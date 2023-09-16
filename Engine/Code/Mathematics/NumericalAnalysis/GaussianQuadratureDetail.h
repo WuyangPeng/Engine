@@ -65,13 +65,13 @@ void Mathematics::GaussianQuadrature<Real, UserDataType>::Calculate() noexcept
     // È»ºóx = ((end - begin) * t + (end + begin)) / 2¡£
     for (auto i = 0; i < degree; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
         result += coeff[i] * function(radius * root[i] + center, userData);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     result *= radius;

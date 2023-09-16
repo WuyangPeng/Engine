@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/28 16:54)
+///	版本：0.9.1.4 (2023/09/01 14:08)
 
 #include "SecurityBaseTestingBase.h"
 #include "System/Helper/SecuritySidMacro.h"
@@ -32,7 +32,7 @@ System::WindowsHandle System::SecurityBaseTestingBase::OpenProcessToken()
     SYSTEM_CLASS_IS_VALID_1;
 
     WindowsHandle tokenHandle{ nullptr };
-    ASSERT_TRUE(OpenSysemProcessToken(GetCurrentProcessHandle(), TokenStandardAccess::Default, TokenSpecificAccess::AllAccess, &tokenHandle));
+    ASSERT_TRUE(OpenSystemProcessToken(GetCurrentProcessHandle(), TokenStandardAccess::Default, TokenSpecificAccess::AllAccess, &tokenHandle));
 
     return tokenHandle;
 }
@@ -56,13 +56,13 @@ void System::SecurityBaseTestingBase::CloseTokenTest(WindowsHandle tokenHandle)
     ASSERT_TRUE(CloseTokenHandle(tokenHandle));
 }
 
-System::SecuritySID System::SecurityBaseTestingBase::GetSecuritySID()
+System::SecuritySid System::SecurityBaseTestingBase::GetSecuritySid()
 {
     SYSTEM_CLASS_IS_VALID_1;
 
-    SecuritySID sid{};
+    SecuritySid sid{};
 
-    SecuritySIDIndentifierAuthority identifierAuthority SYSTEM_SECURITY_NT_AUTHORITY;
+    SecuritySidIdentifierAuthority identifierAuthority SYSTEM_SECURITY_NT_AUTHORITY;
 
     constexpr WindowsByte subAuthorityCount{ 5 };
 

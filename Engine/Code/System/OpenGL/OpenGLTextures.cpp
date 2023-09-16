@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 22:44)
+///	版本：0.9.1.4 (2023/08/29 23:44)
 
 #include "System/SystemExport.h"
 
-#include "OpenGLTextures.h"
-#include "Flags/GLExtensionsFlags.h"
+#include "OpenGLTextures.h" 
 #include "Flags/OpenGLFlags.h"
 #include "Detail/GL10Extensions.h"
 #include "Detail/GL11Extensions.h"
@@ -24,28 +23,28 @@ void System::SetGLBindTexture(TextureTarget target, OpenGLUInt texture) noexcept
     GLBindTexture(EnumCastUnderlying(target), texture);
 }
 
-void System::SetGLPixelStore(PixelStore pname, OpenGLInt param) noexcept
+void System::SetGLPixelStore(PixelStore pName, OpenGLInt param) noexcept
 {
-    GLPixelStorei(EnumCastUnderlying(pname), param);
+    GLPixelStorei(EnumCastUnderlying(pName), param);
 }
 
-void System::SetGLTexturesParameter(TextureTarget target, TextureParameter pname, OpenGLInt param) noexcept
+void System::SetGLTexturesParameter(TextureTarget target, TextureParameter pName, OpenGLInt param) noexcept
 {
-    GLTexParameteri(EnumCastUnderlying(target), EnumCastUnderlying(pname), param);
+    GLTexParameteri(EnumCastUnderlying(target), EnumCastUnderlying(pName), param);
 }
 
-System::OpenGLInt System::GetGLTexturesLevelParameter(TextureTarget target, OpenGLInt level, TextureLevelParameter pname) noexcept
+System::OpenGLInt System::GetGLTexturesLevelParameter(TextureTarget target, OpenGLInt level, TextureLevelParameter pName) noexcept
 {
     OpenGLInt params{};
-    GLGetTexLevelParameteriv(EnumCastUnderlying(target), level, EnumCastUnderlying(pname), &params);
+    GLGetTexLevelParameteriv(EnumCastUnderlying(target), level, EnumCastUnderlying(pName), &params);
 
     return params;
 }
 
-System::OpenGLInt System::GetGLTexturesLevelParameter(TextureCubeMap target, OpenGLInt level, TextureLevelParameter pname) noexcept
+System::OpenGLInt System::GetGLTexturesLevelParameter(TextureCubeMap target, OpenGLInt level, TextureLevelParameter pName) noexcept
 {
     OpenGLInt params{};
-    GLGetTexLevelParameteriv(EnumCastUnderlying(target), level, EnumCastUnderlying(pname), &params);
+    GLGetTexLevelParameteriv(EnumCastUnderlying(target), level, EnumCastUnderlying(pName), &params);
 
     return params;
 }
@@ -83,44 +82,44 @@ void System::SetGLDeleteTextures(OpenGLUInt textures) noexcept
     SetGLDeleteTextures(1, &textures);
 }
 
-void System::SetGLTexturesSubImage1D(TextureTarget target, OpenGLInt level, OpenGLInt xoffset, OpenGLSize width, TextureExternalFormat format, OpenGLData type, const void* pixels) noexcept
+void System::SetGLTexturesSubImage1D(TextureTarget target, OpenGLInt level, OpenGLInt xOffset, OpenGLSize width, TextureExternalFormat format, OpenGLData type, const void* pixels) noexcept
 {
-    GLTexSubImage1D(EnumCastUnderlying(target), level, xoffset, width, EnumCastUnderlying(format), EnumCastUnderlying(type), pixels);
+    GLTexSubImage1D(EnumCastUnderlying(target), level, xOffset, width, EnumCastUnderlying(format), EnumCastUnderlying(type), pixels);
 }
 
-void System::SetGLTexturesStorage1D(TextureTarget target, OpenGLSize levels, TextureInternalFormat internalformat, OpenGLSize width) noexcept
+void System::SetGLTexturesStorage1D(TextureTarget target, OpenGLSize levels, TextureInternalFormat internalFormat, OpenGLSize width) noexcept
 {
-    GLTexStorage1D(EnumCastUnderlying(target), levels, EnumCastUnderlying(internalformat), width);
+    GLTexStorage1D(EnumCastUnderlying(target), levels, EnumCastUnderlying(internalFormat), width);
 }
 
-void System::SetGLTexturesSubImage2D(TextureTarget target, OpenGLInt level, OpenGLInt xoffset, OpenGLInt yoffset, OpenGLSize width, OpenGLSize height, TextureExternalFormat format, OpenGLData type, const void* pixels) noexcept
+void System::SetGLTexturesSubImage2D(TextureTarget target, OpenGLInt level, OpenGLInt xOffset, OpenGLInt yOffset, OpenGLSize width, OpenGLSize height, TextureExternalFormat format, OpenGLData type, const void* pixels) noexcept
 {
-    GLTexSubImage2D(EnumCastUnderlying(target), level, xoffset, yoffset, width, height, EnumCastUnderlying(format), EnumCastUnderlying(type), pixels);
+    GLTexSubImage2D(EnumCastUnderlying(target), level, xOffset, yOffset, width, height, EnumCastUnderlying(format), EnumCastUnderlying(type), pixels);
 }
 
-void System::SetGLTexturesSubImage2D(TextureCubeMap target, OpenGLInt level, OpenGLInt xoffset, OpenGLInt yoffset, OpenGLSize width, OpenGLSize height, TextureExternalFormat format, OpenGLData type, const void* pixels) noexcept
+void System::SetGLTexturesSubImage2D(TextureCubeMap target, OpenGLInt level, OpenGLInt xOffset, OpenGLInt yOffset, OpenGLSize width, OpenGLSize height, TextureExternalFormat format, OpenGLData type, const void* pixels) noexcept
 {
-    GLTexSubImage2D(EnumCastUnderlying(target), level, xoffset, yoffset, width, height, EnumCastUnderlying(format), EnumCastUnderlying(type), pixels);
+    GLTexSubImage2D(EnumCastUnderlying(target), level, xOffset, yOffset, width, height, EnumCastUnderlying(format), EnumCastUnderlying(type), pixels);
 }
 
-void System::SetGLTexturesStorage2D(TextureTarget target, OpenGLSize levels, TextureInternalFormat internalformat, OpenGLSize width, OpenGLSize height) noexcept
+void System::SetGLTexturesStorage2D(TextureTarget target, OpenGLSize levels, TextureInternalFormat internalFormat, OpenGLSize width, OpenGLSize height) noexcept
 {
-    GLTexStorage2D(EnumCastUnderlying(target), levels, EnumCastUnderlying(internalformat), width, height);
+    GLTexStorage2D(EnumCastUnderlying(target), levels, EnumCastUnderlying(internalFormat), width, height);
 }
 
-void System::SetGLTexturesSubImage3D(TextureTarget target, OpenGLInt level, OpenGLInt xoffset, OpenGLInt yoffset, OpenGLInt zoffset, OpenGLSize width, OpenGLSize height, OpenGLSize depth, TextureExternalFormat format, OpenGLData type, const void* pixels) noexcept
+void System::SetGLTexturesSubImage3D(TextureTarget target, OpenGLInt level, OpenGLInt xOffset, OpenGLInt yOffset, OpenGLInt zOffset, OpenGLSize width, OpenGLSize height, OpenGLSize depth, TextureExternalFormat format, OpenGLData type, const void* pixels) noexcept
 {
-    GLTexSubImage3D(EnumCastUnderlying(target), level, xoffset, yoffset, zoffset, width, height, depth, EnumCastUnderlying(format), EnumCastUnderlying(type), pixels);
+    GLTexSubImage3D(EnumCastUnderlying(target), level, xOffset, yOffset, zOffset, width, height, depth, EnumCastUnderlying(format), EnumCastUnderlying(type), pixels);
 }
 
-void System::SetGLTexturesSubImage3D(TextureCubeMap target, OpenGLInt level, OpenGLInt xoffset, OpenGLInt yoffset, OpenGLInt zoffset, OpenGLSize width, OpenGLSize height, OpenGLSize depth, TextureExternalFormat format, OpenGLData type, const void* pixels) noexcept
+void System::SetGLTexturesSubImage3D(TextureCubeMap target, OpenGLInt level, OpenGLInt xOffset, OpenGLInt yOffset, OpenGLInt zOffset, OpenGLSize width, OpenGLSize height, OpenGLSize depth, TextureExternalFormat format, OpenGLData type, const void* pixels) noexcept
 {
-    GLTexSubImage3D(EnumCastUnderlying(target), level, xoffset, yoffset, zoffset, width, height, depth, EnumCastUnderlying(format), EnumCastUnderlying(type), pixels);
+    GLTexSubImage3D(EnumCastUnderlying(target), level, xOffset, yOffset, zOffset, width, height, depth, EnumCastUnderlying(format), EnumCastUnderlying(type), pixels);
 }
 
-void System::SetGLTexturesStorage3D(TextureTarget target, OpenGLSize levels, TextureInternalFormat internalformat, OpenGLSize width, OpenGLSize height, OpenGLSize depth) noexcept
+void System::SetGLTexturesStorage3D(TextureTarget target, OpenGLSize levels, TextureInternalFormat internalFormat, OpenGLSize width, OpenGLSize height, OpenGLSize depth) noexcept
 {
-    GLTexStorage3D(EnumCastUnderlying(target), levels, EnumCastUnderlying(internalformat), width, height, depth);
+    GLTexStorage3D(EnumCastUnderlying(target), levels, EnumCastUnderlying(internalFormat), width, height, depth);
 }
 
 void System::SetGLGenerateMipmap(TextureTarget target) noexcept
@@ -128,7 +127,7 @@ void System::SetGLGenerateMipmap(TextureTarget target) noexcept
     GLGenerateMipmap(EnumCastUnderlying(target));
 }
 
-void System::SetGLFramebufferTexture2D(FrameBufferType target, ColorAttachent attachment, TextureTarget textarget, OpenGLUInt texture, OpenGLInt level) noexcept
+void System::SetGLFrameBufferTexture2D(FrameBufferType target, ColorAttachment attachment, TextureTarget texTarget, OpenGLUInt texture, OpenGLInt level) noexcept
 {
-    GLFramebufferTexture2D(EnumCastUnderlying(target), EnumCastUnderlying(attachment), EnumCastUnderlying(textarget), texture, level);
+    GLFramebufferTexture2D(EnumCastUnderlying(target), EnumCastUnderlying(attachment), EnumCastUnderlying(texTarget), texture, level);
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 17:01)
+///	版本：0.9.1.4 (2023/09/15 17:35)
 
 #ifndef NETWORK_MESSAGE_ORIENTED_MIDDLEWARE_CONSUMER_IMPL_H
 #define NETWORK_MESSAGE_ORIENTED_MIDDLEWARE_CONSUMER_IMPL_H
@@ -27,6 +27,7 @@ namespace Network
     public:
         using ClassType = ConsumerImpl;
         using FactoryType = ConsumerFactory;
+
         using ConsumerSharedPtr = std::shared_ptr<ClassType>;
 
     public:

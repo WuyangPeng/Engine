@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/10 10:49)
+///	版本：0.9.1.4 (2023/09/11 11:03)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_RAW_ITERATORS_H
 #define CORE_TOOLS_MEMORY_TOOLS_RAW_ITERATORS_H
@@ -16,6 +16,7 @@
 
 #include <iterator>
 
+// ContainerAdapter类依赖于原始指针的迭代器的实现。类RawConstIterator和RawIterator提供了这一点。
 namespace CoreTools
 {
     template <typename T>

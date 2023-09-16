@@ -74,13 +74,13 @@ Mathematics::RationalVector<VectorSize, IntSize> Mathematics::RationalVector<Vec
     RationalVector negative{};
     for (auto i = 0; i < VectorSize; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
         negative.tuple[i] = -tuple[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
     return negative;
 }
@@ -92,13 +92,13 @@ Mathematics::RationalVector<VectorSize, IntSize>& Mathematics::RationalVector<Ve
 
     for (auto i = 0; i < VectorSize; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
         tuple[i] += rhs.tuple[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     return *this;
@@ -111,13 +111,13 @@ Mathematics::RationalVector<VectorSize, IntSize>& Mathematics::RationalVector<Ve
 
     for (auto i = 0; i < VectorSize; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
         tuple[i] -= rhs.tuple[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     return *this;

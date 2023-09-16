@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:11)
+///	版本：0.9.1.4 (2023/08/30 15:08)
 
 #ifndef SYSTEM_SECURITY_LOOKUP_PRIVILEGE_USING_H
 #define SYSTEM_SECURITY_LOOKUP_PRIVILEGE_USING_H
@@ -20,17 +20,17 @@ namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    using LookupPrivilegeLUID = LUID;
-    using LookupPrivilegeLUIDPtr = PLUID;
+    using LookupPrivilegeLuid = LUID;
+    using LookupPrivilegeLuidPtr = PLUID;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    struct LookupPrivilegeLUID
+    struct LookupPrivilegeLuid
     {
         WindowsDWord LowPart;
         WindowsLong HighPart;
     };
-    using LookupPrivilegeLUIDPtr = LookupPrivilegeLUID*;
+    using LookupPrivilegeLuidPtr = LookupPrivilegeLuid*;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

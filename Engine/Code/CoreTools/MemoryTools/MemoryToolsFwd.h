@@ -63,7 +63,7 @@ namespace CoreTools
     template <bool RowMajor, typename Real, int... Dimensions>
     class LexicoArray2;
 
-    template <typename T, size_t...>
+    template <typename T, int...>
     class ContainerAdapter;
 
     template <typename T>
@@ -73,6 +73,7 @@ namespace CoreTools
     class RawIterator;
 
     template <bool OrderLToR, int... Sizes>
+    requires(sizeof...(Sizes) >= 1)
     class Lattice;
 
     template <typename T, bool OrderLToR, size_t... Sizes>

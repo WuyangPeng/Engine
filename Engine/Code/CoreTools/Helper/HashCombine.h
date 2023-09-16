@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:47)
+///	版本：0.9.1.4 (2023/09/05 19:21)
 
 #ifndef CORE_TOOLS_HELPER_HASH_COMBINE_H
 #define CORE_TOOLS_HELPER_HASH_COMBINE_H
@@ -15,33 +15,37 @@
 #include <functional>
 #include <type_traits>
 
+/// 允许为类型列表创建哈希值，每个类型T都有一个有效的std::hash<T>()函数。
 namespace CoreTools
 {
     template <typename T>
-    NODISCARD std::size_t HashCombine(std::size_t seed, const T& value) noexcept
+    NODISCARD size_t HashCombine(size_t seed, const T& value) noexcept
     {
         seed ^= std::hash<T>()(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 
         return seed;
     }
 
+    // 使用种子创建哈希值的函数。
     template <typename T>
-    NODISCARD std::size_t DoHashValue(std::size_t seed, T&& value) noexcept
+    NODISCARD size_t DoHashValue(size_t seed, T&& value) noexcept
     {
         return HashCombine(seed, std::forward<T>(value));
     }
 
     template <typename T, typename... Tail>
-    NODISCARD std::size_t DoHashValue(std::size_t seed, T&& value, Tail&&... arguments) noexcept
+    NODISCARD size_t DoHashValue(size_t seed, T&& value, Tail&&... arguments) noexcept
     {
         seed = HashCombine(seed, std::forward<T>(value));
+
         return DoHashValue(seed, std::forward<Tail>(arguments)...);
     }
 
+    // 用于从参数列表中创建哈希值的函数。
     template <typename... Tail>
-    NODISCARD std::size_t HashValue(Tail&&... arguments) noexcept
+    NODISCARD size_t HashValue(Tail&&... arguments) noexcept
     {
-        return DoHashValue(0, std::forward<Tail>(arguments)...);
+        return DoHashValue(0u, std::forward<Tail>(arguments)...);
     }
 }
 

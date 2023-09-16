@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 22:43)
+///	版本：0.9.1.4 (2023/08/29 23:44)
 
 #include "System/SystemExport.h"
 
 #include "OpenGLShader.h"
 #include "Flags/OpenGLShaderFlags.h"
-#include "Detail/GL20Extensions.h"
-#include "Detail/GL43Extensions.h"
+#include "Detail/GL20Extensions.h" 
 #include "System/Helper/EnumCast.h"
 
 #include <vector>
@@ -67,27 +66,26 @@ void System::GetGLShaderSource(OpenGLUInt shader, OpenGLSize bufSize, OpenGLSize
     GLGetShaderSource(shader, bufSize, length, source);
 }
 
-bool System::GetGLShader(OpenGLUInt shader, ShaderStatus pname) noexcept
+bool System::GetGLShader(OpenGLUInt shader, ShaderStatus pName) noexcept
 {
     OpenGLInt params{};
-    GLGetShaderiv(shader, EnumCastUnderlying(pname), &params);
+    GLGetShaderiv(shader, EnumCastUnderlying(pName), &params);
 
     return params != GL_FALSE;
 }
 
-int System::GetGLShader(OpenGLUInt shader, ShaderAttributes pname) noexcept
+int System::GetGLShader(OpenGLUInt shader, ShaderAttributes pName) noexcept
 {
     OpenGLInt params{};
-    GLGetShaderiv(shader, EnumCastUnderlying(pname), &params);
+    GLGetShaderiv(shader, EnumCastUnderlying(pName), &params);
 
     return params;
 }
 
 std::string System::GetGLShaderInfoLog(OpenGLUInt shader)
 {
-    const auto logLength = GetGLShader(shader, ShaderAttributes::InfoLogLength);
-
-    if (0 < logLength)
+    if (const auto logLength = GetGLShader(shader, ShaderAttributes::InfoLogLength);
+        0 < logLength)
     {
         std::vector<OpenGLChar> log(logLength);
         auto numWritten = 0;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/08 17:06)
+///	版本：0.9.1.4 (2023/09/15 11:26)
 
 #ifndef NETWORK_INTERFACE_NETWORK_INTERNAL_FWD_H
 #define NETWORK_INTERFACE_NETWORK_INTERNAL_FWD_H
@@ -21,8 +21,6 @@
 
 namespace Network
 {
-    class ClientImpl;
-    class ServerImpl;
     class HandleSetImpl;
     class SockStreamImpl;
     class SockAddressImpl;
@@ -34,10 +32,8 @@ namespace Network
     class HandleSetIteratorImpl;
 
     class BaseMainManagerFactory;
-    class ClientFactory;
     class HandleSetFactory;
     class HandleSetIteratorFactory;
-    class ServerFactory;
     class SockAcceptorFactory;
     class SockConnectorFactory;
     class SockStreamFactory;
@@ -46,9 +42,6 @@ namespace Network
     class AddressData;
     class MessageBuffer;
     class ConfigurationStrategy;
-
-    CORE_TOOLS_SHARED_PTR_DECLARE(Client);
-    CORE_TOOLS_SHARED_PTR_DECLARE(Server);
 
     CORE_TOOLS_SHARED_PTR_DECLARE(SockStream);
     CORE_TOOLS_SHARED_PTR_DECLARE(SockAddress);

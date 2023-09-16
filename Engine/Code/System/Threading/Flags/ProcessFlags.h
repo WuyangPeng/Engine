@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/30 12:59)
+///	版本：0.9.1.4 (2023/08/30 18:11)
 
 #ifndef SYSTEM_THREADING_PROCESS_FLAGS_H
 #define SYSTEM_THREADING_PROCESS_FLAGS_H
@@ -35,14 +35,14 @@ namespace System
         CreateSeparateWowVdm = CREATE_SEPARATE_WOW_VDM,
 
         CreateSharedWowVdm = CREATE_SHARED_WOW_VDM,
-        CreateForcedos = CREATE_FORCEDOS,
+        CreateForceDos = CREATE_FORCEDOS,
         BelowNormalPriorityClass = BELOW_NORMAL_PRIORITY_CLASS,
         AboveNormalPriorityClass = ABOVE_NORMAL_PRIORITY_CLASS,
 
         InheritParentAffinity = INHERIT_PARENT_AFFINITY,
         InheritCallerPriority = INHERIT_CALLER_PRIORITY,
         CreateProtectedProcess = CREATE_PROTECTED_PROCESS,
-        ExtendedStartupinfoPresent = EXTENDED_STARTUPINFO_PRESENT,
+        ExtendedStartupInfoPresent = EXTENDED_STARTUPINFO_PRESENT,
 
         ProcessModeBackgroundBegin = PROCESS_MODE_BACKGROUND_BEGIN,
         ProcessModeBackgroundEnd = PROCESS_MODE_BACKGROUND_END,
@@ -71,7 +71,7 @@ namespace System
     {
         Terminate = PROCESS_TERMINATE,
         CreateThread = PROCESS_CREATE_THREAD,
-        SetSessionID = PROCESS_SET_SESSIONID,
+        SetSessionId = PROCESS_SET_SESSIONID,
         VmOperation = PROCESS_VM_OPERATION,
         VmRead = PROCESS_VM_READ,
         VmWrite = PROCESS_VM_WRITE,
@@ -106,14 +106,14 @@ namespace System
         CreateSeparateWowVdm = 0x00000800,
 
         CreateSharedWowVdm = 0x00001000,
-        CreateForcedos = 0x00002000,
+        CreateForceDos = 0x00002000,
         BelowNormalPriorityClass = 0x00004000,
         AboveNormalPriorityClass = 0x00008000,
 
         InheritParentAffinity = 0x00010000,
         InheritCallerPriority = 0x00020000,
         CreateProtectedProcess = 0x00040000,
-        ExtendedStartupinfoPresent = 0x00080000,
+        ExtendedStartupInfoPresent = 0x00080000,
 
         ProcessModeBackgroundBegin = 0x00100000,
         ProcessModeBackgroundEnd = 0x00200000,
@@ -142,7 +142,7 @@ namespace System
     {
         Terminate = (0x0001),
         CreateThread = (0x0002),
-        SetSessionID = (0x0004),
+        SetSessionId = (0x0004),
         VmOperation = (0x0008),
         VmRead = (0x0010),
         VmWrite = (0x0020),

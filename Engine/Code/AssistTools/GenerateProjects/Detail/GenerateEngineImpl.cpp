@@ -574,6 +574,7 @@ void AssistTools::GenerateEngineImpl::GenerateWindowsProjectModuleExe(const Game
     GenerateUtf8(input + SYSTEM_TEXT("ProjectNameWindows/Module/Module/ModuleVcxprojFilters.txt"), directory + SYSTEM_TEXT("/") + moduleName + SYSTEM_TEXT(".vcxproj.filters"), replace);
 
     GenerateWindowsProjectModuleExeResource(gameModule);
+    GenerateWindowsProjectModuleExeConfiguration(gameModule);
 }
 
 void AssistTools::GenerateEngineImpl::GenerateWindowsProjectModuleCoreResource(const GameModule& gameModule) const

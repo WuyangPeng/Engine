@@ -20,7 +20,7 @@
 Mathematics::UnorderedTriangleKey::UnorderedTriangleKey(int first, int second, int third) noexcept
     : vertex{}
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     if (first < second)
@@ -58,7 +58,7 @@ Mathematics::UnorderedTriangleKey::UnorderedTriangleKey(int first, int second, i
         }
     }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }

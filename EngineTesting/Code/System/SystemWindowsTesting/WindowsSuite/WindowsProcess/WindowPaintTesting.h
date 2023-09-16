@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 21:05)
+///	版本：0.9.1.4 (2023/08/31 15:14)
 
 #ifndef SYSTEM_WINDOWS_TESTING_WINDOWS_SUITE_WINDOW_PAINT_TESTING_H
 #define SYSTEM_WINDOWS_TESTING_WINDOWS_SUITE_WINDOW_PAINT_TESTING_H
@@ -22,12 +22,12 @@ namespace System
         using ParentType = UnitTest;
 
     public:
-        explicit WindowPaintTesting(const OStreamShared& stream, WindowsHWnd hwnd);
+        WindowPaintTesting(const OStreamShared& stream, WindowsHWnd hWnd);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void SystemPaintTest();
@@ -38,7 +38,7 @@ namespace System
         void ScreenTest(const WindowsPoint& lhsPoint, WindowsPoint& rhsPoint);
 
     private:
-        WindowsHWnd hwnd;
+        WindowsHWnd hWnd;
     };
 }
 

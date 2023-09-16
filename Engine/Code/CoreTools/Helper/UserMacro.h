@@ -18,9 +18,9 @@
 #define CLOSE_CLASS_INVARIANT (CORE_TOOLS_ClOSE_BEGIN << 1)
 #define CLOSE_USE_IMPORTANT_EXCEPTION_ASSERT (CORE_TOOLS_ClOSE_BEGIN << 2)
 #define CLOSE_USE_SAFETY_LIMIT (CORE_TOOLS_ClOSE_BEGIN << 3)
-#define CLOSE_USE_OPENXLSX (CORE_TOOLS_ClOSE_BEGIN << 4)  // 默认不使用
+#define CLOSE_USE_OPEN_XLSX (CORE_TOOLS_ClOSE_BEGIN << 4)  // 默认不使用
 
-#define CORE_TOOLS_ClOSE_END CLOSE_USE_OPENXLSX
+#define CORE_TOOLS_ClOSE_END CLOSE_USE_OPEN_XLSX
 
 #define CLOSE_CORE_TOOLS_MAX (((CORE_TOOLS_ClOSE_END) << 1) - 1)
 
@@ -80,9 +80,9 @@ static_assert(COMPILE_CORE_TOOLS_CLOSE <= CLOSE_CORE_TOOLS_MAX, "COMPILE_CORE_TO
 #endif  // !defined(COMPILE_CORE_TOOLS_CLOSE) || (COMPILE_CORE_TOOLS_CLOSE & CLOSE_USE_USE_SAFETY_LIMIT) != CLOSE_USE_USE_SAFETY_LIMIT
 
 // 是否使用OpenXLSX
-#if !defined(COMPILE_CORE_TOOLS_CLOSE) || (COMPILE_CORE_TOOLS_CLOSE & CLOSE_USE_OPENXLSX) != CLOSE_USE_OPENXLSX
+#if !defined(COMPILE_CORE_TOOLS_CLOSE) || (COMPILE_CORE_TOOLS_CLOSE & CLOSE_USE_OPEN_XLSX) != CLOSE_USE_OPEN_XLSX
 
-    #define CORE_TOOLS_USE_OPENXLSX static_cast<void>(0)
+    #define CORE_TOOLS_USE_OPEN_XLSX static_cast<void>(0)
 
 #endif  // !defined(COMPILE_CORE_TOOLS_CLOSE) || (COMPILE_CORE_TOOLS_CLOSE & CLOSE_USE_USE_OPENXLSX) != CLOSE_USE_USE_OPENXLSX
 
@@ -122,7 +122,7 @@ constexpr auto gOpenClassInvariant = false;
 
 #define BOOST_LIB_DIAGNOSTIC static_cast<void>(0)
 
-#include "System/Helper/PragmaWarning/Disable26444.h"
-#include "System/Helper/PragmaWarning/Disable26456.h"
+#include "System/Helper/PragmaWarning/Disable26444.inl"
+#include "System/Helper/PragmaWarning/Disable26456.inl"
 
 #endif  // CORE_TOOLS_HELPER_USER_MACRO_H

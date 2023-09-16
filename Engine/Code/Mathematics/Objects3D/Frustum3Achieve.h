@@ -172,7 +172,7 @@ typename Mathematics::Frustum3<Real>::VerticesType Mathematics::Frustum3<Real>::
 
     VerticesType vertex(vertexSize);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     vertex[0] = directionScaled - upScaled - rightScaled;
@@ -189,7 +189,7 @@ typename Mathematics::Frustum3<Real>::VerticesType Mathematics::Frustum3<Real>::
         vertex[i] += origin;
     }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     return vertex;
 }

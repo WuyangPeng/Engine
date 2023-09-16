@@ -1,36 +1,36 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/30 14:45)
+///	版本：0.9.1.4 (2023/08/31 15:54)
 
-#ifndef SYSTEM_CHARACTER_STRING_SUITE_STRCAT_TESTING_H
-#define SYSTEM_CHARACTER_STRING_SUITE_STRCAT_TESTING_H
+#ifndef SYSTEM_CHARACTER_STRING_SUITE_STR_CAT_TESTING_H
+#define SYSTEM_CHARACTER_STRING_SUITE_STR_CAT_TESTING_H
 
 #include "FormatStringTestingBase.h"
 
 namespace System
 {
-    class StrcatTesting : public FormatStringTestingBase
+    class StrCatTesting final : public FormatStringTestingBase
     {
     public:
-        using ClassType = StrcatTesting;
+        using ClassType = StrCatTesting;
         using ParentType = FormatStringTestingBase;
 
     public:
-        explicit StrcatTesting(const OStreamShared& stream);
+        explicit StrCatTesting(const OStreamShared& stream);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
-        void StrcatTest();
+        void StrCatTest();
     };
 }
 
-#endif  // SYSTEM_CHARACTER_STRING_SUITE_STRCAT_TESTING_H
+#endif  // SYSTEM_CHARACTER_STRING_SUITE_STR_CAT_TESTING_H

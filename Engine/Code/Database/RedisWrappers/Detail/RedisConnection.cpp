@@ -241,12 +241,12 @@ Database::BasisDatabaseManager Database::RedisConnection::SelectOne(const BasisD
             {
                 for (auto i = 0u; i < result->elements; ++i)
                 {
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26481)
 
                     select.Modify(GetBasisDatabase(fieldNameContainer.at(i), result->element[i]));
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
                 }
             }
             break;
@@ -292,12 +292,12 @@ Database::RedisConnection::ResultContainer Database::RedisConnection::SelectAll(
             {
                 for (auto i = 0u; i < result->elements; ++i)
                 {
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26481)
 
                     select.Modify(GetBasisDatabase(fieldNameContainer.at(i), result->element[i]));
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
                 }
             }
             break;

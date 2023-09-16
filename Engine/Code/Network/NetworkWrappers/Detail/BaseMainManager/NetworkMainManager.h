@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:48)
+///	版本：0.9.1.4 (2023/09/15 17:40)
 
 #ifndef NETWORK_NETWORK_WRAPPERS_NETWORK_BASE_MAIN_MANAGER_H
 #define NETWORK_NETWORK_WRAPPERS_NETWORK_BASE_MAIN_MANAGER_H
@@ -17,7 +17,7 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE NetworkMainManager : public BaseMainManagerImpl
+    class NETWORK_HIDDEN_DECLARE NetworkMainManager final : public BaseMainManagerImpl
     {
     public:
         using ClassType = NetworkMainManager;

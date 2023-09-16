@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 20:15)
+///	版本：0.9.1.4 (2023/09/01 15:28)
 
 #include "ThreadTokenTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -33,7 +33,7 @@ System::ThreadTokenTesting::ThreadTokenTesting(const OStreamShared& stream)
                              TokenSpecificAccess::AdjustPrivileges,
                              TokenSpecificAccess::AdjustGroups,
                              TokenSpecificAccess::AdjustDefault,
-                             TokenSpecificAccess::AdjustSessionID,
+                             TokenSpecificAccess::AdjustSessionId,
                              TokenSpecificAccess::AllAccessP,
                              TokenSpecificAccess::AllAccess,
                              TokenSpecificAccess::Read,
@@ -59,8 +59,8 @@ void System::ThreadTokenTesting::MainTest()
 
 bool System::ThreadTokenTesting::RandomShuffleFlags()
 {
-    shuffle(tokenStandardAccesses.begin(), tokenStandardAccesses.end(), randomEngine);
-    shuffle(tokenSpecificAccesses.begin(), tokenSpecificAccesses.end(), randomEngine);
+    std::ranges::shuffle(tokenStandardAccesses, randomEngine);
+    std::ranges::shuffle(tokenSpecificAccesses, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(ThreadTest);
 
@@ -105,18 +105,18 @@ void System::ThreadTokenTesting::DoThreadTest(ThreadHandle mutexHandle)
 
     ASSERT_TRUE(ImpersonateThreadSelf(SecurityImpersonation));
 
-    WindowsDWord threadID{ 0 };
-    const auto threadHandle = CreateSystemThread(nullptr, 0, ClassType::ThreadStartRoutine, this, ThreadCreation::Default, &threadID);
+    WindowsDWord threadId{ 0 };
+    const auto threadHandle = CreateSystemThread(nullptr, 0, ClassType::ThreadStartRoutine, this, ThreadCreation::Default, &threadId);
 
-    ASSERT_NOT_THROW_EXCEPTION_3(TokenThreadTest, threadHandle, threadID, mutexHandle);
+    ASSERT_NOT_THROW_EXCEPTION_3(TokenThreadTest, threadHandle, threadId, mutexHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
 }
 
-void System::ThreadTokenTesting::TokenThreadTest(ThreadHandle threadHandle, WindowsDWord threadID, ThreadHandle mutexHandle)
+void System::ThreadTokenTesting::TokenThreadTest(ThreadHandle threadHandle, WindowsDWord threadId, ThreadHandle mutexHandle)
 {
     ASSERT_TRUE(IsThreadHandleValid(threadHandle));
-    ASSERT_LESS(0u, threadID);
+    ASSERT_LESS(0u, threadId);
 
     for (auto index = 0u; index < maxSize; ++index)
     {

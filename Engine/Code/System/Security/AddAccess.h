@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:14)
+///	版本：0.9.1.4 (2023/08/30 15:11)
 
 #ifndef SYSTEM_SECURITY_AND_ACCESS_H
 #define SYSTEM_SECURITY_AND_ACCESS_H
@@ -13,73 +13,70 @@
 #include "System/SystemDll.h"
 
 #include "Fwd/SecurityFlagsFwd.h"
-#include "Using/CreateSecurityUsing.h"
-#include "Using/LookupPrivilegeUsing.h"
 #include "Using/SecurityAclUsing.h"
-#include "Using/SecurityDescriptorUsing.h"
 #include "Using/SecuritySidUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
 // 添加访问权限
 namespace System
 {
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAccessAllowedAccessControlEntries(AccessCheckACLPtr acl,
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAccessAllowedAccessControlEntries(AccessCheckAclPtr acl,
                                                                                AccessControlListRevision aceRevision,
                                                                                SpecificAccess accessMask,
-                                                                               SecuritySIDPtr sid) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAccessAllowedAccessControlEntries(AccessCheckACLPtr acl,
+                                                                               SecuritySidPtr sid) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAccessAllowedAccessControlEntries(AccessCheckAclPtr acl,
                                                                                AccessControlListRevision aceRevision,
-                                                                               ControlACEInheritance aceFlags,
+                                                                               ControlAceInheritance aceFlags,
                                                                                SpecificAccess accessMask,
-                                                                               SecuritySIDPtr sid) noexcept;
+                                                                               SecuritySidPtr sid) noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAccessAllowedObjectAccessControlEntries(AccessCheckACLPtr acl,
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAccessAllowedObjectAccessControlEntries(AccessCheckAclPtr acl,
                                                                                      AccessControlListRevision aceRevision,
-                                                                                     ControlACEInheritance aceFlags,
+                                                                                     ControlAceInheritance aceFlags,
                                                                                      SpecificAccess accessMask,
                                                                                      SystemGloballyUniqueIdentifier* objectTypeGuid,
                                                                                      SystemGloballyUniqueIdentifier* inheritedObjectTypeGuid,
-                                                                                     SecuritySIDPtr sid) noexcept;
+                                                                                     SecuritySidPtr sid) noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAccessDeniedAccessControlEntries(AccessCheckACLPtr acl,
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAccessDeniedAccessControlEntries(AccessCheckAclPtr acl,
                                                                               AccessControlListRevision aceRevision,
                                                                               SpecificAccess accessMask,
-                                                                              SecuritySIDPtr sid) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAccessDeniedAccessControlEntries(AccessCheckACLPtr acl,
+                                                                              SecuritySidPtr sid) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAccessDeniedAccessControlEntries(AccessCheckAclPtr acl,
                                                                               AccessControlListRevision aceRevision,
-                                                                              ControlACEInheritance aceFlags,
+                                                                              ControlAceInheritance aceFlags,
                                                                               SpecificAccess accessMask,
-                                                                              SecuritySIDPtr sid) noexcept;
+                                                                              SecuritySidPtr sid) noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAccessDeniedObjectAccessControlEntries(AccessCheckACLPtr acl,
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAccessDeniedObjectAccessControlEntries(AccessCheckAclPtr acl,
                                                                                     AccessControlListRevision aceRevision,
-                                                                                    ControlACEInheritance aceFlags,
+                                                                                    ControlAceInheritance aceFlags,
                                                                                     SpecificAccess accessMask,
                                                                                     SystemGloballyUniqueIdentifier* objectTypeGuid,
                                                                                     SystemGloballyUniqueIdentifier* inheritedObjectTypeGuid,
-                                                                                    SecuritySIDPtr sid) noexcept;
+                                                                                    SecuritySidPtr sid) noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAuditAccessAccessControlEntries(AccessCheckACLPtr acl,
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAuditAccessAccessControlEntries(AccessCheckAclPtr acl,
                                                                              AccessControlListRevision aceRevision,
                                                                              SpecificAccess accessMask,
-                                                                             SecuritySIDPtr sid,
+                                                                             SecuritySidPtr sid,
                                                                              bool auditSuccess,
                                                                              bool auditFailure) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAuditAccessAccessControlEntries(AccessCheckACLPtr acl,
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAuditAccessAccessControlEntries(AccessCheckAclPtr acl,
                                                                              AccessControlListRevision aceRevision,
-                                                                             ControlACEInheritance aceFlags,
+                                                                             ControlAceInheritance aceFlags,
                                                                              SpecificAccess accessMask,
-                                                                             SecuritySIDPtr sid,
+                                                                             SecuritySidPtr sid,
                                                                              bool auditSuccess,
                                                                              bool auditFailure) noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAuditAccessObjectAccessControlEntries(AccessCheckACLPtr acl,
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE AddAuditAccessObjectAccessControlEntries(AccessCheckAclPtr acl,
                                                                                    AccessControlListRevision aceRevision,
-                                                                                   ControlACEInheritance aceFlags,
+                                                                                   ControlAceInheritance aceFlags,
                                                                                    SpecificAccess accessMask,
                                                                                    SystemGloballyUniqueIdentifier* objectTypeGuid,
                                                                                    SystemGloballyUniqueIdentifier* inheritedObjectTypeGuid,
-                                                                                   SecuritySIDPtr sid,
+                                                                                   SecuritySidPtr sid,
                                                                                    bool auditSuccess,
                                                                                    bool auditFailure) noexcept;
 }

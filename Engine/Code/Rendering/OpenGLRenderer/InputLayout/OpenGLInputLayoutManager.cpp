@@ -31,6 +31,15 @@ Rendering::OpenGLInputLayoutManager::OpenGLInputLayoutSharedPtr Rendering::OpenG
     return impl->Bind(programHandle, vertexBufferHandle, vertexBuffer);
 }
 
+bool Rendering::OpenGLInputLayoutManager::Unbind(const ShaderSharedPtr& vertexShader)
+{
+    System::UnusedFunction(vertexShader);
+
+    CoreTools::DisableNoexcept();
+
+    return true;
+}
+
 bool Rendering::OpenGLInputLayoutManager::Unbind(const VertexBufferSharedPtr& vertexBuffer)
 {
     RENDERING_CLASS_IS_VALID_9;

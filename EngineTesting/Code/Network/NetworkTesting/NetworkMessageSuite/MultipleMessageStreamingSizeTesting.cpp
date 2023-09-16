@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/12 11:28)
+///	版本：0.9.1.4 (2023/09/16 09:51)
 
 #include "MultipleMessageStreamingSizeTesting.h"
 #include "Flags/MultipleMessageType.h"
@@ -13,7 +13,6 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"
-#include "Network/NetworkMessage/MultipleMessageCast.h"
 #include "Network/NetworkMessage/MultipleMessageContainerDetail.h"
 #include "Network/NetworkMessage/MultipleMessageStreamingSizeDetail.h"
 

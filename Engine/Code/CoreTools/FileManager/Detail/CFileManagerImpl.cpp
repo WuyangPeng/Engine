@@ -141,7 +141,7 @@ bool CoreTools::CFileManagerImpl::IsEof() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return System::IsEOF(file);
+    return System::IsEof(file);
 }
 
 bool CoreTools::CFileManagerImpl::Flush() noexcept

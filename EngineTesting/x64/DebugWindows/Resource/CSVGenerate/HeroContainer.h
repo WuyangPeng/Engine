@@ -40,6 +40,8 @@ namespace CSVConfigure
         NODISCARD ConstHeroSharedPtr GetHero(int key) const;
         NODISCARD MappingContainer GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstHeroSharedPtr GetFirstHero(Function function) const;
 

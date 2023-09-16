@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/19 13:47)
+///	版本：0.9.1.4 (2023/08/31 09:25)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_FONT_INFORMATION_H
 #define SYSTEM_WINDOWS_WINDOWS_FONT_INFORMATION_H
@@ -22,13 +22,13 @@ namespace System
     NODISCARD int SYSTEM_DEFAULT_DECLARE GetCharacterWidth(WindowsHWnd hWnd, TChar character);
     NODISCARD int SYSTEM_DEFAULT_DECLARE GetFontHeight(WindowsHWnd hWnd) noexcept;
 
-    NODISCARD WindowsHDC SYSTEM_DEFAULT_DECLARE GetSystemDC(WindowsHWnd hWnd) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE ReleaseSystemDC(WindowsHWnd hWnd, WindowsHDC hdc) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemTextExtentPoint32(WindowsHDC hdc,
+    NODISCARD WindowsHdc SYSTEM_DEFAULT_DECLARE GetSystemDC(WindowsHWnd hWnd) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE ReleaseSystemDC(WindowsHWnd hWnd, WindowsHdc hdc) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemTextExtentPoint32(WindowsHdc hdc,
                                                                      const TChar* text,
                                                                      int character,
                                                                      WindowsPointSize* pointSize) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemTextMetrics(WindowsHDC hdc, WindowsTextMetric* metric) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemTextMetrics(WindowsHdc hdc, WindowsTextMetric* metric) noexcept;
 }
 
 #endif  // SYSTEM_WINDOWS_WINDOWS_FONT_INFORMATION_H

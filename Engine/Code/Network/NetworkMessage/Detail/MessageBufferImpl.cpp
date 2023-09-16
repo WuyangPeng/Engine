@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 11:30)
+///	版本：0.9.1.4 (2023/09/04 16:32)
 
 #include "Network/NetworkExport.h"
 
@@ -157,12 +157,12 @@ const char* Network::MessageBufferImpl::GetCurrentReadBufferedPtr() const
     NETWORK_CLASS_IS_VALID_CONST_1;
     NETWORK_ASSERTION_0(currentReadIndex < GetSize(), "索引越界");
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     return GetInitialBufferedPtr() + currentReadIndex;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 char* Network::MessageBufferImpl::GetCurrentReadBufferedPtr()
@@ -177,12 +177,12 @@ const char* Network::MessageBufferImpl::GetCurrentWriteBufferedPtr() const
     NETWORK_CLASS_IS_VALID_CONST_1;
     NETWORK_ASSERTION_0(currentWriteIndex < GetSize(), "索引越界");
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     return GetInitialBufferedPtr() + currentWriteIndex;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 char* Network::MessageBufferImpl::GetCurrentWriteBufferedPtr()
@@ -255,12 +255,12 @@ int Network::MessageBufferImpl::GetMessageLength() const
 
     if (CoreTools::GetStreamSize<int32_t>() <= GetCurrentWriteIndex())
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
         auto totalLength = *reinterpret_cast<const int32_t*>(GetInitialBufferedPtr());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         // 处理字节序问题
         if (IsNeedSwap())

@@ -201,7 +201,7 @@ Framework::AndroidProcessManagerImpl::HandleCmdFunctionPointerSharedPtr Framewor
                                                                                       { AppCmd::SaveState, &AndroidCallBackInterface::NotDealCmdMessage },
                                                                                       { AppCmd::Pause, &AndroidCallBackInterface::NotDealCmdMessage },
                                                                                       { AppCmd::Stop, &AndroidCallBackInterface::NotDealCmdMessage },
-                                                                                      { AppCmd::Destory, &AndroidCallBackInterface::NotDealCmdMessage } };
+                                                                                      { AppCmd::Destroy, &AndroidCallBackInterface::NotDealCmdMessage } };
 
     static HandleCmdFunctionPointerSharedPtr functionPointer = make_shared<HandleCmdFunctionPointerContainer>(handleCmdFunctionPointerContainer);
 

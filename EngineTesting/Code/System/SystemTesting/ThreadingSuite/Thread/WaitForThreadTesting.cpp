@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 19:25)
+///	版本：0.9.1.4 (2023/09/01 15:26)
 
 #include "WaitForThreadTesting.h"
 #include "System/Threading/Flags/SemaphoreFlags.h"
@@ -97,12 +97,12 @@ void System::WaitForThreadTesting::WaitThread3Test()
 
 System::WindowsDWord System::WaitForThreadTesting::ThreadStartRoutine(void* threadParameter)
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26471)
 
-    auto classType = reinterpret_cast<ClassType*>(threadParameter);
+    const auto classType = reinterpret_cast<ClassType*>(threadParameter);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     if (classType != nullptr)
     {

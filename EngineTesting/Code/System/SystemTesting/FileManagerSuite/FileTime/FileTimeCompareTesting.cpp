@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/15 21:49)
+///	版本：0.9.1.4 (2023/08/31 17:17)
 
 #include "FileTimeCompareTesting.h"
 #include "System/FileManager/File.h"
@@ -16,10 +16,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using namespace std::literals;
-
 System::FileTimeCompareTesting::FileTimeCompareTesting(const OStreamShared& stream)
-    : ParentType{ stream }, existingFileName{ SYSTEM_TEXT("Resource/FileTesting/CreateExistingFile.txt"s) }
+    : ParentType{ stream }, existingFileName{ SYSTEM_TEXT("Resource/FileTesting/CreateExistingFile.txt") }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -51,11 +49,11 @@ void System::FileTimeCompareTesting::DoFileTimeTest(WindowsHandle handle)
 
     FileTime creationTime{};
     FileTime lastAccessTime{};
-    FileTime lastWriteTime{};           
+    FileTime lastWriteTime{};
     ASSERT_TRUE(GetSystemFileTime(handle, &creationTime, &lastAccessTime, &lastWriteTime));
 
     ASSERT_ENUM_EQUAL(FileTimeCompare(&lastAccessTime, &lastAccessTime), ComparesFileTimeReturn::Equal);
-      
+
     auto newLastWriteTime = lastAccessTime;
     ++newLastWriteTime.dwHighDateTime;
 

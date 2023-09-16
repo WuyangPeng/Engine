@@ -5,9 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/12 12:23)
+///	版本：0.9.1.4 (2023/09/01 11:18)
 
 #include "WinSocketRecvFromTesting.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
 #include "System/Network/SocketPrototypes.h"
 #include "System/Network/Using/WindowsSockExUsing.h"
@@ -71,11 +72,11 @@ void System::WinSocketRecvFromTesting::DoRecvFromTest(WinSocket socketHandle)
             break;
         }
 
-        remain -= numberOfBytesRecvd;
-        index += numberOfBytesRecvd;
+        remain -= boost::numeric_cast<int>(numberOfBytesRecvd);
+        index += boost::numeric_cast<int>(numberOfBytesRecvd);
     }
 
-    std::string result{ buffer.data() };
+    const std::string result{ buffer.data() };
 
     ASSERT_EQUAL(result, "Hello");
 }
@@ -89,12 +90,12 @@ int System::WinSocketRecvFromTesting::WinSocketRecvFromTest(BufferType& buffer, 
     WindowsDWord flags{ 0 };
     int length{ sizeof(address) };
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     const auto recvCount = WinSocketRecvFrom(socketHandle, &winSockBuf, 1, &numberOfBytesRecvd, &flags, reinterpret_cast<WinSockAddress*>(&address), &length, nullptr, nullptr);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     ASSERT_UNEQUAL(recvCount, socketError);
 

@@ -126,7 +126,7 @@ void Rendering::CameraTesting::FrustumTest()
 
         const float* firstFrustum = firstCamera.GetFrustum();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         ASSERT_APPROXIMATE(firstFrustum[0], directionMin, 1e-5f);
@@ -136,7 +136,7 @@ void Rendering::CameraTesting::FrustumTest()
         ASSERT_APPROXIMATE(firstFrustum[4], rightMin, 1e-5f);
         ASSERT_APPROXIMATE(firstFrustum[5], rightMax, 1e-5f);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         ASSERT_APPROXIMATE(firstCamera.GetDirectionMin(), directionMin, 1e-5f);
         ASSERT_APPROXIMATE(firstCamera.GetDirectionMax(), directionMax, 1e-5f);
@@ -161,7 +161,7 @@ void Rendering::CameraTesting::FrustumTest()
 
         firstFrustum = secondCamera.GetFrustum();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         ASSERT_APPROXIMATE(firstFrustum[0], directionMin * 2.0f, 1e-5f);
@@ -171,7 +171,7 @@ void Rendering::CameraTesting::FrustumTest()
         ASSERT_APPROXIMATE(firstFrustum[4], rightMin, 1e-5f);
         ASSERT_APPROXIMATE(firstFrustum[5], rightMax * 1.5f, 1e-5f);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         ASSERT_APPROXIMATE(secondCamera.GetDirectionMin(), directionMin * 2.0f, 1e-5f);
         ASSERT_APPROXIMATE(secondCamera.GetDirectionMax(), directionMax, 1e-5f);
@@ -196,7 +196,7 @@ void Rendering::CameraTesting::FrustumTest()
 
         const float tanHalfAngleRadians = Mathematics::MathF::Tan(halfAngleRadians);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         ASSERT_APPROXIMATE(firstFrustum[0], directionMin, 1e-5f);
@@ -206,7 +206,7 @@ void Rendering::CameraTesting::FrustumTest()
         ASSERT_APPROXIMATE(firstFrustum[4], -aspectRatio * directionMin * tanHalfAngleRadians, 1e-5f);
         ASSERT_APPROXIMATE(firstFrustum[5], aspectRatio * directionMin * tanHalfAngleRadians, 1e-5f);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         ASSERT_APPROXIMATE(thirdCamera.GetDirectionMin(), directionMin, 1e-5f);
         ASSERT_APPROXIMATE(thirdCamera.GetDirectionMax(), directionMax, 1e-5f);
@@ -539,12 +539,12 @@ void Rendering::CameraTesting::AxesAlignBoundingBoxTest()
             buffer.push_back(firstFloatRandomDistribution(generator));
         }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
         const Camera::AxesAlignBoundingBox2D aabb = firstCamera.ComputeBoundingAABB(numVertices, reinterpret_cast<const char*>(buffer.data()), sizeof(float) * 3, firstMatrix);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         float xmin = Mathematics::MathF::maxReal;
         float xmax = -Mathematics::MathF::maxReal;
@@ -560,12 +560,12 @@ void Rendering::CameraTesting::AxesAlignBoundingBoxTest()
                 continue;
             }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
             const Mathematics::HomogeneousPointF position(vertex[0], vertex[1], vertex[2], 1.0f);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
             Mathematics::HomogeneousPointF homogeneousPosition = worldViewProjectionMatrix * position;
             const float invW = 1.0f / homogeneousPosition[3];

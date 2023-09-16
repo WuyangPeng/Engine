@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/16 22:13)
+///	版本：0.9.1.4 (2023/08/29 11:25)
 
 #ifndef SYSTEM_HELPER_GL_UTILITY_MACRO_H
 #define SYSTEM_HELPER_GL_UTILITY_MACRO_H
@@ -59,7 +59,7 @@ namespace System
 
 #define SYSTEM_BODY_0(function)            \
     SYSTEM_ENTER_FUNCTION(function);       \
-    if (function != nullptr)               \
+    if ((function) != nullptr)             \
     {                                      \
         SYSTEM_NONNULL_FUNCTION(function); \
         function();                        \
@@ -72,7 +72,7 @@ namespace System
 
 #define SYSTEM_BODY_1(function, a0)        \
     SYSTEM_ENTER_FUNCTION(function);       \
-    if (function != nullptr)               \
+    if ((function) != nullptr)             \
     {                                      \
         SYSTEM_NONNULL_FUNCTION(function); \
         function(a0);                      \
@@ -85,7 +85,7 @@ namespace System
 
 #define SYSTEM_BODY_2(function, a0, a1)    \
     SYSTEM_ENTER_FUNCTION(function);       \
-    if (function != nullptr)               \
+    if ((function) != nullptr)             \
     {                                      \
         SYSTEM_NONNULL_FUNCTION(function); \
         function(a0, a1);                  \
@@ -98,7 +98,7 @@ namespace System
 
 #define SYSTEM_BODY_3(function, a0, a1, a2) \
     SYSTEM_ENTER_FUNCTION(function);        \
-    if (function != nullptr)                \
+    if ((function) != nullptr)              \
     {                                       \
         SYSTEM_NONNULL_FUNCTION(function);  \
         function(a0, a1, a2);               \
@@ -111,7 +111,7 @@ namespace System
 
 #define SYSTEM_BODY_4(function, a0, a1, a2, a3) \
     SYSTEM_ENTER_FUNCTION(function);            \
-    if (function != nullptr)                    \
+    if ((function) != nullptr)                  \
     {                                           \
         SYSTEM_NONNULL_FUNCTION(function);      \
         function(a0, a1, a2, a3);               \
@@ -124,7 +124,7 @@ namespace System
 
 #define SYSTEM_BODY_5(function, a0, a1, a2, a3, a4) \
     SYSTEM_ENTER_FUNCTION(function);                \
-    if (function != nullptr)                        \
+    if ((function) != nullptr)                      \
     {                                               \
         SYSTEM_NONNULL_FUNCTION(function);          \
         function(a0, a1, a2, a3, a4);               \
@@ -137,7 +137,7 @@ namespace System
 
 #define SYSTEM_BODY_6(function, a0, a1, a2, a3, a4, a5) \
     SYSTEM_ENTER_FUNCTION(function);                    \
-    if (function != nullptr)                            \
+    if ((function) != nullptr)                          \
     {                                                   \
         SYSTEM_NONNULL_FUNCTION(function);              \
         function(a0, a1, a2, a3, a4, a5);               \
@@ -150,7 +150,7 @@ namespace System
 
 #define SYSTEM_BODY_7(function, a0, a1, a2, a3, a4, a5, a6) \
     SYSTEM_ENTER_FUNCTION(function);                        \
-    if (function != nullptr)                                \
+    if ((function) != nullptr)                              \
     {                                                       \
         SYSTEM_NONNULL_FUNCTION(function);                  \
         function(a0, a1, a2, a3, a4, a5, a6);               \
@@ -163,7 +163,7 @@ namespace System
 
 #define SYSTEM_BODY_8(function, a0, a1, a2, a3, a4, a5, a6, a7) \
     SYSTEM_ENTER_FUNCTION(function);                            \
-    if (function != nullptr)                                    \
+    if ((function) != nullptr)                                  \
     {                                                           \
         SYSTEM_NONNULL_FUNCTION(function);                      \
         function(a0, a1, a2, a3, a4, a5, a6, a7);               \
@@ -176,7 +176,7 @@ namespace System
 
 #define SYSTEM_BODY_9(function, a0, a1, a2, a3, a4, a5, a6, a7, a8) \
     SYSTEM_ENTER_FUNCTION(function);                                \
-    if (function != nullptr)                                        \
+    if ((function) != nullptr)                                      \
     {                                                               \
         SYSTEM_NONNULL_FUNCTION(function);                          \
         function(a0, a1, a2, a3, a4, a5, a6, a7, a8);               \
@@ -189,7 +189,7 @@ namespace System
 
 #define SYSTEM_BODY_10(function, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) \
     SYSTEM_ENTER_FUNCTION(function);                                     \
-    if (function != nullptr)                                             \
+    if ((function) != nullptr)                                           \
     {                                                                    \
         SYSTEM_NONNULL_FUNCTION(function);                               \
         function(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);                \
@@ -202,7 +202,7 @@ namespace System
 
 #define SYSTEM_BODY_11(function, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10) \
     SYSTEM_ENTER_FUNCTION(function);                                          \
-    if (function != nullptr)                                                  \
+    if ((function) != nullptr)                                                \
     {                                                                         \
         SYSTEM_NONNULL_FUNCTION(function);                                    \
         function(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);                \
@@ -215,7 +215,7 @@ namespace System
 
 #define SYSTEM_BODY_12(function, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11) \
     SYSTEM_ENTER_FUNCTION(function);                                               \
-    if (function != nullptr)                                                       \
+    if ((function) != nullptr)                                                     \
     {                                                                              \
         SYSTEM_NONNULL_FUNCTION(function);                                         \
         function(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);                \
@@ -228,7 +228,7 @@ namespace System
 
 #define SYSTEM_BODY_15(function, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14) \
     SYSTEM_ENTER_FUNCTION(function);                                                              \
-    if (function != nullptr)                                                                      \
+    if ((function) != nullptr)                                                                    \
     {                                                                                             \
         SYSTEM_NONNULL_FUNCTION(function);                                                        \
         function(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);                \
@@ -245,7 +245,7 @@ namespace System
     using Type = decltype(function());                  \
     Type result{ nullReturnValue };                     \
     SYSTEM_ENTER_FUNCTION(function);                    \
-    if (function != nullptr)                            \
+    if ((function) != nullptr)                          \
     {                                                   \
         SYSTEM_NONNULL_FUNCTION(function);              \
         result = function();                            \
@@ -261,7 +261,7 @@ namespace System
     using Type = decltype(function(a0));                    \
     Type result{ nullReturnValue };                         \
     SYSTEM_ENTER_FUNCTION(function);                        \
-    if (function != nullptr)                                \
+    if ((function) != nullptr)                              \
     {                                                       \
         SYSTEM_NONNULL_FUNCTION(function);                  \
         result = function(a0);                              \
@@ -277,7 +277,7 @@ namespace System
     using Type = decltype(function(a0, a1));                    \
     Type result{ nullReturnValue };                             \
     SYSTEM_ENTER_FUNCTION(function);                            \
-    if (function != nullptr)                                    \
+    if ((function) != nullptr)                                  \
     {                                                           \
         SYSTEM_NONNULL_FUNCTION(function);                      \
         result = function(a0, a1);                              \
@@ -293,7 +293,7 @@ namespace System
     using Type = decltype(function(a0, a1, a2));                    \
     Type result{ nullReturnValue };                                 \
     SYSTEM_ENTER_FUNCTION(function);                                \
-    if (function != nullptr)                                        \
+    if ((function) != nullptr)                                      \
     {                                                               \
         SYSTEM_NONNULL_FUNCTION(function);                          \
         result = function(a0, a1, a2);                              \
@@ -309,7 +309,7 @@ namespace System
     using Type = decltype(function(a0, a1, a2, a3));                    \
     Type result{ nullReturnValue };                                     \
     SYSTEM_ENTER_FUNCTION(function);                                    \
-    if (function != nullptr)                                            \
+    if ((function) != nullptr)                                          \
     {                                                                   \
         SYSTEM_NONNULL_FUNCTION(function);                              \
         result = function(a0, a1, a2, a3);                              \
@@ -325,7 +325,7 @@ namespace System
     using Type = decltype(function(a0, a1, a2, a3, a4));                    \
     Type result{ nullReturnValue };                                         \
     SYSTEM_ENTER_FUNCTION(function);                                        \
-    if (function != nullptr)                                                \
+    if ((function) != nullptr)                                              \
     {                                                                       \
         SYSTEM_NONNULL_FUNCTION(function);                                  \
         result = function(a0, a1, a2, a3, a4);                              \
@@ -341,7 +341,7 @@ namespace System
     using Type = decltype(function(a0, a1, a2, a3, a4, a5));                    \
     Type result{ nullReturnValue };                                             \
     SYSTEM_ENTER_FUNCTION(function);                                            \
-    if (function != nullptr)                                                    \
+    if ((function) != nullptr)                                                  \
     {                                                                           \
         SYSTEM_NONNULL_FUNCTION(function);                                      \
         result = function(a0, a1, a2, a3, a4, a5);                              \
@@ -357,7 +357,7 @@ namespace System
     using Type = decltype(function(a0, a1, a2, a3, a4, a5, a6));                    \
     Type result{ nullReturnValue };                                                 \
     SYSTEM_ENTER_FUNCTION(function);                                                \
-    if (function != nullptr)                                                        \
+    if ((function) != nullptr)                                                      \
     {                                                                               \
         SYSTEM_NONNULL_FUNCTION(function);                                          \
         result = function(a0, a1, a2, a3, a4, a5, a6);                              \
@@ -373,7 +373,7 @@ namespace System
     using Type = decltype(function(a0, a1, a2, a3, a4, a5, a6, a7));                    \
     Type result{ nullReturnValue };                                                     \
     SYSTEM_ENTER_FUNCTION(function);                                                    \
-    if (function != nullptr)                                                            \
+    if ((function) != nullptr)                                                          \
     {                                                                                   \
         SYSTEM_NONNULL_FUNCTION(function);                                              \
         result = function(a0, a1, a2, a3, a4, a5, a6, a7);                              \
@@ -389,7 +389,7 @@ namespace System
     using Type = decltype(function(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16));                     \
     Type result{ nullReturnValue };                                                                                                 \
     SYSTEM_ENTER_FUNCTION(function);                                                                                                \
-    if (function != nullptr)                                                                                                        \
+    if ((function) != nullptr)                                                                                                      \
     {                                                                                                                               \
         SYSTEM_NONNULL_FUNCTION(function);                                                                                          \
         result = function(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16);                               \

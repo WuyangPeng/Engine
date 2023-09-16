@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/04/28 10:40)
+///	版本：0.9.1.4 (2023/09/04 15:38)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_ANALYSIS_NETWORK_CONFIGURATION_IMPL_H
 #define NETWORK_NETWORK_CONFIGURATION_ANALYSIS_NETWORK_CONFIGURATION_IMPL_H
@@ -25,6 +25,7 @@ namespace Network
     {
     public:
         using ClassType = AnalysisNetworkConfigurationImpl;
+
         using String = System::String;
         using Container = std::map<String, ConfigurationStrategy>;
         using ContainerConstIter = Container::const_iterator;

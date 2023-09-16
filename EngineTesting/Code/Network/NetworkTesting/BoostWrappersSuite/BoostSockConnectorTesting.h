@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 10:35)
+///	版本：0.9.1.4 (2023/09/16 10:47)
 
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_BOOST_SOCK_CONNECTOR_TESTING_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_BOOST_SOCK_CONNECTOR_TESTING_H
@@ -25,36 +25,8 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        using TestFunction = void (ClassType::*)();
-
-    protected:
-        using TestingType = SockConnector;
-        using TestingTypeSharedPtr = std::shared_ptr<SockConnector>;
-
-    protected:
-        void ServerThread();
-        void DoServerThread();
-
-        NODISCARD static constexpr int GetAcceptTime() noexcept
-        {
-            return acceptTime;
-        }
-
-        NODISCARD static constexpr int GetAsynchronousConnectTime() noexcept
-        {
-            return asynchronousConnectTime;
-        }
-
-        NODISCARD static constexpr int GetSynchronizeConnectTime() noexcept
-        {
-            return synchronizeConnectTime;
-        }
-
     private:
-        // Release版本acceptTime和asynchronousConnectTime值要足够大，否则测试时异步回调还未执行。
-        static constexpr auto acceptTime = 100000000;
-        static constexpr auto synchronizeConnectTime = 100;
-        static constexpr auto asynchronousConnectTime = 100000000;
+        void ServerThread() noexcept;
     };
 }
 

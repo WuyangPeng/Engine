@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 14:08)
+///	版本：0.9.1.4 (2023/09/01 15:38)
 
 #ifndef SYSTEM_TIME_SUITE_DELTA_TIME_TESTING_H
 #define SYSTEM_TIME_SUITE_DELTA_TIME_TESTING_H
@@ -34,7 +34,7 @@ namespace System
         static constexpr auto microsecond = 800;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void MicrosecondsTest();

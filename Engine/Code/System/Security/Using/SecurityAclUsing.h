@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:11)
+///	版本：0.9.1.4 (2023/08/30 15:08)
 
 #ifndef SYSTEM_SECURITY_SECURITY_ACL_USING_H
 #define SYSTEM_SECURITY_SECURITY_ACL_USING_H
@@ -16,8 +16,8 @@ namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    using AccessCheckACL = ACL;
-    using AccessCheckACLPtr = PACL;
+    using AccessCheckAcl = ACL;
+    using AccessCheckAclPtr = PACL;
     using SecurityAclInformationClass = ACL_INFORMATION_CLASS;
     using SecurityAclRevisionInformation = ACL_REVISION_INFORMATION;
     using SecurityAclRevisionInformationPtr = PACL_REVISION_INFORMATION;
@@ -26,7 +26,7 @@ namespace System
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    struct AccessCheckACL
+    struct AccessCheckAcl
     {
         uint8_t AclRevision;
         uint8_t Sbz1;
@@ -34,7 +34,7 @@ namespace System
         uint16_t AceCount;
         uint16_t Sbz2;
     };
-    using AccessCheckACLPtr = AccessCheckACL*;
+    using AccessCheckAclPtr = AccessCheckAcl*;
 
     enum SecurityAclInformationClass
     {

@@ -19,6 +19,7 @@ namespace AssistTools
     class GameParameterAnalysis;
     class ProjectGeneration;
     class GenerateEngine;
+    class GenerateTestingEngine;
 }
 
 #endif  // ASSIST_TOOLS_GENERATE_PROJECTS_FWD_H

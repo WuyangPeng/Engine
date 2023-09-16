@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/13 21:30)
+///	版本：0.9.1.4 (2023/08/31 13:51)
 
 #ifndef SYSTEM_OPENGL_TESTING_OPENGL_SUITE_H
 #define SYSTEM_OPENGL_TESTING_OPENGL_SUITE_H
@@ -17,10 +17,10 @@
 #include "OpenGLBase/OpenGLQueryTesting.h"
 #include "OpenGLBase/OpenGLStateTesting.h"
 #include "OpenGLBase/OpenGLStencilTesting.h"
-#include "OpenGLBuffers/OpenGLBindFramebufferTesting.h"
+#include "OpenGLBuffers/OpenGLBindFrameBufferTesting.h"
 #include "OpenGLBuffers/OpenGLBindVertexBufferTesting.h"
 #include "OpenGLBuffers/OpenGLDrawBuffersTesting.h"
-#include "OpenGLBuffers/OpenGLFramebufferTesting.h"
+#include "OpenGLBuffers/OpenGLFrameBufferTesting.h"
 #include "OpenGLBuffers/OpenGLGetBuffersTesting.h"
 #include "OpenGLBuffers/OpenGLSetBufferSubDataTesting.h"
 #include "OpenGLBuffers/OpenGLSetBufferTesting.h"
@@ -48,7 +48,7 @@
 #include "OpenGLShader/OpenGLShaderAttributesTesting.h"
 #include "OpenGLShader/OpenGLShaderStatusTesting.h"
 #include "OpenGLTextures/OpenGLBindTexturesTesting.h"
-#include "OpenGLTextures/OpenGLFramebufferTextures2DTesting.h"
+#include "OpenGLTextures/OpenGLFrameBufferTextures2DTesting.h"
 #include "OpenGLTextures/OpenGLGetTexturesTesting.h"
 #include "OpenGLTextures/OpenGLPixelStoreTesting.h"
 #include "OpenGLTextures/OpenGLTextures1DTesting.h"

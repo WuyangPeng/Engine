@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/29 20:54)
+///	版本：0.9.1.4 (2023/09/01 13:53)
 
 #ifndef SYSTEM_SECURITY_SUITE_GET_SUB_AUTHORITY_TESTING_H
 #define SYSTEM_SECURITY_SUITE_GET_SUB_AUTHORITY_TESTING_H
@@ -29,15 +29,15 @@ namespace System
         static constexpr WindowsByte subAuthorityCount{ 5 };
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void GetSubAuthorityTest();
 
-        void DoGetSubAuthorityTest(SecuritySIDIndentifierAuthority& identifierAuthority);
-        void NextSubAuthorityCountTest(WindowsUCharPtr securityIdentifierSubAuthorityCount, SecuritySID& sid);
-        void GetSecurityIdentifierSubAuthorityTest(const WindowsUChar* nextSubAuthorityCount, const WindowsUChar* securityIdentifierSubAuthorityCount, SecuritySID& sid);
-        NODISCARD SecuritySID GetSecuritySID(SecuritySIDIndentifierAuthority& identifierAuthority);
+        void DoGetSubAuthorityTest(SecuritySidIdentifierAuthority& identifierAuthority);
+        void NextSubAuthorityCountTest(WindowsUCharPtr securityIdentifierSubAuthorityCount, SecuritySid& sid);
+        void GetSecurityIdentifierSubAuthorityTest(const WindowsUChar* nextSubAuthorityCount, const WindowsUChar* securityIdentifierSubAuthorityCount, SecuritySid& sid);
+        NODISCARD SecuritySid GetSecuritySid(SecuritySidIdentifierAuthority& identifierAuthority);
     };
 }
 

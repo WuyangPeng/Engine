@@ -5,18 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/15 09:05)
+///	版本：0.9.1.4 (2023/09/16 09:56)
 
 #include "TestMessageEvent.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Threading/Flags/MutexFlags.h"
 #include "CoreTools/Threading/ScopedMutex.h"
-#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
-#include "Network/Interface/SendSocket.h"
 #include "Network/NetworkMessage/NullMessage.h"
 
 Network::TestMessageEvent::TestMessageEvent(CoreTools::DisableNotThrow disableNotThrow)
-    : ParentType{}, callBackTime{ 0 }, testMessageEventCriticalSection{ CoreTools::MutexCreate::UseCriticalSection }, server{}
+    : ParentType{}, callBackTime{ 0 }, testMessageEventCriticalSection{ CoreTools::MutexCreate::UseCriticalSection }
 {
     System::UnusedFunction(disableNotThrow);
 
@@ -41,31 +39,15 @@ int64_t Network::TestMessageEvent::GetCallBackTime() const noexcept
     return callBackTime;
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
 void Network::TestMessageEvent::CallBackEvent(int64_t socketId, const ConstMessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(message);
 
     CoreTools::ScopedMutex scopedMutex{ testMessageEventCriticalSection };
 
     callBackTime += message->GetMessageId();
 
-    if (const auto serverSharedPtr = server.lock();
-        serverSharedPtr)
-    {
-        const MessageInterfaceSharedPtr sendMessage{ std::make_shared<NullMessage>(MessageHeadStrategy::Default, message->GetMessageId()) };
-        serverSharedPtr->Send(socketId, sendMessage);
-    }
-}
-
-#include STSTEM_WARNING_POP
-
-void Network::TestMessageEvent::SetServerWeakPtr(const ServerSharedPtr& aServer) noexcept
-{
-    NETWORK_CLASS_IS_VALID_9;
-
-    server = aServer;
+    System::UnusedFunction(socketId);
 }

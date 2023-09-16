@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/17 18:20)
+///	版本：0.9.1.4 (2023/09/01 09:33)
 
-#ifndef SYSTEM_TESTING_HELPER_SUITE_HRESULT_TESTING_H
-#define SYSTEM_TESTING_HELPER_SUITE_HRESULT_TESTING_H
+#ifndef SYSTEM_TESTING_HELPER_SUITE_H_RESULT_TESTING_H
+#define SYSTEM_TESTING_HELPER_SUITE_H_RESULT_TESTING_H
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
@@ -26,11 +26,11 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void HResultTest();
     };
 }
 
-#endif  // SYSTEM_TESTING_HELPER_SUITE_HRESULT_TESTING_H
+#endif  // SYSTEM_TESTING_HELPER_SUITE_H_RESULT_TESTING_H

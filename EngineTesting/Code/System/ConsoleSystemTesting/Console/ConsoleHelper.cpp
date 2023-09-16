@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/20 11:56)
+///	版本：0.9.1.4 (2023/08/31 13:37)
 
 #include "ConsoleHelper.h"
 #include "System/Console/ConsoleCreate.h"
@@ -22,7 +22,6 @@ ConsoleSystemTesting::ConsoleHelper::ConsoleHelper() noexcept
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 void ConsoleSystemTesting::ConsoleHelper::AllocConsole() noexcept
 {
     if (DoAllocConsole())
@@ -44,7 +43,6 @@ ConsoleSystemTesting::ConsoleHelper::~ConsoleHelper() noexcept
     FreeConsole();
 }
 
-// private
 void ConsoleSystemTesting::ConsoleHelper::FreeConsole() noexcept
 {
     if (!DoFreeConsole())

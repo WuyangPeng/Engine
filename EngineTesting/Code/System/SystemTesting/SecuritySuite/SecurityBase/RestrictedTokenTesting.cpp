@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/29 15:22)
+///	版本：0.9.1.4 (2023/09/01 14:08)
 
 #include "RestrictedTokenTesting.h"
 #include "System/Helper/SecuritySidMacro.h"
@@ -20,11 +20,11 @@
 
 System::RestrictedTokenTesting::RestrictedTokenTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      specifiesAdditionalPrivilegeOptionses{ SpecifiesAdditionalPrivilegeOptions::Default,
-                                             SpecifiesAdditionalPrivilegeOptions::DisableMaxPrivilege,
-                                             SpecifiesAdditionalPrivilegeOptions::SandboxInert,
-                                             SpecifiesAdditionalPrivilegeOptions::LuaToken,
-                                             SpecifiesAdditionalPrivilegeOptions::WriteRestricted }
+      specifiesAdditionalPrivilegeOptionsContainer{ SpecifiesAdditionalPrivilegeOptions::Default,
+                                                    SpecifiesAdditionalPrivilegeOptions::DisableMaxPrivilege,
+                                                    SpecifiesAdditionalPrivilegeOptions::SandboxInert,
+                                                    SpecifiesAdditionalPrivilegeOptions::LuaToken,
+                                                    SpecifiesAdditionalPrivilegeOptions::WriteRestricted }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -52,7 +52,7 @@ void System::RestrictedTokenTesting::CreateRestrictedTokenTest()
 
 void System::RestrictedTokenTesting::DoCreateRestrictedTokenTest(WindowsHandle tokenHandle)
 {
-    SecuritySIDBufferType sid{};
+    SecuritySidBufferType sid{};
 
     auto sidsToDisable = GetSidsToDisable(sid);
     auto privilegesToDelete = GetPrivilegesToDelete();
@@ -61,7 +61,7 @@ void System::RestrictedTokenTesting::DoCreateRestrictedTokenTest(WindowsHandle t
     RestrictedTest(tokenHandle, sidsToDisable, privilegesToDelete, sidsToRestrict);
 }
 
-System::RestrictedTokenTesting::SecuritySidAndAttributesBufferType System::RestrictedTokenTesting::GetSidsToDisable(SecuritySIDBufferType& sid)
+System::RestrictedTokenTesting::SecuritySidAndAttributesBufferType System::RestrictedTokenTesting::GetSidsToDisable(SecuritySidBufferType& sid)
 {
     SecuritySidAndAttributesBufferType sidsToDisable{};
 
@@ -76,20 +76,20 @@ System::RestrictedTokenTesting::SecuritySidAndAttributesBufferType System::Restr
     return sidsToDisable;
 }
 
-void System::RestrictedTokenTesting::InitializeSecurityIdentifierTest(SecuritySIDBufferType& sid, int count, SecuritySidAndAttributes& securitySidAndAttributes)
+void System::RestrictedTokenTesting::InitializeSecurityIdentifierTest(SecuritySidBufferType& sid, int count, SecuritySidAndAttributes& securitySidAndAttributes)
 {
     constexpr WindowsByte subAuthorityCount{ 5 };
-    SecuritySIDIndentifierAuthority identifierAuthority SYSTEM_SECURITY_NT_AUTHORITY;
-    auto& securitySID = sid.at(count);
+    SecuritySidIdentifierAuthority identifierAuthority SYSTEM_SECURITY_NT_AUTHORITY;
+    auto& securitySid = sid.at(count);
 
-    ASSERT_TRUE(InitializeSecurityIdentifier(&securitySID, &identifierAuthority, subAuthorityCount));
-    ASSERT_TRUE(IsSecurityIdentifierValid(&securitySID));
-    securitySidAndAttributes.Sid = &securitySID;
+    ASSERT_TRUE(InitializeSecurityIdentifier(&securitySid, &identifierAuthority, subAuthorityCount));
+    ASSERT_TRUE(IsSecurityIdentifierValid(&securitySid));
+    securitySidAndAttributes.Sid = &securitySid;
 }
 
-System::RestrictedTokenTesting::LUIDAndAttributesBufferType System::RestrictedTokenTesting::GetPrivilegesToDelete()
+System::RestrictedTokenTesting::LuidAndAttributesBufferType System::RestrictedTokenTesting::GetPrivilegesToDelete()
 {
-    LUIDAndAttributesBufferType privilegesToDelete{};
+    LuidAndAttributesBufferType privilegesToDelete{};
 
     for (auto& luidAndAttributes : privilegesToDelete)
     {
@@ -99,17 +99,17 @@ System::RestrictedTokenTesting::LUIDAndAttributesBufferType System::RestrictedTo
     return privilegesToDelete;
 }
 
-void System::RestrictedTokenTesting::GetLookupPrivilegeValueTest(LUIDAndAttributes& lUIDAndAttributes)
+void System::RestrictedTokenTesting::GetLookupPrivilegeValueTest(LuidAndAttributes& luidAndAttributes)
 {
-    LookupPrivilegeLUID uid{};
+    LookupPrivilegeLuid uid{};
 
     ASSERT_TRUE(GetLookupPrivilegeValue(nullptr, GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::DebugName).c_str(), &uid));
 
-    lUIDAndAttributes.Luid = uid;
-    lUIDAndAttributes.Attributes = EnumCastUnderlying(SecurityTokenAttributesPrivilege::Enabled);
+    luidAndAttributes.Luid = uid;
+    luidAndAttributes.Attributes = EnumCastUnderlying(SecurityTokenAttributesPrivilege::Enabled);
 }
 
-System::RestrictedTokenTesting::SecuritySidAndAttributesBufferType System::RestrictedTokenTesting::GetSidsToRestrict(SecuritySIDBufferType& sid)
+System::RestrictedTokenTesting::SecuritySidAndAttributesBufferType System::RestrictedTokenTesting::GetSidsToRestrict(SecuritySidBufferType& sid)
 {
     auto count = securityBufferSize;
     SecuritySidAndAttributesBufferType sidsToRestrict{};
@@ -125,10 +125,10 @@ System::RestrictedTokenTesting::SecuritySidAndAttributesBufferType System::Restr
 
 void System::RestrictedTokenTesting::RestrictedTest(WindowsHandle tokenHandle,
                                                     SecuritySidAndAttributesBufferType& sidsToDisable,
-                                                    LUIDAndAttributesBufferType& privilegesToDelete,
+                                                    LuidAndAttributesBufferType& privilegesToDelete,
                                                     SecuritySidAndAttributesBufferType& sidsToRestrict)
 {
-    for (auto specifiesAdditionalPrivilegeOptions : specifiesAdditionalPrivilegeOptionses)
+    for (const auto specifiesAdditionalPrivilegeOptions : specifiesAdditionalPrivilegeOptionsContainer)
     {
         DoRestrictedTest(tokenHandle, specifiesAdditionalPrivilegeOptions, sidsToDisable, privilegesToDelete, sidsToRestrict);
     }
@@ -137,7 +137,7 @@ void System::RestrictedTokenTesting::RestrictedTest(WindowsHandle tokenHandle,
 void System::RestrictedTokenTesting::DoRestrictedTest(WindowsHandle tokenHandle,
                                                       SpecifiesAdditionalPrivilegeOptions specifiesAdditionalPrivilegeOptions,
                                                       SecuritySidAndAttributesBufferType& sidsToDisable,
-                                                      LUIDAndAttributesBufferType& privilegesToDelete,
+                                                      LuidAndAttributesBufferType& privilegesToDelete,
                                                       SecuritySidAndAttributesBufferType& sidsToRestrict)
 {
     WindowsHandle restrictedTokenHandle{ nullptr };

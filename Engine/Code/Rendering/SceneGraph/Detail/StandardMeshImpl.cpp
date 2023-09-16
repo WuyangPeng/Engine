@@ -280,7 +280,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Box(MAYBE_UNUSED 
 
     std::vector<int> indices(36);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     indices.at(0) = 0;
@@ -320,7 +320,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Box(MAYBE_UNUSED 
     indices[34] = 3;
     indices[35] = 7;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     if (inside)
     {
@@ -348,12 +348,12 @@ void Rendering::StandardMeshImpl::ReverseTriangleOrder(int numTriangles, int* in
             auto lhsIndex = 3 * i + 1;
             auto rhsIndex = lhsIndex + 1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
             std::swap(indices[lhsIndex], indices[rhsIndex]);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
     }
 }
@@ -825,7 +825,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Hexahedron() cons
     auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     indices[0] = 0;
@@ -865,7 +865,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Hexahedron() cons
     indices[34] = 4;
     indices[35] = 5;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     if (inside)
     {
@@ -895,7 +895,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Octahedron() cons
     auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     indices[0] = 4;
@@ -923,7 +923,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Octahedron() cons
     indices[22] = 0;
     indices[23] = 3;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     if (inside)
     {
@@ -957,7 +957,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Dodecahedron() co
     auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     indices[0] = 0;
@@ -1069,7 +1069,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Dodecahedron() co
     indices[106] = 10;
     indices[107] = 11;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     if (inside)
     {
@@ -1104,7 +1104,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Icosahedron() con
     auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     indices[0] = 0;
@@ -1168,7 +1168,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Icosahedron() con
     indices[58] = 7;
     indices[59] = 5;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     if (inside)
     {
@@ -1193,16 +1193,16 @@ void Rendering::StandardMeshImpl::InitIndexBufferInRectangle(IndexBuffer& indexB
     {
         if (indexSize == 2)
         {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
             auto indices = reinterpret_cast<int16_t*>(&*indexBuffer.GetData(0).GetCurrent());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
             if (indices != nullptr)
             {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
                 indices[index * 6] = boost::numeric_cast<int16_t>(rectangleIndex0);
@@ -1212,21 +1212,21 @@ void Rendering::StandardMeshImpl::InitIndexBufferInRectangle(IndexBuffer& indexB
                 indices[index * 6 + 4] = boost::numeric_cast<int16_t>(rectangleIndex2);
                 indices[index * 6 + 5] = boost::numeric_cast<int16_t>(rectangleIndex3);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
             }
         }
         else  // indexSize == 4
         {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
             auto indices = reinterpret_cast<int32_t*>(&*indexBuffer.GetData(0).GetCurrent());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
             if (indices != nullptr)
             {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
                 indices[index * 6] = rectangleIndex0;
@@ -1236,7 +1236,7 @@ void Rendering::StandardMeshImpl::InitIndexBufferInRectangle(IndexBuffer& indexB
                 indices[index * 6 + 4] = rectangleIndex2;
                 indices[index * 6 + 5] = rectangleIndex3;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
             }
         }
     }
@@ -1250,12 +1250,12 @@ void Rendering::StandardMeshImpl::InitIndexBufferInDisk(IndexBuffer& indexBuffer
 
     if (indexSize == 2)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
         auto indices = reinterpret_cast<int16_t*>(&*indexBuffer.GetData(0).GetCurrent());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         if (indices != nullptr)
         {
@@ -1263,7 +1263,7 @@ void Rendering::StandardMeshImpl::InitIndexBufferInDisk(IndexBuffer& indexBuffer
 
             for (auto secondIndex = 0; secondIndex <= radialSamplesMinus1; ++secondIndex)
             {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
                 indices[0] = 0;
@@ -1288,7 +1288,7 @@ void Rendering::StandardMeshImpl::InitIndexBufferInDisk(IndexBuffer& indexBuffer
                     indices += 6;
                 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
                 firstIndex = secondIndex;
             }
@@ -1296,12 +1296,12 @@ void Rendering::StandardMeshImpl::InitIndexBufferInDisk(IndexBuffer& indexBuffer
     }
     else  // indexSize == 4
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
         auto indices = reinterpret_cast<int32_t*>(&*indexBuffer.GetData(0).GetCurrent());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         if (indices != nullptr)
         {
@@ -1309,7 +1309,7 @@ void Rendering::StandardMeshImpl::InitIndexBufferInDisk(IndexBuffer& indexBuffer
 
             for (auto secondIndex = 0; secondIndex <= radialSamplesMinus1; ++secondIndex)
             {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
                 indices[0] = 0;
@@ -1334,7 +1334,7 @@ void Rendering::StandardMeshImpl::InitIndexBufferInDisk(IndexBuffer& indexBuffer
                     indices += 6;
                 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
                 firstIndex = secondIndex;
             }
@@ -1354,45 +1354,45 @@ void Rendering::StandardMeshImpl::InitIndexBuffer(IndexBuffer& indexBuffer, cons
 
     if (indexSize == 2)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
         auto accessWriteData = reinterpret_cast<int16_t*>(&*indexBuffer.GetData(0).GetCurrent());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         if (accessWriteData != nullptr)
         {
             for (auto i = 0u; i < numVertices; ++i)
             {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
                 accessWriteData[i] = boost::numeric_cast<int16_t>(indices.at(i));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
             }
         }
     }
     else  // indexSize == 4
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
         auto accessWriteData = reinterpret_cast<int32_t*>(&*indexBuffer.GetData(0).GetCurrent());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         if (accessWriteData != nullptr)
         {
             for (auto i = 0u; i < numVertices; ++i)
             {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
                 accessWriteData[i] = indices.at(i);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
             }
         }
     }

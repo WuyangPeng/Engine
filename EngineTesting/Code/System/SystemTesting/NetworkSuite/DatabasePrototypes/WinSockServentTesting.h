@@ -5,35 +5,35 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/07 22:48)
+///	版本：0.9.1.4 (2023/09/01 10:23)
 
-#ifndef SYSTEM_NETWORK_SUITE_WINSOCK_SERVENT_TESTING_H
-#define SYSTEM_NETWORK_SUITE_WINSOCK_SERVENT_TESTING_H
+#ifndef SYSTEM_NETWORK_SUITE_WIN_SOCK_SERV_ENT_TESTING_H
+#define SYSTEM_NETWORK_SUITE_WIN_SOCK_SERV_ENT_TESTING_H
 
 #include "System/Network/Using/DatabasePrototypesUsing.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace System
 {
-    class WinSockServentTesting final : public CoreTools::UnitTest
+    class WinSockServEntTesting final : public CoreTools::UnitTest
     {
     public:
-        using ClassType = WinSockServentTesting;
+        using ClassType = WinSockServEntTesting;
         using ParentType = UnitTest;
 
     public:
-        explicit WinSockServentTesting(const OStreamShared& stream);
+        explicit WinSockServEntTesting(const OStreamShared& stream);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
-        void GetServentTest();
+        void GetServEntTest();
 
-        void WinSockServentTest(const WinSockServent* winSockServent);
+        void WinSockServEntTest(const WinSockServEnt* winSockServEnt);
     };
 }
 
-#endif  // SYSTEM_NETWORK_SUITE_WINSOCK_SERVENT_TESTING_H
+#endif  // SYSTEM_NETWORK_SUITE_WIN_SOCK_SERV_ENT_TESTING_H

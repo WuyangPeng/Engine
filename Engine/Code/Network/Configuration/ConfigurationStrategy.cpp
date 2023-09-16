@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/04/28 10:59)
+///	版本：0.9.1.4 (2023/09/04 15:46)
 
 #include "Network/NetworkExport.h"
 
@@ -15,7 +15,6 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 Network::ConfigurationStrategy Network::ConfigurationStrategy::Create()
 {
@@ -27,35 +26,131 @@ Network::ConfigurationStrategy::ConfigurationStrategy(CoreTools::DisableNotThrow
 {
     System::UnusedFunction(disableNotThrow);
 
-    NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappersStrategy, ConnectStrategy connectStrategy, ServerStrategy serverStrategy, MessageStrategy messageStrategy, ParserStrategy parserStrategy, OpenSSLStrategy openSSLStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy, const ConfigurationSubStrategy& subStrategy, const ConfigurationParameter& configurationParameter, SocketSendMessage socketSendMessage, const std::string& host, int port)
-    : impl{ CoreTools::ImplCreateUseFactory::Default, wrappersStrategy, connectStrategy, serverStrategy, messageStrategy, parserStrategy, openSSLStrategy, encryptedCompressionStrategy, subStrategy, configurationParameter, socketSendMessage, host, port }
+Network::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappersStrategy, ConnectStrategy connectStrategy, ServerStrategy serverStrategy, MessageStrategy messageStrategy, ParserStrategy parserStrategy, OpenSslStrategy openSslStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy, const ConfigurationSubStrategy& subStrategy, const ConfigurationParameter& configurationParameter, SocketSendMessage socketSendMessage, const std::string& host, int port)
+    : impl{ CoreTools::ImplCreateUseFactory::Default, wrappersStrategy, connectStrategy, serverStrategy, messageStrategy, parserStrategy, openSslStrategy, encryptedCompressionStrategy, subStrategy, configurationParameter, socketSendMessage, host, port }
 {
-    NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappersStrategy, ConnectStrategy connectStrategy, ClientStrategy clientStrategy, MessageStrategy messageStrategy, ParserStrategy parserStrategy, OpenSSLStrategy openSSLStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy, const ConfigurationSubStrategy& subStrategy, const ConfigurationParameter& configurationParameter, SocketSendMessage socketSendMessage, const std::string& host, int port)
-    : impl{ CoreTools::ImplCreateUseFactory::Default, wrappersStrategy, connectStrategy, clientStrategy, messageStrategy, parserStrategy, openSSLStrategy, encryptedCompressionStrategy, subStrategy, configurationParameter, socketSendMessage, host, port }
+Network::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappersStrategy, ConnectStrategy connectStrategy, ClientStrategy clientStrategy, MessageStrategy messageStrategy, ParserStrategy parserStrategy, OpenSslStrategy openSslStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy, const ConfigurationSubStrategy& subStrategy, const ConfigurationParameter& configurationParameter, SocketSendMessage socketSendMessage, const std::string& host, int port)
+    : impl{ CoreTools::ImplCreateUseFactory::Default, wrappersStrategy, connectStrategy, clientStrategy, messageStrategy, parserStrategy, openSslStrategy, encryptedCompressionStrategy, subStrategy, configurationParameter, socketSendMessage, host, port }
 {
-    NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ConfigurationStrategy)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetWrappersStrategy, Network::WrappersStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetServerStrategy, Network::ServerStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetMessageStrategy, Network::MessageStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetClientStrategy, Network::ClientStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetConnectStrategy, Network::ConnectStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetParserStrategy, Network::ParserStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetOpenSSLStrategy, Network::OpenSSLStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetEncryptedCompressionStrategy, Network::EncryptedCompressionStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetSocketSendMessage, Network::SocketSendMessage)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetConfigurationSubStrategy, Network::ConfigurationSubStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, ConfigurationStrategy, IsExist, WrappersSubStrategy, bool)
+Network::WrappersStrategy Network::ConfigurationStrategy::GetWrappersStrategy() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, ConfigurationStrategy, GetHost, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetPort, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetConfigurationParameter, Network::ConfigurationParameter)
+    return impl->GetWrappersStrategy();
+}
+
+Network::ServerStrategy Network::ConfigurationStrategy::GetServerStrategy() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetServerStrategy();
+}
+
+Network::MessageStrategy Network::ConfigurationStrategy::GetMessageStrategy() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetMessageStrategy();
+}
+
+Network::ClientStrategy Network::ConfigurationStrategy::GetClientStrategy() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetClientStrategy();
+}
+
+Network::ConnectStrategy Network::ConfigurationStrategy::GetConnectStrategy() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetConnectStrategy();
+}
+
+Network::ParserStrategy Network::ConfigurationStrategy::GetParserStrategy() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetParserStrategy();
+}
+
+Network::OpenSslStrategy Network::ConfigurationStrategy::GetOpenSslStrategy() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetOpenSslStrategy();
+}
+
+Network::SocketSendMessage Network::ConfigurationStrategy::GetSocketSendMessage() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetSocketSendMessage();
+}
+
+Network::EncryptedCompressionStrategy Network::ConfigurationStrategy::GetEncryptedCompressionStrategy() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetEncryptedCompressionStrategy();
+}
+
+Network::ConfigurationSubStrategy Network::ConfigurationStrategy::GetConfigurationSubStrategy() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetConfigurationSubStrategy();
+}
+
+bool Network::ConfigurationStrategy::IsExist(WrappersSubStrategy wrappersSubStrategy) const
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsExist(wrappersSubStrategy);
+}
+
+Network::ConfigurationParameter Network::ConfigurationStrategy::GetConfigurationParameter() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetConfigurationParameter();
+}
+
+std::string Network::ConfigurationStrategy::GetHost() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetHost();
+}
+
+int Network::ConfigurationStrategy::GetPort() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetPort();
+}
+
+bool Network::ConfigurationStrategy::IsServer() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsServer();
+}
+
+bool Network::ConfigurationStrategy::IsClient() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsClient();
+}

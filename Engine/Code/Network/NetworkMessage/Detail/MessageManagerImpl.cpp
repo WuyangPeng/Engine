@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 10:08)
+///	版本：0.9.1.4 (2023/09/04 16:33)
 
 #include "Network/NetworkExport.h"
 
@@ -30,11 +30,11 @@ Network::MessageManagerImpl::FactoryFunction Network::MessageManagerImpl::Find(i
     if (const auto iter = idFactories.find(messageId);
         iter != idFactories.cend())
     {
-        for (const auto& value : iter->second)
+        for (const auto& element : iter->second)
         {
-            if (value.first.IsVersionsConform(version))
+            if (element.first.IsVersionsConform(version))
             {
-                return value.second;
+                return element.second;
             }
         }
     }
@@ -49,11 +49,11 @@ Network::MessageManagerImpl::FactoryFunction Network::MessageManagerImpl::Find(c
     if (const auto iter = describeFactories.find(messageDescribe);
         iter != describeFactories.cend())
     {
-        for (const auto& value : iter->second)
+        for (const auto& element : iter->second)
         {
-            if (value.first.IsVersionsConform(version))
+            if (element.first.IsVersionsConform(version))
             {
-                return value.second;
+                return element.second;
             }
         }
     }

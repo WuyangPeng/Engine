@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 15:52)
+///	版本：0.9.1.4 (2023/09/01 15:20)
 
 #include "WaitSemaphoreTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -35,9 +35,9 @@ void System::WaitSemaphoreTesting::MainTest()
 
 void System::WaitSemaphoreTesting::ThreadTest()
 {
-    constexpr WindowsLong maxSemphoreCount{ 5 };
+    constexpr WindowsLong maxSemaphoreCount{ 5 };
 
-    const auto semaphoreHandle = CreateSystemSemaphore(maxSemphoreCount, maxSemphoreCount);
+    const auto semaphoreHandle = CreateSystemSemaphore(maxSemaphoreCount, maxSemaphoreCount);
     ASSERT_TRUE(IsSystemSemaphoreValid(semaphoreHandle));
 
     ASSERT_NOT_THROW_EXCEPTION_1(CreateThread, semaphoreHandle);
@@ -97,10 +97,21 @@ void System::WaitSemaphoreTesting::CreateThread(WindowsHandle semaphoreHandle)
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest0, this, semaphoreHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest1, this, semaphoreHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest2, this, semaphoreHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest3, this, semaphoreHandle));
+        threadGroup.create_thread([this, semaphoreHandle]() {
+            this->WaitForSemaphoreTest0(semaphoreHandle);
+        });
+
+        threadGroup.create_thread([this, semaphoreHandle]() {
+            this->WaitForSemaphoreTest1(semaphoreHandle);
+        });
+
+        threadGroup.create_thread([this, semaphoreHandle]() {
+            this->WaitForSemaphoreTest2(semaphoreHandle);
+        });
+
+        threadGroup.create_thread([this, semaphoreHandle]() {
+            this->WaitForSemaphoreTest3(semaphoreHandle);
+        });
     }
 
     threadGroup.join_all();

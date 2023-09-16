@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 10:17)
+///	版本：0.9.1.4 (2023/09/16 10:52)
 
 #include "SockACEHandleSetTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Network/Helper/UserMacro.h"
 #include "Network/Interface/HandleSet.h"
 #include "Network/Interface/SockAcceptor.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
@@ -29,21 +28,6 @@ void Network::SockACEHandleSetTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Network::SockACEHandleSetTesting::MainTest()
+void Network::SockACEHandleSetTesting::MainTest() noexcept
 {
-    ASSERT_NOT_THROW_EXCEPTION_2(ACESingletonTest<ClassType>, this, &ClassType::HandleSetTest);
-}
-
-void Network::SockACEHandleSetTesting::HandleSetTest()
-{
-    HandleSet handleSet{ GetACEServerConfigurationStrategy() };
-
-    MAYBE_UNUSED const auto maxSet = handleSet.GetMaxSet();
-    handleSet.SetBit(nullptr);
-    handleSet.Sync(nullptr);
-    MAYBE_UNUSED const auto isSet = handleSet.IsSet(nullptr);
-    handleSet.ClearBit(nullptr);
-    MAYBE_UNUSED const auto isFdSetFull = handleSet.IsFdSetFull();
-    MAYBE_UNUSED const auto isFdSetCount = handleSet.IsFdSetCount();
-    MAYBE_UNUSED const auto select = handleSet.Select(0);
 }

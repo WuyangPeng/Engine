@@ -99,12 +99,12 @@ void Mathematics::IntegerDivisionModuloTesting::DenominatorIsLargeTest()
         ASSERT_EQUAL(fifthIntegerDivisionModulo.GetQuotient(), IntegerData<33>(0));
         ASSERT_EQUAL(fifthIntegerDivisionModulo.GetRemainder(), firstInteger);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26496)
 
         IntegerData<33> fourthInteger = firstInteger;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         IntegerDataAmend<33> fourthIntegerAmend(fourthInteger);
         fourthIntegerAmend.Negative();
@@ -162,12 +162,12 @@ void Mathematics::IntegerDivisionModuloTesting::SingleTest()
 
         ASSERT_EQUAL(thirdMultiple.GetMultiplication() + thirdIntegerDivisionModulo.GetRemainder(), firstInteger);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26496)
 
         IntegerData<33> fourthInteger = firstInteger;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         IntegerDataAmend<33> fourthIntegerAmend(fourthInteger);
         fourthIntegerAmend.Negative();
@@ -231,12 +231,12 @@ void Mathematics::IntegerDivisionModuloTesting::MultipleTest()
 
         ASSERT_EQUAL(thirdMultiplication.GetMultiplication() + thirdIntegerDivisionModulo.GetRemainder(), firstInteger);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26496)
 
         IntegerData<34> fourthInteger = firstInteger;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         IntegerDataAmend<34> fourthIntegerDataAmend(fourthInteger);
         fourthIntegerDataAmend.Negative();

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 13:40)
+///	版本：0.9.1.4 (2023/09/04 16:35)
 
 #include "Network/NetworkExport.h"
 
@@ -15,12 +15,13 @@
 #include "MessageSourceDetail.h"
 #include "Detail/BufferReceiveStreamImpl.h"
 #include "Detail/ReceiveMessageLevelImpl.h"
-#include "Detail/SendMessageLevelImpl.h"
 #include "System/MemoryTools/MemoryHelper.h"
 #include "CoreTools/Helper/Assertion/NetworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(Network, BufferReceiveStream)
 
 Network::BufferReceiveStream::BufferReceiveStream(const MessageBufferSharedPtr& messageBuffer, ParserStrategy parserStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy)
     : impl{ messageBuffer, parserStrategy, encryptedCompressionStrategy }
@@ -37,6 +38,16 @@ void Network::BufferReceiveStream::OnEvent(int64_t socketId, MessageEventManager
     return impl->OnEvent(socketId, messageEventManager);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, BufferReceiveStream, IsFinish, bool)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, BufferReceiveStream, PushBack, MessageBufferSharedPtr, void)
-COPY_UNSHARED_CLONE_SELF_DEFINE(Network, BufferReceiveStream)
+bool Network::BufferReceiveStream::IsFinish() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->IsFinish();
+}
+
+void Network::BufferReceiveStream::PushBack(const MessageBufferSharedPtr& messageBuffer)
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->PushBack(messageBuffer);
+}

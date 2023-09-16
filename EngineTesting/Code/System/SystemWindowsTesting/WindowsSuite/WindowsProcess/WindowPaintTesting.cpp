@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 21:11)
+///	版本：0.9.1.4 (2023/08/31 15:22)
 
 #include "WindowPaintTesting.h"
 #include "System/Windows/WindowsProcess.h"
@@ -13,8 +13,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::WindowPaintTesting::WindowPaintTesting(const OStreamShared& stream, WindowsHWnd hwnd)
-    : ParentType{ stream }, hwnd{ hwnd }
+System::WindowPaintTesting::WindowPaintTesting(const OStreamShared& stream, WindowsHWnd hWnd)
+    : ParentType{ stream }, hWnd{ hWnd }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -35,8 +35,8 @@ void System::WindowPaintTesting::MainTest()
 void System::WindowPaintTesting::SystemPaintTest()
 {
     WindowsPaintStruct ps{};
-    ASSERT_TRUE(SystemBeginPaint(hwnd, &ps));
-    ASSERT_TRUE(SystemEndPaint(hwnd, &ps));
+    ASSERT_TRUE(SystemBeginPaint(hWnd, &ps));
+    ASSERT_TRUE(SystemEndPaint(hWnd, &ps));
 }
 
 void System::WindowPaintTesting::CursorPosTest()
@@ -53,28 +53,28 @@ void System::WindowPaintTesting::CursorPosTest()
 
 void System::WindowPaintTesting::SetCursorClientPosTest(WindowsPoint& point)
 {
-    ASSERT_TRUE(GetCursorClientPos(hwnd, point));
-    ASSERT_TRUE(SetCursorClientPos(hwnd, point));
+    ASSERT_TRUE(GetCursorClientPos(hWnd, point));
+    ASSERT_TRUE(SetCursorClientPos(hWnd, point));
 }
 
 void System::WindowPaintTesting::GetCursorClientPosTest(WindowsPoint& lhsPoint, WindowsPoint& rhsPoint)
 {
-    ASSERT_TRUE(GetCursorClientPos(hwnd, rhsPoint));
+    ASSERT_TRUE(GetCursorClientPos(hWnd, rhsPoint));
     ASSERT_EQUAL(lhsPoint.x, rhsPoint.x);
     ASSERT_EQUAL(lhsPoint.y, rhsPoint.y);
 
     ASSERT_TRUE(GetSystemCursorPos(lhsPoint));
-    ASSERT_TRUE(SystemScreenToClient(hwnd, lhsPoint));
+    ASSERT_TRUE(SystemScreenToClient(hWnd, lhsPoint));
 }
 
 void System::WindowPaintTesting::ScreenTest(const WindowsPoint& lhsPoint, WindowsPoint& rhsPoint)
 {
     WindowsPoint point{ lhsPoint };
-    ASSERT_TRUE(SystemClientToScreen(hwnd, point));
+    ASSERT_TRUE(SystemClientToScreen(hWnd, point));
     ASSERT_TRUE(SetSystemCursorPos(point));
 
     ASSERT_TRUE(GetSystemCursorPos(rhsPoint));
-    ASSERT_TRUE(SystemScreenToClient(hwnd, rhsPoint));
+    ASSERT_TRUE(SystemScreenToClient(hWnd, rhsPoint));
 
     ASSERT_EQUAL(lhsPoint.x, rhsPoint.x);
     ASSERT_EQUAL(lhsPoint.y, rhsPoint.y);

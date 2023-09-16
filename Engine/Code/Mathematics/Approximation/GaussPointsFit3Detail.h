@@ -102,7 +102,7 @@ Mathematics::Box3<Real> Mathematics::GaussPointsFit3<Real>::Calculate(const Poin
 
     for (auto i = 0; i < size; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
@@ -112,7 +112,7 @@ Mathematics::Box3<Real> Mathematics::GaussPointsFit3<Real>::Calculate(const Poin
 
     return Box3{ center, axis[0], axis[1], axis[2], extent[0], extent[1], extent[2] };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_GAUSS_POINTS_FIT3_DETAIL_H

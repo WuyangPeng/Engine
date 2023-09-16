@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/30 0:09)
+///	版本：0.9.1.4 (2023/09/01 14:12)
 
 #ifndef SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_MESSAGE_BOX_SELECTION_USE_LANGUAGE_ID_DATA_TESTING_H
 #define SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_MESSAGE_BOX_SELECTION_USE_LANGUAGE_ID_DATA_TESTING_H
@@ -14,19 +14,19 @@
 
 namespace System
 {
-    class MessageBoxSelectionUseLanguageIDDataTesting final : public CoreTools::UnitTest
+    class MessageBoxSelectionUseLanguageIdDataTesting final : public CoreTools::UnitTest
     {
     public:
-        using ClassType = MessageBoxSelectionUseLanguageIDDataTesting;
+        using ClassType = MessageBoxSelectionUseLanguageIdDataTesting;
         using ParentType = UnitTest;
 
     public:
-        explicit MessageBoxSelectionUseLanguageIDDataTesting(const OStreamShared& stream);
+        explicit MessageBoxSelectionUseLanguageIdDataTesting(const OStreamShared& stream);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void OkCancelTest();

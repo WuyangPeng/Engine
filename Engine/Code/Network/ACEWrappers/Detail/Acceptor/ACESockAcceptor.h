@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 13:48)
+///	版本：0.9.1.4 (2023/09/15 15:36)
 
 #ifndef NETWORK_ACE_WRAPPERS_ACE_SOCK_ACCEPTOR_H
 #define NETWORK_ACE_WRAPPERS_ACE_SOCK_ACCEPTOR_H
@@ -19,20 +19,20 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE ACESockAcceptor final : public SockAcceptorImpl
+    class NETWORK_HIDDEN_DECLARE AceSockAcceptor final : public SockAcceptorImpl
     {
     public:
-        using ClassType = ACESockAcceptor;
+        using ClassType = AceSockAcceptor;
         using ParentType = SockAcceptorImpl;
 
     public:
-        explicit ACESockAcceptor(int port);
-        ACESockAcceptor(const std::string& hostName, int port);
-        ~ACESockAcceptor() noexcept;
-        ACESockAcceptor(const ACESockAcceptor& rhs) = delete;
-        ACESockAcceptor& operator=(const ACESockAcceptor& rhs) = delete;
-        ACESockAcceptor(ACESockAcceptor&& rhs) noexcept = delete;
-        ACESockAcceptor& operator=(ACESockAcceptor&& rhs) noexcept = delete;
+        explicit AceSockAcceptor(int port);
+        AceSockAcceptor(const std::string& hostName, int port);
+        ~AceSockAcceptor() noexcept;
+        AceSockAcceptor(const AceSockAcceptor& rhs) = delete;
+        AceSockAcceptor& operator=(const AceSockAcceptor& rhs) = delete;
+        AceSockAcceptor(AceSockAcceptor&& rhs) noexcept = delete;
+        AceSockAcceptor& operator=(AceSockAcceptor&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

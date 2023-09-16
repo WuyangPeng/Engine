@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/14 15:12)
+///	版本：0.9.1.4 (2023/09/11 15:56)
 
 #include "LatticeTesting.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -33,6 +33,8 @@ void CoreTools::LatticeTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(GetIndexTest);
     ASSERT_NOT_THROW_EXCEPTION_0(GetIndexArrayTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CoordinateTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OrderLToRTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OrderRToLTest);
 }
 
 void CoreTools::LatticeTesting::SizeTest()
@@ -41,9 +43,9 @@ void CoreTools::LatticeTesting::SizeTest()
 
     static_assert(lattice0.GetDimensions() == 3);
 
-    static_assert(lattice0.GetSize(0) == 5);
-    static_assert(lattice0.GetSize(1) == 6);
-    static_assert(lattice0.GetSize(2) == 10);
+    ASSERT_EQUAL(lattice0.GetSize(0), 5);
+    ASSERT_EQUAL(lattice0.GetSize(1), 6);
+    ASSERT_EQUAL(lattice0.GetSize(2), 10);
 
     static_assert(lattice0.GetSize() == 5 * 6 * 10);
 
@@ -145,4 +147,110 @@ void CoreTools::LatticeTesting::CoordinateTest()
     const auto index3 = lattice2.GetIndex(coordinate3);
 
     ASSERT_EQUAL(index3, 61);
+}
+
+void CoreTools::LatticeTesting::OrderLToRTest()
+{
+    const Lattice<true, 2, 3, 5> lattice0{};
+
+    for (auto x2 = 0, i = 0; x2 < lattice0.GetSize(2); ++x2)
+    {
+        for (auto x1 = 0; x1 < lattice0.GetSize(1); ++x1)
+        {
+            for (auto x0 = 0; x0 < lattice0.GetSize(0); ++x0, ++i)
+            {
+                ASSERT_EQUAL(lattice0.GetIndex(x0, x1, x2), i);
+
+                const std::array x{ x0, x1, x2 };
+                ASSERT_EQUAL(lattice0.GetIndex(x), i);
+            }
+        }
+    }
+
+    for (auto i = 0; i < lattice0.GetSize(); ++i)
+    {
+        const auto x = lattice0.GetCoordinate(i);
+
+        ASSERT_EQUAL(x.at(0), i % 2);
+        ASSERT_EQUAL(x.at(1), (i / 2) % 3);
+        ASSERT_EQUAL(x.at(2), (i / 2) / 3);
+    }
+
+    const Lattice<true> lattice1{ 2, 3, 5 };
+
+    for (auto x2 = 0, i = 0; x2 < lattice1.GetSize(2); ++x2)
+    {
+        for (auto x1 = 0; x1 < lattice1.GetSize(1); ++x1)
+        {
+            for (auto x0 = 0; x0 < lattice1.GetSize(0); ++x0, ++i)
+            {
+                ASSERT_EQUAL(lattice1.GetIndex(x0, x1, x2), i);
+
+                const std::vector x{ x0, x1, x2 };
+                ASSERT_EQUAL(lattice1.GetIndex(x), i);
+            }
+        }
+    }
+
+    for (auto i = 0; i < lattice1.GetSize(); ++i)
+    {
+        const auto x = lattice1.GetCoordinate(i);
+
+        ASSERT_EQUAL(x.at(0), i % 2);
+        ASSERT_EQUAL(x.at(1), (i / 2) % 3);
+        ASSERT_EQUAL(x.at(2), (i / 2) / 3);
+    }
+}
+
+void CoreTools::LatticeTesting::OrderRToLTest()
+{
+    const Lattice<false, 2, 3, 5> lattice0{};
+
+    for (auto x2 = 0, i = 0; x2 < lattice0.GetSize(0); ++x2)
+    {
+        for (auto x1 = 0; x1 < lattice0.GetSize(1); ++x1)
+        {
+            for (auto x0 = 0; x0 < lattice0.GetSize(2); ++x0, ++i)
+            {
+                ASSERT_EQUAL(lattice0.GetIndex(x2, x1, x0), i);
+
+                const std::array x{ x2, x1, x0 };
+                ASSERT_EQUAL(lattice0.GetIndex(x), i);
+            }
+        }
+    }
+
+    for (auto i = 0; i < lattice0.GetSize(); ++i)
+    {
+        const auto x = lattice0.GetCoordinate(i);
+
+        ASSERT_EQUAL(x.at(2), i % 5);
+        ASSERT_EQUAL(x.at(1), (i / 5) % 3);
+        ASSERT_EQUAL(x.at(0), (i / 5) / 3);
+    }
+
+    const Lattice<false> lattice1{ 2, 3, 5 };
+
+    for (auto x2 = 0, i = 0; x2 < lattice1.GetSize(0); ++x2)
+    {
+        for (auto x1 = 0; x1 < lattice1.GetSize(1); ++x1)
+        {
+            for (auto x0 = 0; x0 < lattice1.GetSize(2); ++x0, ++i)
+            {
+                ASSERT_EQUAL(lattice1.GetIndex(x2, x1, x0), i);
+
+                const std::vector x{ x2, x1, x0 };
+                ASSERT_EQUAL(lattice1.GetIndex(x), i);
+            }
+        }
+    }
+
+    for (auto i = 0; i < lattice1.GetSize(); ++i)
+    {
+        const auto x = lattice1.GetCoordinate(i);
+
+        ASSERT_EQUAL(x.at(2), i % 5);
+        ASSERT_EQUAL(x.at(1), (i / 5) % 3);
+        ASSERT_EQUAL(x.at(0), (i / 5) / 3);
+    }
 }

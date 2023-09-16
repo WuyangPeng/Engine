@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/30 12:59)
+///	版本：0.9.1.4 (2023/08/30 18:12)
 
 #ifndef SYSTEM_THREADING_PROCESS_TOOLS_FLAGS_H
 #define SYSTEM_THREADING_PROCESS_TOOLS_FLAGS_H
@@ -28,7 +28,7 @@ namespace System
         FloatingPointEmulated = PF_FLOATING_POINT_EMULATED,
         CompareExchangeDouble = PF_COMPARE_EXCHANGE_DOUBLE,
         MmxInstructionsAvailable = PF_MMX_INSTRUCTIONS_AVAILABLE,
-        PpcMovemem64BitOk = PF_PPC_MOVEMEM_64BIT_OK,
+        PpcMoveMem64BitOk = PF_PPC_MOVEMEM_64BIT_OK,
         AlphaByteInstructions = PF_ALPHA_BYTE_INSTRUCTIONS,
         XmmiInstructionsAvailable = PF_XMMI_INSTRUCTIONS_AVAILABLE,
         Now3DInstructionsAvailable = PF_3DNOW_INSTRUCTIONS_AVAILABLE,
@@ -94,7 +94,7 @@ namespace System
         FloatingPointEmulated = 1,
         CompareExchangeDouble = 2,
         MmxInstructionsAvailable = 3,
-        PpcMovemem64BitOk = 4,
+        PpcMoveMem64BitOk = 4,
         AlphaByteInstructions = 5,
         XmmiInstructionsAvailable = 6,
         Now3DInstructionsAvailable = 7,

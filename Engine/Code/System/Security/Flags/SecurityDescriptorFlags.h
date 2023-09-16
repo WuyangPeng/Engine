@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:09)
+///	版本：0.9.1.4 (2023/08/30 15:01)
 
 #ifndef SYSTEM_SECURITY_SECURITY_DESCRIPTOR_FLAGS_H
 #define SYSTEM_SECURITY_SECURITY_DESCRIPTOR_FLAGS_H
@@ -40,7 +40,7 @@ namespace System
         SelfRelative = SE_SELF_RELATIVE,
     };
 
-    enum class SecurityDescriptorRMControlReturn
+    enum class SecurityDescriptorRmControlReturn
     {
         Success = ERROR_SUCCESS,
         InvalidData = ERROR_INVALID_DATA,
@@ -72,7 +72,7 @@ namespace System
         SelfRelative = (0x8000),
     };
 
-    enum class SecurityDescriptorRMControlReturn
+    enum class SecurityDescriptorRmControlReturn
     {
         Success = 0L,
         InvalidData = 13L,

@@ -292,6 +292,12 @@
     <Filter Include="Meshes 头文件\Detail">
       <UniqueIdentifier>{fa7f744c-4a57-4f74-b735-6dd93a51b781}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Estimate 头文件">
+      <UniqueIdentifier>{d18800ce-b4b5-41a0-aa7c-03d05c4c8474}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Estimate 模板文件">
+      <UniqueIdentifier>{097fb315-f3e5-45c6-9727-6c067662dc5c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Mathematics\DllLib.cpp">
@@ -1623,9 +1629,6 @@
     <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay3.cpp">
       <Filter>ComputationalGeometry 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\IncrementalDelaunay2.cpp">
-      <Filter>ComputationalGeometry 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\TriangulateEC.cpp">
       <Filter>ComputationalGeometry 源文件</Filter>
     </ClCompile>
@@ -2378,9 +2381,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\DelaunayDetail.h">
       <Filter>ComputationalGeometry 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\IncrementalDelaunay2Detail.h">
-      <Filter>ComputationalGeometry 模板文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\TriangulateECDetail.h">
       <Filter>ComputationalGeometry 模板文件</Filter>
     </ClInclude>
@@ -2421,9 +2421,6 @@
       <Filter>ComputationalGeometry 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay3.h">
-      <Filter>ComputationalGeometry 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\IncrementalDelaunay2.h">
       <Filter>ComputationalGeometry 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\TriangulateEC.h">
@@ -5740,6 +5737,36 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\SphereCoordinatesDetail.h">
       <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\Estimate.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\EstimateFwd.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ACosEstimate.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ASinEstimate.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ATanEstimate.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ACosEstimateDetail.h">
+      <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ASinEstimateDetail.h">
+      <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ATanEstimateDetail.h">
+      <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\CosEstimate.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\CosEstimateDetail.h">
+      <Filter>Estimate 模板文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

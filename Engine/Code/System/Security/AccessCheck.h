@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:12)
+///	版本：0.9.1.4 (2023/08/30 15:11)
 
 #ifndef SYSTEM_SECURITY_ACCESS_CHECK_H
 #define SYSTEM_SECURITY_ACCESS_CHECK_H
@@ -44,7 +44,7 @@ namespace System
                                                          bool* accessStatus) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetAccessCheckByType(SecurityDescriptorPtr securityDescriptor,
-                                                               SecuritySIDPtr principalSelfSid,
+                                                               SecuritySidPtr principalSelfSid,
                                                                WindowsHandle clientToken,
                                                                AccessGenericMask desiredAccess,
                                                                SecurityObjectTypeListPtr objectTypeList,
@@ -56,7 +56,7 @@ namespace System
                                                                bool* accessStatus) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetAccessCheckByTypeResultList(SecurityDescriptorPtr securityDescriptor,
-                                                                         SecuritySIDPtr principalSelfSid,
+                                                                         SecuritySidPtr principalSelfSid,
                                                                          WindowsHandle clientToken,
                                                                          AccessGenericMask desiredAccess,
                                                                          SecurityObjectTypeListPtr objectTypeList,

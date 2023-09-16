@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 10:31)
+///	版本：0.9.1.4 (2023/09/04 16:21)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_EVENT_MANAGER_IMPL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_EVENT_MANAGER_IMPL_H
@@ -27,6 +27,7 @@ namespace Network
     {
     public:
         using ClassType = MessageEventManagerImpl;
+
         using EventInterfaceSharedPtr = CoreTools::EventInterfaceSharedPtr;
         using EventInterfaceWeakPtr = CoreTools::EventInterfaceWeakPtr;
 

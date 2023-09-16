@@ -182,12 +182,12 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(Real constant, Real once, Real
         // 方程是一次的
         if (FindAlgebraic(constant, once))
         {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
             return root[0];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
         else
         {
@@ -810,10 +810,10 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
         return false;
     }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
     auto thriceRoot = root[0];
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     count = 0;
 

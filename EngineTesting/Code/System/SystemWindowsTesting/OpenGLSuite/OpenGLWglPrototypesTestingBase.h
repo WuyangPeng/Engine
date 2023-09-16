@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/23 0:04)
+///	版本：0.9.1.4 (2023/08/31 14:47)
 
 #ifndef SYSTEM_WINDOWS_TESTING_OPENGL_SUITE_OPENGL_WGL_PROTOTYPES_TESTING_BASE_H
 #define SYSTEM_WINDOWS_TESTING_OPENGL_SUITE_OPENGL_WGL_PROTOTYPES_TESTING_BASE_H
@@ -28,12 +28,12 @@ namespace System
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     protected:
-        NODISCARD WindowsHWnd GetHwnd() const noexcept;
-        NODISCARD WindowsHDC GetWindowsDC();
-        void ReleaseWindowsDCTest(WindowsHDC windowsDC);
-        NODISCARD OpenGLHglrc GetCreateWglContext(WindowsHDC windowsDC);
+        NODISCARD WindowsHWnd GetHWnd() const noexcept;
+        NODISCARD WindowsHdc GetWindowsDc();
+        void ReleaseWindowsDcTest(WindowsHdc windowsDc);
+        NODISCARD OpenGLHglrc GetCreateWglContext(WindowsHdc windowsDc);
         void DeleteWglContextTest(OpenGLHglrc openGLHglrc);
-        void SetWindowPixelFormatTest(WindowsHDC windowsDC);
+        void SetWindowPixelFormatTest(WindowsHdc windowsDc);
 
     protected:
         static constexpr auto colorBits = 32;
@@ -41,7 +41,7 @@ namespace System
         static constexpr auto stencilBits = 8;
 
     private:
-        WindowsHWnd hwnd;
+        WindowsHWnd hWnd;
     };
 }
 

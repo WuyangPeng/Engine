@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/16 22:28)
+///	版本：0.9.1.4 (2023/09/01 09:42)
 
 #include "ConfigMarkTesting.h"
 #include "System/Helper/ConfigMacro.h"
@@ -33,7 +33,7 @@ void System::ConfigMarkTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(UnusedTest);
     ASSERT_NOT_THROW_EXCEPTION_0(MaybeNullptrTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(NnodiscardTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(NodiscardTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FallthroughTest);
     ASSERT_THROW_EXCEPTION_0(NoReturnTest);
 
@@ -57,7 +57,7 @@ void System::ConfigMarkTesting::MaybeNullptrTest()
     ASSERT_EQUAL_NULL_PTR(nullPtr);
 }
 
-void System::ConfigMarkTesting::NnodiscardTest()
+void System::ConfigMarkTesting::NodiscardTest()
 {
     const auto result = FallthroughTest();
 
@@ -99,5 +99,5 @@ const int* System::ConfigMarkTesting::GetNullptr() noexcept
 
 void System::ConfigMarkTesting::NoReturn()
 {
-    THROW_WINDOWS_EXCEPTION;
+    THROW_WINDOWS_EXCEPTION
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 09:37)
+///	版本：0.9.1.4 (2023/09/15 15:22)
 
 #include "Network/NetworkExport.h"
 
@@ -13,12 +13,11 @@
 #include "System/Helper/EnumCast.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/MessageEvent/CallbackParameters.h"
 #include "CoreTools/MessageEvent/EventInterface.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
-#include "Network/NetworkMessage/MessageBuffer.h"
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
+#include "Network/NetworkMessage/MessageBuffer.h"
 
 Network::NullSockStream::NullSockStream() noexcept
     : ParentType{}
@@ -46,15 +45,11 @@ int Network::NullSockStream::Receive(const MessageBufferSharedPtr& messageBuffer
     return 0;
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
 void Network::NullSockStream::AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    System::UnusedFunction(messageBuffer);
+    System::UnusedFunction(eventInterface, messageBuffer);
 
     CoreTools::CallbackParameters callbackParameters{ System::EnumCastUnderlying(SocketManagerPosition::WrappersStrategy) };
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncSend));
@@ -65,8 +60,6 @@ void Network::NullSockStream::AsyncSend(const EventInterfaceSharedPtr& eventInte
         LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("执行事件回调失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
-
-#include STSTEM_WARNING_POP
 
 void Network::NullSockStream::AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) noexcept
 {

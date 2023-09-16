@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/19 18:51)
+///	版本：0.9.1.4 (2023/08/31 09:25)
 
 #include "System/SystemExport.h"
 
@@ -49,11 +49,11 @@ System::String System::GetEngineeringTypesSuffix()
 
 #endif  // _DEBUG
 
-#ifdef _WIN64
+#if defined(TCRE_ARCHITECTURE_TYPE_64)
 
     suffix += SYSTEM_TEXT("X");
 
-#endif  // _WIN64
+#endif  // defined(TCRE_ARCHITECTURE_TYPE_64)
 
     return suffix;
 }

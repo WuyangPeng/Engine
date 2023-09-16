@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 22:42)
+///	版本：0.9.1.4 (2023/08/29 23:41)
 
 #include "System/SystemExport.h"
 
@@ -13,22 +13,20 @@
 #include "Flags/GlutFlags.h"
 #include "System/Helper/WindowsMacro.h"
 
-using std::string;
-
-void System::GlutInit(int* pargc, char** argv) noexcept
+void System::GlutInit(int* pArgc, char** argv) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 
-    ::glutInit(pargc, argv);
+    ::glutInit(pArgc, argv);
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    UnusedFunction(pargc, argv);
+    UnusedFunction(pArgc, argv);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-int System::GlutCreateWindow(const string& title) noexcept
+int System::GlutCreateWindow(const std::string& title) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 
@@ -140,7 +138,7 @@ void System::GlutInitDisplayMode(bool multiSample) noexcept
 
     if (multiSample)
     {
-        glutInitDisplayMode(EnumCastUnderlying(glutMacro | GlutMacro::Multisample));
+        glutInitDisplayMode(EnumCastUnderlying(glutMacro | GlutMacro::MultiSample));
     }
     else
     {

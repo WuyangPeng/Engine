@@ -47,6 +47,11 @@ void Rendering::NullDevice::InitDevice() noexcept
     RENDERING_CLASS_IS_VALID_9;
 }
 
+void Rendering::NullDevice::Release() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+}
+
 void Rendering::NullDevice::SetViewport(const Viewport& viewport) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/10 22:57)
+///	版本：0.9.1.4 (2023/09/01 11:02)
 
 #include "SendToTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -59,8 +59,8 @@ void System::SendToTesting::DoSendToTest(WinSocket socketHandle)
 
     do
     {
-        const auto sendCount = SendTo(socketHandle, &iov.at(sendNum), boost::numeric_cast<int>(iov.size() - sendNum), SocketSend::Default, &address);
-        if (sendCount != -1)
+        if (const auto sendCount = SendTo(socketHandle, &iov.at(sendNum), boost::numeric_cast<int>(iov.size() - sendNum), SocketSend::Default, &address);
+            sendCount != -1)
         {
             sendNum += sendCount;
         }

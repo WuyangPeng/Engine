@@ -359,7 +359,6 @@
     <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay1.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay2.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay3.cpp" />
-    <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\IncrementalDelaunay2.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\TriangulateEC.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContBox2.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContBox3.cpp" />
@@ -1044,8 +1043,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay3.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay3Detail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\DelaunayDetail.h" />
-    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\IncrementalDelaunay2.h" />
-    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\IncrementalDelaunay2Detail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\TriangulateEC.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\TriangulateECDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Containment\Containment.h" />
@@ -1311,6 +1308,16 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Distance\DistanceResult.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Distance\DistanceResultDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\DllLib.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ACosEstimate.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ACosEstimateDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ASinEstimate.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ASinEstimateDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ATanEstimate.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ATanEstimateDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\CosEstimate.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\CosEstimateDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\Estimate.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\EstimateFwd.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Helper\Helper.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Helper\HelperFwd.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Helper\UserMacro.h" />

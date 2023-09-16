@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 22:44)
+///	版本：0.9.1.4 (2023/08/29 23:41)
 
 #include "System/SystemExport.h"
 
 #include "OpenGLBuffers.h"
-#include "Flags/GLExtensionsFlags.h"
 #include "Flags/OpenGLFlags.h"
 #include "Detail/GL15Extensions.h"
 #include "Detail/GL20Extensions.h"
@@ -77,37 +76,37 @@ void System::SetGLCopyBufferSubData(BindBuffer readTarget, BindBuffer writeTarge
     GLCopyBufferSubData(EnumCastUnderlying(readTarget), EnumCastUnderlying(writeTarget), readOffset, writeOffset, size);
 }
 
-void System::GetGLGenFramebuffers(OpenGLSize n, OpenGLUInt* framebuffers) noexcept
+void System::GetGLGenFrameBuffers(OpenGLSize n, OpenGLUInt* frameBuffers) noexcept
 {
-    GLGenFramebuffers(n, framebuffers);
+    GLGenFramebuffers(n, frameBuffers);
 }
 
-System::OpenGLUInt System::GetGLGenFramebuffers() noexcept
+System::OpenGLUInt System::GetGLGenFrameBuffers() noexcept
 {
-    OpenGLUInt framebuffers{};
-    GetGLGenFramebuffers(1, &framebuffers);
+    OpenGLUInt frameBuffers{};
+    GetGLGenFrameBuffers(1, &frameBuffers);
 
-    return framebuffers;
+    return frameBuffers;
 }
 
-void System::SetGLDeleteFramebuffers(OpenGLSize n, const OpenGLUInt* framebuffers) noexcept
+void System::SetGLDeleteFrameBuffers(OpenGLSize n, const OpenGLUInt* frameBuffers) noexcept
 {
-    GLDeleteFramebuffers(n, framebuffers);
+    GLDeleteFramebuffers(n, frameBuffers);
 }
 
-void System::SetGLDeleteFramebuffers(OpenGLUInt framebuffers) noexcept
+void System::SetGLDeleteFrameBuffers(OpenGLUInt frameBuffers) noexcept
 {
-    SetGLDeleteFramebuffers(1, &framebuffers);
+    SetGLDeleteFrameBuffers(1, &frameBuffers);
 }
 
-void System::SetGLBindFramebuffer(FrameBufferType target, OpenGLUInt framebuffer) noexcept
+void System::SetGLBindFrameBuffer(FrameBufferType target, OpenGLUInt frameBuffer) noexcept
 {
-    GLBindFramebuffer(EnumCastUnderlying(target), framebuffer);
+    GLBindFramebuffer(EnumCastUnderlying(target), frameBuffer);
 }
 
-void System::SetGLDrawBuffers(OpenGLSize n, const OpenGLEnum* bufs) noexcept
+void System::SetGLDrawBuffers(OpenGLSize n, const OpenGLEnum* buffers) noexcept
 {
-    GLDrawBuffers(n, bufs);
+    GLDrawBuffers(n, buffers);
 }
 
 void System::SetGLBindVertexArray(OpenGLUInt array) noexcept
@@ -138,7 +137,7 @@ System::OpenGLUInt System::GetGLGenVertexArrays() noexcept
     return arrays;
 }
 
-void System::SetGLEnableVertexAttribArray(OpenGLUInt index) noexcept
+void System::SetGLEnableVertexAttributeArray(OpenGLUInt index) noexcept
 {
     GLEnableVertexAttribArray(index);
 }
@@ -148,12 +147,12 @@ void System::SetGLBindVertexBuffer(OpenGLUInt bindingIndex, OpenGLUInt buffer, O
     GLBindVertexBuffer(bindingIndex, buffer, offset, stride);
 }
 
-void System::SetGLVertexAttribFormat(OpenGLUInt attribIndex, OpenGLInt size, OpenGLData type, OpenGLBoolean normalized, OpenGLUInt relativeOffset) noexcept
+void System::SetGLVertexAttributeFormat(OpenGLUInt attributeIndex, OpenGLInt size, OpenGLData type, OpenGLBoolean normalized, OpenGLUInt relativeOffset) noexcept
 {
-    GLVertexAttribFormat(attribIndex, size,EnumCastUnderlying(type), normalized, relativeOffset);
+    GLVertexAttribFormat(attributeIndex, size, EnumCastUnderlying(type), normalized, relativeOffset);
 }
 
-void System::SetGLVertexAttribBinding(OpenGLUInt attribIndex, OpenGLUInt bindingIndex) noexcept
+void System::SetGLVertexAttributeBinding(OpenGLUInt attributeIndex, OpenGLUInt bindingIndex) noexcept
 {
-    GLVertexAttribBinding(attribIndex, bindingIndex);
+    GLVertexAttribBinding(attributeIndex, bindingIndex);
 }

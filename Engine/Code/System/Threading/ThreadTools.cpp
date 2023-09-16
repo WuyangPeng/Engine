@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/30 13:23)
+///	版本：0.9.1.4 (2023/08/30 19:10)
 
 #include "System/SystemExport.h"
 
@@ -14,15 +14,15 @@
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/WindowsSystem.h"
 
-System::ThreadHandle System::OpenSystemThread(ThreadStandardAccess standardDesiredAccess, ThreadSpecificAccess specificDesiredAccess, bool inheritHandle, WindowsDWord threadID) noexcept
+System::ThreadHandle System::OpenSystemThread(ThreadStandardAccess standardDesiredAccess, ThreadSpecificAccess specificDesiredAccess, bool inheritHandle, WindowsDWord threadId) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::OpenThread(EnumCastUnderlying(standardDesiredAccess) | EnumCastUnderlying(specificDesiredAccess), BoolConversion(inheritHandle), threadID);
+    return ::OpenThread(EnumCastUnderlying(standardDesiredAccess) | EnumCastUnderlying(specificDesiredAccess), BoolConversion(inheritHandle), threadId);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(standardDesiredAccess, specificDesiredAccess, inheritHandle, threadID);
+    UnusedFunction(standardDesiredAccess, specificDesiredAccess, inheritHandle, threadId);
 
     return nullptr;
 
@@ -47,7 +47,7 @@ bool System::GetThreadExitCode(ThreadHandle thread, WindowsDWordPtr exitCode) no
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsDWord System::GetSystemThreadID(ThreadHandle thread) noexcept
+System::WindowsDWord System::GetSystemThreadId(ThreadHandle thread) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 

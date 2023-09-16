@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/25 11:53)
+///	版本：0.9.1.4 (2023/09/01 14:02)
 
 #include "GetLookupPrivilegeDisplayNameTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -49,7 +49,7 @@ void System::GetLookupPrivilegeDisplayNameTesting::DoGetLookupPrivilegeDisplayNa
     auto size = boost::numeric_cast<WindowsDWord>(bufferSize);
     ASSERT_TRUE(GetLookupPrivilegeDisplayName(nullptr, lookupPrivilegeName.c_str(), buffer.data(), &size, &languageId));
 
-    String resultLookupPrivilegeDisplayName{ buffer.data() };
+    const String resultLookupPrivilegeDisplayName{ buffer.data() };
 
     ASSERT_EQUAL(size, resultLookupPrivilegeDisplayName.size());
 }

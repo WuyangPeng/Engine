@@ -100,12 +100,12 @@ Real Mathematics::Polygon2<Real>::ComputePerimeterLength() const
     auto perimeterLength = Vector2Tools::GetLength(vertices.at(0) - vertices.at(last));
     for (auto i = 1u; i < numVertices; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         auto edge = vertices[i] - vertices[i - 1];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         perimeterLength += Vector2Tools::GetLength(edge);
     }
@@ -124,7 +124,7 @@ Real Mathematics::Polygon2<Real>::ComputeArea() const
 
     for (auto i = 1u; i < last; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         const auto next = i + 1;
@@ -132,7 +132,7 @@ Real Mathematics::Polygon2<Real>::ComputeArea() const
 
         area += vertices[i].GetX() * (vertices[next].GetY() - vertices[previous].GetY());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     area *= Math::GetRational(1, 2);

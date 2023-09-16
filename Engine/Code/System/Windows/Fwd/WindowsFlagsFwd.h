@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/20 11:36)
+///	版本：0.9.1.4 (2023/08/31 09:23)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_FWD_H
 #define SYSTEM_WINDOWS_WINDOWS_FWD_H
@@ -57,10 +57,6 @@ namespace System
     enum class ToolHelp32;
     enum class DirectoryEntries;
     enum class ComboBoxNotification;
-
-    // IUnknown
-    enum class ClsContext;
-    enum class RegCls;
 }
 
 #endif  // SYSTEM_WINDOWS_WINDOWS_FWD_H

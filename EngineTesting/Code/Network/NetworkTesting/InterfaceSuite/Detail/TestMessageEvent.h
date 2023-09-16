@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/12 17:08)
+///	版本：0.9.1.4 (2023/09/16 09:55)
 
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_TEST_MESSAGE_EVENT_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_TEST_MESSAGE_EVENT_H
 
 #include "CoreTools/Threading/Mutex.h"
 
-#include "Network/Interface/Server.h"
 #include "Network/NetworkMessage/NetworkMessageEvent.h"
 
 namespace Network
@@ -37,12 +36,9 @@ namespace Network
 
         NODISCARD int64_t GetCallBackTime() const noexcept;
 
-        void SetServerWeakPtr(const ServerSharedPtr& aServer) noexcept;
-
     private:
         int64_t callBackTime;
         CoreTools::Mutex testMessageEventCriticalSection;
-        ServerWeakPtr server;
     };
 
     using TestMessageEventSharedPtr = std::shared_ptr<TestMessageEvent>;

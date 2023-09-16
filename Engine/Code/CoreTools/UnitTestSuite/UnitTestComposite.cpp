@@ -62,7 +62,7 @@ void CoreTools::UnitTestComposite::ClearUnitTestCollection()
     THROW_EXCEPTION(SYSTEM_TEXT("禁止调用UnitTestComposite::ClearUnitTestCollection()！"s))
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26418)
 
 void CoreTools::UnitTestComposite::AddUnitTest(const UnitTestCompositeSharedPtr& unitTest)
@@ -74,7 +74,7 @@ void CoreTools::UnitTestComposite::AddUnitTest(const UnitTestCompositeSharedPtr&
     THROW_EXCEPTION(SYSTEM_TEXT("禁止调用UnitTestComposite::AddUnitTest()！"s))
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 int CoreTools::UnitTestComposite::GetTestLoopCount() const noexcept
 {

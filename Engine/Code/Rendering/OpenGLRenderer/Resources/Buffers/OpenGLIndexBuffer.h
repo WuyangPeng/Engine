@@ -32,7 +32,7 @@ namespace Rendering
         NODISCARD ConstIndexBufferSharedPtr GetIndexBuffer() const;
 
         void Enable() noexcept override;
-        void Disable() noexcept;
+        void Disable() noexcept override;
         [[nodiscard]] bool CopyGpuToCpu(int level) override;
         [[nodiscard]] bool CopyGpuToCpu(int item, int level) override;
         [[nodiscard]] bool CopyCpuToGpu(int level) override;

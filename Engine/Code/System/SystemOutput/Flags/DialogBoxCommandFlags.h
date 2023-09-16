@@ -5,33 +5,33 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/29 23:45)
+///	版本：0.9.1.4 (2023/08/30 15:46)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_DIALOG_BOX_COMMAND_FLAGS_H
 #define SYSTEM_SYSTEM_OUTPUT_DIALOG_BOX_COMMAND_FLAGS_H
 
 #include "System/Helper/Platform.h"
 
-// 对话框命令ID
+// 对话框命令Id
 namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
     enum class DialogBoxCommand
     {
-        IDCreationFailed = 0,
-        IDOk = IDOK,
-        IDCancel = IDCANCEL,
-        IDAbort = IDABORT,
-        IDRetry = IDRETRY,
-        IDIgnore = IDIGNORE,
-        IDYes = IDYES,
-        IDNo = IDNO,
-        IDClose = IDCLOSE,
-        IDHelp = IDHELP,
-        IDTryAgain = IDTRYAGAIN,
-        IDContinue = IDCONTINUE,
-        IDTimeout = IDTIMEOUT,
+        IdCreationFailed = 0,
+        IdOk = IDOK,
+        IdCancel = IDCANCEL,
+        IdAbort = IDABORT,
+        IdRetry = IDRETRY,
+        IdIgnore = IDIGNORE,
+        IdYes = IDYES,
+        IdNo = IDNO,
+        IdClose = IDCLOSE,
+        IdHelp = IDHELP,
+        IdTryAgain = IDTRYAGAIN,
+        IdContinue = IDCONTINUE,
+        IdTimeout = IDTIMEOUT,
 
         PlatformUnknown = -1,
     };
@@ -40,19 +40,19 @@ namespace System
 
     enum class DialogBoxCommand
     {
-        IDCreationFailed = 0,
-        IDOk = 1,
-        IDCancel = 2,
-        IDAbort = 3,
-        IDRetry = 4,
-        IDIgnore = 5,
-        IDYes = 6,
-        IDNo = 7,
-        IDClose = 8,
-        IDHelp = 9,
-        IDTryAgain = 10,
-        IDContinue = 11,
-        IDTimeout = 32000,
+        IdCreationFailed = 0,
+        IdOk = 1,
+        IdCancel = 2,
+        IdAbort = 3,
+        IdRetry = 4,
+        IdIgnore = 5,
+        IdYes = 6,
+        IdNo = 7,
+        IdClose = 8,
+        IdHelp = 9,
+        IdTryAgain = 10,
+        IdContinue = 11,
+        IdTimeout = 32000,
 
         PlatformUnknown = -1,
     };

@@ -5,12 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 13:44)
+///	版本：0.9.1.4 (2023/09/15 15:36)
 
 #ifndef NETWORK_NETWORK_INTERFACE_ACE_USING_H
 #define NETWORK_NETWORK_INTERFACE_ACE_USING_H
 
-#include "System/Helper/PragmaWarning.h"
+#include "Network/NetworkDll.h"
+
 #include "System/Network/Using/SocketPrototypesUsing.h"
 #include "Network/Helper/UserMacro.h"
 
@@ -51,6 +52,7 @@ namespace Network
         #ifdef ACE_USES_WCHAR
 
             #error "NETWORK_USES_ACE_WCHAR要与编译好的ACE库中是否定义ACE_USES_WCHAR相对应"
+
         #endif  // ACE_USES_WCHAR
 
     #endif  // NETWORK_USES_ACE_WCHAR

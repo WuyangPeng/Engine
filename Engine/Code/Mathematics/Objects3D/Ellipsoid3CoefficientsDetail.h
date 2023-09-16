@@ -57,7 +57,7 @@ Mathematics::Matrix3<Real> Mathematics::Ellipsoid3Coefficients<Real>::GetMatrix(
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return Matrix3{ coefficients[4],
@@ -70,7 +70,7 @@ Mathematics::Matrix3<Real> Mathematics::Ellipsoid3Coefficients<Real>::GetMatrix(
                     Math::GetRational(1, 2) * coefficients[8],
                     coefficients[9] };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -78,12 +78,12 @@ Mathematics::Vector3<Real> Mathematics::Ellipsoid3Coefficients<Real>::GetVector(
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return Vector3{ coefficients[1], coefficients[2], coefficients[3] };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -91,12 +91,12 @@ Real Mathematics::Ellipsoid3Coefficients<Real>::GetConstants() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return coefficients[0];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -106,7 +106,7 @@ typename Mathematics::Ellipsoid3Coefficients<Real>::CoefficientsType Mathematics
 
     CoefficientsType result{ coefficients };
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     // 安排x0^2或x1^2或x2^2系数之一是1。
@@ -138,7 +138,7 @@ typename Mathematics::Ellipsoid3Coefficients<Real>::CoefficientsType Mathematics
         }
     }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     return result;
 }
@@ -158,12 +158,12 @@ bool Mathematics::Approximate(const Ellipsoid3Coefficients<Real>& lhs, const Ell
 
     for (auto i = 0; i < coefficientsSize; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         if (!Math<Real>::Approximate(lhsCoefficients[i], rhsCoefficients[i], epsilon))
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         {
             return false;
         }

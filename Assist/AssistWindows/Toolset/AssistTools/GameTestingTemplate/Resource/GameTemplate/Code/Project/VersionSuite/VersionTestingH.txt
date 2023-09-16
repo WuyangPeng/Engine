@@ -1,0 +1,28 @@
+$Copyright$
+
+#ifndef $ProjectCapital$_VERSION_TESTING_H
+#define $ProjectCapital$_VERSION_TESTING_H
+
+#include "CoreTools/UnitTestSuite/UnitTest.h"
+
+namespace $ProjectName$
+{
+    class VersionTesting final : public CoreTools::UnitTest
+    {
+    public:
+        using ClassType = VersionTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit VersionTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
+
+    private:
+        void DoRunUnitTest() final;
+
+        void MainTest();
+    };
+}
+
+#endif  // $ProjectCapital$_VERSION_TESTING_H

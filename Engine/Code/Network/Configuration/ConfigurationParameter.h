@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/04/28 10:58)
+///	版本：0.9.1.4 (2023/09/04 15:42)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_PARAMETER_H
 #define NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_PARAMETER_H
@@ -27,6 +27,7 @@ namespace Network
     {
     public:
         DELAY_COPY_UNSHARED_TYPE_DECLARE(ConfigurationParameter);
+
         using String = System::String;
         using Parameter = std::set<System::String>;
 

@@ -1,0 +1,75 @@
+@echo on
+
+echo $ProjectName$Include = %$ProjectName$Include%
+echo %cd%
+setx $ProjectName$Include "%cd%\..\Code" 
+
+echo $ProjectName$Engineering = %$ProjectName$Engineering%
+echo %cd%
+setx $ProjectName$Engineering "%cd%\.." 
+
+echo $ProjectName$Win32DebugLib = %$ProjectName$Win32DebugLib%
+echo %cd%
+setx $ProjectName$Win32DebugLib "%cd%\..\Win32\DebugWindows" 
+
+echo $ProjectName$Win32ReleaseLib = %$ProjectName$Win32ReleaseLib%
+echo %cd%
+setx $ProjectName$Win32ReleaseLib "%cd%\..\Win32\ReleaseWindows" 
+
+echo $ProjectName$X64DebugLib = %$ProjectName$X64DebugLib%
+echo %cd%
+setx $ProjectName$X64DebugLib "%cd%\..\x64\DebugWindows" 
+
+echo $ProjectName$X64ReleaseLib = %$ProjectName$X64ReleaseLib%
+echo %cd%
+setx $ProjectName$X64ReleaseLib "%cd%\..\x64\ReleaseWindows" 
+
+echo $ProjectName$StaticWin32DebugLib = %$ProjectName$StaticWin32DebugLib%
+echo %cd%
+setx $ProjectName$StaticWin32DebugLib "%cd%\..\Win32\StaticDebugWindows" 
+
+echo $ProjectName$StaticWin32ReleaseLib = %$ProjectName$StaticWin32ReleaseLib%
+echo %cd%
+setx $ProjectName$StaticWin32ReleaseLib "%cd%\..\Win32\StaticReleaseWindows" 
+
+echo $ProjectName$StaticX64DebugLib = %$ProjectName$StaticX64DebugLib%
+echo %cd%
+setx $ProjectName$StaticX64DebugLib "%cd%\..\x64\StaticDebugWindows" 
+
+echo $ProjectName$StaticX64ReleaseLib = %$ProjectName$StaticX64ReleaseLib%
+echo %cd%
+setx $ProjectName$StaticX64ReleaseLib "%cd%\..\x64\StaticReleaseWindows" 
+
+echo $ProjectName$EngineDynamicGameStaticWin32DebugLib = %$ProjectName$EngineDynamicGameStaticWin32DebugLib%
+echo %cd%
+setx $ProjectName$EngineDynamicGameStaticWin32DebugLib "%cd%\..\Win32\GameStaticDebugWindows" 
+
+echo $ProjectName$EngineDynamicGameStaticWin32ReleaseLib = %$ProjectName$EngineDynamicGameStaticWin32ReleaseLib%
+echo %cd%
+setx $ProjectName$EngineDynamicGameStaticWin32ReleaseLib "%cd%\..\Win32\GameStaticReleaseWindows" 
+
+echo $ProjectName$EngineDynamicGameStaticX64DebugLib = %$ProjectName$EngineDynamicGameStaticX64DebugLib%
+echo %cd%
+setx $ProjectName$EngineDynamicGameStaticX64DebugLib "%cd%\..\x64\GameStaticDebugWindows" 
+
+echo $ProjectName$EngineDynamicGameStaticX64ReleaseLib = %$ProjectName$EngineDynamicGameStaticX64ReleaseLib%
+echo %cd%
+setx $ProjectName$EngineDynamicGameStaticX64ReleaseLib "%cd%\..\x64\GameStaticReleaseWindows" 
+
+echo $ProjectName$EngineStaticGameDynamicWin32DebugLib = %$ProjectName$EngineStaticGameDynamicWin32DebugLib%
+echo %cd%
+setx $ProjectName$EngineStaticGameDynamicWin32DebugLib "%cd%\..\Win32\EngineStaticDebugWindows" 
+
+echo $ProjectName$EngineStaticGameDynamicWin32ReleaseLib = %$ProjectName$EngineStaticGameDynamicWin32ReleaseLib%
+echo %cd%
+setx $ProjectName$EngineStaticGameDynamicWin32ReleaseLib "%cd%\..\Win32\EngineStaticReleaseWindows" 
+
+echo $ProjectName$EngineStaticGameDynamicX64DebugLib = %$ProjectName$EngineStaticGameDynamicX64DebugLib%
+echo %cd%
+setx $ProjectName$EngineStaticGameDynamicX64DebugLib "%cd%\..\x64\EngineStaticDebugWindows" 
+
+echo $ProjectName$EngineStaticGameDynamicX64ReleaseLib = %$ProjectName$EngineStaticGameDynamicX64ReleaseLib%
+echo %cd%
+setx $ProjectName$EngineStaticGameDynamicX64ReleaseLib "%cd%\..\x64\EngineStaticReleaseWindows" 
+
+pause

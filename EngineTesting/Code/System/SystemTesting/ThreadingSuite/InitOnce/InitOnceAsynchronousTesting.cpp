@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 0:26)
+///	版本：0.9.1.4 (2023/09/01 15:03)
 
 #include "InitOnceAsynchronousTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -53,20 +53,20 @@ void System::InitOnceAsynchronousTesting::BeginInitializeTest(InitOncePtr initOn
 
 System::WindowsHandle System::InitOnceAsynchronousTesting::OpenEventHandleAsync(InitOncePtr initOnce)
 {
-    const auto initOnceBeginInitializeHandle = GetInitOnceBeginInitializeHandle(initOnce);
-    if (initOnceBeginInitializeHandle != nullptr)
+    if (const auto initOnceBeginInitializeHandle = GetInitOnceBeginInitializeHandle(initOnce);
+        initOnceBeginInitializeHandle != nullptr)
     {
         return initOnceBeginInitializeHandle;
     }
 
-    const auto initOnceCompleteHandle = GetInitOnceCompleteHandle(initOnce);
-    if (initOnceCompleteHandle != nullptr)
+    if (const auto initOnceCompleteHandle = GetInitOnceCompleteHandle(initOnce);
+        initOnceCompleteHandle != nullptr)
     {
         return initOnceCompleteHandle;
     }
 
-    const auto result = GetInitOnceBeginInitializeHandle(initOnce);
-    if (result != nullptr)
+    if (const auto result = GetInitOnceBeginInitializeHandle(initOnce);
+        result != nullptr)
     {
         return result;
     }
@@ -80,7 +80,9 @@ void System::InitOnceAsynchronousTesting::CreateThreadTest()
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::BeginInitializeTest, this, &initOnce));
+        threadGroup.create_thread([this, &initOnce]() {
+            this->BeginInitializeTest(&initOnce);
+        });
     }
 
     threadGroup.join_all();
@@ -90,9 +92,9 @@ System::WindowsHandle System::InitOnceAsynchronousTesting::GetInitOnceBeginIniti
 {
     WindowsBool pending{ gFalse };
     WindowsVoidPtr context{ nullptr };
-    const auto result = SystemInitOnceBeginInitialize(initOnce, InitOnceBeginInitialize::Async, &pending, &context);
 
-    if (result)
+    if (const auto result = SystemInitOnceBeginInitialize(initOnce, InitOnceBeginInitialize::Async, &pending, &context);
+        result)
     {
         if (pending == gFalse)
             return context;
@@ -114,9 +116,8 @@ System::WindowsHandle System::InitOnceAsynchronousTesting::GetInitOnceCompleteHa
         return invalidHandleValue;
     }
 
-    const auto result = SystemInitOnceComplete(initOnce, InitOnceBeginInitialize::Async, event);
-
-    if (result)
+    if (const auto result = SystemInitOnceComplete(initOnce, InitOnceBeginInitialize::Async, event);
+        result)
     {
         return event;
     }

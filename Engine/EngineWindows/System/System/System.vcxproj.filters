@@ -295,6 +295,12 @@
     <Filter Include="CharacterString 源文件\Data">
       <UniqueIdentifier>{91d2d316-9c9d-4294-a81c-a448953a66c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Helper 内联文件">
+      <UniqueIdentifier>{559732df-79ba-4dc9-b5a7-779b1fce23c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 内联文件\PragmaWarning">
+      <UniqueIdentifier>{fd2ac86c-bc01-43a1-81c7-fcfdcf25dc77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\System\SystemFwd.h">
@@ -429,7 +435,7 @@
     <ClInclude Include="..\..\..\Code\System\Console\Using\ConsoleScreenBufferUsing.h">
       <Filter>Console 头文件\Using</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Console\Using\ConsoleColoursUsing.h">
+    <ClInclude Include="..\..\..\Code\System\Console\Using\ConsoleColourUsing.h">
       <Filter>Console 头文件\Using</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Console\Console.h">
@@ -438,7 +444,7 @@
     <ClInclude Include="..\..\..\Code\System\Console\ConsoleCodePage.h">
       <Filter>Console 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Console\ConsoleColours.h">
+    <ClInclude Include="..\..\..\Code\System\Console\ConsoleColour.h">
       <Filter>Console 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Console\ConsoleCreate.h">
@@ -768,195 +774,6 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Chrono.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4100.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4239.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4244.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4505.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4996.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6001.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6255.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6258.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6320.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6330.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6387.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6388.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26110.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26135.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26400.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26401.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26408.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26409.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26414.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26426.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26429.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26432.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26433.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26434.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26436.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26438.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26439.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26440.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26443.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26444.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26446.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26447.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26451.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26455.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26456.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26460.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26461.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26462.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26465.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26466.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26471.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26472.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26473.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26474.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26475.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26476.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26477.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26481.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26482.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26485.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26486.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26487.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26489.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26490.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26491.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26492.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26493.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26494.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26495.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26496.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26497.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26498.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable28251.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\EngineDisable.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
@@ -1002,9 +819,6 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PolymorphicPointerCast.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Pop.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PosixTime.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
@@ -1012,9 +826,6 @@
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PtrVector.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Push.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\RecursiveMutex.h">
@@ -1410,7 +1221,7 @@
     <ClInclude Include="..\..\..\Code\System\SystemOutput\Flags\DialogBoxCommandFlags.h">
       <Filter>SystemOutput 头文件\Flags</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemOutput\Data\LanguageIDData.h">
+    <ClInclude Include="..\..\..\Code\System\SystemOutput\Data\LanguageIdData.h">
       <Filter>SystemOutput 头文件\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemOutput\Data\MessageBoxFlagsData.h">
@@ -1578,52 +1389,10 @@
     <ClInclude Include="..\..\..\Code\System\Threading\InterlockedDetail.h">
       <Filter>Threading 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26812.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26814.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6385.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26488.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26416.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26459.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Any.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26418.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26415.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Bind.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26403.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26402.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26815.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6386.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26819.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26818.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\MathConstants.h">
@@ -1641,27 +1410,6 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Span.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6262.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26051.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6246.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26430.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26435.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6313.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26052.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\Compiler\Diab.h">
       <Filter>Helper 头文件\Compiler</Filter>
     </ClInclude>
@@ -1674,20 +1422,11 @@
     <ClInclude Include="..\..\..\Code\System\Helper\Compiler\XlcppZos.h">
       <Filter>Helper 头文件\Compiler</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26457.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6285.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Spirit.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Console\Using\ConsoleFontUsing.h">
       <Filter>Console 头文件\Using</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable28301.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\VariableTemplateType.h">
       <Filter>Helper 头文件</Filter>
@@ -1800,25 +1539,10 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\TypeIndex.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4101.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\OpenXLSX.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PugiXml.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6326.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26467.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6054.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable28182.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Miniz.h">
@@ -1860,34 +1584,10 @@
     <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLPolygon.h">
       <Filter>OpenGL 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\ProtoBuf.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\ActiveMQ.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4458.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4456.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Mysql.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4459.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6340.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6294.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6201.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26817.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Mongocxx.h">
@@ -1896,8 +1596,314 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Hiredis.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4200.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Push.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\ProtoBuf.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Pop.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4100.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4101.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4200.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4239.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4244.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4456.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4458.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4459.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4505.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4996.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6001.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6054.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6201.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6246.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6255.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6258.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6262.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6285.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6294.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6313.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6320.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6326.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6330.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6340.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6385.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6386.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6387.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6388.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26051.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26052.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26110.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26135.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26400.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26401.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26402.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26403.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26408.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26409.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26414.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26415.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26416.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26418.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26426.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26429.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26430.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26432.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26433.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26434.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26435.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26436.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26438.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26439.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26440.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26443.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26444.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26446.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26447.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26451.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26455.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26456.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26457.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26459.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26460.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26461.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26462.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26465.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26466.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26467.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26471.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26472.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26473.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26474.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26475.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26476.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26477.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26481.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26482.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26485.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26486.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26487.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26488.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26489.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26490.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26491.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26492.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26493.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26494.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26495.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26496.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26497.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26498.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26812.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26814.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26815.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26817.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26818.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26819.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable28182.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable28251.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable28301.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1946,7 +1952,7 @@
     <ClCompile Include="..\..\..\Code\System\Console\ConsoleCodePage.cpp">
       <Filter>Console 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\Console\ConsoleColours.cpp">
+    <ClCompile Include="..\..\..\Code\System\Console\ConsoleColour.cpp">
       <Filter>Console 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\Console\ConsoleCreate.cpp">

@@ -107,13 +107,13 @@ Rendering::Spatial* Rendering::Spatial::GetParent() noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26473)
 #include SYSTEM_WARNING_DISABLE(26492)
 
     return const_cast<Spatial*>(static_cast<const ClassType*>(this)->GetParent());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 const Rendering::Spatial* Rendering::Spatial::GetParent() const noexcept

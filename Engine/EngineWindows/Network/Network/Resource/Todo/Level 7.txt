@@ -1,12 +1,3 @@
 TODO Level 7
  
-0.9.0.7
-
-1.	（综合）实现一个可用的网络库。考虑设计以下类：
-			接口：SockStream、Client、Server。
-			实现类：SockStream、Client、ProactorServer、SockAcceptor、SockConnector、
-					BufferSendStream、BufferReceiveStream、Encryptor、PackParser、WriteWork。
-2.	（综合）完成其他类型的服务器和客户端的接口。
-3.	（综合）封装其他网络相关的类。
-4.	（综合）完成网络类所有公共接口。
- 
+0.9.1.4

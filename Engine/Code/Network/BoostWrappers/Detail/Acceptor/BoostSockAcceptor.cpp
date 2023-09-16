@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:15)
+///	版本：0.9.1.4 (2023/09/15 17:16)
 
 #include "Network/NetworkExport.h"
 
@@ -92,7 +92,7 @@ bool Network::BoostSockAcceptor::Accept(SockStream& sockStream, SockAddress& soc
     ErrorCodeType errorCode{};
 
     acceptor.accept(sockStream.GetBoostSockStream(), sockAddress.GetBoostInternetAddress(), errorCode);
- 
+
     if (errorCode == ErrorCodeType{})
     {
         BoostSockAcceptorHelper::PrintAcceptSuccessLog(synchronizeAcceptSuccess.data(), AddressData{ sockAddress });
@@ -116,22 +116,18 @@ void Network::BoostSockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& even
     });
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
 void Network::BoostSockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    BoostSockAcceptorHelper::PrintAcceptLog(asynchronousAccept.data(), AddressData{ *this }); 
+    System::UnusedFunction(eventInterface, sockStream, sockAddress);
+
+    BoostSockAcceptorHelper::PrintAcceptLog(asynchronousAccept.data(), AddressData{ *this });
 
     acceptor.async_accept(sockStream->GetBoostSockStream(), sockAddress->GetBoostInternetAddress(), [eventInterface, sockAddress](const ErrorCodeType& errorCode) {
         BoostSockAcceptorHelper::EventFunction(errorCode, eventInterface, AddressData{ *sockAddress });
     });
 }
-
-#include STSTEM_WARNING_POP
 
 bool Network::BoostSockAcceptor::EnableNonBlock()
 {

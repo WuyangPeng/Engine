@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/16 21:37)
+///	版本：0.9.1.4 (2023/08/28 17:22)
 
 #ifndef SYSTEM_HELPER_WINDOWS_MACRO_H
 #define SYSTEM_HELPER_WINDOWS_MACRO_H
@@ -24,7 +24,7 @@ namespace System
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
 
-    NODISCARD constexpr WindowsWord MakeLanguageID(WindowsWord primary, WindowsWord sub) noexcept
+    NODISCARD constexpr WindowsWord MakeLanguageId(WindowsWord primary, WindowsWord sub) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
 
@@ -37,30 +37,30 @@ namespace System
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
-    NODISCARD constexpr WindowsWord GetPrimaryLanguageID(WindowsWord languageID) noexcept
+    NODISCARD constexpr WindowsWord GetPrimaryLanguageId(WindowsWord languageId) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
 
-        return PRIMARYLANGID(languageID);
+        return PRIMARYLANGID(languageId);
 
 #else  // !SYSTEM_USE_WINDOWS_MACRO
 
         constexpr WindowsWord primaryLanguageIDMask{ (1 << gMakeLanguageIDShift) - 1 };
 
-        return languageID & primaryLanguageIDMask;
+        return languageId & primaryLanguageIDMask;
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
-    NODISCARD constexpr WindowsWord GetSubLanguageID(WindowsWord languageID) noexcept
+    NODISCARD constexpr WindowsWord GetSubLanguageId(WindowsWord languageId) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
 
-        return SUBLANGID(languageID);
+        return SUBLANGID(languageId);
 
 #else  // !SYSTEM_USE_WINDOWS_MACRO
 
-        return languageID >> gMakeLanguageIDShift;
+        return languageId >> gMakeLanguageIDShift;
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
@@ -78,17 +78,17 @@ namespace System
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
-    NODISCARD constexpr WindowsDWord MakeLanguageCID(WindowsWord languageID, WindowsWord sortID) noexcept
+    NODISCARD constexpr WindowsDWord MakeLanguageCid(WindowsWord languageId, WindowsWord sortId) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
 
-        return MAKELCID(languageID, sortID);
+        return MAKELCID(languageId, sortId);
 
 #else  // !SYSTEM_USE_WINDOWS_MACRO
 
         constexpr WindowsWord makeLanguageCIDShift{ 16 };
 
-        return (static_cast<WindowsDWord>(sortID) << makeLanguageCIDShift) | (static_cast<WindowsDWord>(languageID));
+        return (static_cast<WindowsDWord>(sortId) << makeLanguageCIDShift) | (static_cast<WindowsDWord>(languageId));
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }

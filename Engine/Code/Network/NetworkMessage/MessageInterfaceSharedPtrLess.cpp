@@ -5,19 +5,18 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 09:58)
+///	版本：0.9.1.4 (2023/09/04 16:52)
 
 #include "Network/NetworkExport.h"
 
 #include "MessageInterface.h"
 #include "MessageInterfaceSharedPtrLess.h"
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
+#include "System/Helper/Tools.h"
 
 bool Network::MessageInterfaceSharedPtrLess::operator()(const ConstMessageInterfaceSharedPtr& lhs, const ConstMessageInterfaceSharedPtr& rhs) const
 {
+    System::UnusedFunction(lhs, rhs);
+
     if (lhs->GetMessageId() < rhs->GetMessageId())
         return true;
     else if (rhs->GetMessageId() < lhs->GetMessageId())
@@ -29,5 +28,3 @@ bool Network::MessageInterfaceSharedPtrLess::operator()(const ConstMessageInterf
     else
         return std::string{ lhs->GetRttiType().GetName() } < std::string{ rhs->GetRttiType().GetName() };
 }
-
-#include STSTEM_WARNING_POP

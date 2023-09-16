@@ -5,9 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 0:03)
+///	版本：0.9.1.4 (2023/09/01 15:01)
 
 #include "WaitForEventTesting.h"
+#include "System/Helper/PragmaWarning/Thread.h"
 #include "System/Threading/Event.h"
 #include "System/Threading/Flags/SemaphoreFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -79,10 +80,21 @@ void System::WaitForEventTesting::DoWaitEventTest(WindowsHandle eventHandle)
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForAutoEventTest0, this, eventHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForAutoEventTest1, this, eventHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForAutoEventTest2, this, eventHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForAutoEventTest3, this, eventHandle));
+        threadGroup.create_thread([this, eventHandle]() {
+            this->WaitForAutoEventTest0(eventHandle);
+        });
+
+        threadGroup.create_thread([this, eventHandle]() {
+            this->WaitForAutoEventTest1(eventHandle);
+        });
+
+        threadGroup.create_thread([this, eventHandle]() {
+            this->WaitForAutoEventTest2(eventHandle);
+        });
+
+        threadGroup.create_thread([this, eventHandle]() {
+            this->WaitForAutoEventTest3(eventHandle);
+        });
     }
 
     ASSERT_TRUE(SetSystemEvent(eventHandle));

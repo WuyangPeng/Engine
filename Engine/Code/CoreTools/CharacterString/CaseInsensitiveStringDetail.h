@@ -52,13 +52,13 @@ int CoreTools::CaseInsensitiveStringTraits<CharT>::compare(const CharType* lhs, 
             return result;
         }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         ++lhs;
         ++rhs;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     return 0;
@@ -88,12 +88,12 @@ const typename CoreTools::CaseInsensitiveStringTraits<CharT>::CharType* CoreTool
             return first;
         }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         ++first;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     return nullptr;

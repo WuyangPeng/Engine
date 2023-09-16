@@ -105,43 +105,6 @@ bool Framework::NetworkManagerInterface::Idle(int64_t timeDelta)
     }
 }
 
-void Framework::NetworkManagerInterface::Send(const SocketData& socketData, int64_t socketId, const MessageInterfaceSharedPtr& message)
-{
-    FRAMEWORK_CLASS_IS_VALID_9;
-
-    networkManager->Send(socketData, socketId, message);
-}
-
-Framework::NetworkManagerInterface::SendSocketManagerSharedPtr Framework::NetworkManagerInterface::GetSendSocketManager()
-{
-    FRAMEWORK_CLASS_IS_VALID_9;
-
-    if (const auto sendSocketManager = networkManager->GetSendSocketManager();
-        sendSocketManager != nullptr)
-    {
-        return sendSocketManager;
-    }
-    else
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("网络管理器不存在！"s))
-    }
-}
-
-Network::ConstSendSocketManagerSharedPtr Framework::NetworkManagerInterface::GetSendSocketManager() const
-{
-    FRAMEWORK_CLASS_IS_VALID_CONST_1;
-
-    if (const auto sendSocketManager = networkManager->GetSendSocketManager();
-        sendSocketManager != nullptr)
-    {
-        return sendSocketManager;
-    }
-    else
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("网络管理器不存在！"s))
-    }
-}
-
 ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, Network, Input)
 ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, Network, ObjectLogic)
 

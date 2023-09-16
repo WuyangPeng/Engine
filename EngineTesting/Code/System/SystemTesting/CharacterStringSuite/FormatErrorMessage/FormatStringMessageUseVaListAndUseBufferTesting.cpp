@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/29 23:20)
+///	版本：0.9.1.4 (2023/08/31 16:11)
 
 #include "FormatStringMessageUseVaListAndUseBufferTesting.h"
 #include "System/CharacterString/FormatErrorMessage.h"
@@ -39,14 +39,14 @@ void System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringMessag
 
 void System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringMessageUseIndefiniteParameterTest(const TChar* message, ...)
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26492)
 
     va_list vaArguments{};
     va_start(vaArguments, message);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     ASSERT_NOT_THROW_EXCEPTION_2(FormatStringMessageUseArgumentsTest, message, vaArguments);
 
@@ -61,7 +61,7 @@ void System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringMessag
     ASSERT_LESS(0u, size);
     ASSERT_LESS(size, bufferSize);
 
-    String testMessage{ buffer.data() };
+    const String testMessage{ buffer.data() };
     ASSERT_EQUAL(testMessage.size(), size);
     ASSERT_EQUAL(testMessage, GetMessageVaListResult());
 }

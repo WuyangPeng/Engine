@@ -46,7 +46,7 @@ Mathematics::Int64Vector3::Int64Vector3(int64_t x, int64_t y, int64_t z)
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 Mathematics::Int64Vector3& Mathematics::Int64Vector3::operator=(const Int64Vector<3>& rhs)
@@ -58,7 +58,7 @@ Mathematics::Int64Vector3& Mathematics::Int64Vector3::operator=(const Int64Vecto
     return *this;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 CLASS_INVARIANT_STUB_DEFINE(Mathematics, Int64Vector3)
 

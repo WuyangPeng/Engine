@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 16:53)
+///	版本：0.9.1.4 (2023/09/16 09:19)
 
 #include "NetworkSockStreamTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -13,9 +13,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/ConfigurationParameter.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
-#include "Network/Helper/UserMacro.h"
-#include "Network/Interface/SockAddress.h"
-#include "Network/Interface/SockConnector.h"
 #include "Network/Interface/SockStream.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
 #include "Network/NetworkMessage/NullMessage.h"
@@ -23,7 +20,6 @@
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
 
 #include <array>
-#include <thread>
 
 Network::NetworkSockStreamTesting::NetworkSockStreamTesting(const OStreamShared& stream)
     : ParentType{ stream }, bufferSize{ 1048576 }
@@ -36,11 +32,6 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NetworkSockStreamTesting)
 void Network::NetworkSockStreamTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
-}
-
-namespace Network
-{
-    using TestingType = SockStream;
 }
 
 void Network::NetworkSockStreamTesting::MainTest()
@@ -59,7 +50,7 @@ void Network::NetworkSockStreamTesting::StreamTest()
                                                              ClientStrategy::OnlySending,
                                                              MessageStrategy::Default,
                                                              ParserStrategy::LittleEndian,
-                                                             OpenSSLStrategy::Default,
+                                                             OpenSslStrategy::Default,
                                                              EncryptedCompressionStrategy::Default,
                                                              configurationSubStrategy,
                                                              ConfigurationParameter::Create(),
@@ -67,5 +58,5 @@ void Network::NetworkSockStreamTesting::StreamTest()
                                                              "127.0.0.1",
                                                              7543 };
 
-    TestingType sockStream{ clientConfigurationStrategy };
+    SockStream sockStream{ clientConfigurationStrategy };
 }

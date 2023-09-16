@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 22:44)
+///	版本：0.9.1.4 (2023/08/29 23:40)
 
 #include "System/SystemExport.h"
 
@@ -13,12 +13,15 @@
 #include "Flags/GLExtensionsFlags.h"
 #include "Flags/OpenGLFlags.h"
 #include "Detail/GL10Extensions.h"
+#include "Detail/GL11Extensions.h"
+#include "Detail/GL12Extensions.h"
 #include "Detail/GL14Extensions.h"
 #include "Detail/GL20Extensions.h"
 #include "Detail/GL30Extensions.h"
 #include "Detail/GL32Extensions.h"
 #include "Detail/GL40Extensions.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/EnumOperator.h"
 
 void System::SetupRenderStatus() noexcept
 {
@@ -197,9 +200,9 @@ void System::SetGLStencilMaskSeparate(RasterizerStateCullFace face, OpenGLUInt m
     GLStencilMaskSeparate(EnumCastUnderlying(face), mask);
 }
 
-void System::SetGLStencilOpSeparate(RasterizerStateCullFace face, DepthStencilStateOperation sfail, DepthStencilStateOperation dpfail, DepthStencilStateOperation dppass) noexcept
+void System::SetGLStencilOpSeparate(RasterizerStateCullFace face, DepthStencilStateOperation sFail, DepthStencilStateOperation dpFail, DepthStencilStateOperation dpPass) noexcept
 {
-    GLStencilOpSeparate(EnumCastUnderlying(face), EnumCastUnderlying(sfail), EnumCastUnderlying(dpfail), EnumCastUnderlying(dppass));
+    GLStencilOpSeparate(EnumCastUnderlying(face), EnumCastUnderlying(sFail), EnumCastUnderlying(dpFail), EnumCastUnderlying(dpPass));
 }
 
 void System::SetGLFrontFace(OpenGLFrontFace mode) noexcept
@@ -215,4 +218,14 @@ void System::SetGLCullFace(RasterizerStateCullFace mode) noexcept
 void System::SetGLFlush() noexcept
 {
     GLFlush();
+}
+
+void System::SetGLDrawRangeElements(PrimitiveType mode, OpenGLUInt start, OpenGLUInt end, OpenGLSize count, OpenGLData type, const void* indices) noexcept
+{
+    GLDrawRangeElements(EnumCastUnderlying(mode), start, end, count, EnumCastUnderlying(type), indices);
+}
+
+void System::SetGLDrawArrays(PrimitiveType mode, OpenGLInt first, OpenGLSize count) noexcept
+{
+    GLDrawArrays(EnumCastUnderlying(mode), first, count);
 }

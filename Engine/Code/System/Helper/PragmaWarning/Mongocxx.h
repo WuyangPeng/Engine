@@ -5,16 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/24 15:55)
+///	版本：0.9.1.4 (2023/08/29 10:28)
 
-#ifndef SYSTEM_HELPER_PRAGMA_WARNING_MONGOCXX_H
-#define SYSTEM_HELPER_PRAGMA_WARNING_MONGOCXX_H
+#ifndef SYSTEM_HELPER_PRAGMA_WARNING_MONGO_CXX_H
+#define SYSTEM_HELPER_PRAGMA_WARNING_MONGO_CXX_H
 
 #include "System/Helper/PragmaWarning.h"
 
 #ifdef DATABASE_USE_MONGO
 
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
 
     #include SYSTEM_WARNING_DISABLE(26400)
     #include SYSTEM_WARNING_DISABLE(26409)
@@ -37,8 +37,8 @@
     #include <mongocxx/client.hpp>
     #include <mongocxx/instance.hpp>
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
 
 #endif  // DATABASE_USE_MONGO
 
-#endif  // SYSTEM_HELPER_PRAGMA_WARNING_MONGOCXX_H
+#endif  // SYSTEM_HELPER_PRAGMA_WARNING_MONGO_CXX_H

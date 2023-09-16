@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:52)
+///	版本：0.9.1.4 (2023/09/15 17:42)
 
 #include "Network/NetworkExport.h"
 
@@ -26,13 +26,11 @@ Network::NetworkSockConnector::NetworkSockConnector() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Network, NetworkSockConnector)
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
 bool Network::NetworkSockConnector::Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(sockStream, sockAddress);
 
     if (System::Connect(sockStream->GetNetworkSockStream(), &sockAddress->GetWinSockInternetAddress()))
         return true;
@@ -40,22 +38,14 @@ bool Network::NetworkSockConnector::Connect(const SockStreamSharedPtr& sockStrea
         return false;
 }
 
-#include STSTEM_WARNING_POP
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
 void Network::NetworkSockConnector::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    System::UnusedFunction(eventInterface);
+    System::UnusedFunction(eventInterface, sockStream, sockAddress);
 
     MAYBE_UNUSED const auto result = System::Connect(sockStream->GetNetworkSockStream(), &sockAddress->GetWinSockInternetAddress());
 }
-
-#include STSTEM_WARNING_POP
 
 Network::NetworkSockConnector::SockConnectorSharedPtr Network::NetworkSockConnector::Clone() const
 {

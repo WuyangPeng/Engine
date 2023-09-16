@@ -19,7 +19,7 @@
 
 #include <iostream>
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename Real>
@@ -54,7 +54,7 @@ Mathematics::VariableLengthVector<Real>::VariableLengthVector(ContainerType&& co
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 
@@ -137,12 +137,12 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 
     for (auto i = 0u; i < container.size(); ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         container[i] += rhs.container[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     return *this;
@@ -161,12 +161,12 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 
     for (auto i = 0u; i < container.size(); ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         container[i] -= rhs.container[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     return *this;

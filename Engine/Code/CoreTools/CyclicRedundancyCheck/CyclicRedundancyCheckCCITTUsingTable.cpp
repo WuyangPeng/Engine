@@ -27,12 +27,12 @@ void CoreTools::CyclicRedundancyCheckCCITTUsingTable::Calculation(const char* da
     {
         for (auto i = 0; i < length; ++i)
         {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
             cyclicRedundancyCheck = GetCCITT(cyclicRedundancyCheck, data[i]);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
     }
 }

@@ -5,27 +5,27 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:04)
+///	版本：0.9.1.4 (2023/09/15 15:38)
 
 #ifndef NETWORK_NETWORK_INTERFACE_ACE_IOVEC_SOCK_CONNECTOR_H
 #define NETWORK_NETWORK_INTERFACE_ACE_IOVEC_SOCK_CONNECTOR_H
 
 #include "Network/NetworkDll.h"
 
-#include "ACESockStream.h"
+#include "AceSockStream.h"
 
 #ifdef NETWORK_USE_ACE
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE ACEIovecSockStream : public ACESockStream
+    class NETWORK_HIDDEN_DECLARE AceIovecSockStream : public AceSockStream
     {
     public:
-        using ClassType = ACEIovecSockStream;
-        using ParentType = ACESockStream;
+        using ClassType = AceIovecSockStream;
+        using ParentType = AceSockStream;
 
     public:
-        ACEIovecSockStream() noexcept;
+        AceIovecSockStream() noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 09:35)
+///	版本：0.9.1.4 (2023/09/04 16:27)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_CONTAINER_GROUP_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_CONTAINER_GROUP_H
@@ -25,6 +25,7 @@ namespace Network
     {
     public:
         using ClassType = MessageContainerGroup<E, T>;
+
         using MessageType = std::vector<T>;
         using ContainerType = MessageContainer<E, T>;
         using StructureType = std::vector<MessageType>;

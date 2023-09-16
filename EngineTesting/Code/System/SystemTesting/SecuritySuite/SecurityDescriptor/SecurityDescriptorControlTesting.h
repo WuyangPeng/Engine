@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/29 20:01)
+///	版本：0.9.1.4 (2023/09/01 13:52)
 
 #ifndef SYSTEM_SECURITY_SUITE_SECURITY_DESCRIPTOR_CONTROL_TESTING_H
 #define SYSTEM_SECURITY_SUITE_SECURITY_DESCRIPTOR_CONTROL_TESTING_H
@@ -27,7 +27,7 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void ControlTest();
@@ -38,7 +38,7 @@ namespace System
         using SecurityDescriptorControlBitsContainer = std::vector<SecurityDescriptorControlBits>;
 
     private:
-        SecurityDescriptorControlBitsContainer securityDescriptorControlBitses;
+        SecurityDescriptorControlBitsContainer securityDescriptorControlBitsContainer;
     };
 }
 

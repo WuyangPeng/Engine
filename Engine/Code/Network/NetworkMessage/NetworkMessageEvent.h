@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 10:00)
+///	版本：0.9.1.4 (2023/09/04 16:30)
 
 #ifndef NETWORK_NETWORK_MESSAGE_NETWORK_MESSAGE_EVENT_H
 #define NETWORK_NETWORK_MESSAGE_NETWORK_MESSAGE_EVENT_H
@@ -13,7 +13,6 @@
 #include "Network/NetworkDll.h"
 
 #include "NetworkMessageInternalFwd.h"
-#include "System/Helper/PragmaWarning.h"
 
 template class NETWORK_DEFAULT_DECLARE std::weak_ptr<Network::NetworkMessageEvent>;
 template class NETWORK_DEFAULT_DECLARE std::enable_shared_from_this<Network::NetworkMessageEvent>;

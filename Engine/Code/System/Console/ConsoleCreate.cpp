@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/02/03 22:55)
+///	版本：0.9.1.4 (2023/08/28 16:22)
 
 #include "System/SystemExport.h"
 
@@ -62,9 +62,8 @@ bool System::ReOpenConsole(FILE*& file, const char* path, const char* mode, FILE
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    const auto result = freopen_s(&file, path, mode, stream);
-
-    if (result == 0)
+    if (const auto result = freopen_s(&file, path, mode, stream);
+        result == 0)
         return true;
     else
         return false;
@@ -83,9 +82,8 @@ bool System::ReOpenConsole(FILE*& file, const char* path, const char* mode, FILE
 
 bool System::CloseConsole(FILE* file) noexcept
 {
-    const auto result = fclose(file);
-
-    if (result == 0)
+    if (const auto result = fclose(file);
+        result == 0)
         return true;
     else
         return false;
@@ -93,9 +91,9 @@ bool System::CloseConsole(FILE* file) noexcept
 
 bool System::RemoveConsoleCloseButton() noexcept
 {
-    const auto hwnd = GetSystemConsoleWindow();
-    if (hwnd != nullptr)
-        return RemoveMenuCloseButton(hwnd);
+    if (const auto hWnd = GetSystemConsoleWindow();
+        hWnd != nullptr)
+        return RemoveMenuCloseButton(hWnd);
     else
         return false;
 }

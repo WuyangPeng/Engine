@@ -245,12 +245,12 @@ bool Rendering::CullerImpl::IsVisible(int numVertices, const APoint* vertices, b
         auto which = numVertices;
         for (auto j = 0; j < numVertices; ++j)
         {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
             const auto side = aPlane.WhichSide(vertices[j]);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
             if (side != Mathematics::NumericalValueSymbol::Negative)
             {

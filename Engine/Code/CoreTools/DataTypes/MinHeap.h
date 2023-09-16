@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 11:17)
+///	版本：0.9.1.4 (2023/09/13 14:25)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_H
@@ -13,69 +13,83 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "DataTypesFwd.h"
-#include "MinHeapRecordStoredManager.h"
+#include "MinHeapNode.h"
+#include "MinHeapRecord.h"
 
 #include <type_traits>
 
 namespace CoreTools
 {
-    // 堆存在两个索引：堆位置索引HeapIndex，唯一标识索引UniqueIndex，堆索引是按堆的位置进行索引，在排序时可变。
-    // 唯一标识索引在记录产生时自动生成，在排序时保持不变。Update必须使用唯一标识索引进行更新。
-    template <typename Generator, typename Scalar>
+    /// 类型T必须具有小于比较运算符operator<(...)函数。其他比较运算符是可选的。
+    template <typename T>
     class MinHeap final
     {
     public:
-        static_assert(std::is_scalar_v<Scalar>, "Scalar must be scalar");
+        using ClassType = MinHeap<T>;
 
-        using ClassType = MinHeap<Generator, Scalar>;
-        using RecordType = MinHeapRecord<Generator, Scalar>;
-        using RecordStoredManagerType = MinHeapRecordStoredManager<Generator, Scalar>;
+        using MinHeapNode = MinHeapNode<T>;
+        using MinHeapRecord = MinHeapRecord<T>;
+        using MinHeapNodeContainer = std::vector<MinHeapNode>;
+
+        static constexpr auto invalid = std::numeric_limits<int>::max();
 
     public:
-        MinHeap(int maxElements, int growBy, Scalar initialValue = Scalar{});
+        explicit MinHeap(int maxElements);
 
-#ifdef OPEN_CLASS_INVARIANT
+        // 支持调试。函数测试数据结构是否是有效的最小堆。
+        NODISCARD bool IsValid() const noexcept;
 
-        // 前两个函数检查记录数组确实形成一个堆。最后一个函数打印堆到一个日志中。
-        CLASS_INVARIANT_DECLARE;
-        NODISCARD bool IsValid(int startIndex, int finalIndex) const;
-        void PrintMinHeapInLog() const;
+        // 调整最小堆的大小，使其具有指定的最大元素数。不保留最小堆的先前状态。
+        void Reset(int maxElements);
 
-#endif  // OPEN_CLASS_INVARIANT
-
+        // 获取最小堆中允许的最大元素数。
         NODISCARD int GetMaxElements() const;
-        NODISCARD int GetGrowBy() const noexcept;
-        NODISCARD int GetElementsNumber() const noexcept;
-        NODISCARD RecordType GetMinimum() const;
-        NODISCARD RecordType GetRecordByHeapIndex(int heapIndex) const;
-        NODISCARD RecordType GetRecordByUniqueIndex(int uniqueIndex) const;
 
-        // 插入堆数值“value”对应于识别的“generator”对象， 返回值是一个指向堆记录存储信息的唯一索引UniqueIndex。
-        int Insert(Generator generator, Scalar value);
+        // 获取最小堆中的当前元素数。此数字在{0..maxElements}的范围内。
+        NODISCARD int GetNumElements() const noexcept;
 
-        // 取出堆的根。 根目录包含所有的堆元素的最小值。返回根信息。
-        RecordType Remove();
+        /// 获取最小堆的根。该函数读取根，但不从最小堆中删除元素。
+        /// 函数返回的是MinHeapRecord。
+        /// 如果最小堆不为空，则MinHeapRecord中的'key'有效， 'weight'对应于最小堆的根，'handle'是用户为相应应用程序对象提供的标识符。
+        /// 如果最小堆为空，则'key'无效，并且操作不成功，在这种情况下，'handle'和 'weight'都无效，不应使用。
+        NODISCARD MinHeapRecord GetMinimum() const;
 
-        // 堆记录的值必须通过调用这个函数进行修改。副作用是，堆必须相应地更新以适应新的值。返回索引的新位置HeapIndex。
-        int Update(int uniqueIndex, Scalar value);
+        /// 将（handle、weight）插入最小堆中。函数返回为'key'。如果在插入之前最小堆未满，则'key'是有效的，并且（handle，weight）存储在相应的节点中。
+        /// 如果在插入之前最小堆已满，则'key'无效，操作不成功，并且不修改最小堆。插入成功后，'key'可以稍后在调用Update时使用。
+        NODISCARD int Insert(int handle, const T& weight);
 
-        NODISCARD bool IsUniqueIndexValid(int uniqueIndex) const;
+        /// 移除包含最小权重的最小堆的根。函数返回的是MinHeapRecord。
+        /// 如果最小堆在删除之前不为空，则MinHeapRecord里的'key'是有效的，并且对应于存储的节点（handle，weight）。
+        /// 如果删除前最小堆为空，则'key'无效，操作不成功，并且不修改最小堆。
+        /// 返回时，'key'在进行另一个插入、删除或更新调用之前一直有效。
+        /// 这样做的目的是让调用者使用'key'，并在必要时，在任何其他堆修改调用之前清理与'key'关联的任何资源。
+        NODISCARD MinHeapRecord Remove();
+
+        /// 最小堆节点的值必须通过此函数调用进行修改。副作用是将二进制树恢复为最小堆。
+        /// 输入'updateKey' 应该是通过调用"key = Insert(handle, oldWeight)"返回的键。
+        /// 输入'updateWeight'是要与该键（和句柄）关联的新值。
+        /// 当函数有效时，返回的函数为“updateKey”；也就是说，要求0 <= updateKey < GetMaxElements()，内部0 <= updateIndex < GetNumElements()。
+        /// 当且仅当更新键在所需范围内时，函数才返回'true'，在这种情况下，未修改最小堆。
+        NODISCARD bool Update(int updateKey, const T& updateWeight);
+
+        NODISCARD MinHeapNodeContainer GetNodes() const;
+        NODISCARD MinHeapNode GetNode(int key) const;
+
+        NODISCARD int GetHandle(int key) const;
+        NODISCARD T GetWeight(int key) const;
 
     private:
-        NODISCARD bool IsStoredValueLess(int lhsHeapIndex, int rhsHeapIndex) const;
-        NODISCARD bool IsStoredValueLessEqual(int lhsHeapIndex, int rhsHeapIndex) const;
-
-        void GrowRecords();
-        void StoreInputInformation(Generator generator, Scalar value);
-        int RestoringValidHeapInInsert(Scalar value);
-        void RestoringValidHeapInRemove();
-        int RestoringValidHeapInUpdateLargerValue(int heapIndex, Scalar value);
-        int RestoringValidHeapInUpdateSmallerValue(int heapIndex, Scalar value);
+        using KeysContainer = std::vector<int>;
+        using IndicesContainer = std::vector<int>;
 
     private:
-        int elementsNumber;  // 元素数目
-        int growBy;  // 增加幅度
-        RecordStoredManagerType recordStoredManager;
+        // 支持二叉树拓扑结构和排序。
+        int numElements;
+        KeysContainer keys;
+        IndicesContainer indices;
+
+        // 二进制树节点上的用户指定信息。
+        MinHeapNodeContainer nodes;
     };
 }
 

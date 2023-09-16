@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/27 23:41)
+///	版本：0.9.1.4 (2023/09/01 13:41)
 
 #ifndef SYSTEM_SECURITY_SUITE_ADD_ACCESS_TESTING_BASE_H
 #define SYSTEM_SECURITY_SUITE_ADD_ACCESS_TESTING_BASE_H
@@ -35,24 +35,24 @@ namespace System
     protected:
         static constexpr auto aclBufferSize = 4096u;
 
-        using ACLBufferType = std::array<char, aclBufferSize>;
+        using AclBufferType = std::array<char, aclBufferSize>;
         using SpecificAccessContainer = std::vector<SpecificAccess>;
         using SpecificAccessContainerConstIter = SpecificAccessContainer::const_iterator;
-        using ControlACEInheritanceContainer = std::vector<ControlACEInheritance>;
+        using ControlAceInheritanceContainer = std::vector<ControlAceInheritance>;
 
     protected:
         void RandomShuffle();
         NODISCARD SpecificAccessContainerConstIter GetSpecificAccessBegin() const noexcept;
         NODISCARD SpecificAccessContainerConstIter GetSpecificAccessEnd() const noexcept;
-        NODISCARD ACLBufferType GetACLBuffer(AccessControlListRevision accessControlListRevision);
-        NODISCARD AccessCheckACLPtr GetAccessCheckACLPtr(ACLBufferType& aclBuffer) const noexcept;
-        NODISCARD SecuritySID GetSecuritySID();
+        NODISCARD AclBufferType GetAclBuffer(AccessControlListRevision accessControlListRevision);
+        NODISCARD AccessCheckAclPtr GetAccessCheckAclPtr(AclBufferType& aclBuffer) const noexcept;
+        NODISCARD SecuritySid GetSecuritySid();
         NODISCARD size_t GetMaxSize() const noexcept;
         NODISCARD SpecificAccess GetSpecificAccess(size_t index) const;
-        NODISCARD ControlACEInheritance GetControlACEInheritance(size_t index) const;
+        NODISCARD ControlAceInheritance GetControlAceInheritance(size_t index) const;
 
     private:
-        ControlACEInheritanceContainer controlACEInheritances;
+        ControlAceInheritanceContainer controlAceInheritances;
         SpecificAccessContainer specificAccesses;
         std::default_random_engine randomEngine;
         size_t maxSize;

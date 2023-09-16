@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 19:29)
+///	版本：0.9.1.4 (2023/09/01 14:19)
 
 #include "ThreadLocalStorageTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -53,9 +53,9 @@ void System::ThreadLocalStorageTesting::ThreadLocalStorageThread(WindowsDWord th
 
     ASSERT_TRUE(SetThreadLocalStorageValue(threadLocalStorageIndex, buffer.data()));
 
-    const auto threadLocalStorgae = GetThreadLocalStorageValue(threadLocalStorageIndex);
+    const auto threadLocalStorage = GetThreadLocalStorageValue(threadLocalStorageIndex);
 
-    ASSERT_EQUAL(buffer.data(), threadLocalStorgae);
+    ASSERT_EQUAL(buffer.data(), threadLocalStorage);
 }
 
 void System::ThreadLocalStorageTesting::CreateThread(int threadCount, WindowsDWord threadLocalStorageIndex)
@@ -63,7 +63,9 @@ void System::ThreadLocalStorageTesting::CreateThread(int threadCount, WindowsDWo
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::ThreadLocalStorageThread, this, threadLocalStorageIndex));
+        threadGroup.create_thread([this, threadLocalStorageIndex]() {
+            this->ThreadLocalStorageThread(threadLocalStorageIndex);
+        });
     }
 
     threadGroup.join_all();

@@ -47,12 +47,12 @@ typename Mathematics::Triangle3<Real>::ContainerType Mathematics::Triangle3<Real
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     ContainerType result{ vertex[1] - vertex[0], vertex[2] - vertex[1], vertex[0] - vertex[2] };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     return result;
 }
@@ -62,12 +62,12 @@ Mathematics::Vector3<Real> Mathematics::Triangle3<Real>::GetNormal() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return Vector3Tools::UnitCrossProduct(vertex[1] - vertex[0], vertex[2] - vertex[1]);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -83,14 +83,14 @@ Real Mathematics::Triangle3<Real>::DistanceTo(const Vector3& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     const auto diff = vertex[0] - point;
     const auto edge0 = vertex[1] - vertex[0];
     const auto edge1 = vertex[2] - vertex[0];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     const auto a00 = Vector3Tools::GetLengthSquared(edge0);
     const auto a01 = Vector3Tools::DotProduct(edge0, edge1);

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/04/28 10:10)
+///	版本：0.9.1.4 (2023/09/04 15:38)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FACTORY_H
 #define NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FACTORY_H
@@ -37,7 +37,7 @@ namespace Network
                                             ServerStrategy serverStrategy,
                                             MessageStrategy messageStrategy,
                                             ParserStrategy parserStrategy,
-                                            OpenSSLStrategy openSSLStrategy,
+                                            OpenSslStrategy openSslStrategy,
                                             EncryptedCompressionStrategy encryptedCompressionStrategy,
                                             const ConfigurationSubStrategy& subStrategy,
                                             const ConfigurationParameter& configurationParameter,
@@ -49,7 +49,7 @@ namespace Network
                                             ClientStrategy clientStrategy,
                                             MessageStrategy messageStrategy,
                                             ParserStrategy parserStrategy,
-                                            OpenSSLStrategy openSSLStrategy,
+                                            OpenSslStrategy openSslStrategy,
                                             EncryptedCompressionStrategy encryptedCompressionStrategy,
                                             const ConfigurationSubStrategy& subStrategy,
                                             const ConfigurationParameter& configurationParameter,

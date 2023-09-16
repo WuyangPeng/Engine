@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/08 17:25)
+///	版本：0.9.1.4 (2023/09/15 15:25)
 
 #include "Network/NetworkExport.h"
 
@@ -14,7 +14,7 @@
 #include "NullMainManager.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "Network/ACEWrappers/Detail/BaseMainManager/ACEMainManager.h"
+#include "Network/ACEWrappers/Detail/BaseMainManager/AceMainManager.h"
 #include "Network/BoostWrappers/Detail/BaseMainManager/BoostMainManager.h"
 #include "Network/BoostWrappers/Detail/BaseMainManager/BoostMainManagerUseMultiContext.h"
 #include "Network/BoostWrappers/Detail/BaseMainManager/BoostMainManagerUseThreads.h"
@@ -38,7 +38,7 @@ Network::BaseMainManagerFactory::ImplTypePtr Network::BaseMainManagerFactory::Cr
 
         case WrappersStrategy::Ace:
         {
-            return std::make_shared<ACEMainManager>();
+            return std::make_shared<AceMainManager>();
         }
 
 #endif  // NETWORK_USE_ACE

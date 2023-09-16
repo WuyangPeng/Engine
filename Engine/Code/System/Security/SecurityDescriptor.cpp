@@ -5,12 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:18)
+///	版本：0.9.1.4 (2023/08/30 15:17)
 
 #include "System/SystemExport.h"
 
 #include "SecurityDescriptor.h"
 #include "Flags/SecurityDescriptorFlags.h"
+#include "Using/SecurityDescriptorUsing.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/WindowsSystem.h"
@@ -51,7 +52,7 @@ bool System::SetSystemSecurityDescriptorControl(SecurityDescriptorPtr securityDe
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SetSecurityDescriptorDiscretionaryAccessControlList(SecurityDescriptorPtr securityDescriptor, bool daclPresent, AccessCheckACLPtr dacl, bool daclDefaulted) noexcept
+bool System::SetSecurityDescriptorDiscretionaryAccessControlList(SecurityDescriptorPtr securityDescriptor, bool daclPresent, AccessCheckAclPtr dacl, bool daclDefaulted) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -69,7 +70,7 @@ bool System::SetSecurityDescriptorDiscretionaryAccessControlList(SecurityDescrip
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SetSystemSecurityDescriptorGroup(SecurityDescriptorPtr securityDescriptor, SecuritySIDPtr group, bool groupDefaulted) noexcept
+bool System::SetSystemSecurityDescriptorGroup(SecurityDescriptorPtr securityDescriptor, SecuritySidPtr group, bool groupDefaulted) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -87,7 +88,7 @@ bool System::SetSystemSecurityDescriptorGroup(SecurityDescriptorPtr securityDesc
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SetSystemSecurityDescriptorOwner(SecurityDescriptorPtr securityDescriptor, SecuritySIDPtr group, bool ownerDefaulted) noexcept
+bool System::SetSystemSecurityDescriptorOwner(SecurityDescriptorPtr securityDescriptor, SecuritySidPtr group, bool ownerDefaulted) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -109,7 +110,7 @@ bool System::SetSecurityDescriptorResourceManagerControl(SecurityDescriptorPtr s
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetSecurityDescriptorRMControl(securityDescriptor, rmControl) == EnumCastUnderlying<WindowsDWord>(SecurityDescriptorRMControlReturn::Success))
+    if (::SetSecurityDescriptorRMControl(securityDescriptor, rmControl) == EnumCastUnderlying<WindowsDWord>(SecurityDescriptorRmControlReturn::Success))
         return true;
     else
         return false;
@@ -123,7 +124,7 @@ bool System::SetSecurityDescriptorResourceManagerControl(SecurityDescriptorPtr s
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SetSecurityDescriptorSystemAccessControlList(SecurityDescriptorPtr securityDescriptor, bool saclPresent, AccessCheckACLPtr sacl, bool saclDefaulted) noexcept
+bool System::SetSecurityDescriptorSystemAccessControlList(SecurityDescriptorPtr securityDescriptor, bool saclPresent, AccessCheckAclPtr sacl, bool saclDefaulted) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -166,7 +167,7 @@ bool System::GetSystemSecurityDescriptorControl(SecurityDescriptorPtr securityDe
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetSecurityDescriptorDiscretionaryAccessControlList(SecurityDescriptorPtr securityDescriptor, bool* daclPresent, AccessCheckACLPtr* dacl, bool* daclDefaulted) noexcept
+bool System::GetSecurityDescriptorDiscretionaryAccessControlList(SecurityDescriptorPtr securityDescriptor, bool* daclPresent, AccessCheckAclPtr* dacl, bool* daclDefaulted) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -193,7 +194,7 @@ bool System::GetSecurityDescriptorDiscretionaryAccessControlList(SecurityDescrip
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetSystemSecurityDescriptorGroup(SecurityDescriptorPtr securityDescriptor, SecuritySIDPtr* group, bool* groupDefaulted) noexcept
+bool System::GetSystemSecurityDescriptorGroup(SecurityDescriptorPtr securityDescriptor, SecuritySidPtr* group, bool* groupDefaulted) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -233,7 +234,7 @@ System::WindowsDWord System::GetSystemSecurityDescriptorLength(SecurityDescripto
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetSystemSecurityDescriptorOwner(SecurityDescriptorPtr securityDescriptor, SecuritySIDPtr* owner, bool* ownerDefaulted) noexcept
+bool System::GetSystemSecurityDescriptorOwner(SecurityDescriptorPtr securityDescriptor, SecuritySidPtr* owner, bool* ownerDefaulted) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -262,7 +263,7 @@ bool System::GetSecurityDescriptorResourceManagerControl(SecurityDescriptorPtr s
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetSecurityDescriptorRMControl(securityDescriptor, rmControl) == EnumCastUnderlying<WindowsDWord>(SecurityDescriptorRMControlReturn::Success))
+    if (::GetSecurityDescriptorRMControl(securityDescriptor, rmControl) == EnumCastUnderlying<WindowsDWord>(SecurityDescriptorRmControlReturn::Success))
         return true;
     else
         return false;
@@ -276,7 +277,7 @@ bool System::GetSecurityDescriptorResourceManagerControl(SecurityDescriptorPtr s
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetSecurityDescriptorSystemAccessControlList(SecurityDescriptorPtr securityDescriptor, bool* saclPresent, AccessCheckACLPtr* sacl, bool* saclDefaulted) noexcept
+bool System::GetSecurityDescriptorSystemAccessControlList(SecurityDescriptorPtr securityDescriptor, bool* saclPresent, AccessCheckAclPtr* sacl, bool* saclDefaulted) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -325,8 +326,8 @@ bool System::GetUserObjectSystemSecurity(ThreadHandle obj, SecurityRequestedInfo
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    auto securityInformation = EnumCastUnderlying<SecurityInformation>(requested);
-    if (::GetUserObjectSecurity(obj, &securityInformation, securityDescriptor, length, lengthNeeded) != gFalse)
+    if (auto securityInformation = EnumCastUnderlying<SecurityInformation>(requested);
+        ::GetUserObjectSecurity(obj, &securityInformation, securityDescriptor, length, lengthNeeded) != gFalse)
         return true;
     else
         return false;

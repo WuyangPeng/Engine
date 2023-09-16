@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 10:55)
+///	版本：0.9.1.4 (2023/09/04 16:52)
 
 #include "Network/NetworkExport.h"
 
@@ -49,7 +49,12 @@ void Network::MessageEventManager::Insert(int64_t messageId, const NetworkMessag
     return impl->Insert(messageId, messageEvent, priority);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, MessageEventManager, Remove, int64_t, void)
+void Network::MessageEventManager::Remove(int64_t messageId)
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->Remove(messageId);
+}
 
 void Network::MessageEventManager::Remove(int64_t messageId, const NetworkMessageEventSharedPtr& messageEvent)
 {
@@ -86,7 +91,7 @@ void Network::MessageEventManager::OnEvent(int64_t socketId, const std::string& 
     return impl->OnEvent(socketId, messageDescribe, message);
 }
 
-void Network::MessageEventManager::SetCallbackEvent(const EventInterfaceSharedPtr& eventInterface)  
+void Network::MessageEventManager::SetCallbackEvent(const EventInterfaceSharedPtr& eventInterface)
 {
     NETWORK_CLASS_IS_VALID_1;
 

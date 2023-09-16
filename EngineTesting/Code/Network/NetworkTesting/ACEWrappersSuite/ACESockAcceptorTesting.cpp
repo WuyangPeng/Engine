@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 09:42)
+///	版本：0.9.1.4 (2023/09/16 10:54)
 
 #include "ACESockAcceptorTesting.h"
 #include "System/Windows/Engineering.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Network/Helper/UserMacro.h"
 #include "Network/Interface/SockAcceptor.h"
 #include "Network/Interface/SockAddress.h"
 #include "Network/Interface/SockStream.h"
@@ -42,24 +41,24 @@ void Network::ACESockAcceptorTesting::AcceptorTest()
     const std::string aceHostName{ "127.0.0.1" };
     constexpr auto acePort = 9120 + System::GetEngineeringOffsetValue();
 
-    SockAcceptor sockAcceptor1{ acePort - 1, GetACEServerConfigurationStrategy() };
-    SockAcceptor sockAcceptor2{ aceHostName, acePort + 9, GetACEServerConfigurationStrategy() };
+    SockAcceptor sockAcceptor0{ acePort - 1, GetACEServerConfigurationStrategy() };
+    SockAcceptor sockAcceptor1{ aceHostName, acePort + 9, GetACEServerConfigurationStrategy() };
 
     const auto sockStream = std::make_shared<SockStream>(GetACEServerConfigurationStrategy());
     const auto sockAddress = std::make_shared<SockAddress>(GetACEServerConfigurationStrategy());
     const auto testSocketEvent = std::make_shared<TestSocketEvent>();
 
-    auto enableNonBlock = sockAcceptor1.EnableNonBlock();
+    auto enableNonBlock = sockAcceptor0.EnableNonBlock();
 
-    auto result = sockAcceptor1.Accept(*sockStream);
+    auto result = sockAcceptor0.Accept(*sockStream);
+    result = sockAcceptor0.Accept(*sockStream, *sockAddress);
+    sockAcceptor0.AsyncAccept(testSocketEvent, sockStream, sockAddress);
+    sockAcceptor0.AsyncAccept(testSocketEvent, sockStream);
+
+    enableNonBlock = sockAcceptor1.EnableNonBlock();
+
+    result = sockAcceptor1.Accept(*sockStream);
     result = sockAcceptor1.Accept(*sockStream, *sockAddress);
     sockAcceptor1.AsyncAccept(testSocketEvent, sockStream, sockAddress);
     sockAcceptor1.AsyncAccept(testSocketEvent, sockStream);
-
-    enableNonBlock = sockAcceptor2.EnableNonBlock();
-
-    result = sockAcceptor2.Accept(*sockStream);
-    result = sockAcceptor2.Accept(*sockStream, *sockAddress);
-    sockAcceptor2.AsyncAccept(testSocketEvent, sockStream, sockAddress);
-    sockAcceptor2.AsyncAccept(testSocketEvent, sockStream);
 }

@@ -13,6 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "System/OpenGL/Using/OpenGLUsing.h"
+#include "Rendering/OpenGLRenderer/InputLayout/OpenGLInputLayoutManager.h"
 #include "Rendering/RendererEngine/Detail/RenderingDeviceImpl.h"
 
 namespace Rendering
@@ -24,7 +25,7 @@ namespace Rendering
         using ParentType = RenderingDeviceImpl;
 
     public:
-        OpenGLDevice() noexcept;
+        explicit OpenGLDevice(CoreTools::DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -33,6 +34,7 @@ namespace Rendering
         void SwapBuffers(int syncInterval) override;
         void ResetSize() override;
         void InitDevice() noexcept override;
+        void Release() noexcept override;
 
         void SetViewport(const Viewport& viewport) noexcept override;
         NODISCARD Viewport GetViewport() const override;
@@ -76,6 +78,12 @@ namespace Rendering
         void DisableTextureArrays(const Shader& shader, OpenGLUInt program) noexcept;
         void EnableSamplers(const Shader& shader, OpenGLUInt program) noexcept;
         void DisableSamplers(const Shader& shader, OpenGLUInt program) noexcept;
+
+        NODISCARD int64_t DrawPrimitive(const VertexBufferSharedPtr& vertexBuffer,
+                                        const IndexBufferSharedPtr& indexBuffer);
+
+    private:
+        OpenGLInputLayoutManager openGLInputLayoutManager;
     };
 }
 

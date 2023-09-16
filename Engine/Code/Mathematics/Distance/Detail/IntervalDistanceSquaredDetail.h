@@ -13,7 +13,7 @@
 #include "IntervalDistanceDetail.h"
 #include "IntervalDistanceSquared.h"
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename Real, typename Vector>
@@ -25,7 +25,7 @@ Mathematics::IntervalDistanceSquared<Real, Vector>::IntervalDistanceSquared(cons
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 

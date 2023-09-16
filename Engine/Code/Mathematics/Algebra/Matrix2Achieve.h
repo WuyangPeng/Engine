@@ -31,7 +31,7 @@ Mathematics::Matrix2<Real>::Matrix2(const ContainerType& entry, MatrixMajorFlags
         THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s))
     }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     if (majorFlag == MatrixMajorFlags::Row)
@@ -45,7 +45,7 @@ Mathematics::Matrix2<Real>::Matrix2(const ContainerType& entry, MatrixMajorFlags
         y.SetCoordinate(entry[1], entry[3]);
     }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -79,7 +79,7 @@ Mathematics::Matrix2<Real>::Matrix2(const Vector2ContainerType& vectors, MatrixM
         THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s))
     }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     if (majorFlag == MatrixMajorFlags::Row)
@@ -93,7 +93,7 @@ Mathematics::Matrix2<Real>::Matrix2(const Vector2ContainerType& vectors, MatrixM
         y.SetCoordinate(vectors[xIndex].GetY(), vectors[yIndex].GetY());
     }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -232,12 +232,12 @@ Real& Mathematics::Matrix2<Real>::operator()(int row, int column)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
 
     return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>

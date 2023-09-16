@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/09 22:15)
+///	版本：0.9.1.4 (2023/09/01 10:48)
 
 #include "ConnectTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning/PropertyTree.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
-#include "System/Network/Flags/WindowsExtensionPrototypesFlags.h"
 #include "System/Network/SocketPrototypes.h"
 #include "System/Network/WindowsExtensionPrototypes.h"
 #include "CoreTools/CharacterString/StringConversion.h"
@@ -73,8 +72,8 @@ void System::ConnectTesting::SendTest(WinSocket socketHandle)
 
     do
     {
-        const auto sendCount = Send(socketHandle, &iov.at(sendNum), boost::numeric_cast<int>(iov.size() - sendNum), SocketSend::Default);
-        if (sendCount != socketError)
+        if (const auto sendCount = Send(socketHandle, &iov.at(sendNum), boost::numeric_cast<int>(iov.size() - sendNum), SocketSend::Default);
+            sendCount != socketError)
         {
             sendNum += sendCount;
         }

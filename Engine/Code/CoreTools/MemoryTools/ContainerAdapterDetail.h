@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/10 10:49)
+///	版本：0.9.1.4 (2023/09/05 16:29)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_CONTAINER_ADAPTER_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_CONTAINER_ADAPTER_DETAIL_H
@@ -20,14 +20,33 @@ template <typename T, int N>
 requires(N > 0) CoreTools::ContainerAdapter<T, N>::ContainerAdapter(T* elements, int numElements)
     : elements{ elements }
 {
-    System::UnusedFunction(numElements);
-
     if (elements == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"))
     }
 
+    System::UnusedFunction(numElements);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+template <typename T, int N>
+requires(N > 0)
+CoreTools::ContainerAdapter<T, N>::ContainerAdapter(ContainerAdapter&& rhs) noexcept
+    : elements{ rhs.elements }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+template <typename T, int N>
+requires(N > 0)
+CoreTools::ContainerAdapter<T, N>& CoreTools::ContainerAdapter<T, N>::operator=(ContainerAdapter&& rhs) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    elements = rhs.elements;
+
+    return *this;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -39,21 +58,6 @@ requires(N > 0) bool CoreTools::ContainerAdapter<T, N>::IsValid() const noexcept
 }
 
 #endif  // OPEN_CLASS_INVARIANT
-
-template <typename T, int N>
-requires(N > 0) void CoreTools::ContainerAdapter<T, N>::Reset(T* aElements, int numElements)
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    System::UnusedFunction(numElements);
-
-    if (aElements == nullptr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
-    }
-
-    elements = aElements;
-}
 
 template <typename T, int N>
 requires(N > 0) T* CoreTools::ContainerAdapter<T, N>::GetData() noexcept
@@ -78,15 +82,15 @@ requires(N > 0) const T& CoreTools::ContainerAdapter<T, N>::operator[](int index
 
     if (N <= index)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("index索引越界"));
+        THROW_EXCEPTION(SYSTEM_TEXT("index索引越界"))
     }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     return elements[index];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename T, int N>
@@ -155,7 +159,7 @@ requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::reverse_iterator Cor
 
 template <typename T, int N>
 requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterator CoreTools::ContainerAdapter<T, N>::rend() const noexcept
-{ 
+{
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return const_reverse_iterator{ begin() };
@@ -207,7 +211,7 @@ CoreTools::ContainerAdapter<T>::ContainerAdapter(T* elements, int numElements)
 {
     if (numElements <= 0 || elements == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("无效的元素状态。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("无效的元素状态。"))
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -227,21 +231,7 @@ bool CoreTools::ContainerAdapter<T>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-void CoreTools::ContainerAdapter<T>::Reset(T* aElements, int aNumElements)
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    if (numElements <= 0 || elements == nullptr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("无效的元素状态。"));
-    }
-
-    numElements = aNumElements;
-    elements = aElements;
-}
-
-template <typename T>
-int CoreTools::ContainerAdapter<T>::GetSize() const noexcept
+int CoreTools::ContainerAdapter<T>::size() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -274,12 +264,12 @@ const T& CoreTools::ContainerAdapter<T>::operator[](int index) const
         THROW_EXCEPTION(SYSTEM_TEXT("index索引越界"));
     }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     return elements[index];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename T>
@@ -384,6 +374,17 @@ typename CoreTools::ContainerAdapter<T>::const_reverse_iterator CoreTools::Conta
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return rend();
+}
+
+template <typename T>
+void CoreTools::ContainerAdapter<T>::Fill(const T& value)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    for (auto i = 0; i < numElements; ++i)
+    {
+        elements[i] = value;
+    }
 }
 
 #endif  // CORE_TOOLS_MEMORY_TOOLS_ATOMIC_MIN_MAX_DETAIL_H

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 22:41)
+///	版本：0.9.1.4 (2023/08/29 23:28)
 
 #ifndef SYSTEM_OPENGL_WGL_EXTENSIONS_USING_H
 #define SYSTEM_OPENGL_WGL_EXTENSIONS_USING_H
@@ -29,13 +29,13 @@ namespace System
     using GlyphMetricsFloat = GLYPHMETRICSFLOAT;
     using GlyphMetricsFloatPtr = LPGLYPHMETRICSFLOAT;
     using OpenGLProc = PROC;
-    using WglHPBufferARB = HPBUFFERARB;
-    using WglHPBufferEXT = HPBUFFEREXT;
-    using WglHGpuNV = HGPUNV;
+    using WglHPBufferArb = HPBUFFERARB;
+    using WglHPBufferExt = HPBUFFEREXT;
+    using WglHGpuNv = HGPUNV;
     using WglGpuDevicePtr = PGPU_DEVICE;
-    using WglHVideoOutputDeviceNV = HVIDEOOUTPUTDEVICENV;
-    using WglHVideoInputDeviceNV = HVIDEOINPUTDEVICENV;
-    using WglHPVideoDEV = HPVIDEODEV;
+    using WglHVideoOutputDeviceNv = HVIDEOOUTPUTDEVICENV;
+    using WglHVideoInputDeviceNv = HVIDEOINPUTDEVICENV;
+    using WglHPVideoDev = HPVIDEODEV;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -133,14 +133,14 @@ namespace System
     {
         int unused;
     };
-    using WglHPBufferARB = WglHPBufferARBDeclare*;
-    using WglHPBufferEXT = WglHPBufferARB;
+    using WglHPBufferArb = WglHPBufferARBDeclare*;
+    using WglHPBufferExt = WglHPBufferArb;
 
     struct WglHGPUNVDeclare
     {
         int unused;
     };
-    using WglHGpuNV = WglHGPUNVDeclare*;
+    using WglHGpuNv = WglHGPUNVDeclare*;
 
     struct WglGpuDevice
     {
@@ -156,19 +156,19 @@ namespace System
     {
         int unused;
     };
-    using WglHVideoOutputDeviceNV = WglHVideoOutputDeviceNVDeclare*;
+    using WglHVideoOutputDeviceNv = WglHVideoOutputDeviceNVDeclare*;
 
     struct WglHVideoInputDeviceNVDeclare
     {
         int unused;
     };
-    using WglHVideoInputDeviceNV = WglHVideoInputDeviceNVDeclare*;
+    using WglHVideoInputDeviceNv = WglHVideoInputDeviceNVDeclare*;
 
     struct WglHPVideoDEVDeclare
     {
         int unused;
     };
-    using WglHPVideoDEV = WglHPVideoDEVDeclare*;
+    using WglHPVideoDev = WglHPVideoDEVDeclare*;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

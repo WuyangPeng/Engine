@@ -13,7 +13,7 @@
 #include "OdeEuler.h"
 #include "OdeSolverDetail.h"
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename Real, typename UserDataType>
@@ -23,7 +23,7 @@ Mathematics::OdeEuler<Real, UserDataType>::OdeEuler(int dimension, Real step, Fu
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 

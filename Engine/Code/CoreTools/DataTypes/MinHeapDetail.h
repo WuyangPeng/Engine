@@ -5,38 +5,52 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 11:17)
+///	版本：0.9.1.4 (2023/09/13 14:26)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_DETAIL_H
 
 #include "MinHeap.h"
-#include "MinHeapRecordStoredManagerDetail.h"
+#include "MinHeapNodeDetail.h"
+#include "MinHeapRecordDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/LogMacro.h"
 
-#include <sstream>
-
-template <typename Generator, typename Scalar>
-CoreTools::MinHeap<Generator, Scalar>::MinHeap(int maxElements, int growBy, Scalar initialValue)
-    : elementsNumber{ 0 }, growBy{ 0 < growBy ? growBy : 1 }, recordStoredManager{ maxElements, initialValue }
+template <typename T>
+CoreTools::MinHeap<T>::MinHeap(int maxElements)
+    : numElements{ 0 },
+      keys{},
+      indices{},
+      nodes{}
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_3;
+    Reset(maxElements);
+
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-#ifdef OPEN_CLASS_INVARIANT
-
-template <typename Generator, typename Scalar>
-bool CoreTools::MinHeap<Generator, Scalar>::IsValid() const noexcept
+template <typename T>
+bool CoreTools::MinHeap<T>::IsValid() const noexcept
 {
     try
     {
-        if (IsValid(0, elementsNumber - 1) && 0 <= elementsNumber && 0 < growBy && 0 < recordStoredManager.GetMaxElements())
-            return true;
-        else
-            return false;
+        for (auto childIndex = 1; childIndex < numElements; ++childIndex)
+        {
+            const auto childKey = keys.at(childIndex);
+            const auto parentIndex = (childIndex - 1) / 2;
+            const auto parentKey = keys.at(parentIndex);
+            if (nodes.at(childKey).GetWeight() < nodes.at(parentKey).GetWeight())
+            {
+                return false;
+            }
+
+            if (indices.at(parentKey) != parentIndex)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
     catch (...)
     {
@@ -44,341 +58,319 @@ bool CoreTools::MinHeap<Generator, Scalar>::IsValid() const noexcept
     }
 }
 
-template <typename Generator, typename Scalar>
-bool CoreTools::MinHeap<Generator, Scalar>::IsValid(int startIndex, int finalIndex) const
+template <typename T>
+void CoreTools::MinHeap<T>::Reset(int maxElements)
 {
-    // 索引为HeapIndex
-    for (auto child = startIndex; child <= finalIndex; ++child)
-    {
-        if (const auto parent = (child - 1) / 2; startIndex < parent)
-        {
-            if (IsStoredValueLess(child, parent))
-            {
-                PrintMinHeapInLog();
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-                return false;
+    numElements = 0;
+    if (maxElements > 0)
+    {
+        keys.resize(maxElements);
+        indices.resize(maxElements);
+        nodes.resize(maxElements);
+        for (auto i = 0; i < maxElements; ++i)
+        {
+            keys.at(i) = i;
+            indices.at(i) = i;
+            nodes.at(i).SetHandle(invalid);
+        }
+    }
+    else
+    {
+        keys.clear();
+        indices.clear();
+        nodes.clear();
+    }
+}
+
+template <typename T>
+int CoreTools::MinHeap<T>::GetMaxElements() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(keys.size());
+}
+
+template <typename T>
+int CoreTools::MinHeap<T>::GetNumElements() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return numElements;
+}
+
+template <typename T>
+typename CoreTools::MinHeap<T>::MinHeapRecord CoreTools::MinHeap<T>::GetMinimum() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    if (0 < numElements)
+    {
+        // 从最小堆的根中获取最小值。
+        const auto key = keys.at(0);
+        const auto& node = nodes.at(key);
+
+        return MinHeapRecord{ key, node };
+    }
+    else
+    {
+        // 如果故意取消分配权重，则无效。
+        return MinHeapRecord{ invalid, invalid, 0 };
+    }
+}
+
+template <typename T>
+int CoreTools::MinHeap<T>::Insert(int handle, const T& weight)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    if (numElements < GetMaxElements())
+    {
+        /// 将(handle, weight)存储在二叉树的最后一个叶节点中。
+        const auto insertIndex = numElements++;
+        const auto insertKey = keys.at(insertIndex);
+        indices.at(insertKey) = insertIndex;
+        auto& node = nodes.at(insertKey);
+        node.SetHandle(handle);
+        node.SetWeight(weight);
+
+        /// 向树的根传播信息，直到它到达正确的位置，从而将树恢复为最小堆。
+        auto childIndex = insertIndex;
+        while (0 < childIndex)
+        {
+            const auto parentIndex = (childIndex - 1) / 2;
+            const auto parentKey = keys.at(parentIndex);
+            if (!(weight < nodes.at(parentKey).GetWeight()))
+            {
+                // 父对象的权重小于或等于子对象的值。我们现在有一个最小堆。
+                break;
+            }
+
+            // 父对象的值大于子对象的值。交换父对象和子对象。
+            keys.at(parentIndex) = insertKey;
+            keys.at(childIndex) = parentKey;
+            indices.at(parentKey) = childIndex;
+            indices.at(insertKey) = parentIndex;
+
+            // 向上传播。
+            childIndex = parentIndex;
+        }
+
+        return insertKey;
+    }
+    else
+    {
+        return invalid;
+    }
+}
+
+template <typename T>
+typename CoreTools::MinHeap<T>::MinHeapRecord CoreTools::MinHeap<T>::Remove()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    if (numElements > 0)
+    {
+        // 从最小堆的根中获取最小值。
+        const auto removeKey = keys.at(0);
+        const auto& node = nodes.at(removeKey);
+        const auto handle = node.GetHandle();
+        const auto weight = node.GetWeight();
+
+        // 获取最小堆的最后一个被占用的叶节点的索引。
+        auto lastIndex = --numElements;
+        if (lastIndex == 0)
+        {
+            /// 最小堆只有一个节点。删除它不需要额外的工作。最小堆现在是空的。
+            /// 如果两次应用相同的插入、删除和更新序列，则将键和索引恢复为默认值，以确保结果具有确定性。
+            if (numElements == 0)
+            {
+                const auto maxElements = GetMaxElements();
+                for (auto i = 0; i < maxElements; ++i)
+                {
+                    keys.at(i) = i;
+                    indices.at(i) = i;
+                    nodes.at(i).SetHandle(invalid);
+                }
+            }
+
+            return MinHeapRecord{ removeKey, handle, weight };
+        }
+
+        /// 将树恢复为最小堆。最后一个被占用的叶节点被移动到树的根，以保持未被占用的叶子节点总是在叶子数组的末尾这一不变。
+        /// 移动之后，需要将树恢复为最小堆。
+        /// 根节点值将替换为子节点的最小权重。使用最小权重的子节点重复该过程；其权重被其子节点的最小值所代替。
+        /// 遍历一直持续到二进制树恢复到最小堆为止。
+        auto lastKey = keys.at(lastIndex);
+        const auto& lastWeight = nodes.at(lastKey).GetWeight();
+
+        /// 交换根节点和最后一个叶节点。lastIndex会递减，因此旧的根值现在位于新树的第一个未占用的叶节点中。
+        keys.at(0) = lastKey;
+        keys.at(lastIndex) = removeKey;
+        indices.at(removeKey) = lastIndex;
+        indices.at(lastKey) = 0;
+        --lastIndex;
+
+        // 向下传播新的根值，直到树恢复为最小堆。
+        auto parentIndex = 0;
+        auto childIndex = 1;
+        while (childIndex <= lastIndex)
+        {
+            auto childKey = keys.at(childIndex);
+            if (childIndex < lastIndex)
+            {
+                // 选择值最小的子项。
+                const auto otherChildIndex = childIndex + 1;
+                const auto otherChildKey = keys.at(otherChildIndex);
+                if (nodes.at(otherChildIndex).GetWeight() < nodes.at(childKey).GetWeight())
+                {
+                    childIndex = otherChildIndex;
+                    childKey = otherChildKey;
+                }
+            }
+
+            if (!(nodes.at(childKey).GetWeight() < lastWeight))
+            {
+                // 树现在成了最小堆。
+                break;
+            }
+
+            // 将子对象移动到父对象的槽中。
+            keys.at(parentIndex) = childKey;
+            keys.at(childIndex) = lastKey;
+            indices.at(lastKey) = childIndex;
+            indices.at(childKey) = parentIndex;
+
+            // 向下传播。
+            parentIndex = childIndex;
+            childIndex = 2 * childIndex + 1;
+        }
+
+        /// 最小值现在存储在旧树的最后一个被占用的叶节点中，但现在存储在新树的第一个未被占用的叶节点中。
+        return MinHeapRecord{ removeKey, handle, weight };
+    }
+    else
+    {
+        // 如果故意取消分配权重，则无效。
+        return MinHeapRecord{ invalid, invalid, 0 };
+    }
+}
+
+template <typename T>
+bool CoreTools::MinHeap<T>::Update(int updateKey, const T& updateWeight)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    if (const auto updateIndex = indices.at(updateKey);
+        updateKey < GetMaxElements() && updateIndex < GetNumElements())
+    {
+        const auto oldWeight = nodes.at(updateKey).GetWeight();
+        if (oldWeight < updateWeight)
+        {
+            nodes.at(updateKey).SetWeight(updateWeight);
+
+            // 新值大于旧值。把它传播到叶子上。
+            auto parentIndex = indices.at(updateKey);
+            auto childIndex = 2 * parentIndex + 1;
+            while (childIndex < numElements)
+            {
+                // 选择值最小的子项。
+                auto childKey = keys.at(childIndex);
+
+                if (const auto otherChildIndex = childIndex + 1;
+                    otherChildIndex < numElements)
+                {
+                    if (auto otherChildKey = keys.at(otherChildIndex);
+                        nodes.at(otherChildKey).GetWeight() < nodes.at(childKey).GetWeight())
+                    {
+                        childIndex = otherChildIndex;
+                        childKey = otherChildKey;
+                    }
+                }
+
+                if (!(nodes.at(childKey).GetWeight() < updateWeight))
+                {
+                    // 新值位于将树恢复为最小堆的正确位置。
+                    break;
+                }
+
+                // 子项的值大于父项的值。交换父对象和子对象：
+                keys.at(parentIndex) = childKey;
+                keys.at(childIndex) = updateKey;
+                indices.at(updateKey) = childIndex;
+                indices.at(childKey) = parentIndex;
+
+                // 向下传播。
+                parentIndex = childIndex;
+                childIndex = 2 * childIndex + 1;
             }
         }
-    }
-
-    return true;
-}
-
-template <typename Generator, typename Scalar>
-void CoreTools::MinHeap<Generator, Scalar>::PrintMinHeapInLog() const
-{
-    System::OStringStream os{};
-
-    os << SYSTEM_TEXT("最小堆信息\n");
-
-    for (auto index = 0; index < elementsNumber; ++index)
-    {
-        os << index
-           << SYSTEM_TEXT(": realIndex = ")
-           << recordStoredManager.GetUniqueIndex(index)
-           << SYSTEM_TEXT(", generator = ")
-           << recordStoredManager.GetGeneratorByHeapIndex(index)
-           << SYSTEM_TEXT(", value = ")
-           << recordStoredManager.GetValueByHeapIndex(index)
-           << SYSTEM_TEXT("\n");
-    }
-
-    LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools, os.str());
-
-    recordStoredManager.PrintIndexInLog();
-}
-
-#endif  // OPEN_CLASS_INVARIANT
-
-// private
-template <typename Generator, typename Scalar>
-bool CoreTools::MinHeap<Generator, Scalar>::IsStoredValueLess(int lhsHeapIndex, int rhsHeapIndex) const
-{
-    return recordStoredManager.GetValueByHeapIndex(lhsHeapIndex) < recordStoredManager.GetValueByHeapIndex(rhsHeapIndex);
-}
-
-template <typename Generator, typename Scalar>
-bool CoreTools::MinHeap<Generator, Scalar>::IsStoredValueLessEqual(int lhsHeapIndex, int rhsHeapIndex) const
-{
-    return !IsStoredValueLess(rhsHeapIndex, lhsHeapIndex);
-}
-
-template <typename Generator, typename Scalar>
-int CoreTools::MinHeap<Generator, Scalar>::GetMaxElements() const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_3;
-
-    return recordStoredManager.GetMaxElements();
-}
-
-template <typename Generator, typename Scalar>
-int CoreTools::MinHeap<Generator, Scalar>::GetGrowBy() const noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_3;
-
-    return growBy;
-}
-
-template <typename Generator, typename Scalar>
-int CoreTools::MinHeap<Generator, Scalar>::GetElementsNumber() const noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_3;
-
-    return elementsNumber;
-}
-
-template <typename Generator, typename Scalar>
-CoreTools::MinHeapRecord<Generator, Scalar> CoreTools::MinHeap<Generator, Scalar>::GetMinimum() const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_3;
-
-    return GetRecordByHeapIndex(0);
-}
-
-template <typename Generator, typename Scalar>
-CoreTools::MinHeapRecord<Generator, Scalar> CoreTools::MinHeap<Generator, Scalar>::GetRecordByUniqueIndex(int uniqueIndex) const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_3;
-
-    MAYBE_UNUSED const auto heapIndex = recordStoredManager.GetHeapIndex(uniqueIndex);
-
-    CORE_TOOLS_ASSERTION_2(0 <= heapIndex && heapIndex < elementsNumber, "无效索引\n");
-
-    return RecordType{ uniqueIndex, recordStoredManager.GetGeneratorByUniqueIndex(uniqueIndex), recordStoredManager.GetValueByUniqueIndex(uniqueIndex) };
-}
-
-template <typename Generator, typename Scalar>
-CoreTools::MinHeapRecord<Generator, Scalar> CoreTools::MinHeap<Generator, Scalar>::GetRecordByHeapIndex(int heapIndex) const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_3;
-    CORE_TOOLS_ASSERTION_2(0 <= heapIndex && heapIndex < elementsNumber, "无效索引\n");
-
-    return RecordType{ recordStoredManager.GetHeapIndex(heapIndex),
-                       recordStoredManager.GetGeneratorByHeapIndex(heapIndex),
-                       recordStoredManager.GetValueByHeapIndex(heapIndex) };
-}
-
-template <typename Generator, typename Scalar>
-int CoreTools::MinHeap<Generator, Scalar>::Insert(Generator generator, Scalar value)
-{
-    CORE_TOOLS_CLASS_IS_VALID_3;
-
-    // 如果有必要，增加记录堆数组。
-    GrowRecords();
-
-    // 存储输入信息在堆记录的最后，这是在树中的最后一个叶节点。
-    StoreInputInformation(generator, value);
-
-    // 传播信息朝向树的根，直到它到达正确的位置，从而恢复树为一个有效的堆。
-    return RestoringValidHeapInInsert(value);
-}
-
-// private
-template <typename Generator, typename Scalar>
-void CoreTools::MinHeap<Generator, Scalar>::GrowRecords()
-{
-    const auto maxElements = recordStoredManager.GetMaxElements();
-    if (elementsNumber == maxElements)
-    {
-        const auto newMaxElements = maxElements + growBy;
-
-        recordStoredManager.GrowBy(newMaxElements);
-    }
-}
-
-// private
-template <typename Generator, typename Scalar>
-void CoreTools::MinHeap<Generator, Scalar>::StoreInputInformation(Generator generator, Scalar value)
-{
-    const auto child = elementsNumber++;
-
-    recordStoredManager.SetGeneratorByHeapIndex(child, generator);
-    recordStoredManager.SetValueByHeapIndex(child, value);
-}
-
-// private
-template <typename Generator, typename Scalar>
-int CoreTools::MinHeap<Generator, Scalar>::RestoringValidHeapInInsert(Scalar value)
-{
-    auto child = elementsNumber - 1;
-
-    while (0 < child)
-    {
-        const auto parent = (child - 1) / 2;
-        if (recordStoredManager.GetValueByHeapIndex(parent) <= value)
+        else if (updateWeight < oldWeight)
         {
-            // parent有一个值小于或等于child的值，所以我们现在有一个有效的堆。
-            break;
-        }
+            nodes.at(updateKey).SetWeight(updateWeight);
 
-        // parent具有比child更大的值。交换parent和child：
-        recordStoredManager.ChangeValue(child, parent);
-
-        child = parent;
-    }
-
-    return recordStoredManager.GetUniqueIndex(child);
-}
-
-template <typename Generator, typename Scalar>
-CoreTools::MinHeapRecord<Generator, Scalar> CoreTools::MinHeap<Generator, Scalar>::Remove()
-{
-    CORE_TOOLS_CLASS_IS_VALID_3;
-
-    // 从堆的根中得到的信息。
-    RecordType root{ recordStoredManager.GetHeapIndex(0), recordStoredManager.GetGeneratorByHeapIndex(0), recordStoredManager.GetValueByHeapIndex(0) };
-
-    RestoringValidHeapInRemove();
-
-    return root;
-}
-
-// private
-template <typename Generator, typename Scalar>
-void CoreTools::MinHeap<Generator, Scalar>::RestoringValidHeapInRemove()
-{
-    // 恢复堆中的树。交换第0位和last位的记录。
-    // 然后通过parent-child互换向下移动第0位，直到它恢复在堆中树的位置。
-
-    const auto last = --elementsNumber;
-    auto parent = 0;
-    auto child = 1;
-
-    // 旧的记录不能丢失。它附加到插槽包含最后的旧记录。
-    recordStoredManager.ChangeValue(parent, last);
-
-    while (child < last)
-    {
-        if (child < last - 1)
-        {
-            // 如果有必要，选择最小值的child与parent交换。
-            if (const auto childRight = child + 1; IsStoredValueLess(childRight, child))
+            // 新值小于旧值。将其向根部传播。
+            auto childIndex = updateIndex;
+            while (childIndex > 0)
             {
-                child = childRight;
+                const auto parentIndex = (childIndex - 1) / 2;
+                auto parentKey = keys.at(parentIndex);
+                if (!(updateWeight < nodes.at(parentKey).GetWeight()))
+                {
+                    // 新值位于将树恢复为最小堆堆的正确位置。
+                    break;
+                }
+
+                // 父对象的值小于子对象的值。交换子对象和父对象。
+                keys.at(parentIndex) = updateKey;
+                keys.at(childIndex) = parentKey;
+                indices.at(parentKey) = childIndex;
+                indices.at(updateKey) = parentIndex;
+
+                // 向下传播。
+                childIndex = parentIndex;
             }
         }
 
-        if (IsStoredValueLessEqual(parent, child))
-        {
-            // 树现在是一个堆。
-            break;
-        }
-        else
-        {
-            // 交换child和parent的插槽。
-            recordStoredManager.ChangeValue(child, parent);
-
-            parent = child;
-            child = 2 * child + 1;
-        }
-    }
-}
-
-template <typename Generator, typename Scalar>
-bool CoreTools::MinHeap<Generator, Scalar>::IsUniqueIndexValid(int uniqueIndex) const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_3;
-
-    const auto heapIndex = recordStoredManager.GetHeapIndex(uniqueIndex);
-
-    if (0 <= heapIndex && heapIndex < elementsNumber)
         return true;
+    }
     else
+    {
         return false;
-}
-
-template <typename Generator, typename Scalar>
-int CoreTools::MinHeap<Generator, Scalar>::Update(int uniqueIndex, Scalar value)
-{
-    CORE_TOOLS_CLASS_IS_VALID_3;
-
-    // 只有MinHeap才可以更新记录。
-    const auto scalar = recordStoredManager.GetValueByUniqueIndex(uniqueIndex);
-    const auto heapIndex = recordStoredManager.GetHeapIndex(uniqueIndex);
-
-    CORE_TOOLS_ASSERTION_2(0 <= heapIndex && heapIndex < elementsNumber, "无效索引\n");
-
-    if (scalar < value)
-        return RestoringValidHeapInUpdateLargerValue(heapIndex, value);
-    else if (value < scalar)
-        return RestoringValidHeapInUpdateSmallerValue(heapIndex, value);
-    else
-        return heapIndex;
-}
-
-template <typename Generator, typename Scalar>
-int CoreTools::MinHeap<Generator, Scalar>::RestoringValidHeapInUpdateLargerValue(int heapIndex, Scalar value)
-{
-    // 新值大于旧值。它向叶子传播。
-
-    recordStoredManager.SetValueByHeapIndex(heapIndex, value);
-
-    auto parent = heapIndex;
-    auto child = 2 * parent + 1;
-    auto maxChild = child;
-    while (child < elementsNumber)
-    {
-        // 至少有一个child存在。找到最大值之一。
-
-        if (child < elementsNumber - 1)
-        {
-            // 两个child的存在。
-            if (const auto childRight = child + 1; IsStoredValueLessEqual(child, childRight))
-                maxChild = child;
-            else
-                maxChild = childRight;
-        }
-        else
-        {
-            // 一个child的存在。
-            maxChild = child;
-        }
-
-        if (value <= recordStoredManager.GetValueByHeapIndex(maxChild))
-        {
-            // 新的值是在正确的位置，已恢复树为一个堆。
-            break;
-        }
-        else
-        {
-            // child比parent的值更大。
-            // 交换maxChild和parent的插槽。
-            recordStoredManager.ChangeValue(maxChild, parent);
-
-            parent = maxChild;
-            child = 2 * parent + 1;
-        }
     }
-
-    return parent;
 }
 
-template <typename Generator, typename Scalar>
-int CoreTools::MinHeap<Generator, Scalar>::RestoringValidHeapInUpdateSmallerValue(int heapIndex, Scalar value)
+template <typename T>
+typename CoreTools::MinHeap<T>::MinHeapNodeContainer CoreTools::MinHeap<T>::GetNodes() const
 {
-    recordStoredManager.SetValueByHeapIndex(heapIndex, value);
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    // 新值小于旧值。它向根传播。
-    auto child = heapIndex;
+    return nodes;
+}
 
-    while (0 < child)
-    {
-        // 一个parent存在。
-        if (const auto parent = (child - 1) / 2; recordStoredManager.GetValueByHeapIndex(parent) <= value)
-        {
-            // 新的值是在正确的位置，已恢复树为一个堆。
-            break;
-        }
-        else
-        {
-            // child比parent的值更小。交换child和parent的插槽。
-            recordStoredManager.ChangeValue(child, parent);
+template <typename T>
+typename CoreTools::MinHeap<T>::MinHeapNode CoreTools::MinHeap<T>::GetNode(int key) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-            child = parent;
-        }
-    }
+    return nodes.at(key);
+}
 
-    return child;
+template <typename T>
+int CoreTools::MinHeap<T>::GetHandle(int key) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return nodes.at(key).GetHandle();
+}
+
+template <typename T>
+T CoreTools::MinHeap<T>::GetWeight(int key) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return nodes.at(key).GetWeight();
 }
 
 #endif  // CORE_TOOLS_DATA_TYPE_MIN_HEAP_DETAIL_H

@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 17:11)
+///	版本：0.9.1.4 (2023/09/16 10:14)
 
 #include "ActiveMQRouteServiceTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/UnitTest/AssertExceptionMacro.h"
-#include "CoreTools/Helper/UnitTest/AssertTestMacro.h"
+#include "CoreTools/Helper/UnitTest/AssertExceptionMacro.h" 
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/AnalysisNetworkConfiguration.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
@@ -68,7 +67,7 @@ void Network::ActiveMQRouteServiceTesting::CreateMessage()
     MESSAGE_MANAGER_SINGLETON.Insert(messageId, MessageTypeCondition::CreateNullCondition(), NullMessage::Factory);
 }
 
-void Network::ActiveMQRouteServiceTesting::DestroyMessage()  
+void Network::ActiveMQRouteServiceTesting::DestroyMessage()
 {
     MESSAGE_MANAGER_SINGLETON.Remove(messageId);
 }

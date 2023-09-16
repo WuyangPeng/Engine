@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/11 20:37)
+///	版本：0.9.1.4 (2023/08/28 17:14)
 
 #ifndef SYSTEM_FILE_MANAGER_FILE_H
 #define SYSTEM_FILE_MANAGER_FILE_H
@@ -14,8 +14,6 @@
 
 #include "Fwd/FileFlagsFwd.h"
 #include "Using/CFileUsing.h"
-#include "Using/FileToolsUsing.h"
-#include "Using/FileUsing.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
 
 // 文件的打开、关闭、创建、读写和删除。

@@ -38,7 +38,7 @@ bool Mathematics::Box2<Real>::IsValid() const noexcept
 {
     try
     {
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26446)
 
         if (axis[0].IsNormalize(epsilon) &&
@@ -46,7 +46,7 @@ bool Mathematics::Box2<Real>::IsValid() const noexcept
             -epsilon <= extent[0] &&
             -epsilon <= extent[1])
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
         {
             return true;
         }
@@ -92,12 +92,12 @@ typename Mathematics::Box2<Real>::Vector2 Mathematics::Box2<Real>::GetAxis0() co
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return axis[0];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -105,12 +105,12 @@ typename Mathematics::Box2<Real>::Vector2 Mathematics::Box2<Real>::GetAxis1() co
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return axis[1];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -118,12 +118,12 @@ Real Mathematics::Box2<Real>::GetExtent0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return extent[0];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -131,12 +131,12 @@ Real Mathematics::Box2<Real>::GetExtent1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return extent[1];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/03 12:11)
+///	版本：0.9.1.4 (2023/09/01 10:05)
 
 #include "HeapTestingBase.h"
 #include "System/MemoryTools/Flags/HeapToolsFlags.h"
@@ -20,8 +20,8 @@ System::HeapTestingBase::HeapTestingBase(const OStreamShared& stream)
                    HeapCreate::NoSerialize,
                    HeapCreate::GenerateExceptions,
                    HeapCreate::ZeroMemory,
-                   HeapCreate::ReallocInPlaceOnly,
-                   HeapCreate::Growable,
+                   HeapCreate::ReAllocInPlaceOnly,
+                   HeapCreate::GrowAble,
                    HeapCreate::TailCheckingEnabled,
                    HeapCreate::FreeCheckingEnabled,
                    HeapCreate::DisableCoalesceOnFree,

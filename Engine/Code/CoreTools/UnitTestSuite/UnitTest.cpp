@@ -275,52 +275,52 @@ void CoreTools::UnitTest::AssertExceptionFatalLog(const FunctionDescribed& funct
 
 void CoreTools::UnitTest::AssertFloatingPointCompleteEqual(float lhs, float rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     const auto completeLhs = *reinterpret_cast<uint32_t*>(&lhs);
     const auto completeRhs = *reinterpret_cast<uint32_t*>(&rhs);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     AssertEqual(completeLhs, completeRhs, functionDescribed, errorMessage, failureThrow);
 }
 
 void CoreTools::UnitTest::AssertFloatingPointCompleteEqual(double lhs, double rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     const auto completeLhs = *reinterpret_cast<uint64_t*>(&lhs);
     const auto completeRhs = *reinterpret_cast<uint64_t*>(&rhs);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     AssertEqual(completeLhs, completeRhs, functionDescribed, errorMessage, failureThrow);
 }
 
 void CoreTools::UnitTest::AssertFloatingPointCompleteUnequal(float lhs, float rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     const auto completeLhs = *reinterpret_cast<uint32_t*>(&lhs);
     const auto completeRhs = *reinterpret_cast<uint32_t*>(&rhs);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     AssertUnequal(completeLhs, completeRhs, functionDescribed, errorMessage, failureThrow);
 }
 
 void CoreTools::UnitTest::AssertFloatingPointCompleteUnequal(double lhs, double rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     const auto completeLhs = *reinterpret_cast<uint64_t*>(&lhs);
     const auto completeRhs = *reinterpret_cast<uint64_t*>(&rhs);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     AssertUnequal(completeLhs, completeRhs, functionDescribed, errorMessage, failureThrow);
 }

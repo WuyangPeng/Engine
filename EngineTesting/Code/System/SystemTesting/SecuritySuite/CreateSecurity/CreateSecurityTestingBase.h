@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/25 18:27)
+///	版本：0.9.1.4 (2023/09/01 13:43)
 
 #ifndef SYSTEM_SECURITY_SUITE_CREATE_SECURITY_TESTING_BASE_H
 #define SYSTEM_SECURITY_SUITE_CREATE_SECURITY_TESTING_BASE_H
@@ -50,7 +50,7 @@ namespace System
         NODISCARD AccessCheckGenericMapping GetAccessCheckGenericMapping() noexcept;
 
     private:
-        SecurityRequestedInformationContainer securityRequestedInformations;
+        SecurityRequestedInformationContainer securityRequestedInformationContainer;
         SecurityAutoInheritContainer securityAutoInherits;
         bool tokenIsElevated;
     };

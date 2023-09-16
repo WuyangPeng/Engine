@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王测试版本：0.9.0.12 (2023/06/17 13:50)
+/// 标准：std:c++20
+/// 版本：0.9.1.4 (2023/08/25 15:12)
 
 #ifndef THE_LAST_OVERLORD_TESTING_TESTING_HELPER_H
 #define THE_LAST_OVERLORD_TESTING_TESTING_HELPER_H
 
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
 
-namespace TheLastOverlord
+namespace TheLastOverlordTesting
 {
     class TestingHelper final : public CoreTools::CMainFunctionTestingHelper
     {

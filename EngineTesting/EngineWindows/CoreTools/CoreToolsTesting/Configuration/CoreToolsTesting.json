@@ -317,11 +317,7 @@
   "dataTypesSuite": {
     "TupleTesting": 1,
     "TupleLessTesting": 1,
-    "TableTesting": 1,
-    "MinHeapRecordTesting": 1,
-    "MinHeapRecordStoredTesting": 1,
-    "MinHeapRecordIndexTesting": 1,
-    "MinHeapRecordStoredManagerTesting": 1,
+    "TableTesting": 1, 
     "MinHeapTesting": 1,
     "ThreadSafeMapTesting": 1,
     "ThreadSafeQueueTesting": 1

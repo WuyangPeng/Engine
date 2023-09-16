@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/15 23:35)
+///	版本：0.9.1.4 (2023/08/29 23:29)
 
 #ifndef SYSTEM_OPENGL_OPENGL_BUFFERS_H
 #define SYSTEM_OPENGL_OPENGL_BUFFERS_H
@@ -14,7 +14,6 @@
 
 #include "Fwd/OpenGLFlagsFwd.h"
 #include "Using/OpenGLUsing.h"
-#include "System/Helper/GLExtensionsMacro.h"
 
 namespace System
 {
@@ -31,11 +30,11 @@ namespace System
     void SYSTEM_DEFAULT_DECLARE SetGLBindBufferRange(BindBuffer target, OpenGLUInt index, OpenGLUInt buffer, OpenGLIntPtr offset, OpenGLSizePtr size) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLCopyBufferSubData(BindBuffer readTarget, BindBuffer writeTarget, OpenGLIntPtr readOffset, OpenGLIntPtr writeOffset, OpenGLSizePtr size) noexcept;
 
-    void SYSTEM_DEFAULT_DECLARE GetGLGenFramebuffers(OpenGLSize n, OpenGLUInt* framebuffers) noexcept;
-    NODISCARD OpenGLUInt SYSTEM_DEFAULT_DECLARE GetGLGenFramebuffers() noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLBindFramebuffer(FrameBufferType target, OpenGLUInt framebuffer) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLDeleteFramebuffers(OpenGLSize n, const OpenGLUInt* framebuffers) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLDeleteFramebuffers(OpenGLUInt framebuffers) noexcept;
+    void SYSTEM_DEFAULT_DECLARE GetGLGenFrameBuffers(OpenGLSize n, OpenGLUInt* frameBuffers) noexcept;
+    NODISCARD OpenGLUInt SYSTEM_DEFAULT_DECLARE GetGLGenFrameBuffers() noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLBindFrameBuffer(FrameBufferType target, OpenGLUInt frameBuffer) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLDeleteFrameBuffers(OpenGLSize n, const OpenGLUInt* frameBuffers) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLDeleteFrameBuffers(OpenGLUInt frameBuffers) noexcept;
 
     void SYSTEM_DEFAULT_DECLARE GetGLGenVertexArrays(OpenGLSize n, OpenGLUInt* arrays) noexcept;
     NODISCARD OpenGLUInt SYSTEM_DEFAULT_DECLARE GetGLGenVertexArrays() noexcept;
@@ -43,12 +42,12 @@ namespace System
     void SYSTEM_DEFAULT_DECLARE SetGLDeleteVertexArrays(OpenGLSize n, const OpenGLUInt* arrays) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLDeleteVertexArrays(OpenGLUInt arrays) noexcept;
 
-    void SYSTEM_DEFAULT_DECLARE SetGLEnableVertexAttribArray(OpenGLUInt index) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLEnableVertexAttributeArray(OpenGLUInt index) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLBindVertexBuffer(OpenGLUInt bindingIndex, OpenGLUInt buffer, OpenGLIntPtr offset, OpenGLSize stride) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLVertexAttribFormat(OpenGLUInt attribIndex, OpenGLInt size, OpenGLData type, OpenGLBoolean normalized, OpenGLUInt relativeOffset) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLVertexAttribBinding(OpenGLUInt attribIndex, OpenGLUInt bindingIndex) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLVertexAttributeFormat(OpenGLUInt attributeIndex, OpenGLInt size, OpenGLData type, OpenGLBoolean normalized, OpenGLUInt relativeOffset) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLVertexAttributeBinding(OpenGLUInt attributeIndex, OpenGLUInt bindingIndex) noexcept;
 
-    void SYSTEM_DEFAULT_DECLARE SetGLDrawBuffers(OpenGLSize n, const OpenGLEnum* bufs) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLDrawBuffers(OpenGLSize n, const OpenGLEnum* buffers) noexcept;
 }
 
 #endif  // SYSTEM_OPENGL_OPENGL_BUFFERS_H

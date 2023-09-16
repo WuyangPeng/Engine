@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 10:05)
+///	版本：0.9.1.4 (2023/09/01 15:07)
 
 #include "CreateMutexUseFlagsTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -21,8 +21,8 @@
 
 System::CreateMutexUseFlagsTesting::CreateMutexUseFlagsTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      createMutexs{ MutexCreate::Default,
-                    MutexCreate::InitialOwner },
+      createMutexContainer{ MutexCreate::Default,
+                            MutexCreate::InitialOwner },
       mutexSpecificAccesses{ MutexSpecificAccess::Default,
                              MutexSpecificAccess::ModifyState,
                              MutexSpecificAccess::AllAccess },
@@ -31,7 +31,8 @@ System::CreateMutexUseFlagsTesting::CreateMutexUseFlagsTesting(const OStreamShar
                              MutexStandardAccess::WriteDac,
                              MutexStandardAccess::WriteOwner,
                              MutexStandardAccess::Synchronize },
-      maxSize{ CoreTools::MaxElement<size_t>({ createMutexs.size(), mutexSpecificAccesses.size(), mutexStandardAccesses.size() }) }
+      randomEngine{ GetEngineRandomSeed() },
+      maxSize{ CoreTools::MaxElement<size_t>({ createMutexContainer.size(), mutexSpecificAccesses.size(), mutexStandardAccesses.size() }) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -50,9 +51,9 @@ void System::CreateMutexUseFlagsTesting::MainTest()
 
 bool System::CreateMutexUseFlagsTesting::RandomShuffleFlags()
 {
-    shuffle(mutexStandardAccesses.begin(), mutexStandardAccesses.end(), randomEngine);
-    shuffle(mutexSpecificAccesses.begin(), mutexSpecificAccesses.end(), randomEngine);
-    shuffle(createMutexs.begin(), createMutexs.end(), randomEngine);
+    std::ranges::shuffle(mutexStandardAccesses, randomEngine);
+    std::ranges::shuffle(mutexSpecificAccesses, randomEngine);
+    std::ranges::shuffle(createMutexContainer, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateMutexTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CreateMutexUseNameTest);
@@ -72,7 +73,7 @@ void System::CreateMutexUseFlagsTesting::DoCreateMutexTest(size_t index)
 {
     const auto mutexStandardAccess = mutexStandardAccesses.at(index % mutexStandardAccesses.size());
     const auto mutexSpecificAccess = mutexSpecificAccesses.at(index % mutexSpecificAccesses.size());
-    const auto createMutex = createMutexs.at(index % createMutexs.size());
+    const auto createMutex = createMutexContainer.at(index % createMutexContainer.size());
 
     const auto mutexHandle = CreateSystemMutex(nullptr, nullptr, createMutex, mutexStandardAccess, mutexSpecificAccess);
     ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
@@ -94,7 +95,7 @@ void System::CreateMutexUseFlagsTesting::DoCreateMutexUseNameTest(size_t index)
 
     const auto mutexStandardAccess = mutexStandardAccesses.at(index % mutexStandardAccesses.size());
     const auto mutexSpecificAccess = mutexSpecificAccesses.at(index % mutexSpecificAccesses.size());
-    const auto createMutex = createMutexs.at(index % createMutexs.size());
+    const auto createMutex = createMutexContainer.at(index % createMutexContainer.size());
 
     const auto mutexHandle = CreateSystemMutex(nullptr, mutexName.c_str(), createMutex, mutexStandardAccess, mutexSpecificAccess);
     ASSERT_TRUE(IsSystemMutexValid(mutexHandle));

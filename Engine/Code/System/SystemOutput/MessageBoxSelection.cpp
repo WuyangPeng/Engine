@@ -5,13 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/29 23:48)
+///	版本：0.9.1.4 (2023/08/30 18:08)
 
 #include "System/SystemExport.h"
 
 #include "MessageBoxSelection.h"
 #include "Flags/MessageBoxFlags.h"
-#include "Data/LanguageIDData.h"
+#include "Data/LanguageIdData.h"
 #include "Data/MessageBoxFlagsData.h"
 #include "System/Helper/EnumCast.h"
 
@@ -63,41 +63,41 @@ System::DialogBoxCommand System::MessageBoxSelectionWithTChar(const TChar* text,
     return MessageBoxSelection(nullptr, text, caption, defaultMessageBoxFlagsData);
 }
 
-System::DialogBoxCommand System::MessageBoxSelection(WindowsHWnd hwnd,
+System::DialogBoxCommand System::MessageBoxSelection(WindowsHWnd hWnd,
                                                      const TChar* text,
                                                      const TChar* caption,
                                                      const MessageBoxFlagsData& flagsData) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    const auto selection = ::MessageBox(hwnd, text, caption, flagsData.GetFlag());
+    const auto selection = ::MessageBox(hWnd, text, caption, flagsData.GetFlag());
 
     return UnderlyingCastEnum<DialogBoxCommand>(selection);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd, text, caption, flagsData);
+    UnusedFunction(hWnd, text, caption, flagsData);
 
     return DialogBoxCommand::PlatformUnknown;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::DialogBoxCommand System::MessageBoxSelection(WindowsHWnd hwnd,
+System::DialogBoxCommand System::MessageBoxSelection(WindowsHWnd hWnd,
                                                      const TChar* text,
                                                      const TChar* caption,
                                                      const MessageBoxFlagsData& flagsData,
-                                                     const LanguageIDData& languageIDData) noexcept
+                                                     const LanguageIdData& languageIdData) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    const auto selection = ::MessageBoxEx(hwnd, text, caption, flagsData.GetFlag(), languageIDData.GetLanguageID());
+    const auto selection = ::MessageBoxEx(hWnd, text, caption, flagsData.GetFlag(), languageIdData.GetLanguageId());
 
     return UnderlyingCastEnum<DialogBoxCommand>(selection);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd, text, caption, flagsData, languageIDData);
+    UnusedFunction(hWnd, text, caption, flagsData, languageIdData);
 
     return DialogBoxCommand::PlatformUnknown;
 

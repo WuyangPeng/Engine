@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/06 23:50)
+///	版本：0.9.1.4 (2023/08/29 17:30)
 
 #ifndef SYSTEM_NETWORK_WINDOWS_EXTENSION_PROTOTYPES_FLAGS_H
 #define SYSTEM_NETWORK_WINDOWS_EXTENSION_PROTOTYPES_FLAGS_H
@@ -49,7 +49,7 @@ namespace System
         EAcces = WSAEACCES,
         EFault = WSAEFAULT,
         EInval = WSAEINVAL,
-        EMFile = WSAEMFILE,
+        EmFile = WSAEMFILE,
         EWouldBlock = WSAEWOULDBLOCK,
         EInProgress = WSAEINPROGRESS,
         EAlready = WSAEALREADY,
@@ -59,14 +59,14 @@ namespace System
         EProtoType = WSAEPROTOTYPE,
         ENoProtoOpt = WSAENOPROTOOPT,
         EProtoNoSupport = WSAEPROTONOSUPPORT,
-        ESocktNoSupport = WSAESOCKTNOSUPPORT,
+        ESockTNoSupport = WSAESOCKTNOSUPPORT,
         EOpNotSupp = WSAEOPNOTSUPP,
         EPfNoSupport = WSAEPFNOSUPPORT,
         EAfNoSupport = WSAEAFNOSUPPORT,
-        EAddrInuse = WSAEADDRINUSE,
+        EAddrInUse = WSAEADDRINUSE,
         EAddrNotAvail = WSAEADDRNOTAVAIL,
         ENetDown = WSAENETDOWN,
-        ENetUnreach = WSAENETUNREACH,
+        ENetUnReach = WSAENETUNREACH,
         ENetReset = WSAENETRESET,
         EConnAborted = WSAECONNABORTED,
         EConnReset = WSAECONNRESET,
@@ -121,7 +121,7 @@ namespace System
         QosEFlowspec = WSA_QOS_EFLOWSPEC,
         QosEProvspecBuf = WSA_QOS_EPROVSPECBUF,
         QosEFilterStyle = WSA_QOS_EFILTERSTYLE,
-        QosEFiltertype = WSA_QOS_EFILTERTYPE,
+        QosEFilterType = WSA_QOS_EFILTERTYPE,
         QosEFilterCount = WSA_QOS_EFILTERCOUNT,
         QosEObjLength = WSA_QOS_EOBJLENGTH,
         QosEFlowCount = WSA_QOS_EFLOWCOUNT,
@@ -132,7 +132,7 @@ namespace System
         QosEpsFilterSpec = WSA_QOS_EPSFILTERSPEC,
         QosEsdmodeObj = WSA_QOS_ESDMODEOBJ,
         QosEshaperateObj = WSA_QOS_ESHAPERATEOBJ,
-        QosReservedPetype = WSA_QOS_RESERVED_PETYPE,
+        QosReservedPeType = WSA_QOS_RESERVED_PETYPE,
         SecureHostNotFound = WSA_SECURE_HOST_NOT_FOUND,
         IpsecNamePolicyError = WSA_IPSEC_NAME_POLICY_ERROR,
     };
@@ -181,7 +181,7 @@ namespace System
         EAcces = 10013L,
         EFault = 10014L,
         EInval = 10022L,
-        EMFile = 10024L,
+        EmFile = 10024L,
         EWouldBlock = 10035L,
         EInProgress = 10036L,
         EAlready = 10037L,
@@ -191,14 +191,14 @@ namespace System
         EProtoType = 10041L,
         ENoProtoOpt = 10042L,
         EProtoNoSupport = 10043L,
-        ESocktNoSupport = 10044L,
+        ESockTNoSupport = 10044L,
         EOpNotSupp = 10045L,
         EPfNoSupport = 10046L,
         EAfNoSupport = 10047L,
-        EAddrInuse = 10048L,
+        EAddrInUse = 10048L,
         EAddrNotAvail = 10049L,
         ENetDown = 10050L,
-        ENetUnreach = 10051L,
+        ENetUnReach = 10051L,
         ENetReset = 10052L,
         EConnAborted = 10053L,
         EConnReset = 10054L,
@@ -253,7 +253,7 @@ namespace System
         QosEFlowspec = 11017L,
         QosEProvspecBuf = 11018L,
         QosEFilterStyle = 11019L,
-        QosEFiltertype = 11020L,
+        QosEFilterType = 11020L,
         QosEFilterCount = 11021L,
         QosEObjLength = 11022L,
         QosEFlowCount = 11023L,
@@ -264,7 +264,7 @@ namespace System
         QosEpsFilterSpec = 11028L,
         QosEsdmodeObj = 11029L,
         QosEshaperateObj = 11030L,
-        QosReservedPetype = 11031L,
+        QosReservedPeType = 11031L,
         SecureHostNotFound = 11032L,
         IpsecNamePolicyError = 11033L,
     };

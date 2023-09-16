@@ -39,12 +39,12 @@ void CoreTools::CallConstMemberFunctionMacroTesting::ConstMemberFunctionTest()
     ASSERT_EQUAL(memberFunctionMacro.ConstMemberFunction(), "");
     ASSERT_EQUAL(memberFunctionMacro.ConstMemberFunction(""), "");
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     ASSERT_EQUAL(memberFunctionMacro[0], "");
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     ASSERT_EQUAL(*memberFunctionMacro[""], "");
 }
@@ -56,12 +56,12 @@ void CoreTools::CallConstMemberFunctionMacroTesting::NonConstMemberFunctionTest(
     ASSERT_EQUAL(memberFunctionMacro.ConstMemberFunction(), memberFunctionMacro.NonConstCopyMemberFunction());
     ASSERT_EQUAL(memberFunctionMacro.ConstMemberFunction(""), memberFunctionMacro.NonConstCopyMemberFunction(""));
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     ASSERT_EQUAL(memberFunctionMacro[0], "");
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     ASSERT_EQUAL(*memberFunctionMacro[""], "");
 }

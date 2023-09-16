@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 18:57)
+///	版本：0.9.1.4 (2023/08/29 23:37)
 
 #include "System/SystemExport.h"
 
 #include "GL41Extensions.h"
-#include "GLUtility.h"
 #include "System/Helper/Detail/OpenGL/GLPluginMacro.h"
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/OpenGL/OpenGLUtility.h"
@@ -118,7 +117,7 @@ System::ExistsOpenGLExtensions System::IsExistsOpenGL41() noexcept
 
 void System::InitOpenGL41() noexcept
 {
-    if (System::OpenGLSystemVersion::Version41 <= System::GetOpenGLVersion())
+    if (OpenGLSystemVersion::Version41 <= System::GetOpenGLVersion())
     {
         existsOpenGL41 = ExistsOpenGLExtensions::Exists;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 15:43)
+///	版本：0.9.1.4 (2023/09/01 15:18)
 
 #include "ReleaseSemaphoreTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -35,11 +35,11 @@ void System::ReleaseSemaphoreTesting::MainTest()
 
 void System::ReleaseSemaphoreTesting::InitReleaseTest()
 {
-    constexpr WindowsLong maxSemphoreCount{ 10 };
+    constexpr WindowsLong maxSemaphoreCount{ 10 };
 
-    const auto semaphoreHandle = CreateSystemSemaphore(0, maxSemphoreCount);
+    const auto semaphoreHandle = CreateSystemSemaphore(0, maxSemaphoreCount);
 
-    ASSERT_NOT_THROW_EXCEPTION_2(DoInitReleaseTest, semaphoreHandle, maxSemphoreCount);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoInitReleaseTest, semaphoreHandle, maxSemaphoreCount);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CreateThread, semaphoreHandle);
 
@@ -63,17 +63,19 @@ void System::ReleaseSemaphoreTesting::CreateThread(WindowsHandle semaphoreHandle
     boost::thread_group threadGroup;
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest, this, semaphoreHandle));
+        threadGroup.create_thread([this, semaphoreHandle]() {
+            this->WaitForSemaphoreTest(semaphoreHandle);
+        });
     }
 
     threadGroup.join_all();
 }
 
-void System::ReleaseSemaphoreTesting::DoInitReleaseTest(WindowsHandle semaphoreHandle, WindowsLong maxSemphoreCount)
+void System::ReleaseSemaphoreTesting::DoInitReleaseTest(WindowsHandle semaphoreHandle, WindowsLong maxSemaphoreCount)
 {
     ASSERT_TRUE(IsSystemSemaphoreValid(semaphoreHandle));
 
-    for (WindowsLong index{ 0 }; index < maxSemphoreCount; ++index)
+    for (WindowsLong index{ 0 }; index < maxSemaphoreCount; ++index)
     {
         WindowsLong previousCount{ 0 };
         ASSERT_TRUE(ReleaseSystemSemaphore(semaphoreHandle, 1, &previousCount));

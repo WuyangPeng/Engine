@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/14 22:11)
+///	版本：0.9.1.4 (2023/08/31 17:19)
 
 #include "FileLengthTesting.h"
 #include "System/FileManager/File.h"
@@ -18,11 +18,9 @@
 
 #include <vector>
 
-using namespace std::literals;
-
 System::FileLengthTesting::FileLengthTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      fileName{ SYSTEM_TEXT("Resource/FileTesting/FileLength.txt"s) },
+      fileName{ SYSTEM_TEXT("Resource/FileTesting/FileLength.txt") },
       fileContent{ CoreTools::Version::GetVersion() }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
@@ -54,7 +52,7 @@ void System::FileLengthTesting::WriteFileTest(WindowsHandle handle)
 {
     ASSERT_NOT_THROW_EXCEPTION_1(IsFileHandleValidTest, handle);
 
-    std::vector<char> buffer{ fileContent.begin(), fileContent.end() };
+    const std::vector<char> buffer{ fileContent.begin(), fileContent.end() };
 
     WindowsDWord outNumber{ 0 };
     ASSERT_TRUE(WriteSystemFile(handle, buffer.data(), boost::numeric_cast<WindowsDWord>(buffer.size()), &outNumber));

@@ -48,7 +48,7 @@ bool Mathematics::Ellipsoid3<Real>::IsValid() const noexcept
 {
     try
     {
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26446)
 
         if (axis[0].IsNormalize(epsilon) &&
@@ -59,7 +59,7 @@ bool Mathematics::Ellipsoid3<Real>::IsValid() const noexcept
             -epsilon <= extent[2] &&
             Math::GetValue(0) <= epsilon)
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
         {
             return true;
         }
@@ -89,12 +89,12 @@ Mathematics::Vector3<Real> Mathematics::Ellipsoid3<Real>::GetAxis0() const noexc
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return axis[0];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -102,12 +102,12 @@ Mathematics::Vector3<Real> Mathematics::Ellipsoid3<Real>::GetAxis1() const noexc
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return axis[1];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -115,12 +115,12 @@ Mathematics::Vector3<Real> Mathematics::Ellipsoid3<Real>::GetAxis2() const noexc
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return axis[2];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -128,12 +128,12 @@ Real Mathematics::Ellipsoid3<Real>::GetExtent0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return extent[0];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -141,12 +141,12 @@ Real Mathematics::Ellipsoid3<Real>::GetExtent1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return extent[1];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -154,12 +154,12 @@ Real Mathematics::Ellipsoid3<Real>::GetExtent2() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return extent[2];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -239,7 +239,7 @@ void Mathematics::Ellipsoid3<Real>::FromCoefficients(const Ellipsoid3Coefficient
             THROW_EXCEPTION(SYSTEM_TEXT("³ýÁã´íÎó£¡"s));
         }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
@@ -247,7 +247,7 @@ void Mathematics::Ellipsoid3<Real>::FromCoefficients(const Ellipsoid3Coefficient
 
         axis[i] = Vector3{ rotation(0, i), rotation(1, i), rotation(2, i) };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 

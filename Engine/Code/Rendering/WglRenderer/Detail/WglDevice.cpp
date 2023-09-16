@@ -12,11 +12,12 @@
 #include "WglDevice.h"
 #include "System/OpenGL/OpenGLWglPrototypes.h"
 #include "System/Windows/WindowsSystem.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 Rendering::WglDevice::WglDevice(WindowsHWnd hWnd, WindowsHDC device, OpenGLHglrc immediate)
-    : ParentType{}, hWnd{ hWnd }, device{ device }, immediate{ immediate }
+    : ParentType{ CoreTools::DisableNotThrow::Disable }, hWnd{ hWnd }, device{ device }, immediate{ immediate }
 {
     Init();
 

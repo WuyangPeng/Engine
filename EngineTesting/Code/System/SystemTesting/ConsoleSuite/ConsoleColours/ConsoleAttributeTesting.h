@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/03 20:36)
+///	版本：0.9.1.4 (2023/08/31 16:28)
 
 #ifndef SYSTEM_CONSOLE_SUITE_CONSOLE_ATTRIBUTE_TESTING_H
 #define SYSTEM_CONSOLE_SUITE_CONSOLE_ATTRIBUTE_TESTING_H
@@ -54,8 +54,8 @@ namespace System
         using ConsoleCommonContainer = std::vector<ConsoleCommon>;
 
     private:
-        TextColourContainer textColours;
-        BackgroundColourContainer backgroundColours;
+        TextColourContainer textColourContainer;
+        BackgroundColourContainer backgroundColourContainer;
         ConsoleCommonContainer consoleCommons;
         std::default_random_engine randomEngine;
         size_t maxSize;

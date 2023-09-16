@@ -50,6 +50,7 @@ namespace Rendering
         NODISCARD virtual RenderingDeviceSharedPtr Clone() const = 0;
         virtual void ResetSize() = 0;
         virtual void InitDevice() = 0;
+        virtual void Release() = 0;
 
         virtual void SwapBuffers(int syncInterval) = 0;
 

@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 22:39)
+///	版本：0.9.1.4 (2023/08/29 23:23)
 
 #ifndef SYSTEM_OPENGL_OPENGL_FLAGS_H
 #define SYSTEM_OPENGL_OPENGL_FLAGS_H
 
-#include "System/Helper/EnumOperator.h"
 #include "System/Helper/GLExtensionsMacro.h"
 
 namespace System
@@ -96,7 +95,7 @@ namespace System
         ArrayBuffer = GL_ARRAY_BUFFER,
         ElementArrayBuffer = GL_ELEMENT_ARRAY_BUFFER,
         PixelUnpackBuffer = GL_PIXEL_UNPACK_BUFFER,
-        PixePackBuffer = GL_PIXEL_PACK_BUFFER,
+        PixelPackBuffer = GL_PIXEL_PACK_BUFFER,
         ShaderStorageBuffer = GL_SHADER_STORAGE_BUFFER,
         UniformBuffer = GL_UNIFORM_BUFFER,
         CopyReadBuffer = GL_COPY_READ_BUFFER,
@@ -180,7 +179,7 @@ namespace System
         A = GL_ALPHA,
         BGRA = GL_BGRA,
         RG = GL_RG,
-        RED = GL_RED,
+        Red = GL_RED,
         D24S8 = GL_DEPTH_STENCIL
     };
 
@@ -325,9 +324,13 @@ namespace System
         Point = GL_POINTS,
         Lines = GL_LINES,
         LinesStrip = GL_LINE_STRIP,
+        LinesAdjacency = GL_LINES_ADJACENCY,
+        LinesStripAdjacency = GL_LINE_STRIP_ADJACENCY,
         Triangles = GL_TRIANGLES,
         TrianglesStrip = GL_TRIANGLE_STRIP,
         TrianglesFan = GL_TRIANGLE_FAN,
+        TrianglesAdjacency = GL_TRIANGLES_ADJACENCY,
+        TrianglesStripAdjacency = GL_TRIANGLE_STRIP_ADJACENCY,
     };
 
     enum class TextureCubeMap
@@ -376,7 +379,7 @@ namespace System
         Type31 = GL_TEXTURE31,
     };
 
-    enum class ColorAttachent
+    enum class ColorAttachment
     {
         Color0 = GL_COLOR_ATTACHMENT0,
         Color1 = GL_COLOR_ATTACHMENT1,
@@ -401,7 +404,7 @@ namespace System
         Back = GL_BACK,
     };
 
-    enum class CheckFrambufferStatus
+    enum class CheckFrameBufferStatus
     {
         Null,
         Complete = GL_FRAMEBUFFER_COMPLETE,
@@ -414,8 +417,8 @@ namespace System
 
     enum class FrameBufferType
     {
-        DrawFramebuffer = GL_DRAW_FRAMEBUFFER,
-        Framebuffer = GL_FRAMEBUFFER,
+        DrawFrameBuffer = GL_DRAW_FRAMEBUFFER,
+        FrameBuffer = GL_FRAMEBUFFER,
     };
 
     enum class AttributeUsage
@@ -517,8 +520,8 @@ namespace System
         Sampler2DArray = GL_SAMPLER_2D_ARRAY,
         Sampler1DArrayShadow = GL_SAMPLER_1D_ARRAY_SHADOW,
         Sampler2DArrayShadow = GL_SAMPLER_2D_ARRAY_SHADOW,
-        Sampler2DMultisample = GL_SAMPLER_2D_MULTISAMPLE,
-        Sampler2DMultisampleArray = GL_SAMPLER_2D_MULTISAMPLE_ARRAY,
+        Sampler2DMultiSample = GL_SAMPLER_2D_MULTISAMPLE,
+        Sampler2DMultiSampleArray = GL_SAMPLER_2D_MULTISAMPLE_ARRAY,
         SamplerCubeShadow = GL_SAMPLER_CUBE_SHADOW,
         SamplerCubeMapArray = GL_SAMPLER_CUBE_MAP_ARRAY,
         SamplerCubeMapArrayShadow = GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW,
@@ -531,8 +534,8 @@ namespace System
         IntSamplerCube = GL_INT_SAMPLER_CUBE,
         IntSampler1DArray = GL_INT_SAMPLER_1D_ARRAY,
         IntSampler2DArray = GL_INT_SAMPLER_2D_ARRAY,
-        IntSampler2DMultisample = GL_INT_SAMPLER_2D_MULTISAMPLE,
-        IntSampler2DMultisampleArray = GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY,
+        IntSampler2DMultiSample = GL_INT_SAMPLER_2D_MULTISAMPLE,
+        IntSampler2DMultiSampleArray = GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY,
         IntSamplerCubeMapArray = GL_INT_SAMPLER_CUBE_MAP_ARRAY,
         IntSamplerBuffer = GL_INT_SAMPLER_BUFFER,
         IntSampler2DRect = GL_INT_SAMPLER_2D_RECT,
@@ -542,8 +545,8 @@ namespace System
         UnsignedIntSamplerCube = GL_UNSIGNED_INT_SAMPLER_CUBE,
         UnsignedIntSampler1DArray = GL_UNSIGNED_INT_SAMPLER_1D_ARRAY,
         UnsignedIntSampler2DArray = GL_UNSIGNED_INT_SAMPLER_2D_ARRAY,
-        UnsignedIntSampler2DMultisample = GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE,
-        UnsignedIntSampler2DMultisampleArray = GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY,
+        UnsignedIntSampler2DMultiSample = GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE,
+        UnsignedIntSampler2DMultiSampleArray = GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY,
         UnsignedIntSamplerCubeMapArray = GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY,
         UnsignedIntSamplerBuffer = GL_UNSIGNED_INT_SAMPLER_BUFFER,
         UnsignedIntSampler2DRect = GL_UNSIGNED_INT_SAMPLER_2D_RECT,
@@ -553,8 +556,8 @@ namespace System
         ImageCube = GL_IMAGE_CUBE,
         Image1DArray = GL_IMAGE_1D_ARRAY,
         Image2DArray = GL_IMAGE_2D_ARRAY,
-        Image2DMultisample = GL_IMAGE_2D_MULTISAMPLE,
-        Image2DMultisampleArray = GL_IMAGE_2D_MULTISAMPLE_ARRAY,
+        Image2DMultiSample = GL_IMAGE_2D_MULTISAMPLE,
+        Image2DMultiSampleArray = GL_IMAGE_2D_MULTISAMPLE_ARRAY,
         ImageCubeMapArray = GL_IMAGE_CUBE_MAP_ARRAY,
         ImageBuffer = GL_IMAGE_BUFFER,
         Image2DRect = GL_IMAGE_2D_RECT,
@@ -564,8 +567,8 @@ namespace System
         IntImageCube = GL_INT_IMAGE_CUBE,
         IntImage1DArray = GL_INT_IMAGE_1D_ARRAY,
         IntImage2DArray = GL_INT_IMAGE_2D_ARRAY,
-        IntImage2DMultisample = GL_INT_IMAGE_2D_MULTISAMPLE,
-        IntImage2DMultisampleArray = GL_INT_IMAGE_2D_MULTISAMPLE_ARRAY,
+        IntImage2DMultiSample = GL_INT_IMAGE_2D_MULTISAMPLE,
+        IntImage2DMultiSampleArray = GL_INT_IMAGE_2D_MULTISAMPLE_ARRAY,
         IntImageCubeMapArray = GL_INT_IMAGE_CUBE_MAP_ARRAY,
         IntImageBuffer = GL_INT_IMAGE_BUFFER,
         IntImage2DRect = GL_INT_IMAGE_2D_RECT,
@@ -575,8 +578,8 @@ namespace System
         UnsignedIntImageCube = GL_UNSIGNED_INT_IMAGE_CUBE,
         UnsignedIntImage1DArray = GL_UNSIGNED_INT_IMAGE_1D_ARRAY,
         UnsignedIntImage2DArray = GL_UNSIGNED_INT_IMAGE_2D_ARRAY,
-        UnsignedIntImage2DMultisample = GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE,
-        UnsignedIntImage2DMultisampleArray = GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY,
+        UnsignedIntImage2DMultiSample = GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE,
+        UnsignedIntImage2DMultiSampleArray = GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY,
         UnsignedIntImageCubeMapArray = GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY,
         UnsignedIntImageBuffer = GL_UNSIGNED_INT_IMAGE_BUFFER,
         UnsignedIntImage2DRect = GL_UNSIGNED_INT_IMAGE_2D_RECT,

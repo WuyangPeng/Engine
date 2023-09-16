@@ -37,12 +37,12 @@ void CoreTools::IntelCheckSum::Calculation(const char* data, int length) noexcep
         auto sum = 0;
         for (auto i = 0; i < length; ++i)
         {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
             sum += data[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
 
         intelCheckSum = -sum;

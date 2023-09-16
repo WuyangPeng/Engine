@@ -18,7 +18,7 @@
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26414)
 
 template <typename TestingType>

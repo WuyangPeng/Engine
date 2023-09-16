@@ -300,7 +300,7 @@ void Mathematics::FloatingPointAnalysisTesting::MantissaTest()
     }
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
 void Mathematics::FloatingPointAnalysisTesting::FloatTypeTest()
@@ -400,4 +400,4 @@ void Mathematics::FloatingPointAnalysisTesting::DoubleTypeTest()
     ASSERT_ENUM_EQUAL(fourthFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Zero);
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP

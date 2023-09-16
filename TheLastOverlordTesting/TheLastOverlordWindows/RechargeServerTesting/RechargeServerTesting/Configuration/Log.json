@@ -16,7 +16,8 @@
     "ArtificialIntellegence": 1,
     "UserInterface": 1,
     "AssistTools": 1,
-    "Framework": 1
+    "Framework": 1,
+    "User": 1
   },
 
   "Appender": {
@@ -34,7 +35,6 @@
       "Backup": true,
       "Extension": "log"
     },
-
 
     "Default": {
       "Directory": "Log",

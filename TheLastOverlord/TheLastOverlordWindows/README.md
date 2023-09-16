@@ -4,55 +4,55 @@
 最后的霸王工程
 
 ----------------------------
-TheLastOverlordWindows.props：
+TheLastOverlord.props：
 最后的霸王工程属性表
 
-TheLastOverlordWindowsStaticWin32DebugLibs.props：
+TheLastOverlordStaticWin32DebugLibs.props：
 引擎和游戏都编译成lib、Win32、Debug工程依赖库属性表
 
-TheLastOverlordWindowsStaticWin32ReleaseLibs.props：
+TheLastOverlordStaticWin32ReleaseLibs.props：
 引擎和游戏都编译成lib、Win32、Release工程依赖库属性表
 
-TheLastOverlordWindowsStaticX64DebugLibs.props：
+TheLastOverlordStaticX64DebugLibs.props：
 引擎和游戏都编译成lib、X64、Debug工程依赖库属性表
 
-TheLastOverlordWindowsStaticX64ReleaseLibs.props：
+TheLastOverlordStaticX64ReleaseLibs.props：
 引擎和游戏都编译成lib、X64、Release工程依赖库属性表
 
-TheLastOverlordWindowsWin32DebugLibs.props：
+TheLastOverlordWin32DebugLibs.props：
 引擎和游戏都编译成dll、Win32、Debug工程依赖库属性表
 
-TheLastOverlordWindowsWin32ReleaseLibs.props：
+TheLastOverlordWin32ReleaseLibs.props：
 引擎和游戏都编译成dll、Win32、Release工程依赖库属性表
 
-TheLastOverlordWindowsX64DebugLibs.props：
+TheLastOverlordX64DebugLibs.props：
 引擎和游戏都编译成dll、X64、Debug工程依赖库属性表
 
-TheLastOverlordWindowsX64ReleaseLibs.props：
+TheLastOverlordX64ReleaseLibs.props：
 引擎和游戏都编译成dll、X64、Release工程依赖库属性表
 
-TheLastOverlordWindowsEngineDynamicTheLastOverlordWindowsStaticWin32DebugLibs.props：
+TheLastOverlordEngineDynamicTheLastOverlordStaticWin32DebugLibs.props：
 引擎（dll）和游戏（lib）都编译成Win32、Debug工程依赖库属性表
 
-TheLastOverlordWindowsEngineDynamicTheLastOverlordWindowsStaticWin32ReleaseLibs.props：
+TheLastOverlordEngineDynamicTheLastOverlordStaticWin32ReleaseLibs.props：
 引擎（dll）和游戏（lib）都编译成Win32、Release工程依赖库属性表
 
-TheLastOverlordWindowsEngineDynamicTheLastOverlordWindowsStaticX64DebugLibs.props：
+TheLastOverlordEngineDynamicTheLastOverlordStaticX64DebugLibs.props：
 引擎（dll）和游戏（lib）都编译成X64、Debug工程依赖库属性表
 
-TheLastOverlordWindowsEngineDynamicTheLastOverlordWindowsStaticX64ReleaseLibs.props：
+TheLastOverlordEngineDynamicTheLastOverlordStaticX64ReleaseLibs.props：
 引擎（dll）和游戏（lib）都编译成X64、Release工程依赖库属性表
 
-TheLastOverlordWindowsEngineStaticTheLastOverlordWindowsDynamicWin32DebugLibs.props：
+TheLastOverlordEngineStaticTheLastOverlordDynamicWin32DebugLibs.props：
 引擎（lib）和游戏（dll）都编译成Win32、Debug工程依赖库属性表
 
-TheLastOverlordWindowsEngineStaticTheLastOverlordWindowsDynamicWin32ReleaseLibs.props：
+TheLastOverlordEngineStaticTheLastOverlordDynamicWin32ReleaseLibs.props：
 引擎（lib）和游戏（dll）都编译成Win32、Release工程依赖库属性表
 
-TheLastOverlordWindowsEngineStaticTheLastOverlordWindowsDynamicX64DebugLibs.props：
+TheLastOverlordEngineStaticTheLastOverlordDynamicX64DebugLibs.props：
 引擎（lib）和游戏（dll）都编译成X64、Debug工程依赖库属性表
 
-TheLastOverlordWindowsEngineStaticTheLastOverlordWindowsDynamicX64ReleaseLibs.props：
+TheLastOverlordEngineStaticTheLastOverlordDynamicX64ReleaseLibs.props：
 引擎（lib）和游戏（dll）都编译成X64、Release工程依赖库属性表
 
 ----------------------------

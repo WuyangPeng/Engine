@@ -10,10 +10,6 @@
 #ifndef CORE_TOOLS_DATA_TYPES_SUITE_H
 #define CORE_TOOLS_DATA_TYPES_SUITE_H
 
-#include "MinHeapRecordIndexTesting.h"
-#include "MinHeapRecordStoredManagerTesting.h"
-#include "MinHeapRecordStoredTesting.h"
-#include "MinHeapRecordTesting.h"
 #include "MinHeapTesting.h"
 #include "TableTesting.h"
 #include "ThreadSafeMapTesting.h"

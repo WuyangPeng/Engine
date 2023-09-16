@@ -36,12 +36,12 @@ typename Mathematics::Triangle2<Real>::ContainerType Mathematics::Triangle2<Real
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     ContainerType result{ vertex[0], vertex[1], vertex[2] };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     return result;
 }
@@ -59,14 +59,14 @@ Real Mathematics::Triangle2<Real>::DistanceTo(const Vector2& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     const auto diff = vertex[0] - point;
     const auto edge0 = vertex[1] - vertex[0];
     const auto edge1 = vertex[2] - vertex[0];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     const auto a00 = Vector2Tools::GetLengthSquared(edge0);
     const auto a01 = Vector2Tools::DotProduct(edge0, edge1);

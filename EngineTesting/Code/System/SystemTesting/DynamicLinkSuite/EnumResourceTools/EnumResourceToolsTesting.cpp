@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/09 11:26)
+///	版本：0.9.1.4 (2023/08/31 17:04)
 
 /// 原始文件在SystemTesting下，SystemWindowsTesting下的为自动复制文件，请勿修改。
 #include "EnumResourceToolsTesting.h"
@@ -52,7 +52,7 @@ void System::EnumResourceToolsTesting::EnumResourceTest()
     }
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26461)
 
 System::WindowsBool System::EnumResourceToolsTesting::TypeProcess(DynamicLinkModule module, DynamicLinkCharType* type, WindowsLongPtrSizeType lParam) noexcept
@@ -65,15 +65,14 @@ System::WindowsBool System::EnumResourceToolsTesting::NameProcess(DynamicLinkMod
     return EnumResourceLanguagesInLibrary(module, type, name, LanguageProcess, lParam);
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 System::WindowsBool System::EnumResourceToolsTesting::LanguageProcess(DynamicLinkModule module, const DynamicLinkCharType* type, const DynamicLinkCharType* name, WindowsWord language, WindowsLongPtrSizeType lParam)
 {
     UnusedFunction(module);
 
-    auto testing = GetBase(lParam);
-
-    if (testing != nullptr)
+    if (const auto testing = GetBase(lParam);
+        testing != nullptr)
     {
         testing->AddEnumResourceData(type, name, language);
     }

@@ -16,13 +16,13 @@
 template <typename T>
 T* CoreTools::GetAddress(T& t) noexcept
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 #include SYSTEM_WARNING_DISABLE(26492)
 
     return const_cast<T*>(reinterpret_cast<T const volatile*>(&reinterpret_cast<uint8_t const volatile&>(t)));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 #endif  // CORE_TOOLS_TEMPLATE_TOOLS_REAL_ADDRESS_DETAIL_H

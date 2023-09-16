@@ -28,3 +28,17 @@ CLASS_INVARIANT_STUB_DEFINE(Rendering, RendererObject)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererObject, GetGraphicsObject, Rendering::RendererObject::GraphicsObjectSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererObject, GetGraphicsObject, Rendering::RendererObject::ConstGraphicsObjectSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererObject, GetName, std::string)
+
+void Rendering::RendererObject::Disable()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    CoreTools::DisableNoexcept();
+}
+
+System::OpenGLUInt Rendering::RendererObject::GetGLHandle() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return 0;
+}

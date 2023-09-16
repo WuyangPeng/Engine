@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/06 23:48)
+///	版本：0.9.1.4 (2023/08/29 17:23)
 
 #ifndef SYSTEM_NETWORK_SOCKET_PROTOTYPES_FLAGS_H
 #define SYSTEM_NETWORK_SOCKET_PROTOTYPES_FLAGS_H
@@ -25,10 +25,10 @@ namespace System
     enum class AddressFamilies
     {
         Any = -1,
-        Unspec = AF_UNSPEC,
+        UnSpec = AF_UNSPEC,
         Unix = AF_UNIX,
         Internet = AF_INET,
-        Implink = AF_IMPLINK,
+        ImpLink = AF_IMPLINK,
         Pup = AF_PUP,
         Chaos = AF_CHAOS,
         Ipx = AF_IPX,
@@ -39,13 +39,13 @@ namespace System
         Datakit = AF_DATAKIT,
         Ccitt = AF_CCITT,
         Sna = AF_SNA,
-        Decnet = AF_DECnet,
+        DeCnet = AF_DECnet,
         Dli = AF_DLI,
         Lat = AF_LAT,
-        Hylink = AF_HYLINK,
-        Appletalk = AF_APPLETALK,
-        Netbios = AF_NETBIOS,
-        Voiceview = AF_VOICEVIEW,
+        HyLink = AF_HYLINK,
+        AppleTalk = AF_APPLETALK,
+        NetBios = AF_NETBIOS,
+        VoiceView = AF_VOICEVIEW,
         Firefox = AF_FIREFOX,
         Unknown1 = AF_UNKNOWN1,
         Ban = AF_BAN,
@@ -56,10 +56,10 @@ namespace System
 
     enum class ProtocolFamilies
     {
-        Unspec = PF_UNSPEC,
+        UnSpec = PF_UNSPEC,
         Unix = PF_UNIX,
         Inet = PF_INET,
-        Implink = PF_IMPLINK,
+        ImpLink = PF_IMPLINK,
         Pup = PF_PUP,
         Chaos = PF_CHAOS,
         Ipx = PF_IPX,
@@ -70,12 +70,12 @@ namespace System
         Datakit = PF_DATAKIT,
         Ccitt = PF_CCITT,
         Sna = PF_SNA,
-        Decnet = PF_DECnet,
+        DeCnet = PF_DECnet,
         Dli = PF_DLI,
         Lat = PF_LAT,
-        Hylink = PF_HYLINK,
-        Appletalk = PF_APPLETALK,
-        Voiceview = PF_VOICEVIEW,
+        HyLink = PF_HYLINK,
+        AppleTalk = PF_APPLETALK,
+        VoiceView = PF_VOICEVIEW,
         Firefox = PF_FIREFOX,
         Unknown1 = PF_UNKNOWN1,
         Ban = PF_BAN,
@@ -90,7 +90,7 @@ namespace System
         Dgram = SOCK_DGRAM,
         Raw = SOCK_RAW,
         Rdm = SOCK_RDM,
-        Seqpacket = SOCK_SEQPACKET,
+        SeqPacket = SOCK_SEQPACKET,
     };
 
     enum class SocketProtocols
@@ -121,13 +121,13 @@ namespace System
     {
         Default = 0x0,
         Oob = MSG_OOB,
-        Dontroute = MSG_DONTROUTE,
+        DontRoute = MSG_DONTROUTE,
     };
 
     enum class SocketLevelOption
     {
         Socket = SOL_SOCKET,
-        IpprotoTcp = IPPROTO_TCP,
+        IpProtoTcp = IPPROTO_TCP,
     };
 
     enum class SocketRetrievedOption
@@ -155,12 +155,12 @@ namespace System
 
         BspState = SO_BSP_STATE,
         ConditionalAccept = SO_CONDITIONAL_ACCEPT,
-        Exclusiveaddruse = SO_EXCLUSIVEADDRUSE,
+        ExclusiveAddrUse = SO_EXCLUSIVEADDRUSE,
         MaxMsgSize = SO_MAX_MSG_SIZE,
         PortScalability = SO_PORT_SCALABILITY,
         ProtocolInfo = SO_PROTOCOL_INFO,
 
-        TcpNodelay = TCP_NODELAY,
+        TcpNoDelay = TCP_NODELAY,
     };
 
     enum class ShutdownHow
@@ -175,10 +175,10 @@ namespace System
     enum class AddressFamilies
     {
         Any = -1,
-        Unspec = 0,
+        UnSpec = 0,
         Unix = 1,
         Internet = 2,
-        Implink = 3,
+        ImpLink = 3,
         Pup = 4,
         Chaos = 5,
         Ipx = 6,
@@ -189,13 +189,13 @@ namespace System
         Datakit = 9,
         Ccitt = 10,
         Sna = 11,
-        Decnet = 12,
+        DeCnet = 12,
         Dli = 13,
         Lat = 14,
-        Hylink = 15,
-        Appletalk = 16,
-        Netbios = 17,
-        Voiceview = 18,
+        HyLink = 15,
+        AppleTalk = 16,
+        NetBios = 17,
+        VoiceView = 18,
         Firefox = 19,
         Unknown1 = 20,
         Ban = 21,
@@ -205,10 +205,10 @@ namespace System
 
     enum class ProtocolFamilies
     {
-        Unspec = 0,
+        UnSpec = 0,
         Unix = 1,
         Inet = 2,
-        Implink = 3,
+        ImpLink = 3,
         Pup = 4,
         Chaos = 5,
         Ipx = 6,
@@ -219,12 +219,12 @@ namespace System
         Datakit = 9,
         Ccitt = 10,
         Sna = 11,
-        Decnet = 12,
+        DeCnet = 12,
         Dli = 13,
         Lat = 14,
-        Hylink = 15,
-        Appletalk = 16,
-        Voiceview = 18,
+        HyLink = 15,
+        AppleTalk = 16,
+        VoiceView = 18,
         Firefox = 19,
         Unknown1 = 20,
         Ban = 21,
@@ -238,7 +238,7 @@ namespace System
         Dgram = 2,
         Raw = 3,
         Rdm = 4,
-        Seqpacket = 5,
+        SeqPacket = 5,
     };
 
     enum class SocketProtocols
@@ -269,13 +269,13 @@ namespace System
     {
         Default = 0x0,
         Oob = 0x1,
-        Dontroute = 0x4,
+        DontRoute = 0x4,
     };
 
     enum class SocketLevelOption
     {
         Socket = 0xffff,
-        IpprotoTcp = 6,
+        IpProtoTcp = 6,
     };
 
     enum class SocketRetrievedOption
@@ -303,12 +303,12 @@ namespace System
 
         BspState = 0x1009,
         ConditionalAccept = 0x3002,
-        Exclusiveaddruse = (~ReuseAddr),
+        ExclusiveAddrUse = (~ReuseAddr),
         MaxMsgSize = 0x2003,
         PortScalability = 0x3006,
         ProtocolInfo = 0x2005,
 
-        TcpNodelay = 0x0001,
+        TcpNoDelay = 0x0001,
     };
 
     enum class ShutdownHow

@@ -9,6 +9,7 @@
 
 #include "Input2.h"
 #include "Input2ContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -108,5 +109,12 @@ OutputCSVTesting::Input2Container::Container OutputCSVTesting::Input2Container::
     USER_CLASS_IS_VALID_CONST_9;
 
     return input2;
+}
+
+int OutputCSVTesting::Input2Container::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(input2.size());
 }
 

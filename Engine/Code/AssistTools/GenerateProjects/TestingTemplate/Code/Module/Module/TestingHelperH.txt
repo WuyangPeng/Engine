@@ -1,0 +1,28 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_TESTING_TESTING_HELPER_H
+#define $ModuleUppercase$_TESTING_TESTING_HELPER_H
+
+#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
+#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
+
+namespace $ModuleName$Testing
+{
+    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    {
+    public:
+        using ClassType = TestingHelper;
+        using ParentType = CMainFunctionTestingHelper;
+
+    public:
+        TestingHelper(int argc, char** argv);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
+
+    private:
+        void InitSuite() noexcept;
+    };
+}
+
+#endif  //  $ModuleUppercase$_TESTING_TESTING_HELPER_H

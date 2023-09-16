@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/10 14:49)
+///	版本：0.9.1.4 (2023/09/15 16:25)
 
 #ifndef NETWORK_MESSAGE_ACTIVE_MQ_ACTIVE_MQ_CONSUMER_SESSION_H
 #define NETWORK_MESSAGE_ACTIVE_MQ_ACTIVE_MQ_CONSUMER_SESSION_H
@@ -25,6 +25,7 @@ namespace Network
     {
     public:
         using ClassType = ActiveMQConsumerSession;
+
         using ConnectionSharedPtr = std::shared_ptr<cms::Connection>;
         using ConnectionWeakPtr = std::weak_ptr<cms::Connection>;
         using BytesMessage = cms::BytesMessage;

@@ -271,11 +271,7 @@
 （1）元组：TupleTesting、
 		   TupleLessTesting。
 （2）表：TableTesting。
-（3）最小堆：MinHeapRecordIndexTesting、
-			 MinHeapRecordStoredManagerTesting、
-			 MinHeapRecordStoredTesting、
-			 MinHeapRecordTesting、
-			 MinHeapTesting。
+（3）最小堆：MinHeapTesting。
 （4）线程安全容器：ThreadSafeMapTesting、
 				   ThreadSafeQueueTesting。
 

@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:12)
+///	版本：0.9.1.4 (2023/08/30 15:09)
 
 #ifndef SYSTEM_SECURITY_SECURITY_SID_USING_H
 #define SYSTEM_SECURITY_SECURITY_SID_USING_H
 
-#include "LookupPrivilegeUsing.h"
 #include "System/Helper/Platform.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
@@ -18,10 +17,10 @@ namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    using SecuritySIDIndentifierAuthority = SID_IDENTIFIER_AUTHORITY;
-    using SecuritySIDIndentifierAuthorityPtr = PSID_IDENTIFIER_AUTHORITY;
-    using SecuritySID = SID;
-    using SecuritySIDPtr = PSID;
+    using SecuritySidIdentifierAuthority = SID_IDENTIFIER_AUTHORITY;
+    using SecuritySidIdentifierAuthorityPtr = PSID_IDENTIFIER_AUTHORITY;
+    using SecuritySid = SID;
+    using SecuritySidPtr = PSID;
     using SecurityWellKnownSidType = WELL_KNOWN_SID_TYPE;
 
     constexpr WindowsDWord securityMaxSidSize{ SECURITY_MAX_SID_SIZE };
@@ -29,20 +28,20 @@ namespace System
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    struct SecuritySIDIndentifierAuthority
+    struct SecuritySidIdentifierAuthority
     {
         uint8_t Value[6];
     };
-    using SecuritySIDIndentifierAuthorityPtr = SecuritySIDIndentifierAuthority*;
+    using SecuritySidIdentifierAuthorityPtr = SecuritySidIdentifierAuthority*;
 
-    struct SecuritySID
+    struct SecuritySid
     {
         uint8_t Revision;
         uint8_t SubAuthorityCount;
-        SecuritySIDIndentifierAuthority IdentifierAuthority;
+        SecuritySidIdentifierAuthority IdentifierAuthority;
         unsigned long SubAuthority[1];
     };
-    using SecuritySIDPtr = void*;
+    using SecuritySidPtr = void*;
 
     enum SecurityWellKnownSidType
     {
@@ -157,7 +156,7 @@ namespace System
     };
 
     constexpr WindowsDWord securitySidSubAuthorities{ 15 };
-    constexpr WindowsDWord securityMaxSidSize{ (sizeof(SecuritySID) - sizeof(WindowsDWord) + (securitySidSubAuthorities * sizeof(WindowsDWord))) };
+    constexpr WindowsDWord securityMaxSidSize{ (sizeof(SecuritySid) - sizeof(WindowsDWord) + (securitySidSubAuthorities * sizeof(WindowsDWord))) };
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

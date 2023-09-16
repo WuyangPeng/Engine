@@ -11,7 +11,7 @@
 #define CORE_TOOLS_CONSOLE_CONSOLE_COLORS_DETAIL_H
 
 #include "ConsoleColors.h"
-#include "System/Console/ConsoleColours.h"
+#include "System/Console/ConsoleColour.h"
 #include "System/Console/Flags/ConsoleColoursFlags.h"
 #include "System/Helper/Tools.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"

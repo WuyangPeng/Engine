@@ -48,12 +48,12 @@ void Rendering::ControlledObjectTesting::MainTest()
 
 void Rendering::ControlledObjectTesting::InitTest()
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26414)
 
     auto firstcontrolledObjectTest = std::make_shared<ControlledObjectTest>(CoreTools::DisableNotThrow::Disable);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     ASSERT_EQUAL(firstcontrolledObjectTest->GetNumControllers(), 0);
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/18 18:44)
+///	版本：0.9.1.4 (2023/08/29 16:55)
 
 #ifndef SYSTEM_MEMORY_TOOLS_VIEW_OF_FILE_FLAGS_H
 #define SYSTEM_MEMORY_TOOLS_VIEW_OF_FILE_FLAGS_H
@@ -31,8 +31,8 @@ namespace System
         Default = 0x00000000,
         Commit = SEC_COMMIT,
 
-        PartitionOwnerHandle = SEC_PARTITION_OWNER_HANDLE,  
-        Pages64K = SEC_64K_PAGES,   
+        PartitionOwnerHandle = SEC_PARTITION_OWNER_HANDLE,
+        Pages64K = SEC_64K_PAGES,
         File = SEC_FILE,
         Image = SEC_IMAGE,
         ProtectedImage = SEC_PROTECTED_IMAGE,
@@ -65,7 +65,7 @@ namespace System
         File = 0x800000,
         Image = 0x1000000,
         ProtectedImage = 0x2000000,
-        Reserve = 0x4000000,       
+        Reserve = 0x4000000,
         Nocache = 0x10000000,
         WriteCombine = 0x40000000,
         LargePages = 0x80000000,

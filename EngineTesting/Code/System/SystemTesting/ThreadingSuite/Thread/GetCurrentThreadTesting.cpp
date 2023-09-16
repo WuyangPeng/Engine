@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 19:22)
+///	版本：0.9.1.4 (2023/09/01 15:25)
 
 #include "GetCurrentThreadTesting.h"
 #include "System/Threading/Thread.h"
@@ -36,6 +36,6 @@ void System::GetCurrentThreadTesting::ThreadPriorityTest()
     const auto threadHandle = GetCurrentSystemThread();
     ASSERT_TRUE(IsThreadHandleValid(threadHandle));
 
-    const auto threadID = GetCurrentSystemThreadId();
-    ASSERT_LESS(0u, threadID);
+    const auto threadId = GetCurrentSystemThreadId();
+    ASSERT_LESS(0u, threadId);
 }

@@ -64,12 +64,12 @@ void Rendering::FloatArrayTesting::InitTest()
 
     for (int i = 0; i < size; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         ASSERT_APPROXIMATE(data[i], static_cast<float>(i), 1e-8f);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         ASSERT_APPROXIMATE(firstFloatArray[i], static_cast<float>(i), 1e-8f);
     }

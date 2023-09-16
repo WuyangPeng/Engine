@@ -5,12 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/28 16:58)
+///	版本：0.9.1.4 (2023/09/01 13:36)
 
 #ifndef SYSTEM_SECURITY_SUITE_TOKEN_INFORMATION_TESTING_DETAIL_H
 #define SYSTEM_SECURITY_SUITE_TOKEN_INFORMATION_TESTING_DETAIL_H
 
-#include "TokenInformationTesting.h" 
+#include "TokenInformationTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"

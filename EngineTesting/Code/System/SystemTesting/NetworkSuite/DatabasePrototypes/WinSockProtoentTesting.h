@@ -5,35 +5,35 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/07 22:46)
+///	版本：0.9.1.4 (2023/09/01 10:13)
 
-#ifndef SYSTEM_NETWORK_SUITE_DATABASE_PROTOTYPES_TESTING_H
-#define SYSTEM_NETWORK_SUITE_DATABASE_PROTOTYPES_TESTING_H
+#ifndef SYSTEM_NETWORK_SUITE_DATABASE_WIN_SOCK_PROTO_ENT_TESTING_H
+#define SYSTEM_NETWORK_SUITE_DATABASE_WIN_SOCK_PROTO_ENT_TESTING_H
 
 #include "System/Network/Using/DatabasePrototypesUsing.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace System
 {
-    class WinSockProtoentTesting final : public CoreTools::UnitTest
+    class WinSockProtoEntTesting final : public CoreTools::UnitTest
     {
     public:
-        using ClassType = WinSockProtoentTesting;
+        using ClassType = WinSockProtoEntTesting;
         using ParentType = UnitTest;
 
     public:
-        explicit WinSockProtoentTesting(const OStreamShared& stream);
+        explicit WinSockProtoEntTesting(const OStreamShared& stream);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
-        void GetProtoentTest();
+        void GetProtoEntTest();
 
-        void WinSockProtoentTest(const WinSockProtoent* winSockProtoent);
+        void WinSockProtoEntTest(const WinSockProtoEnt* winSockProtoEnt);
     };
 }
 
-#endif  // SYSTEM_NETWORK_SUITE_DATABASE_PROTOTYPES_TESTING_H
+#endif  // SYSTEM_NETWORK_SUITE_DATABASE_WIN_SOCK_PROTO_ENT_TESTING_H

@@ -17,6 +17,7 @@
 #include "Containment/Containment.h"
 #include "CurvesSurfacesVolumes/CurvesSurfacesVolumes.h"
 #include "Distance/Distance.h"
+#include "Estimate/Estimate.h"
 #include "Helper/Helper.h"
 #include "Interpolation/Interpolation.h"
 #include "Intersection/Intersection.h"

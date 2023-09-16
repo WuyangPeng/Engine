@@ -117,7 +117,7 @@ void Rendering::CameraImpl::SetFrustum(const float* frustum)
 
     if (frustum != nullptr)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         SetFrustum(frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)],
@@ -127,7 +127,7 @@ void Rendering::CameraImpl::SetFrustum(const float* frustum)
                    frustum[System::EnumCastUnderlying(ViewFrustum::RightMin)],
                    frustum[System::EnumCastUnderlying(ViewFrustum::RightMax)]);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 
@@ -294,20 +294,20 @@ Rendering::CameraImpl::AxesAlignBoundingBox2D Rendering::CameraImpl::ComputeBoun
     auto ymax = -Mathematics::MathF::maxReal;
     for (auto i = 0; i < numVertices; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26490)
 
         auto vertex = reinterpret_cast<const float*>(vertices);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         const HomogeneousPoint position{ vertex[0], vertex[1], vertex[2], 1.0f };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         auto homogeneousPosition = worldViewProjectionMatrix * position;
         const auto invW = 1.0f / homogeneousPosition[3];
@@ -330,12 +330,12 @@ Rendering::CameraImpl::AxesAlignBoundingBox2D Rendering::CameraImpl::ComputeBoun
             ymax = yNormalizeDeviceCoordinate;
         }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         vertices += stride;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     return AxesAlignBoundingBox2D{ xmin, xmax, ymin, ymax };

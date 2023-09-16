@@ -1,17 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/13 21:25)
+///	版本：0.9.1.4 (2023/08/31 17:21)
 
 #include "CreateFileWithAttributesTestingBase.h"
 #include "System/FileManager/Flags/FileFlags.h"
 #include "System/Time/DeltaTime.h"
 #include "System/Windows/Engineering.h"
-#include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/MaxElement.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -35,23 +34,23 @@ System::CreateFileWithAttributesTestingBase::CreateFileWithAttributesTestingBase
                                       FileHandleCreationDisposition::OpenExisting,
                                       FileHandleCreationDisposition::OpenAlways,
                                       FileHandleCreationDisposition::TruncateExisting },
-      fileHandleAttributeses{ FileHandleAttributes::ReadOnly,
-                              FileHandleAttributes::Hidden,
-                              FileHandleAttributes::System,
-                              FileHandleAttributes::Archive,
-                              FileHandleAttributes::Device,
-                              FileHandleAttributes::Normal,
-                              FileHandleAttributes::Temporary,
-                              FileHandleAttributes::Offline,
-                              FileHandleAttributes::Encrypted,
-                              FileHandleAttributes::IntegrityStream,
-                              FileHandleAttributes::Virtual,
-                              FileHandleAttributes::NoScrubData,
-                              FileHandleAttributes::EA,
-                              FileHandleAttributes::Pinned,
-                              FileHandleAttributes::Unpinned,
-                              FileHandleAttributes::RecallOnOpen,
-                              FileHandleAttributes::RecallOnDataAccess },
+      fileHandleAttributesContainer{ FileHandleAttributes::ReadOnly,
+                                     FileHandleAttributes::Hidden,
+                                     FileHandleAttributes::System,
+                                     FileHandleAttributes::Archive,
+                                     FileHandleAttributes::Device,
+                                     FileHandleAttributes::Normal,
+                                     FileHandleAttributes::Temporary,
+                                     FileHandleAttributes::Offline,
+                                     FileHandleAttributes::Encrypted,
+                                     FileHandleAttributes::IntegrityStream,
+                                     FileHandleAttributes::Virtual,
+                                     FileHandleAttributes::NoScrubData,
+                                     FileHandleAttributes::Ea,
+                                     FileHandleAttributes::Pinned,
+                                     FileHandleAttributes::Unpinned,
+                                     FileHandleAttributes::RecallOnOpen,
+                                     FileHandleAttributes::RecallOnDataAccess },
       fileHandleOthers{ FileHandleOther::Default,
                         FileHandleOther::WriteThrough,
                         FileHandleOther::Overlapped,
@@ -77,7 +76,7 @@ System::CreateFileWithAttributesTestingBase::CreateFileWithAttributesTestingBase
       maxSize{ CoreTools::MaxElement<size_t>({ fileHandleDesiredAccesses.size(),
                                                fileHandleShareModes.size(),
                                                fileHandleCreationDispositions.size(),
-                                               fileHandleAttributeses.size(),
+                                               fileHandleAttributesContainer.size(),
                                                fileHandleOthers.size(),
                                                fileHandleSecurities.size() }) },
       extendName{ SYSTEM_TEXT(".txt"s) },
@@ -92,12 +91,12 @@ void System::CreateFileWithAttributesTestingBase::RandomFileHandleFlags()
 {
     SYSTEM_CLASS_IS_VALID_9;
 
-    shuffle(fileHandleDesiredAccesses.begin(), fileHandleDesiredAccesses.end(), randomEngine);
-    shuffle(fileHandleShareModes.begin(), fileHandleShareModes.end(), randomEngine);
-    shuffle(fileHandleCreationDispositions.begin(), fileHandleCreationDispositions.end(), randomEngine);
-    shuffle(fileHandleAttributeses.begin(), fileHandleAttributeses.end(), randomEngine);
-    shuffle(fileHandleOthers.begin(), fileHandleOthers.end(), randomEngine);
-    shuffle(fileHandleSecurities.begin(), fileHandleSecurities.end(), randomEngine);
+    std::ranges::shuffle(fileHandleDesiredAccesses, randomEngine);
+    std::ranges::shuffle(fileHandleShareModes, randomEngine);
+    std::ranges::shuffle(fileHandleCreationDispositions, randomEngine);
+    std::ranges::shuffle(fileHandleAttributesContainer, randomEngine);
+    std::ranges::shuffle(fileHandleOthers, randomEngine);
+    std::ranges::shuffle(fileHandleSecurities, randomEngine);
 }
 
 System::FileHandleDesiredAccess System::CreateFileWithAttributesTestingBase::GetFileHandleDesiredAccess(size_t index) const
@@ -136,7 +135,7 @@ System::FileHandleAttributes System::CreateFileWithAttributesTestingBase::GetFil
 {
     SYSTEM_CLASS_IS_VALID_CONST_9;
 
-    return fileHandleAttributeses.at(index % fileHandleAttributeses.size());
+    return fileHandleAttributesContainer.at(index % fileHandleAttributesContainer.size());
 }
 
 System::FileHandleOther System::CreateFileWithAttributesTestingBase::GetFileHandleOther(size_t index) const

@@ -53,12 +53,12 @@ void CoreTools::Array2Testing::ResultTest(const ArrayType& array2)
         {
             for (auto bound0Index = 0; bound0Index < bound0; ++bound0Index)
             {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
                 ASSERT_EQUAL(result[bound0Index], resultCount);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
                 ++resultCount;
             }
@@ -76,12 +76,12 @@ void CoreTools::Array2Testing::InitArray(ArrayType& array2)
         {
             for (auto bound0Index = 0; bound0Index < bound0; ++bound0Index)
             {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
                 result[bound0Index] = count;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
                 ++count;
             }

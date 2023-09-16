@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:22)
+///	版本：0.9.1.4 (2023/09/15 17:13)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_MAIN_MANAGER_USE_THREADS_H
 #define NETWORK_BOOST_WRAPPERS_BOOST_MAIN_MANAGER_USE_THREADS_H
@@ -21,7 +21,7 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE BoostMainManagerUseThreads : public BoostMainManager
+    class NETWORK_HIDDEN_DECLARE BoostMainManagerUseThreads final : public BoostMainManager
     {
     public:
         using ClassType = BoostMainManagerUseThreads;

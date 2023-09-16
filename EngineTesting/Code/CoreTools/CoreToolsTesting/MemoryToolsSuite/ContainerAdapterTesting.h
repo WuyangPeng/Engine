@@ -39,7 +39,13 @@ namespace CoreTools
 
         void ContainerAdapterVectorSizeTest();
         void ContainerAdapterVectorResetTest();
-        void ContainerAdapterVectorAccessTest(); 
+        void ContainerAdapterVectorAccessTest();
+
+        template <typename Container, typename ElementType = typename Container::value_type>
+        NODISCARD ElementType ComputeAverage0(const Container& container);
+
+        void ComputedAverage0Test();
+        void ComputedAverage1Test();
     };
 }
 

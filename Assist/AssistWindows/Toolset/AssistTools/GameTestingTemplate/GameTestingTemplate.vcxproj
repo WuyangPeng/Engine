@@ -175,11 +175,14 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/TestingTemplate/" "$(ProjectDir)/Resource/GameTemplate" /F /Y /E
+xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y
+</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/AssistToolsD.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
@@ -194,11 +197,13 @@ xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/TestingTemplate/" "$(ProjectDir)/Resource/GameTemplate" /F /Y /E
+xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y
+</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -216,11 +221,14 @@ xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/TestingTemplate/" "$(ProjectDir)/Resource/GameTemplate" /F /Y /E
+xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y
+</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/AssistTools.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -239,11 +247,13 @@ xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/TestingTemplate/" "$(ProjectDir)/Resource/GameTemplate" /F /Y /E
+xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y
+</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -258,11 +268,14 @@ xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/TestingTemplate/" "$(ProjectDir)/Resource/GameTemplate" /F /Y /E
+xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y
+</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/AssistToolsD.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -276,11 +289,13 @@ xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/TestingTemplate/" "$(ProjectDir)/Resource/GameTemplate" /F /Y /E
+xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y
+</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -298,11 +313,14 @@ xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/TestingTemplate/" "$(ProjectDir)/Resource/GameTemplate" /F /Y /E
+xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y
+</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/AssistTools.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
@@ -320,11 +338,13 @@ xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/TestingTemplate/" "$(ProjectDir)/Resource/GameTemplate" /F /Y /E
+xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y
+</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -340,13 +360,120 @@ xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json" />
+    <None Include="Configuration\GameTemplate.json" />
     <None Include="Configuration\GameTestingParameter.json" />
     <None Include="Configuration\Log.json" />
-    <None Include="Configuration\TestingStringReplacing.json" />
+    <None Include="Resource\GameTemplate\GenerateProjects.json" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Resource\GameTemplate\Bat\DelDoxygenFileBat.txt" />
+    <Text Include="Resource\GameTemplate\ClangFormat.txt" />
+    <Text Include="Resource\GameTemplate\Code\Gitignore.txt" />
+    <Text Include="Resource\GameTemplate\Code\Module\ModuleCore\TestingH.txt" />
+    <Text Include="Resource\GameTemplate\Code\Module\ModuleCore\TestingHelperCpp.txt" />
+    <Text Include="Resource\GameTemplate\Code\Module\ModuleCore\TestingHelperH.txt" />
+    <Text Include="Resource\GameTemplate\Code\Module\ModuleCore\TestingLibCpp.txt" />
+    <Text Include="Resource\GameTemplate\Code\Module\ModuleCore\TestingMainCpp.txt" />
+    <Text Include="Resource\GameTemplate\Code\Module\ModuleMiddleLayer\TestingH.txt" />
+    <Text Include="Resource\GameTemplate\Code\Module\ModuleMiddleLayer\TestingHelperCpp.txt" />
+    <Text Include="Resource\GameTemplate\Code\Module\ModuleMiddleLayer\TestingHelperH.txt" />
+    <Text Include="Resource\GameTemplate\Code\Module\ModuleMiddleLayer\TestingLibCpp.txt" />
+    <Text Include="Resource\GameTemplate\Code\Module\ModuleMiddleLayer\TestingMainCpp.txt" />
+    <Text Include="Resource\GameTemplate\Code\Module\Module\TestingH.txt" />
+    <Text Include="Resource\GameTemplate\Code\Module\Module\TestingHelperCpp.txt" />
+    <Text Include="Resource\GameTemplate\Code\Module\Module\TestingHelperH.txt" />
+    <Text Include="Resource\GameTemplate\Code\Module\Module\TestingLibCpp.txt" />
+    <Text Include="Resource\GameTemplate\Code\Module\Module\TestingMainCpp.txt" />
+    <Text Include="Resource\GameTemplate\Code\Project\EngineSuite\EngineSuiteH.txt" />
+    <Text Include="Resource\GameTemplate\Code\Project\EngineSuite\EngineTestingCpp.txt" />
+    <Text Include="Resource\GameTemplate\Code\Project\EngineSuite\EngineTestingH.txt" />
+    <Text Include="Resource\GameTemplate\Code\Project\TestingH.txt" />
+    <Text Include="Resource\GameTemplate\Code\Project\TestingHelperCpp.txt" />
+    <Text Include="Resource\GameTemplate\Code\Project\TestingHelperH.txt" />
+    <Text Include="Resource\GameTemplate\Code\Project\TestingLibCpp.txt" />
+    <Text Include="Resource\GameTemplate\Code\Project\TestingMainCpp.txt" />
+    <Text Include="Resource\GameTemplate\Code\Project\VersionH.txt" />
+    <Text Include="Resource\GameTemplate\Code\Project\VersionSuite\VersionSuiteH.txt" />
+    <Text Include="Resource\GameTemplate\Code\Project\VersionSuite\VersionTestingCpp.txt" />
+    <Text Include="Resource\GameTemplate\Code\Project\VersionSuite\VersionTestingH.txt" />
+    <Text Include="Resource\GameTemplate\Code\ReadMeMd.txt" />
+    <Text Include="Resource\GameTemplate\Doc\OverviewMd.txt" />
+    <Text Include="Resource\GameTemplate\Doxygen\Doxyfile.txt" />
+    <Text Include="Resource\GameTemplate\Generate\Configuration\EnvironmentVariableJson.txt" />
+    <Text Include="Resource\GameTemplate\Generate\Configuration\LogJson.txt" />
+    <Text Include="Resource\GameTemplate\Generate\Configuration\ProjectTestingJson.txt" />
+    <Text Include="Resource\GameTemplate\Generate\Gitignore.txt" />
+    <Text Include="Resource\GameTemplate\Generate\ReadMeMd.txt" />
+    <Text Include="Resource\GameTemplate\Gitignore.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Gitignore.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleCore\Configuration\EnvironmentVariableJson.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleCore\Configuration\LogJson.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleCore\Configuration\ModuleTestingJson.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleCore\Configuration\Testing.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleCore\ModuleCoreVcxproj.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleCore\ModuleCoreVcxprojFilters.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleCore\Resource\ReadMeMd.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleCore\Resource\ScheduleMd.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleCore\Resource\Todo\Level.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Configuration\EnvironmentVariableJson.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Configuration\LogJson.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Configuration\ModuleTestingJson.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Configuration\Testing.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\ModuleMiddleLayerVcxproj.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\ModuleMiddleLayerVcxprojFilters.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource\ReadMeMd.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource\ScheduleMd.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource\Todo\Level.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\Module\Configuration\EnvironmentVariableJson.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\Module\Configuration\LogJson.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\Module\Configuration\ModuleTestingJson.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\Module\Configuration\Testing.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\Module\ModuleVcxproj.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\Module\ModuleVcxprojFilters.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\Module\Resource\ReadMeMd.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\Module\Resource\ScheduleMd.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\Module\Resource\Todo\Level.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectEngineDynamicGameStaticWin32DebugLibsProps.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectEngineDynamicGameStaticWin32ReleaseLibsProps.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectEngineDynamicGameStaticX64DebugLibsProps.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectEngineDynamicGameStaticX64ReleaseLibsProps.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectEngineStaticGameDynamicWin32DebugLibsProps.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectEngineStaticGameDynamicWin32ReleaseLibsProps.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectEngineStaticGameDynamicX64DebugLibsProps.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectEngineStaticGameDynamicX64ReleaseLibsProps.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectProps.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectStaticWin32DebugLibsProps.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectStaticWin32ReleaseLibsProps.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectStaticX64DebugLibsProps.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectStaticX64ReleaseLibsProps.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectWin32DebugLibsProps.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectWin32ReleaseLibsProps.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectX64DebugLibsProps.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectX64ReleaseLibsProps.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\ProjectSln.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\Configuration\EnvironmentVariableJson.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\Configuration\LogJson.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\Configuration\ProjectTestingJson.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\Configuration\ProjectTestingNameJson.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\Configuration\Testing.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\ProjectVcxproj.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\ProjectVcxprojFilters.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\Resource\ReadMeMd.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\Resource\ScheduleMd.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\Resource\Todo\Level.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ReadMeMd.txt" />
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\SetEnvironmentBat.txt" />
+    <Text Include="Resource\GameTemplate\ReadMeMd.txt" />
+    <Text Include="Resource\GameTemplate\Run\Gitignore.txt" />
+    <Text Include="Resource\GameTemplate\Run\ReadMeMd.txt" />
+    <Text Include="Resource\GameTemplate\Run\RunAllModuleTestingBat.txt" />
+    <Text Include="Resource\GameTemplate\Run\RunAllTestingBat.txt" />
+    <Text Include="Resource\GameTemplate\Run\RunModuleCoreTestingBat.txt" />
+    <Text Include="Resource\GameTemplate\Run\RunModuleMiddleLayerTestingBat.txt" />
+    <Text Include="Resource\GameTemplate\Run\RunModuleTestingBat.txt" />
+    <Text Include="Resource\GameTemplate\Run\RunProjectTestingBat.txt" />
     <Text Include="Resource\Todo\Level 0.txt" />
     <Text Include="Resource\Todo\Level 1.txt" />
     <Text Include="Resource\Todo\Level 2.txt" />

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/06 17:51)
+///	版本：0.9.1.4 (2023/09/04 16:05)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_STREAMING_LOAD_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_STREAMING_LOAD_DETAIL_H
@@ -13,11 +13,8 @@
 #include "MessageSourceDetail.h"
 #include "MultipleMessageContainer.h"
 #include "MultipleMessageStreamingLoad.h"
-#include "System/Helper/EnumCast.h"
-#include "CoreTools/Helper/StreamMacro.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <int Index, typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
@@ -26,7 +23,7 @@ Network::MultipleMessageStreamingLoad<Index, Network::MultipleMessageContainer<E
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 

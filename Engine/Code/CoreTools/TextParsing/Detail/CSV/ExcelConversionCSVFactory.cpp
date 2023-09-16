@@ -16,18 +16,18 @@
 
 CoreTools::ExcelConversionCSVFactory::ExcelConversionCSVSharedPtr CoreTools::ExcelConversionCSVFactory::Create(const std::string& xlsxFileName, const String& csvFileName, bool useOpenXlsx)
 {
-#ifdef CORE_TOOLS_USE_OPENXLSX
+#ifdef CORE_TOOLS_USE_OPEN_XLSX
 
     if (useOpenXlsx)
         return make_shared<OpenXLSXConversion>(xlsxFileName, csvFileName);
     else
         return make_shared<SimpleCSVConversion>(xlsxFileName, csvFileName);
 
-#else  // !CORE_TOOLS_USE_OPENXLSX
+#else  // !CORE_TOOLS_USE_OPEN_XLSX
 
     System::UnusedFunction(useOpenXlsx);
 
     return make_shared<SimpleCSVConversion>(xlsxFileName, csvFileName);
 
-#endif  // CORE_TOOLS_USE_OPENXLSX
+#endif  // CORE_TOOLS_USE_OPEN_XLSX
 }

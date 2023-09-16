@@ -56,12 +56,12 @@ void CoreTools::Array4Testing::InitArray(ArrayType& array4)
             {
                 for (auto bound0Index = 0; bound0Index < bound0; ++bound0Index)
                 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
                     array4[bound3Index][bound2Index][bound1Index][bound0Index] = count;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
                     ++count;
                 }
@@ -81,12 +81,12 @@ void CoreTools::Array4Testing::ResultTest(const ArrayType& array4)
             {
                 for (auto bound0Index = 0; bound0Index < bound0; ++bound0Index)
                 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
                     ASSERT_EQUAL(array4[bound3Index][bound2Index][bound1Index][bound0Index], resultCount);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
                     ++resultCount;
                 }

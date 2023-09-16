@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/29 19:38)
+///	版本：0.9.1.4 (2023/09/01 14:09)
 
 #include "SecurityDescriptorDiscretionaryAccessControlListTesting.h"
 #include "System/Security/Flags/CreateSecurityFlags.h"
@@ -36,7 +36,7 @@ void System::SecurityDescriptorDiscretionaryAccessControlListTesting::Discretion
 {
     auto buffer = GetUserObjectSecurity(SecurityRequestedInformation::Dacl);
 
-    AccessCheckACLPtr dacl{ nullptr };
+    AccessCheckAclPtr dacl{ nullptr };
     auto daclPresent = false;
     auto daclDefaulted = false;
     ASSERT_TRUE(GetSecurityDescriptorDiscretionaryAccessControlList(buffer.data(), &daclPresent, &dacl, &daclDefaulted));

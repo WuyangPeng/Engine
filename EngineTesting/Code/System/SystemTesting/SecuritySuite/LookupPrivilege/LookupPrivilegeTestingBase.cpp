@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/25 11:50)
+///	版本：0.9.1.4 (2023/09/01 14:02)
 
 #include "LookupPrivilegeTestingBase.h"
 #include "System/Security/Flags/LookupPrivilegeNameFlags.h"
@@ -26,10 +26,10 @@ System::LookupPrivilegeTestingBase::LookupPrivilegeTestingBase(const OStreamShar
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::TakeOwnershipName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::LoadDriverName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::SystemProfileName),
-                            GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::SystemtimeName),
+                            GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::SystemTimeName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::ProfileSingleProcessName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::IncreaseBasePriorityName),
-                            GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::CreatePagefileName),
+                            GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::CreatePageFileName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::CreatePermanentName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::BackupName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::RestoreName),
@@ -39,7 +39,7 @@ System::LookupPrivilegeTestingBase::LookupPrivilegeTestingBase(const OStreamShar
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::SystemEnvironmentName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::ChangeNotifyName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::RemoteShutdownName),
-                            GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::UndockName),
+                            GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::UnDockName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::SyncAgentName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::EnableDelegationName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::ManageVolumeName),

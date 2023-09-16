@@ -85,7 +85,7 @@ Mathematics::Box2<Real> Mathematics::GaussPointsFit2<Real>::Calculate(const Poin
     std::array<Real, size> extent{};
     std::array<Vector2, size> axis{};
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
@@ -97,7 +97,7 @@ Mathematics::Box2<Real> Mathematics::GaussPointsFit2<Real>::Calculate(const Poin
 
     return Box2{ center, axis[0], axis[1], extent[0], extent[1] };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_GAUSS_POINTS_FIT2_DETAIL_H

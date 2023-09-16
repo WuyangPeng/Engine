@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 09:07)
+///	版本：0.9.1.4 (2023/09/04 16:29)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_CONTAINER_H
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_CONTAINER_H
@@ -59,7 +59,7 @@ namespace Network
             return std::any_cast<ValueType>(message.at(System::EnumCastUnderlying(Index)));
         }
 
-        template <int Index> 
+        template <int Index>
         void SetValue(typename MultipleMessageParameterCast<MultipleMessageElement<Index, ClassType>::byteType>::ValueType value);
 
     private:

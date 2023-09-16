@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/31 19:08)
+///	版本：0.9.1.4 (2023/09/01 14:59)
 
 #include "CreateEventTesting.h"
 #include "System/Threading/Event.h"
@@ -27,7 +27,7 @@ System::CreateEventTesting::CreateEventTesting(const OStreamShared& stream)
                              EventSpecificAccess::ModifyState,
                              EventSpecificAccess::AllAccess },
       createEvents{ CreateEventType::Default,
-                    CreateEventType::InitalSet,
+                    CreateEventType::InitialSet,
                     CreateEventType::ManualReset,
                     CreateEventType::All },
       randomEngine{ GetEngineRandomSeed() },
@@ -50,9 +50,9 @@ void System::CreateEventTesting::MainTest()
 
 bool System::CreateEventTesting::RandomShuffleFlags()
 {
-    shuffle(eventStandardAccesses.begin(), eventStandardAccesses.end(), randomEngine);
-    shuffle(eventSpecificAccesses.begin(), eventSpecificAccesses.end(), randomEngine);
-    shuffle(createEvents.begin(), createEvents.end(), randomEngine);
+    std::ranges::shuffle(eventStandardAccesses, randomEngine);
+    std::ranges::shuffle(eventSpecificAccesses, randomEngine);
+    std::ranges::shuffle(createEvents, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateEventTest);
 

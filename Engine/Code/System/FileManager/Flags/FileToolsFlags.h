@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/11 20:22)
+///	版本：0.9.1.4 (2023/08/28 16:47)
 
 #ifndef SYSTEM_FILE_MANAGER_FILE_TOOLS_FLAGS_H
 #define SYSTEM_FILE_MANAGER_FILE_TOOLS_FLAGS_H
@@ -27,13 +27,13 @@ namespace System
 
     enum class Drive
     {
-        Unknow = DRIVE_UNKNOWN,
+        Unknown = DRIVE_UNKNOWN,
         NoRootDir = DRIVE_NO_ROOT_DIR,
-        Removealbe = DRIVE_REMOVABLE,
+        Removable = DRIVE_REMOVABLE,
         Fixed = DRIVE_FIXED,
         Remote = DRIVE_REMOTE,
         Cdrom = DRIVE_CDROM,
-        Ramdisk = DRIVE_RAMDISK,
+        RamDisk = DRIVE_RAMDISK,
     };
 
     enum class FileType
@@ -85,10 +85,10 @@ namespace System
         SupportsTransactions = FILE_SUPPORTS_TRANSACTIONS,
         FileSupportsHardLinks = FILE_SUPPORTS_HARD_LINKS,
         SupportsExtendedAttributes = FILE_SUPPORTS_EXTENDED_ATTRIBUTES,
-        SupportsOpenByFileID = FILE_SUPPORTS_OPEN_BY_FILE_ID,
+        SupportsOpenByFileId = FILE_SUPPORTS_OPEN_BY_FILE_ID,
         SupportsUsnJournal = FILE_SUPPORTS_USN_JOURNAL,
         SupportsIntegrityStreams = FILE_SUPPORTS_INTEGRITY_STREAMS,
-        SupportsBlockRefcounting = FILE_SUPPORTS_BLOCK_REFCOUNTING,
+        SupportsBlockRefCounting = FILE_SUPPORTS_BLOCK_REFCOUNTING,
         SupportsSparseVdl = FILE_SUPPORTS_SPARSE_VDL,
         DaxVolume = FILE_DAX_VOLUME,
         SupportsGhosting = FILE_SUPPORTS_GHOSTING,
@@ -107,13 +107,13 @@ namespace System
 
     enum class Drive
     {
-        Unknow = 0,
+        Unknown = 0,
         NoRootDir = 1,
-        Removealbe = 2,
+        Removable = 2,
         Fixed = 3,
         Remote = 4,
         Cdrom = 5,
-        Ramdisk = 6,
+        RamDisk = 6,
     };
 
     enum class FileType
@@ -165,10 +165,10 @@ namespace System
         SupportsTransactions = 0x00200000,
         FileSupportsHardLinks = 0x00400000,
         SupportsExtendedAttributes = 0x00800000,
-        SupportsOpenByFileID = 0x01000000,
+        SupportsOpenByFileId = 0x01000000,
         SupportsUsnJournal = 0x02000000,
         SupportsIntegrityStreams = 0x04000000,
-        SupportsBlockRefcounting = 0x08000000,
+        SupportsBlockRefCounting = 0x08000000,
         SupportsSparseVdl = 0x10000000,
         DaxVolume = 0x20000000,
         SupportsGhosting = 0x40000000,

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 14:15)
+///	版本：0.9.1.4 (2023/09/01 15:17)
 
 #include "ProcessTokenTesting.h"
 #include "System/Threading/Flags/ThreadToolsFlags.h"
@@ -16,8 +16,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using namespace std::literals;
 
 System::ProcessTokenTesting::ProcessTokenTesting(const OStreamShared& stream)
     : ParentType{ stream },
@@ -34,13 +32,13 @@ System::ProcessTokenTesting::ProcessTokenTesting(const OStreamShared& stream)
                              TokenSpecificAccess::AdjustPrivileges,
                              TokenSpecificAccess::AdjustGroups,
                              TokenSpecificAccess::AdjustDefault,
-                             TokenSpecificAccess::AdjustSessionID,
+                             TokenSpecificAccess::AdjustSessionId,
                              TokenSpecificAccess::AllAccessP,
                              TokenSpecificAccess::AllAccess,
                              TokenSpecificAccess::Read,
                              TokenSpecificAccess::Write,
                              TokenSpecificAccess::Execute },
-      processFullPath{ GetEngineeringDirectory() + SYSTEM_TEXT("ProcessTest"s) + GetEngineeringSuffix() + GetEngineeringExeSuffix() },
+      processFullPath{ GetEngineeringDirectory() + SYSTEM_TEXT("ProcessTest") + GetEngineeringSuffix() + GetEngineeringExeSuffix() },
       randomEngine{ GetEngineRandomSeed() },
       maxSize{ std::max(tokenStandardAccesses.size(), tokenSpecificAccesses.size()) }
 {
@@ -61,8 +59,8 @@ void System::ProcessTokenTesting::MainTest()
 
 bool System::ProcessTokenTesting::RandomShuffleFlags()
 {
-    shuffle(tokenStandardAccesses.begin(), tokenStandardAccesses.end(), randomEngine);
-    shuffle(tokenSpecificAccesses.begin(), tokenSpecificAccesses.end(), randomEngine);
+    std::ranges::shuffle(tokenStandardAccesses, randomEngine);
+    std::ranges::shuffle(tokenSpecificAccesses, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(OpenProcessTokenTest);
 
@@ -83,7 +81,7 @@ void System::ProcessTokenTesting::DoOpenProcessTokenTest(size_t index)
     const auto tokenSpecificAccess = tokenSpecificAccesses.at(index % tokenSpecificAccesses.size());
 
     WindowsHandle tokenHandle{ nullptr };
-    ASSERT_TRUE(OpenSysemProcessToken(GetCurrentProcessHandle(), tokenStandardAccess, tokenSpecificAccess, &tokenHandle));
+    ASSERT_TRUE(OpenSystemProcessToken(GetCurrentProcessHandle(), tokenStandardAccess, tokenSpecificAccess, &tokenHandle));
 
     ASSERT_UNEQUAL_NULL_PTR(tokenHandle);
 

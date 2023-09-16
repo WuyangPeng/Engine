@@ -1,0 +1,8 @@
+$Copyright$
+
+#ifndef $ProjectCapital$_VERSION_SUITE_H
+#define $ProjectCapital$_VERSION_SUITE_H
+
+#include "VersionTesting.h"
+
+#endif  // $ProjectCapital$_VERSION_SUITE_H

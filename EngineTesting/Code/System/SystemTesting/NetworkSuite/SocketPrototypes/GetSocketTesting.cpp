@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/09 23:25)
+///	版本：0.9.1.4 (2023/09/01 10:49)
 
 #include "GetSocketTesting.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
@@ -15,8 +15,8 @@
 #include "CoreTools/TemplateTools/MaxElement.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::GetSocketTesting::GetSocketTesting(const OStreamShared& tream)
-    : ParentType{ tream },
+System::GetSocketTesting::GetSocketTesting(const OStreamShared& stream)
+    : ParentType{ stream },
       protocolFamilies{ ProtocolFamilies::Inet },
       socketTypes{ SocketTypes::Dgram, SocketTypes::Stream },
       socketProtocols{ SocketProtocols::Ip, SocketProtocols::Tcp, SocketProtocols::Udp },
@@ -44,9 +44,9 @@ void System::GetSocketTesting::MainTest()
 
 bool System::GetSocketTesting::RandomShuffleFlags()
 {
-    shuffle(protocolFamilies.begin(), protocolFamilies.end(), randomEngine);
-    shuffle(socketTypes.begin(), socketTypes.end(), randomEngine);
-    shuffle(socketProtocols.begin(), socketProtocols.end(), randomEngine);
+    std::ranges::shuffle(protocolFamilies, randomEngine);
+    std::ranges::shuffle(socketTypes, randomEngine);
+    std::ranges::shuffle(socketProtocols, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(GetSocketTest);
 

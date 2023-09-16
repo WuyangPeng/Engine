@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/25 09:24)
+///	版本：0.9.1.4 (2023/08/29 10:29)
 
 #ifndef SYSTEM_HELPER_PRAGMA_WARNING_HIREDIS_H
 #define SYSTEM_HELPER_PRAGMA_WARNING_HIREDIS_H
@@ -14,11 +14,10 @@
 
 #ifdef DATABASE_USE_REDIS
 
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
 
     #include SYSTEM_WARNING_DISABLE(4200)
     #include SYSTEM_WARNING_DISABLE(4244)
-
     #include SYSTEM_WARNING_DISABLE(26429)
     #include SYSTEM_WARNING_DISABLE(26440)
     #include SYSTEM_WARNING_DISABLE(26461)
@@ -31,7 +30,7 @@
 
     #include <hiredis.h>
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
 
 #endif  // DATABASE_USE_REDIS
 

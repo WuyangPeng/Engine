@@ -5,14 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/10 22:07)
+///	版本：0.9.1.4 (2023/09/01 10:59)
 
 #include "SelectTesting.h"
+#include "System/Network/Flags/SocketPrototypesFlags.h"
+#include "System/Network/SocketPrototypes.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "System/Network/Flags/SocketPrototypesFlags.h"
-#include "System/Network/SocketPrototypes.h"
 
 #include <thread>
 
@@ -67,7 +67,7 @@ void System::SelectTesting::DoSelectTest(WinSocket socketHandle)
 
 System::WinSockInternetAddress System::SelectTesting::AcceptInit(WinSocket socketHandle)
 {
-    auto address = GetAddress(GetTcpPort());
+    const auto address = GetAddress(GetTcpPort());
 
     ASSERT_TRUE(Bind(socketHandle, &address));
     ASSERT_TRUE(Listen(socketHandle, 5));
@@ -89,8 +89,9 @@ void System::SelectTesting::SelectThreadTest()
         std::lock_guard lockGuard{ mutex };
 
         auto readWinSockFdSet = winSockFdSet;
-        const auto result = Select(0, &readWinSockFdSet, nullptr, nullptr, nullptr);
-        if (result != socketError)
+
+        if (const auto result = Select(0, &readWinSockFdSet, nullptr, nullptr, nullptr);
+            result != socketError)
         {
             ASSERT_NOT_THROW_EXCEPTION_1(SelectSuccess, readWinSockFdSet);
 
@@ -101,13 +102,13 @@ void System::SelectTesting::SelectThreadTest()
 
 System::WinSocket System::SelectTesting::GetWinSocket(size_t index) const noexcept
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
     return winSockFdSet.fd_array[index];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 void System::SelectTesting::SelectSuccess(WinSockFdSet& readWinSockFdSet)

@@ -341,17 +341,14 @@
     <ClCompile Include="..\..\..\Code\Rendering\Detail\ClodMesh.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\CollapseRecord.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\CollapseRecordArray.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\Detail\CreateClodMesh.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\BillboardNodeImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshCollapseInfo.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshEdge.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshTriangleMesh.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshVertex.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshVertexEdgeTriangleGraph.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\CollapseRecordArrayImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\CollapseRecordImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\CreateClodMeshImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\DlodNodeImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\DlodNode.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\SwitchNode.cpp" />
@@ -816,7 +813,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\Detail\ClodMesh.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\CollapseRecord.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\CollapseRecordArray.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Detail\CreateClodMesh.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\DetailFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\BillboardNodeImpl.h" />
@@ -825,10 +821,8 @@
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshTriangleMesh.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshVertex.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshVertexEdgeTriangleGraph.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\CollapseRecordArrayImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\CollapseRecordImpl.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\CreateClodMeshImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\DlodNodeImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\DlodNode.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Flags\SwitchNodeType.h" />

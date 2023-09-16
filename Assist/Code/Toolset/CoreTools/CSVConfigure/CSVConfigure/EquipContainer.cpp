@@ -9,6 +9,7 @@
 
 #include "Equip.h"
 #include "EquipContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -91,5 +92,12 @@ CSVConfigure::EquipContainer::Container CSVConfigure::EquipContainer::GetContain
     USER_CLASS_IS_VALID_CONST_9;
 
     return equip;
+}
+
+int CSVConfigure::EquipContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(equip.size());
 }
 

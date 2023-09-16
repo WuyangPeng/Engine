@@ -38,6 +38,8 @@ namespace OutputCSVTesting
         NODISCARD ConstInput3BaseSharedPtr GetInput3(int key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstInput3BaseSharedPtr GetFirstInput3(Function function) const;
 

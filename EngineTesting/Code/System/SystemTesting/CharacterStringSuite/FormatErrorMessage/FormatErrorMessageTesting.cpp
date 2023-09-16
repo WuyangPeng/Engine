@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/26 22:29)
+///	版本：0.9.1.4 (2023/08/31 16:08)
 
 #include "FormatErrorMessageTesting.h"
 #include "System/CharacterString/Data/FormatErrorMessageParameter.h"
@@ -44,7 +44,7 @@ void System::FormatErrorMessageTesting::FormatErrorMessageTest(WindowsHLocal err
                                          parameter.GetWidth(),
                                          nullptr,
                                          WindowError::InvalidAccess,
-                                         parameter.GetLanguageIDData(),
+                                         parameter.GetLanguageIdData(),
                                          ReinterpretCast(errorMessage),
                                          0,
                                          nullptr);

@@ -106,12 +106,12 @@ char* CoreTools::CMainFunctionHelper::GetArgv(int index) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     return argv[index];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 int CoreTools::CMainFunctionHelper::Run() noexcept
@@ -157,12 +157,12 @@ void CoreTools::CMainFunctionHelper::GenerateStream()
 {
     if (argc == 2)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         stream = OStreamShared{ std::string{ argv[1] } };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
     else if (2 < argc)
     {

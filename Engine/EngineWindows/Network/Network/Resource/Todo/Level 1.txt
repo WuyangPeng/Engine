@@ -1,7 +1,3 @@
 TODO Level 1
  
-0.9.0.7
-
-1.  （NetworkMessage）将MessageSource和MessageTarget的接口从指针转为vector。  
-2.  （Interface）完成SendSocketManager。
-3.	（NetworkMessage）增加直接发送Object类的接口。
+0.9.1.4

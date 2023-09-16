@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/29 20:16)
+///	版本：0.9.1.4 (2023/09/01 14:09)
 
 #include "SecurityDescriptorSystemAccessControlListTesting.h"
 #include "System/Security/Flags/SecurityAclFlags.h"
@@ -35,9 +35,9 @@ void System::SecurityDescriptorSystemAccessControlListTesting::MainTest()
 
 void System::SecurityDescriptorSystemAccessControlListTesting::SystemAccessControlListTest()
 {
-    AccessCheckACL acl{};
+    AccessCheckAcl acl{};
 
-    ASSERT_TRUE(InitializeAccessControlList(&acl, sizeof(AccessCheckACL), AccessControlListRevision::Revision));
+    ASSERT_TRUE(InitializeAccessControlList(&acl, sizeof(AccessCheckAcl), AccessControlListRevision::Revision));
     ASSERT_TRUE(IsAccessControlListValid(&acl));
 
     SecurityDescriptor securityDescriptor{};
@@ -45,7 +45,7 @@ void System::SecurityDescriptorSystemAccessControlListTesting::SystemAccessContr
     ASSERT_TRUE(SetSecurityDescriptorSystemAccessControlList(&securityDescriptor, true, &acl, true));
 
     auto daclPresent = false;
-    AccessCheckACLPtr sacl{ nullptr };
+    AccessCheckAclPtr sacl{ nullptr };
     auto daclDefaulted = false;
     ASSERT_TRUE(GetSecurityDescriptorSystemAccessControlList(&securityDescriptor, &daclPresent, &sacl, &daclDefaulted));
 

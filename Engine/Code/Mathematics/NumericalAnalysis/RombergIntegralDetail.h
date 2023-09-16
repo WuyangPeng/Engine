@@ -34,7 +34,7 @@ void Mathematics::RombergIntegral<Real, UserDataType>::Calculate()
 
     auto difference = end - begin;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     rom[0][0] = Math::GetRational(1, 2) * difference * (function(begin, userData) + function(end, userData));
@@ -78,7 +78,7 @@ void Mathematics::RombergIntegral<Real, UserDataType>::Calculate()
 
     value = rom[0][orderMinus1];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 #ifdef OPEN_CLASS_INVARIANT

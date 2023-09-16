@@ -1,22 +1,25 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/11 20:41)
+///	版本：0.9.1.4 (2023/08/28 17:16)
 
 #include "System/SystemExport.h"
 
 #include "File.h"
 #include "Flags/FileFlags.h"
+#include "Using/FileUsing.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/Flags/PlatformErrorFlags.h"
 #include "System/Windows/LastPlatformError.h"
 #include "System/Windows/Using/WindowsUsing.h"
 #include "System/Windows/WindowsSystem.h"
+
+#include <gsl/util>
 
 bool System::RemoveSystemFile(const CFileString& fileName) noexcept
 {
@@ -310,11 +313,10 @@ bool System::SetSystemFilePointer(WindowsHandle file, WindowsLong distanceToMove
 #ifdef SYSTEM_PLATFORM_WIN32
 
     newFilePointer->QuadPart = distanceToMove;
-    newFilePointer->LowPart = ::SetFilePointer(file, newFilePointer->LowPart, &newFilePointer->HighPart, EnumCastUnderlying(moveMethod));
+    newFilePointer->LowPart = ::SetFilePointer(file, gsl::narrow_cast<WindowsLong>(newFilePointer->LowPart), &newFilePointer->HighPart, EnumCastUnderlying(moveMethod));
 
-    const auto lastError = GetPlatformLastError();
-
-    if (lastError != WindowError::Success && newFilePointer->LowPart == gInvalidSetFilePointer)
+    if (const auto lastError = GetPlatformLastError();
+        lastError != WindowError::Success && newFilePointer->LowPart == gInvalidSetFilePointer)
     {
         SetPlatformLastError(lastError);
         newFilePointer->QuadPart = -1;

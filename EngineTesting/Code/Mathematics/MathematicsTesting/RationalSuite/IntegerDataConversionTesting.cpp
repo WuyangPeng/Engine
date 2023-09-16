@@ -43,7 +43,7 @@ void Mathematics::IntegerDataConversionTesting::MainTest()
     ASSERT_THROW_EXCEPTION_0(UnsignedIntegerOverflowTest);
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
 void Mathematics::IntegerDataConversionTesting::FloatingPointTest()
@@ -84,7 +84,7 @@ void Mathematics::IntegerDataConversionTesting::FloatingPointTest()
     }
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 void Mathematics::IntegerDataConversionTesting::IntegerTest()
 {

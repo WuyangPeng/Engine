@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 10:57)
+///	版本：0.9.1.4 (2023/09/04 16:56)
 
 #include "Network/NetworkExport.h"
 
@@ -24,10 +24,51 @@ Network::SendMessageLevel::SendMessageLevel(int messageMaxSize)
 
 CLASS_INVARIANT_STUB_DEFINE(Network, SendMessageLevel)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SendMessageLevel, GetTopLevelSize, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, SendMessageLevel, operator[], int, Network::ConstMessageInterfaceSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, SendMessageLevel, Insert, MessageInterfaceSharedPtr, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, SendMessageLevel, operator[], int, Network::MessageInterfaceSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, SendMessageLevel, GetRemainingSize, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, SendMessageLevel, GetCurrentSize, int)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SendMessageLevel, Clear, void)
+int Network::SendMessageLevel::GetTopLevelSize() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetTopLevelSize();
+}
+
+Network::ConstMessageInterfaceSharedPtr Network::SendMessageLevel::operator[](int index) const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return (*impl)[index];
+}
+
+Network::MessageInterfaceSharedPtr Network::SendMessageLevel::operator[](int index)
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return (*impl)[index];
+}
+
+void Network::SendMessageLevel::Insert(const MessageInterfaceSharedPtr& messagePtr)
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->Insert(messagePtr);
+}
+
+int Network::SendMessageLevel::GetRemainingSize() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetRemainingSize();
+}
+
+int Network::SendMessageLevel::GetCurrentSize() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetCurrentSize();
+}
+
+void Network::SendMessageLevel::Clear()
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->Clear();
+}

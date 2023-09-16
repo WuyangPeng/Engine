@@ -60,6 +60,13 @@ void Rendering::RenderingDevice::InitDevice()
     impl->InitDevice();
 }
 
+void Rendering::RenderingDevice::Release()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    impl->Release();
+}
+
 void Rendering::RenderingDevice::SetViewport(const Viewport& viewport)
 {
     RENDERING_CLASS_IS_VALID_9;

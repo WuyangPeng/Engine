@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:02)
+///	版本：0.9.1.4 (2023/09/15 15:37)
 
 #ifndef NETWORK_ACE_WRAPPERS_ACE_SOCK_CONNECTOR_H
 #define NETWORK_ACE_WRAPPERS_ACE_SOCK_CONNECTOR_H
@@ -19,14 +19,14 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE ACESockConnector : public SockConnectorImpl
+    class NETWORK_HIDDEN_DECLARE AceSockConnector final : public SockConnectorImpl
     {
     public:
-        using ClassType = ACESockConnector;
+        using ClassType = AceSockConnector;
         using ParentType = SockConnectorImpl;
 
     public:
-        ACESockConnector() noexcept;
+        AceSockConnector() noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

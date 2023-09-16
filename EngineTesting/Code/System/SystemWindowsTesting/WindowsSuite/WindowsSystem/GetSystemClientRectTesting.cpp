@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 19:46)
+///	版本：0.9.1.4 (2023/08/31 15:21)
 
 #include "GetSystemClientRectTesting.h"
 #include "System/Windows/WindowsSystem.h"
@@ -13,8 +13,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::GetSystemClientRectTesting::GetSystemClientRectTesting(const OStreamShared& stream, WindowsHWnd hwnd)
-    : ParentType{ stream }, hwnd{ hwnd }
+System::GetSystemClientRectTesting::GetSystemClientRectTesting(const OStreamShared& stream, WindowsHWnd hWnd)
+    : ParentType{ stream }, hWnd{ hWnd }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -34,7 +34,7 @@ void System::GetSystemClientRectTesting::MainTest()
 void System::GetSystemClientRectTesting::GetSystemClientRectTest()
 {
     WindowsRect windowsRect{};
-    ASSERT_TRUE(GetSystemClientRect(hwnd, windowsRect));
+    ASSERT_TRUE(GetSystemClientRect(hWnd, windowsRect));
 
     ASSERT_LESS(0, windowsRect.right);
     ASSERT_LESS(0, windowsRect.bottom);

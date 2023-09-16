@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/29 20:38)
+///	版本：0.9.1.4 (2023/09/01 14:10)
 
 #include "SecuritySidTestingBase.h"
 #include "System/Helper/SecuritySidMacro.h"
@@ -14,39 +14,39 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::SecuritySidTestingBase::SecuritySidTestingBase(const OStreamShared& stream)
-    : ParentType{ stream }, securitySIDIndentifierAuthorities{ GetSecuritySIDIndentifierAuthorityContainer() }
+    : ParentType{ stream }, securitySIDIdentifierAuthorities{ GetSecuritySidIdentifierAuthorityContainer() }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
-System::SecuritySidTestingBase::SecuritySIDIndentifierAuthorityContainer System::SecuritySidTestingBase::GetSecuritySIDIndentifierAuthorityContainer()
+System::SecuritySidTestingBase::SecuritySidIdentifierAuthorityContainer System::SecuritySidTestingBase::GetSecuritySidIdentifierAuthorityContainer()
 {
-    SecuritySIDIndentifierAuthorityContainer securitySIDIndentifierAuthority{};
+    SecuritySidIdentifierAuthorityContainer securitySidIdentifierAuthority{};
 
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_NULL_SID_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_WORLD_SID_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_LOCAL_SID_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_CREATOR_SID_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_NON_UNIQUE_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_RESOURCE_MANAGER_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_NT_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_MANDATORY_LABEL_AUTHORITY);
+    securitySidIdentifierAuthority.emplace_back(SecuritySidIdentifierAuthority SYSTEM_SECURITY_NULL_SID_AUTHORITY);
+    securitySidIdentifierAuthority.emplace_back(SecuritySidIdentifierAuthority SYSTEM_SECURITY_WORLD_SID_AUTHORITY);
+    securitySidIdentifierAuthority.emplace_back(SecuritySidIdentifierAuthority SYSTEM_SECURITY_LOCAL_SID_AUTHORITY);
+    securitySidIdentifierAuthority.emplace_back(SecuritySidIdentifierAuthority SYSTEM_SECURITY_CREATOR_SID_AUTHORITY);
+    securitySidIdentifierAuthority.emplace_back(SecuritySidIdentifierAuthority SYSTEM_SECURITY_NON_UNIQUE_AUTHORITY);
+    securitySidIdentifierAuthority.emplace_back(SecuritySidIdentifierAuthority SYSTEM_SECURITY_RESOURCE_MANAGER_AUTHORITY);
+    securitySidIdentifierAuthority.emplace_back(SecuritySidIdentifierAuthority SYSTEM_SECURITY_NT_AUTHORITY);
+    securitySidIdentifierAuthority.emplace_back(SecuritySidIdentifierAuthority SYSTEM_SECURITY_MANDATORY_LABEL_AUTHORITY);
 
-    return securitySIDIndentifierAuthority;
+    return securitySidIdentifierAuthority;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, SecuritySidTestingBase)
 
-System::SecuritySidTestingBase::SecuritySIDIndentifierAuthorityContainerIter System::SecuritySidTestingBase::begin() noexcept
+System::SecuritySidTestingBase::SecuritySidIdentifierAuthorityContainerIter System::SecuritySidTestingBase::begin() noexcept
 {
     SYSTEM_CLASS_IS_VALID_CONST_1;
 
-    return securitySIDIndentifierAuthorities.begin();
+    return securitySIDIdentifierAuthorities.begin();
 }
 
-System::SecuritySidTestingBase::SecuritySIDIndentifierAuthorityContainerIter System::SecuritySidTestingBase::end() noexcept
+System::SecuritySidTestingBase::SecuritySidIdentifierAuthorityContainerIter System::SecuritySidTestingBase::end() noexcept
 {
     SYSTEM_CLASS_IS_VALID_CONST_1;
 
-    return securitySIDIndentifierAuthorities.end();
+    return securitySIDIdentifierAuthorities.end();
 }

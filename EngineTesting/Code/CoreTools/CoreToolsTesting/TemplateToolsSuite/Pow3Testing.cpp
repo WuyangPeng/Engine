@@ -31,7 +31,7 @@ void CoreTools::Pow3Testing::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(Pow3Test);
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26812)
 
 void CoreTools::Pow3Testing::Pow3Test()
@@ -42,4 +42,4 @@ void CoreTools::Pow3Testing::Pow3Test()
     ASSERT_EQUAL(Pow3<10>::Result, 3 * 3 * 3 * 3 * 3 * 3 * 3 * 3 * 3 * 3);
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP

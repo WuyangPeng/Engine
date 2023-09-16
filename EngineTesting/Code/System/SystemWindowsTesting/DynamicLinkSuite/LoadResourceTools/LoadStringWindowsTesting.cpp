@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/10 22:49)
+///	版本：0.9.1.4 (2023/08/31 14:45)
 
 #include "LoadStringWindowsTesting.h"
 #include "System/DynamicLink/LoadResourceTools.h"
@@ -17,12 +17,10 @@
 
 #include <array>
 
-using namespace std::literals;
-
 System::LoadStringWindowsTesting::LoadStringWindowsTesting(const OStreamShared& stream, WindowsHInstance instance)
     : ParentType{ stream }, instance{ instance }
 {
-    SELF_CLASS_IS_VALID_1;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, LoadStringWindowsTesting)
@@ -44,8 +42,8 @@ void System::LoadStringWindowsTesting::LoadStringTest()
 
     const auto maxFileNameLength = LoadStringInLibrary(instance, IDS_STRING, stringTableValue.data(), gMaxPath);
 
-    DynamicLinkString result{ stringTableValue.data() };
+    const DynamicLinkString result{ stringTableValue.data() };
     ASSERT_EQUAL(boost::numeric_cast<int>(result.size()), maxFileNameLength);
 
-    ASSERT_EQUAL(DYNAMIC_LINK_TEXT("Test"s), result);
+    ASSERT_EQUAL(DYNAMIC_LINK_TEXT("Test"), result);
 }

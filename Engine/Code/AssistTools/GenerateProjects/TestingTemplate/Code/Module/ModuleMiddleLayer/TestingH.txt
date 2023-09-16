@@ -1,0 +1,6 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_MIDDLE_LAYER_TESTING_H
+#define $ModuleUppercase$_MIDDLE_LAYER_TESTING_H
+
+#endif  // $ModuleUppercase$_MIDDLE_LAYER_TESTING_H

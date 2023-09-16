@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/30 0:13)
+///	版本：0.9.1.4 (2023/08/31 14:51)
 
 #include "MessageBoxSelectionUseFlagsDataWindowsTesting.h"
 #include "System/SystemOutput/Data/MessageBoxFlagsData.h"
@@ -17,9 +17,9 @@
 #include "CoreTools/TemplateTools/MaxElement.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::MessageBoxSelectionUseFlagsDataWindowsTesting::MessageBoxSelectionUseFlagsDataWindowsTesting(const OStreamShared& stream, WindowsHWnd hwnd)
+System::MessageBoxSelectionUseFlagsDataWindowsTesting::MessageBoxSelectionUseFlagsDataWindowsTesting(const OStreamShared& stream, WindowsHWnd hWnd)
     : ParentType{ stream },
-      hwnd{ hwnd },
+      hWnd{ hWnd },
       typeFlags{ MessageBoxType::Ok,
                  MessageBoxType::OkCancel,
                  MessageBoxType::AbortRetryIgnore,
@@ -54,13 +54,13 @@ System::MessageBoxSelectionUseFlagsDataWindowsTesting::MessageBoxSelectionUseFla
                  MessageBoxMisc::RightToLeftReading,
                  MessageBoxMisc::ServiceNotification,
                  MessageBoxMisc::ServiceNotificationNt3x },
-      returnCollections{ { MessageBoxType::Ok, { DialogBoxCommand::IDOk } },
-                         { MessageBoxType::OkCancel, { DialogBoxCommand::IDOk, DialogBoxCommand::IDCancel } },
-                         { MessageBoxType::AbortRetryIgnore, { DialogBoxCommand::IDAbort, DialogBoxCommand::IDRetry, DialogBoxCommand::IDIgnore } },
-                         { MessageBoxType::YesNoCancel, { DialogBoxCommand::IDYes, DialogBoxCommand::IDNo, DialogBoxCommand::IDCancel } },
-                         { MessageBoxType::YesNo, { DialogBoxCommand::IDYes, DialogBoxCommand::IDNo } },
-                         { MessageBoxType::RetryCancel, { DialogBoxCommand::IDRetry, DialogBoxCommand::IDCancel } },
-                         { MessageBoxType::CancelTryContinue, { DialogBoxCommand::IDCancel, DialogBoxCommand::IDTryAgain, DialogBoxCommand::IDContinue } } },
+      returnCollections{ { MessageBoxType::Ok, { DialogBoxCommand::IdOk } },
+                         { MessageBoxType::OkCancel, { DialogBoxCommand::IdOk, DialogBoxCommand::IdCancel } },
+                         { MessageBoxType::AbortRetryIgnore, { DialogBoxCommand::IdAbort, DialogBoxCommand::IdRetry, DialogBoxCommand::IdIgnore } },
+                         { MessageBoxType::YesNoCancel, { DialogBoxCommand::IdYes, DialogBoxCommand::IdNo, DialogBoxCommand::IdCancel } },
+                         { MessageBoxType::YesNo, { DialogBoxCommand::IdYes, DialogBoxCommand::IdNo } },
+                         { MessageBoxType::RetryCancel, { DialogBoxCommand::IdRetry, DialogBoxCommand::IdCancel } },
+                         { MessageBoxType::CancelTryContinue, { DialogBoxCommand::IdCancel, DialogBoxCommand::IdTryAgain, DialogBoxCommand::IdContinue } } },
       iconDescriptions{ { MessageBoxIcon::NoIcon, SYSTEM_TEXT("无图标") },
                         { MessageBoxIcon::Hand, SYSTEM_TEXT("错误") },
                         { MessageBoxIcon::Question, SYSTEM_TEXT("问号") },
@@ -97,7 +97,7 @@ System::MessageBoxSelectionUseFlagsDataWindowsTesting::MessageBoxSelectionUseFla
 
 bool System::MessageBoxSelectionUseFlagsDataWindowsTesting::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && hwnd != nullptr)
+    if (ParentType::IsValid() && hWnd != nullptr)
         return true;
     else
         return false;
@@ -117,11 +117,11 @@ void System::MessageBoxSelectionUseFlagsDataWindowsTesting::MainTest()
 
 bool System::MessageBoxSelectionUseFlagsDataWindowsTesting::RandomShuffleFlags()
 {
-    shuffle(typeFlags.begin(), typeFlags.end(), randomEngine);
-    shuffle(iconFlags.begin(), iconFlags.end(), randomEngine);
-    shuffle(defaultFlags.begin(), defaultFlags.end(), randomEngine);
-    shuffle(modeFlags.begin(), modeFlags.end(), randomEngine);
-    shuffle(miscFlags.begin(), miscFlags.end(), randomEngine);
+    std::ranges::shuffle(typeFlags, randomEngine);
+    std::ranges::shuffle(iconFlags, randomEngine);
+    std::ranges::shuffle(defaultFlags, randomEngine);
+    std::ranges::shuffle(modeFlags, randomEngine);
+    std::ranges::shuffle(miscFlags, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(MessageBoxTest);
 
@@ -149,9 +149,9 @@ void System::MessageBoxSelectionUseFlagsDataWindowsTesting::DoMessageBoxTest(siz
     const auto caption = iconDescriptions[iconFlag] + defaultDescriptions[defaultFlag];
     const auto text = modeDescriptions[modeFlag] + miscDescriptions[miscFlag];
 
-    const auto flag = MessageBoxSelection(GetHwnd(miscFlag), text.c_str(), caption.c_str(), flagsData);
+    const auto flag = MessageBoxSelection(GetHWnd(miscFlag), text.c_str(), caption.c_str(), flagsData);
 
-    ASSERT_ENUM_UNEQUAL(DialogBoxCommand::IDCreationFailed, flag);
+    ASSERT_ENUM_UNEQUAL(DialogBoxCommand::IdCreationFailed, flag);
 
     const auto collection = returnCollections[typeFlag];
 
@@ -160,11 +160,11 @@ void System::MessageBoxSelectionUseFlagsDataWindowsTesting::DoMessageBoxTest(siz
     ASSERT_UNEQUAL(iter, collection.cend());
 }
 
-System::WindowsHWnd System::MessageBoxSelectionUseFlagsDataWindowsTesting::GetHwnd(MessageBoxMisc miscFlag) const noexcept
+System::WindowsHWnd System::MessageBoxSelectionUseFlagsDataWindowsTesting::GetHWnd(MessageBoxMisc miscFlag) const noexcept
 {
     if (miscFlag != MessageBoxMisc::ServiceNotification && miscFlag != MessageBoxMisc::DefaultDesktopOnly)
     {
-        return hwnd;
+        return hWnd;
     }
     else
     {

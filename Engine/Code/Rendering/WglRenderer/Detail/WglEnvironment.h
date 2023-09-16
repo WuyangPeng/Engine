@@ -26,7 +26,7 @@ namespace Rendering
         using ClassType = WglEnvironment;
         using ParentType = OpenGLEnvironment;
 
-        using WindowsHDC = System::WindowsHDC;
+        using WindowsHDC = System::WindowsHdc;
         using OpenGLHglrc = System::OpenGLHglrc;
         using WindowsHWnd = System::WindowsHWnd;
         using PixelFormatDescriptor = System::PixelFormatDescriptor;

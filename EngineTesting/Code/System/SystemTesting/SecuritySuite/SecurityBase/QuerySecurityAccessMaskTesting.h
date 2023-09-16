@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/29 15:55)
+///	版本：0.9.1.4 (2023/09/01 13:49)
 
 #ifndef SYSTEM_SECURITY_SUITE_QUERY_SECURITY_ACCESS_MASK_TESTING_H
 #define SYSTEM_SECURITY_SUITE_QUERY_SECURITY_ACCESS_MASK_TESTING_H
@@ -29,18 +29,18 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void QuerySecurityAccessMaskTest();
 
-        void DoQuerySecurityAccessMaskTest(SecurityRequestedInformation SecurityRequestedInformation);
+        void DoQuerySecurityAccessMaskTest(SecurityRequestedInformation securityRequestedInformation);
 
     private:
         using SecurityRequestedInformationContainer = std::vector<SecurityRequestedInformation>;
 
     private:
-        SecurityRequestedInformationContainer securityRequestedInformations;
+        SecurityRequestedInformationContainer securityRequestedInformationContainer;
     };
 }
 

@@ -33,6 +33,7 @@ namespace Rendering
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD OpenGLInputLayoutSharedPtr Bind(OpenGLUInt programHandle, OpenGLUInt vertexBufferHandle, const VertexBufferSharedPtr& vertexBuffer);
+
         void Unbind(const VertexBufferSharedPtr& vertexBuffer);
         void UnbindAll() noexcept;
         NODISCARD bool HasElements() const noexcept;

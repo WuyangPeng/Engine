@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/11 20:11)
+///	版本：0.9.1.4 (2023/08/28 16:46)
 
 #ifndef SYSTEM_FILE_MANAGER_FILE_FLAGS_H
 #define SYSTEM_FILE_MANAGER_FILE_FLAGS_H
@@ -76,7 +76,7 @@ namespace System
         IntegrityStream = FILE_ATTRIBUTE_INTEGRITY_STREAM,
         Virtual = FILE_ATTRIBUTE_VIRTUAL,
         NoScrubData = FILE_ATTRIBUTE_NO_SCRUB_DATA,
-        EA = FILE_ATTRIBUTE_EA,
+        Ea = FILE_ATTRIBUTE_EA,
         Pinned = FILE_ATTRIBUTE_PINNED,
         Unpinned = FILE_ATTRIBUTE_UNPINNED,
         RecallOnOpen = FILE_ATTRIBUTE_RECALL_ON_OPEN,
@@ -168,7 +168,7 @@ namespace System
         IntegrityStream = 0x00008000,
         Virtual = 0x00010000,
         NoScrubData = 0x00020000,
-        EA = 0x00040000,
+        Ea = 0x00040000,
         Pinned = 0x00080000,
         Unpinned = 0x00100000,
         RecallOnOpen = 0x00040000,

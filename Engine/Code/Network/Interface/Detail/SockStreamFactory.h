@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 09:34)
+///	版本：0.9.1.4 (2023/09/15 11:39)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SOCK_STREAM_FACTORY_H
 #define NETWORK_NETWORK_INTERFACE_SOCK_STREAM_FACTORY_H
@@ -23,6 +23,7 @@ namespace Network
     public:
         using ClassType = SockStreamFactory;
         using ImplType = SockStreamImpl;
+
         using ImplTypeSharedPtr = std::shared_ptr<ImplType>;
 
     public:

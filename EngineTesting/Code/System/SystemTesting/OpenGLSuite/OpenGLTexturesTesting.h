@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/12 23:12)
+///	版本：0.9.1.4 (2023/09/01 13:35)
 
-#ifndef SYSTEM_OPENGL_SUITE_OEPNGL_TEXTURES_TESTING_H
-#define SYSTEM_OPENGL_SUITE_OEPNGL_TEXTURES_TESTING_H
+#ifndef SYSTEM_OPENGL_SUITE_OPENGL_TEXTURES_TESTING_H
+#define SYSTEM_OPENGL_SUITE_OPENGL_TEXTURES_TESTING_H
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
@@ -26,9 +26,9 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest() noexcept;
     };
 }
 
-#endif  // SYSTEM_OPENGL_SUITE_OEPNGL_TEXTURES_TESTING_H
+#endif  // SYSTEM_OPENGL_SUITE_OPENGL_TEXTURES_TESTING_H

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/13 10:38)
+///	版本：0.9.1.4 (2023/08/28 15:53)
 
 #ifndef SYSTEM_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_H
 #define SYSTEM_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_H
@@ -28,8 +28,8 @@ namespace System
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatErrorMessage(FormatMessageOption flag,
                                                                      FormatMessageWidth widthFlag,
                                                                      WindowsConstVoidPtr source,
-                                                                     WindowError messageID,
-                                                                     const LanguageIDData& languageID,
+                                                                     WindowError messageId,
+                                                                     const LanguageIdData& languageId,
                                                                      TChar* buffer,
                                                                      WindowsDWord size,
                                                                      va_list* arguments) noexcept;
@@ -47,7 +47,7 @@ namespace System
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, WindowsHLocal& resultMessage, WindowsDWordPtrSizeType* arguments) noexcept;
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, WindowsHLocal& resultMessage, va_list* arguments) noexcept;
 
-    NODISCARD constexpr WindowsDWord MakeSoftwareException(Severity severity, Facility facility, WindowsDWord exception) noexcept
+    NODISCARD constexpr WindowsDWord MakeSoftwareException(const Severity severity, const Facility facility, const WindowsDWord exception) noexcept
     {
         return (EnumCastUnderlying(severity) << severityShift) |
                (1 << customerShift) |

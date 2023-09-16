@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 17:10)
+///	版本：0.9.1.4 (2023/09/16 10:13)
 
 #include "ActiveMQProducerTesting.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/UnitTest/AssertExceptionMacro.h"
-#include "CoreTools/Helper/UnitTest/AssertTestMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/AnalysisNetworkConfiguration.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"

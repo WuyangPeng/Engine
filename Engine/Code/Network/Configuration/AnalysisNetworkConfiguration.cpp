@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/04/28 11:01)
+///	版本：0.9.1.4 (2023/09/04 15:44)
 
 #include "Network/NetworkExport.h"
 
 #include "AnalysisNetworkConfiguration.h"
 #include "Detail/AnalysisNetworkConfigurationImpl.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 Network::AnalysisNetworkConfiguration::AnalysisNetworkConfiguration(const std::string& fileName)
     : impl{ fileName }
@@ -22,7 +21,30 @@ Network::AnalysisNetworkConfiguration::AnalysisNetworkConfiguration(const std::s
 
 CLASS_INVARIANT_STUB_DEFINE(Network, AnalysisNetworkConfiguration)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, AnalysisNetworkConfiguration, GetConfigurationStrategy, String, Network::ConfigurationStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, AnalysisNetworkConfiguration, begin, Network::AnalysisNetworkConfiguration::ContainerConstIter)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, AnalysisNetworkConfiguration, end, Network::AnalysisNetworkConfiguration::ContainerConstIter)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, AnalysisNetworkConfiguration, GetSize, int)
+Network::ConfigurationStrategy Network::AnalysisNetworkConfiguration::GetConfigurationStrategy(const String& name) const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetConfigurationStrategy(name);
+}
+
+Network::AnalysisNetworkConfiguration::ContainerConstIter Network::AnalysisNetworkConfiguration::begin() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->begin();
+}
+
+Network::AnalysisNetworkConfiguration::ContainerConstIter Network::AnalysisNetworkConfiguration::end() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->end();
+}
+
+int Network::AnalysisNetworkConfiguration::GetSize() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetSize();
+}

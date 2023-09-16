@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/19 20:51)
+///	版本：0.9.1.4 (2023/08/29 17:00)
 
 #ifndef SYSTEM_MEMORY_TOOLS_HEAP_TOOLS_H
 #define SYSTEM_MEMORY_TOOLS_HEAP_TOOLS_H
@@ -13,8 +13,9 @@
 #include "System/SystemDll.h"
 
 #include "Fwd/MemoryToolsFlagsFwd.h"
-#include "Using/HeapToolsUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
+
+#include <type_traits>
 
 // 分配堆与内存工具。
 namespace System
@@ -32,9 +33,11 @@ namespace System
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE GetCurrentProcessHeaps(WindowsDWord numberOfHeaps, WindowsHandlePtr processHeaps) noexcept;
 
     template <typename T>
+    requires(std::is_trivial_v<T> && std::is_standard_layout_v<T>)
     MAYBE_NULLPTR T* AllocateProcessHeap(size_t length) noexcept;
 
     template <typename T>
+    requires(std::is_trivial_v<T> && std::is_standard_layout_v<T>)
     NODISCARD bool FreeProcessHeap(T* memory) noexcept;
 }
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/28 14:52)
+///	版本：0.9.1.4 (2023/09/01 14:02)
 
 #include "AddAccessControlEntriesTesting.h"
 #include "System/Security/Flags/SecurityAclFlags.h"
@@ -38,16 +38,16 @@ void System::AddAccessControlEntriesTesting::GetAccessControlEntriesTest()
 {
     auto buffer = GetUserObjectSecurity();
 
-    auto dacl = GetDacl(buffer);
+    const auto dacl = GetDacl(buffer);
     SecurityAclSizeInformation aclSizeInformation{};
     ASSERT_TRUE(GetAccessControlListInformation(dacl, &aclSizeInformation));
 
-    auto aclbuffer = GetACL(buffer, aclSizeInformation.AclBytesInUse);
+    auto aclBuffer = GetAcl(buffer, aclSizeInformation.AclBytesInUse);
 
-    ASSERT_NOT_THROW_EXCEPTION_3(ResultTest, aclSizeInformation, dacl, GetAccessCheckACLPtr(aclbuffer));
+    ASSERT_NOT_THROW_EXCEPTION_3(ResultTest, aclSizeInformation, dacl, GetAccessCheckAclPtr(aclBuffer));
 }
 
-void System::AddAccessControlEntriesTesting::ResultTest(const SecurityAclSizeInformation& aclSizeInformation, AccessCheckACLPtr dacl, AccessCheckACLPtr acl)
+void System::AddAccessControlEntriesTesting::ResultTest(const SecurityAclSizeInformation& aclSizeInformation, AccessCheckAclPtr dacl, AccessCheckAclPtr acl)
 {
     WindowsVoidPtr ace{ nullptr };
 
@@ -55,7 +55,7 @@ void System::AddAccessControlEntriesTesting::ResultTest(const SecurityAclSizeInf
     {
         ASSERT_TRUE(GetAccessControlEntries(dacl, i, &ace));
 
-        ASSERT_TRUE(AddAccessControlEntries(acl, AccessControlListRevision::Revision, gMaxDWord, ace, reinterpret_cast<AceHeaderPtr>(ace)->AceSize));
+        ASSERT_TRUE(AddAccessControlEntries(acl, AccessControlListRevision::Revision, gMaxDWord, ace, static_cast<AceHeaderPtr>(ace)->AceSize));
 
         ASSERT_EQUAL(acl->AceCount, i + 1);
     }

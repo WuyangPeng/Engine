@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/30 13:18)
+///	版本：0.9.1.4 (2023/08/30 18:19)
 
 #ifndef SYSTEM_THREADING_PROCESS_H
 #define SYSTEM_THREADING_PROCESS_H
@@ -29,14 +29,14 @@ namespace System
                                                               ProcessCreation creationFlags,
                                                               WindowsVoidPtr environment,
                                                               const TChar* currentDirectory,
-                                                              ProcessStartupinfoPtr startupInfo,
+                                                              ProcessStartupInfoPtr startupInfo,
                                                               ProcessInformationPtr processInformation) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CloseSystemProcess(WindowsHandle process) noexcept;
 
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE GetCurrentProcessHandle() noexcept;
-    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE GetCurrentProcessHandleID() noexcept;
-    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE GetProcessHandleID(WindowsHandle process) noexcept;
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE GetCurrentProcessHandleId() noexcept;
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE GetProcessHandleId(WindowsHandle process) noexcept;
 
     void SYSTEM_DEFAULT_DECLARE ExitSystemProcess(WindowsUInt exitCode) noexcept;
 
@@ -46,7 +46,7 @@ namespace System
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE OpenSystemProcess(ProcessStandardAccess standardAccess,
                                                                          ProcessSpecificAccess desiredAccess,
                                                                          bool inheritHandle,
-                                                                         WindowsDWord processID) noexcept;
+                                                                         WindowsDWord processId) noexcept;
 }
 
 #endif  // SYSTEM_THREADING_PROCESS_H

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/11 14:33)
+///	版本：0.9.1.4 (2023/09/16 09:32)
 
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_H
@@ -41,7 +41,7 @@
 #include "NullMessageTesting.h"
 #include "ProtoBufMessageTesting.h"
 #include "ReceiveMessageLevelTesting.h"
-#include "SendMessageLevelTesting.h" 
+#include "SendMessageLevelTesting.h"
 #include "StringMessageTesting.h"
 
 #endif  // NETWORK_TESTING_NETWORK_MESSAGE_SUITE_H

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:17)
+///	版本：0.9.1.4 (2023/08/30 15:16)
 
 #include "System/SystemExport.h"
 
@@ -15,9 +15,7 @@
 
 #include <map>
 
-using namespace std::literals;
-
-bool System::GetLookupPrivilegeValue(const TChar* systemName, const TChar* name, LookupPrivilegeLUIDPtr luid) noexcept
+bool System::GetLookupPrivilegeValue(const TChar* systemName, const TChar* name, LookupPrivilegeLuidPtr luid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -35,7 +33,7 @@ bool System::GetLookupPrivilegeValue(const TChar* systemName, const TChar* name,
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetLookupPrivilegeName(const TChar* systemName, LookupPrivilegeLUIDPtr luid, TChar* name, WindowsDWordPtr nameSize) noexcept
+bool System::GetLookupPrivilegeName(const TChar* systemName, LookupPrivilegeLuidPtr luid, TChar* name, WindowsDWordPtr nameSize) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -53,18 +51,18 @@ bool System::GetLookupPrivilegeName(const TChar* systemName, LookupPrivilegeLUID
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetLookupPrivilegeDisplayName(const TChar* systemName, const TChar* name, TChar* displayName, WindowsDWordPtr displayNameSize, WindowsDWordPtr languageID) noexcept
+bool System::GetLookupPrivilegeDisplayName(const TChar* systemName, const TChar* name, TChar* displayName, WindowsDWordPtr displayNameSize, WindowsDWordPtr languageId) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::LookupPrivilegeDisplayName(systemName, name, displayName, displayNameSize, languageID)) != gFalse)
+    if ((::LookupPrivilegeDisplayName(systemName, name, displayName, displayNameSize, languageId)) != gFalse)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(systemName, name, displayName, displayNameSize, languageID);
+    UnusedFunction(systemName, name, displayName, displayNameSize, languageId);
 
     return false;
 
@@ -88,10 +86,10 @@ System::String System::GetLookupPrivilegeNameDescription(LookupPrivilegeNameDesc
                                               { LookupPrivilegeNameDescription::TakeOwnershipName, SE_TAKE_OWNERSHIP_NAME },
                                               { LookupPrivilegeNameDescription::LoadDriverName, SE_LOAD_DRIVER_NAME },
                                               { LookupPrivilegeNameDescription::SystemProfileName, SE_SYSTEM_PROFILE_NAME },
-                                              { LookupPrivilegeNameDescription::SystemtimeName, SE_SYSTEMTIME_NAME },
+                                              { LookupPrivilegeNameDescription::SystemTimeName, SE_SYSTEMTIME_NAME },
                                               { LookupPrivilegeNameDescription::ProfileSingleProcessName, SE_PROF_SINGLE_PROCESS_NAME },
                                               { LookupPrivilegeNameDescription::IncreaseBasePriorityName, SE_INC_BASE_PRIORITY_NAME },
-                                              { LookupPrivilegeNameDescription::CreatePagefileName, SE_CREATE_PAGEFILE_NAME },
+                                              { LookupPrivilegeNameDescription::CreatePageFileName, SE_CREATE_PAGEFILE_NAME },
                                               { LookupPrivilegeNameDescription::CreatePermanentName, SE_CREATE_PERMANENT_NAME },
                                               { LookupPrivilegeNameDescription::BackupName, SE_BACKUP_NAME },
                                               { LookupPrivilegeNameDescription::RestoreName, SE_RESTORE_NAME },
@@ -101,7 +99,7 @@ System::String System::GetLookupPrivilegeNameDescription(LookupPrivilegeNameDesc
                                               { LookupPrivilegeNameDescription::SystemEnvironmentName, SE_SYSTEM_ENVIRONMENT_NAME },
                                               { LookupPrivilegeNameDescription::ChangeNotifyName, SE_CHANGE_NOTIFY_NAME },
                                               { LookupPrivilegeNameDescription::RemoteShutdownName, SE_REMOTE_SHUTDOWN_NAME },
-                                              { LookupPrivilegeNameDescription::UndockName, SE_UNDOCK_NAME },
+                                              { LookupPrivilegeNameDescription::UnDockName, SE_UNDOCK_NAME },
                                               { LookupPrivilegeNameDescription::SyncAgentName, SE_SYNC_AGENT_NAME },
                                               { LookupPrivilegeNameDescription::EnableDelegationName, SE_ENABLE_DELEGATION_NAME },
                                               { LookupPrivilegeNameDescription::ManageVolumeName, SE_MANAGE_VOLUME_NAME },
@@ -113,8 +111,8 @@ System::String System::GetLookupPrivilegeNameDescription(LookupPrivilegeNameDesc
                                               { LookupPrivilegeNameDescription::TimeZoneName, SE_TIME_ZONE_NAME },
                                               { LookupPrivilegeNameDescription::CreateSymbolicLinkName, SE_CREATE_SYMBOLIC_LINK_NAME } };
 
-    const auto iter = description.find(lookupPrivilegeName);
-    if (iter != description.cend())
+    if (const auto iter = description.find(lookupPrivilegeName);
+        iter != description.cend())
     {
         return iter->second;
     }

@@ -5,46 +5,46 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/07 22:46)
+///	版本：0.9.1.4 (2023/09/01 10:47)
 
-#include "WinSockProtoentTesting.h"
+#include "WinSockProtoEntTesting.h"
 #include "System/Network/DatabasePrototypes.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::WinSockProtoentTesting::WinSockProtoentTesting(const OStreamShared& stream)
+System::WinSockProtoEntTesting::WinSockProtoEntTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, WinSockProtoentTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, WinSockProtoEntTesting)
 
-void System::WinSockProtoentTesting::DoRunUnitTest()
+void System::WinSockProtoEntTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void System::WinSockProtoentTesting::MainTest()
+void System::WinSockProtoEntTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(GetProtoentTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetProtoEntTest);
 }
 
-void System::WinSockProtoentTesting::GetProtoentTest()
+void System::WinSockProtoEntTesting::GetProtoEntTest()
 {
-    const auto winSockProtoent0 = GetProtoentByNumber(1);
-    ASSERT_NOT_THROW_EXCEPTION_1(WinSockProtoentTest, winSockProtoent0);
+    const auto winSockProtoEnt0 = GetProtoByNumber(1);
+    ASSERT_NOT_THROW_EXCEPTION_1(WinSockProtoEntTest, winSockProtoEnt0);
 
-    const auto winSockProtoent1 = GetProtoentByName("tcp");
-    ASSERT_NOT_THROW_EXCEPTION_1(WinSockProtoentTest, winSockProtoent1);
+    const auto winSockProtoEnt1 = GetProtoByName("tcp");
+    ASSERT_NOT_THROW_EXCEPTION_1(WinSockProtoEntTest, winSockProtoEnt1);
 }
 
-void System::WinSockProtoentTesting::WinSockProtoentTest(const WinSockProtoent* winSockProtoent)
+void System::WinSockProtoEntTesting::WinSockProtoEntTest(const WinSockProtoEnt* winSockProtoEnt)
 {
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(winSockProtoent, "获取的WinSockProtoent为空。");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(winSockProtoEnt, "获取的WinSockProtoent为空。");
 
-    ASSERT_UNEQUAL_NULL_PTR(winSockProtoent->p_name);
-    ASSERT_UNEQUAL_NULL_PTR(winSockProtoent->p_aliases);
-    ASSERT_UNEQUAL(winSockProtoent->p_proto, 0);
+    ASSERT_UNEQUAL_NULL_PTR(winSockProtoEnt->p_name);
+    ASSERT_UNEQUAL_NULL_PTR(winSockProtoEnt->p_aliases);
+    ASSERT_UNEQUAL(winSockProtoEnt->p_proto, 0);
 }

@@ -5,11 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:04)
+///	版本：0.9.1.4 (2023/09/15 15:49)
 
 #include "Network/NetworkExport.h"
 
-#include "ACEIovecSockStream.h"
+#include "AceIovecSockStream.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -25,21 +25,19 @@
 
 #ifdef NETWORK_USE_ACE
 
-Network::ACEIovecSockStream::ACEIovecSockStream() noexcept
+Network::AceIovecSockStream::AceIovecSockStream() noexcept
     : ParentType{}
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Network, ACEIovecSockStream)
+CLASS_INVARIANT_STUB_DEFINE(Network, AceIovecSockStream)
 
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26415)
-    #include SYSTEM_WARNING_DISABLE(26418)
-
-int Network::ACEIovecSockStream::Send(const MessageBufferSharedPtr& messageBuffer)
+int Network::AceIovecSockStream::Send(const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(messageBuffer);
 
     static constexpr auto headSize = MessageInterface::GetMessageHeadSize();
 
@@ -50,7 +48,7 @@ int Network::ACEIovecSockStream::Send(const MessageBufferSharedPtr& messageBuffe
 
     std::array<iovec, 2> iov{};
 
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26481)
 
     iov.at(0).iov_base = messageBuffer->GetInitialBufferedPtr();
@@ -58,7 +56,7 @@ int Network::ACEIovecSockStream::Send(const MessageBufferSharedPtr& messageBuffe
     iov.at(1).iov_base = messageBuffer->GetInitialBufferedPtr() + headSize;
     iov.at(1).iov_len = messageBuffer->GetCurrentWriteIndex() - headSize;
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
 
     if (GetACESockStream().sendv_n(iov.data(), 2) != messageBuffer->GetCurrentWriteIndex())
     {
@@ -68,8 +66,12 @@ int Network::ACEIovecSockStream::Send(const MessageBufferSharedPtr& messageBuffe
     return messageBuffer->GetCurrentWriteIndex();
 }
 
-void Network::ACEIovecSockStream::AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
+void Network::AceIovecSockStream::AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
+    NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(eventInterface, messageBuffer);
+
     if (const auto currentWriteIndex = Send(messageBuffer);
         currentWriteIndex != messageBuffer->GetCurrentWriteIndex())
     {
@@ -84,7 +86,5 @@ void Network::ACEIovecSockStream::AsyncSend(const EventInterfaceSharedPtr& event
         LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("事件回调执行失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
-
-    #include STSTEM_WARNING_POP
 
 #endif  // NETWORK_USE_ACE

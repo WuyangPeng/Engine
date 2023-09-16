@@ -54,7 +54,7 @@ typename Mathematics::Matrix<Real>::EntryType Mathematics::Matrix<Real>::Create(
         THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s))
     }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return Create(entry[0],
@@ -75,7 +75,7 @@ typename Mathematics::Matrix<Real>::EntryType Mathematics::Matrix<Real>::Create(
                   entry[15],
                   majorFlag);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -144,7 +144,7 @@ Mathematics::Matrix<Real>::Matrix(const AVector& axis, Real angle)
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename Real>
@@ -160,7 +160,7 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator=(const Matrix3& r
     return *this;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 
@@ -181,12 +181,12 @@ void Mathematics::Matrix<Real>::Divide(Real value)
 
     if (Math::GetZeroTolerance() < Math::FAbs(value))
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         entry[Index] /= value;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
     else
     {
@@ -254,12 +254,12 @@ Real& Mathematics::Matrix<Real>::operator()(int row, int column)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
 
     return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -435,13 +435,13 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator+=(const Matrix& r
 
     for (auto i = 0u; i < entrySize; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
         entry[i] += rhs.entry[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     return *this;
@@ -455,12 +455,12 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator-=(const Matrix& r
 
     for (auto i = 0u; i < entrySize; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         entry[i] -= rhs.entry[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     return *this;
@@ -518,7 +518,7 @@ void Mathematics::Matrix<Real>::MakeIdentity() noexcept
 
     for (auto i = 0; i < entrySize; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
@@ -531,7 +531,7 @@ void Mathematics::Matrix<Real>::MakeIdentity() noexcept
             entry[i] = Math::GetValue(0);
         }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 

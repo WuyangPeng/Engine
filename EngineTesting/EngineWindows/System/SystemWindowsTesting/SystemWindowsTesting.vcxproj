@@ -356,7 +356,7 @@ xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/Res
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\TestingHelper.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseFlagsDataWindowsTesting.h" />
-    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseLanguageIDDataWindowsTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseLanguageIdDataWindowsTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\SystemOutputSuite.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\TestingWindowsMessage.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\CreateSystemWindowTesting.h" />
@@ -404,7 +404,7 @@ xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/Res
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\TestingMain.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseFlagsDataWindowsTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseLanguageIDDataWindowsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseLanguageIdDataWindowsTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\TestingWindowsMessage.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\CreateSystemWindowTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\CreateWindowTestingBase.cpp" />

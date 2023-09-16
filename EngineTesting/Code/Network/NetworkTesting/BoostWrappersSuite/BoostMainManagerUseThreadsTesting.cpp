@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 10:26)
+///	版本：0.9.1.4 (2023/09/16 10:35)
 
 #include "BoostMainManagerUseThreadsTesting.h"
 #include "System/Helper/PragmaWarning/AsioPost.h"
@@ -14,7 +14,6 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Threading/ScopedMutex.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
 
@@ -48,7 +47,7 @@ void Network::BoostMainManagerUseThreadsTesting::IncrementTest()
 
     intCount = 0;
 
-    boost::asio::post(ioContext, boost::bind(&ClassType::Increment, this));
+    post(ioContext, boost::bind(&ClassType::Increment, this));
 
     ASSERT_FALSE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
     BASE_MAIN_MANAGER_SINGLETON.StopContext();
@@ -60,7 +59,7 @@ void Network::BoostMainManagerUseThreadsTesting::IncrementTest()
     BASE_MAIN_MANAGER_SINGLETON.RestartContext();
     for (auto i = 0; i < incrementCount; ++i)
     {
-        boost::asio::post(ioContext, boost::bind(&ClassType::Increment, this));
+        post(ioContext, boost::bind(&ClassType::Increment, this));
     }
 
     ASSERT_FALSE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());

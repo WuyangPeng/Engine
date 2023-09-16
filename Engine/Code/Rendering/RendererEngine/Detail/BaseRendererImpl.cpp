@@ -391,6 +391,7 @@ void Rendering::BaseRendererImpl::Release()
 {
     RENDERING_CLASS_IS_VALID_9;
 
+    globalFont.Release();
     globalState.DestroyDefaultGlobalState();
     rendererAdapter.Release();
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/30 13:22)
+///	版本：0.9.1.4 (2023/08/30 18:30)
 
 #include "System/SystemExport.h"
 
@@ -13,7 +13,7 @@
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
 
-bool System::OpenSysemProcessToken(WindowsHandle process, TokenStandardAccess standardAccess, TokenSpecificAccess specificAccess, WindowsHandlePtr tokenHandle) noexcept
+bool System::OpenSystemProcessToken(WindowsHandle process, TokenStandardAccess standardAccess, TokenSpecificAccess specificAccess, WindowsHandlePtr tokenHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 

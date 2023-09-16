@@ -1,4 +1,4 @@
-@ingroup group_BackgroundServerTestingg_Documentation
+@ingroup group_BackgroundServerTesting_Documentation
 
 ----------------------------
 后台服务器单元测试

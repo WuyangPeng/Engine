@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:17)
+///	版本：0.9.1.4 (2023/08/30 15:16)
 
 #include "System/SystemExport.h"
 
@@ -22,7 +22,7 @@
 bool System::IsSystemTokenElevated() noexcept
 {
     WindowsHandle tokenHandle{ nullptr };
-    if (!OpenSysemProcessToken(GetCurrentProcessHandle(), TokenStandardAccess::Default, TokenSpecificAccess::AllAccess, &tokenHandle))
+    if (!OpenSystemProcessToken(GetCurrentProcessHandle(), TokenStandardAccess::Default, TokenSpecificAccess::AllAccess, &tokenHandle))
     {
         return false;
     }
@@ -140,7 +140,7 @@ bool System::CreateSystemRestrictedToken(WindowsHandle existingTokenHandle,
                                          WindowsDWord disableSidCount,
                                          SecuritySidAndAttributesPtr sidsToDisable,
                                          WindowsDWord deletePrivilegeCount,
-                                         LUIDAndAttributesPtr privilegesToDelete,
+                                         LuidAndAttributesPtr privilegesToDelete,
                                          WindowsDWord restrictedSidCount,
                                          SecuritySidAndAttributesPtr sidsToRestrict,
                                          WindowsHandlePtr newTokenHandle) noexcept

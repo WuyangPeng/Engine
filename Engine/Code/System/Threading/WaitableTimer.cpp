@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/30 13:24)
+///	版本：0.9.1.4 (2023/08/30 19:10)
 
 #include "System/SystemExport.h"
 
@@ -14,6 +14,8 @@
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/WindowsSystem.h"
+
+#include <gsl/util>
 
 System::WindowsHandle System::CreateSystemWaitableTimer(WindowSecurityAttributesPtr timerAttributes, bool manualReset, const TChar* timerName) noexcept
 {
@@ -94,7 +96,7 @@ System::MutexWaitReturn System::WaitForSystemWaitableTimer(WindowsHandle timer, 
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<MutexWaitReturn>(::WaitForSingleObject(timer, milliseconds));
+    return UnderlyingCastEnum<MutexWaitReturn>(gsl::narrow_cast<int>(::WaitForSingleObject(timer, milliseconds)));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -109,7 +111,7 @@ System::MutexWaitReturn System::WaitForSystemWaitableTimer(WindowsHandle timer, 
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<MutexWaitReturn>(::WaitForSingleObjectEx(timer, milliseconds, BoolConversion(alertable)));
+    return UnderlyingCastEnum<MutexWaitReturn>(gsl::narrow_cast<int>(::WaitForSingleObjectEx(timer, milliseconds, BoolConversion(alertable))));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -124,7 +126,7 @@ System::MutexWaitReturn System::WaitForSystemWaitableTimer(WindowsDWord count, c
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<MutexWaitReturn>(::WaitForMultipleObjectsEx(count, timer, BoolConversion(waitAll), milliseconds, BoolConversion(alertable)));
+    return UnderlyingCastEnum<MutexWaitReturn>(gsl::narrow_cast<int>(::WaitForMultipleObjectsEx(count, timer, BoolConversion(waitAll), milliseconds, BoolConversion(alertable))));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -139,7 +141,7 @@ System::MutexWaitReturn System::WaitForSystemWaitableTimer(WindowsDWord count, c
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<MutexWaitReturn>(::WaitForMultipleObjects(count, timer, BoolConversion(waitAll), milliseconds));
+    return UnderlyingCastEnum<MutexWaitReturn>(gsl::narrow_cast<int>(::WaitForMultipleObjects(count, timer, BoolConversion(waitAll), milliseconds)));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

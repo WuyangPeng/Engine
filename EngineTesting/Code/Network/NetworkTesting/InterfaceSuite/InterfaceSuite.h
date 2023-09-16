@@ -5,20 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/12 16:59)
+///	版本：0.9.1.4 (2023/09/16 09:55)
 
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_H
 
 #include "BaseMainManagerTesting.h"
-#include "CacheClientTesting.h"
-#include "ClientTesting.h"
 #include "HandleSetIteratorTesting.h"
 #include "HandleSetTesting.h"
-#include "IterativeServerTesting.h"
-#include "OnlySendingClientTesting.h"
-#include "ReactiveServerTesting.h"
-#include "ServerTesting.h"
 #include "SockAcceptorTesting.h"
 #include "SockAddressTesting.h"
 #include "SockConnectorTesting.h"

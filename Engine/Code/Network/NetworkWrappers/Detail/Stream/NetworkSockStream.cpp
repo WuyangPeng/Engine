@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:53)
+///	版本：0.9.1.4 (2023/09/15 17:42)
 
 #include "Network/NetworkExport.h"
 
@@ -24,61 +24,41 @@ Network::NetworkSockStream::NetworkSockStream() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Network, NetworkSockStream)
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
 int Network::NetworkSockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
 
+    System::UnusedFunction(messageBuffer);
+
     return System::Recv(winSocket, messageBuffer->GetCurrentWriteBufferedPtr(), messageBuffer->GetSize(), System::SocketRecv::Default);
 }
-
-#include STSTEM_WARNING_POP
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
 
 int Network::NetworkSockStream::Send(const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
 
+    System::UnusedFunction(messageBuffer);
+
     return System::Send(winSocket, messageBuffer->GetInitialBufferedPtr(), messageBuffer->GetSize(), System::SocketSend::Default);
 }
-
-#include STSTEM_WARNING_POP
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
 
 void Network::NetworkSockStream::AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    System::UnusedFunction(eventInterface);
+    System::UnusedFunction(eventInterface, messageBuffer);
 
     MAYBE_UNUSED const auto result = Recv(winSocket, messageBuffer->GetCurrentWriteBufferedPtr(), messageBuffer->GetSize(), System::SocketRecv::Default);
 }
-
-#include STSTEM_WARNING_POP
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
 
 void Network::NetworkSockStream::AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    System::UnusedFunction(eventInterface);
+    System::UnusedFunction(eventInterface, messageBuffer);
 
     MAYBE_UNUSED const auto result = System::Send(winSocket, messageBuffer->GetInitialBufferedPtr(), messageBuffer->GetSize(), System::SocketSend::Default);
 }
-
-#include STSTEM_WARNING_POP
 
 Network::WinSocketStreamType& Network::NetworkSockStream::GetNetworkSockStream() noexcept
 {

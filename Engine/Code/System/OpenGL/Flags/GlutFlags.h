@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 19:02)
+///	版本：0.9.1.4 (2023/08/29 23:22)
 
 #ifndef SYSTEM_OPENGL_GLUT_FLAGS_H
 #define SYSTEM_OPENGL_GLUT_FLAGS_H
@@ -35,7 +35,7 @@ namespace System
         Alpha = GLUT_ALPHA,
         Depth = GLUT_DEPTH,
         Stencil = GLUT_STENCIL,
-        Multisample = GLUT_MULTISAMPLE,
+        MultiSample = GLUT_MULTISAMPLE,
         Stereo = GLUT_STEREO,
         Luminance = GLUT_LUMINANCE,
     };
@@ -66,7 +66,7 @@ namespace System
         Alpha = 0x0008,
         Depth = 0x0010,
         Stencil = 0x0020,
-        Multisample = 0x0080,
+        MultiSample = 0x0080,
         Stereo = 0x0100,
         Luminance = 0x0200,
     };

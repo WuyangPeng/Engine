@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/10 16:14)
+///	版本：0.9.1.4 (2023/09/12 17:50)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_ADAPTER_H
 #define CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_ADAPTER_H
@@ -14,10 +14,13 @@
 
 #include "Lattice.h"
 
+/// 类MultiArrayAdapter实际上与MultiArray具有相同的接口，只是存储的原始指针是由外部源提供的。
+/// 因为原始指针是外部的，并且类共享原始指针，所以复制和移动语义被禁用。
 namespace CoreTools
 {
+    /// 编译时已知大小的多维数组适配器的实现。
     template <typename T, bool OrderLToR, int... Sizes>
-    class MultiArrayAdapter : public Lattice<OrderLToR, Sizes...>
+    class MultiArrayAdapter final : public Lattice<OrderLToR, Sizes...>, private boost::totally_ordered<MultiArrayAdapter<T, OrderLToR, Sizes...>>
     {
     public:
         using ClassType = MultiArrayAdapter<T, OrderLToR, Sizes...>;
@@ -37,33 +40,45 @@ namespace CoreTools
 
         void Reset(T* aContainer);
 
+        // 获取指向元素数组的指针。
         NODISCARD const T* GetData() const noexcept;
         NODISCARD T* GetData() noexcept;
 
+        // 访问指定索引处的元素。
         NODISCARD const T& operator[](int index) const;
         NODISCARD T& operator[](int index);
 
+        // 将所有元素设置为指定值。
         void Fill(const T& value) noexcept;
 
+        // 获取与索引的n维参数包相对应的元素。
         template <typename... IndexTypes>
         NODISCARD const T& operator()(IndexTypes... tuple) const noexcept;
 
         template <typename... IndexTypes>
         NODISCARD T& operator()(IndexTypes... tuple) noexcept;
 
-        NODISCARD const T& operator()(const std::array<int, sizeof...(Sizes)>& coordinate) const noexcept;
-        NODISCARD T& operator()(const std::array<int, sizeof...(Sizes)>& coordinate) noexcept;
+        // 获取与n维坐标对应的元素。
+        NODISCARD const T& operator()(const std::array<int, sizeof...(Sizes)>& coordinate) const;
+        NODISCARD T& operator()(const std::array<int, sizeof...(Sizes)>& coordinate);
+
+        // 支持对MultiArrayAdapter对象进行排序和比较。
+        NODISCARD bool operator==(const MultiArrayAdapter& rhs) const noexcept;
+        NODISCARD bool operator<(const MultiArrayAdapter& rhs) const noexcept;
 
     private:
+        // 指针必须指向存储Lattice<OrderLToR, Sizes...>::GetSize()个内存块的T对象。
         T* container;
     };
 
+    // 仅在运行时才知道其大小的多维数组的实现。
     template <typename T, bool OrderLToR>
-    class MultiArrayAdapter<T, OrderLToR> : public Lattice<OrderLToR>
+    class MultiArrayAdapter<T, OrderLToR> final : public Lattice<OrderLToR>
     {
     public:
         using ClassType = MultiArrayAdapter<T, OrderLToR>;
         using ParentType = Lattice<OrderLToR>;
+
         using SizeType = std::vector<int>;
 
     public:
@@ -80,24 +95,34 @@ namespace CoreTools
         MultiArrayAdapter(MultiArrayAdapter&& rhs) noexcept = delete;
         MultiArrayAdapter& operator=(MultiArrayAdapter&& rhs) noexcept = delete;
 
+        // 获取指向元素数组的指针。
         NODISCARD const T* GetData() const noexcept;
         NODISCARD T* GetData() noexcept;
 
+        // 访问指定索引处的元素。
         NODISCARD const T& operator[](int index) const;
         NODISCARD T& operator[](int index);
 
+        // 将所有元素设置为指定值。
         void Fill(const T& value) noexcept;
 
+        // 获取与索引的n维参数包相对应的元素。
         template <typename... IndexTypes>
         NODISCARD const T& operator()(IndexTypes... tuple) const;
 
         template <typename... IndexTypes>
         NODISCARD T& operator()(IndexTypes... tuple);
 
+        // 获取与n维坐标对应的元素。
         NODISCARD const T& operator()(const SizeType& coordinate) const;
         NODISCARD T& operator()(const SizeType& coordinate);
 
+        // 支持对MultiArrayAdapter对象进行排序和比较。
+        NODISCARD bool operator==(const MultiArrayAdapter& rhs) const noexcept;
+        NODISCARD bool operator<(const MultiArrayAdapter& rhs) const noexcept;
+
     private:
+        // 指针必须指向存储Lattice<OrderLToR>::GetSize()个内存块的T对象。
         T* container;
     };
 }

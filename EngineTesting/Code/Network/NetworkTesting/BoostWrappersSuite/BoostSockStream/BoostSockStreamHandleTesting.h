@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 14:29)
+///	版本：0.9.1.4 (2023/09/16 10:47)
 
 #ifndef NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_SOCK_STREAM_HANDLE_TESTING_H
 #define NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_SOCK_STREAM_HANDLE_TESTING_H
@@ -25,29 +25,10 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        using TestFunction = void (ClassType::*)();
-
     private:
         void DoRunUnitTest() override;
 
         void MainTest() noexcept;
-
-        void StreamTest();
-
-        void StreamInformationTest();
-
-        void ClientTest();
-        void ServerTest();
-
-        void ClientConnectTest(const TestingTypeSharedPtr& sockStream);
-        void ServerAcceptor(TestingType& sockStream);
-
-        void ACESockStreamExceptionTest();
-        void NetworkSockStreamExceptionTest();
-
-        void ACEHandleExceptionTest();
-        void SetACEHandleExceptionTest();
-        void SetNetworkHandleExceptionTest();
     };
 }
 

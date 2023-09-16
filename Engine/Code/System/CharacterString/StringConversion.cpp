@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/13 11:00)
+///	版本：0.9.1.4 (2023/08/28 15:56)
 
 #include "System/SystemExport.h"
 
@@ -86,8 +86,7 @@ namespace System
 
 int System::MultiByteConversionWideChar(const char* multiByte, int multiByteLength, wchar_t* wideChar, int wideCharLength) noexcept
 {
-    // 代码页
-    const auto codePage = GetANSICodePage();
+    const auto codePage = GetAnsiCodePage();
     constexpr auto defaultMultiByte = MultiByte::NoFlags;
 
     return MultiByteConversionWideChar(codePage, defaultMultiByte, multiByte, multiByteLength, wideChar, wideCharLength);
@@ -114,8 +113,7 @@ int System::MultiByteConversionWideChar(CodePage codePage, MultiByte flag, const
 
 int System::WideCharConversionMultiByte(const wchar_t* wideChar, int wideCharLength, char* multiByte, int multiByteLength) noexcept
 {
-    // 代码页
-    const auto codePage = GetANSICodePage();
+    const auto codePage = GetAnsiCodePage();
     constexpr auto defaultWideChar = WideChar::NoFlags;
 
     return WideCharConversionMultiByte(codePage, defaultWideChar, wideChar, wideCharLength, multiByte, multiByteLength, nullptr, nullptr);
@@ -152,17 +150,17 @@ int System::WideCharConversionMultiByte(CodePage codePage,
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-int System::UTF8ConversionWideChar(const char* multiByte, int multiByteLength, wchar_t* wideChar, int wideCharLength) noexcept
+int System::Utf8ConversionWideChar(const char* multiByte, int multiByteLength, wchar_t* wideChar, int wideCharLength) noexcept
 {
-    const auto codePage = CodePage::UTF8;
+    constexpr auto codePage = CodePage::Utf8;
     constexpr auto defaultMultiByte = MultiByte::NoFlags;
 
     return MultiByteConversionWideChar(codePage, defaultMultiByte, multiByte, multiByteLength, wideChar, wideCharLength);
 }
 
-int System::WideCharConversionUTF8(const wchar_t* wideChar, int wideCharLength, char* multiByte, int multiByteLength) noexcept
+int System::WideCharConversionUtf8(const wchar_t* wideChar, int wideCharLength, char* multiByte, int multiByteLength) noexcept
 {
-    const auto codePage = CodePage::UTF8;
+    constexpr auto codePage = CodePage::Utf8;
     constexpr auto defaultWideChar = WideChar::NoFlags;
 
     return WideCharConversionMultiByte(codePage, defaultWideChar, wideChar, wideCharLength, multiByte, multiByteLength, nullptr, nullptr);

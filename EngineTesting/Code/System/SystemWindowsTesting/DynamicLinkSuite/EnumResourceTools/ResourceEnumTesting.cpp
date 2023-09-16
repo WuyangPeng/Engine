@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/09 11:37)
+///	版本：0.9.1.4 (2023/08/31 17:04)
 
 /// 原始文件在SystemTesting下，SystemWindowsTesting下的为自动复制文件，请勿修改。
 #include "ResourceEnumTesting.h"
@@ -23,9 +23,9 @@ System::ResourceEnumTesting::ResourceEnumTesting(const OStreamShared& stream)
       resourceEnum{ ResourceEnum::Default,
                     ResourceEnum::Ln,
                     ResourceEnum::Validate,
-                    ResourceEnum::ModouleExact,
+                    ResourceEnum::ModuleExact,
                     ResourceEnum::Ln | ResourceEnum::Validate,
-                    ResourceEnum::Validate | ResourceEnum::ModouleExact },
+                    ResourceEnum::Validate | ResourceEnum::ModuleExact },
       index{ 0 }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
@@ -59,9 +59,9 @@ void System::ResourceEnumTesting::EnumResourceTest()
 
 void System::ResourceEnumTesting::DoEnumResourceTest()
 {
-    constexpr LanguageIDData languageIDData{};
+    constexpr LanguageIdData languageIdData{};
 
-    ASSERT_TRUE(EnumResourceTypesInLibrary(GetDllModule(), TypeProcess, reinterpret_cast<WindowsLongPtrSizeType>(this), GetCurrentResourceEnum(), languageIDData));
+    ASSERT_TRUE(EnumResourceTypesInLibrary(GetDllModule(), TypeProcess, reinterpret_cast<WindowsLongPtrSizeType>(this), GetCurrentResourceEnum(), languageIdData));
 
     ASSERT_LESS(0u, GetEnumResourceDataSize());
 
@@ -73,18 +73,17 @@ void System::ResourceEnumTesting::DoEnumResourceTest()
     ClearEnumResourceData();
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26461)
 
 System::WindowsBool System::ResourceEnumTesting::TypeProcess(DynamicLinkModule module, DynamicLinkCharType* type, WindowsLongPtrSizeType lParam)
 {
-    constexpr LanguageIDData languageIDData{};
+    constexpr LanguageIdData languageIdData{};
 
-    const auto* testing = GetSelf(lParam);
-
-    if (testing != nullptr)
+    if (const auto* testing = GetSelf(lParam);
+        testing != nullptr)
     {
-        return EnumResourceNamesInLibrary(module, type, NameProcess, lParam, testing->GetCurrentResourceEnum(), languageIDData);
+        return EnumResourceNamesInLibrary(module, type, NameProcess, lParam, testing->GetCurrentResourceEnum(), languageIdData);
     }
     else
     {
@@ -94,13 +93,12 @@ System::WindowsBool System::ResourceEnumTesting::TypeProcess(DynamicLinkModule m
 
 System::WindowsBool System::ResourceEnumTesting::NameProcess(DynamicLinkModule module, const DynamicLinkCharType* type, DynamicLinkCharType* name, WindowsLongPtrSizeType lParam)
 {
-    constexpr LanguageIDData languageIDData{};
+    constexpr LanguageIdData languageIdData{};
 
-    const auto* testing = GetSelf(lParam);
-
-    if (testing != nullptr)
+    if (const auto* testing = GetSelf(lParam);
+        testing != nullptr)
     {
-        return EnumResourceLanguagesInLibrary(module, type, name, LanguageProcess, lParam, testing->GetCurrentResourceEnum(), languageIDData);
+        return EnumResourceLanguagesInLibrary(module, type, name, LanguageProcess, lParam, testing->GetCurrentResourceEnum(), languageIdData);
     }
     else
     {
@@ -108,15 +106,14 @@ System::WindowsBool System::ResourceEnumTesting::NameProcess(DynamicLinkModule m
     }
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 System::WindowsBool System::ResourceEnumTesting::LanguageProcess(DynamicLinkModule module, const DynamicLinkCharType* type, const DynamicLinkCharType* name, WindowsWord language, WindowsLongPtrSizeType lParam)
 {
     UnusedFunction(module);
 
-    auto testing = GetSelf(lParam);
-
-    if (testing != nullptr)
+    if (const auto testing = GetSelf(lParam);
+        testing != nullptr)
     {
         testing->AddEnumResourceData(type, name, language);
     }
@@ -140,10 +137,10 @@ void System::ResourceEnumTesting::EnumResourceExistTest(const EnumResourceData& 
 
 System::ResourceEnumTesting* System::ResourceEnumTesting::GetSelf(WindowsLongPtrSizeType lParam) noexcept
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     return reinterpret_cast<ClassType*>(lParam);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }

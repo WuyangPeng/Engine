@@ -5,11 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 13:50)
+///	版本：0.9.1.4 (2023/09/15 15:44)
 
 #include "Network/NetworkExport.h"
 
-#include "ACESockAcceptor.h"
+#include "AceSockAcceptor.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/MessageEvent/CallbackParameters.h"
 #include "CoreTools/MessageEvent/EventInterface.h"
-#include "Network/ACEWrappers/Detail/Address/ACESockInternetAddress.h"
+#include "Network/ACEWrappers/Detail/Address/AceSockInternetAddress.h"
 #include "Network/ACEWrappers/Using/ACEUsing.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/Interface/SockAddress.h"
@@ -26,7 +26,7 @@
 
 #ifdef NETWORK_USE_ACE
 
-Network::ACESockAcceptor::ACESockAcceptor(int port)
+Network::AceSockAcceptor::AceSockAcceptor(int port)
     : ParentType{}, aceSockAcceptor{}
 {
     if (ACEInternetAddress internetAddress{};
@@ -38,7 +38,7 @@ Network::ACESockAcceptor::ACESockAcceptor(int port)
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::ACESockAcceptor::ACESockAcceptor(const std::string& hostName, int port)
+Network::AceSockAcceptor::AceSockAcceptor(const std::string& hostName, int port)
     : ParentType{}, aceSockAcceptor{}
 {
     if (ACEInternetAddress internetAddress{};
@@ -50,7 +50,7 @@ Network::ACESockAcceptor::ACESockAcceptor(const std::string& hostName, int port)
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::ACESockAcceptor::~ACESockAcceptor() noexcept
+Network::AceSockAcceptor::~AceSockAcceptor() noexcept
 {
     EXCEPTION_TRY
     {
@@ -61,9 +61,9 @@ Network::ACESockAcceptor::~ACESockAcceptor() noexcept
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, ACESockAcceptor)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, AceSockAcceptor)
 
-bool Network::ACESockAcceptor::Accept(SockStream& sockStream, SockAddress& sockAddress)
+bool Network::AceSockAcceptor::Accept(SockStream& sockStream, SockAddress& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -73,7 +73,7 @@ bool Network::ACESockAcceptor::Accept(SockStream& sockStream, SockAddress& sockA
         return false;
 }
 
-bool Network::ACESockAcceptor::Accept(SockStream& sockStream)
+bool Network::AceSockAcceptor::Accept(SockStream& sockStream)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -83,14 +83,14 @@ bool Network::ACESockAcceptor::Accept(SockStream& sockStream)
         return false;
 }
 
-Network::ACEHandleType Network::ACESockAcceptor::GetACEHandle()
+Network::ACEHandleType Network::AceSockAcceptor::GetACEHandle()
 {
     NETWORK_CLASS_IS_VALID_9;
 
     return aceSockAcceptor.get_handle();
 }
 
-bool Network::ACESockAcceptor::EnableNonBlock()
+bool Network::AceSockAcceptor::EnableNonBlock()
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -100,13 +100,11 @@ bool Network::ACESockAcceptor::EnableNonBlock()
         return false;
 }
 
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26415)
-    #include SYSTEM_WARNING_DISABLE(26418)
-
-void Network::ACESockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
+void Network::AceSockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(eventInterface, sockStream);
 
     if (const auto result = aceSockAcceptor.accept(sockStream->GetACESockStream());
         result == 0)
@@ -123,9 +121,11 @@ void Network::ACESockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventI
     }
 }
 
-void Network::ACESockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+void Network::AceSockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(eventInterface, sockStream, sockAddress);
 
     if (const auto result = aceSockAcceptor.accept(sockStream->GetACESockStream(), &sockAddress->GetACEInternetAddress());
         result == 0)
@@ -142,13 +142,11 @@ void Network::ACESockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventI
     }
 }
 
-    #include STSTEM_WARNING_POP
-
-std::string Network::ACESockAcceptor::GetAddress() const
+std::string Network::AceSockAcceptor::GetAddress() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    if (ACESockInternetAddress address{};
+    if (AceSockInternetAddress address{};
         aceSockAcceptor.get_local_addr(address.GetACEInternetAddress()) == 0)
     {
         return address.GetAddress();
@@ -159,11 +157,11 @@ std::string Network::ACESockAcceptor::GetAddress() const
     }
 }
 
-int Network::ACESockAcceptor::GetPort() const
+int Network::AceSockAcceptor::GetPort() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    if (ACESockInternetAddress address{};
+    if (AceSockInternetAddress address{};
         aceSockAcceptor.get_local_addr(address.GetACEInternetAddress()) == 0)
     {
         return address.GetPort();

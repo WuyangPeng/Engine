@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 18:48)
+///	版本：0.9.1.4 (2023/08/29 23:20)
 
 #ifndef SYSTEM_OPENGL_GLX_EXT_EXTENSIONS_H
 #define SYSTEM_OPENGL_GLX_EXT_EXTENSIONS_H
@@ -14,7 +14,7 @@
 
 namespace System
 {
-    SYSTEM_HIDDEN_DECLARE NODISCARD bool InitGLX() noexcept;
+    SYSTEM_HIDDEN_DECLARE NODISCARD bool InitGlx() noexcept;
 }
 
 #endif  // SYSTEM_OPENGL_GLX_EXT_EXTENSIONS_H

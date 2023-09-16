@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/12 9:37)
+///	版本：0.9.1.4 (2023/08/26 15:35)
 
 #include "System/SystemExport.h"
 
@@ -57,56 +57,56 @@ namespace System
     AppCommand systemAppCommand = nullptr;
     InputEvent systemInputEvent = nullptr;
 
-    WindowsLResult SYSTEM_CALL_BACK AndroidProcess(WindowsHWnd hwnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept;
+    WindowsLResult SYSTEM_CALL_BACK AndroidProcess(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept;
     NODISCARD WindowsClassEx GetWindowClass(const String& appName) noexcept;
     MAYBE_NULLPTR WindowsHWnd CreateSystemWindow(const String& appName);
 
-    NODISCARD WindowsLResult AppCommandEvent(WindowsHWnd hwnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept;
-    NODISCARD WindowsLResult KeyInputEvent(WindowsHWnd hwnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept;
-    NODISCARD WindowsLResult MotionInputEvent(WindowsHWnd hwnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept;
-    NODISCARD WindowsLResult Destory(WindowsHWnd hwnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept;
+    NODISCARD WindowsLResult AppCommandEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept;
+    NODISCARD WindowsLResult KeyInputEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept;
+    NODISCARD WindowsLResult MotionInputEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept;
+    NODISCARD WindowsLResult Destroy(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept;
 }
 
 System::WindowsClassEx System::GetWindowClass(const String& appName) noexcept
 {
-    WindowsClassEx wndclassex{};
+    WindowsClassEx windowsClassEx{};
 
-    wndclassex.cbSize = sizeof(WindowsClassEx);
-    wndclassex.style = EnumCastUnderlying(WindowsClassStyle::CommonUse);
-    wndclassex.lpfnWndProc = AndroidProcess;
-    wndclassex.cbClsExtra = 0;
-    wndclassex.cbWndExtra = 0;
-    wndclassex.hInstance = GetHInstance();
-    wndclassex.hIcon = LoadSystemIcon(nullptr, gApplication);
-    wndclassex.hCursor = LoadSystemCursor(nullptr, gArrow);
-    wndclassex.hbrBackground = static_cast<WindowsHBrush>(GetSystemStockObject(WindowsBrushTypes::WhiteBrush));
-    wndclassex.lpszMenuName = nullptr;
-    wndclassex.lpszClassName = appName.c_str();
-    wndclassex.hIconSm = wndclassex.hIcon;
+    windowsClassEx.cbSize = sizeof(WindowsClassEx);
+    windowsClassEx.style = EnumCastUnderlying(WindowsClassStyle::CommonUse);
+    windowsClassEx.lpfnWndProc = AndroidProcess;
+    windowsClassEx.cbClsExtra = 0;
+    windowsClassEx.cbWndExtra = 0;
+    windowsClassEx.hInstance = GetHInstance();
+    windowsClassEx.hIcon = LoadSystemIcon(nullptr, gApplication);
+    windowsClassEx.hCursor = LoadSystemCursor(nullptr, gArrow);
+    windowsClassEx.hbrBackground = static_cast<WindowsHBrush>(GetSystemStockObject(WindowsBrushTypes::WhiteBrush));
+    windowsClassEx.lpszMenuName = nullptr;
+    windowsClassEx.lpszClassName = appName.c_str();
+    windowsClassEx.hIconSm = windowsClassEx.hIcon;
 
-    return wndclassex;
+    return windowsClassEx;
 }
 
 System::WindowsHWnd System::CreateSystemWindow(const String& appName)
 {
     constexpr WindowsRect rect{ 0, 0, 800, 600 };
 
-    auto hwnd = CreateSystemWindow(appName.c_str(),
-                                   SYSTEM_TEXT("Android Virtual Window"),
-                                   WindowsStyles::Default,
-                                   EnumCastUnderlying(WindowsPointUse::Default),
-                                   EnumCastUnderlying(WindowsPointUse::Default),
-                                   rect,
-                                   nullptr,
-                                   nullptr,
-                                   GetHInstance());
+    const auto hWnd = CreateSystemWindow(appName,
+                                         SYSTEM_TEXT("Android Virtual Window"),
+                                         WindowsStyles::Default,
+                                         EnumCastUnderlying(WindowsPointUse::Default),
+                                         EnumCastUnderlying(WindowsPointUse::Default),
+                                         rect,
+                                         nullptr,
+                                         nullptr,
+                                         GetHInstance());
 
-    if (hwnd != nullptr && mainAndroidApp->GetRunning() == nullptr)
+    if (hWnd != nullptr && mainAndroidApp->GetRunning() == nullptr)
     {
-        mainAndroidApp->SetRunning(hwnd);
+        mainAndroidApp->SetRunning(hWnd);
     }
 
-    return hwnd;
+    return hWnd;
 }
 
 System::WindowsHWnd System::CreateVirtualWindow(AndroidApp* androidApp, const String& appName, AppCommand appCommand, InputEvent inputEvent)
@@ -116,9 +116,9 @@ System::WindowsHWnd System::CreateVirtualWindow(AndroidApp* androidApp, const St
         mainAndroidApp = androidApp;
     }
 
-    auto wndclassex = GetWindowClass(appName);
+    const auto windowsClassEx = GetWindowClass(appName);
 
-    if (RegisterSystemClass(&wndclassex))
+    if (RegisterSystemClass(&windowsClassEx))
     {
         if (inputEvent != nullptr)
         {
@@ -138,82 +138,81 @@ System::WindowsHWnd System::CreateVirtualWindow(AndroidApp* androidApp, const St
     }
 }
 
-System::WindowsLResult SYSTEM_CALL_BACK System::AndroidProcess(WindowsHWnd hwnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept
+System::WindowsLResult SYSTEM_CALL_BACK System::AndroidProcess(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept
 {
     switch (message)
     {
         case EnumCastUnderlying(AppCommandType::InitWindow):
-            FALLTHROUGH;
         case EnumCastUnderlying(AppCommandType::TermWindow):
-            FALLTHROUGH;
         case EnumCastUnderlying(AppCommandType::WindowResized):
         {
-            return AppCommandEvent(hwnd, message, wParam, lParam);
+            return AppCommandEvent(hWnd, message, wParam, lParam);
         }
+
         case EnumCastUnderlying(AndroidKeyEventAction::Down):
-            FALLTHROUGH;
         case EnumCastUnderlying(AndroidKeyEventAction::Up):
         {
-            return KeyInputEvent(hwnd, message, wParam, lParam);
+            return KeyInputEvent(hWnd, message, wParam, lParam);
         }
+
         case EnumCastUnderlying(AndroidMotionEventAction::Down):
-            FALLTHROUGH;
         case EnumCastUnderlying(AndroidMotionEventAction::Up):
-            FALLTHROUGH;
         case EnumCastUnderlying(AndroidMotionEventAction::Move):
         {
-            return MotionInputEvent(hwnd, message, wParam, lParam);
+            return MotionInputEvent(hWnd, message, wParam, lParam);
         }
-        case EnumCastUnderlying(AppCommandType::Destory):
+
+        case EnumCastUnderlying(AppCommandType::Destroy):
         {
-            return Destory(hwnd, message, wParam, lParam);
+            return Destroy(hWnd, message, wParam, lParam);
         }
+
         default:
         {
-            return DefaultSystemWindowProcess(hwnd, UnderlyingCastEnum<WindowsMessages>(message), wParam, lParam);
+            return DefaultSystemWindowProcess(hWnd, static_cast<WindowsMessages>(message), wParam, lParam);
         }
     }
 }
 
-System::WindowsLResult System::AppCommandEvent(WindowsHWnd hwnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept
+System::WindowsLResult System::AppCommandEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept
 {
-    systemAppCommand(mainAndroidApp, message);
+    systemAppCommand(mainAndroidApp, gsl::narrow_cast<int32_t>(message));
 
-    return DefaultSystemWindowProcess(hwnd, UnderlyingCastEnum<WindowsMessages>(message), wParam, lParam);
+    return DefaultSystemWindowProcess(hWnd, static_cast<WindowsMessages>(message), wParam, lParam);
 }
 
-System::WindowsLResult System::KeyInputEvent(WindowsHWnd hwnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept
+System::WindowsLResult System::KeyInputEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept
 {
     AndroidInputEvent androidInputEvent{ AndroidInputEventType::Key,
-                                         UnderlyingCastEnum<AndroidKeyEventAction>(message),
+                                         static_cast<AndroidKeyEventAction>(message),
                                          UnderlyingCastEnum<AndroidKeyCodes>(gsl::narrow_cast<int>(wParam)) };
 
     systemInputEvent(mainAndroidApp, &androidInputEvent);
 
-    UnusedFunction(hwnd, lParam);
+    UnusedFunction(hWnd, lParam);
 
     return 0;
 }
 
-System::WindowsLResult System::MotionInputEvent(WindowsHWnd hwnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept
+System::WindowsLResult System::MotionInputEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept
 {
-    AndroidInputEvent androidInputEvent{ AndroidInputEventType::Motion, UnderlyingCastEnum<AndroidMotionEventAction>(message) };
+    AndroidInputEvent androidInputEvent{ AndroidInputEventType::Motion, static_cast<AndroidMotionEventAction>(message) };
 
     systemInputEvent(mainAndroidApp, &androidInputEvent);
 
-    UnusedFunction(hwnd, wParam, lParam);
+    UnusedFunction(hWnd, wParam, lParam);
 
     return 0;
 }
 
-System::WindowsLResult System::Destory(WindowsHWnd hwnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept
+System::WindowsLResult System::Destroy(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept
 {
-    if (mainAndroidApp->GetRunning() == hwnd && PostSystemQuitMessage() == 0)
+    if (mainAndroidApp->GetRunning() == hWnd && PostSystemQuitMessage() == 0)
     {
         mainAndroidApp->SetDestroyRequested(1);
     }
 
-    UnusedFunction(hwnd, message, wParam, lParam);
+    UnusedFunction(hWnd, message, wParam, lParam);
 
     return 0;
 }

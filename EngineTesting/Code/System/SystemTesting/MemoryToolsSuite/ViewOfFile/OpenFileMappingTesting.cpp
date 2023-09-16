@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/05 22:00)
+///	版本：0.9.1.4 (2023/09/01 10:07)
 
 #include "OpenFileMappingTesting.h"
 #include "System/FileManager/File.h"
@@ -14,8 +14,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using namespace std::literals;
 
 System::OpenFileMappingTesting::OpenFileMappingTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -60,7 +58,7 @@ void System::OpenFileMappingTesting::DoOpenFileMappingTest(size_t index)
                                              GetMapping(memoryProtect),
                                              FileHandleShareMode::Prevents,
                                              FileHandleCreationDisposition::OpenAlways);
-    ASSERT_TRUE_FAILURE_THROW(IsFileHandleValid(fileHandle), "CreateSystemFile 失败"s);
+    ASSERT_TRUE_FAILURE_THROW(IsFileHandleValid(fileHandle), "CreateSystemFile 失败");
 
     ASSERT_NOT_THROW_EXCEPTION_2(FileMappingTest, index, fileHandle);
 
@@ -73,7 +71,6 @@ void System::OpenFileMappingTesting::FileMappingTest(size_t index, WindowsHandle
 
     const auto memoryProtect = GetMemoryProtect(index);
     const auto fileMapProtection = GetFileMapProtection(index);
-    const auto fileMapDesiredAccess = GetFileMapDesiredAccess(index);
 
     const auto fileMappingHandle = CreateSystemFileMapping(fileHandle, memoryProtect, fileMapProtection, 0, GetMaximumSizeLow(), loopTestFileName.c_str(), nullptr);
     ASSERT_UNEQUAL_NULL_PTR(fileMappingHandle);

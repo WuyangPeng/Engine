@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/28 16:03)
+///	版本：0.9.1.4 (2023/09/01 13:45)
 
-#ifndef SYSTEM_SECURITY_SUITE_ADD_MONDATORY_ACE_TESTING_H
-#define SYSTEM_SECURITY_SUITE_ADD_MONDATORY_ACE_TESTING_H
+#ifndef SYSTEM_SECURITY_SUITE_ADD_MANDATORY_ACE_TESTING_H
+#define SYSTEM_SECURITY_SUITE_ADD_MANDATORY_ACE_TESTING_H
 
 #include "System/Security/Fwd/SecurityFlagsFwd.h"
 #include "System/Security/Using/SecurityAclUsing.h"
@@ -33,31 +33,31 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         NODISCARD bool RandomShuffleFlags();
         void GetAccessControlEntriesTest();
-        void DoGetAccessControlEntriesTest(size_t index, AccessCheckACLPtr acl, SecuritySID& sid);
+        void DoGetAccessControlEntriesTest(size_t index, AccessCheckAclPtr acl, SecuritySid& sid);
 
     private:
         static constexpr auto aclSize = 512u;
 
-        using ControlACEInheritanceContainer = std::vector<ControlACEInheritance>;
+        using ControlAceInheritanceContainer = std::vector<ControlAceInheritance>;
         using MandatoryPolicyContainer = std::vector<MandatoryPolicy>;
-        using ACLBuffer = std::array<char, aclSize>;
+        using AclBuffer = std::array<char, aclSize>;
 
     private:
-        NODISCARD SecuritySID GetSecuritySID();
-        NODISCARD ACLBuffer GetACL();
-        NODISCARD AccessCheckACLPtr GetAccessCheckACLPtr(ACLBuffer& buffer) const noexcept;
+        NODISCARD SecuritySid GetSecuritySid();
+        NODISCARD AclBuffer GetAcl();
+        NODISCARD AccessCheckAclPtr GetAccessCheckAclPtr(AclBuffer& buffer) const noexcept;
 
     private:
-        ControlACEInheritanceContainer controlACEInheritances;
+        ControlAceInheritanceContainer controlAceInheritances;
         MandatoryPolicyContainer mandatoryPolicies;
         std::default_random_engine randomEngine;
         size_t maxSize;
     };
 }
 
-#endif  // SYSTEM_SECURITY_SUITE_ADD_MONDATORY_ACE_TESTING_H
+#endif  // SYSTEM_SECURITY_SUITE_ADD_MANDATORY_ACE_TESTING_H

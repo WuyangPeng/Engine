@@ -82,12 +82,12 @@ void Mathematics::IntegerData<N>::Init(T value)
 
     if (beginBlock < data.size() && beginBlock < endBlock && endBlock <= data.size() && copySize <= sizeof(uint64_t) / sizeof(uint8_t))
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         memcpy(data.data() + beginBlock, &mantissa, copySize);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
     else
     {
@@ -109,13 +109,13 @@ void Mathematics::IntegerData<N>::Init(const DataType& data)
 {
     for (auto i = 0; i < boost::numeric_cast<int>(data.size()) && i < intSize; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
         buffer[i] = data[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 
@@ -211,12 +211,12 @@ Mathematics::NumericalValueSymbol Mathematics::IntegerData<N>::GetSign() const n
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return (buffer[intLast] & 0x8000) ? NumericalValueSymbol::Negative : NumericalValueSymbol::Positive;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <int N>

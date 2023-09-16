@@ -88,12 +88,12 @@ namespace CoreTools
     using ObjectInterfaceSharedPtr = ObjectInterface::ObjectInterfaceSharedPtr;
     using ConstObjectInterfaceSharedPtr = ObjectInterface::ConstObjectInterfaceSharedPtr;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 
     CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(ObjectInterface);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 #endif  // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_INTERFACE_H

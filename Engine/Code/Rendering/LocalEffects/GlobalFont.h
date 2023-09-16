@@ -41,6 +41,7 @@ namespace Rendering
         NODISCARD FontSharedPtr GetFont() const noexcept;
         void SetDefaultFont();
         NODISCARD FontSharedPtr GetDefaultFont() const noexcept;
+        void Release();
 
     private:
         PackageType impl;

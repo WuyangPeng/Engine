@@ -1,20 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/07 21:38)
+///	版本：0.9.1.4 (2023/08/28 16:28)
 
 #ifndef SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_DATA_H
 #define SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_DATA_H
 
 #include "System/SystemDll.h"
 
-#include "System/DynamicLink/Using/EnumResourceToolsUsing.h"
 #include "System/DynamicLink/Using/LoadLibraryUsing.h"
-#include "System/SystemOutput/Data/LanguageIDData.h"
+#include "System/SystemOutput/Data/LanguageIdData.h"
 
 namespace System
 {
@@ -40,9 +39,9 @@ namespace System
             return name;
         }
 
-        NODISCARD constexpr const LanguageIDData GetLanguage() const noexcept
+        NODISCARD constexpr LanguageIdData GetLanguage() const noexcept
         {
-            return LanguageIDData{ UnderlyingCastEnum<PrimaryLanguage>(GetPrimaryLanguageID(language)), UnderlyingCastEnum<SubLanguage>(GetSubLanguageID(language)) };
+            return LanguageIdData{ UnderlyingCastEnum<PrimaryLanguage>(GetPrimaryLanguageId(language)), UnderlyingCastEnum<SubLanguage>(GetSubLanguageId(language)) };
         }
 
     private:

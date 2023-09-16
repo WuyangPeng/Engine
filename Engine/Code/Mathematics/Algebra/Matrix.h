@@ -159,12 +159,12 @@ namespace Mathematics
         {
             static_assert(0 <= Index && Index < entrySize);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
             return entry[Index];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
 
         template <int Index>
@@ -172,12 +172,12 @@ namespace Mathematics
         {
             static_assert(0 <= Index && Index < entrySize);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
             entry[Index] = value;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
 
         template <int Index>
@@ -185,12 +185,12 @@ namespace Mathematics
         {
             static_assert(0 <= Index && Index < entrySize);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
             entry[Index] += value;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
 
         template <int Index>
@@ -198,12 +198,12 @@ namespace Mathematics
         {
             static_assert(0 <= Index && Index < entrySize);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
             entry[Index] -= value;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
 
         template <int Index>
@@ -211,12 +211,12 @@ namespace Mathematics
         {
             static_assert(0 <= Index && Index < entrySize);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
             entry[Index] *= value;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
 
         template <int Index>

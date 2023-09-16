@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/30 13:23)
+///	版本：0.9.1.4 (2023/08/30 18:30)
 
 #include "System/SystemExport.h"
 
@@ -30,12 +30,12 @@ void System::ReleaseSlimReaderWriterLockExclusive(SlimReaderWriterLockPtr slimRe
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26110)
 
     ::ReleaseSRWLockExclusive(slimReaderWriterLock);
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

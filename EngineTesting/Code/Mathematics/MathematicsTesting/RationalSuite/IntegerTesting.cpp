@@ -536,7 +536,7 @@ void Mathematics::IntegerTesting::DivideTest()
         const Integer<4> seventhInteger(firstValue);
         const Integer<4> eighthInteger(secondValue);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26496)
 
         Integer<4> ninthInteger(seventhInteger);
@@ -545,7 +545,7 @@ void Mathematics::IntegerTesting::DivideTest()
         ninthInteger /= eighthInteger;
         tenthInteger %= eighthInteger;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         ASSERT_EQUAL(ninthInteger, Integer<4>(firstValue / secondValue));
         ASSERT_EQUAL(tenthInteger, Integer<4>(firstValue % secondValue));
@@ -908,7 +908,7 @@ void Mathematics::IntegerTesting::ConversionTest()
 
         auto secondValue = firstIntegerData.GetValue<float>();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
         const auto thirdValue = *(reinterpret_cast<const uint32_t*>(&firstValue));
@@ -925,7 +925,7 @@ void Mathematics::IntegerTesting::ConversionTest()
         const auto seventhValue = *(reinterpret_cast<const uint64_t*>(&fifthValue));
         const auto eighthValue = *(reinterpret_cast<const uint64_t*>(&sixthValue));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         ASSERT_EQUAL(seventhValue, eighthValue);
     }

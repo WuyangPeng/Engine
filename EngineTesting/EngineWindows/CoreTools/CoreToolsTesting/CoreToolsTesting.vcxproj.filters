@@ -505,6 +505,9 @@
     <Filter Include="资源文件\OutputCodeTesting">
       <UniqueIdentifier>{ca7f6c4a-db74-4443-8592-f1f0a82c7355}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MemoryToolsSuite 模板文件">
+      <UniqueIdentifier>{11418d23-788a-4673-88d9-468eb1653ac6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\BaseSuite.h">
@@ -574,18 +577,6 @@
       <Filter>CyclicRedundancyCheckSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\DataTypesSuite.h">
-      <Filter>DataTypesSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordIndexTesting.h">
-      <Filter>DataTypesSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordStoredManagerTesting.h">
-      <Filter>DataTypesSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordStoredTesting.h">
-      <Filter>DataTypesSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordTesting.h">
       <Filter>DataTypesSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapTesting.h">
@@ -2010,6 +2001,9 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureLoadingTesting.h">
       <Filter>TextParsingSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\ContainerAdapterTestingDetail.h">
+      <Filter>MemoryToolsSuite 模板文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp">
@@ -2167,18 +2161,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SpecifyCheckSumTesting.cpp">
       <Filter>CyclicRedundancyCheckSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordIndexTesting.cpp">
-      <Filter>DataTypesSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordStoredManagerTesting.cpp">
-      <Filter>DataTypesSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordStoredTesting.cpp">
-      <Filter>DataTypesSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordTesting.cpp">
-      <Filter>DataTypesSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapTesting.cpp">
       <Filter>DataTypesSuite 源文件</Filter>

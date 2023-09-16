@@ -27,10 +27,10 @@
     <None Include="Resource\Schedule.md">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="Configuration\EnvironmentVariable.json">
+    <None Include="Configuration\GameClientCoreTesting.json">
       <Filter>配置</Filter>
     </None>
-    <None Include="Configuration\GameClientCoreTesting.json">
+    <None Include="Configuration\EnvironmentVariable.json">
       <Filter>配置</Filter>
     </None>
     <None Include="Configuration\Log.json">

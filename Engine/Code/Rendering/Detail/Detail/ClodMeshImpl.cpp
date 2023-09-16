@@ -97,7 +97,7 @@ void Rendering::ClodMeshImpl::SetTargetRecord(int aTargetRecord) noexcept
     targetRecord = aTargetRecord;
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
 
@@ -154,7 +154,7 @@ void Rendering::ClodMeshImpl::SelectLevelOfDetail(VertexBuffer& vertexbuffer, co
     }
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 CoreTools::ObjectSharedPtr Rendering::ClodMeshImpl::GetObjectByName(const std::string& name)
 {

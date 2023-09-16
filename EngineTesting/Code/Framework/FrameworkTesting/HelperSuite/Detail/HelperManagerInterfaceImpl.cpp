@@ -23,12 +23,12 @@ Framework::MiddleLayerInterfaceSharedPtr Framework::HelperManagerInterfaceImpl::
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26473)
 
     return const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType*>(this)->GetMiddleLayerInterface(index));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 Framework::ConstMiddleLayerInterfaceSharedPtr Framework::HelperManagerInterfaceImpl::GetMiddleLayerInterface(int index) const

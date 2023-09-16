@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/30 13:23)
+///	版本：0.9.1.4 (2023/08/30 18:31)
 
 #include "System/SystemExport.h"
 
@@ -18,30 +18,32 @@
 #include "System/Windows/Using/WindowsUsing.h"
 #include "System/Windows/WindowsSystem.h"
 
+#include <gsl/util>
+
 #ifdef SYSTEM_PLATFORM_WIN32
 
     #include <process.h>
 
 #endif  // SYSTEM_PLATFORM_WIN32
 
-System::ThreadHandle System::CreateSystemThread(WindowSecurityAttributesPtr threadAttributes, WindowsSize stackSize, ThreadStartRoutine startAddress, WindowsVoidPtr parameter, ThreadCreation creationFlags, WindowsDWordPtr threadID) noexcept
+System::ThreadHandle System::CreateSystemThread(WindowSecurityAttributesPtr threadAttributes, WindowsSize stackSize, ThreadStartRoutine startAddress, WindowsVoidPtr parameter, ThreadCreation creationFlags, WindowsDWordPtr threadId) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::CreateThread(threadAttributes, stackSize, startAddress, parameter, EnumCastUnderlying(creationFlags), threadID);
+    return ::CreateThread(threadAttributes, stackSize, startAddress, parameter, EnumCastUnderlying(creationFlags), threadId);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(threadAttributes, stackSize, startAddress, parameter, creationFlags, threadID);
+    UnusedFunction(threadAttributes, stackSize, startAddress, parameter, creationFlags, threadId);
 
     return nullptr;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ThreadHandle System::CreateSystemThread(WindowsSize stackSize, ThreadStartRoutine startAddress, WindowsVoidPtr parameter, WindowsDWordPtr threadID) noexcept
+System::ThreadHandle System::CreateSystemThread(WindowsSize stackSize, ThreadStartRoutine startAddress, WindowsVoidPtr parameter, WindowsDWordPtr threadId) noexcept
 {
-    return CreateSystemThread(nullptr, stackSize, startAddress, parameter, ThreadCreation::Default, threadID);
+    return CreateSystemThread(nullptr, stackSize, startAddress, parameter, ThreadCreation::Default, threadId);
 }
 
 bool System::CloseSystemThread(ThreadHandle thread) noexcept
@@ -160,7 +162,7 @@ System::MutexWaitReturn System::WaitForSystemThread(ThreadHandle handle, Windows
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<MutexWaitReturn>(::WaitForSingleObject(handle, milliseconds));
+    return UnderlyingCastEnum<MutexWaitReturn>(gsl::narrow_cast<int>(::WaitForSingleObject(handle, milliseconds)));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -175,7 +177,7 @@ System::MutexWaitReturn System::WaitForSystemThread(ThreadHandle handle, Windows
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<MutexWaitReturn>(::WaitForSingleObjectEx(handle, milliseconds, BoolConversion(alertable)));
+    return UnderlyingCastEnum<MutexWaitReturn>(gsl::narrow_cast<int>(::WaitForSingleObjectEx(handle, milliseconds, BoolConversion(alertable))));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -190,7 +192,7 @@ System::MutexWaitReturn System::WaitForSystemThread(WindowsDWord count, const Th
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<MutexWaitReturn>(::WaitForMultipleObjectsEx(count, handle, BoolConversion(waitAll), milliseconds, BoolConversion(alertable)));
+    return UnderlyingCastEnum<MutexWaitReturn>(gsl::narrow_cast<int>(::WaitForMultipleObjectsEx(count, handle, BoolConversion(waitAll), milliseconds, BoolConversion(alertable))));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -205,7 +207,7 @@ System::MutexWaitReturn System::WaitForSystemThread(WindowsDWord count, const Th
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<MutexWaitReturn>(::WaitForMultipleObjects(count, handle, BoolConversion(waitAll), milliseconds));
+    return UnderlyingCastEnum<MutexWaitReturn>(gsl::narrow_cast<int>(::WaitForMultipleObjects(count, handle, BoolConversion(waitAll), milliseconds)));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -216,20 +218,20 @@ System::MutexWaitReturn System::WaitForSystemThread(WindowsDWord count, const Th
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ThreadHandle System::BeginSystemThread(void* security, unsigned int stacksize, StartAddress startAddress, void* argument, unsigned int createFlag, unsigned int* threadAddress) noexcept
+System::ThreadHandle System::BeginSystemThread(void* security, unsigned int stackSize, StartAddress startAddress, void* argument, unsigned int createFlag, unsigned int* threadAddress) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
 
-    return reinterpret_cast<ThreadHandle>(::_beginthreadex(security, stacksize, startAddress, argument, createFlag, threadAddress));
+    return reinterpret_cast<ThreadHandle>(::_beginthreadex(security, stackSize, startAddress, argument, createFlag, threadAddress));
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(security, stacksize, startAddress, argument, createFlag, threadAddress);
+    UnusedFunction(security, stackSize, startAddress, argument, createFlag, threadAddress);
 
     return nullptr;
 

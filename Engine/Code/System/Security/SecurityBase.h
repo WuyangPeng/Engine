@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:15)
+///	版本：0.9.1.4 (2023/08/30 15:13)
 
 #ifndef SYSTEM_SECURITY_SECURITY_BASE_H
 #define SYSTEM_SECURITY_SECURITY_BASE_H
@@ -14,13 +14,9 @@
 
 #include "Fwd/SecurityFlagsFwd.h"
 #include "Using/AccessCheckUsing.h"
-#include "Using/CreateSecurityUsing.h"
-#include "Using/SecurityAclUsing.h"
 #include "Using/SecurityBaseUsing.h"
 #include "Using/SecuritySidUsing.h"
-#include "System/Security/Fwd/SecurityFlagsFwd.h"
 #include "System/Threading/Fwd/ThreadingFlagsFwd.h"
-#include "System/Threading/Using/ThreadUsing.h"
 
 // 安全基础
 namespace System
@@ -65,7 +61,7 @@ namespace System
                                                                       WindowsDWord disableSidCount,
                                                                       SecuritySidAndAttributesPtr sidsToDisable,
                                                                       WindowsDWord deletePrivilegeCount,
-                                                                      LUIDAndAttributesPtr privilegesToDelete,
+                                                                      LuidAndAttributesPtr privilegesToDelete,
                                                                       WindowsDWord restrictedSidCount,
                                                                       SecuritySidAndAttributesPtr sidsToRestrict,
                                                                       WindowsHandlePtr newTokenHandle) noexcept;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:09)
+///	版本：0.9.1.4 (2023/08/30 15:00)
 
 #ifndef SYSTEM_SECURITY_LOOKUP_PRIVILEGE_NAME_FLAGS_H
 #define SYSTEM_SECURITY_LOOKUP_PRIVILEGE_NAME_FLAGS_H
@@ -27,10 +27,10 @@ namespace System
         TakeOwnershipName,
         LoadDriverName,
         SystemProfileName,
-        SystemtimeName,
+        SystemTimeName,
         ProfileSingleProcessName,
         IncreaseBasePriorityName,
-        CreatePagefileName,
+        CreatePageFileName,
         CreatePermanentName,
         BackupName,
         RestoreName,
@@ -40,7 +40,7 @@ namespace System
         SystemEnvironmentName,
         ChangeNotifyName,
         RemoteShutdownName,
-        UndockName,
+        UnDockName,
         SyncAgentName,
         EnableDelegationName,
         ManageVolumeName,

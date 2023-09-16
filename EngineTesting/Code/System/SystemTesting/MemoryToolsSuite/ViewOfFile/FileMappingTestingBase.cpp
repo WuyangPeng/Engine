@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/05 20:52)
+///	版本：0.9.1.4 (2023/09/01 10:06)
 
 #include "FileMappingTestingBase.h"
 #include "System/FileManager/File.h"
@@ -55,9 +55,9 @@ void System::FileMappingTestingBase::RandomShuffle()
 {
     SYSTEM_CLASS_IS_VALID_1;
 
-    shuffle(memoryProtects.begin(), memoryProtects.end(), randomEngine);
-    shuffle(fileMapProtections.begin(), fileMapProtections.end(), randomEngine);
-    shuffle(fileMapDesiredAccesses.begin(), fileMapDesiredAccesses.end(), randomEngine);
+    std::ranges::shuffle(memoryProtects, randomEngine);
+    std::ranges::shuffle(fileMapProtections, randomEngine);
+    std::ranges::shuffle(fileMapDesiredAccesses, randomEngine);
 }
 
 size_t System::FileMappingTestingBase::GetMaxSize() const noexcept

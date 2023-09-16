@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:15)
+///	版本：0.9.1.4 (2023/08/30 15:14)
 
 #ifndef SYSTEM_SECURITY_SECURITY_DESCRIPTOR_H
 #define SYSTEM_SECURITY_SECURITY_DESCRIPTOR_H
@@ -15,7 +15,6 @@
 #include "Fwd/SecurityFlagsFwd.h"
 #include "Using/CreateSecurityUsing.h"
 #include "Using/SecurityAclUsing.h"
-#include "Using/SecurityDescriptorUsing.h"
 #include "Using/SecuritySidUsing.h"
 #include "System/Threading/Using/ThreadUsing.h"
 
@@ -33,11 +32,11 @@ namespace System
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSecurityDescriptorDiscretionaryAccessControlList(SecurityDescriptorPtr securityDescriptor,
                                                                                               bool daclPresent,
-                                                                                              AccessCheckACLPtr dacl,
+                                                                                              AccessCheckAclPtr dacl,
                                                                                               bool daclDefaulted) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSecurityDescriptorDiscretionaryAccessControlList(SecurityDescriptorPtr securityDescriptor,
                                                                                               bool* daclPresent,
-                                                                                              AccessCheckACLPtr* dacl,
+                                                                                              AccessCheckAclPtr* dacl,
                                                                                               bool* daclDefaulted) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemSecurityDescriptorControl(SecurityDescriptorPtr securityDescriptor,
@@ -48,17 +47,17 @@ namespace System
                                                                              WindowsDWordPtr revision) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemSecurityDescriptorGroup(SecurityDescriptorPtr securityDescriptor,
-                                                                           SecuritySIDPtr group,
+                                                                           SecuritySidPtr group,
                                                                            bool groupDefaulted) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemSecurityDescriptorGroup(SecurityDescriptorPtr securityDescriptor,
-                                                                           SecuritySIDPtr* group,
+                                                                           SecuritySidPtr* group,
                                                                            bool* groupDefaulted) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemSecurityDescriptorOwner(SecurityDescriptorPtr securityDescriptor,
-                                                                           SecuritySIDPtr group,
+                                                                           SecuritySidPtr group,
                                                                            bool ownerDefaulted) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemSecurityDescriptorOwner(SecurityDescriptorPtr securityDescriptor,
-                                                                           SecuritySIDPtr* owner,
+                                                                           SecuritySidPtr* owner,
                                                                            bool* ownerDefaulted) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSecurityDescriptorResourceManagerControl(SecurityDescriptorPtr securityDescriptor,
@@ -68,11 +67,11 @@ namespace System
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSecurityDescriptorSystemAccessControlList(SecurityDescriptorPtr securityDescriptor,
                                                                                        bool saclPresent,
-                                                                                       AccessCheckACLPtr sacl,
+                                                                                       AccessCheckAclPtr sacl,
                                                                                        bool saclDefaulted) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSecurityDescriptorSystemAccessControlList(SecurityDescriptorPtr securityDescriptor,
                                                                                        bool* saclPresent,
-                                                                                       AccessCheckACLPtr* sacl,
+                                                                                       AccessCheckAclPtr* sacl,
                                                                                        bool* saclDefaulted) noexcept;
 }
 

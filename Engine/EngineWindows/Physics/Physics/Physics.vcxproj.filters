@@ -140,6 +140,9 @@
     <ClInclude Include="..\..\..\Code\Physics\Helper\UserMacro.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\Helper\Physics.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">

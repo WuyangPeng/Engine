@@ -45,7 +45,7 @@ bool Mathematics::Ellipse2<Real>::IsValid() const noexcept
 {
     try
     {
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26446)
 
         if (axis[0].IsNormalize(epsilon) && axis[1].IsNormalize(epsilon) && -epsilon <= extent[0] && -epsilon <= extent[1])
@@ -53,7 +53,7 @@ bool Mathematics::Ellipse2<Real>::IsValid() const noexcept
         else
             return false;
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
     }
     catch (...)
     {
@@ -76,12 +76,12 @@ Mathematics::Vector2<Real> Mathematics::Ellipse2<Real>::GetAxis0() const noexcep
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return axis[0];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -89,12 +89,12 @@ Mathematics::Vector2<Real> Mathematics::Ellipse2<Real>::GetAxis1() const noexcep
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return axis[1];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -102,12 +102,12 @@ Real Mathematics::Ellipse2<Real>::GetExtent0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return extent[0];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -115,12 +115,12 @@ Real Mathematics::Ellipse2<Real>::GetExtent1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return extent[1];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -198,7 +198,7 @@ void Mathematics::Ellipse2<Real>::FromCoefficients(const Ellipse2Coefficients& c
             THROW_EXCEPTION(SYSTEM_TEXT("³ýÁã´íÎó£¡"s));
         }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
@@ -206,7 +206,7 @@ void Mathematics::Ellipse2<Real>::FromCoefficients(const Ellipse2Coefficients& c
 
         axis[i] = Vector2(rotation(0, i), rotation(1, i));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 

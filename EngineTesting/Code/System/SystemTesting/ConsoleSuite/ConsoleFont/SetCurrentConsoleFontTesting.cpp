@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/04 14:52)
+///	版本：0.9.1.4 (2023/08/31 16:40)
 
 #include "SetCurrentConsoleFontTesting.h"
 #include "System/Console/ConsoleFont.h"
@@ -62,12 +62,12 @@ void System::SetCurrentConsoleFontTesting::FontEqualTest(const ConsoleFontInfoEx
 
     for (auto i = 0; i < gLogicalFontFaceSize; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
         ASSERT_EQUAL(originalConsoleFontInfo.FaceName[i], currentConsoleFontInfo.FaceName[i]);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }

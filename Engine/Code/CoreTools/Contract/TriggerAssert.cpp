@@ -97,20 +97,20 @@ void CoreTools::TriggerAssert::JudgeSelection(DialogBoxCommand selection, const 
 {
     switch (selection)
     {
-        case DialogBoxCommand::IDYes:
+        case DialogBoxCommand::IdYes:
         {
             // 调试断点。
             System::DebugBreak();
 
             break;
         }
-        case DialogBoxCommand::IDNo:
+        case DialogBoxCommand::IdNo:
         {
             // 继续执行。
 
             break;
         }
-        case DialogBoxCommand::IDCancel:
+        case DialogBoxCommand::IdCancel:
         default:
         {
             if (triggerAssertCheck == TriggerAssertCheck::Assertion)

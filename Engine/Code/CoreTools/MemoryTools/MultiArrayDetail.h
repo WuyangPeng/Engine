@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/10 15:45)
+///	版本：0.9.1.4 (2023/09/12 16:23)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_DETAIL_H
@@ -104,6 +104,22 @@ T& CoreTools::MultiArray<T, OrderLToR, Sizes...>::operator()(const std::array<in
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     return container.at(this->GetIndex(coordinate));
+}
+
+template <typename T, bool OrderLToR, int... Sizes>
+bool CoreTools::MultiArray<T, OrderLToR, Sizes...>::operator==(const MultiArray& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return container == rhs.container;
+}
+
+template <typename T, bool OrderLToR, int... Sizes>
+bool CoreTools::MultiArray<T, OrderLToR, Sizes...>::operator<(const MultiArray& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return container < rhs.container;
 }
 
 template <typename T, bool OrderLToR>
@@ -231,6 +247,27 @@ T& CoreTools::MultiArray<T, OrderLToR>::operator()(const SizeType& coordinate)
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     return container.at(this->GetIndex(coordinate));
+}
+
+template <typename T, bool OrderLToR>
+bool CoreTools::MultiArray<T, OrderLToR>::operator==(const MultiArray& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return ParentType::operator==(rhs) && container == rhs.container;
+}
+
+template <typename T, bool OrderLToR>
+bool CoreTools::MultiArray<T, OrderLToR>::operator<(const MultiArray& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    if (ParentType::operator==(rhs))
+    {
+        return container < rhs.container;
+    }
+
+    return ParentType::operator<(rhs);
 }
 
 #endif  // CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_DETAIL_H

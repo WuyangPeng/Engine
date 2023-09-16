@@ -46,7 +46,7 @@ bool Mathematics::Box3<Real>::IsValid() const noexcept
 {
     try
     {
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26446)
 
         if (axis[0].IsNormalize(epsilon) &&
@@ -57,7 +57,7 @@ bool Mathematics::Box3<Real>::IsValid() const noexcept
             -epsilon <= extent[2] &&
             Math::GetValue(0) <= epsilon)
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
         {
             return true;
         }
@@ -110,12 +110,12 @@ Mathematics::Vector3<Real> Mathematics::Box3<Real>::GetAxis0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return axis[0];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -123,12 +123,12 @@ Mathematics::Vector3<Real> Mathematics::Box3<Real>::GetAxis1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return axis[1];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -136,12 +136,12 @@ Mathematics::Vector3<Real> Mathematics::Box3<Real>::GetAxis2() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return axis[2];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -165,12 +165,12 @@ Real Mathematics::Box3<Real>::GetExtent0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return extent[0];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -178,12 +178,12 @@ Real Mathematics::Box3<Real>::GetExtent1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return extent[1];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -191,12 +191,12 @@ Real Mathematics::Box3<Real>::GetExtent2() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return extent[2];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -235,7 +235,7 @@ void Mathematics::Box3<Real>::Set(const Vector3& newCenter,
 
     center = newCenter;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     axis[0] = axis0;
@@ -245,7 +245,7 @@ void Mathematics::Box3<Real>::Set(const Vector3& newCenter,
     extent[1] = extent1;
     extent[2] = extent2;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>

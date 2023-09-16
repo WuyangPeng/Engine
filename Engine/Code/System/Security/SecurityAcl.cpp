@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:17)
+///	版本：0.9.1.4 (2023/08/30 15:16)
 
 #include "System/SystemExport.h"
 
@@ -13,7 +13,7 @@
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
 
-bool System::GetAccessControlListInformation(AccessCheckACLPtr acl, SecurityAclRevisionInformationPtr aclInformation) noexcept
+bool System::GetAccessControlListInformation(AccessCheckAclPtr acl, SecurityAclRevisionInformationPtr aclInformation) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -31,7 +31,7 @@ bool System::GetAccessControlListInformation(AccessCheckACLPtr acl, SecurityAclR
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetAccessControlListInformation(AccessCheckACLPtr acl, SecurityAclSizeInformationPtr aclInformation) noexcept
+bool System::GetAccessControlListInformation(AccessCheckAclPtr acl, SecurityAclSizeInformationPtr aclInformation) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -49,7 +49,7 @@ bool System::GetAccessControlListInformation(AccessCheckACLPtr acl, SecurityAclS
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::InitializeAccessControlList(AccessCheckACLPtr acl, WindowsDWord aclLength, AccessControlListRevision aclRevision) noexcept
+bool System::InitializeAccessControlList(AccessCheckAclPtr acl, WindowsDWord aclLength, AccessControlListRevision aclRevision) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -67,7 +67,7 @@ bool System::InitializeAccessControlList(AccessCheckACLPtr acl, WindowsDWord acl
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::IsAccessControlListValid(AccessCheckACLPtr acl) noexcept
+bool System::IsAccessControlListValid(AccessCheckAclPtr acl) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -85,7 +85,7 @@ bool System::IsAccessControlListValid(AccessCheckACLPtr acl) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SetAccessControlListInformation(AccessCheckACLPtr acl, SecurityAclRevisionInformationPtr aclInformation) noexcept
+bool System::SetAccessControlListInformation(AccessCheckAclPtr acl, SecurityAclRevisionInformationPtr aclInformation) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 

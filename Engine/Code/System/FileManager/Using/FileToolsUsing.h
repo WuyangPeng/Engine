@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/11 20:28)
+///	版本：0.9.1.4 (2023/08/28 17:13)
 
 #ifndef SYSTEM_FILE_MANAGER_FILE_TOOLS_USING_H
 #define SYSTEM_FILE_MANAGER_FILE_TOOLS_USING_H
@@ -37,8 +37,8 @@ namespace System
     using FileAllocationInfoTypePtr = PFILE_ALLOCATION_INFO;
     using FileEndOfFileInfoType = FILE_END_OF_FILE_INFO;
     using FileEndOfFileInfoTypePtr = PFILE_END_OF_FILE_INFO;
-    using FileIOPriorityHintInfoType = FILE_IO_PRIORITY_HINT_INFO;
-    using FileIOPriorityHintInfoTypePtr = PFILE_IO_PRIORITY_HINT_INFO;
+    using FileIoPriorityHintInfoType = FILE_IO_PRIORITY_HINT_INFO;
+    using FileIoPriorityHintInfoTypePtr = PFILE_IO_PRIORITY_HINT_INFO;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -148,11 +148,11 @@ namespace System
         MaximumIoPriorityHintType
     };
 
-    struct FileIOPriorityHintInfoType
+    struct FileIoPriorityHintInfoType
     {
         FilePriorityHint PriorityHint;
     };
-    using FileIOPriorityHintInfoTypePtr = FileIOPriorityHintInfoType*;
+    using FileIoPriorityHintInfoTypePtr = FileIoPriorityHintInfoType*;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

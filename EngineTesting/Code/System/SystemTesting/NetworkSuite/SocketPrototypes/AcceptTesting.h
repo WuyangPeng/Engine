@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/09 21:35)
+///	版本：0.9.1.4 (2023/09/01 10:27)
 
 #ifndef SYSTEM_NETWORK_SUITE_ACCEPT_TESTING_H
 #define SYSTEM_NETWORK_SUITE_ACCEPT_TESTING_H
@@ -29,7 +29,7 @@ namespace System
         void PrintTipsMessage() override;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void AcceptTest();

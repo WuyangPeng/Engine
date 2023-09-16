@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 15:47)
+///	版本：0.9.1.4 (2023/09/01 15:19)
 
 #include "WaitMultipleSemaphoreTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -54,7 +54,7 @@ void System::WaitMultipleSemaphoreTesting::WaitForSemaphoreTest0(const Container
 
     if (flag != MutexWaitReturn::Failed)
     {
-        for (auto handle : semaphoreHandles)
+        for (const auto handle : semaphoreHandles)
         {
             ASSERT_TRUE(ReleaseSystemSemaphore(handle, 1, nullptr));
         }
@@ -68,7 +68,7 @@ void System::WaitMultipleSemaphoreTesting::WaitForSemaphoreTest1(const Container
 
     if (flag != MutexWaitReturn::Failed)
     {
-        for (auto handle : semaphoreHandles)
+        for (const auto handle : semaphoreHandles)
         {
             ASSERT_TRUE(ReleaseSystemSemaphore(handle, 1, nullptr));
         }
@@ -82,7 +82,7 @@ void System::WaitMultipleSemaphoreTesting::WaitForSemaphoreTest2(const Container
 
     if (flag != MutexWaitReturn::Failed)
     {
-        for (auto handle : semaphoreHandles)
+        for (const auto handle : semaphoreHandles)
         {
             ASSERT_TRUE(ReleaseSystemSemaphore(handle, 1, nullptr));
         }
@@ -91,12 +91,12 @@ void System::WaitMultipleSemaphoreTesting::WaitForSemaphoreTest2(const Container
 
 void System::WaitMultipleSemaphoreTesting::CreateSemaphoreTest(Container& semaphoreHandles)
 {
-    constexpr WindowsLong maxSemphoreCount{ 5 };
+    constexpr WindowsLong maxSemaphoreCount{ 5 };
     constexpr auto semaphoreSize = 5;
 
     for (auto i = 0; i < semaphoreSize; ++i)
     {
-        const auto handle = CreateSystemSemaphore(maxSemphoreCount, maxSemphoreCount);
+        const auto handle = CreateSystemSemaphore(maxSemaphoreCount, maxSemaphoreCount);
         ASSERT_TRUE(IsSystemSemaphoreValid(handle));
 
         semaphoreHandles.emplace_back(handle);
@@ -108,9 +108,17 @@ void System::WaitMultipleSemaphoreTesting::CreateThread(const Container& semapho
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest0, this, semaphoreHandles));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest1, this, semaphoreHandles));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest2, this, semaphoreHandles));
+        threadGroup.create_thread([this, semaphoreHandles]() {
+            this->WaitForSemaphoreTest0(semaphoreHandles);
+        });
+
+        threadGroup.create_thread([this, semaphoreHandles]() {
+            this->WaitForSemaphoreTest1(semaphoreHandles);
+        });
+
+        threadGroup.create_thread([this, semaphoreHandles]() {
+            this->WaitForSemaphoreTest2(semaphoreHandles);
+        });
     }
 
     threadGroup.join_all();

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/28 16:00)
+///	版本：0.9.1.4 (2023/09/01 14:03)
 
 #include "AddMandatoryAceTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -15,9 +15,7 @@
 #include "System/Security/Flags/SecurityAclFlags.h"
 #include "System/Security/SecurityAce.h"
 #include "System/Security/SecurityAcl.h"
-#include "System/Security/SecurityDescriptor.h"
 #include "System/Security/SecuritySid.h"
-#include "System/Security/Using/SecurityAceUsing.h"
 #include "System/Threading/Thread.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
@@ -25,23 +23,19 @@
 
 #include <array>
 
-using std::array;
-
-using std::vector;
-
 System::AddMandatoryAceTesting::AddMandatoryAceTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      controlACEInheritances{ ControlACEInheritance::ObjectInheritAce,
-                              ControlACEInheritance::ContainerInheritAce,
-                              ControlACEInheritance::NoPropagateInheritAce,
-                              ControlACEInheritance::InheritOnlyAce,
-                              ControlACEInheritance::InheritedAce,
-                              ControlACEInheritance::ValidInheritFlags },
+      controlAceInheritances{ ControlAceInheritance::ObjectInheritAce,
+                              ControlAceInheritance::ContainerInheritAce,
+                              ControlAceInheritance::NoPropagateInheritAce,
+                              ControlAceInheritance::InheritOnlyAce,
+                              ControlAceInheritance::InheritedAce,
+                              ControlAceInheritance::ValidInheritFlags },
       mandatoryPolicies{ MandatoryPolicy::LabelNoWriteUp,
                          MandatoryPolicy::LabelNoReadUp,
                          MandatoryPolicy::LabelNoExecuteUp },
       randomEngine{ GetEngineRandomSeed() },
-      maxSize{ std::max(controlACEInheritances.size(), mandatoryPolicies.size()) }
+      maxSize{ std::max(controlAceInheritances.size(), mandatoryPolicies.size()) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -60,8 +54,8 @@ void System::AddMandatoryAceTesting::MainTest()
 
 bool System::AddMandatoryAceTesting::RandomShuffleFlags()
 {
-    shuffle(controlACEInheritances.begin(), controlACEInheritances.end(), randomEngine);
-    shuffle(mandatoryPolicies.begin(), mandatoryPolicies.end(), randomEngine);
+    std::ranges::shuffle(controlAceInheritances, randomEngine);
+    std::ranges::shuffle(mandatoryPolicies, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(GetAccessControlEntriesTest);
 
@@ -70,11 +64,11 @@ bool System::AddMandatoryAceTesting::RandomShuffleFlags()
 
 void System::AddMandatoryAceTesting::GetAccessControlEntriesTest()
 {
-    auto aclbuffer = GetACL();
+    auto aclBuffer = GetAcl();
 
-    auto acl = GetAccessCheckACLPtr(aclbuffer);
+    auto acl = GetAccessCheckAclPtr(aclBuffer);
 
-    auto sid = GetSecuritySID();
+    auto sid = GetSecuritySid();
 
     for (auto index = 0u; index < maxSize; ++index)
     {
@@ -82,23 +76,23 @@ void System::AddMandatoryAceTesting::GetAccessControlEntriesTest()
     }
 }
 
-System::AddMandatoryAceTesting::ACLBuffer System::AddMandatoryAceTesting::GetACL()
+System::AddMandatoryAceTesting::AclBuffer System::AddMandatoryAceTesting::GetAcl()
 {
-    ACLBuffer aclbuffer{};
+    AclBuffer aclBuffer{};
 
-    auto acl = GetAccessCheckACLPtr(aclbuffer);
+    const auto acl = GetAccessCheckAclPtr(aclBuffer);
 
     ASSERT_TRUE(InitializeAccessControlList(acl, aclSize, AccessControlListRevision::Revision));
     ASSERT_TRUE(IsAccessControlListValid(acl));
 
-    return aclbuffer;
+    return aclBuffer;
 }
 
-System::SecuritySID System::AddMandatoryAceTesting::GetSecuritySID()
+System::SecuritySid System::AddMandatoryAceTesting::GetSecuritySid()
 {
-    SecuritySID sid{};
+    SecuritySid sid{};
 
-    SecuritySIDIndentifierAuthority identifierAuthority SYSTEM_SECURITY_MANDATORY_LABEL_AUTHORITY;
+    SecuritySidIdentifierAuthority identifierAuthority SYSTEM_SECURITY_MANDATORY_LABEL_AUTHORITY;
 
     constexpr WindowsByte subAuthorityCount{ 1 };
 
@@ -108,20 +102,20 @@ System::SecuritySID System::AddMandatoryAceTesting::GetSecuritySID()
     return sid;
 }
 
-System::AccessCheckACLPtr System::AddMandatoryAceTesting::GetAccessCheckACLPtr(ACLBuffer& buffer) const noexcept
+System::AccessCheckAclPtr System::AddMandatoryAceTesting::GetAccessCheckAclPtr(AclBuffer& buffer) const noexcept
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-    return reinterpret_cast<AccessCheckACLPtr>(buffer.data());
+    return reinterpret_cast<AccessCheckAclPtr>(buffer.data());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
-void System::AddMandatoryAceTesting::DoGetAccessControlEntriesTest(size_t index, AccessCheckACLPtr acl, SecuritySID& sid)
+void System::AddMandatoryAceTesting::DoGetAccessControlEntriesTest(size_t index, AccessCheckAclPtr acl, SecuritySid& sid)
 {
-    auto controlACEInheritance = controlACEInheritances.at(index % controlACEInheritances.size());
-    auto mandatoryPolicy = mandatoryPolicies.at(index % mandatoryPolicies.size());
+    const auto controlAceInheritance = controlAceInheritances.at(index % controlAceInheritances.size());
+    const auto mandatoryPolicy = mandatoryPolicies.at(index % mandatoryPolicies.size());
 
-    ASSERT_TRUE(AddMandatoryAccessControlEntries(acl, AccessControlListRevision::Revision, controlACEInheritance, mandatoryPolicy, &sid));
+    ASSERT_TRUE(AddMandatoryAccessControlEntries(acl, AccessControlListRevision::Revision, controlAceInheritance, mandatoryPolicy, &sid));
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 19:23)
+///	版本：0.9.1.4 (2023/09/01 15:25)
 
 #include "ThreadPriorityTesting.h"
 #include "System/Threading/Flags/ThreadFlags.h"
@@ -37,12 +37,12 @@ void System::ThreadPriorityTesting::ThreadPriorityTest()
     const auto threadHandle = GetCurrentSystemThread();
     ASSERT_TRUE(IsThreadHandleValid(threadHandle));
 
-    const auto originalPrority = GetSystemThreadPriority(threadHandle);
+    const auto originalPriority = GetSystemThreadPriority(threadHandle);
 
     ASSERT_TRUE(SetSystemThreadPriority(threadHandle, EnumCastUnderlying(ThreadPriority::Highest)));
 
-    const auto prority = GetSystemThreadPriority(threadHandle);
-    ASSERT_EQUAL(EnumCastUnderlying(ThreadPriority::Highest), prority);
+    const auto priority = GetSystemThreadPriority(threadHandle);
+    ASSERT_EQUAL(EnumCastUnderlying(ThreadPriority::Highest), priority);
 
-    ASSERT_TRUE(SetSystemThreadPriority(threadHandle, originalPrority));
+    ASSERT_TRUE(SetSystemThreadPriority(threadHandle, originalPriority));
 }

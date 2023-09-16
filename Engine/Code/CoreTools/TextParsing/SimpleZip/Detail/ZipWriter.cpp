@@ -56,12 +56,12 @@ void CoreTools::SimpleZip::ZipWriter::ValidateFileArchive() const
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26812)
 
     mz_zip_error errorData{};
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     // 验证临时文件
     if (!mz_zip_validate_file_archive(archivePath.c_str(), 0, &errorData))

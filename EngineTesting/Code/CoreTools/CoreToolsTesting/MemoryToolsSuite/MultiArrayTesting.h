@@ -35,9 +35,9 @@ namespace CoreTools
         void CoordinateTest();
 
         void OrderLToRTest();
-        void OrderLRoTTest();
+        void OrderRToLTest();
         void OrderLToRConstantTest();
-        void OrderLRoTConstantTest();
+        void OrderRToLConstantTest();
     };
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/26 12:43)
+///	版本：0.9.1.4 (2023/08/31 16:08)
 
 #include "FormatErrorMessageParameterTesting.h"
 #include "System/CharacterString/Data/FormatErrorMessageParameter.h"
@@ -40,7 +40,7 @@ void System::FormatErrorMessageParameterTesting::ParameterTest() noexcept
     static_assert(formatErrorMessageParameter.GetWidth() == FormatMessageWidth::NoRestrictions);
     static_assert(formatErrorMessageParameter.GetWindowError() == WindowError::Success);
 
-    constexpr auto languageIDData = formatErrorMessageParameter.GetLanguageIDData();
-    static_assert(languageIDData.GetPrimaryLanguage() == PrimaryLanguage::Neutral);
-    static_assert(languageIDData.GetSubLanguage() == SubLanguage::Neutral);
+    constexpr auto languageIdData = formatErrorMessageParameter.GetLanguageIdData();
+    static_assert(languageIdData.GetPrimaryLanguage() == PrimaryLanguage::Neutral);
+    static_assert(languageIdData.GetSubLanguage() == SubLanguage::Neutral);
 }

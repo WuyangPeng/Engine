@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 22:44)
+///	版本：0.9.1.4 (2023/08/29 23:44)
 
 #include "System/SystemExport.h"
 
 #include "OpenGLWglPrototypes.h"
 #include "Detail/WglExtensions.h"
-#include "System/Helper/WindowsMacro.h"
-#include "System/OpenGL/Detail/WglExtensions.h"
+#include "System/Helper/WindowsMacro.h" 
 
 bool System::IsWglSwapInterval(int interval) noexcept
 {
@@ -27,7 +26,7 @@ int System::GetWglSwapInterval() noexcept
     return WglGetSwapIntervalEXT();
 }
 
-System::OpenGLHglrc System::CreateWglContext(WindowsHDC hDc) noexcept
+System::OpenGLHglrc System::CreateWglContext(WindowsHdc hDc) noexcept
 {
     return WglCreateContext(hDc);
 }
@@ -45,20 +44,20 @@ System::OpenGLHglrc System::GetCurrentWglContext() noexcept
     return WglGetCurrentContext();
 }
 
-bool System::MakeWglCurrent(WindowsHDC hDc, OpenGLHglrc newContext) noexcept
+bool System::MakeWglCurrent(WindowsHdc hdc, OpenGLHglrc newContext) noexcept
 {
-    if (WglMakeCurrent(hDc, newContext) != gFalse)
+    if (WglMakeCurrent(hdc, newContext) != gFalse)
         return true;
     else
         return false;
 }
 
-int System::ChooseWindowPixelFormat(WindowsHDC hdc, const PixelFormatDescriptor* pixelFormatDescriptor) noexcept
+int System::ChooseWindowPixelFormat(WindowsHdc hdc, const PixelFormatDescriptor* pixelFormatDescriptor) noexcept
 {
     return System::ChoosePixelFormat(hdc, pixelFormatDescriptor);
 }
 
-bool System::SetWindowPixelFormat(WindowsHDC hdc, int format, const PixelFormatDescriptor* pixelFormatDescriptor) noexcept
+bool System::SetWindowPixelFormat(WindowsHdc hdc, int format, const PixelFormatDescriptor* pixelFormatDescriptor) noexcept
 {
     if (System::SetPixelFormat(hdc, format, pixelFormatDescriptor) != gFalse)
         return true;
@@ -71,7 +70,7 @@ System::OpenGLProc System::GetWglProcAddress(const char* glFunction) noexcept
     return WglGetProcAddress(glFunction);
 }
 
-bool System::SwapDeviceBuffers(WindowsHDC hdc) noexcept
+bool System::SwapDeviceBuffers(WindowsHdc hdc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -89,7 +88,7 @@ bool System::SwapDeviceBuffers(WindowsHDC hdc) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool SYSTEM_DEFAULT_DECLARE System::DisplayColorBuffer(WindowsHDC hdc, int syncInterval) noexcept
+bool System::DisplayColorBuffer(WindowsHdc hdc, int syncInterval) noexcept
 {
     if (WglSwapIntervalEXT(0 < syncInterval ? 1 : 0) != gFalse && SwapDeviceBuffers(hdc))
         return true;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/25 13:14)
+///	版本：0.9.1.4 (2023/09/01 14:02)
 
 #include "GetLookupPrivilegeValueTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -43,7 +43,7 @@ void System::GetLookupPrivilegeValueTesting::GetLookupPrivilegeValueTest()
 
 void System::GetLookupPrivilegeValueTesting::DoGetLookupPrivilegeValueTesting(const String& lookupPrivilegeName)
 {
-    LookupPrivilegeLUID uid{};
+    LookupPrivilegeLuid uid{};
 
     ASSERT_TRUE(GetLookupPrivilegeValue(nullptr, lookupPrivilegeName.c_str(), &uid));
 

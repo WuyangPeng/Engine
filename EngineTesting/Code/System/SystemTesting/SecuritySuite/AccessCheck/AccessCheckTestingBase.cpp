@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/26 21:24)
+///	版本：0.9.1.4 (2023/09/01 13:56)
 
 #include "AccessCheckTestingBase.h"
 #include "System/FileManager/Flags/FileFlags.h"
 #include "System/Security/CreateSecurity.h"
 #include "System/Security/Flags/CreateSecurityFlags.h"
 #include "System/Security/SecurityBase.h"
-#include "System/Security/Using/SecurityBaseUsing.h"
 #include "System/Threading/Flags/ThreadToolsFlags.h"
 #include "System/Threading/Process.h"
 #include "System/Threading/ProcessTools.h"
@@ -82,7 +81,7 @@ System::WindowsHandle System::AccessCheckTestingBase::OpenProcessToken()
     SYSTEM_CLASS_IS_VALID_1;
 
     WindowsHandle tokenHandle{ nullptr };
-    ASSERT_TRUE(OpenSysemProcessToken(GetCurrentProcessHandle(), TokenStandardAccess::Default, TokenSpecificAccess::AllAccess, &tokenHandle));
+    ASSERT_TRUE(OpenSystemProcessToken(GetCurrentProcessHandle(), TokenStandardAccess::Default, TokenSpecificAccess::AllAccess, &tokenHandle));
 
     return tokenHandle;
 }

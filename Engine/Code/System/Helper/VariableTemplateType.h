@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/16 21:38)
+///	版本：0.9.1.4 (2023/08/28 17:36)
 
 #ifndef SYSTEM_HELPER_VARIABLE_TEMPLATE_TYPE_H
 #define SYSTEM_HELPER_VARIABLE_TEMPLATE_TYPE_H
@@ -22,31 +22,28 @@ namespace System
 
         static constexpr auto count = sizeof...(Types);
 
-        template <size_t index>
+        template <size_t Index>
+        requires(Index < count)
         struct Element
         {
-            static_assert(index < count);
-
-            using Type = typename std::tuple_element<index, std::tuple<Types...>>::type;
+            using Type = std::tuple_element_t<Index, std::tuple<Types...>>;
         };
     };
 
-    template <size_t index, typename... Types>
+    template <size_t Index, typename... Types>
+    requires(std::is_scalar_v<typename VariableTemplateType<Types...>::template Element<Index>::Type>)
     struct IsScalarImpl final
     {
-        using ClassType = IsScalarImpl<index, Types...>;
+        using ClassType = IsScalarImpl<Index, Types...>;
 
-        static_assert(std::is_scalar<VariableTemplateType<Types...>::Element<index>::Type>::value);
-
-        using Type = typename IsScalarImpl<index - 1, Types...>::Type;
+        using Type = typename IsScalarImpl<Index - 1, Types...>::Type;
     };
 
     template <typename... Types>
+    requires(std::is_scalar_v<typename VariableTemplateType<Types...>::template Element<0>::Type>)
     struct IsScalarImpl<0, Types...> final
     {
         using ClassType = IsScalarImpl<0, Types...>;
-
-        static_assert(std::is_scalar<VariableTemplateType<Types...>::Element<0>::Type>::value);
 
         using Type = std::true_type;
     };

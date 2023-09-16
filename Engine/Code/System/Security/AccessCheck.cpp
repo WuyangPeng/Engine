@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:15)
+///	版本：0.9.1.4 (2023/08/30 15:14)
 
 #include "System/SystemExport.h"
 
@@ -14,6 +14,8 @@
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/WindowsSystem.h"
+
+#include <gsl/util>
 
 void System::GetMapGenericMask(WindowsDWordPtr accessMask, AccessCheckGenericMappingPtr genericMapping) noexcept
 {
@@ -68,7 +70,7 @@ bool System::GetAccessCheck(SecurityDescriptorPtr securityDescriptor,
 }
 
 bool System::GetAccessCheckByType(SecurityDescriptorPtr securityDescriptor,
-                                  SecuritySIDPtr principalSelfSid,
+                                  SecuritySidPtr principalSelfSid,
                                   WindowsHandle clientToken,
                                   AccessGenericMask desiredAccess,
                                   SecurityObjectTypeListPtr objectTypeList,
@@ -123,7 +125,7 @@ bool System::GetAccessCheckByType(SecurityDescriptorPtr securityDescriptor,
 }
 
 bool System::GetAccessCheckByTypeResultList(SecurityDescriptorPtr securityDescriptor,
-                                            SecuritySIDPtr principalSelfSid,
+                                            SecuritySidPtr principalSelfSid,
                                             WindowsHandle clientToken,
                                             AccessGenericMask desiredAccess,
                                             SecurityObjectTypeListPtr objectTypeList,
@@ -185,7 +187,7 @@ System::AccessGenericMask System::GetFileMapGenericMask(FileHandleDesiredAccess 
 
     GetMapGenericMask(&mapGenericMask, &genericMapping);
 
-    return UnderlyingCastEnum<AccessGenericMask>(mapGenericMask);
+    return UnderlyingCastEnum<AccessGenericMask>(gsl::narrow_cast<int>(mapGenericMask));
 }
 
 System::AccessGenericMask System::GetTransactionManagerMapGenericMask(FileHandleDesiredAccess accessMask, AccessCheckGenericMapping& genericMapping) noexcept
@@ -199,7 +201,7 @@ System::AccessGenericMask System::GetTransactionManagerMapGenericMask(FileHandle
 
     GetMapGenericMask(&mapGenericMask, &genericMapping);
 
-    return UnderlyingCastEnum<AccessGenericMask>(mapGenericMask);
+    return UnderlyingCastEnum<AccessGenericMask>(gsl::narrow_cast<int>(mapGenericMask));
 }
 
 System::AccessGenericMask System::GetTransactionMapGenericMask(FileHandleDesiredAccess accessMask, AccessCheckGenericMapping& genericMapping) noexcept
@@ -213,7 +215,7 @@ System::AccessGenericMask System::GetTransactionMapGenericMask(FileHandleDesired
 
     GetMapGenericMask(&mapGenericMask, &genericMapping);
 
-    return UnderlyingCastEnum<AccessGenericMask>(mapGenericMask);
+    return UnderlyingCastEnum<AccessGenericMask>(gsl::narrow_cast<int>(mapGenericMask));
 }
 
 System::AccessGenericMask System::GetResourceManagerMapGenericMask(FileHandleDesiredAccess accessMask, AccessCheckGenericMapping& genericMapping) noexcept
@@ -227,7 +229,7 @@ System::AccessGenericMask System::GetResourceManagerMapGenericMask(FileHandleDes
 
     GetMapGenericMask(&mapGenericMask, &genericMapping);
 
-    return UnderlyingCastEnum<AccessGenericMask>(mapGenericMask);
+    return UnderlyingCastEnum<AccessGenericMask>(gsl::narrow_cast<int>(mapGenericMask));
 }
 
 System::AccessGenericMask System::GetEnlistmentMapGenericMask(FileHandleDesiredAccess accessMask, AccessCheckGenericMapping& genericMapping) noexcept
@@ -241,5 +243,5 @@ System::AccessGenericMask System::GetEnlistmentMapGenericMask(FileHandleDesiredA
 
     GetMapGenericMask(&mapGenericMask, &genericMapping);
 
-    return UnderlyingCastEnum<AccessGenericMask>(mapGenericMask);
+    return UnderlyingCastEnum<AccessGenericMask>(gsl::narrow_cast<int>(mapGenericMask));
 }

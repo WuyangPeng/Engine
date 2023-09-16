@@ -66,14 +66,14 @@ CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Container, Fu
 
     const auto offset = (*FunctionOffset)();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26490)
 
     auto thisPtr = reinterpret_cast<const ContainerType*>(reinterpret_cast<const uint8_t*>(this) - offset);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     return (thisPtr->*FunctionGet)();
 }
@@ -91,13 +91,13 @@ CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Container, Fu
 
     const auto offset = (*FunctionOffset)();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26490)
 
     auto thisPtr = reinterpret_cast<ContainerType*>(reinterpret_cast<uint8_t*>(this) - offset);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     if (thisPtr != nullptr)
     {

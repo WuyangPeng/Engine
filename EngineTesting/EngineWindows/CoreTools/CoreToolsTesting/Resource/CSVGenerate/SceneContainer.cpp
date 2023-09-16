@@ -9,6 +9,7 @@
 
 #include "Scene.h"
 #include "SceneContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -88,5 +89,12 @@ CSVConfigure::SceneContainer::MappingContainer CSVConfigure::SceneContainer::Get
     USER_CLASS_IS_VALID_CONST_9;
 
     return scene;
+}
+
+int CSVConfigure::SceneContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(scene.size());
 }
 

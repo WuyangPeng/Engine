@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/05 22:52)
+///	版本：0.9.1.4 (2023/08/31 13:45)
 
 #include "AndroidInputQueueFacadeTesting.h"
 
@@ -31,7 +31,7 @@ System::AndroidInputQueue* System::AndroidInputQueueFacadeTesting::GetAndroidInp
         THROW_EXCEPTION(SYSTEM_TEXT("androidApp为空。"));
     }
 
-    auto androidInputQueue = androidApp->GetInputQueue();
+    const auto androidInputQueue = androidApp->GetInputQueue();
 
     if (androidInputQueue == nullptr)
     {

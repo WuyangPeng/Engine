@@ -84,14 +84,14 @@ void Mathematics::QuadraticCircleFit2<Real>::Calculate(const Points& points)
 
         std::array<Real, 3> coeff{ inv * eigenVector[0], inv * eigenVector[1], inv * eigenVector[2] };
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         center[0] = -(Math::GetRational(1, 2) * coeff[1]);
         center[1] = -(Math::GetRational(1, 2) * coeff[2]);
         radius = Math::Sqrt(Math::FAbs(center.GetX() * center.GetX() + center.GetY() * center.GetY() - coeff[0]));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         // 对于精确配合，数字舍入误差可能使最小特征值仅仅略为负值。
         // 返回的绝对值，因为应用程序可能依赖的返回值是非负数。

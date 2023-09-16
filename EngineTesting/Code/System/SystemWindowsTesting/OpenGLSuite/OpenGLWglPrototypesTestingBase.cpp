@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/23 0:04)
+///	版本：0.9.1.4 (2023/08/31 14:48)
 
 #include "OpenGLWglPrototypesTestingBase.h"
 #include "System/OpenGL/Flags/OpenGLWglPrototypesFlags.h"
@@ -16,40 +16,40 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::OpenGLWglPrototypesTestingBase::OpenGLWglPrototypesTestingBase(const OStreamShared& stream, WindowsHWnd hwnd)
-    : ParentType{ stream }, hwnd{ hwnd }
+    : ParentType{ stream }, hWnd{ hwnd }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, OpenGLWglPrototypesTestingBase)
 
-System::WindowsHWnd System::OpenGLWglPrototypesTestingBase::GetHwnd() const noexcept
+System::WindowsHWnd System::OpenGLWglPrototypesTestingBase::GetHWnd() const noexcept
 {
     SYSTEM_CLASS_IS_VALID_CONST_1;
 
-    return hwnd;
+    return hWnd;
 }
 
-System::WindowsHDC System::OpenGLWglPrototypesTestingBase::GetWindowsDC()
+System::WindowsHdc System::OpenGLWglPrototypesTestingBase::GetWindowsDc()
 {
-    const auto windowsDC = GetSystemDC(hwnd);
+    const auto windowsDc = GetSystemDC(hWnd);
 
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(windowsDC, "获取 windowsDC 失败。");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(windowsDc, "获取 windowsDC 失败。");
 
-    return windowsDC;
+    return windowsDc;
 }
 
-void System::OpenGLWglPrototypesTestingBase::ReleaseWindowsDCTest(WindowsHDC windowsDC)
+void System::OpenGLWglPrototypesTestingBase::ReleaseWindowsDcTest(WindowsHdc windowsDc)
 {
-    ASSERT_TRUE(ReleaseSystemDC(GetHwnd(), windowsDC));
+    ASSERT_TRUE(ReleaseSystemDC(GetHWnd(), windowsDc));
 }
 
-System::OpenGLHglrc System::OpenGLWglPrototypesTestingBase::GetCreateWglContext(WindowsHDC windowsDC)
+System::OpenGLHglrc System::OpenGLWglPrototypesTestingBase::GetCreateWglContext(WindowsHdc windowsDc)
 {
-    const auto openGLHglrc = CreateWglContext(windowsDC);
+    const auto openGLHglrc = CreateWglContext(windowsDc);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(openGLHglrc, "创建Wgl环境失败。");
 
-    ASSERT_TRUE(MakeWglCurrent(windowsDC, openGLHglrc));
+    ASSERT_TRUE(MakeWglCurrent(windowsDc, openGLHglrc));
 
     return openGLHglrc;
 }
@@ -59,7 +59,7 @@ void System::OpenGLWglPrototypesTestingBase::DeleteWglContextTest(OpenGLHglrc op
     ASSERT_TRUE(DeleteWglContext(openGLHglrc));
 }
 
-void System::OpenGLWglPrototypesTestingBase::SetWindowPixelFormatTest(WindowsHDC windowsDC)
+void System::OpenGLWglPrototypesTestingBase::SetWindowPixelFormatTest(WindowsHdc windowsDc)
 {
     PixelFormatDescriptor pixelFormatDescriptor{};
     pixelFormatDescriptor.nSize = sizeof(PixelFormatDescriptor);
@@ -70,7 +70,7 @@ void System::OpenGLWglPrototypesTestingBase::SetWindowPixelFormatTest(WindowsHDC
     pixelFormatDescriptor.cDepthBits = depthBits;
     pixelFormatDescriptor.cStencilBits = stencilBits;
 
-    const auto pixelFormat = ChooseWindowPixelFormat(windowsDC, &pixelFormatDescriptor);
+    const auto pixelFormat = ChooseWindowPixelFormat(windowsDc, &pixelFormatDescriptor);
 
-    ASSERT_TRUE(SetWindowPixelFormat(windowsDC, pixelFormat, &pixelFormatDescriptor));
+    ASSERT_TRUE(SetWindowPixelFormat(windowsDc, pixelFormat, &pixelFormatDescriptor));
 }

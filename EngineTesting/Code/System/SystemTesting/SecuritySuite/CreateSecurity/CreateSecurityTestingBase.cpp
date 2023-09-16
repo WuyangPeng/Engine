@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/25 18:27)
+///	版本：0.9.1.4 (2023/09/01 14:01)
 
 #include "CreateSecurityTestingBase.h"
 #include "System/Security/CreateSecurity.h"
@@ -22,10 +22,10 @@
 
 System::CreateSecurityTestingBase::CreateSecurityTestingBase(const OStreamShared& stream)
     : ParentType{ stream },
-      securityRequestedInformations{ SecurityRequestedInformation::Owner,
-                                     SecurityRequestedInformation::Group,
-                                     SecurityRequestedInformation::Dacl,
-                                     SecurityRequestedInformation::Label },
+      securityRequestedInformationContainer{ SecurityRequestedInformation::Owner,
+                                             SecurityRequestedInformation::Group,
+                                             SecurityRequestedInformation::Dacl,
+                                             SecurityRequestedInformation::Label },
       securityAutoInherits{ SecurityAutoInherit::DaclAutoInherit,
                             SecurityAutoInherit::SaclAutoInherit,
                             SecurityAutoInherit::DefaultDescriptorForObject,
@@ -47,14 +47,14 @@ System::CreateSecurityTestingBase::SecurityRequestedInformationContainerConstIte
 {
     SYSTEM_CLASS_IS_VALID_CONST_1;
 
-    return securityRequestedInformations.cbegin();
+    return securityRequestedInformationContainer.cbegin();
 }
 
 System::CreateSecurityTestingBase::SecurityRequestedInformationContainerConstIter System::CreateSecurityTestingBase::end() const noexcept
 {
     SYSTEM_CLASS_IS_VALID_CONST_1;
 
-    return securityRequestedInformations.cend();
+    return securityRequestedInformationContainer.cend();
 }
 
 System::CreateSecurityTestingBase::SecurityAutoInheritContainerConstIter System::CreateSecurityTestingBase::GetSecurityAutoInheritBegin() const noexcept
@@ -83,7 +83,7 @@ System::WindowsHandle System::CreateSecurityTestingBase::OpenProcessToken()
     SYSTEM_CLASS_IS_VALID_1;
 
     WindowsHandle tokenHandle{ nullptr };
-    ASSERT_TRUE(OpenSysemProcessToken(GetCurrentProcessHandle(), TokenStandardAccess::Default, TokenSpecificAccess::AllAccess, &tokenHandle));
+    ASSERT_TRUE(OpenSystemProcessToken(GetCurrentProcessHandle(), TokenStandardAccess::Default, TokenSpecificAccess::AllAccess, &tokenHandle));
 
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(tokenHandle, "Token句柄获取失败。");
 

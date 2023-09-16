@@ -122,10 +122,10 @@ namespace Framework
     struct AndroidKeyIdentifiers
     {
         static constexpr auto keyEscape = EnumCastUnderlying(System::AndroidKeyCodes::Escape);
-        static constexpr auto keyLeftArrow = EnumCastUnderlying(System::AndroidKeyCodes::DpadLeft);
-        static constexpr auto keyRightArrow = EnumCastUnderlying(System::AndroidKeyCodes::DpadRight);
-        static constexpr auto keyUpArrow = EnumCastUnderlying(System::AndroidKeyCodes::DpadUp);
-        static constexpr auto keyDownArrow = EnumCastUnderlying(System::AndroidKeyCodes::DpadDown);
+        static constexpr auto keyLeftArrow = EnumCastUnderlying(System::AndroidKeyCodes::DPadLeft);
+        static constexpr auto keyRightArrow = EnumCastUnderlying(System::AndroidKeyCodes::DPadRight);
+        static constexpr auto keyUpArrow = EnumCastUnderlying(System::AndroidKeyCodes::DPadUp);
+        static constexpr auto keyDownArrow = EnumCastUnderlying(System::AndroidKeyCodes::DPadDown);
         static constexpr auto keyHome = EnumCastUnderlying(System::AndroidKeyCodes::MoveHome);
         static constexpr auto keyEnd = EnumCastUnderlying(System::AndroidKeyCodes::MoveEnd);
         static constexpr auto keyPageUp = EnumCastUnderlying(System::AndroidKeyCodes::PageUp);

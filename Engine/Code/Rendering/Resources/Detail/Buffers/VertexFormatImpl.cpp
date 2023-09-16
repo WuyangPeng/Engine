@@ -38,7 +38,7 @@ Rendering::VertexFormatImpl::VertexFormatImpl() noexcept
 
 bool Rendering::VertexFormatImpl::IsValid() const noexcept
 {
-    if (0 < numAttributes && numAttributes <= attributes && 0 <= stride)
+    if (0 <= numAttributes && numAttributes < attributes && 0 <= stride)
         return true;
     else
         return false;

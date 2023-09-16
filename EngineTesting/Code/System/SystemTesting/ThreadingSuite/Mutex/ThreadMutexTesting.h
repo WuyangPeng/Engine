@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 10:38)
+///	版本：0.9.1.4 (2023/09/01 14:33)
 
 #ifndef SYSTEM_THREADING_SUITE_THREAD_MUTEX_TESTING_H
 #define SYSTEM_THREADING_SUITE_THREAD_MUTEX_TESTING_H
@@ -27,22 +27,22 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void ThreadTest();
 
-        void TrylockTest();
+        void TryLockTest();
 
         void WaitForMutexTest(WindowsHandle mutexHandle);
-        void TrylockSuccessTest(WindowsHandle mutexHandle);
-        void TrylockTimeoutTest(WindowsHandle mutexHandle);
+        void TryLockSuccessTest(WindowsHandle mutexHandle);
+        void TryLockTimeoutTest(WindowsHandle mutexHandle);
         void DoThreadTest(WindowsHandle mutexHandle);
-        void DoTrylockTest(WindowsHandle mutexHandle);
+        void DoTryLockTest(WindowsHandle mutexHandle);
 
         void CreateThread(WindowsHandle mutexHandle);
-        void TrylockSuccessThreadTest(WindowsHandle mutexHandle);
-        void TrylockTimeoutThreadTest(WindowsHandle mutexHandle);
+        void TryLockSuccessThreadTest(WindowsHandle mutexHandle);
+        void TryLockTimeoutThreadTest(WindowsHandle mutexHandle);
 
     private:
         int threadSum;

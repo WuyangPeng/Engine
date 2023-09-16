@@ -44,14 +44,14 @@ CoreTools::MethodPropertySet<Value, Reference, Container, FunctionOffset, Functi
 
     const auto offset = (*FunctionOffset)();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 
 #include SYSTEM_WARNING_DISABLE(26490)
 #include SYSTEM_WARNING_DISABLE(26481)
 
     auto thisPtr = reinterpret_cast<ContainerType*>(reinterpret_cast<uint8_t*>(this) - offset);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     if (thisPtr != nullptr)
     {

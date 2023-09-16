@@ -54,12 +54,12 @@ void Mathematics::Line2Circle2<Real>::ClearParameter0() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     parameter[0] = parameter[1];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -88,13 +88,13 @@ void Mathematics::Line2Circle2<Real>::Find(const Vector2& origin, const Vector2&
         rootCount = 2;
         discr = Math::Sqrt(discr);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         parameter[0] = -a1 - discr;
         parameter[1] = -a1 + discr;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
     else if (discr < -Math::GetZeroTolerance())
     {
@@ -104,12 +104,12 @@ void Mathematics::Line2Circle2<Real>::Find(const Vector2& origin, const Vector2&
     {
         rootCount = 1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         parameter[0] = -a1;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     intersects = (rootCount != 0);

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/17 18:44)
+///	版本：0.9.1.4 (2023/09/01 09:53)
 
 #include "SecuritySidMacroTesting.h"
 #include "System/Helper/SecuritySidMacro.h"
@@ -40,53 +40,53 @@ void System::SecuritySidMacroTesting::MainTest()
 
 void System::SecuritySidMacroTesting::NullSecuritySidTest()
 {
-    const SecuritySIDIndentifierAuthority identifierAuthority SYSTEM_SECURITY_NULL_SID_AUTHORITY;
+    constexpr SecuritySidIdentifierAuthority identifierAuthority SYSTEM_SECURITY_NULL_SID_AUTHORITY;
     ASSERT_NOT_THROW_EXCEPTION_2(SecurityTest, identifierAuthority, 0u);
 }
 
 void System::SecuritySidMacroTesting::WorldSecuritySidTest()
 {
-    const SecuritySIDIndentifierAuthority identifierAuthority SYSTEM_SECURITY_WORLD_SID_AUTHORITY;
+    constexpr SecuritySidIdentifierAuthority identifierAuthority SYSTEM_SECURITY_WORLD_SID_AUTHORITY;
     ASSERT_NOT_THROW_EXCEPTION_2(SecurityTest, identifierAuthority, 1u);
 }
 
 void System::SecuritySidMacroTesting::LocalSecuritySidTest()
 {
-    const SecuritySIDIndentifierAuthority identifierAuthority SYSTEM_SECURITY_LOCAL_SID_AUTHORITY;
+    constexpr SecuritySidIdentifierAuthority identifierAuthority SYSTEM_SECURITY_LOCAL_SID_AUTHORITY;
     ASSERT_NOT_THROW_EXCEPTION_2(SecurityTest, identifierAuthority, 2u);
 }
 
 void System::SecuritySidMacroTesting::CreatorSecuritySidTest()
 {
-    const SecuritySIDIndentifierAuthority identifierAuthority SYSTEM_SECURITY_CREATOR_SID_AUTHORITY;
+    constexpr SecuritySidIdentifierAuthority identifierAuthority SYSTEM_SECURITY_CREATOR_SID_AUTHORITY;
     ASSERT_NOT_THROW_EXCEPTION_2(SecurityTest, identifierAuthority, 3u);
 }
 
 void System::SecuritySidMacroTesting::NonUniqueSecurityTest()
 {
-    const SecuritySIDIndentifierAuthority identifierAuthority SYSTEM_SECURITY_NON_UNIQUE_AUTHORITY;
+    constexpr SecuritySidIdentifierAuthority identifierAuthority SYSTEM_SECURITY_NON_UNIQUE_AUTHORITY;
     ASSERT_NOT_THROW_EXCEPTION_2(SecurityTest, identifierAuthority, 4u);
 }
 
 void System::SecuritySidMacroTesting::NtSecurityTest()
 {
-    const SecuritySIDIndentifierAuthority identifierAuthority SYSTEM_SECURITY_NT_AUTHORITY;
+    constexpr SecuritySidIdentifierAuthority identifierAuthority SYSTEM_SECURITY_NT_AUTHORITY;
     ASSERT_NOT_THROW_EXCEPTION_2(SecurityTest, identifierAuthority, 5u);
 }
 
 void System::SecuritySidMacroTesting::ResourceManagerSecurityTest()
 {
-    const SecuritySIDIndentifierAuthority identifierAuthority SYSTEM_SECURITY_RESOURCE_MANAGER_AUTHORITY;
+    constexpr SecuritySidIdentifierAuthority identifierAuthority SYSTEM_SECURITY_RESOURCE_MANAGER_AUTHORITY;
     ASSERT_NOT_THROW_EXCEPTION_2(SecurityTest, identifierAuthority, 9u);
 }
 
 void System::SecuritySidMacroTesting::MandatoryLabelSecurityTest()
 {
-    const SecuritySIDIndentifierAuthority identifierAuthority SYSTEM_SECURITY_MANDATORY_LABEL_AUTHORITY;
+    constexpr SecuritySidIdentifierAuthority identifierAuthority SYSTEM_SECURITY_MANDATORY_LABEL_AUTHORITY;
     ASSERT_NOT_THROW_EXCEPTION_2(SecurityTest, identifierAuthority, 16u);
 }
 
-void System::SecuritySidMacroTesting::SecurityTest(const SecuritySIDIndentifierAuthority& identifierAuthority, uint32_t endValue)
+void System::SecuritySidMacroTesting::SecurityTest(const SecuritySidIdentifierAuthority& identifierAuthority, uint32_t endValue)
 {
     auto index = 0;
     for (const auto value : identifierAuthority.Value)

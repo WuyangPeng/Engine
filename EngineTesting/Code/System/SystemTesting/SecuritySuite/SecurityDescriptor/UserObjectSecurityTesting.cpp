@@ -5,22 +5,22 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/29 19:21)
+///	版本：0.9.1.4 (2023/09/01 14:10)
 
 #include "UserObjectSecurityTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Security/Flags/CreateSecurityFlags.h"
-#include "System/Security/SecurityDescriptor.h" 
+#include "System/Security/SecurityDescriptor.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::UserObjectSecurityTesting::UserObjectSecurityTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      securityRequestedInformations{ SecurityRequestedInformation::Owner,
-                                     SecurityRequestedInformation::Group,
-                                     SecurityRequestedInformation::Dacl,
-                                     SecurityRequestedInformation::Label }
+      securityRequestedInformationContainer{ SecurityRequestedInformation::Owner,
+                                             SecurityRequestedInformation::Group,
+                                             SecurityRequestedInformation::Dacl,
+                                             SecurityRequestedInformation::Label }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -39,7 +39,7 @@ void System::UserObjectSecurityTesting::MainTest()
 
 void System::UserObjectSecurityTesting::UserObjectSecurityTest()
 {
-    for (auto requested : securityRequestedInformations)
+    for (auto requested : securityRequestedInformationContainer)
     {
         ASSERT_NOT_THROW_EXCEPTION_1(DoUserObjectSecurityTest, requested);
     }

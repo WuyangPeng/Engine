@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/10 22:01)
+///	版本：0.9.1.4 (2023/08/31 14:38)
 
 #ifndef SYSTEM_TESTING_DYNAMIC_LINK_SUITE_RESOURCE_WINDOWS_TESTING_BASE_H
 #define SYSTEM_TESTING_DYNAMIC_LINK_SUITE_RESOURCE_WINDOWS_TESTING_BASE_H
@@ -24,7 +24,7 @@ namespace System
         using ParentType = LoadResourceToolsTesting;
 
     public:
-        explicit ResourceWindowsTestingBase(const OStreamShared& stream, WindowsHInstance instance);
+        ResourceWindowsTestingBase(const OStreamShared& stream, WindowsHInstance instance);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

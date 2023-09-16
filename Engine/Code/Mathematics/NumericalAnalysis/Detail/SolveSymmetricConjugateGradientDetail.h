@@ -94,12 +94,12 @@ Real Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::Dot(const RealC
     Real dot{};
     for (auto i = 0; i < size; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         dot += lhs[i] * rhs[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
     return dot;
 }
@@ -129,12 +129,12 @@ void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::UpdateOutput() 
 {
     for (auto i = 0; i < size; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         output[i] += alpha * inputAmend2[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 
@@ -143,12 +143,12 @@ void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::UpdateAmend1() 
 {
     for (auto i = 0; i < size; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         inputAmend1[i] -= alpha * product[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 
@@ -159,12 +159,12 @@ void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::UpdateAmend2() 
 
     for (auto i = 0; i < size; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         inputAmend2[i] = inputAmend1[i] + beta * inputAmend2[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 

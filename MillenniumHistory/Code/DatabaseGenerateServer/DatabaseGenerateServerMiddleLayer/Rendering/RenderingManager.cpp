@@ -11,7 +11,6 @@
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerMiddleLayer/Helper/DatabaseGenerateServerMiddleLayerClassInvariantMacro.h"
 #include "RenderingManager.h"
-#include "System/Helper/Tools.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
 
 DatabaseGenerateServerMiddleLayer::RenderingManager::RenderingManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
@@ -26,9 +25,7 @@ bool DatabaseGenerateServerMiddleLayer::RenderingManager::Idle(int64_t timeDelta
 {
     DATABASE_GENERATE_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_9;
 
-    System::UnusedFunction(timeDelta);
+    MAYBE_UNUSED const auto result = GetRenderer()->Draw(320, 320, Rendering::Colour<float>{ 0.0f, 0.3f, 0.4f, 1.0f }, "test");
 
-    MAYBE_UNUSED const auto result = GetRenderer()->Draw(320, 320, Rendering::Colour<float>{ 0.5f, 0.3f, 0.4f, 1.0f }, "test");
-
-    return true;
+    return ParentType::Idle(timeDelta);
 }

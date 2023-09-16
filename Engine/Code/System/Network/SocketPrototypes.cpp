@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/07 13:47)
+///	版本：0.9.1.4 (2023/08/29 17:47)
 
 #include "System/SystemExport.h"
 
@@ -27,22 +27,22 @@ namespace System
 {
     NODISCARD const WinSockAddress* ToWinSockAddress(const WinSockInternetAddress* address) noexcept
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
         return reinterpret_cast<const WinSockAddress*>(address);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     NODISCARD WinSockAddress* ToWinSockAddress(WinSockInternetAddress* address) noexcept
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
         return reinterpret_cast<WinSockAddress*>(address);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 
@@ -104,15 +104,15 @@ bool System::Bind(WinSocket winSocket, const WinSockInternetAddress* address) no
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WinSocket System::Accept(WinSocket winSocket, WinSockInternetAddress* address, int* namelen) noexcept
+System::WinSocket System::Accept(WinSocket winSocket, WinSockInternetAddress* address, int* nameLen) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::accept(winSocket, ToWinSockAddress(address), namelen);
+    return ::accept(winSocket, ToWinSockAddress(address), nameLen);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(winSocket, address, namelen);
+    UnusedFunction(winSocket, address, nameLen);
 
     return nullptr;
 
@@ -178,15 +178,15 @@ bool System::IsSocketValid(WinSocket winSocket) noexcept
         return false;
 }
 
-unsigned long System::GetHostToNetLong(unsigned long hostlong) noexcept
+unsigned long System::GetHostToNetLong(unsigned long hostLong) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::htonl(hostlong);
+    return ::htonl(hostLong);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hostlong);
+    UnusedFunction(hostLong);
 
     return 0;
 
@@ -264,36 +264,36 @@ bool System::IoctlSocket(WinSocket winSocket, IoctlSocketCmd cmd, unsigned long*
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetPeerName(WinSocket winSocket, WinSockInternetAddress* name, int* namelen) noexcept
+bool System::GetPeerName(WinSocket winSocket, WinSockInternetAddress* name, int* nameLen) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::getpeername(winSocket, ToWinSockAddress(name), namelen) != socketError)
+    if (::getpeername(winSocket, ToWinSockAddress(name), nameLen) != socketError)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(winSocket, name, namelen);
+    UnusedFunction(winSocket, name, nameLen);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetSockName(WinSocket winSocket, WinSockInternetAddress* name, int* namelen) noexcept
+bool System::GetSockName(WinSocket winSocket, WinSockInternetAddress* name, int* nameLen) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::getsockname(winSocket, ToWinSockAddress(name), namelen) != socketError)
+    if (::getsockname(winSocket, ToWinSockAddress(name), nameLen) != socketError)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(winSocket, name, namelen);
+    UnusedFunction(winSocket, name, nameLen);
 
     return false;
 
@@ -373,15 +373,15 @@ uint16_t System::GetNetToHostShort(uint16_t netShort) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-unsigned long System::GetNetToHostLong(unsigned long netlong) noexcept
+unsigned long System::GetNetToHostLong(unsigned long netLong) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::ntohl(netlong);
+    return ::ntohl(netLong);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(netlong);
+    UnusedFunction(netLong);
 
     return 0;
 
@@ -406,15 +406,15 @@ bool System::ShutDown(WinSocket winSocket, ShutdownHow how) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-int System::RecvFrom(WinSocket winSocket, char* buf, int len, SocketRecv flags, WinSockInternetAddress* from, int* fromlen) noexcept
+int System::RecvFrom(WinSocket winSocket, char* buf, int len, SocketRecv flags, WinSockInternetAddress* from, int* fromLen) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::recvfrom(winSocket, buf, len, EnumCastUnderlying(flags), ToWinSockAddress(from), fromlen);
+    return ::recvfrom(winSocket, buf, len, EnumCastUnderlying(flags), ToWinSockAddress(from), fromLen);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(winSocket, buf, len, flags, from, fromlen);
+    UnusedFunction(winSocket, buf, len, flags, from, fromLen);
 
     return 0;
 
@@ -436,15 +436,15 @@ int System::SendTo(WinSocket winSocket, const char* buf, int len, SocketSend fla
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-int System::Select(int width, WinSockFdSet* readfds, WinSockFdSet* writefds, WinSockFdSet* exceptfds, const WinSockTimeval* timeout) noexcept
+int System::Select(int width, WinSockFdSet* readFds, WinSockFdSet* writeFds, WinSockFdSet* exceptFds, const WinSockTimeval* timeout) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::select(width, readfds, writefds, exceptfds, timeout);
+    return ::select(width, readFds, writeFds, exceptFds, timeout);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(width, readfds, writefds, exceptfds, timeout);
+    UnusedFunction(width, readFds, writeFds, exceptFds, timeout);
 
     return 0;
 
@@ -453,13 +453,13 @@ int System::Select(int width, WinSockFdSet* readfds, WinSockFdSet* writefds, Win
 
 void System::WinSockFdClear(WinSocket winSocket, WinSockFdSet* fds) noexcept
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
-    SYSTEM_FD_CLRER(winSocket, fds);
+    SYSTEM_FD_CLEAR(winSocket, fds);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 bool System::WinSockFdIsSet(WinSocket winSocket, WinSockFdSet* fds) noexcept
@@ -472,11 +472,11 @@ bool System::WinSockFdIsSet(WinSocket winSocket, WinSockFdSet* fds) noexcept
 
 void System::WinSockSetFd(WinSocket winSocket, WinSockFdSet* fds) noexcept
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26482)
 #include SYSTEM_WARNING_DISABLE(26446)
 
     SYSTEM_FD_SET(winSocket, fds);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }

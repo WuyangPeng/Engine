@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/20 15:04)
+///	版本：0.9.1.4 (2023/08/31 14:28)
 
 #include "OpenGLTexturesTestingBase.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -219,8 +219,8 @@ System::OpenGLTexturesTestingBase::TextureCubeMapContainerConstIter System::Open
 
 System::TextureExternalFormat System::OpenGLTexturesTestingBase::GetTextureExternalFormat(TextureInternalFormat textureInternalFormat) const
 {
-    const auto iter = textureFormat.find(textureInternalFormat);
-    if (iter != textureFormat.cend())
+    if (const auto iter = textureFormat.find(textureInternalFormat);
+        iter != textureFormat.cend())
     {
         return iter->second;
     }
@@ -230,8 +230,8 @@ System::TextureExternalFormat System::OpenGLTexturesTestingBase::GetTextureExter
 
 int System::OpenGLTexturesTestingBase::GetTextureFormatSize(TextureInternalFormat textureInternalFormat) const
 {
-    const auto iter = textureFormatSize.find(textureInternalFormat);
-    if (iter != textureFormatSize.cend())
+    if (const auto iter = textureFormatSize.find(textureInternalFormat);
+        iter != textureFormatSize.cend())
     {
         return iter->second;
     }

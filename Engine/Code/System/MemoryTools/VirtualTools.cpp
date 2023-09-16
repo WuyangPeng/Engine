@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/19 20:53)
+///	版本：0.9.1.4 (2023/08/29 17:02)
 
 #include "System/SystemExport.h"
 
@@ -13,6 +13,8 @@
 #include "Flags/VirtualToolsFlags.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
+
+#include <gsl/util>
 
 System::WindowsVoidPtr System::AllocateVirtual(WindowsVoidPtr address, WindowsSize size, MemoryAllocation allocationType, MemoryProtect protect) noexcept
 {
@@ -48,9 +50,8 @@ bool System::FreeVirtual(WindowsVoidPtr address) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    constexpr auto freeType = EnumCastUnderlying(MemoryAllocation::Release);
-
-    if (::VirtualFree(address, 0, freeType) != gFalse)
+    if (constexpr auto freeType = EnumCastUnderlying(MemoryAllocation::Release);
+        ::VirtualFree(address, 0, freeType) != gFalse)
         return true;
     else
         return false;
@@ -68,9 +69,8 @@ bool System::FreeVirtual(WindowsHandle process, WindowsVoidPtr address) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    constexpr auto freeType = EnumCastUnderlying(MemoryAllocation::Release);
-
-    if (::VirtualFreeEx(process, address, 0, freeType) != gFalse)
+    if (constexpr auto freeType = EnumCastUnderlying(MemoryAllocation::Release);
+        ::VirtualFreeEx(process, address, 0, freeType) != gFalse)
         return true;
     else
         return false;
@@ -89,11 +89,11 @@ bool System::SetVirtualProtect(WindowsVoidPtr address, WindowsSize size, MemoryP
 #ifdef SYSTEM_PLATFORM_WIN32
 
     WindowsDWord oldMemory{ 0 };
-    const auto result = ::VirtualProtect(address, size, EnumCastUnderlying(newProtect), &oldMemory);
 
-    if (result != gFalse)
+    if (const auto result = ::VirtualProtect(address, size, EnumCastUnderlying(newProtect), &oldMemory);
+        result != gFalse)
     {
-        UnderlyingCastEnumPtr(oldMemory, oldProtect);
+        UnderlyingCastEnumPtr(gsl::narrow_cast<int>(oldMemory), oldProtect);
 
         return true;
     }
@@ -116,11 +116,11 @@ bool System::SetVirtualProtect(WindowsHandle process, WindowsVoidPtr address, Wi
 #ifdef SYSTEM_PLATFORM_WIN32
 
     WindowsDWord oldMemory{ 0 };
-    const auto result = ::VirtualProtectEx(process, address, size, EnumCastUnderlying(newProtect), &oldMemory);
 
-    if (result != gFalse)
+    if (const auto result = ::VirtualProtectEx(process, address, size, EnumCastUnderlying(newProtect), &oldMemory);
+        result != gFalse)
     {
-        UnderlyingCastEnumPtr(oldMemory, oldProtect);
+        UnderlyingCastEnumPtr(gsl::narrow_cast<int>(oldMemory), oldProtect);
 
         return true;
     }
@@ -144,9 +144,8 @@ bool System::GetVirtualQuery(WindowsVoidPtr address, MemoryBasicInformationPtr b
 
     constexpr auto memoryBasicInformationSize = sizeof(MemoryBasicInformation);
 
-    const auto size = ::VirtualQuery(address, buffer, memoryBasicInformationSize);
-
-    if (size == memoryBasicInformationSize)
+    if (const auto size = ::VirtualQuery(address, buffer, memoryBasicInformationSize);
+        size == memoryBasicInformationSize)
         return true;
     else
         return false;
@@ -165,9 +164,9 @@ bool System::GetVirtualQuery(WindowsHandle process, WindowsVoidPtr address, Memo
 #ifdef SYSTEM_PLATFORM_WIN32
 
     constexpr auto memoryBasicInformationSize = sizeof(MemoryBasicInformation);
-    const auto size = ::VirtualQueryEx(process, address, buffer, memoryBasicInformationSize);
 
-    if (size == memoryBasicInformationSize)
+    if (const auto size = ::VirtualQueryEx(process, address, buffer, memoryBasicInformationSize);
+        size == memoryBasicInformationSize)
         return true;
     else
         return false;

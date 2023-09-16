@@ -18,6 +18,7 @@
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "Rendering/Base/RendererObject.h"
 #include "Rendering/Base/RendererObjectBridge.h"
 #include "Rendering/RendererEngine/Detail/RendererClear.h"
 #include "Rendering/RendererEngine/Flags/RendererTypes.h"
@@ -26,8 +27,10 @@
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 #include "Rendering/Shaders/VisualProgram.h"
 
-Rendering::OpenGLDevice::OpenGLDevice() noexcept
-    : ParentType{}
+#include <gsl/util>
+
+Rendering::OpenGLDevice::OpenGLDevice(CoreTools::DisableNotThrow disableNotThrow)
+    : ParentType{}, openGLInputLayoutManager{ disableNotThrow }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -63,6 +66,13 @@ void Rendering::OpenGLDevice::InitDevice() noexcept
 
     System::SetGLViewport(0, 0, GetXSize(), GetYSize());
     System::SetGLDepthRange(0.0, 1.0);
+}
+
+void Rendering::OpenGLDevice::Release() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    openGLInputLayoutManager.UnbindAll();
 }
 
 void Rendering::OpenGLDevice::SetViewport(const Viewport& viewport) noexcept
@@ -142,28 +152,28 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(RendererObjectBridge& rendererObj
         THROW_EXCEPTION(SYSTEM_TEXT("A visual program must exist."))
     }
 
-    constexpr int64_t numPixelsDrawn{};
+    int64_t numPixelsDrawn{};
     const auto programHandle = gl4Program->GetProgramHandle();
 
     System::SetUseProgram(programHandle);
 
     if (EnableShaders(*effect, programHandle))
     {
-        //  GL45VertexBuffer* gl4VBuffer = nullptr;
-        //   GL45InputLayout* gl4Layout = nullptr;
+        RendererObjectBridge::RendererObjectSharedPtr gl4VertexBuffer{};
+        OpenGLInputLayoutManager::OpenGLInputLayoutSharedPtr gl4Layout{};
         if (vertexBuffer->StandardUsage())
         {
-            auto gl4VertexBuffer = rendererObjectBridge.BindRendererObject(RendererTypes::OpenGL, vertexBuffer);
-            //  GL45InputLayoutManager* manager = static_cast<GL45InputLayoutManager*>(mILMap.get());
-            //   gl4Layout = manager->Bind(programHandle, gl4VBuffer->GetGLHandle(), vbuffer.get());
-            // gl4Layout->Enable();
+            gl4VertexBuffer = rendererObjectBridge.BindRendererObject(RendererTypes::OpenGL, vertexBuffer);
+
+            gl4Layout = openGLInputLayoutManager.Bind(programHandle, gl4VertexBuffer->GetGLHandle(), vertexBuffer);
+            gl4Layout->Enable();
         }
-        /*
-        GL45IndexBuffer* gl4IBuffer = nullptr;
-        if (indexBuffer->IsIndexed())
+
+        RendererObjectBridge::RendererObjectSharedPtr gl4IndexBuffer{};
+        if (indexBuffer != nullptr)
         {
-            gl4IBuffer = static_cast<GL45IndexBuffer*>(System::Bind(ibuffer));
-            gl4IBuffer->Enable();
+            gl4IndexBuffer = rendererObjectBridge.BindRendererObject(RendererTypes::OpenGL, indexBuffer);
+            gl4IndexBuffer->Enable();
         }
 
         numPixelsDrawn = DrawPrimitive(vertexBuffer, indexBuffer);
@@ -173,10 +183,10 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(RendererObjectBridge& rendererObj
             gl4Layout->Disable();
         }
 
-        if (gl4IBuffer)
+        if (gl4IndexBuffer != nullptr)
         {
-            gl4IBuffer->Disable();
-        }*/
+            gl4IndexBuffer->Disable();
+        }
 
         DisableShaders(*effect, programHandle);
     }
@@ -349,4 +359,70 @@ void Rendering::OpenGLDevice::EnableSamplers(const Shader& shader, OpenGLUInt pr
 void Rendering::OpenGLDevice::DisableSamplers(const Shader& shader, OpenGLUInt program) noexcept
 {
     System::UnusedFunction(shader, program);
+}
+
+int64_t Rendering::OpenGLDevice::DrawPrimitive(const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer)
+{
+    System::UnusedFunction(vertexBuffer, indexBuffer);
+
+    const auto numActiveVertices = vertexBuffer->GetNumActiveElements();
+    const auto vertexOffset = vertexBuffer->GetOffset();
+
+    const auto numActiveIndices = indexBuffer->GetNumActiveIndices();
+    const auto indexSize = indexBuffer->GetElementSize();
+    const auto indexType = (indexSize == 4 ? System::OpenGLData::UnsignedInt : System::OpenGLData::UnsignedShort);
+
+    auto topology = System::PrimitiveType::Point;
+
+    switch (const auto type = indexBuffer->GetPrimitiveType();
+            type)
+    {
+        case IndexFormatType::PolyPoint:
+            topology = System::PrimitiveType::Point;
+            break;
+        case IndexFormatType::PolySegmentDisjoint:
+            topology = System::PrimitiveType::Lines;
+            break;
+        case IndexFormatType::PolySegmentContiguous:
+            topology = System::PrimitiveType::LinesStrip;
+            break;
+        case IndexFormatType::TriMesh:
+            topology = System::PrimitiveType::Triangles;
+            break;
+        case IndexFormatType::TriStrip:
+            topology = System::PrimitiveType::TrianglesStrip;
+            break;
+        case IndexFormatType::PolySegmentDisjointAdj:
+            topology = System::PrimitiveType::LinesAdjacency;
+            break;
+        case IndexFormatType::PolySegmentContiguousAdj:
+            topology = System::PrimitiveType::LinesStripAdjacency;
+            break;
+        case IndexFormatType::TriMeshAdj:
+            topology = System::PrimitiveType::TrianglesAdjacency;
+            break;
+        case IndexFormatType::TriStripAdj:
+            topology = System::PrimitiveType::TrianglesStripAdjacency;
+            break;
+        default:
+            THROW_EXCEPTION(SYSTEM_TEXT("Unknown primitive topology = " + System::ToString(System::EnumCastUnderlying(type))))
+    }
+
+    const auto offset = indexBuffer->GetOffset();
+    if (indexBuffer != nullptr)
+    {
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        const auto* data = reinterpret_cast<const void*>(gsl::narrow_cast<size_t>(indexSize) * gsl::narrow_cast<size_t>(offset));
+
+#include SYSTEM_WARNING_POP
+
+        System::SetGLDrawRangeElements(topology, 0, numActiveVertices - 1, numActiveIndices, indexType, data);
+    }
+    else
+    {
+        System::SetGLDrawArrays(topology, vertexOffset, numActiveVertices);
+    }
+    return 0;
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 19:45)
+///	版本：0.9.1.4 (2023/08/31 15:06)
 
 #ifndef SYSTEM_WINDOWS_TESTING_WINDOW_SUITE_GET_SYSTEM_CLIENT_RECT_TESTING_H
 #define SYSTEM_WINDOWS_TESTING_WINDOW_SUITE_GET_SYSTEM_CLIENT_RECT_TESTING_H
@@ -22,18 +22,18 @@ namespace System
         using ParentType = UnitTest;
 
     public:
-        explicit GetSystemClientRectTesting(const OStreamShared& stream, WindowsHWnd hwnd);
+        GetSystemClientRectTesting(const OStreamShared& stream, WindowsHWnd hWnd);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void GetSystemClientRectTest();
 
     private:
-        WindowsHWnd hwnd;
+        WindowsHWnd hWnd;
     };
 }
 

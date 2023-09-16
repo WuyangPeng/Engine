@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/06 17:26)
+///	版本：0.9.1.4 (2023/09/04 16:05)
 
 #ifndef NETWORK_NETWORK_MESSAGE_STRING_MESSAGE_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_STRING_MESSAGE_DETAIL_H
 
 #include "MessageContainerDetail.h"
-#include "MessageManager.h"
 #include "MessageSourceDetail.h"
 #include "MessageTargetDetail.h"
 #include "StringMessage.h"

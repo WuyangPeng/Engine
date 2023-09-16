@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/03 20:18)
+///	版本：0.9.1.4 (2023/08/31 16:39)
 
 #include "TextColourTesting.h"
-#include "System/Console/ConsoleColours.h"
+#include "System/Console/ConsoleColour.h"
 #include "System/Console/ConsoleHandle.h"
 #include "System/Console/Flags/ConsoleColoursFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -17,22 +17,22 @@
 
 System::TextColourTesting::TextColourTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      textColours{ TextColour::Black,
-                   TextColour::IntensifiedBlack,
-                   TextColour::Red,
-                   TextColour::IntensifiedRed,
-                   TextColour::Green,
-                   TextColour::IntensifiedGreen,
-                   TextColour::Blue,
-                   TextColour::IntensifiedBlue,
-                   TextColour::Yellow,
-                   TextColour::IntensifiedYellow,
-                   TextColour::Cyan,
-                   TextColour::IntensifiedCyan,
-                   TextColour::Magenta,
-                   TextColour::IntensifiedMagenta,
-                   TextColour::White,
-                   TextColour::IntensifiedWhite },
+      textColourContainer{ TextColour::Black,
+                           TextColour::IntensifiedBlack,
+                           TextColour::Red,
+                           TextColour::IntensifiedRed,
+                           TextColour::Green,
+                           TextColour::IntensifiedGreen,
+                           TextColour::Blue,
+                           TextColour::IntensifiedBlue,
+                           TextColour::Yellow,
+                           TextColour::IntensifiedYellow,
+                           TextColour::Cyan,
+                           TextColour::IntensifiedCyan,
+                           TextColour::Magenta,
+                           TextColour::IntensifiedMagenta,
+                           TextColour::White,
+                           TextColour::IntensifiedWhite },
       textColourMapping{ { TextColour::Black, BackgroundColour::White },
                          { TextColour::Red, BackgroundColour::Black },
                          { TextColour::Green, BackgroundColour::Black },
@@ -78,7 +78,7 @@ bool System::TextColourTesting::RandomShuffleFlags()
 
 void System::TextColourTesting::TextColourTest()
 {
-    for (auto index = 0u; index < textColours.size(); ++index)
+    for (auto index = 0u; index < textColourContainer.size(); ++index)
     {
         DoTextColourTest(index);
     }
@@ -87,9 +87,9 @@ void System::TextColourTesting::TextColourTest()
 void System::TextColourTesting::DoTextColourTest(size_t index)
 {
     const auto standardHandle = GetConsoleStandardHandle(index);
-    const auto textColour = textColours.at(index);
+    const auto textColour = textColourContainer.at(index);
     const auto backgroundColour = textColourMapping.at(textColour);
-    const auto consoleCommon = ConsoleCommon::Default;
+    constexpr auto consoleCommon = ConsoleCommon::Default;
 
     ASSERT_TRUE(SetSystemConsoleTextAttribute(GetStandardHandle(standardHandle), textColour, backgroundColour, consoleCommon));
 

@@ -5,26 +5,25 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/10 10:49)
+///	版本：0.9.1.4 (2023/09/11 11:06)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_RAW_ITERATORS_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_RAW_ITERATORS_DETAIL_H
 
 #include "RawIterators.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
 template <typename T>
 CoreTools::RawConstIterator<T>::RawConstIterator(pointer pointer, int offset) noexcept
     : master{ pointer + offset }
-
-#include STSTEM_WARNING_POP
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
+
+#include SYSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 
@@ -68,12 +67,12 @@ CoreTools::RawConstIterator<T>& CoreTools::RawConstIterator<T>::operator++() noe
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     ++master;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     return *this;
 }
@@ -85,12 +84,12 @@ CoreTools::RawConstIterator<T> CoreTools::RawConstIterator<T>::operator++(int) n
 
     auto current = *this;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     ++master;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     return current;
 }
@@ -100,12 +99,12 @@ CoreTools::RawConstIterator<T>& CoreTools::RawConstIterator<T>::operator--() noe
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     --master;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     return *this;
 }
@@ -117,12 +116,12 @@ CoreTools::RawConstIterator<T> CoreTools::RawConstIterator<T>::operator--(int) n
 
     auto current = *this;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     --master;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     return current;
 }
@@ -132,12 +131,12 @@ CoreTools::RawConstIterator<T>& CoreTools::RawConstIterator<T>::operator+=(ptrdi
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     master += offset;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     return *this;
 }
@@ -157,12 +156,12 @@ CoreTools::RawConstIterator<T>& CoreTools::RawConstIterator<T>::operator-=(ptrdi
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     master -= offset;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     return *this;
 }
@@ -218,24 +217,6 @@ bool CoreTools::RawIterator<T>::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26434)
-
-template <typename T>
-typename CoreTools::RawIterator<T>::reference CoreTools::RawIterator<T>::operator*() noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26492)
-
-    return const_cast<reference>(ParentType::operator*());
-
-#include STSTEM_WARNING_POP
-}
-
-#include STSTEM_WARNING_POP
-
 template <typename T>
 typename CoreTools::RawIterator<T>::pointer CoreTools::RawIterator<T>::operator->()
 {
@@ -244,8 +225,21 @@ typename CoreTools::RawIterator<T>::pointer CoreTools::RawIterator<T>::operator-
     return const_cast<pointer>(ParentType::operator->());
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
+
+template <typename T>
+typename CoreTools::RawIterator<T>::reference CoreTools::RawIterator<T>::operator*() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26492)
+
+    return const_cast<reference>(ParentType::operator*());
+
+#include SYSTEM_WARNING_POP
+}
 
 template <typename T>
 CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator++() noexcept
@@ -331,6 +325,6 @@ CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator-(ptrdiff_t offset)
     return current -= offset;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 #endif  // CORE_TOOLS_MEMORY_TOOLS_RAW_ITERATORS_DETAIL_H

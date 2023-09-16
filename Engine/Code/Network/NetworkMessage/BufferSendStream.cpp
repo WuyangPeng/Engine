@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 13:41)
+///	版本：0.9.1.4 (2023/09/04 16:36)
 
 #include "Network/NetworkExport.h"
 
@@ -15,11 +15,12 @@
 #include "MessageTargetDetail.h"
 #include "Detail/BufferSendStreamImpl.h"
 #include "Detail/ReceiveMessageLevelImpl.h"
-#include "Detail/SendMessageLevelImpl.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/NetworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(Network, BufferSendStream)
 
 Network::BufferSendStream::BufferSendStream(int bytesTotal, ParserStrategy parserStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy)
     : impl{ bytesTotal, parserStrategy, encryptedCompressionStrategy }
@@ -29,9 +30,37 @@ Network::BufferSendStream::BufferSendStream(int bytesTotal, ParserStrategy parse
 
 CLASS_INVARIANT_STUB_DEFINE(Network, BufferSendStream)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, BufferSendStream, Insert, MessageInterfaceSharedPtr, bool)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, BufferSendStream, Save, MessageBufferSharedPtr, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, BufferSendStream, Clear, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, BufferSendStream, IsEmpty, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, BufferSendStream, GetCurrentSize, int)
-COPY_UNSHARED_CLONE_SELF_DEFINE(Network, BufferSendStream)
+bool Network::BufferSendStream::Insert(const MessageInterfaceSharedPtr& message)
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->Insert(message);
+}
+
+void Network::BufferSendStream::Save(const MessageBufferSharedPtr& messageBuffer)
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->Save(messageBuffer);
+}
+
+void Network::BufferSendStream::Clear()
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->Clear();
+}
+
+bool Network::BufferSendStream::IsEmpty() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->IsEmpty();
+}
+
+int Network::BufferSendStream::GetCurrentSize() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetCurrentSize();
+}

@@ -34,12 +34,12 @@ namespace CoreTools
         {
             MAYBE_UNUSED constexpr auto size = sizeof(tIsNoSubscriptable[0]);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
             MAYBE_UNUSED auto value = tIsNoSubscriptable[0];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
     };
 

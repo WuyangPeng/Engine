@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/02 16:08)
+///	版本：0.9.1.4 (2023/08/28 16:17)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_SCREEN_BUFFER_USING_H
 #define SYSTEM_CONSOLE_CONSOLE_SCREEN_BUFFER_USING_H
@@ -17,7 +17,7 @@ namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    using ConsoleColorref = COLORREF;
+    using ConsoleColorRef = COLORREF;
     using ConsoleScreenBufferInfo = CONSOLE_SCREEN_BUFFER_INFO;
     using ConsoleScreenBufferInfoPtr = PCONSOLE_SCREEN_BUFFER_INFO;
     using ConsoleScreenBufferInfoEx = CONSOLE_SCREEN_BUFFER_INFOEX;
@@ -25,7 +25,7 @@ namespace System
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    using ConsoleColorref = uint32_t;
+    using ConsoleColorRef = uint32_t;
 
     struct ConsoleSmallRect
     {
@@ -55,7 +55,7 @@ namespace System
         ConsoleCoord dwMaximumWindowSize;
         uint16_t wPopupAttributes;
         int bFullscreenSupported;
-        ConsoleColorref ColorTable[16];
+        ConsoleColorRef ColorTable[16];
     };
     using ConsoleScreenBufferInfoExPtr = ConsoleScreenBufferInfoEx*;
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/16 23:27)
+///	版本：0.9.1.4 (2023/09/01 09:54)
 
 #include "StringizeMacroTesting.h"
 #include "System/Helper/StringizeMacro.h"
@@ -37,21 +37,21 @@ void System::StringizeMacroTesting::MainTest()
 
 void System::StringizeMacroTesting::StringizeTest()
 {
-    std::string testValue{ SYSTEM_STRINGIZE(100TestValue) };
+    const std::string testValue{ SYSTEM_STRINGIZE(100TestValue) };
 
     ASSERT_EQUAL(testValue, "100TestValue");
 }
 
 void System::StringizeMacroTesting::ConcatenatorTest()
 {
-    std::string SYSTEM_CONCATENATOR(test, Value){ "TestValue" };
+    const std::string SYSTEM_CONCATENATOR(test, Value){ "TestValue" };
 
     ASSERT_EQUAL(testValue, "TestValue");
 }
 
 void System::StringizeMacroTesting::MultipleConcatenatorTest()
 {
-    std::string SYSTEM_MULTIPLE_CONCATENATOR(test, Value, 1){ "TestValue" };
+    const std::string SYSTEM_MULTIPLE_CONCATENATOR(test, Value, 1){ "TestValue" };
 
     ASSERT_EQUAL(testValue1, "TestValue");
 }

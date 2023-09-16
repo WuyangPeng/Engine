@@ -1,13 +1,13 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/30 14:37)
+///	版本：0.9.1.4 (2023/08/31 16:12)
 
-#include "SNPrintfTesting.h"
+#include "SnPrintFTesting.h"
 #include "System/CharacterString/FormatStringDetail.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -16,41 +16,41 @@
 
 using namespace std::literals;
 
-#define OPEN_SNPRINTF_ERROR
-#undef OPEN_SNPRINTF_ERROR
+#define OPEN_SN_PRINT_F_ERROR
+#undef OPEN_SN_PRINT_F_ERROR
 
-System::SNPrintfTesting::SNPrintfTesting(const OStreamShared& stream)
+System::SnPrintFTesting::SnPrintFTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, SNPrintfTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, SnPrintFTesting)
 
-void System::SNPrintfTesting::DoRunUnitTest()
+void System::SnPrintFTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void System::SNPrintfTesting::MainTest()
+void System::SnPrintFTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(SnprintTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(PrintTest);
 }
 
-void System::SNPrintfTesting::SnprintTest()
+void System::SnPrintFTesting::PrintTest()
 {
     const auto result = "5snprintf8"s;
 
     BufferType buffer{ 'a' };
 
-    const auto count = SNPrintf(buffer.data(), result.size() + 1, bufferSize - 1, "%d%s%d", 5, "snprintf", 8);
+    const auto count = SnPrintF(buffer.data(), result.size() + 1, bufferSize - 1, "%d%s%d", 5, "snprintf", 8);
 
     ASSERT_EQUAL(count, boost::numeric_cast<int>(result.size()));
     ASSERT_EQUAL(std::string{ buffer.data() }, result);
 
-#ifdef OPEN_SNPRINTF_ERROR
+#ifdef OPEN_SN_PRINT_F_ERROR
 
-    SNPrintf(buffer.data(), result.size() + 1, bufferSize - 1, "%d%s%d", 5, result, 8);
+    SnPrintF(buffer.data(), result.size() + 1, bufferSize - 1, "%d%s%d", 5, result, 8);
 
-#endif  // OPEN_SNPRINTF_ERROR
+#endif  // OPEN_SN_PRINT_F_ERROR
 }

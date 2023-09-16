@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/29 23:46)
+///	版本：0.9.1.4 (2023/08/30 15:48)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_SUB_LANGUAGE_FLAGS_H
 #define SYSTEM_SYSTEM_OUTPUT_SUB_LANGUAGE_FLAGS_H
@@ -47,7 +47,7 @@ namespace System
         ArabicQatar = SUBLANG_ARABIC_QATAR,  // 阿拉伯语（卡塔尔）
         ArmenianArmenia = SUBLANG_ARMENIAN_ARMENIA,  // 亚美尼亚语（亚美尼亚）
         AssameseIndia = SUBLANG_ASSAMESE_INDIA,  // 阿萨姆语（印度）
-        AzeriKatin = SUBLANG_AZERI_LATIN,  // 阿塞拜疆语（拉丁语）- 阿塞拜疆
+        AzeriLatin = SUBLANG_AZERI_LATIN,  // 阿塞拜疆语（拉丁语）- 阿塞拜疆
         AzeriCyrillic = SUBLANG_AZERI_CYRILLIC,  // 阿塞拜疆语（西里尔文） - 阿塞拜疆
         BashkirRussia = SUBLANG_BASHKIR_RUSSIA,  // 巴什基尔（俄罗斯）
         BasqueBasque = SUBLANG_BASQUE_BASQUE,  // 巴斯克语 (巴斯克)
@@ -55,13 +55,13 @@ namespace System
         BengaliIndia = SUBLANG_BENGALI_INDIA,  // 孟加拉语（印度）
         BengaliBangladesh = SUBLANG_BENGALI_BANGLADESH,  // 孟加拉（孟加拉国）
         BosnianBosniaHerzegovinaLatin = SUBLANG_BOSNIAN_BOSNIA_HERZEGOVINA_LATIN,  // 波斯尼亚（波斯尼亚和黑塞哥维那 - 拉丁语）
-        BosnianBosniaHerzegovinaCyrilli = SUBLANG_BOSNIAN_BOSNIA_HERZEGOVINA_CYRILLIC,  // 波斯尼亚（波斯尼亚和黑塞哥维那 - 西里尔文）
+        BosnianBosniaHerzegovinaCyrillic = SUBLANG_BOSNIAN_BOSNIA_HERZEGOVINA_CYRILLIC,  // 波斯尼亚（波斯尼亚和黑塞哥维那 - 西里尔文）
         BretonFrance = SUBLANG_BRETON_FRANCE,  // 布雷顿（法国）
         BulgarianBulgaria = SUBLANG_BULGARIAN_BULGARIA,  // 保加利亚语（保加利亚）
         CatalanCatalan = SUBLANG_CATALAN_CATALAN,  // 加泰罗尼亚语（加泰罗尼亚）
         ChineseTraditional = SUBLANG_CHINESE_TRADITIONAL,  // 中文（台湾）
         ChineseSimplified = SUBLANG_CHINESE_SIMPLIFIED,  // 中文（中国）
-        ChineseHongkong = SUBLANG_CHINESE_HONGKONG,  // 中文（香港）
+        ChineseHongKong = SUBLANG_CHINESE_HONGKONG,  // 中文（香港）
         ChineseSingapore = SUBLANG_CHINESE_SINGAPORE,  // 中文（新加坡）
         ChineseMacau = SUBLANG_CHINESE_MACAU,  // 中文（澳门）
         CorsicanFrance = SUBLANG_CORSICAN_FRANCE,  // 科西嘉（法国）
@@ -73,8 +73,8 @@ namespace System
         DivehiMaldives = SUBLANG_DIVEHI_MALDIVES,  // 迪维希（马尔代夫）
         Dutch = SUBLANG_DUTCH,  // 荷兰语
         DutchBelgian = SUBLANG_DUTCH_BELGIAN,  // 荷兰语（比利时）
-        EnglishUSA = SUBLANG_ENGLISH_US,  // 英语（美国）
-        EnglishUK = SUBLANG_ENGLISH_UK,  // 英语（英国）
+        EnglishUsa = SUBLANG_ENGLISH_US,  // 英语（美国）
+        EnglishUk = SUBLANG_ENGLISH_UK,  // 英语（英国）
         EnglishAustralian = SUBLANG_ENGLISH_AUS,  // 英语（澳大利亚）
         EnglishCanadian = SUBLANG_ENGLISH_CAN,  // 英语（加拿大）
         EnglishNewZealand = SUBLANG_ENGLISH_NZ,  // 英语（新西兰）
@@ -225,12 +225,12 @@ namespace System
         TatarRussia = SUBLANG_TATAR_RUSSIA,  // 鞑靼语（俄罗斯）
         TeluguIndia = SUBLANG_TELUGU_INDIA,  // 泰卢固语（印度（泰卢固文脚本））
         ThaiThailand = SUBLANG_THAI_THAILAND,  // 泰国语（泰国）
-        TibetanPRC = SUBLANG_TIBETAN_PRC,  // 藏语（中国）
+        TibetanPrc = SUBLANG_TIBETAN_PRC,  // 藏语（中国）
         TigrignaEritrea = SUBLANG_TIGRIGNA_ERITREA,  // 蒂格里亚语（厄立特里亚）
         TswanaSouthAfrica = SUBLANG_TSWANA_SOUTH_AFRICA,  // 茨瓦纳语（南非）
         TurkishTurkey = SUBLANG_TURKISH_TURKEY,  // 土耳其语（土耳其）
         TurkmenTurkmenistan = SUBLANG_TURKMEN_TURKMENISTAN,  // 土库曼语（土库曼斯坦）
-        UighurPRC = SUBLANG_UIGHUR_PRC,  // 维语（中国）
+        UighurPrc = SUBLANG_UIGHUR_PRC,  // 维语（中国）
         UkrainianUkraine = SUBLANG_UKRAINIAN_UKRAINE,  // 乌克兰语（乌克兰）
         UpperSorbianGermany = SUBLANG_UPPER_SORBIAN_GERMANY,  // 上索布语（德国）
         UrduPakistan = SUBLANG_URDU_PAKISTAN,  // 乌尔都语（巴基斯坦）
@@ -242,7 +242,7 @@ namespace System
         WolofSenegal = SUBLANG_WOLOF_SENEGAL,  // 沃洛夫 （塞内加尔）
         XhosaSouthAfrica = SUBLANG_XHOSA_SOUTH_AFRICA,  // 科萨语 （南非）
         YakutRussia = SUBLANG_YAKUT_RUSSIA,  // 雅库特（俄罗斯）
-        YiPRC = SUBLANG_YI_PRC,  // 拼音（中国）
+        YiPrc = SUBLANG_YI_PRC,  // 拼音（中国）
         YorubaNigeria = SUBLANG_YORUBA_NIGERIA,  // 约鲁巴（尼日利亚）
         ZuluSouthAfrica = SUBLANG_ZULU_SOUTH_AFRICA,  // 祖鲁 （南非）
     };
@@ -279,7 +279,7 @@ namespace System
         ArabicQatar = 0x10,
         ArmenianArmenia = 0x01,
         AssameseIndia = 0x01,
-        AzeriKatin = 0x01,
+        AzeriLatin = 0x01,
         AzeriCyrillic = 0x02,
         BashkirRussia = 0x01,
         BasqueBasque = 0x01,
@@ -287,13 +287,13 @@ namespace System
         BengaliIndia = 0x01,
         BengaliBangladesh = 0x02,
         BosnianBosniaHerzegovinaLatin = 0x05,
-        BosnianBosniaHerzegovinaCyrilli = 0x08,
+        BosnianBosniaHerzegovinaCyrillic = 0x08,
         BretonFrance = 0x01,
         BulgarianBulgaria = 0x01,
         CatalanCatalan = 0x01,
         ChineseTraditional = 0x01,
         ChineseSimplified = 0x02,
-        ChineseHongkong = 0x03,
+        ChineseHongKong = 0x03,
         ChineseSingapore = 0x04,
         ChineseMacau = 0x05,
         CorsicanFrance = 0x01,
@@ -305,8 +305,8 @@ namespace System
         DivehiMaldives = 0x01,
         Dutch = 0x01,
         DutchBelgian = 0x02,
-        EnglishUSA = 0x01,
-        EnglishUK = 0x02,
+        EnglishUsa = 0x01,
+        EnglishUk = 0x02,
         EnglishAustralian = 0x03,
         EnglishCanadian = 0x04,
         EnglishNewZealand = 0x05,
@@ -457,12 +457,12 @@ namespace System
         TatarRussia = 0x01,
         TeluguIndia = 0x01,
         ThaiThailand = 0x01,
-        TibetanPRC = 0x01,
+        TibetanPrc = 0x01,
         TigrignaEritrea = 0x02,
         TswanaSouthAfrica = 0x01,
         TurkishTurkey = 0x01,
         TurkmenTurkmenistan = 0x01,
-        UighurPRC = 0x01,
+        UighurPrc = 0x01,
         UkrainianUkraine = 0x01,
         UpperSorbianGermany = 0x01,
         UrduPakistan = 0x01,
@@ -474,7 +474,7 @@ namespace System
         WolofSenegal = 0x01,
         XhosaSouthAfrica = 0x01,
         YakutRussia = 0x01,
-        YiPRC = 0x01,
+        YiPrc = 0x01,
         YorubaNigeria = 0x01,
         ZuluSouthAfrica = 0x01,
     };

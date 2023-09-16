@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/18 0:50)
+///	版本：0.9.1.4 (2023/08/31 14:24)
 
 #include "OpenGLSetCopyBufferSubDataTesting.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
@@ -35,7 +35,7 @@ void System::OpenGLSetCopyBufferSubDataTesting::MainTest()
 
 void System::OpenGLSetCopyBufferSubDataTesting::GetBufferSubDataTest(BindBuffer bindBuffer)
 {
-    BufferDataType bufferData{};
+    const BufferDataType bufferData{};
     SetGLBufferData(bindBuffer, bufferDataSize, bufferData.data(), BufferUsage::Dynamic);
 
     BufferDataType result{};

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/28 21:06)
+///	版本：0.9.1.4 (2023/09/01 14:07)
 
 #include "AdjustTokenGroupsTesting.h"
 #include "System/Helper/SecuritySidMacro.h"
@@ -62,7 +62,7 @@ void System::AdjustTokenGroupsTesting::DoGetAdjustTokenGroupsTest(WindowsHandle 
 
 void System::AdjustTokenGroupsTesting::GroupsTest(SecurityTokenAttributesGroup securityTokenAttributesGroup, WindowsHandle tokenHandle)
 {
-    auto sid = GetSecuritySID();
+    auto sid = GetSecuritySid();
 
     SecurityTokenGroups state{};
     state.GroupCount = 1;

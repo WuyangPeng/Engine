@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/28 16:36)
+///	版本：0.9.1.4 (2023/09/01 14:06)
 
 #include "InitializeAclTesting.h"
 #include "System/Security/Flags/SecurityAclFlags.h"
@@ -35,8 +35,8 @@ void System::InitializeAclTesting::MainTest()
 
 void System::InitializeAclTesting::RevisionInitializeAclTest(AccessControlListRevision accessControlListRevision)
 {
-    AccessCheckACL acl{};
+    AccessCheckAcl acl{};
 
-    ASSERT_TRUE(InitializeAccessControlList(&acl, sizeof(AccessCheckACL), accessControlListRevision));
+    ASSERT_TRUE(InitializeAccessControlList(&acl, sizeof(AccessCheckAcl), accessControlListRevision));
     ASSERT_TRUE(IsAccessControlListValid(&acl));
 }

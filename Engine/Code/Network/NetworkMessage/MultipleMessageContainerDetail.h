@@ -5,17 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 09:25)
+///	版本：0.9.1.4 (2023/09/04 16:04)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_CONTAINER_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_CONTAINER_DETAIL_H
 
 #include "MultipleMessageContainer.h"
-#include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/Helper/Assertion/NetworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
 #include "Network/NetworkMessage/MultipleMessageInitValueDetail.h"
 #include "Network/NetworkMessage/MultipleMessageStreamingLoadDetail.h"
 #include "Network/NetworkMessage/MultipleMessageStreamingSaveDetail.h"
@@ -84,12 +81,12 @@ void Network::MultipleMessageContainer<E, ByteType, Types...>::SetValue(typename
 
     static_assert(0 <= Index && Index < size, "The index is out of bounds.");
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     message[Index] = value;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>

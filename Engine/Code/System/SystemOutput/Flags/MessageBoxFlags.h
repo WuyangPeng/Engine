@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/29 23:45)
+///	版本：0.9.1.4 (2023/08/30 15:47)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_MESSAGE_BOX_FLAGS_H
 #define SYSTEM_SYSTEM_OUTPUT_MESSAGE_BOX_FLAGS_H

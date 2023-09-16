@@ -11,5 +11,6 @@
 #define PHYSICS_MACRO_H
 
 #include "UserMacro.h"
+#include "Physics.h"
 
 #endif  // PHYSICS_MACRO_H

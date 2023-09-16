@@ -109,7 +109,7 @@ void CoreTools::CommandLineInformationTesting::LineInformationSucceedTest(Comman
 
 void CoreTools::CommandLineInformationTesting::MainCommandLineInformationSucceedTest()
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26465)
 
     std::vector charVector{ const_cast<char*>("MyProgram"),
@@ -130,7 +130,7 @@ void CoreTools::CommandLineInformationTesting::MainCommandLineInformationSucceed
                             const_cast<char*>("-fileName"),
                             const_cast<char*>("filename") };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     CommandLineInformation commandLineInformation{ boost::numeric_cast<int>(charVector.size()), charVector.data() };
 
@@ -148,12 +148,12 @@ void CoreTools::CommandLineInformationTesting::WinMainCommandLineInformationSucc
 
 void CoreTools::CommandLineInformationTesting::GetBooleanFalseTest()
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26465)
 
     std::vector charVector{ const_cast<char*>("MyProgram"), const_cast<char*>("-debug") };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     const CommandLineInformation commandLineInformation{ boost::numeric_cast<int>(charVector.size()), charVector.data() };
 
@@ -189,7 +189,7 @@ void CoreTools::CommandLineInformationTesting::GetDoubleExceptionTest()
 
 void CoreTools::CommandLineInformationTesting::GetStringExceptionTest()
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26465)
 
     std::vector charVector{ const_cast<char*>("MyProgram"),
@@ -197,7 +197,7 @@ void CoreTools::CommandLineInformationTesting::GetStringExceptionTest()
                             const_cast<char*>("-string"),
                             const_cast<char*>("value") };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     const CommandLineInformation commandLineInformation{ boost::numeric_cast<int>(charVector.size()), charVector.data() };
 
@@ -206,12 +206,12 @@ void CoreTools::CommandLineInformationTesting::GetStringExceptionTest()
 
 void CoreTools::CommandLineInformationTesting::GetFileNameExceptionTest()
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26465)
 
     std::vector charVector{ const_cast<char*>("MyProgram"), const_cast<char*>("-debug") };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     const CommandLineInformation commandLineInformation{ boost::numeric_cast<int>(charVector.size()), charVector.data() };
 

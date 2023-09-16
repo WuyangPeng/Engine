@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/21 21:47)
+///	版本：0.9.1.4 (2023/08/31 15:32)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -105,9 +105,9 @@ CoreTools::Suite System::TestingHelper::GetWindowsMacroSuite()
 {
     auto windowsMacroSuite = GenerateSuite("Windows宏"s);
 
-    ADD_TEST(windowsMacroSuite, MakeLanguageIDTesting);
+    ADD_TEST(windowsMacroSuite, MakeLanguageIdTesting);
     ADD_TEST(windowsMacroSuite, MakeIntreSourceTesting);
-    ADD_TEST(windowsMacroSuite, MakeLanguageCIDTesting);
+    ADD_TEST(windowsMacroSuite, MakeLanguageCidTesting);
     ADD_TEST(windowsMacroSuite, HResultTesting);
     ADD_TEST(windowsMacroSuite, MakeWordTesting);
     ADD_TEST(windowsMacroSuite, PtrToIntTesting);
@@ -176,7 +176,7 @@ void System::TestingHelper::AddSystemOutputSuite()
     auto systemOutputSuite = GenerateSuite("系统输出"s);
 
     ADD_TEST(systemOutputSuite, MessageBoxFlagsDataTesting);
-    ADD_TEST(systemOutputSuite, LanguageIDDataTesting);
+    ADD_TEST(systemOutputSuite, LanguageIdDataTesting);
     ADD_TEST(systemOutputSuite, OutputDebugStringTesting);
     systemOutputSuite.AddSuite(GetMessageBoxSelectionSuite());
 
@@ -189,7 +189,7 @@ CoreTools::Suite System::TestingHelper::GetMessageBoxSelectionSuite()
 
     ADD_TEST(messageBoxSelectionSuite, MessageBoxSelectionUseYesNoCancelTesting);
     ADD_TEST(messageBoxSelectionSuite, MessageBoxSelectionUseFlagsDataTesting);
-    ADD_TEST(messageBoxSelectionSuite, MessageBoxSelectionUseLanguageIDDataTesting);
+    ADD_TEST(messageBoxSelectionSuite, MessageBoxSelectionUseLanguageIdDataTesting);
 
     return messageBoxSelectionSuite;
 }
@@ -268,8 +268,8 @@ CoreTools::Suite System::TestingHelper::GetFormatErrorMessageSuite()
 
     ADD_TEST(formatErrorMessageSuite, FormatErrorMessageUseLocalAllocTesting);
     ADD_TEST(formatErrorMessageSuite, FormatErrorMessageUseBufferTesting);
-    ADD_TEST(formatErrorMessageSuite, FormatErrorMessageUseDllMoudleAndLocalAllocTesting);
-    ADD_TEST(formatErrorMessageSuite, FormatErrorMessageUseDllMoudleAndUseBufferTesting);
+    ADD_TEST(formatErrorMessageSuite, FormatErrorMessageUseDllModuleAndLocalAllocTesting);
+    ADD_TEST(formatErrorMessageSuite, FormatErrorMessageUseDllModuleAndUseBufferTesting);
     ADD_TEST(formatErrorMessageSuite, FormatErrorMessageReturnStringTesting);
     ADD_TEST(formatErrorMessageSuite, FormatErrorMessageTesting);
     ADD_TEST(formatErrorMessageSuite, FormatStringMessageUseArgumentArrayAndLocalAllocTesting);
@@ -299,8 +299,8 @@ CoreTools::Suite System::TestingHelper::GetStringConversionSuite()
 
     ADD_TEST(stringConversionSuite, MultiByteConversionWideCharTesting);
     ADD_TEST(stringConversionSuite, WideCharConversionMultiByteTesting);
-    ADD_TEST(stringConversionSuite, UTF8ConversionWideCharTesting);
-    ADD_TEST(stringConversionSuite, WideCharConversionUTF8Testing);
+    ADD_TEST(stringConversionSuite, Utf8ConversionWideCharTesting);
+    ADD_TEST(stringConversionSuite, WideCharConversionUtf8Testing);
     ADD_TEST(stringConversionSuite, CompareStringUseLocaleFlagsTesting);
     ADD_TEST(stringConversionSuite, CompareStringUseLocaleStringTesting);
     ADD_TEST(stringConversionSuite, CompareStringOrdinalUseBinaryTesting);
@@ -313,13 +313,13 @@ CoreTools::Suite System::TestingHelper::GetFormatStringSuite()
 {
     auto formatStringSuite = GenerateSuite("格式化消息"s);
 
-    ADD_TEST(formatStringSuite, VsnPrintfTesting);
-    ADD_TEST(formatStringSuite, StrcatTesting);
-    ADD_TEST(formatStringSuite, StrlenTesting);
-    ADD_TEST(formatStringSuite, StrcpyTesting);
-    ADD_TEST(formatStringSuite, StrtokTesting);
-    ADD_TEST(formatStringSuite, StrstrTesting);
-    ADD_TEST(formatStringSuite, SNPrintfTesting);
+    ADD_TEST(formatStringSuite, VsnPrintFTesting);
+    ADD_TEST(formatStringSuite, StrCatTesting);
+    ADD_TEST(formatStringSuite, StrLenTesting);
+    ADD_TEST(formatStringSuite, StrCpyTesting);
+    ADD_TEST(formatStringSuite, StrTokTesting);
+    ADD_TEST(formatStringSuite, StrStrTesting);
+    ADD_TEST(formatStringSuite, SnPrintFTesting);
 
     return formatStringSuite;
 }
@@ -329,7 +329,7 @@ void System::TestingHelper::AddConsoleSuite()
     auto consoleSuite = GenerateSuite("控制台"s);
 
     ADD_TEST(consoleSuite, ConsoleHandleTesting);
-    consoleSuite.AddSuite(GetConsoleColoursSuite());
+    consoleSuite.AddSuite(GetConsoleColourSuite());
     consoleSuite.AddSuite(GetConsoleFontSuite());
     consoleSuite.AddSuite(GetConsoleModeSuite());
     consoleSuite.AddSuite(GetConsoleScreenBufferSuite());
@@ -339,19 +339,19 @@ void System::TestingHelper::AddConsoleSuite()
     AddSuite(consoleSuite);
 }
 
-CoreTools::Suite System::TestingHelper::GetConsoleColoursSuite()
+CoreTools::Suite System::TestingHelper::GetConsoleColourSuite()
 {
-    auto consoleColoursSuite = GenerateSuite("控制台颜色"s);
+    auto consoleColourSuite = GenerateSuite("控制台颜色"s);
 
-    ADD_TEST(consoleColoursSuite, TextColourTesting);
-    ADD_TEST(consoleColoursSuite, BackgroundColourTesting);
-    ADD_TEST(consoleColoursSuite, ConsoleCommonTesting);
-    ADD_TEST(consoleColoursSuite, DefaultTextAttributeTesting);
-    ADD_TEST(consoleColoursSuite, ReadAttributeTesting);
-    ADD_TEST(consoleColoursSuite, WriteAttributeTesting);
-    ADD_TEST(consoleColoursSuite, FillAttributeTesting);
+    ADD_TEST(consoleColourSuite, TextColourTesting);
+    ADD_TEST(consoleColourSuite, BackgroundColourTesting);
+    ADD_TEST(consoleColourSuite, ConsoleCommonTesting);
+    ADD_TEST(consoleColourSuite, DefaultTextAttributeTesting);
+    ADD_TEST(consoleColourSuite, ReadAttributeTesting);
+    ADD_TEST(consoleColourSuite, WriteAttributeTesting);
+    ADD_TEST(consoleColourSuite, FillAttributeTesting);
 
-    return consoleColoursSuite;
+    return consoleColourSuite;
 }
 
 CoreTools::Suite System::TestingHelper::GetConsoleFontSuite()
@@ -930,8 +930,8 @@ CoreTools::Suite System::TestingHelper::GetDatabasePrototypesSuite()
     auto databasePrototypesSuite = GenerateSuite("数据原型"s);
 
     ADD_TEST(databasePrototypesSuite, WinSockHostTesting);
-    ADD_TEST(databasePrototypesSuite, WinSockServentTesting);
-    ADD_TEST(databasePrototypesSuite, WinSockProtoentTesting);
+    ADD_TEST(databasePrototypesSuite, WinSockServEntTesting);
+    ADD_TEST(databasePrototypesSuite, WinSockProtoEntTesting);
 
     return databasePrototypesSuite;
 }

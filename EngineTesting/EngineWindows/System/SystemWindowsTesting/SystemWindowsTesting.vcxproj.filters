@@ -128,7 +128,7 @@
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\DynamicLinkSuite.h">
       <Filter>DynamicLinkSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseLanguageIDDataWindowsTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseLanguageIdDataWindowsTesting.h">
       <Filter>SystemOutputSuite 头文件\MessageBoxSelection</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseFlagsDataWindowsTesting.h">
@@ -268,7 +268,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseFlagsDataWindowsTesting.cpp">
       <Filter>SystemOutputSuite 源文件\MessageBoxSelection</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseLanguageIDDataWindowsTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseLanguageIdDataWindowsTesting.cpp">
       <Filter>SystemOutputSuite 源文件\MessageBoxSelection</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\FindResourceWindowsTesting.cpp">

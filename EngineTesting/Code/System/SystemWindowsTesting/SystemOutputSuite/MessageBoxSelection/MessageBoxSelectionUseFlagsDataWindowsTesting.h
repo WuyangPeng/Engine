@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/30 0:11)
+///	版本：0.9.1.4 (2023/08/31 14:49)
 
 #ifndef SYSTEM_WINDOWS_TESTING_SYSTEM_OUTPUT_SUITE_MESSAGE_BOX_SELECTION_USE_FLAGS_DATA_WINDOWS_TESTING_H
 #define SYSTEM_WINDOWS_TESTING_SYSTEM_OUTPUT_SUITE_MESSAGE_BOX_SELECTION_USE_FLAGS_DATA_WINDOWS_TESTING_H
@@ -28,12 +28,12 @@ namespace System
         using ParentType = UnitTest;
 
     public:
-        explicit MessageBoxSelectionUseFlagsDataWindowsTesting(const OStreamShared& stream, WindowsHWnd hwnd);
+        MessageBoxSelectionUseFlagsDataWindowsTesting(const OStreamShared& stream, WindowsHWnd hWnd);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         NODISCARD bool RandomShuffleFlags();
@@ -41,7 +41,7 @@ namespace System
 
         void DoMessageBoxTest(size_t index);
 
-        MAYBE_NULLPTR WindowsHWnd GetHwnd(MessageBoxMisc miscFlag) const noexcept;
+        MAYBE_NULLPTR WindowsHWnd GetHWnd(MessageBoxMisc miscFlag) const noexcept;
 
     private:
         using TypeFlagsContainer = std::vector<MessageBoxType>;
@@ -57,7 +57,7 @@ namespace System
         using MiscDescription = std::map<MessageBoxMisc, String>;
 
     private:
-        WindowsHWnd hwnd;
+        WindowsHWnd hWnd;
         TypeFlagsContainer typeFlags;
         IconFlagsContainer iconFlags;
         DefaultFlagsContainer defaultFlags;

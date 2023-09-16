@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 10:22)
+///	版本：0.9.1.4 (2023/09/15 11:39)
 
 #include "Network/NetworkExport.h"
 
@@ -52,7 +52,7 @@ Network::BufferSendStreamMultiIndexContainer::BufferSendStreamContainerSharedPtr
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的socketID"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的socketId"s))
     }
 }
 
@@ -63,7 +63,7 @@ Network::BufferSendStreamMultiIndexContainer::BufferSendStreamContainerSharedPtr
     if (const auto iter = handleIdContainer.find(handle);
         iter != handleIdContainer.cend())
     {
-        if (const auto result = iter->second.lock();
+        if (auto result = iter->second.lock();
             result != nullptr)
         {
             return result;

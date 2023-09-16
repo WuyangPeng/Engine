@@ -5,21 +5,18 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 09:46)
+///	版本：0.9.1.4 (2023/09/16 10:54)
 
 #include "ACESockConnectorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/ConfigurationParameter.h"
-#include "Network/Helper/UserMacro.h"
 #include "Network/Interface/SockAddress.h"
 #include "Network/Interface/SockConnector.h"
 #include "Network/Interface/SockStream.h"
 #include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketEvent.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-
-#include <thread>
 
 Network::ACESockConnectorTesting::ACESockConnectorTesting(const OStreamShared& stream)
     : ParentType{ stream }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/07 13:49)
+///	版本：0.9.1.4 (2023/08/29 17:47)
 
 #include "System/SystemExport.h"
 
@@ -13,17 +13,16 @@
 #include "Using/SocketPrototypesUsing.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/Windows/WindowsSystem.h"
 
-System::WinSocket System::WinSocketAccept(WinSocket winSocket, WinSockAddress* addr, WindowsIntPtr addrlen, WinSockConditionProc condition, WindowsDWordPtrSizeType callbackData) noexcept
+System::WinSocket System::WinSocketAccept(WinSocket winSocket, WinSockAddress* addr, WindowsIntPtr addrLen, WinSockConditionProc condition, WindowsDWordPtrSizeType callbackData) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::WSAAccept(winSocket, addr, addrlen, condition, callbackData);
+    return ::WSAAccept(winSocket, addr, addrLen, condition, callbackData);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(winSocket, addr, addrlen, condition, callbackData);
+    UnusedFunction(winSocket, addr, addrLen, condition, callbackData);
 
     return nullptr;
 
@@ -32,7 +31,7 @@ System::WinSocket System::WinSocketAccept(WinSocket winSocket, WinSockAddress* a
 
 bool System::WinSocketConnect(WinSocket winSocket,
                               const WinSockAddress* name,
-                              int namelen,
+                              int nameLen,
                               WinSockBufPtr callerData,
                               WinSockBufPtr calleeData,
                               QualityOfServicePtr sQualityOfService,
@@ -40,14 +39,14 @@ bool System::WinSocketConnect(WinSocket winSocket,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WSAConnect(winSocket, name, namelen, callerData, calleeData, sQualityOfService, gQualityOfService) != socketError)
+    if (::WSAConnect(winSocket, name, nameLen, callerData, calleeData, sQualityOfService, gQualityOfService) != socketError)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(winSocket, name, namelen, callerData, calleeData, sQualityOfService, gQualityOfService);
+    UnusedFunction(winSocket, name, nameLen, callerData, calleeData, sQualityOfService, gQualityOfService);
 
     return false;
 
@@ -55,8 +54,8 @@ bool System::WinSocketConnect(WinSocket winSocket,
 }
 
 bool System::WinSocketConnectByName(WinSocket winSocket,
-                                    TChar* nodename,
-                                    TChar* servicename,
+                                    TChar* nodeName,
+                                    TChar* serviceName,
                                     WindowsDWordPtr localAddressLength,
                                     WinSockAddress* localAddress,
                                     WindowsDWordPtr remoteAddressLength,
@@ -65,86 +64,86 @@ bool System::WinSocketConnectByName(WinSocket winSocket,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WSAConnectByName(winSocket, nodename, servicename, localAddressLength, localAddress, remoteAddressLength, remoteAddress, timeout, nullptr) != gFalse)
+    if (::WSAConnectByName(winSocket, nodeName, serviceName, localAddressLength, localAddress, remoteAddressLength, remoteAddress, timeout, nullptr) != gFalse)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(winSocket, nodename, servicename, localAddressLength, localAddress, remoteAddressLength, remoteAddress, timeout);
+    UnusedFunction(winSocket, nodeName, serviceName, localAddressLength, localAddress, remoteAddressLength, remoteAddress, timeout);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::WinSocketHostToNetLong(WinSocket winSocket, unsigned long hostlong, unsigned long* netlong) noexcept
+bool System::WinSocketHostToNetLong(WinSocket winSocket, unsigned long hostLong, unsigned long* netLong) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WSAHtonl(winSocket, hostlong, netlong) != socketError)
+    if (::WSAHtonl(winSocket, hostLong, netLong) != socketError)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(winSocket, hostlong, netlong);
+    UnusedFunction(winSocket, hostLong, netLong);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::WinSocketHostToNetShort(WinSocket winSocket, unsigned short hostshort, unsigned short* netshort) noexcept
+bool System::WinSocketHostToNetShort(WinSocket winSocket, unsigned short hostShort, unsigned short* netShort) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WSAHtons(winSocket, hostshort, netshort) != socketError)
+    if (::WSAHtons(winSocket, hostShort, netShort) != socketError)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(winSocket, hostshort, netshort);
+    UnusedFunction(winSocket, hostShort, netShort);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::WinSocketNetToHostLong(WinSocket winSocket, unsigned long netlong, unsigned long* hostlong) noexcept
+bool System::WinSocketNetToHostLong(WinSocket winSocket, unsigned long netLong, unsigned long* hostLong) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WSANtohl(winSocket, netlong, hostlong) != socketError)
+    if (::WSANtohl(winSocket, netLong, hostLong) != socketError)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(winSocket, netlong, hostlong);
+    UnusedFunction(winSocket, netLong, hostLong);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::WinSocketNetToHostShort(WinSocket winSocket, unsigned short netshort, unsigned short* hostshort) noexcept
+bool System::WinSocketNetToHostShort(WinSocket winSocket, unsigned short netShort, unsigned short* hostShort) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WSANtohs(winSocket, netshort, hostshort) != socketError)
+    if (::WSANtohs(winSocket, netShort, hostShort) != socketError)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(winSocket, netshort, hostshort);
+    UnusedFunction(winSocket, netShort, hostShort);
 
     return false;
 
@@ -178,17 +177,17 @@ int System::WinSocketRecvFrom(WinSocket winSocket,
                               WindowsDWordPtr numberOfBytesRecvd,
                               WindowsDWordPtr flags,
                               WinSockAddress* from,
-                              WindowsIntPtr fromlen,
+                              WindowsIntPtr fromLen,
                               SocketOverlappedPtr overlapped,
                               SocketOverlappedCompletionRoutine completionRoutine) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::WSARecvFrom(winSocket, buffers, bufferCount, numberOfBytesRecvd, flags, from, fromlen, overlapped, completionRoutine);
+    return ::WSARecvFrom(winSocket, buffers, bufferCount, numberOfBytesRecvd, flags, from, fromLen, overlapped, completionRoutine);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(winSocket, buffers, bufferCount, numberOfBytesRecvd, flags, from, fromlen, overlapped, completionRoutine);
+    UnusedFunction(winSocket, buffers, bufferCount, numberOfBytesRecvd, flags, from, fromLen, overlapped, completionRoutine);
 
     return 0;
 
@@ -222,17 +221,17 @@ int System::WinSocketSendTo(WinSocket winSocket,
                             WindowsDWordPtr numberOfBytesSent,
                             WindowsDWord flags,
                             const WinSockAddress* to,
-                            int tolen,
+                            int toLen,
                             SocketOverlappedPtr overlapped,
                             SocketOverlappedCompletionRoutine completionRoutine) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::WSASendTo(winSocket, buffers, bufferCount, numberOfBytesSent, flags, to, tolen, overlapped, completionRoutine);
+    return ::WSASendTo(winSocket, buffers, bufferCount, numberOfBytesSent, flags, to, toLen, overlapped, completionRoutine);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(winSocket, buffers, bufferCount, numberOfBytesSent, flags, to, tolen, overlapped, completionRoutine);
+    UnusedFunction(winSocket, buffers, bufferCount, numberOfBytesSent, flags, to, toLen, overlapped, completionRoutine);
 
     return 0;
 

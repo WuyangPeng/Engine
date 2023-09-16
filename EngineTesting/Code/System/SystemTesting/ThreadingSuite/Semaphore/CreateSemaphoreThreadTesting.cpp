@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 15:15)
+///	版本：0.9.1.4 (2023/09/01 15:17)
 
 #include "CreateSemaphoreThreadTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -35,9 +35,9 @@ void System::CreateSemaphoreThreadTesting::MainTest()
 
 void System::CreateSemaphoreThreadTesting::ThreadTest()
 {
-    constexpr WindowsLong maxSemphoreCount{ 5 };
+    constexpr WindowsLong maxSemaphoreCount{ 5 };
 
-    const auto semaphoreHandle = CreateSystemSemaphore(maxSemphoreCount, maxSemphoreCount);
+    const auto semaphoreHandle = CreateSystemSemaphore(maxSemaphoreCount, maxSemaphoreCount);
     ASSERT_TRUE(IsSystemSemaphoreValid(semaphoreHandle));
 
     ASSERT_NOT_THROW_EXCEPTION_1(CreateThread, semaphoreHandle);
@@ -62,7 +62,9 @@ void System::CreateSemaphoreThreadTesting::CreateThread(WindowsHandle semaphoreH
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest, this, semaphoreHandle));
+        threadGroup.create_thread([this, semaphoreHandle]() {
+            this->WaitForSemaphoreTest(semaphoreHandle);
+        });
     }
 
     threadGroup.join_all();

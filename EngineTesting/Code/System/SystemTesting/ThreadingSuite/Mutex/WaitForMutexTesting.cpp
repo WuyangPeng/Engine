@@ -5,10 +5,9 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 11:32)
+///	版本：0.9.1.4 (2023/09/01 15:14)
 
 #include "WaitForMutexTesting.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning/Thread.h"
 #include "System/Threading/Flags/SemaphoreFlags.h"
 #include "System/Threading/Mutex.h"
@@ -80,10 +79,21 @@ void System::WaitForMutexTesting::CreateThread(WindowsHandle mutexHandle)
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest0, this, mutexHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest1, this, mutexHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest2, this, mutexHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest3, this, mutexHandle));
+        threadGroup.create_thread([this, mutexHandle]() {
+            this->WaitForMutexTest0(mutexHandle);
+        });
+
+        threadGroup.create_thread([this, mutexHandle]() {
+            this->WaitForMutexTest1(mutexHandle);
+        });
+
+        threadGroup.create_thread([this, mutexHandle]() {
+            this->WaitForMutexTest2(mutexHandle);
+        });
+
+        threadGroup.create_thread([this, mutexHandle]() {
+            this->WaitForMutexTest3(mutexHandle);
+        });
     }
 
     threadGroup.join_all();

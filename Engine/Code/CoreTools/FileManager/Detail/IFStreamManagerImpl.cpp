@@ -92,12 +92,12 @@ void CoreTools::IFStreamManagerImpl::CopyContentToStream(OStream* stream) const
 {
     CORE_TOOLS_ASSERTION_0(stream != nullptr, "÷∏’ÎŒﬁ–ß");
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
 
     const auto thisImpl = const_cast<IFStreamManagerImpl*>(this);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     IFStreamSeekManager manager{ thisImpl->iStream };
 

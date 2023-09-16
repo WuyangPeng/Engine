@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 09:34)
+///	版本：0.9.1.4 (2023/09/15 15:22)
 
 #include "Network/NetworkExport.h"
 
@@ -14,11 +14,10 @@
 #include "SockStreamImpl.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "Network/ACEWrappers/Detail/Stream/ACEIovecSockStream.h"
-#include "Network/ACEWrappers/Detail/Stream/ACESockStream.h"
+#include "Network/ACEWrappers/Detail/Stream/AceIovecSockStream.h"
+#include "Network/ACEWrappers/Detail/Stream/AceSockStream.h"
 #include "Network/BoostWrappers/Detail/Stream/BoostFixedSockStream.h"
 #include "Network/BoostWrappers/Detail/Stream/BoostSegmentationSockStream.h"
-#include "Network/BoostWrappers/Detail/Stream/BoostSockStream.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkWrappers/Detail/Stream/NetworkSockStream.h"
@@ -40,9 +39,9 @@ Network::SockStreamFactory::ImplTypeSharedPtr Network::SockStreamFactory::Create
         case WrappersStrategy::Ace:
         {
             if (configurationStrategy.GetMessageStrategy() == MessageStrategy::Iovec)
-                return std::make_shared<ACEIovecSockStream>();
+                return std::make_shared<AceIovecSockStream>();
             else
-                return std::make_shared<ACESockStream>();
+                return std::make_shared<AceSockStream>();
         }
 
 #endif  // NETWORK_USE_ACE

@@ -33,13 +33,13 @@ Mathematics::Tetrahedron3<Real>::Tetrahedron3(const ContainerType& container)
 
     for (auto i = 0; i < vertexSize; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
         vertexs[i] = container[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -95,7 +95,7 @@ typename Mathematics::Tetrahedron3<Real>::PlaneContainerType Mathematics::Tetrah
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     const auto edge10 = vertexs[1] - vertexs[0];
@@ -104,7 +104,7 @@ typename Mathematics::Tetrahedron3<Real>::PlaneContainerType Mathematics::Tetrah
     const auto edge21 = vertexs[2] - vertexs[1];
     const auto edge31 = vertexs[3] - vertexs[1];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     // <v0,v2,v1>
     // <v0,v1,v3>
@@ -115,12 +115,12 @@ typename Mathematics::Tetrahedron3<Real>::PlaneContainerType Mathematics::Tetrah
                                             Vector3Tools::UnitCrossProduct(edge30, edge20),
                                             Vector3Tools::UnitCrossProduct(edge21, edge31) };
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     const auto det = Vector3Tools::DotProduct(edge10, normal[3]);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     if (det < Math::GetValue(0))
     {
@@ -135,13 +135,13 @@ typename Mathematics::Tetrahedron3<Real>::PlaneContainerType Mathematics::Tetrah
 
     for (auto i = 0; i < vertexSize; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
         plane.emplace_back(normal[i], vertexs[i]);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     MATHEMATICS_ASSERTION_1(plane.size() == vertexSize, "返回的面大小错误！");

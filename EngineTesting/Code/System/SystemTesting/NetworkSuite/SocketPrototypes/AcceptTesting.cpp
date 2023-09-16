@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/09 22:07)
+///	版本：0.9.1.4 (2023/09/01 10:48)
 
 #include "AcceptTesting.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
@@ -67,7 +67,7 @@ void System::AcceptTesting::DoAcceptTest(WinSocket socketHandle)
 
 System::WinSockInternetAddress System::AcceptTesting::AcceptInit(WinSocket socketHandle)
 {
-    auto address = GetAddress(GetTcpPort());
+    const auto address = GetAddress(GetTcpPort());
 
     ASSERT_TRUE(Bind(socketHandle, &address));
     ASSERT_TRUE(Listen(socketHandle, 5));
@@ -96,7 +96,7 @@ void System::AcceptTesting::RecvTest(WinSocket acceptHandle)
         index += recvCount;
     }
 
-    std::string result{ buffer.data() };
+    const std::string result{ buffer.data() };
 
     ASSERT_EQUAL(result, "Hello");
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/07 13:49)
+///	版本：0.9.1.4 (2023/08/29 17:44)
 
 #ifndef SYSTEM_NETWORK_WINDOWS_SOCK_EX_H
 #define SYSTEM_NETWORK_WINDOWS_SOCK_EX_H
@@ -17,8 +17,6 @@
 #include "Using/WindowsExtensionPrototypesUsing.h"
 #include "Using/WindowsSockExUsing.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "System/MemoryTools/Using/HeapToolsUsing.h"
-#include "System/Threading/Using/ThreadUsing.h"
 
 namespace System
 {
@@ -31,20 +29,20 @@ namespace System
 
     NODISCARD WinSocket SYSTEM_DEFAULT_DECLARE WinSocketAccept(WinSocket winSocket,
                                                                WinSockAddress* addr,
-                                                               WindowsIntPtr addrlen,
+                                                               WindowsIntPtr addrLen,
                                                                WinSockConditionProc condition,
                                                                WindowsDWordPtrSizeType callbackData) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketConnect(WinSocket winSocket,
                                                            const WinSockAddress* name,
-                                                           int namelen,
+                                                           int nameLen,
                                                            WinSockBufPtr callerData,
                                                            WinSockBufPtr calleeData,
                                                            QualityOfServicePtr sQualityOfService,
                                                            QualityOfServicePtr gQualityOfService) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketConnectByName(WinSocket winSocket,
-                                                                 TChar* nodename,
-                                                                 TChar* servicename,
+                                                                 TChar* nodeName,
+                                                                 TChar* serviceName,
                                                                  WindowsDWordPtr localAddressLength,
                                                                  WinSockAddress* localAddress,
                                                                  WindowsDWordPtr remoteAddressLength,
@@ -52,17 +50,17 @@ namespace System
                                                                  const WinSockTimeval* timeout) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketHostToNetLong(WinSocket winSocket,
-                                                                 unsigned long hostlong,
-                                                                 unsigned long* netlong) noexcept;
+                                                                 unsigned long hostLong,
+                                                                 unsigned long* netLong) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketHostToNetShort(WinSocket winSocket,
-                                                                  unsigned short hostshort,
-                                                                  unsigned short* netshort) noexcept;
+                                                                  unsigned short hostShort,
+                                                                  unsigned short* netShort) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketNetToHostLong(WinSocket winSocket,
-                                                                 unsigned long netlong,
-                                                                 unsigned long* hostlong) noexcept;
+                                                                 unsigned long netLong,
+                                                                 unsigned long* hostLong) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketNetToHostShort(WinSocket winSocket,
-                                                                  unsigned short netshort,
-                                                                  unsigned short* hostshort) noexcept;
+                                                                  unsigned short netShort,
+                                                                  unsigned short* hostShort) noexcept;
 
     NODISCARD int SYSTEM_DEFAULT_DECLARE WinSocketRecv(WinSocket winSocket,
                                                        WinSockBufPtr buffers,
@@ -77,7 +75,7 @@ namespace System
                                                            WindowsDWordPtr numberOfBytesRecvd,
                                                            WindowsDWordPtr flags,
                                                            WinSockAddress* from,
-                                                           WindowsIntPtr fromlen,
+                                                           WindowsIntPtr fromLen,
                                                            SocketOverlappedPtr overlapped,
                                                            SocketOverlappedCompletionRoutine completionRoutine) noexcept;
 
@@ -94,7 +92,7 @@ namespace System
                                                          WindowsDWordPtr numberOfBytesSent,
                                                          WindowsDWord flags,
                                                          const WinSockAddress* to,
-                                                         int tolen,
+                                                         int toLen,
                                                          SocketOverlappedPtr overlapped,
                                                          SocketOverlappedCompletionRoutine completionRoutine) noexcept;
 }

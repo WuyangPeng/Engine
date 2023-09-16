@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 11:45)
+///	版本：0.9.1.4 (2023/09/01 14:32)
 
-#ifndef SYSTEM_THREADING_SUITE_PTHREAD_MUTEX_TESTING_H
-#define SYSTEM_THREADING_SUITE_PTHREAD_MUTEX_TESTING_H
+#ifndef SYSTEM_THREADING_SUITE_P_THREAD_MUTEX_TESTING_H
+#define SYSTEM_THREADING_SUITE_P_THREAD_MUTEX_TESTING_H
 
 #include "MutexTestingBase.h"
 #include "System/Threading/Using/MutexUsing.h"
@@ -27,26 +27,26 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void ThreadTest();
 
-        void TrylockTest();
+        void TryLockTest();
 
-        void WaitForMutexTest(PthreadMutexT* mutex);
-        void TrylockTimeoutTest(PthreadMutexT* mutex);
-        void TrylockSuccessTest(PthreadMutexT* mutex);
+        void WaitForMutexTest(PThreadMutexT* mutex);
+        void TryLockTimeoutTest(PThreadMutexT* mutex);
+        void TryLockSuccessTest(PThreadMutexT* mutex);
 
-        void PthreadMutexInitTest(PthreadMutexattrT& attribute, PthreadMutexT& mutex);
-        void CreateThread(PthreadMutexT& mutex);
-        void PthreadMutexDestroyTest(PthreadMutexT& mutex, PthreadMutexattrT& attribute);
-        void TrylockTimeoutThreadTest(PthreadMutexT& mutex);
-        void TrylockSuccessThreadTest(PthreadMutexT& mutex);
+        void PThreadMutexInitTest(PThreadMutexAttrT& attribute, PThreadMutexT& mutex);
+        void CreateThread(PThreadMutexT& mutex);
+        void PThreadMutexDestroyTest(PThreadMutexT& mutex, PThreadMutexAttrT& attribute);
+        void TryLockTimeoutThreadTest(PThreadMutexT& mutex);
+        void TryLockSuccessThreadTest(PThreadMutexT& mutex);
 
     private:
         int threadSum;
     };
 }
 
-#endif  // SYSTEM_THREADING_SUITE_PTHREAD_MUTEX_TESTING_H
+#endif  // SYSTEM_THREADING_SUITE_P_THREAD_MUTEX_TESTING_H

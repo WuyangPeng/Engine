@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 09:37)
+///	版本：0.9.1.4 (2023/09/04 16:02)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_CONTAINER_GROUP_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_CONTAINER_GROUP_DETAIL_H
@@ -14,7 +14,6 @@
 #include "MessageContainerGroup.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/Helper/Assertion/NetworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 

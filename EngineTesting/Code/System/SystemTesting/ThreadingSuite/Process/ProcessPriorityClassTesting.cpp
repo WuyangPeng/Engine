@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 14:09)
+///	版本：0.9.1.4 (2023/09/01 15:16)
 
 #include "ProcessPriorityClassTesting.h"
 #include "System/Threading/Flags/ProcessFlags.h"
@@ -67,7 +67,7 @@ void System::ProcessPriorityClassTesting::DoPriorityClassTest(ProcessCreation pr
     constexpr auto normalPriorityClassFlag = ProcessCreation::NormalPriorityClass;
     constexpr auto creationFlag = normalPriorityClassFlag | ProcessCreation::CreateSuspended;
 
-    ProcessStartupinfo startupInfo{};
+    ProcessStartupInfo startupInfo{};
     ProcessInformation processInformation{};
 
     ASSERT_TRUE(CreateSystemProcess(GetProcessFullPath().c_str(), nullptr, nullptr, nullptr, true, creationFlag, nullptr, nullptr, &startupInfo, &processInformation));

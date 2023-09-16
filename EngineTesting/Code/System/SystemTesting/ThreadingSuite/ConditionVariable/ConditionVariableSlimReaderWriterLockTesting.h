@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/30 18:29)
+///	版本：0.9.1.4 (2023/09/01 14:24)
 
 #ifndef SYSTEM_THREADING_SUITE_CONDITION_VARIABLE_SLIM_READER_WRITER_TESTING_H
 #define SYSTEM_THREADING_SUITE_CONDITION_VARIABLE_SLIM_READER_WRITER_TESTING_H
@@ -15,7 +15,7 @@
 
 namespace System
 {
-    class ConditionVariableSlimReaderWriterLockTesting : public ConditionVariableTestingBase
+    class ConditionVariableSlimReaderWriterLockTesting final : public ConditionVariableTestingBase
     {
     public:
         using ClassType = ConditionVariableSlimReaderWriterLockTesting;
@@ -27,7 +27,7 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void ThreadPause() override;

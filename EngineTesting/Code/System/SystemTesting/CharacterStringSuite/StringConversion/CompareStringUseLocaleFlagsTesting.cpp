@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/02 14:44)
+///	版本：0.9.1.4 (2023/08/31 16:16)
 
 #include "CompareStringUseLocaleFlagsTesting.h"
 #include "System/CharacterString/Flags/StringConversionFlags.h"
@@ -14,8 +14,6 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/MaxElement.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using std::to_string;
 
 System::CompareStringUseLocaleFlagsTesting::CompareStringUseLocaleFlagsTesting(const OStreamShared& stream)
     : ParentType{ stream },
@@ -71,9 +69,9 @@ void System::CompareStringUseLocaleFlagsTesting::MainTest()
 
 bool System::CompareStringUseLocaleFlagsTesting::RandomShuffleFlags()
 {
-    shuffle(languageLocales.begin(), languageLocales.end(), randomEngine);
+    std::ranges::shuffle(languageLocales, randomEngine);
     ASSERT_NOT_THROW_EXCEPTION_1(RandomShuffleCompares, randomEngine);
-    shuffle(comparesStrings.begin(), comparesStrings.end(), randomEngine);
+    std::ranges::shuffle(comparesStrings, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(CompareStringUseLocaleFlagsTest);
 
@@ -97,7 +95,7 @@ void System::CompareStringUseLocaleFlagsTesting::CompareStringTest(size_t index)
     ASSERT_NOT_THROW_EXCEPTION_3(CompareStringEqualTest, languageLocale, compare, lhsComparesString);
 
     const auto nextIndex = index + 1;
-    auto rhsComparesString = comparesStrings.at(nextIndex % comparesStrings.size());
+    const auto rhsComparesString = comparesStrings.at(nextIndex % comparesStrings.size());
 
     CompareStringOppositeTest(languageLocale, compare, lhsComparesString, rhsComparesString);
 }

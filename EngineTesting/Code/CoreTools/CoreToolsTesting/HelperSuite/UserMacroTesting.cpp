@@ -67,7 +67,7 @@ void CoreTools::UserMacroTesting::IsValidTest() noexcept(!gOpenClassInvariant)
 
 void CoreTools::UserMacroTesting::CloseCoreToolsMaxTest()
 {
-    ASSERT_EQUAL(CLOSE_ASSERT | CLOSE_CLASS_INVARIANT | CLOSE_USE_IMPORTANT_EXCEPTION_ASSERT | CLOSE_USE_SAFETY_LIMIT | CLOSE_USE_OPENXLSX, CLOSE_CORE_TOOLS_MAX);
+    ASSERT_EQUAL(CLOSE_ASSERT | CLOSE_CLASS_INVARIANT | CLOSE_USE_IMPORTANT_EXCEPTION_ASSERT | CLOSE_USE_SAFETY_LIMIT | CLOSE_USE_OPEN_XLSX, CLOSE_CORE_TOOLS_MAX);
 }
 
 void CoreTools::UserMacroTesting::MacroExistTest() noexcept(!gOpenClassInvariant)

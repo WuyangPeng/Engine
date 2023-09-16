@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/17 12:13)
+///	版本：0.9.1.4 (2023/08/31 13:55)
 
 #ifndef SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_BUFFERS_TESTING_BASE_H
 #define SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_BUFFERS_TESTING_BASE_H
@@ -43,8 +43,8 @@ namespace System
         void SetBindBufferTest(BindBuffer type, OpenGLUInt buffer) noexcept;
         void SetGLDeleteBufferTest(OpenGLUInt buffer) noexcept;
         void SetGLDeleteBuffersTest(const BufferType& buffers) noexcept;
-        void SetGLDeleteFramebufferTest(OpenGLUInt buffer) noexcept;
-        void SetGLDeleteFramebuffersTest(const BufferType& buffers) noexcept;
+        void SetGLDeleteFrameBufferTest(OpenGLUInt buffer) noexcept;
+        void SetGLDeleteFrameBuffersTest(const BufferType& buffers) noexcept;
         void SetGLDeleteVertexArrayTest(OpenGLUInt buffer) noexcept;
         void SetGLDeleteVertexArraysTest(const BufferType& buffers) noexcept;
         NODISCARD BindBufferContainerConstIter begin() const noexcept;

@@ -5,11 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/14 15:58)
+///	版本：0.9.1.4 (2023/08/31 14:25)
 
 #include "OpenGLProgramInterfaceTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/OpenGL/Flags/OpenGLProgramFlags.h"
 #include "System/OpenGL/Flags/OpenGLShaderFlags.h"
 #include "System/OpenGL/OpenGLBase.h"
 #include "System/OpenGL/OpenGLProgram.h"
@@ -78,7 +77,9 @@ void System::OpenGLProgramInterfaceTesting::ProgramInterfaceTest(OpenGLUInt prog
             const auto programInterfaceName = GetProgramInterfaceName(inner);
 
             if (IsProgramInterfaceInvalid(programInterface, programInterfaceName))
+            {
                 continue;
+            }
 
             const auto numResources = GetGLProgramInterface(programHandle, programInterface, programInterfaceName);
             ASSERT_LESS_EQUAL(0, numResources);

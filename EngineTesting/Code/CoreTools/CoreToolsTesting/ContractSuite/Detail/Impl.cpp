@@ -43,12 +43,12 @@ size_t CoreTools::Impl::GetAddress() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     return reinterpret_cast<size_t>(&count);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 CoreTools::Impl::ImplSharedPtr CoreTools::Impl::Create(int count)

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 22:43)
+///	版本：0.9.1.4 (2023/08/29 23:44)
 
 #include "System/SystemExport.h"
 
@@ -14,8 +14,7 @@
 #include "Flags/GLExtensionsFlags.h"
 #include "Flags/OpenGLFlags.h"
 #include "Detail/GL10Extensions.h"
-#include "Detail/GL30Extensions.h"
-#include "Detail/GLExtensions.h"
+#include "Detail/GL30Extensions.h" 
 #include "Detail/GLUtility.h"
 #include "Detail/WglExtensions.h"
 #include "System/CharacterString/FormatString.h"
@@ -37,16 +36,15 @@ bool System::IsOpenGLSupportsExtension(const std::string& extension)
 
     for (auto index = 0; index < numExtensions; ++index)
     {
-        const auto openglExtension = GLGetStringi(GL_EXTENSIONS, index);
-
-        if (openglExtension != nullptr)
+        if (const auto openglExtension = GLGetStringi(GL_EXTENSIONS, index);
+            openglExtension != nullptr)
         {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
             if (extension == reinterpret_cast<const char*>(openglExtension))
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
             {
                 return true;
             }
@@ -63,9 +61,8 @@ void* System::GetFunctionPointer(const char* glFunction) noexcept
 
 std::string System::GetOpenGLErrorDescription(OpenGLErrorCode code)
 {
-    auto description = GetOpenGLErrorString(code);
-
-    if (description != nullptr)
+    if (const auto description = GetOpenGLErrorString(code);
+        description != nullptr)
     {
         return description;
     }

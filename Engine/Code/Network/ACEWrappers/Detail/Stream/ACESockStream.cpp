@@ -5,17 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:06)
+///	版本：0.9.1.4 (2023/09/15 15:49)
 
 #include "Network/NetworkExport.h"
 
-#include "ACESockStream.h"
+#include "AceSockStream.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/MessageEvent/CallbackParameters.h"
 #include "CoreTools/MessageEvent/EventInterface.h"
-#include "Network/ACEWrappers/Detail/Address/ACESockInternetAddress.h"
+#include "Network/ACEWrappers/Detail/Address/AceSockInternetAddress.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/BufferSendStream.h"
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
@@ -24,13 +24,13 @@
 
 #ifdef NETWORK_USE_ACE
 
-Network::ACESockStream::ACESockStream() noexcept
+Network::AceSockStream::AceSockStream() noexcept
     : ParentType{}, aceSockStream{}
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::ACESockStream::~ACESockStream() noexcept
+Network::AceSockStream::~AceSockStream() noexcept
 {
     EXCEPTION_TRY
     {
@@ -41,22 +41,20 @@ Network::ACESockStream::~ACESockStream() noexcept
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Network, ACESockStream)
+CLASS_INVARIANT_STUB_DEFINE(Network, AceSockStream)
 
-Network::ACESockStreamNativeType& Network::ACESockStream::GetACESockStream() noexcept
+Network::ACESockStreamNativeType& Network::AceSockStream::GetACESockStream() noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
     return aceSockStream;
 }
 
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26415)
-    #include SYSTEM_WARNING_DISABLE(26418)
-
-int Network::ACESockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
+int Network::AceSockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(messageBuffer);
 
     const auto bytesTotal = messageBuffer->GetSize();
 
@@ -79,12 +77,12 @@ int Network::ACESockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
     {
         messageBuffer->AddCurrentWriteIndex(headSize);
 
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
 
         const auto totalLength = *reinterpret_cast<int*>(buffer);
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
 
         if (bytesTotal < totalLength)
         {
@@ -93,12 +91,12 @@ int Network::ACESockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
 
         const auto remainLength = totalLength - headSize;
 
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26481)
 
         if (aceSockStream.recv_n(buffer + headSize, remainLength) != remainLength)
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
         {
             THROW_EXCEPTION(SYSTEM_TEXT("接收数据长度错误！"s))
         }
@@ -113,15 +111,11 @@ int Network::ACESockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
     }
 }
 
-    #include STSTEM_WARNING_POP
-
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26415)
-    #include SYSTEM_WARNING_DISABLE(26418)
-
-int Network::ACESockStream::Send(const MessageBufferSharedPtr& messageBuffer)
+int Network::AceSockStream::Send(const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(messageBuffer);
 
     if (aceSockStream.send_n(messageBuffer->GetInitialBufferedPtr(), messageBuffer->GetCurrentWriteIndex()) != messageBuffer->GetCurrentWriteIndex())
     {
@@ -131,34 +125,32 @@ int Network::ACESockStream::Send(const MessageBufferSharedPtr& messageBuffer)
     return messageBuffer->GetCurrentWriteIndex();
 }
 
-    #include STSTEM_WARNING_POP
-
-Network::ACEHandleType Network::ACESockStream::GetACEHandle() const
+Network::ACEHandleType Network::AceSockStream::GetACEHandle() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     return aceSockStream.get_handle();
 }
 
-void Network::ACESockStream::SetACEHandle(ACEHandleType handle)
+void Network::AceSockStream::SetACEHandle(ACEHandleType handle)
 {
     NETWORK_CLASS_IS_VALID_9;
 
     aceSockStream.set_handle(handle);
 }
 
-bool Network::ACESockStream::CloseHandle()
+bool Network::AceSockStream::CloseHandle()
 {
     NETWORK_CLASS_IS_VALID_9;
 
     if (aceSockStream.close() == 0)
     {
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
 
         aceSockStream.set_handle(reinterpret_cast<ACEHandle>(System::invalidSocket));
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
 
         return true;
     }
@@ -168,13 +160,11 @@ bool Network::ACESockStream::CloseHandle()
     }
 }
 
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26415)
-    #include SYSTEM_WARNING_DISABLE(26418)
-
-void Network::ACESockStream::AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
+void Network::AceSockStream::AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(eventInterface, messageBuffer);
 
     if (aceSockStream.send_n(messageBuffer->GetInitialBufferedPtr(), messageBuffer->GetCurrentWriteIndex()) != messageBuffer->GetCurrentWriteIndex())
     {
@@ -190,15 +180,11 @@ void Network::ACESockStream::AsyncSend(const EventInterfaceSharedPtr& eventInter
     }
 }
 
-    #include STSTEM_WARNING_POP
-
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26415)
-    #include SYSTEM_WARNING_DISABLE(26418)
-
-void Network::ACESockStream::AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
+void Network::AceSockStream::AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(eventInterface, messageBuffer);
 
     const auto bytesTotal = messageBuffer->GetSize();
 
@@ -209,7 +195,7 @@ void Network::ACESockStream::AsyncReceive(const EventInterfaceSharedPtr& eventIn
         return;
     }
 
-    auto buffer = messageBuffer->GetCurrentWriteBufferedPtr();
+    const auto buffer = messageBuffer->GetCurrentWriteBufferedPtr();
 
     if (buffer == nullptr)
     {
@@ -222,12 +208,12 @@ void Network::ACESockStream::AsyncReceive(const EventInterfaceSharedPtr& eventIn
     {
         messageBuffer->AddCurrentWriteIndex(headSize);
 
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
 
         const auto totalLength = *reinterpret_cast<int*>(buffer);
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
 
         if (bytesTotal < totalLength)
         {
@@ -236,12 +222,12 @@ void Network::ACESockStream::AsyncReceive(const EventInterfaceSharedPtr& eventIn
 
         const auto remainLength = totalLength - headSize;
 
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26481)
 
         if (aceSockStream.recv_n(buffer + headSize, remainLength) != remainLength)
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
         {
             return;
         }
@@ -262,13 +248,11 @@ void Network::ACESockStream::AsyncReceive(const EventInterfaceSharedPtr& eventIn
     }
 }
 
-    #include STSTEM_WARNING_POP
-
-std::string Network::ACESockStream::GetRemoteAddress() const
+std::string Network::AceSockStream::GetRemoteAddress() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    if (ACESockInternetAddress address{};
+    if (AceSockInternetAddress address{};
         aceSockStream.get_remote_addr(address.GetACEInternetAddress()) == 0)
     {
         return address.GetAddress();
@@ -279,11 +263,11 @@ std::string Network::ACESockStream::GetRemoteAddress() const
     }
 }
 
-int Network::ACESockStream::GetRemotePort() const
+int Network::AceSockStream::GetRemotePort() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    if (ACESockInternetAddress address{};
+    if (AceSockInternetAddress address{};
         aceSockStream.get_remote_addr(address.GetACEInternetAddress()) == 0)
     {
         return address.GetPort();
@@ -294,7 +278,7 @@ int Network::ACESockStream::GetRemotePort() const
     }
 }
 
-bool Network::ACESockStream::EnableNonBlock()
+bool Network::AceSockStream::EnableNonBlock()
 {
     NETWORK_CLASS_IS_VALID_9;
 

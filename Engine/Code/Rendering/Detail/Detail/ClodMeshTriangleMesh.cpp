@@ -59,14 +59,14 @@ bool Rendering::ClodMeshTriangleMesh::ValidBuffers() const
 
     for (auto trianglesIndex = 0; trianglesIndex < numTriangles; ++trianglesIndex)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         const auto firstIndex = *currentIndex++;
         const auto secondIndex = *currentIndex++;
         const auto thirdIndex = *currentIndex++;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         if (firstIndex == secondIndex || firstIndex == thirdIndex || secondIndex == thirdIndex)
         {
@@ -107,12 +107,12 @@ const int* Rendering::ClodMeshTriangleMesh::GetIndexBufferReadOnlyData() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     return reinterpret_cast<const int*>(*indixBuffer->GetData());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 int Rendering::ClodMeshTriangleMesh::GetNumTriangles() const noexcept

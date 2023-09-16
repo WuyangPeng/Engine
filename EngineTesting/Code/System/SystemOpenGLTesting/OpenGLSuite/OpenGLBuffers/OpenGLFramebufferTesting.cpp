@@ -5,53 +5,52 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/16 23:32)
+///	版本：0.9.1.4 (2023/08/31 14:23)
 
-#include "OpenGLFramebufferTesting.h"
-#include "System/OpenGL/Flags/OpenGLFlags.h"
+#include "OpenGLFrameBufferTesting.h"
 #include "System/OpenGL/OpenGLBuffers.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::OpenGLFramebufferTesting::OpenGLFramebufferTesting(const OStreamShared& stream)
+System::OpenGLFrameBufferTesting::OpenGLFrameBufferTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, OpenGLFramebufferTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, OpenGLFrameBufferTesting)
 
-void System::OpenGLFramebufferTesting::DoRunUnitTest()
+void System::OpenGLFrameBufferTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void System::OpenGLFramebufferTesting::MainTest()
+void System::OpenGLFrameBufferTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLGetFramebufferTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLGetFramebuffersTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLGetFrameBufferTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLGetFrameBuffersTest);
 }
 
-void System::OpenGLFramebufferTesting::OpenGLGetFramebufferTest()
+void System::OpenGLFrameBufferTesting::OpenGLGetFrameBufferTest()
 {
-    const auto framebuffers = GetGLGenFramebuffers();
-    ASSERT_LESS(0u, framebuffers);
+    const auto frameBuffers = GetGLGenFrameBuffers();
+    ASSERT_LESS(0u, frameBuffers);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteFramebufferTest, framebuffers);
+    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteFrameBufferTest, frameBuffers);
 }
 
-void System::OpenGLFramebufferTesting::OpenGLGetFramebuffersTest()
+void System::OpenGLFrameBufferTesting::OpenGLGetFrameBuffersTest()
 {
-    BufferType framebuffers{};
+    BufferType frameBuffers{};
 
-    GetGLGenFramebuffers(bufferSize, framebuffers.data());
-    ASSERT_NOT_THROW_EXCEPTION_1(DoOpenGLGetFramebuffersTest, framebuffers);
+    GetGLGenFrameBuffers(bufferSize, frameBuffers.data());
+    ASSERT_NOT_THROW_EXCEPTION_1(DoOpenGLGetFrameBuffersTest, frameBuffers);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteFramebuffersTest, framebuffers);
+    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteFrameBuffersTest, frameBuffers);
 }
 
-void System::OpenGLFramebufferTesting::DoOpenGLGetFramebuffersTest(const BufferType& buffers)
+void System::OpenGLFrameBufferTesting::DoOpenGLGetFrameBuffersTest(const BufferType& buffers)
 {
     for (auto buffer : buffers)
     {

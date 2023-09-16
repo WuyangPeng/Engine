@@ -188,14 +188,14 @@ std::vector<Rendering::SurfaceMesh::Triangle> Rendering::SurfaceMesh::Allocate(i
         tri.v.at(1) = v1;
         tri.v.at(2) = v2;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         const auto& param0 = *origParam++;
         const auto& param1 = *origParam++;
         const auto& param2 = *origParam++;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         InsertInto(edgeMap, tri.patch.object, v0, v1, param0, param1, 1);
         InsertInto(edgeMap, tri.patch.object, v1, v2, param1, param2, 1);
@@ -382,7 +382,7 @@ void Rendering::SurfaceMesh::InitializeSurfaceInfo()
         const auto v1 = indices.Increase<int32_t>();
         const auto v2 = indices.Increase<int32_t>();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         sInfo.at(v0).patch.object = patches.at(i).object;
@@ -392,7 +392,7 @@ void Rendering::SurfaceMesh::InitializeSurfaceInfo()
         sInfo.at(v2).patch.object = patches.at(i).object;
         sInfo.at(v2).param = *params++;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 

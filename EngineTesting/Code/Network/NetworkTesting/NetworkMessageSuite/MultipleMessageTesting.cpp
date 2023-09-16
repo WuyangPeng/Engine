@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/12 09:46)
+///	版本：0.9.1.4 (2023/09/16 09:51)
 
 #include "MultipleMessageTesting.h"
 #include "Flags/MultipleMessageType.h"
@@ -108,9 +108,9 @@ void Network::MultipleMessageTesting::FactoryTest()
 
     const std::string stringValue{ "string" };
 
-    TestingType::MessageType messageType{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
+    const TestingType::MessageType messageType{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
 
-    TestingType testMessage{ MessageHeadStrategy::Default, messageId, messageType };
+    const TestingType testMessage{ MessageHeadStrategy::Default, messageId, messageType };
 
     MESSAGE_MANAGER_SINGLETON.Insert(messageId, MessageTypeCondition::CreateNullCondition(), TestingType::Factory);
 

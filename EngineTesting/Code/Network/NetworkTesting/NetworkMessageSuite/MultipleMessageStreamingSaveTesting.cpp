@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/12 09:27)
+///	版本：0.9.1.4 (2023/09/16 09:50)
 
 #include "MultipleMessageStreamingSaveTesting.h"
 #include "Flags/MultipleMessageType.h"
@@ -15,7 +15,6 @@
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"
-#include "Network/NetworkMessage/MultipleMessageCast.h"
 #include "Network/NetworkMessage/MultipleMessageContainerDetail.h"
 #include "Network/NetworkMessage/MultipleMessageStreamingSaveDetail.h"
 
@@ -78,10 +77,10 @@ void Network::MultipleMessageStreamingSaveTesting::BaseTest()
 
     multipleMessageStreamingSave.Save(multipleMessageContainer, messageTarget);
 
-    auto initialBuffered = buffer.GetInitialBufferedPtr();
-    if (initialBuffered != nullptr)
+    if (auto initialBuffered = buffer.GetInitialBufferedPtr();
+        initialBuffered != nullptr)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26490)
 
@@ -123,7 +122,7 @@ void Network::MultipleMessageStreamingSaveTesting::BaseTest()
 
         const std::string resultStringValue{ initialBuffered, initialBuffered + length };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         ASSERT_EQUAL(resultStringValue, stringValue);
     }

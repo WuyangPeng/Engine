@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/28 13:56)
+///	版本：0.9.1.4 (2023/09/01 13:59)
 
 #include "AddAuditAccessAceTesting.h"
 #include "System/Security/AddAccess.h"
@@ -44,10 +44,10 @@ bool System::AddAuditAccessAceTesting::RandomShuffleFlags()
 
 void System::AddAuditAccessAceTesting::AddAuditAccessAceTest(AccessControlListRevision accessControlListRevision)
 {
-    auto aclBuffer = GetACLBuffer(accessControlListRevision);
-    auto acl = GetAccessCheckACLPtr(aclBuffer);
+    auto aclBuffer = GetAclBuffer(accessControlListRevision);
+    const auto acl = GetAccessCheckAclPtr(aclBuffer);
 
-    auto sid = GetSecuritySID();
+    auto sid = GetSecuritySid();
 
     for (auto index = 0u; index < GetMaxSize(); ++index)
     {
@@ -55,9 +55,9 @@ void System::AddAuditAccessAceTesting::AddAuditAccessAceTest(AccessControlListRe
     }
 }
 
-void System::AddAuditAccessAceTesting::AddAccessTest(size_t index, AccessCheckACLPtr acl, AccessControlListRevision accessControlListRevision, SecuritySID& sid)
+void System::AddAuditAccessAceTesting::AddAccessTest(size_t index, AccessCheckAclPtr acl, AccessControlListRevision accessControlListRevision, SecuritySid& sid)
 {
-    const auto controlACEInheritance = GetControlACEInheritance(index);
+    const auto controlAceInheritance = GetControlAceInheritance(index);
     const auto specificAccess = GetSpecificAccess(index);
 
     ASSERT_TRUE(AddAuditAccessAccessControlEntries(acl, accessControlListRevision, specificAccess, &sid, true, false));
@@ -65,8 +65,8 @@ void System::AddAuditAccessAceTesting::AddAccessTest(size_t index, AccessCheckAC
     ASSERT_TRUE(AddAuditAccessAccessControlEntries(acl, accessControlListRevision, specificAccess, &sid, false, false));
     ASSERT_TRUE(AddAuditAccessAccessControlEntries(acl, accessControlListRevision, specificAccess, &sid, false, true));
 
-    ASSERT_TRUE(AddAuditAccessAccessControlEntries(acl, accessControlListRevision, controlACEInheritance, specificAccess, &sid, true, true));
-    ASSERT_TRUE(AddAuditAccessAccessControlEntries(acl, accessControlListRevision, controlACEInheritance, specificAccess, &sid, true, false));
-    ASSERT_TRUE(AddAuditAccessAccessControlEntries(acl, accessControlListRevision, controlACEInheritance, specificAccess, &sid, false, true));
-    ASSERT_TRUE(AddAuditAccessAccessControlEntries(acl, accessControlListRevision, controlACEInheritance, specificAccess, &sid, false, false));
+    ASSERT_TRUE(AddAuditAccessAccessControlEntries(acl, accessControlListRevision, controlAceInheritance, specificAccess, &sid, true, true));
+    ASSERT_TRUE(AddAuditAccessAccessControlEntries(acl, accessControlListRevision, controlAceInheritance, specificAccess, &sid, true, false));
+    ASSERT_TRUE(AddAuditAccessAccessControlEntries(acl, accessControlListRevision, controlAceInheritance, specificAccess, &sid, false, true));
+    ASSERT_TRUE(AddAuditAccessAccessControlEntries(acl, accessControlListRevision, controlAceInheritance, specificAccess, &sid, false, false));
 }

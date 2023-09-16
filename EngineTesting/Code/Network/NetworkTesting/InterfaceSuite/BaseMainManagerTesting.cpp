@@ -5,14 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/15 09:09)
+///	版本：0.9.1.4 (2023/09/16 09:56)
 
 #include "BaseMainManagerTesting.h"
 #include "SingletonTestingDetail.h"
-#include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Interface/BaseMainManager.h"
 
 Network::BaseMainManagerTesting::BaseMainManagerTesting(const OStreamShared& stream)

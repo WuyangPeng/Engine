@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/31 23:43)
+///	版本：0.9.1.4 (2023/09/01 15:00)
 
 #include "OpenEventTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -47,8 +47,8 @@ void System::OpenEventTesting::MainTest()
 
 bool System::OpenEventTesting::RandomShuffleFlags()
 {
-    shuffle(eventStandardAccesses.begin(), eventStandardAccesses.end(), randomEngine);
-    shuffle(eventSpecificAccesses.begin(), eventSpecificAccesses.end(), randomEngine);
+    std::ranges::shuffle(eventStandardAccesses, randomEngine);
+    std::ranges::shuffle(eventSpecificAccesses, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(ThreadTest);
 
@@ -80,7 +80,9 @@ void System::OpenEventTesting::DoThreadTest(WindowsHandle eventHandle, const Str
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForEventTest, this, eventName));
+        threadGroup.create_thread([this, eventName]() {
+            this->WaitForEventTest(eventName);
+        });
     }
 
     threadGroup.join_all();

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/16 21:42)
+///	版本：0.9.1.4 (2023/08/28 17:50)
 
 #ifndef SYSTEM_HELPER_SELECT_STDLIB_CONFIG_H
 #define SYSTEM_HELPER_SELECT_STDLIB_CONFIG_H
@@ -17,13 +17,13 @@
 #if defined(__SGI_STL_PORT) || defined(_STLPORT_VERSION)
 
     /// 这个必须放在第一个，
-    /// 否则由于STLport通常位于一些其他库的顶部，
-    /// 我们可能最终检测到第一个而不是STLport。
+    /// 否则由于STLPort通常位于一些其他库的顶部，
+    /// 我们可能最终检测到第一个而不是STLPort。
     #define TCRE_STDLIB_CONFIG "StdLib/STLPort.h"
 
 #else  // !defined(__SGI_STL_PORT) && !defined(_STLPORT_VERSION)
 
-    /// 如果我们的std lib不是某个版本的STLport，
+    /// 如果我们的std lib不是某个版本的STLPort，
     /// 并且没有被检测到，
     /// 那么包含<utility>，
     /// 因为它是包含真正的C++ std的最小的头文件。

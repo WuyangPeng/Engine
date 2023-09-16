@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/03 23:27)
+///	版本：0.9.1.4 (2023/08/31 16:39)
 
 #include "WriteAttributeTesting.h"
-#include "System/Console/ConsoleColours.h"
+#include "System/Console/ConsoleColour.h"
 #include "System/Console/ConsoleHandle.h"
-#include "System/Console/Using/ConsoleColoursUsing.h"
+#include "System/Console/Using/ConsoleColourUsing.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Time/DeltaTime.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -53,7 +53,7 @@ void System::WriteAttributeTesting::PrintTipsMessage()
 
 void System::WriteAttributeTesting::WriteAttributeTest()
 {
-    for (auto standardHandle : *this)
+    for (const auto standardHandle : *this)
     {
         const auto consoleHandle = GetStandardHandle(standardHandle);
 

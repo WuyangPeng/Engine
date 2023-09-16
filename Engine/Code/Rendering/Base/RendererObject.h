@@ -13,6 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "BaseFwd.h"
+#include "System/OpenGL/Using/OpenGLUsing.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
@@ -45,6 +46,7 @@ namespace Rendering
         NODISCARD std::string GetName() const;
 
         virtual void Enable() = 0;
+        virtual void Disable();
         NODISCARD virtual bool Update() = 0;
         NODISCARD virtual bool Update(int level) = 0;
         NODISCARD virtual bool Update(int item, int level) = 0;
@@ -58,6 +60,8 @@ namespace Rendering
         NODISCARD virtual bool CopyCpuToGpu(int item, int level) = 0;
 
         NODISCARD virtual bool GetNumActiveElements() = 0;
+
+        NODISCARD virtual System::OpenGLUInt GetGLHandle() const noexcept;
 
     private:
         PackageType impl;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 09:39)
+///	版本：0.9.1.4 (2023/09/16 10:56)
 
 #ifndef NETWORK_TESTING_ACE_WRAPPERS_SUITE_ACE_SOCK_INTERNET_ADDRESS_TESTING_H
 #define NETWORK_TESTING_ACE_WRAPPERS_SUITE_ACE_SOCK_INTERNET_ADDRESS_TESTING_H
@@ -15,7 +15,7 @@
 
 namespace Network
 {
-    class ACESockInternetAddressTesting : public SingletonTesting
+    class ACESockInternetAddressTesting final : public SingletonTesting
     {
     public:
         using ClassType = ACESockInternetAddressTesting;

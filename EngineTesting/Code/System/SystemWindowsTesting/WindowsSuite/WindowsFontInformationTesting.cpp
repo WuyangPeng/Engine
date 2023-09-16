@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 20:16)
+///	版本：0.9.1.4 (2023/08/31 14:56)
 
 #include "WindowsFontInformationTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -16,8 +16,8 @@
 
 using namespace std::literals;
 
-System::WindowsFontInformationTesting::WindowsFontInformationTesting(const OStreamShared& stream, WindowsHWnd hwnd)
-    : ParentType{ stream }, hwnd{ hwnd }
+System::WindowsFontInformationTesting::WindowsFontInformationTesting(const OStreamShared& stream, WindowsHWnd hWnd)
+    : ParentType{ stream }, hWnd{ hWnd }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -37,21 +37,21 @@ void System::WindowsFontInformationTesting::MainTest()
 
 void System::WindowsFontInformationTesting::GetFontInformationTest()
 {
-    ASSERT_LESS(0, GetStringWidth(hwnd, SYSTEM_TEXT("GetStringWidth"s)));
-    ASSERT_LESS(0, GetCharacterWidth(hwnd, 'G'));
-    ASSERT_LESS(0, GetFontHeight(hwnd));
+    ASSERT_LESS(0, GetStringWidth(hWnd, SYSTEM_TEXT("GetStringWidth"s)));
+    ASSERT_LESS(0, GetCharacterWidth(hWnd, 'G'));
+    ASSERT_LESS(0, GetFontHeight(hWnd));
 }
 
 void System::WindowsFontInformationTesting::FontInformationTest()
 {
-    const auto context = GetSystemDC(hwnd);
+    const auto context = GetSystemDC(hWnd);
 
     ASSERT_NOT_THROW_EXCEPTION_1(DoFontInformationTest, context);
 
-    ASSERT_TRUE(ReleaseSystemDC(hwnd, context));
+    ASSERT_TRUE(ReleaseSystemDC(hWnd, context));
 }
 
-void System::WindowsFontInformationTesting::DoFontInformationTest(WindowsHDC context)
+void System::WindowsFontInformationTesting::DoFontInformationTest(WindowsHdc context)
 {
     const auto text = SYSTEM_TEXT("GetStringWidth"s);
 

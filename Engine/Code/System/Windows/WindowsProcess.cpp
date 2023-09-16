@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/18 19:32)
+///	版本：0.9.1.4 (2023/08/31 09:26)
 
 #include "System/SystemExport.h"
 
@@ -164,7 +164,7 @@ bool System::DefaultMessageBox(WindowsHWnd hWnd, const String& information, cons
                                                  MessageBoxDefault::Button2,
                                                  MessageBoxMode::ApplModal,
                                                  MessageBoxMisc::NoMisc };
-        MessageBoxSelection(hWnd, information.c_str(), title.c_str(), flagsData) == DialogBoxCommand::IDYes)
+        MessageBoxSelection(hWnd, information.c_str(), title.c_str(), flagsData) == DialogBoxCommand::IdYes)
     {
         return true;
     }

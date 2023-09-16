@@ -69,23 +69,23 @@ void Mathematics::IntegerMultiplication<N>::CalculateProduct(uint32_t lhsBit, ui
         const auto rhsBit = absRhsData[rhsIndex];
         const auto productBit = lhsBit * rhsBit + carry;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         product[productBufferIndex] = boost::numeric_cast<uint16_t>(productBit & low);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         carry = (productBit & high) >> 16;
         ++productBufferIndex;
     }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     product[productBufferIndex] = boost::numeric_cast<uint16_t>(carry);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <int N>
@@ -98,7 +98,7 @@ uint32_t Mathematics::IntegerMultiplication<N>::CalculateResult(uint32_t lhsInde
     auto carry = 0u;
     for (auto rhsIndex = 0u; rhsIndex <= intSize; ++rhsIndex)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         auto originalProduct = boost::numeric_cast<uint32_t>(product[bufferIndex]);
@@ -106,7 +106,7 @@ uint32_t Mathematics::IntegerMultiplication<N>::CalculateResult(uint32_t lhsInde
         auto sum = originalProduct + originalResult + carry;
         result[bufferIndex] = boost::numeric_cast<uint16_t>(sum & low);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         carry = (sum & integerCarry) ? 1 : 0;
 
@@ -122,14 +122,14 @@ void Mathematics::IntegerMultiplication<N>::DetermineCarry(uint32_t carry, uint3
     // 判断是否要进位，下面条件如果成立，则表示计算已溢出。
     for (auto rhsIndex = resultBufferIndex; 0 < carry && rhsIndex < result.size(); ++rhsIndex)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         auto originalResult = boost::numeric_cast<uint32_t>(result[rhsIndex]);
         auto sum = originalResult + carry;
         result[rhsIndex] = boost::numeric_cast<uint16_t>(sum & low);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         carry = (sum & integerCarry) ? 1 : 0;
     }
@@ -142,7 +142,7 @@ void Mathematics::IntegerMultiplication<N>::OverflowTest()
     // 但在这里测试，您可以得到溢出多少。
     // 这个信息对一个应用程序可能是有用的，以决定如何选择整数大小。
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     for (auto i = 2 * intSize - 1; intSize <= i; --i)
@@ -158,7 +158,7 @@ void Mathematics::IntegerMultiplication<N>::OverflowTest()
         THROW_EXCEPTION(SYSTEM_TEXT("Integer溢出\n"s));
     }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     multiplication = IntegerData{ result };
 }

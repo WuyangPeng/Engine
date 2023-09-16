@@ -79,12 +79,12 @@ void Mathematics::IntegerDataAmendTesting::FromUnsignedIntTest()
 
 void Mathematics::IntegerDataAmendTesting::NegativeTest()
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26475)
 
     IntegerData<4> firstIntegerData{ int64_t(0xF000F458F7892523LL) };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     ASSERT_EQUAL(firstIntegerData[0], uint16_t(0x2523));
     ASSERT_EQUAL(firstIntegerData[1], uint16_t(0xF789));

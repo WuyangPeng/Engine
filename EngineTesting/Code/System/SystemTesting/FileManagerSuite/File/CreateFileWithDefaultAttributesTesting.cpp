@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/13 14:22)
+///	版本：0.9.1.4 (2023/08/31 17:20)
 
 #include "CreateFileWithDefaultAttributesTesting.h"
 #include "System/FileManager/File.h"
@@ -55,9 +55,8 @@ void System::CreateFileWithDefaultAttributesTesting::CreateFileTest()
 
 void System::CreateFileWithDefaultAttributesTesting::DoCreateFileTest(size_t index)
 {
-    const auto fileHandleCreationDisposition = GetFileHandleCreationDisposition(index);
-
-    if (fileHandleCreationDisposition != FileHandleCreationDisposition::OpenExisting &&
+    if (const auto fileHandleCreationDisposition = GetFileHandleCreationDisposition(index);
+        fileHandleCreationDisposition != FileHandleCreationDisposition::OpenExisting &&
         fileHandleCreationDisposition != FileHandleCreationDisposition::TruncateExisting)
     {
         ASSERT_NOT_THROW_EXCEPTION_2(NonExistentTest, index, fileHandleCreationDisposition);

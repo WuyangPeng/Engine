@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/18 18:44)
+///	版本：0.9.1.4 (2023/08/29 16:53)
 
 #ifndef SYSTEM_MEMORY_TOOLS_MEMORY_HELPER_FLAGS_H
 #define SYSTEM_MEMORY_TOOLS_MEMORY_HELPER_FLAGS_H

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/12 23:22)
+///	版本：0.9.1.4 (2023/08/31 13:40)
 
 #include "GlutMainLoop.h"
 #include "System/Console/ConsoleCreate.h"
@@ -23,7 +23,7 @@ void GlutMainLoopTesting::GlutMainLoop(int argc, char** argv)
     System::GlutInitWindowPosition(0, 0);
     System::GlutInitDisplayMode(true);
 
-    MAYBE_UNUSED const auto windowID = System::GlutCreateWindow("OpenGL Glut Testing");
+    MAYBE_UNUSED const auto windowId = System::GlutCreateWindow("OpenGL Glut Testing");
 
     System::GlutDisplayFunc(RenderSceneCallback);
 
@@ -43,7 +43,7 @@ void GlutMainLoopTesting::GlutLeaveMainLoop(int argc, char** argv)
     System::GlutInitWindowPosition(0, 0);
     System::GlutInitDisplayMode(true);
 
-    MAYBE_UNUSED const auto windowID = System::GlutCreateWindow("OpenGL Glut Testing");
+    MAYBE_UNUSED const auto windowId = System::GlutCreateWindow("OpenGL Glut Testing");
 
     System::GlutDisplayFunc(RenderSceneCallback);
     System::GlutTimerFunc(2000, TimerFunctionCallback, 1);

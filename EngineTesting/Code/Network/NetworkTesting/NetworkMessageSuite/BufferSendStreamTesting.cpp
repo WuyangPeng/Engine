@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/12 14:53)
+///	版本：0.9.1.4 (2023/09/16 09:40)
 
 #include "BufferSendStreamTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -29,18 +29,12 @@ void Network::BufferSendStreamTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-namespace Network
-{
-    using TestingType = BufferSendStream;
-}
-
 void Network::BufferSendStreamTesting::MainTest()
 {
     constexpr auto segment = 100;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    const auto actualTestLoopCount = aTestLoopCount / segment;
-    auto remainder = aTestLoopCount % segment;
+    const auto actualTestLoopCount = GetTestLoopCount() / segment;
+    auto remainder = GetTestLoopCount() % segment;
 
     ASSERT_NOT_THROW_EXCEPTION_1(SendTest, remainder);
 
@@ -58,7 +52,7 @@ void Network::BufferSendStreamTesting::SendTest(int aTestLoopCount)
 
 void Network::BufferSendStreamTesting::FinishSendTest(int aTestLoopCount, ParserStrategy parserStrategy)
 {
-    TestingType bufferSendStream{ bufferSize, parserStrategy, EncryptedCompressionStrategy::Default };
+    BufferSendStream bufferSendStream{ bufferSize, parserStrategy, EncryptedCompressionStrategy::Default };
 
     ASSERT_EQUAL(bufferSendStream.GetCurrentSize(), MessageInterface::GetMessageHeadSize());
     ASSERT_TRUE(bufferSendStream.IsEmpty());

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/26 23:07)
+///	版本：0.9.1.4 (2023/09/01 13:37)
 
 #ifndef SYSTEM_SECURITY_SUITE_ACCESS_CHECK_BY_TYPE_RESULT_LIST_TESTING_H
 #define SYSTEM_SECURITY_SUITE_ACCESS_CHECK_BY_TYPE_RESULT_LIST_TESTING_H
@@ -27,7 +27,7 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void AccessCheckByTypeResultListTest();
@@ -35,7 +35,7 @@ namespace System
         void DuplicateTokenTest(WindowsHandle tokenHandle);
         void DoAccessCheckTest(WindowsHandle impersonatedToken);
         void GetAccessCheckTest(FileHandleDesiredAccess accessMask, BufferType& buffer, WindowsHandle impersonatedToken);
-        NODISCARD SecuritySID GetSecuritySID();
+        NODISCARD SecuritySid GetSecuritySid();
     };
 }
 

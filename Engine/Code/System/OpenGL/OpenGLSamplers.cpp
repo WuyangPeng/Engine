@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 22:44)
+///	版本：0.9.1.4 (2023/08/29 23:43)
 
 #include "System/SystemExport.h"
 
-#include "OpenGLSamplers.h"
-#include "Flags/GLExtensionsFlags.h"
+#include "OpenGLSamplers.h" 
 #include "Flags/OpenGLFlags.h"
 #include "Detail/GL33Extensions.h"
 #include "System/Helper/EnumCast.h"
@@ -38,27 +37,27 @@ void System::SetGLDeleteSamplers(OpenGLUInt samplers) noexcept
     GLDeleteSamplers(1, &samplers);
 }
 
-void System::SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pname, OpenGLInt param) noexcept
+void System::SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pName, OpenGLInt param) noexcept
 {
-    GLSamplerParameteri(sampler, EnumCastUnderlying(pname), param);
+    GLSamplerParameteri(sampler, EnumCastUnderlying(pName), param);
 }
 
-void System::SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pname, SamplerFilter param) noexcept
+void System::SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pName, SamplerFilter param) noexcept
 {
-    SetGLSamplerParameter(sampler, pname, EnumCastUnderlying(param));
+    SetGLSamplerParameter(sampler, pName, EnumCastUnderlying(param));
 }
 
-void System::SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pname, TextureSamplerCoordinate param) noexcept
+void System::SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pName, TextureSamplerCoordinate param) noexcept
 {
-    SetGLSamplerParameter(sampler, pname, EnumCastUnderlying(param));
+    SetGLSamplerParameter(sampler, pName, EnumCastUnderlying(param));
 }
 
-void System::SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pname, OpenGLFloat param) noexcept
+void System::SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pName, OpenGLFloat param) noexcept
 {
-    GLSamplerParameterf(sampler, EnumCastUnderlying(pname), param);
+    GLSamplerParameterf(sampler, EnumCastUnderlying(pName), param);
 }
 
-void System::SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pname, const OpenGLFloat* param) noexcept
+void System::SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pName, const OpenGLFloat* param) noexcept
 {
-    GLSamplerParameterfv(sampler, EnumCastUnderlying(pname), param);
+    GLSamplerParameterfv(sampler, EnumCastUnderlying(pName), param);
 }

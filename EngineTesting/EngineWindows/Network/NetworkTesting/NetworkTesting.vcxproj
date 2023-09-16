@@ -437,17 +437,11 @@ $(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\StreamMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\UserMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\BaseMainManagerTesting.h" />
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\CacheClientTesting.h" />
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ClientTesting.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestMessageEvent.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestSocketEvent.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\HandleSetIteratorTesting.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\HandleSetTesting.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\InterfaceSuite.h" />
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\IterativeServerTesting.h" />
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\OnlySendingClientTesting.h" />
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ReactiveServerTesting.h" />
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ServerTesting.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SingletonTesting.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SingletonTestingDetail.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockAcceptorTesting.h" />
@@ -512,6 +506,7 @@ $(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockStreamTesting.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkWrappersSuite.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\OpensslSuite\OpensslSuite.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ServiceWrappersSuite\ServiceWrappersSuite.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\TestingHelper.h" />
   </ItemGroup>
@@ -559,16 +554,10 @@ $(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\StreamMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\UserMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\BaseMainManagerTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\CacheClientTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ClientTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestMessageEvent.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestSocketEvent.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\HandleSetIteratorTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\HandleSetTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\IterativeServerTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\OnlySendingClientTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ReactiveServerTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ServerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SingletonTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockAcceptorTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockAddressTesting.cpp" />

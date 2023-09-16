@@ -33,6 +33,7 @@ namespace Rendering
 
         void ResetSize() noexcept override;
         void InitDevice() noexcept override;
+        void Release() noexcept override;
 
         void SetViewport(const Viewport& viewport) noexcept override;
         NODISCARD Viewport GetViewport() const noexcept override;

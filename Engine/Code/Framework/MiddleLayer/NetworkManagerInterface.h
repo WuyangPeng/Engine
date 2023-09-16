@@ -37,9 +37,6 @@ namespace Framework
         using MessageEventPriority = Network::MessageEventPriority;
         using MessageInterfaceSharedPtr = Network::MessageInterfaceSharedPtr;
         using NetworkMessageEventSharedPtr = Network::NetworkMessageEventSharedPtr;
-        using SendSocketManager = Network::SendSocketManager;
-        using SendSocketManagerSharedPtr = Network::SendSocketManagerSharedPtr;
-        using ConstSendSocketManagerSharedPtr = Network::ConstSendSocketManagerSharedPtr;
 
     public:
         NetworkManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
@@ -70,12 +67,6 @@ namespace Framework
 
         ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Input)
         ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(ObjectLogic)
-
-        void Send(const SocketData& socketData, int64_t socketId, const MessageInterfaceSharedPtr& message);
-
-    protected:
-        NODISCARD SendSocketManagerSharedPtr GetSendSocketManager();
-        NODISCARD ConstSendSocketManagerSharedPtr GetSendSocketManager() const;
 
     private:
         using NetworkManagerPackageType = CoreTools::NonCopyImpl<NetworkManagerImpl>;

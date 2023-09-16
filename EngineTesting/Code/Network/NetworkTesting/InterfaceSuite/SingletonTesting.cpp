@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/15 09:31)
+///	版本：0.9.1.4 (2023/09/16 09:57)
 
 #include "SingletonTesting.h"
 #include "System/Windows/Engineering.h"
@@ -36,7 +36,7 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetACEServerConfigurat
                                   ServerStrategy::Iterative,
                                   MessageStrategy::Default,
                                   ParserStrategy::LittleEndian,
-                                  OpenSSLStrategy::Default,
+                                  OpenSslStrategy::Default,
                                   EncryptedCompressionStrategy::Default,
                                   subStrategy,
                                   ConfigurationParameter::Create(),
@@ -56,7 +56,7 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetBoostServerConfigur
                                   ServerStrategy::Iterative,
                                   MessageStrategy::Default,
                                   ParserStrategy::LittleEndian,
-                                  OpenSSLStrategy::Default,
+                                  OpenSslStrategy::Default,
                                   EncryptedCompressionStrategy::Default,
                                   subStrategy,
                                   ConfigurationParameter::Create(),
@@ -76,7 +76,7 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetBoostFixedServerCon
                                   ServerStrategy::Iterative,
                                   MessageStrategy::Fixed,
                                   ParserStrategy::LittleEndian,
-                                  OpenSSLStrategy::Default, EncryptedCompressionStrategy::Default,
+                                  OpenSslStrategy::Default, EncryptedCompressionStrategy::Default,
                                   subStrategy,
                                   ConfigurationParameter::Create(),
                                   SocketSendMessage::Default,
@@ -95,7 +95,7 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetBoostClientConfigur
                                   ClientStrategy::Cache,
                                   MessageStrategy::Iovec,
                                   ParserStrategy::LittleEndian,
-                                  OpenSSLStrategy::Default,
+                                  OpenSslStrategy::Default,
                                   EncryptedCompressionStrategy::Default,
                                   subStrategy,
                                   ConfigurationParameter::Create(),
@@ -115,7 +115,7 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetBoostFixedClientCon
                                   ClientStrategy::Cache,
                                   MessageStrategy::Fixed,
                                   ParserStrategy::LittleEndian,
-                                  OpenSSLStrategy::Default,
+                                  OpenSslStrategy::Default,
                                   EncryptedCompressionStrategy::Default,
                                   subStrategy,
                                   ConfigurationParameter::Create(),
@@ -136,7 +136,7 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetThreadsBoostServerC
                                   ServerStrategy::Iterative,
                                   MessageStrategy::Default,
                                   ParserStrategy::LittleEndian,
-                                  OpenSSLStrategy::Default,
+                                  OpenSslStrategy::Default,
                                   EncryptedCompressionStrategy::Default,
                                   subStrategy,
                                   ConfigurationParameter::Create(),
@@ -157,7 +157,7 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetMultiContextBoostSe
                                   ServerStrategy::Iterative,
                                   MessageStrategy::Default,
                                   ParserStrategy::LittleEndian,
-                                  OpenSSLStrategy::Default,
+                                  OpenSslStrategy::Default,
                                   EncryptedCompressionStrategy::Default,
                                   subStrategy,
                                   ConfigurationParameter::Create(),
@@ -177,7 +177,7 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetNetworkServerConfig
                                   ServerStrategy::Iterative,
                                   MessageStrategy::Default,
                                   ParserStrategy::LittleEndian,
-                                  OpenSSLStrategy::Default,
+                                  OpenSslStrategy::Default,
                                   EncryptedCompressionStrategy::Default,
                                   subStrategy,
                                   ConfigurationParameter::Create(),
@@ -197,7 +197,7 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetNullServerConfigura
                                   ServerStrategy::Iterative,
                                   MessageStrategy::Default,
                                   ParserStrategy::LittleEndian,
-                                  OpenSSLStrategy::Default,
+                                  OpenSslStrategy::Default,
                                   EncryptedCompressionStrategy::Default,
                                   subStrategy,
                                   ConfigurationParameter::Create(),
@@ -217,7 +217,7 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetSocketServerConfigu
                                   ServerStrategy::Iterative,
                                   MessageStrategy::Default,
                                   ParserStrategy::LittleEndian,
-                                  OpenSSLStrategy::Default,
+                                  OpenSslStrategy::Default,
                                   EncryptedCompressionStrategy::Default,
                                   subStrategy,
                                   ConfigurationParameter::Create(),

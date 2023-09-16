@@ -5,16 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/13 11:35)
+///	版本：0.9.1.4 (2023/09/05 17:40)
 
-#include "ContainerAdapterTesting.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "ContainerAdapterTestingDetail.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/UnitTest/AssertExceptionMacro.h"
 #include "CoreTools/Helper/UnitTest/AssertTestMacro.h"
 #include "CoreTools/MemoryTools/ContainerAdapterDetail.h"
 #include "CoreTools/MemoryTools/RawIteratorsDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Mathematics/Base/MathDetail.h"
 
 CoreTools::ContainerAdapterTesting::ContainerAdapterTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -33,6 +33,8 @@ void CoreTools::ContainerAdapterTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ContainerAdapterArrayTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ContainerAdapterVectorTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ComputedAverage0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(ComputedAverage1Test);
 }
 
 void CoreTools::ContainerAdapterTesting::ContainerAdapterArrayTest()
@@ -56,7 +58,7 @@ void CoreTools::ContainerAdapterTesting::ContainerAdapterArraySizeTest()
 
     const ContainerAdapter<int, 8> container{ array.data() };
 
-    ASSERT_EQUAL(container.GetSize(), 8);
+    ASSERT_EQUAL(container.size(), 8);
 
     ASSERT_UNEQUAL_NULL_PTR(container.GetData());
 }
@@ -65,19 +67,13 @@ void CoreTools::ContainerAdapterTesting::ContainerAdapterArrayResetTest()
 {
     std::vector array{ 1, 2, 3, 4, 5, 6, 7, 8 };
 
-    ContainerAdapter<int, 8> container{ array.data() };
+    ContainerAdapter<int, 8> container0{ array.data() };
 
-    ASSERT_EQUAL(container.GetSize(), 8);
+    ASSERT_EQUAL(container0.size(), 8);
 
-    const auto oldData = container.GetData();
+    const auto oldData = container0.GetData();
 
     ASSERT_UNEQUAL_NULL_PTR(oldData);
-
-    std::vector newArray{ 1, 2, 3, 4, 5, 6, 7, 8 };
-
-    container.Reset(newArray.data());
-
-    ASSERT_UNEQUAL(container.GetData(), oldData);
 }
 
 void CoreTools::ContainerAdapterTesting::ContainerAdapterArrayAccessTest()
@@ -86,7 +82,7 @@ void CoreTools::ContainerAdapterTesting::ContainerAdapterArrayAccessTest()
 
     ContainerAdapter<int, 8> container{ array.data() };
 
-    for (auto i = 0; i < container.GetSize(); ++i)
+    for (auto i = 0; i < container.size(); ++i)
     {
         ASSERT_EQUAL(container[i], i + 1);
     }
@@ -132,7 +128,7 @@ void CoreTools::ContainerAdapterTesting::ContainerAdapterArrayFillTest()
 
     container.Fill(5);
 
-    for (auto i = 0; i < container.GetSize(); ++i)
+    for (auto i = 0; i < container.size(); ++i)
     {
         ASSERT_EQUAL(container[i], 5);
     }
@@ -144,7 +140,7 @@ void CoreTools::ContainerAdapterTesting::ContainerAdapterVectorSizeTest()
 
     ContainerAdapter<int> container{ array.data(), boost::numeric_cast<int>(array.size()) };
 
-    ASSERT_EQUAL(container.GetSize(), 8);
+    ASSERT_EQUAL(container.size(), 8);
 
     ASSERT_UNEQUAL_NULL_PTR(container.GetData());
 }
@@ -155,18 +151,11 @@ void CoreTools::ContainerAdapterTesting::ContainerAdapterVectorResetTest()
 
     ContainerAdapter<int> container{ array.data(), boost::numeric_cast<int>(array.size()) };
 
-    ASSERT_EQUAL(container.GetSize(), 8);
+    ASSERT_EQUAL(container.size(), 8);
 
     const auto oldData = container.GetData();
 
     ASSERT_UNEQUAL_NULL_PTR(oldData);
-
-    std::vector newArray{ 1, 2, 3, 4, 5, 6, 7 };
-
-    container.Reset(newArray.data(), boost::numeric_cast<int>(newArray.size()));
-
-    ASSERT_EQUAL(container.GetSize(), 7);
-    ASSERT_UNEQUAL(container.GetData(), oldData);
 }
 
 void CoreTools::ContainerAdapterTesting::ContainerAdapterVectorAccessTest()
@@ -175,7 +164,7 @@ void CoreTools::ContainerAdapterTesting::ContainerAdapterVectorAccessTest()
 
     ContainerAdapter<int> container{ array.data(), boost::numeric_cast<int>(array.size()) };
 
-    for (auto i = 0; i < container.GetSize(); ++i)
+    for (auto i = 0; i < container.size(); ++i)
     {
         ASSERT_EQUAL(container[i], i + 1);
     }
@@ -211,4 +200,42 @@ void CoreTools::ContainerAdapterTesting::ContainerAdapterVectorAccessTest()
 
         --index;
     }
+}
+
+void CoreTools::ContainerAdapterTesting::ComputedAverage0Test()
+{
+    std::vector<std::array<double, 2>> container0{ { 1.0, 2.0 }, { 3.0, 4.0 }, { 5.0, 6.0 }, { 7.0, 8.0 } };
+
+    const auto average0 = ComputeAverage0(container0);
+    ASSERT_APPROXIMATE(average0.at(0), 4.0, Mathematics::MathD::GetZeroTolerance());
+    ASSERT_APPROXIMATE(average0.at(1), 5.0, Mathematics::MathD::GetZeroTolerance());
+
+    const ContainerAdapter<std::array<double, 2>, 4> container1{ container0.data() };
+    const auto average1 = ComputeAverage0(container1);
+    ASSERT_APPROXIMATE(average1.at(0), 4.0, Mathematics::MathD::GetZeroTolerance());
+    ASSERT_APPROXIMATE(average1.at(1), 5.0, Mathematics::MathD::GetZeroTolerance());
+
+    const ContainerAdapter<std::array<double, 2>> container2{ container0.data(), 4 };
+    const auto average2 = ComputeAverage0(container2);
+    ASSERT_APPROXIMATE(average2.at(0), 4.0, Mathematics::MathD::GetZeroTolerance());
+    ASSERT_APPROXIMATE(average2.at(1), 5.0, Mathematics::MathD::GetZeroTolerance());
+}
+
+void CoreTools::ContainerAdapterTesting::ComputedAverage1Test()
+{
+    std::vector<std::vector<double>> container0{ { 1.0, 2.0 }, { 3.0, 4.0 }, { 5.0, 6.0 }, { 7.0, 8.0 } };
+
+    const auto average0 = ComputeAverage0(container0);
+    ASSERT_APPROXIMATE(average0.at(0), 4.0, Mathematics::MathD::GetZeroTolerance());
+    ASSERT_APPROXIMATE(average0.at(1), 5.0, Mathematics::MathD::GetZeroTolerance());
+
+    const ContainerAdapter<std::vector<double>, 4> container1{ container0.data() };
+    const auto average1 = ComputeAverage0(container1);
+    ASSERT_APPROXIMATE(average1.at(0), 4.0, Mathematics::MathD::GetZeroTolerance());
+    ASSERT_APPROXIMATE(average1.at(1), 5.0, Mathematics::MathD::GetZeroTolerance());
+
+    const ContainerAdapter<std::vector<double>> container2{ container0.data(), 4 };
+    const auto average2 = ComputeAverage0(container2);
+    ASSERT_APPROXIMATE(average2.at(0), 4.0, Mathematics::MathD::GetZeroTolerance());
+    ASSERT_APPROXIMATE(average2.at(1), 5.0, Mathematics::MathD::GetZeroTolerance());
 }

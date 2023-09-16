@@ -408,12 +408,12 @@ CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::GetEntry(co
     // 检查操作是否成功
     if (!result->IsDirectory() && result->IsEntryDataEmpty())
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26812)
 
         THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(mz_zip_get_error_string(zipReader->GetArchive()->m_last_error)))
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     // 返回带有文件数据的 ZipEntry 对象。

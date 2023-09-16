@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 13:45)
+///	版本：0.9.1.4 (2023/09/01 15:16)
 
 #include "OpenProcessTesting.h"
 #include "System/Threading/Flags/ProcessFlags.h"
@@ -24,7 +24,7 @@ System::OpenProcessTesting::OpenProcessTesting(const OStreamShared& stream)
                                ProcessStandardAccess::Synchronize },
       processSpecificAccesses{ ProcessSpecificAccess::Terminate,
                                ProcessSpecificAccess::CreateThread,
-                               ProcessSpecificAccess::SetSessionID,
+                               ProcessSpecificAccess::SetSessionId,
                                ProcessSpecificAccess::VmOperation,
                                ProcessSpecificAccess::VmRead,
                                ProcessSpecificAccess::VmWrite,
@@ -56,8 +56,8 @@ void System::OpenProcessTesting::MainTest()
 
 bool System::OpenProcessTesting::RandomShuffleFlags()
 {
-    shuffle(processStandardAccesses.begin(), processStandardAccesses.end(), randomEngine);
-    shuffle(processSpecificAccesses.begin(), processSpecificAccesses.end(), randomEngine);
+    std::ranges::shuffle(processStandardAccesses, randomEngine);
+    std::ranges::shuffle(processSpecificAccesses, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(OpenProcessTest);
 
@@ -66,9 +66,9 @@ bool System::OpenProcessTesting::RandomShuffleFlags()
 
 void System::OpenProcessTesting::OpenProcessTest()
 {
-    const auto creationFlag = ProcessCreation::NormalPriorityClass;
+    constexpr auto creationFlag = ProcessCreation::NormalPriorityClass;
 
-    ProcessStartupinfo startupInfo{};
+    ProcessStartupInfo startupInfo{};
     ProcessInformation processInformation{};
 
     ASSERT_TRUE(CreateSystemProcess(GetProcessFullPath().c_str(), nullptr, nullptr, nullptr, true, creationFlag, nullptr, nullptr, &startupInfo, &processInformation));

@@ -5,15 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:02)
+///	版本：0.9.1.4 (2023/09/15 15:37)
 
 #ifndef NETWORK_ACE_WRAPPERS_STRING_CONVERSION_H
 #define NETWORK_ACE_WRAPPERS_STRING_CONVERSION_H
 
 #include "Network/NetworkDll.h"
 
-#include "System/Helper/PragmaWarning/ACE.h"
-#include "Network/Interface/Detail/BaseMainManagerImpl.h"
+#include "Network/ACEWrappers/Using/ACEUsing.h"
+
+#include <string>
 
 #ifdef NETWORK_USE_ACE
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 22:43)
+///	版本：0.9.1.4 (2023/08/29 23:43)
 
 #include "System/SystemExport.h"
 
@@ -47,32 +47,31 @@ void System::LinkGLProgram(OpenGLUInt program) noexcept
     GLLinkProgram(program);
 }
 
-bool System::GetGLProgram(OpenGLUInt program, ProgramStatus pname) noexcept
+bool System::GetGLProgram(OpenGLUInt program, ProgramStatus pName) noexcept
 {
     OpenGLInt params{};
-    GLGetProgramiv(program, EnumCastUnderlying(pname), &params);
+    GLGetProgramiv(program, EnumCastUnderlying(pName), &params);
 
     return params != GL_FALSE;
 }
 
-void System::GetGLProgram(OpenGLUInt program, ProgramAttributes pname, ComputeWorkGroupSizeType& params) noexcept
+void System::GetGLProgram(OpenGLUInt program, ProgramAttributes pName, ComputeWorkGroupSizeType& params) noexcept
 {
-    GLGetProgramiv(program, EnumCastUnderlying(pname), params.data());
+    GLGetProgramiv(program, EnumCastUnderlying(pName), params.data());
 }
 
-int System::GetGLProgram(OpenGLUInt program, ProgramAttributes pname) noexcept
+int System::GetGLProgram(OpenGLUInt program, ProgramAttributes pName) noexcept
 {
     OpenGLInt params{};
-    GLGetProgramiv(program, EnumCastUnderlying(pname), &params);
+    GLGetProgramiv(program, EnumCastUnderlying(pName), &params);
 
     return params;
 }
 
 std::string System::GetGLProgramInfoLog(OpenGLUInt program)
 {
-    const auto logLength = GetGLProgram(program, ProgramAttributes::InfoLogLength);
-
-    if (0 < logLength)
+    if (const auto logLength = GetGLProgram(program, ProgramAttributes::InfoLogLength);
+        0 < logLength)
     {
         std::vector<OpenGLChar> log(logLength);
         auto numWritten = 0;
@@ -91,10 +90,10 @@ std::string System::GetGLProgramInfoLog(OpenGLUInt program)
     }
 }
 
-int System::GetGLProgramInterface(OpenGLUInt program, ProgramInterface programInterface, ProgramInterfaceName pname) noexcept
+int System::GetGLProgramInterface(OpenGLUInt program, ProgramInterface programInterface, ProgramInterfaceName pName) noexcept
 {
     auto result = 0;
-    GLGetProgramInterfaceiv(program, EnumCastUnderlying(programInterface), EnumCastUnderlying(pname), &result);
+    GLGetProgramInterfaceiv(program, EnumCastUnderlying(programInterface), EnumCastUnderlying(pName), &result);
 
     return result;
 }

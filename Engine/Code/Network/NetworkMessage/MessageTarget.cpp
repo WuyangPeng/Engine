@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 11:43)
+///	版本：0.9.1.4 (2023/09/04 16:54)
 
 #include "Network/NetworkExport.h"
 
 #include "MessageTargetDetail.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 #include <array>
 
@@ -67,12 +66,12 @@ void Network::MessageTarget::WriteBoolWithoutNumber(int32_t elementsNumber, cons
     {
         for (auto i = 0; i < elementsNumber; ++i)
         {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
             WriteBool(data[i]);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
     }
 }
@@ -117,12 +116,12 @@ void Network::MessageTarget::WriteStringWithoutNumber(int32_t elementsNumber, co
     {
         for (auto i = 0; i < elementsNumber; ++i)
         {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
             WriteString(data[i]);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
     }
 }

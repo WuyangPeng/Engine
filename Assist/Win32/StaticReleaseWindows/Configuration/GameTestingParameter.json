@@ -1,16 +1,185 @@
 {
   "CoreName": "Core",
   "CoreCapital": "CORE",
-  "GameTemplateInclude": "ToolsetGameTemplateInclude",
-  "GameTestingTemplateInclude": "ToolsetGameTestingTemplateInclude",
-  "ProjectName": "The Last Overlord Testing",
+  "ProjectChineseName": "最后的霸王单元测试",
+  "ProjectDescribeName": "The Last Overlord Testing",
+  "ProjectName": "TheLastOverlordTesting",
+  "ProjectCapital": "THE_LAST_OVERLORD_TESTING",
+  "ProjectAbbreviation": "TLOT",
   "EndYear": "2023",
-  "Versions": "0.9.1.2",
-  "ProjectChineseName": "游戏测试",
-  "ResourceDirectory": "Resource/GameTemplate",
-  "ExportDirectory": "ExportTesting",
-  "SolutionName": "GameServer",
-  "ProjectCapital": "GAME_SERVER_TESTING",
-  "DebugLibName": "ToolsetGameTemplateDebugLib",
-  "ReleaseLibName": "ToolsetGameTemplateReleaseLib"
+  "Version": "0.9.1.4",
+  "VersionNum": "90104",
+  "TestingName": "TheLastOverlord",
+
+  "Module": {
+    "GameClient": {
+      "ChineseName": "游戏客户端",
+      "IsClient": true,
+      "Uppercase": "GAME_CLIENT"
+    },
+
+    "RobotClient": {
+      "ChineseName": "机器人客户端",
+      "IsClient": true,
+      "Uppercase": "ROBOT_CLIENT"
+    },
+
+    "MessageClient": {
+      "ChineseName": "消息客户端",
+      "IsClient": true,
+      "Uppercase": "MESSAGE_CLIENT"
+    },
+
+    "BackgroundClient": {
+      "ChineseName": "后台客户端",
+      "IsClient": true,
+      "Uppercase": "BACKGROUND_CLIENT"
+    },
+
+    "GatewayServer": {
+      "ChineseName": "网关服务器",
+      "Uppercase": "GATEWAY_SERVER"
+    },
+
+    "LoginServer": {
+      "ChineseName": "登陆服务器",
+      "Uppercase": "LOGIN_SERVER"
+    },
+
+    "GameServer": {
+      "ChineseName": "游戏服务器",
+      "Uppercase": "GAME_SERVER"
+    },
+
+    "FightingServer": {
+      "ChineseName": "战斗服务器",
+      "Uppercase": "FIGHTING_SERVER"
+    },
+
+    "WorldServer": {
+      "ChineseName": "世界服务器",
+      "Uppercase": "WORLD_SERVER"
+    },
+
+    "OfflineServer": {
+      "ChineseName": "离线服务器",
+      "Uppercase": "OFFLINE_SERVER"
+    },
+
+    "LeaderboardServer": {
+      "ChineseName": "排行榜服务器",
+      "Uppercase": "LEADERBOARD_SERVER"
+    },
+
+    "MailServer": {
+      "ChineseName": "邮件服务器",
+      "Uppercase": "MAIL_SERVER"
+    },
+
+    "ChatServer": {
+      "ChineseName": "聊天服务器",
+      "Uppercase": "CHAT_SERVER"
+    },
+
+    "RechargeServer": {
+      "ChineseName": "充值服务器",
+      "Uppercase": "RECHARGE_SERVER"
+    },
+
+    "LogServer": {
+      "ChineseName": "日志服务器",
+      "Uppercase": "LOG_SERVER"
+    },
+
+    "GameMasterServer": {
+      "ChineseName": "游戏管理员服务器",
+      "Uppercase": "GAME_MASTER_SERVER"
+    },
+
+    "ServerManager": {
+      "ChineseName": "服务器管理者",
+      "Uppercase": "SERVER_MANAGER"
+    },
+
+    "UpdateServer": {
+      "ChineseName": "更新服务器",
+      "Uppercase": "UPDATE_SERVER"
+    },
+
+    "BackgroundServer": {
+      "ChineseName": "后台服务器",
+      "Uppercase": "BACKGROUND_SERVER"
+    },
+
+    "DatabaseServer": {
+      "ChineseName": "数据库服务器",
+      "Uppercase": "DATABASE_SERVER"
+    }
+  },
+
+  "MiddleLayer": {
+
+    "Audio": {
+      "Uppercase": "AUDIO",
+      "IsManager": true
+    },
+
+    "CameraSystems": {
+      "Uppercase": "CAMERA_SYSTEMS",
+      "IsManager": true
+    },
+
+    "Event": {
+      "Uppercase": "EVENT",
+      "IsManager": true
+    },
+
+    "GUI": {
+      "Uppercase": "GUI",
+      "IsManager": true
+    },
+
+    "Input": {
+      "Uppercase": "INPUT",
+      "IsManager": true
+    },
+
+    "Message": {
+      "Uppercase": "MESSAGE",
+      "IsManager": true
+    },
+
+    "ObjectLogic": {
+      "Uppercase": "OBJECT_LOGIC"
+    },
+
+    "PhysicalModelling": {
+      "Uppercase": "PHYSICAL_MODELLING",
+      "IsManager": true
+    },
+
+    "Resource": {
+      "Uppercase": "RESOURCE",
+      "IsManager": true
+    },
+
+    "System": {
+      "Uppercase": "SYSTEM",
+      "IsManager": true
+    },
+
+    "Network": {
+      "Uppercase": "NETWORK",
+      "IsManager": true
+    },
+
+    "Rendering": {
+      "Uppercase": "RENDERING",
+      "IsManager": true
+    },
+
+    "ArtificialIntelligence": {
+      "Uppercase": "ARTIFICIAL_INTELLIGENCE"
+    }
+  }
 }

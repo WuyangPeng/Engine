@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/27 23:42)
+///	版本：0.9.1.4 (2023/09/01 13:59)
 
 #include "AddAccessTestingBase.h"
 #include "System/Helper/SecuritySidMacro.h"
@@ -22,12 +22,12 @@
 
 System::AddAccessTestingBase::AddAccessTestingBase(const OStreamShared& stream)
     : ParentType{ stream },
-      controlACEInheritances{ ControlACEInheritance::ObjectInheritAce,
-                              ControlACEInheritance::ContainerInheritAce,
-                              ControlACEInheritance::NoPropagateInheritAce,
-                              ControlACEInheritance::InheritOnlyAce,
-                              ControlACEInheritance::InheritedAce,
-                              ControlACEInheritance::ValidInheritFlags },
+      controlAceInheritances{ ControlAceInheritance::ObjectInheritAce,
+                              ControlAceInheritance::ContainerInheritAce,
+                              ControlAceInheritance::NoPropagateInheritAce,
+                              ControlAceInheritance::InheritOnlyAce,
+                              ControlAceInheritance::InheritedAce,
+                              ControlAceInheritance::ValidInheritFlags },
       specificAccesses{ SpecificAccess::DesktopReadObjects,
                         SpecificAccess::DesktopCreateWindow,
                         SpecificAccess::DesktopCreateMenu,
@@ -38,18 +38,18 @@ System::AddAccessTestingBase::AddAccessTestingBase(const OStreamShared& stream)
                         SpecificAccess::DesktopWriteObjects,
                         SpecificAccess::DesktopSwitchDesktop,
                         SpecificAccess::DesktopAllAccess,
-                        SpecificAccess::WinstaEnumDesktops,
-                        SpecificAccess::WinstaReadAttributes,
-                        SpecificAccess::WinstaAccessClipboard,
-                        SpecificAccess::WinstaCreateDesktop,
-                        SpecificAccess::WinstaWriteAttributes,
-                        SpecificAccess::WinstaAccessGlobatoms,
-                        SpecificAccess::WinstaExitWindows,
-                        SpecificAccess::WinstaEnumerate,
-                        SpecificAccess::WinstaReadScreen,
-                        SpecificAccess::WinstaAllAccess },
+                        SpecificAccess::WinStaEnumDesktops,
+                        SpecificAccess::WinStaReadAttributes,
+                        SpecificAccess::WinStaAccessClipboard,
+                        SpecificAccess::WinStaCreateDesktop,
+                        SpecificAccess::WinStaWriteAttributes,
+                        SpecificAccess::WinStaAccessGlobalAtoms,
+                        SpecificAccess::WinStaExitWindows,
+                        SpecificAccess::WinStaEnumerate,
+                        SpecificAccess::WinStaReadScreen,
+                        SpecificAccess::WinStaAllAccess },
       randomEngine{ GetEngineRandomSeed() },
-      maxSize{ std::max(controlACEInheritances.size(), specificAccesses.size()) }
+      maxSize{ std::max(controlAceInheritances.size(), specificAccesses.size()) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -60,8 +60,8 @@ void System::AddAccessTestingBase::RandomShuffle()
 {
     SYSTEM_CLASS_IS_VALID_1;
 
-    shuffle(controlACEInheritances.begin(), controlACEInheritances.end(), randomEngine);
-    shuffle(specificAccesses.begin(), specificAccesses.end(), randomEngine);
+    std::ranges::shuffle(controlAceInheritances, randomEngine);
+    std::ranges::shuffle(specificAccesses, randomEngine);
 }
 
 System::AddAccessTestingBase::SpecificAccessContainerConstIter System::AddAccessTestingBase::GetSpecificAccessBegin() const noexcept
@@ -78,13 +78,13 @@ System::AddAccessTestingBase::SpecificAccessContainerConstIter System::AddAccess
     return specificAccesses.cend();
 }
 
-System::AddAccessTestingBase::ACLBufferType System::AddAccessTestingBase::GetACLBuffer(AccessControlListRevision accessControlListRevision)
+System::AddAccessTestingBase::AclBufferType System::AddAccessTestingBase::GetAclBuffer(AccessControlListRevision accessControlListRevision)
 {
     SYSTEM_CLASS_IS_VALID_1;
 
-    ACLBufferType aclBuffer{};
+    AclBufferType aclBuffer{};
 
-    auto acl = GetAccessCheckACLPtr(aclBuffer);
+    const auto acl = GetAccessCheckAclPtr(aclBuffer);
 
     ASSERT_TRUE(InitializeAccessControlList(acl, aclBufferSize, accessControlListRevision));
     ASSERT_TRUE(IsAccessControlListValid(acl));
@@ -92,24 +92,24 @@ System::AddAccessTestingBase::ACLBufferType System::AddAccessTestingBase::GetACL
     return aclBuffer;
 }
 
-System::AccessCheckACLPtr System::AddAccessTestingBase::GetAccessCheckACLPtr(ACLBufferType& aclBuffer) const noexcept
+System::AccessCheckAclPtr System::AddAccessTestingBase::GetAccessCheckAclPtr(AclBufferType& aclBuffer) const noexcept
 {
     SYSTEM_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-    return reinterpret_cast<AccessCheckACLPtr>(aclBuffer.data());
+    return reinterpret_cast<AccessCheckAclPtr>(aclBuffer.data());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
-System::SecuritySID System::AddAccessTestingBase::GetSecuritySID()
+System::SecuritySid System::AddAccessTestingBase::GetSecuritySid()
 {
     SYSTEM_CLASS_IS_VALID_1;
 
-    SecuritySID sid{};
-    SecuritySIDIndentifierAuthority identifierAuthority SYSTEM_SECURITY_MANDATORY_LABEL_AUTHORITY;
+    SecuritySid sid{};
+    SecuritySidIdentifierAuthority identifierAuthority SYSTEM_SECURITY_MANDATORY_LABEL_AUTHORITY;
     constexpr WindowsByte subAuthorityCount{ 1 };
 
     ASSERT_TRUE(InitializeSecurityIdentifier(&sid, &identifierAuthority, subAuthorityCount));
@@ -132,9 +132,9 @@ System::SpecificAccess System::AddAccessTestingBase::GetSpecificAccess(size_t in
     return specificAccesses.at(index % specificAccesses.size());
 }
 
-System::ControlACEInheritance System::AddAccessTestingBase::GetControlACEInheritance(size_t index) const
+System::ControlAceInheritance System::AddAccessTestingBase::GetControlAceInheritance(size_t index) const
 {
     SYSTEM_CLASS_IS_VALID_CONST_1;
 
-    return controlACEInheritances.at(index % controlACEInheritances.size());
+    return controlAceInheritances.at(index % controlAceInheritances.size());
 }

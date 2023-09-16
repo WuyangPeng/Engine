@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 21:12)
+///	版本：0.9.1.4 (2023/08/31 15:21)
 
 #include "RegisterClassTesting.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/SystemWindowsTesting/resource.h"
 #include "System/Windows/Flags/WindowsClassStyleFlags.h"
-#include "System/Windows/Using/WindowsRegistryUsing.h"
 #include "System/Windows/WindowsRegister.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
@@ -44,20 +43,20 @@ void System::RegisterClassTesting::RegisterClassTest()
     const auto windowMenuName = SYSTEM_TEXT("RegisterTestingMenuName"s);
     const auto newWindowMenuName = windowClassName + ToString(count++);
 
-    WindowsClassEx wndclass{};
+    WindowsClassEx windowsClassEx{};
 
-    wndclass.cbSize = sizeof(WindowsClassEx);
-    wndclass.style = EnumCastUnderlying(WindowsClassStyle::CommonUse);
-    wndclass.lpfnWndProc = WINDOW_PROCESS_MANAGER_SINGLETON.GetProcess();
-    wndclass.cbClsExtra = 0;
-    wndclass.cbWndExtra = 0;
-    wndclass.hInstance = instance;
-    wndclass.hIcon = LoadSystemIcon(instance, MakeIntreSource(IDI_TEST_ICON));
-    wndclass.hCursor = LoadSystemCursor(instance, MakeIntreSource(IDC_TEST_CURSOR));
-    wndclass.hbrBackground = nullptr;
-    wndclass.lpszMenuName = windowMenuName.c_str();
-    wndclass.lpszClassName = newWindowMenuName.c_str();
-    wndclass.hIconSm = LoadSystemIcon(instance, MakeIntreSource(IDI_TEST_ICON));
+    windowsClassEx.cbSize = sizeof(WindowsClassEx);
+    windowsClassEx.style = EnumCastUnderlying(WindowsClassStyle::CommonUse);
+    windowsClassEx.lpfnWndProc = WINDOW_PROCESS_MANAGER_SINGLETON.GetProcess();
+    windowsClassEx.cbClsExtra = 0;
+    windowsClassEx.cbWndExtra = 0;
+    windowsClassEx.hInstance = instance;
+    windowsClassEx.hIcon = LoadSystemIcon(instance, MakeIntreSource(IDI_TEST_ICON));
+    windowsClassEx.hCursor = LoadSystemCursor(instance, MakeIntreSource(IDC_TEST_CURSOR));
+    windowsClassEx.hbrBackground = nullptr;
+    windowsClassEx.lpszMenuName = windowMenuName.c_str();
+    windowsClassEx.lpszClassName = newWindowMenuName.c_str();
+    windowsClassEx.hIconSm = LoadSystemIcon(instance, MakeIntreSource(IDI_TEST_ICON));
 
-    ASSERT_UNEQUAL(RegisterSystemClass(&wndclass), 0);
+    ASSERT_UNEQUAL(RegisterSystemClass(&windowsClassEx), 0);
 }

@@ -50,12 +50,12 @@ Rendering::BoundF& Rendering::VisualImpl::GetModelBound() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26473)
 
     return const_cast<BoundF&>(static_cast<const ClassType*>(this)->GetModelBound());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 const Rendering::BoundF& Rendering::VisualImpl::GetModelBound() const noexcept

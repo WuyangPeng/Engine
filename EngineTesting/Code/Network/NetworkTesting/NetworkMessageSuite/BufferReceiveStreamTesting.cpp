@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/12 14:05)
+///	版本：0.9.1.4 (2023/09/16 09:37)
 
 #include "BufferReceiveStreamTesting.h"
 #include "Detail/TestNetworkMessageEvent.h"
@@ -13,7 +13,6 @@
 #include "CoreTools/FileManager/Endian.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
@@ -38,19 +37,13 @@ void Network::BufferReceiveStreamTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-namespace Network
-{
-    using TestingType = BufferReceiveStream;
-}
-
 void Network::BufferReceiveStreamTesting::MainTest()
 {
     MESSAGE_MANAGER_SINGLETON.Insert(messageId, MessageTypeCondition::CreateNullCondition(), TestNullMessage::Factory);
 
     constexpr auto segment = 100;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    auto remainderLoopCount = aTestLoopCount;
+    auto remainderLoopCount = GetTestLoopCount();
     auto currentLoopCount = 1;
     while (0 < remainderLoopCount)
     {
@@ -82,7 +75,7 @@ void Network::BufferReceiveStreamTesting::FinishReceiveTest(int aTestLoopCount, 
 
     ASSERT_EQUAL(networkMessageEvent->GetValue(), 0);
 
-    TestingType bufferReceiveStream{ buffer, parserStrategy, EncryptedCompressionStrategy::Default };
+    BufferReceiveStream bufferReceiveStream{ buffer, parserStrategy, EncryptedCompressionStrategy::Default };
 
     ASSERT_TRUE(bufferReceiveStream.IsFinish());
 
@@ -104,7 +97,7 @@ void Network::BufferReceiveStreamTesting::UnFinishReceiveTest(int aTestLoopCount
 
     ASSERT_EQUAL(networkMessageEvent->GetValue(), 0);
 
-    TestingType bufferReceiveStream{ buffer, parserStrategy, EncryptedCompressionStrategy::Default };
+    BufferReceiveStream bufferReceiveStream{ buffer, parserStrategy, EncryptedCompressionStrategy::Default };
 
     ASSERT_FALSE(bufferReceiveStream.IsFinish());
 
@@ -129,11 +122,11 @@ void Network::BufferReceiveStreamTesting::CopyFinishReceiveTest(int aTestLoopCou
 
     ASSERT_EQUAL(networkMessageEvent->GetValue(), 0);
 
-    const TestingType bufferReceiveStream{ buffer, parserStrategy, EncryptedCompressionStrategy::Default };
+    const BufferReceiveStream bufferReceiveStream{ buffer, parserStrategy, EncryptedCompressionStrategy::Default };
 
     ASSERT_TRUE(bufferReceiveStream.IsFinish());
 
-    TestingType copyBufferReceiveStream{ bufferReceiveStream };
+    BufferReceiveStream copyBufferReceiveStream{ bufferReceiveStream };
 
     ASSERT_TRUE(copyBufferReceiveStream.IsFinish());
 
@@ -155,13 +148,13 @@ void Network::BufferReceiveStreamTesting::CopyUnFinishReceiveTest(int aTestLoopC
 
     ASSERT_EQUAL(networkMessageEvent->GetValue(), 0);
 
-    const TestingType bufferReceiveStream{ buffer, parserStrategy, EncryptedCompressionStrategy::Default };
+    const BufferReceiveStream bufferReceiveStream{ buffer, parserStrategy, EncryptedCompressionStrategy::Default };
 
     ASSERT_FALSE(bufferReceiveStream.IsFinish());
 
     const auto noUseBuffer = CreateSendMessageBuffer(aTestLoopCount, parserStrategy);
 
-    TestingType copyBufferReceiveStream{ noUseBuffer, parserStrategy, EncryptedCompressionStrategy::Default };
+    BufferReceiveStream copyBufferReceiveStream{ noUseBuffer, parserStrategy, EncryptedCompressionStrategy::Default };
     copyBufferReceiveStream = bufferReceiveStream;
 
     ASSERT_FALSE(copyBufferReceiveStream.IsFinish());
@@ -186,12 +179,12 @@ Network::MessageBufferSharedPtr Network::BufferReceiveStreamTesting::CreateAddMe
 
     const auto initialBuffered = messageBuffer->GetInitialBufferedPtr();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     auto messageNumber = reinterpret_cast<int32_t*>(initialBuffered);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     if (messageNumber == nullptr)
     {
@@ -200,12 +193,12 @@ Network::MessageBufferSharedPtr Network::BufferReceiveStreamTesting::CreateAddMe
 
     *messageNumber = System::EnumCastUnderlying(MessageHeadStrategy::Default);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     messageNumber += 1;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     *messageNumber = boost::numeric_cast<int32_t>(messageId);
 
@@ -213,21 +206,21 @@ Network::MessageBufferSharedPtr Network::BufferReceiveStreamTesting::CreateAddMe
 
     if (parserStrategy == ParserStrategy::BigEndian)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
         messageNumber = reinterpret_cast<int32_t*>(initialBuffered);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         CoreTools::Endian::SwapByteOrder(4, messageNumber);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         messageNumber += 1;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         CoreTools::Endian::SwapByteOrder(4, messageNumber);
     }
@@ -255,12 +248,12 @@ Network::MessageBufferSharedPtr Network::BufferReceiveStreamTesting::CreateSendM
 
 void Network::BufferReceiveStreamTesting::AddBufferLength(MessageBuffer& messageBuffer)
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     auto& length = *reinterpret_cast<int32_t*>(messageBuffer.GetInitialBufferedPtr());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     const auto streamSize = CoreTools::GetStreamSize(length);
 

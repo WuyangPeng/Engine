@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/30 12:59)
+///	版本：0.9.1.4 (2023/08/30 18:10)
 
 #ifndef SYSTEM_THREADING_MUTEX_FLAGS_H
 #define SYSTEM_THREADING_MUTEX_FLAGS_H
@@ -35,7 +35,7 @@ namespace System
         AllAccess = MUTEX_ALL_ACCESS,
     };
 
-    enum class PthreadResult : uint32_t
+    enum class PThreadResult : uint32_t
     {
         Successful = 0,
         ENomem = WAIT_FAILED,
@@ -46,13 +46,13 @@ namespace System
         EDeadlk = WAIT_FAILED,
     };
 
-    enum class PthreadMutexCompatibility
+    enum class PThreadMutexCompatibility
     {
-        FastNP = 0,
-        RecursiveNP = 1,
-        ErrorcheckNP = 2,
-        TimedNP = 0,
-        AdaptiveNP = 0,
+        FastNp = 0,
+        RecursiveNp = 1,
+        ErrorCheckNp = 2,
+        TimedNp = 0,
+        AdaptiveNp = 0,
 
         Normal = 0,
         Recursive = 1,
@@ -75,7 +75,7 @@ namespace System
         AllAccess = 0x000F0000L | 0x00100000L | 0x3,
     };
 
-    enum class PthreadResult : uint32_t
+    enum class PThreadResult : uint32_t
     {
         Successful = 0,
         ENomem = ENOMEM,
@@ -86,13 +86,13 @@ namespace System
         EDeadlk = EDEADLK,
     };
 
-    enum class PthreadMutexCompatibility
+    enum class PThreadMutexCompatibility
     {
-        FastNP = PTHREAD_MUTEX_FAST_NP,
-        RecursiveNP = PTHREAD_MUTEX_RECURSIVE_NP,
-        ErrorcheckNP = PTHREAD_MUTEX_ERRORCHECK_NP,
-        TimedNP = PTHREAD_MUTEX_TIMED_NP,
-        AdaptiveNP = PTHREAD_MUTEX_ADAPTIVE_NP,
+        FastNp = PTHREAD_MUTEX_FAST_NP,
+        RecursiveNp = PTHREAD_MUTEX_RECURSIVE_NP,
+        ErrorCheckNp = PTHREAD_MUTEX_ERRORCHECK_NP,
+        TimedNp = PTHREAD_MUTEX_TIMED_NP,
+        AdaptiveNp = PTHREAD_MUTEX_ADAPTIVE_NP,
 
         Normal = PTHREAD_MUTEX_NORMAL,
         Recursive = PTHREAD_MUTEX_RECURSIVE,

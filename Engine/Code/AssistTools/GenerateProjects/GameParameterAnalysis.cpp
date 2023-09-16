@@ -128,3 +128,10 @@ AssistTools::GameParameterAnalysis::String AssistTools::GameParameterAnalysis::G
 
     return impl->GetVersionNum();
 }
+
+AssistTools::GameParameterAnalysis::String AssistTools::GameParameterAnalysis::GetTestingName() const
+{
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetTestingName();
+}

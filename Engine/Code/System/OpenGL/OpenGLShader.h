@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 22:43)
+///	版本：0.9.1.4 (2023/08/29 23:31)
 
 #ifndef SYSTEM_OPENGL_OPENGL_SHADER_H
 #define SYSTEM_OPENGL_OPENGL_SHADER_H
@@ -28,11 +28,11 @@ namespace System
     void SYSTEM_DEFAULT_DECLARE DetachGLShader(OpenGLUInt program, OpenGLUInt shader) noexcept;
 
     void SYSTEM_DEFAULT_DECLARE CompileGLShader(OpenGLUInt shader) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLShaderSource(OpenGLUInt shader, OpenGLSize count, const OpenGLChar* const* string, const OpenGLInt* length) noexcept;  
+    void SYSTEM_DEFAULT_DECLARE SetGLShaderSource(OpenGLUInt shader, OpenGLSize count, const OpenGLChar* const* string, const OpenGLInt* length) noexcept;
     void SYSTEM_DEFAULT_DECLARE GetGLShaderSource(OpenGLUInt shader, OpenGLSize bufSize, OpenGLSize* length, OpenGLChar* source) noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetGLShader(OpenGLUInt shader, ShaderStatus pname) noexcept;
-    NODISCARD int SYSTEM_DEFAULT_DECLARE GetGLShader(OpenGLUInt shader, ShaderAttributes pname) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetGLShader(OpenGLUInt shader, ShaderStatus pName) noexcept;
+    NODISCARD int SYSTEM_DEFAULT_DECLARE GetGLShader(OpenGLUInt shader, ShaderAttributes pName) noexcept;
     NODISCARD std::string SYSTEM_DEFAULT_DECLARE GetGLShaderInfoLog(OpenGLUInt shader);
 
     NODISCARD OpenGLInt SYSTEM_DEFAULT_DECLARE GetGLUniformLocation(OpenGLUInt program, const OpenGLChar* name) noexcept;

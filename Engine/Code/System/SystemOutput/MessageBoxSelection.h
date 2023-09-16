@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/29 23:47)
+///	版本：0.9.1.4 (2023/08/30 18:07)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_MESSAGE_BOX_SELECTION_H
 #define SYSTEM_SYSTEM_OUTPUT_MESSAGE_BOX_SELECTION_H
@@ -24,15 +24,15 @@ namespace System
     NODISCARD DialogBoxCommand SYSTEM_DEFAULT_DECLARE MessageBoxSelectionWithWChar(const wchar_t* text, const wchar_t* caption) noexcept;
     NODISCARD DialogBoxCommand SYSTEM_DEFAULT_DECLARE MessageBoxSelectionWithTChar(const TChar* text, const TChar* caption) noexcept;
 
-    NODISCARD DialogBoxCommand SYSTEM_DEFAULT_DECLARE MessageBoxSelection(WindowsHWnd hwnd,
+    NODISCARD DialogBoxCommand SYSTEM_DEFAULT_DECLARE MessageBoxSelection(WindowsHWnd hWnd,
                                                                           const TChar* text,
                                                                           const TChar* caption,
                                                                           const MessageBoxFlagsData& flagsData) noexcept;
-    NODISCARD DialogBoxCommand SYSTEM_DEFAULT_DECLARE MessageBoxSelection(WindowsHWnd hwnd,
+    NODISCARD DialogBoxCommand SYSTEM_DEFAULT_DECLARE MessageBoxSelection(WindowsHWnd hWnd,
                                                                           const TChar* text,
                                                                           const TChar* caption,
                                                                           const MessageBoxFlagsData& flagsData,
-                                                                          const LanguageIDData& languageIDData) noexcept;
+                                                                          const LanguageIdData& languageIdData) noexcept;
 }
 
 #endif  // SYSTEM_SYSTEM_OUTPUT_MESSAGE_BOX_SELECTION_H

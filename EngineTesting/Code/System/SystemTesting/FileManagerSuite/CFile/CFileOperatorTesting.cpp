@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/12 22:17)
+///	版本：0.9.1.4 (2023/08/31 17:23)
 
 #include "CFileOperatorTesting.h"
 #include "System/FileManager/CFile.h"
@@ -14,8 +14,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using namespace std::literals;
 
 System::CFileOperatorTesting::CFileOperatorTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -37,9 +35,9 @@ void System::CFileOperatorTesting::MainTest()
 
 void System::CFileOperatorTesting::OperatorTest()
 {
-    auto file = OpenFile(SYSTEM_FILE_TEXT("w+"s));
+    auto file = OpenFile(SYSTEM_FILE_TEXT("w+"));
 
-    ASSERT_NOT_THROW_EXCEPTION_1(IsEOFTest, file);
+    ASSERT_NOT_THROW_EXCEPTION_1(IsEofTest, file);
     ASSERT_NOT_THROW_EXCEPTION_1(FlushTest, file);
     ASSERT_NOT_THROW_EXCEPTION_1(TellTest, file);
     ASSERT_NOT_THROW_EXCEPTION_1(PositionTest, file);
@@ -48,11 +46,11 @@ void System::CFileOperatorTesting::OperatorTest()
     ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, file);
 }
 
-void System::CFileOperatorTesting::IsEOFTest(FILE* file)
+void System::CFileOperatorTesting::IsEofTest(FILE* file)
 {
     ASSERT_TRUE(Seek(file, 0, FileSeek::Set));
 
-    ASSERT_FALSE(IsEOF(file));
+    ASSERT_FALSE(IsEof(file));
 }
 
 void System::CFileOperatorTesting::FlushTest(FILE* file)
@@ -91,5 +89,5 @@ void System::CFileOperatorTesting::RewindTest(FILE* file) noexcept
 
 System::CFileString System::CFileOperatorTesting::GetFileName() const
 {
-    return SYSTEM_FILE_TEXT("Resource/CFileTesting/OperatorTest.txt"s);
+    return SYSTEM_FILE_TEXT("Resource/CFileTesting/OperatorTest.txt");
 }

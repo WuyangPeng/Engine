@@ -59,7 +59,7 @@ void CoreTools::SevenModElevenCheckSum::Calculation(const char* data, int length
     for (auto i = length; 0 < i; --i)
     {
         // 判断是否是数字
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         if (!isdigit(data[i - 1]))
@@ -70,7 +70,7 @@ void CoreTools::SevenModElevenCheckSum::Calculation(const char* data, int length
         // 将数字字符转换为数字
         const int digit{ data[i - 1] - '0' };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         // 查找幂，乘以digit，加到和
 

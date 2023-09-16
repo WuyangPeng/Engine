@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/20 15:41)
+///	版本：0.9.1.4 (2023/08/31 14:27)
 
 #include "OpenGLTextures1DTesting.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
@@ -66,7 +66,7 @@ void System::OpenGLTextures1DTesting::GetTexturesImageTest(TextureInternalFormat
 {
     const auto texturesImageSize = width * GetTextureFormatSize(textureInternalFormat);
 
-    TexturesImageType texturesData(texturesImageSize, 121);
+    const TexturesImageType texturesData(texturesImageSize, 121);
     SetGLTexturesSubImage1D(textureTarget, 0, 0, width, GetTextureExternalFormat(textureInternalFormat), openGLData, texturesData.data());
 
     TexturesImageType result(texturesImageSize);

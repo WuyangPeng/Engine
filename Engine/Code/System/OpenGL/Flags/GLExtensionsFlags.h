@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 19:01)
+///	版本：0.9.1.4 (2023/08/29 23:21)
 
 #ifndef SYSTEM_OPENGL_GL_EXTENSIONS_FLAGS_H
 #define SYSTEM_OPENGL_GL_EXTENSIONS_FLAGS_H
 
 #include "System/Helper/Detail/OpenGL/GLUtilityMacro.h"
-#include "System/Helper/EnumOperator.h"
 #include "System/Helper/GLExtensionsMacro.h"
 
 namespace System
@@ -32,7 +31,7 @@ namespace System
         StackOverflow = GL_STACK_OVERFLOW,
         StackUnderflow = GL_STACK_UNDERFLOW,
         OutOfMemory = GL_OUT_OF_MEMORY,
-        InvalidFramebufferOperation = GL_INVALID_FRAMEBUFFER_OPERATION,
+        InvalidFrameBufferOperation = GL_INVALID_FRAMEBUFFER_OPERATION,
         ContextLost = GL_CONTEXT_LOST,
     };
 
@@ -58,7 +57,7 @@ namespace System
         Version44 = gSystemOpenGLVersion44,
         Version45 = gSystemOpenGLVersion45,
         Version46 = gSystemOpenGLVersion46,
-        VersionUnkownMax = gSystemOpenGLVersionMax,
+        VersionUnknownMax = gSystemOpenGLVersionMax,
     };
 }
 

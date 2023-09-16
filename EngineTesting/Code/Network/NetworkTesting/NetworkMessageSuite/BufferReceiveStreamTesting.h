@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/12 14:04)
+///	版本：0.9.1.4 (2023/09/16 09:21)
 
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_BUFFER_RECEIVE_STREAM_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_BUFFER_RECEIVE_STREAM_TESTING_H
 
 #include "Detail/TestNullMessage.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
-#include "Network/NetworkMessage/NetworkMessageInternalFwd.h"
 
 namespace Network
 {

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/11 10:57)
+///	版本：0.9.1.4 (2023/09/16 10:12)
 
 #include "AnalysisNetworkConfigurationTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -55,7 +55,7 @@ void Network::AnalysisNetworkConfigurationTesting::GameServerTest(const TestingT
     ASSERT_ENUM_EQUAL(gameServer.GetMessageStrategy(), MessageStrategy::Iovec);
     ASSERT_ENUM_EQUAL(gameServer.GetConnectStrategy(), ConnectStrategy::Udp);
     ASSERT_ENUM_EQUAL(gameServer.GetParserStrategy(), ParserStrategy::BigEndian);
-    ASSERT_ENUM_EQUAL(gameServer.GetOpenSSLStrategy(), OpenSSLStrategy::OpenSSL);
+    ASSERT_ENUM_EQUAL(gameServer.GetOpenSslStrategy(), OpenSslStrategy::OpenSsl);
 
     const auto configurationSubStrategy = gameServer.GetConfigurationSubStrategy();
 
@@ -88,7 +88,7 @@ void Network::AnalysisNetworkConfigurationTesting::GameClientTest(const TestingT
     ASSERT_ENUM_EQUAL(gameClient.GetMessageStrategy(), MessageStrategy::Iovec);
     ASSERT_ENUM_EQUAL(gameClient.GetConnectStrategy(), ConnectStrategy::Tcp);
     ASSERT_ENUM_EQUAL(gameClient.GetParserStrategy(), ParserStrategy::LittleEndian);
-    ASSERT_ENUM_EQUAL(gameClient.GetOpenSSLStrategy(), OpenSSLStrategy::Default);
+    ASSERT_ENUM_EQUAL(gameClient.GetOpenSslStrategy(), OpenSslStrategy::Default);
 
     const auto configurationSubStrategy = gameClient.GetConfigurationSubStrategy();
 

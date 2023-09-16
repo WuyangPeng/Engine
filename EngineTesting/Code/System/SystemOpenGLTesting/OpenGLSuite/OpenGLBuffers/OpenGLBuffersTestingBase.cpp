@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/17 12:13)
+///	版本：0.9.1.4 (2023/08/31 14:22)
 
 #include "OpenGLBuffersTestingBase.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -20,7 +20,7 @@ System::OpenGLBuffersTestingBase::OpenGLBuffersTestingBase(const OStreamShared& 
       bindBuffers{ BindBuffer::ArrayBuffer,
                    BindBuffer::ElementArrayBuffer,
                    BindBuffer::PixelUnpackBuffer,
-                   BindBuffer::PixePackBuffer,
+                   BindBuffer::PixelPackBuffer,
                    BindBuffer::ShaderStorageBuffer,
                    BindBuffer::UniformBuffer,
                    BindBuffer::CopyReadBuffer,
@@ -30,7 +30,7 @@ System::OpenGLBuffersTestingBase::OpenGLBuffersTestingBase(const OStreamShared& 
       subDataBindBuffers{ BindBuffer::ArrayBuffer,
                           BindBuffer::ElementArrayBuffer,
                           BindBuffer::PixelUnpackBuffer,
-                          BindBuffer::PixePackBuffer,
+                          BindBuffer::PixelPackBuffer,
                           BindBuffer::CopyReadBuffer,
                           BindBuffer::CopyWriteBuffer,
                           BindBuffer::TransformFeedbackBuffer },
@@ -43,7 +43,7 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, OpenGLBuffersTestingBase)
 
 void System::OpenGLBuffersTestingBase::RandomShuffle()
 {
-    shuffle(subDataBindBuffers.begin(), subDataBindBuffers.end(), randomEngine);
+    std::ranges::shuffle(subDataBindBuffers, randomEngine);
 }
 
 void System::OpenGLBuffersTestingBase::SetBindBufferTest(BindBuffer type, OpenGLUInt buffer) noexcept
@@ -61,14 +61,14 @@ void System::OpenGLBuffersTestingBase::SetGLDeleteBuffersTest(const BufferType& 
     SetGLDeleteBuffers(bufferSize, buffers.data());
 }
 
-void System::OpenGLBuffersTestingBase::SetGLDeleteFramebufferTest(OpenGLUInt buffer) noexcept
+void System::OpenGLBuffersTestingBase::SetGLDeleteFrameBufferTest(OpenGLUInt buffer) noexcept
 {
-    SetGLDeleteFramebuffers(buffer);
+    SetGLDeleteFrameBuffers(buffer);
 }
 
-void System::OpenGLBuffersTestingBase::SetGLDeleteFramebuffersTest(const BufferType& buffers) noexcept
+void System::OpenGLBuffersTestingBase::SetGLDeleteFrameBuffersTest(const BufferType& buffers) noexcept
 {
-    SetGLDeleteFramebuffers(bufferSize, buffers.data());
+    SetGLDeleteFrameBuffers(bufferSize, buffers.data());
 }
 
 void System::OpenGLBuffersTestingBase::SetGLDeleteVertexArrayTest(OpenGLUInt buffer) noexcept

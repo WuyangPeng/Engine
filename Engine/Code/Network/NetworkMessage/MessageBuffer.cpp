@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 11:10)
+///	版本：0.9.1.4 (2023/09/04 16:37)
 
 #include "Network/NetworkExport.h"
 
@@ -41,38 +41,187 @@ Network::MessageBuffer::MessageBuffer(int count, ParserStrategy parserStrategy)
 
 CLASS_INVARIANT_STUB_DEFINE(Network, MessageBuffer)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, MessageBuffer, ClearCurrentIndex, void)
+int Network::MessageBuffer::GetCurrentReadIndex() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, MessageBuffer, GetCurrentReadIndex, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, MessageBuffer, GetRemainingReadCount, int)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, MessageBuffer, ClearCurrentReadIndex, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, MessageBuffer, AddCurrentReadIndex, int, void)
+    return impl->GetCurrentReadIndex();
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, MessageBuffer, GetCurrentWriteIndex, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, GetRemainingWriteCount, int)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, MessageBuffer, ClearCurrentWriteIndex, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, MessageBuffer, AddCurrentWriteIndex, int, void)
+int Network::MessageBuffer::GetRemainingReadCount() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, GetCurrentReadBufferedPtr, const char*)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, GetCurrentReadBufferedPtr, char*)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, GetCurrentWriteBufferedPtr, const char*)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, GetCurrentWriteBufferedPtr, char*)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, GetInitialBufferedPtr, const char*)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, GetInitialBufferedPtr, char*)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, GetSize, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, MessageBuffer, GetParserStrategy, Network::ParserStrategy)
+    return impl->GetRemainingReadCount();
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, GetReceiveCount, int)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, MessageBuffer, SetReceiveCount, int, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, MessageBuffer, DecreaseReceiveCount, int, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, SetMessageHeadReceiveCount, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, SetMessageContentReceiveCount, void)
+void Network::MessageBuffer::ClearCurrentReadIndex() noexcept
+{
+    NETWORK_CLASS_IS_VALID_1;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, GetMessageLength, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, IsMessageReceiveEnd, bool)
+    return impl->ClearCurrentReadIndex();
+}
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, CheckingMessageHeadSize, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, CheckingMessageContentSize, void)
+void Network::MessageBuffer::AddCurrentReadIndex(int stepping)
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->AddCurrentReadIndex(stepping);
+}
+
+int Network::MessageBuffer::GetCurrentWriteIndex() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetCurrentWriteIndex();
+}
+
+int Network::MessageBuffer::GetRemainingWriteCount() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetRemainingWriteCount();
+}
+
+void Network::MessageBuffer::ClearCurrentWriteIndex() noexcept
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->ClearCurrentWriteIndex();
+}
+
+void Network::MessageBuffer::AddCurrentWriteIndex(int stepping)
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->AddCurrentWriteIndex(stepping);
+}
+
+const char* Network::MessageBuffer::GetCurrentReadBufferedPtr() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetCurrentReadBufferedPtr();
+}
+
+char* Network::MessageBuffer::GetCurrentReadBufferedPtr()
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->GetCurrentReadBufferedPtr();
+}
+
+const char* Network::MessageBuffer::GetCurrentWriteBufferedPtr() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetCurrentWriteBufferedPtr();
+}
+
+char* Network::MessageBuffer::GetCurrentWriteBufferedPtr()
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->GetCurrentWriteBufferedPtr();
+}
+
+const char* Network::MessageBuffer::GetInitialBufferedPtr() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetInitialBufferedPtr();
+}
+
+char* Network::MessageBuffer::GetInitialBufferedPtr()
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->GetInitialBufferedPtr();
+}
+
+int Network::MessageBuffer::GetReceiveCount() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetReceiveCount();
+}
+
+void Network::MessageBuffer::SetReceiveCount(int receiveCount)
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->SetReceiveCount(receiveCount);
+}
+
+void Network::MessageBuffer::DecreaseReceiveCount(int receiveCount)
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->DecreaseReceiveCount(receiveCount);
+}
+
+void Network::MessageBuffer::SetMessageHeadReceiveCount()
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->SetMessageHeadReceiveCount();
+}
+
+void Network::MessageBuffer::SetMessageContentReceiveCount()
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->SetMessageContentReceiveCount();
+}
+
+int Network::MessageBuffer::GetMessageLength() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetMessageLength();
+}
+
+bool Network::MessageBuffer::IsMessageReceiveEnd() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->IsMessageReceiveEnd();
+}
+
+void Network::MessageBuffer::CheckingMessageHeadSize()
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->CheckingMessageHeadSize();
+}
+
+void Network::MessageBuffer::CheckingMessageContentSize()
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->CheckingMessageContentSize();
+}
+
+Network::ParserStrategy Network::MessageBuffer::GetParserStrategy() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetParserStrategy();
+}
+
+int Network::MessageBuffer::GetSize() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetSize();
+}
+
+void Network::MessageBuffer::ClearCurrentIndex() noexcept
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->ClearCurrentIndex();
+}
 
 void Network::MessageBuffer::Read(int itemSize, void* data)
 {

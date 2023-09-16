@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 21:06)
+///	版本：0.9.1.4 (2023/08/31 15:23)
 
 #include "DestroyWindowTesting.h"
 #include "System/Windows/Flags/WindowsFlags.h"
@@ -17,8 +17,8 @@
 
 using namespace std::literals;
 
-System::DestroyWindowTesting::DestroyWindowTesting(const OStreamShared& stream, WindowsHWnd hwnd)
-    : ParentType{ stream }, hwnd{ hwnd }
+System::DestroyWindowTesting::DestroyWindowTesting(const OStreamShared& stream, WindowsHWnd hWnd)
+    : ParentType{ stream }, hWnd{ hWnd }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -39,11 +39,11 @@ void System::DestroyWindowTesting::DestroyWindowTest()
 {
     String className{};
     const auto windowsName = SYSTEM_TEXT("Not Displayed Windows"s);
-    ASSERT_TRUE(GetSystemClassName(hwnd, className));
+    ASSERT_TRUE(GetSystemClassName(hWnd, className));
 
     constexpr auto width = 800;
     constexpr auto high = 600;
-    WindowsRect rect{ 0, 0, width, high };
+    constexpr WindowsRect rect{ 0, 0, width, high };
 
     const auto result = CreateSystemWindow(className, windowsName, WindowsStyles::Default, 0, 0, rect, nullptr, nullptr, GetHInstance());
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/11 18:37)
+///	版本：0.9.1.4 (2023/09/01 10:31)
 
 #ifndef SYSTEM_NETWORK_SUITE_SOCK_OPTION_TESTING_H
 #define SYSTEM_NETWORK_SUITE_SOCK_OPTION_TESTING_H
@@ -27,7 +27,7 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void SockOptionTest();

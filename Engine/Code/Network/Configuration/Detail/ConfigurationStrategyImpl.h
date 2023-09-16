@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/04/28 09:49)
+///	版本：0.9.1.4 (2023/09/04 15:39)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FACTORY_IMPL_H
 #define NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FACTORY_IMPL_H
@@ -36,7 +36,7 @@ namespace Network
                                   ServerStrategy serverStrategy,
                                   MessageStrategy messageStrategy,
                                   ParserStrategy parserStrategy,
-                                  OpenSSLStrategy openSSLStrategy,
+                                  OpenSslStrategy openSslStrategy,
                                   EncryptedCompressionStrategy encryptedCompressionStrategy,
                                   ConfigurationSubStrategy subStrategy,
                                   ConfigurationParameter configurationParameter,
@@ -48,7 +48,7 @@ namespace Network
                                   ClientStrategy clientStrategy,
                                   MessageStrategy messageStrategy,
                                   ParserStrategy parserStrategy,
-                                  OpenSSLStrategy openSSLStrategy,
+                                  OpenSslStrategy openSslStrategy,
                                   EncryptedCompressionStrategy encryptedCompressionStrategy,
                                   ConfigurationSubStrategy subStrategy,
                                   ConfigurationParameter configurationParameter,
@@ -64,7 +64,7 @@ namespace Network
         NODISCARD ClientStrategy GetClientStrategy() const noexcept;
         NODISCARD ConnectStrategy GetConnectStrategy() const noexcept;
         NODISCARD ParserStrategy GetParserStrategy() const noexcept;
-        NODISCARD OpenSSLStrategy GetOpenSSLStrategy() const noexcept;
+        NODISCARD OpenSslStrategy GetOpenSslStrategy() const noexcept;
         NODISCARD SocketSendMessage GetSocketSendMessage() const noexcept;
         NODISCARD EncryptedCompressionStrategy GetEncryptedCompressionStrategy() const noexcept;
 
@@ -76,6 +76,9 @@ namespace Network
         NODISCARD std::string GetHost() const;
         NODISCARD int GetPort() const noexcept;
 
+        NODISCARD bool IsServer() const noexcept;
+        NODISCARD bool IsClient() const noexcept;
+
     private:
         WrappersStrategy wrappersStrategy{ WrappersStrategy::Boost };
         ServerStrategy patternStrategy{ ServerStrategy::Disable };
@@ -83,7 +86,7 @@ namespace Network
         MessageStrategy messageStrategy{ MessageStrategy::Default };
         ConnectStrategy connectStrategy{ ConnectStrategy::Tcp };
         ParserStrategy parserStrategy{ ParserStrategy::LittleEndian };
-        OpenSSLStrategy openSSLStrategy{ OpenSSLStrategy::Default };
+        OpenSslStrategy openSslStrategy{ OpenSslStrategy::Default };
         EncryptedCompressionStrategy encryptedCompressionStrategy{ EncryptedCompressionStrategy::Default };
         ConfigurationSubStrategy subStrategy{ ConfigurationSubStrategy::Create() };
         SocketSendMessage socketSendMessage{};

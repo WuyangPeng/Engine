@@ -1,0 +1,6 @@
+$Copyright$
+
+#include "ThreadingCoreRenderEngine/ThreadingCoreRenderEngineLib.h"
+#include "ThreadingCoreRenderEngineGame/ThreadingCoreRenderEngineGameLib.h"
+
+#include "$ModuleName$/$ModuleName$Core/$ModuleName$CoreLib.h"

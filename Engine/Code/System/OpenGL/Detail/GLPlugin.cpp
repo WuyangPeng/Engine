@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 18:57)
+///	版本：0.9.1.4 (2023/08/29 23:38)
 
 #include "System/SystemExport.h"
 
@@ -17,6 +17,7 @@
 #include "System/OpenGL/Detail/GL11Extensions.h"
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 
+#include <gsl/util>
 #include <boost/assert.hpp>
 #include <iostream>
 
@@ -35,14 +36,14 @@ namespace System
     void DoReportGLError(const char* glFunction)
     {
         // 这里直接调用glGetError，而不是GLGetError。
-        auto code = UnderlyingCastEnum<OpenGLErrorCode>(glGetError());
+        auto code = UnderlyingCastEnum<OpenGLErrorCode>(gsl::narrow_cast<int>(glGetError()));
         while (code != OpenGLErrorCode::NoError)
         {
             const auto errorString = GetOpenGLErrorString(code);
             std::cout << glFunction << ":" << errorString << std::endl;
             BOOST_ASSERT_MSG(false, errorString);
 
-            code = UnderlyingCastEnum<OpenGLErrorCode>(glGetError());
+            code = UnderlyingCastEnum<OpenGLErrorCode>(gsl::narrow_cast<int>(glGetError()));
         }
     }
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/30 13:18)
+///	版本：0.9.1.4 (2023/08/30 18:18)
 
 #ifndef SYSTEM_THREADING_MUTEX_H
 #define SYSTEM_THREADING_MUTEX_H
@@ -55,14 +55,14 @@ namespace System
                                                                           const TChar* name) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE IsSystemMutexValid(WindowsHandle handle) noexcept;
 
-    NODISCARD PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexAttributeInit(PthreadMutexattrT* attribute) noexcept;
-    NODISCARD PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexAttributeSetType(PthreadMutexattrT* attribute) noexcept;
-    NODISCARD PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexInit(PthreadMutexattrT* attribute, PthreadMutexT* mutex) noexcept;
-    NODISCARD PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexDestroy(PthreadMutexT* mutex) noexcept;
-    NODISCARD PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexAttributeDestroy(PthreadMutexattrT* attribute) noexcept;
-    NODISCARD PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexLock(PthreadMutexT* mutex) noexcept;
-    NODISCARD PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexUnlock(PthreadMutexT* mutex) noexcept;
-    NODISCARD PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexTrylock(PthreadMutexT* mutex) noexcept;
+    NODISCARD PThreadResult SYSTEM_DEFAULT_DECLARE PThreadMutexAttributeInit(PThreadMutexAttrT* attribute) noexcept;
+    NODISCARD PThreadResult SYSTEM_DEFAULT_DECLARE PThreadMutexAttributeSetType(PThreadMutexAttrT* attribute) noexcept;
+    NODISCARD PThreadResult SYSTEM_DEFAULT_DECLARE PThreadMutexInit(PThreadMutexAttrT* attribute, PThreadMutexT* mutex) noexcept;
+    NODISCARD PThreadResult SYSTEM_DEFAULT_DECLARE PThreadMutexDestroy(PThreadMutexT* mutex) noexcept;
+    NODISCARD PThreadResult SYSTEM_DEFAULT_DECLARE PThreadMutexAttributeDestroy(PThreadMutexAttrT* attribute) noexcept;
+    NODISCARD PThreadResult SYSTEM_DEFAULT_DECLARE PThreadMutexLock(PThreadMutexT* mutex) noexcept;
+    NODISCARD PThreadResult SYSTEM_DEFAULT_DECLARE PThreadMutexUnlock(PThreadMutexT* mutex) noexcept;
+    NODISCARD PThreadResult SYSTEM_DEFAULT_DECLARE PThreadMutexTryLock(PThreadMutexT* mutex) noexcept;
 }
 
 #endif  // SYSTEM_THREADING_MUTEX_H

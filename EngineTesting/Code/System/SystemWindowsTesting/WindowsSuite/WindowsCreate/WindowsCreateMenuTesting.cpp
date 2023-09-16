@@ -5,19 +5,18 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 19:47)
+///	版本：0.9.1.4 (2023/08/31 15:23)
 
 #include "WindowsCreateMenuTesting.h"
 #include "System/Windows/Flags/WindowsCreateFlags.h"
-#include "System/Windows/Flags/WindowsFlags.h"
 #include "System/Windows/WindowsCreate.h"
 #include "System/Windows/WindowsProcess.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::WindowsCreateMenuTesting::WindowsCreateMenuTesting(const OStreamShared& stream, WindowsHInstance instance, WindowsHWnd hwnd)
-    : ParentType{ stream, instance, hwnd }
+System::WindowsCreateMenuTesting::WindowsCreateMenuTesting(const OStreamShared& stream, WindowsHInstance instance, WindowsHWnd hWnd)
+    : ParentType{ stream, instance, hWnd }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }

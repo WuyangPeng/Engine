@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 20:07)
+///	版本：0.9.1.4 (2023/09/01 14:39)
 
 #ifndef SYSTEM_THREADING_SUITE_PRIORITY_BOOST_TESTING_H
 #define SYSTEM_THREADING_SUITE_PRIORITY_BOOST_TESTING_H
@@ -27,13 +27,13 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void ThreadTest();
 
         void DoThreadTest(WindowsHandle mutexHandle);
-        void ResultTest(WindowsHandle threadHandle, WindowsDWord threadID, WindowsHandle mutexHandle);
+        void ResultTest(WindowsHandle threadHandle, WindowsDWord threadId, WindowsHandle mutexHandle);
 
         static WindowsDWord SYSTEM_WINAPI ThreadStartRoutine(void* threadParameter) noexcept;
     };

@@ -32,7 +32,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistance()
     // 确定m_InputVector的反射到第一象限。
     const std::array<bool, size> reflect{ inputVector.GetX() < Math::GetValue(0), inputVector.GetY() < Math::GetValue(0), inputVector.GetZ() < Math::GetValue(0) };
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     // 确定递减辐度轴顺序。
@@ -80,7 +80,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistance()
         }
     }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     std::array<int, size> invPermute{};
     for (auto index = 0; index < size; ++index)

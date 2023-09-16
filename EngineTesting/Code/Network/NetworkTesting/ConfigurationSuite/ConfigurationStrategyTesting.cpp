@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/11 10:18)
+///	版本：0.9.1.4 (2023/09/16 10:12)
 
 #include "ConfigurationStrategyTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -45,7 +45,7 @@ void Network::ConfigurationStrategyTesting::DefaultTest()
     ASSERT_ENUM_EQUAL(configurationStrategy.GetMessageStrategy(), MessageStrategy::Default);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetConnectStrategy(), ConnectStrategy::Tcp);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetParserStrategy(), ParserStrategy::LittleEndian);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetOpenSSLStrategy(), OpenSSLStrategy::Default);
+    ASSERT_ENUM_EQUAL(configurationStrategy.GetOpenSslStrategy(), OpenSslStrategy::Default);
 
     const auto configurationSubStrategy = configurationStrategy.GetConfigurationSubStrategy();
 
@@ -75,7 +75,7 @@ void Network::ConfigurationStrategyTesting::ServerTest()
                                                        ServerStrategy::Iterative,
                                                        MessageStrategy::Iovec,
                                                        ParserStrategy::BigEndian,
-                                                       OpenSSLStrategy::OpenSSL,
+                                                       OpenSslStrategy::OpenSsl,
                                                        EncryptedCompressionStrategy::Default,
                                                        subStrategy,
                                                        configurationParameter,
@@ -89,7 +89,7 @@ void Network::ConfigurationStrategyTesting::ServerTest()
     ASSERT_ENUM_EQUAL(configurationStrategy.GetMessageStrategy(), MessageStrategy::Iovec);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetConnectStrategy(), ConnectStrategy::Udp);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetParserStrategy(), ParserStrategy::BigEndian);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetOpenSSLStrategy(), OpenSSLStrategy::OpenSSL);
+    ASSERT_ENUM_EQUAL(configurationStrategy.GetOpenSslStrategy(), OpenSslStrategy::OpenSsl);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetSocketSendMessage(), SocketSendMessage::Immediately);
 
     const auto configurationSubStrategy = configurationStrategy.GetConfigurationSubStrategy();
@@ -123,7 +123,7 @@ void Network::ConfigurationStrategyTesting::ClientTest()
                                                        ClientStrategy::Cache,
                                                        MessageStrategy::Iovec,
                                                        ParserStrategy::BigEndian,
-                                                       OpenSSLStrategy::OpenSSL,
+                                                       OpenSslStrategy::OpenSsl,
                                                        EncryptedCompressionStrategy::Default,
                                                        subStrategy,
                                                        configurationParameter,
@@ -137,7 +137,7 @@ void Network::ConfigurationStrategyTesting::ClientTest()
     ASSERT_ENUM_EQUAL(configurationStrategy.GetMessageStrategy(), MessageStrategy::Iovec);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetConnectStrategy(), ConnectStrategy::Udp);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetParserStrategy(), ParserStrategy::BigEndian);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetOpenSSLStrategy(), OpenSSLStrategy::OpenSSL);
+    ASSERT_ENUM_EQUAL(configurationStrategy.GetOpenSslStrategy(), OpenSslStrategy::OpenSsl);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetSocketSendMessage(), SocketSendMessage::Cache);
 
     const auto configurationSubStrategy = configurationStrategy.GetConfigurationSubStrategy();

@@ -47,6 +47,10 @@
     "BufferSendStreamTesting": 153
   },
 
+  "serviceWrappersSuite": {
+
+  },
+
   "interfaceSuite": {
     "BaseMainManagerTesting": 1,
     "SockAddressTesting": 1,
@@ -54,13 +58,7 @@
     "SockConnectorTesting": 1,
     "SockStreamTesting": 1,
     "HandleSetTesting": 1,
-    "HandleSetIteratorTesting": 1,
-    "ClientTesting": 1,
-    "CacheClientTesting": 10,
-    "OnlySendingClientTesting": 10,
-    "ServerTesting": 1,
-    "IterativeServerTesting": 10,
-    "ReactiveServerTesting": 10
+    "HandleSetIteratorTesting": 1
   },
 
   "aCEWrappersSuite": {

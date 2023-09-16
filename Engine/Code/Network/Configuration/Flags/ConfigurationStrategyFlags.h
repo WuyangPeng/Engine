@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/04/27 17:12)
+///	版本：0.9.1.4 (2023/09/04 15:39)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H
 #define NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H
@@ -21,7 +21,7 @@ namespace Network
         Boost = 2,
         Beast = 3,
         Network = 4,
-        ActiveMQ = 5,
+        ActiveMq = 5,
         Nats = 6,
         Kafka = 7,
         Null = 8,
@@ -134,10 +134,10 @@ namespace Network
         return (messageHeadStrategy & MessageHeadStrategy::UseDescribe) != MessageHeadStrategy::Default;
     }
 
-    enum class OpenSSLStrategy
+    enum class OpenSslStrategy
     {
         Default = 0,
-        OpenSSL = 1,
+        OpenSsl = 1,
 
         End,
     };

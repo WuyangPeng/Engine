@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 16:10)
+///	版本：0.9.1.4 (2023/09/01 15:22)
 
 #include "SlimReaderWriterWriterTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -81,24 +81,34 @@ void System::SlimReaderWriterWriterTesting::TryWriterThreadSuccess(SlimReaderWri
 
 void System::SlimReaderWriterWriterTesting::CreateThread(SlimReaderWriterLock& slimReaderWriterLock)
 {
-    boost::thread_group threadGroup0{};
+    boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup0.create_thread(boost::bind(&ClassType::ReaderThread, this, boost::ref(slimReaderWriterLock)));
-        threadGroup0.create_thread(boost::bind(&ClassType::WriterThread, this, boost::ref(slimReaderWriterLock)));
+        threadGroup.create_thread([this, &slimReaderWriterLock]() noexcept {
+            this->ReaderThread(slimReaderWriterLock);
+        });
+
+        threadGroup.create_thread([this, &slimReaderWriterLock]() noexcept {
+            this->WriterThread(slimReaderWriterLock);
+        });
     }
 
-    threadGroup0.join_all();
+    threadGroup.join_all();
 }
 
 void System::SlimReaderWriterWriterTesting::CreateTryThread(SlimReaderWriterLock& slimReaderWriterLock)
 {
-    boost::thread_group threadGroup1{};
+    boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup1.create_thread(boost::bind(&ClassType::TryReaderThreadFailure, this, boost::ref(slimReaderWriterLock)));
-        threadGroup1.create_thread(boost::bind(&ClassType::TryWriterThreadFailure, this, boost::ref(slimReaderWriterLock)));
+        threadGroup.create_thread([this, &slimReaderWriterLock]() {
+            this->TryReaderThreadFailure(slimReaderWriterLock);
+        });
+
+        threadGroup.create_thread([this, &slimReaderWriterLock]() {
+            this->TryWriterThreadFailure(slimReaderWriterLock);
+        });
     }
 
-    threadGroup1.join_all();
+    threadGroup.join_all();
 }

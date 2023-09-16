@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/11 20:41)
+///	版本：0.9.1.4 (2023/08/28 17:15)
 
 #include "System/SystemExport.h"
 
@@ -47,8 +47,8 @@ bool System::GetEnvironment(const String& variableName, TChar*& environmentVaria
 
     size_t length{ 0 };
 
-    const auto error = _tdupenv_s(&environmentVariable, &length, variableName.c_str());
-    if (error != 0)
+    if (const auto error = _tdupenv_s(&environmentVariable, &length, variableName.c_str());
+        error != 0)
         return false;
     else
         return true;
@@ -64,16 +64,14 @@ void System::FreeEnvironment(TChar*& environmentVariable) noexcept
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26408)
 
     ::free(environmentVariable);
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
 
     environmentVariable = nullptr;
 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
-
- 

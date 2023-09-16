@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:30)
+///	版本：0.9.1.4 (2023/09/15 17:16)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_SOCK_STREAM_HELPER_H
 #define NETWORK_BOOST_WRAPPERS_BOOST_SOCK_STREAM_HELPER_H
@@ -20,6 +20,7 @@ namespace Network
     {
     public:
         using ClassType = BoostSockStreamHelper;
+
         using String = System::String;
 
     public:

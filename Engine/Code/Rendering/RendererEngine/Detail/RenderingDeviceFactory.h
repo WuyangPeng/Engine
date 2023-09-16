@@ -24,7 +24,7 @@ namespace Rendering
         using ClassType = RenderingDeviceFactory;
         using RenderingDeviceSharedPtr = std::shared_ptr<RenderingDeviceImpl>;
 
-        using WindowsHDC = System::WindowsHDC;
+        using WindowsHDC = System::WindowsHdc;
         using OpenGLHglrc = System::OpenGLHglrc;
         using WindowsHWnd = System::WindowsHWnd;
 

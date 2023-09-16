@@ -37,12 +37,12 @@ typename Mathematics::FloatingPointAnalysis<T>::IntegerType Mathematics::Floatin
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     const auto bits = (reinterpret_cast<const IntegerType&>(value));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     const auto sign = ((symbol & bits) >> symbolShifting);
 
@@ -54,12 +54,12 @@ typename Mathematics::FloatingPointAnalysis<T>::IntegerType Mathematics::Floatin
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     const auto bits = (reinterpret_cast<const IntegerType&>(value));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     const auto result = ((exponent & bits) >> exponentShifting);
 
@@ -71,12 +71,12 @@ typename Mathematics::FloatingPointAnalysis<T>::IntegerType Mathematics::Floatin
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     const auto bits = (reinterpret_cast<const IntegerType&>(value));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     return (mantissa & bits);
 }

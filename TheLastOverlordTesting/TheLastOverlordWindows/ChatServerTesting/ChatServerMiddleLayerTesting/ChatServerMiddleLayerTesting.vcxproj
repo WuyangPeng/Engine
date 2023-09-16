@@ -70,7 +70,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{47178066-C9D5-4710-A663-BD1485E45285}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>TheLastOverlordTesting</RootNamespace>
+    <RootNamespace>ChatServerMiddleLayerTesting</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

@@ -5,10 +5,9 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/30 14:15)
+///	版本：0.9.1.4 (2023/09/01 14:56)
 
 #include "ConditionVariableTestingBase.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning/Thread.h"
 #include "System/Threading/ConditionVariable.h"
 #include "System/Time/DeltaTime.h"
@@ -124,7 +123,7 @@ bool System::ConditionVariableTestingBase::IsEmpty() const noexcept
 
 void System::ConditionVariableTestingBase::PopBuffer()
 {
-    auto result = buffer.at(queueStartOffset);
+    const auto result = buffer.at(queueStartOffset);
 
     ASSERT_EQUAL(result, queueStartOffset);
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 0:48)
+///	版本：0.9.1.4 (2023/09/01 15:05)
 
 #include "InitOnceSynchronousTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -65,9 +65,9 @@ System::WindowsBool System::InitOnceSynchronousTesting::InitHandleFunction(InitO
     }
 
     ++(*static_cast<int*>(parameter));
-    const auto event = CreateSystemEvent(true, true);
 
-    if (event != nullptr)
+    if (const auto event = CreateSystemEvent(true, true);
+        event != nullptr)
     {
         *context = event;
         return gTrue;
@@ -87,7 +87,9 @@ void System::InitOnceSynchronousTesting::CreateThreadTest()
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::ExecuteOnceTest, this, &initOnce));
+        threadGroup.create_thread([this, &initOnce]() {
+            this->ExecuteOnceTest(&initOnce);
+        });
     }
 
     threadGroup.join_all();

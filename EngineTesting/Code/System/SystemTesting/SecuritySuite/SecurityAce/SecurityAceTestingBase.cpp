@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/28 14:41)
+///	版本：0.9.1.4 (2023/09/01 14:04)
 
 #include "SecurityAceTestingBase.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -46,39 +46,39 @@ System::SecurityAceTestingBase::UserObjectSecurityBuffer System::SecurityAceTest
     return buffer;
 }
 
-System::AccessCheckACLPtr System::SecurityAceTestingBase::GetDacl(UserObjectSecurityBuffer& buffer)
+System::AccessCheckAclPtr System::SecurityAceTestingBase::GetDacl(UserObjectSecurityBuffer& buffer)
 {
     SYSTEM_CLASS_IS_VALID_1;
 
     auto daclPresent = false;
-    AccessCheckACLPtr dacl{ nullptr };
+    AccessCheckAclPtr dacl{ nullptr };
     auto daclDefaulted = false;
     ASSERT_TRUE(GetSecurityDescriptorDiscretionaryAccessControlList(buffer.data(), &daclPresent, &dacl, &daclDefaulted));
 
     return dacl;
 }
 
-System::SecurityAceTestingBase::ACLBuffer System::SecurityAceTestingBase::GetACL(UserObjectSecurityBuffer& buffer, WindowsDWord aclBytesInUse)
+System::SecurityAceTestingBase::AclBuffer System::SecurityAceTestingBase::GetAcl(UserObjectSecurityBuffer& buffer, WindowsDWord aclBytesInUse)
 {
     SYSTEM_CLASS_IS_VALID_1;
 
     const auto aclSize = aclBytesInUse + sizeof(AccessAllowedAce) + GetLengthSecurityIdentifier(buffer.data()) - sizeof(WindowsDWord);
-    ACLBuffer aclbuffer(aclSize);
+    AclBuffer aclBuffer(aclSize);
 
-    auto acl = GetAccessCheckACLPtr(aclbuffer);
+    const auto acl = GetAccessCheckAclPtr(aclBuffer);
 
     ASSERT_TRUE(InitializeAccessControlList(acl, boost::numeric_cast<WindowsDWord>(aclSize), AccessControlListRevision::Revision));
     ASSERT_TRUE(IsAccessControlListValid(acl));
 
-    return aclbuffer;
+    return aclBuffer;
 }
 
-System::AccessCheckACLPtr System::SecurityAceTestingBase::GetAccessCheckACLPtr(ACLBuffer& buffer) const noexcept
+System::AccessCheckAclPtr System::SecurityAceTestingBase::GetAccessCheckAclPtr(AclBuffer& buffer) const noexcept
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-    return reinterpret_cast<AccessCheckACLPtr>(buffer.data());
+    return reinterpret_cast<AccessCheckAclPtr>(buffer.data());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }

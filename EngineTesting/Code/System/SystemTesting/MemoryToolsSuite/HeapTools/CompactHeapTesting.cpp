@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/03 12:10)
+///	版本：0.9.1.4 (2023/09/01 10:05)
 
 #include "CompactHeapTesting.h"
 #include "System/MemoryTools/HeapTools.h"
@@ -28,7 +28,7 @@ void System::CompactHeapTesting::DoRunUnitTest()
 
 void System::CompactHeapTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(CompactHeapTest); 
+    ASSERT_NOT_THROW_EXCEPTION_0(CompactHeapTest);
 }
 
 void System::CompactHeapTesting::CompactHeapTest()

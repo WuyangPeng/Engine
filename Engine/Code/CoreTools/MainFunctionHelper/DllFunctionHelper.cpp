@@ -62,19 +62,19 @@ void CoreTools::DllFunctionHelper::JudgeSelection(System::DialogBoxCommand selec
 {
     switch (selection)
     {
-        case System::DialogBoxCommand::IDYes:
+        case System::DialogBoxCommand::IdYes:
         {
             // 调试断点。
             System::DebugBreak();
 
             break;
         }
-        case System::DialogBoxCommand::IDNo:
+        case System::DialogBoxCommand::IdNo:
         {
             // 继续执行。
             break;
         }
-        case System::DialogBoxCommand::IDCancel:
+        case System::DialogBoxCommand::IdCancel:
         default:
         {
             // 终止执行。

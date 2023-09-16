@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 16:53)
+///	版本：0.9.1.4 (2023/09/16 09:19)
 
 #include "NetworkSockInternetAddressTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Network/Helper/UserMacro.h"
 #include "Network/Interface/SockAddress.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
 
@@ -28,11 +27,6 @@ void Network::NetworkSockInternetAddressTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-namespace Network
-{
-    using TestingType = SockAddress;
-}
-
 void Network::NetworkSockInternetAddressTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(NetworkSingletonTest<ClassType>, this, &ClassType::AddressTest);
@@ -43,7 +37,7 @@ void Network::NetworkSockInternetAddressTesting::AddressTest()
     const std::string networkHostName{ "127.0.0.1" };
     constexpr auto networkPort = 8010;
 
-    TestingType sockAddress{ networkHostName, networkPort, GetNetworkServerConfigurationStrategy() };
+    SockAddress sockAddress{ networkHostName, networkPort, GetNetworkServerConfigurationStrategy() };
 
     MAYBE_UNUSED const auto& networkInternetAddress = sockAddress.GetWinSockInternetAddress();
 

@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 22:41)
+///	版本：0.9.1.4 (2023/08/29 23:26)
 
 #ifndef SYSTEM_OPENGL_OPENGL_WGL_PROTOTYPES_FLAGS_H
 #define SYSTEM_OPENGL_OPENGL_WGL_PROTOTYPES_FLAGS_H
 
-#include "System/Helper/EnumOperator.h"
 #include "System/Helper/Platform.h"
 
 namespace System
@@ -32,12 +31,12 @@ namespace System
         SwapCopy = PFD_SWAP_COPY,
         SwapLayerBuffers = PFD_SWAP_LAYER_BUFFERS,
         GenericAccelerated = PFD_GENERIC_ACCELERATED,
-        SupportDirectdraw = PFD_SUPPORT_DIRECTDRAW,
+        SupportDirectDraw = PFD_SUPPORT_DIRECTDRAW,
         Direct3dAccelerated = PFD_DIRECT3D_ACCELERATED,
         SupportComposition = PFD_SUPPORT_COMPOSITION,
-        DepthDontcare = PFD_DEPTH_DONTCARE,
-        DoublebufferDontcare = PFD_DOUBLEBUFFER_DONTCARE,
-        StereoDontcare = PFD_STEREO_DONTCARE,
+        DepthDontCare = PFD_DEPTH_DONTCARE,
+        DoubleBufferDontCare = PFD_DOUBLEBUFFER_DONTCARE,
+        StereoDontCare = PFD_STEREO_DONTCARE,
     };
 
     enum class PixelTypes
@@ -63,12 +62,12 @@ namespace System
         SwapCopy = 0x00000400,
         SwapLayerBuffers = 0x00000800,
         GenericAccelerated = 0x00001000,
-        SupportDirectdraw = 0x00002000,
+        SupportDirectDraw = 0x00002000,
         Direct3dAccelerated = 0x00004000,
         SupportComposition = 0x00008000,
-        DepthDontcare = 0x20000000,
-        DoublebufferDontcare = 0x40000000,
-        StereoDontcare = 0x80000000,
+        DepthDontCare = 0x20000000,
+        DoubleBufferDontCare = 0x40000000,
+        StereoDontCare = 0x80000000,
     };
 
     enum class PixelTypes

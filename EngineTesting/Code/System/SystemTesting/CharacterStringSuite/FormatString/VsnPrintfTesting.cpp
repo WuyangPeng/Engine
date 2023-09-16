@@ -1,13 +1,13 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/30 14:55)
+///	版本：0.9.1.4 (2023/08/31 16:14)
 
-#include "VsnPrintfTesting.h"
+#include "VsnPrintFTesting.h"
 #include "System/CharacterString/FormatStringDetail.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -16,47 +16,47 @@
 
 using namespace std::literals;
 
-System::VsnPrintfTesting::VsnPrintfTesting(const OStreamShared& stream)
+System::VsnPrintFTesting::VsnPrintFTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, VsnPrintfTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, VsnPrintFTesting)
 
-void System::VsnPrintfTesting::DoRunUnitTest()
+void System::VsnPrintFTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void System::VsnPrintfTesting::MainTest()
+void System::VsnPrintFTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(VsnprintfTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(VsnPrintFTest);
 }
 
-void System::VsnPrintfTesting::VsnprintfTest()
+void System::VsnPrintFTesting::VsnPrintFTest()
 {
-    const auto vsnprintfTestResult = "7vsnprintf1"s;
+    const auto vsnPrintFTestResult = "7vsnprintf1"s;
 
     BufferType buffer{};
 
-    VsnprintfUseIndefiniteParameterTest(boost::numeric_cast<int>(vsnprintfTestResult.size()), buffer.data(), bufferSize, "%d%s%d", 7, "vsnprintf", 1);
+    VsnPrintFUseIndefiniteParameterTest(boost::numeric_cast<int>(vsnPrintFTestResult.size()), buffer.data(), bufferSize, "%d%s%d", 7, "vsnprintf", 1);
 
-    ASSERT_EQUAL(std::string{ buffer.data() }, vsnprintfTestResult);
+    ASSERT_EQUAL(std::string{ buffer.data() }, vsnPrintFTestResult);
 }
 
-void System::VsnPrintfTesting::VsnprintfUseIndefiniteParameterTest(int testStringSize, char* buffer, size_t size, const char* format, ...)
+void System::VsnPrintFTesting::VsnPrintFUseIndefiniteParameterTest(int testStringSize, char* buffer, size_t size, const char* format, ...)
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26492)
 
     va_list arguments{};
     va_start(arguments, format);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
-    const auto count = VsnPrintf(buffer, size, format, arguments);
+    const auto count = VsnPrintF(buffer, size, format, arguments);
 
     va_end(arguments);
 

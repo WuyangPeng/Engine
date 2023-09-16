@@ -22,12 +22,12 @@ bool CoreTools::Endian::IsLittleEndian() noexcept(gAssert < 0 || gCoreToolsAsser
 {
     static constexpr auto one = 1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     static const auto isLittleEndian = (*reinterpret_cast<const char*>(&one) != 0);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 #ifdef SYSTEM_LITTLE_ENDIAN
 

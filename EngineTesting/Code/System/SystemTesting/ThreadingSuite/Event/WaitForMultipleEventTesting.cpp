@@ -5,9 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 0:05)
+///	版本：0.9.1.4 (2023/09/01 15:01)
 
 #include "WaitForMultipleEventTesting.h"
+#include "System/Helper/PragmaWarning/Thread.h"
 #include "System/Threading/Event.h"
 #include "System/Threading/Flags/SemaphoreFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -84,9 +85,17 @@ void System::WaitForMultipleEventTesting::WaitForManualEventTest(const Container
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForManualEventTest0, this, eventHandles));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForManualEventTest1, this, eventHandles));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForManualEventTest2, this, eventHandles));
+        threadGroup.create_thread([this, eventHandles]() {
+            this->WaitForManualEventTest0(eventHandles);
+        });
+
+        threadGroup.create_thread([this, eventHandles]() {
+            this->WaitForManualEventTest1(eventHandles);
+        });
+
+        threadGroup.create_thread([this, eventHandles]() {
+            this->WaitForManualEventTest2(eventHandles);
+        });
     }
 
     threadGroup.join_all();

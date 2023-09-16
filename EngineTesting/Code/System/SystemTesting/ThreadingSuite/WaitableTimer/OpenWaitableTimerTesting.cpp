@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 22:53)
+///	版本：0.9.1.4 (2023/09/01 15:30)
 
 #include "OpenWaitableTimerTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -48,8 +48,8 @@ void System::OpenWaitableTimerTesting::MainTest()
 
 bool System::OpenWaitableTimerTesting::RandomShuffleFlags()
 {
-    shuffle(waitableTimerStandardAccesses.begin(), waitableTimerStandardAccesses.end(), randomEngine);
-    shuffle(waitableTimerSpecificAccesses.begin(), waitableTimerSpecificAccesses.end(), randomEngine);
+    std::ranges::shuffle(waitableTimerStandardAccesses, randomEngine);
+    std::ranges::shuffle(waitableTimerSpecificAccesses, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(ThreadTest);
 
@@ -83,7 +83,9 @@ void System::OpenWaitableTimerTesting::CreateThread(const String& waitableTimerN
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimerTest, this, waitableTimerName));
+        threadGroup.create_thread([this, waitableTimerName]() {
+            this->WaitForWaitableTimerTest(waitableTimerName);
+        });
     }
 
     threadGroup.join_all();

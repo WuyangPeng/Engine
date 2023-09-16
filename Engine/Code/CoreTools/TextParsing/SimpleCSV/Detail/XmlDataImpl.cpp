@@ -123,12 +123,12 @@ CoreTools::SimpleCSV::XMLDocumentSharedPtr CoreTools::SimpleCSV::XmlDataImpl::Ge
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26473)
 
     return std::const_pointer_cast<XMLDocument>(static_cast<const ClassType*>(this)->GetXmlDocument());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr CoreTools::SimpleCSV::XmlDataImpl::GetXmlDocument() const noexcept

@@ -38,7 +38,7 @@ void CoreTools::TinyTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(EraseTest);
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26814)
 
 void CoreTools::TinyTesting::InitTest() noexcept
@@ -99,7 +99,7 @@ void CoreTools::TinyTesting::PushBackTest() noexcept
     BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny6, Tiny3>::type::value));
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 void CoreTools::TinyTesting::ClearTest() noexcept
 {

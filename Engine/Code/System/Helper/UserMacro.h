@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/16 21:38)
+///	版本：0.9.1.4 (2023/08/28 17:44)
 
 #ifndef SYSTEM_HELPER_USER_MACRO_H
 #define SYSTEM_HELPER_USER_MACRO_H
@@ -17,7 +17,7 @@
 #define CLOSE_GLUT (SYSTEM_ClOSE_BEGIN)
 #define CLOSE_GLFW (SYSTEM_ClOSE_BEGIN << 1)
 #define CLOSE_ENABLE_GL_ERROR_CHECKING (SYSTEM_ClOSE_BEGIN << 2)
-#define CLOSE_DIRECTX (SYSTEM_ClOSE_BEGIN << 3)
+#define CLOSE_DIRECT_X (SYSTEM_ClOSE_BEGIN << 3)
 #define CLOSE_VULKAN (SYSTEM_ClOSE_BEGIN << 4)
 
 #define SYSTEM_ClOSE_END CLOSE_VULKAN
@@ -71,12 +71,12 @@ static_assert(COMPILE_SYSTEM_CLOSE <= CLOSE_SYSTEM_MAX, "COMPILE_SYSTEM_CLOSE Mu
 
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    #if !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_DIRECTX) != CLOSE_DIRECTX
+    #if !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_DIRECT_X) != CLOSE_DIRECT_X
 
         // 是否使用DirectX
-        #define SYSTEM_USE_DIRECTX_12 static_cast<void>(0)
+        #define SYSTEM_USE_DIRECT_X_12 static_cast<void>(0)
 
-    #endif  //  !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_DIRECTX) != CLOSE_DIRECTX
+    #endif  //  !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_DIRECT_X) != CLOSE_DIRECT_X
 
 #endif  // SYSTEM_PLATFORM_WIN32
 
@@ -87,7 +87,6 @@ static_assert(COMPILE_SYSTEM_CLOSE <= CLOSE_SYSTEM_MAX, "COMPILE_SYSTEM_CLOSE Mu
 
 #endif  //  !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_VULKAN) != CLOSE_VULKAN
 
-// 是否编译为静态库
 #ifdef BUILDING_STATIC
 
     #define BUILDING_SYSTEM_STATIC static_cast<void>(0)

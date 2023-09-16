@@ -597,16 +597,10 @@
     <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshVertex.cpp">
       <Filter>Detail 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshVertexEdgeTriangleGraph.cpp">
-      <Filter>Detail 源文件\Detail</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\CollapseRecordArrayImpl.cpp">
       <Filter>Detail 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\CollapseRecordImpl.cpp">
-      <Filter>Detail 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\CreateClodMeshImpl.cpp">
       <Filter>Detail 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\DlodNodeImpl.cpp">
@@ -622,9 +616,6 @@
       <Filter>Detail 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\Detail\CollapseRecordArray.cpp">
-      <Filter>Detail 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Detail\CreateClodMesh.cpp">
       <Filter>Detail 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\Detail\DlodNode.cpp">
@@ -1982,16 +1973,10 @@
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshVertex.h">
       <Filter>Detail 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshVertexEdgeTriangleGraph.h">
-      <Filter>Detail 头文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\CollapseRecordArrayImpl.h">
       <Filter>Detail 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\CollapseRecordImpl.h">
-      <Filter>Detail 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\CreateClodMeshImpl.h">
       <Filter>Detail 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\DlodNodeImpl.h">
@@ -2010,9 +1995,6 @@
       <Filter>Detail 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Detail\CollapseRecordArray.h">
-      <Filter>Detail 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Detail\CreateClodMesh.h">
       <Filter>Detail 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail.h">

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/16 23:32)
+///	版本：0.9.1.4 (2023/08/31 14:23)
 
 #include "OpenGLDrawBuffersTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -17,8 +17,8 @@
 
 System::OpenGLDrawBuffersTesting::OpenGLDrawBuffersTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      back{ EnumCastUnderlying(ColorAttachent::Back) },
-      attachment{ EnumCastUnderlying(ColorAttachent::Color0) }
+      back{ EnumCastUnderlying(ColorAttachment::Back) },
+      attachment{ EnumCastUnderlying(ColorAttachment::Color0) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -34,7 +34,7 @@ void System::OpenGLDrawBuffersTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BackDrawBuffersTest);
 
-    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLBindFramebufferTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLBindFrameBufferTest);
 }
 
 void System::OpenGLDrawBuffersTesting::BackDrawBuffersTest()
@@ -42,23 +42,23 @@ void System::OpenGLDrawBuffersTesting::BackDrawBuffersTest()
     SetGLDrawBuffers(boost::numeric_cast<OpenGLSize>(back.size()), back.data());
 }
 
-void System::OpenGLDrawBuffersTesting::OpenGLBindFramebufferTest()
+void System::OpenGLDrawBuffersTesting::OpenGLBindFrameBufferTest()
 {
-    const auto framebuffers = GetGLGenFramebuffers();
-    ASSERT_LESS(0u, framebuffers);
+    const auto frameBuffers = GetGLGenFrameBuffers();
+    ASSERT_LESS(0u, frameBuffers);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(DoOpenGLBindFramebufferTest, framebuffers);
-    ASSERT_NOT_THROW_EXCEPTION_0(FramebufferDrawBuffersTest);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoOpenGLBindFrameBufferTest, frameBuffers);
+    ASSERT_NOT_THROW_EXCEPTION_0(FrameBufferDrawBuffersTest);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteFramebufferTest, framebuffers);
+    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteFrameBufferTest, frameBuffers);
 }
 
-void System::OpenGLDrawBuffersTesting::DoOpenGLBindFramebufferTest(OpenGLUInt framebuffers) noexcept
+void System::OpenGLDrawBuffersTesting::DoOpenGLBindFrameBufferTest(OpenGLUInt frameBuffers) noexcept
 {
-    SetGLBindFramebuffer(FrameBufferType::DrawFramebuffer, framebuffers);
+    SetGLBindFrameBuffer(FrameBufferType::DrawFrameBuffer, frameBuffers);
 }
 
-void System::OpenGLDrawBuffersTesting::FramebufferDrawBuffersTest()
+void System::OpenGLDrawBuffersTesting::FrameBufferDrawBuffersTest()
 {
     SetGLDrawBuffers(boost::numeric_cast<OpenGLSize>(attachment.size()), attachment.data());
 }

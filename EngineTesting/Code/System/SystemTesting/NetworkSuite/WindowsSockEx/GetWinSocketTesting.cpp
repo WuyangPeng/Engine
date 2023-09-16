@@ -5,14 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/11 20:24)
+///	版本：0.9.1.4 (2023/09/01 11:06)
 
 #include "GetWinSocketTesting.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
-#include "System/Network/Flags/WindowsExtensionPrototypesFlags.h"
 #include "System/Network/SocketPrototypes.h"
-#include "System/Network/WindowsExtensionPrototypes.h"
 #include "System/Network/WindowsSockEx.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
@@ -48,9 +46,9 @@ void System::GetWinSocketTesting::MainTest()
 
 bool System::GetWinSocketTesting::RandomShuffleFlags()
 {
-    shuffle(protocolFamilies.begin(), protocolFamilies.end(), randomEngine);
-    shuffle(socketTypes.begin(), socketTypes.end(), randomEngine);
-    shuffle(socketProtocols.begin(), socketProtocols.end(), randomEngine);
+    std::ranges::shuffle(protocolFamilies, randomEngine);
+    std::ranges::shuffle(socketTypes, randomEngine);
+    std::ranges::shuffle(socketProtocols, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(GetSocketTest);
 

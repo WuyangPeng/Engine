@@ -127,6 +127,46 @@ AssistTools::ProjectGenerationImpl::String AssistTools::ProjectGenerationImpl::R
     return content;
 }
 
+AssistTools::ProjectGenerationImpl::String AssistTools::ProjectGenerationImpl::ReplaceModuleTestingJson(const String& templateContent) const
+{
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    auto content = templateContent;
+
+    const auto moduleJson = codeMappingAnalysis.GetElement(SYSTEM_TEXT("ModuleTestingJson"));
+
+    String describe{};
+
+    auto serial = 1;
+    for (auto iter = gameParameterAnalysis.GetModuleBegin(); iter != gameParameterAnalysis.GetModuleEnd(); ++iter)
+    {
+        auto copyModuleJson = moduleJson;
+        boost::algorithm::replace_all(copyModuleJson, SYSTEM_TEXT("$ModuleName$"), iter->GetModuleName());
+
+        if (serial != gameParameterAnalysis.GetModuleCount())
+        {
+            boost::algorithm::replace_all(copyModuleJson, SYSTEM_TEXT("$ModuleNameIsEnd$"), SYSTEM_TEXT(","));
+        }
+        else
+        {
+            boost::algorithm::replace_all(copyModuleJson, SYSTEM_TEXT("$ModuleNameIsEnd$"), SYSTEM_TEXT(""));
+        }
+
+        describe += copyModuleJson;
+
+        if (serial != gameParameterAnalysis.GetModuleCount())
+        {
+            describe += SYSTEM_TEXT("\n");
+        }
+
+        ++serial;
+    }
+
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ModuleTestingJson$"), describe);
+
+    return content;
+}
+
 AssistTools::ProjectGenerationImpl::String AssistTools::ProjectGenerationImpl::ReplaceProjectChineseName(const String& templateContent) const
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
@@ -146,6 +186,13 @@ AssistTools::ProjectGenerationImpl::String AssistTools::ProjectGenerationImpl::R
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return ReplaceParameter(templateContent, SYSTEM_TEXT("ProjectName"), gameParameterAnalysis.GetProjectName());
+}
+
+AssistTools::ProjectGenerationImpl::String AssistTools::ProjectGenerationImpl::ReplaceTestingName(const String& templateContent) const
+{
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return ReplaceParameter(templateContent, SYSTEM_TEXT("TestingName"), gameParameterAnalysis.GetTestingName());
 }
 
 AssistTools::ProjectGenerationImpl::String AssistTools::ProjectGenerationImpl::ReplaceVersion(const String& templateContent) const
@@ -197,6 +244,31 @@ AssistTools::ProjectGenerationImpl::String AssistTools::ProjectGenerationImpl::R
     }
 
     boost::algorithm::replace_all(content, SYSTEM_TEXT("$CallRunBat$"), describe);
+
+    return content;
+}
+
+AssistTools::ProjectGenerationImpl::String AssistTools::ProjectGenerationImpl::CallRunTestingBat(const String& templateContent) const
+{
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    auto content = templateContent;
+
+    const auto callRunBat = codeMappingAnalysis.GetElement(SYSTEM_TEXT("CallRunTestingBat"));
+
+    String describe{};
+
+    for (auto iter = gameParameterAnalysis.GetModuleBegin(); iter != gameParameterAnalysis.GetModuleEnd(); ++iter)
+    {
+        auto copyCallRunBat = callRunBat;
+        boost::algorithm::replace_all(copyCallRunBat, SYSTEM_TEXT("$ModuleName$"), iter->GetModuleName());
+
+        describe += copyCallRunBat;
+
+        describe += SYSTEM_TEXT("\n");
+    }
+
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$CallRunTestingBat$"), describe);
 
     return content;
 }
@@ -264,6 +336,36 @@ AssistTools::ProjectGenerationImpl::String AssistTools::ProjectGenerationImpl::R
     describe += SYSTEM_TEXT("\n");
 
     boost::algorithm::replace_all(content, SYSTEM_TEXT("$CodeAnalysis$"), describe);
+
+    return content;
+}
+
+AssistTools::ProjectGenerationImpl::String AssistTools::ProjectGenerationImpl::ReplaceTestingCodeAnalysis(const String& templateContent) const
+{
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    auto content = templateContent;
+
+    const auto codeAnalysis = codeMappingAnalysis.GetElement(SYSTEM_TEXT("TestingCodeAnalysis"));
+
+    String describe{};
+
+    for (auto iter = gameParameterAnalysis.GetModuleBegin(); iter != gameParameterAnalysis.GetModuleEnd(); ++iter)
+    {
+        auto copyCodeAnalysis = codeAnalysis;
+        boost::algorithm::replace_all(copyCodeAnalysis, SYSTEM_TEXT("$ModuleName$"), iter->GetModuleName() + SYSTEM_TEXT("Testing"));
+
+        describe += copyCodeAnalysis;
+
+        describe += SYSTEM_TEXT("\n");
+    }
+
+    auto copyCodeAnalysis = codeAnalysis;
+    boost::algorithm::replace_all(copyCodeAnalysis, SYSTEM_TEXT("$ModuleName$"), gameParameterAnalysis.GetProjectName());
+    describe += copyCodeAnalysis;
+    describe += SYSTEM_TEXT("\n");
+
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$TestingCodeAnalysis$"), describe);
 
     return content;
 }

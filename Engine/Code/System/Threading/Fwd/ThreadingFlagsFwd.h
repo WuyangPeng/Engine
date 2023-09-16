@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/30 13:00)
+///	版本：0.9.1.4 (2023/08/30 18:15)
 
 #ifndef SYSTEM_THREADING_THREADING_FLAGS_FWD_H
 #define SYSTEM_THREADING_THREADING_FLAGS_FWD_H
@@ -34,10 +34,10 @@ namespace System
     // Mutex
     enum class MutexCreate;
     enum class MutexSpecificAccess;
-    enum class PthreadResult : uint32_t;
-    enum class PthreadMutexCompatibility;
+    enum class PThreadResult : uint32_t;
+    enum class PThreadMutexCompatibility;
 
-    // Proces
+    // Process
     enum class ProcessCreation : uint32_t;
     enum class ProcessStandardAccess;
     enum class ProcessSpecificAccess;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/17 18:22)
+///	版本：0.9.1.4 (2023/09/01 09:52)
 
 #include "MarkTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -28,7 +28,7 @@ void System::MarkTesting::DoRunUnitTest()
 void System::MarkTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CallBackTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(WinAPITest);
+    ASSERT_NOT_THROW_EXCEPTION_0(WinApiTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ParameterMarkTest);
 }
 
@@ -36,7 +36,7 @@ void System::MarkTesting::CallBackTest() noexcept
 {
 }
 
-void System::MarkTesting::WinAPITest() noexcept
+void System::MarkTesting::WinApiTest() noexcept
 {
 }
 

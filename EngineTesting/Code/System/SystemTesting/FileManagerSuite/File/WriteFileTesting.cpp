@@ -1,25 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/15 16:56)
+///	版本：0.9.1.4 (2023/08/31 17:18)
 
 #include "WriteFileTesting.h"
 #include "System/FileManager/File.h"
 #include "System/FileManager/Flags/FileFlags.h"
-#include "System/Helper/PragmaWarning/NumericCast.h" 
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 #include <vector>
-
-using std::string;
-using std::vector;
-using namespace std::literals;
 
 System::WriteFileTesting::WriteFileTesting(const OStreamShared& stream)
     : ParentType{ stream }

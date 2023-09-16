@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:23)
+///	版本：0.9.1.4 (2023/09/15 17:13)
 
 #ifndef NETWORK_BOOST_WRAPPERS_EXECUTOR_WORK_GUARD_CONTEXT_H
 #define NETWORK_BOOST_WRAPPERS_EXECUTOR_WORK_GUARD_CONTEXT_H
 
 #include "Network/NetworkDll.h"
 
-#include "System/Helper/PragmaWarning/ExecutorWorkGuard.h"
 #include "CoreTools/Contract/ContractFwd.h"
 #include "Network/Interface/NetworkInternalFwd.h"
 
@@ -24,7 +23,7 @@ namespace Network
         using ClassType = ExecutorWorkGuardContext;
 
     public:
-        explicit ExecutorWorkGuardContext(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
+        explicit ExecutorWorkGuardContext(CoreTools::DisableNotThrow disableNotThrow);
         ~ExecutorWorkGuardContext() noexcept = default;
         ExecutorWorkGuardContext(const ExecutorWorkGuardContext& rhs) = delete;
         ExecutorWorkGuardContext& operator=(const ExecutorWorkGuardContext& rhs) = delete;

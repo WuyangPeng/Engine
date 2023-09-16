@@ -31,6 +31,7 @@ void CoreTools::AtomicMinMaxTesting::DoRunUnitTest()
 void CoreTools::AtomicMinMaxTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(AtomicMinThreadTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(AtomicMaxThreadTest);
 }
 
 void CoreTools::AtomicMinMaxTesting::AtomicMinThreadTest()
@@ -39,7 +40,7 @@ void CoreTools::AtomicMinMaxTesting::AtomicMinThreadTest()
 
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.AddThread(&ClassType::AtomicMaxTest, this);
+        threadGroup.AddThread(&ClassType::AtomicMinTest, this);
     }
 }
 

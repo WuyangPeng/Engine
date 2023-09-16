@@ -123,12 +123,12 @@ Type& CoreTools::Table<Rows, Columns, Type>::operator()(int row, int column)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
 
     return const_cast<Type&>(static_cast<const ClassType&>(*this)(row, column));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <int Rows, int Columns, typename Type>

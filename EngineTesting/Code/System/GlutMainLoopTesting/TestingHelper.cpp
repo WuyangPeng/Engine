@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/12 22:49)
+///	版本：0.9.1.4 (2023/08/31 13:40)
 
 #include "GlutMainLoop/GlutMainLoop.h"
 #include "Testing.h"
@@ -24,8 +24,8 @@ int GlutMainLoopTesting::TestingHelper::DoRun()
 {
     SYSTEM_CLASS_IS_VALID_1;
 
-    GlutMainLoopTesting::GlutMainLoop(GetArgc(), GetArgv());
-    GlutMainLoopTesting::GlutLeaveMainLoop(GetArgc(), GetArgv());
+    GlutMainLoop(GetArgc(), GetArgv());
+    GlutLeaveMainLoop(GetArgc(), GetArgv());
 
     return 0;
 }

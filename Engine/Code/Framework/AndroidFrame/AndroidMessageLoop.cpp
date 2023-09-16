@@ -33,12 +33,12 @@ void Framework::AndroidMessageLoop::EnterMessageLoop() noexcept
         auto events = 0;
         System::AndroidPollSource* source{ nullptr };
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
         if (System::AndroidLooperPollAll(0, nullptr, &events, reinterpret_cast<void**>(&source)) < System::AndroidLooperEvent::Null)
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         {
             if (function != nullptr)
             {

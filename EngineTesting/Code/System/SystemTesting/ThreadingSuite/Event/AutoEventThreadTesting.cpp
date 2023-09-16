@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/31 23:11)
+///	版本：0.9.1.4 (2023/09/01 14:57)
 
 #include "AutoEventThreadTesting.h"
 #include "System/Threading/Event.h"
@@ -32,7 +32,7 @@ void System::AutoEventThreadTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(AutoEventThreadTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DefaultEventThreadTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(InitalSetEventThreadTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(InitialSetEventThreadTest);
 }
 
 void System::AutoEventThreadTesting::AutoEventThreadTest()
@@ -75,16 +75,16 @@ void System::AutoEventThreadTesting::DoDefaultEventThreadTest(WindowsHandle even
     threadGroup.join_all();
 }
 
-void System::AutoEventThreadTesting::InitalSetEventThreadTest()
+void System::AutoEventThreadTesting::InitialSetEventThreadTest()
 {
-    const auto eventHandle = CreateSystemEvent(nullptr, nullptr, CreateEventType::InitalSet, MutexStandardAccess::Synchronize, EventSpecificAccess::ModifyState);
+    const auto eventHandle = CreateSystemEvent(nullptr, nullptr, CreateEventType::InitialSet, MutexStandardAccess::Synchronize, EventSpecificAccess::ModifyState);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(DoInitalSetEventThreadTest, eventHandle);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoInitialSetEventThreadTest, eventHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseSystemEventTest, eventHandle);
 }
 
-void System::AutoEventThreadTesting::DoInitalSetEventThreadTest(WindowsHandle eventHandle)
+void System::AutoEventThreadTesting::DoInitialSetEventThreadTest(WindowsHandle eventHandle)
 {
     ASSERT_TRUE(IsSystemEventValid(eventHandle));
 
@@ -98,7 +98,9 @@ void System::AutoEventThreadTesting::CreateThread(boost::thread_group& threadGro
 {
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForAutoEventTest, this, eventHandle));
+        threadGroup.create_thread([this, eventHandle]() {
+            this->WaitForAutoEventTest(eventHandle);
+        });
     }
 }
 

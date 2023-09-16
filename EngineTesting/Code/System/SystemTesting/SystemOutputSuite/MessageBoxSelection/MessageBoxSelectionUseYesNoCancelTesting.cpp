@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/30 0:09)
+///	版本：0.9.1.4 (2023/09/01 14:13)
 
 #include "MessageBoxSelectionUseYesNoCancelTesting.h"
 #include "System/SystemOutput/Flags/DialogBoxCommandFlags.h"
@@ -38,19 +38,19 @@ void System::MessageBoxSelectionUseYesNoCancelTesting::MessageBoxSelectionWithCh
 {
     const auto type = MessageBoxSelectionWithChar("这个对话框只是测试，请点击任意按钮。", "测试");
 
-    ASSERT_TRUE(type == DialogBoxCommand::IDYes || type == DialogBoxCommand::IDNo || type == DialogBoxCommand::IDCancel);
+    ASSERT_TRUE(type == DialogBoxCommand::IdYes || type == DialogBoxCommand::IdNo || type == DialogBoxCommand::IdCancel);
 }
 
 void System::MessageBoxSelectionUseYesNoCancelTesting::MessageBoxSelectionWithWCharTest()
 {
     const auto type = MessageBoxSelectionWithWChar(L"这个对话框只是测试，请点击任意按钮。", L"测试");
 
-    ASSERT_TRUE(type == DialogBoxCommand::IDYes || type == DialogBoxCommand::IDNo || type == DialogBoxCommand::IDCancel);
+    ASSERT_TRUE(type == DialogBoxCommand::IdYes || type == DialogBoxCommand::IdNo || type == DialogBoxCommand::IdCancel);
 }
 
 void System::MessageBoxSelectionUseYesNoCancelTesting::MessageBoxSelectionWithTCharTest()
 {
     const auto type = MessageBoxSelectionWithTChar(SYSTEM_TEXT("这个对话框只是测试，请点击任意按钮。"), SYSTEM_TEXT("测试"));
 
-    ASSERT_TRUE(type == DialogBoxCommand::IDYes || type == DialogBoxCommand::IDNo || type == DialogBoxCommand::IDCancel);
+    ASSERT_TRUE(type == DialogBoxCommand::IdYes || type == DialogBoxCommand::IdNo || type == DialogBoxCommand::IdCancel);
 }

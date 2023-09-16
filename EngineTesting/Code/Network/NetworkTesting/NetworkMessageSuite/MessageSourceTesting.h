@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/12 15:02)
+///	版本：0.9.1.4 (2023/09/16 09:29)
 
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_SOURCE_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_SOURCE_TESTING_H
@@ -25,6 +25,7 @@ namespace Network
     public:
         using ClassType = MessageSourceTesting;
         using ParentType = UnitTest;
+
         using TestingType = MessageSource;
 
     public:
@@ -67,14 +68,14 @@ namespace Network
         static constexpr int16_t int32Value{ 15 };
         static const std::string stringValue;
 
+        const std::array<bool, boolArraySize> boolBuffer0;
         const std::array<bool, boolArraySize> boolBuffer1;
-        const std::array<bool, boolArraySize> boolBuffer2;
+        const std::array<ParserStrategy, enumArraySize> parserStrategyBuffer0;
         const std::array<ParserStrategy, enumArraySize> parserStrategyBuffer1;
-        const std::array<ParserStrategy, enumArraySize> parserStrategyBuffer2;
+        const std::array<int16_t, int16ArraySize> int16Buffer0;
         const std::array<int16_t, int16ArraySize> int16Buffer1;
-        const std::array<int16_t, int16ArraySize> int16Buffer2;
+        const std::array<std::string, stringArraySize> stringBuffer0;
         const std::array<std::string, stringArraySize> stringBuffer1;
-        const std::array<std::string, stringArraySize> stringBuffer2;
         const std::vector<int32_t> int32Vector;
         const std::vector<std::string> stringVector;
         int bytesRead;

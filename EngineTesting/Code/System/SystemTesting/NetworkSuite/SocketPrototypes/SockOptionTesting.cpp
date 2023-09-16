@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/11 18:37)
+///	版本：0.9.1.4 (2023/09/01 11:03)
 
 #include "SockOptionTestingDetail.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
@@ -43,7 +43,7 @@ void System::SockOptionTesting::SockOptionTest()
     SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::DontLinger, WindowsBool>();
     SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::DontRoute, WindowsBool>();
     SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::Error, int>();
-    SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::Exclusiveaddruse, WindowsBool>();
+    SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::ExclusiveAddrUse, WindowsBool>();
     SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::KeepAlive, WindowsBool>();
     SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::Linger, SocketLinger>();
     GetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::MaxMsgSize, unsigned int>();
@@ -54,5 +54,5 @@ void System::SockOptionTesting::SockOptionTest()
     SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::ReuseAddr, WindowsBool>();
     SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::SndBuf, int>();
     GetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::Type, int>();
-    SetAndGetSockOptionTest<SocketLevelOption::IpprotoTcp, SocketRetrievedOption::TcpNodelay, WindowsBool>();
+    SetAndGetSockOptionTest<SocketLevelOption::IpProtoTcp, SocketRetrievedOption::TcpNoDelay, WindowsBool>();
 }

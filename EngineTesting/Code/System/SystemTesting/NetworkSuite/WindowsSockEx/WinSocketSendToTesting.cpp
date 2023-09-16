@@ -5,18 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/12 14:09)
+///	版本：0.9.1.4 (2023/09/01 11:18)
 
 #include "WinSocketSendToTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning/PropertyTree.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
-#include "System/Network/Flags/WindowsExtensionPrototypesFlags.h"
 #include "System/Network/SocketPrototypes.h"
 #include "System/Network/WindowsExtensionPrototypes.h"
 #include "System/Network/WindowsSockEx.h"
-#include "System/Threading/Process.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
@@ -69,9 +67,9 @@ void System::WinSocketSendToTesting::DoSendToTest(WinSocket socketHandle)
     do
     {
         WindowsDWord numberOfBytesSent{};
-        const auto sendResult = WinSocketSendToTest(iov, sendNum, socketHandle, address, numberOfBytesSent);
 
-        if (sendResult == 0)
+        if (const auto sendResult = WinSocketSendToTest(iov, sendNum, socketHandle, address, numberOfBytesSent);
+            sendResult == 0)
         {
             sendNum += numberOfBytesSent;
         }
@@ -91,12 +89,12 @@ int System::WinSocketSendToTesting::WinSocketSendToTest(MessageType& iov, uint32
 
     constexpr int length{ sizeof(WinSockInternetAddress) };
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     const auto sendResult = WinSocketSendTo(socketHandle, &buffer, 1, &numberOfBytesSent, 0, reinterpret_cast<const WinSockAddress*>(&address), length, nullptr, nullptr);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     return sendResult;
 }

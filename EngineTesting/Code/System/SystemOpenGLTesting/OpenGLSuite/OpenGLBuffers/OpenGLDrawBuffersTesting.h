@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/19 21:46)
+///	版本：0.9.1.4 (2023/08/31 13:55)
 
 #ifndef SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_DRAW_BUFFERS_TESTING_H
 #define SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_DRAW_BUFFERS_TESTING_H
@@ -26,15 +26,15 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void BackDrawBuffersTest();
 
-        void OpenGLBindFramebufferTest();
-        void DoOpenGLBindFramebufferTest(OpenGLUInt framebuffers) noexcept;
+        void OpenGLBindFrameBufferTest();
+        void DoOpenGLBindFrameBufferTest(OpenGLUInt frameBuffers) noexcept;
 
-        void FramebufferDrawBuffersTest();
+        void FrameBufferDrawBuffersTest();
 
     private:
         using OpenGLEnumContainer = std::vector<OpenGLEnum>;

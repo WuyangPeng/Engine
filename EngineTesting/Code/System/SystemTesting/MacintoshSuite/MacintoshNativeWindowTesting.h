@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/18 15:37)
+///	版本：0.9.1.4 (2023/09/01 09:55)
 
 #ifndef SYSTEM_LINUX_SUITE_MACINTOSH_NATIVE_WINDOW_TESTING_H
 #define SYSTEM_LINUX_SUITE_MACINTOSH_NATIVE_WINDOW_TESTING_H
@@ -14,7 +14,7 @@
 
 namespace System
 {
-    class MacintoshNativeWindowTesting : public CoreTools::UnitTest
+    class MacintoshNativeWindowTesting final : public CoreTools::UnitTest
     {
     public:
         using ClassType = MacintoshNativeWindowTesting;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 09:13)
+///	版本：0.9.1.4 (2023/09/15 15:22)
 
 #include "Network/NetworkExport.h"
 
@@ -13,7 +13,7 @@
 #include "SockAcceptorFactory.h"
 #include "SockAcceptorImpl.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "Network/ACEWrappers/Detail/Acceptor/ACESockAcceptor.h"
+#include "Network/ACEWrappers/Detail/Acceptor/AceSockAcceptor.h"
 #include "Network/BoostWrappers/Detail/Acceptor/BoostSockAcceptor.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
@@ -34,7 +34,7 @@ Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Cr
 #ifdef NETWORK_USE_ACE
 
         case WrappersStrategy::Ace:
-            return std::make_shared<ACESockAcceptor>(port);
+            return std::make_shared<AceSockAcceptor>(port);
 
 #endif  // NETWORK_USE_ACE
 
@@ -60,7 +60,7 @@ Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Cr
 #ifdef NETWORK_USE_ACE
 
         case WrappersStrategy::Ace:
-            return make_shared<ACESockAcceptor>(hostName, port);
+            return make_shared<AceSockAcceptor>(hostName, port);
 
 #endif  // NETWORK_USE_ACE
 
@@ -86,7 +86,7 @@ Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Cr
 #ifdef NETWORK_USE_ACE
 
         case WrappersStrategy::Ace:
-            return make_shared<ACESockAcceptor>(configurationStrategy.GetHost(), configurationStrategy.GetPort());
+            return make_shared<AceSockAcceptor>(configurationStrategy.GetHost(), configurationStrategy.GetPort());
 
 #endif  // NETWORK_USE_ACE
 

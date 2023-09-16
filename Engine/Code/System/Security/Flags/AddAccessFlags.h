@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:09)
+///	版本：0.9.1.4 (2023/08/30 14:58)
 
 #ifndef SYSTEM_SECURITY_ADD_ACCESS_FLAGS_H
 #define SYSTEM_SECURITY_ADD_ACCESS_FLAGS_H
@@ -37,16 +37,16 @@ namespace System
                            DesktopWriteObjects |
                            DesktopSwitchDesktop,
 
-        WinstaEnumDesktops = WINSTA_ENUMDESKTOPS,
-        WinstaReadAttributes = WINSTA_READATTRIBUTES,
-        WinstaAccessClipboard = WINSTA_ACCESSCLIPBOARD,
-        WinstaCreateDesktop = WINSTA_CREATEDESKTOP,
-        WinstaWriteAttributes = WINSTA_WRITEATTRIBUTES,
-        WinstaAccessGlobatoms = WINSTA_ACCESSGLOBALATOMS,
-        WinstaExitWindows = WINSTA_EXITWINDOWS,
-        WinstaEnumerate = WINSTA_ENUMERATE,
-        WinstaReadScreen = WINSTA_READSCREEN,
-        WinstaAllAccess = WINSTA_ALL_ACCESS,
+        WinStaEnumDesktops = WINSTA_ENUMDESKTOPS,
+        WinStaReadAttributes = WINSTA_READATTRIBUTES,
+        WinStaAccessClipboard = WINSTA_ACCESSCLIPBOARD,
+        WinStaCreateDesktop = WINSTA_CREATEDESKTOP,
+        WinStaWriteAttributes = WINSTA_WRITEATTRIBUTES,
+        WinStaAccessGlobalAtoms = WINSTA_ACCESSGLOBALATOMS,
+        WinStaExitWindows = WINSTA_EXITWINDOWS,
+        WinStaEnumerate = WINSTA_ENUMERATE,
+        WinStaReadScreen = WINSTA_READSCREEN,
+        WinStaAllAccess = WINSTA_ALL_ACCESS,
     };
 
 #else  // !SYSTEM_PLATFORM_WIN32
@@ -72,25 +72,25 @@ namespace System
                            DesktopWriteObjects |
                            DesktopSwitchDesktop,
 
-        WinstaEnumDesktops = 0x0001L,
-        WinstaReadAttributes = 0x0002L,
-        WinstaAccessClipboard = 0x0004L,
-        WinstaCreateDesktop = 0x0008L,
-        WinstaWriteAttributes = 0x0010L,
-        WinstaAccessGlobatoms = 0x0020L,
-        WinstaExitWindows = 0x0040L,
-        WinstaEnumerate = 0x0100L,
-        WinstaReadScreen = 0x0200L,
+        WinStaEnumDesktops = 0x0001L,
+        WinStaReadAttributes = 0x0002L,
+        WinStaAccessClipboard = 0x0004L,
+        WinStaCreateDesktop = 0x0008L,
+        WinStaWriteAttributes = 0x0010L,
+        WinStaAccessGlobalAtoms = 0x0020L,
+        WinStaExitWindows = 0x0040L,
+        WinStaEnumerate = 0x0100L,
+        WinStaReadScreen = 0x0200L,
 
-        WinstaAllAccess = (WinstaEnumDesktops |
-                           WinstaReadAttributes |
-                           WinstaAccessClipboard |
-                           WinstaCreateDesktop |
-                           WinstaWriteAttributes |
-                           WinstaAccessGlobatoms |
-                           WinstaExitWindows |
-                           WinstaEnumerate |
-                           WinstaReadScreen),
+        WinStaAllAccess = (WinStaEnumDesktops |
+                           WinStaReadAttributes |
+                           WinStaAccessClipboard |
+                           WinStaCreateDesktop |
+                           WinStaWriteAttributes |
+                           WinStaAccessGlobalAtoms |
+                           WinStaExitWindows |
+                           WinStaEnumerate |
+                           WinStaReadScreen),
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32

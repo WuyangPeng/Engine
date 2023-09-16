@@ -35,7 +35,7 @@ Mathematics::Matrix3<Real>::Matrix3(const ContainerType& entry, MatrixMajorFlags
         THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s))
     }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     if (majorFlag == MatrixMajorFlags::Row)
@@ -51,7 +51,7 @@ Mathematics::Matrix3<Real>::Matrix3(const ContainerType& entry, MatrixMajorFlags
         z.SetCoordinate(entry[2], entry[5], entry[8]);
     }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -87,7 +87,7 @@ Mathematics::Matrix3<Real>::Matrix3(const Vector3ContainerType& vectors, MatrixM
         THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s))
     }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     if (majorFlag == MatrixMajorFlags::Row)
@@ -103,7 +103,7 @@ Mathematics::Matrix3<Real>::Matrix3(const Vector3ContainerType& vectors, MatrixM
         z.SetCoordinate(vectors[xIndex].GetZ(), vectors[yIndex].GetZ(), vectors[zIndex].GetZ());
     }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -315,12 +315,12 @@ Real& Mathematics::Matrix3<Real>::operator()(int row, int column)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
 
     return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>

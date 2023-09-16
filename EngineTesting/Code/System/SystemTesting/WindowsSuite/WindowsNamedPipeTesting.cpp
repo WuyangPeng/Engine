@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 20:11)
+///	版本：0.9.1.4 (2023/09/01 15:43)
 
 #include "WindowsNamedPipeTesting.h"
 #include "System/Console/Using/ConsoleScreenBufferUsing.h"
@@ -35,15 +35,15 @@ void System::WindowsNamedPipeTesting::MainTest()
 
 void System::WindowsNamedPipeTesting::CreatePipeTest()
 {
-    WindowSecurityAttributes saAttr{};
-    saAttr.nLength = sizeof(WindowSecurityAttributes);
-    saAttr.bInheritHandle = gTrue;
-    saAttr.lpSecurityDescriptor = nullptr;
+    WindowSecurityAttributes windowSecurityAttributes{};
+    windowSecurityAttributes.nLength = sizeof(WindowSecurityAttributes);
+    windowSecurityAttributes.bInheritHandle = gTrue;
+    windowSecurityAttributes.lpSecurityDescriptor = nullptr;
 
     WindowsHandle hReadPipe{ nullptr };
     WindowsHandle hWritePipe{ nullptr };
 
-    ASSERT_TRUE(CreateSystemPipe(&hReadPipe, &hWritePipe, &saAttr, 0));
+    ASSERT_TRUE(CreateSystemPipe(&hReadPipe, &hWritePipe, &windowSecurityAttributes, 0));
 
     ASSERT_TRUE(CloseSystemPipe(hReadPipe));
     ASSERT_TRUE(CloseSystemPipe(hWritePipe));

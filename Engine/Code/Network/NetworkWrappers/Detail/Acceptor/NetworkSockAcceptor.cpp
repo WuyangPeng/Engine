@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:49)
+///	版本：0.9.1.4 (2023/09/15 17:41)
 
 #include "Network/NetworkExport.h"
 
@@ -23,7 +23,7 @@
 #include "Network/NetworkWrappers/Detail/Address/NetworkSockInternetAddress.h"
 
 Network::NetworkSockAcceptor::NetworkSockAcceptor(int port)
-    : ParentType{}, socketHandle{ System::CreateSocket(System::ProtocolFamilies::Inet, System::SocketTypes::Stream, System::SocketProtocols::Tcp) }
+    : ParentType{}, socketHandle{ CreateSocket(System::ProtocolFamilies::Inet, System::SocketTypes::Stream, System::SocketProtocols::Tcp) }
 {
     if (!System::IsSocketValid(socketHandle))
     {
@@ -45,7 +45,7 @@ Network::NetworkSockAcceptor::NetworkSockAcceptor(int port)
 }
 
 Network::NetworkSockAcceptor::NetworkSockAcceptor(const std::string& hostName, int port)
-    : ParentType{}, socketHandle{ System::CreateSocket(System::ProtocolFamilies::Inet, System::SocketTypes::Stream, System::SocketProtocols::Tcp) }
+    : ParentType{}, socketHandle{ CreateSocket(System::ProtocolFamilies::Inet, System::SocketTypes::Stream, System::SocketProtocols::Tcp) }
 {
     if (!System::IsSocketValid(socketHandle))
     {
@@ -123,15 +123,11 @@ System::WinSocket Network::NetworkSockAcceptor::GetWinSocket() noexcept
     return socketHandle;
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
 void Network::NetworkSockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    System::UnusedFunction(eventInterface);
+    System::UnusedFunction(eventInterface, sockStream);
 
     MAYBE_UNUSED const auto result = Accept(*sockStream);
 }
@@ -140,12 +136,10 @@ void Network::NetworkSockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& ev
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    System::UnusedFunction(eventInterface);
+    System::UnusedFunction(eventInterface, sockStream, sockAddress);
 
     MAYBE_UNUSED const auto result = Accept(*sockStream, *sockAddress);
 }
-
-#include STSTEM_WARNING_POP
 
 std::string Network::NetworkSockAcceptor::GetAddress() const noexcept
 {

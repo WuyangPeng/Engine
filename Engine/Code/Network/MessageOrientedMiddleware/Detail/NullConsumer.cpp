@@ -5,14 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/10 09:43)
+///	版本：0.9.1.4 (2023/09/15 17:34)
 
 #include "Network/NetworkExport.h"
 
 #include "NullConsumer.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
-Network::NullConsumer::NullConsumer(const ConfigurationStrategy& configurationStrategy)  
+Network::NullConsumer::NullConsumer(const ConfigurationStrategy& configurationStrategy)
     : ParentType{ configurationStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;

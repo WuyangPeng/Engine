@@ -53,12 +53,12 @@ void CoreTools::StdRecursiveMutex::Leave() noexcept
 
 void CoreTools::StdRecursiveMutex::DoLeave()
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26110)
 
     mutex.unlock();
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 bool CoreTools::StdRecursiveMutex::TryEnter() noexcept

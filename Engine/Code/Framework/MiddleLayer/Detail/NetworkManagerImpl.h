@@ -28,9 +28,6 @@ namespace Framework
         using MessageEventPriority = Network::MessageEventPriority;
         using MessageInterfaceSharedPtr = Network::MessageInterfaceSharedPtr;
         using NetworkMessageEventSharedPtr = Network::NetworkMessageEventSharedPtr;
-        using SendSocketManager = Network::SendSocketManager;
-        using SendSocketManagerSharedPtr = Network::SendSocketManagerSharedPtr;
-        using ConstSendSocketManagerSharedPtr = Network::ConstSendSocketManagerSharedPtr;
 
     public:
         NetworkManagerImpl() noexcept;
@@ -42,15 +39,7 @@ namespace Framework
 
         CLASS_INVARIANT_DECLARE;
 
-        void ResetSendSocketManager(const std::string& fileName);
-
-        NODISCARD SendSocketManagerSharedPtr GetSendSocketManager() noexcept;
-        NODISCARD ConstSendSocketManagerSharedPtr GetSendSocketManager() const noexcept;
-
-        void Send(const Network::SocketData& socketData, int64_t socketId, const MessageInterfaceSharedPtr& message);
-
-    private:
-        SendSocketManagerSharedPtr sendSocketManager;
+        void ResetSendSocketManager(const std::string& fileName) noexcept;
     };
 }
 

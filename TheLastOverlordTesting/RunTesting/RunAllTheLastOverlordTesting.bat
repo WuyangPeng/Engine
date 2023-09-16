@@ -1,0 +1,26 @@
+@echo on
+ 
+call RunAllGameClientTesting.bat
+call RunAllRobotClientTesting.bat
+call RunAllMessageClientTesting.bat
+call RunAllBackgroundClientTesting.bat
+call RunAllGatewayServerTesting.bat
+call RunAllLoginServerTesting.bat
+call RunAllGameServerTesting.bat
+call RunAllFightingServerTesting.bat
+call RunAllWorldServerTesting.bat
+call RunAllOfflineServerTesting.bat
+call RunAllLeaderboardServerTesting.bat
+call RunAllMailServerTesting.bat
+call RunAllChatServerTesting.bat
+call RunAllRechargeServerTesting.bat
+call RunAllLogServerTesting.bat
+call RunAllGameMasterServerTesting.bat
+call RunAllServerManagerTesting.bat
+call RunAllUpdateServerTesting.bat
+call RunAllBackgroundServerTesting.bat
+call RunAllDatabaseServerTesting.bat
+
+call RunTheLastOverlordTesting.bat
+
+pause

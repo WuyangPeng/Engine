@@ -19,7 +19,7 @@
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename ApplicationTrait>
@@ -49,7 +49,7 @@ Framework::CameraControllerMiddleLayer<ApplicationTrait>::CameraControllerMiddle
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 

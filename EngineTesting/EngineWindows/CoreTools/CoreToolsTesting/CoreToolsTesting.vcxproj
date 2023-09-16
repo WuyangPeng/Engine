@@ -495,10 +495,6 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SevenModElevenCheckSumTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SpecifyCheckSumTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\DataTypesSuite.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordIndexTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordStoredManagerTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordStoredTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TableTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\ThreadSafeMapTesting.h" />
@@ -669,6 +665,7 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Array4Testing.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\AtomicMinMaxTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\ContainerAdapterTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\ContainerAdapterTestingDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\HeapAllocateTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\LatticeTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\LexicoArray2Testing.h" />
@@ -1314,10 +1311,6 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\IntelCheckSumTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SevenModElevenCheckSumTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SpecifyCheckSumTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordIndexTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordStoredManagerTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordStoredTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TableTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\ThreadSafeMapTesting.cpp" />

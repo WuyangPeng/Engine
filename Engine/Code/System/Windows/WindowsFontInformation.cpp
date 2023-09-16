@@ -54,7 +54,7 @@ int System::GetFontHeight(WindowsHWnd hWnd) noexcept
     }
 }
 
-System::WindowsHDC System::GetSystemDC(WindowsHWnd hWnd) noexcept
+System::WindowsHdc System::GetSystemDC(WindowsHWnd hWnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -69,7 +69,7 @@ System::WindowsHDC System::GetSystemDC(WindowsHWnd hWnd) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::ReleaseSystemDC(WindowsHWnd hWnd, WindowsHDC hdc) noexcept
+bool System::ReleaseSystemDC(WindowsHWnd hWnd, WindowsHdc hdc) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -87,7 +87,7 @@ bool System::ReleaseSystemDC(WindowsHWnd hWnd, WindowsHDC hdc) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetSystemTextExtentPoint32(WindowsHDC hdc, const TChar* text, int character, WindowsPointSize* pointSize) noexcept
+bool System::GetSystemTextExtentPoint32(WindowsHdc hdc, const TChar* text, int character, WindowsPointSize* pointSize) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -105,7 +105,7 @@ bool System::GetSystemTextExtentPoint32(WindowsHDC hdc, const TChar* text, int c
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetSystemTextMetrics(WindowsHDC hdc, WindowsTextMetric* metric) noexcept
+bool System::GetSystemTextMetrics(WindowsHdc hdc, WindowsTextMetric* metric) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 

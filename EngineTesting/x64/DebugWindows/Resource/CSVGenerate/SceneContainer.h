@@ -40,6 +40,8 @@ namespace CSVConfigure
         NODISCARD ConstSceneSharedPtr GetScene(int key) const;
         NODISCARD MappingContainer GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstSceneSharedPtr GetFirstScene(Function function) const;
 

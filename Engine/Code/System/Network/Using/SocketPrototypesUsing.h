@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/06 23:50)
+///	版本：0.9.1.4 (2023/08/29 17:37)
 
 #ifndef SYSTEM_NETWORK_SOCKET_PROTOTYPES_USING_H
 #define SYSTEM_NETWORK_SOCKET_PROTOTYPES_USING_H
@@ -35,7 +35,7 @@ namespace System
     using WinSockInternetAddress = sockaddr_in;
     using Internet6Address = in6_addr;
     using WinSockInternetAddress6 = sockaddr_in6;
-    using WinSockScopeID = SCOPE_ID;
+    using WinSockScopeId = SCOPE_ID;
     using WinSocket = SOCKET;
     using WinSockAddress = sockaddr;
     using WinSockFdSet = fd_set;
@@ -84,7 +84,7 @@ namespace System
         } u;
     };
 
-    struct WinSockScopeID
+    struct WinSockScopeId
     {
         union
         {
@@ -106,7 +106,7 @@ namespace System
         union
         {
             WindowsULong sin6_scope_id;
-            WinSockScopeID sin6_scope_struct;
+            WinSockScopeId sin6_scope_struct;
         };
     };
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/10 09:24)
+///	版本：0.9.1.4 (2023/09/15 17:34)
 
 #ifndef NETWORK_MESSAGE_ORIENTED_MIDDLEWARE_ROUTE_SERVICE_H
 #define NETWORK_MESSAGE_ORIENTED_MIDDLEWARE_ROUTE_SERVICE_H
@@ -26,6 +26,7 @@ namespace Network
     {
     public:
         NON_COPY_TYPE_DECLARE(RouteService);
+
         using String = System::String;
 
     public:

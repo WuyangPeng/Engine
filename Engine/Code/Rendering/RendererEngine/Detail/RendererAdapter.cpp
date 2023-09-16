@@ -149,6 +149,7 @@ void Rendering::RendererAdapter::Release()
 {
     RENDERING_CLASS_IS_VALID_9;
 
+    renderingDevice.Release();
     rendererObjectBridge->Release();
     renderingEnvironment.Release();
 }

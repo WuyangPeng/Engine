@@ -53,6 +53,7 @@ namespace AssistTools
         NODISCARD String GetEndYear() const;
         NODISCARD String GetVersion() const;
         NODISCARD String GetVersionNum() const;
+        NODISCARD String GetTestingName() const;
 
     private:
         PackageType impl;

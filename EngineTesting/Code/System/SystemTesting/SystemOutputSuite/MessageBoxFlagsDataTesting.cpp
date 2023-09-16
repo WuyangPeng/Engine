@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/30 0:01)
+///	版本：0.9.1.4 (2023/09/01 14:14)
 
 #include "MessageBoxFlagsDataTesting.h"
 #include "System/Helper/EnumCast.h"
@@ -72,11 +72,11 @@ void System::MessageBoxFlagsDataTesting::MainTest()
 
 bool System::MessageBoxFlagsDataTesting::RandomShuffleFlags()
 {
-    shuffle(typeFlags.begin(), typeFlags.end(), randomEngine);
-    shuffle(iconFlags.begin(), iconFlags.end(), randomEngine);
-    shuffle(defaultFlags.begin(), defaultFlags.end(), randomEngine);
-    shuffle(modeFlags.begin(), modeFlags.end(), randomEngine);
-    shuffle(miscFlags.begin(), miscFlags.end(), randomEngine);
+    std::ranges::shuffle(typeFlags, randomEngine);
+    std::ranges::shuffle(iconFlags, randomEngine);
+    std::ranges::shuffle(defaultFlags, randomEngine);
+    std::ranges::shuffle(modeFlags, randomEngine);
+    std::ranges::shuffle(miscFlags, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(FlagsTest);
 

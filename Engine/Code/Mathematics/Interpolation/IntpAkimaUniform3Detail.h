@@ -376,7 +376,7 @@ typename Mathematics::IntpAkimaUniform3<Real>::Container Mathematics::IntpAkimaU
     const auto yPreviousBound = yBound - 1;
     const auto zPreviousBound = zBound - 1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26451)
 
     fxyz.at(0).at(0).at(0) = Math<Real>::GetValue(0);
@@ -585,7 +585,7 @@ typename Mathematics::IntpAkimaUniform3<Real>::Container Mathematics::IntpAkimaU
         }
     }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     return fxyz;
 }

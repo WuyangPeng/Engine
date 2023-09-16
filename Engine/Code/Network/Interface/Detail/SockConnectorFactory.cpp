@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 09:25)
+///	版本：0.9.1.4 (2023/09/15 15:22)
 
 #include "Network/NetworkExport.h"
 
@@ -13,7 +13,7 @@
 #include "SockConnectorFactory.h"
 #include "SockConnectorImpl.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "Network/ACEWrappers/Detail/Connector/ACESockConnector.h"
+#include "Network/ACEWrappers/Detail/Connector/AceSockConnector.h"
 #include "Network/BoostWrappers/Detail/Connector/BoostSockConnector.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
@@ -34,7 +34,7 @@ Network::SockConnectorFactory::ImplTypeSharedPtr Network::SockConnectorFactory::
 #ifdef NETWORK_USE_ACE
 
         case WrappersStrategy::Ace:
-            return std::make_shared<ACESockConnector>();
+            return std::make_shared<AceSockConnector>();
 
 #endif  // NETWORK_USE_ACE
 

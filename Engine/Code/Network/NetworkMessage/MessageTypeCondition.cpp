@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 10:00)
+///	版本：0.9.1.4 (2023/09/04 16:54)
 
 #include "Network/NetworkExport.h"
 
@@ -13,8 +13,6 @@
 #include "Detail/MessageTypeConditionAll.h"
 #include "Detail/MessageTypeConditionCompare.h"
 #include "Detail/MessageTypeConditionImpl.h"
-#include "Detail/MessageTypeConditionRange.h"
-#include "Detail/MessageTypeConditionSpecific.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
@@ -53,14 +51,30 @@ Network::MessageTypeCondition::MessageTypeCondition(CoreTools::DisableNotThrow d
 
 CLASS_INVARIANT_STUB_DEFINE(Network, MessageTypeCondition)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, MessageTypeCondition, IsVersionsConform, int, bool)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageTypeCondition, GetMinVersion, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageTypeCondition, GetMaxVersion, int);
-
 bool Network::MessageTypeCondition::operator<(const MessageTypeCondition& rhs) const
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
     return *impl < *rhs.impl;
+}
+
+bool Network::MessageTypeCondition::IsVersionsConform(int version) const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->IsVersionsConform(version);
+}
+
+int Network::MessageTypeCondition::GetMinVersion() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetMinVersion();
+}
+
+int Network::MessageTypeCondition::GetMaxVersion() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetMaxVersion();
 }

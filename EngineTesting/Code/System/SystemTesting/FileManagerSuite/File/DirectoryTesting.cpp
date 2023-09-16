@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/14 17:27)
+///	版本：0.9.1.4 (2023/08/31 17:19)
 
 #include "DirectoryTesting.h"
 #include "System/FileManager/File.h"
@@ -13,8 +13,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using namespace std::literals;
 
 System::DirectoryTesting::DirectoryTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -36,7 +34,7 @@ void System::DirectoryTesting::MainTest()
 
 void System::DirectoryTesting::DirectoryTest()
 {
-    const auto rootDirectory = CreateSystemFile(SYSTEM_TEXT("Resource"s),
+    const auto rootDirectory = CreateSystemFile(SYSTEM_TEXT("Resource"),
                                                 FileHandleDesiredAccess::Read,
                                                 FileHandleShareMode::ShareRead,
                                                 FileHandleCreationDisposition::OpenExisting,

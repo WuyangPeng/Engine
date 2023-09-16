@@ -46,7 +46,7 @@ Mathematics::Int64Vector2::Int64Vector2(int64_t x, int64_t y)
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 Mathematics::Int64Vector2& Mathematics::Int64Vector2::operator=(const Int64Vector<2>& rhs)
@@ -58,7 +58,7 @@ Mathematics::Int64Vector2& Mathematics::Int64Vector2::operator=(const Int64Vecto
     return *this;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 CLASS_INVARIANT_STUB_DEFINE(Mathematics, Int64Vector2)
 

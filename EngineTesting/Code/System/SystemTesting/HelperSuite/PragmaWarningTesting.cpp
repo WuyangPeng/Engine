@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/18 10:54)
+///	版本：0.9.1.4 (2023/09/01 09:53)
 
 #include "PragmaWarningTesting.h"
 #include "System/Helper/PragmaWarning.h"
@@ -25,6 +25,7 @@
 #include "System/Helper/PragmaWarning/Format.h"
 #include "System/Helper/PragmaWarning/Freeglut.h"
 #include "System/Helper/PragmaWarning/Gregorian.h"
+#include "System/Helper/PragmaWarning/Hiredis.h"
 #include "System/Helper/PragmaWarning/IteratorFacade.h"
 #include "System/Helper/PragmaWarning/LexicalCast.h"
 #include "System/Helper/PragmaWarning/LimitTraits.h"
@@ -38,13 +39,12 @@
 #include "System/Helper/PragmaWarning/MysqlxXdevapi.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning/OpenXLSX.h"
-#include "System/Helper/PragmaWarning/Hiredis.h"
 #include "System/Helper/PragmaWarning/Operators.h"
 #include "System/Helper/PragmaWarning/PolymorphicCast.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/Helper/PragmaWarning/PosixTime.h"
 #include "System/Helper/PragmaWarning/PropertyTree.h"
-#include "System/Helper/PragmaWarning/ProtoBuf.h"
+#include "System/Helper/PragmaWarning/ProtoBuf.inl"
 #include "System/Helper/PragmaWarning/PtrVector.h"
 #include "System/Helper/PragmaWarning/PugiXml.h"
 #include "System/Helper/PragmaWarning/RecursiveMutex.h"
@@ -58,7 +58,7 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 
 #include SYSTEM_WARNING_DISABLE(4100)
 #include SYSTEM_WARNING_DISABLE(4101)
@@ -199,4 +199,4 @@ void System::PragmaWarningTesting::MainTest() noexcept
     Disable4996Test();
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP

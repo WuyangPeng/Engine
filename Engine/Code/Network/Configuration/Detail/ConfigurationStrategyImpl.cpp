@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/04/28 09:55)
+///	版本：0.9.1.4 (2023/09/04 15:44)
 
 #include "Network/NetworkExport.h"
 
@@ -28,7 +28,7 @@ Network::ConfigurationStrategyImpl::ConfigurationStrategyImpl(WrappersStrategy w
                                                               ServerStrategy serverStrategy,
                                                               MessageStrategy messageStrategy,
                                                               ParserStrategy parserStrategy,
-                                                              OpenSSLStrategy openSSLStrategy,
+                                                              OpenSslStrategy openSslStrategy,
                                                               EncryptedCompressionStrategy encryptedCompressionStrategy,
                                                               ConfigurationSubStrategy subStrategy,
                                                               ConfigurationParameter configurationParameter,
@@ -40,7 +40,7 @@ Network::ConfigurationStrategyImpl::ConfigurationStrategyImpl(WrappersStrategy w
       messageStrategy{ messageStrategy },
       connectStrategy{ connectStrategy },
       parserStrategy{ parserStrategy },
-      openSSLStrategy{ openSSLStrategy },
+      openSslStrategy{ openSslStrategy },
       encryptedCompressionStrategy{ encryptedCompressionStrategy },
       subStrategy{ std::move(subStrategy) },
       socketSendMessage{ socketSendMessage },
@@ -55,19 +55,19 @@ Network::ConfigurationStrategyImpl::ConfigurationStrategyImpl(WrappersStrategy w
                                                               ClientStrategy clientStrategy,
                                                               MessageStrategy messageStrategy,
                                                               ParserStrategy parserStrategy,
-                                                              OpenSSLStrategy openSSLStrategy,
+                                                              OpenSslStrategy openSslStrategy,
                                                               EncryptedCompressionStrategy encryptedCompressionStrategy,
                                                               ConfigurationSubStrategy subStrategy,
                                                               ConfigurationParameter configurationParameter,
                                                               SocketSendMessage socketSendMessage,
                                                               const std::string& host,
                                                               int port)
-    : wrappersStrategy{ wrappersStrategy },    
+    : wrappersStrategy{ wrappersStrategy },
       clientStrategy{ clientStrategy },
       messageStrategy{ messageStrategy },
       connectStrategy{ connectStrategy },
       parserStrategy{ parserStrategy },
-      openSSLStrategy{ openSSLStrategy },
+      openSslStrategy{ openSslStrategy },
       encryptedCompressionStrategy{ encryptedCompressionStrategy },
       subStrategy{ std::move(subStrategy) },
       socketSendMessage{ socketSendMessage },
@@ -135,6 +135,20 @@ int Network::ConfigurationStrategyImpl::GetPort() const noexcept
     return configurationIpPort.GetPort();
 }
 
+bool Network::ConfigurationStrategyImpl::IsServer() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return patternStrategy != ServerStrategy::Disable;
+}
+
+bool Network::ConfigurationStrategyImpl::IsClient() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return clientStrategy != ClientStrategy::Disable;
+}
+
 Network::ConnectStrategy Network::ConfigurationStrategyImpl::GetConnectStrategy() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
@@ -149,11 +163,11 @@ Network::ParserStrategy Network::ConfigurationStrategyImpl::GetParserStrategy() 
     return parserStrategy;
 }
 
-Network::OpenSSLStrategy Network::ConfigurationStrategyImpl::GetOpenSSLStrategy() const noexcept
+Network::OpenSslStrategy Network::ConfigurationStrategyImpl::GetOpenSslStrategy() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return openSSLStrategy;
+    return openSslStrategy;
 }
 
 Network::ConfigurationParameter Network::ConfigurationStrategyImpl::GetConfigurationParameter() const noexcept

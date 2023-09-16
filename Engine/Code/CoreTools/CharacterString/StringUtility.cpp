@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/10 17:28)
+///	版本：0.9.1.4 (2023/09/13 10:44)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,7 +22,7 @@ std::wstring CoreTools::StringUtility::ConvertNarrowToWide(const std::string& in
     std::wstring output{};
 
     std::ranges::transform(input, std::back_inserter(output),
-                           [](const char c) noexcept {
+                           [](const int c) noexcept {
                                const auto converted = std::btowc(c);
 
                                return (converted != WEOF ? static_cast<wchar_t>(c) : L' ');
@@ -36,7 +36,7 @@ std::string CoreTools::StringUtility::ConvertWideToNarrow(const std::wstring& in
     std::string output{};
 
     std::ranges::transform(input, std::back_inserter(output),
-                           [](const wchar_t c) {
+                           [](const std::wint_t c) {
                                const auto converted = std::wctob(c);
 
                                return (converted != EOF ? boost::numeric_cast<char>(c) : ' ');
@@ -78,18 +78,23 @@ CoreTools::StringUtility::TokensType CoreTools::StringUtility::GetTokens(const s
 
     while (!tokenString.empty())
     {
+        // 查找token的开始位置。
         const auto begin = tokenString.find_first_not_of(whiteSpace);
         if (begin == std::string::npos)
         {
+            // 已找到所有令牌。
             break;
         }
 
+        // 删除空白。
         if (0 < begin)
         {
             tokenString = tokenString.substr(begin);
         }
 
-        if (const auto end = tokenString.find_first_of(whiteSpace); end != std::string::npos)
+        // 查找token的结束位置。
+        if (const auto end = tokenString.find_first_of(whiteSpace);
+            end != std::string::npos)
         {
             const auto token = tokenString.substr(0, end);
             tokens.emplace_back(token);
@@ -97,6 +102,7 @@ CoreTools::StringUtility::TokensType CoreTools::StringUtility::GetTokens(const s
         }
         else
         {
+            // 这是最后一个token。
             tokens.emplace_back(tokenString);
             break;
         }

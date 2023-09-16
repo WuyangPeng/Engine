@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/11 20:39)
+///	版本：0.9.1.4 (2023/08/28 17:15)
 
 #include "System/SystemExport.h"
 
@@ -133,7 +133,7 @@ std::string System::GetString(FILE* file, int count)
     }
 }
 
-bool System::IsEOF(FILE* file) noexcept
+bool System::IsEof(FILE* file) noexcept
 {
     if (::feof(file) != 0)
         return true;

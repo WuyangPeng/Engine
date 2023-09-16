@@ -27,13 +27,13 @@
     <None Include="Resource\Schedule.md">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="Configuration\OfflineServerTesting.json">
+      <Filter>配置</Filter>
+    </None>
     <None Include="Configuration\EnvironmentVariable.json">
       <Filter>配置</Filter>
     </None>
     <None Include="Configuration\Log.json">
-      <Filter>配置</Filter>
-    </None>
-    <None Include="Configuration\OfflineServerTesting.json">
       <Filter>配置</Filter>
     </None>
     <None Include="Configuration\Testing.json">

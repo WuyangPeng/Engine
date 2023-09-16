@@ -103,7 +103,7 @@ void Mathematics::ParaboloidFit3<Real>::Calculate(const Points& points)
         matrix(3, 5) += point.GetX();
         matrix(4, 5) += point.GetY();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         rhs[0] += zx2;
@@ -113,7 +113,7 @@ void Mathematics::ParaboloidFit3<Real>::Calculate(const Points& points)
         rhs[4] += zy;
         rhs[5] += point.GetZ();
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     auto numPoints = static_cast<Real>(points.size());

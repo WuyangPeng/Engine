@@ -28,12 +28,12 @@ void CoreTools::CyclicRedundancyCheck32::Calculation(const char* data, int lengt
     {
         for (auto i = 0; i < length; ++i)
         {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
             const auto value = (cyclicRedundancyCheck ^ data[i]) & 0x000000FFL;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
             cyclicRedundancyCheck = ((cyclicRedundancyCheck >> 8) & 0x00FFFFFFL) ^ CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get32Table(value);
         }

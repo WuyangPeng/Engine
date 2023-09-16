@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 22:41)
+///	版本：0.9.1.4 (2023/08/29 23:27)
 
 #ifndef SYSTEM_OPENGL_OPENGL_FLAGS_FWD_H
 #define SYSTEM_OPENGL_OPENGL_FLAGS_FWD_H
@@ -58,8 +58,8 @@ namespace System
     enum class PrimitiveType;
     enum class TextureCubeMap;
     enum class TextureNumber;
-    enum class ColorAttachent;
-    enum class CheckFrambufferStatus;
+    enum class ColorAttachment;
+    enum class CheckFrameBufferStatus;
     enum class FrameBufferType;
     enum class AttributeUsage;
     enum class OpenGLEnable;

@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/06 23:54)
+///	版本：0.9.1.4 (2023/08/29 17:37)
 
 #ifndef SYSTEM_NETWORK_WINDOWS_SOCK_EX_USING_H
 #define SYSTEM_NETWORK_WINDOWS_SOCK_EX_USING_H
 
-#include "WindowsExtensionPrototypesUsing.h"
 #include "System/Helper/Platform.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
@@ -36,7 +35,7 @@ namespace System
 
     using SocketAddressList = SOCKET_ADDRESS_LIST;
     using SocketAddressListPtr = PSOCKET_ADDRESS_LIST;
-    using SocketAddress = SOCKET_ADDRESS; 
+    using SocketAddress = SOCKET_ADDRESS;
     using SocketAddressPtr = PSOCKET_ADDRESS;
     using SocketProtocolInfo = WSAPROTOCOL_INFO;
     using SocketProtocolInfoPtr = LPWSAPROTOCOL_INFO;
@@ -59,8 +58,8 @@ namespace System
     using SocketGuidPtr = LPGUID;
     using SocketVersion = WSAVERSION;
     using SocketVersionPtr = LPWSAVERSION;
-    using SocketEcomparator = WSAECOMPARATOR;
-    using SocketEcomparatorPtr = LPWSAECOMPARATOR;
+    using SocketEComparator = WSAECOMPARATOR;
+    using SocketEComparatorPtr = LPWSAECOMPARATOR;
     using SocketAfProtocols = AFPROTOCOLS;
     using SocketAfProtocolsPtr = LPAFPROTOCOLS;
     using SocketBlob = BLOB;
@@ -206,17 +205,17 @@ namespace System
 
     using SocketGuidPtr = SystemGUID*;
 
-    enum SocketEcomparator
+    enum SocketEComparator
     {
         COMP_EQUAL = 0,
         COMP_NOTLESS
     };
-    using SocketEcomparatorPtr = SocketEcomparator*;
+    using SocketEComparatorPtr = SocketEComparator*;
 
     struct SocketVersion
     {
         uint32_t dwVersion;
-        SocketEcomparator ecHow;
+        SocketEComparator ecHow;
     };
     using SocketVersionPtr = SocketVersion*;
 

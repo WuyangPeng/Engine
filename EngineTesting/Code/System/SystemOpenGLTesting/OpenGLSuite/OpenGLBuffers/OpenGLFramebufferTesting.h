@@ -5,35 +5,35 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/19 21:46)
+///	版本：0.9.1.4 (2023/08/31 13:56)
 
-#ifndef SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_FRAMEBUFFER_TESTING_H
-#define SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_FRAMEBUFFER_TESTING_H
+#ifndef SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_FRAME_BUFFER_TESTING_H
+#define SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_FRAME_BUFFER_TESTING_H
 
-#include "OpenGLBuffersTestingBase.h" 
+#include "OpenGLBuffersTestingBase.h"
 
 namespace System
 {
-    class OpenGLFramebufferTesting final : public OpenGLBuffersTestingBase
+    class OpenGLFrameBufferTesting final : public OpenGLBuffersTestingBase
     {
     public:
-        using ClassType = OpenGLFramebufferTesting;
+        using ClassType = OpenGLFrameBufferTesting;
         using ParentType = OpenGLBuffersTestingBase;
 
     public:
-        explicit OpenGLFramebufferTesting(const OStreamShared& stream);
+        explicit OpenGLFrameBufferTesting(const OStreamShared& stream);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
-        void OpenGLGetFramebufferTest();
-        void OpenGLGetFramebuffersTest();
+        void OpenGLGetFrameBufferTest();
+        void OpenGLGetFrameBuffersTest();
 
-        void DoOpenGLGetFramebuffersTest(const BufferType& buffers);
+        void DoOpenGLGetFrameBuffersTest(const BufferType& buffers);
     };
 }
 
-#endif  // SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_FRAMEBUFFER_TESTING_H
+#endif  // SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_FRAME_BUFFER_TESTING_H

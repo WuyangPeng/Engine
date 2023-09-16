@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/15 09:05)
+///	版本：0.9.1.4 (2023/09/16 09:55)
 
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_TEST_SOCKET_EVENT_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_TEST_SOCKET_EVENT_H
 
 #include "TestMessageEvent.h"
-#include "Network/Interface/Server.h"
 #include "Network/NetworkMessage/MessageEventManager.h"
 
 #include <atomic>

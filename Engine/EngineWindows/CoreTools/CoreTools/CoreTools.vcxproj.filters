@@ -88,9 +88,6 @@
     <Filter Include="DataTypes 头文件">
       <UniqueIdentifier>{f9d7ddc9-78ff-4dad-90a3-b96fa2b8ae16}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DataTypes 源文件">
-      <UniqueIdentifier>{ac9ba6fa-5364-4cdb-abab-30bacdacc72a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="DataTypes 模板文件">
       <UniqueIdentifier>{40494400-4610-486e-9ba4-cb0eaa402674}</UniqueIdentifier>
     </Filter>
@@ -342,12 +339,6 @@
     </Filter>
     <Filter Include="Contract 源文件">
       <UniqueIdentifier>{dcdb5e83-2e97-4cee-8140-9082ffd2cc93}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DataTypes 头文件\Detail">
-      <UniqueIdentifier>{e76ad2b5-48ff-4b01-9acd-cc4c950ed00a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DataTypes 源文件\Detail">
-      <UniqueIdentifier>{7543a415-2899-45d4-8f3a-85be236de651}</UniqueIdentifier>
     </Filter>
     <Filter Include="MainFunctionHelper 模板文件">
       <UniqueIdentifier>{6b3645e5-dbf9-46ff-9750-d8893c060458}</UniqueIdentifier>
@@ -639,18 +630,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SpecifyCheckSum.h">
       <Filter>CyclicRedundancyCheck 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecord.h">
-      <Filter>DataTypes 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordIndex.h">
-      <Filter>DataTypes 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordStored.h">
-      <Filter>DataTypes 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordStoredManager.h">
-      <Filter>DataTypes 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\Table.h">
       <Filter>DataTypes 头文件</Filter>
     </ClInclude>
@@ -669,16 +648,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeap.h">
       <Filter>DataTypes 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordDetail.h">
-      <Filter>DataTypes 模板文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapDetail.h">
-      <Filter>DataTypes 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordStoredDetail.h">
-      <Filter>DataTypes 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordStoredManagerDetail.h">
       <Filter>DataTypes 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\TupleLessDetail.h">
@@ -2004,9 +1974,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogManagerInternalFwd.h">
       <Filter>LogManager 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\Detail\MinHeapRecordIndexImpl.h">
-      <Filter>DataTypes 头文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\WeakObjectAssociated.h">
       <Filter>ObjectSystems 头文件</Filter>
     </ClInclude>
@@ -3066,6 +3033,18 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CodeMappingAnalysis.h">
       <Filter>CharacterString 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapNode.h">
+      <Filter>DataTypes 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapNodeDetail.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecord.h">
+      <Filter>DataTypes 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordDetail.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp">
@@ -3169,9 +3148,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SpecifyCheckSum.cpp">
       <Filter>CyclicRedundancyCheck 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordIndex.cpp">
-      <Filter>DataTypes 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\StringReplacingImpl.cpp">
       <Filter>EngineConfiguration 源文件\Detail</Filter>
@@ -3724,9 +3700,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\Base\LoadingLibrary.cpp">
       <Filter>Base 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\DataTypes\Detail\MinHeapRecordIndexImpl.cpp">
-      <Filter>DataTypes 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\InitTermRegisterFactory.cpp">
       <Filter>ObjectSystems 源文件</Filter>

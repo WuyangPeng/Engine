@@ -5,13 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/22 17:11)
+///	版本：0.9.1.4 (2023/08/31 09:24)
 
 #ifndef SYSTEM_WINDOWS_ENGINEERING_H
 #define SYSTEM_WINDOWS_ENGINEERING_H
 
 #include "System/SystemDll.h"
 
+#include "System/Helper/ConfigMacro.h"
 #include "System/Helper/UnicodeUsing.h"
 
 namespace System
@@ -25,15 +26,15 @@ namespace System
 
     NODISCARD constexpr int GetEngineeringOffsetValue() noexcept
     {
-#if defined(_DEBUG) || defined(BUILDING_CORE_TOOLS_STATIC) || defined(_WIN64)
+#if defined(_DEBUG) || defined(BUILDING_CORE_TOOLS_STATIC) || defined(TCRE_ARCHITECTURE_TYPE_64)
 
         auto offsetValue = 0;
 
-#else  // !defined(_DEBUG) && !defined(BUILDING_CORE_TOOLS_STATIC) && !defined(_WIN64)
+#else  // !defined(_DEBUG) && !defined(BUILDING_CORE_TOOLS_STATIC) && !defined(TCRE_ARCHITECTURE_TYPE_64)
 
         constexpr auto offsetValue = 0;
 
-#endif  // defined(_DEBUG) || defined(BUILDING_CORE_TOOLS_STATIC) || defined(_WIN64)
+#endif  // defined(_DEBUG) || defined(BUILDING_CORE_TOOLS_STATIC) || defined(TCRE_ARCHITECTURE_TYPE_64)
 
 #ifdef _DEBUG
 
@@ -47,11 +48,11 @@ namespace System
 
 #endif  // BUILDING_CORE_TOOLS_STATIC
 
-#ifdef _WIN64
+#if defined(TCRE_ARCHITECTURE_TYPE_64)
 
         offsetValue += 1;
 
-#endif  // _WIN64
+#endif  // defined(TCRE_ARCHITECTURE_TYPE_64)
 
         return offsetValue;
     }

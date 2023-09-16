@@ -36,7 +36,9 @@ namespace Rendering
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         NODISCARD OpenGLInputLayoutSharedPtr Bind(OpenGLUInt programHandle, OpenGLUInt vertexBufferHandle, const VertexBufferSharedPtr& vertexBuffer);
-        bool Unbind(const VertexBufferSharedPtr& vertexBuffer) override;
+
+        NODISCARD bool Unbind(const ShaderSharedPtr& vertexShader) override;
+        NODISCARD bool Unbind(const VertexBufferSharedPtr& vertexBuffer) override;
         void UnbindAll() noexcept override;
         NODISCARD bool HasElements() const noexcept override;
 

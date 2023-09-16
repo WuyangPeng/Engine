@@ -4,55 +4,55 @@
 $ProjectChineseName$工程
 
 ----------------------------
-$ProjectName$Windows.props：
+$ProjectName$.props：
 $ProjectChineseName$工程属性表
 
-$ProjectName$WindowsStaticWin32DebugLibs.props：
+$ProjectName$StaticWin32DebugLibs.props：
 引擎和游戏都编译成lib、Win32、Debug工程依赖库属性表
 
-$ProjectName$WindowsStaticWin32ReleaseLibs.props：
+$ProjectName$StaticWin32ReleaseLibs.props：
 引擎和游戏都编译成lib、Win32、Release工程依赖库属性表
 
-$ProjectName$WindowsStaticX64DebugLibs.props：
+$ProjectName$StaticX64DebugLibs.props：
 引擎和游戏都编译成lib、X64、Debug工程依赖库属性表
 
-$ProjectName$WindowsStaticX64ReleaseLibs.props：
+$ProjectName$StaticX64ReleaseLibs.props：
 引擎和游戏都编译成lib、X64、Release工程依赖库属性表
 
-$ProjectName$WindowsWin32DebugLibs.props：
+$ProjectName$Win32DebugLibs.props：
 引擎和游戏都编译成dll、Win32、Debug工程依赖库属性表
 
-$ProjectName$WindowsWin32ReleaseLibs.props：
+$ProjectName$Win32ReleaseLibs.props：
 引擎和游戏都编译成dll、Win32、Release工程依赖库属性表
 
-$ProjectName$WindowsX64DebugLibs.props：
+$ProjectName$X64DebugLibs.props：
 引擎和游戏都编译成dll、X64、Debug工程依赖库属性表
 
-$ProjectName$WindowsX64ReleaseLibs.props：
+$ProjectName$X64ReleaseLibs.props：
 引擎和游戏都编译成dll、X64、Release工程依赖库属性表
 
-$ProjectName$WindowsEngineDynamic$ProjectName$WindowsStaticWin32DebugLibs.props：
+$ProjectName$EngineDynamic$ProjectName$StaticWin32DebugLibs.props：
 引擎（dll）和游戏（lib）都编译成Win32、Debug工程依赖库属性表
 
-$ProjectName$WindowsEngineDynamic$ProjectName$WindowsStaticWin32ReleaseLibs.props：
+$ProjectName$EngineDynamic$ProjectName$StaticWin32ReleaseLibs.props：
 引擎（dll）和游戏（lib）都编译成Win32、Release工程依赖库属性表
 
-$ProjectName$WindowsEngineDynamic$ProjectName$WindowsStaticX64DebugLibs.props：
+$ProjectName$EngineDynamic$ProjectName$StaticX64DebugLibs.props：
 引擎（dll）和游戏（lib）都编译成X64、Debug工程依赖库属性表
 
-$ProjectName$WindowsEngineDynamic$ProjectName$WindowsStaticX64ReleaseLibs.props：
+$ProjectName$EngineDynamic$ProjectName$StaticX64ReleaseLibs.props：
 引擎（dll）和游戏（lib）都编译成X64、Release工程依赖库属性表
 
-$ProjectName$WindowsEngineStatic$ProjectName$WindowsDynamicWin32DebugLibs.props：
+$ProjectName$EngineStatic$ProjectName$DynamicWin32DebugLibs.props：
 引擎（lib）和游戏（dll）都编译成Win32、Debug工程依赖库属性表
 
-$ProjectName$WindowsEngineStatic$ProjectName$WindowsDynamicWin32ReleaseLibs.props：
+$ProjectName$EngineStatic$ProjectName$DynamicWin32ReleaseLibs.props：
 引擎（lib）和游戏（dll）都编译成Win32、Release工程依赖库属性表
 
-$ProjectName$WindowsEngineStatic$ProjectName$WindowsDynamicX64DebugLibs.props：
+$ProjectName$EngineStatic$ProjectName$DynamicX64DebugLibs.props：
 引擎（lib）和游戏（dll）都编译成X64、Debug工程依赖库属性表
 
-$ProjectName$WindowsEngineStatic$ProjectName$WindowsDynamicX64ReleaseLibs.props：
+$ProjectName$EngineStatic$ProjectName$DynamicX64ReleaseLibs.props：
 引擎（lib）和游戏（dll）都编译成X64、Release工程依赖库属性表
 
 ----------------------------

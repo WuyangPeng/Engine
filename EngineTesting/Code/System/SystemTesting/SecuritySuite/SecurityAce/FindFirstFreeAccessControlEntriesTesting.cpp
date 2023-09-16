@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/28 16:00)
+///	版本：0.9.1.4 (2023/09/01 14:04)
 
 #include "FindFirstFreeAccessControlEntriesTesting.h"
 #include "System/Security/SecurityAce.h"
@@ -40,8 +40,8 @@ void System::FindFirstFreeAccessControlEntriesTesting::FindFirstFreeAccessContro
     SecurityAclSizeInformation aclSizeInformation{};
     ASSERT_TRUE(GetAccessControlListInformation(dacl, &aclSizeInformation));
 
-    auto aclbuffer = GetACL(buffer, aclSizeInformation.AclBytesInUse);
+    auto aclBuffer = GetAcl(buffer, aclSizeInformation.AclBytesInUse);
 
     WindowsVoidPtr ace{ nullptr };
-    ASSERT_TRUE(FindFirstFreeAccessControlEntries(GetAccessCheckACLPtr(aclbuffer), &ace));
+    ASSERT_TRUE(FindFirstFreeAccessControlEntries(GetAccessCheckAclPtr(aclBuffer), &ace));
 }

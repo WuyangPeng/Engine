@@ -9,6 +9,7 @@
 
 #include "Hero.h"
 #include "HeroContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -88,5 +89,12 @@ CSVConfigure::HeroContainer::MappingContainer CSVConfigure::HeroContainer::GetCo
     USER_CLASS_IS_VALID_CONST_9;
 
     return hero;
+}
+
+int CSVConfigure::HeroContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(hero.size());
 }
 

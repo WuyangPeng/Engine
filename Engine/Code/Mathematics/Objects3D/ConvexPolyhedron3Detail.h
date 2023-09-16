@@ -96,7 +96,7 @@ void Mathematics::ConvexPolyhedron3<Real>::SetVertex(int index, const Vector3& v
     {
         const auto indices = this->GetTriangle(i);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         if (index == indices[0] || index == indices[1] || index == indices[2])
@@ -104,7 +104,7 @@ void Mathematics::ConvexPolyhedron3<Real>::SetVertex(int index, const Vector3& v
             sharingTriangles.insert(i);
         }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 

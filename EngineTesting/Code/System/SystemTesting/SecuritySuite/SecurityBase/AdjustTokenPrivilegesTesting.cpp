@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/28 21:14)
+///	版本：0.9.1.4 (2023/09/01 14:07)
 
 #include "AdjustTokenPrivilegesTesting.h"
 #include "System/Helper/SecuritySidMacro.h"
@@ -13,13 +13,7 @@
 #include "System/Security/Flags/SecurityBaseFlags.h"
 #include "System/Security/LookupPrivilege.h"
 #include "System/Security/SecurityBase.h"
-#include "System/Security/SecuritySid.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
-#include "System/Security/Using/SecuritySidUsing.h"
-#include "System/Threading/Flags/ThreadToolsFlags.h"
-#include "System/Threading/Process.h"
-#include "System/Threading/ProcessTools.h"
-#include "System/Threading/ThreadTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -36,10 +30,10 @@ System::AdjustTokenPrivilegesTesting::AdjustTokenPrivilegesTesting(const OStream
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::TakeOwnershipName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::LoadDriverName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::SystemProfileName),
-                            GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::SystemtimeName),
+                            GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::SystemTimeName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::ProfileSingleProcessName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::IncreaseBasePriorityName),
-                            GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::CreatePagefileName),
+                            GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::CreatePageFileName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::CreatePermanentName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::BackupName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::RestoreName),
@@ -49,7 +43,7 @@ System::AdjustTokenPrivilegesTesting::AdjustTokenPrivilegesTesting(const OStream
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::SystemEnvironmentName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::ChangeNotifyName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::RemoteShutdownName),
-                            GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::UndockName),
+                            GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::UnDockName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::SyncAgentName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::EnableDelegationName),
                             GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::ManageVolumeName),
@@ -95,7 +89,7 @@ void System::AdjustTokenPrivilegesTesting::DoGetAdjustTokenPrivilegesTest(Window
 
 void System::AdjustTokenPrivilegesTesting::PrivilegesTest(const String& lookupPrivilegeName, WindowsHandle tokenHandle)
 {
-    LookupPrivilegeLUID uid{};
+    LookupPrivilegeLuid uid{};
     ASSERT_TRUE(GetLookupPrivilegeValue(nullptr, lookupPrivilegeName.c_str(), &uid));
     ASSERT_LESS(0u, uid.LowPart);
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/04/28 11:00)
+///	版本：0.9.1.4 (2023/09/04 15:48)
 
 #include "Network/NetworkExport.h"
 
@@ -15,6 +15,8 @@
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(Network, ConfigurationSubStrategy)
 
 Network::ConfigurationSubStrategy Network::ConfigurationSubStrategy::Create()
 {
@@ -31,13 +33,23 @@ Network::ConfigurationSubStrategy::ConfigurationSubStrategy(CoreTools::DisableNo
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ConfigurationSubStrategy)
 
+bool Network::ConfigurationSubStrategy::IsExist(WrappersSubStrategy wrappersSubStrategy) const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->IsExist(wrappersSubStrategy);
+}
+
+int Network::ConfigurationSubStrategy::GetValue(WrappersSubStrategy wrappersSubStrategy) const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetValue(wrappersSubStrategy);
+}
+
 void Network::ConfigurationSubStrategy::Insert(WrappersSubStrategy wrappersSubStrategy, int value)
 {
     NETWORK_CLASS_IS_VALID_1;
 
     return impl->Insert(wrappersSubStrategy, value);
 }
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, ConfigurationSubStrategy, IsExist, WrappersSubStrategy, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, ConfigurationSubStrategy, GetValue, WrappersSubStrategy, int)
-COPY_UNSHARED_CLONE_SELF_DEFINE(Network, ConfigurationSubStrategy)

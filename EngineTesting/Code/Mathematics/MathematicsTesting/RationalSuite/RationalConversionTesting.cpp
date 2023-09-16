@@ -61,7 +61,7 @@ void Mathematics::RationalConversionTesting::FloatingPointTest()
 
         auto secondValue = firstConversion.GetValue();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
         const auto thirdValue = *(reinterpret_cast<const uint32_t*>(&firstValue));
@@ -80,7 +80,7 @@ void Mathematics::RationalConversionTesting::FloatingPointTest()
         const auto seventhValue = *(reinterpret_cast<const uint64_t*>(&fifthValue));
         const auto eighthValue = *(reinterpret_cast<const uint64_t*>(&sixthValue));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         ASSERT_EQUAL(seventhValue, eighthValue);
     }

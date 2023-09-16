@@ -5,9 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/11 21:16)
+///	版本：0.9.1.4 (2023/09/01 11:06)
 
 #include "WinSocketAcceptTesting.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
 #include "System/Network/SocketPrototypes.h"
 #include "System/Network/WindowsSockEx.h"
@@ -54,12 +55,12 @@ void System::WinSocketAcceptTesting::DoAcceptTest(WinSocket socketHandle)
 
     int addressLength{ sizeof(address) };
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     const auto acceptHandle = WinSocketAccept(socketHandle, reinterpret_cast<WinSockAddress*>(&address), &addressLength, nullptr, 0);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     ASSERT_TRUE_FAILURE_THROW(IsSocketValid(acceptHandle), "创建Accept Socket失败。");
 
@@ -98,11 +99,11 @@ void System::WinSocketAcceptTesting::RecvTest(WinSocket acceptHandle)
             break;
         }
 
-        remain -= numberOfBytesRecvd;
-        index += numberOfBytesRecvd;
+        remain -= boost::numeric_cast<int>(numberOfBytesRecvd);
+        index += boost::numeric_cast<int>(numberOfBytesRecvd);
     }
 
-    std::string result{ buffer.data() };
+    const std::string result{ buffer.data() };
 
     ASSERT_EQUAL(result, "Hello");
 }

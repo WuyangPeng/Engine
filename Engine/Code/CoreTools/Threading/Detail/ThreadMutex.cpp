@@ -29,20 +29,20 @@ void CoreTools::ThreadMutex::Initialize()
 
     // 成功 = 0
     // 错误 = ENOMEM
-    if (PthreadMutexAttributeInit(&mutex.attribute) != System::PthreadResult::Successful)
+    if (PThreadMutexAttributeInit(&mutex.attribute) != System::PThreadResult::Successful)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexattrInit初始化Mutex失败。"s))
     }
 
     // 成功 = 0
-    if (PthreadMutexAttributeSetType(&mutex.attribute) != System::PthreadResult::Successful)
+    if (PThreadMutexAttributeSetType(&mutex.attribute) != System::PThreadResult::Successful)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexattrSettype初始化Mutex失败。"s))
     }
 
     // 成功 = 0
     // 错误 = EAGAIN, ENOMEM, EPERM, EBUSY, EINVAL
-    if (PthreadMutexInit(&mutex.attribute, &mutex.mutex) != System::PthreadResult::Successful)
+    if (PThreadMutexInit(&mutex.attribute, &mutex.mutex) != System::PThreadResult::Successful)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexInit初始化Mutex失败。"s))
     }
@@ -54,14 +54,14 @@ void CoreTools::ThreadMutex::Delete() noexcept
 
     // 成功 = 0
     // 错误 = EINVAL
-    if (System::PthreadMutexDestroy(&mutex.mutex) != System::PthreadResult::Successful)
+    if (System::PThreadMutexDestroy(&mutex.mutex) != System::PThreadResult::Successful)
     {
         LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("PthreadMutexDestroy销毁Mutex失败"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
     // 成功 = 0
     // 错误 = EBUSY, EINVAL
-    if (PthreadMutexAttributeDestroy(&mutex.attribute) != System::PthreadResult::Successful)
+    if (PThreadMutexAttributeDestroy(&mutex.attribute) != System::PThreadResult::Successful)
     {
         LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("PthreadMutexattrDestroy销毁Mutex失败"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
@@ -73,7 +73,7 @@ void CoreTools::ThreadMutex::Enter()
 
     // 成功 = 0
     // 错误 = EINVAL, EDEADLK
-    if (System::PthreadMutexLock(&mutex.mutex) != System::PthreadResult::Successful)
+    if (System::PThreadMutexLock(&mutex.mutex) != System::PThreadResult::Successful)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("进入Mutex失败。"s))
     }
@@ -85,7 +85,7 @@ void CoreTools::ThreadMutex::Leave() noexcept
 
     // 成功 = 0
     // 错误 = EINVAL, EPERM
-    if (System::PthreadMutexUnlock(&mutex.mutex) != System::PthreadResult::Successful)
+    if (System::PThreadMutexUnlock(&mutex.mutex) != System::PThreadResult::Successful)
     {
         LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("离开Mutex失败"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
@@ -95,7 +95,7 @@ bool CoreTools::ThreadMutex::TryEnter() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (System::PthreadMutexTrylock(&mutex.mutex) == System::PthreadResult::Successful)
+    if (System::PThreadMutexTryLock(&mutex.mutex) == System::PThreadResult::Successful)
         return true;
     else
         return false;

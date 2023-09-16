@@ -1,15 +1,15 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/10 22:25)
+///	版本：0.9.1.4 (2023/08/31 14:44)
 
 #include "FindResourceWindowsTesting.h"
 #include "System/DynamicLink/LoadResourceTools.h"
-#include "System/SystemOutput/Data/LanguageIDData.h"
+#include "System/SystemOutput/Data/LanguageIdData.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -58,9 +58,9 @@ void System::FindResourceWindowsTesting::DoFindResourceTest(const DynamicLinkCha
 
 void System::FindResourceWindowsTesting::DoFindResourceUseLanguageTest(const DynamicLinkCharType* type, WindowsWord name)
 {
-    constexpr LanguageIDData languageIDData{};
+    constexpr LanguageIdData languageIdData{};
 
-    const auto resource = FindResourceInLibrary(GetInstance(), type, MakeIntreSource(name), languageIDData);
+    const auto resource = FindResourceInLibrary(GetInstance(), type, MakeIntreSource(name), languageIdData);
 
     ASSERT_UNEQUAL_NULL_PTR(resource);
 }

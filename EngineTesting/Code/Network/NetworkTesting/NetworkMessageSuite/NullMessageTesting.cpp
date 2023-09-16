@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/11 14:35)
+///	版本：0.9.1.4 (2023/09/16 09:51)
 
 #include "NullMessageTesting.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
@@ -21,11 +21,6 @@
 #include "Network/NetworkMessage/MessageTypeCondition.h"
 #include "Network/NetworkMessage/NullDoubleMessage.h"
 #include "Network/NetworkMessage/NullMessage.h"
-
-namespace Network
-{
-    using TestingTypeSharedPtr = std::shared_ptr<NullMessage>;
-}
 
 Network::NullMessageTesting::NullMessageTesting(const OStreamShared& stream)
     : ParentType{ stream }

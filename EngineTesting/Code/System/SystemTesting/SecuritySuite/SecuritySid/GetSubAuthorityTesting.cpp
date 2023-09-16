@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/29 20:54)
+///	版本：0.9.1.4 (2023/09/01 14:10)
 
 #include "GetSubAuthorityTesting.h"
 #include "System/Security/SecuritySid.h"
@@ -39,9 +39,9 @@ void System::GetSubAuthorityTesting::GetSubAuthorityTest()
     }
 }
 
-void System::GetSubAuthorityTesting::DoGetSubAuthorityTest(SecuritySIDIndentifierAuthority& identifierAuthority)
+void System::GetSubAuthorityTesting::DoGetSubAuthorityTest(SecuritySidIdentifierAuthority& identifierAuthority)
 {
-    auto sid = GetSecuritySID(identifierAuthority);
+    auto sid = GetSecuritySid(identifierAuthority);
 
     auto securityIdentifierSubAuthorityCount = GetSecurityIdentifierSubAuthorityCount(&sid);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(securityIdentifierSubAuthorityCount, "securityIdentifierSubAuthorityCount 是空指针。");
@@ -49,9 +49,9 @@ void System::GetSubAuthorityTesting::DoGetSubAuthorityTest(SecuritySIDIndentifie
     ASSERT_NOT_THROW_EXCEPTION_2(NextSubAuthorityCountTest, securityIdentifierSubAuthorityCount, sid);
 }
 
-System::SecuritySID System::GetSubAuthorityTesting::GetSecuritySID(SecuritySIDIndentifierAuthority& identifierAuthority)
+System::SecuritySid System::GetSubAuthorityTesting::GetSecuritySid(SecuritySidIdentifierAuthority& identifierAuthority)
 {
-    SecuritySID sid{};
+    SecuritySid sid{};
 
     ASSERT_TRUE(InitializeSecurityIdentifier(&sid, &identifierAuthority, subAuthorityCount));
     ASSERT_TRUE(IsSecurityIdentifierValid(&sid));
@@ -59,7 +59,7 @@ System::SecuritySID System::GetSubAuthorityTesting::GetSecuritySID(SecuritySIDIn
     return sid;
 }
 
-void System::GetSubAuthorityTesting::NextSubAuthorityCountTest(WindowsUCharPtr securityIdentifierSubAuthorityCount, SecuritySID& sid)
+void System::GetSubAuthorityTesting::NextSubAuthorityCountTest(WindowsUCharPtr securityIdentifierSubAuthorityCount, SecuritySid& sid)
 {
     if (securityIdentifierSubAuthorityCount != nullptr)
     {
@@ -75,13 +75,13 @@ void System::GetSubAuthorityTesting::NextSubAuthorityCountTest(WindowsUCharPtr s
     }
 }
 
-void System::GetSubAuthorityTesting::GetSecurityIdentifierSubAuthorityTest(const WindowsUChar* nextSubAuthorityCount, const WindowsUChar* securityIdentifierSubAuthorityCount, SecuritySID& sid)
+void System::GetSubAuthorityTesting::GetSecurityIdentifierSubAuthorityTest(const WindowsUChar* nextSubAuthorityCount, const WindowsUChar* securityIdentifierSubAuthorityCount, SecuritySid& sid)
 {
     if (securityIdentifierSubAuthorityCount != nullptr && nextSubAuthorityCount != nullptr)
     {
         ASSERT_EQUAL(*securityIdentifierSubAuthorityCount, *nextSubAuthorityCount);
 
-        auto resultSecurityIdentifierSubAuthority = GetSecurityIdentifierSubAuthority(&sid, *securityIdentifierSubAuthorityCount - 1);
+        const auto resultSecurityIdentifierSubAuthority = GetSecurityIdentifierSubAuthority(&sid, *securityIdentifierSubAuthorityCount - 1);
 
         ASSERT_UNEQUAL_NULL_PTR(resultSecurityIdentifierSubAuthority);
     }

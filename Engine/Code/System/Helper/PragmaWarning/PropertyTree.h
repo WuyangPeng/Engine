@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/16 22:03)
+///	版本：0.9.1.4 (2023/08/29 10:16)
 
 #ifndef SYSTEM_HELPER_PRAGMA_WARNING_PROPERTY_TREE_H
 #define SYSTEM_HELPER_PRAGMA_WARNING_PROPERTY_TREE_H
 
 #include "System/Helper/PragmaWarning.h"
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 
 #include SYSTEM_WARNING_DISABLE(26400)
 #include SYSTEM_WARNING_DISABLE(26409)
@@ -60,8 +60,6 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 
-#undef BOOST_BIND_GLOBAL_PLACEHOLDERS
-
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 #endif  // SYSTEM_HELPER_PRAGMA_WARNING_PROPERTY_TREE_H

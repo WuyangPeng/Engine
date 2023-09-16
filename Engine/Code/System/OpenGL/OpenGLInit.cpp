@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 22:42)
+///	版本：0.9.1.4 (2023/08/29 23:42)
 
 #include "System/SystemExport.h"
 
@@ -15,7 +15,6 @@
 #include "Detail/GL30Extensions.h"
 #include "Detail/GLExtensions.h"
 #include "Detail/GLUtility.h"
-#include "Detail/GlxExtensions.h"
 #include "Detail/WglExtensions.h"
 
 #include <iostream>
@@ -24,11 +23,11 @@ bool System::OpenGLInit()
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return InitWGL();
+    return InitWgl();
 
 #elif defined(SYSTEM_PLATFORM_LINUX)
 
-    return InitGLX();
+    return InitGlx();
 
 #else  // !SYSTEM_PLATFORM_WIN32 && !SYSTEM_PLATFORM_LINUX
 
@@ -39,13 +38,13 @@ bool System::OpenGLInit()
 
 namespace System
 {
-    using FunctiorType = decltype(GetVersionString);
-    void PrintOpenGLInfo(FunctiorType function, const char* describe)
+    using FunctionType = decltype(GetVersionString);
+    void PrintOpenGLInfo(FunctionType function, const char* describe)
     {
         if (function != nullptr)
         {
-            const auto result = function();
-            if (result != nullptr)
+            if (const auto result = function();
+                result != nullptr)
             {
                 std::cout << describe << " = " << result << "\n";
             }
@@ -81,25 +80,23 @@ void System::PrintOpenGLInfo()
 
 void System::PrintWglExtensionsInfo()
 {
-    auto wglExtensions = GetWglExtensionString();
-
-    if (wglExtensions != nullptr)
+    if (const auto wglExtensions = GetWglExtensionString();
+        wglExtensions != nullptr)
     {
-        std::cout << "WGLextensions =\n";
+        std::cout << "WGLExtensions =\n";
 
         PrintExtensionsInfo(wglExtensions);
     }
     else
     {
-        std::cout << "WGLextensions = <null>\n";
+        std::cout << "WGLExtensions = <null>\n";
     }
 }
 
 std::string System::GetOpenGLVendorString()
 {
-    auto result = GetVendorString();
-
-    if (result != nullptr)
+    if (const auto result = GetVendorString();
+        result != nullptr)
     {
         return result;
     }
@@ -111,9 +108,8 @@ std::string System::GetOpenGLVendorString()
 
 std::string System::GetOpenGLVersionString()
 {
-    auto result = GetVersionString();
-
-    if (result != nullptr)
+    if (const auto result = GetVersionString();
+        result != nullptr)
     {
         return result;
     }
@@ -125,9 +121,8 @@ std::string System::GetOpenGLVersionString()
 
 std::string System::GetOpenGLRendererString()
 {
-    auto result = GetRendererString();
-
-    if (result != nullptr)
+    if (const auto result = GetRendererString();
+        result != nullptr)
     {
         return result;
     }
@@ -139,9 +134,8 @@ std::string System::GetOpenGLRendererString()
 
 std::string System::GetOpenGLShadingLanguageVersion()
 {
-    auto result = GetShadingLanguageVersion();
-
-    if (result != nullptr)
+    if (const auto result = GetShadingLanguageVersion();
+        result != nullptr)
     {
         return result;
     }

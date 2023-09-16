@@ -221,10 +221,10 @@ bool Rendering::OpenGLTextureSingle::CopyGpuToCpu(int level)
     auto const textureTarget = GetTarget();
     System::SetGLBindTexture(textureTarget, GetGLHandle());
 
-    System::SetGLBindBuffer(System::BindBuffer::PixePackBuffer, pixBuffer);
+    System::SetGLBindBuffer(System::BindBuffer::PixelUnpackBuffer, pixBuffer);
     System::GetGLTexturesImage(textureTarget, level, GetExternalFormat(), GetExternalType(), nullptr);
-    System::GetGLBufferSubData(System::BindBuffer::PixePackBuffer, 0, numBytes, &*data.GetCurrent());
-    System::SetGLBindBuffer(System::BindBuffer::PixePackBuffer, 0);
+    System::GetGLBufferSubData(System::BindBuffer::PixelPackBuffer, 0, numBytes, &*data.GetCurrent());
+    System::SetGLBindBuffer(System::BindBuffer::PixelPackBuffer, 0);
 
     System::SetGLBindTexture(textureTarget, 0);
 
@@ -339,9 +339,9 @@ void Rendering::OpenGLTextureSingle::CreateStaging()
                 pixBuffer = System::GetGLGenBuffers();
                 impl->SetLevelPixelPackBuffer(level, pixBuffer);
 
-                System::SetGLBindBuffer(System::BindBuffer::PixePackBuffer, pixBuffer);
-                System::SetGLBufferData(System::BindBuffer::PixePackBuffer, numBytes, nullptr, usage);
-                System::SetGLBindBuffer(System::BindBuffer::PixePackBuffer, 0);
+                System::SetGLBindBuffer(System::BindBuffer::PixelPackBuffer, pixBuffer);
+                System::SetGLBufferData(System::BindBuffer::PixelPackBuffer, numBytes, nullptr, usage);
+                System::SetGLBindBuffer(System::BindBuffer::PixelPackBuffer, 0);
             }
         }
     }

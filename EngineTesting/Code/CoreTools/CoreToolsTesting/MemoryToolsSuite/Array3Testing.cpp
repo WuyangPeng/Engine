@@ -53,12 +53,12 @@ void CoreTools::Array3Testing::InitArray(ArrayType& array3)
         {
             for (auto bound0Index = 0; bound0Index < bound0; ++bound0Index)
             {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
                 array3[bound2Index][bound1Index][bound0Index] = count;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
                 ++count;
             }

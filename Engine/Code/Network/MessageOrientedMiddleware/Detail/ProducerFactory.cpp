@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 17:01)
+///	版本：0.9.1.4 (2023/09/15 17:33)
 
 #include "Network/NetworkExport.h"
 
@@ -23,7 +23,7 @@ Network::ProducerFactory::ProducerSharedPtr Network::ProducerFactory::Create(con
     {
 #ifdef NETWORK_USE_ACTIVE_MQ
 
-        case WrappersStrategy::ActiveMQ:
+        case WrappersStrategy::ActiveMq:
             return std::make_shared<ActiveMQProducer>(configurationStrategy);
 
 #endif  // NETWORK_USE_ACTIVE_MQ

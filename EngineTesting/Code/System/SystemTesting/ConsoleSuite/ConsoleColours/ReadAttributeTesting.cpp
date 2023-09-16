@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/03 21:55)
+///	版本：0.9.1.4 (2023/08/31 16:38)
 
 #include "ReadAttributeTesting.h"
-#include "System/Console/ConsoleColours.h"
+#include "System/Console/ConsoleColour.h"
 #include "System/Console/ConsoleHandle.h"
-#include "System/Console/Using/ConsoleColoursUsing.h"
+#include "System/Console/Using/ConsoleColourUsing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -65,9 +65,9 @@ void System::ReadAttributeTesting::DoReadAttributeTest(StandardHandle standardHa
     ASSERT_NOT_THROW_EXCEPTION_1(AttributeResultTest, attribute);
 }
 
-void System::ReadAttributeTesting::AttributeResultTest(AttributeType attribute)
+void System::ReadAttributeTesting::AttributeResultTest(const AttributeType& attribute)
 {
-    for (auto word : attribute)
+    for (const auto word : attribute)
     {
         // 根据TextColour、BackgroundColour和ConsoleCommon枚举的实际值所占的位得出0x000F、0x00F0和0xFF00的值。
         ASSERT_TRUE(HasTextColour(UnderlyingCastEnum<TextColour>(word & textColourMask)));

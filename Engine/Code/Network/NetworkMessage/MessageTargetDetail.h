@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 09:51)
+///	版本：0.9.1.4 (2023/09/04 16:03)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_TARGET_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_TARGET_DETAIL_H
@@ -13,11 +13,7 @@
 #include "MessageTarget.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/FileManager/Endian.h"
-#include "CoreTools/Helper/Assertion/NetworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
 template <typename T>
@@ -105,12 +101,12 @@ void Network::MessageTarget::WriteEnumWithoutNumber(int32_t elementsNumber, cons
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         WriteEnum(data[i]);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 

@@ -48,7 +48,7 @@ int CoreTools::WideCharConversionMultiByte::GetConversionLength()
 
     if (isUtf8)
     {
-        return System::WideCharConversionUTF8(source.data(), destSize, multiByte, targetSize);
+        return System::WideCharConversionUtf8(source.data(), destSize, multiByte, targetSize);
     }
     else
     {
@@ -98,10 +98,10 @@ std::string CoreTools::WideCharConversionMultiByte::GetMultiByteRepresentation()
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     return std::string{ target.data(), target.data() + lengthOfMultiByteString - 1 };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }

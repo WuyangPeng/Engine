@@ -1,14 +1,13 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/30 14:45)
-///	引擎测试版本：0.8.1.3 (2022/10/14 21:22)
+///	版本：0.9.1.4 (2023/08/31 16:13)
 
-#include "StrcatTesting.h"
+#include "StrCatTesting.h"
 #include "System/CharacterString/FormatStringDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
@@ -16,31 +15,31 @@
 
 using namespace std::literals;
 
-System::StrcatTesting::StrcatTesting(const OStreamShared& stream)
+System::StrCatTesting::StrCatTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, StrcatTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, StrCatTesting)
 
-void System::StrcatTesting::DoRunUnitTest()
+void System::StrCatTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void System::StrcatTesting::MainTest()
+void System::StrCatTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(StrcatTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(StrCatTest);
 }
 
-void System::StrcatTesting::StrcatTest()
+void System::StrCatTesting::StrCatTest()
 {
     const auto result = "2strcat4"s;
 
     BufferType buffer{ '2' };
 
-    ASSERT_TRUE(Strcat(buffer.data(), bufferSize, "strcat4"));
+    ASSERT_TRUE(StrCat(buffer.data(), bufferSize, "strcat4"));
 
     ASSERT_EQUAL(std::string{ buffer.data() }, result);
 }

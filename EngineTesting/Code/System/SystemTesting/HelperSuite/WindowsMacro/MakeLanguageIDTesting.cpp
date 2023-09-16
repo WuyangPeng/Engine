@@ -1,69 +1,69 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/17 18:12)
+///	版本：0.9.1.4 (2023/09/01 09:50)
 
-#include "MakeLanguageIDTesting.h"
+#include "MakeLanguageIdTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::MakeLanguageIDTesting::MakeLanguageIDTesting(const OStreamShared& stream)
+System::MakeLanguageIdTesting::MakeLanguageIdTesting(const OStreamShared& stream)
     : ParentType{ stream },
       randomEngine{ GetEngineRandomSeed() },
-      primaryDistribution{ 0x0, maxPrimaryID },
-      subDistribution{ 0x0, maxSubID }
+      primaryDistribution{ 0x0, maxPrimaryId },
+      subDistribution{ 0x0, maxSubId }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, MakeLanguageIDTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, MakeLanguageIdTesting)
 
-void System::MakeLanguageIDTesting::DoRunUnitTest()
+void System::MakeLanguageIdTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void System::MakeLanguageIDTesting::MainTest()
+void System::MakeLanguageIdTesting::MainTest()
 {
-    ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(MakeLanguageIDTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(MakeMaxLanguageIDTest);
+    ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(MakeLanguageIdTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MakeMaxLanguageIdTest);
 }
 
-bool System::MakeLanguageIDTesting::MakeLanguageIDTest()
+bool System::MakeLanguageIdTesting::MakeLanguageIdTest()
 {
-    const auto primaryID = primaryDistribution(randomEngine);
-    const auto subID = subDistribution(randomEngine);
+    const auto primaryId = primaryDistribution(randomEngine);
+    const auto subId = subDistribution(randomEngine);
 
-    const auto languageID = MakeLanguageID(primaryID, subID);
-    const auto expectationLanguageID = boost::numeric_cast<WindowsWord>((subID << maxPrimaryShiftNum) | primaryID);
+    const auto languageId = MakeLanguageId(primaryId, subId);
+    const auto expectationLanguageId = boost::numeric_cast<WindowsWord>((subId << maxPrimaryShiftNum) | primaryId);
 
-    ASSERT_EQUAL(languageID, expectationLanguageID);
+    ASSERT_EQUAL(languageId, expectationLanguageId);
 
-    const auto reversePrimaryID = GetPrimaryLanguageID(languageID);
-    const auto reverseSubID = GetSubLanguageID(languageID);
+    const auto reversePrimaryId = GetPrimaryLanguageId(languageId);
+    const auto reverseSubId = GetSubLanguageId(languageId);
 
-    ASSERT_EQUAL(reversePrimaryID, primaryID);
-    ASSERT_EQUAL(reverseSubID, subID);
+    ASSERT_EQUAL(reversePrimaryId, primaryId);
+    ASSERT_EQUAL(reverseSubId, subId);
 
     return true;
 }
 
-void System::MakeLanguageIDTesting::MakeMaxLanguageIDTest()
+void System::MakeLanguageIdTesting::MakeMaxLanguageIdTest()
 {
-    constexpr auto languageID = MakeLanguageID(maxPrimaryID, maxSubID);
-    constexpr auto expectationLanguageID = (maxSubID << maxPrimaryShiftNum) | maxPrimaryID;
+    constexpr auto languageId = MakeLanguageId(maxPrimaryId, maxSubId);
+    constexpr auto expectationLanguageId = (maxSubId << maxPrimaryShiftNum) | maxPrimaryId;
 
-    ASSERT_EQUAL(languageID, expectationLanguageID);
+    ASSERT_EQUAL(languageId, expectationLanguageId);
 
-    constexpr auto primaryID = GetPrimaryLanguageID(languageID);
-    constexpr auto subID = GetSubLanguageID(languageID);
+    constexpr auto primaryId = GetPrimaryLanguageId(languageId);
+    constexpr auto subId = GetSubLanguageId(languageId);
 
-    ASSERT_EQUAL(primaryID, maxPrimaryID);
-    ASSERT_EQUAL(subID, maxSubID);
+    ASSERT_EQUAL(primaryId, maxPrimaryId);
+    ASSERT_EQUAL(subId, maxSubId);
 }

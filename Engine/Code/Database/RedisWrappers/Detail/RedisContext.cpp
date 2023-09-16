@@ -26,12 +26,12 @@ Database::RedisContext::RedisContext(const ConfigurationStrategy& configurationS
     }
     else if (redisContext->err)
     {
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26485)
 
         THROW_EXCEPTION(SYSTEM_TEXT("redis connect 失败。") + CoreTools::StringConversion::MultiByteConversionStandard(redisContext->errstr))
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
     }
 
     DATABASE_SELF_CLASS_IS_VALID_9;

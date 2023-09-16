@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/15 19:13)
+///	版本：0.9.1.4 (2023/08/31 14:29)
 
 #include "OpenGLErrorDescriptionTesting.h"
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
@@ -52,7 +52,7 @@ void System::OpenGLErrorDescriptionTesting::OpenGLErrorDescriptionTest()
     error = GetOpenGLErrorDescription(OpenGLErrorCode::OutOfMemory);
     ASSERT_EQUAL(error, "GL_OUT_OF_MEMORY");
 
-    error = GetOpenGLErrorDescription(OpenGLErrorCode::InvalidFramebufferOperation);
+    error = GetOpenGLErrorDescription(OpenGLErrorCode::InvalidFrameBufferOperation);
     ASSERT_EQUAL(error, "GL_INVALID_FRAMEBUFFER_OPERATION");
 
     error = GetOpenGLErrorDescription(OpenGLErrorCode::ContextLost);

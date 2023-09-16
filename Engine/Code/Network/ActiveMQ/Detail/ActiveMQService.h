@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/10 13:35)
+///	版本：0.9.1.4 (2023/09/15 16:26)
 
 #ifndef NETWORK_MESSAGE_ACTIVE_MQ_ACTIVE_MQ_SERVICE_H
 #define NETWORK_MESSAGE_ACTIVE_MQ_ACTIVE_MQ_SERVICE_H
 
 #include "Network/NetworkDll.h"
 
-#include "ActiveMQProducerSession.h"
 #include "System/Helper/PragmaWarning/ActiveMQ.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 
@@ -24,6 +23,7 @@ namespace Network
     {
     public:
         using ClassType = ActiveMQService;
+
         using ConnectionSharedPtr = std::shared_ptr<cms::Connection>;
 
     public:

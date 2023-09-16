@@ -219,14 +219,14 @@ void Rendering::TextureColourTesting::R8G8B8Test()
 
     if (ptr != nullptr)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         ASSERT_EQUAL(ptr[0], 22u);
         ASSERT_EQUAL(ptr[1], 11u);
         ASSERT_EQUAL(ptr[2], 33u);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 
@@ -271,7 +271,7 @@ void Rendering::TextureColourTesting::A8R8G8B8Test()
 
     if (ptr != nullptr)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         ASSERT_EQUAL(ptr[0], 11u);
@@ -279,7 +279,7 @@ void Rendering::TextureColourTesting::A8R8G8B8Test()
         ASSERT_EQUAL(ptr[2], 22u);
         ASSERT_EQUAL(ptr[3], 233u);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 
@@ -324,7 +324,7 @@ void Rendering::TextureColourTesting::A8B8G8R8Test()
 
     if (ptr != nullptr)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         ASSERT_EQUAL(ptr[0], 11u);
@@ -332,7 +332,7 @@ void Rendering::TextureColourTesting::A8B8G8R8Test()
         ASSERT_EQUAL(ptr[2], 22u);
         ASSERT_EQUAL(ptr[3], 8u);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 
@@ -354,12 +354,12 @@ void Rendering::TextureColourTesting::L16Test()
 
     if (ptr != nullptr)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         ASSERT_EQUAL(ptr[0], 22u);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 
@@ -384,13 +384,13 @@ void Rendering::TextureColourTesting::G16R16Test()
 
     if (ptr != nullptr)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         ASSERT_EQUAL(ptr[0], 11u);
         ASSERT_EQUAL(ptr[1], 56u);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 
@@ -435,7 +435,7 @@ void Rendering::TextureColourTesting::A16B16G16R16Test()
 
     if (ptr != nullptr)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         ASSERT_EQUAL(ptr[0], 11u);
@@ -443,7 +443,7 @@ void Rendering::TextureColourTesting::A16B16G16R16Test()
         ASSERT_EQUAL(ptr[2], 322u);
         ASSERT_EQUAL(ptr[3], 8u);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 
@@ -477,12 +477,12 @@ void Rendering::TextureColourTesting::R32FTest()
 
     if (ptr != nullptr)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         ASSERT_APPROXIMATE(ptr[0], 0.1f, 1e-8f);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 
@@ -507,13 +507,13 @@ void Rendering::TextureColourTesting::G32R32FTest()
 
     if (ptr != nullptr)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         ASSERT_APPROXIMATE(ptr[0], 0.2f, 1e-8f);
         ASSERT_APPROXIMATE(ptr[1], 0.5f, 1e-8f);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 
@@ -558,7 +558,7 @@ void Rendering::TextureColourTesting::A32B32G32R32FTest()
 
     if (ptr != nullptr)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         ASSERT_APPROXIMATE(ptr[0], 1.0f, 1e-8f);
@@ -566,7 +566,7 @@ void Rendering::TextureColourTesting::A32B32G32R32FTest()
         ASSERT_APPROXIMATE(ptr[2], 0.1f, 1e-8f);
         ASSERT_APPROXIMATE(ptr[3], 0.01f, 1e-8f);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 

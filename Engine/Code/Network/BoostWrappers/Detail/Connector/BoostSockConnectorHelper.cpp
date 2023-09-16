@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:29)
+///	版本：0.9.1.4 (2023/09/15 17:23)
 
 #include "Network/NetworkExport.h"
 
@@ -27,12 +27,10 @@ namespace
     constexpr auto asynchronousConnectorSuccess = SYSTEM_TEXT("异步连接成功，地址："sv);
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
 void Network::BoostSockConnectorHelper::EventFunction(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const AddressData& addressData)
 {
+    System::UnusedFunction(eventInterface);
+
     CoreTools::CallbackParameters callbackParameters{ System::EnumCastUnderlying(SocketManagerPosition::Count) };
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncConnect));
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::Boost));
@@ -49,8 +47,6 @@ void Network::BoostSockConnectorHelper::EventFunction(const ErrorCodeType& error
 
     PrintConnectorSuccessLog(asynchronousConnectorSuccess.data(), addressData);
 }
-
-#include STSTEM_WARNING_POP
 
 void Network::BoostSockConnectorHelper::PrintConnectorLog(const String& prefix, const AddressData& addressData)
 {

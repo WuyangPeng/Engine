@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/29 15:57)
+///	版本：0.9.1.4 (2023/09/01 14:08)
 
 #include "QuerySecurityAccessMaskTesting.h"
 #include "System/Security/Flags/CreateSecurityFlags.h"
@@ -16,11 +16,11 @@
 
 System::QuerySecurityAccessMaskTesting::QuerySecurityAccessMaskTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      securityRequestedInformations{ SecurityRequestedInformation::Owner,
-                                     SecurityRequestedInformation::Group,
-                                     SecurityRequestedInformation::Dacl,
-                                     SecurityRequestedInformation::Sacl,
-                                     SecurityRequestedInformation::Label }
+      securityRequestedInformationContainer{ SecurityRequestedInformation::Owner,
+                                             SecurityRequestedInformation::Group,
+                                             SecurityRequestedInformation::Dacl,
+                                             SecurityRequestedInformation::Sacl,
+                                             SecurityRequestedInformation::Label }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -39,16 +39,16 @@ void System::QuerySecurityAccessMaskTesting::MainTest()
 
 void System::QuerySecurityAccessMaskTesting::QuerySecurityAccessMaskTest()
 {
-    for (auto SecurityRequestedInformation : securityRequestedInformations)
+    for (auto securityRequestedInformation : securityRequestedInformationContainer)
     {
-        ASSERT_NOT_THROW_EXCEPTION_1(DoQuerySecurityAccessMaskTest, SecurityRequestedInformation);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoQuerySecurityAccessMaskTest, securityRequestedInformation);
     }
 }
 
-void System::QuerySecurityAccessMaskTesting::DoQuerySecurityAccessMaskTest(SecurityRequestedInformation SecurityRequestedInformation)
+void System::QuerySecurityAccessMaskTesting::DoQuerySecurityAccessMaskTest(SecurityRequestedInformation securityRequestedInformation)
 {
     WindowsDWord desiredAccess{ 0 };
 
-    QuerySystemSecurityAccessMask(SecurityRequestedInformation, &desiredAccess);
+    QuerySystemSecurityAccessMask(securityRequestedInformation, &desiredAccess);
     ASSERT_LESS(0u, desiredAccess);
 }

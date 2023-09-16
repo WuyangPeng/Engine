@@ -5,6 +5,6 @@
   <ItemDefinitionGroup>
     <Link>
       <AdditionalLibraryDirectories>$(LibsEnvironmentX64Lib);$(LibsEnvironmentX64ReleaseLib);$(EngineX64ReleaseLib);$(GameX64ReleaseLib);$(TheLastOverlordX64ReleaseLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
+    </Link> 
   </ItemDefinitionGroup>
 </Project>

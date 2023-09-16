@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 13:32)
+///	版本：0.9.1.4 (2023/09/16 10:49)
 
 #ifndef NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_SOCK_ACCEPTOR_ASYNCHRONOUS_TESTING_H
 #define NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_SOCK_ACCEPTOR_ASYNCHRONOUS_TESTING_H
@@ -26,31 +26,10 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        using TestFunction = void (ClassType::*)();
-
-    private:
-        using AcceptFunction = void (ClassType::*)(TestingType& sockAcceptor, const TestSocketEventSharedPtr& testSocketManager);
-
     private:
         void DoRunUnitTest() override;
 
-        void MainTest();
-
-        void AcceptorTest();
-
-        void AsynchronousAcceptTest();
-
-        void AsynchronousAccept0Test();
-        void AsynchronousAccept1Test();
-        void AsynchronousAccept2Test();
-        void AsynchronousAccept3Test();
-        void AsynchronousAccept4Test();
-        void AsynchronousAccept5Test();
-
-        void AsynchronousAccept(TestingType& sockAcceptor, AcceptFunction acceptFunction);
-
-        void AsynchronousAcceptNoUseAddress(TestingType& sockAcceptor, const TestSocketEventSharedPtr& testSocketManager);
-        void AsynchronousAcceptUseAddress(TestingType& sockAcceptor, const TestSocketEventSharedPtr& testSocketManager);
+        void MainTest() noexcept;
     };
 }
 

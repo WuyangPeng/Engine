@@ -28,13 +28,13 @@ const T* CoreTools::PropertyBase<Id, T>::Holder() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26490)
 
     return reinterpret_cast<const T*>(reinterpret_cast<const uint8_t*>(this) - offset);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 #ifdef OPEN_CLASS_INVARIANT

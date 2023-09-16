@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/02 14:15)
+///	版本：0.9.1.4 (2023/08/31 16:18)
 
 #include "CompareStringUseLocaleTestingBase.h"
 #include "System/CharacterString/Flags/StringConversionFlags.h"
@@ -42,7 +42,7 @@ void System::CompareStringUseLocaleTestingBase::RandomShuffleCompares(std::defau
 {
     SYSTEM_CLASS_IS_VALID_1;
 
-    shuffle(compares.begin(), compares.end(), randomEngine);
+    std::ranges::shuffle(compares, randomEngine);
 }
 
 System::Compares System::CompareStringUseLocaleTestingBase::GetCompares(size_t index) const

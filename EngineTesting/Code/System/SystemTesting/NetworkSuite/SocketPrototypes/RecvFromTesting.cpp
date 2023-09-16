@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/10 21:45)
+///	版本：0.9.1.4 (2023/09/01 10:58)
 
 #include "RecvFromTesting.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
@@ -71,14 +71,14 @@ void System::RecvFromTesting::DoRecvFromTest(WinSocket socketHandle)
         index += recvCount;
     }
 
-    std::string result{ buffer.data() };
+    const std::string result{ buffer.data() };
 
     ASSERT_EQUAL(result, "Hello");
 }
 
 System::WinSockInternetAddress System::RecvFromTesting::BindInit(WinSocket socketHandle)
 {
-    auto address = GetAddress(GetUdpPort(), GetAddress());
+    const auto address = GetAddress(GetUdpPort(), GetAddress());
 
     ASSERT_TRUE_FAILURE_THROW(Bind(socketHandle, &address), "Bind Error");
 

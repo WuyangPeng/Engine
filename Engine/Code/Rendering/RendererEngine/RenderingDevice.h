@@ -31,7 +31,7 @@ namespace Rendering
     public:
         DELAY_COPY_UNSHARED_TYPE_DECLARE(RenderingDevice);
 
-        using WindowsHDC = System::WindowsHDC;
+        using WindowsHDC = System::WindowsHdc;
         using OpenGLHglrc = System::OpenGLHglrc;
         using WindowsHWnd = System::WindowsHWnd;
         using RenderingDeviceSharedPtr = std::shared_ptr<RenderingDeviceImpl>;
@@ -52,6 +52,7 @@ namespace Rendering
         void SwapBuffers(int syncInterval);
         void ResetSize();
         void InitDevice();
+        void Release();
 
         void SetViewport(const Viewport& viewport);
         NODISCARD Viewport GetViewport() const;

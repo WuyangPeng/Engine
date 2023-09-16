@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/12 19:25)
+///	版本：0.9.1.4 (2023/08/28 15:51)
 
 #ifndef SYSTEM_CHARACTER_STRING_STRING_CONVERSION_FLAGS_H
 #define SYSTEM_CHARACTER_STRING_STRING_CONVERSION_FLAGS_H
@@ -40,13 +40,13 @@ namespace System
         JapaneseRadicalStroke = SORT_JAPANESE_RADICALSTROKE,
 
         ChineseBig5 = SORT_CHINESE_BIG5,
-        ChinesePRCP = SORT_CHINESE_PRCP,
+        ChinesePrcp = SORT_CHINESE_PRCP,
         ChineseUnicode = SORT_CHINESE_UNICODE,
         ChinesePRC = SORT_CHINESE_PRC,
         ChineseBopomofo = SORT_CHINESE_BOPOMOFO,
         ChineseRadicalStroke = SORT_CHINESE_RADICALSTROKE,
 
-        KoreanKSC = SORT_KOREAN_KSC,
+        KoreanKsc = SORT_KOREAN_KSC,
         KoreanUnicode = SORT_KOREAN_UNICODE,
 
         GermanPhoneBook = SORT_GERMAN_PHONE_BOOK,
@@ -64,7 +64,7 @@ namespace System
         UserDefault = LOCALE_USER_DEFAULT,
         CustomDefault = LOCALE_CUSTOM_DEFAULT,
         CustomUnspecified = LOCALE_CUSTOM_UNSPECIFIED,
-        CustomUIDefault = LOCALE_CUSTOM_UI_DEFAULT,
+        CustomUiDefault = LOCALE_CUSTOM_UI_DEFAULT,
         Neutral = LOCALE_NEUTRAL,
         Invariant = LOCALE_INVARIANT,
     };
@@ -127,13 +127,13 @@ namespace System
         JapaneseRadicalStroke = 0x4,
 
         ChineseBig5 = 0x0,
-        ChinesePRCP = 0x0,
+        ChinesePrcp = 0x0,
         ChineseUnicode = 0x1,
         ChinesePRC = 0x2,
         ChineseBopomofo = 0x3,
         ChineseRadicalStroke = 0x4,
 
-        KoreanKSC = 0x0,
+        KoreanKsc = 0x0,
         KoreanUnicode = 0x1,
 
         GermanPhoneBook = 0x1,
@@ -145,18 +145,18 @@ namespace System
         GeorgianModern = 0x1,
     };
 
-    static constexpr auto gLanguageSystemDefault = MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::SysDefault);
-    static constexpr auto gLanguageUserDefault = MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::Default);
+    static constexpr auto gLanguageSystemDefault = MakeLanguageId(PrimaryLanguage::Neutral, SubLanguage::SysDefault);
+    static constexpr auto gLanguageUserDefault = MakeLanguageId(PrimaryLanguage::Neutral, SubLanguage::Default);
 
     enum class LanguageLocale
     {
-        SystemDefault = MakeLanguageCID(gLanguageSystemDefault, LocaleSort::Default),
-        UserDefault = MakeLanguageCID(gLanguageUserDefault, LocaleSort::Default),
-        CustomDefault = MakeLanguageCID(MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::CustomDefault), LocaleSort::Default),
-        CustomUnspecified = MakeLanguageCID(MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::CustomUnspecified), LocaleSort::Default),
-        CustomUIDefault = MakeLanguageCID(MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::UICustomDefault), LocaleSort::Default),
-        Neutral = MakeLanguageCID(MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::Neutral), LocaleSort::Default),
-        Invariant = MakeLanguageCID(MakeLanguageID(PrimaryLanguage::Invariant, SubLanguage::Neutral), LocaleSort::Default),
+        SystemDefault = MakeLanguageCid(gLanguageSystemDefault, LocaleSort::Default),
+        UserDefault = MakeLanguageCid(gLanguageUserDefault, LocaleSort::Default),
+        CustomDefault = MakeLanguageCid(MakeLanguageId(PrimaryLanguage::Neutral, SubLanguage::CustomDefault), LocaleSort::Default),
+        CustomUnspecified = MakeLanguageCid(MakeLanguageId(PrimaryLanguage::Neutral, SubLanguage::CustomUnspecified), LocaleSort::Default),
+        CustomUiDefault = MakeLanguageCid(MakeLanguageId(PrimaryLanguage::Neutral, SubLanguage::UICustomDefault), LocaleSort::Default),
+        Neutral = MakeLanguageCid(MakeLanguageId(PrimaryLanguage::Neutral, SubLanguage::Neutral), LocaleSort::Default),
+        Invariant = MakeLanguageCid(MakeLanguageId(PrimaryLanguage::Invariant, SubLanguage::Neutral), LocaleSort::Default),
     };
 
     enum class Compares

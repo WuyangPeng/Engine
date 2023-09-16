@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/10 16:13)
+///	版本：0.9.1.4 (2023/09/12 17:50)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_ADAPTER_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_ADAPTER_DETAIL_H
@@ -22,7 +22,7 @@ CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::MultiArrayAdapter(T* conta
 {
     if (container == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("容器必须存在。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("容器必须存在。"))
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -80,12 +80,12 @@ const T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator[](int in
         THROW_EXCEPTION(SYSTEM_TEXT("索引无效。"));
     }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     return container[index];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename T, bool OrderLToR, int... Sizes>
@@ -103,12 +103,12 @@ void CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::Fill(const T& value) 
 
     for (auto i = 0; i < this->GetSize(); ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         container[i] = value;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 
@@ -118,7 +118,12 @@ const T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator()(IndexT
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
     return container[this->GetIndex(tuple...)];
+
+#include SYSTEM_WARNING_POP
 }
 
 template <typename T, bool OrderLToR, int... Sizes>
@@ -127,33 +132,75 @@ T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator()(IndexTypes..
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     return container[this->GetIndex(tuple...)];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename T, bool OrderLToR, int... Sizes>
-const T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator()(const std::array<int, sizeof...(Sizes)>& coordinate) const noexcept
+const T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator()(const std::array<int, sizeof...(Sizes)>& coordinate) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return container[this->GetIndex(coordinate)];
-}
-
-template <typename T, bool OrderLToR, int... Sizes>
-T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator()(const std::array<int, sizeof...(Sizes)>& coordinate) noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     return container[this->GetIndex(coordinate)];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
+}
+
+template <typename T, bool OrderLToR, int... Sizes>
+T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator()(const std::array<int, sizeof...(Sizes)>& coordinate)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+    return container[this->GetIndex(coordinate)];
+
+#include SYSTEM_WARNING_POP
+}
+
+template <typename T, bool OrderLToR, int... Sizes>
+bool CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator==(const MultiArrayAdapter& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    for (auto i = 0; i < this->GetSize(); ++i)
+    {
+        if (container[i] != rhs.container[i])
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+template <typename T, bool OrderLToR, int... Sizes>
+bool CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator<(const MultiArrayAdapter& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    for (auto i = 0; i < this->GetSize(); ++i)
+    {
+        if (container[i] < rhs.container[i])
+        {
+            return true;
+        }
+
+        if (rhs.container[i] < container[i])
+        {
+            return false;
+        }
+    }
+
+    return false;
 }
 
 template <typename T, bool OrderLToR>
@@ -221,12 +268,12 @@ const T& CoreTools::MultiArrayAdapter<T, OrderLToR>::operator[](int index) const
         THROW_EXCEPTION(SYSTEM_TEXT("索引无效。"));
     }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     return container[index];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename T, bool OrderLToR>
@@ -244,12 +291,12 @@ void CoreTools::MultiArrayAdapter<T, OrderLToR>::Fill(const T& value) noexcept
 
     for (auto i = 0; i < this->GetSize(); ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         container[i] = value;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 
@@ -268,12 +315,12 @@ T& CoreTools::MultiArrayAdapter<T, OrderLToR>::operator()(IndexTypes... tuple)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     return container[this->GetIndex(tuple...)];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename T, bool OrderLToR>
@@ -289,12 +336,64 @@ T& CoreTools::MultiArrayAdapter<T, OrderLToR>::operator()(const SizeType& coordi
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     return container[this->GetIndex(coordinate)];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
+}
+
+template <typename T, bool OrderLToR>
+bool CoreTools::MultiArrayAdapter<T, OrderLToR>::operator==(const MultiArrayAdapter& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    if (ParentType::operator!=(rhs))
+    {
+        return false;
+    }
+
+    for (auto i = 0; i < this->GetSize(); ++i)
+    {
+        if (container[i] != rhs.container[i])
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+template <typename T, bool OrderLToR>
+bool CoreTools::MultiArrayAdapter<T, OrderLToR>::operator<(const MultiArrayAdapter& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    if (ParentType::operator<(rhs))
+    {
+        return true;
+    }
+
+    if (ParentType::operator>(rhs))
+    {
+        return false;
+    }
+
+    for (auto i = 0; i < this->GetSize(); ++i)
+    {
+        if (container[i] < rhs.container[i])
+        {
+            return true;
+        }
+
+        if (rhs.container[i] < container[i])
+        {
+            return false;
+        }
+    }
+
+    return false;
 }
 
 #endif  // CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_ADAPTER_DETAIL_H

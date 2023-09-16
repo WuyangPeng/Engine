@@ -33,6 +33,8 @@ namespace CoreTools
         void GetIndexTest();
         void GetIndexArrayTest();
         void CoordinateTest();
+        void OrderLToRTest();
+        void OrderRToLTest();
     };
 }
 

@@ -38,6 +38,8 @@ namespace CoreTools
         void OrderLRoTTest();
         void OrderLToRConstantTest();
         void OrderLRoTConstantTest();
+
+        void MultiArrayAdapterTest();
     };
 }
 

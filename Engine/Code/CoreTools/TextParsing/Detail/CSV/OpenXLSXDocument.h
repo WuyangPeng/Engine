@@ -18,7 +18,7 @@
 #include <string>
 #include <vector>
 
-#ifdef CORE_TOOLS_USE_OPENXLSX
+#ifdef CORE_TOOLS_USE_OPEN_XLSX
 
 namespace CoreTools
 {
@@ -50,6 +50,6 @@ namespace CoreTools
     };
 }
 
-#endif  // CORE_TOOLS_USE_OPENXLSX
+#endif  // CORE_TOOLS_USE_OPEN_XLSX
 
 #endif  // CORE_TOOLS_TEXT_PARSING_OPEN_XLSX_DOCUMENT_H

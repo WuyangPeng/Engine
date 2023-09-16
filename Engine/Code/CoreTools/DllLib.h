@@ -16,7 +16,7 @@
 
 #if defined(TCRE_USE_MSVC)
 
-    #ifdef CORE_TOOLS_USE_OPENXLSX
+    #ifdef CORE_TOOLS_USE_OPEN_XLSX
 
         #ifdef _DEBUG
 
@@ -28,7 +28,7 @@
 
         #endif  // _DEBUG
 
-    #endif  // CORE_TOOLS_USE_OPENXLSX
+    #endif  // CORE_TOOLS_USE_OPEN_XLSX
 
     #pragma comment(lib, "miniz.lib")
 

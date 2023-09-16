@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/19 20:52)
+///	版本：0.9.1.4 (2023/08/29 17:00)
 
 #ifndef SYSTEM_MEMORY_TOOLS_MEMORY_HELPER_H
 #define SYSTEM_MEMORY_TOOLS_MEMORY_HELPER_H
@@ -13,7 +13,6 @@
 #include "System/SystemDll.h"
 
 #include "Fwd/MemoryToolsFlagsFwd.h"
-#include "Using/MemoryHelperUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
 // 内存工具函数。
@@ -25,9 +24,11 @@ namespace System
     void SYSTEM_DEFAULT_DECLARE FreeMemory(void* memory) noexcept;
 
     template <typename T>
+    requires(std::is_trivial_v<T> && std::is_standard_layout_v<T>)
     void FillMemoryToZero(T& value) noexcept;
 
     template <typename T>
+    requires(std::is_nothrow_default_constructible_v<T> && std::is_nothrow_copy_constructible_v<T> && std::is_nothrow_move_constructible_v<T>)
     NODISCARD T GetWindowsStructDefaultSize() noexcept;
 }
 

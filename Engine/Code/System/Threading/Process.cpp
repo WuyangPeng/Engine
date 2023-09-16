@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/30 13:22)
+///	版本：0.9.1.4 (2023/08/30 18:29)
 
 #include "System/SystemExport.h"
 
@@ -18,11 +18,13 @@
 #include "System/Windows/Engineering.h"
 #include "System/Windows/WindowsSystem.h"
 
+#include <gsl/util>
+
 bool System::CreateSystemProcess(const String& applicationName)
 {
     const auto fullName = GetEngineeringDirectory() + applicationName + GetEngineeringSuffix() + GetEngineeringExeSuffix();
 
-    ProcessStartupinfo startupInfo{};
+    ProcessStartupInfo startupInfo{};
     ProcessInformation processInformation{};
 
     const auto result = CreateSystemProcess(fullName.c_str(),
@@ -55,7 +57,7 @@ bool System::CreateSystemProcess(const TChar* applicationName,
                                  ProcessCreation creationFlags,
                                  WindowsVoidPtr environment,
                                  const TChar* currentDirectory,
-                                 ProcessStartupinfoPtr startupInfo,
+                                 ProcessStartupInfoPtr startupInfo,
                                  ProcessInformationPtr processInformation) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
@@ -109,7 +111,7 @@ System::WindowsHandle System::GetCurrentProcessHandle() noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsDWord System::GetCurrentProcessHandleID() noexcept
+System::WindowsDWord System::GetCurrentProcessHandleId() noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -137,7 +139,7 @@ void System::ExitSystemProcess(WindowsUInt exitCode) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsDWord System::GetProcessHandleID(WindowsHandle process) noexcept
+System::WindowsDWord System::GetProcessHandleId(WindowsHandle process) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -174,7 +176,7 @@ System::ProcessCreation System::GetProcessPriorityClass(WindowsHandle process) n
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<ProcessCreation>(::GetPriorityClass(process));
+    return UnderlyingCastEnum<ProcessCreation>(gsl::narrow_cast<int>(::GetPriorityClass(process)));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -185,15 +187,15 @@ System::ProcessCreation System::GetProcessPriorityClass(WindowsHandle process) n
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsHandle System::OpenSystemProcess(ProcessStandardAccess standardAccess, ProcessSpecificAccess desiredAccess, bool inheritHandle, WindowsDWord processID) noexcept
+System::WindowsHandle System::OpenSystemProcess(ProcessStandardAccess standardAccess, ProcessSpecificAccess desiredAccess, bool inheritHandle, WindowsDWord processId) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::OpenProcess(EnumCastUnderlying(standardAccess) | EnumCastUnderlying(desiredAccess), BoolConversion(inheritHandle), processID);
+    return ::OpenProcess(EnumCastUnderlying(standardAccess) | EnumCastUnderlying(desiredAccess), BoolConversion(inheritHandle), processId);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(standardAccess, desiredAccess, inheritHandle, processID);
+    UnusedFunction(standardAccess, desiredAccess, inheritHandle, processId);
 
     return nullptr;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/18 19:27)   
+///	版本：0.9.1.4 (2023/08/31 09:25)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_REGISTER_H
 #define SYSTEM_WINDOWS_WINDOWS_REGISTER_H

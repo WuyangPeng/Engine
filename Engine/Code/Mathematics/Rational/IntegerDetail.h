@@ -28,7 +28,7 @@ Mathematics::Integer<N> Mathematics::Integer<N>::CreateOne() noexcept
     return Integer{ Special::One };
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <int N>
@@ -40,9 +40,9 @@ Mathematics::Integer<N>::Integer(Special special) noexcept
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <int N>
@@ -52,9 +52,9 @@ Mathematics::Integer<N>::Integer() noexcept
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <int N>
@@ -64,7 +64,7 @@ Mathematics::Integer<N>::Integer(const DataType& data)
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 template <int N>
 template <typename T>
@@ -76,7 +76,7 @@ Mathematics::Integer<N>::Integer(T value)
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <int N>
@@ -86,7 +86,7 @@ Mathematics::Integer<N>::Integer(const IntegerData& data) noexcept
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 template <int N>

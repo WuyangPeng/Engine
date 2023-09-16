@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 13:44)
+///	版本：0.9.1.4 (2023/09/01 15:16)
 
 #include "GetProcessHandleTesting.h"
 #include "System/Threading/Process.h"
@@ -36,5 +36,5 @@ void System::GetProcessHandleTesting::ProcessTest()
     const auto windowHandle = GetCurrentProcessHandle();
     ASSERT_UNEQUAL_NULL_PTR(windowHandle);
 
-    ASSERT_EQUAL(GetCurrentProcessHandleID(), GetProcessHandleID(windowHandle));
+    ASSERT_EQUAL(GetCurrentProcessHandleId(), GetProcessHandleId(windowHandle));
 }

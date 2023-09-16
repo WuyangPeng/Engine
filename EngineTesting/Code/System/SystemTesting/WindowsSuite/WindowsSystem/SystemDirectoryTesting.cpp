@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 20:50)
+///	版本：0.9.1.4 (2023/09/01 15:42)
 
 #include "SystemDirectoryTesting.h"
 #include "System/Windows/WindowsSystem.h"
@@ -42,7 +42,7 @@ void System::SystemDirectoryTesting::SystemDirectoryTest()
     const auto size1 = GetSystemCurrentDirectory(size0, buffer.data());
     ASSERT_EQUAL(size0, size1 + 1);
 
-    String directory{ buffer.begin(), buffer.end() };
+    const String directory{ buffer.begin(), buffer.end() };
 
     ASSERT_FALSE(directory.empty());
     ASSERT_EQUAL(directory.size(), size0);

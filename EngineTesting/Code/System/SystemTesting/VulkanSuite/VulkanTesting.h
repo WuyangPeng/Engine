@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/05 18:45)
+///	版本：0.9.1.4 (2023/09/01 15:39)
 
 #ifndef SYSTEM_VULKAN_SUITE_VULKAN_TESTING_H
 #define SYSTEM_VULKAN_SUITE_VULKAN_TESTING_H
@@ -26,7 +26,7 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest() noexcept;
     };
 }

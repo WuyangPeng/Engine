@@ -15,7 +15,7 @@
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-#ifdef CORE_TOOLS_USE_OPENXLSX
+#ifdef CORE_TOOLS_USE_OPEN_XLSX
 
 CoreTools::OpenXLSXDocument::OpenXLSXDocument(const std::string& xlsxFileName)
     : xlsxFileName{ xlsxFileName }, document{}, worksheetNames{}
@@ -73,4 +73,4 @@ CoreTools::OpenXLSXDocument::XLWorksheetContainer CoreTools::OpenXLSXDocument::G
     return result;
 }
 
-#endif  // CORE_TOOLS_USE_OPENXLSX
+#endif  // CORE_TOOLS_USE_OPEN_XLSX

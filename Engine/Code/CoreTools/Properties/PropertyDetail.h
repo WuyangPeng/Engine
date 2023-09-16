@@ -36,7 +36,7 @@ bool CoreTools::Property<Id, T, V, R, FunctionSet, FunctionGet>::IsValid() const
 }
 #endif  // OPEN_CLASS_INVARIANT
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename Id, typename T, typename V, typename R, void (T::*FunctionSet)(R), R (T::*FunctionGet)() const>
@@ -49,7 +49,7 @@ CoreTools::Property<Id, T, V, R, FunctionSet, FunctionGet>& CoreTools::Property<
     return *this;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 template <typename Id, typename T, typename V, typename R, void (T::*FunctionSet)(R), R (T::*FunctionGet)() const>
 CoreTools::Property<Id, T, V, R, FunctionSet, FunctionGet>::operator R() const noexcept

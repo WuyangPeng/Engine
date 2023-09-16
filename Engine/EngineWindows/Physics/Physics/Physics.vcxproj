@@ -280,6 +280,7 @@
     <ClInclude Include="..\..\..\Code\Physics\Fluid\FluidFwd.h" />
     <ClInclude Include="..\..\..\Code\Physics\Helper\Helper.h" />
     <ClInclude Include="..\..\..\Code\Physics\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\Code\Physics\Helper\Physics.h" />
     <ClInclude Include="..\..\..\Code\Physics\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\Code\Physics\Intersection\Intersection.h" />
     <ClInclude Include="..\..\..\Code\Physics\Intersection\IntersectionFwd.h" />

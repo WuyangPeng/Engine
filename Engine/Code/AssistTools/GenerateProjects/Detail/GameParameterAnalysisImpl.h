@@ -51,6 +51,7 @@ namespace AssistTools
         NODISCARD String GetEndYear() const;
         NODISCARD String GetVersion() const;
         NODISCARD String GetVersionNum() const;
+        NODISCARD String GetTestingName() const;
 
     private:
         using BasicTree = boost::property_tree::basic_ptree<String, String>;
@@ -72,6 +73,7 @@ namespace AssistTools
         String projectChineseName;
         String projectDescribeName;
         String projectName;
+        String testingName;
         String projectCapital;
         String projectAbbreviation;
         String endYear;

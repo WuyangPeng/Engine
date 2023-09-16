@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/18 15:50)
+///	版本：0.9.1.4 (2023/08/29 16:38)
 
 #ifndef SYSTEM_MEMORY_TOOLS_HEAP_TOOLS_FLAGS_H
 #define SYSTEM_MEMORY_TOOLS_HEAP_TOOLS_FLAGS_H
@@ -26,9 +26,9 @@ namespace System
 
         CreateEnableExecute = HEAP_CREATE_ENABLE_EXECUTE,
         ZeroMemory = HEAP_ZERO_MEMORY,
-        ReallocInPlaceOnly = HEAP_REALLOC_IN_PLACE_ONLY,
+        ReAllocInPlaceOnly = HEAP_REALLOC_IN_PLACE_ONLY,
 
-        Growable = HEAP_GROWABLE,
+        GrowAble = HEAP_GROWABLE,
         TailCheckingEnabled = HEAP_TAIL_CHECKING_ENABLED,
         FreeCheckingEnabled = HEAP_FREE_CHECKING_ENABLED,
         DisableCoalesceOnFree = HEAP_DISABLE_COALESCE_ON_FREE,
@@ -48,7 +48,7 @@ namespace System
         EntryBusy = PROCESS_HEAP_ENTRY_BUSY,
         HeapSegAlloc = PROCESS_HEAP_SEG_ALLOC,
         EntryMoveable = PROCESS_HEAP_ENTRY_MOVEABLE,
-        EntryDdeshare = PROCESS_HEAP_ENTRY_DDESHARE,
+        EntryDdeShare = PROCESS_HEAP_ENTRY_DDESHARE,
     };
 
 #else  // !SYSTEM_PLATFORM_WIN32
@@ -60,9 +60,9 @@ namespace System
 
         GenerateExceptions = 0x00000004,
         ZeroMemory = 0x00000008,
-        ReallocInPlaceOnly = 0x00000010,
+        ReAllocInPlaceOnly = 0x00000010,
 
-        Growable = 0x00000002,
+        GrowAble = 0x00000002,
         TailCheckingEnabled = 0x00000020,
         FreeCheckingEnabled = 0x00000040,
         DisableCoalesceOnFree = 0x00000080,
@@ -83,7 +83,7 @@ namespace System
         EntryBusy = 0x0004,
         HeapSegAlloc = 0x0008,
         EntryMoveable = 0x0010,
-        EntryDdeshare = 0x0020,
+        EntryDdeShare = 0x0020,
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32

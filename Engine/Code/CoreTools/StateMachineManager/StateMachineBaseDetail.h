@@ -66,12 +66,12 @@ typename CoreTools::StateMachineBase<EntityType, EventType>::StateSharedPtr Core
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26473)
 
     return std::const_pointer_cast<State>(static_cast<const ClassType*>(this)->GetPossiblePreviousState());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename EntityType, typename EventType>

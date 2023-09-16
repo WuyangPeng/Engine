@@ -5,12 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/31 23:10)
+///	版本：0.9.1.4 (2023/09/01 14:26)
 
 #ifndef SYSTEM_THREADING_SUITE_AUTO_EVENT_THREAD_TESTING_H
 #define SYSTEM_THREADING_SUITE_AUTO_EVENT_THREAD_TESTING_H
 
 #include "EventTestingBase.h"
+#include "System/Helper/PragmaWarning/Thread.h"
 
 namespace System
 {
@@ -26,17 +27,17 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void AutoEventThreadTest();
         void DefaultEventThreadTest();
-        void InitalSetEventThreadTest();
+        void InitialSetEventThreadTest();
 
         void WaitForAutoEventTest(WindowsHandle eventHandle);
         void DoAutoEventThreadTest(WindowsHandle eventHandle);
         void DoDefaultEventThreadTest(WindowsHandle eventHandle);
-        void DoInitalSetEventThreadTest(WindowsHandle eventHandle);
+        void DoInitialSetEventThreadTest(WindowsHandle eventHandle);
 
         void CreateThread(boost::thread_group& threadGroup, WindowsHandle eventHandle);
     };

@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/27 23:53)
+///	版本：0.9.1.4 (2023/09/01 13:57)
 
 #include "AddAccessAllowedAceTesting.h"
 #include "System/Security/AddAccess.h"
 #include "System/Security/Flags/SecurityAclFlags.h"
-#include "System/Security/SecurityAcl.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -36,10 +35,10 @@ void System::AddAccessAllowedAceTesting::MainTest()
 
 void System::AddAccessAllowedAceTesting::AddAccessAllowedAccessControlEntriesTest(AccessControlListRevision accessControlListRevision)
 {
-    auto aclBuffer = GetACLBuffer(accessControlListRevision);
-    auto acl = GetAccessCheckACLPtr(aclBuffer);
+    auto aclBuffer = GetAclBuffer(accessControlListRevision);
+    const auto acl = GetAccessCheckAclPtr(aclBuffer);
 
-    auto sid = GetSecuritySID();
+    auto sid = GetSecuritySid();
 
     for (auto iter = GetSpecificAccessBegin(); iter != GetSpecificAccessEnd(); ++iter)
     {
@@ -47,7 +46,7 @@ void System::AddAccessAllowedAceTesting::AddAccessAllowedAccessControlEntriesTes
     }
 }
 
-void System::AddAccessAllowedAceTesting::AddAccessTest(AccessCheckACLPtr acl, AccessControlListRevision accessControlListRevision, SpecificAccess specificAccess, SecuritySID& sid)
+void System::AddAccessAllowedAceTesting::AddAccessTest(AccessCheckAclPtr acl, AccessControlListRevision accessControlListRevision, SpecificAccess specificAccess, SecuritySid& sid)
 {
     ASSERT_TRUE(AddAccessAllowedAccessControlEntries(acl, accessControlListRevision, specificAccess, &sid));
 }

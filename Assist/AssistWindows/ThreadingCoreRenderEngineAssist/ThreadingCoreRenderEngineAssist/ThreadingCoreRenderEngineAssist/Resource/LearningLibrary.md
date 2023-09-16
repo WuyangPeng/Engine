@@ -22,10 +22,12 @@ imgui（ogre关联）
 ----------------------------
 ogre-next（引擎不关联）
 
-1. 版本：2.2.2。
-2. 官方网站：https://www.ogre3d.org/download/sdk/sdk-ogre-next。
-3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
-4. 文件OgreIrradianceField.cpp另存为ANSI编码。
+1. 版本：2.3。
+2. 官方网站：https://github.com/OGRECave/ogre-next 。
+3. 编译依赖库，git地址：https://github.com/OGRECave/ogre-next-deps.git 。
+4. 依赖库编译方式：CMake。x64版本建立在BuildX64下。
+5. 编译依赖库，并将ogre-next-deps\BuildX64\ogredeps下的文件复制到ogre-next\Dependencies下。
+6. ogre-next编译方式：CMake。x64版本建立在BuildX64下。
 
 ----------------------------
 ZThread（C++编程思想） 

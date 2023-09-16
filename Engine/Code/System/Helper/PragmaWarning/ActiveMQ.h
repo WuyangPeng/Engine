@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/10 13:35)
+///	版本：0.9.1.4 (2023/08/29 11:21)
 
 #ifndef SYSTEM_HELPER_PRAGMA_WARNING_ACTIVE_MQ_H
 #define SYSTEM_HELPER_PRAGMA_WARNING_ACTIVE_MQ_H
@@ -14,7 +14,7 @@
 
 #ifdef NETWORK_USE_ACTIVE_MQ
 
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(4100)
     #include SYSTEM_WARNING_DISABLE(4458)
 
@@ -31,7 +31,7 @@
     #include <activemq/library/ActiveMQCPP.h>
     #include <cms/Connection.h>
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
 
 #endif  // NETWORK_USE_ACTIVE_MQ
 

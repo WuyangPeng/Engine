@@ -1,17 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/15 18:17)
+///	版本：0.9.1.4 (2023/08/31 17:12)
 
 #ifndef SYSTEM_FILE_MANAGER_SUITE_CREATE_FILE_WITH_ATTRIBUTES_TESTING_BASE_H
 #define SYSTEM_FILE_MANAGER_SUITE_CREATE_FILE_WITH_ATTRIBUTES_TESTING_BASE_H
 
-#include "System/SystemTesting/FileManagerSuite/FileTestingBase.h"
 #include "System/FileManager/Fwd/FileFlagsFwd.h"
+#include "System/SystemTesting/FileManagerSuite/FileTestingBase.h"
 
 #include <random>
 #include <vector>
@@ -53,7 +53,7 @@ namespace System
         FileHandleDesiredAccessContainer fileHandleDesiredAccesses;
         FileHandleShareModeContainer fileHandleShareModes;
         FileHandleCreationDispositionContainer fileHandleCreationDispositions;
-        FileHandleAttributesContainer fileHandleAttributeses;
+        FileHandleAttributesContainer fileHandleAttributesContainer;
         FileHandleOtherContainer fileHandleOthers;
         FileHandleSecurityContainer fileHandleSecurities;
         std::default_random_engine randomEngine;

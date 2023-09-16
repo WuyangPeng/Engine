@@ -5,10 +5,9 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/16 23:32)
+///	版本：0.9.1.4 (2023/08/31 14:24)
 
 #include "OpenGLVertexArraysTesting.h"
-#include "System/OpenGL/Flags/OpenGLFlags.h"
 #include "System/OpenGL/OpenGLBuffers.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"

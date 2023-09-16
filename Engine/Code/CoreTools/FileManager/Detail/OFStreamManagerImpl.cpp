@@ -74,13 +74,13 @@ CoreTools::OFStreamManagerImpl::PosType CoreTools::OFStreamManagerImpl::GetStrea
 
     const OFileStream::pos_type errorPosition{ -1 };
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26492)
 
     const auto thisImpl = const_cast<OFStreamManagerImpl*>(this);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     OFStreamSeekManager manager{ thisImpl->oStream };
 

@@ -18,7 +18,6 @@
 #include "Delaunay1Detail.h"
 #include "Delaunay2Detail.h"
 #include "Delaunay3Detail.h"
-#include "IncrementalDelaunay2Detail.h"
 #include "TriangulateECDetail.h"
  
 #endif // MATHEMATICS_COMPUTATIONAL_GEOMETRY_H

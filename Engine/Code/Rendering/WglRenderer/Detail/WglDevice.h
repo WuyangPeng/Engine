@@ -24,7 +24,7 @@ namespace Rendering
         using ClassType = WglDevice;
         using ParentType = OpenGLDevice;
 
-        using WindowsHDC = System::WindowsHDC;
+        using WindowsHDC = System::WindowsHdc;
         using OpenGLHglrc = System::OpenGLHglrc;
         using WindowsHWnd = System::WindowsHWnd;
 

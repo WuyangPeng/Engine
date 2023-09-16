@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/02 16:27)
+///	版本：0.9.1.4 (2023/08/28 16:14)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_MODE_FLAGS_H
 #define SYSTEM_CONSOLE_CONSOLE_MODE_FLAGS_H
@@ -33,7 +33,7 @@ namespace System
     enum class ConsoleOutputMode
     {
         ProcessedOutput = ENABLE_PROCESSED_OUTPUT,
-        WeapAtEolOutput = ENABLE_WRAP_AT_EOL_OUTPUT,
+        WrapAtEolOutput = ENABLE_WRAP_AT_EOL_OUTPUT,
         VirtualTerminalProcessing = ENABLE_VIRTUAL_TERMINAL_PROCESSING,
         DisableNewlineAutoReturn = DISABLE_NEWLINE_AUTO_RETURN,
         LvbGridWorldwide = ENABLE_LVB_GRID_WORLDWIDE
@@ -57,7 +57,7 @@ namespace System
     enum class ConsoleOutputMode
     {
         ProcessedOutput = 0x0001,
-        WeapAtEolOutput = 0x0002,
+        WrapAtEolOutput = 0x0002,
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 09:18)
+///	版本：0.9.1.4 (2023/09/16 10:58)
 
 #ifndef NETWORK_TESTING_ACE_WRAPPERS_SUITE_ACE_MAIN_MANAGER_TESTING_H
 #define NETWORK_TESTING_ACE_WRAPPERS_SUITE_ACE_MAIN_MANAGER_TESTING_H
@@ -15,18 +15,18 @@
 
 namespace Network
 {
-    class ACEMainManagerTesting : public SingletonTesting
+    class ACEMainManagerTesting final : public SingletonTesting
     {
     public:
         using ClassType = ACEMainManagerTesting;
         using ParentType = SingletonTesting;
 
+        using TestFunction = void (ClassType::*)();
+
     public:
         explicit ACEMainManagerTesting(const OStreamShared& stream);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
-
-        using TestFunction = void (ClassType::*)();
 
     private:
         void MainTest();

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 10:16)
+///	版本：0.9.1.4 (2023/09/16 10:55)
 
 #ifndef NETWORK_TESTING_ACE_WRAPPERS_SUITE_SOCK_ACE_HANDLE_SET_TESTING_H
 #define NETWORK_TESTING_ACE_WRAPPERS_SUITE_SOCK_ACE_HANDLE_SET_TESTING_H
@@ -26,13 +26,9 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        using TestFunction = void (ClassType::*)();
-
     private:
-        void MainTest();
+        void MainTest() noexcept;
         void DoRunUnitTest() override;
-
-        void HandleSetTest();
     };
 }
 

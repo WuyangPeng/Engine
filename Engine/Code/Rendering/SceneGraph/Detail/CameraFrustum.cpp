@@ -52,7 +52,7 @@ void Rendering::CameraFrustum::SetFrustum(const float* aFrustum) noexcept
 
     if (aFrustum != nullptr)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         SetFrustum(aFrustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)],
@@ -62,7 +62,7 @@ void Rendering::CameraFrustum::SetFrustum(const float* aFrustum) noexcept
                    aFrustum[System::EnumCastUnderlying(ViewFrustum::RightMin)],
                    aFrustum[System::EnumCastUnderlying(ViewFrustum::RightMax)]);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 }
 

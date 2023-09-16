@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/12 10:39)
+///	版本：0.9.1.4 (2023/09/16 09:48)
 
 #include "MessageManagerTesting.h"
 #include "ThreadingCoreRenderEngineTesting/Version.h"
@@ -74,14 +74,14 @@ void Network::MessageManagerTesting::ManagerTest()
 
 void Network::MessageManagerTesting::ExceptionTest()
 {
-    constexpr auto messageID = 6LL;
-    MESSAGE_MANAGER_SINGLETON.Insert(messageID, MessageTypeCondition{ VersionsCondition::Equality, gTCRETestingVersion }, TestNullMessage::Factory);
+    constexpr auto messageId = 6LL;
+    MESSAGE_MANAGER_SINGLETON.Insert(messageId, MessageTypeCondition{ VersionsCondition::Equality, gTCRETestingVersion }, TestNullMessage::Factory);
 
-    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageID, gTCRETestingVersion), TestNullMessage::Factory);
+    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageId, gTCRETestingVersion), TestNullMessage::Factory);
 
-    MESSAGE_MANAGER_SINGLETON.Remove(messageID);
+    MESSAGE_MANAGER_SINGLETON.Remove(messageId);
 
-    MAYBE_UNUSED auto result = MESSAGE_MANAGER_SINGLETON.Find(messageID, gTCRETestingVersion);
+    MAYBE_UNUSED auto result = MESSAGE_MANAGER_SINGLETON.Find(messageId, gTCRETestingVersion);
 }
 
 void Network::MessageManagerTesting::DescribeTest()
@@ -100,6 +100,6 @@ void Network::MessageManagerTesting::DescribeTest()
 void Network::MessageManagerTesting::DescribeExceptionTest()
 {
     constexpr auto messageDescribe = "DescribeException";
-  
-    MAYBE_UNUSED auto result = MESSAGE_MANAGER_SINGLETON.Find(messageDescribe, gTCRETestingVersion);
+
+    MAYBE_UNUSED const auto result = MESSAGE_MANAGER_SINGLETON.Find(messageDescribe, gTCRETestingVersion);
 }

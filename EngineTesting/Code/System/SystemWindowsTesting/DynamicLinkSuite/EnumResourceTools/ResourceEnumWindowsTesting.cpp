@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/10 15:02)
+///	版本：0.9.1.4 (2023/08/31 14:44)
 
 #include "ResourceEnumWindowsTesting.h"
 #include "System/DynamicLink/EnumResourceTools.h"
@@ -24,9 +24,9 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, ResourceEnumWindowsTesting)
 
 void System::ResourceEnumWindowsTesting::DoEnumResourceTest()
 {
-    constexpr LanguageIDData languageIDData{};
+    constexpr LanguageIdData languageIdData{};
 
-    ASSERT_TRUE(EnumResourceTypesInLibrary(instance, TypeProcess, reinterpret_cast<WindowsLongPtrSizeType>(this), GetCurrentResourceEnum(), languageIDData));
+    ASSERT_TRUE(EnumResourceTypesInLibrary(instance, TypeProcess, reinterpret_cast<WindowsLongPtrSizeType>(this), GetCurrentResourceEnum(), languageIdData));
 
     ASSERT_LESS(0u, GetEnumResourceDataSize());
 

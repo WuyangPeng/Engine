@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/18 20:49)
+///	版本：0.9.1.4 (2023/08/28 17:14)
 
 #ifndef SYSTEM_FILE_MANAGER_C_FILE_H
 #define SYSTEM_FILE_MANAGER_C_FILE_H
@@ -35,7 +35,7 @@ namespace System
 
     NODISCARD std::string SYSTEM_DEFAULT_DECLARE GetString(FILE* file, int count);
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE IsEOF(FILE* file) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE IsEof(FILE* file) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE Flush(FILE* file) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE Seek(FILE* file, long offset, FileSeek whence) noexcept;
     NODISCARD PosType SYSTEM_DEFAULT_DECLARE GetPosition(FILE* file) noexcept;

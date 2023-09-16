@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/07 22:03)
+///	版本：0.9.1.4 (2023/08/28 16:29)
 
 #ifndef SYSTEM_DYNAMIC_LINK_LOAD_LIBRARY_FLAGS_H
 #define SYSTEM_DYNAMIC_LINK_LOAD_LIBRARY_FLAGS_H
@@ -43,7 +43,7 @@ namespace System
         AsDatafile = LOAD_LIBRARY_AS_DATAFILE,
 
         /// 这个标志用于改变LoadLibraryEx用来查找特定的Dll文件时使用的搜索算法。
-        WithAlteredSerachPath = LOAD_WITH_ALTERED_SEARCH_PATH,
+        WithAlteredSearchPath = LOAD_WITH_ALTERED_SEARCH_PATH,
 
         /// 用来关闭WinSafer所提供的验证，UAC特性已经取代了这项特性。
         IgnoreCodeAuthzLevel = LOAD_IGNORE_CODE_AUTHZ_LEVEL,
@@ -80,7 +80,7 @@ namespace System
         NoFlags = 0,
         DontResolveDllReferences = 0,
         AsDatafile = 0,
-        WithAlteredSerachPath = 0,
+        WithAlteredSearchPath = 0,
         IgnoreCodeAuthzLevel = 0,
         AsImageResource = 0,
         AsDatafileExclusive = 0,

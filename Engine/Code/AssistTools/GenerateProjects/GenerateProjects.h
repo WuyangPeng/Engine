@@ -13,6 +13,7 @@
 #include "GameModule.h"
 #include "GameParameterAnalysis.h"
 #include "GenerateEngine.h"
+#include "GenerateTestingEngine.h"
 #include "MiddleLayerModule.h"
 #include "ProjectGeneration.h"
 

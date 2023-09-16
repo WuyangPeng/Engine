@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 15:31)
+///	版本：0.9.1.4 (2023/09/01 15:18)
 
 #include "OpenSemaphoreTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -47,8 +47,8 @@ void System::OpenSemaphoreTesting::MainTest()
 
 bool System::OpenSemaphoreTesting::RandomShuffleFlags()
 {
-    shuffle(semaphoreStandardAccesses.begin(), semaphoreStandardAccesses.end(), randomEngine);
-    shuffle(semaphoreSpecificAccesses.begin(), semaphoreSpecificAccesses.end(), randomEngine);
+    std::ranges::shuffle(semaphoreStandardAccesses, randomEngine);
+    std::ranges::shuffle(semaphoreSpecificAccesses, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(ThreadTest);
 
@@ -57,11 +57,11 @@ bool System::OpenSemaphoreTesting::RandomShuffleFlags()
 
 void System::OpenSemaphoreTesting::ThreadTest()
 {
-    constexpr WindowsLong maxSemphoreCount{ 10 };
+    constexpr WindowsLong maxSemaphoreCount{ 10 };
 
     const auto semaphoreName = ToString(GetTimeInSeconds()) + GetEngineeringTypesSuffix();
 
-    const auto semaphoreHandle = CreateSystemSemaphore(nullptr, maxSemphoreCount, maxSemphoreCount, semaphoreName.c_str());
+    const auto semaphoreHandle = CreateSystemSemaphore(nullptr, maxSemaphoreCount, maxSemaphoreCount, semaphoreName.c_str());
     ASSERT_TRUE(IsSystemSemaphoreValid(semaphoreHandle));
 
     ASSERT_NOT_THROW_EXCEPTION_1(CreateThread, semaphoreName);
@@ -93,7 +93,9 @@ void System::OpenSemaphoreTesting::CreateThread(const String& semaphoreName)
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest, this, semaphoreName));
+        threadGroup.create_thread([this, semaphoreName]() {
+            this->WaitForSemaphoreTest(semaphoreName);
+        });
     }
 
     threadGroup.join_all();

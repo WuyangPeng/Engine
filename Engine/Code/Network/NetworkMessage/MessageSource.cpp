@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 11:40)
+///	版本：0.9.1.4 (2023/09/04 16:54)
 
 #include "Network/NetworkExport.h"
 
 #include "MessageBuffer.h"
 #include "MessageSourceDetail.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 Network::MessageSource::MessageSource(MessageBuffer& messageBuffer) noexcept
     : source{ messageBuffer }, parserStrategy{ messageBuffer.GetParserStrategy() }
@@ -59,12 +58,12 @@ void Network::MessageSource::ReadBool(int elementsNumber, bool* data)
     {
         for (auto i = 0; i < elementsNumber; ++i)
         {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
             data[i] = ReadBool();
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
     }
 }
@@ -105,12 +104,12 @@ void Network::MessageSource::ReadString(int elementsNumber, std::string* data)
     {
         for (auto i = 0; i < elementsNumber; ++i)
         {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
             data[i] = ReadString();
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
     }
 }

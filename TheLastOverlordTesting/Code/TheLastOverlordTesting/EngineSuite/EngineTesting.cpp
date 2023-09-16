@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王测试版本：0.9.0.12 (2023/06/17 13:53)
+/// 标准：std:c++20
+/// 版本：0.9.1.4 (2023/08/25 15:12)
 
 #include "EngineTesting.h"
 #include "System/Threading/Process.h"
@@ -19,20 +19,20 @@
 
 using namespace std::literals;
 
-TheLastOverlord::EngineTesting::EngineTesting(const OStreamShared& stream)
+TheLastOverlordTesting::EngineTesting::EngineTesting(const OStreamShared& stream)
     : ParentType{ stream }, engineTestingName{ SYSTEM_TEXT("End"s) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(TheLastOverlord, EngineTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(TheLastOverlordTesting, EngineTesting)
 
-void TheLastOverlord::EngineTesting::DoRunUnitTest()
+void TheLastOverlordTesting::EngineTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void TheLastOverlord::EngineTesting::MainTest()
+void TheLastOverlordTesting::EngineTesting::MainTest()
 {
     CoreTools::Directory directory{ System::GetEngineeringDirectory() };
 
@@ -44,7 +44,7 @@ void TheLastOverlord::EngineTesting::MainTest()
     }
 }
 
-bool TheLastOverlord::EngineTesting::EngineTest()
+bool TheLastOverlordTesting::EngineTesting::EngineTest()
 {
     engineTestingName.PrintSelect(GetStream());
 
@@ -53,7 +53,7 @@ bool TheLastOverlord::EngineTesting::EngineTest()
     return ExecuteEngineTesting(select);
 }
 
-bool TheLastOverlord::EngineTesting::ExecuteEngineTesting(int select)
+bool TheLastOverlordTesting::EngineTesting::ExecuteEngineTesting(int select)
 {
     if (engineTestingName.IsSelectValid(select))
     {
@@ -67,7 +67,7 @@ bool TheLastOverlord::EngineTesting::ExecuteEngineTesting(int select)
     }
 }
 
-void TheLastOverlord::EngineTesting::ExecuteSelectEngineTesting(const String& engineeringName)
+void TheLastOverlordTesting::EngineTesting::ExecuteSelectEngineTesting(const String& engineeringName)
 {
     GetStream() << "正在执行单元测试工程：" << CoreTools::StringConversion::StandardConversionMultiByte(engineeringName) << "\n";
 

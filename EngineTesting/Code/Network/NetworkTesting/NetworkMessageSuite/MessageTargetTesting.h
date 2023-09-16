@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/12 15:02)
+///	版本：0.9.1.4 (2023/09/16 09:30)
 
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_TARGET_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_TARGET_TESTING_H
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
-#include "Network/NetworkMessage/MessageSource.h"
 #include "Network/NetworkMessage/NetworkMessageInternalFwd.h"
 
 #include <array>
@@ -65,14 +64,14 @@ namespace Network
         static constexpr int16_t int32Value{ 15 };
         static const std::string stringValue;
 
+        const std::array<bool, boolArraySize> boolBuffer0;
         const std::array<bool, boolArraySize> boolBuffer1;
-        const std::array<bool, boolArraySize> boolBuffer2;
+        const std::array<ParserStrategy, enumArraySize> parserStrategyBuffer0;
         const std::array<ParserStrategy, enumArraySize> parserStrategyBuffer1;
-        const std::array<ParserStrategy, enumArraySize> parserStrategyBuffer2;
+        const std::array<int16_t, int16ArraySize> int16Buffer0;
         const std::array<int16_t, int16ArraySize> int16Buffer1;
-        const std::array<int16_t, int16ArraySize> int16Buffer2;
+        const std::array<std::string, stringArraySize> stringBuffer0;
         const std::array<std::string, stringArraySize> stringBuffer1;
-        const std::array<std::string, stringArraySize> stringBuffer2;
         const std::vector<int32_t> int32Vector;
         const std::vector<std::string> stringVector;
         int bytesWrite;

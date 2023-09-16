@@ -38,6 +38,8 @@ void CoreTools::MultiArrayAdapterTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(OrderLRoTTest);
     ASSERT_NOT_THROW_EXCEPTION_0(OrderLToRConstantTest);
     ASSERT_NOT_THROW_EXCEPTION_0(OrderLRoTConstantTest);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(MultiArrayAdapterTest);
 }
 
 void CoreTools::MultiArrayAdapterTesting::SizeTest()
@@ -49,9 +51,9 @@ void CoreTools::MultiArrayAdapterTesting::SizeTest()
 
     static_assert(lattice0.GetDimensions() == 3);
 
-    static_assert(lattice0.GetSize(0) == 5);
-    static_assert(lattice0.GetSize(1) == 6);
-    static_assert(lattice0.GetSize(2) == 10);
+    ASSERT_EQUAL(lattice0.GetSize(0), 5);
+    ASSERT_EQUAL(lattice0.GetSize(1), 6);
+    ASSERT_EQUAL(lattice0.GetSize(2), 10);
 
     static_assert(lattice0.GetSize() == 5 * 6 * 10);
 
@@ -287,6 +289,35 @@ void CoreTools::MultiArrayAdapterTesting::OrderLRoTConstantTest()
                 ASSERT_EQUAL(multiArray(i0, i1, i2), index);
                 ASSERT_EQUAL(multiArray({ i0, i1, i2 }), index);
                 ++index;
+            }
+        }
+    }
+}
+
+void CoreTools::MultiArrayAdapterTesting::MultiArrayAdapterTest()
+{
+    std::array<int, 30> storage{};
+
+    auto index = 0;
+    for (auto& element : storage)
+    {
+        element = index + 1;
+        ++index;
+    }
+
+    const MultiArrayAdapter<int, true, 2, 3, 5> multiArray{ storage.data() };
+
+    for (auto x2 = 0, i = 0; x2 < multiArray.GetSize(2); ++x2)
+    {
+        for (auto x1 = 0; x1 < multiArray.GetSize(1); ++x1)
+        {
+            for (auto x0 = 0; x0 < multiArray.GetSize(0); ++x0, ++i)
+            {
+                ASSERT_EQUAL(multiArray(x0, x1, x2), i + 1);
+
+                const std::array x{ x0, x1, x2 };
+
+                ASSERT_EQUAL(multiArray(x), i + 1);
             }
         }
     }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/10 14:41)
+///	版本：0.9.1.4 (2023/08/31 14:38)
 
 #ifndef SYSTEM_WINDOWS_TESTING_DYNAMIC_LINK_SUITE_ENUM_RESOURCE_TOOLS_WINDOWS_TESTING_H
 #define SYSTEM_WINDOWS_TESTING_DYNAMIC_LINK_SUITE_ENUM_RESOURCE_TOOLS_WINDOWS_TESTING_H
@@ -26,8 +26,8 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void EnumResourceTest() final;
-        void EnumResourceExistTest(const EnumResourceData& data) final;
+        void EnumResourceTest() override;
+        void EnumResourceExistTest(const EnumResourceData& data) override;
 
     private:
         WindowsHInstance instance;

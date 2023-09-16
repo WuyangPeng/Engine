@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/17 18:20)
+///	版本：0.9.1.4 (2023/09/01 09:49)
 
 #include "MakeIntreSourceTesting.h"
 #include "System/Helper/WindowsMacro.h"
@@ -35,14 +35,14 @@ void System::MakeIntreSourceTesting::MakeIntreSourceTest()
 {
     constexpr WindowsWord id{ 101 };
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     const auto* intrePtr = reinterpret_cast<TChar*>(static_cast<uint64_t>(id));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
-    const auto intreSource = MakeIntreSource(id);
+    const auto* intreSource = MakeIntreSource(id);
 
-    ASSERT_EQUAL(intrePtr, intreSource);
+    ASSERT_TRUE(intrePtr == intreSource);
 }

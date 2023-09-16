@@ -14,7 +14,7 @@
 #include "InputManager.h"
 #include "Framework/MiddleLayer/InputManagerDetail.h"
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename ApplicationTrait>
@@ -24,7 +24,7 @@ MailServerMiddleLayer::InputManager<ApplicationTrait>::InputManager(MiddleLayerP
     MAIL_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 

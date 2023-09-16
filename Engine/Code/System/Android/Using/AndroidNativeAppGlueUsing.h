@@ -1,14 +1,15 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
+///	版本：0.9.1.4 (2023/08/26 15:31)
 ///	引擎版本：0.8.1.4 (2022/11/22 23:23)
 
-#ifndef SYSTEM_ANDROID_ANDROID_NATIVE_APPGLUE_USING_H
-#define SYSTEM_ANDROID_ANDROID_NATIVE_APPGLUE_USING_H
+#ifndef SYSTEM_ANDROID_ANDROID_NATIVE_APP_GLUE_USING_H
+#define SYSTEM_ANDROID_ANDROID_NATIVE_APP_GLUE_USING_H
 
 #include "System/SystemDll.h"
 
@@ -129,4 +130,4 @@ namespace System
     using InputEvent = int32_t (*)(AndroidApp* app, AndroidInputEvent* event);
 }
 
-#endif  // SYSTEM_ANDROID_ANDROID_NATIVE_APPGLUE_USING_H
+#endif  // SYSTEM_ANDROID_ANDROID_NATIVE_APP_GLUE_USING_H

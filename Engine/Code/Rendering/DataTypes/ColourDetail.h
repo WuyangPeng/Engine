@@ -74,7 +74,7 @@ void Rendering::Colour<T>::ConvertingColourFormat(const Colour<RhsType>& colour,
                                                   const std::integral_constant<bool, TIsFloatingPoint>&,
                                                   const std::integral_constant<bool, RhsIsFloatingPoint>&)
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26467)
 
     InitColour(boost::numeric_cast<T>(colour.GetRed()),
@@ -82,7 +82,7 @@ void Rendering::Colour<T>::ConvertingColourFormat(const Colour<RhsType>& colour,
                boost::numeric_cast<T>(colour.GetBlue()),
                boost::numeric_cast<T>(colour.GetAlpha()));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 // private
@@ -113,12 +113,12 @@ T Rendering::Colour<T>::ConvertingIntegralToFloatingPoint(RhsType rhs)
     constexpr auto rhsTypeDistance = ColourDefaultTraits<RhsType>::maxValue - ColourDefaultTraits<RhsType>::minValue;
     constexpr auto lhsTypeDistance = maxValue - minValue;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26467)
 
     return (boost::numeric_cast<T>(rhs) - ColourDefaultTraits<RhsType>::minValue) * lhsTypeDistance / rhsTypeDistance + minValue;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 // private

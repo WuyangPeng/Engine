@@ -20,7 +20,7 @@
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 
-#ifdef CORE_TOOLS_USE_OPENXLSX
+#ifdef CORE_TOOLS_USE_OPEN_XLSX
 
 using namespace std::literals;
 
@@ -271,4 +271,4 @@ void CoreTools::OpenXLSXConversion::SaveIntoFile(const std::string& content) con
     FileManagerHelper::SaveIntoFile(csvFileName, false, boost::numeric_cast<int>(content.size()), content.c_str());
 }
 
-#endif  // CORE_TOOLS_USE_OPENXLSX
+#endif  // CORE_TOOLS_USE_OPEN_XLSX

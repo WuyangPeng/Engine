@@ -93,10 +93,10 @@ Rendering::UInt Rendering::OpenGLConstant::GetOpenGLTextureFormat(int index)
         0,  // GL_LUMINANCE,
         static_cast<GLenum>(System::TextureFormat::RG),  // GL_RG,
         static_cast<GLenum>(System::TextureFormat::RGBA),  // GL_RGBA
-        static_cast<GLenum>(System::TextureFormat::RED),  // GL_RED,
+        static_cast<GLenum>(System::TextureFormat::Red),  // GL_RED,
         static_cast<GLenum>(System::TextureFormat::RG),  // GL_RG,
         static_cast<GLenum>(System::TextureFormat::RGBA),  // GL_RGBA
-        static_cast<GLenum>(System::TextureFormat::RED),  // GL_RED,
+        static_cast<GLenum>(System::TextureFormat::Red),  // GL_RED,
         static_cast<GLenum>(System::TextureFormat::RG),  // GL_RG,
         static_cast<GLenum>(System::TextureFormat::RGBA),  // GL_RGBA
         0,  // GL_COMPRESSED_RGBA_S3TC_DXT1_EXT,

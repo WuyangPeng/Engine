@@ -21,26 +21,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resource\ReadMe.md">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resource\Schedule.md">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Configuration\EnvironmentVariable.json">
-      <Filter>配置</Filter>
-    </None>
-    <None Include="Configuration\GameServerMiddleLayerTesting.json">
-      <Filter>配置</Filter>
-    </None>
-    <None Include="Configuration\Log.json">
-      <Filter>配置</Filter>
-    </None>
-    <None Include="Configuration\Testing.json">
-      <Filter>配置</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\..\Code\GameServerTesting\GameServerMiddleLayerTesting\Testing.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -58,6 +38,26 @@
     <ClCompile Include="..\..\..\Code\GameServerTesting\GameServerMiddleLayerTesting\TestingMain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Configuration\GameServerMiddleLayerTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">

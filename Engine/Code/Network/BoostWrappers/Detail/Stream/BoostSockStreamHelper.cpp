@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:41)
+///	版本：0.9.1.4 (2023/09/15 17:27)
 
 #include "Network/NetworkExport.h"
 
@@ -31,12 +31,10 @@ namespace
     constexpr auto asynchronousReceiveSuccess = SYSTEM_TEXT("异步接收消息成功，地址："sv);
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
 void Network::BoostSockStreamHelper::EventSendFunction(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const AddressData& addressData, int bytesTransferred)
 {
+    System::UnusedFunction(eventInterface);
+
     CoreTools::CallbackParameters callbackParameters{ System::EnumCastUnderlying(SocketManagerPosition::Count) };
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncSend));
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::Boost));
@@ -54,14 +52,10 @@ void Network::BoostSockStreamHelper::EventSendFunction(const ErrorCodeType& erro
     PrintSuccessLog(asynchronousSendSuccess.data(), addressData, bytesTransferred);
 }
 
-#include STSTEM_WARNING_POP
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
 void Network::BoostSockStreamHelper::EventReceiveFunction(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const AddressData& addressData, int bytesTransferred)
 {
+    System::UnusedFunction(eventInterface);
+
     CoreTools::CallbackParameters callbackParameters{ System::EnumCastUnderlying(SocketManagerPosition::Count) };
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncReceive));
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::Boost));
@@ -78,8 +72,6 @@ void Network::BoostSockStreamHelper::EventReceiveFunction(const ErrorCodeType& e
 
     PrintSuccessLog(asynchronousReceiveSuccess.data(), addressData, bytesTransferred);
 }
-
-#include STSTEM_WARNING_POP
 
 void Network::BoostSockStreamHelper::PrintSuccessLog(const String& prefix, const AddressData& addressData, int bytesTransferred)
 {

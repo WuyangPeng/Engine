@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/06 23:50)
+///	版本：0.9.1.4 (2023/08/29 17:36)
 
 #ifndef SYSTEM_NETWORK_WINDOWS_SOCK_EX_FLAGS_H
 #define SYSTEM_NETWORK_WINDOWS_SOCK_EX_FLAGS_H
@@ -27,7 +27,7 @@ namespace System
         MaximumWaitEvents = WSA_MAXIMUM_WAIT_EVENTS,
         WaitFailed = WSA_WAIT_FAILED,
         WaitEvent0 = WSA_WAIT_EVENT_0,
-        WaitIOCompletion = WSA_WAIT_IO_COMPLETION,
+        WaitIoCompletion = WSA_WAIT_IO_COMPLETION,
         WaitTimeout = WSA_WAIT_TIMEOUT,
         Infinite = WSA_INFINITE,
     };
@@ -43,7 +43,7 @@ namespace System
         ExpeditedData = XP1_EXPEDITED_DATA,
         ConnectData = XP1_CONNECT_DATA,
         DisconnectData = XP1_DISCONNECT_DATA,
-        SsupportBroadcast = XP1_SUPPORT_BROADCAST,
+        SupportBroadcast = XP1_SUPPORT_BROADCAST,
         SupportMultipoint = XP1_SUPPORT_MULTIPOINT,
         MultipointControlPlane = XP1_MULTIPOINT_CONTROL_PLANE,
         MultipointDataPlane = XP1_MULTIPOINT_DATA_PLANE,
@@ -62,7 +62,7 @@ namespace System
         RecommendedProtoEntry = PFL_RECOMMENDED_PROTO_ENTRY,
         Hidden = PFL_HIDDEN,
         MatchesProtocolZero = PFL_MATCHES_PROTOCOL_ZERO,
-        NetworkdirectProvider = PFL_NETWORKDIRECT_PROVIDER,
+        NetworkDirectProvider = PFL_NETWORKDIRECT_PROVIDER,
     };
 
 #else  // !SYSTEM_PLATFORM_WIN32
@@ -72,7 +72,7 @@ namespace System
         MaximumWaitEvents = (64),
         WaitFailed = (0xFFFFFFFF),
         WaitEvent0 = (0),
-        WaitIOCompletion = (0x000000C0L),
+        WaitIoCompletion = (0x000000C0L),
         WaitTimeout = (258L),
         Infinite = (0xFFFFFFFF),
     };
@@ -88,7 +88,7 @@ namespace System
         ExpeditedData = 0x00000040,
         ConnectData = 0x00000080,
         DisconnectData = 0x00000100,
-        SsupportBroadcast = 0x00000200,
+        SupportBroadcast = 0x00000200,
         SupportMultipoint = 0x00000400,
         MultipointControlPlane = 0x00000800,
         MultipointDataPlane = 0x00001000,
@@ -107,7 +107,7 @@ namespace System
         RecommendedProtoEntry = 0x00000002,
         Hidden = 0x00000004,
         MatchesProtocolZero = 0x00000008,
-        NetworkdirectProvider = 0x00000010,
+        NetworkDirectProvider = 0x00000010,
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32

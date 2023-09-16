@@ -242,10 +242,10 @@ void Framework::ApplicationTraitTesting::GlutMouseModifiersTest() noexcept
 void Framework::ApplicationTraitTesting::AndroidKeyIdentifiersTest() noexcept
 {
     static_assert(AndroidApplicationTrait::KeyIdentifiers::keyEscape == System::EnumCastUnderlying(System::AndroidKeyCodes::Escape));
-    static_assert(AndroidApplicationTrait::KeyIdentifiers::keyLeftArrow == System::EnumCastUnderlying(System::AndroidKeyCodes::DpadLeft));
-    static_assert(AndroidApplicationTrait::KeyIdentifiers::keyRightArrow == System::EnumCastUnderlying(System::AndroidKeyCodes::DpadRight));
-    static_assert(AndroidApplicationTrait::KeyIdentifiers::keyUpArrow == System::EnumCastUnderlying(System::AndroidKeyCodes::DpadUp));
-    static_assert(AndroidApplicationTrait::KeyIdentifiers::keyDownArrow == System::EnumCastUnderlying(System::AndroidKeyCodes::DpadDown));
+    static_assert(AndroidApplicationTrait::KeyIdentifiers::keyLeftArrow == System::EnumCastUnderlying(System::AndroidKeyCodes::DPadLeft));
+    static_assert(AndroidApplicationTrait::KeyIdentifiers::keyRightArrow == System::EnumCastUnderlying(System::AndroidKeyCodes::DPadRight));
+    static_assert(AndroidApplicationTrait::KeyIdentifiers::keyUpArrow == System::EnumCastUnderlying(System::AndroidKeyCodes::DPadUp));
+    static_assert(AndroidApplicationTrait::KeyIdentifiers::keyDownArrow == System::EnumCastUnderlying(System::AndroidKeyCodes::DPadDown));
     static_assert(AndroidApplicationTrait::KeyIdentifiers::keyHome == System::EnumCastUnderlying(System::AndroidKeyCodes::MoveHome));
     static_assert(AndroidApplicationTrait::KeyIdentifiers::keyEnd == System::EnumCastUnderlying(System::AndroidKeyCodes::MoveEnd));
     static_assert(AndroidApplicationTrait::KeyIdentifiers::keyPageUp == System::EnumCastUnderlying(System::AndroidKeyCodes::PageUp));

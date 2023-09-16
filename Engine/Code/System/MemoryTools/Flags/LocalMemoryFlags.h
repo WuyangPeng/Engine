@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/18 18:42)
+///	版本：0.9.1.4 (2023/08/29 16:39)
 
 #ifndef SYSTEM_MEMORY_TOOLS_LOCAL_MEMORY_FLAGS_H
 #define SYSTEM_MEMORY_TOOLS_LOCAL_MEMORY_FLAGS_H
@@ -59,19 +59,21 @@ namespace System
     {
         Fixed = 0x0000,
         Moveable = 0x0002,
-        NoCompact = 0x0010,
-        NoDiscard = 0x0020,
         ZeroInit = 0x0040,
-        Modify = 0x0080,
-        Discardable = 0x0F00,
-        ValidFlags = 0x0F72,
-        InvalidHandle = 0x8000,
         LHnd = Moveable | ZeroInit,
         LPtr = Fixed | ZeroInit,
         NonZeroLHnd = Moveable,
         NonZeroLPtr = Fixed,
-        Discarded = 0x4000,
+        Modify = 0x0080,
+
+        InvalidHandle = 0x8000,
         LockCount = 0x00FF,
+        Discardable = 0x0F00,
+
+        NoCompact = 0x0010,
+        NoDiscard = 0x0020,
+        ValidFlags = 0x0F72,
+        Discarded = 0x4000,
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32

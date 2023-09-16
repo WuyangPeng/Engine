@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 09:26)
+///	版本：0.9.1.4 (2023/09/15 15:24)
 
 #include "Network/NetworkExport.h"
 
@@ -14,7 +14,6 @@
 #include "System/Windows/Flags/PlatformErrorFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/MessageEvent/CallbackParameters.h"
 #include "CoreTools/MessageEvent/EventInterface.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
@@ -38,15 +37,11 @@ bool Network::NullSockConnector::Connect(const SockStreamSharedPtr& sockStream, 
     return true;
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
 void Network::NullSockConnector::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    System::UnusedFunction(sockStream, sockAddress);
+    System::UnusedFunction(eventInterface, sockStream, sockAddress);
 
     CoreTools::CallbackParameters callbackParameters{ System::EnumCastUnderlying(SocketManagerPosition::Error) };
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncConnect));
@@ -58,8 +53,6 @@ void Network::NullSockConnector::AsyncConnect(const EventInterfaceSharedPtr& eve
         LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("执行事件回调失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
-
-#include STSTEM_WARNING_POP
 
 Network::NullSockConnector::SockConnectorSharedPtr Network::NullSockConnector::Clone() const
 {

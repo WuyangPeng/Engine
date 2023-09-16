@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/16 22:13)
+///	版本：0.9.1.4 (2023/08/28 16:34)
 
 #ifndef SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_TOOLS_H
 #define SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_TOOLS_H
@@ -32,7 +32,7 @@ namespace System
                                                                          EnumResourceLanguageProcess enumFunction,
                                                                          WindowsLongPtrSizeType param,
                                                                          ResourceEnum flags,
-                                                                         const LanguageIDData& language) noexcept;
+                                                                         const LanguageIdData& language) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE EnumResourceNamesInLibrary(DynamicLinkModule module,
                                                                      const DynamicLinkCharType* type,
@@ -43,7 +43,7 @@ namespace System
                                                                      EnumResourceNameProcess enumFunction,
                                                                      WindowsLongPtrSizeType param,
                                                                      ResourceEnum flags,
-                                                                     const LanguageIDData& language) noexcept;
+                                                                     const LanguageIdData& language) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE EnumResourceTypesInLibrary(DynamicLinkModule module,
                                                                      EnumResourceTypeProcess enumFunction,
@@ -52,7 +52,7 @@ namespace System
                                                                      EnumResourceTypeProcess enumFunction,
                                                                      WindowsLongPtrSizeType param,
                                                                      ResourceEnum flags,
-                                                                     const LanguageIDData& language) noexcept;
+                                                                     const LanguageIdData& language) noexcept;
 }
 
 #endif  // SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_TOOLS_H

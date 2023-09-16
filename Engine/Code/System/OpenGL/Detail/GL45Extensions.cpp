@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 18:57)
+///	版本：0.9.1.4 (2023/08/29 23:37)
 
 #include "System/SystemExport.h"
 
 #include "GL45Extensions.h"
-#include "GLUtility.h"
 #include "System/Helper/Detail/OpenGL/GLPluginMacro.h"
 #include "System/Helper/EnumCast.h"
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
@@ -140,7 +139,7 @@ System::ExistsOpenGLExtensions System::IsExistsOpenGL45() noexcept
 
 void System::InitOpenGL45() noexcept
 {
-    if (System::OpenGLSystemVersion::Version45 <= System::GetOpenGLVersion())
+    if (OpenGLSystemVersion::Version45 <= System::GetOpenGLVersion())
     {
         existsOpenGL45 = ExistsOpenGLExtensions::Exists;
 

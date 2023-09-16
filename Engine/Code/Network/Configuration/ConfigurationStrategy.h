@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/04/28 10:59)
+///	版本：0.9.1.4 (2023/09/04 15:42)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_H
 #define NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_H
@@ -40,7 +40,7 @@ namespace Network
                               ServerStrategy serverStrategy,
                               MessageStrategy messageStrategy,
                               ParserStrategy parserStrategy,
-                              OpenSSLStrategy openSSLStrategy,
+                              OpenSslStrategy openSslStrategy,
                               EncryptedCompressionStrategy encryptedCompressionStrategy,
                               const ConfigurationSubStrategy& subStrategy,
                               const ConfigurationParameter& configurationParameter,
@@ -52,7 +52,7 @@ namespace Network
                               ClientStrategy clientStrategy,
                               MessageStrategy messageStrategy,
                               ParserStrategy parserStrategy,
-                              OpenSSLStrategy openSSLStrategy,
+                              OpenSslStrategy openSslStrategy,
                               EncryptedCompressionStrategy encryptedCompressionStrategy,
                               const ConfigurationSubStrategy& subStrategy,
                               const ConfigurationParameter& configurationParameter,
@@ -68,7 +68,7 @@ namespace Network
         NODISCARD ClientStrategy GetClientStrategy() const noexcept;
         NODISCARD ConnectStrategy GetConnectStrategy() const noexcept;
         NODISCARD ParserStrategy GetParserStrategy() const noexcept;
-        NODISCARD OpenSSLStrategy GetOpenSSLStrategy() const noexcept;
+        NODISCARD OpenSslStrategy GetOpenSslStrategy() const noexcept;
         NODISCARD SocketSendMessage GetSocketSendMessage() const noexcept;
         NODISCARD EncryptedCompressionStrategy GetEncryptedCompressionStrategy() const noexcept;
 
@@ -79,6 +79,9 @@ namespace Network
 
         NODISCARD std::string GetHost() const;
         NODISCARD int GetPort() const noexcept;
+
+        NODISCARD bool IsServer() const noexcept;
+        NODISCARD bool IsClient() const noexcept;
 
     private:
         PackageType impl;

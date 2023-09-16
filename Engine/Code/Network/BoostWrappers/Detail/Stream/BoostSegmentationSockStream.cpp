@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:31)
+///	版本：0.9.1.4 (2023/09/15 17:25)
 
 #include "Network/NetworkExport.h"
 
@@ -179,15 +179,11 @@ void Network::BoostSegmentationSockStream::SubclassAsyncReceiveHeadEvent(const E
     }
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
 void Network::BoostSegmentationSockStream::SubclassAsyncReceiveContentEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex)
 {
+    System::UnusedFunction(eventInterface, messageBuffer);
+
     streamReceive = StreamReceive::Head;
 
     BoostSockStreamHelper::EventReceiveFunction(errorCode, eventInterface, AddressData{ *this }, messageBuffer->GetCurrentWriteIndex() - originalWriteIndex);
 }
-
-#include STSTEM_WARNING_POP

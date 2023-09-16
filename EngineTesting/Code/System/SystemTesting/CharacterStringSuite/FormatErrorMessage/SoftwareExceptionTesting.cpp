@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/26 20:33)
+///	版本：0.9.1.4 (2023/08/31 16:11)
 
 #include "SoftwareExceptionTesting.h"
 #include "System/CharacterString/FormatErrorMessage.h"
@@ -160,7 +160,7 @@ System::SoftwareExceptionTesting::SoftwareExceptionTesting(const OStreamShared& 
                   Facility::Web,
                   Facility::WebSocket,
                   Facility::Mobile,
-                  Facility::SQLite,
+                  Facility::SqLite,
                   Facility::Utc,
                   Facility::Wep,
                   Facility::SyncEngine,
@@ -187,8 +187,8 @@ void System::SoftwareExceptionTesting::MainTest()
 
 void System::SoftwareExceptionTesting::RandomShuffleFlags()
 {
-    shuffle(severities.begin(), severities.end(), randomEngine);
-    shuffle(facilities.begin(), facilities.end(), randomEngine);
+    std::ranges::shuffle(severities, randomEngine);
+    std::ranges::shuffle(facilities, randomEngine);
 
     ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(MakeSoftwareExceptionTest);
 }
@@ -205,7 +205,7 @@ bool System::SoftwareExceptionTesting::MakeSoftwareExceptionTest()
 
 void System::SoftwareExceptionTesting::DoMakeSoftwareExceptionTest(size_t index)
 {
-    const std::uniform_int<uint32_t> randomDistribution{ 0u, exceptionBit };
+    const std::uniform_int randomDistribution{ 0u, exceptionBit };
 
     const auto severity = severities.at(index % severities.size());
     const auto facility = facilities.at(index % facilities.size());

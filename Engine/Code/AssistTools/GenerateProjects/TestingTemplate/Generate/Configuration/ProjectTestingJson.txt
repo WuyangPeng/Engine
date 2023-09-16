@@ -1,0 +1,5 @@
+{
+  "$ProjectName$": 1,
+
+$ModuleTestingJson$
+}

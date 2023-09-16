@@ -5,45 +5,45 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/16 23:32)
+///	版本：0.9.1.4 (2023/08/31 14:22)
 
-#include "OpenGLBindFramebufferTesting.h"
+#include "OpenGLBindFrameBufferTesting.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
 #include "System/OpenGL/OpenGLBuffers.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::OpenGLBindFramebufferTesting::OpenGLBindFramebufferTesting(const OStreamShared& stream)
+System::OpenGLBindFrameBufferTesting::OpenGLBindFrameBufferTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, OpenGLBindFramebufferTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, OpenGLBindFrameBufferTesting)
 
-void System::OpenGLBindFramebufferTesting::DoRunUnitTest()
+void System::OpenGLBindFrameBufferTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void System::OpenGLBindFramebufferTesting::MainTest()
+void System::OpenGLBindFrameBufferTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLBindFramebufferTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLBindFrameBufferTest);
 }
 
-void System::OpenGLBindFramebufferTesting::OpenGLBindFramebufferTest()
+void System::OpenGLBindFrameBufferTesting::OpenGLBindFrameBufferTest()
 {
-    const auto framebuffers = GetGLGenFramebuffers();
-    ASSERT_LESS(0u, framebuffers);
+    const auto frameBuffers = GetGLGenFrameBuffers();
+    ASSERT_LESS(0u, frameBuffers);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(DoOpenGLBindFramebufferTest, framebuffers);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoOpenGLBindFrameBufferTest, frameBuffers);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteFramebufferTest, framebuffers);
+    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteFrameBufferTest, frameBuffers);
 }
 
-void System::OpenGLBindFramebufferTesting::DoOpenGLBindFramebufferTest(OpenGLUInt framebuffers) noexcept
+void System::OpenGLBindFrameBufferTesting::DoOpenGLBindFrameBufferTest(OpenGLUInt frameBuffers) noexcept
 {
-    SetGLBindFramebuffer(FrameBufferType::DrawFramebuffer, framebuffers);
-    SetGLBindFramebuffer(FrameBufferType::Framebuffer, framebuffers);
+    SetGLBindFrameBuffer(FrameBufferType::DrawFrameBuffer, frameBuffers);
+    SetGLBindFrameBuffer(FrameBufferType::FrameBuffer, frameBuffers);
 }

@@ -39,6 +39,8 @@ namespace CSVConfigure
         NODISCARD ConstSkillBaseSharedPtr GetSkill(int key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstSkillBaseSharedPtr GetFirstSkill(Function function) const;
 

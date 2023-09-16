@@ -230,10 +230,10 @@
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLSetCopyBufferSubDataTesting.h">
       <Filter>OpenGLSuite 头文件\OpenGLBuffers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLFramebufferTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLFrameBufferTesting.h">
       <Filter>OpenGLSuite 头文件\OpenGLBuffers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLBindFramebufferTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLBindFrameBufferTesting.h">
       <Filter>OpenGLSuite 头文件\OpenGLBuffers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLVertexArraysTesting.h">
@@ -278,7 +278,7 @@
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLTexturesCubeArrayTesting.h">
       <Filter>OpenGLSuite 头文件\OpenGLTextures</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLFramebufferTextures2DTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLFrameBufferTextures2DTesting.h">
       <Filter>OpenGLSuite 头文件\OpenGLTextures</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLPolygon\OpenGLPolygonModeTesting.h">
@@ -418,10 +418,10 @@
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLSetCopyBufferSubDataTesting.cpp">
       <Filter>OpenGLSuite 源文件\OpenGLBuffers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLFramebufferTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLFrameBufferTesting.cpp">
       <Filter>OpenGLSuite 源文件\OpenGLBuffers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLBindFramebufferTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLBindFrameBufferTesting.cpp">
       <Filter>OpenGLSuite 源文件\OpenGLBuffers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLVertexArraysTesting.cpp">
@@ -463,7 +463,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLTexturesCubeArrayTesting.cpp">
       <Filter>OpenGLSuite 源文件\OpenGLTextures</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLFramebufferTextures2DTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLFrameBufferTextures2DTesting.cpp">
       <Filter>OpenGLSuite 源文件\OpenGLTextures</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLPolygon\OpenGLPolygonModeTesting.cpp">

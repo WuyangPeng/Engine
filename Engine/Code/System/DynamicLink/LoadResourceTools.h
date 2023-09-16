@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/08 0:20)
+///	版本：0.9.1.4 (2023/08/28 16:35)
 
 #ifndef SYSTEM_DYNAMIC_LINK_LOAD_RESOURCE_TOOLS_H
 #define SYSTEM_DYNAMIC_LINK_LOAD_RESOURCE_TOOLS_H
@@ -28,7 +28,7 @@ namespace System
     NODISCARD DynamicLinkResource SYSTEM_DEFAULT_DECLARE FindResourceInLibrary(DynamicLinkModule module,
                                                                                const DynamicLinkCharType* type,
                                                                                const DynamicLinkCharType* name,
-                                                                               const LanguageIDData& language) noexcept;
+                                                                               const LanguageIdData& language) noexcept;
 
     NODISCARD DynamicLinkGlobal SYSTEM_DEFAULT_DECLARE LoadResourceInLibrary(DynamicLinkModule module,
                                                                              DynamicLinkResource resourceInfo) noexcept;

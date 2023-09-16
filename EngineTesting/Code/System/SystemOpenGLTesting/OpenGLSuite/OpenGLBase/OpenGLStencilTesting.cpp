@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/16 19:45)
+///	版本：0.9.1.4 (2023/08/31 14:22)
 
 #include "OpenGLStencilTesting.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
@@ -65,9 +65,9 @@ void System::OpenGLStencilTesting::MainTest()
 
 void System::OpenGLStencilTesting::SetGLStencilFuncSeparateTest() noexcept
 {
-    for (auto rasterizerStateCullFace : rasterizerStateCullFaces)
+    for (const auto rasterizerStateCullFace : rasterizerStateCullFaces)
     {
-        for (auto depthStencilStateMode : depthStencilStateModes)
+        for (const auto depthStencilStateMode : depthStencilStateModes)
         {
             SetGLStencilFuncSeparate(rasterizerStateCullFace, depthStencilStateMode, 0, 0);
         }
@@ -76,7 +76,7 @@ void System::OpenGLStencilTesting::SetGLStencilFuncSeparateTest() noexcept
 
 void System::OpenGLStencilTesting::SetGLStencilMaskSeparateTest() noexcept
 {
-    for (auto rasterizerStateCullFace : rasterizerStateCullFaces)
+    for (const auto rasterizerStateCullFace : rasterizerStateCullFaces)
     {
         SetGLStencilMaskSeparate(rasterizerStateCullFace, 0);
     }
@@ -84,13 +84,13 @@ void System::OpenGLStencilTesting::SetGLStencilMaskSeparateTest() noexcept
 
 void System::OpenGLStencilTesting::SetGLStencilOpSeparateTest() noexcept
 {
-    for (auto rasterizerStateCullFace : rasterizerStateCullFaces)
+    for (const auto rasterizerStateCullFace : rasterizerStateCullFaces)
     {
-        for (auto stencilFail : stencilFails)
+        for (const auto stencilFail : stencilFails)
         {
-            for (auto depthFail : depthFails)
+            for (const auto depthFail : depthFails)
             {
-                for (auto depthPass : depthPasses)
+                for (const auto depthPass : depthPasses)
                 {
                     SetGLStencilOpSeparate(rasterizerStateCullFace, stencilFail, depthFail, depthPass);
                 }

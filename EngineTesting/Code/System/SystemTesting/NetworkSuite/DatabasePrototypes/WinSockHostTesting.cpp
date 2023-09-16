@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/07 22:32)
+///	版本：0.9.1.4 (2023/09/01 10:47)
 
 #include "WinSockHostTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -45,34 +45,34 @@ void System::WinSockHostTesting::GetHostByAddressTest()
 {
     const auto serverHostname = "www.sina.com.cn"s;
 
-    InternetAddress addr{};
-    addr.s_addr = GetInternetAddress(serverHostname.c_str());
+    InternetAddress address{};
+    address.s_addr = GetInternetAddress(serverHostname.c_str());
 
-    const auto winSockHostent = GetHostByAddress(&addr, ProtocolFamilies::Inet);
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(winSockHostent, "获取Hostent失败。");
+    const auto winSockHostEnt = GetHostByAddress(&address, ProtocolFamilies::Inet);
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(winSockHostEnt, "获取Hostent失败。");
 
-    ASSERT_NOT_THROW_EXCEPTION_1(WinSockHostentTest, winSockHostent);
+    ASSERT_NOT_THROW_EXCEPTION_1(WinSockHostEntTest, winSockHostEnt);
 }
 
 void System::WinSockHostTesting::GetHostNameTest()
 {
     BufferType buffer{};
     ASSERT_TRUE(GetHostName(buffer.data(), bufferSize));
-    std::string hostName{ buffer.data() };
+    const std::string hostName{ buffer.data() };
 
     ASSERT_FALSE(hostName.empty());
 
-    const auto winSockHostent = GetHostByName(hostName.c_str());
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(winSockHostent, "获取Hostent失败。");
+    const auto winSockHostEnt = GetHostByName(hostName.c_str());
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(winSockHostEnt, "获取Hostent失败。");
 
-    ASSERT_NOT_THROW_EXCEPTION_1(WinSockHostentTest, winSockHostent);
+    ASSERT_NOT_THROW_EXCEPTION_1(WinSockHostEntTest, winSockHostEnt);
 }
 
-void System::WinSockHostTesting::WinSockHostentTest(const WinSockHostent* winSockHostent)
+void System::WinSockHostTesting::WinSockHostEntTest(const WinSockHostEnt* winSockHostEnt)
 {
-    ASSERT_UNEQUAL_NULL_PTR(winSockHostent->h_name);
-    ASSERT_UNEQUAL_NULL_PTR(winSockHostent->h_aliases);
-    ASSERT_EQUAL(winSockHostent->h_addrtype, EnumCastUnderlying<uint16_t>(ProtocolFamilies::Inet));
-    ASSERT_EQUAL(winSockHostent->h_length, boost::numeric_cast<uint16_t>(sizeof(InternetAddress)));
-    ASSERT_UNEQUAL_NULL_PTR(winSockHostent->h_addr_list);
+    ASSERT_UNEQUAL_NULL_PTR(winSockHostEnt->h_name);
+    ASSERT_UNEQUAL_NULL_PTR(winSockHostEnt->h_aliases);
+    ASSERT_EQUAL(winSockHostEnt->h_addrtype, EnumCastUnderlying<uint16_t>(ProtocolFamilies::Inet));
+    ASSERT_EQUAL(winSockHostEnt->h_length, boost::numeric_cast<uint16_t>(sizeof(InternetAddress)));
+    ASSERT_UNEQUAL_NULL_PTR(winSockHostEnt->h_addr_list);
 }

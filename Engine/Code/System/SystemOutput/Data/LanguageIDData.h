@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/29 23:44)
+///	版本：0.9.1.4 (2023/08/30 15:45)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_LANGUAGE_ID_DATA_H
 #define SYSTEM_SYSTEM_OUTPUT_LANGUAGE_ID_DATA_H
@@ -19,18 +19,18 @@
 
 namespace System
 {
-    class SYSTEM_DEFAULT_DECLARE LanguageIDData final
+    class SYSTEM_DEFAULT_DECLARE LanguageIdData final
     {
     public:
-        using ClassType = LanguageIDData;
+        using ClassType = LanguageIdData;
 
     public:
-        constexpr LanguageIDData() noexcept
+        constexpr LanguageIdData() noexcept
             : primaryLanguage{ PrimaryLanguage::Neutral }, subLanguage{ SubLanguage::Neutral }
         {
         }
 
-        constexpr LanguageIDData(PrimaryLanguage primaryLanguage, SubLanguage subLanguage) noexcept
+        constexpr LanguageIdData(const PrimaryLanguage primaryLanguage, const SubLanguage subLanguage) noexcept
             : primaryLanguage{ primaryLanguage }, subLanguage{ subLanguage }
         {
         }
@@ -45,9 +45,9 @@ namespace System
             return subLanguage;
         }
 
-        NODISCARD constexpr auto GetLanguageID() const noexcept
+        NODISCARD constexpr auto GetLanguageId() const noexcept
         {
-            return MakeLanguageID(EnumCastUnderlying<WindowsWord>(primaryLanguage), EnumCastUnderlying<WindowsWord>(subLanguage));
+            return MakeLanguageId(EnumCastUnderlying<WindowsWord>(primaryLanguage), EnumCastUnderlying<WindowsWord>(subLanguage));
         }
 
     private:

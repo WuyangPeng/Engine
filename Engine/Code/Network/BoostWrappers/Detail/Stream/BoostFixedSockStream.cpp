@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:30)
+///	版本：0.9.1.4 (2023/09/15 17:24)
 
 #include "Network/NetworkExport.h"
 
@@ -35,7 +35,7 @@ int Network::BoostFixedSockStream::Receive(const MessageBufferSharedPtr& message
 
     if (receiveSize != 0 && messageBuffer->GetMessageLength() != receiveSize)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("接收消息错误！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("接收消息错误！"s))
     }
 
     return receiveSize;
@@ -50,13 +50,9 @@ void Network::BoostFixedSockStream::AsyncReceive(const EventInterfaceSharedPtr& 
     HandleAsyncReceive(eventInterface, messageBuffer, messageBuffer->GetCurrentWriteIndex());
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
 void Network::BoostFixedSockStream::SubclassAsyncReceiveEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex)
 {
+    System::UnusedFunction(eventInterface, messageBuffer);
+
     BoostSockStreamHelper::EventReceiveFunction(errorCode, eventInterface, AddressData{ *this }, messageBuffer->GetCurrentWriteIndex() - originalWriteIndex);
 }
-
-#include STSTEM_WARNING_POP

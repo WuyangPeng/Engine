@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/29 15:21)
+///	版本：0.9.1.4 (2023/09/01 13:49)
 
 #ifndef SYSTEM_SECURITY_SUITE_RESTRICTED_TOKEN_TESTING_H
 #define SYSTEM_SECURITY_SUITE_RESTRICTED_TOKEN_TESTING_H
@@ -31,38 +31,39 @@ namespace System
 
     private:
         static constexpr auto securityBufferSize = 2u;
-        using SecuritySIDBufferType = std::array<SecuritySID, securityBufferSize * 2>;
+        static constexpr auto securitySidBufferSize = securityBufferSize * 2;
+        using SecuritySidBufferType = std::array<SecuritySid, securitySidBufferSize>;
         using SecuritySidAndAttributesBufferType = std::array<SecuritySidAndAttributes, securityBufferSize>;
-        using LUIDAndAttributesBufferType = std::array<LUIDAndAttributes, securityBufferSize>;
+        using LuidAndAttributesBufferType = std::array<LuidAndAttributes, securityBufferSize>;
 
         using SpecifiesAdditionalPrivilegeOptionsContainer = std::vector<SpecifiesAdditionalPrivilegeOptions>;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void CreateRestrictedTokenTest();
 
         void DoCreateRestrictedTokenTest(WindowsHandle tokenHandle);
-        NODISCARD SecuritySidAndAttributesBufferType GetSidsToDisable(SecuritySIDBufferType& sid);
-        void InitializeSecurityIdentifierTest(SecuritySIDBufferType& sid,
+        NODISCARD SecuritySidAndAttributesBufferType GetSidsToDisable(SecuritySidBufferType& sid);
+        void InitializeSecurityIdentifierTest(SecuritySidBufferType& sid,
                                               int count,
                                               SecuritySidAndAttributes& securitySidAndAttributes);
-        NODISCARD LUIDAndAttributesBufferType GetPrivilegesToDelete();
-        void GetLookupPrivilegeValueTest(LUIDAndAttributes& lUIDAndAttributes);
-        NODISCARD SecuritySidAndAttributesBufferType GetSidsToRestrict(SecuritySIDBufferType& sid);
+        NODISCARD LuidAndAttributesBufferType GetPrivilegesToDelete();
+        void GetLookupPrivilegeValueTest(LuidAndAttributes& luidAndAttributes);
+        NODISCARD SecuritySidAndAttributesBufferType GetSidsToRestrict(SecuritySidBufferType& sid);
         void RestrictedTest(WindowsHandle tokenHandle,
                             SecuritySidAndAttributesBufferType& sidsToDisable,
-                            LUIDAndAttributesBufferType& privilegesToDelete,
+                            LuidAndAttributesBufferType& privilegesToDelete,
                             SecuritySidAndAttributesBufferType& sidsToRestrict);
         void DoRestrictedTest(WindowsHandle tokenHandle,
                               SpecifiesAdditionalPrivilegeOptions specifiesAdditionalPrivilegeOptions,
                               SecuritySidAndAttributesBufferType& sidsToDisable,
-                              LUIDAndAttributesBufferType& privilegesToDelete,
+                              LuidAndAttributesBufferType& privilegesToDelete,
                               SecuritySidAndAttributesBufferType& sidsToRestrict);
 
     private:
-        SpecifiesAdditionalPrivilegeOptionsContainer specifiesAdditionalPrivilegeOptionses;
+        SpecifiesAdditionalPrivilegeOptionsContainer specifiesAdditionalPrivilegeOptionsContainer;
     };
 }
 

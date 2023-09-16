@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/31 23:25)
+///	版本：0.9.1.4 (2023/09/01 15:00)
 
 #include "ManualEventThreadTesting.h"
 #include "System/Threading/Event.h"
@@ -95,7 +95,9 @@ void System::ManualEventThreadTesting::CreateThread(boost::thread_group& threadG
 {
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForManualEventTest, this, eventHandle));
+        threadGroup.create_thread([this, eventHandle]() {
+            this->WaitForManualEventTest(eventHandle);
+        });
     }
 }
 

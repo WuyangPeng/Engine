@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/13 21:37)
+///	版本：0.9.1.4 (2023/08/31 14:24)
 
 #include "OpenGLGlutDestroyTesting.h"
 #include "System/OpenGL/OpenGLGlut.h"
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-int System::OpenGLGlutDestroyTesting::destroyWindowID{ 0 };
+int System::OpenGLGlutDestroyTesting::destroyWindowId{ 0 };
 
 System::OpenGLGlutDestroyTesting::OpenGLGlutDestroyTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -45,9 +45,9 @@ void System::OpenGLGlutDestroyTesting::DestroyWindowTest()
 
     const auto mainWindow = GlutGetWindow();
 
-    destroyWindowID = GlutCreateWindow("Not Displayed Window");
-    ASSERT_LESS(0, destroyWindowID);
-    GlutSetWindow(destroyWindowID);
+    destroyWindowId = GlutCreateWindow("Not Displayed Window");
+    ASSERT_LESS(0, destroyWindowId);
+    GlutSetWindow(destroyWindowId);
     GlutDisplayFunc(RenderSceneCallback);
 
     GlutSetWindow(mainWindow);
@@ -57,5 +57,5 @@ void System::OpenGLGlutDestroyTesting::RenderSceneCallback() noexcept
 {
     GlutSwapBuffers();
 
-    GlutDestroyWindow(destroyWindowID);
+    GlutDestroyWindow(destroyWindowId);
 }

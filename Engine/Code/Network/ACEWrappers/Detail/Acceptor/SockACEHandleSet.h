@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 13:49)
+///	版本：0.9.1.4 (2023/09/15 15:36)
 
 #ifndef NETWORK_NETWORK_INTERFACE_ACE_HANDLE_SET_H
 #define NETWORK_NETWORK_INTERFACE_ACE_HANDLE_SET_H
@@ -18,14 +18,14 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE SockACEHandleSet final : public HandleSetImpl
+    class NETWORK_HIDDEN_DECLARE SockAceHandleSet final : public HandleSetImpl
     {
     public:
-        using ClassType = SockACEHandleSet;
+        using ClassType = SockAceHandleSet;
         using ParentType = HandleSetImpl;
 
     public:
-        SockACEHandleSet() noexcept;
+        SockAceHandleSet() noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

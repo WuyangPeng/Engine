@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/23 0:39)
+///	版本：0.9.1.4 (2023/08/31 14:46)
 
 #ifndef SYSTEM_WINDOWS_TESTING_OPENGL_SUITE_H
 #define SYSTEM_WINDOWS_TESTING_OPENGL_SUITE_H

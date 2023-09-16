@@ -70,12 +70,12 @@ namespace Rendering
         PackageType impl;
     };
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 
     CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(Texture1DArray);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     CORE_TOOLS_SHARED_PTR_DECLARE(Texture1DArray);
 }

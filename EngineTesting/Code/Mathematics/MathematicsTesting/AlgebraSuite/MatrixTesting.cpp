@@ -559,7 +559,7 @@ void Mathematics::MatrixTesting::AccessTest()
 
     std::vector<float> floatVector = matrix0.GetColumnMajor();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     ASSERT_APPROXIMATE(floatVector[0], 3.0f, 1e-8f);
@@ -579,7 +579,7 @@ void Mathematics::MatrixTesting::AccessTest()
     ASSERT_APPROXIMATE(floatVector[11], 6.3f, 1e-8f);
     ASSERT_APPROXIMATE(floatVector[15], 3.21f, 1e-8f);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 void Mathematics::MatrixTesting::OperatorCalculateTest()

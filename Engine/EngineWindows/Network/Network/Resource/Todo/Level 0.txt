@@ -1,6 +1,3 @@
 TODO Level 0
  
-0.9.0.7
-
-1.	（NetworkMessage）增加写入比特位的接口。
-2.	（NetworkMessage）MessageEventManagerImpl事件通过userId分配到别的线程处理。
+0.9.1.4

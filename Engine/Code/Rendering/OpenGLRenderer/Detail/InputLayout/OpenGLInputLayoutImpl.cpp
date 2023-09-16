@@ -40,10 +40,10 @@ Rendering::OpenGLInputLayoutImpl::OpenGLInputLayoutImpl(MAYBE_UNUSED OpenGLUInt 
         attribute.SetOffset(format.GetOffset(i));
         attribute.SetStride(format.GetUsageIndex(i));
 
-        System::SetGLEnableVertexAttribArray(attribute.GetLocation());
+        System::SetGLEnableVertexAttributeArray(attribute.GetLocation());
         System::SetGLBindVertexBuffer(i, vertexBufferHandle, attribute.GetOffset(), attribute.GetStride());
-        System::SetGLVertexAttribFormat(attribute.GetLocation(), attribute.GetNumChannels(), System::UnderlyingCastEnum<System::OpenGLData>(attribute.GetChannelType()), attribute.GetNormalize(), 0);
-        System::SetGLVertexAttribBinding(attribute.GetLocation(), i);
+        System::SetGLVertexAttributeFormat(attribute.GetLocation(), attribute.GetNumChannels(), System::UnderlyingCastEnum<System::OpenGLData>(attribute.GetChannelType()), attribute.GetNormalize(), 0);
+        System::SetGLVertexAttributeBinding(attribute.GetLocation(), i);
     }
 
     System::SetGLBindVertexArray(0);

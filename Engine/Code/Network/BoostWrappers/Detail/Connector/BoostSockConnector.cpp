@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:28)
+///	版本：0.9.1.4 (2023/09/15 17:22)
 
 #include "Network/NetworkExport.h"
 
@@ -35,13 +35,11 @@ Network::BoostSockConnector::BoostSockConnector() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Network, BoostSockConnector)
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
 bool Network::BoostSockConnector::Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(sockStream, sockAddress);
 
     auto& ioService = BASE_MAIN_MANAGER_SINGLETON.GetContext();
 
@@ -68,6 +66,8 @@ void Network::BoostSockConnector::AsyncConnect(const EventInterfaceSharedPtr& ev
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
+    System::UnusedFunction(eventInterface, sockStream, sockAddress);
+
     auto& ioService = BASE_MAIN_MANAGER_SINGLETON.GetContext();
 
     boost::asio::ip::tcp::resolver resolver{ ioService };
@@ -78,8 +78,6 @@ void Network::BoostSockConnector::AsyncConnect(const EventInterfaceSharedPtr& ev
         BoostSockConnectorHelper::EventFunction(errorCode, eventInterface, AddressData{ endpoint.address().to_string() + ":" + std::to_string(endpoint.port()), endpoint.port() });
     });
 }
-
-#include STSTEM_WARNING_POP
 
 Network::BoostSockConnector::SockConnectorSharedPtr Network::BoostSockConnector::Clone() const
 {

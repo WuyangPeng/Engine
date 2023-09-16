@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 13:44)
+///	版本：0.9.1.4 (2023/09/16 10:44)
 
 #include "BoostSockAcceptorHandleTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -28,40 +28,6 @@ void Network::BoostSockAcceptorHandleTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Network::BoostSockAcceptorHandleTesting::MainTest()
+void Network::BoostSockAcceptorHandleTesting::MainTest() noexcept
 {
-    ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::AcceptorTest);
-}
-
-void Network::BoostSockAcceptorHandleTesting::AcceptorTest()
-{
-    ASSERT_NOT_THROW_EXCEPTION_0(AcceptorInformationTest);
-    ASSERT_THROW_EXCEPTION_0(ACEHandleExceptionTest);
-    ASSERT_THROW_EXCEPTION_0(WinSocketExceptionTest);
-}
-
-void Network::BoostSockAcceptorHandleTesting::AcceptorInformationTest()
-{
-    TestingType sockAcceptor{ GetBoostServerConfigurationStrategy(increase) };
-
-    ASSERT_EQUAL(sockAcceptor.GetAddress(), GetHostName() + ":" + std::to_string(GetPort() + increase));
-    ASSERT_EQUAL(sockAcceptor.GetPort(), GetPort() + increase);
-
-    const auto nativeHandle = sockAcceptor.GetBoostHandle();
-
-    ASSERT_TRUE(nativeHandle);
-}
-
-void Network::BoostSockAcceptorHandleTesting::ACEHandleExceptionTest()
-{
-    TestingType sockAcceptor{ GetBoostServerConfigurationStrategy() };
-
-    MAYBE_UNUSED const auto result = sockAcceptor.GetACEHandle();
-}
-
-void Network::BoostSockAcceptorHandleTesting::WinSocketExceptionTest()
-{
-    TestingType sockAcceptor{ GetBoostServerConfigurationStrategy() };
-
-    MAYBE_UNUSED const auto result = sockAcceptor.GetWinSocket();
 }

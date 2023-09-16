@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/14 23:13)
+///	版本：0.9.1.4 (2023/08/31 17:22)
 
 #include "CopyFileTesting.h"
 #include "System/FileManager/File.h"
@@ -14,12 +14,10 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using namespace std::literals;
-
 System::CopyFileTesting::CopyFileTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      fileName{ SYSTEM_TEXT("Resource/FileTesting/FileTestingText.txt"s) },
-      copyFileName{ SYSTEM_TEXT("Resource/FileTesting/CopyFileTestingText.txt"s) }
+      fileName{ SYSTEM_TEXT("Resource/FileTesting/FileTestingText.txt") },
+      copyFileName{ SYSTEM_TEXT("Resource/FileTesting/CopyFileTestingText.txt") }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }

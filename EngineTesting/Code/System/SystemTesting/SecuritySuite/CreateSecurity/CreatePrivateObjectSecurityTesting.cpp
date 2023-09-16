@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/25 21:07)
+///	版本：0.9.1.4 (2023/09/01 14:00)
 
 #include "CreatePrivateObjectSecurityTesting.h"
 #include "System/Security/CreateSecurity.h"
@@ -60,7 +60,7 @@ void System::CreatePrivateObjectSecurityTesting::SetSystemFileSecurityTest(Secur
 {
     if (GetTokenIsElevated())
     {
-        for (auto securityRequestedInformation : *this)
+        for (const auto securityRequestedInformation : *this)
         {
             ASSERT_TRUE(SetSystemFileSecurity(setFileName, securityRequestedInformation, newDescriptor));
         }

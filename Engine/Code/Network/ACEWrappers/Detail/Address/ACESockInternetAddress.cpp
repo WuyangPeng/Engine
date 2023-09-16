@@ -5,11 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:00)
+///	版本：0.9.1.4 (2023/09/15 15:46)
 
 #include "Network/NetworkExport.h"
 
-#include "ACESockInternetAddress.h"
+#include "AceSockInternetAddress.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -19,7 +19,7 @@
 
 #ifdef NETWORK_USE_ACE
 
-Network::ACESockInternetAddress::ACESockInternetAddress(const std::string& hostName, int port)
+Network::AceSockInternetAddress::AceSockInternetAddress(const std::string& hostName, int port)
     : aceInternetAddress{}
 {
     if (aceInternetAddress.set(boost::numeric_cast<uint16_t>(port), hostName.c_str()) != 0)
@@ -30,13 +30,13 @@ Network::ACESockInternetAddress::ACESockInternetAddress(const std::string& hostN
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::ACESockInternetAddress::ACESockInternetAddress() noexcept
+Network::AceSockInternetAddress::AceSockInternetAddress() noexcept
     : aceInternetAddress{}
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::ACESockInternetAddress::ACESockInternetAddress(int port)
+Network::AceSockInternetAddress::AceSockInternetAddress(int port)
     : aceInternetAddress{}
 {
     if (aceInternetAddress.set(boost::numeric_cast<uint16_t>(port)) != 0)
@@ -47,30 +47,30 @@ Network::ACESockInternetAddress::ACESockInternetAddress(int port)
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Network, ACESockInternetAddress)
+CLASS_INVARIANT_STUB_DEFINE(Network, AceSockInternetAddress)
 
-const Network::ACEInternetAddressType& Network::ACESockInternetAddress::GetACEInternetAddress() const noexcept
+const Network::ACEInternetAddressType& Network::AceSockInternetAddress::GetACEInternetAddress() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     return aceInternetAddress;
 }
 
-Network::ACEInternetAddressType& Network::ACESockInternetAddress::GetACEInternetAddress()
+Network::ACEInternetAddressType& Network::AceSockInternetAddress::GetACEInternetAddress()
 {
     NETWORK_CLASS_IS_VALID_9;
 
     return ParentType::GetACEInternetAddress();
 }
 
-Network::ACESockInternetAddress::SockAddressSharedPtr Network::ACESockInternetAddress::Clone() const
+Network::AceSockInternetAddress::SockAddressSharedPtr Network::AceSockInternetAddress::Clone() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     return std::make_shared<ClassType>(*this);
 }
 
-std::string Network::ACESockInternetAddress::GetAddress() const
+std::string Network::AceSockInternetAddress::GetAddress() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -84,7 +84,7 @@ std::string Network::ACESockInternetAddress::GetAddress() const
         return std::string{};
 }
 
-int Network::ACESockInternetAddress::GetPort() const
+int Network::AceSockInternetAddress::GetPort() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 

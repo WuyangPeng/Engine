@@ -103,7 +103,7 @@ void CoreTools::TableTesting::IntegerTest()
     ASSERT_EQUAL(table1.GetColumn(0), columnTuple0);
     ASSERT_EQUAL(table1.GetColumn(1), columnTuple1);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     ASSERT_EQUAL(*(table1[0]), 1221);
@@ -113,7 +113,7 @@ void CoreTools::TableTesting::IntegerTest()
     ASSERT_EQUAL(*(table1[2]), 221232);
     ASSERT_EQUAL(*(table1[2] + 1), 221312);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 void CoreTools::TableTesting::StringTest()
@@ -164,7 +164,7 @@ void CoreTools::TableTesting::StringTest()
     ASSERT_EQUAL(table1.GetColumn(0), columnTuple1);
     ASSERT_EQUAL(table1.GetColumn(1), columnTuple2);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     ASSERT_EQUAL(*(table1[0]), "second1");
@@ -172,7 +172,7 @@ void CoreTools::TableTesting::StringTest()
     ASSERT_EQUAL(*(table1[1]), "second0");
     ASSERT_EQUAL(*(table1[1] + 1), "first0");
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 void CoreTools::TableTesting::OperatorTest()
@@ -202,7 +202,7 @@ void CoreTools::TableTesting::OperatorTest()
 
 void CoreTools::TableTesting::ConstructorTest()
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     Table<2, 2, int> table0{ 1, 2, 3, 4 };
@@ -243,7 +243,7 @@ void CoreTools::TableTesting::ConstructorTest()
     ASSERT_EQUAL(table2[3][2], 15);
     ASSERT_EQUAL(table2[3][3], 16);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 void CoreTools::TableTesting::CompileErrorTest() noexcept

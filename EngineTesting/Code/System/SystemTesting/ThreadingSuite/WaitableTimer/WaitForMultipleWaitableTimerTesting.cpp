@@ -5,10 +5,9 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 23:12)
+///	版本：0.9.1.4 (2023/09/01 15:31)
 
 #include "WaitForMultipleWaitableTimerTesting.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning/Thread.h"
 #include "System/Threading/Flags/SemaphoreFlags.h"
 #include "System/Threading/WaitableTimer.h"
@@ -82,7 +81,7 @@ void System::WaitForMultipleWaitableTimerTesting::ResetSystemWaitableTimer(const
     WindowsLargeInteger waitableTimerLargeInteger{};
     waitableTimerLargeInteger.QuadPart = -base / 2;
 
-    for (auto handle : waitableTimerHandles)
+    for (const auto handle : waitableTimerHandles)
     {
         ASSERT_TRUE(SetSystemWaitableTimer(handle, &waitableTimerLargeInteger, 0, nullptr, nullptr, false));
     }
@@ -114,9 +113,15 @@ void System::WaitForMultipleWaitableTimerTesting::CreateThread(const Container& 
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimer0Test, this, waitableTimerHandles));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimer1Test, this, waitableTimerHandles));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimer2Test, this, waitableTimerHandles));
+        threadGroup.create_thread([this, waitableTimerHandles]() {
+            this->WaitForWaitableTimer0Test(waitableTimerHandles);
+        });
+        threadGroup.create_thread([this, waitableTimerHandles]() {
+            this->WaitForWaitableTimer1Test(waitableTimerHandles);
+        });
+        threadGroup.create_thread([this, waitableTimerHandles]() {
+            this->WaitForWaitableTimer2Test(waitableTimerHandles);
+        });
     }
 
     GetStream() << "等待" << (threadCount * 3) / 2 << "秒钟。\n";

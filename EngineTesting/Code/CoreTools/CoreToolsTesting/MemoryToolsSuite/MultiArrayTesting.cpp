@@ -13,6 +13,7 @@
 #include "CoreTools/Helper/UnitTest/AssertTestMacro.h"
 #include "CoreTools/MemoryTools/MultiArrayDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Mathematics/Base/Math.h"
 
 CoreTools::MultiArrayTesting::MultiArrayTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -35,9 +36,9 @@ void CoreTools::MultiArrayTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CoordinateTest);
 
     ASSERT_NOT_THROW_EXCEPTION_0(OrderLToRTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(OrderLRoTTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OrderRToLTest);
     ASSERT_NOT_THROW_EXCEPTION_0(OrderLToRConstantTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(OrderLRoTConstantTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OrderRToLConstantTest);
 }
 
 void CoreTools::MultiArrayTesting::SizeTest()
@@ -46,9 +47,9 @@ void CoreTools::MultiArrayTesting::SizeTest()
 
     static_assert(lattice0.GetDimensions() == 3);
 
-    static_assert(lattice0.GetSize(0) == 5);
-    static_assert(lattice0.GetSize(1) == 6);
-    static_assert(lattice0.GetSize(2) == 10);
+    ASSERT_EQUAL(lattice0.GetSize(0), 5);
+    ASSERT_EQUAL(lattice0.GetSize(1), 6);
+    ASSERT_EQUAL(lattice0.GetSize(2), 10);
 
     static_assert(lattice0.GetSize() == 5 * 6 * 10);
 
@@ -154,16 +155,16 @@ void CoreTools::MultiArrayTesting::CoordinateTest()
 
 void CoreTools::MultiArrayTesting::OrderLToRTest()
 {
-    MultiArray<int, true> multiArray{ 5, 6, 8 };
+    MultiArray<int, true> multiArray0{ 5, 6, 8 };
 
-    ASSERT_UNEQUAL_NULL_PTR(multiArray.GetData());
+    ASSERT_UNEQUAL_NULL_PTR(multiArray0.GetData());
 
-    multiArray.Fill(5);
+    multiArray0.Fill(5);
 
-    for (auto i = 0; i < multiArray.GetSize(); ++i)
+    for (auto i = 0; i < multiArray0.GetSize(); ++i)
     {
-        ASSERT_EQUAL(multiArray[i], 5);
-        multiArray[i] = i;
+        ASSERT_EQUAL(multiArray0[i], 5);
+        multiArray0[i] = i;
     }
 
     auto index = 0;
@@ -173,26 +174,92 @@ void CoreTools::MultiArrayTesting::OrderLToRTest()
         {
             for (auto i2 = 0; i2 < 5; ++i2)
             {
-                ASSERT_EQUAL(multiArray(i2, i1, i0), index);
-                ASSERT_EQUAL(multiArray({ i2, i1, i0 }), index);
+                ASSERT_EQUAL(multiArray0(i2, i1, i0), index);
+                ASSERT_EQUAL(multiArray0({ i2, i1, i0 }), index);
                 ++index;
+            }
+        }
+    }
+
+    MultiArray<float, true, 2, 3, 5> multiArray1{};
+
+    for (auto x2 = 0, i = 0; x2 < multiArray1.GetSize(2); ++x2)
+    {
+        for (auto x1 = 0; x1 < multiArray1.GetSize(1); ++x1)
+        {
+            for (auto x0 = 0; x0 < multiArray1.GetSize(0); ++x0, ++i)
+            {
+                multiArray1(x0, x1, x2) = static_cast<float>(i + 1);
+            }
+        }
+    }
+
+    for (auto i = 0; i < multiArray1.GetSize(); ++i)
+    {
+        multiArray1[i] += 2.0f;
+    }
+
+    for (auto x2 = 0, i = 0; x2 < multiArray1.GetSize(2); ++x2)
+    {
+        for (auto x1 = 0; x1 < multiArray1.GetSize(1); ++x1)
+        {
+            for (auto x0 = 0; x0 < multiArray1.GetSize(0); ++x0, ++i)
+            {
+                ASSERT_APPROXIMATE(multiArray1(x0, x1, x2), static_cast<float>(i + 3), Mathematics::MathF::GetZeroTolerance());
+
+                const std::array x{ x0, x1, x2 };
+
+                ASSERT_APPROXIMATE(multiArray1(x), static_cast<float>(i + 3), Mathematics::MathF::GetZeroTolerance());
+            }
+        }
+    }
+
+    MultiArray<float, true> multiArray2{ 2, 3, 5 };
+
+    for (auto x2 = 0, i = 0; x2 < multiArray2.GetSize(2); ++x2)
+    {
+        for (auto x1 = 0; x1 < multiArray2.GetSize(1); ++x1)
+        {
+            for (auto x0 = 0; x0 < multiArray2.GetSize(0); ++x0, ++i)
+            {
+                multiArray2(x0, x1, x2) = static_cast<float>(i + 1);
+            }
+        }
+    }
+
+    for (auto i = 0; i < multiArray2.GetSize(); ++i)
+    {
+        multiArray2[i] += 2.0f;
+    }
+
+    for (auto x2 = 0, i = 0; x2 < multiArray2.GetSize(2); ++x2)
+    {
+        for (auto x1 = 0; x1 < multiArray2.GetSize(1); ++x1)
+        {
+            for (auto x0 = 0; x0 < multiArray2.GetSize(0); ++x0, ++i)
+            {
+                ASSERT_APPROXIMATE(multiArray2(x0, x1, x2), static_cast<float>(i + 3), Mathematics::MathF::GetZeroTolerance());
+
+                const std::vector x{ x0, x1, x2 };
+
+                ASSERT_APPROXIMATE(multiArray2(x), static_cast<float>(i + 3), Mathematics::MathF::GetZeroTolerance());
             }
         }
     }
 }
 
-void CoreTools::MultiArrayTesting::OrderLRoTTest()
+void CoreTools::MultiArrayTesting::OrderRToLTest()
 {
-    MultiArray<int, false> multiArray{ 5, 6, 8 };
+    MultiArray<int, false> multiArray0{ 5, 6, 8 };
 
-    ASSERT_UNEQUAL_NULL_PTR(multiArray.GetData());
+    ASSERT_UNEQUAL_NULL_PTR(multiArray0.GetData());
 
-    multiArray.Fill(5);
+    multiArray0.Fill(5);
 
-    for (auto i = 0; i < multiArray.GetSize(); ++i)
+    for (auto i = 0; i < multiArray0.GetSize(); ++i)
     {
-        ASSERT_EQUAL(multiArray[i], 5);
-        multiArray[i] = i;
+        ASSERT_EQUAL(multiArray0[i], 5);
+        multiArray0[i] = i;
     }
 
     auto index = 0;
@@ -202,9 +269,75 @@ void CoreTools::MultiArrayTesting::OrderLRoTTest()
         {
             for (auto i2 = 0; i2 < 8; ++i2)
             {
-                ASSERT_EQUAL(multiArray(i0, i1, i2), index);
-                ASSERT_EQUAL(multiArray({ i0, i1, i2 }), index);
+                ASSERT_EQUAL(multiArray0(i0, i1, i2), index);
+                ASSERT_EQUAL(multiArray0({ i0, i1, i2 }), index);
                 ++index;
+            }
+        }
+    }
+
+    MultiArray<float, false, 2, 3, 5> multiArray1{};
+
+    for (auto x2 = 0, i = 0; x2 < multiArray1.GetSize(0); ++x2)
+    {
+        for (auto x1 = 0; x1 < multiArray1.GetSize(1); ++x1)
+        {
+            for (auto x0 = 0; x0 < multiArray1.GetSize(2); ++x0, ++i)
+            {
+                multiArray1(x2, x1, x0) = static_cast<float>(i + 1);
+            }
+        }
+    }
+
+    for (auto i = 0; i < multiArray1.GetSize(); ++i)
+    {
+        multiArray1[i] += 2.0f;
+    }
+
+    for (auto x2 = 0, i = 0; x2 < multiArray1.GetSize(0); ++x2)
+    {
+        for (auto x1 = 0; x1 < multiArray1.GetSize(1); ++x1)
+        {
+            for (auto x0 = 0; x0 < multiArray1.GetSize(2); ++x0, ++i)
+            {
+                ASSERT_APPROXIMATE(multiArray1(x2, x1, x0), static_cast<float>(i + 3), Mathematics::MathF::GetZeroTolerance());
+
+                const std::array x{ x2, x1, x0 };
+
+                ASSERT_APPROXIMATE(multiArray1(x), static_cast<float>(i + 3), Mathematics::MathF::GetZeroTolerance());
+            }
+        }
+    }
+
+    MultiArray<float, false> multiArray2{ 2, 3, 5 };
+
+    for (auto x2 = 0, i = 0; x2 < multiArray2.GetSize(0); ++x2)
+    {
+        for (auto x1 = 0; x1 < multiArray2.GetSize(1); ++x1)
+        {
+            for (auto x0 = 0; x0 < multiArray2.GetSize(2); ++x0, ++i)
+            {
+                multiArray2(x2, x1, x0) = static_cast<float>(i + 1);
+            }
+        }
+    }
+
+    for (auto i = 0; i < multiArray2.GetSize(); ++i)
+    {
+        multiArray2[i] += 2.0f;
+    }
+
+    for (auto x2 = 0, i = 0; x2 < multiArray2.GetSize(0); ++x2)
+    {
+        for (auto x1 = 0; x1 < multiArray2.GetSize(1); ++x1)
+        {
+            for (auto x0 = 0; x0 < multiArray2.GetSize(2); ++x0, ++i)
+            {
+                ASSERT_APPROXIMATE(multiArray2(x2, x1, x0), static_cast<float>(i + 3), Mathematics::MathF::GetZeroTolerance());
+
+                const std::vector x{ x2, x1, x0 };
+
+                ASSERT_APPROXIMATE(multiArray2(x), static_cast<float>(i + 3), Mathematics::MathF::GetZeroTolerance());
             }
         }
     }
@@ -239,7 +372,7 @@ void CoreTools::MultiArrayTesting::OrderLToRConstantTest()
     }
 }
 
-void CoreTools::MultiArrayTesting::OrderLRoTConstantTest()
+void CoreTools::MultiArrayTesting::OrderRToLConstantTest()
 {
     MultiArray<int, false, 5, 6, 8> multiArray{};
 

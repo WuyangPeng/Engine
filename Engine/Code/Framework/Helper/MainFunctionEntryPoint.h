@@ -92,7 +92,7 @@ namespace Framework
         return -1;
     }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26414)
 
     template <typename T>
@@ -114,7 +114,7 @@ namespace Framework
         return -1;
     }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     template <typename T>
     NODISCARD int AndroidMainEntryPoint(System::AndroidApp* androidApp, const System::TChar* engineEnvironment, const System::TChar* engineDirectory)

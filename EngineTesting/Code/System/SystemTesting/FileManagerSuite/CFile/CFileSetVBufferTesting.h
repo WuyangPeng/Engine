@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/12 18:53)
+///	版本：0.9.1.4 (2023/08/31 17:11)
 
-#ifndef SYSTEM_FILE_MANAGER_SUITE_CFILE_SETV_BUFFER_TESTING_H
-#define SYSTEM_FILE_MANAGER_SUITE_CFILE_SETV_BUFFER_TESTING_H
+#ifndef SYSTEM_FILE_MANAGER_SUITE_C_FILE_SET_V_BUFFER_TESTING_H
+#define SYSTEM_FILE_MANAGER_SUITE_C_FILE_SET_V_BUFFER_TESTING_H
 
 #include "CFileTestingBase.h"
 
@@ -26,7 +26,7 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void SetVBufferTest();
@@ -35,4 +35,4 @@ namespace System
     };
 }
 
-#endif  // SYSTEM_FILE_MANAGER_SUITE_CFILE_SETV_BUFFER_TESTING_H
+#endif  // SYSTEM_FILE_MANAGER_SUITE_C_FILE_SET_V_BUFFER_TESTING_H

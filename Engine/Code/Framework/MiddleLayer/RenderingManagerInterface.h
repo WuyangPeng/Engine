@@ -44,8 +44,10 @@ namespace Framework
         NODISCARD bool Initialize() override;
         NODISCARD bool Resize(WindowDisplay windowDisplay, const WindowSize& size) override;
 
-        NODISCARD bool Paint() override;
         NODISCARD bool Destroy() override;
+
+        void PreIdle() override;
+        NODISCARD bool Idle(int64_t timeDelta) override;
 
         // 渲染层不处理按键消息
         bool KeyUp(int key, const WindowPoint& point) final;

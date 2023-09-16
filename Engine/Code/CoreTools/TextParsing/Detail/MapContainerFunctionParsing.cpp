@@ -32,6 +32,11 @@ System::String CoreTools::MapContainerFunctionParsing::GenerateGetFunction() con
 
     content += GenerateGet();
     content += GenerateGetMappingContainer();
+
+    content += GenerateIndentation();
+    content += SYSTEM_TEXT("NODISCARD int GetContainerSize() const;\n");
+    content += TextParsing::gNewlineCharacter;
+
     content += GenerateGetFirstTemplate();
     content += GenerateGetTemplate();
 

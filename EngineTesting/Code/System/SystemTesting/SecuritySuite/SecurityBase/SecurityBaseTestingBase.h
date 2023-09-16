@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/28 16:53)
+///	版本：0.9.1.4 (2023/09/01 13:51)
 
 #ifndef SYSTEM_SECURITY_SUITE_SECURITY_BASE_TESTING_BASE_H
 #define SYSTEM_SECURITY_SUITE_SECURITY_BASE_TESTING_BASE_H
@@ -37,7 +37,7 @@ namespace System
         NODISCARD WindowsHandle OpenProcessToken();
         NODISCARD WindowsDWord GetBufferLength(WindowsHandle tokenHandle, TokenInformationClass tokenInformation);
         void CloseTokenTest(WindowsHandle tokenHandle);
-        NODISCARD SecuritySID GetSecuritySID();
+        NODISCARD SecuritySid GetSecuritySid();
     };
 }
 

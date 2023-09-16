@@ -46,10 +46,10 @@
     <None Include="Resource\Schedule.md">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="Configuration\EnvironmentVariable.json">
+    <None Include="Configuration\GatewayServerMiddleLayerTesting.json">
       <Filter>配置</Filter>
     </None>
-    <None Include="Configuration\GatewayServerMiddleLayerTesting.json">
+    <None Include="Configuration\EnvironmentVariable.json">
       <Filter>配置</Filter>
     </None>
     <None Include="Configuration\Log.json">

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/03 12:10)
+///	版本：0.9.1.4 (2023/09/01 10:04)
 
 #include "AllocateGenerateExceptionsTesting.h"
 #include "System/MemoryTools/HeapToolsDetail.h"
@@ -74,12 +74,12 @@ void System::AllocateGenerateExceptionsTesting::AllocateGenerateExceptionsHeapFa
 
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(handle, "CreateProcessHeap 失败。");
 
-    ASSERT_NOT_THROW_EXCEPTION_1(AllocateGenerateExceptionsHeapFailuredLoop, handle);
+    ASSERT_NOT_THROW_EXCEPTION_1(AllocateGenerateExceptionsHeapFailureLoop, handle);
 
     ASSERT_NOT_THROW_EXCEPTION_1(DestroyHeapTest, handle);
 }
 
-void System::AllocateGenerateExceptionsTesting::AllocateGenerateExceptionsHeapFailuredLoop(WindowsHandle handle)
+void System::AllocateGenerateExceptionsTesting::AllocateGenerateExceptionsHeapFailureLoop(WindowsHandle handle)
 {
     for (auto heapCreate : *this)
     {

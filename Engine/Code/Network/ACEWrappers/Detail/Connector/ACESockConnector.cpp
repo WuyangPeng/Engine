@@ -5,11 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:03)
+///	版本：0.9.1.4 (2023/09/15 15:46)
 
 #include "Network/NetworkExport.h"
 
-#include "ACESockConnector.h"
+#include "AceSockConnector.h"
 #include "System/Helper/EnumCast.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -22,21 +22,19 @@
 
 #ifdef NETWORK_USE_ACE
 
-Network::ACESockConnector::ACESockConnector() noexcept
+Network::AceSockConnector::AceSockConnector() noexcept
     : aceSockConnector{}
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Network, ACESockConnector)
+CLASS_INVARIANT_STUB_DEFINE(Network, AceSockConnector)
 
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26415)
-    #include SYSTEM_WARNING_DISABLE(26418)
-
-bool Network::ACESockConnector::Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+bool Network::AceSockConnector::Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(sockStream, sockAddress);
 
     if (aceSockConnector.connect(sockStream->GetACESockStream(), sockAddress->GetACEInternetAddress()) == 0)
         return true;
@@ -44,9 +42,11 @@ bool Network::ACESockConnector::Connect(const SockStreamSharedPtr& sockStream, c
         return false;
 }
 
-void Network::ACESockConnector::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+void Network::AceSockConnector::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(eventInterface, sockStream, sockAddress);
 
     CoreTools::CallbackParameters callbackParameters{ System::EnumCastUnderlying(SocketManagerPosition::Event) };
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncConnect));
@@ -64,9 +64,7 @@ void Network::ACESockConnector::AsyncConnect(const EventInterfaceSharedPtr& even
     }
 }
 
-    #include STSTEM_WARNING_POP
-
-Network::ACESockConnector::SockConnectorSharedPtr Network::ACESockConnector::Clone() const
+Network::AceSockConnector::SockConnectorSharedPtr Network::AceSockConnector::Clone() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 

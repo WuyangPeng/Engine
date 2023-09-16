@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/28 13:02)
+///	版本：0.9.1.4 (2023/09/01 13:58)
 
 #include "AddAccessAllowedAceUseAceFlagsTesting.h"
 #include "System/Security/AddAccess.h"
@@ -44,10 +44,10 @@ bool System::AddAccessAllowedAceUseAceFlagsTesting::RandomShuffleFlags()
 
 void System::AddAccessAllowedAceUseAceFlagsTesting::AddAccessAllowedAccessControlEntriesTest(AccessControlListRevision accessControlListRevision)
 {
-    auto aclBuffer = GetACLBuffer(accessControlListRevision);
-    auto acl = GetAccessCheckACLPtr(aclBuffer);
+    auto aclBuffer = GetAclBuffer(accessControlListRevision);
+    const auto acl = GetAccessCheckAclPtr(aclBuffer);
 
-    auto sid = GetSecuritySID();
+    auto sid = GetSecuritySid();
 
     for (auto index = 0u; index < GetMaxSize(); ++index)
     {
@@ -55,10 +55,10 @@ void System::AddAccessAllowedAceUseAceFlagsTesting::AddAccessAllowedAccessContro
     }
 }
 
-void System::AddAccessAllowedAceUseAceFlagsTesting::AddAccessTest(size_t index, AccessCheckACLPtr acl, AccessControlListRevision accessControlListRevision, SecuritySID& sid)
+void System::AddAccessAllowedAceUseAceFlagsTesting::AddAccessTest(size_t index, AccessCheckAclPtr acl, AccessControlListRevision accessControlListRevision, SecuritySid& sid)
 {
-    const auto controlACEInheritance = GetControlACEInheritance(index);
+    const auto controlAceInheritance = GetControlAceInheritance(index);
     const auto specificAccess = GetSpecificAccess(index);
 
-    ASSERT_TRUE(AddAccessAllowedAccessControlEntries(acl, accessControlListRevision, controlACEInheritance, specificAccess, &sid));
+    ASSERT_TRUE(AddAccessAllowedAccessControlEntries(acl, accessControlListRevision, controlAceInheritance, specificAccess, &sid));
 }

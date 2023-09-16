@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/15 23:35)
+///	版本：0.9.1.4 (2023/08/29 23:28)
 
 #ifndef SYSTEM_OPENGL_OPENGL_BASE_H
 #define SYSTEM_OPENGL_OPENGL_BASE_H
@@ -14,7 +14,6 @@
 
 #include "Fwd/OpenGLFlagsFwd.h"
 #include "Using/OpenGLUsing.h"
-#include "System/Helper/GLExtensionsMacro.h"
 
 namespace System
 {
@@ -57,13 +56,16 @@ namespace System
 
     void SYSTEM_DEFAULT_DECLARE SetGLStencilFuncSeparate(RasterizerStateCullFace face, DepthStencilStateMode func, OpenGLInt ref, OpenGLUInt mask) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLStencilMaskSeparate(RasterizerStateCullFace face, OpenGLUInt mask) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLStencilOpSeparate(RasterizerStateCullFace face, DepthStencilStateOperation sfail, DepthStencilStateOperation dpfail, DepthStencilStateOperation dppass) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLStencilOpSeparate(RasterizerStateCullFace face, DepthStencilStateOperation sFail, DepthStencilStateOperation dpFail, DepthStencilStateOperation dpPass) noexcept;
 
     void SYSTEM_DEFAULT_DECLARE SetGLColorMask(OpenGLBoolean red, OpenGLBoolean green, OpenGLBoolean blue, OpenGLBoolean alpha) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLColorMask(OpenGLUInt index, OpenGLBoolean red, OpenGLBoolean green, OpenGLBoolean blue, OpenGLBoolean alpha) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLSampleMask(OpenGLUInt maskNumber, OpenGLBitfield mask) noexcept;
 
     void SYSTEM_DEFAULT_DECLARE SetGLFlush() noexcept;
+
+    void SYSTEM_DEFAULT_DECLARE SetGLDrawRangeElements(PrimitiveType mode, OpenGLUInt start, OpenGLUInt end, OpenGLSize count, OpenGLData type, const void* indices) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLDrawArrays(PrimitiveType mode, OpenGLInt first, OpenGLSize count) noexcept;
 }
 
 #endif  // SYSTEM_OPENGL_OPENGL_BASE_H

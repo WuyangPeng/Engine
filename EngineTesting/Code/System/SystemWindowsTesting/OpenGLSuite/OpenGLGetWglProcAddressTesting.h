@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/23 0:13)
+///	版本：0.9.1.4 (2023/08/31 14:46)
 
 #ifndef SYSTEM_WINDOWS_TESTING_OPENGL_SUITE_OPENGL_GET_WGL_PROC_ADDRESS_TESTING_H
 #define SYSTEM_WINDOWS_TESTING_OPENGL_SUITE_OPENGL_GET_WGL_PROC_ADDRESS_TESTING_H
@@ -21,17 +21,17 @@ namespace System
         using ParentType = OpenGLWglPrototypesTestingBase;
 
     public:
-        explicit OpenGLGetWglProcAddressTesting(const OStreamShared& stream, WindowsHWnd hwnd);
+        OpenGLGetWglProcAddressTesting(const OStreamShared& stream, WindowsHWnd hWnd);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void OpenGLGetWglProcAddressTest();
 
-        void GetContextTest(WindowsHDC windowsDC);
+        void GetContextTest(WindowsHdc windowsDc);
         void DoOpenGLGetWglProcAddressTest();
     };
 }

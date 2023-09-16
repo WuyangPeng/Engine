@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/14 15:58)
+///	版本：0.9.1.4 (2023/08/31 14:25)
 
 #include "OpenGLProgramResourceTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -113,7 +113,9 @@ void System::OpenGLProgramResourceTesting::ProgramResourceNameTest(OpenGLUInt pr
     GetGLProgramResourceName(programHandle, ProgramInterface::ProgramInput, index, boost::numeric_cast<GLsizei>(numBytes), nullptr, name.data());
 
     if (name.empty() || (name.size() == 1 && name.at(0) == '\0'))
+    {
         return;
+    }
 
     const auto resourceIndex = GetGLProgramResourceIndex(programHandle, ProgramInterface::ProgramInput, name.data());
     ASSERT_EQUAL(boost::numeric_cast<int>(resourceIndex), index);

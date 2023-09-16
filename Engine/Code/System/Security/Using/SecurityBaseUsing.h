@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:11)
+///	版本：0.9.1.4 (2023/08/30 15:09)
 
 #ifndef SYSTEM_SECURITY_SECURITY_BASE_USING_H
 #define SYSTEM_SECURITY_SECURITY_BASE_USING_H
@@ -66,8 +66,8 @@ namespace System
     using SecurityTokenElevationTypePtr = PTOKEN_ELEVATION_TYPE;
     using SecurityImpersonationLevel = SECURITY_IMPERSONATION_LEVEL;
     using SecurityImpersonationLevelPtr = PSECURITY_IMPERSONATION_LEVEL;
-    using SecurityTokenAppcontainerInformation = TOKEN_APPCONTAINER_INFORMATION;
-    using SecurityTokenAppcontainerInformationPtr = PTOKEN_APPCONTAINER_INFORMATION;
+    using SecurityTokenAppContainerInformation = TOKEN_APPCONTAINER_INFORMATION;
+    using SecurityTokenAppContainerInformationPtr = PTOKEN_APPCONTAINER_INFORMATION;
 
 #else  // !WIN32
 
@@ -81,7 +81,7 @@ namespace System
 
     struct SecuritySidAndAttributes
     {
-        SecuritySIDPtr Sid;
+        SecuritySidPtr Sid;
         uint32_t Attributes;
     };
     using SecuritySidAndAttributesPtr = SecuritySidAndAttributes*;
@@ -155,25 +155,25 @@ namespace System
     struct SecurityTokenPrivileges
     {
         uint32_t PrivilegeCount;
-        LUIDAndAttributes Privileges[1];
+        LuidAndAttributes Privileges[1];
     };
     using SecurityTokenPrivilegesPtr = SecurityTokenPrivileges*;
 
     struct SecurityTokenOwner
     {
-        SecuritySIDPtr Owner;
+        SecuritySidPtr Owner;
     };
     using SecurityTokenOwnerPtr = SecurityTokenOwner*;
 
     struct SecurityTokenPrimaryGroup
     {
-        SecuritySIDPtr PrimaryGroup;
+        SecuritySidPtr PrimaryGroup;
     };
     using SecurityTokenPrimaryGroupPtr = SecurityTokenPrimaryGroup*;
 
     struct SecurityTokenDefaultDacl
     {
-        AccessCheckACLPtr DefaultDacl;
+        AccessCheckAclPtr DefaultDacl;
     };
     using SecurityTokenDefaultDaclPtr = SecurityTokenDefaultDacl*;
 
@@ -187,8 +187,8 @@ namespace System
         SecuritySidAndAttributesPtr RestrictedSids;
         uint32_t PrivilegeCount;
         uint32_t PrivilegeLength;
-        LUIDAndAttributesPtr Privileges;
-        LookupPrivilegeLUID AuthenticationId;
+        LuidAndAttributesPtr Privileges;
+        LookupPrivilegeLuid AuthenticationId;
     };
     using SecurityTokenGroupsAndPrivilegesPtr = SecurityTokenGroupsAndPrivileges*;
 
@@ -230,15 +230,15 @@ namespace System
         SecuritySidAndAttributesHash SidHash;
         SecuritySidAndAttributesHash RestrictedSidHash;
         SecurityTokenPrivilegesPtr Privileges;
-        LookupPrivilegeLUID AuthenticationId;
+        LookupPrivilegeLuid AuthenticationId;
         SecurityTokenType TokenType;
         SecurityImpersonationLevel ImpersonationLevel;
         SecurityTokenMandatoryPolicy MandatoryPolicy;
         uint32_t Flags;
         uint32_t AppContainerNumber;
-        SecuritySIDPtr PackageSid;
+        SecuritySidPtr PackageSid;
         SecuritySidAndAttributesHash CapabilitiesHash;
-        SecuritySIDPtr TrustLevelSid;
+        SecuritySidPtr TrustLevelSid;
     };
     using SecurityTokenAccessInformationPtr = SecurityTokenAccessInformation*;
 
@@ -253,14 +253,14 @@ namespace System
     struct SecurityTokenSource
     {
         char SourceName[tokenSourceLength];
-        LookupPrivilegeLUID SourceIdentifier;
+        LookupPrivilegeLuid SourceIdentifier;
     };
     using SecurityTokenSourcePtr = SecurityTokenSource*;
 
     struct SecurityTokenStatistics
     {
-        LookupPrivilegeLUID TokenId;
-        LookupPrivilegeLUID AuthenticationId;
+        LookupPrivilegeLuid TokenId;
+        LookupPrivilegeLuid AuthenticationId;
         WindowsLargeInteger ExpirationTime;
         SecurityTokenType TokenType;
         SecurityImpersonationLevel ImpersonationLevel;
@@ -268,22 +268,22 @@ namespace System
         uint32_t DynamicAvailable;
         uint32_t GroupCount;
         uint32_t PrivilegeCount;
-        LookupPrivilegeLUID ModifiedId;
+        LookupPrivilegeLuid ModifiedId;
     };
     using SecurityTokenStatisticsPtr = SecurityTokenStatistics*;
 
     struct SecurityTokenControl
     {
-        LookupPrivilegeLUID TokenId;
-        LookupPrivilegeLUID AuthenticationId;
-        LookupPrivilegeLUID ModifiedId;
+        LookupPrivilegeLuid TokenId;
+        LookupPrivilegeLuid AuthenticationId;
+        LookupPrivilegeLuid ModifiedId;
         SecurityTokenSource TokenSource;
     };
     using SecurityTokenControlPtr = SecurityTokenControl*;
 
     struct SecurityTokenOrigin
     {
-        LookupPrivilegeLUID OriginatingLogonSession;
+        LookupPrivilegeLuid OriginatingLogonSession;
     };
     using SecurityTokenOriginPtr = SecurityTokenOrigin*;
 
@@ -304,11 +304,11 @@ namespace System
     };
     using SecurityImpersonationLevelPtr = SecurityImpersonationLevel*;
 
-    struct SecurityTokenAppcontainerInformation
+    struct SecurityTokenAppContainerInformation
     {
-        SecuritySIDPtr TokenAppContainer;
+        SecuritySidPtr TokenAppContainer;
     };
-    using SecurityTokenAppcontainerInformationPtr = SecurityTokenAppcontainerInformation*;
+    using SecurityTokenAppContainerInformationPtr = SecurityTokenAppContainerInformation*;
 
 #endif  // WIN32
 }

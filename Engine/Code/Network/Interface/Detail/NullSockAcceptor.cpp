@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 09:18)
+///	版本：0.9.1.4 (2023/09/15 15:24)
 
 #include "Network/NetworkExport.h"
 
 #include "NullSockAcceptor.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 Network::NullSockAcceptor::NullSockAcceptor() noexcept
     : ParentType{}

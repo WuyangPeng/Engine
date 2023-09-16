@@ -31,7 +31,7 @@ void CoreTools::SqrtTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(SqrtTest);
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26812)
 
 void CoreTools::SqrtTesting::SqrtTest()
@@ -59,4 +59,4 @@ void CoreTools::SqrtTesting::SqrtTest()
     ASSERT_EQUAL(SqrtAlgorithm3<1>::Result, 1);
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP

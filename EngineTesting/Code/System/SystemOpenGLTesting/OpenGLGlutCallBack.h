@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/12 22:47)
+///	版本：0.9.1.4 (2023/08/31 13:49)
 
 #ifndef SYSTEM_OPENGL_TESTING_OPENGL_GLUT_CALL_BACK_H
 #define SYSTEM_OPENGL_TESTING_OPENGL_GLUT_CALL_BACK_H
@@ -19,6 +19,7 @@ namespace System
     public:
         using ClassType = OpenGLGlutCallBack;
         using ParentType = OpenGLGlutCallBackUnitTestSuite;
+
         using Suite = CoreTools::Suite;
 
     public:
@@ -27,7 +28,7 @@ namespace System
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        void AddSuite() final;
+        void AddSuite() override;
 
         void AddOpenGLSuite();
 

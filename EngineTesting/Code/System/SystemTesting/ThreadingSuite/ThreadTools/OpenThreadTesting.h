@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 19:43)
+///	版本：0.9.1.4 (2023/09/01 14:39)
 
 #ifndef SYSTEM_THREADING_SUITE_OPEN_THREAD_TESTING_H
 #define SYSTEM_THREADING_SUITE_OPEN_THREAD_TESTING_H
@@ -31,15 +31,15 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         NODISCARD bool RandomShuffleFlags();
         void ThreadTest();
 
         void DoThreadTest(WindowsHandle mutexHandle, ThreadStandardAccess threadStandardAccess, ThreadSpecificAccess threadSpecificAccess);
-        void ThreadResultTest(WindowsHandle threadHandle, WindowsDWord threadID, ThreadStandardAccess threadStandardAccess, ThreadSpecificAccess threadSpecificAccess, WindowsHandle mutexHandle);
-        void OpenThreadTest(WindowsHandle openThreadHandle, WindowsDWord threadID, WindowsHandle mutexHandle, WindowsHandle threadHandle);
+        void ThreadResultTest(WindowsHandle threadHandle, WindowsDWord threadId, ThreadStandardAccess threadStandardAccess, ThreadSpecificAccess threadSpecificAccess, WindowsHandle mutexHandle);
+        void OpenThreadTest(WindowsHandle openThreadHandle, WindowsDWord threadId, WindowsHandle mutexHandle, WindowsHandle threadHandle);
         void WaitForSystemMutexTest(WindowsHandle mutexHandle);
         void DoWaitForSystemMutexTest(size_t index, WindowsHandle mutexHandle);
 

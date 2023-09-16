@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:04)
+///	版本：0.9.1.4 (2023/09/15 15:38)
 
 #ifndef NETWORK_NETWORK_INTERFACE_ACE_SOCK_STREAM_H
 #define NETWORK_NETWORK_INTERFACE_ACE_SOCK_STREAM_H
@@ -18,19 +18,19 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE ACESockStream : public SockStreamImpl
+    class NETWORK_HIDDEN_DECLARE AceSockStream : public SockStreamImpl
     {
     public:
-        using ClassType = ACESockStream;
+        using ClassType = AceSockStream;
         using ParentType = SockStreamImpl;
 
     public:
-        ACESockStream() noexcept;
-        ~ACESockStream() noexcept;
-        ACESockStream(const ACESockStream& rhs) = delete;
-        ACESockStream& operator=(const ACESockStream& rhs) = delete;
-        ACESockStream(ACESockStream&& rhs) noexcept = delete;
-        ACESockStream& operator=(ACESockStream&& rhs) noexcept = delete;
+        AceSockStream() noexcept;
+        ~AceSockStream() noexcept;
+        AceSockStream(const AceSockStream& rhs) = delete;
+        AceSockStream& operator=(const AceSockStream& rhs) = delete;
+        AceSockStream(AceSockStream&& rhs) noexcept = delete;
+        AceSockStream& operator=(AceSockStream&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

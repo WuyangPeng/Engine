@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:10)
+///	版本：0.9.1.4 (2023/08/30 15:02)
 
 #ifndef SYSTEM_SECURITY_SECURITY_SID_FLAGS_H
 #define SYSTEM_SECURITY_SECURITY_SID_FLAGS_H
@@ -48,12 +48,12 @@ namespace System
 
         MonitoringUsers = DOMAIN_ALIAS_RID_MONITORING_USERS,
         LoggingUsers = DOMAIN_ALIAS_RID_LOGGING_USERS,
-        Authorizationaccess = DOMAIN_ALIAS_RID_AUTHORIZATIONACCESS,
+        AuthorizationAccess = DOMAIN_ALIAS_RID_AUTHORIZATIONACCESS,
         TsLicenseServers = DOMAIN_ALIAS_RID_TS_LICENSE_SERVERS,
         DcomUsers = DOMAIN_ALIAS_RID_DCOM_USERS,
-        Iusers = DOMAIN_ALIAS_RID_IUSERS,
+        IUsers = DOMAIN_ALIAS_RID_IUSERS,
         CryptoOperators = DOMAIN_ALIAS_RID_CRYPTO_OPERATORS,
-        CacheablePrincipalsGroup = DOMAIN_ALIAS_RID_CACHEABLE_PRINCIPALS_GROUP,
+        CacheablePrincipalsGroup = DOMAIN_ALIAS_RID_CACHEABLE_PRINCIPALS_GROUP,         
         NonCacheablePrincipalsGroup = DOMAIN_ALIAS_RID_NON_CACHEABLE_PRINCIPALS_GROUP,
         EventLogReadersGroup = DOMAIN_ALIAS_RID_EVENT_LOG_READERS_GROUP,
         CertsvcDcomAccessGroup = DOMAIN_ALIAS_RID_CERTSVC_DCOM_ACCESS_GROUP,
@@ -78,7 +78,7 @@ namespace System
         TerminalServerRid = SECURITY_TERMINAL_SERVER_RID,
         RemoteLogonRid = SECURITY_REMOTE_LOGON_RID,
         ThisOrganizationRid = SECURITY_THIS_ORGANIZATION_RID,
-        IuserRid = SECURITY_IUSER_RID,
+        IUserRid = SECURITY_IUSER_RID,
         LocalSystemRid = SECURITY_LOCAL_SYSTEM_RID,
         LocalServiceRid = SECURITY_LOCAL_SERVICE_RID,
         NetworkServiceRid = SECURITY_NETWORK_SERVICE_RID,
@@ -94,7 +94,7 @@ namespace System
         PackageBaseRid = SECURITY_PACKAGE_BASE_RID,
         PackageRidCount = SECURITY_PACKAGE_RID_COUNT,
         PackageNtlmRid = SECURITY_PACKAGE_NTLM_RID,
-        PackageSchannelRid = SECURITY_PACKAGE_SCHANNEL_RID,
+        PackageSChannelRid = SECURITY_PACKAGE_SCHANNEL_RID,
         PackageDigestRid = SECURITY_PACKAGE_DIGEST_RID,
 
         CredTypeBaseRid = SECURITY_CRED_TYPE_BASE_RID,
@@ -108,20 +108,20 @@ namespace System
 
         ReservedIdBaseRid = SECURITY_RESERVED_ID_BASE_RID,
 
-        ApppoolIdBaseRid = SECURITY_APPPOOL_ID_BASE_RID,
-        ApppoolIdRidCount = SECURITY_APPPOOL_ID_RID_COUNT,
+        AppPoolIdBaseRid = SECURITY_APPPOOL_ID_BASE_RID,
+        AppPoolIdRidCount = SECURITY_APPPOOL_ID_RID_COUNT,
 
-        VirtualserverIdBaseRid = SECURITY_VIRTUALSERVER_ID_BASE_RID,
-        VirtualserverIdRidCount = SECURITY_VIRTUALSERVER_ID_RID_COUNT,
+        VirtualServerIdBaseRid = SECURITY_VIRTUALSERVER_ID_BASE_RID,
+        VirtualServerIdRidCount = SECURITY_VIRTUALSERVER_ID_RID_COUNT,
 
-        UsermodedriverhostIdBaseRid = SECURITY_USERMODEDRIVERHOST_ID_BASE_RID,
-        UsermodedriverhostIdRidCount = SECURITY_USERMODEDRIVERHOST_ID_RID_COUNT,
+        UserModeDriverHostIdBaseRid = SECURITY_USERMODEDRIVERHOST_ID_BASE_RID,
+        UserModeDriverHostIdRidCount = SECURITY_USERMODEDRIVERHOST_ID_RID_COUNT,
 
         CloudInfrastructureServicesIdBaseRid = SECURITY_CLOUD_INFRASTRUCTURE_SERVICES_ID_BASE_RID,
         CloudInfrastructureServicesIdRidCount = SECURITY_CLOUD_INFRASTRUCTURE_SERVICES_ID_RID_COUNT,
 
-        WmihostIdBaseRid = SECURITY_WMIHOST_ID_BASE_RID,
-        WmihostIdRidCount = SECURITY_WMIHOST_ID_RID_COUNT,
+        WmiHostIdBaseRid = SECURITY_WMIHOST_ID_BASE_RID,
+        WmiHostIdRidCount = SECURITY_WMIHOST_ID_RID_COUNT,
 
         TaskIdBaseRid = SECURITY_TASK_ID_BASE_RID,
 
@@ -129,7 +129,7 @@ namespace System
 
         ComIdBaseRid = SECURITY_COM_ID_BASE_RID,
 
-        VirtualaccountIdRidCount = SECURITY_VIRTUALACCOUNT_ID_RID_COUNT,
+        VirtualAccountIdRidCount = SECURITY_VIRTUALACCOUNT_ID_RID_COUNT,
 
         MaxBaseRid = SECURITY_MAX_BASE_RID,
         MaxAlwaysFiltered = SECURITY_MAX_ALWAYS_FILTERED,
@@ -172,10 +172,10 @@ namespace System
 
         MonitoringUsers = (0x0000022EL),
         LoggingUsers = (0x0000022FL),
-        Authorizationaccess = (0x00000230L),
+        AuthorizationAccess = (0x00000230L),
         TsLicenseServers = (0x00000231L),
         DcomUsers = (0x00000232L),
-        Iusers = (0x00000238L),
+        IUsers = (0x00000238L),
         CryptoOperators = (0x00000239L),
         CacheablePrincipalsGroup = (0x0000023BL),
         NonCacheablePrincipalsGroup = (0x0000023CL),
@@ -202,7 +202,7 @@ namespace System
         TerminalServerRid = (0x0000000DL),
         RemoteLogonRid = (0x0000000EL),
         ThisOrganizationRid = (0x0000000FL),
-        IuserRid = (0x00000011L),
+        IUserRid = (0x00000011L),
         LocalSystemRid = (0x00000012L),
         LocalServiceRid = (0x00000013L),
         NetworkServiceRid = (0x00000014L),
@@ -218,7 +218,7 @@ namespace System
         PackageBaseRid = (0x00000040L),
         PackageRidCount = (2L),
         PackageNtlmRid = (0x0000000AL),
-        PackageSchannelRid = (0x0000000EL),
+        PackageSChannelRid = (0x0000000EL),
         PackageDigestRid = (0x00000015L),
 
         CredTypeBaseRid = (0x00000041L),
@@ -232,20 +232,20 @@ namespace System
 
         ReservedIdBaseRid = (0x00000051L),
 
-        ApppoolIdBaseRid = (0x00000052L),
-        ApppoolIdRidCount = (6L),
+        AppPoolIdBaseRid = (0x00000052L),
+        AppPoolIdRidCount = (6L),
 
-        VirtualserverIdBaseRid = (0x00000053L),
-        VirtualserverIdRidCount = (6L),
+        VirtualServerIdBaseRid = (0x00000053L),
+        VirtualServerIdRidCount = (6L),
 
-        UsermodedriverhostIdBaseRid = (0x00000054L),
-        UsermodedriverhostIdRidCount = (6L),
+        UserModeDriverHostIdBaseRid = (0x00000054L),
+        UserModeDriverHostIdRidCount = (6L),
 
         CloudInfrastructureServicesIdBaseRid = (0x00000055L),
         CloudInfrastructureServicesIdRidCount = (6L),
 
-        WmihostIdBaseRid = (0x00000056L),
-        WmihostIdRidCount = (6L),
+        WmiHostIdBaseRid = (0x00000056L),
+        WmiHostIdRidCount = (6L),
 
         TaskIdBaseRid = (0x00000057L),
 
@@ -253,7 +253,7 @@ namespace System
 
         ComIdBaseRid = (0x00000059L),
 
-        VirtualaccountIdRidCount = (6L),
+        VirtualAccountIdRidCount = (6L),
 
         MaxBaseRid = (0x0000006FL),
         MaxAlwaysFiltered = (0x000003E7L),

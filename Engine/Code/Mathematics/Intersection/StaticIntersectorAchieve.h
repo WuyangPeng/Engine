@@ -14,7 +14,7 @@
 #include "StaticIntersector.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename Real, template <typename> class Vector>
@@ -24,7 +24,7 @@ Mathematics::StaticIntersector<Real, Vector>::StaticIntersector(const Real epsil
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 template <typename Real, template <typename> class Vector>
 Mathematics::StaticIntersector<Real, Vector>::~StaticIntersector() noexcept

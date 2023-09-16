@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/22 1:40)
+///	版本：0.9.1.4 (2023/08/31 14:26)
 
 #include "OpenGLSetSamplerParameterTesting.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
@@ -97,6 +97,6 @@ void System::OpenGLSetSamplerParameterTesting::LodBiasTest(OpenGLInt sampler) no
 
 void System::OpenGLSetSamplerParameterTesting::BorderColorTest(OpenGLInt sampler) noexcept
 {
-    BorderColorType borderColorType{ 0.5f, 0.3f, 0.2f, 0.4f };
+    constexpr BorderColorType borderColorType{ 0.5f, 0.3f, 0.2f, 0.4f };
     SetGLSamplerParameter(sampler, OpenGLTextureName::BorderColor, borderColorType.data());
 }

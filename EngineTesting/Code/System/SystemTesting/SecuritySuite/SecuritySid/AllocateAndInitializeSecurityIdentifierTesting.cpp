@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/29 20:45)
+///	版本：0.9.1.4 (2023/09/01 14:10)
 
 #include "AllocateAndInitializeSecurityIdentifierTesting.h"
 #include "System/Security/SecuritySid.h"
@@ -39,11 +39,11 @@ void System::AllocateAndInitializeSecurityIdentifierTesting::AllocateTest()
     }
 }
 
-void System::AllocateAndInitializeSecurityIdentifierTesting::DoAllocateTest(SecuritySIDIndentifierAuthority& identifierAuthority)
+void System::AllocateAndInitializeSecurityIdentifierTesting::DoAllocateTest(SecuritySidIdentifierAuthority& identifierAuthority)
 {
     constexpr WindowsByte subAuthorityCount{ 5 };
 
-    SecuritySIDPtr sid{ nullptr };
+    SecuritySidPtr sid{ nullptr };
 
     ASSERT_TRUE(AllocateAndInitializeSecurityIdentifier(&identifierAuthority, subAuthorityCount, 0, 0, 0, 0, 0, 0, 0, 0, &sid));
     ASSERT_UNEQUAL_NULL_PTR(sid);

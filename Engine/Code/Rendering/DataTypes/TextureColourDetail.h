@@ -192,12 +192,12 @@ void Rendering::TextureColour<Format>::ConvertingAlpha([[maybe_unused]] const Te
 {
     static_assert(0 <= alphaIndex && alphaIndex < arraySize, "index is crossing!");
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     colour[alphaIndex] = alphaMaxValue;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 // private
@@ -219,13 +219,13 @@ void Rendering::TextureColour<Format>::ConvertingBit(const TextureColour<RhsForm
     const auto lhsFormatDistance = maxValue - minValue;
     const auto difference = textureColour[RhsIndex] - rhsMinValue;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 #include SYSTEM_WARNING_DISABLE(26467)
 
     colour[Index] = boost::numeric_cast<ValueType>(difference * lhsFormatDistance / rhsFormatDistance) + minValue;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 // private
@@ -247,13 +247,13 @@ void Rendering::TextureColour<Format>::ConvertingBit(const TextureColour<RhsForm
     const auto lhsFormatDistance = maxValue - minValue;
     const auto difference = textureColour[RhsIndex] - rhsMinValue;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 #include SYSTEM_WARNING_DISABLE(26467)
 
     colour[Index] = boost::numeric_cast<ValueType>(difference * lhsFormatDistance / rhsFormatDistance + 0.5f) + minValue;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -324,12 +324,12 @@ typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Fo
 
     RENDERING_CLASS_IS_VALID_CONST_3;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     return colour[redIndex];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <Rendering::TextureFormat Format>
@@ -340,12 +340,12 @@ typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Fo
 
     RENDERING_CLASS_IS_VALID_CONST_3;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     return colour[greenIndex];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <Rendering::TextureFormat Format>
@@ -356,12 +356,12 @@ typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Fo
 
     RENDERING_CLASS_IS_VALID_CONST_3;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     return colour[blueIndex];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <Rendering::TextureFormat Format>
@@ -372,12 +372,12 @@ typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Fo
 
     RENDERING_CLASS_IS_VALID_CONST_3;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     return colour[alphaIndex];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <Rendering::TextureFormat Format>
@@ -388,12 +388,12 @@ typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Fo
 
     RENDERING_CLASS_IS_VALID_CONST_3;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     return colour[luminanceIndex];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <Rendering::TextureFormat Format>
@@ -420,12 +420,12 @@ void Rendering::TextureColour<Format>::SetRed(ValueType red) noexcept
 
     RENDERING_CLASS_IS_VALID_3;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     colour[redIndex] = red;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <Rendering::TextureFormat Format>
@@ -436,12 +436,12 @@ void Rendering::TextureColour<Format>::SetGreen(ValueType green) noexcept
 
     RENDERING_CLASS_IS_VALID_3;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     colour[greenIndex] = green;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <Rendering::TextureFormat Format>
@@ -452,12 +452,12 @@ void Rendering::TextureColour<Format>::SetBlue(ValueType blue) noexcept
 
     RENDERING_CLASS_IS_VALID_3;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     colour[blueIndex] = blue;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <Rendering::TextureFormat Format>
@@ -468,12 +468,12 @@ void Rendering::TextureColour<Format>::SetAlpha(ValueType alpha) noexcept
 
     RENDERING_CLASS_IS_VALID_3;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     colour[alphaIndex] = alpha;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <Rendering::TextureFormat Format>
@@ -484,12 +484,12 @@ void Rendering::TextureColour<Format>::SetLuminance(ValueType luminance) noexcep
 
     RENDERING_CLASS_IS_VALID_3;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     colour[luminanceIndex] = luminance;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <Rendering::TextureFormat Format>
@@ -556,13 +556,13 @@ void Rendering::TextureColour<Format>::Multiply(const std::integral_constant<boo
 {
     static_assert(0 <= Index && Index < arraySize, "index is crossing!");
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 #include SYSTEM_WARNING_DISABLE(26467)
 
     colour[Index] = boost::numeric_cast<ValueType>(textureColour[Index] * textureColour[Index] / maxValue);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <Rendering::TextureFormat Format>
@@ -583,12 +583,12 @@ Rendering::TextureColour<Format>& Rendering::TextureColour<Format>::operator*=(R
     {
         auto multiply = value * rhs;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26467)
 
         value = boost::numeric_cast<ValueType>(multiply);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     Standardization();
@@ -623,12 +623,12 @@ void Rendering::TextureColour<Format>::Divide(RhsType rhs, const std::integral_c
     {
         auto divide = value / rhs;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26467)
 
         value = boost::numeric_cast<ValueType>(divide);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     Standardization();
@@ -648,12 +648,12 @@ void Rendering::TextureColour<Format>::Divide(RhsType rhs, const std::false_type
     {
         auto divide = value / rhs;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26467)
 
         value = boost::numeric_cast<ValueType>(divide);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     Standardization();

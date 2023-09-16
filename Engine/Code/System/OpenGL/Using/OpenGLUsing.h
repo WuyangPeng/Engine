@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 22:41)
+///	版本：0.9.1.4 (2023/08/29 23:27)
 
 #ifndef SYSTEM_OPENGL_OPENGL_USING_H
 #define SYSTEM_OPENGL_OPENGL_USING_H
@@ -28,9 +28,9 @@ namespace System
     using OpenGLUShort = GLshort;
     using OpenGLUInt = GLuint;
     using OpenGLFloat = GLfloat;
-    using OpenGLClampf = GLclampf;
+    using OpenGLClampF = GLclampf;
     using OpenGLDouble = GLdouble;
-    using OpenGLClampd = GLclampd;
+    using OpenGLClampD = GLclampd;
     using OpenGLVoid = GLvoid;
     using OpenGLIntPtr = GLintptr;
     using OpenGLSizePtr = GLsizeiptr;

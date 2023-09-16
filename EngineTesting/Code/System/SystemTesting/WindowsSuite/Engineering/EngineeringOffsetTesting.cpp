@@ -5,13 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 19:01)
+///	版本：0.9.1.4 (2023/09/01 15:41)
 
-#include "EngineeringOffsetTesting.h" 
+#include "EngineeringOffsetTesting.h"
 #include "System/Windows/Engineering.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h" 
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::EngineeringOffsetTesting::EngineeringOffsetTesting(const OStreamShared& stream)
     : ParentType{ stream }

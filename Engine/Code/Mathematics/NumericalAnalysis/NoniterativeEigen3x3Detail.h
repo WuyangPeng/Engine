@@ -70,7 +70,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::Compute(const Matrix3& matrix)
     {
         Matrix3 computeMatrix{ scaledEntry };
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
@@ -79,7 +79,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::Compute(const Matrix3& matrix)
         computeMatrix(2, 2) -= eigenvalue[i];
         if (!PositiveRank(computeMatrix, maxEntry[i], maxRow[i]))
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         {
             // 重新缩放回原来的大小。
             RescaleBack(maxValue);
@@ -89,7 +89,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::Compute(const Matrix3& matrix)
         }
     }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     auto totalMax = maxEntry[0];
@@ -107,7 +107,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::Compute(const Matrix3& matrix)
     maxRow[maxIndex].Normalize();
     ComputeVectors(scaledEntry, maxRow[maxIndex], (maxIndex + 1) % 3, (maxIndex + 2) % 3, maxIndex);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     // 重新缩放回原来的大小。
     RescaleBack(maxValue);
@@ -182,7 +182,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3& matrix
     const auto root1 = c2Divided3 - magnitude * (cosValue + sqrt3Value * sinValue);
     const auto root2 = c2Divided3 - magnitude * (cosValue - sqrt3Value * sinValue);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
     // 排序按升序排列。
     if (root0 <= root1)
@@ -213,7 +213,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3& matrix
             eigenvalue[0] = root2;
         }
     }
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>

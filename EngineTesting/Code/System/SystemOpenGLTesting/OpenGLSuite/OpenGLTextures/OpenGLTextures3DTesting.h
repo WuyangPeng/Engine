@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/20 15:41)
+///	版本：0.9.1.4 (2023/08/31 14:05)
 
 #ifndef SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_TEXTURES_3D_TESTING_H
 #define SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_TEXTURES_3D_TESTING_H
@@ -27,7 +27,7 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void OpenGLTextures3DTest(TextureTarget textureTarget);

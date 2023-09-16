@@ -1,22 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/05 22:50)
+///	版本：0.9.1.4 (2023/08/31 13:44)
 
 #include "SystemAndroidTestingAndroidCallBack.h"
 #include "Testing.h"
 #include "System/Windows/WindowsCreate.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
-
-using namespace std::literals;
+#include "Framework/AndroidFrame/AndroidCallBackUnitTestSuiteDetail.h"
 
 System::SystemAndroidTestingAndroidCallBack::SystemAndroidTestingAndroidCallBack(int64_t delta)
-    : ParentType{ delta, "【系统库】Android单元测试套件"s }
+    : ParentType{ delta, "【系统库】Android单元测试套件" }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -30,7 +29,7 @@ void System::SystemAndroidTestingAndroidCallBack::InitSuite()
 
 void System::SystemAndroidTestingAndroidCallBack::AddAndroidSuite()
 {
-    auto androidSuite = GenerateSuite("安卓"s);
+    auto androidSuite = GenerateSuite("安卓");
 
     auto androidApp = GetAndroidApp();
 

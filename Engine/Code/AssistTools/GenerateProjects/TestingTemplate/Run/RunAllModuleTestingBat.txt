@@ -1,0 +1,9 @@
+@echo on
+ 
+call Run$ModuleName$Testing.bat 
+
+call Run$ModuleName$$CoreName$Testing.bat 
+
+call Run$ModuleName$MiddleLayerTesting.bat
+
+pause

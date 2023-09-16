@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/12 21:42)
+///	版本：0.9.1.4 (2023/08/31 17:22)
 
 #include "CFileCharacterTesting.h"
 #include "System/FileManager/CFile.h"
@@ -14,8 +14,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using namespace std::literals;
 
 System::CFileCharacterTesting::CFileCharacterTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -39,7 +37,7 @@ void System::CFileCharacterTesting::MainTest()
 
 void System::CFileCharacterTesting::PutCharacterTest()
 {
-    auto file = OpenFile(SYSTEM_FILE_TEXT("w+"s));
+    auto file = OpenFile(SYSTEM_FILE_TEXT("w+"));
 
     ASSERT_NOT_THROW_EXCEPTION_1(DoPutCharacterTest, file);
 
@@ -59,7 +57,7 @@ void System::CFileCharacterTesting::DoPutCharacterTest(FILE* file)
 
 void System::CFileCharacterTesting::PutStringTest()
 {
-    auto file = OpenFile(SYSTEM_FILE_TEXT("w+"s));
+    auto file = OpenFile(SYSTEM_FILE_TEXT("w+"));
 
     ASSERT_NOT_THROW_EXCEPTION_1(DoPutStringTest, file);
 
@@ -84,7 +82,7 @@ void System::CFileCharacterTesting::DoPutStringTest(FILE* file)
 
 void System::CFileCharacterTesting::GetStringTest()
 {
-    auto file = OpenFile(SYSTEM_FILE_TEXT("r"s));
+    auto file = OpenFile(SYSTEM_FILE_TEXT("r"));
 
     ASSERT_NOT_THROW_EXCEPTION_1(DoGetStringTest, file);
 
@@ -93,7 +91,7 @@ void System::CFileCharacterTesting::GetStringTest()
 
 System::CFileString System::CFileCharacterTesting::GetFileName() const
 {
-    return SYSTEM_FILE_TEXT("Resource/CFileTesting/CharacterTest.txt"s);
+    return SYSTEM_FILE_TEXT("Resource/CFileTesting/CharacterTest.txt");
 }
 
 void System::CFileCharacterTesting::DoGetStringTest(FILE* file)

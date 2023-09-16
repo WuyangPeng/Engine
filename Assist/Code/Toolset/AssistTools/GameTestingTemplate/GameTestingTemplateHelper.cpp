@@ -22,7 +22,7 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(GameTestingTemplate, GameTestingTemplateH
 
 int GameTestingTemplate::GameTestingTemplateHelper::DoRun()
 {
-    GenerateEngine generateEngine("Configuration/TestingStringReplacing.json", "Configuration/GameTestingParameter.json");
+    GenerateEngine generateEngine{ "Configuration/GameTemplate.json" };
 
     return 0;
 }

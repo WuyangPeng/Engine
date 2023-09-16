@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/08 18:40)
+///	版本：0.9.1.4 (2023/08/28 16:37)
 
 #include "System/SystemExport.h"
 
 #include "LoadResourceTools.h"
-#include "System/SystemOutput/Data/LanguageIDData.h"
+#include "System/SystemOutput/Data/LanguageIdData.h"
 #include "System/Windows/WindowsSystem.h"
 
 System::DynamicLinkResource System::FindResourceInLibrary(DynamicLinkModule module, const DynamicLinkCharType* type, const DynamicLinkCharType* name) noexcept
@@ -28,11 +28,11 @@ System::DynamicLinkResource System::FindResourceInLibrary(DynamicLinkModule modu
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::DynamicLinkResource System::FindResourceInLibrary(DynamicLinkModule module, const DynamicLinkCharType* type, const DynamicLinkCharType* name, const LanguageIDData& language) noexcept
+System::DynamicLinkResource System::FindResourceInLibrary(DynamicLinkModule module, const DynamicLinkCharType* type, const DynamicLinkCharType* name, const LanguageIdData& language) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::FindResourceEx(module, type, name, language.GetLanguageID());
+    return ::FindResourceEx(module, type, name, language.GetLanguageId());
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

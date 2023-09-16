@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/11 09:26)
+///	版本：0.9.1.4 (2023/09/16 09:11)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -15,7 +15,6 @@
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 #include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
-#include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/NetworkMessage/MessageManager.h"
 
@@ -57,6 +56,7 @@ void Network::TestingHelper::InitSuite()
     AddHelperSuite();
     AddConfigurationSuite();
     AddNetworkMessageSuite();
+    AddServiceWrappersSuite();
     AddInterfaceSuite();
     AddACEWrappersSuite();
     AddBoostWrappersSuite();
@@ -131,6 +131,13 @@ void Network::TestingHelper::AddNetworkMessageSuite()
     AddSuite(networkMessageSuite);
 }
 
+void Network::TestingHelper::AddServiceWrappersSuite()
+{
+    auto serviceWrappersSuite = GenerateSuite("服务包装器");
+
+    AddSuite(serviceWrappersSuite);
+}
+
 void Network::TestingHelper::AddInterfaceSuite()
 {
     auto interfaceSuite = GenerateSuite("网络接口");
@@ -142,12 +149,6 @@ void Network::TestingHelper::AddInterfaceSuite()
     ADD_TEST(interfaceSuite, SockStreamTesting);
     ADD_TEST(interfaceSuite, HandleSetTesting);
     ADD_TEST(interfaceSuite, HandleSetIteratorTesting);
-    ADD_TEST(interfaceSuite, ClientTesting);
-    ADD_TEST(interfaceSuite, CacheClientTesting);
-    ADD_TEST(interfaceSuite, OnlySendingClientTesting);
-    ADD_TEST(interfaceSuite, ServerTesting);
-    ADD_TEST(interfaceSuite, IterativeServerTesting);
-    ADD_TEST(interfaceSuite, ReactiveServerTesting);
 
     AddSuite(interfaceSuite);
 }

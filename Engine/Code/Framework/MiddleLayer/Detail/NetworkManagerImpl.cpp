@@ -11,65 +11,36 @@
 
 #include "NetworkManagerImpl.h"
 #include "System/Helper/PragmaWarning.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "Network/Interface/SendSocketManager.h"
 
 Framework::NetworkManagerImpl::NetworkManagerImpl() noexcept
-    : sendSocketManager{}
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Framework::NetworkManagerImpl::NetworkManagerImpl(NetworkManagerImpl&& rhs) noexcept
-    : sendSocketManager{ move(rhs.sendSocketManager) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(rhs);
 }
 
 Framework::NetworkManagerImpl& Framework::NetworkManagerImpl::operator=(NetworkManagerImpl&& rhs) noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    sendSocketManager = move(rhs.sendSocketManager);
+    System::UnusedFunction(rhs);
 
     return *this;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, NetworkManagerImpl)
 
-void Framework::NetworkManagerImpl::ResetSendSocketManager(const std::string& fileName)
+void Framework::NetworkManagerImpl::ResetSendSocketManager(const std::string& fileName) noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    sendSocketManager = make_shared<SendSocketManager>(fileName);
-}
-
-Framework::NetworkManagerImpl::SendSocketManagerSharedPtr Framework::NetworkManagerImpl::GetSendSocketManager() noexcept
-{
-    FRAMEWORK_CLASS_IS_VALID_9;
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26473)
-
-    return const_pointer_cast<SendSocketManager>(static_cast<const ClassType*>(this)->GetSendSocketManager());
-
-#include STSTEM_WARNING_POP
-}
-
-Framework::NetworkManagerImpl::ConstSendSocketManagerSharedPtr Framework::NetworkManagerImpl::GetSendSocketManager() const noexcept
-{
-    FRAMEWORK_CLASS_IS_VALID_CONST_9;
-
-    return sendSocketManager;
-}
-
-void Framework::NetworkManagerImpl::Send(const Network::SocketData& socketData, int64_t socketId, const MessageInterfaceSharedPtr& message)
-{
-    FRAMEWORK_CLASS_IS_VALID_9;
-
-    if (sendSocketManager != nullptr)
-    {
-        sendSocketManager->Send(socketData, socketId, message);
-    }
+    System::UnusedFunction(fileName);
 }

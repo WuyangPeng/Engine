@@ -97,12 +97,12 @@ void Mathematics::RationalConversion<N, T>::InitToFloatingPoint()
 
     auto result = boost::numeric_cast<IntegerType>(mantissa);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     value = *(reinterpret_cast<T*>(&result));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <int N, typename T>

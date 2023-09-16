@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 10:05)
+///	版本：0.9.1.4 (2023/09/04 16:28)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_MANAGER_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_MANAGER_H
@@ -17,7 +17,6 @@
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
-#include "CoreTools/Threading/ThreadingFwd.h"
 
 #include <string>
 
@@ -31,6 +30,7 @@ namespace Network
     public:
         NON_COPY_TYPE_DECLARE(MessageManager);
         using ParentType = Singleton<MessageManager>;
+
         using FactoryFunction = MessageInterface::FactoryFunction;
 
     private:

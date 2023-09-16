@@ -216,7 +216,7 @@ lua（引擎通过宏SCRIPT_USE_LUA关联）
    增加附加库目录：$(SolutionDir)$(Platform)\$(Configuration)\。附加依赖项增加：lua.lib。
 
 ----------------------------  
-OpenXLSX （引擎通过宏CORE_TOOLS_USE_OPENXLSX关联）
+OpenXLSX （引擎通过宏CORE_TOOLS_USE_OPEN_XLSX关联）
 
 1. 版本：0.4.1。
 2. 官方网站：https://github.com/troldal/OpenXLSX 。

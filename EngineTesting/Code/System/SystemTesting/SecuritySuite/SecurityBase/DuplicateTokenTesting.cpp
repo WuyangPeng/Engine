@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/29 11:37)
+///	版本：0.9.1.4 (2023/09/01 14:08)
 
 #include "DuplicateTokenTesting.h"
 #include "System/Security/SecurityBase.h"
@@ -36,7 +36,7 @@ System::DuplicateTokenTesting::DuplicateTokenTesting(const OStreamShared& osPtr)
                              TokenSpecificAccess::AdjustPrivileges,
                              TokenSpecificAccess::AdjustGroups,
                              TokenSpecificAccess::AdjustDefault,
-                             TokenSpecificAccess::AdjustSessionID,
+                             TokenSpecificAccess::AdjustSessionId,
                              TokenSpecificAccess::AllAccessP,
                              TokenSpecificAccess::AllAccess,
                              TokenSpecificAccess::Read,
@@ -62,10 +62,10 @@ void System::DuplicateTokenTesting::MainTest()
 
 bool System::DuplicateTokenTesting::RandomShuffleFlags()
 {
-    shuffle(securityImpersonationLevels.begin(), securityImpersonationLevels.end(), randomEngine);
-    shuffle(securityTokenTypes.begin(), securityTokenTypes.end(), randomEngine);
-    shuffle(tokenStandardAccesses.begin(), tokenStandardAccesses.end(), randomEngine);
-    shuffle(tokenSpecificAccesses.begin(), tokenSpecificAccesses.end(), randomEngine);
+    std::ranges::shuffle(securityImpersonationLevels, randomEngine);
+    std::ranges::shuffle(securityTokenTypes, randomEngine);
+    std::ranges::shuffle(tokenStandardAccesses, randomEngine);
+    std::ranges::shuffle(tokenSpecificAccesses, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(DuplicateTokenTest);
 

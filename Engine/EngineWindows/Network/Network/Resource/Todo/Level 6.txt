@@ -1,14 +1,3 @@
 TODO Level 6
  
-0.9.0.7
-
-1.	（BoostWrappers）实现boost asio 非阻塞架构。
-2.	（BoostWrappers）实现boost asio 异步架构。
-3.	（BoostWrappers）实现boost asio 协程架构。
-4.	（BoostWrappers）实现boost asio http架构。
-5.	（BoostWrappers）实现boost beast http非阻塞架构。
-6.	（BoostWrappers）实现boost beast http异步架构。
-7.	（BoostWrappers）实现boost beast http协程架构。
-8.	（BoostWrappers）实现boost beast websocket非阻塞架构。
-9.	（BoostWrappers）实现boost beast websocket异步架构。
-10. （BoostWrappers）实现boost beast websocket协程架构。
+0.9.1.4

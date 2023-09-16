@@ -149,7 +149,7 @@ int Mathematics::IntegerDataAnalysis<N>::GetLeadingBit(int index) const
 
     for (auto maskIndex = 0; maskIndex < maskSize; ++maskIndex)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
@@ -159,7 +159,7 @@ int Mathematics::IntegerDataAnalysis<N>::GetLeadingBit(int index) const
             valueCopy &= leadingMask[maskIndex];
         }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     return leadingBit;
@@ -180,7 +180,7 @@ int Mathematics::IntegerDataAnalysis<N>::GetTrailingBit(int index) const
 
     for (auto maskIndex = 0; maskIndex < maskSize; ++maskIndex)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
@@ -190,7 +190,7 @@ int Mathematics::IntegerDataAnalysis<N>::GetTrailingBit(int index) const
             valueCopy &= trailingMask[maskIndex];
         }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     return trailingBit;

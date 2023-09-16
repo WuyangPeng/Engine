@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/05 21:30)
+///	版本：0.9.1.4 (2023/08/31 16:40)
 
 #include "ConsoleOutputModeTesting.h"
 #include "System/Console/ConsoleHandle.h"
@@ -22,7 +22,7 @@ System::ConsoleOutputModeTesting::ConsoleOutputModeTesting(const OStreamShared& 
                        StandardHandle::Error },
       // 这里不测试VirtualTerminalProcessing、DisableNewlineAutoReturn、LvbGridWorldwide。
       consoleOutputModes{ ConsoleOutputMode::ProcessedOutput,
-                          ConsoleOutputMode::WeapAtEolOutput }
+                          ConsoleOutputMode::WrapAtEolOutput }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }

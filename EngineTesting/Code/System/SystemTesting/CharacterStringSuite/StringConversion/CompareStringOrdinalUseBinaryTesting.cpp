@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/02 15:33)
+///	版本：0.9.1.4 (2023/08/31 16:15)
 
 #include "CompareStringOrdinalUseBinaryTesting.h"
 #include "System/CharacterString/Flags/StringConversionFlags.h"
@@ -62,7 +62,7 @@ void System::CompareStringOrdinalUseBinaryTesting::MainTest()
 
 bool System::CompareStringOrdinalUseBinaryTesting::RandomShuffleFlags()
 {
-    shuffle(comparesWStrings.begin(), comparesWStrings.end(), randomEngine);
+    std::ranges::shuffle(comparesWStrings, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(CompareStringOrdinalUseBinaryTest);
 
@@ -91,14 +91,14 @@ void System::CompareStringOrdinalUseBinaryTesting::CompareStringTest(size_t inde
 
 void System::CompareStringOrdinalUseBinaryTesting::CompareStringEqualTest(const std::wstring& comparesWString)
 {
-    const auto returnFlag = CompareStringOrdinalUseBinary(comparesWString, comparesWString, gFalse);
+    const auto returnFlag = CompareStringOrdinalUseBinary(comparesWString, comparesWString, false);
     ASSERT_ENUM_EQUAL(returnFlag, ComparesStringReturn::Equal);
 }
 
 void System::CompareStringOrdinalUseBinaryTesting::CompareStringOppositeTest(const std::wstring& lhsComparesWString, const std::wstring& rhsComparesWString)
 {
-    const auto lhsCompareRhs = CompareStringOrdinalUseBinary(lhsComparesWString, rhsComparesWString, gFalse);
-    const auto rhsCompareLhs = CompareStringOrdinalUseBinary(rhsComparesWString, lhsComparesWString, gFalse);
+    const auto lhsCompareRhs = CompareStringOrdinalUseBinary(lhsComparesWString, rhsComparesWString, false);
+    const auto rhsCompareLhs = CompareStringOrdinalUseBinary(rhsComparesWString, lhsComparesWString, false);
 
     CompareTest(lhsCompareRhs, rhsCompareLhs);
 }

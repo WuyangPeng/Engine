@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/02 15:20)
+///	版本：0.9.1.4 (2023/08/31 16:15)
 
 #include "CaseInsensitiveComparisonTesting.h"
 #include "System/CharacterString/Flags/StringConversionFlags.h"
@@ -50,9 +50,9 @@ void System::CaseInsensitiveComparisonTesting::CaseInsensitiveComparisonTest()
 
 void System::CaseInsensitiveComparisonTesting::CompareStringOrdinalUseBinaryTest(wchar_t lower, wchar_t capital)
 {
-    const auto ignoreCaseResult = CompareStringOrdinalUseBinary(std::wstring{ lower }, std::wstring{ capital }, gTrue);
+    const auto ignoreCaseResult = CompareStringOrdinalUseBinary(std::wstring{ lower }, std::wstring{ capital }, true);
     ASSERT_ENUM_EQUAL(ignoreCaseResult, ComparesStringReturn::Equal);
 
-    const auto caseResult = CompareStringOrdinalUseBinary(std::wstring{ lower }, std::wstring{ capital }, gFalse);
+    const auto caseResult = CompareStringOrdinalUseBinary(std::wstring{ lower }, std::wstring{ capital }, false);
     ASSERT_ENUM_EQUAL(caseResult, ComparesStringReturn::GreaterThan);
 }

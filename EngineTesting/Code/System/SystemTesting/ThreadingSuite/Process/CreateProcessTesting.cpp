@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 13:37)
+///	版本：0.9.1.4 (2023/09/01 15:15)
 
 #include "CreateProcessTesting.h"
 #include "System/Threading/Flags/ProcessFlags.h"
 #include "System/Threading/Process.h"
 #include "System/Threading/Thread.h"
-#include "System/Windows/Engineering.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -30,7 +29,7 @@ System::CreateProcessTesting::CreateProcessTesting(const OStreamShared& stream)
                         ProcessCreation::CreateNewProcessGroup,
                         ProcessCreation::CreateUnicodeEnvironment, ProcessCreation::CreateSeparateWowVdm,
                         ProcessCreation::CreateSharedWowVdm,
-                        ProcessCreation::CreateForcedos,
+                        ProcessCreation::CreateForceDos,
                         ProcessCreation::BelowNormalPriorityClass,
                         ProcessCreation::AboveNormalPriorityClass,
                         ProcessCreation::InheritParentAffinity,
@@ -71,7 +70,7 @@ void System::CreateProcessTesting::ProcessTest()
 
 void System::CreateProcessTesting::DoProcessTest(ProcessCreation processCreation)
 {
-    ProcessStartupinfo startupInfo{};
+    ProcessStartupInfo startupInfo{};
     ProcessInformation processInformation{};
 
     ASSERT_TRUE(CreateSystemProcess(GetProcessFullPath().c_str(), nullptr, nullptr, nullptr, true, processCreation, nullptr, nullptr, &startupInfo, &processInformation));
@@ -81,7 +80,7 @@ void System::CreateProcessTesting::DoProcessTest(ProcessCreation processCreation
         ASSERT_EQUAL(ResumeSystemThread(processInformation.hThread), 1u);
     }
 
-    ASSERT_EQUAL(GetProcessHandleID(processInformation.hProcess), processInformation.dwProcessId);
+    ASSERT_EQUAL(GetProcessHandleId(processInformation.hProcess), processInformation.dwProcessId);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseProcessTest, processInformation);
 }

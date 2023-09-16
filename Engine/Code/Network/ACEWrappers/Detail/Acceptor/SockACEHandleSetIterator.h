@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 13:50)
+///	版本：0.9.1.4 (2023/09/15 15:36)
 
 #ifndef NETWORK_NETWORK_INTERFACE_ACE_HANDLE_SET_ITERATOR_H
 #define NETWORK_NETWORK_INTERFACE_ACE_HANDLE_SET_ITERATOR_H
@@ -18,14 +18,14 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE SockACEHandleSetIterator final : public HandleSetIteratorImpl
+    class NETWORK_HIDDEN_DECLARE SockAceHandleSetIterator final : public HandleSetIteratorImpl
     {
     public:
-        using ClassType = SockACEHandleSetIterator;
+        using ClassType = SockAceHandleSetIterator;
         using ParentType = HandleSetIteratorImpl;
 
     public:
-        explicit SockACEHandleSetIterator(const ACEHandleSet& handleSet);
+        explicit SockAceHandleSetIterator(const ACEHandleSet& handleSet);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

@@ -87,13 +87,13 @@ bool Mathematics::PolynomialRootsRational<Real>::Linear(Real constant, Real once
 
         quantity = 1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         root[0] = rationalRoot.ConvertTo<Real>();
         multiplicity[0] = 1;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         return true;
     }
@@ -124,13 +124,13 @@ bool Mathematics::PolynomialRootsRational<Real>::Linear(const PolynomialRational
         const auto rationalRoot = constant / once;
         quantity = 1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         root[0] = -rationalRoot.ConvertTo<Real>();
         multiplicity[0] = 1;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         return true;
     }
@@ -209,7 +209,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Quadratic(const PolynomialRatio
         const auto rationalRoot0 = rationalMinusOnceDivided2 - rationalDiscriminant;
         const auto rationalRoot1 = rationalMinusOnceDivided2 + rationalDiscriminant;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         root[0] = rationalRoot0.ConvertTo<Real>();
@@ -217,20 +217,20 @@ bool Mathematics::PolynomialRootsRational<Real>::Quadratic(const PolynomialRatio
         multiplicity[0] = 1;
         multiplicity[1] = 1;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
     else if (rationalDiscriminant.Abs() <= PolynomialRational{ epsilon })
     {
         // 一个实数根。
         quantity = 1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         root[0] = rationalMinusOnceDivided2.ConvertTo<Real>();
         multiplicity[0] = 2;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
     else
     {
@@ -324,27 +324,27 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
 
         auto rationalRoot = rationalSum0 + rationalSum1 - rationalSecondaryDivide3;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         root[0] = rationalRoot.ConvertTo<Real>();
         multiplicity[0] = 1;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
     else if (rationalDiscriminant < PolynomialRational{ epsilon })
     {
         // 三个不同的实数根。
         quantity = 3;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         multiplicity[0] = 1;
         multiplicity[1] = 1;
         multiplicity[2] = 1;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         // 通过计算的特征值求解该多项式的根。
         auto negativeQ = -rationalQ.ConvertTo<Real>();
@@ -363,7 +363,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
         auto root1 = negativeSecondaryDivide3 - magnitude * (cosValue + sqrt3Value * sinValue);
         auto root2 = negativeSecondaryDivide3 - magnitude * (cosValue - sqrt3Value * sinValue);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         // 以递增顺序排序
@@ -396,7 +396,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
             }
         }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
     else
     {
@@ -412,7 +412,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
 
             auto rationalRoot0 = rationalSecondaryDivide3 - rationalR;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
             root[0] = -rationalRoot0.ConvertTo<Real>();
@@ -428,20 +428,20 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
                 std::swap(multiplicity[0], multiplicity[1]);
             }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
         else
         {
             // 一个实数根，所有重复
             quantity = 1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
             root[0] = -rationalSecondaryDivide3.ConvertTo<Real>();
             multiplicity[0] = 3;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
     }
 

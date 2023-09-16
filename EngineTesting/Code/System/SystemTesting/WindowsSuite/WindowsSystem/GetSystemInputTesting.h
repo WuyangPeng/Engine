@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 20:34)
+///	版本：0.9.1.4 (2023/09/01 15:40)
 
 #ifndef SYSTEM_WINDOWS_SUITE_GET_SYSTEM_INPUT_TESTING_H
 #define SYSTEM_WINDOWS_SUITE_GET_SYSTEM_INPUT_TESTING_H
@@ -29,7 +29,7 @@ namespace System
         void PrintTipsMessage() override;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void GetSystemInputTest();

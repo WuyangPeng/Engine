@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 17:03)
+///	版本：0.9.1.4 (2023/09/16 09:54)
 
 #include "ConsumerTesting.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -46,7 +46,7 @@ void Network::ConsumerTesting::ConsumerTest()
                                                        ServerStrategy::Reactive,
                                                        MessageStrategy::Default,
                                                        ParserStrategy::LittleEndian,
-                                                       OpenSSLStrategy::Default,
+                                                       OpenSslStrategy::Default,
                                                        EncryptedCompressionStrategy::Default,
                                                        subStrategy,
                                                        ConfigurationParameter::Create(),

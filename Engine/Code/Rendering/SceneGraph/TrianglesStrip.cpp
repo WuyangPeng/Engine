@@ -115,44 +115,44 @@ void Rendering::TrianglesStrip::InitIndexBuffer(IndexBuffer& indexBuffer)
 
     if (indexSize == 2)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
         const auto indices = reinterpret_cast<int16_t*>(*indexBuffer.GetData(0));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         if (indices != nullptr)
         {
             for (int16_t i{}; i < numVertices; ++i)
             {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
                 indices[i] = i;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
             }
         }
     }
     else  // indexSize == 4
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
         auto indices = reinterpret_cast<int32_t*>(*indexBuffer.GetData(0));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         if (indices != nullptr)
         {
             for (auto i = 0; i < numVertices; ++i)
             {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
                 indices[i] = i;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
             }
         }
     }

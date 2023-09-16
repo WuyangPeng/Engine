@@ -201,13 +201,13 @@ const T& CoreTools::SpanIterator<Iter>::ReinterpretCast() const
         THROW_EXCEPTION(SYSTEM_TEXT("迭代器长度不足"s))
     }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26473)
 #include SYSTEM_WARNING_DISABLE(26490)
 
     return reinterpret_cast<const T&>(*current);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Iter>
@@ -216,12 +216,12 @@ T& CoreTools::SpanIterator<Iter>::ReinterpretCast()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
 
     return const_cast<T&>(static_cast<const ClassType&>(*this).ReinterpretCast<T>());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Iter>

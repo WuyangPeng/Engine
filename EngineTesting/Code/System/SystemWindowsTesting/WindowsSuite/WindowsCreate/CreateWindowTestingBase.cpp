@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 19:46)
+///	版本：0.9.1.4 (2023/08/31 15:24)
 
 #include "CreateWindowTestingBase.h"
 #include "System/Windows/Flags/WindowsFlags.h"
@@ -16,8 +16,8 @@
 
 using namespace std::literals;
 
-System::CreateWindowTestingBase::CreateWindowTestingBase(const OStreamShared& stream, WindowsHInstance instance, WindowsHWnd hwnd)
-    : ParentType{ stream }, instance{ instance }, hwnd{ hwnd }
+System::CreateWindowTestingBase::CreateWindowTestingBase(const OStreamShared& stream, WindowsHInstance instance, WindowsHWnd hWnd)
+    : ParentType{ stream }, instance{ instance }, hWnd{ hWnd }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -34,7 +34,7 @@ System::String System::CreateWindowTestingBase::GetWindowsClassName()
     SYSTEM_CLASS_IS_VALID_1;
 
     String className{};
-    ASSERT_TRUE(GetSystemClassName(hwnd, className));
+    ASSERT_TRUE(GetSystemClassName(hWnd, className));
 
     return className;
 }
@@ -51,7 +51,7 @@ System::WindowsHWnd System::CreateWindowTestingBase::CreateWindowTest(const Stri
     ASSERT_LESS_EQUAL(width, abs(rect.right - rect.left));
     ASSERT_LESS_EQUAL(high, abs(rect.top - rect.bottom));
 
-    auto systemWindow = CreateSystemWindow(className, GetWindowsName(), WindowsStyles::Default, 0, 0, rect, nullptr, nullptr, instance);
+    const auto systemWindow = CreateSystemWindow(className, GetWindowsName(), WindowsStyles::Default, 0, 0, rect, nullptr, nullptr, instance);
 
     return systemWindow;
 }

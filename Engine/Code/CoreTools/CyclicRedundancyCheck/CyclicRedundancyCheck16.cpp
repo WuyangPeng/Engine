@@ -28,12 +28,12 @@ void CoreTools::CyclicRedundancyCheck16::Calculation(const char* data, int lengt
     {
         for (auto i = 0; i < length; ++i)
         {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
             const auto value = data[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
             // ตอ4ฮป
             const auto lower = CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get16Table(cyclicRedundancyCheck & 0xF);

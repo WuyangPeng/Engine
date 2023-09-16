@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/16 23:32)
+///	版本：0.9.1.4 (2023/08/31 14:22)
 
 #include "OpenGLBindVertexBufferTestingDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -62,6 +62,6 @@ void System::OpenGLBindVertexBufferTesting::BindVertexBufferTest(OpenGLUInt vert
     DoBindVertexBufferTest<OpenGLData::UnsignedShort, OpenGLUShort>(vertexArray, buffers, normalized);
     DoBindVertexBufferTest<OpenGLData::UnsignedInt, OpenGLUInt>(vertexArray, buffers, normalized);
     DoBindVertexBufferTest<OpenGLData::HalfFloat, OpenGLHalf>(vertexArray, buffers, normalized);
- 
+
     DoBindVertexBufferTest<OpenGLData::UnsignedInt10F11F11FRev, OpenGLUInt>(vertexArray, buffers, normalized);
 }

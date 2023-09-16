@@ -29,7 +29,7 @@ namespace Rendering
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD OpenGLUInt GetGLHandle() const noexcept;
+        NODISCARD OpenGLUInt GetGLHandle() const noexcept override;
         void SetGLHandle(OpenGLUInt handler) noexcept;
 
     private:

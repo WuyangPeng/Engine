@@ -27,6 +27,9 @@
     <None Include="Resource\Schedule.md">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="Configuration\UpdateServerCoreTesting.json">
+      <Filter>配置</Filter>
+    </None>
     <None Include="Configuration\EnvironmentVariable.json">
       <Filter>配置</Filter>
     </None>
@@ -34,9 +37,6 @@
       <Filter>配置</Filter>
     </None>
     <None Include="Configuration\Testing.json">
-      <Filter>配置</Filter>
-    </None>
-    <None Include="Configuration\UpdateServerCoreTesting.json">
       <Filter>配置</Filter>
     </None>
   </ItemGroup>

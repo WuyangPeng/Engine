@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/11 23:54)
+///	版本：0.9.1.4 (2023/09/01 11:15)
 
 #include "WinSocketConnectByNameTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -84,8 +84,9 @@ void System::WinSocketConnectByNameTesting::SendTest(WinSocket socketHandle)
         winSockBuf.len = boost::numeric_cast<uint32_t>(iov.size() - sendNum);
 
         WindowsDWord numberOfBytesSent{};
-        const auto sendResult = WinSocketSend(socketHandle, &winSockBuf, 1, &numberOfBytesSent, 0, nullptr, nullptr);
-        if (sendResult == 0)
+
+        if (const auto sendResult = WinSocketSend(socketHandle, &winSockBuf, 1, &numberOfBytesSent, 0, nullptr, nullptr);
+            sendResult == 0)
         {
             sendNum += numberOfBytesSent;
         }

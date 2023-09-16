@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/04/28 10:58)
+///	版本：0.9.1.4 (2023/09/04 15:45)
 
 #include "Network/NetworkExport.h"
 
@@ -14,7 +14,8 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(Network, ConfigurationParameter)
 
 Network::ConfigurationParameter Network::ConfigurationParameter::Create()
 {
@@ -45,6 +46,16 @@ bool Network::ConfigurationParameter::IsParameterExist(const String& key, const 
     return impl->IsParameterExist(key, parameter);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, ConfigurationParameter, GetParameter, String, Network::ConfigurationParameter::Parameter)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, ConfigurationParameter, GetFirstParameter, String, System::String)
-COPY_UNSHARED_CLONE_SELF_DEFINE(Network, ConfigurationParameter)
+Network::ConfigurationParameter::Parameter Network::ConfigurationParameter::GetParameter(const String& key) const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetParameter(key);
+}
+
+Network::ConfigurationParameter::String Network::ConfigurationParameter::GetFirstParameter(const String& key) const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetFirstParameter(key);
+}

@@ -169,6 +169,108 @@
     <Filter Include="GenerateProjects 头文件\Flags">
       <UniqueIdentifier>{6c03d6be-7cac-4011-9a2a-ef117ca896b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate">
+      <UniqueIdentifier>{71668cc0-4a79-43ae-b9aa-e8456ffb176f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\Bat">
+      <UniqueIdentifier>{cf2d7a3b-9a4f-4efd-a440-f1eb10c01dc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\Code">
+      <UniqueIdentifier>{0272f2af-ee24-446c-981a-3f892e539688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\Doc">
+      <UniqueIdentifier>{ab3fe95a-e5ea-4bcb-bb21-549a96344344}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\Doxygen">
+      <UniqueIdentifier>{fa93aea1-d79e-4b67-8a7a-5852eece6e9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\Generate">
+      <UniqueIdentifier>{d7a7790f-fcab-4d69-afc1-014cef1b0a46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows">
+      <UniqueIdentifier>{ba7e5aff-ccd1-4453-966b-426eab150e03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\Run">
+      <UniqueIdentifier>{3ae86c3e-308f-40ab-81a2-4d1b09a6ebb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\Generate\Configuration">
+      <UniqueIdentifier>{04d51924-7236-4c9e-a5ac-863a69c45f93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\Code\Project">
+      <UniqueIdentifier>{db144c7b-9ab2-4b47-96bf-cd539b5ae3e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\Code\Module">
+      <UniqueIdentifier>{e202b90a-b26e-4891-bdb1-09220d4c0050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\Code\Module\Module">
+      <UniqueIdentifier>{1253e528-99d3-444e-a12d-a6d0fd385268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\Code\Module\ModuleCore">
+      <UniqueIdentifier>{9e691d6e-4119-41f8-b739-9b14414561c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\Code\Module\ModuleMiddleLayer">
+      <UniqueIdentifier>{eadc8858-d1a7-4caa-852b-fe7e83551665}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\Code\Project\EngineSuite">
+      <UniqueIdentifier>{6be08ba4-bb7f-42a1-87d3-072c3485b247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\Code\Project\VersionSuite">
+      <UniqueIdentifier>{307a1832-fdda-443b-961c-df349ea51e11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module">
+      <UniqueIdentifier>{13ec6cce-f657-49f7-b246-bf6c48d2dc89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Project">
+      <UniqueIdentifier>{7d6aa3cd-c298-43ba-9f09-97cf655e5e6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Project\Project">
+      <UniqueIdentifier>{7b313bc6-e6cd-43cf-8b4e-9c5d7e7d2bb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Project\Project\Configuration">
+      <UniqueIdentifier>{a95fc433-33e9-4368-abb7-0456d9ffeaea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Project\Project\Resource">
+      <UniqueIdentifier>{c1f2c44b-999f-49d7-a931-1b95dba1cdd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Project\Project\Resource\Todo">
+      <UniqueIdentifier>{4eec907a-7ccf-48ad-b849-fd1689f7a281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\Module">
+      <UniqueIdentifier>{86718765-a8ac-4cd0-8800-24c1941cace4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleCore">
+      <UniqueIdentifier>{e41f4951-acf4-4544-adae-f61f35f6df06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer">
+      <UniqueIdentifier>{bb644c2a-db32-4ab5-805c-e59c5e5cb758}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\Module\Configuration">
+      <UniqueIdentifier>{1e486600-6741-46b1-b570-f5c28f45e104}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleCore\Configuration">
+      <UniqueIdentifier>{9e3aaa9f-6d18-4878-afde-69ad6d59464a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Configuration">
+      <UniqueIdentifier>{bc2ef96c-0505-4071-86e5-dca52366274c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\Module\Resource">
+      <UniqueIdentifier>{e3b1b64d-494d-4fa9-91ac-dde3744d7bf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleCore\Resource">
+      <UniqueIdentifier>{38dc8d98-f681-44f9-97fb-91834f352c9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource">
+      <UniqueIdentifier>{b239c9bf-cc3f-40b6-822a-c43a1a433b76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource\Todo">
+      <UniqueIdentifier>{ac3ec434-1235-48ac-91b7-e8fd94b992df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleCore\Resource\Todo">
+      <UniqueIdentifier>{2e15ca21-5491-49e1-b636-170f82d5a0e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\Module\Resource\Todo">
+      <UniqueIdentifier>{5fe9e72a-8abd-40d5-a256-f11a77e27f00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\AssistTools\DllLib.cpp">
@@ -221,6 +323,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\Utf8ReplaceProjectGeneration.cpp">
       <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingEngineImpl.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingEngine.cpp">
+      <Filter>GenerateProjects 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -338,6 +446,12 @@
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\Utf8ReplaceProjectGeneration.h">
       <Filter>GenerateProjects 头文件\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingEngineImpl.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingEngine.h">
+      <Filter>GenerateProjects 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">
@@ -348,6 +462,9 @@
     </None>
     <None Include="..\..\..\Code\AssistTools\GenerateProjects\Template\GenerateProjects.json">
       <Filter>GenerateProjects 配置文件\Template</Filter>
+    </None>
+    <None Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\GenerateProjects.json">
+      <Filter>GenerateProjects 配置文件\TestingTemplate</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -791,6 +908,324 @@
     </Text>
     <Text Include="..\..\..\Code\AssistTools\GenerateProjects\Template\ProjectNameWindows\Module\Module\Configuration\RendererJson.txt">
       <Filter>GenerateProjects 配置文件\Template\ProjectNameWindows\Module\Module\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ClangFormat.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Gitignore.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ReadMeMd.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Bat\DelDoxygenFileBat.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Bat</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Doc\OverviewMd.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Doc</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Doxygen\Doxyfile.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Doxygen</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Run\Gitignore.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Run</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Run\ReadMeMd.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Run</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Run\RunAllModuleTestingBat.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Run</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Run\RunAllTestingBat.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Run</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Run\RunModuleCoreTestingBat.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Run</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Run\RunModuleMiddleLayerTestingBat.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Run</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Run\RunModuleTestingBat.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Run</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Run\RunProjectTestingBat.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Run</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Generate\Gitignore.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Generate</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Generate\ReadMeMd.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Generate</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Generate\Configuration\LogJson.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Generate\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Generate\Configuration\ProjectTestingJson.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Generate\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Generate\Configuration\EnvironmentVariableJson.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Generate\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Gitignore.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\ReadMeMd.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Project\TestingH.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Project</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Project\TestingHelperCpp.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Project</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Project\TestingHelperH.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Project</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Project\TestingLibCpp.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Project</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Project\TestingMainCpp.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Project</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Project\VersionH.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Project</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Project\VersionSuite\VersionSuiteH.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Project\VersionSuite</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Project\VersionSuite\VersionTestingCpp.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Project\VersionSuite</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Project\VersionSuite\VersionTestingH.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Project\VersionSuite</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Project\EngineSuite\EngineTestingCpp.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Project\EngineSuite</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Project\EngineSuite\EngineTestingH.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Project\EngineSuite</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Project\EngineSuite\EngineSuiteH.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Project\EngineSuite</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Module\Module\TestingH.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Module\Module</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Module\Module\TestingHelperCpp.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Module\Module</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Module\Module\TestingHelperH.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Module\Module</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Module\Module\TestingLibCpp.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Module\Module</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Module\Module\TestingMainCpp.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Module\Module</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Module\ModuleCore\TestingHelperCpp.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Module\ModuleCore</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Module\ModuleCore\TestingHelperH.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Module\ModuleCore</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Module\ModuleCore\TestingLibCpp.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Module\ModuleCore</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Module\ModuleCore\TestingMainCpp.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Module\ModuleCore</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Module\ModuleCore\TestingH.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Module\ModuleCore</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Module\ModuleMiddleLayer\TestingH.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Module\ModuleMiddleLayer</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Module\ModuleMiddleLayer\TestingHelperCpp.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Module\ModuleMiddleLayer</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Module\ModuleMiddleLayer\TestingHelperH.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Module\ModuleMiddleLayer</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Module\ModuleMiddleLayer\TestingLibCpp.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Module\ModuleMiddleLayer</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Code\Module\ModuleMiddleLayer\TestingMainCpp.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Code\Module\ModuleMiddleLayer</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Gitignore.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ProjectEngineDynamicGameStaticWin32DebugLibsProps.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ProjectEngineDynamicGameStaticWin32ReleaseLibsProps.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ProjectEngineDynamicGameStaticX64DebugLibsProps.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ProjectEngineDynamicGameStaticX64ReleaseLibsProps.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ProjectEngineStaticGameDynamicWin32DebugLibsProps.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ProjectEngineStaticGameDynamicWin32ReleaseLibsProps.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ProjectEngineStaticGameDynamicX64DebugLibsProps.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ProjectEngineStaticGameDynamicX64ReleaseLibsProps.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ProjectProps.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ProjectStaticWin32DebugLibsProps.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ProjectStaticWin32ReleaseLibsProps.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ProjectStaticX64DebugLibsProps.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ProjectStaticX64ReleaseLibsProps.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ProjectWin32DebugLibsProps.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ProjectWin32ReleaseLibsProps.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ProjectX64DebugLibsProps.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ProjectX64ReleaseLibsProps.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\ReadMeMd.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\SetEnvironmentBat.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Project\ProjectSln.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Project</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Project\Project\ProjectVcxproj.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Project\Project</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Project\Project\ProjectVcxprojFilters.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Project\Project</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Project\Project\Resource\ReadMeMd.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Project\Project\Resource</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Project\Project\Resource\ScheduleMd.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Project\Project\Resource</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Project\Project\Resource\Todo\Level.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Project\Project\Resource\Todo</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Project\Project\Configuration\EnvironmentVariableJson.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Project\Project\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Project\Project\Configuration\LogJson.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Project\Project\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Project\Project\Configuration\ProjectTestingJson.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Project\Project\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Project\Project\Configuration\ProjectTestingNameJson.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Project\Project\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Project\Project\Configuration\Testing.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Project\Project\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\Module\ModuleVcxproj.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\Module</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\Module\ModuleVcxprojFilters.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\Module</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\Module\Resource\ReadMeMd.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\Module\Resource</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\Module\Resource\ScheduleMd.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\Module\Resource</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\Module\Resource\Todo\Level.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\Module\Resource\Todo</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\Module\Configuration\EnvironmentVariableJson.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\Module\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\Module\Configuration\LogJson.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\Module\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\Module\Configuration\Testing.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\Module\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleCore\ModuleCoreVcxproj.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleCore</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleCore\ModuleCoreVcxprojFilters.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleCore</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleCore\Resource\ReadMeMd.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleCore\Resource</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleCore\Resource\ScheduleMd.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleCore\Resource</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleCore\Resource\Todo\Level.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleCore\Resource\Todo</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleCore\Configuration\EnvironmentVariableJson.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleCore\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleCore\Configuration\LogJson.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleCore\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleCore\Configuration\Testing.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleCore\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\ModuleMiddleLayerVcxproj.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\ModuleMiddleLayerVcxprojFilters.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource\ReadMeMd.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource\ScheduleMd.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource\Todo\Level.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource\Todo</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Configuration\EnvironmentVariableJson.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Configuration\LogJson.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Configuration\Testing.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\Module\Configuration\ModuleTestingJson.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\Module\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleCore\Configuration\ModuleTestingJson.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleCore\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Configuration\ModuleTestingJson.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Configuration</Filter>
     </Text>
   </ItemGroup>
 </Project>

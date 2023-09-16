@@ -580,11 +580,7 @@ void CoreTools::TestingHelper::AddDataTypesSuite()
 
     ADD_TEST(dataTypesSuite, TupleTesting);
     ADD_TEST(dataTypesSuite, TupleLessTesting);
-    ADD_TEST(dataTypesSuite, TableTesting);
-    ADD_TEST(dataTypesSuite, MinHeapRecordTesting);
-    ADD_TEST(dataTypesSuite, MinHeapRecordStoredTesting);
-    ADD_TEST(dataTypesSuite, MinHeapRecordIndexTesting);
-    ADD_TEST(dataTypesSuite, MinHeapRecordStoredManagerTesting);
+    ADD_TEST(dataTypesSuite, TableTesting); 
     ADD_TEST(dataTypesSuite, MinHeapTesting);
     ADD_TEST(dataTypesSuite, ThreadSafeMapTesting);
     ADD_TEST(dataTypesSuite, ThreadSafeQueueTesting);

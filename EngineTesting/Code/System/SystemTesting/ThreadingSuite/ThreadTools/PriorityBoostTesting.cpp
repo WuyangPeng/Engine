@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 20:07)
+///	版本：0.9.1.4 (2023/09/01 15:28)
 
 #include "PriorityBoostTesting.h"
 #include "System/Threading/Flags/ThreadFlags.h"
@@ -58,18 +58,18 @@ void System::PriorityBoostTesting::DoThreadTest(WindowsHandle mutexHandle)
 
     ASSERT_TRUE(WaitForSystemMutex(mutexHandle));
 
-    WindowsDWord threadID{ 0 };
-    const auto threadHandle = CreateSystemThread(nullptr, 0, ClassType::ThreadStartRoutine, mutexHandle, ThreadCreation::Default, &threadID);
+    WindowsDWord threadId{ 0 };
+    const auto threadHandle = CreateSystemThread(nullptr, 0, ClassType::ThreadStartRoutine, mutexHandle, ThreadCreation::Default, &threadId);
 
-    ASSERT_NOT_THROW_EXCEPTION_3(ResultTest, threadHandle, threadID, mutexHandle);
+    ASSERT_NOT_THROW_EXCEPTION_3(ResultTest, threadHandle, threadId, mutexHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
 }
 
-void System::PriorityBoostTesting::ResultTest(WindowsHandle threadHandle, WindowsDWord threadID, WindowsHandle mutexHandle)
+void System::PriorityBoostTesting::ResultTest(WindowsHandle threadHandle, WindowsDWord threadId, WindowsHandle mutexHandle)
 {
     ASSERT_TRUE(IsThreadHandleValid(threadHandle));
-    ASSERT_LESS(0u, threadID);
+    ASSERT_LESS(0u, threadId);
 
     auto disablePriorityBoost = true;
     ASSERT_TRUE(GetSystemThreadPriorityBoost(threadHandle, &disablePriorityBoost));

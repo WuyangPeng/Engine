@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/17 18:55)
+///	版本：0.9.1.4 (2023/09/01 09:53)
 
 #include "NetworkMacroTesting.h"
 #include "System/Helper/WindowsMacro.h"
@@ -71,10 +71,10 @@ System::WinSocket System::NetworkMacroTesting::CreateWinSocket()
 {
     constexpr uint16_t port{ 5300 };
 
-    WinSockInternetAddress addr{};
-    addr.sin_family = System::EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
-    addr.sin_port = GetHostToNetShort(port);
-    addr.sin_addr.s_addr = GetHostToNetLong(internetAddrAny);
+    WinSockInternetAddress address{};
+    address.sin_family = System::EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
+    address.sin_port = GetHostToNetShort(port);
+    address.sin_addr.s_addr = GetHostToNetLong(internetAddrAny);
 
     const auto socketHandle = CreateTcpSocket();
     ASSERT_TRUE_FAILURE_THROW(IsSocketValid(socketHandle), "socketHandle 是无效的。");
@@ -84,7 +84,7 @@ System::WinSocket System::NetworkMacroTesting::CreateWinSocket()
 
 void System::NetworkMacroTesting::FdSetTest(WinSocket winSocket)
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
@@ -95,7 +95,7 @@ void System::NetworkMacroTesting::FdSetTest(WinSocket winSocket)
     ASSERT_EQUAL(winSockFdSet.fd_count, 1u);
     ASSERT_UNEQUAL(SYSTEM_FD_IS_SET(winSocket, &winSockFdSet), 0);
 
-    SYSTEM_FD_CLRER(winSocket, &winSockFdSet);
+    SYSTEM_FD_CLEAR(winSocket, &winSockFdSet);
     ASSERT_EQUAL(winSockFdSet.fd_count, 0u);
     ASSERT_EQUAL(SYSTEM_FD_IS_SET(winSocket, &winSockFdSet), 0);
 
@@ -105,5 +105,5 @@ void System::NetworkMacroTesting::FdSetTest(WinSocket winSocket)
     SYSTEM_FD_ZERO(&winSockFdSet);
     ASSERT_EQUAL(winSockFdSet.fd_count, 0u);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }

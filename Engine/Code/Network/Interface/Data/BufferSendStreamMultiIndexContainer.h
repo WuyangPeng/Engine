@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 10:20)
+///	版本：0.9.1.4 (2023/09/15 11:27)
 
 #ifndef NETWORK_NETWORK_INTERFACE_BUFFER_SEND_STREAM_MULTI_INDEX_CONTAINER_H
 #define NETWORK_NETWORK_INTERFACE_BUFFER_SEND_STREAM_MULTI_INDEX_CONTAINER_H
@@ -24,6 +24,7 @@ namespace Network
     {
     public:
         using ClassType = BufferSendStreamMultiIndexContainer;
+
         using BufferSendStreamContainerSharedPtr = std::shared_ptr<BufferSendStreamContainer>;
         using BufferSendStreamContainerWeakPtr = std::weak_ptr<BufferSendStreamContainer>;
         using SocketIdContainer = std::map<int64_t, BufferSendStreamContainerSharedPtr>;

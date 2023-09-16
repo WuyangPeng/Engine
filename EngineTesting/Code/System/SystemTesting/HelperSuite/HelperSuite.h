@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/16 22:23)
+///	版本：0.9.1.4 (2023/09/01 09:40)
 
 #ifndef SYSTEM_TESTING_HELPER_SUITE_H
 #define SYSTEM_TESTING_HELPER_SUITE_H
@@ -18,7 +18,7 @@
 #include "ConfigMacro/StdLibConfigTesting.h"
 #include "EnumCastTesting.h"
 #include "EnumOperator/EnumAddableTesting.h"
-#include "EnumOperator/EnumAndableTesting.h"
+#include "EnumOperator/EnumAndAbleTesting.h"
 #include "EnumOperator/EnumDecrementableTesting.h"
 #include "EnumOperator/EnumIncrementableTesting.h"
 #include "EnumOperator/EnumMultiplicationTesting.h"
@@ -58,8 +58,8 @@
 #include "VersionTesting.h"
 #include "WindowsMacro/HResultTesting.h"
 #include "WindowsMacro/MakeIntreSourceTesting.h"
-#include "WindowsMacro/MakeLanguageCIDTesting.h"
-#include "WindowsMacro/MakeLanguageIDTesting.h"
+#include "WindowsMacro/MakeLanguageCidTesting.h"
+#include "WindowsMacro/MakeLanguageIdTesting.h"
 #include "WindowsMacro/MakeWordTesting.h"
 #include "WindowsMacro/MarkTesting.h"
 #include "WindowsMacro/PtrToIntTesting.h"

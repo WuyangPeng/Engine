@@ -28,22 +28,26 @@ AssistTools::ProjectGenerationImpl::String AssistTools::DefaultProjectGeneration
 
     content = ReplaceCopyright(content);
     content = ReplaceProjectName(content);
+    content = ReplaceTestingName(content);
     content = ReplaceProjectChineseName(content);
     content = ReplaceProjectDescribeName(content);
     content = ReplaceModuleCount(content);
     content = ReplaceModuleDescribe(content);
     content = ReplaceModuleJson(content);
+    content = ReplaceModuleTestingJson(content);
     content = ReplaceProjectAbbreviation(content);
     content = ReplaceVersion(content);
     content = ReplaceVersionNum(content);
     content = ReplaceEndYear(content);
     content = ReplaceTime(content);
     content = ReplaceCodeAnalysis(content);
+    content = ReplaceTestingCodeAnalysis(content);
     content = ReplaceProjectCapital(content);
     content = ReplaceCoreName(content);
     content = ReplaceCoreCapital(content);
     content = ReplaceMiddleLayerInclude(content);
     content = ReplaceMiddleLayerFwdInclude(content);
+    content = CallRunTestingBat(content);
 
     return content;
 }

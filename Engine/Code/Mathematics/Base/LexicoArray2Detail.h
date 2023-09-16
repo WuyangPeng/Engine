@@ -69,12 +69,12 @@ Real& Mathematics::LexicoArray2<true, Real>::operator()(int row, int column)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
 
     return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -146,12 +146,12 @@ Real& Mathematics::LexicoArray2<false, Real>::operator()(int row, int column)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
 
     return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -222,12 +222,12 @@ Real& Mathematics::LexicoArray2<true, Real, NumRows, NumCols>::operator()(int ro
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
 
     return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real, int NumRows, int NumCols>
@@ -298,12 +298,12 @@ Real& Mathematics::LexicoArray2<false, Real, NumRows, NumCols>::operator()(int r
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
 
     return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real, int NumRows, int NumCols>

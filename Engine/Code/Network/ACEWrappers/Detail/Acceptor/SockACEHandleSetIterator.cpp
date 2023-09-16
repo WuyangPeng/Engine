@@ -5,24 +5,24 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 13:54)
+///	版本：0.9.1.4 (2023/09/15 15:46)
 
 #include "Network/NetworkExport.h"
 
-#include "SockACEHandleSetIterator.h"
+#include "SockAceHandleSetIterator.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 #ifdef NETWORK_USE_ACE
 
-Network::SockACEHandleSetIterator::SockACEHandleSetIterator(const ACEHandleSet& handleSet)
+Network::SockAceHandleSetIterator::SockAceHandleSetIterator(const ACEHandleSet& handleSet)
     : ParentType{}, aceHandleSetIter{ handleSet }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, SockACEHandleSetIterator)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, SockAceHandleSetIterator)
 
-Network::ACEHandle Network::SockACEHandleSetIterator::operator()()
+Network::ACEHandle Network::SockAceHandleSetIterator::operator()()
 {
     NETWORK_CLASS_IS_VALID_9;
 

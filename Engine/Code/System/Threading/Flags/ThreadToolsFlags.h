@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/30 13:00)
+///	版本：0.9.1.4 (2023/08/30 18:14)
 
 #ifndef SYSTEM_THREADING_THREAD_TOOLS_FLAGS_H
 #define SYSTEM_THREADING_THREAD_TOOLS_FLAGS_H
@@ -64,7 +64,7 @@ namespace System
         AdjustPrivileges = TOKEN_ADJUST_PRIVILEGES,
         AdjustGroups = TOKEN_ADJUST_GROUPS,
         AdjustDefault = TOKEN_ADJUST_DEFAULT,
-        AdjustSessionID = TOKEN_ADJUST_SESSIONID,
+        AdjustSessionId = TOKEN_ADJUST_SESSIONID,
 
         AllAccessP = TOKEN_ALL_ACCESS_P,
         AllAccess = TOKEN_ALL_ACCESS,
@@ -138,14 +138,14 @@ namespace System
         AdjustPrivileges = (0x0020),
         AdjustGroups = (0x0040),
         AdjustDefault = (0x0080),
-        AdjustSessionID = (0x0100),
+        AdjustSessionId = (0x0100),
 
         AllAccessP = (0x000F0000L | AssignPrimary | Duplicate | Impersonate | Query | QuerySource | AdjustPrivileges | AdjustGroups | AdjustDefault),
 
-        AllAccess = (AllAccessP | AdjustSessionID),
+        AllAccess = (AllAccessP | AdjustSessionId),
 
         Read = (0x00020000L | Query),
-        Write = (0x00020000L | AdjustPrivileges | AdjustGroups | AdjustSessionID),
+        Write = (0x00020000L | AdjustPrivileges | AdjustGroups | AdjustSessionId),
         Execute = 0x00020000L,
     };
 

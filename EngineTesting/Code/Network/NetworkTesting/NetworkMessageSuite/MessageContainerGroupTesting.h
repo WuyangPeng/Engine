@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/12 09:58)
+///	版本：0.9.1.4 (2023/09/16 09:24)
 
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_CONTAINER_GROUP_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_CONTAINER_GROUP_TESTING_H
@@ -14,7 +14,7 @@
 
 namespace Network
 {
-    class MessageContainerGroupTesting : public CoreTools::UnitTest
+    class MessageContainerGroupTesting final : public CoreTools::UnitTest
     {
     public:
         using ClassType = MessageContainerGroupTesting;

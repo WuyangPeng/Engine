@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 09:54)
+///	版本：0.9.1.4 (2023/09/15 13:37)
 
 #include "Network/NetworkExport.h"
 
@@ -14,14 +14,18 @@
 #include "Detail/HandleSetIteratorImpl.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 Network::HandleSetIterator::HandleSetIterator(const ConfigurationStrategy& configurationStrategy, const HandleSet& handleSet)
     : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy, handleSet }
 {
-    NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, HandleSetIterator)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, HandleSetIterator, operator(), Network::ACEHandleType)
+Network::ACEHandleType Network::HandleSetIterator::operator()()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return (*impl)();
+}

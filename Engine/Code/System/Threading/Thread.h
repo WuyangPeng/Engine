@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/30 13:19)
+///	版本：0.9.1.4 (2023/08/30 18:20)
 
 #ifndef SYSTEM_THREADING_THREAD_H
 #define SYSTEM_THREADING_THREAD_H
@@ -24,11 +24,11 @@ namespace System
                                                                          ThreadStartRoutine startAddress,
                                                                          WindowsVoidPtr parameter,
                                                                          ThreadCreation creationFlags,
-                                                                         WindowsDWordPtr threadID) noexcept;
+                                                                         WindowsDWordPtr threadId) noexcept;
     MAYBE_NULLPTR ThreadHandle SYSTEM_DEFAULT_DECLARE CreateSystemThread(WindowsSize stackSize,
                                                                          ThreadStartRoutine startAddress,
                                                                          WindowsVoidPtr parameter,
-                                                                         WindowsDWordPtr threadID) noexcept;
+                                                                         WindowsDWordPtr threadId) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CloseSystemThread(ThreadHandle thread) noexcept;
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE ResumeSystemThread(ThreadHandle thread) noexcept;
@@ -49,7 +49,7 @@ namespace System
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE ExitSystemThread(WindowsDWord exitCode) noexcept;
 
     MAYBE_NULLPTR ThreadHandle SYSTEM_DEFAULT_DECLARE BeginSystemThread(void* security,
-                                                                        unsigned int stacksize,
+                                                                        unsigned int stackSize,
                                                                         StartAddress startAddress,
                                                                         void* argument,
                                                                         unsigned int createFlag,

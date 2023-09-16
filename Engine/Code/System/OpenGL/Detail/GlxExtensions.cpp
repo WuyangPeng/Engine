@@ -5,14 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 18:59)
+///	版本：0.9.1.4 (2023/08/29 23:39)
 
 #include "System/SystemExport.h"
 
 #include "GLExtensions.h"
 #include "GlxExtensions.h"
 
-bool System::InitGLX() noexcept
+bool System::InitGlx() noexcept
 {
     if (InitGL())
     {

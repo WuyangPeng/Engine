@@ -206,12 +206,12 @@ Real& Mathematics::VariableMatrix<Real>::operator()(int row, int column)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
 
     return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>

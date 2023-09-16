@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/16 22:03)
+///	版本：0.9.1.4 (2023/08/29 10:28)
 
 #ifndef SYSTEM_HELPER_PRAGMA_MYSQLX_XDEVAPI_H
 #define SYSTEM_HELPER_PRAGMA_MYSQLX_XDEVAPI_H
@@ -14,7 +14,7 @@
 
     #include "System/Helper/PragmaWarning.h"
 
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
 
     #include SYSTEM_WARNING_DISABLE(4244)
     #include SYSTEM_WARNING_DISABLE(4996)
@@ -45,7 +45,7 @@
 
     #include <mysqlx/xdevapi.h>
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
 
 #endif  // DATABASE_USE_MYSQL_CPP_CONNECTOR
 

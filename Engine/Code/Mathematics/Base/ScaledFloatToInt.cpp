@@ -16,7 +16,7 @@
 
 #include <algorithm>
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
 Mathematics::ScaledFloatToInt::ScaledFloatToInt(float value, int power) noexcept
@@ -31,7 +31,7 @@ Mathematics::ScaledFloatToInt::ScaledFloatToInt(float value, int power) noexcept
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 void Mathematics::ScaledFloatToInt::Scaled() noexcept
 {

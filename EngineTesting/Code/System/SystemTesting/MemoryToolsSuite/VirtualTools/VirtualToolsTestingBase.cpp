@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/06 20:40)
+///	版本：0.9.1.4 (2023/09/01 10:09)
 
 #include "VirtualToolsTestingBase.h"
 #include "System/MemoryTools/Flags/VirtualToolsFlags.h"
@@ -43,8 +43,8 @@ void System::VirtualToolsTestingBase::RandomShuffle()
 {
     SYSTEM_CLASS_IS_VALID_1;
 
-    shuffle(memoryAllocations.begin(), memoryAllocations.end(), randomEngine);
-    shuffle(memoryProtects.begin(), memoryProtects.end(), randomEngine);
+    std::ranges::shuffle(memoryAllocations, randomEngine);
+    std::ranges::shuffle(memoryProtects, randomEngine);
 }
 
 size_t System::VirtualToolsTestingBase::GetMaxSize() const noexcept

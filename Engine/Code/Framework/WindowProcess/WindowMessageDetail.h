@@ -445,6 +445,7 @@ void Framework::WindowMessage<MiddleLayer>::Display(HWnd hWnd, int64_t timeDelta
     if (const auto aDelta = GetDelta();
         aDelta == 0)
     {
+        middleLayer->PreIdle();
         middleLayer->Idle(accumulative);
 
         accumulative = 0;
@@ -452,6 +453,7 @@ void Framework::WindowMessage<MiddleLayer>::Display(HWnd hWnd, int64_t timeDelta
     else if (aDelta <= accumulative)
     {
         const auto remainder = accumulative % aDelta;
+        middleLayer->PreIdle();
         middleLayer->Idle(accumulative - remainder);
 
         accumulative = remainder;

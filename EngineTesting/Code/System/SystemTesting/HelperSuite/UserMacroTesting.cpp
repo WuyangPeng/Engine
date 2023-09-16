@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/16 22:32)
+///	版本：0.9.1.4 (2023/09/01 09:54)
 
 #include "UserMacroTesting.h"
 #include "System/Helper/UserMacro.h"
@@ -34,7 +34,7 @@ void System::UserMacroTesting::MainTest()
 
 void System::UserMacroTesting::CloseSystemMaxTest()
 {
-    ASSERT_EQUAL(CLOSE_GLUT | CLOSE_GLFW | CLOSE_ENABLE_GL_ERROR_CHECKING | CLOSE_DIRECTX | CLOSE_VULKAN, CLOSE_SYSTEM_MAX);
+    ASSERT_EQUAL(CLOSE_GLUT | CLOSE_GLFW | CLOSE_ENABLE_GL_ERROR_CHECKING | CLOSE_DIRECT_X | CLOSE_VULKAN, CLOSE_SYSTEM_MAX);
 }
 
 void System::UserMacroTesting::MacroExistTest()
@@ -71,11 +71,11 @@ void System::UserMacroTesting::MacroExistTest()
 
 #endif  // SYSTEM_ENABLE_GL_ERROR_CHECKING
 
-#ifdef SYSTEM_USE_DIRECTX_12
+#ifdef SYSTEM_USE_DIRECT_X_12
 
     SYSTEM_PLATFORM_WIN32;
 
-#endif  // SYSTEM_USE_DIRECTX_12
+#endif  // SYSTEM_USE_DIRECT_X_12
 
 #ifdef BUILDING_SYSTEM_STATIC
 

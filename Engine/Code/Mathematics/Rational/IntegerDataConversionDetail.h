@@ -124,12 +124,12 @@ void Mathematics::IntegerDataConversion<N, T>::CalculateConversionValue()
 
     auto conversion = exponent | mantissaValue;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     value = *(reinterpret_cast<const T*>(&conversion));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <int N, typename T>

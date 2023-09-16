@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 21:06)
+///	版本：0.9.1.4 (2023/08/31 15:23)
 
 #include "DefWindowProcTesting.h"
 #include "System/Windows/Flags/WindowsMessagesFlags.h"
@@ -14,8 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::DefWindowProcTesting::DefWindowProcTesting(const OStreamShared& stream, WindowsHWnd hwnd)
-    : ParentType{ stream }, hwnd{ hwnd }
+System::DefWindowProcTesting::DefWindowProcTesting(const OStreamShared& stream, WindowsHWnd hWnd)
+    : ParentType{ stream }, hWnd{ hWnd }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -34,5 +34,5 @@ void System::DefWindowProcTesting::MainTest()
 
 void System::DefWindowProcTesting::DefWindowProcTest()
 {
-    ASSERT_EQUAL(DefaultSystemWindowProcess(hwnd, WindowsMessages::Paint, 0, 0), 0);
+    ASSERT_EQUAL(DefaultSystemWindowProcess(hWnd, WindowsMessages::Paint, 0, 0), 0);
 }

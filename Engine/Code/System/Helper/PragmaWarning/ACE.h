@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/16 21:51)
+///	版本：0.9.1.4 (2023/08/29 11:22)
 
 #ifndef SYSTEM_HELPER_PRAGMA_WARNING_ACE_H
 #define SYSTEM_HELPER_PRAGMA_WARNING_ACE_H
@@ -14,10 +14,12 @@
 
     #include "System/Helper/PragmaWarning.h"
 
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
 
     #if defined(NDEBUG)
+
         #include SYSTEM_WARNING_DISABLE(4996)
+
     #endif  // defined(NDEBUG)
 
     #include SYSTEM_WARNING_DISABLE(6285)
@@ -66,7 +68,7 @@
     #include <ace/SOCK_Connector.h>
     #include <ace/SOCK_Stream.h>
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
 
 #endif  // NETWORK_USE_ACE
 

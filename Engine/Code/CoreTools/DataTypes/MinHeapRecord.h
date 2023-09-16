@@ -1,49 +1,42 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.4 (2023/03/23 10:35)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.4 (2023/09/13 14:14)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include <type_traits>
+#include "MinHeapNode.h"
 
 namespace CoreTools
 {
-    // ´¢´æµÄÊÇÎ¨Ò»±êÊ¶Ë÷ÒıUniqueIndex
-    template <typename Generator, typename Scalar>
+    template <typename T>
     class MinHeapRecord final
     {
     public:
-        static_assert(std::is_scalar_v<Scalar>, "Scalar must be scalar");
+        using ClassType = MinHeapRecord<T>;
 
-        using ClassType = MinHeapRecord<Generator, Scalar>;
+        using MinHeapNode = MinHeapNode<T>;
 
     public:
-        MinHeapRecord() noexcept;
-        MinHeapRecord(int uniqueIndex, Scalar initialValue) noexcept;
-        MinHeapRecord(int uniqueIndex, Generator generator, Scalar initialValue) noexcept(std::is_scalar_v<Generator>);
+        MinHeapRecord(int key, int handle, const T& weight) noexcept;
+        MinHeapRecord(int key, const MinHeapNode& minHeapNode) noexcept(std::is_arithmetic_v<T>);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Generator GetGenerator() const noexcept(std::is_scalar_v<Generator>);
-        NODISCARD Scalar GetValue() const noexcept;
-        NODISCARD int GetUniqueIndex() const noexcept;
-
-        void SetGenerator(Generator aGenerator) noexcept(std::is_scalar_v<Generator>);
-        void SetValue(Scalar aValue) noexcept;
-        void SetUniqueIndex(int aUniqueIndex) noexcept;
+        NODISCARD int GetKey() const noexcept;
+        NODISCARD int GetHandle() const noexcept;
+        NODISCARD T GetWeight() const noexcept(std::is_arithmetic_v<T>);
 
     private:
-        Generator generator;
-        Scalar value;
-        int uniqueIndex;
+        int key;
+        MinHeapNode minHeapNode;
     };
 }
 

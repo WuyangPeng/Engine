@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 22:43)
+///	版本：0.9.1.4 (2023/08/29 23:34)
 
-#ifndef SYSTEM_OPENGL_OPEN_GLUTILITY_H
-#define SYSTEM_OPENGL_OPEN_GLUTILITY_H
+#ifndef SYSTEM_OPENGL_OPEN_GL_UTILITY_H
+#define SYSTEM_OPENGL_OPEN_GL_UTILITY_H
 
 #include "System/SystemDll.h"
 
@@ -28,4 +28,4 @@ namespace System
     NODISCARD bool SYSTEM_DEFAULT_DECLARE IsWglSupportsExtension(const char* wglExtension);
 }
 
-#endif  // SYSTEM_OPENGL_OPEN_GLUTILITY_H
+#endif  // SYSTEM_OPENGL_OPEN_GL_UTILITY_H

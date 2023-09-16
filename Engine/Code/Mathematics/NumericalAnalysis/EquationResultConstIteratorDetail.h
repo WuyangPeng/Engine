@@ -61,7 +61,7 @@ const ResultConstIter& Mathematics::EquationResultConstIterator<ResultConstIter>
     return iter;
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename ResultConstIter>
@@ -72,7 +72,7 @@ typename ResultConstIter::value_type Mathematics::EquationResultConstIterator<Re
     return *iter;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 template <typename ResultConstIter>
 std::ostream& Mathematics::operator<<(std::ostream& os, const EquationResultConstIterator<ResultConstIter>& iter)

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/16 19:34)
+///	版本：0.9.1.4 (2023/08/31 14:21)
 
 #include "OpenGLBlendTesting.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
@@ -126,13 +126,13 @@ void System::OpenGLBlendTesting::SetGLBlendColorTest() noexcept
 
 bool System::OpenGLBlendTesting::RandomShuffleFlags()
 {
-    shuffle(sourceFactorRGBs.begin(), sourceFactorRGBs.end(), randomEngine);
-    shuffle(destinationFactorRGBs.begin(), destinationFactorRGBs.end(), randomEngine);
-    shuffle(sourceFactorAlphas.begin(), sourceFactorAlphas.end(), randomEngine);
-    shuffle(destinationFactorAlphas.begin(), destinationFactorAlphas.end(), randomEngine);
+    std::ranges::shuffle(sourceFactorRGBs, randomEngine);
+    std::ranges::shuffle(destinationFactorRGBs, randomEngine);
+    std::ranges::shuffle(sourceFactorAlphas, randomEngine);
+    std::ranges::shuffle(destinationFactorAlphas, randomEngine);
 
-    shuffle(modeRGBs.begin(), modeRGBs.end(), randomEngine);
-    shuffle(modeAlphas.begin(), modeAlphas.end(), randomEngine);
+    std::ranges::shuffle(modeRGBs, randomEngine);
+    std::ranges::shuffle(modeAlphas, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(SetGLBlendFuncSeparateTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SetGLBlendEquationSeparateTest);

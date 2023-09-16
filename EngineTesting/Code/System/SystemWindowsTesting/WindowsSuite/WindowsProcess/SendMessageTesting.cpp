@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 21:11)
+///	版本：0.9.1.4 (2023/08/31 15:22)
 
 #include "SendMessageTesting.h"
 #include "System/Windows/Flags/WindowsMessagesFlags.h"
@@ -14,8 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::SendMessageTesting::SendMessageTesting(const OStreamShared& stream, WindowsHWnd hwnd)
-    : ParentType{ stream }, hwnd{ hwnd }
+System::SendMessageTesting::SendMessageTesting(const OStreamShared& stream, WindowsHWnd hWnd)
+    : ParentType{ stream }, hWnd{ hWnd }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -34,5 +34,5 @@ void System::SendMessageTesting::MainTest()
 
 void System::SendMessageTesting::SendMessageTest() noexcept
 {
-    MAYBE_UNUSED const auto result = SendSystemMessage(hwnd, WindowsMessages::User, 0, 0);
+    MAYBE_UNUSED const auto result = SendSystemMessage(hWnd, WindowsMessages::User, 0, 0);
 }

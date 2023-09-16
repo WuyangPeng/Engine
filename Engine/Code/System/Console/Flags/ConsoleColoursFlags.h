@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/02 16:27)
+///	版本：0.9.1.4 (2023/08/28 16:13)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_COLORS_FLAGS_H
 #define SYSTEM_CONSOLE_CONSOLE_COLORS_FLAGS_H
@@ -67,8 +67,8 @@ namespace System
         LeadingByte = COMMON_LVB_LEADING_BYTE,
         TrailingByte = COMMON_LVB_TRAILING_BYTE,
         GridHorizontal = COMMON_LVB_GRID_HORIZONTAL,
-        GridLvertical = COMMON_LVB_GRID_LVERTICAL,
-        GridRvertical = COMMON_LVB_GRID_RVERTICAL,
+        GridLVertical = COMMON_LVB_GRID_LVERTICAL,
+        GridRVertical = COMMON_LVB_GRID_RVERTICAL,
         ReverseVideo = COMMON_LVB_REVERSE_VIDEO,
         Underscore = COMMON_LVB_UNDERSCORE,
 
@@ -127,8 +127,8 @@ namespace System
         LeadingByte = 0x0100,
         TrailingByte = 0x0200,
         GridHorizontal = 0x0400,
-        GridLvertical = 0x0800,
-        GridRvertical = 0x1000,
+        GridLVertical = 0x0800,
+        GridRVertical = 0x1000,
         ReverseVideo = 0x4000,
         Underscore = 0x8000,
         SbcsDbcs = 0x0300,

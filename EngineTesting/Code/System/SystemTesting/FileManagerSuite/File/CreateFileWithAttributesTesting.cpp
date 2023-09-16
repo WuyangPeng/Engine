@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/13 10:42)
+///	版本：0.9.1.4 (2023/08/31 17:21)
 
 #include "CreateFileWithAttributesTesting.h"
 #include "System/FileManager/File.h"
@@ -16,10 +16,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using namespace std::literals;
-
 System::CreateFileWithAttributesTesting::CreateFileWithAttributesTesting(const OStreamShared& stream)
-    : ParentType{ stream }, onlyReadFile{ SYSTEM_TEXT("Resource/FileTesting/CreateOnlyReadFile.txt"s) }
+    : ParentType{ stream }, onlyReadFile{ SYSTEM_TEXT("Resource/FileTesting/CreateOnlyReadFile.txt") }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -55,8 +53,8 @@ void System::CreateFileWithAttributesTesting::CreateFileTest()
 
 void System::CreateFileWithAttributesTesting::DoCreateFileTest(size_t index)
 {
-    const auto fileHandleAttribute = GetFileHandleAttributes(index);
-    if (fileHandleAttribute == FileHandleAttributes::ReadOnly)
+    if (const auto fileHandleAttribute = GetFileHandleAttributes(index);
+        fileHandleAttribute == FileHandleAttributes::ReadOnly)
     {
         ASSERT_NOT_THROW_EXCEPTION_1(ReadOnlyTest, fileHandleAttribute);
     }
@@ -91,9 +89,8 @@ void System::CreateFileWithAttributesTesting::ReadOnlyTest(FileHandleAttributes 
 
 void System::CreateFileWithAttributesTesting::CommonTest(size_t index, FileHandleAttributes fileHandleAttribute)
 {
-    const auto fileHandleCreationDisposition = GetFileHandleCreationDisposition(index);
-
-    if (fileHandleCreationDisposition == FileHandleCreationDisposition::OpenExisting ||
+    if (const auto fileHandleCreationDisposition = GetFileHandleCreationDisposition(index);
+        fileHandleCreationDisposition == FileHandleCreationDisposition::OpenExisting ||
         fileHandleCreationDisposition == FileHandleCreationDisposition::TruncateExisting)
     {
         ASSERT_NOT_THROW_EXCEPTION_3(ExistingTest, index, fileHandleAttribute, fileHandleCreationDisposition);
@@ -106,9 +103,8 @@ void System::CreateFileWithAttributesTesting::CommonTest(size_t index, FileHandl
 
 void System::CreateFileWithAttributesTesting::ExistingTest(size_t index, FileHandleAttributes fileHandleAttribute, FileHandleCreationDisposition fileHandleCreationDisposition)
 {
-    const auto fileHandleOther = GetFileHandleOther(index);
-
-    if (fileHandleOther == FileHandleOther::DeleteOnClose)
+    if (const auto fileHandleOther = GetFileHandleOther(index);
+        fileHandleOther == FileHandleOther::DeleteOnClose)
     {
         ASSERT_NOT_THROW_EXCEPTION_3(NonExistentTest, index, fileHandleAttribute, FileHandleCreationDisposition::CreateNew);
     }

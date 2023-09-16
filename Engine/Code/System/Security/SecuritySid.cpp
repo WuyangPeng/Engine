@@ -5,15 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:18)
+///	版本：0.9.1.4 (2023/08/30 15:17)
 
 #include "System/SystemExport.h"
 
 #include "SecuritySid.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/Windows/WindowsSystem.h"
 
-bool System::AllocateAndInitializeSecurityIdentifier(SecuritySIDIndentifierAuthorityPtr identifierAuthority,
+bool System::AllocateAndInitializeSecurityIdentifier(SecuritySidIdentifierAuthorityPtr identifierAuthority,
                                                      WindowsByte subAuthorityCount,
                                                      WindowsDWord subAuthority0,
                                                      WindowsDWord subAuthority1,
@@ -23,7 +22,7 @@ bool System::AllocateAndInitializeSecurityIdentifier(SecuritySIDIndentifierAutho
                                                      WindowsDWord subAuthority5,
                                                      WindowsDWord subAuthority6,
                                                      WindowsDWord subAuthority7,
-                                                     SecuritySIDPtr* sid) noexcept
+                                                     SecuritySidPtr* sid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -51,7 +50,7 @@ bool System::AllocateAndInitializeSecurityIdentifier(SecuritySIDIndentifierAutho
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::CopySecurityIdentifier(WindowsDWord destinationSidLength, SecuritySIDPtr destinationSid, SecuritySIDPtr sourceSid) noexcept
+bool System::CopySecurityIdentifier(WindowsDWord destinationSidLength, SecuritySidPtr destinationSid, SecuritySidPtr sourceSid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -69,7 +68,7 @@ bool System::CopySecurityIdentifier(WindowsDWord destinationSidLength, SecurityS
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::CreateWellKnownSecurityIdentifier(SecurityWellKnownSidType wellKnownSidType, SecuritySIDPtr domainSid, SecuritySIDPtr sid, WindowsDWord* sidCount) noexcept
+bool System::CreateWellKnownSecurityIdentifier(SecurityWellKnownSidType wellKnownSidType, SecuritySidPtr domainSid, SecuritySidPtr sid, WindowsDWord* sidCount) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -87,7 +86,7 @@ bool System::CreateWellKnownSecurityIdentifier(SecurityWellKnownSidType wellKnow
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsVoidPtr System::FreeSecurityIdentifier(SecuritySIDPtr sid) noexcept
+System::WindowsVoidPtr System::FreeSecurityIdentifier(SecuritySidPtr sid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -102,7 +101,7 @@ System::WindowsVoidPtr System::FreeSecurityIdentifier(SecuritySIDPtr sid) noexce
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsDWord System::GetLengthSecurityIdentifier(SecuritySIDPtr sid) noexcept
+System::WindowsDWord System::GetLengthSecurityIdentifier(SecuritySidPtr sid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -117,7 +116,7 @@ System::WindowsDWord System::GetLengthSecurityIdentifier(SecuritySIDPtr sid) noe
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsDWordPtr System::GetSecurityIdentifierSubAuthority(SecuritySIDPtr sid, WindowsDWord subAuthority) noexcept
+System::WindowsDWordPtr System::GetSecurityIdentifierSubAuthority(SecuritySidPtr sid, WindowsDWord subAuthority) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -132,7 +131,7 @@ System::WindowsDWordPtr System::GetSecurityIdentifierSubAuthority(SecuritySIDPtr
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsUCharPtr System::GetSecurityIdentifierSubAuthorityCount(SecuritySIDPtr sid) noexcept
+System::WindowsUCharPtr System::GetSecurityIdentifierSubAuthorityCount(SecuritySidPtr sid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -147,7 +146,7 @@ System::WindowsUCharPtr System::GetSecurityIdentifierSubAuthorityCount(SecurityS
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::InitializeSecurityIdentifier(SecuritySIDPtr sid, SecuritySIDIndentifierAuthorityPtr identifierAuthority, WindowsByte subAuthorityCount) noexcept
+bool System::InitializeSecurityIdentifier(SecuritySidPtr sid, SecuritySidIdentifierAuthorityPtr identifierAuthority, WindowsByte subAuthorityCount) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -165,7 +164,7 @@ bool System::InitializeSecurityIdentifier(SecuritySIDPtr sid, SecuritySIDIndenti
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::IsSecurityIdentifierValid(SecuritySIDPtr sid) noexcept
+bool System::IsSecurityIdentifierValid(SecuritySidPtr sid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -183,7 +182,7 @@ bool System::IsSecurityIdentifierValid(SecuritySIDPtr sid) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::IsWellKnownSecurityIdentifier(SecuritySIDPtr sid, SecurityWellKnownSidType wellKnownSidType) noexcept
+bool System::IsWellKnownSecurityIdentifier(SecuritySidPtr sid, SecurityWellKnownSidType wellKnownSidType) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 

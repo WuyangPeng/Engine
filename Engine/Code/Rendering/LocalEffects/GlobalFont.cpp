@@ -69,3 +69,10 @@ Rendering::GlobalFont::FontSharedPtr Rendering::GlobalFont::GetDefaultFont() con
 
     return impl->GetDefaultFont();
 }
+
+void Rendering::GlobalFont::Release()  
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->Release();
+}

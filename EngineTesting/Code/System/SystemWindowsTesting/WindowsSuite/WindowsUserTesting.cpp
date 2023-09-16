@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 20:18)
+///	版本：0.9.1.4 (2023/08/31 14:56)
 
 #include "WindowsUserTesting.h"
 #include "System/Windows/Flags/WindowsMessagesFlags.h"
@@ -14,8 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::WindowsUserTesting::WindowsUserTesting(const OStreamShared& stream, WindowsHWnd hwnd)
-    : ParentType{ stream }, hwnd{ hwnd }
+System::WindowsUserTesting::WindowsUserTesting(const OStreamShared& stream, WindowsHWnd hWnd)
+    : ParentType{ stream }, hWnd{ hWnd }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -30,7 +30,7 @@ void System::WindowsUserTesting::DoRunUnitTest()
 void System::WindowsUserTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MessageTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(HwndTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(HWndTest);
 }
 
 void System::WindowsUserTesting::MessageTest()
@@ -38,8 +38,8 @@ void System::WindowsUserTesting::MessageTest()
     ASSERT_TRUE(PostSystemThreadMessage(GetCurrentThreadId(), WindowsMessages::Paint, 0, 0));
 }
 
-void System::WindowsUserTesting::HwndTest()
+void System::WindowsUserTesting::HWndTest()
 {
-    ASSERT_TRUE(SystemInvalidateRect(hwnd));
-    ASSERT_TRUE(UpdateSystemWindows(hwnd));
+    ASSERT_TRUE(SystemInvalidateRect(hWnd));
+    ASSERT_TRUE(UpdateSystemWindows(hWnd));
 }

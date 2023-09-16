@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/16 21:47)
+///	版本：0.9.1.4 (2023/08/29 10:05)
 
 #ifndef SYSTEM_HELPER_ENUM_OPERATOR_H
 #define SYSTEM_HELPER_ENUM_OPERATOR_H
@@ -24,12 +24,12 @@ namespace System
     {
         using UnderlyingType = std::underlying_type_t<E>;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
         return reinterpret_cast<UnderlyingType&>(enumerator);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     template <typename E>

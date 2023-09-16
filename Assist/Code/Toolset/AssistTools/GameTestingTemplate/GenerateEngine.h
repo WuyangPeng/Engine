@@ -22,7 +22,7 @@ namespace GameTestingTemplate
         using ClassType = GenerateEngine;
 
     public:
-        GenerateEngine(std::string configurationFileName, const std::string& parameterFileName);
+        explicit GenerateEngine(std::string configurationFileNam);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -30,11 +30,10 @@ namespace GameTestingTemplate
         using StringReplacing = CoreTools::StringReplacing;
 
     private:
-        void Generate() noexcept;
+        void Generate();
 
     private:
         std::string configurationFileName;
-        StringReplacing parameter;
     };
 }
 

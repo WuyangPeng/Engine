@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+Ôªø///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///	‰ΩúËÄÖÔºöÂΩ≠Ê≠¶Èò≥ÔºåÂΩ≠ÊôîÊÅ©ÔºåÂΩ≠ÊôîÊ≥Ω
+///	ËÅîÁ≥ª‰ΩúËÄÖÔºö94458936@qq.com
 ///
-///	±Í◊º£∫std:c++20
-///	“˝«Ê∞Ê±æ£∫0.9.0.4 (2023/03/23 10:37)
+///	Ê†áÂáÜÔºöstd:c++20
+///	ÁâàÊú¨Ôºö0.9.1.4 (2023/09/13 14:15)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_DETAIL_H
@@ -13,83 +13,52 @@
 #include "MinHeapRecord.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-template <typename Generator, typename Scalar>
-CoreTools::MinHeapRecord<Generator, Scalar>::MinHeapRecord() noexcept
-    : generator{}, value{}, uniqueIndex{ -1 }
+template <typename T>
+CoreTools::MinHeapRecord<T>::MinHeapRecord(int key, int handle, const T& weight) noexcept
+    : key{ key }, minHeapNode{ handle, weight }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-template <typename Generator, typename Scalar>
-CoreTools::MinHeapRecord<Generator, Scalar>::MinHeapRecord(int uniqueIndex, Scalar initialValue) noexcept
-    : generator{}, value{ initialValue }, uniqueIndex{ uniqueIndex }
+template <typename T>
+CoreTools::MinHeapRecord<T>::MinHeapRecord(int key, const MinHeapNode& minHeapNode) noexcept(std::is_arithmetic_v<T>)
+    : key{ key }, minHeapNode{ minHeapNode }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
-
-template <typename Generator, typename Scalar>
-CoreTools::MinHeapRecord<Generator, Scalar>::MinHeapRecord(int uniqueIndex, Generator generator, Scalar initialValue) noexcept(std::is_scalar_v<Generator>)
-    : generator{ generator }, value{ initialValue }, uniqueIndex{ uniqueIndex }
-{
-    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 
-template <typename Generator, typename Scalar>
-bool CoreTools::MinHeapRecord<Generator, Scalar>::IsValid() const noexcept
+template <typename T>
+bool CoreTools::MinHeapRecord<T>::IsValid() const noexcept
 {
-    return -1 <= uniqueIndex;
+    return true;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
 
-template <typename Generator, typename Scalar>
-Generator CoreTools::MinHeapRecord<Generator, Scalar>::GetGenerator() const noexcept(std::is_scalar_v<Generator>)
+template <typename T>
+int CoreTools::MinHeapRecord<T>::GetKey() const noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return generator;
+    return key;
 }
 
-template <typename Generator, typename Scalar>
-Scalar CoreTools::MinHeapRecord<Generator, Scalar>::GetValue() const noexcept
+template <typename T>
+int CoreTools::MinHeapRecord<T>::GetHandle() const noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return value;
+    return minHeapNode.GetHandle();
 }
 
-template <typename Generator, typename Scalar>
-int CoreTools::MinHeapRecord<Generator, Scalar>::GetUniqueIndex() const noexcept
+template <typename T>
+T CoreTools::MinHeapRecord<T>::GetWeight() const noexcept(std::is_arithmetic_v<T>)
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return uniqueIndex;
-}
-
-template <typename Generator, typename Scalar>
-void CoreTools::MinHeapRecord<Generator, Scalar>::SetGenerator(Generator aGenerator) noexcept(std::is_scalar_v<Generator>)
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    generator = aGenerator;
-}
-
-template <typename Generator, typename Scalar>
-void CoreTools::MinHeapRecord<Generator, Scalar>::SetValue(Scalar aValue) noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    value = aValue;
-}
-
-template <typename Generator, typename Scalar>
-void CoreTools::MinHeapRecord<Generator, Scalar>::SetUniqueIndex(int aUniqueIndex) noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    uniqueIndex = aUniqueIndex;
+    return minHeapNode.GetWeight();
 }
 
 #endif  // CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_DETAIL_H

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:49)
+///	版本：0.9.1.4 (2023/09/15 17:41)
 
 #ifndef NETWORK_NETWORK_INTERFACE_NETWORK_SOCK_STREAM_H
 #define NETWORK_NETWORK_INTERFACE_NETWORK_SOCK_STREAM_H
@@ -16,7 +16,7 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE NetworkSockStream : public SockStreamImpl
+    class NETWORK_HIDDEN_DECLARE NetworkSockStream final : public SockStreamImpl
     {
     public:
         using ClassType = NetworkSockStream;

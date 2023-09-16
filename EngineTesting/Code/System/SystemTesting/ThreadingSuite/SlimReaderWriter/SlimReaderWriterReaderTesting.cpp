@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 16:08)
+///	版本：0.9.1.4 (2023/09/01 15:21)
 
 #include "SlimReaderWriterReaderTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -68,9 +68,17 @@ void System::SlimReaderWriterReaderTesting::CreateThread(SlimReaderWriterLock& s
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::ReaderThread, this, boost::ref(slimReaderWriterLock)));
-        threadGroup.create_thread(boost::bind(&ClassType::TryReaderThreadSuccess, this, boost::ref(slimReaderWriterLock)));
-        threadGroup.create_thread(boost::bind(&ClassType::TryWriterThreadFailure, this, boost::ref(slimReaderWriterLock)));
+        threadGroup.create_thread([this, &slimReaderWriterLock]() noexcept {
+            this->ReaderThread(slimReaderWriterLock);
+        });
+
+        threadGroup.create_thread([this, &slimReaderWriterLock]() {
+            this->TryReaderThreadSuccess(slimReaderWriterLock);
+        });
+
+        threadGroup.create_thread([this, &slimReaderWriterLock]() {
+            this->TryWriterThreadFailure(slimReaderWriterLock);
+        });
     }
 
     threadGroup.join_all();

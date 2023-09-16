@@ -67,3 +67,11 @@ Rendering::GlobalFontImpl::FontSharedPtr Rendering::GlobalFontImpl::GetDefaultFo
 
     return defaultFont;
 }
+
+void Rendering::GlobalFontImpl::Release() noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    defaultFont.reset();
+    activeFont.reset();
+}

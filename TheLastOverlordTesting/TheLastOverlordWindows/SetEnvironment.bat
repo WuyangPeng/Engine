@@ -2,7 +2,7 @@
 
 echo TheLastOverlordTestingInclude = %TheLastOverlordTestingInclude%
 echo %cd%
-setx TheLastOverlordTestingInclude "%cd%\..\Code"
+setx TheLastOverlordTestingInclude "%cd%\..\Code" 
 
 echo TheLastOverlordTestingEngineering = %TheLastOverlordTestingEngineering%
 echo %cd%
@@ -71,6 +71,5 @@ setx TheLastOverlordTestingEngineStaticGameDynamicX64DebugLib "%cd%\..\x64\Engin
 echo TheLastOverlordTestingEngineStaticGameDynamicX64ReleaseLib = %TheLastOverlordTestingEngineStaticGameDynamicX64ReleaseLib%
 echo %cd%
 setx TheLastOverlordTestingEngineStaticGameDynamicX64ReleaseLib "%cd%\..\x64\EngineStaticReleaseWindows" 
-
 
 pause

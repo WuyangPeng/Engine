@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 20:18)
+///	版本：0.9.1.4 (2023/08/31 14:55)
 
 #ifndef SYSTEM_WINDOWS_TESTING_WINDOWS_SUITE_WINDOWS_USER_TESTING_H
 #define SYSTEM_WINDOWS_TESTING_WINDOWS_SUITE_WINDOWS_USER_TESTING_H
@@ -22,19 +22,19 @@ namespace System
         using ParentType = UnitTest;
 
     public:
-        explicit WindowsUserTesting(const OStreamShared& stream, WindowsHWnd hwnd);
+        explicit WindowsUserTesting(const OStreamShared& stream, WindowsHWnd hWnd);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void MessageTest();
-        void HwndTest();
+        void HWndTest();
 
     private:
-        WindowsHWnd hwnd;
+        WindowsHWnd hWnd;
     };
 }
 

@@ -28,13 +28,13 @@ namespace Mathematics
         explicit StaticIntersector(const Real epsilon = Math::GetZeroTolerance()) noexcept;
         ~StaticIntersector() noexcept = 0;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
         StaticIntersector(const StaticIntersector& rhs) noexcept = default;
         StaticIntersector(StaticIntersector&& rhs) noexcept = default;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         StaticIntersector& operator=(const StaticIntersector& rhs) noexcept = default;
         StaticIntersector& operator=(StaticIntersector&& rhs) noexcept = default;

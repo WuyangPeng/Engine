@@ -5,11 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/11 09:38)
+///	版本：0.9.1.4 (2023/09/16 10:10)
 
 #include "TestAbstractMessage.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/MessageManager.h"

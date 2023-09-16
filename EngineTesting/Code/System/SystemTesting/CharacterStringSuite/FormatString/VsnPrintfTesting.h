@@ -1,38 +1,38 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/30 14:54)
+///	版本：0.9.1.4 (2023/08/31 16:00)
 
-#ifndef SYSTEM_CHARACTER_STRING_SUITE_VSN_PRINTF_TESTING_H
-#define SYSTEM_CHARACTER_STRING_SUITE_VSN_PRINTF_TESTING_H
+#ifndef SYSTEM_CHARACTER_STRING_SUITE_VSN_PRINT_F_TESTING_H
+#define SYSTEM_CHARACTER_STRING_SUITE_VSN_PRINT_F_TESTING_H
 
 #include "FormatStringTestingBase.h"
 
 namespace System
 {
-    class VsnPrintfTesting : public FormatStringTestingBase
+    class VsnPrintFTesting final : public FormatStringTestingBase
     {
     public:
-        using ClassType = VsnPrintfTesting;
+        using ClassType = VsnPrintFTesting;
         using ParentType = FormatStringTestingBase;
 
     public:
-        explicit VsnPrintfTesting(const OStreamShared& stream);
+        explicit VsnPrintFTesting(const OStreamShared& stream);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
-        void VsnprintfTest();
+        void VsnPrintFTest();
 
-        void VsnprintfUseIndefiniteParameterTest(int testStringSize, char* buffer, size_t size, const char* format, ...);
+        void VsnPrintFUseIndefiniteParameterTest(int testStringSize, char* buffer, size_t size, const char* format, ...);
     };
 }
 
-#endif  // SYSTEM_CHARACTER_STRING_SUITE_VSN_PRINTF_TESTING_H
+#endif  // SYSTEM_CHARACTER_STRING_SUITE_VSN_PRINT_F_TESTING_H

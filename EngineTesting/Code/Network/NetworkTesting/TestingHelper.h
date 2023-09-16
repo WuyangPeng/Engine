@@ -5,14 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/11 09:26)
+///	版本：0.9.1.4 (2023/09/16 09:11)
 
 #ifndef NETWORK_TESTING_TESTING_HELPER_H
 #define NETWORK_TESTING_TESTING_HELPER_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
-#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
 namespace Network
 {
@@ -38,10 +36,11 @@ namespace Network
         void AddHelperSuite();
         void AddConfigurationSuite();
         void AddNetworkMessageSuite();
+        void AddServiceWrappersSuite();
         void AddInterfaceSuite();
         void AddACEWrappersSuite();
         void AddBoostWrappersSuite();
-        void AddNetworkWrappersSuite(); 
+        void AddNetworkWrappersSuite();
         void AddOpensslSuite();
         void AddMessageOrientedMiddlewareSuite();
         void AddActiveMQSuite();

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/09 11:26)
+///	版本：0.9.1.4 (2023/08/31 17:04)
 
 /// 原始文件在SystemTesting下，SystemWindowsTesting下的为自动复制文件，请勿修改。
 #include "EnumResourceToolsTestingBase.h"
@@ -51,12 +51,12 @@ size_t System::EnumResourceToolsTestingBase::GetEnumResourceDataSize() const noe
 
 System::EnumResourceToolsTestingBase* System::EnumResourceToolsTestingBase::GetBase(WindowsLongPtrSizeType lParam) noexcept
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     return reinterpret_cast<ClassType*>(lParam);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 void System::EnumResourceToolsTestingBase::ClearEnumResourceData() noexcept

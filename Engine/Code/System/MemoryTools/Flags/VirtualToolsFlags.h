@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/18 18:46)
+///	版本：0.9.1.4 (2023/08/29 16:55)
 
 #ifndef SYSTEM_MEMORY_TOOLS_VIRTUAL_FLAGS_H
 #define SYSTEM_MEMORY_TOOLS_VIRTUAL_FLAGS_H
@@ -38,13 +38,13 @@ namespace System
         Private = MEM_PRIVATE,
         Mapped = MEM_MAPPED,
         Rotate = MEM_ROTATE,
-        Mem4mbPages = MEM_4MB_PAGES,
+        Mem4MbPages = MEM_4MB_PAGES,
 
         ReplacePlaceholder = MEM_REPLACE_PLACEHOLDER,
         ReservePlaceholder = MEM_RESERVE_PLACEHOLDER,
         DifferentImageBaseOk = MEM_DIFFERENT_IMAGE_BASE_OK,
         Pages64K = MEM_64K_PAGES,
-        UnmapWithTransientBoost = MEM_UNMAP_WITH_TRANSIENT_BOOST,
+        UnMapWithTransientBoost = MEM_UNMAP_WITH_TRANSIENT_BOOST,
         CoalescePlaceholders = MEM_COALESCE_PLACEHOLDERS,
         PreservePlaceholder = MEM_PRESERVE_PLACEHOLDER,
     };
@@ -67,7 +67,7 @@ namespace System
         Nocache = PAGE_NOCACHE,
         WriteCombine = PAGE_WRITECOMBINE,
 
-        GraphicsNoaccess = PAGE_GRAPHICS_NOACCESS,
+        GraphicsNoAccess = PAGE_GRAPHICS_NOACCESS,
         GraphicsReadonly = PAGE_GRAPHICS_READONLY,
         GraphicsReadwrite = PAGE_GRAPHICS_READWRITE,
         GraphicsExecute = PAGE_GRAPHICS_EXECUTE,
@@ -83,7 +83,7 @@ namespace System
 
         EnclaveUnvalidated = PAGE_ENCLAVE_UNVALIDATED,
         EnclaveMask = PAGE_ENCLAVE_MASK,
-        EnclaveDecommit = PAGE_ENCLAVE_DECOMMIT,
+        EnclaveDeCommit = PAGE_ENCLAVE_DECOMMIT,
         EnclaveSsFirst = PAGE_ENCLAVE_SS_FIRST,
     };
 
@@ -110,13 +110,13 @@ namespace System
         Private = 0x20000,
         Mapped = 0x40000,
         Rotate = 0x800000,
-        Mem4mbPages = 0x80000000,
+        Mem4MbPages = 0x80000000,
 
         ReplacePlaceholder = 0x00004000,
         ReservePlaceholder = 0x00040000,
         DifferentImageBaseOk = 0x00800000,
         Pages64K = LargePages | Physical,
-        UnmapWithTransientBoost = 0x00000001,
+        UnMapWithTransientBoost = 0x00000001,
         CoalescePlaceholders = 0x00000001,
         PreservePlaceholder = 0x00000002,
     };
@@ -139,7 +139,7 @@ namespace System
         Nocache = 0x200,
         WriteCombine = 0x400,
 
-        GraphicsNoaccess = 0x0800,
+        GraphicsNoAccess = 0x0800,
         GraphicsReadonly = 0x1000,
         GraphicsReadwrite = 0x2000,
         GraphicsExecute = 0x4000,
@@ -155,7 +155,7 @@ namespace System
 
         EnclaveUnvalidated = 0x20000000,
         EnclaveMask = 0x10000000,
-        EnclaveDecommit = (EnclaveMask | 0),
+        EnclaveDeCommit = (EnclaveMask | 0),
         EnclaveSsFirst = (EnclaveMask | 1),
         EnclaveSsRest = (EnclaveMask | 2),
     };

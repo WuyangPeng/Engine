@@ -37,7 +37,7 @@ void CoreTools::AnalysisCommandArgumentContainer::Init(const char* const* argume
 
         for (auto i = 0; i < argumentsNumber; ++i)
         {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
             if (arguments[i] != nullptr)
@@ -47,7 +47,7 @@ void CoreTools::AnalysisCommandArgumentContainer::Init(const char* const* argume
                 argumentContainer.emplace_back(argument);
             }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
     }
 }

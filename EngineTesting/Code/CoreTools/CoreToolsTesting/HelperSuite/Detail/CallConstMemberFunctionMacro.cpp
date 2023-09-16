@@ -59,12 +59,12 @@ std::string& CoreTools::CallConstMemberFunctionMacro::operator[](int index) noex
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return OPERATOR_SQUARE_BRACKETS(std::string, index);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 std::string* CoreTools::CallConstMemberFunctionMacro::operator[](const std::string& character) noexcept

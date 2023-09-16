@@ -55,7 +55,7 @@ typename Mathematics::LinearSystem<Real>::Vector2 Mathematics::LinearSystem<Real
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     auto det = matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
@@ -68,7 +68,7 @@ typename Mathematics::LinearSystem<Real>::Vector2 Mathematics::LinearSystem<Real
     return Vector2{ (matrix[1][1] * vector[0] - matrix[0][1] * vector[1]) / det,
                     (matrix[0][0] * vector[1] - matrix[1][0] * vector[0]) / det };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
@@ -76,7 +76,7 @@ typename Mathematics::LinearSystem<Real>::Vector3 Mathematics::LinearSystem<Real
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     Matrix3 invMatrix{ Vector3{ matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1],
@@ -93,7 +93,7 @@ typename Mathematics::LinearSystem<Real>::Vector3 Mathematics::LinearSystem<Real
 
     auto det = matrix[0][0] * invMatrix[0][0] + matrix[0][1] * invMatrix[1][0] + matrix[0][2] * invMatrix[2][0];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     if (Math::FAbs(det) <= zeroTolerance)
     {
@@ -108,14 +108,14 @@ typename Mathematics::LinearSystem<Real>::Vector3 Mathematics::LinearSystem<Real
         }
     }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return Vector3{ invMatrix[0][0] * vector[0] + invMatrix[0][1] * vector[1] + invMatrix[0][2] * vector[2],
                     invMatrix[1][0] * vector[0] + invMatrix[1][1] * vector[1] + invMatrix[1][2] * vector[2],
                     invMatrix[2][0] * vector[0] + invMatrix[2][1] * vector[1] + invMatrix[2][2] * vector[2] };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename Real>

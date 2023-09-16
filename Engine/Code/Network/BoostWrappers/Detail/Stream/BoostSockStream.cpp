@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:37)
+///	版本：0.9.1.4 (2023/09/15 17:25)
 
 #include "Network/NetworkExport.h"
 
@@ -45,13 +45,11 @@ Network::BoostSockStream::~BoostSockStream() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Network, BoostSockStream)
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
 int Network::BoostSockStream::Send(const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(messageBuffer);
 
     const auto originalReadIndex = messageBuffer->GetCurrentReadIndex();
 
@@ -84,8 +82,6 @@ int Network::BoostSockStream::Send(const MessageBufferSharedPtr& messageBuffer)
 
     return readCount;
 }
-
-#include STSTEM_WARNING_POP
 
 void Network::BoostSockStream::AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
@@ -133,13 +129,11 @@ void Network::BoostSockStream::AsyncSendEvent(const EventInterfaceSharedPtr& eve
     }
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
 int Network::BoostSockStream::HandleReceive(const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(messageBuffer);
 
     const auto originalWriteIndex = messageBuffer->GetCurrentWriteIndex();
 
@@ -173,8 +167,6 @@ int Network::BoostSockStream::HandleReceive(const MessageBufferSharedPtr& messag
 
     return messageBuffer->GetCurrentWriteIndex() - originalWriteIndex;
 }
-
-#include STSTEM_WARNING_POP
 
 void Network::BoostSockStream::HandleAsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex)
 {

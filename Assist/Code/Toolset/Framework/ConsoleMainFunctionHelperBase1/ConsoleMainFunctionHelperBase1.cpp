@@ -49,7 +49,7 @@ void Framework::ConsoleMainFunctionHelperBase1::PrintConsoleParameter()
         if (const auto* const* aArgv = GetArgv();
             aArgv != nullptr)
         {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
             COUT << SYSTEM_TEXT("命令行参数第")
@@ -58,7 +58,7 @@ void Framework::ConsoleMainFunctionHelperBase1::PrintConsoleParameter()
                  << aArgv[index]
                  << SYSTEM_TEXT('\n');
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
     }
 }

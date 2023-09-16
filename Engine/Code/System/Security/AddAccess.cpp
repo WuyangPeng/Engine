@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:16)
+///	版本：0.9.1.4 (2023/08/30 15:15)
 
 #include "System/SystemExport.h"
 
@@ -14,7 +14,7 @@
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/WindowsSystem.h"
 
-bool System::AddAccessAllowedAccessControlEntries(AccessCheckACLPtr acl, AccessControlListRevision aceRevision, SpecificAccess accessMask, SecuritySIDPtr sid) noexcept
+bool System::AddAccessAllowedAccessControlEntries(AccessCheckAclPtr acl, AccessControlListRevision aceRevision, SpecificAccess accessMask, SecuritySidPtr sid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -32,7 +32,7 @@ bool System::AddAccessAllowedAccessControlEntries(AccessCheckACLPtr acl, AccessC
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::AddAccessAllowedAccessControlEntries(AccessCheckACLPtr acl, AccessControlListRevision aceRevision, ControlACEInheritance aceFlags, SpecificAccess accessMask, SecuritySIDPtr sid) noexcept
+bool System::AddAccessAllowedAccessControlEntries(AccessCheckAclPtr acl, AccessControlListRevision aceRevision, ControlAceInheritance aceFlags, SpecificAccess accessMask, SecuritySidPtr sid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -50,13 +50,13 @@ bool System::AddAccessAllowedAccessControlEntries(AccessCheckACLPtr acl, AccessC
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::AddAccessAllowedObjectAccessControlEntries(AccessCheckACLPtr acl,
+bool System::AddAccessAllowedObjectAccessControlEntries(AccessCheckAclPtr acl,
                                                         AccessControlListRevision aceRevision,
-                                                        ControlACEInheritance aceFlags,
+                                                        ControlAceInheritance aceFlags,
                                                         SpecificAccess accessMask,
                                                         SystemGloballyUniqueIdentifier* objectTypeGuid,
                                                         SystemGloballyUniqueIdentifier* inheritedObjectTypeGuid,
-                                                        SecuritySIDPtr sid) noexcept
+                                                        SecuritySidPtr sid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -84,7 +84,7 @@ bool System::AddAccessAllowedObjectAccessControlEntries(AccessCheckACLPtr acl,
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::AddAccessDeniedAccessControlEntries(AccessCheckACLPtr acl, AccessControlListRevision aceRevision, SpecificAccess accessMask, SecuritySIDPtr sid) noexcept
+bool System::AddAccessDeniedAccessControlEntries(AccessCheckAclPtr acl, AccessControlListRevision aceRevision, SpecificAccess accessMask, SecuritySidPtr sid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -102,7 +102,7 @@ bool System::AddAccessDeniedAccessControlEntries(AccessCheckACLPtr acl, AccessCo
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::AddAccessDeniedAccessControlEntries(AccessCheckACLPtr acl, AccessControlListRevision aceRevision, ControlACEInheritance aceFlags, SpecificAccess accessMask, SecuritySIDPtr sid) noexcept
+bool System::AddAccessDeniedAccessControlEntries(AccessCheckAclPtr acl, AccessControlListRevision aceRevision, ControlAceInheritance aceFlags, SpecificAccess accessMask, SecuritySidPtr sid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -120,13 +120,13 @@ bool System::AddAccessDeniedAccessControlEntries(AccessCheckACLPtr acl, AccessCo
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::AddAccessDeniedObjectAccessControlEntries(AccessCheckACLPtr acl,
+bool System::AddAccessDeniedObjectAccessControlEntries(AccessCheckAclPtr acl,
                                                        AccessControlListRevision aceRevision,
-                                                       ControlACEInheritance aceFlags,
+                                                       ControlAceInheritance aceFlags,
                                                        SpecificAccess accessMask,
                                                        SystemGloballyUniqueIdentifier* objectTypeGuid,
                                                        SystemGloballyUniqueIdentifier* inheritedObjectTypeGuid,
-                                                       SecuritySIDPtr sid) noexcept
+                                                       SecuritySidPtr sid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -154,7 +154,7 @@ bool System::AddAccessDeniedObjectAccessControlEntries(AccessCheckACLPtr acl,
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::AddAuditAccessAccessControlEntries(AccessCheckACLPtr acl, AccessControlListRevision aceRevision, SpecificAccess accessMask, SecuritySIDPtr sid, bool auditSuccess, bool auditFailure) noexcept
+bool System::AddAuditAccessAccessControlEntries(AccessCheckAclPtr acl, AccessControlListRevision aceRevision, SpecificAccess accessMask, SecuritySidPtr sid, bool auditSuccess, bool auditFailure) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -172,11 +172,11 @@ bool System::AddAuditAccessAccessControlEntries(AccessCheckACLPtr acl, AccessCon
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::AddAuditAccessAccessControlEntries(AccessCheckACLPtr acl,
+bool System::AddAuditAccessAccessControlEntries(AccessCheckAclPtr acl,
                                                 AccessControlListRevision aceRevision,
-                                                ControlACEInheritance aceFlags,
+                                                ControlAceInheritance aceFlags,
                                                 SpecificAccess accessMask,
-                                                SecuritySIDPtr sid,
+                                                SecuritySidPtr sid,
                                                 bool auditSuccess,
                                                 bool auditFailure) noexcept
 {
@@ -212,13 +212,13 @@ bool System::AddAuditAccessAccessControlEntries(AccessCheckACLPtr acl,
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::AddAuditAccessObjectAccessControlEntries(AccessCheckACLPtr acl,
+bool System::AddAuditAccessObjectAccessControlEntries(AccessCheckAclPtr acl,
                                                       AccessControlListRevision aceRevision,
-                                                      ControlACEInheritance aceFlags,
+                                                      ControlAceInheritance aceFlags,
                                                       SpecificAccess accessMask,
                                                       SystemGloballyUniqueIdentifier* objectTypeGuid,
                                                       SystemGloballyUniqueIdentifier* inheritedObjectTypeGuid,
-                                                      SecuritySIDPtr sid,
+                                                      SecuritySidPtr sid,
                                                       bool auditSuccess,
                                                       bool auditFailure) noexcept
 {

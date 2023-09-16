@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/04 20:37)
+///	版本：0.9.1.4 (2023/08/31 16:41)
 
 #include "ConsoleHandleTesting.h"
 #include "System/Console/ConsoleHandle.h"
@@ -59,7 +59,7 @@ void System::ConsoleHandleTesting::DoHandleTest(StandardHandle standardHandle)
 void System::ConsoleHandleTesting::OutputHandleTest(StandardHandle standardHandle)
 {
     const auto outputFileName = SYSTEM_TEXT("Resource/ConsoleHandleTesting/OutputHandleTest.txt"s);
-    const auto outputHandle = CreateSystemFile(outputFileName.c_str(), FileHandleDesiredAccess::Write, FileHandleShareMode::Prevents, FileHandleCreationDisposition::OpenAlways);
+    const auto outputHandle = CreateSystemFile(outputFileName, FileHandleDesiredAccess::Write, FileHandleShareMode::Prevents, FileHandleCreationDisposition::OpenAlways);
     ASSERT_TRUE(IsFileHandleValid(outputHandle));
 
     ASSERT_NOT_THROW_EXCEPTION_2(SetStandardHandleTest, standardHandle, outputHandle);
@@ -70,7 +70,7 @@ void System::ConsoleHandleTesting::OutputHandleTest(StandardHandle standardHandl
 void System::ConsoleHandleTesting::InputHandleTest(StandardHandle standardHandle)
 {
     const auto inputFileName = SYSTEM_TEXT("Resource/ConsoleHandleTesting/InputHandleTest.txt"s);
-    const auto inputHandle = CreateSystemFile(inputFileName.c_str(), FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenAlways);
+    const auto inputHandle = CreateSystemFile(inputFileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenAlways);
     ASSERT_TRUE(IsFileHandleValid(inputHandle));
 
     ASSERT_NOT_THROW_EXCEPTION_2(SetStandardHandleTest, standardHandle, inputHandle);

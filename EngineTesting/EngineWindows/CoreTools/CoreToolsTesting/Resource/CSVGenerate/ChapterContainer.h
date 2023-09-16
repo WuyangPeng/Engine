@@ -38,6 +38,8 @@ namespace CSVConfigure
         NODISCARD ConstChapterBaseSharedPtr GetChapter(int key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstChapterBaseSharedPtr GetFirstChapter(Function function) const;
 

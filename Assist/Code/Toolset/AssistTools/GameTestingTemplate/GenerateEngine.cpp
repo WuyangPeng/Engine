@@ -9,11 +9,13 @@
 
 #include "GenerateEngine.h"
 #include "System/Helper/PragmaWarning/LexicalCast.h"
+#include "System/Helper/PragmaWarning/PropertyTree.h"
 #include "System/Time/DeltaTime.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
+#include "AssistTools/GenerateProjects/GenerateTestingEngine.h"
 
-GameTestingTemplate::GenerateEngine::GenerateEngine(std::string configurationFileName, const std::string& parameterFileName)
-    : configurationFileName{ std::move(configurationFileName) }, parameter{ parameterFileName }
+GameTestingTemplate::GenerateEngine::GenerateEngine(std::string configurationFileName)
+    : configurationFileName{ std::move(configurationFileName) }
 {
     Generate();
 
@@ -24,6 +26,17 @@ GameTestingTemplate::GenerateEngine::GenerateEngine(std::string configurationFil
 
 CLASS_INVARIANT_STUB_DEFINE(GameTestingTemplate, GenerateEngine)
 
-void GameTestingTemplate::GenerateEngine ::Generate() noexcept
+void GameTestingTemplate::GenerateEngine ::Generate()  
 {
+    using BasicTree = boost::property_tree::basic_ptree<System::String, System::String>;
+
+    BasicTree mainTree{};
+    read_json(configurationFileName, mainTree);
+
+    const auto input = mainTree.get(SYSTEM_TEXT("input"), System::String{});
+    const auto output = mainTree.get(SYSTEM_TEXT("output"), System::String{});
+
+    const AssistTools::GenerateTestingEngine generateEngine{ input, output };
+
+    generateEngine.Generate();
 }

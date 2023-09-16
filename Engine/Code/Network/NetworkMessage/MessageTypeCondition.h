@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 10:00)
+///	版本：0.9.1.4 (2023/09/04 16:28)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_TYPE_CONDITION_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_TYPE_CONDITION_H
@@ -27,6 +27,7 @@ namespace Network
     {
     public:
         PERFORMANCE_UNSHARED_TYPE_DECLARE(MessageTypeCondition);
+
         using VersionType = std::set<int>;
 
     public:

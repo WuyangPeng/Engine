@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/05 22:52)
+///	版本：0.9.1.4 (2023/08/31 13:45)
 
 #include "AndroidNativeAppGlueTesting.h"
 #include "System/Android/AndroidNativeAppGlue.h"
@@ -13,8 +13,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using namespace std::literals;
 
 System::AndroidNativeAppGlueTesting::AndroidNativeAppGlueTesting(const OStreamShared& streamShared)
     : ParentType{ streamShared }, index{ 0 }
@@ -37,12 +35,12 @@ void System::AndroidNativeAppGlueTesting::MainTest()
 void System::AndroidNativeAppGlueTesting::VirtualAndroidNativeAppGlueTest()
 {
     AppDummy();
-    
+
     AndroidApp androidApp{};
 
-    const auto appName = SYSTEM_TEXT("Android Virtual Window Test"s) + ToString(index);
+    const auto appName = SYSTEM_TEXT("Android Virtual Window Test") + ToString(index);
 
-    auto windowHWnd = CreateVirtualWindow(&androidApp, appName, nullptr, nullptr);
+    const auto windowHWnd = CreateVirtualWindow(&androidApp, appName, nullptr, nullptr);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(windowHWnd, "创建窗口失败。");
 
     ASSERT_TRUE(DestroySystemWindow(windowHWnd));

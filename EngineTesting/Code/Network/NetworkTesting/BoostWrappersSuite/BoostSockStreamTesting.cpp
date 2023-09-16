@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 10:46)
+///	版本：0.9.1.4 (2023/09/16 10:25)
 
 #include "BoostSockStreamTesting.h"
 #include "System/Time/DeltaTime.h"
@@ -17,7 +17,6 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
-#include "Network/Interface/Client.h"
 #include "Network/NetworkMessage/BufferSendStream.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/MessageBuffer.h"
@@ -47,61 +46,6 @@ void Network::BoostSockStreamTesting::DoClientThread()
     messageEventManager->SetCallbackEvent(testSocketEvent);
 
     const auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
-
-    Client client{ configurationStrategy, messageEventManager };
-
-    const auto socketId = ClientConnect(client);
-    ClientSend(client, socketId, *testSocketEvent);
-    ASSERT_NOT_THROW_EXCEPTION_2(ClientReceive, client, *testSocketEvent);
-}
-
-int64_t Network::BoostSockStreamTesting::ClientConnect(Client& client)
-{
-    auto socketId = 0LL;
-    for (auto i = 0; i < connectTime; ++i)
-    {
-        socketId = client.Connect();
-        if (socketId != 0u)
-        {
-            break;
-        }
-
-        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, connectTime, "连接服务器失败。");
-    }
-
-    return socketId;
-}
-
-void Network::BoostSockStreamTesting::ClientSend(Client& client, int64_t socketId, const TestSocketEvent& testSocketEvent)
-{
-    const auto message = std::make_shared<NullMessage>(MessageHeadStrategy::Default, GetMessageId());
-    client.AsyncSend(socketId, message);
-    client.ImmediatelyAsyncSend(socketId);
-
-    for (auto i = 0; i < sendTime; ++i)
-    {
-        if (0 < testSocketEvent.GetAsyncSendCount())
-        {
-            break;
-        }
-
-        ASSERT_UNEQUAL(i + 1, sendTime);
-    }
-}
-
-void Network::BoostSockStreamTesting::ClientReceive(Client& client, const TestSocketEvent& testSocketEvent)
-{
-    client.AsyncReceive();
-
-    for (auto i = 0; i < asynchronousReceiveTime; ++i)
-    {
-        if (0 < testSocketEvent.GetAsyncReceiveCount())
-        {
-            break;
-        }
-
-        ASSERT_UNEQUAL(i + 1, asynchronousReceiveTime);
-    }
 }
 
 void Network::BoostSockStreamTesting::ClientNoSendThread()
@@ -117,11 +61,6 @@ void Network::BoostSockStreamTesting::DoClientNoSendThread()
     messageEventManager->SetCallbackEvent(testSocketEvent);
 
     const auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
-
-    Client client{ configurationStrategy, messageEventManager };
-
-    const auto socketId = ClientConnect(client);
-    ASSERT_LESS(0, socketId);
 }
 
 void Network::BoostSockStreamTesting::ServerThread()
@@ -137,22 +76,6 @@ void Network::BoostSockStreamTesting::DoServerThread()
     messageEventManager->SetCallbackEvent(testSocketEvent);
     messageEventManager->Insert(GetMessageId(), testMessageEvent);
     auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
-
-    const auto server = make_shared<Server>(configurationStrategy, messageEventManager);
-
-    testMessageEvent->SetServerWeakPtr(server);
-
-    for (auto i = 0; i < receiveTime; ++i)
-    {
-        ASSERT_TRUE(server->RunServer());
-
-        if (0 < testMessageEvent->GetCallBackTime())
-        {
-            break;
-        }
-
-        ASSERT_UNEQUAL(i + 1, receiveTime);
-    }
 }
 
 void Network::BoostSockStreamTesting::ServerNoReceiveThread()
@@ -169,22 +92,6 @@ void Network::BoostSockStreamTesting::DoServerNoReceiveThread()
     messageEventManager->Insert(GetMessageId(), testMessageEvent);
 
     const auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
-
-    const auto server = make_shared<Server>(configurationStrategy, messageEventManager);
-
-    testMessageEvent->SetServerWeakPtr(server);
-
-    for (auto i = 0; i < acceptTime; ++i)
-    {
-        MAYBE_UNUSED const auto result = server->RunServer();
-
-        if (0 < testSocketEvent->GetAsyncAcceptorCount())
-        {
-            break;
-        }
-
-        ASSERT_UNEQUAL(i + 1, acceptTime);
-    }
 }
 
 void Network::BoostSockStreamTesting::CreateMessage()
@@ -197,10 +104,6 @@ void Network::BoostSockStreamTesting::DestroyMessage()
     MESSAGE_MANAGER_SINGLETON.Remove(GetMessageId());
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26490)
-
 Network::MessageBufferSharedPtr Network::BoostSockStreamTesting::CreateMessageBuffer() const
 {
     const auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
@@ -209,7 +112,12 @@ Network::MessageBufferSharedPtr Network::BoostSockStreamTesting::CreateMessageBu
 
     auto initialBuffered = messageBuffer->GetInitialBufferedPtr();
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
     const auto messageLength = reinterpret_cast<int32_t*>(initialBuffered);
+
+#include SYSTEM_WARNING_POP
 
     if (messageLength == nullptr)
     {
@@ -219,8 +127,16 @@ Network::MessageBufferSharedPtr Network::BoostSockStreamTesting::CreateMessageBu
     // 长度等于消息头长度加上消息ID和子消息ID长度。
     *messageLength = MessageInterface::GetMessageHeadSize() + CoreTools::GetStreamSize(GetMessageId()) * 2;
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+
     initialBuffered += CoreTools::GetStreamSize(*messageLength);
+
     const auto fullVersion = reinterpret_cast<int32_t*>(initialBuffered);
+
+#include SYSTEM_WARNING_POP
+
     if (fullVersion == nullptr)
     {
         return messageBuffer;
@@ -228,24 +144,48 @@ Network::MessageBufferSharedPtr Network::BoostSockStreamTesting::CreateMessageBu
 
     *fullVersion = MESSAGE_MANAGER_SINGLETON.GetFullVersion();
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+
     initialBuffered += CoreTools::GetStreamSize(*fullVersion);
+
     const auto timeInMicroseconds = reinterpret_cast<int64_t*>(initialBuffered);
+
+#include SYSTEM_WARNING_POP
+
     if (timeInMicroseconds == nullptr)
     {
         return messageBuffer;
     }
     *timeInMicroseconds = System::GetTimeInMicroseconds();
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+
     initialBuffered += CoreTools::GetStreamSize(*timeInMicroseconds);
+
     const auto messageHeadStrategy = reinterpret_cast<int32_t*>(initialBuffered);
+
+#include SYSTEM_WARNING_POP
+
     if (messageHeadStrategy == nullptr)
     {
         return messageBuffer;
     }
     *messageHeadStrategy = System::EnumCastUnderlying(MessageHeadStrategy::Default);
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+
     initialBuffered += CoreTools::GetStreamSize(*messageHeadStrategy);
+
     const auto messageNumber = reinterpret_cast<int32_t*>(initialBuffered);
+
+#include SYSTEM_WARNING_POP
+
     if (messageNumber == nullptr)
     {
         return messageBuffer;
@@ -261,7 +201,13 @@ void Network::BoostSockStreamTesting::VerificationMessageBuffer(const MessageBuf
 {
     auto initialBuffered = messageBuffer.GetInitialBufferedPtr();
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
     const auto messageLength = reinterpret_cast<const int32_t*>(initialBuffered);
+
+#include SYSTEM_WARNING_POP
+
     if (messageLength == nullptr)
     {
         return;
@@ -271,8 +217,16 @@ void Network::BoostSockStreamTesting::VerificationMessageBuffer(const MessageBuf
     const auto verificationMessageLength = MessageInterface::GetMessageHeadSize() + CoreTools::GetStreamSize(GetMessageId()) * 2;
     ASSERT_EQUAL(*messageLength, verificationMessageLength);
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+
     initialBuffered += CoreTools::GetStreamSize(*messageLength);
+
     const auto fullVersion = reinterpret_cast<const int32_t*>(initialBuffered);
+
+#include SYSTEM_WARNING_POP
+
     if (fullVersion == nullptr)
     {
         return;
@@ -280,29 +234,51 @@ void Network::BoostSockStreamTesting::VerificationMessageBuffer(const MessageBuf
 
     ASSERT_EQUAL(*fullVersion, MESSAGE_MANAGER_SINGLETON.GetFullVersion());
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+
     initialBuffered += CoreTools::GetStreamSize(*fullVersion);
+
     const auto timeInMicroseconds = reinterpret_cast<const int64_t*>(initialBuffered);
+
+#include SYSTEM_WARNING_POP
+
     if (timeInMicroseconds == nullptr)
     {
         return;
     }
     ASSERT_LESS_EQUAL(*timeInMicroseconds, System::GetTimeInMicroseconds());
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+
     initialBuffered += CoreTools::GetStreamSize(*timeInMicroseconds);
+
     const auto messageHeadStrategy = reinterpret_cast<const int32_t*>(initialBuffered);
+
+#include SYSTEM_WARNING_POP
+
     if (messageHeadStrategy == nullptr)
     {
         return;
     }
     ASSERT_EQUAL(*messageHeadStrategy, System::EnumCastUnderlying(MessageHeadStrategy::Default));
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+
     initialBuffered += CoreTools::GetStreamSize(*messageHeadStrategy);
+
     const auto messageNumber = reinterpret_cast<const int32_t*>(initialBuffered);
+
+#include SYSTEM_WARNING_POP
+
     if (messageNumber == nullptr)
     {
         return;
     }
     ASSERT_EQUAL(*messageNumber, GetMessageId());
 }
-
-#include STSTEM_WARNING_POP

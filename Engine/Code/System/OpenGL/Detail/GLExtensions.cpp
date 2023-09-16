@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 18:57)
+///	版本：0.9.1.4 (2023/08/29 23:38)
 
 #include "System/SystemExport.h"
 
@@ -37,42 +37,42 @@
 
 const char* System::GetVendorString() noexcept
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     return reinterpret_cast<const char*>(GLGetString(GL_VENDOR));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 const char* System::GetRendererString() noexcept
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     return reinterpret_cast<const char*>(GLGetString(GL_RENDERER));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 const char* System::GetVersionString() noexcept
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     return reinterpret_cast<const char*>(GLGetString(GL_VERSION));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 const char* System::GetShadingLanguageVersion() noexcept
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     return reinterpret_cast<const char*>(GLGetString(GL_SHADING_LANGUAGE_VERSION));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 // OpenGL的系统初始化
@@ -99,7 +99,7 @@ bool System::InitGL() noexcept
     InitOpenGL45();
     InitOpenGL46();
 
-    if (GetOpenGLVersion() != System::OpenGLSystemVersion::VersionNone)
+    if (GetOpenGLVersion() != OpenGLSystemVersion::VersionNone)
         return true;
     else
         return false;

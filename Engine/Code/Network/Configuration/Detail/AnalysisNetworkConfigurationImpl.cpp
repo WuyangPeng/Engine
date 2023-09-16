@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/04/28 10:43)
+///	版本：0.9.1.4 (2023/09/04 15:43)
 
 #include "Network/NetworkExport.h"
 
@@ -68,9 +68,15 @@ void Network::AnalysisNetworkConfigurationImpl::InsertStrategy(const String& nam
     const auto server = System::UnderlyingCastEnum<ServerStrategy>(basicTree.get(SYSTEM_TEXT("Server"s), 0));
     const auto message = System::UnderlyingCastEnum<MessageStrategy>(basicTree.get(SYSTEM_TEXT("Message"s), 0));
     const auto parser = System::UnderlyingCastEnum<ParserStrategy>(basicTree.get(SYSTEM_TEXT("Parser"s), 0));
-    const auto openSSL = System::UnderlyingCastEnum<OpenSSLStrategy>(basicTree.get(SYSTEM_TEXT("OpenSSL"s), 0));
+    const auto openSSL = System::UnderlyingCastEnum<OpenSslStrategy>(basicTree.get(SYSTEM_TEXT("OpenSSL"s), 0));
     const auto encryptedCompression = System::UnderlyingCastEnum<EncryptedCompressionStrategy>(basicTree.get(SYSTEM_TEXT("EncryptedCompression"s), 0));
     const auto send = System::UnderlyingCastEnum<SocketSendMessage>(basicTree.get(SYSTEM_TEXT("Send"s), 0));
+
+    if ((client == ClientStrategy::Disable && server == ServerStrategy::Disable) ||
+        (client != ClientStrategy::Disable && server != ServerStrategy::Disable))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("服务器和客户端策略无效。"s))
+    }
 
     if (ClientStrategy::Disable <= client &&
         client < ClientStrategy::End &&
@@ -78,7 +84,7 @@ void Network::AnalysisNetworkConfigurationImpl::InsertStrategy(const String& nam
         server < ServerStrategy::End &&
         message < MessageStrategy::End &&
         parser < ParserStrategy::End &&
-        openSSL < OpenSSLStrategy::End)
+        openSSL < OpenSslStrategy::End)
     {
         const auto host = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("Host"s), String{}));
         const auto port = basicTree.get(SYSTEM_TEXT("Port"s), 0);
@@ -142,9 +148,9 @@ Network::WrappersStrategy Network::AnalysisNetworkConfigurationImpl::GetWrappers
     {
         return WrappersStrategy::Network;
     }
-    else if (caseInsensitiveTString == SYSTEM_TEXT("ActiveMQ"))
+    else if (caseInsensitiveTString == SYSTEM_TEXT("ActiveMq"))
     {
-        return WrappersStrategy::ActiveMQ;
+        return WrappersStrategy::ActiveMq;
     }
     else if (caseInsensitiveTString == SYSTEM_TEXT("Nats"))
     {
@@ -211,9 +217,9 @@ Network::ConfigurationParameter Network::AnalysisNetworkConfigurationImpl::GetCo
 
     auto configurationParameter = ConfigurationParameter::Create();
 
-    for (const auto& value : parameterTree)
+    for (const auto& element : parameterTree)
     {
-        configurationParameter.AddParameter(value.first, value.second.get_value<String>());
+        configurationParameter.AddParameter(element.first, element.second.get_value<String>());
     }
 
     return configurationParameter;

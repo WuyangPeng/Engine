@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/08 20:42)
+///	版本：0.9.1.4 (2023/08/31 17:08)
 
 #include "EnumResourceDataTesting.h"
 #include "System/DynamicLink/Data/EnumResourceData.h"
@@ -184,17 +184,17 @@ System::EnumResourceDataTesting::EnumResourceDataTesting(const OStreamShared& st
              predefinedResourceTypesGroupIcon,
              predefinedResourceTypesVersion,
              predefinedResourceTypesDlgInclude,
-             predefinedResourceTypesPlugplay,
+             predefinedResourceTypesPlugPlay,
              predefinedResourceTypesVxd,
              predefinedResourceTypesAniCursor,
              predefinedResourceTypesAniIcon,
              predefinedResourceTypesHtml,
              predefinedResourceTypesManifest,
-             createProcessManifestResourceID,
-             isolationawareManifestResourceID,
-             isolationawareNoStaticImportManifestResourceID,
-             minimumReservedManifestResourceID,
-             maximumReservedManifestResourceID },
+             createProcessManifestResourceId,
+             isolationAwareManifestResourceId,
+             isolationAwareNoStaticImportManifestResourceId,
+             minimumReservedManifestResourceId,
+             maximumReservedManifestResourceId },
       names{ CreateNameFlags() },
       maxSize{ CoreTools::MaxElement<size_t>({ primaryLanguages.size(), subLanguages.size(), types.size(), names.size() }) },
       randomEngine{ GetEngineRandomSeed() }
@@ -231,10 +231,10 @@ void System::EnumResourceDataTesting::MainTest()
 
 bool System::EnumResourceDataTesting::RandomShuffleFlags()
 {
-    shuffle(primaryLanguages.begin(), primaryLanguages.end(), randomEngine);
-    shuffle(subLanguages.begin(), subLanguages.end(), randomEngine);
-    shuffle(types.begin(), types.end(), randomEngine);
-    shuffle(names.begin(), names.end(), randomEngine);
+    std::ranges::shuffle(primaryLanguages, randomEngine);
+    std::ranges::shuffle(subLanguages, randomEngine);
+    std::ranges::shuffle(types, randomEngine);
+    std::ranges::shuffle(names, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(EnumResourceDataTest);
 
@@ -254,14 +254,14 @@ void System::EnumResourceDataTesting::DoEnumResourceDataTest(size_t index)
     const auto primaryLanguage = primaryLanguages.at(index % primaryLanguages.size());
     const auto subLanguage = subLanguages.at(index % subLanguages.size());
 
-    const LanguageIDData languageIDData{ primaryLanguage, subLanguage };
+    const LanguageIdData languageIdData{ primaryLanguage, subLanguage };
 
     const auto* type = types.at(index % types.size());
     const auto* name = names.at(index % names.size());
 
-    const EnumResourceData enumResourceData{ type, name, languageIDData.GetLanguageID() };
+    const EnumResourceData enumResourceData{ type, name, languageIdData.GetLanguageId() };
 
     ASSERT_TRUE(type == enumResourceData.GetType());
     ASSERT_TRUE(name == enumResourceData.GetName());
-    ASSERT_EQUAL(languageIDData.GetLanguageID(), enumResourceData.GetLanguage().GetLanguageID());
+    ASSERT_EQUAL(languageIdData.GetLanguageId(), enumResourceData.GetLanguage().GetLanguageId());
 }

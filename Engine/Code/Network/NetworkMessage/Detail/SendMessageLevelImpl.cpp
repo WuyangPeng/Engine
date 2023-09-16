@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 10:56)
+///	版本：0.9.1.4 (2023/09/04 16:34)
 
 #include "Network/NetworkExport.h"
 
@@ -14,7 +14,6 @@
 #include "CoreTools/Helper/Assertion/NetworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 Network::SendMessageLevelImpl::SendMessageLevelImpl(int messageMaxSize)
     : topLevel{}, messageMaxSize{ messageMaxSize }, currentSize{ 0 }

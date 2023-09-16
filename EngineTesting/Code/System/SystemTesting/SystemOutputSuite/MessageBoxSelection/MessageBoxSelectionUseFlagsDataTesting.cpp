@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/30 0:09)
+///	版本：0.9.1.4 (2023/09/01 14:13)
 
 #include "MessageBoxSelectionUseFlagsDataTesting.h"
 #include "System/SystemOutput/Data/MessageBoxFlagsData.h"
@@ -33,7 +33,7 @@ void System::MessageBoxSelectionUseFlagsDataTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(YesNoTest);
 
-    // SystemWindowsTesting有hwnd不为空时的测试。
+    // SystemWindowsTesting有hWnd不为空时的测试。
 }
 
 void System::MessageBoxSelectionUseFlagsDataTesting::YesNoTest()
@@ -46,5 +46,5 @@ void System::MessageBoxSelectionUseFlagsDataTesting::YesNoTest()
 
     const auto type = MessageBoxSelection(nullptr, SYSTEM_TEXT("这个对话框只是测试，请点击任意按钮。"), SYSTEM_TEXT("测试"), flagsData);
 
-    ASSERT_TRUE(type == DialogBoxCommand::IDYes || type == DialogBoxCommand::IDNo);
+    ASSERT_TRUE(type == DialogBoxCommand::IdYes || type == DialogBoxCommand::IdNo);
 }

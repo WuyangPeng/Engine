@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/12 16:10)
+///	版本：0.9.1.4 (2023/08/31 17:23)
 
 #include "CFileTestingBase.h"
 #include "System/FileManager/CFile.h"
@@ -17,12 +17,10 @@
 
 #include <vector>
 
-using namespace std::literals;
-
 System::CFileTestingBase::CFileTestingBase(const OStreamShared& stream)
     : ParentType{ stream },
       cFileContent{ CoreTools::Version::GetVersion() },
-      fileName{ SYSTEM_FILE_TEXT("Resource/CFileTesting/CFileTestingText.txt"s) },
+      fileName{ SYSTEM_FILE_TEXT("Resource/CFileTesting/CFileTestingText.txt") },
       originalBuffer{ cFileContent.begin(), cFileContent.end() }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
@@ -36,7 +34,7 @@ FILE* System::CFileTestingBase::OpenFile(const CFileString& mode)
 
     FILE* file{ nullptr };
     ASSERT_TRUE(OpenCFile(file, GetFileName(), mode));
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(file, "打开文件失败。"s);
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(file, "打开文件失败。");
 
     return file;
 }

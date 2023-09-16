@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/29 20:48)
+///	版本：0.9.1.4 (2023/09/01 14:10)
 
 #include "CopySecurityIdentifierTesting.h"
 #include "System/Security/SecuritySid.h"
@@ -39,11 +39,11 @@ void System::CopySecurityIdentifierTesting::CopySecurityIdentifierTest()
     }
 }
 
-void System::CopySecurityIdentifierTesting::DoCopySecurityIdentifierTest(SecuritySIDIndentifierAuthority& identifierAuthority)
+void System::CopySecurityIdentifierTesting::DoCopySecurityIdentifierTest(SecuritySidIdentifierAuthority& identifierAuthority)
 {
     constexpr WindowsByte subAuthorityCount{ 5 };
 
-    SecuritySID sid{};
+    SecuritySid sid{};
 
     ASSERT_TRUE(InitializeSecurityIdentifier(&sid, &identifierAuthority, subAuthorityCount));
     ASSERT_TRUE(IsSecurityIdentifierValid(&sid));

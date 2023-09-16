@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:10)
+///	版本：0.9.1.4 (2023/08/30 15:07)
 
 #ifndef SYSTEM_SECURITY_SECURITY_FLAGS_FWD_H
 #define SYSTEM_SECURITY_SECURITY_FLAGS_FWD_H
@@ -25,7 +25,7 @@ namespace System
     enum class SecurityAutoInherit;
 
     // SecurityAce
-    enum class ControlACEInheritance;
+    enum class ControlAceInheritance;
     enum class MandatoryPolicy;
 
     // SecurityAcl
@@ -39,7 +39,7 @@ namespace System
     // SecurityDescriptor
     enum class InitializeSecurityDescriptorRevision;
     enum class SecurityDescriptorControlBits;
-    enum class SecurityDescriptorRMControlReturn;
+    enum class SecurityDescriptorRmControlReturn;
 
     // SecuritySid
     enum class MandatoryLabelAuthority;

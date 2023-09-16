@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/25 11:53)
+///	版本：0.9.1.4 (2023/09/01 14:02)
 
 #include "GetLookupPrivilegeNameTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -43,14 +43,14 @@ void System::GetLookupPrivilegeNameTesting::GetLookupPrivilegeNameTest()
 
 void System::GetLookupPrivilegeNameTesting::DoGetLookupPrivilegeNameTest(const String& lookupPrivilegeName)
 {
-    LookupPrivilegeLUID uid{};
+    LookupPrivilegeLuid uid{};
     ASSERT_TRUE(GetLookupPrivilegeValue(nullptr, lookupPrivilegeName.c_str(), &uid));
 
     BufferType buffer{};
     auto size = boost::numeric_cast<WindowsDWord>(bufferSize);
     ASSERT_TRUE(GetLookupPrivilegeName(nullptr, &uid, buffer.data(), &size));
 
-    String resultLookupPrivilegeName{ buffer.data() };
+    const String resultLookupPrivilegeName{ buffer.data() };
 
     ASSERT_EQUAL(size, resultLookupPrivilegeName.size());
     ASSERT_EQUAL(resultLookupPrivilegeName, lookupPrivilegeName);

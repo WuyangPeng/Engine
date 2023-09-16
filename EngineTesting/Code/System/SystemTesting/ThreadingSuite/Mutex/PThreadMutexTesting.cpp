@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 11:46)
+///	版本：0.9.1.4 (2023/09/01 15:09)
 
 #include "PThreadMutexTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -31,15 +31,15 @@ void System::PThreadMutexTesting::DoRunUnitTest()
 void System::PThreadMutexTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ThreadTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(TrylockTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(TryLockTest);
 }
 
 void System::PThreadMutexTesting::ThreadTest()
 {
-    PthreadMutexattrT attribute{};
-    PthreadMutexT mutex{};
+    PThreadMutexAttrT attribute{};
+    PThreadMutexT mutex{};
 
-    ASSERT_NOT_THROW_EXCEPTION_2(PthreadMutexInitTest, attribute, mutex);
+    ASSERT_NOT_THROW_EXCEPTION_2(PThreadMutexInitTest, attribute, mutex);
 
     threadSum = 0;
 
@@ -47,68 +47,74 @@ void System::PThreadMutexTesting::ThreadTest()
 
     ASSERT_EQUAL(threadSum, threadCount);
 
-    ASSERT_NOT_THROW_EXCEPTION_2(PthreadMutexDestroyTest, mutex, attribute);
+    ASSERT_NOT_THROW_EXCEPTION_2(PThreadMutexDestroyTest, mutex, attribute);
 }
 
-void System::PThreadMutexTesting::PthreadMutexInitTest(PthreadMutexattrT& attribute, PthreadMutexT& mutex)
+void System::PThreadMutexTesting::PThreadMutexInitTest(PThreadMutexAttrT& attribute, PThreadMutexT& mutex)
 {
-    ASSERT_ENUM_EQUAL(PthreadMutexAttributeInit(&attribute), PthreadResult::Successful);
-    ASSERT_ENUM_EQUAL(PthreadMutexAttributeSetType(&attribute), PthreadResult::Successful);
-    ASSERT_ENUM_EQUAL(PthreadMutexInit(&attribute, &mutex), PthreadResult::Successful);
+    ASSERT_ENUM_EQUAL(PThreadMutexAttributeInit(&attribute), PThreadResult::Successful);
+    ASSERT_ENUM_EQUAL(PThreadMutexAttributeSetType(&attribute), PThreadResult::Successful);
+    ASSERT_ENUM_EQUAL(PThreadMutexInit(&attribute, &mutex), PThreadResult::Successful);
 }
 
-void System::PThreadMutexTesting::CreateThread(PthreadMutexT& mutex)
+void System::PThreadMutexTesting::CreateThread(PThreadMutexT& mutex)
 {
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest, this, &mutex));
+        threadGroup.create_thread([this, &mutex]() {
+            this->WaitForMutexTest(&mutex);
+        });
     }
 
     threadGroup.join_all();
 }
 
-void System::PThreadMutexTesting::PthreadMutexDestroyTest(PthreadMutexT& mutex, PthreadMutexattrT& attribute)
+void System::PThreadMutexTesting::PThreadMutexDestroyTest(PThreadMutexT& mutex, PThreadMutexAttrT& attribute)
 {
-    ASSERT_ENUM_EQUAL(PthreadMutexDestroy(&mutex), PthreadResult::Successful);
-    ASSERT_ENUM_EQUAL(PthreadMutexAttributeDestroy(&attribute), PthreadResult::Successful);
+    ASSERT_ENUM_EQUAL(PThreadMutexDestroy(&mutex), PThreadResult::Successful);
+    ASSERT_ENUM_EQUAL(PThreadMutexAttributeDestroy(&attribute), PThreadResult::Successful);
 }
 
-void System::PThreadMutexTesting::TrylockTest()
+void System::PThreadMutexTesting::TryLockTest()
 {
-    PthreadMutexattrT attribute{};
-    PthreadMutexT mutex{};
+    PThreadMutexAttrT attribute{};
+    PThreadMutexT mutex{};
 
-    ASSERT_NOT_THROW_EXCEPTION_2(PthreadMutexInitTest, attribute, mutex);
+    ASSERT_NOT_THROW_EXCEPTION_2(PThreadMutexInitTest, attribute, mutex);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(TrylockTimeoutThreadTest, mutex);
+    ASSERT_NOT_THROW_EXCEPTION_1(TryLockTimeoutThreadTest, mutex);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(TrylockSuccessThreadTest, mutex);
+    ASSERT_NOT_THROW_EXCEPTION_1(TryLockSuccessThreadTest, mutex);
 
-    ASSERT_NOT_THROW_EXCEPTION_2(PthreadMutexDestroyTest, mutex, attribute);
+    ASSERT_NOT_THROW_EXCEPTION_2(PThreadMutexDestroyTest, mutex, attribute);
 }
 
-void System::PThreadMutexTesting::TrylockTimeoutThreadTest(PthreadMutexT& mutex)
+void System::PThreadMutexTesting::TryLockTimeoutThreadTest(PThreadMutexT& mutex)
 {
-    ASSERT_ENUM_EQUAL(PthreadMutexLock(&mutex), PthreadResult::Successful);
+    ASSERT_ENUM_EQUAL(PThreadMutexLock(&mutex), PThreadResult::Successful);
 
-    boost::thread thread{ boost::bind(&ClassType::TrylockTimeoutTest, this, &mutex) };
+    boost::thread thread{ [this, &mutex]() {
+        this->TryLockTimeoutTest(&mutex);
+    } };
 
     thread.join();
 
-    ASSERT_ENUM_EQUAL(PthreadMutexUnlock(&mutex), PthreadResult::Successful);
+    ASSERT_ENUM_EQUAL(PThreadMutexUnlock(&mutex), PThreadResult::Successful);
 }
 
-void System::PThreadMutexTesting::TrylockSuccessThreadTest(PthreadMutexT& mutex)
+void System::PThreadMutexTesting::TryLockSuccessThreadTest(PThreadMutexT& mutex)
 {
-    boost::thread thread1{ boost::bind(&ClassType::TrylockSuccessTest, this, &mutex) };
+    boost::thread thread{ [this, &mutex]() {
+        this->TryLockSuccessTest(&mutex);
+    } };
 
-    thread1.join();
+    thread.join();
 }
 
-void System::PThreadMutexTesting::WaitForMutexTest(PthreadMutexT* mutex)
+void System::PThreadMutexTesting::WaitForMutexTest(PThreadMutexT* mutex)
 {
-    ASSERT_ENUM_EQUAL(PthreadMutexLock(mutex), PthreadResult::Successful);
+    ASSERT_ENUM_EQUAL(PThreadMutexLock(mutex), PThreadResult::Successful);
 
     const auto original = threadSum;
 
@@ -121,17 +127,17 @@ void System::PThreadMutexTesting::WaitForMutexTest(PthreadMutexT* mutex)
 
     ++threadSum;
 
-    ASSERT_ENUM_EQUAL(PthreadMutexUnlock(mutex), PthreadResult::Successful);
+    ASSERT_ENUM_EQUAL(PThreadMutexUnlock(mutex), PThreadResult::Successful);
 }
 
-void System::PThreadMutexTesting::TrylockTimeoutTest(PthreadMutexT* mutex)
+void System::PThreadMutexTesting::TryLockTimeoutTest(PThreadMutexT* mutex)
 {
-    ASSERT_ENUM_UNEQUAL(PthreadMutexTrylock(mutex), PthreadResult::Successful);
+    ASSERT_ENUM_UNEQUAL(PThreadMutexTryLock(mutex), PThreadResult::Successful);
 }
 
-void System::PThreadMutexTesting::TrylockSuccessTest(PthreadMutexT* mutex)
+void System::PThreadMutexTesting::TryLockSuccessTest(PThreadMutexT* mutex)
 {
-    ASSERT_ENUM_EQUAL(PthreadMutexTrylock(mutex), PthreadResult::Successful);
+    ASSERT_ENUM_EQUAL(PThreadMutexTryLock(mutex), PThreadResult::Successful);
 
-    ASSERT_ENUM_EQUAL(PthreadMutexUnlock(mutex), PthreadResult::Successful);
+    ASSERT_ENUM_EQUAL(PThreadMutexUnlock(mutex), PThreadResult::Successful);
 }

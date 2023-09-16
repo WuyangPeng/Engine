@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %$ProjectName$Win32DebugLib% $ModuleName$MiddleLayerTestingD.exe
+start /d %$ProjectName$Win32ReleaseLib% $ModuleName$MiddleLayerTesting.exe
+start /d %$ProjectName$X64DebugLib% $ModuleName$MiddleLayerTestingD.exe
+start /d %$ProjectName$X64ReleaseLib% $ModuleName$MiddleLayerTesting.exe
+start /d %$ProjectName$StaticWin32DebugLib% $ModuleName$MiddleLayerTestingStaticD.exe
+start /d %$ProjectName$StaticWin32ReleaseLib% $ModuleName$MiddleLayerTestingStatic.exe
+start /d %$ProjectName$StaticX64DebugLib% $ModuleName$MiddleLayerTestingStaticD.exe
+start /d %$ProjectName$StaticX64ReleaseLib% $ModuleName$MiddleLayerTestingStatic.exe
+
+start /d %$ProjectName$EngineStaticGameDynamicWin32DebugLib% $ModuleName$MiddleLayerTestingStaticD.exe
+start /d %$ProjectName$EngineStaticGameDynamicWin32ReleaseLib% $ModuleName$MiddleLayerTestingStatic.exe
+start /d %$ProjectName$EngineStaticGameDynamicX64DebugLib% $ModuleName$MiddleLayerTestingStaticD.exe
+start /d %$ProjectName$EngineStaticGameDynamicX64ReleaseLib% $ModuleName$MiddleLayerTestingStatic.exe
+start /d %$ProjectName$EngineDynamicGameStaticWin32DebugLib% $ModuleName$MiddleLayerTestingD.exe
+start /d %$ProjectName$EngineDynamicGameStaticWin32ReleaseLib% $ModuleName$MiddleLayerTesting.exe
+start /d %$ProjectName$EngineDynamicGameStaticX64DebugLib% $ModuleName$MiddleLayerTestingD.exe
+start /d %$ProjectName$EngineDynamicGameStaticX64ReleaseLib% $ModuleName$MiddleLayerTesting.exe
+
+pause

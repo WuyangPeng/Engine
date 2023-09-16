@@ -90,12 +90,12 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::FloatColour& datum)
 
     auto colour = ReadContainer<Rendering::FloatColour::ValueType, Rendering::FloatColour::arraySize>();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     datum.SetColour(colour[0], colour[1], colour[2], colour[3]);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <>
@@ -114,12 +114,12 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::DoubleColour& datum)
 
     auto colour = ReadContainer<Rendering::DoubleColour::ValueType, Rendering::DoubleColour::arraySize>();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     datum.SetColour(colour[0], colour[1], colour[2], colour[3]);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <>
@@ -138,12 +138,12 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::ByteColour& datum)
 
     auto colour = ReadContainer<Rendering::ByteColour::ValueType, Rendering::ByteColour::arraySize>();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     datum.SetColour(colour[0], colour[1], colour[2], colour[3]);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <>
@@ -162,12 +162,12 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::IntColour& datum)
 
     auto colour = ReadContainer<Rendering::IntColour::ValueType, Rendering::IntColour::arraySize>();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     datum.SetColour(colour[0], colour[1], colour[2], colour[3]);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <>

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/22 16:55)
+///	版本：0.9.1.4 (2023/08/31 09:25)
 
 #ifndef SYSTEM_WINDOWS_WINDOW_USER_H
 #define SYSTEM_WINDOWS_WINDOW_USER_H

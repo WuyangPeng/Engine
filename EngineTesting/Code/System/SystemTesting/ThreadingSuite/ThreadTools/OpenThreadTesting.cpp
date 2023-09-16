@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 19:48)
+///	版本：0.9.1.4 (2023/09/01 15:28)
 
 #include "OpenThreadTesting.h"
 #include "System/Threading/Flags/ThreadFlags.h"
@@ -48,8 +48,8 @@ void System::OpenThreadTesting::MainTest()
 
 bool System::OpenThreadTesting::RandomShuffleFlags()
 {
-    shuffle(threadStandardAccesses.begin(), threadStandardAccesses.end(), randomEngine);
-    shuffle(threadSpecificAccesses.begin(), threadSpecificAccesses.end(), randomEngine);
+    std::ranges::shuffle(threadStandardAccesses, randomEngine);
+    std::ranges::shuffle(threadSpecificAccesses, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(ThreadTest);
 
@@ -86,32 +86,32 @@ void System::OpenThreadTesting::DoWaitForSystemMutexTest(size_t index, WindowsHa
 
 void System::OpenThreadTesting::DoThreadTest(WindowsHandle mutexHandle, ThreadStandardAccess threadStandardAccess, ThreadSpecificAccess threadSpecificAccess)
 {
-    WindowsDWord threadID{ 0 };
-    const auto threadHandle = CreateSystemThread(nullptr, 0, ClassType::ThreadStartRoutine, mutexHandle, ThreadCreation::Default, &threadID);
+    WindowsDWord threadId{ 0 };
+    const auto threadHandle = CreateSystemThread(nullptr, 0, ClassType::ThreadStartRoutine, mutexHandle, ThreadCreation::Default, &threadId);
 
-    ThreadResultTest(threadHandle, threadID, threadStandardAccess, threadSpecificAccess, mutexHandle);
+    ThreadResultTest(threadHandle, threadId, threadStandardAccess, threadSpecificAccess, mutexHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
 }
 
-void System::OpenThreadTesting::ThreadResultTest(WindowsHandle threadHandle, WindowsDWord threadID, ThreadStandardAccess threadStandardAccess, ThreadSpecificAccess threadSpecificAccess, WindowsHandle mutexHandle)
+void System::OpenThreadTesting::ThreadResultTest(WindowsHandle threadHandle, WindowsDWord threadId, ThreadStandardAccess threadStandardAccess, ThreadSpecificAccess threadSpecificAccess, WindowsHandle mutexHandle)
 {
     ASSERT_TRUE(IsThreadHandleValid(threadHandle));
-    ASSERT_LESS(0u, threadID);
+    ASSERT_LESS(0u, threadId);
 
-    const auto openThreadHandle = OpenSystemThread(threadStandardAccess, threadSpecificAccess, false, threadID);
+    const auto openThreadHandle = OpenSystemThread(threadStandardAccess, threadSpecificAccess, false, threadId);
 
-    OpenThreadTest(openThreadHandle, threadID, mutexHandle, threadHandle);
+    OpenThreadTest(openThreadHandle, threadId, mutexHandle, threadHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, openThreadHandle);
 }
 
-void System::OpenThreadTesting::OpenThreadTest(WindowsHandle openThreadHandle, WindowsDWord threadID, WindowsHandle mutexHandle, WindowsHandle threadHandle)
+void System::OpenThreadTesting::OpenThreadTest(WindowsHandle openThreadHandle, WindowsDWord threadId, WindowsHandle mutexHandle, WindowsHandle threadHandle)
 {
     ASSERT_TRUE(IsThreadHandleValid(openThreadHandle));
 
-    const auto openThreadID = GetSystemThreadID(openThreadHandle);
-    ASSERT_EQUAL(openThreadID, threadID);
+    const auto openThreadId = GetSystemThreadId(openThreadHandle);
+    ASSERT_EQUAL(openThreadId, threadId);
 
     ASSERT_TRUE(ReleaseSystemMutex(mutexHandle));
 

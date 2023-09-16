@@ -82,14 +82,21 @@ bool Framework::RenderingManagerInterface::Resize(WindowDisplay windowDisplay, c
     }
 }
 
-bool Framework::RenderingManagerInterface::Paint()
+void Framework::RenderingManagerInterface::PreIdle()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (ParentType::Paint())
-    {
-        viewMiddleLayer->ClearColorBuffer();
+    ParentType::PreIdle();
 
+    viewMiddleLayer->ClearColorBuffer();
+}
+
+bool Framework::RenderingManagerInterface::Idle(int64_t timeDelta)
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    if (ParentType::Idle(timeDelta))
+    {
         viewMiddleLayer->SwapBuffers();
 
         return true;

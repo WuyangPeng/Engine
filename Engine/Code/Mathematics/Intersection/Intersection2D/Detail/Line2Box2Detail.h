@@ -79,25 +79,25 @@ void Mathematics::Line2Box2<Real>::DoClipping(Real t0, Real t1, const Vector2& o
             intersectionType = IntersectionType::Segment;
             rootCount = 2;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
             parameter[0] = origin + t0 * direction;
             parameter[1] = origin + t1 * direction;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
         else
         {
             intersectionType = IntersectionType::Point;
             rootCount = 1;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
             parameter[0] = origin + t0 * direction;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
     }
     else

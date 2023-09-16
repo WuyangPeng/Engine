@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 09:34)
+///	版本：0.9.1.4 (2023/09/15 13:44)
 
 #include "Network/NetworkExport.h"
 
@@ -14,51 +14,109 @@
 #include "Detail/SockStreamImpl.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 Network::SockStream::SockStream(const ConfigurationStrategy& configurationStrategy)
     : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy }
 {
-    NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, SockStream)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, GetACESockStream, Network::ACESockStreamNativeType&)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, GetBoostSockStream, Network::BoostSockStreamType&)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, GetNetworkSockStream, Network::WinSocketStreamType&)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, GetACEHandle, Network::ACEHandleType)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, CloseHandle, bool)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, SockStream, SetACEHandle, ACEHandleType, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, SockStream, SetNetworkHandle, WinSocketStreamType, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, EnableNonBlock, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, GetRemoteAddress, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, GetRemotePort, int)
-
 int Network::SockStream::Send(const MessageBufferSharedPtr& messageBuffer)
 {
-    NETWORK_CLASS_IS_VALID_1;
+    NETWORK_CLASS_IS_VALID_9;
 
     return impl->Send(messageBuffer);
 }
 
 int Network::SockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
 {
-    NETWORK_CLASS_IS_VALID_1;
+    NETWORK_CLASS_IS_VALID_9;
 
     return impl->Receive(messageBuffer);
 }
 
 void Network::SockStream::AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
-    NETWORK_CLASS_IS_VALID_1;
+    NETWORK_CLASS_IS_VALID_9;
 
     return impl->AsyncSend(eventInterface, messageBuffer);
 }
 
 void Network::SockStream::AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
-    NETWORK_CLASS_IS_VALID_1;
+    NETWORK_CLASS_IS_VALID_9;
 
     return impl->AsyncReceive(eventInterface, messageBuffer);
+}
+
+Network::ACESockStreamType& Network::SockStream::GetACESockStream()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->GetACESockStream();
+}
+
+Network::BoostSockStreamType& Network::SockStream::GetBoostSockStream()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->GetBoostSockStream();
+}
+
+Network::WinSocketStreamType& Network::SockStream::GetNetworkSockStream()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->GetNetworkSockStream();
+}
+
+Network::ACEHandleType Network::SockStream::GetACEHandle() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetACEHandle();
+}
+
+void Network::SockStream::SetACEHandle(ACEHandleType handle)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->SetACEHandle(handle);
+}
+
+void Network::SockStream::SetNetworkHandle(WinSocketStreamType winSocket)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->SetNetworkHandle(winSocket);
+}
+
+bool Network::SockStream::CloseHandle()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->CloseHandle();
+}
+
+bool Network::SockStream::EnableNonBlock()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->EnableNonBlock();
+}
+
+std::string Network::SockStream::GetRemoteAddress() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetRemoteAddress();
+}
+
+int Network::SockStream::GetRemotePort() const
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->GetRemotePort();
 }

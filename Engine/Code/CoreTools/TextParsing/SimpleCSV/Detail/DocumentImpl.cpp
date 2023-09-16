@@ -1072,12 +1072,12 @@ CoreTools::SimpleCSV::DocumentImpl::XmlDataSharedPtr CoreTools::SimpleCSV::Docum
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26473)
 
     return std::const_pointer_cast<XmlData>(static_cast<const ClassType*>(this)->GetXmlData(path));
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 CoreTools::SimpleCSV::DocumentImpl::ConstXmlDataSharedPtr CoreTools::SimpleCSV::DocumentImpl::GetXmlData(const std::string& path) const

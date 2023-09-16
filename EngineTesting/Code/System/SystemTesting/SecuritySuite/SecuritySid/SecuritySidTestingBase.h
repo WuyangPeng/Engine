@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/29 20:38)
+///	版本：0.9.1.4 (2023/09/01 13:53)
 
 #ifndef SYSTEM_SECURITY_SUITE_SECURITY_SID_TESTING_BASE_H
 #define SYSTEM_SECURITY_SUITE_SECURITY_SID_TESTING_BASE_H
@@ -30,18 +30,18 @@ namespace System
 
     protected:
         using BufferType = std::vector<char>;
-        using SecuritySIDIndentifierAuthorityContainer = std::vector<SecuritySIDIndentifierAuthority>;
-        using SecuritySIDIndentifierAuthorityContainerIter = SecuritySIDIndentifierAuthorityContainer::iterator;
+        using SecuritySidIdentifierAuthorityContainer = std::vector<SecuritySidIdentifierAuthority>;
+        using SecuritySidIdentifierAuthorityContainerIter = SecuritySidIdentifierAuthorityContainer::iterator;
 
     protected:
-        NODISCARD SecuritySIDIndentifierAuthorityContainerIter begin() noexcept;
-        NODISCARD SecuritySIDIndentifierAuthorityContainerIter end() noexcept;
+        NODISCARD SecuritySidIdentifierAuthorityContainerIter begin() noexcept;
+        NODISCARD SecuritySidIdentifierAuthorityContainerIter end() noexcept;
 
     private:
-        NODISCARD static SecuritySIDIndentifierAuthorityContainer GetSecuritySIDIndentifierAuthorityContainer();
+        NODISCARD static SecuritySidIdentifierAuthorityContainer GetSecuritySidIdentifierAuthorityContainer();
 
     private:
-        SecuritySIDIndentifierAuthorityContainer securitySIDIndentifierAuthorities;
+        SecuritySidIdentifierAuthorityContainer securitySIDIdentifierAuthorities;
     };
 }
 

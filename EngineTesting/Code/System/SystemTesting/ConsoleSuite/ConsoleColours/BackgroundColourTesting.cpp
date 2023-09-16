@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/03 18:41)
+///	版本：0.9.1.4 (2023/08/31 16:36)
 
 #include "BackgroundColourTesting.h"
-#include "System/Console/ConsoleColours.h"
+#include "System/Console/ConsoleColour.h"
 #include "System/Console/ConsoleHandle.h"
 #include "System/Console/Flags/ConsoleColoursFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -17,22 +17,22 @@
 
 System::BackgroundColourTesting::BackgroundColourTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      backgroundColours{ BackgroundColour::Black,
-                         BackgroundColour::IntensifiedBlack,
-                         BackgroundColour::Red,
-                         BackgroundColour::IntensifiedRed,
-                         BackgroundColour::Green,
-                         BackgroundColour::IntensifiedGreen,
-                         BackgroundColour::Blue,
-                         BackgroundColour::IntensifiedBlue,
-                         BackgroundColour::Yellow,
-                         BackgroundColour::IntensifiedYellow,
-                         BackgroundColour::Cyan,
-                         BackgroundColour::IntensifiedCyan,
-                         BackgroundColour::Magenta,
-                         BackgroundColour::IntensifiedMagenta,
-                         BackgroundColour::White,
-                         BackgroundColour::IntensifiedWhite },
+      backgroundColourContainer{ BackgroundColour::Black,
+                                 BackgroundColour::IntensifiedBlack,
+                                 BackgroundColour::Red,
+                                 BackgroundColour::IntensifiedRed,
+                                 BackgroundColour::Green,
+                                 BackgroundColour::IntensifiedGreen,
+                                 BackgroundColour::Blue,
+                                 BackgroundColour::IntensifiedBlue,
+                                 BackgroundColour::Yellow,
+                                 BackgroundColour::IntensifiedYellow,
+                                 BackgroundColour::Cyan,
+                                 BackgroundColour::IntensifiedCyan,
+                                 BackgroundColour::Magenta,
+                                 BackgroundColour::IntensifiedMagenta,
+                                 BackgroundColour::White,
+                                 BackgroundColour::IntensifiedWhite },
       backgroundColourMapping{ { BackgroundColour::Black, TextColour::White },
                                { BackgroundColour::Red, TextColour::White },
                                { BackgroundColour::Green, TextColour::Black },
@@ -78,7 +78,7 @@ bool System::BackgroundColourTesting::RandomShuffleFlags()
 
 void System::BackgroundColourTesting::BackgroundColourTest()
 {
-    for (auto index = 0u; index < backgroundColours.size(); ++index)
+    for (auto index = 0u; index < backgroundColourContainer.size(); ++index)
     {
         ASSERT_NOT_THROW_EXCEPTION_1(DoBackgroundColourTest, index);
     }
@@ -87,7 +87,7 @@ void System::BackgroundColourTesting::BackgroundColourTest()
 void System::BackgroundColourTesting::DoBackgroundColourTest(size_t index)
 {
     const auto standardHandle = GetConsoleStandardHandle(index);
-    const auto backgroundColour = backgroundColours.at(index);
+    const auto backgroundColour = backgroundColourContainer.at(index);
     const auto textColour = backgroundColourMapping.at(backgroundColour);
     constexpr auto consoleCommon = ConsoleCommon::Default;
 

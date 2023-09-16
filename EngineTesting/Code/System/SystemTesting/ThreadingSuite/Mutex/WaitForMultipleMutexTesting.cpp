@@ -5,10 +5,9 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/01 10:50)
+///	版本：0.9.1.4 (2023/09/01 15:13)
 
 #include "WaitForMultipleMutexTesting.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning/Thread.h"
 #include "System/Threading/Flags/SemaphoreFlags.h"
 #include "System/Threading/Mutex.h"
@@ -53,7 +52,7 @@ void System::WaitForMultipleMutexTesting::WaitForMutexTest0(const Container& mut
     const auto flag = WaitForSystemMutex(boost::numeric_cast<WindowsDWord>(mutexHandles.size()), mutexHandles.data(), true, EnumCastUnderlying(MutexWait::Infinite));
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
 
-    for (auto handle : mutexHandles)
+    for (const auto handle : mutexHandles)
     {
         ASSERT_TRUE(ReleaseSystemMutex(handle));
     }
@@ -64,7 +63,7 @@ void System::WaitForMultipleMutexTesting::WaitForMutexTest1(const Container& mut
     const auto flag = WaitForSystemMutex(boost::numeric_cast<WindowsDWord>(mutexHandles.size()), mutexHandles.data(), true, EnumCastUnderlying(MutexWait::Infinite), true);
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
 
-    for (auto handle : mutexHandles)
+    for (const auto handle : mutexHandles)
     {
         ASSERT_TRUE(ReleaseSystemMutex(handle));
     }
@@ -75,7 +74,7 @@ void System::WaitForMultipleMutexTesting::WaitForMutexTest2(const Container& mut
     const auto flag = WaitForSystemMutex(boost::numeric_cast<WindowsDWord>(mutexHandles.size()), mutexHandles.data(), true, EnumCastUnderlying(MutexWait::Infinite), false);
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
 
-    for (auto handle : mutexHandles)
+    for (const auto handle : mutexHandles)
     {
         ASSERT_TRUE(ReleaseSystemMutex(handle));
     }
@@ -98,9 +97,17 @@ void System::WaitForMultipleMutexTesting::CreateThreadTest(const Container& mute
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest0, this, mutexHandles));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest1, this, mutexHandles));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest2, this, mutexHandles));
+        threadGroup.create_thread([this, mutexHandles]() {
+            this->WaitForMutexTest0(mutexHandles);
+        });
+
+        threadGroup.create_thread([this, mutexHandles]() {
+            this->WaitForMutexTest1(mutexHandles);
+        });
+
+        threadGroup.create_thread([this, mutexHandles]() {
+            this->WaitForMutexTest2(mutexHandles);
+        });
     }
 
     threadGroup.join_all();

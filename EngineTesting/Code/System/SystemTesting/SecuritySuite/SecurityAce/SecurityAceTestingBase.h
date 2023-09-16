@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/28 14:40)
+///	版本：0.9.1.4 (2023/09/01 13:46)
 
 #ifndef SYSTEM_SECURITY_SUITE_SECURITY_ACE_TESTING_BASE_H
 #define SYSTEM_SECURITY_SUITE_SECURITY_ACE_TESTING_BASE_H
@@ -31,13 +31,13 @@ namespace System
 
     protected:
         using UserObjectSecurityBuffer = std::vector<char>;
-        using ACLBuffer = std::vector<char>;
+        using AclBuffer = std::vector<char>;
 
     protected:
         NODISCARD UserObjectSecurityBuffer GetUserObjectSecurity();
-        NODISCARD AccessCheckACLPtr GetDacl(UserObjectSecurityBuffer& buffer);
-        NODISCARD ACLBuffer GetACL(UserObjectSecurityBuffer& buffer, WindowsDWord aclBytesInUse);
-        NODISCARD AccessCheckACLPtr GetAccessCheckACLPtr(ACLBuffer& buffer) const noexcept;
+        NODISCARD AccessCheckAclPtr GetDacl(UserObjectSecurityBuffer& buffer);
+        NODISCARD AclBuffer GetAcl(UserObjectSecurityBuffer& buffer, WindowsDWord aclBytesInUse);
+        NODISCARD AccessCheckAclPtr GetAccessCheckAclPtr(AclBuffer& buffer) const noexcept;
     };
 }
 

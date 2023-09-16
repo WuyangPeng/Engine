@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/08 18:34)
+///	版本：0.9.1.4 (2023/08/28 16:36)
 
 #include "System/SystemExport.h"
 
 #include "EnumResourceTools.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/SystemOutput/Data/LanguageIDData.h"
+#include "System/SystemOutput/Data/LanguageIdData.h"
 
 bool System::EnumResourceLanguagesInLibrary(DynamicLinkModule module,
                                             const DynamicLinkCharType* type,
@@ -42,11 +42,11 @@ bool System::EnumResourceLanguagesInLibrary(DynamicLinkModule module,
                                             EnumResourceLanguageProcess enumFunction,
                                             WindowsLongPtrSizeType param,
                                             ResourceEnum flags,
-                                            const LanguageIDData& language) noexcept
+                                            const LanguageIdData& language) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::EnumResourceLanguagesEx(module, type, name, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageID()) != gFalse)
+    if (::EnumResourceLanguagesEx(module, type, name, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageId()) != gFalse)
         return true;
     else
         return false;
@@ -86,11 +86,11 @@ bool System::EnumResourceNamesInLibrary(DynamicLinkModule module,
                                         EnumResourceNameProcess enumFunction,
                                         WindowsLongPtrSizeType param,
                                         ResourceEnum flags,
-                                        const LanguageIDData& language) noexcept
+                                        const LanguageIdData& language) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::EnumResourceNamesEx(module, type, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageID()) != gFalse)
+    if (::EnumResourceNamesEx(module, type, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageId()) != gFalse)
         return true;
     else
         return false;
@@ -126,11 +126,11 @@ bool System::EnumResourceTypesInLibrary(DynamicLinkModule module,
                                         EnumResourceTypeProcess enumFunction,
                                         WindowsLongPtrSizeType param,
                                         ResourceEnum flags,
-                                        const LanguageIDData& language) noexcept
+                                        const LanguageIdData& language) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::EnumResourceTypesEx(module, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageID()) != gFalse)
+    if (::EnumResourceTypesEx(module, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageId()) != gFalse)
         return true;
     else
         return false;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 11:30)
+///	版本：0.9.1.4 (2023/09/04 16:21)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_BUFFER_IMPL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_BUFFER_IMPL_H
@@ -26,6 +26,7 @@ namespace Network
         using ImplPtr = std::shared_ptr<ClassType>;
         using ConstImplPtr = std::shared_ptr<const ClassType>;
         using FactoryType = MessageBufferFactory;
+
         using MessageBufferSharedPtr = std::shared_ptr<MessageBuffer>;
 
     public:

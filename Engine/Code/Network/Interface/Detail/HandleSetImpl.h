@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 09:52)
+///	版本：0.9.1.4 (2023/09/15 11:29)
 
 #ifndef NETWORK_NETWORK_INTERFACE_HANDLE_SET_IMPL_H
 #define NETWORK_NETWORK_INTERFACE_HANDLE_SET_IMPL_H
@@ -23,8 +23,9 @@ namespace Network
     {
     public:
         using ClassType = HandleSetImpl;
-        using ImplTypeSharedPtr = std::shared_ptr<ClassType>;
         using FactoryType = HandleSetFactory;
+
+        using ImplTypeSharedPtr = std::shared_ptr<ClassType>;
 
     public:
         HandleSetImpl() noexcept = default;

@@ -40,7 +40,7 @@ Mathematics::RationalVector3<IntSize>::RationalVector3(const Rational& x, const 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <int IntSize>
@@ -53,7 +53,7 @@ Mathematics::RationalVector3<IntSize>& Mathematics::RationalVector3<IntSize>::op
     return *this;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 template <int IntSize>

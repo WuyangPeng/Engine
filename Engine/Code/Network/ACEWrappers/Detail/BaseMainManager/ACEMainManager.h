@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 14:01)
+///	版本：0.9.1.4 (2023/09/15 15:37)
 
 #ifndef NETWORK_ACE_WRAPPERS_ACE_MAIN_MANAGER_H
 #define NETWORK_ACE_WRAPPERS_ACE_MAIN_MANAGER_H
@@ -19,15 +19,15 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE ACEMainManager : public BaseMainManagerImpl, public ACE_Main_Base
+    class NETWORK_HIDDEN_DECLARE AceMainManager final : public BaseMainManagerImpl, public ACE_Main_Base
     {
     public:
-        using ClassType = ACEMainManager;
+        using ClassType = AceMainManager;
         using ParentType = BaseMainManagerImpl;
         using InterfaceType = ACE_Main_Base;
 
     public:
-        ACEMainManager() noexcept;
+        AceMainManager() noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

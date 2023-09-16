@@ -61,7 +61,7 @@ System::OpenGLUInt Rendering::OpenGLRenderTargetDataImpl::CreateDrawBuffers(cons
         //   auto platformColorTexture = std::make_shared<PlatformTexture2D>(renderer, colorTexture.get());
         //  renderer->InsertInTexture2DMap(colorTexture, platformColorTexture);
         //  colorTextures.at(index) = platformColorTexture->GetTexture();
-        drawBuffers.at(index) = static_cast<GLenum>(System::ColorAttachent::Color0) + index;
+        drawBuffers.at(index) = static_cast<GLenum>(System::ColorAttachment::Color0) + index;
 
         // °ó¶¨ÑÕÉ«ÎÆÀí¡£
 

@@ -25,6 +25,7 @@ AssistTools::GameParameterAnalysisImpl::GameParameterAnalysisImpl(const std::str
       projectChineseName{},
       projectDescribeName{},
       projectName{},
+      testingName{},
       projectCapital{},
       projectAbbreviation{},
       endYear{},
@@ -72,6 +73,7 @@ void AssistTools::GameParameterAnalysisImpl::AnalysisMain()
     endYear = mainTree.get(SYSTEM_TEXT("EndYear"), SYSTEM_TEXT("2023"));
     version = mainTree.get(SYSTEM_TEXT("Version"), CoreTools::StringConversion ::MultiByteConversionStandard(CoreTools::Version::GetVersion()));
     versionNum = mainTree.get(SYSTEM_TEXT("VersionNum"), System::ToString(CoreTools::Version::GetTCREFullVersion()));
+    testingName = mainTree.get(SYSTEM_TEXT("TestingName"), String{});
 
     for (const auto& tree : mainTree.get_child(SYSTEM_TEXT("Module")))
     {
@@ -214,4 +216,11 @@ AssistTools::GameParameterAnalysisImpl::String AssistTools::GameParameterAnalysi
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return versionNum;
+}
+
+AssistTools::GameParameterAnalysisImpl::String AssistTools::GameParameterAnalysisImpl::GetTestingName() const
+{
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return testingName;
 }

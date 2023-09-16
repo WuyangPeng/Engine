@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:56)
+///	版本：0.9.1.4 (2023/09/01 13:56)
 
 #include "AccessCheckByTypeResultListTesting.h"
 #include "System/FileManager/Flags/FileFlags.h"
@@ -13,13 +13,8 @@
 #include "System/Helper/WindowsMacro.h"
 #include "System/Security/AccessCheck.h"
 #include "System/Security/CreateSecurity.h"
-#include "System/Security/Flags/CreateSecurityFlags.h"
 #include "System/Security/SecurityBase.h"
 #include "System/Security/SecuritySid.h"
-#include "System/Threading/Flags/ThreadToolsFlags.h"
-#include "System/Threading/Process.h"
-#include "System/Threading/ProcessTools.h"
-#include "System/Threading/ThreadTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -84,17 +79,17 @@ void System::AccessCheckByTypeResultListTesting::GetAccessCheckTest(FileHandleDe
     SystemGloballyUniqueIdentifier objectType = { 0 };
     SecurityObjectTypeList objectTypeList{ 0, 1, &objectType };
 
-    auto sid = GetSecuritySID();
+    auto sid = GetSecuritySid();
     ASSERT_TRUE(GetAccessCheckByTypeResultList(buffer.data(), &sid, impersonatedToken, fileMapGenericMask, &objectTypeList, 1, &genericMapping, &privileges, &privilegeLength, &grantedAccessList, &accessStatusList));
 
     ASSERT_EQUAL(grantedAccessList, EnumCastUnderlying<WindowsDWord>(fileMapGenericMask));
     ASSERT_EQUAL(privilegeLength, sizeof(privileges));
 }
 
-System::SecuritySID System::AccessCheckByTypeResultListTesting::GetSecuritySID()
+System::SecuritySid System::AccessCheckByTypeResultListTesting::GetSecuritySid()
 {
-    SecuritySID sid{};
-    SecuritySIDIndentifierAuthority identifierAuthority SYSTEM_SECURITY_NT_AUTHORITY;
+    SecuritySid sid{};
+    SecuritySidIdentifierAuthority identifierAuthority SYSTEM_SECURITY_NT_AUTHORITY;
 
     constexpr WindowsByte subAuthorityCount{ 5 };
 

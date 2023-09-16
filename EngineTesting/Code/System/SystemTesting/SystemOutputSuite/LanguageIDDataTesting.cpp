@@ -5,16 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/29 23:56)
+///	版本：0.9.1.4 (2023/09/01 14:14)
 
-#include "LanguageIDDataTesting.h"
+#include "LanguageIdDataTesting.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/SystemOutput/Data/LanguageIDData.h"
+#include "System/SystemOutput/Data/LanguageIdData.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::LanguageIDDataTesting::LanguageIDDataTesting(const OStreamShared& stream)
+System::LanguageIdDataTesting::LanguageIdDataTesting(const OStreamShared& stream)
     : ParentType{ stream },
       primaryLanguages{ PrimaryLanguage::Neutral,
                         PrimaryLanguage::Invariant,
@@ -173,30 +173,30 @@ System::LanguageIDDataTesting::LanguageIDDataTesting(const OStreamShared& stream
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, LanguageIDDataTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, LanguageIdDataTesting)
 
-void System::LanguageIDDataTesting::DoRunUnitTest()
+void System::LanguageIdDataTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void System::LanguageIDDataTesting::MainTest()
+void System::LanguageIdDataTesting::MainTest()
 {
     ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(RandomShuffleFlags);
     ASSERT_NOT_THROW_EXCEPTION_0(DefaultFlagTest);
 }
 
-bool System::LanguageIDDataTesting::RandomShuffleFlags()
+bool System::LanguageIdDataTesting::RandomShuffleFlags()
 {
-    shuffle(primaryLanguages.begin(), primaryLanguages.end(), randomEngine);
-    shuffle(subLanguages.begin(), subLanguages.end(), randomEngine);
+    std::ranges::shuffle(primaryLanguages, randomEngine);
+    std::ranges::shuffle(subLanguages, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(FlagsTest);
 
     return true;
 }
 
-void System::LanguageIDDataTesting::FlagsTest()
+void System::LanguageIdDataTesting::FlagsTest()
 {
     for (auto index = 0u; index < maxSize; ++index)
     {
@@ -204,25 +204,25 @@ void System::LanguageIDDataTesting::FlagsTest()
     }
 }
 
-void System::LanguageIDDataTesting::DoFlagsTest(size_t index)
+void System::LanguageIdDataTesting::DoFlagsTest(size_t index)
 {
     const auto primaryLanguage = primaryLanguages.at(index % primaryLanguages.size());
     const auto subLanguage = subLanguages.at(index % subLanguages.size());
 
-    const LanguageIDData languageIDData{ primaryLanguage, subLanguage };
+    const LanguageIdData languageIdData{ primaryLanguage, subLanguage };
 
-    ASSERT_ENUM_EQUAL(languageIDData.GetPrimaryLanguage(), primaryLanguage);
-    ASSERT_ENUM_EQUAL(languageIDData.GetSubLanguage(), subLanguage);
+    ASSERT_ENUM_EQUAL(languageIdData.GetPrimaryLanguage(), primaryLanguage);
+    ASSERT_ENUM_EQUAL(languageIdData.GetSubLanguage(), subLanguage);
 
-    const auto languageID = MakeLanguageID(EnumCastUnderlying<uint16_t>(primaryLanguage), EnumCastUnderlying<uint16_t>(subLanguage));
+    const auto languageID = MakeLanguageId(EnumCastUnderlying<uint16_t>(primaryLanguage), EnumCastUnderlying<uint16_t>(subLanguage));
 
-    ASSERT_EQUAL(languageIDData.GetLanguageID(), languageID);
+    ASSERT_EQUAL(languageIdData.GetLanguageId(), languageID);
 }
 
-void System::LanguageIDDataTesting::DefaultFlagTest() noexcept
+void System::LanguageIdDataTesting::DefaultFlagTest() noexcept
 {
-    constexpr LanguageIDData languageIDData{};
+    constexpr LanguageIdData languageIdData{};
 
-    static_assert(languageIDData.GetPrimaryLanguage() == PrimaryLanguage::Neutral);
-    static_assert(languageIDData.GetSubLanguage() == SubLanguage::Neutral);
+    static_assert(languageIdData.GetPrimaryLanguage() == PrimaryLanguage::Neutral);
+    static_assert(languageIdData.GetSubLanguage() == SubLanguage::Neutral);
 }

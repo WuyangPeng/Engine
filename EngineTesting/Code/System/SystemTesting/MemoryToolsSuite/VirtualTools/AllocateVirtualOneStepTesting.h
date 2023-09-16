@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/06 20:53)
+///	版本：0.9.1.4 (2023/09/01 10:02)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_ALLOCATE_VIRTUAL_ONE_STEP_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_ALLOCATE_VIRTUAL_ONE_STEP_TESTING_H
 
 #include "VirtualToolsTestingBase.h"
-#include "System/Windows/Using/WindowsUsing.h"
 
 namespace System
 {
@@ -27,7 +26,7 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         NODISCARD bool AllocateVirtualTest();

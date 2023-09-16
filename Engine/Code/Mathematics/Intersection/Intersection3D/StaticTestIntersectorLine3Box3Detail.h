@@ -61,7 +61,7 @@ void Mathematics::StaticTestIntersectorLine3Box3<Real>::Test()
     auto diff = line.GetOrigin() - box.GetCenter();
     const auto WxD = Vector3Tools::CrossProduct(line.GetDirection(), diff);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     awdu[1] = Math::FAbs(Vector3Tools::DotProduct(line.GetDirection(), box.GetAxis(1)));
@@ -91,7 +91,7 @@ void Mathematics::StaticTestIntersectorLine3Box3<Real>::Test()
         return;
     }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     this->SetIntersectionType(IntersectionType::Point);
 }

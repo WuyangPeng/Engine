@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/31 23:50)
+///	版本：0.9.1.4 (2023/09/01 15:01)
 
 #include "ResetEventTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -55,7 +55,9 @@ void System::ResetEventTesting::DoEventThreadTest(WindowsHandle eventHandle)
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForEventTest, this, eventHandle));
+        threadGroup.create_thread([this, eventHandle]() {
+            this->WaitForEventTest(eventHandle);
+        });
     }
 
     ASSERT_TRUE(SetSystemEvent(eventHandle));

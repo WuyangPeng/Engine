@@ -5,14 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/09 09:55)
+///	版本：0.9.1.4 (2023/09/15 15:24)
 
 #include "Network/NetworkExport.h"
 
 #include "HandleSetIteratorFactory.h"
 #include "HandleSetIteratorImpl.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "Network/ACEWrappers/Detail/Acceptor/SockACEHandleSetIterator.h"
+#include "Network/ACEWrappers/Detail/Acceptor/SockAceHandleSetIterator.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/Interface/HandleSet.h"
@@ -32,7 +32,7 @@ Network::HandleSetIteratorFactory::ImplTypeSharedPtr Network::HandleSetIteratorF
 #ifdef NETWORK_USE_ACE
 
         case WrappersStrategy::Ace:
-            return std::make_shared<SockACEHandleSetIterator>(handleSet.GetACEHandleSet());
+            return std::make_shared<SockAceHandleSetIterator>(handleSet.GetACEHandleSet());
 
 #endif  // NETWORK_USE_ACE
 

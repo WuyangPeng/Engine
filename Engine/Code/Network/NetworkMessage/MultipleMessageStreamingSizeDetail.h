@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/06 17:52)
+///	版本：0.9.1.4 (2023/09/04 16:05)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_STREAMING_SIZE_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_STREAMING_SIZE_DETAIL_H
@@ -13,10 +13,9 @@
 #include "MultipleMessageContainer.h"
 #include "MultipleMessageStreamingSize.h"
 #include "System/Helper/EnumCast.h"
-#include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <int Index, typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
@@ -25,7 +24,7 @@ Network::MultipleMessageStreamingSize<Index, Network::MultipleMessageContainer<E
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 
@@ -42,7 +41,7 @@ int Network::MultipleMessageStreamingSize<Index, Network::MultipleMessageContain
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    const auto value = container.GetValue<System::UnderlyingCastEnum<E>(Index - 1)>();
+    const auto value = container.template GetValue<System::UnderlyingCastEnum<E>(Index - 1)>();
     return ParentType::GetStreamingSize(container) + CoreTools::GetStreamSize(value);
 }
 
@@ -67,7 +66,7 @@ int Network::MultipleMessageStreamingSize<1, Network::MultipleMessageContainer<E
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    const auto value = container.GetValue<System::UnderlyingCastEnum<E>(0)>();
+    const auto value = container.template GetValue<System::UnderlyingCastEnum<E>(0)>();
 
     return CoreTools::GetStreamSize(value);
 }

@@ -10,12 +10,12 @@
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLDrawTargetImpl.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/OpenGL/OpenGLBase.h"
 #include "System/OpenGL/OpenGLBuffers.h"
 #include "System/OpenGL/OpenGLTextures.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 #include <array>
 
@@ -38,14 +38,14 @@ Rendering::OpenGLDrawTargetImpl::OpenGLDrawTargetImpl(const ConstDrawTargetShare
         THROW_EXCEPTION(SYSTEM_TEXT("DrawTargets的目标比提供的纹理多"s));
     }
 
-    frameBuffer = System::GetGLGenFramebuffers();
+    frameBuffer = System::GetGLGenFrameBuffers();
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::OpenGLDrawTargetImpl::~OpenGLDrawTargetImpl() noexcept
 {
-    System::SetGLDeleteFramebuffers(frameBuffer);
+    System::SetGLDeleteFrameBuffers(frameBuffer);
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -73,30 +73,30 @@ void Rendering::OpenGLDrawTargetImpl::Enable()
 
     System::SetGLDepthRange(0.0, 1.0);
 
-    System::SetGLBindFramebuffer(System::FrameBufferType::DrawFramebuffer, frameBuffer);
+    System::SetGLBindFrameBuffer(System::FrameBufferType::DrawFrameBuffer, frameBuffer);
 
     if (depthStencilTexture != nullptr)
     {
         auto format = depthStencilTexture->GetTexture()->GetFormat();
-        auto attachment = System::ColorAttachent::DepthAttachment;
+        auto attachment = System::ColorAttachment::DepthAttachment;
         if (format == DataFormatType::D24UNormS8UInt)
         {
-            attachment = System::ColorAttachent::DepthStencilAttachment;
+            attachment = System::ColorAttachment::DepthStencilAttachment;
         }
 
-        System::SetGLFramebufferTexture2D(System::FrameBufferType::DrawFramebuffer, attachment, System::TextureTarget::Texture2D, depthStencilTexture->GetGLHandle(), 0);
+        System::SetGLFrameBufferTexture2D(System::FrameBufferType::DrawFrameBuffer, attachment, System::TextureTarget::Texture2D, depthStencilTexture->GetGLHandle(), 0);
     }
 
     const auto numTargets = drawTarget->GetNumTargets();
     std::vector<System::OpenGLEnum> useDrawBuffers{};
     for (auto i = 0; i < numTargets; ++i)
     {
-        auto colorTarget = System::EnumCastUnderlying(System::ColorAttachent::Color0) + i;
+        auto colorTarget = System::EnumCastUnderlying(System::ColorAttachment::Color0) + i;
 
         useDrawBuffers.emplace_back(colorTarget);
 
         auto textureRT = renderTargetTextures.at(i);
-        System::SetGLFramebufferTexture2D(System::FrameBufferType::DrawFramebuffer, System::UnderlyingCastEnum<System::ColorAttachent>(colorTarget), System::TextureTarget::Texture2D, textureRT->GetGLHandle(), 0);
+        System::SetGLFrameBufferTexture2D(System::FrameBufferType::DrawFrameBuffer, System::UnderlyingCastEnum<System::ColorAttachment>(colorTarget), System::TextureTarget::Texture2D, textureRT->GetGLHandle(), 0);
     }
 
     System::SetGLDrawBuffers(boost::numeric_cast<OpenGLSize>(useDrawBuffers.size()), useDrawBuffers.data());
@@ -106,7 +106,7 @@ void Rendering::OpenGLDrawTargetImpl::Disable()
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    System::SetGLBindFramebuffer(System::FrameBufferType::Framebuffer, 0);
+    System::SetGLBindFrameBuffer(System::FrameBufferType::FrameBuffer, 0);
 
     System::SetGLViewport(saveViewportX, saveViewportY, saveViewportWidth, saveViewportHeight);
     System::SetGLDepthRange(saveViewportNear, saveViewportFar);

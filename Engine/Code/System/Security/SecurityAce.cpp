@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/23 23:17)
+///	版本：0.9.1.4 (2023/08/30 15:16)
 
 #include "System/SystemExport.h"
 
@@ -13,7 +13,7 @@
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
 
-bool System::AddAccessControlEntries(AccessCheckACLPtr acl, AccessControlListRevision aceRevision, WindowsDWord startingAceIndex, WindowsVoidPtr aceList, WindowsDWord aceListLength) noexcept
+bool System::AddAccessControlEntries(AccessCheckAclPtr acl, AccessControlListRevision aceRevision, WindowsDWord startingAceIndex, WindowsVoidPtr aceList, WindowsDWord aceListLength) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -31,7 +31,7 @@ bool System::AddAccessControlEntries(AccessCheckACLPtr acl, AccessControlListRev
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::AddMandatoryAccessControlEntries(AccessCheckACLPtr acl, AccessControlListRevision aceRevision, ControlACEInheritance aceFlags, MandatoryPolicy mandatoryPolicy, SecuritySIDPtr labelSid) noexcept
+bool System::AddMandatoryAccessControlEntries(AccessCheckAclPtr acl, AccessControlListRevision aceRevision, ControlAceInheritance aceFlags, MandatoryPolicy mandatoryPolicy, SecuritySidPtr labelSid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -49,7 +49,7 @@ bool System::AddMandatoryAccessControlEntries(AccessCheckACLPtr acl, AccessContr
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::DeleteAccessControlEntries(AccessCheckACLPtr acl, WindowsDWord aceIndex) noexcept
+bool System::DeleteAccessControlEntries(AccessCheckAclPtr acl, WindowsDWord aceIndex) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -67,7 +67,7 @@ bool System::DeleteAccessControlEntries(AccessCheckACLPtr acl, WindowsDWord aceI
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::FindFirstFreeAccessControlEntries(AccessCheckACLPtr acl, WindowsVoidPtr* ace) noexcept
+bool System::FindFirstFreeAccessControlEntries(AccessCheckAclPtr acl, WindowsVoidPtr* ace) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -85,7 +85,7 @@ bool System::FindFirstFreeAccessControlEntries(AccessCheckACLPtr acl, WindowsVoi
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetAccessControlEntries(AccessCheckACLPtr acl, WindowsDWord aceIndex, WindowsVoidPtr* ace) noexcept
+bool System::GetAccessControlEntries(AccessCheckAclPtr acl, WindowsDWord aceIndex, WindowsVoidPtr* ace) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 

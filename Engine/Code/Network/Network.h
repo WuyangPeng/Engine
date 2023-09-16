@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/04/27 14:33)
+///	版本：0.9.1.4 (2023/09/04 10:50)
 
 #ifndef NETWORK_H
 #define NETWORK_H
@@ -22,5 +22,6 @@
 #include "NetworkMessage/NetworkMessage.h"
 #include "NetworkWrappers/NetworkWrappers.h"
 #include "Openssl/Openssl.h"
+#include "ServiceWrappers/ServiceWrappers.h"
 
 #endif  // NETWORK_H

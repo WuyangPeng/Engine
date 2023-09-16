@@ -37,12 +37,12 @@ namespace Rendering
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
     };
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 
     CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(VisualTest);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 #endif  // RENDERING_SCENE_GRAPH_SUITE_VISUAL_TEST_H

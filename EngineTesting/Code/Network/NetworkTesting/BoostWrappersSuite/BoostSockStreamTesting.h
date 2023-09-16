@@ -5,12 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 10:46)
+///	版本：0.9.1.4 (2023/09/16 10:46)
 
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_BOOST_SOCK_STREAM_TESTING_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_BOOST_SOCK_STREAM_TESTING_H
 
 #include "BoostSockTesting.h"
+#include "Network/Interface/InterfaceFwd.h"
 #include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketEvent.h"
 
 namespace Network
@@ -45,10 +46,6 @@ namespace Network
         void DestroyMessage();
         NODISCARD MessageBufferSharedPtr CreateMessageBuffer() const;
         void VerificationMessageBuffer(const MessageBuffer& messageBuffer);
-
-        NODISCARD int64_t ClientConnect(Client& client);
-        void ClientSend(Client& client, int64_t socketId, const TestSocketEvent& testSocketEvent);
-        void ClientReceive(Client& client, const TestSocketEvent& testSocketEvent);
 
         NODISCARD static constexpr int GetAcceptTime() noexcept
         {

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/16 22:29)
+///	版本：0.9.1.4 (2023/09/01 09:42)
 
 #include "EndianTesting.h"
 #include "System/Helper/ConfigMacro.h"
@@ -33,13 +33,13 @@ void System::EndianTesting::MainTest()
 
 void System::EndianTesting::EndianTest()
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
     constexpr size_t one{ 1 };
     const auto isLittleEndian = (*reinterpret_cast<const char*>(&one) != 0);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 #ifdef SYSTEM_LITTLE_ENDIAN
 

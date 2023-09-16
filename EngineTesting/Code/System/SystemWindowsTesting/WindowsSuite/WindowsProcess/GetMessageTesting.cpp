@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/02/02 21:06)
+///	版本：0.9.1.4 (2023/08/31 15:22)
 
 #include "GetMessageTesting.h"
 #include "System/Windows/Flags/WindowsMessagesFlags.h"
@@ -14,8 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::GetMessageTesting::GetMessageTesting(const OStreamShared& stream, WindowsHWnd hwnd)
-    : ParentType{ stream }, hwnd{ hwnd }
+System::GetMessageTesting::GetMessageTesting(const OStreamShared& stream, WindowsHWnd hWnd)
+    : ParentType{ stream }, hWnd{ hWnd }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -34,15 +34,15 @@ void System::GetMessageTesting::MainTest()
 
 void System::GetMessageTesting::GetMessageTest()
 {
-    ASSERT_TRUE(PostSystemMessage(hwnd, WindowsMessages::User, 0, 0));
+    ASSERT_TRUE(PostSystemMessage(hWnd, WindowsMessages::User, 0, 0));
 
     WindowsMessage msg{};
-    ASSERT_TRUE(GetSystemMessage(&msg, hwnd));
+    ASSERT_TRUE(GetSystemMessage(&msg, hWnd));
 
-    ASSERT_EQUAL(msg.hwnd, hwnd);
+    ASSERT_EQUAL(msg.hwnd, hWnd);
 
-    WindowsHAccelerator accel{ 0 };
-    auto result = SystemTranslateAccelerator(hwnd, accel, &msg);
-    result = TranslateSystemMessage(&msg);
-    result = DispatchSystemMessage(&msg);
+    WindowsHAccelerator accelerator{ nullptr };
+    MAYBE_UNUSED const auto result0 = SystemTranslateAccelerator(hWnd, accelerator, &msg);
+    MAYBE_UNUSED const auto result1 = TranslateSystemMessage(&msg);
+    MAYBE_UNUSED const auto result2 = DispatchSystemMessage(&msg);
 }

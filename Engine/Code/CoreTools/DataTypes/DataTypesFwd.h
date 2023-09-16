@@ -21,18 +21,13 @@ namespace CoreTools
     template <int Rows, int Columns, typename Type>
     class Table;
 
-    template <typename Generator, typename Scalar>
+    template <typename T>
+    class MinHeapNode;
+
+    template <typename T>
     class MinHeapRecord;
 
-    template <typename Generator, typename Scalar>
-    class MinHeapRecordStored;
-
-    class MinHeapRecordIndex;
-
-    template <typename Generator, typename Scalar>
-    class MinHeapRecordStoredManager;
-
-    template <typename Generator, typename Scalar>
+    template <typename T>
     class MinHeap;
 
     template <typename Key, typename Value>

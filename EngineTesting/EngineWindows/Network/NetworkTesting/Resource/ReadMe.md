@@ -6,14 +6,14 @@
 ----------------------------
 1.   HelperSuite  
 
-对帮助模块的单元测试，包括： 
+对帮助模块的单元测试： 
 （1）输入输出流宏：StreamMacroTesting。
 （2）用户宏：UserMacroTesting。
 
 ----------------------------
 2.	ConfigurationSuite  
 
-对网络库配置模块的单元测试，包括：
+对网络库配置模块的单元测试：
 （1）配置策略：ConfigurationStrategyTesting。
 （2）配置子策略：ConfigurationSubStrategyTesting。
 （3）配置参数：ConfigurationParameterTesting。
@@ -22,7 +22,7 @@
 ----------------------------
 3.	NetworkMessageSuite  
 
-对网络消息模块的单元测试，包括：
+对网络消息模块的单元测试：
 （1）消息接口：MessageInterfaceTesting、
 			   NullMessageTesting、
 			   NullDoubleMessageTesting、 
@@ -56,11 +56,16 @@
 			 SendMessageLevelTesting。 
 （5）protobuf： ProtoBufMessageTesting。
 （6）json： JsonMessageTesting。
+----------------------------
+4.	ServiceWrappersSuite 
+
+对服务包装器接口模块的单元测试：
+（1）服务包装器。
 
 ----------------------------
-4.	InterfaceSuite 
+5.	InterfaceSuite 
 
-对网络库接口模块的单元测试，包括：
+对网络库接口模块的单元测试：
 （1）基础主管理：BaseMainManagerTesting、
 				 SingletonTesting。
 （2）网络地址：SockAddressTesting。
@@ -69,17 +74,11 @@
 （5）流：SockStreamTesting。
 （6）句柄集：HandleSetIteratorTesting、
 		     HandleSetTesting。
-（7）客户端：ClientTesting、
-			 OnlySendingClientTesting、
-			 CacheClientTesting。
-（8）服务器：ServerTesting、
-			 IterativeServerTesting、
-			 ReactiveServerTesting。
 
 ----------------------------
-5.	ACEWrappersSuite
+6.	ACEWrappersSuite
 
-对ACE包装器模块的单元测试，包括：
+对ACE包装器模块的单元测试：
 （1）基础主管理：ACEMainManagerTesting。
 （2）网络地址：ACESockInetAddressTesting。
 （3）接受器：ACESockAcceptorTesting。
@@ -90,9 +89,9 @@
 		     SockACEHandleSetTesting。
 
 ----------------------------
-6.	BoostWrappersSuite 
+7.	BoostWrappersSuite 
 
-对boost包装器模块的单元测试，包括：
+对boost包装器模块的单元测试：
 （1）基础主管理：BoostMainManagerTesting、
 				 BoostMainManagerUseMultiContextTesting、
 				 BoostMainManagerUseThreadsTesting。
@@ -116,9 +115,9 @@
 		 BoostSockStreamTesting。
 
 ----------------------------
-7.	NetworkWrappersSuite 
+8.	NetworkWrappersSuite 
 
-对Network包装器模块的单元测试，包括：
+对Network包装器模块的单元测试：
 （1）基础主管理：NetworkMainManagerTesting。
 （2）网络地址：NetworkSockInetAddressTesting。
 （3）接受器：NetworkSockAcceptorTesting。
@@ -126,39 +125,39 @@
 （5）流：NetworkSockStreamTesting。
 
 ----------------------------
-8.	OpensslSuite
+9.	OpensslSuite
 
-对openssl模块的单元测试，包括：
+对openssl模块的单元测试：
 （1）openssl。
 
 ----------------------------
-9.	MessageOrientedMiddlewareSuite
+10.	MessageOrientedMiddlewareSuite
 
-对消息中间件模块的单元测试，包括：
+对消息中间件模块的单元测试：
 （1）消息中间件：ConsumerTesting、
 				 ProducerTesting、
 				 RouteServiceManagerTesting、
 				 RouteServiceTesting。
 
 ----------------------------
-10.	ActiveMQSuite
+11.	ActiveMQSuite
 
-对ActiveMQ模块的单元测试，包括：
+对ActiveMQ模块的单元测试：
 （1）ActiveMQ：ActiveMQConsumerTesting、
 			   ActiveMQProducerTesting、
 			   ActiveMQRouteServiceManagerTesting、
 			   ActiveMQRouteServiceTesting。
 
 ----------------------------
-11.	NatsSuite
+12.	NatsSuite
 
-对Nats模块的单元测试，包括：
+对Nats模块的单元测试：
 （1）Nats。
 
 ----------------------------
-12.	KafkaSuite
+13.	KafkaSuite
 
-对Kafka模块的单元测试，包括：
+对Kafka模块的单元测试：
 （1）Kafka。
 
 ----------------------------

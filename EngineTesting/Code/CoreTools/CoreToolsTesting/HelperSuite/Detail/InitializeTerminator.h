@@ -32,12 +32,12 @@ namespace CoreTools
         static bool isRegister;
     };
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 
     CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(InitializeTerminator);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 #endif  // CORE_TOOLS_HELPER_SUITE_INITIALIZE_TERMINATOR_H

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 10:56)
+///	版本：0.9.1.4 (2023/09/04 16:30)
 
 #ifndef NETWORK_NETWORK_MESSAGE_SEND_MESSAGE_LEVEL_H
 #define NETWORK_NETWORK_MESSAGE_SEND_MESSAGE_LEVEL_H
@@ -36,7 +36,7 @@ namespace Network
         NODISCARD MessageInterfaceSharedPtr operator[](int index);
 
         // 对顶层的对象进行保存。
-        void Insert(const MessageInterfaceSharedPtr& messagePtr);
+        void Insert(const MessageInterfaceSharedPtr& message);
 
         NODISCARD int GetRemainingSize() const noexcept;
         NODISCARD int GetCurrentSize() const noexcept;

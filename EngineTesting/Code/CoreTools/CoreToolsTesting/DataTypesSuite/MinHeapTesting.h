@@ -28,7 +28,7 @@ namespace CoreTools
     private:
         void MainTest();
         void IntegerTest();
-        void FloatTest();
+        void FloatTest() noexcept;
 
         void DoRunUnitTest() override;
     };

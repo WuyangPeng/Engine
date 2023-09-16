@@ -151,6 +151,9 @@
     <Filter Include="MessageOrientedMiddlewareSuite 源文件">
       <UniqueIdentifier>{bfbdf0d2-aa1e-482b-be3c-ade5f331a0c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ServiceWrappersSuite 头文件">
+      <UniqueIdentifier>{eb71f44b-9552-4e84-9891-e2b1cb8beea9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\Testing.h">
@@ -234,12 +237,6 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\BaseMainManagerTesting.h">
       <Filter>InterfaceSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\CacheClientTesting.h">
-      <Filter>InterfaceSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ClientTesting.h">
-      <Filter>InterfaceSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\HandleSetIteratorTesting.h">
       <Filter>InterfaceSuite 头文件</Filter>
     </ClInclude>
@@ -247,18 +244,6 @@
       <Filter>InterfaceSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\InterfaceSuite.h">
-      <Filter>InterfaceSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\IterativeServerTesting.h">
-      <Filter>InterfaceSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\OnlySendingClientTesting.h">
-      <Filter>InterfaceSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ReactiveServerTesting.h">
-      <Filter>InterfaceSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ServerTesting.h">
       <Filter>InterfaceSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SingletonTesting.h">
@@ -528,6 +513,9 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ActiveMQSuite\ActiveMQRouteServiceManagerTesting.h">
       <Filter>ActiveMQSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ServiceWrappersSuite\ServiceWrappersSuite.h">
+      <Filter>ServiceWrappersSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\TestingHelper.cpp">
@@ -602,28 +590,10 @@
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\BaseMainManagerTesting.cpp">
       <Filter>InterfaceSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\CacheClientTesting.cpp">
-      <Filter>InterfaceSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ClientTesting.cpp">
-      <Filter>InterfaceSuite 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\HandleSetIteratorTesting.cpp">
       <Filter>InterfaceSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\HandleSetTesting.cpp">
-      <Filter>InterfaceSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\IterativeServerTesting.cpp">
-      <Filter>InterfaceSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\OnlySendingClientTesting.cpp">
-      <Filter>InterfaceSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ReactiveServerTesting.cpp">
-      <Filter>InterfaceSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ServerTesting.cpp">
       <Filter>InterfaceSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SingletonTesting.cpp">

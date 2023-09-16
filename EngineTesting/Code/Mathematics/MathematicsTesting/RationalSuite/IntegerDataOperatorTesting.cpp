@@ -89,7 +89,7 @@ void Mathematics::IntegerDataOperatorTesting::AdditionTest()
         const IntegerData<28> firstInteger(firstShortVector);
         const IntegerData<28> secondInteger(secondShortVector);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26496)
 
         IntegerData<28> thirdInteger = firstInteger;
@@ -100,7 +100,7 @@ void Mathematics::IntegerDataOperatorTesting::AdditionTest()
         IntegerDataOperator<28> fourthsIntegerDataOperator(fourthInteger);
         fourthsIntegerDataOperator += firstInteger;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         ASSERT_EQUAL(thirdInteger, fourthInteger);
 
@@ -183,14 +183,14 @@ void Mathematics::IntegerDataOperatorTesting::SubtractionTest()
         const IntegerData<13> firstInteger(firstShortVector);
         const IntegerData<13> secondInteger(secondShortVector);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26496)
 
         IntegerData<13> thirdInteger = firstInteger;
         IntegerDataOperator<13> thirdIntegerDataOperator(thirdInteger);
         thirdIntegerDataOperator -= secondInteger;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         IntegerData<13> fourthInteger = secondInteger;
         IntegerDataOperator<13> fourthIntegerDataOperator(fourthInteger);
@@ -211,14 +211,14 @@ void Mathematics::IntegerDataOperatorTesting::SubtractionTest()
         fourthInteger = -fourthIntegerDataAnalysis;
         thirdIntegerDataOperator -= fourthInteger;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26496)
 
         IntegerData<13> testInteger(firstInteger);
         IntegerDataOperator<13> testIntegerDataOperator(testInteger);
         testIntegerDataOperator += secondInteger;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         ASSERT_EQUAL(thirdInteger, testInteger);
 
@@ -295,7 +295,7 @@ void Mathematics::IntegerDataOperatorTesting::MultiplicationTest()
         const IntegerData<20> firstInteger(firstShortVector);
         const IntegerData<20> secondInteger(secondShortVector);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26496)
 
         IntegerData<20> thirdInteger = firstInteger;
@@ -306,7 +306,7 @@ void Mathematics::IntegerDataOperatorTesting::MultiplicationTest()
         IntegerDataOperator<20> fourthIntegerDataOperator(fourthInteger);
         fourthIntegerDataOperator *= firstInteger;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         ASSERT_EQUAL(thirdInteger, fourthInteger);
 
@@ -438,7 +438,7 @@ void Mathematics::IntegerDataOperatorTesting::DivisionModuloTest()
         const IntegerData<20> firstInteger(firstShortVector);
         const IntegerData<20> secondInteger(secondShortVector);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26496)
 
         IntegerData<20> thirdInteger = firstInteger;
@@ -449,7 +449,7 @@ void Mathematics::IntegerDataOperatorTesting::DivisionModuloTest()
         IntegerDataOperator<20> fourthIntegerDataOperator(fourthInteger);
         fourthIntegerDataOperator %= secondInteger;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
         IntegerMultiplication<20> multiplication(thirdInteger, secondInteger);
 

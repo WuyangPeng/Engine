@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/30 12:59)
+///	版本：0.9.1.4 (2023/08/30 18:09)
 
 #ifndef SYSTEM_THREADING_EVENT_FLAGS_H
 #define SYSTEM_THREADING_EVENT_FLAGS_H
@@ -28,11 +28,11 @@ namespace System
         // 初始无信号，自动复位
         Default = 0x00000000,
         // 初始有信号，自动复位
-        InitalSet = CREATE_EVENT_INITIAL_SET,
+        InitialSet = CREATE_EVENT_INITIAL_SET,
         // 初始无信号，手动复位
         ManualReset = CREATE_EVENT_MANUAL_RESET,
         // 初始有信号，手动复位
-        All = InitalSet | ManualReset,
+        All = InitialSet | ManualReset,
     };
 
 #else  // !SYSTEM_PLATFORM_WIN32
@@ -47,9 +47,9 @@ namespace System
     enum class CreateEventType
     {
         Default = 0x00000000,
-        InitalSet = 0x00000002,
+        InitialSet = 0x00000002,
         ManualReset = 0x00000001,
-        All = InitalSet | ManualReset,
+        All = InitialSet | ManualReset,
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32

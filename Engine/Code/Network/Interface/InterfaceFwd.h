@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/08 17:06)
+///	版本：0.9.1.4 (2023/09/15 11:26)
 
 #ifndef NETWORK_NETWORK_INTERFACE_FWD_H
 #define NETWORK_NETWORK_INTERFACE_FWD_H
@@ -23,13 +23,7 @@ namespace Network
     class SockStream;
     class HandleSet;
     class HandleSetIterator;
-    class SendSocket;
-    class Client;
-    class Server;
-    class SendSocketManager;
     class SocketData;
-
-    CORE_TOOLS_SHARED_PTR_DECLARE(SendSocketManager);
 
     enum class StreamReceive;
     enum class SocketType;

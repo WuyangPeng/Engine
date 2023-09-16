@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/23 0:13)
+///	版本：0.9.1.4 (2023/08/31 14:48)
 
 #ifndef SYSTEM_WINDOWS_TESTING_OPENGL_SUITE_OPENGL_WGL_SWAP_INTERVAL_TESTING_H
 #define SYSTEM_WINDOWS_TESTING_OPENGL_SUITE_OPENGL_WGL_SWAP_INTERVAL_TESTING_H
@@ -21,17 +21,17 @@ namespace System
         using ParentType = OpenGLWglPrototypesTestingBase;
 
     public:
-        explicit OpenGLWglSwapIntervalTesting(const OStreamShared& stream, WindowsHWnd hwnd);
+        OpenGLWglSwapIntervalTesting(const OStreamShared& stream, WindowsHWnd hWnd);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void OpenGLWglSwapIntervalTest();
 
-        void GetContextTest(WindowsHDC windowsDC);
+        void GetContextTest(WindowsHdc windowsDc);
         void DoOpenGLWglSwapIntervalTest();
     };
 }

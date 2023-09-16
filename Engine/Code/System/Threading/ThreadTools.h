@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/30 13:19)
+///	版本：0.9.1.4 (2023/08/30 18:21)
 
 #ifndef SYSTEM_THREADING_THREAD_TOOLS_H
 #define SYSTEM_THREADING_THREAD_TOOLS_H
@@ -13,7 +13,6 @@
 #include "System/SystemDll.h"
 
 #include "Fwd/ThreadingFlagsFwd.h"
-#include "Using/ThreadToolsUsing.h"
 #include "Using/ThreadUsing.h"
 #include "System/FileManager/Using/FileUsing.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
@@ -24,10 +23,10 @@ namespace System
     MAYBE_NULLPTR ThreadHandle SYSTEM_DEFAULT_DECLARE OpenSystemThread(ThreadStandardAccess standardDesiredAccess,
                                                                        ThreadSpecificAccess specificDesiredAccess,
                                                                        bool inheritHandle,
-                                                                       WindowsDWord threadID) noexcept;
+                                                                       WindowsDWord threadId) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetThreadExitCode(ThreadHandle thread, WindowsDWordPtr exitCode) noexcept;
-    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE GetSystemThreadID(ThreadHandle thread) noexcept;
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE GetSystemThreadId(ThreadHandle thread) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemThreadPriorityBoost(ThreadHandle thread, bool disablePriorityBoost) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemThreadPriorityBoost(ThreadHandle thread, bool* disablePriorityBoost) noexcept;

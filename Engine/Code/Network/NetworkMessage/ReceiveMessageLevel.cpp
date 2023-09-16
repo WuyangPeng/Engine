@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 10:57)
+///	版本：0.9.1.4 (2023/09/04 16:55)
 
 #include "Network/NetworkExport.h"
 
 #include "ReceiveMessageLevel.h"
 #include "Detail/ReceiveMessageLevelImpl.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
@@ -34,8 +33,33 @@ Network::ReceiveMessageLevel::ReceiveMessageLevel(CoreTools::DisableNotThrow dis
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ReceiveMessageLevel)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, ReceiveMessageLevel, GetTopLevelSize, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, ReceiveMessageLevel, operator[], int, Network::ConstMessageInterfaceSharedPtr)
+int Network::ReceiveMessageLevel::GetTopLevelSize() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetTopLevelSize();
+}
+
+Network::ConstMessageInterfaceSharedPtr Network::ReceiveMessageLevel::operator[](int index) const
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return (*impl)[index];
+}
+
+Network::ReceiveMessageLevel::MessageContainerConstIter Network::ReceiveMessageLevel::begin() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->begin();
+}
+
+Network::ReceiveMessageLevel::MessageContainerConstIter Network::ReceiveMessageLevel::end() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->end();
+}
 
 void Network::ReceiveMessageLevel::Insert(const MessageInterfaceSharedPtr& message)
 {
@@ -43,6 +67,3 @@ void Network::ReceiveMessageLevel::Insert(const MessageInterfaceSharedPtr& messa
 
     return impl->Insert(message);
 }
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ReceiveMessageLevel, begin, Network::ReceiveMessageLevel::MessageContainerConstIter)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ReceiveMessageLevel, end, Network::ReceiveMessageLevel::MessageContainerConstIter)

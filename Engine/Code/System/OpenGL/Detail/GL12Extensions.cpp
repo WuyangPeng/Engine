@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/12 18:54)
+///	版本：0.9.1.4 (2023/08/29 23:35)
 
 #include "System/SystemExport.h"
 
 #include "GL12Extensions.h"
-#include "GLUtility.h"
 #include "System/Helper/Detail/OpenGL/GLPluginMacro.h"
 #include "System/Helper/Detail/OpenGL/GLUtilityMacro.h"
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
@@ -34,7 +33,7 @@ System::ExistsOpenGLExtensions System::IsExistsOpenGL12() noexcept
 
 void System::InitOpenGL12() noexcept
 {
-    if (System::OpenGLSystemVersion::Version12 <= GetOpenGLVersion())
+    if (OpenGLSystemVersion::Version12 <= GetOpenGLVersion())
     {
         existsOpenGL12 = ExistsOpenGLExtensions::Exists;
 

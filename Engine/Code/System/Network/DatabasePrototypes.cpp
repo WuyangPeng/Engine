@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.0 (2023/01/07 13:46)
+///	版本：0.9.1.4 (2023/08/29 17:46)
 
 #include "System/SystemExport.h"
 
@@ -14,17 +14,17 @@
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning.h"
 
-System::WinSockHostent* System::GetHostByAddress(const InternetAddress* address, ProtocolFamilies type) noexcept
+System::WinSockHostEnt* System::GetHostByAddress(const InternetAddress* address, ProtocolFamilies type) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(4996)
     #include SYSTEM_WARNING_DISABLE(26490)
 
     return ::gethostbyaddr(reinterpret_cast<const char*>(address), sizeof(InternetAddress), EnumCastUnderlying(type));
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -35,16 +35,16 @@ System::WinSockHostent* System::GetHostByAddress(const InternetAddress* address,
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WinSockHostent* System::GetHostByName(const char* name) noexcept
+System::WinSockHostEnt* System::GetHostByName(const char* name) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(4996)
 
     return ::gethostbyname(name);
 
-    #include STSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -73,7 +73,7 @@ bool System::GetHostName(char* name, int nameLength) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WinSockServent* System::GetServentByPort(int port, const char* proto) noexcept
+System::WinSockServEnt* System::GetServerByPort(int port, const char* proto) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -88,7 +88,7 @@ System::WinSockServent* System::GetServentByPort(int port, const char* proto) no
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WinSockServent* System::GetServentByName(const char* name, const char* proto) noexcept
+System::WinSockServEnt* System::GetServerByName(const char* name, const char* proto) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -103,7 +103,7 @@ System::WinSockServent* System::GetServentByName(const char* name, const char* p
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WinSockProtoent* System::GetProtoentByNumber(int proto) noexcept
+System::WinSockProtoEnt* System::GetProtoByNumber(int proto) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -118,7 +118,7 @@ System::WinSockProtoent* System::GetProtoentByNumber(int proto) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WinSockProtoent* System::GetProtoentByName(const char* name) noexcept
+System::WinSockProtoEnt* System::GetProtoByName(const char* name) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 

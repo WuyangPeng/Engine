@@ -44,23 +44,23 @@ void CoreTools::Array4<T>::SetPointers()
         {
             const auto indirect1Index = bound1 * (bound2Index + indirect2Index);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
             indirect3.at(bound3Index)[bound2Index] = &indirect1.at(indirect1Index);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
             for (auto bound1Index = 0; bound1Index < bound1; ++bound1Index)
             {
                 const auto objectsIndex = bound0 * (bound1Index + indirect1Index);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
                 indirect3.at(bound3Index)[bound2Index][bound1Index] = &objects.at(objectsIndex);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
             }
         }
     }

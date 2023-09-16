@@ -38,12 +38,12 @@ void CoreTools::Array3<T>::SetPointers()
         {
             const auto objectsIndex = bound0 * (bound1Index + indirect1Index);
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
             indirect2.at(bound2Index)[bound1Index] = &objects.at(objectsIndex);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
         }
     }
 }

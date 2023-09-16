@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/22 17:13)
+///	版本：0.9.1.4 (2023/08/31 09:24)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_USING_H
 #define SYSTEM_WINDOWS_WINDOWS_USING_H
 
-#include "WindowsPictorialUsing.h"
 #include "System/Helper/Platform.h"
 #include "System/Helper/UnicodeUsing.h"
 
@@ -90,7 +89,7 @@ namespace System
     using WindowsHLocal = HLOCAL;
     using WindowsLResult = LRESULT;
     using WindowsProcess = WNDPROC;
-    using WindowsHDC = HDC;
+    using WindowsHdc = HDC;
     using WindowsPaintStruct = PAINTSTRUCT;
     using WindowsAtom = ATOM;
     using WindowsClassEx = WNDCLASSEX;
@@ -269,17 +268,17 @@ namespace System
 
     using WindowsHLocal = void*;
     using WindowsLResult = int;
-    using WindowsProcess = WindowsLResult (*)(WindowsHWnd hwnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam);
+    using WindowsProcess = WindowsLResult (*)(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam);
 
     struct WindowsHDCDeclare
     {
         int unused;
     };
-    using WindowsHDC = WindowsHDCDeclare*;
+    using WindowsHdc = WindowsHDCDeclare*;
 
     struct WindowsPaintStruct
     {
-        WindowsHDC hdc;
+        WindowsHdc hdc;
         int fErase;
         WindowsRect rcPaint;
         int fRestore;

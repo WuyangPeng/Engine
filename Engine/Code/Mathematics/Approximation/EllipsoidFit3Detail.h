@@ -44,7 +44,7 @@ void Mathematics::EllipsoidFit3<Real>::Fit3()
                   extent0 * Math::FAbs(rotate.GetValue<1, 0>()) + extent1 * Math::FAbs(rotate.GetValue<1, 1>()) + extent2 * Math::FAbs(rotate.GetValue<1, 2>()),
                   extent0 * Math::FAbs(rotate.GetValue<2, 0>()) + extent1 * Math::FAbs(rotate.GetValue<2, 1>()) + extent2 * Math::FAbs(rotate.GetValue<2, 2>()) };
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     Angle begin{ Math::GetRational(1, 2) * extent0,
@@ -77,7 +77,7 @@ void Mathematics::EllipsoidFit3<Real>::Fit3()
                    angle[1],
                    angle[2] };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     const MinimizeN<Real, ClassType> minimizer{ 9, Energy, 8, 8, 32, this };
     const auto data = minimizer.GetMinimum(begin, end, initial);
@@ -88,14 +88,14 @@ void Mathematics::EllipsoidFit3<Real>::Fit3()
     extent2 = data.GetMinLocation(2);
     center.SetCoordinate(data.GetMinLocation(3), data.GetMinLocation(4), data.GetMinLocation(5));
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     angle[0] = data.GetMinLocation(6);
     angle[1] = data.GetMinLocation(7);
     angle[2] = data.GetMinLocation(8);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     rotate = AnglesToMatrix(angle);
 }
@@ -130,7 +130,7 @@ Real Mathematics::EllipsoidFit3<Real>::Energy(const Angle& input, const Ellipsoi
 
     const auto& self = *userData;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     // 构建旋转矩阵
@@ -169,7 +169,7 @@ Real Mathematics::EllipsoidFit3<Real>::Energy(const Angle& input, const Ellipsoi
         energy += distance.GetDistance() * maxValue;
     }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     return energy;
 }
@@ -183,7 +183,7 @@ typename Mathematics::EllipsoidFit3<Real>::Angle Mathematics::EllipsoidFit3<Real
     const auto extract = rotate.ExtractAngleAxis();
     const auto axis = extract.GetAxis();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     Angle angle(3);
@@ -208,7 +208,7 @@ typename Mathematics::EllipsoidFit3<Real>::Angle Mathematics::EllipsoidFit3<Real
         angle[1] = Math::GetPI();
     }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     return angle;
 }
@@ -219,7 +219,7 @@ Mathematics::Matrix3<Real> Mathematics::EllipsoidFit3<Real>::AnglesToMatrix(cons
     // 旋转轴 = (cos(a0)sin(a1),sin(a0)sin(a1),cos(a1))
     // a0 在  [-pi,pi], a1 在 [0,pi], a2 在 [0,pi]
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     const auto cs0 = Math::Cos(angle[0]);
@@ -231,7 +231,7 @@ Mathematics::Matrix3<Real> Mathematics::EllipsoidFit3<Real>::AnglesToMatrix(cons
 
     return Matrix3{ axis, angle[2] };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 #ifdef OPEN_CLASS_INVARIANT

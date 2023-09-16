@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/30 0:14)
+///	版本：0.9.1.4 (2023/08/31 14:50)
 
 #ifndef SYSTEM_WINDOWS_TESTING_SYSTEM_OUTPUT_SUITE_MESSAGE_BOX_SELECTION_USE_LANGUAGE_ID_DATA_WINDOWS_TESTING_H
 #define SYSTEM_WINDOWS_TESTING_SYSTEM_OUTPUT_SUITE_MESSAGE_BOX_SELECTION_USE_LANGUAGE_ID_DATA_WINDOWS_TESTING_H
@@ -19,19 +19,19 @@
 
 namespace System
 {
-    class MessageBoxSelectionUseLanguageIDDataWindowsTesting final : public CoreTools::UnitTest
+    class MessageBoxSelectionUseLanguageIdDataWindowsTesting final : public CoreTools::UnitTest
     {
     public:
-        using ClassType = MessageBoxSelectionUseLanguageIDDataWindowsTesting;
+        using ClassType = MessageBoxSelectionUseLanguageIdDataWindowsTesting;
         using ParentType = UnitTest;
 
     public:
-        explicit MessageBoxSelectionUseLanguageIDDataWindowsTesting(const OStreamShared& stream, WindowsHWnd hwnd);
+        MessageBoxSelectionUseLanguageIdDataWindowsTesting(const OStreamShared& stream, WindowsHWnd hWnd);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         NODISCARD bool RandomShuffleFlags();
@@ -44,7 +44,7 @@ namespace System
         using SubLanguageContainer = std::vector<SubLanguage>;
 
     private:
-        WindowsHWnd hwnd;
+        WindowsHWnd hWnd;
         PrimaryLanguageContainer primaryLanguageFlags;
         SubLanguageContainer subLanguageFlags;
         size_t maxSize;

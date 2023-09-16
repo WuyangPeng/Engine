@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/12 15:04)
+///	版本：0.9.1.4 (2023/09/16 09:49)
 
 #include "MessageTargetTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
@@ -22,9 +21,9 @@ const std::string Network::MessageTargetTesting::stringValue{ "StringValue" };
 
 Network::MessageTargetTesting::MessageTargetTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      boolBuffer1{ true, false, true, false, true, false, false, false, true, true },
-      boolBuffer2{ false, true, false, true, false, true, false, false, true, true },
-      parserStrategyBuffer1{ ParserStrategy::LittleEndian,
+      boolBuffer0{ true, false, true, false, true, false, false, false, true, true },
+      boolBuffer1{ false, true, false, true, false, true, false, false, true, true },
+      parserStrategyBuffer0{ ParserStrategy::LittleEndian,
                              ParserStrategy::BigEndian,
                              ParserStrategy::LittleEndian,
                              ParserStrategy::BigEndian,
@@ -35,7 +34,7 @@ Network::MessageTargetTesting::MessageTargetTesting(const OStreamShared& stream)
                              ParserStrategy::LittleEndian,
                              ParserStrategy::BigEndian,
                              ParserStrategy::LittleEndian },
-      parserStrategyBuffer2{ ParserStrategy::BigEndian,
+      parserStrategyBuffer1{ ParserStrategy::BigEndian,
                              ParserStrategy::LittleEndian,
                              ParserStrategy::BigEndian,
                              ParserStrategy::LittleEndian,
@@ -46,10 +45,10 @@ Network::MessageTargetTesting::MessageTargetTesting(const OStreamShared& stream)
                              ParserStrategy::LittleEndian,
                              ParserStrategy::LittleEndian,
                              ParserStrategy::BigEndian },
-      int16Buffer1{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 },
-      int16Buffer2{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
-      stringBuffer1{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" },
-      stringBuffer2{ "x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8", "x9", "x10", "x11", "x12", "x13" },
+      int16Buffer0{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 },
+      int16Buffer1{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
+      stringBuffer0{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" },
+      stringBuffer1{ "x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8", "x9", "x10", "x11", "x12", "x13" },
       int32Vector{ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 },
       stringVector{ "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16" },
       bytesWrite{ 0 }
@@ -108,14 +107,14 @@ void Network::MessageTargetTesting::MessageTargetWriteBool(TestingType& messageT
     bytesWrite += CoreTools::GetStreamSize(boolValue);
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
-    messageTarget.WriteBoolWithNumber(boolArraySize, boolBuffer1.data());
+    messageTarget.WriteBoolWithNumber(boolArraySize, boolBuffer0.data());
 
-    bytesWrite += CoreTools::GetStreamSize(boolArraySize) + CoreTools::GetStreamSize(boolBuffer1.at(0)) * boolArraySize;
+    bytesWrite += CoreTools::GetStreamSize(boolArraySize) + CoreTools::GetStreamSize(boolBuffer0.at(0)) * boolArraySize;
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
-    messageTarget.WriteBoolWithoutNumber(boolArraySize, boolBuffer2.data());
+    messageTarget.WriteBoolWithoutNumber(boolArraySize, boolBuffer1.data());
 
-    bytesWrite += CoreTools::GetStreamSize(boolBuffer2.at(0)) * boolArraySize;
+    bytesWrite += CoreTools::GetStreamSize(boolBuffer1.at(0)) * boolArraySize;
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 }
 
@@ -126,14 +125,14 @@ void Network::MessageTargetTesting::MessageTargetWriteEnum(TestingType& messageT
     bytesWrite += CoreTools::GetStreamSize(parserStrategy);
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
-    messageTarget.WriteEnumWithNumber(enumArraySize, parserStrategyBuffer1.data());
+    messageTarget.WriteEnumWithNumber(enumArraySize, parserStrategyBuffer0.data());
 
-    bytesWrite += CoreTools::GetStreamSize(enumArraySize) + CoreTools::GetStreamSize(parserStrategyBuffer1.at(0)) * enumArraySize;
+    bytesWrite += CoreTools::GetStreamSize(enumArraySize) + CoreTools::GetStreamSize(parserStrategyBuffer0.at(0)) * enumArraySize;
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
-    messageTarget.WriteEnumWithoutNumber(enumArraySize, parserStrategyBuffer2.data());
+    messageTarget.WriteEnumWithoutNumber(enumArraySize, parserStrategyBuffer1.data());
 
-    bytesWrite += CoreTools::GetStreamSize(parserStrategyBuffer2.at(0)) * enumArraySize;
+    bytesWrite += CoreTools::GetStreamSize(parserStrategyBuffer1.at(0)) * enumArraySize;
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 }
 
@@ -144,14 +143,14 @@ void Network::MessageTargetTesting::MessageTargetWriteInt16(TestingType& message
     bytesWrite += CoreTools::GetStreamSize(int16Value);
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
-    messageTarget.WriteWithNumber(int16ArraySize, int16Buffer1.data());
+    messageTarget.WriteWithNumber(int16ArraySize, int16Buffer0.data());
 
-    bytesWrite += CoreTools::GetStreamSize(int16ArraySize) + CoreTools::GetStreamSize(int16Buffer1.at(0)) * int16ArraySize;
+    bytesWrite += CoreTools::GetStreamSize(int16ArraySize) + CoreTools::GetStreamSize(int16Buffer0.at(0)) * int16ArraySize;
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
-    messageTarget.WriteWithoutNumber(int16ArraySize, int16Buffer2.data());
+    messageTarget.WriteWithoutNumber(int16ArraySize, int16Buffer1.data());
 
-    bytesWrite += CoreTools::GetStreamSize(int16Buffer2.at(0)) * int16ArraySize;
+    bytesWrite += CoreTools::GetStreamSize(int16Buffer1.at(0)) * int16ArraySize;
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 }
 
@@ -162,19 +161,19 @@ void Network::MessageTargetTesting::MessageTargetWriteString(TestingType& messag
     bytesWrite += CoreTools::GetStreamSize(stringValue);
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
-    messageTarget.WriteStringWithNumber(stringArraySize, stringBuffer1.data());
+    messageTarget.WriteStringWithNumber(stringArraySize, stringBuffer0.data());
 
     bytesWrite += CoreTools::GetStreamSize(stringArraySize);
 
-    for (const auto& value : stringBuffer1)
+    for (const auto& value : stringBuffer0)
     {
         bytesWrite += CoreTools::GetStreamSize(value);
     }
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
-    messageTarget.WriteStringWithoutNumber(stringArraySize, stringBuffer2.data());
+    messageTarget.WriteStringWithoutNumber(stringArraySize, stringBuffer1.data());
 
-    for (const auto& value : stringBuffer2)
+    for (const auto& value : stringBuffer1)
     {
         bytesWrite += CoreTools::GetStreamSize(value);
     }
@@ -211,10 +210,10 @@ void Network::MessageTargetTesting::VerificationBool(MessageSource& messageSourc
 
     std::array<bool, boolArraySize> resultBoolBuffer{};
     messageSource.ReadBool(boolArraySize, resultBoolBuffer.data());
-    ASSERT_EQUAL(resultBoolBuffer, boolBuffer1);
+    ASSERT_EQUAL(resultBoolBuffer, boolBuffer0);
 
     messageSource.ReadBool(boolArraySize, resultBoolBuffer.data());
-    ASSERT_EQUAL(resultBoolBuffer, boolBuffer2);
+    ASSERT_EQUAL(resultBoolBuffer, boolBuffer1);
 }
 
 void Network::MessageTargetTesting::VerificationEnum(ParserStrategy parserStrategy, MessageSource& messageSource)
@@ -230,10 +229,10 @@ void Network::MessageTargetTesting::VerificationEnum(ParserStrategy parserStrate
 
     std::array<ParserStrategy, enumArraySize> resultParserStrategyBuffer{};
     messageSource.ReadEnum(enumArraySize, resultParserStrategyBuffer.data());
-    ASSERT_EQUAL(resultParserStrategyBuffer, parserStrategyBuffer1);
+    ASSERT_EQUAL(resultParserStrategyBuffer, parserStrategyBuffer0);
 
     messageSource.ReadEnum(enumArraySize, resultParserStrategyBuffer.data());
-    ASSERT_EQUAL(resultParserStrategyBuffer, parserStrategyBuffer2);
+    ASSERT_EQUAL(resultParserStrategyBuffer, parserStrategyBuffer1);
 }
 
 void Network::MessageTargetTesting::VerificationInt16(MessageSource& messageSource)
@@ -249,10 +248,10 @@ void Network::MessageTargetTesting::VerificationInt16(MessageSource& messageSour
 
     std::array<int16_t, int16ArraySize> resultInt16Buffer{};
     messageSource.Read(int16ArraySize, resultInt16Buffer.data());
-    ASSERT_EQUAL(resultInt16Buffer, int16Buffer1);
+    ASSERT_EQUAL(resultInt16Buffer, int16Buffer0);
 
     messageSource.Read(int16ArraySize, resultInt16Buffer.data());
-    ASSERT_EQUAL(resultInt16Buffer, int16Buffer2);
+    ASSERT_EQUAL(resultInt16Buffer, int16Buffer1);
 }
 
 void Network::MessageTargetTesting::VerificationString(MessageSource& messageSource)
@@ -267,10 +266,10 @@ void Network::MessageTargetTesting::VerificationString(MessageSource& messageSou
 
     std::array<std::string, stringArraySize> resultStringBuffer{};
     messageSource.ReadString(stringArraySize, resultStringBuffer.data());
-    ASSERT_EQUAL(resultStringBuffer, stringBuffer1);
+    ASSERT_EQUAL(resultStringBuffer, stringBuffer0);
 
     messageSource.ReadString(stringArraySize, resultStringBuffer.data());
-    ASSERT_EQUAL(resultStringBuffer, stringBuffer2);
+    ASSERT_EQUAL(resultStringBuffer, stringBuffer1);
 }
 
 void Network::MessageTargetTesting::VerificationVector(MessageSource& messageSource)

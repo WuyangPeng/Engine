@@ -78,13 +78,13 @@ Mathematics::Int64Vector<VectorSize> Mathematics::Int64Vector<VectorSize>::opera
     Int64Vector<VectorSize> negative{};
     for (auto i = 0; i < VectorSize; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
         negative.tuple[i] = -tuple[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     return negative;
@@ -97,13 +97,13 @@ Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>::oper
 
     for (auto i = 0; i < VectorSize; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
         tuple[i] += rhs.tuple[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     return *this;
@@ -116,13 +116,13 @@ Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>::oper
 
     for (auto i = 0; i < VectorSize; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
         tuple[i] -= rhs.tuple[i];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     return *this;
@@ -135,13 +135,13 @@ Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>::oper
 
     for (auto i = 0; i < VectorSize; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
         tuple[i] *= scalar;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     return *this;
@@ -159,13 +159,13 @@ Mathematics::Int64Vector<VectorSize>& Mathematics::Int64Vector<VectorSize>::oper
 
     for (auto i = 0; i < VectorSize; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
         tuple[i] /= scalar;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     return *this;

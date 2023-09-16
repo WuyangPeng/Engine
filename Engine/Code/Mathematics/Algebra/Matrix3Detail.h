@@ -29,12 +29,12 @@ Real Mathematics::Matrix3<Real>::GetValue() const noexcept
 
     const auto& vector = GetVector<Row>();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
 
     const auto function = GetVectorGetFunction<Column>();
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     return (vector.*function)();
 }
@@ -49,12 +49,12 @@ void Mathematics::Matrix3<Real>::SetValue(Real value) noexcept
 
     auto& vector = GetVector<Row>();
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
 
     const auto function = GetVectorSetFunction<Column>();
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     (vector.*function)(value);
 }

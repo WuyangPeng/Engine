@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/28 16:56)
+///	版本：0.9.1.4 (2023/09/01 14:08)
 
 #include "IsSystemTokenElevatedTesting.h"
 #include "System/Security/SecurityBase.h"
@@ -31,7 +31,7 @@ void System::IsSystemTokenElevatedTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(IsSystemTokenElevatedTest);
 }
 
-void System::IsSystemTokenElevatedTesting::IsSystemTokenElevatedTest()  
+void System::IsSystemTokenElevatedTesting::IsSystemTokenElevatedTest()
 {
     ASSERT_EQUAL(IsSystemTokenElevated(), IsSystemTokenElevated());
 }

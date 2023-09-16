@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/19 20:53)
+///	版本：0.9.1.4 (2023/08/29 17:01)
 
 #include "System/SystemExport.h"
 
@@ -26,7 +26,7 @@ System::WindowsHandle System::CreateSystemFileMapping(WindowsHandle file,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    auto handle = ::CreateFileMapping(file, nullptr, EnumCastUnderlying(protect) | EnumCastUnderlying(otherProtect), maximumSizeHigh, maximumSizeLow, name);
+    const auto handle = ::CreateFileMapping(file, nullptr, EnumCastUnderlying(protect) | EnumCastUnderlying(otherProtect), maximumSizeHigh, maximumSizeLow, name);
     if (isExists != nullptr)
     {
         const auto errorFlag = GetPlatformLastError();
@@ -117,7 +117,7 @@ bool System::FlushSystemViewOfFile(WindowsVoidPtr baseAddress, WindowsSize numbe
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::UnmapSystemViewOfFile(WindowsVoidPtr baseAddress) noexcept
+bool System::UnMapSystemViewOfFile(WindowsVoidPtr baseAddress) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 

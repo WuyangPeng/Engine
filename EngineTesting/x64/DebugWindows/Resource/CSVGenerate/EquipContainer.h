@@ -38,6 +38,8 @@ namespace CSVConfigure
         NODISCARD Container GetEquip(int key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstEquipBaseSharedPtr GetFirstEquip(Function function) const;
 

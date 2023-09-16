@@ -142,7 +142,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface::CreateFace(int numRows,
     return std::make_shared<TrianglesMesh>(vformat, vbuffer, ibuffer);
 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26418)
 
 void Rendering::BoxSurface::UpdateFace(int numRows, int numCols, MAYBE_UNUSED const VertexFormatSharedPtr& vformat, MAYBE_UNUSED const VertexBufferSharedPtr& vbuffer, bool ccw, float faceValue, const std::array<int, 3>& permute)
@@ -164,7 +164,7 @@ void Rendering::BoxSurface::UpdateFace(int numRows, int numCols, MAYBE_UNUSED co
     }
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 void Rendering::BoxSurface::UpdateSurface()
 {

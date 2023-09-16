@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.1 (2023/01/31 19:03)
+///	版本：0.9.1.4 (2023/09/01 15:00)
 
 #include "EventTestingBase.h"
 #include "System/Threading/Event.h"
@@ -27,5 +27,3 @@ void System::EventTestingBase::CloseSystemEventTest(WindowsHandle eventHandle)
 
     ASSERT_TRUE(CloseSystemEvent(eventHandle));
 }
-
-

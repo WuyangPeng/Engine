@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.8 (2023/05/10 09:36)
+///	版本：0.9.1.4 (2023/09/15 17:35)
 
 #ifndef NETWORK_MESSAGE_ORIENTED_MIDDLEWARE_PRODUCER_FACTORY_H
 #define NETWORK_MESSAGE_ORIENTED_MIDDLEWARE_PRODUCER_FACTORY_H
@@ -13,7 +13,6 @@
 #include "Network/NetworkDll.h"
 
 #include "Network/Configuration/ConfigurationFwd.h"
-#include "Network/MessageOrientedMiddleware/MessageOrientedMiddlewareInternalFwd.h"
 
 #include <memory>
 
@@ -23,6 +22,7 @@ namespace Network
     {
     public:
         using ClassType = ProducerFactory;
+
         using ProducerSharedPtr = std::shared_ptr<ProducerImpl>;
 
     public:

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/13 11:00)
+///	版本：0.9.1.4 (2023/08/28 15:55)
 
 #ifndef SYSTEM_CHARACTER_STRING_STRING_CONVERSION_H
 #define SYSTEM_CHARACTER_STRING_STRING_CONVERSION_H
@@ -14,7 +14,6 @@
 
 #include "Fwd/CharacterStringFlagsFwd.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "System/Windows/Using/WindowsUsing.h"
 
 // 字符串转换
 namespace System
@@ -43,11 +42,11 @@ namespace System
                                                                      char* multiByte,
                                                                      int multiByteLength) noexcept;
 
-    NODISCARD int SYSTEM_DEFAULT_DECLARE UTF8ConversionWideChar(const char* multiByte,
+    NODISCARD int SYSTEM_DEFAULT_DECLARE Utf8ConversionWideChar(const char* multiByte,
                                                                 int multiByteLength,
                                                                 wchar_t* wideChar,
                                                                 int wideCharLength) noexcept;
-    NODISCARD int SYSTEM_DEFAULT_DECLARE WideCharConversionUTF8(const wchar_t* wideChar,
+    NODISCARD int SYSTEM_DEFAULT_DECLARE WideCharConversionUtf8(const wchar_t* wideChar,
                                                                 int wideCharLength,
                                                                 char* multiByte,
                                                                 int multiByteLength) noexcept;

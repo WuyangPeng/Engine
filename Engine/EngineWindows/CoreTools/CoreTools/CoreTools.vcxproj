@@ -389,16 +389,12 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SpecifyCheckSum.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\DataTypes.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\DataTypesFwd.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\Detail\MinHeapRecordIndexImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeap.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapNode.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapNodeDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecord.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordDetail.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordIndex.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordStored.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordStoredDetail.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordStoredManager.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordStoredManagerDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\Table.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\TableDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\ThreadSafeMap.h" />
@@ -1197,8 +1193,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\IntelCheckSum.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SevenModElevenCheckSum.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SpecifyCheckSum.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\DataTypes\Detail\MinHeapRecordIndexImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordIndex.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\DllMain.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\StringReplacingImpl.cpp" />

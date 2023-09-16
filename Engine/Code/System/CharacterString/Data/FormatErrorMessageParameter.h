@@ -1,21 +1,20 @@
-///	Copyright (c) 2010-2022
+ ///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/26 0:57)
+///	版本：0.9.1.4 (2023/08/28 13:33)
 
 #ifndef SYSTEM_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_PARAMETER_H
 #define SYSTEM_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_PARAMETER_H
 
 #include "System/SystemDll.h"
 
-#include "System/CharacterString/Flags/FormatMessageFlags.h"
-#include "System/CharacterString/Fwd/CharacterStringFlagsFwd.h"
-#include "System/SystemOutput/Data/LanguageIDData.h"
-#include "System/Windows/Flags/PlatformErrorFlags.h"
+#include "System/CharacterString/Flags/FormatMessageFlags.h" 
+#include "System/SystemOutput/Data/LanguageIdData.h"
+ #include "System/Windows/Flags/PlatformErrorFlags.h"
 
 namespace System
 {
@@ -30,9 +29,9 @@ namespace System
         {
         }
 
-        NODISCARD constexpr LanguageIDData GetLanguageIDData() const noexcept
+        NODISCARD constexpr LanguageIdData GetLanguageIdData() const noexcept
         {
-            return LanguageIDData{};
+            return LanguageIdData{};
         }
 
         NODISCARD constexpr FormatMessageOption GetOption() const noexcept

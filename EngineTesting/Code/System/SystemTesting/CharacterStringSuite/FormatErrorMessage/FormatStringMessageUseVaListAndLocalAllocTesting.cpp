@@ -1,19 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/29 22:46)
+///	版本：0.9.1.4 (2023/08/31 16:11)
 
 #include "FormatStringMessageUseVaListAndLocalAllocTesting.h"
 #include "System/CharacterString/FormatErrorMessage.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using namespace std::literals;
 
 System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessageUseVaListAndLocalAllocTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -41,7 +39,7 @@ void System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessa
 
 void System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessageUseIndefiniteParameterTest(const TChar* message, ...)
 {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26492)
@@ -49,7 +47,7 @@ void System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessa
     va_list vaArguments{};
     va_start(vaArguments, message);
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     WindowsHLocal resultMessage{ nullptr };
 
@@ -64,9 +62,9 @@ void System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessa
 {
     const auto size = FormatStringMessage(message, resultMessage, &vaArguments);
     ASSERT_LESS(0u, size);
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(resultMessage, "FormatStringMessage 失败。"s);
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(resultMessage, "FormatStringMessage 失败。");
 
-    String testMessage{ static_cast<TChar*>(resultMessage) };
+    const String testMessage{ static_cast<TChar*>(resultMessage) };
 
     ASSERT_EQUAL(testMessage.size(), size);
     ASSERT_EQUAL(testMessage, GetMessageVaListResult());

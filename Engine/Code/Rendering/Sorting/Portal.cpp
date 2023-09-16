@@ -98,12 +98,12 @@ bool Rendering::Portal::ReducedFrustum(const Culler& culler, std::array<float, 6
                     firstVertex = vertexCam;
                 }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
                 ndd = frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)] / vertexCam[0];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
                 udd = vertexCam[1] * ndd;
                 rdd = vertexCam[2] * ndd;
@@ -154,12 +154,12 @@ bool Rendering::Portal::ReducedFrustum(const Culler& culler, std::array<float, 6
                 diff = vertexCam - lastVertex;
                 t = (epsilon - lastVertex[0]) / diff[0];
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
                 ndd = frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)] * invEpsilon;
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
                 udd = (lastVertex[1] + t * diff[1]) * ndd;
                 rdd = (lastVertex[2] + t * diff[2]) * ndd;
@@ -242,7 +242,7 @@ bool Rendering::Portal::ReducedFrustum(const Culler& culler, std::array<float, 6
         }
     }
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
     if (frustum[System::EnumCastUnderlying(ViewFrustum::RightMin)] >= rmax ||
@@ -258,7 +258,7 @@ bool Rendering::Portal::ReducedFrustum(const Culler& culler, std::array<float, 6
         reducedFrustum.at(j) = frustum[j];
     }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
     if (reducedFrustum.at(System::EnumCastUnderlying(ViewFrustum::RightMin)) < rmin)
     {
@@ -312,12 +312,12 @@ void Rendering::Portal::GetVisibleSet(Culler& culler, bool noCull)
 
     for (auto j = 0; j < 6; ++j)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         saveFrustum.at(j) = frustum[j];
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     std::array<float, 6> reducedFrustum{};

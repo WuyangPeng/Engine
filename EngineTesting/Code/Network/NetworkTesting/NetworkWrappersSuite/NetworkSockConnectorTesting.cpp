@@ -5,16 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.8 (2023/05/18 16:52)
+///	版本：0.9.1.4 (2023/09/16 09:18)
 
 #include "NetworkSockConnectorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Network/Helper/UserMacro.h"
 #include "Network/Interface/SockAddress.h"
 #include "Network/Interface/SockConnector.h"
-#include "Network/Interface/SockStream.h"
 #include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketEvent.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
 
@@ -31,11 +29,6 @@ void Network::NetworkSockConnectorTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-namespace Network
-{
-    using TestingType = SockConnector;
-}
-
 void Network::NetworkSockConnectorTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(NetworkSingletonTest<ClassType>, this, &ClassType::ConnectorTest);
@@ -44,5 +37,5 @@ void Network::NetworkSockConnectorTesting::MainTest()
 void Network::NetworkSockConnectorTesting::ConnectorTest()
 {
     const auto clientConfigurationStrategy = GetNetworkServerConfigurationStrategy();
-    TestingType sockConnector{ clientConfigurationStrategy };
+    SockConnector sockConnector{ clientConfigurationStrategy };
 }

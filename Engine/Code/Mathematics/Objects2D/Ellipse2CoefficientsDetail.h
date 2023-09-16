@@ -83,7 +83,7 @@ typename Mathematics::Ellipse2Coefficients<Real>::CoefficientsType Mathematics::
     auto invMaxValue = Math::GetValue(1) / maxValue;
     for (auto i = 0; i < coefficientsSize; ++i)
     {
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
         if (i != maxIndex)
@@ -95,7 +95,7 @@ typename Mathematics::Ellipse2Coefficients<Real>::CoefficientsType Mathematics::
             result[i] = Math::GetValue(1);
         }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
     }
 
     return result;

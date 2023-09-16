@@ -116,12 +116,12 @@ std::string CoreTools::SimpleZip::ZipEntryImpl::GetFileName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26485)
 
     return std::string{ entryInfo.m_filename };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 void CoreTools::SimpleZip::ZipEntryImpl::SetFileName(const std::string& name)
@@ -185,12 +185,12 @@ std::string CoreTools::SimpleZip::ZipEntryImpl::GetComment() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26485)
 
     return std::string{ entryInfo.m_comment };
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 time_t CoreTools::SimpleZip::ZipEntryImpl::GetTime() const noexcept

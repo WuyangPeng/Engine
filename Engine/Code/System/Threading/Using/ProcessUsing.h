@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/01/30 13:02)
+///	版本：0.9.1.4 (2023/08/30 18:17)
 
 #ifndef SYSTEM_THREADING_PROCESS_USING_H
 #define SYSTEM_THREADING_PROCESS_USING_H
@@ -16,16 +16,16 @@ namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    using ProcessStartupinfo = STARTUPINFO;
-    using ProcessStartupinfoPtr = LPSTARTUPINFO;
+    using ProcessStartupInfo = STARTUPINFO;
+    using ProcessStartupInfoPtr = LPSTARTUPINFO;
     using ProcessInformation = PROCESS_INFORMATION;
     using ProcessInformationPtr = LPPROCESS_INFORMATION;
-    using ProcessStartupinfoEx = STARTUPINFOEX;
-    using ProcessStartupinfoExPtr = LPSTARTUPINFOEX;
+    using ProcessStartupInfoEx = STARTUPINFOEX;
+    using ProcessStartupInfoExPtr = LPSTARTUPINFOEX;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    struct ProcessStartupinfo
+    struct ProcessStartupInfo
     {
         uint32_t cb;
         TChar* lpReserved;
@@ -46,7 +46,7 @@ namespace System
         void* hStdOutput;
         void* hStdError;
     };
-    using ProcessStartupinfoPtr = ProcessStartupinfo*;
+    using ProcessStartupInfoPtr = ProcessStartupInfo*;
 
     struct ProcessInformation
     {
@@ -57,12 +57,12 @@ namespace System
     };
     using ProcessInformationPtr = ProcessInformation*;
 
-    struct ProcessStartupinfoEx
+    struct ProcessStartupInfoEx
     {
-        ProcessStartupinfo StartupInfo;
+        ProcessStartupInfo StartupInfo;
         ProcThreadAttributeListPtr lpAttributeList;
     };
-    using ProcessStartupinfoExPtr = ProcessStartupinfoEx*;
+    using ProcessStartupInfoExPtr = ProcessStartupInfoEx*;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

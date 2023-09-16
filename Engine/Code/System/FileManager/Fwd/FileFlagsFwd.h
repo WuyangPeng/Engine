@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.5 (2022/12/11 20:27)
+///	版本：0.9.1.4 (2023/08/28 16:49)
 
 #ifndef SYSTEM_FILE_MANAGER_FILE_FLAGS_FWD_H
 #define SYSTEM_FILE_MANAGER_FILE_FLAGS_FWD_H

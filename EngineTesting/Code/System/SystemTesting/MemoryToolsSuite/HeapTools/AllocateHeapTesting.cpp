@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/03 12:10)
+///	版本：0.9.1.4 (2023/09/01 10:04)
 
 #include "AllocateHeapTesting.h"
 #include "System/MemoryTools/HeapToolsDetail.h"
@@ -104,7 +104,7 @@ void System::AllocateHeapTesting::DoAllocateDefaultHeapFailureTest(WindowsHandle
 
 void System::AllocateHeapTesting::AllocateIntegerTest()
 {
-    auto integer = AllocateProcessHeap<int>(size * 2);
+    const auto integer = AllocateProcessHeap<int>(size * 2);
     ASSERT_UNEQUAL_NULL_PTR(integer);
 
     ASSERT_TRUE(FreeProcessHeap(integer));

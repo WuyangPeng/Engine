@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/22 23:09)
+///	版本：0.9.1.4 (2023/08/26 15:19)
 
 #ifndef SYSTEM_ANDROID_ANDROID_INPUT_FLAGS_H
 #define SYSTEM_ANDROID_ANDROID_INPUT_FLAGS_H
@@ -206,16 +206,16 @@ namespace System
     {
         Unknown = AINPUT_SOURCE_UNKNOWN,
 
-        Keyborad = AINPUT_SOURCE_KEYBOARD,
-        Dpad = AINPUT_SOURCE_DPAD,
-        Gamepad = AINPUT_SOURCE_GAMEPAD,
+        Keyboard = AINPUT_SOURCE_KEYBOARD,
+        DPad = AINPUT_SOURCE_DPAD,
+        GamePad = AINPUT_SOURCE_GAMEPAD,
         Touchscreen = AINPUT_SOURCE_TOUCHSCREEN,
         Mouse = AINPUT_SOURCE_MOUSE,
         Stylus = AINPUT_SOURCE_STYLUS,
-        BluetoothStylus = AINPUT_SOURCE_BLUETOOTH_STYLUS,
+        BlueToothStylus = AINPUT_SOURCE_BLUETOOTH_STYLUS,
         Trackball = AINPUT_SOURCE_TRACKBALL,
         MouseRelative = AINPUT_SOURCE_MOUSE_RELATIVE,
-        Touchpad = AINPUT_SOURCE_TOUCHPAD,
+        TouchPad = AINPUT_SOURCE_TOUCHPAD,
         Navigation = AINPUT_SOURCE_TOUCH_NAVIGATION,
         Joystick = AINPUT_SOURCE_JOYSTICK,
         RotaryEncoder = AINPUT_SOURCE_ROTARY_ENCODER,
@@ -465,16 +465,16 @@ namespace System
     {
         Unknown = 0x00000000,
 
-        Keyborad = 0x00000100 | EnumCastUnderlying(AndroidInputSourceClass::Button),
-        Dpad = 0x00000200 | EnumCastUnderlying(AndroidInputSourceClass::Button),
-        Gamepad = 0x00000400 | EnumCastUnderlying(AndroidInputSourceClass::Button),
+        Keyboard = 0x00000100 | EnumCastUnderlying(AndroidInputSourceClass::Button),
+        DPad = 0x00000200 | EnumCastUnderlying(AndroidInputSourceClass::Button),
+        GamePad = 0x00000400 | EnumCastUnderlying(AndroidInputSourceClass::Button),
         Touchscreen = 0x00001000 | EnumCastUnderlying(AndroidInputSourceClass::Pointer),
         Mouse = 0x00002000 | EnumCastUnderlying(AndroidInputSourceClass::Pointer),
         Stylus = 0x00004000 | EnumCastUnderlying(AndroidInputSourceClass::Pointer),
-        BluetoothStylus = 0x00008000 | Stylus,
+        BlueToothStylus = 0x00008000 | Stylus,
         Trackball = 0x00010000 | EnumCastUnderlying(AndroidInputSourceClass::Navigation),
         MouseRelative = 0x00020000 | EnumCastUnderlying(AndroidInputSourceClass::Navigation),
-        Touchpad = 0x00100000 | EnumCastUnderlying(AndroidInputSourceClass::Position),
+        TouchPad = 0x00100000 | EnumCastUnderlying(AndroidInputSourceClass::Position),
         Navigation = 0x00200000 | EnumCastUnderlying(AndroidInputSourceClass::None),
         Joystick = 0x01000000 | EnumCastUnderlying(AndroidInputSourceClass::Joystick),
         RotaryEncoder = 0x00400000 | EnumCastUnderlying(AndroidInputSourceClass::None),

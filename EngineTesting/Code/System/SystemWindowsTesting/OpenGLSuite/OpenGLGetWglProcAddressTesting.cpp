@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/23 0:05)
+///	版本：0.9.1.4 (2023/08/31 14:48)
 
 #include "OpenGLGetWglProcAddressTesting.h"
 #include "System/OpenGL/OpenGLInit.h"
@@ -14,8 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::OpenGLGetWglProcAddressTesting::OpenGLGetWglProcAddressTesting(const OStreamShared& stream, WindowsHWnd hwnd)
-    : ParentType{ stream, hwnd }
+System::OpenGLGetWglProcAddressTesting::OpenGLGetWglProcAddressTesting(const OStreamShared& stream, WindowsHWnd hWnd)
+    : ParentType{ stream, hWnd }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -34,18 +34,18 @@ void System::OpenGLGetWglProcAddressTesting::MainTest()
 
 void System::OpenGLGetWglProcAddressTesting::OpenGLGetWglProcAddressTest()
 {
-    const auto windowsDC = GetWindowsDC();
+    const auto windowsDc = GetWindowsDc();
 
-    ASSERT_NOT_THROW_EXCEPTION_1(GetContextTest, windowsDC);
+    ASSERT_NOT_THROW_EXCEPTION_1(GetContextTest, windowsDc);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(ReleaseWindowsDCTest, windowsDC);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReleaseWindowsDcTest, windowsDc);
 }
 
-void System::OpenGLGetWglProcAddressTesting::GetContextTest(WindowsHDC windowsDC)
+void System::OpenGLGetWglProcAddressTesting::GetContextTest(WindowsHdc windowsDc)
 {
-    ASSERT_NOT_THROW_EXCEPTION_1(SetWindowPixelFormatTest, windowsDC);
+    ASSERT_NOT_THROW_EXCEPTION_1(SetWindowPixelFormatTest, windowsDc);
 
-    const auto openGLHglrc = GetCreateWglContext(windowsDC);
+    const auto openGLHglrc = GetCreateWglContext(windowsDc);
 
     ASSERT_NOT_THROW_EXCEPTION_0(DoOpenGLGetWglProcAddressTest);
 

@@ -59,12 +59,12 @@ CoreTools::SimpleCSV::XmlFileImpl::DocumentSharedPtr CoreTools::SimpleCSV::XmlFi
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26473)
 
     return std::const_pointer_cast<Document>(static_cast<const ClassType*>(this)->GetParentDocument());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 CoreTools::SimpleCSV::XmlFileImpl::ConstDocumentSharedPtr CoreTools::SimpleCSV::XmlFileImpl::GetParentDocument() const
@@ -98,12 +98,12 @@ CoreTools::SimpleCSV::XmlFileImpl::XmlDataSharedPtr CoreTools::SimpleCSV::XmlFil
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26473)
 
     return std::const_pointer_cast<XmlData>(static_cast<const ClassType*>(this)->GetXmlDataSharedPtr());
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 CoreTools::SimpleCSV::XmlFileImpl::ConstXmlDataSharedPtr CoreTools::SimpleCSV::XmlFileImpl::GetXmlDataSharedPtr() const
