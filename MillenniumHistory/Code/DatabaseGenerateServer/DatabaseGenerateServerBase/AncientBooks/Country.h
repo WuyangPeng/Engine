@@ -24,7 +24,7 @@ namespace AncientBooks
         using ClassType = Country;
         using ParentType = CountryBase;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit Country(const CSVRow& csvRow);
@@ -69,6 +69,7 @@ namespace AncientBooks
         NODISCARD String GetUnansweredQuestion(int index) const override;
         NODISCARD StringContainerConstIter GetUnansweredQuestionBegin() const noexcept override;
         NODISCARD StringContainerConstIter GetUnansweredQuestionEnd() const noexcept override;
+
 
     private:
         int id;  // Id

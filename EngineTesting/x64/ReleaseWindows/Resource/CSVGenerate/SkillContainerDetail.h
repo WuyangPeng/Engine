@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-CSVConfigure::SkillContainer::ConstSkillBaseSharedPtr CSVConfigure::SkillContainer::GetFirstSkill(Function function) const
+CSVConfigure::SkillContainer::ConstSkillSharedPtr CSVConfigure::SkillContainer::GetFirstSkill(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

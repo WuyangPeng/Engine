@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:04)
+///	版本：0.9.1.5 (2023/10/24 14:15)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_ROW_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_ROW_IMPL_H
@@ -26,6 +26,7 @@ namespace CoreTools
     {
     public:
         using ClassType = CSVRowImpl;
+
         using TChar = System::TChar;
         using String = System::String;
         using BoolContainer = std::deque<bool>;
@@ -42,7 +43,7 @@ namespace CoreTools
         using IntVector4Container = std::vector<IntVector4>;
 
     public:
-        CSVRowImpl(CSVHead csvHead, String rowContent); 
+        CSVRowImpl(CSVHead csvHead, String rowContent);
 
         CLASS_INVARIANT_DECLARE;
 

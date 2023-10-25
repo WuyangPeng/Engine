@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/19 10:20)
+///	版本：0.9.1.5 (2023/10/25 14:16)
 
 #include "BufferTargetTesting.h"
 #include "Detail/BoolObject.h"
@@ -15,7 +15,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
-#include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ConstObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ConstWeakObjectAssociated.h"
@@ -64,9 +63,9 @@ void CoreTools::BufferTargetTesting::WriteBoolTest()
 
     ASSERT_EQUAL(bufferTarget.GetBytesWritten(), GetStreamSize(true));
 
-    const std::array container0{ true, false, true, false, true };
-    const std::array container1{ false, false, true, false, true, true };
-    const std::array container2{ true, false, true, false, false, true, true };
+    constexpr std::array container0{ true, false, true, false, true };
+    constexpr std::array container1{ false, false, true, false, true, true };
+    constexpr std::array container2{ true, false, true, false, false, true, true };
 
     bufferTarget.WriteBoolContainerWithNumber(container0);
     bufferTarget.WriteBoolContainerWithoutNumber(container1);
@@ -108,7 +107,7 @@ void CoreTools::BufferTargetTesting::WriteStringTest()
     const std::array container0{ "test1"s, "test2"s, "test3"s, "test4"s, "test5"s };
     const std::array container1{ "test1"s, "test2"s, "test3"s, "test4"s, "test5"s, "test6"s };
     const std::array container2{ "test1"s, "test2"s, "test3"s, "test4"s, "test5"s, "test6"s, "test7"s };
-    const std::array container3{ "test1", "test2", "test3", "test4", "test5", "test6", "test7" };
+    constexpr std::array container3{ "test1", "test2", "test3", "test4", "test5", "test6", "test7" };
 
     bufferTarget.WriteStringContainerWithNumber(container0);
     bufferTarget.WriteStringContainerWithoutNumber(container1);
@@ -156,9 +155,9 @@ void CoreTools::BufferTargetTesting::WriteIntTest()
 
     bufferTarget.Write(51);
 
-    const std::array container0{ 1, 2, 3, 4, 5 };
-    const std::array container1{ 6, 7, 8, 9, 1, 2 };
-    const std::array container2{ 3, 4, 5, 6, 7, 8, 9 };
+    constexpr std::array container0{ 1, 2, 3, 4, 5 };
+    constexpr std::array container1{ 6, 7, 8, 9, 1, 2 };
+    constexpr std::array container2{ 3, 4, 5, 6, 7, 8, 9 };
 
     bufferTarget.WriteContainerWithNumber(container0);
     bufferTarget.WriteContainerWithoutNumber(container1);
@@ -199,9 +198,9 @@ void CoreTools::BufferTargetTesting::WriteEnumTest()
 
     bufferTarget.WriteEnum(BufferTargetTestingEnum::Fifteen);
 
-    const std::array container0{ BufferTargetTestingEnum::Fifteen, BufferTargetTestingEnum::Ten, BufferTargetTestingEnum::Fifteen, BufferTargetTestingEnum::Ten, BufferTargetTestingEnum::Fifteen };
-    const std::array container1{ BufferTargetTestingEnum::Fifteen, BufferTargetTestingEnum::Ten, BufferTargetTestingEnum::Fifteen };
-    const std::array container2{ BufferTargetTestingEnum::Fifteen, BufferTargetTestingEnum::Ten, BufferTargetTestingEnum::Ten, BufferTargetTestingEnum::Ten };
+    constexpr std::array container0{ BufferTargetTestingEnum::Fifteen, BufferTargetTestingEnum::Ten, BufferTargetTestingEnum::Fifteen, BufferTargetTestingEnum::Ten, BufferTargetTestingEnum::Fifteen };
+    constexpr std::array container1{ BufferTargetTestingEnum::Fifteen, BufferTargetTestingEnum::Ten, BufferTargetTestingEnum::Fifteen };
+    constexpr std::array container2{ BufferTargetTestingEnum::Fifteen, BufferTargetTestingEnum::Ten, BufferTargetTestingEnum::Ten, BufferTargetTestingEnum::Ten };
 
     bufferTarget.WriteEnumContainerWithNumber(container0);
     bufferTarget.WriteEnumContainerWithoutNumber(container1);
@@ -244,16 +243,16 @@ void CoreTools::BufferTargetTesting::WriteAggregateTest()
 
     bufferTarget.WriteAggregate(color);
 
-    const std::array container0{ Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
-                                 Mathematics::Vector4D{ 5.0, 6.0, 7.0, 8.0 },
-                                 Mathematics::Vector4D{ 9.0, 1.0, 2.0, 3.0 },
-                                 Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 },
-                                 Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 } };
-    const std::array container1{ Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
-                                 Mathematics::Vector4D{ 5.0, 6.0, 7.0, 8.0 } };
-    const std::array container2{ Mathematics::Vector4D{ 9.0, 1.0, 2.0, 3.0 },
-                                 Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 },
-                                 Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 } };
+    constexpr std::array container0{ Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
+                                     Mathematics::Vector4D{ 5.0, 6.0, 7.0, 8.0 },
+                                     Mathematics::Vector4D{ 9.0, 1.0, 2.0, 3.0 },
+                                     Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 },
+                                     Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 } };
+    constexpr std::array container1{ Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
+                                     Mathematics::Vector4D{ 5.0, 6.0, 7.0, 8.0 } };
+    constexpr std::array container2{ Mathematics::Vector4D{ 9.0, 1.0, 2.0, 3.0 },
+                                     Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 },
+                                     Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 } };
 
     bufferTarget.WriteAggregateContainerWithNumber(container0);
     bufferTarget.WriteAggregateContainerWithoutNumber(container1);

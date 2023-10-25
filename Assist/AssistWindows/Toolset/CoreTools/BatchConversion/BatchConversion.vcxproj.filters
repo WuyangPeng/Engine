@@ -28,6 +28,9 @@
     <Filter Include="资源文件\CodeOutput">
       <UniqueIdentifier>{834820ed-1c46-4ddb-8295-bbd5ac407e41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\CodeInput">
+      <UniqueIdentifier>{f9dc1396-5b6b-4c6c-9d88-bf15f4fc7e9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\BatchConversion\Lib.cpp">
@@ -157,6 +160,51 @@
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
+    <Text Include="Resource\CodeInput\CSVEngineering.txt">
+      <Filter>资源文件\CodeInput</Filter>
+    </Text>
+    <Text Include="Resource\CodeInput\CSVEngineeringFwd.txt">
+      <Filter>资源文件\CodeInput</Filter>
+    </Text>
+    <Text Include="Resource\CodeInput\EngineeringContainerCpp.txt">
+      <Filter>资源文件\CodeInput</Filter>
+    </Text>
+    <Text Include="Resource\CodeInput\EngineeringContainerH.txt">
+      <Filter>资源文件\CodeInput</Filter>
+    </Text>
+    <Text Include="Resource\CodeInput\EntityBaseCpp.txt">
+      <Filter>资源文件\CodeInput</Filter>
+    </Text>
+    <Text Include="Resource\CodeInput\EntityBaseH.txt">
+      <Filter>资源文件\CodeInput</Filter>
+    </Text>
+    <Text Include="Resource\CodeInput\EntityContainerCpp.txt">
+      <Filter>资源文件\CodeInput</Filter>
+    </Text>
+    <Text Include="Resource\CodeInput\EntityContainerDetailH.txt">
+      <Filter>资源文件\CodeInput</Filter>
+    </Text>
+    <Text Include="Resource\CodeInput\EntityContainerH.txt">
+      <Filter>资源文件\CodeInput</Filter>
+    </Text>
+    <Text Include="Resource\CodeInput\EntityCpp.txt">
+      <Filter>资源文件\CodeInput</Filter>
+    </Text>
+    <Text Include="Resource\CodeInput\EntityH.txt">
+      <Filter>资源文件\CodeInput</Filter>
+    </Text>
+    <Text Include="Resource\CodeInput\EntitySubclassCpp.txt">
+      <Filter>资源文件\CodeInput</Filter>
+    </Text>
+    <Text Include="Resource\CodeInput\EntitySubclassH.txt">
+      <Filter>资源文件\CodeInput</Filter>
+    </Text>
+    <Text Include="Resource\CodeInput\FlagsCpp.txt">
+      <Filter>资源文件\CodeInput</Filter>
+    </Text>
+    <Text Include="Resource\CodeInput\FlagsH.txt">
+      <Filter>资源文件\CodeInput</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\BatchConversion.json">
@@ -185,6 +233,9 @@
     </None>
     <None Include="Resource\CsvOutput\Input3.csv">
       <Filter>资源文件\CsvOutput</Filter>
+    </None>
+    <None Include="Resource\CodeInput\CSVEngineering.json">
+      <Filter>资源文件\CodeInput</Filter>
     </None>
   </ItemGroup>
 </Project>

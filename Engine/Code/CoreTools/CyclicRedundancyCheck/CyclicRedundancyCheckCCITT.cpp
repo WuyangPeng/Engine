@@ -5,13 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/22 19:22)
+///	版本：0.9.1.5 (2023/09/23 09:32)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CyclicRedundancyCheckCCITT.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+
+#include <gsl/util>
 
 CoreTools::CyclicRedundancyCheckCCITT::CyclicRedundancyCheckCCITT(const char* data, int length) noexcept
     : cyclicRedundancyCheck{ 0 }
@@ -45,7 +47,7 @@ uint16_t CoreTools::CyclicRedundancyCheckCCITT::GetCCITT(uint16_t crc, uint16_t 
     for (auto i = bitSize; 0 < i; --i)
     {
         if (((value ^ crc) & 0X8000) != 0)
-            crc = (crc << 1) ^ 0x1021;
+            crc = (crc << 1) ^ gsl::narrow_cast<uint16_t>(0x1021);
         else
             crc <<= 1;
 

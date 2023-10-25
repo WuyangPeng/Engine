@@ -40,9 +40,9 @@ void AncientBooks::EmperorContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         emperor.emplace_back(std::make_shared<Emperor>(csvRow));
     }
@@ -77,14 +77,14 @@ void AncientBooks::EmperorContainer::Unique()
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, EmperorContainer)
 
-AncientBooks::EmperorContainer::ConstEmperorBaseSharedPtr AncientBooks::EmperorContainer::GetFirstEmperor() const
+AncientBooks::EmperorContainer::ConstEmperorSharedPtr AncientBooks::EmperorContainer::GetFirstEmperor() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return emperor.at(0);
 }
 
-AncientBooks::EmperorContainer::ConstEmperorBaseSharedPtr AncientBooks::EmperorContainer::GetEmperor(int key) const
+AncientBooks::EmperorContainer::ConstEmperorSharedPtr AncientBooks::EmperorContainer::GetEmperor(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

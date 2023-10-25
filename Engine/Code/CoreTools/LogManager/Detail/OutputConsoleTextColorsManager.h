@@ -5,10 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/28 16:03)
+///	版本：0.9.1.5 (2023/09/21 09:46)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_OUTPUT_CONSOLE_TEXT_COLOR_MANAGER_H
 #define CORE_TOOLS_LOG_MANAGER_OUTPUT_CONSOLE_TEXT_COLOR_MANAGER_H
+
+#include "CoreTools/CoreToolsDll.h"
 
 #include "LogConsoleTextColorsManagerImpl.h"
 #include "System/Console/Flags/ConsoleHandleFlags.h"

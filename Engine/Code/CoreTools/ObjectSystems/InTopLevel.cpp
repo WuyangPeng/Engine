@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/30 17:13)
+///	版本：0.9.1.5 (2023/09/20 15:44)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,7 +14,8 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, InTopLevel)
 
 CoreTools::InTopLevel::InTopLevel(DisableNotThrow disableNotThrow)
     : impl{ ImplCreateUseDefaultConstruction::Default }
@@ -26,17 +27,54 @@ CoreTools::InTopLevel::InTopLevel(DisableNotThrow disableNotThrow)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, InTopLevel)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, InTopLevel, IsTopLevel, ObjectInterfaceSharedPtr, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, InTopLevel, GetTopLevelSize, int)
+bool CoreTools::InTopLevel::IsTopLevel(const ObjectInterfaceSharedPtr& object) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, InTopLevel, begin, CoreTools::ObjectContainerConstIter)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, InTopLevel, end, CoreTools::ObjectContainerConstIter)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, InTopLevel, begin, CoreTools::ObjectContainerIter)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, InTopLevel, end, CoreTools::ObjectContainerIter)
+    return impl->IsTopLevel(object);
+}
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, InTopLevel, Insert, ObjectInterfaceSharedPtr, void)
+int CoreTools::InTopLevel::GetTopLevelSize() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, InTopLevel)
+    return impl->GetTopLevelSize();
+}
+
+CoreTools::ObjectContainerConstIter CoreTools::InTopLevel::begin() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->begin();
+}
+
+CoreTools::ObjectContainerConstIter CoreTools::InTopLevel::end() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->end();
+}
+
+CoreTools::ObjectContainerIter CoreTools::InTopLevel::begin()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->begin();
+}
+
+CoreTools::ObjectContainerIter CoreTools::InTopLevel::end()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->end();
+}
+
+void CoreTools::InTopLevel::Insert(const ObjectInterfaceSharedPtr& object)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->Insert(object);
+}
 
 CoreTools::InTopLevel CoreTools::InTopLevel::Create()
 {

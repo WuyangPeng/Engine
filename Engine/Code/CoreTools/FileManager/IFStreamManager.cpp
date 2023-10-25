@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:41)
+///	版本：0.9.1.5 (2023/09/22 14:12)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "IFStreamManager.h"
 #include "Detail/IFStreamManagerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 CoreTools::IFStreamManager::IFStreamManager(const String& fileName)
     : impl{ fileName }
@@ -22,11 +21,33 @@ CoreTools::IFStreamManager::IFStreamManager(const String& fileName)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, IFStreamManager)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, IFStreamManager, GetFileContent, System::String)
+CoreTools::IFStreamManager::String CoreTools::IFStreamManager::GetFileContent() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, IFStreamManager, BackupFile, System::String)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, IFStreamManager, SetSimplifiedChinese, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, IFStreamManager, GetFileStream, System::IFileStream&)
+    return impl->GetFileContent();
+}
+
+CoreTools::IFStreamManager::String CoreTools::IFStreamManager::BackupFile() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->BackupFile();
+}
+
+void CoreTools::IFStreamManager::SetSimplifiedChinese()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->SetSimplifiedChinese();
+}
+
+CoreTools::IFStreamManager::IFileStream& CoreTools::IFStreamManager::GetFileStream() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->GetFileStream();
+}
 
 CoreTools::IFStreamManager::FileContent CoreTools::IFStreamManager::GetFileContent(System::StringView separate) const
 {

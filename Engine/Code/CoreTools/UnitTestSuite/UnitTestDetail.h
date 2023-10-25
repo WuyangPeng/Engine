@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 17:24)
+///	版本：0.9.1.5 (2023/09/20 14:01)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_DETAIL_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_DETAIL_H
@@ -14,10 +14,8 @@
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning/TypeTraits.h"
 #include "CoreTools/CharacterString/StringConversion.h"
-#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
 
 #include <exception>

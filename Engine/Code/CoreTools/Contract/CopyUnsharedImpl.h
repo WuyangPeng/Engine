@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/22 14:40)
+///	版本：0.9.1.5 (2023/09/23 09:42)
 
 #ifndef CORE_TOOLS_CONTRACT_COPY_UNSHARED_IMPL_H
 #define CORE_TOOLS_CONTRACT_COPY_UNSHARED_IMPL_H
@@ -23,6 +23,7 @@ namespace CoreTools
     {
     public:
         using ClassType = CopyUnsharedImpl<Original, Package>;
+
         using ClassShareType = CopyUnsharedClasses;
         using SharedPtr = std::shared_ptr<Package>;
         using ConstSharedPtr = std::shared_ptr<const Package>;

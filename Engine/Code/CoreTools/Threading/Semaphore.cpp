@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 16:40)
+///	版本：0.9.1.5 (2023/09/20 14:35)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,7 +22,30 @@ CoreTools::Semaphore::Semaphore(int initialCount, int maximumCount)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, Semaphore)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, Semaphore, Release, int, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Semaphore, Wait, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Semaphore, GetCurrentCount, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Semaphore, GetMaximumCount, int)
+void CoreTools::Semaphore::Release(int releaseCount)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->Release(releaseCount);
+}
+
+void CoreTools::Semaphore::Wait()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->Wait();
+}
+
+int CoreTools::Semaphore::GetCurrentCount() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetCurrentCount();
+}
+
+int CoreTools::Semaphore::GetMaximumCount() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetMaximumCount();
+}

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/28 16:12)
+///	版本：0.9.1.5 (2023/09/21 10:01)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,6 +13,8 @@
 #include "Detail/LoggerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, Logger)
 
 CoreTools::Logger::Logger(LogFilter logFilter, LogLevel logLevel)
     : impl{ logFilter, logLevel }
@@ -22,7 +24,23 @@ CoreTools::Logger::Logger(LogFilter logFilter, LogLevel logLevel)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, Logger)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Logger, GetLogLevel, CoreTools::LogLevel)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Logger, GetLogFilterType, CoreTools::LogFilter)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, Logger, SetLogLevel, LogLevel, void)
-COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, Logger)
+CoreTools::LogFilter CoreTools::Logger::GetLogFilterType() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetLogFilterType();
+}
+
+CoreTools::LogLevel CoreTools::Logger::GetLogLevel() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetLogLevel();
+}
+
+void CoreTools::Logger::SetLogLevel(LogLevel level)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->SetLogLevel(level);
+}

@@ -9,6 +9,7 @@
 
 #include "Hero.h"
 #include "HeroContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -29,6 +30,7 @@ void CSVConfigure::HeroContainer::Parsing(const CSVContent& csvContent)
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("hero表开始载入……"));
 
     Load(csvContent);
+
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("hero表结束载入……"));
 }
 
@@ -37,9 +39,9 @@ void CSVConfigure::HeroContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         auto heroBase = std::make_shared<Hero>(csvRow);
 
@@ -50,6 +52,8 @@ void CSVConfigure::HeroContainer::Load(const CSVContent& csvContent)
     }
 
 }
+
+
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, HeroContainer)
 
@@ -88,5 +92,12 @@ CSVConfigure::HeroContainer::MappingContainer CSVConfigure::HeroContainer::GetCo
     USER_CLASS_IS_VALID_CONST_9;
 
     return hero;
+}
+
+int CSVConfigure::HeroContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(hero.size());
 }
 

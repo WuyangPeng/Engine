@@ -25,8 +25,8 @@ namespace AncientBooks
     public:
         using ClassType = EmperorContainer;
 
-        using ConstEmperorBaseSharedPtr = std::shared_ptr<const EmperorBase>;
-        using Container = std::vector<ConstEmperorBaseSharedPtr>;
+        using ConstEmperorSharedPtr = std::shared_ptr<const EmperorMappingType>;
+        using Container = std::vector<ConstEmperorSharedPtr>;
         using CSVContent = CoreTools::CSVContent;
 
     public:
@@ -34,14 +34,14 @@ namespace AncientBooks
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConstEmperorBaseSharedPtr GetFirstEmperor() const;
-        NODISCARD ConstEmperorBaseSharedPtr GetEmperor(int key) const;
+        NODISCARD ConstEmperorSharedPtr GetFirstEmperor() const;
+        NODISCARD ConstEmperorSharedPtr GetEmperor(int key) const;
         NODISCARD Container GetContainer() const;
 
         NODISCARD int GetContainerSize() const;
 
         template <typename Function>
-        NODISCARD ConstEmperorBaseSharedPtr GetFirstEmperor(Function function) const;
+        NODISCARD ConstEmperorSharedPtr GetFirstEmperor(Function function) const;
 
         template <typename Function>
         NODISCARD Container GetEmperor(Function function) const;

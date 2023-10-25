@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 17:22)
+///	版本：0.9.1.5 (2023/10/24 14:26)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,18 +19,18 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 
-CoreTools::CSVTotalGenerateFactory::CSVTotalGenerateSharedPtr CoreTools::CSVTotalGenerateFactory::Create(const String& nameSpace, const CSVHeadContainer& csvHeadContainer, CSVTotalGenerateType csvTotalGenerateType)
+CoreTools::CSVTotalGenerateFactory::CSVTotalGenerateSharedPtr CoreTools::CSVTotalGenerateFactory::Create(const String& nameSpace, const CSVHeadContainer& csvHeadContainer, const CodeMappingAnalysis& codeMappingAnalysis, CSVTotalGenerateType csvTotalGenerateType)
 {
     switch (csvTotalGenerateType)
     {
         case CSVTotalGenerateType::Head:
-            return make_shared<CSVTotalGenerateHeadFile>(nameSpace, csvHeadContainer);
+            return make_shared<CSVTotalGenerateHeadFile>(nameSpace, csvHeadContainer, codeMappingAnalysis);
         case CSVTotalGenerateType::FwdHead:
-            return make_shared<CSVTotalGenerateFwdHeadFile>(nameSpace, csvHeadContainer);
+            return make_shared<CSVTotalGenerateFwdHeadFile>(nameSpace, csvHeadContainer, codeMappingAnalysis);
         case CSVTotalGenerateType::ContainerHead:
-            return make_shared<CSVTotalGenerateContainerHeadFile>(nameSpace, csvHeadContainer);
+            return make_shared<CSVTotalGenerateContainerHeadFile>(nameSpace, csvHeadContainer, codeMappingAnalysis);
         case CSVTotalGenerateType::ContainerSource:
-            return make_shared<CSVTotalGenerateContainerSourceFile>(nameSpace, csvHeadContainer);
+            return make_shared<CSVTotalGenerateContainerSourceFile>(nameSpace, csvHeadContainer, codeMappingAnalysis);
         default:
             break;
     }

@@ -1,12 +1,7 @@
 TODO Level 6
  
-0.9.0.4
+0.9.1.5
 
 1.  （ModuleInitializerTerminator）增加一个需要加载模块配置类，对配置进行读取。 
 2.  （ModuleInitializerTerminator）增加一个模块自动加载及终止类。
-3.  （ModuleInitializerTerminator）终止已加载的模块，并加载新的模块。	
-4.  （SyntacticParser）增加语法分析器。 
-5.  （PerformanceProfiler）增加性能剖析器。
-6.  （PerformanceProfiler）增加统计采集类。
-7.  （PerformanceProfiler）在框架各个循环监测各模块使用的时间。 
-8.  （EngineConfiguration）增加引擎配置类。 
+3.  （ModuleInitializerTerminator）终止已加载的模块，并加载新的模块。	 

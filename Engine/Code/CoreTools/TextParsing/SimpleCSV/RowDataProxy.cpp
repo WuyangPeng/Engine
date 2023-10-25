@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:06)
+///	版本：0.9.1.5 (2023/09/23 18:15)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -48,10 +48,47 @@ CoreTools::SimpleCSV::RowDataProxy& CoreTools::SimpleCSV::RowDataProxy::operator
     return *this;
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, RowDataProxy, GetValues, CoreTools::SimpleCSV::RowDataProxy::CellValueContainer)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, RowDataProxy, GetSharedStrings, CoreTools::SimpleCSV::RowDataProxy::SharedStringsSharedPtr)
+CoreTools::SimpleCSV::RowDataProxy::CellValueContainer CoreTools::SimpleCSV::RowDataProxy::GetValues() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, RowDataProxy, DeleteCellValues, int, void)
+    return impl->GetValues();
+}
+
+CoreTools::SimpleCSV::RowDataProxy::SharedStringsSharedPtr CoreTools::SimpleCSV::RowDataProxy::GetSharedStrings()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetSharedStrings();
+}
+
+void CoreTools::SimpleCSV::RowDataProxy::DeleteCellValues(int count)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->DeleteCellValues(count);
+}
+
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::RowDataProxy::GetRowNode() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetRowNode();
+}
+
+void CoreTools::SimpleCSV::RowDataProxy::Clear()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->Clear();
+}
+
+CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr CoreTools::SimpleCSV::RowDataProxy::GetDocument()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetDocument();
+}
 
 void CoreTools::SimpleCSV::RowDataProxy::PrependCellValue(const CellValue& value, int column)
 {
@@ -59,10 +96,6 @@ void CoreTools::SimpleCSV::RowDataProxy::PrependCellValue(const CellValue& value
 
     impl->PrependCellValue(value, column);
 }
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, RowDataProxy, GetRowNode, CoreTools::SimpleCSV::XMLNode)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, RowDataProxy, Clear, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, RowDataProxy, GetDocument, CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr)
 
 CoreTools::SimpleCSV::RowDataProxy::operator CellValueContainer() const
 {

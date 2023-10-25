@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/28 16:13)
+///	版本：0.9.1.5 (2023/09/21 10:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,5 +22,16 @@ CoreTools::LogMessagePrefix::LogMessagePrefix(AppenderPrint appenderFlags, LogLe
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, LogMessagePrefix)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, LogMessagePrefix, GetPrefix, System::String)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, LogMessagePrefix, GetPrefixSize, int)
+CoreTools::LogMessagePrefix::String CoreTools::LogMessagePrefix::GetPrefix() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetPrefix();
+}
+
+int CoreTools::LogMessagePrefix::GetPrefixSize() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetPrefixSize();
+}

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/10 18:02)
+///	版本：0.9.1.5 (2023/10/24 15:21)
 
 #ifndef CORE_TOOLS_TESTING_H
 #define CORE_TOOLS_TESTING_H
@@ -32,7 +32,6 @@
 #include "ObjectSystemsSuite/ObjectSystemsSuite.h"
 #include "PerformanceProfilerSuite/PerformanceProfilerSuite.h"
 #include "PropertiesSuite/PropertiesSuite.h"
-#include "RegularExpressionSuite/RegularExpressionSuite.h"
 #include "ReportOutputSuite/ReportOutputSuite.h"
 #include "StateMachineSuite/StateMachineSuite.h"
 #include "SyntacticParserSuite/SyntacticParserSuite.h"

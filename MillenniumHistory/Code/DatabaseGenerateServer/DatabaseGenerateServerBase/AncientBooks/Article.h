@@ -24,7 +24,7 @@ namespace AncientBooks
         using ClassType = Article;
         using ParentType = ArticleBase;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit Article(const CSVRow& csvRow);
@@ -64,6 +64,7 @@ namespace AncientBooks
         NODISCARD String GetAbbreviation() const override;
 
         NODISCARD String GetDirectory() const override;
+
 
     private:
         int64_t id;  // Id

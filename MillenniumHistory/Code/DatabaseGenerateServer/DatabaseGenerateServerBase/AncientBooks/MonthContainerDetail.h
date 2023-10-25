@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-AncientBooks::MonthContainer::ConstMonthBaseSharedPtr AncientBooks::MonthContainer::GetFirstMonth(Function function) const
+AncientBooks::MonthContainer::ConstMonthSharedPtr AncientBooks::MonthContainer::GetFirstMonth(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

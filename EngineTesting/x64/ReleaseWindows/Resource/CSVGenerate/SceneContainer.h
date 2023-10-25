@@ -26,7 +26,7 @@ namespace CSVConfigure
     public:
         using ClassType = SceneContainer;
 
-        using ConstSceneSharedPtr = std::shared_ptr<const Scene>;
+        using ConstSceneSharedPtr = std::shared_ptr<const SceneMappingType>;
         using MappingContainer = std::unordered_map<int, ConstSceneSharedPtr>;
         using Container = std::vector<ConstSceneSharedPtr>;
         using CSVContent = CoreTools::CSVContent;
@@ -39,6 +39,8 @@ namespace CSVConfigure
         NODISCARD ConstSceneSharedPtr GetFirstScene() const;
         NODISCARD ConstSceneSharedPtr GetScene(int key) const;
         NODISCARD MappingContainer GetContainer() const;
+
+        NODISCARD int GetContainerSize() const;
 
         template <typename Function>
         NODISCARD ConstSceneSharedPtr GetFirstScene(Function function) const;

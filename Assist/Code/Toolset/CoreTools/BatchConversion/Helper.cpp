@@ -67,9 +67,10 @@ void BatchConversion::Helper::Conversion()
     read_json("Configuration/BatchConversion.json", mainTree);
 
     const auto input = mainTree.get(SYSTEM_TEXT("input"), System::String{});
+    const auto codeInput = mainTree.get(SYSTEM_TEXT("codeInput"), System::String{});
     const auto csvOutput = mainTree.get(SYSTEM_TEXT("csvOutput"), System::String{});
     const auto codeOutput = mainTree.get(SYSTEM_TEXT("codeOutput"), System::String{});
 
     CoreTools::BatchConversionCSV(input, csvOutput);
-    CoreTools::BatchConversionCode(csvOutput, codeOutput);
+    CoreTools::BatchConversionCode(csvOutput, codeInput, codeOutput);
 }

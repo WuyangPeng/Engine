@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-AncientBooks::CategoryContainer::ConstCategoryBaseSharedPtr AncientBooks::CategoryContainer::GetFirstCategory(Function function) const
+AncientBooks::CategoryContainer::ConstCategorySharedPtr AncientBooks::CategoryContainer::GetFirstCategory(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

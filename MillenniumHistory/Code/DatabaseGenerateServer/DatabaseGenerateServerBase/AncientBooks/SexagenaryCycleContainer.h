@@ -25,8 +25,8 @@ namespace AncientBooks
     public:
         using ClassType = SexagenaryCycleContainer;
 
-        using ConstSexagenaryCycleBaseSharedPtr = std::shared_ptr<const SexagenaryCycleBase>;
-        using Container = std::vector<ConstSexagenaryCycleBaseSharedPtr>;
+        using ConstSexagenaryCycleSharedPtr = std::shared_ptr<const SexagenaryCycleMappingType>;
+        using Container = std::vector<ConstSexagenaryCycleSharedPtr>;
         using CSVContent = CoreTools::CSVContent;
 
     public:
@@ -34,14 +34,14 @@ namespace AncientBooks
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConstSexagenaryCycleBaseSharedPtr GetFirstSexagenaryCycle() const;
-        NODISCARD ConstSexagenaryCycleBaseSharedPtr GetSexagenaryCycle(int key) const;
+        NODISCARD ConstSexagenaryCycleSharedPtr GetFirstSexagenaryCycle() const;
+        NODISCARD ConstSexagenaryCycleSharedPtr GetSexagenaryCycle(int key) const;
         NODISCARD Container GetContainer() const;
 
         NODISCARD int GetContainerSize() const;
 
         template <typename Function>
-        NODISCARD ConstSexagenaryCycleBaseSharedPtr GetFirstSexagenaryCycle(Function function) const;
+        NODISCARD ConstSexagenaryCycleSharedPtr GetFirstSexagenaryCycle(Function function) const;
 
         template <typename Function>
         NODISCARD Container GetSexagenaryCycle(Function function) const;

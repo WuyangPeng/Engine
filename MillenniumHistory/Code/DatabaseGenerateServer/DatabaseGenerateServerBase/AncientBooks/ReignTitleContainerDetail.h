@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-AncientBooks::ReignTitleContainer::ConstReignTitleBaseSharedPtr AncientBooks::ReignTitleContainer::GetFirstReignTitle(Function function) const
+AncientBooks::ReignTitleContainer::ConstReignTitleSharedPtr AncientBooks::ReignTitleContainer::GetFirstReignTitle(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

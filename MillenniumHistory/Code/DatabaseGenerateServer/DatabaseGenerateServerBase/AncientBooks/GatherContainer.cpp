@@ -40,9 +40,9 @@ void AncientBooks::GatherContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         gather.emplace_back(std::make_shared<Gather>(csvRow));
     }
@@ -77,14 +77,14 @@ void AncientBooks::GatherContainer::Unique()
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, GatherContainer)
 
-AncientBooks::GatherContainer::ConstGatherBaseSharedPtr AncientBooks::GatherContainer::GetFirstGather() const
+AncientBooks::GatherContainer::ConstGatherSharedPtr AncientBooks::GatherContainer::GetFirstGather() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return gather.at(0);
 }
 
-AncientBooks::GatherContainer::ConstGatherBaseSharedPtr AncientBooks::GatherContainer::GetGather(int key) const
+AncientBooks::GatherContainer::ConstGatherSharedPtr AncientBooks::GatherContainer::GetGather(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:26)
+///	版本：0.9.1.5 (2023/09/22 13:33)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_FILE_EVENT_INTERFACE_H
 #define CORE_TOOLS_FILE_MANAGER_FILE_EVENT_INTERFACE_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/FileManager/FileManagerFwd.h"
 #include "CoreTools/Helper/SharedPtrMacro.h"
 
@@ -27,6 +26,7 @@ namespace CoreTools
     {
     public:
         using ClassType = FileEventInterface;
+
         using FileEventInterfaceUniquePtr = std::unique_ptr<FileEventInterface>;
 
     public:

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 16:41)
+///	版本：0.9.1.5 (2023/09/20 14:38)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -29,17 +29,38 @@ CLASS_INVARIANT_STUB_DEFINE(CoreTools, ThreadManager)
 
 void CoreTools::ThreadManager::AddThread(void* function, void* userData, int processorNumber, ThreadSize stackSize)
 {
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
     return impl->AddThread(function, userData, processorNumber, stackSize);
 }
 
 void CoreTools::ThreadManager::AddThreadUsePriority(void* function, void* userData, int priority, int processorNumber, ThreadSize stackSize)
 {
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
     return impl->AddThreadUsePriority(function, userData, priority, processorNumber, stackSize);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ThreadManager, Resume, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ThreadManager, Suspend, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ThreadManager, Wait, void)
+void CoreTools::ThreadManager::Resume()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->Resume();
+}
+
+void CoreTools::ThreadManager::Suspend()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->Suspend();
+}
+
+void CoreTools::ThreadManager::Wait()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->Wait();
+}
 
 CoreTools::ThreadManager CoreTools::ThreadManager::Create()
 {

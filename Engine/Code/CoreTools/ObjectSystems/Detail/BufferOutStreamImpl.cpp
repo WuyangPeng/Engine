@@ -5,18 +5,18 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/30 16:52)
+///	版本：0.9.1.5 (2023/09/20 15:31)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "BufferOutStreamImpl.h"
 #include "TopLevel.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-#include "CoreTools/FileManager/FileBuffer.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectRegister.h"
 #include "CoreTools/ObjectSystems/Stream.h"
 
 CoreTools::BufferOutStreamImpl::BufferOutStreamImpl(OutTopLevel topLevel)

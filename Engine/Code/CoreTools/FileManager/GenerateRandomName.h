@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.6 (2023/04/11 20:47)
+///	版本：0.9.1.5 (2023/09/22 13:39)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_GENERATE_RANDOM_NAME_H
 #define CORE_TOOLS_FILE_MANAGER_GENERATE_RANDOM_NAME_H
@@ -22,6 +22,7 @@ namespace CoreTools
     {
     public:
         using ClassType = GenerateRandomName;
+
         using String = System::String;
 
     public:

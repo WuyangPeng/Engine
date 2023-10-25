@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/11 21:04)
+///	版本：0.9.1.5 (2023/10/24 15:38)
 
 #include "TestingNoObjectPtr.h"
 #include "TestingNoObjectPtrImpl.h"
@@ -45,5 +45,7 @@ CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(CoreTools, TestingNoObjectPtr);
 
 CoreTools::ObjectInterfaceSharedPtr CoreTools::TestingNoObjectPtr::CloneObject() const
 {
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
     return std::make_shared<ClassType>(*this);
 }

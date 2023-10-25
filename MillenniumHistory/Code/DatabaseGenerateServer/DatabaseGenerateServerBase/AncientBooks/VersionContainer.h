@@ -25,8 +25,8 @@ namespace AncientBooks
     public:
         using ClassType = VersionContainer;
 
-        using ConstVersionBaseSharedPtr = std::shared_ptr<const VersionBase>;
-        using Container = std::vector<ConstVersionBaseSharedPtr>;
+        using ConstVersionSharedPtr = std::shared_ptr<const VersionMappingType>;
+        using Container = std::vector<ConstVersionSharedPtr>;
         using CSVContent = CoreTools::CSVContent;
 
     public:
@@ -34,14 +34,14 @@ namespace AncientBooks
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConstVersionBaseSharedPtr GetFirstVersion() const;
-        NODISCARD ConstVersionBaseSharedPtr GetVersion(int key) const;
+        NODISCARD ConstVersionSharedPtr GetFirstVersion() const;
+        NODISCARD ConstVersionSharedPtr GetVersion(int key) const;
         NODISCARD Container GetContainer() const;
 
         NODISCARD int GetContainerSize() const;
 
         template <typename Function>
-        NODISCARD ConstVersionBaseSharedPtr GetFirstVersion(Function function) const;
+        NODISCARD ConstVersionSharedPtr GetFirstVersion(Function function) const;
 
         template <typename Function>
         NODISCARD Container GetVersion(Function function) const;

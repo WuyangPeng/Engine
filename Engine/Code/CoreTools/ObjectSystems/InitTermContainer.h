@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/29 16:33)
+///	版本：0.9.1.5 (2023/09/20 15:26)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_INIT_TERM_CONTAINER_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_INIT_TERM_CONTAINER_H
@@ -20,6 +20,7 @@ namespace CoreTools
     {
     public:
         using ClassType = InitTermContainer;
+
         using ExecuteFunction = void (*)();
 
     public:

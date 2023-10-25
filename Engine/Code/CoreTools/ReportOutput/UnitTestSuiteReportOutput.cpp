@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 15:52)
+///	版本：0.9.1.5 (2023/09/20 15:00)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,15 +22,58 @@ CoreTools::UnitTestSuiteReportOutput::UnitTestSuiteReportOutput(const std::strin
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, UnitTestSuiteReportOutput)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, UnitTestSuiteReportOutput, PrintString, std::string, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, UnitTestSuiteReportOutput, PrintNewLine, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, UnitTestSuiteReportOutput, PrintBorderLine, char, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, UnitTestSuiteReportOutput, PrintCostTime, CpuTimer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, UnitTestSuiteReportOutput, PrintSuiteName, std::string, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, UnitTestSuiteReportOutput, PrintCurrentTime, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, UnitTestSuiteReportOutput, PrintTestName, std::string, void)
+void CoreTools::UnitTestSuiteReportOutput::PrintString(const std::string& characterString)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->PrintString(characterString);
+}
+
+void CoreTools::UnitTestSuiteReportOutput::PrintNewLine()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->PrintNewLine();
+}
+
+void CoreTools::UnitTestSuiteReportOutput::PrintBorderLine(char character)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->PrintBorderLine(character);
+}
+
+void CoreTools::UnitTestSuiteReportOutput::PrintCurrentTime()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->PrintCurrentTime();
+}
+
+void CoreTools::UnitTestSuiteReportOutput::PrintCostTime(const CpuTimer& cpuTime)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->PrintCostTime(cpuTime);
+}
+
+void CoreTools::UnitTestSuiteReportOutput::PrintSuiteName(const std::string& suiteName)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->PrintSuiteName(suiteName);
+}
+
+void CoreTools::UnitTestSuiteReportOutput::PrintTestName(const std::string& testName)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->PrintTestName(testName);
+}
 
 void CoreTools::UnitTestSuiteReportOutput::PrintTestResult(int passedNumber, int failedNumber, int errorNumber, int characterWidth)
 {
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
     return impl->PrintTestResult(passedNumber, failedNumber, errorNumber, characterWidth);
 }

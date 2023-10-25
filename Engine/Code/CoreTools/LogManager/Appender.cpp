@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/28 16:07)
+///	版本：0.9.1.5 (2023/09/21 09:57)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,7 +14,6 @@
 #include "Detail/AppenderImpl.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(CoreTools, Appender)
 
@@ -44,14 +43,79 @@ CoreTools::Appender::Appender(const String& directory, AppenderPrint appenderFla
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, Appender)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Appender, GetLogLevel, CoreTools::LogLevel)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Appender, GetFlags, CoreTools::AppenderPrint)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Appender, GetAppenderType, CoreTools::AppenderType)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, Appender, SetLogLevel, LogLevel, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, Appender, Write, LogMessage, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Appender, GetDirectory, System::String)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Appender, GetExtensionName, System::String)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Appender, GetMaxFileSize, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Appender, IsBackup, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Appender, IsDefault, bool)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, Appender, SetIsDefault, bool, void)
+CoreTools::LogLevel CoreTools::Appender::GetLogLevel() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetLogLevel();
+}
+
+CoreTools::AppenderPrint CoreTools::Appender::GetFlags() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFlags();
+}
+
+CoreTools::AppenderType CoreTools::Appender::GetAppenderType() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetAppenderType();
+}
+
+void CoreTools::Appender::SetLogLevel(LogLevel level)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetLogLevel(level);
+}
+
+void CoreTools::Appender::Write(const LogMessage& message) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->Write(message);
+}
+
+CoreTools::Appender::String CoreTools::Appender::GetDirectory() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDirectory();
+}
+
+CoreTools::Appender::String CoreTools::Appender::GetExtensionName() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetExtensionName();
+}
+
+int CoreTools::Appender::GetMaxFileSize() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetMaxFileSize();
+}
+
+bool CoreTools::Appender::IsBackup() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsBackup();
+}
+
+bool CoreTools::Appender::IsDefault() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsDefault();
+}
+
+void CoreTools::Appender::SetIsDefault(bool isDefault)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetIsDefault(isDefault);
+}

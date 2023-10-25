@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:21)
+///	版本：0.9.1.5 (2023/09/22 11:30)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_C_FILE_MANAGER_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_C_FILE_MANAGER_IMPL_H
@@ -31,6 +31,7 @@ namespace CoreTools
     {
     public:
         using ClassType = CFileManagerImpl;
+
         using String = System::String;
         using OffType = System::OffType;
         using PosType = System::PosType;

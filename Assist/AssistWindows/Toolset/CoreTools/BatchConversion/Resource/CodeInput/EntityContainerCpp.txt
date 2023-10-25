@@ -1,0 +1,42 @@
+$Copyright$
+
+#include "$ClassName$.h"
+$EntityContainerInclude$
+#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/Helper/LogMacro.h"
+#include "CoreTools/TextParsing/CSV/CSVContent.h"
+#include "CoreTools/TextParsing/CSV/CSVHead.h"
+#include "CoreTools/TextParsing/CSV/CSVRow.h"
+
+#include <algorithm>
+
+$Namespace$::$ClassName$Container::$ClassName$Container(const CSVContent& csvContent)
+    : $ClassNameLetter${}
+{
+    Parsing(csvContent);
+
+    USER_SELF_CLASS_IS_VALID_9;
+}
+
+void $Namespace$::$ClassName$Container::Parsing(const CSVContent& csvContent)
+{
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("$ClassNameLetter$表开始载入……"));
+
+    Load(csvContent);$CallUnique$
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("$ClassNameLetter$表结束载入……"));
+}
+
+void $Namespace$::$ClassName$Container::Load(const CSVContent& csvContent)
+{
+    const auto size = csvContent.GetCount();
+    const auto csvHead = csvContent.GetCSVHead();
+
+$LoadFunctionDefine$
+}
+
+$UniqueFunctionDefine$
+
+CLASS_INVARIANT_STUB_DEFINE($Namespace$, $ClassName$Container)
+
+$GetFirstContainerDefine$$GetSharedPtrDefine$$GetContainerByKeyDefine$$GetOriginalContainerDefine$$GetContainerSizeDefine$$GetUniqueDefine$

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/11 21:09)
+///	版本：0.9.1.5 (2023/10/24 15:25)
 
 #include "MainFunctionMacroTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -28,6 +28,6 @@ void CoreTools::MainFunctionMacroTesting::DoRunUnitTest()
 
 void CoreTools::MainFunctionMacroTesting::MainTest() noexcept
 {
-    // 宏MAIN_FUNCTION使用Toolset中的MainFuction测试。
-    // 宏DLL_MAIN_FUNCTION使用Toolset中的DllMainFuction测试。
+    // 宏MAIN_FUNCTION使用Toolset中的MainFunction测试。
+    // 宏DLL_MAIN_FUNCTION使用Toolset中的DllMainFunction测试。
 }

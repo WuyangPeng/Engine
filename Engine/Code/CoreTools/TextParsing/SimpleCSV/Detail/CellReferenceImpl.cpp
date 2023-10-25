@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:12)
+///	版本：0.9.1.5 (2023/09/23 15:26)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,8 +15,6 @@
 #include "CoreTools/TextParsing/SimpleCSV/Constants.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
-
-#include <array>
 
 using namespace std::literals;
 

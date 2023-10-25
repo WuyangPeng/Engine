@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/30 16:45)
+///	版本：0.9.1.5 (2023/09/20 15:28)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,6 +15,7 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/ObjectSystems/ObjectLink.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 
 CoreTools::BufferInStreamImpl::BufferInStreamImpl(const ConstFileBufferSharedPtr& fileBuffer, int startPoint)
@@ -102,9 +103,9 @@ void CoreTools::BufferInStreamImpl::Link()
     // 链接对象。这个程序会取代存储的任意Object*的数据成员的旧地址，
     // 新地址会在当前运用程序运行时创建。
 
-    for (auto& value : *objectLink)
+    for (const auto& element : *objectLink)
     {
-        value->Link(*objectLink);
+        element->Link(*objectLink);
     }
 }
 
@@ -114,9 +115,9 @@ void CoreTools::BufferInStreamImpl::PostLink()
     // 默认构造函数用于创建一个对象，其中的数据再加载。链接器连接创建的对象。
     // 后链接函数在应用程序运行时创建对象时可以做一些非默认构造函数所做的工作。
 
-    for (auto& value : *objectLink)
+    for (const auto& element : *objectLink)
     {
-        value->PostLink();
+        element->PostLink();
     }
 }
 

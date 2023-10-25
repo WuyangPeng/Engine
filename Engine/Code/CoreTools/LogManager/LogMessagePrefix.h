@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/28 16:13)
+///	版本：0.9.1.5 (2023/09/21 09:48)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_MESSAGE_PREFIX_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_MESSAGE_PREFIX_H
@@ -27,6 +27,7 @@ namespace CoreTools
     {
     public:
         PERFORMANCE_UNSHARED_TYPE_DECLARE(LogMessagePrefix);
+
         using String = System::String;
 
     public:

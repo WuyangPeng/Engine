@@ -5,14 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/29 13:38)
+///	版本：0.9.1.5 (2023/09/21 09:22)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_PARAMETERS_INTERFACE_H
 #define CORE_TOOLS_MESSAGE_EVENT_PARAMETERS_INTERFACE_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "MessageEventFwd.h" 
+#include "MessageEventFwd.h"
 #include "CoreTools/Helper/SharedPtrMacro.h"
 
 #include <memory>
@@ -26,6 +26,7 @@ namespace CoreTools
     {
     public:
         using ClassType = ParametersInterface;
+
         using BaseSharedPtr = std::shared_ptr<ClassType>;
 
     public:

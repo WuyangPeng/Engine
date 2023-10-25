@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 16:00)
+///	版本：0.9.1.5 (2023/09/20 14:51)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_TRANSITION_EVENT_H
 #define CORE_TOOLS_STATE_MACHINE_TRANSITION_EVENT_H
@@ -18,6 +18,7 @@ namespace CoreTools
     struct TransitionEvent
     {
         using ClassType = TransitionEvent<Transition>;
+
         using type = typename Transition::EventType;
     };
 }

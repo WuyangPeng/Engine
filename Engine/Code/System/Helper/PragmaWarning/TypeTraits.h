@@ -28,6 +28,7 @@
 #include <boost/type_traits/has_less_equal.hpp>
 #include <boost/type_traits/has_minus.hpp>
 #include <boost/type_traits/has_not_equal_to.hpp>
+#include <boost/type_traits/has_plus.hpp>
 #include <boost/type_traits/is_const.hpp>
 #include <boost/type_traits/is_volatile.hpp>
 #include <boost/type_traits/remove_bounds.hpp>

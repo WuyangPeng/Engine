@@ -5,9 +5,8 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/22 10:43)
+///	版本：0.9.1.5 (2023/09/23 10:00)
 
-// 控制台颜色标志
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_COLORS_FLAGS_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_COLORS_FLAGS_H
 
@@ -15,6 +14,7 @@
 
 #include "System/Console/Fwd/ConsoleFlagsFwd.h"
 
+// 控制台颜色标志
 namespace CoreTools
 {
     using TextColour = System::TextColour;

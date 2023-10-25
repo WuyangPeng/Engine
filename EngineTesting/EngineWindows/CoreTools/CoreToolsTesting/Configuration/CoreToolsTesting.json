@@ -317,7 +317,7 @@
   "dataTypesSuite": {
     "TupleTesting": 1,
     "TupleLessTesting": 1,
-    "TableTesting": 1, 
+    "TableTesting": 1,
     "MinHeapTesting": 1,
     "ThreadSafeMapTesting": 1,
     "ThreadSafeQueueTesting": 1
@@ -379,7 +379,7 @@
   },
 
   "reportOutputSuite": {
-    "EquilongReportOutputTesting": 1,
+    "EquidistantReportOutputTesting": 1,
     "UnitTestFailReportOutputTesting": 1,
     "UnitTestSuiteReportOutputTesting": 1
   },
@@ -464,10 +464,6 @@
     "CyclicRedundancyCheck32Testing": 1
   },
 
-  "regularExpressionSuite": {
-
-  },
-
   "messageEventSuite": {
     "ParametersInterfaceTesting": 1,
     "CallbackParametersTesting": 1,
@@ -489,8 +485,7 @@
   },
 
   "networkSuite": {
-    "DownloadingFilesEventTesting": 1,
-    "DownloadingFilesTesting": 1
+
   },
 
   "zlibSuite": {

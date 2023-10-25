@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-AncientBooks::GatherContainer::ConstGatherBaseSharedPtr AncientBooks::GatherContainer::GetFirstGather(Function function) const
+AncientBooks::GatherContainer::ConstGatherSharedPtr AncientBooks::GatherContainer::GetFirstGather(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

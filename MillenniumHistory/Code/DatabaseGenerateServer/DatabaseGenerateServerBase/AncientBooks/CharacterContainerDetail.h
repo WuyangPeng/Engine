@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-AncientBooks::CharacterContainer::ConstCharacterBaseSharedPtr AncientBooks::CharacterContainer::GetFirstCharacter(Function function) const
+AncientBooks::CharacterContainer::ConstCharacterSharedPtr AncientBooks::CharacterContainer::GetFirstCharacter(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

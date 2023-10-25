@@ -7,8 +7,8 @@
 ///	标准：std:c++20
 ///	版本：0.9.1.4 (2023/09/14 15:40)
 
-#ifndef MATHEMATICS_BASE_ATAN_ESTIMATE_H
-#define MATHEMATICS_BASE_ATAN_ESTIMATE_H
+#ifndef MATHEMATICS_ESTIMATE_ATAN_ESTIMATE_H
+#define MATHEMATICS_ESTIMATE_ATAN_ESTIMATE_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -72,7 +72,7 @@ namespace Mathematics
         3.5859106295450e-7,  // degree 13
     };
 
-    /// 输入约束是[-1,1]中的x。例如，3度的估计值是
+    /// 输入约束是[-1,1]中的x。例如，3阶的估计值是
     /// float x; // in [-1,1]
     /// float result = ATanEstimate<float, 3>(x);
     template <typename T, int Degree>
@@ -94,4 +94,4 @@ namespace Mathematics
     }
 }
 
-#endif  // MATHEMATICS_BASE_ATAN_ESTIMATE_H
+#endif  // MATHEMATICS_ESTIMATE_ATAN_ESTIMATE_H

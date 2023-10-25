@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/11 18:04)
+///	版本：0.9.1.5 (2023/10/25 11:29)
 
 #ifndef CORE_TOOLS_DATA_TYPES_SUITE_MIN_HEAP_TESTING_H
 #define CORE_TOOLS_DATA_TYPES_SUITE_MIN_HEAP_TESTING_H
@@ -28,7 +28,6 @@ namespace CoreTools
     private:
         void MainTest();
         void IntegerTest();
-        void FloatTest() noexcept;
 
         void DoRunUnitTest() override;
     };

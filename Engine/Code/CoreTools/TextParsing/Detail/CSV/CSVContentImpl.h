@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:02)
+///	版本：0.9.1.5 (2023/10/24 14:11)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_CONTENT_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_CONTENT_IMPL_H
@@ -15,7 +15,7 @@
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
-#include "CoreTools/TextParsing/Flags/CSVFlags.h" 
+#include "CoreTools/TextParsing/Flags/CSVFlags.h"
 
 #include <vector>
 
@@ -25,6 +25,7 @@ namespace CoreTools
     {
     public:
         using ClassType = CSVContentImpl;
+
         using String = System::String;
 
     public:

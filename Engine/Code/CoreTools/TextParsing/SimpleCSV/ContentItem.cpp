@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:07)
+///	版本：0.9.1.5 (2023/09/23 16:13)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,8 +22,19 @@ CoreTools::SimpleCSV::ContentItem::ContentItem(const ConstXMLDocumentSharedPtr& 
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, ContentItem)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, ContentItem, GetType, CoreTools::SimpleCSV::ContentType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, ContentItem, GetPath, std::string)
+CoreTools::SimpleCSV::ContentType CoreTools::SimpleCSV::ContentItem::GetType() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetType();
+}
+
+std::string CoreTools::SimpleCSV::ContentItem::GetPath() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetPath();
+}
 
 CoreTools::SimpleCSV::ContentType CoreTools::SimpleCSV::ContentItem::GetTypeFromString(const std::string& typeString)
 {

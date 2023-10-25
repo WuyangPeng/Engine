@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 17:42)
+///	版本：0.9.1.5 (2023/09/20 14:15)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,7 +14,6 @@
 #include "Detail/SuiteImpl.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 CoreTools::Suite::Suite(const std::string& name, const OStreamShared& streamShared, bool printRunUnitTest)
     : impl{ make_shared<SuiteImpl>(name, streamShared, printRunUnitTest) }
@@ -42,16 +41,68 @@ CoreTools::Suite& CoreTools::Suite::operator=(Suite&& rhs) noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, Suite)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, GetName, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Suite, GetPassedNumber, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Suite, GetFailedNumber, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Suite, GetErrorNumber, int)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Suite, GetStream, CoreTools::OStreamShared&)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, PrintReport, void)
+std::string CoreTools::Suite::GetName() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, ClearUnitTestCollection, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, RunUnitTest, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, ResetTestData, void)
+    return impl->GetName();
+}
+
+int CoreTools::Suite::GetPassedNumber() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetPassedNumber();
+}
+
+int CoreTools::Suite::GetFailedNumber() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetFailedNumber();
+}
+
+int CoreTools::Suite::GetErrorNumber() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetErrorNumber();
+}
+
+CoreTools::OStreamShared& CoreTools::Suite::GetStream() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->GetStream();
+}
+
+void CoreTools::Suite::PrintReport()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->PrintReport();
+}
+
+void CoreTools::Suite::RunUnitTest()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->RunUnitTest();
+}
+
+void CoreTools::Suite::ClearUnitTestCollection()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->ClearUnitTestCollection();
+}
+
+void CoreTools::Suite::ResetTestData()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->ResetTestData();
+}
 
 void CoreTools::Suite::AddTest(const UnitTestSharedPtr& unitTest)
 {

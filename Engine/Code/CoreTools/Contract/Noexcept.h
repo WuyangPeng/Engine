@@ -5,19 +5,28 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/22 14:41)
+///	版本：0.9.1.5 (2023/09/23 09:41)
 
 #ifndef CORE_TOOLS_CONTRACT_NOEXCEPT_H
 #define CORE_TOOLS_CONTRACT_NOEXCEPT_H
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "System/Helper/PragmaWarning.h"
 #include "System/Helper/PragmaWarning/CallTraits.h"
 #include "System/SystemOutput/OutputDebugString.h"
 
 namespace CoreTools
 {
-    void CORE_TOOLS_DEFAULT_DECLARE DisableNoexcept();
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
+
+    // 这个函数是为了消除编译器警告，必须没有性能消耗。
+    inline void DisableNoexcept()
+    {
+    }
+
+#include SYSTEM_WARNING_POP
 
     /// 捕获成员函数所有异常，这些函数的目的是为了消除编译器警告，其目的并不是为了实现noexcept函数。
     /// 日志库也使用这些函数，所以出错时不打印日志。

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:08)
+///	版本：0.9.1.5 (2023/09/23 15:34)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -24,16 +24,54 @@ CoreTools::SimpleCSV::CellRange::CellRange(const ConstXMLDocumentSharedPtr& docu
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, CellRange)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, CellRange, GetNumRows, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, CellRange, GetNumColumns, int)
+int CoreTools::SimpleCSV::CellRange::GetNumRows() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, CellRange, GetDocument, CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr)
+    return impl->GetNumRows();
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, CellRange, GetDataNode, CoreTools::SimpleCSV::XMLNode)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, CellRange, GetTopLeft, CoreTools::SimpleCSV::CellReference)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, CellRange, GetBottomRight, CoreTools::SimpleCSV::CellReference)
+int CoreTools::SimpleCSV::CellRange::GetNumColumns() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, CellRange, GetSharedStrings, CoreTools::SimpleCSV::CellRange::SharedStringsSharedPtr)
+    return impl->GetNumColumns();
+}
+
+CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr CoreTools::SimpleCSV::CellRange::GetDocument()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetDocument();
+}
+
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::CellRange::GetDataNode() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDataNode();
+}
+
+CoreTools::SimpleCSV::CellReference CoreTools::SimpleCSV::CellRange::GetTopLeft() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetTopLeft();
+}
+
+CoreTools::SimpleCSV::CellReference CoreTools::SimpleCSV::CellRange::GetBottomRight() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetBottomRight();
+}
+
+CoreTools::SimpleCSV::CellRange::SharedStringsSharedPtr CoreTools::SimpleCSV::CellRange::GetSharedStrings()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetSharedStrings();
+}
 
 CoreTools::SimpleCSV::CellIterator CoreTools::SimpleCSV::CellRange::begin()
 {

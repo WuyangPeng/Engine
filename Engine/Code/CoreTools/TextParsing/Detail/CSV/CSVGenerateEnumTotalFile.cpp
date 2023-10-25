@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 17:20)
+///	版本：0.9.1.5 (2023/10/24 14:41)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,8 +20,8 @@
 
 #include <future>
 
-CoreTools::CSVGenerateEnumTotalFile::CSVGenerateEnumTotalFile(const CSVContent& csvContent)
-    : ParentType{ csvContent.GetCSVHead() }, csvContent{ csvContent }
+CoreTools::CSVGenerateEnumTotalFile::CSVGenerateEnumTotalFile(const CSVContent& csvContent, const CodeMappingAnalysis& codeMappingAnalysis)
+    : ParentType{ csvContent.GetCSVHead(), codeMappingAnalysis }, csvContent{ csvContent }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -43,21 +43,23 @@ System::String CoreTools::CSVGenerateEnumTotalFile::GetFileSuffix() const noexce
     return GetSuffix();
 }
 
-System::String CoreTools::CSVGenerateEnumTotalFile::GetContent() const noexcept
+System::String CoreTools::CSVGenerateEnumTotalFile::GetContent(const String& codeDirectory) const noexcept
 {
+    System::UnusedFunction(codeDirectory);
+
     return String{};
 }
 
-void CoreTools::CSVGenerateEnumTotalFile::GenerateFile(const String& directory) const
+void CoreTools::CSVGenerateEnumTotalFile::GenerateFile(const String& codeDirectory, const String& directory) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    CSVGenerateEnumHeadFile csvGenerateEnumHeadFile{ csvContent };
+    CSVGenerateEnumHeadFile csvGenerateEnumHeadFile{ csvContent, GetCodeMappingAnalysis() };
 
-    const auto result = std::async(&CSVGenerateEnumHeadFile::GenerateFile, csvGenerateEnumHeadFile, directory);
+    const auto result = std::async(&CSVGenerateEnumHeadFile::GenerateFile, csvGenerateEnumHeadFile, codeDirectory, directory);
 
-    const CSVGenerateEnumSourceFile csvGenerateEnumSourceFile{ csvContent };
-    csvGenerateEnumSourceFile.GenerateFile(directory);
+    const CSVGenerateEnumSourceFile csvGenerateEnumSourceFile{ csvContent, GetCodeMappingAnalysis() };
+    csvGenerateEnumSourceFile.GenerateFile(codeDirectory, directory);
 
     result.wait();
 }

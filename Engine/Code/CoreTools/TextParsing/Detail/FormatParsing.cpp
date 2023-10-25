@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 16:52)
+///	版本：0.9.1.5 (2023/10/24 14:03)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -45,7 +45,7 @@ void CoreTools::FormatParsing::Parsing(const String& formatContent)
 {
     const auto column = Parsing::GetSplitComma(formatContent);
 
-    bool firstIndex = true;
+    auto firstIndex = true;
     for (const auto& value : column)
     {
         ParsingColumn(value, firstIndex);
@@ -57,17 +57,17 @@ void CoreTools::FormatParsing::EmplaceBackEmpty(bool isScope, bool isMapping, bo
 {
     if (!isScope)
     {
-        scope.emplace_back(String{});
+        scope.emplace_back();
     }
 
     if (!isMapping)
     {
-        mapping.emplace_back(String{});
+        mapping.emplace_back();
     }
 
     if (!isDefaultValue)
     {
-        defaultValue.emplace_back(String{});
+        defaultValue.emplace_back();
     }
 }
 
@@ -166,7 +166,7 @@ void CoreTools::FormatParsing::ParsingMapping(bool isMapping, bool firstIndex, c
         {
             ParsingKey(single);
 
-            mapping.emplace_back(String{});
+            mapping.emplace_back();
         }
         else
         {

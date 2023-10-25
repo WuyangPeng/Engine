@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 19:23)
+///	版本：0.9.1.5 (2023/09/21 09:31)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_LEXICO_ARRAY2_H
 #define CORE_TOOLS_MEMORY_TOOLS_LEXICO_ARRAY2_H

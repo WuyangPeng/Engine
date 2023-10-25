@@ -9,6 +9,7 @@
 
 #include "Input1.h"
 #include "Input1ContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -16,7 +17,7 @@
 
 #include <algorithm>
 
-CsvOutput::Input1Container::Input1Container(const CoreTools::CSVContent& csvContent)
+CsvOutput::Input1Container::Input1Container(const CSVContent& csvContent)
     : input1{}
 {
     Parsing(csvContent);
@@ -24,12 +25,24 @@ CsvOutput::Input1Container::Input1Container(const CoreTools::CSVContent& csvCont
     USER_SELF_CLASS_IS_VALID_9;
 }
 
-void CsvOutput::Input1Container::Parsing(const CoreTools::CSVContent& csvContent)
+void CsvOutput::Input1Container::Parsing(const CSVContent& csvContent)
+{
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("input1表开始载入……"));
+
+    Load(csvContent);
+    Unique();
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("input1表结束载入……"));
+}
+
+void CsvOutput::Input1Container::Load(const CSVContent& csvContent)
 {
     const auto size = csvContent.GetCount();
+    const auto csvHead = csvContent.GetCSVHead();
+
     for (auto i = 0; i < size; ++i)
     {
-        CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
 
         input1.emplace_back(std::make_shared<Input1>(csvRow));
     }
@@ -37,17 +50,29 @@ void CsvOutput::Input1Container::Parsing(const CoreTools::CSVContent& csvContent
     std::ranges::sort(input1, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
+}
 
+void CsvOutput::Input1Container::Unique()
+{
     const auto iter = std::ranges::unique(input1, [](const auto& lhs, const auto& rhs) noexcept {
-        return (*lhs).GetKey() == (*rhs).GetKey();
+        if((*lhs).GetKey() == (*rhs).GetKey())
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, User, SYSTEM_TEXT("input1表存在重复主键，key = "), (*lhs).GetKey(), SYSTEM_TEXT("。\n"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     });
 
     if (iter.begin() != iter.end())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("input1表存在重复主键。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-
         input1.erase(iter.begin(), iter.end());
     }
+
+    input1.shrink_to_fit();
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CsvOutput, Input1Container)
@@ -84,5 +109,12 @@ CsvOutput::Input1Container::Container CsvOutput::Input1Container::GetContainer()
     USER_CLASS_IS_VALID_CONST_9;
 
     return input1;
+}
+
+int CsvOutput::Input1Container::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(input1.size());
 }
 

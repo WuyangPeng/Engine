@@ -24,7 +24,7 @@ namespace OutputCSVTesting
         using ClassType = Input1;
         using ParentType = Input1Base;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit Input1(const CSVRow& csvRow);
@@ -44,6 +44,7 @@ namespace OutputCSVTesting
         NODISCARD int GetTest4() const noexcept override;
 
         NODISCARD String GetTest5() const override;
+
 
     private:
         int id;  // id

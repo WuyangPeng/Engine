@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-CSVConfigure::ChapterContainer::ConstChapterBaseSharedPtr CSVConfigure::ChapterContainer::GetFirstChapter(Function function) const
+CSVConfigure::ChapterContainer::ConstChapterSharedPtr CSVConfigure::ChapterContainer::GetFirstChapter(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

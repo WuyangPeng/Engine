@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/18 16:03)
+///	版本：0.9.1.5 (2023/10/25 14:14)
 
 #include "TestObject.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -40,5 +40,7 @@ CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(CoreTools, TestObject);
 
 CoreTools::ObjectInterfaceSharedPtr CoreTools::TestObject::CloneObject() const
 {
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
     return std::make_shared<ClassType>(*this);
 }

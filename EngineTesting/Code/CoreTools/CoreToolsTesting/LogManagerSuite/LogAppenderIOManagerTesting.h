@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/12 14:18)
+///	版本：0.9.1.5 (2023/10/25 11:17)
 
 #ifndef LOG_MANAGER_LOG_APPENDER_IO_MANAGER_TESTING_H
 #define LOG_MANAGER_LOG_APPENDER_IO_MANAGER_TESTING_H
@@ -32,7 +32,7 @@ namespace CoreTools
         void MainTest();
         void IntegerTest();
         void StringTest();
-        void ExceptionTest(); 
+        void ExceptionTest();
         void LogAppenderIOManageSignTest();
         void FileContentTest();
         void DeleteFileTest();

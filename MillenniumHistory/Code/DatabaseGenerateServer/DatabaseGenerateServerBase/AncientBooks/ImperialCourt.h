@@ -24,7 +24,7 @@ namespace AncientBooks
         using ClassType = ImperialCourt;
         using ParentType = ImperialCourtBase;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit ImperialCourt(const CSVRow& csvRow);
@@ -44,6 +44,7 @@ namespace AncientBooks
 
         NODISCARD int GetEnd() const noexcept override;
         NODISCARD ConstYearSharedPtr GetEnd(const AncientBooksContainer& csvContainer) const override;
+
 
     private:
         int id;  // Id

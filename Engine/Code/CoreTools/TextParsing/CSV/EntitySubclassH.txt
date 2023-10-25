@@ -1,0 +1,34 @@
+$Copyright$
+
+#ifndef $NamespaceUppercaseSeparator$_$ClassNameUppercase$_H
+#define $NamespaceUppercaseSeparator$_$ClassNameUppercase$_H
+
+#include "CoreTools/CoreToolsDll.h"
+
+#include "$Namespace$Fwd.h"
+#include "$ClassName$Base.h"
+#include "System/Helper/UnicodeUsing.h"
+
+namespace $Namespace$
+{
+    class $ClassName$ final : public $ClassName$Base
+    {
+    public:
+        using ClassType = $ClassName$;
+        using ParentType = $ClassName$Base;
+
+        using CSVRow = CoreTools::CSVRow; 
+
+    public:
+        explicit $ClassName$(const CSVRow& csvRow);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
+
+        NODISCARD $KeyType$ GetKey() const noexcept override;
+
+$SubclassGetFunction$$GenerateKeyFunction$$SubclassCheckingFunction$
+    private:
+$SubclassMember$    };
+}
+
+#endif  // $NamespaceUppercaseSeparator$_$ClassNameUppercase$_H

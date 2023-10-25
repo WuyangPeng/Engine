@@ -26,7 +26,7 @@ namespace CSVConfigure
     public:
         using ClassType = HeroContainer;
 
-        using ConstHeroSharedPtr = std::shared_ptr<const Hero>;
+        using ConstHeroSharedPtr = std::shared_ptr<const HeroMappingType>;
         using MappingContainer = std::map<int, ConstHeroSharedPtr>;
         using Container = std::vector<ConstHeroSharedPtr>;
         using CSVContent = CoreTools::CSVContent;

@@ -7,8 +7,8 @@
 ///	标准：std:c++20
 ///	版本：0.9.1.4 (2023/09/14 15:40)
 
-#ifndef MATHEMATICS_BASE_ATAN_ESTIMATE_DETAIL_H
-#define MATHEMATICS_BASE_ATAN_ESTIMATE_DETAIL_H
+#ifndef MATHEMATICS_ESTIMATE_ATAN_ESTIMATE_DETAIL_H
+#define MATHEMATICS_ESTIMATE_ATAN_ESTIMATE_DETAIL_H
 
 #include "ATanEstimate.h"
 #include "Mathematics/Base/MathDetail.h"
@@ -49,4 +49,4 @@ T Mathematics::ATanEstimateReal(T x)
     }
 }
 
-#endif  // MATHEMATICS_BASE_ATAN_ESTIMATE_DETAIL_H
+#endif  // MATHEMATICS_ESTIMATE_ATAN_ESTIMATE_DETAIL_H

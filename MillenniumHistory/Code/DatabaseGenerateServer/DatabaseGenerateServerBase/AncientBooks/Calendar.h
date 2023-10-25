@@ -24,7 +24,7 @@ namespace AncientBooks
         using ClassType = Calendar;
         using ParentType = CalendarBase;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit Calendar(const CSVRow& csvRow);
@@ -76,6 +76,7 @@ namespace AncientBooks
 
         NODISCARD int GetAgainEnd() const noexcept override;
         NODISCARD ConstYearSharedPtr GetAgainEnd(const AncientBooksContainer& csvContainer) const override;
+
 
     private:
         int id;  // Id

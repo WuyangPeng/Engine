@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:42)
+///	版本：0.9.1.5 (2023/09/22 14:16)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "WriteBufferIO.h"
 #include "Detail/WriteBufferIOImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 CoreTools::WriteBufferIO::WriteBufferIO(int bufferSize)
     : impl{ bufferSize }
@@ -22,9 +21,26 @@ CoreTools::WriteBufferIO::WriteBufferIO(int bufferSize)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, WriteBufferIO)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, WriteBufferIO, GetBytesTotal, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, WriteBufferIO, GetBytesProcessed, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, WriteBufferIO, GetFileBuffer, CoreTools::ConstFileBufferSharedPtr);
+int CoreTools::WriteBufferIO::GetBytesTotal() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetBytesTotal();
+}
+
+int CoreTools::WriteBufferIO::GetBytesProcessed() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetBytesProcessed();
+}
+
+CoreTools::ConstFileBufferSharedPtr CoreTools::WriteBufferIO::GetFileBuffer() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFileBuffer();
+}
 
 void CoreTools::WriteBufferIO::IncrementBytesProcessed(int bytesNumber)
 {

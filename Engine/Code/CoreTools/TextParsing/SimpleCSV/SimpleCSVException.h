@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:18)
+///	版本：0.9.1.5 (2023/09/23 14:59)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_SIMPLE_CSV_EXCEPTION_H
 #define CORE_TOOLS_TEXT_PARSING_SIMPLE_CSV_EXCEPTION_H
@@ -29,10 +29,10 @@ namespace CoreTools::SimpleCSV
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        [[noreturn]] static void ThrowError(const FunctionDescribed& functionDescribed, WindowError lastError, CSVExceptionType errorCode, const std::wstring& message);
-        [[noreturn]] static void ThrowError(const FunctionDescribed& functionDescribed, CSVExceptionType errorCode, const std::wstring& message);
-        [[noreturn]] static void ThrowError(const FunctionDescribed& functionDescribed, WindowError lastError, CSVExceptionType errorCode, const std::string& message);
-        [[noreturn]] static void ThrowError(const FunctionDescribed& functionDescribed, CSVExceptionType errorCode, const std::string& message);
+        SYSTEM_NORETURN static void ThrowError(const FunctionDescribed& functionDescribed, WindowError lastError, CSVExceptionType errorCode, const std::wstring& message);
+        SYSTEM_NORETURN static void ThrowError(const FunctionDescribed& functionDescribed, CSVExceptionType errorCode, const std::wstring& message);
+        SYSTEM_NORETURN static void ThrowError(const FunctionDescribed& functionDescribed, WindowError lastError, CSVExceptionType errorCode, const std::string& message);
+        SYSTEM_NORETURN static void ThrowError(const FunctionDescribed& functionDescribed, CSVExceptionType errorCode, const std::string& message);
 
     protected:
         NODISCARD String GetErrorCodeDescribed() const final;

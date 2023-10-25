@@ -1,0 +1,14 @@
+$Copyright$
+
+#ifndef $NamespaceUppercaseSeparator$_FWD_H
+#define $NamespaceUppercaseSeparator$_FWD_H
+
+#include "CoreTools/TextParsing/TextParsingFwd.h"
+
+namespace $NameSpaceName$
+{
+$EnumDeclaration$
+$ClassDeclaration$    class $NameSpaceName$Container;
+}
+
+#endif  // $NamespaceUppercaseSeparator$_FWD_H

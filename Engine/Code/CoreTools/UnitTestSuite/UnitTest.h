@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/30 09:40)
+///	版本：0.9.1.5 (2023/09/20 14:01)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_H
@@ -13,7 +13,6 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "UnitTestComposite.h"
-#include "UnitTestSuiteFwd.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Exception/ExceptionFwd.h"
@@ -35,7 +34,7 @@ namespace CoreTools
     public:
         using ClassType = UnitTest;
         using ParentType = UnitTestComposite;
-        using ClassShareType = NonCopyClasses;
+
         using OStreamShared = CoreTools::OStreamShared;
 
     public:

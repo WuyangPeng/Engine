@@ -40,7 +40,7 @@ void Mathematics::IntegerDataTesting::DoRunUnitTest()
 void Mathematics::IntegerDataTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CopyTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(BitTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(Bit1Test);
     ASSERT_NOT_THROW_EXCEPTION_0(ConversionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CompareTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FloatingPointConversionTest);
@@ -79,7 +79,7 @@ void Mathematics::IntegerDataTesting::CopyTest()
     }
 }
 
-void Mathematics::IntegerDataTesting::BitTest()
+void Mathematics::IntegerDataTesting::Bit1Test()
 {
     std::vector<uint16_t> data{ 0b11111111'00000000,  // ื๎ตอฮป
                                 0b10111111'11111111,

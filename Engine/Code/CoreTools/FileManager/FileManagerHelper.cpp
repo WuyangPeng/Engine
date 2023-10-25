@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:41)
+///	版本：0.9.1.5 (2023/09/22 14:11)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,7 +16,6 @@
 
 #include <fstream>
 
-// static
 CoreTools::FileBuffer CoreTools::FileManagerHelper::LoadFromFile(const String& fileName, bool binaryFile)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
@@ -33,7 +32,6 @@ CoreTools::FileBuffer CoreTools::FileManagerHelper::LoadFromFile(const String& f
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// static
 void CoreTools::FileManagerHelper::SaveIntoFile(const String& fileName, bool binaryFile, int bufferSize, const char* buffer)
 {
     CORE_TOOLS_ASSERTION_0(buffer != nullptr, "传入的指针为空！");
@@ -53,7 +51,6 @@ void CoreTools::FileManagerHelper::SaveIntoFile(const String& fileName, bool bin
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// static
 void CoreTools::FileManagerHelper::AppendToFile(const String& fileName, bool binaryFile, int bufferSize, const char* buffer)
 {
     CORE_TOOLS_ASSERTION_0(buffer != nullptr, "传入的指针为空！");

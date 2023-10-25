@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/24 14:57)
+///	版本：0.9.1.5 (2023/09/21 09:45)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_APPENDER_IO_MANAGER_IMPL_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_APPENDER_IO_MANAGER_IMPL_H
@@ -26,6 +26,7 @@ namespace CoreTools
     {
     public:
         using ClassType = LogAppenderIOManagerImpl;
+
         using AppenderManagerSharedPtr = std::shared_ptr<AppenderManager>;
         using String = System::String;
 
@@ -57,7 +58,7 @@ namespace CoreTools
 
     private:
         LogLevel logLevel;
-        AppenderManagerSharedPtr currentAppenderManager; 
+        AppenderManagerSharedPtr currentAppenderManager;
     };
 }
 

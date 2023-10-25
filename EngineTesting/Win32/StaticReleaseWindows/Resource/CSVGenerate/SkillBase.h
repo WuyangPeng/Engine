@@ -16,6 +16,7 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/TextParsing/Data/IntVector3.h"
 
+
 namespace CSVConfigure
 {
     class SkillBase

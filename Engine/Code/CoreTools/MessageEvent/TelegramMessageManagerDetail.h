@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/29 13:47)
+///	版本：0.9.1.5 (2023/09/21 09:24)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_MESSAGE_TELEGRAM_MANAGER_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_MESSAGE_TELEGRAM_MANAGER_DETAIL_H
 
 #include "EntityManagerDetail.h"
-#include "Telegram.h"
 #include "TelegramMessageManager.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -81,8 +80,8 @@ void CoreTools::TelegramMessageManager<EventType>::CallEventImmediately(int64_t 
 
     if (telegram.GetDispatchMillisecondTime() <= currentTime)
     {
-        auto receiver = telegram.GetReceiver();
-        if (receiver.empty())
+        if (auto receiver = telegram.GetReceiver();
+            receiver.empty())
         {
             DisposeAllEvent(telegram);
         }
@@ -131,9 +130,8 @@ void CoreTools::TelegramMessageManager<EventType>::DisposeEvent(const Telegram& 
     {
         EXCEPTION_TRY
         {
-            const auto& container = eventRegisterContainer[telegram.GetMessageType()];
-
-            if (registerContainer.contains(id) || container.contains(id))
+            if (const auto& container = eventRegisterContainer[telegram.GetMessageType()];
+                registerContainer.contains(id) || container.contains(id))
             {
                 DisposeEvent(id, telegram);
             }

@@ -40,9 +40,9 @@ void AncientBooks::GeographicContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         geographic.emplace_back(std::make_shared<Geographic>(csvRow));
     }
@@ -77,14 +77,14 @@ void AncientBooks::GeographicContainer::Unique()
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, GeographicContainer)
 
-AncientBooks::GeographicContainer::ConstGeographicBaseSharedPtr AncientBooks::GeographicContainer::GetFirstGeographic() const
+AncientBooks::GeographicContainer::ConstGeographicSharedPtr AncientBooks::GeographicContainer::GetFirstGeographic() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return geographic.at(0);
 }
 
-AncientBooks::GeographicContainer::ConstGeographicBaseSharedPtr AncientBooks::GeographicContainer::GetGeographic(int key) const
+AncientBooks::GeographicContainer::ConstGeographicSharedPtr AncientBooks::GeographicContainer::GetGeographic(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

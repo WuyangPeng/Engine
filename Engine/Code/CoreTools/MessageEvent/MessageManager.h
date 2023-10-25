@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/29 13:38)
+///	版本：0.9.1.5 (2023/09/21 09:22)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_MESSAGE_MANAGER_H
 #define CORE_TOOLS_MESSAGE_EVENT_MESSAGE_MANAGER_H
@@ -24,6 +24,7 @@ namespace CoreTools
     {
     public:
         using ClassType = MessageManager<EventSlot, EventType>;
+
         using SubclassSharedPtr = typename EventSlot::SubclassSharedPtr;
         using CallbackMemberFunction = typename EventSlot::CallbackMemberFunction;
         using EventSlotPriorityType = typename EventSlot::EventSlotPriorityType;

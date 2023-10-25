@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/24 16:00)
+///	版本：0.9.1.5 (2023/09/21 10:00)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -47,11 +47,18 @@ CoreTools::LogAppenderIOManager::LogAppenderIOManager(DisableNotThrow disableNot
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, LogAppenderIOManager)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(CoreTools, LogAppenderIOManager, SetAppenderManager, AppenderManagerSharedPtr, void)
-
 CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(const LogMessage& message)
 {
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
     *impl << message;
 
     return *this;
+}
+
+void CoreTools::LogAppenderIOManager::SetAppenderManager(const AppenderManagerSharedPtr& appenderManager) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->SetAppenderManager(appenderManager);
 }

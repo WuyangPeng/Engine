@@ -68,7 +68,7 @@ System::String CsvOutput::Input1Base::GetTest5() const
     THROW_EXCEPTION(SYSTEM_TEXT("input1表基类不允许获取字符串。"s))
 }
 
-std::vector<System::String> CsvOutput::Input1Base::GetTest6() const
+CsvOutput::Input1Base::StringContainer CsvOutput::Input1Base::GetTest6() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -82,21 +82,23 @@ int CsvOutput::Input1Base::GetTest6Count() const
     THROW_EXCEPTION(SYSTEM_TEXT("input1表基类不允许获取数组。"s))
 }
 
-System::String CsvOutput::Input1Base::GetTest6(MAYBE_UNUSED int index) const
+System::String CsvOutput::Input1Base::GetTest6(int index) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(index);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("input1表基类不允许获取数组。"s))
+}
+
+CsvOutput::Input1Base::StringContainerConstIter CsvOutput::Input1Base::GetTest6Begin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("input1表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator CsvOutput::Input1Base::GetTest6Begin() const
-{
-    USER_CLASS_IS_VALID_CONST_9;
-
-    THROW_EXCEPTION(SYSTEM_TEXT("input1表基类不允许获取数组。"s))
-}
-
-std::vector<System::String>::const_iterator CsvOutput::Input1Base::GetTest6End() const
+CsvOutput::Input1Base::StringContainerConstIter CsvOutput::Input1Base::GetTest6End() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

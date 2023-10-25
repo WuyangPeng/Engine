@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:47)
+///	版本：0.9.1.5 (2023/09/22 11:10)
 
 // 类不变式所需要的宏
 #ifndef CORE_TOOLS_HELPER_CLASS_INVARIANT_MACRO_H
@@ -41,12 +41,21 @@
 
 #if defined(OPEN_CLASS_INVARIANT)
 
-    #define CLASS_IS_VALID \
-        CoreTools::CheckInvariant<ClassType>{ (*this), (CORE_TOOLS_FUNCTION_DESCRIBED) }
-    #define CLASS_IS_VALID_CONST \
-        CoreTools::CheckInvariant<ClassType>{ (*this), (CORE_TOOLS_FUNCTION_DESCRIBED), (CoreTools::CheckInvariantConditions::OnlyPostCondition) }
-    #define SELF_CLASS_IS_VALID \
-        CoreTools::CheckInvariant<ClassType>{ (*this), (CORE_TOOLS_FUNCTION_DESCRIBED), (CoreTools::CheckInvariantConditions::OnlyPreCondition) }
+    #define CLASS_IS_VALID                           \
+        CoreTools::CheckInvariant<ClassType>         \
+        {                                            \
+            (*this), (CORE_TOOLS_FUNCTION_DESCRIBED) \
+        }
+    #define CLASS_IS_VALID_CONST                                                                               \
+        CoreTools::CheckInvariant<ClassType>                                                                   \
+        {                                                                                                      \
+            (*this), (CORE_TOOLS_FUNCTION_DESCRIBED), (CoreTools::CheckInvariantConditions::OnlyPostCondition) \
+        }
+    #define SELF_CLASS_IS_VALID                                                                               \
+        CoreTools::CheckInvariant<ClassType>                                                                  \
+        {                                                                                                     \
+            (*this), (CORE_TOOLS_FUNCTION_DESCRIBED), (CoreTools::CheckInvariantConditions::OnlyPreCondition) \
+        }
 
 #else  // !OPEN_CLASS_INVARIANT
 
@@ -88,7 +97,7 @@
     #define CLASS_IS_VALID_0 (static_cast<void>(0))
     #define SELF_CLASS_IS_VALID_0 (static_cast<void>(0))
 
-#endif  //0 <= CLASS_INVARIANT_LEVEL
+#endif  // 0 <= CLASS_INVARIANT_LEVEL
 
 #if 1 <= CLASS_INVARIANT_LEVEL
 

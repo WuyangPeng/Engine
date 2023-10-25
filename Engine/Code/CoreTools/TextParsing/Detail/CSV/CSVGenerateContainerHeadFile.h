@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:02)
+///	版本：0.9.1.5 (2023/10/23 09:29)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_CONTAINER_HEAD_FILE_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_CONTAINER_HEAD_FILE_H
@@ -23,7 +23,7 @@ namespace CoreTools
         using ParentType = CSVGenerateImpl;
 
     public:
-        explicit CSVGenerateContainerHeadFile(const CSVHead& csvHead) noexcept;
+        CSVGenerateContainerHeadFile(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis) noexcept;
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -31,7 +31,7 @@ namespace CoreTools
         NODISCARD String GetSuffix() const override;
         NODISCARD String GetFilePrefix() const override;
         NODISCARD String GetFileSuffix() const override;
-        NODISCARD String GetContent() const override;
+        NODISCARD String GetContent(const String& codeDirectory) const override;
     };
 }
 

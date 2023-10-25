@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/18 14:37)
+///	版本：0.9.1.5 (2023/09/23 10:26)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -79,7 +79,7 @@ void CoreTools::FormatErrorMessageImpl::ReleaseMemory() noexcept
 {
     if (errorMessage != nullptr && !System::LocalMemoryFree(errorMessage))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("释放指定的本地内存对象失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);          
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("释放指定的本地内存对象失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

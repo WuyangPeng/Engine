@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:19)
+///	版本：0.9.1.5 (2023/09/23 14:53)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_QUERY_XML_DATA_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_QUERY_XML_DATA_IMPL_H
@@ -23,6 +23,7 @@ namespace CoreTools::SimpleCSV
     {
     public:
         using ClassType = QueryXmlDataImpl;
+
         using XmlDataSharedPtr = std::shared_ptr<XmlData>;
 
     public:

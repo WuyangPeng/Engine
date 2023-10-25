@@ -22,6 +22,8 @@ namespace CsvOutput
     public:
         using ClassType = Input3Base;
 
+        using String = System::String;
+
     public:
         Input3Base() noexcept = default;
         explicit Input3Base(int key) noexcept;
@@ -46,7 +48,7 @@ namespace CsvOutput
 
         NODISCARD virtual int GetTest4() const noexcept;
 
-        NODISCARD virtual System::String GetTest5() const;
+        NODISCARD virtual String GetTest5() const;
 
     private:
         int key{};

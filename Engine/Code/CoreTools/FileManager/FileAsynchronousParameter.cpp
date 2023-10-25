@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:40)
+///	版本：0.9.1.5 (2023/09/22 14:08)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -33,8 +33,37 @@ CoreTools::FileAsynchronousParameter::FileAsynchronousParameter(const String& fi
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, FileAsynchronousParameter)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, FileAsynchronousParameter, GetFileName, System::String)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, FileAsynchronousParameter, GetEvent, CoreTools::FileEventInterfaceWeakPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, FileAsynchronousParameter, IsBinaryFile, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, FileAsynchronousParameter, GetFileBuffer, CoreTools::ConstFileBufferSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, FileAsynchronousParameter, IsAppend, bool)
+CoreTools::FileAsynchronousParameter::String CoreTools::FileAsynchronousParameter::GetFileName() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFileName();
+}
+
+bool CoreTools::FileAsynchronousParameter::IsBinaryFile() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsBinaryFile();
+}
+
+CoreTools::FileEventInterfaceWeakPtr CoreTools::FileAsynchronousParameter::GetEvent() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetEvent();
+}
+
+CoreTools::ConstFileBufferSharedPtr CoreTools::FileAsynchronousParameter::GetFileBuffer() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFileBuffer();
+}
+
+bool CoreTools::FileAsynchronousParameter::IsAppend() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsAppend();
+}

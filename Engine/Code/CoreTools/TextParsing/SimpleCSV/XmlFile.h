@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:18)
+///	版本：0.9.1.5 (2023/09/23 15:01)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_XML_FILE_H
 #define CORE_TOOLS_TEXT_PARSING_XML_FILE_H
@@ -29,6 +29,7 @@ namespace CoreTools::SimpleCSV
     {
     public:
         COPY_UNSHARED_TYPE_DECLARE(XmlFile);
+
         using XmlDataSharedPtr = std::shared_ptr<XmlData>;
         using DocumentSharedPtr = std::shared_ptr<Document>;
         using ConstDocumentSharedPtr = std::shared_ptr<const Document>;

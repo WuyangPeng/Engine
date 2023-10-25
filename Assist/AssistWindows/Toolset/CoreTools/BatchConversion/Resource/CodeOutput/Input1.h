@@ -24,8 +24,10 @@ namespace CsvOutput
         using ClassType = Input1;
         using ParentType = Input1Base;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit Input1(const CoreTools::CSVRow& csvRow);
+        explicit Input1(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -41,13 +43,13 @@ namespace CsvOutput
 
         NODISCARD int GetTest4() const noexcept override;
 
-        NODISCARD System::String GetTest5() const override;
+        NODISCARD String GetTest5() const override;
 
-        NODISCARD std::vector<System::String> GetTest6() const override;
+        NODISCARD StringContainer GetTest6() const override;
         NODISCARD int GetTest6Count() const override;
-        NODISCARD System::String GetTest6(int index) const override;
-        NODISCARD std::vector<System::String>::const_iterator GetTest6Begin() const noexcept override;
-        NODISCARD std::vector<System::String>::const_iterator GetTest6End() const noexcept override;
+        NODISCARD String GetTest6(int index) const override;
+        NODISCARD StringContainerConstIter GetTest6Begin() const noexcept override;
+        NODISCARD StringContainerConstIter GetTest6End() const noexcept override;
 
     private:
         int id;  // id
@@ -55,8 +57,8 @@ namespace CsvOutput
         System::TChar test1;  // ≤‚ ‘1
         double test2;  // ≤‚ ‘2
         int test4;  // ≤‚ ‘4
-        System::String test5;  // ≤‚ ‘5
-        std::vector<System::String> test6;  // ≤‚ ‘6
+        String test5;  // ≤‚ ‘5
+        StringContainer test6;  // ≤‚ ‘6
     };
 }
 

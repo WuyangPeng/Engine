@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/29 13:40)
+///	版本：0.9.1.5 (2023/09/21 09:19)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_MESSAGE_MANAGER_H
 #define CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_MESSAGE_MANAGER_H
@@ -13,8 +13,6 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "EventEntity.h"
-#include "EventSlotManager.h"
-#include "MessageEventFwd.h"
 #include "TelegramLess.h"
 
 #include <map>
@@ -27,6 +25,7 @@ namespace CoreTools
     {
     public:
         using ClassType = TelegramMessageManager<EventType>;
+
         using Telegram = Telegram<EventType>;
         using TelegramLess = TelegramLess<EventType>;
 

@@ -40,9 +40,9 @@ void AncientBooks::ReignTitleContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         reignTitle.emplace_back(std::make_shared<ReignTitle>(csvRow));
     }
@@ -77,14 +77,14 @@ void AncientBooks::ReignTitleContainer::Unique()
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, ReignTitleContainer)
 
-AncientBooks::ReignTitleContainer::ConstReignTitleBaseSharedPtr AncientBooks::ReignTitleContainer::GetFirstReignTitle() const
+AncientBooks::ReignTitleContainer::ConstReignTitleSharedPtr AncientBooks::ReignTitleContainer::GetFirstReignTitle() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return reignTitle.at(0);
 }
 
-AncientBooks::ReignTitleContainer::ConstReignTitleBaseSharedPtr AncientBooks::ReignTitleContainer::GetReignTitle(int64_t key) const
+AncientBooks::ReignTitleContainer::ConstReignTitleSharedPtr AncientBooks::ReignTitleContainer::GetReignTitle(int64_t key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

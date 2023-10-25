@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 17:38)
+///	版本：0.9.1.5 (2023/09/20 13:48)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_O_STREAM_SHARED_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_O_STREAM_SHARED_H
@@ -14,7 +14,6 @@
 
 #include "CoreTools/Helper/Export/SharedExportMacro.h"
 
-#include <iostream>
 #include <string>
 
 CORE_TOOLS_SHARED_EXPORT_IMPL(OStreamImpl);

@@ -16,16 +16,21 @@
 #include "Chapter.h"
 #include "ChapterBase.h"
 #include "ChapterContainerDetail.h"
+
 #include "Equip.h"
 #include "EquipBase.h"
 #include "EquipContainerDetail.h"
+
 #include "Hero.h"
 #include "HeroContainerDetail.h"
+
 #include "Scene.h"
 #include "SceneContainerDetail.h"
+
 #include "Skill.h"
 #include "SkillBase.h"
 #include "SkillContainerDetail.h"
+
 #include "SystemConstant.h"
 #include "SystemConstantContainer.h"
 

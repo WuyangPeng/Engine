@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.7 (2023/04/26 17:06)
+///	版本：0.9.1.5 (2023/10/25 10:55)
 
 #include "CommandDeleteSheetTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -35,10 +35,10 @@ void CoreTools::CommandDeleteSheetTesting::MainTest()
 
 void CoreTools::CommandDeleteSheetTesting::CommandDeleteSheetTest()
 {
-    const auto sheetID = "sheetID"s;
+    const auto sheetId = "sheetId"s;
     const auto sheetName = "sheetName"s;
-    const SimpleCSV::CommandDeleteSheet commandDeleteSheet{ sheetID, sheetName };
+    const SimpleCSV::CommandDeleteSheet commandDeleteSheet{ sheetId, sheetName };
 
-    ASSERT_EQUAL(sheetID, commandDeleteSheet.GetSheetId());
+    ASSERT_EQUAL(sheetId, commandDeleteSheet.GetSheetId());
     ASSERT_EQUAL(sheetName, commandDeleteSheet.GetSheetName());
 }

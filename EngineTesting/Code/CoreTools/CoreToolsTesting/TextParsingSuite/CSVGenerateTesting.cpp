@@ -5,9 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.7 (2023/04/26 16:07)
+///	版本：0.9.1.5 (2023/10/25 10:30)
 
 #include "CSVGenerateTesting.h"
+#include "CoreTools/CharacterString/CodeMappingAnalysis.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/BatchConversionCSV.h"
@@ -62,9 +63,11 @@ void CoreTools::CSVGenerateTesting::CSVGenerateBaseHeadTest()
     const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
     const auto csvHead = csvContent.GetCSVHead();
 
-    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::BaseHead };
+    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json"s) };
 
-    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
+    const CSVGenerate csvGenerate{ csvHead, codeMappingAnalysis, CSVGenerateType::BaseHead };
+
+    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"s), SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateChildHeadTest()
@@ -72,9 +75,11 @@ void CoreTools::CSVGenerateTesting::CSVGenerateChildHeadTest()
     const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
     const auto csvHead = csvContent.GetCSVHead();
 
-    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::ChildHead };
+    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json"s) };
 
-    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
+    const CSVGenerate csvGenerate{ csvHead, codeMappingAnalysis, CSVGenerateType::ChildHead };
+
+    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"s), SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateContainerHeadTest()
@@ -82,9 +87,11 @@ void CoreTools::CSVGenerateTesting::CSVGenerateContainerHeadTest()
     const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
     const auto csvHead = csvContent.GetCSVHead();
 
-    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::ContainerHead };
+    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json"s) };
 
-    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
+    const CSVGenerate csvGenerate{ csvHead, codeMappingAnalysis, CSVGenerateType::ContainerHead };
+
+    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"s), SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateContainerDetailHeadTest()
@@ -92,9 +99,11 @@ void CoreTools::CSVGenerateTesting::CSVGenerateContainerDetailHeadTest()
     const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
     const auto csvHead = csvContent.GetCSVHead();
 
-    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::ContainerDetailHead };
+    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json"s) };
 
-    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
+    const CSVGenerate csvGenerate{ csvHead, codeMappingAnalysis, CSVGenerateType::ContainerDetailHead };
+
+    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"s), SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateBaseSourceTest()
@@ -102,9 +111,11 @@ void CoreTools::CSVGenerateTesting::CSVGenerateBaseSourceTest()
     const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
     const auto csvHead = csvContent.GetCSVHead();
 
-    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::BaseSource };
+    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json"s) };
 
-    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
+    const CSVGenerate csvGenerate{ csvHead, codeMappingAnalysis, CSVGenerateType::BaseSource };
+
+    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"s), SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateChildSourceTest()
@@ -112,9 +123,11 @@ void CoreTools::CSVGenerateTesting::CSVGenerateChildSourceTest()
     const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
     const auto csvHead = csvContent.GetCSVHead();
 
-    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::ChildSource };
+    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json"s) };
 
-    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
+    const CSVGenerate csvGenerate{ csvHead, codeMappingAnalysis, CSVGenerateType::ChildSource };
+
+    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"s), SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateContainerSourceTest()
@@ -122,9 +135,11 @@ void CoreTools::CSVGenerateTesting::CSVGenerateContainerSourceTest()
     const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
     const auto csvHead = csvContent.GetCSVHead();
 
-    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::ContainerSource };
+    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json"s) };
 
-    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
+    const CSVGenerate csvGenerate{ csvHead, codeMappingAnalysis, CSVGenerateType::ContainerSource };
+
+    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"s), SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateTotalVectorTest()
@@ -132,9 +147,11 @@ void CoreTools::CSVGenerateTesting::CSVGenerateTotalVectorTest()
     const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Equip.csv"s) };
     const auto csvHead = csvContent.GetCSVHead();
 
-    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::Total };
+    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json"s) };
 
-    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
+    const CSVGenerate csvGenerate{ csvHead, codeMappingAnalysis, CSVGenerateType::Total };
+
+    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"s), SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateTotalTreeMapTest()
@@ -142,9 +159,11 @@ void CoreTools::CSVGenerateTesting::CSVGenerateTotalTreeMapTest()
     const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Hero.csv"s) };
     const auto csvHead = csvContent.GetCSVHead();
 
-    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::Total };
+    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json"s) };
 
-    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
+    const CSVGenerate csvGenerate{ csvHead, codeMappingAnalysis, CSVGenerateType::Total };
+
+    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"s), SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateTotalHashMapTest()
@@ -152,9 +171,11 @@ void CoreTools::CSVGenerateTesting::CSVGenerateTotalHashMapTest()
     const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Scene.csv"s) };
     const auto csvHead = csvContent.GetCSVHead();
 
-    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::Total };
+    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json"s) };
 
-    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
+    const CSVGenerate csvGenerate{ csvHead, codeMappingAnalysis, CSVGenerateType::Total };
+
+    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"s), SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateTotalKeyTest()
@@ -162,36 +183,44 @@ void CoreTools::CSVGenerateTesting::CSVGenerateTotalKeyTest()
     const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Skill.csv"s) };
     const auto csvHead = csvContent.GetCSVHead();
 
-    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::Total };
+    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json"s) };
 
-    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
+    const CSVGenerate csvGenerate{ csvHead, codeMappingAnalysis, CSVGenerateType::Total };
+
+    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"s), SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateTotalEnumHeadTest()
 {
     const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/VectorType.csv"s) };
 
-    const CSVGenerate csvGenerate{ csvContent, CSVGenerateType::EnumHead };
+    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json"s) };
 
-    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
+    const CSVGenerate csvGenerate{ csvContent, codeMappingAnalysis, CSVGenerateType::EnumHead };
+
+    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"s), SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateTotalEnumSourceTest()
 {
     const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/VectorType.csv"s) };
 
-    const CSVGenerate csvGenerate{ csvContent, CSVGenerateType::EnumSource };
+    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json"s) };
 
-    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
+    const CSVGenerate csvGenerate{ csvContent, codeMappingAnalysis, CSVGenerateType::EnumSource };
+
+    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"s), SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateTotalEnumTotalTest()
 {
     const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/LineType.csv"s) };
 
-    const CSVGenerate csvGenerate{ csvContent, CSVGenerateType::EnumTotal };
+    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json"s) };
 
-    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
+    const CSVGenerate csvGenerate{ csvContent, codeMappingAnalysis, CSVGenerateType::EnumTotal };
+
+    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"s), SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateTotalUniqueTest()
@@ -199,7 +228,9 @@ void CoreTools::CSVGenerateTesting::CSVGenerateTotalUniqueTest()
     const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/SystemConstant.csv"s) };
     const auto csvHead = csvContent.GetCSVHead();
 
-    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::Total };
+    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json"s) };
 
-    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
+    const CSVGenerate csvGenerate{ csvHead, codeMappingAnalysis, CSVGenerateType::Total };
+
+    csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"s), SYSTEM_TEXT("Resource/CSVGenerate"s));
 }

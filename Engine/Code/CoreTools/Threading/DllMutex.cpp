@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 16:40)
+///	版本：0.9.1.5 (2023/09/20 14:31)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "DllMutex.h"
 #include "Detail/MutexFactory.h"
 #include "Detail/MutexImpl.h"
-#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
@@ -43,8 +42,37 @@ CoreTools::DllMutex& CoreTools::DllMutex::operator=(DllMutex&& rhs) noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, DllMutex)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, DllMutex, Initialize, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, DllMutex, Delete, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, DllMutex, Enter, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, DllMutex, TryEnter, bool)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, DllMutex, Leave, void)
+bool CoreTools::DllMutex::TryEnter()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->TryEnter();
+}
+
+void CoreTools::DllMutex::Enter()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->Enter();
+}
+
+void CoreTools::DllMutex::Leave() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->Leave();
+}
+
+void CoreTools::DllMutex::Initialize()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->Initialize();
+}
+
+void CoreTools::DllMutex::Delete() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->Delete();
+}

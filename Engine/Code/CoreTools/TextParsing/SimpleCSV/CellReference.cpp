@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:08)
+///	版本：0.9.1.5 (2023/09/23 15:36)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -35,11 +35,47 @@ CoreTools::SimpleCSV::CellReference::CellReference(int row, const std::string& c
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, CellReference)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, CellReference, GetRow, int)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, CellReference, SetRow, int, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, CellReference, GetColumn, int)
+int CoreTools::SimpleCSV::CellReference::GetRow() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, CellReference, SetColumn, int, void)
+    return impl->GetRow();
+}
+
+void CoreTools::SimpleCSV::CellReference::SetRow(int row)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetRow(row);
+}
+
+int CoreTools::SimpleCSV::CellReference::GetColumn() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetColumn();
+}
+
+void CoreTools::SimpleCSV::CellReference::SetColumn(int column)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetColumn(column);
+}
+
+std::string CoreTools::SimpleCSV::CellReference::GetAddress() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetAddress();
+}
+
+void CoreTools::SimpleCSV::CellReference::SetAddress(const std::string& address)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetAddress(address);
+}
 
 void CoreTools::SimpleCSV::CellReference::SetRowAndColumn(int row, int column)
 {
@@ -47,9 +83,6 @@ void CoreTools::SimpleCSV::CellReference::SetRowAndColumn(int row, int column)
 
     return impl->SetRowAndColumn(row, column);
 }
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, CellReference, GetAddress, std::string)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, CellReference, SetAddress, std::string, void)
 
 bool CoreTools::SimpleCSV::operator==(const CellReference& lhs, const CellReference& rhs) noexcept
 {

@@ -24,7 +24,7 @@ namespace AncientBooks
         using ClassType = Genus;
         using ParentType = GenusBase;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit Genus(const CSVRow& csvRow);
@@ -46,6 +46,7 @@ namespace AncientBooks
         NODISCARD String GetBegin() const override;
 
         NODISCARD String GetEnd() const override;
+
 
     private:
         int id;  // Id

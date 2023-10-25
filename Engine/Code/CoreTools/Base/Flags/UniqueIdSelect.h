@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/17 19:41)
+///	版本：0.9.1.5 (2023/09/23 10:47)
 
 #ifndef CORE_TOOLS_BASE_UNIQUE_ID_SELECT_H
 #define CORE_TOOLS_BASE_UNIQUE_ID_SELECT_H
@@ -16,7 +16,7 @@ namespace CoreTools
 {
     enum class UniqueIdSelect
     {
-        Default = 0, 
+        Default = 0,
         Object = 1,
         Entity = 2,
         Network = 3,

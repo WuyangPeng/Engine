@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:02)
+///	版本：0.9.1.5 (2023/09/22 15:17)
 
 #ifndef CORE_TOOLS_EXCEPTION_ERROR_H
 #define CORE_TOOLS_EXCEPTION_ERROR_H
@@ -13,7 +13,6 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
-
 #include "System/Windows/Fwd/WindowsFlagsFwd.h"
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Exception/ExceptionFwd.h"
@@ -31,6 +30,7 @@ namespace CoreTools
     {
     public:
         PERFORMANCE_UNSHARED_TYPE_DECLARE(Error);
+
         using String = System::String;
         using WindowError = System::WindowError;
         using Format = boost::basic_format<System::TChar>;
@@ -53,8 +53,8 @@ namespace CoreTools
         NODISCARD int GetLine() const noexcept;
         NODISCARD const FunctionDescribed& GetFunctionDescribed() const noexcept;
 
-        [[noreturn]] static void ThrowError(const FunctionDescribed& functionDescribed, WindowError lastError, const String& message);
-        [[noreturn]] static void ThrowError(const FunctionDescribed& functionDescribed, const String& message);
+        SYSTEM_NORETURN static void ThrowError(const FunctionDescribed& functionDescribed, WindowError lastError, const String& message);
+        SYSTEM_NORETURN static void ThrowError(const FunctionDescribed& functionDescribed, const String& message);
 
     private:
         PackageType impl;

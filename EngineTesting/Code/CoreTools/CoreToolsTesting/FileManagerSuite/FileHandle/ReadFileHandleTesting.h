@@ -5,11 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/11 19:42)
+///	版本：0.9.1.5 (2023/10/24 20:28)
 
 #ifndef CORE_TOOLS_TESTING_READ_FILE_HANDLE_MANAGER_TESTING_H
 #define CORE_TOOLS_TESTING_READ_FILE_HANDLE_MANAGER_TESTING_H
 
+#include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -19,6 +20,7 @@ namespace CoreTools
     public:
         using ClassType = ReadFileHandleTesting;
         using ParentType = UnitTest;
+
         using String = System::String;
 
     public:

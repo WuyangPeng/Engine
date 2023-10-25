@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:07)
+///	版本：0.9.1.5 (2023/09/23 18:12)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -37,23 +37,103 @@ CoreTools::SimpleCSV::Row::Row(const ConstXMLDocumentSharedPtr& document, RowCre
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, Row)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Row, GetHeight, double)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, Row, SetHeight, double, void)
+double CoreTools::SimpleCSV::Row::GetHeight() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Row, GetDescent, double)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, Row, SetDescent, double, void)
+    return impl->GetHeight();
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Row, IsHidden, bool)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, Row, SetHidden, bool, void)
+void CoreTools::SimpleCSV::Row::SetHeight(double height)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Row, GetRowNumber, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Row, GetCellCount, int)
+    return impl->SetHeight(height);
+}
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, Row, GetValues, CoreTools::SimpleCSV::RowDataProxy&)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, Row, GetValues, const CoreTools::SimpleCSV::RowDataProxy&)
+double CoreTools::SimpleCSV::Row::GetDescent() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Row, GetCells, CoreTools::SimpleCSV::RowDataRange)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, Row, GetCells, int, CoreTools::SimpleCSV::RowDataRange)
+    return impl->GetDescent();
+}
+
+void CoreTools::SimpleCSV::Row::SetDescent(double descent)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetDescent(descent);
+}
+
+bool CoreTools::SimpleCSV::Row::IsHidden() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsHidden();
+}
+
+void CoreTools::SimpleCSV::Row::SetHidden(bool state)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetHidden(state);
+}
+
+int CoreTools::SimpleCSV::Row::GetRowNumber() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetRowNumber();
+}
+
+int CoreTools::SimpleCSV::Row::GetCellCount() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetCellCount();
+}
+
+CoreTools::SimpleCSV::RowDataProxy& CoreTools::SimpleCSV::Row::GetValues() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetValues();
+}
+
+const CoreTools::SimpleCSV::RowDataProxy& CoreTools::SimpleCSV::Row::GetValues() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetValues();
+}
+
+CoreTools::SimpleCSV::RowDataRange CoreTools::SimpleCSV::Row::GetCells() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetCells();
+}
+
+CoreTools::SimpleCSV::RowDataRange CoreTools::SimpleCSV::Row::GetCells(int cellCount) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetCells(cellCount);
+}
+
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Row::GetRowNode() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetRowNode();
+}
+
+CoreTools::SimpleCSV::Row::SharedStringsSharedPtr CoreTools::SimpleCSV::Row::GetSharedStrings()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetSharedStrings();
+}
 
 CoreTools::SimpleCSV::RowDataRange CoreTools::SimpleCSV::Row::GetCells(int firstCell, int lastCell) const
 {
@@ -61,9 +141,6 @@ CoreTools::SimpleCSV::RowDataRange CoreTools::SimpleCSV::Row::GetCells(int first
 
     return impl->GetCells(firstCell, lastCell);
 }
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Row, GetRowNode, CoreTools::SimpleCSV::XMLNode)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Row, GetSharedStrings, CoreTools::SimpleCSV::Row::SharedStringsSharedPtr)
 
 bool CoreTools::SimpleCSV::Row::IsSame(const Row& rhs) const
 {

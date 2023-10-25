@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVRowDetail.h"
 
-using namespace std::literals;
+using namespace std::literals; 
 
 AncientBooks::Article::Article(const CSVRow& csvRow)
     : ParentType{},

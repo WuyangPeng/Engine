@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/21 15:33)
+///	标准：std:c++20
+///	版本：0.9.1.5 (2023/09/20 14:48)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_H
@@ -26,10 +26,10 @@
 #include "ParamType.h"
 #include "Pow3.h"
 #include "PtrCompare.h"
+#include "RangeIteration.h"
 #include "RealAddressDetail.h"
 #include "RecursiveSine.h"
 #include "ReferenceCastDetail.h"
-#include "RangeIteration.h"
 #include "SimpleDecrementer.h"
 #include "SimpleIncrementer.h"
 #include "Sqrt.h"

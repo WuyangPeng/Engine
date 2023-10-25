@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:03)
+///	版本：0.9.1.5 (2023/09/22 15:18)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -31,11 +31,40 @@ CoreTools::Error::Error(const FunctionDescribed& functionDescribed, WindowError 
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, Error)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Error, GetError, System::String)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Error, GetCurrentFunction, const char*)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Error, GetFileName, const char*)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Error, GetLine, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Error, GetFunctionDescribed, const CoreTools::FunctionDescribed&)
+CoreTools::Error::String CoreTools::Error::GetError() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetError();
+}
+
+const char* CoreTools::Error::GetCurrentFunction() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetCurrentFunction();
+}
+
+const char* CoreTools::Error::GetFileName() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFileName();
+}
+
+int CoreTools::Error::GetLine() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetLine();
+}
+
+const CoreTools::FunctionDescribed& CoreTools::Error::GetFunctionDescribed() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFunctionDescribed();
+}
 
 void CoreTools::Error::ThrowError(const FunctionDescribed& functionDescribed, WindowError lastError, const String& message)
 {

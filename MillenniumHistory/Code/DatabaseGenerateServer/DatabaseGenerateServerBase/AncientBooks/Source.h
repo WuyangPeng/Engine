@@ -24,7 +24,7 @@ namespace AncientBooks
         using ClassType = Source;
         using ParentType = SourceBase;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit Source(const CSVRow& csvRow);
@@ -38,6 +38,7 @@ namespace AncientBooks
         NODISCARD String GetName() const override;
 
         NODISCARD int GetSort() const noexcept override;
+
 
     private:
         int id;  // Id

@@ -24,8 +24,10 @@ namespace CsvOutput
         using ClassType = Input3;
         using ParentType = Input3Base;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit Input3(const CoreTools::CSVRow& csvRow);
+        explicit Input3(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -41,7 +43,7 @@ namespace CsvOutput
 
         NODISCARD int GetTest4() const noexcept override;
 
-        NODISCARD System::String GetTest5() const override;
+        NODISCARD String GetTest5() const override;
 
     private:
         int id;  // id
@@ -49,7 +51,7 @@ namespace CsvOutput
         System::TChar test1;  // ≤‚ ‘1
         double test2;  // ≤‚ ‘2
         int test4;  // ≤‚ ‘4
-        System::String test5;  // ≤‚ ‘5
+        String test5;  // ≤‚ ‘5
     };
 }
 

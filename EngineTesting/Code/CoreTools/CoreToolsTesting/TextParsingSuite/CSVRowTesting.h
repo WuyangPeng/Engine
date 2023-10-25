@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.7 (2023/04/26 15:11)
+///	版本：0.9.1.5 (2023/10/25 10:25)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_CSV_ROW_TESTING_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_CSV_ROW_TESTING_H
@@ -19,8 +19,9 @@ namespace CoreTools
     {
     public:
         using ClassType = CSVRowTesting;
-        using String = System::String;
         using ParentType = UnitTest;
+
+        using String = System::String;
 
     public:
         explicit CSVRowTesting(const OStreamShared& stream);

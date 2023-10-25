@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/22 14:41)
+///	版本：0.9.1.5 (2023/09/23 09:41)
 
 #ifndef CORE_TOOLS_CONTRACT_SHARED_IMPL_H
 #define CORE_TOOLS_CONTRACT_SHARED_IMPL_H
@@ -24,6 +24,7 @@ namespace CoreTools
     {
     public:
         using ClassType = SharedImpl<T>;
+
         using ClassShareType = ShareClasses;
         using SharedPtr = std::shared_ptr<T>;
         using ConstSharedPtr = std::shared_ptr<const T>;

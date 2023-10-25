@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/29 16:36)
+///	版本：0.9.1.5 (2023/09/20 15:27)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_H
@@ -24,6 +24,7 @@ namespace CoreTools
     {
     public:
         COPY_UNSHARED_TYPE_DECLARE(ObjectLink);
+
         using LinkSequentialContainer = std::vector<ObjectInterfaceSharedPtr>;
         using LinkSequentialContainerIter = LinkSequentialContainer::iterator;
         using LinkSequentialContainerConstIter = LinkSequentialContainer::const_iterator;
@@ -43,10 +44,10 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ObjectInterfaceSharedPtr GetObjectInterface(uint64_t uniqueId);
+        NODISCARD ObjectInterfaceSharedPtr GetObjectInterface(int64_t uniqueId);
         NODISCARD int GetOrderedSize() const;
 
-        void Insert(uint64_t uniqueId, const ObjectInterfaceSharedPtr& object);
+        void Insert(int64_t uniqueId, const ObjectInterfaceSharedPtr& object);
 
         void Sort();
 

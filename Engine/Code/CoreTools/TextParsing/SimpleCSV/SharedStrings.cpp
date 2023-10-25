@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:06)
+///	版本：0.9.1.5 (2023/09/23 18:19)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -33,10 +33,33 @@ CoreTools::SimpleCSV::SharedStrings::SharedStrings(const XmlDataSharedPtr& xmlDa
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools::SimpleCSV, SharedStrings)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, SharedStrings, GetStringIndex, std::string, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, SharedStrings, IsStringExists, std::string, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, SharedStrings, IsStringExists, int, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, SharedStrings, GetString, int, const std::string&)
+int CoreTools::SimpleCSV::SharedStrings::GetStringIndex(const std::string& str) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetStringIndex(str);
+}
+
+bool CoreTools::SimpleCSV::SharedStrings::IsStringExists(const std::string& str) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsStringExists(str);
+}
+
+bool CoreTools::SimpleCSV::SharedStrings::IsStringExists(int index) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsStringExists(index);
+}
+
+const std::string& CoreTools::SimpleCSV::SharedStrings::GetString(int index) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetString(index);
+}
 
 int CoreTools::SimpleCSV::SharedStrings::AppendString(const std::string& str)
 {
@@ -60,8 +83,9 @@ void CoreTools::SimpleCSV::SharedStrings::ClearString(int index)
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     const auto children = GetXmlDocument()->document_element().children();
-    auto iter = children.begin();
-    if (!children.empty() && index < std::distance(iter, children.end()))
+
+    if (auto iter = children.begin();
+        !children.empty() && index < std::distance(iter, children.end()))
     {
         std::advance(iter, index);
         iter->text().set("");

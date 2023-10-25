@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/14 10:16)
+///	版本：0.9.1.5 (2023/10/25 14:06)
 
 #include "Array3Testing.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -76,7 +76,7 @@ void CoreTools::Array3Testing::ResultTest(const ArrayType& array3)
         {
             for (auto bound0Index = 0; bound0Index < bound0; ++bound0Index)
             {
-                 ASSERT_EQUAL(array3.Get(bound0Index, bound1Index, bound2Index), resultCount);
+                ASSERT_EQUAL(array3.Get(bound0Index, bound1Index, bound2Index), resultCount);
 
                 ++resultCount;
             }

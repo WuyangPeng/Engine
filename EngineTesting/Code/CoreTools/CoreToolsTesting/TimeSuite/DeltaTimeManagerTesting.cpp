@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.7 (2023/04/25 16:37)
+///	版本：0.9.1.5 (2023/10/25 14:22)
 
 #include "DeltaTimeManagerTesting.h"
 #include "System/Threading/SyncTools.h"
@@ -14,8 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Time/DeltaTimeManager.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-#include <Mathematics/Base/Math.h>
+#include "Mathematics/Base/Math.h"
 
 CoreTools::DeltaTimeManagerTesting::DeltaTimeManagerTesting(const OStreamShared& stream)
     : ParentType{ stream }

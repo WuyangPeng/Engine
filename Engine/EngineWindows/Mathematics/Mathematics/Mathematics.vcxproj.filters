@@ -1413,9 +1413,6 @@
     <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\GaussianElimination.cpp">
       <Filter>NumericalAnalysis 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\ChebyshevRatio.cpp">
-      <Filter>NumericalAnalysis 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\Rational\IntegerData.cpp">
       <Filter>Rational 源文件</Filter>
     </ClCompile>
@@ -5684,12 +5681,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Base\LexicoArray2Detail.h">
       <Filter>Base 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\ChebyshevRatio.h">
-      <Filter>NumericalAnalysis 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\ChebyshevRatioDetail.h">
-      <Filter>NumericalAnalysis 模板文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Primitives\Primitives.h">
       <Filter>Primitives 头文件</Filter>
     </ClInclude>
@@ -5766,6 +5757,90 @@
       <Filter>Estimate 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Estimate\CosEstimateDetail.h">
+      <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\Exp2Estimate.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\Exp2EstimateDetail.h">
+      <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ExpEstimate.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ExpEstimateDetail.h">
+      <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\InvSqrtEstimate.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\InvSqrtEstimateDetail.h">
+      <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\SlerpEstimateDetail.h">
+      <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\SqrtEstimateDetail.h">
+      <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\TanEstimateDetail.h">
+      <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\Log2EstimateDetail.h">
+      <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\LogEstimateDetail.h">
+      <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\RotationEstimateDetail.h">
+      <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\SinEstimateDetail.h">
+      <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\Log2Estimate.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\LogEstimate.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\RotationEstimate.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\SinEstimate.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\SlerpEstimate.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\SqrtEstimate.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\TanEstimate.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ChebyshevRatio.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ChebyshevRatioDetail.h">
+      <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ChebyshevRatioEstimate.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\ChebyshevRatioEstimateDetail.h">
+      <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\RemezAlgorithm.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\RemezAlgorithmDetail.h">
+      <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\Slerp.h">
+      <Filter>Estimate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Estimate\SlerpDetail.h">
       <Filter>Estimate 模板文件</Filter>
     </ClInclude>
   </ItemGroup>

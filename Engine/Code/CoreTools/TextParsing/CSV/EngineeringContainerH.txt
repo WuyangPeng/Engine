@@ -1,0 +1,38 @@
+$Copyright$
+
+#ifndef $NamespaceUppercaseSeparator$_$NamespaceUppercaseSeparator$_CONTAINER_H
+#define $NamespaceUppercaseSeparator$_$NamespaceUppercaseSeparator$_CONTAINER_H
+
+#include "CoreTools/CoreToolsDll.h"
+
+#include "$NameSpaceName$Fwd.h"
+#include "System/Helper/UnicodeUsing.h"
+
+#include <filesystem>
+#include <memory>
+
+namespace $NameSpaceName$
+{
+    class $NameSpaceName$Container final
+    {
+    public:
+        using ClassType = $NameSpaceName$Container;
+
+        using String = System::String;
+$ContainerSharedPtrUsing$
+    public:
+        explicit $NameSpaceName$Container(const String& directory);
+
+        CLASS_INVARIANT_DECLARE;
+
+$GetContainerSharedPtrUsing$
+    private:
+        void Parsing(const String& directory);
+        void Parsing(const std::filesystem::directory_entry& inputPath);
+        void Verify() const;
+
+    private:
+$ContainerSharedPtr$    };
+}
+
+#endif  // $NamespaceUppercaseSeparator$_$NamespaceUppercaseSeparator$_CONTAINER_H

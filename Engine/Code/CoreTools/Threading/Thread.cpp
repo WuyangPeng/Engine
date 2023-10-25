@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 16:40)
+///	版本：0.9.1.5 (2023/09/20 14:36)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,8 +22,37 @@ CoreTools::Thread::Thread(void* function, void* userData, int processorNumber, T
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, Thread)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Thread, Resume, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Thread, Suspend, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Thread, Wait, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, Thread, SetThreadPriority, int, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Thread, GetThreadPriority, int)
+void CoreTools::Thread::Resume()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->Resume();
+}
+
+void CoreTools::Thread::Suspend()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->Suspend();
+}
+
+void CoreTools::Thread::Wait()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->Wait();
+}
+
+void CoreTools::Thread::SetThreadPriority(int priority)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->SetThreadPriority(priority);
+}
+
+int CoreTools::Thread::GetThreadPriority() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetThreadPriority();
+}

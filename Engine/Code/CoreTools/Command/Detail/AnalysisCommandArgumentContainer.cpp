@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/21 10:19)
+///	版本：0.9.1.5 (2023/09/23 10:07)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -28,7 +28,6 @@ CoreTools::AnalysisCommandArgumentContainer::AnalysisCommandArgumentContainer(in
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 void CoreTools::AnalysisCommandArgumentContainer::Init(const char* const* arguments)
 {
     if (arguments != nullptr)
@@ -61,7 +60,6 @@ CoreTools::AnalysisCommandArgumentContainer::AnalysisCommandArgumentContainer(co
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 void CoreTools::AnalysisCommandArgumentContainer::Init(const char* commandLine)
 {
     std::string trimCommandLine{ commandLine };
@@ -73,7 +71,6 @@ void CoreTools::AnalysisCommandArgumentContainer::Init(const char* commandLine)
     commandArgumentContainer = std::make_shared<CommandArgumentContainer>(argumentsNumber);
 }
 
-// private
 void CoreTools::AnalysisCommandArgumentContainer::AddCommandArguments()
 {
     // 从1开始索引

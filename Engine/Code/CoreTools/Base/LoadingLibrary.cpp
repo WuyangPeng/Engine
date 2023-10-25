@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/17 19:50)
+///	版本：0.9.1.5 (2023/09/23 10:48)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,5 +22,16 @@ CoreTools::LoadingLibrary::LoadingLibrary(const String& fileName, LoadLibraryTyp
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, LoadingLibrary)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, LoadingLibrary, GetLoadedModule, CoreTools::LoadingLibrary::DynamicLinkModule)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, LoadingLibrary, GetProcessAddress, std::string, CoreTools::LoadingLibrary::DynamicLinkProcess)
+CoreTools::LoadingLibrary::DynamicLinkModule CoreTools::LoadingLibrary::GetLoadedModule() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetLoadedModule();
+}
+
+CoreTools::LoadingLibrary::DynamicLinkProcess CoreTools::LoadingLibrary::GetProcessAddress(const std::string& procName)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetProcessAddress(procName);
+}

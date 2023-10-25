@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:42)
+///	版本：0.9.1.5 (2023/09/22 14:16)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "WriteFileHandle.h"
 #include "Detail/WriteFileHandleImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 CoreTools::WriteFileHandle::WriteFileHandle(const String& fileName, FileHandleCreationDisposition creation)
     : impl{ fileName, creation }
@@ -22,7 +21,12 @@ CoreTools::WriteFileHandle::WriteFileHandle(const String& fileName, FileHandleCr
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, WriteFileHandle)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, WriteFileHandle, GetFileByteSize, int)
+int CoreTools::WriteFileHandle::GetFileByteSize() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFileByteSize();
+}
 
 void CoreTools::WriteFileHandle::Write(size_t itemSize, const void* data)
 {

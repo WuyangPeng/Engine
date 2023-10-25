@@ -5,14 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/28 16:38)
+///	版本：0.9.1.5 (2023/09/21 09:38)
 
 #ifndef CORE_TOOLS_MAIN_FUNCTION_HELPER_C_MAIN_FUNCTION_TESTING_HELPER_H
 #define CORE_TOOLS_MAIN_FUNCTION_HELPER_C_MAIN_FUNCTION_TESTING_HELPER_H
 
 #include "CoreTools/CoreToolsDll.h"
-
-#include "CoreTools/Helper/ExportMacro.h"
 
 #include "CMainFunctionHelper.h"
 #include "TestingInformationHelper.h"

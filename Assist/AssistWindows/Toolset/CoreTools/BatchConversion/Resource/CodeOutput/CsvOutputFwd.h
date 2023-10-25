@@ -17,12 +17,15 @@ namespace CsvOutput
     class Input1;
     class Input1Base;
     class Input1Container;
+    using Input1MappingType = Input1Base;
     class Input2;
     class Input2Base;
     class Input2Container;
+    using Input2MappingType = Input2Base;
     class Input3;
     class Input3Base;
     class Input3Container;
+    using Input3MappingType = Input3Base;
 
     class CsvOutputContainer;
 }

@@ -1,5 +1,6 @@
 {
   "input": "Resource/Input",
+  "codeInput": "Resource/CodeInput",
   "csvOutput": "Resource/CsvOutput",
   "codeOutput": "Resource/CodeOutput"
 }

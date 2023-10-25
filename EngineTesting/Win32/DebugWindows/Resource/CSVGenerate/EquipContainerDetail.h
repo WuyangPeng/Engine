@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-CSVConfigure::EquipContainer::ConstEquipBaseSharedPtr CSVConfigure::EquipContainer::GetFirstEquip(Function function) const
+CSVConfigure::EquipContainer::ConstEquipSharedPtr CSVConfigure::EquipContainer::GetFirstEquip(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

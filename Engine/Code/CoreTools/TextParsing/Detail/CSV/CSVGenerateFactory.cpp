@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 17:20)
+///	版本：0.9.1.5 (2023/10/24 14:40)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -29,30 +29,30 @@
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 
-CoreTools::CSVGenerateFactory::CSVGenerateSharedPtr CoreTools::CSVGenerateFactory::Create(const CSVHead& csvHead, CSVGenerateType csvGenerateType)
+CoreTools::CSVGenerateFactory::CSVGenerateSharedPtr CoreTools::CSVGenerateFactory::Create(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis, CSVGenerateType csvGenerateType)
 {
     switch (csvGenerateType)
     {
         case CSVGenerateType::BaseHead:
-            return std::make_shared<CSVGenerateBaseHeadFile>(csvHead);
+            return std::make_shared<CSVGenerateBaseHeadFile>(csvHead, codeMappingAnalysis);
         case CSVGenerateType::ChildHead:
-            return std::make_shared<CSVGenerateChildHeadFile>(csvHead);
+            return std::make_shared<CSVGenerateChildHeadFile>(csvHead, codeMappingAnalysis);
         case CSVGenerateType::DataHead:
-            return std::make_shared<CSVGenerateDataHeadFile>(csvHead);
+            return std::make_shared<CSVGenerateDataHeadFile>(csvHead, codeMappingAnalysis);
         case CSVGenerateType::ContainerHead:
-            return std::make_shared<CSVGenerateContainerHeadFile>(csvHead);
+            return std::make_shared<CSVGenerateContainerHeadFile>(csvHead, codeMappingAnalysis);
         case CSVGenerateType::ContainerDetailHead:
-            return std::make_shared<CSVGenerateContainerDetailHeadFile>(csvHead);
+            return std::make_shared<CSVGenerateContainerDetailHeadFile>(csvHead, codeMappingAnalysis);
         case CSVGenerateType::BaseSource:
-            return std::make_shared<CSVGenerateBaseSourceFile>(csvHead);
+            return std::make_shared<CSVGenerateBaseSourceFile>(csvHead, codeMappingAnalysis);
         case CSVGenerateType::ChildSource:
-            return std::make_shared<CSVGenerateChildSourceFile>(csvHead);
+            return std::make_shared<CSVGenerateChildSourceFile>(csvHead, codeMappingAnalysis);
         case CSVGenerateType::DataSource:
-            return std::make_shared<CSVGenerateDataSourceFile>(csvHead);
+            return std::make_shared<CSVGenerateDataSourceFile>(csvHead, codeMappingAnalysis);
         case CSVGenerateType::ContainerSource:
-            return std::make_shared<CSVGenerateContainerSourceFile>(csvHead);
+            return std::make_shared<CSVGenerateContainerSourceFile>(csvHead, codeMappingAnalysis);
         case CSVGenerateType::Total:
-            return std::make_shared<CSVGenerateTotalFile>(csvHead);
+            return std::make_shared<CSVGenerateTotalFile>(csvHead, codeMappingAnalysis);
         default:
             break;
     }
@@ -60,17 +60,17 @@ CoreTools::CSVGenerateFactory::CSVGenerateSharedPtr CoreTools::CSVGenerateFactor
     THROW_EXCEPTION(SYSTEM_TEXT("未找到指定类型"s))
 }
 
-CoreTools::CSVGenerateFactory::CSVGenerateSharedPtr CoreTools::CSVGenerateFactory::Create(const CSVContent& csvContent, CSVGenerateType csvGenerateType)
+CoreTools::CSVGenerateFactory::CSVGenerateSharedPtr CoreTools::CSVGenerateFactory::Create(const CSVContent& csvContent, const CodeMappingAnalysis& codeMappingAnalysis, CSVGenerateType csvGenerateType)
 {
     switch (csvGenerateType)
     {
         case CSVGenerateType::EnumHead:
-            return std::make_shared<CSVGenerateEnumHeadFile>(csvContent);
+            return std::make_shared<CSVGenerateEnumHeadFile>(csvContent, codeMappingAnalysis);
         case CSVGenerateType::EnumSource:
-            return std::make_shared<CSVGenerateEnumSourceFile>(csvContent);
+            return std::make_shared<CSVGenerateEnumSourceFile>(csvContent, codeMappingAnalysis);
         case CSVGenerateType::EnumTotal:
-            return std::make_shared<CSVGenerateEnumTotalFile>(csvContent);
+            return std::make_shared<CSVGenerateEnumTotalFile>(csvContent, codeMappingAnalysis);
         default:
-            return Create(csvContent.GetCSVHead(), csvGenerateType);
+            return Create(csvContent.GetCSVHead(), codeMappingAnalysis, csvGenerateType);
     }
 }

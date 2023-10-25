@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 17:06)
+///	版本：0.9.1.5 (2023/09/20 14:07)
 
 #ifndef CORE_TOOLS_TIME_TIMER_IMPL_H
 #define CORE_TOOLS_TIME_TIMER_IMPL_H
@@ -33,7 +33,10 @@ namespace CoreTools
         void Reset() noexcept;
 
     private:
-        std::chrono::high_resolution_clock::time_point initialTime;
+        using TimePoint = std::chrono::high_resolution_clock::time_point;
+
+    private:
+        TimePoint initialTime;
     };
 }
 

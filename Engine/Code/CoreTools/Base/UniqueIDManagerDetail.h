@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/17 19:32)
+///	版本：0.9.1.5 (2023/09/23 10:47)
 
-#ifndef CORE_TOOLS_BASE_UNIQUEID_MANAGER_DETAIL_H
-#define CORE_TOOLS_BASE_UNIQUEID_MANAGER_DETAIL_H
+#ifndef CORE_TOOLS_BASE_UNIQUE_ID_MANAGER_DETAIL_H
+#define CORE_TOOLS_BASE_UNIQUE_ID_MANAGER_DETAIL_H
 
 #include "UniqueIdManager.h"
 #include "System/Helper/EnumCast.h"
@@ -47,4 +47,4 @@ void CoreTools::UniqueIdManager::SetUniqueId(E index, int64_t latestIndex)
     return SetUniqueId(System::EnumCastUnderlying<int>(index), latestIndex);
 }
 
-#endif  // CORE_TOOLS_BASE_UNIQUEID_MANAGER_DETAIL_H
+#endif  // CORE_TOOLS_BASE_UNIQUE_ID_MANAGER_DETAIL_H

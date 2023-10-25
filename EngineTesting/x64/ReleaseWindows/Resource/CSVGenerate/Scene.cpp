@@ -13,7 +13,7 @@
 
 using namespace std::literals;
 
-CSVConfigure::Scene::Scene(const CoreTools::CSVRow& csvRow)
+CSVConfigure::Scene::Scene(const CSVRow& csvRow)
     : id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       nextId{ csvRow.GetInt(SYSTEM_TEXT("nextId"s)) },
       reward{ csvRow.GetInt(SYSTEM_TEXT("reward"s)) },

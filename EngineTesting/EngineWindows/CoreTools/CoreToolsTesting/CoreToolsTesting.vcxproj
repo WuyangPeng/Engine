@@ -176,7 +176,9 @@
       <AdditionalLibraryDirectories>$(AssistWin32DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+      <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
@@ -209,7 +211,9 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
       <AdditionalLibraryDirectories>$(AssistStaticWin32DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+      <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
@@ -246,7 +250,9 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
       <AdditionalLibraryDirectories>$(AssistWin32ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+      <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
@@ -283,7 +289,9 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
       <AdditionalLibraryDirectories>$(AssistStaticWin32ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+      <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
@@ -316,7 +324,9 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
       <AdditionalLibraryDirectories>$(AssistX64DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+      <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
@@ -349,7 +359,9 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
       <AdditionalLibraryDirectories>$(AssistStaticX64DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+      <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
@@ -386,7 +398,9 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
       <AdditionalLibraryDirectories>$(AssistX64ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+      <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
@@ -423,7 +437,9 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
       <AdditionalLibraryDirectories>$(AssistStaticX64ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+      <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
@@ -748,8 +764,7 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\PropertyOffsetTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\SimplePropertyExternalTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\StaticPropertyExternalTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\RegularExpressionSuite\RegularExpressionSuite.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\EquilongReportOutputTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\EquidistantReportOutputTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\ReportOutputSuite.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\UnitTestFailReportOutputTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\UnitTestSuiteReportOutputTesting.h" />
@@ -1142,116 +1157,6 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\JsonConfigure.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\JsonConfigureContainer.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\JsonConfigureFwd.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\Monsters.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\MonstersDetail.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\Parts.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\PartsDetail.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\Road.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\RoadDetail.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\RunScenes.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\RunScenesDetail.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="Resource\OutputCodeTesting\Input1.h" />
     <ClInclude Include="Resource\OutputCodeTesting\Input1Base.h" />
     <ClInclude Include="Resource\OutputCodeTesting\Input1Container.h" />
@@ -1529,7 +1434,7 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\PropertyOffsetTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\SimplePropertyExternalTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\StaticPropertyExternalTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\EquilongReportOutputTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\EquidistantReportOutputTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\UnitTestFailReportOutputTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\UnitTestSuiteReportOutputTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\EmptyStates.cpp" />
@@ -1839,56 +1744,6 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Resource\JsonGenerate\JsonConfigureContainer.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Resource\JsonGenerate\Monsters.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Resource\JsonGenerate\Parts.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Resource\JsonGenerate\Road.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Resource\JsonGenerate\RunScenes.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Resource\OutputCodeTesting\Input1.cpp" />
     <ClCompile Include="Resource\OutputCodeTesting\Input1Base.cpp" />
     <ClCompile Include="Resource\OutputCodeTesting\Input1Container.cpp" />
@@ -1904,6 +1759,21 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
     <Text Include="Resource\CFileManagerTesting\CFileManagerHelperTestingText.txt" />
     <Text Include="Resource\CFileManagerTesting\CReadFileManagerTestingText.txt" />
     <Text Include="Resource\CFileManagerTesting\CWriteFileManagerTestingText.txt" />
+    <Text Include="Resource\CSVEngineering\CSVEngineering.txt" />
+    <Text Include="Resource\CSVEngineering\CSVEngineeringFwd.txt" />
+    <Text Include="Resource\CSVEngineering\EngineeringContainerCpp.txt" />
+    <Text Include="Resource\CSVEngineering\EngineeringContainerH.txt" />
+    <Text Include="Resource\CSVEngineering\EntityBaseCpp.txt" />
+    <Text Include="Resource\CSVEngineering\EntityBaseH.txt" />
+    <Text Include="Resource\CSVEngineering\EntityContainerCpp.txt" />
+    <Text Include="Resource\CSVEngineering\EntityContainerDetailH.txt" />
+    <Text Include="Resource\CSVEngineering\EntityContainerH.txt" />
+    <Text Include="Resource\CSVEngineering\EntityCpp.txt" />
+    <Text Include="Resource\CSVEngineering\EntityH.txt" />
+    <Text Include="Resource\CSVEngineering\EntitySubclassCpp.txt" />
+    <Text Include="Resource\CSVEngineering\EntitySubclassH.txt" />
+    <Text Include="Resource\CSVEngineering\FlagsCpp.txt" />
+    <Text Include="Resource\CSVEngineering\FlagsH.txt" />
     <Text Include="Resource\EnvironmentTesting\EnvironmentTestingText.txt" />
     <Text Include="Resource\FileAsynchronousTesting\FileAsynchronousText.txt" />
     <Text Include="Resource\FileHandleTesting\FileHandleHelperTestingText.txt" />
@@ -1952,6 +1822,7 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
     <None Include="Resource\CSVConfigure\SystemConstant.xlsx" />
     <None Include="Resource\CSVConfigure\VectorType.csv" />
     <None Include="Resource\CSVConfigure\VectorType.xlsx" />
+    <None Include="Resource\CSVEngineering\CSVEngineering.json" />
     <None Include="Resource\CSVTesting\CSVHeadTesting.xlsx" />
     <None Include="Resource\CSVTesting\CSVHead\CSVHeadTesting.csv" />
     <None Include="Resource\CSVTesting\ExcelConversionCSVTesting.csv" />
@@ -1960,10 +1831,6 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
     <None Include="Resource\InputCSVTesting\Input1.xlsx" />
     <None Include="Resource\InputCSVTesting\Input2.xlsx" />
     <None Include="Resource\InputCSVTesting\Input3.xlsx" />
-    <None Include="Resource\JsonConfigure\Monsters.json" />
-    <None Include="Resource\JsonConfigure\Parts.json" />
-    <None Include="Resource\JsonConfigure\Road.json" />
-    <None Include="Resource\JsonConfigure\RunScenes.json" />
     <None Include="Resource\JsonTesting\Log.json" />
     <None Include="Resource\OutputCSVTesting\Input1.csv" />
     <None Include="Resource\OutputCSVTesting\Input2.csv" />

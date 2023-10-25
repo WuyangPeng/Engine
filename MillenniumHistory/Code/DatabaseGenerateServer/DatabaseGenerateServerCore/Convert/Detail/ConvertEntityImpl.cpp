@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/07/31 21:57)
+///	版本：0.9.1.5 (2023/10/09 13:52)
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerCore/DatabaseGenerateServerCoreExport.h"
 
@@ -174,7 +174,10 @@ DatabaseEntity::CharacterEntity DatabaseGenerateServerCore::ConvertEntityImpl::C
     characterEntity.SetDeathDay(character.GetDeathDay());
     characterEntity.SetUnansweredQuestion(Convert(character.GetUnansweredQuestionBegin(), character.GetUnansweredQuestionEnd()));
 
-    characterEntityContainer.erase(result);
+    if (result != characterEntityContainer.cend())
+    {
+        characterEntityContainer.erase(result);
+    }
 
     return characterEntity;
 }
@@ -198,7 +201,10 @@ DatabaseEntity::CountryEntity DatabaseGenerateServerCore::ConvertEntityImpl::Con
     countryEntity.SetEndDay(country.GetEndDay());
     countryEntity.SetUnansweredQuestion(Convert(country.GetUnansweredQuestionBegin(), country.GetUnansweredQuestionEnd()));
 
-    countryEntityContainer.erase(result);
+    if (result != countryEntityContainer.cend())
+    {
+        countryEntityContainer.erase(result);
+    }
 
     return countryEntity;
 }
@@ -212,7 +218,10 @@ DatabaseEntity::DayEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert
 
     dayEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(day.GetName()));
 
-    dayEntityContainer.erase(result);
+    if (result != dayEntityContainer.cend())
+    {
+        dayEntityContainer.erase(result);
+    }
 
     return dayEntity;
 }
@@ -248,7 +257,10 @@ DatabaseEntity::EmperorEntity DatabaseGenerateServerCore::ConvertEntityImpl::Con
     emperorEntity.SetAgainEndDay(emperor.GetAgainEndDay());
     emperorEntity.SetUnansweredQuestion(Convert(emperor.GetUnansweredQuestionBegin(), emperor.GetUnansweredQuestionEnd()));
 
-    emperorEntityContainer.erase(result);
+    if (result != emperorEntityContainer.cend())
+    {
+        emperorEntityContainer.erase(result);
+    }
 
     return emperorEntity;
 }
@@ -262,7 +274,10 @@ DatabaseEntity::GatherEntity DatabaseGenerateServerCore::ConvertEntityImpl::Conv
 
     gatherEntity.SetGather(CoreTools::StringConversion::StandardConversionUtf8(gather.GetGather()));
 
-    gatherEntityContainer.erase(result);
+    if (result != gatherEntityContainer.cend())
+    {
+        gatherEntityContainer.erase(result);
+    }
 
     return gatherEntity;
 }
@@ -280,7 +295,10 @@ DatabaseEntity::GenusEntity DatabaseGenerateServerCore::ConvertEntityImpl::Conve
     genusEntity.SetBegin(CoreTools::StringConversion::StandardConversionUtf8(genus.GetBegin()));
     genusEntity.SetEnd(CoreTools::StringConversion::StandardConversionUtf8(genus.GetEnd()));
 
-    genusEntityContainer.erase(result);
+    if (result != genusEntityContainer.cend())
+    {
+        genusEntityContainer.erase(result);
+    }
 
     return genusEntity;
 }
@@ -294,7 +312,10 @@ DatabaseEntity::GeographicEntity DatabaseGenerateServerCore::ConvertEntityImpl::
 
     geographicEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(geographic.GetName()));
 
-    geographicEntityContainer.erase(result);
+    if (result != geographicEntityContainer.cend())
+    {
+        geographicEntityContainer.erase(result);
+    }
 
     return geographicEntity;
 }
@@ -308,7 +329,10 @@ DatabaseEntity::IdentityEntity DatabaseGenerateServerCore::ConvertEntityImpl::Co
 
     identityEntity.SetIdentity(CoreTools::StringConversion::StandardConversionUtf8(identity.GetIdentity()));
 
-    identityEntityContainer.erase(result);
+    if (result != identityEntityContainer.cend())
+    {
+        identityEntityContainer.erase(result);
+    }
 
     return identityEntity;
 }
@@ -325,7 +349,10 @@ DatabaseEntity::ImperialCourtEntity DatabaseGenerateServerCore::ConvertEntityImp
     imperialCourtEntity.SetBegin(imperialCourt.GetBegin());
     imperialCourtEntity.SetEnd(imperialCourt.GetEnd());
 
-    imperialCourtEntityContainer.erase(result);
+    if (result != imperialCourtEntityContainer.cend())
+    {
+        imperialCourtEntityContainer.erase(result);
+    }
 
     return imperialCourtEntity;
 }
@@ -339,7 +366,10 @@ DatabaseEntity::MonthEntity DatabaseGenerateServerCore::ConvertEntityImpl::Conve
 
     monthEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(month.GetName()));
 
-    monthEntityContainer.erase(result);
+    if (result != monthEntityContainer.cend())
+    {
+        monthEntityContainer.erase(result);
+    }
 
     return monthEntity;
 }
@@ -363,7 +393,10 @@ DatabaseEntity::ReignTitleEntity DatabaseGenerateServerCore::ConvertEntityImpl::
     reignTitleEntity.SetEndSexagenaryCycle(reignTitle.GetEndSexagenaryCycle());
     reignTitleEntity.SetEndDay(reignTitle.GetEndDay());
 
-    reignTitleEntityContainer.erase(result);
+    if (result != reignTitleEntityContainer.cend())
+    {
+        reignTitleEntityContainer.erase(result);
+    }
 
     return reignTitleEntity;
 }
@@ -379,7 +412,10 @@ DatabaseEntity::SexagenaryCycleEntity DatabaseGenerateServerCore::ConvertEntityI
     sexagenaryCycleEntity.SetBranch(CoreTools::StringConversion::StandardConversionUtf8(sexagenaryCycle.GetBranch()));
     sexagenaryCycleEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(sexagenaryCycle.GetName()));
 
-    sexagenaryCycleEntityContainer.erase(result);
+    if (result != sexagenaryCycleEntityContainer.cend())
+    {
+        sexagenaryCycleEntityContainer.erase(result);
+    }
 
     return sexagenaryCycleEntity;
 }
@@ -394,7 +430,10 @@ DatabaseEntity::SourceEntity DatabaseGenerateServerCore::ConvertEntityImpl::Conv
     sourceEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(source.GetName()));
     sourceEntity.SetSort(source.GetSort());
 
-    sourceEntityContainer.erase(result);
+    if (result != sourceEntityContainer.cend())
+    {
+        sourceEntityContainer.erase(result);
+    }
 
     return sourceEntity;
 }
@@ -416,7 +455,10 @@ DatabaseEntity::VersionEntity DatabaseGenerateServerCore::ConvertEntityImpl::Con
     versionEntity.SetOtherAuthor(version.GetOtherAuthor());
     versionEntity.SetAuthorNotes(Convert(version.GetAuthorNotesBegin(), version.GetAuthorNotesEnd()));
 
-    versionEntityContainer.erase(result);
+    if (result != versionEntityContainer.cend())
+    {
+        versionEntityContainer.erase(result);
+    }
 
     return versionEntity;
 }
@@ -435,7 +477,10 @@ DatabaseEntity::YearEntity DatabaseGenerateServerCore::ConvertEntityImpl::Conver
     yearEntity.SetUnorthodoxReignTitle(year.GetUnorthodoxReignTitle());
     yearEntity.SetUnorthodoxYear(year.GetUnorthodoxYear());
 
-    yearEntityContainer.erase(result);
+    if (result != yearEntityContainer.cend())
+    {
+        yearEntityContainer.erase(result);
+    }
 
     return yearEntity;
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/30 17:09)
+///	版本：0.9.1.5 (2023/09/20 15:37)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -62,9 +62,6 @@ void CoreTools::BufferTarget::Write(const std::string& datum)
     }
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, BufferTarget, WriteUniqueId, ConstObjectInterfaceSharedPtr, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferTarget, GetBytesWritten, int)
-
 void CoreTools::BufferTarget::Write(size_t itemSize, const void* data)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -77,6 +74,20 @@ void CoreTools::BufferTarget::Write(size_t itemSize, size_t itemsNumber, const v
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     return impl->Write(itemSize, itemsNumber, data);
+}
+
+int CoreTools::BufferTarget::GetBytesWritten() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetBytesWritten();
+}
+
+void CoreTools::BufferTarget::WriteUniqueId(const ConstObjectInterfaceSharedPtr& object)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->WriteUniqueId(object);
 }
 
 CoreTools::ConstFileBufferSharedPtr CoreTools::BufferTarget::GetFileBuffer() const noexcept

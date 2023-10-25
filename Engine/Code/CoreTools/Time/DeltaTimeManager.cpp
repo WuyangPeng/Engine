@@ -5,12 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 17:10)
+///	版本：0.9.1.5 (2023/09/20 14:14)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "DeltaTimeManager.h"
-#include "Detail/DeltaTimeManagerImpl.h" 
+#include "Detail/DeltaTimeManagerImpl.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -33,8 +33,37 @@ CoreTools::DeltaTimeManager::DeltaTimeManager(DisableNotThrow disableNotThrow)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, DeltaTimeManager)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, DeltaTimeManager, GetElapsedTimeInMicroseconds, int64_t)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, DeltaTimeManager, GetElapsedTimeInSeconds, int64_t)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, DeltaTimeManager, ResetCurrentTime, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, DeltaTimeManager, GetNowTimeInMicroseconds, int64_t)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, DeltaTimeManager, GetNowTimeInSeconds, int64_t)
+void CoreTools::DeltaTimeManager::ResetCurrentTime()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->ResetCurrentTime();
+}
+
+int64_t CoreTools::DeltaTimeManager::GetElapsedTimeInMicroseconds() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetElapsedTimeInMicroseconds();
+}
+
+int64_t CoreTools::DeltaTimeManager::GetElapsedTimeInSeconds() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetElapsedTimeInSeconds();
+}
+
+int64_t CoreTools::DeltaTimeManager::GetNowTimeInMicroseconds() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNowTimeInMicroseconds();
+}
+
+int64_t CoreTools::DeltaTimeManager::GetNowTimeInSeconds() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNowTimeInSeconds();
+}

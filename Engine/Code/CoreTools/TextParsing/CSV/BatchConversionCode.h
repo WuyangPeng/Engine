@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/29 22:23)
+///	版本：0.9.1.5 (2023/09/26 13:44)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_BATCH_CONVERSION_CODE_H
 #define CORE_TOOLS_TEXT_PARSING_BATCH_CONVERSION_CODE_H
@@ -20,15 +20,16 @@ namespace CoreTools
     {
     public:
         using ClassType = BatchConversionCode;
+
         using String = System::String;
 
     public:
-        explicit BatchConversionCode(const String& inputDirectory, const String& outputDirectory);
+        explicit BatchConversionCode(const String& inputDirectory, const String& codeDirectory, const String& outputDirectory);
 
         CLASS_INVARIANT_DECLARE;
 
     private:
-        void LoadConfigure(const String& inputDirectory, const String& outputDirectory);
+        void LoadConfigure(const String& inputDirectory, const String& codeDirectory, const String& outputDirectory);
     };
 }
 

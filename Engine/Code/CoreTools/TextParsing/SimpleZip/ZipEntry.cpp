@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:03)
+///	版本：0.9.1.5 (2023/09/23 14:29)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -36,32 +36,138 @@ CoreTools::SimpleZip::ZipEntry::ZipEntry(const std::string& name, const std::str
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleZip, ZipEntry)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleZip, ZipEntry, GetEntryData, CoreTools::SimpleZip::ZipEntryData)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleZip, ZipEntry, GetDataAsString, std::string)
+CoreTools::SimpleZip::ZipEntryData CoreTools::SimpleZip::ZipEntry::GetEntryData() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleZip, ZipEntry, SetData, std::string, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleZip, ZipEntry, SetData, ZipEntryData, void)
+    return impl->GetEntryData();
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleZip, ZipEntry, GetIndex, uint32_t)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleZip, ZipEntry, GetCompressedSize, uint64_t)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleZip, ZipEntry, GetUncompressedSize, uint64_t)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleZip, ZipEntry, IsDirectory, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleZip, ZipEntry, IsEncrypted, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleZip, ZipEntry, IsSupported, bool)
+size_t CoreTools::SimpleZip::ZipEntry::GetEntrySize() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleZip, ZipEntry, GetComment, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleZip, ZipEntry, GetTime, time_t)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleZip, ZipEntry, IsModified, bool)
+    return impl->GetEntrySize();
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleZip, ZipEntry, GetFileName, std::string)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleZip, ZipEntry, SetFileName, std::string, void)
+bool CoreTools::SimpleZip::ZipEntry::IsEntryDataEmpty() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleZip, ZipEntry, GetZipEntryInfo, CoreTools::SimpleZip::ZipEntryInfo)
+    return impl->IsEntryDataEmpty();
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleZip, ZipEntry, GetEntrySize, size_t)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleZip, ZipEntry, IsEntryDataEmpty, bool)
+std::string CoreTools::SimpleZip::ZipEntry::GetDataAsString() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleZip, ZipEntry, ResizeZipEntryData, int, void)
+    return impl->GetDataAsString();
+}
+
+void CoreTools::SimpleZip::ZipEntry::SetData(const std::string& data)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetData(data);
+}
+
+void CoreTools::SimpleZip::ZipEntry::SetData(const ZipEntryData& data)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetData(data);
+}
+
+std::string CoreTools::SimpleZip::ZipEntry::GetFileName() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFileName();
+}
+
+void CoreTools::SimpleZip::ZipEntry::SetFileName(const std::string& name)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetFileName(name);
+}
+
+uint32_t CoreTools::SimpleZip::ZipEntry::GetIndex() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetIndex();
+}
+
+uint64_t CoreTools::SimpleZip::ZipEntry::GetCompressedSize() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetCompressedSize();
+}
+
+uint64_t CoreTools::SimpleZip::ZipEntry::GetUncompressedSize() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetUncompressedSize();
+}
+
+bool CoreTools::SimpleZip::ZipEntry::IsDirectory() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsDirectory();
+}
+
+bool CoreTools::SimpleZip::ZipEntry::IsEncrypted() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsEncrypted();
+}
+
+bool CoreTools::SimpleZip::ZipEntry::IsSupported() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsSupported();
+}
+
+std::string CoreTools::SimpleZip::ZipEntry::GetComment() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetComment();
+}
+
+time_t CoreTools::SimpleZip::ZipEntry::GetTime() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetTime();
+}
+
+CoreTools::SimpleZip::ZipEntryInfo CoreTools::SimpleZip::ZipEntry::GetZipEntryInfo() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetZipEntryInfo();
+}
+
+void CoreTools::SimpleZip::ZipEntry::ResizeZipEntryData(int uncompressedSize)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->ResizeZipEntryData(uncompressedSize);
+}
+
+bool CoreTools::SimpleZip::ZipEntry::IsModified() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsModified();
+}
 
 void CoreTools::SimpleZip::ZipEntry::ReaderExtractFileToMem(mz_zip_archive* archive, const std::string& name)
 {

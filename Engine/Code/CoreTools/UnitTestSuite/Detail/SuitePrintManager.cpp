@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 17:42)
+///	版本：0.9.1.5 (2023/09/20 14:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,10 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/ReportOutput/UnitTestSuiteReportOutput.h"
 
-using namespace std::literals;
-
 CoreTools::SuitePrintManager::SuitePrintManager(MasterType& suite, int borderLineLength)
-    : suite{ suite }, unitTestSuiteReportOutput{ make_shared<UnitTestSuiteReportOutput>("测试"s, borderLineLength, suite.GetStream()) }
+    : suite{ suite }, unitTestSuiteReportOutput{ std::make_shared<UnitTestSuiteReportOutput>("测试", borderLineLength, suite.GetStream()) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

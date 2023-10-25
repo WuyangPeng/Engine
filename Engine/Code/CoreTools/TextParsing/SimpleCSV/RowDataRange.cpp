@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:06)
+///	版本：0.9.1.5 (2023/09/23 18:16)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,7 +13,6 @@
 #include "Flags/IteratorFlags.h"
 #include "Detail/RowDataRangeImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools::SimpleCSV, RowDataRange)
 
@@ -25,12 +24,47 @@ CoreTools::SimpleCSV::RowDataRange::RowDataRange(const ConstXMLDocumentSharedPtr
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, RowDataRange)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, RowDataRange, GetSize, int)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, RowDataRange, GetDocument, CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, RowDataRange, GetSharedStrings, CoreTools::SimpleCSV::RowDataRange::SharedStringsSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, RowDataRange, GetRowNode, CoreTools::SimpleCSV::XMLNode)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, RowDataRange, GetFirstColumn, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, RowDataRange, GetLastColumn, int)
+int CoreTools::SimpleCSV::RowDataRange::GetSize() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetSize();
+}
+
+CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr CoreTools::SimpleCSV::RowDataRange::GetDocument()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetDocument();
+}
+
+CoreTools::SimpleCSV::RowDataRange::SharedStringsSharedPtr CoreTools::SimpleCSV::RowDataRange::GetSharedStrings()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetSharedStrings();
+}
+
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::RowDataRange::GetRowNode() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetRowNode();
+}
+
+int CoreTools::SimpleCSV::RowDataRange::GetFirstColumn() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFirstColumn();
+}
+
+int CoreTools::SimpleCSV::RowDataRange::GetLastColumn() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetLastColumn();
+}
 
 CoreTools::SimpleCSV::RowDataIterator CoreTools::SimpleCSV::RowDataRange::begin()
 {

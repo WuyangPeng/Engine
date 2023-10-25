@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:05)
+///	版本：0.9.1.5 (2023/09/23 18:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -23,14 +23,58 @@ CoreTools::SimpleCSV::XmlData::XmlData(const DocumentSharedPtr& parentDocument, 
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, XmlData)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, XmlData, SetRawData, std::string, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, XmlData, GetRawData, std::string)
+void CoreTools::SimpleCSV::XmlData::SetRawData(const std::string& data)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, XmlData, GetParentDocument, CoreTools::SimpleCSV::XmlData::DocumentWeakPtr)
+    return impl->SetRawData(data);
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, XmlData, GetXmlPath, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, XmlData, GetXmlId, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, XmlData, GetXmlType, CoreTools::SimpleCSV::ContentType)
+std::string CoreTools::SimpleCSV::XmlData::GetRawData() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, XmlData, GetXmlDocument, CoreTools::SimpleCSV::XMLDocumentSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, XmlData, GetXmlDocument, CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr)
+    return impl->GetRawData();
+}
+
+std::string CoreTools::SimpleCSV::XmlData::GetXmlPath() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetXmlPath();
+}
+
+std::string CoreTools::SimpleCSV::XmlData::GetXmlId() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetXmlId();
+}
+
+CoreTools::SimpleCSV::ContentType CoreTools::SimpleCSV::XmlData::GetXmlType() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetXmlType();
+}
+
+CoreTools::SimpleCSV::XMLDocumentSharedPtr CoreTools::SimpleCSV::XmlData::GetXmlDocument() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetXmlDocument();
+}
+
+CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr CoreTools::SimpleCSV::XmlData::GetXmlDocument() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetXmlDocument();
+}
+
+CoreTools::SimpleCSV::XmlData::DocumentWeakPtr CoreTools::SimpleCSV::XmlData::GetParentDocument() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetParentDocument();
+}

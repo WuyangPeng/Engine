@@ -40,9 +40,9 @@ void OutputCSVTesting::Input1Container::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         input1.emplace_back(std::make_shared<Input1>(csvRow));
     }
@@ -77,14 +77,14 @@ void OutputCSVTesting::Input1Container::Unique()
 
 CLASS_INVARIANT_STUB_DEFINE(OutputCSVTesting, Input1Container)
 
-OutputCSVTesting::Input1Container::ConstInput1BaseSharedPtr OutputCSVTesting::Input1Container::GetFirstInput1() const
+OutputCSVTesting::Input1Container::ConstInput1SharedPtr OutputCSVTesting::Input1Container::GetFirstInput1() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return input1.at(0);
 }
 
-OutputCSVTesting::Input1Container::ConstInput1BaseSharedPtr OutputCSVTesting::Input1Container::GetInput1(int key) const
+OutputCSVTesting::Input1Container::ConstInput1SharedPtr OutputCSVTesting::Input1Container::GetInput1(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

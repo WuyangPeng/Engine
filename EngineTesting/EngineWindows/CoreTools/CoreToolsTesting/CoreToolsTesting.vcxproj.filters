@@ -211,12 +211,6 @@
     <Filter Include="PropertiesSuite 头文件\Detail">
       <UniqueIdentifier>{629d5337-06e4-4785-b13e-5b72e2b20f53}</UniqueIdentifier>
     </Filter>
-    <Filter Include="RegularExpressionSuite 头文件">
-      <UniqueIdentifier>{4f1f10d9-fd40-4329-8f60-c06065ee38f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="RegularExpressionSuite 源文件">
-      <UniqueIdentifier>{a4134a58-22a7-434e-bf0d-cc5f008a784b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ReportOutputSuite 头文件">
       <UniqueIdentifier>{cb7a4dd8-aacc-4f78-be13-471e03b3f69c}</UniqueIdentifier>
     </Filter>
@@ -508,6 +502,9 @@
     <Filter Include="MemoryToolsSuite 模板文件">
       <UniqueIdentifier>{11418d23-788a-4673-88d9-468eb1653ac6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\CSVEngineering">
+      <UniqueIdentifier>{c92435d0-b19c-4532-b17b-195b77f4a5ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\BaseSuite.h">
@@ -678,10 +675,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PerformanceProfilerSuite\PerformanceProfilerSuite.h">
       <Filter>PerformanceProfilerSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\RegularExpressionSuite\RegularExpressionSuite.h">
-      <Filter>RegularExpressionSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\EquilongReportOutputTesting.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\EquidistantReportOutputTesting.h">
       <Filter>ReportOutputSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\ReportOutputSuite.h">
@@ -1809,39 +1803,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonTotalGenerateTesting.h">
       <Filter>TextParsingSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\JsonConfigure.h">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\JsonConfigureContainer.h">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\JsonConfigureFwd.h">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\Monsters.h">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\MonstersDetail.h">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\Parts.h">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\PartsDetail.h">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\Road.h">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\RoadDetail.h">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\RunScenes.h">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\RunScenesDetail.h">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CoroutineSuite\CoroutineSuite.h">
       <Filter>CoroutineSuite 头文件</Filter>
     </ClInclude>
@@ -2372,7 +2333,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\PropertyExternalTesting.cpp">
       <Filter>PropertiesSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\EquilongReportOutputTesting.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\EquidistantReportOutputTesting.cpp">
       <Filter>ReportOutputSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\UnitTestFailReportOutputTesting.cpp">
@@ -3119,21 +3080,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonTotalGenerateTesting.cpp">
       <Filter>TextParsingSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\JsonGenerate\JsonConfigureContainer.cpp">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\JsonGenerate\Monsters.cpp">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\JsonGenerate\Parts.cpp">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\JsonGenerate\Road.cpp">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\JsonGenerate\RunScenes.cpp">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TupleLessTesting.cpp">
       <Filter>DataTypesSuite 源文件</Filter>
     </ClCompile>
@@ -3361,6 +3307,51 @@
     <Text Include="Resource\SimpleZipTesting\Placeholder.txt">
       <Filter>资源文件\SimpleZipTesting</Filter>
     </Text>
+    <Text Include="Resource\CSVEngineering\CSVEngineering.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\CSVEngineeringFwd.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EngineeringContainerCpp.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EngineeringContainerH.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntityBaseCpp.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntityBaseH.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntityContainerCpp.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntityContainerDetailH.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntityContainerH.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntityCpp.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntityH.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntitySubclassCpp.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntitySubclassH.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\FlagsCpp.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\FlagsH.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\CoreToolsTesting.json">
@@ -3462,17 +3453,8 @@
     <None Include="Resource\JsonTesting\Log.json">
       <Filter>资源文件\JsonTesting</Filter>
     </None>
-    <None Include="Resource\JsonConfigure\Road.json">
-      <Filter>资源文件\JsonConfigure</Filter>
-    </None>
-    <None Include="Resource\JsonConfigure\RunScenes.json">
-      <Filter>资源文件\JsonConfigure</Filter>
-    </None>
-    <None Include="Resource\JsonConfigure\Monsters.json">
-      <Filter>资源文件\JsonConfigure</Filter>
-    </None>
-    <None Include="Resource\JsonConfigure\Parts.json">
-      <Filter>资源文件\JsonConfigure</Filter>
+    <None Include="Resource\CSVEngineering\CSVEngineering.json">
+      <Filter>资源文件\CSVEngineering</Filter>
     </None>
   </ItemGroup>
 </Project>

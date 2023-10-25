@@ -40,9 +40,9 @@ void AncientBooks::CharacterContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         character.emplace_back(std::make_shared<Character>(csvRow));
     }
@@ -77,14 +77,14 @@ void AncientBooks::CharacterContainer::Unique()
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, CharacterContainer)
 
-AncientBooks::CharacterContainer::ConstCharacterBaseSharedPtr AncientBooks::CharacterContainer::GetFirstCharacter() const
+AncientBooks::CharacterContainer::ConstCharacterSharedPtr AncientBooks::CharacterContainer::GetFirstCharacter() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return character.at(0);
 }
 
-AncientBooks::CharacterContainer::ConstCharacterBaseSharedPtr AncientBooks::CharacterContainer::GetCharacter(int key) const
+AncientBooks::CharacterContainer::ConstCharacterSharedPtr AncientBooks::CharacterContainer::GetCharacter(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

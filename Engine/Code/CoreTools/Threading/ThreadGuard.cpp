@@ -5,12 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 16:41)
+///	版本：0.9.1.5 (2023/09/20 14:38)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ThreadGuard.h"
-#include "Detail/ThreadGuardImpl.h" 
+#include "Detail/ThreadGuardImpl.h"
 
 CoreTools::ThreadGuard::ThreadGuard(std::thread thread)
     : impl{ std::move(thread) }

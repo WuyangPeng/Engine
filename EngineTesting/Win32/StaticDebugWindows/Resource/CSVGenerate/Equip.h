@@ -24,7 +24,7 @@ namespace CSVConfigure
         using ClassType = Equip;
         using ParentType = EquipBase;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit Equip(const CSVRow& csvRow);
@@ -53,6 +53,7 @@ namespace CSVConfigure
 
         NODISCARD int GetHeroId() const noexcept override;
         NODISCARD ConstHeroSharedPtr GetHeroId(const CSVConfigureContainer& csvContainer) const override;
+
 
     private:
         int id;  // Id

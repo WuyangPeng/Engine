@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/28 14:48)
+///	版本：0.9.1.5 (2023/09/21 09:46)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_IMPL_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_IMPL_H
@@ -25,6 +25,7 @@ namespace CoreTools
     {
     public:
         using ClassType = LogImpl;
+
         using String = System::String;
 
     public:

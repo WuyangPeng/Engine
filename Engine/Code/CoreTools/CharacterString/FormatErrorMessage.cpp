@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/18 14:38)
+///	版本：0.9.1.5 (2023/09/23 10:45)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "FormatErrorMessage.h"
 #include "Detail/FormatErrorMessageImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 CoreTools::FormatErrorMessage::FormatErrorMessage(WindowError lastError)
     : impl{ lastError }
@@ -22,4 +21,9 @@ CoreTools::FormatErrorMessage::FormatErrorMessage(WindowError lastError)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, FormatErrorMessage)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, FormatErrorMessage, GetErrorMessage, System::String)
+CoreTools::FormatErrorMessage::String CoreTools::FormatErrorMessage::GetErrorMessage() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetErrorMessage();
+}

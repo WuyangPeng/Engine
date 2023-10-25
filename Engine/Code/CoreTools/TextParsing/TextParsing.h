@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/29 22:23)
+///	版本：0.9.1.5 (2023/09/23 14:23)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_H
 #define CORE_TOOLS_TEXT_PARSING_H
@@ -19,13 +19,7 @@
 #include "CSV/CSVTotalGenerate.h"
 #include "CSV/CSVTypeConversion.h"
 #include "CSV/DataTypeDescribe.h"
-#include "CSV/ExcelConversionCSV.h"
-#include "Json/JsonGenerate.h"
-#include "Json/JsonHead.h"
-#include "Json/JsonNode.h"
-#include "Json/JsonNodeContainer.h"
-#include "Json/JsonRow.h"
-#include "Json/JsonTotalGenerate.h"
+#include "CSV/ExcelConversionCSV.h" 
 #include "SimpleCSV/AppProperties.h"
 #include "SimpleCSV/Cell.h"
 #include "SimpleCSV/CellIterator.h"

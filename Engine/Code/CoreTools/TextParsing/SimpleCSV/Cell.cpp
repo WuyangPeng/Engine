@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:09)
+///	版本：0.9.1.5 (2023/09/23 15:32)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,7 +14,6 @@
 #include "System/Helper/Tools.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 CoreTools::SimpleCSV::Cell::Cell(CellCreate cellCreate)
     : impl{ DisableNotThrow::Disable }
@@ -54,17 +53,61 @@ CoreTools::SimpleCSV::Cell::operator bool() const
     return static_cast<bool>(*impl);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, Cell, GetValue, CoreTools::SimpleCSV::CellValueProxy&)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, Cell, GetValue, const CoreTools::SimpleCSV::CellValueProxy&)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Cell, GetCellReference, CoreTools::SimpleCSV::CellReference)
+CoreTools::SimpleCSV::CellValueProxy& CoreTools::SimpleCSV::Cell::GetValue() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Cell, HasFormula, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Cell, GetFormula, std::string)
+    return impl->GetValue();
+}
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Cell, SetFormula, std::string, void)
+const CoreTools::SimpleCSV::CellValueProxy& CoreTools::SimpleCSV::Cell::GetValue() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Cell, GetSharedStrings, CoreTools::SimpleCSV::Cell::SharedStringsSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Cell, GetXMLNode, CoreTools::SimpleCSV::XMLNode)
+    return impl->GetValue();
+}
+
+CoreTools::SimpleCSV::CellReference CoreTools::SimpleCSV::Cell::GetCellReference() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetCellReference();
+}
+
+bool CoreTools::SimpleCSV::Cell::HasFormula() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->HasFormula();
+}
+
+std::string CoreTools::SimpleCSV::Cell::GetFormula() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFormula();
+}
+
+void CoreTools::SimpleCSV::Cell::SetFormula(const std::string& formula)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetFormula(formula);
+}
+
+CoreTools::SimpleCSV::Cell::SharedStringsSharedPtr CoreTools::SimpleCSV::Cell::GetSharedStrings() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetSharedStrings();
+}
+
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Cell::GetXMLNode() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetXMLNode();
+}
 
 bool CoreTools::SimpleCSV::Cell::IsSame(const Cell& rhs) const
 {

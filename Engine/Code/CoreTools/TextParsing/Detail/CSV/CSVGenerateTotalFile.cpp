@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 17:21)
+///	版本：0.9.1.5 (2023/10/24 14:40)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -24,8 +24,8 @@
 
 #include <future>
 
-CoreTools::CSVGenerateTotalFile::CSVGenerateTotalFile(const CSVHead& csvHead) noexcept
-    : ParentType{ csvHead }
+CoreTools::CSVGenerateTotalFile::CSVGenerateTotalFile(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis) noexcept
+    : ParentType{ csvHead, codeMappingAnalysis }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -47,12 +47,14 @@ System::String CoreTools::CSVGenerateTotalFile::GetFileSuffix() const noexcept
     return GetSuffix();
 }
 
-System::String CoreTools::CSVGenerateTotalFile::GetContent() const noexcept
+System::String CoreTools::CSVGenerateTotalFile::GetContent(const String& codeDirectory) const noexcept
 {
+    System::UnusedFunction(codeDirectory);
+
     return String{};
 }
 
-void CoreTools::CSVGenerateTotalFile::GenerateFile(const String& directory) const
+void CoreTools::CSVGenerateTotalFile::GenerateFile(const String& codeDirectory, const String& directory) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -62,30 +64,30 @@ void CoreTools::CSVGenerateTotalFile::GenerateFile(const String& directory) cons
             FALLTHROUGH;
         case CSVFormatType::HashMap:
         {
-            GenerateMapFile(directory);
+            GenerateMapFile(codeDirectory, directory);
         }
         break;
         case CSVFormatType::Unique:
         {
-            GenerateUniqueFile(directory);
+            GenerateUniqueFile(codeDirectory, directory);
         }
         break;
         default:
         {
-            GenerateDefaultFile(directory);
+            GenerateDefaultFile(codeDirectory, directory);
         }
         break;
     }
 }
 
-void CoreTools::CSVGenerateTotalFile::GenerateFile(const Container& container, const String& directory) const
+void CoreTools::CSVGenerateTotalFile::GenerateFile(const Container& container, const String& codeDirectory, const String& directory) const
 {
     using FutureContainer = std::vector<std::future<void>>;
 
     FutureContainer futureContainer{};
     for (const auto& value : container)
     {
-        futureContainer.emplace_back(std::async(&CSVGenerateImpl::GenerateFile, std::ref(*value), directory));
+        futureContainer.emplace_back(std::async(&CSVGenerateImpl::GenerateFile, std::ref(*value), codeDirectory, directory));
     }
 
     for (const auto& value : futureContainer)
@@ -94,36 +96,36 @@ void CoreTools::CSVGenerateTotalFile::GenerateFile(const Container& container, c
     }
 }
 
-void CoreTools::CSVGenerateTotalFile::GenerateDefaultFile(const String& directory) const
+void CoreTools::CSVGenerateTotalFile::GenerateDefaultFile(const String& codeDirectory, const String& directory) const
 {
-    const Container container{ std::make_shared<CSVGenerateBaseHeadFile>(GetCSVHead()),
-                               std::make_shared<CSVGenerateBaseSourceFile>(GetCSVHead()),
-                               std::make_shared<CSVGenerateChildHeadFile>(GetCSVHead()),
-                               std::make_shared<CSVGenerateChildSourceFile>(GetCSVHead()),
-                               std::make_shared<CSVGenerateContainerHeadFile>(GetCSVHead()),
-                               std::make_shared<CSVGenerateContainerDetailHeadFile>(GetCSVHead()),
-                               std::make_shared<CSVGenerateContainerSourceFile>(GetCSVHead()) };
+    const Container container{ std::make_shared<CSVGenerateBaseHeadFile>(GetCSVHead(), GetCodeMappingAnalysis()),
+                               std::make_shared<CSVGenerateBaseSourceFile>(GetCSVHead(), GetCodeMappingAnalysis()),
+                               std::make_shared<CSVGenerateChildHeadFile>(GetCSVHead(), GetCodeMappingAnalysis()),
+                               std::make_shared<CSVGenerateChildSourceFile>(GetCSVHead(), GetCodeMappingAnalysis()),
+                               std::make_shared<CSVGenerateContainerHeadFile>(GetCSVHead(), GetCodeMappingAnalysis()),
+                               std::make_shared<CSVGenerateContainerDetailHeadFile>(GetCSVHead(), GetCodeMappingAnalysis()),
+                               std::make_shared<CSVGenerateContainerSourceFile>(GetCSVHead(), GetCodeMappingAnalysis()) };
 
-    GenerateFile(container, directory);
+    GenerateFile(container, codeDirectory, directory);
 }
 
-void CoreTools::CSVGenerateTotalFile::GenerateMapFile(const String& directory) const
+void CoreTools::CSVGenerateTotalFile::GenerateMapFile(const String& codeDirectory, const String& directory) const
 {
-    const Container container{ std::make_shared<CSVGenerateDataHeadFile>(GetCSVHead()),
-                               std::make_shared<CSVGenerateDataSourceFile>(GetCSVHead()),
-                               std::make_shared<CSVGenerateContainerHeadFile>(GetCSVHead()),
-                               std::make_shared<CSVGenerateContainerDetailHeadFile>(GetCSVHead()),
-                               std::make_shared<CSVGenerateContainerSourceFile>(GetCSVHead()) };
+    const Container container{ std::make_shared<CSVGenerateDataHeadFile>(GetCSVHead(), GetCodeMappingAnalysis()),
+                               std::make_shared<CSVGenerateDataSourceFile>(GetCSVHead(), GetCodeMappingAnalysis()),
+                               std::make_shared<CSVGenerateContainerHeadFile>(GetCSVHead(), GetCodeMappingAnalysis()),
+                               std::make_shared<CSVGenerateContainerDetailHeadFile>(GetCSVHead(), GetCodeMappingAnalysis()),
+                               std::make_shared<CSVGenerateContainerSourceFile>(GetCSVHead(), GetCodeMappingAnalysis()) };
 
-    GenerateFile(container, directory);
+    GenerateFile(container, codeDirectory, directory);
 }
 
-void CoreTools::CSVGenerateTotalFile::GenerateUniqueFile(const String& directory) const
+void CoreTools::CSVGenerateTotalFile::GenerateUniqueFile(const String& codeDirectory, const String& directory) const
 {
-    const Container container{ std::make_shared<CSVGenerateDataHeadFile>(GetCSVHead()),
-                               std::make_shared<CSVGenerateDataSourceFile>(GetCSVHead()),
-                               std::make_shared<CSVGenerateContainerHeadFile>(GetCSVHead()),
-                               std::make_shared<CSVGenerateContainerSourceFile>(GetCSVHead()) };
+    const Container container{ std::make_shared<CSVGenerateDataHeadFile>(GetCSVHead(), GetCodeMappingAnalysis()),
+                               std::make_shared<CSVGenerateDataSourceFile>(GetCSVHead(), GetCodeMappingAnalysis()),
+                               std::make_shared<CSVGenerateContainerHeadFile>(GetCSVHead(), GetCodeMappingAnalysis()),
+                               std::make_shared<CSVGenerateContainerSourceFile>(GetCSVHead(), GetCodeMappingAnalysis()) };
 
-    GenerateFile(container, directory);
+    GenerateFile(container, codeDirectory, directory);
 }

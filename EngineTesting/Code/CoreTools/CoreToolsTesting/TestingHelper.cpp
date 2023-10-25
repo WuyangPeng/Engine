@@ -5,10 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/10 18:02)
+///	版本：0.9.1.5 (2023/10/24 15:21)
 
 #include "Testing.h"
 #include "TestingHelper.h"
+#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 
@@ -51,7 +52,6 @@ void CoreTools::TestingHelper::InitSuite()
     AddEngineConfigurationSuite();
     AddPropertiesSuite();
     AddCyclicRedundancyCheckSuite();
-    AddRegularExpressionSuite();
     AddMessageEventSuite();
     AddStateMachineSuite();
     AddNetworkSuite();
@@ -580,7 +580,7 @@ void CoreTools::TestingHelper::AddDataTypesSuite()
 
     ADD_TEST(dataTypesSuite, TupleTesting);
     ADD_TEST(dataTypesSuite, TupleLessTesting);
-    ADD_TEST(dataTypesSuite, TableTesting); 
+    ADD_TEST(dataTypesSuite, TableTesting);
     ADD_TEST(dataTypesSuite, MinHeapTesting);
     ADD_TEST(dataTypesSuite, ThreadSafeMapTesting);
     ADD_TEST(dataTypesSuite, ThreadSafeQueueTesting);
@@ -662,7 +662,7 @@ void CoreTools::TestingHelper::AddReportOutputSuite()
 {
     auto reportOutputSuite = GenerateSuite("报告输出库");
 
-    ADD_TEST(reportOutputSuite, EquilongReportOutputTesting);
+    ADD_TEST(reportOutputSuite, EquidistantReportOutputTesting);
     ADD_TEST(reportOutputSuite, UnitTestFailReportOutputTesting);
     ADD_TEST(reportOutputSuite, UnitTestSuiteReportOutputTesting);
 
@@ -791,13 +791,6 @@ void CoreTools::TestingHelper::AddCyclicRedundancyCheckSuite()
     ADD_TEST(cyclicRedundancyCheckSuite, CyclicRedundancyCheck32Testing);
 
     AddSuite(cyclicRedundancyCheckSuite);
-}
-
-void CoreTools::TestingHelper::AddRegularExpressionSuite()
-{
-    auto regularExpressionSuite = GenerateSuite("正则表达式");
-
-    AddSuite(regularExpressionSuite);
 }
 
 void CoreTools::TestingHelper::AddMessageEventSuite()

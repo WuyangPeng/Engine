@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/12 16:23)
+///	版本：0.9.1.5 (2023/09/21 09:33)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_DETAIL_H

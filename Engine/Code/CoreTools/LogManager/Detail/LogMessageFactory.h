@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/28 15:24)
+///	版本：0.9.1.5 (2023/09/21 09:46)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_MESSAGE_FACTORY_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_MESSAGE_FACTORY_H
@@ -24,11 +24,12 @@ namespace CoreTools
     {
     public:
         using ClassType = LogMessageFactory;
+
         using LogMessageImplSharedPtr = std::shared_ptr<LogMessageImpl>;
         using String = System::String;
 
     public:
-        NODISCARD static LogMessageImplSharedPtr Create(LogLevel level, LogFilter filter, const FunctionDescribed& functionDescribed); 
+        NODISCARD static LogMessageImplSharedPtr Create(LogLevel level, LogFilter filter, const FunctionDescribed& functionDescribed);
         NODISCARD static LogMessageImplSharedPtr Create(const LogFileName& fileName, LogLevel level, LogFilter filter, const FunctionDescribed& functionDescribed);
 
         CLASS_INVARIANT_DECLARE;

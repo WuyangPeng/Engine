@@ -7,8 +7,8 @@
 ///	标准：std:c++20
 ///	版本：0.9.1.4 (2023/09/14 15:40)
 
-#ifndef MATHEMATICS_BASE_ASIN_ESTIMATE_DETAIL_H
-#define MATHEMATICS_BASE_ASIN_ESTIMATE_DETAIL_H
+#ifndef MATHEMATICS_ESTIMATE_ASIN_ESTIMATE_DETAIL_H
+#define MATHEMATICS_ESTIMATE_ASIN_ESTIMATE_DETAIL_H
 
 #include "ACosEstimateDetail.h"
 #include "ASinEstimate.h"
@@ -21,4 +21,4 @@ T Mathematics::ASinEstimate(T x)
     return Math<T>::GetHalfPI() - ACosEstimate<T, Degree>(x);
 }
 
-#endif  // MATHEMATICS_BASE_ASIN_ESTIMATE_DETAIL_H
+#endif  // MATHEMATICS_ESTIMATE_ASIN_ESTIMATE_DETAIL_H

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:39)
+///	版本：0.9.1.5 (2023/09/22 13:52)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -21,7 +21,6 @@
 
 using namespace std::literals;
 
-// static
 CoreTools::FileBuffer CoreTools::CFileManagerHelper::LoadFromFile(const String& fileName, bool binaryFile)
 {
     const auto mode = binaryFile ? SYSTEM_TEXT("rb"s) : SYSTEM_TEXT("rt"s);
@@ -55,7 +54,6 @@ std::string CoreTools::CFileManagerHelper::LoadFromFile(const std::string& fileN
     }
 }
 
-// static
 void CoreTools::CFileManagerHelper::SaveIntoFile(const String& fileName, bool binaryFile, int bufferSize, const char* buffer)
 {
     // 输入缓冲区必须存在。验证该缓冲区具有指定的字节数是不可能的。
@@ -72,7 +70,6 @@ void CoreTools::CFileManagerHelper::SaveIntoFile(const String& fileName, bool bi
     }
 }
 
-// static
 void CoreTools::CFileManagerHelper::AppendToFile(const String& fileName, bool binaryFile, int bufferSize, const char* buffer)
 {
     // 输入缓冲区必须存在。验证该缓冲区具有指定的字节数是不可能的。

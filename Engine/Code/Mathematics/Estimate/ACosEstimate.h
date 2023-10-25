@@ -7,8 +7,8 @@
 ///	标准：std:c++20
 ///	版本：0.9.1.4 (2023/09/14 15:40)
 
-#ifndef MATHEMATICS_BASE_ACOS_ESTIMATE_H
-#define MATHEMATICS_BASE_ACOS_ESTIMATE_H
+#ifndef MATHEMATICS_ESTIMATE_ACOS_ESTIMATE_H
+#define MATHEMATICS_ESTIMATE_ACOS_ESTIMATE_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -17,7 +17,8 @@
 namespace Mathematics
 {
     /// 形式为f(x) = sqrt(1-x)*p(x)的acos(x)近似，
-    /// 其中D次多项式 p(x)使所有D次多项式上的量最大值{|acos(x)/sqrt(1-x) - p(x)| : x in [0,1]} 的最小化。
+    /// 其中多项式 p(x)的次数为D，
+    /// 最小化了所有次数为D的多项式中的最大值{|acos(x)/sqrt(1-x) - p(x)| : x in [0,1]}。
 
     constexpr std::array<std::array<double, 9>, 8> aCosEstimateCoefficient{
         {
@@ -96,7 +97,7 @@ namespace Mathematics
         3.5952707477805e-9,  // degree 8
     };
 
-    /// 输入约束是[0,1]中的x。例如，3度的估计值是
+    /// 输入约束是[0,1]中的x。例如，3阶的估计值是
     /// float x; // in [0,1]
     /// float result = ACosEstimate<float, 3>(x);
     template <typename T, int Degree>
@@ -111,4 +112,4 @@ namespace Mathematics
     }
 }
 
-#endif  // MATHEMATICS_BASE_ACOS_ESTIMATE_H
+#endif  // MATHEMATICS_ESTIMATE_ACOS_ESTIMATE_H

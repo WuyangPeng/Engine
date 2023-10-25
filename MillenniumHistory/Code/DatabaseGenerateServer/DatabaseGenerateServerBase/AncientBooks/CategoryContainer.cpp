@@ -40,9 +40,9 @@ void AncientBooks::CategoryContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         category.emplace_back(std::make_shared<Category>(csvRow));
     }
@@ -77,14 +77,14 @@ void AncientBooks::CategoryContainer::Unique()
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, CategoryContainer)
 
-AncientBooks::CategoryContainer::ConstCategoryBaseSharedPtr AncientBooks::CategoryContainer::GetFirstCategory() const
+AncientBooks::CategoryContainer::ConstCategorySharedPtr AncientBooks::CategoryContainer::GetFirstCategory() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return category.at(0);
 }
 
-AncientBooks::CategoryContainer::ConstCategoryBaseSharedPtr AncientBooks::CategoryContainer::GetCategory(int key) const
+AncientBooks::CategoryContainer::ConstCategorySharedPtr AncientBooks::CategoryContainer::GetCategory(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

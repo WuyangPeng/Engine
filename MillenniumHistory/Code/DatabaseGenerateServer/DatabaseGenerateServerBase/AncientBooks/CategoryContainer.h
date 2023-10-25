@@ -25,8 +25,8 @@ namespace AncientBooks
     public:
         using ClassType = CategoryContainer;
 
-        using ConstCategoryBaseSharedPtr = std::shared_ptr<const CategoryBase>;
-        using Container = std::vector<ConstCategoryBaseSharedPtr>;
+        using ConstCategorySharedPtr = std::shared_ptr<const CategoryMappingType>;
+        using Container = std::vector<ConstCategorySharedPtr>;
         using CSVContent = CoreTools::CSVContent;
 
     public:
@@ -34,14 +34,14 @@ namespace AncientBooks
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConstCategoryBaseSharedPtr GetFirstCategory() const;
-        NODISCARD ConstCategoryBaseSharedPtr GetCategory(int key) const;
+        NODISCARD ConstCategorySharedPtr GetFirstCategory() const;
+        NODISCARD ConstCategorySharedPtr GetCategory(int key) const;
         NODISCARD Container GetContainer() const;
 
         NODISCARD int GetContainerSize() const;
 
         template <typename Function>
-        NODISCARD ConstCategoryBaseSharedPtr GetFirstCategory(Function function) const;
+        NODISCARD ConstCategorySharedPtr GetFirstCategory(Function function) const;
 
         template <typename Function>
         NODISCARD Container GetCategory(Function function) const;

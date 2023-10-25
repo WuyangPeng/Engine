@@ -5,17 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.7 (2023/04/26 16:05)
+///	版本：0.9.1.5 (2023/10/25 10:32)
 
 #include "JsonNodeTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/TextParsing/Flags/JsonFlags.h"
-#include "CoreTools/TextParsing/Json/JsonNode.h"
-#include "CoreTools/TextParsing/Json/JsonNodeContainer.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using namespace std::literals;
 
 CoreTools::JsonNodeTesting::JsonNodeTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -30,36 +25,6 @@ void CoreTools::JsonNodeTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void CoreTools::JsonNodeTesting::MainTest()
+void CoreTools::JsonNodeTesting::MainTest() noexcept
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(JsonNodeTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(JsonNodeContainerTest);
-}
-
-void CoreTools::JsonNodeTesting::JsonNodeTest()
-{
-    JsonNode jsonNode{ SYSTEM_TEXT("Key"), JsonDataType::Int };
-
-    ASSERT_EQUAL(jsonNode.GetTypeName(), SYSTEM_TEXT("Key"s));
-    ASSERT_ENUM_EQUAL(jsonNode.GetJsonDataType(), JsonDataType::Int);
-
-    jsonNode.SetNewJsonDataType(JsonDataType::Double);
-    ASSERT_ENUM_EQUAL(jsonNode.GetJsonDataType(), JsonDataType::String);
-
-    ASSERT_FALSE(jsonNode.HasArray());
-    ASSERT_FALSE(jsonNode.HasBoolArray());
-}
-
-void CoreTools::JsonNodeTesting::JsonNodeContainerTest()
-{
-    auto jsonNodeContainer0 = JsonNodeContainer::Create();
-    const auto jsonNode0 = make_shared<JsonNode>(SYSTEM_TEXT("Key"s), JsonDataType::Bool);
-    jsonNodeContainer0.AddJsonNode(jsonNode0);
-
-    JsonNode jsonNode1{ SYSTEM_TEXT("Container"), JsonDataType::Nested };
-    jsonNode1.SetNewJsonNodeContainer(jsonNodeContainer0);
-
-    const auto jsonNodeContainer1 = jsonNode1.GetJsonNodeContainer();
-
-    ASSERT_ENUM_EQUAL(jsonNodeContainer1.GetJsonDataType(SYSTEM_TEXT("Key"s)), JsonDataType::Bool);
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:01)
+///	版本：0.9.1.5 (2023/09/23 09:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -27,9 +27,9 @@ void CoreTools::StringReplacingImpl::InitReplacing(const std::string& configurat
 
     read_json(configurationFileName, mainTree);
 
-    for (const auto& value : mainTree)
+    for (const auto& element : mainTree)
     {
-        replacing.insert({ value.first, value.second.get_value<System::String>() });
+        replacing.insert({ element.first, element.second.get_value<System::String>() });
     }
 }
 

@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-AncientBooks::GenusContainer::ConstGenusBaseSharedPtr AncientBooks::GenusContainer::GetFirstGenus(Function function) const
+AncientBooks::GenusContainer::ConstGenusSharedPtr AncientBooks::GenusContainer::GetFirstGenus(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

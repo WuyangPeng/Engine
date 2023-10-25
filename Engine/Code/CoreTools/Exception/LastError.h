@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:03)
+///	版本：0.9.1.5 (2023/09/22 15:17)
 
 #ifndef CORE_TOOLS_EXCEPTION_LAST_ERROR_H
 #define CORE_TOOLS_EXCEPTION_LAST_ERROR_H
@@ -20,6 +20,7 @@ namespace CoreTools
     {
     public:
         using ClassType = LastError;
+
         using WindowError = System::WindowError;
 
     public:

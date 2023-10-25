@@ -40,9 +40,9 @@ void AncientBooks::SexagenaryCycleContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         sexagenaryCycle.emplace_back(std::make_shared<SexagenaryCycle>(csvRow));
     }
@@ -77,14 +77,14 @@ void AncientBooks::SexagenaryCycleContainer::Unique()
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, SexagenaryCycleContainer)
 
-AncientBooks::SexagenaryCycleContainer::ConstSexagenaryCycleBaseSharedPtr AncientBooks::SexagenaryCycleContainer::GetFirstSexagenaryCycle() const
+AncientBooks::SexagenaryCycleContainer::ConstSexagenaryCycleSharedPtr AncientBooks::SexagenaryCycleContainer::GetFirstSexagenaryCycle() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return sexagenaryCycle.at(0);
 }
 
-AncientBooks::SexagenaryCycleContainer::ConstSexagenaryCycleBaseSharedPtr AncientBooks::SexagenaryCycleContainer::GetSexagenaryCycle(int key) const
+AncientBooks::SexagenaryCycleContainer::ConstSexagenaryCycleSharedPtr AncientBooks::SexagenaryCycleContainer::GetSexagenaryCycle(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

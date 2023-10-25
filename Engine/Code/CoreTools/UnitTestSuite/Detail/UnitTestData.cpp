@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 17:42)
+///	版本：0.9.1.5 (2023/09/20 14:05)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -67,7 +67,7 @@ void CoreTools::UnitTestData::AddPassedNumber() noexcept
     ++pass;
 }
 
-void CoreTools::UnitTestData::AddFailedNumber()  
+void CoreTools::UnitTestData::AddFailedNumber()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -81,7 +81,7 @@ void CoreTools::UnitTestData::AddFailedNumber()
     ++fail;
 }
 
-void CoreTools::UnitTestData::AddErrorNumber()  
+void CoreTools::UnitTestData::AddErrorNumber()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

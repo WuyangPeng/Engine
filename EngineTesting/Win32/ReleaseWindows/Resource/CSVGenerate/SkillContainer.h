@@ -25,8 +25,8 @@ namespace CSVConfigure
     public:
         using ClassType = SkillContainer;
 
-        using ConstSkillBaseSharedPtr = std::shared_ptr<const SkillBase>;
-        using Container = std::vector<ConstSkillBaseSharedPtr>;
+        using ConstSkillSharedPtr = std::shared_ptr<const SkillMappingType>;
+        using Container = std::vector<ConstSkillSharedPtr>;
         using CSVContent = CoreTools::CSVContent;
 
     public:
@@ -34,13 +34,14 @@ namespace CSVConfigure
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConstSkillBaseSharedPtr GetFirstSkill() const;
-        NODISCARD ConstSkillBaseSharedPtr GetSkill(int id, int reward) const;
-        NODISCARD ConstSkillBaseSharedPtr GetSkill(int key) const;
+        NODISCARD ConstSkillSharedPtr GetFirstSkill() const;
+        NODISCARD ConstSkillSharedPtr GetSkill(int key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
-        NODISCARD ConstSkillBaseSharedPtr GetFirstSkill(Function function) const;
+        NODISCARD ConstSkillSharedPtr GetFirstSkill(Function function) const;
 
         template <typename Function>
         NODISCARD Container GetSkill(Function function) const;

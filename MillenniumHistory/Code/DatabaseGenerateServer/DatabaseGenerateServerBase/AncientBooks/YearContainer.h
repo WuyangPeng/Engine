@@ -25,8 +25,8 @@ namespace AncientBooks
     public:
         using ClassType = YearContainer;
 
-        using ConstYearBaseSharedPtr = std::shared_ptr<const YearBase>;
-        using Container = std::vector<ConstYearBaseSharedPtr>;
+        using ConstYearSharedPtr = std::shared_ptr<const YearMappingType>;
+        using Container = std::vector<ConstYearSharedPtr>;
         using CSVContent = CoreTools::CSVContent;
 
     public:
@@ -34,14 +34,14 @@ namespace AncientBooks
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConstYearBaseSharedPtr GetFirstYear() const;
-        NODISCARD ConstYearBaseSharedPtr GetYear(int key) const;
+        NODISCARD ConstYearSharedPtr GetFirstYear() const;
+        NODISCARD ConstYearSharedPtr GetYear(int key) const;
         NODISCARD Container GetContainer() const;
 
         NODISCARD int GetContainerSize() const;
 
         template <typename Function>
-        NODISCARD ConstYearBaseSharedPtr GetFirstYear(Function function) const;
+        NODISCARD ConstYearSharedPtr GetFirstYear(Function function) const;
 
         template <typename Function>
         NODISCARD Container GetYear(Function function) const;

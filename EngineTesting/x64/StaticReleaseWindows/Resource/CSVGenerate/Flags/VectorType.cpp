@@ -19,11 +19,10 @@ CSVConfigure::VectorType CSVConfigure::StringCastVectorType(const System::String
 {
     static std::map<System::String, VectorType> typeDescribe{ { SYSTEM_TEXT("Two"s), VectorType::Two },
                                                               { SYSTEM_TEXT("Three"s), VectorType::Three },
-                                                              { SYSTEM_TEXT("Four"s), VectorType::Four } };
+                                                              { SYSTEM_TEXT("Four"s), VectorType::Four } };   
 
-    const auto iter = typeDescribe.find(describe);
-
-    if (iter != typeDescribe.cend())
+    if (const auto iter = typeDescribe.find(describe);
+        iter != typeDescribe.cend())
     {
         return iter->second;
     }
@@ -37,11 +36,11 @@ System::String CSVConfigure::EnumCastString(VectorType type)
 {
     static std::map<VectorType, System::String> typeDescribe{ { VectorType::Two, SYSTEM_TEXT("Two"s) },
                                                               { VectorType::Three, SYSTEM_TEXT("Three"s) },
-                                                              { VectorType::Four, SYSTEM_TEXT("Four"s) } };
+                                                              { VectorType::Four, SYSTEM_TEXT("Four"s) }
+ };    
 
-    const auto iter = typeDescribe.find(type);
-
-    if (iter != typeDescribe.cend())
+    if (const auto iter = typeDescribe.find(type);
+        iter != typeDescribe.cend())
     {
         return iter->second;
     }
@@ -55,11 +54,11 @@ System::String CSVConfigure::GetEnumDescribe(VectorType type)
 {
     static std::map<VectorType, System::String> typeDescribe{ { VectorType::Two, SYSTEM_TEXT("二维"s) },
                                                               { VectorType::Three, SYSTEM_TEXT("三维"s) },
-                                                              { VectorType::Four, SYSTEM_TEXT("四维"s) } };
+                                                              { VectorType::Four, SYSTEM_TEXT("四维"s) }
+ };    
 
-    const auto iter = typeDescribe.find(type);
-
-    if (iter != typeDescribe.cend())
+    if (const auto iter = typeDescribe.find(type);
+        iter != typeDescribe.cend())
     {
         return iter->second;
     }

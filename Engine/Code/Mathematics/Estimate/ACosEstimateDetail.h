@@ -7,8 +7,8 @@
 ///	标准：std:c++20
 ///	版本：0.9.1.4 (2023/09/14 15:40)
 
-#ifndef MATHEMATICS_BASE_ACOS_ESTIMATE_DETAIL_H
-#define MATHEMATICS_BASE_ACOS_ESTIMATE_DETAIL_H
+#ifndef MATHEMATICS_ESTIMATE_ACOS_ESTIMATE_DETAIL_H
+#define MATHEMATICS_ESTIMATE_ACOS_ESTIMATE_DETAIL_H
 
 #include "ACosEstimate.h"
 #include "Mathematics/Base/MathDetail.h"
@@ -30,4 +30,4 @@ T Mathematics::ACosEstimate(T x)
     return poly;
 }
 
-#endif  // MATHEMATICS_BASE_ACOS_ESTIMATE_DETAIL_H
+#endif  // MATHEMATICS_ESTIMATE_ACOS_ESTIMATE_DETAIL_H

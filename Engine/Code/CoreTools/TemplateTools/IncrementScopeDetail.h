@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 16:35)
+///	版本：0.9.1.5 (2023/09/20 14:41)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_INCREMENT_SCOPE_DETAIL_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_INCREMENT_SCOPE_DETAIL_H
@@ -15,17 +15,17 @@
 #include "SimpleIncrementerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-template <typename T, typename Aquire, typename Release>
-CoreTools::IncrementScope<T, Aquire, Release>::IncrementScope(Reference value) noexcept
+template <typename T, typename Acquire, typename Release>
+CoreTools::IncrementScope<T, Acquire, Release>::IncrementScope(Reference value) noexcept
     : value{ value }
 {
-    AquireType()(value);
+    AcquireType()(value);
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-template <typename T, typename Aquire, typename Release>
-CoreTools::IncrementScope<T, Aquire, Release>::~IncrementScope()
+template <typename T, typename Acquire, typename Release>
+CoreTools::IncrementScope<T, Acquire, Release>::~IncrementScope()
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 
@@ -34,8 +34,8 @@ CoreTools::IncrementScope<T, Aquire, Release>::~IncrementScope()
 
 #ifdef OPEN_CLASS_INVARIANT
 
-template <typename T, typename Aquire, typename Release>
-bool CoreTools::IncrementScope<T, Aquire, Release>::IsValid() const noexcept
+template <typename T, typename Acquire, typename Release>
+bool CoreTools::IncrementScope<T, Acquire, Release>::IsValid() const noexcept
 {
     return true;
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/05 17:40)
+///	版本：0.9.1.5 (2023/10/25 14:08)
 
 #include "ContainerAdapterTestingDetail.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"

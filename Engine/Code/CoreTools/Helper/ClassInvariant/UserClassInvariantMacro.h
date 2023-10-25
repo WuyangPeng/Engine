@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:46)
+///	版本：0.9.1.5 (2023/09/22 11:12)
 
 #ifndef CORE_TOOLS_HELPER_USER_CLASS_INVARIANT_MACRO_H
 #define CORE_TOOLS_HELPER_USER_CLASS_INVARIANT_MACRO_H
@@ -37,7 +37,7 @@ static_assert(USER_CLASS_INVARIANT_CONST_LEVEL <= CLASS_INVARIANT_CONST_LEVEL, "
     #define USER_CLASS_IS_VALID_0 (static_cast<void>(0))
     #define USER_SELF_CLASS_IS_VALID_0 (static_cast<void>(0))
 
-#endif  //0 <= USER_CLASS_INVARIANT_LEVEL
+#endif  // 0 <= USER_CLASS_INVARIANT_LEVEL
 
 #if 1 <= USER_CLASS_INVARIANT_LEVEL
 

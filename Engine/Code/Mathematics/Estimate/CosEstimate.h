@@ -7,8 +7,8 @@
 ///	标准：std:c++20
 ///	版本：0.9.1.4 (2023/09/14 17:09)
 
-#ifndef MATHEMATICS_BASE_COS_ESTIMATE_H
-#define MATHEMATICS_BASE_COS_ESTIMATE_H
+#ifndef MATHEMATICS_ESTIMATE_COS_ESTIMATE_H
+#define MATHEMATICS_ESTIMATE_COS_ESTIMATE_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -63,14 +63,14 @@ namespace Mathematics
         2.7008567604626e-10  // degree 10
     };
 
-    /// 输入约束是 [-pi/2,pi/2]中的x。例如，4度的估计值是
+    /// 输入约束是 [-pi/2,pi/2]中的x。例如，4阶的估计值是
     /// float x; // in [-pi/2,pi/2]
     /// float result = CosEstimate<float, 4>(x);
     template <typename T, int Degree>
     requires((Degree & 1) == 0 && 1 <= (Degree / 2) && (Degree / 2) <= 5)
     NODISCARD T CosEstimate(T x);
 
-    /// 输入x可以是任何实数。范围缩小用于生成 [-pi/2,pi/2]中的值y和 cos(y) = s * cos(x)的符号s。例如，4度的估计值是
+    /// 输入x可以是任何实数。范围缩小用于生成 [-pi/2,pi/2]中的值y和 cos(y) = s * cos(x)的符号s。例如，4阶的估计值是
     /// float x;  // x any real number
     /// float result = CosEstimateReal<float, 4>(x);
     template <typename T, int Degree>
@@ -85,4 +85,4 @@ namespace Mathematics
     }
 }
 
-#endif  // MATHEMATICS_BASE_COS_ESTIMATE_H
+#endif  // MATHEMATICS_ESTIMATE_COS_ESTIMATE_H

@@ -5,15 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:10)
+///	版本：0.9.1.5 (2023/09/23 15:32)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "SharedStringsImpl.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
-#include <algorithm>
 
 CoreTools::SimpleCSV::SharedStringsImpl::SharedStringsImpl() noexcept
     : stringCache{}

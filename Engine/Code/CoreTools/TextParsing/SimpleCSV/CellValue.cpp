@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:08)
+///	版本：0.9.1.5 (2023/09/23 15:38)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,7 +16,6 @@
 #include "System/Helper/Tools.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/ValueTypeFlags.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools::SimpleCSV, CellValue)
@@ -95,10 +94,33 @@ std::string CoreTools::SimpleCSV::CellValue::GetString() const
     return impl->Get<std::string>();
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, CellValue, Clear, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, CellValue, SetError, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, CellValue, GetType, CoreTools::SimpleCSV::ValueType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, CellValue, GetTypeAsString, std::string)
+void CoreTools::SimpleCSV::CellValue::Clear()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->Clear();
+}
+
+void CoreTools::SimpleCSV::CellValue::SetError()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetError();
+}
+
+CoreTools::SimpleCSV::ValueType CoreTools::SimpleCSV::CellValue::GetType() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetType();
+}
+
+std::string CoreTools::SimpleCSV::CellValue::GetTypeAsString() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetTypeAsString();
+}
 
 bool CoreTools::SimpleCSV::CellValue::IsEqual(const CellValue& rhs) const noexcept
 {

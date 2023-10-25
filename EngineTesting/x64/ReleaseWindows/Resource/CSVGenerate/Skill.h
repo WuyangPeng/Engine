@@ -24,7 +24,7 @@ namespace CSVConfigure
         using ClassType = Skill;
         using ParentType = SkillBase;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit Skill(const CSVRow& csvRow);

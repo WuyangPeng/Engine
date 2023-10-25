@@ -17,6 +17,7 @@
 #include "CoreTools/TextParsing/Data/IntVector4.h"
 #include "CoreTools/TextParsing/Data/Vector2.h"
 
+
 namespace CSVConfigure
 {
     class ChapterBase

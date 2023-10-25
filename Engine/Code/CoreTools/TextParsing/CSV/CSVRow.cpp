@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:01)
+///	版本：0.9.1.5 (2023/09/26 13:53)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CSVRow.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/TextParsing/Data/IntVector2.h"
 #include "CoreTools/TextParsing/Data/IntVector3.h"
 #include "CoreTools/TextParsing/Data/IntVector4.h"
@@ -29,32 +28,191 @@ CoreTools::CSVRow::CSVRow(const CSVHead& csvHead, const String& rowContent)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CSVRow)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CSVRow, GetCount, int)
+int CoreTools::CSVRow::GetCount() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetString, String, System::String)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetBool, String, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetChar, String, System::TChar)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetInt, String, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetInt64, String, int64_t)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetDouble, String, double)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetEnumString, String, System::String)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetVector2, String, CoreTools::Vector2)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetVector3, String, CoreTools::Vector3)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetVector4, String, CoreTools::Vector4)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetIntVector2, String, CoreTools::IntVector2)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetIntVector3, String, CoreTools::IntVector3)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetIntVector4, String, CoreTools::IntVector4)
+    return impl->GetCount();
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetStringArray, String, CoreTools::CSVRow::StringContainer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetBoolArray, String, CoreTools::CSVRow::BoolContainer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetCharArray, String, CoreTools::CSVRow::CharContainer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetIntArray, String, CoreTools::CSVRow::IntContainer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetInt64Array, String, CoreTools::CSVRow::Int64Container)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetDoubleArray, String, CoreTools::CSVRow::DoubleContainer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetEnumStringArray, String, CoreTools::CSVRow::StringContainer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetVector2Array, String, CoreTools::CSVRow::Vector2Container)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetVector3Array, String, CoreTools::CSVRow::Vector3Container)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetVector4Array, String, CoreTools::CSVRow::Vector4Container)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetIntVector2Array, String, CoreTools::CSVRow::IntVector2Container)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetIntVector3Array, String, CoreTools::CSVRow::IntVector3Container)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetIntVector4Array, String, CoreTools::CSVRow::IntVector4Container)
+CoreTools::CSVRow::String CoreTools::CSVRow::GetString(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetString(field);
+}
+
+bool CoreTools::CSVRow::GetBool(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetBool(field);
+}
+
+CoreTools::CSVRow::TChar CoreTools::CSVRow::GetChar(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetChar(field);
+}
+
+int CoreTools::CSVRow::GetInt(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetInt(field);
+}
+
+int64_t CoreTools::CSVRow::GetInt64(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetInt64(field);
+}
+
+double CoreTools::CSVRow::GetDouble(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDouble(field);
+}
+
+CoreTools::Vector2 CoreTools::CSVRow::GetVector2(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetVector2(field);
+}
+
+CoreTools::Vector3 CoreTools::CSVRow::GetVector3(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetVector3(field);
+}
+
+CoreTools::Vector4 CoreTools::CSVRow::GetVector4(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetVector4(field);
+}
+
+CoreTools::IntVector2 CoreTools::CSVRow::GetIntVector2(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetIntVector2(field);
+}
+
+CoreTools::IntVector3 CoreTools::CSVRow::GetIntVector3(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetIntVector3(field);
+}
+
+CoreTools::IntVector4 CoreTools::CSVRow::GetIntVector4(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetIntVector4(field);
+}
+
+CoreTools::CSVRow::StringContainer CoreTools::CSVRow::GetStringArray(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetStringArray(field);
+}
+
+CoreTools::CSVRow::BoolContainer CoreTools::CSVRow::GetBoolArray(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetBoolArray(field);
+}
+
+CoreTools::CSVRow::CharContainer CoreTools::CSVRow::GetCharArray(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetCharArray(field);
+}
+
+CoreTools::CSVRow::IntContainer CoreTools::CSVRow::GetIntArray(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetIntArray(field);
+}
+
+CoreTools::CSVRow::Int64Container CoreTools::CSVRow::GetInt64Array(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetInt64Array(field);
+}
+
+CoreTools::CSVRow::DoubleContainer CoreTools::CSVRow::GetDoubleArray(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDoubleArray(field);
+}
+
+CoreTools::CSVRow::Vector2Container CoreTools::CSVRow::GetVector2Array(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetVector2Array(field);
+}
+
+CoreTools::CSVRow::Vector3Container CoreTools::CSVRow::GetVector3Array(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetVector3Array(field);
+}
+
+CoreTools::CSVRow::Vector4Container CoreTools::CSVRow::GetVector4Array(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetVector4Array(field);
+}
+
+CoreTools::CSVRow::IntVector2Container CoreTools::CSVRow::GetIntVector2Array(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetIntVector2Array(field);
+}
+
+CoreTools::CSVRow::IntVector3Container CoreTools::CSVRow::GetIntVector3Array(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetIntVector3Array(field);
+}
+
+CoreTools::CSVRow::IntVector4Container CoreTools::CSVRow::GetIntVector4Array(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetIntVector4Array(field);
+}
+
+CoreTools::CSVRow::String CoreTools::CSVRow::GetEnumString(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetEnumString(field);
+}
+
+CoreTools::CSVRow::StringContainer CoreTools::CSVRow::GetEnumStringArray(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetEnumStringArray(field);
+}

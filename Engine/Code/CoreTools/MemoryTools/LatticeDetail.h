@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/11 15:18)
+///	版本：0.9.1.5 (2023/09/21 09:35)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_LATTICE_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_LATTICE_DETAIL_H

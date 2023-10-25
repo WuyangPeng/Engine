@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/29 13:36)
+///	版本：0.9.1.5 (2023/09/21 09:23)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_EVENT_SLOT_H
 #define CORE_TOOLS_MESSAGE_EVENT_EVENT_SLOT_H
@@ -31,6 +31,7 @@ namespace CoreTools
         static_assert(std::is_base_of_v<EventInterface, SubclassType>, "SubclassType is base of EventInterface");
 
         using ClassType = EventSlot<SubclassType, EventSlotPriorityType>;
+
         using CallbackMemberFunction = typename SubclassType::CallbackMemberFunction;
         using ConstSubclassSharedPtr = std::shared_ptr<const T>;
 

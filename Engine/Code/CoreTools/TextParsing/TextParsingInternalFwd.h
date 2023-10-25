@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:13)
+///	版本：0.9.1.5 (2023/09/23 14:22)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_INTERNAL_FWD_H
 #define CORE_TOOLS_TEXT_PARSING_INTERNAL_FWD_H
@@ -22,12 +22,6 @@ namespace CoreTools
 
     class CSVTotalGenerateImpl;
     class CSVTotalGenerateFactory;
-
-    class JsonGenerateImpl;
-    class JsonGenerateFactory;
-
-    class JsonTotalGenerateImpl;
-    class JsonTotalGenerateFactory;
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_INTERNAL_FWD_H

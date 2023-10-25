@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:08)
+///	版本：0.9.1.5 (2023/09/23 18:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,7 +13,6 @@
 #include "CellValueProxyDetail.h"
 #include "Detail/CellValueProxyImpl.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 CoreTools::SimpleCSV::CellValueProxy CoreTools::SimpleCSV::CellValueProxy::CreateEmpty()
 {
@@ -38,18 +37,68 @@ CoreTools::SimpleCSV::CellValueProxy::CellValueProxy(const CellSharedPtr& cell)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, CellValueProxy)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, CellValueProxy, Clear, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, CellValueProxy, SetError, void)
+void CoreTools::SimpleCSV::CellValueProxy::Clear()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, CellValueProxy, GetType, CoreTools::SimpleCSV::ValueType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, CellValueProxy, GetTypeAsString, std::string)
+    return impl->Clear();
+}
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, CellValueProxy, SetInteger, int64_t, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, CellValueProxy, SetBoolean, bool, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, CellValueProxy, SetFloat, double, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, CellValueProxy, SetString, std::string, void)
+void CoreTools::SimpleCSV::CellValueProxy::SetError()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, CellValueProxy, GetValue, CoreTools::SimpleCSV::CellValue)
+    return impl->SetError();
+}
+
+CoreTools::SimpleCSV::ValueType CoreTools::SimpleCSV::CellValueProxy::GetType() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetType();
+}
+
+std::string CoreTools::SimpleCSV::CellValueProxy::GetTypeAsString() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetTypeAsString();
+}
+
+void CoreTools::SimpleCSV::CellValueProxy::SetInteger(int64_t numberValue)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetInteger(numberValue);
+}
+
+void CoreTools::SimpleCSV::CellValueProxy::SetBoolean(bool numberValue)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetBoolean(numberValue);
+}
+
+void CoreTools::SimpleCSV::CellValueProxy::SetFloat(double numberValue)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetFloat(numberValue);
+}
+
+void CoreTools::SimpleCSV::CellValueProxy::SetString(const std::string& stringValue)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetString(stringValue);
+}
+
+CoreTools::SimpleCSV::CellValue CoreTools::SimpleCSV::CellValueProxy::GetValue() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetValue();
+}
 
 void CoreTools::SimpleCSV::CellValueProxy::SetCellValue(const CellValue& cellValue)
 {

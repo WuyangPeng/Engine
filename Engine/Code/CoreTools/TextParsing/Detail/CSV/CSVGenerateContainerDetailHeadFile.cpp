@@ -5,18 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 17:20)
+///	版本：0.9.1.5 (2023/10/24 14:49)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CSVGenerateContainerDetailHeadFile.h"
-#include "CSVGenerateGetFunctionDefinition.h"
-#include "CSVGenerateHead.h"
+#include "System/Helper/PragmaWarning/Algorithm.h"
+#include "CoreTools/CharacterString/StringUtility.h"
+#include "CoreTools/FileManager/IFStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-CoreTools::CSVGenerateContainerDetailHeadFile::CSVGenerateContainerDetailHeadFile(const CSVHead& csvHead) noexcept
-    : ParentType{ csvHead }
+CoreTools::CSVGenerateContainerDetailHeadFile::CSVGenerateContainerDetailHeadFile(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis) noexcept
+    : ParentType{ csvHead, codeMappingAnalysis }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -42,20 +44,24 @@ System::String CoreTools::CSVGenerateContainerDetailHeadFile::GetFileSuffix() co
     return result;
 }
 
-System::String CoreTools::CSVGenerateContainerDetailHeadFile::GetContent() const
+System::String CoreTools::CSVGenerateContainerDetailHeadFile::GetContent(const String& codeDirectory) const
 {
-    String content{ TextParsing::gCopyright };
+    auto content = GetTemplateContent(codeDirectory + SYSTEM_TEXT("/EntityContainerDetailH.txt"));
 
-    content += TextParsing::gNewlineCharacter;
-    content += GenerateHeaderGuard();
+    const auto codeMapping = GetCodeMappingAnalysis();
 
-    const CSVGenerateHead csvGenerateHead{ GetCSVHead(), GetSuffix() };
-    content += csvGenerateHead.GenerateContainerDetailHead();
+    if (const auto head = GetCSVHead();
+        head.GetCSVFormatType() == CSVFormatType::TreeMap ||
+        head.GetCSVFormatType() == CSVFormatType::HashMap)
+    {
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$GetEntityFirstDefine$"), codeMapping.GetElement(SYSTEM_TEXT("GetEntityMapFirstDefine")));
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$ElementSecond$"), SYSTEM_TEXT("element.second"));
+    }
+    else
+    {
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$GetEntityFirstDefine$"), codeMapping.GetElement(SYSTEM_TEXT("GetEntityFirstDefine")));
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$ElementSecond$"), SYSTEM_TEXT("element"));
+    }
 
-    const CSVGenerateGetFunctionDefinition csvGenerateGetFunctionDefinition{ GetCSVHead(), GetSuffix() };
-    content += csvGenerateGetFunctionDefinition.GenerateContainerDetailDefinition();
-
-    content += GenerateHeaderGuardEndif();
-
-    return content;
+    return ReplaceTemplate(content);
 }

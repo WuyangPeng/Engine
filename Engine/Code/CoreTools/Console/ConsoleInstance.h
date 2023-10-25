@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/22 10:43)
+///	版本：0.9.1.5 (2023/09/23 10:00)
 
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_INSTANCE_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_INSTANCE_H
@@ -21,6 +21,7 @@ namespace CoreTools
     {
     public:
         using ClassType = ConsoleInstance;
+
         using ConsoleHandle = System::WindowsHandle;
 
     public:

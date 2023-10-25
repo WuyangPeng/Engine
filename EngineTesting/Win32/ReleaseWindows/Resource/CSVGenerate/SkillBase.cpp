@@ -58,7 +58,7 @@ CSVConfigure::VectorType CSVConfigure::SkillBase::GetVectorType() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return CSVConfigure::VectorType{};
+    return VectorType{};
 }
 
 CoreTools::IntVector3 CSVConfigure::SkillBase::GetPosition() const noexcept

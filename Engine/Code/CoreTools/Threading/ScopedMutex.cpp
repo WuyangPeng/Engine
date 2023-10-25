@@ -5,12 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 16:40)
+///	版本：0.9.1.5 (2023/09/20 14:35)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "DllMutex.h"
-#include "ScopedMutex.h" 
+#include "ScopedMutex.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 

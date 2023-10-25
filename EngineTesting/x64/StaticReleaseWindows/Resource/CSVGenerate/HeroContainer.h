@@ -26,7 +26,7 @@ namespace CSVConfigure
     public:
         using ClassType = HeroContainer;
 
-        using ConstHeroSharedPtr = std::shared_ptr<const Hero>;
+        using ConstHeroSharedPtr = std::shared_ptr<const HeroMappingType>;
         using MappingContainer = std::map<int, ConstHeroSharedPtr>;
         using Container = std::vector<ConstHeroSharedPtr>;
         using CSVContent = CoreTools::CSVContent;
@@ -39,6 +39,8 @@ namespace CSVConfigure
         NODISCARD ConstHeroSharedPtr GetFirstHero() const;
         NODISCARD ConstHeroSharedPtr GetHero(int key) const;
         NODISCARD MappingContainer GetContainer() const;
+
+        NODISCARD int GetContainerSize() const;
 
         template <typename Function>
         NODISCARD ConstHeroSharedPtr GetFirstHero(Function function) const;

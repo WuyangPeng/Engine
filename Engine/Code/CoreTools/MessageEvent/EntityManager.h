@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/29 13:35)
+///	版本：0.9.1.5 (2023/09/21 09:23)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_ENTITY_MANAGER_H
 #define CORE_TOOLS_MESSAGE_EVENT_ENTITY_MANAGER_H
@@ -17,7 +17,6 @@
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
-#include "CoreTools/Threading/ThreadingFwd.h"
 
 #include <string>
 
@@ -31,6 +30,7 @@ namespace CoreTools
     public:
         NON_COPY_TYPE_DECLARE(EntityManager);
         using ParentType = Singleton<EntityManager>;
+
         using EntitySharedPtr = std::shared_ptr<BaseEntity>;
 
     private:

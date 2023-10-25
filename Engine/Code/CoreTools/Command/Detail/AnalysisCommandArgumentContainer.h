@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/21 09:35)
+///	版本：0.9.1.5 (2023/09/23 10:01)
 
 #ifndef CORE_TOOLS_COMMAND_MAIN_COMMAND_ARGUMENT_CONTAINER_H
 #define CORE_TOOLS_COMMAND_MAIN_COMMAND_ARGUMENT_CONTAINER_H
@@ -23,6 +23,7 @@ namespace CoreTools
     {
     public:
         using ClassType = AnalysisCommandArgumentContainer;
+
         using CommandArgumentContainerSharedPtr = std::shared_ptr<CommandArgumentContainer>;
 
     public:

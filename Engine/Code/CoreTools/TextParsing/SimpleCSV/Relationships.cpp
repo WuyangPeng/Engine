@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:07)
+///	版本：0.9.1.5 (2023/09/23 18:11)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -28,7 +28,7 @@ CoreTools::SimpleCSV::Relationships::Relationships(const XmlDataSharedPtr& xmlDa
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools::SimpleCSV, Relationships)
 
-CoreTools::SimpleCSV::RelationshipItem CoreTools::SimpleCSV::Relationships::GetRelationshipByID(const std::string& id) const
+CoreTools::SimpleCSV::RelationshipItem CoreTools::SimpleCSV::Relationships::GetRelationshipById(const std::string& id) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/22 19:21)
+///	版本：0.9.1.5 (2023/09/23 09:32)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -21,7 +21,6 @@ CoreTools::CyclicRedundancyCheck16::CyclicRedundancyCheck16(const char* data, in
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 void CoreTools::CyclicRedundancyCheck16::Calculation(const char* data, int length)
 {
     if (data != nullptr)

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 17:37)
+///	版本：0.9.1.5 (2023/09/20 13:49)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_O_STREAM_IMPL_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_O_STREAM_IMPL_H

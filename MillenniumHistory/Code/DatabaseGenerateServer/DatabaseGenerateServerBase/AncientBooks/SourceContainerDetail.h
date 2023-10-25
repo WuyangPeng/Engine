@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-AncientBooks::SourceContainer::ConstSourceBaseSharedPtr AncientBooks::SourceContainer::GetFirstSource(Function function) const
+AncientBooks::SourceContainer::ConstSourceSharedPtr AncientBooks::SourceContainer::GetFirstSource(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

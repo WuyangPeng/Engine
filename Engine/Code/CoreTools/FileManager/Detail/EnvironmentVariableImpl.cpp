@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:37)
+///	版本：0.9.1.5 (2023/09/22 13:48)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -24,7 +24,6 @@ CoreTools::EnvironmentVariableImpl::EnvironmentVariableImpl(const String& variab
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 void CoreTools::EnvironmentVariableImpl::GainEnv(const String& variableName)
 {
     if (!System::GetEnvironment(variableName, environmentVariable) || environmentVariable == nullptr)

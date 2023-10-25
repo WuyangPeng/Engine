@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVRowDetail.h"
 
-using namespace std::literals;
+using namespace std::literals; 
 
 CSVConfigure::Equip::Equip(const CSVRow& csvRow)
     : ParentType{},

@@ -22,7 +22,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Mathematics/Base/MathDetail.h"
-#include "Mathematics/NumericalAnalysis/ChebyshevRatioDetail.h"
+#include "Mathematics/Estimate/ChebyshevRatioDetail.h"
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
@@ -666,8 +666,8 @@ void Mathematics::Quaternion<Real>::SlerpChebyshevRatio(Real t, const Quaternion
 
     using System::operator*;
 
-    const auto result = ChebyshevRatio<Real>::Get(t, cosA);
-    *this = quaternion0 * result[0] + quaternion1 * (sign * result[1]);
+    const auto result = ChebyshevRatios<Real>(t, cosA);
+    *this = quaternion0 * result.at(0) + quaternion1 * (sign * result.at(1));
 }
 
 template <typename Real>
@@ -678,8 +678,8 @@ void Mathematics::Quaternion<Real>::SlerpChebyshevRatioRestricted(Real t, const 
 
     const auto cosA = Dot(quaternion0, quaternion1);
 
-    const auto result = ChebyshevRatio<Real>::Get(t, cosA);
-    *this = quaternion0 * result[0] + quaternion1 * result[1];
+    const auto result = ChebyshevRatios<Real>(t, cosA);
+    *this = quaternion0 * result.at(0) + quaternion1 * result.at(1);
 }
 
 template <typename Real>
@@ -688,8 +688,8 @@ void Mathematics::Quaternion<Real>::SlerpChebyshevRatioRestrictedPreprocessed(Re
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    const auto result = ChebyshevRatio<Real>::Get(t, cosA);
-    *this = quaternion0 * result[0] + quaternion1 * result[1];
+    const auto result = ChebyshevRatios<Real>(t, cosA);
+    *this = quaternion0 * result.at(0) + quaternion1 * result.at(1);
 }
 
 template <typename Real>
@@ -701,13 +701,13 @@ void Mathematics::Quaternion<Real>::SlerpChebyshevRatioRestrictedPreprocessedHal
     const auto twoT = Math::GetValue(2) * t;
     if (twoT <= Math::GetValue(1))
     {
-        const auto result = ChebyshevRatio<Real>::Get(twoT, cosAHalf);
-        *this = quaternion0 * result[0] + quaternionHalf * result[1];
+        const auto result = ChebyshevRatios<Real>(twoT, cosAHalf);
+        *this = quaternion0 * result.at(0) + quaternionHalf * result.at(1);
     }
     else
     {
-        const auto result = ChebyshevRatio<Real>::Get(twoT - Math::GetValue(1), cosAHalf);
-        *this = quaternionHalf * result[0] + quaternion1 * result[1];
+        const auto result = ChebyshevRatios<Real>(twoT - Math::GetValue(1), cosAHalf);
+        *this = quaternionHalf * result.at(0) + quaternion1 * result.at(1);
     }
 }
 

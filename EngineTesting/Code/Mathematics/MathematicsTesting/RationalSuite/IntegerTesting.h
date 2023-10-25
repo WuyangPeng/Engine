@@ -50,7 +50,7 @@ namespace Mathematics
 
         // Utilities≤‚ ‘
         void BlockTest();
-        void BitTest();
+        void Bit1Test();
         void ConversionTest();
 
         void DoRunUnitTest() override;

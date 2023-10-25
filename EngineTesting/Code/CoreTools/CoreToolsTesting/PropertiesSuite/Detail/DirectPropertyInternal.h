@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/25 10:05)
+///	版本：0.9.1.5 (2023/10/25 14:41)
 
 #ifndef CORE_TOOLS_PROPERTIES_SUITE_DIRECT_PROPERTY_INTERNAL_H
 #define CORE_TOOLS_PROPERTIES_SUITE_DIRECT_PROPERTY_INTERNAL_H
@@ -24,6 +24,7 @@ namespace CoreTools
     public:
         using ClassType = DirectPropertyInternal;
 
+    public:
         CLASS_INVARIANT_DECLARE;
 
         explicit DirectPropertyInternal(DisableNotThrow disableNotThrow);

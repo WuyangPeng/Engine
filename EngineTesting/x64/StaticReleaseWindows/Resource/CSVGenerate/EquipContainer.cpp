@@ -9,6 +9,7 @@
 
 #include "Equip.h"
 #include "EquipContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -29,6 +30,7 @@ void CSVConfigure::EquipContainer::Parsing(const CSVContent& csvContent)
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("equip表开始载入……"));
 
     Load(csvContent);
+
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("equip表结束载入……"));
 }
 
@@ -37,9 +39,9 @@ void CSVConfigure::EquipContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         equip.emplace_back(std::make_shared<Equip>(csvRow));
     }
@@ -49,11 +51,14 @@ void CSVConfigure::EquipContainer::Load(const CSVContent& csvContent)
     });
 
     equip.shrink_to_fit();
+
 }
+
+
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, EquipContainer)
 
-CSVConfigure::EquipContainer::ConstEquipBaseSharedPtr CSVConfigure::EquipContainer::GetFirstEquip(int key) const
+CSVConfigure::EquipContainer::ConstEquipSharedPtr CSVConfigure::EquipContainer::GetFirstEquip(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -91,5 +96,12 @@ CSVConfigure::EquipContainer::Container CSVConfigure::EquipContainer::GetContain
     USER_CLASS_IS_VALID_CONST_9;
 
     return equip;
+}
+
+int CSVConfigure::EquipContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(equip.size());
 }
 

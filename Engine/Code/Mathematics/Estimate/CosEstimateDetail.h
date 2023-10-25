@@ -7,8 +7,8 @@
 ///	标准：std:c++20
 ///	版本：0.9.1.4 (2023/09/14 15:40)
 
-#ifndef MATHEMATICS_BASE_COS_ESTIMATE_DETAIL_H
-#define MATHEMATICS_BASE_COS_ESTIMATE_DETAIL_H
+#ifndef MATHEMATICS_ESTIMATE_COS_ESTIMATE_DETAIL_H
+#define MATHEMATICS_ESTIMATE_COS_ESTIMATE_DETAIL_H
 
 #include "CosEstimate.h"
 #include "Mathematics/Base/MathDetail.h"
@@ -55,4 +55,4 @@ T Mathematics::CosEstimateReal(T x)
     }
 }
 
-#endif  // MATHEMATICS_BASE_COS_ESTIMATE_DETAIL_H
+#endif  // MATHEMATICS_ESTIMATE_COS_ESTIMATE_DETAIL_H

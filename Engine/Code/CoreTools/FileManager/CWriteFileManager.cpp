@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:40)
+///	版本：0.9.1.5 (2023/09/22 13:57)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,6 +22,69 @@ CoreTools::CWriteFileManager::CWriteFileManager(const String& fileName, bool add
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CWriteFileManager)
 
+uint32_t CoreTools::CWriteFileManager::GetFileByteSize() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFileByteSize();
+}
+
+bool CoreTools::CWriteFileManager::PutCharacter(int character)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->PutCharacter(character);
+}
+
+bool CoreTools::CWriteFileManager::PutString(const std::string& str)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->PutString(str);
+}
+
+bool CoreTools::CWriteFileManager::IsEof() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->IsEof();
+}
+
+bool CoreTools::CWriteFileManager::Flush() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->Flush();
+}
+
+CoreTools::CWriteFileManager::PosType CoreTools::CWriteFileManager::GetPosition()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetPosition();
+}
+
+bool CoreTools::CWriteFileManager::SetPosition(PosType position) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetPosition(position);
+}
+
+long CoreTools::CWriteFileManager::Tell() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->Tell();
+}
+
+void CoreTools::CWriteFileManager::Rewind() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->Rewind();
+}
+
 void CoreTools::CWriteFileManager::Write(size_t itemSize, const void* data)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -36,24 +99,12 @@ void CoreTools::CWriteFileManager::Write(size_t itemSize, size_t itemsNumber, co
     return impl->Write(itemSize, itemsNumber, data);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CWriteFileManager, GetFileByteSize, uint32_t);
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, CWriteFileManager, PutCharacter, int, bool);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CWriteFileManager, PutString, std::string, bool);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CWriteFileManager, IsEof, bool);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CWriteFileManager, Flush, bool);
-
 bool CoreTools::CWriteFileManager::Seek(long offset, FileSeek whence) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     return impl->Seek(offset, whence);
 }
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CWriteFileManager, GetPosition, CoreTools::CWriteFileManager::PosType);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(CoreTools, CWriteFileManager, SetPosition, PosType, bool);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CWriteFileManager, Tell, long);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CWriteFileManager, Rewind, void);
 
 bool CoreTools::CWriteFileManager::SetVBuffer(FileSetVBuffer type, size_t size) noexcept
 {

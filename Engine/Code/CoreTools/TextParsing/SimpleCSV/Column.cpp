@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:08)
+///	版本：0.9.1.5 (2023/09/23 15:42)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -23,9 +23,37 @@ CoreTools::SimpleCSV::Column::Column(const ConstXMLDocumentSharedPtr& document, 
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, Column)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Column, GetWidth, float)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, Column, SetWidth, float, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Column, IsHidden, bool)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, Column, SetHidden, bool, void)
+float CoreTools::SimpleCSV::Column::GetWidth() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Column, GetColumnNode, CoreTools::SimpleCSV::XMLNode)
+    return impl->GetWidth();
+}
+
+void CoreTools::SimpleCSV::Column::SetWidth(float width)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetWidth(width);
+}
+
+bool CoreTools::SimpleCSV::Column::IsHidden() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsHidden();
+}
+
+void CoreTools::SimpleCSV::Column::SetHidden(bool state)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetHidden(state);
+}
+
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Column::GetColumnNode() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetColumnNode();
+}

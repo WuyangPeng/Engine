@@ -25,8 +25,8 @@ namespace AncientBooks
     public:
         using ClassType = ArticleContainer;
 
-        using ConstArticleBaseSharedPtr = std::shared_ptr<const ArticleBase>;
-        using Container = std::vector<ConstArticleBaseSharedPtr>;
+        using ConstArticleSharedPtr = std::shared_ptr<const ArticleMappingType>;
+        using Container = std::vector<ConstArticleSharedPtr>;
         using CSVContent = CoreTools::CSVContent;
 
     public:
@@ -34,14 +34,14 @@ namespace AncientBooks
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConstArticleBaseSharedPtr GetFirstArticle() const;
-        NODISCARD ConstArticleBaseSharedPtr GetArticle(int64_t key) const;
+        NODISCARD ConstArticleSharedPtr GetFirstArticle() const;
+        NODISCARD ConstArticleSharedPtr GetArticle(int64_t key) const;
         NODISCARD Container GetContainer() const;
 
         NODISCARD int GetContainerSize() const;
 
         template <typename Function>
-        NODISCARD ConstArticleBaseSharedPtr GetFirstArticle(Function function) const;
+        NODISCARD ConstArticleSharedPtr GetFirstArticle(Function function) const;
 
         template <typename Function>
         NODISCARD Container GetArticle(Function function) const;

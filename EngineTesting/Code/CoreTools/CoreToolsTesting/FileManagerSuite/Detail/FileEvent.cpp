@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/11 20:41)
+///	版本：0.9.1.5 (2023/10/24 19:19)
 
 #include "FileEvent.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -22,6 +22,8 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, FileEvent)
 
 void CoreTools::FileEvent::EventFunction(const FileAsynchronousParameter& fileAsynchronousParameter, const FileBuffer& fileBuffer) noexcept
 {
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
     System::UnusedFunction(fileAsynchronousParameter, fileBuffer);
 }
 

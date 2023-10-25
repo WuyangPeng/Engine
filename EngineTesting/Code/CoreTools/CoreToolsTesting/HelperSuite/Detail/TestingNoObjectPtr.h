@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/11 20:55)
+///	版本：0.9.1.5 (2023/10/24 15:36)
 
 #ifndef CORE_TOOLS_HELPER_SUITE_TESTING_NO_OBJECT_PTR_H
 #define CORE_TOOLS_HELPER_SUITE_TESTING_NO_OBJECT_PTR_H
@@ -16,11 +16,12 @@
 
 namespace CoreTools
 {
-    class TestingNoObjectPtr : public AbstractObject
+    class TestingNoObjectPtr final : public AbstractObject
     {
     public:
         COPY_UNSHARED_TYPE_DECLARE(TestingNoObjectPtr);
         using ParentType = AbstractObject;
+
         using ObjectSharedPtr = std::shared_ptr<ClassType>;
 
     public:

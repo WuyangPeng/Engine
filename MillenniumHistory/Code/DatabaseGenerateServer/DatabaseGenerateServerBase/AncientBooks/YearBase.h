@@ -18,6 +18,7 @@
 #include <memory>
 #include <vector>
 
+
 namespace AncientBooks
 {
     class YearBase

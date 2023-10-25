@@ -24,7 +24,7 @@ namespace AncientBooks
         using ClassType = Identity;
         using ParentType = IdentityBase;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit Identity(const CSVRow& csvRow);
@@ -36,6 +36,7 @@ namespace AncientBooks
         NODISCARD int GetId() const noexcept override;
 
         NODISCARD String GetIdentity() const override;
+
 
     private:
         int id;  // Id

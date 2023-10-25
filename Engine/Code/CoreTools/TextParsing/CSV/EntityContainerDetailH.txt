@@ -1,0 +1,37 @@
+$Copyright$
+
+#ifndef $NamespaceUppercaseSeparator$_$ClassNameUppercase$_CONTAINER_DETAIL_H
+#define $NamespaceUppercaseSeparator$_$ClassNameUppercase$_CONTAINER_DETAIL_H
+
+#include "$ClassName$Container.h"
+#include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+
+template <typename Function>
+$Namespace$::$ClassName$Container::Const$ClassName$SharedPtr $Namespace$::$ClassName$Container::GetFirst$ClassName$(Function function) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+$GetEntityFirstDefine$
+    THROW_EXCEPTION(SYSTEM_TEXT("$ClassNameLetter$表未找到满足条件的配置信息。"s))
+}
+
+template <typename Function>
+$Namespace$::$ClassName$Container::Container $Namespace$::$ClassName$Container::Get$ClassName$(Function function) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    Container result{};
+
+    for (const auto& element : $ClassNameLetter$)
+    {
+        if (function($ElementSecond$))
+        {
+            result.emplace_back($ElementSecond$);
+        }
+    }
+
+    return result;
+}
+
+#endif  // $NamespaceUppercaseSeparator$_$ClassNameUppercase$_CONTAINER_DETAIL_H

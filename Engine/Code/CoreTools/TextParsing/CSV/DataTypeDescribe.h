@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:01)
+///	版本：0.9.1.5 (2023/09/26 13:45)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_DATA_TYPE_DESCRIBE_H
 #define CORE_TOOLS_TEXT_PARSING_DATA_TYPE_DESCRIBE_H
@@ -21,6 +21,7 @@ namespace CoreTools
     {
     public:
         using ClassType = DataTypeDescribe;
+
         using StringView = System::StringView;
 
     public:

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:17)
+///	版本：0.9.1.5 (2023/09/23 14:58)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_RELATIONSHIP_H
 #define CORE_TOOLS_TEXT_PARSING_RELATIONSHIP_H
@@ -33,7 +33,7 @@ namespace CoreTools::SimpleCSV
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD RelationshipItem GetRelationshipByID(const std::string& id) const;
+        NODISCARD RelationshipItem GetRelationshipById(const std::string& id) const;
         NODISCARD RelationshipItem GetRelationshipByTarget(const std::string& target) const;
         NODISCARD RelationshipItemContainer GetRelationships() const;
         void DeleteRelationship(const std::string& relId);

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/21 09:40)
+///	版本：0.9.1.5 (2023/09/23 10:06)
 
 #ifndef CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_FACTORY_H
 #define CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_FACTORY_H
@@ -23,6 +23,7 @@ namespace CoreTools
     {
     public:
         using ClassType = CommandArgumentFactory;
+
         using CommandArgumentSharedPtr = std::shared_ptr<CommandArgumentPackage>;
 
     public:

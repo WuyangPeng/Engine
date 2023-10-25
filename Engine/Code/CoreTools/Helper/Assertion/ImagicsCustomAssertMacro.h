@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:43)
+///	版本：0.9.1.5 (2023/09/22 11:14)
 
 #ifndef CORE_TOOLS_HELPER_IMAGICS_CUSTOM_ASSERT_MACRO_H
 #define CORE_TOOLS_HELPER_IMAGICS_CUSTOM_ASSERT_MACRO_H
@@ -48,7 +48,7 @@ static_assert(IMAGICS_ASSERT_LEVEL <= ASSERT_LEVEL, "Imagics assert level defini
     #define IMAGICS_ASSERTION_DEBUG(condition, format, ...) (static_cast<void>(0))
     #define IMAGICS_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(condition, functionDescribed, format, ...) (static_cast<void>(0))
 
-#endif  //0 <= IMAGICS_ASSERT_LEVEL
+#endif  // 0 <= IMAGICS_ASSERT_LEVEL
 
 #if 1 <= IMAGICS_ASSERT_LEVEL
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:01)
+///	版本：0.9.1.5 (2023/09/26 13:56)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,12 +16,17 @@
 #include "CoreTools/TextParsing/Detail/CSV/CSVTotalGenerateFactory.h"
 #include "CoreTools/TextParsing/Detail/CSV/CSVTotalGenerateImpl.h"
 
-CoreTools::CSVTotalGenerate::CSVTotalGenerate(const String& nameSpace, const CSVHeadContainer& csvHeadContainer, CSVTotalGenerateType csvTotalGenerateType)
-    : impl{ ImplCreateUseFactory::Default, nameSpace, csvHeadContainer, csvTotalGenerateType }
+CoreTools::CSVTotalGenerate::CSVTotalGenerate(const String& nameSpace, const CSVHeadContainer& csvHeadContainer, const CodeMappingAnalysis& codeMappingAnalysis, CSVTotalGenerateType csvTotalGenerateType)
+    : impl{ ImplCreateUseFactory::Default, nameSpace, csvHeadContainer, codeMappingAnalysis, csvTotalGenerateType }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CSVTotalGenerate)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVTotalGenerate, GenerateFile, String, void)
+void CoreTools::CSVTotalGenerate::GenerateFile(const String& codeDirectory, const String& directory) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GenerateFile(codeDirectory, directory);
+}

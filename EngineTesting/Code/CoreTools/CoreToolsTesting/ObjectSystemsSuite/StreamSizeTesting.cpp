@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/24 15:34)
+///	版本：0.9.1.5 (2023/10/25 14:19)
 
 #include "StreamSizeTesting.h"
 #include "Detail/StreamSizeTestingEnum.h"
@@ -14,7 +14,6 @@
 #include "CoreTools/CoreToolsTesting/HelperSuite/Detail/TestingObject.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/ObjectSystems/ObjectInterface.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"

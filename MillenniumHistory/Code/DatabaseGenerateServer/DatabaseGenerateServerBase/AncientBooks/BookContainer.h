@@ -25,8 +25,8 @@ namespace AncientBooks
     public:
         using ClassType = BookContainer;
 
-        using ConstBookBaseSharedPtr = std::shared_ptr<const BookBase>;
-        using Container = std::vector<ConstBookBaseSharedPtr>;
+        using ConstBookSharedPtr = std::shared_ptr<const BookMappingType>;
+        using Container = std::vector<ConstBookSharedPtr>;
         using CSVContent = CoreTools::CSVContent;
 
     public:
@@ -34,14 +34,14 @@ namespace AncientBooks
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConstBookBaseSharedPtr GetFirstBook() const;
-        NODISCARD ConstBookBaseSharedPtr GetBook(int key) const;
+        NODISCARD ConstBookSharedPtr GetFirstBook() const;
+        NODISCARD ConstBookSharedPtr GetBook(int key) const;
         NODISCARD Container GetContainer() const;
 
         NODISCARD int GetContainerSize() const;
 
         template <typename Function>
-        NODISCARD ConstBookBaseSharedPtr GetFirstBook(Function function) const;
+        NODISCARD ConstBookSharedPtr GetFirstBook(Function function) const;
 
         template <typename Function>
         NODISCARD Container GetBook(Function function) const;

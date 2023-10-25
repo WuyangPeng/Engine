@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:02)
+///	版本：0.9.1.5 (2023/09/22 15:16)
 
 #ifndef CORE_TOOLS_EXCEPTION_ERROR_FACTORY_H
 #define CORE_TOOLS_EXCEPTION_ERROR_FACTORY_H
@@ -26,6 +26,7 @@ namespace CoreTools
     {
     public:
         using ClassType = ErrorFactory;
+
         using String = System::String;
         using WindowError = System::WindowError;
         using ErrorImplSharedPtr = std::shared_ptr<ErrorImpl>;

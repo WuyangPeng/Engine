@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.7 (2023/04/26 16:06)
+///	版本：0.9.1.5 (2023/10/25 10:31)
 
 #include "CSVRowTesting.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
@@ -13,7 +13,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVRowDetail.h"
-#include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/CSV/ExcelConversionCSV.h"
 #include "CoreTools/TextParsing/Data/IntVector2.h"
 #include "CoreTools/TextParsing/Data/IntVector3.h"

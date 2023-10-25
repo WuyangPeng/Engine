@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/28 16:40)
+///	版本：0.9.1.5 (2023/09/21 09:39)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -40,11 +40,11 @@ void CoreTools::TestingInformationHelperImpl::AnalysisFile()
     Tree mainTree{};
     read_json("Configuration/Testing.json", mainTree);
 
-    for (const auto& ptree : mainTree)
+    for (const auto& tree : mainTree)
     {
-        if (const auto isOpen = ptree.second.get_value(0); isOpen != 0)
+        if (const auto isOpen = tree.second.get_value(0); isOpen != 0)
         {
-            file.emplace_back(ptree.first);
+            file.emplace_back(tree.first);
         }
     }
 }
@@ -61,11 +61,11 @@ void CoreTools::TestingInformationHelperImpl::AnalysisJson()
 
 void CoreTools::TestingInformationHelperImpl::AnalysisInformation(Tree& tree)
 {
-    for (const auto& ptree : tree)
+    for (const auto& [suiteName, element] : tree)
     {
-        for (const auto& information : ptree.second)
+        for (const auto& information : element)
         {
-            testingInformation.Insert(ptree.first, information.first, information.second.get_value(0));
+            testingInformation.Insert(suiteName, information.first, information.second.get_value(0));
         }
     }
 }

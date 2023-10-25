@@ -14,7 +14,7 @@
 
 using namespace std::literals;
 
-CsvOutput::Input1::Input1(const CoreTools::CSVRow& csvRow)
+CsvOutput::Input1::Input1(const CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       test0{ csvRow.GetBool(SYSTEM_TEXT("test0"s)) },
@@ -78,7 +78,7 @@ System::String CsvOutput::Input1::GetTest5() const
     return test5;
 }
 
-std::vector<System::String> CsvOutput::Input1::GetTest6() const
+CsvOutput::Input1::StringContainer CsvOutput::Input1::GetTest6() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -99,14 +99,14 @@ System::String CsvOutput::Input1::GetTest6(int index) const
     return test6.at(index);
 }
 
-std::vector<System::String>::const_iterator CsvOutput::Input1::GetTest6Begin() const noexcept
+CsvOutput::Input1::StringContainerConstIter CsvOutput::Input1::GetTest6Begin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return test6.cbegin();
 }
 
-std::vector<System::String>::const_iterator CsvOutput::Input1::GetTest6End() const noexcept
+CsvOutput::Input1::StringContainerConstIter CsvOutput::Input1::GetTest6End() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 

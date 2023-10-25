@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVRowDetail.h"
 
-using namespace std::literals;
+using namespace std::literals; 
 
 CSVConfigure::Chapter::Chapter(const CSVRow& csvRow)
     : ParentType{},

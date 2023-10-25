@@ -20,7 +20,7 @@
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVRowDetail.h"
 
-using namespace std::literals;
+using namespace std::literals; 
 
 AncientBooks::Character::Character(const CSVRow& csvRow)
     : ParentType{},

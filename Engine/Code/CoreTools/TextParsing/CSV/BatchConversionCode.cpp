@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/29 22:23)
+///	版本：0.9.1.5 (2023/09/26 13:45)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,6 +16,7 @@
 #include "CSVHead.h"
 #include "CSVTotalGenerate.h"
 #include "System/Helper/PragmaWarning/PropertyTree.h"
+#include "CoreTools/CharacterString/CodeMappingAnalysis.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
@@ -24,16 +25,16 @@
 
 using System::operator++;
 
-CoreTools::BatchConversionCode::BatchConversionCode(const String& inputDirectory, const String& outputDirectory)
+CoreTools::BatchConversionCode::BatchConversionCode(const String& inputDirectory, const String& codeDirectory, const String& outputDirectory)
 {
-    LoadConfigure(inputDirectory, outputDirectory);
+    LoadConfigure(inputDirectory, codeDirectory, outputDirectory);
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, BatchConversionCode)
 
-void CoreTools::BatchConversionCode::LoadConfigure(const String& inputDirectory, const String& outputDirectory)
+void CoreTools::BatchConversionCode::LoadConfigure(const String& inputDirectory, const String& codeDirectory, const String& outputDirectory)
 {
     const std::filesystem::path path{ inputDirectory };
 
@@ -61,17 +62,19 @@ void CoreTools::BatchConversionCode::LoadConfigure(const String& inputDirectory,
         }
     }
 
+    const CodeMappingAnalysis codeMappingAnalysis{ codeDirectory + SYSTEM_TEXT("/CSVEngineering.json") };
+
     for (auto i = CSVTotalGenerateType::Head; i <= CSVTotalGenerateType::ContainerSource; ++i)
     {
-        const CSVTotalGenerate csvTotalGenerate{ nameSpace, container, i };
+        const CSVTotalGenerate csvTotalGenerate{ nameSpace, container, codeMappingAnalysis, i };
 
-        csvTotalGenerate.GenerateFile(outputDirectory);
+        csvTotalGenerate.GenerateFile(codeDirectory, outputDirectory);
     }
 
     for (const auto& value : container)
     {
-        const CSVGenerate csvGenerate{ value, CSVGenerateType::Total };
+        const CSVGenerate csvGenerate{ value, codeMappingAnalysis, CSVGenerateType::Total };
 
-        csvGenerate.GenerateFile(outputDirectory);
+        csvGenerate.GenerateFile(codeDirectory, outputDirectory);
     }
 }

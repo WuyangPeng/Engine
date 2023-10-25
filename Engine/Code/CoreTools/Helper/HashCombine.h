@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/05 19:21)
+///	版本：0.9.1.5 (2023/09/22 11:09)
 
 #ifndef CORE_TOOLS_HELPER_HASH_COMBINE_H
 #define CORE_TOOLS_HELPER_HASH_COMBINE_H

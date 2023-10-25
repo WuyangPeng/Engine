@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 16:05)
+///	版本：0.9.1.5 (2023/09/20 14:45)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_EXPLICIT_CAST_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_EXPLICIT_CAST_H
@@ -70,7 +70,7 @@ namespace CoreTools
         ExplicitCast& operator=(ExplicitCast&&) noexcept = delete;
 
     private:
-        T const& value;
+        const T& value;
     };
 
     // 转换成非const指针不可用

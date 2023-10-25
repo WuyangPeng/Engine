@@ -1,26 +1,33 @@
 @ingroup group_Documentation
 
-Threading Core Render Engine 0.9.1.5
+Threading Core Render Engine 0.9.1.6
 
 ----------------------------
 更新日志
 ----------------------------
-0.9.1.5（2023/09/17——2023/09/30）
+0.9.1.6（2023/10/26——2023/11/30）
 
 	完成功能： 
-	（引擎）			
-	+ CoreTools代码整理。@
-	+ CSV代码生成改成文本。@ 	
+	（引擎）
 	+ Mathematics代码整理。@
 	+ Rendering代码整理。@		
 	+ 引擎正常显示图片。@ 
 	+ 引擎正常显示文字。@  	
-	+ GTL Mathematics Functions 代码合并。@
+	+ GTL Mathematics Algebra 代码合并。@
 	+ GTL Mathematics代码合并。@
 	
 	（历史） 
 	+ 历史配置导入数据库。 @	
 	+ http服务器创建。 @
+	
+----------------------------
+0.9.1.5（2023/09/17——2023/10/25）
+
+	完成功能： 
+	（引擎）
+	+ GTL Mathematics Functions 代码合并。 
+	+ CSV代码生成改成文本。 	
+	+ CoreTools代码整理。
 	
 ----------------------------
 0.9.1.4（2023/08/25——2023/09/16）

@@ -25,8 +25,8 @@ namespace AncientBooks
     public:
         using ClassType = ReignTitleContainer;
 
-        using ConstReignTitleBaseSharedPtr = std::shared_ptr<const ReignTitleBase>;
-        using Container = std::vector<ConstReignTitleBaseSharedPtr>;
+        using ConstReignTitleSharedPtr = std::shared_ptr<const ReignTitleMappingType>;
+        using Container = std::vector<ConstReignTitleSharedPtr>;
         using CSVContent = CoreTools::CSVContent;
 
     public:
@@ -34,14 +34,14 @@ namespace AncientBooks
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConstReignTitleBaseSharedPtr GetFirstReignTitle() const;
-        NODISCARD ConstReignTitleBaseSharedPtr GetReignTitle(int64_t key) const;
+        NODISCARD ConstReignTitleSharedPtr GetFirstReignTitle() const;
+        NODISCARD ConstReignTitleSharedPtr GetReignTitle(int64_t key) const;
         NODISCARD Container GetContainer() const;
 
         NODISCARD int GetContainerSize() const;
 
         template <typename Function>
-        NODISCARD ConstReignTitleBaseSharedPtr GetFirstReignTitle(Function function) const;
+        NODISCARD ConstReignTitleSharedPtr GetFirstReignTitle(Function function) const;
 
         template <typename Function>
         NODISCARD Container GetReignTitle(Function function) const;

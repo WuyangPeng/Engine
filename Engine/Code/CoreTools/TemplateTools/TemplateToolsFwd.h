@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/21 15:34)
+///	标准：std:c++20
+///	版本：0.9.1.5 (2023/09/20 14:48)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_FWD_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_FWD_H
@@ -55,13 +55,6 @@ namespace CoreTools
     template <double& Radian>
     struct NonRecursiveTangent;
 
-    namespace TrigonometricFunction
-    {
-        NODISCARD double SineSeries(double radian, int index, int maxTerms) noexcept;
-        NODISCARD double RecursiveSine(double radian) noexcept;
-        NODISCARD double NonRecursiveSine(double radian) noexcept;
-    }
-
     template <class T>
     class PtrLess;
 
@@ -95,7 +88,7 @@ namespace CoreTools
     template <typename T>
     class SimpleDecrementer;
 
-    template <typename T, typename Aquire, typename Release>
+    template <typename T, typename Acquire, typename Release>
     class IncrementScope;
 
     template <typename T>

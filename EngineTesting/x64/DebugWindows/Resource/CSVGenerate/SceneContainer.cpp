@@ -30,6 +30,7 @@ void CSVConfigure::SceneContainer::Parsing(const CSVContent& csvContent)
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("scene表开始载入……"));
 
     Load(csvContent);
+
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("scene表结束载入……"));
 }
 
@@ -38,9 +39,9 @@ void CSVConfigure::SceneContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         auto sceneBase = std::make_shared<Scene>(csvRow);
 
@@ -51,6 +52,8 @@ void CSVConfigure::SceneContainer::Load(const CSVContent& csvContent)
     }
 
 }
+
+
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, SceneContainer)
 

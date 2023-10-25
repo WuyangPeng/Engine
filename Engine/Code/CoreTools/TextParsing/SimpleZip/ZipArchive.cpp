@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:03)
+///	版本：0.9.1.5 (2023/09/23 14:28)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -46,7 +46,26 @@ CoreTools::SimpleZip::ZipArchive::ZipArchive(DisableNotThrow disableNotThrow)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleZip, ZipArchive)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleZip, ZipArchive, Save, std::string, void)
+void CoreTools::SimpleZip::ZipArchive::Save(const std::string& path)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->Save(path);
+}
+
+void CoreTools::SimpleZip::ZipArchive::DeleteEntry(const std::string& entryName)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->DeleteEntry(entryName);
+}
+
+bool CoreTools::SimpleZip::ZipArchive::HasEntry(const std::string& entryName)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->HasEntry(entryName);
+}
 
 void CoreTools::SimpleZip::ZipArchive::AddEntry(const std::string& name, const std::string& data)
 {
@@ -55,13 +74,9 @@ void CoreTools::SimpleZip::ZipArchive::AddEntry(const std::string& name, const s
     impl->AddEntry(name, data);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleZip, ZipArchive, DeleteEntry, std::string, void)
-
 std::string CoreTools::SimpleZip::ZipArchive::GetEntry(const std::string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     return impl->GetEntry(name).GetDataAsString();
 }
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleZip, ZipArchive, HasEntry, std::string, bool)

@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-AncientBooks::CountryContainer::ConstCountryBaseSharedPtr AncientBooks::CountryContainer::GetFirstCountry(Function function) const
+AncientBooks::CountryContainer::ConstCountrySharedPtr AncientBooks::CountryContainer::GetFirstCountry(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:40)
+///	版本：0.9.1.5 (2023/09/22 13:52)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,6 +22,76 @@ CoreTools::CReadFileManager::CReadFileManager(const String& fileName)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CReadFileManager)
 
+int CoreTools::CReadFileManager::GetFileByteSize() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFileByteSize();
+}
+
+int CoreTools::CReadFileManager::GetCharacter()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetCharacter();
+}
+
+bool CoreTools::CReadFileManager::UnGetCharacter(int character)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->UnGetCharacter(character);
+}
+
+std::string CoreTools::CReadFileManager::GetString(int count)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetString(count);
+}
+
+bool CoreTools::CReadFileManager::IsEof() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->IsEof();
+}
+
+bool CoreTools::CReadFileManager::Flush() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->Flush();
+}
+
+CoreTools::CReadFileManager::PosType CoreTools::CReadFileManager::GetPosition()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetPosition();
+}
+
+bool CoreTools::CReadFileManager::SetPosition(PosType position) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->SetPosition(position);
+}
+
+long CoreTools::CReadFileManager::Tell() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->Tell();
+}
+
+void CoreTools::CReadFileManager::Rewind() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->Rewind();
+}
+
 void CoreTools::CReadFileManager::Read(size_t itemSize, void* data)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -36,25 +106,12 @@ void CoreTools::CReadFileManager::Read(size_t itemSize, size_t itemsNumber, void
     return impl->Read(itemSize, itemsNumber, data);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CReadFileManager, GetFileByteSize, int);
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CReadFileManager, GetCharacter, int);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, CReadFileManager, UnGetCharacter, int, bool);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, CReadFileManager, GetString, int, std::string);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CReadFileManager, IsEof, bool);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CReadFileManager, Flush, bool);
-
 bool CoreTools::CReadFileManager::Seek(long offset, FileSeek whence) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     return impl->Seek(offset, whence);
 }
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CReadFileManager, GetPosition, CoreTools::CReadFileManager::PosType);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(CoreTools, CReadFileManager, SetPosition, PosType, bool);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CReadFileManager, Tell, long);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CReadFileManager, Rewind, void);
 
 bool CoreTools::CReadFileManager::SetVBuffer(FileSetVBuffer type, size_t size) noexcept
 {

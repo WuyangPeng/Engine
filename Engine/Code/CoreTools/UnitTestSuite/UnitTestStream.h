@@ -5,16 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 17:40)
+///	版本：0.9.1.5 (2023/09/20 13:46)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_STREAM_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_STREAM_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
-
 #include "OStreamShared.h"
+#include "CoreTools/Helper/ExportMacro.h"
 
 #include <iosfwd>
 

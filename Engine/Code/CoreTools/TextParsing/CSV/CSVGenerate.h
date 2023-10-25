@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:00)
+///	版本：0.9.1.5 (2023/09/26 13:44)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_H
@@ -13,6 +13,7 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/CharacterString/CharacterStringFwd.h"
 #include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include "CoreTools/TextParsing/TextParsingFwd.h"
 
@@ -24,15 +25,16 @@ namespace CoreTools
     {
     public:
         PERFORMANCE_UNSHARED_TYPE_DECLARE(CSVGenerate);
+
         using String = System::String;
 
     public:
-        CSVGenerate(const CSVHead& csvHead, CSVGenerateType csvGenerateType);
-        CSVGenerate(const CSVContent& csvContent, CSVGenerateType csvGenerateType);
+        CSVGenerate(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis, CSVGenerateType csvGenerateType);
+        CSVGenerate(const CSVContent& csvContent, const CodeMappingAnalysis& codeMappingAnalysis, CSVGenerateType csvGenerateType);
 
         CLASS_INVARIANT_DECLARE;
 
-        void GenerateFile(const String& directory) const;
+        void GenerateFile(const String& codeDirectory, const String& directory) const;
 
     private:
         PackageType impl;

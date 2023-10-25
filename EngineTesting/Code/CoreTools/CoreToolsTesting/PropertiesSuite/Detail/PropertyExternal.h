@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/25 10:08)
+///	版本：0.9.1.5 (2023/10/25 14:41)
 
 #ifndef CORE_TOOLS_PROPERTIES_SUITE_PROPERTY_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_SUITE_PROPERTY_EXTERNAL_H
@@ -24,9 +24,10 @@ namespace CoreTools
     public:
         using ClassType = PropertyExternal;
 
-        CLASS_INVARIANT_DECLARE;
-
+    public:
         PropertyExternal() noexcept;
+
+        CLASS_INVARIANT_DECLARE;
 
     private:
         std::string value;

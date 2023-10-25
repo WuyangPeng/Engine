@@ -5,21 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 17:20)
+///	版本：0.9.1.5 (2023/10/24 14:49)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "CSVGenerateClassName.h"
 #include "CSVGenerateContainerHeadFile.h"
-#include "CSVGenerateDefaultFunction.h"
-#include "CSVGenerateGetFunction.h"
-#include "CSVGenerateHead.h"
-#include "CSVGenerateMember.h"
+#include "System/Helper/PragmaWarning/Algorithm.h"
+#include "CoreTools/CharacterString/StringUtility.h"
+#include "CoreTools/FileManager/IFStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-CoreTools::CSVGenerateContainerHeadFile::CSVGenerateContainerHeadFile(const CSVHead& csvHead) noexcept
-    : ParentType{ csvHead }
+CoreTools::CSVGenerateContainerHeadFile::CSVGenerateContainerHeadFile(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis) noexcept
+    : ParentType{ csvHead, codeMappingAnalysis }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -45,32 +44,90 @@ System::String CoreTools::CSVGenerateContainerHeadFile::GetFileSuffix() const
     return result;
 }
 
-System::String CoreTools::CSVGenerateContainerHeadFile::GetContent() const
+System::String CoreTools::CSVGenerateContainerHeadFile::GetContent(const String& codeDirectory) const
 {
-    String content{ TextParsing::gCopyright };
+    auto content = GetTemplateContent(codeDirectory + SYSTEM_TEXT("/EntityContainerH.txt"));
 
-    content += TextParsing::gNewlineCharacter;
-    content += GenerateHeaderGuard();
+    const auto codeMapping = GetCodeMappingAnalysis();
 
-    CSVGenerateHead csvGenerateHead{ GetCSVHead(), GetSuffix() };
-    content += csvGenerateHead.GenerateCoreToolsHead();
-    content += csvGenerateHead.GenerateContainerHead();
+    const auto head = GetCSVHead();
 
-    content += GenerateNameSpace();
+    String containerStdIncludeContent{};
 
-    const CSVGenerateClassName csvGenerateClassName{ GetCSVHead(), GetSuffix() };
-    content += csvGenerateClassName.GenerateContainerClassName(GetKeyTypeDescribe());
+    if (head.GetCSVFormatType() == CSVFormatType::TreeMap)
+    {
+        containerStdIncludeContent += TextParsing::gMapInclude;
+    }
 
-    const CSVGenerateDefaultFunction csvGenerateDefaultFunction{ GetCSVHead(), GetSuffix(), GetKeyTypeDescribe() };
-    content += csvGenerateDefaultFunction.GenerateContainerDefaultFunction();
+    containerStdIncludeContent += TextParsing::gMemoryInclude;
 
-    const CSVGenerateGetFunction csvGenerateGetFunction{ GetCSVHead(), GetKeyTypeDescribe() };
-    content += csvGenerateGetFunction.GenerateContainerFunction();
+    if (head.GetCSVFormatType() == CSVFormatType::HashMap)
+    {
+        containerStdIncludeContent += TextParsing::gUnorderedMapInclude;
+    }
 
-    const CSVGenerateMember csvGenerateMember{ GetCSVHead(), GetKeyTypeDescribe() };
-    content += csvGenerateMember.GenerateContainerMember();
+    containerStdIncludeContent += TextParsing::gVectorInclude;
 
-    content += GenerateHeaderGuardEndif();
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerStdInclude$"), containerStdIncludeContent);
 
-    return content;
+    if (head.GetCSVFormatType() == CSVFormatType::Unique)
+    {
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerGetFunction$"), codeMapping.GetElement(SYSTEM_TEXT("SingleContainerGetFunction")));
+    }
+    else if (head.GetCSVFormatType() == CSVFormatType::Vector)
+    {
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerGetFunction$"), codeMapping.GetElement(SYSTEM_TEXT("VectorContainerGetFunction")));
+    }
+    else
+    {
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerGetFunction$"), codeMapping.GetElement(SYSTEM_TEXT("ContainerGetFunction")));
+    }
+
+    if (head.GetCSVFormatType() == CSVFormatType::HashMap)
+    {
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$MappingContainerUsing$"), codeMapping.GetElement(SYSTEM_TEXT("MappingContainerUsing")));
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerType$"), SYSTEM_TEXT("MappingContainer"));
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerUsing$"), codeMapping.GetElement(SYSTEM_TEXT("ContainerUsing")));
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$MapName$"), codeMapping.GetElement(SYSTEM_TEXT("unordered_map")));
+    }
+    else if (head.GetCSVFormatType() == CSVFormatType::TreeMap)
+    {
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$MappingContainerUsing$"), codeMapping.GetElement(SYSTEM_TEXT("MappingContainerUsing")));
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerType$"), SYSTEM_TEXT("MappingContainer"));
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerUsing$"), codeMapping.GetElement(SYSTEM_TEXT("ContainerUsing")));
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$MapName$"), codeMapping.GetElement(SYSTEM_TEXT("map")));
+    }
+    else if (head.GetCSVFormatType() == CSVFormatType::Unique)
+    {
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$MappingContainerUsing$"), SYSTEM_TEXT(""));
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerType$"), SYSTEM_TEXT("Const") + GetCSVClassName() + SYSTEM_TEXT("SharedPtr"));
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerUsing$"), SYSTEM_TEXT(""));
+    }
+    else
+    {
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$MappingContainerUsing$"), SYSTEM_TEXT(""));
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerType$"), SYSTEM_TEXT("Container"));
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerUsing$"), codeMapping.GetElement(SYSTEM_TEXT("ContainerUsing")));
+    }
+
+    if (head.GetCSVFormatType() == CSVFormatType::Default ||
+        head.GetCSVFormatType() == CSVFormatType::Key)
+    {
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$UniqueFunction$"), codeMapping.GetElement(SYSTEM_TEXT("UniqueFunction")));
+    }
+    else
+    {
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$UniqueFunction$"), SYSTEM_TEXT(""));
+    }
+
+    if (head.GetCSVFormatType() == CSVFormatType::Vector)
+    {
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$KeyParameter$"), codeMapping.GetElement(SYSTEM_TEXT("KeyParameter")));
+    }
+    else
+    {
+        boost::algorithm::replace_all(content, SYSTEM_TEXT("$KeyParameter$"), SYSTEM_TEXT(""));
+    }
+
+    return ReplaceTemplate(content);
 }

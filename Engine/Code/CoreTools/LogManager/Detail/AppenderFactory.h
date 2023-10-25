@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/28 14:57)
+///	版本：0.9.1.5 (2023/09/21 09:44)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_APPENDER_FACTORY_H
 #define CORE_TOOLS_LOG_MANAGER_APPENDER_FACTORY_H
@@ -24,6 +24,7 @@ namespace CoreTools
     {
     public:
         using ClassType = AppenderFactory;
+
         using AppenderImplSharedPtr = std::shared_ptr<AppenderImpl>;
         using String = System::String;
 

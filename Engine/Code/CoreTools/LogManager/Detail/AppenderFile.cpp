@@ -5,12 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/28 14:58)
+///	版本：0.9.1.5 (2023/09/21 09:52)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "AppenderFile.h"
 #include "System/FileManager/FileTools.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/FileManager/IFStreamManager.h"
 #include "CoreTools/FileManager/OFStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -84,7 +85,7 @@ void CoreTools::AppenderFile::DoWrite(const LogMessage& message, const LogMessag
     const auto messageDescribe = message.GetMessageDescribe();
 
     if (const auto fullMessage = prefix.GetPrefix() + messageDescribe + postfix.GetPostfix();
-        IsExceedMaxSize(*streamManager, fullMessage.size()))
+        IsExceedMaxSize(*streamManager, boost::numeric_cast<PosType>(fullMessage.size())))
     {
         streamManager.reset();
         BackupFile(fullName);

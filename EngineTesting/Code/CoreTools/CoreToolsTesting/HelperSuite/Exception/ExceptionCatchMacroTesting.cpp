@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/11 21:05)
+///	版本：0.9.1.5 (2023/10/24 16:23)
 
 #include "ExceptionCatchMacroTesting.h"
 #include "System/Time/DeltaTime.h"
@@ -13,6 +13,8 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
+#include <iostream>
 
 CoreTools::ExceptionCatchMacroTesting::ExceptionCatchMacroTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -39,7 +41,7 @@ void CoreTools::ExceptionCatchMacroTesting::Catch0Test()
 {
     EXCEPTION_TRY
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常，并被捕获。"))
+        THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常，并被捕获。"));
     }
     EXCEPTION_ENGINE_EXCEPTION_CATCH(CoreTools)
     EXCEPTION_STD_EXCEPTION_CATCH(CoreTools)
@@ -50,7 +52,7 @@ void CoreTools::ExceptionCatchMacroTesting::Catch1Test()
 {
     EXCEPTION_TRY
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常，并被捕获。"))
+        THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常，并被捕获。"));
     }
     EXCEPTION_ALL_CATCH(CoreTools)
 }
@@ -59,7 +61,7 @@ void CoreTools::ExceptionCatchMacroTesting::Catch2Test()
 {
     EXCEPTION_TRY
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常，并被捕获。"))
+        THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常，并被捕获。"));
     }
     EXCEPTION_ENTRY_POINT_CATCH
 }
@@ -68,7 +70,7 @@ void CoreTools::ExceptionCatchMacroTesting::Catch3Test()
 {
     EXCEPTION_TRY
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常，并被捕获。"))
+        THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常，并被捕获。"));
     }
     EXCEPTION_WINDOWS_ENTRY_POINT_CATCH
 }

@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-OutputCSVTesting::Input2Container::ConstInput2BaseSharedPtr OutputCSVTesting::Input2Container::GetFirstInput2(Function function) const
+OutputCSVTesting::Input2Container::ConstInput2SharedPtr OutputCSVTesting::Input2Container::GetFirstInput2(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

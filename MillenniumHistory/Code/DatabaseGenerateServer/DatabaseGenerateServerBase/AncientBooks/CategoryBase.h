@@ -16,6 +16,7 @@
 #include "System/Helper/UnicodeUsing.h"
 
 #include <memory>
+
 namespace AncientBooks
 {
     class CategoryBase

@@ -25,8 +25,8 @@ namespace AncientBooks
     public:
         using ClassType = GenusContainer;
 
-        using ConstGenusBaseSharedPtr = std::shared_ptr<const GenusBase>;
-        using Container = std::vector<ConstGenusBaseSharedPtr>;
+        using ConstGenusSharedPtr = std::shared_ptr<const GenusMappingType>;
+        using Container = std::vector<ConstGenusSharedPtr>;
         using CSVContent = CoreTools::CSVContent;
 
     public:
@@ -34,14 +34,14 @@ namespace AncientBooks
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConstGenusBaseSharedPtr GetFirstGenus() const;
-        NODISCARD ConstGenusBaseSharedPtr GetGenus(int key) const;
+        NODISCARD ConstGenusSharedPtr GetFirstGenus() const;
+        NODISCARD ConstGenusSharedPtr GetGenus(int key) const;
         NODISCARD Container GetContainer() const;
 
         NODISCARD int GetContainerSize() const;
 
         template <typename Function>
-        NODISCARD ConstGenusBaseSharedPtr GetFirstGenus(Function function) const;
+        NODISCARD ConstGenusSharedPtr GetFirstGenus(Function function) const;
 
         template <typename Function>
         NODISCARD Container GetGenus(Function function) const;

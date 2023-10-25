@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 17:39)
+///	版本：0.9.1.5 (2023/09/20 13:46)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_COMPOSITE_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_COMPOSITE_H
@@ -14,9 +14,6 @@
 
 #include "UnitTestInterface.h"
 #include "UnitTestStream.h"
-#include "UnitTestSuiteFwd.h"
-#include "System/DynamicLink/Using/LoadLibraryUsing.h"
-#include "CoreTools/Helper/ExportMacro.h"
 
 // 使用组合模式封装UnitTest类和SuiteImpl类。
 namespace CoreTools
@@ -27,7 +24,7 @@ namespace CoreTools
         using ClassType = UnitTestComposite;
         using ParentType = UnitTestStream;
         using InterfaceType = UnitTestInterface;
-        using ClassShareType = NonCopyClasses;
+
         using UnitTestCompositeSharedPtr = std::shared_ptr<UnitTestComposite>;
 
     public:

@@ -25,8 +25,8 @@ namespace AncientBooks
     public:
         using ClassType = ImperialCourtContainer;
 
-        using ConstImperialCourtBaseSharedPtr = std::shared_ptr<const ImperialCourtBase>;
-        using Container = std::vector<ConstImperialCourtBaseSharedPtr>;
+        using ConstImperialCourtSharedPtr = std::shared_ptr<const ImperialCourtMappingType>;
+        using Container = std::vector<ConstImperialCourtSharedPtr>;
         using CSVContent = CoreTools::CSVContent;
 
     public:
@@ -34,14 +34,14 @@ namespace AncientBooks
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConstImperialCourtBaseSharedPtr GetFirstImperialCourt() const;
-        NODISCARD ConstImperialCourtBaseSharedPtr GetImperialCourt(int key) const;
+        NODISCARD ConstImperialCourtSharedPtr GetFirstImperialCourt() const;
+        NODISCARD ConstImperialCourtSharedPtr GetImperialCourt(int key) const;
         NODISCARD Container GetContainer() const;
 
         NODISCARD int GetContainerSize() const;
 
         template <typename Function>
-        NODISCARD ConstImperialCourtBaseSharedPtr GetFirstImperialCourt(Function function) const;
+        NODISCARD ConstImperialCourtSharedPtr GetFirstImperialCourt(Function function) const;
 
         template <typename Function>
         NODISCARD Container GetImperialCourt(Function function) const;

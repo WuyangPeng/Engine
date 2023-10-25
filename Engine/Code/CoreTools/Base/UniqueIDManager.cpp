@@ -5,11 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/17 19:50)
+///	版本：0.9.1.5 (2023/09/23 10:49)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "UniqueIDManagerDetail.h"
+#include "UniqueIdManagerDetail.h"
 #include "Flags/UniqueIdSelect.h"
 #include "Detail/UniqueIdManagerImpl.h"
 #include "System/Helper/Tools.h"

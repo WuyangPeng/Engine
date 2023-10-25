@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/18 16:03)
+///	版本：0.9.1.5 (2023/10/25 14:14)
 
 #include "IntObject.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -13,7 +13,6 @@
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
@@ -161,5 +160,7 @@ void CoreTools::IntObject::Load(BufferSource& source)
 
 CoreTools::ObjectInterfaceSharedPtr CoreTools::IntObject::CloneObject() const
 {
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
     return std::make_shared<ClassType>(*this);
 }

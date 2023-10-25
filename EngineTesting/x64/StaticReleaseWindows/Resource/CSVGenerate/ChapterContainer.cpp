@@ -9,6 +9,7 @@
 
 #include "Chapter.h"
 #include "ChapterContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -39,9 +40,9 @@ void CSVConfigure::ChapterContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         chapter.emplace_back(std::make_shared<Chapter>(csvRow));
     }
@@ -76,14 +77,14 @@ void CSVConfigure::ChapterContainer::Unique()
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, ChapterContainer)
 
-CSVConfigure::ChapterContainer::ConstChapterBaseSharedPtr CSVConfigure::ChapterContainer::GetFirstChapter() const
+CSVConfigure::ChapterContainer::ConstChapterSharedPtr CSVConfigure::ChapterContainer::GetFirstChapter() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return chapter.at(0);
 }
 
-CSVConfigure::ChapterContainer::ConstChapterBaseSharedPtr CSVConfigure::ChapterContainer::GetChapter(int key) const
+CSVConfigure::ChapterContainer::ConstChapterSharedPtr CSVConfigure::ChapterContainer::GetChapter(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -108,5 +109,12 @@ CSVConfigure::ChapterContainer::Container CSVConfigure::ChapterContainer::GetCon
     USER_CLASS_IS_VALID_CONST_9;
 
     return chapter;
+}
+
+int CSVConfigure::ChapterContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(chapter.size());
 }
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/28 15:01)
+///	版本：0.9.1.5 (2023/09/21 09:45)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_APPENDER_MANAGER_IMPL_H
 #define CORE_TOOLS_LOG_MANAGER_APPENDER_MANAGER_IMPL_H
@@ -23,6 +23,7 @@ namespace CoreTools
     {
     public:
         using ClassType = AppenderManagerImpl;
+
         using String = System::String;
 
     public:
@@ -45,7 +46,7 @@ namespace CoreTools
         void Clear() noexcept;
 
         void Write(const LogMessage& message) const;
-        void Write(const String& name, const LogMessage& message); 
+        void Write(const String& name, const LogMessage& message);
 
         NODISCARD static String GetConsoleAppenderName();
         NODISCARD static String GetDefaultAppenderName();

@@ -25,8 +25,8 @@ namespace AncientBooks
     public:
         using ClassType = GeographicContainer;
 
-        using ConstGeographicBaseSharedPtr = std::shared_ptr<const GeographicBase>;
-        using Container = std::vector<ConstGeographicBaseSharedPtr>;
+        using ConstGeographicSharedPtr = std::shared_ptr<const GeographicMappingType>;
+        using Container = std::vector<ConstGeographicSharedPtr>;
         using CSVContent = CoreTools::CSVContent;
 
     public:
@@ -34,14 +34,14 @@ namespace AncientBooks
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConstGeographicBaseSharedPtr GetFirstGeographic() const;
-        NODISCARD ConstGeographicBaseSharedPtr GetGeographic(int key) const;
+        NODISCARD ConstGeographicSharedPtr GetFirstGeographic() const;
+        NODISCARD ConstGeographicSharedPtr GetGeographic(int key) const;
         NODISCARD Container GetContainer() const;
 
         NODISCARD int GetContainerSize() const;
 
         template <typename Function>
-        NODISCARD ConstGeographicBaseSharedPtr GetFirstGeographic(Function function) const;
+        NODISCARD ConstGeographicSharedPtr GetFirstGeographic(Function function) const;
 
         template <typename Function>
         NODISCARD Container GetGeographic(Function function) const;

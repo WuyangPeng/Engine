@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-AncientBooks::EmperorContainer::ConstEmperorBaseSharedPtr AncientBooks::EmperorContainer::GetFirstEmperor(Function function) const
+AncientBooks::EmperorContainer::ConstEmperorSharedPtr AncientBooks::EmperorContainer::GetFirstEmperor(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-AncientBooks::DayContainer::ConstDayBaseSharedPtr AncientBooks::DayContainer::GetFirstDay(Function function) const
+AncientBooks::DayContainer::ConstDaySharedPtr AncientBooks::DayContainer::GetFirstDay(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

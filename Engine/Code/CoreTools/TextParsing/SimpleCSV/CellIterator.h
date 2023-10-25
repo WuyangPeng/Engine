@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:16)
+///	版本：0.9.1.5 (2023/09/23 14:56)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CELL_ITERATOR_H
 #define CORE_TOOLS_TEXT_PARSING_CELL_ITERATOR_H
@@ -27,6 +27,7 @@ namespace CoreTools::SimpleCSV
     {
     public:
         COPY_UNSHARED_TYPE_DECLARE(CellIterator);
+
         using ValueType = Cell;
         using DifferenceType = int64_t;
         using PointerType = Cell*;

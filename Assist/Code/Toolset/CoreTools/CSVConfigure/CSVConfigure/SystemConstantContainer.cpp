@@ -32,6 +32,7 @@ void CSVConfigure::SystemConstantContainer::Parsing(const CSVContent& csvContent
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("systemConstant表开始载入……"));
 
     Load(csvContent);
+
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("systemConstant表结束载入……"));
 }
 
@@ -56,6 +57,8 @@ void CSVConfigure::SystemConstantContainer::Load(const CSVContent& csvContent)
 
 }
 
+
+
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, SystemConstantContainer)
 
 CSVConfigure::SystemConstantContainer::ConstSystemConstantSharedPtr CSVConfigure::SystemConstantContainer::GetSystemConstant() const noexcept
@@ -64,4 +67,3 @@ CSVConfigure::SystemConstantContainer::ConstSystemConstantSharedPtr CSVConfigure
 
     return systemConstant;
 }
-

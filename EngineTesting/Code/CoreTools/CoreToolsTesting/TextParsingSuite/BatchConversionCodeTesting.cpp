@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.11 (2023/05/29 22:17)
+///	版本：0.9.1.5 (2023/10/25 10:28)
 
 #include "BatchConversionCodeTesting.h"
 #include "CoreTools/FileManager/IFStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/TextParsing/CSV/BatchConversionCSV.h"
 #include "CoreTools/TextParsing/CSV/BatchConversionCode.h"
 #include "CoreTools/TextParsing/CSV/ExcelConversionCSV.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -41,7 +40,7 @@ void CoreTools::BatchConversionCodeTesting::MainTest()
 
 void CoreTools::BatchConversionCodeTesting::BatchConversionCodeTest()
 {
-    const BatchConversionCode batchConversionCode{ SYSTEM_TEXT("Resource/OutputCSVTesting"s), SYSTEM_TEXT("Resource/OutputCodeTesting") };
+    const BatchConversionCode batchConversionCode{ SYSTEM_TEXT("Resource/OutputCSVTesting"s), SYSTEM_TEXT("Resource/CSVEngineering"s), SYSTEM_TEXT("Resource/OutputCodeTesting") };
 }
 
 void CoreTools::BatchConversionCodeTesting::VerifyTest()

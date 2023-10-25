@@ -24,7 +24,7 @@ namespace CSVConfigure
         using ClassType = Chapter;
         using ParentType = ChapterBase;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit Chapter(const CSVRow& csvRow);

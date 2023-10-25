@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-AncientBooks::VersionContainer::ConstVersionBaseSharedPtr AncientBooks::VersionContainer::GetFirstVersion(Function function) const
+AncientBooks::VersionContainer::ConstVersionSharedPtr AncientBooks::VersionContainer::GetFirstVersion(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

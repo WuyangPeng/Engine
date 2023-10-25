@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.7 (2023/04/26 16:13)
+///	版本：0.9.1.5 (2023/10/25 11:12)
 
 #include "ContentItemTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -46,9 +46,8 @@ void CoreTools::ContentItemTesting::ContentItemTest()
     auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
     const auto data = make_shared<SimpleCSV::XmlData>(document, "[Content_Types].xml");
 
-    const SimpleCSV::ContentTypes contentTypes{ data };
-
-    for (const auto& item : contentTypes.GetContentItems())
+    for (const SimpleCSV::ContentTypes contentTypes{ data };
+         const auto& item : contentTypes.GetContentItems())
     {
         switch (const auto type = item.GetType(); type)
         {

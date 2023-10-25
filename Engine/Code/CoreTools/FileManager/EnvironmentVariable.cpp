@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:40)
+///	版本：0.9.1.5 (2023/09/22 14:07)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "EnvironmentVariable.h"
 #include "Detail/EnvironmentVariableImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 CoreTools::EnvironmentVariable::EnvironmentVariable(const String& variableName)
     : impl{ variableName }
@@ -22,4 +21,9 @@ CoreTools::EnvironmentVariable::EnvironmentVariable(const String& variableName)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, EnvironmentVariable)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, EnvironmentVariable, GetVariable, System::String);
+CoreTools::EnvironmentVariable::String CoreTools::EnvironmentVariable::GetVariable() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetVariable();
+}

@@ -5,24 +5,24 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 17:20)
+///	版本：0.9.1.5 (2023/10/24 14:44)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "CSVGenerateClassName.h"
 #include "CSVGenerateEnumHeadFile.h"
-#include "CSVGenerateGetFunction.h"
-#include "CSVGenerateHead.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
+#include "CoreTools/FileManager/IFStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
-#include "CoreTools/TextParsing/Detail/EnumHeadFileParsing.h"
+#include "CoreTools/TextParsing/Detail/Parsing.h"
+#include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-CoreTools::CSVGenerateEnumHeadFile::CSVGenerateEnumHeadFile(const CSVContent& csvContent)
-    : ParentType{ csvContent.GetCSVHead() }, csvContent{ csvContent }
+CoreTools::CSVGenerateEnumHeadFile::CSVGenerateEnumHeadFile(const CSVContent& csvContent, const CodeMappingAnalysis& codeMappingAnalysis)
+    : ParentType{ csvContent.GetCSVHead(), codeMappingAnalysis }, csvContent{ csvContent }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -48,32 +48,46 @@ System::String CoreTools::CSVGenerateEnumHeadFile::GetFileSuffix() const
     return result;
 }
 
-System::String CoreTools::CSVGenerateEnumHeadFile::GetContent() const
+System::String CoreTools::CSVGenerateEnumHeadFile::GetContent(const String& codeDirectory) const
 {
-    String content{ TextParsing::gCopyright };
+    auto content = GetTemplateContent(codeDirectory + SYSTEM_TEXT("/FlagsH.txt"));
 
-    content += TextParsing::gNewlineCharacter;
-    content += GenerateHeaderGuard();
+    const auto codeMapping = GetCodeMappingAnalysis();
 
-    CSVGenerateHead csvGenerateHead{ GetCSVHead(), GetSuffix() };
-    content += csvGenerateHead.GenerateEnumHead();
-    content += TextParsing::gNewlineCharacter;
+    const auto head = GetCSVHead();
 
-    EnumHeadFileParsing enumHeadFileParsing{ GetCSVHead(), csvContent, GetCSVClassName() + GetSuffix() };
+    const auto idIndex = head.GetDataIndex(TextParsing::gIdSmall);
+    const auto nameIndex = head.GetDataIndex(TextParsing::gEnumName);
+    const auto describeIndex = head.GetDataIndex(TextParsing::gEnumDescribe);
 
-    content += GenerateNameSpace();
+    const auto classNameMember = codeMapping.GetElement(SYSTEM_TEXT("ClassNameMember"));
 
-    CSVGenerateClassName csvGenerateClassName{ GetCSVHead(), GetSuffix() };
-    content += csvGenerateClassName.GenerateEnumClassName();
+    String classNameMemberContent{};
+    const auto size = csvContent.GetCount();
+    for (auto i = 0; i < size; ++i)
+    {
+        const auto column = csvContent.GetContent(i);
 
-    content += enumHeadFileParsing.GenerateEnumContent();
-    content += enumHeadFileParsing.GenerateEnumFunction();
-    content += enumHeadFileParsing.GenerateEnumOperator();
+        const auto result = Parsing::GetSplitComma(column);
 
-    CSVGenerateGetFunction csvGenerateGetFunction{ GetCSVHead(), GetSuffix() };
-    content += csvGenerateGetFunction.GenerateStringCastEnumFunction();
+        const auto& id = result.at(idIndex);
 
-    content += GenerateHeaderGuardEndif();
+        auto name = result.at(nameIndex);
+        trim_if(name, boost::is_any_of(TextParsing::gQuotationMarks));
 
-    return content;
+        auto describe = StringConversion::Utf8ConversionStandard(result.at(describeIndex));
+        trim_if(describe, boost::is_any_of(TextParsing::gQuotationMarks));
+
+        auto copyClassNameMember = classNameMember;
+        boost::algorithm::replace_all(copyClassNameMember, SYSTEM_TEXT("$EnumName$"), name);
+        boost::algorithm::replace_all(copyClassNameMember, SYSTEM_TEXT("$EnumValue$"), id);
+        boost::algorithm::replace_all(copyClassNameMember, SYSTEM_TEXT("$EnumNameNote$"), describe);
+
+        classNameMemberContent += copyClassNameMember;
+        classNameMemberContent += SYSTEM_TEXT("\n");
+    }
+
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ClassNameMember$"), classNameMemberContent);
+
+    return ReplaceTemplate(content);
 }

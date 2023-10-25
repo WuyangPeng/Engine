@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.7 (2023/04/26 15:10)
+///	版本：0.9.1.5 (2023/10/25 10:26)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_JSON_NODE_CONTAINER_TESTING_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_JSON_NODE_CONTAINER_TESTING_H
@@ -27,13 +27,7 @@ namespace CoreTools
 
     private:
         void DoRunUnitTest() override;
-        void MainTest();
-
-        void IsEmptyTest();
-        void AddJsonNodeTest();
-        void SetNewJsonDataTypeTest();
-        void SetNewJsonNodeContainerTest();
-        void SetJsonDataTypeTest();
+        void MainTest() noexcept;
     };
 }
 

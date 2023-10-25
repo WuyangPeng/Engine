@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 19:23)
+///	版本：0.9.1.5 (2023/09/21 09:35)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_LEXICO_ARRAY2_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_LEXICO_ARRAY2_DETAIL_H
@@ -13,7 +13,6 @@
 #include "LexicoArray2.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename Real>
 CoreTools::LexicoArray2<true, Real>::LexicoArray2(int numRows, int numCols, Container& matrix) noexcept

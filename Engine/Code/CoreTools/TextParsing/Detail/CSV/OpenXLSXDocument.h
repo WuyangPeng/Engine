@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:04)
+///	版本：0.9.1.5 (2023/10/24 14:16)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_OPEN_XLSX_DOCUMENT_H
 #define CORE_TOOLS_TEXT_PARSING_OPEN_XLSX_DOCUMENT_H
@@ -26,6 +26,7 @@ namespace CoreTools
     {
     public:
         using ClassType = OpenXLSXDocument;
+
         using String = System::String;
         using XLWorksheetContainer = std::vector<OpenXLSX::XLWorksheet>;
 

@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:01)
+///	版本：0.9.1.5 (2023/09/26 13:46)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CSVContent.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/TextParsing/Detail/CSV/CSVContentImpl.h"
 
 CoreTools::CSVContent::CSVContent(const String& fileName)
@@ -22,7 +21,30 @@ CoreTools::CSVContent::CSVContent(const String& fileName)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CSVContent)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CSVContent, GetCSVHead, CoreTools::CSVHead)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, CSVContent, GetContent, int, System::String)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CSVContent, GetCount, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CSVContent, GetCSVClassName, System::String)
+CoreTools::CSVHead CoreTools::CSVContent::GetCSVHead() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetCSVHead();
+}
+
+int CoreTools::CSVContent::GetCount() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetCount();
+}
+
+CoreTools::CSVContent::String CoreTools::CSVContent::GetContent(int index) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetContent(index);
+}
+
+CoreTools::CSVContent::String CoreTools::CSVContent::GetCSVClassName() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetCSVClassName();
+}

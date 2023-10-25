@@ -9,6 +9,7 @@
 
 #include "Skill.h"
 #include "SkillContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -39,9 +40,9 @@ void CSVConfigure::SkillContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         skill.emplace_back(std::make_shared<Skill>(csvRow));
     }
@@ -71,25 +72,19 @@ void CSVConfigure::SkillContainer::Unique()
         skill.erase(iter.begin(), iter.end());
     }
 
+    skill.shrink_to_fit();
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, SkillContainer)
 
-CSVConfigure::SkillContainer::ConstSkillBaseSharedPtr CSVConfigure::SkillContainer::GetFirstSkill() const
+CSVConfigure::SkillContainer::ConstSkillSharedPtr CSVConfigure::SkillContainer::GetFirstSkill() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return skill.at(0);
 }
 
-CSVConfigure::SkillContainer::ConstSkillBaseSharedPtr CSVConfigure::SkillContainer::GetSkill(int id, int reward) const
-{
-    USER_CLASS_IS_VALID_CONST_9;
-
-    return GetSkill(Skill::GenerateKey(id, reward));
-}
-
-CSVConfigure::SkillContainer::ConstSkillBaseSharedPtr CSVConfigure::SkillContainer::GetSkill(int key) const
+CSVConfigure::SkillContainer::ConstSkillSharedPtr CSVConfigure::SkillContainer::GetSkill(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -114,5 +109,12 @@ CSVConfigure::SkillContainer::Container CSVConfigure::SkillContainer::GetContain
     USER_CLASS_IS_VALID_CONST_9;
 
     return skill;
+}
+
+int CSVConfigure::SkillContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(skill.size());
 }
 

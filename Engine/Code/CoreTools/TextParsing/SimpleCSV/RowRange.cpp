@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:06)
+///	版本：0.9.1.5 (2023/09/23 18:18)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -25,11 +25,40 @@ CoreTools::SimpleCSV::RowRange::RowRange(const ConstXMLDocumentSharedPtr& docume
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, RowRange)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, RowRange, GetRowCount, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, RowRange, GetFirstRow, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, RowRange, GetLastRow, int)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, RowRange, GetSharedStrings, CoreTools::SimpleCSV::RowRange::SharedStringsSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, RowRange, GetDataNode, CoreTools::SimpleCSV::XMLNode)
+int CoreTools::SimpleCSV::RowRange::GetRowCount() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetRowCount();
+}
+
+int CoreTools::SimpleCSV::RowRange::GetFirstRow() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFirstRow();
+}
+
+int CoreTools::SimpleCSV::RowRange::GetLastRow() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetLastRow();
+}
+
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::RowRange::GetDataNode() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDataNode();
+}
+
+CoreTools::SimpleCSV::RowRange::SharedStringsSharedPtr CoreTools::SimpleCSV::RowRange::GetSharedStrings()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetSharedStrings();
+}
 
 CoreTools::SimpleCSV::RowIterator CoreTools::SimpleCSV::RowRange::begin()
 {

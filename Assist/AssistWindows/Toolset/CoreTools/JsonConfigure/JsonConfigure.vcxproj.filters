@@ -16,15 +16,6 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{98848240-f4ae-4728-af52-5cb428be9f37}</UniqueIdentifier>
     </Filter>
-    <Filter Include="JsonConfigure 模板文件">
-      <UniqueIdentifier>{67fb29e4-b3af-4fe7-adad-128736fbe13b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="JsonConfigure 头文件">
-      <UniqueIdentifier>{441ae8a7-55dd-429b-8821-52077d2a4a5e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="JsonConfigure 源文件">
-      <UniqueIdentifier>{854b202f-8c5a-4ffb-8e0d-fb8db39e8dcf}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">
@@ -73,58 +64,10 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigureLib.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\JsonConfigure.h">
-      <Filter>JsonConfigure 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\JsonConfigureContainer.h">
-      <Filter>JsonConfigure 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\JsonConfigureFwd.h">
-      <Filter>JsonConfigure 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\Monsters.h">
-      <Filter>JsonConfigure 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\Parts.h">
-      <Filter>JsonConfigure 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\Road.h">
-      <Filter>JsonConfigure 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\RunScenes.h">
-      <Filter>JsonConfigure 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\MonstersDetail.h">
-      <Filter>JsonConfigure 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\RoadDetail.h">
-      <Filter>JsonConfigure 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\PartsDetail.h">
-      <Filter>JsonConfigure 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\RunScenesDetail.h">
-      <Filter>JsonConfigure 模板文件</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\DllLib.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\JsonConfigureContainer.cpp">
-      <Filter>JsonConfigure 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\Monsters.cpp">
-      <Filter>JsonConfigure 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\Parts.cpp">
-      <Filter>JsonConfigure 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\Road.cpp">
-      <Filter>JsonConfigure 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\RunScenes.cpp">
-      <Filter>JsonConfigure 源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

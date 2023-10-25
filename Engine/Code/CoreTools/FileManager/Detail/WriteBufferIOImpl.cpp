@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:39)
+///	版本：0.9.1.5 (2023/09/22 13:51)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -66,8 +66,9 @@ uint32_t CoreTools::WriteBufferIOImpl::WriteToBuffer(size_t itemSize, size_t ite
     CORE_TOOLS_ASSERTION_2(GetBufferIOType() == BufferIO::Write, "缓冲区不支持写入！");
 
     const auto numberToCopy = boost::numeric_cast<int>(itemSize * itemsNumber);
-    const auto nextBytesProcessed = GetBytesProcessed() + numberToCopy;
-    if (nextBytesProcessed <= GetBytesTotal())
+
+    if (const auto nextBytesProcessed = GetBytesProcessed() + numberToCopy;
+        nextBytesProcessed <= GetBytesTotal())
     {
         // 获得缓冲区当前指针位置。
         auto target = buffer->GetBuffer(GetBytesProcessed());

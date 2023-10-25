@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/29 13:39)
+///	版本：0.9.1.5 (2023/09/21 09:22)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_H
 #define CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_H
@@ -23,9 +23,10 @@ namespace CoreTools
     {
     public:
         using ClassType = Telegram<EventType>;
+
         using ReceiverInfo = std::vector<int64_t>;
 
-    public: 
+    public:
         Telegram(int64_t sender, int64_t receiver, EventType message, int64_t dispatchMillisecondTime);
         Telegram(int64_t sender, int64_t receiver, EventType message, int64_t dispatchMillisecondTime, const CallbackParameters& callbackParameters);
         Telegram(int64_t sender, EventType message, int64_t dispatchMillisecondTime);

@@ -25,8 +25,8 @@ namespace OutputCSVTesting
     public:
         using ClassType = Input1Container;
 
-        using ConstInput1BaseSharedPtr = std::shared_ptr<const Input1Base>;
-        using Container = std::vector<ConstInput1BaseSharedPtr>;
+        using ConstInput1SharedPtr = std::shared_ptr<const Input1MappingType>;
+        using Container = std::vector<ConstInput1SharedPtr>;
         using CSVContent = CoreTools::CSVContent;
 
     public:
@@ -34,14 +34,14 @@ namespace OutputCSVTesting
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConstInput1BaseSharedPtr GetFirstInput1() const;
-        NODISCARD ConstInput1BaseSharedPtr GetInput1(int key) const;
+        NODISCARD ConstInput1SharedPtr GetFirstInput1() const;
+        NODISCARD ConstInput1SharedPtr GetInput1(int key) const;
         NODISCARD Container GetContainer() const;
 
         NODISCARD int GetContainerSize() const;
 
         template <typename Function>
-        NODISCARD ConstInput1BaseSharedPtr GetFirstInput1(Function function) const;
+        NODISCARD ConstInput1SharedPtr GetFirstInput1(Function function) const;
 
         template <typename Function>
         NODISCARD Container GetInput1(Function function) const;

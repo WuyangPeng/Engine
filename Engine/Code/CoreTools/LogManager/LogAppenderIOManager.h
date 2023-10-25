@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/28 16:07)
+///	版本：0.9.1.5 (2023/09/21 09:47)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_APPENDER_IO_MANAGER_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_APPENDER_IO_MANAGER_H
@@ -16,7 +16,7 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 #include <boost/format/format_fwd.hpp>
 

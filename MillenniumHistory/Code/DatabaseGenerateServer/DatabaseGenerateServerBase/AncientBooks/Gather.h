@@ -24,7 +24,7 @@ namespace AncientBooks
         using ClassType = Gather;
         using ParentType = GatherBase;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit Gather(const CSVRow& csvRow);
@@ -36,6 +36,7 @@ namespace AncientBooks
         NODISCARD int GetId() const noexcept override;
 
         NODISCARD String GetGather() const override;
+
 
     private:
         int id;  // Id

@@ -447,13 +447,7 @@
 （3）CRC32算法：CyclicRedundancyCheck32Testing。
 
 ----------------------------
-26.	 RegularExpressionSuite 
-
-对正则表达式模块的单元测试，包括：
-（1）正则表达式。
-
-----------------------------
-27.	 MessageEventSuite 
+26.	 MessageEventSuite 
 
 对消息事件模块的单元测试，包括：
 （1）实体消息：ParametersInterfaceTesting、
@@ -470,32 +464,32 @@
 				 TelegramMessageManagerTesting。
 
 ----------------------------
-28.	 StateMachineManagerSuite 
+27.	 StateMachineManagerSuite 
 
 对状态机模块的单元测试，包括：
 （1） 状态机管理器：StateEntityTesting、
 					StateMachineTesting。
 
 ----------------------------
-29.  NetworkSuite 
+28.  NetworkSuite 
 
 对网络模块的单元测试，包括：
 （1） 网络。
 
 ----------------------------
-30.  ZlibSuite 
+29.  ZlibSuite 
 
 对zlib模块的单元测试，包括：
 （1） zlib。
 
 ----------------------------
-31.  FreetypeSuite 
+30.  FreetypeSuite 
 
 对freetype模块的单元测试，包括：
 （1）freetype。
 
 ----------------------------
-32.  CoroutineSuite 
+31.  CoroutineSuite 
 
 对协程模块的单元测试，包括：
 （1）协程。

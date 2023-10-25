@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/21 11:23)
+///	版本：0.9.1.5 (2023/09/23 10:08)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -32,22 +32,96 @@ CoreTools::CommandArgument::CommandArgument(int index, const std::string& argume
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CommandArgument)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, GetIndex, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, GetName, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, GetInteger, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, GetFloat, float)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, GetDouble, double)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, GetString, std::string)
+int CoreTools::CommandArgument::GetIndex() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsInteger, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsFloat, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsDouble, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsString, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsNoValue, bool)
+    return impl->GetIndex();
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsUsed, bool)
+std::string CoreTools::CommandArgument::GetName() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, SetUsed, void)
+    return impl->GetName();
+}
+
+int CoreTools::CommandArgument::GetInteger() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetInteger();
+}
+
+float CoreTools::CommandArgument::GetFloat() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetFloat();
+}
+
+double CoreTools::CommandArgument::GetDouble() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetDouble();
+}
+
+std::string CoreTools::CommandArgument::GetString() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetString();
+}
+
+bool CoreTools::CommandArgument::IsInteger() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->IsInteger();
+}
+
+bool CoreTools::CommandArgument::IsFloat() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->IsFloat();
+}
+
+bool CoreTools::CommandArgument::IsDouble() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->IsDouble();
+}
+
+bool CoreTools::CommandArgument::IsString() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->IsString();
+}
+
+bool CoreTools::CommandArgument::IsNoValue() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->IsNoValue();
+}
+
+bool CoreTools::CommandArgument::IsUsed() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->IsUsed();
+}
+
+void CoreTools::CommandArgument::SetUsed()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->SetUsed();
+}
 
 void CoreTools::CommandArgument::AddEndArgumentValue(const std::string& value)
 {

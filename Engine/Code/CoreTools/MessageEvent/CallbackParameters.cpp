@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/29 13:55)
+///	版本：0.9.1.5 (2023/09/21 09:18)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -23,8 +23,6 @@ CoreTools::CallbackParameters::CallbackParameters(int count)
 COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, CallbackParameters)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CallbackParameters)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CallbackParameters, GetContainerSize, int)
 
 bool CoreTools::CallbackParameters::GetBoolValue(int index) const
 {
@@ -108,6 +106,13 @@ CoreTools::ConstParametersInterfaceSharedPtr CoreTools::CallbackParameters::GetP
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return impl->GetValue<ConstParametersInterfaceSharedPtr>(index);
+}
+
+int CoreTools::CallbackParameters::GetContainerSize() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetContainerSize();
 }
 
 void CoreTools::CallbackParameters::SetValue(int index, bool value)

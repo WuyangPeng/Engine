@@ -21,20 +21,25 @@ namespace CSVConfigure
     class ChapterBase;
     class ChapterContainer;
     using ChapterMappingType = ChapterBase;
+
     class Equip;
     class EquipBase;
     class EquipContainer;
     using EquipMappingType = EquipBase;
+
     class Hero;
     class HeroContainer;
     using HeroMappingType = Hero;
+
     class Scene;
     class SceneContainer;
     using SceneMappingType = Scene;
+
     class Skill;
     class SkillBase;
     class SkillContainer;
     using SkillMappingType = SkillBase;
+
     class SystemConstant;
     class SystemConstantContainer;
     using SystemConstantMappingType = SystemConstant;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/28 16:06) 
+///	版本：0.9.1.5 (2023/09/21 09:47)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_APPENDER_H
 #define CORE_TOOLS_LOG_MANAGER_APPENDER_H
@@ -26,6 +26,7 @@ namespace CoreTools
     {
     public:
         DELAY_COPY_UNSHARED_TYPE_DECLARE(Appender);
+
         using String = System::String;
 
     public:

@@ -24,6 +24,10 @@ namespace CsvOutput
     public:
         using ClassType = Input1Base;
 
+        using String = System::String;
+        using StringContainer = std::vector<String>;
+        using StringContainerConstIter = StringContainer::const_iterator;
+
     public:
         Input1Base() noexcept = default;
         explicit Input1Base(int key) noexcept;
@@ -48,13 +52,13 @@ namespace CsvOutput
 
         NODISCARD virtual int GetTest4() const noexcept;
 
-        NODISCARD virtual System::String GetTest5() const;
+        NODISCARD virtual String GetTest5() const;
 
-        NODISCARD virtual std::vector<System::String> GetTest6() const;
+        NODISCARD virtual StringContainer GetTest6() const;
         NODISCARD virtual int GetTest6Count() const;
-        NODISCARD virtual System::String GetTest6(MAYBE_UNUSED int index) const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetTest6Begin() const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetTest6End() const;
+        NODISCARD virtual String GetTest6(int index) const;
+        NODISCARD virtual StringContainerConstIter GetTest6Begin() const;
+        NODISCARD virtual StringContainerConstIter GetTest6End() const;
 
     private:
         int key{};

@@ -1,6 +1,6 @@
 TODO Level 5
 
-0.9.0.4
+0.9.1.5
 
 1.  （LogManager）考虑修改AnalysisAppenderManager实现的设计，不返回解析完的类指针。
 2.  （LogManager）考虑修改LogAppenderIOManagerImpl的指针设计。

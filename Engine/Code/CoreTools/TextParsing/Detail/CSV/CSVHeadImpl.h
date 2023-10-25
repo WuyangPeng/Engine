@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:03)
+///	版本：0.9.1.5 (2023/10/24 14:15)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_HEAD_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_HEAD_IMPL_H
@@ -36,6 +36,7 @@ namespace CoreTools
     {
     public:
         using ClassType = CSVHeadImpl;
+
         using String = System::String;
         using StringView = System::StringView;
         using FileContent = std::vector<String>;

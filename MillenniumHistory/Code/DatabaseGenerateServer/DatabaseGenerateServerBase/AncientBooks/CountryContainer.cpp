@@ -40,9 +40,9 @@ void AncientBooks::CountryContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         country.emplace_back(std::make_shared<Country>(csvRow));
     }
@@ -77,14 +77,14 @@ void AncientBooks::CountryContainer::Unique()
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, CountryContainer)
 
-AncientBooks::CountryContainer::ConstCountryBaseSharedPtr AncientBooks::CountryContainer::GetFirstCountry() const
+AncientBooks::CountryContainer::ConstCountrySharedPtr AncientBooks::CountryContainer::GetFirstCountry() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return country.at(0);
 }
 
-AncientBooks::CountryContainer::ConstCountryBaseSharedPtr AncientBooks::CountryContainer::GetCountry(int key) const
+AncientBooks::CountryContainer::ConstCountrySharedPtr AncientBooks::CountryContainer::GetCountry(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

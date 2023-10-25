@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/30 17:10)
+///	版本：0.9.1.5 (2023/09/20 15:44)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -49,10 +49,9 @@ void CoreTools::FileInStream::Load(const System::String& fileName)
 
     manager.Read(CoreTools::GetStreamSize<char>(), bufferInformation->GetSize(), bufferInformation->GetBufferBegin());
 
-    const std::string fileVersion{ bufferInformation->GetBufferBegin(), length };
-
     // 比较所需的文件版本。
-    if (fileVersion != version)
+    if (const std::string fileVersion{ bufferInformation->GetBufferBegin(), length };
+        fileVersion != version)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("版本字符串不匹配！"s))
     }

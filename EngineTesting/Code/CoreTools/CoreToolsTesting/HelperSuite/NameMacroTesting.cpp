@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/11 21:09)
+///	版本：0.9.1.5 (2023/10/24 15:26)
 
 #include "NameMacroTesting.h"
 #include "Detail/NameFinalMacro.h"
@@ -56,14 +56,14 @@ void CoreTools::NameMacroTesting::BaseTest()
 
     const auto container = nameMacroBase.GetAllObjectsByName(name);
     ASSERT_FALSE_FAILURE_THROW(container.empty(), "查找对象失败。");
-    for (const auto object : container)
+    for (const auto& object : container)
     {
         ASSERT_EQUAL(object->GetName(), name);
     }
 
     const auto constContainer = nameMacroBase.GetAllConstObjectsByName(name);
     ASSERT_FALSE_FAILURE_THROW(constContainer.empty(), "查找对象失败。");
-    for (const auto object : constContainer)
+    for (const auto& object : constContainer)
     {
         ASSERT_EQUAL(object->GetName(), name);
     }
@@ -85,14 +85,14 @@ void CoreTools::NameMacroTesting::ImplTest()
 
     const auto container = nameMacro->GetAllObjectsByName(name);
     ASSERT_FALSE_FAILURE_THROW(container.empty(), "查找对象失败。");
-    for (const auto object : container)
+    for (const auto& object : container)
     {
         ASSERT_EQUAL(object->GetName(), name);
     }
 
     const auto constContainer = nameMacro->GetAllConstObjectsByName(name);
     ASSERT_FALSE_FAILURE_THROW(constContainer.empty(), "查找对象失败。");
-    for (const auto object : constContainer)
+    for (const auto& object : constContainer)
     {
         ASSERT_EQUAL(object->GetName(), name);
     }
@@ -114,14 +114,14 @@ void CoreTools::NameMacroTesting::FinalTest()
 
     const auto container = nameFinalMacro->GetAllObjectsByName(name);
     ASSERT_FALSE_FAILURE_THROW(container.empty(), "查找对象失败。");
-    for (const auto object : container)
+    for (const auto& object : container)
     {
         ASSERT_EQUAL(object->GetName(), name);
     }
 
     const auto constContainer = nameFinalMacro->GetAllConstObjectsByName(name);
     ASSERT_FALSE_FAILURE_THROW(constContainer.empty(), "查找对象失败。");
-    for (const auto object : constContainer)
+    for (const auto& object : constContainer)
     {
         ASSERT_EQUAL(object->GetName(), name);
     }

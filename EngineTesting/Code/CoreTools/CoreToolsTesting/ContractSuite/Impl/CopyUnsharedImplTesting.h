@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/11 15:32)
+///	版本：0.9.1.5 (2023/10/24 16:29)
 
 #ifndef CORE_TOOLS_CONTRACT_SUITE_COPY_UNSHARED_IMPL_TESTING_H
 #define CORE_TOOLS_CONTRACT_SUITE_COPY_UNSHARED_IMPL_TESTING_H
@@ -21,6 +21,7 @@ namespace CoreTools
     public:
         using ClassType = CopyUnsharedImplTesting;
         using ParentType = UnitTest;
+
         using TestingType = CopyUnsharedImpl<ClassType, Impl>;
         using ImplSharedPtr = Impl::ImplSharedPtr;
 

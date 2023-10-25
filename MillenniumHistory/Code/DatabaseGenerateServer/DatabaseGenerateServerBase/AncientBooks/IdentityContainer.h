@@ -25,8 +25,8 @@ namespace AncientBooks
     public:
         using ClassType = IdentityContainer;
 
-        using ConstIdentityBaseSharedPtr = std::shared_ptr<const IdentityBase>;
-        using Container = std::vector<ConstIdentityBaseSharedPtr>;
+        using ConstIdentitySharedPtr = std::shared_ptr<const IdentityMappingType>;
+        using Container = std::vector<ConstIdentitySharedPtr>;
         using CSVContent = CoreTools::CSVContent;
 
     public:
@@ -34,14 +34,14 @@ namespace AncientBooks
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConstIdentityBaseSharedPtr GetFirstIdentity() const;
-        NODISCARD ConstIdentityBaseSharedPtr GetIdentity(int key) const;
+        NODISCARD ConstIdentitySharedPtr GetFirstIdentity() const;
+        NODISCARD ConstIdentitySharedPtr GetIdentity(int key) const;
         NODISCARD Container GetContainer() const;
 
         NODISCARD int GetContainerSize() const;
 
         template <typename Function>
-        NODISCARD ConstIdentityBaseSharedPtr GetFirstIdentity(Function function) const;
+        NODISCARD ConstIdentitySharedPtr GetFirstIdentity(Function function) const;
 
         template <typename Function>
         NODISCARD Container GetIdentity(Function function) const;

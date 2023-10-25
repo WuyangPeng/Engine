@@ -40,9 +40,9 @@ void AncientBooks::CalendarContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         calendar.emplace_back(std::make_shared<Calendar>(csvRow));
     }
@@ -77,14 +77,14 @@ void AncientBooks::CalendarContainer::Unique()
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, CalendarContainer)
 
-AncientBooks::CalendarContainer::ConstCalendarBaseSharedPtr AncientBooks::CalendarContainer::GetFirstCalendar() const
+AncientBooks::CalendarContainer::ConstCalendarSharedPtr AncientBooks::CalendarContainer::GetFirstCalendar() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return calendar.at(0);
 }
 
-AncientBooks::CalendarContainer::ConstCalendarBaseSharedPtr AncientBooks::CalendarContainer::GetCalendar(int key) const
+AncientBooks::CalendarContainer::ConstCalendarSharedPtr AncientBooks::CalendarContainer::GetCalendar(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

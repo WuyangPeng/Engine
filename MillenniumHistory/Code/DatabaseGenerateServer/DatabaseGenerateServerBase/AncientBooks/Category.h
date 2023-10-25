@@ -24,7 +24,7 @@ namespace AncientBooks
         using ClassType = Category;
         using ParentType = CategoryBase;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit Category(const CSVRow& csvRow);
@@ -39,6 +39,7 @@ namespace AncientBooks
         NODISCARD ConstGatherSharedPtr GetGather(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD String GetCategory() const override;
+
 
     private:
         int id;  // Id

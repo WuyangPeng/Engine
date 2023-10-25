@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/30 09:41)
+///	版本：0.9.1.5 (2023/09/20 14:59)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,8 +22,37 @@ CoreTools::UnitTestFailReportOutput::UnitTestFailReportOutput(const std::string&
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, UnitTestFailReportOutput)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, UnitTestFailReportOutput, PrintNewLine, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, UnitTestFailReportOutput, PrintFailClassInformation, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, UnitTestFailReportOutput, PrintFailFileName, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, UnitTestFailReportOutput, PrintFailLineNumber, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, UnitTestFailReportOutput, PrintErrorMessage, void)
+void CoreTools::UnitTestFailReportOutput::PrintNewLine()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->PrintNewLine();
+}
+
+void CoreTools::UnitTestFailReportOutput::PrintFailClassInformation()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->PrintFailClassInformation();
+}
+
+void CoreTools::UnitTestFailReportOutput::PrintFailFileName()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->PrintFailFileName();
+}
+
+void CoreTools::UnitTestFailReportOutput::PrintFailLineNumber()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->PrintFailLineNumber();
+}
+
+void CoreTools::UnitTestFailReportOutput::PrintErrorMessage()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->PrintErrorMessage();
+}

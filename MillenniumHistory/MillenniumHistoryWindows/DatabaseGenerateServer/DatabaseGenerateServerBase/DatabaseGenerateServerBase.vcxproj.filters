@@ -43,6 +43,9 @@
     <Filter Include="资源文件\DatabaseEntity">
       <UniqueIdentifier>{585c3da9-32b2-4990-a15c-3bb056375567}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\CSVEngineering">
+      <UniqueIdentifier>{f298a447-4970-44c1-97fb-2b7cc97c472a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">
@@ -177,6 +180,9 @@
     <None Include="Resource\DatabaseEntity\DatabaseEntity.json">
       <Filter>资源文件\DatabaseEntity</Filter>
     </None>
+    <None Include="Resource\CSVEngineering\CSVEngineering.json">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">
@@ -220,6 +226,51 @@
     </Text>
     <Text Include="Resource\DatabaseEntity\EntityH.txt">
       <Filter>资源文件\DatabaseEntity</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\CSVEngineering.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\CSVEngineeringFwd.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EngineeringContainerCpp.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EngineeringContainerH.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntityBaseCpp.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntityBaseH.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntityContainerCpp.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntityContainerDetailH.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntityContainerH.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntityCpp.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntityH.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntitySubclassCpp.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\EntitySubclassH.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\FlagsCpp.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
+    </Text>
+    <Text Include="Resource\CSVEngineering\FlagsH.txt">
+      <Filter>资源文件\CSVEngineering</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

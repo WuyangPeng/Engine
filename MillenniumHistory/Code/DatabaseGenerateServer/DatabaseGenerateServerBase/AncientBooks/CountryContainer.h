@@ -25,8 +25,8 @@ namespace AncientBooks
     public:
         using ClassType = CountryContainer;
 
-        using ConstCountryBaseSharedPtr = std::shared_ptr<const CountryBase>;
-        using Container = std::vector<ConstCountryBaseSharedPtr>;
+        using ConstCountrySharedPtr = std::shared_ptr<const CountryMappingType>;
+        using Container = std::vector<ConstCountrySharedPtr>;
         using CSVContent = CoreTools::CSVContent;
 
     public:
@@ -34,14 +34,14 @@ namespace AncientBooks
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConstCountryBaseSharedPtr GetFirstCountry() const;
-        NODISCARD ConstCountryBaseSharedPtr GetCountry(int key) const;
+        NODISCARD ConstCountrySharedPtr GetFirstCountry() const;
+        NODISCARD ConstCountrySharedPtr GetCountry(int key) const;
         NODISCARD Container GetContainer() const;
 
         NODISCARD int GetContainerSize() const;
 
         template <typename Function>
-        NODISCARD ConstCountryBaseSharedPtr GetFirstCountry(Function function) const;
+        NODISCARD ConstCountrySharedPtr GetFirstCountry(Function function) const;
 
         template <typename Function>
         NODISCARD Container GetCountry(Function function) const;

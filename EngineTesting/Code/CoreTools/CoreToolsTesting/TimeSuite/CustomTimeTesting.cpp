@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.7 (2023/04/25 16:37)
+///	版本：0.9.1.5 (2023/10/25 14:22)
 
 #include "CustomTimeTesting.h"
 #include "System/Threading/SyncTools.h"
@@ -84,5 +84,5 @@ void CoreTools::CustomTimeTesting::DescribeTest()
 
     describe = CustomTime::GetSystemTimeDescribe(SYSTEM_TEXT("%1%-%2%.%3%"));
 
-     ASSERT_FALSE(describe.empty());
+    ASSERT_FALSE(describe.empty());
 }

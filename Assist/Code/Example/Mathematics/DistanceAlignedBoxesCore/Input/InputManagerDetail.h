@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Framework/MiddleLayer/InputManagerDetail.h"
 
-#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename ApplicationTrait>
@@ -24,7 +24,7 @@ DistanceAlignedBoxes::InputManager<ApplicationTrait>::InputManager(MiddleLayerPl
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 

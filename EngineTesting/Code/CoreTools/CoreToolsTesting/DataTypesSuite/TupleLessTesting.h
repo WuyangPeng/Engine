@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/11 16:15)
+///	版本：0.9.1.5 (2023/10/25 11:30)
 
 #ifndef CORE_TOOLS_DATA_TYPES_SUITE_TUPLE_LESS_TESTING_H
 #define CORE_TOOLS_DATA_TYPES_SUITE_TUPLE_LESS_TESTING_H

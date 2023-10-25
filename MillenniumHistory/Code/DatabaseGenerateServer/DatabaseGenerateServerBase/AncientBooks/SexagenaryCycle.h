@@ -24,7 +24,7 @@ namespace AncientBooks
         using ClassType = SexagenaryCycle;
         using ParentType = SexagenaryCycleBase;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit SexagenaryCycle(const CSVRow& csvRow);
@@ -40,6 +40,7 @@ namespace AncientBooks
         NODISCARD String GetBranch() const override;
 
         NODISCARD String GetName() const override;
+
 
     private:
         int id;  // Id

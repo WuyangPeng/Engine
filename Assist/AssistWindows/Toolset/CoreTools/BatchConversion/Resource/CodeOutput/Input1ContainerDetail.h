@@ -36,11 +36,11 @@ CsvOutput::Input1Container::Container CsvOutput::Input1Container::GetInput1(Func
 
     Container result{};
 
-    for (const auto& value : input1)
+    for (const auto& element : input1)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

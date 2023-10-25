@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:11)
+///	版本：0.9.1.5 (2023/09/23 15:30)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -908,7 +908,7 @@ void CoreTools::SimpleCSV::DocumentImpl::ExecuteCommand(const CommandDeleteSheet
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     appProperties->DeleteSheetName(command.GetSheetName());
-    auto sheetPath = "/xl/" + wbkRelationships->GetRelationshipByID(command.GetSheetId()).GetTarget();
+    auto sheetPath = "/xl/" + wbkRelationships->GetRelationshipById(command.GetSheetId()).GetTarget();
     archive.DeleteEntry(sheetPath.substr(1));
     contentTypes->DeleteOverride(sheetPath);
     wbkRelationships->DeleteRelationship(command.GetSheetId());
@@ -940,14 +940,14 @@ void CoreTools::SimpleCSV::DocumentImpl::ExecuteCommand(const CommandCloneSheet&
         THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, "Sheet named \""s + command.GetCloneName() + "\" already exists."s)
     }
 
-    if (wbkRelationships->GetRelationshipByID(command.GetSheetId()).GetType() == RelationshipType::Worksheet)
+    if (wbkRelationships->GetRelationshipById(command.GetSheetId()).GetType() == RelationshipType::Worksheet)
     {
         contentTypes->AddOverride(sheetPath, ContentType::Worksheet);
         wbkRelationships->AddRelationship(RelationshipType::Worksheet, sheetPath.substr(4));
         appProperties->AppendSheetName(command.GetCloneName());
 
         if (const auto result = std::ranges::find_if(data, [&](const auto& item) {
-                return item->GetXmlPath().substr(3) == wbkRelationships->GetRelationshipByID(command.GetSheetId()).GetTarget();
+                return item->GetXmlPath().substr(3) == wbkRelationships->GetRelationshipById(command.GetSheetId()).GetTarget();
             });
             result != data.cend())
         {
@@ -965,7 +965,7 @@ void CoreTools::SimpleCSV::DocumentImpl::ExecuteCommand(const CommandCloneSheet&
         appProperties->AppendSheetName(command.GetCloneName());
 
         if (const auto result = std::ranges::find_if(data, [&](const auto& item) {
-                return item->GetXmlPath().substr(3) == wbkRelationships->GetRelationshipByID(command.GetSheetId()).GetTarget();
+                return item->GetXmlPath().substr(3) == wbkRelationships->GetRelationshipById(command.GetSheetId()).GetTarget();
             });
             result != data.cend())
         {
@@ -1005,7 +1005,7 @@ CoreTools::SimpleCSV::QuerySheetType CoreTools::SimpleCSV::DocumentImpl::Execute
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (wbkRelationships->GetRelationshipByID(query.GetSheetId()).GetType() == RelationshipType::Worksheet)
+    if (wbkRelationships->GetRelationshipById(query.GetSheetId()).GetType() == RelationshipType::Worksheet)
     {
         return QuerySheetType{ query.GetSheetId(), ContentType::Worksheet };
     }
@@ -1033,7 +1033,7 @@ CoreTools::SimpleCSV::QuerySheetRelsTarget CoreTools::SimpleCSV::DocumentImpl::E
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return QuerySheetRelsTarget{ query.GetSheetId(), wbkRelationships->GetRelationshipByID(query.GetSheetId()).GetTarget() };
+    return QuerySheetRelsTarget{ query.GetSheetId(), wbkRelationships->GetRelationshipById(query.GetSheetId()).GetTarget() };
 }
 
 CoreTools::SimpleCSV::QuerySharedStrings CoreTools::SimpleCSV::DocumentImpl::ExecuteQuery(const QuerySharedStrings& query) const

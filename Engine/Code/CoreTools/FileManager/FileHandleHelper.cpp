@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:41)
+///	版本：0.9.1.5 (2023/09/22 14:11)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,7 +16,6 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 
-// static
 CoreTools::FileBuffer CoreTools::FileHandleHelper::LoadFromFile(const String& fileName)
 {
     ReadFileHandleImpl handle{ fileName };
@@ -29,7 +28,6 @@ CoreTools::FileBuffer CoreTools::FileHandleHelper::LoadFromFile(const String& fi
     return buffer;
 }
 
-// static
 void CoreTools::FileHandleHelper::SaveIntoFile(const String& fileName, int bufferSize, const char* buffer)
 {
     CORE_TOOLS_ASSERTION_0(buffer != nullptr, "传入的指针为空！");
@@ -40,7 +38,6 @@ void CoreTools::FileHandleHelper::SaveIntoFile(const String& fileName, int buffe
     handle.WriteToFile(sizeof(char), bufferSize, buffer);
 }
 
-// static
 void CoreTools::FileHandleHelper::AppendToFile(const String& fileName, int bufferSize, const char* buffer)
 {
     CORE_TOOLS_ASSERTION_0(buffer != nullptr, "传入的指针为空！");

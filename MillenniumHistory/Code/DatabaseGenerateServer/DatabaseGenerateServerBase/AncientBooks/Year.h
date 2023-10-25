@@ -24,7 +24,7 @@ namespace AncientBooks
         using ClassType = Year;
         using ParentType = YearBase;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit Year(const CSVRow& csvRow);
@@ -58,6 +58,7 @@ namespace AncientBooks
         NODISCARD IntContainerConstIter GetUnorthodoxYearBegin() const noexcept override;
         NODISCARD IntContainerConstIter GetUnorthodoxYearEnd() const noexcept override;
         NODISCARD YearContainer GetUnorthodoxYear(const AncientBooksContainer& csvContainer) const override;
+
 
     private:
         int id;  // Id

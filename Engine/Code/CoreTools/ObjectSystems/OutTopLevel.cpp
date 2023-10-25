@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/30 17:19)
+///	版本：0.9.1.5 (2023/09/20 15:51)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,6 +15,8 @@
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, OutTopLevel)
 
 CoreTools::OutTopLevel CoreTools::OutTopLevel::Create()
 {
@@ -31,10 +33,37 @@ CoreTools::OutTopLevel::OutTopLevel(DisableNotThrow disableNotThrow)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, OutTopLevel)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, OutTopLevel, IsTopLevel, ConstObjectInterfaceSharedPtr, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, OutTopLevel, GetTopLevelSize, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, OutTopLevel, begin, CoreTools::ConstObjectContainerConstIter)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, OutTopLevel, end, CoreTools::ConstObjectContainerConstIter)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, OutTopLevel, Insert, ObjectInterfaceSharedPtr, void)
+bool CoreTools::OutTopLevel::IsTopLevel(const ConstObjectInterfaceSharedPtr& object) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, OutTopLevel)
+    return impl->IsTopLevel(object);
+}
+
+int CoreTools::OutTopLevel::GetTopLevelSize() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetTopLevelSize();
+}
+
+CoreTools::ConstObjectContainerConstIter CoreTools::OutTopLevel::begin() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->begin();
+}
+
+CoreTools::ConstObjectContainerConstIter CoreTools::OutTopLevel::end() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->end();
+}
+
+void CoreTools::OutTopLevel::Insert(const ObjectInterfaceSharedPtr& object)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->Insert(object);
+}

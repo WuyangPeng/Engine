@@ -5,21 +5,25 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:01)
+///	版本：0.9.1.5 (2023/09/23 09:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "StringReplacing.h"
 #include "Detail/StringReplacingImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 CoreTools::StringReplacing::StringReplacing(const std::string& configurationFileName)
     : impl{ configurationFileName }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, StringReplacing)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, StringReplacing, GetReplacing, String, System::String);
+CoreTools::StringReplacing::String CoreTools::StringReplacing::GetReplacing(const String& original) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetReplacing(original);
+}

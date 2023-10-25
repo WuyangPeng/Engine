@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/11 21:04)
+///	版本：0.9.1.5 (2023/10/24 15:38)
 
 #include "SingletonMacro.h"
 #include "System/Helper/Tools.h"
@@ -30,19 +30,21 @@ CLASS_INVARIANT_STUB_DEFINE(CoreTools, SingletonMacro)
 
 void CoreTools::SingletonMacro::Create()
 {
-    SINGLETON_MUTEX_ENTER_GLOBAL(CoreTools);
+    SINGLETON_MUTEX_ENTER_GLOBAL(CoreTools)
 
     singletonMacro = std::make_unique<CoreTools::SingletonMacro>(SingletonMacroCreate::Init);
 }
 
 void CoreTools::SingletonMacro::Destroy() noexcept
 {
-    SINGLETON_DESTROY_MUTEX_ENTER_GLOBAL(CoreTools, CoreTools);
+    SINGLETON_DESTROY_MUTEX_ENTER_GLOBAL(CoreTools, CoreTools)
 
     singletonMacro.reset();
 }
 
 void CoreTools::SingletonMacro::DoNothing()
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     SINGLETON_MUTEX_ENTER_MEMBER;
 }

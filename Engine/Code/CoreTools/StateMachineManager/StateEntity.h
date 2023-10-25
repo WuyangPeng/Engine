@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 15:57)
+///	版本：0.9.1.5 (2023/09/20 14:52)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_ENTITY_H
 #define CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_ENTITY_H
@@ -23,6 +23,7 @@ namespace CoreTools
     public:
         using ClassType = StateEntity<Subclass, EventType>;
         using ParentType = EventEntity<EventType>;
+
         using StateMachineBase = StateMachineBase<Subclass, EventType>;
         using State = State<Subclass>;
         using StateSharedPtr = std::shared_ptr<State>;

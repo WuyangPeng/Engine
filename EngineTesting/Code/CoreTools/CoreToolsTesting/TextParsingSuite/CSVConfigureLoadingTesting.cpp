@@ -5,27 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.11 (2023/06/07 22:11)
+///	版本：0.9.1.5 (2023/10/25 10:28)
 
 #include "CSVConfigureLoadingTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/BatchConversionCSV.h"
-#include "CoreTools/TextParsing/CSV/CSVHead.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Toolset/CoreTools/CSVConfigure/CSVConfigure/CSVConfigureContainer.h"
-#include "Toolset/CoreTools/CSVConfigure/CSVConfigure/Chapter.h"
 #include "Toolset/CoreTools/CSVConfigure/CSVConfigure/ChapterContainerDetail.h"
 #include "Toolset/CoreTools/CSVConfigure/CSVConfigure/Equip.h"
 #include "Toolset/CoreTools/CSVConfigure/CSVConfigure/EquipContainerDetail.h"
-#include "Toolset/CoreTools/CSVConfigure/CSVConfigure/Hero.h"
-#include "Toolset/CoreTools/CSVConfigure/CSVConfigure/HeroContainerDetail.h"
-#include "Toolset/CoreTools/CSVConfigure/CSVConfigure/Scene.h"
-#include "Toolset/CoreTools/CSVConfigure/CSVConfigure/SceneContainerDetail.h"
-#include "Toolset/CoreTools/CSVConfigure/CSVConfigure/Skill.h"
-#include "Toolset/CoreTools/CSVConfigure/CSVConfigure/SkillContainerDetail.h"
-#include "Toolset/CoreTools/CSVConfigure/CSVConfigure/SystemConstant.h"
-#include "Toolset/CoreTools/CSVConfigure/CSVConfigure/SystemConstantContainer.h"
 
 using namespace std::literals;
 

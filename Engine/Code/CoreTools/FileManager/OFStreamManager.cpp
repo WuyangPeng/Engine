@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:41)
+///	版本：0.9.1.5 (2023/09/22 14:13)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "OFStreamManager.h"
 #include "Detail/OFStreamManagerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 CoreTools::OFStreamManager::OFStreamManager(const String& fileName, bool addition)
     : impl{ fileName, addition }
@@ -22,8 +21,19 @@ CoreTools::OFStreamManager::OFStreamManager(const String& fileName, bool additio
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, OFStreamManager)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, OFStreamManager, GetStreamSize, CoreTools::OFStreamManager::PosType)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, OFStreamManager, SetSimplifiedChinese, void)
+CoreTools::OFStreamManager::PosType CoreTools::OFStreamManager::GetStreamSize() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetStreamSize();
+}
+
+void CoreTools::OFStreamManager::SetSimplifiedChinese()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetSimplifiedChinese();
+}
 
 CoreTools::OFStreamManager& CoreTools::OFStreamManager::operator<<(const String& message)
 {

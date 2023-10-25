@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:03)
+///	版本：0.9.1.5 (2023/10/09 20:44)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_FACTORY_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_FACTORY_H
@@ -13,6 +13,7 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/CharacterString/CharacterStringFwd.h"
 
 #include <memory>
 
@@ -22,12 +23,13 @@ namespace CoreTools
     {
     public:
         using ClassType = CSVGenerateFactory;
+
         using CSVGenerateSharedPtr = std::shared_ptr<CSVGenerateImpl>;
         using String = System::String;
 
     public:
-        NODISCARD static CSVGenerateSharedPtr Create(const CSVHead& csvHead, CSVGenerateType csvGenerateType);
-        NODISCARD static CSVGenerateSharedPtr Create(const CSVContent& csvContent, CSVGenerateType csvGenerateType);
+        NODISCARD static CSVGenerateSharedPtr Create(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis, CSVGenerateType csvGenerateType);
+        NODISCARD static CSVGenerateSharedPtr Create(const CSVContent& csvContent, const CodeMappingAnalysis& codeMappingAnalysis, CSVGenerateType csvGenerateType);
     };
 }
 

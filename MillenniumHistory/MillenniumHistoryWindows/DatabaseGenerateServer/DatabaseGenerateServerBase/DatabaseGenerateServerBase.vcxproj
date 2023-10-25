@@ -324,6 +324,8 @@
     </Link>
     <PreBuildEvent>
       <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
 xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
@@ -353,6 +355,8 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
     </Link>
     <PreBuildEvent>
       <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
 xcopy "$(AssistEngineering)/$(Platform)/DebugWindows/BatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
@@ -382,6 +386,8 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
     </Link>
     <PreBuildEvent>
       <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
 xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStaticD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
@@ -408,6 +414,8 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
     </Link>
     <PreBuildEvent>
       <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
 xcopy "$(AssistEngineering)/$(Platform)/DebugWindows/BatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
@@ -438,6 +446,8 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
     </Link>
     <PreBuildEvent>
       <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
 xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
@@ -471,6 +481,8 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
     </Link>
     <PreBuildEvent>
       <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
 xcopy "$(AssistEngineering)/$(Platform)/ReleaseWindows/BatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
@@ -504,6 +516,8 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
     </Link>
     <PreBuildEvent>
       <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
 xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStatic.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
@@ -534,6 +548,8 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
     </Link>
     <PreBuildEvent>
       <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
 xcopy "$(AssistEngineering)/$(Platform)/ReleaseWindows/BatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
@@ -560,6 +576,8 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
     </Link>
     <PreBuildEvent>
       <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
 xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
@@ -589,6 +607,8 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
     </Link>
     <PreBuildEvent>
       <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
 xcopy "$(AssistEngineering)/$(Platform)/DebugWindows/BatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
@@ -618,6 +638,8 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
     </Link>
     <PreBuildEvent>
       <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
 xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStaticD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
@@ -644,6 +666,8 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
     </Link>
     <PreBuildEvent>
       <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
 xcopy "$(AssistEngineering)/$(Platform)/DebugWindows/BatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
@@ -674,6 +698,8 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
     </Link>
     <PreBuildEvent>
       <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
 xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
@@ -707,6 +733,8 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
     </Link>
     <PreBuildEvent>
       <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
 xcopy "$(AssistEngineering)/$(Platform)/ReleaseWindows/BatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
@@ -740,6 +768,8 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
     </Link>
     <PreBuildEvent>
       <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
 xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStatic.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
@@ -770,6 +800,8 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
     </Link>
     <PreBuildEvent>
       <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
 xcopy "$(AssistEngineering)/$(Platform)/ReleaseWindows/BatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
@@ -826,11 +858,27 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
     <None Include="Resource\AncientBooks\Source.csv" />
     <None Include="Resource\AncientBooks\Version.csv" />
     <None Include="Resource\AncientBooks\Year.csv" />
+    <None Include="Resource\CSVEngineering\CSVEngineering.json" />
     <None Include="Resource\DatabaseEntity\DatabaseEntity.json" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Resource\CSVEngineering\CSVEngineering.txt" />
+    <Text Include="Resource\CSVEngineering\CSVEngineeringFwd.txt" />
+    <Text Include="Resource\CSVEngineering\EngineeringContainerCpp.txt" />
+    <Text Include="Resource\CSVEngineering\EngineeringContainerH.txt" />
+    <Text Include="Resource\CSVEngineering\EntityBaseCpp.txt" />
+    <Text Include="Resource\CSVEngineering\EntityBaseH.txt" />
+    <Text Include="Resource\CSVEngineering\EntityContainerCpp.txt" />
+    <Text Include="Resource\CSVEngineering\EntityContainerDetailH.txt" />
+    <Text Include="Resource\CSVEngineering\EntityContainerH.txt" />
+    <Text Include="Resource\CSVEngineering\EntityCpp.txt" />
+    <Text Include="Resource\CSVEngineering\EntityH.txt" />
+    <Text Include="Resource\CSVEngineering\EntitySubclassCpp.txt" />
+    <Text Include="Resource\CSVEngineering\EntitySubclassH.txt" />
+    <Text Include="Resource\CSVEngineering\FlagsCpp.txt" />
+    <Text Include="Resource\CSVEngineering\FlagsH.txt" />
     <Text Include="Resource\DatabaseEntity\DatabaseEntity.txt" />
     <Text Include="Resource\DatabaseEntity\DatabaseEntityFwd.txt" />
     <Text Include="Resource\DatabaseEntity\EntityCpp.txt" />

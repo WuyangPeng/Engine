@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 15:53)
+///	版本：0.9.1.5 (2023/09/20 14:51)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_FWD_H
 #define CORE_TOOLS_STATE_MACHINE_FWD_H
@@ -19,8 +19,7 @@ namespace CoreTools
     template <typename State>
     class DefaultEventDispatcher;
 
-    template <typename Derived, typename State, State CurrentState, typename Event,
-              State NextState, void (Derived::*Action)(const Event&)>
+    template <typename Derived, typename State, State CurrentState, typename Event, State NextState, void (Derived::*Action)(const Event&)>
     class StateMachineRow;
 
     template <typename Transition>

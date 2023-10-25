@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:07)
+///	版本：0.9.1.5 (2023/09/23 18:11)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,9 +22,26 @@ CoreTools::SimpleCSV::RelationshipItem::RelationshipItem(const ConstXMLDocumentS
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, RelationshipItem)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, RelationshipItem, GetType, CoreTools::SimpleCSV::RelationshipType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, RelationshipItem, GetTarget, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, RelationshipItem, GetId, std::string)
+CoreTools::SimpleCSV::RelationshipType CoreTools::SimpleCSV::RelationshipItem::GetType() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetType();
+}
+
+std::string CoreTools::SimpleCSV::RelationshipItem::GetTarget() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetTarget();
+}
+
+std::string CoreTools::SimpleCSV::RelationshipItem::GetId() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetId();
+}
 
 CoreTools::SimpleCSV::RelationshipType CoreTools::SimpleCSV::RelationshipItem::GetTypeFromString(const std::string& typeString)
 {

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/22 10:43)
+///	版本：0.9.1.5 (2023/09/23 10:00)
 
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_COLORS_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_COLORS_H
@@ -26,7 +26,7 @@ namespace CoreTools
         NODISCARD static ConsoleColors Create();
 
     private:
-        explicit ConsoleColors(MAYBE_UNUSED DisableNotThrow disableNotThrow);
+        explicit ConsoleColors(DisableNotThrow disableNotThrow);
 
     public:
         CLASS_INVARIANT_DECLARE;

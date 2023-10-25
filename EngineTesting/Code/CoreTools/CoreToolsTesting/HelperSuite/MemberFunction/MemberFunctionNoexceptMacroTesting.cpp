@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/11 21:07)
+///	版本：0.9.1.5 (2023/10/24 16:06)
 
 #include "MemberFunctionNoexceptMacroTesting.h"
 #include "CoreTools/CoreToolsTesting/HelperSuite/Detail/MemberFunctionNoexceptMacro.h"
@@ -34,20 +34,20 @@ void CoreTools::MemberFunctionNoexceptMacroTesting::MainTest()
 
 void CoreTools::MemberFunctionNoexceptMacroTesting::ConstMemberFunctionTest()
 {
-    const auto MmberFunctionNoexceptMacro = MemberFunctionNoexceptMacro::Create();
+    const auto memberFunctionNoexceptMacro = MemberFunctionNoexceptMacro::Create();
 
-    MmberFunctionNoexceptMacro.ConstMemberFunction();
-    MmberFunctionNoexceptMacro.ConstMemberFunction("");
-    MmberFunctionNoexceptMacro.ConstMemberFunction(0);
-    MmberFunctionNoexceptMacro.ConstMemberFunction(nullptr);
+    memberFunctionNoexceptMacro.ConstMemberFunction();
+    memberFunctionNoexceptMacro.ConstMemberFunction("");
+    memberFunctionNoexceptMacro.ConstMemberFunction(0);
+    memberFunctionNoexceptMacro.ConstMemberFunction(nullptr);
 }
 
 void CoreTools::MemberFunctionNoexceptMacroTesting::NonConstMemberFunctionTest()
 {
-    auto MmberFunctionNoexceptMacro = MemberFunctionNoexceptMacro::Create();
+    auto memberFunctionNoexceptMacro = MemberFunctionNoexceptMacro::Create();
 
-    MmberFunctionNoexceptMacro.NonConstCopyMemberFunction();
-    MmberFunctionNoexceptMacro.NonConstCopyMemberFunction("");
-    MmberFunctionNoexceptMacro.NonConstCopyMemberFunction(0);
-    MmberFunctionNoexceptMacro.NonConstCopyMemberFunction(nullptr);
+    memberFunctionNoexceptMacro.NonConstCopyMemberFunction();
+    memberFunctionNoexceptMacro.NonConstCopyMemberFunction("");
+    memberFunctionNoexceptMacro.NonConstCopyMemberFunction(0);
+    memberFunctionNoexceptMacro.NonConstCopyMemberFunction(nullptr);
 }

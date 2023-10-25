@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 17:46)
+///	版本：0.9.1.5 (2023/09/20 14:17)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -62,9 +62,6 @@ void CoreTools::UnitTestComposite::ClearUnitTestCollection()
     THROW_EXCEPTION(SYSTEM_TEXT("禁止调用UnitTestComposite::ClearUnitTestCollection()！"s))
 }
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26418)
-
 void CoreTools::UnitTestComposite::AddUnitTest(const UnitTestCompositeSharedPtr& unitTest)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
@@ -73,8 +70,6 @@ void CoreTools::UnitTestComposite::AddUnitTest(const UnitTestCompositeSharedPtr&
 
     THROW_EXCEPTION(SYSTEM_TEXT("禁止调用UnitTestComposite::AddUnitTest()！"s))
 }
-
-#include SYSTEM_WARNING_POP
 
 int CoreTools::UnitTestComposite::GetTestLoopCount() const noexcept
 {

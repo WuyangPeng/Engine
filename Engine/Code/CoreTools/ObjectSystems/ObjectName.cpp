@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/30 17:18)
+///	版本：0.9.1.5 (2023/09/20 15:49)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -24,8 +24,19 @@ CoreTools::ObjectName::ObjectName(const std::string& name)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ObjectName)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ObjectName, GetName, std::string)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, ObjectName, SetName, std::string, void)
+std::string CoreTools::ObjectName::GetName() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetName();
+}
+
+void CoreTools::ObjectName::SetName(const std::string& name)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->SetName(name);
+}
 
 bool CoreTools::ObjectName::IsExactly(const ObjectName& name) const noexcept
 {

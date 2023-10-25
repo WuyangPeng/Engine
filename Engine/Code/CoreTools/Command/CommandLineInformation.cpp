@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/21 11:38)
+///	版本：0.9.1.5 (2023/09/23 10:22)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,6 +13,8 @@
 #include "Detail/CommandLineInformationImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, CommandLineInformation)
 
 CoreTools::CommandLineInformation::CommandLineInformation(int argumentsNumber, char** arguments)
     : impl{ argumentsNumber, arguments }
@@ -28,14 +30,72 @@ CoreTools::CommandLineInformation::CommandLineInformation(const char* commandLin
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CommandLineInformation)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandLineInformation, ExcessArguments, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandLineInformation, GetExcessArgumentsCount, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CommandLineInformation, GetBoolean, std::string, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CommandLineInformation, GetInteger, std::string, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CommandLineInformation, GetFloat, std::string, float)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CommandLineInformation, GetDouble, std::string, double)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CommandLineInformation, GetString, std::string, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandLineInformation, GetFileName, std::string)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CommandLineInformation, SetUsed, std::string, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandLineInformation, SetFileNameUsed, void)
-COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, CommandLineInformation)
+std::string CoreTools::CommandLineInformation::ExcessArguments() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->ExcessArguments();
+}
+
+int CoreTools::CommandLineInformation::GetExcessArgumentsCount() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetExcessArgumentsCount();
+}
+
+bool CoreTools::CommandLineInformation::GetBoolean(const std::string& name) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetBoolean(name);
+}
+
+int CoreTools::CommandLineInformation::GetInteger(const std::string& name) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetInteger(name);
+}
+
+float CoreTools::CommandLineInformation::GetFloat(const std::string& name) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFloat(name);
+}
+
+double CoreTools::CommandLineInformation::GetDouble(const std::string& name) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDouble(name);
+}
+
+std::string CoreTools::CommandLineInformation::GetString(const std::string& name) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetString(name);
+}
+
+std::string CoreTools::CommandLineInformation::GetFileName() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFileName();
+}
+
+void CoreTools::CommandLineInformation::SetUsed(const std::string& argumentsName)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetUsed(argumentsName);
+}
+
+void CoreTools::CommandLineInformation::SetFileNameUsed()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetFileNameUsed();
+}

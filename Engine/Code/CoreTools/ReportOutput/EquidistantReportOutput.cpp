@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 15:52)
+///	版本：0.9.1.5 (2023/09/20 14:58)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,6 +22,23 @@ CoreTools::EquidistantReportOutput::EquidistantReportOutput(int borderLineLength
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, EquidistantReportOutput)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, EquidistantReportOutput, PrintNewLine, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, EquidistantReportOutput, PrintBorderLine, char, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, EquidistantReportOutput, PrintString, std::string, void)
+void CoreTools::EquidistantReportOutput::PrintNewLine()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->PrintNewLine();
+}
+
+void CoreTools::EquidistantReportOutput::PrintBorderLine(char character)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->PrintBorderLine(character);
+}
+
+void CoreTools::EquidistantReportOutput::PrintString(const std::string& characterString)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->PrintString(characterString);
+}

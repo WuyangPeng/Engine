@@ -15,6 +15,7 @@
 #include "AncientBooksFwd.h"
 #include "System/Helper/UnicodeUsing.h"
 
+
 namespace AncientBooks
 {
     class GatherBase

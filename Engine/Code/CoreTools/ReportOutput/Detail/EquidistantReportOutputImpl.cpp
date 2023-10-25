@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 15:48)
+///	版本：0.9.1.5 (2023/09/20 14:57)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -34,7 +34,7 @@ void CoreTools::EquidistantReportOutputImpl::PrintBorderLine(char character)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    std::string borderLine(borderLineLength, character);
+    const std::string borderLine(borderLineLength, character);
 
     PrintString(borderLine);
 }

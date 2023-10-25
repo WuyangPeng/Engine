@@ -18,6 +18,7 @@
 
 #include <vector>
 
+
 namespace CSVConfigure
 {
     class Hero final
@@ -27,7 +28,8 @@ namespace CSVConfigure
 
         using CSVRow = CoreTools::CSVRow;
         using String = System::String;
-        using CharContainer = std::vector<System::TChar>;
+        using Char = System::TChar;
+        using CharContainer = std::vector<Char>;
         using CharContainerConstIter = CharContainer::const_iterator;
 
     public:

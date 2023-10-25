@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:10)
+///	版本：0.9.1.5 (2023/10/24 14:10)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_PATH_SPLIT_PARSING_H
 #define CORE_TOOLS_TEXT_PARSING_PATH_SPLIT_PARSING_H
@@ -20,6 +20,7 @@ namespace CoreTools
     {
     public:
         using ClassType = PathSplitParsing;
+
         using String = System::String;
 
     public:

@@ -5,13 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/12 15:54)
+///	版本：0.9.1.5 (2023/10/25 11:25)
 
 #include "LogLevelManagerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/LogManager/LogLevelManager.h"
 #include "CoreTools/LogManager/Flags/LogManagerFlags.h"
+#include "CoreTools/LogManager/LogLevelManager.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 using System::operator++;

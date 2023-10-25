@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/25 13:46)
+///	版本：0.9.1.5 (2023/10/25 14:32)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_SUITE_POW3_TESTING_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_SUITE_POW3_TESTING_H

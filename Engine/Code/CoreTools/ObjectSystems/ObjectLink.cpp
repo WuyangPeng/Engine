@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/30 17:15)
+///	版本：0.9.1.5 (2023/09/20 15:47)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -31,17 +31,58 @@ CoreTools::ObjectLink::ObjectLink(ObjectLinkInit objectLinkInit)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ObjectLink)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, ObjectLink, GetObjectInterface, uint64_t, CoreTools::ObjectInterfaceSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ObjectLink, GetOrderedSize, int)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, ObjectLink, begin, CoreTools::ObjectLink::LinkSequentialContainerConstIter)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, ObjectLink, end, CoreTools::ObjectLink::LinkSequentialContainerConstIter)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, ObjectLink, begin, CoreTools::ObjectLink::LinkSequentialContainerIter)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, ObjectLink, end, CoreTools::ObjectLink::LinkSequentialContainerIter)
-
-void CoreTools::ObjectLink::Insert(uint64_t uniqueId, const ObjectInterfaceSharedPtr& ptr)
+CoreTools::ObjectInterfaceSharedPtr CoreTools::ObjectLink::GetObjectInterface(int64_t uniqueId)
 {
-    return impl->Insert(uniqueId, ptr);
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetObjectInterface(uniqueId);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ObjectLink, Sort, void)
+int CoreTools::ObjectLink::GetOrderedSize() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetOrderedSize();
+}
+
+void CoreTools::ObjectLink::Sort()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->Sort();
+}
+
+CoreTools::ObjectLink::LinkSequentialContainerConstIter CoreTools::ObjectLink::begin() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->begin();
+}
+
+CoreTools::ObjectLink::LinkSequentialContainerConstIter CoreTools::ObjectLink::end() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->end();
+}
+
+CoreTools::ObjectLink::LinkSequentialContainerIter CoreTools::ObjectLink::begin() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->begin();
+}
+
+CoreTools::ObjectLink::LinkSequentialContainerIter CoreTools::ObjectLink::end() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->end();
+}
+
+void CoreTools::ObjectLink::Insert(int64_t uniqueId, const ObjectInterfaceSharedPtr& ptr)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->Insert(uniqueId, ptr);
+}

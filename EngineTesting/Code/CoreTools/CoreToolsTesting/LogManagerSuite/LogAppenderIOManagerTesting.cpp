@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/12 14:19)
+///	版本：0.9.1.5 (2023/10/25 11:24)
 
 #include "LogAppenderIOManagerTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
@@ -152,8 +152,8 @@ CoreTools::LogAppenderIOManagerTesting::AppenderManagerSharedPtr CoreTools::LogA
 
     auto manager = AppenderManager::Create();
 
-    MAYBE_UNUSED const auto value = manager->InsertLogger(logger);
-    MAYBE_UNUSED auto value1 = manager->InsertAppender(SYSTEM_TEXT("FileAppender"s), appender);
+    MAYBE_UNUSED const auto result0 = manager->InsertLogger(logger);
+    MAYBE_UNUSED const auto result1 = manager->InsertAppender(SYSTEM_TEXT("FileAppender"s), appender);
 
     return manager;
 }

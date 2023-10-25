@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-AncientBooks::GeographicContainer::ConstGeographicBaseSharedPtr AncientBooks::GeographicContainer::GetFirstGeographic(Function function) const
+AncientBooks::GeographicContainer::ConstGeographicSharedPtr AncientBooks::GeographicContainer::GetFirstGeographic(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

@@ -5,13 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/25 10:50)
+///	版本：0.9.1.5 (2023/10/25 14:44)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_SUITE_PLAYER_ENTITY_H
 #define CORE_TOOLS_STATE_MACHINE_SUITE_PLAYER_ENTITY_H
 
 #include "CoreTools/CoreToolsTesting/StateMachineSuite/Flags/States.h"
-#include "CoreTools/StateMachineManager/StateEntityDetail.h"
+#include "CoreTools/StateMachineManager/StateEntity.h"
 
 namespace CoreTools
 {

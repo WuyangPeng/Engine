@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-AncientBooks::CalendarContainer::ConstCalendarBaseSharedPtr AncientBooks::CalendarContainer::GetFirstCalendar(Function function) const
+AncientBooks::CalendarContainer::ConstCalendarSharedPtr AncientBooks::CalendarContainer::GetFirstCalendar(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

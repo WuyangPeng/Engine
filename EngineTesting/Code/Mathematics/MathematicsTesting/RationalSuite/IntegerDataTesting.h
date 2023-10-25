@@ -28,7 +28,7 @@ namespace Mathematics
     private:
         void MainTest();
         void CopyTest();
-        void BitTest();
+        void Bit1Test();
         void ConversionTest();
         void FloatingPointConversionTest();
         void CompareTest();

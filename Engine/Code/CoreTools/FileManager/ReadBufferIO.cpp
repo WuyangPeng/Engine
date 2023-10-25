@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:41)
+///	版本：0.9.1.5 (2023/09/22 14:13)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,9 +22,26 @@ CoreTools::ReadBufferIO::ReadBufferIO(const ConstFileBufferSharedPtr& fileBuffer
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ReadBufferIO)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, ReadBufferIO, GetText, int, std::string);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ReadBufferIO, GetBytesTotal, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, ReadBufferIO, GetBytesProcessed, int);
+std::string CoreTools::ReadBufferIO::GetText(int length) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetText(length);
+}
+
+int CoreTools::ReadBufferIO::GetBytesTotal() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetBytesTotal();
+}
+
+int CoreTools::ReadBufferIO::GetBytesProcessed() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetBytesProcessed();
+}
 
 void CoreTools::ReadBufferIO::IncrementBytesProcessed(int bytesNumber)
 {

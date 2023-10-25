@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:48)
+///	版本：0.9.1.5 (2023/09/22 11:05)
 
 // 单例类所需要的宏
 #ifndef CORE_TOOLS_HELPER_SINGLETON_MACRO_H
@@ -51,9 +51,15 @@
     EXCEPTION_ALL_CATCH(filterType)
 
 #define SINGLETON_MUTEX_ENTER_MEMBER \
-    const std::unique_lock holder{ GetMutex() }
+    const std::unique_lock holder    \
+    {                                \
+        GetMutex()                   \
+    }
 
 #define SINGLETON_SCOPED_MUTEX_ENTER_MEMBER \
-    const CoreTools::ScopedMutex holder{ GetMutex() }
+    const CoreTools::ScopedMutex holder     \
+    {                                       \
+        GetMutex()                          \
+    }
 
 #endif  // CORE_TOOLS_HELPER_SINGLETON_MACRO_H

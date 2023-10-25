@@ -40,9 +40,9 @@ void AncientBooks::ImperialCourtContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         imperialCourt.emplace_back(std::make_shared<ImperialCourt>(csvRow));
     }
@@ -77,14 +77,14 @@ void AncientBooks::ImperialCourtContainer::Unique()
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, ImperialCourtContainer)
 
-AncientBooks::ImperialCourtContainer::ConstImperialCourtBaseSharedPtr AncientBooks::ImperialCourtContainer::GetFirstImperialCourt() const
+AncientBooks::ImperialCourtContainer::ConstImperialCourtSharedPtr AncientBooks::ImperialCourtContainer::GetFirstImperialCourt() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return imperialCourt.at(0);
 }
 
-AncientBooks::ImperialCourtContainer::ConstImperialCourtBaseSharedPtr AncientBooks::ImperialCourtContainer::GetImperialCourt(int key) const
+AncientBooks::ImperialCourtContainer::ConstImperialCourtSharedPtr AncientBooks::ImperialCourtContainer::GetImperialCourt(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

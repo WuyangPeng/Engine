@@ -1,0 +1,37 @@
+$Copyright$
+
+#ifndef $NamespaceUppercaseSeparator$_$ClassNameUppercase$_CONTAINER_H
+#define $NamespaceUppercaseSeparator$_$ClassNameUppercase$_CONTAINER_H
+
+#include "CoreTools/CoreToolsDll.h"
+
+#include "$Namespace$Fwd.h"
+#include "System/Helper/UnicodeUsing.h"
+
+$ContainerStdInclude$
+namespace $Namespace$
+{
+    class $ClassName$Container final
+    {
+    public:
+        using ClassType = $ClassName$Container;
+
+        using Const$ClassName$SharedPtr = std::shared_ptr<const $ClassName$MappingType>;$MappingContainerUsing$$ContainerUsing$
+        using CSVContent = CoreTools::CSVContent;
+
+    public:
+        explicit $ClassName$Container(const CSVContent& csvContent);
+
+        CLASS_INVARIANT_DECLARE;
+
+$ContainerGetFunction$
+    private:
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);$UniqueFunction$
+
+    private:
+        $ContainerType$ $ClassNameLetter$;
+    };
+}
+
+#endif  // $NamespaceUppercaseSeparator$_$ClassNameUppercase$_CONTAINER_H

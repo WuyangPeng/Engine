@@ -40,9 +40,9 @@ void AncientBooks::YearContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         year.emplace_back(std::make_shared<Year>(csvRow));
     }
@@ -77,14 +77,14 @@ void AncientBooks::YearContainer::Unique()
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, YearContainer)
 
-AncientBooks::YearContainer::ConstYearBaseSharedPtr AncientBooks::YearContainer::GetFirstYear() const
+AncientBooks::YearContainer::ConstYearSharedPtr AncientBooks::YearContainer::GetFirstYear() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return year.at(0);
 }
 
-AncientBooks::YearContainer::ConstYearBaseSharedPtr AncientBooks::YearContainer::GetYear(int key) const
+AncientBooks::YearContainer::ConstYearSharedPtr AncientBooks::YearContainer::GetYear(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/24 09:55)
+///	版本：0.9.1.5 (2023/10/25 14:17)
 
 #include "InitTermTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -14,7 +14,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 bool CoreTools::InitTermTesting::terminateCall{ false };
-bool CoreTools::InitTermTesting::initializeCall{ false }; 
+bool CoreTools::InitTermTesting::initializeCall{ false };
 
 CoreTools::InitTermTesting::InitTermTesting(const OStreamShared& stream)
     : ParentType{ stream }

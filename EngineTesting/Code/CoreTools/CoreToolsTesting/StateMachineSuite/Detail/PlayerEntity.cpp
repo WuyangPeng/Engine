@@ -5,12 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/25 10:55)
+///	版本：0.9.1.5 (2023/10/25 14:49)
 
 #include "PlayerEntity.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/EventEntityDetail.h"
 #include "CoreTools/StateMachineManager/StateDetail.h"
+#include "CoreTools/StateMachineManager/StateEntityDetail.h"
 #include "CoreTools/StateMachineManager/StateMachineBaseDetail.h"
 
 CoreTools::PlayerEntity::PlayerEntity(const StateSharedPtr& currentState)

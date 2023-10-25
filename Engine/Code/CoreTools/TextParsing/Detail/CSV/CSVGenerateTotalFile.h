@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:03)
+///	版本：0.9.1.5 (2023/10/24 14:15)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_TOTAL_FILE_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_TOTAL_FILE_H
@@ -23,11 +23,11 @@ namespace CoreTools
         using ParentType = CSVGenerateImpl;
 
     public:
-        explicit CSVGenerateTotalFile(const CSVHead& csvHead) noexcept;
+        CSVGenerateTotalFile(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis) noexcept;
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        void GenerateFile(const String& directory) const override;
+        void GenerateFile(const String& codeDirectory, const String& directory) const override;
 
     private:
         using CSVGenerateSharedPtr = std::shared_ptr<CSVGenerateImpl>;
@@ -37,13 +37,13 @@ namespace CoreTools
         NODISCARD String GetSuffix() const noexcept override;
         NODISCARD String GetFilePrefix() const noexcept override;
         NODISCARD String GetFileSuffix() const noexcept override;
-        NODISCARD String GetContent() const noexcept override;
+        NODISCARD String GetContent(const String& codeDirectory) const noexcept override;
 
-        void GenerateDefaultFile(const String& directory) const;
-        void GenerateMapFile(const String& directory) const;
-        void GenerateUniqueFile(const String& directory) const;
+        void GenerateDefaultFile(const String& codeDirectory, const String& directory) const;
+        void GenerateMapFile(const String& codeDirectory, const String& directory) const;
+        void GenerateUniqueFile(const String& codeDirectory, const String& directory) const;
 
-        void GenerateFile(const Container& container, const String& directory) const;
+        void GenerateFile(const Container& container, const String& codeDirectory, const String& directory) const;
     };
 }
 

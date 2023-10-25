@@ -5,13 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/22 19:21)
+///	版本：0.9.1.5 (2023/09/23 09:29)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CyclicRedundancyCheckCCITTTable.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+
+#include <gsl/util>
 
 CoreTools::CyclicRedundancyCheckCCITTTable::CyclicRedundancyCheckCCITTTable() noexcept
     : table{}
@@ -43,7 +45,7 @@ uint16_t CoreTools::CyclicRedundancyCheckCCITTTable::CalculateCCITT(uint32_t ind
     for (auto i = bitSize; 0 < i; --i)
     {
         if (((index ^ value) & 0x8000) != 0)
-            value = (value << 1) ^ 0x1021;
+            value = gsl::narrow_cast<uint16_t>(value << 1) ^ gsl::narrow_cast<uint16_t>(0x1021);
         else
             value <<= 1;
 

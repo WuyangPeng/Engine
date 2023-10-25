@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 16:40)
+///	版本：0.9.1.5 (2023/09/20 14:34)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,6 +22,23 @@ CoreTools::Event::Event(bool manualReset, bool initialState)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, Event)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Event, SetEvent, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Event, ResetEvent, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Event, Wait, void)
+void CoreTools::Event::SetEvent()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->SetEvent();
+}
+
+void CoreTools::Event::ResetEvent()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->ResetEvent();
+}
+
+void CoreTools::Event::Wait()
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->Wait();
+}

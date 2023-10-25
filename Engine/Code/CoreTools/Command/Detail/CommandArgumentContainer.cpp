@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/21 10:53)
+///	版本：0.9.1.5 (2023/09/23 10:07)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -175,9 +175,9 @@ std::string CoreTools::CommandArgumentContainer::ExcessArguments() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    for (const auto& value : commandArgument)
+    for (const auto& element : commandArgument)
     {
-        if (const auto& argument = value.second; !argument.IsUsed())
+        if (const auto& argument = element.second; !argument.IsUsed())
         {
             return argument.GetName();
         }
@@ -192,9 +192,9 @@ int CoreTools::CommandArgumentContainer::GetExcessArgumentsCount() const noexcep
 
     auto count = 0;
 
-    for (const auto& value : commandArgument)
+    for (const auto& element : commandArgument)
     {
-        if (const auto& argument = value.second; !argument.IsUsed())
+        if (const auto& argument = element.second; !argument.IsUsed())
         {
             ++count;
         }

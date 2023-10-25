@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/30 17:07)
+///	版本：0.9.1.5 (2023/09/20 15:36)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "BufferOutStream.h"
 #include "Detail/BufferOutStreamImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 CoreTools::BufferOutStream::BufferOutStream(const OutTopLevel& topLevel)
     : impl{ topLevel }
@@ -22,4 +21,9 @@ CoreTools::BufferOutStream::BufferOutStream(const OutTopLevel& topLevel)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, BufferOutStream)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferOutStream, GetBufferOutStreamInformation, CoreTools::ConstFileBufferSharedPtr)
+CoreTools::ConstFileBufferSharedPtr CoreTools::BufferOutStream::GetBufferOutStreamInformation() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->GetBufferOutStreamInformation();
+}

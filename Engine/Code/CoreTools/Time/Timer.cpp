@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 17:11)
+///	版本：0.9.1.5 (2023/09/20 14:20)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -32,8 +32,37 @@ CoreTools::Timer::Timer(DisableNotThrow disableNotThrow)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, Timer)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Timer, GetNanoseconds, int64_t)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Timer, GetMicroseconds, int64_t)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Timer, GetMilliseconds, int64_t)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Timer, GetSeconds, double)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Timer, Reset, void)
+int64_t CoreTools::Timer::GetNanoseconds() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNanoseconds();
+}
+
+int64_t CoreTools::Timer::GetMicroseconds() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetMicroseconds();
+}
+
+int64_t CoreTools::Timer::GetMilliseconds() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetMilliseconds();
+}
+
+double CoreTools::Timer::GetSeconds() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetSeconds();
+}
+
+void CoreTools::Timer::Reset() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return impl->Reset();
+}

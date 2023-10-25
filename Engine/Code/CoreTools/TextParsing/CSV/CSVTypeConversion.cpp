@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/04 17:33)
+///	版本：0.9.1.5 (2023/09/26 13:56)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -67,9 +67,9 @@ CoreTools::CSVTypeConversion::DescribeConversionFormatType CoreTools::CSVTypeCon
 
     DescribeConversionFormatType result{};
 
-    for (const auto& value : typeDescribe)
+    for (const auto& element : typeDescribe)
     {
-        result.emplace(StringConversion::MultiByteConversionStandard(value.second), value.first);
+        result.emplace(StringConversion::MultiByteConversionStandard(element.second), element.first);
     }
 
     return result;

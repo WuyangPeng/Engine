@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-AncientBooks::ImperialCourtContainer::ConstImperialCourtBaseSharedPtr AncientBooks::ImperialCourtContainer::GetFirstImperialCourt(Function function) const
+AncientBooks::ImperialCourtContainer::ConstImperialCourtSharedPtr AncientBooks::ImperialCourtContainer::GetFirstImperialCourt(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

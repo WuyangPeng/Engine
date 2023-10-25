@@ -40,9 +40,9 @@ void AncientBooks::GenusContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         genus.emplace_back(std::make_shared<Genus>(csvRow));
     }
@@ -77,14 +77,14 @@ void AncientBooks::GenusContainer::Unique()
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, GenusContainer)
 
-AncientBooks::GenusContainer::ConstGenusBaseSharedPtr AncientBooks::GenusContainer::GetFirstGenus() const
+AncientBooks::GenusContainer::ConstGenusSharedPtr AncientBooks::GenusContainer::GetFirstGenus() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return genus.at(0);
 }
 
-AncientBooks::GenusContainer::ConstGenusBaseSharedPtr AncientBooks::GenusContainer::GetGenus(int key) const
+AncientBooks::GenusContainer::ConstGenusSharedPtr AncientBooks::GenusContainer::GetGenus(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

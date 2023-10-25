@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/28 15:25)
+///	版本：0.9.1.5 (2023/09/21 09:56)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,7 +17,8 @@
 #include "CoreTools/LogManager/Flags/LogManagerFlags.h"
 #include "CoreTools/LogManager/Log.h"
 
-CoreTools::LogMessageFactory::LogMessageImplSharedPtr CoreTools::LogMessageFactory::Create(LogLevel level, LogFilter filter, const FunctionDescribed& functionDescribed)
+CoreTools::LogMessageFactory::LogMessageImplSharedPtr
+    CoreTools::LogMessageFactory::Create(LogLevel level, LogFilter filter, const FunctionDescribed& functionDescribed)
 {
     if (const auto minLogLevel = LOG_SINGLETON.GetMinLogLevelType(filter);
         minLogLevel == LogLevel::Disabled || level < minLogLevel)

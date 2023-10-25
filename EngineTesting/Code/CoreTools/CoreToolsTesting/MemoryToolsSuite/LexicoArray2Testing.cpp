@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/13 11:40)
+///	版本：0.9.1.5 (2023/10/25 14:08)
 
 #include "LexicoArray2Testing.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -77,7 +77,7 @@ void CoreTools::LexicoArray2Testing::ColumnMajorLexicoArray2Test()
     {
         for (auto row = 0; row < 5; ++row)
         {
-            ASSERT_EQUAL(lexicoArray2(row, col), index); 
+            ASSERT_EQUAL(lexicoArray2(row, col), index);
             ++index;
         }
     }

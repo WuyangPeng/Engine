@@ -24,7 +24,7 @@ namespace AncientBooks
         using ClassType = Version;
         using ParentType = VersionBase;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit Version(const CSVRow& csvRow);
@@ -65,6 +65,7 @@ namespace AncientBooks
         NODISCARD String GetAuthorNotes(int index) const override;
         NODISCARD StringContainerConstIter GetAuthorNotesBegin() const noexcept override;
         NODISCARD StringContainerConstIter GetAuthorNotesEnd() const noexcept override;
+
 
     private:
         int id;  // Id

@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 15:41)
+///	版本：0.9.1.5 (2023/09/22 14:14)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ReadFileHandle.h"
 #include "Detail/ReadFileHandleImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 CoreTools::ReadFileHandle::ReadFileHandle(const String& fileName)
     : impl{ fileName }
@@ -22,7 +21,12 @@ CoreTools::ReadFileHandle::ReadFileHandle(const String& fileName)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ReadFileHandle)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ReadFileHandle, GetFileByteSize, int);
+int CoreTools::ReadFileHandle::GetFileByteSize() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFileByteSize();
+}
 
 void CoreTools::ReadFileHandle::Read(size_t itemSize, void* data)
 {

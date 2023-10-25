@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/24 14:33)
+///	版本：0.9.1.5 (2023/10/25 14:18)
 
 #include "ObjectRegisterTesting.h"
 #include "Detail/BoolObject.h"
@@ -14,7 +14,6 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/ObjectSystems/NullObject.h"
 #include "CoreTools/ObjectSystems/Object.h"
 #include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"

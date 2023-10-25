@@ -25,7 +25,7 @@ namespace CSVConfigure
     public:
         using ClassType = SystemConstantContainer;
 
-        using ConstSystemConstantSharedPtr = std::shared_ptr<const SystemConstant>;
+        using ConstSystemConstantSharedPtr = std::shared_ptr<const SystemConstantMappingType>;
         using CSVContent = CoreTools::CSVContent;
 
     public:

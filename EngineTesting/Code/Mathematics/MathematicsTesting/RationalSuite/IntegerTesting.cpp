@@ -815,7 +815,7 @@ void Mathematics::IntegerTesting::CompareTest()
 void Mathematics::IntegerTesting::UtilitiesTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BlockTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(BitTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(Bit1Test);
     ASSERT_NOT_THROW_EXCEPTION_0(ConversionTest);
 }
 
@@ -873,7 +873,7 @@ void Mathematics::IntegerTesting::BlockTest()
     }
 }
 
-void Mathematics::IntegerTesting::BitTest()
+void Mathematics::IntegerTesting::Bit1Test()
 {
     const auto aTestLoopCount = GetTestLoopCount();
 

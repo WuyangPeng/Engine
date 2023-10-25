@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/28 16:07)
+///	版本：0.9.1.5 (2023/09/21 09:58)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,7 +17,6 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 CoreTools::AppenderManager::AppenderManagerSharedPtr CoreTools::AppenderManager::Create()
 {
@@ -34,14 +33,61 @@ CoreTools::AppenderManager::AppenderManager(AppenderManagerCreate appenderManage
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, AppenderManager)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, InsertLogger, Logger, bool)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, InsertConsoleAppender, Appender, bool)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, AppenderManager, RemoveLogger, LogFilter, bool)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, RemoveAppender, String, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, Write, LogMessage, void) 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, AppenderManager, Clear, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, IsAppenderExist, String, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, AppenderManager, GetMinLogLevelType, LogFilter, CoreTools::LogLevel)
+bool CoreTools::AppenderManager::IsAppenderExist(const String& name) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsAppenderExist(name);
+}
+
+bool CoreTools::AppenderManager::InsertLogger(const Logger& logger)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->InsertLogger(logger);
+}
+
+bool CoreTools::AppenderManager::RemoveLogger(LogFilter logFilter)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->RemoveLogger(logFilter);
+}
+
+bool CoreTools::AppenderManager::InsertConsoleAppender(const Appender& appender)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->InsertConsoleAppender(appender);
+}
+
+bool CoreTools::AppenderManager::RemoveAppender(const String& name)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->RemoveAppender(name);
+}
+
+void CoreTools::AppenderManager::Clear() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->Clear();
+}
+
+void CoreTools::AppenderManager::Write(const LogMessage& message) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->Write(message);
+}
+
+CoreTools::LogLevel CoreTools::AppenderManager::GetMinLogLevelType(LogFilter logFilter) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetMinLogLevelType(logFilter);
+}
 
 bool CoreTools::AppenderManager::InsertAppender(const String& name, const Appender& appender)
 {

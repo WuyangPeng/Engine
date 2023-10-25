@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/18 11:30)
+///	版本：0.9.1.5 (2023/10/25 15:28)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_SUITE_PARAMETERS_H
 #define CORE_TOOLS_MESSAGE_EVENT_SUITE_PARAMETERS_H
@@ -19,6 +19,7 @@ namespace CoreTools
     public:
         using ClassType = Parameters;
         using ParentType = ParametersInterface;
+
         using ParametersSharedPtr = std::shared_ptr<Parameters>;
 
     public:

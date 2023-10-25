@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.7 (2023/04/26 16:07)
+///	版本：0.9.1.5 (2023/10/25 10:29)
 
 #include "CSVConfigureTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -267,7 +267,7 @@ void CoreTools::CSVConfigureTesting::SkillContainerTest()
     auto reward = 1;
     for (auto i = 10001; i < 10007; ++i)
     {
-        auto skill = skillContainer->GetSkill(i, reward);
+        auto skill = skillContainer->GetSkill(CSVConfigure::Skill::GenerateKey(i, reward));
         ASSERT_UNEQUAL_NULL_PTR(skill);
 
         ASSERT_EQUAL(skill->GetKey(), i * 100 + reward);

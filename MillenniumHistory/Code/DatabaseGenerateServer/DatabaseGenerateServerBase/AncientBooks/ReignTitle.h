@@ -24,7 +24,7 @@ namespace AncientBooks
         using ClassType = ReignTitle;
         using ParentType = ReignTitleBase;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit ReignTitle(const CSVRow& csvRow);
@@ -69,6 +69,7 @@ namespace AncientBooks
 
         NODISCARD int GetEndDay() const noexcept override;
         NODISCARD ConstDaySharedPtr GetEndDay(const AncientBooksContainer& csvContainer) const override;
+
 
     private:
         int64_t id;  // Id

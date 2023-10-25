@@ -9,6 +9,7 @@
 
 #include "Input2.h"
 #include "Input2ContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -39,9 +40,9 @@ void OutputCSVTesting::Input2Container::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         input2.emplace_back(std::make_shared<Input2>(csvRow));
     }
@@ -76,14 +77,14 @@ void OutputCSVTesting::Input2Container::Unique()
 
 CLASS_INVARIANT_STUB_DEFINE(OutputCSVTesting, Input2Container)
 
-OutputCSVTesting::Input2Container::ConstInput2BaseSharedPtr OutputCSVTesting::Input2Container::GetFirstInput2() const
+OutputCSVTesting::Input2Container::ConstInput2SharedPtr OutputCSVTesting::Input2Container::GetFirstInput2() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return input2.at(0);
 }
 
-OutputCSVTesting::Input2Container::ConstInput2BaseSharedPtr OutputCSVTesting::Input2Container::GetInput2(int key) const
+OutputCSVTesting::Input2Container::ConstInput2SharedPtr OutputCSVTesting::Input2Container::GetInput2(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -108,5 +109,12 @@ OutputCSVTesting::Input2Container::Container OutputCSVTesting::Input2Container::
     USER_CLASS_IS_VALID_CONST_9;
 
     return input2;
+}
+
+int OutputCSVTesting::Input2Container::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(input2.size());
 }
 

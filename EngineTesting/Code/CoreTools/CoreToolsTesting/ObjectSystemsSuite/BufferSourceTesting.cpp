@@ -5,22 +5,19 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/20 09:39)
+///	版本：0.9.1.5 (2023/10/25 14:15)
 
 #include "BufferSourceTesting.h"
 #include "Detail/BoolObject.h"
 #include "Detail/BufferSourceTestingEnum.h"
 #include "Detail/IntObject.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ConstObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ConstWeakObjectAssociated.h"
-#include "CoreTools/ObjectSystems/NullObject.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -64,12 +61,12 @@ void CoreTools::BufferSourceTesting::ReadBoolTest()
     bufferTarget.Write(true);
     bufferTarget.Write(false);
 
-    const std::array container0{ true, false, true, false, true };
-    const std::array container1{ false, false, true, false, true, true };
-    const std::array container2{ true, false, true, false, false, true, true };
-    const std::array container3{ true, false, true };
-    const std::array container4{ false, false, true, false, false, true };
-    const std::array container5{ true, false, true, false, false, true, false };
+    constexpr std::array container0{ true, false, true, false, true };
+    constexpr std::array container1{ false, false, true, false, true, true };
+    constexpr std::array container2{ true, false, true, false, false, true, true };
+    constexpr std::array container3{ true, false, true };
+    constexpr std::array container4{ false, false, true, false, false, true };
+    constexpr std::array container5{ true, false, true, false, false, true, false };
     const std::set container6{ true, false };
 
     bufferTarget.WriteBoolContainerWithNumber(container0);
@@ -236,15 +233,15 @@ void CoreTools::BufferSourceTesting::ReadIntTest()
     bufferTarget.Write(51);
     bufferTarget.Write(511);
 
-    const std::array container0{ 1, 2, 3, 4, 5 };
-    const std::array container1{ 6, 7, 8, 9, 1, 2 };
-    const std::array container2{ 3, 4, 5, 6, 7, 8, 9 };
-    const std::array container3{ 3, 4, 5 };
-    const std::array container4{ 3, 4, 3, 4, 5 };
+    constexpr std::array container0{ 1, 2, 3, 4, 5 };
+    constexpr std::array container1{ 6, 7, 8, 9, 1, 2 };
+    constexpr std::array container2{ 3, 4, 5, 6, 7, 8, 9 };
+    constexpr std::array container3{ 3, 4, 5 };
+    constexpr std::array container4{ 3, 4, 3, 4, 5 };
     const std::set container5{ 1, 2, 3, 4, 5 };
-    const std::array container6{ 3, 4, 3, 4, 5, 4, 5, 4, 5 };
-    const std::array container7{ 3, 4, 3, 4, 5, 4, 5, 4, 5, 3, 4, 3 };
-    const std::array container8{ 3, 4, 3, 4, 5, 4, 5, 4, 5, 3, 4, 3 };
+    constexpr std::array container6{ 3, 4, 3, 4, 5, 4, 5, 4, 5 };
+    constexpr std::array container7{ 3, 4, 3, 4, 5, 4, 5, 4, 5, 3, 4, 3 };
+    constexpr std::array container8{ 3, 4, 3, 4, 5, 4, 5, 4, 5, 3, 4, 3 };
 
     bufferTarget.WriteContainerWithNumber(container0);
     bufferTarget.WriteContainerWithoutNumber(container1);
@@ -346,15 +343,15 @@ void CoreTools::BufferSourceTesting::ReadEnumTest()
     bufferTarget.WriteEnum(BufferSourceTestingEnum::Nine);
     bufferTarget.WriteEnum(BufferSourceTestingEnum::Twenty);
 
-    const std::array container0{ BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty };
-    const std::array container1{ BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Nine };
-    const std::array container2{ BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Twenty };
-    const std::array container3{ BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Twenty };
-    const std::array container4{ BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Twenty };
+    constexpr std::array container0{ BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty };
+    constexpr std::array container1{ BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Nine };
+    constexpr std::array container2{ BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Twenty };
+    constexpr std::array container3{ BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Twenty };
+    constexpr std::array container4{ BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Twenty };
     const std::set container5{ BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty };
-    const std::array container6{ BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty };
-    const std::array container7{ BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty };
-    const std::array container8{ BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Twenty };
+    constexpr std::array container6{ BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty };
+    constexpr std::array container7{ BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty };
+    constexpr std::array container8{ BufferSourceTestingEnum::Nine, BufferSourceTestingEnum::Twenty, BufferSourceTestingEnum::Twenty };
 
     bufferTarget.WriteEnumContainerWithNumber(container0);
     bufferTarget.WriteEnumContainerWithoutNumber(container1);
@@ -459,33 +456,33 @@ void CoreTools::BufferSourceTesting::ReadAggregateTest()
     constexpr Mathematics::Vector4D color1{ 1.0, 2.0, 3.0, 4.0 };
     bufferTarget.WriteAggregate(color1);
 
-    const std::array container0{ Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
-                                 Mathematics::Vector4D{ 5.0, 6.0, 7.0, 8.0 },
-                                 Mathematics::Vector4D{ 9.0, 1.0, 2.0, 3.0 },
-                                 Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 },
-                                 Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 } };
-    const std::array container1{ Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
-                                 Mathematics::Vector4D{ 5.0, 6.0, 7.0, 8.0 } };
-    const std::array container2{ Mathematics::Vector4D{ 9.0, 1.0, 2.0, 3.0 },
-                                 Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 },
-                                 Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 } };
+    constexpr std::array container0{ Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
+                                     Mathematics::Vector4D{ 5.0, 6.0, 7.0, 8.0 },
+                                     Mathematics::Vector4D{ 9.0, 1.0, 2.0, 3.0 },
+                                     Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 },
+                                     Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 } };
+    constexpr std::array container1{ Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
+                                     Mathematics::Vector4D{ 5.0, 6.0, 7.0, 8.0 } };
+    constexpr std::array container2{ Mathematics::Vector4D{ 9.0, 1.0, 2.0, 3.0 },
+                                     Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 },
+                                     Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 } };
     const std::set container3{ Mathematics::Vector4D{ 9.0, 1.0, 2.0, 3.0 },
                                Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 },
                                Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 } };
-    const std::array container4{ Mathematics::Vector4D{ 9.0, 1.0, 2.0, 3.0 },
-                                 Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 },
-                                 Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
-                                 Mathematics::Vector4D{ 1.0, 21.0, 3.0, 4.0 } };
-    const std::array container5{ Mathematics::Vector4D{ 9.0, 1.0, 2.0, 3.0 },
-                                 Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 },
-                                 Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
-                                 Mathematics::Vector4D{ 1.0, 21.0, 3.0, 4.0 },
-                                 Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
-                                 Mathematics::Vector4D{ 1.0, 21.0, 3.0, 4.0 } };
-    const std::array container6{ Mathematics::Vector4D{ 9.0, 1.0, 2.0, 3.0 },
-                                 Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 },
-                                 Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
-                                 Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 } };
+    constexpr std::array container4{ Mathematics::Vector4D{ 9.0, 1.0, 2.0, 3.0 },
+                                     Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 },
+                                     Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
+                                     Mathematics::Vector4D{ 1.0, 21.0, 3.0, 4.0 } };
+    constexpr std::array container5{ Mathematics::Vector4D{ 9.0, 1.0, 2.0, 3.0 },
+                                     Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 },
+                                     Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
+                                     Mathematics::Vector4D{ 1.0, 21.0, 3.0, 4.0 },
+                                     Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
+                                     Mathematics::Vector4D{ 1.0, 21.0, 3.0, 4.0 } };
+    constexpr std::array container6{ Mathematics::Vector4D{ 9.0, 1.0, 2.0, 3.0 },
+                                     Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 },
+                                     Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
+                                     Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 } };
 
     bufferTarget.WriteAggregateContainerWithNumber(container0);
     bufferTarget.WriteAggregateContainerWithNumber(container1);

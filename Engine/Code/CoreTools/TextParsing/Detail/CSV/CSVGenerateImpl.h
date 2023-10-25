@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:03)
+///	版本：0.9.1.5 (2023/10/24 14:15)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_IMPL_H
@@ -13,6 +13,7 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/CharacterString/CodeMappingAnalysis.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
 #include "CoreTools/TextParsing/TextParsingInternalFwd.h"
 
@@ -22,11 +23,12 @@ namespace CoreTools
     {
     public:
         using ClassType = CSVGenerateImpl;
-        using String = System::String;
         using FactoryType = CSVGenerateFactory;
 
+        using String = System::String;
+
     public:
-        explicit CSVGenerateImpl(const CSVHead& csvHead) noexcept;
+        CSVGenerateImpl(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis) noexcept;
         virtual ~CSVGenerateImpl() noexcept = default;
         CSVGenerateImpl(const CSVGenerateImpl& rhs) noexcept = default;
         CSVGenerateImpl& operator=(const CSVGenerateImpl& rhs) noexcept = default;
@@ -35,9 +37,14 @@ namespace CoreTools
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        virtual void GenerateFile(const String& directory) const;
+        virtual void GenerateFile(const String& codeDirectory, const String& directory) const;
 
-    protected: 
+    protected:
+        using CSVDataTypeIndex = std::pair<CSVDataType, CSVDataType>;
+        using HeadContent = std::pair<CSVDataTypeIndex, System::StringView>;
+        using HeadContentContainer = std::vector<HeadContent>;
+
+    protected:
         NODISCARD static String GetOldContent(const String& fileName);
 
         NODISCARD String GetCSVClassName() const;
@@ -50,14 +57,22 @@ namespace CoreTools
 
         NODISCARD String GetKeyTypeDescribe() const;
 
+        NODISCARD CodeMappingAnalysis GetCodeMappingAnalysis() const noexcept;
+        NODISCARD String GetNameSpace() const;
+        NODISCARD static const HeadContentContainer& GetHeadContentContainer();
+
+        NODISCARD static String GetTemplateContent(const String& fileName);
+        NODISCARD String ReplaceTemplate(const String& content) const;
+
     private:
         NODISCARD virtual String GetSuffix() const = 0;
         NODISCARD virtual String GetFilePrefix() const = 0;
         NODISCARD virtual String GetFileSuffix() const = 0;
-        NODISCARD virtual String GetContent() const = 0;
+        NODISCARD virtual String GetContent(const String& codeDirectory) const = 0;
 
     private:
         CSVHead csvHead;
+        CodeMappingAnalysis codeMappingAnalysis;
     };
 }
 

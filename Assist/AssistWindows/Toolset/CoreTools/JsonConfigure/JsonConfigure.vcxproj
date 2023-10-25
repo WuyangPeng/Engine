@@ -311,26 +311,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\DllLib.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\JsonConfigureContainer.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\Monsters.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\Parts.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\Road.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\RunScenes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigureLib.h" />
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\DllLib.h" />
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\JsonConfigure.h" />
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\JsonConfigureContainer.h" />
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\JsonConfigureFwd.h" />
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\Monsters.h" />
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\MonstersDetail.h" />
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\Parts.h" />
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\PartsDetail.h" />
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\Road.h" />
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\RoadDetail.h" />
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\RunScenes.h" />
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\JsonConfigure\JsonConfigure\RunScenesDetail.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

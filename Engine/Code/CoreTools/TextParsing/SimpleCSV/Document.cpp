@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:07)
+///	版本：0.9.1.5 (2023/09/23 18:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "Document.h"
 #include "Detail/DocumentImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 CoreTools::SimpleCSV::Document::DocumentSharedPtr CoreTools::SimpleCSV::Document::Create(const std::string& docPath)
 {
@@ -42,13 +41,159 @@ CoreTools::SimpleCSV::Document::Document(DocumentCreate documentCreate, const st
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, Document)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Document, Save, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, SaveAs, std::string, void)
+void CoreTools::SimpleCSV::Document::Save()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Document, GetName, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, Document, GetWorkbook, CoreTools::SimpleCSV::Workbook)
+    return impl->Save();
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, Document, GetProperty, Property, std::string)
+void CoreTools::SimpleCSV::Document::SaveAs(const std::string& fileName)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SaveAs(fileName);
+}
+
+std::string CoreTools::SimpleCSV::Document::GetName() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetName();
+}
+
+CoreTools::SimpleCSV::Workbook CoreTools::SimpleCSV::Document::GetWorkbook() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetWorkbook();
+}
+
+std::string CoreTools::SimpleCSV::Document::GetProperty(Property prop) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetProperty(prop);
+}
+
+void CoreTools::SimpleCSV::Document::DeleteProperty(Property theProperty)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->DeleteProperty(theProperty);
+}
+
+std::string CoreTools::SimpleCSV::Document::ExtractXmlFromArchive(const std::string& path)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->ExtractXmlFromArchive(path);
+}
+
+void CoreTools::SimpleCSV::Document::ExecuteCommand(const CommandSetSheetName& command)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->ExecuteCommand(command);
+}
+
+void CoreTools::SimpleCSV::Document::ExecuteCommand(const CommandSetSheetIndex& command)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->ExecuteCommand(command);
+}
+
+void CoreTools::SimpleCSV::Document::ExecuteCommand(const CommandResetCalcChain& command)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->ExecuteCommand(command);
+}
+
+void CoreTools::SimpleCSV::Document::ExecuteCommand(const CommandAddSharedStrings& command)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->ExecuteCommand(command);
+}
+
+void CoreTools::SimpleCSV::Document::ExecuteCommand(const CommandAddWorksheet& command)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->ExecuteCommand(command);
+}
+
+void CoreTools::SimpleCSV::Document::ExecuteCommand(const CommandDeleteSheet& command)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->ExecuteCommand(command);
+}
+
+void CoreTools::SimpleCSV::Document::ExecuteCommand(const CommandCloneSheet& command)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->ExecuteCommand(command);
+}
+
+CoreTools::SimpleCSV::QuerySheetName CoreTools::SimpleCSV::Document::ExecuteQuery(const QuerySheetName& query) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->ExecuteQuery(query);
+}
+
+CoreTools::SimpleCSV::QuerySheetVisibility CoreTools::SimpleCSV::Document::ExecuteQuery(const QuerySheetVisibility& query) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->ExecuteQuery(query);
+}
+
+CoreTools::SimpleCSV::QuerySheetType CoreTools::SimpleCSV::Document::ExecuteQuery(const QuerySheetType& query) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->ExecuteQuery(query);
+}
+
+CoreTools::SimpleCSV::QuerySheetId CoreTools::SimpleCSV::Document::ExecuteQuery(const QuerySheetId& query) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->ExecuteQuery(query);
+}
+
+CoreTools::SimpleCSV::QuerySheetRelsId CoreTools::SimpleCSV::Document::ExecuteQuery(const QuerySheetRelsId& query) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->ExecuteQuery(query);
+}
+
+CoreTools::SimpleCSV::QuerySheetRelsTarget CoreTools::SimpleCSV::Document::ExecuteQuery(const QuerySheetRelsTarget& query) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->ExecuteQuery(query);
+}
+
+CoreTools::SimpleCSV::QuerySharedStrings CoreTools::SimpleCSV::Document::ExecuteQuery(const QuerySharedStrings& query) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->ExecuteQuery(query);
+}
+
+CoreTools::SimpleCSV::QueryXmlData CoreTools::SimpleCSV::Document::ExecuteQuery(const QueryXmlData& query) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->ExecuteQuery(query);
+}
 
 void CoreTools::SimpleCSV::Document::SetProperty(Property prop, const std::string& value)
 {
@@ -56,24 +201,3 @@ void CoreTools::SimpleCSV::Document::SetProperty(Property prop, const std::strin
 
     return impl->SetProperty(prop, value);
 }
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, Document, DeleteProperty, Property, void)
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteCommand, CommandSetSheetName, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteCommand, CommandSetSheetIndex, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteCommand, CommandResetCalcChain, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteCommand, CommandAddSharedStrings, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteCommand, CommandAddWorksheet, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteCommand, CommandDeleteSheet, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteCommand, CommandCloneSheet, void)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteQuery, QuerySheetName, CoreTools::SimpleCSV::QuerySheetName)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteQuery, QuerySheetVisibility, CoreTools::SimpleCSV::QuerySheetVisibility)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteQuery, QuerySheetType, CoreTools::SimpleCSV::QuerySheetType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteQuery, QuerySheetId, CoreTools::SimpleCSV::QuerySheetId)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteQuery, QuerySheetRelsId, CoreTools::SimpleCSV::QuerySheetRelsId)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteQuery, QuerySheetRelsTarget, CoreTools::SimpleCSV::QuerySheetRelsTarget)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteQuery, QuerySharedStrings, CoreTools::SimpleCSV::QuerySharedStrings)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteQuery, QueryXmlData, CoreTools::SimpleCSV::QueryXmlData)
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExtractXmlFromArchive, std::string, std::string)

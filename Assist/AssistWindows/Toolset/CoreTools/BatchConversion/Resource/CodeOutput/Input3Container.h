@@ -24,17 +24,21 @@ namespace CsvOutput
     {
     public:
         using ClassType = Input3Container;
+
         using ConstInput3BaseSharedPtr = std::shared_ptr<const Input3Base>;
         using Container = std::vector<ConstInput3BaseSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit Input3Container(const CoreTools::CSVContent& csvContent);
+        explicit Input3Container(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD ConstInput3BaseSharedPtr GetFirstInput3() const;
         NODISCARD ConstInput3BaseSharedPtr GetInput3(int key) const;
         NODISCARD Container GetContainer() const;
+
+        NODISCARD int GetContainerSize() const;
 
         template <typename Function>
         NODISCARD ConstInput3BaseSharedPtr GetFirstInput3(Function function) const;
@@ -43,7 +47,9 @@ namespace CsvOutput
         NODISCARD Container GetInput3(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
+        void Unique();
 
     private:
         Container input3;

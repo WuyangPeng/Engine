@@ -24,7 +24,7 @@ namespace AncientBooks
         using ClassType = Geographic;
         using ParentType = GeographicBase;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit Geographic(const CSVRow& csvRow);
@@ -36,6 +36,7 @@ namespace AncientBooks
         NODISCARD int GetId() const noexcept override;
 
         NODISCARD String GetName() const override;
+
 
     private:
         int id;  // Id

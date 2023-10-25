@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:05)
+///	版本：0.9.1.5 (2023/09/23 18:22)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -25,16 +25,65 @@ CoreTools::SimpleCSV::XmlFile::XmlFile(const XmlDataSharedPtr& xmlData)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, XmlFile)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, XmlFile, GetXmlData, std::string)
+std::string CoreTools::SimpleCSV::XmlFile::GetXmlData() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, XmlFile, SetXmlData, std::string, void)
+    return impl->GetXmlData();
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, XmlFile, GetRelationshipId, std::string)
+void CoreTools::SimpleCSV::XmlFile::SetXmlData(const std::string& data)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, XmlFile, GetParentDocument, CoreTools::SimpleCSV::XmlFile::DocumentSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, XmlFile, GetParentDocument, CoreTools::SimpleCSV::XmlFile::ConstDocumentSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, XmlFile, GetXmlDocument, CoreTools::SimpleCSV::XMLDocumentSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, XmlFile, GetXmlDocument, CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr)
+    return impl->SetXmlData(data);
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, XmlFile, GetSheetData, CoreTools::SimpleCSV::XMLNode)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, XmlFile, GetFirstChildColumns, CoreTools::SimpleCSV::XMLNode)
+std::string CoreTools::SimpleCSV::XmlFile::GetRelationshipId() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetRelationshipId();
+}
+
+CoreTools::SimpleCSV::XmlFile::DocumentSharedPtr CoreTools::SimpleCSV::XmlFile::GetParentDocument()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetParentDocument();
+}
+
+CoreTools::SimpleCSV::XmlFile::ConstDocumentSharedPtr CoreTools::SimpleCSV::XmlFile::GetParentDocument() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetParentDocument();
+}
+
+CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr CoreTools::SimpleCSV::XmlFile::GetXmlDocument() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetXmlDocument();
+}
+
+CoreTools::SimpleCSV::XMLDocumentSharedPtr CoreTools::SimpleCSV::XmlFile::GetXmlDocument()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->GetXmlDocument();
+}
+
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::XmlFile::GetSheetData() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetSheetData();
+}
+
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::XmlFile::GetFirstChildColumns() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFirstChildColumns();
+}

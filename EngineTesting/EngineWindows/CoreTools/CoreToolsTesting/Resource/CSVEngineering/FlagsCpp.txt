@@ -1,0 +1,63 @@
+$Copyright$
+
+#include "$ClassName$.h"
+#include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+
+#include <map>
+
+using namespace std::literals;
+
+$Namespace$::$ClassName$ $Namespace$::StringCast$ClassName$(const System::String& describe)
+{
+    static std::map<System::String, $ClassName$> typeDescribe{ $ClassMemberType$ };   
+
+    if (const auto iter = typeDescribe.find(describe);
+        iter != typeDescribe.cend())
+    {
+        return iter->second;
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到对应的类型。"s))
+    }
+}
+
+System::String $Namespace$::EnumCastString($ClassName$ type)
+{
+    static std::map<$ClassName$, System::String> typeDescribe{ $ClassMemberName$ };    
+
+    if (const auto iter = typeDescribe.find(type);
+        iter != typeDescribe.cend())
+    {
+        return iter->second;
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到对应的类型。"s))
+    }
+}
+
+System::String $Namespace$::GetEnumDescribe($ClassName$ type)
+{
+    static std::map<$ClassName$, System::String> typeDescribe{ $ClassMemberNote$ };    
+
+    if (const auto iter = typeDescribe.find(type);
+        iter != typeDescribe.cend())
+    {
+        return iter->second;
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到对应的类型。"s))
+    }
+}
+
+template <>
+$Namespace$::$ClassName$ CoreTools::CSVRow::StringCastEnum<$Namespace$::$ClassName$>(const String& describe) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return $Namespace$::StringCast$ClassName$(describe);
+}
+

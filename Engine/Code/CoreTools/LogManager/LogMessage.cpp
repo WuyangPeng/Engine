@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/28 09:41)
+///	版本：0.9.1.5 (2023/09/21 10:02)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -33,16 +33,68 @@ CoreTools::LogMessage::LogMessage(const LogFileName& fileName, LogLevel level, L
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, LogMessage)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, LogMessage, GetMessageDescribe, System::String)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, LogMessage, GetLogLevel, CoreTools::LogLevel)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, LogMessage, GetLogFilterType, CoreTools::LogFilter)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, LogMessage, GetMessageSize, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, LogMessage, GetFunctionDescribed, CoreTools::FunctionDescribed)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, LogMessage, IsDisabled, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, LogMessage, GetFileName, System::String)
+CoreTools::LogMessage::String CoreTools::LogMessage::GetMessageDescribe() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, LogMessage, HasAlwaysConsole, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, LogMessage, HasTriggerAssert, bool)
+    return impl->GetMessageDescribe();
+}
+
+CoreTools::LogLevel CoreTools::LogMessage::GetLogLevel() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetLogLevel();
+}
+
+CoreTools::LogFilter CoreTools::LogMessage::GetLogFilterType() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetLogFilterType();
+}
+
+int CoreTools::LogMessage::GetMessageSize() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetMessageSize();
+}
+
+CoreTools::FunctionDescribed CoreTools::LogMessage::GetFunctionDescribed() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetFunctionDescribed();
+}
+
+bool CoreTools::LogMessage::IsDisabled() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->IsDisabled();
+}
+
+CoreTools::LogMessage::String CoreTools::LogMessage::GetFileName() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetFileName();
+}
+
+bool CoreTools::LogMessage::HasAlwaysConsole() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->HasAlwaysConsole();
+}
+
+bool CoreTools::LogMessage::HasTriggerAssert() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->HasTriggerAssert();
+}
 
 CoreTools::LogMessage& CoreTools::LogMessage::operator<<(char value)
 {

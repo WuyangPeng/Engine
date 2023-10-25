@@ -177,6 +177,10 @@
     <PostBuildEvent>
       <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/CoreToolsD.dll" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CodeInput" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <ClCompile>
@@ -188,6 +192,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CodeInput" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -206,6 +214,10 @@
     <PostBuildEvent>
       <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/CoreTools.dll" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CodeInput" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <ClCompile>
@@ -221,6 +233,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CodeInput" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -235,6 +251,10 @@
     <PostBuildEvent>
       <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/CoreToolsD.dll" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CodeInput" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <ClCompile>
@@ -246,6 +266,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CodeInput" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -264,6 +288,10 @@
     <PostBuildEvent>
       <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/CoreTools.dll" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CodeInput" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <ClCompile>
@@ -279,6 +307,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CodeInput" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\BatchConversion\Helper.cpp" />
@@ -314,6 +346,21 @@
     <ClInclude Include="Resource\CodeOutput\Input3ContainerDetail.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Resource\CodeInput\CSVEngineering.txt" />
+    <Text Include="Resource\CodeInput\CSVEngineeringFwd.txt" />
+    <Text Include="Resource\CodeInput\EngineeringContainerCpp.txt" />
+    <Text Include="Resource\CodeInput\EngineeringContainerH.txt" />
+    <Text Include="Resource\CodeInput\EntityBaseCpp.txt" />
+    <Text Include="Resource\CodeInput\EntityBaseH.txt" />
+    <Text Include="Resource\CodeInput\EntityContainerCpp.txt" />
+    <Text Include="Resource\CodeInput\EntityContainerDetailH.txt" />
+    <Text Include="Resource\CodeInput\EntityContainerH.txt" />
+    <Text Include="Resource\CodeInput\EntityCpp.txt" />
+    <Text Include="Resource\CodeInput\EntityH.txt" />
+    <Text Include="Resource\CodeInput\EntitySubclassCpp.txt" />
+    <Text Include="Resource\CodeInput\EntitySubclassH.txt" />
+    <Text Include="Resource\CodeInput\FlagsCpp.txt" />
+    <Text Include="Resource\CodeInput\FlagsH.txt" />
     <Text Include="Resource\ReadMe.md" />
     <Text Include="Resource\Schedule.md" />
     <Text Include="Resource\Todo\Level 0.txt" />
@@ -331,6 +378,7 @@
     <None Include="Configuration\BatchConversion.json" />
     <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\Log.json" />
+    <None Include="Resource\CodeInput\CSVEngineering.json" />
     <None Include="Resource\CsvOutput\Input1.csv" />
     <None Include="Resource\CsvOutput\Input2.csv" />
     <None Include="Resource\CsvOutput\Input3.csv" />

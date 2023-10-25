@@ -5,11 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/11 19:41)
+///	版本：0.9.1.5 (2023/10/24 20:21)
 
 #ifndef CORE_TOOLS_TESTING_C_FILE_MANAGER_TESTING_H
 #define CORE_TOOLS_TESTING_C_FILE_MANAGER_TESTING_H
 
+#include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -19,6 +20,7 @@ namespace CoreTools
     public:
         using ClassType = CFileManagerTesting;
         using ParentType = UnitTest;
+
         using String = System::String;
 
     public:

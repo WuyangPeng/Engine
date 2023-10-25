@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/11 18:06)
+///	版本：0.9.1.5 (2023/10/25 11:30)
 
 #include "MinHeapTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -32,14 +32,13 @@ void CoreTools::MinHeapTesting::DoRunUnitTest()
 void CoreTools::MinHeapTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(IntegerTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(FloatTest);
 }
 
 void CoreTools::MinHeapTesting::IntegerTest()
 {
     MinHeap<int> minHeap{ 10 };
 
-    ASSERT_EQUAL(minHeap.GetMaxElements(), 10); 
+    ASSERT_EQUAL(minHeap.GetMaxElements(), 10);
     ASSERT_EQUAL(minHeap.GetNumElements(), 0);
 
     ASSERT_EQUAL(minHeap.Insert(2, 3), 0);
@@ -54,8 +53,4 @@ void CoreTools::MinHeapTesting::IntegerTest()
     ASSERT_EQUAL(minHeapRecord.GetWeight(), 5);
 
     ASSERT_EQUAL(minHeap.GetNumElements(), 0);
-}
-
-void CoreTools::MinHeapTesting::FloatTest() noexcept
-{
 }

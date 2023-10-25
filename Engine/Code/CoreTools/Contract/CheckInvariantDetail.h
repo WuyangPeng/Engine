@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/22 14:39)
+///	版本：0.9.1.5 (2023/09/23 09:43)
 
 #ifndef CORE_TOOLS_CONTRACT_CHECK_INVARIANT_DETAIL_H
 #define CORE_TOOLS_CONTRACT_CHECK_INVARIANT_DETAIL_H
@@ -37,7 +37,6 @@ CoreTools::CheckInvariant<T>::~CheckInvariant() noexcept
     }
 }
 
-// private
 template <typename T>
 void CoreTools::CheckInvariant<T>::CheckIsValid(std::string_view failLocationDescribe) const
 {

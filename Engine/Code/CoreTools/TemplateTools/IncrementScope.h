@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 16:07)
+///	版本：0.9.1.5 (2023/09/20 14:46)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_INCREMENT_SCOPE_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_INCREMENT_SCOPE_H
@@ -17,14 +17,15 @@
 
 namespace CoreTools
 {
-    template <typename T, typename Aquire = SimpleIncrementer<T>, typename Release = SimpleDecrementer<T>>
+    template <typename T, typename Acquire = SimpleIncrementer<T>, typename Release = SimpleDecrementer<T>>
     class IncrementScope final
     {
     public:
         using ValueType = T;
-        using AquireType = Aquire;
+        using AcquireType = Acquire;
         using ReleaseType = Release;
-        using ClassType = IncrementScope<T, Aquire, Release>;
+        using ClassType = IncrementScope<T, Acquire, Release>;
+
         using Reference = ValueType&;
 
     public:

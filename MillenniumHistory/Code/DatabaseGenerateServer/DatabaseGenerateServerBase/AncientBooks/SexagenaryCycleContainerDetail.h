@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-AncientBooks::SexagenaryCycleContainer::ConstSexagenaryCycleBaseSharedPtr AncientBooks::SexagenaryCycleContainer::GetFirstSexagenaryCycle(Function function) const
+AncientBooks::SexagenaryCycleContainer::ConstSexagenaryCycleSharedPtr AncientBooks::SexagenaryCycleContainer::GetFirstSexagenaryCycle(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

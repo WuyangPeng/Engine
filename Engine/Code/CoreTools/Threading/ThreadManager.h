@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 16:38)
+///	版本：0.9.1.5 (2023/09/20 14:28)
 
 #ifndef CORE_TOOLS_THREADING_THREAD_MANAGER_H
 #define CORE_TOOLS_THREADING_THREAD_MANAGER_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "System/Threading/Using/ThreadUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 
@@ -24,6 +23,7 @@ namespace CoreTools
     {
     public:
         NON_COPY_TYPE_DECLARE(ThreadManager);
+
         using ThreadSize = System::WindowsSize;
 
     public:

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.6 (2023/04/11 17:32)
+///	版本：0.9.1.5 (2023/09/23 09:27)
 
 #ifndef CORE_TOOLS_DATA_TYPE_TUPLE_H
 #define CORE_TOOLS_DATA_TYPE_TUPLE_H
@@ -33,6 +33,7 @@ namespace CoreTools
         static constexpr auto tupleDimension = Dimension;
 
         using ClassType = Tuple<Dimension, Type>;
+
         using ParamType = typename boost::call_traits<Type>::param_type;
         using ArrayType = std::array<Type, Dimension>;
         using ArrayTypeConstIter = typename ArrayType::const_iterator;
@@ -63,13 +64,13 @@ namespace CoreTools
     // bool operator== (const T&,const T&);
     // bool operator< (const T&,const T&);
 
-    template <int32_t Dimension, typename Type>
+    template <int Dimension, typename Type>
     NODISCARD bool operator==(const Tuple<Dimension, Type>& lhs, const Tuple<Dimension, Type>& rhs);
 
-    template <int32_t Dimension, typename Type>
+    template <int Dimension, typename Type>
     NODISCARD bool operator<(const Tuple<Dimension, Type>& lhs, const Tuple<Dimension, Type>& rhs);
 
-    template <int32_t Dimension, typename Type>
+    template <int Dimension, typename Type>
     std::ostream& operator<<(std::ostream& os, const Tuple<Dimension, Type>& tuple);
 }
 

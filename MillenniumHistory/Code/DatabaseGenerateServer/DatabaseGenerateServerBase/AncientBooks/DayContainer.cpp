@@ -40,9 +40,9 @@ void AncientBooks::DayContainer::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         day.emplace_back(std::make_shared<Day>(csvRow));
     }
@@ -77,14 +77,14 @@ void AncientBooks::DayContainer::Unique()
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, DayContainer)
 
-AncientBooks::DayContainer::ConstDayBaseSharedPtr AncientBooks::DayContainer::GetFirstDay() const
+AncientBooks::DayContainer::ConstDaySharedPtr AncientBooks::DayContainer::GetFirstDay() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return day.at(0);
 }
 
-AncientBooks::DayContainer::ConstDayBaseSharedPtr AncientBooks::DayContainer::GetDay(int key) const
+AncientBooks::DayContainer::ConstDaySharedPtr AncientBooks::DayContainer::GetDay(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

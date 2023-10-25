@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/12 14:57)
+///	版本：0.9.1.5 (2023/10/25 11:25)
 
 #include "LogAsynchronousTesting.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
@@ -60,7 +60,7 @@ void CoreTools::LogAsynchronousTesting::MainTest()
     LOG_ASYNCHRONOUS_SINGLETON.Stop();
     LOG_ASYNCHRONOUS_SINGLETON.Run();
 
-    ASSERT_NOT_THROW_EXCEPTION_0(FileContentTest); 
+    ASSERT_NOT_THROW_EXCEPTION_0(FileContentTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DeleteFileTest);
 
     ASSERT_NOT_THROW_EXCEPTION_0(WriteMessageToDefaultFileTest);

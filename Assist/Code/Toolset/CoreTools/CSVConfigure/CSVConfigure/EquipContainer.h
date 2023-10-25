@@ -25,8 +25,8 @@ namespace CSVConfigure
     public:
         using ClassType = EquipContainer;
 
-        using ConstEquipBaseSharedPtr = std::shared_ptr<const EquipBase>;
-        using Container = std::vector<ConstEquipBaseSharedPtr>;
+        using ConstEquipSharedPtr = std::shared_ptr<const EquipMappingType>;
+        using Container = std::vector<ConstEquipSharedPtr>;
         using CSVContent = CoreTools::CSVContent;
 
     public:
@@ -34,14 +34,14 @@ namespace CSVConfigure
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConstEquipBaseSharedPtr GetFirstEquip(int key) const;
+        NODISCARD ConstEquipSharedPtr GetFirstEquip(int key) const;
         NODISCARD Container GetEquip(int key) const;
         NODISCARD Container GetContainer() const;
 
         NODISCARD int GetContainerSize() const;
 
         template <typename Function>
-        NODISCARD ConstEquipBaseSharedPtr GetFirstEquip(Function function) const;
+        NODISCARD ConstEquipSharedPtr GetFirstEquip(Function function) const;
 
         template <typename Function>
         NODISCARD Container GetEquip(Function function) const;

@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-AncientBooks::YearContainer::ConstYearBaseSharedPtr AncientBooks::YearContainer::GetFirstYear(Function function) const
+AncientBooks::YearContainer::ConstYearSharedPtr AncientBooks::YearContainer::GetFirstYear(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
