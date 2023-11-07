@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:46)
+///	版本：0.9.1.6 (2023/10/27 09:47)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT2_ROOT_ACHIEVE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT2_ROOT_ACHIEVE_H
@@ -50,7 +50,7 @@ Real Mathematics::Bisect2Root<Real>::GetXRoot() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("方程是无解的！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("方程是无解的！"s))
     }
 }
 
@@ -65,7 +65,7 @@ Real Mathematics::Bisect2Root<Real>::GetYRoot() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("方程是无解的！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("方程是无解的！"s))
     }
 }
 

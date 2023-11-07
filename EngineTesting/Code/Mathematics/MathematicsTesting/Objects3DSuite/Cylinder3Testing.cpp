@@ -43,8 +43,8 @@ void Mathematics::Cylinder3Testing::MainTest()
 void Mathematics::Cylinder3Testing::CylinderTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0{ 0.0, 100.0 };
-    const std::uniform_real<double> randomDistribution1(0.0, MathD::GetHalfPI());
+    std::uniform_real<double> randomDistribution0{ 0.0, 100.0 };
+    std::uniform_real<double> randomDistribution1(0.0, MathD::GetHalfPI());
 
     const auto aTestLoopCount = GetTestLoopCount();
 

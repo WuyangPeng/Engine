@@ -46,11 +46,11 @@ void Mathematics::BandedMatrixSolveTesting::MainTest()
 void Mathematics::BandedMatrixSolveTesting::ConstructionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> integerRandomDistribution0{ 2, 20 };
+    std::uniform_int<> integerRandomDistribution0{ 2, 20 };
 
     const int size = integerRandomDistribution0(generator);
 
-    const std::uniform_int<> integerRandomDistribution1{ 1, size };
+    std::uniform_int<> integerRandomDistribution1{ 1, size };
 
     const int lowerBoundNumber = integerRandomDistribution1(generator);
     const int upperBoundNumber = integerRandomDistribution1(generator);
@@ -291,14 +291,14 @@ void Mathematics::BandedMatrixSolveTesting::ConstructionTest()
 void Mathematics::BandedMatrixSolveTesting::SolveTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> integerRandomDistribution0{ 2, 20 };
-    const std::uniform_real<> doubleRandomDistribution{ 1.0, 3.0 };
+    std::uniform_int<> integerRandomDistribution0{ 2, 20 };
+    std::uniform_real<> doubleRandomDistribution{ 1.0, 3.0 };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         const auto size = integerRandomDistribution0(generator);
 
-        const std::uniform_int<> integerRandomDistribution1(1, size - 1);
+        std::uniform_int<> integerRandomDistribution1(1, size - 1);
 
         const auto boundNumber = integerRandomDistribution1(generator);
 

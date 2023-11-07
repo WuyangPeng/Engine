@@ -35,7 +35,7 @@ namespace CoreTools
         // 并以“/”结束输入“目录”的值。 插入/删除函数返回“真”当且仅当操作成功。
         NODISCARD int GetNumDirectories() const;
         NODISCARD bool InsertDirectory(const String& directory);
-        NODISCARD bool EraseDirectory(const String& directory);
+        NODISCARD bool EraseDirectory(const String& directory) noexcept;
         void EraseAllDirectories() noexcept;
 
         // GetPath*函数搜索目录列表，假设它满足所要求的条件，它返回完全修饰的文件名，如果条件不具备，它抛出一个异常。

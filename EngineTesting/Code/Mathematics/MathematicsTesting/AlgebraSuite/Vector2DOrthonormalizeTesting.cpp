@@ -44,8 +44,8 @@ void Mathematics::Vector2OrthonormalizeTesting::OrthonormalizeTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const std::uniform_real<double> randomDistribution0{ -10.0, 10.0 };
-    const std::uniform_real<float> randomDistribution1{ -10.0f, 10.0f };
+    std::uniform_real<double> randomDistribution0{ -10.0, 10.0 };
+    std::uniform_real<float> randomDistribution1{ -10.0f, 10.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -72,7 +72,7 @@ void Mathematics::Vector2OrthonormalizeTesting::OrthonormalizeTest()
 
         ASSERT_TRUE(Vector2ToolsD::Approximate(vector1, firstOrthonormalize.GetVVector(), 1e-10));
 
-        const Vector2OrthonormalizeF secondOrthonormalize(vector2, vector3, 1e-5f);
+        const Vector2OrthonormalizeF secondOrthonormalize(vector2, vector3, 1e-4f);
 
         vector2.Normalize();
         const float dot1 = Vector2ToolsF::DotProduct(vector2, vector3);

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:30)
+///	版本：0.9.1.6 (2023/10/28 14:26)
 
 #ifndef MATHEMATICS_INTERSECTION_TEST_TEST_INTERSECTOR_LINE3_PLANE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_TEST_TEST_INTERSECTOR_LINE3_PLANE3_DETAIL_H
@@ -54,20 +54,18 @@ Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorLine3Plane3<Real>::G
     return plane;
 }
 
-// private
 template <typename Real>
 void Mathematics::StaticTestIntersectorLine3Plane3<Real>::Test() noexcept
 {
-    const auto ddn = Vector3Tools::DotProduct(line.GetDirection(), plane.GetNormal());
-
-    if (Math::GetZeroTolerance() < Math::FAbs(ddn))
+    if (const auto ddn = Vector3Tools::DotProduct(line.GetDirection(), plane.GetNormal());
+        Math::GetZeroTolerance() < Math::FAbs(ddn))
     {
         this->SetIntersectionType(IntersectionType::Point);
         return;
     }
 
-    const auto signedDistance = plane.DistanceTo(line.GetOrigin());
-    if (Math::FAbs(signedDistance) <= Math::GetZeroTolerance())
+    if (const auto signedDistance = plane.DistanceTo(line.GetOrigin());
+        Math::FAbs(signedDistance) <= Math::GetZeroTolerance())
     {
         this->SetIntersectionType(IntersectionType::Line);
         return;

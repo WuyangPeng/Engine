@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:36)
+///	版本：0.9.1.6 (2023/10/27 14:16)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT3_POWERS_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT3_POWERS_DETAIL_H
@@ -29,7 +29,6 @@ Mathematics::PolynomialFit3Powers<Real>::PolynomialFit3Powers(const Samples& xSa
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialFit3Powers<Real>::Init(const Samples& xSamples, const Samples& ySamples, const Samples& wSamples, bool isRepackage)
 {
@@ -59,7 +58,6 @@ void Mathematics::PolynomialFit3Powers<Real>::Init(const Samples& xSamples, cons
     DoLeastSquaresFit(xTargetSamples, yTargetSamples, wTargetSamples);
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialFit3Powers<Real>::InitializePowers()
 {
@@ -67,13 +65,12 @@ void Mathematics::PolynomialFit3Powers<Real>::InitializePowers()
     // x和y的幂计算可为拟合的多项式的评定的幂。
     for (auto i = 0; i < 2; ++i)
     {
-        auto maxPowerConstIter = std::max_element(powers.begin(), powers.end(), CoreTools::TupleLess<2, int>(i));
+        const auto maxPowerConstIter = std::ranges::max_element(powers, CoreTools::TupleLess<2, int>(i));
 
         powersData.SetMaxPower(i, (*maxPowerConstIter)[i]);
     }
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialFit3Powers<Real>::Repackage(const Samples& xSourceSamples,
                                                         const Samples& ySourceSamples,
@@ -91,7 +88,6 @@ void Mathematics::PolynomialFit3Powers<Real>::Repackage(const Samples& xSourceSa
     }
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialFit3Powers<Real>::TransformToUnit(const Samples& xSourceSamples,
                                                               const Samples& ySourceSamples,
@@ -106,7 +102,6 @@ void Mathematics::PolynomialFit3Powers<Real>::TransformToUnit(const Samples& xSo
     TransformToUnit(wSourceSamples, wTargetSamples, 2);
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialFit3Powers<Real>::TransformToUnit(const Samples& sourceSamples, Samples& targetSamples, int index)
 {
@@ -122,7 +117,6 @@ void Mathematics::PolynomialFit3Powers<Real>::TransformToUnit(const Samples& sou
     }
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialFit3Powers<Real>::DoLeastSquaresFit(const Samples& xTargetSamples, const Samples& yTargetSamples, const Samples& wTargetSamples)
 {
@@ -169,13 +163,13 @@ void Mathematics::PolynomialFit3Powers<Real>::DoLeastSquaresFit(const Samples& x
         for (auto row = 0; row < numPowers; ++row)
         {
             // 更新对称矩阵的上三角部分。
-            for (auto colomn = row; colomn < numPowers; ++colomn)
+            for (auto column = row; column < numPowers; ++column)
             {
-                auto index0 = powers.at(row)[0] + powers.at(colomn)[0];
+                auto index0 = powers.at(row)[0] + powers.at(column)[0];
                 auto xp = xPowers.at(index0);
-                auto index1 = powers.at(row)[1] + powers.at(colomn)[1];
+                auto index1 = powers.at(row)[1] + powers.at(column)[1];
                 auto yp = yPowers.at(index1);
-                matrix(row, colomn) += xp * yp;
+                matrix(row, column) += xp * yp;
             }
 
             // 更新系统在右手坐标系。

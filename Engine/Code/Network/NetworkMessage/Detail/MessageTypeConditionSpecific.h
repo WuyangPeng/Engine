@@ -34,7 +34,7 @@ namespace Network
     public:
         NODISCARD bool IsVersionsConform(int version) const override;
         NODISCARD int GetMinVersion() const noexcept override;
-        NODISCARD int GetMaxVersion() const override;
+        NODISCARD int GetMaxVersion() const noexcept override;
 
     private:
         VersionType specificVersion;

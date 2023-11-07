@@ -59,7 +59,7 @@ int Rendering::Polysegment::GetMaxNumSegments() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto numVertices = GetConstVertexBuffer()->GetNumElements();
+    const auto numVertices = GetConstVertexBuffer()->GetNumElements();
     return contiguous ? numVertices - 1 : numVertices / 2;
 }
 
@@ -67,7 +67,7 @@ void Rendering::Polysegment::SetNumSegments(int aNumSegments) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    auto numVertices = GetConstVertexBuffer()->GetNumElements();
+    const auto numVertices = GetConstVertexBuffer()->GetNumElements();
     if (contiguous)
     {
         const auto numVerticesMinus1 = numVertices - 1;

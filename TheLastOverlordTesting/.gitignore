@@ -1,4 +1,5 @@
 *.aps
+*.bin
 *.config
 *.cso
 *.db
@@ -28,6 +29,7 @@
 *.tlog
 *.tmp
 *.user
+*.vsidx
 
 CodeAnalysisResultManifest.txt
 Doxygen/html/*

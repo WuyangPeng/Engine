@@ -10,6 +10,7 @@
 #ifndef SYSTEM_TESTING_DYNAMIC_LINK_SUITE_FREE_LIBRARY_TESTING_H
 #define SYSTEM_TESTING_DYNAMIC_LINK_SUITE_FREE_LIBRARY_TESTING_H
 
+#include "System/DynamicLink/Using/LoadLibraryUsing.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace System

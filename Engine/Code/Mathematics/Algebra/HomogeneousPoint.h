@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 15:39)
+///	版本：0.9.1.6 (2023/10/26 14:43)
 
 #ifndef MATHEMATICS_ALGEBRA_HOMOGENEOUS_POINT_H
 #define MATHEMATICS_ALGEBRA_HOMOGENEOUS_POINT_H
@@ -17,7 +17,6 @@
 #include "Mathematics/Base/MathDetail.h"
 
 #include <array>
-#include <type_traits>
 #include <vector>
 
 // 当齐次点存储的值为浮点数时，比较两点相等，
@@ -31,6 +30,7 @@ namespace Mathematics
     {
     public:
         using ClassType = HomogeneousPoint<T>;
+
         using ContainerType = std::vector<ClassType>;
 
     public:

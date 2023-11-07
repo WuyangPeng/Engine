@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 15:48)
+///	版本：0.9.1.6 (2023/10/26 17:10)
 
 #ifndef MATHEMATICS_OBJECTS_3D_CYLINDER3_ACHIEVE_H
 #define MATHEMATICS_OBJECTS_3D_CYLINDER3_ACHIEVE_H
@@ -13,7 +13,6 @@
 #include "Cylinder3.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename Real>
 Mathematics::Cylinder3<Real>::Cylinder3(const Line3& axis, Real radius, Real height) noexcept

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:30)
+///	版本：0.9.1.6 (2023/10/27 13:42)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -16,7 +16,6 @@
 #include "EquationSecondary.h"
 #include "EquationThrice.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 Mathematics::EquationFactory::EquationImplSharedPtr Mathematics::EquationFactory::Create(double constant, double once, double secondary, double thrice, double quartic, double epsilon)
 {

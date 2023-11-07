@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 15:16)
+///	版本：0.9.1.6 (2023/10/26 16:39)
 
 #ifndef MATHEMATICS_OBJECTS_2D_TRIANGLE2_H
 #define MATHEMATICS_OBJECTS_2D_TRIANGLE2_H
@@ -17,7 +17,6 @@
 #include "Mathematics/Algebra/Vector2Tools.h"
 #include "Mathematics/Base/MathDetail.h"
 
-#include <type_traits>
 #include <vector>
 
 namespace Mathematics

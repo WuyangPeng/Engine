@@ -44,8 +44,8 @@ void Mathematics::BandedMatrixInvertTesting::MainTest()
 void Mathematics::BandedMatrixInvertTesting::BandedTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const std::uniform_int<> integerRandomDistribution(4, 10);
+    std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    std::uniform_int<> integerRandomDistribution(4, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

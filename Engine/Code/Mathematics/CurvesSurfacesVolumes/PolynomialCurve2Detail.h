@@ -66,7 +66,7 @@ Mathematics::Polynomial<Real> Mathematics::PolynomialCurve2<Real>::GetYPolynomia
 }
 
 template <typename Real>
-Mathematics::Vector2<Real> Mathematics::PolynomialCurve2<Real>::GetPosition(Real t) const
+Mathematics::Vector2<Real> Mathematics::PolynomialCurve2<Real>::GetPosition(Real t) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -74,7 +74,7 @@ Mathematics::Vector2<Real> Mathematics::PolynomialCurve2<Real>::GetPosition(Real
 }
 
 template <typename Real>
-Mathematics::Vector2<Real> Mathematics::PolynomialCurve2<Real>::GetFirstDerivative(Real t) const
+Mathematics::Vector2<Real> Mathematics::PolynomialCurve2<Real>::GetFirstDerivative(Real t) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -82,7 +82,7 @@ Mathematics::Vector2<Real> Mathematics::PolynomialCurve2<Real>::GetFirstDerivati
 }
 
 template <typename Real>
-Mathematics::Vector2<Real> Mathematics::PolynomialCurve2<Real>::GetSecondDerivative(Real t) const
+Mathematics::Vector2<Real> Mathematics::PolynomialCurve2<Real>::GetSecondDerivative(Real t) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -90,7 +90,7 @@ Mathematics::Vector2<Real> Mathematics::PolynomialCurve2<Real>::GetSecondDerivat
 }
 
 template <typename Real>
-Mathematics::Vector2<Real> Mathematics::PolynomialCurve2<Real>::GetThirdDerivative(Real t) const
+Mathematics::Vector2<Real> Mathematics::PolynomialCurve2<Real>::GetThirdDerivative(Real t) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 15:21)
+///	版本：0.9.1.6 (2023/10/26 17:00)
 
 #ifndef MATHEMATICS_OBJECTS_2D_SEGMENT2_ACHIEVE_H
 #define MATHEMATICS_OBJECTS_2D_SEGMENT2_ACHIEVE_H
@@ -13,7 +13,6 @@
 #include "Segment2.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename Real>
 Mathematics::Segment2<Real>::Segment2(const Vector2& beginPoint, const Vector2& endPoint, Real epsilon)

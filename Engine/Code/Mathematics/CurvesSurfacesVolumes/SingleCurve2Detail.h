@@ -14,6 +14,7 @@
 
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_SINGLE_CURVE2_DETAIL)
 
+    #include "CoreTools/Helper/ExceptionMacro.h"
     #include "Mathematics/NumericalAnalysis/RombergIntegralDetail.h"
 
 template <typename Real>

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 14:43)
+///	版本：0.9.1.6 (2023/10/26 10:17)
 
 #ifndef MATHEMATICS_ALGEBRA_A_VECTOR_DETAIL_H
 #define MATHEMATICS_ALGEBRA_A_VECTOR_DETAIL_H
@@ -54,7 +54,7 @@ Mathematics::AVector<T> Mathematics::UnitCross(const AVector<T>& lhs, const AVec
 }
 
 template <typename T>
-const Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const AVector<T>& uVector, const AVector<T>& vVector, const AVector<T>& wVector, T epsilon)
+Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const AVector<T>& uVector, const AVector<T>& vVector, const AVector<T>& wVector, T epsilon)
 {
     /// 如果输入向量v0、v1和v2，则Gram-Schmidt正交向量产生矢量u0、u1和u2如下，
     ///   u0 = v0 / |v0|
@@ -67,7 +67,7 @@ const Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const AV
 }
 
 template <typename T>
-const Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const std::vector<AVector<T>>& vectors, T epsilon)
+Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const std::vector<AVector<T>>& vectors, T epsilon)
 {
     MATHEMATICS_ASSERTION_1(vectors.size() == 3, "vectors的大小错误！");
 
@@ -75,7 +75,7 @@ const Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const st
 }
 
 template <typename T>
-const Mathematics::AVectorOrthonormalBasis<T> Mathematics::GenerateOrthonormalBasis(const AVector<T>& nonzeroVector, T epsilon)
+Mathematics::AVectorOrthonormalBasis<T> Mathematics::GenerateOrthonormalBasis(const AVector<T>& nonzeroVector, T epsilon)
 {
     MATHEMATICS_ASSERTION_1(!nonzeroVector.IsZero(epsilon), "输入必须是非零向量！");
 
@@ -83,7 +83,7 @@ const Mathematics::AVectorOrthonormalBasis<T> Mathematics::GenerateOrthonormalBa
 }
 
 template <typename T>
-const Mathematics::AVectorOrthonormalBasis<T> Mathematics::GenerateComplementBasis(const AVector<T>& unitVector, T epsilon)
+Mathematics::AVectorOrthonormalBasis<T> Mathematics::GenerateComplementBasis(const AVector<T>& unitVector, T epsilon)
 {
     MATHEMATICS_ASSERTION_3(unitVector.IsNormalize(epsilon), "输入必须是单位向量！");
 

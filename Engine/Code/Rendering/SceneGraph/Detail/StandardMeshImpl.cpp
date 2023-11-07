@@ -149,11 +149,10 @@ const Rendering::TransformF& Rendering::StandardMeshImpl::GetTransform() const n
     return transform;
 }
 
-Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Rectangle(int xSamples, int ySamples, float xExtent, float yExtent) const
+Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Rectangle(int xSamples, int ySamples, MAYBE_UNUSED float xExtent, MAYBE_UNUSED float yExtent) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const auto numVertices = xSamples * ySamples;
     const auto numTriangles = 2 * (xSamples - 1) * (ySamples - 1);
     const auto numIndices = 3 * numTriangles;
     const auto stride = vertexFormat->GetStride();
@@ -168,12 +167,11 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Rectangle(int xSa
     auto totalIndex = 0;
     for (auto yIndex = 0; yIndex < ySamples; ++yIndex)
     {
-        const auto vTextureCoord = yIndex * ySamplesInvertor;
-        const auto yCoordinate = (2.0f * vTextureCoord - 1.0f) * yExtent;
+        MAYBE_UNUSED const auto vTextureCoord = yIndex * ySamplesInvertor;
+
         for (auto xIndex = 0; xIndex < xSamples; ++xIndex)
         {
-            const auto uTextureCoord = xIndex * xSamplesInvertor;
-            const auto xCoordinate = (2.0f * uTextureCoord - 1.0f) * xExtent;
+            MAYBE_UNUSED const auto uTextureCoord = xIndex * xSamplesInvertor;
 
             for (auto unit = 0; unit < maxUnits; ++unit)
             {
@@ -222,7 +220,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Disk(int shellSam
 
     const auto radialSamplesMinus1 = radialSamples - 1;
     const auto shellSamplesMinus1 = shellSamples - 1;
-    const auto numVertices = 1 + radialSamples * shellSamplesMinus1;
+    MAYBE_UNUSED const auto numVertices = 1 + radialSamples * shellSamplesMinus1;
     const auto numTriangles = radialSamples * (2 * shellSamplesMinus1 - 1);
     const auto numIndices = 3 * numTriangles;
     const auto stride = vertexFormat->GetStride();
@@ -239,7 +237,6 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Disk(int shellSam
         }
     }
 
-    const auto shellSamplesMinus1Invertor = 1.0f / static_cast<float>(shellSamplesMinus1);
     const auto radialSamplesInvertor = 1.0f / static_cast<float>(radialSamples);
     for (auto radialIndex = 0; radialIndex < radialSamples; ++radialIndex)
     {
@@ -260,7 +257,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Box(MAYBE_UNUSED 
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    constexpr auto numVertices = 8;
+    MAYBE_UNUSED constexpr auto numVertices = 8;
     constexpr auto numTriangles = 12;
     constexpr auto numIndices = 3 * numTriangles;
     const auto stride = vertexFormat->GetStride();
@@ -362,7 +359,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::CylinderOmittedEn
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const auto numVertices = axisSamples * (radialSamples + 1);
+    MAYBE_UNUSED const auto numVertices = axisSamples * (radialSamples + 1);
     const auto numTriangles = 2 * (axisSamples - 1) * radialSamples;
     const auto numIndices = 3 * numTriangles;
     const auto stride = vertexFormat->GetStride();
@@ -401,10 +398,10 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::CylinderOmittedEn
         const APoint sliceCenter{ 0.0f, 0.0f, zCoordinate };
 
         // 计算切片顶点在端点的复制。
-        const auto save = totalIndex;
+        MAYBE_UNUSED const auto save = totalIndex;
         for (auto radialIndex = 0; radialIndex < radialSamples; ++radialIndex)
         {
-            const auto radialFraction = radialIndex * radialSamplesInvertor;  // in [0,1)
+            MAYBE_UNUSED const auto radialFraction = radialIndex * radialSamplesInvertor;  // in [0,1)
             const AVector normal{ angleCos.at(radialIndex), angleSin.at(radialIndex), 0.0f };
 
             for (auto unit = 0; unit < maxUnits; ++unit)
@@ -482,7 +479,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::CylinderIncludedE
 
     auto mesh = Sphere(axisSamples, radialSamples, radius);
     auto vertexBuffer = mesh->GetVertexBuffer();
-    const auto numVertices = vertexBuffer->GetNumElements();
+    MAYBE_UNUSED const auto numVertices = vertexBuffer->GetNumElements();
 
     // 平铺球到两极
     MAYBE_UNUSED const auto heightDivide2 = 0.5f * height;
@@ -554,10 +551,10 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Sphere(int zSampl
         MAYBE_UNUSED auto sliceRadius = Math::Sqrt(Math::FAbs(radius * radius - zValue * zValue));
 
         // 计算切片顶点和复制终点。
-        const auto save = totalIndex;
+        MAYBE_UNUSED const auto save = totalIndex;
         for (auto radialSamplesIndex = 0; radialSamplesIndex < radialSamples; ++radialSamplesIndex)
         {
-            const auto radialFraction = radialSamplesIndex * radialSamplesInvertor;  // in [0,1)
+            MAYBE_UNUSED const auto radialFraction = radialSamplesIndex * radialSamplesInvertor;  // in [0,1)
             const AVector radial{ angleCos.at(radialSamplesIndex), angleSin.at(radialSamplesIndex), 0.0f };
 
             ++totalIndex;
@@ -665,7 +662,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Torus(int circleS
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const auto numVertices = (circleSamples + 1) * (radialSamples + 1);
+    MAYBE_UNUSED const auto numVertices = (circleSamples + 1) * (radialSamples + 1);
     const auto numTriangles = 2 * circleSamples * radialSamples;
     const auto numIndices = 3 * numTriangles;
     const auto stride = vertexFormat->GetStride();
@@ -689,7 +686,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Torus(int circleS
         const APoint radial{ cosTheta, sinTheta, 0.0f };
         const auto torusMiddle = outerRadius * radial;
 
-        const auto save = totalIndex;
+        MAYBE_UNUSED const auto save = totalIndex;
         for (auto radialIndex = 0; radialIndex < radialSamples; ++radialIndex)
         {
             const auto radialFraction = radialIndex * radialSamplesInvertor;  // in [0,1)
@@ -766,9 +763,9 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Tetrahedron() con
 
     MAYBE_UNUSED auto fSqrt2Div3 = Math::Sqrt(2.0f) / 3.0f;
     MAYBE_UNUSED auto fSqrt6Div3 = Math::Sqrt(6.0f) / 3.0f;
-    constexpr auto fOneThird = 1.0f / 3.0f;
+    MAYBE_UNUSED constexpr auto fOneThird = 1.0f / 3.0f;
 
-    constexpr auto numVertices = 4;
+    MAYBE_UNUSED constexpr auto numVertices = 4;
     constexpr auto numTriangles = 4;
     constexpr auto numIndices = 3 * numTriangles;
     const auto stride = vertexFormat->GetStride();
@@ -811,7 +808,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Hexahedron() cons
 
     MAYBE_UNUSED auto fSqrtThird = Math::Sqrt(1.0f / 3.0f);
 
-    constexpr auto numVertices = 8;
+    MAYBE_UNUSED constexpr auto numVertices = 8;
     constexpr auto numTriangles = 12;
     constexpr auto numIndices = 3 * numTriangles;
     const auto stride = vertexFormat->GetStride();
@@ -881,7 +878,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Octahedron() cons
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    constexpr auto numVertices = 6;
+    MAYBE_UNUSED constexpr auto numVertices = 6;
     constexpr auto numTriangles = 8;
     constexpr auto numIndices = 3 * numTriangles;
     const auto stride = vertexFormat->GetStride();
@@ -939,11 +936,11 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Dodecahedron() co
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const auto a = 1.0f / Math::Sqrt(3.0f);
+    MAYBE_UNUSED const auto a = 1.0f / Math::Sqrt(3.0f);
     MAYBE_UNUSED auto b = Math::Sqrt((3.0f - Math::Sqrt(5.0f)) / 6.0f);
     MAYBE_UNUSED auto c = Math::Sqrt((3.0f + Math::Sqrt(5.0f)) / 6.0f);
 
-    constexpr auto numVertices = 20;
+    MAYBE_UNUSED constexpr auto numVertices = 20;
     constexpr auto numTriangles = 36;
     constexpr auto numIndices = 3 * numTriangles;
     const auto stride = vertexFormat->GetStride();
@@ -1087,10 +1084,10 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Icosahedron() con
 
     const auto goldenRatio = 0.5f * (1.0f + Math::Sqrt(5.0f));
     const auto invRoot = 1.0f / Math::Sqrt(1.0f + goldenRatio * goldenRatio);
-    const auto u = goldenRatio * invRoot;
-    const auto v = invRoot;
+    MAYBE_UNUSED const auto u = goldenRatio * invRoot;
+    MAYBE_UNUSED const auto v = invRoot;
 
-    constexpr auto numVertices = 12;
+    MAYBE_UNUSED constexpr auto numVertices = 12;
     constexpr auto numTriangles = 20;
     constexpr auto numIndices = 3 * numTriangles;
     const auto stride = vertexFormat->GetStride();

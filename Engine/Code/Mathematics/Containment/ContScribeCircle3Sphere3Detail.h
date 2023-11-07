@@ -66,9 +66,9 @@ bool Mathematics::ContScribeCircle3Sphere3<Real>::Circumscribe(const Vector3<Rea
     auto e20 = v2 - v0;
     auto e30 = v3 - v0;
 
-    typename LinearSystem<Real>::Matrix3 a{ typename LinearSystem<Real>::Vector3{ e10.GetX(), e10.GetY(), e10.GetZ() },
-                                            typename LinearSystem<Real>::Vector3{ e20.GetX(), e20.GetY(), e20.GetZ() },
-                                            typename LinearSystem<Real>::Vector3{ e30.GetX(), e30.GetY(), e30.GetZ() } };
+    const typename LinearSystem<Real>::Matrix3 a{ typename LinearSystem<Real>::Vector3{ e10.GetX(), e10.GetY(), e10.GetZ() },
+                                                  typename LinearSystem<Real>::Vector3{ e20.GetX(), e20.GetY(), e20.GetZ() },
+                                                  typename LinearSystem<Real>::Vector3{ e30.GetX(), e30.GetY(), e30.GetZ() } };
 
     const typename LinearSystem<Real>::Vector3 b{ Math<Real>::GetRational(1, 2) * Vector3Tools<Real>::GetLengthSquared(e10),
                                                   Math<Real>::GetRational(1, 2) * Vector3Tools<Real>::GetLengthSquared(e20),
@@ -171,9 +171,9 @@ bool Mathematics::ContScribeCircle3Sphere3<Real>::Inscribe(const Vector3<Real>& 
     }
     n3.Normalize();
 
-    typename LinearSystem<Real>::Matrix3 a{ typename LinearSystem<Real>::Vector3{ n1.GetX() - n0.GetX(), n1.GetY() - n0.GetY(), n1.GetZ() - n0.GetZ() },
-                                            typename LinearSystem<Real>::Vector3{ n2.GetX() - n0.GetX(), n2.GetY() - n0.GetY(), n2.GetZ() - n0.GetZ() },
-                                            typename LinearSystem<Real>::Vector3{ n3.GetX() - n0.GetX(), n3.GetY() - n0.GetY(), n3.GetZ() - n0.GetZ() } };
+    const typename LinearSystem<Real>::Matrix3 a{ typename LinearSystem<Real>::Vector3{ n1.GetX() - n0.GetX(), n1.GetY() - n0.GetY(), n1.GetZ() - n0.GetZ() },
+                                                  typename LinearSystem<Real>::Vector3{ n2.GetX() - n0.GetX(), n2.GetY() - n0.GetY(), n2.GetZ() - n0.GetZ() },
+                                                  typename LinearSystem<Real>::Vector3{ n3.GetX() - n0.GetX(), n3.GetY() - n0.GetY(), n3.GetZ() - n0.GetZ() } };
 
     const typename LinearSystem<Real>::Vector3 b{ Math<Real>::GetValue(0),
                                                   Math<Real>::GetValue(0),

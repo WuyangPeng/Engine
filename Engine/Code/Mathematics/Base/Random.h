@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/30 15:00)
+///	版本：0.9.1.6 (2023/10/26 09:54)
 
 #ifndef MATHEMATICS_BASE_RANDOM_H
 #define MATHEMATICS_BASE_RANDOM_H
@@ -25,20 +25,21 @@ namespace Mathematics
     {
     public:
         using ClassType = Random<Real>;
+
         using Math = Math<Real>;
 
     public:
         // 产生范围在[0,1]的随机数。
         // 随机数生成器可以通过调用UnitRandom先设置一个正数的种子。
-        NODISCARD static Real UnitRandom(uint32_t seed = 0) noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real UnitRandom(uint32_t seed = 0);
 
         // 产生范围在[-1,1]的随机数。
         // 随机数生成器可以通过调用UnitRandom先设置一个正数的种子。
-        NODISCARD static Real SymmetricRandom(uint32_t seed = 0) noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real SymmetricRandom(uint32_t seed = 0);
 
         // 产生范围在[min,max]的随机数。
         // 随机数生成器可以通过调用UnitRandom先设置一个正数的种子。
-        NODISCARD static Real IntervalRandom(Real min, Real max, uint32_t seed = 0) noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real IntervalRandom(Real min, Real max, uint32_t seed = 0);
     };
 
     using RandomF = Random<float>;

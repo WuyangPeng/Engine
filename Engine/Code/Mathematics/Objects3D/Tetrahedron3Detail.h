@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 15:51)
+///	版本：0.9.1.6 (2023/10/26 17:25)
 
 #ifndef MATHEMATICS_OBJECTS_3D_TETRAHEDRON3_DETAIL_H
 #define MATHEMATICS_OBJECTS_3D_TETRAHEDRON3_DETAIL_H
@@ -13,18 +13,17 @@
 #include "Tetrahedron3.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename Real>
 Mathematics::Tetrahedron3<Real>::Tetrahedron3(const Vector3& vertex0, const Vector3& vertex1, const Vector3& vertex2, const Vector3& vertex3) noexcept
-    : vertexs{ vertex0, vertex1, vertex2, vertex3 }
+    : vertex{ vertex0, vertex1, vertex2, vertex3 }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
 Mathematics::Tetrahedron3<Real>::Tetrahedron3(const ContainerType& container)
-    : vertexs{}
+    : vertex{}
 {
     if (container.size() != vertexSize)
     {
@@ -37,7 +36,7 @@ Mathematics::Tetrahedron3<Real>::Tetrahedron3(const ContainerType& container)
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
-        vertexs[i] = container[i];
+        vertex[i] = container[i];
 
 #include SYSTEM_WARNING_POP
     }
@@ -60,18 +59,17 @@ Mathematics::Vector3<Real> Mathematics::Tetrahedron3<Real>::GetVertex(int index)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return vertexs.at(index);
+    return vertex.at(index);
 }
 
 template <typename Real>
-void Mathematics::Tetrahedron3<Real>::SetVertex(int index, const Vector3& vertex)
+void Mathematics::Tetrahedron3<Real>::SetVertex(int index, const Vector3& aVertex)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    vertexs.at(index) = vertex;
+    vertex.at(index) = aVertex;
 }
 
-// static
 template <typename Real>
 typename Mathematics::Tetrahedron3<Real>::IndicesType Mathematics::Tetrahedron3<Real>::GetFaceIndices(int face)
 {
@@ -98,11 +96,11 @@ typename Mathematics::Tetrahedron3<Real>::PlaneContainerType Mathematics::Tetrah
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-    const auto edge10 = vertexs[1] - vertexs[0];
-    const auto edge20 = vertexs[2] - vertexs[0];
-    const auto edge30 = vertexs[3] - vertexs[0];
-    const auto edge21 = vertexs[2] - vertexs[1];
-    const auto edge31 = vertexs[3] - vertexs[1];
+    const auto edge10 = vertex[1] - vertex[0];
+    const auto edge20 = vertex[2] - vertex[0];
+    const auto edge30 = vertex[3] - vertex[0];
+    const auto edge21 = vertex[2] - vertex[1];
+    const auto edge31 = vertex[3] - vertex[1];
 
 #include SYSTEM_WARNING_POP
 
@@ -139,7 +137,7 @@ typename Mathematics::Tetrahedron3<Real>::PlaneContainerType Mathematics::Tetrah
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
-        plane.emplace_back(normal[i], vertexs[i]);
+        plane.emplace_back(normal[i], vertex[i]);
 
 #include SYSTEM_WARNING_POP
     }

@@ -35,5 +35,5 @@ void CoreTools::CommandAddSharedStringsTesting::MainTest()
 
 void CoreTools::CommandAddSharedStringsTesting::CommandAddSharedStringsTest() noexcept
 {
-    SimpleCSV::CommandAddSharedStrings commandAddSharedStrings{};
+    const SimpleCSV::CommandAddSharedStrings commandAddSharedStrings{};
 }

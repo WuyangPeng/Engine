@@ -2301,5 +2301,11 @@
     <None Include="Resource\ReadMe.md">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26826.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </None>
+    <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26437.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </None>
   </ItemGroup>
 </Project>

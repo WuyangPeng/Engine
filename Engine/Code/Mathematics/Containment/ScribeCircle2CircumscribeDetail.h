@@ -33,7 +33,7 @@ void Mathematics::ScribeCircle2Circumscribe<Real>::Calculate()
     auto e10 = points.at(1) - points.at(0);
     auto e20 = points.at(2) - points.at(0);
 
-    std::array<std::array<Real, 2>, 2> matrix{ std::array<Real, 2>{ e10[0], e10[1] }, std::array<Real, 2>{ e20[0], e20[1] } };
+    const std::array<std::array<Real, 2>, 2> matrix{ std::array<Real, 2>{ e10[0], e10[1] }, std::array<Real, 2>{ e20[0], e20[1] } };
 
     const std::array<Real, 2> inputVector{ Math::GetRational(1, 2) * Vector2Tools<Real>::GetLengthSquared(e10), Math::GetRational(1, 2) * Vector2Tools<Real>::GetLengthSquared(e20) };
 

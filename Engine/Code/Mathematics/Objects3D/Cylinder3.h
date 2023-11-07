@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 15:44)
+///	版本：0.9.1.6 (2023/10/26 17:37)
 
 #ifndef MATHEMATICS_OBJECTS_3D_CYLINDER3_H
 #define MATHEMATICS_OBJECTS_3D_CYLINDER3_H
@@ -25,6 +25,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = Cylinder3<Real>;
+
         using Math = Math<Real>;
         using Line3 = Line3<Real>;
 

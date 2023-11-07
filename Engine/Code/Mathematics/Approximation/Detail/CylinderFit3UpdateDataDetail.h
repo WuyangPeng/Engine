@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:17)
+///	版本：0.9.1.6 (2023/10/27 14:07)
 
 #ifndef MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_UPDATE_DATA_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_UPDATE_DATA_DETAIL_H
@@ -26,8 +26,6 @@ Mathematics::CylinderFit3UpdateData<Real>::CylinderFit3UpdateData(const Vector3&
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-// static
-// private
 template <typename Real>
 typename Mathematics::CylinderFit3UpdateData<Real>::Vector3 Mathematics::CylinderFit3UpdateData<Real>::CalculateDescentDirection(const Vector3& delta, const Vector3& axis) noexcept
 {

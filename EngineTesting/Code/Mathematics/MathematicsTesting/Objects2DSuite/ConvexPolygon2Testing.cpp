@@ -43,7 +43,7 @@ void Mathematics::ConvexPolygon2Testing::MainTest()
 void Mathematics::ConvexPolygon2Testing::ConvexPolygonTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0{ 0.0, 100.0 };
+    std::uniform_real<double> randomDistribution0{ 0.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -56,7 +56,7 @@ void Mathematics::ConvexPolygon2Testing::ConvexPolygonTest()
         // x¡¢yÖµÎªÕý
         Vector2D firstVertex(randomDistribution0(generator), randomDistribution0(generator));
 
-        const std::uniform_real<double> randomDistribution1(0.0, firstVertex[0]);
+        std::uniform_real<double> randomDistribution1(0.0, firstVertex[0]);
 
         auto firstRandom = randomDistribution1(generator);
         auto secondRandom = randomDistribution0(generator);

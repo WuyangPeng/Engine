@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:50)
+///	版本：0.9.1.6 (2023/10/27 15:17)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RAY2_RAY2_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RAY2_RAY2_ACHIEVE_H
@@ -161,7 +161,6 @@ typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::Distan
     }
 }
 
-// private
 template <typename Real>
 typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::DistanceRay2Ray2<Real>::GetSquaredWithClosestPointsIsOrigin(const DistanceLine2Line2Tool& tool) const
 {
@@ -171,7 +170,6 @@ typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::Distan
                            rhsRay.GetOrigin() };
 }
 
-// private
 template <typename Real>
 typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::DistanceRay2Ray2<Real>::GetSquaredWithClosestPointsIsLhs(const DistanceLine2Line2Tool& tool) const
 {
@@ -180,7 +178,6 @@ typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::Distan
     return DistanceResult{ squaredDistance, Math::GetValue(0), lhsRay.GetOrigin() - tool.GetOriginDifferenceDotLhsDirection() * lhsRay.GetDirection(), rhsRay.GetOrigin() };
 }
 
-// private
 template <typename Real>
 typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::DistanceRay2Ray2<Real>::GetSquaredWithClosestPointsIsRhs(const DistanceLine2Line2Tool& tool) const
 {

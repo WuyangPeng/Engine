@@ -33,11 +33,11 @@ namespace CoreTools
         void Initialize() noexcept override;
         void Delete() noexcept override;
         void Enter() override;
-        NODISCARD bool TryEnter() override;
+        NODISCARD bool TryEnter() noexcept override;
         void Leave() noexcept override;
 
     private:
-        void DoLeave();
+        void DoLeave() noexcept;
 
     private:
         std::mutex mutex;

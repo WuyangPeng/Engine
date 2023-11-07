@@ -25,7 +25,7 @@ void CoreTools::ObjectLink::ResolveLink(T& object)
 
     if (object.associated != 0)
     {
-        object.object = boost::polymorphic_pointer_cast<T::ObjectType>(GetObjectInterface(object.associated));
+        object.object = boost::polymorphic_pointer_cast<typename T::ObjectType>(GetObjectInterface(object.associated));
     }
 }
 

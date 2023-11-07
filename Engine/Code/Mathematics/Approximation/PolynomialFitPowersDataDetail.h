@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:36)
+///	版本：0.9.1.6 (2023/10/27 14:21)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT_POWERS_DATA_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT_POWERS_DATA_DETAIL_H
@@ -90,7 +90,7 @@ Real Mathematics::PolynomialFitPowersData<Real, S>::GetInvTwoWScale() const noex
 }
 
 template <typename Real, int S>
-const typename Mathematics::PolynomialFitPowersData<Real, S>::Coefficients Mathematics::PolynomialFitPowersData<Real, S>::GetCoefficients() const
+typename Mathematics::PolynomialFitPowersData<Real, S>::Coefficients Mathematics::PolynomialFitPowersData<Real, S>::GetCoefficients() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

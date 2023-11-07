@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:51)
+///	版本：0.9.1.6 (2023/10/27 10:23)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_DETAIL_H
@@ -89,7 +89,6 @@ typename Mathematics::PolynomialRoots<Real>::ContainerConstIter Mathematics::Pol
     }
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialRoots<Real>::SetRoot(int index, Real value)
 {
@@ -305,7 +304,6 @@ bool Mathematics::PolynomialRoots<Real>::FindEigenvalues(Real constant, Real onc
     return QRIteration3(matrix);
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialRoots<Real>::BalanceCompanion3(VariableMatrix& matrix, Real tolerance)
 {
@@ -319,27 +317,27 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion3(VariableMatrix& matri
     {
         // 抵销 行/列 0
         auto rowNorm = a02;
-        auto colomnNorm = a10;
-        auto scale = Math::Sqrt(colomnNorm / rowNorm);
+        auto columnNorm = a10;
+        auto scale = Math::Sqrt(columnNorm / rowNorm);
         a02 *= scale;
         a10 = a02;
 
         // 抵销 行/列 1
         rowNorm = (a12 <= a10 ? a10 : a12);
-        colomnNorm = a21;
-        scale = Math::Sqrt(colomnNorm / rowNorm);
+        columnNorm = a21;
+        scale = Math::Sqrt(columnNorm / rowNorm);
         a10 *= scale;
         a12 *= scale;
         a21 /= scale;
 
         // 抵销 行/列 2
         rowNorm = (a22 <= a21 ? a21 : a22);
-        colomnNorm = (a12 <= a02 ? a02 : a12);
-        if (colomnNorm < a22)
+        columnNorm = (a12 <= a02 ? a02 : a12);
+        if (columnNorm < a22)
         {
-            colomnNorm = a22;
+            columnNorm = a22;
         }
-        scale = Math::Sqrt(colomnNorm / rowNorm);
+        scale = Math::Sqrt(columnNorm / rowNorm);
 
         a21 *= scale;
         a02 /= scale;
@@ -360,14 +358,13 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion3(VariableMatrix& matri
     matrix(2, 2) = (Math::GetValue(0) <= matrix(2, 2) ? a22 : -a22);
 }
 
-// private
 template <typename Real>
 bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion3(Real a10, Real a21, Real a02, Real a12, Real a22, Real tolerance) noexcept
 {
     // 行/列 0
     auto rowNorm = a02;
-    auto colomnNorm = a10;
-    auto test = Math::FAbs(Math::GetValue(1) - colomnNorm / rowNorm);
+    auto columnNorm = a10;
+    auto test = Math::FAbs(Math::GetValue(1) - columnNorm / rowNorm);
     if (tolerance < test)
     {
         return false;
@@ -375,8 +372,8 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion3(Real a10, Real a21
 
     // 行/列 1
     rowNorm = (a12 <= a10 ? a10 : a12);
-    colomnNorm = a21;
-    test = Math::FAbs(Math::GetValue(1) - colomnNorm / rowNorm);
+    columnNorm = a21;
+    test = Math::FAbs(Math::GetValue(1) - columnNorm / rowNorm);
     if (tolerance < test)
     {
         return false;
@@ -384,17 +381,16 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion3(Real a10, Real a21
 
     // 行/列 2
     rowNorm = (a22 <= a21 ? a21 : a22);
-    colomnNorm = (a12 <= a02 ? a02 : a12);
-    if (colomnNorm < a22)
+    columnNorm = (a12 <= a02 ? a02 : a12);
+    if (columnNorm < a22)
     {
-        colomnNorm = a22;
+        columnNorm = a22;
     }
-    test = Math::FAbs(Math::GetValue(1) - colomnNorm / rowNorm);
+    test = Math::FAbs(Math::GetValue(1) - columnNorm / rowNorm);
 
     return test <= tolerance;
 }
 
-// private
 template <typename Real>
 bool Mathematics::PolynomialRoots<Real>::QRIteration3(VariableMatrix& matrix)
 {
@@ -467,7 +463,6 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration3(VariableMatrix& matrix)
     return true;
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialRoots<Real>::FrancisQRStep(VariableMatrix& hessenbergMatrix, VariableLengthVector& vector)
 {
@@ -520,7 +515,6 @@ void Mathematics::PolynomialRoots<Real>::FrancisQRStep(VariableMatrix& hessenber
     PostmultiplyHouseholder(hessenbergMatrix, vector, 0, rowsNumber - 1, rowsNumber - 2, rowsNumber - 1, 2, vVector);
 }
 
-// private
 template <typename Real>
 typename Mathematics::PolynomialRoots<Real>::Vector3 Mathematics::PolynomialRoots<Real>::GetHouseholderVector(int size, const Vector3& uVector)
 {
@@ -564,16 +558,15 @@ typename Mathematics::PolynomialRoots<Real>::Vector3 Mathematics::PolynomialRoot
     return vVector;
 }
 
-// private
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::PremultiplyHouseholder(VariableMatrix& matrix, VariableLengthVector& variableLengthVector, int rowMin, int rowMax, int colunmMin, int colunmMax, int vSize, const Vector3& vVector)
+void Mathematics::PolynomialRoots<Real>::PremultiplyHouseholder(VariableMatrix& matrix, VariableLengthVector& variableLengthVector, int rowMin, int rowMax, int columnMin, int columnMax, int vSize, const Vector3& vVector)
 {
     // Householder预乘：给定的矩阵A和m×1矢量V采用V[0]= 1，
     // 令S是A的子矩阵m行的rmin <= r <= m + rmin - 1和列的子cmin <= c <= cmax。
     // 以P * S覆盖S其中 P = I - 2 * V * V^T / |V|^2。
 
     const auto subRows = rowMax - rowMin + 1;
-    const auto subColunms = colunmMax - colunmMin + 1;
+    const auto subColunms = columnMax - columnMin + 1;
 
     auto sqrLen = Math::GetValue(0);
     for (auto i = 0; i < vSize; ++i)
@@ -582,36 +575,41 @@ void Mathematics::PolynomialRoots<Real>::PremultiplyHouseholder(VariableMatrix& 
     }
 
     const auto beta = Math::GetValue(-2) / sqrLen;
-    for (auto colunm = 0; colunm < subColunms; ++colunm)
+    for (auto column = 0; column < subColunms; ++column)
     {
-        variableLengthVector[colunm] = Math::GetValue(0);
+        variableLengthVector[column] = Math::GetValue(0);
         for (auto row = 0; row < subRows; ++row)
         {
-            variableLengthVector[colunm] += vVector[row] * matrix(rowMin + row, colunmMin + colunm);
+            variableLengthVector[column] += vVector[row] * matrix(rowMin + row, columnMin + column);
         }
-        variableLengthVector[colunm] *= beta;
+        variableLengthVector[column] *= beta;
     }
 
     for (auto row = 0; row < subRows; ++row)
     {
-        for (auto colunm = 0; colunm < subColunms; ++colunm)
+        for (auto column = 0; column < subColunms; ++column)
         {
-            matrix(rowMin + row, colunmMin + colunm) += vVector[row] * variableLengthVector[colunm];
+            matrix(rowMin + row, columnMin + column) += vVector[row] * variableLengthVector[column];
         }
     }
 }
 
-// private
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::PostmultiplyHouseholder(VariableMatrix& matrix, VariableLengthVector& variableLengthVector, int rowMin, int rowMax,
-                                                                 int colunmMin, int colunmMax, int vSize, const Vector3& vVector)
+void Mathematics::PolynomialRoots<Real>::PostmultiplyHouseholder(VariableMatrix& matrix,
+                                                                 VariableLengthVector& variableLengthVector,
+                                                                 int rowMin,
+                                                                 int rowMax,
+                                                                 int columnMin,
+                                                                 int columnMax,
+                                                                 int vSize,
+                                                                 const Vector3& vVector)
 {
     // Householder预乘：给定的矩阵A和m×1矢量V采用V[0]= 1，
     // 令S是A的子矩阵m行的rmin <= r <= m + rmin - 1和列的子cmin <= c <= cmax。
     // 以P * S覆盖S其中 P = I - 2 * V * V^T / |V|^2。
 
     const auto subRows = rowMax - rowMin + 1;
-    const auto subColunms = colunmMax - colunmMin + 1;
+    const auto subColumns = columnMax - columnMin + 1;
 
     auto sqrLen = Math::GetValue(0);
     for (auto i = 0; i < vSize; ++i)
@@ -623,18 +621,18 @@ void Mathematics::PolynomialRoots<Real>::PostmultiplyHouseholder(VariableMatrix&
     for (auto row = 0; row < subRows; ++row)
     {
         variableLengthVector[row] = Math::GetValue(0);
-        for (auto colunm = 0; colunm < subColunms; ++colunm)
+        for (auto column = 0; column < subColumns; ++column)
         {
-            variableLengthVector[row] += matrix(rowMin + row, colunmMin + colunm) * vVector[colunm];
+            variableLengthVector[row] += matrix(rowMin + row, columnMin + column) * vVector[column];
         }
         variableLengthVector[row] *= beta;
     }
 
     for (auto row = 0; row < subRows; ++row)
     {
-        for (auto colunm = 0; colunm < subColunms; ++colunm)
+        for (auto column = 0; column < subColumns; ++column)
         {
-            matrix(rowMin + row, colunmMin + colunm) += variableLengthVector[row] * vVector[colunm];
+            matrix(rowMin + row, columnMin + column) += variableLengthVector[row] * vVector[column];
         }
     }
 }
@@ -668,7 +666,6 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(Real constant, Real once, Real
     return Math::GetValue(1) + maxValue;
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialRoots<Real>::Balance3(VariableMatrix& matrix, Real tolerance)
 {
@@ -677,11 +674,11 @@ void Mathematics::PolynomialRoots<Real>::Balance3(VariableMatrix& matrix, Real t
         for (auto index = 0; index < 3; ++index)
         {
             const auto rowNorm = GetRowNorm(index, matrix);
-            const auto colomnNorm = GetColomnNorm(index, matrix);
-            const auto scale = Math::Sqrt(colomnNorm / rowNorm);
+            const auto columnNorm = GetColumnNorm(index, matrix);
+            const auto scale = Math::Sqrt(columnNorm / rowNorm);
             const auto invScale = Math::GetValue(1) / scale;
             ScaleRow(index, scale, matrix);
-            ScaleColomn(index, invScale, matrix);
+            ScaleColumn(index, invScale, matrix);
         }
 
         if (IsBalanced3(matrix, tolerance))
@@ -693,15 +690,14 @@ void Mathematics::PolynomialRoots<Real>::Balance3(VariableMatrix& matrix, Real t
     }
 }
 
-// private
 template <typename Real>
 bool Mathematics::PolynomialRoots<Real>::IsBalanced3(VariableMatrix& matrix, Real tolerance)
 {
     for (auto i = 0; i < 3; ++i)
     {
         const auto rowNorm = GetRowNorm(i, matrix);
-        const auto colomnNorm = GetColomnNorm(i, matrix);
-        const auto test = Math::FAbs(Math::GetValue(1) - colomnNorm / rowNorm);
+        const auto columnNorm = GetColumnNorm(i, matrix);
+        const auto test = Math::FAbs(Math::GetValue(1) - columnNorm / rowNorm);
         if (tolerance < test)
         {
             return false;
@@ -710,7 +706,6 @@ bool Mathematics::PolynomialRoots<Real>::IsBalanced3(VariableMatrix& matrix, Rea
     return true;
 }
 
-// private
 template <typename Real>
 Real Mathematics::PolynomialRoots<Real>::GetRowNorm(int row, VariableMatrix& matrix)
 {
@@ -726,14 +721,13 @@ Real Mathematics::PolynomialRoots<Real>::GetRowNorm(int row, VariableMatrix& mat
     return norm;
 }
 
-// private
 template <typename Real>
-Real Mathematics::PolynomialRoots<Real>::GetColomnNorm(int colomn, VariableMatrix& matrix)
+Real Mathematics::PolynomialRoots<Real>::GetColumnNorm(int column, VariableMatrix& matrix)
 {
     auto norm = Math::GetValue(0);
     for (auto row = 0; row < matrix.GetRowsNumber(); ++row)
     {
-        const auto absValue = Math::FAbs(matrix(row, colomn));
+        const auto absValue = Math::FAbs(matrix(row, column));
         if (norm < absValue)
         {
             norm = absValue;
@@ -742,7 +736,6 @@ Real Mathematics::PolynomialRoots<Real>::GetColomnNorm(int colomn, VariableMatri
     return norm;
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialRoots<Real>::ScaleRow(int row, Real scale, VariableMatrix& matrix)
 {
@@ -752,9 +745,8 @@ void Mathematics::PolynomialRoots<Real>::ScaleRow(int row, Real scale, VariableM
     }
 }
 
-// private
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::ScaleColomn(int column, Real scale, VariableMatrix& matrix)
+void Mathematics::PolynomialRoots<Real>::ScaleColumn(int column, Real scale, VariableMatrix& matrix)
 {
     for (auto row = 0; row < matrix.GetRowsNumber(); ++row)
     {
@@ -810,10 +802,7 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
         return false;
     }
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-    auto thriceRoot = root[0];
-#include SYSTEM_WARNING_POP
+    auto thriceRoot = root.at(0);
 
     count = 0;
 
@@ -932,7 +921,6 @@ bool Mathematics::PolynomialRoots<Real>::FindEigenvalues(Real constant, Real onc
     return QRIteration4(matrix);
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialRoots<Real>::BalanceCompanion4(VariableMatrix& matrix, Real tolerance)
 {
@@ -948,39 +936,39 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion4(VariableMatrix& matri
     {
         // 平衡 行/列 0
         auto rowNorm = a03;
-        auto colomnNorm = a10;
-        auto scale = Math::Sqrt(colomnNorm / rowNorm);
+        auto columnNorm = a10;
+        auto scale = Math::Sqrt(columnNorm / rowNorm);
         a03 *= scale;
         a10 = a03;
 
         // 平衡 行/列 1
         rowNorm = (a13 <= a10 ? a10 : a13);
-        colomnNorm = a21;
-        scale = Math::Sqrt(colomnNorm / rowNorm);
+        columnNorm = a21;
+        scale = Math::Sqrt(columnNorm / rowNorm);
         a10 *= scale;
         a13 *= scale;
         a21 /= scale;
 
         // 平衡 行/列 2
         rowNorm = (a21 >= a23 ? a21 : a23);
-        colomnNorm = a32;
-        scale = Math::Sqrt(colomnNorm / rowNorm);
+        columnNorm = a32;
+        scale = Math::Sqrt(columnNorm / rowNorm);
         a21 *= scale;
         a23 *= scale;
         a32 /= scale;
 
         // 平衡 行/列 3
         rowNorm = (a33 <= a32 ? a32 : a33);
-        colomnNorm = (a13 <= a03 ? a03 : a13);
-        if (colomnNorm < a23)
+        columnNorm = (a13 <= a03 ? a03 : a13);
+        if (columnNorm < a23)
         {
-            colomnNorm = a23;
+            columnNorm = a23;
         }
-        if (colomnNorm < a33)
+        if (columnNorm < a33)
         {
-            colomnNorm = a33;
+            columnNorm = a33;
         }
-        scale = Math::Sqrt(colomnNorm / rowNorm);
+        scale = Math::Sqrt(columnNorm / rowNorm);
         a32 *= scale;
         a03 /= scale;
         a13 /= scale;
@@ -1003,14 +991,13 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion4(VariableMatrix& matri
     matrix(3, 3) = (Math::GetValue(0) <= matrix(3, 3) ? a33 : -a33);
 }
 
-// private
 template <typename Real>
 bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion4(Real a10, Real a21, Real a32, Real a03, Real a13, Real a23, Real a33, Real tolerance) noexcept
 {
     // 行/列 0
     auto rowNorm = a03;
-    auto colomnNorm = a10;
-    auto test = Math::FAbs(Math::GetValue(1) - colomnNorm / rowNorm);
+    auto columnNorm = a10;
+    auto test = Math::FAbs(Math::GetValue(1) - columnNorm / rowNorm);
     if (tolerance < test)
     {
         return false;
@@ -1018,8 +1005,8 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion4(Real a10, Real a21
 
     // 行/列 1
     rowNorm = (a13 <= a10 ? a10 : a13);
-    colomnNorm = a21;
-    test = Math::FAbs(Math::GetValue(1) - colomnNorm / rowNorm);
+    columnNorm = a21;
+    test = Math::FAbs(Math::GetValue(1) - columnNorm / rowNorm);
     if (tolerance < test)
     {
         return false;
@@ -1027,8 +1014,8 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion4(Real a10, Real a21
 
     // 行/列 2
     rowNorm = (a23 <= a21 ? a21 : a23);
-    colomnNorm = a32;
-    test = Math::FAbs(Math::GetValue(1) - colomnNorm / rowNorm);
+    columnNorm = a32;
+    test = Math::FAbs(Math::GetValue(1) - columnNorm / rowNorm);
     if (tolerance < test)
     {
         return false;
@@ -1036,21 +1023,20 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion4(Real a10, Real a21
 
     // 行/列 3
     rowNorm = (a33 <= a32 ? a32 : a33);
-    colomnNorm = (a13 <= a03 ? a03 : a13);
-    if (colomnNorm < a23)
+    columnNorm = (a13 <= a03 ? a03 : a13);
+    if (columnNorm < a23)
     {
-        colomnNorm = a23;
+        columnNorm = a23;
     }
-    if (colomnNorm < a33)
+    if (columnNorm < a33)
     {
-        colomnNorm = a33;
+        columnNorm = a33;
     }
-    test = Math::FAbs(Math::GetValue(1) - colomnNorm / rowNorm);
+    test = Math::FAbs(Math::GetValue(1) - columnNorm / rowNorm);
 
     return test <= tolerance;
 }
 
-// private
 template <typename Real>
 bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrix& matrix)
 {
@@ -1397,8 +1383,9 @@ bool Mathematics::PolynomialRoots<Real>::FindBisection(const Polynomial& polynom
         for (auto i = 1; i < newCount; ++i)
         {
             const auto beforeRootIndex = i - 1;
-            auto rootDifference = newRoot.at(i) - newRoot.at(beforeRootIndex);
-            if (epsilon < Math::FAbs(rootDifference))
+
+            if (auto rootDifference = newRoot.at(i) - newRoot.at(beforeRootIndex);
+                epsilon < Math::FAbs(rootDifference))
             {
                 root.at(count++) = newRoot.at(i);
             }
@@ -1412,9 +1399,8 @@ bool Mathematics::PolynomialRoots<Real>::FindBisection(const Polynomial& polynom
     return 0 < count;
 }
 
-// private
 template <typename Real>
-bool Mathematics::PolynomialRoots<Real>::Bisection(const Polynomial& polynomial, Real xMin, Real xMax, int digits, Real& result)
+bool Mathematics::PolynomialRoots<Real>::Bisection(const Polynomial& polynomial, Real xMin, Real xMax, int digits, Real& result) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     auto xMinPolynomial = polynomial(xMin);
     if (Math::FAbs(xMinPolynomial) <= Math::GetZeroTolerance())
@@ -1524,7 +1510,6 @@ bool Mathematics::PolynomialRoots<Real>::AllRealPartsPositive(const Polynomial& 
     return AllRealPartsNegative(degree, coeff);
 }
 
-// private
 template <typename Real>
 bool Mathematics::PolynomialRoots<Real>::AllRealPartsNegative(int degree, Container& coeff)
 {

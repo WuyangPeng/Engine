@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:21)
+///	版本：0.9.1.6 (2023/10/27 14:27)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT_POWERS_DATA_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT_POWERS_DATA_H
@@ -29,6 +29,7 @@ namespace Mathematics
 
         static constexpr auto size = S;
         using ClassType = PolynomialFitPowersData<Real, size>;
+
         using Math = Math<Real>;
         using Coefficients = std::vector<Real>;
         using VariableLengthVector = VariableLengthVector<Real>;
@@ -46,7 +47,7 @@ namespace Mathematics
         NODISCARD Real GetMax(int index) const;
         NODISCARD Real GetScale(int index) const;
         NODISCARD Real GetInvTwoWScale() const noexcept;
-        NODISCARD const Coefficients GetCoefficients() const;
+        NODISCARD Coefficients GetCoefficients() const;
         NODISCARD Real GetCoefficients(int index) const;
 
         void SetMaxPower(int index, int power);

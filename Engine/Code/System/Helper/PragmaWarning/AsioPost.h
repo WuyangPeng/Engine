@@ -15,6 +15,9 @@
 #include SYSTEM_WARNING_PUSH
 
 #include SYSTEM_WARNING_DISABLE(4996)
+#include SYSTEM_WARNING_DISABLE(26437)
+#include SYSTEM_WARNING_DISABLE(26819)
+#include SYSTEM_WARNING_DISABLE(26826)
 
 #include <boost/asio/post.hpp>
 

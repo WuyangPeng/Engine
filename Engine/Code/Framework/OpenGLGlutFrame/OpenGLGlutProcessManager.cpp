@@ -110,7 +110,7 @@ Framework::OpenGLGlutProcessManager::OpenGLGlutCallBackInterfaceSharedPtr Framew
 
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return impl->GetOpenGLGlutCallBack();
+    return ImplType::GetOpenGLGlutCallBack();
 }
 
 void Framework::OpenGLGlutProcessManager::SetOpenGLGlutCallBack(const OpenGLGlutCallBackInterfaceSharedPtr& openGLGlutCallBack)
@@ -119,7 +119,7 @@ void Framework::OpenGLGlutProcessManager::SetOpenGLGlutCallBack(const OpenGLGlut
 
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return impl->SetOpenGLGlutCallBack(openGLGlutCallBack);
+    return ImplType::SetOpenGLGlutCallBack(openGLGlutCallBack);
 }
 
 void Framework::OpenGLGlutProcessManager::ClearOpenGLGlutCallBack()
@@ -128,7 +128,7 @@ void Framework::OpenGLGlutProcessManager::ClearOpenGLGlutCallBack()
 
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return impl->ClearOpenGLGlutCallBack();
+    return ImplType::ClearOpenGLGlutCallBack();
 }
 
 void Framework::OpenGLGlutProcessManager::SetWindowId(int window)
@@ -137,7 +137,7 @@ void Framework::OpenGLGlutProcessManager::SetWindowId(int window)
 
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return impl->SetWindowId(window);
+    return ImplType::SetWindowId(window);
 }
 
 int Framework::OpenGLGlutProcessManager::GetWindowId() const
@@ -146,7 +146,7 @@ int Framework::OpenGLGlutProcessManager::GetWindowId() const
 
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return impl->GetWindowId();
+    return ImplType::GetWindowId();
 }
 
 int Framework::OpenGLGlutProcessManager::GetMillisecond() const
@@ -155,7 +155,7 @@ int Framework::OpenGLGlutProcessManager::GetMillisecond() const
 
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return impl->GetMillisecond();
+    return ImplType::GetMillisecond();
 }
 
 void Framework::OpenGLGlutProcessManager::SetMillisecond(int millisecond)
@@ -164,7 +164,7 @@ void Framework::OpenGLGlutProcessManager::SetMillisecond(int millisecond)
 
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return impl->SetMillisecond(millisecond);
+    return ImplType::SetMillisecond(millisecond);
 }
 
 void Framework::OpenGLGlutProcessManager::SetMainFunctionHelper(const MainFunctionHelperBaseSharedPtr& mainFunctionHelper)
@@ -173,7 +173,7 @@ void Framework::OpenGLGlutProcessManager::SetMainFunctionHelper(const MainFuncti
 
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return impl->SetMainFunctionHelper(mainFunctionHelper);
+    return ImplType::SetMainFunctionHelper(mainFunctionHelper);
 }
 
 void Framework::OpenGLGlutProcessManager::ClearMainFunctionHelper()
@@ -182,7 +182,7 @@ void Framework::OpenGLGlutProcessManager::ClearMainFunctionHelper()
 
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return impl->ClearMainFunctionHelper();
+    return ImplType::ClearMainFunctionHelper();
 }
 
 Framework::OpenGLGlutProcessManager::MainFunctionHelperBaseSharedPtr Framework::OpenGLGlutProcessManager::GetMainFunctionHelper()
@@ -191,7 +191,7 @@ Framework::OpenGLGlutProcessManager::MainFunctionHelperBaseSharedPtr Framework::
 
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return impl->GetMainFunctionHelper();
+    return ImplType::GetMainFunctionHelper();
 }
 
 bool Framework::OpenGLGlutProcessManager::PreCreate()
@@ -200,7 +200,7 @@ bool Framework::OpenGLGlutProcessManager::PreCreate()
 
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return impl->PreCreate();
+    return ImplType::PreCreate();
 }
 
 bool Framework::OpenGLGlutProcessManager::Initialize()
@@ -209,7 +209,7 @@ bool Framework::OpenGLGlutProcessManager::Initialize()
 
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return impl->Initialize();
+    return ImplType::Initialize();
 }
 
 void Framework::OpenGLGlutProcessManager::PreIdle()
@@ -218,7 +218,7 @@ void Framework::OpenGLGlutProcessManager::PreIdle()
 
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return impl->PreIdle();
+    return ImplType::PreIdle();
 }
 
 void Framework::OpenGLGlutProcessManager::Terminate()
@@ -227,5 +227,5 @@ void Framework::OpenGLGlutProcessManager::Terminate()
 
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return impl->Terminate();
+    return ImplType::Terminate();
 }

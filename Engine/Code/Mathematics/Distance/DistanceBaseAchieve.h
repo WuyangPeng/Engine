@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:42)
+///	版本：0.9.1.6 (2023/10/27 15:14)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_ACHIEVE_H
@@ -27,6 +27,7 @@ Mathematics::DistanceBase<Real, Vector>::DistanceBase() noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real, typename Vector>
 bool Mathematics::DistanceBase<Real, Vector>::IsValid() const noexcept
 {
@@ -49,6 +50,7 @@ bool Mathematics::DistanceBase<Real, Vector>::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename Vector>
@@ -134,7 +136,7 @@ Real Mathematics::DistanceBase<Real, Vector>::GetDerivative(Real t, const Vector
     const auto funcPlus = Get(t + differenceStep, lhsVelocity, rhsVelocity);
     const auto funcMinus = Get(t - differenceStep, lhsVelocity, rhsVelocity);
     const auto derivativeApproximation = inverseTwoDifferenceStep * (funcPlus.GetDistance() - funcMinus.GetDistance());
- 
+
     return derivativeApproximation;
 }
 

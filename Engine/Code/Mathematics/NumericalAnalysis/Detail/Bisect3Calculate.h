@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:24)
+///	版本：0.9.1.6 (2023/10/27 11:10)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_CALCULATE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_CALCULATE_H
@@ -25,6 +25,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = Bisect3Calculate<Real>;
+
         using Bisect3Storage = Bisect3Storage<Real>;
         using Bisect3Node = Bisect3Node<Real>;
         using Bisect3NodeSharedPtr = std::shared_ptr<Bisect3Node>;

@@ -139,7 +139,7 @@ Mathematics::Lozenge3<Real> Mathematics::ContLozenge3<Real>::ContLozenge(const s
             }
         }
 
-        if (aExtreme)
+        if (aExtreme && bExtreme)
         {
             auto deltaU = u - *aExtreme;
             auto deltaV = v - *bExtreme;

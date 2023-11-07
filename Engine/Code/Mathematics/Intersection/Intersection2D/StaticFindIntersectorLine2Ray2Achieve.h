@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:26)
+///	版本：0.9.1.6 (2023/10/27 17:29)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE2_RAY2_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE2_RAY2_ACHIEVE_H
@@ -26,7 +26,6 @@ Mathematics::StaticFindIntersectorLine2Ray2<Real>::StaticFindIntersectorLine2Ray
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real>
 void Mathematics::StaticFindIntersectorLine2Ray2<Real>::Find()
 {
@@ -113,4 +112,5 @@ Mathematics::Vector2<Real> Mathematics::StaticFindIntersectorLine2Ray2<Real>::Ge
         THROW_EXCEPTION(SYSTEM_TEXT("不存在唯一的交点。\n"s));
     }
 }
+
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE2_RAY2_ACHIEVE_H

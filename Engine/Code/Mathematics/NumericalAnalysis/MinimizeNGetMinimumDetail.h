@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:49)
+///	版本：0.9.1.6 (2023/10/27 10:20)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_GET_MINIMUM_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_GET_MINIMUM_DETAIL_H
@@ -225,7 +225,6 @@ typename Mathematics::MinimizeNGetMinimum<Real, UserDataType>::DomainResult Math
     return result;
 }
 
-// static
 template <typename Real, typename UserDataType>
 Real Mathematics::MinimizeNGetMinimum<Real, UserDataType>::LineFunction(Real value, const MinimizeNGetMinimum* userData)
 {

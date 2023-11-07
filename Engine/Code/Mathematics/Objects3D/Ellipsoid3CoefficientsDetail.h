@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 15:49)
+///	版本：0.9.1.6 (2023/10/26 17:10)
 
 #ifndef MATHEMATICS_OBJECTS_3D_ELLIPSOID3_COEFFICIENTS_DETAIL_H
 #define MATHEMATICS_OBJECTS_3D_ELLIPSOID3_COEFFICIENTS_DETAIL_H
@@ -22,12 +22,12 @@ Mathematics::Ellipsoid3Coefficients<Real>::Ellipsoid3Coefficients(const Matrix3&
                     vector.GetX(),
                     vector.GetY(),
                     vector.GetZ(),
-                    matrix.GetValue<0, 0>(),
-                    matrix.GetValue<0, 1>() * Math::GetValue(2),
-                    matrix.GetValue<0, 2>() * Math::GetValue(2),
-                    matrix.GetValue<1, 1>(),
-                    matrix.GetValue<1, 2>() * Math::GetValue(2),
-                    matrix.GetValue<2, 2>() }
+                    matrix.template GetValue<0, 0>(),
+                    matrix.template GetValue<0, 1>() * Math::GetValue(2),
+                    matrix.template GetValue<0, 2>() * Math::GetValue(2),
+                    matrix.template GetValue<1, 1>(),
+                    matrix.template GetValue<1, 2>() * Math::GetValue(2),
+                    matrix.template GetValue<2, 2>() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }

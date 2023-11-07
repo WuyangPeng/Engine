@@ -50,7 +50,7 @@ void Mathematics::FastNegativeExpTesting::FloatFastExpTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetExponent() };
+    std::uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetExponent() };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -69,7 +69,7 @@ void Mathematics::FastNegativeExpTesting::DoubleFastExpTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetExponent() };
+    std::uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetExponent() };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -88,7 +88,7 @@ void Mathematics::FastNegativeExpTesting::FloatFastExpBoundaryTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution{ MathF::GetExponent(), MathF::maxReal };
+    std::uniform_real<float> randomDistribution{ MathF::GetExponent(), MathF::maxReal };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -107,7 +107,7 @@ void Mathematics::FastNegativeExpTesting::DoubleFastExpBoundaryTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution{ MathD::GetExponent(), MathD::maxReal };
+    std::uniform_real<double> randomDistribution{ MathD::GetExponent(), MathD::maxReal };
 
     const auto aTestLoopCount = GetTestLoopCount();
 

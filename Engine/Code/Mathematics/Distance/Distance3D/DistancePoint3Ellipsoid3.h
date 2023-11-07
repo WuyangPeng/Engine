@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:55)
+///	版本：0.9.1.6 (2023/10/27 17:10)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_ELLIPSOID3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_ELLIPSOID3_H
@@ -24,8 +24,9 @@ namespace Mathematics
     public:
         using ClassType = DistancePoint3Ellipsoid3<Real>;
         using Vector3 = Vector3<Real>;
-        using Ellipsoid3 = Ellipsoid3<Real>;
         using ParentType = DistanceBase<Real, Vector3>;
+
+        using Ellipsoid3 = Ellipsoid3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
         using DistanceResult = typename ParentType::DistanceResult;

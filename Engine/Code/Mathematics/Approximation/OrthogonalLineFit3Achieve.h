@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:35)
+///	版本：0.9.1.6 (2023/10/27 14:14)
 
 #ifndef MATHEMATICS_APPROXIMATION_ORTHOGONAL_LINT_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_ORTHOGONAL_LINT_FIT3_ACHIEVE_H
@@ -41,7 +41,6 @@ Mathematics::Line3<Real> Mathematics::OrthogonalLineFit3<Real>::GetLine3() const
     return line;
 }
 
-// static
 template <typename Real>
 Mathematics::Line3<Real> Mathematics::OrthogonalLineFit3<Real>::Calculate(const Points& points)
 {

@@ -53,8 +53,8 @@ void Mathematics::Query2RationalTesting::MainTest()
 void Mathematics::Query2RationalTesting::VerticesTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    const std::uniform_int<> randomDistribution1(1, 50);
+    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_int<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -83,8 +83,8 @@ void Mathematics::Query2RationalTesting::VerticesTest()
 void Mathematics::Query2RationalTesting::LineTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    const std::uniform_int<> randomDistribution1(1, 50);
+    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_int<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -98,7 +98,7 @@ void Mathematics::Query2RationalTesting::LineTest()
             vertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
-        const std::uniform_int<> thirdRandomDistribution(0, size - 1);
+        std::uniform_int<> thirdRandomDistribution(0, size - 1);
 
         auto firstIndex = thirdRandomDistribution(generator);
         auto secondIndex = thirdRandomDistribution(generator);
@@ -141,8 +141,8 @@ void Mathematics::Query2RationalTesting::LineTest()
 void Mathematics::Query2RationalTesting::TriangleTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    const std::uniform_int<> randomDistribution1(1, 50);
+    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_int<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -156,7 +156,7 @@ void Mathematics::Query2RationalTesting::TriangleTest()
             vertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
-        const std::uniform_int<> thirdRandomDistribution(0, size - 1);
+        std::uniform_int<> thirdRandomDistribution(0, size - 1);
 
         auto firstIndex = thirdRandomDistribution(generator);
         auto secondIndex = thirdRandomDistribution(generator);
@@ -195,8 +195,8 @@ void Mathematics::Query2RationalTesting::TriangleTest()
 void Mathematics::Query2RationalTesting::CircumcircleTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    const std::uniform_int<> randomDistribution1(1, 50);
+    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_int<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -210,7 +210,7 @@ void Mathematics::Query2RationalTesting::CircumcircleTest()
             vertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
-        const std::uniform_int<> thirdRandomDistribution(0, size - 1);
+        std::uniform_int<> thirdRandomDistribution(0, size - 1);
 
         auto firstIndex = thirdRandomDistribution(generator);
         auto secondIndex = thirdRandomDistribution(generator);

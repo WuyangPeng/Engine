@@ -47,7 +47,7 @@ void Framework::AndroidProcessManagerTesting::AndroidCallBackPtrTest()
 
 void Framework::AndroidProcessManagerTesting::CallbackSucceedTest()
 {
-    const auto appCmd = ANDROID_PROCESS_MANAGE_SINGLETON.GetAppCmd();
+    const auto appCmd = Framework::AndroidProcessManager::GetAppCmd();
 
     ASSERT_UNEQUAL_NULL_PTR(appCmd);
 
@@ -56,7 +56,7 @@ void Framework::AndroidProcessManagerTesting::CallbackSucceedTest()
         appCmd(androidApp, 0);
     }
 
-    const auto inputEvent = ANDROID_PROCESS_MANAGE_SINGLETON.GetInputEvent();
+    const auto inputEvent = Framework::AndroidProcessManager::GetInputEvent();
 
     ASSERT_UNEQUAL_NULL_PTR(inputEvent);
 
@@ -65,7 +65,7 @@ void Framework::AndroidProcessManagerTesting::CallbackSucceedTest()
         inputEvent(androidApp, nullptr);
     }
 
-    const auto display = ANDROID_PROCESS_MANAGE_SINGLETON.GetDisplay();
+    const auto display = Framework::AndroidProcessManager::GetDisplay();
 
     ASSERT_UNEQUAL_NULL_PTR(display);
 

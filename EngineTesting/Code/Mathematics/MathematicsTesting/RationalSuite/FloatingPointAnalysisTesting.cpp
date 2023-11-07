@@ -47,10 +47,10 @@ void Mathematics::FloatingPointAnalysisTesting::MainTest()
 void Mathematics::FloatingPointAnalysisTesting::NumericalValueSymbolTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution0{ -1.0e38f, 1.0e38f };
-    const std::uniform_real<double> randomDistribution1{ -1.0e300, 1.0e300 };
-    const std::uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
-    const std::uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
+    std::uniform_real<float> randomDistribution0{ -1.0e38f, 1.0e38f };
+    std::uniform_real<double> randomDistribution1{ -1.0e300, 1.0e300 };
+    std::uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
+    std::uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -117,10 +117,10 @@ void Mathematics::FloatingPointAnalysisTesting::NumericalValueSymbolTest()
 void Mathematics::FloatingPointAnalysisTesting::ExponentTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution0{ -1.0e38f, 1.0e38f };
-    const std::uniform_real<double> randomDistribution1{ -1.0e300, 1.0e300 };
-    const std::uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
-    const std::uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
+    std::uniform_real<float> randomDistribution0{ -1.0e38f, 1.0e38f };
+    std::uniform_real<double> randomDistribution1{ -1.0e300, 1.0e300 };
+    std::uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
+    std::uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -191,10 +191,10 @@ void Mathematics::FloatingPointAnalysisTesting::ExponentTest()
 void Mathematics::FloatingPointAnalysisTesting::MantissaTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution0{ -1.0e38f, 1.0e38f };
-    const std::uniform_real<double> randomDistribution1{ -1.0e300, 1.0e300 };
-    const std::uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
-    const std::uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
+    std::uniform_real<float> randomDistribution0{ -1.0e38f, 1.0e38f };
+    std::uniform_real<double> randomDistribution1{ -1.0e300, 1.0e300 };
+    std::uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
+    std::uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
     const std::uniform_int<> fifthRandomDistribution(0, 38);
     const std::uniform_int<> sixthRandomDistribution(0, 308);
 

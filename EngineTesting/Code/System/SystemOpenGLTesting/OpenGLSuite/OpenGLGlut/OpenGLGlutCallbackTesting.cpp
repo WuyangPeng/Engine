@@ -63,21 +63,21 @@ void System::OpenGLGlutCallbackTesting::CallbackTest()
 {
     constexpr auto frame = 17;
 
-    GlutTimerFunc(frame, OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetTimerFunctionCallback(), 1);
-    GlutReshapeFunc(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetChangeSizeCallback());
-    GlutIdleFunc(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetIdleFunctionCallback());
-    GlutKeyboardFunc(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetKeyboardDownCallback());
-    GlutSpecialFunc(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetSpecialKeysDownCallback());
-    GlutKeyboardUpFunc(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetKeyboardUpCallback());
-    GlutSpecialUpFunc(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetSpecialKeysUpCallback());
+    GlutTimerFunc(frame, Framework::OpenGLGlutProcessManager::GetTimerFunctionCallback(), 1);
+    GlutReshapeFunc(Framework::OpenGLGlutProcessManager::GetChangeSizeCallback());
+    GlutIdleFunc(Framework::OpenGLGlutProcessManager::GetIdleFunctionCallback());
+    GlutKeyboardFunc(Framework::OpenGLGlutProcessManager::GetKeyboardDownCallback());
+    GlutSpecialFunc(Framework::OpenGLGlutProcessManager::GetSpecialKeysDownCallback());
+    GlutKeyboardUpFunc(Framework::OpenGLGlutProcessManager::GetKeyboardUpCallback());
+    GlutSpecialUpFunc(Framework::OpenGLGlutProcessManager::GetSpecialKeysUpCallback());
     GlutMouseFunc(MouseClickCallback);
-    GlutMotionFunc(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMotionFunctionCallback());
-    GlutPassiveMotionFunc(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetPassiveMotionCallback());
+    GlutMotionFunc(Framework::OpenGLGlutProcessManager::GetMotionFunctionCallback());
+    GlutPassiveMotionFunc(Framework::OpenGLGlutProcessManager::GetPassiveMotionCallback());
 
-    const auto menu = GlutCreateMenu(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetProcessMenuCallback());
+    const auto menu = GlutCreateMenu(Framework::OpenGLGlutProcessManager::GetProcessMenuCallback());
     ASSERT_LESS(0, menu);
 
-    GlutDisplayFunc(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetRenderSceneCallback());
+    GlutDisplayFunc(Framework::OpenGLGlutProcessManager::GetRenderSceneCallback());
 }
 
 void System::OpenGLGlutCallbackTesting::MouseClickCallback(int button, int state, int xCoordinate, int yCoordinate) noexcept
@@ -86,5 +86,5 @@ void System::OpenGLGlutCallbackTesting::MouseClickCallback(int button, int state
 
     MAYBE_UNUSED const auto modifiers = GlutGetModifiers();
 
-    GlutMouseFunc(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMouseFunctionCallback());
+    GlutMouseFunc(Framework::OpenGLGlutProcessManager::GetMouseFunctionCallback());
 }

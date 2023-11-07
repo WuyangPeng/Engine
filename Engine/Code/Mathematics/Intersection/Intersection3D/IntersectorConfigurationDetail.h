@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:23)
+///	版本：0.9.1.6 (2023/10/27 18:21)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR_CONFIGURATION_DETAIL_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR_CONFIGURATION_DETAIL_H
@@ -13,7 +13,6 @@
 #include "IntersectorConfiguration.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename Real>
 Mathematics::IntersectorConfiguration<Real>::IntersectorConfiguration() noexcept

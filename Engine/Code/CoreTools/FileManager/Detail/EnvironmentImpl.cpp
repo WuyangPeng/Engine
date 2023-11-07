@@ -41,7 +41,7 @@ bool CoreTools::EnvironmentImpl::InsertDirectory(const String& directory)
     return directories.insert(directory).second;
 }
 
-bool CoreTools::EnvironmentImpl::EraseDirectory(const String& directory)
+bool CoreTools::EnvironmentImpl::EraseDirectory(const String& directory) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:51)
+///	版本：0.9.1.6 (2023/10/27 10:48)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_RATIONAL_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_RATIONAL_DETAIL_H
@@ -13,7 +13,6 @@
 #include "PolynomialRootsRational.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Rational/SignRationalDetail.h"
 
@@ -87,13 +86,8 @@ bool Mathematics::PolynomialRootsRational<Real>::Linear(Real constant, Real once
 
         quantity = 1;
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        root[0] = rationalRoot.ConvertTo<Real>();
-        multiplicity[0] = 1;
-
-#include SYSTEM_WARNING_POP
+        root.at(0) = rationalRoot.template ConvertTo<Real>();
+        multiplicity.at(0) = 1;
 
         return true;
     }
@@ -124,13 +118,8 @@ bool Mathematics::PolynomialRootsRational<Real>::Linear(const PolynomialRational
         const auto rationalRoot = constant / once;
         quantity = 1;
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        root[0] = -rationalRoot.ConvertTo<Real>();
-        multiplicity[0] = 1;
-
-#include SYSTEM_WARNING_POP
+        root.at(0) = -rationalRoot.template ConvertTo<Real>();
+        multiplicity.at(0) = 1;
 
         return true;
     }
@@ -198,7 +187,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Quadratic(const PolynomialRatio
         quantity = 2;
 
         // 估算判别式。
-        auto discriminant = rationalDiscriminant.ConvertTo<Real>();
+        auto discriminant = rationalDiscriminant.template ConvertTo<Real>();
 
         MATHEMATICS_ASSERTION_3(Math::GetValue(0) < discriminant, "意外情况\n");
 
@@ -209,28 +198,18 @@ bool Mathematics::PolynomialRootsRational<Real>::Quadratic(const PolynomialRatio
         const auto rationalRoot0 = rationalMinusOnceDivided2 - rationalDiscriminant;
         const auto rationalRoot1 = rationalMinusOnceDivided2 + rationalDiscriminant;
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        root[0] = rationalRoot0.ConvertTo<Real>();
-        root[1] = rationalRoot1.ConvertTo<Real>();
-        multiplicity[0] = 1;
-        multiplicity[1] = 1;
-
-#include SYSTEM_WARNING_POP
+        root.at(0) = rationalRoot0.template ConvertTo<Real>();
+        root.at(1) = rationalRoot1.template ConvertTo<Real>();
+        multiplicity.at(0) = 1;
+        multiplicity.at(1) = 1;
     }
     else if (rationalDiscriminant.Abs() <= PolynomialRational{ epsilon })
     {
         // 一个实数根。
         quantity = 1;
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        root[0] = rationalMinusOnceDivided2.ConvertTo<Real>();
-        multiplicity[0] = 2;
-
-#include SYSTEM_WARNING_POP
+        root.at(0) = rationalMinusOnceDivided2.template ConvertTo<Real>();
+        multiplicity.at(0) = 2;
     }
     else
     {
@@ -304,55 +283,45 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
         quantity = 1;
 
         // 估计判别式
-        auto discriminant = rationalDiscriminant.ConvertTo<Real>();
+        auto discriminant = rationalDiscriminant.template ConvertTo<Real>();
         MATHEMATICS_ASSERTION_3(Math::GetValue(0) < discriminant, "意外情况\n");
         auto discriminantSqrt = Math::Sqrt(discriminant);
 
         rationalDiscriminant = PolynomialRational{ discriminantSqrt };
 
         auto rationalSum0 = -rationalR + rationalDiscriminant;
-        auto sum0 = rationalSum0.ConvertTo<Real>();
+        auto sum0 = rationalSum0.template ConvertTo<Real>();
         sum0 = Math::CubeRoot(sum0);
 
         rationalSum0 = PolynomialRational{ sum0 };
 
         auto rationalSum1 = -rationalR - rationalDiscriminant;
-        auto sum1 = rationalSum1.ConvertTo<Real>();
+        auto sum1 = rationalSum1.template ConvertTo<Real>();
         sum1 = Math::CubeRoot(sum1);
 
         rationalSum1 = PolynomialRational{ sum1 };
 
         auto rationalRoot = rationalSum0 + rationalSum1 - rationalSecondaryDivide3;
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        root[0] = rationalRoot.ConvertTo<Real>();
-        multiplicity[0] = 1;
-
-#include SYSTEM_WARNING_POP
+        root.at(0) = rationalRoot.template ConvertTo<Real>();
+        multiplicity.at(0) = 1;
     }
     else if (rationalDiscriminant < PolynomialRational{ epsilon })
     {
         // 三个不同的实数根。
         quantity = 3;
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        multiplicity[0] = 1;
-        multiplicity[1] = 1;
-        multiplicity[2] = 1;
-
-#include SYSTEM_WARNING_POP
+        multiplicity.at(0) = 1;
+        multiplicity.at(1) = 1;
+        multiplicity.at(2) = 1;
 
         // 通过计算的特征值求解该多项式的根。
-        auto negativeQ = -rationalQ.ConvertTo<Real>();
+        auto negativeQ = -rationalQ.template ConvertTo<Real>();
         MATHEMATICS_ASSERTION_3(Math::GetValue(0) < negativeQ, "意外情况\n");
 
-        auto negativeR = -rationalR.ConvertTo<Real>();
-        auto negativeDiscriminant = -rationalDiscriminant.ConvertTo<Real>();
-        auto negativeSecondaryDivide3 = -rationalSecondaryDivide3.ConvertTo<Real>();
+        auto negativeR = -rationalR.template ConvertTo<Real>();
+        auto negativeDiscriminant = -rationalDiscriminant.template ConvertTo<Real>();
+        auto negativeSecondaryDivide3 = -rationalSecondaryDivide3.template ConvertTo<Real>();
 
         auto sqrt3Value = Math::Sqrt(Math::GetValue(3));
         auto magnitude = Math::Sqrt(negativeQ);
@@ -406,7 +375,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
             // 两个实值的根，一个重复。
             quantity = 2;
 
-            auto r = rationalR.ConvertTo<Real>();
+            auto r = rationalR.template ConvertTo<Real>();
             r = Math::CubeRoot(r);
             rationalR = PolynomialRational{ r };
 
@@ -415,11 +384,11 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-            root[0] = -rationalRoot0.ConvertTo<Real>();
+            root[0] = -rationalRoot0.template ConvertTo<Real>();
             multiplicity[0] = 2;
 
             auto rationalRoot1 = rationalSecondaryDivide3 + rationalTwo * rationalR;
-            root[1] = -rationalRoot1.ConvertTo<Real>();
+            root[1] = -rationalRoot1.template ConvertTo<Real>();
             multiplicity[1] = 1;
 
             if (root[1] < root[0])
@@ -435,13 +404,8 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
             // 一个实数根，所有重复
             quantity = 1;
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-            root[0] = -rationalSecondaryDivide3.ConvertTo<Real>();
-            multiplicity[0] = 3;
-
-#include SYSTEM_WARNING_POP
+            root.at(0) = -rationalSecondaryDivide3.template ConvertTo<Real>();
+            multiplicity.at(0) = 3;
         }
     }
 
@@ -512,7 +476,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Quartic(const PolynomialRationa
     const PolynomialRational rationalY{ polynomial.GetRoot(0) };
 
     auto rationalAlphaSqr = rationalFourth * thrice * thrice - secondary + rationalTwo * rationalY;
-    auto alphaSqr = rationalAlphaSqr.ConvertTo<Real>();
+    auto alphaSqr = rationalAlphaSqr.template ConvertTo<Real>();
 
     if (alphaSqr < -epsilon)
     {
@@ -559,7 +523,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Quartic(const PolynomialRationa
     }
 
     auto rationalBetaSqr = rationalY * rationalY - constant;
-    auto betaSqr = rationalBetaSqr.ConvertTo<Real>();
+    auto betaSqr = rationalBetaSqr.template ConvertTo<Real>();
     if (betaSqr < -epsilon)
     {
         return false;

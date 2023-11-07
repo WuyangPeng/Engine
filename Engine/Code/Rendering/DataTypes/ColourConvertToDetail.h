@@ -30,7 +30,7 @@ uint16_t Rendering::ColourConvertTo::GetSmall(const FloatColour& colour) noexcep
     result |= (green << greenShift);
     result |= (red << redShift);
 
-    if constexpr (std::is_same_v<ColourTextureFormatTraits<Format>::AlphaType, TrueType>)
+    if constexpr (std::is_same_v<typename ColourTextureFormatTraits<Format>::AlphaType, TrueType>)
     {
         const auto alpha = GetAlpha<Format>(colour);
         constexpr auto alphaShift = redShift + ColourTextureFormatTraits<Format>::redBytes;

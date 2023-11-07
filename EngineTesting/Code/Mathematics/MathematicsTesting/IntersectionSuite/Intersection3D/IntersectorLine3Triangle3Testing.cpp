@@ -49,7 +49,7 @@ void Mathematics::IntersectorLine3Triangle3Testing::MainTest()
 void Mathematics::IntersectorLine3Triangle3Testing::FindTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -172,7 +172,7 @@ void Mathematics::IntersectorLine3Triangle3Testing::FindTest()
 void Mathematics::IntersectorLine3Triangle3Testing::IntersectTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution0(-100.0f, 100.0f);
+    std::uniform_real<float> randomDistribution0(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

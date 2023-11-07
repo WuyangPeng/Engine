@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/30 13:55)
+///	版本：0.9.1.6 (2023/10/26 09:50)
 
 #ifndef MATHEMATICS_HELPER_USER_MACRO_H
 #define MATHEMATICS_HELPER_USER_MACRO_H

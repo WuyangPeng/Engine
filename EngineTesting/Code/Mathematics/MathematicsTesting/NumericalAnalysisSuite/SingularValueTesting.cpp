@@ -44,7 +44,7 @@ void Mathematics::SingularValueTesting::MainTest()
 void Mathematics::SingularValueTesting::SingularValueTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-1.0e5, 1.0e5);
+    std::uniform_real<double> randomDistribution0(-1.0e5, 1.0e5);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

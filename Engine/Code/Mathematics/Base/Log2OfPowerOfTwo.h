@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/30 14:58)
+///	版本：0.9.1.6 (2023/10/26 09:53)
 
 #ifndef MATHEMATICS_BASE_LOG2_OF_POWER_OF_TWO_H
 #define MATHEMATICS_BASE_LOG2_OF_POWER_OF_TWO_H
@@ -21,6 +21,7 @@ namespace Mathematics
     {
     public:
         using ClassType = Log2OfPowerOfTwo;
+
         using UnsignedType = std::make_unsigned_t<T>;
         using CalculateType = std::conditional_t<std::is_same_v<uint64_t, UnsignedType>, uint64_t, uint32_t>;
 

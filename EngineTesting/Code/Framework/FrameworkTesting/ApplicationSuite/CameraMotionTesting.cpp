@@ -93,7 +93,7 @@ void Framework::CameraMotionTesting::MoveTest()
     auto right = camera->GetRightVector();
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> random{ 0, 1 };
+    std::uniform_int<> random{ 0, 1 };
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {

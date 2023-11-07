@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:51)
+///	版本：0.9.1.6 (2023/10/27 10:52)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_QDU_DECOMPOSITION_VALUE_ACHIEVE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_QDU_DECOMPOSITION_VALUE_ACHIEVE_H
@@ -61,34 +61,34 @@ void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3& matrix)
     // u02 = r02/r00, 和 u12 = r12/r11.
 
     // 构建正交矩阵Q.
-    auto invLength = Math::InvSqrt(matrix.GetValue<0, 0>() * matrix.GetValue<0, 0>() + matrix.GetValue<1, 0>() * matrix.GetValue<1, 0>() + matrix.GetValue<2, 0>() * matrix.GetValue<2, 0>());
+    auto invLength = Math::InvSqrt(matrix.template GetValue<0, 0>() * matrix.template GetValue<0, 0>() + matrix.template GetValue<1, 0>() * matrix.template GetValue<1, 0>() + matrix.template GetValue<2, 0>() * matrix.template GetValue<2, 0>());
 
-    orthogonal.SetValue<0, 0>(matrix.GetValue<0, 0>() * invLength);
-    orthogonal.SetValue<1, 0>(matrix.GetValue<1, 0>() * invLength);
-    orthogonal.SetValue<2, 0>(matrix.GetValue<2, 0>() * invLength);
+    orthogonal.SetValue<0, 0>(matrix.template GetValue<0, 0>() * invLength);
+    orthogonal.SetValue<1, 0>(matrix.template GetValue<1, 0>() * invLength);
+    orthogonal.SetValue<2, 0>(matrix.template GetValue<2, 0>() * invLength);
 
-    auto fDot = orthogonal.GetValue<0, 0>() * matrix.GetValue<0, 1>() + orthogonal.GetValue<1, 0>() * matrix.GetValue<1, 1>() + orthogonal.GetValue<2, 0>() * matrix.GetValue<2, 1>();
+    auto fDot = orthogonal.template GetValue<0, 0>() * matrix.template GetValue<0, 1>() + orthogonal.template GetValue<1, 0>() * matrix.template GetValue<1, 1>() + orthogonal.template GetValue<2, 0>() * matrix.template GetValue<2, 1>();
 
-    orthogonal.SetValue<0, 1>(matrix.GetValue<0, 1>() - fDot * orthogonal.GetValue<0, 0>());
-    orthogonal.SetValue<1, 1>(matrix.GetValue<1, 1>() - fDot * orthogonal.GetValue<1, 0>());
-    orthogonal.SetValue<2, 1>(matrix.GetValue<2, 1>() - fDot * orthogonal.GetValue<2, 0>());
-    invLength = Math::InvSqrt(orthogonal.GetValue<0, 1>() * orthogonal.GetValue<0, 1>() + orthogonal.GetValue<1, 1>() * orthogonal.GetValue<1, 1>() + orthogonal.GetValue<2, 1>() * orthogonal.GetValue<2, 1>());
+    orthogonal.SetValue<0, 1>(matrix.template GetValue<0, 1>() - fDot * orthogonal.template GetValue<0, 0>());
+    orthogonal.SetValue<1, 1>(matrix.template GetValue<1, 1>() - fDot * orthogonal.template GetValue<1, 0>());
+    orthogonal.SetValue<2, 1>(matrix.template GetValue<2, 1>() - fDot * orthogonal.template GetValue<2, 0>());
+    invLength = Math::InvSqrt(orthogonal.template GetValue<0, 1>() * orthogonal.template GetValue<0, 1>() + orthogonal.template GetValue<1, 1>() * orthogonal.template GetValue<1, 1>() + orthogonal.template GetValue<2, 1>() * orthogonal.template GetValue<2, 1>());
     orthogonal(0, 1) *= invLength;
     orthogonal(1, 1) *= invLength;
     orthogonal(2, 1) *= invLength;
 
-    fDot = orthogonal.GetValue<0, 0>() * matrix.GetValue<0, 2>() + orthogonal.GetValue<1, 0>() * matrix.GetValue<1, 2>() + orthogonal.GetValue<2, 0>() * matrix.GetValue<2, 2>();
+    fDot = orthogonal.template GetValue<0, 0>() * matrix.template GetValue<0, 2>() + orthogonal.template GetValue<1, 0>() * matrix.template GetValue<1, 2>() + orthogonal.template GetValue<2, 0>() * matrix.template GetValue<2, 2>();
 
-    orthogonal(0, 2) = matrix.GetValue<0, 2>() - fDot * orthogonal.GetValue<0, 0>();
-    orthogonal(1, 2) = matrix.GetValue<1, 2>() - fDot * orthogonal.GetValue<1, 0>();
-    orthogonal(2, 2) = matrix.GetValue<2, 2>() - fDot * orthogonal.GetValue<2, 0>();
-    fDot = orthogonal.GetValue<0, 1>() * matrix.GetValue<0, 2>() + orthogonal.GetValue<1, 1>() * matrix.GetValue<1, 2>() + orthogonal.GetValue<2, 1>() * matrix.GetValue<2, 2>();
+    orthogonal(0, 2) = matrix.template GetValue<0, 2>() - fDot * orthogonal.template GetValue<0, 0>();
+    orthogonal(1, 2) = matrix.template GetValue<1, 2>() - fDot * orthogonal.template GetValue<1, 0>();
+    orthogonal(2, 2) = matrix.template GetValue<2, 2>() - fDot * orthogonal.template GetValue<2, 0>();
+    fDot = orthogonal.template GetValue<0, 1>() * matrix.template GetValue<0, 2>() + orthogonal.template GetValue<1, 1>() * matrix.template GetValue<1, 2>() + orthogonal.template GetValue<2, 1>() * matrix.template GetValue<2, 2>();
 
-    orthogonal(0, 2) -= fDot * orthogonal.GetValue<0, 1>();
-    orthogonal(1, 2) -= fDot * orthogonal.GetValue<1, 1>();
-    orthogonal(2, 2) -= fDot * orthogonal.GetValue<2, 1>();
+    orthogonal(0, 2) -= fDot * orthogonal.template GetValue<0, 1>();
+    orthogonal(1, 2) -= fDot * orthogonal.template GetValue<1, 1>();
+    orthogonal(2, 2) -= fDot * orthogonal.template GetValue<2, 1>();
 
-    invLength = Math::InvSqrt(orthogonal.GetValue<0, 2>() * orthogonal.GetValue<0, 2>() + orthogonal.GetValue<1, 2>() * orthogonal.GetValue<1, 2>() + orthogonal.GetValue<2, 2>() * orthogonal.GetValue<2, 2>());
+    invLength = Math::InvSqrt(orthogonal.template GetValue<0, 2>() * orthogonal.template GetValue<0, 2>() + orthogonal.template GetValue<1, 2>() * orthogonal.template GetValue<1, 2>() + orthogonal.template GetValue<2, 2>() * orthogonal.template GetValue<2, 2>());
     orthogonal(0, 2) *= invLength;
     orthogonal(1, 2) *= invLength;
     orthogonal(2, 2) *= invLength;
@@ -103,29 +103,29 @@ void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3& matrix)
 
     // 建立“右边”的矩阵Real.
     Matrix3 right{};
-    right(0, 0) = orthogonal.GetValue<0, 0>() * matrix.GetValue<0, 0>() + orthogonal.GetValue<1, 0>() * matrix.GetValue<1, 0>() + orthogonal.GetValue<2, 0>() * matrix.GetValue<2, 0>();
+    right(0, 0) = orthogonal.template GetValue<0, 0>() * matrix.template GetValue<0, 0>() + orthogonal.template GetValue<1, 0>() * matrix.template GetValue<1, 0>() + orthogonal.template GetValue<2, 0>() * matrix.template GetValue<2, 0>();
 
-    right(0, 1) = orthogonal.GetValue<0, 0>() * matrix.GetValue<0, 1>() + orthogonal.GetValue<1, 0>() * matrix.GetValue<1, 1>() + orthogonal.GetValue<2, 0>() * matrix.GetValue<2, 1>();
+    right(0, 1) = orthogonal.template GetValue<0, 0>() * matrix.template GetValue<0, 1>() + orthogonal.template GetValue<1, 0>() * matrix.template GetValue<1, 1>() + orthogonal.template GetValue<2, 0>() * matrix.template GetValue<2, 1>();
 
-    right(1, 1) = orthogonal.GetValue<0, 1>() * matrix.GetValue<0, 1>() + orthogonal.GetValue<1, 1>() * matrix.GetValue<1, 1>() + orthogonal.GetValue<2, 1>() * matrix.GetValue<2, 1>();
+    right(1, 1) = orthogonal.template GetValue<0, 1>() * matrix.template GetValue<0, 1>() + orthogonal.template GetValue<1, 1>() * matrix.template GetValue<1, 1>() + orthogonal.template GetValue<2, 1>() * matrix.template GetValue<2, 1>();
 
-    right(0, 2) = orthogonal.GetValue<0, 0>() * matrix.GetValue<0, 2>() + orthogonal.GetValue<1, 0>() * matrix.GetValue<1, 2>() + orthogonal.GetValue<2, 0>() * matrix.GetValue<2, 2>();
+    right(0, 2) = orthogonal.template GetValue<0, 0>() * matrix.template GetValue<0, 2>() + orthogonal.template GetValue<1, 0>() * matrix.template GetValue<1, 2>() + orthogonal.template GetValue<2, 0>() * matrix.template GetValue<2, 2>();
 
-    right(1, 2) = orthogonal.GetValue<0, 1>() * matrix.GetValue<0, 2>() + orthogonal.GetValue<1, 1>() * matrix.GetValue<1, 2>() + orthogonal.GetValue<2, 1>() * matrix.GetValue<2, 2>();
+    right(1, 2) = orthogonal.template GetValue<0, 1>() * matrix.template GetValue<0, 2>() + orthogonal.template GetValue<1, 1>() * matrix.template GetValue<1, 2>() + orthogonal.template GetValue<2, 1>() * matrix.template GetValue<2, 2>();
 
-    right(2, 2) = orthogonal.GetValue<0, 2>() * matrix.GetValue<0, 2>() + orthogonal.GetValue<1, 2>() * matrix.GetValue<1, 2>() + orthogonal.GetValue<2, 2>() * matrix.GetValue<2, 2>();
+    right(2, 2) = orthogonal.template GetValue<0, 2>() * matrix.template GetValue<0, 2>() + orthogonal.template GetValue<1, 2>() * matrix.template GetValue<1, 2>() + orthogonal.template GetValue<2, 2>() * matrix.template GetValue<2, 2>();
 
     // 缩放组件。
-    diagonal.MakeDiagonal(right.GetValue<0, 0>(), right.GetValue<1, 1>(), right.GetValue<2, 2>());
+    diagonal.MakeDiagonal(right.template GetValue<0, 0>(), right.template GetValue<1, 1>(), right.template GetValue<2, 2>());
 
     // 剪切组件。
-    auto invD00 = Math::GetValue(1) / diagonal.GetValue<0, 0>();
+    auto invD00 = Math::GetValue(1) / diagonal.template GetValue<0, 0>();
     upperTriangular = Matrix3{ Math::GetValue(1),
-                               right.GetValue<0, 1>() * invD00,
+                               right.template GetValue<0, 1>() * invD00,
                                right(0, 2) * invD00,
                                Math::GetValue(0),
                                Math::GetValue(1),
-                               right.GetValue<1, 2>() / diagonal.GetValue<1, 1>(),
+                               right.template GetValue<1, 2>() / diagonal.template GetValue<1, 1>(),
                                Math::GetValue(0),
                                Math::GetValue(0),
                                Math::GetValue(1) };

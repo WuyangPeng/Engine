@@ -233,7 +233,7 @@ bool Rendering::OpenGLTextureArray::CopyGpuToCpu(int item, int level)
         THROW_EXCEPTION(SYSTEM_TEXT("纹理级别超出范围。"));
     }
 
-    auto pixBuffer = impl->GetLevelPixelPackBuffer(level);
+    const auto pixBuffer = impl->GetLevelPixelPackBuffer(level);
     if (0 == pixBuffer)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("未为级别") + System::ToString(level) + SYSTEM_TEXT("定义暂存缓冲区。"));
@@ -309,7 +309,7 @@ bool Rendering::OpenGLTextureArray::DoCopyCpuToGpu(int item, int level)
     const auto textureTarget = GetTarget();
     System::SetGLBindTexture(textureTarget, GetGLHandle());
 
-    auto pixBuffer = impl->GetLevelPixelUnpackBuffer(level);
+    const auto pixBuffer = impl->GetLevelPixelUnpackBuffer(level);
     if (0 != pixBuffer)
     {
         System::SetGLBindBuffer(System::BindBuffer::PixelUnpackBuffer, pixBuffer);

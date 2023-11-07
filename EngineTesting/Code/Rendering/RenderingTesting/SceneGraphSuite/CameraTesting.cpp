@@ -65,7 +65,7 @@ void Rendering::CameraTesting::MainTest()
 void Rendering::CameraTesting::FrameTest()
 {
     std::default_random_engine generator;
-    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -96,7 +96,7 @@ void Rendering::CameraTesting::FrameTest()
 void Rendering::CameraTesting::FrustumTest()
 {
     std::default_random_engine generator;
-    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -228,7 +228,7 @@ void Rendering::CameraTesting::FrustumTest()
 void Rendering::CameraTesting::ProjectionMatrixTest()
 {
     std::default_random_engine generator;
-    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
     const std::uniform_real<float> secondFloatRandomDistribution(0.0f, 180.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
@@ -509,7 +509,7 @@ void Rendering::CameraTesting::ProjectionMatrixTest()
 void Rendering::CameraTesting::AxesAlignBoundingBoxTest()
 {
     std::default_random_engine generator;
-    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -594,7 +594,7 @@ void Rendering::CameraTesting::AxesAlignBoundingBoxTest()
 void Rendering::CameraTesting::StreamTest()
 {
     std::default_random_engine generator;
-    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {

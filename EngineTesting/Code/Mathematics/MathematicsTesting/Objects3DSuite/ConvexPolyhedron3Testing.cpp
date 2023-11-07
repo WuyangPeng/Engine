@@ -44,9 +44,9 @@ void Mathematics::ConvexPolyhedron3Testing::MainTest()
 void Mathematics::ConvexPolyhedron3Testing::ConvexPolyhedronTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0{ 0.0, 100.0 };
-    const std::uniform_real<double> randomDistribution1(-100.0, 0.0);
-    const std::uniform_real<double> thirdRandomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution0{ 0.0, 100.0 };
+    std::uniform_real<double> randomDistribution1(-100.0, 0.0);
+    std::uniform_real<double> thirdRandomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

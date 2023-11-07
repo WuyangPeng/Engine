@@ -59,7 +59,7 @@ void Network::BufferSendStreamTesting::FinishSendTest(int aTestLoopCount, Parser
 
     for (auto i = 0; i < aTestLoopCount; ++i)
     {
-        MAYBE_UNUSED auto result = bufferSendStream.Insert(testMessage);
+        MAYBE_UNUSED const auto result = bufferSendStream.Insert(testMessage);
     }
 
     ASSERT_FALSE(bufferSendStream.IsEmpty());

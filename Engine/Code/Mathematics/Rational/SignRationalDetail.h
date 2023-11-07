@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:14)
+///	版本：0.9.1.6 (2023/10/26 20:00)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_DETAIL_H
 #define MATHEMATICS_RATIONAL_RATIONAL_DETAIL_H
@@ -17,7 +17,6 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <iostream>
@@ -63,10 +62,10 @@ void Mathematics::SignRational<N>::ConvertToRational(T value)
 {
     const ConversionRational<T> convert{ value };
 
-    if (convert.IsCanConversion<N>())
+    if (convert.template IsCanConversion<N>())
     {
-        numerator = convert.GetNumerator<N>();
-        denominator = convert.GetDenominator<N>();
+        numerator = convert.template GetNumerator<N>();
+        denominator = convert.template GetDenominator<N>();
     }
     else
     {
@@ -99,7 +98,6 @@ bool Mathematics::SignRational<N>::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-// private
 template <int N>
 void Mathematics::SignRational<N>::EliminatePowersOfTwo()
 {
@@ -120,7 +118,6 @@ void Mathematics::SignRational<N>::EliminatePowersOfTwo()
     }
 }
 
-// private
 template <int N>
 int Mathematics::SignRational<N>::GetPowers() const
 {

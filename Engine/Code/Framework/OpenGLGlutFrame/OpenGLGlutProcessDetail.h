@@ -55,7 +55,7 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::RenderSceneCallback F
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetRenderSceneCallback();
+    return OpenGLGlutProcessManager::GetRenderSceneCallback();
 }
 
 template <typename OpenGLGlutCallBack>
@@ -63,7 +63,7 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::ChangeSizeCallback Fr
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetChangeSizeCallback();
+    return OpenGLGlutProcessManager::GetChangeSizeCallback();
 }
 
 template <typename OpenGLGlutCallBack>
@@ -71,7 +71,7 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::TimerFunctionCallback
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetTimerFunctionCallback();
+    return OpenGLGlutProcessManager::GetTimerFunctionCallback();
 }
 
 template <typename OpenGLGlutCallBack>
@@ -79,7 +79,7 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::SpecialKeysDownCallba
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetSpecialKeysDownCallback();
+    return OpenGLGlutProcessManager::GetSpecialKeysDownCallback();
 }
 
 template <typename OpenGLGlutCallBack>
@@ -87,7 +87,7 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::KeyboardDownCallback 
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetKeyboardDownCallback();
+    return OpenGLGlutProcessManager::GetKeyboardDownCallback();
 }
 
 template <typename OpenGLGlutCallBack>
@@ -95,7 +95,7 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::SpecialKeysUpCallback
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetSpecialKeysUpCallback();
+    return OpenGLGlutProcessManager::GetSpecialKeysUpCallback();
 }
 
 template <typename OpenGLGlutCallBack>
@@ -103,7 +103,7 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::KeyboardUpCallback Fr
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetKeyboardUpCallback();
+    return OpenGLGlutProcessManager::GetKeyboardUpCallback();
 }
 
 template <typename OpenGLGlutCallBack>
@@ -111,7 +111,7 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::MouseFunctionCallback
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMouseFunctionCallback();
+    return OpenGLGlutProcessManager::GetMouseFunctionCallback();
 }
 
 template <typename OpenGLGlutCallBack>
@@ -119,7 +119,7 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::MotionFunctionCallbac
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMotionFunctionCallback();
+    return OpenGLGlutProcessManager::GetMotionFunctionCallback();
 }
 
 template <typename OpenGLGlutCallBack>
@@ -127,7 +127,7 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::PassiveMotionFunction
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetPassiveMotionCallback();
+    return OpenGLGlutProcessManager::GetPassiveMotionCallback();
 }
 
 template <typename OpenGLGlutCallBack>
@@ -135,7 +135,7 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::IdleFunctionCallback 
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetIdleFunctionCallback();
+    return OpenGLGlutProcessManager::GetIdleFunctionCallback();
 }
 
 template <typename OpenGLGlutCallBack>
@@ -143,7 +143,7 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::ProcessMenuCallback F
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetProcessMenuCallback();
+    return OpenGLGlutProcessManager::GetProcessMenuCallback();
 }
 
 template <typename OpenGLGlutCallBack>
@@ -151,7 +151,7 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::TerminateCallback Fra
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetTerminateCallback();
+    return OpenGLGlutProcessManager::GetTerminateCallback();
 }
 
 template <typename OpenGLGlutCallBack>

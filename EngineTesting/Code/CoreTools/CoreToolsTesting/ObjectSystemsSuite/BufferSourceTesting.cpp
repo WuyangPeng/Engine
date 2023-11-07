@@ -671,7 +671,13 @@ void CoreTools::BufferSourceTesting::ReadObjectAssociatedTest()
         ASSERT_EQUAL(container5.at(i).object->GetUniqueId(), result5.at(i).associated);
     }
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
     const auto objectInterface = std::make_shared<BoolObject>(DisableNotThrow::Disable);
+
+#include SYSTEM_WARNING_POP
+
     bufferSource.ReadUniqueId(*objectInterface);
 
     ASSERT_EQUAL(objectInterface->GetUniqueId(), 123);

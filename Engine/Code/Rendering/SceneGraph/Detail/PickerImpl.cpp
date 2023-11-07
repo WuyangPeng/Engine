@@ -91,7 +91,7 @@ Rendering::PickRecord Rendering::PickerImpl::GetClosestNonnegative() const
         auto findIndex = -1;
         for (auto i = 0; i < numRecords; ++i)
         {
-            auto parameter = records.GetPickRecord(i).GetParameter();
+            const auto parameter = records.GetPickRecord(i).GetParameter();
             if (0.0f <= parameter)
             {
                 closest = parameter;
@@ -106,7 +106,7 @@ Rendering::PickRecord Rendering::PickerImpl::GetClosestNonnegative() const
 
         for (auto i = findIndex + 1; i < numRecords; ++i)
         {
-            auto parameter = records.GetPickRecord(i).GetParameter();
+            const auto parameter = records.GetPickRecord(i).GetParameter();
             if (0.0f <= parameter && parameter < closest)
             {
                 closest = parameter;
@@ -135,7 +135,7 @@ Rendering::PickRecord Rendering::PickerImpl::GetClosestNonpositive() const
 
         for (auto i = 0; i < numRecords; ++i)
         {
-            auto parameter = records.GetPickRecord(i).GetParameter();
+            const auto parameter = records.GetPickRecord(i).GetParameter();
             if (parameter <= 0.0f)
             {
                 closest = parameter;
@@ -150,7 +150,7 @@ Rendering::PickRecord Rendering::PickerImpl::GetClosestNonpositive() const
 
         for (auto i = findIndex + 1; i < numRecords; ++i)
         {
-            auto parameter = records.GetPickRecord(i).GetParameter();
+            const auto parameter = records.GetPickRecord(i).GetParameter();
             if (closest < parameter && parameter <= 0.0f)
             {
                 closest = parameter;

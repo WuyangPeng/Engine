@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 09:23)
+///	版本：0.9.1.6 (2023/10/26 14:16)
 
 #ifndef MATHEMATICS_ALGEBRA_BANDED_MATRIX_DATA_H
 #define MATHEMATICS_ALGEBRA_BANDED_MATRIX_DATA_H
@@ -26,6 +26,7 @@ namespace Mathematics
     {
     public:
         using ClassType = BandedMatrixData<Real>;
+
         using Math = Math<Real>;
         using ContainerType = std::vector<Real>;
 
@@ -40,7 +41,7 @@ namespace Mathematics
         NODISCARD int GetStreamSize() const;
 
         // 重设大小会清空原有数据。
-        void ResetSize(int newSize, int bandsNumber);
+        void ResetSize(int aSize, int bandsNumber);
 
         // 下三角
         // GetBand(index):  0 <= index < bandMax

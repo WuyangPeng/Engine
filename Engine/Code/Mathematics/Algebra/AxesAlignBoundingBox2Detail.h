@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 14:59)
+///	版本：0.9.1.6 (2023/10/26 10:18)
 
 #ifndef MATHEMATICS_ALGEBRA_AXES_ALIGN_BOUNDING_BOX2_DETAIL_H
 #define MATHEMATICS_ALGEBRA_AXES_ALIGN_BOUNDING_BOX2_DETAIL_H
@@ -13,7 +13,6 @@
 #include "AxesAlignBoundingBox2.h"
 #include "Vector2Detail.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
 
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_AXES_ALIGN_BOUNDING_BOX2_ACHIEVE)
 
@@ -31,7 +30,7 @@ Mathematics::AxesAlignBoundingBox2<Real>::AxesAlignBoundingBox2(const AxesAlignB
 }
 
 template <typename Real>
-bool Mathematics::HasXOverlap(const AxesAlignBoundingBox2<Real>& lhs, const AxesAlignBoundingBox2<Real>& rhs)  
+bool Mathematics::HasXOverlap(const AxesAlignBoundingBox2<Real>& lhs, const AxesAlignBoundingBox2<Real>& rhs)
 {
     constexpr auto pointIndex = AxesAlignBoundingBox2<Real>::PointIndex::X;
 
@@ -40,7 +39,7 @@ bool Mathematics::HasXOverlap(const AxesAlignBoundingBox2<Real>& lhs, const Axes
 }
 
 template <typename Real>
-bool Mathematics::HasYOverlap(const AxesAlignBoundingBox2<Real>& lhs, const AxesAlignBoundingBox2<Real>& rhs)  
+bool Mathematics::HasYOverlap(const AxesAlignBoundingBox2<Real>& lhs, const AxesAlignBoundingBox2<Real>& rhs)
 {
     constexpr auto pointIndex = AxesAlignBoundingBox2<Real>::PointIndex::Y;
 

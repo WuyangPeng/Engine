@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:16)
+///	版本：0.9.1.6 (2023/10/27 14:24)
 
 #ifndef MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_UPDATE_DATA_H
 #define MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_UPDATE_DATA_H
@@ -21,6 +21,7 @@ namespace Mathematics
     {
     public:
         using ClassType = CylinderFit3UpdateData<Real>;
+
         using Vector3 = Vector3<Real>;
 
     public:

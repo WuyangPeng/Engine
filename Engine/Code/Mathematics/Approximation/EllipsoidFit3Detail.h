@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:34)
+///	版本：0.9.1.6 (2023/10/27 14:09)
 
 #ifndef MATHEMATICS_APPROXIMATION_ELLIPSOID_FIT3_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_ELLIPSOID_FIT3_DETAIL_H
@@ -40,19 +40,16 @@ void Mathematics::EllipsoidFit3<Real>::Fit3()
 
     auto angle = MatrixToAngles(rotate);
 
-    Angle extent{ extent0 * Math::FAbs(rotate.GetValue<0, 0>()) + extent1 * Math::FAbs(rotate.GetValue<0, 1>()) + extent2 * Math::FAbs(rotate.GetValue<0, 2>()),
-                  extent0 * Math::FAbs(rotate.GetValue<1, 0>()) + extent1 * Math::FAbs(rotate.GetValue<1, 1>()) + extent2 * Math::FAbs(rotate.GetValue<1, 2>()),
-                  extent0 * Math::FAbs(rotate.GetValue<2, 0>()) + extent1 * Math::FAbs(rotate.GetValue<2, 1>()) + extent2 * Math::FAbs(rotate.GetValue<2, 2>()) };
-
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+    Angle extent{ extent0 * Math::FAbs(rotate.template GetValue<0, 0>()) + extent1 * Math::FAbs(rotate.template GetValue<0, 1>()) + extent2 * Math::FAbs(rotate.template GetValue<0, 2>()),
+                  extent0 * Math::FAbs(rotate.template GetValue<1, 0>()) + extent1 * Math::FAbs(rotate.template GetValue<1, 1>()) + extent2 * Math::FAbs(rotate.template GetValue<1, 2>()),
+                  extent0 * Math::FAbs(rotate.template GetValue<2, 0>()) + extent1 * Math::FAbs(rotate.template GetValue<2, 1>()) + extent2 * Math::FAbs(rotate.template GetValue<2, 2>()) };
 
     Angle begin{ Math::GetRational(1, 2) * extent0,
                  Math::GetRational(1, 2) * extent1,
                  Math::GetRational(1, 2) * extent2,
-                 center.GetX() - extent[0],
-                 center.GetY() - extent[1],
-                 center.GetZ() - extent[2],
+                 center.GetX() - extent.at(0),
+                 center.GetY() - extent.at(1),
+                 center.GetZ() - extent.at(2),
                  -Math::GetPI(),
                  Math::GetValue(0),
                  Math::GetValue(0) };
@@ -60,9 +57,9 @@ void Mathematics::EllipsoidFit3<Real>::Fit3()
     Angle end{ Math::GetValue(2) * extent0,
                Math::GetValue(2) * extent1,
                Math::GetValue(2) * extent2,
-               center.GetX() + extent[0],
-               center.GetY() + extent[1],
-               center.GetZ() + extent[2],
+               center.GetX() + extent.at(0),
+               center.GetY() + extent.at(1),
+               center.GetZ() + extent.at(2),
                Math::GetPI(),
                Math::GetPI(),
                Math::GetPI() };
@@ -73,11 +70,9 @@ void Mathematics::EllipsoidFit3<Real>::Fit3()
                    center.GetX(),
                    center.GetY(),
                    center.GetZ(),
-                   angle[0],
-                   angle[1],
-                   angle[2] };
-
-#include SYSTEM_WARNING_POP
+                   angle.at(0),
+                   angle.at(1),
+                   angle.at(2) };
 
     const MinimizeN<Real, ClassType> minimizer{ 9, Energy, 8, 8, 32, this };
     const auto data = minimizer.GetMinimum(begin, end, initial);
@@ -88,14 +83,9 @@ void Mathematics::EllipsoidFit3<Real>::Fit3()
     extent2 = data.GetMinLocation(2);
     center.SetCoordinate(data.GetMinLocation(3), data.GetMinLocation(4), data.GetMinLocation(5));
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-    angle[0] = data.GetMinLocation(6);
-    angle[1] = data.GetMinLocation(7);
-    angle[2] = data.GetMinLocation(8);
-
-#include SYSTEM_WARNING_POP
+    angle.at(0) = data.GetMinLocation(6);
+    angle.at(1) = data.GetMinLocation(7);
+    angle.at(2) = data.GetMinLocation(8);
 
     rotate = AnglesToMatrix(angle);
 }

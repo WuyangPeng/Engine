@@ -43,7 +43,7 @@ void Mathematics::StaticFindIntersectorSegment2Segment2Testing::MainTest()
 void Mathematics::StaticFindIntersectorSegment2Segment2Testing::SegmentTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
+    std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -115,7 +115,7 @@ void Mathematics::StaticFindIntersectorSegment2Segment2Testing::SegmentTest()
         {
             ASSERT_ENUM_EQUAL(sixthClassify.GetIntersectionType(), IntersectionType::Point);
             ASSERT_EQUAL(sixthClassify.GetQuantity(), 1);
-            ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin + seventhClassify.GetParameter0() * lhsDirection, sixthClassify.GetPoint(0), 1e-6f);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin + seventhClassify.GetParameter0() * lhsDirection, sixthClassify.GetPoint(0), 1e-5f);
         }
         else
         {

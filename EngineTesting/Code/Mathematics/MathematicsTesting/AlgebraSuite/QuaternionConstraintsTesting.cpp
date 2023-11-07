@@ -48,7 +48,7 @@ void Mathematics::QuaternionConstraintsTesting::MainTest()
 void Mathematics::QuaternionConstraintsTesting::ConstraintsTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution0{ -MathF::GetHalfPI(), MathF::GetHalfPI() };
+    std::uniform_real<float> randomDistribution0{ -MathF::GetHalfPI(), MathF::GetHalfPI() };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -56,7 +56,7 @@ void Mathematics::QuaternionConstraintsTesting::ConstraintsTest()
     {
         const float firstAngle = randomDistribution0(generator);
 
-        const std::uniform_real<float> randomDistribution1(firstAngle, MathF::GetHalfPI());
+        std::uniform_real<float> randomDistribution1(firstAngle, MathF::GetHalfPI());
 
         const float secondAngle = randomDistribution1(generator);
 
@@ -74,7 +74,7 @@ void Mathematics::QuaternionConstraintsTesting::ConstraintsTest()
         ASSERT_APPROXIMATE(firstQuaternionConstraints.GetCosAvrAngle(), MathF::Cos(avrAngle), 1e-8f);
         ASSERT_APPROXIMATE(firstQuaternionConstraints.GetSinAvrAngle(), MathF::Sin(avrAngle), 1e-8f);
 
-        const std::uniform_real<float> thirdRandomDistribution(-100.0f, 100.0f);
+        std::uniform_real<float> thirdRandomDistribution(-100.0f, 100.0f);
 
         Vector2F vector0(thirdRandomDistribution(generator), thirdRandomDistribution(generator));
 

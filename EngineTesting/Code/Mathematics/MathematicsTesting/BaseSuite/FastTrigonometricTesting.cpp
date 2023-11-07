@@ -59,7 +59,7 @@ void Mathematics::FastTrigonometricTesting::FloatFastSinTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetHalfPI() };
+    std::uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetHalfPI() };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -79,7 +79,7 @@ void Mathematics::FastTrigonometricTesting::DoubleFastSinTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetHalfPI() };
+    std::uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetHalfPI() };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -105,7 +105,7 @@ void Mathematics::FastTrigonometricTesting::FloatFastCosTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetHalfPI() };
+    std::uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetHalfPI() };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -125,7 +125,7 @@ void Mathematics::FastTrigonometricTesting::DoubleFastCosTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetHalfPI() };
+    std::uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetHalfPI() };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -151,7 +151,7 @@ void Mathematics::FastTrigonometricTesting::FloatFastTanTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetQuarterPI() };
+    std::uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetQuarterPI() };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -171,7 +171,7 @@ void Mathematics::FastTrigonometricTesting::DoubleFastTanTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetQuarterPI() };
+    std::uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetQuarterPI() };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -197,7 +197,7 @@ void Mathematics::FastTrigonometricTesting::FloatFastInvSinTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetValue(1) };
+    std::uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetValue(1) };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -215,7 +215,7 @@ void Mathematics::FastTrigonometricTesting::DoubleFastInvSinTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetValue(1) };
+    std::uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetValue(1) };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -239,7 +239,7 @@ void Mathematics::FastTrigonometricTesting::FloatFastInvCosTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetValue(1) };
+    std::uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetValue(1) };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -257,7 +257,7 @@ void Mathematics::FastTrigonometricTesting::DoubleFastInvCosTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetValue(1) };
+    std::uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetValue(1) };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -281,7 +281,7 @@ void Mathematics::FastTrigonometricTesting::FloatFastInvTanTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution{ MathF::GetValue(-1), MathF::GetValue(1) };
+    std::uniform_real<float> randomDistribution{ MathF::GetValue(-1), MathF::GetValue(1) };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -299,7 +299,7 @@ void Mathematics::FastTrigonometricTesting::DoubleFastInvTanTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution{ MathD::GetValue(-1), MathD::GetValue(1) };
+    std::uniform_real<double> randomDistribution{ MathD::GetValue(-1), MathD::GetValue(1) };
 
     const auto aTestLoopCount = GetTestLoopCount();
 

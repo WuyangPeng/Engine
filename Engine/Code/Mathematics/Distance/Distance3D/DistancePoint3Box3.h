@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:55)
+///	版本：0.9.1.6 (2023/10/27 17:09)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_BOX3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_BOX3_H
@@ -25,6 +25,7 @@ namespace Mathematics
         using ClassType = DistancePoint3Box3<Real>;
         using Vector3 = Vector3<Real>;
         using ParentType = DistanceBase<Real, Vector3>;
+
         using Box3 = Box3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;

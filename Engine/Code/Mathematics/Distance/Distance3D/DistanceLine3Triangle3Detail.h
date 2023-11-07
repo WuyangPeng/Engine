@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 18:05)
+///	版本：0.9.1.6 (2023/10/27 16:32)
 
 #ifndef MATHEMATICS_DISTANCE_DIST_LINE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DIST_LINE3_TRIANGLE3_DETAIL_H
@@ -61,8 +61,9 @@ typename Mathematics::DistanceLine3Triangle3<Real>::DistanceResult Mathematics::
     const auto edge0 = triangle.GetVertex(1) - triangle.GetVertex(0);
     const auto edge1 = triangle.GetVertex(2) - triangle.GetVertex(0);
     const auto normal = Vector3Tools::UnitCrossProduct(edge0, edge1);
-    const auto normalDotDirection = Vector3Tools::DotProduct(normal, line.GetDirection());
-    if (Math::GetZeroTolerance() < Math::FAbs(normalDotDirection))
+
+    if (const auto normalDotDirection = Vector3Tools::DotProduct(normal, line.GetDirection());
+        Math::GetZeroTolerance() < Math::FAbs(normalDotDirection))
     {
         // 直线和三角形不平行，因此直线与三角形的平面相交。
         auto diff = line.GetOrigin() - triangle.GetVertex(0);

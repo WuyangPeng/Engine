@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:09)
+///	版本：0.9.1.6 (2023/10/27 14:03)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -34,6 +34,16 @@ Mathematics::QuerySortTools ::QuerySortTools(int value0, int value1, int value2,
 
 CLASS_INVARIANT_STUB_DEFINE(Mathematics, QuerySortTools)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, QuerySortTools, GetSymbol, Mathematics::NumericalValueSymbol)
+Mathematics::NumericalValueSymbol Mathematics::QuerySortTools::GetSymbol() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Mathematics, QuerySortTools, GetValue, int, int)
+    return impl->GetSymbol();
+}
+
+int Mathematics::QuerySortTools::GetValue(int index) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetValue(index);
+}

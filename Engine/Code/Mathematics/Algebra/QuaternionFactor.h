@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 17:53)
+///	版本：0.9.1.6 (2023/10/26 14:55)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_FACTOR_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_FACTOR_H
@@ -14,7 +14,6 @@
 
 #include "AlgebraFwd.h"
 #include "Quaternion.h"
-#include "Flags/QuaternionFlags.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>

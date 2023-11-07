@@ -11,6 +11,7 @@
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_NATURAL_SPLINE2_DETAIL_H
 
 #include "NaturalSpline2.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/NumericalAnalysis/LinearSystemDetail.h"
 #include "Mathematics/NumericalAnalysis/RombergIntegralDetail.h"

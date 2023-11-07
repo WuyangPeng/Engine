@@ -105,6 +105,10 @@ Rendering::PlanarShadowEffectImpl::PlanarShadowEffectImpl(const BaseRendererShar
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, PlanarShadowEffectImpl)
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+
 void Rendering::PlanarShadowEffectImpl::Draw(const BaseRendererSharedPtr& engine, ProjectionViewWorldUpdater& projectionViewWorldMatrices)
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -154,7 +158,7 @@ void Rendering::PlanarShadowEffectImpl::Draw(const BaseRendererSharedPtr& engine
                 color.Increase(value[3]);
             }
 
-            const auto updateResult = engine->Update(constantBuffer);
+            MAYBE_UNUSED const auto updateResult = engine->Update(constantBuffer);
 
             projectionViewWorldMatrices.Unsubscribe(visual);
             visual->SetEffect(casterEffects.at(j));
@@ -186,6 +190,8 @@ void Rendering::PlanarShadowEffectImpl::Draw(const BaseRendererSharedPtr& engine
     engine->SetBlendState(saveBlendState);
     engine->SetDepthStencilState(saveDepthStencilState);
 }
+
+#include SYSTEM_WARNING_POP
 
 void Rendering::PlanarShadowEffectImpl::GatherVisuals(const BaseRendererSharedPtr& engine, const ProgramFactorySharedPtr& factory, const SpatialSharedPtr& spatial)
 {

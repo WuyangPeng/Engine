@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 16:41)
+///	版本：0.9.1.6 (2023/10/26 10:31)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX2_EIGEN_DECOMPOSITION_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_MATRIX2_EIGEN_DECOMPOSITION_ACHIEVE_H
@@ -14,7 +14,6 @@
 #include "Matrix2EigenDecomposition.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
@@ -29,11 +28,11 @@ Mathematics::Matrix2EigenDecomposition<Real>::Matrix2EigenDecomposition(const Ma
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::Matrix2EigenDecomposition<Real>::IsValid() const noexcept
 {
-    if (Math::FAbs(rotation.GetValue<0, 0>() - rotation.GetValue<1, 1>()) <= epsilon &&
-        Math::FAbs(rotation.GetValue<0, 1>() + rotation.GetValue<1, 0>()) <= epsilon &&
-        Math::FAbs(rotation.GetValue<0, 0>() * rotation.GetValue<1, 1>() - rotation.GetValue<0, 1>() * rotation.GetValue<1, 0>() - Math::GetValue(1)) <= epsilon &&
-        Math::FAbs(diagonal.GetValue<0, 1>() - Math::GetValue(0)) <= epsilon &&
-        Math::FAbs(diagonal.GetValue<1, 0>() - Math::GetValue(0)) <= epsilon)
+    if (Math::FAbs(rotation.template GetValue<0, 0>() - rotation.template GetValue<1, 1>()) <= epsilon &&
+        Math::FAbs(rotation.template GetValue<0, 1>() + rotation.template GetValue<1, 0>()) <= epsilon &&
+        Math::FAbs(rotation.template GetValue<0, 0>() * rotation.template GetValue<1, 1>() - rotation.template GetValue<0, 1>() * rotation.template GetValue<1, 0>() - Math::GetValue(1)) <= epsilon &&
+        Math::FAbs(diagonal.template GetValue<0, 1>() - Math::GetValue(0)) <= epsilon &&
+        Math::FAbs(diagonal.template GetValue<1, 0>() - Math::GetValue(0)) <= epsilon)
     {
         return true;
     }

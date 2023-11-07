@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:13)
+///	版本：0.9.1.6 (2023/10/26 19:58)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_DETAIL_H
 #define MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_DETAIL_H
@@ -16,7 +16,6 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 #include <gsl/util>
 #include <type_traits>
@@ -38,7 +37,6 @@ Mathematics::RationalConversion<N, T>::RationalConversion(const Rational& ration
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 template <int N, typename T>
 void Mathematics::RationalConversion<N, T>::Init(const SignedIntegerType&)
 {
@@ -204,7 +202,7 @@ void Mathematics::RationalConversion<N, T>::InitToIntegral()
 {
     auto division = absNumerator / absDenominator;
 
-    value = division.GetValue<T>();
+    value = division.template GetValue<T>();
 }
 
 #ifdef OPEN_CLASS_INVARIANT

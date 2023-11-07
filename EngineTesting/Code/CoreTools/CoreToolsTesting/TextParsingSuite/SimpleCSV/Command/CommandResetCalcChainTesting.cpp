@@ -35,5 +35,5 @@ void CoreTools::CommandResetCalcChainTesting::MainTest()
 
 void CoreTools::CommandResetCalcChainTesting::CommandResetCalcChainTest() noexcept
 {
-    SimpleCSV::CommandResetCalcChain commandResetCalcChain{};
+    const SimpleCSV::CommandResetCalcChain commandResetCalcChain{};
 }

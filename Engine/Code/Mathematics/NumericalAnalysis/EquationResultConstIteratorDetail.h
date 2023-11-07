@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:47)
+///	版本：0.9.1.6 (2023/10/27 09:59)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_CONST_ITERATOR_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_CONST_ITERATOR_DETAIL_H
@@ -13,7 +13,6 @@
 #include "EquationResultConstIterator.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename ResultConstIter>
 Mathematics::EquationResultConstIterator<ResultConstIter>::EquationResultConstIterator()
@@ -30,15 +29,17 @@ Mathematics::EquationResultConstIterator<ResultConstIter>::EquationResultConstIt
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename ResultConstIter>
 bool Mathematics::EquationResultConstIterator<ResultConstIter>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename ResultConstIter>
-void Mathematics::EquationResultConstIterator<ResultConstIter>::increment()
+void Mathematics::EquationResultConstIterator<ResultConstIter>::increment() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -46,7 +47,7 @@ void Mathematics::EquationResultConstIterator<ResultConstIter>::increment()
 }
 
 template <typename ResultConstIter>
-bool Mathematics::EquationResultConstIterator<ResultConstIter>::equal(const EquationResultConstIterator& other) const
+bool Mathematics::EquationResultConstIterator<ResultConstIter>::equal(const EquationResultConstIterator& other) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

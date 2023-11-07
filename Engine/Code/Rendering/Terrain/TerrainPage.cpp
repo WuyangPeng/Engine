@@ -40,11 +40,11 @@ Rendering::TerrainPage::TerrainPage(const VertexFormatSharedPtr& vformat, int si
     SetVertexBuffer(mesh->GetVertexBuffer());
     SetIndexBuffer(mesh->GetIndexBuffer());
 
-    auto numVertices = GetVertexBuffer()->GetNumElements();
+    const auto numVertices = GetVertexBuffer()->GetNumElements();
     for (auto i = 0; i < numVertices; ++i)
     {
-        const auto x = i % pageSize;
-        const auto y = i / pageSize;
+        MAYBE_UNUSED const auto x = i % pageSize;
+        MAYBE_UNUSED const auto y = i / pageSize;
     }
 
     UpdateModelSpace(VisualUpdateType::Normals);

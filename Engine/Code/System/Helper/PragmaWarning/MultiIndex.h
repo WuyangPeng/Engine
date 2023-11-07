@@ -39,6 +39,7 @@
 #include SYSTEM_WARNING_DISABLE(26497)
 #include SYSTEM_WARNING_DISABLE(26812)
 #include SYSTEM_WARNING_DISABLE(26814)
+#include SYSTEM_WARNING_DISABLE(26819)
 
 #include <boost/multi_index/member.hpp>
 #include <boost/multi_index/ordered_index.hpp>

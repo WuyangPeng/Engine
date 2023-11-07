@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 18:08)
+///	版本：0.9.1.6 (2023/10/27 16:37)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_TRIANGLE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_TRIANGLE3_TRIANGLE3_DETAIL_H
@@ -74,8 +74,9 @@ typename Mathematics::DistanceTriangle3Triangle3<Real>::DistanceResult Mathemati
         const Segment3<Real> edge{ extent, center, direction };
 
         DistanceSegment3Triangle3<Real> distanceSegment3Triangle3{ edge, rhsTriangle };
-        auto squared = distanceSegment3Triangle3.GetSquared();
-        if (squared.GetDistance() < sqrDist)
+
+        if (auto squared = distanceSegment3Triangle3.GetSquared();
+            squared.GetDistance() < sqrDist)
         {
             closestPoint0 = squared.GetLhsClosestPoint();
             closestPoint1 = squared.GetRhsClosestPoint();
@@ -106,8 +107,9 @@ typename Mathematics::DistanceTriangle3Triangle3<Real>::DistanceResult Mathemati
         const Segment3<Real> edge{ extent, center, direction };
 
         DistanceSegment3Triangle3<Real> distanceSegment3Triangle3{ edge, lhsTriangle };
-        auto squared = distanceSegment3Triangle3.GetSquared();
-        if (squared.GetDistance() < sqrDist)
+
+        if (auto squared = distanceSegment3Triangle3.GetSquared();
+            squared.GetDistance() < sqrDist)
         {
             closestPoint0 = squared.GetLhsClosestPoint();
             closestPoint1 = squared.GetRhsClosestPoint();

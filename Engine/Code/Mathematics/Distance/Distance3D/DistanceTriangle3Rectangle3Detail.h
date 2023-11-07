@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 18:08)
+///	版本：0.9.1.6 (2023/10/27 16:37)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_TRIANGLE3_RECTANGLE3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_TRIANGLE3_RECTANGLE3_DETAIL_H
@@ -73,8 +73,9 @@ typename Mathematics::DistanceTriangle3Rectangle3<Real>::DistanceResult Mathemat
         const Segment3<Real> edge{ extent, center, direction };
 
         DistanceSegment3Rectangle3<Real> distanceSegment3Rectangle3{ edge, rectangle };
-        auto squared = distanceSegment3Rectangle3.GetSquared();
-        if (squared.GetDistance() < sqrDist)
+
+        if (auto squared = distanceSegment3Rectangle3.GetSquared();
+            squared.GetDistance() < sqrDist)
         {
             // 三角形点在closestPoint0中报告，而矩形点在closestPoint1中报告。
             // distanceSegment3Rectangle3计算器适用于triangleEdge-rectangle，
@@ -97,8 +98,9 @@ typename Mathematics::DistanceTriangle3Rectangle3<Real>::DistanceResult Mathemat
             const Segment3<Real> edge{ extent, center, direction };
 
             DistanceSegment3Triangle3<Real> distanceSegment3Triangle3{ edge, triangle };
-            auto squared = distanceSegment3Triangle3.GetSquared();
-            if (squared.GetDistance() < sqrDist)
+
+            if (auto squared = distanceSegment3Triangle3.GetSquared();
+                squared.GetDistance() < sqrDist)
             {
                 // 矩形点在closestPoint0中报告，而三角形点在closestPoint1中报告。
                 // distanceSegment3Triangle3计算器适用于rectangleEdge-triangle，

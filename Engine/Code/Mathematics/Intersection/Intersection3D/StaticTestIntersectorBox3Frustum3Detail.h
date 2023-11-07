@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:29)
+///	版本：0.9.1.6 (2023/10/28 14:20)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_BOX3_FRUSTUM3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_BOX3_FRUSTUM3_DETAIL_H
@@ -140,8 +140,8 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
     diffDotMin.at(1) = frustum.GetDirectionMin() * diffDot.at(1);
     diffDotMax.at(2) = frustum.GetUpBound() * diffDot.at(2);
     value0 = diffDotMin.at(1) - diffDotMax.at(2);
-    auto MTwoUF = frustum.GetMTwoUF();
-    if (value0 + radius < MTwoUF || radius < value0)
+    auto mTwoUf = frustum.GetMTwoUF();
+    if (value0 + radius < mTwoUf || radius < value0)
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;
@@ -154,7 +154,7 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
     }
     radius = extents.at(0) * Math::FAbs(upDotMinPlusDirectionDotMax.at(0)) + extents.at(1) * Math::FAbs(upDotMinPlusDirectionDotMax.at(1)) + extents.at(2) * Math::FAbs(upDotMinPlusDirectionDotMax.at(2));
     value0 = -(diffDotMin.at(1) + diffDotMax.at(2));
-    if (value0 + radius < MTwoUF || radius < value0)
+    if (value0 + radius < mTwoUf || radius < value0)
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;
@@ -165,18 +165,18 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
     {
         auto p = frustum.GetRightBound() * Math::FAbs(rightDot.at(i)) + frustum.GetUpBound() * Math::FAbs(upDot.at(i));
         directionDotMin.at(i) = frustum.GetDirectionMin() * directionDot.at(i);
-        auto fmin = directionDotMin.at(i) - p;
-        if (fmin < Math::GetValue(0))
+        auto fMin = directionDotMin.at(i) - p;
+        if (fMin < Math::GetValue(0))
         {
-            fmin *= frustum.GetDirectionRatio();
+            fMin *= frustum.GetDirectionRatio();
         }
-        auto fmax = directionDotMin.at(i) + p;
-        if (Math::GetValue(0) < fmax)
+        auto fMax = directionDotMin.at(i) + p;
+        if (Math::GetValue(0) < fMax)
         {
-            fmax *= frustum.GetDirectionRatio();
+            fMax *= frustum.GetDirectionRatio();
         }
         value0 = rightDot.at(i) * diffDot.at(0) + upDot.at(i) * diffDot.at(1) + directionDot.at(i) * diffDot.at(2);
-        if (value0 + extents.at(i) < fmin || fmax < value0 - extents.at(i))
+        if (value0 + extents.at(i) < fMin || fMax < value0 - extents.at(i))
         {
             this->SetIntersectionType(IntersectionType::Empty);
             return;
@@ -187,19 +187,19 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
     for (auto i = 0; i < 3; ++i)
     {
         auto p = frustum.GetUpBound() * Math::FAbs(directionDot.at(i));
-        auto fmin = -upDotMin.at(i) - p;
-        if (fmin < Math::GetValue(0))
+        auto fMin = -upDotMin.at(i) - p;
+        if (fMin < Math::GetValue(0))
         {
-            fmin *= frustum.GetDirectionRatio();
+            fMin *= frustum.GetDirectionRatio();
         }
-        auto fmax = -upDotMin.at(i) + p;
-        if (Math::GetValue(0) < fmax)
+        auto fMax = -upDotMin.at(i) + p;
+        if (Math::GetValue(0) < fMax)
         {
-            fmax *= frustum.GetDirectionRatio();
+            fMax *= frustum.GetDirectionRatio();
         }
         value0 = directionDot.at(i) * diffDot.at(1) - upDot.at(i) * diffDot.at(2);
         radius = extents.at(0) * Math::FAbs(upDot.at(i) * directionDot.at(0) - upDot.at(0) * directionDot.at(i)) + extents.at(1) * Math::FAbs(upDot.at(i) * directionDot.at(1) - upDot.at(1) * directionDot.at(i)) + extents.at(2) * Math::FAbs(upDot.at(i) * directionDot.at(2) - upDot.at(2) * directionDot.at(i));
-        if (value0 + radius < fmin || fmax < value0 - radius)
+        if (value0 + radius < fMin || fMax < value0 - radius)
         {
             this->SetIntersectionType(IntersectionType::Empty);
             return;
@@ -210,19 +210,19 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
     for (auto i = 0; i < 3; ++i)
     {
         auto p = frustum.GetRightBound() * Math::FAbs(directionDot.at(i));
-        auto fmin = rightDotMin.at(i) - p;
-        if (fmin < Math::GetValue(0))
+        auto fMin = rightDotMin.at(i) - p;
+        if (fMin < Math::GetValue(0))
         {
-            fmin *= frustum.GetDirectionRatio();
+            fMin *= frustum.GetDirectionRatio();
         }
-        auto fmax = rightDotMin.at(i) + p;
-        if (Math::GetValue(0) < fmax)
+        auto fMax = rightDotMin.at(i) + p;
+        if (Math::GetValue(0) < fMax)
         {
-            fmax *= frustum.GetDirectionRatio();
+            fMax *= frustum.GetDirectionRatio();
         }
         value0 = -directionDot.at(i) * diffDot.at(0) + rightDot.at(i) * diffDot.at(2);
         radius = extents.at(0) * Math::FAbs(rightDot.at(i) * directionDot.at(0) - rightDot.at(0) * directionDot.at(i)) + extents.at(1) * Math::FAbs(rightDot.at(i) * directionDot.at(1) - rightDot.at(1) * directionDot.at(i)) + extents.at(2) * Math::FAbs(rightDot.at(i) * directionDot.at(2) - rightDot.at(2) * directionDot.at(i));
-        if (value0 + radius < fmin || fmax < value0 - radius)
+        if (value0 + radius < fMin || fMax < value0 - radius)
         {
             this->SetIntersectionType(IntersectionType::Empty);
             return;
@@ -242,15 +242,15 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
     {
         auto p = frustum.GetRightBound() * Math::FAbs(upDotMinMinusDirectionDotMax.at(i)) + frustum.GetUpBound() * Math::FAbs(rightDotMinMinusDirectionDotMax.at(i));
         auto value2 = -frustum.GetDirectionMin() * upDotMaxMinusRightDotMax.at(i);
-        auto fmin = value2 - p;
-        if (fmin < Math::GetValue(0))
+        auto fMin = value2 - p;
+        if (fMin < Math::GetValue(0))
         {
-            fmin *= frustum.GetDirectionRatio();
+            fMin *= frustum.GetDirectionRatio();
         }
-        auto fmax = value2 + p;
-        if (Math::GetValue(0) < fmax)
+        auto fMax = value2 + p;
+        if (Math::GetValue(0) < fMax)
         {
-            fmax *= frustum.GetDirectionRatio();
+            fMax *= frustum.GetDirectionRatio();
         }
         value0 = diffDot.at(0) * upDotMinMinusDirectionDotMax.at(i) - diffDot.at(1) * rightDotMinMinusDirectionDotMax.at(i) - diffDot.at(2) * upDotMaxMinusRightDotMax.at(i);
         radius = Math::GetValue(0);
@@ -259,7 +259,7 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
             radius += extents.at(j) * Math::FAbs(rightDot.at(j) * upDotMinMinusDirectionDotMax.at(i) - upDot.at(j) * rightDotMinMinusDirectionDotMax.at(i) - directionDot.at(j) * upDotMaxMinusRightDotMax.at(i));
         }
 
-        if (value0 + radius < fmin || fmax < value0 - radius)
+        if (value0 + radius < fMin || fMax < value0 - radius)
         {
             this->SetIntersectionType(IntersectionType::Empty);
             return;
@@ -271,15 +271,15 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
     {
         auto p = frustum.GetRightBound() * Math::FAbs(upDotMinPlusDirectionDotMax.at(i)) + frustum.GetUpBound() * Math::FAbs(rightDotMinMinusDirectionDotMax.at(i));
         auto value2 = -frustum.GetDirectionMin() * upDotMaxPlusRightDotMax.at(i);
-        auto fmin = value2 - p;
-        if (fmin < Math::GetValue(0))
+        auto fMin = value2 - p;
+        if (fMin < Math::GetValue(0))
         {
-            fmin *= frustum.GetDirectionRatio();
+            fMin *= frustum.GetDirectionRatio();
         }
-        auto fmax = value2 + p;
-        if (Math::GetValue(0) < fmax)
+        auto fMax = value2 + p;
+        if (Math::GetValue(0) < fMax)
         {
-            fmax *= frustum.GetDirectionRatio();
+            fMax *= frustum.GetDirectionRatio();
         }
         value0 = diffDot.at(0) * upDotMinPlusDirectionDotMax.at(i) - diffDot.at(1) * rightDotMinMinusDirectionDotMax.at(i) - diffDot.at(2) * upDotMaxPlusRightDotMax.at(i);
         radius = Math::GetValue(0);
@@ -287,7 +287,7 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
         {
             radius += extents.at(j) * Math::FAbs(rightDot.at(j) * upDotMinPlusDirectionDotMax.at(i) - upDot.at(j) * rightDotMinMinusDirectionDotMax.at(i) - directionDot.at(j) * upDotMaxPlusRightDotMax.at(i));
         }
-        if (value0 + radius < fmin || fmax < value0 - radius)
+        if (value0 + radius < fMin || fMax < value0 - radius)
         {
             this->SetIntersectionType(IntersectionType::Empty);
             return;
@@ -299,15 +299,15 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
     {
         auto p = frustum.GetRightBound() * Math::FAbs(upDotMinMinusDirectionDotMax.at(i)) + frustum.GetUpBound() * Math::FAbs(rightDotMinPlusDirectionDotMax.at(i));
         auto value = frustum.GetDirectionMin() * upDotMaxPlusRightDotMax.at(i);
-        auto fmin = value - p;
-        if (fmin < Math::GetValue(0))
+        auto fMin = value - p;
+        if (fMin < Math::GetValue(0))
         {
-            fmin *= frustum.GetDirectionRatio();
+            fMin *= frustum.GetDirectionRatio();
         }
-        auto fmax = value + p;
-        if (Math::GetValue(0) < fmax)
+        auto fMax = value + p;
+        if (Math::GetValue(0) < fMax)
         {
-            fmax *= frustum.GetDirectionRatio();
+            fMax *= frustum.GetDirectionRatio();
         }
         value0 = diffDot.at(0) * upDotMinMinusDirectionDotMax.at(i) - diffDot.at(1) * rightDotMinPlusDirectionDotMax.at(i) + diffDot.at(2) * upDotMaxPlusRightDotMax.at(i);
         radius = Math::GetValue(0);
@@ -315,7 +315,7 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
         {
             radius += extents.at(j) * Math::FAbs(rightDot.at(j) * upDotMinMinusDirectionDotMax.at(i) - upDot.at(j) * rightDotMinPlusDirectionDotMax.at(i) + directionDot.at(j) * upDotMaxPlusRightDotMax.at(i));
         }
-        if (value0 + radius < fmin || fmax < value0 - radius)
+        if (value0 + radius < fMin || fMax < value0 - radius)
         {
             this->SetIntersectionType(IntersectionType::Empty);
             return;
@@ -327,15 +327,15 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
     {
         auto p = frustum.GetRightBound() * Math::FAbs(upDotMinPlusDirectionDotMax.at(i)) + frustum.GetUpBound() * Math::FAbs(rightDotMinPlusDirectionDotMax.at(i));
         auto value = frustum.GetDirectionMin() * upDotMaxMinusRightDotMax.at(i);
-        auto fmin = value - p;
-        if (fmin < Math::GetValue(0))
+        auto fMin = value - p;
+        if (fMin < Math::GetValue(0))
         {
-            fmin *= frustum.GetDirectionRatio();
+            fMin *= frustum.GetDirectionRatio();
         }
-        auto fmax = value + p;
-        if (Math::GetValue(0) < fmax)
+        auto fMax = value + p;
+        if (Math::GetValue(0) < fMax)
         {
-            fmax *= frustum.GetDirectionRatio();
+            fMax *= frustum.GetDirectionRatio();
         }
         value0 = diffDot.at(0) * upDotMinPlusDirectionDotMax.at(i) - diffDot.at(1) * rightDotMinPlusDirectionDotMax.at(i) + diffDot.at(2) * upDotMaxMinusRightDotMax.at(i);
         radius = Math::GetValue(0);
@@ -343,7 +343,7 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
         {
             radius += extents.at(j) * Math::FAbs(rightDot.at(j) * upDotMinPlusDirectionDotMax.at(i) - upDot.at(j) * rightDotMinPlusDirectionDotMax.at(i) + directionDot.at(j) * upDotMaxMinusRightDotMax.at(i));
         }
-        if (value0 + radius < fmin || fmax < value0 - radius)
+        if (value0 + radius < fMin || fMax < value0 - radius)
         {
             this->SetIntersectionType(IntersectionType::Empty);
             return;

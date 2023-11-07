@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:01)
+///	版本：0.9.1.6 (2023/10/28 16:00)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LOZENGE3_LOZENGE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LOZENGE3_LOZENGE3_H
@@ -23,6 +23,7 @@ namespace Mathematics
     public:
         using ClassType = StaticTestIntersectorLozenge3Lozenge3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
+
         using Vector3 = Vector3<Real>;
         using Lozenge3 = Lozenge3<Real>;
         using Vector3Tools = Vector3Tools<Real>;

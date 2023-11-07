@@ -15,7 +15,7 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
-#include "Mathematics/CurvesSurfacesVolumes/ParametricSurfaceDetail.h" 
+#include "Mathematics/CurvesSurfacesVolumes/ParametricSurfaceDetail.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, RectangleSurface);
@@ -39,12 +39,10 @@ Rendering::RectangleSurface::RectangleSurface(const std::shared_ptr<Mathematics:
 
     const auto uMin = surface->GetUMin();
     const auto uRange = surface->GetUMax() - uMin;
-    const auto uDelta = uRange / boost::numeric_cast<float>(numUSamples - 1);
+
     const auto vMin = surface->GetVMin();
     const auto vRange = surface->GetVMax() - vMin;
-    const auto vDelta = vRange / boost::numeric_cast<float>(numVSamples - 1);
 
-    const auto numVertices = numUSamples * numVSamples;
     const auto vstride = vformat->GetStride();
     SetVertexBuffer(VertexBuffer::Create(*vformat, vstride));
 
@@ -89,22 +87,7 @@ void Rendering::RectangleSurface::UpdateSurface()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    const auto uMin = surface->GetUMin();
-    const auto uDelta = (surface->GetUMax() - uMin) / boost::numeric_cast<float>(numUSamples - 1);
-    const auto vMin = surface->GetVMin();
-    const auto vDelta = (surface->GetVMax() - vMin) / boost::numeric_cast<float>(numVSamples - 1);
-
-    for (auto uIndex = 0, i = 0; uIndex < numUSamples; ++uIndex)
-    {
-        const auto u = uMin + uDelta * uIndex;
-        for (auto vIndex = 0; vIndex < numVSamples; ++vIndex, ++i)
-        {
-            const auto v = vMin + vDelta * vIndex;
-        }
-    }
-
     UpdateModelSpace(VisualUpdateType::Normals);
- 
 }
 
 Rendering::RectangleSurface::RectangleSurface(LoadConstructor value)

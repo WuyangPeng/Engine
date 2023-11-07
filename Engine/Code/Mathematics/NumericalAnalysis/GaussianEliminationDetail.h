@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:47)
+///	版本：0.9.1.6 (2023/10/27 10:00)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_GAUSSIAN_ELIMINATION_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_GAUSSIAN_ELIMINATION_DETAIL_H
@@ -25,30 +25,30 @@ Mathematics::GaussianElimination<Real>::GaussianElimination(int numRows, const C
       matrix{ matrix },
       wantInverse{ wantInverse },
       b{ b },
+      numCols{ numCols },
       c{ c },
       epsilon{ epsilon },
       isInverse{ false },
       inverseMatrix{ numRows, numRows, matrix },
       determinant{ Math::GetValue(1) },
       x{ b },
-      numCols{ numCols },
       y{ numRows, numCols, c }
 {
     const auto numElement = numRows * numRows;
     if (matrix.empty() || numElement != boost::numeric_cast<int>(matrix.size()))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("矩阵输入无效！"));
+        THROW_EXCEPTION(SYSTEM_TEXT("矩阵输入无效！"))
     }
 
     if (!b.empty() && b.size() != matrix.size())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("b无效输入！"));
+        THROW_EXCEPTION(SYSTEM_TEXT("b无效输入！"))
     }
 
     const auto numCElement = numRows * numCols;
     if (!c.empty() && (boost::numeric_cast<int>(c.size()) != numCElement))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("c无效输入！"));
+        THROW_EXCEPTION(SYSTEM_TEXT("c无效输入！"))
     }
 
     Init();
@@ -223,8 +223,8 @@ void Mathematics::GaussianElimination<Real>::Init()
 template <typename Real>
 bool Mathematics::GaussianElimination<Real>::IsValid() const noexcept
 {
-    const auto numElement = numRows * numRows;
-    if (matrix.empty() || gsl::narrow_cast<size_t>(numElement) != matrix.size())
+    if (const auto numElement = numRows * numRows;
+        matrix.empty() || gsl::narrow_cast<size_t>(numElement) != matrix.size())
     {
         return false;
     }
@@ -234,8 +234,8 @@ bool Mathematics::GaussianElimination<Real>::IsValid() const noexcept
         return false;
     }
 
-    const auto numCElement = numRows * numCols;
-    if (!c.empty() && (c.size() != gsl::narrow_cast<size_t>(numCElement)))
+    if (const auto numCElement = numRows * numCols;
+        !c.empty() && (c.size() != gsl::narrow_cast<size_t>(numCElement)))
     {
         return false;
     }
@@ -245,8 +245,8 @@ bool Mathematics::GaussianElimination<Real>::IsValid() const noexcept
         return false;
     }
 
-    const auto numYElement = y.GetNumRows() * y.GetNumCols();
-    if (c.size() != gsl::narrow_cast<size_t>(numYElement))
+    if (const auto numYElement = y.GetNumRows() * y.GetNumCols();
+        c.size() != gsl::narrow_cast<size_t>(numYElement))
     {
         return false;
     }

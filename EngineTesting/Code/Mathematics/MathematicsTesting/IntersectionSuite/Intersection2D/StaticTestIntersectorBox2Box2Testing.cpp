@@ -43,7 +43,7 @@ void Mathematics::StaticTestIntersectorBox2Box2Testing::MainTest()
 void Mathematics::StaticTestIntersectorBox2Box2Testing::BoxTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

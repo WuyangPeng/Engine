@@ -19,7 +19,6 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/Detail/ClodMesh.h"
-#include "Rendering/Detail/CreateClodMesh.h"
 #include "Rendering/Detail/SwitchNode.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/LoadVisual.h"

@@ -11,6 +11,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Mathematics/Algebra/Vector3Tools.h"
 #include "Mathematics/Objects3D/Polyhedron3Detail.h"
 
 #include <random>
@@ -43,8 +44,8 @@ void Mathematics::Polyhedron3Testing::PolyhedronTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const std::uniform_real<double> randomDistribution0(0.0, 100.0);
-    const std::uniform_real<double> randomDistribution1(-100.0, 0.0);
+    std::uniform_real<double> randomDistribution0(0.0, 100.0);
+    std::uniform_real<double> randomDistribution1(-100.0, 0.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

@@ -15,6 +15,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
+#include <iostream>
+
 System::EnumShiftableTesting::EnumShiftableTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 17:12)
+///	版本：0.9.1.6 (2023/10/26 14:46)
 
 #ifndef MATHEMATICS_ALGEBRA_POLYNOMIAL_H
 #define MATHEMATICS_ALGEBRA_POLYNOMIAL_H
@@ -13,13 +13,11 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "AlgebraFwd.h"
-#include "PolynomialDivideDetail.h"
 #include "System/Helper/PragmaWarning/Operators.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Mathematics/Algebra/PolynomialDivide.h"
 #include "Mathematics/Base/MathDetail.h"
 
-#include <type_traits>
 #include <vector>
 
 namespace Mathematics
@@ -30,6 +28,7 @@ namespace Mathematics
     {
     public:
         using ClassType = Polynomial<Real>;
+
         using PolynomialDivide = PolynomialDivide<Real>;
         using Math = Math<Real>;
         using ContainerType = std::vector<Real>;
@@ -53,7 +52,7 @@ namespace Mathematics
         NODISCARD Real GetEnd() const noexcept;
 
         // 计算多项式，p(t)。
-        NODISCARD Real operator()(Real value) const;
+        NODISCARD Real operator()(Real value) const noexcept;
 
         NODISCARD ContainerType GetValue() const;
         void SetValue(const ContainerType& aCoeff);

@@ -196,7 +196,7 @@ CoreTools::SimpleZip::ZipArchiveImpl::EntryNamesType CoreTools::SimpleZip::ZipAr
     const auto count = std::ranges::count(dir, TextParsing::gForwardSlash);
     const auto rootDepth = (dir.empty() ? 1 : (dir.back() == TextParsing::gForwardSlash ? count + 1 : count + 2));
 
-    constexpr auto removeEntryNames = [&](const auto& fileName) {
+    const auto removeEntryNames = [&](const auto& fileName) {
         const auto subFolderDepth = std::ranges::count(fileName, TextParsing::gForwardSlash);
 
         return (rootDepth < subFolderDepth) || (subFolderDepth == rootDepth && fileName.back() != TextParsing::gForwardSlash);
@@ -220,7 +220,7 @@ void CoreTools::SimpleZip::ZipArchiveImpl::GetEntryNames(const std::string& dir,
             conditionDir += TextParsing::gForwardSlash;
         }
 
-        constexpr auto removeEntryNames = [&](const auto& fileName) {
+        const auto removeEntryNames = [&](const auto& fileName) {
             return fileName == conditionDir || fileName.substr(0, conditionDir.size()) != conditionDir;
         };
 

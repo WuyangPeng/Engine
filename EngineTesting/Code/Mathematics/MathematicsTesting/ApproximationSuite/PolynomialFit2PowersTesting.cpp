@@ -44,10 +44,10 @@ void Mathematics::PolynomialFit2PowersTesting::MainTest()
 void Mathematics::PolynomialFit2PowersTesting::FitTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(0.0, 5.0);
-    const std::uniform_int<> randomDistribution1(10, 50);
-    const std::uniform_int<> thirdRandomDistribution(3, 5);
-    const std::uniform_int<> fourthRandomDistribution(0, 7);
+    std::uniform_real<double> randomDistribution0(0.0, 5.0);
+    std::uniform_int<> randomDistribution1(10, 50);
+    std::uniform_int<> thirdRandomDistribution(3, 5);
+    std::uniform_int<> fourthRandomDistribution(0, 7);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

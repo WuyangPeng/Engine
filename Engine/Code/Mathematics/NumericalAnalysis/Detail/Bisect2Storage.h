@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:24)
+///	版本：0.9.1.6 (2023/10/27 11:09)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT2_STORAGE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT2_STORAGE_H
@@ -19,7 +19,6 @@
 
 #include <boost/noncopyable.hpp>
 #include <memory>
-#include <type_traits>
 
 namespace Mathematics
 {
@@ -30,6 +29,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = Bisect2Storage<Real>;
+
         using Bisect2Root = Bisect2Root<Real>;
         using Bisect2RootSharedPtr = std::shared_ptr<Bisect2Root>;
         using Math = Math<Real>;
@@ -42,7 +42,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD bool TestFourCornerValues(Real beginPointX, Real beginPointY, Real endPointX, Real endPointY);
+        NODISCARD bool TestFourCornerValues(Real beginX, Real beginY, Real endX, Real endY);
 
         NODISCARD bool TestEdgeValues();
 

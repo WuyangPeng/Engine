@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:13)
+///	版本：0.9.1.6 (2023/10/28 16:04)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR1_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR1_H
@@ -22,6 +22,7 @@ namespace Mathematics
     public:
         using ClassType = DynamicTestIntersector1<Real>;
         using ParentType = Intersector1<Real>;
+
         using Math = typename ParentType::Math;
 
     public:
@@ -29,7 +30,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD bool IsIntersection() const noexcept final;
+        NODISCARD bool IsIntersection() const noexcept override;
 
         // 动态相交查询的两个区间处于第一次/最后一次接触的时间。
         NODISCARD Real GetFirstTime() const;

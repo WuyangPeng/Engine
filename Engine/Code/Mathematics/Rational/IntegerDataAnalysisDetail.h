@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:11)
+///	版本：0.9.1.6 (2023/10/26 19:38)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_ANALYSIS_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_ANALYSIS_DETAIL_H
@@ -18,8 +18,6 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 #include <iomanip>
 #include <iostream>
@@ -201,11 +199,11 @@ int Mathematics::IntegerDataAnalysis<N>::GetLeadingBit() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto block = GetLeadingBlock();
-    if (0 <= block)
+    if (const auto block = GetLeadingBlock();
+        0 <= block)
     {
-        const auto bit = GetLeadingBit(block);
-        if (0 <= bit)
+        if (const auto bit = GetLeadingBit(block);
+            0 <= bit)
         {
             return bit + 16 * block;
         }
@@ -219,11 +217,11 @@ int Mathematics::IntegerDataAnalysis<N>::GetTrailingBit() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto block = GetTrailingBlock();
-    if (0 <= block)
+    if (const auto block = GetTrailingBlock();
+        0 <= block)
     {
-        const auto bit = GetTrailingBit(block);
-        if (0 <= bit)
+        if (const auto bit = GetTrailingBit(block);
+            0 <= bit)
         {
             return bit + 16 * block;
         }

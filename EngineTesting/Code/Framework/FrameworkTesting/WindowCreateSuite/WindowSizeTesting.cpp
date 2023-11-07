@@ -54,7 +54,7 @@ void Framework::WindowSizeTesting::RandomTest()
     constexpr auto maxValue = 2048;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> random{ minValue, maxValue };
+    std::uniform_int<> random{ minValue, maxValue };
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
@@ -74,7 +74,7 @@ void Framework::WindowSizeTesting::LParamTest()
     constexpr auto maxValue = 2048;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> random{ minValue, maxValue };
+    std::uniform_int<> random{ minValue, maxValue };
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
@@ -95,7 +95,7 @@ void Framework::WindowSizeTesting::EqualTest()
     constexpr auto maxValue = 2048;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> random{ minValue, maxValue };
+    std::uniform_int<> random{ minValue, maxValue };
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
@@ -120,7 +120,7 @@ void Framework::WindowSizeTesting::SetWindowSizeTest()
     constexpr auto maxValue = 2048;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> random{ minValue, maxValue };
+    std::uniform_int<> random{ minValue, maxValue };
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
@@ -146,7 +146,7 @@ void Framework::WindowSizeTesting::OStreamTest()
     constexpr auto maxValue = 2048;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> random{ minValue, maxValue };
+    std::uniform_int<> random{ minValue, maxValue };
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
@@ -165,7 +165,7 @@ void Framework::WindowSizeTesting::NegativeTest()
     constexpr auto maxValue = 2048;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> random{ minValue, maxValue };
+    std::uniform_int<> random{ minValue, maxValue };
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {

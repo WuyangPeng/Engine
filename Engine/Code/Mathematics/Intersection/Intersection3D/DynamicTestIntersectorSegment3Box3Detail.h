@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:23)
+///	版本：0.9.1.6 (2023/10/27 18:17)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_SEGMENT3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_SEGMENT3_BOX3_DETAIL_H
@@ -15,8 +15,8 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicTestIntersectorSegment3Box3<Real>::DynamicTestIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
-    : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, segment{ segment }, box{ box }, solid{ solid }
+Mathematics::DynamicTestIntersectorSegment3Box3<Real>::DynamicTestIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+    : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, segment{ segment }, box{ box }, solid{ solid }
 {
     Test();
 
@@ -57,7 +57,7 @@ void Mathematics::DynamicTestIntersectorSegment3Box3<Real>::Test()
 {
     // 获取线段的端点。
     using SegmentType = std::array<Vector3, 2>;
-    SegmentType segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
+    const SegmentType segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
 
     // 获取相对于线段的框速度。
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();

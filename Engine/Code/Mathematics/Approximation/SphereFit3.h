@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:24)
+///	版本：0.9.1.6 (2023/10/27 14:52)
 
 #ifndef MATHEMATICS_APPROXIMATION_SPHERE_FIT3_H
 #define MATHEMATICS_APPROXIMATION_SPHERE_FIT3_H
@@ -31,6 +31,7 @@ namespace Mathematics
     {
     public:
         using ClassType = SphereFit3<Real>;
+
         using Vector3 = Vector3<Real>;
         using Sphere3 = Sphere3<Real>;
         using Points = std::vector<Vector3>;
@@ -45,7 +46,7 @@ namespace Mathematics
 
     private:
         void Calculate(const Points& points, int maxIterations, bool initialCenterIsAverage);
-        NODISCARD const Vector3 GetAveragePoint(const Points& points);
+        NODISCARD Vector3 GetAveragePoint(const Points& points);
         void Iteration(const Points& points, const Vector3& average);
 
     private:

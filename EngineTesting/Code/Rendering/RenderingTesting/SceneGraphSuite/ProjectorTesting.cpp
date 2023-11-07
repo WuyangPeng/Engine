@@ -65,7 +65,7 @@ void Rendering::ProjectorTesting::MainTest()
 void Rendering::ProjectorTesting::FrameTest()
 {
     std::default_random_engine generator;
-    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -96,7 +96,7 @@ void Rendering::ProjectorTesting::FrameTest()
 void Rendering::ProjectorTesting::FrustumTest()
 {
     std::default_random_engine generator;
-    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -228,7 +228,7 @@ void Rendering::ProjectorTesting::FrustumTest()
 void Rendering::ProjectorTesting::ProjectionMatrixTest()
 {
     std::default_random_engine generator;
-    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
     const std::uniform_real<float> secondFloatRandomDistribution(0.0f, 180.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
@@ -491,7 +491,7 @@ void Rendering::ProjectorTesting::ProjectionMatrixTest()
 void Rendering::ProjectorTesting::AxesAlignBoundingBoxTest()
 {
     std::default_random_engine generator;
-    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -548,6 +548,11 @@ void Rendering::ProjectorTesting::AxesAlignBoundingBoxTest()
         {
             const auto index = i * 3;
             const float* vertex = &buffer.at(index);
+
+            if (vertex == nullptr)
+            {
+                return;
+            }
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)

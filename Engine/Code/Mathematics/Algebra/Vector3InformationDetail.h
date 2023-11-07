@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/01 10:21)
+///	版本：0.9.1.6 (2023/10/26 11:16)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR3_TOOLS_INFORMATION_DETAIL_H
 #define MATHEMATICS_ALGEBRA_VECTOR3_TOOLS_INFORMATION_DETAIL_H
@@ -49,7 +49,6 @@ Mathematics::Vector3Information<Real>::Vector3Information(const ContainerType& p
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real>
 requires std::is_arithmetic_v<Real>
 void Mathematics::Vector3Information<Real>::Init()
@@ -103,7 +102,6 @@ void Mathematics::Vector3Information<Real>::ComputeAxisAlignedBoundingBox()
     aabb = AxesAlignBoundingBox3D{ min, max };
 }
 
-// private
 template <typename Real>
 requires std::is_arithmetic_v<Real>
 void Mathematics::Vector3Information<Real>::DetermineMaximumRange()

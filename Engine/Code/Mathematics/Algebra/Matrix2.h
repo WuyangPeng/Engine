@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 16:25)
+///	版本：0.9.1.6 (2023/10/26 14:44)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX2_H
 #define MATHEMATICS_ALGEBRA_MATRIX2_H
@@ -35,6 +35,7 @@ namespace Mathematics
     {
     public:
         using ClassType = Matrix2<Real>;
+
         using Vector2 = Vector2<Real>;
         using VectorIndex = typename Vector2::PointIndex;
 

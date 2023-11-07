@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 16:56)
+///	版本：0.9.1.6 (2023/10/26 10:37)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX4_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_MATRIX4_ACHIEVE_H
@@ -371,22 +371,22 @@ Mathematics::Matrix4<Real> Mathematics::Matrix4<Real>::Adjoint() const noexcept
     const auto b4 = GetValue<2, 1>() * GetValue<3, 3>() - GetValue<2, 3>() * GetValue<3, 1>();
     const auto b5 = GetValue<2, 2>() * GetValue<3, 3>() - GetValue<2, 3>() * GetValue<3, 2>();
 
-    return Matrix4<Real>{ GetValue<1, 1>() * b5 - GetValue<1, 2>() * b4 + GetValue<1, 3>() * b3,
-                          -GetValue<0, 1>() * b5 + GetValue<0, 2>() * b4 - GetValue<0, 3>() * b3,
-                          GetValue<3, 1>() * a5 - GetValue<3, 2>() * a4 + GetValue<3, 3>() * a3,
-                          -GetValue<2, 1>() * a5 + GetValue<2, 2>() * a4 - GetValue<2, 3>() * a3,
-                          -GetValue<1, 0>() * b5 + GetValue<1, 2>() * b2 - GetValue<1, 3>() * b1,
-                          GetValue<0, 0>() * b5 - GetValue<0, 2>() * b2 + GetValue<0, 3>() * b1,
-                          -GetValue<3, 0>() * a5 + GetValue<3, 2>() * a2 - GetValue<3, 3>() * a1,
-                          GetValue<2, 0>() * a5 - GetValue<2, 2>() * a2 + GetValue<2, 3>() * a1,
-                          GetValue<1, 0>() * b4 - GetValue<1, 1>() * b2 + GetValue<1, 3>() * b0,
-                          -GetValue<0, 0>() * b4 + GetValue<0, 1>() * b2 - GetValue<0, 3>() * b0,
-                          GetValue<3, 0>() * a4 - GetValue<3, 1>() * a2 + GetValue<3, 3>() * a0,
-                          -GetValue<2, 0>() * a4 + GetValue<2, 1>() * a2 - GetValue<2, 3>() * a0,
-                          -GetValue<1, 0>() * b3 + GetValue<1, 1>() * b1 - GetValue<1, 2>() * b0,
-                          GetValue<0, 0>() * b3 - GetValue<0, 1>() * b1 + GetValue<0, 2>() * b0,
-                          -GetValue<3, 0>() * a3 + GetValue<3, 1>() * a1 - GetValue<3, 2>() * a0,
-                          GetValue<2, 0>() * a3 - GetValue<2, 1>() * a1 + GetValue<2, 2>() * a0 };
+    return Matrix4{ GetValue<1, 1>() * b5 - GetValue<1, 2>() * b4 + GetValue<1, 3>() * b3,
+                    -GetValue<0, 1>() * b5 + GetValue<0, 2>() * b4 - GetValue<0, 3>() * b3,
+                    GetValue<3, 1>() * a5 - GetValue<3, 2>() * a4 + GetValue<3, 3>() * a3,
+                    -GetValue<2, 1>() * a5 + GetValue<2, 2>() * a4 - GetValue<2, 3>() * a3,
+                    -GetValue<1, 0>() * b5 + GetValue<1, 2>() * b2 - GetValue<1, 3>() * b1,
+                    GetValue<0, 0>() * b5 - GetValue<0, 2>() * b2 + GetValue<0, 3>() * b1,
+                    -GetValue<3, 0>() * a5 + GetValue<3, 2>() * a2 - GetValue<3, 3>() * a1,
+                    GetValue<2, 0>() * a5 - GetValue<2, 2>() * a2 + GetValue<2, 3>() * a1,
+                    GetValue<1, 0>() * b4 - GetValue<1, 1>() * b2 + GetValue<1, 3>() * b0,
+                    -GetValue<0, 0>() * b4 + GetValue<0, 1>() * b2 - GetValue<0, 3>() * b0,
+                    GetValue<3, 0>() * a4 - GetValue<3, 1>() * a2 + GetValue<3, 3>() * a0,
+                    -GetValue<2, 0>() * a4 + GetValue<2, 1>() * a2 - GetValue<2, 3>() * a0,
+                    -GetValue<1, 0>() * b3 + GetValue<1, 1>() * b1 - GetValue<1, 2>() * b0,
+                    GetValue<0, 0>() * b3 - GetValue<0, 1>() * b1 + GetValue<0, 2>() * b0,
+                    -GetValue<3, 0>() * a3 + GetValue<3, 1>() * a1 - GetValue<3, 2>() * a0,
+                    GetValue<2, 0>() * a3 - GetValue<2, 1>() * a1 + GetValue<2, 2>() * a0 };
 }
 
 template <typename Real>

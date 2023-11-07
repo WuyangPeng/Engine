@@ -100,8 +100,8 @@ void Mathematics::VariableMatrixTesting::ArithmeticCalculateTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const std::uniform_real<float> floatRandomDistribution{ -100.0f, 100.0f };
-    const std::uniform_int<> integerRandomDistribution(1, 20);
+    std::uniform_real<float> floatRandomDistribution{ -100.0f, 100.0f };
+    std::uniform_int<> integerRandomDistribution(1, 20);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -326,8 +326,8 @@ void Mathematics::VariableMatrixTesting::MatrixCalculateTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const std::uniform_real<float> floatRandomDistribution{ -100.0f, 100.0f };
-    const std::uniform_int<> integerRandomDistribution(1, 20);
+    std::uniform_real<float> floatRandomDistribution{ -100.0f, 100.0f };
+    std::uniform_int<> integerRandomDistribution(1, 20);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -357,7 +357,7 @@ void Mathematics::VariableMatrixTesting::MatrixCalculateTest()
             vector1[index] = floatRandomDistribution(generator);
         }
 
-        float quadraticForm = Dot(vector0, matrix0 * vector1);
+        const float quadraticForm = Dot(vector0, matrix0 * vector1);
 
         ASSERT_APPROXIMATE(quadraticForm, matrix0.QuadraticForm(vector0, vector1), 1e-10f);
 
@@ -487,7 +487,7 @@ void Mathematics::VariableMatrixTesting::CompareTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     std::vector<double> firstDoubleVector;
     for (int i = 0; i < 15; ++i)

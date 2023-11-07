@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:11)
+///	版本：0.9.1.6 (2023/10/26 19:38)
 
 #ifndef MATHEMATICS_RATIONAL_INT64_VECTOR_DETAIL_H
 #define MATHEMATICS_RATIONAL_INT64_VECTOR_DETAIL_H

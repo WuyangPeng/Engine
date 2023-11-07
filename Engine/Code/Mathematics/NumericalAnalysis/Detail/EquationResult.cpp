@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:31)
+///	版本：0.9.1.6 (2023/10/27 13:45)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -75,7 +75,6 @@ void Mathematics::EquationResult::CleanSolution() noexcept
     imaginaryResult.clear();
 }
 
-// private
 bool Mathematics::EquationResult::FindSolution(double solution, double epsilon) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -91,7 +90,6 @@ bool Mathematics::EquationResult::FindSolution(double solution, double epsilon) 
     return false;
 }
 
-// private
 bool Mathematics::EquationResult::FindSolution(const Imaginary& solution, double epsilon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -143,8 +141,8 @@ void Mathematics::EquationResult::SortResult()
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    sort(realResult.begin(), realResult.end());
-    sort(imaginaryResult.begin(), imaginaryResult.end(), ImaginaryLess{});
+    std::ranges::sort(realResult);
+    std::ranges::sort(imaginaryResult, ImaginaryLess{});
 }
 
 bool Mathematics::EquationResult::ImaginaryLess::operator()(const Imaginary& lhs, const Imaginary& rhs) const

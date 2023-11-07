@@ -54,7 +54,7 @@ void System::CreateFileWithAttributesTesting::CreateFileTest()
 void System::CreateFileWithAttributesTesting::DoCreateFileTest(size_t index)
 {
     if (const auto fileHandleAttribute = GetFileHandleAttributes(index);
-        fileHandleAttribute == FileHandleAttributes::ReadOnly)
+        ((fileHandleAttribute & FileHandleAttributes::ReadOnly) == FileHandleAttributes::ReadOnly))
     {
         ASSERT_NOT_THROW_EXCEPTION_1(ReadOnlyTest, fileHandleAttribute);
     }
@@ -104,7 +104,7 @@ void System::CreateFileWithAttributesTesting::CommonTest(size_t index, FileHandl
 void System::CreateFileWithAttributesTesting::ExistingTest(size_t index, FileHandleAttributes fileHandleAttribute, FileHandleCreationDisposition fileHandleCreationDisposition)
 {
     if (const auto fileHandleOther = GetFileHandleOther(index);
-        fileHandleOther == FileHandleOther::DeleteOnClose)
+        ((fileHandleOther & FileHandleOther::DeleteOnClose) == FileHandleOther::DeleteOnClose))
     {
         ASSERT_NOT_THROW_EXCEPTION_3(NonExistentTest, index, fileHandleAttribute, FileHandleCreationDisposition::CreateNew);
     }

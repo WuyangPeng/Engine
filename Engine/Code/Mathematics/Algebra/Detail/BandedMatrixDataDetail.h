@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 09:24)
+///	版本：0.9.1.6 (2023/10/26 10:13)
 
 #ifndef MATHEMATICS_ALGEBRA_BANDED_MATRIX_DATA_DETAIL_H
 #define MATHEMATICS_ALGEBRA_BANDED_MATRIX_DATA_DETAIL_H
@@ -107,11 +107,11 @@ int Mathematics::BandedMatrixData<Real>::GetStreamSize() const
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::BandedMatrixData<Real>::ResetSize(int newSize, int bandsNumber)
+void Mathematics::BandedMatrixData<Real>::ResetSize(int aSize, int bandsNumber)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
 
-    size = newSize;
+    size = aSize;
     bands.clear();
     Allocate(bandsNumber);
 

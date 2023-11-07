@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/06 19:16)
+///	版本：0.9.1.6 (2023/10/26 14:24)
 
 #ifndef MATHEMATICS_ALGEBRA_H
 #define MATHEMATICS_ALGEBRA_H
@@ -40,6 +40,7 @@
 #include "QuaternionDetail.h"
 #include "QuaternionFactorDetail.h"
 #include "QuaternionSwingTwistDetail.h"
+#include "SphereCoordinatesDetail.h"
 #include "VariableLengthVectorDetail.h"
 #include "VariableMatrixDetail.h"
 #include "Vector2Detail.h"
@@ -54,6 +55,5 @@
 #include "Vector3ToolsDetail.h"
 #include "Vector4Detail.h"
 #include "Vector4ToolsDetail.h"
-#include "SphereCoordinatesDetail.h"
 
 #endif  // MATHEMATICS_ALGEBRA_H

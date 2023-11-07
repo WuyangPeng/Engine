@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:13)
+///	版本：0.9.1.6 (2023/10/28 16:03)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_INTERSECTOR_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_INTERSECTOR_H
@@ -25,6 +25,7 @@ namespace Mathematics
     public:
         using ClassType = DynamicIntersector<Real, Vector>;
         using ParentType = Intersector<Real, Vector>;
+
         using Math = typename ParentType::Math;
         using VectorType = typename ParentType::VectorType;
 

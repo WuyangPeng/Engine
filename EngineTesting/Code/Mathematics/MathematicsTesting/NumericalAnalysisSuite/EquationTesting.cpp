@@ -40,7 +40,7 @@ void Mathematics::EquationTesting::MainTest()
 void Mathematics::EquationTesting::OnceTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-1.0e10, 1.0e10);
+    std::uniform_real<double> randomDistribution0(-1.0e10, 1.0e10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -67,7 +67,7 @@ void Mathematics::EquationTesting::OnceTest()
 void Mathematics::EquationTesting::SecondaryTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-1.0e8, 1.0e8);
+    std::uniform_real<double> randomDistribution0(-1.0e8, 1.0e8);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -112,7 +112,7 @@ void Mathematics::EquationTesting::SecondaryTest()
 void Mathematics::EquationTesting::ThriceTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-1.0e7, 1.0e7);
+    std::uniform_real<double> randomDistribution0(-1.0e7, 1.0e7);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -210,7 +210,7 @@ void Mathematics::EquationTesting::ThriceTest()
 void Mathematics::EquationTesting::QuarticTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-1.0e4, 1.0e4);
+    std::uniform_real<double> randomDistribution0(-1.0e4, 1.0e4);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

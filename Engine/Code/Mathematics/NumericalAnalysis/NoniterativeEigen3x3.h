@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:42)
+///	版本：0.9.1.6 (2023/10/27 11:39)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_NONITERATIVE_EIGEN3X3_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_NONITERATIVE_EIGEN3X3_H
@@ -26,6 +26,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = NoniterativeEigen3x3<Real>;
+
         using Math = Math<Real>;
         using Matrix3 = Matrix3<Real>;
         using Vector3 = Vector3<Real>;

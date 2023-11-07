@@ -63,7 +63,7 @@ Framework::AndroidProcessManager::AndroidCallBackInterfaceSharedPtr Framework::A
 
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return impl->GetAndroidCallBackInterface();
+    return ImplType::GetAndroidCallBackInterface();
 }
 
 void Framework::AndroidProcessManager::SetAndroidCallBack(const AndroidCallBackInterfaceSharedPtr& androidCallBack)
@@ -72,7 +72,7 @@ void Framework::AndroidProcessManager::SetAndroidCallBack(const AndroidCallBackI
 
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    return impl->SetAndroidCallBack(androidCallBack);
+    return ImplType::SetAndroidCallBack(androidCallBack);
 }
 
 void Framework::AndroidProcessManager::ClearAndroidCallBack()
@@ -81,7 +81,7 @@ void Framework::AndroidProcessManager::ClearAndroidCallBack()
 
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    return impl->ClearAndroidCallBack();
+    return ImplType::ClearAndroidCallBack();
 }
 
 bool Framework::AndroidProcessManager::PreCreate()
@@ -90,7 +90,7 @@ bool Framework::AndroidProcessManager::PreCreate()
 
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    return impl->PreCreate();
+    return ImplType::PreCreate();
 }
 
 bool Framework::AndroidProcessManager::Initialize()
@@ -99,7 +99,7 @@ bool Framework::AndroidProcessManager::Initialize()
 
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    return impl->Initialize();
+    return ImplType::Initialize();
 }
 
 void Framework::AndroidProcessManager::PreIdle()
@@ -108,7 +108,7 @@ void Framework::AndroidProcessManager::PreIdle()
 
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    return impl->PreIdle();
+    return ImplType::PreIdle();
 }
 
 void Framework::AndroidProcessManager::Terminate()
@@ -117,5 +117,5 @@ void Framework::AndroidProcessManager::Terminate()
 
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    return impl->Terminate();
+    return ImplType::Terminate();
 }

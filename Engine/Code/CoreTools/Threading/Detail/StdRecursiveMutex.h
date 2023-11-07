@@ -36,7 +36,7 @@ namespace CoreTools
         void Leave() noexcept override;
 
     private:
-        void DoLeave();
+        void DoLeave() noexcept;
 
     private:
         std::recursive_mutex mutex;

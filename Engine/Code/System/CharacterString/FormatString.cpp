@@ -5,17 +5,23 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/28 15:56)
+///	版本：0.9.1.6 (2023/11/02 16:29)
 
 #include "System/SystemExport.h"
 
 #include "FormatString.h"
+#include "System/Helper/PragmaWarning.h"
 #include "System/Helper/WindowsMacro.h"
 
 #include <cstdio>
 #include <cstring>
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26826)
+
 int System::VsnPrintF(char* buffer, size_t size, const char* format, va_list argList) noexcept
+
+#include SYSTEM_WARNING_POP
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 

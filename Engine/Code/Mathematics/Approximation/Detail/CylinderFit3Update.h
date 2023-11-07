@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:16)
+///	版本：0.9.1.6 (2023/10/27 14:23)
 
 #ifndef MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_UPDATE_H
 #define MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_UPDATE_H
@@ -25,6 +25,7 @@ namespace Mathematics
     {
     public:
         using ClassType = CylinderFit3Update<Real>;
+
         using Vector3 = Vector3<Real>;
         using Math = Math<Real>;
         using Points = std::vector<Vector3>;
@@ -32,7 +33,7 @@ namespace Mathematics
         using UpdateData = std::vector<CylinderFit3UpdateData>;
 
     public:
-        CylinderFit3Update(const Points& points, const Vector3& guessCenter, const Vector3& guessAxis, const Real epsilon = Math::GetZeroTolerance());
+        CylinderFit3Update(Points points, const Vector3& guessCenter, const Vector3& guessAxis, const Real epsilon = Math::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -41,19 +42,19 @@ namespace Mathematics
         // 返回准确度
         NODISCARD Real GetExactly() const noexcept;
 
-        NODISCARD Real GetInverseRadiusSqrare() const noexcept;
+        NODISCARD Real GetInverseRadiusSquare() const noexcept;
         NODISCARD Vector3 GetAxis() const noexcept;
         NODISCARD Vector3 GetCenter() const noexcept;
 
     private:
         void CalculateUpdateData();
-        void UpdateInverseRadiusSqrare() noexcept(gAssert < 2 || gMathematicsAssert < 2);
+        void UpdateInverseRadiusSquare() noexcept(gAssert < 2 || gMathematicsAssert < 2);
         void UpdateDirection();
         void UpdateCenter();
 
     private:
         Points points;
-        Real inverseRadiusSqrare;
+        Real inverseRadiusSquare;
         Vector3 axis;
         Vector3 center;
         Real exactly;

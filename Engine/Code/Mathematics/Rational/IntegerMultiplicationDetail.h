@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:13)
+///	版本：0.9.1.6 (2023/10/26 19:49)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_MULTIPLICATION_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_MULTIPLICATION_DETAIL_H
@@ -16,7 +16,6 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <int N>
 Mathematics::IntegerMultiplication<N>::IntegerMultiplication(const IntegerData& lhs, const IntegerData& rhs)
@@ -101,9 +100,9 @@ uint32_t Mathematics::IntegerMultiplication<N>::CalculateResult(uint32_t lhsInde
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-        auto originalProduct = boost::numeric_cast<uint32_t>(product[bufferIndex]);
-        auto originalResult = boost::numeric_cast<uint32_t>(result[bufferIndex]);
-        auto sum = originalProduct + originalResult + carry;
+        const auto originalProduct = boost::numeric_cast<uint32_t>(product[bufferIndex]);
+        const auto originalResult = boost::numeric_cast<uint32_t>(result[bufferIndex]);
+        const auto sum = originalProduct + originalResult + carry;
         result[bufferIndex] = boost::numeric_cast<uint16_t>(sum & low);
 
 #include SYSTEM_WARNING_POP
@@ -125,8 +124,8 @@ void Mathematics::IntegerMultiplication<N>::DetermineCarry(uint32_t carry, uint3
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-        auto originalResult = boost::numeric_cast<uint32_t>(result[rhsIndex]);
-        auto sum = originalResult + carry;
+        const auto originalResult = boost::numeric_cast<uint32_t>(result[rhsIndex]);
+        const auto sum = originalResult + carry;
         result[rhsIndex] = boost::numeric_cast<uint16_t>(sum & low);
 
 #include SYSTEM_WARNING_POP
@@ -142,23 +141,18 @@ void Mathematics::IntegerMultiplication<N>::OverflowTest()
     // 但在这里测试，您可以得到溢出多少。
     // 这个信息对一个应用程序可能是有用的，以决定如何选择整数大小。
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
     for (auto i = 2 * intSize - 1; intSize <= i; --i)
     {
-        if (result[i] != 0)
+        if (result.at(i) != 0)
         {
-            THROW_EXCEPTION((CoreTools::Error::Format(SYSTEM_TEXT("Integer溢出在i = %1\n")) % i).str());
+            THROW_EXCEPTION((CoreTools::Error::Format(SYSTEM_TEXT("Integer溢出在i = %1%\n")) % i).str());
         }
     }
 
-    if ((result[intLast] & symbol) != 0)
+    if ((result.at(intLast) & symbol) != 0)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("Integer溢出\n"s));
     }
-
-#include SYSTEM_WARNING_POP
 
     multiplication = IntegerData{ result };
 }

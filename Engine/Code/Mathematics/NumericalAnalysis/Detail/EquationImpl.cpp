@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:30)
+///	版本：0.9.1.6 (2023/10/27 13:42)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -13,7 +13,6 @@
 #include "EquationResult.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/NumericalAnalysis/EquationResultConstIteratorDetail.h"
 
@@ -81,26 +80,22 @@ Mathematics::EquationImpl::ImaginaryConstIterator Mathematics::EquationImpl::Get
     return equationResult.GetImaginaryEnd();
 }
 
-// protected
 void Mathematics::EquationImpl::SetRealResult(double result)
 {
     equationResult.AddRealResult(result, epsilon);
 }
 
-// protected
 void Mathematics::EquationImpl::SetImaginaryResult(const Imaginary& result)
 {
     equationResult.AddImaginaryResult(result, epsilon);
 }
 
-// protected
 void Mathematics::EquationImpl::AddResult(const EquationImpl& equation, double offset)
 {
     AddRealResult(equation, offset);
     AddImaginaryResult(equation, offset);
 }
 
-// protected
 void Mathematics::EquationImpl::Calculate()
 {
     if (!Predigest())
@@ -110,7 +105,6 @@ void Mathematics::EquationImpl::Calculate()
     }
 }
 
-// private
 double Mathematics::EquationImpl::NewtonMethod(double solution) const
 {
     // 没有使用无限循环，避免无法退出！
@@ -137,7 +131,6 @@ double Mathematics::EquationImpl::NewtonMethod(double solution) const
     return solution;
 }
 
-// private
 Mathematics::EquationImpl::Imaginary Mathematics::EquationImpl::NewtonMethod(Imaginary solution) const
 {
     // 没有使用无限循环，避免无法退出！
@@ -160,7 +153,6 @@ Mathematics::EquationImpl::Imaginary Mathematics::EquationImpl::NewtonMethod(Ima
     return solution;
 }
 
-// private
 Mathematics::EquationImpl::RealContainer Mathematics::EquationImpl::NewRealResult() const
 {
     RealContainer newRealSolve{};
@@ -175,7 +167,6 @@ Mathematics::EquationImpl::RealContainer Mathematics::EquationImpl::NewRealResul
     return newRealSolve;
 }
 
-// private
 Mathematics::EquationImpl::ImaginaryContainer Mathematics::EquationImpl::NewImaginaryResult() const
 {
     ImaginaryContainer newImaginarySolve{};
@@ -184,19 +175,17 @@ Mathematics::EquationImpl::ImaginaryContainer Mathematics::EquationImpl::NewImag
     {
         auto solve = *iter;
         solve = NewtonMethod(solve);
-        newImaginarySolve.push_back(solve);
+        newImaginarySolve.emplace_back(solve);
     }
 
     return newImaginarySolve;
 }
 
-// private
 void Mathematics::EquationImpl::CleanSolution() noexcept
 {
     equationResult.CleanSolution();
 }
 
-// private
 void Mathematics::EquationImpl::Validate()
 {
     const auto newRealSolve = NewRealResult();
@@ -208,7 +197,6 @@ void Mathematics::EquationImpl::Validate()
     DisplaceImaginaryResult(newImaginarySolve);
 }
 
-// private
 void Mathematics::EquationImpl::AddRealResult(const EquationImpl& equation, double offset)
 {
     for (auto iter = equation.GetRealBegin(); iter != equation.GetRealEnd(); ++iter)
@@ -219,7 +207,6 @@ void Mathematics::EquationImpl::AddRealResult(const EquationImpl& equation, doub
     }
 }
 
-// private
 void Mathematics::EquationImpl::AddImaginaryResult(const EquationImpl& equation, double offset)
 {
     for (auto iter = equation.GetImaginaryBegin(); iter != equation.GetImaginaryEnd(); ++iter)
@@ -230,7 +217,6 @@ void Mathematics::EquationImpl::AddImaginaryResult(const EquationImpl& equation,
     }
 }
 
-// private
 void Mathematics::EquationImpl::DisplaceRealResult(const RealContainer& result)
 {
     for (const auto& value : result)
@@ -239,7 +225,6 @@ void Mathematics::EquationImpl::DisplaceRealResult(const RealContainer& result)
     }
 }
 
-// private
 void Mathematics::EquationImpl::DisplaceImaginaryResult(const ImaginaryContainer& result)
 {
     for (const auto& value : result)

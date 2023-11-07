@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:36)
+///	版本：0.9.1.6 (2023/10/27 14:16)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT3_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT3_DETAIL_H
@@ -26,7 +26,6 @@ Mathematics::PolynomialFit3<Real>::PolynomialFit3(const Samples& xSamples, const
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialFit3<Real>::Calculate(const Samples& xSamples, const Samples& ySamples, const Samples& wSamples, int xDegree, int yDegree)
 {

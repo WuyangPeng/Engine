@@ -35,7 +35,7 @@ namespace Rendering
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD RendererObjectSharedPtr BindRendererObject(RendererTypes rendererTypes, const GraphicsObjectSharedPtr& graphicsObject);
-        void UnbindRendererObject(const GraphicsObjectSharedPtr& graphicsObject);
+        void UnbindRendererObject(const GraphicsObjectSharedPtr& graphicsObject) noexcept;
         NODISCARD RendererObjectSharedPtr GetRendererObject(const GraphicsObjectSharedPtr& graphicsObject);
         NODISCARD ConstRendererObjectSharedPtr GetRendererObject(const GraphicsObjectSharedPtr& graphicsObject) const;
         NODISCARD TotalAllocation GetTotalAllocation() const;

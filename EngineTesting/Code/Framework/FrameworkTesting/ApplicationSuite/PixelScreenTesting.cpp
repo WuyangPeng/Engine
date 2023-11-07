@@ -86,7 +86,7 @@ void Framework::PixelScreenTesting::ResizeTest()
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
 
     auto pixelScreen = CreateTestPixelScreen();
 
@@ -128,7 +128,7 @@ void Framework::PixelScreenTesting::SetPixelTest()
     constexpr auto maxSize = 256;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -158,8 +158,8 @@ void Framework::PixelScreenTesting::SetThickPixelTest()
     constexpr auto maxThick = 10;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<> thickRandom{ minThick, maxThick };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> thickRandom{ minThick, maxThick };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -203,7 +203,7 @@ void Framework::PixelScreenTesting::DrawLineTest()
     constexpr auto maxSize = 128;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -310,7 +310,7 @@ void Framework::PixelScreenTesting::DrawRectangleSolidTest()
     constexpr auto maxSize = 128;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -364,7 +364,7 @@ void Framework::PixelScreenTesting::DrawRectangleHollowTest()
     constexpr auto maxSize = 128;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -421,8 +421,8 @@ void Framework::PixelScreenTesting::DrawCircleSolidTest()
     constexpr auto maxRadius = 50;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<> radiusRandom{ minRadius, maxRadius };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> radiusRandom{ minRadius, maxRadius };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -536,8 +536,8 @@ void Framework::PixelScreenTesting::DrawCircleHollowTest()
     constexpr auto maxRadius = 50;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<> radiusRandom{ minRadius, maxRadius };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> radiusRandom{ minRadius, maxRadius };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -626,8 +626,8 @@ void Framework::PixelScreenTesting::FillThickPixelTest()
     constexpr auto maxThick = 10;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<> thickRandom{ minThick, maxThick };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> thickRandom{ minThick, maxThick };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -662,7 +662,7 @@ void Framework::PixelScreenTesting::FillRectangleSolidTest()
     constexpr auto maxSize = 128;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -707,7 +707,7 @@ void Framework::PixelScreenTesting::FillRectangleHollowTest()
     constexpr auto maxSize = 128;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -754,8 +754,8 @@ void Framework::PixelScreenTesting::FillCircleSolidTest()
     constexpr auto maxRadius = 50;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<> radiusRandom{ minRadius, maxRadius };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> radiusRandom{ minRadius, maxRadius };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:18)
+///	版本：0.9.1.6 (2023/10/27 18:14)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_BOX3_DETAIL_H
@@ -18,8 +18,8 @@
 #include "Mathematics/Intersection/Flags/ContactSide.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::DynamicFindIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
-    : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, triangle{ triangle }, box{ box }, point{}
+Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::DynamicFindIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+    : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, triangle{ triangle }, box{ box }, point{}
 {
     Find();
 

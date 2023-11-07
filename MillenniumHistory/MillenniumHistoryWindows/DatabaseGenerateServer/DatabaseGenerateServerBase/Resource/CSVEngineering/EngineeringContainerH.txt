@@ -5,23 +5,23 @@ $Copyright$
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "$Namespace$Fwd.h"
+#include "$NameSpaceName$Fwd.h"
 #include "System/Helper/UnicodeUsing.h"
 
 #include <filesystem>
 #include <memory>
 
-namespace $Namespace$
+namespace $NameSpaceName$
 {
-    class $Namespace$Container final
+    class $NameSpaceName$Container final
     {
     public:
-        using ClassType = $Namespace$Container;
+        using ClassType = $NameSpaceName$Container;
 
         using String = System::String;
 $ContainerSharedPtrUsing$
     public:
-        explicit $Namespace$Container(const String& directory);
+        explicit $NameSpaceName$Container(const String& directory);
 
         CLASS_INVARIANT_DECLARE;
 

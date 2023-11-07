@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:14)
+///	版本：0.9.1.6 (2023/10/28 16:05)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR1_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR1_H
@@ -22,6 +22,7 @@ namespace Mathematics
     public:
         using ClassType = StaticTestIntersector1<Real>;
         using ParentType = Intersector1<Real>;
+
         using Math = typename ParentType::Math;
 
     public:

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:18)
+///	版本：0.9.1.6 (2023/10/28 14:46)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE2_TRIANGLE2_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE2_TRIANGLE2_H
@@ -24,6 +24,7 @@ namespace Mathematics
     public:
         using ClassType = DynamicFindIntersectorTriangle2Triangle2<Real>;
         using ParentType = DynamicIntersector<Real, Vector2>;
+
         using Math = typename ParentType::Math;
         using Vector2 = Vector2<Real>;
         using Triangle2 = Triangle2<Real>;

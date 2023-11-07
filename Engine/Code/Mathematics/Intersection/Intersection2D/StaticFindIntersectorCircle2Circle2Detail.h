@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:25)
+///	版本：0.9.1.6 (2023/10/27 17:27)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_CIRCLE2_CIRCLE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_CIRCLE2_CIRCLE2_DETAIL_H
@@ -54,17 +54,17 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>::Find()
     auto centerDifferenceSquaredLength = Vector2Tools::GetLengthSquared(centerDifference);
     auto lhsRadius = lhsCircle.GetRadius();
     auto rhsRadius = rhsCircle.GetRadius();
-    auto lhsAdiusMinusRhsAdius = lhsRadius - rhsRadius;
+    auto lhsRadiusMinusRhsRadius = lhsRadius - rhsRadius;
     auto epsilon = ParentType::GetEpsilon();
-    if (centerDifferenceSquaredLength < epsilon && Math::FAbs(lhsAdiusMinusRhsAdius) < epsilon)
+    if (centerDifferenceSquaredLength < epsilon && Math::FAbs(lhsRadiusMinusRhsRadius) < epsilon)
     {
         // 圆基本相同。
         this->SetIntersectionType(IntersectionType::Other);
         return;
     }
 
-    auto lhsAdiusMinusRhsAdiusSquared = lhsAdiusMinusRhsAdius * lhsAdiusMinusRhsAdius;
-    if (centerDifferenceSquaredLength + epsilon < lhsAdiusMinusRhsAdiusSquared)
+    auto lhsRadiusMinusRhsRadiusSquared = lhsRadiusMinusRhsRadius * lhsRadiusMinusRhsRadius;
+    if (centerDifferenceSquaredLength + epsilon < lhsRadiusMinusRhsRadiusSquared)
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;
@@ -80,7 +80,7 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>::Find()
 
     if (centerDifferenceSquaredLength + epsilon < lhsRadiusPlusRhsRadiusSquared)
     {
-        if (lhsAdiusMinusRhsAdiusSquared + epsilon < centerDifferenceSquaredLength)
+        if (lhsRadiusMinusRhsRadiusSquared + epsilon < centerDifferenceSquaredLength)
         {
             auto ordinal = Math::GetRational(1, 2) * ((lhsRadius * lhsRadius - rhsRadius * rhsRadius) / centerDifferenceSquaredLength + Math::GetValue(1));
             auto amendmentCenter = lhsCircle.GetCenter() + ordinal * centerDifference;
@@ -111,7 +111,7 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>::Find()
         else
         {
             // |U| = |R0 - R1|,圆是相切的。
-            point.emplace_back(lhsCircle.GetCenter() + (lhsRadius / lhsAdiusMinusRhsAdius) * centerDifference);
+            point.emplace_back(lhsCircle.GetCenter() + (lhsRadius / lhsRadiusMinusRhsRadius) * centerDifference);
         }
     }
     else

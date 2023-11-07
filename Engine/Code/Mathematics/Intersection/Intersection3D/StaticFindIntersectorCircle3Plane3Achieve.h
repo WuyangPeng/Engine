@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:24)
+///	版本：0.9.1.6 (2023/10/27 18:21)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_CIRCLE3_PLANE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_CIRCLE3_PLANE3_ACHIEVE_H
@@ -59,10 +59,10 @@ void Mathematics::StaticFindIntersectorCircle3Plane3<Real>::Find()
     quantity = 0;
 
     // 构造圆的平面。
-    const Plane3 CPlane{ circle.GetNormal(), circle.GetCenter() };
+    const Plane3 cPlane{ circle.GetNormal(), circle.GetCenter() };
 
     // 计算此平面与输入平面的交点。
-    StaticFindIntersectorPlane3Plane3<Real> intersector{ plane, CPlane };
+    StaticFindIntersectorPlane3Plane3<Real> intersector{ plane, cPlane };
     if (!intersector.IsIntersection())
     {
         // 平面是平行且不相交的。

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:42)
+///	版本：0.9.1.6 (2023/10/27 11:38)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_H
@@ -18,8 +18,6 @@
 #include "Mathematics/Algebra/VariableMatrix.h"
 #include "Mathematics/Base/MathDetail.h"
 
-#include <map>
-
 namespace Mathematics
 {
     template <typename Real>
@@ -29,6 +27,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = LinearSystem<Real>;
+
         using Math = Math<Real>;
         using RealContainer = std::vector<Real>;
         using Vector2 = std::array<Real, 2>;

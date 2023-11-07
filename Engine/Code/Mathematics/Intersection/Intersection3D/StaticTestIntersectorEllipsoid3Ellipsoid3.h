@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:00)
+///	版本：0.9.1.6 (2023/10/28 15:59)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_ELLIPSOID3_ELLIPSOID3_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_ELLIPSOID3_ELLIPSOID3_H
@@ -23,6 +23,7 @@ namespace Mathematics
     public:
         using ClassType = StaticTestIntersectorEllipsoid3Ellipsoid3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
+
         using Vector3 = Vector3<Real>;
         using Ellipsoid3 = Ellipsoid3<Real>;
         using Vector3Tools = Vector3Tools<Real>;

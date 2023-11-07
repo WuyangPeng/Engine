@@ -86,7 +86,7 @@ typename Framework::AndroidProcess<AndroidCallBack>::AppCmd Framework::AndroidPr
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return ANDROID_PROCESS_MANAGE_SINGLETON.GetAppCmd();
+    return AndroidProcessManager::GetAppCmd();
 }
 
 template <typename AndroidCallBack>
@@ -94,7 +94,7 @@ typename Framework::AndroidProcess<AndroidCallBack>::InputEvent Framework::Andro
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return ANDROID_PROCESS_MANAGE_SINGLETON.GetInputEvent();
+    return AndroidProcessManager::GetInputEvent();
 }
 
 template <typename AndroidCallBack>
@@ -102,7 +102,7 @@ typename Framework::AndroidProcess<AndroidCallBack>::Display Framework::AndroidP
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return ANDROID_PROCESS_MANAGE_SINGLETON.GetDisplay();
+    return AndroidProcessManager::GetDisplay();
 }
 
 #endif  // FRAMEWORK_ANDROID_FRAME_ANDROID_PROCESS_DETAIL_H

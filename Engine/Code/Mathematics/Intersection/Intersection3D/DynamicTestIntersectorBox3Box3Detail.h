@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:21)
+///	版本：0.9.1.6 (2023/10/27 18:15)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_BOX3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_BOX3_BOX3_DETAIL_H
@@ -90,15 +90,15 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
                                 Vector3Tools::DotProduct(box0.GetAxis(2), box1.GetAxis(2)) };
 
     // |c_{ij}|
-    Matrix3<Real> absMatrix{ Math::FAbs(matrix.GetValue<0, 0>()),
-                             Math::FAbs(matrix.GetValue<0, 1>()),
-                             Math::FAbs(matrix.GetValue<0, 2>()),
-                             Math::FAbs(matrix.GetValue<1, 0>()),
-                             Math::FAbs(matrix.GetValue<1, 1>()),
-                             Math::FAbs(matrix.GetValue<1, 2>()),
-                             Math::FAbs(matrix.GetValue<2, 0>()),
-                             Math::FAbs(matrix.GetValue<2, 1>()),
-                             Math::FAbs(matrix.GetValue<2, 2>()) };
+    Matrix3<Real> absMatrix{ Math::FAbs(matrix.template GetValue<0, 0>()),
+                             Math::FAbs(matrix.template GetValue<0, 1>()),
+                             Math::FAbs(matrix.template GetValue<0, 2>()),
+                             Math::FAbs(matrix.template GetValue<1, 0>()),
+                             Math::FAbs(matrix.template GetValue<1, 1>()),
+                             Math::FAbs(matrix.template GetValue<1, 2>()),
+                             Math::FAbs(matrix.template GetValue<2, 0>()),
+                             Math::FAbs(matrix.template GetValue<2, 1>()),
+                             Math::FAbs(matrix.template GetValue<2, 2>()) };
     // Dot(A_i,D)
     Vector3 axisDotCenterDiff{ Vector3Tools::DotProduct(box0.GetAxis(0), centerDiff),
                                Vector3Tools::DotProduct(box0.GetAxis(1), centerDiff),
@@ -110,7 +110,7 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
                                   Vector3Tools::DotProduct(box0.GetAxis(2), velocityDiff) };
 
     this->SetContactTime(Math::GetValue(0));
-    Separated tlast{ false, Math::maxReal };
+    Separated tLast{ false, Math::maxReal };
 
     // 轴 C0 + t * A[i]
     constexpr auto size = 3;
@@ -135,8 +135,8 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
         auto max1 = axisDotCenterDiff[i] + radius;
         auto speed = axisDotAvelocityDiff[i];
 
-        tlast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tlast.second);
-        if (tlast.first)
+        tLast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tLast.second);
+        if (tLast.first)
         {
             this->SetIntersectionType(IntersectionType::Empty);
             return;
@@ -153,8 +153,8 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
         auto min1 = center - box1.GetExtent(i);
         auto max1 = center + box1.GetExtent(i);
         auto speed = Vector3Tools::DotProduct(velocityDiff, box1.GetAxis(i));
-        tlast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tlast.second);
-        if (tlast.first)
+        tLast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tLast.second);
+        if (tLast.first)
         {
             this->SetIntersectionType(IntersectionType::Empty);
             return;
@@ -169,144 +169,144 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
     }
 
     // 轴 C0 + t * A0 x B0
-    auto radius = box0.GetExtent(1) * absMatrix.GetValue<2, 0>() + box0.GetExtent(2) * absMatrix.GetValue<1, 0>();
+    auto radius = box0.GetExtent(1) * absMatrix.template GetValue<2, 0>() + box0.GetExtent(2) * absMatrix.template GetValue<1, 0>();
     auto min0 = -radius;
     auto max0 = +radius;
-    auto center = axisDotCenterDiff[2] * matrix.GetValue<1, 0>() - axisDotCenterDiff[1] * matrix.GetValue<2, 0>();
-    radius = box1.GetExtent(1) * absMatrix.GetValue<0, 2>() + box1.GetExtent(2) * absMatrix.GetValue<0, 1>();
+    auto center = axisDotCenterDiff[2] * matrix.template GetValue<1, 0>() - axisDotCenterDiff[1] * matrix.template GetValue<2, 0>();
+    radius = box1.GetExtent(1) * absMatrix.template GetValue<0, 2>() + box1.GetExtent(2) * absMatrix.template GetValue<0, 1>();
     auto min1 = center - radius;
     auto max1 = center + radius;
-    auto speed = axisDotAvelocityDiff[2] * matrix.GetValue<1, 0>() - axisDotAvelocityDiff[1] * matrix.GetValue<2, 0>();
-    tlast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tlast.second);
-    if (tlast.first)
+    auto speed = axisDotAvelocityDiff[2] * matrix.template GetValue<1, 0>() - axisDotAvelocityDiff[1] * matrix.template GetValue<2, 0>();
+    tLast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tLast.second);
+    if (tLast.first)
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
     // 轴 C0 + t * A0 x B1
-    radius = box0.GetExtent(1) * absMatrix.GetValue<2, 1>() + box0.GetExtent(2) * absMatrix.GetValue<1, 1>();
+    radius = box0.GetExtent(1) * absMatrix.template GetValue<2, 1>() + box0.GetExtent(2) * absMatrix.template GetValue<1, 1>();
     min0 = -radius;
     max0 = +radius;
-    center = axisDotCenterDiff[2] * matrix.GetValue<1, 1>() - axisDotCenterDiff[1] * matrix.GetValue<2, 1>();
-    radius = box1.GetExtent(0) * absMatrix.GetValue<0, 2>() + box1.GetExtent(2) * absMatrix.GetValue<0, 0>();
+    center = axisDotCenterDiff[2] * matrix.template GetValue<1, 1>() - axisDotCenterDiff[1] * matrix.template GetValue<2, 1>();
+    radius = box1.GetExtent(0) * absMatrix.template GetValue<0, 2>() + box1.GetExtent(2) * absMatrix.template GetValue<0, 0>();
     min1 = center - radius;
     max1 = center + radius;
-    speed = axisDotAvelocityDiff[2] * matrix.GetValue<1, 1>() - axisDotAvelocityDiff[1] * matrix.GetValue<2, 1>();
-    tlast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tlast.second);
-    if (tlast.first)
+    speed = axisDotAvelocityDiff[2] * matrix.template GetValue<1, 1>() - axisDotAvelocityDiff[1] * matrix.template GetValue<2, 1>();
+    tLast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tLast.second);
+    if (tLast.first)
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
     // 轴 C0 + t * A0 x B2
-    radius = box0.GetExtent(1) * absMatrix.GetValue<2, 2>() + box0.GetExtent(2) * absMatrix.GetValue<1, 2>();
+    radius = box0.GetExtent(1) * absMatrix.template GetValue<2, 2>() + box0.GetExtent(2) * absMatrix.template GetValue<1, 2>();
     min0 = -radius;
     max0 = +radius;
-    center = axisDotCenterDiff[2] * matrix.GetValue<1, 2>() - axisDotCenterDiff[1] * matrix.GetValue<2, 2>();
-    radius = box1.GetExtent(0) * absMatrix.GetValue<0, 1>() + box1.GetExtent(1) * absMatrix.GetValue<0, 0>();
+    center = axisDotCenterDiff[2] * matrix.template GetValue<1, 2>() - axisDotCenterDiff[1] * matrix.template GetValue<2, 2>();
+    radius = box1.GetExtent(0) * absMatrix.template GetValue<0, 1>() + box1.GetExtent(1) * absMatrix.template GetValue<0, 0>();
     min1 = center - radius;
     max1 = center + radius;
-    speed = axisDotAvelocityDiff[2] * matrix.GetValue<1, 2>() - axisDotAvelocityDiff[1] * matrix.GetValue<2, 2>();
-    tlast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tlast.second);
-    if (tlast.first)
+    speed = axisDotAvelocityDiff[2] * matrix.template GetValue<1, 2>() - axisDotAvelocityDiff[1] * matrix.template GetValue<2, 2>();
+    tLast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tLast.second);
+    if (tLast.first)
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
     // 轴 C0 + t * A1 x B0
-    radius = box0.GetExtent(0) * absMatrix.GetValue<2, 0>() + box0.GetExtent(2) * absMatrix.GetValue<0, 0>();
+    radius = box0.GetExtent(0) * absMatrix.template GetValue<2, 0>() + box0.GetExtent(2) * absMatrix.template GetValue<0, 0>();
     min0 = -radius;
     max0 = +radius;
-    center = axisDotCenterDiff[0] * matrix.GetValue<2, 0>() - axisDotCenterDiff[2] * matrix.GetValue<0, 0>();
-    radius = box1.GetExtent(1) * absMatrix.GetValue<1, 2>() + box1.GetExtent(2) * absMatrix.GetValue<1, 1>();
+    center = axisDotCenterDiff[0] * matrix.template GetValue<2, 0>() - axisDotCenterDiff[2] * matrix.template GetValue<0, 0>();
+    radius = box1.GetExtent(1) * absMatrix.template GetValue<1, 2>() + box1.GetExtent(2) * absMatrix.template GetValue<1, 1>();
     min1 = center - radius;
     max1 = center + radius;
-    speed = axisDotAvelocityDiff[0] * matrix.GetValue<2, 0>() - axisDotAvelocityDiff[2] * matrix.GetValue<0, 0>();
-    tlast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tlast.second);
-    if (tlast.first)
+    speed = axisDotAvelocityDiff[0] * matrix.template GetValue<2, 0>() - axisDotAvelocityDiff[2] * matrix.template GetValue<0, 0>();
+    tLast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tLast.second);
+    if (tLast.first)
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
     // 轴 C0 + t * A1 x B1
-    radius = box0.GetExtent(0) * absMatrix.GetValue<2, 1>() + box0.GetExtent(2) * absMatrix.GetValue<0, 1>();
+    radius = box0.GetExtent(0) * absMatrix.template GetValue<2, 1>() + box0.GetExtent(2) * absMatrix.template GetValue<0, 1>();
     min0 = -radius;
     max0 = +radius;
-    center = axisDotCenterDiff[0] * matrix.GetValue<2, 1>() - axisDotCenterDiff[2] * matrix.GetValue<0, 1>();
-    radius = box1.GetExtent(0) * absMatrix.GetValue<1, 2>() + box1.GetExtent(2) * absMatrix.GetValue<1, 0>();
+    center = axisDotCenterDiff[0] * matrix.template GetValue<2, 1>() - axisDotCenterDiff[2] * matrix.template GetValue<0, 1>();
+    radius = box1.GetExtent(0) * absMatrix.template GetValue<1, 2>() + box1.GetExtent(2) * absMatrix.template GetValue<1, 0>();
     min1 = center - radius;
     max1 = center + radius;
-    speed = axisDotAvelocityDiff[0] * matrix.GetValue<2, 1>() - axisDotAvelocityDiff[2] * matrix.GetValue<0, 1>();
-    tlast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tlast.second);
-    if (tlast.first)
+    speed = axisDotAvelocityDiff[0] * matrix.template GetValue<2, 1>() - axisDotAvelocityDiff[2] * matrix.template GetValue<0, 1>();
+    tLast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tLast.second);
+    if (tLast.first)
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
     // 轴 C0 + t * A1xB2
-    radius = box0.GetExtent(0) * absMatrix.GetValue<2, 2>() + box0.GetExtent(2) * absMatrix.GetValue<0, 2>();
+    radius = box0.GetExtent(0) * absMatrix.template GetValue<2, 2>() + box0.GetExtent(2) * absMatrix.template GetValue<0, 2>();
     min0 = -radius;
     max0 = +radius;
-    center = axisDotCenterDiff[0] * matrix.GetValue<2, 2>() - axisDotCenterDiff[2] * matrix.GetValue<0, 2>();
-    radius = box1.GetExtent(0) * absMatrix.GetValue<1, 1>() + box1.GetExtent(1) * absMatrix.GetValue<1, 0>();
+    center = axisDotCenterDiff[0] * matrix.template GetValue<2, 2>() - axisDotCenterDiff[2] * matrix.template GetValue<0, 2>();
+    radius = box1.GetExtent(0) * absMatrix.template GetValue<1, 1>() + box1.GetExtent(1) * absMatrix.template GetValue<1, 0>();
     min1 = center - radius;
     max1 = center + radius;
-    speed = axisDotAvelocityDiff[0] * matrix.GetValue<2, 2>() - axisDotAvelocityDiff[2] * matrix.GetValue<0, 2>();
-    tlast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tlast.second);
-    if (tlast.first)
+    speed = axisDotAvelocityDiff[0] * matrix.template GetValue<2, 2>() - axisDotAvelocityDiff[2] * matrix.template GetValue<0, 2>();
+    tLast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tLast.second);
+    if (tLast.first)
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
     // 轴 C0 + t * A2 x B0
-    radius = box0.GetExtent(0) * absMatrix.GetValue<1, 0>() + box0.GetExtent(1) * absMatrix.GetValue<0, 0>();
+    radius = box0.GetExtent(0) * absMatrix.template GetValue<1, 0>() + box0.GetExtent(1) * absMatrix.template GetValue<0, 0>();
     min0 = -radius;
     max0 = +radius;
-    center = axisDotCenterDiff[1] * matrix.GetValue<0, 0>() - axisDotCenterDiff[0] * matrix.GetValue<1, 0>();
-    radius = box1.GetExtent(1) * absMatrix.GetValue<2, 2>() + box1.GetExtent(2) * absMatrix.GetValue<2, 1>();
+    center = axisDotCenterDiff[1] * matrix.template GetValue<0, 0>() - axisDotCenterDiff[0] * matrix.template GetValue<1, 0>();
+    radius = box1.GetExtent(1) * absMatrix.template GetValue<2, 2>() + box1.GetExtent(2) * absMatrix.template GetValue<2, 1>();
     min1 = center - radius;
     max1 = center + radius;
-    speed = axisDotAvelocityDiff[1] * matrix.GetValue<0, 0>() - axisDotAvelocityDiff[0] * matrix.GetValue<1, 0>();
-    tlast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tlast.second);
-    if (tlast.first)
+    speed = axisDotAvelocityDiff[1] * matrix.template GetValue<0, 0>() - axisDotAvelocityDiff[0] * matrix.template GetValue<1, 0>();
+    tLast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tLast.second);
+    if (tLast.first)
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
     // 轴 C0 + t * A2 x B1
-    radius = box0.GetExtent(0) * absMatrix.GetValue<1, 1>() + box0.GetExtent(1) * absMatrix.GetValue<0, 1>();
+    radius = box0.GetExtent(0) * absMatrix.template GetValue<1, 1>() + box0.GetExtent(1) * absMatrix.template GetValue<0, 1>();
     min0 = -radius;
     max0 = +radius;
-    center = axisDotCenterDiff[1] * matrix.GetValue<0, 1>() - axisDotCenterDiff[0] * matrix.GetValue<1, 1>();
-    radius = box1.GetExtent(0) * absMatrix.GetValue<2, 2>() + box1.GetExtent(2) * absMatrix.GetValue<2, 0>();
+    center = axisDotCenterDiff[1] * matrix.template GetValue<0, 1>() - axisDotCenterDiff[0] * matrix.template GetValue<1, 1>();
+    radius = box1.GetExtent(0) * absMatrix.template GetValue<2, 2>() + box1.GetExtent(2) * absMatrix.template GetValue<2, 0>();
     min1 = center - radius;
     max1 = center + radius;
-    speed = axisDotAvelocityDiff[1] * matrix.GetValue<0, 1>() - axisDotAvelocityDiff[0] * matrix.GetValue<1, 1>();
-    tlast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tlast.second);
-    if (tlast.first)
+    speed = axisDotAvelocityDiff[1] * matrix.template GetValue<0, 1>() - axisDotAvelocityDiff[0] * matrix.template GetValue<1, 1>();
+    tLast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tLast.second);
+    if (tLast.first)
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
     // 轴 C0 + t * A2 x B2
-    radius = box0.GetExtent(0) * absMatrix.GetValue<1, 2>() + box0.GetExtent(1) * absMatrix.GetValue<0, 2>();
+    radius = box0.GetExtent(0) * absMatrix.template GetValue<1, 2>() + box0.GetExtent(1) * absMatrix.template GetValue<0, 2>();
     min0 = -radius;
     max0 = +radius;
-    center = axisDotCenterDiff[1] * matrix.GetValue<0, 2>() - axisDotCenterDiff[0] * matrix.GetValue<1, 2>();
-    radius = box1.GetExtent(0) * absMatrix.GetValue<2, 1>() + box1.GetExtent(1) * absMatrix.GetValue<2, 0>();
+    center = axisDotCenterDiff[1] * matrix.template GetValue<0, 2>() - axisDotCenterDiff[0] * matrix.template GetValue<1, 2>();
+    radius = box1.GetExtent(0) * absMatrix.template GetValue<2, 1>() + box1.GetExtent(1) * absMatrix.template GetValue<2, 0>();
     min1 = center - radius;
     max1 = center + radius;
-    speed = axisDotAvelocityDiff[1] * matrix.GetValue<0, 2>() - axisDotAvelocityDiff[0] * matrix.GetValue<1, 2>();
-    tlast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tlast.second);
-    if (tlast.first)
+    speed = axisDotAvelocityDiff[1] * matrix.template GetValue<0, 2>() - axisDotAvelocityDiff[0] * matrix.template GetValue<1, 2>();
+    tLast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tLast.second);
+    if (tLast.first)
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;

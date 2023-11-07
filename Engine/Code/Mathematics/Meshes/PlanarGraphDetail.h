@@ -383,6 +383,10 @@ void Mathematics::PlanarGraph<Point2>::ExtractPrimitive(std::shared_ptr<Vertex> 
     }
 }
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+
 template <typename Point2>
 std::shared_ptr<typename Mathematics::PlanarGraph<Point2>::Vertex> Mathematics::PlanarGraph<Point2>::GetClockwiseMost(const std::shared_ptr<Vertex>& vPrev, const std::shared_ptr<Vertex>& vCurr)
 {
@@ -486,6 +490,8 @@ std::shared_ptr<typename Mathematics::PlanarGraph<Point2>::Vertex> Mathematics::
 
     return vNext;
 }
+
+#include SYSTEM_WARNING_POP
 
 // PlanarGraph::Vertex
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 14:39)
+///	版本：0.9.1.6 (2023/10/26 14:40)
 
 #ifndef MATHEMATICS_ALGEBRA_A_VECTOR_H
 #define MATHEMATICS_ALGEBRA_A_VECTOR_H
@@ -18,7 +18,6 @@
 #include "System/Helper/PragmaWarning/Operators.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 
-#include <type_traits>
 #include <vector>
 
 namespace Mathematics
@@ -140,18 +139,18 @@ namespace Mathematics
 
     // 输入必须初始化为非零向量
     template <typename T>
-    NODISCARD const AVectorOrthonormalize<T> Orthonormalize(const AVector<T>& uVector, const AVector<T>& vVector, const AVector<T>& wVector, T epsilon = Math<T>::GetZeroTolerance());
+    NODISCARD AVectorOrthonormalize<T> Orthonormalize(const AVector<T>& uVector, const AVector<T>& vVector, const AVector<T>& wVector, T epsilon = Math<T>::GetZeroTolerance());
     template <typename T>
-    NODISCARD const AVectorOrthonormalize<T> Orthonormalize(const std::vector<AVector<T>>& vectors, T epsilon = Math<T>::GetZeroTolerance());
+    NODISCARD AVectorOrthonormalize<T> Orthonormalize(const std::vector<AVector<T>>& vectors, T epsilon = Math<T>::GetZeroTolerance());
 
     // 输入值nonzeroVector必须是一个非零向量。返回值是一个标准正交基{U，V, W}。
     // 返回的W为通过此函数正则化的nonzeroVector。如果你已知W是单位长度，使用GenerateComplementBasis来计算U和V。
     template <typename T>
-    NODISCARD const AVectorOrthonormalBasis<T> GenerateOrthonormalBasis(const AVector<T>& nonzeroVector, T epsilon = Math<T>::GetZeroTolerance());
+    NODISCARD AVectorOrthonormalBasis<T> GenerateOrthonormalBasis(const AVector<T>& nonzeroVector, T epsilon = Math<T>::GetZeroTolerance());
 
     // 输入值unitVector（W）必须是一个单位向量。返回值中的向量{U,V}是单位长度且互相垂直，且{U,V,W}是一个标准正交基。
     template <typename T>
-    NODISCARD const AVectorOrthonormalBasis<T> GenerateComplementBasis(const AVector<T>& unitVector, T epsilon = Math<T>::GetZeroTolerance());
+    NODISCARD AVectorOrthonormalBasis<T> GenerateComplementBasis(const AVector<T>& unitVector, T epsilon = Math<T>::GetZeroTolerance());
 
     // 调试输出
     template <typename T>

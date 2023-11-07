@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:55)
+///	版本：0.9.1.6 (2023/10/27 17:10)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_RECTANGLE3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_RECTANGLE3_H
@@ -24,6 +24,7 @@ namespace Mathematics
         using ClassType = DistancePoint3Rectangle3<Real>;
         using Vector3 = Vector3<Real>;
         using ParentType = DistanceBase<Real, Vector3>;
+
         using Vector2 = Vector2<Real>;
         using Rectangle3 = Rectangle3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
@@ -49,7 +50,7 @@ namespace Mathematics
         Vector3 point;
         Rectangle3 rectangle;
 
-        // 有关最接近的矩形点的信息 
+        // 有关最接近的矩形点的信息
         mutable Vector2 rectCoord;
     };
 

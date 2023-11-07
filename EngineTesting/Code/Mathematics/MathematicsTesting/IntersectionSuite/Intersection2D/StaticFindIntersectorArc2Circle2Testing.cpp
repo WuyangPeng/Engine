@@ -45,7 +45,7 @@ void Mathematics::StaticFindIntersectorArc2Circle2Testing::SameTest() noexcept
 void Mathematics::StaticFindIntersectorArc2Circle2Testing::EmptyTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
+    std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -75,7 +75,7 @@ void Mathematics::StaticFindIntersectorArc2Circle2Testing::EmptyTest()
         const float maxX = lhsCenter.GetX() + lhsRadius;
         const float minX = lhsCenter.GetX() - lhsRadius;
 
-        const std::uniform_real<float> randomDistribution1(minX, maxX);
+        std::uniform_real<float> randomDistribution1(minX, maxX);
 
         const float firstX = randomDistribution1(generator);
         float distanceX = lhsCenter.GetX() - firstX;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:21)
+///	版本：0.9.1.6 (2023/10/28 14:55)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT2_SEGMENT2_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT2_SEGMENT2_H
@@ -23,6 +23,7 @@ namespace Mathematics
     public:
         using ClassType = StaticTestIntersectorSegment2Segment2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
+
         using Vector2 = Vector2<Real>;
         using Segment2 = Segment2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
@@ -62,7 +63,7 @@ namespace Mathematics
         // 相交集
         int quantity;
 
-        Real m_IntervalThreshold;
+        Real intervalThreshold;
     };
 }
 

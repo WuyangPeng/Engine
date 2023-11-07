@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:50)
+///	版本：0.9.1.6 (2023/10/27 15:16)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT2_HYPERBOLA2_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT2_HYPERBOLA2_ACHIEVE_H
@@ -105,7 +105,6 @@ typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathematics
     return DistanceResult{ Vector2Tools::GetLengthSquared(diff), Math::GetValue(0), point, closest };
 }
 
-// private
 template <typename Real>
 Real Mathematics::DistancePoint2Hyperbola2<Real>::GetHyperbola(Real t, const Vector2& reciprocalExtentSquared) const
 {

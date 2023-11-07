@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:13)
+///	版本：0.9.1.6 (2023/10/28 16:04)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR_H
@@ -28,11 +28,12 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = Intersector<Real, Vector>;
+
         using Math = Math<Real>;
         using VectorType = Vector<Real>;
 
     public:
-        explicit Intersector(const Real epsilon = Math::GetZeroTolerance()) noexcept;
+        explicit Intersector(Real epsilon = Math::GetZeroTolerance()) noexcept;
         virtual ~Intersector() noexcept = 0;
         Intersector(const Intersector& rhs) noexcept = default;
         virtual Intersector& operator=(const Intersector& rhs) noexcept = default;

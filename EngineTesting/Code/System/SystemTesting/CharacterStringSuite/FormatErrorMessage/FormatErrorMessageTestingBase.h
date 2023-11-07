@@ -12,7 +12,8 @@
 
 #include "FormatMessageTestingBase.h"
 #include "System/Helper/EnumCast.h"
-#include "System/Windows/Flags/PlatformErrorFlags.h" 
+#include "System/Windows/Flags/PlatformErrorFlags.h"
+#include "System/DynamicLink/Using/LoadLibraryUsing.h"
 
 #include <set>
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 17:57)
+///	版本：0.9.1.6 (2023/10/26 11:04)
 
 #ifndef MATHEMATICS_ALGEBRA_TRIDIAGONALIZE_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_TRIDIAGONALIZE_ACHIEVE_H
@@ -19,9 +19,9 @@ requires std::is_arithmetic_v<Real>
 Mathematics::Tridiagonalize<Real>::Tridiagonalize(const Matrix3& matrix)
     : inputMatrix{ matrix }, outputMatrix{ MatrixInitType::Identity }, reflection{ false }, diagonal{}, subDiagonal{}
 {
-    MATHEMATICS_ASSERTION_1(Math::FAbs(inputMatrix.GetValue<0, 1>() - inputMatrix.GetValue<1, 0>()) <= Math::GetZeroTolerance(), "矩阵必须是对称矩阵。");
-    MATHEMATICS_ASSERTION_1(Math::FAbs(inputMatrix.GetValue<0, 2>() - inputMatrix.GetValue<2, 0>()) <= Math::GetZeroTolerance(), "矩阵必须是对称矩阵。");
-    MATHEMATICS_ASSERTION_1(Math::FAbs(inputMatrix.GetValue<1, 2>() - inputMatrix.GetValue<2, 1>()) <= Math::GetZeroTolerance(), "矩阵必须是对称矩阵。");
+    MATHEMATICS_ASSERTION_1(Math::FAbs(inputMatrix.template GetValue<0, 1>() - inputMatrix.template GetValue<1, 0>()) <= Math::GetZeroTolerance(), "矩阵必须是对称矩阵。");
+    MATHEMATICS_ASSERTION_1(Math::FAbs(inputMatrix.template GetValue<0, 2>() - inputMatrix.template GetValue<2, 0>()) <= Math::GetZeroTolerance(), "矩阵必须是对称矩阵。");
+    MATHEMATICS_ASSERTION_1(Math::FAbs(inputMatrix.template GetValue<1, 2>() - inputMatrix.template GetValue<2, 1>()) <= Math::GetZeroTolerance(), "矩阵必须是对称矩阵。");
 
     Init();
 
@@ -53,12 +53,12 @@ void Mathematics::Tridiagonalize<Real>::Init()
     //     diagonal, T的对角线 T
     //     subDiagonal,T的次对角项 T (T 是对称的)
 
-    auto m00 = inputMatrix.GetValue<0, 0>();
-    auto m01 = inputMatrix.GetValue<0, 1>();
-    auto m02 = inputMatrix.GetValue<0, 2>();
-    auto m11 = inputMatrix.GetValue<1, 1>();
-    auto m12 = inputMatrix.GetValue<1, 2>();
-    auto m22 = inputMatrix.GetValue<2, 2>();
+    auto m00 = inputMatrix.template GetValue<0, 0>();
+    auto m01 = inputMatrix.template GetValue<0, 1>();
+    auto m02 = inputMatrix.template GetValue<0, 2>();
+    auto m11 = inputMatrix.template GetValue<1, 1>();
+    auto m12 = inputMatrix.template GetValue<1, 2>();
+    auto m22 = inputMatrix.template GetValue<2, 2>();
 
     diagonal = Vector3{ m00, Math::GetValue(0), Math::GetValue(0) };
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:41)
+///	版本：0.9.1.6 (2023/10/27 11:34)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EIGEN_DECOMPOSITION_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EIGEN_DECOMPOSITION_H
@@ -17,7 +17,6 @@
 #include "Mathematics/Algebra/VariableMatrix.h"
 #include "Mathematics/Base/MathDetail.h"
 
-#include <memory>
 #include <vector>
 
 namespace Mathematics
@@ -98,7 +97,7 @@ namespace Mathematics
         NODISCARD bool IsQLAlgorithmQuit(int outerIndex) const;
         void QLAlgorithmLoop(int totalIndex, int outerIndex);
         void QLAlgorithmAmendSolveMatrix(int innerIndex, Real sine, Real cosine);
-        NODISCARD Real GetQLAlgorithmSubdiagonalValue(int totalIndex, int outerIndex) const;
+        NODISCARD Real GetQLAlgorithmSubDiagonalValue(int totalIndex, int outerIndex) const;
 
         // 排序特征值从最大到最小。
         void DecreasingSort();

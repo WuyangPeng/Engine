@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:25)
+///	版本：0.9.1.6 (2023/10/27 17:28)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ELLIPSE2_ELLIPSE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ELLIPSE2_ELLIPSE2_DETAIL_H
@@ -92,8 +92,8 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
     const Box2<Real> box0{ ellipse0.GetCenter(), ellipse0.GetAxis0(), ellipse0.GetAxis1(), ellipse0.GetExtent0(), ellipse0.GetExtent1() };
     const Box2<Real> box1{ ellipse1.GetCenter(), ellipse1.GetAxis0(), ellipse1.GetAxis1(), ellipse1.GetExtent0(), ellipse1.GetExtent1() };
 
-    StaticTestIntersectorBox2Box2<Real> staticTestIntersectorBox2Box2{ box0, box1 };
-    if (!staticTestIntersectorBox2Box2.IsIntersection())
+    if (StaticTestIntersectorBox2Box2<Real> staticTestIntersectorBox2Box2{ box0, box1 };
+        !staticTestIntersectorBox2Box2.IsIntersection())
     {
         // 包围盒不重叠，椭圆也不重叠。
         this->SetIntersectionType(IntersectionType::Empty);
@@ -174,8 +174,8 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
 
             for (; find < quantity; ++find)
             {
-                auto diff = measure.at(i).angle0 - measure.at(find).angle0;
-                if (Math::FAbs(diff) < Math::GetZeroTolerance())
+                if (auto diff = measure.at(i).angle0 - measure.at(find).angle0;
+                    Math::FAbs(diff) < Math::GetZeroTolerance())
                 {
                     break;
                 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 16:28)
+///	版本：0.9.1.6 (2023/10/26 10:28)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX2_DETAIL_H
 #define MATHEMATICS_ALGEBRA_MATRIX2_DETAIL_H
@@ -112,42 +112,42 @@ template <typename Real>
 Mathematics::Matrix2<Real> Mathematics::operator*(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept
 {
     // A * B
-    return Matrix2<Real>{ lhs.GetValue<0, 0>() * rhs.GetValue<0, 0>() + lhs.GetValue<0, 1>() * rhs.GetValue<1, 0>(),
-                          lhs.GetValue<0, 0>() * rhs.GetValue<0, 1>() + lhs.GetValue<0, 1>() * rhs.GetValue<1, 1>(),
-                          lhs.GetValue<1, 0>() * rhs.GetValue<0, 0>() + lhs.GetValue<1, 1>() * rhs.GetValue<1, 0>(),
-                          lhs.GetValue<1, 0>() * rhs.GetValue<0, 1>() + lhs.GetValue<1, 1>() * rhs.GetValue<1, 1>() };
+    return Matrix2<Real>{ lhs.template GetValue<0, 0>() * rhs.template GetValue<0, 0>() + lhs.template GetValue<0, 1>() * rhs.template GetValue<1, 0>(),
+                          lhs.template GetValue<0, 0>() * rhs.template GetValue<0, 1>() + lhs.template GetValue<0, 1>() * rhs.template GetValue<1, 1>(),
+                          lhs.template GetValue<1, 0>() * rhs.template GetValue<0, 0>() + lhs.template GetValue<1, 1>() * rhs.template GetValue<1, 0>(),
+                          lhs.template GetValue<1, 0>() * rhs.template GetValue<0, 1>() + lhs.template GetValue<1, 1>() * rhs.template GetValue<1, 1>() };
 }
 
 template <typename Real>
 Mathematics::Vector2<Real> Mathematics::operator*(const Matrix2<Real>& matrix, const Vector2<Real>& vector) noexcept
 {
-    return Vector2<Real>{ matrix.GetValue<0, 0>() * vector.GetX() + matrix.GetValue<0, 1>() * vector.GetY(), matrix.GetValue<1, 0>() * vector.GetX() + matrix.GetValue<1, 1>() * vector.GetY() };
+    return Vector2<Real>{ matrix.template GetValue<0, 0>() * vector.GetX() + matrix.template GetValue<0, 1>() * vector.GetY(), matrix.template GetValue<1, 0>() * vector.GetX() + matrix.template GetValue<1, 1>() * vector.GetY() };
 }
 
 template <typename Real>
 Mathematics::Vector2<Real> Mathematics::operator*(const Vector2<Real>& vector, const Matrix2<Real>& matrix) noexcept
 {
-    return Vector2<Real>{ vector.GetX() * matrix.GetValue<0, 0>() + vector.GetY() * matrix.GetValue<1, 0>(), vector.GetX() * matrix.GetValue<0, 1>() + vector.GetY() * matrix.GetValue<1, 1>() };
+    return Vector2<Real>{ vector.GetX() * matrix.template GetValue<0, 0>() + vector.GetY() * matrix.template GetValue<1, 0>(), vector.GetX() * matrix.template GetValue<0, 1>() + vector.GetY() * matrix.template GetValue<1, 1>() };
 }
 
 template <typename Real>
 Mathematics::Matrix2<Real> Mathematics::TransposeTimes(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept
 {
     // lhs^T * rhs
-    return Matrix2<Real>{ lhs.GetValue<0, 0>() * rhs.GetValue<0, 0>() + lhs.GetValue<1, 0>() * rhs.GetValue<1, 0>(),
-                          lhs.GetValue<0, 0>() * rhs.GetValue<0, 1>() + lhs.GetValue<1, 0>() * rhs.GetValue<1, 1>(),
-                          lhs.GetValue<0, 1>() * rhs.GetValue<0, 0>() + lhs.GetValue<1, 1>() * rhs.GetValue<1, 0>(),
-                          lhs.GetValue<0, 1>() * rhs.GetValue<0, 1>() + lhs.GetValue<1, 1>() * rhs.GetValue<1, 1>() };
+    return Matrix2<Real>{ lhs.template GetValue<0, 0>() * rhs.template GetValue<0, 0>() + lhs.template GetValue<1, 0>() * rhs.template GetValue<1, 0>(),
+                          lhs.template GetValue<0, 0>() * rhs.template GetValue<0, 1>() + lhs.template GetValue<1, 0>() * rhs.template GetValue<1, 1>(),
+                          lhs.template GetValue<0, 1>() * rhs.template GetValue<0, 0>() + lhs.template GetValue<1, 1>() * rhs.template GetValue<1, 0>(),
+                          lhs.template GetValue<0, 1>() * rhs.template GetValue<0, 1>() + lhs.template GetValue<1, 1>() * rhs.template GetValue<1, 1>() };
 }
 
 template <typename Real>
 Mathematics::Matrix2<Real> Mathematics::TimesTranspose(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept
 {
     // lhs * rhs^T
-    return Matrix2<Real>{ lhs.GetValue<0, 0>() * rhs.GetValue<0, 0>() + lhs.GetValue<0, 1>() * rhs.GetValue<0, 1>(),
-                          lhs.GetValue<0, 0>() * rhs.GetValue<1, 0>() + lhs.GetValue<0, 1>() * rhs.GetValue<1, 1>(),
-                          lhs.GetValue<1, 0>() * rhs.GetValue<0, 0>() + lhs.GetValue<1, 1>() * rhs.GetValue<0, 1>(),
-                          lhs.GetValue<1, 0>() * rhs.GetValue<1, 0>() + lhs.GetValue<1, 1>() * rhs.GetValue<1, 1>() };
+    return Matrix2<Real>{ lhs.template GetValue<0, 0>() * rhs.template GetValue<0, 0>() + lhs.template GetValue<0, 1>() * rhs.template GetValue<0, 1>(),
+                          lhs.template GetValue<0, 0>() * rhs.template GetValue<1, 0>() + lhs.template GetValue<0, 1>() * rhs.template GetValue<1, 1>(),
+                          lhs.template GetValue<1, 0>() * rhs.template GetValue<0, 0>() + lhs.template GetValue<1, 1>() * rhs.template GetValue<0, 1>(),
+                          lhs.template GetValue<1, 0>() * rhs.template GetValue<1, 0>() + lhs.template GetValue<1, 1>() * rhs.template GetValue<1, 1>() };
 }
 
 template <typename Real>
@@ -155,19 +155,19 @@ Mathematics::Matrix2<Real> Mathematics::TransposeTimesTranspose(const Matrix2<Re
 {
     // lhs^T * rhs^T
 
-    return Matrix2<Real>{ lhs.GetValue<0, 0>() * rhs.GetValue<0, 0>() + lhs.GetValue<1, 0>() * rhs.GetValue<0, 1>(),
-                          lhs.GetValue<0, 0>() * rhs.GetValue<1, 0>() + lhs.GetValue<1, 0>() * rhs.GetValue<1, 1>(),
-                          lhs.GetValue<0, 1>() * rhs.GetValue<0, 0>() + lhs.GetValue<1, 1>() * rhs.GetValue<0, 1>(),
-                          lhs.GetValue<0, 1>() * rhs.GetValue<1, 0>() + lhs.GetValue<1, 1>() * rhs.GetValue<1, 1>() };
+    return Matrix2<Real>{ lhs.template GetValue<0, 0>() * rhs.template GetValue<0, 0>() + lhs.template GetValue<1, 0>() * rhs.template GetValue<0, 1>(),
+                          lhs.template GetValue<0, 0>() * rhs.template GetValue<1, 0>() + lhs.template GetValue<1, 0>() * rhs.template GetValue<1, 1>(),
+                          lhs.template GetValue<0, 1>() * rhs.template GetValue<0, 0>() + lhs.template GetValue<1, 1>() * rhs.template GetValue<0, 1>(),
+                          lhs.template GetValue<0, 1>() * rhs.template GetValue<1, 0>() + lhs.template GetValue<1, 1>() * rhs.template GetValue<1, 1>() };
 }
 
 template <typename Real>
 bool Mathematics::Approximate(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs, Real epsilon) noexcept
 {
-    return Math<Real>::FAbs(lhs.GetValue<0, 0>() - rhs.GetValue<0, 0>()) <= epsilon &&
-           Math<Real>::FAbs(lhs.GetValue<0, 1>() - rhs.GetValue<0, 1>()) <= epsilon &&
-           Math<Real>::FAbs(lhs.GetValue<1, 0>() - rhs.GetValue<1, 0>()) <= epsilon &&
-           Math<Real>::FAbs(lhs.GetValue<1, 1>() - rhs.GetValue<1, 1>()) <= epsilon;
+    return Math<Real>::FAbs(lhs.template GetValue<0, 0>() - rhs.template GetValue<0, 0>()) <= epsilon &&
+           Math<Real>::FAbs(lhs.template GetValue<0, 1>() - rhs.template GetValue<0, 1>()) <= epsilon &&
+           Math<Real>::FAbs(lhs.template GetValue<1, 0>() - rhs.template GetValue<1, 0>()) <= epsilon &&
+           Math<Real>::FAbs(lhs.template GetValue<1, 1>() - rhs.template GetValue<1, 1>()) <= epsilon;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_MATRIX2_DETAIL_H

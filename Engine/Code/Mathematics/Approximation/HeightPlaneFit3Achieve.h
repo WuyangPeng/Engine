@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:35)
+///	版本：0.9.1.6 (2023/10/27 14:13)
 
 #ifndef MATHEMATICS_APPROXIMATION_HEIGHT_PLANE_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_HEIGHT_PLANE_FIT3_ACHIEVE_H
@@ -53,7 +53,7 @@ Real Mathematics::HeightPlaneFit3<Real>::GetCoeffA() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("拟合失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("拟合失败！"s))
     }
 }
 
@@ -68,7 +68,7 @@ Real Mathematics::HeightPlaneFit3<Real>::GetCoeffB() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("拟合失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("拟合失败！"s))
     }
 }
 
@@ -83,7 +83,7 @@ Real Mathematics::HeightPlaneFit3<Real>::GetCoeffC() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("拟合失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("拟合失败！"s))
     }
 }
 
@@ -124,7 +124,7 @@ void Mathematics::HeightPlaneFit3<Real>::Calculate(const Points& points)
         using Vector = typename LinearSystem<Real>::Vector3;
         using Matrix3 = typename LinearSystem<Real>::Matrix3;
 
-        Matrix3 matrix{ Vector{ sumXX, sumXY, sumX }, Vector{ sumXY, sumYY, sumY }, Vector{ sumX, sumY, numPoints } };
+        const Matrix3 matrix{ Vector{ sumXX, sumXY, sumX }, Vector{ sumXY, sumYY, sumY }, Vector{ sumX, sumY, numPoints } };
 
         const Vector input{ sumXZ, sumYZ, sumZ };
 

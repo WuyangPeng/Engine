@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 15:48)
+///	版本：0.9.1.6 (2023/10/26 17:09)
 
 #ifndef MATHEMATICS_OBJECTS_3D_CONVEX_POLYHEDRON3_DETAIL_H
 #define MATHEMATICS_OBJECTS_3D_CONVEX_POLYHEDRON3_DETAIL_H
@@ -14,8 +14,6 @@
 #include "Polyhedron3Detail.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "Mathematics/Algebra/Vector3Tools.h"
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
@@ -187,7 +185,7 @@ bool Mathematics::ConvexPolyhedron3<Real>::IsConvex(Real threshold) const
 
     if (IsUpdatePlanes())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("需要更新平面。\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("需要更新平面。\n"s))
     }
 
     auto maxDistance = -Math::maxReal;
@@ -226,7 +224,7 @@ bool Mathematics::ConvexPolyhedron3<Real>::Contains(const Vector3& point, Real t
 
     if (IsUpdatePlanes())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("需要更新平面。\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("需要更新平面。\n"s))
     }
 
     for (const auto& plane : planes)

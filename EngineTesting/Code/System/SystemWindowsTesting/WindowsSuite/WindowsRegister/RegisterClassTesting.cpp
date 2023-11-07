@@ -47,7 +47,7 @@ void System::RegisterClassTesting::RegisterClassTest()
 
     windowsClassEx.cbSize = sizeof(WindowsClassEx);
     windowsClassEx.style = EnumCastUnderlying(WindowsClassStyle::CommonUse);
-    windowsClassEx.lpfnWndProc = WINDOW_PROCESS_MANAGER_SINGLETON.GetProcess();
+    windowsClassEx.lpfnWndProc = Framework::WindowProcessManager::GetProcess();
     windowsClassEx.cbClsExtra = 0;
     windowsClassEx.cbWndExtra = 0;
     windowsClassEx.hInstance = instance;

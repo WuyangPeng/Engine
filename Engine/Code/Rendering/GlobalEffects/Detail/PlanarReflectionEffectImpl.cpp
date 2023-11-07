@@ -121,6 +121,10 @@ Rendering::PlanarReflectionEffectImpl::PlanarReflectionEffectImpl(const NodeShar
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, PlanarReflectionEffectImpl)
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+
 void Rendering::PlanarReflectionEffectImpl::Draw(const BaseRendererSharedPtr& engine, ProjectionViewWorldUpdater& projectionViewWorldMatrices)
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -196,6 +200,8 @@ void Rendering::PlanarReflectionEffectImpl::Draw(const BaseRendererSharedPtr& en
 
     MAYBE_UNUSED const auto casterVisualsDrawResult = engine->Draw(casterVisuals);
 }
+
+#include SYSTEM_WARNING_POP
 
 void Rendering::PlanarReflectionEffectImpl::GatherVisuals(const SpatialSharedPtr& spatial)
 {

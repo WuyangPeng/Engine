@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:42)
+///	版本：0.9.1.6 (2023/10/27 16:41)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_CLOSEST_POINTS_PARAMETER_RESULT_H
 #define MATHEMATICS_DISTANCE_DISTANCE_CLOSEST_POINTS_PARAMETER_RESULT_H
@@ -17,11 +17,12 @@
 namespace Mathematics
 {
     template <typename Real, typename Vector>
-    class DistanceClosestPointsParameterResult : public DistanceClosestPointsResult<Real, Vector>
+    class DistanceClosestPointsParameterResult final : public DistanceClosestPointsResult<Real, Vector>
     {
     public:
         using ClassType = DistanceClosestPointsParameterResult<Real, Vector>;
         using ParentType = DistanceClosestPointsResult<Real, Vector>;
+
         using ImplTypeSharedPtr = typename ParentType::ImplTypeSharedPtr;
 
     public:

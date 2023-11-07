@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:26)
+///	版本：0.9.1.6 (2023/10/28 13:51)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_TRIANGLE3_DETAIL_H
@@ -43,7 +43,7 @@ bool Mathematics::StaticFindIntersectorPlane3Triangle3<Real>::IsValid() const no
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorPlane3Triangle3<Real>::GetPlane() const noexcept
+Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorPlane3Triangle3<Real>::GetPlane() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -51,7 +51,7 @@ const Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorPlane3Triangle
 }
 
 template <typename Real>
-const Mathematics::Triangle3<Real> Mathematics::StaticFindIntersectorPlane3Triangle3<Real>::GetTriangle() const noexcept
+Mathematics::Triangle3<Real> Mathematics::StaticFindIntersectorPlane3Triangle3<Real>::GetTriangle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -332,7 +332,7 @@ int Mathematics::StaticFindIntersectorPlane3Triangle3<Real>::GetQuantity() const
 }
 
 template <typename Real>
-const Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorPlane3Triangle3<Real>::GetPoint(int index) const
+Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorPlane3Triangle3<Real>::GetPoint(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

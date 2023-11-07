@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:21)
+///	版本：0.9.1.6 (2023/10/27 14:27)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_H
@@ -46,6 +46,7 @@ namespace Mathematics
     {
     public:
         using ClassType = PolynomialFit4<Real>;
+
         using Samples = std::vector<Real>;
         using Polynomial = Polynomial<Real>;
         using Math = Math<Real>;

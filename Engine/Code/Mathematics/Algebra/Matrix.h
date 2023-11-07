@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 16:00)
+///	版本：0.9.1.6 (2023/10/26 14:44)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX_H
 #define MATHEMATICS_ALGEBRA_MATRIX_H
@@ -23,7 +23,6 @@
 #include "Mathematics/Base/MathDetail.h"
 
 #include <array>
-#include <type_traits>
 #include <vector>
 
 namespace Mathematics

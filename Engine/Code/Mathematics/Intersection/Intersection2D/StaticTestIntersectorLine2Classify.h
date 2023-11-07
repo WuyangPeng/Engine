@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:20)
+///	版本：0.9.1.6 (2023/10/28 14:53)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_CLASSIFY_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_CLASSIFY_H
@@ -22,6 +22,7 @@ namespace Mathematics
     public:
         using ClassType = StaticTestIntersectorLine2Classify<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
+
         using Vector2 = Vector2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
         using Math = typename ParentType::Math;

@@ -43,7 +43,7 @@ void Mathematics::Circle2Testing::MainTest()
 void Mathematics::Circle2Testing::CircleTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
+    std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 

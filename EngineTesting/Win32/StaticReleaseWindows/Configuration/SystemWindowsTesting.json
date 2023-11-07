@@ -4,7 +4,7 @@
 
   "messageBoxSelectionSuite": {
     "MessageBoxSelectionUseFlagsDataWindowsTesting": 0,
-    "MessageBoxSelectionUseLanguageIDDataWindowsTesting": 0
+    "MessageBoxSelectionUseLanguageIdDataWindowsTesting": 0
   },
 
   "dynamicLinkSuite": {

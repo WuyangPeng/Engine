@@ -111,6 +111,7 @@ void CoreTools::CommandLineInformationTesting::MainCommandLineInformationSucceed
 {
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26465)
+#include SYSTEM_WARNING_DISABLE(26492)
 
     std::vector charVector{ const_cast<char*>("MyProgram"),
                             const_cast<char*>("-debug"),
@@ -150,6 +151,7 @@ void CoreTools::CommandLineInformationTesting::GetBooleanFalseTest()
 {
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26465)
+#include SYSTEM_WARNING_DISABLE(26492)
 
     std::vector charVector{ const_cast<char*>("MyProgram"), const_cast<char*>("-debug") };
 
@@ -166,7 +168,7 @@ void CoreTools::CommandLineInformationTesting::GetIntegerExceptionTest()
 
     const CommandLineInformation commandLineInformation{ commandLine };
 
-    MAYBE_UNUSED auto value = commandLineInformation.GetInteger("fileName");
+    MAYBE_UNUSED const auto value = commandLineInformation.GetInteger("fileName");
 }
 
 void CoreTools::CommandLineInformationTesting::GetFloatExceptionTest()
@@ -175,7 +177,7 @@ void CoreTools::CommandLineInformationTesting::GetFloatExceptionTest()
 
     const CommandLineInformation commandLineInformation{ commandLine };
 
-    MAYBE_UNUSED auto value = commandLineInformation.GetFloat("Float");
+    MAYBE_UNUSED const auto value = commandLineInformation.GetFloat("Float");
 }
 
 void CoreTools::CommandLineInformationTesting::GetDoubleExceptionTest()
@@ -184,13 +186,14 @@ void CoreTools::CommandLineInformationTesting::GetDoubleExceptionTest()
 
     const CommandLineInformation commandLineInformation{ commandLine };
 
-    MAYBE_UNUSED auto value = commandLineInformation.GetDouble("debug");
+    MAYBE_UNUSED const auto value = commandLineInformation.GetDouble("debug");
 }
 
 void CoreTools::CommandLineInformationTesting::GetStringExceptionTest()
 {
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26465)
+#include SYSTEM_WARNING_DISABLE(26492)
 
     std::vector charVector{ const_cast<char*>("MyProgram"),
                             const_cast<char*>("-debug"),
@@ -208,6 +211,7 @@ void CoreTools::CommandLineInformationTesting::GetFileNameExceptionTest()
 {
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26465)
+#include SYSTEM_WARNING_DISABLE(26492)
 
     std::vector charVector{ const_cast<char*>("MyProgram"), const_cast<char*>("-debug") };
 

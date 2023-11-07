@@ -42,16 +42,20 @@ void System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringMessag
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26826)
 
     va_list vaArguments{};
     va_start(vaArguments, message);
 
-#include SYSTEM_WARNING_POP
-
     ASSERT_NOT_THROW_EXCEPTION_2(FormatStringMessageUseArgumentsTest, message, vaArguments);
 
     va_end(vaArguments);
+
+#include SYSTEM_WARNING_POP
 }
+
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26826)
 
 void System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringMessageUseArgumentsTest(const TChar* message, va_list vaArguments)
 {
@@ -65,3 +69,5 @@ void System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringMessag
     ASSERT_EQUAL(testMessage.size(), size);
     ASSERT_EQUAL(testMessage, GetMessageVaListResult());
 }
+
+#include SYSTEM_WARNING_POP

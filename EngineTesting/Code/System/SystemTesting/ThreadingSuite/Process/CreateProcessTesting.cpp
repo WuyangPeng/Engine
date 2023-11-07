@@ -75,7 +75,7 @@ void System::CreateProcessTesting::DoProcessTest(ProcessCreation processCreation
 
     ASSERT_TRUE(CreateSystemProcess(GetProcessFullPath().c_str(), nullptr, nullptr, nullptr, true, processCreation, nullptr, nullptr, &startupInfo, &processInformation));
 
-    if (processCreation == ProcessCreation::CreateSuspended)
+    if ((processCreation & ProcessCreation::CreateSuspended) == ProcessCreation::CreateSuspended)
     {
         ASSERT_EQUAL(ResumeSystemThread(processInformation.hThread), 1u);
     }

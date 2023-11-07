@@ -60,6 +60,11 @@ bool Rendering::Portal::ReducedFrustum(const Culler& culler, std::array<float, 6
 
     const auto camera = culler.GetCamera();
     const auto frustum = culler.GetFrustum();
+    if (frustum == nullptr)
+    {
+        return false;
+    }
+
     auto rmin = +Mathematics::MathF::maxReal;
     auto rmax = -Mathematics::MathF::maxReal;
     auto umin = +Mathematics::MathF::maxReal;

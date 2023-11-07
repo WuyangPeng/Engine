@@ -19,7 +19,7 @@
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/CurvesSurfacesVolumes/Curve2Detail.h"
-#include "Rendering/DataTypes/TransformDetail.h" 
+#include "Rendering/DataTypes/TransformDetail.h"
 #include "Rendering/SceneGraph/StandardMesh.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, RevolutionSurface);
@@ -175,7 +175,6 @@ void Rendering::RevolutionSurface::UpdateSurface()
 
     if (GetIndexBuffer() != nullptr)
     {
-    
     }
 }
 
@@ -207,94 +206,19 @@ void Rendering::RevolutionSurface::UpdateDisk()
     }
 }
 
-void Rendering::RevolutionSurface::UpdateSphere()
+void Rendering::RevolutionSurface::UpdateSphere() noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
-
-    const auto index = numCurveSamples - 1;
-
-    for (auto c = 1; c <= numCurveSamples - 2; ++c)
-    {
-        auto i = (c - 1) * (numRadialSamples + 1);
-
-        i += numRadialSamples;
-    }
-
-    for (auto r = 1; r < numRadialSamples; ++r)
-    {
-        for (auto c = 1; c <= numCurveSamples - 2; ++c)
-        {
-            auto radius = samples.at(c)[0] - xCenter;
-            if (radius < 0.0f)
-            {
-                radius = 0.0f;
-            }
-            const auto i = (c - 1) * (numRadialSamples + 1) + r;
-
-            const Mathematics::Vector3F position{ xCenter + radius * cos.at(r), radius * sin.at(r), samples.at(c)[2] };
-        }
-    }
 }
 
-void Rendering::RevolutionSurface::UpdateCylinder()
+void Rendering::RevolutionSurface::UpdateCylinder() noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
-
-    for (auto c = 0; c < numCurveSamples; ++c)
-    {
-        auto i = c * (numRadialSamples + 1);
-
-        i += numRadialSamples;
-    }
-
-    for (auto r = 1; r < numRadialSamples; ++r)
-    {
-        for (auto c = 0; c < numCurveSamples; ++c)
-        {
-            auto radius = samples.at(c)[0] - xCenter;
-            if (radius < 0.0f)
-            {
-                radius = 0.0f;
-            }
-            const auto i = c * (numRadialSamples + 1) + r;
-
-            const Mathematics::Vector3F position{ xCenter + radius * cos.at(r), radius * sin.at(r), samples.at(c)[2] };
-        }
-    }
 }
 
-void Rendering::RevolutionSurface::UpdateTorus()
+void Rendering::RevolutionSurface::UpdateTorus() noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
-
-    auto numVertices = GetVertexBuffer()->GetNumElements();
-
-    for (auto c = 0; c < numCurveSamples; ++c)
-    {
-        auto i = c * (numRadialSamples + 1);
-
-        i += numRadialSamples;
-    }
-
-    for (auto r = 1; r < numRadialSamples; ++r)
-    {
-        for (auto c = 0; c < numCurveSamples; ++c)
-        {
-            auto radius = samples.at(c)[0] - xCenter;
-            if (radius < 0.0f)
-            {
-                radius = 0.0f;
-            }
-            const auto i = c * (numRadialSamples + 1) + r;
-
-            const Mathematics::Vector3F position{ xCenter + radius * cos.at(r), radius * sin.at(r), samples.at(c)[2] };
-        }
-    }
-
-    auto i = numVertices - (numRadialSamples + 1);
-    for (auto r = 0; r <= numRadialSamples; ++r, ++i)
-    {
-    }
 }
 
 Rendering::RevolutionSurface::RevolutionSurface(LoadConstructor value)

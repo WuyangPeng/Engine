@@ -685,10 +685,10 @@ void Rendering::GLSLReflection::ReflectUniforms()
 
             if (info.GetArraySize() > 1)
             {
-                auto index = info.GetName().find('[');
+                const auto index = info.GetName().find('[');
                 if (index != std::string::npos)
                 {
-                    auto index2 = info.GetName().find('[', index + 1);
+                    const auto index2 = info.GetName().find('[', index + 1);
                     if (index2 != std::string::npos)
                     {
                         THROW_EXCEPTION(SYSTEM_TEXT("GLSL uniforms只支持一维数组。"));

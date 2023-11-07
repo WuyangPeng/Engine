@@ -46,7 +46,7 @@ namespace CoreTools
         void DispatchDelayEvent(int64_t currentTime);
 
         NODISCARD bool RegisterAllEvent(int64_t entityId);
-        NODISCARD bool UnRegisterAllEvent(int64_t entityId);
+        NODISCARD bool UnRegisterAllEvent(int64_t entityId) noexcept;
 
         NODISCARD bool Register(EventType eventType, int64_t entityId);
         NODISCARD bool UnRegister(EventType eventType, int64_t entityId);

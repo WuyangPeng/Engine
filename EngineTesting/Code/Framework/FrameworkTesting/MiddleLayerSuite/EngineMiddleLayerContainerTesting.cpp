@@ -115,6 +115,9 @@ void Framework::EngineMiddleLayerContainerTesting::EngineMiddleLayerTest()
     System::UnusedFunction(middleLayer);
 }
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
 void Framework::EngineMiddleLayerContainerTesting::SetMiddleLayerTest()
 {
     const auto middleLayer = std::make_shared<EngineMiddleLayerContainer<WindowApplicationTrait>>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
@@ -155,3 +158,5 @@ void Framework::EngineMiddleLayerContainerTesting::SetMiddleLayerTest()
     const auto guiManagerInterface = std::make_shared<GUIManagerInterface>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     middleLayer->SetGUIManager(guiManagerInterface);
 }
+
+#include SYSTEM_WARNING_POP

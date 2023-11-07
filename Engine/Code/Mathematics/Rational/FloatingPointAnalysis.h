@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:04)
+///	版本：0.9.1.6 (2023/10/26 20:05)
 
 #ifndef MATHEMATICS_RATIONAL_FLOATING_POINT_ANALYSIS_H
 #define MATHEMATICS_RATIONAL_FLOATING_POINT_ANALYSIS_H
@@ -16,8 +16,6 @@
 #include "Flags/FloatingPointAnalysisType.h"
 #include "Mathematics/Base/Flags/NumericalValueSymbol.h"
 
-#include <type_traits>
-
 namespace Mathematics
 {
     template <typename T>
@@ -27,6 +25,7 @@ namespace Mathematics
         static_assert(std::is_floating_point_v<T>, "T must be floating point.");
 
         using ClassType = FloatingPointAnalysis<T>;
+
         using TraitsType = typename IntegerTraits<T>::TraitsType;
         using IntegerType = typename TraitsType::IntegerType;
 

@@ -42,7 +42,6 @@ void Rendering::MaterialEmissiveConstantTesting::DoRunUnitTest()
 void Rendering::MaterialEmissiveConstantTesting::MainTest()
 {
     CameraManager::Create();
-    
 
     CoreTools::InitTerm::ExecuteInitializer();
 
@@ -53,7 +52,6 @@ void Rendering::MaterialEmissiveConstantTesting::MainTest()
 
     CoreTools::InitTerm::ExecuteTerminator();
 
-    
     CameraManager::Destroy();
 }
 
@@ -61,7 +59,7 @@ void Rendering::MaterialEmissiveConstantTesting::InitTest()
 {
     std::default_random_engine generator;
     const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
-    const std::uniform_real<float> secondFloatRandomDistribution(0.0f, 1.0f);
+    std::uniform_real<float> secondFloatRandomDistribution(0.0f, 1.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -146,7 +144,7 @@ void Rendering::MaterialEmissiveConstantTesting::CopyTest()
 {
     std::default_random_engine generator;
     const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
-    const std::uniform_real<float> secondFloatRandomDistribution(0.0f, 1.0f);
+    std::uniform_real<float> secondFloatRandomDistribution(0.0f, 1.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {

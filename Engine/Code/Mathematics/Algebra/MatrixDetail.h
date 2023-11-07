@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 16:03)
+///	版本：0.9.1.6 (2023/10/26 10:39)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX_DETAIL_H
 #define MATHEMATICS_ALGEBRA_MATRIX_DETAIL_H
@@ -749,17 +749,17 @@ Mathematics::Matrix<Real> Mathematics::Matrix<Real>::Invert3x3(const Real epsilo
     if (epsilon < Math::FAbs(det))
     {
         // inverse(M) = adjoint(M) / determinant(M).
-        adjoint.Divide<0>(det);
-        adjoint.Divide<1>(det);
-        adjoint.Divide<2>(det);
+        adjoint.template Divide<0>(det);
+        adjoint.template Divide<1>(det);
+        adjoint.template Divide<2>(det);
 
-        adjoint.Divide<4>(det);
-        adjoint.Divide<5>(det);
-        adjoint.Divide<6>(det);
+        adjoint.template Divide<4>(det);
+        adjoint.template Divide<5>(det);
+        adjoint.template Divide<6>(det);
 
-        adjoint.Divide<8>(det);
-        adjoint.Divide<9>(det);
-        adjoint.Divide<10>(det);
+        adjoint.template Divide<8>(det);
+        adjoint.template Divide<9>(det);
+        adjoint.template Divide<10>(det);
 
         return adjoint;
     }
@@ -1106,104 +1106,104 @@ bool Mathematics::operator<(const Matrix<Real>& lhs, const Matrix<Real>& rhs)
 template <typename Real>
 Mathematics::Matrix<Real> Mathematics::operator*(const Matrix<Real>& lhs, const Matrix<Real>& rhs) noexcept
 {
-    return Matrix<Real>{ lhs.GetValue<0>() * rhs.GetValue<0>() + lhs.GetValue<1>() * rhs.GetValue<4>() + lhs.GetValue<2>() * rhs.GetValue<8>() + lhs.GetValue<3>() * rhs.GetValue<12>(),
-                         lhs.GetValue<0>() * rhs.GetValue<1>() + lhs.GetValue<1>() * rhs.GetValue<5>() + lhs.GetValue<2>() * rhs.GetValue<9>() + lhs.GetValue<3>() * rhs.GetValue<13>(),
-                         lhs.GetValue<0>() * rhs.GetValue<2>() + lhs.GetValue<1>() * rhs.GetValue<6>() + lhs.GetValue<2>() * rhs.GetValue<10>() + lhs.GetValue<3>() * rhs.GetValue<14>(),
-                         lhs.GetValue<0>() * rhs.GetValue<3>() + lhs.GetValue<1>() * rhs.GetValue<7>() + lhs.GetValue<2>() * rhs.GetValue<11>() + lhs.GetValue<3>() * rhs.GetValue<15>(),
-                         lhs.GetValue<4>() * rhs.GetValue<0>() + lhs.GetValue<5>() * rhs.GetValue<4>() + lhs.GetValue<6>() * rhs.GetValue<8>() + lhs.GetValue<7>() * rhs.GetValue<12>(),
-                         lhs.GetValue<4>() * rhs.GetValue<1>() + lhs.GetValue<5>() * rhs.GetValue<5>() + lhs.GetValue<6>() * rhs.GetValue<9>() + lhs.GetValue<7>() * rhs.GetValue<13>(),
-                         lhs.GetValue<4>() * rhs.GetValue<2>() + lhs.GetValue<5>() * rhs.GetValue<6>() + lhs.GetValue<6>() * rhs.GetValue<10>() + lhs.GetValue<7>() * rhs.GetValue<14>(),
-                         lhs.GetValue<4>() * rhs.GetValue<3>() + lhs.GetValue<5>() * rhs.GetValue<7>() + lhs.GetValue<6>() * rhs.GetValue<11>() + lhs.GetValue<7>() * rhs.GetValue<15>(),
-                         lhs.GetValue<8>() * rhs.GetValue<0>() + lhs.GetValue<9>() * rhs.GetValue<4>() + lhs.GetValue<10>() * rhs.GetValue<8>() + lhs.GetValue<11>() * rhs.GetValue<12>(),
-                         lhs.GetValue<8>() * rhs.GetValue<1>() + lhs.GetValue<9>() * rhs.GetValue<5>() + lhs.GetValue<10>() * rhs.GetValue<9>() + lhs.GetValue<11>() * rhs.GetValue<13>(),
-                         lhs.GetValue<8>() * rhs.GetValue<2>() + lhs.GetValue<9>() * rhs.GetValue<6>() + lhs.GetValue<10>() * rhs.GetValue<10>() + lhs.GetValue<11>() * rhs.GetValue<14>(),
-                         lhs.GetValue<8>() * rhs.GetValue<3>() + lhs.GetValue<9>() * rhs.GetValue<7>() + lhs.GetValue<10>() * rhs.GetValue<11>() + lhs.GetValue<11>() * rhs.GetValue<15>(),
-                         lhs.GetValue<12>() * rhs.GetValue<0>() + lhs.GetValue<13>() * rhs.GetValue<4>() + lhs.GetValue<14>() * rhs.GetValue<8>() + lhs.GetValue<15>() * rhs.GetValue<12>(),
-                         lhs.GetValue<12>() * rhs.GetValue<1>() + lhs.GetValue<13>() * rhs.GetValue<5>() + lhs.GetValue<14>() * rhs.GetValue<9>() + lhs.GetValue<15>() * rhs.GetValue<13>(),
-                         lhs.GetValue<12>() * rhs.GetValue<2>() + lhs.GetValue<13>() * rhs.GetValue<6>() + lhs.GetValue<14>() * rhs.GetValue<10>() + lhs.GetValue<15>() * rhs.GetValue<14>(),
-                         lhs.GetValue<12>() * rhs.GetValue<3>() + lhs.GetValue<13>() * rhs.GetValue<7>() + lhs.GetValue<14>() * rhs.GetValue<11>() + lhs.GetValue<15>() * rhs.GetValue<15>() };
+    return Matrix<Real>{ lhs.template GetValue<0>() * rhs.template GetValue<0>() + lhs.template GetValue<1>() * rhs.template GetValue<4>() + lhs.template GetValue<2>() * rhs.template GetValue<8>() + lhs.template GetValue<3>() * rhs.template GetValue<12>(),
+                         lhs.template GetValue<0>() * rhs.template GetValue<1>() + lhs.template GetValue<1>() * rhs.template GetValue<5>() + lhs.template GetValue<2>() * rhs.template GetValue<9>() + lhs.template GetValue<3>() * rhs.template GetValue<13>(),
+                         lhs.template GetValue<0>() * rhs.template GetValue<2>() + lhs.template GetValue<1>() * rhs.template GetValue<6>() + lhs.template GetValue<2>() * rhs.template GetValue<10>() + lhs.template GetValue<3>() * rhs.template GetValue<14>(),
+                         lhs.template GetValue<0>() * rhs.template GetValue<3>() + lhs.template GetValue<1>() * rhs.template GetValue<7>() + lhs.template GetValue<2>() * rhs.template GetValue<11>() + lhs.template GetValue<3>() * rhs.template GetValue<15>(),
+                         lhs.template GetValue<4>() * rhs.template GetValue<0>() + lhs.template GetValue<5>() * rhs.template GetValue<4>() + lhs.template GetValue<6>() * rhs.template GetValue<8>() + lhs.template GetValue<7>() * rhs.template GetValue<12>(),
+                         lhs.template GetValue<4>() * rhs.template GetValue<1>() + lhs.template GetValue<5>() * rhs.template GetValue<5>() + lhs.template GetValue<6>() * rhs.template GetValue<9>() + lhs.template GetValue<7>() * rhs.template GetValue<13>(),
+                         lhs.template GetValue<4>() * rhs.template GetValue<2>() + lhs.template GetValue<5>() * rhs.template GetValue<6>() + lhs.template GetValue<6>() * rhs.template GetValue<10>() + lhs.template GetValue<7>() * rhs.template GetValue<14>(),
+                         lhs.template GetValue<4>() * rhs.template GetValue<3>() + lhs.template GetValue<5>() * rhs.template GetValue<7>() + lhs.template GetValue<6>() * rhs.template GetValue<11>() + lhs.template GetValue<7>() * rhs.template GetValue<15>(),
+                         lhs.template GetValue<8>() * rhs.template GetValue<0>() + lhs.template GetValue<9>() * rhs.template GetValue<4>() + lhs.template GetValue<10>() * rhs.template GetValue<8>() + lhs.template GetValue<11>() * rhs.template GetValue<12>(),
+                         lhs.template GetValue<8>() * rhs.template GetValue<1>() + lhs.template GetValue<9>() * rhs.template GetValue<5>() + lhs.template GetValue<10>() * rhs.template GetValue<9>() + lhs.template GetValue<11>() * rhs.template GetValue<13>(),
+                         lhs.template GetValue<8>() * rhs.template GetValue<2>() + lhs.template GetValue<9>() * rhs.template GetValue<6>() + lhs.template GetValue<10>() * rhs.template GetValue<10>() + lhs.template GetValue<11>() * rhs.template GetValue<14>(),
+                         lhs.template GetValue<8>() * rhs.template GetValue<3>() + lhs.template GetValue<9>() * rhs.template GetValue<7>() + lhs.template GetValue<10>() * rhs.template GetValue<11>() + lhs.template GetValue<11>() * rhs.template GetValue<15>(),
+                         lhs.template GetValue<12>() * rhs.template GetValue<0>() + lhs.template GetValue<13>() * rhs.template GetValue<4>() + lhs.template GetValue<14>() * rhs.template GetValue<8>() + lhs.template GetValue<15>() * rhs.template GetValue<12>(),
+                         lhs.template GetValue<12>() * rhs.template GetValue<1>() + lhs.template GetValue<13>() * rhs.template GetValue<5>() + lhs.template GetValue<14>() * rhs.template GetValue<9>() + lhs.template GetValue<15>() * rhs.template GetValue<13>(),
+                         lhs.template GetValue<12>() * rhs.template GetValue<2>() + lhs.template GetValue<13>() * rhs.template GetValue<6>() + lhs.template GetValue<14>() * rhs.template GetValue<10>() + lhs.template GetValue<15>() * rhs.template GetValue<14>(),
+                         lhs.template GetValue<12>() * rhs.template GetValue<3>() + lhs.template GetValue<13>() * rhs.template GetValue<7>() + lhs.template GetValue<14>() * rhs.template GetValue<11>() + lhs.template GetValue<15>() * rhs.template GetValue<15>() };
 }
 
 template <typename Real>
 Mathematics::Matrix<Real> Mathematics::TransposeTimes(const Matrix<Real>& lhs, const Matrix<Real>& rhs) noexcept
 {
-    return Matrix<Real>{ lhs.GetValue<0>() * rhs.GetValue<0>() + lhs.GetValue<4>() * rhs.GetValue<4>() + lhs.GetValue<8>() * rhs.GetValue<8>() + lhs.GetValue<12>() * rhs.GetValue<12>(),
-                         lhs.GetValue<0>() * rhs.GetValue<1>() + lhs.GetValue<4>() * rhs.GetValue<5>() + lhs.GetValue<8>() * rhs.GetValue<9>() + lhs.GetValue<12>() * rhs.GetValue<13>(),
-                         lhs.GetValue<0>() * rhs.GetValue<2>() + lhs.GetValue<4>() * rhs.GetValue<6>() + lhs.GetValue<8>() * rhs.GetValue<10>() + lhs.GetValue<12>() * rhs.GetValue<14>(),
-                         lhs.GetValue<0>() * rhs.GetValue<3>() + lhs.GetValue<4>() * rhs.GetValue<7>() + lhs.GetValue<8>() * rhs.GetValue<11>() + lhs.GetValue<12>() * rhs.GetValue<15>(),
-                         lhs.GetValue<1>() * rhs.GetValue<0>() + lhs.GetValue<5>() * rhs.GetValue<4>() + lhs.GetValue<9>() * rhs.GetValue<8>() + lhs.GetValue<13>() * rhs.GetValue<12>(),
-                         lhs.GetValue<1>() * rhs.GetValue<1>() + lhs.GetValue<5>() * rhs.GetValue<5>() + lhs.GetValue<9>() * rhs.GetValue<9>() + lhs.GetValue<13>() * rhs.GetValue<13>(),
-                         lhs.GetValue<1>() * rhs.GetValue<2>() + lhs.GetValue<5>() * rhs.GetValue<6>() + lhs.GetValue<9>() * rhs.GetValue<10>() + lhs.GetValue<13>() * rhs.GetValue<14>(),
-                         lhs.GetValue<1>() * rhs.GetValue<3>() + lhs.GetValue<5>() * rhs.GetValue<7>() + lhs.GetValue<9>() * rhs.GetValue<11>() + lhs.GetValue<13>() * rhs.GetValue<15>(),
-                         lhs.GetValue<2>() * rhs.GetValue<0>() + lhs.GetValue<6>() * rhs.GetValue<4>() + lhs.GetValue<10>() * rhs.GetValue<8>() + lhs.GetValue<14>() * rhs.GetValue<12>(),
-                         lhs.GetValue<2>() * rhs.GetValue<1>() + lhs.GetValue<6>() * rhs.GetValue<5>() + lhs.GetValue<10>() * rhs.GetValue<9>() + lhs.GetValue<14>() * rhs.GetValue<13>(),
-                         lhs.GetValue<2>() * rhs.GetValue<2>() + lhs.GetValue<6>() * rhs.GetValue<6>() + lhs.GetValue<10>() * rhs.GetValue<10>() + lhs.GetValue<14>() * rhs.GetValue<14>(),
-                         lhs.GetValue<2>() * rhs.GetValue<3>() + lhs.GetValue<6>() * rhs.GetValue<7>() + lhs.GetValue<10>() * rhs.GetValue<11>() + lhs.GetValue<14>() * rhs.GetValue<15>(),
-                         lhs.GetValue<3>() * rhs.GetValue<0>() + lhs.GetValue<7>() * rhs.GetValue<4>() + lhs.GetValue<11>() * rhs.GetValue<8>() + lhs.GetValue<15>() * rhs.GetValue<12>(),
-                         lhs.GetValue<3>() * rhs.GetValue<1>() + lhs.GetValue<7>() * rhs.GetValue<5>() + lhs.GetValue<11>() * rhs.GetValue<9>() + lhs.GetValue<15>() * rhs.GetValue<13>(),
-                         lhs.GetValue<3>() * rhs.GetValue<2>() + lhs.GetValue<7>() * rhs.GetValue<6>() + lhs.GetValue<11>() * rhs.GetValue<10>() + lhs.GetValue<15>() * rhs.GetValue<14>(),
-                         lhs.GetValue<3>() * rhs.GetValue<3>() + lhs.GetValue<7>() * rhs.GetValue<7>() + lhs.GetValue<11>() * rhs.GetValue<11>() + lhs.GetValue<15>() * rhs.GetValue<15>() };
+    return Matrix<Real>{ lhs.template GetValue<0>() * rhs.template GetValue<0>() + lhs.template GetValue<4>() * rhs.template GetValue<4>() + lhs.template GetValue<8>() * rhs.template GetValue<8>() + lhs.template GetValue<12>() * rhs.template GetValue<12>(),
+                         lhs.template GetValue<0>() * rhs.template GetValue<1>() + lhs.template GetValue<4>() * rhs.template GetValue<5>() + lhs.template GetValue<8>() * rhs.template GetValue<9>() + lhs.template GetValue<12>() * rhs.template GetValue<13>(),
+                         lhs.template GetValue<0>() * rhs.template GetValue<2>() + lhs.template GetValue<4>() * rhs.template GetValue<6>() + lhs.template GetValue<8>() * rhs.template GetValue<10>() + lhs.template GetValue<12>() * rhs.template GetValue<14>(),
+                         lhs.template GetValue<0>() * rhs.template GetValue<3>() + lhs.template GetValue<4>() * rhs.template GetValue<7>() + lhs.template GetValue<8>() * rhs.template GetValue<11>() + lhs.template GetValue<12>() * rhs.template GetValue<15>(),
+                         lhs.template GetValue<1>() * rhs.template GetValue<0>() + lhs.template GetValue<5>() * rhs.template GetValue<4>() + lhs.template GetValue<9>() * rhs.template GetValue<8>() + lhs.template GetValue<13>() * rhs.template GetValue<12>(),
+                         lhs.template GetValue<1>() * rhs.template GetValue<1>() + lhs.template GetValue<5>() * rhs.template GetValue<5>() + lhs.template GetValue<9>() * rhs.template GetValue<9>() + lhs.template GetValue<13>() * rhs.template GetValue<13>(),
+                         lhs.template GetValue<1>() * rhs.template GetValue<2>() + lhs.template GetValue<5>() * rhs.template GetValue<6>() + lhs.template GetValue<9>() * rhs.template GetValue<10>() + lhs.template GetValue<13>() * rhs.template GetValue<14>(),
+                         lhs.template GetValue<1>() * rhs.template GetValue<3>() + lhs.template GetValue<5>() * rhs.template GetValue<7>() + lhs.template GetValue<9>() * rhs.template GetValue<11>() + lhs.template GetValue<13>() * rhs.template GetValue<15>(),
+                         lhs.template GetValue<2>() * rhs.template GetValue<0>() + lhs.template GetValue<6>() * rhs.template GetValue<4>() + lhs.template GetValue<10>() * rhs.template GetValue<8>() + lhs.template GetValue<14>() * rhs.template GetValue<12>(),
+                         lhs.template GetValue<2>() * rhs.template GetValue<1>() + lhs.template GetValue<6>() * rhs.template GetValue<5>() + lhs.template GetValue<10>() * rhs.template GetValue<9>() + lhs.template GetValue<14>() * rhs.template GetValue<13>(),
+                         lhs.template GetValue<2>() * rhs.template GetValue<2>() + lhs.template GetValue<6>() * rhs.template GetValue<6>() + lhs.template GetValue<10>() * rhs.template GetValue<10>() + lhs.template GetValue<14>() * rhs.template GetValue<14>(),
+                         lhs.template GetValue<2>() * rhs.template GetValue<3>() + lhs.template GetValue<6>() * rhs.template GetValue<7>() + lhs.template GetValue<10>() * rhs.template GetValue<11>() + lhs.template GetValue<14>() * rhs.template GetValue<15>(),
+                         lhs.template GetValue<3>() * rhs.template GetValue<0>() + lhs.template GetValue<7>() * rhs.template GetValue<4>() + lhs.template GetValue<11>() * rhs.template GetValue<8>() + lhs.template GetValue<15>() * rhs.template GetValue<12>(),
+                         lhs.template GetValue<3>() * rhs.template GetValue<1>() + lhs.template GetValue<7>() * rhs.template GetValue<5>() + lhs.template GetValue<11>() * rhs.template GetValue<9>() + lhs.template GetValue<15>() * rhs.template GetValue<13>(),
+                         lhs.template GetValue<3>() * rhs.template GetValue<2>() + lhs.template GetValue<7>() * rhs.template GetValue<6>() + lhs.template GetValue<11>() * rhs.template GetValue<10>() + lhs.template GetValue<15>() * rhs.template GetValue<14>(),
+                         lhs.template GetValue<3>() * rhs.template GetValue<3>() + lhs.template GetValue<7>() * rhs.template GetValue<7>() + lhs.template GetValue<11>() * rhs.template GetValue<11>() + lhs.template GetValue<15>() * rhs.template GetValue<15>() };
 }
 
 template <typename Real>
 Mathematics::Matrix<Real> Mathematics::TimesTranspose(const Matrix<Real>& lhs, const Matrix<Real>& rhs) noexcept
 {
-    return Matrix<Real>{ lhs.GetValue<0>() * rhs.GetValue<0>() + lhs.GetValue<1>() * rhs.GetValue<1>() + lhs.GetValue<2>() * rhs.GetValue<2>() + lhs.GetValue<3>() * rhs.GetValue<3>(),
-                         lhs.GetValue<0>() * rhs.GetValue<4>() + lhs.GetValue<1>() * rhs.GetValue<5>() + lhs.GetValue<2>() * rhs.GetValue<6>() + lhs.GetValue<3>() * rhs.GetValue<7>(),
-                         lhs.GetValue<0>() * rhs.GetValue<8>() + lhs.GetValue<1>() * rhs.GetValue<9>() + lhs.GetValue<2>() * rhs.GetValue<10>() + lhs.GetValue<3>() * rhs.GetValue<11>(),
-                         lhs.GetValue<0>() * rhs.GetValue<12>() + lhs.GetValue<1>() * rhs.GetValue<13>() + lhs.GetValue<2>() * rhs.GetValue<14>() + lhs.GetValue<3>() * rhs.GetValue<15>(),
-                         lhs.GetValue<4>() * rhs.GetValue<0>() + lhs.GetValue<5>() * rhs.GetValue<1>() + lhs.GetValue<6>() * rhs.GetValue<2>() + lhs.GetValue<7>() * rhs.GetValue<3>(),
-                         lhs.GetValue<4>() * rhs.GetValue<4>() + lhs.GetValue<5>() * rhs.GetValue<5>() + lhs.GetValue<6>() * rhs.GetValue<6>() + lhs.GetValue<7>() * rhs.GetValue<7>(),
-                         lhs.GetValue<4>() * rhs.GetValue<8>() + lhs.GetValue<5>() * rhs.GetValue<9>() + lhs.GetValue<6>() * rhs.GetValue<10>() + lhs.GetValue<7>() * rhs.GetValue<11>(),
-                         lhs.GetValue<4>() * rhs.GetValue<12>() + lhs.GetValue<5>() * rhs.GetValue<13>() + lhs.GetValue<6>() * rhs.GetValue<14>() + lhs.GetValue<7>() * rhs.GetValue<15>(),
-                         lhs.GetValue<8>() * rhs.GetValue<0>() + lhs.GetValue<9>() * rhs.GetValue<1>() + lhs.GetValue<10>() * rhs.GetValue<2>() + lhs.GetValue<11>() * rhs.GetValue<3>(),
-                         lhs.GetValue<8>() * rhs.GetValue<4>() + lhs.GetValue<9>() * rhs.GetValue<5>() + lhs.GetValue<10>() * rhs.GetValue<6>() + lhs.GetValue<11>() * rhs.GetValue<7>(),
-                         lhs.GetValue<8>() * rhs.GetValue<8>() + lhs.GetValue<9>() * rhs.GetValue<9>() + lhs.GetValue<10>() * rhs.GetValue<10>() + lhs.GetValue<11>() * rhs.GetValue<11>(),
-                         lhs.GetValue<8>() * rhs.GetValue<12>() + lhs.GetValue<9>() * rhs.GetValue<13>() + lhs.GetValue<10>() * rhs.GetValue<14>() + lhs.GetValue<11>() * rhs.GetValue<15>(),
-                         lhs.GetValue<12>() * rhs.GetValue<0>() + lhs.GetValue<13>() * rhs.GetValue<1>() + lhs.GetValue<14>() * rhs.GetValue<2>() + lhs.GetValue<15>() * rhs.GetValue<3>(),
-                         lhs.GetValue<12>() * rhs.GetValue<4>() + lhs.GetValue<13>() * rhs.GetValue<5>() + lhs.GetValue<14>() * rhs.GetValue<6>() + lhs.GetValue<15>() * rhs.GetValue<7>(),
-                         lhs.GetValue<12>() * rhs.GetValue<8>() + lhs.GetValue<13>() * rhs.GetValue<9>() + lhs.GetValue<14>() * rhs.GetValue<10>() + lhs.GetValue<15>() * rhs.GetValue<11>(),
-                         lhs.GetValue<12>() * rhs.GetValue<12>() + lhs.GetValue<13>() * rhs.GetValue<13>() + lhs.GetValue<14>() * rhs.GetValue<14>() + lhs.GetValue<15>() * rhs.GetValue<15>() };
+    return Matrix<Real>{ lhs.template GetValue<0>() * rhs.template GetValue<0>() + lhs.template GetValue<1>() * rhs.template GetValue<1>() + lhs.template GetValue<2>() * rhs.template GetValue<2>() + lhs.template GetValue<3>() * rhs.template GetValue<3>(),
+                         lhs.template GetValue<0>() * rhs.template GetValue<4>() + lhs.template GetValue<1>() * rhs.template GetValue<5>() + lhs.template GetValue<2>() * rhs.template GetValue<6>() + lhs.template GetValue<3>() * rhs.template GetValue<7>(),
+                         lhs.template GetValue<0>() * rhs.template GetValue<8>() + lhs.template GetValue<1>() * rhs.template GetValue<9>() + lhs.template GetValue<2>() * rhs.template GetValue<10>() + lhs.template GetValue<3>() * rhs.template GetValue<11>(),
+                         lhs.template GetValue<0>() * rhs.template GetValue<12>() + lhs.template GetValue<1>() * rhs.template GetValue<13>() + lhs.template GetValue<2>() * rhs.template GetValue<14>() + lhs.template GetValue<3>() * rhs.template GetValue<15>(),
+                         lhs.template GetValue<4>() * rhs.template GetValue<0>() + lhs.template GetValue<5>() * rhs.template GetValue<1>() + lhs.template GetValue<6>() * rhs.template GetValue<2>() + lhs.template GetValue<7>() * rhs.template GetValue<3>(),
+                         lhs.template GetValue<4>() * rhs.template GetValue<4>() + lhs.template GetValue<5>() * rhs.template GetValue<5>() + lhs.template GetValue<6>() * rhs.template GetValue<6>() + lhs.template GetValue<7>() * rhs.template GetValue<7>(),
+                         lhs.template GetValue<4>() * rhs.template GetValue<8>() + lhs.template GetValue<5>() * rhs.template GetValue<9>() + lhs.template GetValue<6>() * rhs.template GetValue<10>() + lhs.template GetValue<7>() * rhs.template GetValue<11>(),
+                         lhs.template GetValue<4>() * rhs.template GetValue<12>() + lhs.template GetValue<5>() * rhs.template GetValue<13>() + lhs.template GetValue<6>() * rhs.template GetValue<14>() + lhs.template GetValue<7>() * rhs.template GetValue<15>(),
+                         lhs.template GetValue<8>() * rhs.template GetValue<0>() + lhs.template GetValue<9>() * rhs.template GetValue<1>() + lhs.template GetValue<10>() * rhs.template GetValue<2>() + lhs.template GetValue<11>() * rhs.template GetValue<3>(),
+                         lhs.template GetValue<8>() * rhs.template GetValue<4>() + lhs.template GetValue<9>() * rhs.template GetValue<5>() + lhs.template GetValue<10>() * rhs.template GetValue<6>() + lhs.template GetValue<11>() * rhs.template GetValue<7>(),
+                         lhs.template GetValue<8>() * rhs.template GetValue<8>() + lhs.template GetValue<9>() * rhs.template GetValue<9>() + lhs.template GetValue<10>() * rhs.template GetValue<10>() + lhs.template GetValue<11>() * rhs.template GetValue<11>(),
+                         lhs.template GetValue<8>() * rhs.template GetValue<12>() + lhs.template GetValue<9>() * rhs.template GetValue<13>() + lhs.template GetValue<10>() * rhs.template GetValue<14>() + lhs.template GetValue<11>() * rhs.template GetValue<15>(),
+                         lhs.template GetValue<12>() * rhs.template GetValue<0>() + lhs.template GetValue<13>() * rhs.template GetValue<1>() + lhs.template GetValue<14>() * rhs.template GetValue<2>() + lhs.template GetValue<15>() * rhs.template GetValue<3>(),
+                         lhs.template GetValue<12>() * rhs.template GetValue<4>() + lhs.template GetValue<13>() * rhs.template GetValue<5>() + lhs.template GetValue<14>() * rhs.template GetValue<6>() + lhs.template GetValue<15>() * rhs.template GetValue<7>(),
+                         lhs.template GetValue<12>() * rhs.template GetValue<8>() + lhs.template GetValue<13>() * rhs.template GetValue<9>() + lhs.template GetValue<14>() * rhs.template GetValue<10>() + lhs.template GetValue<15>() * rhs.template GetValue<11>(),
+                         lhs.template GetValue<12>() * rhs.template GetValue<12>() + lhs.template GetValue<13>() * rhs.template GetValue<13>() + lhs.template GetValue<14>() * rhs.template GetValue<14>() + lhs.template GetValue<15>() * rhs.template GetValue<15>() };
 }
 
 template <typename Real>
 Mathematics::Matrix<Real> Mathematics::TransposeTimesTranspose(const Matrix<Real>& lhs, const Matrix<Real>& rhs) noexcept
 {
     // A^T * B^T
-    return Matrix<Real>{ lhs.GetValue<0>() * rhs.GetValue<0>() + lhs.GetValue<4>() * rhs.GetValue<1>() + lhs.GetValue<8>() * rhs.GetValue<2>() + lhs.GetValue<12>() * rhs.GetValue<3>(),
-                         lhs.GetValue<0>() * rhs.GetValue<4>() + lhs.GetValue<4>() * rhs.GetValue<5>() + lhs.GetValue<8>() * rhs.GetValue<6>() + lhs.GetValue<12>() * rhs.GetValue<7>(),
-                         lhs.GetValue<0>() * rhs.GetValue<8>() + lhs.GetValue<4>() * rhs.GetValue<9>() + lhs.GetValue<8>() * rhs.GetValue<10>() + lhs.GetValue<12>() * rhs.GetValue<11>(),
-                         lhs.GetValue<0>() * rhs.GetValue<12>() + lhs.GetValue<4>() * rhs.GetValue<13>() + lhs.GetValue<8>() * rhs.GetValue<14>() + lhs.GetValue<12>() * rhs.GetValue<15>(),
-                         lhs.GetValue<1>() * rhs.GetValue<0>() + lhs.GetValue<5>() * rhs.GetValue<1>() + lhs.GetValue<9>() * rhs.GetValue<2>() + lhs.GetValue<13>() * rhs.GetValue<3>(),
-                         lhs.GetValue<1>() * rhs.GetValue<4>() + lhs.GetValue<5>() * rhs.GetValue<5>() + lhs.GetValue<9>() * rhs.GetValue<6>() + lhs.GetValue<13>() * rhs.GetValue<7>(),
-                         lhs.GetValue<1>() * rhs.GetValue<8>() + lhs.GetValue<5>() * rhs.GetValue<9>() + lhs.GetValue<9>() * rhs.GetValue<10>() + lhs.GetValue<13>() * rhs.GetValue<11>(),
-                         lhs.GetValue<1>() * rhs.GetValue<12>() + lhs.GetValue<5>() * rhs.GetValue<13>() + lhs.GetValue<9>() * rhs.GetValue<14>() + lhs.GetValue<13>() * rhs.GetValue<15>(),
-                         lhs.GetValue<2>() * rhs.GetValue<0>() + lhs.GetValue<6>() * rhs.GetValue<1>() + lhs.GetValue<10>() * rhs.GetValue<2>() + lhs.GetValue<14>() * rhs.GetValue<3>(),
-                         lhs.GetValue<2>() * rhs.GetValue<4>() + lhs.GetValue<6>() * rhs.GetValue<5>() + lhs.GetValue<10>() * rhs.GetValue<6>() + lhs.GetValue<14>() * rhs.GetValue<7>(),
-                         lhs.GetValue<2>() * rhs.GetValue<8>() + lhs.GetValue<6>() * rhs.GetValue<9>() + lhs.GetValue<10>() * rhs.GetValue<10>() + lhs.GetValue<14>() * rhs.GetValue<11>(),
-                         lhs.GetValue<2>() * rhs.GetValue<12>() + lhs.GetValue<6>() * rhs.GetValue<13>() + lhs.GetValue<10>() * rhs.GetValue<14>() + lhs.GetValue<14>() * rhs.GetValue<15>(),
-                         lhs.GetValue<3>() * rhs.GetValue<0>() + lhs.GetValue<7>() * rhs.GetValue<1>() + lhs.GetValue<11>() * rhs.GetValue<2>() + lhs.GetValue<15>() * rhs.GetValue<3>(),
-                         lhs.GetValue<3>() * rhs.GetValue<4>() + lhs.GetValue<7>() * rhs.GetValue<5>() + lhs.GetValue<11>() * rhs.GetValue<6>() + lhs.GetValue<15>() * rhs.GetValue<7>(),
-                         lhs.GetValue<3>() * rhs.GetValue<8>() + lhs.GetValue<7>() * rhs.GetValue<9>() + lhs.GetValue<11>() * rhs.GetValue<10>() + lhs.GetValue<15>() * rhs.GetValue<11>(),
-                         lhs.GetValue<3>() * rhs.GetValue<12>() + lhs.GetValue<7>() * rhs.GetValue<13>() + lhs.GetValue<11>() * rhs.GetValue<14>() + lhs.GetValue<15>() * rhs.GetValue<15>() };
+    return Matrix<Real>{ lhs.template GetValue<0>() * rhs.template GetValue<0>() + lhs.template GetValue<4>() * rhs.template GetValue<1>() + lhs.template GetValue<8>() * rhs.template GetValue<2>() + lhs.template GetValue<12>() * rhs.template GetValue<3>(),
+                         lhs.template GetValue<0>() * rhs.template GetValue<4>() + lhs.template GetValue<4>() * rhs.template GetValue<5>() + lhs.template GetValue<8>() * rhs.template GetValue<6>() + lhs.template GetValue<12>() * rhs.template GetValue<7>(),
+                         lhs.template GetValue<0>() * rhs.template GetValue<8>() + lhs.template GetValue<4>() * rhs.template GetValue<9>() + lhs.template GetValue<8>() * rhs.template GetValue<10>() + lhs.template GetValue<12>() * rhs.template GetValue<11>(),
+                         lhs.template GetValue<0>() * rhs.template GetValue<12>() + lhs.template GetValue<4>() * rhs.template GetValue<13>() + lhs.template GetValue<8>() * rhs.template GetValue<14>() + lhs.template GetValue<12>() * rhs.template GetValue<15>(),
+                         lhs.template GetValue<1>() * rhs.template GetValue<0>() + lhs.template GetValue<5>() * rhs.template GetValue<1>() + lhs.template GetValue<9>() * rhs.template GetValue<2>() + lhs.template GetValue<13>() * rhs.template GetValue<3>(),
+                         lhs.template GetValue<1>() * rhs.template GetValue<4>() + lhs.template GetValue<5>() * rhs.template GetValue<5>() + lhs.template GetValue<9>() * rhs.template GetValue<6>() + lhs.template GetValue<13>() * rhs.template GetValue<7>(),
+                         lhs.template GetValue<1>() * rhs.template GetValue<8>() + lhs.template GetValue<5>() * rhs.template GetValue<9>() + lhs.template GetValue<9>() * rhs.template GetValue<10>() + lhs.template GetValue<13>() * rhs.template GetValue<11>(),
+                         lhs.template GetValue<1>() * rhs.template GetValue<12>() + lhs.template GetValue<5>() * rhs.template GetValue<13>() + lhs.template GetValue<9>() * rhs.template GetValue<14>() + lhs.template GetValue<13>() * rhs.template GetValue<15>(),
+                         lhs.template GetValue<2>() * rhs.template GetValue<0>() + lhs.template GetValue<6>() * rhs.template GetValue<1>() + lhs.template GetValue<10>() * rhs.template GetValue<2>() + lhs.template GetValue<14>() * rhs.template GetValue<3>(),
+                         lhs.template GetValue<2>() * rhs.template GetValue<4>() + lhs.template GetValue<6>() * rhs.template GetValue<5>() + lhs.template GetValue<10>() * rhs.template GetValue<6>() + lhs.template GetValue<14>() * rhs.template GetValue<7>(),
+                         lhs.template GetValue<2>() * rhs.template GetValue<8>() + lhs.template GetValue<6>() * rhs.template GetValue<9>() + lhs.template GetValue<10>() * rhs.template GetValue<10>() + lhs.template GetValue<14>() * rhs.template GetValue<11>(),
+                         lhs.template GetValue<2>() * rhs.template GetValue<12>() + lhs.template GetValue<6>() * rhs.template GetValue<13>() + lhs.template GetValue<10>() * rhs.template GetValue<14>() + lhs.template GetValue<14>() * rhs.template GetValue<15>(),
+                         lhs.template GetValue<3>() * rhs.template GetValue<0>() + lhs.template GetValue<7>() * rhs.template GetValue<1>() + lhs.template GetValue<11>() * rhs.template GetValue<2>() + lhs.template GetValue<15>() * rhs.template GetValue<3>(),
+                         lhs.template GetValue<3>() * rhs.template GetValue<4>() + lhs.template GetValue<7>() * rhs.template GetValue<5>() + lhs.template GetValue<11>() * rhs.template GetValue<6>() + lhs.template GetValue<15>() * rhs.template GetValue<7>(),
+                         lhs.template GetValue<3>() * rhs.template GetValue<8>() + lhs.template GetValue<7>() * rhs.template GetValue<9>() + lhs.template GetValue<11>() * rhs.template GetValue<10>() + lhs.template GetValue<15>() * rhs.template GetValue<11>(),
+                         lhs.template GetValue<3>() * rhs.template GetValue<12>() + lhs.template GetValue<7>() * rhs.template GetValue<13>() + lhs.template GetValue<11>() * rhs.template GetValue<14>() + lhs.template GetValue<15>() * rhs.template GetValue<15>() };
 }
 
 template <typename Real>
 Mathematics::HomogeneousPoint<Real> Mathematics::operator*(const Matrix<Real>& matrix, const HomogeneousPoint<Real>& point) noexcept
 {
-    return HomogeneousPoint<Real>{ matrix.GetValue<0>() * point.GetX() + matrix.GetValue<1>() * point.GetY() + matrix.GetValue<2>() * point.GetZ() + matrix.GetValue<3>() * point.GetW(),
-                                   matrix.GetValue<4>() * point.GetX() + matrix.GetValue<5>() * point.GetY() + matrix.GetValue<6>() * point.GetZ() + matrix.GetValue<7>() * point.GetW(),
-                                   matrix.GetValue<8>() * point.GetX() + matrix.GetValue<9>() * point.GetY() + matrix.GetValue<10>() * point.GetZ() + matrix.GetValue<11>() * point.GetW(),
-                                   matrix.GetValue<12>() * point.GetX() + matrix.GetValue<13>() * point.GetY() + matrix.GetValue<14>() * point.GetZ() + matrix.GetValue<15>() * point.GetW() };
+    return HomogeneousPoint<Real>{ matrix.template GetValue<0>() * point.GetX() + matrix.template GetValue<1>() * point.GetY() + matrix.template GetValue<2>() * point.GetZ() + matrix.template GetValue<3>() * point.GetW(),
+                                   matrix.template GetValue<4>() * point.GetX() + matrix.template GetValue<5>() * point.GetY() + matrix.template GetValue<6>() * point.GetZ() + matrix.template GetValue<7>() * point.GetW(),
+                                   matrix.template GetValue<8>() * point.GetX() + matrix.template GetValue<9>() * point.GetY() + matrix.template GetValue<10>() * point.GetZ() + matrix.template GetValue<11>() * point.GetW(),
+                                   matrix.template GetValue<12>() * point.GetX() + matrix.template GetValue<13>() * point.GetY() + matrix.template GetValue<14>() * point.GetZ() + matrix.template GetValue<15>() * point.GetW() };
 }
 
 template <typename Real>
 Mathematics::HomogeneousPoint<Real> Mathematics::operator*(const HomogeneousPoint<Real>& point, const Matrix<Real>& matrix) noexcept
 {
-    return HomogeneousPoint<Real>{ point.GetX() * matrix.GetValue<0>() + point.GetY() * matrix.GetValue<4>() + point.GetZ() * matrix.GetValue<8>() + point.GetW() * matrix.GetValue<12>(),
-                                   point.GetX() * matrix.GetValue<1>() + point.GetY() * matrix.GetValue<5>() + point.GetZ() * matrix.GetValue<9>() + point.GetW() * matrix.GetValue<13>(),
-                                   point.GetX() * matrix.GetValue<2>() + point.GetY() * matrix.GetValue<6>() + point.GetZ() * matrix.GetValue<10>() + point.GetW() * matrix.GetValue<14>(),
-                                   point.GetX() * matrix.GetValue<3>() + point.GetY() * matrix.GetValue<7>() + point.GetZ() * matrix.GetValue<11>() + point.GetW() * matrix.GetValue<15>() };
+    return HomogeneousPoint<Real>{ point.GetX() * matrix.template GetValue<0>() + point.GetY() * matrix.template GetValue<4>() + point.GetZ() * matrix.template GetValue<8>() + point.GetW() * matrix.template GetValue<12>(),
+                                   point.GetX() * matrix.template GetValue<1>() + point.GetY() * matrix.template GetValue<5>() + point.GetZ() * matrix.template GetValue<9>() + point.GetW() * matrix.template GetValue<13>(),
+                                   point.GetX() * matrix.template GetValue<2>() + point.GetY() * matrix.template GetValue<6>() + point.GetZ() * matrix.template GetValue<10>() + point.GetW() * matrix.template GetValue<14>(),
+                                   point.GetX() * matrix.template GetValue<3>() + point.GetY() * matrix.template GetValue<7>() + point.GetZ() * matrix.template GetValue<11>() + point.GetW() * matrix.template GetValue<15>() };
 }
 
 template <typename Real>
@@ -1224,9 +1224,9 @@ typename Mathematics::HomogeneousPoint<Real>::ContainerType Mathematics::BatchMu
 template <typename Real>
 Mathematics::APoint<Real> Mathematics::operator*(const Matrix<Real>& matrix, const APoint<Real>& point) noexcept
 {
-    return APoint<Real>{ matrix.GetValue<0>() * point.GetX() + matrix.GetValue<1>() * point.GetY() + matrix.GetValue<2>() * point.GetZ() + matrix.GetValue<3>(),
-                         matrix.GetValue<4>() * point.GetX() + matrix.GetValue<5>() * point.GetY() + matrix.GetValue<6>() * point.GetZ() + matrix.GetValue<7>(),
-                         matrix.GetValue<8>() * point.GetX() + matrix.GetValue<9>() * point.GetY() + matrix.GetValue<10>() * point.GetZ() + matrix.GetValue<11>() };
+    return APoint<Real>{ matrix.template GetValue<0>() * point.GetX() + matrix.template GetValue<1>() * point.GetY() + matrix.template GetValue<2>() * point.GetZ() + matrix.template GetValue<3>(),
+                         matrix.template GetValue<4>() * point.GetX() + matrix.template GetValue<5>() * point.GetY() + matrix.template GetValue<6>() * point.GetZ() + matrix.template GetValue<7>(),
+                         matrix.template GetValue<8>() * point.GetX() + matrix.template GetValue<9>() * point.GetY() + matrix.template GetValue<10>() * point.GetZ() + matrix.template GetValue<11>() };
 }
 
 template <typename Real>
@@ -1247,9 +1247,9 @@ typename Mathematics::APoint<Real>::ContainerType Mathematics::BatchMultiply(con
 template <typename Real>
 Mathematics::AVector<Real> Mathematics::operator*(const Matrix<Real>& matrix, const AVector<Real>& point) noexcept
 {
-    return AVector<Real>{ matrix.GetValue<0>() * point.GetX() + matrix.GetValue<1>() * point.GetY() + matrix.GetValue<2>() * point.GetZ(),
-                          matrix.GetValue<4>() * point.GetX() + matrix.GetValue<5>() * point.GetY() + matrix.GetValue<6>() * point.GetZ(),
-                          matrix.GetValue<8>() * point.GetX() + matrix.GetValue<9>() * point.GetY() + matrix.GetValue<10>() * point.GetZ() };
+    return AVector<Real>{ matrix.template GetValue<0>() * point.GetX() + matrix.template GetValue<1>() * point.GetY() + matrix.template GetValue<2>() * point.GetZ(),
+                          matrix.template GetValue<4>() * point.GetX() + matrix.template GetValue<5>() * point.GetY() + matrix.template GetValue<6>() * point.GetZ(),
+                          matrix.template GetValue<8>() * point.GetX() + matrix.template GetValue<9>() * point.GetY() + matrix.template GetValue<10>() * point.GetZ() };
 }
 
 template <typename Real>

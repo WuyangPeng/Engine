@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 15:49)
+///	版本：0.9.1.6 (2023/10/26 17:16)
 
 #ifndef MATHEMATICS_OBJECTS_3D_FRUSTUM3_ACHIEVE_H
 #define MATHEMATICS_OBJECTS_3D_FRUSTUM3_ACHIEVE_H
@@ -13,7 +13,6 @@
 #include "Frustum3.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename Real>
 Mathematics::Frustum3<Real>::Frustum3(const Vector3& origin,
@@ -210,7 +209,6 @@ Mathematics::Frustum3<Real> Mathematics::Frustum3<Real>::GetMove(Real t, const V
                      epsilon };
 }
 
-// private
 template <typename Real>
 void Mathematics::Frustum3<Real>::Update() noexcept
 {

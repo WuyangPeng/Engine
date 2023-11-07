@@ -20,7 +20,7 @@ Mathematics::BSplineSurfaceFit<Real>::BSplineSurfaceFit(int degree0, int numCont
       samples{ samples },
       degree{ degree0, degree1 },
       numControls{ numControls0, numControls1 },
-      controls{ numControls0, std::vector<Vector3<Real>>(numControls1) },
+      controls(numControls0, std::vector<Vector3<Real>>(numControls1)),
       basis{}
 {
     MATHEMATICS_ASSERTION_0(1 <= degree0 && degree0 + 1 < numControls0, "ÎÞÐ§ÊäÈë¡£\n");

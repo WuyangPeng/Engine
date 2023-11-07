@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 15:11)
+///	版本：0.9.1.6 (2023/10/26 14:42)
 
 #ifndef MATHEMATICS_ALGEBRA_AXES_ALIGN_BOUNDING_BOX4_H
 #define MATHEMATICS_ALGEBRA_AXES_ALIGN_BOUNDING_BOX4_H
@@ -22,6 +22,7 @@ namespace Mathematics
     {
     public:
         using ClassType = AxesAlignBoundingBox4<T>;
+
         using Vector4 = Vector4<T>;
 
     public:

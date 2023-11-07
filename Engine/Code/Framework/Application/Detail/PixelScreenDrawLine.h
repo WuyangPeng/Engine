@@ -31,7 +31,7 @@ namespace Framework
 
 #ifdef OPEN_CLASS_INVARIANT
 
-        NODISCARD bool IsEndpointCorrect() const;
+        NODISCARD bool IsEndpointCorrect() const noexcept;
 
 #endif  // OPEN_CLASS_INVARIANT
 

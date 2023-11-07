@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/30 14:01)
+///	版本：0.9.1.6 (2023/10/26 09:51)
 
 #ifndef MATHEMATICS_BASE_NUMERICAL_VALUE_SYMBOL_H
 #define MATHEMATICS_BASE_NUMERICAL_VALUE_SYMBOL_H
@@ -23,7 +23,6 @@ namespace Mathematics
         // 正号
         Positive = 1
     };
-
 }
 
 #endif  // MATHEMATICS_BASE_NUMERICAL_VALUE_SYMBOL_H

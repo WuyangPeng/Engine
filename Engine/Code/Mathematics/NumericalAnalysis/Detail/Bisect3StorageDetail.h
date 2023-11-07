@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:34)
+///	版本：0.9.1.6 (2023/10/27 09:36)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_STORAGE_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_STORAGE_DETAIL_H
@@ -119,11 +119,13 @@ Mathematics::Bisect3Storage<Real>::Bisect3Storage(const Bisect3& bisect) noexcep
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Bisect3Storage<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>

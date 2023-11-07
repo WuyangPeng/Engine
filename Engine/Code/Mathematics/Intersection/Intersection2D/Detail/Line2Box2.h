@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:17)
+///	版本：0.9.1.6 (2023/10/28 14:45)
 
 #ifndef MATHEMATICS_INTERSECTION_LINE2_BOX2_H
 #define MATHEMATICS_INTERSECTION_LINE2_BOX2_H
@@ -21,6 +21,7 @@ namespace Mathematics
     {
     public:
         using ClassType = Line2Box2<Real>;
+
         using Math = Math<Real>;
         using Vector2 = Vector2<Real>;
         using Vector2Tools = Vector2Tools<Real>;

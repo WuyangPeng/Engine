@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:34)
+///	版本：0.9.1.6 (2023/10/27 14:13)
 
 #ifndef MATHEMATICS_APPROXIMATION_GREAT_ARC_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_GREAT_ARC_FIT3_ACHIEVE_H
@@ -24,7 +24,6 @@ Mathematics::GreatArcFit3<Real>::GreatArcFit3(const Points& points)
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 template <typename Real>
 void Mathematics::GreatArcFit3<Real>::Calculate(const Points& points)
 {

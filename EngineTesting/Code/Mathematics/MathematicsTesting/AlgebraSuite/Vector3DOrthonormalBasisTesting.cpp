@@ -44,8 +44,8 @@ void Mathematics::Vector3OrthonormalBasisTesting::OrthonormalBasisTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const std::uniform_real<double> randomDistribution0{ -10.0, 10.0 };
-    const std::uniform_real<float> randomDistribution1{ -10.0f, 10.0f };
+    std::uniform_real<double> randomDistribution0{ -10.0, 10.0 };
+    std::uniform_real<float> randomDistribution1{ -10.0f, 10.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 

@@ -49,10 +49,10 @@ namespace CoreTools
         NODISCARD bool IsAppenderExist(const String& name) const;
 
         NODISCARD bool InsertLogger(const Logger& logger);
-        NODISCARD bool RemoveLogger(LogFilter logFilter);
+        NODISCARD bool RemoveLogger(LogFilter logFilter) noexcept;
         NODISCARD bool InsertAppender(const String& name, const Appender& appender);
         NODISCARD bool InsertConsoleAppender(const Appender& appender);
-        NODISCARD bool RemoveAppender(const String& name);
+        NODISCARD bool RemoveAppender(const String& name) noexcept;
         void Clear() noexcept;
 
         void Write(const LogMessage& message) const;

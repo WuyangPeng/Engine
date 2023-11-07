@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 18:04)
+///	版本：0.9.1.6 (2023/10/27 16:31)
 
 #ifndef MATHEMATICS_DISTANCE_DIST_LINE3_RECTANGLE3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DIST_LINE3_RECTANGLE3_DETAIL_H
@@ -59,15 +59,16 @@ typename Mathematics::DistanceLine3Rectangle3<Real>::DistanceResult Mathematics:
 
     // 测试线是否与矩形相交。 如果是这样，则平方距离为零。
     const auto crossProduct = Vector3Tools::CrossProduct(rectangle.GetAxis0(), rectangle.GetAxis1());
-    const auto dot = Vector3Tools::DotProduct(crossProduct, line.GetDirection());
-    if (Math::GetZeroTolerance() < Math::FAbs(dot))
+
+    if (const auto dot = Vector3Tools::DotProduct(crossProduct, line.GetDirection());
+        Math::GetZeroTolerance() < Math::FAbs(dot))
     {
         // 线和矩形不平行，因此线与矩形的平面相交。
         const auto diff = line.GetOrigin() - rectangle.GetCenter();
 
-        const auto Vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(line.GetDirection());
-        const auto uVector = Vector3OrthonormalBasis.GetUVector();
-        const auto vVector = Vector3OrthonormalBasis.GetVVector();
+        const auto vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(line.GetDirection());
+        const auto uVector = vector3OrthonormalBasis.GetUVector();
+        const auto vVector = vector3OrthonormalBasis.GetVVector();
         const auto uVectorDotAxis0 = Vector3Tools::DotProduct(uVector, rectangle.GetAxis0());
         const auto uVectorDotAxis1 = Vector3Tools::DotProduct(uVector, rectangle.GetAxis1());
         const auto uVectorDotDiff = Vector3Tools::DotProduct(uVector, diff);
@@ -123,8 +124,9 @@ typename Mathematics::DistanceLine3Rectangle3<Real>::DistanceResult Mathematics:
             const Segment3<Real> segment{ extent, center, direction };
 
             DistanceLine3Segment3<Real> distanceLine3Segment3{ line, segment };
-            auto squaredDistance = distanceLine3Segment3.GetSquared();
-            if (squaredDistance.GetDistance() < sqrDist)
+
+            if (auto squaredDistance = distanceLine3Segment3.GetSquared();
+                squaredDistance.GetDistance() < sqrDist)
             {
                 closestPoint0 = squaredDistance.GetLhsClosestPoint();
                 closestPoint1 = squaredDistance.GetRhsClosestPoint();

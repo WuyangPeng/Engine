@@ -52,7 +52,7 @@ void CoreTools::CellReferenceTesting::CellAddressTest()
 
 bool CoreTools::CellReferenceTesting::RowTest()
 {
-    const std::uniform_int_distribution<> randomDistribution{ 1, SimpleCSV::gMaxRows };
+    std::uniform_int_distribution<> randomDistribution{ 1, SimpleCSV::gMaxRows };
     auto row = randomDistribution(randomEngine);
     SimpleCSV::CellReference cellReference0{ row, 500 };
 
@@ -96,7 +96,7 @@ void CoreTools::CellReferenceTesting::OneLetterColumnTest()
 
 bool CoreTools::CellReferenceTesting::TwoLetterRowTest()
 {
-    const std::uniform_int_distribution<> randomDistribution{ 1, alphabetSize };
+    std::uniform_int_distribution<> randomDistribution{ 1, alphabetSize };
     const auto column0 = randomDistribution(randomEngine);
     const auto column1 = randomDistribution(randomEngine);
     const auto address = std::string{ boost::numeric_cast<char>(column0 + 'A' - 1) } + std::string{ boost::numeric_cast<char>(column1 + 'A' - 1) };
@@ -122,7 +122,7 @@ bool CoreTools::CellReferenceTesting::TwoLetterRowTest()
 
 bool CoreTools::CellReferenceTesting::ThreeLetterRowTest()
 {
-    const std::uniform_int_distribution<> randomDistribution{ 1, alphabetSize };
+    std::uniform_int_distribution<> randomDistribution{ 1, alphabetSize };
     const auto column0 = randomDistribution(randomEngine);
     const auto column1 = randomDistribution(randomEngine);
     const auto column2 = randomDistribution(randomEngine);

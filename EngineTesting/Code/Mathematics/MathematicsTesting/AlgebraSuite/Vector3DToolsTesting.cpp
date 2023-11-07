@@ -66,7 +66,7 @@ void Mathematics::Vector3ToolsTesting::ProductTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -109,7 +109,7 @@ void Mathematics::Vector3ToolsTesting::ProjectionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -156,7 +156,7 @@ void Mathematics::Vector3ToolsTesting::ConversionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -253,7 +253,7 @@ void Mathematics::Vector3ToolsTesting::OtherCalculateTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 

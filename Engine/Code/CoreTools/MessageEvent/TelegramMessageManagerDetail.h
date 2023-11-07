@@ -42,7 +42,7 @@ bool CoreTools::TelegramMessageManager<EventType>::RegisterAllEvent(int64_t enti
 }
 
 template <typename EventType>
-bool CoreTools::TelegramMessageManager<EventType>::UnRegisterAllEvent(int64_t entityId)
+bool CoreTools::TelegramMessageManager<EventType>::UnRegisterAllEvent(int64_t entityId) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

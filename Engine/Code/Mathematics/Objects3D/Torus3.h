@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 15:47)
+///	版本：0.9.1.6 (2023/10/26 17:53)
 
 #ifndef MATHEMATICS_OBJECTS_3D_TORUS3_H
 #define MATHEMATICS_OBJECTS_3D_TORUS3_H
@@ -17,8 +17,6 @@
 #include "Mathematics/Algebra/Vector3.h"
 #include "Mathematics/Base/MathDetail.h"
 
-#include <type_traits>
-
 namespace Mathematics
 {
     template <typename Real>
@@ -28,6 +26,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = Torus3<Real>;
+
         using Vector3 = Vector3<Real>;
         using Math = Math<Real>;
         using Torus3Parameters = Torus3Parameters<Real>;

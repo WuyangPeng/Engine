@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:18)
+///	版本：0.9.1.6 (2023/10/28 14:46)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ARC2_CIRCLE2_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ARC2_CIRCLE2_H
@@ -26,6 +26,7 @@ namespace Mathematics
     public:
         using ClassType = StaticFindIntersectorArc2Circle2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
+
         using Vector2 = Vector2<Real>;
         using Circle2 = Circle2<Real>;
         using Arc2 = Arc2<Real>;

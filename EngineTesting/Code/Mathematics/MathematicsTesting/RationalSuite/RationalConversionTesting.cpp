@@ -46,8 +46,8 @@ void Mathematics::RationalConversionTesting::MainTest()
 void Mathematics::RationalConversionTesting::FloatingPointTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution0(-1.0e38f, 1.0e38f);
-    const std::uniform_real<double> randomDistribution1(static_cast<double>(std::numeric_limits<uint64_t>::min()), static_cast<double>(std::numeric_limits<uint64_t>::max()));
+    std::uniform_real<float> randomDistribution0(-1.0e38f, 1.0e38f);
+    std::uniform_real<double> randomDistribution1(static_cast<double>(std::numeric_limits<uint64_t>::min()), static_cast<double>(std::numeric_limits<uint64_t>::max()));
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -89,11 +89,11 @@ void Mathematics::RationalConversionTesting::FloatingPointTest()
 void Mathematics::RationalConversionTesting::IntegerTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<int64_t> randomDistribution0(-std::numeric_limits<int64_t>::max(), std::numeric_limits<int64_t>::max());
-    const std::uniform_int<int> randomDistribution1(-INT_MAX, INT_MAX);
-    const std::uniform_int<int8_t> thirdRandomDistribution(-std::numeric_limits<int8_t>::max(), std::numeric_limits<int8_t>::max());
+    std::uniform_int<int64_t> randomDistribution0(-std::numeric_limits<int64_t>::max(), std::numeric_limits<int64_t>::max());
+    std::uniform_int<int> randomDistribution1(-INT_MAX, INT_MAX);
+    std::uniform_int<int8_t> thirdRandomDistribution(-std::numeric_limits<int8_t>::max(), std::numeric_limits<int8_t>::max());
 
-    const std::uniform_int<int16_t> fourthRandomDistribution(-std::numeric_limits<int16_t>::max(), std::numeric_limits<int16_t>::max());
+    std::uniform_int<int16_t> fourthRandomDistribution(-std::numeric_limits<int16_t>::max(), std::numeric_limits<int16_t>::max());
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
@@ -143,10 +143,10 @@ void Mathematics::RationalConversionTesting::IntegerTest()
 void Mathematics::RationalConversionTesting::UnsignedIntegerTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<uint64_t> randomDistribution0(0, std::numeric_limits<int64_t>::max());
-    const std::uniform_int<uint32_t> randomDistribution1(0, INT_MAX);
-    const std::uniform_int<uint8_t> thirdRandomDistribution(0, std::numeric_limits<int8_t>::max());
-    const std::uniform_int<uint16_t> fourthRandomDistribution(0, std::numeric_limits<int16_t>::max());
+    std::uniform_int<uint64_t> randomDistribution0(0, std::numeric_limits<int64_t>::max());
+    std::uniform_int<uint32_t> randomDistribution1(0, INT_MAX);
+    std::uniform_int<uint8_t> thirdRandomDistribution(0, std::numeric_limits<int8_t>::max());
+    std::uniform_int<uint16_t> fourthRandomDistribution(0, std::numeric_limits<int16_t>::max());
 
     const auto aTestLoopCount = GetTestLoopCount();
 

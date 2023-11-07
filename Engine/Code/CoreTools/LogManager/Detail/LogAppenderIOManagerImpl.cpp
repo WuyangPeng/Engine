@@ -71,9 +71,9 @@ bool CoreTools::LogAppenderIOManagerImpl::Write(const LogMessage& message)
         {
             LOG_ASYNCHRONOUS_SINGLETON.Registered(fileName, message, currentAppenderManager);
 
-            if (message.HasAlwaysConsole() && fileName != currentAppenderManager->GetConsoleAppenderName())
+            if (message.HasAlwaysConsole() && fileName != AppenderManager::GetConsoleAppenderName())
             {
-                LOG_ASYNCHRONOUS_SINGLETON.Registered(currentAppenderManager->GetConsoleAppenderName(), message, currentAppenderManager);
+                LOG_ASYNCHRONOUS_SINGLETON.Registered(AppenderManager::GetConsoleAppenderName(), message, currentAppenderManager);
             }
         }
         else

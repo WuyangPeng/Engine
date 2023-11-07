@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:41)
+///	版本：0.9.1.6 (2023/10/27 11:35)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_H
@@ -28,6 +28,7 @@ namespace Mathematics
     {
     public:
         PERFORMANCE_UNSHARED_TYPE_DECLARE(Equation);
+
         using Imaginary = std::complex<double>;
         using ImaginaryContainer = std::vector<Imaginary>;
         using RealContainer = std::vector<double>;

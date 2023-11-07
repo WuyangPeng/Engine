@@ -43,11 +43,10 @@ void System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessa
 
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26826)
 
     va_list vaArguments{};
     va_start(vaArguments, message);
-
-#include SYSTEM_WARNING_POP
 
     WindowsHLocal resultMessage{ nullptr };
 
@@ -56,7 +55,12 @@ void System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessa
     ASSERT_NOT_THROW_EXCEPTION_1(LocalMemoryFreeTest, resultMessage);
 
     va_end(vaArguments);
+
+#include SYSTEM_WARNING_POP
 }
+
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26826)
 
 void System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessageUseArgumentsTest(WindowsHLocal& resultMessage, const TChar* message, va_list vaArguments)
 {
@@ -69,3 +73,5 @@ void System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessa
     ASSERT_EQUAL(testMessage.size(), size);
     ASSERT_EQUAL(testMessage, GetMessageVaListResult());
 }
+
+#include SYSTEM_WARNING_POP

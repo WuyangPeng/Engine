@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:35)
+///	版本：0.9.1.6 (2023/10/27 14:13)
 
 #ifndef MATHEMATICS_APPROXIMATION_HEIGHT_LINT_FIT2_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_HEIGHT_LINT_FIT2_ACHIEVE_H
@@ -49,7 +49,7 @@ void Mathematics::HeightLineFit2<Real>::Calculate(const Points& points)
     using Vector = typename LinearSystem<Real>::Vector2;
     using Matrix2 = typename LinearSystem<Real>::Matrix2;
 
-    Matrix2 matrix{ Vector{ sumXX, sumX }, Vector{ sumX, numPoints } };
+    const Matrix2 matrix{ Vector{ sumXX, sumX }, Vector{ sumX, numPoints } };
 
     const Vector inputVector{ sumXY, sumY };
 
@@ -98,7 +98,7 @@ Real Mathematics::HeightLineFit2<Real>::GetCoeffA() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("拟合失败"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("拟合失败"s))
     }
 }
 
@@ -113,7 +113,7 @@ Real Mathematics::HeightLineFit2<Real>::GetCoeffB() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("拟合失败"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("拟合失败"s))
     }
 }
 

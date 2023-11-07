@@ -62,9 +62,9 @@ namespace Rendering
     protected:
         void ComputeSampleData();
         void UpdateDisk();
-        void UpdateCylinder();
-        void UpdateSphere();
-        void UpdateTorus();
+        void UpdateCylinder() noexcept;
+        void UpdateSphere() noexcept;
+        void UpdateTorus() noexcept;
 
     private:
         std::shared_ptr<Mathematics::Curve2<float>> curve;

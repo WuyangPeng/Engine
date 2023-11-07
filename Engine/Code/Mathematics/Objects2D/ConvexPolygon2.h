@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 15:12)
+///	版本：0.9.1.6 (2023/10/26 16:14)
 
 #ifndef MATHEMATICS_OBJECTS_2D_CONVEX_POLYGON2_H
 #define MATHEMATICS_OBJECTS_2D_CONVEX_POLYGON2_H
@@ -17,7 +17,6 @@
 #include "Mathematics/Algebra/Vector2.h"
 
 #include <set>
-#include <type_traits>
 
 namespace Mathematics
 {
@@ -28,6 +27,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = ConvexPolygon2<Real>;
+
         using ParentType = Polygon2<Real>;
         using Line2 = Line2<Real>;
         using LineType = std::vector<Line2>;

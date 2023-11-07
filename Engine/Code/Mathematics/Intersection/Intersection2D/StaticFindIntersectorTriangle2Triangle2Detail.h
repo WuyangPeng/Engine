@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:27)
+///	版本：0.9.1.6 (2023/10/27 17:52)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE2_TRIANGLE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE2_TRIANGLE2_DETAIL_H
@@ -77,12 +77,12 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Find()
 
     for (auto i1 = 2, i0 = 0; i0 < 3; i1 = i0++)
     {
-        const auto& vertor0 = vertex1.at(i0);
-        const auto& vertor1 = vertex1.at(i1);
+        const auto& vector0 = vertex1.at(i0);
+        const auto& vector1 = vertex1.at(i1);
 
         // 裁剪边沿 <V0[i1],V0[i0]>.
-        const Vector2 axis{ vertor1.GetY() - vertor0.GetY(), vertor0.GetX() - vertor1.GetX() };
-        auto dot = Vector2Tools::DotProduct(axis, vertor1);
+        const Vector2 axis{ vector1.GetY() - vector0.GetY(), vector0.GetX() - vector1.GetX() };
+        auto dot = Vector2Tools::DotProduct(axis, vector1);
         intersection = ClipConvexPolygonAgainstLine(axis, dot, intersection);
         if (intersection.empty())
         {

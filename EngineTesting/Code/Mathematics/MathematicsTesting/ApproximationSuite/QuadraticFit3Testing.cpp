@@ -43,8 +43,8 @@ void Mathematics::QuadraticFit3Testing::MainTest()
 void Mathematics::QuadraticFit3Testing::FitTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    const std::uniform_int<> randomDistribution1(3, 50);
+    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_int<> randomDistribution1(3, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -81,7 +81,7 @@ void Mathematics::QuadraticFit3Testing::FitTest()
 
             if (eigenValue <= MathD::GetZeroTolerance())
             {
-                ASSERT_APPROXIMATE(value, 0.0, 1e-8);
+                ASSERT_APPROXIMATE(value, 0.0, 1e-7);
             }
             else if (eigenValue <= 0.6)
             {

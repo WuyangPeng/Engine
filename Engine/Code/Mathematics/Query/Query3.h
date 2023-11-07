@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:07)
+///	版本：0.9.1.6 (2023/10/27 14:01)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_H
 #define MATHEMATICS_QUERY_QUERY3_H
@@ -25,6 +25,7 @@ namespace Mathematics
     public:
         using ClassType = Query3<Real>;
         using ParentType = QueryBase;
+
         using Math = Math<Real>;
         using Vector3 = Vector3<Real>;
         using VerticesType = std::vector<Vector3>;
@@ -38,7 +39,7 @@ namespace Mathematics
         NODISCARD QueryType GetType() const noexcept override;
 
         NODISCARD int GetNumVertices() const;
-        NODISCARD const Vector3 GetVertice(int index) const;
+        NODISCARD Vector3 GetVertice(int index) const;
 
         // 关于一个点的各种几何对象之间的关系查询。
 

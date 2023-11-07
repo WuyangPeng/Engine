@@ -590,6 +590,9 @@ typename Mathematics::IntpAkimaUniform3<Real>::Container Mathematics::IntpAkimaU
     return fxyz;
 }
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26451)
+
 template <typename Real>
 void Mathematics::IntpAkimaUniform3<Real>::GetPolynomials(const Container& fx,
                                                           const Container& fy,
@@ -606,83 +609,85 @@ void Mathematics::IntpAkimaUniform3<Real>::GetPolynomials(const Container& fx,
         {
             for (auto ix = 0; ix < xBound - 1; ++ix)
             {
-                ConstructType g{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fContainer.at(iz).at(iy).at(ix),
-                                                                                          fContainer.at(iz + 1).at(iy).at(ix) },
-                                                                     std::array<Real, 2>{ fContainer.at(iz).at(iy + 1).at(ix),
-                                                                                          fContainer.at(iz + 1).at(iy + 1).at(ix) } },
-                                 std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fContainer.at(iz).at(iy).at(ix + 1),
-                                                                                          fContainer.at(iz + 1).at(iy).at(ix + 1) },
-                                                                     std::array<Real, 2>{ fContainer.at(iz).at(iy + 1).at(ix + 1),
-                                                                                          fContainer.at(iz + 1).at(iy + 1).at(ix + 1) } } };
+                const ConstructType g{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fContainer.at(iz).at(iy).at(ix),
+                                                                                                fContainer.at(iz + 1).at(iy).at(ix) },
+                                                                           std::array<Real, 2>{ fContainer.at(iz).at(iy + 1).at(ix),
+                                                                                                fContainer.at(iz + 1).at(iy + 1).at(ix) } },
+                                       std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fContainer.at(iz).at(iy).at(ix + 1),
+                                                                                                fContainer.at(iz + 1).at(iy).at(ix + 1) },
+                                                                           std::array<Real, 2>{ fContainer.at(iz).at(iy + 1).at(ix + 1),
+                                                                                                fContainer.at(iz + 1).at(iy + 1).at(ix + 1) } } };
 
-                ConstructType gx{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fx.at(iz).at(iy).at(ix),
-                                                                                           fx.at(iz + 1).at(iy).at(ix) },
-                                                                      std::array<Real, 2>{ fx.at(iz).at(iy + 1).at(ix),
-                                                                                           fx.at(iz + 1).at(iy + 1).at(ix) } },
-                                  std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fx.at(iz).at(iy).at(ix + 1),
-                                                                                           fx.at(iz + 1).at(iy).at(ix + 1) },
-                                                                      std::array<Real, 2>{ fx.at(iz).at(iy + 1).at(ix + 1),
-                                                                                           fx.at(iz + 1).at(iy + 1).at(ix + 1) } } };
+                const ConstructType gx{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fx.at(iz).at(iy).at(ix),
+                                                                                                 fx.at(iz + 1).at(iy).at(ix) },
+                                                                            std::array<Real, 2>{ fx.at(iz).at(iy + 1).at(ix),
+                                                                                                 fx.at(iz + 1).at(iy + 1).at(ix) } },
+                                        std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fx.at(iz).at(iy).at(ix + 1),
+                                                                                                 fx.at(iz + 1).at(iy).at(ix + 1) },
+                                                                            std::array<Real, 2>{ fx.at(iz).at(iy + 1).at(ix + 1),
+                                                                                                 fx.at(iz + 1).at(iy + 1).at(ix + 1) } } };
 
-                ConstructType gy{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fy.at(iz).at(iy).at(ix),
-                                                                                           fy.at(iz + 1).at(iy).at(ix) },
-                                                                      std::array<Real, 2>{ fy.at(iz).at(iy + 1).at(ix),
-                                                                                           fy.at(iz + 1).at(iy + 1).at(ix) } },
-                                  std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fy.at(iz).at(iy).at(ix + 1),
-                                                                                           fy.at(iz + 1).at(iy).at(ix + 1) },
-                                                                      std::array<Real, 2>{ fy.at(iz).at(iy + 1).at(ix + 1),
-                                                                                           fy.at(iz + 1).at(iy + 1).at(ix + 1) } } };
+                const ConstructType gy{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fy.at(iz).at(iy).at(ix),
+                                                                                                 fy.at(iz + 1).at(iy).at(ix) },
+                                                                            std::array<Real, 2>{ fy.at(iz).at(iy + 1).at(ix),
+                                                                                                 fy.at(iz + 1).at(iy + 1).at(ix) } },
+                                        std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fy.at(iz).at(iy).at(ix + 1),
+                                                                                                 fy.at(iz + 1).at(iy).at(ix + 1) },
+                                                                            std::array<Real, 2>{ fy.at(iz).at(iy + 1).at(ix + 1),
+                                                                                                 fy.at(iz + 1).at(iy + 1).at(ix + 1) } } };
 
-                ConstructType gz{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fz.at(iz).at(iy).at(ix),
-                                                                                           fz.at(iz + 1).at(iy).at(ix) },
-                                                                      std::array<Real, 2>{ fz.at(iz).at(iy + 1).at(ix),
-                                                                                           fz.at(iz + 1).at(iy + 1).at(ix) } },
-                                  std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fz.at(iz).at(iy).at(ix + 1),
-                                                                                           fz.at(iz + 1).at(iy).at(ix + 1) },
-                                                                      std::array<Real, 2>{ fz.at(iz).at(iy + 1).at(ix + 1),
-                                                                                           fz.at(iz + 1).at(iy + 1).at(ix + 1) } } };
+                const ConstructType gz{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fz.at(iz).at(iy).at(ix),
+                                                                                                 fz.at(iz + 1).at(iy).at(ix) },
+                                                                            std::array<Real, 2>{ fz.at(iz).at(iy + 1).at(ix),
+                                                                                                 fz.at(iz + 1).at(iy + 1).at(ix) } },
+                                        std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fz.at(iz).at(iy).at(ix + 1),
+                                                                                                 fz.at(iz + 1).at(iy).at(ix + 1) },
+                                                                            std::array<Real, 2>{ fz.at(iz).at(iy + 1).at(ix + 1),
+                                                                                                 fz.at(iz + 1).at(iy + 1).at(ix + 1) } } };
 
-                ConstructType gxy{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxy.at(iz).at(iy).at(ix),
-                                                                                            fxy.at(iz + 1).at(iy).at(ix) },
-                                                                       std::array<Real, 2>{ fxy.at(iz).at(iy + 1).at(ix),
-                                                                                            fxy.at(iz + 1).at(iy + 1).at(ix) } },
-                                   std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxy.at(iz).at(iy).at(ix + 1),
-                                                                                            fxy.at(iz + 1).at(iy).at(ix + 1) },
-                                                                       std::array<Real, 2>{ fxy.at(iz).at(iy + 1).at(ix + 1),
-                                                                                            fxy.at(iz + 1).at(iy + 1).at(ix + 1) } } };
+                const ConstructType gxy{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxy.at(iz).at(iy).at(ix),
+                                                                                                  fxy.at(iz + 1).at(iy).at(ix) },
+                                                                             std::array<Real, 2>{ fxy.at(iz).at(iy + 1).at(ix),
+                                                                                                  fxy.at(iz + 1).at(iy + 1).at(ix) } },
+                                         std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxy.at(iz).at(iy).at(ix + 1),
+                                                                                                  fxy.at(iz + 1).at(iy).at(ix + 1) },
+                                                                             std::array<Real, 2>{ fxy.at(iz).at(iy + 1).at(ix + 1),
+                                                                                                  fxy.at(iz + 1).at(iy + 1).at(ix + 1) } } };
 
-                ConstructType gxz{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxz.at(iz).at(iy).at(ix),
-                                                                                            fxz.at(iz + 1).at(iy).at(ix) },
-                                                                       std::array<Real, 2>{ fxz.at(iz).at(iy + 1).at(ix),
-                                                                                            fxz.at(iz + 1).at(iy + 1).at(ix) } },
-                                   std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxz.at(iz).at(iy).at(ix + 1),
-                                                                                            fxz.at(iz + 1).at(iy).at(ix + 1) },
-                                                                       std::array<Real, 2>{ fxz.at(iz).at(iy + 1).at(ix + 1),
-                                                                                            fxz.at(iz + 1).at(iy + 1).at(ix + 1) } } };
+                const ConstructType gxz{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxz.at(iz).at(iy).at(ix),
+                                                                                                  fxz.at(iz + 1).at(iy).at(ix) },
+                                                                             std::array<Real, 2>{ fxz.at(iz).at(iy + 1).at(ix),
+                                                                                                  fxz.at(iz + 1).at(iy + 1).at(ix) } },
+                                         std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxz.at(iz).at(iy).at(ix + 1),
+                                                                                                  fxz.at(iz + 1).at(iy).at(ix + 1) },
+                                                                             std::array<Real, 2>{ fxz.at(iz).at(iy + 1).at(ix + 1),
+                                                                                                  fxz.at(iz + 1).at(iy + 1).at(ix + 1) } } };
 
-                ConstructType gyz{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fyz.at(iz).at(iy).at(ix),
-                                                                                            fyz.at(iz + 1).at(iy).at(ix) },
-                                                                       std::array<Real, 2>{ fyz.at(iz).at(iy + 1).at(ix),
-                                                                                            fyz.at(iz + 1).at(iy + 1).at(ix) } },
-                                   std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fyz.at(iz).at(iy).at(ix + 1),
-                                                                                            fyz.at(iz + 1).at(iy).at(ix + 1) },
-                                                                       std::array<Real, 2>{ fyz.at(iz).at(iy + 1).at(ix + 1),
-                                                                                            fyz.at(iz + 1).at(iy + 1).at(ix + 1) } } };
+                const ConstructType gyz{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fyz.at(iz).at(iy).at(ix),
+                                                                                                  fyz.at(iz + 1).at(iy).at(ix) },
+                                                                             std::array<Real, 2>{ fyz.at(iz).at(iy + 1).at(ix),
+                                                                                                  fyz.at(iz + 1).at(iy + 1).at(ix) } },
+                                         std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fyz.at(iz).at(iy).at(ix + 1),
+                                                                                                  fyz.at(iz + 1).at(iy).at(ix + 1) },
+                                                                             std::array<Real, 2>{ fyz.at(iz).at(iy + 1).at(ix + 1),
+                                                                                                  fyz.at(iz + 1).at(iy + 1).at(ix + 1) } } };
 
-                ConstructType gxyz{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxyz.at(iz).at(iy).at(ix),
-                                                                                             fxyz.at(iz + 1).at(iy).at(ix) },
-                                                                        std::array<Real, 2>{ fxyz.at(iz).at(iy + 1).at(ix),
-                                                                                             fxyz.at(iz + 1).at(iy + 1).at(ix) } },
-                                    std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxyz.at(iz).at(iy).at(ix + 1),
-                                                                                             fxyz.at(iz + 1).at(iy).at(ix + 1) },
-                                                                        std::array<Real, 2>{ fxyz.at(iz).at(iy + 1).at(ix + 1),
-                                                                                             fxyz.at(iz + 1).at(iy + 1).at(ix + 1) } } };
+                const ConstructType gxyz{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxyz.at(iz).at(iy).at(ix),
+                                                                                                   fxyz.at(iz + 1).at(iy).at(ix) },
+                                                                              std::array<Real, 2>{ fxyz.at(iz).at(iy + 1).at(ix),
+                                                                                                   fxyz.at(iz + 1).at(iy + 1).at(ix) } },
+                                          std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxyz.at(iz).at(iy).at(ix + 1),
+                                                                                                   fxyz.at(iz + 1).at(iy).at(ix + 1) },
+                                                                              std::array<Real, 2>{ fxyz.at(iz).at(iy + 1).at(ix + 1),
+                                                                                                   fxyz.at(iz + 1).at(iy + 1).at(ix + 1) } } };
 
                 Construct(polynomialContainer.at(iz).at(iy).at(ix), g, gx, gy, gz, gxy, gxz, gyz, gxyz);
             }
         }
     }
 }
+
+#include SYSTEM_WARNING_POP
 
 template <typename Real>
 int Mathematics::IntpAkimaUniform3<Real>::GetXBound() const noexcept

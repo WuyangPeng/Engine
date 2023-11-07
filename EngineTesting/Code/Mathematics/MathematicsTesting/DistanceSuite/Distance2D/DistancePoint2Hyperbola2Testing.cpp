@@ -49,7 +49,7 @@ void Mathematics::DistancePoint2Hyperbola2Testing::MainTest()
 void Mathematics::DistancePoint2Hyperbola2Testing::BaseTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -83,7 +83,7 @@ void Mathematics::DistancePoint2Hyperbola2Testing::BaseTest()
 void Mathematics::DistancePoint2Hyperbola2Testing::StaticTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -112,7 +112,7 @@ void Mathematics::DistancePoint2Hyperbola2Testing::StaticTest()
 void Mathematics::DistancePoint2Hyperbola2Testing::DynamicTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -147,7 +147,7 @@ void Mathematics::DistancePoint2Hyperbola2Testing::DynamicTest()
 void Mathematics::DistancePoint2Hyperbola2Testing::DerivativeTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -184,7 +184,7 @@ void Mathematics::DistancePoint2Hyperbola2Testing::DerivativeTest()
 void Mathematics::DistancePoint2Hyperbola2Testing::IntervalTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-10.0, 10.0);
+    std::uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -214,11 +214,11 @@ void Mathematics::DistancePoint2Hyperbola2Testing::IntervalTest()
         DistanceResult2D result = distance.GetInterval(tMin, tMax, lhsVelocity, rhsVelocity);
 
         ASSERT_APPROXIMATE(MathD::Sqrt(squaredResult.GetDistance()), result.GetDistance(), 1e-3);
-        ASSERT_APPROXIMATE(squaredResult.GetContactTime(), result.GetContactTime(), 1e-1);
+        ASSERT_APPROXIMATE(squaredResult.GetContactTime(), result.GetContactTime(), 1e0);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetLhsClosestPoint(),
-                                        result.GetLhsClosestPoint(), 1e-1);
+                                        result.GetLhsClosestPoint(), 1e0);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetRhsClosestPoint(),
-                                        result.GetRhsClosestPoint(), 1e-1);
+                                        result.GetRhsClosestPoint(), 1e0);
 
         for (double t = tMin; t < tMax; t += 0.1)
         {

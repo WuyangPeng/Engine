@@ -42,7 +42,7 @@ Rendering::DrawTargetBridgeImpl::RendererDrawTargetSharedPtr Rendering::DrawTarg
     }
 }
 
-void Rendering::DrawTargetBridgeImpl::UnbindDrawTarget(const ConstDrawTargetSharedPtr& drawTarget)
+void Rendering::DrawTargetBridgeImpl::UnbindDrawTarget(const ConstDrawTargetSharedPtr& drawTarget) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 

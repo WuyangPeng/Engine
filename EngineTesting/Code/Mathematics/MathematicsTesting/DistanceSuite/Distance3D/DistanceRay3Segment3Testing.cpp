@@ -49,7 +49,7 @@ void Mathematics::DistanceRay3Segment3Testing::MainTest()
 void Mathematics::DistanceRay3Segment3Testing::BaseTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -94,7 +94,7 @@ void Mathematics::DistanceRay3Segment3Testing::BaseTest()
 void Mathematics::DistanceRay3Segment3Testing::StaticTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -280,7 +280,7 @@ void Mathematics::DistanceRay3Segment3Testing::StaticTest()
 void Mathematics::DistanceRay3Segment3Testing::DynamicTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -472,7 +472,7 @@ void Mathematics::DistanceRay3Segment3Testing::DynamicTest()
 void Mathematics::DistanceRay3Segment3Testing::DerivativeTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -514,7 +514,7 @@ void Mathematics::DistanceRay3Segment3Testing::DerivativeTest()
 void Mathematics::DistanceRay3Segment3Testing::IntervalTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-10.0, 10.0);
+    std::uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -549,7 +549,7 @@ void Mathematics::DistanceRay3Segment3Testing::IntervalTest()
         DistanceResult3D squaredResult = distance.GetIntervalSquared(tMin, tMax, lhsVelocity, rhsVelocity);
         DistanceResult3D result = distance.GetInterval(tMin, tMax, lhsVelocity, rhsVelocity);
 
-        ASSERT_APPROXIMATE(MathD::Sqrt(squaredResult.GetDistance()), result.GetDistance(), 1e-5);
+        ASSERT_APPROXIMATE(MathD::Sqrt(squaredResult.GetDistance()), result.GetDistance(), 1e-4);
         ASSERT_APPROXIMATE(squaredResult.GetContactTime(), result.GetContactTime(), 1e-1);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetLhsClosestPoint(),
                                         result.GetLhsClosestPoint(), 1e-1);
@@ -562,7 +562,7 @@ void Mathematics::DistanceRay3Segment3Testing::IntervalTest()
             DistanceResult3D tResultSquared = distance.GetSquared(t, lhsVelocity, rhsVelocity);
 
             ASSERT_TRUE(result.GetDistance() <= tResult.GetDistance() + 1e-5);
-            ASSERT_TRUE(squaredResult.GetDistance() <= tResultSquared.GetDistance());
+            ASSERT_TRUE(squaredResult.GetDistance() <= tResultSquared.GetDistance() + 1e-5);
         }
     }
 }

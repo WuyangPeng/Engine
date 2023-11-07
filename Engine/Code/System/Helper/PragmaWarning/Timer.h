@@ -20,6 +20,7 @@
 #include SYSTEM_WARNING_DISABLE(26495)
 #include SYSTEM_WARNING_DISABLE(26496)
 #include SYSTEM_WARNING_DISABLE(26814)
+#include SYSTEM_WARNING_DISABLE(26826)
 
 #include <boost/timer/timer.hpp>
 

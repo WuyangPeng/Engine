@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:14)
+///	版本：0.9.1.6 (2023/10/28 16:04)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR1_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR1_H
@@ -27,6 +27,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = Intersector1<Real>;
+
         using Math = Math<Real>;
         using Vector2 = Vector2<Real>;
 
@@ -35,7 +36,7 @@ namespace Mathematics
         // 终点必须排序：u0 <= u1和v0 <= v1。
         // 允许sm_MaxReal和-sm_MaxReal的值，
         // 允许退化间隔：u0 = u1或v0 = v1。
-        Intersector1(Real u0, Real u1, Real v0, Real v1, const Real epsilon = Math::GetZeroTolerance()) noexcept;
+        Intersector1(Real u0, Real u1, Real v0, Real v1, Real epsilon = Math::GetZeroTolerance()) noexcept;
         virtual ~Intersector1() = default;
         Intersector1(const Intersector1& rhs) noexcept = default;
         Intersector1& operator=(const Intersector1& rhs) noexcept = default;

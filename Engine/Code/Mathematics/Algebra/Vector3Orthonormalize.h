@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/01 10:28)
+///	版本：0.9.1.6 (2023/10/26 15:17)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR3_ORTHONORMALIZE_H
 #define MATHEMATICS_ALGEBRA_VECTOR3_ORTHONORMALIZE_H
@@ -27,6 +27,7 @@ namespace Mathematics
     {
     public:
         using ClassType = Vector3Orthonormalize<Real, Robust>;
+
         using Math = Math<Real>;
         using Vector3 = Vector3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
@@ -41,9 +42,9 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD const Vector3 GetUVector() const noexcept;
-        NODISCARD const Vector3 GetVVector() const noexcept;
-        NODISCARD const Vector3 GetWVector() const noexcept;
+        NODISCARD Vector3 GetUVector() const noexcept;
+        NODISCARD Vector3 GetVVector() const noexcept;
+        NODISCARD Vector3 GetWVector() const noexcept;
 
     private:
         void Generate();

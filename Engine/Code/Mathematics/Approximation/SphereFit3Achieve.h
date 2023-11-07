@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:37)
+///	版本：0.9.1.6 (2023/10/27 14:22)
 
 #ifndef MATHEMATICS_APPROXIMATION_SPHERE_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_SPHERE_FIT3_ACHIEVE_H
@@ -81,7 +81,7 @@ void Mathematics::SphereFit3<Real>::Calculate(const Points& points, int maxItera
 }
 
 template <typename Real>
-const Mathematics::Vector3<Real> Mathematics::SphereFit3<Real>::GetAveragePoint(const Points& points)
+Mathematics::Vector3<Real> Mathematics::SphereFit3<Real>::GetAveragePoint(const Points& points)
 {
     MATHEMATICS_ASSERTION_0(!points.empty(), "输入的数组大小为零！");
 
@@ -107,7 +107,7 @@ void Mathematics::SphereFit3<Real>::Iteration(const Points& points, const Vector
 
     // 计算平均值L, dL/da, dL/db, dL/dc。
     auto lengthAverage = Math::GetValue(0);
-    Vector3 derLenghtAverage{};
+    Vector3 derLengthAverage{};
 
     for (const auto& point : points)
     {
@@ -117,14 +117,14 @@ void Mathematics::SphereFit3<Real>::Iteration(const Points& points, const Vector
         if (Math::GetZeroTolerance() < length)
         {
             lengthAverage += length;
-            derLenghtAverage -= difference / length;
+            derLengthAverage -= difference / length;
         }
     }
 
     lengthAverage /= numPoints;
-    derLenghtAverage /= numPoints;
+    derLengthAverage /= numPoints;
 
-    sphere.SetSphere(average + lengthAverage * derLenghtAverage, lengthAverage);
+    sphere.SetSphere(average + lengthAverage * derLengthAverage, lengthAverage);
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_SPHERE_FIT3_ACHIEVE_H

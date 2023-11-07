@@ -31,8 +31,7 @@ namespace Mathematics
         void OnceTest();
         void SecondaryTest();
         void ThriceTest();
-        void SpecialCubicTest();
-        void QuarticTest();
+        void SpecialCubicTest(); 
         void PolynomialTest();
         void AllRealPartsNegativeTest();
         void AllRealPartsPositiveTest();

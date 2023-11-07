@@ -80,10 +80,10 @@ void CoreTools::TinyTesting::PushBackTest() noexcept
     using Tiny3 = boost::mpl::push_back<Tiny2, long>::type;
     BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny3>::type, long>));
 
-    MAYBE_UNUSED TinyTest<Tiny0>::type tiny0{};
-    MAYBE_UNUSED TinyTest<Tiny1>::type tiny1{};
-    MAYBE_UNUSED TinyTest<Tiny2>::type tiny2{};
-    MAYBE_UNUSED TinyTest<Tiny3>::type tiny3{};
+    MAYBE_UNUSED const TinyTest<Tiny0>::type tiny0{};
+    MAYBE_UNUSED const TinyTest<Tiny1>::type tiny1{};
+    MAYBE_UNUSED const TinyTest<Tiny2>::type tiny2{};
+    MAYBE_UNUSED const TinyTest<Tiny3>::type tiny3{};
 
     using Tiny4 = boost::mpl::push_back<Tiny0, char>::type;
     using Tiny5 = boost::mpl::push_back<Tiny4, int>::type;

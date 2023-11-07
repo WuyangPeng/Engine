@@ -40,7 +40,7 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing::MainTest()
 void Mathematics::StaticFindIntersectorCircle2Circle2Testing::SameTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -68,7 +68,7 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing::SameTest()
 void Mathematics::StaticFindIntersectorCircle2Circle2Testing::EmptyTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -124,7 +124,7 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing::EmptyTest()
 void Mathematics::StaticFindIntersectorCircle2Circle2Testing::TangentTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
+    std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -166,7 +166,7 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing::TangentTest()
 void Mathematics::StaticFindIntersectorCircle2Circle2Testing::PointTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

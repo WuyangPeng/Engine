@@ -50,7 +50,7 @@ void CoreTools::StdMutex::Leave() noexcept
     EXCEPTION_UNKNOWN_CATCH(CoreTools)
 }
 
-void CoreTools::StdMutex::DoLeave()
+void CoreTools::StdMutex::DoLeave() noexcept
 {
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26110)
@@ -60,7 +60,7 @@ void CoreTools::StdMutex::DoLeave()
 #include SYSTEM_WARNING_POP
 }
 
-bool CoreTools::StdMutex::TryEnter()
+bool CoreTools::StdMutex::TryEnter() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

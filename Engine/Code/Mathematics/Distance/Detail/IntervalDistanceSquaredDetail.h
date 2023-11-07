@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:45)
+///	版本：0.9.1.6 (2023/10/27 15:14)
 
 #ifndef MATHEMATICS_DISTANCE_INTERVAL_DISTANCE_SQUARED_DETAIL_H
 #define MATHEMATICS_DISTANCE_INTERVAL_DISTANCE_SQUARED_DETAIL_H
@@ -40,7 +40,6 @@ bool Mathematics::IntervalDistanceSquared<Real, Vector>::IsValid() const noexcep
 
 #endif  // OPEN_CLASS_INVARIANT
 
-// private
 template <typename Real, typename Vector>
 typename Mathematics::IntervalDistanceSquared<Real, Vector>::DistanceResult Mathematics::IntervalDistanceSquared<Real, Vector>::Get(Real t) const
 {

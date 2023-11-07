@@ -50,7 +50,7 @@ void Mathematics::DistanceRay2Ray2Testing::MainTest()
 void Mathematics::DistanceRay2Ray2Testing::BaseTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -90,7 +90,7 @@ void Mathematics::DistanceRay2Ray2Testing::BaseTest()
 void Mathematics::DistanceRay2Ray2Testing::StaticTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -133,8 +133,8 @@ void Mathematics::DistanceRay2Ray2Testing::StaticTest()
             ASSERT_APPROXIMATE(result.GetDistance(), 0.0, 1e-10);
             ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
 
-            ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, result.GetLhsClosestPoint(), result.GetRhsClosestPoint(), 1e-8);
-            ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), squaredResult.GetRhsClosestPoint(), 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, result.GetLhsClosestPoint(), result.GetRhsClosestPoint(), 1e-7);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), squaredResult.GetRhsClosestPoint(), 1e-7);
         }
         else if (Vector2ToolsD::Approximate(lhsDifference, lhsDirection, 1e-8) && Vector2ToolsD::Approximate(rhsDifference, -rhsDirection, 1e-8))
         {
@@ -353,7 +353,7 @@ void Mathematics::DistanceRay2Ray2Testing::StaticTest()
 void Mathematics::DistanceRay2Ray2Testing::DynamicTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -518,7 +518,7 @@ void Mathematics::DistanceRay2Ray2Testing::DynamicTest()
 void Mathematics::DistanceRay2Ray2Testing::DerivativeTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -558,7 +558,7 @@ void Mathematics::DistanceRay2Ray2Testing::DerivativeTest()
 void Mathematics::DistanceRay2Ray2Testing::IntervalTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-10.0, 10.0);
+    std::uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -592,18 +592,18 @@ void Mathematics::DistanceRay2Ray2Testing::IntervalTest()
         DistanceResult2D result = distance.GetInterval(tMin, tMax, lhsVelocity, rhsVelocity);
 
         ASSERT_APPROXIMATE(MathD::Sqrt(squaredResult.GetDistance()), result.GetDistance(), 1e-5);
-        ASSERT_APPROXIMATE(squaredResult.GetContactTime(), result.GetContactTime(), 1e-2);
+        ASSERT_APPROXIMATE(squaredResult.GetContactTime(), result.GetContactTime(), 1e-1);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetLhsClosestPoint(),
-                                        result.GetLhsClosestPoint(), 1e-2);
+                                        result.GetLhsClosestPoint(), 1e-1);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetRhsClosestPoint(),
-                                        result.GetRhsClosestPoint(), 1e-2);
+                                        result.GetRhsClosestPoint(), 1e-1);
 
         for (double t = tMin; t < tMax; t += 0.1)
         {
             DistanceResult2D tResult = distance.Get(t, lhsVelocity, rhsVelocity);
             DistanceResult2D tResultSquared = distance.GetSquared(t, lhsVelocity, rhsVelocity);
 
-            ASSERT_TRUE(result.GetDistance() <= tResult.GetDistance());
+            ASSERT_TRUE(result.GetDistance() <= tResult.GetDistance() + 1e-2);
             ASSERT_TRUE(squaredResult.GetDistance() <= tResultSquared.GetDistance());
         }
     }

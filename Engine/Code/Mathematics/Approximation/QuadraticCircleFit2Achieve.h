@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:36)
+///	版本：0.9.1.6 (2023/10/27 14:21)
 
 #ifndef MATHEMATICS_APPROXIMATION_QUADRATIC_CIRCLE_FIT2_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_QUADRATIC_CIRCLE_FIT2_ACHIEVE_H
@@ -25,7 +25,6 @@ Mathematics::QuadraticCircleFit2<Real>::QuadraticCircleFit2(const Points& points
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real>
 void Mathematics::QuadraticCircleFit2<Real>::Calculate(const Points& points)
 {

@@ -30,7 +30,7 @@ bool CoreTools::EntityManagerImpl::Register(const EntitySharedPtr& entity)
     return container.emplace(entity->GetEntityId(), entity).second;
 }
 
-bool CoreTools::EntityManagerImpl::UnRegister(int64_t entityId)
+bool CoreTools::EntityManagerImpl::UnRegister(int64_t entityId) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

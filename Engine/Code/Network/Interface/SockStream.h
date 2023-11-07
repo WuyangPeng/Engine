@@ -12,10 +12,9 @@
 
 #include "Network/NetworkDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
-
 #include "NetworkInternalFwd.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
+#include "CoreTools/Helper/ExportMacro.h"
 
 template class NETWORK_DEFAULT_DECLARE std::weak_ptr<Network::SockStream>;
 template class NETWORK_DEFAULT_DECLARE std::enable_shared_from_this<Network::SockStream>;

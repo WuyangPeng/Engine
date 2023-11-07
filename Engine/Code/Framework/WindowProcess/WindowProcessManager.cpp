@@ -55,7 +55,7 @@ bool Framework::WindowProcessManager::IsClassNameExist(const String& className)
 
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return impl->IsClassNameExist(className);
+    return ImplType::IsClassNameExist(className);
 }
 
 bool Framework::WindowProcessManager::SetNewClassName(const String& className)
@@ -64,7 +64,7 @@ bool Framework::WindowProcessManager::SetNewClassName(const String& className)
 
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    return impl->SetNewClassName(className);
+    return ImplType::SetNewClassName(className);
 }
 
 Framework::ConstWindowMessageInterfaceSharedPtr Framework::WindowProcessManager::GetWindowMessageInterface() const

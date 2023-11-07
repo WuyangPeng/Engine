@@ -58,13 +58,13 @@ bool Framework::WindowProcessHandle<WindowMessage>::IsValid() const noexcept
 template <typename WindowMessage>
 typename Framework::WindowProcessHandle<WindowMessage>::WindowsProcess Framework::WindowProcessHandle<WindowMessage>::GetProcess() noexcept
 {
-    return WINDOW_PROCESS_MANAGER_SINGLETON.GetProcess();
+    return WindowProcessManager::GetProcess();
 }
 
 template <typename WindowMessage>
 typename Framework::WindowProcessHandle<WindowMessage>::DisplayFunction Framework::WindowProcessHandle<WindowMessage>::GetFunction() noexcept
 {
-    return WINDOW_PROCESS_MANAGER_SINGLETON.GetFunction();
+    return WindowProcessManager::GetFunction();
 }
 
 template <typename WindowMessage>

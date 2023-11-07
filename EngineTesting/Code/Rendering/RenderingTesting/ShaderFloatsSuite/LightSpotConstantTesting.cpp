@@ -58,7 +58,7 @@ void Rendering::LightSpotConstantTesting::InitTest()
 {
     std::default_random_engine generator;
     const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
-    const std::uniform_real<float> secondFloatRandomDistribution(0.0f, 1.0f);
+    std::uniform_real<float> secondFloatRandomDistribution(0.0f, 1.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -155,7 +155,7 @@ void Rendering::LightSpotConstantTesting::CopyTest()
 {
     std::default_random_engine generator;
     const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
-    const std::uniform_real<float> secondFloatRandomDistribution(0.0f, 1.0f);
+    std::uniform_real<float> secondFloatRandomDistribution(0.0f, 1.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {

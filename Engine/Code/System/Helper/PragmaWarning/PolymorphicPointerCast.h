@@ -32,6 +32,7 @@
 #include SYSTEM_WARNING_DISABLE(26489)
 #include SYSTEM_WARNING_DISABLE(26496)
 #include SYSTEM_WARNING_DISABLE(26812)
+#include SYSTEM_WARNING_DISABLE(26819)
 
 #include <boost/polymorphic_pointer_cast.hpp>
 

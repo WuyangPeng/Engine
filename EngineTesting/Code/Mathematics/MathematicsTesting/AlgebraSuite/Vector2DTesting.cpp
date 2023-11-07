@@ -178,7 +178,7 @@ void Mathematics::Vector2Testing::BarycentricsTest()
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const std::uniform_real<double> randomDistribution{ -10.0f, 10.0f };
+    std::uniform_real<double> randomDistribution{ -10.0f, 10.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -190,7 +190,7 @@ void Mathematics::Vector2Testing::BarycentricsTest()
 
         ASSERT_TRUE(fifthCoordinates.IsBarycentricCoordinatesValid());
 
-        Vector2D difference[3]{ vector0 - vector2, vector1 - vector2, vector4 - vector2 };
+        const Vector2D difference[3]{ vector0 - vector2, vector1 - vector2, vector4 - vector2 };
 
         const double det = Vector2ToolsD::DotPerp(difference[0], difference[1]);
 

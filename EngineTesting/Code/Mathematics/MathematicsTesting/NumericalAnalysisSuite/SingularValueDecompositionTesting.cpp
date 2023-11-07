@@ -44,8 +44,8 @@ void Mathematics::SingularValueDecompositionTesting::MainTest()
 void Mathematics::SingularValueDecompositionTesting::SingularValueTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-1.0e5, 1.0e5);
-    const std::uniform_int<> randomDistribution1(2, 10);
+    std::uniform_real<double> randomDistribution0(-1.0e5, 1.0e5);
+    std::uniform_int<> randomDistribution1(2, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

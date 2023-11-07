@@ -62,10 +62,6 @@ CoreTools::LiteralCast<uint64_t, V>::operator uint64_t() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    constexpr auto literalCastCannotCastToLargestUnsignedIntegerType = 0;
-
-    static_assert(literalCastCannotCastToLargestUnsignedIntegerType, "Literal Cast Cannot Cast To Largest Unsigned Integer Type");
-
     return 0;
 }
 
@@ -83,10 +79,6 @@ template <int64_t V>
 CoreTools::LiteralCast<int64_t, V>::operator int64_t() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    constexpr auto literalCastCannotCastToLargestSignedIntegerType = 0;
-
-    static_assert(literalCastCannotCastToLargestSignedIntegerType, "Literal Cast Cannot Cast To Largest Signed Integer Type");
 
     return 0;
 }

@@ -226,8 +226,8 @@ void Framework::CameraModelMiddleLayerTesting::MoveObjectTest()
 
     middleLayer.SetTrackBallDow(false);
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> random{ 0, 1 };
-    const std::uniform_int<> selectRandom{ 0, 2 };
+    std::uniform_int<> random{ 0, 1 };
+    std::uniform_int<> selectRandom{ 0, 2 };
 
     ASSERT_FALSE(middleLayer.MoveObject());
 
@@ -332,7 +332,7 @@ void Framework::CameraModelMiddleLayerTesting::RotateTrackBallTest()
     ASSERT_TRUE(middleLayer.Initialize());
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> random{ 0.0f, 100.0f };
+    std::uniform_real<float> random{ 0.0f, 100.0f };
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {

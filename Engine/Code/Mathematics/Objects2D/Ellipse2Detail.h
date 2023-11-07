@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 15:19)
+///	版本：0.9.1.6 (2023/10/26 16:59)
 
 #ifndef MATHEMATICS_OBJECTS_2D_ELLIPSE2_DETAIL_H
 #define MATHEMATICS_OBJECTS_2D_ELLIPSE2_DETAIL_H
@@ -195,7 +195,7 @@ void Mathematics::Ellipse2<Real>::FromCoefficients(const Ellipse2Coefficients& c
 
         if (eigenValue <= epsilon)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("除零错误！"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("除零错误！"s))
         }
 
 #include SYSTEM_WARNING_PUSH

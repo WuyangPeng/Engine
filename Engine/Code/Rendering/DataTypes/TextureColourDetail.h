@@ -42,8 +42,6 @@ Rendering::TextureColour<Format>::TextureColour(ValueType value0, ValueType valu
 template <Rendering::TextureFormat Format>
 void Rendering::TextureColour<Format>::SetColour(ValueType value1, ValueType value2) noexcept
 {
-    static_assert(false, "TextureFormat is error!");
-
     RENDERING_CLASS_IS_VALID_3;
 
     colour[0] = value1;
@@ -77,8 +75,6 @@ Rendering::TextureColour<Format>::TextureColour(ValueType value) noexcept
 template <Rendering::TextureFormat Format>
 void Rendering::TextureColour<Format>::SetColour(ValueType value) noexcept
 {
-    static_assert(false, "TextureFormat is error!");
-
     RENDERING_CLASS_IS_VALID_3;
 
     colour[0] = value;

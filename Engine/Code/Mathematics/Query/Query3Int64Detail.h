@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:10)
+///	版本：0.9.1.6 (2023/10/27 13:58)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_INT64_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY3_INT64_DETAIL_H
@@ -74,9 +74,8 @@ Mathematics::PlaneQueryType Mathematics::Query3Int64<Real>::ToPlane(const Vector
     const int64_t y2{ boost::numeric_cast<int64_t>(vector2.GetY()) - boost::numeric_cast<int64_t>(vector0.GetY()) };
     const int64_t z2{ boost::numeric_cast<int64_t>(vector2.GetZ()) - boost::numeric_cast<int64_t>(vector0.GetZ()) };
 
-    const auto det = QueryDotTools<int64_t>::Det3(x0, y0, z0, x1, y1, z1, x2, y2, z2);
-
-    if (0 < det)
+    if (const auto det = QueryDotTools<int64_t>::Det3(x0, y0, z0, x1, y1, z1, x2, y2, z2);
+        0 < det)
         return PlaneQueryType::PositiveSide;
     else if (det < 0)
         return PlaneQueryType::NegativeSide;

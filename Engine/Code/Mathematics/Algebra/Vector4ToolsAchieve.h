@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/01 10:50)
+///	版本：0.9.1.6 (2023/10/26 11:18)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR4_TOOLS_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_VECTOR4_TOOLS_ACHIEVE_H
@@ -103,7 +103,7 @@ typename Mathematics::Vector4Tools<Real>::Vector4 Mathematics::Vector4Tools<Real
     {
         MATHEMATICS_ASSERTION_1(false, "除零错误！");
 
-        return Vector4();
+        return Vector4{};
     }
 }
 

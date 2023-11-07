@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:10)
+///	版本：0.9.1.6 (2023/10/27 13:57)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_RATIONAL_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY2_RATIONAL_DETAIL_H
@@ -25,7 +25,7 @@ Mathematics::Query2Rational<Real>::Query2Rational(const VerticesType& vertices)
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
- 
+
 template <typename Real>
 void Mathematics::Query2Rational<Real>::Convert()
 {

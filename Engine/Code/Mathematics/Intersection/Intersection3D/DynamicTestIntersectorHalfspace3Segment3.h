@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:34)
+///	版本：0.9.1.6 (2023/10/28 15:01)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_SEGMENT3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_SEGMENT3_H
@@ -29,6 +29,7 @@ namespace Mathematics
     public:
         using ClassType = DynamicTestIntersectorHalfspace3Segment3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
+
         using Vector3 = Vector3<Real>;
         using Segment3 = Segment3<Real>;
         using Plane3 = Plane3<Real>;

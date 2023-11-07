@@ -42,8 +42,8 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::MainTest()
 void Mathematics::DistancePoint3Ellipsoid3Testing::BaseTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    const std::uniform_real<double> randomDistribution1(0.0, 100.0);
+    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution1(0.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -101,8 +101,8 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::BaseTest()
 void Mathematics::DistancePoint3Ellipsoid3Testing::StaticDistanceTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    const std::uniform_real<double> randomDistribution1(0.0, 50.0);
+    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution1(0.0, 50.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -194,8 +194,8 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::StaticDistanceTest()
 void Mathematics::DistancePoint3Ellipsoid3Testing::DynamicDistanceTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    const std::uniform_real<double> randomDistribution1(0.0, 50.0);
+    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution1(0.0, 50.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -297,8 +297,8 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::DynamicDistanceTest()
 void Mathematics::DistancePoint3Ellipsoid3Testing::DerivativeDistanceTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    const std::uniform_real<double> randomDistribution1(0.0, 50.0);
+    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution1(0.0, 50.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -344,8 +344,8 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::DerivativeDistanceTest()
 void Mathematics::DistancePoint3Ellipsoid3Testing::IntervalDistanceTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    const std::uniform_real<double> randomDistribution1(0.0, 20.0);
+    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution1(0.0, 20.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

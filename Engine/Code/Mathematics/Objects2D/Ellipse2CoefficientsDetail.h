@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 15:19)
+///	版本：0.9.1.6 (2023/10/26 16:56)
 
 #ifndef MATHEMATICS_OBJECTS_2D_ELLIPSE2_COEFFICIENTS_DETAIL_H
 #define MATHEMATICS_OBJECTS_2D_ELLIPSE2_COEFFICIENTS_DETAIL_H
@@ -16,14 +16,14 @@
 
 template <typename Real>
 Mathematics::Ellipse2Coefficients<Real>::Ellipse2Coefficients(const Matrix2& matrix, const Vector2& vector, Real constants)
-    : coefficients{ constants, vector.GetX(), vector.GetY(), matrix.GetValue<0, 0>(), matrix.GetValue<0, 1>() * Math::GetValue(2), matrix.GetValue<1, 1>() }
+    : coefficients{ constants, vector.GetX(), vector.GetY(), matrix.template GetValue<0, 0>(), matrix.template GetValue<0, 1>() * Math::GetValue(2), matrix.template GetValue<1, 1>() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
-Mathematics::Ellipse2Coefficients<Real>::Ellipse2Coefficients(const CoefficientsType& coefficient)
-    : coefficients{ coefficient }
+Mathematics::Ellipse2Coefficients<Real>::Ellipse2Coefficients(CoefficientsType coefficient) noexcept
+    : coefficients{ std::move(coefficient) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }

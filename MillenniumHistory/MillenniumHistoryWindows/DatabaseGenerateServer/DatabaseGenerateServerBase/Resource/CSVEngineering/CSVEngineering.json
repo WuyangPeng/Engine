@@ -26,7 +26,7 @@
   "BeginContainerNotEqualNullptr": "$SmallClassName$Container != nullptr &&",
   "ContainerNotEqualNullptr": "        $SmallClassName$Container != nullptr &&",
   "EndContainerNotEqualNullptr": "        $SmallClassName$Container != nullptr",
-  "GetContainerDefine": "$Namespace$::$Namespace$Container::Const$ClassName$ContainerSharedPtr $Namespace$::$Namespace$Container::Get$ClassName$Container() const noexcept\n{\n    USER_CLASS_IS_VALID_CONST_1;\n\n    return $SmallClassName$Container;\n}\n",
+  "GetContainerDefine": "$NameSpaceName$::$NameSpaceName$Container::Const$ClassName$ContainerSharedPtr $NameSpaceName$::$NameSpaceName$Container::Get$ClassName$Container() const noexcept\n{\n    USER_CLASS_IS_VALID_CONST_1;\n\n    return $SmallClassName$Container;\n}\n",
   "ClassNameMember": "        $EnumName$ = $EnumValue$,  // $EnumNameNote$",
   "ClassMemberType": "{ SYSTEM_TEXT(\"$EnumName$\"s), $ClassName$::$EnumName$ },\n",
   "EndClassMemberType": "{ SYSTEM_TEXT(\"$EnumName$\"s), $ClassName$::$EnumName$ }",

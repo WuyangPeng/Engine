@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:34)
+///	版本：0.9.1.6 (2023/10/28 15:03)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_SEGMENT3_TRIANGLE3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_SEGMENT3_TRIANGLE3_H
@@ -24,6 +24,7 @@ namespace Mathematics
     public:
         using ClassType = DynamicTestIntersectorSegment3Triangle3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
+
         using Vector3 = Vector3<Real>;
         using Segment3 = Segment3<Real>;
         using Triangle3 = Triangle3<Real>;
@@ -33,7 +34,7 @@ namespace Mathematics
     public:
         DynamicTestIntersectorSegment3Triangle3(const Segment3& segment,
                                                 const Triangle3& triangle,
-                                                Real tmax,
+                                                Real tMax,
                                                 const Vector3& lhsVelocity,
                                                 const Vector3& rhsVelocity,
                                                 const Real epsilon = Math::GetZeroTolerance());

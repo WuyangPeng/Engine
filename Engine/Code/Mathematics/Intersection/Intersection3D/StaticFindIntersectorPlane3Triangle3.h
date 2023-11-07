@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 08:58)
+///	版本：0.9.1.6 (2023/10/28 15:07)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_TRIANGLE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_TRIANGLE3_H
@@ -24,6 +24,7 @@ namespace Mathematics
     public:
         using ClassType = StaticFindIntersectorPlane3Triangle3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
+
         using Vector3 = Vector3<Real>;
         using Plane3 = Plane3<Real>;
         using Triangle3 = Triangle3<Real>;
@@ -36,12 +37,12 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD const Plane3 GetPlane() const noexcept;
-        NODISCARD const Triangle3 GetTriangle() const noexcept;
+        NODISCARD Plane3 GetPlane() const noexcept;
+        NODISCARD Triangle3 GetTriangle() const noexcept;
 
         // 相交集，它是空的，点，线段或整个三角形（GetQuantity返回0、1、2或3）
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD const Vector3 GetPoint(int index) const;
+        NODISCARD Vector3 GetPoint(int index) const;
 
     private:
         void Find();

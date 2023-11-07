@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:24)
+///	版本：0.9.1.6 (2023/10/28 13:47)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_CAPSULE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_CAPSULE3_ACHIEVE_H
@@ -115,9 +115,9 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
     /// 组成胶囊减去其半球形端盖的有限圆柱体的z值|z| <= e，其中e是胶囊段的范围。
     /// 对于z > = e，上半球上限为x^2+y^2+(z-e)^2 = r^2；对于z <= -e，下半球上限为x^2+y^2+(z+e)^2 = r^2。
     const auto segmentDirection = capsule.GetSegment().GetDirection();
-    const auto Vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(segmentDirection);
-    const auto uVector = Vector3OrthonormalBasis.GetUVector();
-    const auto vVector = Vector3OrthonormalBasis.GetVVector();
+    const auto vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(segmentDirection);
+    const auto uVector = vector3OrthonormalBasis.GetUVector();
+    const auto vVector = vector3OrthonormalBasis.GetVVector();
     auto radiusSqr = capsule.GetRadius() * capsule.GetRadius();
     auto extent = capsule.GetSegment().GetExtent();
 
@@ -210,8 +210,9 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
     {
         // 线与无限圆柱相切。
         auto tValue = -a1 / a2;
-        auto zValue = point.GetZ() + tValue * dot.GetZ();
-        if (Math::FAbs(zValue) <= extent)
+
+        if (auto zValue = point.GetZ() + tValue * dot.GetZ();
+            Math::FAbs(zValue) <= extent)
         {
             findShared.parameter0 = tValue;
 

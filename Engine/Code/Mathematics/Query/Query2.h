@@ -25,6 +25,7 @@ namespace Mathematics
     public:
         using ClassType = Query2<Real>;
         using ParentType = QueryBase;
+
         using Math = Math<Real>;
         using Vector2 = Vector2<Real>;
         using VerticesType = std::vector<Vector2>;

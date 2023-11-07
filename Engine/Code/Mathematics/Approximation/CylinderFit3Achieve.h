@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:33)
+///	版本：0.9.1.6 (2023/10/27 14:08)
 
 #ifndef MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_ACHIEVE_H
@@ -70,7 +70,7 @@ void Mathematics::CylinderFit3<Real>::Update(const Points& points)
     CylinderFit3Update<Real> update{ points, center, axis, epsilon };
     update.Update(maxLoopTime);
 
-    radius = Math::InvSqrt(update.GetInverseRadiusSqrare());
+    radius = Math::InvSqrt(update.GetInverseRadiusSquare());
     center = update.GetCenter();
     axis = update.GetAxis();
 

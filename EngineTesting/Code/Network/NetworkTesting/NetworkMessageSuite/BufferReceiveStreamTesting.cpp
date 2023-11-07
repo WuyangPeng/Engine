@@ -41,8 +41,6 @@ void Network::BufferReceiveStreamTesting::MainTest()
 {
     MESSAGE_MANAGER_SINGLETON.Insert(messageId, MessageTypeCondition::CreateNullCondition(), TestNullMessage::Factory);
 
-    constexpr auto segment = 100;
-
     auto remainderLoopCount = GetTestLoopCount();
     auto currentLoopCount = 1;
     while (0 < remainderLoopCount)

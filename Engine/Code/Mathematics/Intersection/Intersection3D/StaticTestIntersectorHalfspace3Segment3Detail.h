@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:29)
+///	版本：0.9.1.6 (2023/10/28 14:25)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_HALFSPACE3_SEGMENT3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_HALFSPACE3_SEGMENT3_DETAIL_H
@@ -56,10 +56,10 @@ Mathematics::Segment3<Real> Mathematics::StaticTestIntersectorHalfspace3Segment3
 template <typename Real>
 void Mathematics::StaticTestIntersectorHalfspace3Segment3<Real>::Test() noexcept
 {
-    std::array<Vector3, 2> segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
+    const std::array<Vector3, 2> segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
 
-    const auto projection = TestIntersectorAxis<Real>::GetProjection(halfspace.GetNormal(), segmentType);
-    if (projection.first <= halfspace.GetConstant())
+    if (const auto projection = TestIntersectorAxis<Real>::GetProjection(halfspace.GetNormal(), segmentType);
+        projection.first <= halfspace.GetConstant())
     {
         this->SetIntersectionType(IntersectionType::Point);
     }

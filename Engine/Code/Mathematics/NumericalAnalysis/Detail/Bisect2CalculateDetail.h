@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:33)
+///	版本：0.9.1.6 (2023/10/27 09:22)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT2_CALCULATE_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT2_CALCULATE_DETAIL_H
@@ -56,9 +56,8 @@ void Mathematics::Bisect2Calculate<Real>::Calculate(Real beginPointX, Real begin
     graph->GetXNext()->AddYNextNode(endPointX, endPointY, bisect2Storage.GetEndXAndEndYValue0(), bisect2Storage.GetEndXAndEndYValue1());
     graph->GetYNext()->AddXNextNode(graph->GetXNext()->GetYNext());
 
-    const auto result = BisectRecurse(graph);
-
-    if (result)
+    if (const auto result = BisectRecurse(graph);
+        result)
     {
         bisect2Root = bisect2Storage.GetBisect2Root();
     }
@@ -88,7 +87,6 @@ typename Mathematics::Bisect2Calculate<Real>::Bisect2Root Mathematics::Bisect2Ca
     return *bisect2Root;
 }
 
-// private
 template <typename Real>
 bool Mathematics::Bisect2Calculate<Real>::BisectRecurse(const Bisect2NodeSharedPtr& node)
 {

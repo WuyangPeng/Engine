@@ -54,7 +54,7 @@ void Rendering::Particles::InitIndexBuffer(int indexSize)
 {
     RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "无效索引大小。\n");
 
-    auto numVertices = GetVertexBuffer()->GetNumElements();
+    const auto numVertices = GetVertexBuffer()->GetNumElements();
     const auto numParticles = numVertices / 4;
 
     RENDERING_ASSERTION_1(numVertices % 4 == 0, "顶点数必须是4的倍数。\n");

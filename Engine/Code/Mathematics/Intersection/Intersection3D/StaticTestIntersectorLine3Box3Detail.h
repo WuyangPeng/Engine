@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:30)
+///	版本：0.9.1.6 (2023/10/28 14:26)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE3_BOX3_DETAIL_H
@@ -59,14 +59,14 @@ void Mathematics::StaticTestIntersectorLine3Box3<Real>::Test()
     std::array<Real, 3> awxddu{};
 
     auto diff = line.GetOrigin() - box.GetCenter();
-    const auto WxD = Vector3Tools::CrossProduct(line.GetDirection(), diff);
+    const auto wxD = Vector3Tools::CrossProduct(line.GetDirection(), diff);
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
     awdu[1] = Math::FAbs(Vector3Tools::DotProduct(line.GetDirection(), box.GetAxis(1)));
     awdu[2] = Math::FAbs(Vector3Tools::DotProduct(line.GetDirection(), box.GetAxis(2)));
-    awxddu[0] = Math::FAbs(Vector3Tools::DotProduct(WxD, box.GetAxis(0)));
+    awxddu[0] = Math::FAbs(Vector3Tools::DotProduct(wxD, box.GetAxis(0)));
     auto rhs = box.GetExtent(1) * awdu[2] + box.GetExtent(2) * awdu[1];
     if (rhs < awxddu[0])
     {
@@ -75,7 +75,7 @@ void Mathematics::StaticTestIntersectorLine3Box3<Real>::Test()
     }
 
     awdu[0] = Math::FAbs(Vector3Tools::DotProduct(line.GetDirection(), box.GetAxis(0)));
-    awxddu[1] = Math::FAbs(Vector3Tools::DotProduct(WxD, box.GetAxis(1)));
+    awxddu[1] = Math::FAbs(Vector3Tools::DotProduct(wxD, box.GetAxis(1)));
     rhs = box.GetExtent(0) * awdu[2] + box.GetExtent(2) * awdu[0];
     if (rhs < awxddu[1])
     {
@@ -83,7 +83,7 @@ void Mathematics::StaticTestIntersectorLine3Box3<Real>::Test()
         return;
     }
 
-    awxddu[2] = Math::FAbs(Vector3Tools::DotProduct(WxD, box.GetAxis(2)));
+    awxddu[2] = Math::FAbs(Vector3Tools::DotProduct(wxD, box.GetAxis(2)));
     rhs = box.GetExtent(0) * awdu[1] + box.GetExtent(1) * awdu[0];
     if (rhs < awxddu[2])
     {

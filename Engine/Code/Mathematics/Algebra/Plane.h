@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 17:08)
+///	版本：0.9.1.6 (2023/10/26 14:46)
 
 #ifndef MATHEMATICS_ALGEBRA_PLANE_H
 #define MATHEMATICS_ALGEBRA_PLANE_H
@@ -18,8 +18,6 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "Mathematics/Base/BaseFwd.h"
 #include "Mathematics/Base/MathDetail.h"
-
-#include <type_traits>
 
 namespace Mathematics
 {

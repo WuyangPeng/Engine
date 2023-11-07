@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:13)
+///	版本：0.9.1.6 (2023/10/26 19:49)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DIVISION_MULTIPLE_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DIVISION_MULTIPLE_DETAIL_H
@@ -19,7 +19,6 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <int N>
 Mathematics::IntegerDivisionMultiple<N>::IntegerDivisionMultiple(const IntegerData& absNumerator, const IntegerData& absDenominator)
@@ -43,7 +42,6 @@ Mathematics::IntegerDivisionMultiple<N>::IntegerDivisionMultiple(const IntegerDa
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 template <int N>
 void Mathematics::IntegerDivisionMultiple<N>::Adjust()
 {
@@ -64,7 +62,6 @@ void Mathematics::IntegerDivisionMultiple<N>::Adjust()
     adjustDenominator = denominatorAdjust.GetMultiplication();
 }
 
-// private
 template <int N>
 void Mathematics::IntegerDivisionMultiple<N>::Calculate()
 {

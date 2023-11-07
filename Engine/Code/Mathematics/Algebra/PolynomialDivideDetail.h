@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 17:21)
+///	版本：0.9.1.6 (2023/10/26 10:43)
 
 #ifndef MATHEMATICS_ALGEBRA_POLYNOMIAL_DIVIDE_DETAIL_H
 #define MATHEMATICS_ALGEBRA_POLYNOMIAL_DIVIDE_DETAIL_H
@@ -16,8 +16,8 @@
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::PolynomialDivide<Real>::PolynomialDivide(const Polynomial& quotient, const Polynomial& remainder)
-    : quotient{ quotient }, remainder{ remainder }
+Mathematics::PolynomialDivide<Real>::PolynomialDivide(Polynomial quotient, Polynomial remainder) noexcept
+    : quotient{ std::move(quotient) }, remainder{ std::move(remainder) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }

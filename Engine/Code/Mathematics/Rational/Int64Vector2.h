@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:04)
+///	版本：0.9.1.6 (2023/10/26 20:06)
 
 #ifndef MATHEMATICS_RATIONAL_INT64_VECTOR2_H
 #define MATHEMATICS_RATIONAL_INT64_VECTOR2_H
@@ -30,7 +30,7 @@ namespace Mathematics
         DELAY_COPY_UNSHARED_TYPE_DECLARE(Int64Vector2);
 
     private:
-        explicit Int64Vector2(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
+        explicit Int64Vector2(CoreTools::DisableNotThrow disableNotThrow);
 
     public:
         NODISCARD static Int64Vector2 CreateDefault();

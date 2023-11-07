@@ -5,17 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 15:48)
+///	版本：0.9.1.6 (2023/10/26 17:06)
 
 #ifndef MATHEMATICS_OBJECTS_3D_BOX3_DETAIL_H
 #define MATHEMATICS_OBJECTS_3D_BOX3_DETAIL_H
 
 #include "Box3.h"
-#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
 
 template <typename Real>

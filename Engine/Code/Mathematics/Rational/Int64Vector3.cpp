@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:08)
+///	版本：0.9.1.6 (2023/10/26 23:45)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -62,13 +62,47 @@ Mathematics::Int64Vector3& Mathematics::Int64Vector3::operator=(const Int64Vecto
 
 CLASS_INVARIANT_STUB_DEFINE(Mathematics, Int64Vector3)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Int64Vector3, GetX, int64_t)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Int64Vector3, GetY, int64_t)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Int64Vector3, GetZ, int64_t)
+int64_t Mathematics::Int64Vector3::GetX() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Mathematics, Int64Vector3, SetX, int64_t, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Mathematics, Int64Vector3, SetY, int64_t, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Mathematics, Int64Vector3, SetZ, int64_t, void)
+    return impl->GetX();
+}
+
+void Mathematics::Int64Vector3::SetX(int64_t x)
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    return impl->SetX(x);
+}
+
+int64_t Mathematics::Int64Vector3::GetY() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetY();
+}
+
+void Mathematics::Int64Vector3::SetY(int64_t y)
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    return impl->SetY(y);
+}
+
+int64_t Mathematics::Int64Vector3::GetZ() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetZ();
+}
+
+void Mathematics::Int64Vector3::SetZ(int64_t z)
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    return impl->SetZ(z);
+}
 
 Mathematics::Int64Vector3 Mathematics::Int64Vector3::operator-() const
 {
@@ -115,7 +149,12 @@ Mathematics::Int64Vector3& Mathematics::Int64Vector3::operator/=(int64_t scalar)
     return *this;
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Int64Vector3, SquaredLength, int64_t)
+int64_t Mathematics::Int64Vector3::SquaredLength() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return impl->SquaredLength();
+}
 
 int64_t Mathematics::Int64Vector3::Dot(const Int64Vector3& rhs) const
 {

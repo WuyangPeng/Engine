@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Mathematics/Base/Float.h" 
+#include "Mathematics/Base/Float.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, CurveMesh);
@@ -85,7 +85,6 @@ void Rendering::CurveMesh::SetLevel(int aLevel)
     UpdateModelSpace(VisualUpdateType::Normals);
 
     OnDynamicChange();
-  
 }
 
 int Rendering::CurveMesh::GetLevel() const noexcept
@@ -110,7 +109,7 @@ std::vector<Rendering::CurveMesh::Edge> Rendering::CurveMesh::Allocate(int& numT
         numTotalEdges = 2 * numTotalEdges;
     }
 
-    auto vstride = GetVertexFormat()->GetStride();
+    const auto vstride = GetVertexFormat()->GetStride();
     SetVertexBuffer(VertexBuffer::Create(*GetVertexFormat(), vstride));
     std::vector<Edge> edges(numTotalEdges);
 

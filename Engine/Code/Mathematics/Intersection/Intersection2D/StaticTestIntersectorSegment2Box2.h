@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:21)
+///	版本：0.9.1.6 (2023/10/28 14:55)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT2_BOX2_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT2_BOX2_H
@@ -24,6 +24,7 @@ namespace Mathematics
     public:
         using ClassType = StaticTestIntersectorSegment2Box2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
+
         using Vector2 = Vector2<Real>;
         using Segment2 = Segment2<Real>;
         using Box2 = Box2<Real>;

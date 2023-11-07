@@ -73,11 +73,13 @@ void CoreTools::Singleton<T, MutexCreate>::CheckSingleton() noexcept(gAssert < 0
 }
 
 template <typename T, CoreTools::MutexCreate MutexCreate>
-typename CoreTools::Singleton<T, MutexCreate>::MutexType& CoreTools::Singleton<T, MutexCreate>::GetMutex()
+typename CoreTools::Singleton<T, MutexCreate>::MutexType& CoreTools::Singleton<T, MutexCreate>::GetMutex()  
 {
     if constexpr (MutexCreate == MutexCreate::UseOriginalStd || MutexCreate == MutexCreate::UseOriginalStdRecursive)
     {
         static MutexType mutex{};
+
+        CoreTools::DisableNoexcept();
 
         return mutex;
     }

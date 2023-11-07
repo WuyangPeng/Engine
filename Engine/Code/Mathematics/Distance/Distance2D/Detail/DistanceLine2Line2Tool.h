@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:46)
+///	版本：0.9.1.6 (2023/10/27 16:46)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE2_LINE2_TOOL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE2_LINE2_TOOL_H
@@ -22,6 +22,7 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceLine2Line2Tool<Real>;
+
         using Math = Math<Real>;
         using Vector2 = Vector2<Real>;
         using Vector2Tools = Vector2Tools<Real>;

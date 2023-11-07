@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:29)
+///	版本：0.9.1.6 (2023/10/28 14:16)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_BOX3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_BOX3_BOX3_DETAIL_H
@@ -88,7 +88,7 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
 
     /// 间隔半径和中心之间的距离
     auto r = Math::FAbs(axisDotCenterDiff[0]);
-    auto r1 = box1.GetExtent(0) * absMatrix.GetValue<0, 0>() + box1.GetExtent(1) * absMatrix.GetValue<0, 1>() + box1.GetExtent(2) * absMatrix.GetValue<0, 2>();
+    auto r1 = box1.GetExtent(0) * absMatrix.template GetValue<0, 0>() + box1.GetExtent(1) * absMatrix.template GetValue<0, 1>() + box1.GetExtent(2) * absMatrix.template GetValue<0, 2>();
     auto r01 = box0.GetExtent(0) + r1;
     if (r01 < r)
     {
@@ -108,7 +108,7 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     }
     axisDotCenterDiff[1] = Vector3Tools::DotProduct(box0.GetAxis(1), centerDiff);
     r = Math::FAbs(axisDotCenterDiff[1]);
-    r1 = box1.GetExtent(0) * absMatrix.GetValue<1, 0>() + box1.GetExtent(1) * absMatrix.GetValue<1, 1>() + box1.GetExtent(2) * absMatrix.GetValue<1, 2>();
+    r1 = box1.GetExtent(0) * absMatrix.template GetValue<1, 0>() + box1.GetExtent(1) * absMatrix.template GetValue<1, 1>() + box1.GetExtent(2) * absMatrix.template GetValue<1, 2>();
     r01 = box0.GetExtent(1) + r1;
     if (r01 < r)
     {
@@ -128,7 +128,7 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     }
     axisDotCenterDiff[2] = Vector3Tools::DotProduct(box0.GetAxis(2), centerDiff);
     r = Math::FAbs(axisDotCenterDiff[2]);
-    r1 = box1.GetExtent(0) * absMatrix.GetValue<2, 0>() + box1.GetExtent(1) * absMatrix.GetValue<2, 1>() + box1.GetExtent(2) * absMatrix.GetValue<2, 2>();
+    r1 = box1.GetExtent(0) * absMatrix.template GetValue<2, 0>() + box1.GetExtent(1) * absMatrix.template GetValue<2, 1>() + box1.GetExtent(2) * absMatrix.template GetValue<2, 2>();
     r01 = box0.GetExtent(2) + r1;
     if (r01 < r)
     {
@@ -138,7 +138,7 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
 
     // 轴 C0 + t * B0
     r = Math::FAbs(Vector3Tools::DotProduct(box1.GetAxis(0), centerDiff));
-    auto r0 = box1.GetExtent(0) * absMatrix.GetValue<0, 0>() + box1.GetExtent(1) * absMatrix.GetValue<1, 0>() + box1.GetExtent(2) * absMatrix.GetValue<2, 0>();
+    auto r0 = box1.GetExtent(0) * absMatrix.template GetValue<0, 0>() + box1.GetExtent(1) * absMatrix.template GetValue<1, 0>() + box1.GetExtent(2) * absMatrix.template GetValue<2, 0>();
     r01 = r0 + box1.GetExtent(0);
     if (r01 < r)
     {
@@ -148,7 +148,7 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
 
     // 轴 C0+ t * B1
     r = Math::FAbs(Vector3Tools::DotProduct(box1.GetAxis(1), centerDiff));
-    r0 = box1.GetExtent(0) * absMatrix.GetValue<0, 1>() + box1.GetExtent(1) * absMatrix.GetValue<1, 1>() + box1.GetExtent(2) * absMatrix.GetValue<2, 1>();
+    r0 = box1.GetExtent(0) * absMatrix.template GetValue<0, 1>() + box1.GetExtent(1) * absMatrix.template GetValue<1, 1>() + box1.GetExtent(2) * absMatrix.template GetValue<2, 1>();
     r01 = r0 + box1.GetExtent(1);
     if (r01 < r)
     {
@@ -158,7 +158,7 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
 
     // 轴 C0 + t * B2
     r = Math::FAbs(Vector3Tools::DotProduct(box1.GetAxis(2), centerDiff));
-    r0 = box1.GetExtent(0) * absMatrix.GetValue<0, 2>() + box1.GetExtent(1) * absMatrix.GetValue<1, 2>() + box1.GetExtent(2) * absMatrix.GetValue<2, 2>();
+    r0 = box1.GetExtent(0) * absMatrix.template GetValue<0, 2>() + box1.GetExtent(1) * absMatrix.template GetValue<1, 2>() + box1.GetExtent(2) * absMatrix.template GetValue<2, 2>();
     r01 = r0 + box1.GetExtent(2);
     if (r01 < r)
     {
@@ -174,9 +174,9 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     }
 
     // 轴 C0 + t * A0 x B0
-    r = Math::FAbs(axisDotCenterDiff[2] * matrix.GetValue<1, 0>() - axisDotCenterDiff[1] * matrix.GetValue<2, 0>());
-    r0 = box0.GetExtent(1) * absMatrix.GetValue<2, 0>() + box0.GetExtent(2) * absMatrix.GetValue<1, 0>();
-    r1 = box1.GetExtent(1) * absMatrix.GetValue<0, 2>() + box1.GetExtent(2) * absMatrix.GetValue<0, 1>();
+    r = Math::FAbs(axisDotCenterDiff[2] * matrix.template GetValue<1, 0>() - axisDotCenterDiff[1] * matrix.template GetValue<2, 0>());
+    r0 = box0.GetExtent(1) * absMatrix.template GetValue<2, 0>() + box0.GetExtent(2) * absMatrix.template GetValue<1, 0>();
+    r1 = box1.GetExtent(1) * absMatrix.template GetValue<0, 2>() + box1.GetExtent(2) * absMatrix.template GetValue<0, 1>();
     r01 = r0 + r1;
     if (r01 < r)
     {
@@ -185,9 +185,9 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     }
 
     // 轴 C0 + t * A0 x B1
-    r = Math::FAbs(axisDotCenterDiff[2] * matrix.GetValue<1, 1>() - axisDotCenterDiff[1] * matrix.GetValue<2, 1>());
-    r0 = box0.GetExtent(1) * absMatrix.GetValue<2, 1>() + box0.GetExtent(2) * absMatrix.GetValue<1, 1>();
-    r1 = box1.GetExtent(0) * absMatrix.GetValue<0, 2>() + box1.GetExtent(2) * absMatrix.GetValue<0, 0>();
+    r = Math::FAbs(axisDotCenterDiff[2] * matrix.template GetValue<1, 1>() - axisDotCenterDiff[1] * matrix.template GetValue<2, 1>());
+    r0 = box0.GetExtent(1) * absMatrix.template GetValue<2, 1>() + box0.GetExtent(2) * absMatrix.template GetValue<1, 1>();
+    r1 = box1.GetExtent(0) * absMatrix.template GetValue<0, 2>() + box1.GetExtent(2) * absMatrix.template GetValue<0, 0>();
     r01 = r0 + r1;
     if (r01 < r)
     {
@@ -196,9 +196,9 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     }
 
     // 轴 C0 + t * A0 x B2
-    r = Math::FAbs(axisDotCenterDiff[2] * matrix.GetValue<1, 2>() - axisDotCenterDiff[1] * matrix.GetValue<2, 2>());
-    r0 = box0.GetExtent(1) * absMatrix.GetValue<2, 2>() + box0.GetExtent(2) * absMatrix.GetValue<1, 2>();
-    r1 = box1.GetExtent(0) * absMatrix.GetValue<0, 1>() + box1.GetExtent(1) * absMatrix.GetValue<0, 0>();
+    r = Math::FAbs(axisDotCenterDiff[2] * matrix.template GetValue<1, 2>() - axisDotCenterDiff[1] * matrix.template GetValue<2, 2>());
+    r0 = box0.GetExtent(1) * absMatrix.template GetValue<2, 2>() + box0.GetExtent(2) * absMatrix.template GetValue<1, 2>();
+    r1 = box1.GetExtent(0) * absMatrix.template GetValue<0, 1>() + box1.GetExtent(1) * absMatrix.template GetValue<0, 0>();
     r01 = r0 + r1;
     if (r01 < r)
     {
@@ -207,9 +207,9 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     }
 
     // 轴 C0 + t * A1 x B0
-    r = Math::FAbs(axisDotCenterDiff[0] * matrix.GetValue<2, 0>() - axisDotCenterDiff[2] * matrix.GetValue<0, 0>());
-    r0 = box0.GetExtent(0) * absMatrix.GetValue<2, 0>() + box0.GetExtent(2) * absMatrix.GetValue<0, 0>();
-    r1 = box1.GetExtent(1) * absMatrix.GetValue<1, 2>() + box1.GetExtent(2) * absMatrix.GetValue<1, 1>();
+    r = Math::FAbs(axisDotCenterDiff[0] * matrix.template GetValue<2, 0>() - axisDotCenterDiff[2] * matrix.template GetValue<0, 0>());
+    r0 = box0.GetExtent(0) * absMatrix.template GetValue<2, 0>() + box0.GetExtent(2) * absMatrix.template GetValue<0, 0>();
+    r1 = box1.GetExtent(1) * absMatrix.template GetValue<1, 2>() + box1.GetExtent(2) * absMatrix.template GetValue<1, 1>();
     r01 = r0 + r1;
     if (r01 < r)
     {
@@ -218,9 +218,9 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     }
 
     // 轴 C0 + t * A1 x B1
-    r = Math::FAbs(axisDotCenterDiff[0] * matrix.GetValue<2, 1>() - axisDotCenterDiff[2] * matrix.GetValue<0, 1>());
-    r0 = box0.GetExtent(0) * absMatrix.GetValue<2, 1>() + box0.GetExtent(2) * absMatrix.GetValue<0, 1>();
-    r1 = box1.GetExtent(0) * absMatrix.GetValue<1, 2>() + box1.GetExtent(2) * absMatrix.GetValue<1, 0>();
+    r = Math::FAbs(axisDotCenterDiff[0] * matrix.template GetValue<2, 1>() - axisDotCenterDiff[2] * matrix.template GetValue<0, 1>());
+    r0 = box0.GetExtent(0) * absMatrix.template GetValue<2, 1>() + box0.GetExtent(2) * absMatrix.template GetValue<0, 1>();
+    r1 = box1.GetExtent(0) * absMatrix.template GetValue<1, 2>() + box1.GetExtent(2) * absMatrix.template GetValue<1, 0>();
     r01 = r0 + r1;
     if (r01 < r)
     {
@@ -229,9 +229,9 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     }
 
     // 轴 C0 + t * A1 x B2
-    r = Math::FAbs(axisDotCenterDiff[0] * matrix.GetValue<2, 2>() - axisDotCenterDiff[2] * matrix.GetValue<0, 2>());
-    r0 = box0.GetExtent(0) * absMatrix.GetValue<2, 2>() + box0.GetExtent(2) * absMatrix.GetValue<0, 2>();
-    r1 = box1.GetExtent(0) * absMatrix.GetValue<1, 1>() + box1.GetExtent(1) * absMatrix.GetValue<1, 0>();
+    r = Math::FAbs(axisDotCenterDiff[0] * matrix.template GetValue<2, 2>() - axisDotCenterDiff[2] * matrix.template GetValue<0, 2>());
+    r0 = box0.GetExtent(0) * absMatrix.template GetValue<2, 2>() + box0.GetExtent(2) * absMatrix.template GetValue<0, 2>();
+    r1 = box1.GetExtent(0) * absMatrix.template GetValue<1, 1>() + box1.GetExtent(1) * absMatrix.template GetValue<1, 0>();
     r01 = r0 + r1;
     if (r01 < r)
     {
@@ -240,9 +240,9 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     }
 
     // 轴 C0 + t * A2 x B0
-    r = Math::FAbs(axisDotCenterDiff[1] * matrix.GetValue<0, 0>() - axisDotCenterDiff[0] * matrix.GetValue<1, 0>());
-    r0 = box0.GetExtent(0) * absMatrix.GetValue<1, 0>() + box0.GetExtent(1) * absMatrix.GetValue<0, 0>();
-    r1 = box1.GetExtent(1) * absMatrix.GetValue<2, 2>() + box1.GetExtent(2) * absMatrix.GetValue<2, 1>();
+    r = Math::FAbs(axisDotCenterDiff[1] * matrix.template GetValue<0, 0>() - axisDotCenterDiff[0] * matrix.template GetValue<1, 0>());
+    r0 = box0.GetExtent(0) * absMatrix.template GetValue<1, 0>() + box0.GetExtent(1) * absMatrix.template GetValue<0, 0>();
+    r1 = box1.GetExtent(1) * absMatrix.template GetValue<2, 2>() + box1.GetExtent(2) * absMatrix.template GetValue<2, 1>();
     r01 = r0 + r1;
     if (r01 < r)
     {
@@ -251,9 +251,9 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     }
 
     // 轴 C0 + t * A2 x B1
-    r = Math::FAbs(axisDotCenterDiff[1] * matrix.GetValue<0, 1>() - axisDotCenterDiff[0] * matrix.GetValue<1, 1>());
-    r0 = box0.GetExtent(0) * absMatrix.GetValue<1, 1>() + box0.GetExtent(1) * absMatrix.GetValue<0, 1>();
-    r1 = box1.GetExtent(0) * absMatrix.GetValue<2, 2>() + box1.GetExtent(2) * absMatrix.GetValue<2, 0>();
+    r = Math::FAbs(axisDotCenterDiff[1] * matrix.template GetValue<0, 1>() - axisDotCenterDiff[0] * matrix.template GetValue<1, 1>());
+    r0 = box0.GetExtent(0) * absMatrix.template GetValue<1, 1>() + box0.GetExtent(1) * absMatrix.template GetValue<0, 1>();
+    r1 = box1.GetExtent(0) * absMatrix.template GetValue<2, 2>() + box1.GetExtent(2) * absMatrix.template GetValue<2, 0>();
     r01 = r0 + r1;
     if (r01 < r)
     {
@@ -262,9 +262,9 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     }
 
     // 轴 C0 + t * A2 x B2
-    r = Math::FAbs(axisDotCenterDiff[1] * matrix.GetValue<0, 2>() - axisDotCenterDiff[0] * matrix.GetValue<1, 2>());
-    r0 = box0.GetExtent(0) * absMatrix.GetValue<1, 2>() + box0.GetExtent(1) * absMatrix.GetValue<0, 2>();
-    r1 = box1.GetExtent(0) * absMatrix.GetValue<2, 1>() + box1.GetExtent(1) * absMatrix.GetValue<2, 0>();
+    r = Math::FAbs(axisDotCenterDiff[1] * matrix.template GetValue<0, 2>() - axisDotCenterDiff[0] * matrix.template GetValue<1, 2>());
+    r0 = box0.GetExtent(0) * absMatrix.template GetValue<1, 2>() + box0.GetExtent(1) * absMatrix.template GetValue<0, 2>();
+    r1 = box1.GetExtent(0) * absMatrix.template GetValue<2, 1>() + box1.GetExtent(1) * absMatrix.template GetValue<2, 0>();
     r01 = r0 + r1;
     if (r01 < r)
     {

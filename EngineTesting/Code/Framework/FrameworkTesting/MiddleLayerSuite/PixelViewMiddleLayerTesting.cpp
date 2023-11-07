@@ -150,7 +150,7 @@ void Framework::PixelViewMiddleLayerTesting::SetPixelTest()
     constexpr auto maxSize = 128;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
     const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
@@ -181,8 +181,8 @@ void Framework::PixelViewMiddleLayerTesting::SetThickPixelTest()
     constexpr auto maxThick = 10;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<> thickRandom{ minThick, maxThick };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> thickRandom{ minThick, maxThick };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -226,7 +226,7 @@ void Framework::PixelViewMiddleLayerTesting::DrawLineTest()
     constexpr auto maxSize = 64;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
     const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
@@ -334,7 +334,7 @@ void Framework::PixelViewMiddleLayerTesting::DrawRectangleSolidTest()
     constexpr auto maxSize = 64;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -388,7 +388,7 @@ void Framework::PixelViewMiddleLayerTesting::DrawRectangleHollowTest()
     constexpr auto maxSize = 64;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -445,8 +445,8 @@ void Framework::PixelViewMiddleLayerTesting::DrawCircleSolidTest()
     constexpr auto maxRadius = 25;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<> radiusRandom{ minRadius, maxRadius };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> radiusRandom{ minRadius, maxRadius };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -561,8 +561,8 @@ void Framework::PixelViewMiddleLayerTesting::DrawCircleHollowTest()
     constexpr auto maxRadius = 25;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<> radiusRandom{ minRadius, maxRadius };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> radiusRandom{ minRadius, maxRadius };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -651,8 +651,8 @@ void Framework::PixelViewMiddleLayerTesting::FillThickPixelTest()
     constexpr auto maxThick = 10;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<> thickRandom{ minThick, maxThick };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> thickRandom{ minThick, maxThick };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -687,7 +687,7 @@ void Framework::PixelViewMiddleLayerTesting::FillRectangleSolidTest()
     constexpr auto maxSize = 64;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -732,7 +732,7 @@ void Framework::PixelViewMiddleLayerTesting::FillRectangleHollowTest()
     constexpr auto maxSize = 64;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
@@ -779,8 +779,8 @@ void Framework::PixelViewMiddleLayerTesting::FillCircleSolidTest()
     constexpr auto maxRadius = 25;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<> radiusRandom{ minRadius, maxRadius };
+    std::uniform_int<> sizeRandom{ minSize, maxSize };
+    std::uniform_int<> radiusRandom{ minRadius, maxRadius };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;

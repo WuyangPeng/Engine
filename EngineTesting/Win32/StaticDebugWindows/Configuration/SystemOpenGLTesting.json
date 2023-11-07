@@ -26,8 +26,8 @@
     "OpenGLSetBufferTesting": 1,
     "OpenGLSetBufferSubDataTesting": 1,
     "OpenGLSetCopyBufferSubDataTesting": 1,
-    "OpenGLFramebufferTesting": 1,
-    "OpenGLBindFramebufferTesting": 1,
+    "OpenGLFrameBufferTesting": 1,
+    "OpenGLBindFrameBufferTesting": 1,
     "OpenGLVertexArraysTesting": 1,
     "OpenGLBindVertexBufferTesting": 1,
     "OpenGLDrawBuffersTesting": 1
@@ -43,7 +43,7 @@
     "OpenGLTextures3DTesting": 1,
     "OpenGLTexturesCubeTesting": 1,
     "OpenGLTexturesCubeArrayTesting": 1,
-    "OpenGLFramebufferTextures2DTesting": 1
+    "OpenGLFrameBufferTextures2DTesting": 1
   },
 
   "openGLPolygonSuite": {

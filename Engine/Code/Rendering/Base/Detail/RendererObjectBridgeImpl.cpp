@@ -45,7 +45,7 @@ Rendering::RendererObjectBridgeImpl::RendererObjectSharedPtr Rendering::Renderer
     }
 }
 
-void Rendering::RendererObjectBridgeImpl::UnbindRendererObject(const GraphicsObjectSharedPtr& graphicsObject)
+void Rendering::RendererObjectBridgeImpl::UnbindRendererObject(const GraphicsObjectSharedPtr& graphicsObject) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 

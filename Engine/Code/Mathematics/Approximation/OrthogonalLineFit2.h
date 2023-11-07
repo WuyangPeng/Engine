@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:20)
+///	版本：0.9.1.6 (2023/10/27 14:26)
 
 #ifndef MATHEMATICS_APPROXIMATION_ORTHOGONAL_LINT_FIT2_H
 #define MATHEMATICS_APPROXIMATION_ORTHOGONAL_LINT_FIT2_H
@@ -24,6 +24,7 @@ namespace Mathematics
     {
     public:
         using ClassType = OrthogonalLineFit2<Real>;
+
         using Vector2 = Vector2<Real>;
         using Line2 = Line2<Real>;
         using Math = Math<Real>;

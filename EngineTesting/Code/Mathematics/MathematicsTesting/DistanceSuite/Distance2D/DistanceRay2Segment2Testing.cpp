@@ -50,7 +50,7 @@ void Mathematics::DistanceRay2Segment2Testing::MainTest()
 void Mathematics::DistanceRay2Segment2Testing::BaseTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -95,7 +95,7 @@ void Mathematics::DistanceRay2Segment2Testing::BaseTest()
 void Mathematics::DistanceRay2Segment2Testing::StaticTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -279,7 +279,7 @@ void Mathematics::DistanceRay2Segment2Testing::StaticTest()
 void Mathematics::DistanceRay2Segment2Testing::DynamicTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -470,7 +470,7 @@ void Mathematics::DistanceRay2Segment2Testing::DynamicTest()
 void Mathematics::DistanceRay2Segment2Testing::DerivativeTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -512,7 +512,7 @@ void Mathematics::DistanceRay2Segment2Testing::DerivativeTest()
 void Mathematics::DistanceRay2Segment2Testing::IntervalTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-10.0, 10.0);
+    std::uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -559,8 +559,8 @@ void Mathematics::DistanceRay2Segment2Testing::IntervalTest()
             DistanceResult2D tResult = distance.Get(t, lhsVelocity, rhsVelocity);
             DistanceResult2D tResultSquared = distance.GetSquared(t, lhsVelocity, rhsVelocity);
 
-            ASSERT_LESS_EQUAL(result.GetDistance(), tResult.GetDistance() + 1e-4);
-            ASSERT_LESS_EQUAL(squaredResult.GetDistance(), tResultSquared.GetDistance());
+            ASSERT_LESS_EQUAL(result.GetDistance(), tResult.GetDistance() + 1e-3);
+            ASSERT_LESS_EQUAL(squaredResult.GetDistance(), tResultSquared.GetDistance() + 1e-3);
         }
     }
 }

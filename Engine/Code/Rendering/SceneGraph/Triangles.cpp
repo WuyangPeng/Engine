@@ -31,7 +31,7 @@
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Intersection/Intersection3D/StaticFindIntersectorLine3Triangle3Detail.h"
 #include "Mathematics/Objects3D/Line3Detail.h"
-#include "Mathematics/Objects3D/Triangle3Detail.h" 
+#include "Mathematics/Objects3D/Triangle3Detail.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, Triangles);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Triangles);
@@ -57,9 +57,9 @@ Rendering::TrianglePosition Rendering::Triangles::GetModelTriangle(int index) co
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     const auto triangleIndex = GetTriangle(index);
-    const auto firstIndex = triangleIndex.GetFirstIndex();
-    const auto secondIndex = triangleIndex.GetSecondIndex();
-    const auto thirdIndex = triangleIndex.GetThirdIndex();
+    MAYBE_UNUSED const auto firstIndex = triangleIndex.GetFirstIndex();
+    MAYBE_UNUSED const auto secondIndex = triangleIndex.GetSecondIndex();
+    MAYBE_UNUSED const auto thirdIndex = triangleIndex.GetThirdIndex();
 
     TrianglePosition trianglePosition{ APoint{}, APoint{}, APoint{} };
 
@@ -90,11 +90,11 @@ Rendering::Triangles::Vector3D Rendering::Triangles::GetPosition(int vertexIndex
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto index = GetConstVertexFormat()->GetIndex(VertexFormatFlags::Semantic::Position);
+    const auto index = GetConstVertexFormat()->GetIndex(VertexFormatFlags::Semantic::Position);
     if (0 <= index)
     {
         auto positions = GetConstVertexBuffer()->GetData(GetConstVertexFormat()->GetOffset(index));
-        auto stride = GetConstVertexFormat()->GetStride();
+        const auto stride = GetConstVertexFormat()->GetStride();
         const auto index0 = vertexIndex * stride;
 
         positions += index0;
@@ -117,8 +117,6 @@ void Rendering::Triangles::UpdateModelSpace(VisualUpdateType type)
     {
         return;
     }
-
-  
 }
 
 // private
@@ -189,7 +187,7 @@ void Rendering::Triangles::UpdateModelTangentsUseTextureCoords(MAYBE_UNUSED cons
             // 计算双切线B,另一个切线垂直于T。
             const auto bitangentVector = UnitCross(normalVector, tangentVector);
 
-            const auto currentTriangleIndex = triangleIndex[current];
+            MAYBE_UNUSED const auto currentTriangleIndex = triangleIndex[current];
         }
     }
 }

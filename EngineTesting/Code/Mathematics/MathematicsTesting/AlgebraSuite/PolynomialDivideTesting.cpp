@@ -44,7 +44,7 @@ void Mathematics::PolynomialDivideTesting::MainTest()
 void Mathematics::PolynomialDivideTesting::ConstructionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     std::vector<double> firstDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
                                            randomDistribution(generator), randomDistribution(generator) };

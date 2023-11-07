@@ -110,7 +110,7 @@ void Rendering::VertexFormatImpl::SetAttribute(int attribute, const VertexFormat
 
     if (0 < attribute)
     {
-        const auto previousIndex = attribute - 1;
+        MAYBE_UNUSED const auto previousIndex = attribute - 1;
         RENDERING_ASSERTION_1(elements.at(previousIndex).GetOffset() < vertexFormatElement.GetOffset(), "偏移量必须比属性索引高。\n");
     }
     else

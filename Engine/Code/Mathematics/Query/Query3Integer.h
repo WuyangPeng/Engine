@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:07)
+///	版本：0.9.1.6 (2023/10/27 14:01)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_INTEGER_H
 #define MATHEMATICS_QUERY_QUERY3_INTEGER_H
@@ -22,6 +22,7 @@ namespace Mathematics
     public:
         using ClassType = Query3Integer<Real>;
         using ParentType = Query3<Real>;
+
         using Math = typename ParentType::Math;
         using Vector3 = typename ParentType::Vector3;
         using VerticesType = typename ParentType::VerticesType;

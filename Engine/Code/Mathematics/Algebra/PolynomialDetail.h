@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 17:13)
+///	版本：0.9.1.6 (2023/10/26 10:43)
 
 #ifndef MATHEMATICS_ALGEBRA_POLYNOMIAL_DETAIL_H
 #define MATHEMATICS_ALGEBRA_POLYNOMIAL_DETAIL_H
@@ -137,7 +137,7 @@ Real Mathematics::Polynomial<Real>::GetEnd() const noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Polynomial<Real>::operator()(Real value) const
+Real Mathematics::Polynomial<Real>::operator()(Real value) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

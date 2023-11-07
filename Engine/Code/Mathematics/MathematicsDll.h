@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/30 11:11)
+///	版本：0.9.1.6 (2023/10/25 17:34)
 
 #ifndef MATHEMATICS_DLL_H
 #define MATHEMATICS_DLL_H

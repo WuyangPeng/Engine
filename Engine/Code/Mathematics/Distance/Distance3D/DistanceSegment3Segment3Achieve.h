@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 18:07)
+///	版本：0.9.1.6 (2023/10/27 16:36)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_SEGMENT3_SEGMENT3_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_SEGMENT3_SEGMENT3_ACHIEVE_H
@@ -182,7 +182,6 @@ typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics
     }
 }
 
-// private
 template <typename Real>
 typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics::DistanceSegment3Segment3<Real>::GetSquaredWithClosestPointsIsLhsSide(const DistanceLine3Line3Tool& tool, Real lhsExtent, Real rhsExtent) const
 {
@@ -219,7 +218,6 @@ typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics
     }
 }
 
-// private
 template <typename Real>
 typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics::DistanceSegment3Segment3<Real>::GetSquaredWithClosestPointsIsRhsSide(const DistanceLine3Line3Tool& tool, Real lhsExtent, Real rhsExtent) const
 {
@@ -256,7 +254,6 @@ typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics
     }
 }
 
-// private
 template <typename Real>
 typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics::DistanceSegment3Segment3<Real>::GetSquaredWithClosestPointsIsLhsCorner(const DistanceLine3Line3Tool& tool, Real lhsExtent, Real rhsExtent) const
 {
@@ -288,7 +285,6 @@ typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics
     }
 }
 
-// private
 template <typename Real>
 typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics::DistanceSegment3Segment3<Real>::GetSquaredWithClosestPointsIsRhsCorner(const DistanceLine3Line3Tool& tool, Real lhsExtent, Real rhsExtent) const
 {

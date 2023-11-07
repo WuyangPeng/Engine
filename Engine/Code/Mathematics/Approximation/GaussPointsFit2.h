@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:18)
+///	版本：0.9.1.6 (2023/10/27 14:25)
 
 #ifndef MATHEMATICS_APPROXIMATION_GAUSS_POINTS_FIT2_H
 #define MATHEMATICS_APPROXIMATION_GAUSS_POINTS_FIT2_H
@@ -26,6 +26,7 @@ namespace Mathematics
     {
     public:
         using ClassType = GaussPointsFit2<Real>;
+
         using Vector2 = Vector2<Real>;
         using Box2 = Box2<Real>;
         using Math = Math<Real>;

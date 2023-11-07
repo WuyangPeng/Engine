@@ -49,7 +49,7 @@ void Mathematics::DynamicIntersectorTesting::IntersectionTypeTest()
     using System::operator++;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

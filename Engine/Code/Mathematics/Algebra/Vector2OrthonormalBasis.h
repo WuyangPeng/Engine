@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/01 10:05)
+///	版本：0.9.1.6 (2023/10/26 15:15)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR2_ORTHONORMAL_BASIS_H
 #define MATHEMATICS_ALGEBRA_VECTOR2_ORTHONORMAL_BASIS_H
@@ -26,6 +26,7 @@ namespace Mathematics
     {
     public:
         using ClassType = Vector2OrthonormalBasis<Real>;
+
         using Math = Math<Real>;
         using Vector2 = Vector2<Real>;
         using Vector2Tools = Vector2Tools<Real>;

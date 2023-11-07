@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 17:51)
+///	版本：0.9.1.6 (2023/10/26 14:55)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_CONSTRAINTS_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_CONSTRAINTS_H
@@ -16,8 +16,6 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 
-#include <type_traits>
-
 namespace Mathematics
 {
     // 查找最近的四元数使用约束的角度。
@@ -27,6 +25,7 @@ namespace Mathematics
     {
     public:
         using ClassType = QuaternionConstraints<Real>;
+
         using Quaternion = Quaternion<Real>;
         using Math = Math<Real>;
 

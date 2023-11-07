@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 13:51)
+///	版本：0.9.1.6 (2023/10/26 14:39)
 
 #ifndef MATHEMATICS_ALGEBRA_A_POINT_H
 #define MATHEMATICS_ALGEBRA_A_POINT_H
@@ -17,7 +17,6 @@
 #include "Mathematics/Base/BaseFwd.h"
 #include "Mathematics/Base/MathDetail.h"
 
-#include <type_traits>
 #include <vector>
 
 namespace Mathematics

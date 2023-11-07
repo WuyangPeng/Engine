@@ -23,7 +23,7 @@ T CoreTools::GenerateRandomName::GetName(int length, const T& letters, const T& 
 
     std::random_device randomDevice{};
     std::default_random_engine generator{ randomDevice() };
-    const std::uniform_int_distribution<int> distribution{ 0, boost::numeric_cast<int>(letters.size() - 1) };
+    std::uniform_int_distribution<int> distribution{ 0, boost::numeric_cast<int>(letters.size() - 1) };
 
     T result{};
     for (auto i = 0; i < length; ++i)

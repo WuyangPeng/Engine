@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 15:17)
+///	版本：0.9.1.6 (2023/10/26 16:44)
 
 #ifndef MATHEMATICS_OBJECTS_2D_ARC2_DETAIL_H
 #define MATHEMATICS_OBJECTS_2D_ARC2_DETAIL_H
@@ -30,13 +30,13 @@ bool Mathematics::Approximate(const Arc2<Real>& lhs, const Arc2<Real>& rhs, Real
 template <typename Real>
 std::ostream& Mathematics::operator<<(std::ostream& out, const Arc2<Real>& arc2)
 {
-    out << "center=("
+    out << "center = ("
         << arc2.GetCenter()
-        << "),radius="
+        << "),radius = "
         << arc2.GetRadius()
-        << ",firstEnd=("
+        << ",end0 = ("
         << arc2.GetEnd0()
-        << "),secondEnd=("
+        << "),end1 = ("
         << arc2.GetEnd1()
         << ")";
 

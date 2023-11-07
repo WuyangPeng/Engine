@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:10)
+///	版本：0.9.1.6 (2023/10/27 13:57)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_INTEGER_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY2_INTEGER_DETAIL_H
@@ -59,9 +59,8 @@ Mathematics::LineQueryType Mathematics::Query2Integer<Real>::ToLine(const Vector
     const Integer<2> x1{ boost::numeric_cast<int>(vector1.GetX()) - boost::numeric_cast<int>(vector0.GetX()) };
     const Integer<2> y1{ boost::numeric_cast<int>(vector1.GetY()) - boost::numeric_cast<int>(vector0.GetY()) };
 
-    auto det = QueryDotTools<Integer<2>>::Det2(x0, y0, x1, y1);
-
-    if (Integer<2>{ 0 } < det)
+    if (const auto det = QueryDotTools<Integer<2>>::Det2(x0, y0, x1, y1);
+        Integer<2>{ 0 } < det)
         return LineQueryType::Right;
     else if (det < Integer<2>{ 0 })
         return LineQueryType::Left;
@@ -113,9 +112,8 @@ Mathematics::CircumcircleQueryType Mathematics::Query2Integer<Real>::ToCircumcir
     const auto z1 = mhsPlusTestX * mhsMinusTestX + mhsPlusTestY * mhsMinusTestY;
     const auto z2 = rhsPlusTestX * rhsMinusTestX + rhsPlusTestY * rhsMinusTestY;
 
-    const auto det = QueryDotTools<Integer<4>>::Det3(lhsMinusTestX, lhsMinusTestY, z0, mhsMinusTestX, mhsMinusTestY, z1, rhsMinusTestX, rhsMinusTestY, z2);
-
-    if (Integer<4>{ 0 } < det)
+    if (const auto det = QueryDotTools<Integer<4>>::Det3(lhsMinusTestX, lhsMinusTestY, z0, mhsMinusTestX, mhsMinusTestY, z1, rhsMinusTestX, rhsMinusTestY, z2);
+        Integer<4>{ 0 } < det)
         return CircumcircleQueryType::Inside;
     else if (det < Integer<4>{ 0 })
         return CircumcircleQueryType::Outside;

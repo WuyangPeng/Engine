@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:44)
+///	版本：0.9.1.6 (2023/10/27 15:12)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RESULT_IMPL_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RESULT_IMPL_DETAIL_H
@@ -144,7 +144,7 @@ Real Mathematics::DistanceResultImpl<Real, Vector>::GetRhsParameter() const
 }
 
 template <typename Real, typename Vector>
-bool Mathematics::DistanceResultImpl<Real, Vector>::isHaveContactTime() const noexcept
+bool Mathematics::DistanceResultImpl<Real, Vector>::IsHaveContactTime() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

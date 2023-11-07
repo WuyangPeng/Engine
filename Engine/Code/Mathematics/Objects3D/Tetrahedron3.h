@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 15:47)
+///	版本：0.9.1.6 (2023/10/26 17:48)
 
 #ifndef MATHEMATICS_OBJECTS_3D_TETRAHEDRON3_H
 #define MATHEMATICS_OBJECTS_3D_TETRAHEDRON3_H
@@ -15,7 +15,6 @@
 #include "Plane3.h"
 #include "Mathematics/Algebra/Vector3.h"
 
-#include <type_traits>
 #include <vector>
 
 namespace Mathematics
@@ -27,6 +26,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = Tetrahedron3<Real>;
+
         using Math = Math<Real>;
         using Plane3 = Plane3<Real>;
         using Vector3 = Vector3<Real>;
@@ -54,7 +54,7 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD Vector3 GetVertex(int index) const;
-        void SetVertex(int index, const Vector3& vertex);
+        void SetVertex(int index, const Vector3& aVertex);
 
         // 获取顶点索引在指定的面。
         NODISCARD static IndicesType GetFaceIndices(int face);
@@ -72,7 +72,7 @@ namespace Mathematics
         using ArrayType = std::array<Vector3, vertexSize>;
 
     private:
-        ArrayType vertexs;
+        ArrayType vertex;
     };
 
     using Tetrahedron3F = Tetrahedron3<float>;

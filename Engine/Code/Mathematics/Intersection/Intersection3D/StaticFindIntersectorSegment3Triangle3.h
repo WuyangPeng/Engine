@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:00)
+///	版本：0.9.1.6 (2023/10/28 15:09)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_TRIANGLE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_TRIANGLE3_H
@@ -24,6 +24,7 @@ namespace Mathematics
     public:
         using ClassType = StaticFindIntersectorSegment3Triangle3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
+
         using Vector3 = Vector3<Real>;
         using Segment3 = Segment3<Real>;
         using Triangle3 = Triangle3<Real>;
@@ -35,8 +36,8 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD const Segment3 GetSegment() const noexcept;
-        NODISCARD const Triangle3 GetTriangle() const noexcept;
+        NODISCARD Segment3 GetSegment() const noexcept;
+        NODISCARD Triangle3 GetTriangle() const noexcept;
 
         // 查找交叉点查询。 相交点为 P = origin + t * direction = b0 * V0 + b1 * V1 + b2 * V2
         NODISCARD Real GetSegmentParameter() const noexcept;
@@ -48,7 +49,7 @@ namespace Mathematics
         /// 对于“ bool Find()”查询，您打算使用GetSegmentParameter()或三个GetTriBary?()函数自己计算接触点。
         ///  现在，这些函数还支持“bool Find()”查询。
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD const Vector3 GetPoint(int index) const;
+        NODISCARD Vector3 GetPoint(int index) const;
 
     private:
         void Find();

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:49)
+///	版本：0.9.1.6 (2023/10/27 10:18)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_DETAIL_H
@@ -145,7 +145,6 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real
     }
 }
 
-// private
 template <typename Real, typename UserDataType>
 void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real beginFunction, Real middle, Real middleFunction, Real end, Real endFunction, int level, Minimize1Data& minimize1Data) const
 {

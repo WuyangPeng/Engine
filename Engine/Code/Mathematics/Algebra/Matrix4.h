@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 16:52)
+///	版本：0.9.1.6 (2023/10/26 14:45)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX4_H
 #define MATHEMATICS_ALGEBRA_MATRIX4_H
@@ -18,7 +18,6 @@
 #include "System/Helper/PragmaWarning/Operators.h"
 #include "Mathematics/Base/BaseFwd.h"
 
-#include <type_traits>
 #include <vector>
 
 namespace Mathematics

@@ -5,13 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:15)
+///	版本：0.9.1.6 (2023/10/28 14:31)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR1_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR1_DETAIL_H
 
 #include "DynamicFindIntersector1.h"
-#include "Intersector1Detail.h" 
+#include "Intersector1Detail.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
@@ -27,7 +27,6 @@ Mathematics::DynamicFindIntersector1<Real>::DynamicFindIntersector1(Real u0, Rea
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real>
 void Mathematics::DynamicFindIntersector1<Real>::Find(Real tMax, Real speedU, Real speedV)
 {

@@ -51,7 +51,7 @@ void System::SetSystemConsoleScreenBufferSizeTesting::SetConsoleScreenBufferSize
 
 void System::SetSystemConsoleScreenBufferSizeTesting::DoSetConsoleScreenBufferSizeTest(WindowsHandle attributesConsoleHandle)
 {
-    ConsoleCoord consoleCoord{ 256, 512 };
+    const ConsoleCoord consoleCoord{ 256, 512 };
 
     ASSERT_TRUE(SetSystemConsoleScreenBufferSize(attributesConsoleHandle, consoleCoord));
 

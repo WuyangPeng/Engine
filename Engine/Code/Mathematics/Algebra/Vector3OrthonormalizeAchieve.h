@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/01 10:29)
+///	版本：0.9.1.6 (2023/10/26 11:17)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR3_ORTHONORMALIZE_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_VECTOR3_ORTHONORMALIZE_ACHIEVE_H
@@ -118,7 +118,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Orthonormalize<Real
 
 template <typename Real, bool Robust>
 requires std::is_arithmetic_v<Real>
-const Mathematics::Vector3<Real> Mathematics::Vector3Orthonormalize<Real, Robust>::GetUVector() const noexcept
+Mathematics::Vector3<Real> Mathematics::Vector3Orthonormalize<Real, Robust>::GetUVector() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -127,7 +127,7 @@ const Mathematics::Vector3<Real> Mathematics::Vector3Orthonormalize<Real, Robust
 
 template <typename Real, bool Robust>
 requires std::is_arithmetic_v<Real>
-const Mathematics::Vector3<Real> Mathematics::Vector3Orthonormalize<Real, Robust>::GetVVector() const noexcept
+Mathematics::Vector3<Real> Mathematics::Vector3Orthonormalize<Real, Robust>::GetVVector() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -136,7 +136,7 @@ const Mathematics::Vector3<Real> Mathematics::Vector3Orthonormalize<Real, Robust
 
 template <typename Real, bool Robust>
 requires std::is_arithmetic_v<Real>
-const Mathematics::Vector3<Real> Mathematics::Vector3Orthonormalize<Real, Robust>::GetWVector() const noexcept
+Mathematics::Vector3<Real> Mathematics::Vector3Orthonormalize<Real, Robust>::GetWVector() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

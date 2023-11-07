@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 08:58)
+///	版本：0.9.1.6 (2023/10/28 15:07)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_CYLINDER3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_CYLINDER3_H
@@ -27,6 +27,7 @@ namespace Mathematics
     public:
         using ClassType = StaticFindIntersectorPlane3Cylinder3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
+
         using Vector3 = Vector3<Real>;
         using Plane3 = Plane3<Real>;
         using Cylinder3 = Cylinder3<Real>;

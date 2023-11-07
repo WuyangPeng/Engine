@@ -64,7 +64,8 @@ void System::AndroidLooperTesting::AndroidLooperPollTest()
     ASSERT_ENUM_EQUAL(AndroidLooperPollOnce(0, &outFd, &outEvents, nullptr), AndroidLooperEvent::Input);
 
     const auto result = AndroidLooperPollAll(0, &outFd, &outEvents, nullptr);
-    ASSERT_TRUE(result == AndroidLooperEvent::Input || result == AndroidLooperEvent::Null);
+
+    ASSERT_TRUE(((result & AndroidLooperEvent::Input) == AndroidLooperEvent::Input) || result == AndroidLooperEvent::Null);
 }
 
 void System::AndroidLooperTesting::AndroidLooperWakeTest() noexcept

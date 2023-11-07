@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:29)
+///	版本：0.9.1.6 (2023/10/27 11:14)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_BANDED_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_BANDED_H
@@ -31,7 +31,7 @@ namespace Mathematics
         using RealContainer = std::vector<Real>;
 
     public:
-        explicit SolveBanded(const BandedMatrix& matrix, const RealContainer& inputVector, Real zeroTolerance = Math::GetZeroTolerance());
+        SolveBanded(BandedMatrix matrix, RealContainer inputVector, Real zeroTolerance = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 

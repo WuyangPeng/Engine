@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:41)
+///	版本：0.9.1.6 (2023/10/27 16:43)
 
 #ifndef MATHEMATICS_DISTANCE_H
 #define MATHEMATICS_DISTANCE_H

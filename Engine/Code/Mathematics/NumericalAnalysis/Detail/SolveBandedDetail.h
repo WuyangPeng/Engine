@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:35)
+///	版本：0.9.1.6 (2023/10/27 09:39)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_BANDED_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_BANDED_DETAIL_H
@@ -18,8 +18,8 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::SolveBanded<Real>::SolveBanded(const BandedMatrix& matrix, const RealContainer& inputVector, Real zeroTolerance)
-    : zeroTolerance{ zeroTolerance }, matrix{ matrix }, output{ inputVector }
+Mathematics::SolveBanded<Real>::SolveBanded(BandedMatrix matrix, RealContainer inputVector, Real zeroTolerance)
+    : zeroTolerance{ std::move(zeroTolerance) }, matrix{ std::move(matrix) }, output{ inputVector }
 {
     Solve();
 

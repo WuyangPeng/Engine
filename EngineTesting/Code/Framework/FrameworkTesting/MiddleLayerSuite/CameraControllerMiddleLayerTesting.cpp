@@ -243,7 +243,7 @@ void Framework::CameraControllerMiddleLayerTesting::RotateTrackBallTest()
     ASSERT_TRUE(middleLayer->Resize(System::WindowsDisplay::MaxHide, windowSize));
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> random{ 0, 100 };
+    std::uniform_int<> random{ 0, 100 };
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {

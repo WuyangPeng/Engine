@@ -150,7 +150,6 @@ void Rendering::VisualImpl::DoUpdateModelBound()
     const auto numVertices = visualData.GetVertexBufferNumElements();
     const auto stride = visualData.GetVertexFormatStride();
     const auto data = visualData.GetVertexBufferReadOnlyData();
-    const auto positionOffset = visualData.GetPositionOffset();
 
     modelBound.ComputeFromData(numVertices, stride, data);
 }

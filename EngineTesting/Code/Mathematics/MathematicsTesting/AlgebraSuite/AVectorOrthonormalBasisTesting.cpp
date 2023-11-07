@@ -42,8 +42,8 @@ void Mathematics::AVectorOrthonormalBasisTesting::MainTest()
 void Mathematics::AVectorOrthonormalBasisTesting::OrthonormalBasisTest()
 {
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0{ -10.0, 10.0 };
-    const std::uniform_real<float> randomDistribution1{ -10.0f, 10.0f };
+    std::uniform_real<double> randomDistribution0{ -10.0, 10.0 };
+    std::uniform_real<float> randomDistribution1{ -10.0f, 10.0f };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {

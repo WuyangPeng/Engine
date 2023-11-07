@@ -22,8 +22,8 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Projector);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Projector);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Projector);
 
-Rendering::Projector::Projector(DepthType depthType, bool isPerspective, float epsilon)
-    : ParentType{ isPerspective, epsilon }
+Rendering::Projector::Projector(DepthType depthType, bool isPerspective, MAYBE_UNUSED float epsilon)
+    : ParentType{ isPerspective, depthType == DepthType::ZeroToOne }
 {
     // 覆盖Camera构造函数设定的深度类型。
     SetDepthType(depthType);

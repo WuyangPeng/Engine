@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:33)
+///	版本：0.9.1.6 (2023/10/28 15:01)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_SPHERE3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_SPHERE3_H
@@ -24,6 +24,7 @@ namespace Mathematics
     public:
         using ClassType = DynamicFindIntersectorTriangle3Sphere3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
+
         using Vector3 = Vector3<Real>;
         using Triangle3 = Triangle3<Real>;
         using Sphere3 = Sphere3<Real>;
@@ -33,7 +34,7 @@ namespace Mathematics
     public:
         DynamicFindIntersectorTriangle3Sphere3(const Triangle3& triangle,
                                                const Sphere3& sphere,
-                                               Real tmax,
+                                               Real tMax,
                                                const Vector3& lhsVelocity,
                                                const Vector3& rhsVelocity,
                                                const Real epsilon = Math::GetZeroTolerance());
@@ -61,7 +62,7 @@ namespace Mathematics
 
         NODISCARD bool FindSphereVertexIntersection(const Vector3& vertex, Real tmax, const Vector3& velocity0, const Vector3& velocity1);
 
-   private:
+    private:
         // 要相交的对象。
         Triangle3 triangle;
         Sphere3 sphere;

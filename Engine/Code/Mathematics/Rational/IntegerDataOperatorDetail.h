@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:12)
+///	版本：0.9.1.6 (2023/10/26 19:40)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_DETAIL_H
@@ -20,7 +20,6 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <int N>
 Mathematics::IntegerDataOperator<N>::IntegerDataOperator(IntegerData& master) noexcept
@@ -44,7 +43,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    const auto symbel = master.GetSign();
+    const auto sign = master.GetSign();
 
     auto result = 0u;
     for (auto index = 0; index < intSize; ++index)
@@ -57,7 +56,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
     }
 
     // 测试溢出
-    if (symbel == rhs.GetSign() && master.GetSign() != symbel)
+    if (sign == rhs.GetSign() && master.GetSign() != sign)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("IntegerData加减溢出\n"s));
     }

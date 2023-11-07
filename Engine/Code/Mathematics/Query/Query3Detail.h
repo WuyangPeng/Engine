@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:10)
+///	版本：0.9.1.6 (2023/10/27 13:57)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY3_DETAIL_H
@@ -13,10 +13,9 @@
 #include "Query3.h"
 #include "QueryDotToolsDetail.h"
 #include "QuerySortTools.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-
-#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::Query3<Real>::Query3(const VerticesType& vertices)
@@ -55,7 +54,7 @@ int Mathematics::Query3<Real>::GetNumVertices() const
 }
 
 template <typename Real>
-typename const Mathematics::Query3<Real>::Vector3 Mathematics::Query3<Real>::GetVertice(int index) const
+typename Mathematics::Query3<Real>::Vector3 Mathematics::Query3<Real>::GetVertice(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -75,7 +74,7 @@ Mathematics::PlaneQueryType Mathematics::Query3<Real>::ToPlane(const Vector3& te
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    QuerySortTools querySortTools{ v0, v1, v2 };
+    const QuerySortTools querySortTools{ v0, v1, v2 };
 
     const auto& vector0 = vertices.at(querySortTools.GetValue(0));
     const auto& vector1 = vertices.at(querySortTools.GetValue(1));
@@ -93,8 +92,8 @@ Mathematics::PlaneQueryType Mathematics::Query3<Real>::ToPlane(const Vector3& te
 
     auto det = QueryDotTools<Real>::Det3(x0, y0, z0, x1, y1, z1, x2, y2, z2);
 
-    const auto positive = querySortTools.GetSymbol();
-    if (positive == NumericalValueSymbol::Negative)
+    if (const auto positive = querySortTools.GetSymbol();
+        positive == NumericalValueSymbol::Negative)
     {
         det = -det;
     }
@@ -172,7 +171,7 @@ Mathematics::CircumsphereQueryType Mathematics::Query3<Real>::ToCircumsphere(con
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    QuerySortTools querySortTools{ v0, v1, v2, v3 };
+    const QuerySortTools querySortTools{ v0, v1, v2, v3 };
 
     const auto& vec0 = vertices.at(querySortTools.GetValue(0));
     const auto& vec1 = vertices.at(querySortTools.GetValue(1));
@@ -209,8 +208,9 @@ Mathematics::CircumsphereQueryType Mathematics::Query3<Real>::ToCircumsphere(con
     const auto w3 = s3x * d3x + s3y * d3y + s3z * d3z;
 
     auto det = QueryDotTools<Real>::Det4(d0x, d0y, d0z, w0, d1x, d1y, d1z, w1, d2x, d2y, d2z, w2, d3x, d3y, d3z, w3);
-    const auto positive = querySortTools.GetSymbol();
-    if (positive == NumericalValueSymbol::Negative)
+
+    if (const auto positive = querySortTools.GetSymbol();
+        positive == NumericalValueSymbol::Negative)
     {
         det = -det;
     }

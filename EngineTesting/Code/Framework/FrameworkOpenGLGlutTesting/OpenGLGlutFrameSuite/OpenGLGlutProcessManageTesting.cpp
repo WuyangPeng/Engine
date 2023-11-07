@@ -89,7 +89,7 @@ void Framework::OpenGLGlutProcessManagerTesting::SetMillisecondSucceedTest()
 
 void Framework::OpenGLGlutProcessManagerTesting::RenderSceneCallbackSucceedTest()
 {
-    const auto renderSceneCallback = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetRenderSceneCallback();
+    const auto renderSceneCallback = OpenGLGlutProcessManager::GetRenderSceneCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(renderSceneCallback);
 
@@ -101,7 +101,7 @@ void Framework::OpenGLGlutProcessManagerTesting::RenderSceneCallbackSucceedTest(
 
 void Framework::OpenGLGlutProcessManagerTesting::ChangeSizeCallbackSucceedTest()
 {
-    const auto changeSizeCallback = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetChangeSizeCallback();
+    const auto changeSizeCallback = OpenGLGlutProcessManager::GetChangeSizeCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(changeSizeCallback);
 
@@ -113,7 +113,7 @@ void Framework::OpenGLGlutProcessManagerTesting::ChangeSizeCallbackSucceedTest()
 
 void Framework::OpenGLGlutProcessManagerTesting::TimerFunctionCallbackSucceedTest()
 {
-    const auto timerFunctionCallback = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetTimerFunctionCallback();
+    const auto timerFunctionCallback = OpenGLGlutProcessManager::GetTimerFunctionCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(timerFunctionCallback);
 
@@ -125,7 +125,7 @@ void Framework::OpenGLGlutProcessManagerTesting::TimerFunctionCallbackSucceedTes
 
 void Framework::OpenGLGlutProcessManagerTesting::SpecialKeysDownCallbackSucceedTest()
 {
-    const auto specialKeysDownCallback = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetSpecialKeysDownCallback();
+    const auto specialKeysDownCallback = OpenGLGlutProcessManager::GetSpecialKeysDownCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(specialKeysDownCallback);
 
@@ -137,7 +137,7 @@ void Framework::OpenGLGlutProcessManagerTesting::SpecialKeysDownCallbackSucceedT
 
 void Framework::OpenGLGlutProcessManagerTesting::KeyboardDownCallbackSucceedTest()
 {
-    const auto keyboardDownCallback = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetKeyboardDownCallback();
+    const auto keyboardDownCallback = OpenGLGlutProcessManager::GetKeyboardDownCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(keyboardDownCallback);
 
@@ -149,7 +149,7 @@ void Framework::OpenGLGlutProcessManagerTesting::KeyboardDownCallbackSucceedTest
 
 void Framework::OpenGLGlutProcessManagerTesting::SpecialKeysUpCallbackSucceedTest()
 {
-    const auto specialKeysUpCallback = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetSpecialKeysUpCallback();
+    const auto specialKeysUpCallback = OpenGLGlutProcessManager::GetSpecialKeysUpCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(specialKeysUpCallback);
 
@@ -161,7 +161,7 @@ void Framework::OpenGLGlutProcessManagerTesting::SpecialKeysUpCallbackSucceedTes
 
 void Framework::OpenGLGlutProcessManagerTesting::KeyboardUpCallbackSucceedTest()
 {
-    const auto keyboardUpCallback = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetKeyboardUpCallback();
+    const auto keyboardUpCallback = OpenGLGlutProcessManager::GetKeyboardUpCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(keyboardUpCallback);
 
@@ -173,7 +173,7 @@ void Framework::OpenGLGlutProcessManagerTesting::KeyboardUpCallbackSucceedTest()
 
 void Framework::OpenGLGlutProcessManagerTesting::MouseFunctionCallbackSucceedTest()
 {
-    const auto mouseFunctionCallback = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMouseFunctionCallback();
+    const auto mouseFunctionCallback = OpenGLGlutProcessManager::GetMouseFunctionCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(mouseFunctionCallback);
 
@@ -185,7 +185,7 @@ void Framework::OpenGLGlutProcessManagerTesting::MouseFunctionCallbackSucceedTes
 
 void Framework::OpenGLGlutProcessManagerTesting::MotionFunctionCallbackSucceedTest()
 {
-    const auto motionFunctionCallback = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMotionFunctionCallback();
+    const auto motionFunctionCallback = OpenGLGlutProcessManager::GetMotionFunctionCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(motionFunctionCallback);
 
@@ -197,7 +197,7 @@ void Framework::OpenGLGlutProcessManagerTesting::MotionFunctionCallbackSucceedTe
 
 void Framework::OpenGLGlutProcessManagerTesting::IdleFunctionCallbackSucceedTest()
 {
-    const auto idleFunctionCallback = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetIdleFunctionCallback();
+    const auto idleFunctionCallback = OpenGLGlutProcessManager::GetIdleFunctionCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(idleFunctionCallback);
 
@@ -209,7 +209,7 @@ void Framework::OpenGLGlutProcessManagerTesting::IdleFunctionCallbackSucceedTest
 
 void Framework::OpenGLGlutProcessManagerTesting::ProcessMenuCallbackSucceedTest()
 {
-    const auto processMenuCallback = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetProcessMenuCallback();
+    const auto processMenuCallback = OpenGLGlutProcessManager::GetProcessMenuCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(processMenuCallback);
 
@@ -221,7 +221,7 @@ void Framework::OpenGLGlutProcessManagerTesting::ProcessMenuCallbackSucceedTest(
 
 void Framework::OpenGLGlutProcessManagerTesting::TerminateCallbackSucceedTest()
 {
-    const auto terminateCallback = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetTerminateCallback();
+    const auto terminateCallback = OpenGLGlutProcessManager::GetTerminateCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(terminateCallback);
 }

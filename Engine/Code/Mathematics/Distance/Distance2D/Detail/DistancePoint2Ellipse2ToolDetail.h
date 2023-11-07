@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:46)
+///	版本：0.9.1.6 (2023/10/27 15:15)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT2_ELLIPSE2_TOOL_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT2_ELLIPSE2_TOOL_DETAIL_H
@@ -23,7 +23,6 @@ Mathematics::DistancePoint2Ellipse2Tool<Real>::DistancePoint2Ellipse2Tool(Real e
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real>
 void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistance()
 {
@@ -80,7 +79,6 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistance()
     }
 }
 
-// private
 template <typename Real>
 void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistanceSpecial(const Vector2& localExtent, const Vector2& queryPoint)
 {
@@ -105,13 +103,13 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistanceSpecia
 
                 const Vector2 r{ extentMultiplyQueryPoint[0] / (middleT + extentSquared[0]),
                                  extentMultiplyQueryPoint[1] / (middleT + extentSquared[1]) };
-                auto lenghtSquaredMinusOne = Vector2Tools<Real>::GetLengthSquared(r) - Math::GetValue(1);
+                auto lengthSquaredMinusOne = Vector2Tools<Real>::GetLengthSquared(r) - Math::GetValue(1);
 
-                if (Math::GetValue(0) < lenghtSquaredMinusOne)
+                if (Math::GetValue(0) < lengthSquaredMinusOne)
                 {
                     beginT = middleT;
                 }
-                else if (lenghtSquaredMinusOne < Math::GetValue(0))
+                else if (lengthSquaredMinusOne < Math::GetValue(0))
                 {
                     endT = middleT;
                 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:18)
+///	版本：0.9.1.6 (2023/10/27 14:25)
 
 #ifndef MATHEMATICS_APPROXIMATION_ELLIPSE_BY_ARCS2_H
 #define MATHEMATICS_APPROXIMATION_ELLIPSE_BY_ARCS2_H
@@ -34,6 +34,7 @@ namespace Mathematics
         using ClassType = EllipseByArcs2<Real>;
 
         using Vector2 = Vector2<Real>;
+
         using Math = Math<Real>;
         using Arc2 = Arc2<Real>;
         using Circle2 = Circle2<Real>;

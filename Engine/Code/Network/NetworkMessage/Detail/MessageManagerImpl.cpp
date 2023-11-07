@@ -87,7 +87,7 @@ void Network::MessageManagerImpl::Remove(int64_t messageId, const MessageTypeCon
     }
 }
 
-void Network::MessageManagerImpl::Remove(int64_t messageId)
+void Network::MessageManagerImpl::Remove(int64_t messageId) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 

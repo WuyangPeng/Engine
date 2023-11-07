@@ -42,7 +42,7 @@ void Framework::VirtualKeysTypesTesting::WindowKeysTest()
     constexpr auto maxValue = 1;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> random{ minValue, maxValue };
+    std::uniform_int<> random{ minValue, maxValue };
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
@@ -99,7 +99,7 @@ void Framework::VirtualKeysTypesTesting::SetModifiersTest()
     constexpr auto maxValue = 5;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> random{ minValue, maxValue };
+    std::uniform_int<> random{ minValue, maxValue };
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {

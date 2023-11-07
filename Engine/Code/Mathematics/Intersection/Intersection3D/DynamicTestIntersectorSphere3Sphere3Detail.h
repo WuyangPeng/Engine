@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:23)
+///	版本：0.9.1.6 (2023/10/27 18:17)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_SPHERE3_SPHERE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_SPHERE3_SPHERE3_DETAIL_H
@@ -14,8 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicTestIntersectorSphere3Sphere3<Real>::DynamicTestIntersectorSphere3Sphere3(const Sphere3& sphere0, const Sphere3& sphere1, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
-    : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, sphere0{ sphere0 }, sphere1{ sphere1 }
+Mathematics::DynamicTestIntersectorSphere3Sphere3<Real>::DynamicTestIntersectorSphere3Sphere3(const Sphere3& sphere0, const Sphere3& sphere1, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+    : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, sphere0{ sphere0 }, sphere1{ sphere1 }
 {
     Test();
 
@@ -58,8 +58,8 @@ void Mathematics::DynamicTestIntersectorSphere3Sphere3<Real>::Test()
     auto relVelocitySquared = Vector3Tools::GetLengthSquared(relVelocity);
     auto diff = sphere1.GetCenter() - sphere0.GetCenter();
     auto diffSquared = Vector3Tools::GetLengthSquared(diff);
-    auto radiuSum = sphere0.GetRadius() + sphere1.GetRadius();
-    auto radiuSumSqr = radiuSum * radiuSum;
+    auto radiusSum = sphere0.GetRadius() + sphere1.GetRadius();
+    auto radiusSumSqr = radiusSum * radiusSum;
 
     auto result = false;
     if (Math::GetValue(0) < relVelocitySquared)
@@ -69,16 +69,16 @@ void Mathematics::DynamicTestIntersectorSphere3Sphere3<Real>::Test()
         {
             if (-this->GetTMax() * relVelocitySquared <= dot)
             {
-                result = relVelocitySquared * diffSquared - dot * dot <= relVelocitySquared * radiuSumSqr;
+                result = relVelocitySquared * diffSquared - dot * dot <= relVelocitySquared * radiusSumSqr;
             }
             else
             {
-                result = this->GetTMax() * (this->GetTMax() * relVelocitySquared + (Math::GetValue(2)) * dot) + diffSquared <= radiuSumSqr;
+                result = this->GetTMax() * (this->GetTMax() * relVelocitySquared + (Math::GetValue(2)) * dot) + diffSquared <= radiusSumSqr;
             }
         }
     }
 
-    result = (diffSquared <= radiuSumSqr);
+    result = (diffSquared <= radiusSumSqr);
     if (result)
     {
         this->SetIntersectionType(IntersectionType::Other);

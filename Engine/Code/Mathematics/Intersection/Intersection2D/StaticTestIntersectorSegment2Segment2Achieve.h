@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:30)
+///	版本：0.9.1.6 (2023/10/27 17:58)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT2_SEGMENT2_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT2_SEGMENT2_ACHIEVE_H
@@ -21,14 +21,13 @@
 
 template <typename Real>
 Mathematics::StaticTestIntersectorSegment2Segment2<Real>::StaticTestIntersectorSegment2Segment2(const Segment2& lhsSegment, const Segment2& rhsSegment, const Real dotThreshold, const Real intervalThreshold)
-    : ParentType{ dotThreshold }, lhsSegment{ lhsSegment }, rhsSegment{ rhsSegment }, quantity{ 0 }, m_IntervalThreshold{ intervalThreshold }
+    : ParentType{ dotThreshold }, lhsSegment{ lhsSegment }, rhsSegment{ rhsSegment }, quantity{ 0 }, intervalThreshold{ intervalThreshold }
 {
     Test();
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real>
 void Mathematics::StaticTestIntersectorSegment2Segment2<Real>::Test()
 {
@@ -40,8 +39,8 @@ void Mathematics::StaticTestIntersectorSegment2Segment2<Real>::Test()
     if (intersectionType == IntersectionType::Point)
     {
         // 测试直线-直线的相交点是否在线段上。
-        if (Math::FAbs(classify.GetParameter0()) <= lhsSegment.GetExtent() + m_IntervalThreshold &&
-            Math::FAbs(classify.GetParameter1()) <= rhsSegment.GetExtent() + m_IntervalThreshold)
+        if (Math::FAbs(classify.GetParameter0()) <= lhsSegment.GetExtent() + intervalThreshold &&
+            Math::FAbs(classify.GetParameter1()) <= rhsSegment.GetExtent() + intervalThreshold)
         {
             quantity = 1;
         }
@@ -126,7 +125,7 @@ Real Mathematics::StaticTestIntersectorSegment2Segment2<Real>::GetIntervalThresh
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_IntervalThreshold;
+    return intervalThreshold;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT2_SEGMENT2_ACHIEVE_H

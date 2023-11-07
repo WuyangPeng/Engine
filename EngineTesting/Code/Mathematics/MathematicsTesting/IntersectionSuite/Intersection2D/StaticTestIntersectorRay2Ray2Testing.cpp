@@ -43,7 +43,7 @@ void Mathematics::StaticTestIntersectorRay2Ray2Testing::MainTest()
 void Mathematics::StaticTestIntersectorRay2Ray2Testing::RayTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
+    std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

@@ -122,7 +122,7 @@ void CoreTools::SimpleCSV::Workbook::DeleteSheet(const std::string& sheetName)
 
     const auto sheetsNode = node.children();
 
-    constexpr auto countFunction = [&](const auto& item) {
+    const auto countFunction = [&](const auto& item) {
         return parentDocument->ExecuteQuery(QuerySheetType{ item.attribute(TextParsing::gRId.data()).value() }).GetSheetType() == ContentType::Worksheet;
     };
 

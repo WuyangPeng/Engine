@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 16:50)
+///	版本：0.9.1.6 (2023/10/26 10:35)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX3_EIGEN_DECOMPOSITION_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_MATRIX3_EIGEN_DECOMPOSITION_ACHIEVE_H
@@ -14,7 +14,6 @@
 #include "Matrix3EigenDecomposition.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
@@ -30,12 +29,12 @@ Mathematics::Matrix3EigenDecomposition<Real>::Matrix3EigenDecomposition(const Ma
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::Matrix3EigenDecomposition<Real>::IsValid() const noexcept
 {
-    if (Math::FAbs(diagonal.GetValue<0, 1>()) <= epsilon &&
-        Math::FAbs(diagonal.GetValue<0, 2>()) <= epsilon &&
-        Math::FAbs(diagonal.GetValue<1, 0>()) <= epsilon &&
-        Math::FAbs(diagonal.GetValue<1, 2>()) <= epsilon &&
-        Math::FAbs(diagonal.GetValue<2, 0>()) <= epsilon &&
-        Math::FAbs(diagonal.GetValue<2, 1>()) <= epsilon)
+    if (Math::FAbs(diagonal.template GetValue<0, 1>()) <= epsilon &&
+        Math::FAbs(diagonal.template GetValue<0, 2>()) <= epsilon &&
+        Math::FAbs(diagonal.template GetValue<1, 0>()) <= epsilon &&
+        Math::FAbs(diagonal.template GetValue<1, 2>()) <= epsilon &&
+        Math::FAbs(diagonal.template GetValue<2, 0>()) <= epsilon &&
+        Math::FAbs(diagonal.template GetValue<2, 1>()) <= epsilon)
     {
         return true;
     }

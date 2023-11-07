@@ -39,7 +39,7 @@ namespace Rendering
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD RendererDrawTargetSharedPtr BindDrawTarget(RendererTypes rendererTypes, const ConstDrawTargetSharedPtr& drawTarget, const RendererObjectContainer& renderTargetTextures, const RendererObjectSharedPtr& depthStencilTexture);
-        void UnbindDrawTarget(const ConstDrawTargetSharedPtr& drawTarget);
+        void UnbindDrawTarget(const ConstDrawTargetSharedPtr& drawTarget) noexcept;
         NODISCARD RendererDrawTargetSharedPtr GetDrawTarget(const ConstDrawTargetSharedPtr& drawTarget);
         NODISCARD ConstRendererDrawTargetSharedPtr GetDrawTarget(const ConstDrawTargetSharedPtr& drawTarget) const;
         NODISCARD bool HasDrawTarget(const ConstDrawTargetSharedPtr& drawTarget) const;

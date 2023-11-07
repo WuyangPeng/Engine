@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:35)
+///	版本：0.9.1.6 (2023/10/27 09:41)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_SYMMETRIC_CONJUGATE_GRADIENT_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_SYMMETRIC_CONJUGATE_GRADIENT_DETAIL_H
@@ -85,7 +85,7 @@ void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::RemainingIterat
         dot1 = Dot(inputAmend1, inputAmend1);
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("循环超出次数！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("循环超出次数！"s))
 }
 
 template <typename Real, template <typename> class Matrix>

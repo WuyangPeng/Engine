@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 15:23)
+///	版本：0.9.1.6 (2023/10/26 14:43)
 
 /// 所谓的带状矩阵即：在矩阵A中，
 /// 所有的非零元素都集中在以主对角线为中心的带状区域中。
@@ -25,8 +25,6 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 
-#include <memory>
-#include <type_traits>
 #include <vector>
 
 namespace Mathematics
@@ -37,6 +35,7 @@ namespace Mathematics
     {
     public:
         using ClassType = BandedMatrix<Real>;
+
         using Math = Math<Real>;
         using VariableMatrix = VariableMatrix<Real>;
         using ContainerType = std::vector<Real>;
@@ -68,7 +67,7 @@ namespace Mathematics
         void SetLowerBandZero();
 
         // 上三角
-        // GetUupperBand(index):  0 <= index < UpperBandMax
+        // GetUpperBand(index):  0 <= index < UpperBandMax
         NODISCARD int GetUpperBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD ContainerType GetUpperBand(int index) const;
         void SetUpperBand(int index, const ContainerType& upperBand);

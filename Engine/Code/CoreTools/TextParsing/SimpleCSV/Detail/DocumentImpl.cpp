@@ -608,7 +608,7 @@ void CoreTools::SimpleCSV::DocumentImpl::SetAppVersionProperty(const std::string
 {
     try
     {
-        std::stof(value);
+        MAYBE_UNUSED const auto result = std::stof(value);
     }
     catch (...)
     {

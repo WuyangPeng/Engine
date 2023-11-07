@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 17:46)
+///	版本：0.9.1.6 (2023/10/26 10:50)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_ACHIEVE_H
@@ -41,7 +41,7 @@ void Mathematics::Quaternion<Real>::FromRotationMatrix(const Matrix3& matrix)
     MATHEMATICS_CLASS_IS_VALID_9;
 
     // 算法在Ken Shoemake的文章，在1987年SIGGRAPH课程文章“四元微积分和快速动画”。
-    const auto trace = matrix.GetValue<0, 0>() + matrix.GetValue<1, 1>() + matrix.GetValue<2, 2>();
+    const auto trace = matrix.template GetValue<0, 0>() + matrix.template GetValue<1, 1>() + matrix.template GetValue<2, 2>();
 
     if (Math::GetValue(0) < trace)
     {
@@ -50,9 +50,9 @@ void Mathematics::Quaternion<Real>::FromRotationMatrix(const Matrix3& matrix)
 
         w = Math::GetRational(1, 2) * root;
         root = Math::GetRational(1, 2) / root;  // 1 / (4w)
-        x = (matrix.GetValue<2, 1>() - matrix.GetValue<1, 2>()) * root;
-        y = (matrix.GetValue<0, 2>() - matrix.GetValue<2, 0>()) * root;
-        z = (matrix.GetValue<1, 0>() - matrix.GetValue<0, 1>()) * root;
+        x = (matrix.template GetValue<2, 1>() - matrix.template GetValue<1, 2>()) * root;
+        y = (matrix.template GetValue<0, 2>() - matrix.template GetValue<2, 0>()) * root;
+        z = (matrix.template GetValue<1, 0>() - matrix.template GetValue<0, 1>()) * root;
     }
     else
     {
@@ -60,17 +60,17 @@ void Mathematics::Quaternion<Real>::FromRotationMatrix(const Matrix3& matrix)
 
         // |w| <= 1 / 2
         auto index0 = 0;
-        auto maxValue = matrix.GetValue<0, 0>();
-        if (maxValue < matrix.GetValue<1, 1>())
+        auto maxValue = matrix.template GetValue<0, 0>();
+        if (maxValue < matrix.template GetValue<1, 1>())
         {
             index0 = 1;
-            maxValue = matrix.GetValue<1, 1>();
+            maxValue = matrix.template GetValue<1, 1>();
         }
 
-        if (maxValue < matrix.GetValue<2, 2>())
+        if (maxValue < matrix.template GetValue<2, 2>())
         {
             index0 = 2;
-            maxValue = matrix.GetValue<2, 2>();
+            maxValue = matrix.template GetValue<2, 2>();
         }
 
         const auto index1 = (index0 + 1) % indexSize;
@@ -951,7 +951,6 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosest(Quaterni
 
     const auto axisIndex = System::EnumCastUnderlying(axis);
 
-    // 适当的非零分量将在后面进行设置。
     Quaternion quaternion{};
     const auto p0 = w;
     const auto p1 = (*this)[axisIndex];

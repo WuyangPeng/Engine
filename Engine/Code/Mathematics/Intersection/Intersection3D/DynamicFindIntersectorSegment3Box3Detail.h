@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:18)
+///	版本：0.9.1.6 (2023/10/27 18:13)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SEGMENT3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SEGMENT3_BOX3_DETAIL_H
@@ -18,8 +18,8 @@
 #include "Mathematics/Intersection/Intersection3D/IntersectorConfigurationDetail.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorSegment3Box3<Real>::DynamicFindIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
-    : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, segment{ segment }, box{ box }, solid{ solid }, quantity{}, point0{}, point1{}
+Mathematics::DynamicFindIntersectorSegment3Box3<Real>::DynamicFindIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+    : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, segment{ segment }, box{ box }, solid{ solid }, quantity{}, point0{}, point1{}
 {
     Find();
 
@@ -65,7 +65,7 @@ void Mathematics::DynamicFindIntersectorSegment3Box3<Real>::Find()
     using SegmentType = std::array<Vector3, 2>;
 
     // 获取线段的端点。
-    SegmentType segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
+    const SegmentType segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
 
     // 获取相对于线段的框速度。
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();

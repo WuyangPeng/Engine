@@ -39,7 +39,7 @@ namespace Network
         void Insert(int64_t messageId, const MessageTypeCondition& messageTypeCondition, FactoryFunction function);
         void Insert(const std::string& messageDescribe, const MessageTypeCondition& messageTypeCondition, FactoryFunction function);
         void Remove(int64_t messageId, const MessageTypeCondition& messageTypeCondition);
-        void Remove(int64_t messageId);
+        void Remove(int64_t messageId) noexcept;
 
         void SetFullVersion(int aFullVersion) noexcept;
         NODISCARD int GetFullVersion() const noexcept;

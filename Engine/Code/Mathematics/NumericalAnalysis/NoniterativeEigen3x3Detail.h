@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:50)
+///	版本：0.9.1.6 (2023/10/27 10:20)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_NONITERATIVE_EIGEN3X3_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_NONITERATIVE_EIGEN3X3_DETAIL_H
@@ -24,16 +24,15 @@ Mathematics::NoniterativeEigen3x3<Real>::NoniterativeEigen3x3(const Matrix3& mat
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 template <typename Real>
 Real Mathematics::NoniterativeEigen3x3<Real>::GetMaxValue(const Matrix3& matrix) const
 {
-    Container maxValue{ Math::FAbs(matrix.GetValue<0, 0>()),
-                        Math::FAbs(matrix.GetValue<0, 1>()),
-                        Math::FAbs(matrix.GetValue<0, 2>()),
-                        Math::FAbs(matrix.GetValue<1, 1>()),
-                        Math::FAbs(matrix.GetValue<1, 2>()),
-                        Math::FAbs(matrix.GetValue<2, 2>()) };
+    Container maxValue{ Math::FAbs(matrix.template GetValue<0, 0>()),
+                        Math::FAbs(matrix.template GetValue<0, 1>()),
+                        Math::FAbs(matrix.template GetValue<0, 2>()),
+                        Math::FAbs(matrix.template GetValue<1, 1>()),
+                        Math::FAbs(matrix.template GetValue<1, 2>()),
+                        Math::FAbs(matrix.template GetValue<2, 2>()) };
 
     const auto iter = max_element(maxValue.begin(), maxValue.end());
     if (iter != maxValue.end())
@@ -46,7 +45,6 @@ Real Mathematics::NoniterativeEigen3x3<Real>::GetMaxValue(const Matrix3& matrix)
     }
 }
 
-// private
 template <typename Real>
 void Mathematics::NoniterativeEigen3x3<Real>::Compute(const Matrix3& matrix)
 {
@@ -125,7 +123,6 @@ void Mathematics::NoniterativeEigen3x3<Real>::RescaleBack(Real maxValue) noexcep
     }
 }
 
-// private
 template <typename Real>
 void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3& matrix)
 {
@@ -184,6 +181,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3& matrix
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
+
     // 排序按升序排列。
     if (root0 <= root1)
     {
@@ -213,6 +211,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3& matrix
             eigenvalue[0] = root2;
         }
     }
+
 #include SYSTEM_WARNING_POP
 }
 

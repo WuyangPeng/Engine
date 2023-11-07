@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:24)
+///	版本：0.9.1.6 (2023/10/27 14:52)
 
 #ifndef MATHEMATICS_APPROXIMATION_QUADRATIC_CIRCLE_FIT3_H
 #define MATHEMATICS_APPROXIMATION_QUADRATIC_CIRCLE_FIT3_H
@@ -30,6 +30,7 @@ namespace Mathematics
     {
     public:
         using ClassType = QuadraticSphereFit3<Real>;
+
         using Vector3 = Vector3<Real>;
         using Points = std::vector<Vector3>;
         using Math = Math<Real>;

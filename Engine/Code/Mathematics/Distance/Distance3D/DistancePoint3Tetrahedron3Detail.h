@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 18:06)
+///	版本：0.9.1.6 (2023/10/27 16:34)
 
 #ifndef MATHEMATICS_DISTANCE_DIST_POINT3_TETRAHEDRON3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DIST_POINT3_TETRAHEDRON3_DETAIL_H
@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Distance/DistanceBaseDetail.h"
-#include "Mathematics/Objects3D/Plane3.h"
+#include "Mathematics/Objects3D/Plane3Detail.h"
 
 template <typename Real>
 Mathematics::DistancePoint3Tetrahedron3<Real>::DistancePoint3Tetrahedron3(const Vector3& point, const Tetrahedron3& tetrahedron) noexcept

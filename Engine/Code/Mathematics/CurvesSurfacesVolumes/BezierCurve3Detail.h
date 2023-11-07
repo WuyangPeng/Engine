@@ -26,7 +26,7 @@ Mathematics::BezierCurve3<Real>::BezierCurve3(int degree, const std::vector<Vect
       der1CtrlPoint{},
       der2CtrlPoint{},
       der3CtrlPoint{},
-      choose{ numCtrlPoints, std::vector<Real>(numCtrlPoints) }
+      choose(numCtrlPoints, std::vector<Real>(numCtrlPoints))
 {
     MATHEMATICS_ASSERTION_0(degree >= 2, "维度必须是3或更大。\n");
 

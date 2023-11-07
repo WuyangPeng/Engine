@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/14 22:21)
+///	版本：0.9.1.6 (2023/10/26 11:03)
 
 #ifndef MATHEMATICS_SPHERE_COORDINATES_DETAIL_H
 #define MATHEMATICS_SPHERE_COORDINATES_DETAIL_H

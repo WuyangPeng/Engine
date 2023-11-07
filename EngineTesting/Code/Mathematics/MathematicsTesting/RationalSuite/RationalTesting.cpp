@@ -48,9 +48,9 @@ void Mathematics::RationalTesting::MainTest()
 void Mathematics::RationalTesting::ConstructionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
-    const std::uniform_real<float> randomDistribution1(-1.0e38f, 1.0e38f);
-    const std::uniform_real<double> thirdRandomDistribution(-1.0e300, 1.0e300);
+    std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
+    std::uniform_real<float> randomDistribution1(-1.0e38f, 1.0e38f);
+    std::uniform_real<double> thirdRandomDistribution(-1.0e300, 1.0e300);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -127,7 +127,7 @@ void Mathematics::RationalTesting::ConstructionTest()
 void Mathematics::RationalTesting::AccessTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
+    std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -176,7 +176,7 @@ void Mathematics::RationalTesting::AccessTest()
 void Mathematics::RationalTesting::OperatorTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
+    std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -286,7 +286,7 @@ void Mathematics::RationalTesting::OperatorTest()
 void Mathematics::RationalTesting::CompareTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
+    std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -338,7 +338,7 @@ void Mathematics::RationalTesting::CompareTest()
 void Mathematics::RationalTesting::EliminatePowersOfTwoTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
+    std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
     const std::uniform_real<float> randomDistribution1(-1.0e38f, 1.0e38f);
     const std::uniform_real<double> thirdRandomDistribution(-1.0e300, 1.0e300);
 

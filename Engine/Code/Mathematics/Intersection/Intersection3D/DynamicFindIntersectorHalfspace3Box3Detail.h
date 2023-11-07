@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:17)
+///	版本：0.9.1.6 (2023/10/27 18:04)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_BOX3_DETAIL_H
@@ -17,8 +17,8 @@
 #include "Mathematics/Intersection/Intersection3D/IntersectorUtility3Detail.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::DynamicFindIntersectorHalfspace3Box3(const Plane3& halfspace, const Box3& box, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
-    : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, halfspace{ halfspace }, box{ box }, point{}
+Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::DynamicFindIntersectorHalfspace3Box3(const Plane3& halfSpace, const Box3& box, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+    : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, halfSpace{ halfSpace }, box{ box }, point{}
 {
     Find();
 
@@ -43,7 +43,7 @@ Mathematics::Plane3<Real> Mathematics::DynamicFindIntersectorHalfspace3Box3<Real
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return halfspace;
+    return halfSpace;
 }
 
 template <typename Real>
@@ -77,8 +77,8 @@ void Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::Find()
 
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
-    const auto cfg = FindIntersectorAxis<Real>::GetConfiguration(halfspace.GetNormal(), box);
-    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -Math::maxReal, halfspace.GetConstant(), cfg.GetMin(), cfg.GetMax(), this->GetTMax() };
+    const auto cfg = FindIntersectorAxis<Real>::GetConfiguration(halfSpace.GetNormal(), box);
+    const TestIntersectorAxis<Real> testIntersectorAxis{ halfSpace.GetNormal(), relVelocity, -Math::maxReal, halfSpace.GetConstant(), cfg.GetMin(), cfg.GetMax(), this->GetTMax() };
 
     auto contactTime = testIntersectorAxis.GetTFirst();
 

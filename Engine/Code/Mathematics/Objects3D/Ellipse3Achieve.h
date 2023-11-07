@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 15:49)
+///	版本：0.9.1.6 (2023/10/26 17:10)
 
 #ifndef MATHEMATICS_OBJECTS_3D_ELLIPSE3_ACHIEVE_H
 #define MATHEMATICS_OBJECTS_3D_ELLIPSE3_ACHIEVE_H
@@ -13,7 +13,6 @@
 #include "Ellipse3.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename Real>
 Mathematics::Ellipse3<Real>::Ellipse3(const Vector3& center,
@@ -26,7 +25,7 @@ Mathematics::Ellipse3<Real>::Ellipse3(const Vector3& center,
     : center{ center },
       normal{ normal },
       major{ major },
-      m_Minor{ minor },
+      minor{ minor },
       majorLength{ majorLength },
       minorLength{ minorLength },
       epsilon{ epsilon }
@@ -43,7 +42,7 @@ bool Mathematics::Ellipse3<Real>::IsValid() const noexcept
     {
         if (normal.IsNormalize(epsilon) &&
             major.IsNormalize(epsilon) &&
-            m_Minor.IsNormalize(epsilon) &&
+            minor.IsNormalize(epsilon) &&
             Math::GetValue(0) <= majorLength &&
             Math::GetValue(0) <= minorLength)
         {
@@ -91,7 +90,7 @@ Mathematics::Vector3<Real> Mathematics::Ellipse3<Real>::GetMinor() const noexcep
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Minor;
+    return minor;
 }
 
 template <typename Real>

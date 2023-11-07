@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:34)
+///	版本：0.9.1.6 (2023/10/27 09:34)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_CALCULATE_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_CALCULATE_DETAIL_H
@@ -36,7 +36,6 @@ Mathematics::Bisect3Calculate<Real>::Bisect3Calculate(const Bisect3& bisect,
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real>
 void Mathematics::Bisect3Calculate<Real>::Calculate(Real beginPointX,
                                                     Real beginPointY,
@@ -132,9 +131,8 @@ void Mathematics::Bisect3Calculate<Real>::Calculate(Real beginPointX,
     graph->GetYNext()->GetXNext()->AddZNextNode(graph->GetXNext()->GetYNext()->GetZNext());
     graph->GetXNext()->GetZNext()->AddYNextNode(graph->GetXNext()->GetYNext()->GetZNext());
 
-    const auto result = BisectRecurse(graph);
-
-    if (result)
+    if (const auto result = BisectRecurse(graph);
+        result)
     {
         bisect3Root = bisect3Storage.GetBisect3Root();
     }
@@ -164,7 +162,6 @@ typename Mathematics::Bisect3Calculate<Real>::Bisect3Root Mathematics::Bisect3Ca
     return *bisect3Root;
 }
 
-// private
 template <typename Real>
 bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedPtr& node)
 {
@@ -185,7 +182,7 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
     if (node->IsFunctionResult0SameSign() || node->IsFunctionResult1SameSign() || node->IsFunctionResult2SameSign())
     {
         // FirstFunction具有相同的符号在边界点。
-        // 或者GecondFunction具有相同的符号在边界点。
+        // 或者SecondFunction具有相同的符号在边界点。
         // 或者ThirdFunction具有相同的符号在边界点。
 
         // 方程在这个区间无解

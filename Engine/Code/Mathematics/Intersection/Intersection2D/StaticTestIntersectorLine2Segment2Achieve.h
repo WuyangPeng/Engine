@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:28)
+///	版本：0.9.1.6 (2023/10/27 17:57)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_SEGMENT2_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_SEGMENT2_ACHIEVE_H
@@ -27,7 +27,6 @@ Mathematics::StaticTestIntersectorLine2Segment2<Real>::StaticTestIntersectorLine
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real>
 void Mathematics::StaticTestIntersectorLine2Segment2<Real>::Test()
 {

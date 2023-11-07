@@ -40,7 +40,7 @@ void Rendering::HalfFloatTesting::MainTest()
 void Rendering::HalfFloatTesting::BigFloatTest()
 {
     std::default_random_engine generator;
-    const std::uniform_real<float> floatRandomDistribution(-32768.0f, 32768.0f);  // 2的15次方
+    std::uniform_real<float> floatRandomDistribution(-32768.0f, 32768.0f);  // 2的15次方
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -67,7 +67,7 @@ void Rendering::HalfFloatTesting::BigFloatTest()
 void Rendering::HalfFloatTesting::SmallFloatTest()
 {
     std::default_random_engine generator;
-    const std::uniform_real<float> firstFloatRandomDistribution(-1.0f / 32768.0f, 1.0f / 32768.0f);  // 2的-15次方
+    std::uniform_real<float> firstFloatRandomDistribution(-1.0f / 32768.0f, 1.0f / 32768.0f);  // 2的-15次方
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -98,7 +98,7 @@ void Rendering::HalfFloatTesting::UInt16Test() noexcept
 void Rendering::HalfFloatTesting::OperatorTest()
 {
     std::default_random_engine generator;
-    const std::uniform_real<float> floatRandomDistribution(-32768.0f, 32768.0f);  // 2的15次方
+    std::uniform_real<float> floatRandomDistribution(-32768.0f, 32768.0f);  // 2的15次方
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {

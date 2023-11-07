@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:55)
+///	版本：0.9.1.6 (2023/10/27 16:51)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE3_SEGMENT3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE3_SEGMENT3_H
@@ -27,6 +27,7 @@ namespace Mathematics
         using ClassType = DistanceLine3Segment3<Real>;
         using Vector3 = Vector3<Real>;
         using ParentType = DistanceBase<Real, Vector3>;
+
         using Line3 = Line3<Real>;
         using Segment3 = Segment3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
@@ -35,7 +36,7 @@ namespace Mathematics
         using DistanceResult = typename ParentType::DistanceResult;
 
     public:
-        DistanceLine3Segment3(const Line3& line, const Segment3& ray) noexcept;
+        DistanceLine3Segment3(const Line3& line, const Segment3& segment) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

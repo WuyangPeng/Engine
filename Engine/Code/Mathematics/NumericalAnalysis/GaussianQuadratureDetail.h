@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:47)
+///	版本：0.9.1.6 (2023/10/27 10:04)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_GAUSSIAN_QUADRATURE_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_GAUSSIAN_QUADRATURE_DETAIL_H
@@ -27,7 +27,6 @@ Mathematics::GaussianQuadrature<Real, UserDataType>::GaussianQuadrature(Real beg
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real, typename UserDataType>
 void Mathematics::GaussianQuadrature<Real, UserDataType>::Calculate() noexcept
 {

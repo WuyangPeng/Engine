@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Mathematics/Meshes/EdgeKey.h" 
+#include "Mathematics/Meshes/EdgeKey.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 #include <set>
@@ -107,7 +107,6 @@ void Rendering::SurfaceMesh::SetLevel(int aLevel)
             indices.Increase(tri.v.at(j));
         }
     }
-   
 
     OnDynamicChange();
     UpdateModelSpace(VisualUpdateType::Normals);
@@ -155,7 +154,7 @@ std::vector<Rendering::SurfaceMesh::Triangle> Rendering::SurfaceMesh::Allocate(i
         numTotalTriangles = 4 * numTotalTriangles;
     }
 
-    auto vstride = GetVertexFormat()->GetStride();
+    const auto vstride = GetVertexFormat()->GetStride();
     SetVertexBuffer(VertexBuffer::Create(*GetVertexFormat(), vstride));
     std::vector<Triangle> triangles(numTotalTriangles);
     if (allowDynamicChange)
@@ -218,9 +217,6 @@ void Rendering::SurfaceMesh::Subdivide(int& numVertices, int& numEdges, EdgeMap&
         auto& edge = value.second;
         edge.paramMid[0] = (0.5f * (edge.param.at(0)[0] + edge.param.at(1)[0]));
         edge.paramMid[1] = (0.5f * (edge.param.at(0)[1] + edge.param.at(1)[1]));
-
-        const auto v0 = edge.v.at(0);
-        const auto v1 = edge.v.at(1);
 
         if (allowDynamicChange)
         {

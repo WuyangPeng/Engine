@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:36)
+///	版本：0.9.1.6 (2023/10/27 13:47)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -24,16 +24,65 @@ Mathematics::Equation::Equation(double constant, double once, double secondary, 
 
 CLASS_INVARIANT_STUB_DEFINE(Mathematics, Equation)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Equation, IsRealResult, bool);
+bool Mathematics::Equation::IsRealResult() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Mathematics, Equation, Substitution, double, double);
+    return impl->IsRealResult();
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Mathematics, Equation, Substitution, Imaginary, Mathematics::Equation::Imaginary);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Equation, GetRealResultCount, int);
+double Mathematics::Equation::Substitution(double value) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Equation, GetImaginaryResultCount, int);
+    return impl->Substitution(value);
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Equation, GetRealBegin, Mathematics::Equation::RealConstIterator);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Equation, GetRealEnd, Mathematics::Equation::RealConstIterator);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Equation, GetImaginaryBegin, Mathematics::Equation::ImaginaryConstIterator);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Equation, GetImaginaryEnd, Mathematics::Equation::ImaginaryConstIterator);
+Mathematics::Equation::Imaginary Mathematics::Equation::Substitution(const Imaginary& value) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return impl->Substitution(value);
+}
+
+int Mathematics::Equation::GetRealResultCount() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetRealResultCount();
+}
+
+int Mathematics::Equation::GetImaginaryResultCount() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetImaginaryResultCount();
+}
+
+Mathematics::Equation::RealConstIterator Mathematics::Equation::GetRealBegin() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetRealBegin();
+}
+
+Mathematics::Equation::RealConstIterator Mathematics::Equation::GetRealEnd() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetRealEnd();
+}
+
+Mathematics::Equation::ImaginaryConstIterator Mathematics::Equation::GetImaginaryBegin() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetImaginaryBegin();
+}
+
+Mathematics::Equation::ImaginaryConstIterator Mathematics::Equation::GetImaginaryEnd() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetImaginaryEnd();
+}

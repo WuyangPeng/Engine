@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:44)
+///	版本：0.9.1.6 (2023/10/27 13:24)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_H
@@ -46,6 +46,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = PolynomialRoots<Real>;
+
         using Math = Math<Real>;
         using Vector3 = Vector3<Real>;
         using Polynomial = Polynomial<Real>;
@@ -125,8 +126,8 @@ namespace Mathematics
                                     VariableLengthVector& variableLengthVector,
                                     int rowMin,
                                     int rowMax,
-                                    int colunmMin,
-                                    int colunmMax,
+                                    int columnMin,
+                                    int columnMax,
                                     int vSize,
                                     const Vector3& vVector);
 
@@ -134,8 +135,8 @@ namespace Mathematics
                                      VariableLengthVector& variableLengthVector,
                                      int rowMin,
                                      int rowMax,
-                                     int colunmMin,
-                                     int colunmMax,
+                                     int columnMin,
+                                     int columnMax,
                                      int vSize,
                                      const Vector3& vVector);
 
@@ -151,7 +152,7 @@ namespace Mathematics
         NODISCARD bool QRIteration4(VariableMatrix& matrix);
 
         // 支持 FindB.
-        NODISCARD bool Bisection(const Polynomial& polynomial, Real xMin, Real xMax, int digits, Real& root);
+        NODISCARD bool Bisection(const Polynomial& polynomial, Real xMin, Real xMax, int digits, Real& root) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 支持测试，如果所有根具有负实部。
         NODISCARD bool AllRealPartsNegative(int degree, Container& coeff);
@@ -159,9 +160,9 @@ namespace Mathematics
         void Balance3(VariableMatrix& matrix, Real tolerance);
         NODISCARD bool IsBalanced3(VariableMatrix& matrix, Real tolerance);
         NODISCARD Real GetRowNorm(int row, VariableMatrix& matrix);
-        NODISCARD Real GetColomnNorm(int colomn, VariableMatrix& matrix);
+        NODISCARD Real GetColumnNorm(int column, VariableMatrix& matrix);
         void ScaleRow(int row, Real scale, VariableMatrix& matrix);
-        void ScaleColomn(int colomn, Real scale, VariableMatrix& matrix);
+        void ScaleColumn(int column, Real scale, VariableMatrix& matrix);
 
         void SetRoot(int index, Real value);
 

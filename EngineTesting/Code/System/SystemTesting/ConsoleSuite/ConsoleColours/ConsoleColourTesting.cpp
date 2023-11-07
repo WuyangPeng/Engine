@@ -16,6 +16,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
+#include <iostream>
+
 System::ConsoleColourTesting::ConsoleColourTesting(const OStreamShared& stream)
     : ParentType{ stream },
       textColourDescription{ { TextColour::Black, "ºÚÉ«" },

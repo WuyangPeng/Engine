@@ -50,15 +50,16 @@ void System::VsnPrintFTesting::VsnPrintFUseIndefiniteParameterTest(int testStrin
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26492)
+#include SYSTEM_WARNING_DISABLE(26826)
 
     va_list arguments{};
     va_start(arguments, format);
-
-#include SYSTEM_WARNING_POP
 
     const auto count = VsnPrintF(buffer, size, format, arguments);
 
     va_end(arguments);
 
     ASSERT_EQUAL(count, testStringSize);
+
+#include SYSTEM_WARNING_POP
 }

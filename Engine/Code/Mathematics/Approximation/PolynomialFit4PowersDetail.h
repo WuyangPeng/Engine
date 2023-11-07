@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:36)
+///	版本：0.9.1.6 (2023/10/27 14:20)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_POWERS_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_POWERS_DETAIL_H
@@ -33,7 +33,6 @@ Mathematics::PolynomialFit4Powers<Real>::PolynomialFit4Powers(const Samples& xSa
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialFit4Powers<Real>::Init(const Samples& xSamples, const Samples& ySamples, const Samples& zSamples, const Samples& wSamples, bool isRepackage)
 {
@@ -67,7 +66,6 @@ void Mathematics::PolynomialFit4Powers<Real>::Init(const Samples& xSamples, cons
     DoLeastSquaresFit(xTargetSamples, yTargetSamples, zTargetSamples, wTargetSamples);
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialFit4Powers<Real>::InitializePowers()
 {
@@ -81,7 +79,6 @@ void Mathematics::PolynomialFit4Powers<Real>::InitializePowers()
     }
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialFit4Powers<Real>::Repackage(const Samples& xSourceSamples,
                                                         const Samples& ySourceSamples,
@@ -199,15 +196,15 @@ void Mathematics::PolynomialFit4Powers<Real>::DoLeastSquaresFit(const Samples& x
         for (auto row = 0; row < numPowers; ++row)
         {
             // 更新对称矩阵的上三角部分。
-            for (auto colomn = row; colomn < numPowers; ++colomn)
+            for (auto column = row; column < numPowers; ++column)
             {
-                auto xPowersIndex = powers.at(row)[0] + powers.at(colomn)[0];
+                auto xPowersIndex = powers.at(row)[0] + powers.at(column)[0];
                 auto xp = xPowers.at(xPowersIndex);
-                auto yPowersIndex = powers.at(row)[1] + powers.at(colomn)[1];
+                auto yPowersIndex = powers.at(row)[1] + powers.at(column)[1];
                 auto yp = yPowers.at(yPowersIndex);
-                auto zPowersIndex = powers.at(row)[2] + powers.at(colomn)[2];
+                auto zPowersIndex = powers.at(row)[2] + powers.at(column)[2];
                 auto zp = zPowers.at(zPowersIndex);
-                matrix(row, colomn) += xp * yp * zp;
+                matrix(row, column) += xp * yp * zp;
             }
 
             // 更新系统在右手坐标系。

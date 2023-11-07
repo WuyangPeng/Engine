@@ -19,15 +19,4 @@ void System::FillMemoryToZero(T& value) noexcept
     ::ZeroMemory(&value, sizeof(T));
 }
 
-template <typename T>
-requires(std::is_nothrow_default_constructible_v<T> && std::is_nothrow_copy_constructible_v<T> && std::is_nothrow_move_constructible_v<T>)
-T System::GetWindowsStructDefaultSize() noexcept
-{
-    T result{};
-
-    result.cbSize = sizeof(T);
-
-    return result;
-}
-
 #endif  // SYSTEM_MEMORY_TOOLS_MEMORY_HELPER_DETAIL_H

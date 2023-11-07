@@ -32,7 +32,7 @@ namespace CoreTools
     public:
         NODISCARD FactoryFunction Find(const std::string& name) const;
         void Insert(const std::string& name, FactoryFunction function);
-        void Remove(const std::string& name);
+        void Remove(const std::string& name) noexcept;
 
     private:
         using FactoryContainer = std::map<std::string, FactoryFunction>;

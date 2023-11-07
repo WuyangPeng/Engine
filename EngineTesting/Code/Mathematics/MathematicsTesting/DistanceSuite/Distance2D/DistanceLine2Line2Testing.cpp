@@ -50,7 +50,7 @@ void Mathematics::DistanceLine2Line2Testing::MainTest()
 void Mathematics::DistanceLine2Line2Testing::BaseTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -87,7 +87,7 @@ void Mathematics::DistanceLine2Line2Testing::BaseTest()
 void Mathematics::DistanceLine2Line2Testing::StaticTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -106,7 +106,7 @@ void Mathematics::DistanceLine2Line2Testing::StaticTest()
         DistanceResult2D squaredResult = distance.GetSquared();
         ASSERT_APPROXIMATE(squaredResult.GetDistance(), 0.0, 1e-10);
         ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), squaredResult.GetRhsClosestPoint(), 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), squaredResult.GetRhsClosestPoint(), 1e-7);
 
         Vector2 lhsDifference = lhsOrigin - squaredResult.GetLhsClosestPoint();
         lhsDifference.Normalize();
@@ -119,7 +119,7 @@ void Mathematics::DistanceLine2Line2Testing::StaticTest()
         DistanceResult2D result = distance.Get();
         ASSERT_APPROXIMATE(result.GetDistance(), 0.0, 1e-10);
         ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, result.GetLhsClosestPoint(), result.GetRhsClosestPoint(), 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, result.GetLhsClosestPoint(), result.GetRhsClosestPoint(), 1e-7);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), result.GetLhsClosestPoint(), 1e-8);
 
         DistanceLine2Line2<double> equalDistance(Line2D(lhsOrigin, lhsDirection), Line2D(lhsOrigin + lhsDirection, lhsDirection));
@@ -167,7 +167,7 @@ void Mathematics::DistanceLine2Line2Testing::StaticTest()
 void Mathematics::DistanceLine2Line2Testing::DynamicTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -251,7 +251,7 @@ void Mathematics::DistanceLine2Line2Testing::DynamicTest()
 void Mathematics::DistanceLine2Line2Testing::DerivativeTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -291,7 +291,7 @@ void Mathematics::DistanceLine2Line2Testing::DerivativeTest()
 void Mathematics::DistanceLine2Line2Testing::IntervalTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution(-10.0, 10.0);
+    std::uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

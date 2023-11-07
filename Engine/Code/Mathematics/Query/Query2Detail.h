@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:09)
+///	版本：0.9.1.6 (2023/10/27 13:55)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY2_DETAIL_H
@@ -74,7 +74,7 @@ Mathematics::LineQueryType Mathematics::Query2<Real>::ToLine(const Vector2& test
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    QuerySortTools querySortTools{ lhsVerticesIndex, rhsVerticesIndex };
+    const QuerySortTools querySortTools{ lhsVerticesIndex, rhsVerticesIndex };
 
     const auto& vector0 = vertices.at(querySortTools.GetValue(0));
     const auto& vector1 = vertices.at(querySortTools.GetValue(1));
@@ -86,8 +86,8 @@ Mathematics::LineQueryType Mathematics::Query2<Real>::ToLine(const Vector2& test
 
     auto det = QueryDotTools<Real>::Det2(x0, y0, x1, y1);
 
-    const auto positive = querySortTools.GetSymbol();
-    if (positive == NumericalValueSymbol::Negative)
+    if (const auto positive = querySortTools.GetSymbol();
+        positive == NumericalValueSymbol::Negative)
     {
         det = -det;
     }
@@ -155,7 +155,7 @@ Mathematics::CircumcircleQueryType Mathematics::Query2<Real>::ToCircumcircle(con
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    QuerySortTools querySortTools{ lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex };
+    const QuerySortTools querySortTools{ lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex };
 
     const auto& lhsVector = vertices.at(querySortTools.GetValue(0));
     const auto& mhsVector = vertices.at(querySortTools.GetValue(1));
@@ -179,8 +179,8 @@ Mathematics::CircumcircleQueryType Mathematics::Query2<Real>::ToCircumcircle(con
 
     auto det = QueryDotTools<Real>::Det3(lhsMinusTestX, lhsMinusTestY, z0, mhsMinusTestX, mhsMinusTestY, z1, rhsMinusTestX, rhsMinusTestY, z2);
 
-    const auto positive = querySortTools.GetSymbol();
-    if (positive == NumericalValueSymbol::Negative)
+    if (const auto positive = querySortTools.GetSymbol();
+        positive == NumericalValueSymbol::Negative)
     {
         det = -det;
     }

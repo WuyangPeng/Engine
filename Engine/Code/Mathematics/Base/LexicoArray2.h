@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/30 14:57)
+///	版本：0.9.1.6 (2023/10/26 09:53)
 
 #ifndef MATHEMATICS_BASE_LEXICO_ARRAY2_H
 #define MATHEMATICS_BASE_LEXICO_ARRAY2_H
@@ -26,6 +26,7 @@ namespace Mathematics
     {
     public:
         using ClassType = LexicoArray2<true, Real>;
+
         using Container = std::vector<Real>;
         using Math = Math<Real>;
 
@@ -55,6 +56,7 @@ namespace Mathematics
     {
     public:
         using ClassType = LexicoArray2<false, Real>;
+
         using Container = std::vector<Real>;
         using Math = Math<Real>;
 
@@ -84,6 +86,7 @@ namespace Mathematics
     {
     public:
         using ClassType = LexicoArray2<true, Real, NumRows, NumCols>;
+
         using Container = std::vector<Real>;
         using Math = Math<Real>;
 
@@ -111,6 +114,7 @@ namespace Mathematics
     {
     public:
         using ClassType = LexicoArray2<false, Real, NumRows, NumCols>;
+
         using Container = std::vector<Real>;
         using Math = Math<Real>;
 

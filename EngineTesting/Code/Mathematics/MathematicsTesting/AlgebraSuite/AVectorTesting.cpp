@@ -171,7 +171,7 @@ void Mathematics::AVectorTesting::ArithmeticCalculateTest()
 void Mathematics::AVectorTesting::VectorCalculateTest()
 {
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -212,7 +212,7 @@ void Mathematics::AVectorTesting::VectorCalculateTest()
 void Mathematics::AVectorTesting::OtherCalculateTest()
 {
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     AVectorD vector0{ randomDistribution(randomEngine), randomDistribution(randomEngine), randomDistribution(randomEngine) };
     AVectorD vector1{ randomDistribution(randomEngine), randomDistribution(randomEngine), randomDistribution(randomEngine) };

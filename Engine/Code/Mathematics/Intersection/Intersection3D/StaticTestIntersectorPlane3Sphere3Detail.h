@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:31)
+///	版本：0.9.1.6 (2023/10/28 14:27)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_SPHERE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_SPHERE3_DETAIL_H
@@ -54,8 +54,8 @@ Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorPlane3Sphere3<Real>
 template <typename Real>
 void Mathematics::StaticTestIntersectorPlane3Sphere3<Real>::Test() noexcept
 {
-    const auto signedDistance = plane.DistanceTo(sphere.GetCenter());
-    if (Math::FAbs(signedDistance) <= sphere.GetRadius())
+    if (const auto signedDistance = plane.DistanceTo(sphere.GetCenter());
+        Math::FAbs(signedDistance) <= sphere.GetRadius())
     {
         this->SetIntersectionType(IntersectionType::Other);
     }

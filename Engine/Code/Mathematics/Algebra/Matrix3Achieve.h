@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 16:46)
+///	版本：0.9.1.6 (2023/10/26 10:32)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX3_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_MATRIX3_ACHIEVE_H
@@ -17,8 +17,9 @@
 #include "Matrix3ExtractDetail.h"
 #include "Matrix4Detail.h"
 #include "TridiagonalizeDetail.h"
-#include "Vector3.h"
+#include "Vector3Detail.h"
 #include "Vector3Tools.h"
+#include "Flags/ExtractEulerResultType.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -505,7 +506,7 @@ Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::Inverse(const Real epsilo
     // 计算伴随矩阵。
     auto adjoint = Adjoint();
 
-    const auto det = GetValue<0, 0>() * adjoint.GetValue<0, 0>() + GetValue<0, 1>() * adjoint.GetValue<1, 0>() + GetValue<0, 2>() * adjoint.GetValue<2, 0>();
+    const auto det = GetValue<0, 0>() * adjoint.template GetValue<0, 0>() + GetValue<0, 1>() * adjoint.template GetValue<1, 0>() + GetValue<0, 2>() * adjoint.template GetValue<2, 0>();
 
     if (epsilon < Math::FAbs(det))
     {
@@ -773,9 +774,9 @@ typename Mathematics::Matrix3<Real>::Matrix3EigenDecomposition Mathematics::Matr
     if (reflection)
     {
         // 这对角矩阵M正交变换是一种反射。通过改变最后一列的符号使特征向量符合右手系统。
-        rotation(0, 2) = -rotation.GetValue<0, 2>();
-        rotation(1, 2) = -rotation.GetValue<1, 2>();
-        rotation(2, 2) = -rotation.GetValue<2, 2>();
+        rotation(0, 2) = -rotation.template GetValue<0, 2>();
+        rotation(1, 2) = -rotation.template GetValue<1, 2>();
+        rotation(2, 2) = -rotation.template GetValue<2, 2>();
     }
 
     return Matrix3EigenDecomposition{ rotation, diagonalMatrix, epsilon };

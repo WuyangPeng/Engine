@@ -37,7 +37,7 @@ void System::WindowsCreateLParamTesting::MainTest()
 
 void System::WindowsCreateLParamTesting::LParamTest()
 {
-    const std::uniform_int_distribution<WindowsLParam> random{ minValue, maxValue };
+    std::uniform_int_distribution<WindowsLParam> random{ minValue, maxValue };
 
     const auto low = random(generator);
     const auto high = random(generator);

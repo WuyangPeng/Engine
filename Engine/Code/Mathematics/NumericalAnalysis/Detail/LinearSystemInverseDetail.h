@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:35)
+///	版本：0.9.1.6 (2023/10/27 09:37)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_INVERSE_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_INVERSE_DETAIL_H
@@ -82,7 +82,6 @@ bool Mathematics::LinearSystemInverse<Real>::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-// private
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>::Inverse()
 {
@@ -175,11 +174,10 @@ void Mathematics::LinearSystemInverse<Real>::CalculateCurrentMaxValue()
 
     if (currentMaxValue <= zeroTolerance)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("矩阵是不可逆的。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("矩阵是不可逆的。"s))
     }
 }
 
-// private
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>::ZeroOutPivotColumnLocations()
 {
@@ -208,7 +206,6 @@ void Mathematics::LinearSystemInverse<Real>::ZeroOutPivotColumnLocations(int out
     }
 }
 
-// private
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>::Rearrangement()
 {

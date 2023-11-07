@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:46)
+///	版本：0.9.1.6 (2023/10/27 09:50)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_CALCULATE_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_CALCULATE_DETAIL_H
@@ -57,7 +57,6 @@ typename Mathematics::BrentsMethodCalculate<Real, UserDataType>::BrentsMethodRoo
     return bisect2Root;
 }
 
-// private
 template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethodCalculate<Real, UserDataType>::Calculate()
 {
@@ -77,7 +76,6 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::Calculate()
     }
 }
 
-// private
 template <typename Real, typename UserDataType>
 bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::IsBeginSatisfyConditions() const noexcept
 {
@@ -91,7 +89,6 @@ bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::IsBeginSatisfyCondi
     }
 }
 
-// private
 template <typename Real, typename UserDataType>
 bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::IsEndSatisfyConditions() const noexcept
 {
@@ -126,7 +123,6 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::Search()
     bisect2Root = BrentsMethodRoot{ end, endFunction, BrentsMethodRootType::Unknown };
 }
 
-// private
 template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethodCalculate<Real, UserDataType>::SwapBeginEnd() noexcept
 {
@@ -139,7 +135,6 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::SwapBeginEnd() noex
     }
 }
 
-// private
 template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethodCalculate<Real, UserDataType>::InitSearchValue() noexcept
 {
@@ -149,7 +144,6 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::InitSearchValue() n
     previousBisected = true;
 }
 
-// private
 template <typename Real, typename UserDataType>
 bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::RootSearch()
 {
@@ -197,7 +191,6 @@ bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::RootSearch()
     return false;
 }
 
-// private
 template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethodCalculate<Real, UserDataType>::UpdateFunctionDifference() noexcept
 {
@@ -206,7 +199,6 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::UpdateFunctionDiffe
     endSearchFunctionDifference = endFunction - searchFunction;
 }
 
-// private
 template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethodCalculate<Real, UserDataType>::InverseQuadratic() noexcept
 {
@@ -215,14 +207,12 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::InverseQuadratic() 
                searchBegin * beginFunction * searchFunction / beginSearchFunctionDifference / endSearchFunctionDifference;
 }
 
-// private
 template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethodCalculate<Real, UserDataType>::InverseLinear() noexcept
 {
     solution = (end * beginFunction - begin * endFunction) / beginEndFunctionDifference;
 }
 
-// private
 template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethodCalculate<Real, UserDataType>::AcceptOrRejectTests() noexcept
 {
@@ -268,7 +258,6 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::AcceptOrRejectTests
     }
 }
 
-// private
 template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethodCalculate<Real, UserDataType>::UpdateSubinterval() noexcept
 {
@@ -287,7 +276,6 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::UpdateSubinterval()
     }
 }
 
-// private
 template <typename Real, typename UserDataType>
 bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::IsSolutionSatisfyConditions() const noexcept
 {
@@ -301,7 +289,6 @@ bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::IsSolutionSatisfyCo
     }
 }
 
-// private
 template <typename Real, typename UserDataType>
 bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::IsConvXTolerance() const noexcept
 {

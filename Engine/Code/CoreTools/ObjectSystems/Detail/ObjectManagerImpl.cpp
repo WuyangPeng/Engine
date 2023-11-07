@@ -45,7 +45,7 @@ void CoreTools::ObjectManagerImpl::Insert(const std::string& name, FactoryFuncti
     factories.emplace(name, function);
 }
 
-void CoreTools::ObjectManagerImpl::Remove(const std::string& name)
+void CoreTools::ObjectManagerImpl::Remove(const std::string& name) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

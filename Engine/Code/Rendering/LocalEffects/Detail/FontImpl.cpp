@@ -198,8 +198,6 @@ void Rendering::FontImpl::Typeset(int viewportWidth, int viewportHeight, int x, 
         const auto tx1 = characterData.at(nextIndex);
         const auto charWidthM1 = (tx1 - tx0) * tw - 1.0f;
 
-        const auto fourI = 4 * boost::numeric_cast<size_t>(i);
-
         const auto x1 = x0 + charWidthM1 * viewportDX;
 
         data.Increase<float>(x0);

@@ -37,10 +37,10 @@ namespace Mathematics
         NODISCARD Polynomial<Real> GetYPolynomial() const;
         NODISCARD Polynomial<Real> GetZPolynomial() const;
 
-        NODISCARD Vector3<Real> GetPosition(Real t) const override;
-        NODISCARD Vector3<Real> GetFirstDerivative(Real t) const override;
-        NODISCARD Vector3<Real> GetSecondDerivative(Real t) const override;
-        NODISCARD Vector3<Real> GetThirdDerivative(Real t) const override;
+        NODISCARD Vector3<Real> GetPosition(Real t) const noexcept override;
+        NODISCARD Vector3<Real> GetFirstDerivative(Real t) const noexcept override;
+        NODISCARD Vector3<Real> GetSecondDerivative(Real t) const noexcept override;
+        NODISCARD Vector3<Real> GetThirdDerivative(Real t) const noexcept override;
 
     protected:
         Polynomial<Real> xPoly;

@@ -21,11 +21,11 @@
 
 Rendering::NormalDerivatives::NormalDerivatives(const VertexBuffer& vertexBufferAccessor)
     : vertexBufferAccessor{ vertexBufferAccessor },
-      derivativestNormal{ vertexBufferAccessor.GetElementSize() },
-      projectMatrix{ vertexBufferAccessor.GetElementSize() },
-      differentMatrix{ vertexBufferAccessor.GetElementSize() },
-      tangent{ vertexBufferAccessor.GetElementSize() },
-      binormal{ vertexBufferAccessor.GetElementSize() }
+      derivativestNormal(vertexBufferAccessor.GetElementSize()),
+      projectMatrix(vertexBufferAccessor.GetElementSize()),
+      differentMatrix(vertexBufferAccessor.GetElementSize()),
+      tangent(vertexBufferAccessor.GetElementSize()),
+      binormal(vertexBufferAccessor.GetElementSize())
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

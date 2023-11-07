@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 15:27)
+///	版本：0.9.1.6 (2023/10/26 14:43)
 
 /// 所谓的带状矩阵即：在矩阵A中，
 /// 所有的非零元素都集中在以主对角线为中心的带状区域中。
@@ -23,7 +23,6 @@
 #include "AlgebraFwd.h"
 #include "BandedMatrix.h"
 
-#include <type_traits>
 #include <vector>
 
 namespace Mathematics
@@ -34,6 +33,7 @@ namespace Mathematics
     {
     public:
         using ClassType = BandedMatrixSolve<Real>;
+
         using Math = Math<Real>;
         using BandedMatrix = BandedMatrix<Real>;
         using VariableLengthVector = VariableLengthVector<Real>;

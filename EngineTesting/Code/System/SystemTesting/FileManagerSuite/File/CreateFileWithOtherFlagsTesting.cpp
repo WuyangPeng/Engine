@@ -59,7 +59,7 @@ void System::CreateFileWithOtherFlagsTesting::DoCreateFileTest(size_t index)
     const auto fileHandleOther = GetFileHandleOther(index);
 
     if (fileHandleCreationDisposition == FileHandleCreationDisposition::CreateNew ||
-        fileHandleOther == FileHandleOther::DeleteOnClose)
+        ((fileHandleOther & FileHandleOther::DeleteOnClose) == FileHandleOther::DeleteOnClose))
     {
         CreateNewTest(index, FileHandleCreationDisposition::CreateNew);
     }

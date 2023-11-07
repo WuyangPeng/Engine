@@ -137,8 +137,6 @@ void Rendering::TubeSurface::ComputeVertices()
             t = tMin + m * tRange * denom;
         }
 
-        const auto radius = radial(t);
-
         Mathematics::Vector3F position{};
         Mathematics::Vector3F tangent{};
         Mathematics::Vector3F normal{};
@@ -308,7 +306,6 @@ void Rendering::TubeSurface::UpdateSurface()
     {
         ComputeNormals();
     }
-
 }
 
 Rendering::TubeSurface::TubeSurface(LoadConstructor value)

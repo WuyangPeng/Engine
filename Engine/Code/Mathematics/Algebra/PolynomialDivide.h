@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 17:21)
+///	版本：0.9.1.6 (2023/10/26 14:47)
 
 #ifndef MATHEMATICS_ALGEBRA_POLYNOMIAL_DIVIDE_H
 #define MATHEMATICS_ALGEBRA_POLYNOMIAL_DIVIDE_H
@@ -13,8 +13,6 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/MathematicsFwd.h"
-
-#include <type_traits>
 
 namespace Mathematics
 {
@@ -24,10 +22,11 @@ namespace Mathematics
     {
     public:
         using ClassType = PolynomialDivide<Real>;
+
         using Polynomial = Polynomial<Real>;
 
     public:
-        PolynomialDivide(const Polynomial& quotient, const Polynomial& remainder);
+        PolynomialDivide(Polynomial quotient, Polynomial remainder) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

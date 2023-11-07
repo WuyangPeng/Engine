@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:29)
+///	版本：0.9.1.6 (2023/10/27 11:15)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_SYMMETRIC_CONJUGATE_GRADIENT_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_SYMMETRIC_CONJUGATE_GRADIENT_H
@@ -26,6 +26,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = SolveSymmetricConjugateGradient<Real, Matrix>;
+
         using MatrixType = Matrix<Real>;
         using RealContainer = std::vector<Real>;
 

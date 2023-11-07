@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/20 14:48)
+///	版本：0.9.1.6 (2023/11/03 09:30)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_RANGE_ITERATION_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_RANGE_ITERATION_H
@@ -43,7 +43,7 @@ namespace CoreTools
     template <typename Iterable,
               typename Iterator = decltype(std::begin(std::declval<Iterable>())),
               typename ReverseIterator = std::reverse_iterator<Iterator>>
-    ReversalObject<ReverseIterator> Reverse(Iterable&& range)
+    NODISCARD ReversalObject<ReverseIterator> Reverse(Iterable&& range) noexcept
     {
         return ReversalObject<ReverseIterator>(ReverseIterator(std::end(range)), ReverseIterator(std::begin(range)));
     }

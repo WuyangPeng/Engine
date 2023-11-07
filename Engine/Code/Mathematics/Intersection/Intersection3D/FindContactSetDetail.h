@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:23)
+///	版本：0.9.1.6 (2023/10/27 18:18)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_CONTACT_SET_DETAIL_H
 #define MATHEMATICS_INTERSECTION_FIND_CONTACT_SET_DETAIL_H
@@ -115,18 +115,18 @@ Mathematics::FindContactSet<Real>::FindContactSet(const SegmentType& segment,
         else if (boxCfg.GetMap() == VertexProjectionMap::M2_2)
         {
             // 线段线段相交
-            SegmentType boxSegment{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(6), boxFinal),
-                                    IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(7), boxFinal) };
+            const SegmentType boxSegment{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(6), boxFinal),
+                                          IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(7), boxFinal) };
 
             SegmentSegment(segmentFinal, boxSegment);
         }
         else  // boxCfg.GetMap() == VertexProjectionMap::M44
         {
             // 线段-盒面相交
-            RectangleType boxFace{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(4), boxFinal),
-                                   IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(5), boxFinal),
-                                   IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(6), boxFinal),
-                                   IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(7), boxFinal) };
+            const RectangleType boxFace{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(4), boxFinal),
+                                         IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(5), boxFinal),
+                                         IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(6), boxFinal),
+                                         IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(7), boxFinal) };
 
             CoplanarSegmentRectangle(segmentFinal, boxFace);
         }
@@ -145,18 +145,18 @@ Mathematics::FindContactSet<Real>::FindContactSet(const SegmentType& segment,
         else if (boxCfg.GetMap() == VertexProjectionMap::M2_2)
         {
             // 线段线段相交
-            SegmentType boxSegment{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(0), boxFinal),
-                                    IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(1), boxFinal) };
+            const SegmentType boxSegment{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(0), boxFinal),
+                                          IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(1), boxFinal) };
 
             SegmentSegment(segmentFinal, boxSegment);
         }
         else  // boxCfg.GetMap() == VertexProjectionMap::M44
         {
             // 线段-盒面相交
-            RectangleType boxFace{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(0), boxFinal),
-                                   IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(1), boxFinal),
-                                   IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(2), boxFinal),
-                                   IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(3), boxFinal) };
+            const RectangleType boxFace{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(0), boxFinal),
+                                         IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(1), boxFinal),
+                                         IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(2), boxFinal),
+                                         IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(3), boxFinal) };
 
             CoplanarSegmentRectangle(segmentFinal, boxFace);
         }
@@ -203,8 +203,8 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3& triangle,
                 const SegmentType triangleSegment{ triangleFinal.at(triangleCfg.GetIndex(0)),
                                                    triangleFinal.at(triangleCfg.GetIndex(1)) };
 
-                SegmentType boxSegment{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(6), boxFinal),
-                                        IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(7), boxFinal) };
+                const SegmentType boxSegment{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(6), boxFinal),
+                                              IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(7), boxFinal) };
 
                 SegmentSegment(triangleSegment, boxSegment);
             }
@@ -214,10 +214,10 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3& triangle,
                 const SegmentType triangleSegment{ triangleFinal.at(triangleCfg.GetIndex(0)),
                                                    triangleFinal.at(triangleCfg.GetIndex(1)) };
 
-                RectangleType boxFace{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(4), boxFinal),
-                                       IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(5), boxFinal),
-                                       IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(6), boxFinal),
-                                       IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(7), boxFinal) };
+                const RectangleType boxFace{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(4), boxFinal),
+                                             IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(5), boxFinal),
+                                             IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(6), boxFinal),
+                                             IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(7), boxFinal) };
 
                 CoplanarSegmentRectangle(triangleSegment, boxFace);
             }
@@ -227,18 +227,18 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3& triangle,
             if (boxCfg.GetMap() == VertexProjectionMap::M2_2)
             {
                 // 盒子线段——三角形面相交
-                SegmentType boxSegment{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(6), boxFinal),
-                                        IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(7), boxFinal) };
+                const SegmentType boxSegment{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(6), boxFinal),
+                                              IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(7), boxFinal) };
 
                 ColinearSegmentTriangle(boxSegment, triangleFinal);
             }
             else
             {
                 // 三角形面——盒子面相交
-                RectangleType boxFace{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(4), boxFinal),
-                                       IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(5), boxFinal),
-                                       IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(6), boxFinal),
-                                       IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(7), boxFinal) };
+                const RectangleType boxFace{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(4), boxFinal),
+                                             IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(5), boxFinal),
+                                             IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(6), boxFinal),
+                                             IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(7), boxFinal) };
 
                 CoplanarTriangleRectangle(triangleFinal, boxFace);
             }
@@ -263,8 +263,8 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3& triangle,
                 const SegmentType triangleSegment{ triangleFinal.at(triangleCfg.GetIndex(1)),
                                                    triangleFinal.at(triangleCfg.GetIndex(2)) };
 
-                SegmentType boxSegment{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(0), boxFinal),
-                                        IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(1), boxFinal) };
+                const SegmentType boxSegment{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(0), boxFinal),
+                                              IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(1), boxFinal) };
 
                 SegmentSegment(triangleSegment, boxSegment);
             }
@@ -274,10 +274,10 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3& triangle,
                 const SegmentType triangleSegment{ triangleFinal.at(triangleCfg.GetIndex(1)),
                                                    triangleFinal.at(triangleCfg.GetIndex(2)) };
 
-                RectangleType boxFace{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(0), boxFinal),
-                                       IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(1), boxFinal),
-                                       IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(2), boxFinal),
-                                       IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(3), boxFinal) };
+                const RectangleType boxFace{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(0), boxFinal),
+                                             IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(1), boxFinal),
+                                             IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(2), boxFinal),
+                                             IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(3), boxFinal) };
 
                 CoplanarSegmentRectangle(triangleSegment, boxFace);
             }
@@ -287,18 +287,18 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3& triangle,
             if (boxCfg.GetMap() == VertexProjectionMap::M2_2)
             {
                 //  盒子线段——三角形面相交
-                SegmentType boxSegment{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(0), boxFinal),
-                                        IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(1), boxFinal) };
+                const SegmentType boxSegment{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(0), boxFinal),
+                                              IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(1), boxFinal) };
 
                 ColinearSegmentTriangle(boxSegment, triangleFinal);
             }
             else
             {
                 // 三角形面——盒子面相交
-                RectangleType boxFace{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(0), boxFinal),
-                                       IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(1), boxFinal),
-                                       IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(2), boxFinal),
-                                       IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(3), boxFinal) };
+                const RectangleType boxFace{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(0), boxFinal),
+                                             IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(1), boxFinal),
+                                             IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(2), boxFinal),
+                                             IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(3), boxFinal) };
 
                 CoplanarTriangleRectangle(triangleFinal, boxFace);
             }
@@ -339,24 +339,24 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Box3& box0,
             if (box1Cfg.GetMap() == VertexProjectionMap::M2_2)
             {
                 // box0边——box1边相交
-                SegmentType edge0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(0), box0Final),
-                                   IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(1), box0Final) };
+                const SegmentType edge0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(0), box0Final),
+                                         IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(1), box0Final) };
 
-                SegmentType edge1{ IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(6), box1Final),
-                                   IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(7), box1Final) };
+                const SegmentType edge1{ IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(6), box1Final),
+                                         IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(7), box1Final) };
 
                 SegmentSegment(edge0, edge1);
             }
             else  // box1Cfg.mMap == VertexProjectionMap::M44
             {
                 // box0边——box1面相交
-                SegmentType edge0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(0), box0Final),
-                                   IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(1), box0Final) };
+                const SegmentType edge0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(0), box0Final),
+                                         IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(1), box0Final) };
 
-                RectangleType face1{ IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(4), box1Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(5), box1Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(6), box1Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(7), box1Final) };
+                const RectangleType face1{ IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(4), box1Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(5), box1Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(6), box1Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(7), box1Final) };
 
                 CoplanarSegmentRectangle(edge0, face1);
             }
@@ -366,28 +366,28 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Box3& box0,
             if (box1Cfg.GetMap() == VertexProjectionMap::M2_2)
             {
                 // box0面——box1边相交
-                RectangleType face0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(0), box0Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(1), box0Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(2), box0Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(3), box0Final) };
+                const RectangleType face0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(0), box0Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(1), box0Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(2), box0Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(3), box0Final) };
 
-                SegmentType edge1{ IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(6), box1Final),
-                                   IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(7), box1Final) };
+                const SegmentType edge1{ IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(6), box1Final),
+                                         IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(7), box1Final) };
 
                 CoplanarSegmentRectangle(edge1, face0);
             }
             else
             {
                 // box0面——box1面相交
-                RectangleType face0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(0), box0Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(1), box0Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(2), box0Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(3), box0Final) };
+                const RectangleType face0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(0), box0Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(1), box0Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(2), box0Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(3), box0Final) };
 
-                RectangleType face1{ IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(4), box1Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(5), box1Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(6), box1Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(7), box1Final) };
+                const RectangleType face1{ IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(4), box1Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(5), box1Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(6), box1Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(7), box1Final) };
 
                 CoplanarRectangleRectangle(face0, face1);
             }
@@ -409,24 +409,24 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Box3& box0,
             if (box1Cfg.GetMap() == VertexProjectionMap::M2_2)
             {
                 // box0边——box1边相交
-                SegmentType edge0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(6), box0Final),
-                                   IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(7), box0Final) };
+                const SegmentType edge0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(6), box0Final),
+                                         IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(7), box0Final) };
 
-                SegmentType edge1{ IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(0), box1Final),
-                                   IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(1), box1Final) };
+                const SegmentType edge1{ IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(0), box1Final),
+                                         IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(1), box1Final) };
 
                 SegmentSegment(edge0, edge1);
             }
             else  // box1Cfg.GetMap() == VertexProjectionMap::M44
             {
                 // box0边——box1面相交
-                SegmentType edge0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(6), box0Final),
-                                   IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(7), box0Final) };
+                const SegmentType edge0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(6), box0Final),
+                                         IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(7), box0Final) };
 
-                RectangleType face1{ IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(0), box1Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(1), box1Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(2), box1Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(3), box1Final) };
+                const RectangleType face1{ IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(0), box1Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(1), box1Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(2), box1Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(3), box1Final) };
 
                 CoplanarSegmentRectangle(edge0, face1);
             }
@@ -436,28 +436,28 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Box3& box0,
             if (box1Cfg.GetMap() == VertexProjectionMap::M2_2)
             {
                 // box0面——box1边相交
-                RectangleType face0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(4), box0Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(5), box0Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(6), box0Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(7), box0Final) };
+                const RectangleType face0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(4), box0Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(5), box0Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(6), box0Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(7), box0Final) };
 
-                SegmentType edge1{ IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(0), box1Final),
-                                   IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(1), box1Final) };
+                const SegmentType edge1{ IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(0), box1Final),
+                                         IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(1), box1Final) };
 
                 CoplanarSegmentRectangle(edge1, face0);
             }
             else  // box1Cfg.GetMap() == VertexProjectionMap::M44
             {
                 // box0面——box1面相交
-                RectangleType face0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(4), box0Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(5), box0Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(6), box0Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(7), box0Final) };
+                const RectangleType face0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(4), box0Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(5), box0Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(6), box0Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(7), box0Final) };
 
-                RectangleType face1{ IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(0), box1Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(1), box1Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(2), box1Final),
-                                     IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(3), box1Final) };
+                const RectangleType face1{ IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(0), box1Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(1), box1Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(2), box1Final),
+                                           IntersectorUtility3<Real>::GetPointFromIndex(box1Cfg.GetIndex(3), box1Final) };
 
                 CoplanarRectangleRectangle(face0, face1);
             }

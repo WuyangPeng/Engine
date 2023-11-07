@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:32)
+///	版本：0.9.1.6 (2023/10/28 14:30)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_TRIANGLE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_TRIANGLE3_TRIANGLE3_DETAIL_H
@@ -43,7 +43,6 @@ bool Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::IsValid() const
 
 #endif  // OPEN_CLASS_INVARIANT
 
-// private
 template <typename Real>
 void Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Test()
 {

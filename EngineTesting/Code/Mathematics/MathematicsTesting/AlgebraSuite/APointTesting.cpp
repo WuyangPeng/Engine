@@ -185,7 +185,7 @@ void Mathematics::APointTesting::CalculateTest()
     ASSERT_APPROXIMATE(point6[2], 0.14f, 1e-4f);
 
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    const std::uniform_real randomDistribution{ -100.0f, 100.0f };
+    std::uniform_real randomDistribution{ -100.0f, 100.0f };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:42)
+///	版本：0.9.1.6 (2023/10/27 15:14)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RESLUT_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RESLUT_DETAIL_H
@@ -14,8 +14,6 @@
 #include "Detail/DistanceResultFactoryDetail.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "Mathematics/Base/MathDetail.h"
 
 template <typename Real, typename Vector>
 Mathematics::DistanceResult<Real, Vector>::DistanceResult(Real distance)
@@ -169,7 +167,7 @@ void Mathematics::DistanceResult<Real, Vector>::SetContactTime(Real contactTime)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (impl.GetConstImpl()->isHaveContactTime())
+    if (impl.GetConstImpl()->IsHaveContactTime())
     {
         impl->SetContactTime(contactTime);
     }

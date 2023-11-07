@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:28)
+///	版本：0.9.1.6 (2023/10/28 14:15)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE3_BOX3_DETAIL_H
@@ -56,8 +56,6 @@ Mathematics::Box3<Real> Mathematics::StaticFindIntersectorTriangle3Box3<Real>::G
 template <typename Real>
 void Mathematics::StaticFindIntersectorTriangle3Box3<Real>::Find()
 {
-    using Container = std::vector<Vector3>;
-
     // 从三角形开始，将其裁剪在盒子的每个面上。
 
     auto container = triangle.GetVertex();

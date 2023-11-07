@@ -58,7 +58,7 @@ void Mathematics::LinearSystemTesting::MainTest()
 void Mathematics::LinearSystemTesting::Solve2Test()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
     const std::uniform_int<> integerRandomDistribution(1, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -84,7 +84,7 @@ void Mathematics::LinearSystemTesting::Solve2Test()
 void Mathematics::LinearSystemTesting::Solve3Test()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
     const std::uniform_int<> integerRandomDistribution(1, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -118,8 +118,8 @@ void Mathematics::LinearSystemTesting::Solve3Test()
 void Mathematics::LinearSystemTesting::InverseTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const std::uniform_int<> integerRandomDistribution(1, 10);
+    std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    std::uniform_int<> integerRandomDistribution(1, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -159,8 +159,8 @@ void Mathematics::LinearSystemTesting::InverseTest()
 void Mathematics::LinearSystemTesting::SolveTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const std::uniform_int<> integerRandomDistribution(1, 10);
+    std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    std::uniform_int<> integerRandomDistribution(1, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -204,8 +204,8 @@ void Mathematics::LinearSystemTesting::SolveTest()
 void Mathematics::LinearSystemTesting::SolveTridiagonalTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const std::uniform_int<> integerRandomDistribution(3, 10);
+    std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    std::uniform_int<> integerRandomDistribution(3, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -261,8 +261,8 @@ void Mathematics::LinearSystemTesting::SolveTridiagonalTest()
 void Mathematics::LinearSystemTesting::SolveConstTridiagonalTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const std::uniform_int<> integerRandomDistribution(1, 10);
+    std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    std::uniform_int<> integerRandomDistribution(1, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -312,8 +312,8 @@ void Mathematics::LinearSystemTesting::SolveConstTridiagonalTest()
 void Mathematics::LinearSystemTesting::SolveSymmetricConjugateGradientTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const std::uniform_int<> integerRandomDistribution(1, 10);
+    std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    std::uniform_int<> integerRandomDistribution(1, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -384,8 +384,8 @@ void Mathematics::LinearSystemTesting::SolveSymmetricConjugateGradientTest()
 void Mathematics::LinearSystemTesting::SolveBandedTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const std::uniform_int<> integerRandomDistribution(4, 10);
+    std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    std::uniform_int<> integerRandomDistribution(4, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -449,8 +449,8 @@ void Mathematics::LinearSystemTesting::SolveBandedTest()
 void Mathematics::LinearSystemTesting::InvertTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const std::uniform_int<> integerRandomDistribution(4, 10);
+    std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    std::uniform_int<> integerRandomDistribution(4, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

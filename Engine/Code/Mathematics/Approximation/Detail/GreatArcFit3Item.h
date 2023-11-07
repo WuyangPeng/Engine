@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:17)
+///	版本：0.9.1.6 (2023/10/27 14:24)
 
 #ifndef MATHEMATICS_APPROXIMATION_GREAT_ARC_FIT3_ITEM_H
 #define MATHEMATICS_APPROXIMATION_GREAT_ARC_FIT3_ITEM_H
@@ -21,6 +21,7 @@ namespace Mathematics
     {
     public:
         using ClassType = GreatArcFit3Item<Real>;
+
         using Vector3 = Vector3<Real>;
 
     public:

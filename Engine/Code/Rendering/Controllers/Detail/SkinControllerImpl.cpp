@@ -263,6 +263,10 @@ void Rendering::SkinControllerImpl::Register(CoreTools::ObjectRegister& target) 
     }
 }
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+
 bool Rendering::SkinControllerImpl::Update(const VisualSharedPtr& visual)
 {
     RENDERING_CLASS_IS_VALID_1;
@@ -324,6 +328,8 @@ bool Rendering::SkinControllerImpl::Update(const VisualSharedPtr& visual)
     return false;
 }
 
+#include SYSTEM_WARNING_POP
+
 void Rendering::SkinControllerImpl::OnFirstUpdate(Visual& visual)
 {
     if (const auto vertexBuffer = visual.GetVertexBuffer();
@@ -335,7 +341,7 @@ void Rendering::SkinControllerImpl::OnFirstUpdate(Visual& visual)
         {
             const auto semantic = vertexFormat.GetAttributeUsage(i);
             const auto type = vertexFormat.GetAttributeType(i);
-            const auto unit = vertexFormat.GetUsageIndex(i);
+
             const auto offset = vertexFormat.GetOffset(i);
 
             if (semantic == VertexFormatFlags::Semantic::Position &&

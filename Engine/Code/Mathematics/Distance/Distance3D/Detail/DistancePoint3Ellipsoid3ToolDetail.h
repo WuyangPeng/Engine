@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:54)
+///	版本：0.9.1.6 (2023/10/27 16:26)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_ELLIPSOID3_TOOL_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_ELLIPSOID3_TOOL_DETAIL_H
@@ -23,7 +23,6 @@ Mathematics::DistancePoint3Ellipsoid3Tool<Real>::DistancePoint3Ellipsoid3Tool(Re
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real>
 void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistance()
 {
@@ -117,7 +116,6 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistance()
     }
 }
 
-// private
 template <typename Real>
 void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistanceSpecial(const Vector3& extent, const Vector3& queryPoint)
 {

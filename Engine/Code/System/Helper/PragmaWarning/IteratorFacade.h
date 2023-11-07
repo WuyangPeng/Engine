@@ -21,6 +21,7 @@
 #include SYSTEM_WARNING_DISABLE(26487)
 #include SYSTEM_WARNING_DISABLE(26491)
 #include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26819)
 
 #include <boost/iterator/iterator_facade.hpp>
 

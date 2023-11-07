@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 15:28)
+///	版本：0.9.1.6 (2023/10/26 10:23)
 
 #ifndef MATHEMATICS_ALGEBRA_BANDED_MATRIX_SOLVE_DETAIL_H
 #define MATHEMATICS_ALGEBRA_BANDED_MATRIX_SOLVE_DETAIL_H
@@ -17,8 +17,6 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/StreamMacro.h"
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>

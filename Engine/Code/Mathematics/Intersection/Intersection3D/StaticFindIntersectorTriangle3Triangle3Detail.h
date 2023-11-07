@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:28)
+///	版本：0.9.1.6 (2023/10/28 14:15)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE3_TRIANGLE3_DETAIL_H
@@ -31,14 +31,13 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::StaticFindIntersectorTriangle3Triangle3(const Triangle3& lhsTriangle, const Triangle3& rhsTriangle, bool reportCoplanarIntersections, const Real epsilon)
-    : ParentType{ epsilon }, triangle0{ lhsTriangle }, triangle1{ rhsTriangle }, point{}, reportCoplanarIntersections{ reportCoplanarIntersections }
+    : ParentType{ epsilon }, triangle0{ lhsTriangle }, triangle1{ rhsTriangle }, reportCoplanarIntersections{ reportCoplanarIntersections }, point{}
 {
     Find();
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real>
 void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Find()
 {
@@ -189,9 +188,9 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::ContainsPoint(c
     /// 构造为{ U0，U1，N } 是一个正交集。 平面中的任何点Q均可写为Q = V0 + x0 * U0 + x1 * U1。
     ///  坐标计算为x0 = Dot(U0,Q - V0)和x1 = Dot(U1,Q - V0)。
 
-    const auto Vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(plane.GetNormal());
-    const auto uVector = Vector3OrthonormalBasis.GetUVector();
-    const auto vVector = Vector3OrthonormalBasis.GetVVector();
+    const auto vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(plane.GetNormal());
+    const auto uVector = vector3OrthonormalBasis.GetUVector();
+    const auto vVector = vector3OrthonormalBasis.GetVVector();
 
     /// 计算点P，V1和V2的平面坐标。 为简化起见，从这些点中减去原点，在这种情况下，平面坐标适用于P - V0，V1 - V0和V2 - V0。
     auto pointMinusVertex0 = vector3 - triangle.GetVertex(0);
@@ -295,7 +294,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
 
     const auto quantity = calc.GetQuantity();
 
-    Triangle intersector;
+    Triangle intersector{};
     if (calc.GetIntersectionType() == IntersectionType::Segment)
     {
         this->SetIntersectionType(IntersectionType::Segment);

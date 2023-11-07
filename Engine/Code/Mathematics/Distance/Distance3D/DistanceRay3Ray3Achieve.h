@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 18:07)
+///	版本：0.9.1.6 (2023/10/27 16:34)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RAY3_RAY3_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RAY3_RAY3_ACHIEVE_H
@@ -166,7 +166,6 @@ typename Mathematics::DistanceRay3Ray3<Real>::DistanceResult Mathematics::Distan
     }
 }
 
-// private
 template <typename Real>
 typename Mathematics::DistanceRay3Ray3<Real>::DistanceResult Mathematics::DistanceRay3Ray3<Real>::GetSquaredWithClosestPointsIsOrigin(const DistanceLine3Line3Tool& tool) const
 {
@@ -178,7 +177,6 @@ typename Mathematics::DistanceRay3Ray3<Real>::DistanceResult Mathematics::Distan
                            Math::GetValue(0) };
 }
 
-// private
 template <typename Real>
 typename Mathematics::DistanceRay3Ray3<Real>::DistanceResult Mathematics::DistanceRay3Ray3<Real>::GetSquaredWithClosestPointsIsLhs(const DistanceLine3Line3Tool& tool) const
 {
@@ -192,7 +190,6 @@ typename Mathematics::DistanceRay3Ray3<Real>::DistanceResult Mathematics::Distan
                            Math::GetValue(0) };
 }
 
-// private
 template <typename Real>
 typename Mathematics::DistanceRay3Ray3<Real>::DistanceResult Mathematics::DistanceRay3Ray3<Real>::GetSquaredWithClosestPointsIsRhs(const DistanceLine3Line3Tool& tool) const
 {

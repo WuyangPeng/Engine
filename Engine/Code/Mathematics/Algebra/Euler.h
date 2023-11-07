@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 15:35)
+///	版本：0.9.1.6 (2023/10/26 14:43)
 
 #ifndef MATHEMATICS_ALGEBRA_EULER_H
 #define MATHEMATICS_ALGEBRA_EULER_H
@@ -24,9 +24,8 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Euler final
     {
     public:
-        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
-
         using ClassType = Euler<Real>;
+
         using Math = Math<Real>;
 
     public:

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:18)
+///	版本：0.9.1.6 (2023/10/27 18:13)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SEGMENT3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SEGMENT3_TRIANGLE3_DETAIL_H
@@ -108,7 +108,7 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::Find()
     using SegmentType = std::array<Vector3, 2>;
 
     // 获取细分的端点。
-    SegmentType segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
+    const SegmentType segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
 
     // 获取三角形的边缘。
     auto edge0 = triangle.GetVertex(1) - triangle.GetVertex(0);

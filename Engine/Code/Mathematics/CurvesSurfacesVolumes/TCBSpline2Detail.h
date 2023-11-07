@@ -11,6 +11,7 @@
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_TCB_SPLINE2_DETAIL_H
 
 #include "TCBSpline2.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/NumericalAnalysis/RombergIntegralDetail.h"
 

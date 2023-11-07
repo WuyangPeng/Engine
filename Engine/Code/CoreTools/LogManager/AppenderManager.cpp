@@ -47,7 +47,7 @@ bool CoreTools::AppenderManager::InsertLogger(const Logger& logger)
     return impl->InsertLogger(logger);
 }
 
-bool CoreTools::AppenderManager::RemoveLogger(LogFilter logFilter)
+bool CoreTools::AppenderManager::RemoveLogger(LogFilter logFilter) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -61,7 +61,7 @@ bool CoreTools::AppenderManager::InsertConsoleAppender(const Appender& appender)
     return impl->InsertConsoleAppender(appender);
 }
 
-bool CoreTools::AppenderManager::RemoveAppender(const String& name)
+bool CoreTools::AppenderManager::RemoveAppender(const String& name) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

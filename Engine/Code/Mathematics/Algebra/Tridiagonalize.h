@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 17:56)
+///	版本：0.9.1.6 (2023/10/26 15:02)
 
 #ifndef MATHEMATICS_ALGEBRA_TRIDIAGONALIZE_H
 #define MATHEMATICS_ALGEBRA_TRIDIAGONALIZE_H
@@ -24,6 +24,7 @@ namespace Mathematics
     {
     public:
         using ClassType = Tridiagonalize<Real>;
+
         using Math = Math<Real>;
         using Matrix3 = Matrix3<Real>;
         using Vector2 = Vector2<Real>;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 19:31)
+///	版本：0.9.1.6 (2023/10/27 18:02)
 
 #ifndef MATHEMATICS_INTERSECTION_TRIANGLE_PLANE_RELATIONS_DETAIL_H
 #define MATHEMATICS_INTERSECTION_TRIANGLE_PLANE_RELATIONS_DETAIL_H
@@ -24,7 +24,6 @@ Mathematics::TrianglePlaneRelations<Real>::TrianglePlaneRelations(const Triangle
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real>
 void Mathematics::TrianglePlaneRelations<Real>::Relations(const Triangle3& triangle, const Plane3& plane, const Real epsilon)
 {

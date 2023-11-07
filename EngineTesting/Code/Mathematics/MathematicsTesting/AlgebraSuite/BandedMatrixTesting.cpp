@@ -48,11 +48,11 @@ void Mathematics::BandedMatrixTesting::MainTest()
 void Mathematics::BandedMatrixTesting::ConstructionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> integerRandomDistribution0{ 2, 20 };
+    std::uniform_int<> integerRandomDistribution0{ 2, 20 };
 
     const auto size = integerRandomDistribution0(generator);
 
-    const std::uniform_int<> secondIntegerRandomDistribution(1, size);
+    std::uniform_int<> secondIntegerRandomDistribution(1, size);
 
     const auto lowerBoundNumber = secondIntegerRandomDistribution(generator);
     const auto upperBoundNumber = secondIntegerRandomDistribution(generator);

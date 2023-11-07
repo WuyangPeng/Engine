@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 15:07)
+///	版本：0.9.1.6 (2023/10/26 10:19)
 
 #ifndef MATHEMATICS_ALGEBRA_AXES_ALIGN_BOUNDING_BOX3_DETAIL_H
 #define MATHEMATICS_ALGEBRA_AXES_ALIGN_BOUNDING_BOX3_DETAIL_H
@@ -13,7 +13,6 @@
 #include "AxesAlignBoundingBox3.h"
 
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
 
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_AXES_ALIGN_BOUNDING_BOX3_ACHIEVE)
 

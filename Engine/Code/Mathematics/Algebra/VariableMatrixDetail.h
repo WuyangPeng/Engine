@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 18:20)
+///	版本：0.9.1.6 (2023/10/26 11:09)
 
 #ifndef MATHEMATICS_ALGEBRA_VARIABLE_MATRIX_DETAIL_H
 #define MATHEMATICS_ALGEBRA_VARIABLE_MATRIX_DETAIL_H
@@ -24,7 +24,7 @@
 template <typename Real>
 requires std::is_arithmetic_v<Real>
 Mathematics::VariableMatrix<Real>::VariableMatrix(int rowsNumber, int columnsNumber)
-    : container{ rowsNumber, VariableLengthVector{ columnsNumber } }
+    : container(rowsNumber, VariableLengthVector{ columnsNumber })
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_3;
 }

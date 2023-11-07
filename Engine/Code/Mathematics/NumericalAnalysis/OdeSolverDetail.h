@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:50)
+///	版本：0.9.1.6 (2023/10/27 10:22)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_ODE_SOLVER_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_ODE_SOLVER_DETAIL_H
@@ -24,12 +24,13 @@ Mathematics::OdeSolver<Real, UserDataType>::Data::Data(Real t, const Container& 
 
 template <typename Real, typename UserDataType>
 Mathematics::OdeSolver<Real, UserDataType>::OdeSolver(int dimension, Real step, Function function, const UserDataType* userData)
-    : dimension{ dimension }, step{ step }, function{ function }, userData{ userData }, functionValue(dimension)
+    : dimension{ dimension }, function{ function }, userData{ userData }, step{ step }, functionValue(dimension)
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real, typename UserDataType>
 bool Mathematics::OdeSolver<Real, UserDataType>::IsValid() const noexcept
 {
@@ -42,6 +43,7 @@ bool Mathematics::OdeSolver<Real, UserDataType>::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename UserDataType>
@@ -79,7 +81,6 @@ void Mathematics::OdeSolver<Real, UserDataType>::SetStepSize(Real newStep) noexc
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26440)
 
-// protected
 template <typename Real, typename UserDataType>
 void Mathematics::OdeSolver<Real, UserDataType>::CalculateFunctionValue(Real tIn, const Container& xIn)
 {
@@ -88,35 +89,30 @@ void Mathematics::OdeSolver<Real, UserDataType>::CalculateFunctionValue(Real tIn
 
 #include SYSTEM_WARNING_POP
 
-// protected
 template <typename Real, typename UserDataType>
 int Mathematics::OdeSolver<Real, UserDataType>::GetDimension() const noexcept
 {
     return dimension;
 }
 
-// protected
 template <typename Real, typename UserDataType>
 Real Mathematics::OdeSolver<Real, UserDataType>::GetStepFunctionValue(int index) const
 {
     return step * GetFunctionValue(index);
 }
 
-// protected
 template <typename Real, typename UserDataType>
 Real Mathematics::OdeSolver<Real, UserDataType>::GetFunctionValue(int index) const
 {
     return functionValue.at(index);
 }
 
-// protected
 template <typename Real, typename UserDataType>
 typename Mathematics::OdeSolver<Real, UserDataType>::Container Mathematics::OdeSolver<Real, UserDataType>::GetFunctionValue() const
 {
     return functionValue;
 }
 
-// protected
 template <typename Real, typename UserDataType>
 void Mathematics::OdeSolver<Real, UserDataType>::SetFunctionValue(const Container& newFunctionValue)
 {

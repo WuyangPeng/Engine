@@ -51,7 +51,7 @@ int Network::MessageTypeConditionSpecific::GetMinVersion() const noexcept
     return *specificVersion.begin();
 }
 
-int Network::MessageTypeConditionSpecific::GetMaxVersion() const
+int Network::MessageTypeConditionSpecific::GetMaxVersion() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 

@@ -41,10 +41,12 @@
 #include SYSTEM_WARNING_DISABLE(26491)
 #include SYSTEM_WARNING_DISABLE(26492)
 #include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26494)
 #include SYSTEM_WARNING_DISABLE(26495)
 #include SYSTEM_WARNING_DISABLE(26496)
 #include SYSTEM_WARNING_DISABLE(26497)
 #include SYSTEM_WARNING_DISABLE(26812)
+#include SYSTEM_WARNING_DISABLE(26819)
 
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/find.hpp>

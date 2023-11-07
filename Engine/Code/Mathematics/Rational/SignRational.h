@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:07)
+///	版本：0.9.1.6 (2023/10/26 20:10)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_H
 #define MATHEMATICS_RATIONAL_RATIONAL_H
@@ -25,6 +25,7 @@ namespace Mathematics
     {
     public:
         using ClassType = SignRational<N>;
+
         using Integer = Integer<N>;
 
     public:
@@ -43,7 +44,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        //成员访问
+        // 成员访问
         NODISCARD Integer GetNumerator() const noexcept;
         NODISCARD Integer GetDenominator() const noexcept;
         void Set(const Integer& newNumerator, const Integer& newDenominator);

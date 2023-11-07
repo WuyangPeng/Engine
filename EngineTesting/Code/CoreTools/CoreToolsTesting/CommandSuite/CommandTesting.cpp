@@ -120,7 +120,7 @@ void CoreTools::CommandTesting::SetMinValueExceptionTest()
 
     command.SetMinValue(17.0);
 
-    MAYBE_UNUSED auto value = command.GetFloat("float");
+    MAYBE_UNUSED const auto value = command.GetFloat("float");
 }
 
 void CoreTools::CommandTesting::SetMaxValueExceptionTest()
@@ -131,7 +131,7 @@ void CoreTools::CommandTesting::SetMaxValueExceptionTest()
 
     command.SetMaxValue(4.0);
 
-    MAYBE_UNUSED auto value = command.GetDouble("double");
+    MAYBE_UNUSED const auto value = command.GetDouble("double");
 }
 
 void CoreTools::CommandTesting::SetInfValueExceptionTest()
@@ -142,7 +142,7 @@ void CoreTools::CommandTesting::SetInfValueExceptionTest()
 
     command.SetInfValue(52);
 
-    MAYBE_UNUSED auto value = command.GetInteger("integer");
+    MAYBE_UNUSED const auto value = command.GetInteger("integer");
 }
 
 void CoreTools::CommandTesting::SetSupValueExceptionTest()
@@ -153,5 +153,5 @@ void CoreTools::CommandTesting::SetSupValueExceptionTest()
 
     command.SetSupValue(50);
 
-    MAYBE_UNUSED auto value = command.GetInteger("integer");
+    MAYBE_UNUSED const auto value = command.GetInteger("integer");
 }

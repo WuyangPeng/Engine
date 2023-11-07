@@ -40,7 +40,7 @@ void Mathematics::Int64Vector3Testing::MainTest()
 void Mathematics::Int64Vector3Testing::ConstructionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
+    std::uniform_int<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
 
     auto vector0 = Int64Vector3::CreateDefault();
 
@@ -106,7 +106,7 @@ void Mathematics::Int64Vector3Testing::ConstructionTest()
 void Mathematics::Int64Vector3Testing::CalculateTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
+    std::uniform_int<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
 
     Int64Vector3 vector0(randomDistribution0(generator),
                          randomDistribution0(generator),
@@ -135,7 +135,7 @@ void Mathematics::Int64Vector3Testing::CalculateTest()
 
     ASSERT_EQUAL(vector2, vector3);
 
-    auto tripleScalar = vector0.Dot(vector1.Cross(vector2));
+    const auto tripleScalar = vector0.Dot(vector1.Cross(vector2));
 
     ASSERT_EQUAL(tripleScalar, vector0.TripleScalar(vector1, vector2));
 }
@@ -143,7 +143,7 @@ void Mathematics::Int64Vector3Testing::CalculateTest()
 void Mathematics::Int64Vector3Testing::OperatorTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
+    std::uniform_int<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
 
     Int64Vector3 vector0(randomDistribution0(generator),
                          randomDistribution0(generator),

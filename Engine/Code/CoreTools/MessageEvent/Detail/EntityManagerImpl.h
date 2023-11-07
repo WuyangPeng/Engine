@@ -33,7 +33,7 @@ namespace CoreTools
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD bool Register(const EntitySharedPtr& entity);
-        NODISCARD bool UnRegister(int64_t entityId);
+        NODISCARD bool UnRegister(int64_t entityId) noexcept;
 
         NODISCARD EntitySharedPtr GetEntity(int64_t entityId) const;
 

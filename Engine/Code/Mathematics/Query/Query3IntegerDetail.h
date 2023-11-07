@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:10)
+///	版本：0.9.1.6 (2023/10/27 13:58)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_INTEGER_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY3_INTEGER_DETAIL_H
@@ -42,6 +42,7 @@ Mathematics::QueryType Mathematics::Query3Integer<Real>::GetType() const noexcep
 
     return QueryType::Interger;
 }
+
 template <typename Real>
 Mathematics::PlaneQueryType Mathematics::Query3Integer<Real>::ToPlane(int index, int v0, int v1, int v2) const
 {
@@ -72,9 +73,8 @@ Mathematics::PlaneQueryType Mathematics::Query3Integer<Real>::ToPlane(const Vect
     const Integer<4> y2{ vector2.GetY() - vector0.GetY() };
     const Integer<4> z2{ vector2.GetZ() - vector0.GetZ() };
 
-    const auto det = QueryDotTools<Integer<4>>::Det3(x0, y0, z0, x1, y1, z1, x2, y2, z2);
-
-    if (Integer<4>{} < det)
+    if (const auto det = QueryDotTools<Integer<4>>::Det3(x0, y0, z0, x1, y1, z1, x2, y2, z2);
+        Integer<4>{} < det)
         return PlaneQueryType::PositiveSide;
     else if (det < Integer<4>{})
         return PlaneQueryType::NegativeSide;
@@ -132,9 +132,8 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Integer<Real>::ToCircumsph
     const auto w2 = s2x * d2x + s2y * d2y + s2z * d2z;
     const auto w3 = s3x * d3x + s3y * d3y + s3z * d3z;
 
-    const auto det = QueryDotTools<Integer<6>>::Det4(d0x, d0y, d0z, w0, d1x, d1y, d1z, w1, d2x, d2y, d2z, w2, d3x, d3y, d3z, w3);
-
-    if (Integer<6>{} < det)
+    if (const auto det = QueryDotTools<Integer<6>>::Det4(d0x, d0y, d0z, w0, d1x, d1y, d1z, w1, d2x, d2y, d2z, w2, d3x, d3y, d3z, w3);
+        Integer<6>{} < det)
         return CircumsphereQueryType::Outside;
     else if (det < Integer<6>{})
         return CircumsphereQueryType::Inside;

@@ -50,7 +50,7 @@ void Mathematics::QueryDotToolsTesting::MainTest()
 void Mathematics::QueryDotToolsTesting::DotTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -72,7 +72,7 @@ void Mathematics::QueryDotToolsTesting::DotTest()
 void Mathematics::QueryDotToolsTesting::Det2Test()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution0(-100.0f, 100.0f);
+    std::uniform_real<float> randomDistribution0(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -88,7 +88,7 @@ void Mathematics::QueryDotToolsTesting::Det2Test()
 void Mathematics::QueryDotToolsTesting::Det3Test()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

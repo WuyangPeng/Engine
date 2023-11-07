@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:36)
+///	版本：0.9.1.6 (2023/10/27 14:15)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_POWERS_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_POWERS_DETAIL_H
@@ -26,7 +26,6 @@ Mathematics::PolynomialFit2Powers<Real>::PolynomialFit2Powers(const Samples& xSa
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialFit2Powers<Real>::Init(const Samples& xSamples, const Samples& wSamples)
 {
@@ -38,7 +37,6 @@ void Mathematics::PolynomialFit2Powers<Real>::Init(const Samples& xSamples, cons
     DoLeastSquaresFit(xTargetSamples, wTargetSamples);
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialFit2Powers<Real>::InitializePowers()
 {
@@ -49,7 +47,6 @@ void Mathematics::PolynomialFit2Powers<Real>::InitializePowers()
     powersData.SetMaxPower(0, *maxXPowerConstIter);
 }
 
-// private
 template <typename Real>
 void Mathematics::PolynomialFit2Powers<Real>::TransformToUnit(const Samples& xSourceSamples, const Samples& wSourceSamples, Samples& xTargetSamples, Samples& wTargetSamples)
 {
@@ -106,11 +103,11 @@ void Mathematics::PolynomialFit2Powers<Real>::DoLeastSquaresFit(const Samples& x
         for (auto row = 0; row < numPowers; ++row)
         {
             // 更新对称矩阵的上三角部分。
-            for (auto colomn = row; colomn < numPowers; ++colomn)
+            for (auto column = row; column < numPowers; ++column)
             {
-                auto next = powers.at(row) + powers.at(colomn);
+                auto next = powers.at(row) + powers.at(column);
                 auto xp = xPowers.at(next);
-                matrix(row, colomn) += xp;
+                matrix(row, column) += xp;
             }
 
             // 更新系统在右手坐标系。

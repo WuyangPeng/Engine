@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 09:29)
+///	版本：0.9.1.6 (2023/10/28 14:22)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_ELLIPSOID3_ELLIPSOID3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_ELLIPSOID3_ELLIPSOID3_DETAIL_H
@@ -422,49 +422,49 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::RootsType
     auto temp0 = (Math::GetValue(1) - multiplier0 * sqrtd0c0) * invD0;
     auto temp1 = (Math::GetValue(1) - multiplier0 * sqrtd1c1) * invD1;
     auto temp2 = (Math::GetValue(1) - multiplier0 * sqrtd2c2) * invD2;
-    auto smin = (temp0 < temp1 ? temp0 : temp1);
-    smin = (temp2 < smin ? temp2 : smin);
-    auto invN0 = (Math::GetValue(1)) / (d0 * smin - Math::GetValue(1));
-    auto invN1 = (Math::GetValue(1)) / (d1 * smin - Math::GetValue(1));
-    auto invN2 = (Math::GetValue(1)) / (d2 * smin - Math::GetValue(1));
+    auto sMin = (temp0 < temp1 ? temp0 : temp1);
+    sMin = (temp2 < sMin ? temp2 : sMin);
+    auto invN0 = (Math::GetValue(1)) / (d0 * sMin - Math::GetValue(1));
+    auto invN1 = (Math::GetValue(1)) / (d1 * sMin - Math::GetValue(1));
+    auto invN2 = (Math::GetValue(1)) / (d2 * sMin - Math::GetValue(1));
     auto invN0Sqr = invN0 * invN0;
     auto invN1Sqr = invN1 * invN1;
     auto invN2Sqr = invN2 * invN2;
-    auto fmin = d0c0 * invN0Sqr + d1c1 * invN1Sqr + d2c2 * invN2Sqr - Math::GetValue(1);
-    MATHEMATICS_ASSERTION_0(fmin < Math::GetValue(0), "意外情况.\n");
+    auto fMin = d0c0 * invN0Sqr + d1c1 * invN1Sqr + d2c2 * invN2Sqr - Math::GetValue(1);
+    MATHEMATICS_ASSERTION_0(fMin < Math::GetValue(0), "意外情况.\n");
 
-    auto smax = (Math::GetValue(1) - multiplier1 * sqrtd0c0) * invD0;
-    invN0 = (Math::GetValue(1)) / (d0 * smax - Math::GetValue(1));
-    invN1 = (Math::GetValue(1)) / (d1 * smax - Math::GetValue(1));
-    invN2 = (Math::GetValue(1)) / (d2 * smax - Math::GetValue(1));
+    auto sMax = (Math::GetValue(1) - multiplier1 * sqrtd0c0) * invD0;
+    invN0 = (Math::GetValue(1)) / (d0 * sMax - Math::GetValue(1));
+    invN1 = (Math::GetValue(1)) / (d1 * sMax - Math::GetValue(1));
+    invN2 = (Math::GetValue(1)) / (d2 * sMax - Math::GetValue(1));
     invN0Sqr = invN0 * invN0;
     invN1Sqr = invN1 * invN1;
     invN2Sqr = invN2 * invN2;
-    auto fmax = d0c0 * invN0Sqr + d1c1 * invN1Sqr + d2c2 * invN2Sqr - Math::GetValue(1);
-    MATHEMATICS_ASSERTION_0(Math::GetValue(0) < fmax, "意外情况.\n");
+    auto fMax = d0c0 * invN0Sqr + d1c1 * invN1Sqr + d2c2 * invN2Sqr - Math::GetValue(1);
+    MATHEMATICS_ASSERTION_0(Math::GetValue(0) < fMax, "意外情况.\n");
 
-    auto result = BisectF(d0, d1, d2, d0c0, d1c1, d2c2, smin, fmin, smax, fmax);
+    auto result = BisectF(d0, d1, d2, d0c0, d1c1, d2c2, sMin, fMin, sMax, fMax);
     roots.emplace_back(result.s);
 
     // 计算根在 (1 / d0,1 / d1).
 
     result = BisectDF(d0, d1, d2, d0c0, d1c1, d2c2, invD0, -Math::maxReal, invD1, Math::maxReal);
-    auto smid = result.s;
+    auto sMid = result.s;
     auto df = result.f;
-    invN0 = (Math::GetValue(1)) / (d0 * smid - Math::GetValue(1));
-    invN1 = (Math::GetValue(1)) / (d1 * smid - Math::GetValue(1));
-    invN2 = (Math::GetValue(1)) / (d2 * smid - Math::GetValue(1));
+    invN0 = (Math::GetValue(1)) / (d0 * sMid - Math::GetValue(1));
+    invN1 = (Math::GetValue(1)) / (d1 * sMid - Math::GetValue(1));
+    invN2 = (Math::GetValue(1)) / (d2 * sMid - Math::GetValue(1));
     invN0Sqr = invN0 * invN0;
     invN1Sqr = invN1 * invN1;
     invN2Sqr = invN2 * invN2;
-    auto fmid = d0c0 * invN0Sqr + d1c1 * invN1Sqr + d2c2 * invN2Sqr - Math::GetValue(1);
-    if (fmid < Math::GetValue(0))
+    auto fMid = d0c0 * invN0Sqr + d1c1 * invN1Sqr + d2c2 * invN2Sqr - Math::GetValue(1);
+    if (fMid < Math::GetValue(0))
     {
-        auto resultType = BisectF(d0, d1, d2, d0c0, d1c1, d2c2, invD0, Math::maxReal, smid, fmid);
+        auto resultType = BisectF(d0, d1, d2, d0c0, d1c1, d2c2, invD0, Math::maxReal, sMid, fMid);
         auto s = resultType.s;
         auto f = resultType.f;
         roots.emplace_back(s);
-        resultType = BisectF(d0, d1, d2, d0c0, d1c1, d2c2, smid, fmid, invD1, Math::maxReal);
+        resultType = BisectF(d0, d1, d2, d0c0, d1c1, d2c2, sMid, fMid, invD1, Math::maxReal);
         s = resultType.s;
         f = resultType.f;
         roots.emplace_back(s);
@@ -472,22 +472,22 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::RootsType
 
     // 计算根在 (1 / d1,1 / d2).
     result = BisectDF(d0, d1, d2, d0c0, d1c1, d2c2, invD1, -Math::maxReal, invD2, Math::maxReal);
-    smid = result.s;
+    sMid = result.s;
     df = result.f;
-    invN0 = (Math::GetValue(1)) / (d0 * smid - Math::GetValue(1));
-    invN1 = (Math::GetValue(1)) / (d1 * smid - Math::GetValue(1));
-    invN2 = (Math::GetValue(1)) / (d2 * smid - Math::GetValue(1));
+    invN0 = (Math::GetValue(1)) / (d0 * sMid - Math::GetValue(1));
+    invN1 = (Math::GetValue(1)) / (d1 * sMid - Math::GetValue(1));
+    invN2 = (Math::GetValue(1)) / (d2 * sMid - Math::GetValue(1));
     invN0Sqr = invN0 * invN0;
     invN1Sqr = invN1 * invN1;
     invN2Sqr = invN2 * invN2;
-    fmid = d0c0 * invN0Sqr + d1c1 * invN1Sqr + d2c2 * invN2Sqr - Math::GetValue(1);
-    if (fmid < Math::GetValue(0))
+    fMid = d0c0 * invN0Sqr + d1c1 * invN1Sqr + d2c2 * invN2Sqr - Math::GetValue(1);
+    if (fMid < Math::GetValue(0))
     {
-        auto resultType = BisectF(d0, d1, d2, d0c0, d1c1, d2c2, invD1, Math::maxReal, smid, fmid);
+        auto resultType = BisectF(d0, d1, d2, d0c0, d1c1, d2c2, invD1, Math::maxReal, sMid, fMid);
         auto s = resultType.s;
         auto f = resultType.f;
         roots.emplace_back(s);
-        resultType = BisectF(d0, d1, d2, d0c0, d1c1, d2c2, smid, fmid, invD2, Math::maxReal);
+        resultType = BisectF(d0, d1, d2, d0c0, d1c1, d2c2, sMid, fMid, invD2, Math::maxReal);
         s = resultType.s;
         f = resultType.f;
         roots.emplace_back(s);
@@ -497,26 +497,26 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::RootsType
     temp0 = (Math::GetValue(1) + multiplier0 * sqrtd0c0) * invD0;
     temp1 = (Math::GetValue(1) + multiplier0 * sqrtd1c1) * invD1;
     temp2 = (Math::GetValue(1) + multiplier0 * sqrtd2c2) * invD2;
-    smax = (temp0 > temp1 ? temp0 : temp1);
-    smax = (temp2 > smax ? temp2 : smax);
-    invN0 = (Math::GetValue(1)) / (d0 * smax - Math::GetValue(1));
-    invN1 = (Math::GetValue(1)) / (d1 * smax - Math::GetValue(1));
-    invN2 = (Math::GetValue(1)) / (d2 * smax - Math::GetValue(1));
+    sMax = (temp0 > temp1 ? temp0 : temp1);
+    sMax = (temp2 > sMax ? temp2 : sMax);
+    invN0 = (Math::GetValue(1)) / (d0 * sMax - Math::GetValue(1));
+    invN1 = (Math::GetValue(1)) / (d1 * sMax - Math::GetValue(1));
+    invN2 = (Math::GetValue(1)) / (d2 * sMax - Math::GetValue(1));
     invN0Sqr = invN0 * invN0;
     invN1Sqr = invN1 * invN1;
     invN2Sqr = invN2 * invN2;
-    fmax = d0c0 * invN0Sqr + d1c1 * invN1Sqr + d2c2 * invN2Sqr - Math::GetValue(1);
-    MATHEMATICS_ASSERTION_0(fmax < Math::GetValue(0), "Unexpected condition.\n");
-    smin = (Math::GetValue(1) + multiplier1 * sqrtd2c2) * invD2;
-    invN0 = (Math::GetValue(1)) / (d0 * smin - Math::GetValue(1));
-    invN1 = (Math::GetValue(1)) / (d1 * smin - Math::GetValue(1));
-    invN2 = (Math::GetValue(1)) / (d2 * smin - Math::GetValue(1));
+    fMax = d0c0 * invN0Sqr + d1c1 * invN1Sqr + d2c2 * invN2Sqr - Math::GetValue(1);
+    MATHEMATICS_ASSERTION_0(fMax < Math::GetValue(0), "Unexpected condition.\n");
+    sMin = (Math::GetValue(1) + multiplier1 * sqrtd2c2) * invD2;
+    invN0 = (Math::GetValue(1)) / (d0 * sMin - Math::GetValue(1));
+    invN1 = (Math::GetValue(1)) / (d1 * sMin - Math::GetValue(1));
+    invN2 = (Math::GetValue(1)) / (d2 * sMin - Math::GetValue(1));
     invN0Sqr = invN0 * invN0;
     invN1Sqr = invN1 * invN1;
     invN2Sqr = invN2 * invN2;
-    fmin = d0c0 * invN0Sqr + d1c1 * invN1Sqr + d2c2 * invN2Sqr - Math::GetValue(1);
-    MATHEMATICS_ASSERTION_0(fmin > Math::GetValue(0), "Unexpected condition.\n");
-    auto resultType = BisectF(d0, d1, d2, d0c0, d1c1, d2c2, smin, fmin, smax, fmax);
+    fMin = d0c0 * invN0Sqr + d1c1 * invN1Sqr + d2c2 * invN2Sqr - Math::GetValue(1);
+    MATHEMATICS_ASSERTION_0(fMin > Math::GetValue(0), "Unexpected condition.\n");
+    auto resultType = BisectF(d0, d1, d2, d0c0, d1c1, d2c2, sMin, fMin, sMax, fMax);
     roots.emplace_back(resultType.s);
 
     return roots;
@@ -658,21 +658,21 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::RootsType
     // 计算根在 (-infinity,1 / d0).
     auto temp0 = (Math::GetValue(1) - multiplier0 * sqrtd0c0) * invD0;
     auto temp1 = (Math::GetValue(1) - multiplier0 * sqrtd1c1) * invD1;
-    auto smin = (temp0 < temp1 ? temp0 : temp1);
-    auto invN0 = (Math::GetValue(1)) / (d0 * smin - Math::GetValue(1));
-    auto invN1 = (Math::GetValue(1)) / (d1 * smin - Math::GetValue(1));
+    auto sMin = (temp0 < temp1 ? temp0 : temp1);
+    auto invN0 = (Math::GetValue(1)) / (d0 * sMin - Math::GetValue(1));
+    auto invN1 = (Math::GetValue(1)) / (d1 * sMin - Math::GetValue(1));
     auto invN0Sqr = invN0 * invN0;
     auto invN1Sqr = invN1 * invN1;
-    auto fmin = d0c0 * invN0Sqr + d1c1 * invN1Sqr - Math::GetValue(1);
-    MATHEMATICS_ASSERTION_0(fmin < Math::GetValue(0), "Unexpected condition.\n");
-    auto smax = (Math::GetValue(1) - multiplier1 * sqrtd0c0) * invD0;
-    invN0 = (Math::GetValue(1)) / (d0 * smax - Math::GetValue(1));
-    invN1 = (Math::GetValue(1)) / (d1 * smax - Math::GetValue(1));
+    auto fMin = d0c0 * invN0Sqr + d1c1 * invN1Sqr - Math::GetValue(1);
+    MATHEMATICS_ASSERTION_0(fMin < Math::GetValue(0), "Unexpected condition.\n");
+    auto sMax = (Math::GetValue(1) - multiplier1 * sqrtd0c0) * invD0;
+    invN0 = (Math::GetValue(1)) / (d0 * sMax - Math::GetValue(1));
+    invN1 = (Math::GetValue(1)) / (d1 * sMax - Math::GetValue(1));
     invN0Sqr = invN0 * invN0;
     invN1Sqr = invN1 * invN1;
-    auto fmax = d0c0 * invN0Sqr + d1c1 * invN1Sqr - Math::GetValue(1);
-    MATHEMATICS_ASSERTION_0(fmax > Math::GetValue(0), "Unexpected condition.\n");
-    auto result = BisectF(d0, d1, d0c0, d1c1, smin, fmin, smax, fmax);
+    auto fMax = d0c0 * invN0Sqr + d1c1 * invN1Sqr - Math::GetValue(1);
+    MATHEMATICS_ASSERTION_0(fMax > Math::GetValue(0), "Unexpected condition.\n");
+    auto result = BisectF(d0, d1, d0c0, d1c1, sMin, fMin, sMax, fMax);
     auto s = result.s;
     auto f = result.f;
     roots.emplace_back(s);
@@ -680,20 +680,20 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::RootsType
     // 计算根在 (1 / d0,1 / d1).
 
     result = BisectDF(d0, d1, d0c0, d1c1, invD0, -Math::maxReal, invD1, Math::maxReal);
-    auto smid = result.s;
+    auto sMid = result.s;
 
-    invN0 = (Math::GetValue(1)) / (d0 * smid - Math::GetValue(1));
-    invN1 = (Math::GetValue(1)) / (d1 * smid - Math::GetValue(1));
+    invN0 = (Math::GetValue(1)) / (d0 * sMid - Math::GetValue(1));
+    invN1 = (Math::GetValue(1)) / (d1 * sMid - Math::GetValue(1));
     invN0Sqr = invN0 * invN0;
     invN1Sqr = invN1 * invN1;
-    auto fmid = d0c0 * invN0Sqr + d1c1 * invN1Sqr - Math::GetValue(1);
-    if (fmid < Math::GetValue(0))
+    auto fMid = d0c0 * invN0Sqr + d1c1 * invN1Sqr - Math::GetValue(1);
+    if (fMid < Math::GetValue(0))
     {
-        result = BisectF(d0, d1, d0c0, d1c1, invD0, Math::maxReal, smid, fmid);
+        result = BisectF(d0, d1, d0c0, d1c1, invD0, Math::maxReal, sMid, fMid);
         s = result.s;
         f = result.f;
         roots.emplace_back(s);
-        result = BisectF(d0, d1, d0c0, d1c1, smid, fmid, invD1, Math::maxReal);
+        result = BisectF(d0, d1, d0c0, d1c1, sMid, fMid, invD1, Math::maxReal);
         s = result.s;
         f = result.f;
         roots.emplace_back(s);
@@ -702,21 +702,21 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::RootsType
     // 计算根在 (1 / d1,+infinity).
     temp0 = (Math::GetValue(1) + multiplier0 * sqrtd0c0) * invD0;
     temp1 = (Math::GetValue(1) + multiplier0 * sqrtd1c1) * invD1;
-    smax = (temp0 > temp1 ? temp0 : temp1);
-    invN0 = (Math::GetValue(1)) / (d0 * smax - Math::GetValue(1));
-    invN1 = (Math::GetValue(1)) / (d1 * smax - Math::GetValue(1));
+    sMax = (temp0 > temp1 ? temp0 : temp1);
+    invN0 = (Math::GetValue(1)) / (d0 * sMax - Math::GetValue(1));
+    invN1 = (Math::GetValue(1)) / (d1 * sMax - Math::GetValue(1));
     invN0Sqr = invN0 * invN0;
     invN1Sqr = invN1 * invN1;
-    fmax = d0c0 * invN0Sqr + d1c1 * invN1Sqr - Math::GetValue(1);
-    MATHEMATICS_ASSERTION_0(fmax < Math::GetValue(0), "Unexpected condition.\n");
-    smin = (Math::GetValue(1) + multiplier1 * sqrtd1c1) * invD1;
-    invN0 = (Math::GetValue(1)) / (d0 * smin - Math::GetValue(1));
-    invN1 = (Math::GetValue(1)) / (d1 * smin - Math::GetValue(1));
+    fMax = d0c0 * invN0Sqr + d1c1 * invN1Sqr - Math::GetValue(1);
+    MATHEMATICS_ASSERTION_0(fMax < Math::GetValue(0), "Unexpected condition.\n");
+    sMin = (Math::GetValue(1) + multiplier1 * sqrtd1c1) * invD1;
+    invN0 = (Math::GetValue(1)) / (d0 * sMin - Math::GetValue(1));
+    invN1 = (Math::GetValue(1)) / (d1 * sMin - Math::GetValue(1));
     invN0Sqr = invN0 * invN0;
     invN1Sqr = invN1 * invN1;
-    fmin = d0c0 * invN0Sqr + d1c1 * invN1Sqr - Math::GetValue(1);
-    MATHEMATICS_ASSERTION_0(fmin > Math::GetValue(0), "Unexpected condition.\n");
-    result = BisectF(d0, d1, d0c0, d1c1, smin, fmin, smax, fmax);
+    fMin = d0c0 * invN0Sqr + d1c1 * invN1Sqr - Math::GetValue(1);
+    MATHEMATICS_ASSERTION_0(fMin > Math::GetValue(0), "Unexpected condition.\n");
+    result = BisectF(d0, d1, d0c0, d1c1, sMin, fMin, sMax, fMax);
     s = result.s;
     f = result.f;
     roots.emplace_back(s);

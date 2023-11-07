@@ -52,8 +52,8 @@ void Mathematics::IntegerMultiplicationTesting::MainTest()
 void Mathematics::IntegerMultiplicationTesting::MultiplicationTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<> randomDistribution0(0, UINT16_MAX);
-    const std::uniform_int<uint16_t> randomDistribution1(0, UINT16_MAX);
+    std::uniform_int<> randomDistribution0(0, UINT16_MAX);
+    std::uniform_int<uint16_t> randomDistribution1(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

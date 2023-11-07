@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 18:20)
+///	版本：0.9.1.6 (2023/10/26 15:02)
 
 #ifndef MATHEMATICS_ALGEBRA_VARIABLE_MATRIX_H
 #define MATHEMATICS_ALGEBRA_VARIABLE_MATRIX_H
@@ -14,11 +14,9 @@
 
 #include "AlgebraFwd.h"
 #include "VariableLengthVector.h"
-#include "Flags/MatrixFlags.h"
 #include "System/Helper/PragmaWarning/Operators.h"
 #include "Mathematics/Base/MathDetail.h"
 
-#include <type_traits>
 #include <vector>
 
 // 矩阵运算应用为左乘。

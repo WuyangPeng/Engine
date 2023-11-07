@@ -44,8 +44,8 @@ void Mathematics::Ellipsoid3Testing::MainTest()
 void Mathematics::Ellipsoid3Testing::ConstructionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
-    const std::uniform_real<double> randomDistribution1(1.0, 10.0);
+    std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
+    std::uniform_real<double> randomDistribution1(1.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -127,8 +127,8 @@ void Mathematics::Ellipsoid3Testing::ConstructionTest()
 void Mathematics::Ellipsoid3Testing::CalculateTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0{ -50.0, 50.0 };
-    const std::uniform_real<double> randomDistribution1(1.0, 10.0);
+    std::uniform_real<double> randomDistribution0{ -50.0, 50.0 };
+    std::uniform_real<double> randomDistribution1(1.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

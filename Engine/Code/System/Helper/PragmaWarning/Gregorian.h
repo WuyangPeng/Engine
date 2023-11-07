@@ -43,6 +43,7 @@
 #include SYSTEM_WARNING_DISABLE(26496)
 #include SYSTEM_WARNING_DISABLE(26812)
 #include SYSTEM_WARNING_DISABLE(26814)
+#include SYSTEM_WARNING_DISABLE(26819)
 #include SYSTEM_WARNING_DISABLE(28301)
 
 #include <boost/date_time/gregorian/gregorian_io.hpp>

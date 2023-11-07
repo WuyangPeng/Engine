@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/09 08:58)
+///	版本：0.9.1.6 (2023/10/28 15:07)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TRIANGLE3_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TRIANGLE3_H
@@ -26,6 +26,7 @@ namespace Mathematics
     public:
         using ClassType = StaticFindIntersectorLine3Triangle3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
+
         using Vector3 = Vector3<Real>;
         using Line3 = Line3<Real>;
         using Triangle3 = Triangle3<Real>;

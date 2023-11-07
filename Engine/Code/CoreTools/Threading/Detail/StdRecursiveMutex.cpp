@@ -51,7 +51,7 @@ void CoreTools::StdRecursiveMutex::Leave() noexcept
     EXCEPTION_UNKNOWN_CATCH(CoreTools)
 }
 
-void CoreTools::StdRecursiveMutex::DoLeave()
+void CoreTools::StdRecursiveMutex::DoLeave() noexcept
 {
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26110)

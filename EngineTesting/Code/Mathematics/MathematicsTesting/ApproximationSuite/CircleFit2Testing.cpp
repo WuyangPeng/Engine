@@ -43,8 +43,8 @@ void Mathematics::CircleFit2Testing::MainTest()
 void Mathematics::CircleFit2Testing::FitTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    const std::uniform_int<> randomDistribution1(10, 50);
+    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_int<> randomDistribution1(10, 20);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:07)
+///	版本：0.9.1.6 (2023/10/26 20:09)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_H
 #define MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_H
@@ -16,8 +16,6 @@
 #include "RationalFwd.h"
 #include "Mathematics/Base/Flags/NumericalValueSymbol.h"
 
-#include <type_traits>
-
 namespace Mathematics
 {
     template <int N, typename T>
@@ -27,6 +25,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<T>, "T must be arithmetic.");
 
         using ClassType = RationalConversion<N, T>;
+
         using TraitsType = typename IntegerTraits<T>::TraitsType;
         using Rational = SignRational<N>;
         using Integer = Integer<N>;

@@ -33,9 +33,9 @@
   },
 
   "windowsMacroSuite": {
-    "MakeLanguageIDTesting": 1000,
+    "MakeLanguageIdTesting": 1000,
     "MakeIntreSourceTesting": 1,
-    "MakeLanguageCIDTesting": 1000,
+    "MakeLanguageCidTesting": 1000,
     "HResultTesting": 1,
     "MakeWordTesting": 1000,
     "PtrToIntTesting": 1,
@@ -79,14 +79,14 @@
 
   "systemOutputSuite": {
     "MessageBoxFlagsDataTesting": 100,
-    "LanguageIDDataTesting": 100,
+    "LanguageIdDataTesting": 100,
     "OutputDebugStringTesting": 1
   },
 
   "messageBoxSelectionSuite": {
     "MessageBoxSelectionUseYesNoCancelTesting": 0,
     "MessageBoxSelectionUseFlagsDataTesting": 0,
-    "MessageBoxSelectionUseLanguageIDDataTesting": 0
+    "MessageBoxSelectionUseLanguageIdDataTesting": 0
   },
 
   "dynamicLinkSuite": {
@@ -123,8 +123,8 @@
   "formatErrorMessageSuite": {
     "FormatErrorMessageUseLocalAllocTesting": 1,
     "FormatErrorMessageUseBufferTesting": 1,
-    "FormatErrorMessageUseDllMoudleAndLocalAllocTesting": 1,
-    "FormatErrorMessageUseDllMoudleAndUseBufferTesting": 1,
+    "FormatErrorMessageUseDllModuleAndLocalAllocTesting": 1,
+    "FormatErrorMessageUseDllModuleAndUseBufferTesting": 1,
     "FormatErrorMessageReturnStringTesting": 1,
     "FormatErrorMessageTesting": 1,
     "FormatStringMessageUseArgumentArrayAndLocalAllocTesting": 1,
@@ -144,8 +144,8 @@
   "stringConversionSuite": {
     "MultiByteConversionWideCharTesting": 1,
     "WideCharConversionMultiByteTesting": 1,
-    "UTF8ConversionWideCharTesting": 1,
-    "WideCharConversionUTF8Testing": 1,
+    "Utf8ConversionWideCharTesting": 1,
+    "WideCharConversionUtf8Testing": 1,
     "CompareStringUseLocaleFlagsTesting": 100,
     "CompareStringUseLocaleStringTesting": 100,
     "CompareStringOrdinalUseBinaryTesting": 100,
@@ -153,13 +153,13 @@
   },
 
   "formatStringSuite": {
-    "VsnPrintfTesting": 1,
-    "StrcatTesting": 1,
-    "StrlenTesting": 1,
-    "StrcpyTesting": 1,
-    "StrtokTesting": 1,
-    "StrstrTesting": 1,
-    "SNPrintfTesting": 1
+    "VsnPrintFTesting": 1,
+    "StrCatTesting": 1,
+    "StrLenTesting": 1,
+    "StrCpyTesting": 1,
+    "StrTokTesting": 1,
+    "StrStrTesting": 1,
+    "SnPrintFTesting": 1
   },
 
   "consoleSuite": {
@@ -169,7 +169,7 @@
     "ConsoleCreateTesting": 1
   },
 
-  "consoleColoursSuite": {
+  "consoleColourSuite": {
     "TextColourTesting": 1,
     "BackgroundColourTesting": 1,
     "ConsoleCommonTesting": 1,
@@ -509,8 +509,8 @@
 
   "databasePrototypesSuite": {
     "WinSockHostTesting": 1,
-    "WinSockServentTesting": 1,
-    "WinSockProtoentTesting": 1
+    "WinSockServEntTesting": 1,
+    "WinSockProtoEntTesting": 1
   },
 
   "windowsSockExSuite": {

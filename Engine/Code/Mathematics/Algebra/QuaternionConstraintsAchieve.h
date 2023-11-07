@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 17:51)
+///	版本：0.9.1.6 (2023/10/26 11:00)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_CONSTRAINTS_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_CONSTRAINTS_ACHIEVE_H
 
 #include "QuaternionConstraints.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:56)
+///	版本：0.9.1.6 (2023/10/27 17:11)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RAY3_SEGMENT3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RAY3_SEGMENT3_H
@@ -27,6 +27,7 @@ namespace Mathematics
         using ClassType = DistanceRay3Segment3<Real>;
         using Vector3 = Vector3<Real>;
         using ParentType = DistanceBase<Real, Vector3>;
+
         using Ray3 = Ray3<Real>;
         using Segment3 = Segment3<Real>;
         using Vector3Tools = Vector3Tools<Real>;

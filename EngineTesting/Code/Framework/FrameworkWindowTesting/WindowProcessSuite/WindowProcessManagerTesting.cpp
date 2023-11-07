@@ -44,8 +44,8 @@ void Framework::WindowProcessManagerTesting::MainTest()
 
 void Framework::WindowProcessManagerTesting::ManagerTest()
 {
-    ASSERT_UNEQUAL_NULL_PTR(WINDOW_PROCESS_MANAGER_SINGLETON.GetProcess());
-    ASSERT_UNEQUAL_NULL_PTR(WINDOW_PROCESS_MANAGER_SINGLETON.GetFunction());
+    ASSERT_UNEQUAL_NULL_PTR(Framework::WindowProcessManager::GetProcess());
+    ASSERT_UNEQUAL_NULL_PTR(Framework::WindowProcessManager::GetFunction());
 
     const auto windowMessage0 = const_pointer_cast<WindowMessageInterface>(WINDOW_PROCESS_MANAGER_SINGLETON.GetWindowMessageInterface());
 

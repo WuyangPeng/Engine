@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/05/31 09:35)
+///	版本：0.9.1.6 (2023/10/26 14:24)
 
 #ifndef MATHEMATICS_ALGEBRA_ALGEBRA_AGGREGATE_H
 #define MATHEMATICS_ALGEBRA_ALGEBRA_AGGREGATE_H

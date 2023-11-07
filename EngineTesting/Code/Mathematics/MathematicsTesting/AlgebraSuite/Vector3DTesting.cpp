@@ -220,7 +220,7 @@ void Mathematics::Vector3Testing::BarycentricsTest()
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const std::uniform_real<double> randomDistribution{ -10.0, 10.0 };
+    std::uniform_real<double> randomDistribution{ -10.0, 10.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -234,7 +234,7 @@ void Mathematics::Vector3Testing::BarycentricsTest()
 
         ASSERT_TRUE(sixthCoordinates.IsBarycentricCoordinatesValid());
 
-        Vector3D difference[4]{ vector0 - vector3, vector1 - vector3, vector2 - vector3, vector5 - vector3 };
+        const Vector3D difference[4]{ vector0 - vector3, vector1 - vector3, vector2 - vector3, vector5 - vector3 };
 
         const double det = Vector3ToolsD::ScalarTripleProduct(difference[1], difference[2], difference[0]);
 

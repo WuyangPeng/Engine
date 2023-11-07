@@ -39,8 +39,8 @@ void Mathematics::EllipseFit2Testing::MainTest()
 void Mathematics::EllipseFit2Testing::FitTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0(0.0, 100.0);
-    const std::uniform_int<> randomDistribution1(5, 15);
+    std::uniform_real<double> randomDistribution0(0.0, 100.0);
+    std::uniform_int<> randomDistribution1(5, 15);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

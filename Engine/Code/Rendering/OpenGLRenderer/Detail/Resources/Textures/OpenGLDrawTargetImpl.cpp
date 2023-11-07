@@ -77,7 +77,7 @@ void Rendering::OpenGLDrawTargetImpl::Enable()
 
     if (depthStencilTexture != nullptr)
     {
-        auto format = depthStencilTexture->GetTexture()->GetFormat();
+        const auto format = depthStencilTexture->GetTexture()->GetFormat();
         auto attachment = System::ColorAttachment::DepthAttachment;
         if (format == DataFormatType::D24UNormS8UInt)
         {

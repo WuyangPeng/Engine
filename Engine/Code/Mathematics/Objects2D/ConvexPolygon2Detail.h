@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 15:18)
+///	版本：0.9.1.6 (2023/10/26 16:56)
 
 #ifndef MATHEMATICS_OBJECTS_2D_CONVEX_POLYGON2_DETAIL_H
 #define MATHEMATICS_OBJECTS_2D_CONVEX_POLYGON2_DETAIL_H
@@ -15,7 +15,6 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "Mathematics/Algebra/Vector2Tools.h"
 
 template <typename Real>
 Mathematics::ConvexPolygon2<Real>::ConvexPolygon2(const VerticesType& vertices, const LineType& lines)
@@ -80,8 +79,8 @@ void Mathematics::ConvexPolygon2<Real>::SetVertex(int index, const Vector2& vert
     // 顶点索引相关联的边i是E[i] = <V[i],V[i+1]> 和 E[i-1] = <V[i-1],V[i]>，
     // 其中i+1 和 i-1被计算为顶点数的模。
     const auto previous = index - 1;
-    sharingEdges.insert(previous % lines.size());
-    sharingEdges.insert(index);
+    sharingEdges.emplace(previous % boost::numeric_cast<int>(lines.size()));
+    sharingEdges.emplace(index);
 }
 
 template <typename Real>
@@ -101,7 +100,6 @@ void Mathematics::ConvexPolygon2<Real>::UpdateLines()
     }
 }
 
-// private
 template <typename Real>
 void Mathematics::ConvexPolygon2<Real>::UpdateLine(int index, const Vector2& average)
 {
@@ -152,7 +150,7 @@ bool Mathematics::ConvexPolygon2<Real>::IsConvex(Real threshold) const
 
     if (IsUpdateLines())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("需要更新线段。\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("需要更新线段。\n"s))
     }
 
     auto maxDistance = -Math::maxReal;
@@ -182,14 +180,14 @@ bool Mathematics::ConvexPolygon2<Real>::IsConvex(Real threshold) const
 }
 
 template <typename Real>
-bool Mathematics::ConvexPolygon2<Real>::Contains(const typename Vector2& point, Real threshold) const
+bool Mathematics::ConvexPolygon2<Real>::Contains(const Vector2& point, Real threshold) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_1(threshold <= Math::GetValue(0), "threshold必须为负值！");
 
     if (IsUpdateLines())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("需要更新线段。\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("需要更新线段。\n"s))
     }
 
     for (const auto& line : lines)

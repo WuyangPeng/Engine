@@ -48,7 +48,7 @@ void Mathematics::DistanceCircle3Circle3Testing::MainTest()
 void Mathematics::DistanceCircle3Circle3Testing::BaseTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

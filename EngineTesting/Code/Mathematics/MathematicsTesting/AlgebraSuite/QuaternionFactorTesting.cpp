@@ -11,6 +11,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Mathematics/Algebra/Flags/QuaternionFlags.h"
 #include "Mathematics/Algebra/Polynomial.h"
 #include "Mathematics/Algebra/QuaternionFactorDetail.h"
 
@@ -48,7 +49,7 @@ void Mathematics::QuaternionFactorTesting::MainTest()
 void Mathematics::QuaternionFactorTesting::FactorXYZTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
+    std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -77,7 +78,7 @@ void Mathematics::QuaternionFactorTesting::FactorXYZTest()
 void Mathematics::QuaternionFactorTesting::FactorXZYTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
+    std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -106,7 +107,7 @@ void Mathematics::QuaternionFactorTesting::FactorXZYTest()
 void Mathematics::QuaternionFactorTesting::FactorYZXTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
+    std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -135,7 +136,7 @@ void Mathematics::QuaternionFactorTesting::FactorYZXTest()
 void Mathematics::QuaternionFactorTesting::FactorYXZTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
+    std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -161,7 +162,7 @@ void Mathematics::QuaternionFactorTesting::FactorYXZTest()
 void Mathematics::QuaternionFactorTesting::FactorZXYTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
+    std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -190,7 +191,7 @@ void Mathematics::QuaternionFactorTesting::FactorZXYTest()
 void Mathematics::QuaternionFactorTesting::FactorZYXTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
+    std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 

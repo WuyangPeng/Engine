@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 16:12)
+///	版本：0.9.1.6 (2023/10/26 19:48)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DIVISION_MODULO_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DIVISION_MODULO_DETAIL_H
@@ -20,7 +20,6 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <int N>
 Mathematics::IntegerDivisionModulo<N>::IntegerDivisionModulo(const IntegerData& division, const IntegerData& modulo)
@@ -39,7 +38,6 @@ Mathematics::IntegerDivisionModulo<N>::IntegerDivisionModulo(const IntegerData& 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <int N>
 void Mathematics::IntegerDivisionModulo<N>::Calculate()
 {
@@ -84,7 +82,6 @@ void Mathematics::IntegerDivisionModulo<N>::Calculate()
     }
 }
 
-// private
 template <int N>
 void Mathematics::IntegerDivisionModulo<N>::DivisionSingle()
 {
@@ -127,7 +124,6 @@ void Mathematics::IntegerDivisionModulo<N>::DivisionSingle()
     }
 }
 
-// private
 template <int N>
 void Mathematics::IntegerDivisionModulo<N>::DivisionMultiple()
 {
@@ -139,16 +135,15 @@ void Mathematics::IntegerDivisionModulo<N>::DivisionMultiple()
     CalculateRemainder();
 }
 
-// private
 template <int N>
 void Mathematics::IntegerDivisionModulo<N>::CalculateRemainder()
 {
-    // 余数比除数大，要继续计算
-    constexpr auto maxLoop = 20;
-
     auto loop = 0;
     while (absDenominator <= remainder)
     {
+        // 余数比除数大，要继续计算
+        MAYBE_UNUSED constexpr auto maxLoop = 20;
+
         MATHEMATICS_ASSERTION_1(loop < maxLoop, "计算量过大！");
 
         if (absDenominator == remainder)
@@ -202,12 +197,16 @@ template <int N>
 bool Mathematics::IntegerDivisionModulo<N>::IsCorrect() const
 {
     IntegerMultiplication<N> multiplication{ denominator, quotient };
-    const auto correct = numerator - multiplication.GetMultiplication() - remainder;
 
-    if (correct.IsZero())
+    if (const auto correct = numerator - multiplication.GetMultiplication() - remainder;
+        correct.IsZero())
+    {
         return true;
+    }
     else
+    {
         return false;
+    }
 }
 
 #endif  // OPEN_CLASS_INVARIANT
