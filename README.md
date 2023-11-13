@@ -11,3 +11,6 @@
 	(8) 编译各工程的单元测试（EngineTesting依赖于Assist）。
 
 2. linux平台 
+	(1) 将Libs文件复制到/data/coding/下。
+	(2) 执行cd /data/coding/Libs/Bat。
+	(3) 执行sh create_lib。如果出现依赖库错误，根据Engine\EngineWindows\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine\Resource下的Library.md进行修正。
