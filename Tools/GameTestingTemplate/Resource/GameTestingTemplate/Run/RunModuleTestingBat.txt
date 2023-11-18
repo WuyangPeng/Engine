@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %$ProjectName$Win32DebugLib% $ModuleName$TestingD.exe
+start /d %$ProjectName$Win32ReleaseLib% $ModuleName$Testing.exe
+start /d %$ProjectName$X64DebugLib% $ModuleName$TestingD.exe
+start /d %$ProjectName$X64ReleaseLib% $ModuleName$Testing.exe
+start /d %$ProjectName$StaticWin32DebugLib% $ModuleName$TestingStaticD.exe
+start /d %$ProjectName$StaticWin32ReleaseLib% $ModuleName$TestingStatic.exe
+start /d %$ProjectName$StaticX64DebugLib% $ModuleName$TestingStaticD.exe
+start /d %$ProjectName$StaticX64ReleaseLib% $ModuleName$TestingStatic.exe
+
+start /d %$ProjectName$EngineStaticGameDynamicWin32DebugLib% $ModuleName$TestingStaticD.exe
+start /d %$ProjectName$EngineStaticGameDynamicWin32ReleaseLib% $ModuleName$TestingStatic.exe
+start /d %$ProjectName$EngineStaticGameDynamicX64DebugLib% $ModuleName$TestingStaticD.exe
+start /d %$ProjectName$EngineStaticGameDynamicX64ReleaseLib% $ModuleName$TestingStatic.exe
+start /d %$ProjectName$EngineDynamicGameStaticWin32DebugLib% $ModuleName$TestingD.exe
+start /d %$ProjectName$EngineDynamicGameStaticWin32ReleaseLib% $ModuleName$Testing.exe
+start /d %$ProjectName$EngineDynamicGameStaticX64DebugLib% $ModuleName$TestingD.exe
+start /d %$ProjectName$EngineDynamicGameStaticX64ReleaseLib% $ModuleName$Testing.exe
+
+pause

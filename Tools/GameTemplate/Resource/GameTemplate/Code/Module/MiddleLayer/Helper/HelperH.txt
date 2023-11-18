@@ -1,0 +1,11 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_MIDDLE_LAYER_HELPER_H
+#define $ModuleUppercase$_MIDDLE_LAYER_HELPER_H
+
+#include "ExportMacro.h"
+#include "$ModuleName$MiddleLayerClassInvariantMacro.h"
+#include "$ModuleName$MiddleLayerCustomAssertMacro.h"
+#include "UserMacro.h"
+
+#endif  // $ModuleUppercase$_MIDDLE_LAYER_HELPER_H

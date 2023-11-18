@@ -1,0 +1,40 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_MIDDLE_LAYER_LIB_H
+#define $ModuleUppercase$_MIDDLE_LAYER_LIB_H
+
+#include "Helper/UserMacro.h"
+
+#if defined(TCRE_USE_MSVC)
+
+    #ifndef BUILDING_$ModuleUppercase$_MIDDLE_LAYER_STATIC
+
+        #ifdef _DEBUG
+
+            #pragma comment(lib, "$ModuleName$MiddleLayerD.lib")
+
+        #else  // !_DEBUG
+
+            #pragma comment(lib, "$ModuleName$MiddleLayer.lib")
+
+        #endif  // _DEBUG
+
+    #else  // !BUILDING_$ModuleUppercase$_MIDDLE_LAYER_STATIC
+
+        #include "DllLib.h"
+
+        #ifdef _DEBUG
+
+            #pragma comment(lib, "$ModuleName$MiddleLayerStaticD.lib")
+
+        #else  // !_DEBUG
+
+            #pragma comment(lib, "$ModuleName$MiddleLayerStatic.lib")
+
+        #endif  // _DEBUG
+
+    #endif  // BUILDING_$ModuleUppercase$_MIDDLE_LAYER_STATIC
+
+#endif  // TCRE_USE_MSVC
+
+#endif  // $ModuleUppercase$_MIDDLE_LAYER_LIB_H

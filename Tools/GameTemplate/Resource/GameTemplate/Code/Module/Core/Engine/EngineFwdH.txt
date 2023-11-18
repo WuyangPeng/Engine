@@ -1,0 +1,6 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_$CoreCapital$_ENGINE_FWD_H
+#define $ModuleUppercase$_$CoreCapital$_ENGINE_FWD_H
+
+#endif  // $ModuleUppercase$_$CoreCapital$_ENGINE_FWD_H

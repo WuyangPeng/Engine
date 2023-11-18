@@ -1,0 +1,14 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_MIDDLE_LAYER_EXPORT_H
+#define $ModuleUppercase$_MIDDLE_LAYER_EXPORT_H
+
+#include "Helper/UserMacro.h"
+
+#ifndef BUILDING_$ModuleUppercase$_MIDDLE_LAYER_EXPORT
+
+    #define BUILDING_$ModuleUppercase$_MIDDLE_LAYER_EXPORT
+
+#endif  // BUILDING_$ModuleUppercase$_MIDDLE_LAYER_EXPORT
+
+#endif  // $ModuleUppercase$_MIDDLE_LAYER_EXPORT_H

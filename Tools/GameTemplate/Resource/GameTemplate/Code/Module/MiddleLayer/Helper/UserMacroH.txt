@@ -1,0 +1,32 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_MIDDLE_LAYER_HELPER_USER_MACRO_H
+#define $ModuleUppercase$_MIDDLE_LAYER_HELPER_USER_MACRO_H
+
+#include "Framework/Helper/UserMacro.h"
+
+#define $ModuleUppercase$_MIDDLE_LAYER_ClOSE_BEGIN (0x01)
+
+#define CLOSE_USE_$ModuleUppercase$_MIDDLE_LAYER ($ModuleUppercase$_MIDDLE_LAYER_ClOSE_BEGIN)
+
+#define $ModuleUppercase$_MIDDLE_LAYER_ClOSE_END CLOSE_USE_$ModuleUppercase$_MIDDLE_LAYER
+
+#define CLOSE_$ModuleUppercase$_MIDDLE_LAYER_MAX ((($ModuleUppercase$_MIDDLE_LAYER_ClOSE_END) << 1) - 1)
+
+// 编译测试（默认为0，最大值为0x01）
+#define COMPILE_$ModuleUppercase$_MIDDLE_LAYER_CLOSE 0x00
+
+static_assert(0 <= COMPILE_$ModuleUppercase$_MIDDLE_LAYER_CLOSE, "COMPILE_$ModuleUppercase$_MIDDLE_LAYER_CLOSE Must be greater than or equal 0.");
+static_assert(COMPILE_$ModuleUppercase$_MIDDLE_LAYER_CLOSE <= CLOSE_$ModuleUppercase$_MIDDLE_LAYER_MAX, "COMPILE_$ModuleUppercase$_MIDDLE_LAYER_CLOSE Must be less than or equal CLOSE_$ModuleUppercase$_MIDDLE_LAYER_MAX.");
+
+#if !defined(COMPILE_$ModuleUppercase$_MIDDLE_LAYER_CLOSE) || (COMPILE_$ModuleUppercase$_MIDDLE_LAYER_CLOSE & CLOSE_USE_$ModuleUppercase$_MIDDLE_LAYER) != CLOSE_USE_$ModuleUppercase$_MIDDLE_LAYER
+
+#endif  // !defined(COMPILE_$ModuleUppercase$_MIDDLE_LAYER_CLOSE) || (COMPILE_$ModuleUppercase$_MIDDLE_LAYER_CLOSE & CLOSE_USE_$ModuleUppercase$_MIDDLE_LAYER) != CLOSE_USE_$ModuleUppercase$_MIDDLE_LAYER
+
+#ifdef BUILDING_STATIC
+
+    #define BUILDING_$ModuleUppercase$_MIDDLE_LAYER_STATIC
+
+#endif  // BUILDING_STATIC
+
+#endif  // $ModuleUppercase$_MIDDLE_LAYER_HELPER_USER_MACRO_H

@@ -1,0 +1,14 @@
+$Copyright$
+
+#include "$ModuleName$/$ModuleName$/$ModuleName$Helper.h"
+#include "Framework/Helper/MainFunctionMacro.h"
+
+#include <vld.h>
+
+WINDOWS_MAIN_FUNCTION_WITH_INFORMATION($ModuleName$,
+                                       $ModuleName$Helper,
+                                       SYSTEM_TEXT("$ProjectDescribeName$ $ModuleName$"),
+                                       SYSTEM_TEXT("DefaultEnvironment"),
+                                       SYSTEM_TEXT(""),
+                                       1024,
+                                       768)

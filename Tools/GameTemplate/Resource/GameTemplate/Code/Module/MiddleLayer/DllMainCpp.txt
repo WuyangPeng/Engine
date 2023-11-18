@@ -1,0 +1,16 @@
+$Copyright$
+
+#include "$ModuleName$MiddleLayerExport.h"
+
+#include "$ModuleName$MiddleLayerFwd.h"
+#include "CoreTools/Helper/MainFunctionMacro.h"
+
+#ifndef BUILDING_$ModuleUppercase$_MIDDLE_LAYER_STATIC
+
+DLL_MAIN_FUNCTION($ModuleName$MiddleLayer);
+
+#else  // !BUILDING_$ModuleUppercase$_MIDDLE_LAYER_STATIC
+
+CORE_TOOLS_MUTEX_INIT($ModuleName$MiddleLayer);
+
+#endif  // BUILDING_$ModuleUppercase$_MIDDLE_LAYER_STATIC

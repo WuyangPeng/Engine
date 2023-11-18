@@ -1,0 +1,26 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_MIDDLE_LAYER_$MiddleLayerUppercase$_MIDDLE_LAYER_$MiddleLayerUppercase$_H
+#define $ModuleUppercase$_MIDDLE_LAYER_$MiddleLayerUppercase$_MIDDLE_LAYER_$MiddleLayerUppercase$_H
+
+#include "$ModuleName$/$ModuleName$MiddleLayer/$ModuleName$MiddleLayerDll.h"
+
+#include "$ModuleName$/$ModuleName$MiddleLayer/Helper/ExportMacro.h"
+#include "Framework/MiddleLayer/$MiddleLayerName$$IsManager$Interface.h"
+
+namespace $ModuleName$MiddleLayer
+{
+    class $ModuleUppercase$_MIDDLE_LAYER_DEFAULT_DECLARE $MiddleLayerName$Manager final : public Framework::$MiddleLayerName$$IsManager$Interface
+    {
+    public:
+        using ClassType = $MiddleLayerName$Manager;
+        using ParentType = $MiddleLayerName$$IsManager$Interface;
+
+    public:
+        $MiddleLayerName$Manager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+    };
+}
+
+#endif  // $ModuleUppercase$_MIDDLE_LAYER_$MiddleLayerUppercase$_MIDDLE_LAYER_$MiddleLayerUppercase$_H

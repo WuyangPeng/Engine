@@ -1,0 +1,10 @@
+$Copyright$
+
+#ifndef $ProjectCapital$_HELPER_H
+#define $ProjectCapital$_HELPER_H
+
+#include "$ProjectName$ClassInvariantMacro.h"
+#include "$ProjectName$CustomAssertMacro.h"
+#include "UserMacro.h"
+
+#endif  // $ProjectCapital$_HELPER_H

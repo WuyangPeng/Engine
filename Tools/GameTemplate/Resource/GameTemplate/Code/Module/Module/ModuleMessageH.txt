@@ -1,0 +1,65 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_$ModuleUppercase$_MESSAGE_H
+#define $ModuleUppercase$_$ModuleUppercase$_MESSAGE_H
+
+#include "$ModuleName$/$ModuleName$MiddleLayer/ArtificialIntelligence/ArtificialIntelligenceManager.h"
+#include "$ModuleName$/$ModuleName$MiddleLayer/Audio/AudioManager.h"
+#include "$ModuleName$/$ModuleName$MiddleLayer/CameraSystems/CameraSystemsManager.h"
+#include "$ModuleName$/$ModuleName$MiddleLayer/Event/EventManager.h"
+#include "$ModuleName$/$ModuleName$MiddleLayer/GUI/GUIManager.h"
+#include "$ModuleName$/$ModuleName$MiddleLayer/Input/InputManager.h"
+#include "$ModuleName$/$ModuleName$MiddleLayer/Message/MessageManager.h"
+#include "$ModuleName$/$ModuleName$MiddleLayer/Network/NetworkManager.h"
+#include "$ModuleName$/$ModuleName$MiddleLayer/ObjectLogic/ObjectLogicManager.h"
+#include "$ModuleName$/$ModuleName$MiddleLayer/PhysicalModelling/PhysicalModellingManager.h"
+#include "$ModuleName$/$ModuleName$MiddleLayer/Rendering/RenderingManager.h"
+#include "$ModuleName$/$ModuleName$MiddleLayer/Resource/ResourceManager.h"
+#include "$ModuleName$/$ModuleName$MiddleLayer/System/SystemManager.h"
+#include "CoreTools/Console/ConsoleAlloc.h"
+#include "Framework/Application/Flags/ApplicationTrait.h"
+#include "Framework/MiddleLayer/EngineMiddleLayerContainer.h"
+#include "Framework/MiddleLayer/ObjectLogicManager.h"
+#include "Framework/WindowProcess/WindowMessage.h"
+#include "Framework/WindowProcess/WindowProcessHandle.h"
+
+namespace $ModuleName$
+{
+    using ObjectLogicManager = Framework::ObjectLogicManager<$ModuleName$MiddleLayer::ObjectLogicManager, $ModuleName$MiddleLayer::ArtificialIntelligenceManager>;
+    using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
+                                                                  $ModuleName$MiddleLayer::InputManager,
+                                                                  $ModuleName$MiddleLayer::NetworkManager,
+                                                                  ObjectLogicManager,
+                                                                  $ModuleName$MiddleLayer::PhysicalModellingManager,
+                                                                  $ModuleName$MiddleLayer::MessageManager,
+                                                                  $ModuleName$MiddleLayer::EventManager,
+                                                                  $ModuleName$MiddleLayer::SystemManager,
+                                                                  $ModuleName$MiddleLayer::ResourceManager,
+                                                                  $ModuleName$MiddleLayer::AudioManager,
+                                                                  $ModuleName$MiddleLayer::CameraSystemsManager,
+                                                                  $ModuleName$MiddleLayer::RenderingManager,
+                                                                  $ModuleName$MiddleLayer::GUIManager>;
+    using MessageType = Framework::WindowMessage<MiddleLayerType>;
+
+    class $ModuleName$Message : public MessageType
+    {
+    public:
+        using ClassType = $ModuleName$Message;
+        using ParentType = MessageType;
+
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
+    public:
+        $ModuleName$Message(int64_t delta, const EnvironmentDirectory& environmentDirectory);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+    private:
+        ConsoleAlloc alloc;
+    };
+
+    using $ModuleName$MessageWindowProcessHandle = Framework::WindowProcessHandle<$ModuleName$Message>;
+}
+
+#endif  // $ModuleUppercase$_$ModuleUppercase$_MESSAGE_H

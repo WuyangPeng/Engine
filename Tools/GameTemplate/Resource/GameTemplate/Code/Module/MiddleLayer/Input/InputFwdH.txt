@@ -1,0 +1,12 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_MIDDLE_LAYER_INPUT_ENGINE_FWD_H
+#define $ModuleUppercase$_MIDDLE_LAYER_INPUT_ENGINE_FWD_H
+
+namespace $ModuleName$MiddleLayer
+{
+    template <typename ApplicationTrait>
+    class InputManager;
+}
+
+#endif  // $ModuleUppercase$_MIDDLE_LAYER_INPUT_ENGINE_FWD_H

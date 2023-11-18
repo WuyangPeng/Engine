@@ -1,0 +1,30 @@
+$Copyright$
+
+#ifndef $ProjectCapital$_$ProjectCapital$_HELPER_H
+#define $ProjectCapital$_$ProjectCapital$_HELPER_H
+
+#include "$ProjectName$MiddleLayerMessage.h"
+#include "Framework/MainFunctionHelper/WindowMainFunctionHelper.h"
+#include "Framework/WindowsAPIFrame/WindowsAPIFrameBuild.h"
+
+namespace $ProjectName$
+{
+    using HelperBase = Framework::WindowMainFunctionHelper<Framework::WindowsAPIFrameBuild, $ProjectName$Process>;
+
+    class $ProjectName$Helper final : public HelperBase
+    {
+    public:
+        using ClassType = $ProjectName$Helper;
+        using ParentType = HelperBase;
+
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+        using WindowApplicationInformation = Framework::WindowApplicationInformation;
+
+    public:
+        $ProjectName$Helper(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
+    };
+}
+
+#endif  // $ProjectCapital$_$ProjectCapital$_HELPER_H

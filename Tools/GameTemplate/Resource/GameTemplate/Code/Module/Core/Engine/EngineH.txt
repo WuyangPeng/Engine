@@ -1,0 +1,8 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_$CoreCapital$_ENGINE_H
+#define $ModuleUppercase$_$CoreCapital$_ENGINE_H
+
+#include "Placeholder.h"
+
+#endif  // $ModuleUppercase$_$CoreCapital$_ENGINE_H

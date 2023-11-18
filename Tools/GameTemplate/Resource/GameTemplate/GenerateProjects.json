@@ -1,0 +1,12 @@
+{
+  "Copyright": "/// Copyright (c) 2010-$EndYear$\n/// Threading Core Render Engine\n///\n/// 作者：彭武阳，彭晔恩，彭晔泽\n/// 联系作者：94458936@qq.com\n///\n/// 标准：std:c++20\n/// 版本：$Version$ ($Data$ $Hour$:$Minute$)",
+  "ModuleDescribe": "$Serial$. $ModuleName$（$ModuleChineseName$）",
+  "CallRunBat": "call RunAll$ModuleName$.bat",
+  "CallRunTestingBat": "call RunAll$ModuleName$Testing.bat",
+  "ModuleJson": "  \"$ModuleName$\": 1$ModuleNameIsEnd$",
+  "ModuleTestingJson": "  \"$ModuleName$Testing\": 1$ModuleNameIsEnd$",
+  "CodeAnalysis": "$ModuleName$：代码分析（所有规则），平台（Windows）",
+  "TestingCodeAnalysis": "$ModuleName$：代码分析（所有规则），平台（Windows）",
+  "MiddleLayerFwdInclude": "#include \"$MiddleLayerName$/$MiddleLayerName$Fwd.h\"",
+  "MiddleLayerInclude": "#include \"$MiddleLayerName$/$MiddleLayerName$.h\""
+}

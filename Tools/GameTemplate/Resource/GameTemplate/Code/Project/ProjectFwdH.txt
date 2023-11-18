@@ -1,0 +1,8 @@
+$Copyright$
+
+#ifndef $ProjectCapital$_$ProjectCapital$_FWD_H
+#define $ProjectCapital$_$ProjectCapital$_FWD_H
+
+#include "Helper/HelperFwd.h"
+
+#endif  // $ProjectCapital$_$ProjectCapital$_FWD_H
