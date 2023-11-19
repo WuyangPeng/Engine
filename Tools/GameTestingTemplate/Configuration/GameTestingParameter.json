@@ -1,15 +1,15 @@
 {
   "CoreName": "Core",
   "CoreCapital": "CORE",
-  "ProjectChineseName": "最后的霸王单元测试",
-  "ProjectDescribeName": "The Last Overlord Testing",
-  "ProjectName": "TheLastOverlordTesting",
-  "ProjectCapital": "THE_LAST_OVERLORD_TESTING",
-  "ProjectAbbreviation": "TLOT",
+  "ProjectChineseName": "历史的崛起单元测试",
+  "ProjectDescribeName": "Rise Of History Testing",
+  "ProjectName": "RiseOfHistoryTesting",
+  "ProjectCapital": "RISE_OF_HISTORY_TESTING",
+  "ProjectAbbreviation": "RHT",
   "EndYear": "2023",
   "Version": "1.0.0.0",
   "VersionNum": "1000000",
-  "TestingName": "TheLastOverlord",
+  "TestingName": "RiseOfHistory",
 
   "Module": {
     "GameClient": {
