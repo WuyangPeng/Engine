@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %RiseOfHistoryTestingWin32DebugLib% RechargeServerCoreTestingD.exe
+start /d %RiseOfHistoryTestingWin32ReleaseLib% RechargeServerCoreTesting.exe
+start /d %RiseOfHistoryTestingX64DebugLib% RechargeServerCoreTestingD.exe
+start /d %RiseOfHistoryTestingX64ReleaseLib% RechargeServerCoreTesting.exe
+start /d %RiseOfHistoryTestingStaticWin32DebugLib% RechargeServerCoreTestingStaticD.exe
+start /d %RiseOfHistoryTestingStaticWin32ReleaseLib% RechargeServerCoreTestingStatic.exe
+start /d %RiseOfHistoryTestingStaticX64DebugLib% RechargeServerCoreTestingStaticD.exe
+start /d %RiseOfHistoryTestingStaticX64ReleaseLib% RechargeServerCoreTestingStatic.exe
+
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicWin32DebugLib% RechargeServerCoreTestingStaticD.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicWin32ReleaseLib% RechargeServerCoreTestingStatic.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicX64DebugLib% RechargeServerCoreTestingStaticD.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicX64ReleaseLib% RechargeServerCoreTestingStatic.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticWin32DebugLib% RechargeServerCoreTestingD.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticWin32ReleaseLib% RechargeServerCoreTesting.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticX64DebugLib% RechargeServerCoreTestingD.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticX64ReleaseLib% RechargeServerCoreTesting.exe
+
+pause

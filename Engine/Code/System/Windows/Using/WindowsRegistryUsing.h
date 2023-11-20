@@ -66,9 +66,9 @@ namespace System
 
     struct SystemHKey
     {
-        int unused;
+        uint32_t unused;
 
-        explicit SystemHKey(int key)
+        explicit SystemHKey(uint32_t key)
             : unused{ key }
         {
         }

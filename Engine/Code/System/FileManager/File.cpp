@@ -13,6 +13,7 @@
 #include "Flags/FileFlags.h"
 #include "Using/FileUsing.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/Flags/PlatformErrorFlags.h"
 #include "System/Windows/LastPlatformError.h"
@@ -278,7 +279,7 @@ bool System::AppendSystemFile(WindowsHandle file, WindowsConstVoidPtr buffer, Wi
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(file, buffer, numberOfBytesToWrite, numberOfBytesWritten, overlapped);
+    UnusedFunction(file, buffer, numberOfBytesToWrite, numberOfBytesWritten);
 
     return false;
 

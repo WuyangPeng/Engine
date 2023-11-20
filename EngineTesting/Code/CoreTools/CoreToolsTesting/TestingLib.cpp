@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 15:22)
+///	版本：1.0.0.0 (2023/11/08 12:39)
 
 #include "System/SystemLib.h"
 #include "CoreTools/CoreToolsLib.h"

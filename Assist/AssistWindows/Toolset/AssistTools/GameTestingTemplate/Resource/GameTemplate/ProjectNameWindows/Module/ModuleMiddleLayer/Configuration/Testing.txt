@@ -1,3 +1,0 @@
-{
-  "$ModuleName$MiddleLayerTesting": 1
-}

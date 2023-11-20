@@ -86,11 +86,11 @@ T System::SystemInterlockedExchangeSubtract(T* addend, T value) noexcept(std::is
 }
 
 template <typename T>
-T System::SystemInterlockedCompareExchange(T* destination, T exchange, T comparand) noexcept(std::is_same_v<long, T>)
+T System::SystemInterlockedCompareExchange(T* destination, T exchange, T comperand) noexcept(std::is_same_v<long, T>)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::InterlockedCompareExchange(destination, exchange, comparand);
+    return ::InterlockedCompareExchange(destination, exchange, comperand);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

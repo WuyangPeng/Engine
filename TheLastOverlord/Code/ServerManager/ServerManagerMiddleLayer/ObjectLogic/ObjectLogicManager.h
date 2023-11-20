@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：0.9.1.3 (2023/08/21 10:43)
+/// 版本：1.0.0.0 (2023/11/18 17:09)
 
 #ifndef SERVER_MANAGER_MIDDLE_LAYER_OBJECT_LOGIC_MIDDLE_LAYER_OBJECT_LOGIC_H
 #define SERVER_MANAGER_MIDDLE_LAYER_OBJECT_LOGIC_MIDDLE_LAYER_OBJECT_LOGIC_H
@@ -17,7 +17,7 @@
 
 namespace ServerManagerMiddleLayer
 {
-    class SERVER_MANAGER_MIDDLE_LAYER_DEFAULT_DECLARE ObjectLogicManager : public Framework::ObjectLogicInterface
+    class SERVER_MANAGER_MIDDLE_LAYER_DEFAULT_DECLARE ObjectLogicManager final : public Framework::ObjectLogicInterface
     {
     public:
         using ClassType = ObjectLogicManager;

@@ -12,6 +12,7 @@
 #include "AccessCheck.h"
 #include "Flags/AccessCheckFlags.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/WindowsSystem.h"
 
@@ -61,8 +62,7 @@ bool System::GetAccessCheck(SecurityDescriptorPtr securityDescriptor,
                    genericMapping,
                    privilegeSet,
                    privilegeSetLength,
-                   grantedAccess,
-                   &resultAccessStatue);
+                   grantedAccess);
 
     return false;
 
@@ -116,8 +116,7 @@ bool System::GetAccessCheckByType(SecurityDescriptorPtr securityDescriptor,
                    genericMapping,
                    privilegeSet,
                    privilegeSetLength,
-                   grantedAccess,
-                   &resultAccessStatue);
+                   grantedAccess);
 
     return false;
 

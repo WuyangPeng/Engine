@@ -1,9 +1,0 @@
-$Copyright$
-
-#ifndef $ProjectCapital$_H
-#define $ProjectCapital$_H
-
-#include "EngineSuite/EngineSuite.h"
-#include "VersionSuite/VersionSuite.h"
-
-#endif  // $ProjectCapital$_H

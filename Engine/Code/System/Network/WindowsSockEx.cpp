@@ -12,6 +12,7 @@
 #include "WindowsSockEx.h"
 #include "Using/SocketPrototypesUsing.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 System::WinSocket System::WinSocketAccept(WinSocket winSocket, WinSockAddress* addr, WindowsIntPtr addrLen, WinSockConditionProc condition, WindowsDWordPtrSizeType callbackData) noexcept
@@ -24,7 +25,7 @@ System::WinSocket System::WinSocketAccept(WinSocket winSocket, WinSockAddress* a
 
     UnusedFunction(winSocket, addr, addrLen, condition, callbackData);
 
-    return nullptr;
+    return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -248,7 +249,7 @@ System::WinSocket System::GetWinSocket(ProtocolFamilies addressFamilies, SocketT
 
     UnusedFunction(addressFamilies, type, protocol, protocolInfo, group, flags);
 
-    return nullptr;
+    return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

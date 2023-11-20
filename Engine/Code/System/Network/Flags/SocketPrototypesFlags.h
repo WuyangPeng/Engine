@@ -16,6 +16,11 @@
 
     #include <WinSock2.h>
 
+#elif defined(SYSTEM_PLATFORM_LINUX)
+
+    #include <sys/ioctl.h>
+    #include <sys/socket.h>
+
 #endif  // SYSTEM_PLATFORM_WIN32
 
 namespace System

@@ -5,10 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 10:50)
+///	版本：1.0.0.0 (2023/11/10 14:12)
 
 #ifndef ASSIST_TOOLS_TESTING_GENERATE_PROJECTS_SUITE_H
 #define ASSIST_TOOLS_TESTING_GENERATE_PROJECTS_SUITE_H
 
-#
+#include "GameModuleTesting.h"
+#include "GameParameterAnalysisTesting.h"
+#include "GenerateEngineTesting.h"
+#include "GenerateTestingEngineTesting.h"
+#include "MiddleLayerModuleTesting.h"
+#include "ProjectGeneration/ClientProjectGenerationTesting.h"
+#include "ProjectGeneration/DefaultProjectGenerationTesting.h"
+#include "ProjectGeneration/ReplaceProjectGenerationTesting.h"
+#include "ProjectGeneration/Utf8ReplaceProjectGenerationTesting.h"
+#include "ReplaceTesting.h"
+
 #endif  // ASSIST_TOOLS_TESTING_GENERATE_PROJECTS_SUITE_H

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/23 10:26)
+///	版本：1.0.0.0 (2023/11/08 10:15)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -25,7 +25,10 @@ void CoreTools::CodeMappingImpl::Insert(const String& codeKey, const String& ele
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    codeMapping.emplace(codeKey, element);
+    if (!codeMapping.emplace(codeKey, element).second)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("元素已存在, key = ") + codeKey)
+    }
 }
 
 System::String CoreTools::CodeMappingImpl::GetElement(const String& codeKey) const

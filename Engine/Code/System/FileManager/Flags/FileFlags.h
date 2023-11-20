@@ -189,7 +189,7 @@ namespace System
         OpenReparsePoint = 0x00200000,
         OpenNoRecall = 0x00100000,
         FirstPipeInstance = 0x00080000,
-    }
+    };
 
     enum class FileHandleSecurity
     {

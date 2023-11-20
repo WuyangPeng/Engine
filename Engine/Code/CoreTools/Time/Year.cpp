@@ -10,7 +10,9 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "Year.h"
+#include "System/Helper/PragmaWarning/PosixTime.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 CoreTools::Year::Year(int year) noexcept
     : year{ year }
@@ -35,4 +37,11 @@ int CoreTools::Year::GetYear() const noexcept
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return year;
+}
+
+int CoreTools::Year::GetCurrentYear()
+{
+    const auto currentTime = boost::posix_time::second_clock::local_time();
+
+    return currentTime.date().year();
 }

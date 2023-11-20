@@ -10,7 +10,9 @@
 #include "System/SystemExport.h"
 
 #include "FileTime.h"
+#include "System/FileManager/Flags/FileTimeFlags.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 System::ComparesFileTimeReturn System::FileTimeCompare(const FileTime* lhsFileTime, const FileTime* rhsFileTime) noexcept

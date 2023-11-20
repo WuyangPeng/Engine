@@ -15,6 +15,12 @@
 
 #include <string>
 
+#if defined(SYSTEM_PLATFORM_LINUX)
+
+    #include <sys/stat.h>
+
+#endif  // !SYSTEM_PLATFORM_LINUX
+
 namespace System
 {
 #ifdef SYSTEM_PLATFORM_LINUX

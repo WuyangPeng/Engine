@@ -5,15 +5,18 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/16 10:48)
+///	版本：1.0.0.0 (2023/11/08 15:30)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GameModuleImpl.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 
-AssistTools::GameModuleImpl::GameModuleImpl(String moduleName, String chineseName, bool isClient, String uppercaseName) noexcept
-    : moduleName{ std::move(moduleName) }, chineseName{ std::move(chineseName) }, isClient{ isClient }, uppercaseName{ std::move(uppercaseName) }
+AssistTools::GameModuleImpl::GameModuleImpl(String moduleName, String chineseName, ProjectServiceType projectServiceType, String uppercaseName) noexcept
+    : moduleName{ std::move(moduleName) },
+      chineseName{ std::move(chineseName) },
+      projectServiceType{ projectServiceType },
+      uppercaseName{ std::move(uppercaseName) }
 {
     ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -34,11 +37,11 @@ System::String AssistTools::GameModuleImpl::GetChineseName() const
     return chineseName;
 }
 
-bool AssistTools::GameModuleImpl::IsClient() const noexcept
+AssistTools::ProjectServiceType AssistTools::GameModuleImpl::GetProjectServiceType() const noexcept
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return isClient;
+    return projectServiceType;
 }
 
 System::String AssistTools::GameModuleImpl::GetUppercaseName() const

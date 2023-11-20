@@ -10,8 +10,10 @@
 #include "System/SystemExport.h"
 
 #include "LastPlatformError.h"
+#include "Flags/PlatformErrorFlags.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/Platform.h"
+#include "System/Helper/Tools.h"
 
 #include <gsl/util>
 

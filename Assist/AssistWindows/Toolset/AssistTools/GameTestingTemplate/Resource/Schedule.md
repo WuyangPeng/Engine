@@ -12,12 +12,11 @@ GameTestingTemplate
 
 ----------------------------
 状态
-	目前版本：0.9.1.2。
+	目前版本：1.0.0.0。
 
 ---------------------------- 
 实现内容
-	1. 复制目录GameTestingParameter.json到引擎辅助运行目录。
-	2. 复制目录TestingStringReplacing.json到引擎辅助运行目录。
-	3. 复制目录GameTemplate下的文件到引擎辅助运行目录。
+	1. 复制GenerateProjects配置文件到引擎辅助运行目录。
+	2. 复制目录GameTemplate下的文件到引擎辅助运行目录。
 
 ---------------------------- 

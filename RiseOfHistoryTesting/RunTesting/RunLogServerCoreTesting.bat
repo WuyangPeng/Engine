@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %RiseOfHistoryTestingWin32DebugLib% LogServerCoreTestingD.exe
+start /d %RiseOfHistoryTestingWin32ReleaseLib% LogServerCoreTesting.exe
+start /d %RiseOfHistoryTestingX64DebugLib% LogServerCoreTestingD.exe
+start /d %RiseOfHistoryTestingX64ReleaseLib% LogServerCoreTesting.exe
+start /d %RiseOfHistoryTestingStaticWin32DebugLib% LogServerCoreTestingStaticD.exe
+start /d %RiseOfHistoryTestingStaticWin32ReleaseLib% LogServerCoreTestingStatic.exe
+start /d %RiseOfHistoryTestingStaticX64DebugLib% LogServerCoreTestingStaticD.exe
+start /d %RiseOfHistoryTestingStaticX64ReleaseLib% LogServerCoreTestingStatic.exe
+
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicWin32DebugLib% LogServerCoreTestingStaticD.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicWin32ReleaseLib% LogServerCoreTestingStatic.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicX64DebugLib% LogServerCoreTestingStaticD.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicX64ReleaseLib% LogServerCoreTestingStatic.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticWin32DebugLib% LogServerCoreTestingD.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticWin32ReleaseLib% LogServerCoreTesting.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticX64DebugLib% LogServerCoreTestingD.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticX64ReleaseLib% LogServerCoreTesting.exe
+
+pause

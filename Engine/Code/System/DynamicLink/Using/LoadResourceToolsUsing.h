@@ -12,6 +12,7 @@
 
 #include "LoadLibraryUsing.h"
 #include "System/Helper/Platform.h"
+#include "System/Helper/WindowsMacro.h"
 
 namespace System
 {

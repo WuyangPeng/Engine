@@ -1,8 +1,0 @@
-$Copyright$
-
-#ifndef $ProjectCapital$_ENGINE_SUITE_H
-#define $ProjectCapital$_ENGINE_SUITE_H
-
-#include "EngineTesting.h"
-
-#endif  // $ProjectCapital$_ENGINE_SUITE_H

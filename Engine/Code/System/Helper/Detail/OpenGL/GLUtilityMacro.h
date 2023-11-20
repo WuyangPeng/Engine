@@ -521,7 +521,7 @@ namespace System
         SYSTEM_BODY_0(function);
 
     #define SYSTEM_PREVIOUSLY_BODY_1(function, a0) \
-        SYSTEM_BODY_1(function, a);
+        SYSTEM_BODY_1(function, a0);
 
     #define SYSTEM_PREVIOUSLY_BODY_2(function, a0, a1) \
         SYSTEM_BODY_2(function, a0, a1);

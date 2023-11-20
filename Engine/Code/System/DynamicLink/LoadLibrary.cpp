@@ -12,6 +12,7 @@
 #include "LoadLibrary.h"
 #include "Flags/LoadLibraryFlags.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 System::DynamicLinkModule System::LoadDynamicLibrary(const DynamicLinkCharType* fileName, LoadLibraryType flag) noexcept
@@ -27,7 +28,7 @@ System::DynamicLinkModule System::LoadDynamicLibrary(const DynamicLinkCharType* 
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    return ::dlopen(fileName, flag);
+    return ::dlopen(fileName, EnumCastUnderlying(flag));
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

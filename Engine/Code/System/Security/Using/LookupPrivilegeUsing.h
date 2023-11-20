@@ -13,6 +13,7 @@
 #include "System/Helper/Platform.h"
 #include "System/Helper/PragmaWarning.h"
 #include "System/Helper/UnicodeUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 #include <string>
 

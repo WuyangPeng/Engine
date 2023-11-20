@@ -523,28 +523,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="Configuration\EnvironmentVariable.json" />
-    <None Include="Configuration\GameClientMiddleLayerTesting.json" />
-    <None Include="Configuration\Log.json" />
-    <None Include="Configuration\Testing.json" />
-    <None Include="Resource\ReadMe.md" />
-    <None Include="Resource\Schedule.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\ArtificialIntelligenceSuite\ArtificialIntelligenceSuite.h" />
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\AudioSuite\AudioSuite.h" />
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\CameraSystemsSuite\CameraSystemsSuite.h" />
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\EventSuite\EventSuite.h" />
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\GUISuite\GUISuite.h" />
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\HelperSuite\HelperSuite.h" />
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\InputSuite\InputSuite.h" />
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\MessageSuite\MessageSuite.h" />
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\NetworkSuite\NetworkSuite.h" />
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\ObjectLogicSuite\ObjectLogicSuite.h" />
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\PhysicalModellingSuite\PhysicalModellingSuite.h" />
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\RenderingSuite\RenderingSuite.h" />
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\ResourceSuite\ResourceSuite.h" />
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\SystemSuite\SystemSuite.h" />
     <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\TestingHelper.h" />
   </ItemGroup>
@@ -552,6 +530,14 @@
     <ClCompile Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\TestingHelper.cpp" />
     <ClCompile Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\TestingMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\GameClientMiddleLayerTesting.json" />
+    <None Include="Configuration\EnvironmentVariable.json" />
+    <None Include="Configuration\Log.json" />
+    <None Include="Configuration\Testing.json" />
+    <None Include="Resource\ReadMe.md" />
+    <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt" />

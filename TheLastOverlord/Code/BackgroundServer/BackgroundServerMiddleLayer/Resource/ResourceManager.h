@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：0.9.1.3 (2023/08/21 10:43)
+/// 版本：1.0.0.0 (2023/11/18 17:09)
 
 #ifndef BACKGROUND_SERVER_MIDDLE_LAYER_RESOURCE_MIDDLE_LAYER_RESOURCE_H
 #define BACKGROUND_SERVER_MIDDLE_LAYER_RESOURCE_MIDDLE_LAYER_RESOURCE_H
@@ -17,7 +17,7 @@
 
 namespace BackgroundServerMiddleLayer
 {
-    class BACKGROUND_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE ResourceManager : public Framework::ResourceManagerInterface
+    class BACKGROUND_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE ResourceManager final : public Framework::ResourceManagerInterface
     {
     public:
         using ClassType = ResourceManager;

@@ -10,7 +10,9 @@
 #ifndef SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_TOOLS_USING_H
 #define SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_TOOLS_USING_H
 
+#include "LoadLibraryUsing.h"
 #include "System/Helper/Platform.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 namespace System
 {

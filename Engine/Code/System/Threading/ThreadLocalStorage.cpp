@@ -12,10 +12,10 @@
 #include "ThreadLocalStorage.h"
 #include "Flags/ThreadLocalStorageFlags.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
-System::WindowsDWord
-    System::ThreadLocalStorageAlloc() noexcept
+System::WindowsDWord System::ThreadLocalStorageAlloc() noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 

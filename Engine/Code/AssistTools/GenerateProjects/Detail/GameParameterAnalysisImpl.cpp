@@ -5,32 +5,25 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/16 11:02)
+///	版本：1.0.0.0 (2023/11/09 13:31)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GameParameterAnalysisImpl.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Base/Version.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Time/Year.h"
+#include "AssistTools/GenerateProjects/Flags/GameParameterType.h"
+#include "AssistTools/GenerateProjects/Flags/ProjectServiceType.h"
+#include "AssistTools/GenerateProjects/Using/GameParameterUsing.h"
 
-AssistTools::GameParameterAnalysisImpl::GameParameterAnalysisImpl(const std::string& fileName)
-    : fileName{ fileName },
+AssistTools::GameParameterAnalysisImpl::GameParameterAnalysisImpl(std::string fileName)
+    : fileName{ std::move(fileName) },
       mainTree{},
-      coreName{},
-      coreCapital{},
-      projectChineseName{},
-      projectDescribeName{},
-      projectName{},
-      testingName{},
-      projectCapital{},
-      projectAbbreviation{},
-      endYear{},
-      version{},
-      versionNum{},
+      gameParameter{},
       gameModule{},
       middleLayer{}
 {
@@ -47,68 +40,90 @@ void AssistTools::GameParameterAnalysisImpl::Analysis()
 
 void AssistTools::GameParameterAnalysisImpl::AnalysisJson()
 {
-    if (System::IFileStream fileStream{ CoreTools::StringConversion::MultiByteConversionStandard(fileName) };
-        fileStream)
-    {
-        const std::locale chs{ "chs" };
-        fileStream.imbue(chs);
-
-        read_json(fileStream, mainTree);
-    }
-    else
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("文件：") + CoreTools::StringConversion::MultiByteConversionStandard(fileName) + SYSTEM_TEXT("不存在"))
-    }
+    read_json(fileName, mainTree);
 }
 
 void AssistTools::GameParameterAnalysisImpl::AnalysisMain()
 {
-    coreName = mainTree.get(SYSTEM_TEXT("CoreName"), SYSTEM_TEXT("Core"));
-    coreCapital = mainTree.get(SYSTEM_TEXT("CoreCapital"), SYSTEM_TEXT("CORE"));
-    projectChineseName = mainTree.get(SYSTEM_TEXT("ProjectChineseName"), String{});
-    projectDescribeName = mainTree.get(SYSTEM_TEXT("ProjectDescribeName"), String{});
-    projectName = mainTree.get(SYSTEM_TEXT("ProjectName"), String{});
-    projectCapital = mainTree.get(SYSTEM_TEXT("ProjectCapital"), String{});
-    projectAbbreviation = mainTree.get(SYSTEM_TEXT("ProjectAbbreviation"), String{});
-    endYear = mainTree.get(SYSTEM_TEXT("EndYear"), SYSTEM_TEXT("2023"));
-    version = mainTree.get(SYSTEM_TEXT("Version"), CoreTools::StringConversion ::MultiByteConversionStandard(CoreTools::Version::GetVersion()));
-    versionNum = mainTree.get(SYSTEM_TEXT("VersionNum"), System::ToString(CoreTools::Version::GetTCREFullVersion()));
-    testingName = mainTree.get(SYSTEM_TEXT("TestingName"), String{});
+    AnalysisGameParameter();
+    AnalysisModule();
+    AnalysisMiddleLayer();
+}
 
-    for (const auto& tree : mainTree.get_child(SYSTEM_TEXT("Module")))
+void AssistTools::GameParameterAnalysisImpl::AnalysisGameParameter()
+{
+    for (const auto& element : GetGameParameterContainer())
     {
-        EXCEPTION_TRY
-        {
-            InsertModule(tree.first, tree.second);
-        }
-        EXCEPTION_ENGINE_EXCEPTION_CATCH(AssistTools)
-    }
-
-    for (const auto& tree : mainTree.get_child(SYSTEM_TEXT("MiddleLayer")))
-    {
-        EXCEPTION_TRY
-        {
-            InsertMiddleLayer(tree.first, tree.second);
-        }
-        EXCEPTION_ENGINE_EXCEPTION_CATCH(AssistTools)
+        gameParameter.emplace(element.GetGameParameterType(), CoreTools::StringConversion::Utf8ConversionStandard(mainTree.get(element.GetKeyName(), element.GetDefaultValue())));
     }
 }
 
-void AssistTools::GameParameterAnalysisImpl::InsertModule(const String& moduleName, const BasicTree& basicTree)
+void AssistTools::GameParameterAnalysisImpl::AnalysisModule()
 {
-    const auto chineseName = basicTree.get(SYSTEM_TEXT("ChineseName"), String{});
-    const auto isClient = basicTree.get(SYSTEM_TEXT("IsClient"), false);
-    const auto uppercase = basicTree.get(SYSTEM_TEXT("Uppercase"), String{});
-
-    gameModule.emplace_back(moduleName, chineseName, isClient, uppercase);
+    for (const auto& [moduleName, basicTree] : mainTree.get_child(moduleKey.data()))
+    {
+        AnalysisModule(moduleName, basicTree);
+    }
 }
 
-void AssistTools::GameParameterAnalysisImpl::InsertMiddleLayer(const String& middleLayerName, const BasicTree& basicTree)
+void AssistTools::GameParameterAnalysisImpl::AnalysisModule(const std::string& moduleName, const BasicTree& basicTree)
 {
-    const auto uppercase = basicTree.get(SYSTEM_TEXT("Uppercase"), String{});
-    const auto isManager = basicTree.get(SYSTEM_TEXT("IsManager"), false);
+    EXCEPTION_TRY
+    {
+        InsertModule(moduleName, basicTree);
+    }
+    EXCEPTION_ENGINE_EXCEPTION_CATCH(AssistTools)
+}
 
-    middleLayer.emplace_back(middleLayerName, uppercase, isManager);
+void AssistTools::GameParameterAnalysisImpl::InsertModule(const std::string& moduleName, const BasicTree& basicTree)
+{
+    const auto chineseName = CoreTools::StringConversion::Utf8ConversionStandard(basicTree.get(chineseNameKey.data(), ""));
+    const auto projectServiceType = System::UnderlyingCastEnum<ProjectServiceType>(basicTree.get(projectServiceTypeKey.data(), System::EnumCastUnderlying(ProjectServiceType::Tools)));
+    const auto uppercase = CoreTools::StringConversion::Utf8ConversionStandard(basicTree.get(uppercaseKey.data(), ""));
+
+    gameModule.emplace_back(CoreTools::StringConversion::Utf8ConversionStandard(moduleName), chineseName, projectServiceType, uppercase);
+}
+
+void AssistTools::GameParameterAnalysisImpl::AnalysisMiddleLayer()
+{
+    for (const auto& [middleLayerName, basicTree] : mainTree.get_child(middleLayerKey.data()))
+    {
+        AnalysisMiddleLayer(middleLayerName, basicTree);
+    }
+}
+
+void AssistTools::GameParameterAnalysisImpl::AnalysisMiddleLayer(const std::string& middleLayerName, const BasicTree& basicTree)
+{
+    EXCEPTION_TRY
+    {
+        InsertMiddleLayer(middleLayerName, basicTree);
+    }
+    EXCEPTION_ENGINE_EXCEPTION_CATCH(AssistTools)
+}
+
+void AssistTools::GameParameterAnalysisImpl::InsertMiddleLayer(const std::string& middleLayerName, const BasicTree& basicTree)
+{
+    const auto uppercase = CoreTools::StringConversion::Utf8ConversionStandard(basicTree.get(uppercaseKey.data(), ""));
+    const auto isManager = basicTree.get(isManagerKey.data(), false);
+
+    middleLayer.emplace_back(CoreTools::StringConversion::Utf8ConversionStandard(middleLayerName), uppercase, isManager);
+}
+
+const AssistTools::GameParameterAnalysisImpl::GameParameterContainer& AssistTools::GameParameterAnalysisImpl::GetGameParameterContainer()
+{
+    static GameParameterContainer gameParameterContainer{ GameParameter{ GameParameterType::CoreName, "Core" },
+                                                          GameParameter{ GameParameterType::CoreCapital, "CORE" },
+                                                          GameParameter{ GameParameterType::ProjectChineseName },
+                                                          GameParameter{ GameParameterType::ProjectDescribeName },
+                                                          GameParameter{ GameParameterType::ProjectName },
+                                                          GameParameter{ GameParameterType::ProjectCapital },
+                                                          GameParameter{ GameParameterType::ProjectAbbreviation },
+                                                          GameParameter{ GameParameterType::EndYear, std::to_string(CoreTools::Year::GetCurrentYear()) },
+                                                          GameParameter{ GameParameterType::Version, CoreTools::Version::GetVersion() },
+                                                          GameParameter{ GameParameterType::VersionNum, std::to_string(CoreTools::Version::GetTCREFullVersion()) },
+                                                          GameParameter{ GameParameterType::TestingName } };
+
+    return gameParameterContainer;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(AssistTools, GameParameterAnalysisImpl)
@@ -148,79 +163,17 @@ AssistTools::GameParameterAnalysisImpl::MiddleLayerContainerConstIter AssistTool
     return middleLayer.cend();
 }
 
-System::String AssistTools::GameParameterAnalysisImpl::GetCoreName() const
+AssistTools::GameParameterAnalysisImpl::String AssistTools::GameParameterAnalysisImpl::GetGameParameter(GameParameterType gameParameterType) const
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return coreName;
-}
-
-System::String AssistTools::GameParameterAnalysisImpl::GetCoreCapital() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return coreCapital;
-}
-
-System::String AssistTools::GameParameterAnalysisImpl::GetProjectChineseName() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return projectChineseName;
-}
-
-System::String AssistTools::GameParameterAnalysisImpl::GetProjectDescribeName() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return projectDescribeName;
-}
-
-System::String AssistTools::GameParameterAnalysisImpl::GetProjectName() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return projectName;
-}
-
-System::String AssistTools::GameParameterAnalysisImpl::GetProjectCapital() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return projectCapital;
-}
-
-System::String AssistTools::GameParameterAnalysisImpl::GetProjectAbbreviation() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return projectAbbreviation;
-}
-
-System::String AssistTools::GameParameterAnalysisImpl::GetEndYear() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return endYear;
-}
-
-System::String AssistTools::GameParameterAnalysisImpl::GetVersion() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return version;
-}
-
-AssistTools::GameParameterAnalysisImpl::String AssistTools::GameParameterAnalysisImpl::GetVersionNum() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return versionNum;
-}
-
-AssistTools::GameParameterAnalysisImpl::String AssistTools::GameParameterAnalysisImpl::GetTestingName() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return testingName;
+    if (const auto iter = gameParameter.find(gameParameterType);
+        iter != gameParameter.cend())
+    {
+        return iter->second;
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到对应参数，GameParameterType = ") + System::ToString(gameParameterType))
+    }
 }

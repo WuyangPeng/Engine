@@ -36,11 +36,22 @@ int System::VsnPrintF(char* buffer, size_t size, const char* format, va_list arg
 
 bool System::StrCat(char* destination, size_t sizeInBytes, const char* source) noexcept
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     // 如果成功，则为零；如果失败，则为错误代码。
     if (::strcat_s(destination, sizeInBytes, source) == 0)
         return true;
     else
         return false;
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    if (::strcat(destination, source) == 0)
+        return true;
+    else
+        return false;
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 size_t System::StrLen(const char* str) noexcept
@@ -53,15 +64,34 @@ size_t System::StrLen(const char* str) noexcept
 
 bool System::StrCpy(char* destination, size_t sizeInBytes, char const* source) noexcept
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     if (::strcpy_s(destination, sizeInBytes, source) == 0)
         return true;
     else
         return false;
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    if (::strcpy(destination, source) == 0)
+        return true;
+    else
+        return false;
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 char* System::StrTok(char* string, char const* delimiter, char** context) noexcept
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     return ::strtok_s(string, delimiter, context);
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    return ::strtok_r(string, delimiter, context);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 const char* System::StrStr(char const* str, char const* subStr) noexcept

@@ -12,6 +12,12 @@
 
 // 下面宏仅在System库内部调用，如果外部需要使用，WIN32需要链接Ws2_32.lib。
 
+#ifdef SYSTEM_PLATFORM_LINUX
+
+    #include <sys/select.h>
+
+#endif  // SYSTEM_PLATFORM_LINUX
+
 #ifdef BUILDING_SYSTEM_EXPORT
 
     #define SYSTEM_FD_CLEAR(fd, set) FD_CLR(fd, set)

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/18 17:40)
+/// 标准：std:c++20
+/// 版本：1.0.0.0 (2023/11/19 00:20)
 
 #ifndef RISE_OF_HISTORY_VERSION_H
 #define RISE_OF_HISTORY_VERSION_H
@@ -15,6 +15,6 @@
 //  gRiseOfHistoryVersion / 10000 % 100 是次版本号
 //  gRiseOfHistoryVersion / 1000000 % 100 是主版本号
 
-constexpr auto gRiseOfHistoryVersion = 90102;
+constexpr auto gRiseOfHistoryVersion = 1000000;
 
 #endif  // RISE_OF_HISTORY_VERSION_H

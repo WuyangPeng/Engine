@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：0.9.1.3 (2023/08/21 10:43)
+/// 版本：1.0.0.0 (2023/11/18 17:09)
 
 #ifndef DATABASE_SERVER_MIDDLE_LAYER_RENDERING_MIDDLE_LAYER_RENDERING_H
 #define DATABASE_SERVER_MIDDLE_LAYER_RENDERING_MIDDLE_LAYER_RENDERING_H
@@ -17,7 +17,7 @@
 
 namespace DatabaseServerMiddleLayer
 {
-    class DATABASE_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE RenderingManager : public Framework::RenderingManagerInterface
+    class DATABASE_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE RenderingManager final : public Framework::RenderingManagerInterface
     {
     public:
         using ClassType = RenderingManager;

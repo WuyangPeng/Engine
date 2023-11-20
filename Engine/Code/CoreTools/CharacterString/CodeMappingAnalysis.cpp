@@ -5,17 +5,21 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/23 10:45)
+///	版本：1.0.0.0 (2023/11/08 10:14)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CodeMappingAnalysis.h"
 #include "Detail/CodeMappingAnalysisImpl.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
 
-CoreTools::CodeMappingAnalysis::CodeMappingAnalysis(const String& fileName)
+CoreTools::CodeMappingAnalysis::CodeMappingAnalysis(const std::wstring& fileName)
+    : impl{ fileName }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+}
+
+CoreTools::CodeMappingAnalysis::CodeMappingAnalysis(const std::string& fileName)
     : impl{ fileName }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;

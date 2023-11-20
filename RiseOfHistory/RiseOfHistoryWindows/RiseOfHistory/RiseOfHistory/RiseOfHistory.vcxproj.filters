@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="源文件">
@@ -20,7 +20,7 @@
       <UniqueIdentifier>{cf3704dd-48b9-4634-850d-20e0759ec9ad}</UniqueIdentifier>
     </Filter>
     <Filter Include="Helper 头文件">
-      <UniqueIdentifier>{7d0045a7-b65b-4dbb-9baf-91cebf449f66}</UniqueIdentifier>
+      <UniqueIdentifier>{e3fa5a78-1e4e-479b-9669-800a0377976d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -114,13 +114,13 @@
     <ClInclude Include="..\..\..\Code\RiseOfHistory\Helper\HelperFwd.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\RiseOfHistory\Helper\UserMacro.h">
-      <Filter>Helper 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\RiseOfHistory\Helper\RiseOfHistoryClassInvariantMacro.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\RiseOfHistory\Helper\RiseOfHistoryCustomAssertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\Helper\UserMacro.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>

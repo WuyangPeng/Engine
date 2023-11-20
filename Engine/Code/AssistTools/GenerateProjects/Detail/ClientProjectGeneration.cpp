@@ -5,16 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/16 15:25)
+///	版本：1.0.0.0 (2023/11/09 16:49)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "ClientProjectGeneration.h"
-#include "System/Helper/PragmaWarning/Algorithm.h"
+#include "ProjectGenerationReplace.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 
-AssistTools::ClientProjectGeneration::ClientProjectGeneration(const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, bool isClient)
-    : ParentType{ fileName, gameParameterAnalysis, codeMappingAnalysis }, isClient{ isClient }
+AssistTools::ClientProjectGeneration::ClientProjectGeneration(const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, ProjectServiceType projectServiceType)
+    : ParentType{ fileName, gameParameterAnalysis, codeMappingAnalysis }, projectServiceType{ projectServiceType }
 {
     ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -25,9 +25,9 @@ AssistTools::ClientProjectGeneration::String AssistTools::ClientProjectGeneratio
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto content = ParentType::GetContent();
+    ProjectGenerationReplace projectGenerationReplace{ ParentType::GetContent(), GetGameParameterAnalysis(), GetCodeMappingAnalysis() };
 
-    content = ReplaceCallRunBat(content, isClient);
+    projectGenerationReplace.ReplaceCallRunBat(projectServiceType);
 
-    return content;
+    return projectGenerationReplace.GetReplaceResult();
 }

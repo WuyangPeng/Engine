@@ -11,6 +11,7 @@
 
 #include "LocalTools.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 bool System::LocalMemoryFree(WindowsHLocal& memory) noexcept

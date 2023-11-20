@@ -39,7 +39,7 @@ double Mathematics::EquationQuartic::Substitution(double value) const noexcept
            quartic * MathD::Square(value) * MathD::Square(value);
 }
 
-Mathematics::EquationQuartic::Imaginary Mathematics::EquationQuartic::Substitution(const Imaginary& value) const
+Mathematics::EquationQuartic::Imaginary Mathematics::EquationQuartic::Substitution(const Imaginary& value) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -58,7 +58,7 @@ double Mathematics::EquationQuartic::SubstitutionTangent(double solution) const 
            solution * solution * solution * quartic * 4.0;
 }
 
-Mathematics::EquationQuartic::Imaginary Mathematics::EquationQuartic::SubstitutionTangent(const Imaginary& solution) const
+Mathematics::EquationQuartic::Imaginary Mathematics::EquationQuartic::SubstitutionTangent(const Imaginary& solution) const noexcept
 {
     return once +
            solution * secondary * 2.0 +

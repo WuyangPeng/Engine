@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/23 10:25)
+///	版本：1.0.0.0 (2023/11/08 10:13)
 
 #ifndef CORE_TOOLS_CHARACTER_STRING_H
 #define CORE_TOOLS_CHARACTER_STRING_H

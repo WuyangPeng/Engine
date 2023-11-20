@@ -15,6 +15,6 @@
 /// gTCREVersion / 10000 % 100 是次版本号
 /// gTCREVersion / 1000000 % 100 是主版本号
 
-constexpr auto gTCREVersion = 90104;
+constexpr auto gTCREVersion = 100000;
 
 #endif  // SYSTEM_HELPER_VERSION_H

@@ -14,9 +14,17 @@
 
 #define SYSTEM_WARNING_PUSH "System/Helper/PragmaWarning/Push.inl"
 
-// clang-format off
-#define SYSTEM_WARNING_DISABLE(index) SYSTEM_STRINGIZE(SYSTEM_MULTIPLE_CONCATENATOR(System/Helper/PragmaWarning/Disable, index, .inl))
-// clang-format on
+#ifdef TCRE_USE_MSVC
+
+    // clang-format off
+    #define SYSTEM_WARNING_DISABLE(index) SYSTEM_STRINGIZE(SYSTEM_MULTIPLE_CONCATENATOR(System/Helper/PragmaWarning/Disable, index, .inl))
+    // clang-format on
+
+#else  // !TCRE_USE_MSVC
+
+    #define SYSTEM_WARNING_DISABLE(index) "System/Helper/ConfigMacro.h"
+
+#endif  // TCRE_USE_MSVC
 
 #define SYSTEM_WARNING_POP "System/Helper/PragmaWarning/Pop.inl"
 

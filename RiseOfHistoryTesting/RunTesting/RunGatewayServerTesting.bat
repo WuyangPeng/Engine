@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %RiseOfHistoryTestingWin32DebugLib% GatewayServerTestingD.exe
+start /d %RiseOfHistoryTestingWin32ReleaseLib% GatewayServerTesting.exe
+start /d %RiseOfHistoryTestingX64DebugLib% GatewayServerTestingD.exe
+start /d %RiseOfHistoryTestingX64ReleaseLib% GatewayServerTesting.exe
+start /d %RiseOfHistoryTestingStaticWin32DebugLib% GatewayServerTestingStaticD.exe
+start /d %RiseOfHistoryTestingStaticWin32ReleaseLib% GatewayServerTestingStatic.exe
+start /d %RiseOfHistoryTestingStaticX64DebugLib% GatewayServerTestingStaticD.exe
+start /d %RiseOfHistoryTestingStaticX64ReleaseLib% GatewayServerTestingStatic.exe
+
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicWin32DebugLib% GatewayServerTestingStaticD.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicWin32ReleaseLib% GatewayServerTestingStatic.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicX64DebugLib% GatewayServerTestingStaticD.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicX64ReleaseLib% GatewayServerTestingStatic.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticWin32DebugLib% GatewayServerTestingD.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticWin32ReleaseLib% GatewayServerTesting.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticX64DebugLib% GatewayServerTestingD.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticX64ReleaseLib% GatewayServerTesting.exe
+
+pause

@@ -12,6 +12,8 @@
 #include "WindowsExtensionPrototypes.h"
 #include "Using/SocketPrototypesUsing.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
+#include "System/Network/Flags/WindowsExtensionPrototypesFlags.h"
 
 System::WinSockStartUpReturn System::WinSockStartUp(WindowsWord versionRequired, WinSockDataPtr wsaData) noexcept
 {

@@ -11,6 +11,7 @@
 
 #include "LibraryTools.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 #include <array>
@@ -25,7 +26,7 @@ System::DynamicLinkModule System::GetDynamicLinkHandle(const DynamicLinkCharType
 
     UnusedFunction(moduleName);
 
-    return false;
+    return nullptr;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -56,9 +57,9 @@ System::WindowsDWord System::GetDynamicLinkFileName(DynamicLinkModule module, Dy
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(moduleName, filename, size);
+    UnusedFunction(module, filename, size);
 
-    return false;
+    return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

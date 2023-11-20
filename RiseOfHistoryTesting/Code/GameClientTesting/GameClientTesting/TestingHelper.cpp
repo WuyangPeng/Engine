@@ -1,40 +1,29 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/18 18:10)
+/// 标准：std:c++20
+/// 版本：1.0.0.0 (2023/11/19 20:39)
 
-#include "GameClient/GameClientCore/Helper/GameClientCoreClassInvariantMacro.h"
 #include "Testing.h"
 #include "TestingHelper.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
-#include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 
 GameClientTesting::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "游戏客户端测试" }
+    : ParentType{ argc, argv, "游戏客户端单元测试" }
 {
     InitSuite();
 
-    GAME_CLIENT_CORE_SELF_CLASS_IS_VALID_1;
+    USER_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(GameClientTesting, TestingHelper)
 
-void GameClientTesting::TestingHelper::InitSuite()
+void GameClientTesting::TestingHelper::InitSuite() noexcept
 {
-    AddGameClientSuite();
 }
 
-void GameClientTesting::TestingHelper::AddGameClientSuite()
-{
-    auto gameClientSuite = GenerateSuite("游戏客户端");
 
-    ADD_TEST(gameClientSuite, GameClientHelperTesting);
-    ADD_TEST(gameClientSuite, GameClientMessageTesting);
-
-    AddSuite(gameClientSuite);
-}
+ 

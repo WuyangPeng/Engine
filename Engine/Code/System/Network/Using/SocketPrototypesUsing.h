@@ -120,11 +120,7 @@ namespace System
 
     constexpr auto fdSetSize = 64;
 
-    struct WinSockFdSet
-    {
-        uint32_t fd_count;
-        WinSocket fd_array[fdSetSize];
-    };
+    using WinSockFdSet = fd_set;
 
     struct WinSockTimeval
     {

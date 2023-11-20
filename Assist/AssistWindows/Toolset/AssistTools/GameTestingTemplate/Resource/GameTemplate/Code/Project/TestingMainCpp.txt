@@ -1,8 +1,0 @@
-$Copyright$
-
-#include "$ProjectName$/TestingHelper.h"
-#include "CoreTools/Helper/MainFunctionMacro.h"
-
-#include <vld.h>
-
-MAIN_FUNCTION($ProjectName$, TestingHelper)

@@ -23,6 +23,14 @@ namespace System
 
     using StartAddress = unsigned(__stdcall*)(void*);
 
+#elif defined(SYSTEM_PLATFORM_LINUX)
+
+    using ThreadHandle = pthread_t;
+    using ThreadHandlePtr = ThreadHandle*;
+    using ThreadStartRoutine = WindowsDWord (*)(void* threadParameter);
+
+    using StartAddress = unsigned (*)(void*);
+
 #else  // !SYSTEM_PLATFORM_WIN32
 
     using ThreadHandle = pthread_t;

@@ -10,8 +10,11 @@
 #ifndef SYSTEM_CHARACTER_STRING_STRING_CONVERSION_FLAGS_H
 #define SYSTEM_CHARACTER_STRING_STRING_CONVERSION_FLAGS_H
 
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/Platform.h"
 #include "System/Helper/WindowsMacro.h"
+#include "System/SystemOutput/Flags/PrimaryLanguageFlags.h"
+#include "System/SystemOutput/Flags/SubLanguageFlags.h"
 
 namespace System
 {
@@ -145,18 +148,18 @@ namespace System
         GeorgianModern = 0x1,
     };
 
-    static constexpr auto gLanguageSystemDefault = MakeLanguageId(PrimaryLanguage::Neutral, SubLanguage::SysDefault);
-    static constexpr auto gLanguageUserDefault = MakeLanguageId(PrimaryLanguage::Neutral, SubLanguage::Default);
+    static constexpr auto gLanguageSystemDefault = MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Neutral), EnumCastUnderlying(SubLanguage::SysDefault));
+    static constexpr auto gLanguageUserDefault = MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Neutral), EnumCastUnderlying(SubLanguage::Default));
 
     enum class LanguageLocale
     {
-        SystemDefault = MakeLanguageCid(gLanguageSystemDefault, LocaleSort::Default),
-        UserDefault = MakeLanguageCid(gLanguageUserDefault, LocaleSort::Default),
-        CustomDefault = MakeLanguageCid(MakeLanguageId(PrimaryLanguage::Neutral, SubLanguage::CustomDefault), LocaleSort::Default),
-        CustomUnspecified = MakeLanguageCid(MakeLanguageId(PrimaryLanguage::Neutral, SubLanguage::CustomUnspecified), LocaleSort::Default),
-        CustomUiDefault = MakeLanguageCid(MakeLanguageId(PrimaryLanguage::Neutral, SubLanguage::UICustomDefault), LocaleSort::Default),
-        Neutral = MakeLanguageCid(MakeLanguageId(PrimaryLanguage::Neutral, SubLanguage::Neutral), LocaleSort::Default),
-        Invariant = MakeLanguageCid(MakeLanguageId(PrimaryLanguage::Invariant, SubLanguage::Neutral), LocaleSort::Default),
+        SystemDefault = MakeLanguageCid(gLanguageSystemDefault, EnumCastUnderlying(LocaleSort::Default)),
+        UserDefault = MakeLanguageCid(gLanguageUserDefault, EnumCastUnderlying(LocaleSort::Default)),
+        CustomDefault = MakeLanguageCid(MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Neutral), EnumCastUnderlying(SubLanguage::CustomDefault)), EnumCastUnderlying(LocaleSort::Default)),
+        CustomUnspecified = MakeLanguageCid(MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Neutral), EnumCastUnderlying(SubLanguage::CustomUnspecified)), EnumCastUnderlying(LocaleSort::Default)),
+        CustomUiDefault = MakeLanguageCid(MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Neutral), EnumCastUnderlying(SubLanguage::UICustomDefault)), EnumCastUnderlying(LocaleSort::Default)),
+        Neutral = MakeLanguageCid(MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Neutral), EnumCastUnderlying(SubLanguage::Neutral)), EnumCastUnderlying(LocaleSort::Default)),
+        Invariant = MakeLanguageCid(MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Invariant), EnumCastUnderlying(SubLanguage::Neutral)), EnumCastUnderlying(LocaleSort::Default)),
     };
 
     enum class Compares

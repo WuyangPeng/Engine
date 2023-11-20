@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 10:39)
+///	版本：1.0.0.0 (2023/11/08 09:10)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -24,20 +24,15 @@ AssistTools::TestingHelper::TestingHelper(int argc, char** argv)
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, TestingHelper)
 
-// private
 void AssistTools::TestingHelper::InitSuite()
 {
     AddHelperSuite();
     AddGenerateProjectsSuite();
-    AddFeaturesImporterSuite();
-    AddBmpColorToGraySuite();
-    AddBmpToWmtfSuite();
-    AddWmfxCompilerSuite();
 }
 
 void AssistTools::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("宏");
+    auto helperSuite = GenerateSuite("帮助");
 
     AddSuite(helperSuite);
 }
@@ -46,33 +41,25 @@ void AssistTools::TestingHelper::AddGenerateProjectsSuite()
 {
     auto generateProjectsSuite = GenerateSuite("生成项目");
 
+    ADD_TEST(generateProjectsSuite, GameModuleTesting);
+    ADD_TEST(generateProjectsSuite, MiddleLayerModuleTesting);
+    ADD_TEST(generateProjectsSuite, GameParameterAnalysisTesting);
+    generateProjectsSuite.AddSuite(GetProjectGenerationSuite());
+    ADD_TEST(generateProjectsSuite, ReplaceTesting);
+    ADD_TEST(generateProjectsSuite, GenerateEngineTesting);
+    ADD_TEST(generateProjectsSuite, GenerateTestingEngineTesting);
+
     AddSuite(generateProjectsSuite);
 }
 
-void AssistTools::TestingHelper::AddFeaturesImporterSuite()
+CoreTools::Suite AssistTools::TestingHelper::GetProjectGenerationSuite()
 {
-    auto featuresImporterSuite = GenerateSuite("特征导入");
+    auto projectGenerationSuite = GenerateSuite("工程生成");
 
-    AddSuite(featuresImporterSuite);
-}
+    ADD_TEST(projectGenerationSuite, DefaultProjectGenerationTesting);
+    ADD_TEST(projectGenerationSuite, ClientProjectGenerationTesting);
+    ADD_TEST(projectGenerationSuite, ReplaceProjectGenerationTesting);
+    ADD_TEST(projectGenerationSuite, Utf8ReplaceProjectGenerationTesting);
 
-void AssistTools::TestingHelper::AddBmpColorToGraySuite()
-{
-    auto bmpColorToGraySuite = GenerateSuite("灰态Bmp颜色");
-
-    AddSuite(bmpColorToGraySuite);
-}
-
-void AssistTools::TestingHelper::AddBmpToWmtfSuite()
-{
-    auto bmpToWmtfSuite = GenerateSuite("Bmp转换Wmtf");
-
-    AddSuite(bmpToWmtfSuite);
-}
-
-void AssistTools::TestingHelper::AddWmfxCompilerSuite()
-{
-    auto wmfxCompilerSuite = GenerateSuite("Wmfx编译器");
-
-    AddSuite(wmfxCompilerSuite);
+    return projectGenerationSuite;
 }

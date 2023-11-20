@@ -22,7 +22,15 @@ namespace System
     template <typename Function>
     void GetFunction(const char* functionName, Function& function) noexcept
     {
+#if defined(SYSTEM_PLATFORM_WIN32)
+
         function = static_cast<Function>(GetOpenGLFunctionPointer(functionName));
+
+#elif defined(SYSTEM_PLATFORM_LINUX)
+
+        function = reinterpret_cast<Function>(GetOpenGLFunctionPointer(functionName));
+
+#endif  // defined(SYSTEM_PLATFORM_WIN32) || defined(SYSTEM_PLATFORM_LINUX)
 
         BOOST_ASSERT(function != nullptr);
     }

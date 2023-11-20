@@ -132,7 +132,7 @@ void CoreTools::IFStreamManagerImpl::SetSimplifiedChinese()
 
 #if !defined(TCRE_USE_GCC)
 
-    const std::locale chs{ "chs" };
+    static const std::locale chs{ "chs" };
 
     iStream.imbue(chs);
 

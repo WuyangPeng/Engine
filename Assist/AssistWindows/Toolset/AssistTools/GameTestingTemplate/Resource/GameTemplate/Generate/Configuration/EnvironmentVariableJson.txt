@@ -1,7 +1,0 @@
-{
-  "DefaultEnvironment": "",
-  "EngineDirectory": "Configuration/EngineDirectory.json",
-  "PrintRun": 1,
-  "Version": "$Version$",
-  "RandomSeed": $VersionNum$
-}

@@ -90,7 +90,7 @@ bool Mathematics::EquationResult::FindSolution(double solution, double epsilon) 
     return false;
 }
 
-bool Mathematics::EquationResult::FindSolution(const Imaginary& solution, double epsilon) const
+bool Mathematics::EquationResult::FindSolution(const Imaginary& solution, double epsilon) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -145,7 +145,7 @@ void Mathematics::EquationResult::SortResult()
     std::ranges::sort(imaginaryResult, ImaginaryLess{});
 }
 
-bool Mathematics::EquationResult::ImaginaryLess::operator()(const Imaginary& lhs, const Imaginary& rhs) const
+bool Mathematics::EquationResult::ImaginaryLess::operator()(const Imaginary& lhs, const Imaginary& rhs) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

@@ -16,10 +16,10 @@ call RunAllChatServerTesting.bat
 call RunAllRechargeServerTesting.bat
 call RunAllLogServerTesting.bat
 call RunAllGameMasterServerTesting.bat
-call RunAllServerManagerTesting.bat
 call RunAllUpdateServerTesting.bat
 call RunAllBackgroundServerTesting.bat
 call RunAllDatabaseServerTesting.bat
+call RunAllServerManagerTesting.bat
 
 call RunTheLastOverlordTesting.bat
 

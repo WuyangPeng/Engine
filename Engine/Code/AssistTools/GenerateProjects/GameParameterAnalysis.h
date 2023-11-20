@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/16 11:03)
+///	版本：1.0.0.0 (2023/11/08 15:56)
 
 #ifndef ASSIST_TOOLS_GENERATE_PROJECTS_GAME_PARAMETER_ANALYSIS_H
 #define ASSIST_TOOLS_GENERATE_PROJECTS_GAME_PARAMETER_ANALYSIS_H
@@ -14,23 +14,23 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Contract/ContractFwd.h"
-#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include "AssistTools/GenerateProjects/GenerateProjectsFwd.h"
 
-ASSIST_TOOLS_COPY_UNSHARED_EXPORT_IMPL(GameParameterAnalysis, GameParameterAnalysisImpl);
+ASSIST_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(GameParameterAnalysisImpl);
 
 namespace AssistTools
 {
     class ASSIST_TOOLS_DEFAULT_DECLARE GameParameterAnalysis
     {
     public:
-        COPY_UNSHARED_TYPE_DECLARE(GameParameterAnalysis);
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(GameParameterAnalysis);
 
         using String = System::String;
-        using MiddleLayerContainer = std::vector<MiddleLayerModule>;
-        using MiddleLayerContainerConstIter = MiddleLayerContainer::const_iterator;
         using GameModuleContainer = std::vector<GameModule>;
         using GameModuleContainerConstIter = GameModuleContainer::const_iterator;
+        using MiddleLayerContainer = std::vector<MiddleLayerModule>;
+        using MiddleLayerContainerConstIter = MiddleLayerContainer::const_iterator;
 
     public:
         explicit GameParameterAnalysis(const std::string& fileName);
@@ -43,17 +43,7 @@ namespace AssistTools
         NODISCARD MiddleLayerContainerConstIter GetMiddleLayerBegin() const noexcept;
         NODISCARD MiddleLayerContainerConstIter GetMiddleLayerEnd() const noexcept;
 
-        NODISCARD String GetCoreName() const;
-        NODISCARD String GetCoreCapital() const;
-        NODISCARD String GetProjectChineseName() const;
-        NODISCARD String GetProjectDescribeName() const;
-        NODISCARD String GetProjectName() const;
-        NODISCARD String GetProjectCapital() const;
-        NODISCARD String GetProjectAbbreviation() const;
-        NODISCARD String GetEndYear() const;
-        NODISCARD String GetVersion() const;
-        NODISCARD String GetVersionNum() const;
-        NODISCARD String GetTestingName() const;
+        NODISCARD String GetGameParameter(GameParameterType gameParameterType) const;
 
     private:
         PackageType impl;

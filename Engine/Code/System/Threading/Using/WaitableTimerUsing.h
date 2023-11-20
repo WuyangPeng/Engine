@@ -11,6 +11,7 @@
 #define SYSTEM_THREADING_WAITABLE_TIMER_USING_H
 
 #include "System/Helper/Platform.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 namespace System
 {
@@ -22,7 +23,7 @@ namespace System
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    uisng TimerApcRoutine = void(*)(void* argToCompletionRoutine, uint32_t timerLowValue, uint32_t timerHighValue);
+    using TimerApcRoutine = void (*)(void* argToCompletionRoutine, uint32_t timerLowValue, uint32_t timerHighValue);
 
     struct WaitableTimerReasonContext
     {

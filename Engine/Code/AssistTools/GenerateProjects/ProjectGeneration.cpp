@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/16 14:20)
+///	版本：1.0.0.0 (2023/11/09 16:40)
 
 #include "AssistTools/AssistToolsExport.h"
 
@@ -21,13 +21,13 @@ AssistTools::ProjectGeneration::ProjectGeneration(ProjectGenerationType projectG
     ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-AssistTools::ProjectGeneration::ProjectGeneration(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, bool isClient)
-    : impl{ CoreTools::ImplCreateUseFactory::Default, projectGenerationType, fileName, gameParameterAnalysis, codeMappingAnalysis, isClient }
+AssistTools::ProjectGeneration::ProjectGeneration(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, ProjectServiceType projectServiceType)
+    : impl{ CoreTools::ImplCreateUseFactory::Default, projectGenerationType, fileName, gameParameterAnalysis, codeMappingAnalysis, projectServiceType }
 {
     ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-AssistTools::ProjectGeneration::ProjectGeneration(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, const ReplaceType& replace)
+AssistTools::ProjectGeneration::ProjectGeneration(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, const ReplaceContainer& replace)
     : impl{ CoreTools::ImplCreateUseFactory::Default, projectGenerationType, fileName, gameParameterAnalysis, codeMappingAnalysis, replace }
 {
     ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;

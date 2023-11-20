@@ -102,6 +102,8 @@
 （3）忽略大小写的字符类：CaseInsensitiveStringTesting、
 						 CaseInsensitiveStringIOStreamTesting。 
 （4）字符串工具：StringUtilityTesting。
+（5）代码映射：CodeMappingTesting、★★★
+			   CodeMappingAnalysis。★★★
 
 ----------------------------
 5.   ExceptionSuite 

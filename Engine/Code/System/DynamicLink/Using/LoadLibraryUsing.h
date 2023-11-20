@@ -32,7 +32,7 @@ namespace System
 
     using DynamicLinkModule = void*;
     using ConstDynamicLinkModule = const void*;
-    using DynamicLinkProcess = int (*)();
+    using DynamicLinkProcess = void*;
     using DynamicLinkCharType = char;
     using DynamicLinkString = std::string;
     using DynamicLinkStringView = std::string_view;

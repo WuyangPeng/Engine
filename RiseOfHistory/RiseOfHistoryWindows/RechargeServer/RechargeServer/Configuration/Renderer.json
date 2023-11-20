@@ -1,0 +1,25 @@
+{
+  "RendererType": 4,
+
+  "Texture": {
+    "ColorFormat": 2,
+    "DepthStencilFormat": 45,
+    "MultisamplesNumber": 1
+  },
+
+  "ClearColor": {
+    "Red": 1.0,
+    "Green": 1.0,
+    "Blue": 1.0,
+    "Alpha": 1.0
+  },
+
+  "WindowParameter": {
+    "WindowTitle": "RechargeServer",
+    "Width": 1024,
+    "Height": 768,
+    "X": 0,
+    "Y": 0,
+    "AllowResize": true
+  }
+}

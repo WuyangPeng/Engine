@@ -13,6 +13,7 @@
 #include "Thread.h"
 #include "Flags/ProcessFlags.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/SystemOutput/OutputDebugString.h"
 #include "System/Windows/Engineering.h"
@@ -133,8 +134,6 @@ void System::ExitSystemProcess(WindowsUInt exitCode) noexcept
 #else  // !SYSTEM_PLATFORM_WIN32
 
     UnusedFunction(exitCode);
-
-    return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

@@ -12,6 +12,7 @@
 #include "HeapTools.h"
 #include "Using/HeapToolsUsing.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/Flags/ExceptionFlags.h"
 

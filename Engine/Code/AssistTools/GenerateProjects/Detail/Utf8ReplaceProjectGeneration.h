@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/24 13:34)
+///	版本：1.0.0.0 (2023/11/09 16:48)
 
-#ifndef AssistTools_XX_Utf8ReplaceProjectGeneration_H
-#define AssistTools_XX_Utf8ReplaceProjectGeneration_H
+#ifndef ASSIST_TOOLS_GENERATE_PROJECTS_UTF8_REPLACE_PROJECT_GENERATION_H
+#define ASSIST_TOOLS_GENERATE_PROJECTS_UTF8_REPLACE_PROJECT_GENERATION_H
 
 #include "AssistTools/AssistToolsDll.h"
 
@@ -16,17 +16,15 @@
 
 namespace AssistTools
 {
-    class ASSIST_TOOLS_HIDDEN_DECLARE Utf8ReplaceProjectGeneration : public ReplaceProjectGeneration
+    class ASSIST_TOOLS_HIDDEN_DECLARE Utf8ReplaceProjectGeneration final : public ReplaceProjectGeneration
     {
     public:
         using ClassType = Utf8ReplaceProjectGeneration;
         using ParentType = ReplaceProjectGeneration;
 
-        using ReplaceType = std::map<String, String>;
-
     public:
         Utf8ReplaceProjectGeneration(const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis);
-        Utf8ReplaceProjectGeneration(const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, const ReplaceType& replace);
+        Utf8ReplaceProjectGeneration(const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, const ReplaceContainer& replace);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -34,4 +32,4 @@ namespace AssistTools
     };
 }
 
-#endif  // AssistTools_XX_Utf8ReplaceProjectGeneration_H
+#endif  // ASSIST_TOOLS_GENERATE_PROJECTS_UTF8_REPLACE_PROJECT_GENERATION_H

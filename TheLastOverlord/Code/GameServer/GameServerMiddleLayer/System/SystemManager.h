@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：0.9.1.3 (2023/08/21 10:42)
+/// 版本：1.0.0.0 (2023/11/18 17:09)
 
 #ifndef GAME_SERVER_MIDDLE_LAYER_SYSTEM_MIDDLE_LAYER_SYSTEM_H
 #define GAME_SERVER_MIDDLE_LAYER_SYSTEM_MIDDLE_LAYER_SYSTEM_H
@@ -17,7 +17,7 @@
 
 namespace GameServerMiddleLayer
 {
-    class GAME_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE SystemManager : public Framework::SystemManagerInterface
+    class GAME_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE SystemManager final : public Framework::SystemManagerInterface
     {
     public:
         using ClassType = SystemManager;

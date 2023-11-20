@@ -41,7 +41,7 @@ namespace System
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    enum class DesiredAccessGeneric
+    enum class DesiredAccessGeneric : uint32_t
     {
         Read = 0x80000000L,
         Write = 0x40000000L,

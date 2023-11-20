@@ -10,7 +10,7 @@ $Copyright$
 
 namespace $ModuleName$MiddleLayer
 {
-    class $ModuleUppercase$_MIDDLE_LAYER_DEFAULT_DECLARE $MiddleLayerName$Manager : public Framework::$MiddleLayerName$$IsManager$Interface
+    class $ModuleUppercase$_MIDDLE_LAYER_DEFAULT_DECLARE $MiddleLayerName$Manager final : public Framework::$MiddleLayerName$$IsManager$Interface
     {
     public:
         using ClassType = $MiddleLayerName$Manager;

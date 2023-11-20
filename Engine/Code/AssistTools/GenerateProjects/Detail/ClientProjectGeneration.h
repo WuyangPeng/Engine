@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/16 15:24)
+///	版本：1.0.0.0 (2023/11/09 16:49)
 
 #ifndef ASSIST_TOOLS_GENERATE_PROJECTS_CLIENT_PROJECT_GENERATION_H
 #define ASSIST_TOOLS_GENERATE_PROJECTS_CLIENT_PROJECT_GENERATION_H
@@ -14,25 +14,23 @@
 
 #include "DefaultProjectGeneration.h"
 
-#include <map>
-
 namespace AssistTools
 {
-    class ASSIST_TOOLS_HIDDEN_DECLARE ClientProjectGeneration : public DefaultProjectGeneration
+    class ASSIST_TOOLS_HIDDEN_DECLARE ClientProjectGeneration final : public DefaultProjectGeneration
     {
     public:
         using ClassType = ClientProjectGeneration;
         using ParentType = DefaultProjectGeneration;
 
     public:
-        ClientProjectGeneration(const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, bool isClient);
+        ClientProjectGeneration(const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, ProjectServiceType projectServiceType);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         NODISCARD String GetContent() const override;
 
     private:
-        bool isClient;
+        ProjectServiceType projectServiceType;
     };
 }
 

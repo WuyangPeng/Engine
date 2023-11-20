@@ -5,23 +5,21 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/24 13:34)
+///	版本：1.0.0.0 (2023/11/09 16:48)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "Utf8ReplaceProjectGeneration.h"
-#include "System/Helper/PragmaWarning/Algorithm.h"
-#include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/FileManager/IFStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 
 AssistTools::Utf8ReplaceProjectGeneration::Utf8ReplaceProjectGeneration(const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis)
-    : ParentType{ fileName, gameParameterAnalysis, codeMappingAnalysis, ReplaceType{} }
+    : ParentType{ fileName, gameParameterAnalysis, codeMappingAnalysis, ReplaceContainer{} }
 {
     ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-AssistTools::Utf8ReplaceProjectGeneration::Utf8ReplaceProjectGeneration(const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, const ReplaceType& replace)
+AssistTools::Utf8ReplaceProjectGeneration::Utf8ReplaceProjectGeneration(const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, const ReplaceContainer& replace)
     : ParentType{ fileName, gameParameterAnalysis, codeMappingAnalysis, replace }
 {
     ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;

@@ -11,7 +11,33 @@
 
 #include "FileTools.h"
 #include "Using/FileUsing.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
+
+#include <filesystem>
+
+void System::DeleteFileDirectory(const String& pathName)
+{
+    for (const auto& element : std::filesystem::directory_iterator(pathName))
+    {
+        if (element.is_directory())
+        {
+            DeleteFileDirectory(element.path());
+            std::filesystem::remove(element.path());
+        }
+        else if (element.is_regular_file())
+        {
+            std::filesystem::remove(element.path());
+        }
+    }
+}
+
+void System::CreateFileDirectory(const String& pathName) noexcept
+{
+    const auto result = CreateFileDirectory(pathName, nullptr);
+
+    UnusedFunction(result);
+}
 
 bool System::CreateFileDirectory(const String& pathName, WindowSecurityAttributesPtr securityAttributes) noexcept
 {

@@ -10,6 +10,7 @@
 #include "System/SystemExport.h"
 
 #include "LookupPrivilege.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Security/Flags/LookupPrivilegeNameFlags.h"
 

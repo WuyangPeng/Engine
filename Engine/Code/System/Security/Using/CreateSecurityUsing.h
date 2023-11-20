@@ -10,6 +10,8 @@
 #ifndef SYSTEM_SECURITY_CREATE_SECURITY_USING_H
 #define SYSTEM_SECURITY_CREATE_SECURITY_USING_H
 
+#include "SecurityAceUsing.h"
+#include "SecurityAclUsing.h"
 #include "System/Helper/Platform.h"
 
 namespace System
@@ -33,8 +35,8 @@ namespace System
         uint16_t Control;
         uint16_t Owner;
         uint16_t Group;
-        AccessCheckACLPtr Sacl;
-        AccessCheckACLPtr Dacl;
+        AccessCheckAclPtr Sacl;
+        AccessCheckAclPtr Dacl;
     };
     using SecurityDescriptorPtr = void*;
 

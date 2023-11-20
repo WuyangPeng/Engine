@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/16 14:26)
+///	版本：1.0.0.0 (2023/11/09 16:41)
 
 #include "AssistTools/AssistToolsExport.h"
 
@@ -14,16 +14,8 @@
 #include "ProjectGenerationFactory.h"
 #include "ReplaceProjectGeneration.h"
 #include "Utf8ReplaceProjectGeneration.h"
-#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "AssistTools/GenerateProjects/Flags/ProjectGenerationType.h"
-
-AssistTools::ProjectGenerationFactory::ProjectGenerationFactory() noexcept
-{
-    ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
-CLASS_INVARIANT_STUB_DEFINE(AssistTools, ProjectGenerationFactory)
 
 AssistTools::ProjectGenerationFactory::ProjectGenerationSharedPtr AssistTools::ProjectGenerationFactory::Create(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis)
 {
@@ -44,13 +36,13 @@ AssistTools::ProjectGenerationFactory::ProjectGenerationSharedPtr AssistTools::P
     }
 }
 
-AssistTools::ProjectGenerationFactory::ProjectGenerationSharedPtr AssistTools::ProjectGenerationFactory::Create(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, bool isClient)
+AssistTools::ProjectGenerationFactory::ProjectGenerationSharedPtr AssistTools::ProjectGenerationFactory::Create(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, ProjectServiceType projectServiceType)
 {
     switch (projectGenerationType)
     {
         case ProjectGenerationType::Default:
         {
-            return std::make_shared<ClientProjectGeneration>(fileName, gameParameterAnalysis, codeMappingAnalysis, isClient);
+            return std::make_shared<ClientProjectGeneration>(fileName, gameParameterAnalysis, codeMappingAnalysis, projectServiceType);
         }
         default:
         {
@@ -59,7 +51,7 @@ AssistTools::ProjectGenerationFactory::ProjectGenerationSharedPtr AssistTools::P
     }
 }
 
-AssistTools::ProjectGenerationFactory::ProjectGenerationSharedPtr AssistTools::ProjectGenerationFactory::Create(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, const ReplaceType& replace)
+AssistTools::ProjectGenerationFactory::ProjectGenerationSharedPtr AssistTools::ProjectGenerationFactory::Create(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, const ReplaceContainer& replace)
 {
     switch (projectGenerationType)
     {

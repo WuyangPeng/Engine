@@ -5,15 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/16 15:25)
+///	版本：1.0.0.0 (2023/11/09 16:49)
 
 #include "AssistTools/AssistToolsExport.h"
 
+#include "ProjectGenerationReplace.h"
 #include "ReplaceProjectGeneration.h"
-#include "System/Helper/PragmaWarning/Algorithm.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 
-AssistTools::ReplaceProjectGeneration::ReplaceProjectGeneration(const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, ReplaceType replace)
+AssistTools::ReplaceProjectGeneration::ReplaceProjectGeneration(const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, ReplaceContainer replace)
     : ParentType{ fileName, gameParameterAnalysis, codeMappingAnalysis }, replace{ std::move(replace) }
 {
     ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -25,12 +25,5 @@ AssistTools::ProjectGenerationImpl::String AssistTools::ReplaceProjectGeneration
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto content = ParentType::GetContent();
-
-    for (const auto& element : replace)
-    {
-        boost::algorithm::replace_all(content, SYSTEM_TEXT("$") + element.first + SYSTEM_TEXT("$"), element.second);
-    }
-
-    return content;
+    return ProjectGenerationReplace::ReplaceParameter(ParentType::GetContent(), replace);
 }

@@ -1,15 +1,15 @@
-/// @mainpage Rise of History API 文档
+/// @mainpage Rise Of History API 文档
 
-@copyright Copyright (c) 2011-2022
-Rise of History
+@copyright Copyright (c) 2011-2023
+Rise Of History
 
 @author 彭武阳，彭晔恩，彭晔泽
 联系作者：94458936@qq.com
 
-@version 0.8.1.0
+@version 1.0.0.0
 标准：std:c++20
 
-@date 2022/08/02 18:07
+@date 2023/11/19 00:20
 
 @section sec_Contents 内容
 
@@ -19,9 +19,28 @@ Rise of History
 
 @section sec_Overview 概述
 
-历史的崛起包含一个模块：
+历史的崛起包含20个模块：
 
-1. GameClient（游戏客户端） 
+1. GameClient（游戏客户端）
+2. RobotClient（机器人客户端）
+3. MessageClient（消息客户端）
+4. BackgroundClient（后台客户端）
+5. GatewayServer（网关服务器）
+6. LoginServer（登陆服务器）
+7. GameServer（游戏服务器）
+8. FightingServer（战斗服务器）
+9. WorldServer（世界服务器）
+10. OfflineServer（离线服务器）
+11. LeaderboardServer（排行榜服务器）
+12. MailServer（邮件服务器）
+13. ChatServer（聊天服务器）
+14. RechargeServer（充值服务器）
+15. LogServer（日志服务器）
+16. GameMasterServer（游戏管理员服务器）
+17. UpdateServer（更新服务器）
+18. BackgroundServer（后台服务器）
+19. DatabaseServer（数据库服务器）
+20. ServerManager（服务器管理者）
 
 @section sec_Detail 详细说明
 
@@ -30,7 +49,7 @@ Rise of History
 
 @section sec_SeeAlso 参见
 
-@li @ref page_GameClient_Base 
+@li @ref page_CoreTools_Base 
 
 @page page_Documentation 说明
 
@@ -46,11 +65,11 @@ Rise of History
 @defgroup group_RiseOfHistory_Documentation 历史的崛起说明
 有关详细历史的崛起说明，请参见 @ref group_RiseOfHistory_Documentation 。 
 
-@page page_GameClient_Base GameClient
+@page page_CoreTools_Base The CoreTools Base 
 
 详细说明在这里。
 
-@link group_GameClient_Base \b View All GameClient Classes @endlink
+@link group_CoreTools_Base \b View All CoreTools Classes @endlink
 
-@defgroup group_GameClient_Base 游戏客户端基础功能
-有关详细说明，请参见 @ref page_GameClient_Base 。
+@defgroup group_CoreTools_Base 核心工具库基础功能
+有关详细说明，请参见 @ref page_CoreTools_Base 。

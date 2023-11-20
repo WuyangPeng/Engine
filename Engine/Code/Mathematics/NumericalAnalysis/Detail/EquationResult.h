@@ -55,7 +55,7 @@ namespace Mathematics
 
     private:
         NODISCARD bool FindSolution(double solution, double epsilon) const noexcept;
-        NODISCARD bool FindSolution(const Imaginary& solution, double epsilon) const;
+        NODISCARD bool FindSolution(const Imaginary& solution, double epsilon) const noexcept;
 
         class ImaginaryLess
         {
@@ -63,7 +63,7 @@ namespace Mathematics
             using ClassType = ImaginaryLess;
 
         public:
-            NODISCARD bool operator()(const Imaginary& lhs, const Imaginary& rhs) const;
+            NODISCARD bool operator()(const Imaginary& lhs, const Imaginary& rhs) const noexcept;
 
             CLASS_INVARIANT_DECLARE;
         };

@@ -523,15 +523,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\GameClientCoreTesting.json" />
+    <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\Testing.json" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientCoreTesting\EngineSuite\EngineSuite.h" />
     <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientCoreTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientCoreTesting\TestingHelper.h" />
   </ItemGroup>

@@ -13,6 +13,7 @@
 #include "Using/SocketPrototypesUsing.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning.h"
+#include "System/Helper/Tools.h"
 
 System::WinSockHostEnt* System::GetHostByAddress(const InternetAddress* address, ProtocolFamilies type) noexcept
 {
@@ -66,7 +67,7 @@ bool System::GetHostName(char* name, int nameLength) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(name, namelen);
+    UnusedFunction(name, nameLength);
 
     return false;
 

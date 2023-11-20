@@ -32,7 +32,7 @@ namespace System
     NODISCARD T SystemInterlockedExchangeSubtract(T* addend, T value) noexcept(std::is_same_v<long, T>);
 
     template <typename T>
-    NODISCARD T SystemInterlockedCompareExchange(T* destination, T exchange, T comparand) noexcept(std::is_same_v<long, T>);
+    NODISCARD T SystemInterlockedCompareExchange(T* destination, T exchange, T comperand) noexcept(std::is_same_v<long, T>);
 
     template <typename T>
     NODISCARD T SystemInterlockedAnd(T* destination, T value) noexcept(std::is_same_v<long, T>);

@@ -10,6 +10,7 @@
 #include "System/SystemExport.h"
 
 #include "LibraryDirectory.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 #include <array>

@@ -19,6 +19,8 @@
 // 文件管理辅助工具
 namespace System
 {
+    void SYSTEM_DEFAULT_DECLARE DeleteFileDirectory(const String& pathName);
+    void SYSTEM_DEFAULT_DECLARE CreateFileDirectory(const String& pathName) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CreateFileDirectory(const String& pathName, WindowSecurityAttributesPtr securityAttributes) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE RemoveSystemDirectory(const TChar* pathName) noexcept;
 

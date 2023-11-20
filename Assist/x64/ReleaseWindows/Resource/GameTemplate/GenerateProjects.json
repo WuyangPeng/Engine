@@ -1,12 +1,12 @@
 {
-  "Copyright": "/// Copyright (c) 2010-$EndYear$\n/// Threading Core Render Engine\n///\n/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó\n/// ÁªÏµ×÷Õß£º94458936@qq.com\n///\n/// ±ê×¼£ºstd:c++20\n/// °æ±¾£º$Version$ ($Data$ $Hour$:$Minute$)",
-  "ModuleDescribe": "$Serial$. $ModuleName$£¨$ModuleChineseName$£©",
+  "Copyright": "/// Copyright (c) 2010-$EndYear$\n/// Threading Core Render Engine\n///\n/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½\n/// è”ç³»ä½œè€…ï¼š94458936@qq.com\n///\n/// æ ‡å‡†ï¼šstd:c++20\n/// ç‰ˆæœ¬ï¼š$Version$ ($Data$ $Hour$:$Minute$)",
+  "ModuleDescribe": "$Serial$. $ModuleName$ï¼ˆ$ModuleChineseName$ï¼‰",
   "CallRunBat": "call RunAll$ModuleName$.bat",
   "CallRunTestingBat": "call RunAll$ModuleName$Testing.bat",
   "ModuleJson": "  \"$ModuleName$\": 1$ModuleNameIsEnd$",
   "ModuleTestingJson": "  \"$ModuleName$Testing\": 1$ModuleNameIsEnd$",
-  "CodeAnalysis": "$ModuleName$£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©",
-  "TestingCodeAnalysis": "$ModuleName$£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©",
+  "CodeAnalysis": "$ModuleName$ï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰",
+  "TestingCodeAnalysis": "$ModuleName$ï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰",
   "MiddleLayerFwdInclude": "#include \"$MiddleLayerName$/$MiddleLayerName$Fwd.h\"",
   "MiddleLayerInclude": "#include \"$MiddleLayerName$/$MiddleLayerName$.h\""
 }

@@ -10,6 +10,7 @@
 #include "System/SystemExport.h"
 
 #include "ConsoleFont.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/WindowsSystem.h"
 
@@ -77,7 +78,7 @@ System::ConsoleCoord System::GetSystemConsoleFontSize(WindowsHandle consoleOutpu
 
     UnusedFunction(consoleOutput, font);
 
-    return false;
+    return ConsoleCoord{};
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

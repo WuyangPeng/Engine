@@ -18,16 +18,19 @@ namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
+    using ThreadingCriticalSection = CRITICAL_SECTION;
+    using ThreadingCriticalSectionPtr = LPCRITICAL_SECTION;
     using ThreadingRtlCriticalSectionDebug = RTL_CRITICAL_SECTION_DEBUG;
     using ThreadingRtlCriticalSectionDebugPtr = PRTL_CRITICAL_SECTION_DEBUG;
     using ThreadingRtlResourceDebug = RTL_RESOURCE_DEBUG;
     using ThreadingRtlResourceDebugPtr = PRTL_RESOURCE_DEBUG;
-    using ThreadingCriticalSection = CRITICAL_SECTION;
-    using ThreadingCriticalSectionPtr = LPCRITICAL_SECTION;
     using ThreadingListEntry = LIST_ENTRY;
     using ThreadingListEntryPtr = PLIST_ENTRY;
 
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    using ThreadingCriticalSection = std::recursive_mutex;
+    using ThreadingCriticalSectionPtr = ThreadingCriticalSection*;
 
     struct ThreadingListEntry
     {
@@ -40,7 +43,7 @@ namespace System
     {
         uint16_t Type;
         uint16_t CreatorBackTraceIndex;
-        struct ThreadingCriticalSection* CriticalSection;
+        ThreadingCriticalSection* CriticalSection;
         ThreadingListEntry ProcessLocksList;
         uint32_t EntryCount;
         uint32_t ContentionCount;
@@ -52,9 +55,6 @@ namespace System
     using ThreadingRtlCriticalSectionDebugPtr = ThreadingRtlCriticalSectionDebug*;
     using ThreadingRtlResourceDebug = ThreadingRtlCriticalSectionDebug;
     using ThreadingRtlResourceDebugPtr = ThreadingRtlResourceDebug*;
-
-    using ThreadingCriticalSection = std::recursive_mutex;
-    using ThreadingCriticalSectionPtr = ThreadingCriticalSection*;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

@@ -12,30 +12,15 @@
  2.  GenerateProjects
 
 对生成项目模块的单元测试，包括： 
-（1）生成项目。
-
-----------------------------
-3.  FeaturesImporter
-
-对特征导入模块的单元测试，包括： 
-（1）特征导入。
-
-----------------------------
-4.  BmpColorToGray
-
-对灰态Bmp颜色模块的单元测试，包括： 
-（1）灰态Bmp颜色。
-
-----------------------------
-5.  BmpToTf
-
-对Bmp转换tf模块的单元测试，包括： 
-（1）Bmp转换tf。
-
-----------------------------
-6.  FxCompiler
-
-对Fx编译器模块的单元测试，包括： 
-（1）Fx编译器。
+（1）生成项目：GameModuleTesting、★★★
+			   MiddleLayerModuleTesting、★★★
+			   GameParameterAnalysisTesting、★★★
+			   DefaultProjectGenerationTesting、★★★
+			   ClientProjectGenerationTesting、★★★
+			   ReplaceProjectGenerationTesting、★★★
+			   Utf8ReplaceProjectGenerationTesting、★★★
+			   ReplaceTesting、★★★
+			   GenerateEngineTesting、★★★
+			   GenerateTestingEngineTesting。★★★
 
 ----------------------------

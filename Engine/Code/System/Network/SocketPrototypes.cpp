@@ -14,6 +14,7 @@
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/NetworkMacro.h"
 #include "System/Helper/PragmaWarning.h"
+#include "System/Helper/Tools.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -56,7 +57,7 @@ System::WinSocket System::CreateSocket(ProtocolFamilies addressFamilies, SocketT
 
     UnusedFunction(addressFamilies, type, protocol);
 
-    return nullptr;
+    return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -114,7 +115,7 @@ System::WinSocket System::Accept(WinSocket winSocket, WinSockInternetAddress* ad
 
     UnusedFunction(winSocket, address, nameLen);
 
-    return nullptr;
+    return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

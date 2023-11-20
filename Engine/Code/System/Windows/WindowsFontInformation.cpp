@@ -11,6 +11,7 @@
 
 #include "WindowsFontInformation.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 #include <gsl/util>

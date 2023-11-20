@@ -110,7 +110,7 @@ System::AndroidLooperEvent System::AndroidLooperPollAll(int32_t timeoutMillis, i
 
 #else  // !SYSTEM_PLATFORM_ANDROID && !SYSTEM_PLATFORM_WIN32
 
-    return AndroidLooperEventInput;
+    return AndroidLooperEvent::Input;
 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }

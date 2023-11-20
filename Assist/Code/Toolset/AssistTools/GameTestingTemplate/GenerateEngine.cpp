@@ -5,9 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/31 10:34)
+///	版本：1.0.0.0 (2023/11/18 14:06)
 
 #include "GenerateEngine.h"
+#include "System/FileManager/FileTools.h"
 #include "System/Helper/PragmaWarning/LexicalCast.h"
 #include "System/Helper/PragmaWarning/PropertyTree.h"
 #include "System/Time/DeltaTime.h"
@@ -26,7 +27,7 @@ GameTestingTemplate::GenerateEngine::GenerateEngine(std::string configurationFil
 
 CLASS_INVARIANT_STUB_DEFINE(GameTestingTemplate, GenerateEngine)
 
-void GameTestingTemplate::GenerateEngine ::Generate()  
+void GameTestingTemplate::GenerateEngine::Generate()
 {
     using BasicTree = boost::property_tree::basic_ptree<System::String, System::String>;
 
@@ -35,6 +36,8 @@ void GameTestingTemplate::GenerateEngine ::Generate()
 
     const auto input = mainTree.get(SYSTEM_TEXT("input"), System::String{});
     const auto output = mainTree.get(SYSTEM_TEXT("output"), System::String{});
+
+    System::DeleteFileDirectory(output);
 
     const AssistTools::GenerateTestingEngine generateEngine{ input, output };
 

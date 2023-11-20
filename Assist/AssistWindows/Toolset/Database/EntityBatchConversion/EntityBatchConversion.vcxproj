@@ -36,7 +36,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{28A2D059-98C2-4535-9220-D0D62F928C9E}</ProjectGuid>
+    <ProjectGuid>{03975480-50F3-4A19-8D78-4D3586DAC84D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>EntityBatchConversion</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>

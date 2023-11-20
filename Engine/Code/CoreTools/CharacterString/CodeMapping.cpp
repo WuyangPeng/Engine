@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/23 10:45)
+///	版本：1.0.0.0 (2023/11/08 10:14)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,17 +14,16 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, CodeMapping)
 
 CoreTools::CodeMapping CoreTools::CodeMapping::Create()
 {
-    return CodeMapping{ CoreTools::DisableNotThrow::Disable };
+    return CodeMapping{ DisableNotThrow::Disable };
 }
 
-CoreTools::CodeMapping::CodeMapping(CoreTools::DisableNotThrow disableNotThrow)
-    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+CoreTools::CodeMapping::CodeMapping(DisableNotThrow disableNotThrow)
+    : impl{ ImplCreateUseDefaultConstruction::Default }
 {
     System::UnusedFunction(disableNotThrow);
 

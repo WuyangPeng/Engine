@@ -12,6 +12,7 @@
 #include "FormatErrorMessage.h"
 #include "Data/FormatErrorMessageParameter.h"
 #include "System/Helper/PragmaWarning.h"
+#include "System/Helper/Tools.h"
 
 #include <array>
 

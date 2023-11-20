@@ -175,13 +175,14 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.txt" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
-xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.json" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
-xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/" "$(ProjectDir)/Resource/GenerateProjectsSuite/Template/" /F /Y /S /I
+xcopy "$(EngineInclude)/AssistTools/GenerateProjects/TestingTemplate/" "$(ProjectDir)/Resource/GenerateProjectsSuite/TestingTemplate/" /F /Y /S /I
+xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y /S /I</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/GameParameter*.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/GameTestingParameter*.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
@@ -195,13 +196,14 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.txt" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
-xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.json" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
-xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/" "$(ProjectDir)/Resource/GenerateProjectsSuite/Template/" /F /Y /S /I
+xcopy "$(EngineInclude)/AssistTools/GenerateProjects/TestingTemplate/" "$(ProjectDir)/Resource/GenerateProjectsSuite/TestingTemplate/" /F /Y /S /I
+xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y /S /I</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/GameParameter*.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/GameTestingParameter*.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -219,13 +221,14 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.txt" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
-xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.json" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
-xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/" "$(ProjectDir)/Resource/GenerateProjectsSuite/Template/" /F /Y /S /I
+xcopy "$(EngineInclude)/AssistTools/GenerateProjects/TestingTemplate/" "$(ProjectDir)/Resource/GenerateProjectsSuite/TestingTemplate/" /F /Y /S /I
+xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y /S /I</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/GameParameter*.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/GameTestingParameter*.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
@@ -243,13 +246,14 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.txt" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
-xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.json" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
-xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/" "$(ProjectDir)/Resource/GenerateProjectsSuite/Template/" /F /Y /S /I
+xcopy "$(EngineInclude)/AssistTools/GenerateProjects/TestingTemplate/" "$(ProjectDir)/Resource/GenerateProjectsSuite/TestingTemplate/" /F /Y /S /I
+xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y /S /I</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/GameParameter*.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/GameTestingParameter*.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -263,13 +267,14 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.txt" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
-xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.json" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
-xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/" "$(ProjectDir)/Resource/GenerateProjectsSuite/Template/" /F /Y /S /I
+xcopy "$(EngineInclude)/AssistTools/GenerateProjects/TestingTemplate/" "$(ProjectDir)/Resource/GenerateProjectsSuite/TestingTemplate/" /F /Y /S /I
+xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y /S /I</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/GameParameter*.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/GameTestingParameter*.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -283,13 +288,14 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.txt" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
-xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.json" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
-xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/" "$(ProjectDir)/Resource/GenerateProjectsSuite/Template/" /F /Y /S /I
+xcopy "$(EngineInclude)/AssistTools/GenerateProjects/TestingTemplate/" "$(ProjectDir)/Resource/GenerateProjectsSuite/TestingTemplate/" /F /Y /S /I
+xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y /S /I</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/GameParameter*.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/GameTestingParameter*.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -307,13 +313,14 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.txt" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
-xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.json" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
-xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/" "$(ProjectDir)/Resource/GenerateProjectsSuite/Template/" /F /Y /S /I
+xcopy "$(EngineInclude)/AssistTools/GenerateProjects/TestingTemplate/" "$(ProjectDir)/Resource/GenerateProjectsSuite/TestingTemplate/" /F /Y /S /I
+xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y /S /I</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/GameParameter*.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/GameTestingParameter*.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
@@ -331,44 +338,64 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.txt" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
-xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.json" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
-xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/" "$(ProjectDir)/Resource/GenerateProjectsSuite/Template/" /F /Y /S /I
+xcopy "$(EngineInclude)/AssistTools/GenerateProjects/TestingTemplate/" "$(ProjectDir)/Resource/GenerateProjectsSuite/TestingTemplate/" /F /Y /S /I
+xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y /S /I</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/GameParameter*.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/GameTestingParameter*.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Configuration\AssistToolsTesting.json" />
     <None Include="Configuration\EnvironmentVariable.json" />
+    <None Include="Configuration\GameParameter.json" />
+    <None Include="Configuration\GameParameter0.json" />
+    <None Include="Configuration\GameParameter1.json" />
+    <None Include="Configuration\GameTestingParameter.json" />
     <None Include="Configuration\Log.json" />
-    <None Include="Configuration\StringReplacing.json" />
     <None Include="Configuration\Testing.json" />
-    <None Include="Resource\GenerateProjectsSuite\GenerateProjects.json" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\BmpColorToGraySuite\BmpColorToGraySuite.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\BmpToTfSuite\BmpToTfSuite.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\FeaturesImporterSuite\FeaturesImporterSuite.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\FxCompilerSuite\FxCompilerSuite.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GameModuleTesting.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GameParameterAnalysisTesting.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateEngineTesting.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateProjectsSuite.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTesting.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingEngineTesting.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\MiddleLayerModuleTesting.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\ClientProjectGenerationTesting.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\DefaultProjectGenerationTesting.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\ProjectGenerationTesting.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\ReplaceProjectGenerationTesting.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\Utf8ReplaceProjectGenerationTesting.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ReplaceTesting.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\HelperSuite\HelperSuite.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\TestingHelper.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GameModuleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GameParameterAnalysisTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateEngineTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingEngineTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\MiddleLayerModuleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\ClientProjectGenerationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\DefaultProjectGenerationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\ProjectGenerationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\ReplaceProjectGenerationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\Utf8ReplaceProjectGenerationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ReplaceTesting.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\TestingHelper.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\TestingMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\GenerateProjectsSuite\ClangFormat.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\Gitignore.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\ReadMeMd.txt" />
     <Text Include="Resource\Todo\Level 0.txt" />
     <Text Include="Resource\Todo\Level 1.txt" />
     <Text Include="Resource\Todo\Level 2.txt" />
@@ -383,4 +410,9 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

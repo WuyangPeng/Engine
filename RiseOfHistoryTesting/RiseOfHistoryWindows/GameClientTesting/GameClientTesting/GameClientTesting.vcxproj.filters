@@ -19,12 +19,6 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{68f14701-d87c-4a2f-ac11-7381ed07c781}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameClientSuite 头文件">
-      <UniqueIdentifier>{cdd8a081-b391-4e13-9d76-c2296a6b5fa8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameClientSuite 源文件">
-      <UniqueIdentifier>{6680691f-0353-43e9-a7d2-e84ae2b8bcd0}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">
@@ -33,10 +27,10 @@
     <None Include="Resource\Schedule.md">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="Configuration\EnvironmentVariable.json">
+    <None Include="Configuration\GameClientTesting.json">
       <Filter>配置</Filter>
     </None>
-    <None Include="Configuration\GameClientTesting.json">
+    <None Include="Configuration\EnvironmentVariable.json">
       <Filter>配置</Filter>
     </None>
     <None Include="Configuration\Log.json">
@@ -53,15 +47,6 @@
     <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientTesting\TestingHelper.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientTesting\GameClientSuite\GameClientSuite.h">
-      <Filter>GameClientSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientTesting\GameClientSuite\GameClientHelperTesting.h">
-      <Filter>GameClientSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientTesting\GameClientSuite\GameClientMessageTesting.h">
-      <Filter>GameClientSuite 头文件</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\GameClientTesting\GameClientTesting\TestingHelper.cpp">
@@ -72,12 +57,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\GameClientTesting\GameClientTesting\TestingMain.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\GameClientTesting\GameClientTesting\GameClientSuite\GameClientHelperTesting.cpp">
-      <Filter>GameClientSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\GameClientTesting\GameClientTesting\GameClientSuite\GameClientMessageTesting.cpp">
-      <Filter>GameClientSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

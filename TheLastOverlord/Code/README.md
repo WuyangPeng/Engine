@@ -20,10 +20,10 @@ ChatServer：代码分析（所有规则），平台（Windows）
 RechargeServer：代码分析（所有规则），平台（Windows）
 LogServer：代码分析（所有规则），平台（Windows）
 GameMasterServer：代码分析（所有规则），平台（Windows）
-ServerManager：代码分析（所有规则），平台（Windows）
 UpdateServer：代码分析（所有规则），平台（Windows）
 BackgroundServer：代码分析（所有规则），平台（Windows）
 DatabaseServer：代码分析（所有规则），平台（Windows）
+ServerManager：代码分析（所有规则），平台（Windows）
 TheLastOverlord：代码分析（所有规则），平台（Windows）
 
 ----------------------------

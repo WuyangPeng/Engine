@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：0.9.1.3 (2023/08/21 10:43)
+/// 版本：1.0.0.0 (2023/11/18 17:09)
 
 #ifndef DATABASE_SERVER_CORE_HELPER_USER_MACRO_H
 #define DATABASE_SERVER_CORE_HELPER_USER_MACRO_H

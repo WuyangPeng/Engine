@@ -11,6 +11,7 @@
 
 #include "SecurityAce.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 bool System::AddAccessControlEntries(AccessCheckAclPtr acl, AccessControlListRevision aceRevision, WindowsDWord startingAceIndex, WindowsVoidPtr aceList, WindowsDWord aceListLength) noexcept

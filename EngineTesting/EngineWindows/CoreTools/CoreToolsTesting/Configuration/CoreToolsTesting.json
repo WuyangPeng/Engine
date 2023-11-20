@@ -129,6 +129,11 @@
     "CaseInsensitiveStringIOStreamTesting": 1
   },
 
+  "codeMappingSuite": {
+    "CodeMappingTesting": 1,
+    "CodeMappingAnalysisTesting": 1
+  },
+
   "exceptionSuite": {
     "LastErrorTesting": 1,
     "ErrorTesting": 1,

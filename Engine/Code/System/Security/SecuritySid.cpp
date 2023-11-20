@@ -10,6 +10,7 @@
 #include "System/SystemExport.h"
 
 #include "SecuritySid.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 bool System::AllocateAndInitializeSecurityIdentifier(SecuritySidIdentifierAuthorityPtr identifierAuthority,

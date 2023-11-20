@@ -23,6 +23,11 @@ CoreTools::FileBuffer CoreTools::FileHandleHelper::LoadFromFile(const String& fi
     const auto bufferSize = boost::numeric_cast<int>(handle.GetFileLength());
     FileBuffer buffer{ bufferSize };
 
+    if (bufferSize == 0)
+    {
+        return buffer;
+    }
+
     handle.ReadFromFile(sizeof(char), buffer.GetSize(), buffer.GetBufferBegin());
 
     return buffer;

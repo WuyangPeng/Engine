@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/16 11:03)
+///	版本：1.0.0.0 (2023/11/08 15:56)
 
 #include "AssistTools/AssistToolsExport.h"
 
@@ -13,8 +13,6 @@
 #include "Detail/GameParameterAnalysisImpl.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
-
-COPY_UNSHARED_CLONE_SELF_DEFINE(AssistTools, GameParameterAnalysis)
 
 AssistTools::GameParameterAnalysis::GameParameterAnalysis(const std::string& fileName)
     : impl{ fileName }
@@ -59,79 +57,9 @@ AssistTools::GameParameterAnalysis::MiddleLayerContainerConstIter AssistTools::G
     return impl->GetMiddleLayerEnd();
 }
 
-AssistTools::GameParameterAnalysis::String AssistTools::GameParameterAnalysis::GetCoreName() const
+AssistTools::GameParameterAnalysis::String AssistTools::GameParameterAnalysis::GetGameParameter(GameParameterType gameParameterType) const
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return impl->GetCoreName();
-}
-
-AssistTools::GameParameterAnalysis::String AssistTools::GameParameterAnalysis::GetCoreCapital() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return impl->GetCoreCapital();
-}
-
-AssistTools::GameParameterAnalysis::String AssistTools::GameParameterAnalysis::GetProjectChineseName() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return impl->GetProjectChineseName();
-}
-
-AssistTools::GameParameterAnalysis::String AssistTools::GameParameterAnalysis::GetProjectDescribeName() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return impl->GetProjectDescribeName();
-}
-
-AssistTools::GameParameterAnalysis::String AssistTools::GameParameterAnalysis::GetProjectName() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return impl->GetProjectName();
-}
-
-AssistTools::GameParameterAnalysis::String AssistTools::GameParameterAnalysis::GetProjectCapital() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return impl->GetProjectCapital();
-}
-
-AssistTools::GameParameterAnalysis::String AssistTools::GameParameterAnalysis::GetProjectAbbreviation() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return impl->GetProjectAbbreviation();
-}
-
-AssistTools::GameParameterAnalysis::String AssistTools::GameParameterAnalysis::GetEndYear() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return impl->GetEndYear();
-}
-
-AssistTools::GameParameterAnalysis::String AssistTools::GameParameterAnalysis::GetVersion() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return impl->GetVersion();
-}
-
-AssistTools::GameParameterAnalysis::String AssistTools::GameParameterAnalysis::GetVersionNum() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return impl->GetVersionNum();
-}
-
-AssistTools::GameParameterAnalysis::String AssistTools::GameParameterAnalysis::GetTestingName() const
-{
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return impl->GetTestingName();
+    return impl->GetGameParameter(gameParameterType);
 }

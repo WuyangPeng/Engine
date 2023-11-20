@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/16 15:24)
+///	版本：1.0.0.0 (2023/11/09 16:49)
 
 #ifndef ASSIST_TOOLS_GENERATE_PROJECTS_REPLACE_PROJECT_GENERATION_H
 #define ASSIST_TOOLS_GENERATE_PROJECTS_REPLACE_PROJECT_GENERATION_H
@@ -13,8 +13,7 @@
 #include "AssistTools/AssistToolsDll.h"
 
 #include "DefaultProjectGeneration.h"
-
-#include <map>
+#include "AssistTools/GenerateProjects/Replace.h"
 
 namespace AssistTools
 {
@@ -24,17 +23,17 @@ namespace AssistTools
         using ClassType = ReplaceProjectGeneration;
         using ParentType = DefaultProjectGeneration;
 
-        using ReplaceType = std::map<String, String>;
+        using ReplaceContainer = std::vector<Replace>;
 
     public:
-        ReplaceProjectGeneration(const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, ReplaceType replace);
+        ReplaceProjectGeneration(const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, ReplaceContainer replace);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         NODISCARD String GetContent() const override;
 
     private:
-        ReplaceType replace;
+        ReplaceContainer replace;
     };
 }
 

@@ -61,10 +61,10 @@
 #define __gl_glext_h_ static_cast<void>(0)
 #define __gl_ATI_h_ static_cast<void>(0)
 
-#ifdef SYSTEM_PLATFORM_WIN32
+#if defined(SYSTEM_PLATFORM_WIN32) || defined(SYSTEM_PLATFORM_LINUX)
 
     #include <GL/glcorearb.h>
 
-#endif  // SYSTEM_PLATFORM_WIN32
+#endif  // defined(SYSTEM_PLATFORM_WIN32) || defined(SYSTEM_PLATFORM_LINUX)
 
 #endif  // SYSTEM_HELPER_GL_EXTENSIONS_MACRO_H

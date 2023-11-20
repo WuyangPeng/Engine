@@ -40,8 +40,9 @@ namespace CoreTools
         void SetSimplifiedChinese();
 
     private:
-        void OpenFile(bool addition);
         void SeekEnd();
+
+        NODISCARD static int GetOpenMode(const String& fileName, bool addition);
 
     private:
         OFileStream oStream;

@@ -12,6 +12,7 @@
 #include "ProcessTools.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
+#include "System/Helper/Tools.h"
 
 bool System::OpenSystemProcessToken(WindowsHandle process, TokenStandardAccess standardAccess, TokenSpecificAccess specificAccess, WindowsHandlePtr tokenHandle) noexcept
 {

@@ -1,3 +1,0 @@
-TODO Level $LevelIndex$
-
-$Version$

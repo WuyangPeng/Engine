@@ -5,15 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 10:39)
+///	版本：1.0.0.0 (2023/11/08 09:10)
 
 #ifndef ASSIST_TOOLS_TESTING_H
 #define ASSIST_TOOLS_TESTING_H
 
-#include "BmpColorToGraySuite/BmpColorToGraySuite.h"
-#include "BmpToTfSuite/BmpToTfSuite.h"
-#include "FeaturesImporterSuite/FeaturesImporterSuite.h"
-#include "FxCompilerSuite/FxCompilerSuite.h"
 #include "GenerateProjectsSuite/GenerateProjectsSuite.h"
 #include "HelperSuite/HelperSuite.h"
 

@@ -26,6 +26,8 @@ namespace CoreTools
 
         NODISCARD int GetYear() const noexcept;
 
+        NODISCARD static int GetCurrentYear();
+
     private:
         int year;
     };

@@ -1,11 +1,11 @@
-ï»¿///	Copyright (c) 2010-2023
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	ï¿½ï¿½ï¿½ß£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-///	ï¿½ï¿½Ïµï¿½ï¿½ï¿½ß£ï¿½94458936@qq.com
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
 ///
-///	ï¿½ï¿½×¼ï¿½ï¿½std:c++20
-///	ï¿½æ±¾ï¿½ï¿½0.9.1.4 (2023/08/29 23:21)
+///	±ê×¼£ºstd:c++20
+///	°æ±¾£º1.0.0.0 (2023/11/14 17:34)
 
 #ifndef SYSTEM_OPENGL_WGL_EXTENSIONS_H
 #define SYSTEM_OPENGL_WGL_EXTENSIONS_H
@@ -52,7 +52,7 @@ namespace System
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglUseFontOutlinesA(WindowsHdc hDC, WindowsDWord first, WindowsDWord count, WindowsDWord listBase, float deviation, float extrusion, int format, GlyphMetricsFloatPtr lpgmf) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglUseFontOutlinesW(WindowsHdc hDC, WindowsDWord first, WindowsDWord count, WindowsDWord listBase, float deviation, float extrusion, int format, GlyphMetricsFloatPtr lpgmf) noexcept;
 
-    // ARB ï¿½ï¿½Õ¹
+    // ARB À©Õ¹
 
     // WGL_ARB_buffer_region
 
@@ -176,7 +176,7 @@ namespace System
 
     SYSTEM_HIDDEN_DECLARE void InitWglArbRobustnessShareGroupIsolation();
 
-    // 3DFX ï¿½ï¿½Õ¹
+    // 3DFX À©Õ¹
 
     // WGL_3DFX_multisample
 
@@ -184,7 +184,7 @@ namespace System
 
     SYSTEM_HIDDEN_DECLARE void InitWgl3DFXMultisample();
 
-    // 3DL ï¿½ï¿½Õ¹
+    // 3DL À©Õ¹
 
     // WGL_3DL_stereo_control
 
@@ -194,7 +194,7 @@ namespace System
 
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglSetStereoEmitterState3DL(WindowsHdc hDC, WindowsUInt uState) noexcept;
 
-    // AMD ï¿½ï¿½Õ¹
+    // AMD À©Õ¹
 
     // WGL_AMD_gpu_association
 
@@ -212,7 +212,7 @@ namespace System
     NODISCARD OpenGLHglrc SYSTEM_HIDDEN_DECLARE WglGetCurrentAssociatedContextAMD() noexcept;
     void SYSTEM_HIDDEN_DECLARE WglBlitContextFramebufferAMD(OpenGLHglrc dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) noexcept;
 
-    // ATI ï¿½ï¿½Õ¹
+    // ATI À©Õ¹
 
     // WGL_ATI_pixel_format_float
 
@@ -226,7 +226,7 @@ namespace System
 
     SYSTEM_HIDDEN_DECLARE void InitWglATIRenderTextureRectangle();
 
-    // EXT ï¿½ï¿½Õ¹
+    // EXT À©Õ¹
 
     // WGL_EXT_colorspace
 
@@ -335,7 +335,7 @@ namespace System
 
     SYSTEM_HIDDEN_DECLARE void InitWglExtSwapControlTear();
 
-    // I3D ï¿½ï¿½Õ¹
+    // I3D À©Õ¹
 
     // WGL_I3D_digital_video_control
 
@@ -409,7 +409,7 @@ namespace System
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglEndFrameTrackingI3D() noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglQueryFrameTrackingI3D(WindowsDWord* pFrameCount, WindowsDWord* pMissedFrames, float* pLastMissedUsage) noexcept;
 
-    // NV ï¿½ï¿½Õ¹
+    // NV À©Õ¹
 
     // WGL_NV_DX_interop
 
@@ -547,7 +547,7 @@ namespace System
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglSendPbufferToVideoNV(WglHPBufferArb hPbuffer, int iBufferType, unsigned long* pulCounterPbuffer, WindowsBool bBlock) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglGetVideoInfoNV(WglHPVideoDev hpVideoDevice, unsigned long* pulCounterOutputPbuffer, unsigned long* pulCounterOutputVideo) noexcept;
 
-    // OML ï¿½ï¿½Õ¹
+    // OML À©Õ¹
 
     // WGL_OML_sync_control
 
@@ -558,7 +558,7 @@ namespace System
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglGetSyncValuesOML(WindowsHdc hdc, WindowsInt64* ust, WindowsInt64* msc, WindowsInt64* sbc) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglGetMscRateOML(WindowsHdc hdc, WindowsInt32* numerator, WindowsInt32* denominator) noexcept;
     NODISCARD WindowsInt64 SYSTEM_HIDDEN_DECLARE WglSwapBuffersMscOML(WindowsHdc hdc, WindowsInt64 target_msc, WindowsInt64 divisor, WindowsInt64 remainder) noexcept;
-    NODISCARD WindowsInt64 SYSTEM_HIDDEN_DECLARE WglSwapLayerBuffersMscOML(WindowsHdc hdc, INT fuPlanes, WindowsInt64 target_msc, WindowsInt64 divisor, WindowsInt64 remainder) noexcept;
+    NODISCARD WindowsInt64 SYSTEM_HIDDEN_DECLARE WglSwapLayerBuffersMscOML(WindowsHdc hdc, WindowsInt fuPlanes, WindowsInt64 target_msc, WindowsInt64 divisor, WindowsInt64 remainder) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglWaitForMscOML(WindowsHdc hdc, WindowsInt64 target_msc, WindowsInt64 divisor, WindowsInt64 remainder, WindowsInt64* ust, WindowsInt64* msc, WindowsInt64* sbc) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglWaitForSbcOML(WindowsHdc hdc, WindowsInt64 target_sbc, WindowsInt64* ust, WindowsInt64* msc, WindowsInt64* sbc) noexcept;
 

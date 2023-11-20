@@ -5,21 +5,22 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 10:39)
+///	版本：1.0.0.0 (2023/11/08 09:10)
 
-#ifndef ASSIST_TOOLS_TESTING_HTESTING_HELPER_H
-#define ASSIST_TOOLS_TESTING_HTESTING_HELPER_H
+#ifndef ASSIST_TOOLS_TESTING_TESTING_HELPER_H
+#define ASSIST_TOOLS_TESTING_TESTING_HELPER_H
 
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace AssistTools
 {
-    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    class TestingHelper final : public CoreTools::CMainFunctionTestingHelper
     {
     public:
         using ClassType = TestingHelper;
         using ParentType = CMainFunctionTestingHelper;
+
+        using Suite = CoreTools::Suite;
 
     public:
         TestingHelper(int argc, char** argv);
@@ -31,11 +32,9 @@ namespace AssistTools
 
         void AddHelperSuite();
         void AddGenerateProjectsSuite();
-        void AddFeaturesImporterSuite();
-        void AddBmpColorToGraySuite();
-        void AddBmpToWmtfSuite();
-        void AddWmfxCompilerSuite();
+
+        NODISCARD Suite GetProjectGenerationSuite();
     };
 }
 
-#endif  // ASSIST_TOOLS_TESTING_HTESTING_HELPER_H
+#endif  // ASSIST_TOOLS_TESTING_TESTING_HELPER_H

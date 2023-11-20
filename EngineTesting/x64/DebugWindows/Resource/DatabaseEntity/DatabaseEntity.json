@@ -1,5 +1,5 @@
 {
-  "Copyright": "/// Copyright (c) 2010-\n/// Threading Core Render Engine\n///\n/// 作者：彭武阳，彭晔恩，彭晔泽\n/// 联系作者：94458936@qq.com\n///\n/// 标准：std:c++20\n/// 自动生成",
+  "Copyright": "/// Copyright (c) 2010-\n/// Threading Core Render Engine\n///\n/// 浣滆�咃細褰闃筹紝褰檾鎭╋紝褰檾娉絓n/// 鑱旂郴浣滆�咃細94458936@qq.com\n///\n/// 鏍囧噯锛歴td:c++20\n/// 鑷姩鐢熸垚",
   "IncludeClass": "#include \"$Class$.h\"",
   "ClassDeclaration": "    class $Class$;",
   "GetDeclaration": "        NODISCARD Database::Traits::$EntityType$ $IsBool$$EntityFirstUppercase$() const$EntityIsNoexcept$;",

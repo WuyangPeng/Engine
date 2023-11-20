@@ -32,13 +32,16 @@ EGL（引擎直接关联）
 ----------------------------
 boost（引擎直接关联）
 
-1. 版本：1.82.0。
+1. 版本：1.83.0。
 2. 官方网站：http://www.boost.org/。
-3. 编译指令：
+3. Windows编译指令：
   （1）运行bootstrap。
   （2）运行b2（最新版本）
 		   b2 --toolset=msvc-14.2（特定版本）           	
   （3）由于链接context库需要，使用选项asmflags=\safeseh。
+4. linux编译指令：
+  （1）./bootstrap.sh --with-libraries=all --with-toolset=gcc
+  （2）./b2 install --prefix=/data/coding/Libs/boost/stage/
 
 ----------------------------
 stlsoft（引擎直接关联）
@@ -143,7 +146,7 @@ protobuf（引擎通过宏NETWORK_USE_PROTOBUF关联）
 5. 选中protobuf_BUILD_SHARED_LIBS。
 6. port_def.inc尾部增加
    #ifdef PROTO_BUF_PRAGMA_WARNING
-	#include "System/Helper/PragmaWarning/ProtoBuf.h"
+	#include "System/Helper/PragmaWarning/ProtoBuf.inl"
    #endif
 
 ----------------------------

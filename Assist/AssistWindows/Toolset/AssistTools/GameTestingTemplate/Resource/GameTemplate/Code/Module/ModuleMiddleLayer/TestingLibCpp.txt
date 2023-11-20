@@ -1,6 +1,0 @@
-$Copyright$
-
-#include "ThreadingCoreRenderEngine/ThreadingCoreRenderEngineLib.h"
-#include "ThreadingCoreRenderEngineGame/ThreadingCoreRenderEngineGameLib.h"
-
-#include "$ModuleName$/$ModuleName$MiddleLayer/$ModuleName$MiddleLayerLib.h"

@@ -11,6 +11,7 @@
 
 #include "ThreadTools.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/WindowsSystem.h"
 
@@ -24,7 +25,7 @@ System::ThreadHandle System::OpenSystemThread(ThreadStandardAccess standardDesir
 
     UnusedFunction(standardDesiredAccess, specificDesiredAccess, inheritHandle, threadId);
 
-    return nullptr;
+    return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

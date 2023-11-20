@@ -89,8 +89,8 @@ namespace System
                                                                                           bool isDirectoryObject,
                                                                                           AccessCheckGenericMappingPtr genericMapping) noexcept;
 
-    NODISCARD void SYSTEM_DEFAULT_DECLARE SetSystemSecurityAccessMask(SecurityRequestedInformation securityInformation,
-                                                                      WindowsDWordPtr desiredAccess) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetSystemSecurityAccessMask(SecurityRequestedInformation securityInformation,
+                                                            WindowsDWordPtr desiredAccess) noexcept;
 }
 
 #endif  // SYSTEM_SECURITY_CREATE_SECURITY_H

@@ -11,6 +11,7 @@
 
 #include "OpenGLGlut.h"
 #include "Flags/GlutFlags.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 void System::GlutInit(int* pArgc, char** argv) noexcept
@@ -112,7 +113,7 @@ void System::GlutTimerFunc(unsigned millisecond, TimerFunctionCallback callback,
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    UnusedFunction(millisecond, callback, int value);
+    UnusedFunction(millisecond, callback, value);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }

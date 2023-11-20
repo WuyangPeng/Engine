@@ -5,708 +5,188 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/25 09:49)
+///	版本：1.0.0.0 (2023/11/17 18:15)
 
 #include "AssistTools/AssistToolsExport.h"
 
+#include "CodeModuleTestingGenerate.h"
+#include "GenerateEngineBaseDetail.h"
 #include "GenerateTestingEngineImpl.h"
-#include "System/FileManager/FileTools.h"
-#include "CoreTools/CharacterString/StringConversion.h"
-#include "CoreTools/FileManager/OFStreamManager.h"
+#include "WindowsProjectModuleTestingGenerate.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
-#include "AssistTools/GenerateProjects/Flags/ProjectGenerationType.h"
 #include "AssistTools/GenerateProjects/GameModule.h"
-#include "AssistTools/GenerateProjects/MiddleLayerModule.h"
-#include "AssistTools/GenerateProjects/ProjectGeneration.h"
+#include "AssistTools/GenerateProjects/Replace.h"
+#include "AssistTools/GenerateProjects/Using/GenerateEngineUsing.h"
 
-AssistTools::GenerateTestingEngineImpl::GenerateTestingEngineImpl(const String& input, String output)
-    : input{ input },
-      output{ std::move(output) },
-      gameParameterAnalysis{ "Configuration/GameTestingParameter.json" },
-      codeMappingAnalysis{ input + SYSTEM_TEXT("GenerateProjects.json") }
+AssistTools::GenerateTestingEngineImpl::GenerateTestingEngineImpl(const String& input, const String& output)
+    : ParentType{ input, output, "Configuration/GameTestingParameter.json" },
+      projectName{ GetProjectName() },
+      testingName{ GetTestingName() }
 {
     ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTestingEngineImpl)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTestingEngineImpl)
 
-void AssistTools::GenerateTestingEngineImpl::Generate() const
+void AssistTools::GenerateTestingEngineImpl::GenerateBinaryConfiguration(const String& staticDescribe, const GenerateDirectory& directory) const
 {
-    ASSIST_TOOLS_CLASS_IS_VALID_9;
+    const auto nextDirectory = CreateBinaryConfigurationFileDirectory(staticDescribe, directory);
 
-    const auto result = System::CreateFileDirectory(output, nullptr);
+    const ReplaceContainer replace{ { Replace{ configurationDescribe, staticDescribe } } };
+    Generate(nextDirectory, logJson, logJsonOriginal, replace);
 
-    System::UnusedFunction(result);
+    const ReplaceContainer project{ { Replace{ environmentVariable, environmentVariableOriginal.data() },
+                                      Replace{ projectTestingJson, projectTestingJsonOriginal.data() } } };
 
-    GenerateTop();
-    GenerateBinary(SYSTEM_TEXT("x64"));
-    GenerateBinary(SYSTEM_TEXT("Win32"));
-    GenerateRun();
-    GenerateDoxygen();
-    GenerateDoc();
-    GenerateBat();
-    GenerateCode();
-    GenerateWindows();
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateTop() const
-{
-    Generate(input + SYSTEM_TEXT("ReadMeMd.txt"), output + SYSTEM_TEXT("ReadMe.md"));
-    Generate(input + SYSTEM_TEXT("GitIgnore.txt"), output + SYSTEM_TEXT(".gitignore"));
-    Generate(input + SYSTEM_TEXT("ClangFormat.txt"), output + SYSTEM_TEXT(".clang-format"));
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateBinary(const String& configuration) const
-{
-    const auto result = System::CreateFileDirectory(output + configuration, nullptr);
-
-    System::UnusedFunction(result);
-
-    const auto directory = output + configuration;
-
-    Generate(input + SYSTEM_TEXT("Generate/ReadMeMd.txt"), directory + SYSTEM_TEXT("/ReadMe.md"), { { SYSTEM_TEXT("Configuration"), configuration } });
-    Generate(input + SYSTEM_TEXT("Generate/GitIgnore.txt"), directory + SYSTEM_TEXT("/.gitignore"));
-
-    GenerateBinaryConfiguration(configuration, SYSTEM_TEXT("Debug"));
-    GenerateBinaryConfiguration(configuration, SYSTEM_TEXT("EngineStaticDebug"));
-    GenerateBinaryConfiguration(configuration, SYSTEM_TEXT("GameStaticDebug"));
-    GenerateBinaryConfiguration(configuration, SYSTEM_TEXT("StaticDebug"));
-    GenerateBinaryConfiguration(configuration, SYSTEM_TEXT("Release"));
-    GenerateBinaryConfiguration(configuration, SYSTEM_TEXT("EngineStaticRelease"));
-    GenerateBinaryConfiguration(configuration, SYSTEM_TEXT("GameStaticRelease"));
-    GenerateBinaryConfiguration(configuration, SYSTEM_TEXT("StaticRelease"));
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateBinaryConfiguration(const String& configuration, const String& staticDescribe) const
-{
-    const auto directory = output + configuration + SYSTEM_TEXT("/") + staticDescribe + SYSTEM_TEXT("Windows");
-    const auto resultWindows = System::CreateFileDirectory(directory, nullptr);
-    const auto resultConfiguration = System::CreateFileDirectory(directory + SYSTEM_TEXT("/Configuration"), nullptr);
-
-    System::UnusedFunction(resultWindows, resultConfiguration);
-
-    Generate(input + SYSTEM_TEXT("Generate/Configuration/EnvironmentVariableJson.txt"), directory + SYSTEM_TEXT("/Configuration/EnvironmentVariable.json"));
-    Generate(input + SYSTEM_TEXT("Generate/Configuration/LogJson.txt"), directory + SYSTEM_TEXT("/Configuration/Log.json"), { { SYSTEM_TEXT("Configuration"), staticDescribe } });
-    Generate(input + SYSTEM_TEXT("Generate/Configuration/ProjectTestingJson.txt"), directory + SYSTEM_TEXT("/Configuration/ProjectTesting.json"));
+    Generate(nextDirectory, project);
 }
 
 void AssistTools::GenerateTestingEngineImpl::GenerateRun() const
 {
-    const auto result = System::CreateFileDirectory(output + SYSTEM_TEXT("/RunTesting"), nullptr);
+    const auto directory = GetGenerateDirectory(runDescribe, runTestingDescribe.data());
+    directory.CreateFileDirectory();
 
-    System::UnusedFunction(result);
+    const ReplaceContainer project{ { Replace{ readMeMd, readMeMdOriginal.data() },
+                                      Replace{ gitIgnore, gitIgnoreOriginal.data() },
+                                      Replace{ runAllTestingBat, SYSTEM_TEXT("RunAll") + projectName + batExtension.data() },
+                                      Replace{ runProjectTestingBat, SYSTEM_TEXT("Run") + projectName + batExtension.data() } } };
 
-    Generate(input + SYSTEM_TEXT("Run/ReadMeMd.txt"), output + SYSTEM_TEXT("RunTesting/ReadMe.md"));
-    Generate(input + SYSTEM_TEXT("Run/GitIgnore.txt"), output + SYSTEM_TEXT("RunTesting/.gitignore"));
-    Generate(input + SYSTEM_TEXT("Run/RunAllTestingBat.txt"), output + SYSTEM_TEXT("RunTesting/RunAll") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT(".bat"));
-    Generate(input + SYSTEM_TEXT("Run/RunProjectTestingBat.txt"), output + SYSTEM_TEXT("RunTesting/Run") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT(".bat"));
-    GenerateRunBat();
+    Generate(directory, project);
+    GenerateRunBat(directory);
 }
 
-void AssistTools::GenerateTestingEngineImpl::GenerateRunBat() const
+void AssistTools::GenerateTestingEngineImpl::GenerateRunBat(const GenerateDirectory& directory) const
 {
-    for (auto iter = gameParameterAnalysis.GetModuleBegin(); iter != gameParameterAnalysis.GetModuleEnd(); ++iter)
-    {
-        GenerateRunBat(iter->GetModuleName());
-    }
+    ParentType::GenerateRunBat(directory);
 }
 
-void AssistTools::GenerateTestingEngineImpl::GenerateRunBat(const String& moduleName) const
+void AssistTools::GenerateTestingEngineImpl::GenerateRunBat(const String& moduleName, const GenerateDirectory& directory) const
 {
-    Generate(input + SYSTEM_TEXT("Run/RunAllModuleTestingBat.txt"), output + SYSTEM_TEXT("RunTesting/RunAll") + moduleName + SYSTEM_TEXT("Testing.bat"), { { SYSTEM_TEXT("ModuleName"), moduleName } });
-    Generate(input + SYSTEM_TEXT("Run/RunModuleCoreTestingBat.txt"), output + SYSTEM_TEXT("RunTesting/Run") + moduleName + SYSTEM_TEXT("CoreTesting.bat"), { { SYSTEM_TEXT("ModuleName"), moduleName } });
-    Generate(input + SYSTEM_TEXT("Run/RunModuleMiddleLayerTestingBat.txt"), output + SYSTEM_TEXT("RunTesting/Run") + moduleName + SYSTEM_TEXT("MiddleLayerTesting.bat"), { { SYSTEM_TEXT("ModuleName"), moduleName } });
-    Generate(input + SYSTEM_TEXT("Run/RunModuleTestingBat.txt"), output + SYSTEM_TEXT("RunTesting/Run") + moduleName + SYSTEM_TEXT("Testing.bat"), { { SYSTEM_TEXT("ModuleName"), moduleName } });
+    const GenerateFile::ReplaceContainer replace{ Replace{ moduleNameDescribe, moduleName } };
+    const ReplaceContainer project{ { Replace{ SYSTEM_TEXT("RunAllModuleTestingBat"), SYSTEM_TEXT("RunAll") + moduleName + SYSTEM_TEXT("Testing.bat") },
+                                      Replace{ SYSTEM_TEXT("RunModuleCoreTestingBat"), SYSTEM_TEXT("Run") + moduleName + SYSTEM_TEXT("CoreTesting.bat") },
+                                      Replace{ SYSTEM_TEXT("RunModuleMiddleLayerTestingBat"), SYSTEM_TEXT("Run") + moduleName + SYSTEM_TEXT("MiddleLayerTesting.bat") },
+                                      Replace{ SYSTEM_TEXT("RunModuleTestingBat"), SYSTEM_TEXT("Run") + moduleName + SYSTEM_TEXT("Testing.bat") } } };
+
+    Generate(directory, project, replace);
 }
 
-void AssistTools::GenerateTestingEngineImpl::GenerateDoxygen() const
+void AssistTools::GenerateTestingEngineImpl::GenerateCodeProject(const GenerateDirectory& directory) const
 {
-    const auto result = System::CreateFileDirectory(output + SYSTEM_TEXT("/Doxygen"), nullptr);
+    const auto nextDirectory = directory.GetGenerateDirectory(projectDescribe, projectName);
+    nextDirectory.CreateFileDirectory();
 
-    System::UnusedFunction(result);
+    const ReplaceContainer project{ { Replace{ SYSTEM_TEXT("TestingH"), SYSTEM_TEXT("Testing.h") },
+                                      Replace{ SYSTEM_TEXT("TestingHelperCpp"), SYSTEM_TEXT("TestingHelper.cpp") },
+                                      Replace{ SYSTEM_TEXT("TestingHelperH"), SYSTEM_TEXT("TestingHelper.h") },
+                                      Replace{ SYSTEM_TEXT("TestingLibCpp"), SYSTEM_TEXT("TestingLib.cpp") },
+                                      Replace{ SYSTEM_TEXT("TestingMainCpp"), SYSTEM_TEXT("TestingMain.cpp") },
+                                      Replace{ SYSTEM_TEXT("VersionH"), SYSTEM_TEXT("Version.h") } } };
 
-    Generate(input + SYSTEM_TEXT("Doxygen/Doxyfile.txt"), output + SYSTEM_TEXT("Doxygen/Doxyfile"));
+    Generate(nextDirectory, project);
+
+    GenerateCodeVersion(nextDirectory);
+    GenerateCodeEngine(nextDirectory);
 }
 
-void AssistTools::GenerateTestingEngineImpl::GenerateDoc() const
+void AssistTools::GenerateTestingEngineImpl::GenerateCodeVersion(const GenerateDirectory& directory) const
 {
-    const auto result = System::CreateFileDirectory(output + SYSTEM_TEXT("/Doc"), nullptr);
+    const auto nextDirectory = directory.GetGenerateDirectory(versionSuiteDescribe);
+    nextDirectory.CreateFileDirectory();
 
-    System::UnusedFunction(result);
+    const ReplaceContainer project{ { Replace{ SYSTEM_TEXT("VersionSuiteH"), SYSTEM_TEXT("VersionSuite.h") },
+                                      Replace{ SYSTEM_TEXT("VersionTestingCpp"), SYSTEM_TEXT("VersionTesting.cpp") },
+                                      Replace{ SYSTEM_TEXT("VersionTestingH"), SYSTEM_TEXT("VersionTesting.h") } } };
 
-    Generate(input + SYSTEM_TEXT("Doc/OverviewMd.txt"), output + SYSTEM_TEXT("Doc/Overview.md"));
+    Generate(nextDirectory, project);
 }
 
-void AssistTools::GenerateTestingEngineImpl::GenerateBat() const
+void AssistTools::GenerateTestingEngineImpl::GenerateCodeEngine(const GenerateDirectory& directory) const
 {
-    const auto result = System::CreateFileDirectory(output + SYSTEM_TEXT("/Bat"), nullptr);
+    const auto nextDirectory = directory.GetGenerateDirectory(engineSuiteDescribe);
+    nextDirectory.CreateFileDirectory();
 
-    System::UnusedFunction(result);
+    const ReplaceContainer project{ { Replace{ SYSTEM_TEXT("EngineSuiteH"), SYSTEM_TEXT("EngineSuite.h") },
+                                      Replace{ SYSTEM_TEXT("EngineTestingCpp"), SYSTEM_TEXT("EngineTesting.cpp") },
+                                      Replace{ SYSTEM_TEXT("EngineTestingH"), SYSTEM_TEXT("EngineTesting.h") } } };
 
-    Generate(input + SYSTEM_TEXT("Bat/DelDoxygenFileBat.txt"), output + SYSTEM_TEXT("Bat/DelDoxygenFile.bat"));
+    Generate(nextDirectory, project);
 }
 
-void AssistTools::GenerateTestingEngineImpl::GenerateCode() const
+void AssistTools::GenerateTestingEngineImpl::GenerateCodeModule(const GenerateDirectory& directory) const
 {
-    const auto result = System::CreateFileDirectory(output + SYSTEM_TEXT("/Code"), nullptr);
-
-    System::UnusedFunction(result);
-
-    Generate(input + SYSTEM_TEXT("Code/ReadMeMd.txt"), output + SYSTEM_TEXT("Code/ReadMe.md"));
-    Generate(input + SYSTEM_TEXT("Code/GitIgnore.txt"), output + SYSTEM_TEXT("Code/.gitignore"));
-    GenerateCodeProject();
-    GenerateCodeModule();
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateCodeProject() const
-{
-    const auto directory = output + SYSTEM_TEXT("/Code/") + gameParameterAnalysis.GetProjectName();
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    Generate(input + SYSTEM_TEXT("Code/Project/TestingH.txt"), directory + SYSTEM_TEXT("/Testing.h"));
-    Generate(input + SYSTEM_TEXT("Code/Project/TestingHelperCpp.txt"), directory + SYSTEM_TEXT("/TestingHelper.cpp"));
-    Generate(input + SYSTEM_TEXT("Code/Project/TestingHelperH.txt"), directory + SYSTEM_TEXT("/TestingHelper.h"));
-    Generate(input + SYSTEM_TEXT("Code/Project/TestingLibCpp.txt"), directory + SYSTEM_TEXT("/TestingLib.cpp"));
-    Generate(input + SYSTEM_TEXT("Code/Project/TestingMainCpp.txt"), directory + SYSTEM_TEXT("/TestingMain.cpp"));
-    Generate(input + SYSTEM_TEXT("Code/Project/VersionH.txt"), directory + SYSTEM_TEXT("/Version.h"));
-    GenerateCodeVersion();
-    GenerateCodeEngine();
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateCodeVersion() const
-{
-    const auto directory = output + SYSTEM_TEXT("/Code/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("/VersionSuite/");
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    Generate(input + SYSTEM_TEXT("Code/Project/VersionSuite/VersionSuiteH.txt"), directory + SYSTEM_TEXT("VersionSuite.h"));
-    Generate(input + SYSTEM_TEXT("Code/Project/VersionSuite/VersionTestingCpp.txt"), directory + SYSTEM_TEXT("VersionTesting.cpp"));
-    Generate(input + SYSTEM_TEXT("Code/Project/VersionSuite/VersionTestingH.txt"), directory + SYSTEM_TEXT("VersionTesting.h"));
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateCodeEngine() const
-{
-    const auto directory = output + SYSTEM_TEXT("/Code/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("/EngineSuite/");
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    Generate(input + SYSTEM_TEXT("Code/Project/EngineSuite/EngineSuiteH.txt"), directory + SYSTEM_TEXT("EngineSuite.h"));
-    Generate(input + SYSTEM_TEXT("Code/Project/EngineSuite/EngineTestingCpp.txt"), directory + SYSTEM_TEXT("EngineTesting.cpp"));
-    Generate(input + SYSTEM_TEXT("Code/Project/EngineSuite/EngineTestingH.txt"), directory + SYSTEM_TEXT("EngineTesting.h"));
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateCodeModule() const
-{
-    for (auto iter = gameParameterAnalysis.GetModuleBegin(); iter != gameParameterAnalysis.GetModuleEnd(); ++iter)
-    {
-        GenerateCodeModule(*iter);
-    }
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateCodeModule(const GameModule& gameModule) const
-{
-    const auto result = System::CreateFileDirectory(output + SYSTEM_TEXT("/Code/") + gameModule.GetModuleName() + SYSTEM_TEXT("Testing"), nullptr);
-
-    System::UnusedFunction(result);
-
-    GenerateCodeModuleCore(gameModule);
-    GenerateCodeModuleMiddleLayer(gameModule);
-    GenerateCodeModuleExe(gameModule);
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateCodeModuleCore(const GameModule& gameModule) const
-{
-    const auto moduleName = gameModule.GetModuleName();
-    const auto directory = output + SYSTEM_TEXT("/Code/") + moduleName + SYSTEM_TEXT("Testing/") + moduleName + SYSTEM_TEXT("CoreTesting/");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    const ProjectGeneration::ReplaceType replace{ { { SYSTEM_TEXT("ModuleName"), moduleName },
-                                                    { SYSTEM_TEXT("ModuleUppercase"), gameModule.GetUppercaseName() },
-                                                    { SYSTEM_TEXT("ModuleChineseName"), gameModule.GetChineseName() } } };
-
-    Generate(input + SYSTEM_TEXT("Code/Module/ModuleCore/TestingH.txt"), directory + SYSTEM_TEXT("Testing.h"), replace);
-    Generate(input + SYSTEM_TEXT("Code/Module/ModuleCore/TestingHelperCpp.txt"), directory + SYSTEM_TEXT("TestingHelper.cpp"), replace);
-    Generate(input + SYSTEM_TEXT("Code/Module/ModuleCore/TestingHelperH.txt"), directory + SYSTEM_TEXT("TestingHelper.h"), replace);
-    Generate(input + SYSTEM_TEXT("Code/Module/ModuleCore/TestingLibCpp.txt"), directory + SYSTEM_TEXT("TestingLib.cpp"), replace);
-    Generate(input + SYSTEM_TEXT("Code/Module/ModuleCore/TestingMainCpp.txt"), directory + SYSTEM_TEXT("TestingMain.cpp"), replace);
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateCodeModuleMiddleLayer(const GameModule& gameModule) const
-{
-    const auto moduleName = gameModule.GetModuleName();
-    const auto directory = output + SYSTEM_TEXT("/Code/") + moduleName + SYSTEM_TEXT("Testing/") + moduleName + SYSTEM_TEXT("MiddleLayerTesting/");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    const ProjectGeneration::ReplaceType replace{ { { SYSTEM_TEXT("ModuleName"), moduleName },
-                                                    { SYSTEM_TEXT("ModuleUppercase"), gameModule.GetUppercaseName() },
-                                                    { SYSTEM_TEXT("ModuleChineseName"), gameModule.GetChineseName() } } };
-
-    Generate(input + SYSTEM_TEXT("Code/Module/ModuleMiddleLayer/TestingH.txt"), directory + SYSTEM_TEXT("Testing.h"), replace);
-    Generate(input + SYSTEM_TEXT("Code/Module/ModuleMiddleLayer/TestingHelperCpp.txt"), directory + SYSTEM_TEXT("TestingHelper.cpp"), replace);
-    Generate(input + SYSTEM_TEXT("Code/Module/ModuleMiddleLayer/TestingHelperH.txt"), directory + SYSTEM_TEXT("TestingHelper.h"), replace);
-    Generate(input + SYSTEM_TEXT("Code/Module/ModuleMiddleLayer/TestingLibCpp.txt"), directory + SYSTEM_TEXT("TestingLib.cpp"), replace);
-    Generate(input + SYSTEM_TEXT("Code/Module/ModuleMiddleLayer/TestingMainCpp.txt"), directory + SYSTEM_TEXT("TestingMain.cpp"), replace);
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateCodeModuleExe(const GameModule& gameModule) const
-{
-    const auto moduleName = gameModule.GetModuleName();
-    const auto directory = output + SYSTEM_TEXT("/Code/") + moduleName + SYSTEM_TEXT("Testing/") + moduleName + SYSTEM_TEXT("Testing/");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    const ProjectGeneration::ReplaceType replace{ { { SYSTEM_TEXT("ModuleName"), moduleName },
-                                                    { SYSTEM_TEXT("ModuleUppercase"), gameModule.GetUppercaseName() },
-                                                    { SYSTEM_TEXT("ModuleChineseName"), gameModule.GetChineseName() } } };
-
-    Generate(input + SYSTEM_TEXT("Code/Module/Module/TestingH.txt"), directory + SYSTEM_TEXT("Testing.h"), replace);
-    Generate(input + SYSTEM_TEXT("Code/Module/Module/TestingHelperCpp.txt"), directory + SYSTEM_TEXT("TestingHelper.cpp"), replace);
-    Generate(input + SYSTEM_TEXT("Code/Module/Module/TestingHelperH.txt"), directory + SYSTEM_TEXT("TestingHelper.h"), replace);
-    Generate(input + SYSTEM_TEXT("Code/Module/Module/TestingLibCpp.txt"), directory + SYSTEM_TEXT("TestingLib.cpp"), replace);
-    Generate(input + SYSTEM_TEXT("Code/Module/Module/TestingMainCpp.txt"), directory + SYSTEM_TEXT("TestingMain.cpp"), replace);
+    ExecuteModuleGenerate<CodeModuleTestingGenerate>(directory);
 }
 
 void AssistTools::GenerateTestingEngineImpl::GenerateWindows() const
 {
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows");
+    const auto directory = GetGenerateDirectory(projectNameWindowsDescribe, testingName + windowsDescribe.data());
+    directory.CreateFileDirectory();
 
-    const auto result = System::CreateFileDirectory(directory, nullptr);
+    const ReplaceContainer project{ { Replace{ SYSTEM_TEXT("SetEnvironmentBat"), SYSTEM_TEXT("SetEnvironment.bat") },
+                                      Replace{ SYSTEM_TEXT("ReadMeMd"), SYSTEM_TEXT("ReadMe.md") },
+                                      Replace{ SYSTEM_TEXT("ProjectX64ReleaseLibsProps"), projectName + SYSTEM_TEXT("X64ReleaseLibs.props") },
+                                      Replace{ SYSTEM_TEXT("ProjectX64DebugLibsProps"), projectName + SYSTEM_TEXT("X64DebugLibs.props") },
+                                      Replace{ SYSTEM_TEXT("ProjectWin32ReleaseLibsProps"), projectName + SYSTEM_TEXT("Win32ReleaseLibs.props") },
+                                      Replace{ SYSTEM_TEXT("ProjectWin32DebugLibsProps"), projectName + SYSTEM_TEXT("Win32DebugLibs.props") },
+                                      Replace{ SYSTEM_TEXT("ProjectStaticX64ReleaseLibsProps"), projectName + SYSTEM_TEXT("StaticX64ReleaseLibs.props") },
+                                      Replace{ SYSTEM_TEXT("ProjectStaticX64DebugLibsProps"), projectName + SYSTEM_TEXT("StaticX64DebugLibs.props") },
+                                      Replace{ SYSTEM_TEXT("ProjectStaticWin32ReleaseLibsProps"), projectName + SYSTEM_TEXT("StaticWin32ReleaseLibs.props") },
+                                      Replace{ SYSTEM_TEXT("ProjectStaticWin32DebugLibsProps"), projectName + SYSTEM_TEXT("StaticWin32DebugLibs.props") },
+                                      Replace{ SYSTEM_TEXT("ProjectProps"), projectName + SYSTEM_TEXT(".props") },
+                                      Replace{ SYSTEM_TEXT("ProjectEngineStaticGameDynamicX64ReleaseLibsProps"), projectName + SYSTEM_TEXT("EngineStaticGameDynamicX64ReleaseLibs.props") },
+                                      Replace{ SYSTEM_TEXT("ProjectEngineStaticGameDynamicX64DebugLibsProps"), projectName + SYSTEM_TEXT("EngineStaticGameDynamicX64DebugLibs.props") },
+                                      Replace{ SYSTEM_TEXT("ProjectEngineStaticGameDynamicWin32ReleaseLibsProps"), projectName + SYSTEM_TEXT("EngineStaticGameDynamicWin32ReleaseLibs.props") },
+                                      Replace{ SYSTEM_TEXT("ProjectEngineStaticGameDynamicWin32DebugLibsProps"), projectName + SYSTEM_TEXT("EngineStaticGameDynamicWin32DebugLibs.props") },
+                                      Replace{ SYSTEM_TEXT("ProjectEngineDynamicGameStaticX64ReleaseLibsProps"), projectName + SYSTEM_TEXT("EngineDynamicGameStaticX64ReleaseLibs.props") },
+                                      Replace{ SYSTEM_TEXT("ProjectEngineDynamicGameStaticX64DebugLibsProps"), projectName + SYSTEM_TEXT("EngineDynamicGameStaticX64DebugLibs.props") },
+                                      Replace{ SYSTEM_TEXT("ProjectEngineDynamicGameStaticWin32ReleaseLibsProps"), projectName + SYSTEM_TEXT("EngineDynamicGameStaticWin32ReleaseLibs.props") },
+                                      Replace{ SYSTEM_TEXT("ProjectEngineDynamicGameStaticWin32DebugLibsProps"), projectName + SYSTEM_TEXT("EngineDynamicGameStaticWin32DebugLibs.props") },
+                                      Replace{ SYSTEM_TEXT("Gitignore"), SYSTEM_TEXT(".gitignore") } } };
 
-    System::UnusedFunction(result);
+    Generate(directory, project);
 
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/SetEnvironmentBat.txt"), directory + SYSTEM_TEXT("/SetEnvironment.bat"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ReadMeMd.txt"), directory + SYSTEM_TEXT("/ReadMe.md"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ProjectX64ReleaseLibsProps.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("X64ReleaseLibs.props"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ProjectX64DebugLibsProps.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("X64DebugLibs.props"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ProjectWin32ReleaseLibsProps.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("Win32ReleaseLibs.props"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ProjectWin32DebugLibsProps.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("Win32DebugLibs.props"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ProjectStaticX64ReleaseLibsProps.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("StaticX64ReleaseLibs.props"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ProjectStaticX64DebugLibsProps.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("StaticX64DebugLibs.props"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ProjectStaticWin32ReleaseLibsProps.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("StaticWin32ReleaseLibs.props"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ProjectStaticWin32DebugLibsProps.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("StaticWin32DebugLibs.props"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ProjectProps.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT(".props"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ProjectEngineStaticGameDynamicX64ReleaseLibsProps.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("EngineStaticGameDynamicX64ReleaseLibs.props"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ProjectEngineStaticGameDynamicX64DebugLibsProps.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("EngineStaticGameDynamicX64DebugLibs.props"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ProjectEngineStaticGameDynamicWin32ReleaseLibsProps.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("EngineStaticGameDynamicWin32ReleaseLibs.props"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ProjectEngineStaticGameDynamicWin32DebugLibsProps.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("EngineStaticGameDynamicWin32DebugLibs.props"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ProjectEngineDynamicGameStaticX64ReleaseLibsProps.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("EngineDynamicGameStaticX64ReleaseLibs.props"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ProjectEngineDynamicGameStaticX64DebugLibsProps.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("EngineDynamicGameStaticX64DebugLibs.props"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ProjectEngineDynamicGameStaticWin32ReleaseLibsProps.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("EngineDynamicGameStaticWin32ReleaseLibs.props"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/ProjectEngineDynamicGameStaticWin32DebugLibsProps.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("EngineDynamicGameStaticWin32DebugLibs.props"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Gitignore.txt"), directory + SYSTEM_TEXT("/.gitignore"));
-
-    GenerateWindowsProject();
-
-    for (auto iter = gameParameterAnalysis.GetModuleBegin(); iter != gameParameterAnalysis.GetModuleEnd(); ++iter)
-    {
-        GenerateWindowsProjectModule(*iter);
-    }
+    GenerateWindowsProject(directory);
+    GenerateWindowsProjectModule(directory);
 }
 
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProject() const
+void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectModule(const GenerateDirectory& directory) const
 {
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + gameParameterAnalysis.GetProjectName();
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Project/ProjectSln.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT(".sln"));
-
-    GenerateWindowsProjectVcxproj();
+    ExecuteModuleGenerate<WindowsProjectModuleTestingGenerate>(directory);
 }
 
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectVcxproj() const
+void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProject(const GenerateDirectory& directory) const
 {
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName();
+    const auto nextDirectory = directory.GetGenerateDirectory(projectDescribe, projectName);
+    nextDirectory.CreateFileDirectory();
 
-    const auto result = System::CreateFileDirectory(directory, nullptr);
+    Generate(nextDirectory, SYSTEM_TEXT("ProjectSln"), projectName + SYSTEM_TEXT(".sln"));
 
-    System::UnusedFunction(result);
-
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Project/Project/ProjectVcxproj.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT(".vcxproj"));
-    GenerateUtf8(input + SYSTEM_TEXT("ProjectNameWindows/Project/Project/ProjectVcxprojFilters.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT(".vcxproj.filters"));
-
-    GenerateWindowsProjectResource();
-    GenerateWindowsProjectConfiguration();
+    GenerateWindowsProjectVcxproj(nextDirectory);
 }
 
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectResource() const
+void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectVcxproj(const GenerateDirectory& directory) const
 {
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("/Resource");
+    const auto nextDirectory = directory.GetGenerateDirectory(projectDescribe, projectName);
+    nextDirectory.CreateFileDirectory();
 
-    const auto result = System::CreateFileDirectory(directory, nullptr);
+    Generate(nextDirectory, SYSTEM_TEXT("ProjectVcxproj"), projectName + SYSTEM_TEXT(".vcxproj"));
+    GenerateUtf8(nextDirectory, SYSTEM_TEXT("ProjectVcxprojFilters"), projectName + SYSTEM_TEXT(".vcxproj.filters"));
 
-    System::UnusedFunction(result);
-
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Project/Project/Resource/ReadMeMd.txt"), directory + SYSTEM_TEXT("/ReadMe.md"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Project/Project/Resource/ScheduleMd.txt"), directory + SYSTEM_TEXT("/Schedule.md"));
-
-    GenerateWindowsProjectResourceTodo();
+    GenerateWindowsProjectResource(nextDirectory);
+    GenerateWindowsProjectConfiguration(nextDirectory);
 }
 
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectResourceTodo() const
+void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectConfiguration(const GenerateDirectory& directory) const
 {
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("/Resource/Todo");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    for (auto i = 0; i < 10; ++i)
-    {
-        const ProjectGeneration::ReplaceType replace{ { SYSTEM_TEXT("LevelIndex"), System::ToString(i) } };
-
-        Generate(input + SYSTEM_TEXT("ProjectNameWindows/Project/Project/Resource/Todo/Level.txt"),
-                 directory + SYSTEM_TEXT("/Level ") + System::ToString(i) + SYSTEM_TEXT(".txt"),
-                 replace);
-    }
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectConfiguration() const
-{
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT("/Configuration");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Project/Project/Configuration/EnvironmentVariableJson.txt"), directory + SYSTEM_TEXT("/EnvironmentVariable.json"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Project/Project/Configuration/LogJson.txt"), directory + SYSTEM_TEXT("/Log.json"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Project/Project/Configuration/ProjectTestingJson.txt"), directory + SYSTEM_TEXT("/ProjectTesting.json"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Project/Project/Configuration/ProjectTestingNameJson.txt"), directory + SYSTEM_TEXT("/") + gameParameterAnalysis.GetProjectName() + SYSTEM_TEXT(".json"));
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Project/Project/Configuration/Testing.txt"), directory + SYSTEM_TEXT("/Testing.json"));
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectModule(const GameModule& gameModule) const
-{
-    const auto moduleName = gameModule.GetModuleName();
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + moduleName + SYSTEM_TEXT("Testing");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    GenerateWindowsProjectModuleCore(gameModule);
-    GenerateWindowsProjectModuleMiddleLayer(gameModule);
-    GenerateWindowsProjectModuleExe(gameModule);
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectModuleCore(const GameModule& gameModule) const
-{
-    const auto moduleName = gameModule.GetModuleName();
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + moduleName + SYSTEM_TEXT("Testing/") + moduleName + SYSTEM_TEXT("CoreTesting");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    const ProjectGeneration::ReplaceType replace{ { { SYSTEM_TEXT("ModuleName"), moduleName },
-                                                    { SYSTEM_TEXT("ModuleChineseName"), gameModule.GetChineseName() },
-                                                    { SYSTEM_TEXT("ModuleUppercase"), gameModule.GetUppercaseName() } } };
-
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleCore/ModuleCoreVcxproj.txt"), directory + SYSTEM_TEXT("/") + moduleName + SYSTEM_TEXT("CoreTesting.vcxproj"), replace);
-    GenerateUtf8(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleCore/ModuleCoreVcxprojFilters.txt"), directory + SYSTEM_TEXT("/") + moduleName + SYSTEM_TEXT("CoreTesting.vcxproj.filters"), replace);
-
-    GenerateWindowsProjectModuleCoreResource(gameModule);
-    GenerateWindowsProjectModuleCoreConfiguration(gameModule);
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectModuleMiddleLayer(const GameModule& gameModule) const
-{
-    const auto moduleName = gameModule.GetModuleName();
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + moduleName + SYSTEM_TEXT("Testing/") + moduleName + SYSTEM_TEXT("MiddleLayerTesting");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    const ProjectGeneration::ReplaceType replace{ { { SYSTEM_TEXT("ModuleName"), moduleName },
-                                                    { SYSTEM_TEXT("ModuleChineseName"), gameModule.GetChineseName() },
-                                                    { SYSTEM_TEXT("ModuleUppercase"), gameModule.GetUppercaseName() } } };
-
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleMiddleLayer/ModuleMiddleLayerVcxproj.txt"), directory + SYSTEM_TEXT("/") + moduleName + SYSTEM_TEXT("MiddleLayerTesting.vcxproj"), replace);
-    GenerateUtf8(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleMiddleLayer/ModuleMiddleLayerVcxprojFilters.txt"), directory + SYSTEM_TEXT("/") + moduleName + SYSTEM_TEXT("MiddleLayerTesting.vcxproj.filters"), replace);
-
-    GenerateWindowsProjectModuleMiddleLayerResource(gameModule);
-    GenerateWindowsProjectModuleMiddleLayerConfiguration(gameModule);
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectModuleExe(const GameModule& gameModule) const
-{
-    const auto moduleName = gameModule.GetModuleName();
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + moduleName + SYSTEM_TEXT("Testing/") + moduleName + SYSTEM_TEXT("Testing");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    const ProjectGeneration::ReplaceType replace{ { { SYSTEM_TEXT("ModuleName"), moduleName },
-                                                    { SYSTEM_TEXT("ModuleChineseName"), gameModule.GetChineseName() },
-                                                    { SYSTEM_TEXT("ModuleUppercase"), gameModule.GetUppercaseName() } } };
-
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/Module/ModuleVcxproj.txt"), directory + SYSTEM_TEXT("/") + moduleName + SYSTEM_TEXT("Testing.vcxproj"), replace);
-    GenerateUtf8(input + SYSTEM_TEXT("ProjectNameWindows/Module/Module/ModuleVcxprojFilters.txt"), directory + SYSTEM_TEXT("/") + moduleName + SYSTEM_TEXT("Testing.vcxproj.filters"), replace);
-
-    GenerateWindowsProjectModuleExeResource(gameModule);
-    GenerateWindowsProjectModuleExeConfiguration(gameModule);
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectModuleCoreResource(const GameModule& gameModule) const
-{
-    const auto moduleName = gameModule.GetModuleName();
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + moduleName + SYSTEM_TEXT("Testing/") + moduleName + SYSTEM_TEXT("CoreTesting/Resource");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    const ProjectGeneration::ReplaceType replace{ { { SYSTEM_TEXT("ModuleName"), moduleName },
-                                                    { SYSTEM_TEXT("ModuleChineseName"), gameModule.GetChineseName() },
-                                                    { SYSTEM_TEXT("ModuleUppercase"), gameModule.GetUppercaseName() } } };
-
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleCore/Resource/ReadMeMd.txt"), directory + SYSTEM_TEXT("/ReadMe.md"), replace);
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleCore/Resource/ScheduleMd.txt"), directory + SYSTEM_TEXT("/Schedule.md"), replace);
-
-    GenerateWindowsProjectModuleCoreResourceTodo(gameModule);
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectModuleMiddleLayerResource(const GameModule& gameModule) const
-{
-    const auto moduleName = gameModule.GetModuleName();
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + moduleName + SYSTEM_TEXT("Testing/") + moduleName + SYSTEM_TEXT("MiddleLayerTesting/Resource");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    const ProjectGeneration::ReplaceType replace{ { { SYSTEM_TEXT("ModuleName"), moduleName },
-                                                    { SYSTEM_TEXT("ModuleChineseName"), gameModule.GetChineseName() },
-                                                    { SYSTEM_TEXT("ModuleUppercase"), gameModule.GetUppercaseName() } } };
-
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleMiddleLayer/Resource/ReadMeMd.txt"), directory + SYSTEM_TEXT("/ReadMe.md"), replace);
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleMiddleLayer/Resource/ScheduleMd.txt"), directory + SYSTEM_TEXT("/Schedule.md"), replace);
-
-    GenerateWindowsProjectModuleMiddleLayerResourceTodo(gameModule);
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectModuleExeResource(const GameModule& gameModule) const
-{
-    const auto moduleName = gameModule.GetModuleName();
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + moduleName + SYSTEM_TEXT("Testing/") + moduleName + SYSTEM_TEXT("Testing/Resource");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    const ProjectGeneration::ReplaceType replace{ { { SYSTEM_TEXT("ModuleName"), moduleName },
-                                                    { SYSTEM_TEXT("ModuleChineseName"), gameModule.GetChineseName() },
-                                                    { SYSTEM_TEXT("ModuleUppercase"), gameModule.GetUppercaseName() } } };
-
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/Module/Resource/ReadMeMd.txt"), directory + SYSTEM_TEXT("/ReadMe.md"), replace);
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/Module/Resource/ScheduleMd.txt"), directory + SYSTEM_TEXT("/Schedule.md"), replace);
-
-    GenerateWindowsProjectModuleExeResourceTodo(gameModule);
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectModuleCoreConfiguration(const GameModule& gameModule) const
-{
-    const auto moduleName = gameModule.GetModuleName();
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + moduleName + SYSTEM_TEXT("Testing/") + moduleName + SYSTEM_TEXT("CoreTesting/Configuration");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    const ProjectGeneration::ReplaceType replace{ { { SYSTEM_TEXT("ModuleName"), moduleName },
-                                                    { SYSTEM_TEXT("ModuleChineseName"), gameModule.GetChineseName() },
-                                                    { SYSTEM_TEXT("ModuleUppercase"), gameModule.GetUppercaseName() } } };
-
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleCore/Configuration/EnvironmentVariableJson.txt"), directory + SYSTEM_TEXT("/EnvironmentVariable.json"), replace);
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleCore/Configuration/LogJson.txt"), directory + SYSTEM_TEXT("/Log.json"), replace);
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleCore/Configuration/Testing.txt"), directory + SYSTEM_TEXT("/Testing.json"), replace);
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleCore/Configuration/ModuleTestingJson.txt"), directory + SYSTEM_TEXT("/") + moduleName + SYSTEM_TEXT("CoreTesting.json"), replace);
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectModuleMiddleLayerConfiguration(const GameModule& gameModule) const
-{
-    const auto moduleName = gameModule.GetModuleName();
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + moduleName + SYSTEM_TEXT("Testing/") + moduleName + SYSTEM_TEXT("MiddleLayerTesting/Configuration");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    const ProjectGeneration::ReplaceType replace{ { { SYSTEM_TEXT("ModuleName"), moduleName },
-                                                    { SYSTEM_TEXT("ModuleChineseName"), gameModule.GetChineseName() },
-                                                    { SYSTEM_TEXT("ModuleUppercase"), gameModule.GetUppercaseName() } } };
-
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleMiddleLayer/Configuration/EnvironmentVariableJson.txt"), directory + SYSTEM_TEXT("/EnvironmentVariable.json"), replace);
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleMiddleLayer/Configuration/LogJson.txt"), directory + SYSTEM_TEXT("/Log.json"), replace);
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleMiddleLayer/Configuration/Testing.txt"), directory + SYSTEM_TEXT("/Testing.json"), replace);
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleMiddleLayer/Configuration/ModuleTestingJson.txt"), directory + SYSTEM_TEXT("/") + moduleName + SYSTEM_TEXT("MiddleLayerTesting.json"), replace);
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectModuleExeConfiguration(const GameModule& gameModule) const
-{
-    const auto moduleName = gameModule.GetModuleName();
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + moduleName + SYSTEM_TEXT("Testing/") + moduleName + SYSTEM_TEXT("Testing/Configuration");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    const ProjectGeneration::ReplaceType replace{ { { SYSTEM_TEXT("ModuleName"), moduleName },
-                                                    { SYSTEM_TEXT("ModuleChineseName"), gameModule.GetChineseName() },
-                                                    { SYSTEM_TEXT("ModuleUppercase"), gameModule.GetUppercaseName() } } };
-
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/Module/Configuration/EnvironmentVariableJson.txt"), directory + SYSTEM_TEXT("/EnvironmentVariable.json"), replace);
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/Module/Configuration/LogJson.txt"), directory + SYSTEM_TEXT("/Log.json"), replace);
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/Module/Configuration/Testing.txt"), directory + SYSTEM_TEXT("/Testing.json"), replace);
-    Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/Module/Configuration/ModuleTestingJson.txt"), directory + SYSTEM_TEXT("/") + moduleName + SYSTEM_TEXT("Testing.json"), replace);
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectModuleCoreResourceTodo(const GameModule& gameModule) const
-{
-    const auto moduleName = gameModule.GetModuleName();
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + moduleName + SYSTEM_TEXT("Testing/") + moduleName + SYSTEM_TEXT("CoreTesting/Resource/Todo");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    for (auto i = 0; i < 10; ++i)
-    {
-        const ProjectGeneration::ReplaceType replace{ { SYSTEM_TEXT("LevelIndex"), System::ToString(i) } };
-
-        Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleCore/Resource/Todo/Level.txt"),
-                 directory + SYSTEM_TEXT("/Level ") + System::ToString(i) + SYSTEM_TEXT(".txt"),
-                 replace);
-    }
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectModuleMiddleLayerResourceTodo(const GameModule& gameModule) const
-{
-    const auto moduleName = gameModule.GetModuleName();
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + moduleName + SYSTEM_TEXT("Testing/") + moduleName + SYSTEM_TEXT("MiddleLayerTesting/Resource/Todo");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    for (auto i = 0; i < 10; ++i)
-    {
-        const ProjectGeneration::ReplaceType replace{ { SYSTEM_TEXT("LevelIndex"), System::ToString(i) } };
-
-        Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/ModuleMiddleLayer/Resource/Todo/Level.txt"),
-                 directory + SYSTEM_TEXT("/Level ") + System::ToString(i) + SYSTEM_TEXT(".txt"),
-                 replace);
-    }
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProjectModuleExeResourceTodo(const GameModule& gameModule) const
-{
-    const auto moduleName = gameModule.GetModuleName();
-    const auto directory = output + SYSTEM_TEXT("/") + gameParameterAnalysis.GetTestingName() + SYSTEM_TEXT("Windows/") + moduleName + SYSTEM_TEXT("Testing/") + moduleName + SYSTEM_TEXT("Testing/Resource/Todo");
-
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-
-    System::UnusedFunction(result);
-
-    for (auto i = 0; i < 10; ++i)
-    {
-        const ProjectGeneration::ReplaceType replace{ { SYSTEM_TEXT("LevelIndex"), System::ToString(i) } };
-
-        Generate(input + SYSTEM_TEXT("ProjectNameWindows/Module/Module/Resource/Todo/Level.txt"),
-                 directory + SYSTEM_TEXT("/Level ") + System::ToString(i) + SYSTEM_TEXT(".txt"),
-                 replace);
-    }
-}
-
-void AssistTools::GenerateTestingEngineImpl::Generate(const String& inputFileName, const String& outputFileName) const
-{
-    const ProjectGeneration projectGeneration{ ProjectGenerationType::Default,
-                                               inputFileName,
-                                               gameParameterAnalysis,
-                                               codeMappingAnalysis };
-
-    const auto content = projectGeneration.GetContent();
-
-    CoreTools::OFStreamManager streamManager{ outputFileName, false };
-    streamManager.SetSimplifiedChinese();
-
-    streamManager << content;
-}
-
-void AssistTools::GenerateTestingEngineImpl::Generate(const String& inputFileName, const String& outputFileName, const ReplaceType& replace) const
-{
-    const ProjectGeneration projectGeneration{ ProjectGenerationType::Default,
-                                               inputFileName,
-                                               gameParameterAnalysis,
-                                               codeMappingAnalysis,
-                                               replace };
-
-    const auto content = projectGeneration.GetContent();
-
-    CoreTools::OFStreamManager streamManager{ outputFileName, false };
-    streamManager.SetSimplifiedChinese();
-
-    streamManager << content;
-}
-
-void AssistTools::GenerateTestingEngineImpl::Generate(const String& inputFileName, const String& outputFileName, bool isClient) const
-{
-    const ProjectGeneration projectGeneration{ ProjectGenerationType::Default,
-                                               inputFileName,
-                                               gameParameterAnalysis,
-                                               codeMappingAnalysis,
-                                               isClient };
-
-    const auto content = projectGeneration.GetContent();
-
-    CoreTools::OFStreamManager streamManager{ outputFileName, false };
-    streamManager.SetSimplifiedChinese();
-
-    streamManager << content;
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateUtf8(const String& inputFileName, const String& outputFileName) const
-{
-    const ProjectGeneration projectGeneration{ ProjectGenerationType::Utf8,
-                                               inputFileName,
-                                               gameParameterAnalysis,
-                                               codeMappingAnalysis };
-
-    const auto content = projectGeneration.GetContent();
-
-    CoreTools::OFStreamManager streamManager{ outputFileName, false };
-
-    streamManager << content;
-}
-
-void AssistTools::GenerateTestingEngineImpl::GenerateUtf8(const String& inputFileName, const String& outputFileName, const ReplaceType& replace) const
-{
-    const ProjectGeneration projectGeneration{ ProjectGenerationType::Utf8,
-                                               inputFileName,
-                                               gameParameterAnalysis,
-                                               codeMappingAnalysis,
-                                               replace };
-
-    const auto content = projectGeneration.GetContent();
-
-    CoreTools::OFStreamManager streamManager{ outputFileName, false };
-
-    streamManager << content;
+    const auto nextDirectory = directory.GetGenerateDirectory(configurationDescribe);
+    nextDirectory.CreateFileDirectory();
+
+    const ReplaceContainer project{ { Replace{ SYSTEM_TEXT("EnvironmentVariableJson"), SYSTEM_TEXT("EnvironmentVariable.json") },
+                                      Replace{ SYSTEM_TEXT("LogJson"), SYSTEM_TEXT("Log.json") },
+                                      Replace{ SYSTEM_TEXT("ProjectTestingJson"), SYSTEM_TEXT("ProjectTesting.json") },
+                                      Replace{ SYSTEM_TEXT("ProjectTestingNameJson"), projectName + SYSTEM_TEXT(".json") },
+                                      Replace{ SYSTEM_TEXT("Testing"), SYSTEM_TEXT("Testing.json") } } };
+
+    Generate(nextDirectory, project);
 }

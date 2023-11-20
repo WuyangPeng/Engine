@@ -7,8 +7,20 @@ project ("ThreadingCoreRenderEngine")
 
 set(CMAKE_CXX_STANDARD 20)
 
-include_directories($ENV{LibsEnvironmentBaseInclude}/)
-include_directories($ENV{LibsEnvironmentExtendInclude}/)
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+
+	include_directories(/data/github/Libs/boost/)
+	include_directories(/data/github/Libs/GSL/include/)
+
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+
+	include_directories($ENV{LibsEnvironmentBaseInclude}/)
+	include_directories($ENV{LibsEnvironmentExtendInclude}/)
+
+else()
+    # 其他平台下的操作
+endif()
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Code)
 
 if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))

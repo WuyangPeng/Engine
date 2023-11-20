@@ -28,11 +28,11 @@ namespace Mathematics
         CLASS_INVARIANT_FINAL_DECLARE;
 
         NODISCARD double Substitution(double value) const noexcept override;
-        NODISCARD Imaginary Substitution(const Imaginary& value) const override;
+        NODISCARD Imaginary Substitution(const Imaginary& value) const noexcept override;
 
     private:
         NODISCARD double SubstitutionTangent(double solution) const noexcept override;
-        NODISCARD Imaginary SubstitutionTangent(const Imaginary& solution) const override;
+        NODISCARD Imaginary SubstitutionTangent(const Imaginary& solution) const noexcept override;
 
         void Solving() override;
         NODISCARD bool Predigest() noexcept override;

@@ -50,13 +50,26 @@
         }                                                                     \
         template class exportName std::shared_ptr<const namespaceName::implClassName>
 
-    #define EXPORT_UNIQUE_PTR(namespaceName, implClassName, exportName)                                                                    \
-        namespace namespaceName                                                                                                            \
-        {                                                                                                                                  \
-            class implClassName;                                                                                                           \
-        }                                                                                                                                  \
-        template class exportName std::_Compressed_pair<std::default_delete<namespaceName::implClassName>, namespaceName::implClassName*>; \
-        template class exportName std::unique_ptr<namespaceName::implClassName>
+    #if defined(SYSTEM_PLATFORM_WIN32)
+
+        #define EXPORT_UNIQUE_PTR(namespaceName, implClassName, exportName)                                                                    \
+            namespace namespaceName                                                                                                            \
+            {                                                                                                                                  \
+                class implClassName;                                                                                                           \
+            }                                                                                                                                  \
+            template class exportName std::_Compressed_pair<std::default_delete<namespaceName::implClassName>, namespaceName::implClassName*>; \
+            template class exportName std::unique_ptr<namespaceName::implClassName>
+
+    #else  // !SYSTEM_PLATFORM_WIN32
+
+        #define EXPORT_UNIQUE_PTR(namespaceName, implClassName, exportName) \
+            namespace namespaceName                                         \
+            {                                                               \
+                class implClassName;                                        \
+            }                                                               \
+            template class exportName std::unique_ptr<namespaceName::implClassName>
+
+    #endif  // SYSTEM_PLATFORM_WIN32
 
 #endif  // BUILDING_STATIC
 

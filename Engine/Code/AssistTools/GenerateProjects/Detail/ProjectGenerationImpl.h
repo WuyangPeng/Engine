@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/16 14:18)
+///	版本：1.0.0.0 (2023/11/09 16:42)
 
 #ifndef ASSIST_TOOLS_GENERATE_PROJECTS_PROJECT_GENERATION_IMPL_H
 #define ASSIST_TOOLS_GENERATE_PROJECTS_PROJECT_GENERATION_IMPL_H
@@ -33,42 +33,23 @@ namespace AssistTools
         virtual ~ProjectGenerationImpl() noexcept = default;
         ProjectGenerationImpl(const ProjectGenerationImpl& rhs) = default;
         ProjectGenerationImpl& operator=(const ProjectGenerationImpl& rhs) = default;
-        ProjectGenerationImpl(ProjectGenerationImpl&& rhs) = default;
-        ProjectGenerationImpl& operator=(ProjectGenerationImpl&& rhs) = default;
+        ProjectGenerationImpl(ProjectGenerationImpl&& rhs) noexcept = default;
+        ProjectGenerationImpl& operator=(ProjectGenerationImpl&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         NODISCARD virtual String GetContent() const = 0;
 
     protected:
+        using StringView = System::StringView;
+
+    protected:
         NODISCARD virtual String GetTemplateContent() const;
-        NODISCARD String ReplaceCodeMapping(const String& templateContent, const String& codeKey) const;
-        NODISCARD String ReplaceModuleCount(const String& templateContent) const;
-        NODISCARD String ReplaceModuleDescribe(const String& templateContent) const;
-        NODISCARD String ReplaceModuleJson(const String& templateContent) const;
-        NODISCARD String ReplaceModuleTestingJson(const String& templateContent) const;
-        NODISCARD String ReplaceProjectChineseName(const String& templateContent) const;
-        NODISCARD String ReplaceProjectDescribeName(const String& templateContent) const;
-        NODISCARD String ReplaceProjectName(const String& templateContent) const;
-        NODISCARD String ReplaceTestingName(const String& templateContent) const;
-        NODISCARD String ReplaceVersion(const String& templateContent) const;
-        NODISCARD String ReplaceVersionNum(const String& templateContent) const;
-        NODISCARD String ReplaceParameter(const String& templateContent, const String& codeKey, const String& parameter) const;
-        NODISCARD String ReplaceCallRunBat(const String& templateContent, bool isClient) const;
-        NODISCARD String CallRunTestingBat(const String& templateContent) const;
-        NODISCARD String ReplaceProjectAbbreviation(const String& templateContent) const;
-        NODISCARD String ReplaceEndYear(const String& templateContent) const;
-        NODISCARD String ReplaceTime(const String& templateContent) const;
-        NODISCARD String ReplaceCodeAnalysis(const String& templateContent) const;
-        NODISCARD String ReplaceTestingCodeAnalysis(const String& templateContent) const;
-        NODISCARD String ReplaceProjectCapital(const String& templateContent) const;
-        NODISCARD String ReplaceCopyright(const String& templateContent) const;
-        NODISCARD String ReplaceCoreName(const String& templateContent) const;
-        NODISCARD String ReplaceCoreCapital(const String& templateContent) const;
-        NODISCARD String ReplaceMiddleLayerInclude(const String& templateContent) const;
-        NODISCARD String ReplaceMiddleLayerFwdInclude(const String& templateContent) const;
 
         NODISCARD String GetFileName() const;
+
+        NODISCARD GameParameterAnalysis GetGameParameterAnalysis() const noexcept;
+        NODISCARD CodeMappingAnalysis GetCodeMappingAnalysis() const noexcept;
 
     private:
         String fileName;

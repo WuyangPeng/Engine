@@ -15,6 +15,7 @@
 #include "System/Helper/WindowsMacro.h"
 
 #include <cstdlib>
+#include <cstring>
 
 void System::MemorySet(void* bytes, int value, int byteSize) noexcept
 {

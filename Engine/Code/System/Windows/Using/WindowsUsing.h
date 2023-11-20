@@ -10,6 +10,7 @@
 #ifndef SYSTEM_WINDOWS_WINDOWS_USING_H
 #define SYSTEM_WINDOWS_WINDOWS_USING_H
 
+#include "WindowsPictorialUsing.h"
 #include "System/Helper/Platform.h"
 #include "System/Helper/UnicodeUsing.h"
 

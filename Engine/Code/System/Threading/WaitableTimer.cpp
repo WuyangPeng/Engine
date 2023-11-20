@@ -12,6 +12,7 @@
 #include "WaitableTimer.h"
 #include "Flags/SemaphoreFlags.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/WindowsSystem.h"
 
@@ -44,7 +45,7 @@ System::WindowsHandle System::CreateSystemWaitableTimer(WindowSecurityAttributes
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(timerAttributes, timerName, flag, desiredAcces, specificAccess);
+    UnusedFunction(timerAttributes, timerName, flag, desiredAccess, specificAccess);
 
     return nullptr;
 

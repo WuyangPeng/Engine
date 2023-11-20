@@ -10,6 +10,7 @@
 #include "System/SystemExport.h"
 
 #include "LoadResourceTools.h"
+#include "System/Helper/Tools.h"
 #include "System/SystemOutput/Data/LanguageIdData.h"
 #include "System/Windows/WindowsSystem.h"
 
@@ -23,7 +24,7 @@ System::DynamicLinkResource System::FindResourceInLibrary(DynamicLinkModule modu
 
     UnusedFunction(module, type, name);
 
-    return false;
+    return nullptr;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -38,7 +39,7 @@ System::DynamicLinkResource System::FindResourceInLibrary(DynamicLinkModule modu
 
     UnusedFunction(module, type, name, language);
 
-    return false;
+    return nullptr;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -53,7 +54,7 @@ System::DynamicLinkGlobal System::LoadResourceInLibrary(DynamicLinkModule module
 
     UnusedFunction(module, resourceInfo);
 
-    return false;
+    return nullptr;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -66,9 +67,9 @@ System::WindowsVoidPtr System::LockResourceInLibrary(DynamicLinkGlobal resourceD
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(resourceInfo);
+    UnusedFunction(resourceData);
 
-    return false;
+    return nullptr;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -83,7 +84,7 @@ System::WindowsDWord System::SizeofResourceInLibrary(DynamicLinkModule module, D
 
     UnusedFunction(module, resourceInfo);
 
-    return false;
+    return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -98,7 +99,7 @@ int System::LoadStringInLibrary(WindowsHInstance instance, WindowsUInt id, Dynam
 
     UnusedFunction(instance, id, buffer, size);
 
-    return false;
+    return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

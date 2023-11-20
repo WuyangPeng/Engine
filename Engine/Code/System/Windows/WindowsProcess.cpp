@@ -12,6 +12,7 @@
 #include "WindowsProcess.h"
 #include "Flags/WindowsProcessFlags.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/SystemOutput/Data/MessageBoxFlagsData.h"
 #include "System/SystemOutput/Flags/DialogBoxCommandFlags.h"
@@ -102,7 +103,7 @@ bool System::SystemTranslateAccelerator(WindowsHWnd hWnd, WindowsHAccelerator ac
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hWnd, accelerator, msg);
+    UnusedFunction(hWnd, accelerator, message);
 
     return false;
 

@@ -18,6 +18,8 @@
 #include "Database/DatabaseInterface/DatabaseInterfaceFwd.h"
 
 #include <deque>
+#include <mutex>
+#include <thread>
 
 #ifdef DATABASE_USE_MONGO
 

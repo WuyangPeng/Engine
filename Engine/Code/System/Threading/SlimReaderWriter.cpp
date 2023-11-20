@@ -11,6 +11,7 @@
 
 #include "SlimReaderWriter.h"
 #include "System/Helper/PragmaWarning.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 void System::InitializeSlimReaderWriterLock(SlimReaderWriterLockPtr slimReaderWriterLock) noexcept

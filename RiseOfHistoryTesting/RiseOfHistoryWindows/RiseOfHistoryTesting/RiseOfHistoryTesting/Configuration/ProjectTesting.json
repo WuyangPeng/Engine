@@ -1,5 +1,24 @@
 {
   "GameClientTesting": 1,
+  "RobotClientTesting": 1,
+  "MessageClientTesting": 1,
+  "BackgroundClientTesting": 1,
+  "GatewayServerTesting": 1,
+  "LoginServerTesting": 1,
+  "GameServerTesting": 1,
+  "FightingServerTesting": 1,
+  "WorldServerTesting": 1,
+  "OfflineServerTesting": 1,
+  "LeaderboardServerTesting": 1,
+  "MailServerTesting": 1,
+  "ChatServerTesting": 1,
+  "RechargeServerTesting": 1,
+  "LogServerTesting": 1,
+  "GameMasterServerTesting": 1,
+  "ServerManagerTesting": 1,
+  "BackgroundServerTesting": 1,
+  "UpdateServerTesting": 1,
+  "DatabaseServerTesting": 1,
 
   "RiseOfHistoryTesting": 1
 }

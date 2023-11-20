@@ -1,6 +1,0 @@
-@echo on
- 
-$CallRunTestingBat$
-call Run$ProjectName$.bat
-
-pause

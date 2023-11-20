@@ -5,100 +5,55 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/25 09:49)
+///	版本：1.0.0.0 (2023/11/16 15:17)
 
 #ifndef ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_TESTING_ENGINE_IMPL_H
 #define ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_TESTING_ENGINE_IMPL_H
 
 #include "AssistTools/AssistToolsDll.h"
 
+#include "GenerateDirectory.h"
+#include "GenerateEngineBase.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/CharacterString/CodeMappingAnalysis.h"
-#include "AssistTools/GenerateProjects/GameParameterAnalysis.h"
-
-#include <map>
 
 namespace AssistTools
 {
-    class ASSIST_TOOLS_HIDDEN_DECLARE GenerateTestingEngineImpl
+    class ASSIST_TOOLS_HIDDEN_DECLARE GenerateTestingEngineImpl final : public GenerateEngineBase
     {
     public:
         using ClassType = GenerateTestingEngineImpl;
-
-        using String = System::String;
+        using ParentType = GenerateEngineBase;
 
     public:
-        GenerateTestingEngineImpl(const String& input, String output);
+        GenerateTestingEngineImpl(const String& input, const String& output);
 
-        CLASS_INVARIANT_DECLARE;
-
-        void Generate() const;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        using CodeMappingAnalysis = CoreTools::CodeMappingAnalysis;
-        using ReplaceType = std::map<String, String>;
+        void GenerateRun() const override;
+        void GenerateWindows() const override;
+
+        void GenerateBinaryConfiguration(const String& staticDescribe, const GenerateDirectory& directory) const override;
+
+        void GenerateRunBat(const GenerateDirectory& directory) const override;
+        void GenerateRunBat(const String& moduleName, const GenerateDirectory& directory) const override;
+
+        void GenerateCodeProject(const GenerateDirectory& directory) const override;
+        void GenerateCodeVersion(const GenerateDirectory& directory) const;
+        void GenerateCodeEngine(const GenerateDirectory& directory) const;
+
+        void GenerateCodeModule(const GenerateDirectory& directory) const override;
+        void GenerateWindowsProjectModule(const GenerateDirectory& directory) const;
+
+        void GenerateWindowsProject(const GenerateDirectory& directory) const;
+        void GenerateWindowsProjectVcxproj(const GenerateDirectory& directory) const;
+
+        void GenerateWindowsProjectConfiguration(const GenerateDirectory& directory) const;
 
     private:
-        void GenerateTop() const;
-        void GenerateBinary(const String& configuration) const;
-        void GenerateRun() const;
-        void GenerateDoxygen() const;
-        void GenerateDoc() const;
-        void GenerateBat() const;
-        void GenerateCode() const;
-        void GenerateWindows() const;
-
-        void GenerateBinaryConfiguration(const String& configuration, const String& staticDescribe) const;
-
-        void GenerateRunBat() const;
-        void GenerateRunBat(const String& moduleName) const;
-
-        void GenerateCodeProject() const;
-        void GenerateCodeVersion() const;
-        void GenerateCodeEngine() const;
-
-        void GenerateCodeModule() const;
-        void GenerateCodeModule(const GameModule& gameModule) const;
-        void GenerateCodeModuleCore(const GameModule& gameModule) const;
-        void GenerateCodeModuleMiddleLayer(const GameModule& gameModule) const;
-        void GenerateCodeModuleExe(const GameModule& gameModule) const;
-
-        void GenerateWindowsProject() const;
-        void GenerateWindowsProjectVcxproj() const;
-        void GenerateWindowsProjectModule(const GameModule& gameModule) const;
-
-        void GenerateWindowsProjectResource() const;
-        void GenerateWindowsProjectResourceTodo() const;
-        void GenerateWindowsProjectConfiguration() const;
-
-        void GenerateWindowsProjectModuleCore(const GameModule& gameModule) const;
-        void GenerateWindowsProjectModuleMiddleLayer(const GameModule& gameModule) const;
-        void GenerateWindowsProjectModuleExe(const GameModule& gameModule) const;
-
-        void GenerateWindowsProjectModuleCoreResource(const GameModule& gameModule) const;
-        void GenerateWindowsProjectModuleMiddleLayerResource(const GameModule& gameModule) const;
-        void GenerateWindowsProjectModuleExeResource(const GameModule& gameModule) const;
-
-        void GenerateWindowsProjectModuleCoreConfiguration(const GameModule& gameModule) const;
-        void GenerateWindowsProjectModuleMiddleLayerConfiguration(const GameModule& gameModule) const;
-        void GenerateWindowsProjectModuleExeConfiguration(const GameModule& gameModule) const;
-
-        void GenerateWindowsProjectModuleCoreResourceTodo(const GameModule& gameModule) const;
-        void GenerateWindowsProjectModuleMiddleLayerResourceTodo(const GameModule& gameModule) const;
-        void GenerateWindowsProjectModuleExeResourceTodo(const GameModule& gameModule) const;
-
-        void Generate(const String& inputFileName, const String& outputFileName) const;
-        void Generate(const String& inputFileName, const String& outputFileName, const ReplaceType& replace) const;
-        void Generate(const String& inputFileName, const String& outputFileName, bool isClient) const;
-        void GenerateUtf8(const String& inputFileName, const String& outputFileName) const;
-        void GenerateUtf8(const String& inputFileName, const String& outputFileName, const ReplaceType& replace) const;
-
-    private:
-        String input;
-        String output;
-        GameParameterAnalysis gameParameterAnalysis;
-        CodeMappingAnalysis codeMappingAnalysis;
+        String projectName;
+        String testingName;
     };
 }
 
-#endif  // ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_ENGINE_IMPL_H
+#endif  // ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_TESTING_ENGINE_IMPL_H

@@ -6,10 +6,10 @@ The Last Overlord Testing
 @author 彭武阳，彭晔恩，彭晔泽
 联系作者：94458936@qq.com
 
-@version 0.9.1.3
+@version 1.0.0.0
 标准：std:c++20
 
-@date 2023/08/25 10:15
+@date 2023/11/18 22:36
 
 @section sec_Contents 内容
 
@@ -37,10 +37,10 @@ The Last Overlord Testing
 14. RechargeServer（充值服务器）
 15. LogServer（日志服务器）
 16. GameMasterServer（游戏管理员服务器）
-17. ServerManager（服务器管理者）
-18. UpdateServer（更新服务器）
-19. BackgroundServer（后台服务器）
-20. DatabaseServer（数据库服务器）
+17. UpdateServer（更新服务器）
+18. BackgroundServer（后台服务器）
+19. DatabaseServer（数据库服务器）
+20. ServerManager（服务器管理者）
 
 @section sec_Detail 详细说明
 

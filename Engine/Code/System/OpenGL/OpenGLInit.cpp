@@ -15,6 +15,7 @@
 #include "Detail/GL30Extensions.h"
 #include "Detail/GLExtensions.h"
 #include "Detail/GLUtility.h"
+#include "Detail/GlxExtensions.h"
 #include "Detail/WglExtensions.h"
 
 #include <iostream>

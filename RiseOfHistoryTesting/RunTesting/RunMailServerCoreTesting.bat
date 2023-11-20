@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %RiseOfHistoryTestingWin32DebugLib% MailServerCoreTestingD.exe
+start /d %RiseOfHistoryTestingWin32ReleaseLib% MailServerCoreTesting.exe
+start /d %RiseOfHistoryTestingX64DebugLib% MailServerCoreTestingD.exe
+start /d %RiseOfHistoryTestingX64ReleaseLib% MailServerCoreTesting.exe
+start /d %RiseOfHistoryTestingStaticWin32DebugLib% MailServerCoreTestingStaticD.exe
+start /d %RiseOfHistoryTestingStaticWin32ReleaseLib% MailServerCoreTestingStatic.exe
+start /d %RiseOfHistoryTestingStaticX64DebugLib% MailServerCoreTestingStaticD.exe
+start /d %RiseOfHistoryTestingStaticX64ReleaseLib% MailServerCoreTestingStatic.exe
+
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicWin32DebugLib% MailServerCoreTestingStaticD.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicWin32ReleaseLib% MailServerCoreTestingStatic.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicX64DebugLib% MailServerCoreTestingStaticD.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicX64ReleaseLib% MailServerCoreTestingStatic.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticWin32DebugLib% MailServerCoreTestingD.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticWin32ReleaseLib% MailServerCoreTesting.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticX64DebugLib% MailServerCoreTestingD.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticX64ReleaseLib% MailServerCoreTesting.exe
+
+pause

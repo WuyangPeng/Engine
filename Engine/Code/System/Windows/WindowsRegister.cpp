@@ -11,6 +11,7 @@
 
 #include "WindowsRegister.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 
 System::WindowsHGdiObj System::GetSystemStockObject(WindowsBrushTypes background) noexcept
 {
@@ -35,7 +36,7 @@ System::WindowsHCursor System::LoadSystemCursor(WindowsHInstance instance, const
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(instance, background);
+    UnusedFunction(instance, cursor);
 
     return nullptr;
 

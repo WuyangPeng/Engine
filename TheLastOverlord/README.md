@@ -24,9 +24,9 @@
 14. RechargeServer（充值服务器）
 15. LogServer（日志服务器）
 16. GameMasterServer（游戏管理员服务器）
-17. ServerManager（服务器管理者）
-18. UpdateServer（更新服务器）
-19. BackgroundServer（后台服务器）
-20. DatabaseServer（数据库服务器）
+17. UpdateServer（更新服务器）
+18. BackgroundServer（后台服务器）
+19. DatabaseServer（数据库服务器）
+20. ServerManager（服务器管理者）
 
 ---------------------------

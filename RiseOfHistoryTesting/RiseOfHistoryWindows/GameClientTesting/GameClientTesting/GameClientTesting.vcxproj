@@ -523,23 +523,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\GameClientTesting.json" />
+    <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\Testing.json" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientTesting\GameClientSuite\GameClientHelperTesting.h" />
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientTesting\GameClientSuite\GameClientMessageTesting.h" />
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientTesting\GameClientSuite\GameClientSuite.h" />
     <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientTesting\TestingHelper.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Code\GameClientTesting\GameClientTesting\GameClientSuite\GameClientHelperTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\GameClientTesting\GameClientTesting\GameClientSuite\GameClientMessageTesting.cpp" />
     <ClCompile Include="..\..\..\Code\GameClientTesting\GameClientTesting\TestingHelper.cpp" />
     <ClCompile Include="..\..\..\Code\GameClientTesting\GameClientTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\GameClientTesting\GameClientTesting\TestingMain.cpp" />

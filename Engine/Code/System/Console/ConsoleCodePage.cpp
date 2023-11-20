@@ -10,7 +10,9 @@
 #include "System/SystemExport.h"
 
 #include "ConsoleCodePage.h"
+#include "System/CharacterString/Flags/CodePageFlags.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 System::CodePage System::GetConsoleCodePage() noexcept
@@ -21,7 +23,7 @@ System::CodePage System::GetConsoleCodePage() noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    return CodePage::UTF8;
+    return CodePage::Utf8;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -52,7 +54,7 @@ System::CodePage System::GetConsoleOutputCodePage() noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    return CodePage::UTF8;
+    return CodePage::Utf8;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

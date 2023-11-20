@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %RiseOfHistoryTestingWin32DebugLib% ChatServerTestingD.exe
+start /d %RiseOfHistoryTestingWin32ReleaseLib% ChatServerTesting.exe
+start /d %RiseOfHistoryTestingX64DebugLib% ChatServerTestingD.exe
+start /d %RiseOfHistoryTestingX64ReleaseLib% ChatServerTesting.exe
+start /d %RiseOfHistoryTestingStaticWin32DebugLib% ChatServerTestingStaticD.exe
+start /d %RiseOfHistoryTestingStaticWin32ReleaseLib% ChatServerTestingStatic.exe
+start /d %RiseOfHistoryTestingStaticX64DebugLib% ChatServerTestingStaticD.exe
+start /d %RiseOfHistoryTestingStaticX64ReleaseLib% ChatServerTestingStatic.exe
+
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicWin32DebugLib% ChatServerTestingStaticD.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicWin32ReleaseLib% ChatServerTestingStatic.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicX64DebugLib% ChatServerTestingStaticD.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicX64ReleaseLib% ChatServerTestingStatic.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticWin32DebugLib% ChatServerTestingD.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticWin32ReleaseLib% ChatServerTesting.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticX64DebugLib% ChatServerTestingD.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticX64ReleaseLib% ChatServerTesting.exe
+
+pause

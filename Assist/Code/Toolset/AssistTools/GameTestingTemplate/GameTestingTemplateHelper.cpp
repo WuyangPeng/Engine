@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/31 10:34)
+///	版本：1.0.0.0 (2023/11/18 14:06)
 
 #include "GameTestingTemplate.h"
 #include "GameTestingTemplateHelper.h"

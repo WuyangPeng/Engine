@@ -12,6 +12,7 @@
 #include "WindowsCreate.h"
 #include "Flags/WindowsCreateFlags.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 
 namespace System
 {

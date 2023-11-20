@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %RiseOfHistoryTestingWin32DebugLib% RobotClientTestingD.exe
+start /d %RiseOfHistoryTestingWin32ReleaseLib% RobotClientTesting.exe
+start /d %RiseOfHistoryTestingX64DebugLib% RobotClientTestingD.exe
+start /d %RiseOfHistoryTestingX64ReleaseLib% RobotClientTesting.exe
+start /d %RiseOfHistoryTestingStaticWin32DebugLib% RobotClientTestingStaticD.exe
+start /d %RiseOfHistoryTestingStaticWin32ReleaseLib% RobotClientTestingStatic.exe
+start /d %RiseOfHistoryTestingStaticX64DebugLib% RobotClientTestingStaticD.exe
+start /d %RiseOfHistoryTestingStaticX64ReleaseLib% RobotClientTestingStatic.exe
+
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicWin32DebugLib% RobotClientTestingStaticD.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicWin32ReleaseLib% RobotClientTestingStatic.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicX64DebugLib% RobotClientTestingStaticD.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicX64ReleaseLib% RobotClientTestingStatic.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticWin32DebugLib% RobotClientTestingD.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticWin32ReleaseLib% RobotClientTesting.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticX64DebugLib% RobotClientTestingD.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticX64ReleaseLib% RobotClientTesting.exe
+
+pause

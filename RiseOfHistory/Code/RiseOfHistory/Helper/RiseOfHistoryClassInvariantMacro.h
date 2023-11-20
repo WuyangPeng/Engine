@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/18 17:41)
+/// 标准：std:c++20
+/// 版本：1.0.0.0 (2023/11/19 00:20)
 
 #ifndef RISE_OF_HISTORY_RISE_OF_HISTORY_CLASS_INVARIANT_MACRO_H
 #define RISE_OF_HISTORY_RISE_OF_HISTORY_CLASS_INVARIANT_MACRO_H
@@ -234,8 +234,8 @@ static_assert(RISE_OF_HISTORY_CLASS_INVARIANT_CONST_LEVEL <= USER_CLASS_INVARIAN
 
 #else  // RISE_OF_HISTORY_CLASS_INVARIANT_CONST_LEVEL < 8
 
-    #define RISE_OF_HISTORY_CLASS_IS_VALID_CONST_8 (static_cast<void>(0)
-)
+    #define RISE_OF_HISTORY_CLASS_IS_VALID_CONST_8 (static_cast<void>(0))
+
 #endif  // 8 <= RISE_OF_HISTORY_CLASS_INVARIANT_CONST_LEVEL
 
 #if 9 <= RISE_OF_HISTORY_CLASS_INVARIANT_CONST_LEVEL

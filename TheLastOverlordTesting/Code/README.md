@@ -20,10 +20,10 @@ ChatServerTesting：代码分析（所有规则），平台（Windows）
 RechargeServerTesting：代码分析（所有规则），平台（Windows）
 LogServerTesting：代码分析（所有规则），平台（Windows）
 GameMasterServerTesting：代码分析（所有规则），平台（Windows）
-ServerManagerTesting：代码分析（所有规则），平台（Windows）
 UpdateServerTesting：代码分析（所有规则），平台（Windows）
 BackgroundServerTesting：代码分析（所有规则），平台（Windows）
 DatabaseServerTesting：代码分析（所有规则），平台（Windows）
+ServerManagerTesting：代码分析（所有规则），平台（Windows）
 TheLastOverlordTesting：代码分析（所有规则），平台（Windows）
 
 ----------------------------

@@ -19,68 +19,6 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{68f14701-d87c-4a2f-ac11-7381ed07c781}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ArtificialIntelligenceSuite 头文件">
-      <UniqueIdentifier>{aab8a949-403c-47aa-97b3-2459590f6d25}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AudioSuite 头文件">
-      <UniqueIdentifier>{864558ea-75b0-42f5-b0a3-2818a64cab3c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CameraSystemsSuite 头文件">
-      <UniqueIdentifier>{3580b124-c4d1-416c-a211-6ef3d899ed9d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EventSuite 头文件">
-      <UniqueIdentifier>{47ceae11-d432-48b4-b061-5873a9b45258}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUISuite 头文件">
-      <UniqueIdentifier>{47b5ef50-4c7a-41ba-be8d-f30677337db5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="HelperSuite 头文件">
-      <UniqueIdentifier>{baa64bb5-758b-463e-a9db-fb499cd7628b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="InputSuite 头文件">
-      <UniqueIdentifier>{6448975d-3448-476d-bfe5-e28e17f767a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="MessageSuite 头文件">
-      <UniqueIdentifier>{9e229e0d-6579-4c6d-a548-1deaa07fae38}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NetworkSuite 头文件">
-      <UniqueIdentifier>{ce91a5bb-cb86-4f25-a057-6380fd181e02}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ObjectLogicSuite 头文件">
-      <UniqueIdentifier>{6176cc0a-a1c3-4be6-948e-9b71a38074ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PhysicalModellingSuite 头文件">
-      <UniqueIdentifier>{006b6da7-a251-4188-8ff3-e65e055fc723}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="RenderingSuite 头文件">
-      <UniqueIdentifier>{90de5e5c-0ac1-4cea-9946-bd7ce75bd245}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ResourceSuite 头文件">
-      <UniqueIdentifier>{b1a06450-ce30-42bb-b977-83ac4fdd9bee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemSuite 头文件">
-      <UniqueIdentifier>{25e2e37b-2078-469f-bce2-d1b5a5ba08b4}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resource\ReadMe.md">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Resource\Schedule.md">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Configuration\EnvironmentVariable.json">
-      <Filter>配置</Filter>
-    </None>
-    <None Include="Configuration\GameClientMiddleLayerTesting.json">
-      <Filter>配置</Filter>
-    </None>
-    <None Include="Configuration\Log.json">
-      <Filter>配置</Filter>
-    </None>
-    <None Include="Configuration\Testing.json">
-      <Filter>配置</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\Testing.h">
@@ -88,48 +26,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\TestingHelper.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\ArtificialIntelligenceSuite\ArtificialIntelligenceSuite.h">
-      <Filter>ArtificialIntelligenceSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\AudioSuite\AudioSuite.h">
-      <Filter>AudioSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\CameraSystemsSuite\CameraSystemsSuite.h">
-      <Filter>CameraSystemsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\EventSuite\EventSuite.h">
-      <Filter>EventSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\GUISuite\GUISuite.h">
-      <Filter>GUISuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\HelperSuite\HelperSuite.h">
-      <Filter>HelperSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\InputSuite\InputSuite.h">
-      <Filter>InputSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\MessageSuite\MessageSuite.h">
-      <Filter>MessageSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\NetworkSuite\NetworkSuite.h">
-      <Filter>NetworkSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\ObjectLogicSuite\ObjectLogicSuite.h">
-      <Filter>ObjectLogicSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\PhysicalModellingSuite\PhysicalModellingSuite.h">
-      <Filter>PhysicalModellingSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\RenderingSuite\RenderingSuite.h">
-      <Filter>RenderingSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\ResourceSuite\ResourceSuite.h">
-      <Filter>ResourceSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\SystemSuite\SystemSuite.h">
-      <Filter>SystemSuite 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +38,26 @@
     <ClCompile Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\TestingMain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Configuration\GameClientMiddleLayerTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">

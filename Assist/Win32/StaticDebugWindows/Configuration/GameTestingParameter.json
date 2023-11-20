@@ -1,119 +1,136 @@
 {
   "CoreName": "Core",
   "CoreCapital": "CORE",
-  "ProjectChineseName": "×îºóµÄ°ÔÍõµ¥Ôª²âÊÔ",
+  "ProjectChineseName": "æœ€åçš„éœ¸ç‹å•å…ƒæµ‹è¯•",
   "ProjectDescribeName": "The Last Overlord Testing",
   "ProjectName": "TheLastOverlordTesting",
   "ProjectCapital": "THE_LAST_OVERLORD_TESTING",
   "ProjectAbbreviation": "TLOT",
   "EndYear": "2023",
-  "Version": "0.9.1.4",
-  "VersionNum": "90104",
+  "Version": "1.0.0.0",
+  "VersionNum": "1000000",
   "TestingName": "TheLastOverlord",
 
   "Module": {
     "GameClient": {
-      "ChineseName": "ÓÎÏ·¿Í»§¶Ë",
-      "IsClient": true,
+      "ChineseName": "æ¸¸æˆå®¢æˆ·ç«¯",
+      "ProjectServiceType": 1,
       "Uppercase": "GAME_CLIENT"
     },
 
     "RobotClient": {
-      "ChineseName": "»úÆ÷ÈË¿Í»§¶Ë",
-      "IsClient": true,
+      "ChineseName": "æœºå™¨äººå®¢æˆ·ç«¯",
+      "ProjectServiceType": 1,
       "Uppercase": "ROBOT_CLIENT"
     },
 
     "MessageClient": {
-      "ChineseName": "ÏûÏ¢¿Í»§¶Ë",
-      "IsClient": true,
+      "ChineseName": "æ¶ˆæ¯å®¢æˆ·ç«¯",
+      "ProjectServiceType": 1,
       "Uppercase": "MESSAGE_CLIENT"
     },
 
     "BackgroundClient": {
-      "ChineseName": "ºóÌ¨¿Í»§¶Ë",
-      "IsClient": true,
+      "ChineseName": "åå°å®¢æˆ·ç«¯",
+      "ProjectServiceType": 1,
       "Uppercase": "BACKGROUND_CLIENT"
     },
 
     "GatewayServer": {
-      "ChineseName": "Íø¹Ø·şÎñÆ÷",
+      "ChineseName": "ç½‘å…³æœåŠ¡å™¨",
+      "ProjectServiceType": 2,
       "Uppercase": "GATEWAY_SERVER"
     },
 
     "LoginServer": {
-      "ChineseName": "µÇÂ½·şÎñÆ÷",
+      "ChineseName": "ç™»é™†æœåŠ¡å™¨",
+      "ProjectServiceType": 2,
       "Uppercase": "LOGIN_SERVER"
     },
 
     "GameServer": {
-      "ChineseName": "ÓÎÏ··şÎñÆ÷",
+      "ChineseName": "æ¸¸æˆæœåŠ¡å™¨",
+      "ProjectServiceType": 2,
       "Uppercase": "GAME_SERVER"
     },
 
     "FightingServer": {
-      "ChineseName": "Õ½¶··şÎñÆ÷",
+      "ChineseName": "æˆ˜æ–—æœåŠ¡å™¨",
+      "ProjectServiceType": 2,
       "Uppercase": "FIGHTING_SERVER"
     },
 
     "WorldServer": {
-      "ChineseName": "ÊÀ½ç·şÎñÆ÷",
+      "ChineseName": "ä¸–ç•ŒæœåŠ¡å™¨",
+      "ProjectServiceType": 2,
       "Uppercase": "WORLD_SERVER"
     },
 
     "OfflineServer": {
-      "ChineseName": "ÀëÏß·şÎñÆ÷",
+      "ChineseName": "ç¦»çº¿æœåŠ¡å™¨",
+      "ProjectServiceType": 2,
       "Uppercase": "OFFLINE_SERVER"
     },
 
     "LeaderboardServer": {
-      "ChineseName": "ÅÅĞĞ°ñ·şÎñÆ÷",
+      "ChineseName": "æ’è¡Œæ¦œæœåŠ¡å™¨",
+      "ProjectServiceType": 2,
       "Uppercase": "LEADERBOARD_SERVER"
     },
 
     "MailServer": {
-      "ChineseName": "ÓÊ¼ş·şÎñÆ÷",
+      "ChineseName": "é‚®ä»¶æœåŠ¡å™¨",
+      "ProjectServiceType": 2,
       "Uppercase": "MAIL_SERVER"
     },
 
     "ChatServer": {
-      "ChineseName": "ÁÄÌì·şÎñÆ÷",
+      "ChineseName": "èŠå¤©æœåŠ¡å™¨",
+      "ProjectServiceType": 2,
       "Uppercase": "CHAT_SERVER"
     },
 
     "RechargeServer": {
-      "ChineseName": "³äÖµ·şÎñÆ÷",
+      "ChineseName": "å……å€¼æœåŠ¡å™¨",
+      "ProjectServiceType": 2,
       "Uppercase": "RECHARGE_SERVER"
     },
 
     "LogServer": {
-      "ChineseName": "ÈÕÖ¾·şÎñÆ÷",
+      "ChineseName": "æ—¥å¿—æœåŠ¡å™¨",
+      "ProjectServiceType": 2,
       "Uppercase": "LOG_SERVER"
     },
 
     "GameMasterServer": {
-      "ChineseName": "ÓÎÏ·¹ÜÀíÔ±·şÎñÆ÷",
+      "ChineseName": "æ¸¸æˆç®¡ç†å‘˜æœåŠ¡å™¨",
+      "ProjectServiceType": 2,
       "Uppercase": "GAME_MASTER_SERVER"
     },
 
-    "ServerManager": {
-      "ChineseName": "·şÎñÆ÷¹ÜÀíÕß",
-      "Uppercase": "SERVER_MANAGER"
-    },
 
     "UpdateServer": {
-      "ChineseName": "¸üĞÂ·şÎñÆ÷",
+      "ChineseName": "æ›´æ–°æœåŠ¡å™¨",
+      "ProjectServiceType": 2,
       "Uppercase": "UPDATE_SERVER"
     },
 
     "BackgroundServer": {
-      "ChineseName": "ºóÌ¨·şÎñÆ÷",
+      "ChineseName": "åå°æœåŠ¡å™¨",
+      "ProjectServiceType": 2,
       "Uppercase": "BACKGROUND_SERVER"
     },
 
     "DatabaseServer": {
-      "ChineseName": "Êı¾İ¿â·şÎñÆ÷",
+      "ChineseName": "æ•°æ®åº“æœåŠ¡å™¨",
+      "ProjectServiceType": 2,
       "Uppercase": "DATABASE_SERVER"
+    },
+
+    "ServerManager": {
+      "ChineseName": "æœåŠ¡å™¨ç®¡ç†è€…",
+      "ProjectServiceType": 2,
+      "Uppercase": "SERVER_MANAGER"
     }
   },
 

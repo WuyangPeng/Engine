@@ -11,6 +11,7 @@
 
 #include "ConditionVariable.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 void System::InitializeSystemConditionVariable(ConditionVariablePtr conditionVariable) noexcept
@@ -37,7 +38,7 @@ bool System::SleepConditionVariableSlimReaderWriter(ConditionVariablePtr conditi
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(conditionVariable slimReaderWriterLock, milliseconds, flags);
+    UnusedFunction(conditionVariable, slimReaderWriterLock, milliseconds, flags);
 
     return false;
 
@@ -55,7 +56,7 @@ bool System::SleepConditionVariableCriticalSection(ConditionVariablePtr conditio
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(conditionVariable criticalSection, milliseconds);
+    UnusedFunction(conditionVariable, criticalSection, milliseconds);
 
     return false;
 

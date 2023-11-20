@@ -2,7 +2,7 @@
 
 echo RiseOfHistoryTestingInclude = %RiseOfHistoryTestingInclude%
 echo %cd%
-setx RiseOfHistoryTestingInclude "%cd%\..\Code"
+setx RiseOfHistoryTestingInclude "%cd%\..\Code" 
 
 echo RiseOfHistoryTestingEngineering = %RiseOfHistoryTestingEngineering%
 echo %cd%
@@ -71,6 +71,5 @@ setx RiseOfHistoryTestingEngineStaticGameDynamicX64DebugLib "%cd%\..\x64\EngineS
 echo RiseOfHistoryTestingEngineStaticGameDynamicX64ReleaseLib = %RiseOfHistoryTestingEngineStaticGameDynamicX64ReleaseLib%
 echo %cd%
 setx RiseOfHistoryTestingEngineStaticGameDynamicX64ReleaseLib "%cd%\..\x64\EngineStaticReleaseWindows" 
-
 
 pause

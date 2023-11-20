@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：0.9.1.3 (2023/08/21 10:43)
+/// 版本：1.0.0.0 (2023/11/18 17:09)
 
 #ifndef LOG_SERVER_MIDDLE_LAYER_NETWORK_MIDDLE_LAYER_NETWORK_H
 #define LOG_SERVER_MIDDLE_LAYER_NETWORK_MIDDLE_LAYER_NETWORK_H
@@ -17,7 +17,7 @@
 
 namespace LogServerMiddleLayer
 {
-    class LOG_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE NetworkManager : public Framework::NetworkManagerInterface
+    class LOG_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE NetworkManager final : public Framework::NetworkManagerInterface
     {
     public:
         using ClassType = NetworkManager;

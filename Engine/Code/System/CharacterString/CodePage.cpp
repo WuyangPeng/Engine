@@ -10,7 +10,9 @@
 #include "System/SystemExport.h"
 
 #include "CodePage.h"
+#include "System/CharacterString/Flags/CodePageFlags.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 bool System::IsCodePageValid(CodePage codePage) noexcept
@@ -39,7 +41,7 @@ System::CodePage System::GetAnsiCodePage() noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    return CodePage::UTF8;
+    return CodePage::Utf8;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -52,7 +54,7 @@ System::CodePage System::GetOemCodePage() noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    return CodePage::UTF8;
+    return CodePage::Utf8;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

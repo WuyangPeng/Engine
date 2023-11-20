@@ -10,6 +10,7 @@
 #include "System/SystemExport.h"
 
 #include "WindowsSystem.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 void System::GetWindowSystemInfo(WindowsSystemInfo& systemInfo) noexcept
@@ -112,7 +113,15 @@ void System::BoolConversion(WindowsBool input, bool* result) noexcept
 
 System::WindowsHWnd System::GetActiveWindow() noexcept
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     return ::GetActiveWindow();
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    return 0;
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 bool System::GetSystemClientRect(WindowsHWnd hWnd, WindowsRect& windowsRect) noexcept

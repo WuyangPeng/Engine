@@ -16,7 +16,15 @@ template <typename T>
 requires(std::is_trivial_v<T> && std::is_standard_layout_v<T>)
 void System::FillMemoryToZero(T& value) noexcept
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     ::ZeroMemory(&value, sizeof(T));
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    memset(&value, 0, sizeof(T));
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 #endif  // SYSTEM_MEMORY_TOOLS_MEMORY_HELPER_DETAIL_H

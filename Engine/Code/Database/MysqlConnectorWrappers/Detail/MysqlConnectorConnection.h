@@ -18,6 +18,8 @@
 #include "Database/MysqlConnectorWrappers/Using/MysqlConnectorUsing.h"
 
 #include <deque>
+#include <mutex>
+#include <thread>
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
@@ -46,7 +48,7 @@ namespace Database
 
         NODISCARD BasisDatabaseManager SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
         NODISCARD ResultContainer SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
-      
+
         void Wait();
 
     private:

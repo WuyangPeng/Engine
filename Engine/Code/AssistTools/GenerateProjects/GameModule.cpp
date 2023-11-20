@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/16 10:49)
+///	版本：1.0.0.0 (2023/11/08 15:30)
 
 #include "AssistTools/AssistToolsExport.h"
 
@@ -13,8 +13,8 @@
 #include "Detail/GameModuleImpl.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 
-AssistTools::GameModule::GameModule(const String& moduleName, const String& chineseName, bool isClient, const String& uppercaseName)
-    : impl{ moduleName, chineseName, isClient, uppercaseName }
+AssistTools::GameModule::GameModule(const String& moduleName, const String& chineseName, ProjectServiceType projectServiceType, const String& uppercaseName)
+    : impl{ moduleName, chineseName, projectServiceType, uppercaseName }
 {
     ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -35,11 +35,11 @@ AssistTools::GameModule::String AssistTools::GameModule::GetChineseName() const
     return impl->GetChineseName();
 }
 
-bool AssistTools::GameModule::IsClient() const noexcept
+AssistTools::ProjectServiceType AssistTools::GameModule::GetProjectServiceType() const noexcept
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return impl->IsClient();
+    return impl->GetProjectServiceType();
 }
 
 AssistTools::GameModule::String AssistTools::GameModule::GetUppercaseName() const

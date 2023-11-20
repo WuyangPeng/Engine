@@ -65,13 +65,14 @@
 4.	CharacterString（字符串）
 
 封装了字符串的相关调用，包括格式化错误消息，字符串转换和忽略大小写的字符类。
-由于异常类可能需要使用FormatErrorMessage格式化错误消息，所以FormatErrorMessage不抛出异常。
-FormatErrorMessage失败时，将错误写入日志文件。字符串库的其他调用可能抛出异常。
+由于异常类可能需要使用FormatErrorMessage格式化错误消息，所以FormatErrorMessage不抛出异常。FormatErrorMessage失败时，将错误写入日志文件。
+字符串库的其他调用可能抛出异常。
 
 （1）格式化错误消息：格式化Windows错误消息。
 （2）字符串转换：wchar_t和char相互的转换。
 （3）忽略大小写的字符类：一个忽略大小写的string。
 （4）字符串工具：处理字符串的工具类。
+（5）代码映射：读取一个utf8格式的json文件，将键映射为值。★★★
 
 ----------------------------
 5.	Exception（异常）

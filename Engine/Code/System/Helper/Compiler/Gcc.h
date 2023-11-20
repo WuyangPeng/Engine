@@ -37,7 +37,7 @@
 
         #ifndef TCRE_COMPILER_VERSION
 
-            #define TCRE_COMPILER_VERSION __VERSION__
+            #define TCRE_COMPILER_VERSION __GNUC__
 
         #endif  // TCRE_COMPILER_VERSION
 
@@ -81,6 +81,7 @@
     #endif  // SYSTEM_CPP_STANDARD
 
     #include <cstddef>
+    #include <cstdint>
 
     #if (4 <= __GNUC__) && (SYSTEM_CPP_STANDARD < 17)
 

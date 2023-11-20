@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/16 14:26)
+///	版本：1.0.0.0 (2023/11/09 16:41)
 
 #ifndef ASSIST_TOOLS_GENERATE_PROJECTS_PROJECT_GENERATION_FACTORY_H
 #define ASSIST_TOOLS_GENERATE_PROJECTS_PROJECT_GENERATION_FACTORY_H
@@ -16,7 +16,6 @@
 #include "CoreTools/CharacterString/CharacterStringFwd.h"
 #include "AssistTools/GenerateProjects/GenerateProjectsInternalFwd.h"
 
-#include <map>
 #include <memory>
 
 namespace AssistTools
@@ -25,20 +24,18 @@ namespace AssistTools
     {
     public:
         using ClassType = ProjectGenerationFactory;
-        using ProjectGenerationSharedPtr = std::shared_ptr<ProjectGenerationImpl>;
 
         using String = System::String;
         using CodeMappingAnalysis = CoreTools::CodeMappingAnalysis;
-        using ReplaceType = std::map<String, String>;
+        using ReplaceContainer = std::vector<Replace>;
+        using ProjectGenerationSharedPtr = std::shared_ptr<ProjectGenerationImpl>;
 
     public:
-        ProjectGenerationFactory() noexcept;
-
-        CLASS_INVARIANT_DECLARE;
+        ProjectGenerationFactory() noexcept = delete;
 
         NODISCARD static ProjectGenerationSharedPtr Create(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis);
-        NODISCARD static ProjectGenerationSharedPtr Create(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, bool isClient);
-        NODISCARD static ProjectGenerationSharedPtr Create(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, const ReplaceType& replace);
+        NODISCARD static ProjectGenerationSharedPtr Create(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, ProjectServiceType projectServiceType);
+        NODISCARD static ProjectGenerationSharedPtr Create(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, const ReplaceContainer& replace);
     };
 }
 

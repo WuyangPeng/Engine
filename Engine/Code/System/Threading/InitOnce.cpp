@@ -11,6 +11,7 @@
 
 #include "InitOnce.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 void System::SystemInitOnceInitialize(InitOncePtr initOnce) noexcept

@@ -11,8 +11,17 @@
 
 #include "SyncTools.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
+#include "System/Threading/Flags/SemaphoreFlags.h"
+#include "System/Threading/Flags/SyncToolsFlags.h"
 #include "System/Windows/WindowsSystem.h"
+
+#ifdef SYSTEM_PLATFORM_LINUX
+
+    #include <unistd.h>
+
+#endif  // SYSTEM_PLATFORM_LINUX
 
 void System::SystemSleep(WindowsDWord milliseconds) noexcept
 {
@@ -54,7 +63,7 @@ System::MutexWaitReturn System::SystemSignalObjectAndWait(ThreadHandle objectToS
 
     UnusedFunction(objectToSignal, objectToWaitOn, milliseconds, alertable);
 
-    return false;
+    return MutexWaitReturn::Failed;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

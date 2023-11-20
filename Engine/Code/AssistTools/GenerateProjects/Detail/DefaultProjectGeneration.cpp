@@ -5,12 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/16 15:25)
+///	版本：1.0.0.0 (2023/11/13 19:56)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "DefaultProjectGeneration.h"
+#include "ProjectGenerationReplace.h"
+#include "System/Helper/EnumOperator.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
+#include "AssistTools/GenerateProjects/Flags/GameParameterType.h"
+
+using System::operator++;
 
 AssistTools::DefaultProjectGeneration::DefaultProjectGeneration(const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis)
     : ParentType{ fileName, gameParameterAnalysis, codeMappingAnalysis }
@@ -18,36 +23,39 @@ AssistTools::DefaultProjectGeneration::DefaultProjectGeneration(const String& fi
     ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(AssistTools, DefaultProjectGeneration)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, DefaultProjectGeneration)
 
-AssistTools::ProjectGenerationImpl::String AssistTools::DefaultProjectGeneration::GetContent() const
+System::String AssistTools::DefaultProjectGeneration::GetContent() const
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto content = GetTemplateContent();
+    ProjectGenerationReplace projectGenerationReplace{ GetTemplateContent(), GetGameParameterAnalysis(), GetCodeMappingAnalysis() };
 
-    content = ReplaceCopyright(content);
-    content = ReplaceProjectName(content);
-    content = ReplaceTestingName(content);
-    content = ReplaceProjectChineseName(content);
-    content = ReplaceProjectDescribeName(content);
-    content = ReplaceModuleCount(content);
-    content = ReplaceModuleDescribe(content);
-    content = ReplaceModuleJson(content);
-    content = ReplaceModuleTestingJson(content);
-    content = ReplaceProjectAbbreviation(content);
-    content = ReplaceVersion(content);
-    content = ReplaceVersionNum(content);
-    content = ReplaceEndYear(content);
-    content = ReplaceTime(content);
-    content = ReplaceCodeAnalysis(content);
-    content = ReplaceTestingCodeAnalysis(content);
-    content = ReplaceProjectCapital(content);
-    content = ReplaceCoreName(content);
-    content = ReplaceCoreCapital(content);
-    content = ReplaceMiddleLayerInclude(content);
-    content = ReplaceMiddleLayerFwdInclude(content);
-    content = CallRunTestingBat(content);
+    if (projectGenerationReplace.IsEmpty())
+    {
+        return projectGenerationReplace.GetReplaceResult();
+    }
 
-    return content;
+    projectGenerationReplace.ReplaceCopyright();
+    projectGenerationReplace.ReplaceTime();
+
+    projectGenerationReplace.ReplaceModuleCount();
+    projectGenerationReplace.ReplaceModuleDescribe();
+    projectGenerationReplace.ReplaceModuleJson();
+    projectGenerationReplace.ReplaceModuleTestingJson();
+
+    projectGenerationReplace.ReplaceCodeAnalysis();
+    projectGenerationReplace.ReplaceTestingCodeAnalysis();
+
+    projectGenerationReplace.ReplaceMiddleLayerInclude();
+    projectGenerationReplace.ReplaceMiddleLayerFwdInclude();
+
+    projectGenerationReplace.ReplaceCallRunTestingBat();
+
+    for (auto gameParameterType = GameParameterType::Begin; gameParameterType < GameParameterType::Count; ++gameParameterType)
+    {
+        projectGenerationReplace.ReplaceGameParameter(gameParameterType);
+    }
+
+    return projectGenerationReplace.GetReplaceResult();
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 20:27)
+///	版本：1.0.0.0 (2023/11/07 20:00)
 
 #include "AssistTools/AssistToolsExport.h"
 
@@ -14,7 +14,7 @@
 
 #ifndef BUILDING_ASSIST_TOOLS_STATIC
 
-DLL_MAIN_FUNCTION(AssistTools);
+DLL_MAIN_FUNCTION(AssistTools)
 
 #else  // !BUILDING_ASSIST_TOOLS_STATIC
 

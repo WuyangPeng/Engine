@@ -13,6 +13,7 @@
 // Unicode字符和ANSI字符所需要的using声明和宏
 
 #include "ConfigMacro.h"
+#include "EnumCast.h"
 
 #include <iosfwd>
 #include <regex>
@@ -57,10 +58,9 @@ namespace System
 #endif  // UNICODE
 
     template <typename T>
+    requires(std::is_arithmetic_v<T>)
     NODISCARD String ToString(const T value)
     {
-        static_assert(std::is_arithmetic_v<T>);
-
 #ifdef UNICODE
 
         return std::to_wstring(value);
@@ -68,6 +68,21 @@ namespace System
 #else  // !UNICODE
 
         return std::to_string(value);
+
+#endif  // UNICODE
+    }
+
+    template <typename T>
+    requires(std::is_enum_v<T>)
+    NODISCARD String ToString(const T value)
+    {
+#ifdef UNICODE
+
+        return std::to_wstring(EnumCastUnderlying(value));
+
+#else  // !UNICODE
+
+        return std::to_string(EnumCastUnderlying(value));
 
 #endif  // UNICODE
     }

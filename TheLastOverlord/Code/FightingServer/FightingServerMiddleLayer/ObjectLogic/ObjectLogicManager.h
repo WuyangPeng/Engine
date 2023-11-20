@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：0.9.1.3 (2023/08/21 10:42)
+/// 版本：1.0.0.0 (2023/11/18 17:09)
 
 #ifndef FIGHTING_SERVER_MIDDLE_LAYER_OBJECT_LOGIC_MIDDLE_LAYER_OBJECT_LOGIC_H
 #define FIGHTING_SERVER_MIDDLE_LAYER_OBJECT_LOGIC_MIDDLE_LAYER_OBJECT_LOGIC_H
@@ -17,7 +17,7 @@
 
 namespace FightingServerMiddleLayer
 {
-    class FIGHTING_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE ObjectLogicManager : public Framework::ObjectLogicInterface
+    class FIGHTING_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE ObjectLogicManager final : public Framework::ObjectLogicInterface
     {
     public:
         using ClassType = ObjectLogicManager;

@@ -1,0 +1,138 @@
+{
+  "Module": {
+    "GameClient": {
+     
+    },
+
+    "RobotClient": {
+     
+    },
+
+    "MessageClient": {
+    
+    },
+
+    "BackgroundClient": {
+     
+    },
+
+    "GatewayServer": {
+     
+    },
+
+    "LoginServer": {
+     
+    },
+
+    "GameServer": {
+     
+    },
+
+    "FightingServer": {
+ 
+    },
+
+    "WorldServer": {
+      
+    },
+
+    "OfflineServer": {
+   
+    },
+
+    "LeaderboardServer": {
+      
+    },
+
+    "MailServer": {
+ 
+    },
+
+    "ChatServer": {
+    
+    },
+
+    "RechargeServer": {
+   
+    },
+
+    "LogServer": {
+     
+    },
+
+    "GameMasterServer": {
+
+    },
+
+    "ServerManager": {
+    
+    },
+
+    "UpdateServer": {
+  
+    },
+
+    "BackgroundServer": {
+     
+    },
+
+    "DatabaseServer": {
+    
+    }
+  },
+
+  "MiddleLayer": {
+
+    "Audio": {
+    
+    },
+
+    "CameraSystems": {
+   
+    },
+
+    "Event": {
+     
+    },
+
+    "GUI": {
+    
+    },
+
+    "Input": {
+    
+    },
+
+    "Message": {
+    
+    },
+
+    "ObjectLogic": {
+      
+    },
+
+    "PhysicalModelling": {
+      
+    },
+
+    "Resource": {
+    
+    },
+
+    "System": {
+   
+    },
+
+    "Network": {
+    
+    },
+
+    "Rendering": {
+    
+    },
+
+    "ArtificialIntelligence": {
+      
+    }
+  }
+}

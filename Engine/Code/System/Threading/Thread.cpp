@@ -14,6 +14,7 @@
 #include "Flags/ThreadFlags.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/Using/WindowsUsing.h"
 #include "System/Windows/WindowsSystem.h"
@@ -36,7 +37,7 @@ System::ThreadHandle System::CreateSystemThread(WindowSecurityAttributesPtr thre
 
     UnusedFunction(threadAttributes, stackSize, startAddress, parameter, creationFlags, threadId);
 
-    return nullptr;
+    return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -102,7 +103,7 @@ System::ThreadHandle System::GetCurrentSystemThread() noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    return nullptr;
+    return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -166,7 +167,7 @@ System::MutexWaitReturn System::WaitForSystemThread(ThreadHandle handle, Windows
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(thread, milliseconds);
+    UnusedFunction(handle, milliseconds);
 
     return MutexWaitReturn::Failed;
 
@@ -181,7 +182,7 @@ System::MutexWaitReturn System::WaitForSystemThread(ThreadHandle handle, Windows
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(thread, milliseconds, alertable);
+    UnusedFunction(handle, milliseconds, alertable);
 
     return MutexWaitReturn::Failed;
 
@@ -233,7 +234,7 @@ System::ThreadHandle System::BeginSystemThread(void* security, unsigned int stac
 
     UnusedFunction(security, stackSize, startAddress, argument, createFlag, threadAddress);
 
-    return nullptr;
+    return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -253,10 +254,21 @@ void System::EndSystemThread(unsigned int retCode) noexcept
 
 bool System::IsThreadHandleValid(ThreadHandle threadHandle) noexcept
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     if (threadHandle != nullptr && threadHandle != invalidHandleValue)
         return true;
     else
         return false;
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    if (threadHandle != 0)
+        return true;
+    else
+        return false;
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 System::WindowsDWord System::ExitSystemThread(WindowsDWord exitCode) noexcept

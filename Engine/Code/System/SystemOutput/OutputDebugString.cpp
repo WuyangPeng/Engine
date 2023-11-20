@@ -11,6 +11,7 @@
 
 #include "OutputDebugString.h"
 #include "System/Helper/Platform.h"
+#include "System/Helper/Tools.h"
 
 void System::OutputDebugStringWithChar(const char* outputString) noexcept
 {

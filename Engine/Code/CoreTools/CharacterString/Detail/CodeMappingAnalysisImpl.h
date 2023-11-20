@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/23 10:24)
+///	版本：1.0.0.0 (2023/11/08 10:13)
 
 #ifndef CORE_TOOLS_CHARACTER_STRING_CODE_MAPPING_ANALYSIS_IMPL_H
 #define CORE_TOOLS_CHARACTER_STRING_CODE_MAPPING_ANALYSIS_IMPL_H
@@ -15,6 +15,7 @@
 #include "System/Helper/PragmaWarning/PropertyTree.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/CharacterString/CodeMapping.h"
+#include "CoreTools/Exception/ExceptionFwd.h"
 
 namespace CoreTools
 {
@@ -26,22 +27,26 @@ namespace CoreTools
         using String = System::String;
 
     public:
-        explicit CodeMappingAnalysisImpl(String fileName);
+        explicit CodeMappingAnalysisImpl(const std::wstring& fileName);
+        explicit CodeMappingAnalysisImpl(std::string fileName);
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD String GetElement(const String& codeKey) const;
 
     private:
-        using BasicTree = boost::property_tree::basic_ptree<String, String>;
+        using BasicTree = boost::property_tree::basic_ptree<std::string, std::string>;
 
     private:
         void Analysis();
         void AnalysisJson();
         void AnalysisMain();
+        void AnalysisMain(const std::string& codeKey, const BasicTree& element);
+        void InsertElement(const std::string& codeKey, const BasicTree& element);
+        static void PrintErrorLog(const std::string& codeKey, const Error& error) noexcept;
 
     private:
-        String fileName;
+        std::string fileName;
         CodeMapping codeMapping;
         BasicTree mainTree;
     };

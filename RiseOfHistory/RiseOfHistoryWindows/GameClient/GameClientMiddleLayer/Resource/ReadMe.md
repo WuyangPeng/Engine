@@ -9,7 +9,7 @@
 1.   Helper（帮助） 
 
 ----------------------------
-2.   ArtificialIntelligence（人工智能） 
+2.   ArtificialIntellegence（人工智能） 
 
 ----------------------------
 3.   Audio（音效） 

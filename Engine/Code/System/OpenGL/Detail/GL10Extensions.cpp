@@ -13,6 +13,7 @@
 #include "GLUtility.h"
 #include "System/Helper/Detail/OpenGL/GLPluginMacro.h"
 #include "System/Helper/Detail/OpenGL/GLUtilityMacro.h"
+#include "System/Helper/EnumCast.h"
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/OpenGL/OpenGLUtility.h"
 

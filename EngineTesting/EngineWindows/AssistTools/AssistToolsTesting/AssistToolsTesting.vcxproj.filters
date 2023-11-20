@@ -16,9 +16,6 @@
     <Filter Include="配置">
       <UniqueIdentifier>{8aaed613-9124-46fc-981b-2f976cebbada}</UniqueIdentifier>
     </Filter>
-    <Filter Include="资源文件\GenerateProjectsSuite">
-      <UniqueIdentifier>{a419ee32-9570-4fef-8bb0-481101a86065}</UniqueIdentifier>
-    </Filter>
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{17af23a1-9727-48c1-9493-547c412a0f1d}</UniqueIdentifier>
     </Filter>
@@ -28,20 +25,14 @@
     <Filter Include="GenerateProjectsSuite 源文件">
       <UniqueIdentifier>{e66c06db-0b4a-4be3-b352-4e633600e426}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BmpColorToGraySuite 头文件">
-      <UniqueIdentifier>{abf7b4cf-189d-41bf-a144-d3c2c9ab1709}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BmpToTfSuite 头文件">
-      <UniqueIdentifier>{3765df6e-e459-41b3-843e-dec66ad0112e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FeaturesImporterSuite 头文件">
-      <UniqueIdentifier>{b7b4503c-9952-49bf-9b62-343ef300e2de}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FxCompilerSuite 头文件">
-      <UniqueIdentifier>{084eedcc-6692-42d5-ad5f-f72276814e8c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="HelperSuite 头文件">
       <UniqueIdentifier>{48c54ddb-b823-4570-bfdf-362f6ef2a1f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjectsSuite 头文件\ProjectGeneration">
+      <UniqueIdentifier>{d7777cfa-cacd-4bb5-a676-050ebaff1b1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenerateProjectsSuite 源文件\ProjectGeneration">
+      <UniqueIdentifier>{c0bcdf31-a78c-480a-a480-89339b86b19e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,11 +54,17 @@
     <None Include="Resource\Schedule.md">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="Configuration\StringReplacing.json">
+    <None Include="Configuration\GameParameter0.json">
       <Filter>配置</Filter>
     </None>
-    <None Include="Resource\GenerateProjectsSuite\GenerateProjects.json">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
+    <None Include="Configuration\GameParameter1.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\GameParameter.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\GameTestingParameter.json">
+      <Filter>配置</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -80,20 +77,44 @@
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateProjectsSuite.h">
       <Filter>GenerateProjectsSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\BmpColorToGraySuite\BmpColorToGraySuite.h">
-      <Filter>BmpColorToGraySuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\BmpToTfSuite\BmpToTfSuite.h">
-      <Filter>BmpToTfSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\FeaturesImporterSuite\FeaturesImporterSuite.h">
-      <Filter>FeaturesImporterSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\FxCompilerSuite\FxCompilerSuite.h">
-      <Filter>FxCompilerSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\HelperSuite\HelperSuite.h">
       <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GameModuleTesting.h">
+      <Filter>GenerateProjectsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\MiddleLayerModuleTesting.h">
+      <Filter>GenerateProjectsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GameParameterAnalysisTesting.h">
+      <Filter>GenerateProjectsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\ProjectGenerationTesting.h">
+      <Filter>GenerateProjectsSuite 头文件\ProjectGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\DefaultProjectGenerationTesting.h">
+      <Filter>GenerateProjectsSuite 头文件\ProjectGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\ReplaceProjectGenerationTesting.h">
+      <Filter>GenerateProjectsSuite 头文件\ProjectGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\Utf8ReplaceProjectGenerationTesting.h">
+      <Filter>GenerateProjectsSuite 头文件\ProjectGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\ClientProjectGenerationTesting.h">
+      <Filter>GenerateProjectsSuite 头文件\ProjectGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateEngineTesting.h">
+      <Filter>GenerateProjectsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ReplaceTesting.h">
+      <Filter>GenerateProjectsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingEngineTesting.h">
+      <Filter>GenerateProjectsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTesting.h">
+      <Filter>GenerateProjectsSuite 头文件\ProjectGeneration</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +126,42 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\TestingMain.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GameModuleTesting.cpp">
+      <Filter>GenerateProjectsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\MiddleLayerModuleTesting.cpp">
+      <Filter>GenerateProjectsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GameParameterAnalysisTesting.cpp">
+      <Filter>GenerateProjectsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\ProjectGenerationTesting.cpp">
+      <Filter>GenerateProjectsSuite 源文件\ProjectGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\ClientProjectGenerationTesting.cpp">
+      <Filter>GenerateProjectsSuite 源文件\ProjectGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\DefaultProjectGenerationTesting.cpp">
+      <Filter>GenerateProjectsSuite 源文件\ProjectGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\ReplaceProjectGenerationTesting.cpp">
+      <Filter>GenerateProjectsSuite 源文件\ProjectGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\Utf8ReplaceProjectGenerationTesting.cpp">
+      <Filter>GenerateProjectsSuite 源文件\ProjectGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateEngineTesting.cpp">
+      <Filter>GenerateProjectsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ReplaceTesting.cpp">
+      <Filter>GenerateProjectsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingEngineTesting.cpp">
+      <Filter>GenerateProjectsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTesting.cpp">
+      <Filter>GenerateProjectsSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,15 +194,6 @@
     </Text>
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\ClangFormat.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\Gitignore.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\ReadMeMd.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
     </Text>
   </ItemGroup>
 </Project>

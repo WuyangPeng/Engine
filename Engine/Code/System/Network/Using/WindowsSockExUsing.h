@@ -11,6 +11,7 @@
 #define SYSTEM_NETWORK_WINDOWS_SOCK_EX_USING_H
 
 #include "System/Helper/Platform.h"
+#include "System/Threading/Using/ThreadUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
@@ -154,7 +155,7 @@ namespace System
         uint32_t dwServiceFlags3;
         uint32_t dwServiceFlags4;
         uint32_t dwProviderFlags;
-        SystemGUID ProviderId;
+        SystemGloballyUniqueIdentifier ProviderId;
         uint32_t dwCatalogEntryId;
         SocketProtocolChain ProtocolChain;
         int iVersion;
@@ -203,7 +204,7 @@ namespace System
     using SocketMsgPtr = SocketMsg*;
     using SocketGroup = unsigned int;
 
-    using SocketGuidPtr = SystemGUID*;
+    using SocketGuidPtr = SystemGloballyUniqueIdentifier*;
 
     enum SocketEComparator
     {
@@ -323,7 +324,7 @@ namespace System
 
     struct SocketNamespaceInfo
     {
-        SystemGUID NSProviderId;
+        SystemGloballyUniqueIdentifier NSProviderId;
         uint32_t dwNameSpace;
         int fActive;
         uint32_t dwVersion;
@@ -333,7 +334,7 @@ namespace System
 
     struct SocketNamespaceInfoEx
     {
-        SystemGUID NSProviderId;
+        SystemGloballyUniqueIdentifier NSProviderId;
         uint32_t dwNameSpace;
         int fActive;
         uint32_t dwVersion;

@@ -1,6 +1,0 @@
-$Copyright$
-
-#ifndef $ModuleUppercase$_CORE_TESTING_H
-#define $ModuleUppercase$_CORE_TESTING_H
-
-#endif  // $ModuleUppercase$_CORE_TESTING_H

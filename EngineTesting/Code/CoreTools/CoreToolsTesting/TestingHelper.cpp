@@ -5,18 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 15:21)
+///	版本：1.0.0.0 (2023/11/08 12:39)
 
 #include "Testing.h"
 #include "TestingHelper.h"
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 
-using namespace std::literals;
-
 CoreTools::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "核心工具库"s }
+    : ParentType{ argc, argv, "核心工具库" }
 {
     InitSuite();
 
@@ -274,6 +272,7 @@ void CoreTools::TestingHelper::AddCharacterStringSuite()
     ADD_TEST(characterStringSuite, FormatErrorMessageTesting);
     characterStringSuite.AddSuite(GetCaseInsensitiveStringSuite());
     ADD_TEST(characterStringSuite, StringUtilityTesting);
+    characterStringSuite.AddSuite(GetCodeMappingSuite());
 
     AddSuite(characterStringSuite);
 }
@@ -286,6 +285,16 @@ CoreTools::Suite CoreTools::TestingHelper::GetCaseInsensitiveStringSuite()
     ADD_TEST(caseInsensitiveStringSuite, CaseInsensitiveStringIOStreamTesting);
 
     return caseInsensitiveStringSuite;
+}
+
+CoreTools::Suite CoreTools::TestingHelper::GetCodeMappingSuite()
+{
+    auto codeMappingSuite = GenerateSuite("代码映射");
+
+    ADD_TEST(codeMappingSuite, CodeMappingTesting);
+    ADD_TEST(codeMappingSuite, CodeMappingAnalysisTesting);
+
+    return codeMappingSuite;
 }
 
 void CoreTools::TestingHelper::AddExceptionSuite()

@@ -1,17 +1,32 @@
 @ingroup group_Documentation
 
-Threading Core Render Engine 1.0.0.0
+Threading Core Render Engine 1.0.0.1
 
 ----------------------------
 更新日志
 ----------------------------
-1.0.0.0（2023/11/08——2023/11/30）
+1.0.0.1（2023/11/20——2023/12/31）
+
+	完成功能： 
+	（引擎）	
+	+ 运行GameClient工程。@	
+	+ GameClient背景擦除。@	
+	+ GameClient显示一张图片。@
+	+ linux系统通过编译。@		
+	
+	（历史）
+	+ 工程生成增加工具组。@	
+	+ MillenniumHistory工程创建。@
+	
+----------------------------
+1.0.0.0（2023/11/08——2023/11/19）
 
 	完成功能： 
 	（引擎）
-	+ RiseOfHistory工程创建。@
-	
-	（历史） 
-	+ MillenniumHistory工程创建。@
+	+ 修改CodeMappingAnalysis支持utf8。
+	+ 优化ProjectGeneration的性能。
+	+ GenerateProjects补全单元测试。
+	+ GenerateProjects工具生成。
+	+ RiseOfHistory工程创建。
 	
 ----------------------------

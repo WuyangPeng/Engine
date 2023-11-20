@@ -5,18 +5,22 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/23 10:25)
+///	版本：1.0.0.0 (2023/11/08 10:38)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CodeMappingAnalysisImpl.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/LogMacro.h"
 
-using namespace std::literals;
+CoreTools::CodeMappingAnalysisImpl::CodeMappingAnalysisImpl(const std::wstring& fileName)
+    : CodeMappingAnalysisImpl{ StringConversion::WideCharConversionMultiByte(fileName) }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+}
 
-CoreTools::CodeMappingAnalysisImpl::CodeMappingAnalysisImpl(String fileName)
+CoreTools::CodeMappingAnalysisImpl::CodeMappingAnalysisImpl(std::string fileName)
     : fileName{ std::move(fileName) }, codeMapping{ CodeMapping::Create() }, mainTree{}
 {
     Analysis();
@@ -32,25 +36,45 @@ void CoreTools::CodeMappingAnalysisImpl::Analysis()
 
 void CoreTools::CodeMappingAnalysisImpl::AnalysisJson()
 {
-    IFStreamManager stream{ fileName };
-    stream.SetSimplifiedChinese();
-
-    read_json(stream.GetFileStream(), mainTree);
+    read_json(fileName, mainTree);
 }
 
 void CoreTools::CodeMappingAnalysisImpl::AnalysisMain()
 {
-    for (const auto& tree : mainTree)
+    for (const auto& [codeKey, element] : mainTree)
     {
-        try
-        {
-            codeMapping.Insert(tree.first, tree.second.get_value<String>());
-        }
-        catch (const Error& error)
-        {
-            LOG_SINGLETON_ENGINE_APPENDER(Error, Database, SYSTEM_TEXT("数据库映射类："), tree.first, SYSTEM_TEXT("配置值错误："), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
-        }
+        AnalysisMain(codeKey, element);
     }
+}
+
+void CoreTools::CodeMappingAnalysisImpl::AnalysisMain(const std::string& codeKey, const BasicTree& element)
+{
+    try
+    {
+        InsertElement(codeKey, element);
+    }
+    catch (const Error& error)
+    {
+        PrintErrorLog(codeKey, error);
+    }
+}
+
+void CoreTools::CodeMappingAnalysisImpl::InsertElement(const std::string& codeKey, const BasicTree& element)
+{
+    codeMapping.Insert(StringConversion::Utf8ConversionStandard(codeKey),
+                       StringConversion::Utf8ConversionStandard(element.get_value<std::string>()));
+}
+
+void CoreTools::CodeMappingAnalysisImpl::PrintErrorLog(const std::string& codeKey, const Error& error) noexcept
+{
+    LOG_SINGLETON_ENGINE_APPENDER(Error,
+                                  CoreTools,
+                                  SYSTEM_TEXT("映射键值："),
+                                  codeKey,
+                                  SYSTEM_TEXT("，错误："),
+                                  error,
+                                  SYSTEM_TEXT("。"),
+                                  CoreTools::LogAppenderIOManageSign::TriggerAssert);
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CodeMappingAnalysisImpl)
@@ -59,7 +83,5 @@ System::String CoreTools::CodeMappingAnalysisImpl::GetElement(const String& code
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto result = codeMapping.GetElement(codeKey);
-
-    return result;
+    return codeMapping.GetElement(codeKey);
 }

@@ -174,6 +174,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "../../../.gitignore" "../../../Code/AssistTools/GenerateProjects/Template/Gitignore.txt" /F /Y
+xcopy "../../../.gitignore" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/Gitignore.txt" /F /Y
+xcopy "../../../.clang-format" "../../../Code/AssistTools/GenerateProjects/Template/ClangFormat.txt" /F /Y
+xcopy "../../../.clang-format" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/ClangFormat.txt" /F /Y
+xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProjects/Template/Bat/DelDoxygenFileBat.txt" /F /Y
+xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/Bat/DelDoxygenFileBat.txt" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <ClCompile>
@@ -185,6 +193,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "../../../.gitignore" "../../../Code/AssistTools/GenerateProjects/Template/Gitignore.txt" /F /Y
+xcopy "../../../.gitignore" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/Gitignore.txt" /F /Y
+xcopy "../../../.clang-format" "../../../Code/AssistTools/GenerateProjects/Template/ClangFormat.txt" /F /Y
+xcopy "../../../.clang-format" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/ClangFormat.txt" /F /Y
+xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProjects/Template/Bat/DelDoxygenFileBat.txt" /F /Y
+xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/Bat/DelDoxygenFileBat.txt" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -200,6 +216,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "../../../.gitignore" "../../../Code/AssistTools/GenerateProjects/Template/Gitignore.txt" /F /Y
+xcopy "../../../.gitignore" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/Gitignore.txt" /F /Y
+xcopy "../../../.clang-format" "../../../Code/AssistTools/GenerateProjects/Template/ClangFormat.txt" /F /Y
+xcopy "../../../.clang-format" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/ClangFormat.txt" /F /Y
+xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProjects/Template/Bat/DelDoxygenFileBat.txt" /F /Y
+xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/Bat/DelDoxygenFileBat.txt" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <ClCompile>
@@ -215,6 +239,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "../../../.gitignore" "../../../Code/AssistTools/GenerateProjects/Template/Gitignore.txt" /F /Y
+xcopy "../../../.gitignore" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/Gitignore.txt" /F /Y
+xcopy "../../../.clang-format" "../../../Code/AssistTools/GenerateProjects/Template/ClangFormat.txt" /F /Y
+xcopy "../../../.clang-format" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/ClangFormat.txt" /F /Y
+xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProjects/Template/Bat/DelDoxygenFileBat.txt" /F /Y
+xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/Bat/DelDoxygenFileBat.txt" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -226,6 +258,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "../../../.gitignore" "../../../Code/AssistTools/GenerateProjects/Template/Gitignore.txt" /F /Y
+xcopy "../../../.gitignore" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/Gitignore.txt" /F /Y
+xcopy "../../../.clang-format" "../../../Code/AssistTools/GenerateProjects/Template/ClangFormat.txt" /F /Y
+xcopy "../../../.clang-format" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/ClangFormat.txt" /F /Y
+xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProjects/Template/Bat/DelDoxygenFileBat.txt" /F /Y
+xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/Bat/DelDoxygenFileBat.txt" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <ClCompile>
@@ -237,6 +277,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "../../../.gitignore" "../../../Code/AssistTools/GenerateProjects/Template/Gitignore.txt" /F /Y
+xcopy "../../../.gitignore" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/Gitignore.txt" /F /Y
+xcopy "../../../.clang-format" "../../../Code/AssistTools/GenerateProjects/Template/ClangFormat.txt" /F /Y
+xcopy "../../../.clang-format" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/ClangFormat.txt" /F /Y
+xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProjects/Template/Bat/DelDoxygenFileBat.txt" /F /Y
+xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/Bat/DelDoxygenFileBat.txt" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -252,6 +300,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "../../../.gitignore" "../../../Code/AssistTools/GenerateProjects/Template/Gitignore.txt" /F /Y
+xcopy "../../../.gitignore" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/Gitignore.txt" /F /Y
+xcopy "../../../.clang-format" "../../../Code/AssistTools/GenerateProjects/Template/ClangFormat.txt" /F /Y
+xcopy "../../../.clang-format" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/ClangFormat.txt" /F /Y
+xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProjects/Template/Bat/DelDoxygenFileBat.txt" /F /Y
+xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/Bat/DelDoxygenFileBat.txt" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <ClCompile>
@@ -267,27 +323,48 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "../../../.gitignore" "../../../Code/AssistTools/GenerateProjects/Template/Gitignore.txt" /F /Y
+xcopy "../../../.gitignore" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/Gitignore.txt" /F /Y
+xcopy "../../../.clang-format" "../../../Code/AssistTools/GenerateProjects/Template/ClangFormat.txt" /F /Y
+xcopy "../../../.clang-format" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/ClangFormat.txt" /F /Y
+xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProjects/Template/Bat/DelDoxygenFileBat.txt" /F /Y
+xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProjects/TestingTemplate/Bat/DelDoxygenFileBat.txt" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\AssistTools\DllLib.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\DllMain.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ClientProjectGeneration.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\CodeModuleTestingGenerate.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\DefaultProjectGeneration.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GameModuleImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GameParameter.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GameParameterAnalysisImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\CodeModuleGenerate.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateDirectory.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateEngineBase.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateFile.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateEngineImpl.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingEngineImpl.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\MiddleLayerModuleImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ModuleGenerate.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ProjectGenerationFactory.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ProjectGenerationImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ProjectGenerationReplace.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ReplaceImpl.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ReplaceProjectGeneration.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\Utf8ReplaceProjectGeneration.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\WindowsProjectModuleGenerate.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\WindowsProjectModuleTestingGenerate.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Flags\ProjectGenerationType.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GameModule.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GameParameterAnalysis.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateEngine.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingEngine.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\MiddleLayerModule.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\ProjectGeneration.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Replace.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\AssistTools\AssistTools.h" />
@@ -297,27 +374,33 @@
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsImport.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsLib.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsNoImport.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\BmpColorToGray.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\BmpColorToGrayFwd.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\BmpToWmtf.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\BmpToWmtfFwd.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\DllLib.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\FeaturesImporter.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\FeaturesImporterFwd.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\FxCompiler\FxCompiler.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\FxCompiler\FxCompilerFwd.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ClientProjectGeneration.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\CodeModuleTestingGenerate.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\DefaultProjectGeneration.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GameModuleImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GameParameter.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GameParameterAnalysisImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\CodeModuleGenerate.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateDirectory.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateEngineBase.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateEngineBaseDetail.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateFile.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateEngineImpl.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingEngineImpl.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\MiddleLayerModuleImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ModuleGenerate.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ProjectGenerationFactory.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ProjectGenerationImpl.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ProjectGenerationReplace.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ReplaceImpl.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ReplaceProjectGeneration.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\Utf8ReplaceProjectGeneration.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\WindowsProjectModuleGenerate.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\WindowsProjectModuleTestingGenerate.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Flags\GameParameterType.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Flags\ProjectGenerationType.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Flags\ProjectServiceType.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GameModule.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GameParameterAnalysis.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateEngine.h" />
@@ -327,6 +410,10 @@
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingEngine.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\MiddleLayerModule.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\ProjectGeneration.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Replace.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Using\GameParameterUsing.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Using\GenerateEngineUsing.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Using\ProjectGenerationUsing.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\Helper\Helper.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\Helper\HelperFwd.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\Helper\UserMacro.h" />

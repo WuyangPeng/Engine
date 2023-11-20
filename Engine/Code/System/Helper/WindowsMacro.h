@@ -137,7 +137,7 @@ namespace System
         constexpr WindowsWord makeWordShift{ 8 };
         constexpr WindowsWord makeWordMask{ (1 << makeWordShift) - 1 };
 
-        return static_cast<WindowsWord>(static_cast<WindowsByte>(low & makeWordMask) | static_cast<WindowWord>(static_cast<WindowsByte>(high & makeWordMask)) << makeWordShift);
+        return static_cast<WindowsWord>(static_cast<WindowsByte>(low & makeWordMask) | static_cast<WindowsWord>(static_cast<WindowsByte>(high & makeWordMask)) << makeWordShift);
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }

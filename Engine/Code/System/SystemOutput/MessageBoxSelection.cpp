@@ -10,10 +10,12 @@
 #include "System/SystemExport.h"
 
 #include "MessageBoxSelection.h"
+#include "Flags/DialogBoxCommandFlags.h"
 #include "Flags/MessageBoxFlags.h"
 #include "Data/LanguageIdData.h"
 #include "Data/MessageBoxFlagsData.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 
 namespace System
 {

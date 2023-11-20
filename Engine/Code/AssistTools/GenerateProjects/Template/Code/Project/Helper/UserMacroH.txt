@@ -13,8 +13,8 @@ $Copyright$
 
 #define CLOSE_$ProjectCapital$_MAX (($ProjectCapital$_ClOSE_END << 1) - 1)
 
-// 编译测试（默认为0，最大值为0x01）
-#define COMPILE_$ProjectCapital$_CLOSE 0x00
+// 编译测试（默认为0B0000，最大值为0B0001）
+#define COMPILE_$ProjectCapital$_CLOSE 0B0000
 
 static_assert(0 <= COMPILE_$ProjectCapital$_CLOSE, "COMPILE_$ProjectCapital$_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_$ProjectCapital$_CLOSE <= CLOSE_$ProjectCapital$_MAX, "COMPILE_$ProjectCapital$_CLOSE Must be less than or equal CLOSE_$ProjectCapital$_MAX.");

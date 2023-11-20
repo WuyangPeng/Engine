@@ -505,6 +505,12 @@
     <Filter Include="资源文件\CSVEngineering">
       <UniqueIdentifier>{c92435d0-b19c-4532-b17b-195b77f4a5ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CharacterStringSuite 头文件\CodeMapping">
+      <UniqueIdentifier>{b335381b-a964-4368-8db6-d5e0c329bd23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CharacterStringSuite 源文件\CodeMapping">
+      <UniqueIdentifier>{ab320bbc-e705-434e-8b88-806cd06673e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\BaseSuite.h">
@@ -1965,6 +1971,12 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\ContainerAdapterTestingDetail.h">
       <Filter>MemoryToolsSuite 模板文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CodeMapping\CodeMappingAnalysisTesting.h">
+      <Filter>CharacterStringSuite 头文件\CodeMapping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CodeMapping\CodeMappingTesting.h">
+      <Filter>CharacterStringSuite 头文件\CodeMapping</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp">
@@ -3220,6 +3232,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureLoadingTesting.cpp">
       <Filter>TextParsingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CodeMapping\CodeMappingAnalysisTesting.cpp">
+      <Filter>CharacterStringSuite 源文件\CodeMapping</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CodeMapping\CodeMappingTesting.cpp">
+      <Filter>CharacterStringSuite 源文件\CodeMapping</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -11,7 +11,8 @@
 
 #include "OpenGLWglPrototypes.h"
 #include "Detail/WglExtensions.h"
-#include "System/Helper/WindowsMacro.h" 
+#include "System/Helper/Tools.h"
+#include "System/Helper/WindowsMacro.h"
 
 bool System::IsWglSwapInterval(int interval) noexcept
 {

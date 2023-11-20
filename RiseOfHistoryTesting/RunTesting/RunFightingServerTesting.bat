@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %RiseOfHistoryTestingWin32DebugLib% FightingServerTestingD.exe
+start /d %RiseOfHistoryTestingWin32ReleaseLib% FightingServerTesting.exe
+start /d %RiseOfHistoryTestingX64DebugLib% FightingServerTestingD.exe
+start /d %RiseOfHistoryTestingX64ReleaseLib% FightingServerTesting.exe
+start /d %RiseOfHistoryTestingStaticWin32DebugLib% FightingServerTestingStaticD.exe
+start /d %RiseOfHistoryTestingStaticWin32ReleaseLib% FightingServerTestingStatic.exe
+start /d %RiseOfHistoryTestingStaticX64DebugLib% FightingServerTestingStaticD.exe
+start /d %RiseOfHistoryTestingStaticX64ReleaseLib% FightingServerTestingStatic.exe
+
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicWin32DebugLib% FightingServerTestingStaticD.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicWin32ReleaseLib% FightingServerTestingStatic.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicX64DebugLib% FightingServerTestingStaticD.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicX64ReleaseLib% FightingServerTestingStatic.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticWin32DebugLib% FightingServerTestingD.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticWin32ReleaseLib% FightingServerTesting.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticX64DebugLib% FightingServerTestingD.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticX64ReleaseLib% FightingServerTesting.exe
+
+pause

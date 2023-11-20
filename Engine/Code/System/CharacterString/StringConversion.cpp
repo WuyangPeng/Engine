@@ -71,7 +71,7 @@ namespace System
     }
 
     template <typename T>
-    NODISCARD ComparesStringReturn Compares(const T& lhs, const T& rhs)
+    NODISCARD ComparesStringReturn StringCompares(const T& lhs, const T& rhs)
     {
         if (lhs < rhs)
             return ComparesStringReturn::LessThan;
@@ -179,7 +179,7 @@ System::ComparesStringReturn System::CompareStringUseLocale(LanguageLocale local
 
     UnusedFunction(locale, compares);
 
-    return Compares(lhsString, rhsString);
+    return StringCompares(lhsString, rhsString);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -197,7 +197,7 @@ System::ComparesStringReturn System::CompareStringUseLocale(const wchar_t* local
 
     UnusedFunction(localeName, compares);
 
-    return Compares(lhsString, rhsString);
+    return StringCompares(lhsString, rhsString);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -214,7 +214,7 @@ System::ComparesStringReturn System::CompareStringOrdinalUseBinary(const std::ws
 
     UnusedFunction(ignoreCase);
 
-    return Compares(lhsString, rhsString);
+    return StringCompares(lhsString, rhsString);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

@@ -10,6 +10,9 @@
 #ifndef SYSTEM_SECURITY_SECURITY_BASE_USING_H
 #define SYSTEM_SECURITY_SECURITY_BASE_USING_H
 
+#include "AccessCheckUsing.h"
+#include "SecurityAclUsing.h"
+#include "SecuritySidUsing.h"
 #include "System/Helper/Platform.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
@@ -17,6 +20,8 @@ namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
+    using SecurityImpersonationLevel = SECURITY_IMPERSONATION_LEVEL;
+    using SecurityImpersonationLevelPtr = PSECURITY_IMPERSONATION_LEVEL;
     using WindowSecurityAttributes = SECURITY_ATTRIBUTES;
     using WindowSecurityAttributesPtr = LPSECURITY_ATTRIBUTES;
     using SecuritySidAndAttributes = SID_AND_ATTRIBUTES;
@@ -64,12 +69,19 @@ namespace System
     using SecurityTokenOriginPtr = PTOKEN_ORIGIN;
     using SecurityTokenElevationType = TOKEN_ELEVATION_TYPE;
     using SecurityTokenElevationTypePtr = PTOKEN_ELEVATION_TYPE;
-    using SecurityImpersonationLevel = SECURITY_IMPERSONATION_LEVEL;
-    using SecurityImpersonationLevelPtr = PSECURITY_IMPERSONATION_LEVEL;
     using SecurityTokenAppContainerInformation = TOKEN_APPCONTAINER_INFORMATION;
     using SecurityTokenAppContainerInformationPtr = PTOKEN_APPCONTAINER_INFORMATION;
 
 #else  // !WIN32
+
+    enum SecurityImpersonationLevel
+    {
+        SecurityAnonymous,
+        SecurityIdentification,
+        SecurityImpersonation,
+        SecurityDelegation
+    };
+    using SecurityImpersonationLevelPtr = SecurityImpersonationLevel*;
 
     struct WindowSecurityAttributes
     {
@@ -294,15 +306,6 @@ namespace System
         TokenElevationTypeLimited,
     };
     using SecurityTokenElevationTypePtr = SecurityTokenElevationType*;
-
-    enum SecurityImpersonationLevel
-    {
-        SecurityAnonymous,
-        SecurityIdentification,
-        SecurityImpersonation,
-        SecurityDelegation
-    };
-    using SecurityImpersonationLevelPtr = SecurityImpersonationLevel*;
 
     struct SecurityTokenAppContainerInformation
     {

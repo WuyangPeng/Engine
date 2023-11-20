@@ -10,7 +10,9 @@
 #ifndef SYSTEM_SECURITY_ACCESS_CHECK_USING_H
 #define SYSTEM_SECURITY_ACCESS_CHECK_USING_H
 
+#include "LookupPrivilegeUsing.h"
 #include "System/Helper/Platform.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 namespace System
 {
@@ -45,7 +47,7 @@ namespace System
     {
         uint16_t Level;
         uint16_t Sbz;
-        SystemGUID* ObjectType;
+        SystemGloballyUniqueIdentifier* ObjectType;
     };
     using SecurityObjectTypeListPtr = SecurityObjectTypeList*;
 

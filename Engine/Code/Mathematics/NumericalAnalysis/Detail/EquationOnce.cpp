@@ -32,7 +32,7 @@ double Mathematics::EquationOnce::Substitution(double value) const noexcept
     return constant + value * once;
 }
 
-Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce::Substitution(const Imaginary& value) const
+Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce::Substitution(const Imaginary& value) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -44,7 +44,7 @@ double Mathematics::EquationOnce::SubstitutionTangent([[maybe_unused]] double so
     return once;
 }
 
-Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce::SubstitutionTangent([[maybe_unused]] const Imaginary& solution) const
+Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce::SubstitutionTangent([[maybe_unused]] const Imaginary& solution) const noexcept
 {
     return once;
 }

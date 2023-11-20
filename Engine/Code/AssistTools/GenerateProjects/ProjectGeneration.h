@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/16 14:20)
+///	版本：1.0.0.0 (2023/11/09 16:40)
 
 #ifndef ASSIST_TOOLS_GENERATE_PROJECTS_PROJECT_GENERATION_H
 #define ASSIST_TOOLS_GENERATE_PROJECTS_PROJECT_GENERATION_H
@@ -30,13 +30,13 @@ namespace AssistTools
         PERFORMANCE_UNSHARED_TYPE_DECLARE(ProjectGeneration);
 
         using String = System::String;
+        using ReplaceContainer = std::vector<Replace>;
         using CodeMappingAnalysis = CoreTools::CodeMappingAnalysis;
-        using ReplaceType = std::map<String, String>;
 
     public:
         ProjectGeneration(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis);
-        ProjectGeneration(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, bool isClient);
-        ProjectGeneration(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, const ReplaceType& replace);
+        ProjectGeneration(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, ProjectServiceType projectServiceType);
+        ProjectGeneration(ProjectGenerationType projectGenerationType, const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis, const ReplaceContainer& replace);
 
         CLASS_INVARIANT_DECLARE;
 

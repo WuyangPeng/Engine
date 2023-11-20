@@ -134,6 +134,6 @@
     "GUIProjectManagerTesting": 1,
     "InputProjectManagerTesting": 1,
     "ResourceProjectManagerTesting": 1,
-    "SystemProjectManagerTesting": 1
+    "SystemProjectManagerTesting": 0
   }
 }

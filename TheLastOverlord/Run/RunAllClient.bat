@@ -1,8 +1,8 @@
 @echo on
  
-call RunGameClient.bat
-call RunRobotClient.bat
-call RunMessageClient.bat
-call RunBackgroundClient.bat
+call RunAllGameClient.bat
+call RunAllRobotClient.bat
+call RunAllMessageClient.bat
+call RunAllBackgroundClient.bat
 
 pause

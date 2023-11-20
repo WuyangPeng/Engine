@@ -5,13 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 17:27)
+///	版本：1.0.0.0 (2023/11/08 12:40)
 
 #ifndef CORE_TOOLS_CHARACTER_STRING_SUITE_H
 #define CORE_TOOLS_CHARACTER_STRING_SUITE_H
 
 #include "CaseInsensitiveString/CaseInsensitiveStringIOStreamTesting.h"
 #include "CaseInsensitiveString/CaseInsensitiveStringTesting.h"
+#include "CodeMapping/CodeMappingAnalysisTesting.h"
+#include "CodeMapping/CodeMappingTesting.h"
 #include "FormatErrorMessageTesting.h"
 #include "StringConversionTesting.h"
 #include "StringUtilityTesting.h"

@@ -34,7 +34,7 @@ double Mathematics::EquationThrice::Substitution(double value) const noexcept
            thrice * value * value * value;
 }
 
-Mathematics::EquationThrice::Imaginary Mathematics::EquationThrice::Substitution(const Imaginary& value) const
+Mathematics::EquationThrice::Imaginary Mathematics::EquationThrice::Substitution(const Imaginary& value) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -50,7 +50,7 @@ double Mathematics::EquationThrice::SubstitutionTangent(double solution) const n
            MathD::Square(solution) * thrice * 3.0;
 }
 
-Mathematics::EquationThrice::Imaginary Mathematics::EquationThrice::SubstitutionTangent(const Imaginary& solution) const
+Mathematics::EquationThrice::Imaginary Mathematics::EquationThrice::SubstitutionTangent(const Imaginary& solution) const noexcept
 {
     return once +
            solution * secondary * 2.0 +

@@ -4,22 +4,18 @@
   },
 
   "generateProjectsSuite": {
-    
+    "GameModuleTesting": 1,
+    "MiddleLayerModuleTesting": 1,
+    "GameParameterAnalysisTesting": 1,
+    "ReplaceTesting": 1,
+    "GenerateEngineTesting": 1,
+    "GenerateTestingEngineTesting": 1
   },
 
-  "featuresImporterSuite": {
-
-  },
-
-  "bmpColorToGraySuite": {
-
-  },
-
-  "bmpToWmtfSuite": {
-
-  },
-
-  "wmfxCompilerSuite": {
-
+  "projectGenerationSuite": {
+    "DefaultProjectGenerationTesting": 1,
+    "ClientProjectGenerationTesting": 1,
+    "ReplaceProjectGenerationTesting": 1,
+    "Utf8ReplaceProjectGenerationTesting": 1
   }
 }
