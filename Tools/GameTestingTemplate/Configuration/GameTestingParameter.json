@@ -7,8 +7,8 @@
   "ProjectCapital": "RISE_OF_HISTORY_TESTING",
   "ProjectAbbreviation": "RHT",
   "EndYear": "2023",
-  "Version": "1.0.0.0",
-  "VersionNum": "1000000",
+  "Version": "1.0.0.1",
+  "VersionNum": "1000001",
   "TestingName": "RiseOfHistory",
 
   "Module": {
