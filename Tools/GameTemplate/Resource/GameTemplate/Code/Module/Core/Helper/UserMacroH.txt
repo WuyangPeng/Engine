@@ -13,8 +13,8 @@ $Copyright$
 
 #define CLOSE_$ModuleUppercase$_$CoreCapital$_MAX ((($ModuleUppercase$_$CoreCapital$_ClOSE_END) << 1) - 1)
 
-// 编译测试（默认为0，最大值为0x01）
-#define COMPILE_$ModuleUppercase$_$CoreCapital$_CLOSE 0x00
+// 编译测试（默认为0B0000，最大值为0B0001）
+#define COMPILE_$ModuleUppercase$_$CoreCapital$_CLOSE 0B0000
 
 static_assert(0 <= COMPILE_$ModuleUppercase$_$CoreCapital$_CLOSE, "COMPILE_$ModuleUppercase$_$CoreCapital$_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_$ModuleUppercase$_$CoreCapital$_CLOSE <= CLOSE_$ModuleUppercase$_$CoreCapital$_MAX, "COMPILE_$ModuleUppercase$_$CoreCapital$_CLOSE Must be less than or equal CLOSE_$ModuleUppercase$_$CoreCapital$_MAX.");

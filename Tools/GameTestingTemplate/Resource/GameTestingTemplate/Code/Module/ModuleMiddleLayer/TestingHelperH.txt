@@ -9,7 +9,7 @@ $Copyright$
 
 namespace $ModuleName$Testing
 {
-    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    class TestingHelper final : public CoreTools::CMainFunctionTestingHelper
     {
     public:
         using ClassType = TestingHelper;
