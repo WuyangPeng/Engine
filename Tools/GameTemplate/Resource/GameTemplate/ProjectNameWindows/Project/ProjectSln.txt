@@ -243,21 +243,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameMasterServer", "..\Game
 		{BAC623CE-4E9A-4C31-B087-D24AF61F1DA1} = {BAC623CE-4E9A-4C31-B087-D24AF61F1DA1}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServerManager", "ServerManager", "{F72EEAB7-1A78-4260-92B4-315ACC3E55F4}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerManagerCore", "..\ServerManager\ServerManagerCore\ServerManagerCore.vcxproj", "{401A3FE5-BE1A-47D4-A7DF-A754918F3508}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerManagerMiddleLayer", "..\ServerManager\ServerManagerMiddleLayer\ServerManagerMiddleLayer.vcxproj", "{4071B22A-798D-4424-9ADE-EDB01535E24F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{BAC623CE-4E9A-4C31-B087-D24AF61F1DA1} = {BAC623CE-4E9A-4C31-B087-D24AF61F1DA1}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerManager", "..\ServerManager\ServerManager\ServerManager.vcxproj", "{CC1BA504-EF1E-48D4-AB80-4917E84FBDFA}"
-	ProjectSection(ProjectDependencies) = postProject
-		{840EBA25-69D1-4A36-B6F3-6E0D280FAA46} = {840EBA25-69D1-4A36-B6F3-6E0D280FAA46}
-		{BAC623CE-4E9A-4C31-B087-D24AF61F1DA1} = {BAC623CE-4E9A-4C31-B087-D24AF61F1DA1}
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackgroundServer", "BackgroundServer", "{4038655D-6AF9-4F25-BCCC-EE5EA90A1D5C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BackgroundServerCore", "..\BackgroundServer\BackgroundServerCore\BackgroundServerCore.vcxproj", "{DA2E24EA-75AE-431A-B2DB-21203ADDBB23}"
@@ -302,6 +287,21 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DatabaseServer", "..\Databa
 		{1A3A4DA7-B88C-4CB3-AD5C-BD4B62032D3B} = {1A3A4DA7-B88C-4CB3-AD5C-BD4B62032D3B}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServerManager", "ServerManager", "{F72EEAB7-1A78-4260-92B4-315ACC3E55F4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerManagerCore", "..\ServerManager\ServerManagerCore\ServerManagerCore.vcxproj", "{401A3FE5-BE1A-47D4-A7DF-A754918F3508}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerManagerMiddleLayer", "..\ServerManager\ServerManagerMiddleLayer\ServerManagerMiddleLayer.vcxproj", "{4071B22A-798D-4424-9ADE-EDB01535E24F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BAC623CE-4E9A-4C31-B087-D24AF61F1DA1} = {BAC623CE-4E9A-4C31-B087-D24AF61F1DA1}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerManager", "..\ServerManager\ServerManager\ServerManager.vcxproj", "{CC1BA504-EF1E-48D4-AB80-4917E84FBDFA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{840EBA25-69D1-4A36-B6F3-6E0D280FAA46} = {840EBA25-69D1-4A36-B6F3-6E0D280FAA46}
+		{BAC623CE-4E9A-4C31-B087-D24AF61F1DA1} = {BAC623CE-4E9A-4C31-B087-D24AF61F1DA1}
+	EndProjectSection
+EndProject$ToolDirectory$$ToolProject$
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -2358,7 +2358,7 @@ Global
 		{A25238B4-5183-4597-A247-EF8E349945DF} = {D670936E-8B31-423D-8BD6-F309D0C37B75}
 		{A9203C6A-D6C8-4CA2-8AB2-7080BBAAD27F} = {A25238B4-5183-4597-A247-EF8E349945DF}
 		{1A3A4DA7-B88C-4CB3-AD5C-BD4B62032D3B} = {A25238B4-5183-4597-A247-EF8E349945DF}
-		{CDE32DAD-2533-417D-A7E2-B189226A7C11} = {A25238B4-5183-4597-A247-EF8E349945DF}
+		{CDE32DAD-2533-417D-A7E2-B189226A7C11} = {A25238B4-5183-4597-A247-EF8E349945DF}$ToolNestedProjects$
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B0D40FC-5825-42A0-9DA3-E4A564B9D706}

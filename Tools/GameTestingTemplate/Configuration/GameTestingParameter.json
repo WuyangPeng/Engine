@@ -1,15 +1,15 @@
 {
   "CoreName": "Core",
   "CoreCapital": "CORE",
-  "ProjectChineseName": "历史的崛起单元测试",
-  "ProjectDescribeName": "Rise Of History Testing",
-  "ProjectName": "RiseOfHistoryTesting",
-  "ProjectCapital": "RISE_OF_HISTORY_TESTING",
-  "ProjectAbbreviation": "RHT",
+  "ProjectChineseName": "千年史策单元测试",
+  "ProjectDescribeName": "Millennium History Testing",
+  "ProjectName": "MillenniumHistoryTesting",
+  "ProjectCapital": "MILLENNIUM_HISTORY_TESTING",
+  "ProjectAbbreviation": "MHT",
   "EndYear": "2023",
   "Version": "1.0.0.1",
   "VersionNum": "1000001",
-  "TestingName": "RiseOfHistory",
+  "TestingName": "MillenniumHistory",
 
   "Module": {
     "GameClient": {
@@ -131,6 +131,15 @@
       "ChineseName": "服务器管理者",
       "ProjectServiceType": 2,
       "Uppercase": "SERVER_MANAGER"
+    },
+
+    "DatabaseGenerate": {
+      "ChineseName": "数据库生成",
+      "Uppercase": "DATABASE_GENERATE",
+      "Guid0": "EEE47C56-4B7D-4B73-80DD-050F4F08A8BD",
+      "Guid1": "7491A880-90C3-467E-B424-4153A848B9D9",
+      "Guid2": "06551520-A364-4AFC-B988-5A93A6593718",
+      "Guid3": "53E2179F-8E4D-458C-84D4-031B9F991EEE"
     }
   },
 
