@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %MillenniumHistoryTestingWin32DebugLib% DatabaseGenerateTestingD.exe
+start /d %MillenniumHistoryTestingWin32ReleaseLib% DatabaseGenerateTesting.exe
+start /d %MillenniumHistoryTestingX64DebugLib% DatabaseGenerateTestingD.exe
+start /d %MillenniumHistoryTestingX64ReleaseLib% DatabaseGenerateTesting.exe
+start /d %MillenniumHistoryTestingStaticWin32DebugLib% DatabaseGenerateTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticWin32ReleaseLib% DatabaseGenerateTestingStatic.exe
+start /d %MillenniumHistoryTestingStaticX64DebugLib% DatabaseGenerateTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticX64ReleaseLib% DatabaseGenerateTestingStatic.exe
+
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32DebugLib% DatabaseGenerateTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32ReleaseLib% DatabaseGenerateTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64DebugLib% DatabaseGenerateTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64ReleaseLib% DatabaseGenerateTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32DebugLib% DatabaseGenerateTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32ReleaseLib% DatabaseGenerateTesting.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64DebugLib% DatabaseGenerateTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64ReleaseLib% DatabaseGenerateTesting.exe
+
+pause

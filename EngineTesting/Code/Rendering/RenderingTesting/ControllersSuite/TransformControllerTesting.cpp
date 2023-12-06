@@ -20,7 +20,7 @@
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/Controllers/TransformController.h"
-#include "Rendering/DataTypes/Transform.h"
+#include "Mathematics/Algebra/Transform.h"
 #include "Rendering/RenderingTesting/SceneGraphSuite/SpatialTest.h"
 
 Rendering::TransformControllerTesting::TransformControllerTesting(const OStreamShared& stream)

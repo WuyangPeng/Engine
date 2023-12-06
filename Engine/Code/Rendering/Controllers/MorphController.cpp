@@ -31,7 +31,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, MorphController);
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, MorphController)
 
 Rendering::MorphController::MorphController(int numVertices, int numTargets, int numKeys, const BaseRendererSharedPtr& baseRenderer)
-    : ParentType{ CoreTools::DisableNotThrow::Disable }, impl{ numVertices, numTargets, numKeys, baseRenderer }
+    : ParentType{ "MorphController" }, impl{ numVertices, numTargets, numKeys, baseRenderer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -91,7 +91,7 @@ bool Rendering::MorphController::Update(double applicationTime)
     if (ParentType::Update(applicationTime))
     {
         // 访问该顶点缓冲器来存储混合目标。
-        const auto visual = boost::polymorphic_pointer_cast<Visual>(GetControllerObject());
+        const auto visual = boost::polymorphic_pointer_cast<Visual>(GetController());
 
         return impl->Update(GetControlTime(applicationTime), *visual);
     }
@@ -99,7 +99,7 @@ bool Rendering::MorphController::Update(double applicationTime)
     return false;
 }
 
-void Rendering::MorphController::SetControllerObject(const ControllerInterfaceSharedPtr& object)
+void Rendering::MorphController::SetController(const ControllerSharedPtr& object)
 {
     RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::GetCurrentRttiType()), "无效类\n");
@@ -108,7 +108,7 @@ void Rendering::MorphController::SetControllerObject(const ControllerInterfaceSh
 
     impl->SetControllerObject(*visual);
 
-    ParentType::SetControllerObject(object);
+    ParentType::SetController(object);
 }
 
 Rendering::ControllerInterfaceSharedPtr Rendering::MorphController::Clone() const

@@ -2,7 +2,7 @@
 
 echo MillenniumHistoryTestingInclude = %MillenniumHistoryTestingInclude%
 echo %cd%
-setx MillenniumHistoryTestingInclude "%cd%\..\Code"
+setx MillenniumHistoryTestingInclude "%cd%\..\Code" 
 
 echo MillenniumHistoryTestingEngineering = %MillenniumHistoryTestingEngineering%
 echo %cd%
@@ -71,6 +71,5 @@ setx MillenniumHistoryTestingEngineStaticGameDynamicX64DebugLib "%cd%\..\x64\Eng
 echo MillenniumHistoryTestingEngineStaticGameDynamicX64ReleaseLib = %MillenniumHistoryTestingEngineStaticGameDynamicX64ReleaseLib%
 echo %cd%
 setx MillenniumHistoryTestingEngineStaticGameDynamicX64ReleaseLib "%cd%\..\x64\EngineStaticReleaseWindows" 
-
 
 pause

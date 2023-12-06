@@ -16,7 +16,7 @@
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
-#include "Rendering/DataTypes/Transform.h"
+#include "Mathematics/Algebra/Transform.h"
 
 #include <random>
 

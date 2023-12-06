@@ -121,14 +121,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameMasterServerCoreTesting
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameMasterServerMiddleLayerTesting", "..\GameMasterServerTesting\GameMasterServerMiddleLayerTesting\GameMasterServerMiddleLayerTesting.vcxproj", "{C5D9B695-DEE0-499C-900A-CEBCEB20C4EF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServerManager", "ServerManager", "{DF73334B-E16E-4BB4-ABAF-2616E46A8D46}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerManagerTesting", "..\ServerManagerTesting\ServerManagerTesting\ServerManagerTesting.vcxproj", "{95B8DC79-4274-40C1-84CC-4F40235E268F}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerManagerCoreTesting", "..\ServerManagerTesting\ServerManagerCoreTesting\ServerManagerCoreTesting.vcxproj", "{C31EA5E5-9F72-4052-9ADD-1D8A88A06C4A}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerManagerMiddleLayerTesting", "..\ServerManagerTesting\ServerManagerMiddleLayerTesting\ServerManagerMiddleLayerTesting.vcxproj", "{62237952-F848-4CA8-9901-0E404C877820}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackgroundServer", "BackgroundServer", "{2D27EDF4-BE93-4BFF-8805-49A9B3390414}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BackgroundServerTesting", "..\BackgroundServerTesting\BackgroundServerTesting\BackgroundServerTesting.vcxproj", "{A2FA24E8-10B5-494F-A57F-EA5815863A92}"
@@ -169,6 +161,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MailServerMiddleLayerTestin
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MailServerTesting", "..\MailServerTesting\MailServerTesting\MailServerTesting.vcxproj", "{01D34BCE-1EEF-484C-BA36-2899E2238003}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServerManager", "ServerManager", "{DF73334B-E16E-4BB4-ABAF-2616E46A8D46}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerManagerTesting", "..\ServerManagerTesting\ServerManagerTesting\ServerManagerTesting.vcxproj", "{95B8DC79-4274-40C1-84CC-4F40235E268F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerManagerCoreTesting", "..\ServerManagerTesting\ServerManagerCoreTesting\ServerManagerCoreTesting.vcxproj", "{C31EA5E5-9F72-4052-9ADD-1D8A88A06C4A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerManagerMiddleLayerTesting", "..\ServerManagerTesting\ServerManagerMiddleLayerTesting\ServerManagerMiddleLayerTesting.vcxproj", "{62237952-F848-4CA8-9901-0E404C877820}"
+EndProject$ToolDirectory$$TestingToolProject$
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -2225,7 +2225,7 @@ Global
 		{CB919E67-079F-4400-BBED-94DE7B0CAEB8} = {DF23937F-1149-48F3-8B18-1CA6FBC4632F}
 		{31630494-5E42-4B42-B3D0-01F4A4C9BF19} = {29D93BD5-66AD-4B32-9A3A-326882B3437E}
 		{98F02C7D-4DF8-4567-8526-8856F6EA697D} = {29D93BD5-66AD-4B32-9A3A-326882B3437E}
-		{01D34BCE-1EEF-484C-BA36-2899E2238003} = {29D93BD5-66AD-4B32-9A3A-326882B3437E}
+		{01D34BCE-1EEF-484C-BA36-2899E2238003} = {29D93BD5-66AD-4B32-9A3A-326882B3437E}$ToolNestedProjects$
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B0D40FC-5825-42A0-9DA3-E4A564B9D706}

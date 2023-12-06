@@ -4,55 +4,55 @@
 千年史策工程
 
 ----------------------------
-MillenniumHistoryWindows.props：
-历史的崛起工程属性表
+MillenniumHistory.props：
+千年史策工程属性表
 
-MillenniumHistoryWindowsStaticWin32DebugLibs.props：
+MillenniumHistoryStaticWin32DebugLibs.props：
 引擎和游戏都编译成lib、Win32、Debug工程依赖库属性表
 
-MillenniumHistoryWindowsStaticWin32ReleaseLibs.props：
+MillenniumHistoryStaticWin32ReleaseLibs.props：
 引擎和游戏都编译成lib、Win32、Release工程依赖库属性表
 
-MillenniumHistoryWindowsStaticX64DebugLibs.props：
+MillenniumHistoryStaticX64DebugLibs.props：
 引擎和游戏都编译成lib、X64、Debug工程依赖库属性表
 
-MillenniumHistoryWindowsStaticX64ReleaseLibs.props：
+MillenniumHistoryStaticX64ReleaseLibs.props：
 引擎和游戏都编译成lib、X64、Release工程依赖库属性表
 
-MillenniumHistoryWindowsWin32DebugLibs.props：
+MillenniumHistoryWin32DebugLibs.props：
 引擎和游戏都编译成dll、Win32、Debug工程依赖库属性表
 
-MillenniumHistoryWindowsWin32ReleaseLibs.props：
+MillenniumHistoryWin32ReleaseLibs.props：
 引擎和游戏都编译成dll、Win32、Release工程依赖库属性表
 
-MillenniumHistoryWindowsX64DebugLibs.props：
+MillenniumHistoryX64DebugLibs.props：
 引擎和游戏都编译成dll、X64、Debug工程依赖库属性表
 
-MillenniumHistoryWindowsX64ReleaseLibs.props：
+MillenniumHistoryX64ReleaseLibs.props：
 引擎和游戏都编译成dll、X64、Release工程依赖库属性表
 
-MillenniumHistoryWindowsEngineDynamicMillenniumHistoryWindowsStaticWin32DebugLibs.props：
+MillenniumHistoryEngineDynamicMillenniumHistoryStaticWin32DebugLibs.props：
 引擎（dll）和游戏（lib）都编译成Win32、Debug工程依赖库属性表
 
-MillenniumHistoryWindowsEngineDynamicMillenniumHistoryWindowsStaticWin32ReleaseLibs.props：
+MillenniumHistoryEngineDynamicMillenniumHistoryStaticWin32ReleaseLibs.props：
 引擎（dll）和游戏（lib）都编译成Win32、Release工程依赖库属性表
 
-MillenniumHistoryWindowsEngineDynamicMillenniumHistoryWindowsStaticX64DebugLibs.props：
+MillenniumHistoryEngineDynamicMillenniumHistoryStaticX64DebugLibs.props：
 引擎（dll）和游戏（lib）都编译成X64、Debug工程依赖库属性表
 
-MillenniumHistoryWindowsEngineDynamicMillenniumHistoryWindowsStaticX64ReleaseLibs.props：
+MillenniumHistoryEngineDynamicMillenniumHistoryStaticX64ReleaseLibs.props：
 引擎（dll）和游戏（lib）都编译成X64、Release工程依赖库属性表
 
-MillenniumHistoryWindowsEngineStaticMillenniumHistoryWindowsDynamicWin32DebugLibs.props：
+MillenniumHistoryEngineStaticMillenniumHistoryDynamicWin32DebugLibs.props：
 引擎（lib）和游戏（dll）都编译成Win32、Debug工程依赖库属性表
 
-MillenniumHistoryWindowsEngineStaticMillenniumHistoryWindowsDynamicWin32ReleaseLibs.props：
+MillenniumHistoryEngineStaticMillenniumHistoryDynamicWin32ReleaseLibs.props：
 引擎（lib）和游戏（dll）都编译成Win32、Release工程依赖库属性表
 
-MillenniumHistoryWindowsEngineStaticMillenniumHistoryWindowsDynamicX64DebugLibs.props：
+MillenniumHistoryEngineStaticMillenniumHistoryDynamicX64DebugLibs.props：
 引擎（lib）和游戏（dll）都编译成X64、Debug工程依赖库属性表
 
-MillenniumHistoryWindowsEngineStaticMillenniumHistoryWindowsDynamicX64ReleaseLibs.props：
+MillenniumHistoryEngineStaticMillenniumHistoryDynamicX64ReleaseLibs.props：
 引擎（lib）和游戏（dll）都编译成X64、Release工程依赖库属性表
 
 ----------------------------

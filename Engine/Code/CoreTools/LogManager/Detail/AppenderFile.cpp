@@ -103,9 +103,19 @@ void CoreTools::AppenderFile::DoWrite(const LogMessage& message, const LogMessag
 
 bool CoreTools::AppenderFile::IsExceedMaxSize(const OFStreamManager& stream, PosType increaseSize) const
 {
+#if !defined(TCRE_USE_GCC)
+
     const auto fileSize = stream.GetStreamSize();
 
     return (maxFileSize < fileSize + increaseSize);
+
+#else  // defined(TCRE_USE_GCC)
+
+    const auto fileSize = stream.GetStreamSize();
+
+    return (maxFileSize < static_cast<int>(fileSize) + static_cast<int>(increaseSize));
+
+#endif  // !defined(TCRE_USE_GCC)
 }
 
 void CoreTools::AppenderFile::BackupFile(const String& fullName) const

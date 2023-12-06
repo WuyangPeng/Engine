@@ -11,13 +11,13 @@
 
 #include "PlanarShadowEffectImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "Mathematics/Algebra/PlaneDetail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
 #include "Mathematics/Algebra/Vector4Tools.h"
 #include "Rendering/GlobalEffects/LightProjector.h"
 #include "Rendering/LocalEffects/ConstantColorEffect.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Buffers/ConstantBufferDetail.h"
-#include "Rendering/SceneGraph/CullingPlane.h"
 #include "Rendering/SceneGraph/Node.h"
 #include "Rendering/SceneGraph/ProjectionViewWorldUpdater.h"
 #include "Rendering/Shaders/ProgramFactory.h"
@@ -285,8 +285,9 @@ bool Rendering::PlanarShadowEffectImpl::GetProjectionMatrix(int index, Matrix& p
     {
         wsTriangle.at(j) = result * msTriangle.at(j);
     }
-    CullingPlane<float> wPlane{ wsTriangle.at(0), wsTriangle.at(1), wsTriangle.at(2) };
-    wPlane.Normalize();
+    const Mathematics::Plane<float> wPlane{ Mathematics::APointF{ wsTriangle.at(0).GetX(), wsTriangle.at(0).GetY(), wsTriangle.at(0).GetZ() },
+                                            Mathematics::APointF{ wsTriangle.at(1).GetX(), wsTriangle.at(1).GetY(), wsTriangle.at(1).GetZ() },
+                                            Mathematics::APointF{ wsTriangle.at(2).GetX(), wsTriangle.at(2).GetY(), wsTriangle.at(2).GetZ() } };
 
     if (shadowCaster->GetWorldBound().WhichSide(wPlane) == Mathematics::NumericalValueSymbol::Negative)
     {
@@ -297,7 +298,7 @@ bool Rendering::PlanarShadowEffectImpl::GetProjectionMatrix(int index, Matrix& p
     const auto normal = wPlane.GetNormal();
     if (lightProjector->IsPointLight())
     {
-        const auto ndE = Mathematics::Vector4Tools<float>::DotProduct(normal, lightProjector->GetPosition());
+        const auto ndE = Dot(normal, Mathematics::AVectorF{ lightProjector->GetPosition().GetX(), lightProjector->GetPosition().GetY(), lightProjector->GetPosition().GetZ() });
         if (ndE <= 0.0f)
         {
             projectionMatrix = Matrix::GetIdentityMatrix();
@@ -311,7 +312,7 @@ bool Rendering::PlanarShadowEffectImpl::GetProjectionMatrix(int index, Matrix& p
     }
     else
     {
-        const auto ndD = Mathematics::Vector4Tools<float>::DotProduct(normal, lightProjector->GetDirection());
+        const auto ndD = Dot(normal, Mathematics::AVectorF{ lightProjector->GetPosition().GetX(), lightProjector->GetPosition().GetY(), lightProjector->GetPosition().GetZ() });
         if (ndD >= 0.0f)
         {
             projectionMatrix = Matrix::GetIdentityMatrix();

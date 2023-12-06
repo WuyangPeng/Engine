@@ -552,9 +552,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\TubeSurface.cpp">
       <Filter>CurvesSurfaces 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Bound.cpp">
-      <Filter>DataTypes 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\ColourConvertFrom.cpp">
       <Filter>DataTypes 源文件</Filter>
     </ClCompile>
@@ -571,9 +568,6 @@
       <Filter>DataTypes 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\TextureColour.cpp">
-      <Filter>DataTypes 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Transform.cpp">
       <Filter>DataTypes 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Utility.cpp">
@@ -952,9 +946,6 @@
       <Filter>RendererEngine 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Colour.cpp">
-      <Filter>DataTypes 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\TransformMatrix.cpp">
       <Filter>DataTypes 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualData.cpp">
@@ -1734,6 +1725,18 @@
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\NullProgramFactory.cpp">
       <Filter>Shaders 源文件\Detail</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\ProjectionMatrix.cpp">
+      <Filter>SceneGraph 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\ViewVolumeImpl.cpp">
+      <Filter>SceneGraph 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\ViewVolume.cpp">
+      <Filter>SceneGraph 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\PickLine.cpp">
+      <Filter>SceneGraph 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingLib.h">
@@ -1913,13 +1916,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\SurfacePatchFrame.h">
       <Filter>CurvesSurfaces 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Transform.h">
-      <Filter>DataTypes 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Utility.h">
-      <Filter>DataTypes 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Bound.h">
       <Filter>DataTypes 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Colour.h">
@@ -2560,21 +2557,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourAchieve.h">
       <Filter>DataTypes 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\BoundAchieve.h">
-      <Filter>DataTypes 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\BoundDetail.h">
-      <Filter>DataTypes 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformDetail.h">
-      <Filter>DataTypes 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformMatrixDetail.h">
-      <Filter>DataTypes 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformMatrix.h">
-      <Filter>DataTypes 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualData.h">
       <Filter>SceneGraph 头文件\Detail</Filter>
@@ -3437,9 +3419,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\LightProjector.h">
       <Filter>GlobalEffects 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\CullingPlane.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\PointLightEffect.h">
       <Filter>LocalEffects 头文件</Filter>
     </ClInclude>
@@ -3487,6 +3466,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\NullProgramFactory.h">
       <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\ProjectionMatrix.h">
+      <Filter>SceneGraph 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\ViewVolumeImpl.h">
+      <Filter>SceneGraph 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\ViewVolume.h">
+      <Filter>SceneGraph 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\PickLine.h">
+      <Filter>SceneGraph 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

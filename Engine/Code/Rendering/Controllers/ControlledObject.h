@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/24 11:14)
+/// 标准：std:c++20
+/// 版本：1.0.0.1 (2023/11/21 09:29)
 
 #ifndef RENDERING_CONTROLLERS_CONTROLLED_OBJECT_H
 #define RENDERING_CONTROLLERS_CONTROLLED_OBJECT_H
@@ -26,7 +26,7 @@ namespace Rendering
         using ParentType = ControllerInterface;
 
     public:
-        explicit ControlledObject(CoreTools::DisableNotThrow disableNotThrow);
+        explicit ControlledObject(const std::string& name);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -36,16 +36,11 @@ namespace Rendering
         NODISCARD bool Update(double applicationTime) override;
 
         NODISCARD int GetNumControllers() const override;
-        NODISCARD ConstControllerInterfaceSharedPtr GetConstController(int index) const;
-        NODISCARD ControllerInterfaceSharedPtr GetController(int index);
-        void AttachController(const ControllerInterfaceSharedPtr& controller) override;
-        void DetachController(const ControllerInterfaceSharedPtr& controller) override;
-        void DetachAllControllers();
-        NODISCARD bool UpdateControllers(double applicationTime);
-
-        NODISCARD ConstControllerInterfaceSharedPtr GetControllerObject() const override;
-        NODISCARD ControllerInterfaceSharedPtr GetControllerObject() override;
-        void SetControllerObject(const ControllerInterfaceSharedPtr& object) override;
+        NODISCARD ConstControllerSharedPtr GetConstController(int index) const override;
+        NODISCARD ControllerSharedPtr GetController(int index) override;
+        void AttachController(const ControllerSharedPtr& controller) override;
+        void DetachController(const ControllerSharedPtr& controller) override;
+        void DetachAllControllers() override;
 
     private:
         PackageType impl;

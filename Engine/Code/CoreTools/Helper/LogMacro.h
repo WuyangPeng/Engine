@@ -16,29 +16,62 @@
 #include "CoreTools/LogManager/Log.h"
 #include "CoreTools/LogManager/LogAppenderIOManager.h"
 #include "CoreTools/LogManager/LogFileName.h"
+#include "CoreTools/LogManager/LogFilterManager.h"
 #include "CoreTools/LogManager/LogHelperDetail.h"
+#include "CoreTools/LogManager/LogLevelManager.h"
 
-#define LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, functionDescribed, ...) \
-    const CoreTools::LogHelper SYSTEM_CONCATENATOR(logHelper, __LINE__)                             \
-    {                                                                                               \
-        SYSTEM_CONCATENATOR(CoreTools::LogLevel::, appender),                                       \
-            SYSTEM_CONCATENATOR(CoreTools::LogFilter::, filterType),                                \
-            functionDescribed,                                                                      \
-            __VA_ARGS__                                                                             \
-    }
+#ifdef SYSTEM_PLATFORM_WIN32
+
+    #define LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, functionDescribed, ...) \
+        const CoreTools::LogHelper SYSTEM_CONCATENATOR(logHelper, __LINE__)                             \
+        {                                                                                               \
+            SYSTEM_CONCATENATOR(CoreTools::LogLevel::, appender),                                       \
+                SYSTEM_CONCATENATOR(CoreTools::LogFilter::, filterType),                                \
+                functionDescribed,                                                                      \
+                __VA_ARGS__                                                                             \
+        }
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    #define LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, functionDescribed, ...) \
+        const CoreTools::LogHelper SYSTEM_CONCATENATOR(logHelper, __LINE__)                             \
+        {                                                                                               \
+            LogLevelManager::GetLogLevel(SYSTEM_STRINGIZE(appender)),                                   \
+                LogFilterManager::GetLogFilterType(SYSTEM_STRINGIZE(filterType)),                       \
+                functionDescribed,                                                                      \
+                __VA_ARGS__                                                                             \
+        }
+
+#endif  // SYSTEM_PLATFORM_WIN32
 
 #define LOG_SINGLETON_APPENDER(appender, filterType, ...) \
     LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, (CORE_TOOLS_FUNCTION_DESCRIBED), __VA_ARGS__)
 
-#define LOG_SINGLETON_FILE_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, functionDescribed, fileName, ...) \
-    const CoreTools::LogHelper SYSTEM_CONCATENATOR(logHelper, __LINE__)                                            \
-    {                                                                                                              \
-        CoreTools::LogFileName{ fileName },                                                                        \
-            SYSTEM_CONCATENATOR(CoreTools::LogLevel::, appender),                                                  \
-            SYSTEM_CONCATENATOR(CoreTools::LogFilter::, filterType),                                               \
-            functionDescribed,                                                                                     \
-            __VA_ARGS__                                                                                            \
-    }
+#ifdef SYSTEM_PLATFORM_WIN32
+
+    #define LOG_SINGLETON_FILE_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, functionDescribed, fileName, ...) \
+        const CoreTools::LogHelper SYSTEM_CONCATENATOR(logHelper, __LINE__)                                            \
+        {                                                                                                              \
+            CoreTools::LogFileName{ fileName },                                                                        \
+                SYSTEM_CONCATENATOR(CoreTools::LogLevel::, appender),                                                  \
+                SYSTEM_CONCATENATOR(CoreTools::LogFilter::, filterType),                                               \
+                functionDescribed,                                                                                     \
+                __VA_ARGS__                                                                                            \
+        }
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    #define LOG_SINGLETON_FILE_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, functionDescribed, fileName, ...) \
+        const CoreTools::LogHelper SYSTEM_CONCATENATOR(logHelper, __LINE__)                                            \
+        {                                                                                                              \
+            CoreTools::LogFileName{ fileName },                                                                        \
+                LogLevelManager::GetLogLevel(SYSTEM_STRINGIZE(appender)),                                              \
+                LogFilterManager::GetLogFilterType(SYSTEM_STRINGIZE(filterType)),                                      \
+                functionDescribed,                                                                                     \
+                __VA_ARGS__                                                                                            \
+        }
+
+#endif  // SYSTEM_PLATFORM_WIN32
 
 #define LOG_SINGLETON_FILE_APPENDER(appender, filterType, fileName, ...) \
     LOG_SINGLETON_FILE_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, (CORE_TOOLS_FUNCTION_DESCRIBED), fileName, __VA_ARGS__)

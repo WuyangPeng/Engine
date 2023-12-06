@@ -283,7 +283,7 @@ Real Mathematics::Math<Real>::Saturate(Real value) noexcept
 template <typename Real>
 bool Mathematics::Math<Real>::Approximate(Real lhs, Real rhs, const Real zeroTolerance) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(GetValue(0) <= zeroTolerance, "epsilon必须大于0！");
+    MATHEMATICS_ASSERTION_3(GetValue(0) <= zeroTolerance, "zeroTolerance必须大于0！");
 
     if (FAbs(lhs - rhs) <= zeroTolerance)
         return true;

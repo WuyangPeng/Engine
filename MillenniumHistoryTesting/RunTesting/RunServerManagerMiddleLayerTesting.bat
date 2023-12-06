@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %MillenniumHistoryTestingWin32DebugLib% ServerManagerMiddleLayerTestingD.exe
+start /d %MillenniumHistoryTestingWin32ReleaseLib% ServerManagerMiddleLayerTesting.exe
+start /d %MillenniumHistoryTestingX64DebugLib% ServerManagerMiddleLayerTestingD.exe
+start /d %MillenniumHistoryTestingX64ReleaseLib% ServerManagerMiddleLayerTesting.exe
+start /d %MillenniumHistoryTestingStaticWin32DebugLib% ServerManagerMiddleLayerTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticWin32ReleaseLib% ServerManagerMiddleLayerTestingStatic.exe
+start /d %MillenniumHistoryTestingStaticX64DebugLib% ServerManagerMiddleLayerTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticX64ReleaseLib% ServerManagerMiddleLayerTestingStatic.exe
+
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32DebugLib% ServerManagerMiddleLayerTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32ReleaseLib% ServerManagerMiddleLayerTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64DebugLib% ServerManagerMiddleLayerTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64ReleaseLib% ServerManagerMiddleLayerTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32DebugLib% ServerManagerMiddleLayerTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32ReleaseLib% ServerManagerMiddleLayerTesting.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64DebugLib% ServerManagerMiddleLayerTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64ReleaseLib% ServerManagerMiddleLayerTesting.exe
+
+pause

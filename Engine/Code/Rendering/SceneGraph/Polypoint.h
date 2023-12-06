@@ -37,7 +37,7 @@ namespace Rendering
         void SetNumPoints(int numPoints) noexcept;
         NODISCARD int GetNumPoints() const noexcept;
 
-        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ControllerSharedPtr Clone() const override;
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
     private:

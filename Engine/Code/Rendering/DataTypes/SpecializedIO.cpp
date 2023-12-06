@@ -10,78 +10,14 @@
 #include "Rendering/RenderingExport.h"
 
 #include "SpecializedIO.h"
-#include "TransformDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
 
 #include <array>
-
-template <>
-void CoreTools::BufferSource::ReadAggregate(Rendering::TransformF& datum)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    datum.ReadAggregate(*this);
-}
-
-template <>
-void CoreTools::BufferSource::ReadAggregate(Rendering::TransformD& datum)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    datum.ReadAggregate(*this);
-}
-
-template <>
-void CoreTools::BufferTarget::WriteAggregate(const Rendering::TransformF& datum)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    datum.WriteAggregate(*this);
-}
-
-template <>
-void CoreTools::BufferTarget::WriteAggregate(const Rendering::TransformD& datum)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    datum.WriteAggregate(*this);
-}
-
-template <>
-void CoreTools::BufferSource::ReadAggregate(Rendering::BoundF& datum)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    datum.ReadAggregate(*this);
-}
-
-template <>
-void CoreTools::BufferSource::ReadAggregate(Rendering::BoundD& datum)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    datum.ReadAggregate(*this);
-}
-
-template <>
-void CoreTools::BufferTarget::WriteAggregate(const Rendering::BoundF& datum)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    datum.WriteAggregate(*this);
-}
-
-template <>
-void CoreTools::BufferTarget::WriteAggregate(const Rendering::BoundD& datum)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    datum.WriteAggregate(*this);
-}
 
 template <>
 void CoreTools::BufferSource::ReadAggregate(Rendering::FloatColour& datum)

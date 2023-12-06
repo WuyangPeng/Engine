@@ -1,19 +1,20 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/12 15:30)
+/// 标准：std:c++20
+/// 版本：1.0.0.1 (2023/11/21 11:08)
 
 #ifndef RENDERING_SCENE_GRAPH_SUITE_H
 #define RENDERING_SCENE_GRAPH_SUITE_H
 
-#include "CameraFrustumDataTesting.h"
+#include "Camera/CameraFrustumDataTesting.h"
+#include "Camera/CameraTesting.h"
+#include "Camera/PickLineTesting.h"
 #include "CameraManageTesting.h"
 #include "CameraNodeTesting.h"
-#include "CameraTesting.h"
 #include "CullerTesting.h"
 #include "LightTesting.h"
 #include "MaterialTesting.h"
@@ -33,6 +34,10 @@
 #include "TrianglesFanTesting.h"
 #include "TrianglesMeshTesting.h"
 #include "TrianglesStripTesting.h"
+#include "ViewVolume/CameraFrustumTesting.h"
+#include "ViewVolume/ProjectionMatrixTesting.h"
+#include "ViewVolume/ViewVolumeTesting.h"
+#include "ViewVolume/WorldCoordinateFrameTesting.h"
 #include "VisibleSetTesting.h"
 #include "VisualTesting.h"
 

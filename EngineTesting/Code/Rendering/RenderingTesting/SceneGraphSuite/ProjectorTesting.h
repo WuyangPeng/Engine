@@ -29,8 +29,8 @@ namespace Rendering
         void MainTest();
         void FrameTest();
         void FrustumTest();
-        void ProjectionMatrixTest();
-        void AxesAlignBoundingBoxTest();
+        void ProjectionMatrixTest() noexcept;
+        void AxesAlignBoundingBoxTest() noexcept;
         void StreamTest() noexcept;
 
         void DoRunUnitTest() override;

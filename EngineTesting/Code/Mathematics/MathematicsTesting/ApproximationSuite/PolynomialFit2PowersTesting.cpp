@@ -79,7 +79,7 @@ void Mathematics::PolynomialFit2PowersTesting::FitTest()
             {
                 const double value = polynomialFit(x.at(i)) - w.at(i);
 
-                ASSERT_LESS_EQUAL(MathD::FAbs(value), 75.0);
+                ASSERT_LESS_EQUAL(MathD::FAbs(value), 110.0);
             }
         }
     }

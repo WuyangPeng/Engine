@@ -17,7 +17,7 @@
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
 #include "Mathematics/Algebra/Matrix.h"
-#include "Rendering/DataTypes/Transform.h"
+#include "Mathematics/Algebra/Transform.h"
 #include "Rendering/SceneGraph/Camera.h"
 
 namespace Rendering
@@ -60,7 +60,7 @@ namespace Rendering
         void SetCamera(const CameraSharedPtr& aCamera) noexcept;
         NODISCARD ConstCameraSharedPtr GetCamera() const noexcept;
 
-        NODISCARD TransformF GetLocalTransform() const;
+        NODISCARD Mathematics::TransformF GetLocalTransform() const;
 
         void SetFrame(const APoint& position, const AVector& directionVector, const AVector& upVector, const AVector& rightVector);
 

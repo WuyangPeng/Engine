@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	千年史策测试版本：0.9.0.12 (2023/06/13 22:39)
+/// 标准：std:c++20
+/// 版本：1.0.0.1 (2023/11/25 20:42)
 
 #include "EngineTesting.h"
 #include "System/Threading/Process.h"
@@ -17,34 +17,31 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using namespace std::literals;
-
-MillenniumHistory::EngineTesting::EngineTesting(const OStreamShared& stream)
-    : ParentType{ stream }, engineTestingName{ SYSTEM_TEXT("End"s) }
+MillenniumHistoryTesting::EngineTesting::EngineTesting(const OStreamShared& stream)
+    : ParentType{ stream }, engineTestingName{ SYSTEM_TEXT("End") }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(MillenniumHistory, EngineTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(MillenniumHistoryTesting, EngineTesting)
 
-void MillenniumHistory::EngineTesting::DoRunUnitTest()
+void MillenniumHistoryTesting::EngineTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void MillenniumHistory::EngineTesting::MainTest()
+void MillenniumHistoryTesting::EngineTesting::MainTest()
 {
     CoreTools::Directory directory{ System::GetEngineeringDirectory() };
 
-    const auto isStreamSharedFile = IsStreamSharedFile();
-
-    if (!isStreamSharedFile)
+    if (const auto isStreamSharedFile = IsStreamSharedFile();
+        !isStreamSharedFile)
     {
         ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(EngineTest);
     }
 }
 
-bool MillenniumHistory::EngineTesting::EngineTest()
+bool MillenniumHistoryTesting::EngineTesting::EngineTest()
 {
     engineTestingName.PrintSelect(GetStream());
 
@@ -53,7 +50,7 @@ bool MillenniumHistory::EngineTesting::EngineTest()
     return ExecuteEngineTesting(select);
 }
 
-bool MillenniumHistory::EngineTesting::ExecuteEngineTesting(int select)
+bool MillenniumHistoryTesting::EngineTesting::ExecuteEngineTesting(int select)
 {
     if (engineTestingName.IsSelectValid(select))
     {
@@ -67,7 +64,7 @@ bool MillenniumHistory::EngineTesting::ExecuteEngineTesting(int select)
     }
 }
 
-void MillenniumHistory::EngineTesting::ExecuteSelectEngineTesting(const String& engineeringName)
+void MillenniumHistoryTesting::EngineTesting::ExecuteSelectEngineTesting(const String& engineeringName)
 {
     GetStream() << "正在执行单元测试工程：" << CoreTools::StringConversion::StandardConversionMultiByte(engineeringName) << "\n";
 

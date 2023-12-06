@@ -198,6 +198,23 @@ namespace CoreTools
         }
     };
 
+    template <typename T, int Size>
+    requires(0 < Size)
+    struct StreamSize<std::array<T, Size>>
+    {
+        NODISCARD constexpr static int GetStreamSize(const std::array<T, Size>& value) noexcept
+        {
+            System::UnusedFunction(value);
+
+            return GetStreamSize();
+        }
+
+        NODISCARD constexpr static int GetStreamSize() noexcept
+        {
+            return StreamSize<T>::GetStreamSize(T{}) * Size;
+        }
+    };
+
     template <typename T>
     NODISCARD int GetStreamSize(const T& value = T{}) noexcept(noexcept(StreamSize<T>::GetStreamSize(value)))
     {

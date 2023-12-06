@@ -19,7 +19,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/RenderingTesting/ControllersSuite/ControllerTest.h"
+#include "Rendering/RenderingTesting/ControllersSuite/Detail/ControllerTest.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 
 Rendering::SpatialTesting::SpatialTesting(const OStreamShared& stream)

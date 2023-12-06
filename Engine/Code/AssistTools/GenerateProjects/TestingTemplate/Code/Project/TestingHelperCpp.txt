@@ -7,7 +7,7 @@ $Copyright$
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 
 $ProjectName$::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "最后的霸王测试" }
+    : ParentType{ argc, argv, "$ProjectChineseName$" }
 {
     InitSuite();
 

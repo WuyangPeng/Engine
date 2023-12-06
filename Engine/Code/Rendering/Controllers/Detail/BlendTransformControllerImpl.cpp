@@ -21,6 +21,7 @@
 #include "Mathematics/Algebra/AlgebraAggregate.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
 
 Rendering::BlendTransformControllerImpl::BlendTransformControllerImpl() noexcept
@@ -231,8 +232,8 @@ void Rendering::BlendTransformControllerImpl::SetObject(const ControllerInterfac
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    firstController.object->SetControllerObject(object);
-    secondController.object->SetControllerObject(object);
+    firstController.object->SetController(object);
+    secondController.object->SetController(object);
 }
 
 bool Rendering::BlendTransformControllerImpl::Update(double applicationTime)

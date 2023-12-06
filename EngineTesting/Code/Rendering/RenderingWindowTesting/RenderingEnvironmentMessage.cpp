@@ -35,7 +35,7 @@ void RenderingWindowTesting::RenderingEnvironmentMessage::InitSuite()
 
 void RenderingWindowTesting::RenderingEnvironmentMessage::AddRendererEngineSuite()
 {
-    const auto hWnd = GetHwnd();
+    const auto hWnd = GetHWnd();
     auto rendererEngineSuite = GenerateSuite("‰÷»æ“˝«Ê"s);
 
     ADD_TEST_USE_PARAMETER_1(rendererEngineSuite, RenderingEnvironmentTesting, hWnd);

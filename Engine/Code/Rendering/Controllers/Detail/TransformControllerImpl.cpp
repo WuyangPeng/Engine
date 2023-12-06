@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
 
-Rendering::TransformControllerImpl::TransformControllerImpl(const TransformF& localTransform) noexcept
+Rendering::TransformControllerImpl::TransformControllerImpl(const Mathematics::TransformF& localTransform) noexcept
     : localTransform{ localTransform }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -21,14 +21,14 @@ Rendering::TransformControllerImpl::TransformControllerImpl(const TransformF& lo
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, TransformControllerImpl)
 
-void Rendering::TransformControllerImpl::SetTransform(const TransformF& aLocalTransform) noexcept
+void Rendering::TransformControllerImpl::SetTransform(const Mathematics::TransformF& aLocalTransform) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     localTransform = aLocalTransform;
 }
 
-Rendering::TransformF Rendering::TransformControllerImpl::GetTransform() const noexcept
+Mathematics::TransformF Rendering::TransformControllerImpl::GetTransform() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -70,14 +70,14 @@ void Rendering::TransformControllerImpl::SetRotate(const Matrix& rotate) noexcep
     localTransform.SetRotate(rotate);
 }
 
-void Rendering::TransformControllerImpl::SetUniformScale(float scale) noexcept(gAssert < 2 || gRenderingAssert < 2)
+void Rendering::TransformControllerImpl::SetUniformScale(float scale)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     localTransform.SetUniformScale(scale);
 }
 
-void Rendering::TransformControllerImpl::SetScale(const APoint& scale) noexcept(gAssert < 2 || gRenderingAssert < 2)
+void Rendering::TransformControllerImpl::SetScale(const APoint& scale)
 {
     RENDERING_CLASS_IS_VALID_9;
 

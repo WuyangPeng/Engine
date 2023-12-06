@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/24 10:57)
+/// 标准：std:c++20
+/// 版本：1.0.0.1 (2023/11/20 17:05)
 
 #include "Rendering/RenderingExport.h"
 
@@ -13,7 +13,6 @@
 #include "Controller.h"
 #include "Detail/ControllerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
@@ -28,68 +27,156 @@ CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Controller);
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Controller)
 
-Rendering::Controller::Controller(CoreTools::DisableNotThrow disableNotThrow)
-    : ParentType{ disableNotThrow }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+Rendering::Controller::Controller(const std::string& name)
+    : ParentType{ name }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Controller)
 
-Rendering::Controller::ConstControllerInterfaceSharedPtr Rendering::Controller::GetControllerObject() const
+Rendering::Controller::ConstControllerSharedPtr Rendering::Controller::GetController() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetControllerObject();
 }
 
-Rendering::Controller::ControllerInterfaceSharedPtr Rendering::Controller::GetControllerObject()
+Rendering::Controller::ControllerSharedPtr Rendering::Controller::GetController()
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->GetControllerObject();
 }
 
-void Rendering::Controller::SetControllerObject(const ControllerInterfaceSharedPtr& aObject)
+void Rendering::Controller::SetController(const ControllerSharedPtr& controller)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     CoreTools::DisableNoexcept();
 
-    impl->SetObject(aObject);
+    impl->SetController(controller);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetApplicationTime, double, void)
+void Rendering::Controller::SetApplicationTime(double applicationTime) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Controller, GetApplicationTime, double)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Controller, GetControlTime, double, double)
+    return impl->SetApplicationTime(applicationTime);
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Controller, GetRepeat, Rendering::ControllerRepeatType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Controller, GetMinTime, double)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Controller, GetMaxTime, double)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Controller, GetPhase, double)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Controller, GetFrequency, double)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Controller, IsActive, bool)
+double Rendering::Controller::GetApplicationTime() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetRepeat, ControllerRepeatType, void)
+    return impl->GetApplicationTime();
+}
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetPhase, double, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetFrequency, double, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetActive, bool, void)
+double Rendering::Controller::GetControlTime(double applicationTime) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
+    return impl->GetControlTime(applicationTime);
+}
+
+Rendering::ControllerRepeatType Rendering::Controller::GetRepeat() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetRepeat();
+}
+
+double Rendering::Controller::GetMinTime() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetMinTime();
+}
+
+double Rendering::Controller::GetMaxTime() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetMaxTime();
+}
+
+double Rendering::Controller::GetPhase() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetPhase();
+}
+
+double Rendering::Controller::GetFrequency() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetFrequency();
+}
+
+bool Rendering::Controller::IsActive() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->IsActive();
+}
+
+void Rendering::Controller::SetRepeat(ControllerRepeatType repeat) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->SetRepeat(repeat);
+}
+
+void Rendering::Controller::SetTime(double minTime, double maxTime)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->SetTime(minTime, maxTime);
+}
+
+void Rendering::Controller::SetPhase(double phase) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->SetPhase(phase);
+}
+
+void Rendering::Controller::SetFrequency(double frequency) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->SetFrequency(frequency);
+}
+
+void Rendering::Controller::SetActive(bool active) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->SetActive(active);
+}
+
+bool Rendering::Controller::Update(double applicationTime)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    CoreTools::DisableNoexcept();
+
+    return impl->Update(applicationTime);
+}
+
+// object不搜索impl里存的Controller，以避免循环。
 CoreTools::ObjectSharedPtr Rendering::Controller::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    // object不搜索对象图以避免循环。
     return ParentType::GetObjectByName(name);
 }
 
-std::vector<CoreTools::ObjectSharedPtr> Rendering::Controller::GetAllObjectsByName(const std::string& name)
+Rendering::Controller::ObjectSharedPtrContainer Rendering::Controller::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    // object不搜索对象图以避免循环。
     return ParentType::GetAllObjectsByName(name);
 }
 
@@ -97,17 +184,14 @@ CoreTools::ConstObjectSharedPtr Rendering::Controller::GetConstObjectByName(cons
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    // object不搜索对象图以避免循环。
     return ParentType::GetConstObjectByName(name);
 }
 
-std::vector<CoreTools::ConstObjectSharedPtr> Rendering::Controller::GetAllConstObjectsByName(const std::string& name) const
+Rendering::Controller::ConstObjectSharedPtrContainer Rendering::Controller::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    // object不搜索对象图以避免循环。
     return ParentType::GetAllConstObjectsByName(name);
-    ;
 }
 
 Rendering::Controller::Controller(LoadConstructor loadConstructor)
@@ -156,6 +240,8 @@ void Rendering::Controller::Link(CoreTools::ObjectLink& source)
 
 void Rendering::Controller::PostLink()
 {
+    RENDERING_CLASS_IS_VALID_1;
+
     ParentType::PostLink();
 }
 
@@ -170,20 +256,4 @@ void Rendering::Controller::Load(CoreTools::BufferSource& source)
     impl->Load(source);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
-}
-
-void Rendering::Controller::SetTime(double minTime, double maxTime) noexcept
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    return impl->SetTime(minTime, maxTime);
-}
-
-bool Rendering::Controller::Update(double applicationTime)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    CoreTools::DisableNoexcept();
-
-    return impl->Update(applicationTime);
 }

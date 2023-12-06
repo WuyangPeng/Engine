@@ -39,7 +39,7 @@ namespace CoreTools
         static void Create(int count);
         static void Destroy() noexcept;
 
-        SINGLETON_GET_PTR_DECLARE(WindowProcessManager)
+        SINGLETON_GET_PTR_DECLARE(UniqueIdManager)
 
         CLASS_INVARIANT_DECLARE;
 

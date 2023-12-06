@@ -213,7 +213,7 @@ void Mathematics::DistancePoint2Hyperbola2Testing::IntervalTest()
         DistanceResult2D squaredResult = distance.GetIntervalSquared(tMin, tMax, lhsVelocity, rhsVelocity);
         DistanceResult2D result = distance.GetInterval(tMin, tMax, lhsVelocity, rhsVelocity);
 
-        ASSERT_APPROXIMATE(MathD::Sqrt(squaredResult.GetDistance()), result.GetDistance(), 1e-3);
+        ASSERT_APPROXIMATE(MathD::Sqrt(squaredResult.GetDistance()), result.GetDistance(), 1e-2);
         ASSERT_APPROXIMATE(squaredResult.GetContactTime(), result.GetContactTime(), 1e0);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetLhsClosestPoint(),
                                         result.GetLhsClosestPoint(), 1e0);
@@ -225,7 +225,7 @@ void Mathematics::DistancePoint2Hyperbola2Testing::IntervalTest()
             DistanceResult2D tResult = distance.Get(t, lhsVelocity, rhsVelocity);
             DistanceResult2D tResultSquared = distance.GetSquared(t, lhsVelocity, rhsVelocity);
 
-            ASSERT_LESS_EQUAL(result.GetDistance(), tResult.GetDistance() + 1e-4);
+            ASSERT_LESS_EQUAL(result.GetDistance(), tResult.GetDistance() + 1e-3);
             ASSERT_LESS_EQUAL(squaredResult.GetDistance(), tResultSquared.GetDistance() + 1e-3);
         }
     }

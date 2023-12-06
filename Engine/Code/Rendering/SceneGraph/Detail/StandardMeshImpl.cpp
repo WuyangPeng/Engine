@@ -17,9 +17,9 @@
 
 #include <vector>
 
-Rendering::StandardMeshImpl::StandardMeshImpl(const VertexFormatSharedPtr& vertexFormat, bool isStatic, bool inside, const TransformF* transform)
+Rendering::StandardMeshImpl::StandardMeshImpl(const VertexFormatSharedPtr& vertexFormat, bool isStatic, bool inside, const Mathematics::TransformF* transform)
     : vertexFormat{ vertexFormat },
-      transform{ transform != nullptr ? *transform : TransformF{} },
+      transform{ transform != nullptr ? *transform : Mathematics::TransformF{} },
       isStatic{ isStatic },
       inside{ inside },
       hasNormals{ false },
@@ -135,14 +135,14 @@ Rendering::StandardMeshImpl::StandardMeshImpl(StandardMeshImpl&& rhs) noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, StandardMeshImpl)
 
-void Rendering::StandardMeshImpl::SetTransform(const TransformF& aTransform) noexcept
+void Rendering::StandardMeshImpl::SetTransform(const Mathematics::TransformF& aTransform) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     transform = aTransform;
 }
 
-const Rendering::TransformF& Rendering::StandardMeshImpl::GetTransform() const noexcept
+const Mathematics::TransformF& Rendering::StandardMeshImpl::GetTransform() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

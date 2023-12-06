@@ -36,7 +36,8 @@ void AssistTools::GenerateTestingEngineImpl::GenerateBinaryConfiguration(const S
     Generate(nextDirectory, logJson, logJsonOriginal, replace);
 
     const ReplaceContainer project{ { Replace{ environmentVariable, environmentVariableOriginal.data() },
-                                      Replace{ projectTestingJson, projectTestingJsonOriginal.data() } } };
+                                      Replace{ projectTestingJson, projectTestingJsonOriginal.data() },
+                                      Replace{ testingJson, testingJsonOriginal.data() } } };
 
     Generate(nextDirectory, project);
 }
@@ -160,7 +161,7 @@ void AssistTools::GenerateTestingEngineImpl::GenerateWindowsProject(const Genera
     const auto nextDirectory = directory.GetGenerateDirectory(projectDescribe, projectName);
     nextDirectory.CreateFileDirectory();
 
-    Generate(nextDirectory, SYSTEM_TEXT("ProjectSln"), projectName + SYSTEM_TEXT(".sln"));
+    GenerateSln(nextDirectory, SYSTEM_TEXT("ProjectSln"), projectName + SYSTEM_TEXT(".sln"));
 
     GenerateWindowsProjectVcxproj(nextDirectory);
 }

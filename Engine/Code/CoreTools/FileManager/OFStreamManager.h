@@ -16,6 +16,7 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 
+#include <fstream>
 #include <string>
 
 CORE_TOOLS_NON_COPY_EXPORT_IMPL(OFStreamManagerImpl);
@@ -28,7 +29,7 @@ namespace CoreTools
         NON_COPY_TYPE_DECLARE(OFStreamManager);
 
         using String = System::String;
-        using PosType = System::PosType;
+        using PosType = System::OFileStream::pos_type;
 
     public:
         OFStreamManager(const String& fileName, bool addition);

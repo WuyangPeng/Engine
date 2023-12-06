@@ -1,0 +1,6 @@
+{
+  "databaseGenerateServerSuite": {
+    "DatabaseGenerateHelperTesting": 1,
+    "DatabaseGenerateMessageTesting": 1
+  }
+}

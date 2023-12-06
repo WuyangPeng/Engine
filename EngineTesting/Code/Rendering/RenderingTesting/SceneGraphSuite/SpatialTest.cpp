@@ -28,7 +28,7 @@ Rendering::SpatialTest::SpatialTest(MAYBE_UNUSED CoreTools::DisableNotThrow disa
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, SpatialTest)
 
-Rendering::SpatialTest::ControllerInterfaceSharedPtr Rendering::SpatialTest::Clone() const
+Rendering::SpatialTest::ControllerSharedPtr Rendering::SpatialTest::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

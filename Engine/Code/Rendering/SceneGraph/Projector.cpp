@@ -23,10 +23,10 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Projector);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Projector);
 
 Rendering::Projector::Projector(DepthType depthType, bool isPerspective, MAYBE_UNUSED float epsilon)
-    : ParentType{ isPerspective, depthType == DepthType::ZeroToOne }
+    : ParentType{ isPerspective, depthType }
 {
     // 覆盖Camera构造函数设定的深度类型。
-    SetDepthType(depthType);
+    // SetDepthType(depthType);
 
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -94,7 +94,7 @@ void Rendering::Projector::Load(CoreTools::BufferSource& source)
 
     auto depthType = DepthType::Quantity;
     source.ReadEnum(depthType);
-    SetDepthType(depthType);
+    // SetDepthType(depthType);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

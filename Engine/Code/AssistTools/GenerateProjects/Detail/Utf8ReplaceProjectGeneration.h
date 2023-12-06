@@ -16,7 +16,7 @@
 
 namespace AssistTools
 {
-    class ASSIST_TOOLS_HIDDEN_DECLARE Utf8ReplaceProjectGeneration final : public ReplaceProjectGeneration
+    class ASSIST_TOOLS_HIDDEN_DECLARE Utf8ReplaceProjectGeneration : public ReplaceProjectGeneration
     {
     public:
         using ClassType = Utf8ReplaceProjectGeneration;

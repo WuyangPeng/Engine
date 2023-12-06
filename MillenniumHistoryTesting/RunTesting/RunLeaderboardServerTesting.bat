@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %MillenniumHistoryTestingWin32DebugLib% LeaderboardServerTestingD.exe
+start /d %MillenniumHistoryTestingWin32ReleaseLib% LeaderboardServerTesting.exe
+start /d %MillenniumHistoryTestingX64DebugLib% LeaderboardServerTestingD.exe
+start /d %MillenniumHistoryTestingX64ReleaseLib% LeaderboardServerTesting.exe
+start /d %MillenniumHistoryTestingStaticWin32DebugLib% LeaderboardServerTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticWin32ReleaseLib% LeaderboardServerTestingStatic.exe
+start /d %MillenniumHistoryTestingStaticX64DebugLib% LeaderboardServerTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticX64ReleaseLib% LeaderboardServerTestingStatic.exe
+
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32DebugLib% LeaderboardServerTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32ReleaseLib% LeaderboardServerTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64DebugLib% LeaderboardServerTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64ReleaseLib% LeaderboardServerTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32DebugLib% LeaderboardServerTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32ReleaseLib% LeaderboardServerTesting.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64DebugLib% LeaderboardServerTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64ReleaseLib% LeaderboardServerTesting.exe
+
+pause

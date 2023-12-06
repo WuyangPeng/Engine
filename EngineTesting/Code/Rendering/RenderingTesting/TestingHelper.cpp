@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/20 16:47)
+/// 标准：std:c++20
+/// 版本：1.0.0.1 (2023/11/20 15:13)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -14,10 +14,8 @@
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-using namespace std::literals;
-
 Rendering::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "渲染库"s }
+    : ParentType{ argc, argv, "渲染库" }
 {
     InitSuite();
 
@@ -76,7 +74,6 @@ void Rendering::TestingHelper::AddBaseSuite()
     AddSuite(baseSuite);
 }
 
-// private
 void Rendering::TestingHelper::AddDataTypesSuite()
 {
     auto dataTypeSuite = GenerateSuite("数据类型");
@@ -114,14 +111,13 @@ void Rendering::TestingHelper::AddResourcesSuite()
     AddSuite(resourcesSuite);
 }
 
-// private
 void Rendering::TestingHelper::AddSceneGraphSuite()
 {
     auto sceneGraphSuite = GenerateSuite("场景图");
 
-    ADD_TEST(sceneGraphSuite, CameraFrustumDataTesting);
+    sceneGraphSuite.AddSuite(GetViewVolumeSuite());
+    sceneGraphSuite.AddSuite(GetCameraSuite());
     ADD_TEST(sceneGraphSuite, CameraManageTesting);
-    ADD_TEST(sceneGraphSuite, CameraTesting);
     ADD_TEST(sceneGraphSuite, SpatialTesting);
     ADD_TEST(sceneGraphSuite, VisibleSetTesting);
     ADD_TEST(sceneGraphSuite, CullerTesting);
@@ -148,7 +144,29 @@ void Rendering::TestingHelper::AddSceneGraphSuite()
     AddSuite(sceneGraphSuite);
 }
 
-// private
+CoreTools::Suite Rendering::TestingHelper::GetViewVolumeSuite()
+{
+    auto viewVolumeSuite = GenerateSuite("视景体");
+
+    ADD_TEST(viewVolumeSuite, WorldCoordinateFrameTesting);
+    ADD_TEST(viewVolumeSuite, ProjectionMatrixTesting);
+    ADD_TEST(viewVolumeSuite, CameraFrustumTesting);
+    ADD_TEST(viewVolumeSuite, ViewVolumeTesting);
+
+    return viewVolumeSuite;
+}
+
+Rendering::TestingHelper::Suite Rendering::TestingHelper::GetCameraSuite()
+{
+    auto cameraSuite = GenerateSuite("摄像机");
+
+    ADD_TEST(cameraSuite, CameraFrustumDataTesting);
+    ADD_TEST(cameraSuite, PickLineTesting);
+    ADD_TEST(cameraSuite, CameraTesting);
+
+    return cameraSuite;
+}
+
 void Rendering::TestingHelper::AddControllersSuite()
 {
     auto controllersSuite = GenerateSuite("控制器");

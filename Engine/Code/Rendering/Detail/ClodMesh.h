@@ -55,7 +55,7 @@ namespace Rendering
         // 可以在不需要显示网格的应用程序手动调用。
         void SelectLevelOfDetail();
 
-        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ControllerSharedPtr Clone() const override;
 
     protected:
         // 支持分级裁剪。

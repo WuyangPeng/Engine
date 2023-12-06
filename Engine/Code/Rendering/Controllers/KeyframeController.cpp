@@ -29,7 +29,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, KeyframeController);
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, KeyframeController)
 
-Rendering::KeyframeController::KeyframeController(int numCommonTimes, int numTranslations, int numRotations, int numScales, const TransformF& localTransform)
+Rendering::KeyframeController::KeyframeController(int numCommonTimes, int numTranslations, int numRotations, int numScales, const Mathematics::TransformF& localTransform)
     : ParentType{ localTransform },
       impl{ numCommonTimes, numTranslations, numRotations, numScales }
 {
@@ -102,12 +102,12 @@ void Rendering::KeyframeController::SetScales(int index, float scales)
     return impl->SetScales(index, scales);
 }
 
-void Rendering::KeyframeController::SetControllerObject(const ControllerInterfaceSharedPtr& object)
+void Rendering::KeyframeController::SetController(const ControllerSharedPtr& object)
 {
     RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Spatial::GetCurrentRttiType()), "Œﬁ–ß¿‡\n");
 
-    ParentType::SetControllerObject(object);
+    ParentType::SetController(object);
 }
 
 Rendering::ControllerInterfaceSharedPtr Rendering::KeyframeController::Clone() const
@@ -184,7 +184,7 @@ bool Rendering::KeyframeController::Update(double applicationTime)
             }
         }
 
-        if (const auto spatial = boost::polymorphic_pointer_cast<Spatial>(GetControllerObject());
+        if (const auto spatial = boost::polymorphic_pointer_cast<Spatial>(GetController());
             spatial != nullptr)
         {
             spatial->SetLocalTransform(GetTransform());

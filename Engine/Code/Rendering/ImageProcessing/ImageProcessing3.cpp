@@ -10,6 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "ImageProcessing3.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
 

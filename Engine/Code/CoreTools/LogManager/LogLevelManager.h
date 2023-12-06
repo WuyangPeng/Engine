@@ -28,6 +28,7 @@ namespace CoreTools
 
     public:
         NODISCARD static String GetLogLevelDescribe(LogLevel logLevelType);
+        NODISCARD static LogLevel GetLogLevel(const std::string& describe);
     };
 }
 

@@ -13,7 +13,6 @@
 #include "AssistTools/AssistToolsDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 
 ASSIST_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(ReplaceImpl);

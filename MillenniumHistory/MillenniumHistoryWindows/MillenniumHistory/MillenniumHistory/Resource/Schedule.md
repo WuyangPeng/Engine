@@ -12,14 +12,14 @@ MillenniumHistory
 
 ----------------------------
 状态
-	目前版本：0.9.1.0。
+	目前版本：1.0.0.1。
 
 ----------------------------
 实现内容
 	1. 复制必要的dll到运行目录。 
 	2. 复制工程的EnvironmentVariable.json到千年史策工程运行目录。
-	3. 复制工程的Renderer.json到历史的千年史策工程运行目录。
-	4. 复制工程的Project.json到历史的千年史策工程运行目录。
+	3. 复制工程的Renderer.json到千年史策工程运行目录。
+	4. 复制工程的Project.json到千年史策运行目录。
 	5. 复制工程的MillenniumHistory.json到千年史策工程运行目录。
 	6. 版本号定义在Version.h中。
 	7. 千年史策工程样例工程。

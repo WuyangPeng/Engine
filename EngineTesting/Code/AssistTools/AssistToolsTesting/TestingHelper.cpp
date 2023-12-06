@@ -60,6 +60,7 @@ CoreTools::Suite AssistTools::TestingHelper::GetProjectGenerationSuite()
     ADD_TEST(projectGenerationSuite, ClientProjectGenerationTesting);
     ADD_TEST(projectGenerationSuite, ReplaceProjectGenerationTesting);
     ADD_TEST(projectGenerationSuite, Utf8ReplaceProjectGenerationTesting);
+    ADD_TEST(projectGenerationSuite, SlnProjectGenerationTesting);
 
     return projectGenerationSuite;
 }

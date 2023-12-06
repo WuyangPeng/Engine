@@ -35,9 +35,7 @@
   },
 
   "sceneGraphSuite": {
-    "CameraFrustumDataTesting": 1,
     "CameraManageTesting": 1,
-    "CameraTesting": 100,
     "SpatialTesting": 1,
     "VisibleSetTesting": 1,
     "CullerTesting": 1,
@@ -60,6 +58,19 @@
     "PickerTesting": 100,
     "ScreenTargetTesting": 1,
     "StandardMeshTesting": 1
+  },
+
+  "viewVolumeSuite": {
+    "WorldCoordinateFrameTesting": 100,
+    "ProjectionMatrixTesting": 100,
+    "CameraFrustumTesting": 100,
+    "ViewVolumeTesting": 100
+  },
+
+  "cameraSuite": {
+    "CameraFrustumDataTesting": 1,
+    "PickLineTesting": 1,
+    "CameraTesting": 100
   },
 
   "controllersSuite": {

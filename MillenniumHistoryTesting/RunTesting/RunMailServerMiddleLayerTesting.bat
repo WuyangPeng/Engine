@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %MillenniumHistoryTestingWin32DebugLib% MailServerMiddleLayerTestingD.exe
+start /d %MillenniumHistoryTestingWin32ReleaseLib% MailServerMiddleLayerTesting.exe
+start /d %MillenniumHistoryTestingX64DebugLib% MailServerMiddleLayerTestingD.exe
+start /d %MillenniumHistoryTestingX64ReleaseLib% MailServerMiddleLayerTesting.exe
+start /d %MillenniumHistoryTestingStaticWin32DebugLib% MailServerMiddleLayerTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticWin32ReleaseLib% MailServerMiddleLayerTestingStatic.exe
+start /d %MillenniumHistoryTestingStaticX64DebugLib% MailServerMiddleLayerTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticX64ReleaseLib% MailServerMiddleLayerTestingStatic.exe
+
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32DebugLib% MailServerMiddleLayerTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32ReleaseLib% MailServerMiddleLayerTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64DebugLib% MailServerMiddleLayerTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64ReleaseLib% MailServerMiddleLayerTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32DebugLib% MailServerMiddleLayerTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32ReleaseLib% MailServerMiddleLayerTesting.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64DebugLib% MailServerMiddleLayerTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64ReleaseLib% MailServerMiddleLayerTesting.exe
+
+pause

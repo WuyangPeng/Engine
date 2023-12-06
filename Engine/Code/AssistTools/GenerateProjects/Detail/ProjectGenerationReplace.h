@@ -50,6 +50,10 @@ namespace AssistTools
         void ReplaceTestingCodeAnalysis();
         void ReplaceMiddleLayerInclude();
         void ReplaceMiddleLayerFwdInclude();
+        void ReplaceToolDirectory();
+        void ReplaceToolProject();
+        void ReplaceToolNestedProjects();
+        void ReplaceTestingToolProject();
 
         NODISCARD static String GetIdentifier(const String& original);
 
@@ -72,6 +76,8 @@ namespace AssistTools
         NODISCARD static String ReplaceCallRunBat(const String& callRunBat, ProjectServiceType projectServiceType, const GameModule& gameModule);
         NODISCARD static String ReplaceModuleName(const String& module, const String& moduleName);
         NODISCARD static String ReplaceMiddleLayerName(const String& middleLayer, const MiddleLayerModule& middleLayerModule);
+        NODISCARD static String ReplaceToolProject(const String& toolProject, const GameModule& gameModule);
+        NODISCARD static String ReplaceToolNestedProjects(const String& toolNestedProjects, const GameModule& gameModule);
         NODISCARD String GetModuleDescribe() const;
         NODISCARD String GetModuleJson() const;
         NODISCARD String GetModuleTestingJson() const;
@@ -80,6 +86,9 @@ namespace AssistTools
         NODISCARD String GetCodeAnalysis() const;
         NODISCARD String GetTestingCodeAnalysis() const;
         NODISCARD String GetMiddleLayer(const StringView& codeKey) const;
+        NODISCARD String GetToolProject() const;
+        NODISCARD String GetToolNestedProjects() const;
+        NODISCARD String GetTestToolProject() const;
 
         NODISCARD String GetDescribe(const StringView& codeKey, NotNullReplaceParameterFunction replaceParameterType) const;
         NODISCARD String GetProjectName(const String& templateContent) const;

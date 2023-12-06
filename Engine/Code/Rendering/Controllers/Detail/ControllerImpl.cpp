@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/24 10:55)
+/// 标准：std:c++20
+/// 版本：1.0.0.1 (2023/11/20 16:42)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,14 +18,14 @@
 #include "Rendering/Controllers/ControllerInterface.h"
 
 Rendering::ControllerImpl::ControllerImpl() noexcept
-    : controllerRepeat{ ControllerRepeatType::Clamp },
-      controllerMinTime{ 0.0 },
-      controllerMaxTime{ 0.0 },
-      controllerPhase{ 0.0 },
-      controllerFrequency{ 1.0 },
-      controllerActive{ true },
-      controllerApplicationTime{ -Mathematics::MathD::maxReal },
-      controllerInterface{}
+    : repeat{ ControllerRepeatType::Clamp },
+      minTime{ 0.0 },
+      maxTime{ 0.0 },
+      phase{ 0.0 },
+      frequency{ 1.0 },
+      active{ true },
+      applicationTime{ -Mathematics::MathD::maxReal },
+      controller{}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -34,7 +34,7 @@ Rendering::ControllerImpl::ControllerImpl() noexcept
 
 bool Rendering::ControllerImpl::IsValid() const noexcept
 {
-    if (controllerMinTime <= controllerMaxTime)
+    if (minTime <= maxTime)
         return true;
     else
         return false;
@@ -42,27 +42,27 @@ bool Rendering::ControllerImpl::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-void Rendering::ControllerImpl::SetApplicationTime(double applicationTime) noexcept
+void Rendering::ControllerImpl::SetApplicationTime(double aApplicationTime) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    controllerApplicationTime = applicationTime;
+    applicationTime = aApplicationTime;
 }
 
 double Rendering::ControllerImpl::GetApplicationTime() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return controllerApplicationTime;
+    return applicationTime;
 }
 
-bool Rendering::ControllerImpl::Update(double applicationTime) noexcept
+bool Rendering::ControllerImpl::Update(double aApplicationTime) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    if (controllerActive)
+    if (active)
     {
-        controllerApplicationTime = applicationTime;
+        applicationTime = aApplicationTime;
 
         return true;
     }
@@ -70,185 +70,190 @@ bool Rendering::ControllerImpl::Update(double applicationTime) noexcept
     return false;
 }
 
-double Rendering::ControllerImpl::GetControlTime(double applicationTime)
+double Rendering::ControllerImpl::GetControlTime(double aApplicationTime) const
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    const auto controlTime = controllerFrequency * applicationTime + controllerPhase;
+    const auto controlTime = frequency * aApplicationTime + phase;
 
-    if (controllerRepeat == ControllerRepeatType::Clamp)
+    if (repeat == ControllerRepeatType::Clamp)
     {
         // 截断时间在间隔[min,max]
-        if (controlTime < controllerMinTime)
+        if (controlTime < minTime)
         {
-            return controllerMinTime;
+            return minTime;
         }
-        if (controllerMaxTime < controlTime)
+        if (maxTime < controlTime)
         {
-            return controllerMaxTime;
+            return maxTime;
         }
 
         return controlTime;
     }
 
-    if (const auto timeRange = controllerMaxTime - controllerMinTime;
+    if (const auto timeRange = maxTime - minTime;
         0.0 < timeRange)
     {
-        const auto multiples = (controlTime - controllerMinTime) / timeRange;
+        const auto multiples = (controlTime - minTime) / timeRange;
         const auto integerTime = Math::Floor(multiples);
         const auto fractionTime = multiples - integerTime;
-        if (controllerRepeat == ControllerRepeatType::Wrap)
+        if (repeat == ControllerRepeatType::Wrap)
         {
-            return controllerMinTime + fractionTime * timeRange;
+            return minTime + fractionTime * timeRange;
         }
 
-        // controllerRepeat == ControllerRepeatType::ClampCycle
+        // repeat == ControllerRepeatType::ClampCycle
         if ((boost::numeric_cast<int>(integerTime) & 1) != 0)
         {
             // 时间向后走。
-            return controllerMaxTime - fractionTime * timeRange;
+            return maxTime - fractionTime * timeRange;
         }
         else
         {
             // 时间向前走。
-            return controllerMinTime + fractionTime * timeRange;
+            return minTime + fractionTime * timeRange;
         }
     }
 
     // 最小值和最大值是相等的，所以返回最小值。
-    return controllerMinTime;
+    return minTime;
 }
 
 Rendering::ControllerRepeatType Rendering::ControllerImpl::GetRepeat() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return controllerRepeat;
+    return repeat;
 }
 
 double Rendering::ControllerImpl::GetMinTime() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return controllerMinTime;
+    return minTime;
 }
 
 double Rendering::ControllerImpl::GetMaxTime() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return controllerMaxTime;
+    return maxTime;
 }
 
 double Rendering::ControllerImpl::GetPhase() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return controllerPhase;
+    return phase;
 }
 
 double Rendering::ControllerImpl::GetFrequency() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return controllerFrequency;
+    return frequency;
 }
 
 bool Rendering::ControllerImpl::IsActive() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return controllerActive;
+    return active;
 }
 
-void Rendering::ControllerImpl::SetRepeat(ControllerRepeatType repeat) noexcept
+void Rendering::ControllerImpl::SetRepeat(ControllerRepeatType aRepeat) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    controllerRepeat = repeat;
+    repeat = aRepeat;
 }
 
-void Rendering::ControllerImpl::SetTime(double minTime, double maxTime) noexcept
+void Rendering::ControllerImpl::SetTime(double aMinTime, double aMaxTime)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    controllerMinTime = minTime;
-    controllerMaxTime = maxTime;
+    if (minTime > maxTime)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("设置最小时间大于最大时间。"))
+    }
+
+    minTime = aMinTime;
+    maxTime = aMaxTime;
 }
 
-void Rendering::ControllerImpl::SetPhase(double phase) noexcept
+void Rendering::ControllerImpl::SetPhase(double aPhase) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    controllerPhase = phase;
+    phase = aPhase;
 }
 
-void Rendering::ControllerImpl::SetFrequency(double frequency) noexcept
+void Rendering::ControllerImpl::SetFrequency(double aFrequency) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    controllerFrequency = frequency;
+    frequency = aFrequency;
 }
 
-void Rendering::ControllerImpl::SetActive(bool active) noexcept
+void Rendering::ControllerImpl::SetActive(bool aActive) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    controllerActive = active;
+    active = aActive;
 }
 
 void Rendering::ControllerImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    source.ReadEnum(controllerRepeat);
-    source.Read(controllerMinTime);
-    source.Read(controllerMaxTime);
-    source.Read(controllerPhase);
-    source.Read(controllerFrequency);
-    controllerActive = source.ReadBool();
+    source.ReadEnum(repeat);
+    source.Read(minTime);
+    source.Read(maxTime);
+    source.Read(phase);
+    source.Read(frequency);
+    active = source.ReadBool();
 
-    controllerApplicationTime = -Mathematics::MathD::maxReal;
+    applicationTime = -Mathematics::MathD::maxReal;
 }
 
 void Rendering::ControllerImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    target.WriteEnum(controllerRepeat);
-    target.Write(controllerMinTime);
-    target.Write(controllerMaxTime);
-    target.Write(controllerPhase);
-    target.Write(controllerFrequency);
-    target.Write(controllerActive);
+    target.WriteEnum(repeat);
+    target.Write(minTime);
+    target.Write(maxTime);
+    target.Write(phase);
+    target.Write(frequency);
+    target.Write(active);
 }
 
 int Rendering::ControllerImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CoreTools::GetStreamSize(controllerRepeat);
-    size += CoreTools::GetStreamSize(controllerMinTime);
-    size += CoreTools::GetStreamSize(controllerMaxTime);
-    size += CoreTools::GetStreamSize(controllerPhase);
-    size += CoreTools::GetStreamSize(controllerFrequency);
-    size += CoreTools::GetStreamSize(controllerActive);
+    auto size = CoreTools::GetStreamSize(repeat);
+    size += CoreTools::GetStreamSize(minTime);
+    size += CoreTools::GetStreamSize(maxTime);
+    size += CoreTools::GetStreamSize(phase);
+    size += CoreTools::GetStreamSize(frequency);
+    size += CoreTools::GetStreamSize(active);
 
     return size;
 }
 
-void Rendering::ControllerImpl::SetObject(const ControllerInterfaceSharedPtr& object) noexcept
+void Rendering::ControllerImpl::SetController(const ControllerSharedPtr& aController) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    controllerInterface = object;
+    controller = aController;
 }
 
-Rendering::ControllerImpl::ConstControllerInterfaceSharedPtr Rendering::ControllerImpl::GetControllerObject() const
+Rendering::ControllerImpl::ConstControllerSharedPtr Rendering::ControllerImpl::GetControllerObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto result = controllerInterface.lock();
+    auto result = controller.lock();
 
     if (!result)
     {
@@ -258,16 +263,14 @@ Rendering::ControllerImpl::ConstControllerInterfaceSharedPtr Rendering::Controll
     return result;
 }
 
-Rendering::ControllerImpl::ControllerInterfaceSharedPtr Rendering::ControllerImpl::GetControllerObject()
+Rendering::ControllerImpl::ControllerSharedPtr Rendering::ControllerImpl::GetControllerObject()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    auto result = controllerInterface.lock();
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26473)
 
-    if (!result)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("ControllerObject 已释放"))
-    }
+    return std::const_pointer_cast<ControllerInterface>(static_cast<const ClassType*>(this)->GetControllerObject());
 
-    return result;
+#include SYSTEM_WARNING_POP
 }

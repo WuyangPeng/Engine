@@ -27,9 +27,11 @@ namespace AssistTools
         PERFORMANCE_UNSHARED_TYPE_DECLARE(GameModule);
 
         using String = System::String;
+        static constexpr auto guidCount = 4;
+        using GuidContainer = std::array<String, guidCount>;
 
     public:
-        GameModule(const String& moduleName, const String& chineseName, ProjectServiceType projectServiceType, const String& uppercaseName);
+        GameModule(const String& moduleName, const String& chineseName, ProjectServiceType projectServiceType, const String& uppercaseName, const GuidContainer& guid);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -37,6 +39,7 @@ namespace AssistTools
         NODISCARD String GetChineseName() const;
         NODISCARD ProjectServiceType GetProjectServiceType() const noexcept;
         NODISCARD String GetUppercaseName() const;
+        NODISCARD String GetGuid(int index) const;
 
     private:
         PackageType impl;

@@ -191,7 +191,7 @@ void Mathematics::QuerySortToolsTesting::SortFourValueTest()
         {
             ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
         }
-        else if (fourthValue <= secondValue && secondValue <= firstValue && firstValue <= thirdValue)
+        else if (fourthValue < secondValue && secondValue <= firstValue && firstValue <= thirdValue)
         {
             ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
         }

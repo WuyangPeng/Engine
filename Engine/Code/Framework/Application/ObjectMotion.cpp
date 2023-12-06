@@ -84,7 +84,7 @@ void Framework::ObjectMotion::SetEndTrack(float xTrack, float yTrack) noexcept
     return impl->SetEndTrack(xTrack, yTrack);
 }
 
-void Framework::ObjectMotion::SetSaveRotate() noexcept(gAssert < 2 || gRenderingAssert < 2)
+void Framework::ObjectMotion::SetSaveRotate()  
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 

@@ -172,6 +172,18 @@
     <Filter Include="PrimitivesSuite 头文件">
       <UniqueIdentifier>{5b7c11e4-fadd-4714-a72e-23cea50dea67}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AlgebraSuite 头文件\Transform">
+      <UniqueIdentifier>{7e6c68f4-f586-4f32-9711-6fcf2b6a1e8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AlgebraSuite 源文件\Transform">
+      <UniqueIdentifier>{250ad3fd-669e-4c72-bf43-a71e9762169c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AlgebraSuite 头文件\Detail">
+      <UniqueIdentifier>{b55018a2-67aa-41f8-9bb1-d0742eaf15c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AlgebraSuite 源文件\Detail">
+      <UniqueIdentifier>{b3055d42-ea98-4a3b-8370-1aa743c2a3f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\TestingHelper.h">
@@ -1008,6 +1020,33 @@
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\PrimitivesSuite\PrimitivesSuite.h">
       <Filter>PrimitivesSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\IdentityTransformTesting.h">
+      <Filter>AlgebraSuite 头文件\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\UnitScaleTransformTesting.h">
+      <Filter>AlgebraSuite 头文件\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\RotationTransformTesting.h">
+      <Filter>AlgebraSuite 头文件\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\TransformTestingBase.h">
+      <Filter>AlgebraSuite 头文件\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Detail\TransformTool.h">
+      <Filter>AlgebraSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\ScaleTransformTesting.h">
+      <Filter>AlgebraSuite 头文件\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\MatrixTransformTesting.h">
+      <Filter>AlgebraSuite 头文件\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\TranslateTransformTesting.h">
+      <Filter>AlgebraSuite 头文件\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BoundingSphereTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\TestingHelper.cpp">
@@ -1762,6 +1801,33 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalVectorTesting.cpp">
       <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\IdentityTransformTesting.cpp">
+      <Filter>AlgebraSuite 源文件\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\UnitScaleTransformTesting.cpp">
+      <Filter>AlgebraSuite 源文件\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\RotationTransformTesting.cpp">
+      <Filter>AlgebraSuite 源文件\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\TransformTestingBase.cpp">
+      <Filter>AlgebraSuite 源文件\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Detail\TransformTool.cpp">
+      <Filter>AlgebraSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\ScaleTransformTesting.cpp">
+      <Filter>AlgebraSuite 源文件\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\MatrixTransformTesting.cpp">
+      <Filter>AlgebraSuite 源文件\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\TranslateTransformTesting.cpp">
+      <Filter>AlgebraSuite 源文件\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BoundingSphereTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

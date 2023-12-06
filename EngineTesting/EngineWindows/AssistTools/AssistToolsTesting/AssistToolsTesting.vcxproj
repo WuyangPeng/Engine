@@ -372,6 +372,7 @@ xcopy "$(ProjectDir)/Configuration/GameTestingParameter*.json" "../../../$(Platf
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\DefaultProjectGenerationTesting.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\ProjectGenerationTesting.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\ReplaceProjectGenerationTesting.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\SlnProjectGenerationTesting.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\Utf8ReplaceProjectGenerationTesting.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ReplaceTesting.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\HelperSuite\HelperSuite.h" />
@@ -389,6 +390,7 @@ xcopy "$(ProjectDir)/Configuration/GameTestingParameter*.json" "../../../$(Platf
     <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\DefaultProjectGenerationTesting.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\ProjectGenerationTesting.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\ReplaceProjectGenerationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\SlnProjectGenerationTesting.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\Utf8ReplaceProjectGenerationTesting.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ReplaceTesting.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\TestingHelper.cpp" />

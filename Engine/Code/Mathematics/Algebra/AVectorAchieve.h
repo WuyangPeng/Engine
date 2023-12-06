@@ -231,8 +231,18 @@ void Mathematics::AVector<T>::Normalize(T epsilon)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
+#ifdef MATHEMATICS_NORMALIZE_EPSILON
+
+    if (const auto length = Length();
+        std::min(Math::epsilon, epsilon) < length)
+
+#else  // !MATHEMATICS_NORMALIZE_EPSILON
+
     if (const auto length = Length();
         epsilon < length)
+
+#endif  // MATHEMATICS_NORMALIZE_EPSILON
+
     {
         auto invLength = Math::GetValue(1) / length;
 

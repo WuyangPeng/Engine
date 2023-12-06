@@ -62,9 +62,9 @@ namespace Rendering
 
         // 动画更新。应用程序时间以毫秒为单位。
         NODISCARD bool Update(double applicationTime) override;
-        void SetControllerObject(const ControllerInterfaceSharedPtr& object) override;
+        void SetController(const ControllerSharedPtr& object) override;
 
-        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ControllerSharedPtr Clone() const override;
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
     protected:

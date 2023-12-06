@@ -1,0 +1,1025 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="GameStaticDebug|Win32">
+      <Configuration>GameStaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="EngineStaticDebug|Win32">
+      <Configuration>EngineStaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="GameStaticRelease|Win32">
+      <Configuration>GameStaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="EngineStaticRelease|Win32">
+      <Configuration>EngineStaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="GameStaticDebug|x64">
+      <Configuration>GameStaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="EngineStaticDebug|x64">
+      <Configuration>EngineStaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="GameStaticRelease|x64">
+      <Configuration>GameStaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="EngineStaticRelease|x64">
+      <Configuration>EngineStaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{7C502120-806E-489C-9542-CAA3678EEFE1}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>DatabaseGenerateBase</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\MillenniumHistory.props" />
+    <Import Project="..\..\MillenniumHistoryWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\MillenniumHistory.props" />
+    <Import Project="..\..\MillenniumHistoryEngineStaticGameDynamicWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\MillenniumHistory.props" />
+    <Import Project="..\..\MillenniumHistoryStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\MillenniumHistory.props" />
+    <Import Project="..\..\MillenniumHistoryEngineDynamicGameStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\MillenniumHistory.props" />
+    <Import Project="..\..\MillenniumHistoryWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\MillenniumHistory.props" />
+    <Import Project="..\..\MillenniumHistoryEngineStaticGameDynamicWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\MillenniumHistory.props" />
+    <Import Project="..\..\MillenniumHistoryStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\MillenniumHistory.props" />
+    <Import Project="..\..\MillenniumHistoryEngineDynamicGameStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\MillenniumHistory.props" />
+    <Import Project="..\..\MillenniumHistoryX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\MillenniumHistory.props" />
+    <Import Project="..\..\MillenniumHistoryEngineStaticGameDynamicX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\MillenniumHistory.props" />
+    <Import Project="..\..\MillenniumHistoryStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\MillenniumHistory.props" />
+    <Import Project="..\..\MillenniumHistoryEngineDynamicGameStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\MillenniumHistory.props" />
+    <Import Project="..\..\MillenniumHistoryX64ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\MillenniumHistory.props" />
+    <Import Project="..\..\MillenniumHistoryEngineStaticGameDynamicX64ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\MillenniumHistory.props" />
+    <Import Project="..\..\MillenniumHistoryStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\MillenniumHistory.props" />
+    <Import Project="..\..\MillenniumHistoryEngineDynamicGameStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;DATABASEGENERATEBASE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionD.exe
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateBaseTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateCoreTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateMiddleLayerTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command />
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;DATABASEGENERATEBASE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/DebugWindows/BatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionD.exe
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateBaseTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateCoreTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateMiddleLayerTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/DebugWindows/EntityBatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command />
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStaticD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStaticD.exe
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateBaseTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateCoreTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateMiddleLayerTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStaticD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStaticD.exe</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/DebugWindows/BatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionD.exe
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateBaseTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateCoreTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateMiddleLayerTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/StaticDebugWindows/EntityBatchConversionStaticD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStaticD.exe</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;DATABASEGENERATEBASE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversion.exe
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateBaseTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateCoreTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateMiddleLayerTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversion.exe</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command />
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;DATABASEGENERATEBASE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/ReleaseWindows/BatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversion.exe
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateBaseTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateCoreTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateMiddleLayerTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/ReleaseWindows/EntityBatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversion.exe</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command />
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStatic.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStatic.exe
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateBaseTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateCoreTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateMiddleLayerTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStatic.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStatic.exe</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/ReleaseWindows/BatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversion.exe
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateBaseTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateCoreTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateMiddleLayerTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/StaticReleaseWindows/EntityBatchConversionStatic.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStatic.exe</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;DATABASEGENERATEBASE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionD.exe
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateBaseTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateCoreTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateMiddleLayerTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command />
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;DATABASEGENERATEBASE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/DebugWindows/BatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionD.exe
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateBaseTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateCoreTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateMiddleLayerTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/DebugWindows/EntityBatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command />
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStaticD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStaticD.exe
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateBaseTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateCoreTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateMiddleLayerTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStaticD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStaticD.exe</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/DebugWindows/BatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionD.exe
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateBaseTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateCoreTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateMiddleLayerTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/StaticDebugWindows/EntityBatchConversionStaticD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStaticD.exe</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;DATABASEGENERATEBASE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversion.exe
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateBaseTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateCoreTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateMiddleLayerTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversion.exe</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command />
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;DATABASEGENERATEBASE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/ReleaseWindows/BatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversion.exe
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateBaseTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateCoreTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateMiddleLayerTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/ReleaseWindows/EntityBatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversion.exe</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command />
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStatic.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStatic.exe
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateBaseTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateCoreTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateMiddleLayerTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStatic.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStatic.exe</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CSVEngineering" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/ReleaseWindows/BatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversion.exe
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerate/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateBaseTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateCoreTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateTesting/DatabaseGenerateMiddleLayerTesting/Resource/AncientBooksCsv/" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/StaticReleaseWindows/EntityBatchConversionStatic.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStatic.exe</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="Configuration\BatchConversion.json" />
+    <None Include="Configuration\DatabaseEntity.json" />
+    <None Include="Configuration\EntityBatchConversion.json" />
+    <None Include="Resource\ReadMe.md" />
+    <None Include="Resource\Schedule.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\ArticleEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\BookEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\CalendarEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\CategoryEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\CharacterEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\CountryEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\DatabaseEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\DatabaseEntityFwd.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\DayEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\EmperorEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\GatherEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\GenusEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\GeographicEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\IdentityEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\ImperialCourtEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\MonthEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\ReignTitleEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\SexagenaryCycleEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\SourceEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\VersionEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\YearEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseGenerateBaseLib.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\AncientBooks.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\AncientBooksContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\AncientBooksFwd.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Article.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ArticleBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ArticleContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ArticleContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Book.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\BookBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\BookContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\BookContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Calendar.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CalendarBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CalendarContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CalendarContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Category.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CategoryBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CategoryContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CategoryContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Character.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CharacterBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CharacterContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CharacterContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Country.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CountryBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CountryContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CountryContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Day.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\DayBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\DayContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\DayContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Emperor.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\EmperorBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\EmperorContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\EmperorContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Gather.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GatherBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GatherContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GatherContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Genus.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GenusBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GenusContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GenusContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Geographic.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GeographicBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GeographicContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GeographicContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Identity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\IdentityBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\IdentityContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\IdentityContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ImperialCourt.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ImperialCourtBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ImperialCourtContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ImperialCourtContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Month.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\MonthBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\MonthContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\MonthContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ReignTitle.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ReignTitleBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ReignTitleContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ReignTitleContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SexagenaryCycle.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SexagenaryCycleBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SexagenaryCycleContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SexagenaryCycleContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Source.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SourceBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SourceContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SourceContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Version.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\VersionBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\VersionContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\VersionContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Year.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\YearBase.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\YearContainer.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\YearContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DllLib.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\AncientBooksContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Article.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ArticleBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ArticleContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Book.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\BookBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\BookContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Calendar.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CalendarBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CalendarContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Category.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CategoryBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CategoryContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Character.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CharacterBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CharacterContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Country.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CountryBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CountryContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Day.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\DayBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\DayContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Emperor.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\EmperorBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\EmperorContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Gather.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GatherBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GatherContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Genus.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GenusBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GenusContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Geographic.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GeographicBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GeographicContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Identity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\IdentityBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\IdentityContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ImperialCourt.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ImperialCourtBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ImperialCourtContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Month.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\MonthBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\MonthContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ReignTitle.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ReignTitleBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ReignTitleContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SexagenaryCycle.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SexagenaryCycleBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SexagenaryCycleContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Source.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SourceBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SourceContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Version.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\VersionBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\VersionContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Year.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\YearBase.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\YearContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\ArticleEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\BookEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\CalendarEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\CategoryEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\CharacterEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\CountryEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\DayEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\EmperorEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\GatherEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\GenusEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\GeographicEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\IdentityEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\ImperialCourtEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\MonthEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\ReignTitleEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\SexagenaryCycleEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\SourceEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\VersionEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\YearEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DllLib.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

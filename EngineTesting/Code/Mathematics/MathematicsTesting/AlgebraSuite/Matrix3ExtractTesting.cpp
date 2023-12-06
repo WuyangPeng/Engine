@@ -11,16 +11,16 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Mathematics/Algebra/AxisAngleDetail.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
-#include "Mathematics/Algebra/Matrix3ExtractDetail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
 
 #include <random>
 
 namespace Mathematics
 {
-    template class Matrix3Extract<float>;
-    template class Matrix3Extract<double>;
+    template class AxisAngle<float>;
+    template class AxisAngle<double>;
 }
 
 Mathematics::Matrix3ExtractTesting::Matrix3ExtractTesting(const OStreamShared& streamShared)

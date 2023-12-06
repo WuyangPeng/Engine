@@ -13,6 +13,7 @@
 #include "DefaultProjectGeneration.h"
 #include "ProjectGenerationFactory.h"
 #include "ReplaceProjectGeneration.h"
+#include "SlnProjectGeneration.h"
 #include "Utf8ReplaceProjectGeneration.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "AssistTools/GenerateProjects/Flags/ProjectGenerationType.h"
@@ -28,6 +29,10 @@ AssistTools::ProjectGenerationFactory::ProjectGenerationSharedPtr AssistTools::P
         case ProjectGenerationType::Utf8:
         {
             return std::make_shared<Utf8ReplaceProjectGeneration>(fileName, gameParameterAnalysis, codeMappingAnalysis);
+        }
+        case ProjectGenerationType::Sln:
+        {
+            return std::make_shared<SlnProjectGeneration>(fileName, gameParameterAnalysis, codeMappingAnalysis);
         }
         default:
         {

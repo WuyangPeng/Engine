@@ -298,6 +298,9 @@
     <Filter Include="Estimate 模板文件">
       <UniqueIdentifier>{097fb315-f3e5-45c6-9727-6c067662dc5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Algebra 源文件\Detail">
+      <UniqueIdentifier>{b3bd582d-04d7-4384-90ea-cb2e8207c15c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Mathematics\DllLib.cpp">
@@ -552,7 +555,7 @@
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Matrix3EigenDecomposition.cpp">
       <Filter>Algebra 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Matrix3Extract.cpp">
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\AxisAngle.cpp">
       <Filter>Algebra 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Matrix4.cpp">
@@ -1866,6 +1869,18 @@
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\SphereCoordinates.cpp">
       <Filter>Algebra 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Transform.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Detail\TransformMatrix.cpp">
+      <Filter>Algebra 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Detail\AffineMatrix.cpp">
+      <Filter>Algebra 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\BoundingSphere.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsLib.h">
@@ -1949,7 +1964,7 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix3EigenDecomposition.h">
       <Filter>Algebra 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix3Extract.h">
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AxisAngle.h">
       <Filter>Algebra 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix4.h">
@@ -2078,7 +2093,7 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix3EigenDecompositionDetail.h">
       <Filter>Algebra 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix3ExtractDetail.h">
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AxisAngleDetail.h">
       <Filter>Algebra 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix4Detail.h">
@@ -5012,7 +5027,7 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix3EigenDecompositionAchieve.h">
       <Filter>Algebra 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix3ExtractAchieve.h">
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AxisAngleAchieve.h">
       <Filter>Algebra 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix4Achieve.h">
@@ -5842,6 +5857,33 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Estimate\SlerpDetail.h">
       <Filter>Estimate 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Transform.h">
+      <Filter>Algebra 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\TransformDetail.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\TransformMatrixDetail.h">
+      <Filter>Algebra 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\TransformMatrix.h">
+      <Filter>Algebra 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\AffineMatrixDetail.h">
+      <Filter>Algebra 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\AffineMatrix.h">
+      <Filter>Algebra 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\BoundingSphere.h">
+      <Filter>Algebra 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\BoundingSphereAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\BoundingSphereDetail.h">
+      <Filter>Algebra 模板文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

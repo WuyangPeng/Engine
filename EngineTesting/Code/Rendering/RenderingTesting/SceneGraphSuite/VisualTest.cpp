@@ -37,7 +37,7 @@ Rendering::VisualTest::VisualTest(VisualPrimitiveType type,
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, VisualTest)
 
-Rendering::VisualTest::ControllerInterfaceSharedPtr Rendering::VisualTest::Clone() const
+Rendering::VisualTest::ControllerSharedPtr Rendering::VisualTest::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

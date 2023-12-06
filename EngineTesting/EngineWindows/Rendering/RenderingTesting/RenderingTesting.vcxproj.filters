@@ -178,6 +178,30 @@
     <Filter Include="RendererEngineSuite 源文件">
       <UniqueIdentifier>{ba1942ac-8ed2-44da-a420-1c233808e8ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ControllersSuite 头文件\Detail">
+      <UniqueIdentifier>{a6801e90-5e21-4fa3-bdb8-d654a48f83ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ControllersSuite 源文件\Detail">
+      <UniqueIdentifier>{d5829d77-f0f9-4f60-8638-dc440a32e27d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneGraphSuite 头文件\Detail">
+      <UniqueIdentifier>{d08b41b4-5488-48f3-ae89-32a36f59c89e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneGraphSuite 源文件\Detail">
+      <UniqueIdentifier>{4237f4ec-6b13-403e-8696-ff088e090a35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneGraphSuite 头文件\ViewVolume">
+      <UniqueIdentifier>{d251f344-128a-4a64-83eb-ed4489b51f9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneGraphSuite 源文件\ViewVolume">
+      <UniqueIdentifier>{99cefb21-5c2e-4c72-bcfc-1bc26d067a35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneGraphSuite 源文件\Camera">
+      <UniqueIdentifier>{70152148-770f-4bca-b33e-439acd4011de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneGraphSuite 头文件\Camera">
+      <UniqueIdentifier>{16e86711-c307-4544-8cc4-2a399aefdae0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json">
@@ -326,9 +350,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ConsoleGraphSuite\ConsoleGraphSuite.h">
       <Filter>ConsoleGraphSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\ControlledObjectTest.h">
-      <Filter>ControllersSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\ControlledObjectTesting.h">
       <Filter>ControllersSuite 头文件</Filter>
     </ClInclude>
@@ -336,9 +357,6 @@
       <Filter>ControllersSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\ControllersSuite.h">
-      <Filter>ControllersSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\ControllerTest.h">
       <Filter>ControllersSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\ControllerTesting.h">
@@ -542,16 +560,10 @@
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\RenderTargetTesting.h">
       <Filter>ResourcesSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\CameraFrustumDataTesting.h">
-      <Filter>SceneGraphSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\CameraManageTesting.h">
       <Filter>SceneGraphSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\CameraNodeTesting.h">
-      <Filter>SceneGraphSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\CameraTesting.h">
       <Filter>SceneGraphSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\CullerTesting.h">
@@ -917,6 +929,42 @@
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RendererEngineSuite\DepthRangeTesting.h">
       <Filter>RendererEngineSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\Detail\ControllerTest.h">
+      <Filter>ControllersSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\Detail\ControlledObjectTest.h">
+      <Filter>ControllersSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Detail\ViewVolumeTest.h">
+      <Filter>SceneGraphSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\ViewVolume\WorldCoordinateFrameTesting.h">
+      <Filter>SceneGraphSuite 头文件\ViewVolume</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\ViewVolume\CameraFrustumTesting.h">
+      <Filter>SceneGraphSuite 头文件\ViewVolume</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\ViewVolume\ProjectionMatrixTesting.h">
+      <Filter>SceneGraphSuite 头文件\ViewVolume</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\ViewVolume\ViewVolumeTesting.h">
+      <Filter>SceneGraphSuite 头文件\ViewVolume</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\ViewVolume\ViewVolumeTestingBase.h">
+      <Filter>SceneGraphSuite 头文件\ViewVolume</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Detail\ViewVolumeTool.h">
+      <Filter>SceneGraphSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Camera\CameraTesting.h">
+      <Filter>SceneGraphSuite 头文件\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Camera\CameraFrustumDataTesting.h">
+      <Filter>SceneGraphSuite 头文件\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Camera\PickLineTesting.h">
+      <Filter>SceneGraphSuite 头文件\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\TestingHelper.cpp">
@@ -931,16 +979,10 @@
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\BlendTransformControllerTesting.cpp">
       <Filter>ControllersSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\ControlledObjectTest.cpp">
-      <Filter>ControllersSuite 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\ControlledObjectTesting.cpp">
       <Filter>ControllersSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\ControllerKeyInfoTesting.cpp">
-      <Filter>ControllersSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\ControllerTest.cpp">
       <Filter>ControllersSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\ControllerTesting.cpp">
@@ -1165,16 +1207,10 @@
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\VisualTesting.cpp">
       <Filter>SceneGraphSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\CameraFrustumDataTesting.cpp">
-      <Filter>SceneGraphSuite 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\CameraManageTesting.cpp">
       <Filter>SceneGraphSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\CameraNodeTesting.cpp">
-      <Filter>SceneGraphSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\CameraTesting.cpp">
       <Filter>SceneGraphSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\CameraModelDirectionVectorConstantTesting.cpp">
@@ -1431,6 +1467,42 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RendererEngineSuite\DepthRangeTesting.cpp">
       <Filter>RendererEngineSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\Detail\ControllerTest.cpp">
+      <Filter>ControllersSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\Detail\ControlledObjectTest.cpp">
+      <Filter>ControllersSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Detail\ViewVolumeTest.cpp">
+      <Filter>SceneGraphSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\ViewVolume\WorldCoordinateFrameTesting.cpp">
+      <Filter>SceneGraphSuite 源文件\ViewVolume</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\ViewVolume\CameraFrustumTesting.cpp">
+      <Filter>SceneGraphSuite 源文件\ViewVolume</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\ViewVolume\ProjectionMatrixTesting.cpp">
+      <Filter>SceneGraphSuite 源文件\ViewVolume</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\ViewVolume\ViewVolumeTesting.cpp">
+      <Filter>SceneGraphSuite 源文件\ViewVolume</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\ViewVolume\ViewVolumeTestingBase.cpp">
+      <Filter>SceneGraphSuite 源文件\ViewVolume</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Detail\ViewVolumeTool.cpp">
+      <Filter>SceneGraphSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Camera\CameraTesting.cpp">
+      <Filter>SceneGraphSuite 源文件\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Camera\CameraFrustumDataTesting.cpp">
+      <Filter>SceneGraphSuite 源文件\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Camera\PickLineTesting.cpp">
+      <Filter>SceneGraphSuite 源文件\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

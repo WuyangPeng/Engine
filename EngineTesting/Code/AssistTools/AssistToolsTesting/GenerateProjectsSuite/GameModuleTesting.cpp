@@ -38,8 +38,12 @@ void AssistTools::GameModuleTesting::GameModuleReadTest()
     const auto chineseName = SYSTEM_TEXT("ChineseName");
     const auto uppercaseName = SYSTEM_TEXT("UppercaseName");
     constexpr auto projectServiceType = ProjectServiceType::Server;
+    const GameModule::GuidContainer guid{ SYSTEM_TEXT("6E4ADD87-9435-4726-9FA2-0FB79FBE6727"),
+                                          SYSTEM_TEXT("CCA2224E-0568-4DAB-9D57-0DD4D20EBD46"),
+                                          SYSTEM_TEXT("5B753E23-3BE0-4BEA-88F9-EF9388D1058A"),
+                                          SYSTEM_TEXT("4CCECE3C-E703-4694-A0DB-B136CAAEF3D0") };
 
-    const GameModule gameModule{ moduleName, chineseName, projectServiceType, uppercaseName };
+    const GameModule gameModule{ moduleName, chineseName, projectServiceType, uppercaseName, guid };
 
     ASSERT_EQUAL(gameModule.GetModuleName(), moduleName);
     ASSERT_EQUAL(gameModule.GetChineseName(), chineseName);

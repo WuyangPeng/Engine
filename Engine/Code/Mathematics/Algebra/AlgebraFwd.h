@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/26 14:34)
+/// 标准：std:c++20
+/// 版本：1.0.0.1 (2023/11/27 19:28)
 
 #ifndef MATHEMATICS_ALGEBRA_FWD_H
 #define MATHEMATICS_ALGEBRA_FWD_H
@@ -128,7 +128,7 @@ namespace Mathematics
 
     template <typename Real>
     requires std::is_arithmetic_v<Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Matrix3Extract;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AxisAngle;
 
     template <typename Real>
     requires std::is_arithmetic_v<Real>
@@ -189,6 +189,14 @@ namespace Mathematics
     template <typename Real>
     requires std::is_floating_point_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE SphereCoordinates;
+
+    template <typename Real>
+    requires std::is_floating_point_v<Real>
+    class Transform;
+
+    template <typename Real>
+    requires std::is_floating_point_v<Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BoundingSphere;
 
     enum class ExtractEulerResultType;
     enum class ExtractEulerResultOrder;

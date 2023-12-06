@@ -39,8 +39,8 @@ namespace CoreTools
 
         NODISCARD virtual int GetFileByteSize() const = 0;
 
-        NODISCARD virtual void Read(size_t itemSize, void* data) = 0;
-        NODISCARD virtual void Read(size_t itemSize, size_t itemsNumber, void* data) = 0;
+        virtual void Read(size_t itemSize, void* data) = 0;
+        virtual void Read(size_t itemSize, size_t itemsNumber, void* data) = 0;
 
     public:
         NODISCARD static ReadFileManagerSharedPtr Create(const String& fileName);

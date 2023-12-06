@@ -41,7 +41,7 @@ namespace $ModuleName$
                                                                   $ModuleName$MiddleLayer::GUIManager>;
     using MessageType = Framework::WindowMessage<MiddleLayerType>;
 
-    class $ModuleName$Message : public MessageType
+    class $ModuleName$Message final : public MessageType
     {
     public:
         using ClassType = $ModuleName$Message;

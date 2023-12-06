@@ -76,6 +76,9 @@ namespace AssistTools
     constexpr System::StringView projectTestingJson{ SYSTEM_TEXT("ProjectTestingJson") };
     constexpr System::StringView projectTestingJsonOriginal{ SYSTEM_TEXT("ProjectTesting.json") };
 
+    constexpr System::StringView testingJson{ SYSTEM_TEXT("TestingJson") };
+    constexpr System::StringView testingJsonOriginal{ SYSTEM_TEXT("Testing.json") };
+
     constexpr System::StringView projectNameJson{ SYSTEM_TEXT("ProjectNameJson") };
 
     constexpr System::StringView rendererJson{ SYSTEM_TEXT("RendererJson") };

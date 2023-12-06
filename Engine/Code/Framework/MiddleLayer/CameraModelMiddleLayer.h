@@ -13,10 +13,11 @@
 #include "Framework/FrameworkDll.h"
 
 #include "ModelMiddleLayer.h"
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
-#include "Rendering/DataTypes/Transform.h"
+#include "Mathematics/Algebra/Transform.h"
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(CameraModelMiddleLayerImpl);
 
@@ -31,7 +32,7 @@ namespace Framework
         using APoint = Mathematics::APointF;
         using AVector = Mathematics::AVectorF;
         using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
-        using Transform = Rendering::TransformF;
+        using Transform = Mathematics::TransformF;
 
     public:
         CameraModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
@@ -79,7 +80,7 @@ namespace Framework
         void SetEndTrack(float xTrack, float yTrack) noexcept;
         void RotateTrackBall();
         void SetTrackBallDow(bool trackBallDow) noexcept;
-        void SetSaveRotate() noexcept(gAssert < 2 || gRenderingAssert < 2);
+        void SetSaveRotate();
         void SetDoRoll(NumericalValueSymbol doRoll) noexcept;
         void SetDoYaw(NumericalValueSymbol doYaw) noexcept;
         void SetDoPitch(NumericalValueSymbol doPitch) noexcept;

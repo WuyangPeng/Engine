@@ -1,7 +1,7 @@
 {
   "DefaultEnvironment": "",
   "EngineDirectory": "Configuration/EngineDirectory.json",
+  "Version": "1.0.0.0", 
   "PrintRun": 1,
-  "Version": "1.0.0.0",
   "RandomSeed": 1000000
 }

@@ -53,7 +53,7 @@ namespace Rendering
         void SetCamera(const CameraSharedPtr& camera);
         NODISCARD ConstCameraSharedPtr GetCamera() const noexcept;
 
-        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ControllerSharedPtr Clone() const override;
 
     protected:
         NODISCARD bool UpdateWorldData(double applicationTime) override;

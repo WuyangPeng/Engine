@@ -10,7 +10,6 @@
 #include "Rendering/RenderingExport.h"
 
 #include "IKGoalImpl.h"
-
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -19,6 +18,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 
 Rendering::IKGoalImpl::IKGoalImpl(const SpatialSharedPtr& target, const SpatialSharedPtr& effector, float weight) noexcept
     : weight{ weight }, goalTarget{ target }, effector{ effector }

@@ -29,7 +29,7 @@ namespace Framework
 
         using Matrix = Mathematics::MatrixF;
         using AVector = Mathematics::AVectorF;
-        using Transform = Rendering::TransformF;
+        using Transform = Mathematics::TransformF;
         using SpatialSharedPtr = Rendering::SpatialSharedPtr;
         using ConstCameraSharedPtr = Rendering::ConstCameraSharedPtr;
 
@@ -49,7 +49,7 @@ namespace Framework
 
         void SetBeginTrack(float xTrack, float yTrack) noexcept;
         void SetEndTrack(float xTrack, float yTrack) noexcept;
-        void SetSaveRotate() noexcept(gAssert < 2 || gRenderingAssert < 2);
+        void SetSaveRotate();
 
         NODISCARD Transform GetMotionObjectLocalTransform() const noexcept;
 

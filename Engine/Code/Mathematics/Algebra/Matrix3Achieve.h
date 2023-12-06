@@ -11,10 +11,10 @@
 #define MATHEMATICS_ALGEBRA_MATRIX3_ACHIEVE_H
 
 #include "AVector.h"
+#include "AxisAngleDetail.h"
 #include "EulerDetail.h"
 #include "Matrix2Detail.h"
 #include "Matrix3.h"
-#include "Matrix3ExtractDetail.h"
 #include "Matrix4Detail.h"
 #include "TridiagonalizeDetail.h"
 #include "Vector3Detail.h"
@@ -828,6 +828,43 @@ void Mathematics::Matrix3<Real>::MakeEuler(const Euler& euler) noexcept(gAssert 
             break;
         default:
             break;
+    }
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEuler(ExtractEulerResultOrder euler) const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    switch (euler)
+    {
+        case ExtractEulerResultOrder::XYZ:
+            return ExtractEulerXYZ();
+        case ExtractEulerResultOrder::XZY:
+            return ExtractEulerXZY();
+        case ExtractEulerResultOrder::YXZ:
+            return ExtractEulerYXZ();
+        case ExtractEulerResultOrder::YZX:
+            return ExtractEulerYZX();
+        case ExtractEulerResultOrder::ZXY:
+            return ExtractEulerZXY();
+        case ExtractEulerResultOrder::ZYX:
+            return ExtractEulerZYX();
+        case ExtractEulerResultOrder::XYX:
+            return ExtractEulerXYX();
+        case ExtractEulerResultOrder::XZX:
+            return ExtractEulerXZX();
+        case ExtractEulerResultOrder::YXY:
+            return ExtractEulerYXY();
+        case ExtractEulerResultOrder::YZY:
+            return ExtractEulerYZY();
+        case ExtractEulerResultOrder::ZXZ:
+            return ExtractEulerZXZ();
+        case ExtractEulerResultOrder::ZYZ:
+            return ExtractEulerZYZ();
+        default:
+            return ExtractEulerXYZ();
     }
 }
 

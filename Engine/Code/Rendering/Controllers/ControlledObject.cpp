@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/24 11:14)
+/// 标准：std:c++20
+/// 版本：1.0.0.1 (2023/11/21 09:30)
 
 #include "Rendering/RenderingExport.h"
 
@@ -19,36 +19,73 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Mathematics/Base/MathDetail.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, ControlledObject);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ControlledObject);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, ControlledObject);
-CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, ControlledObject);
+CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, ControlledObject)
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, ControlledObject)
 
-Rendering::ControlledObject::ControlledObject(CoreTools::DisableNotThrow disableNotThrow)
-    : ParentType{ disableNotThrow }, impl{ this }
+Rendering::ControlledObject::ControlledObject(const std::string& name)
+    : ParentType{ name }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, ControlledObject)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ControlledObject, Update, double, bool)
+bool Rendering::ControlledObject::Update(double applicationTime)
+{
+    RENDERING_CLASS_IS_VALID_1;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ControlledObject, GetNumControllers, int)
+    return impl->Update(applicationTime);
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ControlledObject, GetConstController, int, Rendering::ConstControllerInterfaceSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ControlledObject, GetController, int, Rendering::ControllerInterfaceSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ControlledObject, AttachController, ControllerInterfaceSharedPtr, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ControlledObject, DetachController, ControllerInterfaceSharedPtr, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ControlledObject, DetachAllControllers, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ControlledObject, UpdateControllers, double, bool)
+int Rendering::ControlledObject::GetNumControllers() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNumControllers();
+}
+
+Rendering::ControlledObject::ConstControllerSharedPtr Rendering::ControlledObject::GetConstController(int index) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetConstController(index);
+}
+
+Rendering::ControlledObject::ControllerSharedPtr Rendering::ControlledObject::GetController(int index)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->GetController(index);
+}
+
+void Rendering::ControlledObject::AttachController(const ControllerSharedPtr& controller)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->AttachController(controller, boost::polymorphic_pointer_downcast<ControllerInterface>(shared_from_this()));
+}
+
+void Rendering::ControlledObject::DetachController(const ControllerSharedPtr& controller)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->DetachController(controller);
+}
+
+void Rendering::ControlledObject::DetachAllControllers()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->DetachAllControllers();
+}
 
 Rendering::ControlledObject::ControlledObject(LoadConstructor loadConstructor)
-    : ParentType{ loadConstructor }, impl{ this }
+    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -117,27 +154,4 @@ void Rendering::ControlledObject::Load(CoreTools::BufferSource& source)
     impl->Load(source);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
-}
-
-Rendering::ControllerInterface::ConstControllerInterfaceSharedPtr Rendering::ControlledObject::GetControllerObject() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    THROW_EXCEPTION(SYSTEM_TEXT("GetControllerObject 不能调用。"))
-}
-
-Rendering::ControllerInterface::ControllerInterfaceSharedPtr Rendering::ControlledObject::GetControllerObject()
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    THROW_EXCEPTION(SYSTEM_TEXT("GetControllerObject 不能调用。"))
-}
-
-void Rendering::ControlledObject::SetControllerObject(const ControllerInterfaceSharedPtr& object)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    System::UnusedFunction(object);
-
-    THROW_EXCEPTION(SYSTEM_TEXT("SetControllerObject 不能调用。"))
 }

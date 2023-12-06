@@ -166,6 +166,18 @@ namespace Mathematics
 #include SYSTEM_WARNING_POP
         }
 
+        template <int RowIndex, int ColumnIndex>
+        NODISCARD constexpr Real GetValue() const noexcept
+        {
+            return GetValue<RowIndex * columnSize + ColumnIndex>();
+        }
+
+        template <int RowIndex, int ColumnIndex>
+        constexpr void SetValue(Real value) noexcept
+        {
+            SetValue<RowIndex * columnSize + ColumnIndex>(value);
+        }
+
         template <int Index>
         constexpr void SetValue(Real value) noexcept
         {
@@ -177,6 +189,12 @@ namespace Mathematics
             entry[Index] = value;
 
 #include SYSTEM_WARNING_POP
+        }
+
+        template <int RowIndex, int ColumnIndex>
+        constexpr void Plus(Real value) noexcept
+        {
+            Plus<RowIndex * columnSize + ColumnIndex>(value);
         }
 
         template <int Index>
@@ -269,16 +287,15 @@ namespace Mathematics
         // 反射矩阵到一个指定的平面，这个平面包含“原点”和单位长度的“向量”。
         void MakeReflection(const APoint& origin, const AVector& normal);
 
-        NODISCARD Real GetNorm() const noexcept;
+        NODISCARD Real GetNorm() const;
 
         // 特殊矩阵。
-
-        static constexpr Matrix GetZeroMatrix()
+        NODISCARD static constexpr Matrix GetZeroMatrix() noexcept
         {
             return Matrix{};
         }
 
-        static constexpr Matrix GetIdentityMatrix()
+        NODISCARD static constexpr Matrix GetIdentityMatrix() noexcept
         {
             return Matrix{ MatrixInitType::Identity };
         }

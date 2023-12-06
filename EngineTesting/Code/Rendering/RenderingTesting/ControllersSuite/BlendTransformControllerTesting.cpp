@@ -19,9 +19,9 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AQuaternionDetail.h"
+#include "Mathematics/Algebra/Transform.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/Controllers/BlendTransformController.h"
-#include "Rendering/DataTypes/Transform.h"
 #include "Rendering/RenderingTesting/SceneGraphSuite/SpatialTest.h"
 
 Rendering::BlendTransformControllerTesting::BlendTransformControllerTesting(const OStreamShared& stream)

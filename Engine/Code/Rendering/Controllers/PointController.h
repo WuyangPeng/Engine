@@ -63,7 +63,7 @@ namespace Rendering
 
         // 动画更新。应用程序时间以毫秒为单位。
         NODISCARD bool Update(double applicationTime) override;
-        void SetControllerObject(const ControllerInterfaceSharedPtr& object) override;
+        void SetController(const ControllerSharedPtr& object) override;
 
     protected:
         // 该类从运动参数计算新的位置和方向。

@@ -14,7 +14,7 @@
 
 #include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
-#include "Rendering/DataTypes/Bound.h"
+#include "Mathematics/Algebra/BoundingSphere.h"
 #include "Rendering/SceneGraph/Culler.h"
 #include "Rendering/SceneGraph/SceneGraphFwd.h"
 #include "Rendering/SceneGraph/Spatial.h"
@@ -106,7 +106,7 @@ namespace Rendering
 
         // 对几何更新的支持。
         NODISCARD bool UpdateWorldData(double applicationTime);
-        NODISCARD BoundF GetWorldBound();
+        NODISCARD Mathematics::BoundingSphereF GetWorldBound();
 
         // 对分级裁剪的支持。
         void GetVisibleSet(Culler& culler, bool noCull);

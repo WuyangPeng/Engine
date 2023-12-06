@@ -12,10 +12,11 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/Matrix.h"
-#include "Rendering/DataTypes/Transform.h"
+#include "Mathematics/Algebra/Transform.h"
 
 namespace Rendering
 {
@@ -30,17 +31,17 @@ namespace Rendering
         using BufferSource = CoreTools::BufferSource;
 
     public:
-        explicit TransformControllerImpl(const TransformF& localTransform) noexcept;
+        explicit TransformControllerImpl(const Mathematics::TransformF& localTransform) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        void SetTransform(const TransformF& aLocalTransform) noexcept;
-        NODISCARD TransformF GetTransform() const noexcept;
+        void SetTransform(const Mathematics::TransformF& aLocalTransform) noexcept;
+        NODISCARD Mathematics::TransformF GetTransform() const noexcept;
 
         void SetTranslate(const APoint& translate) noexcept;
         void SetRotate(const Matrix& rotate) noexcept;
-        void SetUniformScale(float scale) noexcept(gAssert < 2 || gRenderingAssert < 2);
-        void SetScale(const APoint& scale) noexcept(gAssert < 2 || gRenderingAssert < 2);
+        void SetUniformScale(float scale);
+        void SetScale(const APoint& scale);
         void SetMatrix(const Matrix& matrix) noexcept;
 
         NODISCARD int GetStreamingSize() const noexcept;
@@ -48,7 +49,7 @@ namespace Rendering
         void Load(BufferSource& source);
 
     private:
-        TransformF localTransform;
+        Mathematics::TransformF localTransform;
     };
 }
 

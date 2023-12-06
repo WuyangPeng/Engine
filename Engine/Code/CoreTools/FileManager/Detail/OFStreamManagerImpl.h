@@ -26,7 +26,7 @@ namespace CoreTools
         using ClassType = OFStreamManagerImpl;
 
         using String = System::String;
-        using PosType = System::PosType;
+        using PosType = System::OFileStream::pos_type;
         using OFileStream = System::OFileStream;
 
     public:
@@ -42,7 +42,7 @@ namespace CoreTools
     private:
         void SeekEnd();
 
-        NODISCARD static int GetOpenMode(const String& fileName, bool addition);
+        NODISCARD static std::ios_base::openmode GetOpenMode(const String& fileName, bool addition);
 
     private:
         OFileStream oStream;

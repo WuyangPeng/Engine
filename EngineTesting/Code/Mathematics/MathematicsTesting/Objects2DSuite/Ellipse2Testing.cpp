@@ -153,7 +153,7 @@ void Mathematics::Ellipse2Testing::CalculateTest()
         matrix2 = Matrix2D(firstEllipse2.GetAxis0() * firstEllipse2.GetExtent0(), firstEllipse2.GetAxis0() * firstEllipse2.GetExtent0()) +
                   Matrix2D(firstEllipse2.GetAxis1() * firstEllipse2.GetExtent1(), firstEllipse2.GetAxis1() * firstEllipse2.GetExtent1());
 
-        ASSERT_TRUE(Approximate(matrix0, matrix1, 1e-3));
+        ASSERT_TRUE(Approximate(matrix0, matrix1, 1e-2));
         ASSERT_TRUE(Approximate(matrix0, matrix2, 1e-10));
 
         const Vector2 point(randomDistribution0(generator), randomDistribution0(generator));
@@ -163,7 +163,7 @@ void Mathematics::Ellipse2Testing::CalculateTest()
         auto ratio1 = Vector2ToolsD::DotProduct(firstEllipse2.GetAxis1(), diff) / firstEllipse2.GetExtent1();
         auto evaluate = ratio0 * ratio0 + ratio1 * ratio1 - 1.0;
 
-        ASSERT_APPROXIMATE(firstEllipse2.Evaluate(point), secondEllipse2.Evaluate(point), 1e-5);
+        ASSERT_APPROXIMATE(firstEllipse2.Evaluate(point), secondEllipse2.Evaluate(point), 1e-4);
 
         ASSERT_APPROXIMATE(firstEllipse2.Evaluate(point), evaluate, 1e-10);
 

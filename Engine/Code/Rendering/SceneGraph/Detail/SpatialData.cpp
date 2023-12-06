@@ -30,7 +30,7 @@ Rendering::SpatialData::SpatialData() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, SpatialData)
 
-void Rendering::SpatialData::DirectSetWorldTransform(const TransformF& transform) noexcept
+void Rendering::SpatialData::DirectSetWorldTransform(const Mathematics::TransformF& transform) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -46,7 +46,7 @@ void Rendering::SpatialData::DirectSetWorldBound(const Bound& bound) noexcept
     worldBoundIsCurrent = true;
 }
 
-void Rendering::SpatialData::SetLocalTransform(const TransformF& transform) noexcept
+void Rendering::SpatialData::SetLocalTransform(const Mathematics::TransformF& transform) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -61,7 +61,7 @@ void Rendering::SpatialData::SetCullingMode(CullingMode aCulling) noexcept
     culling = aCulling;
 }
 
-void Rendering::SpatialData::SetLocalTransformToWorldTransform(const TransformF& aWorldTransform)
+void Rendering::SpatialData::SetLocalTransformToWorldTransform(const Mathematics::TransformF& aWorldTransform)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -107,21 +107,21 @@ bool Rendering::SpatialData::GetWorldBoundIsCurrent() const noexcept
     return worldBoundIsCurrent;
 }
 
-Rendering::TransformF Rendering::SpatialData::GetLocalTransform() const noexcept
+Mathematics::TransformF Rendering::SpatialData::GetLocalTransform() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return localTransform;
 }
 
-Rendering::TransformF Rendering::SpatialData::GetWorldTransform() const noexcept
+Mathematics::TransformF Rendering::SpatialData::GetWorldTransform() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return worldTransform;
 }
 
-Rendering::BoundF Rendering::SpatialData::GetWorldBound() const noexcept
+Mathematics::BoundingSphereF Rendering::SpatialData::GetWorldBound() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -185,7 +185,7 @@ void Rendering::SpatialData::SetLocalTransformRotate(const Matrix& rotate) noexc
     localTransform.SetRotate(rotate);
 }
 
-void Rendering::SpatialData::SetWorldTransformOnUpdate(const TransformF& transform) noexcept
+void Rendering::SpatialData::SetWorldTransformOnUpdate(const Mathematics::TransformF& transform) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 

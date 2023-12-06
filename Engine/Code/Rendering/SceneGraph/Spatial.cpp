@@ -26,7 +26,7 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Spatial);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Spatial);
 
 Rendering::Spatial::Spatial(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
-    : ParentType{ CoreTools::DisableNotThrow::Disable }, parent{ nullptr }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+    : ParentType{ "Spatial" }, parent{ nullptr }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -89,7 +89,7 @@ bool Rendering::Spatial::UpdateWorldData(double applicationTime)
     }
 
     // 更新与该对象相关的任何控制器。
-    return ParentType::UpdateControllers(applicationTime);
+    return ParentType::Update(applicationTime);
 }
 
 void Rendering::Spatial::PropagateBoundToRoot()
@@ -147,21 +147,21 @@ void Rendering::Spatial::OnGetVisibleSet(Culler& culler, bool noCull)
     culler.SetPlaneState(savePlaneState);
 }
 
-void Rendering::Spatial::SetLocalTransform(const TransformF& transform) noexcept
+void Rendering::Spatial::SetLocalTransform(const Mathematics::TransformF& transform) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetLocalTransform(transform);
 }
 
-void Rendering::Spatial::SetWorldTransform(const TransformF& transform) noexcept
+void Rendering::Spatial::SetWorldTransform(const Mathematics::TransformF& transform) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->DirectSetWorldTransform(transform);
 }
 
-void Rendering::Spatial::SetWorldBound(const BoundF& bound) noexcept
+void Rendering::Spatial::SetWorldBound(const Mathematics::BoundingSphereF& bound) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -182,28 +182,28 @@ void Rendering::Spatial::InitWorldBound()
     return impl->InitWorldBound();
 }
 
-void Rendering::Spatial::BoundGrowToContain(const BoundF& worldBound)
+void Rendering::Spatial::BoundGrowToContain(const Mathematics::BoundingSphereF& worldBound)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetWorldBound(worldBound);
 }
 
-Rendering::TransformF Rendering::Spatial::GetLocalTransform() const noexcept
+Mathematics::TransformF Rendering::Spatial::GetLocalTransform() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetLocalTransform();
 }
 
-Rendering::TransformF Rendering::Spatial::GetWorldTransform() const noexcept
+Mathematics::TransformF Rendering::Spatial::GetWorldTransform() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetWorldTransform();
 }
 
-Rendering::BoundF Rendering::Spatial::GetWorldBound() const noexcept
+Mathematics::BoundingSphereF Rendering::Spatial::GetWorldBound() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -284,7 +284,7 @@ void Rendering::Spatial::PostLink()
 
     ParentType::PostLink();
 
-    //parent = dynamic_cast<Spatial*>(GetControllerObject());
+    // parent = dynamic_cast<Spatial*>(GetController());
 }
 
 void Rendering::Spatial::Load(CoreTools::BufferSource& source)
@@ -324,7 +324,7 @@ void Rendering::Spatial::SetLocalTransformRotate(const Matrix& rotate) noexcept
     return impl->SetLocalTransformRotate(rotate);
 }
 
-void Rendering::Spatial::SetWorldTransformOnUpdate(const TransformF& transform) noexcept
+void Rendering::Spatial::SetWorldTransformOnUpdate(const Mathematics::TransformF& transform) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 

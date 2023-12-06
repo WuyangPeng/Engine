@@ -43,6 +43,7 @@ namespace AssistTools
         NODISCARD GameModuleContainerConstIter GetModuleEnd() const noexcept;
         NODISCARD MiddleLayerContainerConstIter GetMiddleLayerBegin() const noexcept;
         NODISCARD MiddleLayerContainerConstIter GetMiddleLayerEnd() const noexcept;
+        NODISCARD bool HasTools() const noexcept;
 
         NODISCARD String GetGameParameter(GameParameterType gameParameterType) const;
 

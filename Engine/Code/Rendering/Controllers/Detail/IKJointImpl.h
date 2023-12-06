@@ -48,7 +48,7 @@ namespace Rendering
         // Joint更新。
         NODISCARD AVector GetAxis(MatrixRotationAxis axisIndex) const;
         void UpdateWorldTransform();
-        void UpdateWorldRotateAndTranslate() noexcept(gAssert < 2 || gRenderingAssert < 2);
+        void UpdateWorldRotateAndTranslate();
         NODISCARD bool UpdateLocalTranslate(MatrixRotationAxis axisIndex);
         NODISCARD bool UpdateLocalRotate(MatrixRotationAxis axisIndex);
 
@@ -64,7 +64,7 @@ namespace Rendering
 
     private:
         // 索引i为joint的父世界axis[i]。
-        static constexpr  int numAxis = 3;
+        static constexpr int numAxis = 3;
 
         std::array<bool, numAxis> allowTranslation;  // 默认 = false
         std::array<float, numAxis> minTranslation;  // 默认 = -无穷大

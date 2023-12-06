@@ -12,7 +12,7 @@
 #include "CMainFunctionHelper.h"
 #include "System/Time/DeltaTime.h"
 #include "CoreTools/Base/Flags/UniqueIdSelect.h"
-#include "CoreTools/Base/UniqueIDManagerDetail.h"
+#include "CoreTools/Base/UniqueIdManagerDetail.h"
 #include "CoreTools/Command/CommandHandle.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"

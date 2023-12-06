@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %MillenniumHistoryTestingWin32DebugLib% BackgroundClientTestingD.exe
+start /d %MillenniumHistoryTestingWin32ReleaseLib% BackgroundClientTesting.exe
+start /d %MillenniumHistoryTestingX64DebugLib% BackgroundClientTestingD.exe
+start /d %MillenniumHistoryTestingX64ReleaseLib% BackgroundClientTesting.exe
+start /d %MillenniumHistoryTestingStaticWin32DebugLib% BackgroundClientTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticWin32ReleaseLib% BackgroundClientTestingStatic.exe
+start /d %MillenniumHistoryTestingStaticX64DebugLib% BackgroundClientTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticX64ReleaseLib% BackgroundClientTestingStatic.exe
+
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32DebugLib% BackgroundClientTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32ReleaseLib% BackgroundClientTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64DebugLib% BackgroundClientTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64ReleaseLib% BackgroundClientTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32DebugLib% BackgroundClientTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32ReleaseLib% BackgroundClientTesting.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64DebugLib% BackgroundClientTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64ReleaseLib% BackgroundClientTesting.exe
+
+pause

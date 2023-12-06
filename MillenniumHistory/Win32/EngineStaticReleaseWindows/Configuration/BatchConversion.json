@@ -2,5 +2,5 @@
   "input": "Resource/AncientBooksInput",
   "codeInput": "Resource/CSVEngineering",
   "csvOutput": "Resource/AncientBooks",
-  "codeOutput": "../../../Code/DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks"
+  "codeOutput": "../../../Code/DatabaseGenerate/DatabaseGenerateBase/AncientBooks"
 }

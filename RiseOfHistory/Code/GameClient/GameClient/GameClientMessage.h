@@ -48,7 +48,7 @@ namespace GameClient
                                                                   GameClientMiddleLayer::GUIManager>;
     using MessageType = Framework::WindowMessage<MiddleLayerType>;
 
-    class GameClientMessage : public MessageType
+    class GameClientMessage final : public MessageType
     {
     public:
         using ClassType = GameClientMessage;

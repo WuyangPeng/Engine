@@ -63,7 +63,7 @@ namespace Rendering
         // 粒子是广告牌，总是面对镜头。
         void GenerateParticles(const Camera& camera);
 
-        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ControllerSharedPtr Clone() const override;
 
         void GetVisibleSet(Culler& culler, bool noCull) override;
 

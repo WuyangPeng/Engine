@@ -32,8 +32,8 @@ namespace CoreTools
         NODISCARD int GetHandle() const noexcept;
         NODISCARD T GetWeight() const noexcept(std::is_arithmetic_v<T>);
 
-        NODISCARD void SetHandle(int aHandle) noexcept;
-        NODISCARD void SetWeight(const T& aWeight) noexcept(std::is_arithmetic_v<T>);
+        void SetHandle(int aHandle) noexcept;
+        void SetWeight(const T& aWeight) noexcept(std::is_arithmetic_v<T>);
 
     private:
         int handle;

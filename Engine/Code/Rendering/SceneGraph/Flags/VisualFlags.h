@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:09)
+/// 标准：std:c++20
+/// 版本：1.0.0.1 (2023/11/21 11:13)
 
 #ifndef RENDERING_SCENE_GRAPH_VISUAL_FLAGS_H
 #define RENDERING_SCENE_GRAPH_VISUAL_FLAGS_H
@@ -15,9 +15,9 @@ namespace Rendering
     enum class VisualPrimitiveType
     {
         None,  // 默认构造
-        Polypoint,
-        PolysegmentsDisjoint,
-        PolysegmentsContiguous,
+        PolyPoint,
+        PolySegmentsDisjoint,
+        PolySegmentsContiguous,
         Triangles,  // 抽象
         TriangleMesh,
         TriangleStrip,
@@ -49,7 +49,7 @@ namespace Rendering
     //      使用网状拓扑以确定表面帧。
     //      该算法使用最小二乘法，这是昂贵的。
 
-    //   VisualUpdateTypeUseTcoordChannel + 非负整数:
+    //   VisualUpdateTypeUseTCoordChannel + 非负整数:
     //      标准的方法来生成表面帧，是使用从顶点缓冲区中的纹理坐标单元。
 
     // 要通过顶点缓冲区减少视频内存的使用，如果你的顶点着色器使用法线，切线和双切钱，

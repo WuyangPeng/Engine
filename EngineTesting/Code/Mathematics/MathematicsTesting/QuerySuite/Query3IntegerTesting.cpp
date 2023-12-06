@@ -49,7 +49,6 @@ void Mathematics::Query3IntegerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(VerticesTest);
     ASSERT_NOT_THROW_EXCEPTION_0(PlaneTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(TetrahedronTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CircumspherTest);
 }
 

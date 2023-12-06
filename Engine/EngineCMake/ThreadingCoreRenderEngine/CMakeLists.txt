@@ -11,6 +11,8 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
 	include_directories(/data/github/Libs/boost/)
 	include_directories(/data/github/Libs/GSL/include/)
+	include_directories(/data/github/Libs/STLSoft/include/)
+	include_directories(/data/github/Libs/miniz/)
 
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 

@@ -15,7 +15,6 @@
 #include "GenerateProjectsFwd.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/CharacterString/CharacterStringFwd.h"
-#include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 
 #include <map>

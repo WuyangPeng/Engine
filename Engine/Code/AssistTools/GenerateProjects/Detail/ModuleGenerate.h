@@ -12,7 +12,6 @@
 
 #include "AssistTools/AssistToolsDll.h"
 
-#include "GenerateDirectory.h"
 #include "GenerateFile.h"
 #include "AssistTools/GenerateProjects/Flags/ProjectGenerationType.h"
 #include "AssistTools/GenerateProjects/GameParameterAnalysis.h"

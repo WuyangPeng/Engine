@@ -12,34 +12,16 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "BoundDetail.h"
 #include "ColourDetail.h"
-#include "TransformDetail.h"
 #include "CoreTools/ObjectSystems/BufferSource.h"
 #include "CoreTools/ObjectSystems/BufferTarget.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Mathematics/Algebra/BoundingSphereDetail.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 #include "Rendering/Resources/Buffers/MemberLayout.h"
 #include "Rendering/Shaders/ShaderData.h"
 #include "Rendering/State/BlendStateTarget.h"
 #include "Rendering/State/DepthStencilStateFace.h"
-
-template <>
-struct CoreTools::StreamSize<Rendering::TransformF>
-{
-    NODISCARD static int GetStreamSize(const Rendering::TransformF& value) noexcept
-    {
-        return value.GetStreamingSize();
-    }
-};
-
-template <>
-struct CoreTools::StreamSize<Rendering::BoundF>
-{
-    NODISCARD static int GetStreamSize(const Rendering::BoundF& value) noexcept
-    {
-        return value.GetStreamingSize();
-    }
-};
 
 template <typename T>
 struct CoreTools::StreamSize<Rendering::Colour<T>>
@@ -85,30 +67,6 @@ struct CoreTools::StreamSize<Rendering::ShaderData>
         return value.GetStreamingSize();
     }
 };
-
-template <>
-RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering::TransformF& datum);
-
-template <>
-RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::TransformF& datum);
-
-template <>
-RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering::TransformD& datum);
-
-template <>
-RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::TransformD& datum);
-
-template <>
-RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering::BoundF& datum);
-
-template <>
-RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::BoundF& datum);
-
-template <>
-RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering::BoundD& datum);
-
-template <>
-RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::BoundD& datum);
 
 template <>
 RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering::FloatColour& datum);

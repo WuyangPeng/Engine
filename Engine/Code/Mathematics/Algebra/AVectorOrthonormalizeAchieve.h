@@ -49,16 +49,26 @@ void Mathematics::AVectorOrthonormalize<Real>::Generate()
     // 计算 u0
     uVector.Normalize(epsilon);
 
-    // 计算 u1
-    const auto dotUV = Dot(uVector, vVector);
-    vVector -= dotUV * uVector;
-    vVector.Normalize(epsilon);
+#ifdef MATHEMATICS_PRECISION
 
-    // 计算 u2
-    const auto dotVW = Dot(vVector, wVector);
-    const auto dotUW = Dot(uVector, wVector);
-    wVector -= dotUW * uVector + dotVW * vVector;
-    wVector.Normalize(epsilon);
+    constexpr auto count = std::is_same_v<Real, float> ? MATHEMATICS_PRECISION : MATHEMATICS_PRECISION - 1;
+
+    for (auto i = 0; i < count; ++i)
+
+#endif  // MATHEMATICS_PRECISION
+
+    {
+        // 计算 u1
+        const auto dotUV = Dot(uVector, vVector);
+        vVector -= (dotUV * uVector);
+        vVector.Normalize(epsilon);
+
+        // 计算 u2
+        const auto dotVW = Dot(vVector, wVector);
+        const auto dotUW = Dot(uVector, wVector);
+        wVector -= (dotUW * uVector + dotVW * vVector);
+        wVector.Normalize(epsilon);
+    }
 }
 
 #ifdef OPEN_CLASS_INVARIANT

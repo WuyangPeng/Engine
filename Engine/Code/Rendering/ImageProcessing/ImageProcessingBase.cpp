@@ -16,6 +16,7 @@
 #include "System/OpenGL/Flags/OpenGLFlags.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Mathematics/Base/Float.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
@@ -29,7 +30,7 @@ Rendering::ImageProcessingBase::ImageProcessingBase(int numCols, int numRows, in
       numTargets{ numTargets },
       colSpacing{ 1.0f / numColsM1 },
       rowSpacing{ 1.0f / numRowsM1 },
-      camera{ std::make_shared<Camera>(false, true) },
+      camera{ std::make_shared<Camera>(false, DepthType::ZeroToOne, Mathematics::MathF::GetZeroTolerance()) },
       rectangle{},
       pvwMatrixConstant{},
       renderTargets{},

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/26 11:07)
+/// 标准：std:c++20
+/// 版本：1.0.0.1 (2023/11/27 19:30)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -14,10 +14,8 @@
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-using namespace std::literals;
-
 Mathematics::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "数学库"s }
+    : ParentType{ argc, argv, "数学库" }
 {
     InitSuite();
 
@@ -55,7 +53,6 @@ void Mathematics::TestingHelper::AddHelperSuite()
     AddSuite(helperSuite);
 }
 
-// private
 void Mathematics::TestingHelper::AddBaseSuite()
 {
     auto baseSuite = GenerateSuite("基本");
@@ -73,7 +70,6 @@ void Mathematics::TestingHelper::AddBaseSuite()
     AddSuite(baseSuite);
 }
 
-// private
 void Mathematics::TestingHelper::AddAlgebraSuite()
 {
     auto algebraSuite = GenerateSuite("代数");
@@ -121,11 +117,26 @@ void Mathematics::TestingHelper::AddAlgebraSuite()
     ADD_TEST(algebraSuite, AQuaternionTesting);
     ADD_TEST(algebraSuite, AlgebraStreamSizeTesting);
     ADD_TEST(algebraSuite, AlgebraAggregateTesting);
+    algebraSuite.AddSuite(GetTransformSuite());
+    ADD_TEST(algebraSuite, BoundingSphereTesting);
 
     AddSuite(algebraSuite);
 }
 
-// private
+CoreTools::Suite Mathematics::TestingHelper::GetTransformSuite()
+{
+    auto transformSuite = GenerateSuite("转换");
+
+    ADD_TEST(transformSuite, IdentityTransformTesting);
+    ADD_TEST(transformSuite, UnitScaleTransformTesting);
+    ADD_TEST(transformSuite, ScaleTransformTesting);
+    ADD_TEST(transformSuite, RotationTransformTesting);
+    ADD_TEST(transformSuite, MatrixTransformTesting);
+    ADD_TEST(transformSuite, TranslateTransformTesting);
+
+    return transformSuite;
+}
+
 void Mathematics::TestingHelper::AddObjects2DSuite()
 {
     auto objects2DSuite = GenerateSuite("对象2D");
@@ -145,7 +156,6 @@ void Mathematics::TestingHelper::AddObjects2DSuite()
     AddSuite(objects2DSuite);
 }
 
-// private
 void Mathematics::TestingHelper::AddObjects3DSuite()
 {
     auto objects3DSuite = GenerateSuite("对象3D");
@@ -183,7 +193,6 @@ void Mathematics::TestingHelper::AddPrimitivesSuite()
     AddSuite(primitivesSuite);
 }
 
-// private
 void Mathematics::TestingHelper::AddRationalSuite()
 {
     auto rationalSuite = GenerateSuite("有理数");
@@ -211,7 +220,6 @@ void Mathematics::TestingHelper::AddRationalSuite()
     AddSuite(rationalSuite);
 }
 
-// private
 void Mathematics::TestingHelper::AddNumericalAnalysisSuite()
 {
     auto numericalAnalysisSuite = GenerateSuite("数值分析");

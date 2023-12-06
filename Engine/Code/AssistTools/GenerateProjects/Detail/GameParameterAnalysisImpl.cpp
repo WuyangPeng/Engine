@@ -81,7 +81,16 @@ void AssistTools::GameParameterAnalysisImpl::InsertModule(const std::string& mod
     const auto projectServiceType = System::UnderlyingCastEnum<ProjectServiceType>(basicTree.get(projectServiceTypeKey.data(), System::EnumCastUnderlying(ProjectServiceType::Tools)));
     const auto uppercase = CoreTools::StringConversion::Utf8ConversionStandard(basicTree.get(uppercaseKey.data(), ""));
 
-    gameModule.emplace_back(CoreTools::StringConversion::Utf8ConversionStandard(moduleName), chineseName, projectServiceType, uppercase);
+    GameModule::GuidContainer guid{};
+    auto index = 0;
+    for (auto& element : guid)
+    {
+        element = CoreTools::StringConversion::Utf8ConversionStandard(basicTree.get(guidKey.data() + std::to_string(index), ""));
+
+        ++index;
+    }
+
+    gameModule.emplace_back(CoreTools::StringConversion::Utf8ConversionStandard(moduleName), chineseName, projectServiceType, uppercase, guid);
 }
 
 void AssistTools::GameParameterAnalysisImpl::AnalysisMiddleLayer()
@@ -161,6 +170,21 @@ AssistTools::GameParameterAnalysisImpl::MiddleLayerContainerConstIter AssistTool
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return middleLayer.cend();
+}
+
+bool AssistTools::GameParameterAnalysisImpl::HasTools() const noexcept
+{
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    for (const auto& element : gameModule)
+    {
+        if (element.GetProjectServiceType() == ProjectServiceType::Tools)
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 AssistTools::GameParameterAnalysisImpl::String AssistTools::GameParameterAnalysisImpl::GetGameParameter(GameParameterType gameParameterType) const

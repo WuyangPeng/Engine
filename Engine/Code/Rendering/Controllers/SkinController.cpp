@@ -31,7 +31,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, SkinController);
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, SkinController)
 
 Rendering::SkinController::SkinController(int numVertices, int numBones, const BaseRendererSharedPtr& baseRenderer)
-    : ParentType{ CoreTools::DisableNotThrow::Disable }, impl{ numVertices, numBones, baseRenderer }
+    : ParentType{ "SkinController" }, impl{ numVertices, numBones, baseRenderer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -106,7 +106,7 @@ bool Rendering::SkinController::Update(double applicationTime)
 
     if (ParentType::Update(applicationTime))
     {
-        const auto visual = boost::polymorphic_pointer_cast<Visual>(GetControllerObject());
+        const auto visual = boost::polymorphic_pointer_cast<Visual>(GetController());
 
         return impl->Update(visual);
     }
@@ -114,12 +114,12 @@ bool Rendering::SkinController::Update(double applicationTime)
     return false;
 }
 
-void Rendering::SkinController::SetControllerObject(const ControllerInterfaceSharedPtr& object)
+void Rendering::SkinController::SetController(const ControllerSharedPtr& object)
 {
     RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::GetCurrentRttiType()), "Œﬁ–ß¿‡\n");
 
-    ParentType::SetControllerObject(object);
+    ParentType::SetController(object);
 }
 
 Rendering::SkinController::SkinController(LoadConstructor loadConstructor)

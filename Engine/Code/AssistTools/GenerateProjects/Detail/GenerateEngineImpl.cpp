@@ -151,7 +151,7 @@ void AssistTools::GenerateEngineImpl::GenerateWindowsProject(const GenerateDirec
     const auto nextDirectory = directory.GetGenerateDirectory(projectDescribe, projectName);
     nextDirectory.CreateFileDirectory();
 
-    Generate(nextDirectory, SYSTEM_TEXT("ProjectSln"), projectName + SYSTEM_TEXT(".sln"));
+    GenerateSln(nextDirectory, SYSTEM_TEXT("ProjectSln"), projectName + SYSTEM_TEXT(".sln"));
 
     GenerateWindowsProjectVcxproj(nextDirectory);
 }

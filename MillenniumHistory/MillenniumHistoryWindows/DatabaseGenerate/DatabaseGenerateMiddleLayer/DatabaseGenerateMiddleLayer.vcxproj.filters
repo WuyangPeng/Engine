@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{2f17764f-e1cc-4258-ac95-8ef39d4a9e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio 头文件">
+      <UniqueIdentifier>{4eda321d-71f9-48bd-802d-f9514ee3e3fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio 源文件">
+      <UniqueIdentifier>{ce85d75d-6b8e-4058-9912-e4e2ac9a21f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CameraSystems 头文件">
+      <UniqueIdentifier>{88890bb4-a9de-4252-9ad5-b396c7347a21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CameraSystems 源文件">
+      <UniqueIdentifier>{13bbcf8d-1a9a-40e9-9187-81bf4346fbd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event 头文件">
+      <UniqueIdentifier>{6be171c1-a928-4322-80b0-f47a5a1f5b75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event 源文件">
+      <UniqueIdentifier>{ce39eb05-3ea6-4c3f-9879-745ef6be3bce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI 头文件">
+      <UniqueIdentifier>{0efdff56-cf01-4d50-b5bb-2020f3d21f1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI 源文件">
+      <UniqueIdentifier>{c50ce56c-0cf6-443c-a206-1f0ba0ba556d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input 头文件">
+      <UniqueIdentifier>{824914d5-2244-40b2-8cf2-66202a7e7090}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input 模板文件">
+      <UniqueIdentifier>{9be3e5f2-b9ae-4d37-8561-a4f9fd1ef934}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Message 头文件">
+      <UniqueIdentifier>{1fdc1822-bfa3-49a8-bfe0-3a928f813eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Message 源文件">
+      <UniqueIdentifier>{f235e23d-802b-4565-95c6-4ff312d13b24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network 头文件">
+      <UniqueIdentifier>{71ef9f5d-0602-4427-89bc-8e3d822891b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network 源文件">
+      <UniqueIdentifier>{c38c41a2-42b9-4085-b44d-6cc94f77a88d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectLogic 头文件">
+      <UniqueIdentifier>{cf9bb813-9f41-4f1a-9f02-12e99d06cdaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectLogic 源文件">
+      <UniqueIdentifier>{0293dcb7-bfc2-47b8-b740-30bd0eed7aa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicalModelling 头文件">
+      <UniqueIdentifier>{d3614848-1989-4738-9462-a88fec687940}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicalModelling 源文件">
+      <UniqueIdentifier>{e336a699-de27-4c51-8825-3cff94057ed8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering 头文件">
+      <UniqueIdentifier>{b7a043e0-1909-4433-816f-04416803305e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering 源文件">
+      <UniqueIdentifier>{a448b1e4-64cc-4795-a452-66dd65b0de38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource 头文件">
+      <UniqueIdentifier>{00037b65-5d86-4d88-92bb-19d3663fe65f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource 源文件">
+      <UniqueIdentifier>{0ad120f9-33fb-4a27-975a-2c6f8f73cc9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System 头文件">
+      <UniqueIdentifier>{a7c307c8-3454-4e05-8104-5dc1a9c048b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System 源文件">
+      <UniqueIdentifier>{7cbb6c5f-3c80-4174-b1b8-f323266e1823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{0d17664c-7dd2-4dcb-99b2-94d3253c3312}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ArtificialIntelligence 源文件">
+      <UniqueIdentifier>{f61f9586-9699-4ac6-80a9-88f917d2bb81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ArtificialIntelligence 头文件">
+      <UniqueIdentifier>{f096e9e3-81f1-4e17-b2c3-97d694c49dc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource 头文件\Detail">
+      <UniqueIdentifier>{496ec08b-2c1a-4673-b7fc-f9e4109b81a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource 源文件\Detail">
+      <UniqueIdentifier>{51cf7f3e-faaf-4d36-ab7a-94c8c90923c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System 头文件\Detail">
+      <UniqueIdentifier>{c291adbc-4d65-4db3-9574-e05492447223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System 源文件\Detail">
+      <UniqueIdentifier>{5ab1a9b9-9950-44e0-bae9-8f496138d439}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Audio\AudioManager.cpp">
+      <Filter>Audio 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\CameraSystems\CameraSystemsManager.cpp">
+      <Filter>CameraSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Event\EventManager.cpp">
+      <Filter>Event 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\GUI\GUIManager.cpp">
+      <Filter>GUI 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Message\MessageManager.cpp">
+      <Filter>Message 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Network\NetworkManager.cpp">
+      <Filter>Network 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\ObjectLogic\ObjectLogicManager.cpp">
+      <Filter>ObjectLogic 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\PhysicalModelling\PhysicalModellingManager.cpp">
+      <Filter>PhysicalModelling 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Rendering\RenderingManager.cpp">
+      <Filter>Rendering 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Resource\ResourceManager.cpp">
+      <Filter>Resource 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\System\SystemManager.cpp">
+      <Filter>System 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceManager.cpp">
+      <Filter>ArtificialIntelligence 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Resource\Detail\ResourceManagerImpl.cpp">
+      <Filter>Resource 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\System\Detail\SystemManagerImpl.cpp">
+      <Filter>System 源文件\Detail</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\DatabaseGenerateMiddleLayer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\DatabaseGenerateMiddleLayerDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\DatabaseGenerateMiddleLayerExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\DatabaseGenerateMiddleLayerFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\DatabaseGenerateMiddleLayerImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\DatabaseGenerateMiddleLayerLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\DatabaseGenerateMiddleLayerNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Audio\Audio.h">
+      <Filter>Audio 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Audio\AudioFwd.h">
+      <Filter>Audio 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Audio\AudioManager.h">
+      <Filter>Audio 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\CameraSystems\CameraSystems.h">
+      <Filter>CameraSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\CameraSystems\CameraSystemsFwd.h">
+      <Filter>CameraSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\CameraSystems\CameraSystemsManager.h">
+      <Filter>CameraSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Event\Event.h">
+      <Filter>Event 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Event\EventFwd.h">
+      <Filter>Event 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Event\EventManager.h">
+      <Filter>Event 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\GUI\GUI.h">
+      <Filter>GUI 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\GUI\GUIFwd.h">
+      <Filter>GUI 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\GUI\GUIManager.h">
+      <Filter>GUI 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Input\Input.h">
+      <Filter>Input 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Input\InputFwd.h">
+      <Filter>Input 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Input\InputManager.h">
+      <Filter>Input 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Input\InputManagerDetail.h">
+      <Filter>Input 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Message\Message.h">
+      <Filter>Message 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Message\MessageFwd.h">
+      <Filter>Message 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Message\MessageManager.h">
+      <Filter>Message 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Network\NetworkManager.h">
+      <Filter>Network 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Network\Network.h">
+      <Filter>Network 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Network\NetworkFwd.h">
+      <Filter>Network 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\ObjectLogic\ObjectLogic.h">
+      <Filter>ObjectLogic 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\ObjectLogic\ObjectLogicFwd.h">
+      <Filter>ObjectLogic 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\ObjectLogic\ObjectLogicManager.h">
+      <Filter>ObjectLogic 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\PhysicalModelling\PhysicalModelling.h">
+      <Filter>PhysicalModelling 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\PhysicalModelling\PhysicalModellingFwd.h">
+      <Filter>PhysicalModelling 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\PhysicalModelling\PhysicalModellingManager.h">
+      <Filter>PhysicalModelling 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Rendering\RenderingFwd.h">
+      <Filter>Rendering 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Rendering\Rendering.h">
+      <Filter>Rendering 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Rendering\RenderingManager.h">
+      <Filter>Rendering 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Resource\ResourceFwd.h">
+      <Filter>Resource 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Resource\Resource.h">
+      <Filter>Resource 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Resource\ResourceManager.h">
+      <Filter>Resource 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\System\System.h">
+      <Filter>System 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\System\SystemFwd.h">
+      <Filter>System 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\System\SystemManager.h">
+      <Filter>System 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Helper\ExportMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Helper\DatabaseGenerateMiddleLayerClassInvariantMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Helper\DatabaseGenerateMiddleLayerCustomAssertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\ArtificialIntelligence\ArtificialIntelligence.h">
+      <Filter>ArtificialIntelligence 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceFwd.h">
+      <Filter>ArtificialIntelligence 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceManager.h">
+      <Filter>ArtificialIntelligence 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\Resource\Detail\ResourceManagerImpl.h">
+      <Filter>Resource 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateMiddleLayer\System\Detail\SystemManagerImpl.h">
+      <Filter>System 头文件\Detail</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

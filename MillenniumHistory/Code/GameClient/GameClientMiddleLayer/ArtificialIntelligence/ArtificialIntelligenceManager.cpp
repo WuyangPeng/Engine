@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/25 19:51)
+/// 标准：std:c++20
+/// 版本：1.0.0.1 (2023/11/25 20:42)
 
 #include "GameClient/GameClientMiddleLayer/GameClientMiddleLayerExport.h"
 
-#include "ArtificialIntelligenceManager.h"
 #include "GameClient/GameClientMiddleLayer/Helper/GameClientMiddleLayerClassInvariantMacro.h"
+#include "ArtificialIntelligenceManager.h"
 
 GameClientMiddleLayer::ArtificialIntelligenceManager::ArtificialIntelligenceManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory }

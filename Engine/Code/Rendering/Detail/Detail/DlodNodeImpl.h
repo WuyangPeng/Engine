@@ -15,6 +15,7 @@
 #include "CoreTools/ObjectSystems/BufferTarget.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Mathematics/Algebra/APoint.h"
+#include "Mathematics/Algebra/Transform.h"
 #include "Rendering/DataTypes/DataTypesFwd.h"
 
 #include <vector>
@@ -43,7 +44,7 @@ namespace Rendering
         NODISCARD APoint GetWorldCenter() const noexcept;
 
         void SetModelCenter(const APoint& modelCenter) noexcept;
-        void SetWorldCenter(const TransformF& transform) noexcept;
+        void SetWorldCenter(const Mathematics::TransformF& transform) noexcept;
 
         // 获得子节点的距离间隔。
         NODISCARD int GetNumLevelsOfDetail() const noexcept;

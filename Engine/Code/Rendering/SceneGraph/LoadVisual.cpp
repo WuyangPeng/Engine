@@ -99,15 +99,15 @@ Rendering::VisualSharedPtr Rendering::LoadVisual::CreateFromFile(const System::S
 
     switch (loadVisual.GetPrimitiveType())
     {
-        case VisualPrimitiveType::Polypoint:
+        case VisualPrimitiveType::PolyPoint:
         {
             return std::make_shared<Polypoint>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer());
         }
-        case VisualPrimitiveType::PolysegmentsDisjoint:
+        case VisualPrimitiveType::PolySegmentsDisjoint:
         {
             return std::make_shared<Polysegment>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), false);
         }
-        case VisualPrimitiveType::PolysegmentsContiguous:
+        case VisualPrimitiveType::PolySegmentsContiguous:
         {
             return std::make_shared<Polysegment>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), true);
         }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/17 23:40)
+/// 标准：std:c++20
+/// 版本：1.0.0.1 (2023/11/25 20:42)
 
 #ifndef MILLENNIUM_HISTORY_USER_MACRO_H
 #define MILLENNIUM_HISTORY_USER_MACRO_H
@@ -20,8 +20,8 @@
 
 #define CLOSE_MILLENNIUM_HISTORY_MAX ((MILLENNIUM_HISTORY_ClOSE_END << 1) - 1)
 
-// 编译测试（默认为0，最大值为0x01）
-#define COMPILE_MILLENNIUM_HISTORY_CLOSE 0x00
+// 编译测试（默认为0B0000，最大值为0B0001）
+#define COMPILE_MILLENNIUM_HISTORY_CLOSE 0B0000
 
 static_assert(0 <= COMPILE_MILLENNIUM_HISTORY_CLOSE, "COMPILE_MILLENNIUM_HISTORY_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_MILLENNIUM_HISTORY_CLOSE <= CLOSE_MILLENNIUM_HISTORY_MAX, "COMPILE_MILLENNIUM_HISTORY_CLOSE Must be less than or equal CLOSE_MILLENNIUM_HISTORY_MAX.");

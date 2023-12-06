@@ -22,7 +22,7 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Polypoint);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Polypoint);
 
 Rendering::Polypoint::Polypoint(const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer)
-    : ParentType{ VisualPrimitiveType::Polypoint, vertexformat, vertexbuffer, IndexBufferSharedPtr() }, pointsCount{ vertexbuffer->GetNumElements() }
+    : ParentType{ VisualPrimitiveType::PolyPoint, vertexformat, vertexbuffer, IndexBufferSharedPtr() }, pointsCount{ vertexbuffer->GetNumElements() }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

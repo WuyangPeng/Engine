@@ -10,7 +10,6 @@
 #ifndef RENDERING_DATA_TYPES_H
 #define RENDERING_DATA_TYPES_H
 
-#include "Bound.h"
 #include "ColourConvertFrom.h"
 #include "ColourConvertTo.h"
 #include "ColourDefaultTraits.h"
@@ -20,8 +19,6 @@
 #include "HalfFloat.h"
 #include "SpecializedIO.h"
 #include "TextureColour.h"
-#include "Transform.h"
-#include "TransformMatrix.h"
 #include "Utility.h"
 
 #endif  // RENDERING_DATA_TYPES_H

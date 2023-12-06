@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/20 16:47)
+/// 标准：std:c++20
+/// 版本：1.0.0.1 (2023/11/20 15:12)
 
 #ifndef RENDERING_TESTING_TESTING_HELPER_H
 #define RENDERING_TESTING_TESTING_HELPER_H
@@ -20,6 +20,8 @@ namespace Rendering
         using ClassType = TestingHelper;
         using ParentType = CMainFunctionTestingHelper;
 
+        using Suite = CoreTools::Suite;
+
     public:
         TestingHelper(int argc, char** argv);
 
@@ -32,6 +34,10 @@ namespace Rendering
         void AddDataTypesSuite();
         void AddResourcesSuite();
         void AddSceneGraphSuite();
+
+        NODISCARD Suite GetViewVolumeSuite();
+        NODISCARD Suite GetCameraSuite();
+
         void AddControllersSuite();
         void AddShaderFloatsSuite();
         void AddDetailSuite();

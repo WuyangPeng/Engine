@@ -38,6 +38,7 @@ namespace AssistTools
         void Generate(const GenerateDirectory& generateDirectory, const StringView& templateName, const StringView& originalName, ProjectServiceType projectServiceType) const;
         void GenerateUtf8(const GenerateDirectory& generateDirectory, const StringView& templateName, const StringView& originalName) const;
         void GenerateUtf8(const GenerateDirectory& generateDirectory, const StringView& templateName, const StringView& originalName, const ReplaceContainer& replace) const;
+        void GenerateSln(const GenerateDirectory& generateDirectory, const StringView& templateName, const StringView& originalName) const;
         static void GenerateByContent(const GenerateDirectory& generateDirectory, const String& content, const StringView& originalName, const ReplaceContainer& replace);
         static void GenerateByContent(const GenerateDirectory& generateDirectory, const String& content, const StringView& originalName);
         static void GenerateByContentUtf8(const GenerateDirectory& generateDirectory, const String& content, const StringView& originalName, const ReplaceContainer& replace);
@@ -52,12 +53,14 @@ namespace AssistTools
         void Generate(const String& inputDirectory, const StringView& templateName, const String& outputDirectory, const StringView& originalName, ProjectServiceType projectServiceType) const;
         void GenerateUtf8(const String& inputDirectory, const StringView& templateName, const String& outputDirectory, const StringView& originalName) const;
         void GenerateUtf8(const String& inputDirectory, const StringView& templateName, const String& outputDirectory, const StringView& originalName, const ReplaceContainer& replace) const;
+        void GenerateSln(const String& inputDirectory, const StringView& templateName, const String& outputDirectory, const StringView& originalName) const;
 
         void Generate(const String& inputFileName, const String& outputFileName) const;
         void Generate(const String& inputFileName, const String& outputFileName, const ReplaceContainer& replace) const;
         void Generate(const String& inputFileName, const String& outputFileName, ProjectServiceType projectServiceType) const;
         void GenerateUtf8(const String& inputFileName, const String& outputFileName) const;
         void GenerateUtf8(const String& inputFileName, const String& outputFileName, const ReplaceContainer& replace) const;
+        void GenerateSln(const String& inputFileName, const String& outputFileName) const;
         static void GenerateByContent(const String& content, const String& outputFileName, const ReplaceContainer& replace);
         static void GenerateByContent(const String& content, const String& outputFileName);
         static void GenerateByContentUtf8(const String& content, const String& outputFileName, const ReplaceContainer& replace);

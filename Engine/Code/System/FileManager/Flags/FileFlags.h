@@ -12,6 +12,7 @@
 
 #include "System/Helper/EnumOperator.h"
 #include "System/Helper/Platform.h"
+#include "System/Security/Using/SecurityBaseUsing.h"
 
 namespace System
 {

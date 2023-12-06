@@ -18,7 +18,7 @@
 
 #include <memory>
 
-SINGLETON_GET_PTR_DEFINE(CoreTools, UniqueIDManager);
+SINGLETON_GET_PTR_DEFINE(CoreTools, UniqueIdManager);
 
 CoreTools::UniqueIdManager::UniqueIdManagerUniquePtr CoreTools::UniqueIdManager::uniqueIdManager{};
 

@@ -13,6 +13,7 @@
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 #include "Rendering/LocalEffects/Texture2DEffect.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
@@ -43,7 +44,7 @@ Rendering::CubeMapEffectImpl::CubeMapEffectImpl(TextureCubeSharedPtr texture, Sa
       reflectivityConstant{ std::make_shared<ConstantBuffer>(numReflectivityConstantBytes, true) },
       cubeTexture{ std::move(texture) },
       cubeSampler{ std::make_shared<SamplerState>(filter, mode0, mode1) },
-      camera{ std::make_shared<Camera>(true, depthRangeIs01) },
+      camera{ std::make_shared<Camera>(true, depthRangeIs01 ? DepthType::ZeroToOne : DepthType::MinusOneToOne, Mathematics::MathF::GetZeroTolerance()) },
       target{ std::make_shared<DrawTarget>(1, cubeTexture->GetFormat(), cubeTexture->GetLength(), cubeTexture->GetLength(), true) },
       depthRangeIs01{ depthRangeIs01 },
       dynamicUpdates{ false }
@@ -70,7 +71,7 @@ void Rendering::CubeMapEffectImpl::UseDynamicUpdates(float dMin, float dMax)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    camera = std::make_shared<Camera>(true, depthRangeIs01);
+    camera = std::make_shared<Camera>(true, depthRangeIs01 ? DepthType::ZeroToOne : DepthType::MinusOneToOne, Mathematics::MathF::GetZeroTolerance());
     camera->SetFrustum(90.0f, 1.0f, dMin, dMax);
 
     target = std::make_shared<DrawTarget>(1, cubeTexture->GetFormat(), cubeTexture->GetLength(), cubeTexture->GetLength(), true);

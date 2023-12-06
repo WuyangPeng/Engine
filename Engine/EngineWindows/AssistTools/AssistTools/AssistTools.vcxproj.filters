@@ -357,6 +357,9 @@
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateEngineBase.cpp">
       <Filter>GenerateProjects 源文件\Detail</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\SlnProjectGeneration.cpp">
+      <Filter>GenerateProjects 源文件\Detail</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsLib.h">
@@ -508,6 +511,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateEngineBaseDetail.h">
       <Filter>GenerateProjects 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\SlnProjectGeneration.h">
+      <Filter>GenerateProjects 头文件\Detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1283,6 +1289,9 @@
     </Text>
     <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Configuration\ModuleTestingJson.txt">
       <Filter>GenerateProjects 配置文件\TestingTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Configuration</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Generate\Configuration\TestingJson.txt">
+      <Filter>GenerateProjects 配置文件\TestingTemplate\Generate\Configuration</Filter>
     </Text>
   </ItemGroup>
 </Project>

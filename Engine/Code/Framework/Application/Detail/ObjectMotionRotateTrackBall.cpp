@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
-#include "Rendering/DataTypes/Transform.h"
+#include "Mathematics/Algebra/Transform.h"
 
 Framework::ObjectMotionRotateTrackBall::ObjectMotionRotateTrackBall(SpatialSharedPtr motionObject,
                                                                     ConstCameraSharedPtr camera,
@@ -139,7 +139,7 @@ void Framework::ObjectMotionRotateTrackBall::Calculate()
     localRotate.Orthonormalize();
 }
 
-Rendering::TransformF Framework::ObjectMotionRotateTrackBall::GetTransform() const noexcept
+Mathematics::TransformF Framework::ObjectMotionRotateTrackBall::GetTransform() const noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 

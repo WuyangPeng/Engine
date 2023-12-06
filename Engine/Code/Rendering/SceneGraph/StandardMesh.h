@@ -38,13 +38,13 @@ namespace Rendering
         // 使得观察者会看到物体内部时的网格。
         // 设置“isStatic”为“true”具有缓冲区用法BufferUsage::Static。
         // 否则“isStatic'是“false”具有缓冲区用法BufferUsage::Dynamic。
-        StandardMesh(const VertexFormatSharedPtr& vertexFormat, bool isStatic = true, bool inside = false, const TransformF* transform = nullptr);
+        StandardMesh(const VertexFormatSharedPtr& vertexFormat, bool isStatic = true, bool inside = false, const Mathematics::TransformF* transform = nullptr);
 
         CLASS_INVARIANT_DECLARE;
 
         // 访问网格创造者的转换
-        void SetTransform(const TransformF& transform);
-        NODISCARD const TransformF& GetTransform() const noexcept;
+        void SetTransform(const Mathematics::TransformF& transform);
+        NODISCARD const Mathematics::TransformF& GetTransform() const noexcept;
 
         // 下面各种对象的注释是当输入“transform”是nullptr(单位transform)。
 

@@ -25,8 +25,8 @@ CLASS_INVARIANT_STUB_DEFINE(Rendering, Culler)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Culler, SetCamera, ConstCameraSharedPtr, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Culler, GetCamera, Rendering::ConstCameraSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Culler, SetFrustum, const float*, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Culler, GetFrustum, const float*)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Culler, SetFrustum, Container, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Culler, GetFrustum, Rendering::Culler::Container)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Culler, Insert, VisualSharedPtr, void)
 
@@ -37,7 +37,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Culler, GetPlaneState, i
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Culler, PushPlane, Plane, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Culler, PopPlane, void)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Culler, IsVisible, BoundF, bool)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Culler, IsVisible, Mathematics::BoundingSphereF, bool)
 
 bool Rendering::Culler::IsVisible(int numVertices, const APoint* vertices, bool ignoreNearPlane) const noexcept
 {
@@ -46,7 +46,7 @@ bool Rendering::Culler::IsVisible(int numVertices, const APoint* vertices, bool 
     return impl->IsVisible(numVertices, vertices, ignoreNearPlane);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Culler, WhichSide, Plane, Rendering::Culler::NumericalValueSymbol)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Culler, WhichSide, Plane, Rendering::Culler::NumericalValueSymbol)
 
 void Rendering::Culler::ComputeVisibleSet(SpatialSharedPtr scene)
 {

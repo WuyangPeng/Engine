@@ -14,8 +14,8 @@
 
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Mathematics/Algebra/APoint.h"
-#include "Rendering/DataTypes/Bound.h"
-#include "Rendering/DataTypes/Transform.h"
+#include "Mathematics/Algebra/Transform.h"
+#include "Mathematics/Algebra/BoundingSphere.h"
 #include "Rendering/SceneGraph/Flags/CullingModeFlags.h"
 
 namespace Rendering
@@ -28,23 +28,23 @@ namespace Rendering
         using BufferTarget = CoreTools::BufferTarget;
         using APoint = Mathematics::APoint<float>;
         using Matrix = Mathematics::Matrix<float>;
-        using Bound = Bound<float>;
+        using Bound = Mathematics::BoundingSphere<float>;
 
     public:
         SpatialData() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        void DirectSetWorldTransform(const TransformF& transform) noexcept;
+        void DirectSetWorldTransform(const Mathematics::TransformF& transform) noexcept;
         void DirectSetWorldBound(const Bound& bound) noexcept;
 
-        void SetLocalTransform(const TransformF& transform) noexcept;
+        void SetLocalTransform(const Mathematics::TransformF& transform) noexcept;
         void SetCullingMode(CullingMode aCulling) noexcept;
 
         void SetLocalTransformTranslate(const APoint& translate) noexcept;
         void SetLocalTransformRotate(const Matrix& rotate) noexcept;
 
-        void SetLocalTransformToWorldTransform(const TransformF& aWorldTransform);
+        void SetLocalTransformToWorldTransform(const Mathematics::TransformF& aWorldTransform);
         void SetLocalTransformToWorldTransform() noexcept;
 
         void InitWorldBound();
@@ -53,8 +53,8 @@ namespace Rendering
         NODISCARD bool GetWorldTransformIsCurrent() const noexcept;
         NODISCARD bool GetWorldBoundIsCurrent() const noexcept;
 
-        NODISCARD TransformF GetLocalTransform() const noexcept;
-        NODISCARD TransformF GetWorldTransform() const noexcept;
+        NODISCARD Mathematics::TransformF GetLocalTransform() const noexcept;
+        NODISCARD Mathematics::TransformF GetWorldTransform() const noexcept;
         NODISCARD Bound GetWorldBound() const noexcept;
         NODISCARD CullingMode GetCullingMode() const noexcept;
 
@@ -62,13 +62,13 @@ namespace Rendering
         void Save(CoreTools::BufferTarget& target) const;
         NODISCARD int GetStreamingSize() const noexcept;
 
-        void SetWorldTransformOnUpdate(const TransformF& transform) noexcept;
+        void SetWorldTransformOnUpdate(const Mathematics::TransformF& transform) noexcept;
 
     private:
         // 局部和世界变换。在某些情况下,您可能需要直接设置世界变换绕过Spatial::Update()机制。
         // 如果直接设置m_WorldTransform,m_WorldTransformIsCurrent应该设置为“true”。
-        TransformF localTransform;
-        TransformF worldTransform;
+        Mathematics::TransformF localTransform;
+        Mathematics::TransformF worldTransform;
         bool worldTransformIsCurrent;
 
         // 世界绑定访问。在某些情况下,您可能想要直接设置世界绑定,绕过Spatial::Update()机制。

@@ -50,7 +50,7 @@ namespace Rendering
         // 当是一组不相交段时，'contiguous'是'false'。
         NODISCARD bool GetContiguous() const noexcept;
 
-        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ControllerSharedPtr Clone() const override;
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
     private:

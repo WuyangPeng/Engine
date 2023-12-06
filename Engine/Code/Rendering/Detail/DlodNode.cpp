@@ -17,6 +17,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, DlodNode)
 

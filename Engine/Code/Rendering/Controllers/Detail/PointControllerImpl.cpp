@@ -18,6 +18,7 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "Mathematics/Algebra/AlgebraAggregate.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"

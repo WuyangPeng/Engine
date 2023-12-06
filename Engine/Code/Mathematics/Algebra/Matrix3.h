@@ -29,7 +29,7 @@
 #include "AlgebraFwd.h"
 #include "Euler.h"
 #include "Matrix3EigenDecomposition.h"
-#include "Matrix3Extract.h"
+#include "AxisAngle.h"
 #include "Vector3.h"
 #include "Flags/MatrixFlags.h"
 #include "System/Helper/PragmaWarning/Operators.h"
@@ -58,7 +58,7 @@ namespace Mathematics
         using Matrix2 = Matrix2<Real>;
         using Matrix4 = Matrix4<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Matrix3Extract = Matrix3Extract<Real>;
+        using Matrix3Extract = AxisAngle<Real>;
         using Matrix3EigenDecomposition = Matrix3EigenDecomposition<Real>;
         using ArrayType = std::array<Real, matrixSize>;
         using ContainerType = std::vector<Real>;
@@ -194,6 +194,8 @@ namespace Mathematics
         void MakeEulerZYZ(Real z0Angle, Real yAngle, Real z1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         void MakeEuler(const Euler& euler) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+
+        NODISCARD Euler ExtractEuler(ExtractEulerResultOrder euler) const noexcept;
 
         /// 返回值顺序为xAngle、yAngle、zAngle
         /// 且在指定的范围内：

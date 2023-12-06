@@ -39,31 +39,38 @@
 5.	SceneGraphSuite 
 
 对场景图模块的单元测试，包括： 
-（1）  相机对象。
-（2）  节点对象。
-（3）  光照对象。
-（4）  材质对象。
-（5）  点-粒子图元。
-（6）  直线图元。
-（7）  三角形图元。
-（8）  转换操作。
-（9）  层次结构剔除机制。
-（10） 屏幕目标。
-（11） 标准网格。
+（1）  视景体对象:：WorldCoordinateFrameTesting、★★★
+					ProjectionMatrixTesting、★★★
+					CameraFrustumTesting、★★★
+					ViewVolumeTesting、★★★
+（2）  相机对象:  CameraFrustumDataTesting、★★★
+				  PickLineTesting、★★★
+				  CameraTesting。★★★ 
+（3）  节点对象。☆☆☆
+（4）  光照对象。
+（5）  材质对象。
+（6）  点-粒子图元。
+（7）  直线图元。
+（8）  三角形图元。
+（9）  转换操作。
+（10） 层次结构剔除机制。
+（11） 屏幕目标。
+（12） 标准网格。
 
 ----------------------------
 6.	ControllersSuite 
 
 对控制器模块的单元测试，包括： 
-（1）  控制器对象。
+（1）  控制器对象：ControlledTesting、★★★
+			       ControlledObjectTesting。★★★
 （2）  转换控制器。
 （3）  皮肤控制器。
 （4）  点控制器。
 （5）  粒子控制器。
 （6）  变形控制器。
-（7）  关键帧控制器。	 
+（7）  关键帧控制器。
 （8）  混合转换控制器。
-（9）  反向运动控制器。 
+（9）  反向运动控制器。
 
 ----------------------------
 7.	ShaderFloatsSuite

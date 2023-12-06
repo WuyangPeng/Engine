@@ -13,13 +13,14 @@
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/CurvesSurfacesVolumes/Curve2Detail.h"
-#include "Rendering/DataTypes/TransformDetail.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 #include "Rendering/SceneGraph/StandardMesh.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, RevolutionSurface);

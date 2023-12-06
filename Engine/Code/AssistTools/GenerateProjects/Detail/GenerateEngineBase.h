@@ -57,6 +57,7 @@ namespace AssistTools
         void Generate(const GenerateDirectory& directory, const StringView& templateName, const StringView& originalName, ProjectServiceType projectServiceType) const;
         void Generate(const GenerateDirectory& directory, const StringView& templateName, const StringView& originalName) const;
         void GenerateUtf8(const GenerateDirectory& directory, const StringView& templateName, const StringView& originalName) const;
+        void GenerateSln(const GenerateDirectory& directory, const StringView& templateName, const StringView& originalName) const;
 
         NODISCARD GenerateDirectory GetGenerateDirectory(const StringView& pathRoute) const;
         NODISCARD GenerateDirectory GetGenerateDirectory(const StringView& inputPathRoute, const String& outputPathRoute) const;

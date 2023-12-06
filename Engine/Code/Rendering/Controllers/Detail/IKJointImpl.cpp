@@ -24,7 +24,7 @@
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
-#include "Rendering/DataTypes/TransformDetail.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 
 Rendering::IKJointImpl::IKJointImpl() noexcept
     : allowTranslation{},
@@ -236,7 +236,7 @@ void Rendering::IKJointImpl::UpdateWorldTransform()
     }
 }
 
-void Rendering::IKJointImpl::UpdateWorldRotateAndTranslate() noexcept(gAssert < 2 || gRenderingAssert < 2)
+void Rendering::IKJointImpl::UpdateWorldRotateAndTranslate()  
 {
     RENDERING_CLASS_IS_VALID_9;
 

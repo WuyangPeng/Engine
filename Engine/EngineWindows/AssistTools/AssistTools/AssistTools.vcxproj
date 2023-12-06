@@ -354,6 +354,7 @@ xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProje
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ProjectGenerationReplace.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ReplaceImpl.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ReplaceProjectGeneration.cpp" />
+    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\SlnProjectGeneration.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\Utf8ReplaceProjectGeneration.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\WindowsProjectModuleGenerate.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\WindowsProjectModuleTestingGenerate.cpp" />
@@ -395,6 +396,7 @@ xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProje
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ProjectGenerationReplace.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ReplaceImpl.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\ReplaceProjectGeneration.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\SlnProjectGeneration.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\Utf8ReplaceProjectGeneration.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\WindowsProjectModuleGenerate.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\WindowsProjectModuleTestingGenerate.h" />
@@ -598,6 +600,7 @@ xcopy "../../../Bat/DelDoxygenFile.bat" "../../../Code/AssistTools/GenerateProje
     <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Generate\Configuration\EnvironmentVariableJson.txt" />
     <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Generate\Configuration\LogJson.txt" />
     <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Generate\Configuration\ProjectTestingJson.txt" />
+    <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Generate\Configuration\TestingJson.txt" />
     <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Generate\Gitignore.txt" />
     <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Generate\ReadMeMd.txt" />
     <Text Include="..\..\..\Code\AssistTools\GenerateProjects\TestingTemplate\Gitignore.txt" />

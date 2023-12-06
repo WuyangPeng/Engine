@@ -35,7 +35,7 @@ CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, PointController);
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, PointController)
 
 Rendering::PointController::PointController(const BaseRendererSharedPtr& baseRenderer)
-    : ParentType{ CoreTools::DisableNotThrow::Disable }, impl{ baseRenderer }
+    : ParentType{ "PointController" }, impl{ baseRenderer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -88,7 +88,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, PointController, 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PointController, GetSystemAngularAxis, Rendering::PointController::AVector)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, PointController, SetSystemAngularAxis, AVector, void)
 
-void Rendering::PointController::SetControllerObject(const ControllerInterfaceSharedPtr& object)
+void Rendering::PointController::SetController(const ControllerSharedPtr& object)
 {
     RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::GetCurrentRttiType()), "ÎÞÐ§Àà\n");
@@ -97,19 +97,19 @@ void Rendering::PointController::SetControllerObject(const ControllerInterfaceSh
 
     impl->SetControllerObject(*visual);
 
-    ParentType::SetControllerObject(object);
+    ParentType::SetController(object);
 }
 
 void Rendering::PointController::UpdateSystemMotion(float ctrlTime)
 {
-    const auto visual = boost::polymorphic_pointer_cast<Visual>(GetControllerObject());
+    const auto visual = boost::polymorphic_pointer_cast<Visual>(GetController());
 
     impl->UpdateSystemMotion(*visual, ctrlTime);
 }
 
 void Rendering::PointController::UpdatePointMotion(float ctrlTime)
 {
-    const auto visual = boost::polymorphic_pointer_cast<Visual>(GetControllerObject());
+    const auto visual = boost::polymorphic_pointer_cast<Visual>(GetController());
 
     impl->UpdatePointMotion(*visual, ctrlTime);
 }

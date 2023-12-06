@@ -18,7 +18,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Rendering/DataTypes/BoundDetail.h"
+#include "Mathematics/Algebra/BoundingSphereDetail.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, SwitchNode);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, SwitchNode);

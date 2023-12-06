@@ -35,7 +35,7 @@ Rendering::NodeImpl::~NodeImpl() noexcept
         {
             if (iter->object != nullptr)
             {
-                iter->object->SetControllerObject(nullptr);
+                iter->object->SetController(nullptr);
                 iter->object.reset();
             }
         }
@@ -229,12 +229,12 @@ bool Rendering::NodeImpl::UpdateWorldData(double applicationTime)
     return result;
 }
 
-Rendering::BoundF Rendering::NodeImpl::GetWorldBound()
+Mathematics::BoundingSphereF Rendering::NodeImpl::GetWorldBound()
 {
     RENDERING_CLASS_IS_VALID_9;
 
     // 从一个无效的边界开始。
-    BoundF bound{ Mathematics::APointF::GetOrigin(), 0.0f };
+    Mathematics::BoundingSphereF bound{ Mathematics::APointF::GetOrigin(), 0.0f };
 
     for (auto iter = spatialChild.begin(); iter != spatialChild.end(); ++iter)
     {

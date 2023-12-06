@@ -1,0 +1,46 @@
+{
+  "ancientBooksSuite": {
+    "AncientBooksContainerTesting": 1,
+    "ArticleTesting": 1,
+    "BookTesting": 1,
+    "CalendarTesting": 1,
+    "CategoryTesting": 1,
+    "CharacterTesting": 1,
+    "CountryTesting": 1,
+    "DayTesting": 1,
+    "EmperorTesting": 1,
+    "GatherTesting": 1,
+    "GenusTesting": 1,
+    "GeographicTesting": 1,
+    "IdentityTesting": 1,
+    "ImperialCourtTesting": 1,
+    "MonthTesting": 1,
+    "ReignTitleTesting": 1,
+    "SexagenaryCycleTesting": 1,
+    "SourceTesting": 1,
+    "VersionTesting": 1,
+    "YearTesting": 1
+  },
+
+  "databaseEntitySuite": {
+    "ArticleEntityTesting": 1,
+    "BookEntityTesting": 1,
+    "CalendarEntityTesting": 1,
+    "CategoryEntityTesting": 1,
+    "CharacterEntityTesting": 1,
+    "CountryEntityTesting": 1,
+    "DayEntityTesting": 1,
+    "EmperorEntityTesting": 1,
+    "GatherEntityTesting": 1,
+    "GenusEntityTesting": 1,
+    "GeographicEntityTesting": 1,
+    "IdentityEntityTesting": 1,
+    "ImperialCourtEntityTesting": 1,
+    "MonthEntityTesting": 1,
+    "ReignTitleEntityTesting": 1,
+    "SexagenaryCycleEntityTesting": 1,
+    "SourceEntityTesting": 1,
+    "VersionEntityTesting": 1,
+    "YearEntityTesting": 1
+  }
+}

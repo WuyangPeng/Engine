@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %MillenniumHistoryTestingWin32DebugLib% FightingServerCoreTestingD.exe
+start /d %MillenniumHistoryTestingWin32ReleaseLib% FightingServerCoreTesting.exe
+start /d %MillenniumHistoryTestingX64DebugLib% FightingServerCoreTestingD.exe
+start /d %MillenniumHistoryTestingX64ReleaseLib% FightingServerCoreTesting.exe
+start /d %MillenniumHistoryTestingStaticWin32DebugLib% FightingServerCoreTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticWin32ReleaseLib% FightingServerCoreTestingStatic.exe
+start /d %MillenniumHistoryTestingStaticX64DebugLib% FightingServerCoreTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticX64ReleaseLib% FightingServerCoreTestingStatic.exe
+
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32DebugLib% FightingServerCoreTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32ReleaseLib% FightingServerCoreTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64DebugLib% FightingServerCoreTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64ReleaseLib% FightingServerCoreTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32DebugLib% FightingServerCoreTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32ReleaseLib% FightingServerCoreTesting.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64DebugLib% FightingServerCoreTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64ReleaseLib% FightingServerCoreTesting.exe
+
+pause

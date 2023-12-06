@@ -15,8 +15,7 @@
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
-#include "Rendering/DataTypes/Transform.h"
-#include "Rendering/DataTypes/TransformMatrixDetail.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 
 Framework::ObjectMotionMove::ObjectMotionMove(const SpatialSharedPtr& motionObject, int doRoll, int doYaw, int doPitch, float rotationSpeed)
     : motionObject{ motionObject },

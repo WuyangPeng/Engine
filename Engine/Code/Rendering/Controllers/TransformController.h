@@ -13,9 +13,10 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Controller.h"
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/Matrix.h"
-#include "Rendering/DataTypes/Transform.h"
+#include "Mathematics/Algebra/Transform.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(TransformController, TransformControllerImpl);
 
@@ -31,29 +32,29 @@ namespace Rendering
         using Matrix = Mathematics::MatrixF;
 
     public:
-        explicit TransformController(const TransformF& localTransform);
+        explicit TransformController(const Mathematics::TransformF& localTransform);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(TransformController);
 
-        void SetTransform(const TransformF& localTransform) noexcept;
-        NODISCARD TransformF GetTransform() const noexcept;
+        void SetTransform(const Mathematics::TransformF& localTransform) noexcept;
+        NODISCARD Mathematics::TransformF GetTransform() const noexcept;
 
         void SetTranslate(const APoint& translate) noexcept;
         void SetRotate(const Matrix& rotate) noexcept;
-        void SetUniformScale(float scale) noexcept(gAssert < 2 || gRenderingAssert < 2);
-        void SetScale(const APoint& scale) noexcept(gAssert < 2 || gRenderingAssert < 2);
+        void SetUniformScale(float scale);
+        void SetScale(const APoint& scale);
         void SetMatrix(const Matrix& matrix) noexcept;
 
-        void SetControllerObject(const ControllerInterfaceSharedPtr& object) override;
+        void SetController(const ControllerSharedPtr& object) override;
 
         // 动画更新。应用程序时间以毫秒为单位。
         // 更新简单的拷贝m_LocalTransform到Spatial m_Object的LocalTransform。
         // 在这个意义上，TransformController表示一个所有时间为常数的transform。
         bool Update(double applicationTime) override;
 
-        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ControllerSharedPtr Clone() const override;
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
     private:

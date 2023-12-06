@@ -62,8 +62,8 @@ namespace Rendering
         NODISCARD ConstIndexBufferSharedPtr GetConstIndexBuffer() const noexcept;
         NODISCARD IndexBufferSharedPtr GetIndexBuffer() noexcept;
 
-        NODISCARD const BoundF& GetModelBound() const noexcept;
-        NODISCARD BoundF& GetModelBound() noexcept;
+        NODISCARD const Mathematics::BoundingSphereF& GetModelBound() const noexcept;
+        NODISCARD Mathematics::BoundingSphereF& GetModelBound() noexcept;
 
         virtual void UpdateModelSpace(MAYBE_UNUSED VisualUpdateType type);
 

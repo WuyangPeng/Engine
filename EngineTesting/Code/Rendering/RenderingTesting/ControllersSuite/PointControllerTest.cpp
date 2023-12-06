@@ -28,7 +28,7 @@ Rendering::PointControllerTest::PointControllerTest(const BaseRendererSharedPtr&
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, PointControllerTest)
 
-Rendering::PointControllerTest::ControllerInterfaceSharedPtr Rendering::PointControllerTest::Clone() const
+Rendering::PointControllerTest::ControllerSharedPtr Rendering::PointControllerTest::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

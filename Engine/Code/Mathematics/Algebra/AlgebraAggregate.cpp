@@ -1068,3 +1068,67 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Float4& datum)
         Write(element);
     }
 }
+
+template <>
+void CoreTools::BufferSource::ReadAggregate(Mathematics::TransformF& datum)
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+
+    datum.ReadAggregate(*this);
+}
+
+template <>
+void CoreTools::BufferSource::ReadAggregate(Mathematics::TransformD& datum)
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+
+    datum.ReadAggregate(*this);
+}
+
+template <>
+void CoreTools::BufferTarget::WriteAggregate(const Mathematics::TransformF& datum)
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+
+    datum.WriteAggregate(*this);
+}
+
+template <>
+void CoreTools::BufferTarget::WriteAggregate(const Mathematics::TransformD& datum)
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+
+    datum.WriteAggregate(*this);
+}
+
+template <>
+void CoreTools::BufferSource::ReadAggregate(Mathematics::BoundingSphereF& datum)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    datum.ReadAggregate(*this);
+}
+
+template <>
+void CoreTools::BufferSource::ReadAggregate(Mathematics::BoundingSphereD& datum)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    datum.ReadAggregate(*this);
+}
+
+template <>
+void CoreTools::BufferTarget::WriteAggregate(const Mathematics::BoundingSphereF& datum)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    datum.WriteAggregate(*this);
+}
+
+template <>
+void CoreTools::BufferTarget::WriteAggregate(const Mathematics::BoundingSphereD& datum)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    datum.WriteAggregate(*this);
+}

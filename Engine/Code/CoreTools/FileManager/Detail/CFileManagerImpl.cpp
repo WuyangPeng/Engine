@@ -162,6 +162,8 @@ CoreTools::CFileManagerImpl::PosType CoreTools::CFileManagerImpl::GetPosition()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
+#if !defined(TCRE_USE_GCC)
+
     constexpr PosType errorPosition{ -1 };
 
     if (const auto position = System::GetPosition(file); position != errorPosition)
@@ -172,6 +174,22 @@ CoreTools::CFileManagerImpl::PosType CoreTools::CFileManagerImpl::GetPosition()
     {
         THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("获取文件“%1%”的位置失败！"s)) % fileName).str())
     }
+
+#else  // defined(TCRE_USE_GCC)
+
+    constexpr PosType errorPosition{ -1 };
+
+    if (const auto position = System::GetPosition(file);
+        memcmp(&position, &errorPosition, sizeof(PosType)) != 0)
+    {
+        return position;
+    }
+    else
+    {
+        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("获取文件“%1%”的位置失败！"s)) % fileName).str())
+    }
+
+#endif  // !defined(TCRE_USE_GCC)
 }
 
 bool CoreTools::CFileManagerImpl::SetPosition(PosType position) noexcept

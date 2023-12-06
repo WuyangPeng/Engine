@@ -46,19 +46,19 @@ Rendering::ConstVertexFormatSharedPtr Rendering::VisualImpl::GetConstVertexForma
     return visualData.GetConstVertexFormat();
 }
 
-Rendering::BoundF& Rendering::VisualImpl::GetModelBound() noexcept
+Mathematics::BoundingSphereF& Rendering::VisualImpl::GetModelBound() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26473)
 
-    return const_cast<BoundF&>(static_cast<const ClassType*>(this)->GetModelBound());
+    return const_cast<Mathematics::BoundingSphereF&>(static_cast<const ClassType*>(this)->GetModelBound());
 
 #include SYSTEM_WARNING_POP
 }
 
-const Rendering::BoundF& Rendering::VisualImpl::GetModelBound() const noexcept
+const Mathematics::BoundingSphereF& Rendering::VisualImpl::GetModelBound() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -121,7 +121,7 @@ void Rendering::VisualImpl::SetVertexFormat(const VertexFormatSharedPtr& vertexf
     visualData.SetVertexFormat(vertexformat);
 }
 
-Rendering::BoundF Rendering::VisualImpl::GetWorldBound(const TransformF& worldTransform)
+Mathematics::BoundingSphereF Rendering::VisualImpl::GetWorldBound(const Mathematics::TransformF& worldTransform)
 {
     RENDERING_CLASS_IS_VALID_9;
 

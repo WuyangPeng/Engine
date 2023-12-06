@@ -38,6 +38,14 @@ namespace AssistTools
     constexpr System::StringView middleLayerIncludeKey{ SYSTEM_TEXT("MiddleLayerInclude") };
     constexpr System::StringView middleLayerFwdIncludeKey{ SYSTEM_TEXT("MiddleLayerFwdInclude") };
     constexpr System::StringView middleLayerNameKey{ SYSTEM_TEXT("MiddleLayerName") };
+    constexpr System::StringView toolDirectoryKey{ SYSTEM_TEXT("ToolDirectory") };
+    constexpr System::StringView toolProjectKey{ SYSTEM_TEXT("ToolProject") };
+    constexpr System::StringView toolsProjectConfigurationPlatformsKey{ SYSTEM_TEXT("ToolProjectConfigurationPlatforms") };
+    constexpr System::StringView toolsNestedProjectsKey{ SYSTEM_TEXT("ToolNestedProjects") };
+    constexpr System::StringView guidIndexKey{ SYSTEM_TEXT("Guid") };
+    constexpr System::StringView staticDescribeKey{ SYSTEM_TEXT("StaticDescribe") };
+    constexpr System::StringView configurationKey{ SYSTEM_TEXT("Configuration") };
+    constexpr System::StringView testingToolProjectKey{ SYSTEM_TEXT("TestingToolProject") };
 }
 
 #endif  // ASSIST_TOOLS_GENERATE_PROJECTS_PROJECT_GENERATION_USING_H

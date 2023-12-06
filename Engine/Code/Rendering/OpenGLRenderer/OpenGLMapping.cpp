@@ -183,9 +183,9 @@ Rendering::Enum Rendering::OpenGLConstant::GetOpenGLPrimitiveType(int index)
 {
     static std::array<Enum, System::EnumCastUnderlying(VisualPrimitiveType::MaxQuantity)> result{
         0,  // VisualPrimitiveType::None (未使用)
-        static_cast<GLenum>(System::PrimitiveType::Point),  // VisualPrimitiveType::Polypoint
-        static_cast<GLenum>(System::PrimitiveType::Lines),  // VisualPrimitiveType::PolysegmentsDisjoint
-        static_cast<GLenum>(System::PrimitiveType::LinesStrip),  // VisualPrimitiveType::PolysegmentsContiguous
+        static_cast<GLenum>(System::PrimitiveType::Point),  // VisualPrimitiveType::PolyPoint
+        static_cast<GLenum>(System::PrimitiveType::Lines),  // VisualPrimitiveType::PolySegmentsDisjoint
+        static_cast<GLenum>(System::PrimitiveType::LinesStrip),  // VisualPrimitiveType::PolySegmentsContiguous
         0,  // VisualPrimitiveType::Triangles (未使用)
         static_cast<GLenum>(System::PrimitiveType::Triangles),  // VisualPrimitiveType::TriMesh
         static_cast<GLenum>(System::PrimitiveType::TrianglesStrip),  // VisualPrimitiveType::TriStrip

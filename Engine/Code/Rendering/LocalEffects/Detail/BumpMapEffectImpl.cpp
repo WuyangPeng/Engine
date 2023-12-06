@@ -12,6 +12,7 @@
 #include "BumpMapEffectImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Mathematics/Algebra/Matrix4Detail.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Rendering/SceneGraph/Visual.h"

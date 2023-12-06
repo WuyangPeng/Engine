@@ -16,9 +16,9 @@
 #include "Flags/CullingModeFlags.h"
 #include "CoreTools/FileManager/FileManagerFwd.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
+#include "Mathematics/Algebra/BoundingSphere.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 #include "Rendering/Controllers/ControlledObject.h"
-#include "Rendering/DataTypes/Bound.h"
-#include "Rendering/DataTypes/TransformDetail.h"
 #include "Rendering/SceneGraph/SceneGraphFwd.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(Spatial, SpatialData);
@@ -61,14 +61,14 @@ namespace Rendering
         void OnGetVisibleSet(Culler& culler, bool noCull);
         virtual void GetVisibleSet(Culler& culler, bool noCull) = 0;
 
-        void SetLocalTransform(const TransformF& transform) noexcept;
-        void SetWorldTransform(const TransformF& transform) noexcept;
-        void SetWorldBound(const BoundF& bound) noexcept;
+        void SetLocalTransform(const Mathematics::TransformF& transform) noexcept;
+        void SetWorldTransform(const Mathematics::TransformF& transform) noexcept;
+        void SetWorldBound(const Mathematics::BoundingSphereF& bound) noexcept;
         void SetCullingMode(CullingMode culling) noexcept;
 
-        NODISCARD TransformF GetLocalTransform() const noexcept;
-        NODISCARD TransformF GetWorldTransform() const noexcept;
-        NODISCARD BoundF GetWorldBound() const noexcept;
+        NODISCARD Mathematics::TransformF GetLocalTransform() const noexcept;
+        NODISCARD Mathematics::TransformF GetWorldTransform() const noexcept;
+        NODISCARD Mathematics::BoundingSphereF GetWorldBound() const noexcept;
         NODISCARD CullingMode GetCullingMode() const noexcept;
 
         void SetLocalTransformTranslate(const APoint& translate) noexcept;
@@ -76,17 +76,17 @@ namespace Rendering
 
         NODISCARD virtual PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const;
 
-        virtual ControllerInterfaceSharedPtr Clone() const = 0;
+        virtual ControllerSharedPtr Clone() const = 0;
 
     protected:
         void InitWorldBound();
-        void BoundGrowToContain(const BoundF& worldBound);
+        void BoundGrowToContain(const Mathematics::BoundingSphereF& worldBound);
 
         // 对几何更新的支持。
         virtual bool UpdateWorldData(double applicationTime);
 
         NODISCARD bool GetWorldBoundIsCurrent() const noexcept;
-        void SetWorldTransformOnUpdate(const TransformF& transform) noexcept;
+        void SetWorldTransformOnUpdate(const Mathematics::TransformF& transform) noexcept;
 
     private:
         // 对几何更新的支持。

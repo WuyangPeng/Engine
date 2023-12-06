@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExportMacro.h"
 
 #include "Mathematics/Algebra/Matrix.h"
-#include "Rendering/DataTypes/Transform.h"
+#include "Mathematics/Algebra/Transform.h"
 #include "Rendering/SceneGraph/Spatial.h"
 
 namespace Framework
@@ -28,7 +28,7 @@ namespace Framework
         using Matrix = Mathematics::MatrixF;
         using AVector = Mathematics::AVectorF;
         using Spatial = Rendering::Spatial;
-        using Transform = Rendering::TransformF;
+        using Transform = Mathematics::TransformF;
         using SpatialSharedPtr = Rendering::SpatialSharedPtr;
 
     public:

@@ -41,8 +41,8 @@ namespace CoreTools
 
         NODISCARD virtual int GetFileByteSize() const = 0;
 
-        NODISCARD virtual void Write(size_t itemSize, const void* data) = 0;
-        NODISCARD virtual void Write(size_t itemSize, size_t itemsNumber, const void* data) = 0;
+        virtual void Write(size_t itemSize, const void* data) = 0;
+        virtual void Write(size_t itemSize, size_t itemsNumber, const void* data) = 0;
 
     public:
         NODISCARD static WriteFileManagerSharedPtr Create(const String& fileName, bool addition);

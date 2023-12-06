@@ -154,6 +154,11 @@ void AssistTools::GenerateEngineBase::GenerateUtf8(const GenerateDirectory& dire
     generateFile.GenerateUtf8(directory, templateName, originalName);
 }
 
+void AssistTools::GenerateEngineBase::GenerateSln(const GenerateDirectory& directory, const StringView& templateName, const StringView& originalName) const
+{
+    generateFile.GenerateSln(directory, templateName, originalName);
+}
+
 AssistTools::GenerateDirectory AssistTools::GenerateEngineBase::GetGenerateDirectory(const StringView& pathRoute) const
 {
     return generateDirectory.GetGenerateDirectory(pathRoute);

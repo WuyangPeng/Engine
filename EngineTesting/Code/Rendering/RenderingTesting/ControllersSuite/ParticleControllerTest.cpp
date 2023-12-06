@@ -28,7 +28,7 @@ Rendering::ParticleControllerTest::ParticleControllerTest(const BaseRendererShar
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, ParticleControllerTest)
 
-Rendering::ParticleControllerTest::ControllerInterfaceSharedPtr Rendering::ParticleControllerTest::Clone() const
+Rendering::ParticleControllerTest::ControllerSharedPtr Rendering::ParticleControllerTest::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

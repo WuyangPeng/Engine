@@ -19,6 +19,7 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, CameraNode)
 
@@ -198,7 +199,7 @@ void Rendering::CameraNode::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-Rendering::CameraNode::ControllerInterfaceSharedPtr Rendering::CameraNode::Clone() const
+Rendering::CameraNode::ControllerSharedPtr Rendering::CameraNode::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

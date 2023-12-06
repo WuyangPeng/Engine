@@ -1,0 +1,9 @@
+diff a/Code/DatabaseGenerate/DatabaseGenerateMiddleLayer/Rendering/RenderingManager.h b/Code/DatabaseGenerate/DatabaseGenerateMiddleLayer/Rendering/RenderingManager.h	(rejected hunks)
+@@ -1,5 +0,5 @@
+-/// Copyright (c) 2010-2023
+-/// Threading Core Render Engine
++///	Copyright (c) 2010-2023
++///	Threading Core Render Engine
+ ///
+ ///	���ߣ�����������ʶ���������
+ ///	��ϵ���ߣ�94458936@qq.com

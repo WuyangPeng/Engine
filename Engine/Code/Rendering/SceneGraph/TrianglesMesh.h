@@ -36,7 +36,7 @@ namespace Rendering
         NODISCARD int GetNumTriangles() const noexcept override;
         NODISCARD TriangleIndex GetTriangle(int index) const override;
 
-        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ControllerSharedPtr Clone() const override;
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
     };
 

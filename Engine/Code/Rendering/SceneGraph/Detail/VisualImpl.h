@@ -15,7 +15,7 @@
 #include "VisualData.h"
 #include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
-#include "Rendering/DataTypes/Bound.h"
+#include "Mathematics/Algebra/BoundingSphere.h"
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 #include "Rendering/Resources/Buffers/VertexFormat.h"
@@ -58,11 +58,11 @@ namespace Rendering
         NODISCARD ConstIndexBufferSharedPtr GetConstIndexBuffer() const noexcept;
         NODISCARD IndexBufferSharedPtr GetIndexBuffer() noexcept;
 
-        NODISCARD const BoundF& GetModelBound() const noexcept;
-        NODISCARD BoundF& GetModelBound() noexcept;
+        NODISCARD const Mathematics::BoundingSphereF& GetModelBound() const noexcept;
+        NODISCARD Mathematics::BoundingSphereF& GetModelBound() noexcept;
 
         // 对几何更新的支持。
-        NODISCARD BoundF GetWorldBound(const TransformF& worldTransform);
+        NODISCARD Mathematics::BoundingSphereF GetWorldBound(const Mathematics::TransformF& worldTransform);
         void UpdateModelBound();
         void ComputeBounding(const std::vector<APoint>& positions);
 
@@ -79,7 +79,7 @@ namespace Rendering
 
     private:
         VisualData visualData;
-        BoundF modelBound;
+        Mathematics::BoundingSphereF modelBound;
     };
 }
 

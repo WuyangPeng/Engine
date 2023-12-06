@@ -283,6 +283,8 @@
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BandedMatrixSolveTesting.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BandedMatrixTesting.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BarycentricCoordinatesTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BoundingSphereTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Detail\TransformTool.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\EulerTesting.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\HomogeneousPointTesting.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix2EigenDecompositionTesting.h" />
@@ -299,6 +301,13 @@
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionFactorTesting.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionSwingTwistTesting.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\IdentityTransformTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\MatrixTransformTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\RotationTransformTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\ScaleTransformTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\TransformTestingBase.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\TranslateTransformTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\UnitScaleTransformTesting.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\VariableLengthVectorTesting.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\VariableMatrixTesting.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DInformationTesting.h" />
@@ -562,6 +571,8 @@
     <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BandedMatrixSolveTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BandedMatrixTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BarycentricCoordinatesTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BoundingSphereTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Detail\TransformTool.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\EulerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\HomogeneousPointTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix2EigenDecompositionTesting.cpp" />
@@ -578,6 +589,13 @@
     <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionFactorTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionSwingTwistTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\IdentityTransformTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\MatrixTransformTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\RotationTransformTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\ScaleTransformTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\TransformTestingBase.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\TranslateTransformTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Transform\UnitScaleTransformTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\VariableLengthVectorTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\VariableMatrixTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DInformationTesting.cpp" />

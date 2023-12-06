@@ -16,7 +16,7 @@
 #include "CoreTools/ObjectSystems/WeakObjectAssociated.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/Plane.h"
-#include "Rendering/DataTypes/Transform.h"
+#include "Mathematics/Algebra/Transform.h"
 #include "Rendering/SceneGraph/SceneGraphFwd.h"
 #include "Rendering/Sorting/SortingFwd.h"
 
@@ -39,7 +39,7 @@ namespace Rendering
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
-        void UpdateWorldData(const TransformF& worldTransform);
+        void UpdateWorldData(const Mathematics::TransformF& worldTransform);
         void GetVisibleSet(Culler& culler, bool noCull);
 
     protected:

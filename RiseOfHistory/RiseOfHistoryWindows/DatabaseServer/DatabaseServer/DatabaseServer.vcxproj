@@ -341,6 +341,9 @@
     <PostBuildEvent>
       <Command />
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
     <ClCompile>
@@ -355,6 +358,9 @@
     <PostBuildEvent>
       <Command />
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <ClCompile>
@@ -366,6 +372,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|Win32'">
     <ClCompile>
@@ -377,6 +386,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -395,6 +407,9 @@
     <PostBuildEvent>
       <Command />
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|Win32'">
     <ClCompile>
@@ -413,6 +428,9 @@
     <PostBuildEvent>
       <Command />
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <ClCompile>
@@ -428,6 +446,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|Win32'">
     <ClCompile>
@@ -443,6 +464,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -457,6 +481,9 @@
     <PostBuildEvent>
       <Command />
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
     <ClCompile>
@@ -471,6 +498,9 @@
     <PostBuildEvent>
       <Command />
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <ClCompile>
@@ -482,6 +512,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|x64'">
     <ClCompile>
@@ -493,6 +526,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -511,6 +547,9 @@
     <PostBuildEvent>
       <Command />
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|x64'">
     <ClCompile>
@@ -529,6 +568,9 @@
     <PostBuildEvent>
       <Command />
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <ClCompile>
@@ -544,6 +586,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|x64'">
     <ClCompile>
@@ -559,6 +604,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json" />

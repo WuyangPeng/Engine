@@ -37,7 +37,7 @@ namespace Rendering
         NODISCARD int GetActiveChild() const noexcept;
         void DisableAllChildren() noexcept;
 
-        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ControllerSharedPtr Clone() const override;
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
         NODISCARD PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const override;
 

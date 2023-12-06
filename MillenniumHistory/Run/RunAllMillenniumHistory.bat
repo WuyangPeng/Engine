@@ -1,6 +1,8 @@
 @echo on
  
-call RunAllClient.bat  
+call RunAllClient.bat 
+
+call RunAllServer.bat 
 
 call RunMillenniumHistory.bat 
 

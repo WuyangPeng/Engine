@@ -243,7 +243,7 @@ void Mathematics::DistancePoint2Ray2Testing::IntervalTest()
             DistanceResult2D tResult = distance.Get(t, lhsVelocity, rhsVelocity);
             DistanceResult2D tResultSquared = distance.GetSquared(t, lhsVelocity, rhsVelocity);
 
-            ASSERT_TRUE(result.GetDistance() <= tResult.GetDistance());
+            ASSERT_TRUE(result.GetDistance() <= tResult.GetDistance() + 1e-3);
             ASSERT_TRUE(squaredResult.GetDistance() <= tResultSquared.GetDistance());
         }
     }

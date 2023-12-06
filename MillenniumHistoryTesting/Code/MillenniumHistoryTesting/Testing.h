@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/25 19:25)
+/// 标准：std:c++20
+/// 版本：1.0.0.1 (2023/11/25 20:42)
 
-#ifndef THE_LAST_OVERLORD_TESTING_H
-#define THE_LAST_OVERLORD_TESTING_H
+#ifndef MILLENNIUM_HISTORY_TESTING_H
+#define MILLENNIUM_HISTORY_TESTING_H
 
 #include "EngineSuite/EngineSuite.h"
 #include "VersionSuite/VersionSuite.h"
 
-#endif  // THE_LAST_OVERLORD_TESTING_H
+#endif  // MILLENNIUM_HISTORY_TESTING_H

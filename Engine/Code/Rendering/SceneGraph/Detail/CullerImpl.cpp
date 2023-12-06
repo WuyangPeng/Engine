@@ -16,7 +16,7 @@
 
 Rendering::CullerImpl::CullerImpl(const ConstCameraSharedPtr& camera)
     : camera{ camera },
-      frustum{ false },
+      frustum{ false, Mathematics::MathF::GetZeroTolerance() },
       planeQuantity{ System::EnumCastUnderlying(ViewFrustum::Quantity) },
       plane{},
       planeState{ 0 },
@@ -51,7 +51,7 @@ Rendering::ConstCameraSharedPtr Rendering::CullerImpl::GetCamera() const noexcep
     return camera;
 }
 
-void Rendering::CullerImpl::SetFrustum(const float* aFrustum)
+void Rendering::CullerImpl::SetFrustum(const Container& aFrustum)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -71,7 +71,7 @@ void Rendering::CullerImpl::SetFrustum(const float* aFrustum)
     const auto rightVector = camera->GetRightVector();
     const auto directionDotEye = Dot(position, directionVector);
 
-    const auto epsilon = camera->GetEpsilon();
+    constexpr auto epsilon = Mathematics::MathF::GetZeroTolerance();
 
     // 更新近平面
     plane.at(System::EnumCastUnderlying(ViewFrustum::DirectionMin)) = Plane{ directionVector, directionDotEye + frustum.GetDirectionMin(), epsilon };
@@ -115,7 +115,7 @@ void Rendering::CullerImpl::SetFrustum(const float* aFrustum)
     planeState = 0xFFFFFFFF;
 }
 
-const float* Rendering::CullerImpl::GetFrustum() const noexcept
+Rendering::CullerImpl::Container Rendering::CullerImpl::GetFrustum() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -180,7 +180,7 @@ void Rendering::CullerImpl::PopPlane() noexcept
     }
 }
 
-bool Rendering::CullerImpl::IsVisible(const BoundF& bound) noexcept
+bool Rendering::CullerImpl::IsVisible(const Mathematics::BoundingSphereF& bound) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -270,7 +270,7 @@ bool Rendering::CullerImpl::IsVisible(int numVertices, const APoint* vertices, b
     return true;
 }
 
-Mathematics::NumericalValueSymbol Rendering::CullerImpl::WhichSide(const Plane& aPlane) const noexcept
+Mathematics::NumericalValueSymbol Rendering::CullerImpl::WhichSide(const Plane& aPlane) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

@@ -289,7 +289,7 @@ void Framework::CameraModelMiddleLayer::InitializeObjectMotion()
     return impl->InitializeObjectMotion();
 }
 
-void Framework::CameraModelMiddleLayer::SetSaveRotate() noexcept(gAssert < 2 || gRenderingAssert < 2)
+void Framework::CameraModelMiddleLayer::SetSaveRotate()  
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 

@@ -38,6 +38,13 @@
 （15） 带状矩阵。
 （16） 四元数。
 （17） 代数输入输出。
+（18） 转换：IdentityTransformTesting、★★★
+			 UnitScaleTransformTesting、★★★
+			 ScaleTransformTesting、★★★
+			 RotationTransformTesting、★★★
+			 MatrixTransformTesting、★★★
+			 TranslateTransformTesting。★★★
+（19） 边界球：BoundingSphereTesting。★★★
 
 ----------------------------
 4.	Objects2DSuite

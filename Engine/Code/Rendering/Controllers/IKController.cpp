@@ -29,7 +29,7 @@ CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, IKController);
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, IKController)
 
 Rendering::IKController::IKController(const IKJointSharedPtrVector& joints)
-    : ParentType{ CoreTools::DisableNotThrow::Disable }, impl{ joints }
+    : ParentType{ "IKController" }, impl{ joints }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

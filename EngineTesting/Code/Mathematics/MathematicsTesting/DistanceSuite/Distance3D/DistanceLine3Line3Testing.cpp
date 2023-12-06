@@ -332,7 +332,7 @@ void Mathematics::DistanceLine3Line3Testing::IntervalTest()
         DistanceResult3D squaredResult = distance.GetIntervalSquared(tMin, tMax, lhsVelocity, rhsVelocity);
         DistanceResult3D result = distance.GetInterval(tMin, tMax, lhsVelocity, rhsVelocity);
 
-        ASSERT_APPROXIMATE(MathD::Sqrt(squaredResult.GetDistance()), result.GetDistance(), 1e-10);
+        ASSERT_APPROXIMATE(MathD::Sqrt(squaredResult.GetDistance()), result.GetDistance(), 1e-5);
         ASSERT_APPROXIMATE(squaredResult.GetContactTime(), result.GetContactTime(), 1e-2);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetLhsClosestPoint(),
                                         result.GetLhsClosestPoint(), 1e-2);

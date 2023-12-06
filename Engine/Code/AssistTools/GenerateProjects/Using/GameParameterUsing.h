@@ -23,6 +23,7 @@ namespace AssistTools
     constexpr std::string_view projectServiceTypeKey{ "ProjectServiceType" };
     constexpr std::string_view uppercaseKey{ "Uppercase" };
     constexpr std::string_view isManagerKey{ "IsManager" };
+    constexpr std::string_view guidKey{ "Guid" };
 }
 
 #endif  // ASSIST_TOOLS_GENERATE_PROJECTS_GAME_PARAMETER_USING_H

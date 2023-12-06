@@ -19,7 +19,10 @@
 #include "AssistTools/GenerateProjects/GameModule.h"
 #include "AssistTools/GenerateProjects/MiddleLayerModule.h"
 #include "AssistTools/GenerateProjects/Replace.h"
+#include "AssistTools/GenerateProjects/Using/GameParameterUsing.h"
 #include "AssistTools/GenerateProjects/Using/ProjectGenerationUsing.h"
+
+using namespace std::literals;
 
 AssistTools::ProjectGenerationReplace::ProjectGenerationReplace(String templateContent, GameParameterAnalysis gameParameterAnalysis, CodeMappingAnalysis codeMappingAnalysis) noexcept
     : replaceResult{ std::move(templateContent) }, gameParameterAnalysis{ std::move(gameParameterAnalysis) }, codeMappingAnalysis{ std::move(codeMappingAnalysis) }
@@ -43,7 +46,7 @@ System::String AssistTools::ProjectGenerationReplace::GetIdentifier(const String
 
 void AssistTools::ProjectGenerationReplace::ReplaceCodeMapping(const StringView& codeKey)
 {
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
 
     ReplaceParameter(codeKey, codeMappingAnalysis.GetElement(codeKey.data()));
 }
@@ -69,7 +72,7 @@ void AssistTools::ProjectGenerationReplace::ReplaceParameter(const StringView& c
 
 System::String AssistTools::ProjectGenerationReplace::ReplaceParameter(const String& content, const StringView& codeKey, const String& parameter)
 {
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
 
 #ifdef ASSIST_TOOLS_USE_CUSTOM_REPLACE
 
@@ -94,7 +97,7 @@ System::String AssistTools::ProjectGenerationReplace::ReplaceParameter(const Str
 
 System::String AssistTools::ProjectGenerationReplace::ReplaceParameter(const String& content, const ReplaceContainer& replace)
 {
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
 
 #ifdef ASSIST_TOOLS_USE_CUSTOM_ARRAY_REPLACE
 
@@ -152,14 +155,14 @@ bool AssistTools::ProjectGenerationReplace::IsEmpty() const noexcept
 
 void AssistTools::ProjectGenerationReplace::ReplaceModuleCount()
 {
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
 
     ReplaceParameter(moduleCountKey, System::ToString(gameParameterAnalysis.GetModuleCount()));
 }
 
 void AssistTools::ProjectGenerationReplace::ReplaceModuleDescribe()
 {
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
 
     ReplaceParameter(moduleDescribeKey, GetModuleDescribe());
 }
@@ -205,7 +208,7 @@ System::String AssistTools::ProjectGenerationReplace::ReplaceModuleDescribe(cons
 
 void AssistTools::ProjectGenerationReplace::ReplaceModuleJson()
 {
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
 
     ReplaceParameter(moduleJsonKey, GetModuleJson());
 }
@@ -234,7 +237,7 @@ System::String AssistTools::ProjectGenerationReplace::ReplaceJson(const String& 
 
 void AssistTools::ProjectGenerationReplace::ReplaceModuleTestingJson()
 {
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
 
     ReplaceParameter(moduleTestingJsonKey, GetModuleTestingJson());
 }
@@ -246,14 +249,14 @@ System::String AssistTools::ProjectGenerationReplace::GetModuleTestingJson() con
 
 void AssistTools::ProjectGenerationReplace::ReplaceGameParameter(GameParameterType gameParameterType)
 {
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
 
     ReplaceParameter(ToString(gameParameterType), gameParameterAnalysis.GetGameParameter(gameParameterType));
 }
 
 void AssistTools::ProjectGenerationReplace::ReplaceCallRunBat(ProjectServiceType projectServiceType)
 {
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
 
     ReplaceParameter(callRunBatKey, GetCallRunBat(projectServiceType));
 }
@@ -285,7 +288,7 @@ System::String AssistTools::ProjectGenerationReplace::ReplaceCallRunBat(const St
 
 void AssistTools::ProjectGenerationReplace::ReplaceCallRunTestingBat()
 {
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
 
     ReplaceParameter(callRunTestingBatKey, GetCallRunTestingBat());
 }
@@ -299,7 +302,7 @@ System::String AssistTools::ProjectGenerationReplace::GetCallRunTestingBat() con
 
 void AssistTools::ProjectGenerationReplace::ReplaceTime()
 {
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
 
     const auto currentTime = boost::posix_time::second_clock::local_time();
 
@@ -318,14 +321,14 @@ void AssistTools::ProjectGenerationReplace::ReplaceTime()
 
 void AssistTools::ProjectGenerationReplace::ReplaceCopyright()
 {
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
 
     ReplaceCodeMapping(copyrightKey);
 }
 
 void AssistTools::ProjectGenerationReplace::ReplaceCodeAnalysis()
 {
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
 
     ReplaceParameter(codeAnalysisKey, GetCodeAnalysis());
 }
@@ -355,7 +358,7 @@ System::String AssistTools::ProjectGenerationReplace::ReplaceModuleName(const St
 
 void AssistTools::ProjectGenerationReplace::ReplaceTestingCodeAnalysis()
 {
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
 
     ReplaceParameter(testingCodeAnalysisKey, GetTestingCodeAnalysis());
 }
@@ -382,7 +385,7 @@ AssistTools::ProjectGenerationReplace::String AssistTools::ProjectGenerationRepl
 
 void AssistTools::ProjectGenerationReplace::ReplaceMiddleLayerInclude()
 {
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
 
     ReplaceParameter(middleLayerIncludeKey, GetMiddleLayer(middleLayerIncludeKey));
 }
@@ -392,11 +395,91 @@ System::String AssistTools::ProjectGenerationReplace::ReplaceMiddleLayerName(con
     return ReplaceParameter(middleLayer, middleLayerNameKey, middleLayerModule.GetMiddleLayerName()) + SYSTEM_TEXT("\n");
 }
 
+System::String AssistTools::ProjectGenerationReplace::ReplaceToolProject(const String& toolProject, const GameModule& gameModule)
+{
+    auto result = ReplaceParameter(toolProject, moduleNameKey, gameModule.GetModuleName());
+
+    for (auto i = 0; i < GameModule::guidCount; ++i)
+    {
+        result = ReplaceParameter(result, guidIndexKey.data() + System::ToString(i), gameModule.GetGuid(i));
+    }
+
+    return result;
+}
+
+AssistTools::ProjectGenerationReplace::String AssistTools::ProjectGenerationReplace::ReplaceToolNestedProjects(const String& toolNestedProjects, const GameModule& gameModule)
+{
+    auto result = toolNestedProjects;
+
+    for (auto i = 0; i < GameModule::guidCount; ++i)
+    {
+        result = ReplaceParameter(result, guidIndexKey.data() + System::ToString(i), gameModule.GetGuid(i));
+    }
+
+    return result;
+}
+
 void AssistTools::ProjectGenerationReplace::ReplaceMiddleLayerFwdInclude()
 {
-    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
 
     ReplaceParameter(middleLayerFwdIncludeKey, GetMiddleLayer(middleLayerFwdIncludeKey));
+}
+
+void AssistTools::ProjectGenerationReplace::ReplaceToolDirectory()
+{
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
+
+    if (gameParameterAnalysis.HasTools())
+    {
+        ReplaceCodeMapping(toolDirectoryKey);
+    }
+    else
+    {
+        ReplaceParameter(toolDirectoryKey, SYSTEM_TEXT(""));
+    }
+}
+
+void AssistTools::ProjectGenerationReplace::ReplaceToolProject()
+{
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
+
+    if (gameParameterAnalysis.HasTools())
+    {
+        ReplaceParameter(toolProjectKey, GetToolProject());
+    }
+    else
+    {
+        ReplaceParameter(toolProjectKey, SYSTEM_TEXT(""));
+    }
+}
+
+void AssistTools::ProjectGenerationReplace::ReplaceToolNestedProjects()
+{
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
+
+    if (gameParameterAnalysis.HasTools())
+    {
+        ReplaceParameter(toolsNestedProjectsKey, GetToolNestedProjects());
+    }
+    else
+    {
+        ReplaceParameter(toolsNestedProjectsKey, SYSTEM_TEXT(""));
+    }
+}
+
+void AssistTools::ProjectGenerationReplace::ReplaceTestingToolProject()
+{
+    ASSIST_TOOLS_CLASS_IS_VALID_9;
+
+    if (gameParameterAnalysis.HasTools())
+    {
+        ReplaceParameter(testingToolProjectKey, GetTestToolProject());
+    }
+    else
+    {
+        ReplaceParameter(testingToolProjectKey, SYSTEM_TEXT(""));
+    }
 }
 
 System::String AssistTools::ProjectGenerationReplace::GetMiddleLayer(const StringView& codeKey) const
@@ -407,6 +490,54 @@ System::String AssistTools::ProjectGenerationReplace::GetMiddleLayer(const Strin
 
     std::for_each(gameParameterAnalysis.GetMiddleLayerBegin(), gameParameterAnalysis.GetMiddleLayerEnd(), [&content, middleLayer](const auto& element) {
         content += ReplaceMiddleLayerName(middleLayer, element);
+    });
+
+    return content;
+}
+
+System::String AssistTools::ProjectGenerationReplace::GetToolProject() const
+{
+    const auto toolProject = codeMappingAnalysis.GetElement(toolProjectKey.data());
+
+    String content{};
+
+    std::for_each(gameParameterAnalysis.GetModuleBegin(), gameParameterAnalysis.GetModuleEnd(), [&content, toolProject](const auto& element) {
+        if (element.GetProjectServiceType() == ProjectServiceType::Tools)
+        {
+            content += ReplaceToolProject(toolProject, element);
+        }
+    });
+
+    return content;
+}
+
+System::String AssistTools::ProjectGenerationReplace::GetToolNestedProjects() const
+{
+    const auto toolsNestedProjects = codeMappingAnalysis.GetElement(toolsNestedProjectsKey.data());
+
+    String content{};
+
+    std::for_each(gameParameterAnalysis.GetModuleBegin(), gameParameterAnalysis.GetModuleEnd(), [&content, toolsNestedProjects](const auto& element) {
+        if (element.GetProjectServiceType() == ProjectServiceType::Tools)
+        {
+            content += ReplaceToolNestedProjects(toolsNestedProjects, element);
+        }
+    });
+
+    return content;
+}
+
+System::String AssistTools::ProjectGenerationReplace::GetTestToolProject() const
+{
+    const auto testingToolProject = codeMappingAnalysis.GetElement(testingToolProjectKey.data());
+
+    String content{};
+
+    std::for_each(gameParameterAnalysis.GetModuleBegin(), gameParameterAnalysis.GetModuleEnd(), [&content, testingToolProject](const auto& element) {
+        if (element.GetProjectServiceType() == ProjectServiceType::Tools)
+        {
+            content += ReplaceToolProject(testingToolProject, element);
+        }
     });
 
     return content;

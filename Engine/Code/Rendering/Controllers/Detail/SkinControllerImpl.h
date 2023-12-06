@@ -15,7 +15,7 @@
 #include "CoreTools/ObjectSystems/ConstWeakObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Mathematics/Algebra/APoint.h"
-#include "Rendering/DataTypes/Bound.h"
+#include "Mathematics/Algebra/BoundingSphere.h"
 #include "Rendering/SceneGraph/Node.h"
 
 #include <vector>

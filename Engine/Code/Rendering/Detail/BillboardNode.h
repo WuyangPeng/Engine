@@ -36,7 +36,7 @@ namespace Rendering
         // 广告牌对齐的摄像头。
         void AlignTo(const CameraSharedPtr& camera) noexcept;
 
-        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ControllerSharedPtr Clone() const override;
 
         NODISCARD ConstCameraSharedPtr GetCamera() const noexcept;
 

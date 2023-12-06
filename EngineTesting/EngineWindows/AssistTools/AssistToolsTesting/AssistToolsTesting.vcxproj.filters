@@ -116,6 +116,9 @@
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTesting.h">
       <Filter>GenerateProjectsSuite 头文件\ProjectGeneration</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\SlnProjectGenerationTesting.h">
+      <Filter>GenerateProjectsSuite 头文件\ProjectGeneration</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\TestingHelper.cpp">
@@ -162,6 +165,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTesting.cpp">
       <Filter>GenerateProjectsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\ProjectGeneration\SlnProjectGenerationTesting.cpp">
+      <Filter>GenerateProjectsSuite 源文件\ProjectGeneration</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

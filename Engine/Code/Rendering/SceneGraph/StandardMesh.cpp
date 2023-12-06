@@ -18,7 +18,7 @@
 #include "Rendering/SceneGraph/Detail/PickRecordContainerImpl.h"
 #include "Rendering/SceneGraph/Detail/PickRecordImpl.h"
 
-Rendering::StandardMesh::StandardMesh(const VertexFormatSharedPtr& vertexFormat, bool isStatic, bool inside, const TransformF* transform)
+Rendering::StandardMesh::StandardMesh(const VertexFormatSharedPtr& vertexFormat, bool isStatic, bool inside, const Mathematics::TransformF* transform)
     : impl{ vertexFormat, isStatic, inside, transform }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -26,8 +26,8 @@ Rendering::StandardMesh::StandardMesh(const VertexFormatSharedPtr& vertexFormat,
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, StandardMesh)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, StandardMesh, SetTransform, TransformF, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, StandardMesh, GetTransform, const Rendering::TransformF&)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, StandardMesh, SetTransform, Mathematics::TransformF, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, StandardMesh, GetTransform, const Mathematics::TransformF&)
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, StandardMesh)
 
 const Rendering::TrianglesMeshSharedPtr Rendering::StandardMesh::Rectangle(int xSamples, int ySamples, float xExtent, float yExtent) const

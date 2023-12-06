@@ -32,7 +32,7 @@ namespace Rendering
         CORE_TOOLS_OBJECT_FACTORY_DECLARE(VisualTest);
         CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
 
-        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ControllerSharedPtr Clone() const override;
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
     };

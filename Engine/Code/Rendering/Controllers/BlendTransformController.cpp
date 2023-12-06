@@ -36,7 +36,7 @@ Rendering::BlendTransformController::BlendTransformController(const TransformCon
                                                               bool rotationScaleMatrices,
                                                               bool geometricRotation,
                                                               bool geometricScale)
-    : ParentType{ TransformF{} }, impl{ firstController, secondController, rotationScaleMatrices, geometricRotation, geometricScale }
+    : ParentType{ Mathematics::TransformF{} }, impl{ firstController, secondController, rotationScaleMatrices, geometricRotation, geometricScale }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -143,12 +143,12 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendTransformController
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendTransformController, IsGeometricScale, bool)
 
-void Rendering::BlendTransformController::SetControllerObject(const ControllerInterfaceSharedPtr& object)
+void Rendering::BlendTransformController::SetController(const ControllerSharedPtr& object)
 {
     RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Spatial::GetCurrentRttiType()), "ÎÞÐ§Àà\n");
 
-    ParentType::SetControllerObject(object);
+    ParentType::SetController(object);
     impl->SetObject(object);
 }
 
@@ -182,7 +182,7 @@ bool Rendering::BlendTransformController::Update(double applicationTime)
             SetMatrix(blendMatrix);
         }
 
-        auto spatial = boost::polymorphic_pointer_cast<Spatial>(GetControllerObject());
+        auto spatial = boost::polymorphic_pointer_cast<Spatial>(GetController());
 
         if (spatial != nullptr)
         {

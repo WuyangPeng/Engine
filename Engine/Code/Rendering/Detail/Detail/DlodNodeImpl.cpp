@@ -16,7 +16,7 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Rendering/DataTypes/Transform.h"
+#include "Mathematics/Algebra/Transform.h"
 
 #include <gsl/util>
 
@@ -170,7 +170,7 @@ void Rendering::DlodNodeImpl::SetModelDistance(int index, float minDistance, flo
     worldMaxDistance.at(index) = minDistance;
 }
 
-void Rendering::DlodNodeImpl::SetWorldCenter(const TransformF& transform) noexcept
+void Rendering::DlodNodeImpl::SetWorldCenter(const Mathematics::TransformF& transform) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 

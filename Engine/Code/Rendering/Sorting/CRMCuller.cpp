@@ -10,6 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "CRMCuller.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::CRMCuller::CRMCuller(const ConstCameraSharedPtr& camera)
     : ParentType{ camera }

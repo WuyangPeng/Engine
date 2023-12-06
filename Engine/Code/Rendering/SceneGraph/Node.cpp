@@ -19,7 +19,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Rendering/DataTypes/BoundDetail.h"
+#include "Mathematics/Algebra/BoundingSphereDetail.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Node)
 
@@ -217,7 +217,7 @@ void Rendering::Node::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-Rendering::Node::ControllerInterfaceSharedPtr Rendering::Node::Clone() const
+Rendering::Node::ControllerSharedPtr Rendering::Node::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

@@ -1,11 +1,11 @@
 @ingroup group_Documentation
 
----------------------------
-千年史策测试工程
+----------------------------
+千年史策单元测试工程
 
----------------------------
+----------------------------
 MillenniumHistoryTesting.props：
-千年史策测试工程属性表
+千年史策单元测试工程属性表
 
 MillenniumHistoryTestingStaticWin32DebugLibs.props：
 引擎和游戏都编译成lib、Win32、Debug工程依赖库属性表
@@ -55,9 +55,11 @@ MillenniumHistoryTestingEngineStaticMillenniumHistoryTestingDynamicX64DebugLibs.
 MillenniumHistoryTestingEngineStaticMillenniumHistoryTestingDynamicX64ReleaseLibs.props：
 引擎（lib）和游戏（dll）都编译成X64、Release工程依赖库属性表
 
----------------------------
+----------------------------
 SetEnvironment.bat：
-设置千年史策测试所需要的环境变量
+设置千年史策单元测试所需要的环境变量
 
----------------------------
- 
+SetAllEnvironment.bat：
+设置游戏所需要的所有环境变量
+
+----------------------------

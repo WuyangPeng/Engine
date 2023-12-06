@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.0 (2023/11/19 20:39)
+/// 版本：1.0.0.1 (2023/11/20 13:43)
 
 #include "EngineTesting.h"
 #include "System/Threading/Process.h"
@@ -17,10 +17,8 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using namespace std::literals;
-
 RiseOfHistoryTesting::EngineTesting::EngineTesting(const OStreamShared& stream)
-    : ParentType{ stream }, engineTestingName{ SYSTEM_TEXT("End"s) }
+    : ParentType{ stream }, engineTestingName{ SYSTEM_TEXT("End") }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -36,9 +34,8 @@ void RiseOfHistoryTesting::EngineTesting::MainTest()
 {
     CoreTools::Directory directory{ System::GetEngineeringDirectory() };
 
-    const auto isStreamSharedFile = IsStreamSharedFile();
-
-    if (!isStreamSharedFile)
+    if (const auto isStreamSharedFile = IsStreamSharedFile();
+        !isStreamSharedFile)
     {
         ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(EngineTest);
     }
@@ -48,7 +45,7 @@ bool RiseOfHistoryTesting::EngineTesting::EngineTest()
 {
     engineTestingName.PrintSelect(GetStream());
 
-    auto select = System::GetSystemInput<int>();
+    const auto select = System::GetSystemInput<int>();
 
     return ExecuteEngineTesting(select);
 }

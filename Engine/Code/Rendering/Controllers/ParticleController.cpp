@@ -32,7 +32,7 @@ CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, ParticleController);
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, ParticleController)
 
 Rendering::ParticleController::ParticleController(const BaseRendererSharedPtr& baseRenderer)
-    : ParentType{ CoreTools::DisableNotThrow::Disable }, impl{ baseRenderer }
+    : ParentType{ "ParticleController" }, impl{ baseRenderer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -109,7 +109,7 @@ std::shared_ptr<Rendering::Camera> Rendering::ParticleController::GetCamera() no
     return impl->GetCamera();
 }
 
-void Rendering::ParticleController::SetControllerObject(const ControllerInterfaceSharedPtr& object)
+void Rendering::ParticleController::SetController(const ControllerSharedPtr& object)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -119,14 +119,14 @@ void Rendering::ParticleController::SetControllerObject(const ControllerInterfac
 
     impl->SetControllerObject(*visual);
 
-    ParentType::SetControllerObject(object);
+    ParentType::SetController(object);
 }
 
 void Rendering::ParticleController::UpdateSystemMotion(float ctrlTime)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    const auto visual = boost::polymorphic_pointer_cast<Particles>(GetControllerObject());
+    const auto visual = boost::polymorphic_pointer_cast<Particles>(GetController());
 
     impl->UpdateSystemMotion(*visual, ctrlTime);
 }
@@ -135,7 +135,7 @@ void Rendering::ParticleController::UpdatePointMotion(float ctrlTime)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    const auto visual = boost::polymorphic_pointer_cast<Particles>(GetControllerObject());
+    const auto visual = boost::polymorphic_pointer_cast<Particles>(GetController());
 
     impl->UpdatePointMotion(*visual, ctrlTime);
 }

@@ -30,7 +30,7 @@ namespace Rendering
         using Math = Mathematics::MathF;
 
     public:
-        StandardMeshImpl(const VertexFormatSharedPtr& vertexFormat, bool isStatic = true, bool inside = false, const TransformF* transform = nullptr);
+        StandardMeshImpl(const VertexFormatSharedPtr& vertexFormat, bool isStatic = true, bool inside = false, const Mathematics::TransformF* transform = nullptr);
 
         ~StandardMeshImpl() noexcept = default;
         StandardMeshImpl(const StandardMeshImpl& rhs);
@@ -40,8 +40,8 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        void SetTransform(const TransformF& aTransform) noexcept;
-        NODISCARD const TransformF& GetTransform() const noexcept;
+        void SetTransform(const Mathematics::TransformF& aTransform) noexcept;
+        NODISCARD const Mathematics::TransformF& GetTransform() const noexcept;
 
         NODISCARD TrianglesMeshSharedPtr Rectangle(int xSamples, int ySamples, float xExtent, float yExtent) const;
         NODISCARD TrianglesMeshSharedPtr Disk(int shellSamples, int radialSamples, float radius) const;
@@ -72,7 +72,7 @@ namespace Rendering
         static constexpr auto maxUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
 
         VertexFormatSharedPtr vertexFormat;
-        TransformF transform;
+        Mathematics::TransformF transform;
         bool isStatic;
         bool inside;
         bool hasNormals;

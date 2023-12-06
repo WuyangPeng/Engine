@@ -26,6 +26,7 @@
 #include "Plane.h"
 #include "Polynomial.h"
 #include "Quaternion.h"
+#include "Transform.h"
 #include "VariableLengthVector.h"
 #include "VariableMatrix.h"
 #include "Vector2.h"
@@ -274,5 +275,29 @@ MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathemat
 
 template <>
 MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Float4& datum);
+
+template <>
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::TransformF& datum);
+
+template <>
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::TransformF& datum);
+
+template <>
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::TransformD& datum);
+
+template <>
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::TransformD& datum);
+
+template <>
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::BoundingSphereF& datum);
+
+template <>
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::BoundingSphereF& datum);
+
+template <>
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::BoundingSphereD& datum);
+
+template <>
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::BoundingSphereD& datum);
 
 #endif  // MATHEMATICS_ALGEBRA_ALGEBRA_AGGREGATE_H

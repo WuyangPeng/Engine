@@ -12,7 +12,8 @@
 
 #include "Framework/FrameworkDll.h"
 
-#include "Rendering/DataTypes/Transform.h"
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "Mathematics/Algebra/Transform.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Framework/Application/ApplicationFwd.h"
 
@@ -26,7 +27,7 @@ namespace Framework
         using APoint = Mathematics::APointF;
         using AVector = Mathematics::AVectorF;
         using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
-        using Transform = Rendering::TransformF;
+        using Transform = Mathematics::TransformF;
         using CameraSharedPtr = Rendering::CameraSharedPtr;
         using ConstCameraSharedPtr = Rendering::ConstCameraSharedPtr;
 
@@ -84,7 +85,7 @@ namespace Framework
         void SetEndTrack(float xTrack, float yTrack) noexcept;
         void RotateTrackBall();
         void SetTrackBallDow(bool value) noexcept;
-        void SetSaveRotate() noexcept(gAssert < 2 || gRenderingAssert < 2);
+        void SetSaveRotate();
         void SetDoRoll(NumericalValueSymbol doRoll) noexcept;
         void SetDoYaw(NumericalValueSymbol doYaw) noexcept;
         void SetDoPitch(NumericalValueSymbol doPitch) noexcept;

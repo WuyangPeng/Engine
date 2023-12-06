@@ -13,7 +13,10 @@
 #include "AssistTools/AssistToolsDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
+#include "AssistTools/GenerateProjects/GameModule.h"
 #include "AssistTools/GenerateProjects/GenerateProjectsFwd.h"
+
+#include <array>
 
 namespace AssistTools
 {
@@ -23,9 +26,11 @@ namespace AssistTools
         using ClassType = GameModuleImpl;
 
         using String = System::String;
+        static constexpr auto guidCount = 4;
+        using GuidContainer = std::array<String, guidCount>;
 
     public:
-        GameModuleImpl(String moduleName, String chineseName, ProjectServiceType projectServiceType, String uppercaseName) noexcept;
+        GameModuleImpl(String moduleName, String chineseName, ProjectServiceType projectServiceType, String uppercaseName, const GuidContainer& guid) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -33,12 +38,14 @@ namespace AssistTools
         NODISCARD String GetChineseName() const;
         NODISCARD ProjectServiceType GetProjectServiceType() const noexcept;
         NODISCARD String GetUppercaseName() const;
+        NODISCARD String GetGuid(int index) const;
 
     private:
         String moduleName;
         String chineseName;
         ProjectServiceType projectServiceType;
         String uppercaseName;
+        GuidContainer guid;
     };
 }
 

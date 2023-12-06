@@ -29,7 +29,7 @@ CoreTools::OFStreamManagerImpl::OFStreamManagerImpl(const String& fileName, bool
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-int CoreTools::OFStreamManagerImpl::GetOpenMode(const String& fileName, bool addition)
+std::ios_base::openmode CoreTools::OFStreamManagerImpl::GetOpenMode(const String& fileName, bool addition)
 {
     if (fileName.empty())
     {
@@ -69,7 +69,7 @@ CoreTools::OFStreamManagerImpl::PosType CoreTools::OFStreamManagerImpl::GetStrea
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    const OFileStream::pos_type errorPosition{ -1 };
+    const PosType errorPosition{ -1 };
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
@@ -84,9 +84,9 @@ CoreTools::OFStreamManagerImpl::PosType CoreTools::OFStreamManagerImpl::GetStrea
     thisImpl->SeekEnd();
 
     if (const auto endPosition = thisImpl->oStream.tellp(); endPosition != errorPosition)
-        return endPosition;
+        return PosType{ endPosition };
     else
-        return 0;
+        return PosType{ 0 };
 }
 
 void CoreTools::OFStreamManagerImpl::SeekEnd()

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/26 14:24)
+/// 标准：std:c++20
+/// 版本：1.0.0.1 (2023/11/27 19:28)
 
 #ifndef MATHEMATICS_ALGEBRA_H
 #define MATHEMATICS_ALGEBRA_H
@@ -20,9 +20,11 @@
 #include "AxesAlignBoundingBox2Detail.h"
 #include "AxesAlignBoundingBox3Detail.h"
 #include "AxesAlignBoundingBox4Detail.h"
+#include "AxisAngleDetail.h"
 #include "BandedMatrixDetail.h"
 #include "BandedMatrixSolveDetail.h"
 #include "BarycentricCoordinates.h"
+#include "BoundingSphereDetail.h"
 #include "CylindricalCoordinatesDetail.h"
 #include "EulerDetail.h"
 #include "HomogeneousPointDetail.h"
@@ -30,7 +32,6 @@
 #include "Matrix2EigenDecompositionDetail.h"
 #include "Matrix3Detail.h"
 #include "Matrix3EigenDecompositionDetail.h"
-#include "Matrix3ExtractDetail.h"
 #include "Matrix4Detail.h"
 #include "MatrixDetail.h"
 #include "PlaneDetail.h"
@@ -41,6 +42,7 @@
 #include "QuaternionFactorDetail.h"
 #include "QuaternionSwingTwistDetail.h"
 #include "SphereCoordinatesDetail.h"
+#include "TransformDetail.h"
 #include "VariableLengthVectorDetail.h"
 #include "VariableMatrixDetail.h"
 #include "Vector2Detail.h"

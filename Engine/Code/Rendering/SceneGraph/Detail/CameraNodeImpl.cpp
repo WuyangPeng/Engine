@@ -20,6 +20,7 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/APointDetail.h"
+#include "Mathematics/Algebra/MatrixDetail.h"
 
 Rendering::CameraNodeImpl::CameraNodeImpl(const CameraSharedPtr& camera) noexcept
     : camera{ camera }
@@ -43,12 +44,12 @@ Rendering::ConstCameraSharedPtr Rendering::CameraNodeImpl::GetCamera() const noe
     return camera.object;
 }
 
-Rendering::TransformF Rendering::CameraNodeImpl::GetLocalTransform() const
+Mathematics::TransformF Rendering::CameraNodeImpl::GetLocalTransform() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_CameraÎª¿ÕÖ¸Õë£¡");
 
-    TransformF transform{};
+    Mathematics::TransformF transform{};
     transform.SetTranslate(camera.object->GetPosition());
 
     const Matrix rotate{ camera.object->GetDirectionVector(), camera.object->GetUpVector(), camera.object->GetRightVector(), Mathematics::APointF::GetOrigin(), Mathematics::MatrixMajorFlags::Column };

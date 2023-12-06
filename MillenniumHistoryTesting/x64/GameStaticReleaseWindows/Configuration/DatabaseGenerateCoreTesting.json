@@ -1,0 +1,25 @@
+{
+  "convertSuite": {
+    "ArticleConvertTesting": 1,
+    "BookConvertTesting": 1,
+    "CalendarConvertTesting": 1,
+    "CategoryConvertTesting": 1,
+    "CharacterConvertTesting": 1,
+    "CountryConvertTesting": 1,
+    "DayConvertTesting": 1,
+    "EmperorConvertTesting": 1,
+    "GatherConvertTesting": 1,
+    "GenusConvertTesting": 1,
+    "GeographicConvertTesting": 1,
+    "IdentityConvertTesting": 1,
+    "ImperialCourtConvertTesting": 1,
+    "MonthConvertTesting": 1,
+    "ReignTitleConvertTesting": 1,
+    "SexagenaryCycleConvertTesting": 1,
+    "SourceConvertTesting": 1,
+    "VersionConvertTesting": 1,
+    "YearConvertTesting": 1,
+    "DeleteInvalidDatabaseTesting": 1,
+    "AncientBooksDatabaseSaveTesting": 1
+  }
+}

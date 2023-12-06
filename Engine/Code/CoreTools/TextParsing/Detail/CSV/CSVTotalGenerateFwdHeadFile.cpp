@@ -63,6 +63,11 @@ System::String CoreTools::CSVTotalGenerateFwdHeadFile::GetContent(const String& 
         includeEnumContent += SYSTEM_TEXT("\n");
     }
 
+    if (!enumType.empty())
+    {
+        includeEnumContent += SYSTEM_TEXT("\n");
+    }
+
     boost::algorithm::replace_all(content, SYSTEM_TEXT("$EnumDeclaration$"), includeEnumContent);
 
     const auto classDeclaration = codeMapping.GetElement(SYSTEM_TEXT("ClassDeclaration"));

@@ -19,6 +19,7 @@
 			   ClientProjectGenerationTesting¡¢¡ï¡ï¡ï
 			   ReplaceProjectGenerationTesting¡¢¡ï¡ï¡ï
 			   Utf8ReplaceProjectGenerationTesting¡¢¡ï¡ï¡ï
+			   SlnProjectGenerationTesting¡¢¡ï¡ï¡ï
 			   ReplaceTesting¡¢¡ï¡ï¡ï
 			   GenerateEngineTesting¡¢¡ï¡ï¡ï
 			   GenerateTestingEngineTesting¡£¡ï¡ï¡ï

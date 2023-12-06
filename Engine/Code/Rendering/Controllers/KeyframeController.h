@@ -16,7 +16,7 @@
 #include "TransformController.h"
 #include "Mathematics/Algebra/AQuaternion.h"
 #include "Mathematics/Algebra/Matrix.h"
-#include "Rendering/DataTypes/Transform.h"
+#include "Mathematics/Algebra/Transform.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(KeyframeController, KeyframeControllerImpl);
 
@@ -41,7 +41,7 @@ namespace Rendering
         // 这个类的以前的行为是为了填补只能由关键帧代表的通道变换，
         // 其中隐含依靠空间Spatial m_Object有它的应用程序适当地设置其他通道。
         // 现在KeyframeController设置*所有*的通道。
-        KeyframeController(int numCommonTimes, int numTranslations, int numRotations, int numScales, const TransformF& localTransform);
+        KeyframeController(int numCommonTimes, int numTranslations, int numRotations, int numScales, const Mathematics::TransformF& localTransform);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -75,9 +75,9 @@ namespace Rendering
 
         // 动画更新。应用程序时间以毫秒为单位。
         NODISCARD bool Update(double applicationTime) override;
-        void SetControllerObject(const ControllerInterfaceSharedPtr& object) override;
+        void SetController(const ControllerSharedPtr& object) override;
 
-        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ControllerSharedPtr Clone() const override;
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
     protected:

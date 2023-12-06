@@ -57,6 +57,13 @@ AssistTools::GameParameterAnalysis::MiddleLayerContainerConstIter AssistTools::G
     return impl->GetMiddleLayerEnd();
 }
 
+bool AssistTools::GameParameterAnalysis::HasTools() const noexcept
+{
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->HasTools();
+}
+
 AssistTools::GameParameterAnalysis::String AssistTools::GameParameterAnalysis::GetGameParameter(GameParameterType gameParameterType) const
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;

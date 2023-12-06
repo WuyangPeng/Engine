@@ -36,7 +36,6 @@
       "Extension": "log"
     },
 
-
     "Default": {
       "Directory": "Log",
       "Flags": 15,

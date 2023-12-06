@@ -169,7 +169,7 @@ namespace Mathematics
     NODISCARD Real Dot(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs) noexcept;
 
     template <typename Real>
-    NODISCARD bool Approximate(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs, const Real epsilon = Math<Real>::GetZeroTolerance()) noexcept;
+    NODISCARD bool Approximate(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs, Real epsilon = Math<Real>::GetZeroTolerance()) noexcept;
 
     // µ÷ÊÔÊä³ö
     template <typename Real>

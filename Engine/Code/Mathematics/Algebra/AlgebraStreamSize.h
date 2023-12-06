@@ -15,6 +15,7 @@
 #include "AVector.h"
 #include "BandedMatrix.h"
 #include "BandedMatrixSolve.h"
+#include "BoundingSphere.h"
 #include "HomogeneousPoint.h"
 #include "Matrix.h"
 #include "Matrix2.h"
@@ -23,6 +24,7 @@
 #include "Plane.h"
 #include "Polynomial.h"
 #include "Quaternion.h"
+#include "Transform.h"
 #include "VariableLengthVector.h"
 #include "VariableMatrix.h"
 #include "Vector2.h"
@@ -377,6 +379,42 @@ struct CoreTools::StreamSize<Mathematics::Float4>
         System::UnusedFunction(value);
 
         return StreamSize<float>::GetStreamSize() * Mathematics::Float4::tupleDimension;
+    }
+};
+
+template <>
+struct CoreTools::StreamSize<Mathematics::TransformF>
+{
+    NODISCARD static int GetStreamSize(const Mathematics::TransformF& value) noexcept
+    {
+        return value.GetStreamingSize();
+    }
+};
+
+template <>
+struct CoreTools::StreamSize<Mathematics::TransformD>
+{
+    NODISCARD static int GetStreamSize(const Mathematics::TransformD& value) noexcept
+    {
+        return value.GetStreamingSize();
+    }
+};
+
+template <>
+struct CoreTools::StreamSize<Mathematics::BoundingSphereF>
+{
+    NODISCARD static int GetStreamSize(const Mathematics::BoundingSphereF& value) noexcept
+    {
+        return value.GetStreamingSize();
+    }
+};
+
+template <>
+struct CoreTools::StreamSize<Mathematics::BoundingSphereD>
+{
+    NODISCARD static int GetStreamSize(const Mathematics::BoundingSphereD& value) noexcept
+    {
+        return value.GetStreamingSize();
     }
 };
 

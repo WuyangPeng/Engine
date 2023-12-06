@@ -60,6 +60,13 @@ void AssistTools::GenerateFile::GenerateUtf8(const GenerateDirectory& generateDi
     GenerateUtf8(generateDirectory.GetInputDirectory(), templateName, generateDirectory.GetOutputDirectory(), originalName, replace);
 }
 
+void AssistTools::GenerateFile::GenerateSln(const GenerateDirectory& generateDirectory, const StringView& templateName, const StringView& originalName) const
+{
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    GenerateSln(generateDirectory.GetInputDirectory(), templateName, generateDirectory.GetOutputDirectory(), originalName);
+}
+
 void AssistTools::GenerateFile::GenerateByContent(const GenerateDirectory& generateDirectory, const String& content, const StringView& originalName, const ReplaceContainer& replace)
 {
     GenerateByContent(content, GetOutputFileName(generateDirectory.GetOutputDirectory(), originalName), replace);
@@ -115,6 +122,11 @@ void AssistTools::GenerateFile::GenerateUtf8(const String& inputDirectory, const
     GenerateUtf8(GetInputFileName(inputDirectory, templateName), GetOutputFileName(outputDirectory, originalName), replace);
 }
 
+void AssistTools::GenerateFile::GenerateSln(const String& inputDirectory, const StringView& templateName, const String& outputDirectory, const StringView& originalName) const
+{
+    GenerateSln(GetInputFileName(inputDirectory, templateName), GetOutputFileName(outputDirectory, originalName));
+}
+
 void AssistTools::GenerateFile::Generate(const String& inputFileName, const String& outputFileName) const
 {
     const ProjectGeneration projectGeneration{ ProjectGenerationType::Default,
@@ -156,6 +168,18 @@ void AssistTools::GenerateFile::Generate(const String& inputFileName, const Stri
 void AssistTools::GenerateFile::GenerateUtf8(const String& inputFileName, const String& outputFileName) const
 {
     const ProjectGeneration projectGeneration{ ProjectGenerationType::Utf8,
+                                               inputFileName,
+                                               gameParameterAnalysis,
+                                               codeMappingAnalysis };
+
+    const auto content = projectGeneration.GetContent();
+
+    GenerateByContentUtf8(content, outputFileName);
+}
+
+void AssistTools::GenerateFile::GenerateSln(const String& inputFileName, const String& outputFileName) const
+{
+    const ProjectGeneration projectGeneration{ ProjectGenerationType::Sln,
                                                inputFileName,
                                                gameParameterAnalysis,
                                                codeMappingAnalysis };

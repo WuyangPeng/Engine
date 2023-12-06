@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %MillenniumHistoryTestingWin32DebugLib% RobotClientCoreTestingD.exe
+start /d %MillenniumHistoryTestingWin32ReleaseLib% RobotClientCoreTesting.exe
+start /d %MillenniumHistoryTestingX64DebugLib% RobotClientCoreTestingD.exe
+start /d %MillenniumHistoryTestingX64ReleaseLib% RobotClientCoreTesting.exe
+start /d %MillenniumHistoryTestingStaticWin32DebugLib% RobotClientCoreTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticWin32ReleaseLib% RobotClientCoreTestingStatic.exe
+start /d %MillenniumHistoryTestingStaticX64DebugLib% RobotClientCoreTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticX64ReleaseLib% RobotClientCoreTestingStatic.exe
+
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32DebugLib% RobotClientCoreTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32ReleaseLib% RobotClientCoreTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64DebugLib% RobotClientCoreTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64ReleaseLib% RobotClientCoreTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32DebugLib% RobotClientCoreTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32ReleaseLib% RobotClientCoreTesting.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64DebugLib% RobotClientCoreTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64ReleaseLib% RobotClientCoreTesting.exe
+
+pause

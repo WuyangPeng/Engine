@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{8aaed613-9124-46fc-981b-2f976cebbada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{68f14701-d87c-4a2f-ac11-7381ed07c781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ArtificialIntelligenceSuite 头文件">
+      <UniqueIdentifier>{aa03b768-43bf-4d46-97b9-fdea31174f71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ArtificialIntelligenceSuite 源文件">
+      <UniqueIdentifier>{e3075595-5242-4ecf-ad8c-5f02e8198f8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AudioSuite 头文件">
+      <UniqueIdentifier>{8a5a1d88-37b7-4d99-a7b0-38ed63f7ccda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AudioSuite 源文件">
+      <UniqueIdentifier>{3f679512-e7a9-44ae-9680-a6612bf500cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CameraSystemsSuite 头文件">
+      <UniqueIdentifier>{0aa8a538-159c-4e19-b63e-e914779a65a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CameraSystemsSuite 源文件">
+      <UniqueIdentifier>{492fbbe1-075c-4ec7-864b-f2c97575e059}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EventSuite 头文件">
+      <UniqueIdentifier>{42cab4d2-4fca-494e-a219-2b4d578c01a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EventSuite 源文件">
+      <UniqueIdentifier>{776e8929-cd42-44c9-bcd5-4fb3afd5655b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUISuite 头文件">
+      <UniqueIdentifier>{5cae0093-ef99-4e65-ab8c-dfc9a0b1ba1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUISuite 源文件">
+      <UniqueIdentifier>{cde30167-f826-4cf1-a4de-254d483a368e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件">
+      <UniqueIdentifier>{f0bc956a-f254-4c62-b8e8-d4255cd3b63a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件">
+      <UniqueIdentifier>{185c8558-f9f8-48d4-9344-5c70c59d14e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InputSuite 头文件">
+      <UniqueIdentifier>{51bb1437-de32-4d6d-86df-7e0c12454006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InputSuite 源文件">
+      <UniqueIdentifier>{623d98b3-1a10-48a2-a91c-2dd58ab993c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessageSuite 头文件">
+      <UniqueIdentifier>{a7bb1109-a14d-40ea-a3b4-8bac7ca3bb7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessageSuite 源文件">
+      <UniqueIdentifier>{a4d84904-a4c8-466d-b97c-f70a4d8200fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkSuite 头文件">
+      <UniqueIdentifier>{6426374e-2154-43a9-8253-22cf517b2c88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkSuite 源文件">
+      <UniqueIdentifier>{c0b39585-1dae-46de-ad9e-e62d8f7a3ac7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectLogicSuite 头文件">
+      <UniqueIdentifier>{9c43c6f5-b150-4d86-90e8-9b46a20c914e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectLogicSuite 源文件">
+      <UniqueIdentifier>{23ae6bb3-ae3f-4650-a622-9ca3c2ba0704}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicalModellingSuite 头文件">
+      <UniqueIdentifier>{2c14b53c-2098-4abd-8a79-624a5cf828fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicalModellingSuite 源文件">
+      <UniqueIdentifier>{7bee52ad-781f-49b2-a371-f11d52da4be0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderingSuite 头文件">
+      <UniqueIdentifier>{31172211-a013-47cf-8f27-e1896fed5727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderingSuite 源文件">
+      <UniqueIdentifier>{cb9be42c-8821-489e-a670-657b23a4e67f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResourceSuite 头文件">
+      <UniqueIdentifier>{fbf9dc50-6f24-4aff-ba9e-41dafbcc15db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResourceSuite 源文件">
+      <UniqueIdentifier>{235028af-37fe-48b0-943d-d152ff992a35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemSuite 头文件">
+      <UniqueIdentifier>{b09e6bf9-4234-46fe-8916-964ef0c74b14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemSuite 源文件">
+      <UniqueIdentifier>{72ae978b-cd17-4b5f-a4c8-5b40f4b6df19}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\ArtificialIntelligenceSuite\AIManagerTesting.h">
+      <Filter>ArtificialIntelligenceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\ArtificialIntelligenceSuite\ArtificialIntelligenceSuite.h">
+      <Filter>ArtificialIntelligenceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\AudioSuite\AudioManagerTesting.h">
+      <Filter>AudioSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\AudioSuite\AudioSuite.h">
+      <Filter>AudioSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\CameraSystemsSuite\CameraSystemsManagerTesting.h">
+      <Filter>CameraSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\CameraSystemsSuite\CameraSystemsSuite.h">
+      <Filter>CameraSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\EventSuite\EventManagerTesting.h">
+      <Filter>EventSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\EventSuite\EventSuite.h">
+      <Filter>EventSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\GUISuite\GUIManagerTesting.h">
+      <Filter>GUISuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\GUISuite\GUISuite.h">
+      <Filter>GUISuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\HelperSuite\HelperSuite.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\InputSuite\InputManagerTesting.h">
+      <Filter>InputSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\InputSuite\InputSuite.h">
+      <Filter>InputSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\MessageSuite\MessageManagerTesting.h">
+      <Filter>MessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\MessageSuite\MessageSuite.h">
+      <Filter>MessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\NetworkSuite\NetworkManagerTesting.h">
+      <Filter>NetworkSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\NetworkSuite\NetworkSuite.h">
+      <Filter>NetworkSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\ObjectLogicSuite\ObjectLogicManagerTesting.h">
+      <Filter>ObjectLogicSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\ObjectLogicSuite\ObjectLogicSuite.h">
+      <Filter>ObjectLogicSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\PhysicalModellingSuite\PhysicalModellingManagerTesting.h">
+      <Filter>PhysicalModellingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\PhysicalModellingSuite\PhysicalModellingSuite.h">
+      <Filter>PhysicalModellingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\RenderingSuite\RenderingManagerTesting.h">
+      <Filter>RenderingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\RenderingSuite\RenderingSuite.h">
+      <Filter>RenderingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\ResourceSuite\ResourceManagerTesting.h">
+      <Filter>ResourceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\ResourceSuite\ResourceSuite.h">
+      <Filter>ResourceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\SystemSuite\SystemManagerTesting.h">
+      <Filter>SystemSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\SystemSuite\SystemSuite.h">
+      <Filter>SystemSuite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\ArtificialIntelligenceSuite\AIManagerTesting.cpp">
+      <Filter>ArtificialIntelligenceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\AudioSuite\AudioManagerTesting.cpp">
+      <Filter>AudioSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\CameraSystemsSuite\CameraSystemsManagerTesting.cpp">
+      <Filter>CameraSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\EventSuite\EventManagerTesting.cpp">
+      <Filter>EventSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\GUISuite\GUIManagerTesting.cpp">
+      <Filter>GUISuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\InputSuite\InputManagerTesting.cpp">
+      <Filter>InputSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\MessageSuite\MessageManagerTesting.cpp">
+      <Filter>MessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\NetworkSuite\NetworkManagerTesting.cpp">
+      <Filter>NetworkSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\ObjectLogicSuite\ObjectLogicManagerTesting.cpp">
+      <Filter>ObjectLogicSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\PhysicalModellingSuite\PhysicalModellingManagerTesting.cpp">
+      <Filter>PhysicalModellingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\RenderingSuite\RenderingManagerTesting.cpp">
+      <Filter>RenderingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\ResourceSuite\ResourceManagerTesting.cpp">
+      <Filter>ResourceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateTesting\DatabaseGenerateMiddleLayerTesting\SystemSuite\SystemManagerTesting.cpp">
+      <Filter>SystemSuite 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Configuration\DatabaseGenerateMiddleLayerTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Database.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

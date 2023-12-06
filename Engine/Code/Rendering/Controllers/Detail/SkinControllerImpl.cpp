@@ -279,7 +279,7 @@ bool Rendering::SkinControllerImpl::Update(const VisualSharedPtr& visual)
 
     if (canUpdate)
     {
-        TransformF identity{};
+        Mathematics::TransformF identity{};
         identity.MakeIdentity();
         visual->SetWorldTransform(identity);
         visual->SetWorldTransformIsCurrent(true);

@@ -16,6 +16,7 @@
 #include "CoreTools/LogManager/LogManagerFwd.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
+#include <condition_variable>
 #include <deque>
 #include <mutex>
 #include <thread>

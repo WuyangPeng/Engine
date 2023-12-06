@@ -523,8 +523,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\GameClientTesting.json" />
+    <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\Testing.json" />
     <None Include="Resource\ReadMe.md" />

@@ -1,0 +1,631 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{2f17764f-e1cc-4258-ac95-8ef39d4a9e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{8dda47bf-8440-43c0-b414-a603bb79858b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AncientBooks 头文件">
+      <UniqueIdentifier>{2fbfc1e4-a260-438f-8f5e-186ebf41b8e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AncientBooks 源文件">
+      <UniqueIdentifier>{2512de7f-aa64-4033-8e61-0dadaf3ef7d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AncientBooks 模板文件">
+      <UniqueIdentifier>{8a821c6b-c773-431c-9b0f-37fa0bcae942}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseEntity 头文件">
+      <UniqueIdentifier>{e9226211-ad11-49c3-afa0-4af0f3e4e462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseEntity 源文件">
+      <UniqueIdentifier>{3f5abbf2-dac7-48d7-9cd2-83bf256d7625}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Configuration\BatchConversion.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EntityBatchConversion.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\DatabaseEntity.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseGenerateBaseLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\VersionContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Year.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\YearBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\YearContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\AncientBooks.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\AncientBooksContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\AncientBooksFwd.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Article.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ArticleBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ArticleContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Book.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\BookBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\BookContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Calendar.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CalendarBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CalendarContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Category.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CategoryBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CategoryContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Character.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CharacterBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CharacterContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Country.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CountryBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CountryContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Day.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\DayBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\DayContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Emperor.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\EmperorBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\EmperorContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Gather.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GatherBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GatherContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Genus.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GenusBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GenusContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Geographic.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GeographicBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GeographicContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Identity.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\IdentityBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\IdentityContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ImperialCourt.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ImperialCourtBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ImperialCourtContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Month.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\MonthBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\MonthContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ReignTitle.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ReignTitleBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ReignTitleContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SexagenaryCycle.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SexagenaryCycleBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SexagenaryCycleContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Source.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SourceBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SourceContainer.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Version.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\VersionBase.h">
+      <Filter>AncientBooks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ArticleContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\BookContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CalendarContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CategoryContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CharacterContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CountryContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\DayContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GatherContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GenusContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\EmperorContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GeographicContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\IdentityContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ImperialCourtContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\MonthContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ReignTitleContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SexagenaryCycleContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SourceContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\VersionContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\YearContainerDetail.h">
+      <Filter>AncientBooks 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\ArticleEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\DatabaseEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\DatabaseEntityFwd.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\BookEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\CalendarEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\CategoryEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\CharacterEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\EmperorEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\GatherEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\GenusEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\GeographicEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\IdentityEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\ImperialCourtEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\MonthEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\ReignTitleEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\SexagenaryCycleEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\SourceEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\VersionEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\YearEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\DayEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\CountryEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\YearContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\YearBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Year.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\VersionContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\VersionBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Version.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SourceContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SourceBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Source.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SexagenaryCycleContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SexagenaryCycleBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\SexagenaryCycle.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ReignTitleContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ReignTitleBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ReignTitle.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\MonthContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\MonthBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Month.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ImperialCourtContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ImperialCourtBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ImperialCourt.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\IdentityContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\IdentityBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Identity.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\AncientBooksContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ArticleBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Article.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\ArticleContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Book.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\BookBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\BookContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Calendar.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CalendarBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CalendarContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Category.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CategoryBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CategoryContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Character.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CharacterBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CharacterContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Country.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CountryBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\CountryContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Day.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\DayBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\DayContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Emperor.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\EmperorBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\EmperorContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Gather.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GatherBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GatherContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Genus.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GenusBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GenusContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\Geographic.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GeographicBase.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\AncientBooks\GeographicContainer.cpp">
+      <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\ArticleEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\BookEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\CalendarEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\CategoryEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\CharacterEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\YearEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\DayEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\EmperorEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\GatherEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\GenusEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\GeographicEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\IdentityEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\ImperialCourtEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\MonthEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\ReignTitleEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\SexagenaryCycleEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\SourceEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\VersionEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerate\DatabaseGenerateBase\DatabaseEntity\CountryEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -13,6 +13,8 @@
 #include "Flags/LogManagerFlags.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 
+#include <map>
+
 using namespace std::literals;
 
 System::String CoreTools::LogLevelManager::GetLogLevelDescribe(LogLevel logLevelType)
@@ -37,4 +39,23 @@ System::String CoreTools::LogLevelManager::GetLogLevelDescribe(LogLevel logLevel
             CORE_TOOLS_ASSERTION_2(false, "未找到日志等级的相关描述！");
             return SYSTEM_TEXT(""s);
     }
+}
+
+CoreTools::LogLevel CoreTools::LogLevelManager::GetLogLevel(const std::string& describe)
+{
+    static const std::map<std::string, LogLevel> container{ { "Disabled", LogLevel::Disabled },
+                                                            { "Trace", LogLevel::Trace },
+                                                            { "Debug", LogLevel::Debug },
+                                                            { "Info", LogLevel::Info },
+                                                            { "Warn", LogLevel::Warn },
+                                                            { "Error", LogLevel::Error },
+                                                            { "Fatal", LogLevel::Fatal } };
+
+    if (const auto iter = container.find(describe);
+        iter != container.cend())
+    {
+        return iter->second;
+    }
+
+    return LogLevel::MaxLogLevels;
 }

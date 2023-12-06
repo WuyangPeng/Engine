@@ -30,43 +30,43 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, TransformController);
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, TransformController)
 
-Rendering::TransformController::TransformController(const TransformF& localTransform)
-    : ParentType{ CoreTools::DisableNotThrow::Disable }, impl{ localTransform }
+Rendering::TransformController::TransformController(const Mathematics::TransformF& localTransform)
+    : ParentType{ "TransformController" }, impl{ localTransform }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, TransformController)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, TransformController, SetTransform, TransformF, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, TransformController, SetTransform, Mathematics::TransformF, void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TransformController, GetTransform, Rendering::TransformF)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TransformController, GetTransform, Mathematics::TransformF)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, TransformController, SetTranslate, APoint, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, TransformController, SetRotate, Matrix, void)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, TransformController, SetMatrix, Matrix, void)
 
-void Rendering::TransformController::SetUniformScale(float scale) noexcept(gAssert < 2 || gRenderingAssert < 2)
+void Rendering::TransformController::SetUniformScale(float scale)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetUniformScale(scale);
 }
 
-void Rendering::TransformController::SetScale(const APoint& scale) noexcept(gAssert < 2 || gRenderingAssert < 2)
+void Rendering::TransformController::SetScale(const APoint& scale)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetScale(scale);
 }
 
-void Rendering::TransformController::SetControllerObject(const ControllerInterfaceSharedPtr& object)
+void Rendering::TransformController::SetController(const ControllerSharedPtr& object)
 {
     RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Spatial::GetCurrentRttiType()), "Œﬁ–ß¿‡\n");
 
-    ParentType::SetControllerObject(object);
+    ParentType::SetController(object);
 }
 
 bool Rendering::TransformController::Update(double applicationTime)
@@ -75,7 +75,7 @@ bool Rendering::TransformController::Update(double applicationTime)
 
     if (ParentType::Update(applicationTime))
     {
-        if (const auto spatial = boost::polymorphic_pointer_cast<Spatial>(GetControllerObject());
+        if (const auto spatial = boost::polymorphic_pointer_cast<Spatial>(GetController());
             spatial != nullptr)
         {
             spatial->SetLocalTransform(impl->GetTransform());
@@ -94,7 +94,7 @@ Rendering::ControllerInterfaceSharedPtr Rendering::TransformController::Clone() 
 }
 
 Rendering::TransformController::TransformController(LoadConstructor loadConstructor)
-    : ParentType{ loadConstructor }, impl{ TransformF{} }
+    : ParentType{ loadConstructor }, impl{ Mathematics::TransformF{} }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

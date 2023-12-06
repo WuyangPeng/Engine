@@ -16,8 +16,7 @@
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
-#include "Rendering/DataTypes/Transform.h"
-#include "Rendering/DataTypes/TransformMatrixDetail.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 
 Framework::ObjectMotionImpl::ObjectMotionImpl(SpatialSharedPtr motionObject) noexcept
     : motionObject{ std::move(motionObject) },
@@ -138,7 +137,7 @@ void Framework::ObjectMotionImpl::SetEndTrack(float xTrack, float yTrack) noexce
     endYTrack = yTrack;
 }
 
-void Framework::ObjectMotionImpl::SetSaveRotate() noexcept(gAssert < 2 || gRenderingAssert < 2)
+void Framework::ObjectMotionImpl::SetSaveRotate() 
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -152,7 +151,7 @@ bool Framework::ObjectMotionImpl::GetTrackBallDow() const noexcept
     return trackBallDown;
 }
 
-Rendering::TransformF Framework::ObjectMotionImpl::GetMotionObjectLocalTransform() const noexcept
+Mathematics::TransformF Framework::ObjectMotionImpl::GetMotionObjectLocalTransform() const noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 

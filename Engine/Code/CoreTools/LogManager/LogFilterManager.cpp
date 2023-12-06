@@ -49,29 +49,32 @@ System::String CoreTools::LogFilterManager::GetLogFilterDescribe(LogFilter logFi
     }
 }
 
-#define LOG_FILTER_DESCRIBE_JUDGE(describe, filter) \
-    if (describe == SYSTEM_TEXT(#filter))           \
-    return SYSTEM_CONCATENATOR(LogFilter::, filter)
-
 CoreTools::LogFilter CoreTools::LogFilterManager::GetLogFilterType(const String& describe)
 {
-    LOG_FILTER_DESCRIBE_JUDGE(describe, System);
-    else LOG_FILTER_DESCRIBE_JUDGE(describe, CoreTools);
-    else LOG_FILTER_DESCRIBE_JUDGE(describe, Network);
-    else LOG_FILTER_DESCRIBE_JUDGE(describe, Database);
-    else LOG_FILTER_DESCRIBE_JUDGE(describe, Script);
-    else LOG_FILTER_DESCRIBE_JUDGE(describe, Mathematics);
-    else LOG_FILTER_DESCRIBE_JUDGE(describe, SoundEffect);
-    else LOG_FILTER_DESCRIBE_JUDGE(describe, InputOutput);
-    else LOG_FILTER_DESCRIBE_JUDGE(describe, ResourceManager);
-    else LOG_FILTER_DESCRIBE_JUDGE(describe, Rendering);
-    else LOG_FILTER_DESCRIBE_JUDGE(describe, Physics);
-    else LOG_FILTER_DESCRIBE_JUDGE(describe, Imagics);
-    else LOG_FILTER_DESCRIBE_JUDGE(describe, Animation);
-    else LOG_FILTER_DESCRIBE_JUDGE(describe, ArtificialIntelligence);
-    else LOG_FILTER_DESCRIBE_JUDGE(describe, UserInterface);
-    else LOG_FILTER_DESCRIBE_JUDGE(describe, AssistTools);
-    else LOG_FILTER_DESCRIBE_JUDGE(describe, Framework);
-    else LOG_FILTER_DESCRIBE_JUDGE(describe, User);
-    else return LogFilter::MaxLogFilter;
+    static const std::map<String, LogFilter> container{ { SYSTEM_TEXT("System"), LogFilter::System },
+                                                        { SYSTEM_TEXT("CoreTools"), LogFilter::CoreTools },
+                                                        { SYSTEM_TEXT("Network"), LogFilter::Network },
+                                                        { SYSTEM_TEXT("Database"), LogFilter::Database },
+                                                        { SYSTEM_TEXT("Script"), LogFilter::Script },
+                                                        { SYSTEM_TEXT("Mathematics"), LogFilter::Mathematics },
+                                                        { SYSTEM_TEXT("SoundEffect"), LogFilter::SoundEffect },
+                                                        { SYSTEM_TEXT("InputOutput"), LogFilter::InputOutput },
+                                                        { SYSTEM_TEXT("ResourceManager"), LogFilter::ResourceManager },
+                                                        { SYSTEM_TEXT("Rendering"), LogFilter::Rendering },
+                                                        { SYSTEM_TEXT("Physics"), LogFilter::Physics },
+                                                        { SYSTEM_TEXT("Imagics"), LogFilter::Imagics },
+                                                        { SYSTEM_TEXT("Animation"), LogFilter::Animation },
+                                                        { SYSTEM_TEXT("ArtificialIntelligence"), LogFilter::ArtificialIntelligence },
+                                                        { SYSTEM_TEXT("UserInterface"), LogFilter::UserInterface },
+                                                        { SYSTEM_TEXT("AssistTools"), LogFilter::AssistTools },
+                                                        { SYSTEM_TEXT("Framework"), LogFilter::Framework },
+                                                        { SYSTEM_TEXT("User"), LogFilter::User } };
+
+    if (const auto iter = container.find(describe);
+        iter != container.cend())
+    {
+        return iter->second;
+    }
+
+    return LogFilter::MaxLogFilter;
 }

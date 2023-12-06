@@ -523,14 +523,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="Configuration\EnvironmentVariable.json" />
-    <None Include="Configuration\GameClientMiddleLayerTesting.json" />
-    <None Include="Configuration\Log.json" />
-    <None Include="Configuration\Testing.json" />
-    <None Include="Resource\ReadMe.md" />
-    <None Include="Resource\Schedule.md" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\TestingHelper.h" />
   </ItemGroup>
@@ -538,6 +530,14 @@
     <ClCompile Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\TestingHelper.cpp" />
     <ClCompile Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\GameClientTesting\GameClientMiddleLayerTesting\TestingMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\GameClientMiddleLayerTesting.json" />
+    <None Include="Configuration\EnvironmentVariable.json" />
+    <None Include="Configuration\Log.json" />
+    <None Include="Configuration\Testing.json" />
+    <None Include="Resource\ReadMe.md" />
+    <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt" />

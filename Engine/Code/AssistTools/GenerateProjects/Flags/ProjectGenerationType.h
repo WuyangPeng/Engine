@@ -17,8 +17,8 @@ namespace AssistTools
     enum class ProjectGenerationType
     {
         Default = 0,
-
         Utf8 = 1,
+        Sln = 2,
     };
 }
 

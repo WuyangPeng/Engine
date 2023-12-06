@@ -18,6 +18,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/TemplateTools/MaxElement.h"
 
 #include <gsl/util>
 #include <iostream>
@@ -1054,27 +1055,27 @@ void Mathematics::Matrix<Real>::MakeReflection(const APoint& origin, const AVect
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Matrix<Real>::GetNorm() const noexcept
+Real Mathematics::Matrix<Real>::GetNorm() const  
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    auto maxRowSum = Math::FAbs(GetValue<0>()) + Math::FAbs(GetValue<1>()) + Math::FAbs(GetValue<2>());
+#if defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-    auto rowSum = Math::FAbs(GetValue<4>()) + Math::FAbs(GetValue<5>()) + Math::FAbs(GetValue<6>());
+    // 使用最大行和矩阵范数。
+    const auto sum0 = Math::FAbs(GetValue<0, 0>()) + Math::FAbs(GetValue<0, 1>()) + Math::FAbs(GetValue<0, 2>());
+    const auto sum1 = Math::FAbs(GetValue<1, 0>()) + Math::FAbs(GetValue<1, 1>()) + Math::FAbs(GetValue<1, 2>());
+    const auto sum2 = Math::FAbs(GetValue<2, 0>()) + Math::FAbs(GetValue<2, 1>()) + Math::FAbs(GetValue<2, 2>());
 
-    if (maxRowSum < rowSum)
-    {
-        maxRowSum = rowSum;
-    }
+#else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
-    rowSum = Math::FAbs(GetValue<8>()) + Math::FAbs(GetValue<9>()) + Math::FAbs(GetValue<10>());
+    // 使用最大列和矩阵范数。
+    const auto sum0 = Math::FAbs(GetValue<0, 0>()) + Math::FAbs(GetValue<1, 0>()) + Math::FAbs(GetValue<2, 0>());
+    const auto sum1 = Math::FAbs(GetValue<0, 1>()) + Math::FAbs(GetValue<1, 1>()) + Math::FAbs(GetValue<2, 1>());
+    const auto sum2 = Math::FAbs(GetValue<0, 2>()) + Math::FAbs(GetValue<1, 2>()) + Math::FAbs(GetValue<2, 2>());
 
-    if (maxRowSum < rowSum)
-    {
-        maxRowSum = rowSum;
-    }
+#endif  // MATHEMATICS_USE_MATRIX_VECTOR
 
-    return maxRowSum;
+    return CoreTools::MaxElement({ sum0, sum1, sum2 });
 }
 
 template <typename Real>

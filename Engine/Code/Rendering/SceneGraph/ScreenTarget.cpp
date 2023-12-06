@@ -19,7 +19,7 @@ Rendering::CameraSharedPtr Rendering::ScreenTarget::CreateCamera()
 {
     // 场景摄像机映射  (x,y,z)  [0,1]^3 到 (x',y,'z') 在
     // [-1,1]^2 x [0,1].
-    auto camera = std::make_shared<Camera>(false, true);
+    auto camera = std::make_shared<Camera>(false, DepthType::MinusOneToOne);
     camera->SetFrustum(0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f);
     camera->SetFrame(Mathematics::APointF::GetOrigin(), Mathematics::AVectorF::GetUnitZ(), Mathematics::AVectorF::GetUnitY(), Mathematics::AVectorF::GetUnitX());
 

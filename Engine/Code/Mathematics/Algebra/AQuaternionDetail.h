@@ -62,7 +62,7 @@ Real Mathematics::Dot(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs
 }
 
 template <typename Real>
-bool Mathematics::Approximate(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs, const Real epsilon) noexcept
+bool Mathematics::Approximate(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs, Real epsilon) noexcept
 {
     return Math<Real>::FAbs(lhs.GetW() - rhs.GetW()) <= epsilon &&
            Math<Real>::FAbs(lhs.GetX() - rhs.GetX()) <= epsilon &&

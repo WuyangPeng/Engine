@@ -29,7 +29,7 @@ namespace Rendering
         CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
-        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ControllerSharedPtr Clone() const override;
     };
 
 #include SYSTEM_WARNING_PUSH

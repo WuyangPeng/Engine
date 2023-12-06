@@ -326,7 +326,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\SurfacePatch.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\SurfacePatchFrame.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\CurvesSurfaces\TubeSurface.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Bound.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Colour.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\ColourConvertFrom.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\ColourConvertTo.cpp" />
@@ -334,8 +333,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\HalfFloat.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\SpecializedIO.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\TextureColour.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Transform.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\TransformMatrix.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Utility.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\BillboardNode.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\ClodMesh.cpp" />
@@ -577,9 +574,11 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordContainerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\ProjectionMatrix.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialData.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\StandardMeshImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\TrianglePositionImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\ViewVolumeImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisibleSetImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualData.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualImpl.cpp" />
@@ -588,6 +587,7 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Node.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Particles.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Picker.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\PickLine.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\PickRecord.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\PickRecordContainer.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Polypoint.cpp" />
@@ -604,6 +604,7 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\TrianglesFan.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\TrianglesMesh.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\TrianglesStrip.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\ViewVolume.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\VisibleSet.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Visual.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\CameraModelDirectionVectorConstant.cpp" />
@@ -780,9 +781,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\SurfacePatch.h" />
     <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\SurfacePatchFrame.h" />
     <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\TubeSurface.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Bound.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\BoundAchieve.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\BoundDetail.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Colour.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourAchieve.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourConvertFrom.h" />
@@ -804,10 +802,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\SpecializedIO.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TextureColour.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TextureColourDetail.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Transform.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformDetail.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformMatrix.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformMatrixDetail.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Utility.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\BillboardNode.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\ClodMesh.h" />
@@ -1107,7 +1101,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\CameraManager.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\CameraNode.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Culler.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\CullingPlane.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraFrustum.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraManagerImpl.h" />
@@ -1120,9 +1113,11 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickerImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordContainerImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\ProjectionMatrix.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialData.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\StandardMeshImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\TrianglePositionImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\ViewVolumeImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisibleSetImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualData.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualImpl.h" />
@@ -1134,6 +1129,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Node.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Particles.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Picker.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\PickLine.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\PickRecord.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\PickRecordContainer.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Polypoint.h" />
@@ -1152,6 +1148,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\TrianglesFan.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\TrianglesMesh.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\TrianglesStrip.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\ViewVolume.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\VisibleSet.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Visual.h" />
     <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\CameraModelDirectionVectorConstant.h" />

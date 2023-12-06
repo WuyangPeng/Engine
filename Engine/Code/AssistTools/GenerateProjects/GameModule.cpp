@@ -13,22 +13,22 @@
 #include "Detail/GameModuleImpl.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 
-AssistTools::GameModule::GameModule(const String& moduleName, const String& chineseName, ProjectServiceType projectServiceType, const String& uppercaseName)
-    : impl{ moduleName, chineseName, projectServiceType, uppercaseName }
+AssistTools::GameModule::GameModule(const String& moduleName, const String& chineseName, ProjectServiceType projectServiceType, const String& uppercaseName, const GuidContainer& guid)
+    : impl{ moduleName, chineseName, projectServiceType, uppercaseName, guid }
 {
     ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(AssistTools, GameModule)
 
-AssistTools::GameModule::String AssistTools::GameModule::GetModuleName() const
+System::String AssistTools::GameModule::GetModuleName() const
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetModuleName();
 }
 
-AssistTools::GameModule::String AssistTools::GameModule::GetChineseName() const
+System::String AssistTools::GameModule::GetChineseName() const
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -42,9 +42,16 @@ AssistTools::ProjectServiceType AssistTools::GameModule::GetProjectServiceType()
     return impl->GetProjectServiceType();
 }
 
-AssistTools::GameModule::String AssistTools::GameModule::GetUppercaseName() const
+System::String AssistTools::GameModule::GetUppercaseName() const
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetUppercaseName();
+}
+
+System::String AssistTools::GameModule::GetGuid(int index) const
+{
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetGuid(index);
 }

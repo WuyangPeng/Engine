@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %MillenniumHistoryTestingWin32DebugLib% GatewayServerTestingD.exe
+start /d %MillenniumHistoryTestingWin32ReleaseLib% GatewayServerTesting.exe
+start /d %MillenniumHistoryTestingX64DebugLib% GatewayServerTestingD.exe
+start /d %MillenniumHistoryTestingX64ReleaseLib% GatewayServerTesting.exe
+start /d %MillenniumHistoryTestingStaticWin32DebugLib% GatewayServerTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticWin32ReleaseLib% GatewayServerTestingStatic.exe
+start /d %MillenniumHistoryTestingStaticX64DebugLib% GatewayServerTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticX64ReleaseLib% GatewayServerTestingStatic.exe
+
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32DebugLib% GatewayServerTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32ReleaseLib% GatewayServerTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64DebugLib% GatewayServerTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64ReleaseLib% GatewayServerTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32DebugLib% GatewayServerTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32ReleaseLib% GatewayServerTesting.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64DebugLib% GatewayServerTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64ReleaseLib% GatewayServerTesting.exe
+
+pause

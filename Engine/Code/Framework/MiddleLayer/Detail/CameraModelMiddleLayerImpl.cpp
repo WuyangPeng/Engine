@@ -250,7 +250,7 @@ void Framework::CameraModelMiddleLayerImpl::SetTrackBallDow(bool value) noexcept
     }
 }
 
-void Framework::CameraModelMiddleLayerImpl::SetSaveRotate() noexcept(gAssert < 2 || gRenderingAssert < 2)
+void Framework::CameraModelMiddleLayerImpl::SetSaveRotate()  
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 

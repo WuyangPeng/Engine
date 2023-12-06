@@ -10,10 +10,8 @@ $Copyright$
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using namespace std::literals;
-
 $ProjectName$::EngineTesting::EngineTesting(const OStreamShared& stream)
-    : ParentType{ stream }, engineTestingName{ SYSTEM_TEXT("End"s) }
+    : ParentType{ stream }, engineTestingName{ SYSTEM_TEXT("End") }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -29,9 +27,8 @@ void $ProjectName$::EngineTesting::MainTest()
 {
     CoreTools::Directory directory{ System::GetEngineeringDirectory() };
 
-    const auto isStreamSharedFile = IsStreamSharedFile();
-
-    if (!isStreamSharedFile)
+    if (const auto isStreamSharedFile = IsStreamSharedFile();
+        !isStreamSharedFile)
     {
         ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(EngineTest);
     }
@@ -41,7 +38,7 @@ bool $ProjectName$::EngineTesting::EngineTest()
 {
     engineTestingName.PrintSelect(GetStream());
 
-    auto select = System::GetSystemInput<int>();
+    const auto select = System::GetSystemInput<int>();
 
     return ExecuteEngineTesting(select);
 }

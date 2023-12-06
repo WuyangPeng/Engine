@@ -13,7 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "AlgebraFwd.h"
-#include "Matrix3Extract.h"
+#include "AxisAngle.h"
 #include "QuaternionConstraints.h"
 #include "QuaternionFactor.h"
 #include "QuaternionSwingTwist.h"
@@ -51,7 +51,7 @@ namespace Mathematics
         using Vector4 = Vector4<Real>;
         using Vector3Tools = Vector3Tools<Real>;
         using Matrix3 = Matrix3<Real>;
-        using Matrix3Extract = Matrix3Extract<Real>;
+        using Matrix3Extract = AxisAngle<Real>;
         using QuaternionFactor = QuaternionFactor<Real>;
         using QuaternionConstraints = QuaternionConstraints<Real>;
         using QuaternionSwingTwist = QuaternionSwingTwist<Real>;

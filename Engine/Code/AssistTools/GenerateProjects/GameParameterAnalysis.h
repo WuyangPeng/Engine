@@ -13,7 +13,6 @@
 #include "AssistTools/AssistToolsDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include "AssistTools/GenerateProjects/GenerateProjectsFwd.h"
 
@@ -42,6 +41,7 @@ namespace AssistTools
         NODISCARD GameModuleContainerConstIter GetModuleEnd() const noexcept;
         NODISCARD MiddleLayerContainerConstIter GetMiddleLayerBegin() const noexcept;
         NODISCARD MiddleLayerContainerConstIter GetMiddleLayerEnd() const noexcept;
+        NODISCARD bool HasTools() const noexcept;
 
         NODISCARD String GetGameParameter(GameParameterType gameParameterType) const;
 

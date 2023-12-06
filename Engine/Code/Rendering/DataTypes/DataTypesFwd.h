@@ -40,20 +40,6 @@ namespace Rendering
     template <TextureFormat Format>
     class TextureColour;
 
-    template <typename T>
-    class Bound;
-
-    using BoundF = Bound<float>;
-    using BoundD = Bound<double>;
-
-    template <typename Real>
-    class Transform;
-
-    using TransformF = Transform<float>;
-    using TransformD = Transform<double>;
-
-    template <typename Real>
-    class TransformMatrix;
 }
 
 #endif  // RENDERING_DATA_TYPES_FWD_H

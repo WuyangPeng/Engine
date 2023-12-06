@@ -42,7 +42,7 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::Portal::CloneObject() const
     return std::make_shared<ClassType>(*this);
 }
 
-void Rendering::Portal::UpdateWorldData(const TransformF& worldTransform)
+void Rendering::Portal::UpdateWorldData(const Mathematics::TransformF& worldTransform)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -60,10 +60,6 @@ bool Rendering::Portal::ReducedFrustum(const Culler& culler, std::array<float, 6
 
     const auto camera = culler.GetCamera();
     const auto frustum = culler.GetFrustum();
-    if (frustum == nullptr)
-    {
-        return false;
-    }
 
     auto rmin = +Mathematics::MathF::maxReal;
     auto rmax = -Mathematics::MathF::maxReal;
@@ -105,6 +101,7 @@ bool Rendering::Portal::ReducedFrustum(const Culler& culler, std::array<float, 6
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26446)
 
                 ndd = frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)] / vertexCam[0];
 
@@ -161,6 +158,7 @@ bool Rendering::Portal::ReducedFrustum(const Culler& culler, std::array<float, 6
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26446)
 
                 ndd = frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)] * invEpsilon;
 
@@ -249,6 +247,8 @@ bool Rendering::Portal::ReducedFrustum(const Culler& culler, std::array<float, 6
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 
     if (frustum[System::EnumCastUnderlying(ViewFrustum::RightMin)] >= rmax ||
         frustum[System::EnumCastUnderlying(ViewFrustum::RightMax)] <= rmin ||
@@ -310,15 +310,13 @@ void Rendering::Portal::GetVisibleSet(Culler& culler, bool noCull)
 
     std::array<float, 6> saveFrustum{};
     const auto frustum = culler.GetFrustum();
-    if (frustum == nullptr)
-    {
-        return;
-    }
 
     for (auto j = 0; j < 6; ++j)
     {
 #include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
 
         saveFrustum.at(j) = frustum[j];
 
@@ -328,11 +326,11 @@ void Rendering::Portal::GetVisibleSet(Culler& culler, bool noCull)
     std::array<float, 6> reducedFrustum{};
     if (ReducedFrustum(culler, reducedFrustum))
     {
-        culler.SetFrustum(reducedFrustum.data());
+        culler.SetFrustum(reducedFrustum);
 
         adjacentRegion.object.lock()->GetVisibleSet(culler, noCull);
 
-        culler.SetFrustum(saveFrustum.data());
+        culler.SetFrustum(saveFrustum);
     }
 }
 

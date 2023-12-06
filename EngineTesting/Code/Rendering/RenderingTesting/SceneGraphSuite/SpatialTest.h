@@ -28,7 +28,7 @@ namespace Rendering
         CORE_TOOLS_OBJECT_FACTORY_DECLARE(SpatialTest);
         CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
 
-        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ControllerSharedPtr Clone() const override;
 
         void GetVisibleSet(Culler& culler, bool noCull) noexcept override;
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;

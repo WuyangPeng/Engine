@@ -13,9 +13,9 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
+#include "Mathematics/Algebra/BoundingSphereDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Mathematics/Algebra/PlaneDetail.h"
-#include "Rendering/DataTypes/Bound.h"
 
 #include <random>
 #include <vector>

@@ -14,7 +14,7 @@
 
 #include <memory>
 
-#ifdef BUILDING_STATIC
+#if defined(BUILDING_STATIC) || defined(TCRE_USE_GCC)
 
     #define EXPORT_SHARED_PTR(namespaceName, implClassName, exportName) \
         namespace namespaceName                                         \
@@ -34,7 +34,7 @@
             class implClassName;                                        \
         }
 
-#else  // !BUILDING_STATIC
+#else  // !BUILDING_STATIC && !TCRE_USE_GCC
 
     #define EXPORT_SHARED_PTR(namespaceName, implClassName, exportName) \
         namespace namespaceName                                         \
@@ -71,7 +71,7 @@
 
     #endif  // SYSTEM_PLATFORM_WIN32
 
-#endif  // BUILDING_STATIC
+#endif  // defined(BUILDING_STATIC) || defined(TCRE_USE_GCC)
 
 // Export
 #define CORE_TOOLS_EXPORT(implClassName, type) \

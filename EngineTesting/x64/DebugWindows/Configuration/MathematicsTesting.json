@@ -58,7 +58,17 @@
     "QuaternionSwingTwistTesting": 100,
     "AQuaternionTesting": 100,
     "AlgebraStreamSizeTesting": 1,
-    "AlgebraAggregateTesting": 10
+    "AlgebraAggregateTesting": 10,
+    "BoundingSphereTesting": 100
+  },
+
+  "transformSuite": {
+    "IdentityTransformTesting": 100,
+    "UnitScaleTransformTesting": 100,
+    "ScaleTransformTesting": 100,
+    "RotationTransformTesting": 100,
+    "MatrixTransformTesting": 100,
+    "TranslateTransformTesting": 100
   },
 
   "objects2DSuite": {

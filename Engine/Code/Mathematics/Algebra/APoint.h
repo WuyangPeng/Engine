@@ -89,6 +89,11 @@ namespace Mathematics
             return APoint{};
         }
 
+        NODISCARD static constexpr APoint GetUnit() noexcept
+        {
+            return APoint{ Math::GetValue(1), Math::GetValue(1), Math::GetValue(1) };
+        }
+
     private:
         HomogeneousPoint homogeneousPoint;
     };

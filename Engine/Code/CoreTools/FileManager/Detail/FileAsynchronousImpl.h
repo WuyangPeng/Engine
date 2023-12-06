@@ -16,6 +16,7 @@
 #include "CoreTools/FileManager/FileEventInterface.h"
 #include "CoreTools/FileManager/FileManagerInternalFwd.h"
 
+#include <condition_variable>
 #include <deque>
 #include <mutex>
 #include <thread>

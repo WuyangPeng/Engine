@@ -34,6 +34,7 @@ namespace Rendering
         using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
         using VisualContainer = std::vector<VisualSharedPtr>;
         using VisualContainerIter = VisualContainer::iterator;
+        using Container = std::array<float, System::EnumCastUnderlying(ViewFrustum::Quantity)>;
 
     public:
         // 裁剪需要相机模型。如果需要修改相机，
@@ -45,8 +46,8 @@ namespace Rendering
         // 访问相机，复制的平截头体和潜在可见集。
         void SetCamera(const ConstCameraSharedPtr& aCamera) noexcept;
         NODISCARD ConstCameraSharedPtr GetCamera() const noexcept;
-        void SetFrustum(const float* aFrustum);
-        NODISCARD const float* GetFrustum() const noexcept;
+        void SetFrustum(const Container& aFrustum);
+        NODISCARD Container GetFrustum() const noexcept;
 
         // 基类的行为是可见的对象附加到可见集(存储为一个数组)。
         void Insert(const VisualSharedPtr& visible);
@@ -62,7 +63,7 @@ namespace Rendering
         void PopPlane() noexcept;
 
         // 比较对象的世界边界对立的裁剪平面。只有Spatial调用这个函数。
-        NODISCARD bool IsVisible(const BoundF& bound) noexcept;
+        NODISCARD bool IsVisible(const Mathematics::BoundingSphereF& bound) noexcept;
 
         // 支持在 Portal::GetVisibleSet.
         NODISCARD bool IsVisible(int numVertices, const APoint* vertices, bool ignoreNearPlane) const noexcept;
@@ -74,7 +75,7 @@ namespace Rendering
         // 函数返回-1如果视图平截头体完全在平面的负面上，
         // 或者0，如果视图平截头体位于平面。
         // 输入平面在世界坐标系和世界相机坐标系用于测试。
-        NODISCARD NumericalValueSymbol WhichSide(const Plane& aPlane) const noexcept;
+        NODISCARD NumericalValueSymbol WhichSide(const Plane& aPlane) const;
 
         // 这是你应该使用的主要函数中使用的在场景图裁剪。
         // 遍历场景图,构建潜在可见集相对于世界平面。

@@ -3,7 +3,6 @@ $Copyright$
 #ifndef $NamespaceUppercaseSeparator$_H
 #define $NamespaceUppercaseSeparator$_H
 
-$IncludeEnum$
-$IncludeClass$#include "$NameSpaceName$Container.h"
+$IncludeEnum$$IncludeClass$#include "$NameSpaceName$Container.h"
 
 #endif  // $NamespaceUppercaseSeparator$_H

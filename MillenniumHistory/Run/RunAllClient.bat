@@ -1,5 +1,8 @@
-@echo on 
+@echo on
  
-call RunGameClient.bat  
+call RunAllGameClient.bat
+call RunAllRobotClient.bat
+call RunAllMessageClient.bat
+call RunAllBackgroundClient.bat
 
 pause
