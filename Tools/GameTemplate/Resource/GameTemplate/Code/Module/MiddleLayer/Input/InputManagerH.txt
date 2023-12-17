@@ -12,7 +12,7 @@ $Copyright$
 namespace $ModuleName$MiddleLayer
 {
     template <typename ApplicationTrait>
-    class InputManager : public Framework::InputManager<ApplicationTrait>
+    class InputManager final : public Framework::InputManager<ApplicationTrait>
     {
     public:
         using ClassType = InputManager<ApplicationTrait>;

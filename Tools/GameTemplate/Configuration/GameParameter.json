@@ -47,6 +47,12 @@
       "Uppercase": "LOGIN_SERVER"
     },
 
+    "PlayerServer": {
+      "ChineseName": "玩家服务器",
+      "ProjectServiceType": 2,
+      "Uppercase": "PLAYER_SERVER"
+    },
+
     "GameServer": {
       "ChineseName": "游戏服务器",
       "ProjectServiceType": 2,
@@ -64,6 +70,12 @@
       "ProjectServiceType": 2,
       "Uppercase": "WORLD_SERVER"
     },
+
+    "CrossServer": {
+	   "ChineseName": "跨服服务器",
+	   "ProjectServiceType": 2,
+	   "Uppercase": "CROSS_SERVER"
+	},
 
     "OfflineServer": {
       "ChineseName": "离线服务器",
