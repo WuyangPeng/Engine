@@ -377,31 +377,31 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(const VertexBufferSharedPtr& vert
     switch (const auto type = indexBuffer->GetPrimitiveType();
             type)
     {
-        case IndexFormatType::PolyPoint:
+        case IndexFormatType::PolygonPoint:
             topology = System::PrimitiveType::Point;
             break;
-        case IndexFormatType::PolySegmentDisjoint:
+        case IndexFormatType::PolygonSegmentDisjoint:
             topology = System::PrimitiveType::Lines;
             break;
-        case IndexFormatType::PolySegmentContiguous:
+        case IndexFormatType::PolygonSegmentContiguous:
             topology = System::PrimitiveType::LinesStrip;
             break;
-        case IndexFormatType::TriMesh:
+        case IndexFormatType::TriangleMesh:
             topology = System::PrimitiveType::Triangles;
             break;
-        case IndexFormatType::TriStrip:
+        case IndexFormatType::TriangleStrip:
             topology = System::PrimitiveType::TrianglesStrip;
             break;
-        case IndexFormatType::PolySegmentDisjointAdj:
+        case IndexFormatType::PolygonSegmentDisjointAdjacency:
             topology = System::PrimitiveType::LinesAdjacency;
             break;
-        case IndexFormatType::PolySegmentContiguousAdj:
+        case IndexFormatType::PolygonSegmentContiguousAdjacency:
             topology = System::PrimitiveType::LinesStripAdjacency;
             break;
-        case IndexFormatType::TriMeshAdj:
+        case IndexFormatType::TriangleMeshAdjacency:
             topology = System::PrimitiveType::TrianglesAdjacency;
             break;
-        case IndexFormatType::TriStripAdj:
+        case IndexFormatType::TriangleStripAdjacency:
             topology = System::PrimitiveType::TrianglesStripAdjacency;
             break;
         default:

@@ -28,14 +28,14 @@ Rendering::FontImpl::FontImpl(ProgramFactory& factory, const std::string& shader
       textEffect{},
       characterData{ characterData }
 {
-    const auto vertexFormat = VertexFormat::Create();
-    vertexFormat->Bind(VertexFormatFlags::Semantic::Position, DataFormatType::R32G32Float, 0);
-    vertexFormat->Bind(VertexFormatFlags::Semantic::TextureCoord, DataFormatType::R32G32Float, 0);
+    const auto vertexFormat = VertexFormat::Create("VertexFormat");
+    vertexFormat->Bind(DataFormatType::R32G32Float, VertexFormatFlags::Semantic::Position, 0);
+    vertexFormat->Bind(DataFormatType::R32G32Float, VertexFormatFlags::Semantic::TextureCoord, 0);
     const auto numVertices = 4 * maxMessageLength;
-    vertexBuffer = VertexBuffer::Create(*vertexFormat, numVertices);
+    vertexBuffer = VertexBuffer::Create("VertexBuffer", *vertexFormat, numVertices);
     vertexBuffer->SetUsage(UsageType::DynamicUpdate);
 
-    auto vertices = vertexBuffer->GetData();
+    auto vertices = vertexBuffer->GetStorage();
     for (auto i = 0; i < numVertices; ++i)
     {
         vertices.Increase<float>(0.0f);
@@ -45,7 +45,7 @@ Rendering::FontImpl::FontImpl(ProgramFactory& factory, const std::string& shader
         vertices.Increase<float>(0.0f);
     }
 
-    vertices = vertexBuffer->GetData();
+    vertices = vertexBuffer->GetStorage();
     for (auto i = 0; i < maxMessageLength; ++i)
     {
         vertices.Increase<float>(0.0f);
@@ -74,8 +74,8 @@ Rendering::FontImpl::FontImpl(ProgramFactory& factory, const std::string& shader
     }
 
     const auto numTriangles = 2 * maxMessageLength;
-    indexBuffer = IndexBuffer::Create(IndexFormatType::TriMesh, numTriangles, sizeof(uint32_t));
-    auto indices = indexBuffer->GetData();
+    indexBuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::TriangleMesh, numTriangles, sizeof(uint32_t));
+    auto indices = indexBuffer->GetStorage();
     for (auto i = 0; i < maxMessageLength; ++i)
     {
         indices.Increase<uint32_t>(4 * i);
@@ -94,7 +94,7 @@ Rendering::FontImpl::FontImpl(ProgramFactory& factory, const std::string& shader
     {
         storageType.emplace_back(value);
     }
-    texture->SetNewData(storageType);
+    texture->SetStorage(storageType);
 
     textEffect = std::make_shared<TextEffect>(factory, shaderExtendName, texture);
 
@@ -184,8 +184,8 @@ void Rendering::FontImpl::Typeset(int viewportWidth, int viewportHeight, int x, 
     const auto tw = boost::numeric_cast<float>(texture->GetWidth());
     const auto th = boost::numeric_cast<float>(texture->GetHeight());
 
-    const auto vertexSize = vertexBuffer->GetFormat().GetStride();
-    auto data = vertexBuffer->GetData();
+    const auto vertexSize = vertexBuffer->GetFormat().GetVertexSize();
+    auto data = vertexBuffer->GetStorage();
 
     auto x0 = 0.0f;
     const auto length = std::min(boost::numeric_cast<int>(message.length()), maxMessageLength);

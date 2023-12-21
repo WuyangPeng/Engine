@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.0 (2023/11/18 22:36)
+/// 版本：1.0.0.2 (2023/12/17 20:02)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -14,7 +14,7 @@
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 
 TheLastOverlordTesting::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "最后的霸王测试" }
+    : ParentType{ argc, argv, "最后的霸王单元测试" }
 {
     InitSuite();
 

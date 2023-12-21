@@ -82,7 +82,7 @@ void Rendering::TextEffectImpl::SetTranslate(float x, float y)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto data = translate->GetData();
+    auto data = translate->GetStorage();
     data.Increase(x);
     data.Increase(y);
 }
@@ -91,7 +91,7 @@ void Rendering::TextEffectImpl::SetNormalizedZ(float z)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto data = translate->GetData(sizeof(float) * 2);
+    auto data = translate->GetStorage(sizeof(float) * 2);
     data.Increase(z);
 }
 
@@ -99,7 +99,7 @@ void Rendering::TextEffectImpl::SetColor(const Colour& aColor)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto data = translate->GetData();
+    auto data = translate->GetStorage();
     data.Increase(aColor.GetRed());
     data.Increase(aColor.GetBlue());
     data.Increase(aColor.GetGreen());

@@ -58,14 +58,14 @@ Framework::ObjectMotionMove::Matrix Framework::ObjectMotionMove::GetRotate() con
 void Framework::ObjectMotionMove::Calculate()
 {
     // 检查对象是否被移动。
-    const auto* parent = motionObject->GetParent();
+    const auto parent = motionObject->GetParent();
 
     if (doRoll != 0)
     {
         rotate = motionObject->GetLocalTransform().GetRotate();
 
         angle = doRoll * rotationSpeed;
-        if (parent != nullptr)
+        if (!parent->IsNullObject())
         {
             axis = Mathematics::AVector{ parent->GetWorldTransform().GetRotate().GetColumn(0) };
         }
@@ -79,7 +79,7 @@ void Framework::ObjectMotionMove::Calculate()
         rotate = motionObject->GetLocalTransform().GetRotate();
 
         angle = doYaw * rotationSpeed;
-        if (parent != nullptr)
+        if (!parent->IsNullObject())
         {
             axis = Mathematics::AVector{ parent->GetWorldTransform().GetRotate().GetColumn(1) };
         }
@@ -93,7 +93,7 @@ void Framework::ObjectMotionMove::Calculate()
         rotate = motionObject->GetLocalTransform().GetRotate();
 
         angle = doPitch * rotationSpeed;
-        if (parent != nullptr)
+        if (!parent->IsNullObject())
         {
             axis = Mathematics::AVector{ parent->GetWorldTransform().GetRotate().GetColumn(2) };
         }

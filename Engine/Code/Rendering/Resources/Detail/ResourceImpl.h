@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 17:08)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/12 13:15)
 
 #ifndef RENDERING_RESOURCES_RESOURCE_IMPL_H
 #define RENDERING_RESOURCES_RESOURCE_IMPL_H
@@ -25,32 +25,40 @@ namespace Rendering
     public:
         using ClassType = ResourceImpl;
 
+        using BufferSource = CoreTools::BufferSource;
+        using BufferTarget = CoreTools::BufferTarget;
+
         using StorageType = std::vector<char>;
         using SpanIterator = CoreTools::SpanIterator<StorageType::iterator>;
         using ConstSpanIterator = CoreTools::SpanIterator<StorageType::const_iterator>;
 
     public:
-        ResourceImpl() noexcept;
-        ResourceImpl(int numElements, int elementSize);
+        ResourceImpl() noexcept; 
+        ResourceImpl(int numElements, int elementSize, bool createStorage);
         ResourceImpl(int numElements, int elementSize, const StorageType& storage);
 
         CLASS_INVARIANT_DECLARE;
+
+        NODISCARD bool IsCreateStorage() const noexcept;
+
+        void CreateStorage();
+        void DestroyStorage();
 
         NODISCARD int GetNumElements() const noexcept;
         NODISCARD int GetElementSize() const noexcept;
         NODISCARD int GetNumBytes() const noexcept;
 
-        void SetUsage(UsageType usageType) noexcept;
+        void SetUsage(UsageType aUsage) noexcept;
         NODISCARD UsageType GetUsage() const noexcept;
 
-        void SetCopy(CopyType copyType) noexcept;
+        void SetCopy(CopyType aCopy) noexcept;
         NODISCARD CopyType GetCopy() const noexcept;
 
-        NODISCARD ConstSpanIterator GetData() const noexcept;
-        NODISCARD SpanIterator GetData() noexcept;
+        NODISCARD ConstSpanIterator GetStorage() const noexcept;
+        NODISCARD SpanIterator GetStorage() noexcept;
 
-        NODISCARD ConstSpanIterator GetData(int aOffset) const;
-        NODISCARD SpanIterator GetData(int aOffset);
+        NODISCARD ConstSpanIterator GetStorage(int aOffset) const;
+        NODISCARD SpanIterator GetStorage(int aOffset);
 
         void SetOffset(int aOffset);
         NODISCARD int GetOffset() const noexcept;
@@ -59,16 +67,17 @@ namespace Rendering
         NODISCARD int GetNumActiveElements() const noexcept;
         NODISCARD int GetNumActiveBytes() const noexcept;
 
-        void Load(CoreTools::BufferSource& source);
-        void Save(CoreTools::BufferTarget& target) const;
-        NODISCARD int GetStreamingSize() const;
-
-        void SetNewData(const StorageType& aStorage);
+        void SetStorage(const StorageType& aStorage);
 
         NODISCARD const char* GetOriginalData() const;
         NODISCARD const char* GetOriginalData(int aOffset) const;
 
+        NODISCARD char* GetOriginalData();
         NODISCARD char* GetOriginalData(int aOffset);
+
+        void Load(BufferSource& source);
+        void Save(BufferTarget& target) const;
+        NODISCARD int GetStreamingSize() const;
 
     private:
         int numElements;  // 默认: 0
@@ -79,6 +88,7 @@ namespace Rendering
         int offset;  // 默认: 0
         int numActiveElements;  // 默认: 0
         std::vector<char> storage;  // 默认: 空
+        bool createStorage;
     };
 }
 

@@ -7,12 +7,14 @@
 ///	标准：std:c++20
 ///	引擎测试版本：0.9.0.12 (2023/06/12 15:36)
 
-#include "SpatialTest.h"
 #include "VisibleSetTesting.h"
+#include "Detail/SpatialTest.h"
+#include "Detail/VisualTest.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Rendering/SceneGraph/Flags/VisualFlags.h"
 #include "Rendering/SceneGraph/VisibleSet.h"
 
 Rendering::VisibleSetTesting::VisibleSetTesting(const OStreamShared& stream)
@@ -43,9 +45,9 @@ void Rendering::VisibleSetTesting::VisibleSetTest()
 
     ASSERT_EQUAL(firstVisibleSet.GetNumVisible(), 0);
 
-    VisualSharedPtr firstSpatialPtr(std::make_shared<SpatialTest>(CoreTools::DisableNotThrow::Disable));
-    VisualSharedPtr secondSpatialPtr(std::make_shared<SpatialTest>(CoreTools::DisableNotThrow::Disable));
-    VisualSharedPtr thirdSpatialPtr(std::make_shared<SpatialTest>(CoreTools::DisableNotThrow::Disable));
+    VisualSharedPtr firstSpatialPtr(std::make_shared<VisualTest>(""));
+    VisualSharedPtr secondSpatialPtr(std::make_shared<VisualTest>(""));
+    VisualSharedPtr thirdSpatialPtr(std::make_shared<VisualTest>(""));
 
     firstVisibleSet.Insert(firstSpatialPtr);
     firstVisibleSet.Insert(secondSpatialPtr);

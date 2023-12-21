@@ -19,6 +19,8 @@
 #include "Rendering/Resources/Flags/DataFormatType.h"
 #include "Rendering/Resources/Textures/DrawTarget.h"
 
+#include <gsl/util>
+
 Rendering::OpenGLRenderTargetDataImpl::OpenGLRenderTargetDataImpl(BaseRenderer* renderer, const DrawTarget* renderTarget)
     : numTargets{ renderTarget != nullptr ? renderTarget->GetNumTargets() : 0 },
       width{ renderTarget != nullptr ? renderTarget->GetWidth() : 0 },

@@ -20,13 +20,13 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TypedBuffer);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TypedBuffer);
 
 Rendering::TypedBuffer::TypedBuffer(int numElements, int elementSize)
-    : ParentType{ numElements, elementSize, GraphicsObjectType::TypedBuffer }
+    : ParentType{ "TypedBuffer", numElements, elementSize, GraphicsObjectType::TypedBuffer }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::TypedBuffer::TypedBuffer(int numElements, int elementSize, const StorageType& storage)
-    : ParentType{ numElements, elementSize, storage, GraphicsObjectType::TypedBuffer }
+    : ParentType{ "TypedBuffer", numElements, elementSize, storage, GraphicsObjectType::TypedBuffer }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

@@ -27,7 +27,7 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TextureBuffer);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TextureBuffer);
 
 Rendering::TextureBuffer::TextureBuffer(DataFormatType format, int numElements, bool allowDynamicUpdate, const MemberLayoutContainer& memberLayoutContainer)
-    : ParentType{ numElements, DataFormat::GetNumBytesPerStruct(format), GraphicsObjectType::TextureBuffer }, impl{ memberLayoutContainer }, format{ format }
+    : ParentType{ "TextureBuffer", numElements, DataFormat::GetNumBytesPerStruct(format), GraphicsObjectType::TextureBuffer }, impl{ memberLayoutContainer }, format{ format }
 {
     SetUsage(allowDynamicUpdate ? UsageType::DynamicUpdate : UsageType::Immutable);
 

@@ -5,12 +5,13 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/11/22 18:14)
+/// 版本：1.0.0.2 (2023/12/07 14:44)
 
 #include "ViewVolumeTool.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Mathematics/Algebra/AVectorOrthonormalizeDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 
 Rendering::ViewVolumeTool::ViewVolumeTool(uint32_t randomSeed)
     : generator{ randomSeed },
@@ -65,6 +66,26 @@ Rendering::ViewVolumeTool::Matrix Rendering::ViewVolumeTool::ComputeMatrix(float
     ComputeAxes(epsilon);
 
     return Matrix{ directionVector, upVector, rightVector, position, Mathematics::MatrixMajorFlags::Row };
+}
+
+Mathematics::TransformF Rendering::ViewVolumeTool::ComputeTransform(float epsilon)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    Transform transform{};
+
+    transform.SetScale(ComputePosition());
+    transform.SetTranslate(ComputePosition());
+    transform.SetMatrix(ComputeMatrix(epsilon));
+
+    return transform;
+}
+
+Rendering::ViewVolumeTool::BoundingSphere Rendering::ViewVolumeTool::ComputeBoundingSphere()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return BoundingSphere{ ComputePosition(), GetRandomProportion() };
 }
 
 Rendering::ViewVolumeTool::AVector Rendering::ViewVolumeTool::GetDirectionVector() const noexcept

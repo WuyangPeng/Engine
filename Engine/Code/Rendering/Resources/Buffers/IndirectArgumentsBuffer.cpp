@@ -20,13 +20,13 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, IndirectArgumentsBuffer);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, IndirectArgumentsBuffer);
 
 Rendering::IndirectArgumentsBuffer::IndirectArgumentsBuffer(int numElements)
-    : ParentType{ numElements, 4, GraphicsObjectType::IndirectArgumentsBuffer }
+    : ParentType{ "IndirectArgumentsBuffer", numElements, 4, GraphicsObjectType::IndirectArgumentsBuffer }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::IndirectArgumentsBuffer::IndirectArgumentsBuffer(int numElements, const StorageType& storage)
-    : ParentType{ numElements, 4, storage, GraphicsObjectType::IndirectArgumentsBuffer }
+    : ParentType{ "IndirectArgumentsBuffer", numElements, 4, storage, GraphicsObjectType::IndirectArgumentsBuffer }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

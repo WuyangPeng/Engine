@@ -104,7 +104,7 @@ void Rendering::BumpMapEffectImpl::ComputeLightVectors(const VisualSharedPtr& me
 
     for (auto i = 0; i < numVertices; ++i)
     {
-        auto vertices = vertexBuffer->GetData(vertexSize * i + lightDirectionShifting);
+        auto vertices = vertexBuffer->GetStorage(vertexSize * i + lightDirectionShifting);
         vertices.Increase(0.0f);
         vertices.Increase(0.0f);
         vertices.Increase(0.0f);
@@ -112,7 +112,7 @@ void Rendering::BumpMapEffectImpl::ComputeLightVectors(const VisualSharedPtr& me
 
     const auto indexBuffer = mesh->GetIndexBuffer();
     const auto numTriangles = indexBuffer->GetNumPrimitives();
-    auto indices = indexBuffer->GetData();
+    auto indices = indexBuffer->GetStorage();
 
     for (auto t = 0; t < numTriangles; ++t)
     {
@@ -124,7 +124,7 @@ void Rendering::BumpMapEffectImpl::ComputeLightVectors(const VisualSharedPtr& me
         for (auto i = 0; i < 3; ++i)
         {
             auto v0 = v.at(i);
-            auto vertices = vertexBuffer->GetData(vertexSize * v0 + lightDirectionShifting);
+            auto vertices = vertexBuffer->GetStorage(vertexSize * v0 + lightDirectionShifting);
             const auto vertices0 = vertices.Increase<float>();
             const auto vertices1 = vertices.Increase<float>();
             const auto vertices2 = vertices.Increase<float>();
@@ -140,40 +140,40 @@ void Rendering::BumpMapEffectImpl::ComputeLightVectors(const VisualSharedPtr& me
             const auto v1 = v.at(iN);
             const auto v2 = v.at(iP);
 
-            auto position = vertexBuffer->GetData(vertexSize * v0);
+            auto position = vertexBuffer->GetStorage(vertexSize * v0);
             auto position0 = position.Increase<float>();
             auto position1 = position.Increase<float>();
             auto position2 = position.Increase<float>();
             const Vector3 pos0{ position0, position1, position2 };
 
-            auto baseTextureCoordinate = vertexBuffer->GetData(vertexSize * v0 + baseTextureCoordinateShifting);
+            auto baseTextureCoordinate = vertexBuffer->GetStorage(vertexSize * v0 + baseTextureCoordinateShifting);
             auto baseTextureCoordinate0 = baseTextureCoordinate.Increase<float>();
             auto baseTextureCoordinate1 = baseTextureCoordinate.Increase<float>();
             const Vector2 tcd0{ baseTextureCoordinate0, baseTextureCoordinate1 };
 
-            position = vertexBuffer->GetData(vertexSize * v1);
+            position = vertexBuffer->GetStorage(vertexSize * v1);
             position0 = position.Increase<float>();
             position1 = position.Increase<float>();
             position2 = position.Increase<float>();
             const Vector3 pos1{ position0, position1, position2 };
 
-            baseTextureCoordinate = vertexBuffer->GetData(vertexSize * v1 + baseTextureCoordinateShifting);
+            baseTextureCoordinate = vertexBuffer->GetStorage(vertexSize * v1 + baseTextureCoordinateShifting);
             baseTextureCoordinate0 = baseTextureCoordinate.Increase<float>();
             baseTextureCoordinate1 = baseTextureCoordinate.Increase<float>();
             const Vector2 tcd1{ baseTextureCoordinate0, baseTextureCoordinate1 };
 
-            position = vertexBuffer->GetData(vertexSize * v2);
+            position = vertexBuffer->GetStorage(vertexSize * v2);
             position0 = position.Increase<float>();
             position1 = position.Increase<float>();
             position2 = position.Increase<float>();
             const Vector3 pos2{ position0, position1, position2 };
 
-            baseTextureCoordinate = vertexBuffer->GetData(vertexSize * v2 + baseTextureCoordinateShifting);
+            baseTextureCoordinate = vertexBuffer->GetStorage(vertexSize * v2 + baseTextureCoordinateShifting);
             baseTextureCoordinate0 = baseTextureCoordinate.Increase<float>();
             baseTextureCoordinate1 = baseTextureCoordinate.Increase<float>();
             const Vector2 tcd2{ baseTextureCoordinate0, baseTextureCoordinate1 };
 
-            auto normalData = vertexBuffer->GetData(vertexSize * v0 + normalShifting);
+            auto normalData = vertexBuffer->GetStorage(vertexSize * v0 + normalShifting);
             auto normal0 = normalData.Increase<float>();
             auto normal1 = normalData.Increase<float>();
             auto normal2 = normalData.Increase<float>();
@@ -182,7 +182,7 @@ void Rendering::BumpMapEffectImpl::ComputeLightVectors(const VisualSharedPtr& me
             Vector3 tangent{};
             if (!ComputeTangent(pos0, tcd0, pos1, tcd1, pos2, tcd2, tangent))
             {
-                auto data = vertexBuffer->GetData(vertexSize * v0 + lightDirectionShifting);
+                auto data = vertexBuffer->GetStorage(vertexSize * v0 + lightDirectionShifting);
                 data.Increase<float>(normal.GetX());
                 data.Increase<float>(normal.GetY());
                 data.Increase<float>(normal.GetZ());
@@ -199,7 +199,7 @@ void Rendering::BumpMapEffectImpl::ComputeLightVectors(const VisualSharedPtr& me
             const auto dotUB = Mathematics::Vector3Tools<float>::DotProduct(modelLightDirection, bitangent);
             const auto dotUN = Mathematics::Vector3Tools<float>::DotProduct(modelLightDirection, normal);
 
-            auto data = vertexBuffer->GetData(vertexSize * v0 + lightDirectionShifting);
+            auto data = vertexBuffer->GetStorage(vertexSize * v0 + lightDirectionShifting);
             data.Increase<float>(0.5f * (dotUT + 1.0f));
             data.Increase<float>(0.5f * (dotUB + 1.0f));
             data.Increase<float>(0.5f * (dotUN + 1.0f));

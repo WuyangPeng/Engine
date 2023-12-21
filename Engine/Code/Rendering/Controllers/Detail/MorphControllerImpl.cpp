@@ -281,8 +281,8 @@ bool Rendering::MorphControllerImpl::Update(double controlTime, Visual& visual)
     const auto vertexFormat = vertexBuffer->GetFormat();
 
     const auto count = vertexBuffer->GetNumElements();
-    auto combination = vertexBuffer->GetData();
-    const auto vertexSize = vertexFormat.GetStride();
+    auto combination = vertexBuffer->GetStorage();
+    const auto vertexSize = vertexFormat.GetVertexSize();
     for (auto i = 0; i < count; ++i)
     {
         combination.Increase(0.0f);
@@ -303,7 +303,7 @@ bool Rendering::MorphControllerImpl::Update(double controlTime, Visual& visual)
         const auto index0 = controllerKeyInfo.GetFirstIndex() * numTargets + n;
         const auto index1 = controllerKeyInfo.GetSecondIndex() * numTargets + n;
         const auto w = oneMinusNormTime * weights.at(index0) + controllerKeyInfo.GetNormTime() * weights.at(index1);
-        combination = vertexBuffer->GetData();
+        combination = vertexBuffer->GetStorage();
         for (auto m = 0; m < numVertices; ++m)
         {
             const auto x = combination.Increase<float>();

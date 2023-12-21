@@ -1,18 +1,16 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 17:11)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/18 15:01)
 
 #include "Rendering/RenderingExport.h"
 
 #include "VertexFormat.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/FileManager/ReadFileManager.h"
-#include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
@@ -29,8 +27,8 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, VertexFormat);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, VertexFormat);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, VertexFormat);
 
-Rendering::VertexFormat::VertexFormat(VertexFormatCreate vertexFormatCreate, int numAttributes)
-    : ParentType{ "VertexFormat" }, impl{ numAttributes }
+Rendering::VertexFormat::VertexFormat(VertexFormatCreate vertexFormatCreate, const std::string& name, int numAttributes)
+    : ParentType{ name }, impl{ numAttributes }
 {
     System::UnusedFunction(vertexFormatCreate);
 
@@ -39,35 +37,93 @@ Rendering::VertexFormat::VertexFormat(VertexFormatCreate vertexFormatCreate, int
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, VertexFormat)
 
-Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat::Create(const AttributeContainer& triple)
+Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat::Create(const std::string& name, const AttributeContainer& triple)
 {
     auto numAttributes = boost::numeric_cast<int>(triple.size());
 
-    auto vertexFormat = std::make_shared<VertexFormat>(VertexFormatCreate::Init, numAttributes);
+    auto vertexFormat = std::make_shared<VertexFormat>(VertexFormatCreate::Init, name, numAttributes);
 
-    auto offset = 0;
-    for (auto i = 0; i < numAttributes; ++i)
+    auto vertexSize = 0;
+    auto index = 0;
+    for (const auto& attribute : triple)
     {
-        const auto& attribute = triple.at(i);
-        vertexFormat->SetAttribute(i, attribute.GetType(), attribute.GetUsage(), attribute.GetUsageIndex(), offset);
-        offset += DataFormat::GetNumBytesPerStruct(attribute.GetType());
+        vertexFormat->SetAttribute(index, attribute.GetType(), attribute.GetSemantic(), attribute.GetUnit(), vertexSize);
+        vertexSize += DataFormat::GetNumBytesPerStruct(attribute.GetType());
+
+        ++index;
     }
 
-    vertexFormat->SetStride(offset);
+    vertexFormat->SetVertexSize(vertexSize);
 
     return vertexFormat;
 }
 
-Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat::Create()
+Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat::Create(const std::string& name)
 {
-    return std::make_shared<VertexFormat>(VertexFormatCreate::Init, 0);
+    return std::make_shared<VertexFormat>(VertexFormatCreate::Init, name, 0);
 }
 
-void Rendering::VertexFormat::SetAttribute(int attribute, DataFormatType type, Semantic usage, int usageIndex, int offset)
+void Rendering::VertexFormat::SetAttribute(int attribute, DataFormatType type, Semantic semantic, int unit, int offset)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return impl->SetAttribute(attribute, type, usage, usageIndex, offset);
+    return impl->SetAttribute(attribute, type, semantic, unit, offset);
+}
+
+int Rendering::VertexFormat::GetNumAttributes() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetNumAttributes();
+}
+
+int Rendering::VertexFormat::GetOffset(int attribute) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetOffset(attribute);
+}
+
+Rendering::DataFormatType Rendering::VertexFormat::GetAttributeType(int attribute) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetAttributeType(attribute);
+}
+
+Rendering::VertexFormat::Semantic Rendering::VertexFormat::GetSemantic(int attribute) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetSemantic(attribute);
+}
+
+int Rendering::VertexFormat::GetUnit(int attribute) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetUnit(attribute);
+}
+
+int Rendering::VertexFormat::GetVertexSize() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetVertexSize();
+}
+
+void Rendering::VertexFormat::SetVertexSize(int vertexSize)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetVertexSize(vertexSize);
+}
+
+void Rendering::VertexFormat::Reset() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->Reset();
 }
 
 void Rendering::VertexFormat::SetAttribute(int attribute, const VertexFormatAttribute& vertexFormatElement)
@@ -77,26 +133,15 @@ void Rendering::VertexFormat::SetAttribute(int attribute, const VertexFormatAttr
     return impl->SetAttribute(attribute, vertexFormatElement);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormat, SetStride, int, void)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexFormat, GetNumAttributes, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormat, GetOffset, int, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormat, GetAttributeType, int, Rendering::DataFormatType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormat, GetAttributeUsage, int, Rendering::VertexFormatFlags::Semantic)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormat, GetUsageIndex, int, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexFormat, GetStride, int)
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexFormat, Reset, void)
-
-int Rendering::VertexFormat::GetIndex(Semantic usage, int usageIndex) const noexcept
+int Rendering::VertexFormat::GetIndex(Semantic semantic, int unit) const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return impl->GetIndex(usage, usageIndex);
+    return impl->GetIndex(semantic, unit);
 }
 
-Rendering::VertexFormat::VertexFormat(LoadConstructor value)
-    : ParentType{ value }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+Rendering::VertexFormat::VertexFormat(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -159,25 +204,11 @@ void Rendering::VertexFormat::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::VertexFormat::Bind(Semantic semantic, DataFormatType type, int unit)
+void Rendering::VertexFormat::Bind(DataFormatType type, Semantic semantic, int unit)
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    impl->Bind(semantic, type, unit);
-}
-
-void Rendering::VertexFormat::SaveToFile(WriteFileManager& outFile) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    impl->SaveToFile(outFile);
-}
-
-void Rendering::VertexFormat::ReadFromFile(ReadFileManager& inFile)
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    impl->ReadFromFile(inFile);
+    impl->Bind(type, semantic, unit);
 }
 
 Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat::Clone() const
@@ -185,20 +216,6 @@ Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat::Clone() 
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return std::make_shared<ClassType>(*this);
-}
-
-Rendering::VertexFormatSharedPtr Rendering::VertexFormat::LoadFromFile(ReadFileManager& manager)
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    auto numAttributes = 0;
-    manager.Read(sizeof(int32_t), &numAttributes);
-
-    auto vertexFormat = std::make_shared<VertexFormat>(VertexFormatCreate::Init, numAttributes);
-
-    vertexFormat->ReadFromFile(manager);
-
-    return vertexFormat;
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::VertexFormat::CloneObject() const

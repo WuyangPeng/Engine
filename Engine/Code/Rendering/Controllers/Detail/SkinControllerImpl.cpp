@@ -282,7 +282,6 @@ bool Rendering::SkinControllerImpl::Update(const VisualSharedPtr& visual)
         Mathematics::TransformF identity{};
         identity.MakeIdentity();
         visual->SetWorldTransform(identity);
-        visual->SetWorldTransformIsCurrent(true);
 
         std::vector<Mathematics::Matrix<float>> worldTransforms(numBones);
         for (auto bone = 0; bone < numBones; ++bone)
@@ -311,7 +310,7 @@ bool Rendering::SkinControllerImpl::Update(const VisualSharedPtr& visual)
                 }
             }
 
-            auto target = vertexBuffer->GetData(current);
+            auto target = vertexBuffer->GetStorage(current);
             target.Increase(currentPosition.at(0));
             target.Increase(currentPosition.at(1));
             target.Increase(currentPosition.at(2));
@@ -339,7 +338,7 @@ void Rendering::SkinControllerImpl::OnFirstUpdate(Visual& visual)
         const auto numAttributes = vertexFormat.GetNumAttributes();
         for (auto i = 0; i < numAttributes; ++i)
         {
-            const auto semantic = vertexFormat.GetAttributeUsage(i);
+            const auto semantic = vertexFormat.GetSemantic(i);
             const auto type = vertexFormat.GetAttributeType(i);
 
             const auto offset = vertexFormat.GetOffset(i);
@@ -348,7 +347,7 @@ void Rendering::SkinControllerImpl::OnFirstUpdate(Visual& visual)
                 (type == DataFormatType::R32G32B32Float || type == DataFormatType::R32G32B32A32Float))
             {
                 position = offset;
-                stride = vertexFormat.GetStride();
+                stride = vertexFormat.GetVertexSize();
                 canUpdate = true;
                 break;
             }

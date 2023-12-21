@@ -6,13 +6,14 @@
 1.   HelperSuite 
 
 对帮助模块的单元测试，包括： 
-（1）用户宏。 
+（1）用户宏：UserMacroTesting。★★★
 
 ----------------------------
 2.  BaseSuite 
 
 对基础模块的单元测试，包括： 
-（1）图形对象基类。
+（1）图形对象基类：GraphicsObjectTesting。★★★
+（2）渲染对象基类。
 
 ----------------------------
 3.  DataTypesSuite 
@@ -27,13 +28,15 @@
 4.	ResourcesSuite 
 
 对资源模块的单元测试，包括： 
-（1）顶点缓冲区。
-（2）索引缓冲区。
-（3）1D纹理对象。
-（4）2D纹理对象。
-（5）3D纹理对象。
-（6）Cube纹理对象。
-（7）顶点格式。
+（1）资源基类：ResourceTesting、★★★
+			   BufferTesting。★★★			   
+（2）顶点缓冲区：StructuredBufferTesting、★★★
+				 VertexBufferTesting。★★★
+（3）索引缓冲区：IndexBufferTesting。★★★
+（3）纹理对象。
+（4）渲染目标。
+（5）顶点格式：VertexFormatAttributeTesting、★★★
+			   VertexFormatTesting。★★★
 
 ----------------------------
 5.	SceneGraphSuite 
@@ -46,7 +49,9 @@
 （2）  相机对象:  CameraFrustumDataTesting、★★★
 				  PickLineTesting、★★★
 				  CameraTesting。★★★ 
-（3）  节点对象。☆☆☆
+（3）  节点对象。SpatialTesting、★★★
+				 NodeTesting、★★★
+				 VisualTesting。☆☆☆
 （4）  光照对象。
 （5）  材质对象。
 （6）  点-粒子图元。
@@ -132,67 +137,73 @@
 （10） 反转曲面。 
  
 ----------------------------
-13.	IlluminationSuite 
+13.	StateSuite
+
+对状态模块的单元测试，包括： 
+（1）状态。
+
+---------------------------- 
+14.	IlluminationSuite 
 
 对光照模块的单元测试，包括： 
 （1）光照。
 
 ----------------------------
-14.	ImageProcessingSuite
+15.	ImageProcessingSuite
 
 对图像处理模块的单元测试，包括： 
 （1）图像处理。
  
 ----------------------------
-15.	PictureSuite
+16.	PictureSuite
 
 对图像模块的单元测试，包括： 
 （1）图像。
 
 ----------------------------
-16.	SortingSuite
+17.	SortingSuite
 
 对排序模块的单元测试，包括： 
 （1）排序。
 
 ----------------------------
-17.	TerrainSuite
+18.	TerrainSuite
 
 对地形处理模块的单元测试，包括： 
 （1）地形处理。
 
 ----------------------------
-18.	VertexSuite
+19.	VertexSuite
 
 对顶点模块的单元测试，包括： 
 （1）顶点。
 
 ---------------------------- 
-19.	TextFontsSuite
+20.	TextFontsSuite
 
 对文本及字体模块的单元测试，包括： 
 （1）文本及字体。
 
 ----------------------------
-20.	ConsoleGraphSuite
+21.	ConsoleGraphSuite
 
 对控制台图形模块的单元测试，包括： 
 （1）控制台图形。
 
 ----------------------------
-21.	OpenGLAPISuite
+22.	OpenGLAPISuite
 
 对OpenGLAPI模块的单元测试，包括： 
 （1）OpenGLAPI。
 
 ----------------------------
-22.	DirectAPISuite 
+23.	DirectAPISuite 
 
 对DirectAPI模块的单元测试，包括： 
 （1）DirectAPI。
 
 ----------------------------
-23.	RendererEngineSuite
+24.	RendererEngineSuite
 
 对渲染器模块的单元测试，包括： 
 （1） 渲染基础：ViewportTesting、
@@ -210,45 +221,39 @@
 （8） 渲染目标。
 
 ----------------------------
-24.	OpenGLRendererSuite
+25.	OpenGLRendererSuite
 
 对OpenGL渲染器模块的单元测试，包括： 
 （1）OpenGL渲染器。
 
 ----------------------------
-25.	Dx9RendererSuite 
+26.	Dx9RendererSuite 
 
 对Dx9渲染器模块的单元测试，包括： 
 （1）Dx9渲染器。
 
 ----------------------------
-26.	AglRendererSuite 
+27.	AglRendererSuite 
 
 对Agl渲染器模块的单元测试，包括： 
 （1）Agl渲染器。
 
 ----------------------------
-27.	GlutRendererSuite
+28.	GlutRendererSuite
 
 对Glut渲染器模块的单元测试，包括： 
 （1）Glut渲染器。
 
 ----------------------------
-28.	GlxRendererSuite
+29.	GlxRendererSuite
 
 对Glx渲染器模块的单元测试，包括： 
 （1）Glx渲染器。
 
 ----------------------------
-29.	WglRendererSuite
+30.	WglRendererSuite
 
 对Wgl渲染器模块的单元测试，包括： 
 （1）Wgl渲染器。
 
 ----------------------------
-30.	StateSuite
-
-对状态模块的单元测试，包括： 
-（1）状态。
-
----------------------------- 

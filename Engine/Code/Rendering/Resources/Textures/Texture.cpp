@@ -28,13 +28,13 @@ CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Texture);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, Texture);
 
 Rendering::Texture::Texture(int numElements, int elementSize, GraphicsObjectType type)
-    : ParentType{ numElements, elementSize, type }
+    : ParentType{ "Texture", numElements, elementSize, type }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::Texture::Texture(int numElements, int elementSize, const StorageType& storage, GraphicsObjectType type)
-    : ParentType{ numElements, elementSize, storage, type }
+    : ParentType{ "Texture", numElements, elementSize, storage, type }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -47,7 +47,7 @@ Rendering::Texture::ConstSpanIterator Rendering::Texture::GetDataFor(int item, i
 
     const auto offset = GetLevelOffset(item, level);
 
-    return GetData(offset);
+    return GetStorage(offset);
 }
 
 Rendering::SubResource Rendering::Texture::GetSubResource(int index)
@@ -70,7 +70,7 @@ Rendering::Texture::SpanIterator Rendering::Texture::GetDataFor(int item, int le
 
     const auto offset = GetLevelOffset(item, level);
 
-    return GetData(offset);
+    return GetStorage(offset);
 }
 
 void Rendering::Texture::SaveTypeToFile(WriteFileManager& outFile) const
@@ -101,7 +101,7 @@ void Rendering::Texture::SaveStorageDataToFile(WriteFileManager& outFile) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const auto textureData = GetData();
+    const auto textureData = GetStorage();
     const StorageType storageData{ textureData.GetCurrent(), textureData.GetEnd() };
 
     outFile.Write(sizeof(char), storageData.size(), storageData.data());
@@ -135,5 +135,5 @@ void Rendering::Texture::ReadStorageDataFromFile(ReadFileManager& inFile)
 
     inFile.Read(sizeof(char), storageData.size(), storageData.data());
 
-    SetNewData(storageData);
+    SetStorage(storageData);
 }

@@ -73,8 +73,8 @@ Rendering::OverlayEffectImpl::OverlayEffectImpl(ProgramFactory& factory,
       invTextureHeight{ 1.0f / boost::numeric_cast<float>(textureHeight) },
       overlayRectangle{ 0, 0, windowWidth, windowHeight },
       textureRectangle{ 0, 0, textureWidth, textureHeight },
-      vertexBuffer{ VertexBuffer::Create(GetVertexFormat(), 4) },
-      indexBuffer{ IndexBuffer::Create(IndexFormatType::TriMesh, 2, sizeof(int32_t)) },
+      vertexBuffer{ VertexBuffer::Create("VertexBuffer", GetVertexFormat(), 4) },
+      indexBuffer{ IndexBuffer::Create("IndexBuffer", IndexFormatType::TriangleMesh, 2, sizeof(int32_t)) },
       program{ factory.CreateFromFiles("Resource/Shader/OverlayEffect.vs", useColorPShader ? "Resource/Shader/OverlayEffectColor.ps" : "Resource/Shader/OverlayEffectGray.ps", "") },
       effect{ std::make_shared<VisualEffect>(program) },
       shaderAPIType{ factory.GetAPI() }
@@ -96,8 +96,8 @@ Rendering::OverlayEffectImpl::OverlayEffectImpl(ProgramFactory& factory, int win
       invTextureHeight{ 1.0f / boost::numeric_cast<float>(textureHeight) },
       overlayRectangle{ 0, 0, windowWidth, windowHeight },
       textureRectangle{ 0, 0, textureWidth, textureHeight },
-      vertexBuffer{ VertexBuffer::Create(GetVertexFormat(), 4) },
-      indexBuffer{ IndexBuffer::Create(IndexFormatType::TriMesh, 2, sizeof(int32_t)) },
+      vertexBuffer{ VertexBuffer::Create("VertexBuffer", GetVertexFormat(), 4) },
+      indexBuffer{ IndexBuffer::Create("IndexBuffer", IndexFormatType::TriangleMesh, 2, sizeof(int32_t)) },
       program{ factory.CreateFromFiles("Resource/Shader/OverlayEffect.vs", pixelShaderFile, "") },
       effect{ std::make_shared<VisualEffect>(program) },
       shaderAPIType{ factory.GetAPI() }
@@ -111,9 +111,9 @@ Rendering::OverlayEffectImpl::OverlayEffectImpl(ProgramFactory& factory, int win
 
 Rendering::VertexFormat Rendering::OverlayEffectImpl::GetVertexFormat()
 {
-    const auto vertexFormat = VertexFormat::Create();
-    vertexFormat->Bind(VertexFormatFlags::Semantic::Position, DataFormatType::R32G32Float, 0);
-    vertexFormat->Bind(VertexFormatFlags::Semantic::TextureCoord, DataFormatType::R32G32Float, 0);
+    const auto vertexFormat = VertexFormat::Create("VertexFormat");
+    vertexFormat->Bind(DataFormatType::R32G32Float, VertexFormatFlags::Semantic::Position, 0);
+    vertexFormat->Bind(DataFormatType::R32G32Float, VertexFormatFlags::Semantic::TextureCoord, 0);
 
     return *vertexFormat;
 }
@@ -123,7 +123,7 @@ void Rendering::OverlayEffectImpl::Initialize()
     vertexBuffer->SetUsage(UsageType::DynamicUpdate);
     UpdateVertexBuffer();
 
-    auto indices = indexBuffer->GetData();
+    auto indices = indexBuffer->GetStorage();
     indices.Increase<int32_t>(0);
     indices.Increase<int32_t>(2);
     indices.Increase<int32_t>(3);
@@ -273,7 +273,7 @@ void Rendering::OverlayEffectImpl::UpdateVertexBuffer()
     const auto tw = static_cast<float>(textureRectangle.at(2)) * invTextureWidth;
     const auto th = static_cast<float>(textureRectangle.at(3)) * invTextureHeight;
 
-    auto vertex = vertexBuffer->GetData();
+    auto vertex = vertexBuffer->GetStorage();
 
     vertex.Increase<float>(px);
     vertex.Increase<float>(py);
@@ -306,7 +306,7 @@ void Rendering::OverlayEffectImpl::SetNormalizedZ(float z)
 
     const auto constantBuffer = std::make_shared<ConstantBuffer>(CoreTools::GetStreamSize<float>(), true);
 
-    auto data = constantBuffer->GetData();
+    auto data = constantBuffer->GetStorage();
     if (shaderAPIType == ShaderAPIType::GLSL)
     {
         data.Increase<float>(z);

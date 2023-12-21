@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.0 (2023/11/18 17:09)
+/// 版本：1.0.0.2 (2023/12/17 19:26)
 
 #ifndef LOGIN_SERVER_LOGIN_SERVER_MESSAGE_H
 #define LOGIN_SERVER_LOGIN_SERVER_MESSAGE_H
@@ -48,7 +48,7 @@ namespace LoginServer
                                                                   LoginServerMiddleLayer::GUIManager>;
     using MessageType = Framework::WindowMessage<MiddleLayerType>;
 
-    class LoginServerMessage : public MessageType
+    class LoginServerMessage final : public MessageType
     {
     public:
         using ClassType = LoginServerMessage;

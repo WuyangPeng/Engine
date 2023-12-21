@@ -437,7 +437,7 @@ int64_t Rendering::BaseRendererImpl::Draw(Visual& visual)
 
     const auto vertexBuffer = visual.GetVertexBuffer();
     const auto indexBuffer = visual.GetIndexBuffer();
-    const auto effect = visual.GetEffect();
+    const auto effect = visual.GetVisualEffect();
 
     return DrawPrimitive(vertexBuffer, indexBuffer, effect);
 }

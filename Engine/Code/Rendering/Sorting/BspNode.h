@@ -54,7 +54,7 @@ namespace Rendering
     protected:
         NODISCARD bool UpdateWorldData(double applicationTime) override;
 
-        void GetVisibleSet(Culler& culler, bool noCull) override;
+        void GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull) override;
 
     private:
         Mathematics::PlaneF modelPlane;

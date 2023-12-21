@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/28 10:24)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/08 17:45)
 
 #include "Rendering/RenderingExport.h"
 
@@ -17,6 +17,8 @@
 #include "Rendering/Base/RendererObject.h"
 #include "Rendering/Base/TotalAllocation.h"
 #include "Rendering/Resources/Resource.h"
+
+#include <ranges>
 
 Rendering::RendererObjectBridgeImpl::RendererObjectBridgeImpl() noexcept
     : container{}
@@ -80,10 +82,8 @@ Rendering::TotalAllocation Rendering::RendererObjectBridgeImpl::GetTotalAllocati
 
     TotalAllocation totalAllocation{};
 
-    for (const auto& element : container)
+    for (const auto& object : container | std::views::values)
     {
-        const auto& object = element.second;
-
         const auto resource = boost::polymorphic_pointer_downcast<const Resource>(object->GetGraphicsObject());
         totalAllocation.AddNumObjects(1);
         totalAllocation.AddNumBytes(resource->GetNumBytes());

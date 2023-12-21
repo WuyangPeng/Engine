@@ -22,18 +22,18 @@ namespace Rendering
     class PickLine;
     class ViewVolume;
     class Camera;
-
-    class CameraManager;
     class Spatial;
+    class Node;
+    class Visual;
     class VisibleSet;
     class Culler;
-    class Node;
+
+    class CameraManager;
     class Light;
     class CameraNode;
     class Material;
     class TriangleIndex;
     class TrianglePosition;
-    class Visual;
     class Polypoint;
     class Polysegment;
     class Triangles;

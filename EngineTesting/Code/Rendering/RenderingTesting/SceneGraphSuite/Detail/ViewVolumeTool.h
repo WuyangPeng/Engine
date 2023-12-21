@@ -11,7 +11,9 @@
 #define RENDERING_SCENE_GRAPH_SUITE_VIEW_VOLUME_TOOL_H
 
 #include "Mathematics/Algebra/APoint.h"
+#include "Mathematics/Algebra/BoundingSphere.h"
 #include "Mathematics/Algebra/Matrix.h"
+#include "Mathematics/Algebra/Transform.h"
 
 #include <random>
 
@@ -25,6 +27,8 @@ namespace Rendering
         using APoint = Mathematics::APointF;
         using AVector = Mathematics::AVectorF;
         using Matrix = Mathematics::MatrixF;
+        using Transform = Mathematics::TransformF;
+        using BoundingSphere = Mathematics::BoundingSphereF;
 
         using AVectorContainer = std::array<AVector, 3>;
 
@@ -37,6 +41,8 @@ namespace Rendering
         NODISCARD AVector ComputeVector();
         void ComputeAxes(float epsilon);
         NODISCARD Matrix ComputeMatrix(float epsilon);
+        NODISCARD Transform ComputeTransform(float epsilon);
+        NODISCARD BoundingSphere ComputeBoundingSphere();
 
         NODISCARD AVector GetDirectionVector() const noexcept;
         NODISCARD AVector GetUpVector() const noexcept;

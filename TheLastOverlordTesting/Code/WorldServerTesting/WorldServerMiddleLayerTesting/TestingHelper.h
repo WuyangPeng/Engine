@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.0 (2023/11/18 22:36)
+/// 版本：1.0.0.2 (2023/12/17 20:02)
 
 #ifndef WORLD_SERVER_MIDDLE_LAYER_TESTING_TESTING_HELPER_H
 #define WORLD_SERVER_MIDDLE_LAYER_TESTING_TESTING_HELPER_H
@@ -16,7 +16,7 @@
 
 namespace WorldServerTesting
 {
-    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    class TestingHelper final : public CoreTools::CMainFunctionTestingHelper
     {
     public:
         using ClassType = TestingHelper;

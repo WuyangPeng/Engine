@@ -323,7 +323,7 @@ xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(AssistInclude)/../$(Pla
 xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/AssistTools.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "$(ToolInclude)/GameTestingTemplate/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(ToolInclude)/GameTestingTemplate/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Log.json" "$(ToolInclude)/GameTemplate/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Log.json" "$(ToolInclude)/GameTestingTemplate/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/GameTestingTemplate/" "$(ToolInclude)/GameTestingTemplate/Resource/GameTestingTemplate/" /F /Y /E
 xcopy "$(ProjectDir)/../../../../x64/ReleaseWindows/GameTestingTemplate.exe" "$(ToolInclude)/GameTestingTemplate/" /F /Y /E
 xcopy "$(ProjectDir)/../../../../x64/ReleaseWindows/*.dll" "$(ToolInclude)/GameTestingTemplate/" /F /Y /E</Command>

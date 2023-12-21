@@ -20,6 +20,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/CurvesSurfacesVolumes/Curve3Detail.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
+#include "Rendering/SceneGraph/Flags/VisualFlags.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, TubeSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TubeSurface);
@@ -60,8 +61,8 @@ Rendering::TubeSurface::TubeSurface(const std::shared_ptr<Mathematics::Curve3<fl
     }
 
     SetVertexFormat(vformat);
-    const auto vstride = vformat->GetStride();
-    SetVertexBuffer(VertexBuffer::Create(*vformat, vstride));
+    const auto vstride = vformat->GetVertexSize();
+    SetVertexBuffer(VertexBuffer::Create("VertexBuffer", *vformat, vstride));
 
     ComputeSinCos();
     ComputeVertices();
@@ -207,9 +208,9 @@ void Rendering::TubeSurface::ComputeIndices(bool insideView)
         numTriangles = 2 * numSliceSamples * (numMedialSamples - 1);
     }
 
-    SetIndexBuffer(IndexBuffer::Create(IndexFormatType::PolyPoint, 3 * numTriangles, sizeof(int)));
+    SetIndexBuffer(IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, 3 * numTriangles, sizeof(int)));
 
-    auto indices = GetIndexBuffer()->GetData();
+    auto indices = GetIndexBuffer()->GetStorage();
     auto start = 0;
     for (auto m = 0; m < numMedialSamples - 1; ++m)
     {

@@ -202,8 +202,8 @@ Rendering::IKJointImpl::AVector Rendering::IKJointImpl::GetAxis(MatrixRotationAx
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const auto* const parent = object.object->GetParent();
-    if (parent != nullptr)
+    const auto parent = object.object->GetParent();
+    if (!parent->IsNullObject())
     {
         return AVector{ parent->GetWorldTransform().GetRotate().GetColumn(System::EnumCastUnderlying(axisIndex)) };
     }
@@ -225,8 +225,8 @@ void Rendering::IKJointImpl::UpdateWorldTransform()
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    const auto* const parent = object.object->GetParent();
-    if (parent != nullptr)
+    const auto parent = object.object->GetParent();
+    if (!parent->IsNullObject())
     {
         object.object->SetWorldTransform(parent->GetWorldTransform() * object.object->GetLocalTransform());
     }
@@ -236,12 +236,12 @@ void Rendering::IKJointImpl::UpdateWorldTransform()
     }
 }
 
-void Rendering::IKJointImpl::UpdateWorldRotateAndTranslate()  
+void Rendering::IKJointImpl::UpdateWorldRotateAndTranslate()
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    const auto* const parent = object.object->GetParent();
-    if (parent != nullptr)
+    const auto parent = object.object->GetParent();
+    if (!parent->IsNullObject())
     {
         auto transform = object.object->GetWorldTransform();
 

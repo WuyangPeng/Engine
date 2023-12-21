@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/11/20 13:43)
+/// 版本：1.0.0.2 (2023/12/17 19:56)
 
 #ifndef RISE_OF_HISTORY_TESTING_VERSION_SUITE_H
 #define RISE_OF_HISTORY_TESTING_VERSION_SUITE_H

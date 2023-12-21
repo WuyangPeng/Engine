@@ -38,7 +38,7 @@ Rendering::OpenGLInputLayoutImpl::OpenGLInputLayoutImpl(MAYBE_UNUSED OpenGLUInt 
         attribute.SetNormalize(DataFormat::ConvertChannel(type) ? GL_TRUE : GL_FALSE);
         attribute.SetLocation(i);
         attribute.SetOffset(format.GetOffset(i));
-        attribute.SetStride(format.GetUsageIndex(i));
+        attribute.SetStride(format.GetUnit(i));
 
         System::SetGLEnableVertexAttributeArray(attribute.GetLocation());
         System::SetGLBindVertexBuffer(i, vertexBufferHandle, attribute.GetOffset(), attribute.GetStride());

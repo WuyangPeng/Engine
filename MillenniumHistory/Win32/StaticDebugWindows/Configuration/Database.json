@@ -1,0 +1,16 @@
+{
+  "GenerateServerDB": {
+    "Ip": "43.139.123.106",
+    "Port": 27017,
+    "Wrappers": "Mongo",
+    "HostName": "tcretest",
+    "UserName": "dbOwner",
+    "Password": "TCRE",
+
+    "Pooling": true,
+    "PoolMaxSize": 10,
+    "PoolQueueTimeout": 1000,
+    "PoolMaxIdleTime": 500,
+    "threadCount": 5
+  }
+}

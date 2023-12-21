@@ -1,23 +1,21 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 17:09)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/13 14:45)
 
 #include "Rendering/RenderingExport.h"
 
 #include "VertexBuffer.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
-#include "CoreTools/FileManager/ReadFileManager.h"
-#include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
@@ -26,44 +24,83 @@
 #include "Rendering/Resources/Buffers/StructuredBuffer.h"
 #include "Rendering/Resources/Detail/Buffers/VertexBufferImpl.h"
 
-COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(Rendering, VertexBuffer)
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, VertexBuffer)
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, VertexBuffer);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, VertexBuffer);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, VertexBuffer);
+CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, VertexBuffer)
 
-Rendering::VertexBuffer::VertexBuffer(VertexBufferCreate vertexBufferCreate, const VertexFormat& format, const StructuredBufferSharedPtr& structuredBuffer)
-    : ParentType{ structuredBuffer->GetNumElements(), format.GetStride(), GraphicsObjectType::VertexBuffer }, impl{ format, structuredBuffer }
+Rendering::VertexBuffer::VertexBufferSharedPtr Rendering::VertexBuffer::Create(const std::string& name, int numVertices)
 {
-    System::UnusedFunction(vertexBufferCreate);
-
-    RENDERING_SELF_CLASS_IS_VALID_1;
+    return std::make_shared<ClassType>(VertexBufferCreate::Init, name, numVertices);
 }
 
-Rendering::VertexBuffer::VertexBuffer(VertexBufferCreate vertexBufferCreate, const VertexFormat& format, int numVertices)
-    : ParentType{ numVertices, format.GetStride(), GraphicsObjectType::VertexBuffer }, impl{ format }
+Rendering::VertexBuffer::VertexBufferSharedPtr Rendering::VertexBuffer::Create(const std::string& name, const VertexFormat& format, const StructuredBuffer& structuredBuffer)
+{
+    return std::make_shared<ClassType>(VertexBufferCreate::Init, name, format, structuredBuffer);
+}
+
+Rendering::VertexBuffer::VertexBufferSharedPtr Rendering::VertexBuffer::Create(const std::string& name, const VertexFormat& format, int numVertices, bool createStorage)
+{
+    return std::make_shared<ClassType>(VertexBufferCreate::Init, name, format, numVertices, createStorage);
+}
+
+Rendering::VertexBuffer::VertexBuffer(VertexBufferCreate vertexBufferCreate, const std::string& name, const VertexFormat& format, const StructuredBuffer& structuredBuffer)
+    : ParentType{ name, structuredBuffer.GetNumElements(), format.GetVertexSize(), GraphicsObjectType::VertexBuffer }, impl{ format, structuredBuffer }
 {
     System::UnusedFunction(vertexBufferCreate);
 
-    RENDERING_SELF_CLASS_IS_VALID_1;
+    SetNumActiveElements(structuredBuffer.GetNumElements());
+
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::VertexBuffer::VertexBuffer(VertexBufferCreate vertexBufferCreate, const std::string& name, const VertexFormat& format, int numVertices, bool createStorage)
+    : ParentType{ name, numVertices, format.GetVertexSize(), GraphicsObjectType::VertexBuffer, createStorage }, impl{ format }
+{
+    System::UnusedFunction(vertexBufferCreate);
+
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::VertexBuffer::VertexBuffer(VertexBufferCreate vertexBufferCreate, const std::string& name, int numVertices)
+    : ParentType{ name, numVertices, 0, GraphicsObjectType::VertexBuffer, false }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+{
+    System::UnusedFunction(vertexBufferCreate);
+
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, VertexBuffer)
 
-Rendering::VertexBuffer::VertexBufferSharedPtr Rendering::VertexBuffer::Create(const VertexFormat& format, const StructuredBufferSharedPtr& structuredBuffer)
+Rendering::VertexFormat Rendering::VertexBuffer::GetFormat() const
 {
-    return std::make_shared<ClassType>(VertexBufferCreate::Init, format, structuredBuffer);
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFormat();
 }
 
-Rendering::VertexBuffer::VertexBufferSharedPtr Rendering::VertexBuffer::Create(const VertexFormat& format, int numVertices)
+bool Rendering::VertexBuffer::StandardUsage() const noexcept
 {
-    return std::make_shared<ClassType>(VertexBufferCreate::Init, format, numVertices);
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->StandardUsage();
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VertexBuffer, GetFormat, Rendering::VertexFormat)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexBuffer, StandardUsage, bool)
+Rendering::VertexBuffer::StructuredBufferSharedPtr Rendering::VertexBuffer::GetStructuredBuffer()
+{
+    RENDERING_CLASS_IS_VALID_9;
 
-Rendering::VertexBuffer::StructuredBufferSharedPtr Rendering::VertexBuffer::GetStructuredBuffer() const
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26473)
+
+    return std::const_pointer_cast<StructuredBuffer>(static_cast<const ClassType*>(this)->GetStructuredBuffer());
+
+#include SYSTEM_WARNING_POP
+}
+
+Rendering::VertexBuffer::ConstStructuredBufferSharedPtr Rendering::VertexBuffer::GetStructuredBuffer() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -78,7 +115,7 @@ Rendering::VertexBuffer::StructuredBufferSharedPtr Rendering::VertexBuffer::GetS
 }
 
 Rendering::VertexBuffer::VertexBuffer(LoadConstructor loadConstructor)
-    : ParentType{ loadConstructor }, impl{ *VertexFormat::Create() }
+    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -98,7 +135,14 @@ int64_t Rendering::VertexBuffer::Register(CoreTools::ObjectRegister& target) con
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return ParentType::Register(target);
+    const auto registerId = ParentType::Register(target);
+
+    if (0 < registerId)
+    {
+        impl->Register(target);
+    }
+
+    return registerId;
 }
 
 void Rendering::VertexBuffer::Save(CoreTools::BufferTarget& target) const
@@ -119,6 +163,8 @@ void Rendering::VertexBuffer::Link(CoreTools::ObjectLink& source)
     RENDERING_CLASS_IS_VALID_9;
 
     ParentType::Link(source);
+
+    impl->Link(source);
 }
 
 void Rendering::VertexBuffer::PostLink()
@@ -159,6 +205,26 @@ Rendering::VertexBuffer::SpanIterator Rendering::VertexBuffer::GetChannel(Semant
 {
     RENDERING_CLASS_IS_VALID_1;
 
+    const auto offset = CheckChannel(semantic, unit, requiredTypes);
+
+    const auto structuredBuffer = impl->GetStructuredBuffer();
+
+    return (structuredBuffer == nullptr) ? GetStorage(offset) : structuredBuffer->GetStorage(offset);
+}
+
+Rendering::Resource::ConstSpanIterator Rendering::VertexBuffer::GetConstChannel(Semantic semantic, int unit, const DataFormatTypeContainer& requiredTypes) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    const auto offset = CheckChannel(semantic, unit, requiredTypes);
+
+    const auto structuredBuffer = impl->GetStructuredBuffer();
+
+    return (structuredBuffer == nullptr) ? GetStorage(offset) : structuredBuffer->GetStorage(offset);
+}
+
+int Rendering::VertexBuffer::CheckChannel(Semantic semantic, int unit, const DataFormatTypeContainer& requiredTypes) const
+{
     const auto index = impl->GetIndex(semantic, unit);
     if (index < 0)
     {
@@ -171,11 +237,7 @@ Rendering::VertexBuffer::SpanIterator Rendering::VertexBuffer::GetChannel(Semant
         THROW_EXCEPTION(SYSTEM_TEXT("语义的类型不在所需类型的集合中。"s))
     }
 
-    const auto buffer = impl->GetStructuredBuffer();
-
-    const auto offset = impl->GetOffset(index);
-
-    return (buffer == nullptr) ? GetData(offset) : buffer->GetData(offset);
+    return impl->GetOffset(index);
 }
 
 Rendering::VertexBuffer::RendererObjectSharedPtr Rendering::VertexBuffer::CreateRendererObject(RendererTypes rendererTypes)

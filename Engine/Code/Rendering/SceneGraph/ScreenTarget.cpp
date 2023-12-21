@@ -37,8 +37,8 @@ Rendering::TrianglesMeshSharedPtr Rendering::ScreenTarget::CreateRectangle(const
 {
     if (ValidFormat(*vertexFormat) && ValidSizes(renderTargetWidth, renderTargetHeight))
     {
-        const auto vstride = vertexFormat->GetStride();
-        auto vertexBuffer = VertexBuffer::Create(*vertexFormat, vstride);
+        const auto vstride = vertexFormat->GetVertexSize();
+        auto vertexBuffer = VertexBuffer::Create("VertexBuffer", *vertexFormat, vstride);
 
         const auto dx = 0.5f * (xMax - xMin) / static_cast<float>(renderTargetWidth - 1);
         const auto dy = 0.5f * (yMax - yMin) / static_cast<float>(renderTargetHeight - 1);
@@ -48,7 +48,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::ScreenTarget::CreateRectangle(const
         yMax += dy;
 
         // 创建正方形的索引缓冲区
-        auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, 6, boost::numeric_cast<int>(sizeof(int)));
+        auto indexBuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, 6, boost::numeric_cast<int>(sizeof(int)));
         InitIndexBufferInParticles(*indexBuffer);
 
         return std::make_shared<TrianglesMesh>(vertexFormat, vertexBuffer, indexBuffer);
@@ -71,7 +71,7 @@ void Rendering::ScreenTarget::InitIndexBufferInParticles(IndexBuffer& indexBuffe
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-        auto indices = reinterpret_cast<int16_t*>(&*indexBuffer.GetData(0).GetCurrent());
+        auto indices = reinterpret_cast<int16_t*>(&*indexBuffer.GetStorage(0).GetCurrent());
 
 #include SYSTEM_WARNING_POP
 
@@ -98,7 +98,7 @@ void Rendering::ScreenTarget::InitIndexBufferInParticles(IndexBuffer& indexBuffe
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-        auto indices = reinterpret_cast<int32_t*>(&*indexBuffer.GetData(0).GetCurrent());
+        auto indices = reinterpret_cast<int32_t*>(&*indexBuffer.GetStorage(0).GetCurrent());
 
 #include SYSTEM_WARNING_POP
 

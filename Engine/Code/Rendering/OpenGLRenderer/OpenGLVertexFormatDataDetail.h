@@ -120,7 +120,7 @@ template <>
 RENDERING_DEFAULT_DECLARE void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::FogCoord>::Enable(int stride) noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::Psize>::Enable(int stride) noexcept;
+RENDERING_DEFAULT_DECLARE void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::PSize>::Enable(int stride) noexcept;
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::Position>::Disable() noexcept;
@@ -144,6 +144,6 @@ template <>
 RENDERING_DEFAULT_DECLARE void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::FogCoord>::Disable() noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::Psize>::Disable() noexcept;
+RENDERING_DEFAULT_DECLARE void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::PSize>::Disable() noexcept;
 
 #endif  // RENDERING_RENDERERS_OPENGL_VERTEX_FORMAT_DATA_DETAIL_H

@@ -1,6 +1,6 @@
 {
   "helperSuite": {
-
+    "UserMacroTesting": 1
   },
 
   "baseSuite": {
@@ -22,7 +22,13 @@
   },
 
   "resourcesSuite": {
+    "ResourceTesting": 1,
     "BufferTesting": 1,
+    "StructuredBufferTesting": 1,
+    "VertexBufferTesting": 1,
+    "IndexBufferTesting": 1,
+    "VertexFormatAttributeTesting": 1,
+    "VertexFormatTesting": 1,
     "Texture1DTesting": 1,
     "Texture2DTesting": 1,
     "Texture3DTesting": 1,
@@ -30,20 +36,19 @@
     "RenderTargetTesting": 1,
     "VertexFormatTypeTesting": 1,
     "VertexFormatElementTesting": 1,
-    "VertexFormatTesting": 1,
     "VertexBufferAccessorTesting": 1
   },
 
   "sceneGraphSuite": {
+    "SpatialTesting": 100,
+    "NodeTesting": 100,
+    "VisualTesting": 1,
     "CameraManageTesting": 1,
-    "SpatialTesting": 1,
     "VisibleSetTesting": 1,
     "CullerTesting": 1,
-    "NodeTesting": 1,
     "LightTesting": 100,
     "CameraNodeTesting": 1,
     "MaterialTesting": 1,
-    "VisualTesting": 1,
     "TriangleIndexTesting": 1,
     "TrianglePositionTesting": 1,
     "PolypointTesting": 1,

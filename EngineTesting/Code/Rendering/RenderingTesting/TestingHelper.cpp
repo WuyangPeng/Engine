@@ -62,6 +62,8 @@ void Rendering::TestingHelper::AddHelperSuite()
 {
     auto helperSuite = GenerateSuite("°ïÖú");
 
+    ADD_TEST(helperSuite, UserMacroTesting);
+
     AddSuite(helperSuite);
 }
 
@@ -97,14 +99,18 @@ void Rendering::TestingHelper::AddResourcesSuite()
 {
     auto resourcesSuite = GenerateSuite("×ÊÔ´");
 
+    ADD_TEST(resourcesSuite, ResourceTesting);
     ADD_TEST(resourcesSuite, BufferTesting);
+    ADD_TEST(resourcesSuite, StructuredBufferTesting);
+    ADD_TEST(resourcesSuite, VertexBufferTesting);
+    ADD_TEST(resourcesSuite, IndexBufferTesting);
     ADD_TEST(resourcesSuite, Texture1DTesting);
     ADD_TEST(resourcesSuite, Texture2DTesting);
     ADD_TEST(resourcesSuite, Texture3DTesting);
     ADD_TEST(resourcesSuite, TextureCubeTesting);
     ADD_TEST(resourcesSuite, RenderTargetTesting);
     ADD_TEST(resourcesSuite, VertexFormatTypeTesting);
-    ADD_TEST(resourcesSuite, VertexFormatElementTesting);
+    ADD_TEST(resourcesSuite, VertexFormatAttributeTesting);
     ADD_TEST(resourcesSuite, VertexFormatTesting);
     ADD_TEST(resourcesSuite, VertexBufferAccessorTesting);
 
@@ -117,15 +123,15 @@ void Rendering::TestingHelper::AddSceneGraphSuite()
 
     sceneGraphSuite.AddSuite(GetViewVolumeSuite());
     sceneGraphSuite.AddSuite(GetCameraSuite());
-    ADD_TEST(sceneGraphSuite, CameraManageTesting);
     ADD_TEST(sceneGraphSuite, SpatialTesting);
+    ADD_TEST(sceneGraphSuite, NodeTesting);
+    ADD_TEST(sceneGraphSuite, VisualTesting);
+    ADD_TEST(sceneGraphSuite, CameraManageTesting);
     ADD_TEST(sceneGraphSuite, VisibleSetTesting);
     ADD_TEST(sceneGraphSuite, CullerTesting);
-    ADD_TEST(sceneGraphSuite, NodeTesting);
     ADD_TEST(sceneGraphSuite, LightTesting);
     ADD_TEST(sceneGraphSuite, CameraNodeTesting);
     ADD_TEST(sceneGraphSuite, MaterialTesting);
-    ADD_TEST(sceneGraphSuite, VisualTesting);
     ADD_TEST(sceneGraphSuite, TriangleIndexTesting);
     ADD_TEST(sceneGraphSuite, TrianglePositionTesting);
     ADD_TEST(sceneGraphSuite, PolypointTesting);

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 14:24)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/12 17:04)
 
 #ifndef RENDERING_RESOURCES_BUFFER_H
 #define RENDERING_RESOURCES_BUFFER_H
@@ -23,9 +23,9 @@ namespace Rendering
         using ParentType = Resource;
 
     public:
-        explicit Buffer(GraphicsObjectType type);
-        Buffer(int numElements, int elementSize, GraphicsObjectType type = GraphicsObjectType::Buffer);
-        Buffer(int numElements, int elementSize, const StorageType& storage, GraphicsObjectType type = GraphicsObjectType::Buffer);
+        Buffer(const std::string& name, GraphicsObjectType type);
+        Buffer(const std::string& name, int numElements, int elementSize, GraphicsObjectType type, bool createStorage = true);
+        Buffer(const std::string& name, int numElements, int elementSize, const StorageType& storage, GraphicsObjectType type);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

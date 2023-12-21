@@ -12,6 +12,7 @@
 #include "PickRecord.h"
 #include "PickRecordContainer.h"
 #include "Triangles.h"
+#include "Flags/VisualFlags.h"
 #include "Detail/NormalDerivatives.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -38,14 +39,14 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Triangles);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Triangles);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, Triangles);
 
-Rendering::Triangles::Triangles(VisualPrimitiveType type)
-    : ParentType{ type }
+Rendering::Triangles::Triangles(MAYBE_UNUSED VisualPrimitiveType type)
+    : ParentType{ "Triangles" }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Triangles::Triangles(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer)
-    : ParentType{ type, vertexformat, vertexbuffer, indexbuffer }
+Rendering::Triangles::Triangles(MAYBE_UNUSED VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer)
+    : ParentType{ "Triangles", vertexformat, vertexbuffer, indexbuffer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -93,8 +94,8 @@ Rendering::Triangles::Vector3D Rendering::Triangles::GetPosition(int vertexIndex
     const auto index = GetConstVertexFormat()->GetIndex(VertexFormatFlags::Semantic::Position);
     if (0 <= index)
     {
-        auto positions = GetConstVertexBuffer()->GetData(GetConstVertexFormat()->GetOffset(index));
-        const auto stride = GetConstVertexFormat()->GetStride();
+        auto positions = GetConstVertexBuffer()->GetStorage(GetConstVertexFormat()->GetOffset(index));
+        const auto stride = GetConstVertexFormat()->GetVertexSize();
         const auto index0 = vertexIndex * stride;
 
         positions += index0;

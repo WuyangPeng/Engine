@@ -48,7 +48,7 @@ namespace Rendering
 
     protected:
         // 支持分级裁剪。
-        void GetVisibleSet(Culler& culler, bool noCull) override;
+        void GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull) override;
 
     private:
         // 开关基于来自世界LOD中心，以摄像头距离选择子节点。

@@ -25,7 +25,7 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TerrainBase);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TerrainBase);
 
 Rendering::TerrainBase::TerrainBase(const System::String& heightName, const VertexFormatSharedPtr& vformat, const CameraSharedPtr& camera)
-    : ParentType{ NodeCreate::Init },
+    : ParentType{ "TerrainBase", NodeCreate::Init },
       mode{ 0 },
       vFormat{ vformat },
       numRows{},
@@ -265,7 +265,7 @@ void Rendering::TerrainBase::OnCameraMotion()
                 rP = 0;
             }
         }
-        Update();
+        MAYBE_UNUSED const auto result = Update();
     }
 }
 

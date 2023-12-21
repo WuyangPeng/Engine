@@ -38,6 +38,7 @@ namespace Rendering
         using ConstantBufferSharedPtr = std::shared_ptr<ConstantBuffer>;
         using ConstConstantBufferSharedPtr = std::shared_ptr<const ConstantBuffer>;
         using BaseRendererSharedPtr = std::shared_ptr<BaseRenderer>;
+        using VisualEffectSharedPtr = std::shared_ptr<ClassType>;
 
     public:
         explicit VisualEffect(CoreTools::DisableNotThrow disableNotThrow);
@@ -58,6 +59,7 @@ namespace Rendering
         NODISCARD BaseRendererSharedPtr GetBaseRenderer();
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+        NODISCARD VisualEffectSharedPtr Clone() const;
 
         NODISCARD ConstVisualProgramSharedPtr GetProgram() const noexcept;
         NODISCARD VisualProgramSharedPtr GetProgram() noexcept;

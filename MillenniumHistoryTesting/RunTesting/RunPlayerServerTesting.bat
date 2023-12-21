@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %MillenniumHistoryTestingWin32DebugLib% PlayerServerTestingD.exe
+start /d %MillenniumHistoryTestingWin32ReleaseLib% PlayerServerTesting.exe
+start /d %MillenniumHistoryTestingX64DebugLib% PlayerServerTestingD.exe
+start /d %MillenniumHistoryTestingX64ReleaseLib% PlayerServerTesting.exe
+start /d %MillenniumHistoryTestingStaticWin32DebugLib% PlayerServerTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticWin32ReleaseLib% PlayerServerTestingStatic.exe
+start /d %MillenniumHistoryTestingStaticX64DebugLib% PlayerServerTestingStaticD.exe
+start /d %MillenniumHistoryTestingStaticX64ReleaseLib% PlayerServerTestingStatic.exe
+
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32DebugLib% PlayerServerTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicWin32ReleaseLib% PlayerServerTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64DebugLib% PlayerServerTestingStaticD.exe
+start /d %MillenniumHistoryTestingEngineStaticGameDynamicX64ReleaseLib% PlayerServerTestingStatic.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32DebugLib% PlayerServerTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticWin32ReleaseLib% PlayerServerTesting.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64DebugLib% PlayerServerTestingD.exe
+start /d %MillenniumHistoryTestingEngineDynamicGameStaticX64ReleaseLib% PlayerServerTesting.exe
+
+pause

@@ -21,7 +21,7 @@
 
 namespace Rendering
 {
-    class DataFormat
+    class RENDERING_DEFAULT_DECLARE DataFormat
     {
     public:
         using ClassType = DataFormat;

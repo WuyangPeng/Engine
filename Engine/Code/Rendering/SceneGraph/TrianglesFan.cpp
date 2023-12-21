@@ -10,6 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "TrianglesFan.h"
+#include "Flags/VisualFlags.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -37,7 +38,7 @@ Rendering::TrianglesFan::TrianglesFan(const VertexFormatSharedPtr& vertexformat,
 {
     const auto numVertices = vertexbuffer->GetNumElements();
 
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numVertices, indexSize);
+    auto indexBuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, numVertices, indexSize);
     InitIndexBuffer(*indexBuffer);
     SetIndexBuffer(indexBuffer);
 
@@ -59,7 +60,7 @@ Rendering::TriangleIndex Rendering::TrianglesFan::GetTriangle(int index) const
 
     if (0 <= index && index < GetNumTriangles())
     {
-        auto indices = (GetConstIndexBuffer()->GetData());
+        auto indices = (GetConstIndexBuffer()->GetStorage());
         const auto firstIndex = *indices;
         indices += (index + 1);
         const auto secondIndex = *indices;
@@ -96,7 +97,7 @@ void Rendering::TrianglesFan::InitIndexBuffer(IndexBuffer& indexBuffer)
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-        const auto indices = reinterpret_cast<int16_t*>(&*indexBuffer.GetData(0).GetCurrent());
+        const auto indices = reinterpret_cast<int16_t*>(&*indexBuffer.GetStorage(0).GetCurrent());
 
 #include SYSTEM_WARNING_POP
 
@@ -118,7 +119,7 @@ void Rendering::TrianglesFan::InitIndexBuffer(IndexBuffer& indexBuffer)
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-        auto indices = reinterpret_cast<int32_t*>(&*indexBuffer.GetData(0).GetCurrent());
+        auto indices = reinterpret_cast<int32_t*>(&*indexBuffer.GetStorage(0).GetCurrent());
 
 #include SYSTEM_WARNING_POP
         if (indices != nullptr)

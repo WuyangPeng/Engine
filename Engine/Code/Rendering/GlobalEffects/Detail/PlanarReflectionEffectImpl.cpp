@@ -11,9 +11,11 @@
 
 #include "PlanarReflectionEffectImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "Mathematics/Algebra/MatrixDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
+#include "Rendering/SceneGraph/Flags/CullingModeFlags.h"
 #include "Rendering/SceneGraph/Node.h"
 #include "Rendering/SceneGraph/ProjectionViewWorldUpdater.h"
 #include "Rendering/State/BlendState.h"
@@ -257,7 +259,7 @@ void Rendering::PlanarReflectionEffectImpl::GetModelSpacePlanes()
 
         const auto indexBuffer = visual->GetIndexBuffer();
         const auto primitiveType = indexBuffer->GetPrimitiveType();
-        if (primitiveType != IndexFormatType::TriMesh)
+        if (primitiveType != IndexFormatType::TriangleMesh)
         {
             THROW_EXCEPTION(SYSTEM_TEXT("visual必须具有TRIMESH拓扑结构。"))
         }
@@ -266,11 +268,11 @@ void Rendering::PlanarReflectionEffectImpl::GetModelSpacePlanes()
 
         std::vector<int32_t> triangle{ get<0>(triangleTuple), get<1>(triangleTuple), get<2>(triangleTuple) };
 
-        const auto stride = vertexFormat.GetStride();
+        const auto stride = vertexFormat.GetVertexSize();
         std::array<Vector4, 3> p{};
         for (auto j = 0; j < 3; ++j)
         {
-            auto vertices = vertexBuffer->GetData(triangle.at(j) * stride);
+            auto vertices = vertexBuffer->GetStorage(triangle.at(j) * stride);
 
             Mathematics::Vector3<float> vector3{};
             vector3.SetX(vertices.Increase<float>());

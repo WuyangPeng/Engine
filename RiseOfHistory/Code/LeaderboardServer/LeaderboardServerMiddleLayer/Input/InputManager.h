@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.0 (2023/11/19 00:20)
+/// 版本：1.0.0.2 (2023/12/17 19:45)
 
 #ifndef LEADERBOARD_SERVER_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_H
 #define LEADERBOARD_SERVER_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_H
@@ -19,7 +19,7 @@
 namespace LeaderboardServerMiddleLayer
 {
     template <typename ApplicationTrait>
-    class InputManager : public Framework::InputManager<ApplicationTrait>
+    class InputManager final : public Framework::InputManager<ApplicationTrait>
     {
     public:
         using ClassType = InputManager<ApplicationTrait>;

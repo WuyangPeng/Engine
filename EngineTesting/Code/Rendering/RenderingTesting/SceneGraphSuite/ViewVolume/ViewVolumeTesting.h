@@ -10,16 +10,16 @@
 #ifndef RENDERING_SCENE_GRAPH_SUITE_VIEW_VOLUME_TESTING_H
 #define RENDERING_SCENE_GRAPH_SUITE_VIEW_VOLUME_TESTING_H
 
-#include "ViewVolumeTestingBase.h"
 #include "Rendering/RenderingTesting/SceneGraphSuite/Detail/ViewVolumeTool.h"
+#include "Rendering/RenderingTesting/SceneGraphSuite/SceneGraphTestingBase.h"
 
 namespace Rendering
 {
-    class ViewVolumeTesting final : public ViewVolumeTestingBase
+    class ViewVolumeTesting final : public SceneGraphTestingBase
     {
     public:
         using ClassType = ViewVolumeTesting;
-        using ParentType = ViewVolumeTestingBase;
+        using ParentType = SceneGraphTestingBase;
 
     public:
         explicit ViewVolumeTesting(const OStreamShared& stream);

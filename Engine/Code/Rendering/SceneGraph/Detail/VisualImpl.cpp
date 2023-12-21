@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:15)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/20 09:55)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,23 +16,61 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
+#include "Rendering/Resources/Flags/DataFormatType.h"
 
-Rendering::VisualImpl::VisualImpl(VisualPrimitiveType type) noexcept
-    : visualData{ type }, modelBound{}
+using System::operator&;
+
+Rendering::VisualImpl::VisualImpl() noexcept
+    : visualData{}, modelBound{}, visualEffect{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::VisualImpl::VisualImpl(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer) noexcept
-    : visualData{ type, vertexformat, vertexbuffer, indexbuffer }, modelBound{}
+Rendering::VisualImpl::VisualImpl(const VertexFormatSharedPtr& vertexFormat, const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer) noexcept
+    : visualData{ vertexFormat, vertexBuffer, indexBuffer }, modelBound{}, visualEffect{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::VisualImpl::VisualImpl(const VisualImpl& rhs)
+    : visualData{ rhs.visualData }, modelBound{ rhs.modelBound }, visualEffect{ rhs.visualEffect.Clone() }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::VisualImpl& Rendering::VisualImpl::operator=(const VisualImpl& rhs)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    visualData = rhs.visualData;
+    modelBound = rhs.modelBound;
+    visualEffect.object = rhs.visualEffect.Clone();
+
+    return *this;
+}
+
+Rendering::VisualImpl::VisualImpl(VisualImpl&& rhs) noexcept
+    : visualData{ std::move(rhs.visualData) }, modelBound{ rhs.modelBound }, visualEffect{ std::move(rhs.visualEffect) }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::VisualImpl& Rendering::VisualImpl::operator=(VisualImpl&& rhs) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    visualData = std::move(rhs.visualData);
+    modelBound = rhs.modelBound;
+    visualEffect = std::move(rhs.visualEffect);
+
+    return *this;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, VisualImpl)
 
-Rendering::VisualPrimitiveType Rendering::VisualImpl::GetPrimitiveType() const noexcept
+Rendering::IndexFormatType Rendering::VisualImpl::GetPrimitiveType() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -46,7 +84,7 @@ Rendering::ConstVertexFormatSharedPtr Rendering::VisualImpl::GetConstVertexForma
     return visualData.GetConstVertexFormat();
 }
 
-Mathematics::BoundingSphereF& Rendering::VisualImpl::GetModelBound() noexcept
+Rendering::VisualImpl::BoundingSphere& Rendering::VisualImpl::GetModelBound() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -58,7 +96,14 @@ Mathematics::BoundingSphereF& Rendering::VisualImpl::GetModelBound() noexcept
 #include SYSTEM_WARNING_POP
 }
 
-const Mathematics::BoundingSphereF& Rendering::VisualImpl::GetModelBound() const noexcept
+Rendering::VisualImpl::BoundingSphere Rendering::VisualImpl::UpdateWorldBound(const Transform& worldTransform) const
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return modelBound.TransformBy(worldTransform);
+}
+
+const Rendering::VisualImpl::BoundingSphere& Rendering::VisualImpl::GetModelBound() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -86,11 +131,11 @@ Rendering::ConstIndexBufferSharedPtr Rendering::VisualImpl::GetConstIndexBuffer(
     return visualData.GetConstIndexBuffer();
 }
 
-void Rendering::VisualImpl::SetIndexBuffer(const IndexBufferSharedPtr& indexbuffer) noexcept
+void Rendering::VisualImpl::SetIndexBuffer(const IndexBufferSharedPtr& indexBuffer) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    visualData.SetIndexBuffer(indexbuffer);
+    visualData.SetIndexBuffer(indexBuffer);
 }
 
 Rendering::ConstVertexBufferSharedPtr Rendering::VisualImpl::GetConstVertexBuffer() const noexcept
@@ -100,11 +145,11 @@ Rendering::ConstVertexBufferSharedPtr Rendering::VisualImpl::GetConstVertexBuffe
     return visualData.GetConstVertexBuffer();
 }
 
-void Rendering::VisualImpl::SetVertexBuffer(const VertexBufferSharedPtr& vertexbuffer) noexcept
+void Rendering::VisualImpl::SetVertexBuffer(const VertexBufferSharedPtr& vertexBuffer) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    visualData.SetVertexBuffer(vertexbuffer);
+    visualData.SetVertexBuffer(vertexBuffer);
 }
 
 Rendering::VertexFormatSharedPtr Rendering::VisualImpl::GetVertexFormat() noexcept
@@ -114,60 +159,50 @@ Rendering::VertexFormatSharedPtr Rendering::VisualImpl::GetVertexFormat() noexce
     return visualData.GetVertexFormat();
 }
 
-void Rendering::VisualImpl::SetVertexFormat(const VertexFormatSharedPtr& vertexformat) noexcept
+void Rendering::VisualImpl::SetVertexFormat(const VertexFormatSharedPtr& vertexFormat) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    visualData.SetVertexFormat(vertexformat);
+    visualData.SetVertexFormat(vertexFormat);
 }
 
-Mathematics::BoundingSphereF Rendering::VisualImpl::GetWorldBound(const Mathematics::TransformF& worldTransform)
+void Rendering::VisualImpl::SetVisualEffect(const VisualEffectSharedPtr& aVisualEffect) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return modelBound.TransformBy(worldTransform);
+    visualEffect.object = aVisualEffect;
 }
 
-void Rendering::VisualImpl::UpdateModelBound()
+Rendering::ConstVisualEffectSharedPtr Rendering::VisualImpl::GetConstVisualEffect() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return visualEffect.object;
+}
+
+Rendering::VisualEffectSharedPtr Rendering::VisualImpl::GetVisualEffect() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    if (visualData.IsVertexSharedPtrValid())
-    {
-        DoUpdateModelBound();
-    }
+    return visualEffect.object;
 }
 
-void Rendering::VisualImpl::ComputeBounding(const std::vector<APoint>& positions)
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    modelBound.ComputeFromData(positions);
-}
-
-void Rendering::VisualImpl::DoUpdateModelBound()
-{
-    const auto numVertices = visualData.GetVertexBufferNumElements();
-    const auto stride = visualData.GetVertexFormatStride();
-    const auto data = visualData.GetVertexBufferReadOnlyData();
-
-    modelBound.ComputeFromData(numVertices, stride, data);
-}
-
-void Rendering::VisualImpl::Load(CoreTools::BufferSource& source)
+void Rendering::VisualImpl::Load(BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     visualData.Load(source);
     source.ReadAggregate(modelBound);
+    source.ReadObjectAssociated(visualEffect);
 }
 
-void Rendering::VisualImpl::Save(CoreTools::BufferTarget& target) const
+void Rendering::VisualImpl::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     visualData.Save(target);
     target.WriteAggregate(modelBound);
+    target.WriteObjectAssociated(visualEffect);
 }
 
 int Rendering::VisualImpl::GetStreamingSize() const noexcept
@@ -177,68 +212,222 @@ int Rendering::VisualImpl::GetStreamingSize() const noexcept
     auto size = visualData.GetStreamingSize();
 
     size += RENDERING_STREAM_SIZE(modelBound);
+    size += RENDERING_STREAM_SIZE(visualEffect);
 
     return size;
 }
 
-void Rendering::VisualImpl::Register(CoreTools::ObjectRegister& target) const
+void Rendering::VisualImpl::Register(ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     visualData.Register(target);
+    target.Register(visualEffect);
 }
 
-void Rendering::VisualImpl::Link(CoreTools::ObjectLink& source)
+void Rendering::VisualImpl::Link(ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     visualData.Link(source);
+    source.ResolveLink(visualEffect);
 }
 
 CoreTools::ObjectSharedPtr Rendering::VisualImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto object = visualData.GetObjectByName(name);
-    if (object != nullptr)
+    if (auto object = visualData.GetObjectByName(name);
+        !object->IsNullObject())
+    {
         return object;
+    }
 
-    return object;
+    else
+    {
+        return visualEffect->GetObjectByName(name);
+    }
 }
 
-std::vector<CoreTools::ObjectSharedPtr> Rendering::VisualImpl::GetAllObjectsByName(const std::string& name)
+Rendering::VisualImpl::ObjectSharedPtrContainer Rendering::VisualImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto visualDataObjects = visualData.GetAllObjectsByName(name);
+    const auto visualDataObjects = visualData.GetAllObjectsByName(name);
+    const auto visualEffectObjects = visualEffect->GetAllObjectsByName(name);
 
-    std::vector<CoreTools::ObjectSharedPtr> entirelyObjects{};
+    ObjectSharedPtrContainer entirelyObjects{};
 
     entirelyObjects.insert(entirelyObjects.end(), visualDataObjects.begin(), visualDataObjects.end());
+    entirelyObjects.insert(entirelyObjects.end(), visualEffectObjects.begin(), visualEffectObjects.end());
 
     return entirelyObjects;
 }
 
 CoreTools::ConstObjectSharedPtr Rendering::VisualImpl::GetConstObjectByName(const std::string& name) const
 {
-    RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto object = visualData.GetConstObjectByName(name);
-    if (object != nullptr)
+    if (auto object = visualData.GetConstObjectByName(name);
+        !object->IsNullObject())
+    {
         return object;
+    }
 
-    return object;
+    else
+    {
+        return visualEffect->GetConstObjectByName(name);
+    }
 }
 
-std::vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualImpl::GetAllConstObjectsByName(const std::string& name) const
+Rendering::VisualImpl::ConstObjectSharedPtrContainer Rendering::VisualImpl::GetAllConstObjectsByName(const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    const auto visualDataObjects = visualData.GetAllConstObjectsByName(name);
+    const auto visualEffectObjects = visualEffect->GetAllConstObjectsByName(name);
+
+    ConstObjectSharedPtrContainer entirelyObjects{};
+
+    entirelyObjects.insert(entirelyObjects.end(), visualDataObjects.begin(), visualDataObjects.end());
+    entirelyObjects.insert(entirelyObjects.end(), visualEffectObjects.begin(), visualEffectObjects.end());
+
+    return entirelyObjects;
+}
+
+void Rendering::VisualImpl::UpdateModelBound()
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto visualDataObjects = visualData.GetAllConstObjectsByName(name);
+    const VisualData::DataFormatTypeContainer required{ DataFormatType::R32G32B32Float, DataFormatType::R32G32B32A32Float };
 
-    std::vector<CoreTools::ConstObjectSharedPtr> entirelyObjects{};
+    const auto positions = visualData.GetConstChannel(VertexFormatFlags::Semantic::Position, 0, required);
 
-    entirelyObjects.insert(entirelyObjects.end(), visualDataObjects.begin(), visualDataObjects.end());
+    const auto vertexBuffer = visualData.GetConstVertexBuffer();
 
-    return entirelyObjects;
+    const auto numElements = vertexBuffer->GetNumElements();
+    const auto vertexSize = vertexBuffer->GetElementSize();
+
+    modelBound.ComputeFromData(numElements, vertexSize, positions);
+}
+
+void Rendering::VisualImpl::UpdateModelNormals()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    // 获取顶点位置。
+    const VisualData::DataFormatTypeContainer required{ DataFormatType::R32G32B32Float, DataFormatType::R32G32B32A32Float };
+
+    const auto positions = visualData.GetConstChannel(VertexFormatFlags::Semantic::Position, 0, required);
+
+    // 获取顶点法线。
+    const auto normals = visualData.GetChannel(VertexFormatFlags::Semantic::Normal, 0, required);
+
+    // 获取三角形基本体。
+    const auto primitiveType = visualData.GetPrimitiveType();
+    if ((primitiveType & IndexFormatType::HasTriangles) == IndexFormatType::Zero)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("没有为点或线段基本体定义法线向量。"))
+    }
+
+    const auto vertexBuffer = visualData.GetConstVertexBuffer();
+    const auto indexBuffer = visualData.GetIndexBuffer();
+
+    const auto numVertices = vertexBuffer->GetNumElements();
+    const auto stride = vertexBuffer->GetElementSize();
+
+    const auto dataSize = CoreTools::GetStreamSize<float>();
+    const auto difference = stride - dataSize * Vector3::pointSize;
+    if (difference < 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("步进值错误。"))
+    }
+
+    ClearNormals(normals, numVertices, difference);
+    SetNormals(positions, normals, primitiveType, *indexBuffer, stride);
+    NormalizeNormals(normals, numVertices, stride);
+}
+
+void Rendering::VisualImpl::ClearNormals(SpanIterator normals, const int numVertices, const int difference)
+{
+    for (auto i = 0; i < numVertices; ++i)
+    {
+        normals.Increase(0.0f);
+        normals.Increase(0.0f);
+        normals.Increase(0.0f);
+
+        if (0 < difference)
+        {
+            normals += difference;
+        }
+    }
+}
+
+void Rendering::VisualImpl::SetNormals(const ConstSpanIterator& positions, SpanIterator normals, IndexFormatType primitiveType, const IndexBuffer& indexBuffer, int stride)
+{
+    const auto numTriangles = indexBuffer.GetNumPrimitives();
+    const auto isIndexed = indexBuffer.IsIndexed();
+    for (auto i = 0; i < numTriangles; ++i)
+    {
+        // 获取三角形的顶点索引。
+        IndexBuffer::TriangleType triangle{};
+        if (isIndexed)
+        {
+            triangle = indexBuffer.GetTriangle(i);
+        }
+        else if (primitiveType == IndexFormatType::TriangleMesh)
+        {
+            triangle = { 3 * i, 3 * i + 1, 3 * i + 2 };
+        }
+        else  // primitiveType == TriStrip
+        {
+            const auto offset = i & 1;
+            triangle = { i + offset, i + 1 + offset, i + 2 - offset };
+        }
+
+        const auto index0 = std::get<0>(triangle) * stride;
+        const auto index1 = std::get<1>(triangle) * stride;
+        const auto index2 = std::get<2>(triangle) * stride;
+
+        // 获取顶点位置。
+        const Vector3 position0{ positions.GetValue<float, Vector3::pointSize>(index0) };
+        const Vector3 position1{ positions.GetValue<float, Vector3::pointSize>(index1) };
+        const Vector3 position2{ positions.GetValue<float, Vector3::pointSize>(index2) };
+
+        // 计算三角形法线。此法线的长度用于法线的加权和。
+        const auto edge1 = position1 - position0;
+        const auto edge2 = position2 - position0;
+        const auto normal = Mathematics::Vector3ToolsF::CrossProduct(edge1, edge2);
+
+        // 将三角形法线与顶点的法线和相加。
+        Vector3 normal0{ normals.GetValue<float, Vector3::pointSize>(index0) };
+        Vector3 normal1{ normals.GetValue<float, Vector3::pointSize>(index1) };
+        Vector3 normal2{ normals.GetValue<float, Vector3::pointSize>(index2) };
+
+        normal0 += normal;
+        normal1 += normal;
+        normal2 += normal;
+
+        normals.SetValue<float, Vector3::pointSize>(index0, normal0.GetCoordinate());
+        normals.SetValue<float, Vector3::pointSize>(index1, normal1.GetCoordinate());
+        normals.SetValue<float, Vector3::pointSize>(index2, normal2.GetCoordinate());
+    }
+}
+
+void Rendering::VisualImpl::NormalizeNormals(SpanIterator normals, int numVertices, int stride)
+{
+    // 顶点法线必须是单位长度向量。
+    for (auto i = 0; i < numVertices; ++i)
+    {
+        const auto index = i * stride;
+
+        Vector3 normal{ normals.GetValue<float, Vector3::pointSize>(index) };
+
+        if (!normal.IsZero())
+        {
+            normal.Normalize();
+        }
+
+        normals.SetValue<float, Vector3::pointSize>(index, normal.GetCoordinate());
+    }
 }

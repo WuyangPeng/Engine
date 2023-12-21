@@ -17,6 +17,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Flags/VisualFlags.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, TrianglesMesh);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TrianglesMesh);
@@ -45,7 +46,7 @@ Rendering::TriangleIndex
     if (0 <= index && index < GetNumTriangles())
     {
         const auto value = 3 * index;
-        auto indices = (GetConstIndexBuffer()->GetData(value));
+        auto indices = (GetConstIndexBuffer()->GetStorage(value));
         const auto firstIndex = *indices;
         ++indices;
         const auto secondIndex = *indices;

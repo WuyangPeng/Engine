@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.0 (2023/11/19 00:20)
+/// 版本：1.0.0.2 (2023/12/17 19:45)
 
 #ifndef FIGHTING_SERVER_FIGHTING_SERVER_MESSAGE_H
 #define FIGHTING_SERVER_FIGHTING_SERVER_MESSAGE_H
@@ -48,7 +48,7 @@ namespace FightingServer
                                                                   FightingServerMiddleLayer::GUIManager>;
     using MessageType = Framework::WindowMessage<MiddleLayerType>;
 
-    class FightingServerMessage : public MessageType
+    class FightingServerMessage final : public MessageType
     {
     public:
         using ClassType = FightingServerMessage;

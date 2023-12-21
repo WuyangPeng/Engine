@@ -125,8 +125,8 @@ void Framework::ObjectMotionRotateTrackBall::Calculate()
     // 计算出新的局部旋转。如果对象是场景的根,
     // 新的旋转是轨迹球应用在对象被旧局部旋转的增量旋转。
     // 如果对象不是场景的根,你要转换的增量式旋转要在改变父坐标空间的基础上。
-    if (const auto* parent = motionObject->GetParent();
-        parent != nullptr)
+    if (const auto parent = motionObject->GetParent();
+        !parent->IsNullObject())
     {
         const auto parWorRotate = parent->GetWorldTransform().GetRotate();
         localRotate = TransposeTimes(parWorRotate, trackRotate) * parWorRotate * saveRotate;

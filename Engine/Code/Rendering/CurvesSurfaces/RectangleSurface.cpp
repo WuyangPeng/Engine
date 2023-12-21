@@ -18,6 +18,7 @@
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/CurvesSurfacesVolumes/ParametricSurfaceDetail.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
+#include "Rendering/SceneGraph/Flags/VisualFlags.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, RectangleSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, RectangleSurface);
@@ -44,17 +45,17 @@ Rendering::RectangleSurface::RectangleSurface(const std::shared_ptr<Mathematics:
     const auto vMin = surface->GetVMin();
     const auto vRange = surface->GetVMax() - vMin;
 
-    const auto vstride = vformat->GetStride();
-    SetVertexBuffer(VertexBuffer::Create(*vformat, vstride));
+    const auto vstride = vformat->GetVertexSize();
+    SetVertexBuffer(VertexBuffer::Create("VertexBuffer", *vformat, vstride));
 
     MAYBE_UNUSED auto tuDelta = (tcoordMax[0] - tcoordMin[0]) / uRange;
     MAYBE_UNUSED auto tvDelta = (tcoordMax[1] - tcoordMin[1]) / vRange;
 
     const auto numTriangles = 2 * (numUSamples - 1) * (numVSamples - 1);
     const auto numIndices = 3 * numTriangles;
-    SetIndexBuffer(IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, sizeof(int)));
+    SetIndexBuffer(IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, numIndices, sizeof(int)));
 
-    auto indices = GetIndexBuffer()->GetData();
+    auto indices = GetIndexBuffer()->GetStorage();
     for (auto uIndex = 0, i = 0; uIndex < numUSamples - 1; ++uIndex)
     {
         auto i0 = i;

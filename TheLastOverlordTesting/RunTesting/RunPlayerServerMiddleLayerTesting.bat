@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %TheLastOverlordTestingWin32DebugLib% PlayerServerMiddleLayerTestingD.exe
+start /d %TheLastOverlordTestingWin32ReleaseLib% PlayerServerMiddleLayerTesting.exe
+start /d %TheLastOverlordTestingX64DebugLib% PlayerServerMiddleLayerTestingD.exe
+start /d %TheLastOverlordTestingX64ReleaseLib% PlayerServerMiddleLayerTesting.exe
+start /d %TheLastOverlordTestingStaticWin32DebugLib% PlayerServerMiddleLayerTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticWin32ReleaseLib% PlayerServerMiddleLayerTestingStatic.exe
+start /d %TheLastOverlordTestingStaticX64DebugLib% PlayerServerMiddleLayerTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticX64ReleaseLib% PlayerServerMiddleLayerTestingStatic.exe
+
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32DebugLib% PlayerServerMiddleLayerTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32ReleaseLib% PlayerServerMiddleLayerTestingStatic.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64DebugLib% PlayerServerMiddleLayerTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64ReleaseLib% PlayerServerMiddleLayerTestingStatic.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32DebugLib% PlayerServerMiddleLayerTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32ReleaseLib% PlayerServerMiddleLayerTesting.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64DebugLib% PlayerServerMiddleLayerTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64ReleaseLib% PlayerServerMiddleLayerTesting.exe
+
+pause

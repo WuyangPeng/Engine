@@ -54,7 +54,7 @@ void Rendering::DepthStencilStateTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CloneObjectTest<DepthStencilState>);
     ASSERT_NOT_THROW_EXCEPTION_0(NameTest<DepthStencilState>);
     ASSERT_NOT_THROW_EXCEPTION_0(IsNullObjectTest<DepthStencilState>);
-    ASSERT_NOT_THROW_EXCEPTION_0(UniqueIDTest<DepthStencilState>);
+    ASSERT_NOT_THROW_EXCEPTION_0(UniqueIdTest<DepthStencilState>);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DepthStencilStateTest);
 }

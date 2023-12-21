@@ -21,7 +21,7 @@
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/Controllers/IKJoint.h"
-#include "Rendering/RenderingTesting/SceneGraphSuite/SpatialTest.h"
+#include "Rendering/RenderingTesting/SceneGraphSuite/Detail/SpatialTest.h"
 
 Rendering::IKJointTesting::IKJointTesting(const OStreamShared& stream)
     : ParentType{ stream }

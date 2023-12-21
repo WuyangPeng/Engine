@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:08)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/20 09:54)
 
 #ifndef RENDERING_SCENE_GRAPH_VISUAL_DATA_H
 #define RENDERING_SCENE_GRAPH_VISUAL_DATA_H
@@ -14,10 +14,10 @@
 
 #include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
+#include "Rendering/LocalEffects/VisualEffect.h"
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 #include "Rendering/Resources/Buffers/VertexFormat.h"
-#include "Rendering/SceneGraph/Flags/VisualFlags.h"
 
 #include <string>
 #include <vector>
@@ -28,42 +28,54 @@ namespace Rendering
     {
     public:
         using ClassType = VisualData;
+
+        using Object = CoreTools::Object;
         using BufferSource = CoreTools::BufferSource;
         using BufferTarget = CoreTools::BufferTarget;
         using ObjectRegister = CoreTools::ObjectRegister;
         using ObjectLink = CoreTools::ObjectLink;
-        using Object = CoreTools::Object;
-        using SpanIterator = CoreTools::SpanIterator<std::vector<char>::const_iterator>;
+
+        using Container = std::vector<char>;
+        using ContainerConstIter = Container::const_iterator;
+        using ConstSpanIterator = CoreTools::SpanIterator<ContainerConstIter>;
+        using ContainerIter = Container::iterator;
+        using SpanIterator = CoreTools::SpanIterator<ContainerIter>;
+
+        using Semantic = VertexFormatFlags::Semantic;
+        using DataFormatTypeContainer = std::set<DataFormatType>;
 
     public:
-        explicit VisualData(VisualPrimitiveType type = VisualPrimitiveType::None) noexcept;
-        VisualData(VisualPrimitiveType type,
-                   const VertexFormatSharedPtr& vertexformat,
-                   const VertexBufferSharedPtr& vertexbuffer,
-                   const IndexBufferSharedPtr& indexbuffer) noexcept;
+        VisualData() noexcept;
+        VisualData(const VertexFormatSharedPtr& vertexFormat,
+                   const VertexBufferSharedPtr& vertexBuffer,
+                   const IndexBufferSharedPtr& indexBuffer) noexcept;
+        ~VisualData() noexcept = default;
+        VisualData(const VisualData& rhs);
+        VisualData& operator=(const VisualData& rhs);
+        VisualData(VisualData&& rhs) noexcept;
+        VisualData& operator=(VisualData&& rhs) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        void SetPrimitiveType(VisualPrimitiveType type) noexcept;
-        NODISCARD VisualPrimitiveType GetPrimitiveType() const noexcept;
+        NODISCARD IndexFormatType GetPrimitiveType() const;
 
-        void SetVertexFormat(const VertexFormatSharedPtr& vertexformat) noexcept;
+        void SetVertexFormat(const VertexFormatSharedPtr& aVertexFormat) noexcept;
         NODISCARD ConstVertexFormatSharedPtr GetConstVertexFormat() const noexcept;
         NODISCARD VertexFormatSharedPtr GetVertexFormat() noexcept;
 
-        void SetVertexBuffer(const VertexBufferSharedPtr& vertexbuffer) noexcept;
+        void SetVertexBuffer(const VertexBufferSharedPtr& aVertexBuffer) noexcept;
         NODISCARD ConstVertexBufferSharedPtr GetConstVertexBuffer() const noexcept;
         NODISCARD VertexBufferSharedPtr GetVertexBuffer() noexcept;
 
-        void SetIndexBuffer(const IndexBufferSharedPtr& indexbuffer) noexcept;
+        void SetIndexBuffer(const IndexBufferSharedPtr& aIndexBuffer) noexcept;
         NODISCARD ConstIndexBufferSharedPtr GetConstIndexBuffer() const noexcept;
         NODISCARD IndexBufferSharedPtr GetIndexBuffer() noexcept;
 
-        void Load(CoreTools::BufferSource& source);
-        void Save(CoreTools::BufferTarget& target) const;
+        void Load(BufferSource& source);
+        void Save(BufferTarget& target) const;
         NODISCARD int GetStreamingSize() const noexcept;
-        void Register(CoreTools::ObjectRegister& target) const;
-        void Link(CoreTools::ObjectLink& source);
+        void Register(ObjectRegister& target) const;
+        void Link(ObjectLink& source);
 
         CORE_TOOLS_NAMES_IMPL_DECLARE;
 
@@ -71,13 +83,20 @@ namespace Rendering
         NODISCARD int GetVertexBufferNumElements() const noexcept;
         NODISCARD int GetVertexFormatStride() const noexcept;
         NODISCARD int GetPositionOffset() const;
-        NODISCARD SpanIterator GetVertexBufferReadOnlyData() const noexcept;
+        NODISCARD ConstSpanIterator GetVertexBufferReadOnlyData() const noexcept;
+
+        NODISCARD SpanIterator GetChannel(Semantic semantic, int unit, const DataFormatTypeContainer& requiredTypes);
+        NODISCARD ConstSpanIterator GetConstChannel(Semantic semantic, int unit, const DataFormatTypeContainer& requiredTypes) const;
 
     private:
-        VisualPrimitiveType visualPrimitiveType;
-        CoreTools::ObjectAssociated<VertexFormat> vertexFormat;
-        CoreTools::ObjectAssociated<VertexBuffer> vertexBuffer;
-        CoreTools::ObjectAssociated<IndexBuffer> indexBuffer;
+        using VertexFormatObjectAssociated = CoreTools::ObjectAssociated<VertexFormat>;
+        using VertexBufferObjectAssociated = CoreTools::ObjectAssociated<VertexBuffer>;
+        using IndexBufferObjectAssociated = CoreTools::ObjectAssociated<IndexBuffer>;
+
+    private:
+        VertexFormatObjectAssociated vertexFormat;
+        VertexBufferObjectAssociated vertexBuffer;
+        IndexBufferObjectAssociated indexBuffer;
     };
 }
 

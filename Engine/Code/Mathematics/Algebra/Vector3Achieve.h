@@ -19,6 +19,13 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
+template <typename Real>
+requires std::is_arithmetic_v<Real> Mathematics::Vector3<Real>::Vector3(const ArrayType& coordinate)
+    : x{ coordinate.at(0) }, y{ coordinate.at(1) }, z{ coordinate.at(2) }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>

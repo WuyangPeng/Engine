@@ -29,7 +29,7 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ConstantBuffer);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ConstantBuffer);
 
 Rendering::ConstantBuffer::ConstantBuffer(int numBytes, bool allowDynamicUpdate)
-    : ParentType{ 1, GetRoundedNumBytes(numBytes), GraphicsObjectType::ConstantBuffer }, impl{ MemberLayoutContainer{} }
+    : ParentType{ "ConstantBuffer", 1, GetRoundedNumBytes(numBytes), GraphicsObjectType::ConstantBuffer }, impl{ MemberLayoutContainer{} }
 {
     SetUsage(allowDynamicUpdate ? UsageType::DynamicUpdate : UsageType::Immutable);
 
@@ -37,7 +37,7 @@ Rendering::ConstantBuffer::ConstantBuffer(int numBytes, bool allowDynamicUpdate)
 }
 
 Rendering::ConstantBuffer::ConstantBuffer(int numBytes, bool allowDynamicUpdate, const MemberLayoutContainer& memberLayoutContainer)
-    : ParentType{ 1, GetRoundedNumBytes(numBytes), GraphicsObjectType::ConstantBuffer }, impl{ memberLayoutContainer }
+    : ParentType{ "ConstantBuffer", 1, GetRoundedNumBytes(numBytes), GraphicsObjectType::ConstantBuffer }, impl{ memberLayoutContainer }
 {
     SetUsage(allowDynamicUpdate ? UsageType::DynamicUpdate : UsageType::Immutable);
 

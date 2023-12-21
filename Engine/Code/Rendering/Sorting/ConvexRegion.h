@@ -48,7 +48,7 @@ namespace Rendering
         bool visited;
 
     public:
-        void GetVisibleSet(Culler& culler, bool noCull) override;
+        void GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull) override;
     };
 
     CORE_TOOLS_SHARED_PTR_DECLARE(ConvexRegion);

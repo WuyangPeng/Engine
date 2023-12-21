@@ -14,12 +14,13 @@
 #include "CoreTools/Base/SpanIteratorDetail.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Meshes/EdgeKey.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
+#include "Rendering/SceneGraph/Flags/VisualFlags.h"
 
 #include <set>
 
@@ -97,9 +98,9 @@ void Rendering::SurfaceMesh::SetLevel(int aLevel)
     numFullVertices = numTotalVertices;
 
     const auto numTotalIndices = 3 * numTotalTriangles;
-    SetIndexBuffer(IndexBuffer::Create(IndexFormatType::PolyPoint, numTotalIndices, sizeof(int)));
+    SetIndexBuffer(IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, numTotalIndices, sizeof(int)));
 
-    auto indices = GetIndexBuffer()->GetData();
+    auto indices = GetIndexBuffer()->GetStorage();
     for (auto i = 0; i < numTotalTriangles; ++i)
     {
         auto& tri = triangles.at(i);
@@ -129,7 +130,7 @@ std::vector<Rendering::SurfaceMesh::Triangle> Rendering::SurfaceMesh::Allocate(i
     const auto numOrigIndices = origIBuffer->GetNumElements();
     auto numOrigTriangles = numOrigIndices / 3;
 
-    auto indices = origIBuffer->GetData();
+    auto indices = origIBuffer->GetStorage();
     std::set<Mathematics::EdgeKey> eKeys{};
 
     for (auto i = 0; i < numOrigTriangles; ++i)
@@ -155,8 +156,8 @@ std::vector<Rendering::SurfaceMesh::Triangle> Rendering::SurfaceMesh::Allocate(i
         numTotalTriangles = 4 * numTotalTriangles;
     }
 
-    const auto vstride = GetVertexFormat()->GetStride();
-    SetVertexBuffer(VertexBuffer::Create(*GetVertexFormat(), vstride));
+    const auto vstride = GetVertexFormat()->GetVertexSize();
+    SetVertexBuffer(VertexBuffer::Create("VertexBuffer", *GetVertexFormat(), vstride));
     std::vector<Triangle> triangles(numTotalTriangles);
     if (allowDynamicChange)
     {
@@ -164,8 +165,8 @@ std::vector<Rendering::SurfaceMesh::Triangle> Rendering::SurfaceMesh::Allocate(i
         InitializeSurfaceInfo();
     }
 
-    auto origData = origVBuffer->GetData();
-    auto fullData = GetVertexBuffer()->GetData();
+    auto origData = origVBuffer->GetStorage();
+    auto fullData = GetVertexBuffer()->GetStorage();
     const auto numOrigBytes = origVBuffer->GetNumBytes();
 
     for (int i = 0; i < numOrigBytes; ++i)
@@ -174,7 +175,7 @@ std::vector<Rendering::SurfaceMesh::Triangle> Rendering::SurfaceMesh::Allocate(i
     }
 
     auto origParam = origParams->GetData();
-    indices = origIBuffer->GetData();
+    indices = origIBuffer->GetStorage();
     for (auto i = 0; i < numOrigTriangles; ++i)
     {
         auto& tri = triangles.at(i);
@@ -371,7 +372,7 @@ void Rendering::SurfaceMesh::InitializeSurfaceInfo()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    auto indices = origIBuffer->GetData();
+    auto indices = origIBuffer->GetStorage();
     const auto* params = origParams->GetData();
     for (auto i = 0; i < numPatches; ++i)
     {

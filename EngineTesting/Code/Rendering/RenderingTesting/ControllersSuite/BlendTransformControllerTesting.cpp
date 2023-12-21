@@ -22,7 +22,7 @@
 #include "Mathematics/Algebra/Transform.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/Controllers/BlendTransformController.h"
-#include "Rendering/RenderingTesting/SceneGraphSuite/SpatialTest.h"
+#include "Rendering/RenderingTesting/SceneGraphSuite/Detail/SpatialTest.h"
 
 Rendering::BlendTransformControllerTesting::BlendTransformControllerTesting(const OStreamShared& stream)
     : ParentType{ stream }

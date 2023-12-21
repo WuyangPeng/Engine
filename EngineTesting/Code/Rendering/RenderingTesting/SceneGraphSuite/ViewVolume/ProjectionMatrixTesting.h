@@ -10,19 +10,19 @@
 #ifndef RENDERING_SCENE_GRAPH_SUITE_PROJECTION_MATRIX_TESTING_H
 #define RENDERING_SCENE_GRAPH_SUITE_PROJECTION_MATRIX_TESTING_H
 
-#include "ViewVolumeTestingBase.h"
 #include "Rendering/RenderingTesting/SceneGraphSuite/Detail/ViewVolumeTool.h"
+#include "Rendering/RenderingTesting/SceneGraphSuite/SceneGraphTestingBase.h"
 #include "Rendering/SceneGraph/SceneGraphFwd.h"
 
 #include <gsl/pointers>
 
 namespace Rendering
 {
-    class ProjectionMatrixTesting final : public ViewVolumeTestingBase
+    class ProjectionMatrixTesting final : public SceneGraphTestingBase
     {
     public:
         using ClassType = ProjectionMatrixTesting;
-        using ParentType = ViewVolumeTestingBase;
+        using ParentType = SceneGraphTestingBase;
 
     public:
         explicit ProjectionMatrixTesting(const OStreamShared& stream);

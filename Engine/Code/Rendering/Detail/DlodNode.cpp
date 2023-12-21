@@ -63,11 +63,11 @@ void Rendering::DlodNode::SetModelDistance(int index, float minDistance, float m
     return impl->SetModelDistance(index, minDistance, maxDistance);
 }
 
-void Rendering::DlodNode::GetVisibleSet(Culler& culler, bool noCull)
+void Rendering::DlodNode::GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull)
 {
     SelectLevelOfDetail(*culler.GetCamera());
 
-    ParentType::GetVisibleSet(culler, noCull);
+    ParentType::GetVisibleSet(culler, camera, noCull);
 }
 
 void Rendering::DlodNode::SelectLevelOfDetail(const Camera& camera)

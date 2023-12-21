@@ -10,9 +10,11 @@ MessageClientTesting：代码分析（所有规则），平台（Windows）
 BackgroundClientTesting：代码分析（所有规则），平台（Windows）
 GatewayServerTesting：代码分析（所有规则），平台（Windows）
 LoginServerTesting：代码分析（所有规则），平台（Windows）
+PlayerServerTesting：代码分析（所有规则），平台（Windows）
 GameServerTesting：代码分析（所有规则），平台（Windows）
 FightingServerTesting：代码分析（所有规则），平台（Windows）
 WorldServerTesting：代码分析（所有规则），平台（Windows）
+CrossServerTesting：代码分析（所有规则），平台（Windows）
 OfflineServerTesting：代码分析（所有规则），平台（Windows）
 LeaderboardServerTesting：代码分析（所有规则），平台（Windows）
 MailServerTesting：代码分析（所有规则），平台（Windows）

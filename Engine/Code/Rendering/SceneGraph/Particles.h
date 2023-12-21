@@ -65,7 +65,7 @@ namespace Rendering
 
         NODISCARD ControllerSharedPtr Clone() const override;
 
-        void GetVisibleSet(Culler& culler, bool noCull) override;
+        void GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull) override;
 
     private:
         void InitIndexBuffer(int indexSize);

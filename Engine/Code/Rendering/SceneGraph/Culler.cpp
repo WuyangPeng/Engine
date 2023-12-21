@@ -55,7 +55,7 @@ void Rendering::Culler::ComputeVisibleSet(SpatialSharedPtr scene)
 
     SetFrustum(impl->GetCamera()->GetFrustum());
     impl->Clear();
-    scene->OnGetVisibleSet(*this, false);
+    scene->OnGetVisibleSet(*this, Camera::Create(false, DepthType::ZeroToOne, 0.0f), false);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Culler, GetNumVisible, int)

@@ -40,6 +40,14 @@ namespace CoreTools
         {
         }
 
+        NODISCARD ConstObjectSharedPtr Clone() const
+        {
+            if (object != nullptr)
+                return object->Clone();
+            else
+                return object;
+        }
+
         ConstObjectSharedPtr object;
         int64_t associated;
     };

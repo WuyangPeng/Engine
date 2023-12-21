@@ -10,9 +10,11 @@ MessageClient：代码分析（所有规则），平台（Windows）
 BackgroundClient：代码分析（所有规则），平台（Windows）
 GatewayServer：代码分析（所有规则），平台（Windows）
 LoginServer：代码分析（所有规则），平台（Windows）
+PlayerServer：代码分析（所有规则），平台（Windows）
 GameServer：代码分析（所有规则），平台（Windows）
 FightingServer：代码分析（所有规则），平台（Windows）
 WorldServer：代码分析（所有规则），平台（Windows）
+CrossServer：代码分析（所有规则），平台（Windows）
 OfflineServer：代码分析（所有规则），平台（Windows）
 LeaderboardServer：代码分析（所有规则），平台（Windows）
 MailServer：代码分析（所有规则），平台（Windows）

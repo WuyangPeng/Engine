@@ -11,15 +11,15 @@
 #define RENDERING_SCENE_GRAPH_SUITE_PICK_LINE_TESTING_H
 
 #include "Rendering/RenderingTesting/SceneGraphSuite/Detail/ViewVolumeTool.h"
-#include "Rendering/RenderingTesting/SceneGraphSuite/ViewVolume/ViewVolumeTestingBase.h"
+#include "Rendering/RenderingTesting/SceneGraphSuite/SceneGraphTestingBase.h"
 
 namespace Rendering
 {
-    class PickLineTesting final : public ViewVolumeTestingBase
+    class PickLineTesting final : public SceneGraphTestingBase
     {
     public:
         using ClassType = PickLineTesting;
-        using ParentType = ViewVolumeTestingBase;
+        using ParentType = SceneGraphTestingBase;
 
     public:
         explicit PickLineTesting(const OStreamShared& stream);

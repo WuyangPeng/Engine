@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/11/25 20:42)
+/// 版本：1.0.0.2 (2023/12/19 23:52)
 
 #ifndef MILLENNIUM_HISTORY_VERSION_H
 #define MILLENNIUM_HISTORY_VERSION_H
@@ -15,6 +15,6 @@
 //  gMillenniumHistoryVersion / 10000 % 100 是次版本号
 //  gMillenniumHistoryVersion / 1000000 % 100 是主版本号
 
-constexpr auto gMillenniumHistoryVersion = 1000001;
+constexpr auto gMillenniumHistoryVersion = 1000002;
 
 #endif  // MILLENNIUM_HISTORY_VERSION_H

@@ -110,7 +110,7 @@ const int* Rendering::ClodMeshTriangleMesh::GetIndexBufferReadOnlyData() const
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-    return reinterpret_cast<const int*>(*indixBuffer->GetData());
+    return reinterpret_cast<const int*>(*indixBuffer->GetStorage());
 
 #include SYSTEM_WARNING_POP
 }
@@ -133,7 +133,7 @@ const char* Rendering::ClodMeshTriangleMesh::GetVertexBufferReadOnlyData() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return &*vertexBufferAccessor.GetData();
+    return &*vertexBufferAccessor.GetStorage();
 }
 
 int Rendering::ClodMeshTriangleMesh::GetStride() const noexcept
@@ -147,12 +147,12 @@ void Rendering::ClodMeshTriangleMesh::SetNewVertexBufferData(const std::vector<c
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    vertexBuffer->SetNewData(newData);
+    vertexBuffer->SetStorage(newData);
 }
 
 void Rendering::ClodMeshTriangleMesh::SetNewIndexBufferData(const std::vector<char>& newData)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    indixBuffer->SetNewData(newData);
+    indixBuffer->SetStorage(newData);
 }

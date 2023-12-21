@@ -8,7 +8,7 @@
 ///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.9.0.12 (2023/06/12 15:34)
 
 #include "PolysegmentTesting.h"
-#include "VisualTest.h"
+#include "Detail/VisualTest.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"

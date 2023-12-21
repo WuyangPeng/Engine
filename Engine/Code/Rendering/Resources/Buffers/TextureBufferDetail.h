@@ -24,7 +24,7 @@ void Rendering::TextureBuffer::SetMember(const std::string& name, const T& value
 
     CheckMember(layout);
 
-    auto target = GetData(layout.GetOffset());
+    auto target = GetStorage(layout.GetOffset());
 
     target.Increase<T>(value);
 }
@@ -38,7 +38,7 @@ T Rendering::TextureBuffer::GetMember(const std::string& name) const
 
     CheckMember(layout);
 
-    auto target = GetData(layout.GetOffset());
+    auto target = GetStorage(layout.GetOffset());
 
     return target.Increase<T>();
 }
@@ -52,7 +52,7 @@ void Rendering::TextureBuffer::SetMember(const std::string& name, int index, con
 
     CheckMember(index, layout);
 
-    auto target = GetData(layout.GetOffset() + index * sizeof(T));
+    auto target = GetStorage(layout.GetOffset() + index * sizeof(T));
 
     target.Increase<T>(value);
 }
@@ -66,7 +66,7 @@ T Rendering::TextureBuffer::GetMember(const std::string& name, int index) const
 
     CheckMember(index, layout);
 
-    auto target = GetData(layout.GetOffset() + index * sizeof(T));
+    auto target = GetStorage(layout.GetOffset() + index * sizeof(T));
 
     return target.Increase<T>();
 }

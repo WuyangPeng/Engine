@@ -65,7 +65,7 @@ void Rendering::AmbientLightEffect::UpdateMaterialConstant()
 
     const auto materialConstant = GetMaterialConstant();
 
-    auto data = materialConstant->GetData();
+    auto data = materialConstant->GetStorage();
 
     const auto emissive = material->GetEmissive();
     data.Increase<float>(emissive.GetRed());
@@ -90,7 +90,7 @@ void Rendering::AmbientLightEffect::UpdateLightingConstant()
 
     const auto lightingConstant = GetLightingConstant();
 
-    auto data = lightingConstant->GetData();
+    auto data = lightingConstant->GetStorage();
 
     const auto emissive = lighting->GetAmbient();
     data.Increase<float>(emissive.GetRed());

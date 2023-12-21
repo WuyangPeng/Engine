@@ -5,9 +5,9 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.0 (2023/11/18 17:09)
+/// 版本：1.0.0.2 (2023/12/17 19:26)
 
-#include "GameMasterServer//GameMasterServerCore/Helper/GameMasterServerCoreClassInvariantMacro.h"
+#include "GameMasterServer/GameMasterServerCore/Helper/GameMasterServerCoreClassInvariantMacro.h"
 #include "GameMasterServer/GameMasterServerMiddleLayer/Input/InputManagerDetail.h"
 #include "GameMasterServerMessage.h"
 #include "Framework/MiddleLayer/EngineMiddleLayerContainerDetail.h"

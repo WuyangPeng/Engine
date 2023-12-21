@@ -226,6 +226,43 @@ T& CoreTools::SpanIterator<Iter>::ReinterpretCast()
 
 template <typename Iter>
 template <typename T>
+const T& CoreTools::SpanIterator<Iter>::ReinterpretCast(int step) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    static_assert(std::is_arithmetic_v<ValueType>, "ValueType must be arithmetic.");
+    static_assert(std::is_arithmetic_v<T>, "T must be arithmetic.");
+
+    if (step * sizeof(ValueType) < sizeof(T))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("迭代器长度不足"s))
+    }
+
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26473)
+#include SYSTEM_WARNING_DISABLE(26490)
+
+    return reinterpret_cast<const T&>(*(current + step * sizeof(ValueType)));
+
+#include SYSTEM_WARNING_POP
+}
+
+template <typename Iter>
+template <typename T>
+T& CoreTools::SpanIterator<Iter>::ReinterpretCast(int step)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26492)
+
+    return const_cast<T&>(static_cast<const ClassType&>(*this).ReinterpretCast<T>(step));
+
+#include SYSTEM_WARNING_POP
+}
+
+template <typename Iter>
+template <typename T>
 T CoreTools::SpanIterator<Iter>::Increase()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
@@ -248,6 +285,78 @@ void CoreTools::SpanIterator<Iter>::Increase(T value)
     result = value;
 
     *this += sizeof(T);
+}
+
+template <typename Iter>
+template <typename T>
+T CoreTools::SpanIterator<Iter>::GetValue(int step) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return ReinterpretCast<T>(step);
+}
+
+template <typename Iter>
+template <typename T, int Size>
+NODISCARD std::array<T, Size> CoreTools::SpanIterator<Iter>::GetValue(int step) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    constexpr auto proportion = sizeof(T) / sizeof(ValueType);
+
+    const auto* endPosition = &ReinterpretCast<T>(step + Size * proportion);
+
+    std::array<T, Size> result{};
+
+    auto index = Size;
+    for (auto& element : result)
+    {
+#include SYSTEM_WARNING_PUSH
+
+#include SYSTEM_WARNING_DISABLE(26481)
+
+        element = *(endPosition - index * proportion);
+
+#include SYSTEM_WARNING_POP
+
+        --index;
+    }
+
+    return result;
+}
+
+template <typename Iter>
+template <typename T>
+void CoreTools::SpanIterator<Iter>::SetValue(int step, T value)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    auto& result = ReinterpretCast<T>(step);
+
+    result = value;
+}
+
+template <typename Iter>
+template <typename T, int Size>
+void CoreTools::SpanIterator<Iter>::SetValue(int step, const std::array<T, Size>& value)
+{
+    constexpr auto proportion = sizeof(T) / sizeof(ValueType);
+
+    auto* endPosition = &ReinterpretCast<T>(step + proportion);
+
+    auto index = Size;
+    for (const auto& element : value)
+    {
+#include SYSTEM_WARNING_PUSH
+
+#include SYSTEM_WARNING_DISABLE(26481)
+
+        *(endPosition - index * proportion) = element;
+
+#include SYSTEM_WARNING_POP
+
+        --index;
+    }
 }
 
 template <typename Iter>

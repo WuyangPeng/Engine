@@ -18,10 +18,10 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
+#include "Mathematics/Algebra/Transform.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/Controllers/TransformController.h"
-#include "Mathematics/Algebra/Transform.h"
-#include "Rendering/RenderingTesting/SceneGraphSuite/SpatialTest.h"
+#include "Rendering/RenderingTesting/SceneGraphSuite/Detail/SpatialTest.h"
 
 Rendering::TransformControllerTesting::TransformControllerTesting(const OStreamShared& stream)
     : ParentType{ stream }

@@ -18,10 +18,10 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
+#include "Mathematics/Algebra/Transform.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/Controllers/SkinController.h"
-#include "Mathematics/Algebra/Transform.h"
-#include "Rendering/RenderingTesting/SceneGraphSuite/VisualTest.h"
+#include "Rendering/RenderingTesting/SceneGraphSuite/Detail/VisualTest.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
 
 Rendering::SkinControllerTesting::SkinControllerTesting(const OStreamShared& stream)
@@ -40,8 +40,6 @@ void Rendering::SkinControllerTesting::DoRunUnitTest()
 void Rendering::SkinControllerTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
-
-   
 
     CoreTools::InitTerm::ExecuteTerminator();
 }

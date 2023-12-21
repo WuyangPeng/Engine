@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 17:12)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/12 13:15)
 
 #include "Rendering/RenderingExport.h"
 
@@ -27,12 +27,13 @@ Rendering::ResourceImpl::ResourceImpl() noexcept
       copy{ CopyType::None },
       offset{ 0 },
       numActiveElements{ 0 },
-      storage{}
+      storage{},
+      createStorage{ false }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ResourceImpl::ResourceImpl(int numElements, int elementSize)
+Rendering::ResourceImpl::ResourceImpl(int numElements, int elementSize, bool createStorage)
     : numElements{ 0 < numElements ? numElements : 0 },
       elementSize{ 0 < elementSize ? elementSize : 0 },
       numBytes{ (0 < numElements && 0 < elementSize) ? (numElements * elementSize) : 0 },
@@ -40,7 +41,8 @@ Rendering::ResourceImpl::ResourceImpl(int numElements, int elementSize)
       copy{ CopyType::None },
       offset{ 0 },
       numActiveElements{ 0 < numElements ? numElements : 0 },
-      storage(numBytes)
+      storage((0 < numElements && 0 < elementSize && createStorage) ? numBytes : 0),
+      createStorage{ createStorage }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -53,7 +55,8 @@ Rendering::ResourceImpl::ResourceImpl(int numElements, int elementSize, const St
       copy{ CopyType::None },
       offset{ 0 },
       numActiveElements{ 0 < numElements ? numElements : 0 },
-      storage{ storage }
+      storage{ storage },
+      createStorage{ true }
 {
     if (boost::numeric_cast<int>(storage.size()) != numBytes)
     {
@@ -71,7 +74,8 @@ bool Rendering::ResourceImpl::IsValid() const noexcept
         0 <= elementSize &&
         (numBytes == numElements * elementSize) &&
         0 <= offset &&
-        gsl::narrow_cast<int>(storage.size()) == numBytes)
+        (!createStorage ||
+         gsl::narrow_cast<int>(storage.size()) == numBytes))
     {
         return true;
     }
@@ -82,6 +86,32 @@ bool Rendering::ResourceImpl::IsValid() const noexcept
 }
 
 #endif  // OPEN_CLASS_INVARIANT
+
+void Rendering::ResourceImpl::CreateStorage()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    if (storage.empty() && 0 < numBytes)
+    {
+        storage.resize(numBytes);
+        createStorage = true;
+    }
+}
+
+void Rendering::ResourceImpl::DestroyStorage()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    /// DestroyStorage的目的是在只需要GPU内存资源的情况下释放不需要的CPU内存。
+    /// clear调用将大小设置为0，但容量保持不变；也就是说，内存没有被释放。
+    /// 需要shrink_to_fit调用才能释放内存。
+    if (!storage.empty() && createStorage)
+    {
+        createStorage = false;
+        storage.clear();
+        storage.shrink_to_fit();
+    }
+}
 
 int Rendering::ResourceImpl::GetNumElements() const noexcept
 {
@@ -104,11 +134,11 @@ int Rendering::ResourceImpl::GetNumBytes() const noexcept
     return numBytes;
 }
 
-void Rendering::ResourceImpl::SetUsage(UsageType usageType) noexcept
+void Rendering::ResourceImpl::SetUsage(UsageType aUsage) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    usage = usageType;
+    usage = aUsage;
 }
 
 Rendering::UsageType Rendering::ResourceImpl::GetUsage() const noexcept
@@ -118,11 +148,11 @@ Rendering::UsageType Rendering::ResourceImpl::GetUsage() const noexcept
     return usage;
 }
 
-void Rendering::ResourceImpl::SetCopy(CopyType copyType) noexcept
+void Rendering::ResourceImpl::SetCopy(CopyType aCopy) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    copy = copyType;
+    copy = aCopy;
 }
 
 Rendering::CopyType Rendering::ResourceImpl::GetCopy() const noexcept
@@ -132,14 +162,14 @@ Rendering::CopyType Rendering::ResourceImpl::GetCopy() const noexcept
     return copy;
 }
 
-Rendering::ResourceImpl::ConstSpanIterator Rendering::ResourceImpl::GetData() const noexcept
+Rendering::ResourceImpl::ConstSpanIterator Rendering::ResourceImpl::GetStorage() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return ConstSpanIterator{ storage.cbegin(), storage.cend() };
 }
 
-Rendering::ResourceImpl::SpanIterator Rendering::ResourceImpl::GetData(int aOffset)
+Rendering::ResourceImpl::SpanIterator Rendering::ResourceImpl::GetStorage(int aOffset)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -150,7 +180,7 @@ Rendering::ResourceImpl::SpanIterator Rendering::ResourceImpl::GetData(int aOffs
     return result;
 }
 
-Rendering::ResourceImpl::ConstSpanIterator Rendering::ResourceImpl::GetData(int aOffset) const
+Rendering::ResourceImpl::ConstSpanIterator Rendering::ResourceImpl::GetStorage(int aOffset) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -161,7 +191,7 @@ Rendering::ResourceImpl::ConstSpanIterator Rendering::ResourceImpl::GetData(int 
     return result;
 }
 
-Rendering::ResourceImpl::SpanIterator Rendering::ResourceImpl::GetData() noexcept
+Rendering::ResourceImpl::SpanIterator Rendering::ResourceImpl::GetStorage() noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -185,7 +215,13 @@ void Rendering::ResourceImpl::SetOffset(int aOffset)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("无效的offset值。"s))
+        const auto message = SYSTEM_TEXT("无效的offset (") +
+                             System::ToString(offset) +
+                             SYSTEM_TEXT(")") +
+                             SYSTEM_TEXT("; 总元素 = ") +
+                             System::ToString(numElements) +
+                             SYSTEM_TEXT("。");
+        THROW_EXCEPTION(message)
     }
 }
 
@@ -213,11 +249,20 @@ void Rendering::ResourceImpl::SetNumActiveElements(int aNumActiveElements)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("无效的numActiveElements值。"s))
+        const auto message = SYSTEM_TEXT("活动元素的数量无效 (") +
+                             System::ToString(numActiveElements) +
+                             SYSTEM_TEXT(")") +
+                             SYSTEM_TEXT("; offset = ") +
+                             System::ToString(offset) +
+                             SYSTEM_TEXT("; 总元素 = ") +
+                             System::ToString(numElements) +
+                             SYSTEM_TEXT("。");
+
+        THROW_EXCEPTION(message)
     }
 }
 
-void Rendering::ResourceImpl::SetNewData(const StorageType& aStorage)
+void Rendering::ResourceImpl::SetStorage(const StorageType& aStorage)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -245,17 +290,46 @@ char* Rendering::ResourceImpl::GetOriginalData(int aOffset)
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
+    if (boost::numeric_cast<int>(storage.size()) <= aOffset)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("数据容器小于偏移值。"s))
+    }
+
     return &storage.at(aOffset);
+}
+
+bool Rendering::ResourceImpl::IsCreateStorage() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return createStorage;
 }
 
 const char* Rendering::ResourceImpl::GetOriginalData(int aOffset) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
+    if (boost::numeric_cast<int>(storage.size()) <= aOffset)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("数据容器小于偏移值。"s))
+    }
+
     return &storage.at(aOffset);
 }
 
-void Rendering::ResourceImpl::Load(CoreTools::BufferSource& source)
+char* Rendering::ResourceImpl::GetOriginalData()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    if (storage.empty())
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("数据为空。"s))
+    }
+
+    return storage.data();
+}
+
+void Rendering::ResourceImpl::Load(BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -269,9 +343,10 @@ void Rendering::ResourceImpl::Load(CoreTools::BufferSource& source)
     source.Read(numActiveElements);
 
     storage = source.ReadVectorUseNumber<char>(numBytes);
+    createStorage = source.ReadBool();
 }
 
-void Rendering::ResourceImpl::Save(CoreTools::BufferTarget& target) const
+void Rendering::ResourceImpl::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -284,6 +359,7 @@ void Rendering::ResourceImpl::Save(CoreTools::BufferTarget& target) const
     target.Write(numActiveElements);
 
     target.WriteContainerWithoutNumber(storage);
+    target.Write(createStorage);
 }
 
 int Rendering::ResourceImpl::GetStreamingSize() const
@@ -299,6 +375,7 @@ int Rendering::ResourceImpl::GetStreamingSize() const
     size += CoreTools::GetStreamSize(numActiveElements);
 
     size += boost::numeric_cast<int>(storage.size()) * CoreTools::GetStreamSize<char>();
+    size += CoreTools::GetStreamSize(createStorage);
 
     return size;
 }

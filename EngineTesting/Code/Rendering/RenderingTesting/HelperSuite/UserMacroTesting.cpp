@@ -1,0 +1,93 @@
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
+///
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
+///
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/08 16:18)
+
+#include "UserMacroTesting.h"
+#include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Rendering/Helper/UserMacro.h"
+
+Rendering::UserMacroTesting::UserMacroTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, UserMacroTesting)
+
+void Rendering::UserMacroTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
+
+void Rendering::UserMacroTesting::MainTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(CloseCoreToolsMaxTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MacroExistTest);
+}
+
+void Rendering::UserMacroTesting::CloseCoreToolsMaxTest()
+{
+    ASSERT_EQUAL(CLOSE_USE_RENDERING_TEMPLATE_TEST | CLOSE_USE_RENDERING_EXPORT_TEMPLATE | CLOSE_USE_VALIDATE_COORDINATE_FRAME_ONCE | CLOSE_USE_RENDERING_PRECISION, CLOSE_RENDERING_MAX);
+}
+
+void Rendering::UserMacroTesting::MacroExistTest()
+{
+#ifdef RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
+
+    ASSERT_EQUAL(_DEBUG, 1);
+
+#endif  // RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
+
+#ifdef RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
+
+    ASSERT_UNEQUAL(CLOSE_USE_VALIDATE_COORDINATE_FRAME_ONCE, 0);
+
+#else  // !RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
+
+    ASSERT_EQUAL(CLOSE_USE_VALIDATE_COORDINATE_FRAME_ONCE, 0);
+
+#endif  // RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
+
+#ifdef RENDERING_TEMPLATE_TEST
+
+    ASSERT_UNEQUAL(CLOSE_USE_RENDERING_TEMPLATE_TEST, 0);
+
+#else  // !RENDERING_TEMPLATE_TEST
+
+    ASSERT_EQUAL(CLOSE_USE_RENDERING_TEMPLATE_TEST, 0);
+
+#endif  // RENDERING_TEMPLATE_TEST
+
+#ifdef RENDERING_EXPORT_TEMPLATE
+
+    ASSERT_UNEQUAL(CLOSE_USE_RENDERING_EXPORT_TEMPLATE, 0);
+
+#else  // !RENDERING_EXPORT_TEMPLATE
+
+    ASSERT_EQUAL(CLOSE_USE_RENDERING_EXPORT_TEMPLATE, 0);
+
+#endif  // RENDERING_EXPORT_TEMPLATE
+
+#ifdef RENDERING_USE_PRECISION
+
+    ASSERT_UNEQUAL(CLOSE_USE_RENDERING_PRECISION, 0);
+
+#else  // !RENDERING_USE_PRECISION
+
+    ASSERT_EQUAL(CLOSE_USE_RENDERING_PRECISION, 0);
+
+#endif  // RENDERING_USE_PRECISION
+
+#ifdef BUILDING_RENDERING_STATIC
+
+    BUILDING_STATIC;
+
+#endif  // BUILDING_RENDERING_STATIC
+}

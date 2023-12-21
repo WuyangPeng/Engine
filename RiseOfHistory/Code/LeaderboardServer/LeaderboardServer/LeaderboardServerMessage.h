@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.0 (2023/11/19 00:20)
+/// 版本：1.0.0.2 (2023/12/17 19:45)
 
 #ifndef LEADERBOARD_SERVER_LEADERBOARD_SERVER_MESSAGE_H
 #define LEADERBOARD_SERVER_LEADERBOARD_SERVER_MESSAGE_H
@@ -48,7 +48,7 @@ namespace LeaderboardServer
                                                                   LeaderboardServerMiddleLayer::GUIManager>;
     using MessageType = Framework::WindowMessage<MiddleLayerType>;
 
-    class LeaderboardServerMessage : public MessageType
+    class LeaderboardServerMessage final : public MessageType
     {
     public:
         using ClassType = LeaderboardServerMessage;

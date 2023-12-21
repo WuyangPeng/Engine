@@ -16,6 +16,7 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/SceneGraph/StandardMesh.h"
+#include "Rendering/SceneGraph/Flags/VisualFlags.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, TerrainPage);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TerrainPage);

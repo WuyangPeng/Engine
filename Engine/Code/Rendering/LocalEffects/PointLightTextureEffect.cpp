@@ -79,7 +79,7 @@ void Rendering::PointLightTextureEffect::UpdateMaterialConstant()
 
     const auto materialConstant = GetMaterialConstant();
 
-    auto data = materialConstant->GetData();
+    auto data = materialConstant->GetStorage();
 
     const auto emissive = material->GetEmissive();
     data.Increase<float>(emissive.GetRed());
@@ -116,7 +116,7 @@ void Rendering::PointLightTextureEffect::UpdateLightingConstant()
 
     const auto lightingConstant = GetLightingConstant();
 
-    auto data = lightingConstant->GetData();
+    auto data = lightingConstant->GetStorage();
 
     const auto ambient = lighting->GetAmbient();
     data.Increase<float>(ambient.GetRed());
@@ -152,7 +152,7 @@ void Rendering::PointLightTextureEffect::UpdateGeometryConstant()
 
     const auto geometryConstant = GetGeometryConstant();
 
-    auto data = geometryConstant->GetData();
+    auto data = geometryConstant->GetStorage();
 
     const auto lightModelDirection = geometry->GetLightModelDirection();
     data.Increase<float>(lightModelDirection.GetRed());

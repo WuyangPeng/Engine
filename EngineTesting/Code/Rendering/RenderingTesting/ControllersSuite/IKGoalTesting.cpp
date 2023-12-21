@@ -16,7 +16,7 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/Controllers/IKGoal.h"
-#include "Rendering/RenderingTesting/SceneGraphSuite/SpatialTest.h"
+#include "Rendering/RenderingTesting/SceneGraphSuite/Detail/SpatialTest.h"
 
 Rendering::IKGoalTesting::IKGoalTesting(const OStreamShared& stream)
     : ParentType{ stream }

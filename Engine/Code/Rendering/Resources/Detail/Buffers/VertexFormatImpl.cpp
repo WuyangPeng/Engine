@@ -1,17 +1,15 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 17:12)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/16 14:03)
 
 #include "Rendering/RenderingExport.h"
 
 #include "VertexFormatImpl.h"
-#include "CoreTools/FileManager/ReadFileManager.h"
-#include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
@@ -23,13 +21,13 @@
 #include "Rendering/Resources/DataFormat.h"
 
 Rendering::VertexFormatImpl::VertexFormatImpl(int numAttributes) noexcept
-    : numAttributes{ numAttributes }, stride{ 0 }, elements{}
+    : numAttributes{ numAttributes }, vertexSize{ 0 }, elements{}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 Rendering::VertexFormatImpl::VertexFormatImpl() noexcept
-    : numAttributes{ 0 }, stride{ 0 }, elements{}
+    : numAttributes{ 0 }, vertexSize{ 0 }, elements{}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -38,7 +36,7 @@ Rendering::VertexFormatImpl::VertexFormatImpl() noexcept
 
 bool Rendering::VertexFormatImpl::IsValid() const noexcept
 {
-    if (0 <= numAttributes && numAttributes < attributes && 0 <= stride)
+    if (0 <= numAttributes && numAttributes < attributes && 0 <= vertexSize)
         return true;
     else
         return false;
@@ -51,18 +49,19 @@ void Rendering::VertexFormatImpl::Reset() noexcept
     RENDERING_CLASS_IS_VALID_1;
 
     numAttributes = 0;
-    stride = 0;
+    vertexSize = 0;
 
     for (auto& value : elements)
     {
-        value = VertexFormatAttribute{};
+        value.Clear();
     }
 }
 
-void Rendering::VertexFormatImpl::Bind(Semantic semantic, DataFormatType type, int unit)
+void Rendering::VertexFormatImpl::Bind(DataFormatType type, Semantic semantic, int unit)
 {
     RENDERING_CLASS_IS_VALID_1;
 
+    // 验证输入。
     if (numAttributes < 0 && attributes <= numAttributes)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("超过最大属性。"))
@@ -90,43 +89,46 @@ void Rendering::VertexFormatImpl::Bind(Semantic semantic, DataFormatType type, i
         }
     }
 
-    elements.at(numAttributes) = VertexFormatAttribute{ type, semantic, unit, stride };
+    // 设置属性
+    auto& attribute = elements.at(numAttributes);
+    attribute.SetVertexFormatAttribute(type, semantic, unit, vertexSize);
 
     ++numAttributes;
-    stride += DataFormat::GetNumBytesPerStruct(type);
+
+    // 推进偏移。
+    vertexSize += DataFormat::GetNumBytesPerStruct(type);
 }
 
-void Rendering::VertexFormatImpl::SetAttribute(int attribute, DataFormatType type, Semantic usage, int usageIndex, int offset)
+void Rendering::VertexFormatImpl::SetAttribute(int attribute, DataFormatType type, Semantic semantic, int unit, int offset)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    SetAttribute(attribute, VertexFormatAttribute{ type, usage, usageIndex, offset });
+    SetAttribute(attribute, VertexFormatAttribute{ type, semantic, unit, offset });
 }
 
-void Rendering::VertexFormatImpl::SetAttribute(int attribute, const VertexFormatAttribute& vertexFormatElement)
+void Rendering::VertexFormatImpl::SetAttribute(int attribute, const VertexFormatAttribute& vertexFormatAttribute)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_1(0 <= attribute && attribute < numAttributes, "无效索引在SetAttribute\n");
 
     if (0 < attribute)
     {
-        MAYBE_UNUSED const auto previousIndex = attribute - 1;
-        RENDERING_ASSERTION_1(elements.at(previousIndex).GetOffset() < vertexFormatElement.GetOffset(), "偏移量必须比属性索引高。\n");
+        const auto previousIndex = attribute - 1;
+        RENDERING_ASSERTION_0(elements.at(previousIndex).GetOffset() < vertexFormatAttribute.GetOffset(), "偏移量必须比属性索引高。\n");
     }
     else
     {
-        RENDERING_ASSERTION_1(vertexFormatElement.GetOffset() == 0, "第一个属性的偏移量必须为零。\n");
+        RENDERING_ASSERTION_0(vertexFormatAttribute.GetOffset() == 0, "第一个属性的偏移量必须为零。\n");
     }
 
-    elements.at(attribute) = vertexFormatElement;
+    elements.at(attribute) = vertexFormatAttribute;
 }
 
-void Rendering::VertexFormatImpl::SetStride(int aStride)
+void Rendering::VertexFormatImpl::SetVertexSize(int aVertexSize)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 < aStride, "Stride必须是正数。\n");
+    RENDERING_ASSERTION_0(0 < aVertexSize, "Stride必须是正数。\n");
 
-    stride = aStride;
+    vertexSize = aVertexSize;
 }
 
 int32_t Rendering::VertexFormatImpl::GetNumAttributes() const noexcept
@@ -139,7 +141,6 @@ int32_t Rendering::VertexFormatImpl::GetNumAttributes() const noexcept
 int32_t Rendering::VertexFormatImpl::GetOffset(int attribute) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_1(0 <= attribute && attribute < numAttributes, "无效索引在GetStreamIndex\n");
 
     return elements.at(attribute).GetOffset();
 }
@@ -147,42 +148,39 @@ int32_t Rendering::VertexFormatImpl::GetOffset(int attribute) const
 Rendering::DataFormatType Rendering::VertexFormatImpl::GetAttributeType(int attribute) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_1(0 <= attribute && attribute < numAttributes, "无效索引在GetStreamIndex\n");
 
     return elements.at(attribute).GetType();
 }
 
-Rendering::VertexFormatFlags::Semantic Rendering::VertexFormatImpl::GetAttributeUsage(int attribute) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_1(0 <= attribute && attribute < numAttributes, "无效索引在GetStreamIndex\n");
-
-    return elements.at(attribute).GetUsage();
-}
-
-int32_t Rendering::VertexFormatImpl::GetUsageIndex(int attribute) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_1(0 <= attribute && attribute < numAttributes, "无效索引在GetStreamIndex\n");
-
-    return elements.at(attribute).GetUsageIndex();
-}
-
-int Rendering::VertexFormatImpl::GetStride() const noexcept
+Rendering::VertexFormatFlags::Semantic Rendering::VertexFormatImpl::GetSemantic(int attribute) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return stride;
+    return elements.at(attribute).GetSemantic();
 }
 
-int Rendering::VertexFormatImpl::GetIndex(Semantic usage, int usageIndex) const noexcept
+int32_t Rendering::VertexFormatImpl::GetUnit(int attribute) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return elements.at(attribute).GetUnit();
+}
+
+int Rendering::VertexFormatImpl::GetVertexSize() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return vertexSize;
+}
+
+int Rendering::VertexFormatImpl::GetIndex(Semantic semantic, int unit) const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     for (auto index = 0; index < numAttributes; ++index)
     {
         if (const auto& attribute = elements.at(index);
-            attribute.GetUsage() == usage && attribute.GetUsageIndex() == usageIndex)
+            attribute.GetSemantic() == semantic && attribute.GetUnit() == unit)
         {
             return index;
         }
@@ -202,7 +200,7 @@ int Rendering::VertexFormatImpl::GetStreamingSize() const noexcept
         size += elements.at(i).GetStreamingSize();
     }
 
-    size += CoreTools::GetStreamSize(stride);
+    size += CoreTools::GetStreamSize(vertexSize);
 
     return size;
 }
@@ -218,7 +216,7 @@ void Rendering::VertexFormatImpl::Save(CoreTools::BufferTarget& target) const
         elements.at(i).Save(target);
     }
 
-    target.Write(stride);
+    target.Write(vertexSize);
 }
 
 void Rendering::VertexFormatImpl::Load(CoreTools::BufferSource& source)
@@ -232,34 +230,5 @@ void Rendering::VertexFormatImpl::Load(CoreTools::BufferSource& source)
         elements.at(i).Load(source);
     }
 
-    source.Read(stride);
-}
-
-void Rendering::VertexFormatImpl::SaveToFile(WriteFileManager& outFile) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    outFile.Write(sizeof(int32_t), &numAttributes);
-
-    for (auto i = 0; i < numAttributes; ++i)
-    {
-        elements.at(i).SaveToFile(outFile);
-    }
-
-    outFile.Write(sizeof(int32_t), &stride);
-}
-
-void Rendering::VertexFormatImpl::ReadFromFile(ReadFileManager& inFile)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    // numAttributes已在VertexFormat读取。
-    // inFile.Read(sizeof(int32_t),&numAttributes);
-
-    for (auto i = 0; i < numAttributes; ++i)
-    {
-        elements.at(i).ReadFromFile(inFile);
-    }
-
-    inFile.Read(sizeof(int32_t), &stride);
+    source.Read(vertexSize);
 }

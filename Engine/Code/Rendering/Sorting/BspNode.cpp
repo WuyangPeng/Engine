@@ -15,6 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Mathematics/Algebra/MatrixDetail.h"
 #include "Mathematics/Algebra/PlaneDetail.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, BspNode);
@@ -27,7 +28,7 @@ Rendering::BspNode::BspNodeSharedPtr Rendering::BspNode::Create()
 }
 
 Rendering::BspNode::BspNode(NodeCreate nodeCreate)
-    : ParentType{ nodeCreate },
+    : ParentType{ "BspNode", nodeCreate },
       modelPlane{ 0.0f, 0.0f, 0.0f, 0.0f },
       worldPlane{ 0.0f, 0.0f, 0.0f, 0.0f }
 {
@@ -42,7 +43,7 @@ Rendering::BspNode::BspNode(NodeCreate nodeCreate)
 CLASS_INVARIANT_STUB_DEFINE(Rendering, BspNode)
 
 Rendering::BspNode::BspNode(const Mathematics::PlaneF& modelPlane)
-    : ParentType{ NodeCreate::Init },
+    : ParentType{ "BspNode", NodeCreate::Init },
       modelPlane{ modelPlane },
       worldPlane{ modelPlane }
 {
@@ -110,7 +111,7 @@ bool Rendering::BspNode::UpdateWorldData(double applicationTime)
     return result;
 }
 
-void Rendering::BspNode::GetVisibleSet(Culler& culler, bool noCull)
+void Rendering::BspNode::GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -118,8 +119,8 @@ void Rendering::BspNode::GetVisibleSet(Culler& culler, bool noCull)
     auto copChild = GetCoplanarChild();
     auto negChild = GetNegativeChild();
 
-    const auto camera = culler.GetCamera();
-    const auto positionSide = worldPlane.WhichSide(camera->GetPosition());
+    const auto camera0 = culler.GetCamera();
+    const auto positionSide = worldPlane.WhichSide(camera0->GetPosition());
     const auto frustumSide = culler.WhichSide(worldPlane);
 
     if (positionSide > Mathematics::NumericalValueSymbol::Zero)
@@ -128,7 +129,7 @@ void Rendering::BspNode::GetVisibleSet(Culler& culler, bool noCull)
         {
             if (negChild)
             {
-                negChild->OnGetVisibleSet(culler, noCull);
+                negChild->OnGetVisibleSet(culler, camera, noCull);
             }
         }
 
@@ -136,7 +137,7 @@ void Rendering::BspNode::GetVisibleSet(Culler& culler, bool noCull)
         {
             if (copChild)
             {
-                copChild->OnGetVisibleSet(culler, noCull);
+                copChild->OnGetVisibleSet(culler, camera, noCull);
             }
         }
 
@@ -144,7 +145,7 @@ void Rendering::BspNode::GetVisibleSet(Culler& culler, bool noCull)
         {
             if (posChild)
             {
-                posChild->OnGetVisibleSet(culler, noCull);
+                posChild->OnGetVisibleSet(culler, camera, noCull);
             }
         }
     }
@@ -154,7 +155,7 @@ void Rendering::BspNode::GetVisibleSet(Culler& culler, bool noCull)
         {
             if (posChild)
             {
-                posChild->OnGetVisibleSet(culler, noCull);
+                posChild->OnGetVisibleSet(culler, camera, noCull);
             }
         }
 
@@ -162,7 +163,7 @@ void Rendering::BspNode::GetVisibleSet(Culler& culler, bool noCull)
         {
             if (copChild)
             {
-                copChild->OnGetVisibleSet(culler, noCull);
+                copChild->OnGetVisibleSet(culler, camera, noCull);
             }
         }
 
@@ -170,45 +171,45 @@ void Rendering::BspNode::GetVisibleSet(Culler& culler, bool noCull)
         {
             if (negChild)
             {
-                negChild->OnGetVisibleSet(culler, noCull);
+                negChild->OnGetVisibleSet(culler, camera, noCull);
             }
         }
     }
     else
     {
-        const auto ndd = Dot(worldPlane.GetNormal(), camera->GetDirectionVector());
+        const auto ndd = Dot(worldPlane.GetNormal(), camera0->GetDirectionVector());
         if (ndd >= 0.0f)
         {
             if (posChild)
             {
-                posChild->OnGetVisibleSet(culler, noCull);
+                posChild->OnGetVisibleSet(culler, camera, noCull);
             }
 
             if (copChild)
             {
-                copChild->OnGetVisibleSet(culler, noCull);
+                copChild->OnGetVisibleSet(culler, camera, noCull);
             }
 
             if (negChild)
             {
-                negChild->OnGetVisibleSet(culler, noCull);
+                negChild->OnGetVisibleSet(culler, camera, noCull);
             }
         }
         else
         {
             if (negChild)
             {
-                negChild->OnGetVisibleSet(culler, noCull);
+                negChild->OnGetVisibleSet(culler, camera, noCull);
             }
 
             if (copChild)
             {
-                copChild->OnGetVisibleSet(culler, noCull);
+                copChild->OnGetVisibleSet(culler, camera, noCull);
             }
 
             if (posChild)
             {
-                posChild->OnGetVisibleSet(culler, noCull);
+                posChild->OnGetVisibleSet(culler, camera, noCull);
             }
         }
     }

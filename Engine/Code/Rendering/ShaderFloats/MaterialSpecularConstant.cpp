@@ -16,7 +16,7 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Visual.h"
-
+ 
 CORE_TOOLS_RTTI_DEFINE(Rendering, MaterialSpecularConstant);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, MaterialSpecularConstant);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, MaterialSpecularConstant);

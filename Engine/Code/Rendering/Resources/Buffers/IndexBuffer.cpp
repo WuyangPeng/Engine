@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 14:49)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/15 09:11)
 
 #include "Rendering/RenderingExport.h"
 
@@ -14,7 +14,6 @@
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
@@ -29,8 +28,8 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, IndexBuffer);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, IndexBuffer);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, IndexBuffer);
 
-Rendering::IndexBuffer::IndexBuffer(IndexBufferCreate indexBufferCreate, IndexFormatType type, int numPrimitives)
-    : ParentType{ GetIndexCounter(type, numPrimitives), 0, GraphicsObjectType::IndexBuffer },
+Rendering::IndexBuffer::IndexBuffer(const std::string& name, IndexBufferCreate indexBufferCreate, IndexFormatType type, int numPrimitives)
+    : ParentType{ name, GetIndexCounter(type, numPrimitives), 0, GraphicsObjectType::IndexBuffer, false },
       primitiveType{ type },
       numPrimitives{ numPrimitives },
       numActivePrimitives{ numPrimitives },
@@ -46,8 +45,8 @@ Rendering::IndexBuffer::IndexBuffer(IndexBufferCreate indexBufferCreate, IndexFo
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::IndexBuffer::IndexBuffer(IndexBufferCreate indexBufferCreate, IndexFormatType type, int numPrimitives, int indexSize)
-    : ParentType{ GetIndexCounter(type, numPrimitives), indexSize, GraphicsObjectType::IndexBuffer },
+Rendering::IndexBuffer::IndexBuffer(const std::string& name, IndexBufferCreate indexBufferCreate, IndexFormatType type, int numPrimitives, int indexSize, bool createStorage)
+    : ParentType{ name, GetIndexCounter(type, numPrimitives), indexSize, GraphicsObjectType::IndexBuffer, createStorage },
       primitiveType{ type },
       numPrimitives{ numPrimitives },
       numActivePrimitives{ numPrimitives },
@@ -63,14 +62,14 @@ Rendering::IndexBuffer::IndexBuffer(IndexBufferCreate indexBufferCreate, IndexFo
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::IndexBuffer::IndexBufferSharedPtr Rendering::IndexBuffer::Create(IndexFormatType type, int numPrimitives)
+Rendering::IndexBuffer::IndexBufferSharedPtr Rendering::IndexBuffer::Create(const std::string& name, IndexFormatType type, int numPrimitives)
 {
-    return std::make_shared<ClassType>(IndexBufferCreate::Init, type, numPrimitives);
+    return std::make_shared<ClassType>(name, IndexBufferCreate::Init, type, numPrimitives);
 }
 
-Rendering::IndexBuffer::IndexBufferSharedPtr Rendering::IndexBuffer::Create(IndexFormatType type, int numPrimitives, int indexSize)
+Rendering::IndexBuffer::IndexBufferSharedPtr Rendering::IndexBuffer::Create(const std::string& name, IndexFormatType type, int numPrimitives, int indexSize, bool createStorage)
 {
-    return std::make_shared<ClassType>(IndexBufferCreate::Init, type, numPrimitives, indexSize);
+    return std::make_shared<ClassType>(name, IndexBufferCreate::Init, type, numPrimitives, indexSize, createStorage);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -183,6 +182,13 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::IndexBuffer::CloneObject() const
     return Clone();
 }
 
+bool Rendering::IndexBuffer::IsIndexed() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return IsCreateStorage();
+}
+
 Rendering::IndexFormatType Rendering::IndexBuffer::GetPrimitiveType() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
@@ -262,15 +268,15 @@ void Rendering::IndexBuffer::SetPoint(int index, int32_t vertex)
 
     ValidPrimitiveType(IndexFormatType::HasPoints);
 
-    if (index < numPrimitives)
+    if (IsIndexed() && index < numPrimitives)
     {
         if (GetElementSize() == CoreTools::GetStreamSize<int32_t>())
         {
-            IncreaseData(index, vertex);
+            return IncreaseData(index, vertex);
         }
         else
         {
-            IncreaseData(index, boost::numeric_cast<uint16_t>(vertex));
+            return IncreaseData(index, boost::numeric_cast<int16_t>(vertex));
         }
     }
 
@@ -283,7 +289,7 @@ int32_t Rendering::IndexBuffer::GetPoint(int index) const
 
     ValidPrimitiveType(IndexFormatType::HasPoints);
 
-    if (index < numPrimitives)
+    if (IsIndexed() && index < numPrimitives)
     {
         if (GetElementSize() == CoreTools::GetStreamSize<int32_t>())
         {
@@ -308,24 +314,24 @@ void Rendering::IndexBuffer::SetSegment(int index, int32_t vertex0, int32_t vert
     {
         if (GetElementSize() == CoreTools::GetStreamSize<int32_t>())
         {
-            if (primitiveType == IndexFormatType::PolySegmentDisjoint)
+            if (primitiveType == IndexFormatType::PolygonSegmentDisjoint)
             {
-                IncreaseData(index, vertex0, vertex1, 2);
+                return IncreaseData(index, vertex0, vertex1, 2);
             }
             else
             {
-                IncreaseData(index, vertex0, vertex1, 1);
+                return IncreaseData(index, vertex0, vertex1, 1);
             }
         }
         else
         {
-            if (primitiveType == IndexFormatType::PolySegmentDisjoint)
+            if (primitiveType == IndexFormatType::PolygonSegmentDisjoint)
             {
-                IncreaseData(index, boost::numeric_cast<uint16_t>(vertex0), boost::numeric_cast<uint16_t>(vertex1), 2);
+                return IncreaseData(index, boost::numeric_cast<int16_t>(vertex0), boost::numeric_cast<int16_t>(vertex1), 2);
             }
             else
             {
-                IncreaseData(index, boost::numeric_cast<uint16_t>(vertex0), boost::numeric_cast<uint16_t>(vertex1), 1);
+                return IncreaseData(index, boost::numeric_cast<int16_t>(vertex0), boost::numeric_cast<int16_t>(vertex1), 1);
             }
         }
     }
@@ -343,7 +349,7 @@ Rendering::IndexBuffer::SegmentType Rendering::IndexBuffer::GetSegment(int index
     {
         if (GetElementSize() == CoreTools::GetStreamSize<int32_t>())
         {
-            if (primitiveType == IndexFormatType::PolySegmentDisjoint)
+            if (primitiveType == IndexFormatType::PolygonSegmentDisjoint)
             {
                 return GetIncreaseData<int32_t>(index, 2);
             }
@@ -354,7 +360,7 @@ Rendering::IndexBuffer::SegmentType Rendering::IndexBuffer::GetSegment(int index
         }
         else
         {
-            if (primitiveType == IndexFormatType::PolySegmentDisjoint)
+            if (primitiveType == IndexFormatType::PolygonSegmentDisjoint)
             {
                 return GetIncreaseData<int16_t>(index, 2);
             }
@@ -378,54 +384,54 @@ void Rendering::IndexBuffer::SetTriangle(int index, int32_t vertex0, int32_t ver
     {
         if (GetElementSize() == CoreTools::GetStreamSize<int32_t>())
         {
-            if (primitiveType == IndexFormatType::TriMesh)
+            if (primitiveType == IndexFormatType::TriangleMesh)
             {
-                IncreaseData(index, vertex0, vertex1, vertex2, 3);
+                return IncreaseData(index, vertex0, vertex1, vertex2, 3);
             }
-            else if (primitiveType == IndexFormatType::TriStrip)
+            else if (primitiveType == IndexFormatType::TriangleStrip)
             {
                 if ((index & 1) != 0)
                 {
-                    IncreaseData(index, vertex0, vertex2, vertex1, 1);
+                    return IncreaseData(index, vertex0, vertex2, vertex1, 1);
                 }
                 else
                 {
-                    IncreaseData(index, vertex0, vertex1, vertex2, 1);
+                    return IncreaseData(index, vertex0, vertex1, vertex2, 1);
                 }
             }
-            else if (primitiveType == IndexFormatType::TriMeshAdj)
+            else if (primitiveType == IndexFormatType::TriangleMeshAdjacency)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TrimeshAdj不支持。"s))
+                THROW_EXCEPTION(SYSTEM_TEXT("TriangleMeshAdjacency不支持。"s))
             }
-            else if (primitiveType == IndexFormatType::TriStripAdj)
+            else if (primitiveType == IndexFormatType::TriangleStripAdjacency)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TristripAdj不支持。"s))
+                THROW_EXCEPTION(SYSTEM_TEXT("TriangleStripAdjacency不支持。"s))
             }
         }
         else
         {
-            if (primitiveType == IndexFormatType::TriMesh)
+            if (primitiveType == IndexFormatType::TriangleMesh)
             {
-                IncreaseData(index, boost::numeric_cast<uint16_t>(vertex0), boost::numeric_cast<uint16_t>(vertex1), boost::numeric_cast<uint16_t>(vertex2), 3);
+                return IncreaseData(index, boost::numeric_cast<int16_t>(vertex0), boost::numeric_cast<int16_t>(vertex1), boost::numeric_cast<int16_t>(vertex2), 3);
             }
-            else if (primitiveType == IndexFormatType::TriStrip)
+            else if (primitiveType == IndexFormatType::TriangleStrip)
             {
                 if ((index & 1) != 0)
                 {
-                    IncreaseData(index, boost::numeric_cast<uint16_t>(vertex0), boost::numeric_cast<uint16_t>(vertex2), boost::numeric_cast<uint16_t>(vertex1), 1);
+                    return IncreaseData(index, boost::numeric_cast<int16_t>(vertex0), boost::numeric_cast<int16_t>(vertex2), boost::numeric_cast<int16_t>(vertex1), 1);
                 }
                 else
                 {
-                    IncreaseData(index, boost::numeric_cast<uint16_t>(vertex0), boost::numeric_cast<uint16_t>(vertex1), boost::numeric_cast<uint16_t>(vertex2), 1);
+                    return IncreaseData(index, boost::numeric_cast<int16_t>(vertex0), boost::numeric_cast<int16_t>(vertex1), boost::numeric_cast<int16_t>(vertex2), 1);
                 }
             }
-            else if (primitiveType == IndexFormatType::TriMeshAdj)
+            else if (primitiveType == IndexFormatType::TriangleMeshAdjacency)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TrimeshAdj不支持。"s))
+                THROW_EXCEPTION(SYSTEM_TEXT("TriangleMeshAdjacency不支持。"s))
             }
-            else if (primitiveType == IndexFormatType::TriStripAdj)
+            else if (primitiveType == IndexFormatType::TriangleStripAdjacency)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TristripAdj不支持。"s))
+                THROW_EXCEPTION(SYSTEM_TEXT("TriangleStripAdjacency不支持。"s))
             }
         }
     }
@@ -441,11 +447,11 @@ Rendering::IndexBuffer::TriangleType Rendering::IndexBuffer::GetTriangle(int ind
     {
         if (GetElementSize() == CoreTools::GetStreamSize<int32_t>())
         {
-            if (primitiveType == IndexFormatType::TriMesh)
+            if (primitiveType == IndexFormatType::TriangleMesh)
             {
                 return GetIncreaseData<int32_t>(index, 3, false);
             }
-            else if (primitiveType == IndexFormatType::TriStrip)
+            else if (primitiveType == IndexFormatType::TriangleStrip)
             {
                 if ((index & 1) != 0)
                 {
@@ -456,22 +462,22 @@ Rendering::IndexBuffer::TriangleType Rendering::IndexBuffer::GetTriangle(int ind
                     return GetIncreaseData<int32_t>(index, 1, false);
                 }
             }
-            else if (primitiveType == IndexFormatType::TriMeshAdj)
+            else if (primitiveType == IndexFormatType::TriangleMeshAdjacency)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TrimeshAdj不支持。"s))
+                THROW_EXCEPTION(SYSTEM_TEXT("TriangleMeshAdjacency不支持。"s))
             }
-            else if (primitiveType == IndexFormatType::TriStripAdj)
+            else if (primitiveType == IndexFormatType::TriangleStripAdjacency)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TristripAdj不支持。"s))
+                THROW_EXCEPTION(SYSTEM_TEXT("TriangleStripAdjacency不支持。"s))
             }
         }
         else
         {
-            if (primitiveType == IndexFormatType::TriMesh)
+            if (primitiveType == IndexFormatType::TriangleMesh)
             {
                 return GetIncreaseData<int16_t>(index, 3, false);
             }
-            else if (primitiveType == IndexFormatType::TriStrip)
+            else if (primitiveType == IndexFormatType::TriangleStrip)
             {
                 if ((index & 1) != 0)
                 {
@@ -482,13 +488,13 @@ Rendering::IndexBuffer::TriangleType Rendering::IndexBuffer::GetTriangle(int ind
                     return GetIncreaseData<int16_t>(index, 1, false);
                 }
             }
-            else if (primitiveType == IndexFormatType::TriMeshAdj)
+            else if (primitiveType == IndexFormatType::TriangleMeshAdjacency)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TrimeshAdj不支持。"s))
+                THROW_EXCEPTION(SYSTEM_TEXT("TriangleMeshAdjacency不支持。"s))
             }
-            else if (primitiveType == IndexFormatType::TriStripAdj)
+            else if (primitiveType == IndexFormatType::TriangleStripAdjacency)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TristripAdj不支持。"s))
+                THROW_EXCEPTION(SYSTEM_TEXT("TriangleStripAdjacency不支持。"s))
             }
         }
     }
@@ -506,18 +512,15 @@ void Rendering::IndexBuffer::ValidPrimitiveType(IndexFormatType type) const
 
 int Rendering::IndexBuffer::GetIndexCounter(IndexFormatType type, int numPrimitives)
 {
-    using IndexCounterFunction = int (*)(int) noexcept;
-    constexpr auto numTypes = System::EnumCastUnderlying(IndexFormatType::NumTypes);
-
-    static const std::array<IndexCounterFunction, numTypes> indexCounter{ &IndexBuffer::GetPolyPointIndexCount,
-                                                                          &IndexBuffer::GetPolySegmentDisjointIndexCount,
-                                                                          &IndexBuffer::GetPolySegmentContiguousIndexCount,
-                                                                          &IndexBuffer::GetTriMeshIndexCount,
-                                                                          &IndexBuffer::GetTriStripIndexCount,
-                                                                          &IndexBuffer::GetPolySegmentDisjointAdjIndexCount,
-                                                                          &IndexBuffer::GetPolySegmentContiguousAdjIndexCount,
-                                                                          &IndexBuffer::GetTriMeshAdjIndexCount,
-                                                                          &IndexBuffer::GetTriStripAdjIndexCount };
+    static constexpr std::array indexCounter{ &IndexBuffer::GetPolygonPointIndexCount,
+                                              &IndexBuffer::GetPolygonSegmentDisjointIndexCount,
+                                              &IndexBuffer::GetPolygonSegmentContiguousIndexCount,
+                                              &IndexBuffer::GetTriangleMeshIndexCount,
+                                              &IndexBuffer::GetTriangleStripIndexCount,
+                                              &IndexBuffer::GetPolygonSegmentDisjointAdjacencyIndexCount,
+                                              &IndexBuffer::GetPolygonSegmentContiguousAdjacencyIndexCount,
+                                              &IndexBuffer::GetTriangleMeshAdjacencyIndexCount,
+                                              &IndexBuffer::GetTriangleStripAdjacencyIndexCount };
 
     const auto index = Mathematics::BitHacks::Log2OfPowerOfTwo(System::EnumCastUnderlying(type));
 

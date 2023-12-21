@@ -11,15 +11,15 @@
 #define RENDERING_SCENE_GRAPH_SUITE_CAMERA_TESTING_H
 
 #include "Rendering/RenderingTesting/SceneGraphSuite/Detail/ViewVolumeTool.h"
-#include "Rendering/RenderingTesting/SceneGraphSuite/ViewVolume/ViewVolumeTestingBase.h"
+#include "Rendering/RenderingTesting/SceneGraphSuite/SceneGraphTestingBase.h"
 
 namespace Rendering
 {
-    class CameraTesting final : public ViewVolumeTestingBase
+    class CameraTesting final : public SceneGraphTestingBase
     {
     public:
         using ClassType = CameraTesting;
-        using ParentType = ViewVolumeTestingBase;
+        using ParentType = SceneGraphTestingBase;
 
     public:
         explicit CameraTesting(const OStreamShared& stream);

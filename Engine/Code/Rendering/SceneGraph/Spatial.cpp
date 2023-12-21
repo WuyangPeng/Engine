@@ -1,17 +1,20 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:18)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/07 10:30)
 
 #include "Rendering/RenderingExport.h"
 
 #include "Culler.h"
+#include "NullSpatial.h"
 #include "Spatial.h"
-#include "Detail/SpatialData.h"
+#include "Flags/CullingModeFlags.h"
+#include "Detail/SpatialFactory.h"
+#include "Detail/SpatialImpl.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -19,35 +22,31 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
-COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Spatial)
+COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(Rendering, Spatial)
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, Spatial);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Spatial);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Spatial);
 
-Rendering::Spatial::Spatial(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
-    : ParentType{ "Spatial" }, parent{ nullptr }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+Rendering::Spatial::Spatial(const std::string& name)
+    : ParentType{ name }, impl{ CoreTools::ImplCreateUseFactory::Default, CullingMode::Dynamic, false }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-#ifdef OPEN_CLASS_INVARIANT
-
-bool Rendering::Spatial::IsValid() const noexcept
+Rendering::Spatial::Spatial(const std::string& name, bool isNull)
+    : ParentType{ name }, impl{ CoreTools::ImplCreateUseFactory::Default, CullingMode::Dynamic, isNull }
 {
-    if (ParentType::IsValid())
-        return true;
-    else
-        return false;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-#endif  // OPEN_CLASS_INVARIANT
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Spatial)
 
-void Rendering::Spatial::SetParent(Spatial* aParent) noexcept
+void Rendering::Spatial::SetParent(const SpatialSharedPtr& parent)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    parent = aParent;
+    return impl->SetParent(parent);
 }
 
 bool Rendering::Spatial::Update(double applicationTime)
@@ -63,6 +62,7 @@ bool Rendering::Spatial::Update(double applicationTime, bool initiator)
 
     const auto result = UpdateWorldData(applicationTime);
     UpdateWorldBound();
+
     if (initiator)
     {
         PropagateBoundToRoot();
@@ -75,10 +75,14 @@ bool Rendering::Spatial::UpdateWorldData(double applicationTime)
 {
     RENDERING_CLASS_IS_VALID_1;
 
+    // 更新与该对象相关的任何控制器。
+    const auto result = ParentType::Update(applicationTime);
+
     // 更新世界变换。
     if (!impl->GetWorldTransformIsCurrent())
     {
-        if (parent != nullptr)
+        if (const auto parent = GetParent();
+            !parent->IsNullObject())
         {
             impl->SetLocalTransformToWorldTransform(parent->GetWorldTransform());
         }
@@ -88,42 +92,36 @@ bool Rendering::Spatial::UpdateWorldData(double applicationTime)
         }
     }
 
-    // 更新与该对象相关的任何控制器。
-    return ParentType::Update(applicationTime);
+    return result;
 }
 
 void Rendering::Spatial::PropagateBoundToRoot()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    if (parent)
+    if (const auto parent = GetParent();
+        !parent->IsNullObject())
     {
         parent->UpdateWorldBound();
         parent->PropagateBoundToRoot();
     }
 }
 
-Rendering::Spatial* Rendering::Spatial::GetParent() noexcept
+Rendering::Spatial::SpatialSharedPtr Rendering::Spatial::GetParent()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26473)
-#include SYSTEM_WARNING_DISABLE(26492)
-
-    return const_cast<Spatial*>(static_cast<const ClassType*>(this)->GetParent());
-
-#include SYSTEM_WARNING_POP
+    return impl->GetParent();
 }
 
-const Rendering::Spatial* Rendering::Spatial::GetParent() const noexcept
+Rendering::Spatial::ConstSpatialSharedPtr Rendering::Spatial::GetParent() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return parent;
+    return impl->GetParent();
 }
 
-void Rendering::Spatial::OnGetVisibleSet(Culler& culler, bool noCull)
+void Rendering::Spatial::OnGetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -142,30 +140,30 @@ void Rendering::Spatial::OnGetVisibleSet(Culler& culler, bool noCull)
     const auto savePlaneState = culler.GetPlaneState();
     if (noCull || culler.IsVisible(impl->GetWorldBound()))
     {
-        GetVisibleSet(culler, noCull);
+        GetVisibleSet(culler, camera, noCull);
     }
     culler.SetPlaneState(savePlaneState);
 }
 
-void Rendering::Spatial::SetLocalTransform(const Mathematics::TransformF& transform) noexcept
+void Rendering::Spatial::SetLocalTransform(const Transform& transform) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetLocalTransform(transform);
 }
 
-void Rendering::Spatial::SetWorldTransform(const Mathematics::TransformF& transform) noexcept
+void Rendering::Spatial::SetWorldTransform(const Transform& transform) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->DirectSetWorldTransform(transform);
 }
 
-void Rendering::Spatial::SetWorldBound(const Mathematics::BoundingSphereF& bound) noexcept
+void Rendering::Spatial::SetWorldBound(const BoundingSphere& bound) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    return impl->DirectSetWorldBound(bound);
+    return impl->SetWorldBound(bound);
 }
 
 void Rendering::Spatial::SetCullingMode(CullingMode culling) noexcept
@@ -175,6 +173,13 @@ void Rendering::Spatial::SetCullingMode(CullingMode culling) noexcept
     return impl->SetCullingMode(culling);
 }
 
+const Rendering::Spatial::SpatialSharedPtr& Rendering::Spatial::GetNullObject()
+{
+    static SpatialSharedPtr spatial{ std::make_shared<NullSpatial>("nullSpatial") };
+
+    return spatial;
+}
+
 void Rendering::Spatial::InitWorldBound()
 {
     RENDERING_CLASS_IS_VALID_1;
@@ -182,11 +187,11 @@ void Rendering::Spatial::InitWorldBound()
     return impl->InitWorldBound();
 }
 
-void Rendering::Spatial::BoundGrowToContain(const Mathematics::BoundingSphereF& worldBound)
+void Rendering::Spatial::BoundGrowToContain(const BoundingSphere& worldBound)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    return impl->SetWorldBound(worldBound);
+    return impl->GrowToContain(worldBound);
 }
 
 Mathematics::TransformF Rendering::Spatial::GetLocalTransform() const noexcept
@@ -224,9 +229,8 @@ bool Rendering::Spatial::GetWorldBoundIsCurrent() const noexcept
     return impl->GetWorldBoundIsCurrent();
 }
 
-// 流支持
-Rendering::Spatial::Spatial(LoadConstructor value)
-    : ParentType{ value }, parent{ nullptr }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+Rendering::Spatial::Spatial(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseFactory::Default, CullingMode::Dynamic, false }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -239,8 +243,6 @@ int Rendering::Spatial::GetStreamingSize() const
 
     size += impl->GetStreamingSize();
 
-    // parent 不保存
-
     return size;
 }
 
@@ -248,7 +250,6 @@ int64_t Rendering::Spatial::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    // m_Parent不需要注册，由于parent本身必须发起注册调用其孩子,“this”就是其中之一。
     return ParentType::Register(target);
 }
 
@@ -262,9 +263,6 @@ void Rendering::Spatial::Save(CoreTools::BufferTarget& target) const
 
     impl->Save(target);
 
-    // m_Parent没有保存。它将被设置在 Node::Link，
-    // 当子节点的指针链接解析Node::SetChild。
-
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
@@ -273,9 +271,6 @@ void Rendering::Spatial::Link(CoreTools::ObjectLink& source)
     RENDERING_CLASS_IS_VALID_1;
 
     ParentType::Link(source);
-
-    // m_Parent没有保存。它将被设置在 Node::Link，
-    // 当子节点的指针链接解析Node::SetChild。
 }
 
 void Rendering::Spatial::PostLink()
@@ -283,8 +278,6 @@ void Rendering::Spatial::PostLink()
     RENDERING_CLASS_IS_VALID_1;
 
     ParentType::PostLink();
-
-    // parent = dynamic_cast<Spatial*>(GetController());
 }
 
 void Rendering::Spatial::Load(CoreTools::BufferSource& source)
@@ -297,17 +290,7 @@ void Rendering::Spatial::Load(CoreTools::BufferSource& source)
 
     impl->Load(source);
 
-    // m_Parent没有保存。它将被设置在 Node::Link，
-    // 当子节点的指针链接解析Node::SetChild。
-
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
-}
-
-Rendering::PickRecordContainer Rendering::Spatial::ExecuteRecursive([[maybe_unused]] const APoint& origin, [[maybe_unused]] const AVector& direction, [[maybe_unused]] float tMin, [[maybe_unused]] float tMax) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return PickRecordContainer::Create();
 }
 
 void Rendering::Spatial::SetLocalTransformTranslate(const APoint& translate) noexcept
@@ -324,9 +307,18 @@ void Rendering::Spatial::SetLocalTransformRotate(const Matrix& rotate) noexcept
     return impl->SetLocalTransformRotate(rotate);
 }
 
-void Rendering::Spatial::SetWorldTransformOnUpdate(const Mathematics::TransformF& transform) noexcept
+void Rendering::Spatial::SetWorldTransformOnUpdate(const Transform& transform) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
     impl->SetWorldTransformOnUpdate(transform);
+}
+
+Rendering::PickRecordContainer Rendering::Spatial::ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    System::UnusedFunction(origin, direction, tMin, tMax);
+
+    return PickRecordContainer::Create();
 }

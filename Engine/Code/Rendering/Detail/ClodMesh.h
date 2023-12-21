@@ -59,7 +59,7 @@ namespace Rendering
 
     protected:
         // 支持分级裁剪。
-        void GetVisibleSet(Culler& culler, bool noCull) override;
+        void GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull) override;
 
     private:
         PackageType impl;

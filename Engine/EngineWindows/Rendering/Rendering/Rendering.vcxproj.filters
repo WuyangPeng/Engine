@@ -951,7 +951,7 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualData.cpp">
       <Filter>SceneGraph 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialData.cpp">
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialImpl.cpp">
       <Filter>SceneGraph 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RendererEngine\Detail\BaseRendererImpl.cpp">
@@ -1736,6 +1736,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\PickLine.cpp">
       <Filter>SceneGraph 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\NullSpatial.cpp">
+      <Filter>SceneGraph 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\ParentSpatialImpl.cpp">
+      <Filter>SceneGraph 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\NullSpatialImpl.cpp">
+      <Filter>SceneGraph 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialFactory.cpp">
+      <Filter>SceneGraph 源文件\Detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2561,7 +2573,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualData.h">
       <Filter>SceneGraph 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialData.h">
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialImpl.h">
       <Filter>SceneGraph 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RendererEngine\Detail\BaseRendererImpl.h">
@@ -3477,6 +3489,21 @@
       <Filter>SceneGraph 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\PickLine.h">
+      <Filter>SceneGraph 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\NullSpatial.h">
+      <Filter>SceneGraph 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\ParentSpatialImpl.h">
+      <Filter>SceneGraph 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\NullSpatialImpl.h">
+      <Filter>SceneGraph 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialFactory.h">
+      <Filter>SceneGraph 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SceneGraphInternalFwd.h">
       <Filter>SceneGraph 头文件</Filter>
     </ClInclude>
   </ItemGroup>

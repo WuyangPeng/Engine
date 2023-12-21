@@ -32,7 +32,7 @@ Rendering::ConstantColorEffect::ConstantColorEffect(ProgramFactory& factory, con
 {
     const auto colorConstant = impl->GetColorConstant();
 
-    auto data = colorConstant->GetData();
+    auto data = colorConstant->GetStorage();
     data.Increase<float>(color.GetRed());
     data.Increase<float>(color.GetGreen());
     data.Increase<float>(color.GetBlue());

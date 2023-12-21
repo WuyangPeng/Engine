@@ -11,6 +11,7 @@
 
 #include "PlanarShadowEffectImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "Mathematics/Algebra/MatrixDetail.h"
 #include "Mathematics/Algebra/PlaneDetail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
 #include "Mathematics/Algebra/Vector4Tools.h"
@@ -18,6 +19,7 @@
 #include "Rendering/LocalEffects/ConstantColorEffect.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Buffers/ConstantBufferDetail.h"
+#include "Rendering/SceneGraph/Flags/CullingModeFlags.h"
 #include "Rendering/SceneGraph/Node.h"
 #include "Rendering/SceneGraph/ProjectionViewWorldUpdater.h"
 #include "Rendering/Shaders/ProgramFactory.h"
@@ -145,10 +147,10 @@ void Rendering::PlanarShadowEffectImpl::Draw(const BaseRendererSharedPtr& engine
         for (auto j = 0; j < boost::numeric_cast<int>(casterVisuals.size()); ++j)
         {
             const auto& visual = casterVisuals.at(j);
-            saveVisualEffects.at(j) = visual->GetEffect();
+            saveVisualEffects.at(j) = visual->GetVisualEffect();
 
             const auto constantBuffer = casterEffects.at(j)->GetColorConstant();
-            auto color = constantBuffer->GetData();
+            auto color = constantBuffer->GetStorage();
 
             for (const auto& value : shadowColors)
             {
@@ -161,7 +163,7 @@ void Rendering::PlanarShadowEffectImpl::Draw(const BaseRendererSharedPtr& engine
             MAYBE_UNUSED const auto updateResult = engine->Update(constantBuffer);
 
             projectionViewWorldMatrices.Unsubscribe(visual);
-            visual->SetEffect(casterEffects.at(j));
+            visual->SetVisualEffect(casterEffects.at(j));
             projectionViewWorldMatrices.Subscribe(visual);
         }
 
@@ -173,7 +175,7 @@ void Rendering::PlanarShadowEffectImpl::Draw(const BaseRendererSharedPtr& engine
         {
             const auto& visual = casterVisuals.at(j);
             projectionViewWorldMatrices.Unsubscribe(visual);
-            visual->SetEffect(saveVisualEffects.at(j));
+            visual->SetVisualEffect(saveVisualEffects.at(j));
             projectionViewWorldMatrices.Subscribe(visual);
         }
 
@@ -246,7 +248,7 @@ void Rendering::PlanarShadowEffectImpl::GetModelSpaceTriangles()
 
         const auto indexBuffer = visual->GetIndexBuffer();
         const auto primitiveType = indexBuffer->GetPrimitiveType();
-        if (primitiveType != IndexFormatType::TriMesh)
+        if (primitiveType != IndexFormatType::TriangleMesh)
         {
             THROW_EXCEPTION(SYSTEM_TEXT("visual必须具有TRIMESH拓扑结构。"))
         }
@@ -255,11 +257,11 @@ void Rendering::PlanarShadowEffectImpl::GetModelSpaceTriangles()
 
         std::vector<int32_t> triangle{ get<0>(triangleTuple), get<1>(triangleTuple), get<2>(triangleTuple) };
 
-        const auto stride = vertexFormat.GetStride();
+        const auto stride = vertexFormat.GetVertexSize();
         auto& point = modelSpaceTriangles.at(index);
         for (auto j = 0; j < 3; ++j)
         {
-            auto vertices = vertexBuffer->GetData(triangle.at(j) * stride);
+            auto vertices = vertexBuffer->GetStorage(triangle.at(j) * stride);
 
             Mathematics::Vector3<float> vector3{};
             vector3.SetX(vertices.Increase<float>());

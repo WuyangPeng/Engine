@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/12 16:06)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/11 19:16)
 
 #ifndef RENDERING_BASE_SUITE_GRAPHICS_OBJECT_TESTING_BASE_DETAIL_H
 #define RENDERING_BASE_SUITE_GRAPHICS_OBJECT_TESTING_BASE_DETAIL_H
@@ -30,7 +30,7 @@ std::shared_ptr<TestingType> Rendering::GraphicsObjectTestingBase::Create(const 
 template <typename TestingType>
 void Rendering::GraphicsObjectTestingBase::RttiTest()
 {
-    auto testingType = Create<TestingType>(graphicsObjectName, beginGraphicsObjectType);
+    const auto testingType = Create<TestingType>(graphicsObjectName, beginGraphicsObjectType);
 
     GraphicsObjectRttiTrueTest(testingType, testingType);
 
@@ -75,9 +75,9 @@ void Rendering::GraphicsObjectTestingBase::CloneObjectTrueTest(GraphicsObjectTyp
 {
     const auto name = graphicsObjectName + std::to_string(System::EnumCastUnderlying(graphicsObjectType));
 
-    auto testingType = Create<TestingType>(name, graphicsObjectType);
+    const auto testingType = Create<TestingType>(name, graphicsObjectType);
 
-    auto clone = boost::polymorphic_pointer_cast<TestingType>(testingType->CloneObject());
+    const auto clone = boost::polymorphic_pointer_cast<TestingType>(testingType->CloneObject());
 
     ASSERT_EQUAL(testingType->GetName(), clone->GetName());
     ASSERT_ENUM_EQUAL(testingType->GetType(), clone->GetType());
@@ -86,19 +86,19 @@ void Rendering::GraphicsObjectTestingBase::CloneObjectTrueTest(GraphicsObjectTyp
 template <typename TestingType>
 void Rendering::GraphicsObjectTestingBase::IsNullObjectTest()
 {
-    auto testingType = Create<TestingType>(graphicsObjectName, beginGraphicsObjectType);
+    const auto testingType = Create<TestingType>(graphicsObjectName, beginGraphicsObjectType);
     ASSERT_FALSE(testingType->IsNullObject());
 }
 
 template <typename TestingType>
-void Rendering::GraphicsObjectTestingBase::UniqueIDTest()
+void Rendering::GraphicsObjectTestingBase::UniqueIdTest()
 {
-    auto testingType = Create<TestingType>(graphicsObjectName, beginGraphicsObjectType);
+    const auto testingType = Create<TestingType>(graphicsObjectName, beginGraphicsObjectType);
     ASSERT_LESS(0, testingType->GetUniqueId());
 
-    constexpr auto uniqueID = 7;
-    testingType->SetUniqueId(uniqueID);
-    ASSERT_EQUAL(testingType->GetUniqueId(), uniqueID);
+    constexpr auto uniqueId = 7;
+    testingType->SetUniqueId(uniqueId);
+    ASSERT_EQUAL(testingType->GetUniqueId(), uniqueId);
 }
 
 template <typename TestingType>
@@ -106,7 +106,7 @@ void Rendering::GraphicsObjectTestingBase::FactoryTest()
 {
     TestingType::InitializeFactory();
 
-    auto factoryFunction = OBJECT_MANAGER_SINGLETON.Find(TestingType::GetCurrentRttiType().GetName());
+    const auto factoryFunction = OBJECT_MANAGER_SINGLETON.Find(TestingType::GetCurrentRttiType().GetName());
 
     ASSERT_UNEQUAL_NULL_PTR(factoryFunction);
 }
@@ -127,7 +127,7 @@ void Rendering::GraphicsObjectTestingBase::NameTest()
     {
         const auto name = graphicsObjectName + std::to_string(System::EnumCastUnderlying(type));
 
-        auto testingType = Create<TestingType>(name, type);
+        const auto testingType = Create<TestingType>(name, type);
 
         ASSERT_NOT_THROW_EXCEPTION_2(GetObjectByNameTest<TestingType>, *testingType, name);
         ASSERT_NOT_THROW_EXCEPTION_2(GetConstObjectByNameTest<TestingType>, *testingType, name);
@@ -139,8 +139,8 @@ void Rendering::GraphicsObjectTestingBase::NameTest()
 template <typename TestingType>
 void Rendering::GraphicsObjectTestingBase::GetObjectByNameTest(const TestingType& testingType, const std::string& name)
 {
-    auto clone = boost::polymorphic_pointer_cast<TestingType>(testingType.CloneObject());
-    auto object = boost::polymorphic_pointer_cast<TestingType>(clone->GetObjectByName(name));
+    const auto clone = boost::polymorphic_pointer_cast<TestingType>(testingType.CloneObject());
+    const auto object = boost::polymorphic_pointer_cast<TestingType>(clone->GetObjectByName(name));
 
     ASSERT_EQUAL(testingType.GetName(), object->GetName());
     ASSERT_ENUM_EQUAL(testingType.GetType(), object->GetType());
@@ -149,8 +149,8 @@ void Rendering::GraphicsObjectTestingBase::GetObjectByNameTest(const TestingType
 template <typename TestingType>
 void Rendering::GraphicsObjectTestingBase::GetConstObjectByNameTest(const TestingType& testingType, const std::string& name)
 {
-    auto clone = boost::polymorphic_pointer_cast<TestingType>(testingType.CloneObject());
-    auto constObject = boost::polymorphic_pointer_cast<const TestingType>(clone->GetConstObjectByName(name));
+    const auto clone = boost::polymorphic_pointer_cast<TestingType>(testingType.CloneObject());
+    const auto constObject = boost::polymorphic_pointer_cast<const TestingType>(clone->GetConstObjectByName(name));
 
     ASSERT_EQUAL(testingType.GetName(), constObject->GetName());
     ASSERT_ENUM_EQUAL(testingType.GetType(), constObject->GetType());
@@ -159,12 +159,12 @@ void Rendering::GraphicsObjectTestingBase::GetConstObjectByNameTest(const Testin
 template <typename TestingType>
 void Rendering::GraphicsObjectTestingBase::GetAllObjectsByNameTest(const TestingType& testingType, const std::string& name)
 {
-    auto clone = boost::polymorphic_pointer_cast<TestingType>(testingType.CloneObject());
-    auto allObject = clone->GetAllObjectsByName(name);
+    const auto clone = boost::polymorphic_pointer_cast<TestingType>(testingType.CloneObject());
+    const auto allObject = clone->GetAllObjectsByName(name);
 
     ASSERT_EQUAL_FAILURE_THROW(allObject.size(), 1u, "未找到名字为" + name + "的对象。");
 
-    auto object = boost::polymorphic_pointer_cast<TestingType>(allObject.at(0));
+    const auto object = boost::polymorphic_pointer_cast<TestingType>(allObject.at(0));
 
     ASSERT_EQUAL(testingType.GetName(), object->GetName());
     ASSERT_ENUM_EQUAL(testingType.GetType(), object->GetType());
@@ -173,12 +173,12 @@ void Rendering::GraphicsObjectTestingBase::GetAllObjectsByNameTest(const Testing
 template <typename TestingType>
 void Rendering::GraphicsObjectTestingBase::GetAllConstObjectsByNameTest(const TestingType& testingType, const std::string& name)
 {
-    auto clone = boost::polymorphic_pointer_cast<TestingType>(testingType.CloneObject());
-    auto allConstObject = clone->GetAllConstObjectsByName(name);
+    const auto clone = boost::polymorphic_pointer_cast<TestingType>(testingType.CloneObject());
+    const auto allConstObject = clone->GetAllConstObjectsByName(name);
 
     ASSERT_EQUAL_FAILURE_THROW(allConstObject.size(), 1u, "未找到名字为" + name + "的对象。");
 
-    auto constObject = boost::polymorphic_pointer_cast<const TestingType>(allConstObject.at(0));
+    const auto constObject = boost::polymorphic_pointer_cast<const TestingType>(allConstObject.at(0));
 
     ASSERT_EQUAL(testingType.GetName(), constObject->GetName());
     ASSERT_ENUM_EQUAL(testingType.GetType(), constObject->GetType());
@@ -203,12 +203,13 @@ void Rendering::GraphicsObjectTestingBase::StreamTest()
 template <typename TestingType>
 void Rendering::GraphicsObjectTestingBase::GetStreamingSizeTest()
 {
-    auto testingType = Create<TestingType>(graphicsObjectName, beginGraphicsObjectType);
+    const auto testingType = Create<TestingType>(graphicsObjectName, beginGraphicsObjectType);
 
     auto streamingSize = CoreTools::GetStreamSize(TestingType::GetCurrentRttiType().GetName());
     streamingSize += 8;
     streamingSize += CoreTools::GetStreamSize(graphicsObjectName);
     streamingSize += CoreTools::GetStreamSize(beginGraphicsObjectType);
+    streamingSize += GetStreamSizeShifting();
 
     ASSERT_EQUAL(streamingSize, testingType->GetStreamingSize());
 }
@@ -216,18 +217,18 @@ void Rendering::GraphicsObjectTestingBase::GetStreamingSizeTest()
 template <typename TestingType>
 void Rendering::GraphicsObjectTestingBase::RegisterTest()
 {
-    auto testingType = Create<TestingType>(graphicsObjectName, beginGraphicsObjectType);
+    const auto testingType = Create<TestingType>(graphicsObjectName, beginGraphicsObjectType);
 
-    auto objectRegister = CoreTools::ObjectRegister::Create();
+    const auto objectRegister = CoreTools::ObjectRegister::Create();
     ASSERT_EQUAL(1, testingType->Register(*objectRegister));
 }
 
 template <typename TestingType>
 void Rendering::GraphicsObjectTestingBase::LinkTest()
 {
-    auto testingType = Create<TestingType>(graphicsObjectName, beginGraphicsObjectType);
+    const auto testingType = Create<TestingType>(graphicsObjectName, beginGraphicsObjectType);
 
-    auto objectLink = CoreTools::ObjectLink::Create();
+    const auto objectLink = CoreTools::ObjectLink::Create();
     testingType->Link(*objectLink);
 
     testingType->PostLink();
@@ -241,9 +242,9 @@ void Rendering::GraphicsObjectTestingBase::StreamCreateTest()
     {
         const auto name = graphicsObjectName + std::to_string(System::EnumCastUnderlying(type));
 
-        auto testingType = Create<TestingType>(name, type);
+        const auto testingType = Create<TestingType>(name, type);
 
-        auto saveFileBuffer = SaveTest<TestingType>(*testingType);
+        const auto saveFileBuffer = SaveTest<TestingType>(*testingType);
         ASSERT_NOT_THROW_EXCEPTION_2(LoadTest<TestingType>, saveFileBuffer, *testingType);
     }
 }
@@ -254,7 +255,7 @@ CoreTools::FileBufferSharedPtr Rendering::GraphicsObjectTestingBase::SaveTest(co
     auto bufferTarget = CreateBufferTarget(testingType);
     testingType.Save(bufferTarget);
 
-    auto fileBuffer = bufferTarget.GetFileBuffer();
+    const auto fileBuffer = bufferTarget.GetFileBuffer();
 
     OriginalBuffer buffer{ fileBuffer->begin(), fileBuffer->end() };
 
@@ -279,7 +280,7 @@ template <typename TestingType>
 CoreTools::BufferTarget Rendering::GraphicsObjectTestingBase::CreateBufferTarget(const TestingType& testingType)
 {
     constexpr auto bufferSize = 1024;
-    auto objectRegister = CoreTools::ObjectRegister::Create();
+    const auto objectRegister = CoreTools::ObjectRegister::Create();
     ASSERT_EQUAL(1, testingType.Register(*objectRegister));
 
     BufferTarget bufferTarget{ bufferSize, objectRegister };

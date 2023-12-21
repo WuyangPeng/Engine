@@ -18,6 +18,7 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Base/Float.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
+#include "Rendering/SceneGraph/Flags/VisualFlags.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, CurveMesh);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, CurveMesh);
@@ -109,8 +110,8 @@ std::vector<Rendering::CurveMesh::Edge> Rendering::CurveMesh::Allocate(int& numT
         numTotalEdges = 2 * numTotalEdges;
     }
 
-    const auto vstride = GetVertexFormat()->GetStride();
-    SetVertexBuffer(VertexBuffer::Create(*GetVertexFormat(), vstride));
+    const auto vstride = GetVertexFormat()->GetVertexSize();
+    SetVertexBuffer(VertexBuffer::Create("VertexBuffer", *GetVertexFormat(), vstride));
     std::vector<Edge> edges(numTotalEdges);
 
     if (allowDynamicChange)
@@ -121,8 +122,8 @@ std::vector<Rendering::CurveMesh::Edge> Rendering::CurveMesh::Allocate(int& numT
     }
 
     auto origParam = 0;
-    auto origData = origVBuffer.object->GetData();
-    auto fullData = GetVertexBuffer()->GetData();
+    auto origData = origVBuffer.object->GetStorage();
+    auto fullData = GetVertexBuffer()->GetStorage();
     auto index = 0;
     const auto indexDelta = (1 << level);
 

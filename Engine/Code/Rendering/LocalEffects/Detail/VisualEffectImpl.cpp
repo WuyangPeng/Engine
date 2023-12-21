@@ -273,7 +273,7 @@ void Rendering::VisualEffectImpl::SetProjectionViewWorldMatrix(const Matrix4& pr
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto data = projectionViewWorldMatrixConstant->GetData();
+    auto data = projectionViewWorldMatrixConstant->GetStorage();
 
     for (const auto container = projectionViewWorldMatrix.GetContainer();
          const auto& element : container)
@@ -286,7 +286,7 @@ Rendering::VisualEffectImpl::Matrix4 Rendering::VisualEffectImpl::GetProjectionV
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto data = projectionViewWorldMatrixConstant->GetData();
+    auto data = projectionViewWorldMatrixConstant->GetStorage();
 
     Matrix4::ContainerType container{};
     for (auto i = 0; i < Matrix4::matrixSize; ++i)

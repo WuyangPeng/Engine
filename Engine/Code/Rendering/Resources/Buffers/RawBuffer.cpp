@@ -23,13 +23,13 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, RawBuffer);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, RawBuffer);
 
 Rendering::RawBuffer::RawBuffer(int numElements)
-    : ParentType{ numElements, 4, GraphicsObjectType::RawBuffer }
+    : ParentType{ "RawBuffer", numElements, 4, GraphicsObjectType::RawBuffer }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::RawBuffer::RawBuffer(int numElements, const StorageType& storage)
-    : ParentType{ numElements, 4, storage, GraphicsObjectType::RawBuffer }
+    : ParentType{ "RawBuffer", numElements, 4, storage, GraphicsObjectType::RawBuffer }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

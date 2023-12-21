@@ -28,7 +28,7 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, CameraNode);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, CameraNode);
 
 Rendering::CameraNode::CameraNode(const CameraSharedPtr& camera)
-    : ParentType{ NodeCreate::Init }, impl{ camera }
+    : ParentType{ "CameraNode", NodeCreate::Init }, impl{ camera }
 {
     const auto transform = impl->GetLocalTransform();
 
@@ -49,7 +49,7 @@ void Rendering::CameraNode::SetCamera(const CameraSharedPtr& camera)
 
     SetLocalTransform(transform);
 
-    Update();
+    MAYBE_UNUSED const auto result = Update();
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, CameraNode, GetCamera, Rendering::ConstCameraSharedPtr)

@@ -21,7 +21,7 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ConvexRegion);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ConvexRegion);
 
 Rendering::ConvexRegion::ConvexRegion(int numPortals, const std::vector<CoreTools::ObjectAssociated<Portal>>& portals)
-    : ParentType{ NodeCreate::Init }, numPortals{ numPortals }, portals{ portals }, visited{ false }
+    : ParentType{ "ConvexRegion", NodeCreate::Init }, numPortals{ numPortals }, portals{ portals }, visited{ false }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -42,7 +42,7 @@ bool Rendering::ConvexRegion::UpdateWorldData(double applicationTime)
     return result;
 }
 
-void Rendering::ConvexRegion::GetVisibleSet(Culler& culler, bool noCull)
+void Rendering::ConvexRegion::GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -55,7 +55,7 @@ void Rendering::ConvexRegion::GetVisibleSet(Culler& culler, bool noCull)
             portals.at(i)->GetVisibleSet(culler, noCull);
         }
 
-        ParentType::GetVisibleSet(culler, noCull);
+        ParentType::GetVisibleSet(culler, camera, noCull);
 
         visited = false;
     }

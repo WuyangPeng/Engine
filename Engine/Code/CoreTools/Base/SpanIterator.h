@@ -12,6 +12,7 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include <array>
 #include <type_traits>
 
 namespace CoreTools
@@ -57,12 +58,30 @@ namespace CoreTools
         template <typename T>
         void Increase(T value);
 
+        template <typename T>
+        NODISCARD T GetValue(int step) const;
+
+        template <typename T, int Size>
+        NODISCARD std::array<T, Size> GetValue(int step) const;
+
+        template <typename T>
+        void SetValue(int step, T value);
+
+        template <typename T, int Size>
+        void SetValue(int step, const std::array<T, Size>& value);
+
     private:
         template <typename T>
         NODISCARD const T& ReinterpretCast() const;
 
         template <typename T>
         NODISCARD T& ReinterpretCast();
+
+        template <typename T>
+        NODISCARD const T& ReinterpretCast(int step) const;
+
+        template <typename T>
+        NODISCARD T& ReinterpretCast(int step);
 
     private:
         Iter begin{};

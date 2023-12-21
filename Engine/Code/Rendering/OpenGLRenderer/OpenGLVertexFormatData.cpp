@@ -84,7 +84,7 @@ void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::F
 }
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::Psize>::Enable(MAYBE_UNUSED int stride) noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::PSize>::Enable(MAYBE_UNUSED int stride) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -164,7 +164,7 @@ void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::F
 }
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::Psize>::Disable() noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::PSize>::Disable() noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

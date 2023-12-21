@@ -18,6 +18,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Flags/VisualFlags.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, TrianglesStrip);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TrianglesStrip);
@@ -37,7 +38,7 @@ Rendering::TrianglesStrip::TrianglesStrip(const VertexFormatSharedPtr& vertexfor
 {
     const auto numVertices = vertexbuffer->GetNumElements();
 
-    IndexBufferSharedPtr indexBuffer{ IndexBuffer::Create(IndexFormatType::PolyPoint, numVertices, indexSize) };
+    IndexBufferSharedPtr indexBuffer{ IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, numVertices, indexSize) };
     InitIndexBuffer(*indexBuffer);
     SetIndexBuffer(indexBuffer);
 
@@ -60,7 +61,7 @@ Rendering::TriangleIndex
 
     if (0 <= index && index < GetNumTriangles())
     {
-        auto indices = (GetConstIndexBuffer()->GetData(index));
+        auto indices = (GetConstIndexBuffer()->GetStorage(index));
         const auto firstIndex = indices.Increase<int>();
         auto secondIndex = -1;
         auto thirdIndex = -1;
@@ -118,7 +119,7 @@ void Rendering::TrianglesStrip::InitIndexBuffer(IndexBuffer& indexBuffer)
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-        const auto indices = reinterpret_cast<int16_t*>(*indexBuffer.GetData(0));
+        const auto indices = reinterpret_cast<int16_t*>(*indexBuffer.GetStorage(0));
 
 #include SYSTEM_WARNING_POP
 
@@ -140,7 +141,7 @@ void Rendering::TrianglesStrip::InitIndexBuffer(IndexBuffer& indexBuffer)
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-        auto indices = reinterpret_cast<int32_t*>(*indexBuffer.GetData(0));
+        auto indices = reinterpret_cast<int32_t*>(*indexBuffer.GetStorage(0));
 
 #include SYSTEM_WARNING_POP
         if (indices != nullptr)

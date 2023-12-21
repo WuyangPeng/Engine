@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.0 (2023/11/19 00:20)
+/// 版本：1.0.0.2 (2023/12/17 19:45)
 
 #ifndef OFFLINE_SERVER_OFFLINE_SERVER_HELPER_H
 #define OFFLINE_SERVER_OFFLINE_SERVER_HELPER_H

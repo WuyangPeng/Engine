@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %TheLastOverlordTestingWin32DebugLib% CrossServerTestingD.exe
+start /d %TheLastOverlordTestingWin32ReleaseLib% CrossServerTesting.exe
+start /d %TheLastOverlordTestingX64DebugLib% CrossServerTestingD.exe
+start /d %TheLastOverlordTestingX64ReleaseLib% CrossServerTesting.exe
+start /d %TheLastOverlordTestingStaticWin32DebugLib% CrossServerTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticWin32ReleaseLib% CrossServerTestingStatic.exe
+start /d %TheLastOverlordTestingStaticX64DebugLib% CrossServerTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticX64ReleaseLib% CrossServerTestingStatic.exe
+
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32DebugLib% CrossServerTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32ReleaseLib% CrossServerTestingStatic.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64DebugLib% CrossServerTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64ReleaseLib% CrossServerTestingStatic.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32DebugLib% CrossServerTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32ReleaseLib% CrossServerTesting.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64DebugLib% CrossServerTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64ReleaseLib% CrossServerTesting.exe
+
+pause

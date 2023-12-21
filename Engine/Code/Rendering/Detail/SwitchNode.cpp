@@ -30,14 +30,14 @@ Rendering::SwitchNode::SwitchNodeSharedPtr Rendering::SwitchNode::Create()
 }
 
 Rendering::SwitchNode::SwitchNode(NodeCreate nodeCreate)
-    : ParentType{ nodeCreate }, activeChild{ System::EnumCastUnderlying(SwitchNodeType::InvalidChild) }
+    : ParentType{ "SwitchNode", nodeCreate }, activeChild{ System::EnumCastUnderlying(SwitchNodeType::InvalidChild) }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, SwitchNode)
 
-void Rendering::SwitchNode::GetVisibleSet(Culler& culler, bool noCull)
+void Rendering::SwitchNode::GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull)
 {
     if (activeChild != System::EnumCastUnderlying(SwitchNodeType::InvalidChild))
     {
@@ -45,7 +45,7 @@ void Rendering::SwitchNode::GetVisibleSet(Culler& culler, bool noCull)
         auto child = GetChild(activeChild);
         if (child)
         {
-            child->OnGetVisibleSet(culler, noCull);
+            child->OnGetVisibleSet(culler, camera, noCull);
         }
     }
 }

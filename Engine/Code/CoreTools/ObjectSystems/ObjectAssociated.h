@@ -59,6 +59,14 @@ namespace CoreTools
             return object.get();
         }
 
+        NODISCARD ObjectSharedPtr Clone() const
+        {
+            if (object != nullptr)
+                return object->Clone();
+            else
+                return object;
+        }
+
         ObjectSharedPtr object;
         int64_t associated;
     };

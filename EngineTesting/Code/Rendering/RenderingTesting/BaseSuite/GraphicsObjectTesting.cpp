@@ -1,17 +1,16 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/12 16:07)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/11 19:18)
 
 #include "GraphicsObjectTesting.h"
 #include "GraphicsObjectTestingBaseDetail.h"
 #include "Detail/GraphicsObjectTest.h"
 #include "System/Helper/EnumOperator.h"
-#include "CoreTools/FileManager/FileBuffer.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -45,7 +44,7 @@ void Rendering::GraphicsObjectTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CloneObjectTest<GraphicsObjectTest>);
     ASSERT_NOT_THROW_EXCEPTION_0(NameTest<GraphicsObjectTest>);
     ASSERT_NOT_THROW_EXCEPTION_0(IsNullObjectTest<GraphicsObjectTest>);
-    ASSERT_NOT_THROW_EXCEPTION_0(UniqueIDTest<GraphicsObjectTest>);
+    ASSERT_NOT_THROW_EXCEPTION_0(UniqueIdTest<GraphicsObjectTest>);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest<GraphicsObjectTest>);
 }
 

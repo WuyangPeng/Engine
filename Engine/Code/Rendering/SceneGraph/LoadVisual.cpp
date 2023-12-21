@@ -22,7 +22,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 Rendering::LoadVisual::LoadVisual(const System::String& name)
-    : impl{ VisualPrimitiveType::None }
+    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     LoadFromFile(name);
 
@@ -38,7 +38,7 @@ bool Rendering::LoadVisual::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-Rendering::VisualPrimitiveType Rendering::LoadVisual::GetPrimitiveType() const noexcept
+Rendering::IndexFormatType Rendering::LoadVisual::GetPrimitiveType() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -76,20 +76,6 @@ void Rendering::LoadVisual::LoadFromFile(const System::String& name)
 
     if (VisualPrimitiveType::None < type && type < VisualPrimitiveType::MaxQuantity)
     {
-        auto vertexFormat = VertexFormat::LoadFromFile(manager);
-
-        auto vertexBuffer = VertexBuffer::Create(*VertexFormat::Create(), 0);
-
-        auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, 0);
-
-        impl->SetPrimitiveType(type);
-        impl->SetVertexFormat(vertexFormat);
-        impl->SetVertexBuffer(vertexBuffer);
-
-        if (indexBuffer->GetNumElements() != 0)
-            impl->SetIndexBuffer(indexBuffer);
-        else
-            impl->SetIndexBuffer(nullptr);
     }
 }
 
@@ -99,23 +85,23 @@ Rendering::VisualSharedPtr Rendering::LoadVisual::CreateFromFile(const System::S
 
     switch (loadVisual.GetPrimitiveType())
     {
-        case VisualPrimitiveType::PolyPoint:
+        case IndexFormatType::PolygonPoint:
         {
             return std::make_shared<Polypoint>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer());
         }
-        case VisualPrimitiveType::PolySegmentsDisjoint:
+        case IndexFormatType::PolygonSegmentDisjoint:
         {
             return std::make_shared<Polysegment>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), false);
         }
-        case VisualPrimitiveType::PolySegmentsContiguous:
+        case IndexFormatType::PolygonSegmentContiguous:
         {
             return std::make_shared<Polysegment>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), true);
         }
-        case VisualPrimitiveType::TriangleMesh:
+        case IndexFormatType::TriangleMesh:
         {
             return std::make_shared<TrianglesMesh>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), loadVisual.GetIndexBuffer());
         }
-        case VisualPrimitiveType::TriangleStrip:
+        case IndexFormatType::TriangleStrip:
         {
             auto indexBuffer = loadVisual.GetIndexBuffer();
             if (!indexBuffer)
@@ -127,7 +113,7 @@ Rendering::VisualSharedPtr Rendering::LoadVisual::CreateFromFile(const System::S
                 return std::make_shared<TrianglesStrip>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexBuffer);
             }
         }
-        case VisualPrimitiveType::TriangleFan:
+        case IndexFormatType::TriangleStripAdjacency:
         {
             auto indexBuffer = loadVisual.GetIndexBuffer();
             if (!indexBuffer)
@@ -152,11 +138,11 @@ Rendering::VisualSharedPtr Rendering::LoadVisual::CreateFromFile(const System::S
 
     switch (loadVisual.GetPrimitiveType())
     {
-        case VisualPrimitiveType::TriangleStrip:
+        case IndexFormatType::TriangleStripAdjacency:
         {
             return std::make_shared<TrianglesStrip>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexSize);
         }
-        case VisualPrimitiveType::TriangleFan:
+        case IndexFormatType::TriangleMeshAdjacency:
         {
             return std::make_shared<TrianglesFan>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexSize);
         }

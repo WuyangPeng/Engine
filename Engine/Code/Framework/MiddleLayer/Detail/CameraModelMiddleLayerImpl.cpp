@@ -55,7 +55,7 @@ void Framework::CameraModelMiddleLayerImpl::InitializeObjectMotion()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    objectMotion = make_shared<ObjectMotion>(Rendering::Node::Create());
+    objectMotion = make_shared<ObjectMotion>(Rendering::Node::Create("ObjectMotion"));
 }
 
 bool Framework::CameraModelMiddleLayerImpl::MoveCamera()

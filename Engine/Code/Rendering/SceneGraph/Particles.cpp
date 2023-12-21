@@ -10,6 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "Particles.h"
+#include "Flags/VisualFlags.h"
 #include "Detail/ParticlesImpl.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -18,6 +19,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/APointDetail.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 #include "Rendering/SceneGraph/Culler.h"
 
@@ -45,7 +47,7 @@ Rendering::Particles::Particles(const VertexFormatSharedPtr& vertexformat,
     {
         point.emplace_back(APoint{ element[0], element[1], element[2] });
     }
-    ComputeBounding(point);
+    // ComputeBounding(point);
 
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -60,7 +62,7 @@ void Rendering::Particles::InitIndexBuffer(int indexSize)
     RENDERING_ASSERTION_1(numVertices % 4 == 0, "顶点数必须是4的倍数。\n");
     RENDERING_ASSERTION_1(numParticles == impl->GetNumParticles(), "粒子数必须和位置数组大小相等。\n");
 
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, 6 * numParticles, indexSize);
+    auto indexBuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, 6 * numParticles, indexSize);
     InitIndexBufferInParticles(*indexBuffer);
     SetIndexBuffer(indexBuffer);
 }
@@ -87,7 +89,7 @@ void Rendering::Particles::InitIndexBufferInParticles(IndexBuffer& indexBuffer)
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-        auto indices = reinterpret_cast<int16_t*>(&*indexBuffer.GetData(0).GetCurrent());
+        auto indices = reinterpret_cast<int16_t*>(&*indexBuffer.GetStorage(0).GetCurrent());
 
 #include SYSTEM_WARNING_POP
 
@@ -114,7 +116,7 @@ void Rendering::Particles::InitIndexBufferInParticles(IndexBuffer& indexBuffer)
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-        auto indices = reinterpret_cast<int32_t*>(&*indexBuffer.GetData(0).GetCurrent());
+        auto indices = reinterpret_cast<int32_t*>(&*indexBuffer.GetStorage(0).GetCurrent());
 
 #include SYSTEM_WARNING_POP
 
@@ -200,10 +202,10 @@ void Rendering::Particles::GenerateParticles(const Camera& camera)
     UpdateModelSpace(VisualUpdateType::Normals);
 }
 
-void Rendering::Particles::GetVisibleSet(Culler& culler, bool noCull)
+void Rendering::Particles::GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull)
 {
     GenerateParticles(*culler.GetCamera());
-    ParentType::GetVisibleSet(culler, noCull);
+    ParentType::GetVisibleSet(culler, camera, noCull);
 }
 
 Rendering::Particles::Particles(LoadConstructor value)

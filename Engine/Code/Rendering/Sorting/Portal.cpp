@@ -328,7 +328,7 @@ void Rendering::Portal::GetVisibleSet(Culler& culler, bool noCull)
     {
         culler.SetFrustum(reducedFrustum);
 
-        adjacentRegion.object.lock()->GetVisibleSet(culler, noCull);
+        adjacentRegion.object.lock()->GetVisibleSet(culler, Camera::Create(false, DepthType::ZeroToOne, 0.0f), noCull);
 
         culler.SetFrustum(saveFrustum);
     }

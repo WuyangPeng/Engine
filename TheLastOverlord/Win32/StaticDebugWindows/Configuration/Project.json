@@ -3,12 +3,13 @@
   "RobotClient": 1,
   "MessageClient": 1,
   "BackgroundClient": 1,
-
   "GatewayServer": 1,
   "LoginServer": 1,
+  "PlayerServer": 1,
   "GameServer": 1,
   "FightingServer": 1,
   "WorldServer": 1,
+  "CrossServer": 1,
   "OfflineServer": 1,
   "LeaderboardServer": 1,
   "MailServer": 1,
@@ -16,8 +17,8 @@
   "RechargeServer": 1,
   "LogServer": 1,
   "GameMasterServer": 1,
-  "ServerManager": 1,
-  "BackgroundServer": 1,
   "UpdateServer": 1,
-  "DatabaseServer": 1
+  "BackgroundServer": 1,
+  "DatabaseServer": 1,
+  "ServerManager": 1
 }

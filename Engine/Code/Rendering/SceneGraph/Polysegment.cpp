@@ -23,7 +23,7 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Polysegment);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Polysegment);
 
 Rendering::Polysegment::Polysegment(const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, bool contiguous)
-    : ParentType{ contiguous ? VisualPrimitiveType::PolySegmentsContiguous : VisualPrimitiveType::PolySegmentsDisjoint, vertexformat, vertexbuffer, IndexBufferSharedPtr{} },
+    : ParentType{ "Polysegment", vertexformat, vertexbuffer, IndexBufferSharedPtr{} },
       numSegments{ 0 }, contiguous{ contiguous }
 {
     const auto numVertices = vertexbuffer->GetNumElements();

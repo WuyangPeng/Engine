@@ -202,6 +202,15 @@
     <Filter Include="SceneGraphSuite 头文件\Camera">
       <UniqueIdentifier>{16e86711-c307-4544-8cc4-2a399aefdae0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HelperSuite 源文件">
+      <UniqueIdentifier>{041efdf2-6ece-493f-9d2a-6e732259bba6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResourcesSuite 头文件\Detail">
+      <UniqueIdentifier>{580c8f7f-460b-49ba-a4e9-c9942983c245}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResourcesSuite 源文件\Detail">
+      <UniqueIdentifier>{21177c35-d3c5-4c10-ae0f-741e187dff53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json">
@@ -545,7 +554,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\VertexBufferAccessorTesting.h">
       <Filter>ResourcesSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\VertexFormatElementTesting.h">
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\VertexFormatAttributeTesting.h">
       <Filter>ResourcesSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\VertexFormatTesting.h">
@@ -605,9 +614,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\ScreenTargetTesting.h">
       <Filter>SceneGraphSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\SpatialTest.h">
-      <Filter>SceneGraphSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\SpatialTesting.h">
       <Filter>SceneGraphSuite 头文件</Filter>
     </ClInclude>
@@ -630,9 +636,6 @@
       <Filter>SceneGraphSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\VisibleSetTesting.h">
-      <Filter>SceneGraphSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\VisualTest.h">
       <Filter>SceneGraphSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\VisualTesting.h">
@@ -950,9 +953,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\ViewVolume\ViewVolumeTesting.h">
       <Filter>SceneGraphSuite 头文件\ViewVolume</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\ViewVolume\ViewVolumeTestingBase.h">
-      <Filter>SceneGraphSuite 头文件\ViewVolume</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Detail\ViewVolumeTool.h">
       <Filter>SceneGraphSuite 头文件\Detail</Filter>
     </ClInclude>
@@ -964,6 +964,36 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Camera\PickLineTesting.h">
       <Filter>SceneGraphSuite 头文件\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Detail\SpatialTest.h">
+      <Filter>SceneGraphSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\SceneGraphTestingBase.h">
+      <Filter>SceneGraphSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\HelperSuite\UserMacroTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Detail\VisualTest.h">
+      <Filter>SceneGraphSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\ResourceTesting.h">
+      <Filter>ResourcesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\Detail\ResourcesTest.h">
+      <Filter>ResourcesSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\Detail\BufferTest.h">
+      <Filter>ResourcesSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\StructuredBufferTesting.h">
+      <Filter>ResourcesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\VertexBufferTesting.h">
+      <Filter>ResourcesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\IndexBufferTesting.h">
+      <Filter>ResourcesSuite 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1129,7 +1159,7 @@
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\VertexBufferAccessorTesting.cpp">
       <Filter>ResourcesSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\VertexFormatElementTesting.cpp">
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\VertexFormatAttributeTesting.cpp">
       <Filter>ResourcesSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\VertexFormatTesting.cpp">
@@ -1174,9 +1204,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\ScreenTargetTesting.cpp">
       <Filter>SceneGraphSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\SpatialTest.cpp">
-      <Filter>SceneGraphSuite 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\SpatialTesting.cpp">
       <Filter>SceneGraphSuite 源文件</Filter>
     </ClCompile>
@@ -1199,9 +1226,6 @@
       <Filter>SceneGraphSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\VisibleSetTesting.cpp">
-      <Filter>SceneGraphSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\VisualTest.cpp">
       <Filter>SceneGraphSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\VisualTesting.cpp">
@@ -1489,9 +1513,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\ViewVolume\ViewVolumeTesting.cpp">
       <Filter>SceneGraphSuite 源文件\ViewVolume</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\ViewVolume\ViewVolumeTestingBase.cpp">
-      <Filter>SceneGraphSuite 源文件\ViewVolume</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Detail\ViewVolumeTool.cpp">
       <Filter>SceneGraphSuite 源文件\Detail</Filter>
     </ClCompile>
@@ -1503,6 +1524,36 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Camera\PickLineTesting.cpp">
       <Filter>SceneGraphSuite 源文件\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Detail\SpatialTest.cpp">
+      <Filter>SceneGraphSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\SceneGraphTestingBase.cpp">
+      <Filter>SceneGraphSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\HelperSuite\UserMacroTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\Detail\VisualTest.cpp">
+      <Filter>SceneGraphSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\ResourceTesting.cpp">
+      <Filter>ResourcesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\Detail\ResourcesTest.cpp">
+      <Filter>ResourcesSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\Detail\BufferTest.cpp">
+      <Filter>ResourcesSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\StructuredBufferTesting.cpp">
+      <Filter>ResourcesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\VertexBufferTesting.cpp">
+      <Filter>ResourcesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\IndexBufferTesting.cpp">
+      <Filter>ResourcesSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

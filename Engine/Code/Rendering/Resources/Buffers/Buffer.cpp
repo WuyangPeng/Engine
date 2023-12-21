@@ -1,17 +1,16 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 14:25)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/12 17:05)
 
 #include "Rendering/RenderingExport.h"
 
 #include "Buffer.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
@@ -21,20 +20,20 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Buffer);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Buffer);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Buffer);
 
-Rendering::Buffer::Buffer(GraphicsObjectType type)
-    : ParentType{ type }
+Rendering::Buffer::Buffer(const std::string& name, GraphicsObjectType type)
+    : ParentType{ name, type }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::Buffer::Buffer(int numElements, int elementSize, GraphicsObjectType type)
-    : ParentType{ numElements, elementSize, type }
+Rendering::Buffer::Buffer(const std::string& name, int numElements, int elementSize, GraphicsObjectType type, bool createStorage)
+    : ParentType{ name, numElements, elementSize, type, createStorage }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::Buffer::Buffer(int numElements, int elementSize, const StorageType& storage, GraphicsObjectType type)
-    : ParentType{ numElements, elementSize, storage, type }
+Rendering::Buffer::Buffer(const std::string& name, int numElements, int elementSize, const StorageType& storage, GraphicsObjectType type)
+    : ParentType{ name, numElements, elementSize, storage, type }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

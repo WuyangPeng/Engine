@@ -9,7 +9,6 @@
 
 #include "Rendering/RenderingExport.h"
 
-#include "../Resources/Flags/DataFormatType.h"
 #include "ImageProcessingBase.h"
 #include "System/Helper/PragmaWarning.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
@@ -21,6 +20,7 @@
 #include "Mathematics/Base/Float.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
+#include "Rendering/Resources/Flags/DataFormatType.h"
 
 Rendering::ImageProcessingBase::ImageProcessingBase(int numCols, int numRows, int numTargets)
     : numCols{ numCols },
@@ -51,14 +51,10 @@ Rendering::ImageProcessingBase::ImageProcessingBase(int numCols, int numRows, in
     triple.emplace_back(DataFormatType::R32G32B32Float, VertexFormatFlags::Semantic::Position, 0, 0);
     triple.emplace_back(DataFormatType::R32G32Float, VertexFormatFlags::Semantic::TextureCoord, 1, boost::numeric_cast<int>(3 * sizeof(float)));
 
-    auto vformat = VertexFormat::Create(triple);
+    auto vformat = VertexFormat::Create("VertexFormat", triple);
 
-    vformat->SetAttribute(0, DataFormatType::R32G32B32Float, VertexFormatFlags::Semantic::Position, 0, 0);
-    vformat->SetAttribute(1, DataFormatType::R32G32Float, VertexFormatFlags::Semantic::TextureCoord, 0, 3 * sizeof(float));
-    vformat->SetStride(5 * sizeof(float));
-
-    const auto vstride = vformat->GetStride();
-    auto vbuffer = VertexBuffer::Create(*vformat, vstride);
+    const auto vstride = vformat->GetVertexSize();
+    auto vbuffer = VertexBuffer::Create("VertexBuffer", *vformat, vstride);
     VertexBuffer vba = *vbuffer;
 
     const Mathematics::Float2 tc0{};
@@ -66,9 +62,9 @@ Rendering::ImageProcessingBase::ImageProcessingBase(int numCols, int numRows, in
     const Mathematics::Float2 tc2{};
     const Mathematics::Float2 tc3{};
 
-    auto ibuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, 6, boost::numeric_cast<int>(sizeof(int)));
+    auto ibuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, 6, boost::numeric_cast<int>(sizeof(int)));
 
-    auto indices = ibuffer->GetData();
+    auto indices = ibuffer->GetStorage();
     indices.Increase<int32_t>(0);
     indices.Increase<int32_t>(1);
     indices.Increase<int32_t>(2);

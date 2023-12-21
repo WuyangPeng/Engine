@@ -50,7 +50,7 @@ void Rendering::BlendStateTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CloneObjectTest<BlendState>);
     ASSERT_NOT_THROW_EXCEPTION_0(NameTest<BlendState>);
     ASSERT_NOT_THROW_EXCEPTION_0(IsNullObjectTest<BlendState>);
-    ASSERT_NOT_THROW_EXCEPTION_0(UniqueIDTest<BlendState>);
+    ASSERT_NOT_THROW_EXCEPTION_0(UniqueIdTest<BlendState>);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
     ASSERT_NOT_THROW_EXCEPTION_0(BlendStateTest);
 }

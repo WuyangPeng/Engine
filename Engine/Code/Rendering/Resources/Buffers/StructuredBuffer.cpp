@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 16:46)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/13 09:30)
 
 #include "Rendering/RenderingExport.h"
 
@@ -24,16 +24,16 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, StructuredBuffer);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, StructuredBuffer);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, StructuredBuffer);
 
-Rendering::StructuredBuffer::StructuredBuffer(int numElements, int elementSize)
-    : ParentType{ numElements, elementSize, GraphicsObjectType::StructuredBuffer },
+Rendering::StructuredBuffer::StructuredBuffer(const std::string& name, int numElements, int elementSize, bool createStorage)
+    : ParentType{ name, numElements, elementSize, GraphicsObjectType::StructuredBuffer, createStorage },
       counterType{ CounterType::None },
       keepInternalCount{ false }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::StructuredBuffer::StructuredBuffer(int numElements, int elementSize, const StorageType& storage)
-    : ParentType{ numElements, elementSize, storage, GraphicsObjectType::StructuredBuffer },
+Rendering::StructuredBuffer::StructuredBuffer(const std::string& name, int numElements, int elementSize, const StorageType& storage)
+    : ParentType{ name, numElements, elementSize, storage, GraphicsObjectType::StructuredBuffer },
       counterType{ CounterType::None },
       keepInternalCount{ false }
 {
@@ -43,6 +43,13 @@ Rendering::StructuredBuffer::StructuredBuffer(int numElements, int elementSize, 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, StructuredBuffer)
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::StructuredBuffer::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return Clone();
+}
+
+Rendering::StructuredBuffer::StructuredBufferSharedPtr Rendering::StructuredBuffer::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -101,7 +108,12 @@ int Rendering::StructuredBuffer::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return ParentType::GetStreamingSize();
+    auto size = ParentType::GetStreamingSize();
+
+    size += CoreTools::GetStreamSize(counterType);
+    size += CoreTools::GetStreamSize(keepInternalCount);
+
+    return size;
 }
 
 int64_t Rendering::StructuredBuffer::Register(CoreTools::ObjectRegister& target) const
@@ -118,6 +130,8 @@ void Rendering::StructuredBuffer::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     ParentType::Save(target);
+    target.WriteEnum(counterType);
+    target.Write(keepInternalCount);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -143,6 +157,8 @@ void Rendering::StructuredBuffer::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
+    source.ReadEnum(counterType);
+    keepInternalCount = source.ReadBool();
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

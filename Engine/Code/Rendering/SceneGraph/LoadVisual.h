@@ -39,7 +39,7 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD VisualPrimitiveType GetPrimitiveType() const noexcept;
+        NODISCARD IndexFormatType GetPrimitiveType() const;
 
         NODISCARD VertexFormatSharedPtr GetVertexFormat() noexcept;
         NODISCARD VertexBufferSharedPtr GetVertexBuffer() noexcept;

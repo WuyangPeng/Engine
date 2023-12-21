@@ -22,15 +22,15 @@
 #include "Mathematics/Base/Float.h"
 #include "Mathematics/CurvesSurfacesVolumes/BSplineBasisDetail.h"
 #include "Mathematics/CurvesSurfacesVolumes/BSplineVolumeDetail.h"
-
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
+#include "Rendering/SceneGraph/Flags/VisualFlags.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, BoxSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, BoxSurface);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, BoxSurface);
 
 Rendering::BoxSurface::BoxSurface(const Mathematics::BSplineVolume<float>& volume, int numUSamples, int numVSamples, int numWSamples, const std::array<VertexFormatSharedPtr, 6>& vformat)
-    : ParentType{ NodeCreate::Init },
+    : ParentType{ "BoxSurface", NodeCreate::Init },
       volume{ std::make_shared<Mathematics::BSplineVolume<float>>(volume) },
       numUSamples{ numUSamples },
       numVSamples{ numVSamples },
@@ -80,8 +80,8 @@ Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface::CreateFace(int numRows,
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    const auto vstride = vformat->GetStride();
-    auto vbuffer = VertexBuffer::Create(*vformat, vstride);
+    const auto vstride = vformat->GetVertexSize();
+    auto vbuffer = VertexBuffer::Create("VertexBuffer", *vformat, vstride);
 
     std::array<float, 3> param{};
     param.at(permute.at(2)) = faceValue;
@@ -105,8 +105,8 @@ Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface::CreateFace(int numRows,
     }
 
     const auto numTriangles = 2 * (numRows - 1) * (numCols - 1);
-    auto ibuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, 3 * numTriangles, boost::numeric_cast<int>(sizeof(int32_t)));
-    auto spanIterator = ibuffer->GetData();
+    auto ibuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, 3 * numTriangles, boost::numeric_cast<int>(sizeof(int32_t)));
+    auto spanIterator = ibuffer->GetStorage();
 
     for (auto row = 0, i = 0; row < numRows - 1; ++row)
     {

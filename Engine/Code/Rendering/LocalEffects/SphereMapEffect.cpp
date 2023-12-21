@@ -95,7 +95,7 @@ void Rendering::SphereMapEffect::SetViewWorldMatrix(const Matrix4& viewWorldMatr
 
     const auto projectorMatrixConstant = GetViewWorldMatrixConstant();
 
-    auto data = projectorMatrixConstant->GetData();
+    auto data = projectorMatrixConstant->GetStorage();
 
     for (const auto value : viewWorldMatrix.GetContainer())
     {
@@ -109,7 +109,7 @@ Rendering::VisualEffect::Matrix4 Rendering::SphereMapEffect::GetViewWorldMatrix(
 
     const auto projectorMatrixConstant = impl->GetViewWorldMatrixConstant();
 
-    auto data = projectorMatrixConstant->GetData();
+    auto data = projectorMatrixConstant->GetStorage();
 
     Matrix4::ContainerType matrix4{};
     for (auto& value : matrix4)

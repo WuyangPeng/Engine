@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.0 (2023/11/18 17:09)
+/// 版本：1.0.0.2 (2023/12/17 19:26)
 
 #ifndef THE_LAST_OVERLORD_VERSION_H
 #define THE_LAST_OVERLORD_VERSION_H
@@ -15,6 +15,6 @@
 //  gTheLastOverlordVersion / 10000 % 100 是次版本号
 //  gTheLastOverlordVersion / 1000000 % 100 是主版本号
 
-constexpr auto gTheLastOverlordVersion = 1000000;
+constexpr auto gTheLastOverlordVersion = 1000002;
 
 #endif  // THE_LAST_OVERLORD_VERSION_H

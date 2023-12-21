@@ -1,33 +1,37 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 17:11)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/15 14:14)
 
 #include "Rendering/RenderingExport.h"
 
 #include "VertexFormatAttribute.h"
-#include "System/Helper/EnumCast.h"
-#include "CoreTools/FileManager/ReadFileManager.h"
-#include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
+#include "Rendering/Resources/Flags/VertexFormatFlags.h"
 
 Rendering::VertexFormatAttribute::VertexFormatAttribute() noexcept
-    : dataFormatType{ DataFormatType::Unknown }, semantic{ VertexFormatFlags::Semantic::None }, usageIndex{ 0 }, offset{ 0 }
+    : dataFormatType{ DataFormatType::Unknown }, semantic{ Semantic::None }, unit{ 0 }, offset{ 0 }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::VertexFormatAttribute::VertexFormatAttribute(DataFormatType type, Semantic usage, int usageIndex, int offset) noexcept
-    : dataFormatType{ type }, semantic{ usage }, usageIndex{ usageIndex }, offset{ offset }
+Rendering::VertexFormatAttribute::VertexFormatAttribute(DataFormatType type, Semantic semantic, int unit) noexcept
+    : dataFormatType{ type }, semantic{ semantic }, unit{ unit }, offset{ 0 }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::VertexFormatAttribute::VertexFormatAttribute(DataFormatType type, Semantic semantic, int unit, int offset) noexcept
+    : dataFormatType{ type }, semantic{ semantic }, unit{ unit }, offset{ offset }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -48,32 +52,32 @@ void Rendering::VertexFormatAttribute::SetType(DataFormatType type) noexcept
     dataFormatType = type;
 }
 
-Rendering::VertexFormatFlags::Semantic Rendering::VertexFormatAttribute::GetUsage() const noexcept
+Rendering::VertexFormatFlags::Semantic Rendering::VertexFormatAttribute::GetSemantic() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return semantic;
 }
 
-void Rendering::VertexFormatAttribute::SetUsage(Semantic usage) noexcept
+void Rendering::VertexFormatAttribute::SetSemantic(Semantic aSemantic) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    semantic = usage;
+    semantic = aSemantic;
 }
 
-int Rendering::VertexFormatAttribute::GetUsageIndex() const noexcept
+int Rendering::VertexFormatAttribute::GetUnit() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return usageIndex;
+    return unit;
 }
 
-void Rendering::VertexFormatAttribute::SetUsageIndex(int aUsageIndex) noexcept
+void Rendering::VertexFormatAttribute::SetUnit(int aUnit) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    usageIndex = aUsageIndex;
+    unit = aUnit;
 }
 
 int Rendering::VertexFormatAttribute::GetOffset() const noexcept
@@ -90,13 +94,30 @@ void Rendering::VertexFormatAttribute::SetOffset(int aOffset) noexcept
     offset = aOffset;
 }
 
+void Rendering::VertexFormatAttribute::SetVertexFormatAttribute(DataFormatType type, Semantic aSemantic, int aUnit, int aOffset) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    dataFormatType = type;
+    semantic = aSemantic;
+    unit = aUnit;
+    offset = aOffset;
+}
+
+void Rendering::VertexFormatAttribute::Clear() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    SetVertexFormatAttribute(DataFormatType::Unknown, Semantic::None, 0, 0);
+}
+
 int Rendering::VertexFormatAttribute::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     auto size = CoreTools::GetStreamSize(dataFormatType);
     size += CoreTools::GetStreamSize(semantic);
-    size += CoreTools::GetStreamSize(usageIndex);
+    size += CoreTools::GetStreamSize(unit);
     size += CoreTools::GetStreamSize(offset);
 
     return size;
@@ -108,7 +129,7 @@ void Rendering::VertexFormatAttribute::Save(BufferTarget& target) const
 
     target.WriteEnum(dataFormatType);
     target.WriteEnum(semantic);
-    target.Write(usageIndex);
+    target.Write(unit);
     target.Write(offset);
 }
 
@@ -118,26 +139,6 @@ void Rendering::VertexFormatAttribute::Load(BufferSource& source)
 
     source.ReadEnum(dataFormatType);
     source.ReadEnum(semantic);
-    source.Read(usageIndex);
+    source.Read(unit);
     source.Read(offset);
-}
-
-void Rendering::VertexFormatAttribute::SaveToFile(WriteFileManager& outFile) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    outFile.Write(sizeof(DataFormatType), &dataFormatType);
-    outFile.Write(sizeof(Semantic), &semantic);
-    outFile.Write(sizeof(int32_t), &usageIndex);
-    outFile.Write(sizeof(int32_t), &offset);
-}
-
-void Rendering::VertexFormatAttribute::ReadFromFile(ReadFileManager& inFile)
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    inFile.Read(sizeof(DataFormatType), &dataFormatType);
-    inFile.Read(sizeof(Semantic), &semantic);
-    inFile.Read(sizeof(int32_t), &usageIndex);
-    inFile.Read(sizeof(int32_t), &offset);
 }

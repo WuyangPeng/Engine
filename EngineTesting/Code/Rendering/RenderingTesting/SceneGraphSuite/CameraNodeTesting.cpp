@@ -8,7 +8,7 @@
 ///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.9.0.12 (2023/06/12 15:32)
 
 #include "CameraNodeTesting.h"
-#include "SpatialTest.h"
+#include "Detail/SpatialTest.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"

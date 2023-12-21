@@ -48,9 +48,10 @@
 	<s:String x:Key="/Default/CodeStyle/Naming/CppNaming/Rules/=Typedefs/@EntryIndexedValue">&lt;NamingElement Priority="18"&gt;&lt;Descriptor Static="Indeterminate" Constexpr="Indeterminate" Const="Indeterminate" Volatile="Indeterminate" Accessibility="NOT_APPLICABLE"&gt;&lt;type Name="type alias" /&gt;&lt;type Name="typedef" /&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;&lt;/NamingElement&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CppNaming/Rules/=Union_0020members/@EntryIndexedValue">&lt;NamingElement Priority="13"&gt;&lt;Descriptor Static="Indeterminate" Constexpr="Indeterminate" Const="Indeterminate" Volatile="Indeterminate" Accessibility="NOT_APPLICABLE"&gt;&lt;type Name="union member" /&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="True" Prefix="" Suffix="" Style="aaBb" /&gt;&lt;/NamingElement&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CppNaming/Rules/=Unions/@EntryIndexedValue">&lt;NamingElement Priority="4"&gt;&lt;Descriptor Static="Indeterminate" Constexpr="Indeterminate" Const="Indeterminate" Volatile="Indeterminate" Accessibility="NOT_APPLICABLE"&gt;&lt;type Name="union" /&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;&lt;/NamingElement&gt;</s:String>
+	<s:Boolean x:Key="/Default/Dpa/IsNoEtwHostNotificationEnabled/@EntryValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/Feedback/SendActivityLogs/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/Feedback/ShouldPrompt/@EntryValue">False</s:Boolean>
-	<s:Int64 x:Key="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue">2802</s:Int64>
+	<s:Int64 x:Key="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue">2879</s:Int64>
 	<s:Boolean x:Key="/Default/Environment/OpenDocument/OpenDocumentAfterModification/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/PerformanceGuide/SwitchBehaviour/=Antivirus/@EntryIndexedValue">DO_NOTHING</s:String>
 	<s:String x:Key="/Default/Environment/PerformanceGuide/SwitchBehaviour/=Roslyn_002Dswea/@EntryIndexedValue">LIVE_MONITOR</s:String>
@@ -65,14 +66,16 @@
 	<s:Int64 x:Key="/Default/Environment/SearchAndNavigation/DefaultOccurrencesGroupingIndices/=JetBrains_002EReSharper_002EFeature_002EServices_002ENavigation_002EDescriptors_002ESearchUsagesDescriptor/@EntryIndexedValue">12</s:Int64>
 	<s:Int64 x:Key="/Default/Environment/SearchAndNavigation/DefaultOccurrencesGroupingIndices/=JetBrains_002EReSharper_002EFeature_002EServices_002ERefactorings_002EConflicts_002EOccurrences_002EConflictOccurrencesDescriptor/@EntryIndexedValue">9</s:Int64>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EApplication_002EExceptionReport_002EUserLoginInformationMigrateSettings/@EntryIndexedValue">True</s:Boolean>
-	<s:String x:Key="/Default/Environment/UpdatesManger/LastUpdateCheck/@EntryValue">12/11/2023 09:20:32</s:String>
-	<s:String x:Key="/Default/Housekeeping/DiskCleanup/LastRunTime/@EntryValue">12/11/2023 09:24:26</s:String>
+	<s:String x:Key="/Default/Environment/UpdatesManger/LastUpdateCheck/@EntryValue">12/20/2023 15:22:16</s:String>
+	<s:String x:Key="/Default/Environment/UpdatesManger/LastUpdateCheckPerHost/=ReSharperPlatformVs17/@EntryIndexedValue">12/20/2023 07:21:43</s:String>
+	<s:String x:Key="/Default/GrammarAndSpelling/GrammarChecking/LanguagesStates/=_4E2D_6587/@EntryIndexedValue">Enabled</s:String>
+	<s:String x:Key="/Default/Housekeeping/DiskCleanup/LastRunTime/@EntryValue">12/21/2023 09:35:31</s:String>
 	<s:Boolean x:Key="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=EditorConfigFeatureSuggester/@EntryIndexedValue">True</s:Boolean>
 	
 	<s:Boolean x:Key="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Housekeeping/IntellisenseHousekeeping/HintUsed/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/OptionsDialogView/Position/@EntryValue">[-238,43](1024,768)</s:String>
-	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/RefactoringWizardWindow/Location/@EntryValue">-287,-221</s:String>
+	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/RefactoringWizardWindow/Location/@EntryValue">27,-223</s:String>
 	<s:Boolean x:Key="/Default/Housekeeping/LiveTemplatesHousekeeping/HotspotSessionHintIsShown/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue">CppNaming</s:String>
 	<s:Boolean x:Key="/Default/Housekeeping/RefactoringsMru/RenameRefactoring/DoSearchForTextInStrings/@EntryValue">False</s:Boolean>
@@ -81,6 +84,7 @@
 	<s:Boolean x:Key="/Default/Housekeeping/UpgradeFromExceptionReport/UpgradePerformed/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/Housekeeping/VsShortcutsNotSetNotification/NotificationShownDateTimeUtc/@EntryValue">11/18/2023 08:58:55</s:String>
 	<s:String x:Key="/Default/Housekeeping/WhatsNewShown/WhatsNewShownIndexedEntry/=RC/@EntryIndexedValue">2023.2</s:String>
+	<s:String x:Key="/Default/Housekeeping/WhatsNewShown/WhatsNewShownIndexedEntry/=RS0/@EntryIndexedValue">2023.3</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=3AB47DFD69B2604798ED8CD6EBBABC84/@KeyIndexDefined">True</s:Boolean>
 	
 	
@@ -123,14 +127,14 @@
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Scope/=CD5B1AEA8099834C8F10F84286AA88CA/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Scope/=CD5B1AEA8099834C8F10F84286AA88CA/Type/@EntryValue">InCppProjectFile</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Text/@EntryValue">///	Copyright (c) 2010-2023&#xD;
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Text/@EntryValue">///	Copyright (c) 2010-2024&#xD;
 ///	Threading Core Render Engine&#xD;
 ///&#xD;
 ///	作者：彭武阳，彭晔恩，彭晔泽&#xD;
 ///	联系作者：94458936@qq.com&#xD;
 ///&#xD;
 ///	标准：std:c++20&#xD;
-///	版本：1.0.0.2 ($TIME$)&#xD;
+///	版本：1.0.0.3 ($TIME$)&#xD;
 &#xD;
 #include "$Namespace$/$Namespace$Export.h"&#xD;
 &#xD;
@@ -169,14 +173,14 @@ CLASS_INVARIANT_STUB_DEFINE($Namespace$, $ClassName$) </s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/Scope/=F6696F8185506F41B9C4252540BE9C18/Type/@EntryValue">InCppFile</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/Shortcut/@EntryValue">TC</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/Text/@EntryValue">/// Copyright (c) 2010-2023&#xD;
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/Text/@EntryValue">/// Copyright (c) 2010-2024&#xD;
 /// Threading Core Render Engine&#xD;
 ///&#xD;
 /// 作者：彭武阳，彭晔恩，彭晔泽&#xD;
 /// 联系作者：94458936@qq.com&#xD;
 ///&#xD;
 /// 标准：std:c++20&#xD;
-/// 版本：1.0.0.2 ($TIME$)</s:String>
+/// 版本：1.0.0.3 ($TIME$)</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/CustomProperties/=Extension/@EntryIndexedValue">h</s:String>
@@ -203,14 +207,14 @@ CLASS_INVARIANT_STUB_DEFINE($Namespace$, $ClassName$) </s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Scope/=CD5B1AEA8099834C8F10F84286AA88CA/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Scope/=CD5B1AEA8099834C8F10F84286AA88CA/Type/@EntryValue">InCppProjectFile</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Text/@EntryValue">///	Copyright (c) 2010-2023&#xD;
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Text/@EntryValue">///	Copyright (c) 2010-2024&#xD;
 ///	Threading Core Render Engine&#xD;
 ///&#xD;
 ///	作者：彭武阳，彭晔恩，彭晔泽&#xD;
 ///	联系作者：94458936@qq.com&#xD;
 ///&#xD;
 ///	标准：std:c++20&#xD;
-///	版本：1.0.0.2 ($TIME$)&#xD;
+///	版本：1.0.0.3 ($TIME$)&#xD;
 &#xD;
 #ifndef $Namespace$_XX_$ClassName$_H&#xD;
 #define $Namespace$_XX_$ClassName$_H&#xD;
@@ -255,14 +259,14 @@ namespace $Namespace$&#xD;
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Scope/=CD5B1AEA8099834C8F10F84286AA88CA/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Scope/=CD5B1AEA8099834C8F10F84286AA88CA/Type/@EntryValue">InCppProjectFile</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Text/@EntryValue">///	Copyright (c) 2010-2023&#xD;
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Text/@EntryValue">///	Copyright (c) 2010-2024&#xD;
 ///	Threading Core Render Engine&#xD;
 ///&#xD;
 ///	作者：彭武阳，彭晔恩，彭晔泽&#xD;
 ///	联系作者：94458936@qq.com&#xD;
 ///&#xD;
 ///	标准：std:c++20&#xD;
-///	版本：1.0.0.2 ($TIME$)&#xD;
+///	版本：1.0.0.3 ($TIME$)&#xD;
 &#xD;
 #include "$Namespace$/$Namespace$Export.h"&#xD;
 &#xD;
@@ -301,14 +305,14 @@ CLASS_INVARIANT_STUB_DEFINE($Namespace$, $ClassName$) </s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Scope/=CD5B1AEA8099834C8F10F84286AA88CA/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Scope/=CD5B1AEA8099834C8F10F84286AA88CA/Type/@EntryValue">InCppProjectFile</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Text/@EntryValue">///	Copyright (c) 2010-2023&#xD;
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Text/@EntryValue">///	Copyright (c) 2010-2024&#xD;
 ///	Threading Core Render Engine&#xD;
 ///&#xD;
 ///	作者：彭武阳，彭晔恩，彭晔泽&#xD;
 ///	联系作者：94458936@qq.com&#xD;
 ///&#xD;
 ///	标准：std:c++20&#xD;
-///	版本：1.0.0.2 ($TIME$)&#xD;
+///	版本：1.0.0.3 ($TIME$)&#xD;
 &#xD;
 #ifndef $Namespace$_XX_$ClassName$_H&#xD;
 #define $Namespace$_XX_$ClassName$_H&#xD;

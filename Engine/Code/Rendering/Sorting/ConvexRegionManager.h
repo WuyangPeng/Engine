@@ -45,7 +45,7 @@ namespace Rendering
         ConvexRegionSharedPtr GetContainingRegion(const Mathematics::APointF& point);
 
     protected:
-        void GetVisibleSet(Culler& culler, bool noCull) override;
+        void GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull) override;
 
     private:
         CRMCuller crmCuller;

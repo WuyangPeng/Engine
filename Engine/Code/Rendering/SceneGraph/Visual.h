@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:11)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/20 09:55)
 
 #ifndef RENDERING_SCENE_GRAPH_VISUAL_H
 #define RENDERING_SCENE_GRAPH_VISUAL_H
@@ -13,7 +13,6 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Spatial.h"
-#include "Flags/VisualFlags.h"
 #include "Rendering/LocalEffects/ConstantColorEffect.h"
 #include "Rendering/LocalEffects/VisualEffect.h"
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
@@ -29,66 +28,55 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(Visual);
         using ParentType = Spatial;
+
         using VisualSharedPtr = std::shared_ptr<ClassType>;
         using ConstVisualSharedPtr = std::shared_ptr<const ClassType>;
+        using VisualEffectSharedPtr = std::shared_ptr<VisualEffect>;
         using APoint = Mathematics::APointF;
+        using BoundingSphere = Mathematics::BoundingSphereF;
 
     public:
-        explicit Visual(VisualPrimitiveType type);
-        Visual(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer);
-        ~Visual() noexcept = default;
-
-        Visual(const Visual& rhs);
-        Visual& operator=(const Visual& rhs);
-        Visual(Visual&& rhs) noexcept;
-        Visual& operator=(Visual&& rhs) noexcept;
+        explicit Visual(const std::string& name);
+        Visual(const std::string& name, const VertexFormatSharedPtr& vertexFormat, const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Visual);
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-        NODISCARD VisualPrimitiveType GetPrimitiveType() const noexcept;
+        NODISCARD IndexFormatType GetPrimitiveType() const;
 
-        void SetVertexFormat(const VertexFormatSharedPtr& vertexformat) noexcept;
+        void SetVertexFormat(const VertexFormatSharedPtr& vertexFormat) noexcept;
         NODISCARD ConstVertexFormatSharedPtr GetConstVertexFormat() const noexcept;
         NODISCARD VertexFormatSharedPtr GetVertexFormat() noexcept;
 
-        void SetVertexBuffer(const VertexBufferSharedPtr& vertexbuffer) noexcept;
+        void SetVertexBuffer(const VertexBufferSharedPtr& vertexBuffer) noexcept;
         NODISCARD ConstVertexBufferSharedPtr GetConstVertexBuffer() const noexcept;
         NODISCARD VertexBufferSharedPtr GetVertexBuffer() noexcept;
 
-        void SetIndexBuffer(const IndexBufferSharedPtr& indexbuffer) noexcept;
+        void SetIndexBuffer(const IndexBufferSharedPtr& indexBuffer) noexcept;
         NODISCARD ConstIndexBufferSharedPtr GetConstIndexBuffer() const noexcept;
         NODISCARD IndexBufferSharedPtr GetIndexBuffer() noexcept;
 
-        NODISCARD const Mathematics::BoundingSphereF& GetModelBound() const noexcept;
-        NODISCARD Mathematics::BoundingSphereF& GetModelBound() noexcept;
+        NODISCARD const BoundingSphere& GetModelBound() const noexcept;
+        NODISCARD BoundingSphere& GetModelBound() noexcept;
 
-        virtual void UpdateModelSpace(MAYBE_UNUSED VisualUpdateType type);
+        virtual void UpdateModelSpace(VisualUpdateType type);
 
-        NODISCARD std::shared_ptr<VisualEffect> GetEffect() noexcept;
-        void SetEffect(const std::shared_ptr<VisualEffect>& visualEffect) noexcept;
-        void SetWorldTransformIsCurrent(bool cond) noexcept;
-        virtual void UpdateModelBound();
-        virtual void UpdateModelNormals() noexcept;
+        void SetVisualEffect(const VisualEffectSharedPtr& visualEffect) noexcept;
+        NODISCARD ConstVisualEffectSharedPtr GetConstVisualEffect() const noexcept;
+        NODISCARD VisualEffectSharedPtr GetVisualEffect() noexcept;
+
+        void UpdateModelBound();
+        void UpdateModelNormals();
 
     protected:
-        void ComputeBounding(const std::vector<APoint>& positions);
-
         // 支持分级裁剪。
-        void GetVisibleSet(Culler& culler, MAYBE_UNUSED bool noCull) override;
+        void GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull) override;
 
     private:
         // 对几何更新的支持。
         void UpdateWorldBound() override;
-
-        NODISCARD ConstVisualSharedPtr GetSharedPtr() const;
-
-        void CloneData(const Visual& rhs);
-        void CloneIndexBuffer(const Visual& rhs);
-        void CloneVertexBuffer(const Visual& rhs);
-        void CloneVertexFormat(const Visual& rhs);
 
     private:
         PackageType impl;

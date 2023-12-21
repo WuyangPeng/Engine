@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.0 (2023/11/18 17:09)
+/// 版本：1.0.0.2 (2023/12/17 19:26)
 
 #ifndef GATEWAY_SERVER_GATEWAY_SERVER_MESSAGE_H
 #define GATEWAY_SERVER_GATEWAY_SERVER_MESSAGE_H
@@ -48,7 +48,7 @@ namespace GatewayServer
                                                                   GatewayServerMiddleLayer::GUIManager>;
     using MessageType = Framework::WindowMessage<MiddleLayerType>;
 
-    class GatewayServerMessage : public MessageType
+    class GatewayServerMessage final : public MessageType
     {
     public:
         using ClassType = GatewayServerMessage;

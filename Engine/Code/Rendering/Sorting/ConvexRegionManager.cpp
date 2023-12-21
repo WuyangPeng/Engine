@@ -10,8 +10,8 @@
 #include "Rendering/RenderingExport.h"
 
 #include "ConvexRegionManager.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
@@ -74,7 +74,7 @@ Rendering::ConvexRegionSharedPtr Rendering::ConvexRegionManager::GetContainingRe
     return boost::polymorphic_pointer_cast<ConvexRegion>(GetContainingNode(point));
 }
 
-void Rendering::ConvexRegionManager::GetVisibleSet(Culler& culler, bool noCull)
+void Rendering::ConvexRegionManager::GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -95,7 +95,7 @@ void Rendering::ConvexRegionManager::GetVisibleSet(Culler& culler, bool noCull)
     {
         if (GetOutside())
         {
-            GetOutside()->GetVisibleSet(culler, noCull);
+            GetOutside()->GetVisibleSet(culler, camera, noCull);
         }
     }
 }

@@ -570,12 +570,15 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\CullerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\NodeImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\NormalDerivatives.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\NullSpatialImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\ParentSpatialImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\ParticlesImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordContainerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\ProjectionMatrix.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialData.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\StandardMeshImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\TrianglePositionImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\ViewVolumeImpl.cpp" />
@@ -585,6 +588,7 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\WorldCoordinateFrame.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\LoadVisual.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Node.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\NullSpatial.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Particles.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Picker.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\PickLine.cpp" />
@@ -1109,12 +1113,15 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CullerImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\NodeImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\NormalDerivatives.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\NullSpatialImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\ParentSpatialImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\ParticlesImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickerImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordContainerImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\ProjectionMatrix.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialData.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialFactory.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\StandardMeshImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\TrianglePositionImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\ViewVolumeImpl.h" />
@@ -1127,6 +1134,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Flags\VisualFlags.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\LoadVisual.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Node.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\NullSpatial.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Particles.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Picker.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\PickLine.h" />
@@ -1139,6 +1147,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SaveVisual.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SceneGraph.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SceneGraphFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SceneGraphInternalFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\ScreenTarget.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Spatial.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\StandardMesh.h" />

@@ -20,10 +20,10 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AQuaternionDetail.h"
+#include "Mathematics/Algebra/Transform.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/Controllers/KeyframeController.h"
-#include "Mathematics/Algebra/Transform.h"
-#include "Rendering/RenderingTesting/SceneGraphSuite/SpatialTest.h"
+#include "Rendering/RenderingTesting/SceneGraphSuite/Detail/SpatialTest.h"
 
 Rendering::KeyframeControllerTesting::KeyframeControllerTesting(const OStreamShared& stream)
     : ParentType{ stream }

@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %RiseOfHistoryTestingWin32DebugLib% PlayerServerTestingD.exe
+start /d %RiseOfHistoryTestingWin32ReleaseLib% PlayerServerTesting.exe
+start /d %RiseOfHistoryTestingX64DebugLib% PlayerServerTestingD.exe
+start /d %RiseOfHistoryTestingX64ReleaseLib% PlayerServerTesting.exe
+start /d %RiseOfHistoryTestingStaticWin32DebugLib% PlayerServerTestingStaticD.exe
+start /d %RiseOfHistoryTestingStaticWin32ReleaseLib% PlayerServerTestingStatic.exe
+start /d %RiseOfHistoryTestingStaticX64DebugLib% PlayerServerTestingStaticD.exe
+start /d %RiseOfHistoryTestingStaticX64ReleaseLib% PlayerServerTestingStatic.exe
+
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicWin32DebugLib% PlayerServerTestingStaticD.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicWin32ReleaseLib% PlayerServerTestingStatic.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicX64DebugLib% PlayerServerTestingStaticD.exe
+start /d %RiseOfHistoryTestingEngineStaticGameDynamicX64ReleaseLib% PlayerServerTestingStatic.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticWin32DebugLib% PlayerServerTestingD.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticWin32ReleaseLib% PlayerServerTesting.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticX64DebugLib% PlayerServerTestingD.exe
+start /d %RiseOfHistoryTestingEngineDynamicGameStaticX64ReleaseLib% PlayerServerTesting.exe
+
+pause

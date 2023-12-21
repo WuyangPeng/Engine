@@ -57,6 +57,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LoginServerCoreTesting", ".
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LoginServerMiddleLayerTesting", "..\LoginServerTesting\LoginServerMiddleLayerTesting\LoginServerMiddleLayerTesting.vcxproj", "{378F1F9A-2ED8-4068-B629-86ADEA45AE60}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PlayerServer", "PlayerServer", "{F0A03236-DBE1-4496-AB7A-0653BF023EC0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlayerServerCoreTesting", "..\PlayerServerTesting\PlayerServerCoreTesting\PlayerServerCoreTesting.vcxproj", "{CEDFCD47-D38A-4B8B-9971-E045A234822E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlayerServerMiddleLayerTesting", "..\PlayerServerTesting\PlayerServerMiddleLayerTesting\PlayerServerMiddleLayerTesting.vcxproj", "{5A25AE23-98CA-4FAB-8E0B-2A3290A3B3EA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlayerServerTesting", "..\PlayerServerTesting\PlayerServerTesting\PlayerServerTesting.vcxproj", "{8FE451E4-799E-4BB6-8787-6084C18647A8}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GameServer", "GameServer", "{824E476A-4E2F-44D9-99E5-0EF44D8723ED}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameServerTesting", "..\GameServerTesting\GameServerTesting\GameServerTesting.vcxproj", "{7AA75C25-024B-41B5-8D62-93A9BB20FC6F}"
@@ -80,6 +88,14 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WorldServerCoreTesting", "..\WorldServerTesting\WorldServerCoreTesting\WorldServerCoreTesting.vcxproj", "{B14E9D8D-E1D7-40A0-BA76-0D01931C2683}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WorldServerMiddleLayerTesting", "..\WorldServerTesting\WorldServerMiddleLayerTesting\WorldServerMiddleLayerTesting.vcxproj", "{7FE8C969-B8B2-4F5F-8E56-DEFE31A12F88}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossServer", "CrossServer", "{91EFD8BB-437E-4B64-8716-D52B16E9EBB5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CrossServerCoreTesting", "..\CrossServerTesting\CrossServerCoreTesting\CrossServerCoreTesting.vcxproj", "{6A952F5F-94F6-4F0F-BBD8-2205FA9897DB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CrossServerMiddleLayerTesting", "..\CrossServerTesting\CrossServerMiddleLayerTesting\CrossServerMiddleLayerTesting.vcxproj", "{9AD7AC10-355E-4B49-A212-86F04F3ED750}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CrossServerTesting", "..\CrossServerTesting\CrossServerTesting\CrossServerTesting.vcxproj", "{EA3C466D-8D98-4DC8-B41A-F429E8FB8E4B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OfflineServer", "OfflineServer", "{972C669A-51EA-47F8-A200-E1199F1A1921}"
 EndProject
@@ -2225,7 +2241,15 @@ Global
 		{CB919E67-079F-4400-BBED-94DE7B0CAEB8} = {DF23937F-1149-48F3-8B18-1CA6FBC4632F}
 		{31630494-5E42-4B42-B3D0-01F4A4C9BF19} = {29D93BD5-66AD-4B32-9A3A-326882B3437E}
 		{98F02C7D-4DF8-4567-8526-8856F6EA697D} = {29D93BD5-66AD-4B32-9A3A-326882B3437E}
-		{01D34BCE-1EEF-484C-BA36-2899E2238003} = {29D93BD5-66AD-4B32-9A3A-326882B3437E}$ToolNestedProjects$
+		{01D34BCE-1EEF-484C-BA36-2899E2238003} = {29D93BD5-66AD-4B32-9A3A-326882B3437E}
+		{F0A03236-DBE1-4496-AB7A-0653BF023EC0} = {662A905C-1378-456F-A2A3-F040649D97AC}
+		{CEDFCD47-D38A-4B8B-9971-E045A234822E} = {F0A03236-DBE1-4496-AB7A-0653BF023EC0}
+		{5A25AE23-98CA-4FAB-8E0B-2A3290A3B3EA} = {F0A03236-DBE1-4496-AB7A-0653BF023EC0}
+		{8FE451E4-799E-4BB6-8787-6084C18647A8} = {F0A03236-DBE1-4496-AB7A-0653BF023EC0}
+		{91EFD8BB-437E-4B64-8716-D52B16E9EBB5} = {662A905C-1378-456F-A2A3-F040649D97AC}
+		{6A952F5F-94F6-4F0F-BBD8-2205FA9897DB} = {91EFD8BB-437E-4B64-8716-D52B16E9EBB5}
+		{9AD7AC10-355E-4B49-A212-86F04F3ED750} = {91EFD8BB-437E-4B64-8716-D52B16E9EBB5}
+		{EA3C466D-8D98-4DC8-B41A-F429E8FB8E4B} = {91EFD8BB-437E-4B64-8716-D52B16E9EBB5}$ToolNestedProjects$
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B0D40FC-5825-42A0-9DA3-E4A564B9D706}

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 15:17)
+/// 标准：std:c++20
+/// 版本：1.0.0.2 (2023/12/15 09:28)
 
 #ifndef RENDERING_RESOURCES_INDEX_BUFFER_DETAIL_H
 #define RENDERING_RESOURCES_INDEX_BUFFER_DETAIL_H
@@ -19,7 +19,7 @@ void Rendering::IndexBuffer::IncreaseData(int index, T vertex)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    auto data = GetData(index * CoreTools::GetStreamSize<T>());
+    auto data = GetStorage(index * CoreTools::GetStreamSize<T>());
 
     data.template Increase<T>(vertex);
 }
@@ -29,7 +29,7 @@ T Rendering::IndexBuffer::GetIncreaseData(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto data = GetData(index * CoreTools::GetStreamSize<T>());
+    auto data = GetStorage(index * CoreTools::GetStreamSize<T>());
 
     return data.template Increase<T>();
 }
@@ -39,7 +39,7 @@ void Rendering::IndexBuffer::IncreaseData(int index, T vertex0, T vertex1, int m
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    auto data = GetData(multiple * index * CoreTools::GetStreamSize<T>());
+    auto data = GetStorage(multiple * index * CoreTools::GetStreamSize<T>());
 
     data.template Increase<T>(vertex0);
     data.template Increase<T>(vertex1);
@@ -50,7 +50,7 @@ Rendering::IndexBuffer::SegmentType Rendering::IndexBuffer::GetIncreaseData(int 
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto data = GetData(multiple * index * CoreTools::GetStreamSize<T>());
+    auto data = GetStorage(multiple * index * CoreTools::GetStreamSize<T>());
 
     const auto vertex0 = data.template Increase<T>();
     const auto vertex1 = data.template Increase<T>();
@@ -63,7 +63,7 @@ void Rendering::IndexBuffer::IncreaseData(int index, T vertex0, T vertex1, T ver
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    auto data = GetData(multiple * index * CoreTools::GetStreamSize<T>());
+    auto data = GetStorage(multiple * index * CoreTools::GetStreamSize<T>());
 
     data.template Increase<T>(vertex0);
     data.template Increase<T>(vertex1);
@@ -75,7 +75,7 @@ Rendering::IndexBuffer::TriangleType Rendering::IndexBuffer::GetIncreaseData(int
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto data = GetData(multiple * index * CoreTools::GetStreamSize<T>());
+    auto data = GetStorage(multiple * index * CoreTools::GetStreamSize<T>());
 
     const auto vertex0 = data.template Increase<T>();
     const auto vertex1 = data.template Increase<T>();

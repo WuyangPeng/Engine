@@ -41,7 +41,7 @@ CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, BillboardNode)
 CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, BillboardNode)
 
 Rendering::BillboardNode::BillboardNode(const CameraSharedPtr& camera)
-    : ParentType{ NodeCreate::Init }, impl{ camera }
+    : ParentType{ "BillboardNode", NodeCreate::Init }, impl{ camera }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -88,5 +88,5 @@ bool Rendering::BillboardNode::UpdateWorldData(double applicationTime)
     }
 
     // 现在的广告牌方向可以告诉子节点进行更新。
-    return ParentType::UpdateImplWorldData(applicationTime);
+    return ParentType::UpdateChildWorldData(applicationTime);
 }

@@ -29,7 +29,7 @@ Rendering::SphereMapEffectImpl::SphereMapEffectImpl(Texture2DSharedPtr texture, 
 {
     const auto matrix = Mathematics::Matrix4<float>::GetIdentity();
 
-    auto data = viewWorldMatrixConstant->GetData();
+    auto data = viewWorldMatrixConstant->GetStorage();
     for (const auto value : matrix.GetContainer())
     {
         data.Increase(value);

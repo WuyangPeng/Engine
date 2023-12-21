@@ -6,9 +6,11 @@ call RunAllMessageClientTesting.bat
 call RunAllBackgroundClientTesting.bat
 call RunAllGatewayServerTesting.bat
 call RunAllLoginServerTesting.bat
+call RunAllPlayerServerTesting.bat
 call RunAllGameServerTesting.bat
 call RunAllFightingServerTesting.bat
 call RunAllWorldServerTesting.bat
+call RunAllCrossServerTesting.bat
 call RunAllOfflineServerTesting.bat
 call RunAllLeaderboardServerTesting.bat
 call RunAllMailServerTesting.bat

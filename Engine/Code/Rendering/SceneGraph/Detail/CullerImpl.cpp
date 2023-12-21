@@ -12,6 +12,7 @@
 #include "CullerImpl.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "Mathematics/Algebra/BoundingSphereDetail.h"
 #include "Mathematics/Algebra/PlaneDetail.h"
 
 Rendering::CullerImpl::CullerImpl(const ConstCameraSharedPtr& camera)

@@ -57,7 +57,7 @@ void Rendering::RasterizerStateTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CloneObjectTest<RasterizerState>);
     ASSERT_NOT_THROW_EXCEPTION_0(NameTest<RasterizerState>);
     ASSERT_NOT_THROW_EXCEPTION_0(IsNullObjectTest<RasterizerState>);
-    ASSERT_NOT_THROW_EXCEPTION_0(UniqueIDTest<RasterizerState>);
+    ASSERT_NOT_THROW_EXCEPTION_0(UniqueIdTest<RasterizerState>);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
     ASSERT_NOT_THROW_EXCEPTION_0(RasterizerStateTest);
 }

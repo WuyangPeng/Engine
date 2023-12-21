@@ -92,6 +92,13 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::VisualEffect::CloneObject() const
     return std::make_shared<ClassType>(*this);
 }
 
+Rendering::VisualEffect::VisualEffectSharedPtr Rendering::VisualEffect::Clone() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return std::make_shared<ClassType>(*this);
+}
+
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetProgram, Rendering::VisualEffect::ConstVisualProgramSharedPtr)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetProgram, Rendering::VisualEffect::VisualProgramSharedPtr)
 

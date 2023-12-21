@@ -258,7 +258,7 @@ void Rendering::PointControllerImpl::SetControllerObject(Visual& visual)
     const auto indexBuffer = visual.GetIndexBuffer();
 
     if (const auto primitiveType = indexBuffer->GetPrimitiveType();
-        primitiveType != IndexFormatType::PolyPoint)
+        primitiveType != IndexFormatType::PolygonPoint)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("Geometric primitive must be points."))
     }
@@ -325,8 +325,8 @@ void Rendering::PointControllerImpl::UpdatePointMotion(Visual& visual, float ctr
     const auto vertexBuffer = visual.GetVertexBuffer();
     const auto vertexFormat = vertexBuffer->GetFormat();
     const auto numVertices = vertexBuffer->GetNumElements();
-    auto vertices = vertexBuffer->GetData();
-    const auto vertexSize = vertexFormat.GetStride();
+    auto vertices = vertexBuffer->GetStorage();
+    const auto vertexSize = vertexFormat.GetVertexSize();
 
     for (auto i = 0; i < numVertices; ++i)
     {
@@ -349,7 +349,7 @@ void Rendering::PointControllerImpl::UpdatePointMotion(Visual& visual, float ctr
         index >= 0)
     {
         const auto offset = vertexFormat.GetOffset(index);
-        vertices = vertexBuffer->GetData(offset);
+        vertices = vertexBuffer->GetStorage(offset);
         for (auto i = 0; i < numVertices; ++i)
         {
             Mathematics::AVector<float> normal{};

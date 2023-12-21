@@ -10,16 +10,16 @@
 #ifndef RENDERING_SCENE_GRAPH_SUITE_CAMERA_FRUSTUM_TESTING_H
 #define RENDERING_SCENE_GRAPH_SUITE_CAMERA_FRUSTUM_TESTING_H
 
-#include "ViewVolumeTestingBase.h"
 #include "Rendering/RenderingTesting/SceneGraphSuite/Detail/ViewVolumeTool.h"
+#include "Rendering/RenderingTesting/SceneGraphSuite/SceneGraphTestingBase.h"
 
 namespace Rendering
 {
-    class CameraFrustumTesting final : public ViewVolumeTestingBase
+    class CameraFrustumTesting final : public SceneGraphTestingBase
     {
     public:
         using ClassType = CameraFrustumTesting;
-        using ParentType = ViewVolumeTestingBase;
+        using ParentType = SceneGraphTestingBase;
 
     public:
         explicit CameraFrustumTesting(const OStreamShared& stream);

@@ -1,23 +1,42 @@
 @ingroup group_Documentation
 
-Threading Core Render Engine 1.0.0.2
+Threading Core Render Engine 1.0.0.3
 
 ----------------------------
 更新日志
 ----------------------------
-1.0.0.2（2023/12/07——2023/12/31）
+1.0.0.3（2023/12/21——2024/01/31）
 
 	完成功能： 
-	（引擎）
-	+ 实现Spatial。@
+	（引擎）	
+	+ 实现Visual。@
+	+ 实现VisibleSet。@
 	+ 实现Cull。@
-	+ 实现Node。@
 	+ 实现场景类。@
 	+ GameClient显示一张图片。@
 	+ linux系统通过编译。@		
 	
-	（历史）	
-	+ DatabaseGenerate工程创建。@
+	（历史）
+	+ DatabaseGenerate工程创建。@	
+	
+----------------------------
+1.0.0.2（2023/12/07——2023/12/20）
+
+	完成功能： 
+	（引擎）
+	+ 实现Spatial。 	
+	+ 实现Node。
+	+ 完成帮助模块。
+	+ 实现GraphicsObject。
+	+ 实现Resource。
+	+ 实现Buffer。
+	+ 实现StructuredBuffer。
+	+ 实现VertexBuffer。
+	+ 实现IndexBuffer。
+	+ 实现VertexFormat。
+	
+	（历史）
+	+ 框架增加跨服服务器和玩家服务器。
 	
 ----------------------------
 1.0.0.1（2023/11/20——2023/12/06）

@@ -44,7 +44,7 @@ void Rendering::DrawingStateTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CloneObjectTest<DrawingStateTest>);
     ASSERT_NOT_THROW_EXCEPTION_0(NameTest<DrawingStateTest>);
     ASSERT_NOT_THROW_EXCEPTION_0(IsNullObjectTest<DrawingStateTest>);
-    ASSERT_NOT_THROW_EXCEPTION_0(UniqueIDTest<DrawingStateTest>);
+    ASSERT_NOT_THROW_EXCEPTION_0(UniqueIdTest<DrawingStateTest>);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest<DrawingStateTest>);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamCreateExceptionTest);
 }

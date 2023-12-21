@@ -56,11 +56,11 @@ Rendering::ControllerInterfaceSharedPtr Rendering::ClodMesh::Clone() const
     return std::make_shared<ClassType>(*this);
 }
 
-void Rendering::ClodMesh::GetVisibleSet(Culler& culler, bool noCull)
+void Rendering::ClodMesh::GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull)
 {
     SelectLevelOfDetail();
 
-    ParentType::GetVisibleSet(culler, noCull);
+    ParentType::GetVisibleSet(culler, camera, noCull);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ClodMesh, GetNumRecords, int)

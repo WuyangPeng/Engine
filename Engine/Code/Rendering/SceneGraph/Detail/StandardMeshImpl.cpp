@@ -13,7 +13,9 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "Rendering/Resources/Flags/BufferFlags.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
+#include "Rendering/SceneGraph/Flags/VisualFlags.h"
 
 #include <vector>
 
@@ -155,10 +157,10 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Rectangle(int xSa
 
     const auto numTriangles = 2 * (xSamples - 1) * (ySamples - 1);
     const auto numIndices = 3 * numTriangles;
-    const auto stride = vertexFormat->GetStride();
+    const auto stride = vertexFormat->GetVertexSize();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
+    auto vertexBuffer = VertexBuffer::Create("VertexBuffer", *vertexFormat, stride);
 
     // 生成几何数据。
     const auto xSamplesInvertor = 1.0f / (xSamples - 1.0f);
@@ -185,7 +187,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Rectangle(int xSa
     }
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, numIndices, 4);
 
     totalIndex = 0;
     for (auto yIndex = 0; yIndex < ySamples - 1; ++yIndex)
@@ -223,10 +225,10 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Disk(int shellSam
     MAYBE_UNUSED const auto numVertices = 1 + radialSamples * shellSamplesMinus1;
     const auto numTriangles = radialSamples * (2 * shellSamplesMinus1 - 1);
     const auto numIndices = 3 * numTriangles;
-    const auto stride = vertexFormat->GetStride();
+    const auto stride = vertexFormat->GetVertexSize();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
+    auto vertexBuffer = VertexBuffer::Create("VertexBuffer", *vertexFormat, stride);
 
     // 生成几何数据。
 
@@ -247,7 +249,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Disk(int shellSam
     }
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, numIndices, 4);
     InitIndexBufferInDisk(*indexBuffer, radialSamplesMinus1, shellSamplesMinus1);
 
     return std::make_shared<TrianglesMesh>(vertexFormat->Clone(), vertexBuffer, indexBuffer);
@@ -260,10 +262,10 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Box(MAYBE_UNUSED 
     MAYBE_UNUSED constexpr auto numVertices = 8;
     constexpr auto numTriangles = 12;
     constexpr auto numIndices = 3 * numTriangles;
-    const auto stride = vertexFormat->GetStride();
+    const auto stride = vertexFormat->GetVertexSize();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
+    auto vertexBuffer = VertexBuffer::Create("VertexBuffer", *vertexFormat, stride);
 
     for (auto unit = 0; unit < maxUnits; ++unit)
     {
@@ -273,7 +275,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Box(MAYBE_UNUSED 
     }
 
     // 生成索引（外视图）
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, numIndices, 4);
 
     std::vector<int> indices(36);
 
@@ -362,10 +364,10 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::CylinderOmittedEn
     MAYBE_UNUSED const auto numVertices = axisSamples * (radialSamples + 1);
     const auto numTriangles = 2 * (axisSamples - 1) * radialSamples;
     const auto numIndices = 3 * numTriangles;
-    const auto stride = vertexFormat->GetStride();
+    const auto stride = vertexFormat->GetVertexSize();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
+    auto vertexBuffer = VertexBuffer::Create("VertexBuffer", *vertexFormat, stride);
 
     // 生成几何数据。
     const auto radialSamplesInvertor = 1.0f / boost::numeric_cast<float>(radialSamples);
@@ -425,7 +427,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::CylinderOmittedEn
     }
 
     // 产生索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
     size_t indicesIndex{};
 
@@ -514,10 +516,10 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Sphere(int zSampl
     const auto numVertices = zSamplesMinus2 * radialSamplesPlus1 + 2;
     const auto numTriangles = 2 * zSamplesMinus2 * radialSamples;
     const auto numIndices = 3 * numTriangles;
-    const auto stride = vertexFormat->GetStride();
+    const auto stride = vertexFormat->GetVertexSize();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
+    auto vertexBuffer = VertexBuffer::Create("VertexBuffer", *vertexFormat, stride);
 
     // 生成几何数据。
     const auto radialSamplesInvertor = 1.0f / boost::numeric_cast<float>(radialSamples);
@@ -568,7 +570,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Sphere(int zSampl
     ++totalIndex;
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
     size_t indicesIndex{};
 
@@ -665,10 +667,10 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Torus(int circleS
     MAYBE_UNUSED const auto numVertices = (circleSamples + 1) * (radialSamples + 1);
     const auto numTriangles = 2 * circleSamples * radialSamples;
     const auto numIndices = 3 * numTriangles;
-    const auto stride = vertexFormat->GetStride();
+    const auto stride = vertexFormat->GetVertexSize();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
+    auto vertexBuffer = VertexBuffer::Create("VertexBuffer", *vertexFormat, stride);
 
     // 生成几何数据。
     const auto circleSamplesInvertor = 1.0f / static_cast<float>(circleSamples);
@@ -708,7 +710,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Torus(int circleS
     }
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
 
     size_t indicesIndex{};
@@ -768,15 +770,15 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Tetrahedron() con
     MAYBE_UNUSED constexpr auto numVertices = 4;
     constexpr auto numTriangles = 4;
     constexpr auto numIndices = 3 * numTriangles;
-    const auto stride = vertexFormat->GetStride();
+    const auto stride = vertexFormat->GetVertexSize();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
+    auto vertexBuffer = VertexBuffer::Create("VertexBuffer", *vertexFormat, stride);
 
     // 生成几何数据。
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, numIndices, 4);
     std::vector<int> indices(12);
 
     indices.at(0) = 0;
@@ -811,15 +813,15 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Hexahedron() cons
     MAYBE_UNUSED constexpr auto numVertices = 8;
     constexpr auto numTriangles = 12;
     constexpr auto numIndices = 3 * numTriangles;
-    const auto stride = vertexFormat->GetStride();
+    const auto stride = vertexFormat->GetVertexSize();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
+    auto vertexBuffer = VertexBuffer::Create("VertexBuffer", *vertexFormat, stride);
 
     // 生成几何数据。
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
 
 #include SYSTEM_WARNING_PUSH
@@ -881,15 +883,15 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Octahedron() cons
     MAYBE_UNUSED constexpr auto numVertices = 6;
     constexpr auto numTriangles = 8;
     constexpr auto numIndices = 3 * numTriangles;
-    const auto stride = vertexFormat->GetStride();
+    const auto stride = vertexFormat->GetVertexSize();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
+    auto vertexBuffer = VertexBuffer::Create("VertexBuffer", *vertexFormat, stride);
 
     // 生成几何数据。
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
 
 #include SYSTEM_WARNING_PUSH
@@ -943,15 +945,15 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Dodecahedron() co
     MAYBE_UNUSED constexpr auto numVertices = 20;
     constexpr auto numTriangles = 36;
     constexpr auto numIndices = 3 * numTriangles;
-    const auto stride = vertexFormat->GetStride();
+    const auto stride = vertexFormat->GetVertexSize();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
+    auto vertexBuffer = VertexBuffer::Create("VertexBuffer", *vertexFormat, stride);
 
     // 生成几何数据。
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
 
 #include SYSTEM_WARNING_PUSH
@@ -1090,15 +1092,15 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Icosahedron() con
     MAYBE_UNUSED constexpr auto numVertices = 12;
     constexpr auto numTriangles = 20;
     constexpr auto numIndices = 3 * numTriangles;
-    const auto stride = vertexFormat->GetStride();
+    const auto stride = vertexFormat->GetVertexSize();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
+    auto vertexBuffer = VertexBuffer::Create("VertexBuffer", *vertexFormat, stride);
 
     // 生成几何数据。
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::PolygonPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
 
 #include SYSTEM_WARNING_PUSH
@@ -1193,7 +1195,7 @@ void Rendering::StandardMeshImpl::InitIndexBufferInRectangle(IndexBuffer& indexB
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-            auto indices = reinterpret_cast<int16_t*>(&*indexBuffer.GetData(0).GetCurrent());
+            auto indices = reinterpret_cast<int16_t*>(&*indexBuffer.GetStorage(0).GetCurrent());
 
 #include SYSTEM_WARNING_POP
 
@@ -1217,7 +1219,7 @@ void Rendering::StandardMeshImpl::InitIndexBufferInRectangle(IndexBuffer& indexB
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-            auto indices = reinterpret_cast<int32_t*>(&*indexBuffer.GetData(0).GetCurrent());
+            auto indices = reinterpret_cast<int32_t*>(&*indexBuffer.GetStorage(0).GetCurrent());
 
 #include SYSTEM_WARNING_POP
 
@@ -1250,7 +1252,7 @@ void Rendering::StandardMeshImpl::InitIndexBufferInDisk(IndexBuffer& indexBuffer
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-        auto indices = reinterpret_cast<int16_t*>(&*indexBuffer.GetData(0).GetCurrent());
+        auto indices = reinterpret_cast<int16_t*>(&*indexBuffer.GetStorage(0).GetCurrent());
 
 #include SYSTEM_WARNING_POP
 
@@ -1296,7 +1298,7 @@ void Rendering::StandardMeshImpl::InitIndexBufferInDisk(IndexBuffer& indexBuffer
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-        auto indices = reinterpret_cast<int32_t*>(&*indexBuffer.GetData(0).GetCurrent());
+        auto indices = reinterpret_cast<int32_t*>(&*indexBuffer.GetStorage(0).GetCurrent());
 
 #include SYSTEM_WARNING_POP
 
@@ -1354,7 +1356,7 @@ void Rendering::StandardMeshImpl::InitIndexBuffer(IndexBuffer& indexBuffer, cons
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-        auto accessWriteData = reinterpret_cast<int16_t*>(&*indexBuffer.GetData(0).GetCurrent());
+        auto accessWriteData = reinterpret_cast<int16_t*>(&*indexBuffer.GetStorage(0).GetCurrent());
 
 #include SYSTEM_WARNING_POP
 
@@ -1376,7 +1378,7 @@ void Rendering::StandardMeshImpl::InitIndexBuffer(IndexBuffer& indexBuffer, cons
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-        auto accessWriteData = reinterpret_cast<int32_t*>(&*indexBuffer.GetData(0).GetCurrent());
+        auto accessWriteData = reinterpret_cast<int32_t*>(&*indexBuffer.GetStorage(0).GetCurrent());
 
 #include SYSTEM_WARNING_POP
 

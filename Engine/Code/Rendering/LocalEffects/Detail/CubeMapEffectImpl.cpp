@@ -62,7 +62,7 @@ void Rendering::CubeMapEffectImpl::SetReflectivity(float reflectivity)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto data = reflectivityConstant->GetData();
+    auto data = reflectivityConstant->GetStorage();
 
     data.Increase(reflectivity);
 }
@@ -85,7 +85,7 @@ void Rendering::CubeMapEffectImpl::SetWorldMatrix(const Matrix4& worldMatrix)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto data = worldMatrixConstant->GetData();
+    auto data = worldMatrixConstant->GetStorage();
 
     for (const auto element : worldMatrix.GetContainer())
     {
@@ -99,7 +99,7 @@ Rendering::CubeMapEffectImpl::Matrix4 Rendering::CubeMapEffectImpl::GetWorldMatr
 
     Matrix4 matrix4{};
 
-    auto data = worldMatrixConstant->GetData();
+    auto data = worldMatrixConstant->GetStorage();
 
     for (auto x = 0; x < Matrix4::vectorSize; ++x)
     {
@@ -130,7 +130,7 @@ void Rendering::CubeMapEffectImpl::SetCameraWorldPosition(const Vector4& cameraW
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto data = cameraWorldPositionConstant->GetData();
+    auto data = cameraWorldPositionConstant->GetStorage();
 
     for (const auto element : cameraWorldPosition.GetCoordinate())
     {
@@ -144,7 +144,7 @@ Rendering::CubeMapEffectImpl::Vector4 Rendering::CubeMapEffectImpl::GetCameraWor
 
     Vector4 vector4{};
 
-    auto data = cameraWorldPositionConstant->GetData();
+    auto data = cameraWorldPositionConstant->GetStorage();
 
     for (auto x = 0; x < Vector4::pointSize; ++x)
     {
@@ -172,7 +172,7 @@ float Rendering::CubeMapEffectImpl::GetReflectivity() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto data = reflectivityConstant->GetData();
+    auto data = reflectivityConstant->GetStorage();
 
     return data.Increase<float>();
 }
@@ -215,7 +215,7 @@ void Rendering::CubeMapEffectImpl::UpdateFaces(const BaseRendererSharedPtr& base
         const auto pvMatrix = camera->GetProjectionViewMatrix();
         for (const auto& visual : culler)
         {
-            if (const auto effect = boost::polymorphic_pointer_cast<Texture2DEffect>(visual->GetEffect());
+            if (const auto effect = boost::polymorphic_pointer_cast<Texture2DEffect>(visual->GetVisualEffect());
                 effect != nullptr)
             {
                 const auto wMatrix = visual->GetWorldTransform().GetMatrix();
@@ -259,9 +259,9 @@ void Rendering::CubeMapEffectImpl::UpdateFaces(const BaseRendererSharedPtr& base
                     {
                         const auto src = u + uSize * v;
                         const auto trg = uReflect + uSize * v;
-                        auto input = texture->GetData(level + src * sizeof(int32_t));
+                        auto input = texture->GetStorage(level + src * sizeof(int32_t));
                         const auto levelOffset = cubeTexture->GetLevelOffset(face, level);
-                        auto output = cubeTexture->GetData(levelOffset + trg * sizeof(int32_t));
+                        auto output = cubeTexture->GetStorage(levelOffset + trg * sizeof(int32_t));
 
                         output.Increase(input.Increase<int32_t>());
                     }
