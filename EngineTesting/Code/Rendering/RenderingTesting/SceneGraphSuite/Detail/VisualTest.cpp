@@ -27,10 +27,9 @@ Rendering::VisualTest::VisualTest(const std::string& name)
 }
 
 Rendering::VisualTest::VisualTest(const std::string& name,
-                                  const VertexFormatSharedPtr& vertexFormat,
                                   const VertexBufferSharedPtr& vertexBuffer,
                                   const IndexBufferSharedPtr& indexBuffer)
-    : ParentType{ name, vertexFormat, vertexBuffer, indexBuffer }
+    : ParentType{ name, vertexBuffer, indexBuffer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

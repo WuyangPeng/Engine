@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 11:16)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/26 11:21)
 
 #include "Rendering/RenderingExport.h"
 
@@ -23,12 +23,12 @@
 Rendering::SamplerStateImpl::SamplerStateImpl() noexcept
     : filter{ SamplerStateFilter::MinPMagPMipP },
       mode{ SamplerStateMode::Clamp, SamplerStateMode::Clamp, SamplerStateMode::Clamp },
-      mipLODBias{ 0.0f },
+      mipLodBias{ 0.0f },
       maxAnisotropy{ 1 },
       comparison{ SamplerStateComparison::Never },
       borderColor{ 1.0f, 1.0f, 1.0f, 1.0f },
-      minLOD{ -std::numeric_limits<float>::max() },
-      maxLOD{ std::numeric_limits<float>::max() }
+      minLod{ -std::numeric_limits<float>::max() },
+      maxLod{ std::numeric_limits<float>::max() }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -36,12 +36,12 @@ Rendering::SamplerStateImpl::SamplerStateImpl() noexcept
 Rendering::SamplerStateImpl::SamplerStateImpl(SamplerStateFilter filter, SamplerStateMode mode0, SamplerStateMode mode1) noexcept
     : filter{ filter },
       mode{ mode0, mode1, SamplerStateMode::Clamp },
-      mipLODBias{ 0.0f },
+      mipLodBias{ 0.0f },
       maxAnisotropy{ 1 },
       comparison{ SamplerStateComparison::Never },
       borderColor{ 1.0f, 1.0f, 1.0f, 1.0f },
-      minLOD{ -std::numeric_limits<float>::max() },
-      maxLOD{ std::numeric_limits<float>::max() }
+      minLod{ -std::numeric_limits<float>::max() },
+      maxLod{ std::numeric_limits<float>::max() }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -49,12 +49,12 @@ Rendering::SamplerStateImpl::SamplerStateImpl(SamplerStateFilter filter, Sampler
 Rendering::SamplerStateImpl::SamplerStateImpl(SamplerStateFilter filter, SamplerStateMode mode0, SamplerStateMode mode1, SamplerStateMode mode2) noexcept
     : filter{ filter },
       mode{ mode0, mode1, mode2 },
-      mipLODBias{ 0.0f },
+      mipLodBias{ 0.0f },
       maxAnisotropy{ 1 },
       comparison{ SamplerStateComparison::Never },
       borderColor{ 1.0f, 1.0f, 1.0f, 1.0f },
-      minLOD{ -std::numeric_limits<float>::max() },
-      maxLOD{ std::numeric_limits<float>::max() }
+      minLod{ -std::numeric_limits<float>::max() },
+      maxLod{ std::numeric_limits<float>::max() }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -68,14 +68,14 @@ void Rendering::SamplerStateImpl::Load(CoreTools::BufferSource& source)
     source.ReadEnum(filter);
     source.ReadEnumContainer(mode);
 
-    source.Read(mipLODBias);
+    source.Read(mipLodBias);
     source.Read(maxAnisotropy);
 
     source.ReadEnum(comparison);
     source.ReadAggregate(borderColor);
 
-    source.Read(minLOD);
-    source.Read(maxLOD);
+    source.Read(minLod);
+    source.Read(maxLod);
 }
 
 void Rendering::SamplerStateImpl::Save(CoreTools::BufferTarget& target) const
@@ -85,14 +85,14 @@ void Rendering::SamplerStateImpl::Save(CoreTools::BufferTarget& target) const
     target.WriteEnum(filter);
     target.WriteEnumContainer(mode);
 
-    target.Write(mipLODBias);
+    target.Write(mipLodBias);
     target.Write(maxAnisotropy);
 
     target.WriteEnum(comparison);
     target.WriteAggregate(borderColor);
 
-    target.Write(minLOD);
-    target.Write(maxLOD);
+    target.Write(minLod);
+    target.Write(maxLod);
 }
 
 int Rendering::SamplerStateImpl::GetStreamingSize() const noexcept
@@ -103,14 +103,14 @@ int Rendering::SamplerStateImpl::GetStreamingSize() const noexcept
 
     size += RENDERING_STREAM_SIZE(mode);
 
-    size += RENDERING_STREAM_SIZE(mipLODBias);
+    size += RENDERING_STREAM_SIZE(mipLodBias);
     size += RENDERING_STREAM_SIZE(maxAnisotropy);
 
     size += RENDERING_STREAM_SIZE(comparison);
     size += RENDERING_STREAM_SIZE(borderColor);
 
-    size += RENDERING_STREAM_SIZE(minLOD);
-    size += RENDERING_STREAM_SIZE(maxLOD);
+    size += RENDERING_STREAM_SIZE(minLod);
+    size += RENDERING_STREAM_SIZE(maxLod);
 
     return size;
 }
@@ -129,11 +129,11 @@ Rendering::SamplerStateMode Rendering::SamplerStateImpl::GetMode(int index) cons
     return mode.at(index);
 }
 
-float Rendering::SamplerStateImpl::GetMipLODBias() const noexcept
+float Rendering::SamplerStateImpl::GetMipLodBias() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return mipLODBias;
+    return mipLodBias;
 }
 
 int Rendering::SamplerStateImpl::GetMaxAnisotropy() const noexcept
@@ -157,16 +157,16 @@ Rendering::SamplerStateImpl::Colour Rendering::SamplerStateImpl::GetBorderColor(
     return borderColor;
 }
 
-float Rendering::SamplerStateImpl::GetMinLOD() const noexcept
+float Rendering::SamplerStateImpl::GetMinLod() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return minLOD;
+    return minLod;
 }
 
-float Rendering::SamplerStateImpl::GetMaxLOD() const noexcept
+float Rendering::SamplerStateImpl::GetMaxLod() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return maxLOD;
+    return maxLod;
 }

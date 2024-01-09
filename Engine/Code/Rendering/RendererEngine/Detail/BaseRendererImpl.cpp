@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/28 12:31)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/02 16:05)
 
 #include "Rendering/RenderingExport.h"
 
@@ -23,12 +23,9 @@
 #include "Rendering/LocalEffects/OverlayEffect.h"
 #include "Rendering/LocalEffects/TextEffect.h"
 #include "Rendering/RendererEngine/Flags/RendererTypes.h"
-#include "Rendering/Resources/Buffers/Buffer.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
-#include "Rendering/Resources/Buffers/IndexBuffer.h"
 #include "Rendering/Resources/Buffers/StructuredBuffer.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
-#include "Rendering/Resources/Textures/Texture.h"
 #include "Rendering/Resources/Textures/TextureArray.h"
 #include "Rendering/SceneGraph/Visual.h"
 #include "Rendering/Shaders/ProgramFactory.h"
@@ -500,9 +497,9 @@ int64_t Rendering::BaseRendererImpl::Draw(int x, int y, const Colour& color, con
     if (!message.empty())
     {
         const auto viewport = GetViewport();
-        const auto activeFont = GetFont();
 
-        if (activeFont != nullptr)
+        if (const auto activeFont = GetFont();
+            activeFont != nullptr)
         {
             activeFont->Typeset(viewport.GetWidth(), viewport.GetHeight(), x, y, color, message);
             Update(*activeFont);
@@ -611,7 +608,7 @@ void Rendering::BaseRendererImpl::Unbind(const DrawTargetSharedPtr& object)
     rendererAdapter.UnbindDrawTarget(object);
 }
 
-Rendering::TotalAllocation Rendering::BaseRendererImpl::GetTotalAllocation()
+Rendering::TotalAllocation Rendering::BaseRendererImpl::GetTotalAllocation() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -762,7 +759,7 @@ bool Rendering::BaseRendererImpl::GetNumActiveElements(const StructuredBufferSha
     return object->GetNumActiveElements();
 }
 
-void Rendering::BaseRendererImpl::Execute(const ComputeProgramSharedPtr& program, int numXGroups, int numYGroups, int numZGroups)
+void Rendering::BaseRendererImpl::Execute(ComputeProgram& program, int numXGroups, int numYGroups, int numZGroups)
 {
     RENDERING_CLASS_IS_VALID_9;
 

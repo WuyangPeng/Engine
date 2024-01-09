@@ -28,6 +28,7 @@ namespace Rendering
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         void Enable() noexcept override;
+        void Disable() noexcept override;
 
         NODISCARD bool Update() noexcept override;
         NODISCARD bool Update(int level) noexcept override;

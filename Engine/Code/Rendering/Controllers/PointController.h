@@ -14,7 +14,7 @@
 
 #include "Controller.h"
 #include "Mathematics/Algebra/AVector.h"
-#include "Rendering/SceneGraph/Polypoint.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/SceneGraph/SceneGraphFwd.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(PointController, PointControllerImpl);

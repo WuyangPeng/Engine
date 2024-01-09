@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/12/04 14:02)
+/// 版本：1.0.0.3 (2023/12/28 17:55)
 
 #ifndef RENDERING_RENDERING_SCENE_GRAPH_FWD_H
 #define RENDERING_RENDERING_SCENE_GRAPH_FWD_H
@@ -14,7 +14,6 @@ namespace Rendering
 {
     enum class DepthType;
     enum class ViewFrustum;
-    enum class CullingMode;
     enum class VisualPrimitiveType;
     enum class VisualUpdateType;
 
@@ -25,28 +24,11 @@ namespace Rendering
     class Spatial;
     class Node;
     class Visual;
-    class VisibleSet;
-    class Culler;
-
-    class CameraManager;
     class Light;
-    class CameraNode;
-    class Material;
-    class TriangleIndex;
-    class TrianglePosition;
-    class Polypoint;
-    class Polysegment;
-    class Triangles;
-    class TrianglesMesh;
-    class TrianglesStrip;
-    class TrianglesFan;
+    class ViewVolumeNode;
     class Particles;
-    class Projector;
-    class PickRecord;
-    class Picker;
-    class ScreenTarget;
-    class StandardMesh;
     class ProjectionViewWorldUpdater;
+    class PickLine;
 }
 
 #endif  // RENDERING_RENDERING_SCENE_GRAPH_FWD_H

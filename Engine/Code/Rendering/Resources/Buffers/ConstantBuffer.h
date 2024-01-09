@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 14:26)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 13:48)
 
 #ifndef RENDERING_RESOURCES_CONSTANT_BUFFER_H
 #define RENDERING_RESOURCES_CONSTANT_BUFFER_H
@@ -14,7 +14,7 @@
 
 #include "Buffer.h"
 #include "MemberLayout.h"
-#include "CoreTools/Helper/ExportMacro.h"
+#include "Mathematics/Algebra/Matrix.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(ConstantBuffer, BufferLayout);
 
@@ -30,8 +30,8 @@ namespace Rendering
         using MemberLayoutContainer = std::vector<MemberLayout>;
 
     public:
-        ConstantBuffer(int numBytes, bool allowDynamicUpdate);
-        ConstantBuffer(int numBytes, bool allowDynamicUpdate, const MemberLayoutContainer& memberLayoutContainer);
+        ConstantBuffer(const std::string& name, int numBytes, bool allowDynamicUpdate);
+        ConstantBuffer(const std::string& name, int numBytes, bool allowDynamicUpdate, const MemberLayoutContainer& memberLayoutContainer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -48,7 +48,13 @@ namespace Rendering
         void SetMember(const std::string& name, const T& value);
 
         template <typename T>
+        void SetMember(const std::string& name, const Mathematics::Matrix<T>& value);
+
+        template <typename T>
         NODISCARD T GetMember(const std::string& name) const;
+
+        template <typename T>
+        NODISCARD Mathematics::Matrix<T> GetMatrixMember(const std::string& name) const;
 
         template <typename T>
         void SetMember(const std::string& name, int index, const T& value);

@@ -9,7 +9,6 @@
 
 #include "Rendering/RenderingExport.h"
 
-#include "Light.h"
 #include "LightCameraGeometry.h"
 #include "Material.h"
 #include "PointLightTextureEffect.h"
@@ -20,6 +19,7 @@
 #include "Rendering/DataTypes/SpecializedIO.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
 #include "Rendering/Resources/Textures/Texture2D.h"
+#include "Rendering/LocalEffects/Lighting.h" 
 #include "Rendering/Shaders/Shader.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, PointLightTextureEffect)

@@ -1621,7 +1621,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Plane3Achieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Plane3Detail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Sphere3.h" />
-    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Sphere3Achieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Sphere3Detail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Torus3.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Torus3Achieve.h" />

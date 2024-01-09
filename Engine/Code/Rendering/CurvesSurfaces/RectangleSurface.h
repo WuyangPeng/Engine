@@ -14,18 +14,18 @@
 
 #include "Mathematics/Base/Float.h"
 #include "Mathematics/CurvesSurfacesVolumes/ParametricSurface.h"
-#include "Rendering/SceneGraph/TrianglesMesh.h"
+#include "Rendering/SceneGraph/Visual.h"
 
 namespace Rendering
 {
-    class RectangleSurface : public TrianglesMesh
+    class RectangleSurface : public Visual
     {
     private:
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(RectangleSurface);
 
     public:
         using ClassType = RectangleSurface;
-        using ParentType = TrianglesMesh;
+        using ParentType = Visual;
 
     public:
         RectangleSurface(const std::shared_ptr<Mathematics::ParametricSurface<float>>& surface,

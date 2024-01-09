@@ -18,8 +18,6 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/SceneGraph/CameraManager.h"
-#include "Rendering/SceneGraph/LoadVisual.h"
 
 #include <random>
 #include <vector>
@@ -41,12 +39,12 @@ void Rendering::CreateClodMeshTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    CameraManager::Create();
+
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateTrianglesMeshFile);
     ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
 
-    CameraManager::Destroy();
+
 
     CoreTools::InitTerm::ExecuteTerminator();
 }

@@ -22,7 +22,6 @@
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/CurvesSurfacesVolumes/Curve2Detail.h"
 #include "Rendering/SceneGraph/Flags/VisualFlags.h"
-#include "Rendering/SceneGraph/StandardMesh.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, RevolutionSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, RevolutionSurface);
@@ -36,7 +35,7 @@ Rendering::RevolutionSurface::RevolutionSurface(const std::shared_ptr<Mathematic
                                                 bool sampleByArcLength,
                                                 bool outsideView,
                                                 const VertexFormatSharedPtr& vformat)
-    : ParentType{ vformat, nullptr, nullptr },
+    : ParentType{ "", nullptr, nullptr },
       curve{ curve },
       xCenter{ xCenter },
       topology{ topology },
@@ -47,48 +46,12 @@ Rendering::RevolutionSurface::RevolutionSurface(const std::shared_ptr<Mathematic
       samples{},
       sampleByArcLength{ sampleByArcLength }
 {
+    System::UnusedFunction(vformat);
+    outsideView;
     ComputeSampleData();
-
-    StandardMesh stdmesh{ vformat, !outsideView };
-    TrianglesMeshSharedPtr mesh{ nullptr };
-    switch (topology)
-    {
-        case TopologyType::RevDiskTopology:
-        {
-            mesh = stdmesh.Disk(numCurveSamples, numRadialSamples, 1.0f);
-        }
-        break;
-        case TopologyType::RevCylinderTopology:
-        {
-            mesh = stdmesh.CylinderIncludedEndDisks(numCurveSamples, numRadialSamples, 1.0f, 1.0f);
-        }
-        break;
-        case TopologyType::RevSphereTopology:
-        {
-            mesh = stdmesh.Sphere(numCurveSamples, numRadialSamples, 1.0f);
-        }
-        break;
-        case TopologyType::RevTorusTopology:
-        {
-            mesh = stdmesh.Torus(numCurveSamples, numRadialSamples, 1.0f, 0.25f);
-        }
-
-        break;
-        default:
-        {
-            RENDERING_ASSERTION_0(false, "意外情况。\n");
-        }
-
-        break;
-    }
-
-    SetVertexFormat(vformat);
-    SetVertexBuffer(mesh->GetVertexBuffer());
 
     SetIndexBuffer(nullptr);
     UpdateSurface();
-
-    SetIndexBuffer(mesh->GetIndexBuffer());
 
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

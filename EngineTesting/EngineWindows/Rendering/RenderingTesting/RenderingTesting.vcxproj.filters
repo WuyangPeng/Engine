@@ -106,9 +106,6 @@
     <Filter Include="ShaderFloatsSuite 头文件">
       <UniqueIdentifier>{97e444b3-f723-445b-a86f-8a9edd753715}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ShaderFloatsSuite 源文件">
-      <UniqueIdentifier>{128a14d1-25fc-491e-b1fb-06d1591f2494}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ShadersSuite 头文件">
       <UniqueIdentifier>{2815af08-7fa9-4e74-b126-8ac26d618fab}</UniqueIdentifier>
     </Filter>
@@ -641,85 +638,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\VisualTesting.h">
       <Filter>SceneGraphSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\CameraWorldPositionConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightAmbientConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightAttenuationConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightDiffuseConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightModelDirectionVectorConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightModelPositionConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightSpecularConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightSpotConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightWorldDirectionVectorConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightWorldPositionConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\MaterialAmbientConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\MaterialDiffuseConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\MaterialEmissiveConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\MaterialSpecularConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\ProjectionMatrixConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\ProjectionViewMatrixConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\ProjectionViewWorldMatrixConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\ProjectorMatrixConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\ProjectorWorldPositionConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\ShaderFloatsSuite.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\ShaderFloatTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\ViewMatrixConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\ViewWorldMatrixConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\WorldMatrixConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\CameraModelDirectionVectorConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\CameraModelPositionConstantTesting.h">
-      <Filter>ShaderFloatsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\CameraWorldDirectionVectorConstantTesting.h">
       <Filter>ShaderFloatsSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ShadersSuite\LoadVisualEffectTesting.h">
@@ -1236,84 +1155,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\SceneGraphSuite\CameraNodeTesting.cpp">
       <Filter>SceneGraphSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\CameraModelDirectionVectorConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\CameraModelPositionConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\CameraWorldDirectionVectorConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\CameraWorldPositionConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightAmbientConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightAttenuationConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightDiffuseConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightModelDirectionVectorConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightModelPositionConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightSpecularConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightSpotConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightWorldDirectionVectorConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\LightWorldPositionConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\MaterialAmbientConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\MaterialDiffuseConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\MaterialEmissiveConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\MaterialSpecularConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\ProjectionMatrixConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\ProjectionViewMatrixConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\ProjectionViewWorldMatrixConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\ProjectorMatrixConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\ProjectorWorldPositionConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\ShaderFloatTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\ViewMatrixConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\ViewWorldMatrixConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShaderFloatsSuite\WorldMatrixConstantTesting.cpp">
-      <Filter>ShaderFloatsSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ShadersSuite\AlphaStateTesting.cpp">
       <Filter>ShadersSuite 源文件</Filter>

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/28 15:34)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/02 15:18)
 
 #ifndef RENDERING_RENDERER_ENGINE_RENDERING_DEVICE_H
 #define RENDERING_RENDERER_ENGINE_RENDERING_DEVICE_H
@@ -19,7 +19,6 @@
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "Rendering/Base/BaseFwd.h"
 #include "Rendering/LocalEffects/VisualEffect.h"
-#include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/RendererEngine/RendererEngineInternalFwd.h"
 
 RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(RenderingDevice, RenderingDeviceImpl);
@@ -31,8 +30,8 @@ namespace Rendering
     public:
         DELAY_COPY_UNSHARED_TYPE_DECLARE(RenderingDevice);
 
-        using WindowsHDC = System::WindowsHdc;
-        using OpenGLHglrc = System::OpenGLHglrc;
+        using WindowsHdc = System::WindowsHdc;
+        using OpenGLRcHandleHglrc = System::OpenGLRcHandle;
         using WindowsHWnd = System::WindowsHWnd;
         using RenderingDeviceSharedPtr = std::shared_ptr<RenderingDeviceImpl>;
         using VertexBufferSharedPtr = std::shared_ptr<VertexBuffer>;
@@ -44,7 +43,7 @@ namespace Rendering
         using ComputeProgramSharedPtr = std::shared_ptr<ComputeProgram>;
 
     public:
-        RenderingDevice(WindowsHWnd hWnd, WindowsHDC device, OpenGLHglrc immediate);
+        RenderingDevice(WindowsHWnd hWnd, WindowsHdc device, OpenGLRcHandleHglrc immediate);
         NODISCARD static RenderingDevice Create();
 
         CLASS_INVARIANT_DECLARE;
@@ -76,7 +75,7 @@ namespace Rendering
 
         void WaitForFinish();
         void Flush();
-        void Execute(const ComputeProgramSharedPtr& computeProgram, int numXGroups, int numYGroups, int numZGroups);
+        void Execute(RendererObjectBridge& rendererObjectBridge, ComputeProgram& computeProgram, int numXGroups, int numYGroups, int numZGroups);
 
     private:
         enum class RenderingDeviceCreate

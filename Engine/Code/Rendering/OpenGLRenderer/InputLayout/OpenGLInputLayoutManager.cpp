@@ -16,9 +16,11 @@
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, OpenGLInputLayoutManager)
 
-Rendering::OpenGLInputLayoutManager::OpenGLInputLayoutManager(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+Rendering::OpenGLInputLayoutManager::OpenGLInputLayoutManager(CoreTools::DisableNotThrow disableNotThrow)
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
+    System::UnusedFunction(disableNotThrow);
+
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 

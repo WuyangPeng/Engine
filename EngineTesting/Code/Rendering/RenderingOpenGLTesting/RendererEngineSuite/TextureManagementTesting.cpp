@@ -12,8 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
-#include "Rendering/Resources/Buffers/IndexBuffer.h"
-#include "Rendering/Resources/Textures/LoadTexture.h"
+#include "Rendering/Resources/Buffers/IndexBuffer.h" 
 
 Rendering::TextureManagementTesting::TextureManagementTesting(const OStreamShared& stream)
     : ParentType{ stream }

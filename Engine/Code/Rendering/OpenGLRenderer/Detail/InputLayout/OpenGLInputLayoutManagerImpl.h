@@ -13,6 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "System/OpenGL/Using/OpenGLUsing.h"
+#include "CoreTools/MemoryTools/WeakPtrCompare.h"
 #include "Rendering/OpenGLRenderer/InputLayout/OpenGLInputLayout.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 
@@ -24,6 +25,7 @@ namespace Rendering
     {
     public:
         using ClassType = OpenGLInputLayoutManagerImpl;
+
         using OpenGLUInt = System::OpenGLUInt;
         using OpenGLInputLayoutSharedPtr = std::shared_ptr<OpenGLInputLayout>;
 
@@ -39,8 +41,17 @@ namespace Rendering
         NODISCARD bool HasElements() const noexcept;
 
     private:
-        using InputLayoutKey = std::pair<ConstVertexBufferSharedPtr, OpenGLUInt>;
-        using Container = std::map<InputLayoutKey, OpenGLInputLayoutSharedPtr>;
+        using InputLayoutKey = std::pair<ConstVertexBufferWeakPtr, OpenGLUInt>;
+
+        struct InputLayoutKeyLess final
+        {
+            bool operator()(const InputLayoutKey& lhs, const InputLayoutKey& rhs) const noexcept
+            {
+                return CoreTools::WeakPtrLess<const VertexBuffer>()(lhs.first, rhs.first);
+            }
+        };
+
+        using Container = std::map<InputLayoutKey, OpenGLInputLayoutSharedPtr, InputLayoutKeyLess>;
 
     private:
         Container inputLayout;

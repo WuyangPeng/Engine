@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:24)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/06 15:57)
 
 #include "Rendering/RenderingExport.h"
 
@@ -32,94 +32,31 @@ void Rendering::OpenGLDepthStencilState::Enable() noexcept
 
     if (impl->IsDepthEnable())
     {
-        System::EnableGLState(System::OpenGLEnable::DepthTest);
+        EnableGLState(System::OpenGLEnable::DepthTest);
 
-        System::SetGLDepthFunc(impl->GetComparison());
+        SetGLDepthFunc(impl->GetComparison());
     }
     else
     {
-        System::DisableGLState(System::OpenGLEnable::DepthTest);
+        DisableGLState(System::OpenGLEnable::DepthTest);
     }
 
-    System::SetGLDepthMask(impl->GetWriteMask());
+    SetGLDepthMask(impl->GetWriteMask());
 
     if (impl->IsStencilEnable())
     {
-        System::EnableGLState(System::OpenGLEnable::StencilTest);
+        EnableGLState(System::OpenGLEnable::StencilTest);
 
-        System::SetGLStencilFuncSeparate(System::RasterizerStateCullFace::Front, impl->GetFrontComparison(), impl->GetReference(), impl->GetStencilReadMask());
-        System::SetGLStencilMaskSeparate(System::RasterizerStateCullFace::Front, impl->GetStencilWriteMask());
-        System::SetGLStencilOpSeparate(System::RasterizerStateCullFace::Front, impl->GetFrontOnFail(), impl->GetFrontOnZFail(), impl->GetFrontOnZPass());
+        SetGLStencilFuncSeparate(System::RasterizerStateCullFace::Front, impl->GetFrontComparison(), impl->GetReference(), impl->GetStencilReadMask());
+        SetGLStencilMaskSeparate(System::RasterizerStateCullFace::Front, impl->GetStencilWriteMask());
+        SetGLStencilOpSeparate(System::RasterizerStateCullFace::Front, impl->GetFrontOnFail(), impl->GetFrontOnZFail(), impl->GetFrontOnZPass());
 
-        System::SetGLStencilFuncSeparate(System::RasterizerStateCullFace::Back, impl->GetBackComparison(), impl->GetReference(), impl->GetStencilReadMask());
-        System::SetGLStencilMaskSeparate(System::RasterizerStateCullFace::Back, impl->GetStencilWriteMask());
-        System::SetGLStencilOpSeparate(System::RasterizerStateCullFace::Back, impl->GetBackOnFail(), impl->GetBackOnZFail(), impl->GetBackOnZPass());
+        SetGLStencilFuncSeparate(System::RasterizerStateCullFace::Back, impl->GetBackComparison(), impl->GetReference(), impl->GetStencilReadMask());
+        SetGLStencilMaskSeparate(System::RasterizerStateCullFace::Back, impl->GetStencilWriteMask());
+        SetGLStencilOpSeparate(System::RasterizerStateCullFace::Back, impl->GetBackOnFail(), impl->GetBackOnZFail(), impl->GetBackOnZPass());
     }
     else
     {
-        System::DisableGLState(System::OpenGLEnable::StencilTest);
+        DisableGLState(System::OpenGLEnable::StencilTest);
     }
-}
-
-bool Rendering::OpenGLDepthStencilState::Update(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLDepthStencilState::Update(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLDepthStencilState::CopyGpuToCpu()
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLDepthStencilState::CopyGpuToCpu(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLDepthStencilState::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLDepthStencilState::CopyCpuToGpu()
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLDepthStencilState::CopyCpuToGpu(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLDepthStencilState::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLDepthStencilState::GetNumActiveElements()
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
 }

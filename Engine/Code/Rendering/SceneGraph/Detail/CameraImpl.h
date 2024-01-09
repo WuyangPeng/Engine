@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/11/27 11:14)
+/// 版本：1.0.0.3 (2023/12/28 17:33)
 
 #ifndef RENDERING_SCENE_GRAPH_CAMERA_IMPL_H
 #define RENDERING_SCENE_GRAPH_CAMERA_IMPL_H
@@ -29,10 +29,10 @@ namespace Rendering
         using BufferSource = CoreTools::BufferSource;
         using BufferTarget = CoreTools::BufferTarget;
 
-        using Math = Mathematics::Math<float>;
-        using APoint = Mathematics::APoint<float>;
-        using AVector = Mathematics::AVector<float>;
-        using Matrix = Mathematics::Matrix<float>;
+        using Math = Mathematics::MathF;
+        using APoint = Mathematics::APointF;
+        using AVector = Mathematics::AVectorF;
+        using Matrix = Mathematics::MatrixF;
 
     public:
         explicit CameraImpl(float epsilon = Mathematics::MathF::GetZeroTolerance()) noexcept;

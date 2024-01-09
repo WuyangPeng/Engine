@@ -53,12 +53,10 @@ namespace Framework
         void Initializer(int argc, char** argv, const GLUTApplicationInformation& information, const EnvironmentDirectory& environmentDirectory);
         void Terminators();
 
-        void InitOpenGLGlutProcess();
-        void InitCamera();
+        void InitOpenGLGlutProcess(); 
         void InitOpenGLImpl(int argc, char** argv, const GLUTApplicationInformation& information, const EnvironmentDirectory& environmentDirectory);
 
-        void DestroyOpenGLImpl() noexcept;
-        void DestroyCamera() noexcept;
+        void DestroyOpenGLImpl() noexcept; 
         void DestroyOpenGLGlutProcess();
 
     private:

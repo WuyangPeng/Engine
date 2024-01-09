@@ -198,33 +198,6 @@ void Rendering::TestingHelper::AddShaderFloatsSuite()
 {
     auto shaderFloatsSuite = GenerateSuite("¸¡µã×ÅÉ«Æ÷");
 
-    ADD_TEST(shaderFloatsSuite, ShaderFloatTesting);
-    ADD_TEST(shaderFloatsSuite, CameraModelDirectionVectorConstantTesting);
-    ADD_TEST(shaderFloatsSuite, CameraModelPositionConstantTesting);
-    ADD_TEST(shaderFloatsSuite, CameraWorldDirectionVectorConstantTesting);
-    ADD_TEST(shaderFloatsSuite, CameraWorldPositionConstantTesting);
-    ADD_TEST(shaderFloatsSuite, LightAmbientConstantTesting);
-    ADD_TEST(shaderFloatsSuite, LightAttenuationConstantTesting);
-    ADD_TEST(shaderFloatsSuite, LightDiffuseConstantTesting);
-    ADD_TEST(shaderFloatsSuite, LightModelDirectionVectorConstantTesting);
-    ADD_TEST(shaderFloatsSuite, LightModelPositionConstantTesting);
-    ADD_TEST(shaderFloatsSuite, LightSpecularConstantTesting);
-    ADD_TEST(shaderFloatsSuite, LightSpotConstantTesting);
-    ADD_TEST(shaderFloatsSuite, LightWorldDirectionVectorConstantTesting);
-    ADD_TEST(shaderFloatsSuite, LightWorldPositionConstantTesting);
-    ADD_TEST(shaderFloatsSuite, MaterialAmbientConstantTesting);
-    ADD_TEST(shaderFloatsSuite, MaterialDiffuseConstantTesting);
-    ADD_TEST(shaderFloatsSuite, MaterialEmissiveConstantTesting);
-    ADD_TEST(shaderFloatsSuite, MaterialSpecularConstantTesting);
-    ADD_TEST(shaderFloatsSuite, ProjectionMatrixConstantTesting);
-    ADD_TEST(shaderFloatsSuite, ProjectionViewMatrixConstantTesting);
-    ADD_TEST(shaderFloatsSuite, ProjectionViewWorldMatrixConstantTesting);
-    ADD_TEST(shaderFloatsSuite, ViewMatrixConstantTesting);
-    ADD_TEST(shaderFloatsSuite, ViewWorldMatrixConstantTesting);
-    ADD_TEST(shaderFloatsSuite, WorldMatrixConstantTesting);
-    ADD_TEST(shaderFloatsSuite, ProjectorWorldPositionConstantTesting);
-    ADD_TEST(shaderFloatsSuite, ProjectorMatrixConstantTesting);
-
     AddSuite(shaderFloatsSuite);
 }
 

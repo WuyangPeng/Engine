@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:25)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/06 12:50)
 
 #include "Rendering/RenderingExport.h"
 
@@ -32,9 +32,7 @@ void Rendering::OpenGLBlendState::Enable()
     RENDERING_CLASS_IS_VALID_9;
 
     EnableAlphaToCoverage();
-
     EnableIndependentBlend();
-
     SetGLBlendColor();
 }
 
@@ -42,11 +40,11 @@ void Rendering::OpenGLBlendState::EnableAlphaToCoverage() noexcept
 {
     if (impl->IsEnableAlphaToCoverage())
     {
-        System::EnableGLState(System::OpenGLEnable::SampleCoverage);
+        EnableGLState(System::OpenGLEnable::SampleCoverage);
     }
     else
     {
-        System::DisableGLState(System::OpenGLEnable::SampleCoverage);
+        DisableGLState(System::OpenGLEnable::SampleCoverage);
     }
 }
 
@@ -59,19 +57,19 @@ void Rendering::OpenGLBlendState::EnableIndependentBlend()
         {
             if (target.IsEnable())
             {
-                System::EnableGLState(System::OpenGLEnable::Blend, index);
-                System::SetGLBlendFuncSeparate(index,
+                EnableGLState(System::OpenGLEnable::Blend, index);
+                SetGLBlendFuncSeparate(index,
                                                target.GetSourceColor(),
                                                target.GetDestinationColor(),
                                                target.GetSourceAlpha(),
                                                target.GetDestinationAlpha());
-                System::SetGLBlendEquationSeparate(index,
+                SetGLBlendEquationSeparate(index,
                                                    target.GetOperationColor(),
                                                    target.GetOperationAlpha());
             }
             else
             {
-                System::DisableGLState(System::OpenGLEnable::Blend, index);
+                DisableGLState(System::OpenGLEnable::Blend, index);
             }
 
             System::SetGLColorMask(index, target.IsRedMask(), target.IsGreenMask(), target.IsBlueMask(), target.IsAlphaMask());
@@ -85,18 +83,18 @@ void Rendering::OpenGLBlendState::EnableIndependentBlend()
         const auto target = impl->GetBlendStateTarget(0);
         if (target.IsEnable())
         {
-            System::EnableGLState(System::OpenGLEnable::Blend);
+            EnableGLState(System::OpenGLEnable::Blend);
 
-            System::SetGLBlendFuncSeparate(target.GetSourceColor(),
+            SetGLBlendFuncSeparate(target.GetSourceColor(),
                                            target.GetDestinationColor(),
                                            target.GetSourceAlpha(),
                                            target.GetDestinationAlpha());
-            System::SetGLBlendEquationSeparate(target.GetOperationColor(),
+            SetGLBlendEquationSeparate(target.GetOperationColor(),
                                                target.GetOperationAlpha());
         }
         else
         {
-            System::DisableGLState(System::OpenGLEnable::Blend);
+            DisableGLState(System::OpenGLEnable::Blend);
         }
 
         System::SetGLColorMask(target.IsRedMask(), target.IsGreenMask(), target.IsBlueMask(), target.IsAlphaMask());
@@ -108,67 +106,4 @@ void Rendering::OpenGLBlendState::SetGLBlendColor() noexcept
 {
     const auto blendColor = impl->GetBlendColor();
     System::SetGLBlendColor(blendColor.GetRed(), blendColor.GetGreen(), blendColor.GetBlue(), blendColor.GetAlpha());
-}
-
-bool Rendering::OpenGLBlendState::Update(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLBlendState::Update(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLBlendState::CopyGpuToCpu()
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLBlendState::CopyGpuToCpu(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLBlendState::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLBlendState::CopyCpuToGpu()
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLBlendState::CopyCpuToGpu(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLBlendState::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLBlendState::GetNumActiveElements()
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
 }

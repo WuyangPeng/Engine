@@ -27,10 +27,6 @@ namespace Rendering
 
     private:
         void MainTest();
-        void BaseTest();
-        void MipmapsTest();
-        void StreamTest();
-        void FileTest();
 
         void DoRunUnitTest() override;
     };

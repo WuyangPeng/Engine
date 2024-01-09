@@ -17,6 +17,7 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/SceneGraph/Camera.h"
+#include "Rendering/SceneGraph/PickLine.h"
 
 Rendering::CameraTesting::CameraTesting(const OStreamShared& stream)
     : ParentType{ stream },

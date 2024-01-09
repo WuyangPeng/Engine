@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/30 09:29)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 11:34)
 
 #ifndef RENDERING_RESOURCES_CONSTANT_BUFFER_DETAIL_H
 #define RENDERING_RESOURCES_CONSTANT_BUFFER_DETAIL_H
@@ -13,6 +13,8 @@
 #include "BufferDetail.h"
 #include "ConstantBuffer.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/Resources/Buffers/MemberLayout.h"
 
 template <typename T>
@@ -30,6 +32,23 @@ void Rendering::ConstantBuffer::SetMember(const std::string& name, const T& valu
 }
 
 template <typename T>
+void Rendering::ConstantBuffer::SetMember(const std::string& name, const Mathematics::Matrix<T>& value)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    const auto layout = GetMember(name);
+
+    CheckMember(layout);
+
+    auto target = GetStorage(layout.GetOffset());
+
+    for (const auto element : value.GetData())
+    {
+        target.Increase<T>(element);
+    }
+}
+
+template <typename T>
 T Rendering::ConstantBuffer::GetMember(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
@@ -44,6 +63,31 @@ T Rendering::ConstantBuffer::GetMember(const std::string& name) const
 }
 
 template <typename T>
+Mathematics::Matrix<T> Rendering::ConstantBuffer::GetMatrixMember(const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    const auto layout = GetMember(name);
+
+    CheckMember(layout);
+
+    auto target = GetStorage(layout.GetOffset());
+
+    Mathematics::Matrix<T> matrix{};
+
+    typename Mathematics::Matrix<T>::EntryType entry{};
+
+    for (auto& element : entry)
+    {
+        element = target.Increase<T>();
+    }
+
+    matrix.Set(entry);
+
+    return matrix;
+}
+
+template <typename T>
 void Rendering::ConstantBuffer::SetMember(const std::string& name, int index, const T& value)
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -52,9 +96,9 @@ void Rendering::ConstantBuffer::SetMember(const std::string& name, int index, co
 
     CheckMember(index, layout);
 
-    auto target = GetStorage(layout.GetOffset() + index * sizeof(T));
+    auto target = GetStorage(layout.GetOffset() + index * CoreTools::GetStreamSize<T>());
 
-    target.Increase<T>(value);
+    target.template Increase<T>(value);
 }
 
 template <typename T>
@@ -66,9 +110,9 @@ T Rendering::ConstantBuffer::GetMember(const std::string& name, int index) const
 
     CheckMember(index, layout);
 
-    auto target = GetStorage(layout.GetOffset() + index * sizeof(T));
+    auto target = GetStorage(layout.GetOffset() + index * CoreTools::GetStreamSize<T>());
 
-    return target.Increase<T>();
+    return target.template Increase<T>();
 }
 
 #endif  // RENDERING_RESOURCES_CONSTANT_BUFFER_DETAIL_H

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 20:05)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 13:56)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_H
 #define RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_H
@@ -27,8 +27,6 @@ namespace Rendering
         static_assert(NumDimensions == 1 || NumDimensions == 2 || NumDimensions == 3, "NumDimensions must be 1 or 2 or 3.");
 
         using ClassType = TextureLevelData<NumDimensions>;
-        using ReadFileManager = CoreTools::ReadFileManager;
-        using WriteFileManager = CoreTools::WriteFileManager;
         using BufferSource = CoreTools::BufferSource;
         using BufferTarget = CoreTools::BufferTarget;
 
@@ -54,9 +52,6 @@ namespace Rendering
         void Load(BufferSource& source);
         void Save(BufferTarget& target) const;
         NODISCARD int GetStreamingSize() const;
-
-        void SaveToFile(WriteFileManager& outFile) const;
-        void ReadFromFile(ReadFileManager& inFile);
 
         void AutoGenerateMipMaps() noexcept;
         NODISCARD bool WantAutoGenerateMipMaps() const noexcept;

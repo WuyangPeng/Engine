@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 17:01)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 14:04)
 
 #include "Rendering/RenderingExport.h"
 
@@ -26,8 +26,8 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, TextureBuffer);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TextureBuffer);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TextureBuffer);
 
-Rendering::TextureBuffer::TextureBuffer(DataFormatType format, int numElements, bool allowDynamicUpdate, const MemberLayoutContainer& memberLayoutContainer)
-    : ParentType{ "TextureBuffer", numElements, DataFormat::GetNumBytesPerStruct(format), GraphicsObjectType::TextureBuffer }, impl{ memberLayoutContainer }, format{ format }
+Rendering::TextureBuffer::TextureBuffer(const std::string& name, DataFormatType format, int numElements, bool allowDynamicUpdate, const MemberLayoutContainer& memberLayoutContainer)
+    : ParentType{ name, numElements, DataFormat::GetNumBytesPerStruct(format), GraphicsObjectType::TextureBuffer }, impl{ memberLayoutContainer }, format{ format }
 {
     SetUsage(allowDynamicUpdate ? UsageType::DynamicUpdate : UsageType::Immutable);
 
@@ -43,10 +43,33 @@ Rendering::DataFormatType Rendering::TextureBuffer::GetFormat() const noexcept
     return format;
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, TextureBuffer, SetLayout, MemberLayoutContainer, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, TextureBuffer, GetLayout, Rendering::TextureBuffer::MemberLayoutContainer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, TextureBuffer, HasMember, std::string, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, TextureBuffer, GetMember, std::string, Rendering::MemberLayout)
+void Rendering::TextureBuffer::SetLayout(const MemberLayoutContainer& memberLayoutContainer)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetLayout(memberLayoutContainer);
+}
+
+Rendering::TextureBuffer::MemberLayoutContainer Rendering::TextureBuffer::GetLayout() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetLayout();
+}
+
+bool Rendering::TextureBuffer::HasMember(const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->HasMember(name);
+}
+
+Rendering::MemberLayout Rendering::TextureBuffer::GetMember(const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetMember(name);
+}
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::TextureBuffer::CloneObject() const
 {

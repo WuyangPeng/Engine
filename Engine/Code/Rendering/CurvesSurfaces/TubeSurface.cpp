@@ -39,7 +39,7 @@ Rendering::TubeSurface::TubeSurface(const std::shared_ptr<Mathematics::Curve3<fl
                                     const Mathematics::Float2& tcoordMin,
                                     const Mathematics::Float2& tcoordMax,
                                     VertexFormatSharedPtr vformat)
-    : ParentType{ vformat, nullptr, nullptr },
+    : ParentType{"", nullptr, nullptr },
       medial{ medial },
       radial{ radial },
       numMedialSamples{ numMedialSamples },
@@ -50,6 +50,7 @@ Rendering::TubeSurface::TubeSurface(const std::shared_ptr<Mathematics::Curve3<fl
       closed{ closed },
       sampleByArcLength{ sampleByArcLength }
 {
+    System::UnusedFunction(vformat);
     auto numVertices = 0;
     if (closed)
     {
@@ -60,17 +61,11 @@ Rendering::TubeSurface::TubeSurface(const std::shared_ptr<Mathematics::Curve3<fl
         numVertices = (numSliceSamples + 1) * numMedialSamples;
     }
 
-    SetVertexFormat(vformat);
     const auto vstride = vformat->GetVertexSize();
     SetVertexBuffer(VertexBuffer::Create("VertexBuffer", *vformat, vstride));
 
     ComputeSinCos();
     ComputeVertices();
-
-    if (GetVertexFormat()->GetIndex(VertexFormatFlags::Semantic::Normal) >= 0)
-    {
-        ComputeNormals();
-    }
 
     ComputeUVs(tcoordMin, tcoordMax);
 
@@ -303,11 +298,6 @@ void Rendering::TubeSurface::UpdateSurface()
 
     ComputeVertices();
     UpdateModelSpace(VisualUpdateType::ModelBoundOnly);
-
-    if (GetVertexFormat()->GetIndex(VertexFormatFlags::Semantic::Normal) >= 0)
-    {
-        ComputeNormals();
-    }
 }
 
 Rendering::TubeSurface::TubeSurface(LoadConstructor value)

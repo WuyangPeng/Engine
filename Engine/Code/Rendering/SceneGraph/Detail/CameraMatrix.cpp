@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/11/27 11:12)
+/// 版本：1.0.0.3 (2023/12/28 17:34)
 
 #include "Rendering/RenderingExport.h"
 
@@ -107,7 +107,7 @@ int Rendering::CameraMatrix::GetStreamingSize() const noexcept
     return size;
 }
 
-Rendering::CameraMatrix::Matrix Rendering::CameraMatrix::GetProjectionViewMatrix(const Matrix& matrix) noexcept
+Rendering::CameraMatrix::Matrix Rendering::CameraMatrix::GetProjectionViewMatrix(const Matrix& matrix) const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

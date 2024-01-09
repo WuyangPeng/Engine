@@ -1,22 +1,19 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:27)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/08 19:47)
 
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLTextureDepthStencil.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
-#include "System/OpenGL/Flags/OpenGLFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
-#include "Rendering/Resources/Flags/CopyType.h"
-#include "Rendering/Resources/Flags/UsageType.h"
 
 Rendering::OpenGLTextureDepthStencil::OpenGLTextureDepthStencil(const TextureDepthStencilSharedPtr& textureDepthStencil, const std::string& name)
     : ParentType{ textureDepthStencil, name }
@@ -36,34 +33,6 @@ Rendering::ConstTextureDepthStencilSharedPtr Rendering::OpenGLTextureDepthStenci
 bool Rendering::OpenGLTextureDepthStencil::CanAutoGenerateMipmaps() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-
-    return false;
-}
-
-bool Rendering::OpenGLTextureDepthStencil::Update(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLTextureDepthStencil::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLTextureDepthStencil::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLTextureDepthStencil::GetNumActiveElements()
-{
-    CoreTools::DisableNoexcept();
 
     return false;
 }

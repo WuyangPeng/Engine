@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:24)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/25 21:53)
 
 #ifndef RENDERING_TERRAIN_TERRAIN_BASE_H
 #define RENDERING_TERRAIN_TERRAIN_BASE_H
@@ -18,65 +18,77 @@
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Node.h"
 
+RENDERING_COPY_UNSHARED_EXPORT_IMPL(TerrainBase, TerrainBaseImpl);
+
 namespace Rendering
 {
-    class TerrainBase : public Node
+    class RENDERING_DEFAULT_DECLARE TerrainBase : public Node
     {
     public:
-        using ClassType = TerrainBase;
+        COPY_UNSHARED_TYPE_DECLARE(TerrainBase);
         using ParentType = Node;
 
-    private:
-        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(TerrainBase);
-        CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
+        using Vector2 = Mathematics::Vector2F;
+        using Vector3 = Mathematics::Vector3F;
+        using HeightsType = std::vector<uint16_t>;
 
     public:
-        TerrainBase(const System::String& heightName, const VertexFormatSharedPtr& vformat, const CameraSharedPtr& camera);
+        TerrainBase(const std::string& name,
+                    int numRows,
+                    int numColumns,
+                    int size,
+                    float minElevation,
+                    float maxElevation,
+                    float spacing,
+                    const VertexFormatSharedPtr& vertexFormat,
+                    const CameraSharedPtr& camera);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD int GetRowQuantity() const noexcept;
-        NODISCARD int GetColQuantity() const noexcept;
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(TerrainBase);
+        CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
+
+        NODISCARD int GetNumRows() const noexcept;
+        NODISCARD int GetNumColumns() const noexcept;
         NODISCARD int GetSize() const noexcept;
         NODISCARD float GetMinElevation() const noexcept;
         NODISCARD float GetMaxElevation() const noexcept;
         NODISCARD float GetSpacing() const noexcept;
 
-        NODISCARD TerrainPageSharedPtr GetPage(int row, int col);
-        NODISCARD TerrainPageSharedPtr GetCurrentPage(float x, float y) const;
+        NODISCARD ConstVisualSharedPtr GetPage(int row, int column) const;
+        void SetHeights(int row, int column, const HeightsType& heights);
+        NODISCARD HeightsType GetHeights(int row, int column) const;
         NODISCARD float GetHeight(float x, float y) const;
-
-        NODISCARD AVector GetNormal(float x, float y) const;
-
-        NODISCARD TerrainPageSharedPtr ReplacePage(int row, int col, const System::String& heightName, const System::String& heightSuffix);
-
-        NODISCARD TerrainPageSharedPtr ReplacePage(int row, int col, TerrainPageSharedPtr newPage);
-
+        NODISCARD Vector3 GetNormal(float x, float y) const;
         void OnCameraMotion();
+
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+        NODISCARD ControllerSharedPtr Clone() const override;
 
     protected:
-        void LoadHeader(const System::String& heightName);
-
-        void LoadPage(int row, int col, const System::String& heightName, const System::String& heightSuffix);
+        NODISCARD ConstTerrainPageSharedPtr GetPage(float x, float y) const;
 
     private:
-        int mode;
+        void AttachTerrainPage(const std::string& name,
+                               int numRows,
+                               int numCols,
+                               int size,
+                               float minElevation,
+                               float maxElevation,
+                               float spacing,
+                               const VertexFormatSharedPtr& vertexFormat,
+                               const CameraSharedPtr& camera);
 
-        CoreTools::ObjectAssociated<VertexFormat> vFormat;
-
-        int numRows;
-        int numCols;
-        int size;
-        float minElevation;
-        float maxElevation;
-        float spacing;
-        std::vector<std::vector<CoreTools::ObjectAssociated<TerrainPage>>> pages;
-
-        int cameraRow;
-        int cameraCol;
-        CoreTools::ObjectAssociated<Camera> camera;
+    private:
+        PackageType impl;
     };
+
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+
+    CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(TerrainBase);
+
+#include SYSTEM_WARNING_POP
 
     CORE_TOOLS_SHARED_PTR_DECLARE(TerrainBase);
 }

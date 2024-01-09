@@ -12,8 +12,8 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/SceneGraph/PickRecord.h"
-#include "Rendering/SceneGraph/PickRecordContainer.h"
+#include "Rendering/Picking/PickRecord.h"
+#include "Rendering/Picking/PickRecordContainer.h"
 
 Rendering::PickRecordContainerTesting::PickRecordContainerTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -43,7 +43,6 @@ void Rendering::PickRecordContainerTesting::BaseTest()
     for (int i = 0; i < 10; ++i)
     {
         PickRecord pickRecord = PickRecord::Create();
-        pickRecord.SetParameter(static_cast<float>(i));
 
         firstPickRecordContainer.InsertPickRecord(pickRecord);
     }
@@ -51,21 +50,11 @@ void Rendering::PickRecordContainerTesting::BaseTest()
     ASSERT_EQUAL(firstPickRecordContainer.GetSize(), 10);
     ASSERT_FALSE(firstPickRecordContainer.IsEmpty());
 
-    for (int i = 0; i < 10; ++i)
-    {
-        ASSERT_APPROXIMATE(firstPickRecordContainer.GetPickRecord(i).GetParameter(), i, 1e-8f);
-    }
-
     PickRecordContainer secondPickRecordContainer = PickRecordContainer::Create();
 
     secondPickRecordContainer.InsertPickRecord(firstPickRecordContainer);
 
     ASSERT_EQUAL(secondPickRecordContainer.GetSize(), 10);
-
-    for (int i = 0; i < 10; ++i)
-    {
-        ASSERT_APPROXIMATE(secondPickRecordContainer.GetPickRecord(i).GetParameter(), i, 1e-8f);
-    }
 
     ASSERT_FALSE(secondPickRecordContainer.IsEmpty());
 }

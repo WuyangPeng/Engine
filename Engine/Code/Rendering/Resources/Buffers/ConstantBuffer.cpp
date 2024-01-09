@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 14:33)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 14:01)
 
 #include "Rendering/RenderingExport.h"
 
@@ -24,20 +24,20 @@
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, ConstantBuffer)
 
-CORE_TOOLS_RTTI_DEFINE(Rendering, ConstantBuffer);
+CORE_TOOLS_RTTI_DEFINE(Rendering, ConstantBuffer)
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ConstantBuffer);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ConstantBuffer);
 
-Rendering::ConstantBuffer::ConstantBuffer(int numBytes, bool allowDynamicUpdate)
-    : ParentType{ "ConstantBuffer", 1, GetRoundedNumBytes(numBytes), GraphicsObjectType::ConstantBuffer }, impl{ MemberLayoutContainer{} }
+Rendering::ConstantBuffer::ConstantBuffer(const std::string& name, int numBytes, bool allowDynamicUpdate)
+    : ParentType{ name, 1, GetRoundedNumBytes(numBytes), GraphicsObjectType::ConstantBuffer }, impl{ MemberLayoutContainer{} }
 {
     SetUsage(allowDynamicUpdate ? UsageType::DynamicUpdate : UsageType::Immutable);
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::ConstantBuffer::ConstantBuffer(int numBytes, bool allowDynamicUpdate, const MemberLayoutContainer& memberLayoutContainer)
-    : ParentType{ "ConstantBuffer", 1, GetRoundedNumBytes(numBytes), GraphicsObjectType::ConstantBuffer }, impl{ memberLayoutContainer }
+Rendering::ConstantBuffer::ConstantBuffer(const std::string& name, int numBytes, bool allowDynamicUpdate, const MemberLayoutContainer& memberLayoutContainer)
+    : ParentType{ name, 1, GetRoundedNumBytes(numBytes), GraphicsObjectType::ConstantBuffer }, impl{ memberLayoutContainer }
 {
     SetUsage(allowDynamicUpdate ? UsageType::DynamicUpdate : UsageType::Immutable);
 
@@ -46,8 +46,38 @@ Rendering::ConstantBuffer::ConstantBuffer(int numBytes, bool allowDynamicUpdate,
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, ConstantBuffer)
 
+void Rendering::ConstantBuffer::SetLayout(const MemberLayoutContainer& memberLayoutContainer)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetLayout(memberLayoutContainer);
+}
+
+Rendering::ConstantBuffer::MemberLayoutContainer Rendering::ConstantBuffer::GetLayout() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetLayout();
+}
+
+bool Rendering::ConstantBuffer::HasMember(const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->HasMember(name);
+}
+
+Rendering::MemberLayout Rendering::ConstantBuffer::GetMember(const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetMember(name);
+}
+
 int Rendering::ConstantBuffer::GetRoundedNumBytes(int numBytes) noexcept
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     if (0 < numBytes)
     {
         if (const auto remainder = numBytes % constantBufferRequiredMinimumBytes;
@@ -65,11 +95,6 @@ int Rendering::ConstantBuffer::GetRoundedNumBytes(int numBytes) noexcept
         return constantBufferRequiredMinimumBytes;
     }
 }
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ConstantBuffer, SetLayout, MemberLayoutContainer, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ConstantBuffer, GetLayout, Rendering::ConstantBuffer::MemberLayoutContainer)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ConstantBuffer, HasMember, std::string, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ConstantBuffer, GetMember, std::string, Rendering::MemberLayout)
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::ConstantBuffer::CloneObject() const
 {

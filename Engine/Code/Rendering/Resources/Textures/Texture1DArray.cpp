@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 20:21)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 14:10)
 
 #include "Rendering/RenderingExport.h"
 
@@ -27,27 +27,22 @@
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Texture1DArray)
 
-CORE_TOOLS_RTTI_DEFINE(Rendering, Texture1DArray);
+CORE_TOOLS_RTTI_DEFINE(Rendering, Texture1DArray)
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Texture1DArray);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture1DArray);
 
-Rendering::Texture1DArray::Texture1DArray(int numItems, DataFormatType format, int length, bool hasMipMaps)
-    : ParentType{ ImplType::GetTotalElements(numItems, length, 1, 1, hasMipMaps),
+Rendering::Texture1DArray::Texture1DArray(const std::string& name, int numItems, DataFormatType format, int length, bool hasMipMaps, bool createStorage)
+    : ParentType{ name,
+                  ImplType::GetTotalElements(numItems, length, 1, 1, hasMipMaps),
                   DataFormat::GetNumBytesPerStruct(format),
-                  GraphicsObjectType::Texture1Array },
+                  GraphicsObjectType::Texture1Array,
+                  createStorage },
       impl{ numItems, format, length, hasMipMaps }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Texture1DArray)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1DArray, GetNumItems, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1DArray, GetFormat, Rendering::DataFormatType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1DArray, GetNumLevels, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Texture1DArray, GetDimension, int, int)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1DArray, GetNumDimensions, int)
 
 int Rendering::Texture1DArray::GetDimension(int index, int level) const
 {
@@ -64,37 +59,6 @@ int Rendering::Texture1DArray::GetLevelOffset(int item, int level) const
 
     return impl->GetLevelOffset(item, level);
 }
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Texture1DArray, GetLength, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1DArray, HasMipMaps, bool)
-
-void Rendering::Texture1DArray::SaveToFile(WriteFileManager& outFile) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    ParentType::SaveTypeToFile(outFile);
-
-    impl->SaveToFile(outFile);
-
-    ParentType::SaveResourceDataToFile(outFile);
-
-    ParentType::SaveStorageDataToFile(outFile);
-}
-
-void Rendering::Texture1DArray::ReadFromFile(ReadFileManager& inFile)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    impl->ReadFromFile(inFile);
-
-    ParentType::ReadResourceDataFromFile(inFile);
-
-    ParentType::ReadStorageDataFromFile(inFile);
-}
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1DArray, AutoGenerateMipMaps, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1DArray, WantAutoGenerateMipMaps, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1DArray, GetNumSubResources, int)
 
 int Rendering::Texture1DArray::GetNumElementsFor(int level) const
 {
@@ -190,7 +154,7 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::Texture1DArray::CloneObject() con
 
 Rendering::Texture1DArray::RendererObjectSharedPtr Rendering::Texture1DArray::CreateRendererObject(RendererTypes rendererTypes)
 {
-    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
     switch (rendererTypes)
     {
@@ -203,4 +167,74 @@ Rendering::Texture1DArray::RendererObjectSharedPtr Rendering::Texture1DArray::Cr
             THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
         }
     }
+}
+
+int Rendering::Texture1DArray::GetNumItems() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNumItems();
+}
+
+int Rendering::Texture1DArray::GetDimension(int index) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetDimension(index);
+}
+
+Rendering::DataFormatType Rendering::Texture1DArray::GetFormat() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetFormat();
+}
+
+int Rendering::Texture1DArray::GetNumLevels() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNumLevels();
+}
+
+int Rendering::Texture1DArray::GetNumDimensions() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNumDimensions();
+}
+
+bool Rendering::Texture1DArray::HasMipMaps() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->HasMipMaps();
+}
+
+int Rendering::Texture1DArray::GetLength() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetLength();
+}
+
+void Rendering::Texture1DArray::AutoGenerateMipMaps() noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->AutoGenerateMipMaps();
+}
+
+bool Rendering::Texture1DArray::WantAutoGenerateMipMaps() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->WantAutoGenerateMipMaps();
+}
+
+int Rendering::Texture1DArray::GetNumSubResources() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNumSubResources();
 }

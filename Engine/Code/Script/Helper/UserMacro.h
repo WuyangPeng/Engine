@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/03 14:35)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/21 20:13)
 
 #ifndef SCRIPT_MACRO_USER_MACRO_H
 #define SCRIPT_MACRO_USER_MACRO_H
@@ -23,8 +23,8 @@
 
 #define CLOSE_SCRIPT_MAX (((SCRIPT_CLOSE_END) << 1) - 1)
 
-// 编译测试（默认为0，最大值为0x0F）
-#define COMPILE_SCRIPT_CLOSE 0x00
+// 编译测试（默认为0B0000，最大值为0B1111）
+#define COMPILE_SCRIPT_CLOSE 0B0000
 
 static_assert(0 <= COMPILE_SCRIPT_CLOSE, "COMPILE_SCRIPT_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_SCRIPT_CLOSE <= CLOSE_SCRIPT_MAX, "COMPILE_SCRIPT_CLOSE Must be less than or equal CLOSE_SCRIPT_MAX.");

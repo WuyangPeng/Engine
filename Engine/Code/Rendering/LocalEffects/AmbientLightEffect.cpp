@@ -16,7 +16,6 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
-#include "Rendering/ShaderFloats/LightAttenuationConstant.h"
 #include "Rendering/Shaders/ProgramSources.h"
 #include "Rendering/Shaders/Shader.h"
 

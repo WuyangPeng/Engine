@@ -31,8 +31,7 @@ Rendering::ImageProcessingBase::ImageProcessingBase(int numCols, int numRows, in
       colSpacing{ 1.0f / numColsM1 },
       rowSpacing{ 1.0f / numRowsM1 },
       camera{ std::make_shared<Camera>(false, DepthType::ZeroToOne, Mathematics::MathF::GetZeroTolerance()) },
-      rectangle{},
-      pvwMatrixConstant{},
+
       renderTargets{},
       mainTexture{},
       mainEffect{},
@@ -72,7 +71,7 @@ Rendering::ImageProcessingBase::ImageProcessingBase(int numCols, int numRows, in
     indices.Increase<int32_t>(2);
     indices.Increase<int32_t>(3);
 
-    rectangle = std::make_shared<TrianglesMesh>(vformat, vbuffer, ibuffer);
+    rectangle = std::make_shared<TrianglesMesh>(vbuffer, ibuffer);
 
     CreateVertexShader();
 
@@ -170,11 +169,11 @@ void Rendering::ImageProcessingBase::ExecuteStep(BaseRenderer& renderer, bool dr
       renderer.Disable(renderTargets.at(1));*/
 }
 
-void Rendering::ImageProcessingBase::CreateVertexShader()
+void Rendering::ImageProcessingBase::CreateVertexShader() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    pvwMatrixConstant = std::make_shared<ProjectionViewWorldMatrixConstant>(CoreTools::DisableNotThrow::Disable);
+    ;
 }
 
 void Rendering::ImageProcessingBase::SetMainTexture(const Texture2DSharedPtr& val) noexcept

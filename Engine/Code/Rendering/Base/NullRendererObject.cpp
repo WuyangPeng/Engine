@@ -26,6 +26,11 @@ void Rendering::NullRendererObject::Enable() noexcept
     RENDERING_CLASS_IS_VALID_9;
 }
 
+void Rendering::NullRendererObject::Disable() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+}
+
 bool Rendering::NullRendererObject::Update() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;

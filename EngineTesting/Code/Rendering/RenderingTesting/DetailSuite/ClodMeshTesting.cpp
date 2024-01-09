@@ -20,8 +20,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/Detail/ClodMesh.h"
 #include "Rendering/Detail/SwitchNode.h"
-#include "Rendering/SceneGraph/CameraManager.h"
-#include "Rendering/SceneGraph/LoadVisual.h"
 
 #include <random>
 #include <vector>
@@ -43,7 +41,7 @@ void Rendering::ClodMeshTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    CameraManager::Create();
+  
 
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateTrianglesMeshFile);
@@ -52,7 +50,6 @@ void Rendering::ClodMeshTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
 
 
-    CameraManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();
 }

@@ -27,8 +27,6 @@ namespace Rendering
 
     private:
         void MainTest();
-        void BaseTest();
-        void OperatorTest();
 
         void DoRunUnitTest() override;
     };

@@ -1,19 +1,17 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:21)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/09 16:55)
 
 #ifndef RENDERING_OPENGL_RENDERER_GLSL_REFLECTION_INPUT_IMPL_H
 #define RENDERING_OPENGL_RENDERER_GLSL_REFLECTION_INPUT_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "System/OpenGL/Fwd/OpenGLFlagsFwd.h"
-#include "System/OpenGL/Using/OpenGLUsing.h"
 #include "Rendering/Shaders/Detail/ReflectionInputImpl.h"
 
 #include <array>
@@ -36,7 +34,7 @@ namespace Rendering
         NODISCARD ReflectionInputSharedPtr Clone() const override;
 
         NODISCARD std::string GetName() const override;
-        void SetName(std::string aName) override;
+        void SetName(const std::string& aName) override;
 
         NODISCARD GLSLReflectionEnumType GetType() const noexcept override;
         void SetType(GLSLReflectionEnumType aType) noexcept override;

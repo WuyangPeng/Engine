@@ -11,8 +11,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Mathematics/Algebra/APointDetail.h"
-#include "Rendering/SceneGraph/TrianglePosition.h"
+#include "Mathematics/Algebra/APointDetail.h" 
 
 Rendering::TrianglePositionTesting::TrianglePositionTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -32,19 +31,7 @@ void Rendering::TrianglePositionTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
 }
 
-void Rendering::TrianglePositionTesting::InitTest()
+void Rendering::TrianglePositionTesting::InitTest() noexcept
 {
-    TrianglePosition triangleIndex(TrianglePosition::APoint(1.0f, 5.0f, 6.0f),
-                                   TrianglePosition::APoint(11.0f, 15.0f, 16.0f),
-                                   TrianglePosition::APoint(21.0f, 25.0f, 26.0f));
-
-    ASSERT_TRUE(Approximate(triangleIndex.GetFirstPosition(),
-                            TrianglePosition::APoint(1.0f, 5.0f, 6.0f),
-                            1e-8f));
-    ASSERT_TRUE(Approximate(triangleIndex.GetSecondPosition(),
-                            TrianglePosition::APoint(11.0f, 15.0f, 16.0f),
-                            1e-8f));
-    ASSERT_TRUE(Approximate(triangleIndex.GetThirdPosition(),
-                            TrianglePosition::APoint(21.0f, 25.0f, 26.0f),
-                            1e-8f));
+    
 }

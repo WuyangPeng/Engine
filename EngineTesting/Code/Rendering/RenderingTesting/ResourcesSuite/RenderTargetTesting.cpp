@@ -37,14 +37,12 @@ void Rendering::RenderTargetTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-  
-
     CoreTools::InitTerm::ExecuteTerminator();
 }
 
 void Rendering::RenderTargetTesting::BaseTest()
 {
-    DrawTarget firstRenderTarget(5, DataFormatType::A8P8, 20, 22, false, DataFormatType::D24UNormS8UInt);
+    DrawTarget firstRenderTarget("", 5, DataFormatType::A8P8, 20, 22, false, true, DataFormatType::D24UNormS8UInt);
 
     ASSERT_EQUAL(firstRenderTarget.GetNumTargets(), 5);
     ASSERT_ENUM_EQUAL(firstRenderTarget.GetRenderTargetFormat(), DataFormatType::A8P8);

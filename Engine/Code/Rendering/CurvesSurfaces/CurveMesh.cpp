@@ -24,8 +24,8 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, CurveMesh);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, CurveMesh);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, CurveMesh);
 
-Rendering::CurveMesh::CurveMesh(const VertexFormatSharedPtr& vformat, const VertexBufferSharedPtr& vbuffer, const std::vector<CoreTools::ObjectAssociated<CurveSegment>>& segments, const FloatArraySharedPtr& params, bool allowDynamicChange)
-    : ParentType{ vformat, vbuffer, true },
+Rendering::CurveMesh::CurveMesh(const VertexBufferSharedPtr& vbuffer, const std::vector<CoreTools::ObjectAssociated<CurveSegment>>& segments, const FloatArraySharedPtr& params, bool allowDynamicChange)
+    : ParentType{ "", vbuffer, nullptr },
       origVBuffer{ vbuffer },
       origParams{ params },
       segments{ segments },
@@ -80,7 +80,7 @@ void Rendering::CurveMesh::SetLevel(int aLevel)
     }
 
     RENDERING_ASSERTION_0(numVertices == numTotalVertices && numEdges == numTotalEdges, "意外情况。\n");
-    SetNumSegments(numTotalVertices - 1);
+
     numFullVertices = numTotalVertices;
 
     UpdateModelSpace(VisualUpdateType::Normals);
@@ -110,8 +110,6 @@ std::vector<Rendering::CurveMesh::Edge> Rendering::CurveMesh::Allocate(int& numT
         numTotalEdges = 2 * numTotalEdges;
     }
 
-    const auto vstride = GetVertexFormat()->GetVertexSize();
-    SetVertexBuffer(VertexBuffer::Create("VertexBuffer", *GetVertexFormat(), vstride));
     std::vector<Edge> edges(numTotalEdges);
 
     if (allowDynamicChange)
@@ -436,7 +434,7 @@ int64_t Rendering::CurveMesh::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const uint64_t id = Polysegment::Register(target);
+    const uint64_t id = ParentType::Register(target);
     if (0 < id)
     {
         target.Register(origVBuffer);

@@ -20,7 +20,6 @@
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/Controllers/MorphController.h"
-#include "Rendering/SceneGraph/LoadVisual.h"
 #include "Rendering/SceneGraph/Visual.h"
 
 Rendering::MorphControllerTesting::MorphControllerTesting(const OStreamShared& stream)

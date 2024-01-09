@@ -147,6 +147,15 @@ Mathematics::AVector<T> Mathematics::AVector<T>::operator-() const noexcept
 
 template <typename T>
 requires std::is_arithmetic_v<T>
+Mathematics::HomogeneousPoint<T> Mathematics::AVector<T>::GetHomogeneousPoint() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return homogeneousPoint;
+}
+
+template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::AVector<T>& Mathematics::AVector<T>::operator+=(const AVector& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;

@@ -28,7 +28,7 @@ namespace Rendering
     private:
         void MainTest();
         void FrameTest();
-        void FrustumTest();
+        void FrustumTest() noexcept;
         void ProjectionMatrixTest() noexcept;
         void AxesAlignBoundingBoxTest() noexcept;
         void StreamTest() noexcept;

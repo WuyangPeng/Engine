@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/11/30 22:52)
+/// 版本：1.0.0.3 (2023/12/25 22:17)
 
 #include "DatabaseGenerate/DatabaseGenerateBase/AncientBooks/Day.h"
 #include "DatabaseGenerate/DatabaseGenerateBase/AncientBooks/DayContainerDetail.h"
@@ -16,8 +16,8 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-DatabaseGenerateCoreTesting::DayConvertTesting::DayConvertTesting(const OStreamShared& stream, const DayContainer& dayContainer)
-    : ParentType{ stream }, dayContainer{ dayContainer }
+DatabaseGenerateCoreTesting::DayConvertTesting::DayConvertTesting(const OStreamShared& stream, DayContainer dayContainer)
+    : ParentType{ stream }, dayContainer{ std::move(dayContainer) }
 {
     DATABASE_GENERATE_CORE_SELF_CLASS_IS_VALID_1;
 }

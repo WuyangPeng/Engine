@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 20:27)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 14:16)
 
 #include "Rendering/RenderingExport.h"
 
@@ -24,31 +24,25 @@
 #include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Resources/DataFormat.h"
 #include "Rendering/Resources/Detail/Textures/Texture2DImpl.h"
-#include "Rendering/Resources/Flags/UsageType.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Texture2DArray)
 
-CORE_TOOLS_RTTI_DEFINE(Rendering, Texture2DArray);
+CORE_TOOLS_RTTI_DEFINE(Rendering, Texture2DArray)
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Texture2DArray);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture2DArray);
 
-Rendering::Texture2DArray::Texture2DArray(int numItems, DataFormatType format, int width, int height, bool hasMipMaps)
-    : ParentType{ ImplType::GetTotalElements(numItems, width, height, 1, hasMipMaps),
+Rendering::Texture2DArray::Texture2DArray(const std::string& name, int numItems, DataFormatType format, int width, int height, bool hasMipMaps, bool createStorage)
+    : ParentType{ name,
+                  ImplType::GetTotalElements(numItems, width, height, 1, hasMipMaps),
                   DataFormat::GetNumBytesPerStruct(format),
-                  GraphicsObjectType::Texture2Array },
+                  GraphicsObjectType::Texture2Array,
+                  createStorage },
       impl{ numItems, format, width, height, hasMipMaps }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Texture2DArray)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2DArray, GetNumItems, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2DArray, GetFormat, Rendering::DataFormatType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2DArray, GetNumLevels, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Texture2DArray, GetDimension, int, int)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2DArray, GetNumDimensions, int)
 
 int Rendering::Texture2DArray::GetDimension(int index, int level) const
 {
@@ -57,46 +51,12 @@ int Rendering::Texture2DArray::GetDimension(int index, int level) const
     return impl->GetDimension(index, level);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Texture2DArray, GetNumLevelBytes, int, int)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Texture2DArray, GetWidth, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Texture2DArray, GetHeight, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2DArray, HasMipMaps, bool)
-
-void Rendering::Texture2DArray::SaveToFile(WriteFileManager& outFile) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    ParentType::SaveTypeToFile(outFile);
-
-    impl->SaveToFile(outFile);
-
-    ParentType::SaveResourceDataToFile(outFile);
-
-    ParentType::SaveStorageDataToFile(outFile);
-}
-
-void Rendering::Texture2DArray::ReadFromFile(ReadFileManager& inFile)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    impl->ReadFromFile(inFile);
-
-    ParentType::ReadResourceDataFromFile(inFile);
-
-    ParentType::ReadStorageDataFromFile(inFile);
-}
-
 int Rendering::Texture2DArray::GetLevelOffset(int item, int level) const
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->GetLevelOffset(item, level);
 }
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2DArray, AutoGenerateMipMaps, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2DArray, WantAutoGenerateMipMaps, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2DArray, GetNumSubResources, int)
 
 int Rendering::Texture2DArray::GetIndex(int item, int level) const
 {
@@ -205,4 +165,88 @@ Rendering::Texture2DArray::RendererObjectSharedPtr Rendering::Texture2DArray::Cr
             THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
         }
     }
+}
+
+int Rendering::Texture2DArray::GetNumItems() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetNumItems();
+}
+
+int Rendering::Texture2DArray::GetDimension(int index) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDimension(index);
+}
+
+Rendering::DataFormatType Rendering::Texture2DArray::GetFormat() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFormat();
+}
+
+int Rendering::Texture2DArray::GetNumLevels() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetNumLevels();
+}
+
+int Rendering::Texture2DArray::GetNumDimensions() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetNumDimensions();
+}
+
+int Rendering::Texture2DArray::GetNumLevelBytes(int level) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetNumLevelBytes(level);
+}
+
+bool Rendering::Texture2DArray::HasMipMaps() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->HasMipMaps();
+}
+
+int Rendering::Texture2DArray::GetWidth() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetWidth();
+}
+
+int Rendering::Texture2DArray::GetHeight() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetHeight();
+}
+
+void Rendering::Texture2DArray::AutoGenerateMipMaps() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->AutoGenerateMipMaps();
+}
+
+bool Rendering::Texture2DArray::WantAutoGenerateMipMaps() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->WantAutoGenerateMipMaps();
+}
+
+int Rendering::Texture2DArray::GetNumSubResources() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetNumSubResources();
 }

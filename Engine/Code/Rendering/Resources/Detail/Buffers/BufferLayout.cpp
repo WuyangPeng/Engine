@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 17:11)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 14:27)
 
 #include "Rendering/RenderingExport.h"
 
@@ -90,14 +90,14 @@ int Rendering::BufferLayout::GetSize() const
     return boost::numeric_cast<int>(layout.size());
 }
 
-void Rendering::BufferLayout::Load(CoreTools::BufferSource& source)
+void Rendering::BufferLayout::Load(BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     layout = source.ReadAggregateContainerNotUseNumber<MemberLayoutContainer>();
 }
 
-void Rendering::BufferLayout::Save(CoreTools::BufferTarget& target) const
+void Rendering::BufferLayout::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

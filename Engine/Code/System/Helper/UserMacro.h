@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/28 17:44)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/21 17:59)
 
 #ifndef SYSTEM_HELPER_USER_MACRO_H
 #define SYSTEM_HELPER_USER_MACRO_H
@@ -17,15 +17,15 @@
 #define CLOSE_GLUT (SYSTEM_ClOSE_BEGIN)
 #define CLOSE_GLFW (SYSTEM_ClOSE_BEGIN << 1)
 #define CLOSE_ENABLE_GL_ERROR_CHECKING (SYSTEM_ClOSE_BEGIN << 2)
-#define CLOSE_DIRECT_X (SYSTEM_ClOSE_BEGIN << 3)
+#define CLOSE_DIRECTX_12 (SYSTEM_ClOSE_BEGIN << 3)
 #define CLOSE_VULKAN (SYSTEM_ClOSE_BEGIN << 4)
 
 #define SYSTEM_ClOSE_END CLOSE_VULKAN
 
 #define CLOSE_SYSTEM_MAX ((SYSTEM_ClOSE_END << 1) - 1)
 
-// 编译测试（默认为0，最大值为0x10）
-#define COMPILE_SYSTEM_CLOSE 0x00
+// 编译测试（默认为0B0000'0000，最大值为0B0001'1111）
+#define COMPILE_SYSTEM_CLOSE 0B0000'0000
 
 static_assert(0 <= COMPILE_SYSTEM_CLOSE, "COMPILE_SYSTEM_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_SYSTEM_CLOSE <= CLOSE_SYSTEM_MAX, "COMPILE_SYSTEM_CLOSE Must be less than or equal CLOSE_SYSTEM_MAX.");
@@ -71,12 +71,12 @@ static_assert(COMPILE_SYSTEM_CLOSE <= CLOSE_SYSTEM_MAX, "COMPILE_SYSTEM_CLOSE Mu
 
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    #if !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_DIRECT_X) != CLOSE_DIRECT_X
+    #if !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_DIRECTX_12) != CLOSE_DIRECTX_12
 
         // 是否使用DirectX
-        #define SYSTEM_USE_DIRECT_X_12 static_cast<void>(0)
+        #define SYSTEM_USE_DIRECTX_12 static_cast<void>(0)
 
-    #endif  //  !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_DIRECT_X) != CLOSE_DIRECT_X
+    #endif  //  !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_DIRECTX_12) != CLOSE_DIRECTX_12
 
 #endif  // SYSTEM_PLATFORM_WIN32
 

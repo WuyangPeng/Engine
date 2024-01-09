@@ -38,11 +38,10 @@ CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(Rendering, ClodMesh)
 CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, ClodMesh)
 CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, ClodMesh)
 
-Rendering::ClodMesh::ClodMesh(const VertexFormatSharedPtr& vertexformat,
-                              const VertexBufferSharedPtr& vertexbuffer,
+Rendering::ClodMesh::ClodMesh(const VertexBufferSharedPtr& vertexbuffer,
                               const IndexBuffer& indexbuffer,
                               const CollapseRecordArraySharedPtr& recordArray)
-    : ParentType{ vertexformat, vertexbuffer, indexbuffer.Clone() }, impl{ recordArray }
+    : ParentType{ "", vertexbuffer, indexbuffer.Clone() }, impl{ recordArray }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

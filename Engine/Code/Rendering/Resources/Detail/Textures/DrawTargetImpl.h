@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 19:29)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 13:51)
 
 #ifndef RENDERING_RESOURCES_DRAW_TARGET_IMPL_H
 #define RENDERING_RESOURCES_DRAW_TARGET_IMPL_H
@@ -14,7 +14,6 @@
 
 #include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
-#include "Rendering/Resources/ResourcesFwd.h"
 #include "Rendering/Resources/Textures/TextureDepthStencil.h"
 #include "Rendering/Resources/Textures/TextureRenderTarget.h"
 
@@ -37,7 +36,9 @@ namespace Rendering
                        int width,
                        int height,
                        bool hasRenderTargetMipMaps = false,
-                       DataFormatType depthStencilFormat = DataFormatType::Unknown);
+                       bool createRenderTargetStorage = true,
+                       DataFormatType depthStencilFormat = DataFormatType::Unknown,
+                       bool createDepthStencilStorage = false);
 
         ~DrawTargetImpl() noexcept = default;
         DrawTargetImpl(const DrawTargetImpl& rhs);

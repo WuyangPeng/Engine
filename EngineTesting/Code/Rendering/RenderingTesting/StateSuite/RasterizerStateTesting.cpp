@@ -121,14 +121,14 @@ void Rendering::RasterizerStateTesting::GetStreamingSizeTest()
 
     streamingSize += CoreTools::GetStreamSize(rasterizerState->GetFill());
     streamingSize += CoreTools::GetStreamSize(rasterizerState->GetCull());
-    streamingSize += CoreTools::GetStreamSize(rasterizerState->IsFrontCCW());
+    streamingSize += CoreTools::GetStreamSize(rasterizerState->IsFrontCcw());
     streamingSize += CoreTools::GetStreamSize(rasterizerState->GetDepthBias());
     streamingSize += CoreTools::GetStreamSize(rasterizerState->GetDepthBiasClamp());
     streamingSize += CoreTools::GetStreamSize(rasterizerState->GetSlopeScaledDepthBias());
     streamingSize += CoreTools::GetStreamSize(rasterizerState->IsEnableDepthClip());
     streamingSize += CoreTools::GetStreamSize(rasterizerState->IsEnableScissor());
-    streamingSize += CoreTools::GetStreamSize(rasterizerState->IsEnableMultisample());
-    streamingSize += CoreTools::GetStreamSize(rasterizerState->IsEnableAntialiasedLine());
+    streamingSize += CoreTools::GetStreamSize(rasterizerState->IsEnableMultiSample());
+    streamingSize += CoreTools::GetStreamSize(rasterizerState->IsEnableAntiAliasedLine());
 
     ASSERT_EQUAL(streamingSize, rasterizerState->GetStreamingSize());
 }
@@ -187,14 +187,14 @@ void Rendering::RasterizerStateTesting::RasterizerStateValueTest()
 {
     ASSERT_ENUM_EQUAL(rasterizerState->GetFill(), fill);
     ASSERT_ENUM_EQUAL(rasterizerState->GetCull(), cull);
-    ASSERT_EQUAL(rasterizerState->IsFrontCCW(), frontCCW);
+    ASSERT_EQUAL(rasterizerState->IsFrontCcw(), frontCCW);
     ASSERT_EQUAL(rasterizerState->GetDepthBias(), depthBias);
     ASSERT_EQUAL(rasterizerState->GetDepthBiasClamp(), depthBiasClamp);
     ASSERT_EQUAL(rasterizerState->GetSlopeScaledDepthBias(), slopeScaledDepthBias);
     ASSERT_EQUAL(rasterizerState->IsEnableDepthClip(), enableDepthClip);
     ASSERT_EQUAL(rasterizerState->IsEnableScissor(), enableScissor);
-    ASSERT_EQUAL(rasterizerState->IsEnableMultisample(), enableMultisample);
-    ASSERT_EQUAL(rasterizerState->IsEnableAntialiasedLine(), enableAntialiasedLine);
+    ASSERT_EQUAL(rasterizerState->IsEnableMultiSample(), enableMultisample);
+    ASSERT_EQUAL(rasterizerState->IsEnableAntiAliasedLine(), enableAntialiasedLine);
 }
 
 void Rendering::RasterizerStateTesting::RasterizerStateSaveTest()
@@ -245,11 +245,11 @@ void Rendering::RasterizerStateTesting::SetCullTest()
 
 void Rendering::RasterizerStateTesting::SetFrontCCWTest()
 {
-    rasterizerState->SetFrontCCW(false);
+    rasterizerState->SetFrontCcw(false);
     frontCCW = false;
     ASSERT_NOT_THROW_EXCEPTION_0(RasterizerStateTest);
 
-    rasterizerState->SetFrontCCW(true);
+    rasterizerState->SetFrontCcw(true);
     frontCCW = true;
     ASSERT_NOT_THROW_EXCEPTION_0(RasterizerStateTest);
 }
@@ -299,22 +299,22 @@ void Rendering::RasterizerStateTesting::SetEnableScissorTest()
 
 void Rendering::RasterizerStateTesting::SetEnableMultisampleTest()
 {
-    rasterizerState->SetEnableMultisample(true);
+    rasterizerState->SetEnableMultiSample(true);
     enableMultisample = true;
     ASSERT_NOT_THROW_EXCEPTION_0(RasterizerStateTest);
 
-    rasterizerState->SetEnableMultisample(false);
+    rasterizerState->SetEnableMultiSample(false);
     enableMultisample = false;
     ASSERT_NOT_THROW_EXCEPTION_0(RasterizerStateTest);
 }
 
 void Rendering::RasterizerStateTesting::SetEnableAntialiasedLineTest()
 {
-    rasterizerState->SetEnableAntialiasedLine(true);
+    rasterizerState->SetEnableAntiAliasedLine(true);
     enableAntialiasedLine = true;
     ASSERT_NOT_THROW_EXCEPTION_0(RasterizerStateTest);
 
-    rasterizerState->SetEnableAntialiasedLine(false);
+    rasterizerState->SetEnableAntiAliasedLine(false);
     enableAntialiasedLine = false;
     ASSERT_NOT_THROW_EXCEPTION_0(RasterizerStateTest);
 }

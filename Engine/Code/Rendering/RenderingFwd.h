@@ -1,22 +1,20 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/11/20 15:07)
+/// 版本：1.0.0.3 (2023/12/22 10:01)
 
 #ifndef RENDERING_FWD_H
 #define RENDERING_FWD_H
 
-#include "AglRenderer/AglRendererFwd.h"
 #include "Base/BaseFwd.h"
 #include "ConsoleGraph/ConsoleGraphFwd.h"
 #include "Controllers/ControllersFwd.h"
 #include "CurvesSurfaces/CurvesSurfacesFwd.h"
 #include "DataTypes/DataTypesFwd.h"
-#include "DirectAPI/DirectAPIFwd.h"
 #include "Dx9Renderer/Dx9RendererFwd.h"
 #include "GlobalEffects/GlobalEffectsFwd.h"
 #include "GlutRenderer/GlutRendererFwd.h"
@@ -25,8 +23,8 @@
 #include "Illumination/IlluminationFwd.h"
 #include "ImageProcessing/ImageProcessingFwd.h"
 #include "LocalEffects/LocalEffectsFwd.h"
-#include "OpenGLAPI/OpenGLAPIFwd.h"
 #include "OpenGLRenderer/OpenGLRendererFwd.h"
+#include "Picking/PickingFwd.h"
 #include "Picture/PictureFwd.h"
 #include "RendererEngine/RendererEngineFwd.h"
 #include "Resources/ResourcesFwd.h"
@@ -38,6 +36,7 @@
 #include "Terrain/TerrainFwd.h"
 #include "TextFonts/TextFontsFwd.h"
 #include "Vertex/VertexFwd.h"
+#include "Visibility/VisibilityFwd.h"
 #include "WglRenderer/WglRendererFwd.h"
 #include "Detail/DetailFwd.h"
 

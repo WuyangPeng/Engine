@@ -25,6 +25,8 @@
 #include "Framework/OpenGLGlutFrame/OpenGLGlutFrameFwd.h"
 #include "Framework/WindowCreate/WindowSize.h"
 
+#include <iostream>
+
 namespace Framework
 {
     template <typename T>

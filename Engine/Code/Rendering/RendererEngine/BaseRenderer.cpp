@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/28 15:19)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/02 16:15)
 
 #include "Rendering/RenderingExport.h"
 
@@ -48,26 +48,6 @@ void Rendering::BaseRenderer::Release()
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, BaseRenderer)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BaseRenderer, GetWidth, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BaseRenderer, GetHeight, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BaseRenderer, GetColorFormat, Rendering::DataFormatType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BaseRenderer, GetDepthStencilFormat, Rendering::DataFormatType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BaseRenderer, GetNumMultiSamples, int)
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, BaseRenderer, SetRasterizerState, RasterizerStateSharedPtr, void)
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, BaseRenderer, SetClearColor, Colour, void);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BaseRenderer, GetClearColor, Rendering::BaseRenderer::Colour)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, BaseRenderer, SetClearDepth, float, void);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BaseRenderer, GetClearDepth, float)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, BaseRenderer, SetClearStencil, int, void);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BaseRenderer, GetClearStencil, int)
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, BaseRenderer, SetViewport, Viewport, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, BaseRenderer, GetViewport, Rendering::Viewport)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, BaseRenderer, SetDepthRange, DepthRange, void);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, BaseRenderer, GetDepthRange, Rendering::DepthRange)
-
 bool Rendering::BaseRenderer::HasDepthRange01() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
@@ -88,11 +68,6 @@ void Rendering::BaseRenderer::Resize(int width, int height)
 
     return impl->Resize(width, height);
 }
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, BaseRenderer, ClearColorBuffer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, BaseRenderer, ClearDepthBuffer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, BaseRenderer, ClearStencilBuffer, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, BaseRenderer, ClearBuffers, void)
 
 int64_t Rendering::BaseRenderer::Draw(Visual& visual)
 {
@@ -185,7 +160,7 @@ void Rendering::BaseRenderer::Unbind(const DrawTargetSharedPtr& object)
     return impl->Unbind(object);
 }
 
-Rendering::TotalAllocation Rendering::BaseRenderer::GetTotalAllocation()
+Rendering::TotalAllocation Rendering::BaseRenderer::GetTotalAllocation() const
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -304,7 +279,7 @@ bool Rendering::BaseRenderer::GetNumActiveElements(const StructuredBufferSharedP
     return impl->GetNumActiveElements(buffer);
 }
 
-void Rendering::BaseRenderer::Execute(const ComputeProgramSharedPtr& program, int numXGroups, int numYGroups, int numZGroups)
+void Rendering::BaseRenderer::Execute(ComputeProgram& program, int numXGroups, int numYGroups, int numZGroups)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -338,8 +313,6 @@ void Rendering::BaseRenderer::InitDevice()
 
     return impl->InitDevice();
 }
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BaseRenderer, GetRendererType, Rendering::RendererTypes)
 
 void Rendering::BaseRenderer::DisplayColorBuffer(int32_t syncInterval)
 {
@@ -437,4 +410,151 @@ Rendering::BaseRenderer::RasterizerStateSharedPtr Rendering::BaseRenderer::GetDe
     RENDERING_CLASS_IS_VALID_9;
 
     return impl->GetDefaultRasterizerState();
+}
+
+Rendering::RendererTypes Rendering::BaseRenderer::GetRendererType() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetRendererType();
+}
+
+int Rendering::BaseRenderer::GetWidth() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetWidth();
+}
+
+int Rendering::BaseRenderer::GetHeight() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetHeight();
+}
+
+Rendering::DataFormatType Rendering::BaseRenderer::GetColorFormat() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetColorFormat();
+}
+
+Rendering::DataFormatType Rendering::BaseRenderer::GetDepthStencilFormat() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDepthStencilFormat();
+}
+
+int Rendering::BaseRenderer::GetNumMultiSamples() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetNumMultiSamples();
+}
+
+void Rendering::BaseRenderer::SetViewport(const Viewport& viewport)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetViewport(viewport);
+}
+
+Rendering::Viewport Rendering::BaseRenderer::GetViewport() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetViewport();
+}
+
+void Rendering::BaseRenderer::SetDepthRange(const DepthRange& depthRange)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetDepthRange(depthRange);
+}
+
+Rendering::DepthRange Rendering::BaseRenderer::GetDepthRange() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDepthRange();
+}
+
+void Rendering::BaseRenderer::SetClearColor(const Colour& clearColor) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetClearColor(clearColor);
+}
+
+Rendering::BaseRenderer::Colour Rendering::BaseRenderer::GetClearColor() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetClearColor();
+}
+
+void Rendering::BaseRenderer::SetClearDepth(float clearDepth) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetClearDepth(clearDepth);
+}
+
+float Rendering::BaseRenderer::GetClearDepth() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetClearDepth();
+}
+
+void Rendering::BaseRenderer::SetClearStencil(int clearStencil) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetClearStencil(clearStencil);
+}
+
+int Rendering::BaseRenderer::GetClearStencil() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetClearStencil();
+}
+
+void Rendering::BaseRenderer::SetRasterizerState(const RasterizerStateSharedPtr& state)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetRasterizerState(state);
+}
+
+void Rendering::BaseRenderer::ClearColorBuffer()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->ClearColorBuffer();
+}
+
+void Rendering::BaseRenderer::ClearDepthBuffer()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->ClearDepthBuffer();
+}
+
+void Rendering::BaseRenderer::ClearStencilBuffer()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->ClearStencilBuffer();
+}
+
+void Rendering::BaseRenderer::ClearBuffers()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->ClearBuffers();
 }

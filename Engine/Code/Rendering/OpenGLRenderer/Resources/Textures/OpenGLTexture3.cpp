@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:28)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/08 19:29)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,23 +16,21 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
-#include "Rendering/Resources/Flags/CopyType.h"
-#include "Rendering/Resources/Flags/UsageType.h"
 
 Rendering::OpenGLTexture3::OpenGLTexture3(const Texture3DSharedPtr& texture3D, const std::string& name)
     : ParentType{ texture3D, name, TextureTarget::Texture3D, TextureTargetBinding::Binding3D }
 {
     SetGLHandle(System::GetGLGenTextures());
-    System::SetGLBindTexture(TextureTarget::Texture3D, GetGLHandle());
+    SetGLBindTexture(TextureTarget::Texture3D, ClassType::GetGLHandle());
 
     const auto width = texture3D->GetDimension(0);
     const auto height = texture3D->GetDimension(1);
     const auto depth = texture3D->GetDimension(2);
-    System::SetGLTexturesStorage3D(TextureTarget::Texture3D, GetNumLevels(), GetInternalFormat(), width, height, depth);
+    SetGLTexturesStorage3D(TextureTarget::Texture3D, GetNumLevels(), GetInternalFormat(), width, height, depth);
 
     Initialize();
 
-    System::SetGLBindTexture(TextureTarget::Texture3D, 0);
+    SetGLBindTexture(TextureTarget::Texture3D, 0);
 
     CreateStaging();
 
@@ -41,7 +39,7 @@ Rendering::OpenGLTexture3::OpenGLTexture3(const Texture3DSharedPtr& texture3D, c
 
 Rendering::OpenGLTexture3::~OpenGLTexture3() noexcept
 {
-    System::SetGLDeleteTextures(GetGLHandle());
+    System::SetGLDeleteTextures(ClassType::GetGLHandle());
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -59,55 +57,22 @@ bool Rendering::OpenGLTexture3::CanAutoGenerateMipmaps() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto texture = GetTexture();
+    const auto texture = GetTexture();
 
     return texture &&
            texture->HasMipMaps() &&
            texture->WantAutoGenerateMipMaps();
 }
 
-void Rendering::OpenGLTexture3::Enable() noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
-}
-
 void Rendering::OpenGLTexture3::LoadTextureLevel(int level, const ConstSpanIterator& data)
 {
-    auto texture = GetTexture();
-    if (texture && level < texture->GetNumLevels())
+    if (const auto texture = GetTexture();
+        texture && level < texture->GetNumLevels())
     {
         const auto width = texture->GetDimension(level, 0);
         const auto height = texture->GetDimension(level, 1);
         const auto depth = texture->GetDimension(level, 2);
 
-        System::SetGLTexturesSubImage3D(TextureTarget::Texture2D, level, 0, 0, 0, width, height, depth, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
+        SetGLTexturesSubImage3D(TextureTarget::Texture2D, level, 0, 0, 0, width, height, depth, GetExternalFormat(), GetExternalType(), data.GetData());
     }
-}
-
-bool Rendering::OpenGLTexture3::Update(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLTexture3::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLTexture3::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLTexture3::GetNumActiveElements()
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
 }

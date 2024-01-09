@@ -1,19 +1,17 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/03 15:25)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/09 16:56)
 
 #ifndef RENDERING_OPENGL_RENDERER_GLSL_REFLECTION_UNIFORM_H
 #define RENDERING_OPENGL_RENDERER_GLSL_REFLECTION_UNIFORM_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "System/OpenGL/Fwd/OpenGLFlagsFwd.h"
-#include "System/OpenGL/Using/OpenGLUsing.h"
 #include "Rendering/Shaders/Detail/ReflectionUniformImpl.h"
 
 #include <array>
@@ -29,7 +27,7 @@ namespace Rendering
 
     public:
         GLSLReflectionUniform() noexcept;
-        explicit GLSLReflectionUniform(const std::string& name);
+        explicit GLSLReflectionUniform(std::string name) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

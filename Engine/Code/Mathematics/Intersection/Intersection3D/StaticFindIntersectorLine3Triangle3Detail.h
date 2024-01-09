@@ -19,7 +19,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorLine3Triangle3<Real>::StaticFindIntersectorLine3Triangle3(const Line3& line, const Triangle3& triangle, const Real epsilon)
-    : ParentType{ epsilon }, line{ line }, triangle{ triangle }, lineParameter{}, triangleBary0{}, triangleBary1{}, triangleBary2{ Math::GetValue(1) }
+    : ParentType{ epsilon }, line{ line }, triangle{ triangle }, lineParameter{}, triangleBary0{}, triangleBary1{}, triangleBary2{ Math::GetValue(1) }, point{}
 {
     Find();
 
@@ -110,6 +110,8 @@ void Mathematics::StaticFindIntersectorLine3Triangle3<Real>::Find()
                 triangleBary2 = directionDotEdge1CrossOrigin / directionDotNormal;
                 triangleBary0 = Math::GetValue(1) - triangleBary1 - triangleBary2;
 
+                point = line.GetOrigin() + lineParameter * line.GetDirection();
+
                 this->SetIntersectionType(IntersectionType::Point);
             }
             // else: 1 < b1 + b2, ²»Ïà½»
@@ -149,6 +151,14 @@ Real Mathematics::StaticFindIntersectorLine3Triangle3<Real>::GetTriangleBary2() 
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     return triangleBary2;
+}
+
+template <typename Real>
+typename Mathematics::StaticFindIntersectorLine3Triangle3<Real>::Vector3 Mathematics::StaticFindIntersectorLine3Triangle3<Real>::GetPoint() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return point;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TRIANGLE3_DETAIL_H

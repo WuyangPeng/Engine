@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/25 14:58)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/04 09:31)
 
 #include "Rendering/RenderingExport.h"
 
@@ -15,7 +15,8 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, WindowsParameter)
 
 Rendering::WindowsParameter Rendering::WindowsParameter::Create()
 {
@@ -32,14 +33,103 @@ Rendering::WindowsParameter::WindowsParameter(DisableNotThrow disableNotThrow)
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, WindowsParameter)
 
-COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, WindowsParameter)
+Rendering::WindowsParameter::ColourType Rendering::WindowsParameter::GetClearColor() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, WindowsParameter, GetClearColor, Rendering::WindowsParameter::ColourType);
+    return impl->GetClearColor();
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, WindowsParameter, GetWindowTitle, std::string);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, WindowsParameter, GetXPosition, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, WindowsParameter, GetYPosition, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, WindowsParameter, IsAllowResize, bool);
+std::string Rendering::WindowsParameter::GetWindowTitle() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetWindowTitle();
+}
+
+int Rendering::WindowsParameter::GetXPosition() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetXPosition();
+}
+
+int Rendering::WindowsParameter::GetYPosition() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetYPosition();
+}
+
+bool Rendering::WindowsParameter::IsAllowResize() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsAllowResize();
+}
+
+Rendering::WindowsParameter::String Rendering::WindowsParameter::GetWindowClassName() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetWindowClassName();
+}
+
+void Rendering::WindowsParameter::SetWindowClassName(const String& className)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetWindowClassName(className);
+}
+
+Rendering::WindowsParameter::String Rendering::WindowsParameter::GetWindowMenuName() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetWindowMenuName();
+}
+
+void Rendering::WindowsParameter::SetWindowMenuName(const String& menuName)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetWindowMenuName(menuName);
+}
+
+int Rendering::WindowsParameter::GetIcon() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetIcon();
+}
+
+bool Rendering::WindowsParameter::IsIconDefault() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsIconDefault();
+}
+
+int Rendering::WindowsParameter::GetCursor() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetCursor();
+}
+
+bool Rendering::WindowsParameter::IsCursorDefault() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsCursorDefault();
+}
+
+Rendering::WindowsParameter::WindowsBrushTypes Rendering::WindowsParameter::GetBackground() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetBackground();
+}
 
 void Rendering::WindowsParameter::SetClearColor(float red, float green, float blue, float alpha)
 {
@@ -54,18 +144,6 @@ void Rendering::WindowsParameter::SetWindowParameter(const std::string& windowTi
 
     return impl->SetWindowParameter(windowTitle, x, y, allowResize);
 }
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, WindowsParameter, GetWindowMenuName, System::String);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, WindowsParameter, SetWindowClassName, String, void);
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, WindowsParameter, GetWindowClassName, System::String);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, WindowsParameter, SetWindowMenuName, String, void);
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, WindowsParameter, GetIcon, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, WindowsParameter, IsIconDefault, bool);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, WindowsParameter, GetCursor, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, WindowsParameter, IsCursorDefault, bool);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, WindowsParameter, GetBackground, System::WindowsBrushTypes);
 
 void Rendering::WindowsParameter::SetWindowPictorialParameter(int icon, bool isIconDefault, int cursor, bool isCursorDefault, WindowsBrushTypes background)
 {

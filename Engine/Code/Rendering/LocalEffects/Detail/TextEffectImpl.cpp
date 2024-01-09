@@ -22,8 +22,8 @@
 #include "Rendering/State/SamplerState.h"
 
 Rendering::TextEffectImpl::TextEffectImpl(ShaderAPIType shaderAPIType, int numTranslateConstantBytes, int numColorConstantBytes)
-    : translate{ std::make_shared<ConstantBuffer>(numTranslateConstantBytes, true) },
-      color{ std::make_shared<ConstantBuffer>(numColorConstantBytes, true) },
+    : translate{ std::make_shared<ConstantBuffer>("translate", numTranslateConstantBytes, true) },
+      color{ std::make_shared<ConstantBuffer>("color", numColorConstantBytes, true) },
       samplerState{ std::make_shared<SamplerState>("SamplerState") }
 {
     SetTranslate(0.0f, 0.0f);
@@ -99,7 +99,7 @@ void Rendering::TextEffectImpl::SetColor(const Colour& aColor)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto data = translate->GetStorage();
+    auto data = color->GetStorage();
     data.Increase(aColor.GetRed());
     data.Increase(aColor.GetBlue());
     data.Increase(aColor.GetGreen());

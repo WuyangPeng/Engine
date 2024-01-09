@@ -47,7 +47,7 @@ void Rendering::OpenGLInputLayoutManagerImpl::Unbind(const VertexBufferSharedPtr
     std::vector<InputLayoutKey> matches{};
     for (const auto& element : inputLayout)
     {
-        if (vertexBuffer == element.first.first)
+        if (vertexBuffer == element.first.first.lock())
         {
             matches.emplace_back(element.first);
         }

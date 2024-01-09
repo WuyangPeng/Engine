@@ -16,12 +16,6 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{e95646c8-4e8d-4bd5-b65a-4b318e89d0f7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AglRenderer 头文件">
-      <UniqueIdentifier>{d154e736-7cea-47a4-8524-c65cb1ba005c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AglRenderer 源文件">
-      <UniqueIdentifier>{1369adc4-6c55-4797-ae6e-c8d96f46a5c9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ConsoleGraph 头文件">
       <UniqueIdentifier>{26927892-6119-49e2-b152-65366000c6d9}</UniqueIdentifier>
     </Filter>
@@ -73,14 +67,8 @@
     <Filter Include="Detail 源文件\Detail">
       <UniqueIdentifier>{b32c8c6c-e65d-43c8-a878-e509903e85ed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DirectAPI 头文件">
-      <UniqueIdentifier>{3884aa5e-b8de-495d-b091-08e6cf0a502e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Dx9Renderer 头文件">
       <UniqueIdentifier>{d5aa356f-ff24-4e9f-9fa6-37cd3a008bd2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Dx9Renderer 源文件">
-      <UniqueIdentifier>{c1d5c2e1-5169-40ba-b1bb-7a21f73ccf4b}</UniqueIdentifier>
     </Filter>
     <Filter Include="GlobalEffects 头文件">
       <UniqueIdentifier>{d6284ec0-590d-4472-8347-49d3d66b9703}</UniqueIdentifier>
@@ -106,26 +94,17 @@
     <Filter Include="ImageProcessing 头文件">
       <UniqueIdentifier>{2ddc880d-c4c5-438c-8cfe-363408362a66}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ImageProcessing 源文件">
-      <UniqueIdentifier>{a8978875-716e-471d-b3b8-304f3d738738}</UniqueIdentifier>
-    </Filter>
     <Filter Include="LocalEffects 头文件">
       <UniqueIdentifier>{51a995e3-0e85-46c8-9d34-73fb048151e4}</UniqueIdentifier>
     </Filter>
     <Filter Include="LocalEffects 源文件">
       <UniqueIdentifier>{eabe060d-057f-45bb-a58a-d1589eab9300}</UniqueIdentifier>
     </Filter>
-    <Filter Include="OpenGLAPI 头文件">
-      <UniqueIdentifier>{205d22d7-af45-42e8-a7b0-148263fbc1e9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="OpenGLRenderer 头文件">
       <UniqueIdentifier>{dc448bdf-473f-40a2-bd0d-6ca93b35f2a1}</UniqueIdentifier>
     </Filter>
     <Filter Include="OpenGLRenderer 源文件">
       <UniqueIdentifier>{5d6d419d-0560-48e0-a521-0825b8a97e0d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="OpenGLRenderer 模板文件">
-      <UniqueIdentifier>{24e9d540-1b42-44ff-ac8a-1f549876abb6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Picture 头文件">
       <UniqueIdentifier>{a5d9b78a-e151-46ae-bdd0-4a5e92ab0c4b}</UniqueIdentifier>
@@ -160,15 +139,6 @@
     <Filter Include="ShaderFloats 头文件">
       <UniqueIdentifier>{8273bfd2-811b-4e36-bab5-e498f43adc0c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ShaderFloats 源文件">
-      <UniqueIdentifier>{99d35188-1adb-4de9-b260-2e1751ff32b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFloats 源文件\Detail">
-      <UniqueIdentifier>{265321d8-c65e-4b60-b51e-a8f27ff94b01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFloats 头文件\Detail">
-      <UniqueIdentifier>{50c26366-25ae-41d1-b9f2-1cdcbd3f826a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shaders 头文件">
       <UniqueIdentifier>{04aaf31e-ef28-4c3d-acfc-5a1df5cb88fc}</UniqueIdentifier>
     </Filter>
@@ -183,9 +153,6 @@
     </Filter>
     <Filter Include="Sorting 头文件">
       <UniqueIdentifier>{e181d68b-67ed-4a32-8df4-84b4a7b5f86c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sorting 源文件">
-      <UniqueIdentifier>{7f861c63-93dd-48a9-8ea7-29aff9ccfc27}</UniqueIdentifier>
     </Filter>
     <Filter Include="Terrain 头文件">
       <UniqueIdentifier>{167782de-c06e-410b-aad6-5ecaafa38b03}</UniqueIdentifier>
@@ -334,17 +301,11 @@
     <Filter Include="OpenGLRenderer 头文件\Detail\Resources">
       <UniqueIdentifier>{be681c59-62eb-4b77-ba3d-16bd4b6b532c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="OpenGLRenderer 头文件\Detail\Resources\Buffers">
-      <UniqueIdentifier>{43660230-0746-43fb-a053-c2e9a9fafb80}</UniqueIdentifier>
-    </Filter>
     <Filter Include="OpenGLRenderer 头文件\Detail\Resources\Textures">
       <UniqueIdentifier>{c9509b29-2132-44fa-bb6d-16bb74de7590}</UniqueIdentifier>
     </Filter>
     <Filter Include="OpenGLRenderer 源文件\Detail\Resources">
       <UniqueIdentifier>{12895451-45ae-4a6f-b747-900e7d51a378}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="OpenGLRenderer 源文件\Detail\Resources\Buffers">
-      <UniqueIdentifier>{f8b8fddc-66a4-4998-85c7-39f7ba54021b}</UniqueIdentifier>
     </Filter>
     <Filter Include="OpenGLRenderer 源文件\Detail\Resources\Textures">
       <UniqueIdentifier>{d70ac650-0060-4bb0-9041-1737fb19b32b}</UniqueIdentifier>
@@ -375,9 +336,6 @@
     </Filter>
     <Filter Include="OpenGLRenderer 源文件\Detail\GLSL">
       <UniqueIdentifier>{da9083c9-6201-437a-b23c-c58cbd2787f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="OpenGLRenderer 头文件\Flags">
-      <UniqueIdentifier>{2597ebdd-3c48-4493-86d7-21076318538b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shaders 模板文件\Detail">
       <UniqueIdentifier>{f1615ef9-fb41-4114-9579-a4a7d240e997}</UniqueIdentifier>
@@ -411,6 +369,39 @@
     </Filter>
     <Filter Include="GlobalEffects 源文件\Detail">
       <UniqueIdentifier>{2fd06422-101f-48eb-bc56-ab12e09407ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Terrain 头文件\Detail">
+      <UniqueIdentifier>{ef295ac5-fb94-4cc1-ba34-75fb7f77f1a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Terrain 源文件\Detail">
+      <UniqueIdentifier>{527c7c4a-4a91-4f56-b0d3-f5a54146a7e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Picking 头文件">
+      <UniqueIdentifier>{59b7557d-d59b-4f51-86e1-87409662c61f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Picking 源文件">
+      <UniqueIdentifier>{b4712a11-94a3-4d2a-9a9e-4803a1d1bc0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Picking 头文件\Detail">
+      <UniqueIdentifier>{a274ca2e-b366-47fc-890b-0684ad7a5111}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Picking 源文件\Detail">
+      <UniqueIdentifier>{b3ae0168-3810-4c0e-bcb4-e424df227fc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Visibility 头文件">
+      <UniqueIdentifier>{07a148f8-84fd-4474-bd9e-3d6ffd6340a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Visibility 源文件">
+      <UniqueIdentifier>{9116276e-faae-4154-931b-39125d58694d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Visibility 头文件\Detail">
+      <UniqueIdentifier>{2d59e716-79d1-4b73-862a-46887a9fa9a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Visibility 源文件\Detail">
+      <UniqueIdentifier>{721517b5-a137-4a04-8278-666af7c1328e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Visibility 头文件\Flags">
+      <UniqueIdentifier>{de8039cf-c7dc-441d-a240-400d22950439}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -627,53 +618,8 @@
     <ClCompile Include="..\..\..\Code\Rendering\GlxRenderer\GlxRenderer.cpp">
       <Filter>GlxRenderer 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessingBase.cpp">
-      <Filter>ImageProcessing 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessing3.cpp">
-      <Filter>ImageProcessing 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessing2.cpp">
-      <Filter>ImageProcessing 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\AmbientLightEffect.cpp">
       <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRenderTargetData.cpp">
-      <Filter>OpenGLRenderer 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRenderTargetDataImpl.cpp">
-      <Filter>OpenGLRenderer 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLShader.cpp">
-      <Filter>OpenGLRenderer 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureData.cpp">
-      <Filter>OpenGLRenderer 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureDataManager.cpp">
-      <Filter>OpenGLRenderer 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormatArrayData.cpp">
-      <Filter>OpenGLRenderer 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormatData.cpp">
-      <Filter>OpenGLRenderer 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexShader.cpp">
-      <Filter>OpenGLRenderer 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLBindTexture.cpp">
-      <Filter>OpenGLRenderer 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLMapping.cpp">
-      <Filter>OpenGLRenderer 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLPixelShader.cpp">
-      <Filter>OpenGLRenderer 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRendererData.cpp">
-      <Filter>OpenGLRenderer 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RendererEngine\Detail\RendererParameterImpl.cpp">
       <Filter>RendererEngine 源文件\Detail</Filter>
@@ -693,37 +639,13 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraMatrix.cpp">
       <Filter>SceneGraph 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraNodeImpl.cpp">
-      <Filter>SceneGraph 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\CullerImpl.cpp">
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\ViewVolumeNodeImpl.cpp">
       <Filter>SceneGraph 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\NodeImpl.cpp">
       <Filter>SceneGraph 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\NormalDerivatives.cpp">
-      <Filter>SceneGraph 源文件\Detail</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\ParticlesImpl.cpp">
-      <Filter>SceneGraph 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickerImpl.cpp">
-      <Filter>SceneGraph 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordContainerImpl.cpp">
-      <Filter>SceneGraph 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordImpl.cpp">
-      <Filter>SceneGraph 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\StandardMeshImpl.cpp">
-      <Filter>SceneGraph 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\TrianglePositionImpl.cpp">
-      <Filter>SceneGraph 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisibleSetImpl.cpp">
       <Filter>SceneGraph 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualImpl.cpp">
@@ -735,25 +657,13 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraImpl.cpp">
       <Filter>SceneGraph 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraManagerImpl.cpp">
-      <Filter>SceneGraph 源文件\Detail</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Camera.cpp">
       <Filter>SceneGraph 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\CameraFrustumData.cpp">
       <Filter>SceneGraph 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\CameraManager.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\CameraNode.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Culler.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\LoadVisual.cpp">
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\ViewVolumeNode.cpp">
       <Filter>SceneGraph 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Node.cpp">
@@ -762,173 +672,11 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Particles.cpp">
       <Filter>SceneGraph 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Picker.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\PickRecord.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\PickRecordContainer.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Polypoint.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Polysegment.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Projector.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\SaveVisual.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\ScreenTarget.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Spatial.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\StandardMesh.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\TriangleIndex.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\TrianglePosition.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Triangles.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\TrianglesFan.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\TrianglesMesh.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\TrianglesStrip.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\VisibleSet.cpp">
       <Filter>SceneGraph 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Visual.cpp">
       <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\CameraModelDirectionVectorConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\CameraModelPositionConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\CameraWorldDirectionVectorConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\CameraWorldPositionConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightAmbientConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightAttenuationConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightDiffuseConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightModelDirectionVectorConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightModelPositionConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightSpecularConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightSpotConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightWorldDirectionVectorConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\LightWorldPositionConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\MaterialAmbientConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\MaterialConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\MaterialDiffuseConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\MaterialEmissiveConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\MaterialSpecularConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\ProjectionMatrixConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\ProjectionViewMatrixConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\ProjectionViewWorldMatrixConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\ProjectorMatrixConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\ProjectorWorldPositionConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\ShaderFloat.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\ViewMatrixConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\ViewWorldMatrixConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\WorldMatrixConstant.cpp">
-      <Filter>ShaderFloats 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\Detail\LightConstantImpl.cpp">
-      <Filter>ShaderFloats 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\Detail\MaterialConstantImpl.cpp">
-      <Filter>ShaderFloats 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\Detail\ProjectorConstantImpl.cpp">
-      <Filter>ShaderFloats 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\Detail\ProjectorMatrixConstantImpl.cpp">
-      <Filter>ShaderFloats 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\Detail\ShaderFloatImpl.cpp">
-      <Filter>ShaderFloats 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Sorting\CRMCuller.cpp">
-      <Filter>Sorting 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Sorting\Portal.cpp">
-      <Filter>Sorting 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Sorting\BspNode.cpp">
-      <Filter>Sorting 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Sorting\ConvexRegion.cpp">
-      <Filter>Sorting 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Sorting\ConvexRegionManager.cpp">
-      <Filter>Sorting 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\Terrain\TerrainBase.cpp">
       <Filter>Terrain 源文件</Filter>
@@ -1018,12 +766,6 @@
       <Filter>Resources 源文件\Buffers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\DrawTarget.cpp">
-      <Filter>Resources 源文件\Textures</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\LoadTexture.cpp">
-      <Filter>Resources 源文件\Textures</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\SaveTexture.cpp">
       <Filter>Resources 源文件\Textures</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\Texture.cpp">
@@ -1431,9 +1173,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\Base\Detail\GraphicsObjectImpl.cpp">
       <Filter>Base 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRendererObject.cpp">
-      <Filter>OpenGLRenderer 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\Base\Detail\RendererDrawTargetImpl.cpp">
       <Filter>Base 源文件\Detail</Filter>
     </ClCompile>
@@ -1554,13 +1293,10 @@
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ComputeProgramFactory.cpp">
       <Filter>Shaders 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Light.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Material.cpp">
       <Filter>LocalEffects 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\LightImpl.cpp">
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\LightingImpl.cpp">
       <Filter>LocalEffects 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\MaterialImpl.cpp">
@@ -1734,20 +1470,86 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\ViewVolume.cpp">
       <Filter>SceneGraph 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\PickLine.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\NullSpatial.cpp">
       <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\ParentSpatialImpl.cpp">
-      <Filter>SceneGraph 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\NullSpatialImpl.cpp">
       <Filter>SceneGraph 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialFactory.cpp">
       <Filter>SceneGraph 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Terrain\Detail\TerrainPageImpl.cpp">
+      <Filter>Terrain 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\MeshFactoryImpl.cpp">
+      <Filter>SceneGraph 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\MeshVertexBuffer.cpp">
+      <Filter>SceneGraph 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\MeshFactory.cpp">
+      <Filter>SceneGraph 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Terrain\Detail\TerrainBaseImpl.cpp">
+      <Filter>Terrain 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\ParentSpatialImpl.cpp">
+      <Filter>SceneGraph 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Lighting.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\LightImpl.cpp">
+      <Filter>SceneGraph 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Light.cpp">
+      <Filter>SceneGraph 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\ProjectionViewWorldUpdaterImpl.cpp">
+      <Filter>SceneGraph 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Picking\Detail\PickerImpl.cpp">
+      <Filter>Picking 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Picking\Detail\PickRecordContainerImpl.cpp">
+      <Filter>Picking 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Picking\Detail\PickRecordImpl.cpp">
+      <Filter>Picking 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Picking\Picker.cpp">
+      <Filter>Picking 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Picking\PickRecord.cpp">
+      <Filter>Picking 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Picking\PickRecordContainer.cpp">
+      <Filter>Picking 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Visibility\Culler.cpp">
+      <Filter>Visibility 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Visibility\VisibleSet.cpp">
+      <Filter>Visibility 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Visibility\Detail\CullerImpl.cpp">
+      <Filter>Visibility 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Visibility\Detail\VisibleSetImpl.cpp">
+      <Filter>Visibility 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\PickLine.cpp">
+      <Filter>SceneGraph 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRendererObject.cpp">
+      <Filter>OpenGLRenderer 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\LinkInfo.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\ProgramIndexUnitContainer.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1771,12 +1573,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingImport.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\AglRenderer\AglRenderer.h">
-      <Filter>AglRenderer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\AglRenderer\AglRendererFwd.h">
-      <Filter>AglRenderer 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\ConsoleGraph\ConsoleGraph.h">
       <Filter>ConsoleGraph 头文件</Filter>
@@ -2018,12 +1814,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\Detail\SwitchNode.h">
       <Filter>Detail 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DirectAPI\DirectAPIFwd.h">
-      <Filter>DirectAPI 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DirectAPI\DirectAPI.h">
-      <Filter>DirectAPI 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Renderer.h">
       <Filter>Dx9Renderer 头文件</Filter>
     </ClInclude>
@@ -2066,19 +1856,10 @@
     <ClInclude Include="..\..\..\Code\Rendering\Illumination\Illumination.h">
       <Filter>Illumination 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessingBase.h">
-      <Filter>ImageProcessing 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessingFwd.h">
       <Filter>ImageProcessing 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessing.h">
-      <Filter>ImageProcessing 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessing2.h">
-      <Filter>ImageProcessing 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessing3.h">
       <Filter>ImageProcessing 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LocalEffects.h">
@@ -2090,68 +1871,11 @@
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\AmbientLightEffect.h">
       <Filter>LocalEffects 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLAPI\OpenGLAPI.h">
-      <Filter>OpenGLAPI 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLAPI\OpenGLAPIFwd.h">
-      <Filter>OpenGLAPI 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLBindTexture.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLMapping.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLPixelShader.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRenderer.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRendererData.h">
       <Filter>OpenGLRenderer 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRendererFwd.h">
       <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRenderTargetData.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRenderTargetDataImpl.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLShader.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureData.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureDataManager.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormatArrayData.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormatData.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexShader.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\TextureDataTraits.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureDataManageDetail.h">
-      <Filter>OpenGLRenderer 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureDataDetail.h">
-      <Filter>OpenGLRenderer 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormatArrayDataDetail.h">
-      <Filter>OpenGLRenderer 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormatDataDetail.h">
-      <Filter>OpenGLRenderer 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Picture\PictureFwd.h">
       <Filter>Picture 头文件</Filter>
@@ -2186,43 +1910,16 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraImpl.h">
       <Filter>SceneGraph 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraManagerImpl.h">
-      <Filter>SceneGraph 头文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraMatrix.h">
       <Filter>SceneGraph 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraNodeImpl.h">
-      <Filter>SceneGraph 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CullerImpl.h">
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\ViewVolumeNodeImpl.h">
       <Filter>SceneGraph 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\NodeImpl.h">
       <Filter>SceneGraph 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\NormalDerivatives.h">
-      <Filter>SceneGraph 头文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\ParticlesImpl.h">
-      <Filter>SceneGraph 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickerImpl.h">
-      <Filter>SceneGraph 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordContainerImpl.h">
-      <Filter>SceneGraph 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordImpl.h">
-      <Filter>SceneGraph 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\StandardMeshImpl.h">
-      <Filter>SceneGraph 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\TrianglePositionImpl.h">
-      <Filter>SceneGraph 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisibleSetImpl.h">
       <Filter>SceneGraph 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualImpl.h">
@@ -2234,16 +1931,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\CameraFrustumData.h">
       <Filter>SceneGraph 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\CameraManager.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\CameraNode.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Culler.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\LoadVisual.h">
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\ViewVolumeNode.h">
       <Filter>SceneGraph 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Node.h">
@@ -2252,161 +1940,17 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Particles.h">
       <Filter>SceneGraph 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Picker.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\PickRecord.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\PickRecordContainer.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Polypoint.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Polysegment.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Projector.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SaveVisual.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SceneGraph.h">
       <Filter>SceneGraph 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SceneGraphFwd.h">
       <Filter>SceneGraph 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\ScreenTarget.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Spatial.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\StandardMesh.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\TriangleIndex.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\TrianglePosition.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Triangles.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\TrianglesFan.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\TrianglesMesh.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\TrianglesStrip.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\VisibleSet.h">
       <Filter>SceneGraph 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Visual.h">
       <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\Detail\LightConstantImpl.h">
-      <Filter>ShaderFloats 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\Detail\MaterialConstantImpl.h">
-      <Filter>ShaderFloats 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\Detail\ProjectorConstantImpl.h">
-      <Filter>ShaderFloats 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\Detail\ProjectorMatrixConstantImpl.h">
-      <Filter>ShaderFloats 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\Detail\ShaderFloatImpl.h">
-      <Filter>ShaderFloats 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ViewWorldMatrixConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\WorldMatrixConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\CameraModelDirectionVectorConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\CameraModelPositionConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\CameraWorldDirectionVectorConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\CameraWorldPositionConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightAmbientConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightAttenuationConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightDiffuseConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightModelDirectionVectorConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightModelPositionConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightSpecularConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightSpotConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightWorldDirectionVectorConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\LightWorldPositionConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\MaterialAmbientConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\MaterialConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\MaterialDiffuseConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\MaterialEmissiveConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\MaterialSpecularConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ProjectionMatrixConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ProjectionViewMatrixConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ProjectionViewWorldMatrixConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ProjectorMatrixConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ProjectorWorldPositionConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ShaderFloat.h">
-      <Filter>ShaderFloats 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ShaderFloats.h">
       <Filter>ShaderFloats 头文件</Filter>
@@ -2414,29 +1958,11 @@
     <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ShaderFloatsFwd.h">
       <Filter>ShaderFloats 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ViewMatrixConstant.h">
-      <Filter>ShaderFloats 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Shaders.h">
       <Filter>Shaders 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\ShadersFwd.h">
       <Filter>Shaders 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Sorting\BspNode.h">
-      <Filter>Sorting 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Sorting\ConvexRegion.h">
-      <Filter>Sorting 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Sorting\ConvexRegionManager.h">
-      <Filter>Sorting 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Sorting\CRMCuller.h">
-      <Filter>Sorting 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Sorting\Portal.h">
-      <Filter>Sorting 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Sorting\Sorting.h">
       <Filter>Sorting 头文件</Filter>
@@ -2486,9 +2012,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\WorldCoordinateFrame.h">
       <Filter>SceneGraph 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Flags\CullingModeFlags.h">
-      <Filter>SceneGraph 头文件\Flags</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Flags\VisualFlags.h">
       <Filter>SceneGraph 头文件\Flags</Filter>
     </ClInclude>
@@ -2500,15 +2023,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Flags\SwitchNodeType.h">
       <Filter>Detail 头文件\Flags</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\DepthStateFlags.h">
-      <Filter>Shaders 头文件\Flags</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\StencilStateFlags.h">
-      <Filter>Shaders 头文件\Flags</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\AlphaStateFlags.h">
-      <Filter>Shaders 头文件\Flags</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RendererEngine\Flags\RendererTypes.h">
       <Filter>RendererEngine 头文件\Flags</Filter>
@@ -2533,9 +2047,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RendererEngine\Viewport.h">
       <Filter>RendererEngine 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRendererInternalFwd.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Helper\HelperFwd.h">
       <Filter>Helper 头文件</Filter>
@@ -2675,19 +2186,10 @@
     <ClInclude Include="..\..\..\Code\Rendering\Resources\Buffers\VertexFormatAttribute.h">
       <Filter>Resources 头文件\Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\LoadTextureDetail.h">
-      <Filter>Resources 模板文件\Textures</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\TextureLevelDataDetail.h">
       <Filter>Resources 模板文件\Textures</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\DrawTarget.h">
-      <Filter>Resources 头文件\Textures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\LoadTexture.h">
-      <Filter>Resources 头文件\Textures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\SaveTexture.h">
       <Filter>Resources 头文件\Textures</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\Texture.h">
@@ -3164,9 +2666,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\Base\Detail\GraphicsObjectImpl.h">
       <Filter>Base 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRendererObject.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Base\Detail\RendererDrawTargetImpl.h">
       <Filter>Base 头文件\Detail</Filter>
     </ClInclude>
@@ -3299,13 +2798,10 @@
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ComputeProgramFactory.h">
       <Filter>Shaders 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Light.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Material.h">
       <Filter>LocalEffects 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\LightImpl.h">
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\LightingImpl.h">
       <Filter>LocalEffects 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\MaterialImpl.h">
@@ -3488,14 +2984,8 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\ViewVolume.h">
       <Filter>SceneGraph 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\PickLine.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\NullSpatial.h">
       <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\ParentSpatialImpl.h">
-      <Filter>SceneGraph 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\NullSpatialImpl.h">
       <Filter>SceneGraph 头文件\Detail</Filter>
@@ -3505,6 +2995,93 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SceneGraphInternalFwd.h">
       <Filter>SceneGraph 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Terrain\Detail\TerrainPageImpl.h">
+      <Filter>Terrain 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\MeshFactoryImpl.h">
+      <Filter>SceneGraph 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\MeshVertexBuffer.h">
+      <Filter>SceneGraph 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\MeshFactory.h">
+      <Filter>SceneGraph 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Terrain\Detail\TerrainBaseImpl.h">
+      <Filter>Terrain 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\ParentSpatialImpl.h">
+      <Filter>SceneGraph 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Lighting.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\LightImpl.h">
+      <Filter>SceneGraph 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Light.h">
+      <Filter>SceneGraph 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\ProjectionViewWorldUpdaterImpl.h">
+      <Filter>SceneGraph 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Picking\Detail\PickerImpl.h">
+      <Filter>Picking 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Picking\Detail\PickRecordContainerImpl.h">
+      <Filter>Picking 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Picking\Detail\PickRecordImpl.h">
+      <Filter>Picking 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Picking\Picker.h">
+      <Filter>Picking 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Picking\PickRecord.h">
+      <Filter>Picking 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Picking\PickRecordContainer.h">
+      <Filter>Picking 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Picking\Picking.h">
+      <Filter>Picking 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Picking\PickingFwd.h">
+      <Filter>Picking 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Visibility\Culler.h">
+      <Filter>Visibility 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Visibility\Visibility.h">
+      <Filter>Visibility 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Visibility\VisibilityFwd.h">
+      <Filter>Visibility 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Visibility\VisibleSet.h">
+      <Filter>Visibility 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Visibility\Detail\CullerImpl.h">
+      <Filter>Visibility 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Visibility\Detail\VisibleSetImpl.h">
+      <Filter>Visibility 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Visibility\Flags\CullingModeFlags.h">
+      <Filter>Visibility 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\PickLine.h">
+      <Filter>SceneGraph 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRendererObject.h">
+      <Filter>OpenGLRenderer 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\LinkInfo.h">
+      <Filter>OpenGLRenderer 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\ProgramIndexUnitContainer.h">
+      <Filter>OpenGLRenderer 头文件\Detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,7 @@
 #ifndef RENDERING_BASE_RENDERER_OBJECT_BRIDGE_IMPL_H
 #define RENDERING_BASE_RENDERER_OBJECT_BRIDGE_IMPL_H
 
+#include "CoreTools/MemoryTools/WeakPtrCompare.h"
 #include "Rendering/RenderingDll.h"
 
 #include "Rendering/Base/BaseFwd.h"
@@ -28,6 +29,7 @@ namespace Rendering
         using GraphicsObjectSharedPtr = std::shared_ptr<GraphicsObject>;
         using RendererObjectSharedPtr = std::shared_ptr<RendererObject>;
         using ConstRendererObjectSharedPtr = std::shared_ptr<const RendererObject>;
+        using GraphicsObjectWeakPtr = std::weak_ptr<GraphicsObject>;
 
     public:
         RendererObjectBridgeImpl() noexcept;
@@ -42,7 +44,7 @@ namespace Rendering
         void Release() noexcept;
 
     private:
-        using RendererObjectContainer = std::map<GraphicsObjectSharedPtr, RendererObjectSharedPtr>;
+        using RendererObjectContainer = std::map<GraphicsObjectWeakPtr, RendererObjectSharedPtr, CoreTools::WeakPtrLess<GraphicsObject>>;
 
     private:
         RendererObjectContainer container;

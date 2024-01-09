@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/11/28 22:39)
+/// 版本：1.0.0.3 (2023/12/26 22:57)
 
 #include "DatabaseGenerate/DatabaseGenerateMiddleLayer/DatabaseGenerateMiddleLayerExport.h"
 
@@ -15,6 +15,8 @@
 #include "CoreTools/Helper/LogMacro.h"
 #include "Database/DatabaseInterface/DatabaseEnvironment.h"
 #include "Database/DatabaseInterface/DatabaseFlush.h"
+
+#include <ranges>
 
 DatabaseGenerateMiddleLayer::SystemManagerImpl::SystemManagerImpl(const std::string& fileName)
     : isSave{ false },
@@ -40,6 +42,8 @@ bool DatabaseGenerateMiddleLayer::SystemManagerImpl::Idle(const AncientBooksCont
     if (finishCount == analysisDatabaseConfiguration.GetSize())
     {
         LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("数据库写入完成。"));
+
+        finishCount = 0;
     }
 
     return true;
@@ -49,9 +53,9 @@ void DatabaseGenerateMiddleLayer::SystemManagerImpl::CreateSaveDatabaseThread(co
 {
     isSave = true;
 
-    for (const auto& element : analysisDatabaseConfiguration)
+    for (const auto& element : analysisDatabaseConfiguration | std::views::values)
     {
-        CreateSaveDatabaseThread(element.second, ancientBooksContainer);
+        CreateSaveDatabaseThread(element, ancientBooksContainer);
     }
 }
 

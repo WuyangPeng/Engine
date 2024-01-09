@@ -12,7 +12,7 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "System/Helper/PragmaWarning.h"
+#include "System/Helper/PragmaWarning/TypeTraits.h"
 
 #include <memory>
 
@@ -23,9 +23,14 @@ namespace CoreTools
     {
         bool operator()(const std::shared_ptr<T>& lhs, const std::shared_ptr<T>& rhs) const noexcept
         {
-            System::UnusedFunction(lhs, rhs);
-
-            return (lhs ? (rhs ? *lhs == *rhs : false) : !rhs);
+            if constexpr (boost::has_less<T, T, bool>::value)
+            {
+                return (lhs ? (rhs ? *lhs == *rhs : false) : !rhs);
+            }
+            else
+            {
+                return lhs == rhs;
+            }
         }
     };
 
@@ -43,9 +48,14 @@ namespace CoreTools
     {
         bool operator()(const std::shared_ptr<T>& lhs, const std::shared_ptr<T>& rhs) const noexcept
         {
-            System::UnusedFunction(lhs, rhs);
-
-            return (rhs ? (!lhs || *lhs < *rhs) : false);
+            if constexpr (boost::has_less<T, T, bool>::value)
+            {
+                return (rhs ? (!lhs || *lhs < *rhs) : false);
+            }
+            else
+            {
+                return lhs < rhs;
+            }
         }
     };
 

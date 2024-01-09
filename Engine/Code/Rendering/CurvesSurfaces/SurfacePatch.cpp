@@ -16,6 +16,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/Matrix2Detail.h"
 
 using std::make_shared;

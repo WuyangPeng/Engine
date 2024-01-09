@@ -48,7 +48,7 @@ namespace Rendering
         NODISCARD std::string GetName() const;
 
         virtual void Enable() = 0;
-        virtual void Disable();
+        virtual void Disable() = 0;
         NODISCARD virtual bool Update() = 0;
         NODISCARD virtual bool Update(int level) = 0;
         NODISCARD virtual bool Update(int item, int level) = 0;

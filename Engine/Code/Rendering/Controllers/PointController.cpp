@@ -25,7 +25,6 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/Resources/Buffers/Buffer.h"
-#include "Rendering/SceneGraph/Polypoint.h"
 #include "Rendering/SceneGraph/Visual.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, PointController);

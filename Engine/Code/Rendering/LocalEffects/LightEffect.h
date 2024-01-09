@@ -18,6 +18,7 @@
 #include "Rendering/LocalEffects/LocalEffectsFwd.h"
 #include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/Resources/ResourcesFwd.h"
+#include "Rendering/SceneGraph/SceneGraphFwd.h"
 #include "Rendering/Shaders/ShadersFwd.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(LightEffect, LightEffectImpl);
@@ -32,8 +33,8 @@ namespace Rendering
 
         using MaterialSharedPtr = std::shared_ptr<Material>;
         using ConstMaterialSharedPtr = std::shared_ptr<const Material>;
-        using LightSharedPtr = std::shared_ptr<Light>;
-        using ConstLightSharedPtr = std::shared_ptr<const Light>;
+        using LightSharedPtr = std::shared_ptr<Lighting>;
+        using ConstLightSharedPtr = std::shared_ptr<const Lighting>;
         using LightCameraGeometrySharedPtr = std::shared_ptr<LightCameraGeometry>;
         using ConstLightCameraGeometrySharedPtr = std::shared_ptr<const LightCameraGeometry>;
         using ConstantBufferSharedPtr = std::shared_ptr<ConstantBuffer>;

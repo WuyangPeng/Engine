@@ -30,7 +30,7 @@
 Rendering::VisualEffectImpl::VisualEffectImpl(CoreTools::DisableNotThrow disableNotThrow)
     : program{ std::make_shared<VisualProgram>(VisualProgram::Create()) },
       baseRenderer{},
-      projectionViewWorldMatrixConstant{ std::make_shared<ConstantBuffer>(Mathematics::GetStreamSize<Matrix4>(), true) }
+      projectionViewWorldMatrixConstant{ std::make_shared<ConstantBuffer>("projectionViewWorldMatrixConstant", Mathematics::GetStreamSize<Matrix4>(), true) }
 {
     System::UnusedFunction(disableNotThrow);
 
@@ -42,7 +42,7 @@ Rendering::VisualEffectImpl::VisualEffectImpl(CoreTools::DisableNotThrow disable
 Rendering::VisualEffectImpl::VisualEffectImpl(VisualProgramSharedPtr visualProgram)
     : program{ std::move(visualProgram) },
       baseRenderer{},
-      projectionViewWorldMatrixConstant{ std::make_shared<ConstantBuffer>(Mathematics::GetStreamSize<Matrix4>(), true) }
+      projectionViewWorldMatrixConstant{ std::make_shared<ConstantBuffer>("projectionViewWorldMatrixConstant", Mathematics::GetStreamSize<Matrix4>(), true) }
 {
     SetProjectionViewWorldMatrix(Matrix4::GetIdentity());
 
@@ -52,7 +52,7 @@ Rendering::VisualEffectImpl::VisualEffectImpl(VisualProgramSharedPtr visualProgr
 Rendering::VisualEffectImpl::VisualEffectImpl(const BaseRendererSharedPtr& baseRenderer)
     : program{ std::make_shared<VisualProgram>(VisualProgram::Create()) },
       baseRenderer{ baseRenderer },
-      projectionViewWorldMatrixConstant{ std::make_shared<ConstantBuffer>(Mathematics::GetStreamSize<Matrix4>(), true) }
+      projectionViewWorldMatrixConstant{ std::make_shared<ConstantBuffer>("projectionViewWorldMatrixConstant", Mathematics::GetStreamSize<Matrix4>(), true) }
 {
     SetProjectionViewWorldMatrix(Matrix4::GetIdentity());
 
@@ -62,7 +62,7 @@ Rendering::VisualEffectImpl::VisualEffectImpl(const BaseRendererSharedPtr& baseR
 Rendering::VisualEffectImpl::VisualEffectImpl(const BaseRendererSharedPtr& baseRenderer, VisualProgramSharedPtr visualProgram)
     : program{ std::move(visualProgram) },
       baseRenderer{ baseRenderer },
-      projectionViewWorldMatrixConstant{ std::make_shared<ConstantBuffer>(CoreTools::GetStreamSize<Matrix4>(), true) }
+      projectionViewWorldMatrixConstant{ std::make_shared<ConstantBuffer>("projectionViewWorldMatrixConstant", CoreTools::GetStreamSize<Matrix4>(), true) }
 {
     SetProjectionViewWorldMatrix(Matrix4::GetIdentity());
 
@@ -72,7 +72,7 @@ Rendering::VisualEffectImpl::VisualEffectImpl(const BaseRendererSharedPtr& baseR
 Rendering::VisualEffectImpl::VisualEffectImpl(ProgramFactory& factory, const BaseRendererSharedPtr& baseRenderer, const std::string& vertexShaderFile, const std::string& pixelShaderFile)
     : program{ factory.CreateFromFiles(baseRenderer->GetShaderName(vertexShaderFile), baseRenderer->GetShaderName(pixelShaderFile), "") },
       baseRenderer{ baseRenderer },
-      projectionViewWorldMatrixConstant{ std::make_shared<ConstantBuffer>(CoreTools::GetStreamSize<Matrix4>(), true) }
+      projectionViewWorldMatrixConstant{ std::make_shared<ConstantBuffer>("projectionViewWorldMatrixConstant", CoreTools::GetStreamSize<Matrix4>(), true) }
 {
     SetProjectionViewWorldMatrix(Matrix4::GetIdentity());
 

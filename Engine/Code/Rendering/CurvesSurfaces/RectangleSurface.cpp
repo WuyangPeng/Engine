@@ -30,14 +30,13 @@ Rendering::RectangleSurface::RectangleSurface(const std::shared_ptr<Mathematics:
                                               const VertexFormatSharedPtr& vformat,
                                               const Mathematics::Float2& tcoordMin,
                                               const Mathematics::Float2& tcoordMax)
-    : ParentType{ vformat, nullptr, nullptr },
+    : ParentType{ "", nullptr, nullptr },
       surface{ surface },
       numUSamples{ numUSamples },
       numVSamples{ numVSamples }
 {
+    System::UnusedFunction(vformat);
     RENDERING_ASSERTION_0(surface && surface->IsRectangular(), "无效的表面\n");
-
-    SetVertexFormat(vformat);
 
     const auto uMin = surface->GetUMin();
     const auto uRange = surface->GetUMax() - uMin;

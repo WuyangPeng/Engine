@@ -11,9 +11,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/OpenGLRenderer/OpenGLRenderTargetData.h"
-#include "Rendering/RendererEngine/BaseRenderer.h"
-#include "Rendering/Resources/Textures/DrawTarget.h"
 
 Rendering::OpenGLRenderTargetDataTesting::OpenGLRenderTargetDataTesting(const OStreamShared& stream)
     : ParentType{ stream }

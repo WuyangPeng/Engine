@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 09:11)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/21 15:17)
 
 #ifndef SYSTEM_WINDOWS_PLATFORM_ERROR_FLAGS_H
 #define SYSTEM_WINDOWS_PLATFORM_ERROR_FLAGS_H
@@ -318,7 +318,7 @@ namespace System
         SignalRefused = ERROR_SIGNAL_REFUSED,
         Discarded = ERROR_DISCARDED,
         NotLocked = ERROR_NOT_LOCKED,
-        BadThreadidAddr = ERROR_BAD_THREADID_ADDR,
+        BadThreadIdAddress = ERROR_BAD_THREADID_ADDR,
         BadArguments = ERROR_BAD_ARGUMENTS,
         BadPathname = ERROR_BAD_PATHNAME,
         SignalPending = ERROR_SIGNAL_PENDING,
@@ -333,13 +333,13 @@ namespace System
         AlreadyExists = ERROR_ALREADY_EXISTS,
         InvalidFlagNumber = ERROR_INVALID_FLAG_NUMBER,
         SemNotFound = ERROR_SEM_NOT_FOUND,
-        InvalidStartingCodeseg = ERROR_INVALID_STARTING_CODESEG,
-        InvalidStackseg = ERROR_INVALID_STACKSEG,
-        InvalidModuletype = ERROR_INVALID_MODULETYPE,
+        InvalidStartingCodeSeg = ERROR_INVALID_STARTING_CODESEG,
+        InvalidStackSeg = ERROR_INVALID_STACKSEG,
+        InvalidModuleType = ERROR_INVALID_MODULETYPE,
         InvalidExeSignature = ERROR_INVALID_EXE_SIGNATURE,
         ExeMarkedInvalid = ERROR_EXE_MARKED_INVALID,
         BadExeFormat = ERROR_BAD_EXE_FORMAT,
-        IteratedDataExceeds64k = ERROR_ITERATED_DATA_EXCEEDS_64k,
+        IteratedDataExceeds64K = ERROR_ITERATED_DATA_EXCEEDS_64k,
         InvalidMinallocsize = ERROR_INVALID_MINALLOCSIZE,
         DynlinkFromInvalidRing = ERROR_DYNLINK_FROM_INVALID_RING,
         IoplNotEnabled = ERROR_IOPL_NOT_ENABLED,
@@ -383,7 +383,7 @@ namespace System
         CannotCopy = ERROR_CANNOT_COPY,
         Directory = ERROR_DIRECTORY,
         EasDidntFit = ERROR_EAS_DIDNT_FIT,
-        EaFileCorrurt = ERROR_EA_FILE_CORRUPT,
+        EaFileCorrupt = ERROR_EA_FILE_CORRUPT,
         EaTableFull = ERROR_EA_TABLE_FULL,
         InvalidEaHandle = ERROR_INVALID_EA_HANDLE,
         EasNotSupported = ERROR_EAS_NOT_SUPPORTED,
@@ -1353,7 +1353,7 @@ namespace System
         SignalRefused = 156L,
         Discarded = 157L,
         NotLocked = 158L,
-        BadThreadidAddr = 159L,
+        BadThreadIdAddress = 159L,
         BadArguments = 160L,
         BadPathname = 161L,
         SignalPending = 162L,
@@ -1368,13 +1368,13 @@ namespace System
         AlreadyExists = 183L,
         InvalidFlagNumber = 186L,
         SemNotFound = 187L,
-        InvalidStartingCodeseg = 188L,
-        InvalidStackseg = 189L,
-        InvalidModuletype = 190L,
+        InvalidStartingCodeSeg = 188L,
+        InvalidStackSeg = 189L,
+        InvalidModuleType = 190L,
         InvalidExeSignature = 191L,
         ExeMarkedInvalid = 192L,
         BadExeFormat = 193L,
-        IteratedDataExceeds64k = 194L,
+        IteratedDataExceeds64K = 194L,
         InvalidMinallocsize = 195L,
         DynlinkFromInvalidRing = 196L,
         IoplNotEnabled = 197L,
@@ -1418,7 +1418,7 @@ namespace System
         CannotCopy = 266L,
         Directory = 267L,
         EasDidntFit = 275L,
-        EaFileCorrurt = 276L,
+        EaFileCorrupt = 276L,
         EaTableFull = 277L,
         InvalidEaHandle = 278L,
         EasNotSupported = 282L,

@@ -18,8 +18,6 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/SceneGraph/CameraManager.h"
-#include "Rendering/SceneGraph/CameraNode.h"
 
 Rendering::CameraNodeTesting::CameraNodeTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -38,7 +36,7 @@ void Rendering::CameraNodeTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    CameraManager::Create();
+
 
     ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CopyTest);
@@ -46,7 +44,6 @@ void Rendering::CameraNodeTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(ChildTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
 
-    CameraManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();
 }

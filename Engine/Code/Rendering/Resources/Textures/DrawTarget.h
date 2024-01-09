@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 19:40)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 13:54)
 
 #ifndef RENDERING_RESOURCES_DRAW_TARGET_H
 #define RENDERING_RESOURCES_DRAW_TARGET_H
@@ -18,9 +18,7 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/ObjectSystems/Object.h"
 #include "Rendering/Base/RendererDrawTarget.h"
-#include "Rendering/LocalEffects/LocalEffectsFwd.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
-#include "Rendering/Resources/ResourcesFwd.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(DrawTarget, DrawTargetImpl);
 
@@ -37,12 +35,15 @@ namespace Rendering
 
     public:
         // 支持目标的数量取决于图形硬件和驱动程序。“numRenderTargets”必须至少1。
-        DrawTarget(int numRenderTargets,
+        DrawTarget(const std::string& name,
+                   int numRenderTargets,
                    DataFormatType renderTargetFormat,
                    int width,
                    int height,
                    bool hasRenderTargetMipMaps = false,
-                   DataFormatType depthStencilFormat = DataFormatType::Unknown);
+                   bool createRenderTargetStorage = true,
+                   DataFormatType depthStencilFormat = DataFormatType::Unknown,
+                   bool createDepthStencilStorage = false);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

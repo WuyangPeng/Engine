@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:24)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/06 16:12)
 
 #include "Rendering/RenderingExport.h"
 
@@ -25,71 +25,78 @@ Rendering::OpenGLSamplerState::OpenGLSamplerState(const SamplerStateSharedPtr& s
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
+Rendering::OpenGLSamplerState::~OpenGLSamplerState() noexcept
+{
+    System::SetGLDeleteSamplers(ParentType::GetGLHandle());
+
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
 void Rendering::OpenGLSamplerState::Init(const SamplerState& samplerState)
 {
     const auto handler = System::GetGLGenSamplers();
 
     SetGLHandle(handler);
 
-    System::SetGLSamplerParameter(handler, System::OpenGLTextureName::WrapS, GetSamplerStateMode(samplerState.GetMode(0)));
-    System::SetGLSamplerParameter(handler, System::OpenGLTextureName::WrapT, GetSamplerStateMode(samplerState.GetMode(1)));
-    System::SetGLSamplerParameter(handler, System::OpenGLTextureName::WrapR, GetSamplerStateMode(samplerState.GetMode(2)));
+    SetGLSamplerParameter(handler, System::OpenGLTextureName::WrapS, GetSamplerStateMode(samplerState.GetMode(0)));
+    SetGLSamplerParameter(handler, System::OpenGLTextureName::WrapT, GetSamplerStateMode(samplerState.GetMode(1)));
+    SetGLSamplerParameter(handler, System::OpenGLTextureName::WrapR, GetSamplerStateMode(samplerState.GetMode(2)));
 
-    System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MinLod, samplerState.GetMinLOD());
-    System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MaxLod, samplerState.GetMaxLOD());
-    System::SetGLSamplerParameter(handler, System::OpenGLTextureName::LodBias, samplerState.GetMipLODBias());
+    SetGLSamplerParameter(handler, System::OpenGLTextureName::MinLod, samplerState.GetMinLod());
+    SetGLSamplerParameter(handler, System::OpenGLTextureName::MaxLod, samplerState.GetMaxLod());
+    SetGLSamplerParameter(handler, System::OpenGLTextureName::LodBias, samplerState.GetMipLodBias());
 
     const auto borderColor = samplerState.GetBorderColor().GetPoint();
-    System::SetGLSamplerParameter(handler, System::OpenGLTextureName::BorderColor, borderColor.data());
+    SetGLSamplerParameter(handler, System::OpenGLTextureName::BorderColor, borderColor.data());
 
     switch (samplerState.GetFilter())
     {
         case SamplerStateFilter::MinPMagPMipP:
         {
-            System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MinFilter, System::SamplerFilter::NearestMipmapNearest);
-            System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MagFilter, System::SamplerFilter::Nearest);
+            SetGLSamplerParameter(handler, System::OpenGLTextureName::MinFilter, System::SamplerFilter::NearestMipmapNearest);
+            SetGLSamplerParameter(handler, System::OpenGLTextureName::MagFilter, System::SamplerFilter::Nearest);
             break;
         }
         case SamplerStateFilter::MinPMagPMipL:
         {
-            System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MinFilter, System::SamplerFilter::NearestMipmapLinear);
-            System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MagFilter, System::SamplerFilter::Nearest);
+            SetGLSamplerParameter(handler, System::OpenGLTextureName::MinFilter, System::SamplerFilter::NearestMipmapLinear);
+            SetGLSamplerParameter(handler, System::OpenGLTextureName::MagFilter, System::SamplerFilter::Nearest);
             break;
         }
         case SamplerStateFilter::MinPMagLMipP:
         {
-            System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MinFilter, System::SamplerFilter::NearestMipmapNearest);
-            System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MagFilter, System::SamplerFilter::Linear);
+            SetGLSamplerParameter(handler, System::OpenGLTextureName::MinFilter, System::SamplerFilter::NearestMipmapNearest);
+            SetGLSamplerParameter(handler, System::OpenGLTextureName::MagFilter, System::SamplerFilter::Linear);
             break;
         }
         case SamplerStateFilter::MinPMagLMipL:
         {
-            System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MinFilter, System::SamplerFilter::NearestMipmapLinear);
-            System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MagFilter, System::SamplerFilter::Linear);
+            SetGLSamplerParameter(handler, System::OpenGLTextureName::MinFilter, System::SamplerFilter::NearestMipmapLinear);
+            SetGLSamplerParameter(handler, System::OpenGLTextureName::MagFilter, System::SamplerFilter::Linear);
             break;
         }
         case SamplerStateFilter::MinLMagPMipP:
         {
-            System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MinFilter, System::SamplerFilter::LinearMipmapNearest);
-            System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MagFilter, System::SamplerFilter::Nearest);
+            SetGLSamplerParameter(handler, System::OpenGLTextureName::MinFilter, System::SamplerFilter::LinearMipmapNearest);
+            SetGLSamplerParameter(handler, System::OpenGLTextureName::MagFilter, System::SamplerFilter::Nearest);
             break;
         }
         case SamplerStateFilter::MinLMagPMipL:
         {
-            System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MinFilter, System::SamplerFilter::LinearMipmapLinear);
-            System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MagFilter, System::SamplerFilter::Nearest);
+            SetGLSamplerParameter(handler, System::OpenGLTextureName::MinFilter, System::SamplerFilter::LinearMipmapLinear);
+            SetGLSamplerParameter(handler, System::OpenGLTextureName::MagFilter, System::SamplerFilter::Nearest);
             break;
         }
         case SamplerStateFilter::MinLMagLMipP:
         {
-            System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MinFilter, System::SamplerFilter::LinearMipmapNearest);
-            System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MagFilter, System::SamplerFilter::Linear);
+            SetGLSamplerParameter(handler, System::OpenGLTextureName::MinFilter, System::SamplerFilter::LinearMipmapNearest);
+            SetGLSamplerParameter(handler, System::OpenGLTextureName::MagFilter, System::SamplerFilter::Linear);
             break;
         }
         case SamplerStateFilter::MinLMagLMipL:
         {
-            System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MinFilter, System::SamplerFilter::LinearMipmapLinear);
-            System::SetGLSamplerParameter(handler, System::OpenGLTextureName::MagFilter, System::SamplerFilter::Linear);
+            SetGLSamplerParameter(handler, System::OpenGLTextureName::MinFilter, System::SamplerFilter::LinearMipmapLinear);
+            SetGLSamplerParameter(handler, System::OpenGLTextureName::MagFilter, System::SamplerFilter::Linear);
             break;
         }
         default:
@@ -99,89 +106,7 @@ void Rendering::OpenGLSamplerState::Init(const SamplerState& samplerState)
     }
 }
 
-bool Rendering::OpenGLSamplerState::Update(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLSamplerState::Update(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLSamplerState::CopyGpuToCpu()
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLSamplerState::CopyGpuToCpu(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLSamplerState::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLSamplerState::CopyCpuToGpu()
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLSamplerState::CopyCpuToGpu(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLSamplerState::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLSamplerState::GetNumActiveElements()
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-Rendering::OpenGLSamplerState::~OpenGLSamplerState() noexcept
-{
-    System::SetGLDeleteSamplers(GetGLHandle());
-
-    RENDERING_SELF_CLASS_IS_VALID_9;
-}
-
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, OpenGLSamplerState)
-
-void Rendering::OpenGLSamplerState::Enable() noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
-}
-
-bool Rendering::OpenGLSamplerState::Update() noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    return false;
-}
 
 System::TextureSamplerCoordinate Rendering::OpenGLSamplerState::GetSamplerStateMode(SamplerStateMode samplerStateMode)
 {

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.2 (2023/12/13 14:45)
+/// 版本：1.0.0.3 (2023/12/29 13:49)
 
 #ifndef RENDERING_RESOURCES_VERTEX_BUFFER_H
 #define RENDERING_RESOURCES_VERTEX_BUFFER_H
@@ -99,6 +99,7 @@ namespace Rendering
 #include SYSTEM_WARNING_POP
 
     CORE_TOOLS_SHARED_PTR_DECLARE(VertexBuffer);
+    CORE_TOOLS_WEAK_PTR_DECLARE(VertexBuffer);
 }
 
 #endif  // RENDERING_RESOURCES_VERTEX_BUFFER_H

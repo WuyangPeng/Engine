@@ -39,6 +39,7 @@ namespace Mathematics
         using Vector3Orthonormalize = Vector3Orthonormalize<Real>;
         using Vector3OrthonormalBasis = Vector3OrthonormalBasis<Real>;
         using ContainerType = std::vector<Vector3>;
+        using ArrayType = std::array<Vector3, 3>;
 
     public:
         NODISCARD static bool Approximate(const Vector3& lhs, const Vector3& rhs, Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
@@ -94,6 +95,8 @@ namespace Mathematics
         NODISCARD static Vector4 Lift(const Vector3& vector, int inject, Real value);
         NODISCARD static Vector2 ProjectHomogeneous(const Vector3& vector) noexcept;
         NODISCARD static Vector2 Project(const Vector3& vector, int reject);
+
+        NODISCARD static Vector3Orthonormalize ComputeOrthogonalComplement(int numInputs, const ArrayType& vector);
     };
 
     using Vector3ToolsF = Vector3Tools<float>;

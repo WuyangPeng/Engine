@@ -18,6 +18,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/TransformDetail.h"
+#include "Rendering/Visibility/Culler.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, DlodNode)
 

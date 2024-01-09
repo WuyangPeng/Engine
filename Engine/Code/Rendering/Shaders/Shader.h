@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/05 12:35)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/26 15:04)
 
 #ifndef RENDERING_SHADERS_SHADER_H
 #define RENDERING_SHADERS_SHADER_H
@@ -52,6 +52,7 @@ namespace Rendering
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Shader);
+        CORE_TOOLS_NAMES_DECLARE;
 
         NODISCARD int Get(const std::string& name) const;
 
@@ -84,7 +85,7 @@ namespace Rendering
         NODISCARD int GetNumZThreads() const noexcept;
 
         NODISCARD CompiledCodeContainer GetCompiledCode() const;
-        NODISCARD ShaderDataContainer GetData(int lookup) const;
+        NODISCARD ShaderDataContainer& GetData(int lookup);
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 

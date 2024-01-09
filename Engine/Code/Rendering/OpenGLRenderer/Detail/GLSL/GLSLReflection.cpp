@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:41)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/09 17:04)
 
 #include "Rendering/RenderingExport.h"
 
@@ -401,8 +401,8 @@ void Rendering::GLSLReflection::Print(std::ofstream& output) const
             }
 
             output << "; //";
-            const auto size = GetEnumSize(bufferVar.GetType(), bufferVar.GetArraySize(), bufferVar.GetArrayStride(), bufferVar.GetMatrixStride(), bufferVar.GetIsRowMajor());
-            if (size > 0)
+            if (const auto size = GetEnumSize(bufferVar.GetType(), bufferVar.GetArraySize(), bufferVar.GetArrayStride(), bufferVar.GetMatrixStride(), bufferVar.GetIsRowMajor());
+                size > 0)
             {
                 output << " size=" << size;
             }
@@ -452,8 +452,8 @@ void Rendering::GLSLReflection::Print(std::ofstream& output) const
             output << "is row major = " << bufferVar.GetIsRowMajor() << std::endl;
             output << "top level array size = " << bufferVar.GetTopLevelArraySize() << std::endl;
             output << "top level array stride = " << bufferVar.GetTopLevelArrayStride() << std::endl;
-            auto const size = GetEnumSize(bufferVar.GetType(), bufferVar.GetArraySize(), bufferVar.GetArrayStride(), bufferVar.GetMatrixStride(), bufferVar.GetIsRowMajor());
-            if (size > 0)
+            if (auto const size = GetEnumSize(bufferVar.GetType(), bufferVar.GetArraySize(), bufferVar.GetArrayStride(), bufferVar.GetMatrixStride(), bufferVar.GetIsRowMajor());
+                size > 0)
             {
                 output << "size=" << size << std::endl;
             }
@@ -470,9 +470,8 @@ void Rendering::GLSLReflection::Print(std::ofstream& output) const
 
 void Rendering::GLSLReflection::ReflectProgramInputs()
 {
-    const auto numResources = System::GetGLProgramInterface(handle, ProgramInterface::ProgramInput, System::ProgramInterfaceName::ActiveResources);
-
-    if (numResources > 0)
+    if (const auto numResources = System::GetGLProgramInterface(handle, ProgramInterface::ProgramInput, System::ProgramInterfaceName::ActiveResources);
+        numResources > 0)
     {
         inputs.resize(numResources, ReflectionInput{ "" });
 
@@ -507,14 +506,14 @@ void Rendering::GLSLReflection::ReflectProgramInputs()
 
         const auto numProperties = boost::numeric_cast<System::OpenGLSize>(properties.size());
 
-        std::vector<OpenGLInt> results(properties.size(), 0);
+        std::vector results(properties.size(), 0);
         for (auto i = 0; i < numResources; ++i)
         {
-            System::GetGLProgramResource(handle, ProgramInterface::ProgramInput, i, numProperties, properties.data(), numProperties, nullptr, results.data());
+            GetGLProgramResource(handle, ProgramInterface::ProgramInput, i, numProperties, properties.data(), numProperties, nullptr, results.data());
 
             const auto numBytes = boost::numeric_cast<System::OpenGLSize>(results.at(NameLength) + 1);
             std::vector<System::OpenGLChar> name(numBytes);
-            System::GetGLProgramResourceName(handle, ProgramInterface::ProgramInput, i, numBytes, nullptr, name.data());
+            GetGLProgramResourceName(handle, ProgramInterface::ProgramInput, i, numBytes, nullptr, name.data());
 
             auto& info = inputs.at(i);
             info.SetName(name.data());
@@ -535,9 +534,8 @@ void Rendering::GLSLReflection::ReflectProgramInputs()
 
 void Rendering::GLSLReflection::ReflectProgramOutputs()
 {
-    const auto numResources = System::GetGLProgramInterface(handle, ProgramInterface::ProgramOutput, System::ProgramInterfaceName::ActiveResources);
-
-    if (numResources > 0)
+    if (const auto numResources = System::GetGLProgramInterface(handle, ProgramInterface::ProgramOutput, System::ProgramInterfaceName::ActiveResources);
+        numResources > 0)
     {
         outputs.resize(numResources, ReflectionOutput{ "" });
 
@@ -574,15 +572,15 @@ void Rendering::GLSLReflection::ReflectProgramOutputs()
 
         const auto numProperties = boost::numeric_cast<System::OpenGLSize>(properties.size());
 
-        std::vector<OpenGLInt> results(properties.size(), 0);
+        std::vector results(properties.size(), 0);
         for (auto i = 0; i < numResources; ++i)
         {
-            System::GetGLProgramResource(handle, ProgramInterface::ProgramOutput, i, numProperties, properties.data(), numProperties, nullptr, results.data());
+            GetGLProgramResource(handle, ProgramInterface::ProgramOutput, i, numProperties, properties.data(), numProperties, nullptr, results.data());
 
             const auto numBytes = boost::numeric_cast<System::OpenGLSize>(results.at(NameLength) + 1);
             std::vector<System::OpenGLChar> name(numBytes);
 
-            System::GetGLProgramResourceName(handle, ProgramInterface::ProgramOutput, i, numBytes, nullptr, name.data());
+            GetGLProgramResourceName(handle, ProgramInterface::ProgramOutput, i, numBytes, nullptr, name.data());
 
             auto& info = outputs.at(i);
             info.SetName(name.data());
@@ -604,9 +602,8 @@ void Rendering::GLSLReflection::ReflectProgramOutputs()
 
 void Rendering::GLSLReflection::ReflectUniforms()
 {
-    const auto numResources = System::GetGLProgramInterface(handle, ProgramInterface::Uniform, System::ProgramInterfaceName::ActiveResources);
-
-    if (numResources > 0)
+    if (const auto numResources = System::GetGLProgramInterface(handle, ProgramInterface::Uniform, System::ProgramInterfaceName::ActiveResources);
+        numResources > 0)
     {
         uniforms.clear();
 
@@ -649,14 +646,14 @@ void Rendering::GLSLReflection::ReflectUniforms()
 
         const auto numProperties = boost::numeric_cast<System::OpenGLSize>(properties.size());
 
-        std::vector<OpenGLInt> results(properties.size(), 0);
+        std::vector results(properties.size(), 0);
         for (auto i = 0; i < numResources; ++i)
         {
-            System::GetGLProgramResource(handle, ProgramInterface::Uniform, i, numProperties, properties.data(), numProperties, nullptr, results.data());
+            GetGLProgramResource(handle, ProgramInterface::Uniform, i, numProperties, properties.data(), numProperties, nullptr, results.data());
 
             const auto numBytes = boost::numeric_cast<System::OpenGLSize>(results.at(NameLength) + 1);
             std::vector<System::OpenGLChar> name(numBytes);
-            System::GetGLProgramResourceName(handle, ProgramInterface::Uniform, i, numBytes, nullptr, name.data());
+            GetGLProgramResourceName(handle, ProgramInterface::Uniform, i, numBytes, nullptr, name.data());
 
             ReflectionUniform info{ name.data() };
 
@@ -685,8 +682,8 @@ void Rendering::GLSLReflection::ReflectUniforms()
 
             if (info.GetArraySize() > 1)
             {
-                const auto index = info.GetName().find('[');
-                if (index != std::string::npos)
+                if (const auto index = info.GetName().find('[');
+                    index != std::string::npos)
                 {
                     const auto index2 = info.GetName().find('[', index + 1);
                     if (index2 != std::string::npos)
@@ -709,9 +706,8 @@ void Rendering::GLSLReflection::ReflectUniforms()
 
 void Rendering::GLSLReflection::ReflectDataBlocks(ProgramInterface programInterface, DataBlockContainer& blocks)
 {
-    const auto numResources = System::GetGLProgramInterface(handle, programInterface, System::ProgramInterfaceName::ActiveResources);
-
-    if (numResources > 0)
+    if (const auto numResources = System::GetGLProgramInterface(handle, programInterface, System::ProgramInterfaceName::ActiveResources);
+        numResources > 0)
     {
         blocks.resize(numResources, ReflectionDataBlock{ "" });
 
@@ -742,14 +738,14 @@ void Rendering::GLSLReflection::ReflectDataBlocks(ProgramInterface programInterf
 
         const auto numProperties = boost::numeric_cast<System::OpenGLSize>(properties.size());
 
-        std::vector<OpenGLInt> results(properties.size(), 0);
+        std::vector results(properties.size(), 0);
         for (auto i = 0; i < numResources; ++i)
         {
-            System::GetGLProgramResource(handle, programInterface, i, numProperties, properties.data(), numProperties, nullptr, results.data());
+            GetGLProgramResource(handle, programInterface, i, numProperties, properties.data(), numProperties, nullptr, results.data());
 
             const auto numBytes = boost::numeric_cast<System::OpenGLSize>(results.at(NameLength) + 1);
             std::vector<System::OpenGLChar> name(numBytes);
-            System::GetGLProgramResourceName(handle, programInterface, i, numBytes, nullptr, name.data());
+            GetGLProgramResourceName(handle, programInterface, i, numBytes, nullptr, name.data());
 
             auto& info = blocks.at(i);
             info.SetName(name.data());
@@ -770,12 +766,12 @@ void Rendering::GLSLReflection::ReflectDataBlocks(ProgramInterface programInterf
 
             info.SetBufferBinding(System::GetGLProgramResourceIndex(handle, programInterface, info.GetName().c_str()));
 
-            auto numActiveVariables = results.at(NumActiveVariables);
-            if (numActiveVariables > 0)
+            if (const auto numActiveVariables = results.at(NumActiveVariables);
+                numActiveVariables > 0)
             {
                 std::vector<OpenGLInt> activeVariables(numActiveVariables);
                 auto varProperty = EnumCastUnderlying<OpenGLEnum>(System::ProgramProperties::ActiveVariables);
-                System::GetGLProgramResource(handle, programInterface, i, 1, &varProperty, numActiveVariables, nullptr, activeVariables.data());
+                GetGLProgramResource(handle, programInterface, i, 1, &varProperty, numActiveVariables, nullptr, activeVariables.data());
 
                 info.SetActiveVariables(activeVariables);
             }
@@ -785,9 +781,8 @@ void Rendering::GLSLReflection::ReflectDataBlocks(ProgramInterface programInterf
 
 void Rendering::GLSLReflection::ReflectAtomicCounterBuffers()
 {
-    const auto numResources = System::GetGLProgramInterface(handle, ProgramInterface::AtomicCounterBuffer, System::ProgramInterfaceName::ActiveResources);
-
-    if (numResources > 0)
+    if (const auto numResources = System::GetGLProgramInterface(handle, ProgramInterface::AtomicCounterBuffer, System::ProgramInterfaceName::ActiveResources);
+        numResources > 0)
     {
         atomicCounterBuffers.resize(numResources, ReflectionAtomicCounterBuffer{ 0 });
 
@@ -816,10 +811,10 @@ void Rendering::GLSLReflection::ReflectAtomicCounterBuffers()
 
         const auto numProperties = boost::numeric_cast<System::OpenGLSize>(properties.size());
 
-        std::vector<OpenGLInt> results(properties.size(), 0);
+        std::vector results(properties.size(), 0);
         for (auto i = 0; i < numResources; ++i)
         {
-            System::GetGLProgramResource(handle, ProgramInterface::AtomicCounterBuffer, i, numProperties, properties.data(), numProperties, nullptr, results.data());
+            GetGLProgramResource(handle, ProgramInterface::AtomicCounterBuffer, i, numProperties, properties.data(), numProperties, nullptr, results.data());
 
             auto& info = atomicCounterBuffers.at(i);
             info.SetBufferBinding(results.at(BufferBinding));
@@ -831,12 +826,12 @@ void Rendering::GLSLReflection::ReflectAtomicCounterBuffers()
             info.SetReferencedBy(System::EnumCastUnderlying(ReferenceType::TessControl), results.at(ReferencedByTessControlShader));
             info.SetReferencedBy(System::EnumCastUnderlying(ReferenceType::TessEvaluation), results.at(ReferencedByTessEvaluationShader));
 
-            auto numActiveVariables = results.at(NumActiveVariables);
-            if (numActiveVariables > 0)
+            if (const auto numActiveVariables = results.at(NumActiveVariables);
+                numActiveVariables > 0)
             {
                 std::vector<OpenGLInt> activeVariables(numActiveVariables);
                 auto varProperty = EnumCastUnderlying<OpenGLEnum>(System::ProgramProperties::ActiveVariables);
-                System::GetGLProgramResource(handle, ProgramInterface::AtomicCounterBuffer, i, 1, &varProperty, numActiveVariables, nullptr, activeVariables.data());
+                GetGLProgramResource(handle, ProgramInterface::AtomicCounterBuffer, i, 1, &varProperty, numActiveVariables, nullptr, activeVariables.data());
 
                 info.SetActiveVariables(activeVariables);
             }
@@ -846,22 +841,21 @@ void Rendering::GLSLReflection::ReflectAtomicCounterBuffers()
 
 void Rendering::GLSLReflection::ReflectSubroutines(ProgramInterface programInterface, SubroutinesType& subroutines)
 {
-    const auto numResources = System::GetGLProgramInterface(handle, programInterface, System::ProgramInterfaceName::ActiveResources);
-
-    if (numResources > 0)
+    if (const auto numResources = System::GetGLProgramInterface(handle, programInterface, System::ProgramInterfaceName::ActiveResources);
+        numResources > 0)
     {
         subroutines.resize(numResources);
 
-        auto nameLengthProperty = EnumCastUnderlying<OpenGLEnum>(System::ProgramProperties::NameLength);
+        constexpr auto nameLengthProperty = EnumCastUnderlying<OpenGLEnum>(System::ProgramProperties::NameLength);
         for (auto i = 0; i < numResources; ++i)
         {
             OpenGLInt result{};
-            System::GetGLProgramResource(handle, programInterface, i, 1, &nameLengthProperty, 1, nullptr, &result);
+            GetGLProgramResource(handle, programInterface, i, 1, &nameLengthProperty, 1, nullptr, &result);
 
             const auto numBytes = boost::numeric_cast<System::OpenGLSize>(result + 1);
             std::vector<System::OpenGLChar> name(numBytes);
 
-            System::GetGLProgramResourceName(handle, programInterface, i, numBytes, nullptr, name.data());
+            GetGLProgramResourceName(handle, programInterface, i, numBytes, nullptr, name.data());
             subroutines.at(i) = name.data();
         }
     }
@@ -869,9 +863,8 @@ void Rendering::GLSLReflection::ReflectSubroutines(ProgramInterface programInter
 
 void Rendering::GLSLReflection::ReflectSubroutineUniforms(ProgramInterface programInterface, SubroutineUniformContainer& subUniforms)
 {
-    const auto numResources = System::GetGLProgramInterface(handle, programInterface, System::ProgramInterfaceName::ActiveResources);
-
-    if (numResources > 0)
+    if (const auto numResources = System::GetGLProgramInterface(handle, programInterface, System::ProgramInterfaceName::ActiveResources);
+        numResources > 0)
     {
         subUniforms.resize(numResources, ReflectionSubroutineUniform{ "" });
 
@@ -889,26 +882,26 @@ void Rendering::GLSLReflection::ReflectSubroutineUniforms(ProgramInterface progr
 
         const auto numProperties = boost::numeric_cast<System::OpenGLSize>(properties.size());
 
-        std::vector<OpenGLInt> results(properties.size(), 0);
+        std::vector results(properties.size(), 0);
         for (auto i = 0; i < numResources; ++i)
         {
-            System::GetGLProgramResource(handle, programInterface, i, numProperties, properties.data(), numProperties, nullptr, results.data());
+            GetGLProgramResource(handle, programInterface, i, numProperties, properties.data(), numProperties, nullptr, results.data());
 
             const auto numBytes = boost::numeric_cast<System::OpenGLSize>(results.at(NameLength) + 1);
             std::vector<System::OpenGLChar> name(numBytes);
-            System::GetGLProgramResourceName(handle, programInterface, i, numBytes, nullptr, name.data());
+            GetGLProgramResourceName(handle, programInterface, i, numBytes, nullptr, name.data());
 
             auto& info = subUniforms.at(i);
             info.SetName(name.data());
             info.SetLocation(results.at(NameLength));
             info.SetArraySize(results.at(ArraySize));
 
-            auto numCompatibleSubroutines = results.at(NumActiveVariables);
-            if (numCompatibleSubroutines > 0)
+            if (const auto numCompatibleSubroutines = results.at(NumActiveVariables);
+                numCompatibleSubroutines > 0)
             {
                 std::vector<OpenGLInt> compatibleSubroutines(numCompatibleSubroutines);
                 auto subProperty = EnumCastUnderlying<OpenGLEnum>(System::ProgramProperties::CompatibleSubroutines);
-                System::GetGLProgramResource(handle, programInterface, i, 1, &subProperty, numCompatibleSubroutines, nullptr, compatibleSubroutines.data());
+                GetGLProgramResource(handle, programInterface, i, 1, &subProperty, numCompatibleSubroutines, nullptr, compatibleSubroutines.data());
                 info.SetCompatibleSubroutines(compatibleSubroutines);
             }
         }
@@ -917,9 +910,8 @@ void Rendering::GLSLReflection::ReflectSubroutineUniforms(ProgramInterface progr
 
 void Rendering::GLSLReflection::ReflectBufferVariables()
 {
-    const auto numResources = System::GetGLProgramInterface(handle, ProgramInterface::BufferVariable, System::ProgramInterfaceName::ActiveResources);
-
-    if (numResources > 0)
+    if (const auto numResources = System::GetGLProgramInterface(handle, ProgramInterface::BufferVariable, System::ProgramInterfaceName::ActiveResources);
+        numResources > 0)
     {
         bufferVariables.resize(numResources, ReflectionBufferVariable{ "" });
 
@@ -962,14 +954,14 @@ void Rendering::GLSLReflection::ReflectBufferVariables()
 
         const auto numProperties = boost::numeric_cast<System::OpenGLSize>(properties.size());
 
-        std::vector<OpenGLInt> results(properties.size(), 0);
+        std::vector results(properties.size(), 0);
         for (auto i = 0; i < numResources; ++i)
         {
-            System::GetGLProgramResource(handle, ProgramInterface::BufferVariable, i, numProperties, properties.data(), numProperties, nullptr, results.data());
+            GetGLProgramResource(handle, ProgramInterface::BufferVariable, i, numProperties, properties.data(), numProperties, nullptr, results.data());
 
             const auto numBytes = boost::numeric_cast<System::OpenGLSize>(results.at(NameLength) + 1);
             std::vector<System::OpenGLChar> name(numBytes);
-            System::GetGLProgramResourceName(handle, ProgramInterface::BufferVariable, i, numBytes, nullptr, name.data());
+            GetGLProgramResourceName(handle, ProgramInterface::BufferVariable, i, numBytes, nullptr, name.data());
 
             auto& info = bufferVariables.at(i);
             info.SetName(name.data());
@@ -990,9 +982,8 @@ void Rendering::GLSLReflection::ReflectBufferVariables()
 
             info.SetFullName(info.GetName());
 
-            const auto bufferBlockName = shaderStorageBlocks.at(info.GetBlockIndex()).GetName() + '.';
-
-            if (0 == info.GetName().find(bufferBlockName))
+            if (const auto bufferBlockName = shaderStorageBlocks.at(info.GetBlockIndex()).GetName() + '.';
+                0 == info.GetName().find(bufferBlockName))
             {
                 info.SetName(info.GetName().substr(bufferBlockName.length()));
             }
@@ -1021,9 +1012,8 @@ void Rendering::GLSLReflection::ReflectBufferVariables()
 
 void Rendering::GLSLReflection::ReflectTransformFeedbackVaryings()
 {
-    const auto numResources = System::GetGLProgramInterface(handle, ProgramInterface::TransformFeedbackVarying, System::ProgramInterfaceName::ActiveResources);
-
-    if (numResources > 0)
+    if (const auto numResources = System::GetGLProgramInterface(handle, ProgramInterface::TransformFeedbackVarying, System::ProgramInterfaceName::ActiveResources);
+        numResources > 0)
     {
         inputs.resize(numResources, ReflectionInput{ "" });
 
@@ -1044,14 +1034,14 @@ void Rendering::GLSLReflection::ReflectTransformFeedbackVaryings()
 
         const auto numProperties = boost::numeric_cast<System::OpenGLSize>(properties.size());
 
-        std::vector<OpenGLInt> results(properties.size(), 0);
+        std::vector results(properties.size(), 0);
         for (auto i = 0; i < numResources; ++i)
         {
-            System::GetGLProgramResource(handle, ProgramInterface::TransformFeedbackVarying, i, numProperties, properties.data(), numProperties, nullptr, results.data());
+            GetGLProgramResource(handle, ProgramInterface::TransformFeedbackVarying, i, numProperties, properties.data(), numProperties, nullptr, results.data());
 
             const auto numBytes = boost::numeric_cast<System::OpenGLSize>(results.at(NameLength) + 1);
             std::vector<System::OpenGLChar> name(numBytes);
-            System::GetGLProgramResourceName(handle, ProgramInterface::TransformFeedbackVarying, i, numBytes, nullptr, name.data());
+            GetGLProgramResourceName(handle, ProgramInterface::TransformFeedbackVarying, i, numBytes, nullptr, name.data());
 
             auto& info = transformFeedbackVaryings.at(i);
             info.SetName(name.data());
@@ -1065,9 +1055,8 @@ void Rendering::GLSLReflection::ReflectTransformFeedbackVaryings()
 
 void Rendering::GLSLReflection::ReflectTransformFeedbackBuffers()
 {
-    const auto numResources = System::GetGLProgramInterface(handle, ProgramInterface::TransformFeedbackBuffer, System::ProgramInterfaceName::ActiveResources);
-
-    if (numResources > 0)
+    if (const auto numResources = System::GetGLProgramInterface(handle, ProgramInterface::TransformFeedbackBuffer, System::ProgramInterfaceName::ActiveResources);
+        numResources > 0)
     {
         transformFeedbackBuffers.resize(numResources, ReflectionTransformFeedbackBuffer{ 0 });
 
@@ -1084,22 +1073,22 @@ void Rendering::GLSLReflection::ReflectTransformFeedbackBuffers()
 
         const auto numProperties = boost::numeric_cast<System::OpenGLSize>(properties.size());
 
-        std::vector<OpenGLInt> results(properties.size(), 0);
+        std::vector results(properties.size(), 0);
         for (auto i = 0; i < numResources; ++i)
         {
-            System::GetGLProgramResource(handle, ProgramInterface::TransformFeedbackBuffer, i, numProperties, properties.data(), numProperties, nullptr, results.data());
+            GetGLProgramResource(handle, ProgramInterface::TransformFeedbackBuffer, i, numProperties, properties.data(), numProperties, nullptr, results.data());
 
             auto& info = transformFeedbackBuffers.at(i);
             info.SetBufferBinding(results.at(BufferBinding));
             info.SetTransformFeedbackBufferStride(results.at(TransformFeedbackBufferStride));
 
-            auto numActiveVariables = results.at(NumActiveVariables);
-            if (numActiveVariables > 0)
+            if (const auto numActiveVariables = results.at(NumActiveVariables);
+                numActiveVariables > 0)
             {
                 std::vector<OpenGLInt> activeVariables(numActiveVariables);
                 auto varProperty = EnumCastUnderlying<OpenGLEnum>(System::ProgramProperties::ActiveVariables);
 
-                System::GetGLProgramResource(handle, ProgramInterface::TransformFeedbackBuffer, i, 1, &varProperty, numActiveVariables, nullptr, activeVariables.data());
+                GetGLProgramResource(handle, ProgramInterface::TransformFeedbackBuffer, i, 1, &varProperty, numActiveVariables, nullptr, activeVariables.data());
                 info.SetActiveVariables(activeVariables);
             }
         }
@@ -1123,15 +1112,15 @@ void Rendering::GLSLReflection::IntelWorkaround(const std::string& name, Results
         return;
     }
 
-    for (auto shader : shaders)
+    for (const auto shader : shaders)
     {
         const auto type = System::GetGLShader(shader, System::ShaderAttributes::ShaderType);
 
-        const auto iter = shaderTypeMap.find(System::UnderlyingCastEnum<System::ShaderType>(type));
-        if (iter != shaderTypeMap.end())
+        if (const auto iter = shaderTypeMap.find(System::UnderlyingCastEnum<System::ShaderType>(type));
+            iter != shaderTypeMap.end())
         {
-            auto index = iter->second;
-            if (results.at(index) == 0)
+            if (const auto index = iter->second;
+                results.at(index) == 0)
             {
                 const auto length = System::GetGLShader(shader, System::ShaderAttributes::ShaderSourceLength);
 
@@ -1173,9 +1162,9 @@ void Rendering::GLSLReflection::IntelWorkaround(const std::string& name, Results
                 }
 
                 const auto endInstance = source.find_first_of(" ;\t", beginInstance);
-                auto instance = source.substr(beginInstance, endInstance - beginInstance);
 
-                if (source.find(instance, endInstance) != std::string::npos)
+                if (auto instance = source.substr(beginInstance, endInstance - beginInstance);
+                    source.find(instance, endInstance) != std::string::npos)
                 {
                     results.at(index) = 1;
                 }
@@ -1309,8 +1298,8 @@ int Rendering::GLSLReflection::GetEnumSize(GLSLReflectionEnumType value, OpenGLI
 {
     for (auto i = 0; GetGLSLReflectionEnumMap(i).GetValue() != GLSLReflectionEnumType::None; ++i)
     {
-        const auto& item = GetGLSLReflectionEnumMap(i);
-        if (item.GetValue() == value)
+        if (const auto& item = GetGLSLReflectionEnumMap(i);
+            item.GetValue() == value)
         {
             if (arrayStride > 0)
             {
@@ -1342,8 +1331,8 @@ std::string Rendering::GLSLReflection::GetEnumName(GLSLReflectionEnumType value)
 {
     for (auto i = 0; GetGLSLReflectionEnumMap(i).GetValue() != GLSLReflectionEnumType::None; ++i)
     {
-        const auto& item = GetGLSLReflectionEnumMap(i);
-        if (item.GetValue() == value)
+        if (const auto& item = GetGLSLReflectionEnumMap(i);
+            item.GetValue() == value)
         {
             return item.GetName();
         }
@@ -1356,8 +1345,8 @@ std::string Rendering::GLSLReflection::GetEnumShaderName(GLSLReflectionEnumType 
 {
     for (auto i = 0; GetGLSLReflectionEnumMap(i).GetValue() != GLSLReflectionEnumType::None; ++i)
     {
-        const auto& item = GetGLSLReflectionEnumMap(i);
-        if (item.GetValue() == value)
+        if (const auto& item = GetGLSLReflectionEnumMap(i);
+            item.GetValue() == value)
         {
             return item.GetShaderName();
         }

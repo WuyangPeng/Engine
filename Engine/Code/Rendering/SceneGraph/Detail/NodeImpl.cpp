@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.2 (2023/12/08 09:48)
+/// 版本：1.0.0.3 (2023/12/28 17:42)
 
 #include "Rendering/RenderingExport.h"
 
@@ -271,7 +271,6 @@ void Rendering::NodeImpl::GetVisibleSet(Culler& culler, const CameraSharedPtr& c
     }
 }
 
-// 名字支持。
 CoreTools::ObjectSharedPtr Rendering::NodeImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -361,7 +360,7 @@ void Rendering::NodeImpl::Clear() noexcept
     spatialChild.clear();
 }
 
-Rendering::PickRecordContainer Rendering::NodeImpl::ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const
+Rendering::PickRecordContainer Rendering::NodeImpl::ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax, int numThreads, float maxDistance) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -375,7 +374,7 @@ Rendering::PickRecordContainer Rendering::NodeImpl::ExecuteRecursive(const APoin
             if (const auto child = element.object;
                 child != nullptr)
             {
-                const auto childContainer = child->ExecuteRecursive(origin, direction, tMin, tMax);
+                const auto childContainer = child->ExecuteRecursive(origin, direction, tMin, tMax, numThreads, maxDistance);
 
                 container.InsertPickRecord(childContainer);
             }

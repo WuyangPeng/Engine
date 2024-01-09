@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/26 15:32)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/21 19:27)
 
 #ifndef SYSTEM_ANDROID_ANDROID_WINDOW_USING_H
 #define SYSTEM_ANDROID_ANDROID_WINDOW_USING_H
@@ -51,12 +51,15 @@ namespace System
         static constexpr auto size = 6;
 
     private:
+        using ReservedType = std::array<uint32_t, size>;
+
+    private:
         int32_t width;
         int32_t height;
         int32_t stride;
         int32_t format;
         void* bits;
-        std::array<uint32_t, size> reserved;
+        ReservedType reserved;
     };
 
     class SYSTEM_DEFAULT_DECLARE AndroidRect final

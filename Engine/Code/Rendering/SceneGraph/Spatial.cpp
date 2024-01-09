@@ -1,18 +1,17 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.2 (2023/12/07 10:30)
+/// 版本：1.0.0.3 (2023/12/28 17:56)
 
 #include "Rendering/RenderingExport.h"
 
-#include "Culler.h"
 #include "NullSpatial.h"
 #include "Spatial.h"
-#include "Flags/CullingModeFlags.h"
+
 #include "Detail/SpatialFactory.h"
 #include "Detail/SpatialImpl.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -21,6 +20,8 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Rendering/Visibility/Culler.h"
+#include "Rendering/Visibility/Flags/CullingModeFlags.h"
 
 COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(Rendering, Spatial)
 
@@ -314,11 +315,11 @@ void Rendering::Spatial::SetWorldTransformOnUpdate(const Transform& transform) n
     impl->SetWorldTransformOnUpdate(transform);
 }
 
-Rendering::PickRecordContainer Rendering::Spatial::ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const
+Rendering::PickRecordContainer Rendering::Spatial::ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax, int numThreads, float maxDistance)
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    System::UnusedFunction(origin, direction, tMin, tMax);
+    System::UnusedFunction(origin, direction, tMin, tMax, numThreads, maxDistance);
 
-    return PickRecordContainer::Create();
+    THROW_EXCEPTION(SYSTEM_TEXT("无效对象类型。"))
 }

@@ -1,18 +1,17 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/11/27 11:16)
+/// 版本：1.0.0.3 (2023/12/28 17:54)
 
 #ifndef RENDERING_SCENE_GRAPH_CAMERA_H
 #define RENDERING_SCENE_GRAPH_CAMERA_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "PickLine.h"
 #include "ViewVolume.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 
@@ -53,6 +52,7 @@ namespace Rendering
         void SetProjectionMatrix(const APoint& p00, const APoint& p10, const APoint& p11, const APoint& p01, float nearExtrude, float farExtrude);
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+        NODISCARD CameraSharedPtr Clone() const;
 
         /// 根据左手屏幕坐标(x,y)、视口和摄影机计算拾取线。
         /// 输出“原点”是相机位置，“方向”是单位长度矢量，均为世界坐标。

@@ -1,14 +1,15 @@
 @ingroup group_Documentation
 
-Threading Core Render Engine 1.0.0.3
+Threading Core Render Engine 1.0.0.4
 
 ----------------------------
 更新日志
 ----------------------------
-1.0.0.3（2023/12/21——2024/01/31）
+1.0.0.4（2024/01/10——2024/01/31）
 
 	完成功能： 
-	（引擎）	
+	（引擎）
+	+ 引擎整理。@
 	+ 实现Visual。@
 	+ 实现VisibleSet。@
 	+ 实现Cull。@
@@ -18,6 +19,18 @@ Threading Core Render Engine 1.0.0.3
 	
 	（历史）
 	+ DatabaseGenerate工程创建。@	
+	
+----------------------------
+1.0.0.3（2023/12/21——2024/01/09）
+
+	完成功能： 
+	（引擎）
+	+ 引擎整理：总工程。	
+	+ 引擎整理：UserInterface。
+	+ 引擎整理：System。
+	+ 引擎整理：SoundEffect。
+	+ 引擎整理：Script。
+	+ 引擎整理：ResourceManager。	
 	
 ----------------------------
 1.0.0.2（2023/12/07——2023/12/20）

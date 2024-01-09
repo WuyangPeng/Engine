@@ -18,10 +18,6 @@
 #include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/SceneGraph/CameraManager.h"
-#include "Rendering/SceneGraph/LoadVisual.h"
-#include "Rendering/SceneGraph/Polysegment.h"
-#include "Rendering/SceneGraph/SaveVisual.h"
 
 #include <vector>
 
@@ -42,7 +38,7 @@ void Rendering::PolysegmentTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    CameraManager::Create();
+
 
     ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CopyTest);
@@ -50,7 +46,6 @@ void Rendering::PolysegmentTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FileTest);
 
-    CameraManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();
 }

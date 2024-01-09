@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.2 (2023/12/20 09:54)
+/// 版本：1.0.0.3 (2023/12/28 17:52)
 
 #ifndef RENDERING_SCENE_GRAPH_VISUAL_DATA_H
 #define RENDERING_SCENE_GRAPH_VISUAL_DATA_H
@@ -46,8 +46,7 @@ namespace Rendering
 
     public:
         VisualData() noexcept;
-        VisualData(const VertexFormatSharedPtr& vertexFormat,
-                   const VertexBufferSharedPtr& vertexBuffer,
+        VisualData(const VertexBufferSharedPtr& vertexBuffer,
                    const IndexBufferSharedPtr& indexBuffer) noexcept;
         ~VisualData() noexcept = default;
         VisualData(const VisualData& rhs);
@@ -58,10 +57,6 @@ namespace Rendering
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD IndexFormatType GetPrimitiveType() const;
-
-        void SetVertexFormat(const VertexFormatSharedPtr& aVertexFormat) noexcept;
-        NODISCARD ConstVertexFormatSharedPtr GetConstVertexFormat() const noexcept;
-        NODISCARD VertexFormatSharedPtr GetVertexFormat() noexcept;
 
         void SetVertexBuffer(const VertexBufferSharedPtr& aVertexBuffer) noexcept;
         NODISCARD ConstVertexBufferSharedPtr GetConstVertexBuffer() const noexcept;
@@ -81,20 +76,17 @@ namespace Rendering
 
         NODISCARD bool IsVertexSharedPtrValid() const noexcept;
         NODISCARD int GetVertexBufferNumElements() const noexcept;
-        NODISCARD int GetVertexFormatStride() const noexcept;
-        NODISCARD int GetPositionOffset() const;
+
         NODISCARD ConstSpanIterator GetVertexBufferReadOnlyData() const noexcept;
 
         NODISCARD SpanIterator GetChannel(Semantic semantic, int unit, const DataFormatTypeContainer& requiredTypes);
         NODISCARD ConstSpanIterator GetConstChannel(Semantic semantic, int unit, const DataFormatTypeContainer& requiredTypes) const;
 
     private:
-        using VertexFormatObjectAssociated = CoreTools::ObjectAssociated<VertexFormat>;
         using VertexBufferObjectAssociated = CoreTools::ObjectAssociated<VertexBuffer>;
         using IndexBufferObjectAssociated = CoreTools::ObjectAssociated<IndexBuffer>;
 
     private:
-        VertexFormatObjectAssociated vertexFormat;
         VertexBufferObjectAssociated vertexBuffer;
         IndexBufferObjectAssociated indexBuffer;
     };

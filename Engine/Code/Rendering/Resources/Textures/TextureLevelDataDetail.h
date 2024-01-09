@@ -1,16 +1,14 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 20:07)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 13:46)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_DETAIL_H
 #define RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_DETAIL_H
-
-#include "Rendering/RenderingExport.h"
 
 #include "TextureLevelData.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
@@ -105,17 +103,17 @@ void Rendering::TextureLevelData<NumDimensions>::Init(int dimension0, int dimens
     {
         for (auto level = 1; level < numLevels; ++level)
         {
-            if (dimension0 > 1)
+            if (1 < dimension0)
             {
                 dimension0 >>= 1;
             }
 
-            if (dimension1 > 1)
+            if (1 < dimension1)
             {
                 dimension1 >>= 1;
             }
 
-            if (dimension2 > 1)
+            if (1 < dimension2)
             {
                 dimension2 >>= 1;
             }
@@ -331,57 +329,6 @@ int Rendering::TextureLevelData<NumDimensions>::GetStreamingSize() const
     size += CoreTools::GetStreamSize(autoGenerateMipMaps);
 
     return size;
-}
-
-template <int NumDimensions>
-void Rendering::TextureLevelData<NumDimensions>::SaveToFile(WriteFileManager& outFile) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    outFile.Write(sizeof(int32_t), &numItems);
-    for (auto& value : levelDimension)
-    {
-        outFile.Write(sizeof(int32_t), value.size(), value.data());
-    }
-    outFile.Write(sizeof(int32_t), levelNumBytes.size(), levelNumBytes.data());
-    const auto elementsNumber = boost::numeric_cast<int32_t>(levelOffsets.size());
-    outFile.Write(sizeof(int32_t), &elementsNumber);
-
-    for (auto levelOffset : levelOffsets)
-    {
-        outFile.Write(sizeof(int32_t), levelOffset.size(), levelOffset.data());
-    }
-
-    outFile.Write(sizeof(bool), &hasMipMaps);
-    outFile.Write(sizeof(bool), &autoGenerateMipMaps);
-}
-
-template <int NumDimensions>
-void Rendering::TextureLevelData<NumDimensions>::ReadFromFile(ReadFileManager& inFile)
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    inFile.Read(sizeof(int32_t), &numItems);
-
-    for (auto& value : levelDimension)
-    {
-        inFile.Read(sizeof(int32_t), value.size(), value.data());
-    }
-
-    inFile.Read(sizeof(int32_t), levelNumBytes.size(), levelNumBytes.data());
-
-    auto elementsNumber = 0;
-    inFile.Read(sizeof(int32_t), &elementsNumber);
-
-    levelOffsets.resize(elementsNumber);
-
-    for (auto levelOffset : levelOffsets)
-    {
-        inFile.Read(sizeof(int32_t), levelOffset.size(), levelOffset.data());
-    }
-
-    inFile.Read(sizeof(bool), &hasMipMaps);
-    inFile.Read(sizeof(bool), &autoGenerateMipMaps);
 }
 
 template <int NumDimensions>

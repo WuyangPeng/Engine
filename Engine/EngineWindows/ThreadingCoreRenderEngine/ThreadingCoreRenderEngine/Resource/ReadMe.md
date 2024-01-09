@@ -16,10 +16,10 @@
 9.  尽量不直接使用除0和1之外的整数值，避免使用文字量，应使用具名常量或具有适当作用域的变量代替。
 10. 不同平台或项目配置命名规则：Static + $(Platform) + $(Configuration)，如StaticX64Debug。
 11. 使用min和max表示[min,max]区间，使用begin和end表示[begin,end)区间。
-12. 对直接抛出异常的函数使用[[noreturn]] 。
-13. 对必须检查返回值的函数使用[[nodiscard]]。
-14. 对可能不会使用的参数使用[[maybe_unused]]。
-15. 对于没有break的case标签使用[[fallthrough]]。
+12. 对直接抛出异常的函数使用[[noreturn]]，已定义宏SYSTEM_NORETURN。
+13. 对必须检查返回值的函数使用[[nodiscard]]，已定义宏NODISCARD和MAYBE_NULLPTR。
+14. 对可能不会使用的参数使用[[maybe_unused]]，已定义宏MAYBE_UNUSED。
+15. 对于没有break的case标签使用[[fallthrough]]，已定义宏FALLTHROUGH。
 16. 禁止注释掉代码，必需保留不执行的代码使用预处理器。
 17. 定义宏为空时，使用static_cast<void>(0)，可防止宏被用作右值。
 18. 使用using代替typedef。

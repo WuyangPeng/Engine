@@ -17,13 +17,13 @@
 
 #include <set>
 
-Rendering::ClodMeshTriangleMesh::ClodMeshTriangleMesh(TrianglesMesh& mesh)
-    : numVertices{ mesh.GetVertexBuffer()->GetNumElements() },
-      numIndices{ mesh.GetIndexBuffer()->GetNumElements() },
+Rendering::ClodMeshTriangleMesh::ClodMeshTriangleMesh() noexcept
+    : numVertices{},
+      numIndices{},
       numTriangles{ numIndices / 3 },
-      indixBuffer{ mesh.GetIndexBuffer() },
-      vertexBuffer{ mesh.GetVertexBuffer() },
-      vertexBufferAccessor{ *mesh.GetVertexBuffer() }
+      indixBuffer{},
+      vertexBuffer{},
+      vertexBufferAccessor{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -129,11 +129,11 @@ Mathematics::Vector3F Rendering::ClodMeshTriangleMesh::GetPosition(MAYBE_UNUSED 
     return Mathematics::Vector3F{};
 }
 
-const char* Rendering::ClodMeshTriangleMesh::GetVertexBufferReadOnlyData() const
+const char* Rendering::ClodMeshTriangleMesh::GetVertexBufferReadOnlyData() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return &*vertexBufferAccessor.GetStorage();
+    return nullptr;
 }
 
 int Rendering::ClodMeshTriangleMesh::GetStride() const noexcept

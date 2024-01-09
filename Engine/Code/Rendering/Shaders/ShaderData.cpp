@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/05 14:36)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/26 15:17)
 
 #include "Rendering/RenderingExport.h"
 
@@ -27,16 +27,68 @@ Rendering::ShaderData::ShaderData(GraphicsObjectType inType, const std::string& 
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ShaderData)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderData, GetType, Rendering::GraphicsObjectType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderData, GetName, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderData, GetBindPoint, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderData, GetNumBytes, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderData, GetExtra, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderData, IsGpuWritable, bool)
+Rendering::GraphicsObjectType Rendering::ShaderData::GetType() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, ShaderData, SetGraphicsObject, GraphicsObjectSharedPtr, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderData, GetGraphicsObject, Rendering::ConstGraphicsObjectSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderData, GetGraphicsObject, Rendering::GraphicsObjectSharedPtr)
+    return impl->GetType();
+}
+
+std::string Rendering::ShaderData::GetName() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetName();
+}
+
+int Rendering::ShaderData::GetBindPoint() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetBindPoint();
+}
+
+int Rendering::ShaderData::GetNumBytes() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetNumBytes();
+}
+
+int Rendering::ShaderData::GetExtra() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetExtra();
+}
+
+bool Rendering::ShaderData::IsGpuWritable() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsGpuWritable();
+}
+
+void Rendering::ShaderData::SetGraphicsObject(const GraphicsObjectSharedPtr& graphicsObject) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetGraphicsObject(graphicsObject);
+}
+
+Rendering::ConstGraphicsObjectSharedPtr Rendering::ShaderData::GetGraphicsObject() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetGraphicsObject();
+}
+
+Rendering::GraphicsObjectSharedPtr Rendering::ShaderData::GetGraphicsObject() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetGraphicsObject();
+}
 
 void Rendering::ShaderData::Load(BufferSource& source)
 {
@@ -71,4 +123,32 @@ void Rendering::ShaderData::Register(ObjectRegister& target) const
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     impl->Register(target);
+}
+
+CoreTools::ObjectSharedPtr Rendering::ShaderData::GetObjectByName(const std::string& name)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetObjectByName(name);
+}
+
+Rendering::ShaderData::ObjectSharedPtrContainer Rendering::ShaderData::GetAllObjectsByName(const std::string& name)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetAllObjectsByName(name);
+}
+
+CoreTools::ConstObjectSharedPtr Rendering::ShaderData::GetConstObjectByName(const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetConstObjectByName(name);
+}
+
+Rendering::ShaderData::ConstObjectSharedPtrContainer Rendering::ShaderData::GetAllConstObjectsByName(const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetAllConstObjectsByName(name);
 }

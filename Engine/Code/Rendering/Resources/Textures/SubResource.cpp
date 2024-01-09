@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 19:48)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 14:07)
 
 #include "Rendering/RenderingExport.h"
 
@@ -24,8 +24,37 @@ Rendering::SubResource::SubResource(int item, int level, const SpanIterator& dat
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, SubResource)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SubResource, GetItem, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SubResource, GetLevel, int)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SubResource, GetData, Rendering::SubResource::SpanIterator)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SubResource, GetRowPitch, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SubResource, GetSlicePitch, int)
+int Rendering::SubResource::GetItem() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetItem();
+}
+
+int Rendering::SubResource::GetLevel() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetLevel();
+}
+
+Rendering::SubResource::SpanIterator Rendering::SubResource::GetData() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetData();
+}
+
+int Rendering::SubResource::GetRowPitch() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetRowPitch();
+}
+
+int Rendering::SubResource::GetSlicePitch() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetSlicePitch();
+}

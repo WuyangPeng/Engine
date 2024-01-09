@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.2 (2023/12/20 09:55)
+/// 版本：1.0.0.3 (2023/12/28 17:55)
 
 #ifndef RENDERING_SCENE_GRAPH_VISUAL_H
 #define RENDERING_SCENE_GRAPH_VISUAL_H
@@ -13,6 +13,9 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Spatial.h"
+#include "Mathematics/Objects3D/Line3.h"
+#include "Mathematics/Objects3D/Segment3.h"
+#include "Mathematics/Objects3D/Triangle3.h"
 #include "Rendering/LocalEffects/ConstantColorEffect.h"
 #include "Rendering/LocalEffects/VisualEffect.h"
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
@@ -37,7 +40,9 @@ namespace Rendering
 
     public:
         explicit Visual(const std::string& name);
-        Visual(const std::string& name, const VertexFormatSharedPtr& vertexFormat, const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer);
+        Visual(const std::string& name, Visual& visual);
+        Visual(const std::string& name, const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer);
+        Visual(const std::string& name, const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer, const VisualEffectSharedPtr& visualEffect);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -45,10 +50,6 @@ namespace Rendering
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
         NODISCARD IndexFormatType GetPrimitiveType() const;
-
-        void SetVertexFormat(const VertexFormatSharedPtr& vertexFormat) noexcept;
-        NODISCARD ConstVertexFormatSharedPtr GetConstVertexFormat() const noexcept;
-        NODISCARD VertexFormatSharedPtr GetVertexFormat() noexcept;
 
         void SetVertexBuffer(const VertexBufferSharedPtr& vertexBuffer) noexcept;
         NODISCARD ConstVertexBufferSharedPtr GetConstVertexBuffer() const noexcept;
@@ -70,13 +71,65 @@ namespace Rendering
         void UpdateModelBound();
         void UpdateModelNormals();
 
+        NODISCARD ControllerSharedPtr Clone() const override;
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+
+        NODISCARD PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax, int numThreads, float maxDistance) override;
+
     protected:
         // 支持分级裁剪。
         void GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull) override;
 
     private:
+        using Line3 = Mathematics::Line3F;
+        using Vector3 = Mathematics::Vector3F;
+        using Vector4 = Mathematics::Vector4F;
+        using Triangle3 = Mathematics::Triangle3F;
+        using Segment3 = Mathematics::Segment3F;
+        using StorageType = std::vector<char>;
+        using SpanIterator = CoreTools::SpanIterator<StorageType::iterator>;
+
+    private:
         // 对几何更新的支持。
         void UpdateWorldBound() override;
+
+        NODISCARD PickRecordContainer PickTriangles(const SpanIterator& positions,
+                                                    int vStride,
+                                                    const IndexBufferSharedPtr& indexBuffer,
+                                                    const Line3& line,
+                                                    int numThreads,
+                                                    float tMin,
+                                                    float tMax,
+                                                    const APoint& origin);
+
+        void PickTriangles(const SpanIterator& positions,
+                           int vStride,
+                           const IndexBuffer& indexBuffer,
+                           const Line3& line,
+                           int i0,
+                           int i1,
+                           float tMin,
+                           float tMax,
+                           PickRecordContainer& pickRecordContainer,
+                           const APoint& origin);
+
+        NODISCARD PickRecordContainer PickSegments(const SpanIterator& positions,
+                                                   int vStride,
+                                                   const IndexBuffer& indexBuffer,
+                                                   const Line3& line,
+                                                   float tMin,
+                                                   float tMax,
+                                                   float maxDistance,
+                                                   const APoint& origin);
+
+        NODISCARD PickRecordContainer PickPoints(const SpanIterator& positions,
+                                                 int vStride,
+                                                 const IndexBuffer& indexBuffer,
+                                                 const Line3& line,
+                                                 float tMin,
+                                                 float tMax,
+                                                 float maxDistance,
+                                                 const APoint& origin);
 
     private:
         PackageType impl;

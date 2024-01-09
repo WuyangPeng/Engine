@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 11:16)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/26 11:09)
 
 #include "Rendering/RenderingExport.h"
 
@@ -24,7 +24,7 @@
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, BlendState)
 
-CORE_TOOLS_RTTI_DEFINE(Rendering, BlendState);
+CORE_TOOLS_RTTI_DEFINE(Rendering, BlendState)
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, BlendState);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, BlendState);
 
@@ -44,19 +44,68 @@ Rendering::BlendState::BlendState(BlendStateCreate blendStateCreate, const std::
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, BlendState)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendState, IsEnableAlphaToCoverage, bool)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, BlendState, SetEnableAlphaToCoverage, bool, void)
+bool Rendering::BlendState::IsEnableAlphaToCoverage() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendState, IsEnableIndependentBlend, bool)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, BlendState, SetEnableIndependentBlend, bool, void)
+    return impl->IsEnableAlphaToCoverage();
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendState, GetBlendColor, Rendering::BlendState::Colour)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, BlendState, SetBlendColor, Colour, void)
+void Rendering::BlendState::SetEnableAlphaToCoverage(bool enableAlphaToCoverage) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendState, GetSampleMask, uint32_t)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, BlendState, SetSampleMask, uint32_t, void)
+    return impl->SetEnableAlphaToCoverage(enableAlphaToCoverage);
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, BlendState, GetBlendStateTarget, int, Rendering::BlendStateTarget)
+bool Rendering::BlendState::IsEnableIndependentBlend() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsEnableIndependentBlend();
+}
+
+void Rendering::BlendState::SetEnableIndependentBlend(bool enableIndependentBlend) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetEnableIndependentBlend(enableIndependentBlend);
+}
+
+Rendering::BlendState::Colour Rendering::BlendState::GetBlendColor() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetBlendColor();
+}
+
+void Rendering::BlendState::SetBlendColor(const Colour& blendColor) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetBlendColor(blendColor);
+}
+
+uint32_t Rendering::BlendState::GetSampleMask() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetSampleMask();
+}
+
+void Rendering::BlendState::SetSampleMask(uint32_t sampleMask) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetSampleMask(sampleMask);
+}
+
+Rendering::BlendStateTarget Rendering::BlendState::GetBlendStateTarget(int index) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetBlendStateTarget(index);
+}
 
 void Rendering::BlendState::SetBlendStateTarget(int index, const BlendStateTarget& blendStateTarget)
 {

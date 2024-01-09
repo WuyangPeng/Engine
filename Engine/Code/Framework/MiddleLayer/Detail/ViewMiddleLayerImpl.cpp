@@ -91,6 +91,20 @@ void Framework::ViewMiddleLayerImpl::ClearColorBuffer()
     }
 }
 
+void Framework::ViewMiddleLayerImpl::ClearBuffers()
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    if (renderer != nullptr)
+    {
+        renderer->ClearBuffers();
+    }
+    else
+    {
+        ThrowException();
+    }
+}
+
 Framework::ViewMiddleLayerImpl::Colour Framework::ViewMiddleLayerImpl::GetClearColor() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;

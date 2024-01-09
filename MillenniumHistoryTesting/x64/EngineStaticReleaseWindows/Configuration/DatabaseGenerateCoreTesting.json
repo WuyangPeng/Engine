@@ -1,4 +1,8 @@
 {
+  "helperSuite": {
+
+  },
+
   "convertSuite": {
     "ArticleConvertTesting": 1,
     "BookConvertTesting": 1,

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 20:12)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 13:51)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_2D_IMPL_H
 #define RENDERING_RESOURCES_TEXTURE_2D_IMPL_H
@@ -63,11 +63,6 @@ namespace Rendering
         void LoadLevelData(BufferSource& source) override;
         void SaveLevelData(BufferTarget& target) const override;
         NODISCARD int GetLevelDataStreamingSize() const override;
-
-        void SaveLevelDataToFile(WriteFileManager& outFile) const override;
-        void LoadLevelDataFromFile(ReadFileManager& inFile) override;
-
-        void SaveBaseToFile(WriteFileManager& outFile) const override;
 
     private:
         TextureLevelData textureLevelData;

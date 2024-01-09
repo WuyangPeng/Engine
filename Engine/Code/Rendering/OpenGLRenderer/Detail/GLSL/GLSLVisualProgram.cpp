@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:40)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/09 17:14)
 
 #include "Rendering/RenderingExport.h"
 
@@ -15,7 +15,6 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Rendering/Shaders/Flags/ShaderAPIType.h"
 
 Rendering::GLSLVisualProgram::GLSLVisualProgram(OpenGLUInt programHandle, OpenGLUInt vertexShaderHandle, OpenGLUInt pixelShaderHandle, OpenGLUInt geometryShaderHandle)
     : ParentType{},
@@ -74,28 +73,28 @@ Rendering::GLSLVisualProgram::~GLSLVisualProgram() noexcept
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 
-    /*    if (System::IsGLProgram(programHandle))
+    if (System::IsGLProgram(programHandle))
+    {
+        if (System::IsGLShader(vertexShaderHandle))
         {
-            if (System::IsGLShader(vertexShaderHandle))
-            {
-                System::DetachGLShader(programHandle, vertexShaderHandle);
-                System::DeleteGLShader(vertexShaderHandle);
-            }
+            System::DetachGLShader(programHandle, vertexShaderHandle);
+            System::DeleteGLShader(vertexShaderHandle);
+        }
 
-            if (System::IsGLShader(pixelShaderHandle))
-            {
-                System::DetachGLShader(programHandle, pixelShaderHandle);
-                System::DeleteGLShader(pixelShaderHandle);
-            }
+        if (System::IsGLShader(pixelShaderHandle))
+        {
+            System::DetachGLShader(programHandle, pixelShaderHandle);
+            System::DeleteGLShader(pixelShaderHandle);
+        }
 
-            if (System::IsGLShader(geometryShaderHandle))
-            {
-                System::DetachGLShader(programHandle, geometryShaderHandle);
-                System::DeleteGLShader(geometryShaderHandle);
-            }
+        if (System::IsGLShader(geometryShaderHandle))
+        {
+            System::DetachGLShader(programHandle, geometryShaderHandle);
+            System::DeleteGLShader(geometryShaderHandle);
+        }
 
-            System::DeleteGLProgram(programHandle);
-        }*/
+        System::DeleteGLProgram(programHandle);
+    }
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, GLSLVisualProgram)

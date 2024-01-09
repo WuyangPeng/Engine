@@ -43,6 +43,7 @@ namespace Framework
         void DrawFrameRate(int x, int y, const Colour& color, const std::string& message);
         void ResetRenderer(const std::string& fileName, const EnvironmentParameter& environmentParameter);
         void ClearColorBuffer();
+        void ClearBuffers();
 
         NODISCARD Colour GetClearColor() const;
         void SetClearColor(const Colour& colour);

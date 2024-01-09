@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/11/30 22:36)
+/// 版本：1.0.0.3 (2023/12/23 22:11)
 
 #include "CountryTesting.h"
 #include "DatabaseGenerate/DatabaseGenerateBase/AncientBooks/Country.h"
@@ -114,9 +114,8 @@ void DatabaseGenerateBaseTesting::CountryTesting::CategoryTest(const Country& co
 
 void DatabaseGenerateBaseTesting::CountryTesting::UnansweredQuestionTest(const Country& country)
 {
-    const auto unansweredQuestion = country.GetUnansweredQuestion();
-
-    for (const auto& element : unansweredQuestion)
+    for (const auto unansweredQuestion = country.GetUnansweredQuestion();
+         const auto& element : unansweredQuestion)
     {
         ASSERT_TRUE(element == SYSTEM_TEXT("beginYear") ||
                     element == SYSTEM_TEXT("beginMonth") ||

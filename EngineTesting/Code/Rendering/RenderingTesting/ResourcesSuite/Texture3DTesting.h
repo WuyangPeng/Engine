@@ -26,11 +26,7 @@ namespace Rendering
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void MainTest();
-        void BaseTest();
-        void MipmapsTest();
-        void StreamTest();
-        void FileTest();
+        void MainTest(); 
 
         void DoRunUnitTest() override;
     };

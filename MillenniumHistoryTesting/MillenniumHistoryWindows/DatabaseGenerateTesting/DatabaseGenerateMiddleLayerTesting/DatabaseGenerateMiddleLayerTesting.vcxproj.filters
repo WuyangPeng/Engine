@@ -52,9 +52,6 @@
     <Filter Include="HelperSuite 头文件">
       <UniqueIdentifier>{f0bc956a-f254-4c62-b8e8-d4255cd3b63a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="HelperSuite 源文件">
-      <UniqueIdentifier>{185c8558-f9f8-48d4-9344-5c70c59d14e9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="InputSuite 头文件">
       <UniqueIdentifier>{51bb1437-de32-4d6d-86df-7e0c12454006}</UniqueIdentifier>
     </Filter>

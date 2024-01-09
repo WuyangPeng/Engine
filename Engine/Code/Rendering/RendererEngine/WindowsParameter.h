@@ -1,23 +1,23 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/25 15:01)
-///
-///	单元测试：Pass
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/02 15:18)
 
 #ifndef RENDERING_RENDERER_ENGINE_WINDOWS_PARAMETER_H
 #define RENDERING_RENDERER_ENGINE_WINDOWS_PARAMETER_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "System/Helper/UnicodeUsing.h"
+#include "System/Windows/WindowsFwd.h"
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "Rendering/DataTypes/ColourDetail.h"
+#include "Rendering/DataTypes/Colour.h"
 
 RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(WindowsParameter, WindowsParameterImpl);
 

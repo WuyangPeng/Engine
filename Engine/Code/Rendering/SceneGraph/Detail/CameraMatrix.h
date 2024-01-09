@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/11/27 11:06)
+/// 版本：1.0.0.3 (2023/12/28 17:34)
 
 #ifndef RENDERING_SCENE_GRAPH_CAMERA_MATRIX_H
 #define RENDERING_SCENE_GRAPH_CAMERA_MATRIX_H
@@ -26,10 +26,10 @@ namespace Rendering
         using BufferSource = CoreTools::BufferSource;
         using BufferTarget = CoreTools::BufferTarget;
 
-        using Math = Mathematics::Math<float>;
-        using APoint = Mathematics::APoint<float>;
-        using AVector = Mathematics::AVector<float>;
-        using Matrix = Mathematics::Matrix<float>;
+        using Math = Mathematics::MathF;
+        using APoint = Mathematics::APointF;
+        using AVector = Mathematics::AVectorF;
+        using Matrix = Mathematics::MatrixF;
 
     public:
         explicit CameraMatrix(float epsilon) noexcept;
@@ -50,7 +50,7 @@ namespace Rendering
         void Load(BufferSource& source);
         void Save(BufferTarget& target) const;
         NODISCARD int GetStreamingSize() const noexcept;
-        NODISCARD Matrix GetProjectionViewMatrix(const Matrix& matrix) noexcept;
+        NODISCARD Matrix GetProjectionViewMatrix(const Matrix& matrix) const noexcept;
         NODISCARD float GetEpsilon() const noexcept;
 
     private:
@@ -59,9 +59,9 @@ namespace Rendering
         // 指示用户是否指定了非单位的预视图矩阵。
         bool preViewIsIdentity;
 
-        // 摄影机的后投影矩阵。
+        // 摄影机后投影矩阵。
         Matrix postProjectionMatrix;
-        // 指示用户是否指定了非单位的后投影矩阵。
+        // 指示用户是否指定了非单位后投影矩阵。
         bool postProjectionIsIdentity;
 
         float epsilon;

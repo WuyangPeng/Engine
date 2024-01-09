@@ -20,12 +20,9 @@
 #include "Mathematics/Objects3D/Line3Detail.h"
 #include "Mathematics/Objects3D/Triangle3Detail.h"
 #include "Rendering/Detail/SwitchNode.h"
-#include "Rendering/SceneGraph/CameraManager.h"
-#include "Rendering/SceneGraph/LoadVisual.h"
+#include "Rendering/Picking/PickRecord.h"
+#include "Rendering/Picking/Picker.h"
 #include "Rendering/SceneGraph/Node.h"
-#include "Rendering/SceneGraph/PickRecord.h"
-#include "Rendering/SceneGraph/Picker.h"
-#include "Rendering/SceneGraph/Triangles.h"
 
 #include <random>
 
@@ -46,11 +43,7 @@ void Rendering::PickerTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    CameraManager::Create();
-
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
-
-    CameraManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();
 }

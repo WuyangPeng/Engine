@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/05 14:32)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/26 15:07)
 
 #include "Rendering/RenderingExport.h"
 
@@ -227,7 +227,7 @@ Rendering::ShaderImpl::CompiledCodeContainer Rendering::ShaderImpl::GetCompiledC
     return compiledCode;
 }
 
-Rendering::ShaderImpl::ShaderDataContainer Rendering::ShaderImpl::GetData(int lookup) const
+Rendering::ShaderImpl::ShaderDataContainer& Rendering::ShaderImpl::GetData(int lookup)
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -406,6 +406,8 @@ Rendering::ConstGraphicsObjectSharedPtr Rendering::ShaderImpl::GetGraphicsObject
 
 void Rendering::ShaderImpl::SetNumThreads(int x, int y, int z) noexcept
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     numXThreads = x;
     numYThreads = y;
     numZThreads = z;
@@ -413,35 +415,123 @@ void Rendering::ShaderImpl::SetNumThreads(int x, int y, int z) noexcept
 
 void Rendering::ShaderImpl::AddLookupData(int index, GraphicsObjectType inType, const std::string& inName, int inBindPoint, int inNumBytes, int inExtra, bool inIsGpuWritable)
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     lookupData.at(index).emplace_back(inType, inName, inBindPoint, inNumBytes, inExtra, inIsGpuWritable);
 }
 
 void Rendering::ShaderImpl::ResizeConstantBufferLayouts(int size)
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     constantBufferLayouts.resize(size);
 }
 
 void Rendering::ShaderImpl::AddConstantBufferLayouts(int layoutIndex, const MemberLayout& item)
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     constantBufferLayouts.at(layoutIndex).AddLayout(item);
 }
 
 void Rendering::ShaderImpl::ResizeStructuredBufferLayouts(int size)
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     structuredBufferLayouts.resize(size);
 }
 
 void Rendering::ShaderImpl::AddStructuredBufferLayouts(int layoutIndex, const MemberLayout& item)
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     structuredBufferLayouts.at(layoutIndex).AddLayout(item);
 }
 
 int Rendering::ShaderImpl::GetStructuredBufferCounter(int layoutIndex) const
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     return structuredBufferLayouts.at(layoutIndex).GetSize();
 }
 
 void Rendering::ShaderImpl::SortConstantBufferLayouts(int layoutIndex)
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     structuredBufferLayouts.at(layoutIndex).SortLayouts();
+}
+
+CoreTools::ObjectSharedPtr Rendering::ShaderImpl::GetObjectByName(const std::string& name)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    for (auto element : lookupData)
+    {
+        for (auto shaderData : element)
+        {
+            if (auto object = shaderData.GetObjectByName(name);
+                !object->IsNullObject())
+            {
+                return object;
+            }
+        }
+    }
+
+    return CoreTools::Object::GetNullObject();
+}
+
+Rendering::ShaderImpl::ObjectSharedPtrContainer Rendering::ShaderImpl::GetAllObjectsByName(const std::string& name)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    ObjectSharedPtrContainer result{};
+
+    for (auto element : lookupData)
+    {
+        for (auto shaderData : element)
+        {
+            auto object = shaderData.GetAllObjectsByName(name);
+            result.insert(result.end(), object.begin(), object.end());
+        }
+    }
+
+    return result;
+}
+
+CoreTools::ConstObjectSharedPtr Rendering::ShaderImpl::GetConstObjectByName(const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    for (auto element : lookupData)
+    {
+        for (auto shaderData : element)
+        {
+            if (auto object = shaderData.GetConstObjectByName(name);
+                !object->IsNullObject())
+            {
+                return object;
+            }
+        }
+    }
+
+    return CoreTools::Object::GetNullObject();
+}
+
+Rendering::ShaderImpl::ConstObjectSharedPtrContainer Rendering::ShaderImpl::GetAllConstObjectsByName(const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    ConstObjectSharedPtrContainer result{};
+
+    for (auto element : lookupData)
+    {
+        for (auto shaderData : element)
+        {
+            auto object = shaderData.GetAllConstObjectsByName(name);
+            result.insert(result.end(), object.begin(), object.end());
+        }
+    }
+
+    return result;
 }

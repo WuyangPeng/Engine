@@ -523,6 +523,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="Configuration\Database.json" />
     <None Include="Configuration\DatabaseGenerateCoreTesting.json" />
     <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\Log.json" />

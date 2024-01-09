@@ -18,7 +18,6 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
-#include "Rendering/LocalEffects/Light.h"
 
 #include <random>
 #include <vector>

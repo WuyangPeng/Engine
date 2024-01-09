@@ -104,7 +104,7 @@ System::String CoreTools::CSVGenerateBaseHeadFile::GetContent(const String& code
         stdIncludeContent += SYSTEM_TEXT("\n");
     }
 
-    if (head.HasArrayDataType())
+    if (head.HasArrayDataType() || head.HasMapping())
     {
         stdIncludeContent += SYSTEM_TEXT("\n");
     }

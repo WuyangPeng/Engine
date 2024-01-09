@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:28)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/08 19:39)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,23 +16,21 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
-#include "Rendering/Resources/Flags/CopyType.h"
-#include "Rendering/Resources/Flags/UsageType.h"
 
 Rendering::OpenGLTextureCube::OpenGLTextureCube(const TextureCubeSharedPtr& textureCube, const std::string& name)
     : ParentType{ textureCube, name, TextureTarget::TextureCubeMap, TextureTargetBinding::BindingCube }
 {
     SetGLHandle(System::GetGLGenTextures());
-    System::SetGLBindTexture(TextureTarget::TextureCubeMap, GetGLHandle());
+    SetGLBindTexture(TextureTarget::TextureCubeMap, ClassType::GetGLHandle());
 
     const auto width = textureCube->GetDimension(0);
     const auto height = textureCube->GetDimension(1);
 
-    System::SetGLTexturesStorage2D(TextureTarget::TextureCubeMap, GetNumLevels(), GetInternalFormat(), width, height);
+    SetGLTexturesStorage2D(TextureTarget::TextureCubeMap, GetNumLevels(), GetInternalFormat(), width, height);
 
     Initialize();
 
-    System::SetGLBindTexture(TextureTarget::TextureCubeMap, 0);
+    SetGLBindTexture(TextureTarget::TextureCubeMap, 0);
 
     CreateStaging();
 
@@ -41,7 +39,7 @@ Rendering::OpenGLTextureCube::OpenGLTextureCube(const TextureCubeSharedPtr& text
 
 Rendering::OpenGLTextureCube::~OpenGLTextureCube() noexcept
 {
-    System::SetGLDeleteTextures(GetGLHandle());
+    System::SetGLDeleteTextures(ClassType::GetGLHandle());
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -59,56 +57,23 @@ bool Rendering::OpenGLTextureCube::CanAutoGenerateMipmaps() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto texture = GetTexture();
+    const auto texture = GetTexture();
 
     return texture && texture->HasMipMaps() && texture->WantAutoGenerateMipMaps();
-}
-
-void Rendering::OpenGLTextureCube::Enable() noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
 }
 
 void Rendering::OpenGLTextureCube::LoadTextureLevel(int item, int level, const ConstSpanIterator& data)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto texture = GetTexture();
-    if (texture && level < texture->GetNumLevels())
+    if (const auto texture = GetTexture();
+        texture && level < texture->GetNumLevels())
     {
         const auto width = texture->GetDimension(level, 0);
         const auto height = texture->GetDimension(level, 1);
 
         const auto targetFace = GetCubeFaceTarget(item);
 
-        System::SetGLTexturesSubImage2D(targetFace, level, 0, 0, width, height, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
+        SetGLTexturesSubImage2D(targetFace, level, 0, 0, width, height, GetExternalFormat(), GetExternalType(), data.GetData());
     }
-}
-
-bool Rendering::OpenGLTextureCube::Update(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLTextureCube::CopyGpuToCpu(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLTextureCube::CopyCpuToGpu(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLTextureCube::GetNumActiveElements()
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
 }

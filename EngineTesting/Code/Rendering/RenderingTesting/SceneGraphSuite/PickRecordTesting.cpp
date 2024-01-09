@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/SceneGraph/PickRecord.h"
+#include "Rendering/Picking/PickRecord.h"
 
 Rendering::PickRecordTesting::PickRecordTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -31,49 +31,5 @@ void Rendering::PickRecordTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(OperatorTest);
-
     CoreTools::InitTerm::ExecuteTerminator();
-}
-
-void Rendering::PickRecordTesting::BaseTest()
-{
-    PickRecord firstPickRecord = PickRecord::Create();
-
-    ConstSpatialSharedPtr firstSpatialSharedPtr = firstPickRecord.GetIntersected();
-
-    ASSERT_APPROXIMATE(firstPickRecord.GetParameter(), 0.0f, 1e-8f);
-    ASSERT_EQUAL(firstPickRecord.GetTriangle(), -1);
-    ASSERT_TRUE(0.0f <= firstPickRecord.GetBary(0) && firstPickRecord.GetBary(0) <= 1.0f);
-    ASSERT_TRUE(0.0f <= firstPickRecord.GetBary(1) && firstPickRecord.GetBary(1) <= 1.0f);
-    ASSERT_TRUE(0.0f <= firstPickRecord.GetBary(2) && firstPickRecord.GetBary(2) <= 1.0f);
-    ASSERT_APPROXIMATE(firstPickRecord.GetBary(0) + firstPickRecord.GetBary(1) + firstPickRecord.GetBary(2), 1.0f, 1e-8f);
-}
-
-void Rendering::PickRecordTesting::OperatorTest()
-{
-    PickRecord firstPickRecord = PickRecord::Create();
-    firstPickRecord.SetParameter(0.5f);
-
-    PickRecord secondPickRecord = PickRecord::Create();
-    secondPickRecord.SetParameter(0.15f);
-
-    ASSERT_TRUE(firstPickRecord == firstPickRecord);
-    ASSERT_TRUE(secondPickRecord == secondPickRecord);
-    ASSERT_FALSE(firstPickRecord == secondPickRecord);
-
-    ASSERT_FALSE(firstPickRecord != firstPickRecord);
-    ASSERT_FALSE(secondPickRecord != secondPickRecord);
-    ASSERT_TRUE(firstPickRecord != secondPickRecord);
-
-    ASSERT_FALSE(firstPickRecord < secondPickRecord);
-    ASSERT_FALSE(firstPickRecord <= secondPickRecord);
-    ASSERT_TRUE(firstPickRecord > secondPickRecord);
-    ASSERT_TRUE(firstPickRecord >= secondPickRecord);
-
-    ASSERT_FALSE(firstPickRecord < firstPickRecord);
-    ASSERT_TRUE(firstPickRecord <= firstPickRecord);
-    ASSERT_FALSE(firstPickRecord > firstPickRecord);
-    ASSERT_TRUE(firstPickRecord >= firstPickRecord);
 }

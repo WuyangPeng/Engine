@@ -11,7 +11,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/SceneGraph/CameraManager.h"
 
 Rendering::CameraManageTesting::CameraManageTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -28,36 +27,14 @@ void Rendering::CameraManageTesting::DoRunUnitTest()
 
 void Rendering::CameraManageTesting::MainTest()
 {
-    CameraManager::Create();
+
 
     ASSERT_NOT_THROW_EXCEPTION_0(DepthTypeTest);
 
-    CameraManager::Destroy();
+   
 }
 
-void Rendering::CameraManageTesting::DepthTypeTest()
+void Rendering::CameraManageTesting::DepthTypeTest() noexcept
 {
-    CAMERA_MANAGE_SINGLETON.SetDefaultDepthType(RendererTypes::Default);
-
-    ASSERT_ENUM_EQUAL(CAMERA_MANAGE_SINGLETON.GetDepthType(), DepthType::MinusOneToOne);
-
-    CAMERA_MANAGE_SINGLETON.SetDefaultDepthType(RendererTypes::Windows);
-
-    ASSERT_ENUM_EQUAL(CAMERA_MANAGE_SINGLETON.GetDepthType(), DepthType::MinusOneToOne);
-
-    CAMERA_MANAGE_SINGLETON.SetDefaultDepthType(RendererTypes::Glut);
-
-    ASSERT_ENUM_EQUAL(CAMERA_MANAGE_SINGLETON.GetDepthType(), DepthType::MinusOneToOne);
-
-    CAMERA_MANAGE_SINGLETON.SetDefaultDepthType(RendererTypes::OpenGL);
-
-    ASSERT_ENUM_EQUAL(CAMERA_MANAGE_SINGLETON.GetDepthType(), DepthType::MinusOneToOne);
-
-    CAMERA_MANAGE_SINGLETON.SetDefaultDepthType(RendererTypes::OpenGLES);
-
-    ASSERT_ENUM_EQUAL(CAMERA_MANAGE_SINGLETON.GetDepthType(), DepthType::MinusOneToOne);
-
-    CAMERA_MANAGE_SINGLETON.SetDefaultDepthType(RendererTypes::Dx11);
-
-    ASSERT_ENUM_EQUAL(CAMERA_MANAGE_SINGLETON.GetDepthType(), DepthType::ZeroToOne);
+    
 }

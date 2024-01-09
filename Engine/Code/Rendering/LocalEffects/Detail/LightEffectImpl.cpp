@@ -12,13 +12,13 @@
 #include "LightEffectImpl.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "Rendering/LocalEffects/Light.h"
 #include "Rendering/LocalEffects/LightCameraGeometry.h"
+#include "Rendering/LocalEffects/Lighting.h"
 #include "Rendering/LocalEffects/Material.h"
 
 Rendering::LightEffectImpl::LightEffectImpl(CoreTools::DisableNotThrow disableNotThrow)
     : material{ Material::Create() },
-      lighting{ Light::Create() },
+      lighting{ Lighting::Create() },
       geometry{ LightCameraGeometry::Create() },
       materialConstant{},
       lightingConstant{},
@@ -34,13 +34,13 @@ Rendering::LightEffectImpl::LightEffectImpl(MaterialSharedPtr material,
                                             LightCameraGeometrySharedPtr geometry,
                                             int numMaterialConstantBytes,
                                             int numLightingConstantBytes,
-                                            int numGeometryConstantBytes)  
+                                            int numGeometryConstantBytes)
     : material{ std::move(material) },
       lighting{ std::move(lighting) },
       geometry{ std::move(geometry) },
-      materialConstant{ std::make_shared<ConstantBuffer>(numMaterialConstantBytes, true) },
-      lightingConstant{ std::make_shared<ConstantBuffer>(numLightingConstantBytes, true) },
-      geometryConstant{ std::make_shared<ConstantBuffer>(numGeometryConstantBytes, true) }
+      materialConstant{ std::make_shared<ConstantBuffer>("materialConstant", numMaterialConstantBytes, true) },
+      lightingConstant{ std::make_shared<ConstantBuffer>("lightingConstant", numLightingConstantBytes, true) },
+      geometryConstant{ std::make_shared<ConstantBuffer>("geometryConstant", numGeometryConstantBytes, true) }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

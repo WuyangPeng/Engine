@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/SceneGraph/Flags/VisualFlags.h"
-#include "Rendering/SceneGraph/VisibleSet.h"
+#include "Rendering/Visibility/VisibleSet.h"
 
 Rendering::VisibleSetTesting::VisibleSetTesting(const OStreamShared& stream)
     : ParentType{ stream }

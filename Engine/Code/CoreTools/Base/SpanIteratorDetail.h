@@ -23,7 +23,7 @@ CoreTools::SpanIterator<Iter>::SpanIterator(Iter begin, Iter end) noexcept
 
 template <typename Iter>
 CoreTools::SpanIterator<Iter>::SpanIterator(Iter begin, Iter end, Iter current) noexcept
-    : begin{ begin }, end{ end }, current{ current }
+    : begin{ std::move(begin) }, end{ std::move(end) }, current{ std::move(current) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -61,6 +61,14 @@ typename CoreTools::SpanIterator<Iter>::ConstReferenceType CoreTools::SpanIterat
     {
         THROW_EXCEPTION(SYSTEM_TEXT("迭代器无效。"s))
     }
+}
+
+template <typename Iter>
+typename CoreTools::SpanIterator<Iter>::ConstPointerType CoreTools::SpanIterator<Iter>::GetData() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return &(this->operator*());
 }
 
 template <typename Iter>
@@ -233,7 +241,9 @@ const T& CoreTools::SpanIterator<Iter>::ReinterpretCast(int step) const
     static_assert(std::is_arithmetic_v<ValueType>, "ValueType must be arithmetic.");
     static_assert(std::is_arithmetic_v<T>, "T must be arithmetic.");
 
-    if (step * sizeof(ValueType) < sizeof(T))
+    const auto endStep = current + step * sizeof(ValueType);
+
+    if (end <= endStep)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("迭代器长度不足"s))
     }
@@ -242,7 +252,7 @@ const T& CoreTools::SpanIterator<Iter>::ReinterpretCast(int step) const
 #include SYSTEM_WARNING_DISABLE(26473)
 #include SYSTEM_WARNING_DISABLE(26490)
 
-    return reinterpret_cast<const T&>(*(current + step * sizeof(ValueType)));
+    return reinterpret_cast<const T&>(*(endStep));
 
 #include SYSTEM_WARNING_POP
 }
@@ -315,7 +325,7 @@ NODISCARD std::array<T, Size> CoreTools::SpanIterator<Iter>::GetValue(int step) 
 
 #include SYSTEM_WARNING_DISABLE(26481)
 
-        element = *(endPosition - index * proportion);
+        element = *(endPosition - index);
 
 #include SYSTEM_WARNING_POP
 
@@ -342,7 +352,7 @@ void CoreTools::SpanIterator<Iter>::SetValue(int step, const std::array<T, Size>
 {
     constexpr auto proportion = sizeof(T) / sizeof(ValueType);
 
-    auto* endPosition = &ReinterpretCast<T>(step + proportion);
+    auto* endPosition = &ReinterpretCast<T>(step + Size * proportion);
 
     auto index = Size;
     for (const auto& element : value)
@@ -351,7 +361,7 @@ void CoreTools::SpanIterator<Iter>::SetValue(int step, const std::array<T, Size>
 
 #include SYSTEM_WARNING_DISABLE(26481)
 
-        *(endPosition - index * proportion) = element;
+        *(endPosition - index) = element;
 
 #include SYSTEM_WARNING_POP
 

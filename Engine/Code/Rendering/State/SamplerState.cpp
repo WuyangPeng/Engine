@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 11:18)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/26 11:21)
 
 #include "Rendering/RenderingExport.h"
 
@@ -64,11 +64,11 @@ Rendering::SamplerStateMode Rendering::SamplerState::GetMode(int index) const
     return impl->GetMode(index);
 }
 
-float Rendering::SamplerState::GetMipLODBias() const noexcept
+float Rendering::SamplerState::GetMipLodBias() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return impl->GetMipLODBias();
+    return impl->GetMipLodBias();
 }
 
 int Rendering::SamplerState::GetMaxAnisotropy() const noexcept
@@ -92,18 +92,18 @@ Rendering::SamplerState::Colour Rendering::SamplerState::GetBorderColor() const 
     return impl->GetBorderColor();
 }
 
-float Rendering::SamplerState::GetMinLOD() const noexcept
+float Rendering::SamplerState::GetMinLod() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return impl->GetMinLOD();
+    return impl->GetMinLod();
 }
 
-float Rendering::SamplerState::GetMaxLOD() const noexcept
+float Rendering::SamplerState::GetMaxLod() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return impl->GetMaxLOD();
+    return impl->GetMaxLod();
 }
 
 Rendering::SamplerState::SamplerState(LoadConstructor loadConstructor)

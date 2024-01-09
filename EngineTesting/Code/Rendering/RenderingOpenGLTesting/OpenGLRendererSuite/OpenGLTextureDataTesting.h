@@ -27,10 +27,6 @@ namespace Rendering
 
     private:
         void MainTest() noexcept;
-        void Texture1DTest();
-        void Texture2DTest();
-        void Texture3DTest();
-        void TextureCubeTest();
 
         void DoRunUnitTest() override;
     };

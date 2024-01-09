@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/29 23:41)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/21 17:23)
 
 #include "System/SystemExport.h"
 
@@ -156,3 +156,25 @@ void System::SetGLVertexAttributeBinding(OpenGLUInt attributeIndex, OpenGLUInt b
 {
     GLVertexAttribBinding(attributeIndex, bindingIndex);
 }
+
+void* System::GetGLMapForWrite(BindBuffer target, OpenGLUInt buffer) noexcept
+{
+    SetGLBindBuffer(target, buffer);
+    const auto mapped = GLMapBuffer(EnumCastUnderlying(target), EnumCastUnderlying(BufferLocking::WriteOnly));
+    SetGLBindBuffer(target, 0);
+
+    return mapped;
+}
+
+void System::SetGLUnmap(BindBuffer target, OpenGLUInt buffer) noexcept
+{
+    SetGLBindBuffer(target, buffer);
+    MAYBE_UNUSED const auto result = GLUnmapBuffer(EnumCastUnderlying(target));
+    SetGLBindBuffer(target, 0);
+}
+
+void System::SetGLUniformBlockBinding(OpenGLUInt program, OpenGLUInt uniformBlockIndex, OpenGLUInt uniformBlockBinding) noexcept
+{
+    GLUniformBlockBinding(program, uniformBlockIndex, uniformBlockBinding);
+}
+

@@ -11,8 +11,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/RendererEngine/BaseRenderer.h"
-#include "Rendering/Resources/Textures/LoadTexture.h"
+#include "Rendering/RendererEngine/BaseRenderer.h" 
 
 Rendering::PlatformTexture3DTesting::PlatformTexture3DTesting(const OStreamShared& stream)
     : ParentType{ stream }

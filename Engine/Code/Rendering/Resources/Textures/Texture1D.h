@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 20:16)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 13:54)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_1D_H
 #define RENDERING_RESOURCES_TEXTURE_1D_H
@@ -27,7 +27,7 @@ namespace Rendering
         using ParentType = TextureSingle;
 
     public:
-        Texture1D(DataFormatType format, int length, bool hasMipMaps);
+        Texture1D(const std::string& name, DataFormatType format, int length, bool hasMipMaps, bool createStorage = true);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -48,9 +48,6 @@ namespace Rendering
         NODISCARD bool HasMipMaps() const noexcept override;
 
         NODISCARD int GetNumElementsFor(int level) const override;
-
-        void SaveToFile(WriteFileManager& outFile) const override;
-        void ReadFromFile(ReadFileManager& inFile) override;
 
         NODISCARD int GetLength() const;
 

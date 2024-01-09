@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:24)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/06 16:09)
 
 #include "Rendering/RenderingExport.h"
 
@@ -14,7 +14,6 @@
 #include "System/OpenGL/OpenGLBase.h"
 #include "System/OpenGL/OpenGLPolygon.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/OpenGLRenderer/Detail/State/OpenGLRasterizerStateImpl.h"
 
@@ -32,93 +31,31 @@ void Rendering::OpenGLRasterizerState::Enable() noexcept(gAssert < 3 || gMathema
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    System::SetGLPolygonMode(System::RasterizerStateCullFace::FrontAndBack, impl->GetFillMode());
+    SetGLPolygonMode(System::RasterizerStateCullFace::FrontAndBack, impl->GetFillMode());
 
     if (impl->GetCullFace() != System::RasterizerStateCullFace::None)
     {
-        System::EnableGLState(System::OpenGLEnable::CullFace);
-        System::SetGLFrontFace(impl->GetFrontFace());
-        System::SetGLCullFace(impl->GetCullFace());
+        EnableGLState(System::OpenGLEnable::CullFace);
+        SetGLFrontFace(impl->GetFrontFace());
+        SetGLCullFace(impl->GetCullFace());
     }
     else
     {
-        System::DisableGLState(System::OpenGLEnable::CullFace);
+        DisableGLState(System::OpenGLEnable::CullFace);
     }
 
     if (Mathematics::MathF::Approximate(impl->GetDepthScale(), 0.0f) && Mathematics::MathF::Approximate(impl->GetDepthBias(), 0.0f))
     {
-        System::EnableGLState(System::OpenGLEnable::PolygonOffsetFill);
-        System::EnableGLState(System::OpenGLEnable::PolygonOffsetLine);
-        System::EnableGLState(System::OpenGLEnable::PolygonOffsetPoint);
+        EnableGLState(System::OpenGLEnable::PolygonOffsetFill);
+        EnableGLState(System::OpenGLEnable::PolygonOffsetLine);
+        EnableGLState(System::OpenGLEnable::PolygonOffsetPoint);
         System::SetGLPolygonOffset(impl->GetDepthScale(), impl->GetDepthBias());
     }
     else
     {
-        System::DisableGLState(System::OpenGLEnable::PolygonOffsetFill);
-        System::DisableGLState(System::OpenGLEnable::PolygonOffsetLine);
-        System::DisableGLState(System::OpenGLEnable::PolygonOffsetPoint);
+        DisableGLState(System::OpenGLEnable::PolygonOffsetFill);
+        DisableGLState(System::OpenGLEnable::PolygonOffsetLine);
+        DisableGLState(System::OpenGLEnable::PolygonOffsetPoint);
     }
 }
-
-bool Rendering::OpenGLRasterizerState::Update(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLRasterizerState::Update(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLRasterizerState::CopyGpuToCpu()
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLRasterizerState::CopyGpuToCpu(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLRasterizerState::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLRasterizerState::CopyCpuToGpu()
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLRasterizerState::CopyCpuToGpu(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLRasterizerState::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLRasterizerState::GetNumActiveElements()
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
+ 

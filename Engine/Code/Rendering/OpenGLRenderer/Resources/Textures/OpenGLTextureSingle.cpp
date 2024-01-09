@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:27)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/08 15:55)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,7 +18,6 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/OpenGLRenderer/Detail/Resources/Textures/OpenGLTextureSingleImpl.h"
-#include "Rendering/Resources/Flags/BufferFlags.h"
 #include "Rendering/Resources/Flags/CopyType.h"
 #include "Rendering/Resources/Flags/UsageType.h"
 
@@ -55,18 +54,25 @@ Rendering::ConstTextureSingleSharedPtr Rendering::OpenGLTextureSingle::GetTextur
     return boost::polymorphic_pointer_cast<const TextureSingle>(GetGraphicsObject());
 }
 
+Rendering::TextureSingleSharedPtr Rendering::OpenGLTextureSingle::GetTextureSingle()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return boost::polymorphic_pointer_cast<TextureSingle>(GetGraphicsObject());
+}
+
 void Rendering::OpenGLTextureSingle::Initialize()
 {
     const auto prevBinding = GetGLInteger(GetTargetBinding());
-    System::SetGLBindTexture(GetTarget(), GetGLHandle());
+    SetGLBindTexture(GetTarget(), GetGLHandle());
 
-    System::SetGLPixelStore(System::PixelStore::UnpackAlignment, 1);
-    System::SetGLPixelStore(System::PixelStore::PackAlignment, 1);
+    SetGLPixelStore(System::PixelStore::UnpackAlignment, 1);
+    SetGLPixelStore(System::PixelStore::PackAlignment, 1);
 
-    System::SetGLTexturesParameter(GetTarget(), System::TextureParameter::TextureBaseLevel, 0);
-    System::SetGLTexturesParameter(GetTarget(), System::TextureParameter::TextureMaxLevel, GetNumLevels() - 1);
+    SetGLTexturesParameter(GetTarget(), System::TextureParameter::TextureBaseLevel, 0);
+    SetGLTexturesParameter(GetTarget(), System::TextureParameter::TextureMaxLevel, GetNumLevels() - 1);
 
-    auto texture = GetTexture();
+    const auto texture = GetTexture();
 
     if (CanAutoGenerateMipmaps())
     {
@@ -85,14 +91,14 @@ void Rendering::OpenGLTextureSingle::Initialize()
         }
     }
 
-    System::SetGLBindTexture(GetTarget(), prevBinding);
+    SetGLBindTexture(GetTarget(), prevBinding);
 }
 
 bool Rendering::OpenGLTextureSingle::Update()
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto texture = GetTexture();
+    const auto texture = GetTexture();
 
     if (CanAutoGenerateMipmaps())
     {
@@ -104,8 +110,7 @@ bool Rendering::OpenGLTextureSingle::Update()
     }
     else
     {
-        const auto count = texture->GetNumLevels();
-        for (auto level = 0; level < count; ++level)
+        for (auto level = 0; level < texture->GetNumLevels(); ++level)
         {
             if (!Update(level))
             {
@@ -121,7 +126,7 @@ bool Rendering::OpenGLTextureSingle::CopyCpuToGpu()
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto texture = GetTexture();
+    const auto texture = GetTexture();
 
     if (CanAutoGenerateMipmaps())
     {
@@ -133,8 +138,7 @@ bool Rendering::OpenGLTextureSingle::CopyCpuToGpu()
     }
     else
     {
-        const auto count = texture->GetNumLevels();
-        for (auto level = 0; level < count; ++level)
+        for (auto level = 0; level < texture->GetNumLevels(); ++level)
         {
             if (!CopyCpuToGpu(level))
             {
@@ -150,9 +154,9 @@ bool Rendering::OpenGLTextureSingle::CopyGpuToCpu()
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto texture = GetTexture();
-    const auto count = texture->GetNumLevels();
-    for (auto level = 0; level < count; ++level)
+    const auto texture = GetTexture();
+
+    for (auto level = 0; level < texture->GetNumLevels(); ++level)
     {
         if (!CopyGpuToCpu(level))
         {
@@ -167,8 +171,8 @@ bool Rendering::OpenGLTextureSingle::Update(int level)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto texture = GetTexture();
-    if (texture->GetUsage() != UsageType::DynamicUpdate)
+    if (const auto texture = GetTexture();
+        texture->GetUsage() != UsageType::DynamicUpdate)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("纹理使用必须为DynamicUpdate。"));
     }
@@ -197,36 +201,35 @@ bool Rendering::OpenGLTextureSingle::CopyGpuToCpu(int level)
         return false;
     }
 
-    auto texture = boost::polymorphic_pointer_cast<Texture>(GetGraphicsObject());
+    const auto texture = GetTextureSingle();
 
-    const auto count = texture->GetNumLevels();
-    if (level >= count)
+    if (texture->GetNumLevels() <= level)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("纹理级别超出范围。"));
     }
 
     const auto pixBuffer = impl->GetLevelPixelPackBuffer(level);
-    if (0 == pixBuffer)
+    if (pixBuffer == 0)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("未为级别") + System::ToString(level) + SYSTEM_TEXT("定义暂存缓冲区。"));
     }
 
     const auto data = texture->GetDataFor(0, level);
     const auto numBytes = texture->GetNumLevelBytes(level);
-    if (0 == numBytes)
+    if (numBytes == 0)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("没有纹理级别") + System::ToString(level) + SYSTEM_TEXT("的目标数据。"));
     }
 
     auto const textureTarget = GetTarget();
-    System::SetGLBindTexture(textureTarget, GetGLHandle());
+    SetGLBindTexture(textureTarget, GetGLHandle());
 
-    System::SetGLBindBuffer(System::BindBuffer::PixelUnpackBuffer, pixBuffer);
-    System::GetGLTexturesImage(textureTarget, level, GetExternalFormat(), GetExternalType(), nullptr);
-    System::GetGLBufferSubData(System::BindBuffer::PixelPackBuffer, 0, numBytes, &*data.GetCurrent());
-    System::SetGLBindBuffer(System::BindBuffer::PixelPackBuffer, 0);
+    SetGLBindBuffer(System::BindBuffer::PixelUnpackBuffer, pixBuffer);
+    GetGLTexturesImage(textureTarget, level, GetExternalFormat(), GetExternalType(), nullptr);
+    GetGLBufferSubData(System::BindBuffer::PixelPackBuffer, 0, numBytes, &*data.GetCurrent());
+    SetGLBindBuffer(System::BindBuffer::PixelPackBuffer, 0);
 
-    System::SetGLBindTexture(textureTarget, 0);
+    SetGLBindTexture(textureTarget, 0);
 
     return true;
 }
@@ -238,11 +241,11 @@ bool Rendering::OpenGLTextureSingle::GenerateMipmaps()
     if (CanAutoGenerateMipmaps())
     {
         const auto prevBinding = GetGLInteger(GetTargetBinding());
-        System::SetGLBindTexture(GetTarget(), GetGLHandle());
+        SetGLBindTexture(GetTarget(), GetGLHandle());
 
-        System::SetGLGenerateMipmap(GetTarget());
+        SetGLGenerateMipmap(GetTarget());
 
-        System::SetGLBindTexture(GetTarget(), prevBinding);
+        SetGLBindTexture(GetTarget(), prevBinding);
 
         return true;
     }
@@ -250,47 +253,46 @@ bool Rendering::OpenGLTextureSingle::GenerateMipmaps()
     return false;
 }
 
-bool Rendering::OpenGLTextureSingle::DoCopyCpuToGpu(MAYBE_UNUSED int level)
+bool Rendering::OpenGLTextureSingle::DoCopyCpuToGpu(int level)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto texture = boost::polymorphic_pointer_cast<Texture>(GetGraphicsObject());
+    const auto texture = GetTexture();
 
-    if (CanAutoGenerateMipmaps() && (level > 0))
+    if (CanAutoGenerateMipmaps() && (0 < level))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("无法更新GPU中自动生成的mipmap。"));
     }
 
-    const auto count = texture->GetNumLevels();
-    if (level >= count)
+    if (texture->GetNumLevels() <= level)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("纹理级别超出范围。"));
     }
 
     const auto data = texture->GetDataFor(0, level);
     const auto numBytes = texture->GetNumLevelBytes(level);
-    if (0 == numBytes)
+    if (numBytes == 0)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("没有纹理级别") + System::ToString(level) + SYSTEM_TEXT("的源数据"));
     }
 
     const auto textureTarget = GetTarget();
-    System::SetGLBindTexture(textureTarget, GetGLHandle());
+    SetGLBindTexture(textureTarget, GetGLHandle());
 
-    const auto pixBuffer = impl->GetLevelPixelUnpackBuffer(level);
-    if (0 != pixBuffer)
+    if (const auto pixBuffer = impl->GetLevelPixelUnpackBuffer(level);
+        pixBuffer != 0)
     {
-        System::SetGLBindBuffer(System::BindBuffer::PixelUnpackBuffer, pixBuffer);
-        System::SetGLBufferSubData(System::BindBuffer::PixelUnpackBuffer, 0, numBytes, &*data.GetCurrent());
+        SetGLBindBuffer(System::BindBuffer::PixelUnpackBuffer, pixBuffer);
+        SetGLBufferSubData(System::BindBuffer::PixelUnpackBuffer, 0, numBytes, data.GetData());
         LoadTextureLevel(level, ConstSpanIterator{ data.GetBegin(), data.GetBegin() });
-        System::SetGLBindBuffer(System::BindBuffer::PixelUnpackBuffer, 0);
+        SetGLBindBuffer(System::BindBuffer::PixelUnpackBuffer, 0);
     }
     else
     {
         LoadTextureLevel(level, ConstSpanIterator{ data.GetBegin(), data.GetEnd(), data.GetCurrent() });
     }
 
-    System::SetGLBindTexture(textureTarget, 0);
+    SetGLBindTexture(textureTarget, 0);
 
     return true;
 }
@@ -299,7 +301,7 @@ void Rendering::OpenGLTextureSingle::CreateStaging()
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto texture = GetTexture();
+    const auto texture = GetTexture();
     const auto copyType = texture->GetCopy();
 
     const auto createPixelUnpackBuffers = (copyType == CopyType::CpuToStaging) || (copyType == CopyType::Bidirectional);
@@ -312,16 +314,16 @@ void Rendering::OpenGLTextureSingle::CreateStaging()
     {
         for (auto level = 0; level < GetNumLevels(); ++level)
         {
-            auto pixBuffer = impl->GetLevelPixelUnpackBuffer(level);
-            if (0 == pixBuffer)
+            if (auto pixBuffer = impl->GetLevelPixelUnpackBuffer(level);
+                pixBuffer == 0)
             {
                 const auto numBytes = texture->GetNumLevelBytes(level);
 
                 pixBuffer = System::GetGLGenBuffers();
                 impl->SetLevelPixelUnpackBuffer(level, pixBuffer);
-                System::SetGLBindBuffer(System::BindBuffer::PixelUnpackBuffer, pixBuffer);
-                System::SetGLBufferData(System::BindBuffer::PixelUnpackBuffer, numBytes, nullptr, usage);
-                System::SetGLBindBuffer(System::BindBuffer::PixelUnpackBuffer, 0);
+                SetGLBindBuffer(System::BindBuffer::PixelUnpackBuffer, pixBuffer);
+                SetGLBufferData(System::BindBuffer::PixelUnpackBuffer, numBytes, nullptr, usage);
+                SetGLBindBuffer(System::BindBuffer::PixelUnpackBuffer, 0);
             }
         }
     }
@@ -330,18 +332,17 @@ void Rendering::OpenGLTextureSingle::CreateStaging()
     {
         for (auto level = 0; level < GetNumLevels(); ++level)
         {
-            auto pixBuffer = impl->GetLevelPixelPackBuffer(level);
-
-            if (0 == pixBuffer)
+            if (auto pixBuffer = impl->GetLevelPixelPackBuffer(level);
+                pixBuffer == 0)
             {
                 const auto numBytes = texture->GetNumLevelBytes(level);
 
                 pixBuffer = System::GetGLGenBuffers();
                 impl->SetLevelPixelPackBuffer(level, pixBuffer);
 
-                System::SetGLBindBuffer(System::BindBuffer::PixelPackBuffer, pixBuffer);
-                System::SetGLBufferData(System::BindBuffer::PixelPackBuffer, numBytes, nullptr, usage);
-                System::SetGLBindBuffer(System::BindBuffer::PixelPackBuffer, 0);
+                SetGLBindBuffer(BindBuffer::PixelPackBuffer, pixBuffer);
+                SetGLBufferData(BindBuffer::PixelPackBuffer, numBytes, nullptr, usage);
+                SetGLBindBuffer(BindBuffer::PixelPackBuffer, 0);
             }
         }
     }

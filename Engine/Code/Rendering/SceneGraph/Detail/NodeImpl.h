@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.2 (2023/12/08 09:47)
+/// 版本：1.0.0.3 (2023/12/28 17:42)
 
 #ifndef RENDERING_SCENE_GRAPH_NODE_IMPL_H
 #define RENDERING_SCENE_GRAPH_NODE_IMPL_H
@@ -15,9 +15,8 @@
 #include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Mathematics/Algebra/BoundingSphere.h"
-#include "Rendering/SceneGraph/Culler.h"
-#include "Rendering/SceneGraph/SceneGraphFwd.h"
 #include "Rendering/SceneGraph/Spatial.h"
+#include "Rendering/Visibility/Culler.h"
 
 #include <string>
 #include <vector>
@@ -73,7 +72,7 @@ namespace Rendering
 
         void Clear() noexcept;
 
-        NODISCARD PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const;
+        NODISCARD PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax, int numThreads, float maxDistance) const;
 
     private:
         using ObjectAssociated = CoreTools::ObjectAssociated<Spatial>;

@@ -1,16 +1,18 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 12:33)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 13:59)
 
 #include "Rendering/RenderingExport.h"
 
 #include "DataFormat.h"
 #include "Flags/ChannelType.h"
+
+#include <array>
 
 const std::string& Rendering::DataFormat::GetName(DataFormatType type)
 {
@@ -136,7 +138,7 @@ const std::string& Rendering::DataFormat::GetName(DataFormatType type)
 
 int Rendering::DataFormat::GetNumBytesPerStruct(DataFormatType type)
 {
-    static const std::array<int, numFormats> numBytesPerStruct{
+    static constexpr std::array numBytesPerStruct{
         0,  // Unknown
         16,  // R32G32B32A32Typeless
         16,  // R32G32B32A32Float
@@ -261,7 +263,7 @@ int Rendering::DataFormat::GetNumBytesPerStruct(DataFormatType type)
 
 int Rendering::DataFormat::GetNumChannels(DataFormatType type)
 {
-    static const std::array<int, numFormats> numChannels{
+    static constexpr std::array numChannels{
         0,  // Unknown
         4,  // R32G32B32A32Typeless
         4,  // R32G32B32A32Float
@@ -386,7 +388,7 @@ int Rendering::DataFormat::GetNumChannels(DataFormatType type)
 
 Rendering::ChannelType Rendering::DataFormat::GetChannelType(DataFormatType type)
 {
-    static const std::array<ChannelType, numFormats> channelType{
+    static constexpr std::array channelType{
         ChannelType::UnSupported,  // Unknown
         ChannelType::UnSupported,  // R32G32B32A32Typeless
         ChannelType::Float,  // R32G32B32A32Float
@@ -511,7 +513,7 @@ Rendering::ChannelType Rendering::DataFormat::GetChannelType(DataFormatType type
 
 bool Rendering::DataFormat::ConvertChannel(DataFormatType type)
 {
-    static const std::array<bool, numFormats> convertChannel{
+    static constexpr std::array convertChannel{
         false,  // Unknown
         false,  // R32G32B32A32Typeless
         false,  // R32G32B32A32Float
@@ -636,7 +638,7 @@ bool Rendering::DataFormat::ConvertChannel(DataFormatType type)
 
 bool Rendering::DataFormat::IsSupported(DataFormatType type)
 {
-    static const std::array<bool, numFormats> supported{
+    static constexpr std::array supported{
         false,  // Unknown
         true,  // R32G32B32A32Typeless
         true,  // R32G32B32A32Float

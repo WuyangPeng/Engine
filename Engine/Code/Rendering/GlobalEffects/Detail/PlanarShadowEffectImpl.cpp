@@ -19,7 +19,6 @@
 #include "Rendering/LocalEffects/ConstantColorEffect.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Buffers/ConstantBufferDetail.h"
-#include "Rendering/SceneGraph/Flags/CullingModeFlags.h"
 #include "Rendering/SceneGraph/Node.h"
 #include "Rendering/SceneGraph/ProjectionViewWorldUpdater.h"
 #include "Rendering/Shaders/ProgramFactory.h"
@@ -31,6 +30,7 @@
 #include "Rendering/State/Flags/DepthStencilStateComparison.h"
 #include "Rendering/State/Flags/DepthStencilStateOperation.h"
 #include "Rendering/State/Flags/DepthStencilStateWriteMask.h"
+#include "Rendering/Visibility/Flags/CullingModeFlags.h"
 
 Rendering::PlanarShadowEffectImpl::PlanarShadowEffectImpl(const BaseRendererSharedPtr& engine,
                                                           const ProgramFactorySharedPtr& factory,
@@ -160,11 +160,11 @@ void Rendering::PlanarShadowEffectImpl::Draw(const BaseRendererSharedPtr& engine
                 color.Increase(value[3]);
             }
 
-            MAYBE_UNUSED const auto updateResult = engine->Update(constantBuffer);
+            auto updateResult = engine->Update(constantBuffer);
 
-            projectionViewWorldMatrices.Unsubscribe(visual);
+            updateResult = projectionViewWorldMatrices.Unsubscribe(visual);
             visual->SetVisualEffect(casterEffects.at(j));
-            projectionViewWorldMatrices.Subscribe(visual);
+            updateResult = projectionViewWorldMatrices.Subscribe(visual);
         }
 
         projectionViewWorldMatrices.Update();
@@ -174,9 +174,9 @@ void Rendering::PlanarShadowEffectImpl::Draw(const BaseRendererSharedPtr& engine
         for (auto j = 0; j < boost::numeric_cast<int>(casterVisuals.size()); ++j)
         {
             const auto& visual = casterVisuals.at(j);
-            projectionViewWorldMatrices.Unsubscribe(visual);
+            auto updateResult = projectionViewWorldMatrices.Unsubscribe(visual);
             visual->SetVisualEffect(saveVisualEffects.at(j));
-            projectionViewWorldMatrices.Subscribe(visual);
+            updateResult = projectionViewWorldMatrices.Subscribe(visual);
         }
 
         camera->SetPreViewMatrix(Mathematics::Matrix<float>::GetIdentityMatrix());

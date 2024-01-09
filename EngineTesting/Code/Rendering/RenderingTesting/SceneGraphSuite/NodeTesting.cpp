@@ -17,8 +17,8 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/BoundingSphereDetail.h"
 #include "Mathematics/Algebra/TransformDetail.h"
-#include "Rendering/SceneGraph/Flags/CullingModeFlags.h"
 #include "Rendering/SceneGraph/Node.h"
+#include "Rendering/Visibility/Flags/CullingModeFlags.h"
 
 Rendering::NodeTesting::NodeTesting(const OStreamShared& stream)
     : ParentType{ stream },

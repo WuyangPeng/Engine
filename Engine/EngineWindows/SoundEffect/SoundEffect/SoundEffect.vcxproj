@@ -287,7 +287,7 @@
     <ClInclude Include="..\..\..\Code\SoundEffect\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\Code\SoundEffect\Interface\Interface.h" />
     <ClInclude Include="..\..\..\Code\SoundEffect\Interface\InterfaceFwd.h" />
-    <ClInclude Include="..\..\..\Code\SoundEffect\Interface\User.h" />
+    <ClInclude Include="..\..\..\Code\SoundEffect\Interface\Placeholder.h" />
     <ClInclude Include="..\..\..\Code\SoundEffect\Ogg\Ogg.h" />
     <ClInclude Include="..\..\..\Code\SoundEffect\Ogg\OggFwd.h" />
     <ClInclude Include="..\..\..\Code\SoundEffect\OpenAL\OpenAL.h" />

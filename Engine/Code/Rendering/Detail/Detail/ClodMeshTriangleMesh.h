@@ -10,11 +10,11 @@
 #ifndef RENDERING_DETAIL_CLOD_MESH_TRIANGLE_MESH_H
 #define RENDERING_DETAIL_CLOD_MESH_TRIANGLE_MESH_H
 
+#include "Mathematics/Algebra/Vector3.h"
 #include "Rendering/RenderingDll.h"
 
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
-#include "Rendering/SceneGraph/TrianglesMesh.h"
 
 namespace Rendering
 {
@@ -24,7 +24,7 @@ namespace Rendering
         using ClassType = ClodMeshTriangleMesh;
 
     public:
-        explicit ClodMeshTriangleMesh(TrianglesMesh& mesh);
+        ClodMeshTriangleMesh() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -37,7 +37,7 @@ namespace Rendering
 
         NODISCARD Mathematics::Vector3F GetPosition(int index) const noexcept;
 
-        NODISCARD const char* GetVertexBufferReadOnlyData() const;
+        NODISCARD const char* GetVertexBufferReadOnlyData() const noexcept;
         NODISCARD int GetStride() const noexcept;
 
         void SetNewVertexBufferData(const std::vector<char>& newData);
@@ -50,7 +50,7 @@ namespace Rendering
         int numTriangles;
         IndexBufferSharedPtr indixBuffer;
         VertexBufferSharedPtr vertexBuffer;
-        VertexBuffer vertexBufferAccessor;
+        VertexBufferSharedPtr vertexBufferAccessor;
     };
 }
 

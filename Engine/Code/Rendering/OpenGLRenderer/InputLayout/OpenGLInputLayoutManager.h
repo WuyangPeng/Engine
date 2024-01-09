@@ -27,6 +27,7 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(OpenGLInputLayoutManager);
         using ParentType = InputLayoutManager;
+
         using OpenGLUInt = System::OpenGLUInt;
         using OpenGLInputLayoutSharedPtr = std::shared_ptr<OpenGLInputLayout>;
 

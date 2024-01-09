@@ -23,8 +23,11 @@ namespace Rendering
     {
     public:
         using ClassType = OpenGLDepthStencilStateImpl;
-        using OpenGLInt = System::OpenGLInt; 
-        using DepthStencilStateMode = System::DepthStencilStateMode;
+
+        using OpenGLInt = System::OpenGLInt;
+        using StateMode = System::DepthStencilStateMode;
+        using StateOperation = System::DepthStencilStateOperation;
+        using StateWriteMask = System::DepthStencilStateWriteMask;
 
     public:
         OpenGLDepthStencilStateImpl() noexcept;
@@ -32,18 +35,18 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD static DepthStencilStateMode GetDepthStencilStateMode(DepthStencilStateComparison depthStencilStateComparison);
-        NODISCARD static System::DepthStencilStateOperation GetDepthStencilStateOperation(DepthStencilStateOperation depthStencilStateOperation);
-        NODISCARD static System::DepthStencilStateWriteMask GetDepthStencilStateWriteMask(DepthStencilStateWriteMask depthStencilStateWriteMask);
+        NODISCARD static StateMode GetDepthStencilStateMode(DepthStencilStateComparison depthStencilStateComparison);
+        NODISCARD static StateOperation GetDepthStencilStateOperation(DepthStencilStateOperation depthStencilStateOperation);
+        NODISCARD static StateWriteMask GetDepthStencilStateWriteMask(DepthStencilStateWriteMask depthStencilStateWriteMask);
 
         NODISCARD bool IsDepthEnable() const noexcept;
         void SetDepthEnable(bool aDepthEnable) noexcept;
 
-        NODISCARD System::DepthStencilStateWriteMask GetWriteMask() const noexcept;
-        void SetWriteMask(System::DepthStencilStateWriteMask aWriteMask) noexcept;
+        NODISCARD StateWriteMask GetWriteMask() const noexcept;
+        void SetWriteMask(StateWriteMask aWriteMask) noexcept;
 
-        NODISCARD DepthStencilStateMode GetComparison() const noexcept;
-        void SetComparison(DepthStencilStateMode aComparison) noexcept;
+        NODISCARD StateMode GetComparison() const noexcept;
+        void SetComparison(StateMode aComparison) noexcept;
 
         NODISCARD bool IsStencilEnable() const noexcept;
         void SetStencilEnable(bool aStencilEnable) noexcept;
@@ -57,34 +60,34 @@ namespace Rendering
         NODISCARD OpenGLInt GetReference() const noexcept;
         void SetReference(OpenGLInt aReference) noexcept;
 
-        NODISCARD System::DepthStencilStateOperation GetFrontOnFail() const noexcept;
-        void SetFrontOnFail(System::DepthStencilStateOperation onFail) noexcept;
+        NODISCARD StateOperation GetFrontOnFail() const noexcept;
+        void SetFrontOnFail(StateOperation onFail) noexcept;
 
-        NODISCARD System::DepthStencilStateOperation GetFrontOnZFail() const noexcept;
-        void SetFrontOnZFail(System::DepthStencilStateOperation onZFail) noexcept;
+        NODISCARD StateOperation GetFrontOnZFail() const noexcept;
+        void SetFrontOnZFail(StateOperation onZFail) noexcept;
 
-        NODISCARD System::DepthStencilStateOperation GetFrontOnZPass() const noexcept;
-        void SetFrontOnZPass(System::DepthStencilStateOperation onZPass) noexcept;
+        NODISCARD StateOperation GetFrontOnZPass() const noexcept;
+        void SetFrontOnZPass(StateOperation onZPass) noexcept;
 
-        NODISCARD System::DepthStencilStateMode GetFrontComparison() const noexcept;
-        void SetFrontComparison(System::DepthStencilStateMode aComparison) noexcept;
+        NODISCARD StateMode GetFrontComparison() const noexcept;
+        void SetFrontComparison(StateMode aComparison) noexcept;
 
-        NODISCARD System::DepthStencilStateOperation GetBackOnFail() const noexcept;
-        void SetBackOnFail(System::DepthStencilStateOperation onFail) noexcept;
+        NODISCARD StateOperation GetBackOnFail() const noexcept;
+        void SetBackOnFail(StateOperation onFail) noexcept;
 
-        NODISCARD System::DepthStencilStateOperation GetBackOnZFail() const noexcept;
-        void SetBackOnZFail(System::DepthStencilStateOperation onZFail) noexcept;
+        NODISCARD StateOperation GetBackOnZFail() const noexcept;
+        void SetBackOnZFail(StateOperation onZFail) noexcept;
 
-        NODISCARD System::DepthStencilStateOperation GetBackOnZPass() const noexcept;
-        void SetBackOnZPass(System::DepthStencilStateOperation onZPass) noexcept;
+        NODISCARD StateOperation GetBackOnZPass() const noexcept;
+        void SetBackOnZPass(StateOperation onZPass) noexcept;
 
-        NODISCARD System::DepthStencilStateMode GetBackComparison() const noexcept;
-        void SetBackComparison(System::DepthStencilStateMode aComparison) noexcept;
+        NODISCARD StateMode GetBackComparison() const noexcept;
+        void SetBackComparison(StateMode aComparison) noexcept;
 
     private:
         bool depthEnable;
-        System::DepthStencilStateWriteMask writeMask;
-        DepthStencilStateMode comparison;
+        StateWriteMask writeMask;
+        StateMode comparison;
         bool stencilEnable;
         OpenGLInt stencilReadMask;
         OpenGLInt stencilWriteMask;

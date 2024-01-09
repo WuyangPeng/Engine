@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/05 14:34)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/26 15:10)
 
 #include "Rendering/RenderingExport.h"
 
@@ -32,13 +32,47 @@ Rendering::ProgramDefines::ProgramDefines(CoreTools::DisableNotThrow disableNotT
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ProgramDefines)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ProgramDefines, Remove, std::string, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ProgramDefines, Clear, void)
+void Rendering::ProgramDefines::Remove(const std::string& name)
+{
+    RENDERING_CLASS_IS_VALID_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ProgramDefines, Get, std::string, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ProgramDefines, GetSize, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ProgramDefines, begin, Rendering::ProgramDefines::ContainerConstIter)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ProgramDefines, end, Rendering::ProgramDefines::ContainerConstIter)
+    return impl->Remove(name);
+}
+
+void Rendering::ProgramDefines::Clear() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->Clear();
+}
+
+std::string Rendering::ProgramDefines::Get(const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->Get(name);
+}
+
+int Rendering::ProgramDefines::GetSize() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetSize();
+}
+
+Rendering::ProgramDefines::ContainerConstIter Rendering::ProgramDefines::begin() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->begin();
+}
+
+Rendering::ProgramDefines::ContainerConstIter Rendering::ProgramDefines::end() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->end();
+}
 
 void Rendering::ProgramDefines::Update(const std::string& name, const std::string& value)
 {

@@ -15,7 +15,6 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
-#include "Rendering/SceneGraph/Flags/CullingModeFlags.h"
 #include "Rendering/SceneGraph/Node.h"
 #include "Rendering/SceneGraph/ProjectionViewWorldUpdater.h"
 #include "Rendering/State/BlendState.h"
@@ -27,6 +26,7 @@
 #include "Rendering/State/Flags/DepthStencilStateWriteMask.h"
 #include "Rendering/State/Flags/RasterizerStateCull.h"
 #include "Rendering/State/RasterizerState.h"
+#include "Rendering/Visibility/Flags/CullingModeFlags.h"
 
 Rendering::PlanarReflectionEffectImpl::PlanarReflectionEffectImpl(const NodeSharedPtr& reflectionCaster,
                                                                   const VisualContainer& planeVisuals,

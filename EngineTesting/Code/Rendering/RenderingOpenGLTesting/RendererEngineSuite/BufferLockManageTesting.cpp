@@ -13,7 +13,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h" 
 #include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
-#include "Rendering/SceneGraph/LoadVisual.h"
 #include "Rendering/SceneGraph/Visual.h"
 
 Rendering::BufferLockManageTesting::BufferLockManageTesting(const OStreamShared& stream)

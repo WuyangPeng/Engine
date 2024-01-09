@@ -25,10 +25,6 @@
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
-#include "Rendering/SceneGraph/CameraManager.h"
-#include "Rendering/SceneGraph/LoadVisual.h"
-#include "Rendering/SceneGraph/SaveVisual.h"
-#include "Rendering/SceneGraph/TrianglesStrip.h"
 
 #include <random>
 #include <vector>
@@ -50,7 +46,7 @@ void Rendering::TrianglesStripTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    CameraManager::Create();
+
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateTrianglesStripFile);
     ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
@@ -60,7 +56,7 @@ void Rendering::TrianglesStripTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(FileTest);
     ASSERT_NOT_THROW_EXCEPTION_0(UpdateModelSpaceTest);
 
-    CameraManager::Destroy();
+
 
     CoreTools::InitTerm::ExecuteTerminator();
 }

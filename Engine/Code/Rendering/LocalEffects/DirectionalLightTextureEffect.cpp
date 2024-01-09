@@ -10,7 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "DirectionalLightTextureEffect.h"
-#include "Light.h"
+#include "Rendering/LocalEffects/Lighting.h" 
 #include "LightCameraGeometry.h"
 #include "Material.h"
 #include "Detail/DirectionalLightTextureEffectImpl.h"

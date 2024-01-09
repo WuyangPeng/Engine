@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/28 12:29)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/02 16:05)
 
 #include "Rendering/RenderingExport.h"
 
@@ -17,8 +17,6 @@
 #include "CoreTools/Helper/LogMacro.h"
 #include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
-
-using namespace std::literals;
 
 Rendering::AnalysisRendererParameter::AnalysisRendererParameter(const std::string& fileName)
     : rendererParameter{ RendererTypes::Default },
@@ -141,8 +139,8 @@ void Rendering::AnalysisRendererParameter::AnalysisWindowParameter()
 
 void Rendering::AnalysisRendererParameter::AnalysisWindowName()
 {
-    const auto className = windowParameterTree.get("ClassName", ""s);
-    const auto menuName = windowParameterTree.get("MenuName", ""s);
+    const auto className = windowParameterTree.get("ClassName", "");
+    const auto menuName = windowParameterTree.get("MenuName", "");
 
     rendererParameter->SetWindowClassName(CoreTools::StringConversion::MultiByteConversionStandard(className));
     rendererParameter->SetWindowMenuName(CoreTools::StringConversion::MultiByteConversionStandard(menuName));

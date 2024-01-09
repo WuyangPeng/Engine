@@ -325,7 +325,8 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
@@ -344,7 +345,8 @@ xcopy "$(ProjectDir)/Resource/AncientBooksCsv/*.*" "$(MillenniumHistoryEngineeri
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
@@ -368,7 +370,8 @@ xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(
 xcopy "$(ProjectDir)/Resource/AncientBooksCsv/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooksCsv/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|Win32'">
@@ -387,7 +390,8 @@ xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(
 xcopy "$(ProjectDir)/Resource/AncientBooksCsv/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooksCsv/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -405,7 +409,8 @@ xcopy "$(ProjectDir)/Resource/AncientBooksCsv/*.*" "$(MillenniumHistoryEngineeri
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
@@ -428,7 +433,8 @@ xcopy "$(ProjectDir)/Resource/AncientBooksCsv/*.*" "$(MillenniumHistoryEngineeri
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
@@ -456,7 +462,8 @@ xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(
 xcopy "$(ProjectDir)/Resource/AncientBooksCsv/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooksCsv/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|Win32'">
@@ -479,7 +486,8 @@ xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(
 xcopy "$(ProjectDir)/Resource/AncientBooksCsv/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooksCsv/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -493,7 +501,8 @@ xcopy "$(ProjectDir)/Resource/AncientBooksCsv/*.*" "$(MillenniumHistoryEngineeri
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
@@ -512,7 +521,8 @@ xcopy "$(ProjectDir)/Resource/AncientBooksCsv/*.*" "$(MillenniumHistoryEngineeri
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
@@ -536,7 +546,8 @@ xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(
 xcopy "$(ProjectDir)/Resource/AncientBooksCsv/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooksCsv/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|x64'">
@@ -555,7 +566,8 @@ xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(
 xcopy "$(ProjectDir)/Resource/AncientBooksCsv/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooksCsv/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -573,7 +585,8 @@ xcopy "$(ProjectDir)/Resource/AncientBooksCsv/*.*" "$(MillenniumHistoryEngineeri
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
@@ -596,7 +609,8 @@ xcopy "$(ProjectDir)/Resource/AncientBooksCsv/*.*" "$(MillenniumHistoryEngineeri
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
@@ -624,7 +638,8 @@ xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(
 xcopy "$(ProjectDir)/Resource/AncientBooksCsv/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooksCsv/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|x64'">
@@ -647,7 +662,8 @@ xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(
 xcopy "$(ProjectDir)/Resource/AncientBooksCsv/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooksCsv/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/Database.json" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

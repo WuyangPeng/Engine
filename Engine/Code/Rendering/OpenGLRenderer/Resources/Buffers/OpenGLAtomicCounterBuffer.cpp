@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:29)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/08 14:51)
 
 #include "Rendering/RenderingExport.h"
 
@@ -20,7 +20,7 @@
 Rendering::OpenGLAtomicCounterBuffer::OpenGLAtomicCounterBuffer(const RawBufferSharedPtr& buffer, const std::string& name)
     : ParentType{ buffer, name, BindBuffer::AtomicCounterBuffer }
 {
-    Initialize();
+    ParentType::Initialize();
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -34,49 +34,9 @@ Rendering::ConstRawBufferSharedPtr Rendering::OpenGLAtomicCounterBuffer::GetRawB
     return boost::polymorphic_pointer_cast<const RawBuffer>(GetGraphicsObject());
 }
 
-void Rendering::OpenGLAtomicCounterBuffer::Enable() noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
-}
-
-bool Rendering::OpenGLAtomicCounterBuffer::CopyGpuToCpu(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLAtomicCounterBuffer::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLAtomicCounterBuffer::CopyCpuToGpu(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLAtomicCounterBuffer::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLAtomicCounterBuffer::GetNumActiveElements()
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
 void Rendering::OpenGLAtomicCounterBuffer::AttachToUnit(OpenGLInt atomicCounterBufferUnit) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    System::SetGLBindBufferBase(BindBuffer::AtomicCounterBuffer, atomicCounterBufferUnit, GetGLHandle());
+    SetGLBindBufferBase(BindBuffer::AtomicCounterBuffer, atomicCounterBufferUnit, GetGLHandle());
 }

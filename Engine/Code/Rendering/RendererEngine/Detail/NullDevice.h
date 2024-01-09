@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/28 14:42)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/02 15:10)
 
 #ifndef RENDERING_RENDERER_ENGINE_NULL_DEVICE_H
 #define RENDERING_RENDERER_ENGINE_NULL_DEVICE_H
@@ -57,7 +57,7 @@ namespace Rendering
 
         void WaitForFinish() noexcept override;
         void Flush() noexcept override;
-        void Execute(const ComputeProgramSharedPtr& computeProgram, int numXGroups, int numYGroups, int numZGroups) noexcept override;
+        void Execute(RendererObjectBridge& rendererObjectBridge, ComputeProgram& computeProgram, int numXGroups, int numYGroups, int numZGroups) noexcept override;
 
     private:
         Viewport nullViewport;

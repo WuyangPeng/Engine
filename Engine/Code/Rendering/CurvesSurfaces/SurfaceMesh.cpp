@@ -28,13 +28,12 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, SurfaceMesh);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, SurfaceMesh);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, SurfaceMesh);
 
-Rendering::SurfaceMesh::SurfaceMesh(const VertexFormatSharedPtr& vformat,
-                                    const VertexBufferSharedPtr& vbuffer,
+Rendering::SurfaceMesh::SurfaceMesh(const VertexBufferSharedPtr& vbuffer,
                                     const IndexBufferSharedPtr& ibuffer,
                                     const Float2ArraySharedPtr& params,
                                     const std::vector<CoreTools::ObjectAssociated<SurfacePatch>>& patches,
                                     bool allowDynamicChange)
-    : ParentType{ vformat, vbuffer, ibuffer },
+    : ParentType{ "", vbuffer, ibuffer },
       origVBuffer{ vbuffer },
       origIBuffer{ ibuffer },
       origParams{ params },
@@ -156,8 +155,6 @@ std::vector<Rendering::SurfaceMesh::Triangle> Rendering::SurfaceMesh::Allocate(i
         numTotalTriangles = 4 * numTotalTriangles;
     }
 
-    const auto vstride = GetVertexFormat()->GetVertexSize();
-    SetVertexBuffer(VertexBuffer::Create("VertexBuffer", *GetVertexFormat(), vstride));
     std::vector<Triangle> triangles(numTotalTriangles);
     if (allowDynamicChange)
     {

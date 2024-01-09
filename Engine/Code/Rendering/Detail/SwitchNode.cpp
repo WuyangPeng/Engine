@@ -143,7 +143,7 @@ void Rendering::SwitchNode::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-Rendering::PickRecordContainer Rendering::SwitchNode::ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const
+Rendering::PickRecordContainer Rendering::SwitchNode::ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax, int numThreads, float maxDistance)
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -154,10 +154,10 @@ Rendering::PickRecordContainer Rendering::SwitchNode::ExecuteRecursive(const APo
     {
         if (GetWorldBound().TestIntersection(origin, direction, tMin, tMax))
         {
-            auto child = GetConstChild(active);
+            auto child = GetChild(active);
             if (child)
             {
-                auto childContainer = child->ExecuteRecursive(origin, direction, tMin, tMax);
+                auto childContainer = child->ExecuteRecursive(origin, direction, tMin, tMax, numThreads, maxDistance);
 
                 container.InsertPickRecord(childContainer);
             }

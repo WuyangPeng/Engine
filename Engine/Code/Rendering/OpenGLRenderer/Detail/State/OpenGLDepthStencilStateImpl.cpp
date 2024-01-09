@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:30)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/06 15:55)
 
 #include "Rendering/RenderingExport.h"
 
@@ -22,7 +22,7 @@
 Rendering::OpenGLDepthStencilStateImpl::OpenGLDepthStencilStateImpl() noexcept
     : depthEnable{ false },
       writeMask{ System::DepthStencilStateWriteMask::False },
-      comparison{ DepthStencilStateMode::Never },
+      comparison{ StateMode::Never },
       stencilEnable{ false },
       stencilReadMask{ 0 },
       stencilWriteMask{ 0 },
@@ -34,10 +34,10 @@ Rendering::OpenGLDepthStencilStateImpl::OpenGLDepthStencilStateImpl() noexcept
 }
 
 Rendering::OpenGLDepthStencilStateImpl::OpenGLDepthStencilStateImpl(const DepthStencilState& depthStencilState)
-    : depthEnable{ depthStencilState.IsDepthEnable() ? true : false },
+    : depthEnable{ depthStencilState.IsDepthEnable() },
       writeMask{ GetDepthStencilStateWriteMask(depthStencilState.GetWriteMask()) },
       comparison{ GetDepthStencilStateMode(depthStencilState.GetComparison()) },
-      stencilEnable{ depthStencilState.IsStencilEnable() ? true : false },
+      stencilEnable{ depthStencilState.IsStencilEnable() },
       stencilReadMask{ depthStencilState.GetStencilReadMask() },
       stencilWriteMask{ depthStencilState.GetStencilWriteMask() },
       frontFace{},
@@ -121,21 +121,21 @@ System::DepthStencilStateWriteMask Rendering::OpenGLDepthStencilStateImpl::GetWr
     return writeMask;
 }
 
-void Rendering::OpenGLDepthStencilStateImpl::SetWriteMask(System::DepthStencilStateWriteMask aWriteMask) noexcept
+void Rendering::OpenGLDepthStencilStateImpl::SetWriteMask(StateWriteMask aWriteMask) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     writeMask = aWriteMask;
 }
 
-Rendering::OpenGLDepthStencilStateImpl::DepthStencilStateMode Rendering::OpenGLDepthStencilStateImpl::GetComparison() const noexcept
+Rendering::OpenGLDepthStencilStateImpl::StateMode Rendering::OpenGLDepthStencilStateImpl::GetComparison() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return comparison;
 }
 
-void Rendering::OpenGLDepthStencilStateImpl::SetComparison(DepthStencilStateMode aComparison) noexcept
+void Rendering::OpenGLDepthStencilStateImpl::SetComparison(StateMode aComparison) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -205,7 +205,7 @@ System::DepthStencilStateOperation Rendering::OpenGLDepthStencilStateImpl::GetFr
     return frontFace.GetOnFail();
 }
 
-void Rendering::OpenGLDepthStencilStateImpl::SetFrontOnFail(System::DepthStencilStateOperation onFail) noexcept
+void Rendering::OpenGLDepthStencilStateImpl::SetFrontOnFail(StateOperation onFail) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -219,7 +219,7 @@ System::DepthStencilStateOperation Rendering::OpenGLDepthStencilStateImpl::GetFr
     return frontFace.GetOnZFail();
 }
 
-void Rendering::OpenGLDepthStencilStateImpl::SetFrontOnZFail(System::DepthStencilStateOperation onZFail) noexcept
+void Rendering::OpenGLDepthStencilStateImpl::SetFrontOnZFail(StateOperation onZFail) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -233,7 +233,7 @@ System::DepthStencilStateOperation Rendering::OpenGLDepthStencilStateImpl::GetFr
     return frontFace.GetOnZPass();
 }
 
-void Rendering::OpenGLDepthStencilStateImpl::SetFrontOnZPass(System::DepthStencilStateOperation onZPass) noexcept
+void Rendering::OpenGLDepthStencilStateImpl::SetFrontOnZPass(StateOperation onZPass) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -247,7 +247,7 @@ System::DepthStencilStateMode Rendering::OpenGLDepthStencilStateImpl::GetFrontCo
     return frontFace.GetComparison();
 }
 
-void Rendering::OpenGLDepthStencilStateImpl::SetFrontComparison(System::DepthStencilStateMode aComparison) noexcept
+void Rendering::OpenGLDepthStencilStateImpl::SetFrontComparison(StateMode aComparison) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -261,7 +261,7 @@ System::DepthStencilStateOperation Rendering::OpenGLDepthStencilStateImpl::GetBa
     return backFace.GetOnFail();
 }
 
-void Rendering::OpenGLDepthStencilStateImpl::SetBackOnFail(System::DepthStencilStateOperation onFail) noexcept
+void Rendering::OpenGLDepthStencilStateImpl::SetBackOnFail(StateOperation onFail) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -275,7 +275,7 @@ System::DepthStencilStateOperation Rendering::OpenGLDepthStencilStateImpl::GetBa
     return backFace.GetOnZFail();
 }
 
-void Rendering::OpenGLDepthStencilStateImpl::SetBackOnZFail(System::DepthStencilStateOperation onZFail) noexcept
+void Rendering::OpenGLDepthStencilStateImpl::SetBackOnZFail(StateOperation onZFail) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -289,7 +289,7 @@ System::DepthStencilStateOperation Rendering::OpenGLDepthStencilStateImpl::GetBa
     return backFace.GetOnZPass();
 }
 
-void Rendering::OpenGLDepthStencilStateImpl::SetBackOnZPass(System::DepthStencilStateOperation onZPass) noexcept
+void Rendering::OpenGLDepthStencilStateImpl::SetBackOnZPass(StateOperation onZPass) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -303,7 +303,7 @@ System::DepthStencilStateMode Rendering::OpenGLDepthStencilStateImpl::GetBackCom
     return backFace.GetComparison();
 }
 
-void Rendering::OpenGLDepthStencilStateImpl::SetBackComparison(System::DepthStencilStateMode aComparison) noexcept
+void Rendering::OpenGLDepthStencilStateImpl::SetBackComparison(StateMode aComparison) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 

@@ -1,6 +1,6 @@
 TODO Level 4
 
-0.9.1.4
+1.0.0.3
 
 1.（CharacterString）完成CharacterString非Windows平台的实现：CodePage。
 2.（CharacterString）完成CharacterString非Windows平台的实现：FormatErrorMessage、StringConversion、FormatString。

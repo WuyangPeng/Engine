@@ -10,15 +10,16 @@
 #ifndef RENDERING_LOCAL_EFFECTS_CUBE_MAP_EFFECT_H
 #define RENDERING_LOCAL_EFFECTS_CUBE_MAP_EFFECT_H
 
-#include "VisualEffect.h"
 #include "Rendering/RenderingDll.h"
 
+#include "VisualEffect.h"
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Rendering/Resources/ResourcesFwd.h"
-#include "Rendering/SceneGraph/SceneGraphFwd.h"
+#include "Rendering/SceneGraph/Spatial.h"
 #include "Rendering/State/StateFwd.h"
+#include "Rendering/Visibility/VisibilityFwd.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(CubeMapEffect, CubeMapEffectImpl);
 

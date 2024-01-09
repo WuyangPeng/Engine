@@ -86,7 +86,7 @@
     <ClInclude Include="..\..\..\Code\UserInterface\Interface\InterfaceFwd.h">
       <Filter>Interface 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\UserInterface\Interface\User.h">
+    <ClInclude Include="..\..\..\Code\UserInterface\Interface\Placeholder.h">
       <Filter>Interface 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\UserInterface\WxWidgets\WxWidgets.h">

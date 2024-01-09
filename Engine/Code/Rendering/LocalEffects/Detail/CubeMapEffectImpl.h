@@ -19,6 +19,7 @@
 #include "Rendering/Resources/ResourcesFwd.h"
 #include "Rendering/SceneGraph/SceneGraphFwd.h"
 #include "Rendering/State/StateFwd.h"
+#include "Rendering/Visibility/VisibilityFwd.h"
 
 #include <memory>
 

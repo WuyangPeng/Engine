@@ -1,19 +1,17 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 20:34)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 14:25)
 
 #include "Rendering/RenderingExport.h"
 
 #include "TextureCubeArray.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-#include "CoreTools/FileManager/ReadFileManager.h"
-#include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -30,14 +28,16 @@
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, TextureCubeArray)
 
-CORE_TOOLS_RTTI_DEFINE(Rendering, TextureCubeArray);
+CORE_TOOLS_RTTI_DEFINE(Rendering, TextureCubeArray)
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TextureCubeArray);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TextureCubeArray);
 
-Rendering::TextureCubeArray::TextureCubeArray(int numCubes, DataFormatType format, int length, bool hasMipMaps)
-    : ParentType{ ImplType::GetTotalElements(numCubes * System::EnumCastUnderlying(CubeFaceType::Count), length, length, 1, hasMipMaps),
+Rendering::TextureCubeArray::TextureCubeArray(const std::string& name, int numCubes, DataFormatType format, int length, bool hasMipMaps, bool createStorage)
+    : ParentType{ name,
+                  ImplType::GetTotalElements(numCubes * System::EnumCastUnderlying(CubeFaceType::Count), length, length, 1, hasMipMaps),
                   DataFormat::GetNumBytesPerStruct(format),
-                  GraphicsObjectType::TextureCubeArray },
+                  GraphicsObjectType::TextureCubeArray,
+                  createStorage },
       impl{ numCubes, format, length, hasMipMaps },
       numCubes{ numCubes }
 {
@@ -45,13 +45,6 @@ Rendering::TextureCubeArray::TextureCubeArray(int numCubes, DataFormatType forma
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, TextureCubeArray)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCubeArray, GetNumItems, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCubeArray, GetFormat, Rendering::DataFormatType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCubeArray, GetNumLevels, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, TextureCubeArray, GetDimension, int, int)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCubeArray, GetNumDimensions, int)
 
 int Rendering::TextureCubeArray::GetDimension(int index, int level) const
 {
@@ -66,44 +59,6 @@ int Rendering::TextureCubeArray::GetLevelOffset(int item, int level) const
 
     return impl->GetLevelOffset(item, level);
 }
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, TextureCubeArray, GetNumLevelBytes, int, int)
-
-void Rendering::TextureCubeArray::SaveToFile(WriteFileManager& outFile) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    ParentType::SaveTypeToFile(outFile);
-
-    impl->SaveToFile(outFile);
-
-    ParentType::SaveResourceDataToFile(outFile);
-
-    outFile.Write(sizeof(int32_t), &numCubes);
-
-    ParentType::SaveStorageDataToFile(outFile);
-}
-
-void Rendering::TextureCubeArray::ReadFromFile(ReadFileManager& inFile)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    impl->ReadFromFile(inFile);
-
-    ParentType::ReadResourceDataFromFile(inFile);
-
-    inFile.Read(sizeof(int32_t), &numCubes);
-
-    ParentType::ReadStorageDataFromFile(inFile);
-}
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, TextureCubeArray, GetWidth, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, TextureCubeArray, GetHeight, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCubeArray, HasMipMaps, bool)
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCubeArray, AutoGenerateMipMaps, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCubeArray, WantAutoGenerateMipMaps, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCubeArray, GetNumSubResources, int)
 
 int Rendering::TextureCubeArray::GetLength() const
 {
@@ -268,7 +223,7 @@ Rendering::Resource::SpanIterator Rendering::TextureCubeArray::GetDataForCubeArr
 
 Rendering::TextureCubeArray::RendererObjectSharedPtr Rendering::TextureCubeArray::CreateRendererObject(RendererTypes rendererTypes)
 {
-    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
     switch (rendererTypes)
     {
@@ -281,4 +236,88 @@ Rendering::TextureCubeArray::RendererObjectSharedPtr Rendering::TextureCubeArray
             THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
         }
     }
+}
+
+int Rendering::TextureCubeArray::GetNumItems() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNumItems();
+}
+
+int Rendering::TextureCubeArray::GetDimension(int index) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetDimension(index);
+}
+
+Rendering::DataFormatType Rendering::TextureCubeArray::GetFormat() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetFormat();
+}
+
+int Rendering::TextureCubeArray::GetNumLevels() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNumLevels();
+}
+
+int Rendering::TextureCubeArray::GetNumDimensions() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNumDimensions();
+}
+
+int Rendering::TextureCubeArray::GetNumLevelBytes(int level) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNumLevelBytes(level);
+}
+
+bool Rendering::TextureCubeArray::HasMipMaps() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->HasMipMaps();
+}
+
+int Rendering::TextureCubeArray::GetWidth() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetWidth();
+}
+
+int Rendering::TextureCubeArray::GetHeight() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetHeight();
+}
+
+void Rendering::TextureCubeArray::AutoGenerateMipMaps() noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->AutoGenerateMipMaps();
+}
+
+bool Rendering::TextureCubeArray::WantAutoGenerateMipMaps() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->WantAutoGenerateMipMaps();
+}
+
+int Rendering::TextureCubeArray::GetNumSubResources() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNumSubResources();
 }

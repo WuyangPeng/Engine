@@ -23,7 +23,7 @@ Rendering::ProjectedTextureEffectImpl::ProjectedTextureEffectImpl() noexcept
 Rendering::ProjectedTextureEffectImpl::ProjectedTextureEffectImpl(Texture2DSharedPtr texture, SamplerStateFilter filter, SamplerStateMode mode0, SamplerStateMode mode1, int numProjectorMatrixConstantBytes)
     : texture{ std::move(texture) },
       sampler{ std::make_shared<SamplerState>(filter, mode0, mode1) },
-      projectorMatrixConstant{ std::make_shared<ConstantBuffer>(numProjectorMatrixConstantBytes, true) }
+      projectorMatrixConstant{ std::make_shared<ConstantBuffer>("projectorMatrixConstant", numProjectorMatrixConstantBytes, true) }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

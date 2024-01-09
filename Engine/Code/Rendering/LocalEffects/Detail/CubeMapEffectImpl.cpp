@@ -21,8 +21,8 @@
 #include "Rendering/Resources/Textures/DrawTarget.h"
 #include "Rendering/Resources/Textures/TextureCube.h"
 #include "Rendering/SceneGraph/Camera.h"
-#include "Rendering/SceneGraph/Culler.h"
 #include "Rendering/State/SamplerState.h"
+#include "Rendering/Visibility/Culler.h"
 
 Rendering::CubeMapEffectImpl::CubeMapEffectImpl() noexcept
     : worldMatrixConstant{},
@@ -39,13 +39,13 @@ Rendering::CubeMapEffectImpl::CubeMapEffectImpl() noexcept
 }
 
 Rendering::CubeMapEffectImpl::CubeMapEffectImpl(TextureCubeSharedPtr texture, SamplerStateFilter filter, SamplerStateMode mode0, SamplerStateMode mode1, float reflectivity, bool depthRangeIs01, int numWorldMatrixConstantBytes, int numCameraWorldPositionConstantBytes, int numReflectivityConstantBytes)
-    : worldMatrixConstant{ std::make_shared<ConstantBuffer>(numWorldMatrixConstantBytes, true) },
-      cameraWorldPositionConstant{ std::make_shared<ConstantBuffer>(numCameraWorldPositionConstantBytes, true) },
-      reflectivityConstant{ std::make_shared<ConstantBuffer>(numReflectivityConstantBytes, true) },
+    : worldMatrixConstant{ std::make_shared<ConstantBuffer>("worldMatrixConstant", numWorldMatrixConstantBytes, true) },
+      cameraWorldPositionConstant{ std::make_shared<ConstantBuffer>("cameraWorldPositionConstant", numCameraWorldPositionConstantBytes, true) },
+      reflectivityConstant{ std::make_shared<ConstantBuffer>("reflectivityConstant", numReflectivityConstantBytes, true) },
       cubeTexture{ std::move(texture) },
       cubeSampler{ std::make_shared<SamplerState>(filter, mode0, mode1) },
       camera{ std::make_shared<Camera>(true, depthRangeIs01 ? DepthType::ZeroToOne : DepthType::MinusOneToOne, Mathematics::MathF::GetZeroTolerance()) },
-      target{ std::make_shared<DrawTarget>(1, cubeTexture->GetFormat(), cubeTexture->GetLength(), cubeTexture->GetLength(), true) },
+      target{ std::make_shared<DrawTarget>("target", 1, cubeTexture->GetFormat(), cubeTexture->GetLength(), cubeTexture->GetLength(), true) },
       depthRangeIs01{ depthRangeIs01 },
       dynamicUpdates{ false }
 {
@@ -74,7 +74,7 @@ void Rendering::CubeMapEffectImpl::UseDynamicUpdates(float dMin, float dMax)
     camera = std::make_shared<Camera>(true, depthRangeIs01 ? DepthType::ZeroToOne : DepthType::MinusOneToOne, Mathematics::MathF::GetZeroTolerance());
     camera->SetFrustum(90.0f, 1.0f, dMin, dMax);
 
-    target = std::make_shared<DrawTarget>(1, cubeTexture->GetFormat(), cubeTexture->GetLength(), cubeTexture->GetLength(), true);
+    target = std::make_shared<DrawTarget>("DrawTarget", 1, cubeTexture->GetFormat(), cubeTexture->GetLength(), cubeTexture->GetLength(), true);
     target->AutoGenerateRenderTargetMipMaps();
     target->GetRenderTargetTexture(0)->SetCopy(CopyType::StagingToCpu);
 

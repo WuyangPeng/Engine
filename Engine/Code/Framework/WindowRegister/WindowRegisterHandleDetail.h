@@ -21,7 +21,7 @@
 template <typename WindowsProcess>
 Framework::WindowRegisterHandle<WindowsProcess>::WindowRegisterHandle(const EnvironmentDirectory& environmentDirectory, HInstance instance, const char* commandLine, WindowPictorial pictorial, WindowName name, WindowsClassStyle styles)
     : environmentDirectory{ environmentDirectory },
-      windowProcess{ System::gMicroseconds / interval, environmentDirectory },
+      windowProcess{ System::gMillisecond / interval, environmentDirectory },
       command{ std::make_shared<CommandHandle>(commandLine) },
       windowRegisterParameter{ instance, styles },
       windowPictorial{ std::move(pictorial) },

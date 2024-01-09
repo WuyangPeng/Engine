@@ -10,7 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "DirectionalLightEffect.h"
-#include "Light.h"
+#include "Rendering/LocalEffects/Lighting.h" 
 #include "LightCameraGeometry.h"
 #include "Material.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"

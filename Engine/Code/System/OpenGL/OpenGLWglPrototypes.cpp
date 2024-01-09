@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/29 23:44)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/21 17:25)
 
 #include "System/SystemExport.h"
 
@@ -27,12 +27,12 @@ int System::GetWglSwapInterval() noexcept
     return WglGetSwapIntervalEXT();
 }
 
-System::OpenGLHglrc System::CreateWglContext(WindowsHdc hDc) noexcept
+System::OpenGLRcHandle System::CreateWglContext(WindowsHdc hDc) noexcept
 {
     return WglCreateContext(hDc);
 }
 
-bool SYSTEM_DEFAULT_DECLARE System::DeleteWglContext(OpenGLHglrc oldContext) noexcept
+bool SYSTEM_DEFAULT_DECLARE System::DeleteWglContext(OpenGLRcHandle oldContext) noexcept
 {
     if (WglDeleteContext(oldContext) != gFalse)
         return true;
@@ -40,12 +40,12 @@ bool SYSTEM_DEFAULT_DECLARE System::DeleteWglContext(OpenGLHglrc oldContext) noe
         return false;
 }
 
-System::OpenGLHglrc System::GetCurrentWglContext() noexcept
+System::OpenGLRcHandle System::GetCurrentWglContext() noexcept
 {
     return WglGetCurrentContext();
 }
 
-bool System::MakeWglCurrent(WindowsHdc hdc, OpenGLHglrc newContext) noexcept
+bool System::MakeWglCurrent(WindowsHdc hdc, OpenGLRcHandle newContext) noexcept
 {
     if (WglMakeCurrent(hdc, newContext) != gFalse)
         return true;

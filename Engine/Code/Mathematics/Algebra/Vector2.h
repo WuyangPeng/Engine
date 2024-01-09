@@ -69,6 +69,8 @@ namespace Mathematics
         template <typename RhsType>
         explicit Vector2(const Vector4<RhsType>& vector);
 
+        explicit Vector2(const ArrayType& coordinate);
+
         CLASS_INVARIANT_DECLARE;
 
         // ื๘ฑ๊ทรฮส

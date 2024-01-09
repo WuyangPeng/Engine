@@ -1,20 +1,20 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.2 (2023/12/08 09:47)
+/// 版本：1.0.0.3 (2023/12/28 17:54)
 
 #ifndef RENDERING_SCENE_GRAPH_NODE_H
 #define RENDERING_SCENE_GRAPH_NODE_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "Culler.h"
 #include "Spatial.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
+#include "Rendering/Visibility/VisibilityFwd.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(Node, NodeImpl);
 
@@ -114,7 +114,7 @@ namespace Rendering
 
         NODISCARD ControllerSharedPtr Clone() const override;
 
-        NODISCARD PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const override;
+        NODISCARD PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax, int numThreads, float maxDistance) override;
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
     protected:

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:30)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/06 16:08)
 
 #include "Rendering/RenderingExport.h"
 
@@ -36,7 +36,7 @@ void Rendering::OpenGLGlobalState::SetActiveBlendState(const BlendStateSharedPtr
 
     if (state != GetActiveBlendState())
     {
-        auto gl4State = BindRendererObject(RendererTypes::OpenGL, state);
+        const auto gl4State = BindRendererObject(RendererTypes::OpenGL, state);
 
         gl4State->Enable();
         ParentType::SetActiveBlendState(state);
@@ -54,7 +54,7 @@ void Rendering::OpenGLGlobalState::SetActiveDepthStencilState(const DepthStencil
 
     if (state != GetActiveDepthStencilState())
     {
-        auto gl4State = BindRendererObject(RendererTypes::OpenGL, state);
+        const auto gl4State = BindRendererObject(RendererTypes::OpenGL, state);
 
         gl4State->Enable();
         ParentType::SetActiveDepthStencilState(state);
@@ -72,7 +72,7 @@ void Rendering::OpenGLGlobalState::SetActiveRasterizerState(const RasterizerStat
 
     if (state != GetActiveRasterizerState())
     {
-        auto gl4State = BindRendererObject(RendererTypes::OpenGL, state);
+        const auto gl4State = BindRendererObject(RendererTypes::OpenGL, state);
 
         gl4State->Enable();
         ParentType::SetActiveRasterizerState(state);

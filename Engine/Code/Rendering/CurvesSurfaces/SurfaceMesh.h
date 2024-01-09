@@ -16,13 +16,13 @@
 #include "SurfacePatch.h"
 #include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "Mathematics/Meshes/EdgeKey.h"
-#include "Rendering/SceneGraph/TrianglesMesh.h"
+#include "Rendering/SceneGraph/Visual.h"
 
 #include <map>
 
 namespace Rendering
 {
-    class SurfaceMesh : public TrianglesMesh
+    class SurfaceMesh : public Visual
     {
     private:
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(SurfaceMesh);
@@ -30,11 +30,10 @@ namespace Rendering
 
     public:
         using ClassType = SurfaceMesh;
-        using ParentType = TrianglesMesh;
+        using ParentType = Visual;
 
     public:
-        SurfaceMesh(const VertexFormatSharedPtr& vformat,
-                    const VertexBufferSharedPtr& vbuffer,
+        SurfaceMesh(const VertexBufferSharedPtr& vbuffer,
                     const IndexBufferSharedPtr& ibuffer,
                     const Float2ArraySharedPtr& params,
                     const std::vector<CoreTools::ObjectAssociated<SurfacePatch>>& patches,

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 20:16)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 13:54)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_2D_H
 #define RENDERING_RESOURCES_TEXTURE_2D_H
@@ -29,8 +29,8 @@ namespace Rendering
         using ConstTexture2DSharedPtr = std::shared_ptr<const ClassType>;
 
     public:
-        Texture2D(DataFormatType format, int width, int height, bool hasMipMaps);
-        Texture2D(DataFormatType format, int width, int height, bool hasMipMaps, GraphicsObjectType type);
+        Texture2D(const std::string& name, DataFormatType format, int width, int height, bool hasMipMaps, bool createStorage = true);
+        Texture2D(const std::string& name, DataFormatType format, int width, int height, bool hasMipMaps, GraphicsObjectType type, bool createStorage = true);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -47,9 +47,6 @@ namespace Rendering
         NODISCARD int GetDimension(int level, int index) const override;
         NODISCARD int GetNumLevelBytes(int level) const override;
         NODISCARD int GetLevelOffset(int item, int level) const override;
-
-        void SaveToFile(WriteFileManager& outFile) const override;
-        void ReadFromFile(ReadFileManager& inFile) override;
 
         NODISCARD bool HasMipMaps() const noexcept override;
 

@@ -1,20 +1,20 @@
- ///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/28 13:33)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/21 19:21)
 
 #ifndef SYSTEM_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_PARAMETER_H
 #define SYSTEM_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_PARAMETER_H
 
 #include "System/SystemDll.h"
 
-#include "System/CharacterString/Flags/FormatMessageFlags.h" 
+#include "System/CharacterString/Flags/FormatMessageFlags.h"
 #include "System/SystemOutput/Data/LanguageIdData.h"
- #include "System/Windows/Flags/PlatformErrorFlags.h"
+#include "System/Windows/Flags/PlatformErrorFlags.h"
 
 namespace System
 {
@@ -29,7 +29,7 @@ namespace System
         {
         }
 
-        NODISCARD constexpr LanguageIdData GetLanguageIdData() const noexcept
+        NODISCARD constexpr static LanguageIdData GetLanguageIdData() noexcept
         {
             return LanguageIdData{};
         }
@@ -39,12 +39,12 @@ namespace System
             return formatMessageOption;
         }
 
-        NODISCARD constexpr FormatMessageWidth GetWidth() const noexcept
+        NODISCARD constexpr static FormatMessageWidth GetWidth() noexcept
         {
             return FormatMessageWidth::NoRestrictions;
         }
 
-        NODISCARD constexpr WindowError GetWindowError() const noexcept
+        NODISCARD constexpr static WindowError GetWindowError() noexcept
         {
             return WindowError::Success;
         }

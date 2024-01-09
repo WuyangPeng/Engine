@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/29 23:39)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/21 17:23)
 
 #include "System/SystemExport.h"
 
@@ -133,7 +133,7 @@ System::WindowsBool System::SwapBuffers(WindowsHdc hdc) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglCopyContext(OpenGLHglrc hglrcSrc, OpenGLHglrc hglrcDst, WindowsUInt mask) noexcept
+System::WindowsBool System::WglCopyContext(OpenGLRcHandle hglrcSrc, OpenGLRcHandle hglrcDst, WindowsUInt mask) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -148,7 +148,7 @@ System::WindowsBool System::WglCopyContext(OpenGLHglrc hglrcSrc, OpenGLHglrc hgl
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::OpenGLHglrc System::WglCreateContext(WindowsHdc hDc) noexcept
+System::OpenGLRcHandle System::WglCreateContext(WindowsHdc hDc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -163,7 +163,7 @@ System::OpenGLHglrc System::WglCreateContext(WindowsHdc hDc) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::OpenGLHglrc System::WglCreateLayerContext(WindowsHdc hDc, int level) noexcept
+System::OpenGLRcHandle System::WglCreateLayerContext(WindowsHdc hDc, int level) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -178,7 +178,7 @@ System::OpenGLHglrc System::WglCreateLayerContext(WindowsHdc hDc, int level) noe
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglDeleteContext(OpenGLHglrc oldContext) noexcept
+System::WindowsBool System::WglDeleteContext(OpenGLRcHandle oldContext) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -208,7 +208,7 @@ System::WindowsBool System::WglDescribeLayerPlane(WindowsHdc hDc, int pixelForma
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::OpenGLHglrc System::WglGetCurrentContext() noexcept
+System::OpenGLRcHandle System::WglGetCurrentContext() noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -264,7 +264,7 @@ System::OpenGLProc System::WglGetProcAddress(const char* lpszProc) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglMakeCurrent(WindowsHdc hDc, OpenGLHglrc newContext) noexcept
+System::WindowsBool System::WglMakeCurrent(WindowsHdc hDc, OpenGLRcHandle newContext) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -309,7 +309,7 @@ int System::WglSetLayerPaletteEntries(WindowsHdc hdc, int iLayerPlane, int iStar
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglShareLists(OpenGLHglrc hrcSrvShare, OpenGLHglrc hrcSrvSource) noexcept
+System::WindowsBool System::WglShareLists(OpenGLRcHandle hrcSrvShare, OpenGLRcHandle hrcSrvSource) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -607,7 +607,7 @@ void System::InitWglArbCreateContext()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::OpenGLHglrc System::WglCreateContextAttribsARB(WindowsHdc hDC, OpenGLHglrc hShareContext, const int* attribList) noexcept
+System::OpenGLRcHandle System::WglCreateContextAttribsARB(WindowsHdc hDC, OpenGLRcHandle hShareContext, const int* attribList) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -847,7 +847,7 @@ void System::InitWglArbMakeCurrentRead()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglMakeContextCurrentARB(WindowsHdc hDrawDC, WindowsHdc hReadDC, OpenGLHglrc hglrc) noexcept
+System::WindowsBool System::WglMakeContextCurrentARB(WindowsHdc hDrawDC, WindowsHdc hReadDC, OpenGLRcHandle hglrc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -1483,7 +1483,7 @@ System::WindowsInt System::WglGetGPUInfoAMD(WindowsUInt id, WindowsInt property,
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsUInt System::WglGetContextGPUIDAMD(OpenGLHglrc hglrc) noexcept
+System::WindowsUInt System::WglGetContextGPUIDAMD(OpenGLRcHandle hglrc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -1498,7 +1498,7 @@ System::WindowsUInt System::WglGetContextGPUIDAMD(OpenGLHglrc hglrc) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::OpenGLHglrc System::WglCreateAssociatedContextAMD(WindowsUInt id) noexcept
+System::OpenGLRcHandle System::WglCreateAssociatedContextAMD(WindowsUInt id) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -1513,7 +1513,7 @@ System::OpenGLHglrc System::WglCreateAssociatedContextAMD(WindowsUInt id) noexce
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::OpenGLHglrc System::WglCreateAssociatedContextAttribsAMD(WindowsUInt id, OpenGLHglrc hShareContext, const int* attribList) noexcept
+System::OpenGLRcHandle System::WglCreateAssociatedContextAttribsAMD(WindowsUInt id, OpenGLRcHandle hShareContext, const int* attribList) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -1528,7 +1528,7 @@ System::OpenGLHglrc System::WglCreateAssociatedContextAttribsAMD(WindowsUInt id,
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglDeleteAssociatedContextAMD(OpenGLHglrc hglrc) noexcept
+System::WindowsBool System::WglDeleteAssociatedContextAMD(OpenGLRcHandle hglrc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -1543,7 +1543,7 @@ System::WindowsBool System::WglDeleteAssociatedContextAMD(OpenGLHglrc hglrc) noe
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglMakeAssociatedContextCurrentAMD(OpenGLHglrc hglrc) noexcept
+System::WindowsBool System::WglMakeAssociatedContextCurrentAMD(OpenGLRcHandle hglrc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -1558,7 +1558,7 @@ System::WindowsBool System::WglMakeAssociatedContextCurrentAMD(OpenGLHglrc hglrc
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::OpenGLHglrc System::WglGetCurrentAssociatedContextAMD() noexcept
+System::OpenGLRcHandle System::WglGetCurrentAssociatedContextAMD() noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -1571,7 +1571,7 @@ System::OpenGLHglrc System::WglGetCurrentAssociatedContextAMD() noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-void System::WglBlitContextFramebufferAMD(OpenGLHglrc dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) noexcept
+void System::WglBlitContextFramebufferAMD(OpenGLRcHandle dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -2011,7 +2011,7 @@ void System::InitWglExtMakeCurrentRead()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglMakeContextCurrentEXT(WindowsHdc hDrawDC, WindowsHdc hReadDC, OpenGLHglrc hglrc) noexcept
+System::WindowsBool System::WglMakeContextCurrentEXT(WindowsHdc hDrawDC, WindowsHdc hReadDC, OpenGLRcHandle hglrc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3397,7 +3397,7 @@ void System::InitWglNVCopyImage()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglCopyImageSubDataNV(OpenGLHglrc hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, OpenGLHglrc hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth) noexcept
+System::WindowsBool System::WglCopyImageSubDataNV(OpenGLRcHandle hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, OpenGLRcHandle hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 

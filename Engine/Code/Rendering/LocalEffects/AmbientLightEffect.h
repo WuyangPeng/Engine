@@ -15,7 +15,7 @@
 #include "LightEffect.h"
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
-#include "Rendering/LocalEffects/Light.h"
+#include "Rendering/LocalEffects/Lighting.h" 
 #include "Rendering/LocalEffects/Material.h"
 
 namespace Rendering

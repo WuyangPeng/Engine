@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/05 14:34)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/26 15:08)
 
 #include "Rendering/RenderingExport.h"
 
@@ -40,7 +40,37 @@ Rendering::ComputeProgram::ComputeProgram(OpenGLUInt programHandle, OpenGLUInt c
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ComputeProgram)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ComputeProgram, GetComputeShader, Rendering::ComputeProgram::ConstShaderSharedPtr)
+Rendering::ComputeProgram::ConstShaderSharedPtr Rendering::ComputeProgram::GetComputeShader() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ComputeProgram, SetComputeShader, ShaderSharedPtr, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ComputeProgram, GetReflector, Rendering::Reflection)
+    return impl->GetComputeShader();
+}
+
+Rendering::ComputeProgram::ShaderSharedPtr Rendering::ComputeProgram::GetComputeShader() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetComputeShader();
+}
+
+void Rendering::ComputeProgram::SetComputeShader(const ShaderSharedPtr& shader)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetComputeShader(shader);
+}
+
+Rendering::Reflection Rendering::ComputeProgram::GetReflector() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetReflector();
+}
+
+Rendering::ComputeProgram::OpenGLUInt Rendering::ComputeProgram::GetProgramHandle() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetProgramHandle();
+}

@@ -9,7 +9,6 @@
 
 #include "Rendering/RenderingExport.h"
 
-#include "Light.h"
 #include "LightCameraGeometry.h"
 #include "Material.h"
 #include "SpotLightEffect.h"
@@ -18,6 +17,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
+#include "Rendering/LocalEffects/Lighting.h" 
 #include "Rendering/Shaders/Shader.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, SpotLightEffect)

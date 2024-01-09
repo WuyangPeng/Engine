@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:41)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/09 16:56)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,27 +16,28 @@
 #include "System/OpenGL/OpenGLProgram.h"
 #include "System/OpenGL/OpenGLShader.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
 #include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Shaders/ComputeProgram.h"
-#include "Rendering/Shaders/Reflection.h"
+#include "Rendering/Shaders/Flags/ReferenceType.h"
 #include "Rendering/Shaders/Flags/ShaderAPIType.h"
+#include "Rendering/Shaders/Reflection.h"
 #include "Rendering/Shaders/Shader.h"
 #include "Rendering/Shaders/VisualProgram.h"
-#include "Rendering/Shaders/Flags/ReferenceType.h"
-
-#include <CoreTools/Contract/Flags/DisableNotThrowFlags.h>
 
 Rendering::ProgramFactoryImpl::ProgramFactorySharedPtr Rendering::GLSLProgramFactory::Create()
 {
     return std::make_shared<ClassType>(CoreTools::DisableNotThrow::Disable);
 }
 
-Rendering::GLSLProgramFactory::GLSLProgramFactory(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+Rendering::GLSLProgramFactory::GLSLProgramFactory(CoreTools::DisableNotThrow disableNotThrow)
     : ParentType{ "#version 430", "main", "main", "main", "main", 0 }
 {
+    System::UnusedFunction(disableNotThrow);
+
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
@@ -49,32 +50,34 @@ Rendering::ShaderAPIType Rendering::GLSLProgramFactory::GetAPI() const noexcept
     return ShaderAPIType::GLSL;
 }
 
-Rendering::GLSLProgramFactory::VisualProgramSharedPtr Rendering::GLSLProgramFactory::CreateFromNamedSources(MAYBE_UNUSED const std::string& vsName, const std::string& vsSource, MAYBE_UNUSED const std::string& psName, const std::string& psSource, MAYBE_UNUSED const std::string& gsName, const std::string& gsSource)
+Rendering::GLSLProgramFactory::VisualProgramSharedPtr Rendering::GLSLProgramFactory::CreateFromNamedSources(const std::string& vertexShaderName, const std::string& vertexShaderSource, const std::string& pixelShaderName, const std::string& pixelShaderSource, const std::string& geometryShaderName, const std::string& geometryShaderSource)
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    if (vsSource.empty() || psSource.empty())
+    System::UnusedFunction(vertexShaderName, pixelShaderName, geometryShaderName);
+
+    if (vertexShaderSource.empty() || pixelShaderSource.empty())
     {
         THROW_EXCEPTION(SYSTEM_TEXT("程序必须具有顶点着色器和像素着色器。"));
     }
 
-    auto vsHandle = Compile(ShaderType::Vertex, vsSource);
-    if (vsHandle == 0)
+    auto vertexShaderHandle = Compile(ShaderType::Vertex, vertexShaderSource);
+    if (vertexShaderHandle == 0)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("编译顶点着色器失败。"));
     }
 
-    auto psHandle = Compile(ShaderType::Fragment, psSource);
-    if (psHandle == 0)
+    auto pixelShaderHandle = Compile(ShaderType::Fragment, pixelShaderSource);
+    if (pixelShaderHandle == 0)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("编译像素着色器失败。"));
     }
 
-    auto gsHandle = 0;
-    if (gsSource != "")
+    auto geometryShaderHandle = 0;
+    if (geometryShaderSource != "")
     {
-        gsHandle = Compile(ShaderType::Geometry, gsSource);
-        if (gsHandle == 0)
+        geometryShaderHandle = Compile(ShaderType::Geometry, geometryShaderSource);
+        if (geometryShaderHandle == 0)
         {
             THROW_EXCEPTION(SYSTEM_TEXT("编译几何着色器失败。"));
         }
@@ -86,58 +89,60 @@ Rendering::GLSLProgramFactory::VisualProgramSharedPtr Rendering::GLSLProgramFact
         THROW_EXCEPTION(SYSTEM_TEXT("程序创建失败。"));
     }
 
-    System::AttachGLShader(programHandle, vsHandle);
-    System::AttachGLShader(programHandle, psHandle);
-    if (gsHandle > 0)
+    System::AttachGLShader(programHandle, vertexShaderHandle);
+    System::AttachGLShader(programHandle, pixelShaderHandle);
+    if (geometryShaderHandle > 0)
     {
-        System::AttachGLShader(programHandle, gsHandle);
+        System::AttachGLShader(programHandle, geometryShaderHandle);
     }
 
     if (!Link(programHandle))
     {
-        System::DetachGLShader(programHandle, vsHandle);
-        System::DeleteGLShader(vsHandle);
-        System::DetachGLShader(programHandle, psHandle);
-        System::DeleteGLShader(psHandle);
-        if (gsHandle)
+        System::DetachGLShader(programHandle, vertexShaderHandle);
+        System::DeleteGLShader(vertexShaderHandle);
+        System::DetachGLShader(programHandle, pixelShaderHandle);
+        System::DeleteGLShader(pixelShaderHandle);
+        if (geometryShaderHandle)
         {
-            System::DetachGLShader(programHandle, gsHandle);
-            System::DeleteGLShader(gsHandle);
+            System::DetachGLShader(programHandle, geometryShaderHandle);
+            System::DeleteGLShader(geometryShaderHandle);
         }
         System::DeleteGLProgram(programHandle);
 
         THROW_EXCEPTION(SYSTEM_TEXT("链接失败。"));
     }
 
-    auto program = std::make_shared<VisualProgram>(programHandle, vsHandle, psHandle, gsHandle);
+    auto program = std::make_shared<VisualProgram>(programHandle, vertexShaderHandle, pixelShaderHandle, geometryShaderHandle);
 
     const auto reflector = program->GetReflector();
-    auto vshader = std::make_shared<Shader>(GraphicsObjectType::VertexShader, RendererTypes::OpenGL, reflector, ReferenceType::Vertex);
-    auto pshader = std::make_shared<Shader>(GraphicsObjectType::PixelShader, RendererTypes::OpenGL, reflector, ReferenceType::Pixel);
+    const auto vertexShader = std::make_shared<Shader>(GraphicsObjectType::VertexShader, RendererTypes::OpenGL, reflector, ReferenceType::Vertex);
+    const auto pixelShader = std::make_shared<Shader>(GraphicsObjectType::PixelShader, RendererTypes::OpenGL, reflector, ReferenceType::Pixel);
 
-    program->SetVertexShader(vshader);
-    program->SetPixelShader(pshader);
-    if (gsHandle > 0)
+    program->SetVertexShader(vertexShader);
+    program->SetPixelShader(pixelShader);
+    if (geometryShaderHandle > 0)
     {
-        auto gshader = std::make_shared<Shader>(GraphicsObjectType::GeometryShader, RendererTypes::OpenGL, reflector, ReferenceType::Geometry);
+        const auto geometryShader = std::make_shared<Shader>(GraphicsObjectType::GeometryShader, RendererTypes::OpenGL, reflector, ReferenceType::Geometry);
 
-        program->SetGeometryShader(gshader);
+        program->SetGeometryShader(geometryShader);
     }
 
     return program;
 }
 
-Rendering::GLSLProgramFactory::ComputeProgramSharedPtr Rendering::GLSLProgramFactory::CreateFromNamedSource(MAYBE_UNUSED const std::string& csName, const std::string& csSource)
+Rendering::GLSLProgramFactory::ComputeProgramSharedPtr Rendering::GLSLProgramFactory::CreateFromNamedSource(const std::string& computeShaderName, const std::string& computeShaderSource)
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    if (csSource.empty())
+    System::UnusedFunction(computeShaderName);
+
+    if (computeShaderSource.empty())
     {
         THROW_EXCEPTION(SYSTEM_TEXT("程序必须具有计算着色器。 "));
     }
 
-    auto csHandle = Compile(ShaderType::Compute, csSource);
-    if (csHandle == 0)
+    auto computeShaderHandle = Compile(ShaderType::Compute, computeShaderSource);
+    if (computeShaderHandle == 0)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("编译计算着色器失败。"));
     }
@@ -148,21 +153,21 @@ Rendering::GLSLProgramFactory::ComputeProgramSharedPtr Rendering::GLSLProgramFac
         THROW_EXCEPTION(SYSTEM_TEXT("程序创建失败。"));
     }
 
-    System::AttachGLShader(programHandle, csHandle);
+    System::AttachGLShader(programHandle, computeShaderHandle);
 
     if (!Link(programHandle))
     {
-        System::DetachGLShader(programHandle, csHandle);
-        System::DeleteGLShader(csHandle);
+        System::DetachGLShader(programHandle, computeShaderHandle);
+        System::DeleteGLShader(computeShaderHandle);
         System::DeleteGLProgram(programHandle);
         THROW_EXCEPTION(SYSTEM_TEXT("链接失败。"));
     }
 
-    auto program = std::make_shared<ComputeProgram>(programHandle, csHandle);
+    auto program = std::make_shared<ComputeProgram>(programHandle, computeShaderHandle);
     auto reflector = program->GetReflector();
-    auto cshader = std::make_shared<Shader>(GraphicsObjectType::ComputeShader, RendererTypes::OpenGL, reflector, ReferenceType::Compute);
+    const auto computeShader = std::make_shared<Shader>(GraphicsObjectType::ComputeShader, RendererTypes::OpenGL, reflector, ReferenceType::Compute);
 
-    program->SetComputeShader(cshader);
+    program->SetComputeShader(computeShader);
 
     return program;
 }
@@ -171,8 +176,8 @@ Rendering::GLSLProgramFactory::OpenGLUInt Rendering::GLSLProgramFactory::Compile
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    const auto handle = System::CreateGLShader(shaderType);
-    if (handle > 0)
+    if (const auto handle = System::CreateGLShader(shaderType);
+        0 < handle)
     {
         std::vector<std::string> glslDefines{};
         const auto size = GetDefinesSize() + 5;
@@ -184,34 +189,34 @@ Rendering::GLSLProgramFactory::OpenGLUInt Rendering::GLSLProgramFactory::Compile
         glslDefines.emplace_back("layout(std140, column_major) uniform;\n");
         glslDefines.emplace_back("layout(std430, column_major) buffer;\n");
 
-        for (const auto& d : *this)
+        for (const auto& define : *this)
         {
-            glslDefines.emplace_back("#define " + d.first + " " + d.second + "\n");
+            glslDefines.emplace_back("#define " + define.first + " " + define.second + "\n");
         }
 
         glslDefines.emplace_back(source);
 
-        std::vector<GLchar const*> code;
+        std::vector<GLchar const*> code{};
         code.reserve(glslDefines.size());
-        for (auto const& d : glslDefines)
+        for (const auto& define : glslDefines)
         {
-            code.emplace_back(d.c_str());
+            code.emplace_back(define.c_str());
         }
 
         System::SetGLShaderSource(handle, boost::numeric_cast<System::OpenGLSize>(code.size()), code.data(), nullptr);
 
         System::CompileGLShader(handle);
 
-        const auto status = GetGLShader(handle, System::ShaderStatus::Compile);
-        if (status == GL_TRUE)
+        if (const auto status = GetGLShader(handle, System::ShaderStatus::Compile);
+            status == GL_TRUE)
         {
             return handle;
         }
 
-        const auto logLength = System::GetGLShader(handle, System::ShaderAttributes::InfoLogLength);
-        if (logLength > 0)
+        if (const auto logLength = System::GetGLShader(handle, System::ShaderAttributes::InfoLogLength);
+            logLength > 0)
         {
-            auto message = System::GetGLShaderInfoLog(handle);
+            const auto message = System::GetGLShaderInfoLog(handle);
 
             THROW_EXCEPTION(SYSTEM_TEXT("编译失败:\n") + CoreTools::StringConversion::MultiByteConversionStandard(message));
         }
@@ -232,16 +237,16 @@ bool Rendering::GLSLProgramFactory::Link(OpenGLUInt programHandle)
 
     System::LinkGLProgram(programHandle);
 
-    const auto status = System::GetGLProgram(programHandle, System::ProgramStatus::Link);
-    if (status == GL_TRUE)
+    if (const auto status = System::GetGLProgram(programHandle, System::ProgramStatus::Link);
+        status == GL_TRUE)
     {
         return true;
     }
 
-    const auto logLength = System::GetGLProgram(programHandle, System::ProgramAttributes::InfoLogLength);
-    if (logLength > 0)
+    if (const auto logLength = System::GetGLProgram(programHandle, System::ProgramAttributes::InfoLogLength);
+        0 < logLength)
     {
-        auto message = System::GetGLProgramInfoLog(programHandle);
+        const auto message = System::GetGLProgramInfoLog(programHandle);
 
         THROW_EXCEPTION(SYSTEM_TEXT("链接失败:\n") + CoreTools::StringConversion::MultiByteConversionStandard(message));
     }

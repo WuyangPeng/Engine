@@ -1,7 +1,7 @@
 @ingroup group_DatabaseGenerateBase_Documentation
 
 ----------------------------
-数据库生成服务器配置
+数据库生成配置
 
 ----------------------------
 1. 配置代码。

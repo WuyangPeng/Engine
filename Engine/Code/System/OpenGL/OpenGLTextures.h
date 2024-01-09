@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/29 23:32)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/21 17:11)
 
 #ifndef SYSTEM_OPENGL_OPENGL_TEXTURES_H
 #define SYSTEM_OPENGL_OPENGL_TEXTURES_H
@@ -13,7 +13,7 @@
 #include "System/SystemDll.h"
 
 #include "Fwd/OpenGLFlagsFwd.h"
-#include "Using/OpenGLUsing.h" 
+#include "Using/OpenGLUsing.h"
 
 namespace System
 {
@@ -44,6 +44,9 @@ namespace System
 
     void SYSTEM_DEFAULT_DECLARE SetGLGenerateMipmap(TextureTarget target) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLFrameBufferTexture2D(FrameBufferType target, ColorAttachment attachment, TextureTarget texTarget, OpenGLUInt texture, OpenGLInt level) noexcept;
+
+    void SYSTEM_DEFAULT_DECLARE SetGLActiveTexture(OpenGLEnum texture) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLBindImageTexture(OpenGLUInt unit, OpenGLUInt texture, OpenGLInt level, bool layered, OpenGLInt layer, BufferLocking access, OpenGLEnum format) noexcept;
 }
 
 #endif  // SYSTEM_OPENGL_OPENGL_TEXTURES_H

@@ -123,6 +123,8 @@ namespace Mathematics
             }
         }
 
+        NODISCARD HomogeneousPoint GetHomogeneousPoint() const noexcept;
+
     private:
         HomogeneousPoint homogeneousPoint;
     };

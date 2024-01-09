@@ -15,7 +15,6 @@
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Rendering/SceneGraph/CameraManager.h"
 #include "Framework/Application/GlutApplicationInformation.h"
 #include "Framework/OpenGLGlutFrame/OpenGLGlutProcessManager.h"
 
@@ -120,7 +119,6 @@ void Framework::OpenGLGlutMainFunctionHelper<Build, Process>::Initializer(int ar
     EXCEPTION_TRY
     {
         InitOpenGLGlutProcess();
-        InitCamera();
         InitOpenGLImpl(argc, argv, information, environmentDirectory);
     }
     EXCEPTION_WINDOWS_ENTRY_POINT_CATCH
@@ -131,13 +129,6 @@ void Framework::OpenGLGlutMainFunctionHelper<Build, Process>::InitOpenGLGlutProc
 {
     OpenGLGlutProcessManager::Create();
     openGLGlutMainFunctionSchedule = OpenGLGlutMainFunctionSchedule::OpenGLGlutProcess;
-}
-
-template <template <typename> class Build, typename Process>
-void Framework::OpenGLGlutMainFunctionHelper<Build, Process>::InitCamera()
-{
-    Rendering::CameraManager::Create();
-    openGLGlutMainFunctionSchedule = OpenGLGlutMainFunctionSchedule::Camera;
 }
 
 template <template <typename> class Build, typename Process>
@@ -157,7 +148,6 @@ void Framework::OpenGLGlutMainFunctionHelper<Build, Process>::Terminators()
     EXCEPTION_TRY
     {
         DestroyOpenGLImpl();
-        DestroyCamera();
         DestroyOpenGLGlutProcess();
     }
     EXCEPTION_WINDOWS_ENTRY_POINT_CATCH
@@ -169,17 +159,6 @@ void Framework::OpenGLGlutMainFunctionHelper<Build, Process>::DestroyOpenGLImpl(
     if (OpenGLGlutMainFunctionSchedule::Max <= openGLGlutMainFunctionSchedule)
     {
         build.reset();
-        openGLGlutMainFunctionSchedule = OpenGLGlutMainFunctionSchedule::Camera;
-    }
-}
-
-template <template <typename> class Build, typename Process>
-void Framework::OpenGLGlutMainFunctionHelper<Build, Process>::DestroyCamera() noexcept
-{
-    if (OpenGLGlutMainFunctionSchedule::Camera <= openGLGlutMainFunctionSchedule)
-    {
-        Rendering::CameraManager::Destroy();
-
         openGLGlutMainFunctionSchedule = OpenGLGlutMainFunctionSchedule::OpenGLGlutProcess;
     }
 }

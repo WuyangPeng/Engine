@@ -22,7 +22,6 @@
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/Controllers/SkinController.h"
 #include "Rendering/RenderingTesting/SceneGraphSuite/Detail/VisualTest.h"
-#include "Rendering/SceneGraph/LoadVisual.h"
 
 Rendering::SkinControllerTesting::SkinControllerTesting(const OStreamShared& stream)
     : ParentType{ stream }

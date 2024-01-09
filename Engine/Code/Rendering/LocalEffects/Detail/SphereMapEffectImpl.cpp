@@ -25,7 +25,7 @@ Rendering::SphereMapEffectImpl::SphereMapEffectImpl() noexcept
 Rendering::SphereMapEffectImpl::SphereMapEffectImpl(Texture2DSharedPtr texture, SamplerStateFilter filter, SamplerStateMode mode0, SamplerStateMode mode1, int numViewWorldMatrixConstantBytes)
     : texture{ std::move(texture) },
       sampler{ std::make_shared<SamplerState>(filter, mode0, mode1) },
-      viewWorldMatrixConstant{ std::make_shared<ConstantBuffer>(numViewWorldMatrixConstantBytes, true) }
+      viewWorldMatrixConstant{ std::make_shared<ConstantBuffer>("viewWorldMatrixConstant", numViewWorldMatrixConstantBytes, true) }
 {
     const auto matrix = Mathematics::Matrix4<float>::GetIdentity();
 

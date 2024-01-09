@@ -13,7 +13,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
-#include "Rendering/SceneGraph/LoadVisual.h"
 
 Rendering::PlatformVertexBufferTesting::PlatformVertexBufferTesting(const OStreamShared& stream)
     : ParentType{ stream }

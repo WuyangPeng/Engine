@@ -35,7 +35,6 @@ namespace Framework
     {
         Failure = 0,
         WindowProcess,
-        Camera,
         Max,
     };
 
@@ -43,7 +42,6 @@ namespace Framework
     {
         Failure = 0,
         OpenGLGlutProcess,
-        Camera,
         Max,
         InitComplete
     };

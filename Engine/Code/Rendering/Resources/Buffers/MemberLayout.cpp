@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 14:31)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 14:03)
 
 #include "Rendering/RenderingExport.h"
 
@@ -22,8 +22,30 @@ Rendering::MemberLayout::MemberLayout(const std::string& name, int offset, int n
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, MemberLayout)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, MemberLayout, GetName, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, MemberLayout, GetOffset, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, MemberLayout, GetNumElements, int)
+std::string Rendering::MemberLayout::GetName() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, MemberLayout, GetStreamingSize, int)
+    return impl->GetName();
+}
+
+int Rendering::MemberLayout::GetOffset() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetOffset();
+}
+
+int Rendering::MemberLayout::GetNumElements() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetNumElements();
+}
+
+int Rendering::MemberLayout::GetStreamingSize() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetStreamingSize();
+}

@@ -1,23 +1,24 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.2 (2023/12/07 10:27)
+/// 版本：1.0.0.3 (2023/12/28 17:55)
 
 #ifndef RENDERING_SCENE_GRAPH_SPATIAL_H
 #define RENDERING_SCENE_GRAPH_SPATIAL_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "PickRecordContainer.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "Mathematics/Algebra/BoundingSphere.h"
 #include "Mathematics/Algebra/Transform.h"
 #include "Rendering/Controllers/ControlledObject.h"
+#include "Rendering/Picking/PickRecordContainer.h"
 #include "Rendering/SceneGraph/SceneGraphFwd.h"
+#include "Rendering/Visibility/VisibilityFwd.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(Spatial, SpatialImpl);
 
@@ -85,7 +86,7 @@ namespace Rendering
         void SetLocalTransformTranslate(const APoint& translate) noexcept;
         void SetLocalTransformRotate(const Matrix& rotate) noexcept;
 
-        NODISCARD virtual PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const;
+        NODISCARD virtual PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax, int numThreads, float maxDistance);
 
         NODISCARD ControllerSharedPtr Clone() const override = 0;
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:28)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/08 19:15)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,22 +16,20 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
-#include "Rendering/Resources/Flags/CopyType.h"
-#include "Rendering/Resources/Flags/UsageType.h"
 
 Rendering::OpenGLTexture1Array::OpenGLTexture1Array(const Texture1DArraySharedPtr& texture1Array, const std::string& name)
     : ParentType{ texture1Array, name, TextureTarget::Texture1DArray, TextureTargetBinding::Binding1DArray }
 {
     SetGLHandle(System::GetGLGenTextures());
-    System::SetGLBindTexture(TextureTarget::Texture1DArray, GetGLHandle());
+    SetGLBindTexture(TextureTarget::Texture1DArray, ClassType::GetGLHandle());
 
     const auto length = texture1Array->GetDimension(0);
     const auto numItems = texture1Array->GetNumItems();
-    System::SetGLTexturesStorage2D(TextureTarget::Texture1DArray, GetNumLevels(), GetInternalFormat(), length, numItems);
+    SetGLTexturesStorage2D(TextureTarget::Texture1DArray, GetNumLevels(), GetInternalFormat(), length, numItems);
 
     Initialize();
 
-    System::SetGLBindTexture(TextureTarget::Texture1DArray, 0);
+    SetGLBindTexture(TextureTarget::Texture1DArray, 0);
 
     CreateStaging();
 
@@ -40,7 +38,7 @@ Rendering::OpenGLTexture1Array::OpenGLTexture1Array(const Texture1DArraySharedPt
 
 Rendering::OpenGLTexture1Array::~OpenGLTexture1Array() noexcept
 {
-    System::SetGLDeleteTextures(GetGLHandle());
+    System::SetGLDeleteTextures(ClassType::GetGLHandle());
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -58,53 +56,20 @@ bool Rendering::OpenGLTexture1Array::CanAutoGenerateMipmaps() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto texture = GetTexture();
+    const auto texture = GetTexture();
 
     return texture && texture->HasMipMaps() && texture->WantAutoGenerateMipMaps();
-}
-
-void Rendering::OpenGLTexture1Array::Enable() noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
 }
 
 void Rendering::OpenGLTexture1Array::LoadTextureLevel(int item, int level, const ConstSpanIterator& data)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto texture = GetTexture();
-    if (texture && level < texture->GetNumLevels())
+    if (const auto texture = GetTexture();
+        texture && level < texture->GetNumLevels())
     {
         auto const length = texture->GetDimension(level, 0);
 
-        System::SetGLTexturesSubImage2D(TextureTarget::Texture1DArray, level, 0, item, length, 1, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
+        SetGLTexturesSubImage2D(TextureTarget::Texture1DArray, level, 0, item, length, 1, GetExternalFormat(), GetExternalType(), data.GetData());
     }
-}
-
-bool Rendering::OpenGLTexture1Array::Update(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLTexture1Array::CopyGpuToCpu(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLTexture1Array::CopyCpuToGpu(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLTexture1Array::GetNumActiveElements()
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
 }

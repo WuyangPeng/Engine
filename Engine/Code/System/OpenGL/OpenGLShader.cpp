@@ -1,17 +1,18 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/29 23:44)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/21 17:25)
 
 #include "System/SystemExport.h"
 
 #include "OpenGLShader.h"
 #include "Flags/OpenGLShaderFlags.h"
-#include "Detail/GL20Extensions.h" 
+#include "Detail/GL20Extensions.h"
+#include "Detail/GL43Extensions.h"
 #include "System/Helper/EnumCast.h"
 
 #include <vector>
@@ -107,4 +108,9 @@ std::string System::GetGLShaderInfoLog(OpenGLUInt shader)
 System::OpenGLInt System::GetGLUniformLocation(OpenGLUInt program, const OpenGLChar* name) noexcept
 {
     return GLGetUniformLocation(program, name);
+}
+
+void System::SetGLShaderStorageBlockBinding(OpenGLUInt program, OpenGLUInt storageBlockIndex, OpenGLUInt storageBlockBinding) noexcept
+{
+    GLShaderStorageBlockBinding(program, storageBlockIndex, storageBlockBinding);
 }

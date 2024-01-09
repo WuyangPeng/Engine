@@ -34,6 +34,8 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
+        NODISCARD ConstPointerType GetData() const;
+
         NODISCARD ConstReferenceType operator*() const;
         NODISCARD Iter operator->() const noexcept;
 

@@ -16,6 +16,7 @@
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/BoundingSphere.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/SceneGraph/Node.h"
 
 #include <vector>

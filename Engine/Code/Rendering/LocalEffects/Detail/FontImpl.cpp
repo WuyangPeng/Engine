@@ -12,6 +12,7 @@
 #include "FontImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Rendering/LocalEffects/TextEffect.h"
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
@@ -36,58 +37,29 @@ Rendering::FontImpl::FontImpl(ProgramFactory& factory, const std::string& shader
     vertexBuffer->SetUsage(UsageType::DynamicUpdate);
 
     auto vertices = vertexBuffer->GetStorage();
-    for (auto i = 0; i < numVertices; ++i)
-    {
-        vertices.Increase<float>(0.0f);
-        vertices.Increase<float>(0.0f);
-
-        vertices.Increase<float>(0.0f);
-        vertices.Increase<float>(0.0f);
-    }
-
-    vertices = vertexBuffer->GetStorage();
     for (auto i = 0; i < maxMessageLength; ++i)
     {
-        vertices.Increase<float>(0.0f);
-        vertices.Increase<float>(0.0f);
-
-        vertices.Increase<float>(0.0f);
-        vertices.Increase<float>(0.0f);
-
-        vertices.Increase<float>(0.0f);
-        vertices.Increase<float>(0.0f);
-
-        vertices.Increase<float>(0.0f);
-        vertices.Increase<float>(1.0f);
-
-        vertices.Increase<float>(0.0f);
-        vertices.Increase<float>(0.0f);
-
-        vertices.Increase<float>(0.0f);
-        vertices.Increase<float>(0.0f);
-
-        vertices.Increase<float>(0.0f);
-        vertices.Increase<float>(0.0f);
-
-        vertices.Increase<float>(0.0f);
-        vertices.Increase<float>(1.0f);
+        vertices.SetValue<float, 4>((4 * i + 0) * CoreTools::GetStreamSize<float>(), { 0.0f, 0.0f, 0.0f, 0.0f });
+        vertices.SetValue<float, 4>((4 * i + 1) * CoreTools::GetStreamSize<float>(), { 0.0f, 0.0f, 0.0f, 1.0f });
+        vertices.SetValue<float, 4>((4 * i + 2) * CoreTools::GetStreamSize<float>(), { 0.0f, 0.0f, 0.0f, 1.0f });
+        vertices.SetValue<float, 4>((4 * i + 3) * CoreTools::GetStreamSize<float>(), { 0.0f, 0.0f, 0.0f, 1.0f });
     }
 
     const auto numTriangles = 2 * maxMessageLength;
-    indexBuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::TriangleMesh, numTriangles, sizeof(uint32_t));
+    indexBuffer = IndexBuffer::Create("IndexBuffer", IndexFormatType::TriangleMesh, numTriangles, sizeof(int32_t));
     auto indices = indexBuffer->GetStorage();
     for (auto i = 0; i < maxMessageLength; ++i)
     {
-        indices.Increase<uint32_t>(4 * i);
-        indices.Increase<uint32_t>(4 * i + 3);
-        indices.Increase<uint32_t>(4 * i + 1);
+        indices.Increase<int32_t>(4 * i);
+        indices.Increase<int32_t>(4 * i + 3);
+        indices.Increase<int32_t>(4 * i + 1);
 
-        indices.Increase<uint32_t>(4 * i);
-        indices.Increase<uint32_t>(4 * i + 2);
-        indices.Increase<uint32_t>(4 * i + 3);
+        indices.Increase<int32_t>(4 * i);
+        indices.Increase<int32_t>(4 * i + 2);
+        indices.Increase<int32_t>(4 * i + 3);
     }
 
-    texture = std::make_shared<Texture2D>(DataFormatType::R8UNorm, width, height, false);
+    texture = std::make_shared<Texture2D>("R8UNorm", DataFormatType::R8UNorm, width, height, false);
 
     Texture2D::StorageType storageType{};
     for (auto value : texels)
@@ -189,10 +161,10 @@ void Rendering::FontImpl::Typeset(int viewportWidth, int viewportHeight, int x, 
 
     auto x0 = 0.0f;
     const auto length = std::min(boost::numeric_cast<int>(message.length()), maxMessageLength);
-    const auto stepSize = boost::numeric_cast<int>(vertexSize - sizeof(float) * 3);
+    const auto stepSize = vertexSize - 4 * CoreTools::GetStreamSize<float>();
     for (auto i = 0; i < length; ++i)
     {
-        auto c = boost::numeric_cast<int>(message.at(i));
+        const auto c = boost::numeric_cast<int>(message.at(i));
         const auto tx0 = characterData.at(c);
         const auto nextIndex = c + 1;
         const auto tx1 = characterData.at(nextIndex);
@@ -201,8 +173,10 @@ void Rendering::FontImpl::Typeset(int viewportWidth, int viewportHeight, int x, 
         const auto x1 = x0 + charWidthM1 * viewportDX;
 
         data.Increase<float>(x0);
-        data.Increase<float>(0.0f);
+        data += sizeof(float);
         data.Increase<float>(tx0);
+        data += sizeof(float);
+
         if (0 < stepSize)
         {
             data += stepSize;
@@ -211,14 +185,18 @@ void Rendering::FontImpl::Typeset(int viewportWidth, int viewportHeight, int x, 
         data.Increase<float>(x0);
         data.Increase<float>(viewportDY * th);
         data.Increase<float>(tx0);
+        data += sizeof(float);
+
         if (0 < stepSize)
         {
             data += stepSize;
         }
 
         data.Increase<float>(x1);
-        data.Increase<float>(0.0f);
+        data += sizeof(float);
         data.Increase<float>(tx1);
+        data += sizeof(float);
+
         if (0 < stepSize)
         {
             data += stepSize;
@@ -227,6 +205,8 @@ void Rendering::FontImpl::Typeset(int viewportWidth, int viewportHeight, int x, 
         data.Increase<float>(x1);
         data.Increase<float>(viewportDY * th);
         data.Increase<float>(tx1);
+        data += sizeof(float);
+
         if (0 < stepSize)
         {
             data += stepSize;

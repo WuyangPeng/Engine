@@ -33,9 +33,9 @@ Rendering::AreaLightEffectImpl::AreaLightEffectImpl(SamplerStateFilter filter,
                                                     int numMaterialConstantBytes,
                                                     int numLightingConstantBytes,
                                                     int numGeometryConstantBytes)
-    : materialConstant{ std::make_shared<ConstantBuffer>(numMaterialConstantBytes, true) },
-      cameraConstant{ std::make_shared<ConstantBuffer>(numLightingConstantBytes, true) },
-      areaLightConstant{ std::make_shared<ConstantBuffer>(numGeometryConstantBytes, true) },
+    : materialConstant{ std::make_shared<ConstantBuffer>("materialConstant", numMaterialConstantBytes, true) },
+      cameraConstant{ std::make_shared<ConstantBuffer>("cameraConstant", numLightingConstantBytes, true) },
+      areaLightConstant{ std::make_shared<ConstantBuffer>("areaLightConstant", numGeometryConstantBytes, true) },
       baseTexture{ std::move(baseTexture) },
       normalTexture{ std::move(normalTexture) },
       commonSampler{ std::make_shared<SamplerState>(filter, mode0, mode1) }

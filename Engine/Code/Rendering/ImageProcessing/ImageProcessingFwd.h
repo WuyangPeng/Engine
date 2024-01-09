@@ -12,9 +12,7 @@
 
 namespace Rendering
 {
-    class ImageProcessing2;
-    class ImageProcessing3;
-    class ImageProcessingBase;
+  
 }
 
 #endif  // RENDERING_IMAGE_PROCESSING_FWD_H

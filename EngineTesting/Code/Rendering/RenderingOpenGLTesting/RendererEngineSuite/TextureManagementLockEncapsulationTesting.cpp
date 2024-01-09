@@ -13,7 +13,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
-#include "Rendering/Resources/Textures/LoadTexture.h"
 
 Rendering::TextureManagementLockEncapsulationTesting::TextureManagementLockEncapsulationTesting(const OStreamShared& stream)
     : ParentType{ stream }

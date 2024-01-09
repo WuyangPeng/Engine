@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/11/30 22:52)
+/// 版本：1.0.0.3 (2023/12/25 22:18)
 
 #include "DatabaseGenerate/DatabaseGenerateBase/AncientBooks/SexagenaryCycle.h"
 #include "DatabaseGenerate/DatabaseGenerateBase/AncientBooks/SexagenaryCycleContainerDetail.h"
@@ -16,8 +16,8 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-DatabaseGenerateCoreTesting::SexagenaryCycleConvertTesting::SexagenaryCycleConvertTesting(const OStreamShared& stream, const SexagenaryCycleContainer& sexagenaryCycleContainer)
-    : ParentType{ stream }, sexagenaryCycleContainer{ sexagenaryCycleContainer }
+DatabaseGenerateCoreTesting::SexagenaryCycleConvertTesting::SexagenaryCycleConvertTesting(const OStreamShared& stream, SexagenaryCycleContainer sexagenaryCycleContainer)
+    : ParentType{ stream }, sexagenaryCycleContainer{ std::move(sexagenaryCycleContainer) }
 {
     DATABASE_GENERATE_CORE_SELF_CLASS_IS_VALID_1;
 }

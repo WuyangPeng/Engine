@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.2 (2023/12/13 14:31)
+/// 版本：1.0.0.3 (2023/12/29 14:28)
 
 #include "Rendering/RenderingExport.h"
 
@@ -87,35 +87,35 @@ Rendering::VertexFormat Rendering::VertexBufferImpl::GetFormat() const
 
 Rendering::VertexBufferImpl::StructuredBufferSharedPtr Rendering::VertexBufferImpl::GetStructuredBuffer() noexcept
 {
-    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_9;
 
     return structuredBuffer.object;
 }
 
 Rendering::VertexBufferImpl::ConstStructuredBufferSharedPtr Rendering::VertexBufferImpl::GetStructuredBuffer() const noexcept
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
     return structuredBuffer.object;
 }
 
 bool Rendering::VertexBufferImpl::StandardUsage() const noexcept
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
     return vertexFormat->GetNumAttributes() != 0 && structuredBuffer.object == nullptr;
 }
 
 int Rendering::VertexBufferImpl::GetStreamingSize() const noexcept
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
     return CoreTools::GetStreamSize(vertexFormat) + CoreTools::GetStreamSize(structuredBuffer);
 }
 
 void Rendering::VertexBufferImpl::Save(BufferTarget& target) const
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
     target.WriteObjectAssociated(vertexFormat);
     target.WriteObjectAssociated(structuredBuffer);
@@ -123,7 +123,7 @@ void Rendering::VertexBufferImpl::Save(BufferTarget& target) const
 
 void Rendering::VertexBufferImpl::Load(BufferSource& source)
 {
-    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_9;
 
     source.ReadObjectAssociated(vertexFormat);
     source.ReadObjectAssociated(structuredBuffer);
@@ -131,7 +131,7 @@ void Rendering::VertexBufferImpl::Load(BufferSource& source)
 
 void Rendering::VertexBufferImpl::Register(ObjectRegister& target) const
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
     target.Register(vertexFormat);
     target.Register(structuredBuffer);
@@ -139,7 +139,7 @@ void Rendering::VertexBufferImpl::Register(ObjectRegister& target) const
 
 void Rendering::VertexBufferImpl::Link(ObjectLink& source)
 {
-    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_9;
 
     source.ResolveLink(vertexFormat);
     source.ResolveLink(structuredBuffer);
@@ -147,21 +147,21 @@ void Rendering::VertexBufferImpl::Link(ObjectLink& source)
 
 int Rendering::VertexBufferImpl::GetIndex(Semantic usage, int usageIndex) const noexcept
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
     return vertexFormat->GetIndex(usage, usageIndex);
 }
 
 Rendering::DataFormatType Rendering::VertexBufferImpl::GetAttributeType(int attribute) const
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
     return vertexFormat->GetAttributeType(attribute);
 }
 
 int Rendering::VertexBufferImpl::GetOffset(int attribute) const
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
     return vertexFormat->GetOffset(attribute);
 }

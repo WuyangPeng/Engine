@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/11/28 22:38)
+/// 版本：1.0.0.3 (2023/12/26 22:55)
 
 #include "DatabaseGenerate/DatabaseGenerateMiddleLayer/DatabaseGenerateMiddleLayerExport.h"
 
@@ -25,7 +25,7 @@ bool DatabaseGenerateMiddleLayer::RenderingManager::Idle(int64_t timeDelta)
 {
     DATABASE_GENERATE_MIDDLE_LAYER_CLASS_IS_VALID_9;
 
-    MAYBE_UNUSED const auto result = GetRenderer()->Draw(320, 320, Rendering::Colour<float>{ 0.0f, 0.3f, 0.4f, 1.0f }, "test");
+    MAYBE_UNUSED const auto result = GetRenderer()->Draw(320, 320, Rendering::Colour{ 1.0f, 0.3f, 0.4f, 1.0f }, "test");
 
     return ParentType::Idle(timeDelta);
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/05 14:36)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/26 15:19)
 
 #include "Rendering/RenderingExport.h"
 
@@ -39,31 +39,138 @@ Rendering::VisualProgram::VisualProgram(OpenGLUInt programHandle, OpenGLUInt ver
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, VisualProgram)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualProgram, GetVertexShader, Rendering::VisualProgram::ConstShaderSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualProgram, GetPixelShader, Rendering::VisualProgram::ConstShaderSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualProgram, GetGeometryShader, Rendering::VisualProgram::ConstShaderSharedPtr)
+Rendering::VisualProgram::ConstShaderSharedPtr Rendering::VisualProgram::GetVertexShader() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualProgram, GetVertexShader, Rendering::VisualProgram::ShaderSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualProgram, GetPixelShader, Rendering::VisualProgram::ShaderSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualProgram, GetGeometryShader, Rendering::VisualProgram::ShaderSharedPtr)
+    return impl->GetVertexShader();
+}
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualProgram, SetVertexShader, ShaderSharedPtr, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualProgram, SetPixelShader, ShaderSharedPtr, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualProgram, SetGeometryShader, ShaderSharedPtr, void)
+Rendering::VisualProgram::ConstShaderSharedPtr Rendering::VisualProgram::GetPixelShader() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualProgram, GetStreamingSize, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualProgram, Save, BufferTarget&, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualProgram, Load, BufferSource&, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualProgram, Register, ObjectRegister&, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualProgram, Link, ObjectLink&, void)
+    return impl->GetPixelShader();
+}
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualProgram, GetObjectByName, std::string, CoreTools::ObjectSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualProgram, GetAllObjectsByName, std::string, Rendering::VisualProgram::ObjectSharedPtrContainer)
+Rendering::VisualProgram::ConstShaderSharedPtr Rendering::VisualProgram::GetGeometryShader() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualProgram, GetConstObjectByName, std::string, CoreTools::ConstObjectSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualProgram, GetAllConstObjectsByName, std::string, Rendering::VisualProgram::ConstObjectSharedPtrContainer)
+    return impl->GetGeometryShader();
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualProgram, GetReflector, Rendering::Reflection)
+Rendering::VisualProgram::ShaderSharedPtr Rendering::VisualProgram::GetVertexShader() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetVertexShader();
+}
+
+Rendering::VisualProgram::ShaderSharedPtr Rendering::VisualProgram::GetPixelShader() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetPixelShader();
+}
+
+Rendering::VisualProgram::ShaderSharedPtr Rendering::VisualProgram::GetGeometryShader() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetGeometryShader();
+}
+
+void Rendering::VisualProgram::SetVertexShader(const ShaderSharedPtr& shader)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetVertexShader(shader);
+}
+
+void Rendering::VisualProgram::SetPixelShader(const ShaderSharedPtr& shader)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetPixelShader(shader);
+}
+
+void Rendering::VisualProgram::SetGeometryShader(const ShaderSharedPtr& shader)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetGeometryShader(shader);
+}
+
+Rendering::VisualProgram::ObjectSharedPtr Rendering::VisualProgram::GetObjectByName(const std::string& name)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetObjectByName(name);
+}
+
+Rendering::VisualProgram::ObjectSharedPtrContainer Rendering::VisualProgram::GetAllObjectsByName(const std::string& name)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetAllObjectsByName(name);
+}
+
+Rendering::VisualProgram::ConstObjectSharedPtr Rendering::VisualProgram::GetConstObjectByName(const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetConstObjectByName(name);
+}
+
+Rendering::VisualProgram::ConstObjectSharedPtrContainer Rendering::VisualProgram::GetAllConstObjectsByName(const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetAllConstObjectsByName(name);
+}
+
+int Rendering::VisualProgram::GetStreamingSize() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetStreamingSize();
+}
+
+void Rendering::VisualProgram::Save(BufferTarget& target) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->Save(target);
+}
+
+void Rendering::VisualProgram::Load(BufferSource& source)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->Load(source);
+}
+
+void Rendering::VisualProgram::Link(ObjectLink& source)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->Link(source);
+}
+
+void Rendering::VisualProgram::Register(ObjectRegister& target) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->Register(target);
+}
+
+Rendering::Reflection Rendering::VisualProgram::GetReflector() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetReflector();
+}
 
 Rendering::VisualProgram::OpenGLUInt Rendering::VisualProgram::GetProgramHandle() const
 {

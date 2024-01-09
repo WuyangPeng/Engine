@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:27)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/08 19:43)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,33 +16,31 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
-#include "Rendering/Resources/Flags/CopyType.h"
-#include "Rendering/Resources/Flags/UsageType.h"
 
 Rendering::OpenGLTextureCubeArray::OpenGLTextureCubeArray(const TextureCubeArraySharedPtr& textureCubeArray, const std::string& name)
     : ParentType{ textureCubeArray, name, TextureTarget::TextureCubeMapArray, TextureTargetBinding::BindingCubeArray }
 {
     SetGLHandle(System::GetGLGenTextures());
-    System::SetGLBindTexture(TextureTarget::TextureCubeMapArray, GetGLHandle());
+    SetGLBindTexture(TextureTarget::TextureCubeMapArray, ClassType::GetGLHandle());
 
     const auto width = textureCubeArray->GetDimension(0);
     const auto height = textureCubeArray->GetDimension(1);
     const auto numItems = textureCubeArray->GetNumItems();
     const auto numCubes = textureCubeArray->GetNumCubes();
 
-    System::SetGLTexturesStorage3D(TextureTarget::TextureCubeMapArray, GetNumLevels(), GetInternalFormat(), width, height, numItems);
+    SetGLTexturesStorage3D(TextureTarget::TextureCubeMapArray, GetNumLevels(), GetInternalFormat(), width, height, numItems);
 
-    System::SetGLPixelStore(System::PixelStore::UnpackAlignment, 1);
-    System::SetGLPixelStore(System::PixelStore::PackAlignment, 1);
+    SetGLPixelStore(System::PixelStore::UnpackAlignment, 1);
+    SetGLPixelStore(System::PixelStore::PackAlignment, 1);
 
-    System::SetGLTexturesParameter(TextureTarget::TextureCubeMapArray, System::TextureParameter::TextureBaseLevel, 0);
-    System::SetGLTexturesParameter(TextureTarget::TextureCubeMapArray, System::TextureParameter::TextureMaxLevel, GetNumLevels() - 1);
+    SetGLTexturesParameter(TextureTarget::TextureCubeMapArray, System::TextureParameter::TextureBaseLevel, 0);
+    SetGLTexturesParameter(TextureTarget::TextureCubeMapArray, System::TextureParameter::TextureMaxLevel, GetNumLevels() - 1);
 
     constexpr auto cubeFaceCount = System::EnumCastUnderlying(CubeFaceType::Count);
 
-    auto texture = boost::polymorphic_pointer_cast<const TextureCubeArray>(GetGraphicsObject());
+    const auto texture = boost::polymorphic_pointer_cast<const TextureCubeArray>(GetGraphicsObject());
 
-    if (CanAutoGenerateMipmaps())
+    if (ClassType::CanAutoGenerateMipmaps())
     {
         for (auto cube = 0; cube < numCubes; ++cube)
         {
@@ -51,10 +49,10 @@ Rendering::OpenGLTextureCubeArray::OpenGLTextureCubeArray(const TextureCubeArray
                 const auto data = texture->GetDataForCubeArray(cube, face, 0);
 
                 const auto item = textureCubeArray->GetItemIndexFor(cube, face);
-                LoadTextureLevel(item, 0, data);
+                ClassType::LoadTextureLevel(item, 0, data);
             }
         }
-        GenerateMipmaps();
+        ClassType::GenerateMipmaps();
     }
     else
     {
@@ -67,13 +65,13 @@ Rendering::OpenGLTextureCubeArray::OpenGLTextureCubeArray(const TextureCubeArray
                     const auto data = texture->GetDataForCubeArray(cube, face, level);
 
                     const auto item = textureCubeArray->GetItemIndexFor(cube, face);
-                    LoadTextureLevel(item, level, data);
+                    ClassType::LoadTextureLevel(item, level, data);
                 }
             }
         }
     }
 
-    System::SetGLBindTexture(TextureTarget::TextureCubeMapArray, 0);
+    SetGLBindTexture(TextureTarget::TextureCubeMapArray, 0);
 
     CreateStaging();
 
@@ -82,7 +80,7 @@ Rendering::OpenGLTextureCubeArray::OpenGLTextureCubeArray(const TextureCubeArray
 
 Rendering::OpenGLTextureCubeArray::~OpenGLTextureCubeArray() noexcept
 {
-    System::SetGLDeleteTextures(GetGLHandle());
+    System::SetGLDeleteTextures(ClassType::GetGLHandle());
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -100,22 +98,17 @@ bool Rendering::OpenGLTextureCubeArray::CanAutoGenerateMipmaps() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto texture = GetTexture();
+    const auto texture = GetTexture();
 
     return texture && texture->HasMipMaps() && texture->WantAutoGenerateMipMaps();
-}
-
-void Rendering::OpenGLTextureCubeArray::Enable() noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
 }
 
 void Rendering::OpenGLTextureCubeArray::LoadTextureLevel(int item, int level, const ConstSpanIterator& data)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto texture = boost::polymorphic_pointer_cast<const TextureCubeArray>(GetGraphicsObject());
-    if (texture && level < texture->GetNumLevels())
+    if (const auto texture = GetTextureCubeArray();
+        texture && level < texture->GetNumLevels())
     {
         const auto width = texture->GetDimension(level, 0);
         const auto height = texture->GetDimension(level, 1);
@@ -125,34 +118,6 @@ void Rendering::OpenGLTextureCubeArray::LoadTextureLevel(int item, int level, co
 
         const auto targetFace = GetCubeFaceTarget(face);
 
-        System::SetGLTexturesSubImage3D(targetFace, level, 0, 0, cube, width, height, 1, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
+        SetGLTexturesSubImage3D(targetFace, level, 0, 0, cube, width, height, 1, GetExternalFormat(), GetExternalType(), data.GetData());
     }
-}
-
-bool Rendering::OpenGLTextureCubeArray::Update(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLTextureCubeArray::CopyGpuToCpu(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLTextureCubeArray::CopyCpuToGpu(MAYBE_UNUSED int level)
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
-}
-
-bool Rendering::OpenGLTextureCubeArray::GetNumActiveElements()
-{
-    CoreTools::DisableNoexcept();
-
-    return false;
 }

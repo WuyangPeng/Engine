@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 20:34)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 14:22)
 
 #include "Rendering/RenderingExport.h"
 
@@ -21,14 +21,14 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TextureArray);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, TextureArray);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, TextureArray);
 
-Rendering::TextureArray::TextureArray(int numElements, int elementSize, GraphicsObjectType type)
-    : ParentType{ numElements, elementSize, type }
+Rendering::TextureArray::TextureArray(const std::string& name, int numElements, int elementSize, GraphicsObjectType type, bool createStorage)
+    : ParentType{ name, numElements, elementSize, type, createStorage }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::TextureArray::TextureArray(int numElements, int elementSize, const StorageType& storage, GraphicsObjectType type)
-    : ParentType{ numElements, elementSize, storage, type }
+Rendering::TextureArray::TextureArray(const std::string& name, int numElements, int elementSize, const StorageType& storage, GraphicsObjectType type)
+    : ParentType{ name, numElements, elementSize, storage, type }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

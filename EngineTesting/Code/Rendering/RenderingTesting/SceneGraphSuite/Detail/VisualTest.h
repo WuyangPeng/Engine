@@ -23,7 +23,6 @@ namespace Rendering
     public:
         explicit VisualTest(const std::string& name);
         VisualTest(const std::string& name,
-                   const VertexFormatSharedPtr& vertexFormat,
                    const VertexBufferSharedPtr& vertexBuffer,
                    const IndexBufferSharedPtr& indexBuffer);
 

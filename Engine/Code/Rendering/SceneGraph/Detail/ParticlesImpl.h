@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:07)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/28 17:48)
 
 #ifndef RENDERING_SCENE_GRAPH_PARTICLES_IMPL_H
 #define RENDERING_SCENE_GRAPH_PARTICLES_IMPL_H
@@ -14,8 +14,7 @@
 
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Mathematics/Algebra/APoint.h"
-#include "Rendering/SceneGraph/SceneGraphFwd.h"
-#include "Rendering/SceneGraph/TrianglesMesh.h"
+#include "Mathematics/Algebra/Vector4.h"
 
 namespace Rendering
 {
@@ -23,45 +22,42 @@ namespace Rendering
     {
     public:
         using ClassType = ParticlesImpl;
+
         using BufferSource = CoreTools::BufferSource;
         using BufferTarget = CoreTools::BufferTarget;
-        using APoint = Mathematics::APointF;
+        using Vector4 = Mathematics::Vector4F;
+        using Container = std::vector<Vector4>;
 
     public:
-        // VertexFormat对象必须包含3元组位置。
-        // 也必须有2元组的纹理坐标在通道零，
-        // 这些都是设置为标准(每个四边形为单位正方形)。
-        // vertexbuffer元素的数量必须是4的倍数。
-        // 元素的粒子数量的是1/4 vertexbuffer元素的个数。
-        // 索引缓冲区是自动生成的。
-        // 'positionSizes'包含位置在开始的三元组和大小在第四元组。
-        ParticlesImpl(const std::vector<Mathematics::Vector4F>& positions, const std::vector<float>& sizes, float sizeAdjust);
+        /// VertexFormat对象必须包含3元组位置。
+        /// 也必须有2元组的纹理坐标在通道零，
+        /// 这些都是设置为标准(每个四边形为单位正方形)。
+        /// vertexBuffer元素的数量必须是4的倍数。
+        /// 元素的粒子数量的是1/4 vertexBuffer元素的个数。
+        /// 索引缓冲区是自动生成的。
+        /// 'positionSizes'包含位置在开始的三元组和大小在第四元组。
+        ParticlesImpl(const Container& positionSize, float sizeAdjust);
         ParticlesImpl() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD int GetNumParticles() const;
-        NODISCARD Mathematics::Vector4F GetParticlesPosition(int index) const;
-        NODISCARD float GetSize(int index) const;
+        NODISCARD Vector4 GetParticlesPosition(int index) const;
         void SetSizeAdjust(float aSizeAdjust);
         NODISCARD float GetSizeAdjust() const noexcept;
 
-        void SetPosition(int index, const Mathematics::Vector4F& position);
-        void SetSize(int index, float size);
-
-        NODISCARD float GetTrueSize(int index) const;
+        void SetPosition(int index, const Vector4& position);
 
         // 允许应用程序指定小于最大数量的顶点绘制。
         void SetNumActive(int aNumActive);
         NODISCARD int GetNumActive() const noexcept;
 
-        void Load(CoreTools::BufferSource& source);
-        void Save(CoreTools::BufferTarget& target) const;
+        void Load(BufferSource& source);
+        void Save(BufferTarget& target) const;
         NODISCARD int GetStreamingSize() const;
 
     private:
-        std::vector<Mathematics::Vector4F> positions;
-        std::vector<float> sizes;
+        Container positionSize;
         float sizeAdjust;
         int numActive;
     };

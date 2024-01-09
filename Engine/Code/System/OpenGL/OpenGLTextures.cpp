@@ -1,19 +1,20 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/29 23:44)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/21 17:25)
 
 #include "System/SystemExport.h"
 
-#include "OpenGLTextures.h" 
+#include "OpenGLTextures.h"
 #include "Flags/OpenGLFlags.h"
 #include "Detail/GL10Extensions.h"
 #include "Detail/GL11Extensions.h"
 #include "Detail/GL12Extensions.h"
+#include "Detail/GL13Extensions.h"
 #include "Detail/GL30Extensions.h"
 #include "Detail/GL42Extensions.h"
 #include "System/Helper/EnumCast.h"
@@ -130,4 +131,14 @@ void System::SetGLGenerateMipmap(TextureTarget target) noexcept
 void System::SetGLFrameBufferTexture2D(FrameBufferType target, ColorAttachment attachment, TextureTarget texTarget, OpenGLUInt texture, OpenGLInt level) noexcept
 {
     GLFramebufferTexture2D(EnumCastUnderlying(target), EnumCastUnderlying(attachment), EnumCastUnderlying(texTarget), texture, level);
+}
+
+void System::SetGLActiveTexture(OpenGLEnum texture) noexcept
+{
+    GLActiveTexture(texture);
+}
+
+void System::SetGLBindImageTexture(OpenGLUInt unit, OpenGLUInt texture, OpenGLInt level, bool layered, OpenGLInt layer, BufferLocking access, OpenGLEnum format) noexcept
+{
+    GLBindImageTexture(unit, texture, level, layered, layer ? GL_TRUE : GL_FALSE, EnumCastUnderlying(access), format);
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 19:41)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 14:05)
 
 #include "Rendering/RenderingExport.h"
 
@@ -27,39 +27,26 @@ COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, DrawTarget)
 CORE_TOOLS_RTTI_DEFINE(Rendering, DrawTarget);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, DrawTarget);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, DrawTarget);
-CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, DrawTarget);
+CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, DrawTarget)
 
-Rendering::DrawTarget::DrawTarget(int numRenderTargets,
+    ;
+
+Rendering::DrawTarget::DrawTarget(const std::string& name,
+                                  int numRenderTargets,
                                   DataFormatType renderTargetFormat,
                                   int width,
                                   int height,
                                   bool hasRenderTargetMipMaps,
-                                  DataFormatType depthStencilFormat)
-    : ParentType{ "DrawTarget" },
-      impl{ numRenderTargets, renderTargetFormat, width, height, hasRenderTargetMipMaps, depthStencilFormat }
+                                  bool createRenderTargetStorage,
+                                  DataFormatType depthStencilFormat,
+                                  bool createDepthStencilStorage)
+    : ParentType{ name },
+      impl{ numRenderTargets, renderTargetFormat, width, height, hasRenderTargetMipMaps, createRenderTargetStorage, depthStencilFormat, createDepthStencilStorage }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, DrawTarget)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, GetNumTargets, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, GetRenderTargetFormat, Rendering::DataFormatType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, GetWidth, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, GetHeight, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, HasRenderTargetMipMaps, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, DrawTarget, HasDepthStencil, bool)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, DrawTarget, GetDepthStencilFormat, Rendering::DataFormatType)
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, DrawTarget, GetRenderTargetTexture, int, Rendering::TextureRenderTargetSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, GetDepthStencilTexture, Rendering::TextureDepthStencilSharedPtr)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, DrawTarget, GetRenderTargetTexture, int, Rendering::ConstTextureRenderTargetSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, GetDepthStencilTexture, Rendering::ConstTextureDepthStencilSharedPtr)
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, AutoGenerateRenderTargetMipMaps, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, WantAutoGenerateRenderTargetMipMaps, bool)
 
 Rendering::DrawTarget::DrawTarget(LoadConstructor loadConstructor)
     : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
@@ -82,13 +69,13 @@ int64_t Rendering::DrawTarget::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const auto registerID = ParentType::Register(target);
-    if (registerID != 0)
+    const auto registerId = ParentType::Register(target);
+    if (registerId != 0)
     {
         impl->Register(target);
     }
 
-    return registerID;
+    return registerId;
 }
 
 void Rendering::DrawTarget::Save(CoreTools::BufferTarget& target) const
@@ -163,4 +150,95 @@ Rendering::RendererDrawTargetSharedPtr Rendering::DrawTarget::CreateRendererDraw
             THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
         }
     }
+}
+
+int Rendering::DrawTarget::GetNumTargets() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetNumTargets();
+}
+
+Rendering::DataFormatType Rendering::DrawTarget::GetRenderTargetFormat() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetRenderTargetFormat();
+}
+
+int Rendering::DrawTarget::GetWidth() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetWidth();
+}
+
+int Rendering::DrawTarget::GetHeight() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetHeight();
+}
+
+bool Rendering::DrawTarget::HasRenderTargetMipMaps() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->HasRenderTargetMipMaps();
+}
+
+Rendering::DataFormatType Rendering::DrawTarget::GetDepthStencilFormat() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDepthStencilFormat();
+}
+
+Rendering::TextureRenderTargetSharedPtr Rendering::DrawTarget::GetRenderTargetTexture(int index)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetRenderTargetTexture(index);
+}
+
+Rendering::TextureDepthStencilSharedPtr Rendering::DrawTarget::GetDepthStencilTexture()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetDepthStencilTexture();
+}
+
+Rendering::ConstTextureRenderTargetSharedPtr Rendering::DrawTarget::GetRenderTargetTexture(int index) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetRenderTargetTexture(index);
+}
+
+Rendering::ConstTextureDepthStencilSharedPtr Rendering::DrawTarget::GetDepthStencilTexture() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDepthStencilTexture();
+}
+
+bool Rendering::DrawTarget::HasDepthStencil() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->HasDepthStencil();
+}
+
+void Rendering::DrawTarget::AutoGenerateRenderTargetMipMaps()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->AutoGenerateRenderTargetMipMaps();
+}
+
+bool Rendering::DrawTarget::WantAutoGenerateRenderTargetMipMaps() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->WantAutoGenerateRenderTargetMipMaps();
 }

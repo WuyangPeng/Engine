@@ -16,8 +16,7 @@
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Mathematics/Algebra/PlaneDetail.h"
-#include "Rendering/SceneGraph/CameraManager.h"
-#include "Rendering/SceneGraph/Culler.h"
+#include "Rendering/Visibility/Culler.h"
 
 #include <random>
 #include <vector>
@@ -39,14 +38,10 @@ void Rendering::CullerTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    CameraManager::Create();
-
     ASSERT_NOT_THROW_EXCEPTION_0(CameraTest);
     ASSERT_NOT_THROW_EXCEPTION_0(PlaneTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SpatialPtrTest);
     ASSERT_NOT_THROW_EXCEPTION_0(VisibleTest);
-
-    CameraManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();
 }

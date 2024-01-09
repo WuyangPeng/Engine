@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/28 15:35)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/04 09:31)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,7 +18,7 @@
 
 COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(Rendering, RenderingDevice)
 
-Rendering::RenderingDevice::RenderingDevice(WindowsHWnd hWnd, WindowsHDC device, OpenGLHglrc immediate)
+Rendering::RenderingDevice::RenderingDevice(WindowsHWnd hWnd, WindowsHdc device, OpenGLRcHandleHglrc immediate)
     : impl{ CoreTools::ImplCreateUseFactory::Default, hWnd, device, immediate }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -172,9 +172,9 @@ void Rendering::RenderingDevice::Flush()
     return impl->Flush();
 }
 
-void Rendering::RenderingDevice::Execute(const ComputeProgramSharedPtr& computeProgram, int numXGroups, int numYGroups, int numZGroups)
+void Rendering::RenderingDevice::Execute(RendererObjectBridge& rendererObjectBridge, ComputeProgram& computeProgram, int numXGroups, int numYGroups, int numZGroups)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return impl->Execute(computeProgram, numXGroups, numYGroups, numZGroups);
+    return impl->Execute(rendererObjectBridge, computeProgram, numXGroups, numYGroups, numZGroups);
 }

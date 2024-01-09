@@ -16,7 +16,6 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/Resources/Textures/Texture2D.h"
-#include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
 #include "Rendering/Shaders/Shader.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Texture2DEffect)

@@ -46,13 +46,6 @@ std::string Rendering::RendererObject::GetName() const
     return impl->GetName();
 }
 
-void Rendering::RendererObject::Disable()
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    CoreTools::DisableNoexcept();
-}
-
 System::OpenGLUInt Rendering::RendererObject::GetGLHandle() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;

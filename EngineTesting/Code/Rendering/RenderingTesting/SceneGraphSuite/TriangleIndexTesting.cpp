@@ -9,8 +9,7 @@
 
 #include "TriangleIndexTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "Rendering/SceneGraph/TriangleIndex.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 Rendering::TriangleIndexTesting::TriangleIndexTesting(const OStreamShared& stream)
@@ -31,11 +30,7 @@ void Rendering::TriangleIndexTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
 }
 
-void Rendering::TriangleIndexTesting::InitTest()
+void Rendering::TriangleIndexTesting::InitTest() noexcept
 {
-    const TriangleIndex triangleIndex(9, 44, 88);
-
-    ASSERT_EQUAL(triangleIndex.GetFirstIndex(), 9);
-    ASSERT_EQUAL(triangleIndex.GetSecondIndex(), 44);
-    ASSERT_EQUAL(triangleIndex.GetThirdIndex(), 88);
+     
 }

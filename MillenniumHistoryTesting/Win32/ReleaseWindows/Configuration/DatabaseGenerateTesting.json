@@ -1,5 +1,5 @@
 {
-  "databaseGenerateServerSuite": {
+  "databaseGenerateSuite": {
     "DatabaseGenerateHelperTesting": 1,
     "DatabaseGenerateMessageTesting": 1
   }

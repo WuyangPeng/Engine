@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 20:19)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 14:29)
 
 #include "Rendering/RenderingExport.h"
 
@@ -124,20 +124,6 @@ int Rendering::TextureCubeImpl::GetLevelDataStreamingSize() const
     return textureLevelData.GetStreamingSize();
 }
 
-void Rendering::TextureCubeImpl::SaveLevelDataToFile(WriteFileManager& outFile) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    textureLevelData.SaveToFile(outFile);
-}
-
-void Rendering::TextureCubeImpl::LoadLevelDataFromFile(ReadFileManager& inFile)
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    textureLevelData.ReadFromFile(inFile);
-}
-
 void Rendering::TextureCubeImpl::AutoGenerateMipMaps() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -169,21 +155,4 @@ int Rendering::TextureCubeImpl::GetIndex(int item, int level) const
     }
 
     return GetNumLevels() * item + level;
-}
-
-void Rendering::TextureCubeImpl::SaveBaseToFile(WriteFileManager& outFile) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    const auto dataFormatType = GetFormat();
-    outFile.Write(sizeof(DataFormatType), &dataFormatType);
-
-    const auto dimension0 = GetDimension(0);
-    outFile.Write(sizeof(int32_t), &dimension0);
-
-    const auto hasMipMaps = HasMipMaps();
-    outFile.Write(sizeof(bool), &hasMipMaps);
-
-    const auto numItems = GetNumItems();
-    outFile.Write(sizeof(int32_t), &numItems);
 }

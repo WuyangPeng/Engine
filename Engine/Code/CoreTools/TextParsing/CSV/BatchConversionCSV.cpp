@@ -30,7 +30,15 @@ void CoreTools::BatchConversionCSV::Execution(const String& inputDirectory, cons
     for (const std::filesystem::path path{ StringConversion::StandardConversionWideChar(inputDirectory) };
          const auto& inputPath : std::filesystem::directory_iterator(path))
     {
+#ifdef SYSTEM_PLATFORM_LINUX
+
+        const auto& nativeFileName = StringConversion::MultiByteConversionStandard(inputPath.path().native());
+
+#else  // !SYSTEM_PLATFORM_LINUX
+
         const auto& nativeFileName = StringConversion::WideCharConversionStandard(inputPath.path().native());
+
+#endif  // SYSTEM_PLATFORM_LINUX
 
         const BatchConversionCSVImpl impl{ nativeFileName, outputDirectory };
     }

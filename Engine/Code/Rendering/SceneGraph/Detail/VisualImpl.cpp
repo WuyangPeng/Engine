@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.2 (2023/12/20 09:55)
+/// 版本：1.0.0.3 (2023/12/28 17:53)
 
 #include "Rendering/RenderingExport.h"
 
@@ -28,8 +28,14 @@ Rendering::VisualImpl::VisualImpl() noexcept
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::VisualImpl::VisualImpl(const VertexFormatSharedPtr& vertexFormat, const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer) noexcept
-    : visualData{ vertexFormat, vertexBuffer, indexBuffer }, modelBound{}, visualEffect{}
+Rendering::VisualImpl::VisualImpl(const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer, const VisualEffectSharedPtr& visualEffect) noexcept
+    : visualData{ vertexBuffer, indexBuffer }, modelBound{}, visualEffect{ visualEffect }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::VisualImpl::VisualImpl(const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer) noexcept
+    : visualData{ vertexBuffer, indexBuffer }, modelBound{}, visualEffect{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -75,13 +81,6 @@ Rendering::IndexFormatType Rendering::VisualImpl::GetPrimitiveType() const
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return visualData.GetPrimitiveType();
-}
-
-Rendering::ConstVertexFormatSharedPtr Rendering::VisualImpl::GetConstVertexFormat() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    return visualData.GetConstVertexFormat();
 }
 
 Rendering::VisualImpl::BoundingSphere& Rendering::VisualImpl::GetModelBound() noexcept
@@ -150,20 +149,6 @@ void Rendering::VisualImpl::SetVertexBuffer(const VertexBufferSharedPtr& vertexB
     RENDERING_CLASS_IS_VALID_9;
 
     visualData.SetVertexBuffer(vertexBuffer);
-}
-
-Rendering::VertexFormatSharedPtr Rendering::VisualImpl::GetVertexFormat() noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    return visualData.GetVertexFormat();
-}
-
-void Rendering::VisualImpl::SetVertexFormat(const VertexFormatSharedPtr& vertexFormat) noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    visualData.SetVertexFormat(vertexFormat);
 }
 
 void Rendering::VisualImpl::SetVisualEffect(const VisualEffectSharedPtr& aVisualEffect) noexcept

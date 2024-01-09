@@ -104,7 +104,7 @@
     <ClInclude Include="..\..\..\Code\SoundEffect\Interface\InterfaceFwd.h">
       <Filter>Interface 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\SoundEffect\Interface\User.h">
+    <ClInclude Include="..\..\..\Code\SoundEffect\Interface\Placeholder.h">
       <Filter>Interface 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\SoundEffect\Ogg\Ogg.h">
@@ -147,7 +147,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-	<Text Include="Resource\Todo\Level 0.txt">
+    <Text Include="Resource\Todo\Level 0.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
     <Text Include="Resource\Todo\Level 1.txt">
@@ -176,6 +176,6 @@
     </Text>
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
-    </Text>    
+    </Text>
   </ItemGroup>
 </Project>

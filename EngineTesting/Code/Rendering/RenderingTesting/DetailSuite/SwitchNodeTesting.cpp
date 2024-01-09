@@ -18,7 +18,6 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/Detail/SwitchNode.h"
-#include "Rendering/SceneGraph/CameraManager.h"
 
 Rendering::SwitchNodeTesting::SwitchNodeTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -37,7 +36,7 @@ void Rendering::SwitchNodeTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    CameraManager::Create();
+ 
 
     ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CopyTest);
@@ -45,7 +44,7 @@ void Rendering::SwitchNodeTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(ChildTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
 
-    CameraManager::Destroy();
+
 
     CoreTools::InitTerm::ExecuteTerminator();
 }

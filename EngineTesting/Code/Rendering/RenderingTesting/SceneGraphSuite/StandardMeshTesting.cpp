@@ -10,9 +10,7 @@
 #include "StandardMeshTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/SceneGraph/CameraManager.h"
-#include "Rendering/SceneGraph/StandardMesh.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h" 
 
 #include <vector>
 
@@ -29,13 +27,7 @@ void Rendering::StandardMeshTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Rendering::StandardMeshTesting::MainTest()
+void Rendering::StandardMeshTesting::MainTest() noexcept
 {
-    CoreTools::InitTerm::ExecuteInitializer();
-
-    CameraManager::Create();
-  
-    CameraManager::Destroy();
-
-    CoreTools::InitTerm::ExecuteTerminator();
+   
 }

@@ -34,8 +34,8 @@ namespace Rendering
         using ObjectRegister = CoreTools::ObjectRegister;
         using MaterialSharedPtr = std::shared_ptr<Material>;
         using ConstMaterialSharedPtr = std::shared_ptr<const Material>;
-        using LightSharedPtr = std::shared_ptr<Light>;
-        using ConstLightSharedPtr = std::shared_ptr<const Light>;
+        using LightSharedPtr = std::shared_ptr<Lighting>;
+        using ConstLightSharedPtr = std::shared_ptr<const Lighting>;
         using LightCameraGeometrySharedPtr = std::shared_ptr<LightCameraGeometry>;
         using ConstLightCameraGeometrySharedPtr = std::shared_ptr<const LightCameraGeometry>;
         using ConstantBufferObjectAssociated = CoreTools::ObjectAssociated<ConstantBuffer>;

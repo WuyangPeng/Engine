@@ -20,7 +20,7 @@ Rendering::ConstantColorEffectImpl::ConstantColorEffectImpl() noexcept
 }
 
 Rendering::ConstantColorEffectImpl::ConstantColorEffectImpl(int numColorConstantBytes)
-    : colorConstant{ std::make_shared<ConstantBuffer>(numColorConstantBytes, true) }
+    : colorConstant{ std::make_shared<ConstantBuffer>("colorConstant", numColorConstantBytes, true) }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

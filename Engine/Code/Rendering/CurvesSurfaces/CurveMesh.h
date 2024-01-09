@@ -15,11 +15,11 @@
 #include "CurveSegment.h"
 #include "FloatArray.h"
 #include "CoreTools/ObjectSystems/ObjectAssociated.h"
-#include "Rendering/SceneGraph/Polysegment.h"
+#include "Rendering/SceneGraph/Visual.h"
 
 namespace Rendering
 {
-    class CurveMesh : public Polysegment
+    class CurveMesh : public Visual
     {
     private:
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(CurveMesh);
@@ -27,10 +27,10 @@ namespace Rendering
 
     public:
         using ClassType = CurveMesh;
-        using ParentType = Polysegment;
+        using ParentType = Visual;
 
     public:
-        CurveMesh(const VertexFormatSharedPtr& vformat, const VertexBufferSharedPtr& vbuffer, const std::vector<CoreTools::ObjectAssociated<CurveSegment>>& segments, const FloatArraySharedPtr& params, bool allowDynamicChange);
+        CurveMesh(const VertexBufferSharedPtr& vbuffer, const std::vector<CoreTools::ObjectAssociated<CurveSegment>>& segments, const FloatArraySharedPtr& params, bool allowDynamicChange);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

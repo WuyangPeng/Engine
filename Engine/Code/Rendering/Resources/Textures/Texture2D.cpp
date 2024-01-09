@@ -1,19 +1,17 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 20:26)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 14:11)
 
 #include "Rendering/RenderingExport.h"
 
 #include "Texture2D.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-#include "CoreTools/FileManager/ReadFileManager.h"
-#include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -30,22 +28,26 @@
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Texture2D)
 
-CORE_TOOLS_RTTI_DEFINE(Rendering, Texture2D);
+CORE_TOOLS_RTTI_DEFINE(Rendering, Texture2D)
+
+    ;
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Texture2D);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture2D);
 
-Rendering::Texture2D::Texture2D(DataFormatType format, int width, int height, bool hasMipMaps)
-    : ParentType{ ImplType::GetTotalElements(1, width, height, 1, hasMipMaps),
+Rendering::Texture2D::Texture2D(const std::string& name, DataFormatType format, int width, int height, bool hasMipMaps, bool createStorage)
+    : ParentType{ name,
+                  ImplType::GetTotalElements(1, width, height, 1, hasMipMaps),
                   DataFormat::GetNumBytesPerStruct(format),
-                  GraphicsObjectType::Texture2 },
+                  GraphicsObjectType::Texture2,
+                  createStorage },
       impl{ format, width, height, hasMipMaps },
       shared{ false }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Texture2D::Texture2D(DataFormatType format, int width, int height, bool hasMipMaps, GraphicsObjectType type)
-    : ParentType{ ImplType::GetTotalElements(1, width, height, 1, hasMipMaps), DataFormat::GetNumBytesPerStruct(format), type },
+Rendering::Texture2D::Texture2D(const std::string& name, DataFormatType format, int width, int height, bool hasMipMaps, GraphicsObjectType type, bool createStorage)
+    : ParentType{ name, ImplType::GetTotalElements(1, width, height, 1, hasMipMaps), DataFormat::GetNumBytesPerStruct(format), type, createStorage },
       impl{ format, width, height, hasMipMaps },
       shared{ false }
 {
@@ -54,52 +56,11 @@ Rendering::Texture2D::Texture2D(DataFormatType format, int width, int height, bo
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Texture2D)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, GetNumItems, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, GetFormat, Rendering::DataFormatType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, GetNumLevels, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Texture2D, GetDimension, int, int)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, GetNumDimensions, int)
-
 int Rendering::Texture2D::GetDimension(int index, int level) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetDimension(index, level);
-}
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Texture2D, GetNumLevelBytes, int, int)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Texture2D, GetWidth, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Texture2D, GetHeight, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, HasMipMaps, bool)
-
-void Rendering::Texture2D::SaveToFile(WriteFileManager& outFile) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    ParentType::SaveTypeToFile(outFile);
-
-    impl->SaveToFile(outFile);
-
-    ParentType::SaveResourceDataToFile(outFile);
-
-    outFile.Write(sizeof(bool), &shared);
-
-    ParentType::SaveStorageDataToFile(outFile);
-}
-
-void Rendering::Texture2D::ReadFromFile(ReadFileManager& inFile)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    impl->ReadFromFile(inFile);
-
-    ParentType::ReadResourceDataFromFile(inFile);
-
-    inFile.Read(sizeof(bool), &shared);
-
-    ParentType::ReadStorageDataFromFile(inFile);
 }
 
 int Rendering::Texture2D::GetLevelOffset(int item, int level) const
@@ -108,10 +69,6 @@ int Rendering::Texture2D::GetLevelOffset(int item, int level) const
 
     return impl->GetLevelOffset(item, level);
 }
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, AutoGenerateMipMaps, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, WantAutoGenerateMipMaps, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, GetNumSubResources, int)
 
 int Rendering::Texture2D::GetIndex(int item, int level) const
 {
@@ -228,7 +185,7 @@ bool Rendering::Texture2D::IsShared() const noexcept
 
 Rendering::Texture2D::RendererObjectSharedPtr Rendering::Texture2D::CreateRendererObject(RendererTypes rendererTypes)
 {
-    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
     switch (rendererTypes)
     {
@@ -241,4 +198,88 @@ Rendering::Texture2D::RendererObjectSharedPtr Rendering::Texture2D::CreateRender
             THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
         }
     }
+}
+
+int Rendering::Texture2D::GetNumItems() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNumItems();
+}
+
+int Rendering::Texture2D::GetDimension(int index) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetDimension(index);
+}
+
+Rendering::DataFormatType Rendering::Texture2D::GetFormat() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetFormat();
+}
+
+int Rendering::Texture2D::GetNumLevels() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNumLevels();
+}
+
+int Rendering::Texture2D::GetNumDimensions() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNumDimensions();
+}
+
+int Rendering::Texture2D::GetNumLevelBytes(int level) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNumLevelBytes(level);
+}
+
+bool Rendering::Texture2D::HasMipMaps() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->HasMipMaps();
+}
+
+int Rendering::Texture2D::GetWidth() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetWidth();
+}
+
+int Rendering::Texture2D::GetHeight() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetHeight();
+}
+
+void Rendering::Texture2D::AutoGenerateMipMaps() noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->AutoGenerateMipMaps();
+}
+
+bool Rendering::Texture2D::WantAutoGenerateMipMaps() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->WantAutoGenerateMipMaps();
+}
+
+int Rendering::Texture2D::GetNumSubResources() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetNumSubResources();
 }

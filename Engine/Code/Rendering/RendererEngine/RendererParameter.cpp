@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/25 15:37)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/02 16:21)
 
 #include "Rendering/RenderingExport.h"
 
@@ -22,7 +22,7 @@ COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, RendererParameter)
 Rendering::RendererParameter::RendererParameter(const std::string& fileName)
     : impl{ CreateRendererParameter(fileName) }
 {
-    RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::RendererParameter::PackageType Rendering::RendererParameter::CreateRendererParameter(const std::string& fileName)
@@ -43,36 +43,142 @@ Rendering::RendererParameter::PackageType Rendering::RendererParameter::CreateRe
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, RendererParameter)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetColorFormat, Rendering::DataFormatType)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetDepthStencilFormat, Rendering::DataFormatType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetNumMultiSamples, int);
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetClearColor, Rendering::RendererParameter::ColourType);
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, GetWindowTitle, std::string);
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetXPosition, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetYPosition, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetWidth, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetHeight, int);
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, IsAllowResize, bool);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetRendererType, Rendering::RendererTypes);
-
 void Rendering::RendererParameter::Resize(int width, int height)
 {
-    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_9;
 
     return impl->Resize(width, height);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetRendererBasis, Rendering::RendererBasis);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, GetWindowMenuName, System::String);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, GetWindowClassName, System::String);
+Rendering::RendererTypes Rendering::RendererParameter::GetRendererType() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetIcon, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, IsIconDefault, bool);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetCursor, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, IsCursorDefault, bool);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetBackground, System::WindowsBrushTypes);
+    return impl->GetRendererType();
+}
+
+Rendering::DataFormatType Rendering::RendererParameter::GetColorFormat() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetColorFormat();
+}
+
+Rendering::DataFormatType Rendering::RendererParameter::GetDepthStencilFormat() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDepthStencilFormat();
+}
+
+int Rendering::RendererParameter::GetNumMultiSamples() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetNumMultiSamples();
+}
+
+Rendering::RendererParameter::ColourType Rendering::RendererParameter::GetClearColor() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetClearColor();
+}
+
+std::string Rendering::RendererParameter::GetWindowTitle() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetWindowTitle();
+}
+
+int Rendering::RendererParameter::GetXPosition() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetXPosition();
+}
+
+int Rendering::RendererParameter::GetYPosition() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetYPosition();
+}
+
+int Rendering::RendererParameter::GetWidth() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetWidth();
+}
+
+int Rendering::RendererParameter::GetHeight() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetHeight();
+}
+
+bool Rendering::RendererParameter::IsAllowResize() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsAllowResize();
+}
+
+Rendering::RendererBasis Rendering::RendererParameter::GetRendererBasis() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetRendererBasis();
+}
+
+Rendering::RendererParameter::String Rendering::RendererParameter::GetWindowMenuName() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetWindowMenuName();
+}
+
+Rendering::RendererParameter::String Rendering::RendererParameter::GetWindowClassName() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetWindowClassName();
+}
+
+int Rendering::RendererParameter::GetIcon() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetIcon();
+}
+
+bool Rendering::RendererParameter::IsIconDefault() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsIconDefault();
+}
+
+int Rendering::RendererParameter::GetCursor() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetCursor();
+}
+
+bool Rendering::RendererParameter::IsCursorDefault() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsCursorDefault();
+}
+
+Rendering::RendererParameter::WindowsBrushTypes Rendering::RendererParameter::GetBackground() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetBackground();
+}

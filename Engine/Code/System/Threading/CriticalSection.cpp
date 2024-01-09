@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/30 18:22)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/21 16:18)
 
 #include "System/SystemExport.h"
 
@@ -87,7 +87,7 @@ bool System::InitializeSystemCriticalSection(ThreadingCriticalSectionPtr critica
 {
 #if defined(SYSTEM_USE_SPIN_COUNT_CRITICAL_SECTION)
 
-    // 在MSVS2010文档中提到，堆管理器自旋锁设定为大约4000。让我们看看如何做到4096。
+    // 在MSVC2010文档中提到，堆管理器自旋锁设定为大约4000。让我们看看如何做到4096。
     return InitializeSystemCriticalSectionAndSpinCount(criticalSection, 4096);
 
 #else  // !SYSTEM_SPIN_COUNT_CRITICAL_SECTION
@@ -147,9 +147,7 @@ bool System::TryEnterSystemCriticalSection(ThreadingCriticalSectionPtr criticalS
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    criticalSection->try_lock();
-
-    return false;
+    return criticalSection->try_lock();
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

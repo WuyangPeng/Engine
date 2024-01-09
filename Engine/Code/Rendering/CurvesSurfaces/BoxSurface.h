@@ -13,8 +13,9 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Mathematics/CurvesSurfacesVolumes/BSplineVolume.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
+#include "Rendering/Resources/Buffers/VertexFormat.h"
 #include "Rendering/SceneGraph/Node.h"
-#include "Rendering/SceneGraph/TrianglesMesh.h"
 
 namespace Rendering
 {
@@ -37,13 +38,11 @@ namespace Rendering
         NODISCARD int GetNumVSamples() const noexcept;
         NODISCARD int GetNumWSamples() const noexcept;
 
-        void UpdateSurface();
+        void UpdateSurface() noexcept;
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
     protected:
-        NODISCARD TrianglesMeshSharedPtr CreateFace(int numRows, int numCols, const VertexFormatSharedPtr& vformat, bool ccw, float faceValue, const std::array<int, 3>& permute);
-
         void UpdateFace(int numRows, int numCols, const VertexFormatSharedPtr& vformat, const VertexBufferSharedPtr& vbuffer, bool ccw, float faceValue, const std::array<int, 3>& permute);
 
     private:

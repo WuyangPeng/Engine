@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.2 (2023/12/20 09:54)
+/// 版本：1.0.0.3 (2023/12/28 17:53)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,23 +18,21 @@
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
-#include "Rendering/Resources/Flags/DataFormatType.h"
 
 Rendering::VisualData::VisualData() noexcept
-    : vertexFormat{}, vertexBuffer{}, indexBuffer{}
+    : vertexBuffer{}, indexBuffer{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::VisualData::VisualData(const VertexFormatSharedPtr& vertexFormat, const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer) noexcept
-    : vertexFormat{ vertexFormat }, vertexBuffer{ vertexBuffer }, indexBuffer{ indexBuffer }
+Rendering::VisualData::VisualData(const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer) noexcept
+    : vertexBuffer{ vertexBuffer }, indexBuffer{ indexBuffer }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::VisualData::VisualData(const VisualData& rhs)
-    : vertexFormat{ rhs.vertexFormat.Clone() },
-      vertexBuffer{ rhs.vertexBuffer.Clone() },
+    : vertexBuffer{ rhs.vertexBuffer.Clone() },
       indexBuffer{ rhs.indexBuffer.Clone() }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -44,7 +42,6 @@ Rendering::VisualData& Rendering::VisualData::operator=(const VisualData& rhs)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    vertexFormat.object = rhs.vertexFormat.Clone();
     vertexBuffer.object = rhs.vertexBuffer.Clone();
     indexBuffer.object = rhs.indexBuffer.Clone();
 
@@ -52,8 +49,7 @@ Rendering::VisualData& Rendering::VisualData::operator=(const VisualData& rhs)
 }
 
 Rendering::VisualData::VisualData(VisualData&& rhs) noexcept
-    : vertexFormat{ std::move(rhs.vertexFormat) },
-      vertexBuffer{ std::move(rhs.vertexBuffer) },
+    : vertexBuffer{ std::move(rhs.vertexBuffer) },
       indexBuffer{ std::move(rhs.indexBuffer) }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -63,7 +59,6 @@ Rendering::VisualData& Rendering::VisualData::operator=(VisualData&& rhs) noexce
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    vertexFormat = std::move(rhs.vertexFormat);
     vertexBuffer = std::move(rhs.vertexBuffer);
     indexBuffer = std::move(rhs.indexBuffer);
 
@@ -82,13 +77,6 @@ Rendering::IndexFormatType Rendering::VisualData::GetPrimitiveType() const
     }
 
     return indexBuffer->GetPrimitiveType();
-}
-
-Rendering::ConstVertexFormatSharedPtr Rendering::VisualData::GetConstVertexFormat() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    return vertexFormat.object;
 }
 
 Rendering::VisualData::ConstSpanIterator Rendering::VisualData::GetVertexBufferReadOnlyData() const noexcept
@@ -122,32 +110,6 @@ Rendering::VisualData::ConstSpanIterator Rendering::VisualData::GetConstChannel(
     return vertexBuffer->GetConstChannel(semantic, unit, requiredTypes);
 }
 
-int Rendering::VisualData::GetPositionOffset() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    const auto positionIndex = vertexFormat->GetIndex(VertexFormatFlags::Semantic::Position);
-    if (positionIndex == -1)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("更新需要顶点位置\n"s))
-    }
-
-    if (const auto positionType = vertexFormat->GetAttributeType(positionIndex);
-        positionType != DataFormatType::R32G32B32Float && positionType != DataFormatType::R32G32B32A32Float)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("顶点必须是3元组或4元组\n"s))
-    }
-
-    return vertexFormat.object->GetOffset(positionIndex);
-}
-
-int Rendering::VisualData::GetVertexFormatStride() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    return vertexFormat.object->GetVertexSize();
-}
-
 int Rendering::VisualData::GetVertexBufferNumElements() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
@@ -159,7 +121,7 @@ bool Rendering::VisualData::IsVertexSharedPtrValid() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    if (!(!vertexBuffer.object || !vertexFormat.object))
+    if (vertexBuffer.object)
     {
         return true;
     }
@@ -211,25 +173,10 @@ void Rendering::VisualData::SetVertexBuffer(const VertexBufferSharedPtr& aVertex
     vertexBuffer.object = aVertexBuffer;
 }
 
-Rendering::VertexFormatSharedPtr Rendering::VisualData::GetVertexFormat() noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    return vertexFormat.object;
-}
-
-void Rendering::VisualData::SetVertexFormat(const VertexFormatSharedPtr& aVertexFormat) noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    vertexFormat.object = aVertexFormat;
-}
-
 void Rendering::VisualData::Load(BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    source.ReadObjectAssociated(vertexFormat);
     source.ReadObjectAssociated(vertexBuffer);
     source.ReadObjectAssociated(indexBuffer);
 }
@@ -238,7 +185,6 @@ void Rendering::VisualData::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    target.WriteObjectAssociated(vertexFormat);
     target.WriteObjectAssociated(vertexBuffer);
     target.WriteObjectAssociated(indexBuffer);
 }
@@ -247,9 +193,8 @@ int Rendering::VisualData::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CoreTools::GetStreamSize(vertexFormat);
+    auto size = CoreTools::GetStreamSize(vertexBuffer);
 
-    size += CoreTools::GetStreamSize(vertexBuffer);
     size += CoreTools::GetStreamSize(indexBuffer);
 
     return size;
@@ -259,7 +204,6 @@ void Rendering::VisualData::Register(ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    target.Register(vertexFormat);
     target.Register(vertexBuffer);
     target.Register(indexBuffer);
 }
@@ -268,7 +212,6 @@ void Rendering::VisualData::Link(ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    source.ResolveLink(vertexFormat);
     source.ResolveLink(vertexBuffer);
     source.ResolveLink(indexBuffer);
 }
@@ -277,13 +220,7 @@ CoreTools::ObjectSharedPtr Rendering::VisualData::GetObjectByName(const std::str
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto object = vertexFormat->GetObjectByName(name);
-    if (!object->IsNullObject())
-    {
-        return object;
-    }
-
-    object = vertexBuffer->GetObjectByName(name);
+    auto object = vertexBuffer->GetObjectByName(name);
     if (!object->IsNullObject())
     {
         return object;
@@ -302,13 +239,11 @@ Rendering::VisualData::ObjectSharedPtrContainer Rendering::VisualData::GetAllObj
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    const auto vertexFormatObjects = vertexFormat->GetAllObjectsByName(name);
     const auto vertexBufferObjects = vertexBuffer->GetAllObjectsByName(name);
     const auto indexBufferObjects = indexBuffer->GetAllObjectsByName(name);
 
     ObjectSharedPtrContainer entirelyObjects{};
 
-    entirelyObjects.insert(entirelyObjects.end(), vertexFormatObjects.begin(), vertexFormatObjects.end());
     entirelyObjects.insert(entirelyObjects.end(), vertexBufferObjects.begin(), vertexBufferObjects.end());
     entirelyObjects.insert(entirelyObjects.end(), indexBufferObjects.begin(), indexBufferObjects.end());
 
@@ -319,13 +254,7 @@ CoreTools::ConstObjectSharedPtr Rendering::VisualData::GetConstObjectByName(cons
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto object = vertexFormat->GetConstObjectByName(name);
-    if (!object->IsNullObject())
-    {
-        return object;
-    }
-
-    object = vertexBuffer->GetConstObjectByName(name);
+    auto object = vertexBuffer->GetConstObjectByName(name);
     if (!object->IsNullObject())
     {
         return object;
@@ -344,13 +273,11 @@ Rendering::VisualData::ConstObjectSharedPtrContainer Rendering::VisualData::GetA
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    const auto vertexFormatObjects = vertexFormat->GetAllConstObjectsByName(name);
     const auto vertexBufferObjects = vertexBuffer->GetAllConstObjectsByName(name);
     const auto indexBufferObjects = indexBuffer->GetAllConstObjectsByName(name);
 
     ConstObjectSharedPtrContainer entirelyObjects{};
 
-    entirelyObjects.insert(entirelyObjects.end(), vertexFormatObjects.begin(), vertexFormatObjects.end());
     entirelyObjects.insert(entirelyObjects.end(), vertexBufferObjects.begin(), vertexBufferObjects.end());
     entirelyObjects.insert(entirelyObjects.end(), indexBufferObjects.begin(), indexBufferObjects.end());
 

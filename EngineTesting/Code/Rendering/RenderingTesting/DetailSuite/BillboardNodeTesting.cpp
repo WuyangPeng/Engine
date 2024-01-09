@@ -18,7 +18,6 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/Detail/BillboardNode.h"
-#include "Rendering/SceneGraph/CameraManager.h"
 
 Rendering::BillboardNodeTesting::BillboardNodeTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -37,14 +36,14 @@ void Rendering::BillboardNodeTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    CameraManager::Create();
+
 
     ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CopyTest);
     ASSERT_NOT_THROW_EXCEPTION_0(TransformTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
 
-    CameraManager::Destroy();
+
 
     CoreTools::InitTerm::ExecuteTerminator();
 }

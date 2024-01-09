@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/28 15:55)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/21 19:23)
 
 #include "System/SystemExport.h"
 
@@ -79,7 +79,7 @@ bool System::FormatErrorMessage(WindowsHLocal& errorMessage, WindowError lastErr
 {
     constexpr FormatErrorMessageParameter parameter{ FormatMessageOption::FromSystem | FormatMessageOption::IgnoreInserts | FormatMessageOption::AllocateBuffer };
 
-    const auto size = FormatErrorMessage(parameter.GetOption(), parameter.GetWidth(), nullptr, lastError, parameter.GetLanguageIdData(), ReinterpretCast(errorMessage), 0, nullptr);
+    const auto size = FormatErrorMessage(parameter.GetOption(), FormatErrorMessageParameter::GetWidth(), nullptr, lastError, FormatErrorMessageParameter::GetLanguageIdData(), ReinterpretCast(errorMessage), 0, nullptr);
 
     return size != 0;
 }
@@ -88,14 +88,14 @@ System::WindowsDWord System::FormatErrorMessage(WindowError lastError, TChar* bu
 {
     constexpr FormatErrorMessageParameter parameter{ FormatMessageOption::FromSystem | FormatMessageOption::IgnoreInserts };
 
-    return FormatErrorMessage(parameter.GetOption(), parameter.GetWidth(), nullptr, lastError, parameter.GetLanguageIdData(), buffer, size, nullptr);
+    return FormatErrorMessage(parameter.GetOption(), FormatErrorMessageParameter::GetWidth(), nullptr, lastError, FormatErrorMessageParameter::GetLanguageIdData(), buffer, size, nullptr);
 }
 
 bool System::FormatErrorMessage(WindowsHLocal& errorMessage, ConstDynamicLinkModule module, WindowError lastError) noexcept
 {
     constexpr FormatErrorMessageParameter parameter{ FormatMessageOption::FromHModule | FormatMessageOption::IgnoreInserts | FormatMessageOption::AllocateBuffer };
 
-    const auto size = FormatErrorMessage(parameter.GetOption(), parameter.GetWidth(), module, lastError, parameter.GetLanguageIdData(), ReinterpretCast(errorMessage), 0, nullptr);
+    const auto size = FormatErrorMessage(parameter.GetOption(), FormatErrorMessageParameter::GetWidth(), module, lastError, FormatErrorMessageParameter::GetLanguageIdData(), ReinterpretCast(errorMessage), 0, nullptr);
 
     return size != 0;
 }
@@ -104,33 +104,33 @@ System::WindowsDWord System::FormatErrorMessage(ConstDynamicLinkModule module, W
 {
     constexpr FormatErrorMessageParameter parameter{ FormatMessageOption::FromHModule | FormatMessageOption::IgnoreInserts };
 
-    return FormatErrorMessage(parameter.GetOption(), parameter.GetWidth(), module, lastError, parameter.GetLanguageIdData(), buffer, size, nullptr);
+    return FormatErrorMessage(parameter.GetOption(), FormatErrorMessageParameter::GetWidth(), module, lastError, FormatErrorMessageParameter::GetLanguageIdData(), buffer, size, nullptr);
 }
 
 System::WindowsDWord System::FormatStringMessage(const TChar* message, TChar* buffer, WindowsDWord size, WindowsDWordPtrSizeType* arguments) noexcept
 {
     constexpr FormatErrorMessageParameter parameter{ FormatMessageOption::FromString | FormatMessageOption::ArgumentArray };
 
-    return FormatErrorMessage(parameter.GetOption(), parameter.GetWidth(), message, parameter.GetWindowError(), parameter.GetLanguageIdData(), buffer, size, ReinterpretCast(arguments));
+    return FormatErrorMessage(parameter.GetOption(), FormatErrorMessageParameter::GetWidth(), message, FormatErrorMessageParameter::GetWindowError(), FormatErrorMessageParameter::GetLanguageIdData(), buffer, size, ReinterpretCast(arguments));
 }
 
 System::WindowsDWord System::FormatStringMessage(const TChar* message, TChar* buffer, WindowsDWord size, va_list* arguments) noexcept
 {
     constexpr FormatErrorMessageParameter parameter{ FormatMessageOption::FromString };
 
-    return FormatErrorMessage(parameter.GetOption(), parameter.GetWidth(), message, parameter.GetWindowError(), parameter.GetLanguageIdData(), buffer, size, arguments);
+    return FormatErrorMessage(parameter.GetOption(), FormatErrorMessageParameter::GetWidth(), message, FormatErrorMessageParameter::GetWindowError(), FormatErrorMessageParameter::GetLanguageIdData(), buffer, size, arguments);
 }
 
 System::WindowsDWord System::FormatStringMessage(const TChar* message, WindowsHLocal& resultMessage, WindowsDWordPtrSizeType* arguments) noexcept
 {
     constexpr FormatErrorMessageParameter parameter{ FormatMessageOption::FromString | FormatMessageOption::ArgumentArray | FormatMessageOption::AllocateBuffer };
 
-    return FormatErrorMessage(parameter.GetOption(), parameter.GetWidth(), message, parameter.GetWindowError(), parameter.GetLanguageIdData(), ReinterpretCast(resultMessage), 0, ReinterpretCast(arguments));
+    return FormatErrorMessage(parameter.GetOption(), FormatErrorMessageParameter::GetWidth(), message, FormatErrorMessageParameter::GetWindowError(), FormatErrorMessageParameter::GetLanguageIdData(), ReinterpretCast(resultMessage), 0, ReinterpretCast(arguments));
 }
 
 System::WindowsDWord System::FormatStringMessage(const TChar* message, WindowsHLocal& resultMessage, va_list* arguments) noexcept
 {
     constexpr FormatErrorMessageParameter parameter{ FormatMessageOption::FromString | FormatMessageOption::AllocateBuffer };
 
-    return FormatErrorMessage(parameter.GetOption(), parameter.GetWidth(), message, parameter.GetWindowError(), parameter.GetLanguageIdData(), ReinterpretCast(resultMessage), 0, arguments);
+    return FormatErrorMessage(parameter.GetOption(), FormatErrorMessageParameter::GetWidth(), message, FormatErrorMessageParameter::GetWindowError(), FormatErrorMessageParameter::GetLanguageIdData(), ReinterpretCast(resultMessage), 0, arguments);
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:29)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/08 14:43)
 
 #include "Rendering/RenderingExport.h"
 
@@ -22,8 +22,8 @@ Rendering::OpenGLBuffer::OpenGLBuffer(const BufferSharedPtr& buffer, const std::
 {
     SetGLHandle(System::GetGLGenBuffers());
 
-    const auto bufferUsage = buffer->GetUsage();
-    if (bufferUsage == UsageType::Immutable)
+    if (const auto bufferUsage = buffer->GetUsage();
+        bufferUsage == UsageType::Immutable)
     {
         usage = BufferUsage::Static;
     }
@@ -52,7 +52,7 @@ Rendering::OpenGLBuffer::OpenGLBuffer(const BufferSharedPtr& buffer, const std::
 
 Rendering::OpenGLBuffer::~OpenGLBuffer() noexcept
 {
-    System::SetGLDeleteBuffers(GetGLHandle());
+    System::SetGLDeleteBuffers(ParentType::GetGLHandle());
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -64,6 +64,13 @@ Rendering::ConstBufferSharedPtr Rendering::OpenGLBuffer::GetBuffer() const
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return boost::polymorphic_pointer_cast<const Buffer>(GetGraphicsObject());
+}
+
+Rendering::BufferSharedPtr Rendering::OpenGLBuffer::GetBuffer()
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return boost::polymorphic_pointer_cast<Buffer>(GetGraphicsObject());
 }
 
 System::BindBuffer Rendering::OpenGLBuffer::GetType() const noexcept
@@ -82,46 +89,36 @@ System::BufferUsage Rendering::OpenGLBuffer::GetUsage() const noexcept
 
 void Rendering::OpenGLBuffer::Initialize()
 {
-    System::SetGLBindBuffer(type, GetGLHandle());
+    SetGLBindBuffer(type, GetGLHandle());
 
-    auto buffer = GetBuffer();
+    const auto buffer = GetBuffer();
 
-    System::SetGLBufferData(type, buffer->GetNumBytes(), buffer->GetOriginalData(), usage);
+    SetGLBufferData(type, buffer->GetNumBytes(), buffer->GetOriginalData(), usage);
 
-    System::SetGLBindBuffer(type, 0);
+    SetGLBindBuffer(type, 0);
 }
 
 bool Rendering::OpenGLBuffer::Update()
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto buffer = GetBuffer();
+    const auto buffer = GetBuffer();
     if (buffer->GetUsage() != UsageType::DynamicUpdate)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("缓冲区使用的不是DynamicUpdate"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("缓冲区使用的不是DynamicUpdate"s))
     }
 
-    const auto numActiveBytes = buffer->GetNumActiveBytes();
-    if (0 < numActiveBytes)
+    if (const auto numActiveBytes = buffer->GetNumActiveBytes();
+        0 < numActiveBytes)
     {
         const auto offsetInBytes = buffer->GetOffset() * buffer->GetElementSize();
 
-        auto source = buffer->GetOriginalData(offsetInBytes);
-        System::SetGLBindBuffer(type, GetGLHandle());
-        System::SetGLBufferSubData(type, offsetInBytes, numActiveBytes, source);
-        System::SetGLBindBuffer(type, 0);
+        const auto* source = buffer->GetOriginalData(offsetInBytes);
+        SetGLBindBuffer(type, GetGLHandle());
+        SetGLBufferSubData(type, offsetInBytes, numActiveBytes, source);
+        SetGLBindBuffer(type, 0);
     }
 
-    return true;
-}
-
-bool Rendering::OpenGLBuffer::Update(MAYBE_UNUSED int level) noexcept
-{
-    return true;
-}
-
-bool Rendering::OpenGLBuffer::Update(MAYBE_UNUSED int item, MAYBE_UNUSED int level) noexcept
-{
     return true;
 }
 
@@ -134,16 +131,17 @@ bool Rendering::OpenGLBuffer::CopyCpuToGpu()
         return false;
     }
 
-    auto buffer = GetBuffer();
-    const auto numActiveBytes = buffer->GetNumActiveBytes();
-    if (0 < numActiveBytes)
+    const auto buffer = GetBuffer();
+
+    if (const auto numActiveBytes = buffer->GetNumActiveBytes();
+        0 < numActiveBytes)
     {
         const auto offsetInBytes = buffer->GetOffset() * buffer->GetElementSize();
 
-        auto source = buffer->GetOriginalData(offsetInBytes);
-        System::SetGLBindBuffer(type, GetGLHandle());
-        System::SetGLBufferSubData(type, offsetInBytes, numActiveBytes, source);
-        System::SetGLBindBuffer(type, 0);
+        const auto* source = buffer->GetOriginalData(offsetInBytes);
+        SetGLBindBuffer(type, GetGLHandle());
+        SetGLBufferSubData(type, offsetInBytes, numActiveBytes, source);
+        SetGLBindBuffer(type, 0);
     }
 
     return true;
@@ -158,16 +156,17 @@ bool Rendering::OpenGLBuffer::CopyGpuToCpu()
         return false;
     }
 
-    auto buffer = boost::polymorphic_pointer_cast<Buffer>(GetGraphicsObject());
-    const auto numActiveBytes = buffer->GetNumActiveBytes();
-    if (0 < numActiveBytes)
+    const auto buffer = GetBuffer();
+
+    if (const auto numActiveBytes = buffer->GetNumActiveBytes();
+        0 < numActiveBytes)
     {
         const auto offsetInBytes = buffer->GetOffset() * buffer->GetElementSize();
 
-        auto target = buffer->GetOriginalData(offsetInBytes);
-        System::SetGLBindBuffer(type, GetGLHandle());
-        System::GetGLBufferSubData(type, offsetInBytes, numActiveBytes, target);
-        System::SetGLBindBuffer(type, 0);
+        const auto target = buffer->GetOriginalData(offsetInBytes);
+        SetGLBindBuffer(type, GetGLHandle());
+        GetGLBufferSubData(type, offsetInBytes, numActiveBytes, target);
+        SetGLBindBuffer(type, 0);
     }
 
     return true;

@@ -13,24 +13,23 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Rendering/Detail/CollapseRecordArray.h"
-#include "Rendering/SceneGraph/TrianglesMesh.h"
+#include "Rendering/SceneGraph/Visual.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(ClodMesh, ClodMeshImpl);
 
 namespace Rendering
 {
-    class RENDERING_DEFAULT_DECLARE ClodMesh : public TrianglesMesh
+    class RENDERING_DEFAULT_DECLARE ClodMesh : public Visual
     {
     public:
         COPY_UNSHARED_TYPE_DECLARE(ClodMesh);
-        using ParentType = TrianglesMesh;
+        using ParentType = Visual;
 
     public:
         // ClodMesh将复制“网格”的索引缓冲器，
         // 因为它需要能够独立地更新两个索引，
         // 或更多个ClodMesh对象共享相同的顶点缓冲器和折叠的记录。
-        explicit ClodMesh(const VertexFormatSharedPtr& vertexformat,
-                          const VertexBufferSharedPtr& vertexbuffer,
+        explicit ClodMesh(const VertexBufferSharedPtr& vertexbuffer,
                           const IndexBuffer& indexbuffer,
                           const CollapseRecordArraySharedPtr& recordArray);
 

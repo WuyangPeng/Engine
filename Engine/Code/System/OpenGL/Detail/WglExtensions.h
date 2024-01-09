@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+ï»¿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+/// ï¿½ï¿½ï¿½ß£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+/// ï¿½ï¿½Ïµï¿½ï¿½ï¿½ß£ï¿½94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º1.0.0.0 (2023/11/14 17:34)
+/// ï¿½ï¿½×¼ï¿½ï¿½std:c++20
+/// ï¿½æ±¾ï¿½ï¿½1.0.0.3 (2023/12/21 17:09)
 
 #ifndef SYSTEM_OPENGL_WGL_EXTENSIONS_H
 #define SYSTEM_OPENGL_WGL_EXTENSIONS_H
@@ -31,19 +31,19 @@ namespace System
     NODISCARD int SYSTEM_HIDDEN_DECLARE GetPixelFormat(WindowsHdc hdc) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE SetPixelFormat(WindowsHdc hdc, int ipfd, const PixelFormatDescriptor* ppfd) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE SwapBuffers(WindowsHdc hdc) noexcept;
-    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglCopyContext(OpenGLHglrc hglrcSrc, OpenGLHglrc hglrcDst, WindowsUInt mask) noexcept;
-    NODISCARD OpenGLHglrc SYSTEM_HIDDEN_DECLARE WglCreateContext(WindowsHdc hDc) noexcept;
-    NODISCARD OpenGLHglrc SYSTEM_HIDDEN_DECLARE WglCreateLayerContext(WindowsHdc hDc, int level) noexcept;
-    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglDeleteContext(OpenGLHglrc oldContext) noexcept;
+    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglCopyContext(OpenGLRcHandle hglrcSrc, OpenGLRcHandle hglrcDst, WindowsUInt mask) noexcept;
+    NODISCARD OpenGLRcHandle SYSTEM_HIDDEN_DECLARE WglCreateContext(WindowsHdc hDc) noexcept;
+    NODISCARD OpenGLRcHandle SYSTEM_HIDDEN_DECLARE WglCreateLayerContext(WindowsHdc hDc, int level) noexcept;
+    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglDeleteContext(OpenGLRcHandle oldContext) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglDescribeLayerPlane(WindowsHdc hDc, int pixelFormat, int layerPlane, WindowsUInt nBytes, LayerPlaneDescriptor* plpd) noexcept;
-    NODISCARD OpenGLHglrc SYSTEM_HIDDEN_DECLARE WglGetCurrentContext() noexcept;
+    NODISCARD OpenGLRcHandle SYSTEM_HIDDEN_DECLARE WglGetCurrentContext() noexcept;
     NODISCARD WindowsHdc SYSTEM_HIDDEN_DECLARE WglGetCurrentDC() noexcept;
     NODISCARD int SYSTEM_HIDDEN_DECLARE WglGetLayerPaletteEntries(WindowsHdc hdc, int iLayerPlane, int iStart, int cEntries, OpenGLColorref* pcr) noexcept;
     NODISCARD OpenGLProc SYSTEM_HIDDEN_DECLARE WglGetProcAddress(const char* lpszProc) noexcept;
-    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglMakeCurrent(WindowsHdc hDc, OpenGLHglrc newContext) noexcept;
+    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglMakeCurrent(WindowsHdc hDc, OpenGLRcHandle newContext) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglRealizeLayerPalette(WindowsHdc hdc, int iLayerPlane, WindowsBool bRealize) noexcept;
     NODISCARD int SYSTEM_HIDDEN_DECLARE WglSetLayerPaletteEntries(WindowsHdc hdc, int iLayerPlane, int iStart, int cEntries, const OpenGLColorref* pcr) noexcept;
-    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglShareLists(OpenGLHglrc hrcSrvShare, OpenGLHglrc hrcSrvSource) noexcept;
+    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglShareLists(OpenGLRcHandle hrcSrvShare, OpenGLRcHandle hrcSrvSource) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglSwapLayerBuffers(WindowsHdc hdc, WindowsUInt fuFlags) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglUseFontBitmaps(WindowsHdc hDC, WindowsDWord first, WindowsDWord count, WindowsDWord listBase) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglUseFontBitmapsA(WindowsHdc hDC, WindowsDWord first, WindowsDWord count, WindowsDWord listBase) noexcept;
@@ -52,7 +52,7 @@ namespace System
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglUseFontOutlinesA(WindowsHdc hDC, WindowsDWord first, WindowsDWord count, WindowsDWord listBase, float deviation, float extrusion, int format, GlyphMetricsFloatPtr lpgmf) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglUseFontOutlinesW(WindowsHdc hDC, WindowsDWord first, WindowsDWord count, WindowsDWord listBase, float deviation, float extrusion, int format, GlyphMetricsFloatPtr lpgmf) noexcept;
 
-    // ARB À©Õ¹
+    // ARB ï¿½ï¿½Õ¹
 
     // WGL_ARB_buffer_region
 
@@ -77,7 +77,7 @@ namespace System
 
     SYSTEM_HIDDEN_DECLARE void InitWglArbCreateContext();
 
-    NODISCARD OpenGLHglrc SYSTEM_HIDDEN_DECLARE WglCreateContextAttribsARB(WindowsHdc hDC, OpenGLHglrc hShareContext, const int* attribList) noexcept;
+    NODISCARD OpenGLRcHandle SYSTEM_HIDDEN_DECLARE WglCreateContextAttribsARB(WindowsHdc hDC, OpenGLRcHandle hShareContext, const int* attribList) noexcept;
 
     // WGL_ARB_create_context_no_error
 
@@ -117,7 +117,7 @@ namespace System
 
     SYSTEM_HIDDEN_DECLARE void InitWglArbMakeCurrentRead();
 
-    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglMakeContextCurrentARB(WindowsHdc hDrawDC, WindowsHdc hReadDC, OpenGLHglrc hglrc) noexcept;
+    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglMakeContextCurrentARB(WindowsHdc hDrawDC, WindowsHdc hReadDC, OpenGLRcHandle hglrc) noexcept;
     NODISCARD WindowsHdc SYSTEM_HIDDEN_DECLARE WglGetCurrentReadDCARB() noexcept;
 
     // WGL_ARB_multisample
@@ -176,7 +176,7 @@ namespace System
 
     SYSTEM_HIDDEN_DECLARE void InitWglArbRobustnessShareGroupIsolation();
 
-    // 3DFX À©Õ¹
+    // 3DFX ï¿½ï¿½Õ¹
 
     // WGL_3DFX_multisample
 
@@ -184,7 +184,7 @@ namespace System
 
     SYSTEM_HIDDEN_DECLARE void InitWgl3DFXMultisample();
 
-    // 3DL À©Õ¹
+    // 3DL ï¿½ï¿½Õ¹
 
     // WGL_3DL_stereo_control
 
@@ -194,7 +194,7 @@ namespace System
 
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglSetStereoEmitterState3DL(WindowsHdc hDC, WindowsUInt uState) noexcept;
 
-    // AMD À©Õ¹
+    // AMD ï¿½ï¿½Õ¹
 
     // WGL_AMD_gpu_association
 
@@ -204,15 +204,15 @@ namespace System
 
     NODISCARD WindowsUInt SYSTEM_HIDDEN_DECLARE WglGetGPUIDsAMD(WindowsUInt maxCount, WindowsUInt* ids) noexcept;
     NODISCARD WindowsInt SYSTEM_HIDDEN_DECLARE WglGetGPUInfoAMD(WindowsUInt id, WindowsInt property, GLenum dataType, WindowsUInt size, void* data) noexcept;
-    NODISCARD WindowsUInt SYSTEM_HIDDEN_DECLARE WglGetContextGPUIDAMD(OpenGLHglrc hglrc) noexcept;
-    NODISCARD OpenGLHglrc SYSTEM_HIDDEN_DECLARE WglCreateAssociatedContextAMD(WindowsUInt id) noexcept;
-    NODISCARD OpenGLHglrc SYSTEM_HIDDEN_DECLARE WglCreateAssociatedContextAttribsAMD(WindowsUInt id, OpenGLHglrc hShareContext, const int* attribList) noexcept;
-    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglDeleteAssociatedContextAMD(OpenGLHglrc hglrc) noexcept;
-    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglMakeAssociatedContextCurrentAMD(OpenGLHglrc hglrc) noexcept;
-    NODISCARD OpenGLHglrc SYSTEM_HIDDEN_DECLARE WglGetCurrentAssociatedContextAMD() noexcept;
-    void SYSTEM_HIDDEN_DECLARE WglBlitContextFramebufferAMD(OpenGLHglrc dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) noexcept;
+    NODISCARD WindowsUInt SYSTEM_HIDDEN_DECLARE WglGetContextGPUIDAMD(OpenGLRcHandle hglrc) noexcept;
+    NODISCARD OpenGLRcHandle SYSTEM_HIDDEN_DECLARE WglCreateAssociatedContextAMD(WindowsUInt id) noexcept;
+    NODISCARD OpenGLRcHandle SYSTEM_HIDDEN_DECLARE WglCreateAssociatedContextAttribsAMD(WindowsUInt id, OpenGLRcHandle hShareContext, const int* attribList) noexcept;
+    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglDeleteAssociatedContextAMD(OpenGLRcHandle hglrc) noexcept;
+    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglMakeAssociatedContextCurrentAMD(OpenGLRcHandle hglrc) noexcept;
+    NODISCARD OpenGLRcHandle SYSTEM_HIDDEN_DECLARE WglGetCurrentAssociatedContextAMD() noexcept;
+    void SYSTEM_HIDDEN_DECLARE WglBlitContextFramebufferAMD(OpenGLRcHandle dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) noexcept;
 
-    // ATI À©Õ¹
+    // ATI ï¿½ï¿½Õ¹
 
     // WGL_ATI_pixel_format_float
 
@@ -226,7 +226,7 @@ namespace System
 
     SYSTEM_HIDDEN_DECLARE void InitWglATIRenderTextureRectangle();
 
-    // EXT À©Õ¹
+    // EXT ï¿½ï¿½Õ¹
 
     // WGL_EXT_colorspace
 
@@ -283,7 +283,7 @@ namespace System
 
     SYSTEM_HIDDEN_DECLARE void InitWglExtMakeCurrentRead();
 
-    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglMakeContextCurrentEXT(WindowsHdc hDrawDC, WindowsHdc hReadDC, OpenGLHglrc hglrc) noexcept;
+    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglMakeContextCurrentEXT(WindowsHdc hDrawDC, WindowsHdc hReadDC, OpenGLRcHandle hglrc) noexcept;
     NODISCARD WindowsHdc SYSTEM_HIDDEN_DECLARE WglGetCurrentReadDCEXT() noexcept;
 
     // WGL_EXT_multisample
@@ -335,7 +335,7 @@ namespace System
 
     SYSTEM_HIDDEN_DECLARE void InitWglExtSwapControlTear();
 
-    // I3D À©Õ¹
+    // I3D ï¿½ï¿½Õ¹
 
     // WGL_I3D_digital_video_control
 
@@ -409,7 +409,7 @@ namespace System
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglEndFrameTrackingI3D() noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglQueryFrameTrackingI3D(WindowsDWord* pFrameCount, WindowsDWord* pMissedFrames, float* pLastMissedUsage) noexcept;
 
-    // NV À©Õ¹
+    // NV ï¿½ï¿½Õ¹
 
     // WGL_NV_DX_interop
 
@@ -438,7 +438,7 @@ namespace System
 
     SYSTEM_HIDDEN_DECLARE void InitWglNVCopyImage();
 
-    WindowsBool SYSTEM_HIDDEN_DECLARE WglCopyImageSubDataNV(OpenGLHglrc hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, OpenGLHglrc hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth) noexcept;
+    WindowsBool SYSTEM_HIDDEN_DECLARE WglCopyImageSubDataNV(OpenGLRcHandle hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, OpenGLRcHandle hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth) noexcept;
 
     // WGL_NV_delay_before_swap
 
@@ -547,7 +547,7 @@ namespace System
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglSendPbufferToVideoNV(WglHPBufferArb hPbuffer, int iBufferType, unsigned long* pulCounterPbuffer, WindowsBool bBlock) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglGetVideoInfoNV(WglHPVideoDev hpVideoDevice, unsigned long* pulCounterOutputPbuffer, unsigned long* pulCounterOutputVideo) noexcept;
 
-    // OML À©Õ¹
+    // OML ï¿½ï¿½Õ¹
 
     // WGL_OML_sync_control
 

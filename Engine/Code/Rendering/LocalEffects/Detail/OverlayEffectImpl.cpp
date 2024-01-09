@@ -304,7 +304,7 @@ void Rendering::OverlayEffectImpl::SetNormalizedZ(float z)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    const auto constantBuffer = std::make_shared<ConstantBuffer>(CoreTools::GetStreamSize<float>(), true);
+    const auto constantBuffer = std::make_shared<ConstantBuffer>("constantBuffer", CoreTools::GetStreamSize<float>(), true);
 
     auto data = constantBuffer->GetStorage();
     if (shaderAPIType == ShaderAPIType::GLSL)

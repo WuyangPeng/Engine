@@ -1,36 +1,62 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/25 16:58)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/09 10:02)
 
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLDevice.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/Network/SocketPrototypes.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
 #include "System/OpenGL/OpenGLBase.h"
+#include "System/OpenGL/OpenGLBuffers.h"
 #include "System/OpenGL/OpenGLProgram.h"
+#include "System/OpenGL/OpenGLSamplers.h"
+#include "System/OpenGL/OpenGLShader.h"
+#include "System/OpenGL/OpenGLTextures.h"
+#include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/LogMacro.h"
 #include "Rendering/Base/RendererObject.h"
 #include "Rendering/Base/RendererObjectBridge.h"
+#include "Rendering/OpenGLRenderer/Resources/Buffers/OpenGLAtomicCounterBuffer.h"
+#include "Rendering/OpenGLRenderer/Resources/Buffers/OpenGLConstantBuffer.h"
+#include "Rendering/OpenGLRenderer/Resources/Buffers/OpenGLStructuredBuffer.h"
+#include "Rendering/OpenGLRenderer/Resources/Textures/OpenGLTextureArray.h"
+#include "Rendering/OpenGLRenderer/Resources/Textures/OpenGLTextureSingle.h"
+#include "Rendering/OpenGLRenderer/State/OpenGLSamplerState.h"
 #include "Rendering/RendererEngine/Detail/RendererClear.h"
 #include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
+#include "Rendering/Resources/Buffers/StructuredBuffer.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
+#include "Rendering/Resources/Flags/UsageType.h"
+#include "Rendering/Resources/Textures/TextureArray.h"
+#include "Rendering/Shaders/ComputeProgram.h"
+#include "Rendering/Shaders/Flags/ShaderDataLookup.h"
+#include "Rendering/Shaders/Shader.h"
 #include "Rendering/Shaders/VisualProgram.h"
+#include "Rendering/State/SamplerState.h"
 
 #include <gsl/util>
 
 Rendering::OpenGLDevice::OpenGLDevice(CoreTools::DisableNotThrow disableNotThrow)
-    : ParentType{}, openGLInputLayoutManager{ disableNotThrow }
+    : ParentType{},
+      openGLInputLayoutManager{ disableNotThrow },
+      textureSamplerUnit{},
+      textureImageUnit{},
+      uniformUnit{},
+      shaderStorageUnit{},
+      atomicCounterRawBuffers{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -96,7 +122,7 @@ void Rendering::OpenGLDevice::SetDepthRange(const DepthRange& depthRange) noexce
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    System::SetGLDepthRange(static_cast<GLdouble>(depthRange.GetZMin()), static_cast<GLdouble>(depthRange.GetZMax()));
+    System::SetGLDepthRange(depthRange.GetZMin(), depthRange.GetZMax());
 }
 
 Rendering::DepthRange Rendering::OpenGLDevice::GetDepthRange() const
@@ -144,7 +170,7 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(RendererObjectBridge& rendererObj
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    System::UnusedFunction(vertexBuffer, indexBuffer, effect);
+    System::UnusedFunction(effect);
 
     const auto gl4Program = effect->GetProgram();
     if (gl4Program == nullptr)
@@ -157,7 +183,7 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(RendererObjectBridge& rendererObj
 
     System::SetUseProgram(programHandle);
 
-    if (EnableShaders(*effect, programHandle))
+    if (EnableShaders(rendererObjectBridge, *effect, programHandle))
     {
         RendererObjectBridge::RendererObjectSharedPtr gl4VertexBuffer{};
         OpenGLInputLayoutManager::OpenGLInputLayoutSharedPtr gl4Layout{};
@@ -176,7 +202,7 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(RendererObjectBridge& rendererObj
             gl4IndexBuffer->Enable();
         }
 
-        numPixelsDrawn = DrawPrimitive(vertexBuffer, indexBuffer);
+        numPixelsDrawn = DrawPrimitive(*vertexBuffer, *indexBuffer);
 
         if (vertexBuffer->StandardUsage())
         {
@@ -188,7 +214,7 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(RendererObjectBridge& rendererObj
             gl4IndexBuffer->Disable();
         }
 
-        DisableShaders(*effect, programHandle);
+        DisableShaders(rendererObjectBridge, *effect, programHandle);
     }
 
     System::SetUseProgram(0);
@@ -246,135 +272,431 @@ void Rendering::OpenGLDevice::Flush() noexcept
     System::SetGLFlush();
 }
 
-void Rendering::OpenGLDevice::Execute(const ComputeProgramSharedPtr& computeProgram, int numXGroups, int numYGroups, int numZGroups) noexcept
+void Rendering::OpenGLDevice::Execute(RendererObjectBridge& rendererObjectBridge, ComputeProgram& computeProgram, int numXGroups, int numYGroups, int numZGroups)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    System::UnusedFunction(computeProgram, numXGroups, numYGroups, numZGroups);
+    if (numXGroups > 0 && numYGroups > 0 && numZGroups > 0)
+    {
+        const auto computeShader = computeProgram.GetComputeShader();
+        const auto programHandle = computeProgram.GetProgramHandle();
+        if (computeShader && programHandle > 0)
+        {
+            System::SetUseProgram(programHandle);
+            Enable(rendererObjectBridge, *computeShader, programHandle);
+            System::SetGLDispatchCompute(numXGroups, numYGroups, numZGroups);
+            Disable(rendererObjectBridge, *computeShader, programHandle);
+            System::SetUseProgram(0);
+        }
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("Invalid input parameter."))
+    }
 }
 
-bool Rendering::OpenGLDevice::EnableShaders(VisualEffect& effect, OpenGLUInt program)
+bool Rendering::OpenGLDevice::EnableShaders(RendererObjectBridge& rendererObjectBridge, VisualEffect& effect, OpenGLUInt program)
 {
-    auto vertexShader = effect.GetVertexShader();
+    RENDERING_CLASS_IS_VALID_9;
+
+    const auto vertexShader = effect.GetVertexShader();
     if (vertexShader == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("Effect does not have a vertex shader."))
     }
 
-    auto pixelShader = effect.GetPixelShader();
+    const auto pixelShader = effect.GetPixelShader();
     if (pixelShader == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("Effect does not have a pixel shader."))
     }
 
-    auto geometryShader = effect.GetGeometryShader();
+    const auto geometryShader = effect.GetGeometryShader();
 
-    Enable(*vertexShader, program);
-    Enable(*pixelShader, program);
+    Enable(rendererObjectBridge, *vertexShader, program);
+    Enable(rendererObjectBridge, *pixelShader, program);
     if (geometryShader != nullptr)
     {
-        Enable(*geometryShader, program);
+        Enable(rendererObjectBridge, *geometryShader, program);
     }
 
     return true;
 }
 
-void Rendering::OpenGLDevice::DisableShaders(VisualEffect& effect, OpenGLUInt program) noexcept
+void Rendering::OpenGLDevice::DisableShaders(RendererObjectBridge& rendererObjectBridge, VisualEffect& effect, OpenGLUInt program)
 {
-    auto vertexShader = effect.GetVertexShader();
-    auto pixelShader = effect.GetPixelShader();
-    auto geometryShader = effect.GetGeometryShader();
+    RENDERING_CLASS_IS_VALID_9;
 
-    if (geometryShader != nullptr)
+    const auto vertexShader = effect.GetVertexShader();
+    const auto pixelShader = effect.GetPixelShader();
+
+    if (const auto geometryShader = effect.GetGeometryShader();
+        geometryShader != nullptr)
     {
-        Disable(*geometryShader, program);
+        Disable(rendererObjectBridge, *geometryShader, program);
     }
-    Disable(*vertexShader, program);
-    Disable(*pixelShader, program);
+
+    Disable(rendererObjectBridge, *vertexShader, program);
+    Disable(rendererObjectBridge, *pixelShader, program);
 }
 
-void Rendering::OpenGLDevice::Enable(const Shader& shader, OpenGLUInt program) noexcept
+void Rendering::OpenGLDevice::Enable(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program)
 {
-    EnableConstantBuffers(shader, program);
-    EnableSBuffers(shader, program);
-    EnableTextures(shader, program);
-    EnableTextureArrays(shader, program);
-    EnableSamplers(shader, program);
+    RENDERING_CLASS_IS_VALID_9;
+
+    EnableConstantBuffers(rendererObjectBridge, shader, program);
+    EnableStructuredBuffers(rendererObjectBridge, shader, program);
+    EnableTextures(rendererObjectBridge, shader, program);
+    EnableTextureArrays(rendererObjectBridge, shader, program);
+    EnableSamplers(rendererObjectBridge, shader, program);
 }
 
-void Rendering::OpenGLDevice::Disable(const Shader& shader, OpenGLUInt program) noexcept
+void Rendering::OpenGLDevice::Disable(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program)
 {
-    DisableSamplers(shader, program);
-    DisableTextureArrays(shader, program);
-    DisableTextures(shader, program);
-    DisableSBuffers(shader, program);
+    RENDERING_CLASS_IS_VALID_9;
+
+    DisableSamplers(rendererObjectBridge, shader, program);
+    DisableTextureArrays(rendererObjectBridge, shader, program);
+    DisableTextures(rendererObjectBridge, shader, program);
+    DisableStructuredBuffers(rendererObjectBridge, shader, program);
     DisableConstantBuffers(shader, program);
 }
 
-void Rendering::OpenGLDevice::EnableConstantBuffers(const Shader& shader, OpenGLUInt program) noexcept
+void Rendering::OpenGLDevice::EnableConstantBuffers(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program)
 {
-    System::UnusedFunction(shader, program);
+    RENDERING_CLASS_IS_VALID_9;
+
+    for (constexpr auto index = ConstantBuffer::GetShaderDataLookup();
+         auto& constantBuffer : shader.GetData(index))
+    {
+        const auto constantBufferRendererObject = boost::polymorphic_pointer_cast<OpenGLConstantBuffer>(rendererObjectBridge.BindRendererObject(RendererTypes::OpenGL, constantBuffer.GetGraphicsObject()));
+
+        if (const auto blockIndex = constantBuffer.GetBindPoint();
+            gsl::narrow_cast<uint32_t>(blockIndex) != GL_INVALID_INDEX)
+        {
+            auto const unit = uniformUnit.AcquireUnit(program, blockIndex);
+            System::SetGLUniformBlockBinding(program, blockIndex, unit);
+            constantBufferRendererObject->AttachToUnit(unit);
+        }
+    }
 }
 
-void Rendering::OpenGLDevice::DisableConstantBuffers(const Shader& shader, OpenGLUInt program) noexcept
+void Rendering::OpenGLDevice::DisableConstantBuffers(Shader& shader, OpenGLUInt program)
 {
-    System::UnusedFunction(shader, program);
+    RENDERING_CLASS_IS_VALID_9;
+
+    for (constexpr auto index = ConstantBuffer::GetShaderDataLookup();
+         const auto& constantBuffer : shader.GetData(index))
+    {
+        if (const auto blockIndex = constantBuffer.GetBindPoint();
+            gsl::narrow_cast<uint32_t>(blockIndex) != GL_INVALID_INDEX)
+        {
+            const auto unit = uniformUnit.GetUnit(program, blockIndex);
+            SetGLBindBufferBase(System::BindBuffer::UniformBuffer, unit, 0);
+            uniformUnit.ReleaseUnit(unit);
+        }
+    }
 }
 
-void Rendering::OpenGLDevice::EnableSBuffers(const Shader& shader, OpenGLUInt program) noexcept
+void Rendering::OpenGLDevice::EnableStructuredBuffers(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program)
 {
-    System::UnusedFunction(shader, program);
+    RENDERING_CLASS_IS_VALID_9;
+
+    const auto& atomicCounters = shader.GetData(System::EnumCastUnderlying(ShaderDataLookup::AtomicCounterShaderDataLookup));
+    const auto& atomicCounterBuffers = shader.GetData(System::EnumCastUnderlying(ShaderDataLookup::AtomicCounterBufferShaderDataLookup));
+    for (auto atomicCounterBufferIndex = 0u; atomicCounterBufferIndex < atomicCounterBuffers.size(); ++atomicCounterBufferIndex)
+    {
+        auto const& atomicCounterBuffer = atomicCounterBuffers.at(atomicCounterBufferIndex);
+
+        if (atomicCounterRawBuffers.size() <= atomicCounterBufferIndex)
+        {
+            atomicCounterRawBuffers.emplace_back(nullptr);
+        }
+
+        auto& rawBuffer = atomicCounterRawBuffers.at(atomicCounterBufferIndex);
+
+        if (rawBuffer && rawBuffer->GetNumBytes() < (atomicCounterBuffer.GetNumBytes()))
+        {
+            rendererObjectBridge.UnbindRendererObject(rawBuffer);
+            rawBuffer = nullptr;
+        }
+
+        std::shared_ptr<OpenGLAtomicCounterBuffer> openGLAtomicCounterBuffer = nullptr;
+        if (rawBuffer)
+        {
+            openGLAtomicCounterBuffer = boost::polymorphic_pointer_cast<OpenGLAtomicCounterBuffer>(rendererObjectBridge.GetRendererObject(rawBuffer));
+        }
+        else
+        {
+            rawBuffer = std::make_shared<RawBuffer>("RawBuffer", (atomicCounterBuffer.GetNumBytes() + 3) / 4, false);
+            rawBuffer->SetUsage(UsageType::DynamicUpdate);
+
+            openGLAtomicCounterBuffer = boost::polymorphic_pointer_cast<OpenGLAtomicCounterBuffer>(rendererObjectBridge.BindRendererObject(RendererTypes::OpenGL, rawBuffer));
+        }
+
+        openGLAtomicCounterBuffer->AttachToUnit(atomicCounterBuffer.GetBindPoint());
+    }
+
+    for (constexpr auto indexStructuredBuffer = StructuredBuffer::GetShaderDataLookup();
+         auto& structuredBuffer : shader.GetData(indexStructuredBuffer))
+    {
+        if (structuredBuffer.GetGraphicsObject())
+        {
+            const auto openGLStructuredBuffer = boost::polymorphic_pointer_cast<OpenGLStructuredBuffer>(rendererObjectBridge.BindRendererObject(RendererTypes::OpenGL, structuredBuffer.GetGraphicsObject()));
+
+            if (const auto blockIndex = structuredBuffer.GetBindPoint();
+                boost::numeric_cast<uint32_t>(blockIndex) != GL_INVALID_INDEX)
+            {
+                const auto unit = shaderStorageUnit.AcquireUnit(program, blockIndex);
+                System::SetGLShaderStorageBlockBinding(program, blockIndex, unit);
+
+                openGLStructuredBuffer->AttachToUnit(unit);
+
+                if (structuredBuffer.IsGpuWritable())
+                {
+                    if (!openGLStructuredBuffer->SetNumActiveElements())
+                    {
+                        LOG_SINGLETON_ENGINE_APPENDER(Info, Rendering, SYSTEM_TEXT("openGLStructuredBuffer SetNumActiveElements 失败。"));
+                    }
+
+                    auto const acIndex = structuredBuffer.GetExtra();
+
+                    auto const acbIndex = atomicCounters.at(acIndex).GetBindPoint();
+                    auto const acbOffset = atomicCounters.at(acIndex).GetExtra();
+
+                    auto openGLAtomicCounterBuffer = boost::polymorphic_pointer_cast<OpenGLAtomicCounterBuffer>(rendererObjectBridge.GetRendererObject(atomicCounterRawBuffers.at(acbIndex)));
+
+                    if (!openGLStructuredBuffer->CopyCounterValueToBuffer(openGLAtomicCounterBuffer.get(), acbOffset))
+                    {
+                        LOG_SINGLETON_ENGINE_APPENDER(Info, Rendering, SYSTEM_TEXT("openGLStructuredBuffer CopyCounterValueToBuffer 失败。"));
+                    }
+                }
+            }
+        }
+    }
 }
 
-void Rendering::OpenGLDevice::DisableSBuffers(const Shader& shader, OpenGLUInt program) noexcept
+void Rendering::OpenGLDevice::DisableStructuredBuffers(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program)
 {
-    System::UnusedFunction(shader, program);
+    RENDERING_CLASS_IS_VALID_9;
+
+    const auto& atomicCounters = shader.GetData(System::EnumCastUnderlying(ShaderDataLookup::AtomicCounterShaderDataLookup));
+    const auto& atomicCounterBuffers = shader.GetData(System::EnumCastUnderlying(ShaderDataLookup::AtomicCounterBufferShaderDataLookup));
+
+    for (auto atomicCounterBufferIndex = 0u; atomicCounterBufferIndex < atomicCounterBuffers.size(); ++atomicCounterBufferIndex)
+    {
+        const auto& atomicCounterBuffer = atomicCounterBuffers.at(atomicCounterBufferIndex);
+        SetGLBindBufferBase(System::BindBuffer::AtomicCounterBuffer, atomicCounterBuffer.GetBindPoint(), 0);
+    }
+
+    for (constexpr auto index = StructuredBuffer::GetShaderDataLookup();
+         auto& structuredBuffer : shader.GetData(index))
+    {
+        if (structuredBuffer.GetGraphicsObject())
+        {
+            const auto openGLStructuredBuffer = boost::polymorphic_pointer_cast<OpenGLStructuredBuffer>(rendererObjectBridge.GetRendererObject(structuredBuffer.GetGraphicsObject()));
+
+            if (const auto blockIndex = structuredBuffer.GetBindPoint();
+                boost::numeric_cast<uint32_t>(blockIndex) != GL_INVALID_INDEX)
+            {
+                const auto unit = shaderStorageUnit.GetUnit(program, blockIndex);
+                SetGLBindBufferBase(System::BindBuffer::ShaderStorageBuffer, unit, 0);
+                shaderStorageUnit.ReleaseUnit(unit);
+
+                if (structuredBuffer.IsGpuWritable())
+                {
+                    auto const acIndex = structuredBuffer.GetExtra();
+
+                    auto const acbIndex = atomicCounters.at(acIndex).GetBindPoint();
+                    auto const acbOffset = atomicCounters.at(acIndex).GetExtra();
+
+                    auto openGLAtomicCounterBuffer = boost::polymorphic_pointer_cast<OpenGLAtomicCounterBuffer>(rendererObjectBridge.GetRendererObject(atomicCounterRawBuffers.at(acbIndex)));
+
+                    if (!openGLStructuredBuffer->CopyCounterValueFromBuffer(openGLAtomicCounterBuffer.get(), acbOffset))
+                    {
+                        LOG_SINGLETON_ENGINE_APPENDER(Info, Rendering, SYSTEM_TEXT("openGLStructuredBuffer openGLAtomicCounterBuffer 失败。"));
+                    }
+                }
+            }
+        }
+    }
 }
 
-void Rendering::OpenGLDevice::EnableTextures(const Shader& shader, OpenGLUInt program) noexcept
+void Rendering::OpenGLDevice::EnableTextures(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program)
 {
-    System::UnusedFunction(shader, program);
+    RENDERING_CLASS_IS_VALID_9;
+
+    for (constexpr auto index = TextureSingle::GetShaderDataLookup();
+         auto& textureSingle : shader.GetData(index))
+    {
+        if (!textureSingle.GetGraphicsObject())
+        {
+            THROW_EXCEPTION(CoreTools::StringConversion::MultiByteConversionStandard(textureSingle.GetName() + " is null texture."));
+        }
+
+        const auto texture = boost::polymorphic_pointer_cast<OpenGLTextureSingle>(rendererObjectBridge.BindRendererObject(RendererTypes::OpenGL, textureSingle.GetGraphicsObject()));
+
+        const auto handle = texture->GetGLHandle();
+        if (textureSingle.IsGpuWritable())
+        {
+            const auto unit = textureImageUnit.AcquireUnit(program, textureSingle.GetBindPoint());
+            System::SetGLUniform1(textureSingle.GetBindPoint(), unit);
+            const auto format = texture->GetTexture()->GetFormat();
+            const auto internalFormat = texture->GetGLTextureInternalFormat(format);
+            SetGLBindImageTexture(unit, handle, 0, true, 0, System::BufferLocking::ReadWrite, EnumCastUnderlying(internalFormat));
+        }
+        else
+        {
+            const auto unit = textureSamplerUnit.AcquireUnit(program, textureSingle.GetBindPoint());
+            System::SetGLUniform1(textureSingle.GetBindPoint(), unit);
+            System::SetGLActiveTexture(EnumCastUnderlying(System::TextureNumber::Type0) + unit);
+            SetGLBindTexture(texture->GetTarget(), handle);
+        }
+    }
 }
 
-void Rendering::OpenGLDevice::DisableTextures(const Shader& shader, OpenGLUInt program) noexcept
+void Rendering::OpenGLDevice::DisableTextures(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program)
 {
-    System::UnusedFunction(shader, program);
+    RENDERING_CLASS_IS_VALID_9;
+
+    for (constexpr auto index = TextureSingle::GetShaderDataLookup();
+         auto& textureSingle : shader.GetData(index))
+    {
+        if (!textureSingle.GetGraphicsObject())
+        {
+            THROW_EXCEPTION(CoreTools::StringConversion::MultiByteConversionStandard(textureSingle.GetName() + " is null texture."));
+        }
+
+        const auto texture = boost::polymorphic_pointer_cast<OpenGLTextureSingle>(rendererObjectBridge.GetRendererObject(textureSingle.GetGraphicsObject()));
+
+        if (textureSingle.IsGpuWritable())
+        {
+            const auto unit = textureImageUnit.GetUnit(program, textureSingle.GetBindPoint());
+            textureImageUnit.ReleaseUnit(unit);
+        }
+        else
+        {
+            const auto unit = textureSamplerUnit.GetUnit(program, textureSingle.GetBindPoint());
+            System::SetGLActiveTexture(EnumCastUnderlying(System::TextureNumber::Type0) + unit);
+            SetGLBindTexture(texture->GetTarget(), 0);
+            textureSamplerUnit.ReleaseUnit(unit);
+        }
+    }
 }
 
-void Rendering::OpenGLDevice::EnableTextureArrays(const Shader& shader, OpenGLUInt program) noexcept
+void Rendering::OpenGLDevice::EnableTextureArrays(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program)
 {
-    System::UnusedFunction(shader, program);
+    RENDERING_CLASS_IS_VALID_9;
+
+    for (constexpr auto index = TextureArray::GetShaderDataLookup();
+         auto& textureArray : shader.GetData(index))
+    {
+        if (!textureArray.GetGraphicsObject())
+        {
+            THROW_EXCEPTION(CoreTools::StringConversion::MultiByteConversionStandard(textureArray.GetName() + " is null texture array."));
+        }
+
+        const auto texture = boost::polymorphic_pointer_cast<OpenGLTextureArray>(rendererObjectBridge.BindRendererObject(RendererTypes::OpenGL, textureArray.GetGraphicsObject()));
+
+        const auto handle = texture->GetGLHandle();
+        if (textureArray.IsGpuWritable())
+        {
+            const auto unit = textureImageUnit.AcquireUnit(program, textureArray.GetBindPoint());
+            System::SetGLUniform1(textureArray.GetBindPoint(), unit);
+            const auto format = texture->GetTexture()->GetFormat();
+            const auto internalFormat = texture->GetGLTextureInternalFormat(format);
+            SetGLBindImageTexture(unit, handle, 0, true, 0, System::BufferLocking::ReadWrite, EnumCastUnderlying(internalFormat));
+        }
+        else
+        {
+            const auto unit = textureSamplerUnit.AcquireUnit(program, textureArray.GetBindPoint());
+            System::SetGLUniform1(textureArray.GetBindPoint(), unit);
+            System::SetGLActiveTexture(EnumCastUnderlying(System::TextureNumber::Type0) + unit);
+            SetGLBindTexture(texture->GetTarget(), handle);
+        }
+    }
 }
 
-void Rendering::OpenGLDevice::DisableTextureArrays(const Shader& shader, OpenGLUInt program) noexcept
+void Rendering::OpenGLDevice::DisableTextureArrays(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program)
 {
-    System::UnusedFunction(shader, program);
+    RENDERING_CLASS_IS_VALID_9;
+
+    for (constexpr auto index = TextureArray::GetShaderDataLookup();
+         auto& textureArray : shader.GetData(index))
+    {
+        if (!textureArray.GetGraphicsObject())
+        {
+            THROW_EXCEPTION(CoreTools::StringConversion::MultiByteConversionStandard(textureArray.GetName() + " is null texture."));
+        }
+
+        const auto texture = boost::polymorphic_pointer_cast<OpenGLTextureArray>(rendererObjectBridge.GetRendererObject(textureArray.GetGraphicsObject()));
+
+        if (textureArray.IsGpuWritable())
+        {
+            const auto unit = textureImageUnit.GetUnit(program, textureArray.GetBindPoint());
+            textureImageUnit.ReleaseUnit(unit);
+        }
+        else
+        {
+            const auto unit = textureSamplerUnit.GetUnit(program, textureArray.GetBindPoint());
+            System::SetGLActiveTexture(EnumCastUnderlying(System::TextureNumber::Type0) + unit);
+            SetGLBindTexture(texture->GetTarget(), 0);
+            textureSamplerUnit.ReleaseUnit(unit);
+        }
+    }
 }
 
-void Rendering::OpenGLDevice::EnableSamplers(const Shader& shader, OpenGLUInt program) noexcept
+void Rendering::OpenGLDevice::EnableSamplers(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program)
 {
-    System::UnusedFunction(shader, program);
+    RENDERING_CLASS_IS_VALID_9;
+
+    for (constexpr auto index = SamplerState::GetShaderDataLookup();
+         auto& sampler : shader.GetData(index))
+    {
+        if (sampler.GetGraphicsObject())
+        {
+            const auto openGLSamplerState = boost::polymorphic_pointer_cast<OpenGLSamplerState>(rendererObjectBridge.BindRendererObject(RendererTypes::OpenGL, sampler.GetGraphicsObject()));
+
+            const auto location = sampler.GetBindPoint();
+            const auto unit = textureSamplerUnit.AcquireUnit(program, location);
+            System::SetGLBindSampler(unit, openGLSamplerState->GetGLHandle());
+        }
+    }
 }
 
-void Rendering::OpenGLDevice::DisableSamplers(const Shader& shader, OpenGLUInt program) noexcept
+void Rendering::OpenGLDevice::DisableSamplers(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program)
 {
-    System::UnusedFunction(shader, program);
+    RENDERING_CLASS_IS_VALID_9;
+
+    for (constexpr auto index = SamplerState::GetShaderDataLookup();
+         auto& sampler : shader.GetData(index))
+    {
+        if (sampler.GetGraphicsObject())
+        {
+            const auto openGLSamplerState = boost::polymorphic_pointer_cast<OpenGLSamplerState>(rendererObjectBridge.GetRendererObject(sampler.GetGraphicsObject()));
+
+            const auto location = sampler.GetBindPoint();
+            const auto unit = textureSamplerUnit.AcquireUnit(program, location);
+            System::SetGLBindSampler(unit, 0);
+            textureSamplerUnit.ReleaseUnit(unit);
+        }
+    }
 }
 
-int64_t Rendering::OpenGLDevice::DrawPrimitive(const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer)
+int64_t Rendering::OpenGLDevice::DrawPrimitive(const VertexBuffer& vertexBuffer, const IndexBuffer& indexBuffer)
 {
-    System::UnusedFunction(vertexBuffer, indexBuffer);
+    RENDERING_CLASS_IS_VALID_9;
 
-    const auto numActiveVertices = vertexBuffer->GetNumActiveElements();
-    const auto vertexOffset = vertexBuffer->GetOffset();
+    const auto numActiveVertices = vertexBuffer.GetNumActiveElements();
+    const auto vertexOffset = vertexBuffer.GetOffset();
 
-    const auto numActiveIndices = indexBuffer->GetNumActiveIndices();
-    const auto indexSize = indexBuffer->GetElementSize();
+    const auto numActiveIndices = indexBuffer.GetNumActiveIndices();
+    const auto indexSize = indexBuffer.GetElementSize();
     const auto indexType = (indexSize == 4 ? System::OpenGLData::UnsignedInt : System::OpenGLData::UnsignedShort);
 
     auto topology = System::PrimitiveType::Point;
 
-    switch (const auto type = indexBuffer->GetPrimitiveType();
+    switch (const auto type = indexBuffer.GetPrimitiveType();
             type)
     {
         case IndexFormatType::PolygonPoint:
@@ -408,8 +730,8 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(const VertexBufferSharedPtr& vert
             THROW_EXCEPTION(SYSTEM_TEXT("Unknown primitive topology = " + System::ToString(System::EnumCastUnderlying(type))))
     }
 
-    const auto offset = indexBuffer->GetOffset();
-    if (indexBuffer != nullptr)
+    const auto offset = indexBuffer.GetOffset();
+    if (indexBuffer.IsIndexed())
     {
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
@@ -418,11 +740,12 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(const VertexBufferSharedPtr& vert
 
 #include SYSTEM_WARNING_POP
 
-        System::SetGLDrawRangeElements(topology, 0, numActiveVertices - 1, numActiveIndices, indexType, data);
+        SetGLDrawRangeElements(topology, 0, numActiveVertices - 1, numActiveIndices, indexType, data);
     }
     else
     {
-        System::SetGLDrawArrays(topology, vertexOffset, numActiveVertices);
+        SetGLDrawArrays(topology, vertexOffset, numActiveVertices);
     }
+
     return 0;
 }

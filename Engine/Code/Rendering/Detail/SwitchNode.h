@@ -39,7 +39,7 @@ namespace Rendering
 
         NODISCARD ControllerSharedPtr Clone() const override;
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
-        NODISCARD PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const override;
+        NODISCARD PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax, int numThreads, float maxDistance) override;
 
     protected:
         void GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull) override;

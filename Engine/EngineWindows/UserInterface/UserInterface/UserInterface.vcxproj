@@ -285,7 +285,7 @@
     <ClInclude Include="..\..\..\Code\UserInterface\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\Interface\Interface.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\Interface\InterfaceFwd.h" />
-    <ClInclude Include="..\..\..\Code\UserInterface\Interface\User.h" />
+    <ClInclude Include="..\..\..\Code\UserInterface\Interface\Placeholder.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\OpenGL\OpenGL.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\OpenGL\OpenGLFwd.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\UserInterface.h" />

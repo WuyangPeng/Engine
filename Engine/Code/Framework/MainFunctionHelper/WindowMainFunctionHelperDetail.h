@@ -17,7 +17,6 @@
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Rendering/SceneGraph/CameraManager.h"
 #include "Framework/WindowProcess/WindowProcessManager.h"
 
 template <template <typename> class Build, typename Process>
@@ -116,7 +115,6 @@ void Framework::WindowMainFunctionHelper<Build, Process>::Initializer(WindowsHIn
     EXCEPTION_TRY
     {
         InitWindowProcess();
-        InitCamera();
         InitWindowImpl(instance, commandLine, information);
     }
     EXCEPTION_WINDOWS_ENTRY_POINT_CATCH
@@ -127,13 +125,6 @@ void Framework::WindowMainFunctionHelper<Build, Process>::InitWindowProcess()
 {
     WindowProcessManager::Create();
     windowMainFunctionSchedule = WindowMainFunctionSchedule::WindowProcess;
-}
-
-template <template <typename> class Build, typename Process>
-void Framework::WindowMainFunctionHelper<Build, Process>::InitCamera()
-{
-    Rendering::CameraManager::Create();
-    windowMainFunctionSchedule = WindowMainFunctionSchedule::Camera;
 }
 
 template <template <typename> class Build, typename Process>
@@ -149,7 +140,6 @@ void Framework::WindowMainFunctionHelper<Build, Process>::Terminators()
     EXCEPTION_TRY
     {
         DestroyWindowImpl();
-        DestroyCamera();
         DestroyWindowProcess();
     }
     EXCEPTION_WINDOWS_ENTRY_POINT_CATCH
@@ -161,16 +151,6 @@ void Framework::WindowMainFunctionHelper<Build, Process>::DestroyWindowImpl() no
     if (WindowMainFunctionSchedule::Max <= windowMainFunctionSchedule)
     {
         build.reset();
-        windowMainFunctionSchedule = WindowMainFunctionSchedule::Camera;
-    }
-}
-
-template <template <typename> class Build, typename Process>
-void Framework::WindowMainFunctionHelper<Build, Process>::DestroyCamera() noexcept
-{
-    if (WindowMainFunctionSchedule::Camera <= windowMainFunctionSchedule)
-    {
-        Rendering::CameraManager::Destroy();
         windowMainFunctionSchedule = WindowMainFunctionSchedule::WindowProcess;
     }
 }

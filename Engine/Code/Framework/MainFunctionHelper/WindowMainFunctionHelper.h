@@ -61,11 +61,9 @@ namespace Framework
         void Terminators();
 
         void InitWindowProcess();
-        void InitCamera(); 
         void InitWindowImpl(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information);
 
-        void DestroyWindowImpl() noexcept; 
-        void DestroyCamera() noexcept;
+        void DestroyWindowImpl() noexcept;
         void DestroyWindowProcess() noexcept;
 
     private:

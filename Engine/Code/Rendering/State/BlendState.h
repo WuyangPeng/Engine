@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 11:11)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/26 11:09)
 
 #ifndef RENDERING_STATE_BLEND_STATE_H
 #define RENDERING_STATE_BLEND_STATE_H
@@ -52,7 +52,7 @@ namespace Rendering
         void SetEnableIndependentBlend(bool enableIndependentBlend) noexcept;
 
         NODISCARD Colour GetBlendColor() const noexcept;
-        void SetBlendColor(Colour blendColor) noexcept;
+        void SetBlendColor(const Colour& blendColor) noexcept;
 
         NODISCARD uint32_t GetSampleMask() const noexcept;
         void SetSampleMask(uint32_t sampleMask) noexcept;

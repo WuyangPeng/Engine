@@ -22,8 +22,6 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/BitHacksDetail.h"
-#include "Rendering/Resources/Textures/LoadTexture.h"
-#include "Rendering/Resources/Textures/SaveTexture.h"
 #include "Rendering/Resources/Textures/Texture1D.h"
 
 Rendering::Texture1DTesting::Texture1DTesting(const OStreamShared& stream)
@@ -43,60 +41,5 @@ void Rendering::Texture1DTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-
     CoreTools::InitTerm::ExecuteTerminator();
-}
-
-void Rendering::Texture1DTesting::BaseTest()
-{
-    Texture1DSharedPtr firstTexture1D = LoadTexture::Load1DFromFile(SYSTEM_TEXT("Resource/ResourcesSuite/Texture1D.trt"));
-
-    ASSERT_EQUAL(1, firstTexture1D->GetNumLevels());
-
-    ASSERT_EQUAL(1, firstTexture1D->GetNumDimensions());
-    ASSERT_EQUAL(16, firstTexture1D->GetDimension(0, 0));
-    ASSERT_EQUAL(0, firstTexture1D->GetLevelOffset(0, 0));
-
-    ASSERT_EQUAL(16, firstTexture1D->GetLength());
-}
-
-void Rendering::Texture1DTesting::MipmapsTest()
-{
-    Texture1DSharedPtr firstTexture1D = LoadTexture::Load1DFromFile(SYSTEM_TEXT("Resource/ResourcesSuite/Texture1D.trt"));
-
-    ASSERT_FALSE(firstTexture1D->HasMipMaps());
-}
-
-void Rendering::Texture1DTesting::StreamTest()
-{
-    Texture1DSharedPtr firstTexture1D = LoadTexture::Load1DFromFile(SYSTEM_TEXT("Resource/ResourcesSuite/Texture1D.trt"));
-}
-
-void Rendering::Texture1DTesting::FileTest()
-{
-    Texture1DSharedPtr firstTexture1D = LoadTexture::Load1DFromFile(SYSTEM_TEXT("Resource/ResourcesSuite/Texture1D.trt"));
-
-    SaveTexture::SaveToFile(*firstTexture1D, SYSTEM_TEXT("Resource/ResourcesSuite/MipmapsTexture1D.trt"));
-
-    Texture1DSharedPtr secondTexture1D = LoadTexture::Load1DFromFile(SYSTEM_TEXT("Resource/ResourcesSuite/MipmapsTexture1D.trt"));
-
-    ASSERT_EQUAL(firstTexture1D->GetNumLevels(), secondTexture1D->GetNumLevels());
-
-    ASSERT_EQUAL(firstTexture1D->GetNumDimensions(), secondTexture1D->GetNumDimensions());
-
-    for (int i = 0; i < firstTexture1D->GetNumLevels(); ++i)
-    {
-        ASSERT_EQUAL(firstTexture1D->GetDimension(0, i), secondTexture1D->GetDimension(0, i));
-        ASSERT_EQUAL(firstTexture1D->GetNumLevelBytes(i), secondTexture1D->GetNumLevelBytes(i));
-        ASSERT_EQUAL(firstTexture1D->GetLevelOffset(0, i), secondTexture1D->GetLevelOffset(0, i));
-    }
-
-    ASSERT_EQUAL(firstTexture1D->GetLength(), secondTexture1D->GetLength());
-
-    for (int i = 0; i < secondTexture1D->GetNumLevels(); ++i)
-    {
-        for (int k = 0; k < secondTexture1D->GetNumLevelBytes(i); ++k)
-        {
-        }
-    }
 }

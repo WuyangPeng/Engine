@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 20:17)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/29 13:55)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_ARRAY_H
 #define RENDERING_RESOURCES_TEXTURE_ARRAY_H
@@ -24,8 +24,8 @@ namespace Rendering
         using ParentType = Texture;
 
     public:
-        TextureArray(int numElements, int elementSize, GraphicsObjectType type);
-        TextureArray(int numElements, int elementSize, const StorageType& storage, GraphicsObjectType type);
+        TextureArray(const std::string& name, int numElements, int elementSize, GraphicsObjectType type, bool createStorage = true);
+        TextureArray(const std::string& name, int numElements, int elementSize, const StorageType& storage, GraphicsObjectType type);
 
     public:
         CLASS_INVARIANT_OVERRIDE_DECLARE;

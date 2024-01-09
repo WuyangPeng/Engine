@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:19)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/08 14:53)
 
 #ifndef RENDERING_OPENGL_RENDERER_OPENGL_STRUCTURED_BUFFER_H
 #define RENDERING_OPENGL_RENDERER_OPENGL_STRUCTURED_BUFFER_H
@@ -41,16 +41,8 @@ namespace Rendering
 
         NODISCARD bool CopyGpuToCpu() override;
 
-        void Enable() noexcept override;
-
     protected:
         void Initialize() override;
-
-    public:
-        [[nodiscard]] bool CopyGpuToCpu(int level) override;
-        [[nodiscard]] bool CopyGpuToCpu(int item, int level) override;
-        [[nodiscard]] bool CopyCpuToGpu(int level) override;
-        [[nodiscard]] bool CopyCpuToGpu(int item, int level) override;
 
     private:
         OpenGLInt counterOffset;

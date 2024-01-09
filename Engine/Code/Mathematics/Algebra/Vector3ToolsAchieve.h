@@ -382,4 +382,33 @@ Mathematics::Vector2<Real> Mathematics::Vector3Tools<Real>::Project(const Vector
     return result;
 }
 
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+typename Mathematics::Vector3Tools<Real>::Vector3Orthonormalize Mathematics::Vector3Tools<Real>::ComputeOrthogonalComplement(int numInputs, const ArrayType& vector)
+{
+    auto uVector = vector.at(0);
+    auto vVector = vector.at(1);
+    auto wVector = vector.at(2);
+
+    if (numInputs == 1)
+    {
+        if (Math::FAbs(uVector[0]) > Math::FAbs(uVector[1]))
+        {
+            vVector = { -uVector[2], Real{}, +uVector[0] };
+        }
+        else
+        {
+            vVector = { Real{}, +uVector[2], -uVector[1] };
+        }
+        numInputs = 2;
+    }
+
+    if (numInputs == 2)
+    {
+        wVector = CrossProduct(uVector, vVector);
+    }
+
+    return Orthonormalize(uVector, vVector, wVector);
+}
+
 #endif  // MATHEMATICS_ALGEBRA_VECTOR3_TOOLS_ACHIEVE_H

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/25 16:58)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/22 10:05)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-Rendering::WglDevice::WglDevice(WindowsHWnd hWnd, WindowsHDC device, OpenGLHglrc immediate)
+Rendering::WglDevice::WglDevice(WindowsHWnd hWnd, WindowsHdc device, OpenGLRcHandle immediate)
     : ParentType{ CoreTools::DisableNotThrow::Disable }, hWnd{ hWnd }, device{ device }, immediate{ immediate }
 {
     Init();
@@ -28,21 +28,17 @@ void Rendering::WglDevice::Init()
 {
     if (hWnd == nullptr || device == nullptr || immediate == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("wgl环境参数无效"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("wgl环境参数无效"s))
     }
 
     ResetSize();
-}
-
-void Rendering::WglDevice::Execute(MAYBE_UNUSED const ComputeProgramSharedPtr& computeProgram, MAYBE_UNUSED int numXGroups, MAYBE_UNUSED int numYGroups, MAYBE_UNUSED int numZGroups) noexcept
-{
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 
 bool Rendering::WglDevice::IsValid() const noexcept
 {
-    return ParentType::IsValid() && device != nullptr && immediate != nullptr;
+    return ParentType::IsValid() && hWnd != nullptr && device != nullptr && immediate != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

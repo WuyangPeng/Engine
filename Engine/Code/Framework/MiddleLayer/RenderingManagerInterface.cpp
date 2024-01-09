@@ -88,7 +88,7 @@ void Framework::RenderingManagerInterface::PreIdle()
 
     ParentType::PreIdle();
 
-    viewMiddleLayer->ClearColorBuffer();
+    viewMiddleLayer->ClearBuffers();
 }
 
 bool Framework::RenderingManagerInterface::Idle(int64_t timeDelta)

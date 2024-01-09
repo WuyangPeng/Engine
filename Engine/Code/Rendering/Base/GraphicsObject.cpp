@@ -43,7 +43,9 @@ void Rendering::GraphicsObject::Release()
 {
     const auto rendererObjectBridge = impl->GetRendererObjectBridge();
 
-    rendererObjectBridge->UnbindRendererObject(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()));
+    const auto rendererObject = boost::polymorphic_pointer_cast<ClassType>(shared_from_this());
+
+    rendererObjectBridge->UnbindRendererObject(rendererObject);
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, GraphicsObject);

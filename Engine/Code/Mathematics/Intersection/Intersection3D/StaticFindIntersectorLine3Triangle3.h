@@ -46,6 +46,8 @@ namespace Mathematics
         NODISCARD Real GetTriangleBary1() const noexcept;
         NODISCARD Real GetTriangleBary2() const noexcept;
 
+        NODISCARD Vector3 GetPoint() const noexcept;
+
     private:
         void Find();
 
@@ -59,6 +61,8 @@ namespace Mathematics
         Real triangleBary0;
         Real triangleBary1;
         Real triangleBary2;
+
+        Vector3 point;
     };
 }
 

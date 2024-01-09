@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/28 15:16)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/02 15:13)
 
 #ifndef RENDERING_RENDERER_ENGINE_RENDERER_H
 #define RENDERING_RENDERER_ENGINE_RENDERER_H
@@ -19,19 +19,14 @@
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/DataTypes/Colour.h"
-#include "Rendering/DataTypes/DataTypesFwd.h"
-#include "Rendering/GlobalEffects/GlobalEffectsFwd.h"
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 #include "Rendering/Resources/Buffers/VertexFormat.h"
 #include "Rendering/Resources/ResourcesFwd.h"
 #include "Rendering/Resources/Textures/DrawTarget.h"
 #include "Rendering/Resources/Textures/Texture1D.h"
-#include "Rendering/Resources/Textures/Texture2D.h"
-#include "Rendering/Resources/Textures/Texture3D.h"
 #include "Rendering/Resources/Textures/TextureCube.h"
 #include "Rendering/SceneGraph/Camera.h"
-#include "Rendering/SceneGraph/SceneGraphFwd.h"
 #include "Rendering/SceneGraph/Visual.h"
 #include "Rendering/Shaders/ShadersFwd.h"
 #include "Rendering/State/StateFwd.h"
@@ -182,7 +177,7 @@ namespace Rendering
         void Unbind(const GraphicsObjectSharedPtr& object);
         void Unbind(const DrawTargetSharedPtr& object);
 
-        NODISCARD TotalAllocation GetTotalAllocation();
+        NODISCARD TotalAllocation GetTotalAllocation() const;
 
         // 支持通过映射内存从CPU复制到GPU。
         NODISCARD bool Update(const BufferSharedPtr& buffer);
@@ -210,7 +205,7 @@ namespace Rendering
 
         // 执行计算程序。如果您希望CPU暂停等待结果，请在Execute(...)后立即调用WaitForFinish()。
         // 但是，您可以在稍后的某个时间通过调用WaitForFinish()。
-        void Execute(const ComputeProgramSharedPtr& program, int numXGroups, int numYGroups, int numZGroups);
+        void Execute(ComputeProgram& program, int numXGroups, int numYGroups, int numZGroups);
 
         // 让CPU等待，直到GPU完成其当前命令缓冲区。
         void WaitForFinish();

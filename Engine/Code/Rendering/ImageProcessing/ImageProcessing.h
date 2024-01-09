@@ -10,8 +10,6 @@
 #ifndef RENDERING_IMAGE_PROCESSING_H
 #define RENDERING_IMAGE_PROCESSING_H
 
-#include "ImageProcessing2.h"
-#include "ImageProcessing3.h"
-#include "ImageProcessingBase.h"
+
 
 #endif  // RENDERING_IMAGE_PROCESSING_H

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/28 15:33)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/02 16:20)
 
 #include "Rendering/RenderingExport.h"
 
@@ -36,6 +36,23 @@ Rendering::PickRay::PickRay(PickRayCreate pickRayCreate)
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, PickRay)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PickRay, IsResult, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PickRay, GetOrigin, Rendering::PickRay::APoint)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PickRay, GetDirection, Rendering::PickRay::AVector)
+bool Rendering::PickRay::IsResult() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->IsResult();
+}
+
+Rendering::PickRay::APoint Rendering::PickRay::GetOrigin() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetOrigin();
+}
+
+Rendering::PickRay::AVector Rendering::PickRay::GetDirection() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetDirection();
+}

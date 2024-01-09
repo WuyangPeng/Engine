@@ -1,17 +1,16 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/29 11:17)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/26 11:20)
 
 #include "Rendering/RenderingExport.h"
 
 #include "RasterizerState.h"
 #include "Flags/DepthStencilStateComparison.h"
-#include "Flags/DepthStencilStateWriteMask.h"
 #include "Flags/RasterizerStateCull.h"
 #include "Flags/RasterizerStateFill.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
@@ -49,7 +48,7 @@ Rendering::RasterizerState::RasterizerState(RasterizerStateCreate rasterizerStat
     : ParentType{ name, GraphicsObjectType::RasterizerState },
       fill{ RasterizerStateFill::Solid },
       cull{ RasterizerStateCull::Back },
-      frontCCW{ true },
+      frontCcw{ true },
       depthBias{ 0 },
       depthBiasClamp{ 0.0f },
       slopeScaledDepthBias{ 0.0f },
@@ -67,7 +66,7 @@ Rendering::RasterizerState::RasterizerState(RasterizerStateCreate rasterizerStat
     : ParentType{ name, GraphicsObjectType::RasterizerState },
       fill{ rasterizerStateFill },
       cull{ rasterizerStateCull },
-      frontCCW{ true },
+      frontCcw{ true },
       depthBias{ 0 },
       depthBiasClamp{ 0.0f },
       slopeScaledDepthBias{ 0.0f },
@@ -85,7 +84,7 @@ Rendering::RasterizerState::RasterizerState(RasterizerStateCreate rasterizerStat
     : ParentType{ name, GraphicsObjectType::RasterizerState },
       fill{ RasterizerStateFill::Solid },
       cull{ rasterizerStateCull },
-      frontCCW{ true },
+      frontCcw{ true },
       depthBias{ 0 },
       depthBiasClamp{ 0.0f },
       slopeScaledDepthBias{ 0.0f },
@@ -105,7 +104,7 @@ Rendering::RasterizerState::RasterizerState(LoadConstructor loadConstructor)
     : ParentType{ loadConstructor },
       fill{ RasterizerStateFill::Solid },
       cull{ RasterizerStateCull::Back },
-      frontCCW{ true },
+      frontCcw{ true },
       depthBias{ 0 },
       depthBiasClamp{ 0.0f },
       slopeScaledDepthBias{ 0.0f },
@@ -125,7 +124,7 @@ int Rendering::RasterizerState::GetStreamingSize() const
 
     size += RENDERING_STREAM_SIZE(fill);
     size += RENDERING_STREAM_SIZE(cull);
-    size += RENDERING_STREAM_SIZE(frontCCW);
+    size += RENDERING_STREAM_SIZE(frontCcw);
     size += RENDERING_STREAM_SIZE(depthBias);
     size += RENDERING_STREAM_SIZE(depthBiasClamp);
     size += RENDERING_STREAM_SIZE(slopeScaledDepthBias);
@@ -154,7 +153,7 @@ void Rendering::RasterizerState::Save(CoreTools::BufferTarget& target) const
 
     target.WriteEnum(fill);
     target.WriteEnum(cull);
-    target.Write(frontCCW);
+    target.Write(frontCcw);
     target.Write(depthBias);
     target.Write(depthBiasClamp);
     target.Write(slopeScaledDepthBias);
@@ -190,7 +189,7 @@ void Rendering::RasterizerState::Load(CoreTools::BufferSource& source)
 
     source.ReadEnum(fill);
     source.ReadEnum(cull);
-    source.Read(frontCCW);
+    source.Read(frontCcw);
     source.Read(depthBias);
     source.Read(depthBiasClamp);
     source.Read(slopeScaledDepthBias);
@@ -239,18 +238,18 @@ void Rendering::RasterizerState::SetCull(RasterizerStateCull rasterizerStateCull
     cull = rasterizerStateCull;
 }
 
-bool Rendering::RasterizerState::IsFrontCCW() const noexcept
+bool Rendering::RasterizerState::IsFrontCcw() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return frontCCW;
+    return frontCcw;
 }
 
-void Rendering::RasterizerState::SetFrontCCW(bool aFrontCCW) noexcept
+void Rendering::RasterizerState::SetFrontCcw(bool aFrontCcw) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    frontCCW = aFrontCCW;
+    frontCcw = aFrontCcw;
 }
 
 int Rendering::RasterizerState::GetDepthBias() const noexcept
@@ -323,32 +322,32 @@ void Rendering::RasterizerState::SetEnableScissor(bool aEnableScissor) noexcept
     enableScissor = aEnableScissor;
 }
 
-bool Rendering::RasterizerState::IsEnableMultisample() const noexcept
+bool Rendering::RasterizerState::IsEnableMultiSample() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return enableMultiSample;
 }
 
-void Rendering::RasterizerState::SetEnableMultisample(bool aEnableMultisample) noexcept
+void Rendering::RasterizerState::SetEnableMultiSample(bool aEnableMultiSample) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    enableMultiSample = aEnableMultisample;
+    enableMultiSample = aEnableMultiSample;
 }
 
-bool Rendering::RasterizerState::IsEnableAntialiasedLine() const noexcept
+bool Rendering::RasterizerState::IsEnableAntiAliasedLine() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return enableAntiAliasedLine;
 }
 
-void Rendering::RasterizerState::SetEnableAntialiasedLine(bool aEnableAntialiasedLine) noexcept
+void Rendering::RasterizerState::SetEnableAntiAliasedLine(bool aEnableAntiAliasedLine) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    enableAntiAliasedLine = aEnableAntialiasedLine;
+    enableAntiAliasedLine = aEnableAntiAliasedLine;
 }
 
 Rendering::RasterizerState::RendererObjectSharedPtr Rendering::RasterizerState::CreateRendererObject(RendererTypes rendererTypes)

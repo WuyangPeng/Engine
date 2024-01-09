@@ -21,8 +21,6 @@
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/Controllers/Controller.h"
-#include "Rendering/SceneGraph/LoadVisual.h"
-#include "Rendering/SceneGraph/Polypoint.h"
 
 Rendering::PointControllerTesting::PointControllerTesting(const OStreamShared& stream)
     : ParentType{ stream }

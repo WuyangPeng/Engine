@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/26 15:49)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/06 11:29)
 
 #ifndef RENDERING_OPENGL_RENDERER_OPENGL_RENDERER_OBJECT_H
 #define RENDERING_OPENGL_RENDERER_OPENGL_RENDERER_OBJECT_H
@@ -22,6 +22,7 @@ namespace Rendering
     public:
         using ClassType = OpenGLRendererObject;
         using ParentType = RendererObject;
+
         using OpenGLUInt = System::OpenGLUInt;
 
     public:
@@ -31,6 +32,22 @@ namespace Rendering
 
         NODISCARD OpenGLUInt GetGLHandle() const noexcept override;
         void SetGLHandle(OpenGLUInt handler) noexcept;
+
+        void Enable() override;
+        void Disable() override;
+        NODISCARD bool Update() override;
+        NODISCARD bool Update(int level) override;
+        NODISCARD bool Update(int item, int level) override;
+
+        NODISCARD bool CopyGpuToCpu() override;
+        NODISCARD bool CopyGpuToCpu(int level) override;
+        NODISCARD bool CopyGpuToCpu(int item, int level) override;
+
+        NODISCARD bool CopyCpuToGpu() override;
+        NODISCARD bool CopyCpuToGpu(int level) override;
+        NODISCARD bool CopyCpuToGpu(int item, int level) override;
+
+        NODISCARD bool GetNumActiveElements() override;
 
     private:
         OpenGLUInt glHandle;

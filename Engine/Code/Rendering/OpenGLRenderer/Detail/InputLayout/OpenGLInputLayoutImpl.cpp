@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:40)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/08 19:51)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,16 +16,17 @@
 #include "Rendering/Resources/DataFormat.h"
 #include "Rendering/Resources/Flags/ChannelType.h"
 
-Rendering::OpenGLInputLayoutImpl::OpenGLInputLayoutImpl(MAYBE_UNUSED OpenGLUInt programHandle, OpenGLUInt vertexBufferHandle, const VertexBuffer& vertexBuffer)
+Rendering::OpenGLInputLayoutImpl::OpenGLInputLayoutImpl(OpenGLUInt programHandle, OpenGLUInt vertexBufferHandle, const VertexBuffer& vertexBuffer)
     : vertexBufferHandle{ vertexBufferHandle },
       vertexArrayHandle{ 0 },
       numAttributes{ 0 },
       attributes{}
 {
+    System::UnusedFunction(programHandle);
     vertexArrayHandle = System::GetGLGenVertexArrays();
     System::SetGLBindVertexArray(vertexArrayHandle);
 
-    auto format = vertexBuffer.GetFormat();
+    const auto format = vertexBuffer.GetFormat();
     numAttributes = format.GetNumAttributes();
     for (auto i = 0; i < numAttributes; ++i)
     {
@@ -42,7 +43,7 @@ Rendering::OpenGLInputLayoutImpl::OpenGLInputLayoutImpl(MAYBE_UNUSED OpenGLUInt 
 
         System::SetGLEnableVertexAttributeArray(attribute.GetLocation());
         System::SetGLBindVertexBuffer(i, vertexBufferHandle, attribute.GetOffset(), attribute.GetStride());
-        System::SetGLVertexAttributeFormat(attribute.GetLocation(), attribute.GetNumChannels(), System::UnderlyingCastEnum<System::OpenGLData>(attribute.GetChannelType()), attribute.GetNormalize(), 0);
+        SetGLVertexAttributeFormat(attribute.GetLocation(), attribute.GetNumChannels(), System::UnderlyingCastEnum<System::OpenGLData>(attribute.GetChannelType()), attribute.GetNormalize(), 0);
         System::SetGLVertexAttributeBinding(attribute.GetLocation(), i);
     }
 
@@ -77,19 +78,19 @@ void Rendering::OpenGLInputLayoutImpl::Disable() noexcept
 System::OpenGLData Rendering::OpenGLInputLayoutImpl::GetChannelType(ChannelType channelType)
 {
     using Container = std::array<System::OpenGLData, System::EnumCastUnderlying(ChannelType::NumChannelTypes)>;
-    static Container container{ System::OpenGLData::None,
-                                System::OpenGLData::Byte,
-                                System::OpenGLData::UnsignedByte,
-                                System::OpenGLData::Short,
-                                System::OpenGLData::UnsignedShort,
-                                System::OpenGLData::Int,
-                                System::OpenGLData::UnsignedInt,
-                                System::OpenGLData::HalfFloat,
-                                System::OpenGLData::Float,
-                                System::OpenGLData::Double,
-                                System::OpenGLData::Int2_10_10_10Rev,
-                                System::OpenGLData::UnsignedInt2_10_10_10Rev,
-                                System::OpenGLData::UnsignedInt10F11F11FRev };
+    static Container container{ OpenGLData::None,
+                                OpenGLData::Byte,
+                                OpenGLData::UnsignedByte,
+                                OpenGLData::Short,
+                                OpenGLData::UnsignedShort,
+                                OpenGLData::Int,
+                                OpenGLData::UnsignedInt,
+                                OpenGLData::HalfFloat,
+                                OpenGLData::Float,
+                                OpenGLData::Double,
+                                OpenGLData::Int2_10_10_10Rev,
+                                OpenGLData::UnsignedInt2_10_10_10Rev,
+                                OpenGLData::UnsignedInt10F11F11FRev };
 
     return container.at(System::EnumCastUnderlying(channelType));
 }

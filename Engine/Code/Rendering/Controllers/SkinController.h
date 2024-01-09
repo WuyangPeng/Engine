@@ -15,6 +15,7 @@
 #include "Controller.h"
 #include "CoreTools/ObjectSystems/ConstObjectAssociated.h"
 #include "Mathematics/Algebra/APoint.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/SceneGraph/Node.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(SkinController, SkinControllerImpl);

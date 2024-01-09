@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:13)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/28 17:48)
 
 #include "Rendering/RenderingExport.h"
 
@@ -17,18 +17,17 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "Mathematics/Algebra/AlgebraAggregate.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
-#include "Rendering/SceneGraph/Culler.h"
 
 #include <gsl/util>
 
-Rendering::ParticlesImpl::ParticlesImpl(const std::vector<Mathematics::Vector4F>& positions, const std::vector<float>& sizes, float sizeAdjust)
-    : positions{ positions }, sizes{ sizes }, sizeAdjust{ sizeAdjust }, numActive{ boost::numeric_cast<int>(positions.size()) }
+Rendering::ParticlesImpl::ParticlesImpl(const Container& positionSize, float sizeAdjust)
+    : positionSize{ positionSize }, sizeAdjust{ sizeAdjust }, numActive{ boost::numeric_cast<int>(positionSize.size()) }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 Rendering::ParticlesImpl::ParticlesImpl() noexcept
-    : positions{}, sizes{}, sizeAdjust{ 1.0f }, numActive{ 0 }
+    : positionSize{}, sizeAdjust{ 1.0f }, numActive{ 0 }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -37,7 +36,7 @@ Rendering::ParticlesImpl::ParticlesImpl() noexcept
 
 bool Rendering::ParticlesImpl::IsValid() const noexcept
 {
-    if (0.0f < sizeAdjust && numActive <= gsl::narrow_cast<int>(positions.size()) && positions.size() == sizes.size())
+    if (0.0f < sizeAdjust && numActive <= gsl::narrow_cast<int>(positionSize.size()))
     {
         return true;
     }
@@ -53,39 +52,21 @@ int Rendering::ParticlesImpl::GetNumParticles() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return boost::numeric_cast<int>(positions.size());
+    return boost::numeric_cast<int>(positionSize.size());
 }
 
 Mathematics::Vector4F Rendering::ParticlesImpl::GetParticlesPosition(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(positions.size()), "索引越界！");
 
-    return positions.at(index);
+    return positionSize.at(index);
 }
 
-float Rendering::ParticlesImpl::GetSize(int index) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(positions.size()), "索引越界！");
-
-    return sizes.at(index);
-}
-
-void Rendering::ParticlesImpl::SetPosition(int index, const Mathematics::Vector4F& position)
+void Rendering::ParticlesImpl::SetPosition(int index, const Vector4& position)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(positions.size()), "索引越界！");
 
-    positions.at(index) = position;
-}
-
-void Rendering::ParticlesImpl::SetSize(int index, float size)
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(positions.size()), "索引越界！");
-
-    sizes.at(index) = size;
+    positionSize.at(index) = position;
 }
 
 void Rendering::ParticlesImpl::SetSizeAdjust(float aSizeAdjust)
@@ -98,8 +79,7 @@ void Rendering::ParticlesImpl::SetSizeAdjust(float aSizeAdjust)
     }
     else
     {
-        RENDERING_ASSERTION_0(false, "无效的大小调整参数。\n");
-        sizeAdjust = 1.0f;
+        THROW_EXCEPTION(SYSTEM_TEXT("无效的大小调整参数。\n"))
     }
 }
 
@@ -114,8 +94,8 @@ void Rendering::ParticlesImpl::SetNumActive(int aNumActive)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    auto numParticles = boost::numeric_cast<int>(positions.size());
-    if (0 <= aNumActive && aNumActive <= numParticles)
+    if (const auto numParticles = boost::numeric_cast<int>(positionSize.size());
+        0 <= aNumActive && aNumActive <= numParticles)
     {
         numActive = aNumActive;
     }
@@ -132,33 +112,21 @@ int Rendering::ParticlesImpl::GetNumActive() const noexcept
     return numActive;
 }
 
-void Rendering::ParticlesImpl::Load(CoreTools::BufferSource& source)
+void Rendering::ParticlesImpl::Load(BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    int32_t size{ 0 };
-    source.Read(size);
-
-    positions.resize(size);
-    sizes.resize(size);
-
-    source.ReadAggregateContainer(size, positions);
-    sizes = source.ReadVectorUseNumber<float>(size);
+    positionSize = source.ReadAggregateContainerNotUseNumber<Container>();
 
     source.Read(sizeAdjust);
     source.Read(numActive);
 }
 
-void Rendering::ParticlesImpl::Save(CoreTools::BufferTarget& target) const
+void Rendering::ParticlesImpl::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = boost::numeric_cast<uint32_t>(positions.size());
-
-    target.Write(size);
-
-    target.WriteAggregateContainerWithoutNumber(positions);
-    target.WriteContainerWithNumber(sizes);
+    target.WriteAggregateContainerWithNumber(positionSize);
 
     target.Write(sizeAdjust);
     target.Write(numActive);
@@ -168,18 +136,10 @@ int Rendering::ParticlesImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CoreTools::GetStreamSize(int{});
-    size += boost::numeric_cast<int>(Mathematics::GetStreamSize(positions.at(0)) * positions.size());
-    size += boost::numeric_cast<int>(CoreTools::GetStreamSize(sizes.at(0)) * sizes.size());
+    auto size = Mathematics::GetStreamSize(positionSize);
+
     size += CoreTools::GetStreamSize(sizeAdjust);
     size += CoreTools::GetStreamSize(numActive);
 
     return size;
-}
-
-float Rendering::ParticlesImpl::GetTrueSize(int index) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return sizeAdjust * GetSize(index);
 }
