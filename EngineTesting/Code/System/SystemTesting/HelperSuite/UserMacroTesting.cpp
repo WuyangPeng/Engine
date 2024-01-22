@@ -34,7 +34,7 @@ void System::UserMacroTesting::MainTest()
 
 void System::UserMacroTesting::CloseSystemMaxTest()
 {
-    ASSERT_EQUAL(CLOSE_GLUT | CLOSE_GLFW | CLOSE_ENABLE_GL_ERROR_CHECKING | CLOSE_DIRECT_X | CLOSE_VULKAN, CLOSE_SYSTEM_MAX);
+    ASSERT_EQUAL(CLOSE_GLUT | CLOSE_GLFW | CLOSE_ENABLE_GL_ERROR_CHECKING | CLOSE_DIRECTX_12 | CLOSE_VULKAN, CLOSE_SYSTEM_MAX);
 }
 
 void System::UserMacroTesting::MacroExistTest()

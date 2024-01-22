@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/27 13:58)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 23:34)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_INTEGER_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY3_INTEGER_DETAIL_H
@@ -40,7 +40,7 @@ Mathematics::QueryType Mathematics::Query3Integer<Real>::GetType() const noexcep
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return QueryType::Interger;
+    return QueryType::Integer;
 }
 
 template <typename Real>
@@ -59,9 +59,9 @@ Mathematics::PlaneQueryType Mathematics::Query3Integer<Real>::ToPlane(const Vect
     MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < this->GetNumVertices(), "索引错误！");
     MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < this->GetNumVertices(), "索引错误！");
 
-    const auto vector0 = this->GetVertice(v0);
-    const auto vector1 = this->GetVertice(v1);
-    const auto vector2 = this->GetVertice(v2);
+    const auto vector0 = this->GetVertex(v0);
+    const auto vector1 = this->GetVertex(v1);
+    const auto vector2 = this->GetVertex(v2);
 
     const Integer<4> x0{ testVector.GetX() - vector0.GetX() };
     const Integer<4> y0{ testVector.GetY() - vector0.GetY() };
@@ -98,10 +98,10 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Integer<Real>::ToCircumsph
     MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < this->GetNumVertices(), "索引错误！");
     MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < this->GetNumVertices(), "索引错误！");
 
-    const auto vector0 = this->GetVertice(v0);
-    const auto vector1 = this->GetVertice(v1);
-    const auto vector2 = this->GetVertice(v2);
-    const auto vector3 = this->GetVertice(v3);
+    const auto vector0 = this->GetVertex(v0);
+    const auto vector1 = this->GetVertex(v1);
+    const auto vector2 = this->GetVertex(v2);
+    const auto vector3 = this->GetVertex(v3);
 
     const Integer<6> s0x{ vector0.GetX() + testVector.GetX() };
     const Integer<6> d0x{ vector0.GetX() - testVector.GetX() };

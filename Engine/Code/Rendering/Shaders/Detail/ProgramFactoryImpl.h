@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/26 14:58)
+/// 版本：1.0.0.4 (2024/01/13 23:57)
 
 #ifndef RENDERING_SHADERS_PROGRAM_FACTORY_IMPL_H
 #define RENDERING_SHADERS_PROGRAM_FACTORY_IMPL_H
@@ -27,9 +27,9 @@ namespace Rendering
         using ClassType = ProgramFactoryImpl;
         using FactoryType = ClassType;
 
-        using ProgramFactorySharedPtr = std::shared_ptr<ProgramFactoryImpl>;
         using VisualProgramSharedPtr = std::shared_ptr<VisualProgram>;
         using ComputeProgramSharedPtr = std::shared_ptr<ComputeProgram>;
+        using ProgramFactorySharedPtr = std::shared_ptr<ProgramFactoryImpl>;
         using ContainerConstIter = ProgramDefines::ContainerConstIter;
 
     public:
@@ -65,6 +65,8 @@ namespace Rendering
 
         NODISCARD static ProgramFactorySharedPtr Create(RendererTypes rendererTypes);
 
+        NODISCARD void SetVersion(const std::string& defaultVersion);
+
     protected:
         NODISCARD virtual VisualProgramSharedPtr CreateFromNamedSources(const std::string& vertexShaderName,
                                                                         const std::string& vertexShaderSource,
@@ -73,10 +75,12 @@ namespace Rendering
                                                                         const std::string& geometryShaderName,
                                                                         const std::string& geometryShaderSource) = 0;
 
-        NODISCARD virtual ComputeProgramSharedPtr CreateFromNamedSource(const std::string& computeShaderName, const std::string& computeShaderSource) = 0;
+        NODISCARD virtual ComputeProgramSharedPtr CreateFromNamedSource(const std::string& computeShaderName,
+                                                                        const std::string& computeShaderSource) = 0;
 
         NODISCARD std::string GetVersion() const;
         NODISCARD int GetDefinesSize() const;
+        NODISCARD ProgramDefines GetProgramDefines() const;
 
         NODISCARD ContainerConstIter begin() const noexcept;
         NODISCARD ContainerConstIter end() const noexcept;

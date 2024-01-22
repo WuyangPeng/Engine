@@ -27,7 +27,7 @@ Rendering::ShaderFactory::ShaderSharedPtr Rendering::ShaderFactory::Create(Rende
             return std::make_shared<GLSLShader>(reflector, referenceType);
         }
 
-        case RendererTypes::Dx11:
+        case RendererTypes::DirectX11:
         case RendererTypes::Default:
         case RendererTypes::Windows:
         default:

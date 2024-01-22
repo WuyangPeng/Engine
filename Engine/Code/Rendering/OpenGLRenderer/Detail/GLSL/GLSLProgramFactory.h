@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2024/01/09 16:53)
+/// 版本：1.0.0.4 (2024/01/14 00:19)
 
 #ifndef RENDERING_OPENGL_RENDERER_GLSL_PROGRAM_FACTORY_H
 #define RENDERING_OPENGL_RENDERER_GLSL_PROGRAM_FACTORY_H
@@ -15,15 +15,17 @@
 #include "System/OpenGL/Fwd/OpenGLFlagsFwd.h"
 #include "System/OpenGL/Using/OpenGLUsing.h"
 #include "Rendering/Shaders/Detail/ProgramFactoryImpl.h"
+#include "System/Helper/UnicodeUsing.h"
 
 namespace Rendering
 {
-    class GLSLProgramFactory : public ProgramFactoryImpl
+    class GLSLProgramFactory final : public ProgramFactoryImpl
     {
     public:
         using ClassType = GLSLProgramFactory;
         using ParentType = ProgramFactoryImpl;
 
+        using String = System::String;
         using OpenGLUInt = System::OpenGLUInt;
         using ShaderType = System::ShaderType;
 
@@ -35,6 +37,12 @@ namespace Rendering
 
         NODISCARD ShaderAPIType GetAPI() const noexcept override;
 
+        /// GLSLVisualProgram和GLSLComputeProgram对象负责销毁着色器和程序。
+        /// 工厂将程序对象包装为共享指针，以允许自动清理。
+
+    protected:
+        /// 创建GPU显示程序。此程序与激活的引擎对象相关联。
+        /// 只有当programHandle为正时，返回的程序才有效。
         NODISCARD VisualProgramSharedPtr CreateFromNamedSources(const std::string& vertexShaderName,
                                                                 const std::string& vertexShaderSource,
                                                                 const std::string& pixelShaderName,
@@ -42,11 +50,10 @@ namespace Rendering
                                                                 const std::string& geometryShaderName,
                                                                 const std::string& geometryShaderSource) override;
 
-        NODISCARD ComputeProgramSharedPtr CreateFromNamedSource(const std::string& computeShaderName, const std::string& computeShaderSource) override;
-
-    private:
-        NODISCARD OpenGLUInt Compile(ShaderType shaderType, const std::string& source);
-        NODISCARD bool Link(OpenGLUInt programHandle);
+        /// 创建GPU计算程序。此程序与激活的引擎对象相关联。
+        /// 只有当programHandle为正时，返回的程序才有效。
+        NODISCARD ComputeProgramSharedPtr CreateFromNamedSource(const std::string& computeShaderName,
+                                                                const std::string& computeShaderSource) override;
     };
 }
 

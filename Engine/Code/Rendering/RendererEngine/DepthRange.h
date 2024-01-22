@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2024/01/02 15:16)
+/// 版本：1.0.0.4 (2024/01/17 09:47)
 
 #ifndef RENDERING_RENDERER_ENGINE_DEPTH_RANGE_H
 #define RENDERING_RENDERER_ENGINE_DEPTH_RANGE_H

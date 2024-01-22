@@ -75,7 +75,7 @@ void Mathematics::Query3Testing::VerticesTest()
 
         for (auto k = 0; k < size; ++k)
         {
-            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, query.GetVertice(k), vertices.at(k), 1e-10);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, query.GetVertex(k), vertices.at(k), 1e-10);
         }
     }
 }

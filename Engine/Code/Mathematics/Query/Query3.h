@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/27 14:01)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 23:39)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_H
 #define MATHEMATICS_QUERY_QUERY3_H
@@ -39,7 +39,7 @@ namespace Mathematics
         NODISCARD QueryType GetType() const noexcept override;
 
         NODISCARD int GetNumVertices() const;
-        NODISCARD Vector3 GetVertice(int index) const;
+        NODISCARD Vector3 GetVertex(int index) const;
 
         // 关于一个点的各种几何对象之间的关系查询。
 

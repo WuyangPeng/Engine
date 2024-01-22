@@ -13,8 +13,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
-#include "Rendering/DataTypes/TransformDetail.h"
-#include "Rendering/DataTypes/TransformMatrixDetail.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 #include "Framework/WindowCreate/WindowSize.h"
 
 Framework::CameraMiddleLayerTesting::CameraMiddleLayerTesting(const OStreamShared& stream)
@@ -50,7 +49,7 @@ float Framework::CameraMiddleLayerTesting::GetYTrack(int y, float multiplier, co
     return static_cast<float>(2 * (height - 1 - y) - height) * multiplier;
 }
 
-Rendering::TransformF Framework::CameraMiddleLayerTesting::CalculateTransform(const Transform& original, NumericalValueSymbol doValue, float speed, const AVector& axis)
+Mathematics::TransformF Framework::CameraMiddleLayerTesting::CalculateTransform(const Transform& original, NumericalValueSymbol doValue, float speed, const AVector& axis)
 {
     auto result = original;
     auto rotate = result.GetRotate();
@@ -149,7 +148,7 @@ void Framework::CameraMiddleLayerTesting::AVectorTest(const AVector& lhs, const 
 void Framework::CameraMiddleLayerTesting::TransformTest(const Transform& lhs, const Transform& rhs, const std::string& functionName, int index)
 {
     using ApproximateFunction = bool (*)(const Transform&, const Transform&, float);
-    ApproximateFunction approximateFunction{ Rendering::Approximate };
+    ApproximateFunction approximateFunction{ Mathematics::Approximate };
     const auto message = "º¯ÊýÃûÎª£º" + functionName + "£¬ÐòºÅ£º" + std::to_string(index);
 
     ASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE(approximateFunction, lhs, rhs, Mathematics::MathF::GetZeroTolerance(), message);

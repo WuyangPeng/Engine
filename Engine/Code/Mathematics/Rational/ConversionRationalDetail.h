@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/26 19:37)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 23:15)
 
 #ifndef MATHEMATICS_RATIONAL_CONVERSION_RATIONAL_DETAIL_H
 #define MATHEMATICS_RATIONAL_CONVERSION_RATIONAL_DETAIL_H
@@ -13,7 +13,6 @@
 #include "ConversionRational.h"
 #include "FloatingPointAnalysisDetail.h"
 #include "IntegerDetail.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -77,7 +76,7 @@ void Mathematics::ConversionRational<T>::Init(T value, const UnsignedIntegerType
     numeratorShifting = 0;
     denominatorShifting = 0;
 
-    const FloatingPointAnalysis<double> floatingPointAnalysis{ boost::numeric_cast<double>(numeratorMantissa) };
+    const FloatingPointAnalysis floatingPointAnalysis{ boost::numeric_cast<double>(numeratorMantissa) };
     maxShifting = floatingPointAnalysis.GetRealExponent();
     if (maxShifting < 0)
     {
@@ -107,9 +106,8 @@ void Mathematics::ConversionRational<T>::InitFloatingPoint(T value)
 {
     static_assert(std::is_floating_point_v<T>, "T isn't floating_point.");
 
-    const FloatingPointAnalysis<T> floatingPointAnalysis{ value };
-
-    if (floatingPointAnalysis.GetType() == FloatingPointAnalysisType::Valid || floatingPointAnalysis.GetType() == FloatingPointAnalysisType::Zero)
+    if (const FloatingPointAnalysis<T> floatingPointAnalysis{ value };
+        floatingPointAnalysis.GetType() == FloatingPointAnalysisType::Valid || floatingPointAnalysis.GetType() == FloatingPointAnalysisType::Zero)
     {
         numeratorMantissa = floatingPointAnalysis.GetRealMantissa();
         denominatorMantissa = uint64_t{ 1 } << TraitsType::exponentShifting;
@@ -292,9 +290,8 @@ int Mathematics::ConversionRational<T>::GetAssignmentNumeratorShifting(int bit) 
 
     if (bit <= reducibilityShifting)
     {
-        const auto shifting = numeratorShifting - reducibilityShifting;
-
-        if (0 <= shifting)
+        if (const auto shifting = numeratorShifting - reducibilityShifting;
+            0 <= shifting)
         {
             return numeratorShifting >> reducibilityShifting;
         }
@@ -337,9 +334,8 @@ int Mathematics::ConversionRational<T>::GetAssignmentDenominatorShifting(int bit
         }
         else
         {
-            const auto shifting = denominatorShifting + reducibilityShifting;
-
-            if (0 <= shifting)
+            if (const auto shifting = denominatorShifting + reducibilityShifting;
+                0 <= shifting)
             {
                 return denominatorShifting >> reducibilityShifting;
             }
@@ -362,9 +358,8 @@ uint64_t Mathematics::ConversionRational<T>::GetAssignmentNumeratorMantissa(int 
 
     if (bit <= reducibilityShifting)
     {
-        const auto shifting = numeratorShifting - reducibilityShifting;
-
-        if (0 <= shifting)
+        if (const auto shifting = numeratorShifting - reducibilityShifting;
+            0 <= shifting)
         {
             return numeratorMantissa;
         }
@@ -407,9 +402,8 @@ uint64_t Mathematics::ConversionRational<T>::GetAssignmentDenominatorMantissa(in
         }
         else
         {
-            const auto shifting = denominatorShifting + reducibilityShifting;
-
-            if (0 <= shifting)
+            if (const auto shifting = denominatorShifting + reducibilityShifting;
+                0 <= shifting)
             {
                 return denominatorMantissa;
             }

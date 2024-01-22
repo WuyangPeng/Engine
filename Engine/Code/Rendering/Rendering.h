@@ -15,7 +15,7 @@
 #include "Controllers/Controllers.h"
 #include "CurvesSurfaces/CurvesSurfaces.h"
 #include "DataTypes/DataTypes.h"
-#include "Dx9Renderer/Dx9Renderer.h"
+#include "DirectX11Renderer/DirectX11Renderer.h"
 #include "GlobalEffects/GlobalEffects.h"
 #include "GlutRenderer/GlutRenderer.h"
 #include "GlxRenderer/GlxRenderer.h"

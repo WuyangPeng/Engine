@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/05 16:32)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/09 20:30)
 
 #ifndef RENDERING_SCENE_GRAPH_LIGHTINT_IMPL_H
 #define RENDERING_SCENE_GRAPH_LIGHTINT_IMPL_H
@@ -15,7 +15,6 @@
 #include "CoreTools/ObjectSystems/Object.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Mathematics/Algebra/APoint.h"
-#include "Mathematics/Algebra/AVector.h"
 #include "Rendering/DataTypes/Colour.h"
 
 namespace Rendering
@@ -60,8 +59,8 @@ namespace Rendering
         NODISCARD float GetQuadratic() const noexcept;
         NODISCARD float GetIntensity() const noexcept;
 
-        void Load(CoreTools::BufferSource& source);
-        void Save(CoreTools::BufferTarget& target) const;
+        void Load(BufferSource& source);
+        void Save(BufferTarget& target) const;
         NODISCARD int GetStreamingSize() const noexcept;
 
     private:

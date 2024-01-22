@@ -31,7 +31,13 @@ void Rendering::WglDevice::Init()
         THROW_EXCEPTION(SYSTEM_TEXT("wgl环境参数无效"s))
     }
 
-    ResetSize();
+    System::WindowsRect windowsRect{};
+    if (!System::GetSystemClientRect(hWnd, windowsRect))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("获取窗口大小失败。"s))
+    }
+
+    SetSize(windowsRect.right - windowsRect.left, windowsRect.bottom - windowsRect.top);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -50,7 +56,7 @@ Rendering::WglDevice::RenderingDeviceSharedPtr Rendering::WglDevice::Clone() con
     return std::make_shared<ClassType>(*this);
 }
 
-void Rendering::WglDevice::SwapBuffers(int syncInterval)
+void Rendering::WglDevice::DisplayColorBuffer(int syncInterval)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -60,15 +66,11 @@ void Rendering::WglDevice::SwapBuffers(int syncInterval)
     }
 }
 
-void Rendering::WglDevice::ResetSize()
+void Rendering::WglDevice::Resize(int width, int height)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    System::WindowsRect windowsRect{};
-    if (!System::GetSystemClientRect(hWnd, windowsRect))
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("获取窗口大小失败。"s))
-    }
+    ParentType::Resize(width, height);
 
-    SetSize(windowsRect.right - windowsRect.left, windowsRect.bottom - windowsRect.top);
+    SetSize(width, height);
 }

@@ -39,32 +39,32 @@ CORE_TOOLS_WITH_IMPL_OBJECT_LINK_DEFINE(Rendering, VisualEffect)
 CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, VisualEffect)
 CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, VisualEffect)
 
-Rendering::VisualEffect::VisualEffect(const VisualProgramSharedPtr& visualProgram)
-    : ParentType{ "VisualEffect" }, impl{ visualProgram }
+Rendering::VisualEffect::VisualEffect(const std::string& name, const VisualProgramSharedPtr& visualProgram)
+    : ParentType{ name }, impl{ visualProgram }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::VisualEffect::VisualEffect(CoreTools::DisableNotThrow disableNotThrow)
-    : ParentType{ "VisualEffect" }, impl{ disableNotThrow }
+Rendering::VisualEffect::VisualEffect(const std::string& name)
+    : ParentType{ name }, impl{ CoreTools::DisableNotThrow::Disable }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::VisualEffect::VisualEffect(const BaseRendererSharedPtr& baseRenderer)
-    : ParentType{ "VisualEffect" }, impl{ baseRenderer }
+Rendering::VisualEffect::VisualEffect(const std::string& name, const BaseRendererSharedPtr& baseRenderer)
+    : ParentType{ name }, impl{ baseRenderer }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::VisualEffect::VisualEffect(const BaseRendererSharedPtr& baseRenderer, const VisualProgramSharedPtr& visualProgram)
-    : ParentType{ "VisualEffect" }, impl{ baseRenderer, visualProgram }
+Rendering::VisualEffect::VisualEffect(const std::string& name, const BaseRendererSharedPtr& baseRenderer, const VisualProgramSharedPtr& visualProgram)
+    : ParentType{ name }, impl{ baseRenderer, visualProgram }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::VisualEffect::VisualEffect(ProgramFactory& factory, const BaseRendererSharedPtr& baseRenderer, const std::string& vertexShaderFile, const std::string& pixelShaderFile)
-    : ParentType{ "VisualEffect" }, impl{ factory, baseRenderer, vertexShaderFile, pixelShaderFile }
+Rendering::VisualEffect::VisualEffect(const std::string& name, ProgramFactory& factory, const BaseRendererSharedPtr& baseRenderer, const std::string& vertexShaderFile, const std::string& pixelShaderFile)
+    : ParentType{ name }, impl{ factory, baseRenderer, vertexShaderFile, pixelShaderFile }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -99,20 +99,93 @@ Rendering::VisualEffect::VisualEffectSharedPtr Rendering::VisualEffect::Clone() 
     return std::make_shared<ClassType>(*this);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetProgram, Rendering::VisualEffect::ConstVisualProgramSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetProgram, Rendering::VisualEffect::VisualProgramSharedPtr)
+Rendering::VisualEffect::ConstVisualProgramSharedPtr Rendering::VisualEffect::GetProgram() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetVertexShader, Rendering::VisualEffect::ConstShaderSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetPixelShader, Rendering::VisualEffect::ConstShaderSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetGeometryShader, Rendering::VisualEffect::ConstShaderSharedPtr)
+    return impl->GetProgram();
+}
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetVertexShader, Rendering::VisualEffect::ShaderSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetPixelShader, Rendering::VisualEffect::ShaderSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetGeometryShader, Rendering::VisualEffect::ShaderSharedPtr)
+Rendering::VisualEffect::VisualProgramSharedPtr Rendering::VisualEffect::GetProgram() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualEffect, SetProjectionViewWorldMatrixConstant, ConstantBufferSharedPtr, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetProjectionViewWorldMatrixConstant, Rendering::VisualEffect::ConstConstantBufferSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetProjectionViewWorldMatrixConstant, Rendering::VisualEffect::ConstantBufferSharedPtr)
+    return impl->GetProgram();
+}
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualEffect, SetProjectionViewWorldMatrix, Matrix4, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualEffect, GetProjectionViewWorldMatrix, Rendering::VisualEffect::Matrix4)
+Rendering::VisualEffect::ConstShaderSharedPtr Rendering::VisualEffect::GetVertexShader() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetVertexShader();
+}
+
+Rendering::VisualEffect::ConstShaderSharedPtr Rendering::VisualEffect::GetPixelShader() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetPixelShader();
+}
+
+Rendering::VisualEffect::ConstShaderSharedPtr Rendering::VisualEffect::GetGeometryShader() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetGeometryShader();
+}
+
+Rendering::VisualEffect::ShaderSharedPtr Rendering::VisualEffect::GetVertexShader() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetVertexShader();
+}
+
+Rendering::VisualEffect::ShaderSharedPtr Rendering::VisualEffect::GetPixelShader() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetPixelShader();
+}
+
+Rendering::VisualEffect::ShaderSharedPtr Rendering::VisualEffect::GetGeometryShader() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetGeometryShader();
+}
+
+void Rendering::VisualEffect::SetProjectionViewWorldMatrixConstant(const ConstantBufferSharedPtr& buffer)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetProjectionViewWorldMatrixConstant(buffer);
+}
+
+Rendering::VisualEffect::ConstConstantBufferSharedPtr Rendering::VisualEffect::GetProjectionViewWorldMatrixConstant() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetProjectionViewWorldMatrixConstant();
+}
+
+Rendering::VisualEffect::ConstantBufferSharedPtr Rendering::VisualEffect::GetProjectionViewWorldMatrixConstant() noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetProjectionViewWorldMatrixConstant();
+}
+
+void Rendering::VisualEffect::SetProjectionViewWorldMatrix(const Matrix4& projectionViewWorldMatrix)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetProjectionViewWorldMatrix(projectionViewWorldMatrix);
+}
+
+Rendering::VisualEffect::Matrix4 Rendering::VisualEffect::GetProjectionViewWorldMatrix() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetProjectionViewWorldMatrix();
+}

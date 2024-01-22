@@ -1,24 +1,43 @@
 @ingroup group_Documentation
 
-Threading Core Render Engine 1.0.0.4
+Threading Core Render Engine 1.0.0.5
 
 ----------------------------
 更新日志
 ----------------------------
-1.0.0.4（2024/01/10——2024/01/31）
+1.0.0.5（2024/01/22——2024/02/29）
 
 	完成功能： 
 	（引擎）
-	+ 引擎整理。@
-	+ 实现Visual。@
-	+ 实现VisibleSet。@
-	+ 实现Cull。@
-	+ 实现场景类。@
+	+ 实现OnIdleTimer。@
+	+ 实现WindowApplication。@
+	+ DistanceAlignedBoxes例子。@
 	+ GameClient显示一张图片。@
 	+ linux系统通过编译。@		
 	
 	（历史）
-	+ DatabaseGenerate工程创建。@	
+	+ 窗口中显示文字。@
+	+ 千年史策http服务器。@	
+	
+----------------------------
+1.0.0.4（2024/01/10——2024/01/21）
+
+	完成功能： 
+	（引擎）
+	+ 引擎整理：Animation。
+	+ 引擎整理：ArtificialIntelligence。
+	+ 引擎整理：AssistTools。
+	+ 引擎整理：CoreTools。
+·	+ 引擎整理：Database。
+	+ 引擎整理：Framework。
+	+ 引擎整理：Imagics。
+	+ 引擎整理：InputOutput。
+	+ 引擎整理：Network。
+	+ 引擎整理：Physics。
+	+ 实现Environment。
+	+ 实现ProgramFactory。
+	+ 实现BaseEngine。
+	+ 实现Application。
 	
 ----------------------------
 1.0.0.3（2023/12/21——2024/01/09）
@@ -30,7 +49,10 @@ Threading Core Render Engine 1.0.0.4
 	+ 引擎整理：System。
 	+ 引擎整理：SoundEffect。
 	+ 引擎整理：Script。
-	+ 引擎整理：ResourceManager。	
+	+ 引擎整理：ResourceManager。
+
+	（历史）
+	+ DatabaseGenerate工程创建。		
 	
 ----------------------------
 1.0.0.2（2023/12/07——2023/12/20）

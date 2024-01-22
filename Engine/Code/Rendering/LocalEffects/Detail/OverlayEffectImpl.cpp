@@ -76,7 +76,7 @@ Rendering::OverlayEffectImpl::OverlayEffectImpl(ProgramFactory& factory,
       vertexBuffer{ VertexBuffer::Create("VertexBuffer", GetVertexFormat(), 4) },
       indexBuffer{ IndexBuffer::Create("IndexBuffer", IndexFormatType::TriangleMesh, 2, sizeof(int32_t)) },
       program{ factory.CreateFromFiles("Resource/Shader/OverlayEffect.vs", useColorPShader ? "Resource/Shader/OverlayEffectColor.ps" : "Resource/Shader/OverlayEffectGray.ps", "") },
-      effect{ std::make_shared<VisualEffect>(program) },
+      effect{ std::make_shared<VisualEffect>("VisualEffect", program) },
       shaderAPIType{ factory.GetAPI() }
 {
     Initialize();
@@ -99,7 +99,7 @@ Rendering::OverlayEffectImpl::OverlayEffectImpl(ProgramFactory& factory, int win
       vertexBuffer{ VertexBuffer::Create("VertexBuffer", GetVertexFormat(), 4) },
       indexBuffer{ IndexBuffer::Create("IndexBuffer", IndexFormatType::TriangleMesh, 2, sizeof(int32_t)) },
       program{ factory.CreateFromFiles("Resource/Shader/OverlayEffect.vs", pixelShaderFile, "") },
-      effect{ std::make_shared<VisualEffect>(program) },
+      effect{ std::make_shared<VisualEffect>("VisualEffect", program) },
       shaderAPIType{ factory.GetAPI() }
 {
     Initialize();

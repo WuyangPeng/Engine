@@ -174,6 +174,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/MathematicsD.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/RenderingD.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/FrameworkD.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <ClCompile>
@@ -185,6 +193,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PostBuildEvent>
+    <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -200,6 +212,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/Mathematics.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/Rendering.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/Framework.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <ClCompile>
@@ -215,6 +235,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PostBuildEvent>
+    <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -226,6 +250,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/MathematicsD.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/RenderingD.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/FrameworkD.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <ClCompile>
@@ -237,6 +269,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PostBuildEvent>
+    <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -252,6 +288,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/Mathematics.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/Rendering.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/Framework.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <ClCompile>
@@ -267,6 +311,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
+    </PostBuildEvent>
+    <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Configuration\DistanceAlignedBoxes.json" />

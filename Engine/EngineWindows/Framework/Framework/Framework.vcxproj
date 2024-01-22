@@ -390,7 +390,8 @@
     <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\ModelViewControllerMiddleLayerImpl.h" />
     <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\NetworkManagerImpl.h" />
     <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\PixelViewMiddleLayerImpl.h" />
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\ViewMiddleLayerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\SystemManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\RenderingManagerImpl.h" />
     <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\EngineMiddleLayerContainer.h" />
     <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\EngineMiddleLayerContainerDetail.h" />
     <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\EngineMiddleLayerInterface.h" />
@@ -559,7 +560,8 @@
     <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\ModelViewControllerMiddleLayerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\NetworkManagerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\PixelViewMiddleLayerImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\ViewMiddleLayerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\SystemManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\RenderingManagerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\EngineMiddleLayerInterface.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\EventManagerInterface.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\GUIManagerInterface.cpp" />

@@ -19,6 +19,8 @@
 
 namespace Rendering
 {
+    /// 跟踪可用的纹理采样器/图像单元和均匀/阴影存储缓冲单元。
+    /// 如果单元正在使用，则链接计数为正，绑定到该单元的程序+索引将被存储。
     class RENDERING_HIDDEN_DECLARE ProgramIndexUnitContainer
     {
     public:

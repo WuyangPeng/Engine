@@ -15,7 +15,6 @@
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
-#include "Rendering/SceneGraph/CameraManager.h"
 #include "Framework/Application/CameraMotion.h"
 
 #include <random>
@@ -35,13 +34,9 @@ void Framework::CameraMotionTesting::DoRunUnitTest()
 
 void Framework::CameraMotionTesting::MainTest()
 {
-    Rendering::CameraManager::Create();
-
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SpeedTest);
     ASSERT_NOT_THROW_EXCEPTION_0(MoveTest);
-
-    Rendering::CameraManager::Destroy();
 }
 
 void Framework::CameraMotionTesting::BaseTest()
@@ -87,7 +82,7 @@ void Framework::CameraMotionTesting::MoveTest()
     constexpr auto rotationSpeed = 1.0f;
     CameraMotion cameraMotion{ translationSpeed, rotationSpeed };
 
-    const auto camera = std::make_shared<Rendering::Camera>(false, false);
+    const auto camera = std::make_shared<Rendering::Camera>(false, Rendering::DepthType::ZeroToOne);
     auto direction = camera->GetDirectionVector();
     const auto up = camera->GetUpVector();
     auto right = camera->GetRightVector();

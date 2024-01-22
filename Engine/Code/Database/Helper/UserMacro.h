@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/14 15:14)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 13:44)
 
 #ifndef DATABASE_DATABASE_MACRO_USER_MACRO_H
 #define DATABASE_DATABASE_MACRO_USER_MACRO_H
@@ -29,8 +29,8 @@
 
 #define CLOSE_DATABASE_MAX (((DATABASE_ClOSE_END) << 1) - 1)
 
-// 编译测试（默认为0，最大值为0x3FF）
-#define COMPILE_DATABASE_CLOSE 0x00
+// 编译测试（默认为0B00'0000'0000，最大值为0B11'1111'1111）
+#define COMPILE_DATABASE_CLOSE 0B00'0000'0000
 
 static_assert(0 <= COMPILE_DATABASE_CLOSE, "COMPILE_DATABASE_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_DATABASE_CLOSE <= CLOSE_DATABASE_MAX, "COMPILE_DATABASE_CLOSE Must be less than or equal CLOSE_DATABASE_MAX.");

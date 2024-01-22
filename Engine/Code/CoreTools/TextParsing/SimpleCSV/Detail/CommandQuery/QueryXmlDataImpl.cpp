@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/23 15:23)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 11:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,13 +15,13 @@
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 
 CoreTools::SimpleCSV::QueryXmlDataImpl::QueryXmlDataImpl(std::string xmlPath) noexcept
-    : xmlPath{ xmlPath }, xmlData{}
+    : xmlPath{ std::move(xmlPath) }, xmlData{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CoreTools::SimpleCSV::QueryXmlDataImpl::QueryXmlDataImpl(std::string xmlPath, const XmlDataSharedPtr& xmlData) noexcept
-    : xmlPath{ xmlPath }, xmlData{ xmlData }
+    : xmlPath{ std::move(xmlPath) }, xmlData{ xmlData }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

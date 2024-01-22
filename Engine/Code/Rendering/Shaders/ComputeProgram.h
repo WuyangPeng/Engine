@@ -14,6 +14,8 @@
 
 #include "System/OpenGL/Using/OpenGLUsing.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
+#include "Rendering/OpenGLRenderer/GLSL/GLSLProgramHandle.h"
+#include "Rendering/OpenGLRenderer/GLSL/GLSLShaderHandle.h"
 #include "Rendering/Shaders/ShadersFwd.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(ComputeProgram, ComputeProgramImpl);
@@ -28,10 +30,12 @@ namespace Rendering
         using OpenGLUInt = System::OpenGLUInt;
         using ShaderSharedPtr = std::shared_ptr<Shader>;
         using ConstShaderSharedPtr = std::shared_ptr<const Shader>;
+        using ComputeProgramSharedPtr = std::shared_ptr<ComputeProgram>;
 
     public:
         NODISCARD static ComputeProgram Create();
-        ComputeProgram(OpenGLUInt programHandle, OpenGLUInt computeShaderHandle);
+        NODISCARD static ComputeProgramSharedPtr Create(const std::string& computeShaderSource, const std::string& version, const ProgramDefines& defines);
+        ComputeProgram(const GLSLProgramHandle& programHandle, const GLSLShaderHandle& computeShaderHandle);
         virtual ~ComputeProgram() noexcept = default;
         ComputeProgram(const ComputeProgram& rhs) = default;
         ComputeProgram& operator=(const ComputeProgram& rhs) = default;
@@ -46,6 +50,8 @@ namespace Rendering
 
         void SetComputeShader(const ShaderSharedPtr& shader);
         NODISCARD Reflection GetReflector() const;
+
+        void CreateComputeShader();
 
     protected:
         explicit ComputeProgram(CoreTools::DisableNotThrow disableNotThrow);

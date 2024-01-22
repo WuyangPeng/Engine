@@ -2,8 +2,8 @@
   "RendererType": 4,
 
   "Texture": {
-    "ColorFormat": 8,
-    "DepthStencilFormat": 22,
+    "ColorFormat": 2,
+    "DepthStencilFormat": 45,
     "MultisamplesNumber": 1
   },
 
@@ -15,7 +15,7 @@
   },
 
   "WindowParameter": {
-    "WindowTitle": "ThreadingCoreRenderEngineAssist",
+    "WindowTitle": "Threading Core Render Engine Assist",
     "Width": 1024,
     "Height": 768,
     "X": 0,

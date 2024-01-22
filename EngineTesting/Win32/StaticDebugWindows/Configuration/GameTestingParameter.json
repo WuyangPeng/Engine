@@ -131,6 +131,24 @@
       "ChineseName": "服务器管理者",
       "ProjectServiceType": 2,
       "Uppercase": "SERVER_MANAGER"
+    },
+
+    "ConfigurationGenerate": {
+      "ChineseName": "配置生成",
+      "Uppercase": "CONFIGURATION_GENERATE",
+      "Guid0": "0E8415AD-AD9C-4686-8607-AD40E8A7D74C",
+      "Guid1": "41B86C44-5682-4556-A460-5D2142828039",
+      "Guid2": "CDBC6F54-7F3B-4F22-BEC1-9F8E0810E5DF",
+      "Guid3": "270C6959-FEBE-423C-BE0F-D11685DA321C"
+    },
+
+    "DatabaseGenerate": {
+      "ChineseName": "数据库生成",
+      "Uppercase": "DATABASE_GENERATE",
+      "Guid0": "EEE47C56-4B7D-4B73-80DD-050F4F08A8BD",
+      "Guid1": "7491A880-90C3-467E-B424-4153A848B9D9",
+      "Guid2": "06551520-A364-4AFC-B988-5A93A6593718",
+      "Guid3": "53E2179F-8E4D-458C-84D4-031B9F991EEE"
     }
   },
 

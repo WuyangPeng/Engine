@@ -56,7 +56,7 @@ void Rendering::RenderingEnvironmentTesting::GetNullRenderingDeviceTest()
 
     auto renderingDevice = renderingEnvironment.GetRenderingDevice();
 
-    renderingDevice.SwapBuffers(0);
+    renderingDevice.DisplayColorBuffer(0);
 
     renderingEnvironment.Release();
 }

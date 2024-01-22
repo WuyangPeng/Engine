@@ -1,18 +1,17 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/27 13:59)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 23:34)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_RATIONAL_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY3_RATIONAL_DETAIL_H
 
 #include "Query3Rational.h"
 #include "QueryDotToolsDetail.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Rational/IntegerDetail.h"
 #include "Mathematics/Rational/RationalVector3Detail.h"
@@ -35,11 +34,11 @@ void Mathematics::Query3Rational<Real>::Convert()
 
     for (auto index = 0; index < numVertices; ++index)
     {
-        const auto vertice = this->GetVertice(index);
+        const auto vertex = this->GetVertex(index);
 
-        QueryRational rational0{ vertice.GetX() };
-        QueryRational rational1{ vertice.GetY() };
-        QueryRational rational2{ vertice.GetZ() };
+        QueryRational rational0{ vertex.GetX() };
+        QueryRational rational1{ vertex.GetY() };
+        QueryRational rational2{ vertex.GetZ() };
 
         rationalVertices.emplace_back(rational0, rational1, rational2);
     }

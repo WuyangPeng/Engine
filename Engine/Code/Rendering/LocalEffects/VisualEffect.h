@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/06 09:14)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/10 09:27)
 
 #ifndef RENDERING_LOCAL_EFFECTS_VISUAL_EFFECT_H
 #define RENDERING_LOCAL_EFFECTS_VISUAL_EFFECT_H
@@ -41,11 +41,12 @@ namespace Rendering
         using VisualEffectSharedPtr = std::shared_ptr<ClassType>;
 
     public:
-        explicit VisualEffect(CoreTools::DisableNotThrow disableNotThrow);
-        explicit VisualEffect(const VisualProgramSharedPtr& visualProgram);
-        explicit VisualEffect(const BaseRendererSharedPtr& baseRenderer);
-        VisualEffect(const BaseRendererSharedPtr& baseRenderer, const VisualProgramSharedPtr& visualProgram);
-        VisualEffect(ProgramFactory& factory,
+        explicit VisualEffect(const std::string& name);
+        explicit VisualEffect(const std::string& name, const VisualProgramSharedPtr& visualProgram);
+        explicit VisualEffect(const std::string& name, const BaseRendererSharedPtr& baseRenderer);
+        VisualEffect(const std::string& name, const BaseRendererSharedPtr& baseRenderer, const VisualProgramSharedPtr& visualProgram);
+        VisualEffect(const std::string& name,
+                     ProgramFactory& factory,
                      const BaseRendererSharedPtr& baseRenderer,
                      const std::string& vertexShaderFile,
                      const std::string& pixelShaderFile);

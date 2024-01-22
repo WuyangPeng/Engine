@@ -10,6 +10,8 @@
 #ifndef RENDERING_RENDERING_SCENE_GRAPH_FWD_H
 #define RENDERING_RENDERING_SCENE_GRAPH_FWD_H
 
+#include "CoreTools/Helper/SharedPtrMacro.h"
+
 namespace Rendering
 {
     enum class DepthType;
@@ -29,6 +31,8 @@ namespace Rendering
     class Particles;
     class ProjectionViewWorldUpdater;
     class PickLine;
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(Visual);
 }
 
 #endif  // RENDERING_RENDERING_SCENE_GRAPH_FWD_H

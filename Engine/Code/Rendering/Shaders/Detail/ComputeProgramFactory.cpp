@@ -16,7 +16,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ComputeProgramFactory)
 
-Rendering::ComputeProgramFactory::ComputeProgramSharedPtr Rendering::ComputeProgramFactory::Create(OpenGLUInt programHandle, OpenGLUInt computeShaderHandle)
+Rendering::ComputeProgramFactory::ComputeProgramSharedPtr Rendering::ComputeProgramFactory::Create(const GLSLProgramHandle& programHandle, const GLSLShaderHandle& computeShaderHandle)
 {
     return std::make_shared<GLSLComputeProgram>(programHandle, computeShaderHandle);
 }

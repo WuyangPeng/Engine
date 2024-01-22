@@ -1,21 +1,21 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/08 16:27)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 15:05)
 
 #include "Framework/FrameworkExport.h"
 
 #include "ModelMiddleLayer.h"
 #include "ViewMiddleLayer.h"
-#include "Detail/ViewMiddleLayerImpl.h"
+#include "Detail/RenderingManagerImpl.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 #include "Framework/WindowCreate/WindowPoint.h"
@@ -77,7 +77,7 @@ bool Framework::ViewMiddleLayer::Initialize()
         // 设备创建与平台相关的代码在EnterMessageLoop前调用Initialize。
         // 因此此时设备状态可能会修改。
 
-        impl->ClearColorBuffer();
+        impl->ClearBuffers();
 
         return true;
     }

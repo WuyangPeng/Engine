@@ -1,12 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/05 16:33)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/09 20:31)
 
 #include "Rendering/RenderingExport.h"
 
@@ -19,7 +18,6 @@
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/AlgebraAggregate.h"
-#include "Mathematics/Algebra/AlgebraStreamSize.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/DataTypes/ColourDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
@@ -193,7 +191,7 @@ void Rendering::LightingImpl::SetAttenuation(float aConstant, float aLinear, flo
     intensity = aIntensity;
 }
 
-void Rendering::LightingImpl::Load(CoreTools::BufferSource& source)
+void Rendering::LightingImpl::Load(BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -210,7 +208,7 @@ void Rendering::LightingImpl::Load(CoreTools::BufferSource& source)
     source.Read(intensity);
 }
 
-void Rendering::LightingImpl::Save(CoreTools::BufferTarget& target) const
+void Rendering::LightingImpl::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -231,18 +229,18 @@ int Rendering::LightingImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = Rendering::GetStreamSize(ambient);
+    auto size = GetStreamSize(ambient);
 
-    size += Rendering::GetStreamSize(diffuse);
-    size += Rendering::GetStreamSize(specular);
-    size += CoreTools::GetStreamSize(angle);
-    size += CoreTools::GetStreamSize(cosAngle);
-    size += CoreTools::GetStreamSize(sinAngle);
-    size += CoreTools::GetStreamSize(exponent);
-    size += CoreTools::GetStreamSize(constant);
-    size += CoreTools::GetStreamSize(linear);
-    size += CoreTools::GetStreamSize(quadratic);
-    size += CoreTools::GetStreamSize(intensity);
+    size += GetStreamSize(diffuse);
+    size += GetStreamSize(specular);
+    size += GetStreamSize(angle);
+    size += GetStreamSize(cosAngle);
+    size += GetStreamSize(sinAngle);
+    size += GetStreamSize(exponent);
+    size += GetStreamSize(constant);
+    size += GetStreamSize(linear);
+    size += GetStreamSize(quadratic);
+    size += GetStreamSize(intensity);
 
     return size;
 }

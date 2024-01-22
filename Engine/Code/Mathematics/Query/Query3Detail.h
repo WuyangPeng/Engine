@@ -1,19 +1,18 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/27 13:57)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 23:33)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY3_DETAIL_H
 
 #include "Query3.h"
 #include "QueryDotToolsDetail.h"
-#include "QuerySortTools.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "QuerySortTools.h" 
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
@@ -54,7 +53,7 @@ int Mathematics::Query3<Real>::GetNumVertices() const
 }
 
 template <typename Real>
-typename Mathematics::Query3<Real>::Vector3 Mathematics::Query3<Real>::GetVertice(int index) const
+typename Mathematics::Query3<Real>::Vector3 Mathematics::Query3<Real>::GetVertex(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

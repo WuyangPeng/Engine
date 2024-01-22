@@ -30,16 +30,11 @@ Rendering::NullDevice::RenderingDeviceSharedPtr Rendering::NullDevice::Clone() c
     return std::make_shared<ClassType>(*this);
 }
 
-void Rendering::NullDevice::SwapBuffers(int syncInterval) noexcept
+void Rendering::NullDevice::DisplayColorBuffer(int syncInterval) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     System::UnusedFunction(syncInterval);
-}
-
-void Rendering::NullDevice::ResetSize() noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
 }
 
 void Rendering::NullDevice::InitDevice() noexcept
@@ -101,13 +96,6 @@ std::string Rendering::NullDevice::GetShaderExtendName() const
     return ".hlsl";
 }
 
-void Rendering::NullDevice::Resize(int width, int height) noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    System::UnusedFunction(width, height);
-}
-
 int64_t Rendering::NullDevice::DrawPrimitive(RendererObjectBridge& rendererObjectBridge, const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer, const VisualEffectSharedPtr& effect) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -160,4 +148,11 @@ void Rendering::NullDevice::Execute(RendererObjectBridge& rendererObjectBridge, 
     RENDERING_CLASS_IS_VALID_9;
 
     System::UnusedFunction(rendererObjectBridge, computeProgram, numXGroups, numYGroups, numZGroups);
+}
+
+void Rendering::NullDevice::Resize(int width, int height) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(width, height);
 }

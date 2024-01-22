@@ -25,8 +25,8 @@ namespace Rendering
         OpenGL = 4,
         OpenGLES = 5,
         Vulkan = 6,
-        Dx11 = 7,
-        Dx12 = 8,
+        DirectX11 = 7,
+        DirectX12 = 8,
         Non,
 
         Max,

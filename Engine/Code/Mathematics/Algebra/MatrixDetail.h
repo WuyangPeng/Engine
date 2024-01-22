@@ -14,6 +14,7 @@
 #include "AVectorDetail.h"
 #include "Matrix.h"
 #include "Matrix3Detail.h"
+#include "Matrix4Detail.h"
 #include "Vector4Detail.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
@@ -228,6 +229,30 @@ typename Mathematics::Matrix<Real>::Matrix3 Mathematics::Matrix<Real>::GetMatrix
                     GetValue<8>(),
                     GetValue<9>(),
                     GetValue<10>() };
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+typename Mathematics::Matrix<Real>::Matrix4 Mathematics::Matrix<Real>::GetMatrix4() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return Matrix4{ GetValue<0>(),
+                    GetValue<1>(),
+                    GetValue<2>(),
+                    GetValue<3>(),
+                    GetValue<4>(),
+                    GetValue<5>(),
+                    GetValue<6>(),
+                    GetValue<7>(),
+                    GetValue<8>(),
+                    GetValue<9>(),
+                    GetValue<10>(),
+                    GetValue<11>(),
+                    GetValue<12>(),
+                    GetValue<13>(),
+                    GetValue<14>(),
+                    GetValue<15>() };
 }
 
 template <typename Real>
@@ -1055,7 +1080,7 @@ void Mathematics::Matrix<Real>::MakeReflection(const APoint& origin, const AVect
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Matrix<Real>::GetNorm() const  
+Real Mathematics::Matrix<Real>::GetNorm() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

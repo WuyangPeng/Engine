@@ -19,9 +19,8 @@ OutputCSVTesting::Input1Container::ConstInput1SharedPtr OutputCSVTesting::Input1
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = std::ranges::find_if(input1, function);
-
-    if (iter != input1.cend())
+    if (const auto iter = std::ranges::find_if(input1, function);
+        iter != input1.cend())
     {
         return *iter;
     }

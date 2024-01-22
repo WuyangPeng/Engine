@@ -40,24 +40,6 @@
     <Filter Include="BinaryOperations 源文件">
       <UniqueIdentifier>{29e9baf4-1567-4ba6-9cfb-2c6783d5eeb1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Extraction 源文件">
-      <UniqueIdentifier>{587e0a72-578a-482d-a68f-b51a7a03490f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Filters 源文件">
-      <UniqueIdentifier>{6cd309e0-6820-4156-a2b8-5a976811b0e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Images 源文件">
-      <UniqueIdentifier>{946cbc77-60a8-4712-8950-e7dc1bc180c2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Segmenters 源文件">
-      <UniqueIdentifier>{b22c09ce-44ad-49d8-8b0e-89baa551ef01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="RasterDrawing 源文件">
-      <UniqueIdentifier>{64ae454c-a7ad-439c-a42e-db7775f54a02}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="OpenCV 源文件">
-      <UniqueIdentifier>{bc8e20eb-a473-49ea-98e5-a246827ae35a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Helper 头文件">
       <UniqueIdentifier>{72372d09-362e-4af2-8044-663f379f95e7}</UniqueIdentifier>
     </Filter>

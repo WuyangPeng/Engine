@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/09 16:39)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 15:26)
 
 #include "Framework/FrameworkExport.h"
 
@@ -137,7 +137,7 @@ void Framework::ObjectMotionImpl::SetEndTrack(float xTrack, float yTrack) noexce
     endYTrack = yTrack;
 }
 
-void Framework::ObjectMotionImpl::SetSaveRotate() 
+void Framework::ObjectMotionImpl::SetSaveRotate()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 

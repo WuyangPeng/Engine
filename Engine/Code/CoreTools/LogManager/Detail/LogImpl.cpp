@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/21 09:56)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 00:41)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,6 +15,8 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/LogManager/Appender.h"
 #include "CoreTools/LogManager/LogMessage.h"
+
+#include <ranges>
 
 using System::operator++;
 
@@ -38,9 +40,9 @@ void CoreTools::LogImpl::InitIOManager()
 
 void CoreTools::LogImpl::ResetIOManager() noexcept
 {
-    for (auto& element : logAppenderIOManagerContainer)
+    for (const auto& element : logAppenderIOManagerContainer | std::views::values)
     {
-        element.second->SetAppenderManager(appenderManager);
+        element->SetAppenderManager(appenderManager);
     }
 }
 

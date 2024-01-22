@@ -19,9 +19,8 @@ CSVConfigure::EquipContainer::ConstEquipSharedPtr CSVConfigure::EquipContainer::
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = std::ranges::find_if(equip, function);
-
-    if (iter != equip.cend())
+    if (const auto iter = std::ranges::find_if(equip, function);
+        iter != equip.cend())
     {
         return *iter;
     }

@@ -54,7 +54,6 @@ namespace CSVConfigure
         NODISCARD int GetHeroId() const noexcept override;
         NODISCARD ConstHeroSharedPtr GetHeroId(const CSVConfigureContainer& csvContainer) const override;
 
-
     private:
         int id;  // Id
         int nextId;  // ÏÂÒ»¹ØID

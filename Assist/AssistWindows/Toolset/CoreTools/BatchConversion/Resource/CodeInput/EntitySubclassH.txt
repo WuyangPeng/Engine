@@ -26,8 +26,7 @@ namespace $Namespace$
 
         NODISCARD $KeyType$ GetKey() const noexcept override;
 
-$SubclassGetFunction$$GenerateKeyFunction$$SubclassCheckingFunction$
-    private:
+$SubclassGetFunction$$GenerateKeyFunction$$SubclassCheckingFunction$    private:
 $SubclassMember$    };
 }
 

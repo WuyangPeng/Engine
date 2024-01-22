@@ -1,17 +1,16 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/26 17:00)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/12 11:19)
 
 #ifndef MATHEMATICS_OBJECTS_2D_RAY2_ACHIEVE_H
 #define MATHEMATICS_OBJECTS_2D_RAY2_ACHIEVE_H
 
 #include "Ray2.h"
-#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/26 13:49)
+/// 版本：1.0.0.4 (2024/01/13 23:41)
 
 #ifndef RENDERING_SHADERS_SHADER_API_TYPE_H
 #define RENDERING_SHADERS_SHADER_API_TYPE_H

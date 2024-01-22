@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/02 13:41)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 15:39)
 
 #ifndef INPUT_OUTPUT_MACRO_USER_MACRO_H
 #define INPUT_OUTPUT_MACRO_USER_MACRO_H
@@ -20,8 +20,8 @@
 
 #define CLOSE_INPUT_OUTPUT_MAX (((INPUT_OUTPUT_ClOSE_END) << 1) - 1)
 
-// 编译测试（默认为0，最大值为0x01）
-#define COMPILE_INPUT_OUTPUT_CLOSE 0x00
+// 编译测试（默认为0B0000，最大值为0B0001）
+#define COMPILE_INPUT_OUTPUT_CLOSE 0B0000
 
 static_assert(0 <= COMPILE_INPUT_OUTPUT_CLOSE, "COMPILE_INPUT_OUTPUT_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_INPUT_OUTPUT_CLOSE <= CLOSE_INPUT_OUTPUT_MAX, "COMPILE_INPUT_OUTPUT_CLOSE Must be less than or equal CLOSE_INPUT_OUTPUT_MAX.");

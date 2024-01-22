@@ -29,9 +29,8 @@ namespace Rendering
 
         NODISCARD RenderingDeviceSharedPtr Clone() const override;
 
-        void SwapBuffers(int syncInterval) noexcept override;
+        void DisplayColorBuffer(int syncInterval) noexcept override;
 
-        void ResetSize() noexcept override;
         void InitDevice() noexcept override;
         void Release() noexcept override;
 
@@ -43,7 +42,6 @@ namespace Rendering
         NODISCARD bool HasDepthRange01() const noexcept override;
         NODISCARD std::string GetShaderName(const std::string& name) const override;
         NODISCARD std::string GetShaderExtendName() const override;
-        NODISCARD void Resize(int width, int height) noexcept override;
 
         NODISCARD int64_t DrawPrimitive(RendererObjectBridge& rendererObjectBridge,
                                         const VertexBufferSharedPtr& vertexBuffer,
@@ -58,6 +56,7 @@ namespace Rendering
         void WaitForFinish() noexcept override;
         void Flush() noexcept override;
         void Execute(RendererObjectBridge& rendererObjectBridge, ComputeProgram& computeProgram, int numXGroups, int numYGroups, int numZGroups) noexcept override;
+        void Resize(int width, int height) noexcept override;
 
     private:
         Viewport nullViewport;

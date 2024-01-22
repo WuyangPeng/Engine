@@ -16,8 +16,8 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
+#include "Rendering/LocalEffects/Lighting.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
-#include "Rendering/LocalEffects/Lighting.h" 
 #include "Rendering/Shaders/Shader.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, PointLightEffect)
@@ -31,7 +31,8 @@ Rendering::PointLightEffect::PointLightEffect(ProgramFactory& factory,
                                               const MaterialSharedPtr& material,
                                               const LightSharedPtr& lighting,
                                               const LightCameraGeometrySharedPtr& geometry)
-    : ParentType{ factory,
+    : ParentType{ "PointLightEffect",
+                  factory,
                   baseRenderer,
                   select ? "Resource/Shader/PointLightEffect.ps.vs" : "Resource/Shader/PointLightEffect.vs.vs",
                   select ? "Resource/Shader/PointLightEffect.ps.ps" : "Resource/Shader/PointLightEffect.vs.ps",

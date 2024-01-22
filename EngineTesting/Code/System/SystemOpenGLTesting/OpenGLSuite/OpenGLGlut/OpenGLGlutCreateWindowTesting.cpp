@@ -55,7 +55,7 @@ void System::OpenGLGlutCreateWindowTesting::CreateWindowTest()
     GlutSetWindow(mainWindow);
 
     GlutPostWindowRedisplay(window);
-    GlutDisplayFunc(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetRenderSceneCallback());
+    GlutDisplayFunc(Framework::OpenGLGlutProcessManager::GetRenderSceneCallback());
 
     System::GlutSetOption(GlutOption::WindowClose, EnumCastUnderlying(GlutExtension::GlutMainLoopReturns));
 }

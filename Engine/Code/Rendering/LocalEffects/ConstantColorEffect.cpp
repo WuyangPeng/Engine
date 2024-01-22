@@ -1,11 +1,11 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/10 14:55)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/10 16:46)
 
 #include "Rendering/RenderingExport.h"
 
@@ -22,21 +22,17 @@
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, ConstantColorEffect)
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, ConstantColorEffect)
-
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ConstantColorEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ConstantColorEffect);
 
-Rendering::ConstantColorEffect::ConstantColorEffect(ProgramFactory& factory, const BaseRendererSharedPtr& baseRenderer, const Colour& color)
-    : ParentType{ factory, baseRenderer, "Resource/Shader/ConstantColorEffect.vs", "Resource/Shader/ConstantColorEffect.ps" },
+Rendering::ConstantColorEffect::ConstantColorEffect(const std::string& name, ProgramFactory& factory, const BaseRendererSharedPtr& baseRenderer, const Colour& color)
+    : ParentType{ name, factory, baseRenderer, "Resource/Shader/ConstantColorEffect.vs", "Resource/Shader/ConstantColorEffect.ps" },
       impl{ Rendering::GetStreamSize<Colour>() }
 {
     const auto colorConstant = impl->GetColorConstant();
 
     auto data = colorConstant->GetStorage();
-    data.Increase<float>(color.GetRed());
-    data.Increase<float>(color.GetGreen());
-    data.Increase<float>(color.GetBlue());
-    data.Increase<float>(color.GetAlpha());
+    data.SetValue<float, 4>(0, color.GetPoint());
 
     GetVertexShader()->Set("ProjectionViewWorldMatrix", GetProjectionViewWorldMatrixConstant());
     GetVertexShader()->Set("ConstantColor", colorConstant);

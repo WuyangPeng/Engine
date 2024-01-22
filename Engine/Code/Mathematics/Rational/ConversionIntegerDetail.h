@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/26 19:36)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 23:15)
 
 #ifndef MATHEMATICS_RATIONAL_CONVERSION_INTEGER_DETAIL_H
 #define MATHEMATICS_RATIONAL_CONVERSION_INTEGER_DETAIL_H
@@ -16,8 +16,6 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-
-#include <type_traits>
 
 template <typename T>
 Mathematics::ConversionInteger<T>::ConversionInteger(T value)
@@ -50,7 +48,7 @@ void Mathematics::ConversionInteger<T>::Init(T value, const SignedIntegerType&)
         symbol = NumericalValueSymbol::Negative;
     }
 
-    const FloatingPointAnalysis<double> floatingPointAnalysis{ boost::numeric_cast<double>(mantissa) };
+    const FloatingPointAnalysis floatingPointAnalysis{ boost::numeric_cast<double>(mantissa) };
     shifting = floatingPointAnalysis.GetRealExponent();
 
     maxMantissaBit = shifting;
@@ -64,7 +62,7 @@ void Mathematics::ConversionInteger<T>::Init(T value, const UnsignedIntegerType&
     mantissa = value;
     symbol = NumericalValueSymbol::Positive;
 
-    const FloatingPointAnalysis<double> floatingPointAnalysis{ boost::numeric_cast<double>(mantissa) };
+    const FloatingPointAnalysis floatingPointAnalysis{ boost::numeric_cast<double>(mantissa) };
     shifting = floatingPointAnalysis.GetRealExponent();
 
     maxMantissaBit = shifting;

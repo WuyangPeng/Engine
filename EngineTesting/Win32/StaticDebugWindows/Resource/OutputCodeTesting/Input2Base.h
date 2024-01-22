@@ -15,7 +15,6 @@
 #include "OutputCSVTestingFwd.h"
 #include "System/Helper/UnicodeUsing.h"
 
-
 namespace OutputCSVTesting
 {
     class Input2Base

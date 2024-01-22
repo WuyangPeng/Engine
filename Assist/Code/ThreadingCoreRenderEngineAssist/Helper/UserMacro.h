@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/28 09:21)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/18 18:19)
 
 #ifndef THREADING_CORE_RENDER_ENGINE_ASSIST_USER_MACRO_H
 #define THREADING_CORE_RENDER_ENGINE_ASSIST_USER_MACRO_H
@@ -20,8 +20,8 @@
 
 #define CLOSE_ASSIST_MAX ((ASSIST_ClOSE_END << 1) - 1)
 
-// 编译测试（默认为0，最大值为0x01）
-#define COMPILE_ASSIST_CLOSE 0x00
+// 编译测试（默认为0B0000，最大值为0B0001）
+#define COMPILE_ASSIST_CLOSE 0B0000
 
 static_assert(0 <= COMPILE_ASSIST_CLOSE, "COMPILE_ASSIST_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_ASSIST_CLOSE <= CLOSE_ASSIST_MAX, "COMPILE_ASSIST_CLOSE Must be less than or equal CLOSE_ASSIST_MAX.");
@@ -34,7 +34,7 @@ static_assert(COMPILE_ASSIST_CLOSE <= CLOSE_ASSIST_MAX, "COMPILE_ASSIST_CLOSE Mu
 
 #ifdef BUILDING_STATIC
 
-    #define BUILDING_ASSIST_STATIC
+    #define BUILDING_ASSIST_STATIC static_cast<void>(0)
 
 #endif  // BUILDING_STATIC
 

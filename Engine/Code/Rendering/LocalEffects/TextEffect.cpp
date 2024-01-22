@@ -29,7 +29,7 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TextEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TextEffect);
 
 Rendering::TextEffect::TextEffect(ProgramFactory& factory, const std::string& shaderExtendName, const Texture2DSharedPtr& texture)
-    : ParentType{ factory.CreateFromFiles("Resource/Shader/TextEffect.vs" + shaderExtendName, "Resource/Shader/TextEffect.ps" + shaderExtendName, "") },
+    : ParentType{ "TextEffect", factory.CreateFromFiles("Resource/Shader/TextEffect.vs" + shaderExtendName, "Resource/Shader/TextEffect.ps" + shaderExtendName, "") },
       impl{ factory.GetAPI(), Rendering::GetStreamSize<Mathematics::Vector3<float>>(), Rendering::GetStreamSize<Mathematics::Vector4<float>>() }
 {
     GetVertexShader()->Set("Translate", GetTranslate());

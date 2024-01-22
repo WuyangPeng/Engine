@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2024/01/02 15:13)
+/// 版本：1.0.0.4 (2024/01/17 09:44)
 
 #ifndef RENDERING_RENDERER_ENGINE_RENDERER_H
 #define RENDERING_RENDERER_ENGINE_RENDERER_H
@@ -100,13 +100,13 @@ namespace Rendering
         /// 当深度范围是[-1, 1]（OpenGL）时，函数返回“false”。
         NODISCARD bool HasDepthRange01() const;
 
-        // 将着色器文件的扩展名附加到“name”（.hlsl表示DirectX，.glsl表示OpenGL）。
+        /// 将着色器文件的扩展名附加到“name”（.hlsl表示DirectX，.glsl表示OpenGL）。
         NODISCARD std::string GetShaderName(const std::string& name) const;
 
-        // 窗口大小变化
+        /// 窗口大小变化
         NODISCARD void Resize(int width, int height);
 
-        // 访问颜色，深度和模板缓冲区的当前清除参数。 颜色缓冲区是后缓冲区。
+        /// 访问颜色，深度和模板缓冲区的当前清除参数。 颜色缓冲区是后缓冲区。
         void SetClearColor(const Colour& clearColor) noexcept;
         NODISCARD Colour GetClearColor() const noexcept;
         void SetClearDepth(float clearDepth) noexcept;
@@ -116,13 +116,13 @@ namespace Rendering
 
         void DisplayColorBuffer(int syncInterval);
 
-        // 支持文本渲染中使用的位图字体。默认字体为Arial（高度18，无斜体，无粗体）。
+        /// 支持文本渲染中使用的位图字体。默认字体为Arial（高度18，无斜体，无粗体）。
         void SetFont(const FontSharedPtr& font);
         NODISCARD FontSharedPtr GetFont() const noexcept;
         void SetDefaultFont();
         NODISCARD FontSharedPtr GetDefaultFont() const noexcept;
 
-        // 全局绘图状态。
+        /// 全局绘图状态。
         void SetBlendState(const BlendStateSharedPtr& state);
         NODISCARD BlendStateSharedPtr GetBlendState() noexcept;
         NODISCARD BlendStateSharedPtr GetDefaultBlendState() noexcept;
@@ -138,9 +138,8 @@ namespace Rendering
 
         void InitDevice();
         void Release();
-        void ResetSize();
 
-        // 支持清除颜色、深度和模板后缓冲区。
+        /// 支持清除颜色、深度和模板后缓冲区。
         void ClearColorBuffer();
         void ClearDepthBuffer();
         void ClearStencilBuffer();
@@ -149,26 +148,26 @@ namespace Rendering
         /// 支持绘图。如果启用了遮挡查询，则返回值是通过深度和模板测试的样本数，实际上绘制的像素数。
         /// 如果遮挡查询被禁用，函数将返回0。
 
-        // 绘制几何图元。
+        /// 绘制几何图元。
         NODISCARD int64_t Draw(Visual& visual);
         NODISCARD int64_t Draw(const VisualContainer& visuals);
 
-        // 绘制二维文本。
+        /// 绘制二维文本。
         NODISCARD int64_t Draw(int x, int y, const Colour& color, const std::string& message);
 
-        // 绘制二维矩形覆盖。这对于将按钮、控件、缩略图和其他GUI对象添加到应用程序窗口非常有用。
+        /// 绘制二维矩形覆盖。这对于将按钮、控件、缩略图和其他GUI对象添加到应用程序窗口非常有用。
         NODISCARD int64_t Draw(const OverlayEffectSharedPtr& overlay);
 
-        // 支持遮挡查询。启用时，Draw函数返回通过深度和模板测试的样本数，实际上是绘制的像素数。默认值为“false”。
+        /// 支持遮挡查询。启用时，Draw函数返回通过深度和模板测试的样本数，实际上是绘制的像素数。默认值为“false”。
         void SetAllowOcclusionQuery(bool allow) noexcept;
 
-        // 支持绘图到屏幕外存储器（即不到后台缓冲区）。DrawTarget对象封装渲染目标（颜色信息）和深度模板目标。
+        /// 支持绘图到屏幕外存储器（即不到后台缓冲区）。DrawTarget对象封装渲染目标（颜色信息）和深度模板目标。
         void Enable(const DrawTargetSharedPtr& target);
         void Disable(const DrawTargetSharedPtr& target);
 
-        // 图形对象管理。Bind函数创建与输入Engine对象相对应的图形API特定对象。
-        // GraphicsEngine在内部管理此桥接映射。取消绑定功能会破坏图形API特定对象。
-        // 这些可以被明确地调用，但引擎被设计为按需创建和按设备销毁。
+        /// 图形对象管理。Bind函数创建与输入Engine对象相对应的图形API特定对象。
+        /// GraphicsEngine在内部管理此桥接映射。取消绑定功能会破坏图形API特定对象。
+        /// 这些可以被明确地调用，但引擎被设计为按需创建和按设备销毁。
         RendererObjectSharedPtr Bind(const GraphicsObjectSharedPtr& graphicsObject);
         NODISCARD RendererDrawTargetSharedPtr Bind(const DrawTargetSharedPtr& target);
         NODISCARD RendererObjectSharedPtr Get(const GraphicsObjectSharedPtr& graphicsObject);
@@ -179,39 +178,61 @@ namespace Rendering
 
         NODISCARD TotalAllocation GetTotalAllocation() const;
 
-        // 支持通过映射内存从CPU复制到GPU。
+        /// 支持通过映射内存从CPU复制到GPU。
         NODISCARD bool Update(const BufferSharedPtr& buffer);
         NODISCARD bool Update(const TextureSingleSharedPtr& texture);
         NODISCARD bool Update(const TextureSingleSharedPtr& texture, int level);
         NODISCARD bool Update(const TextureArraySharedPtr& textureArray);
         NODISCARD bool Update(const TextureArraySharedPtr& textureArray, int item, int level);
 
-        // 支持通过暂存内存从CPU复制到GPU。
+        /// 支持通过暂存内存从CPU复制到GPU。
         NODISCARD bool CopyCpuToGpu(const BufferSharedPtr& buffer);
         NODISCARD bool CopyCpuToGpu(const TextureSingleSharedPtr& texture);
         NODISCARD bool CopyCpuToGpu(const TextureSingleSharedPtr& texture, int level);
         NODISCARD bool CopyCpuToGpu(const TextureArraySharedPtr& textureArray);
         NODISCARD bool CopyCpuToGpu(const TextureArraySharedPtr& textureArray, int item, int level);
 
-        // 支持通过暂存内存从GPU复制到CPU。
+        /// 支持通过暂存内存从GPU复制到CPU。
         NODISCARD bool CopyGpuToCpu(const BufferSharedPtr& buffer);
         NODISCARD bool CopyGpuToCpu(const TextureSingleSharedPtr& texture);
         NODISCARD bool CopyGpuToCpu(const TextureSingleSharedPtr& texture, int level);
         NODISCARD bool CopyGpuToCpu(const TextureArraySharedPtr& textureArray);
         NODISCARD bool CopyGpuToCpu(const TextureArraySharedPtr& textureArray, int item, int level);
 
-        // 计数缓冲区管理。GetNumActiveElements将结果存储在“buffer”中。
+        /// 计数缓冲区管理。GetNumActiveElements将结果存储在“buffer”中。
         NODISCARD bool GetNumActiveElements(const StructuredBufferSharedPtr& buffer);
 
-        // 执行计算程序。如果您希望CPU暂停等待结果，请在Execute(...)后立即调用WaitForFinish()。
-        // 但是，您可以在稍后的某个时间通过调用WaitForFinish()。
+        /// 执行计算程序。如果您希望CPU暂停等待结果，请在Execute(...)后立即调用WaitForFinish()。
+        /// 但是，您可以在稍后的某个时间通过调用WaitForFinish()。
         void Execute(ComputeProgram& program, int numXGroups, int numYGroups, int numZGroups);
 
-        // 让CPU等待，直到GPU完成其当前命令缓冲区。
+        /// 让CPU等待，直到GPU完成其当前命令缓冲区。
         void WaitForFinish();
 
-        // 刷新命令缓冲区。
+        /// 刷新命令缓冲区。
         void Flush();
+
+        // 支持直接从GPU复制到GPU。目前，限制是资源不同，类型相同，尺寸相同，格式兼容（如果是纹理类型）。
+        void CopyGpuToGpu(const BufferSharedPtr& buffer0, const BufferSharedPtr& buffer1);
+
+        void CopyGpuToGpu(const TextureSingleSharedPtr& texture0, const TextureSingleSharedPtr& texture1);
+
+        void CopyGpuToGpu(const TextureSingleSharedPtr& texture0,
+                          const TextureSingleSharedPtr& texture1,
+                          int level);
+
+        void CopyGpuToGpu(const TextureArraySharedPtr& textureArray0,
+                          const TextureArraySharedPtr& textureArray1);
+
+        void CopyGpuToGpu(const TextureArraySharedPtr& textureArray0,
+                          const TextureArraySharedPtr& textureArray1,
+                          int item,
+                          int level);
+
+        /// 如果希望DirectX11Device析构函数报告网桥映射为非空，请将警告设置为“true”。
+        /// 如果是，则在引擎被销毁之前，应用程序没有销毁GraphicsObject项。
+        /// 默认值为“true”。
+        void SetWarnOnNonemptyBridges(bool warn) noexcept;
 
     private:
         PackageType impl;

@@ -15,6 +15,8 @@
 #include "System/OpenGL/Using/OpenGLUsing.h"
 #include "CoreTools/Helper/NameMacro.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
+#include "Rendering/OpenGLRenderer/GLSL/GLSLProgramHandle.h"
+#include "Rendering/OpenGLRenderer/GLSL/GLSLShaderHandle.h"
 #include "Rendering/Shaders/Shader.h"
 
 #include <memory>
@@ -39,7 +41,7 @@ namespace Rendering
         using VisualProgramSharedPtr = std::shared_ptr<VisualProgramImpl>;
 
     public:
-        NODISCARD static VisualProgramSharedPtr Create(OpenGLUInt programHandle, OpenGLUInt vertexShaderHandle, OpenGLUInt pixelShaderHandle, OpenGLUInt geometryShaderHandle);
+        NODISCARD static VisualProgramSharedPtr Create(const GLSLProgramHandle& programHandle, const GLSLShaderHandle& vertexShaderHandle, const GLSLShaderHandle& pixelShaderHandle, const GLSLShaderHandle& geometryShaderHandle);
 
         VisualProgramImpl() noexcept;
         virtual ~VisualProgramImpl() noexcept = default;
@@ -73,6 +75,11 @@ namespace Rendering
         NODISCARD virtual Reflection GetReflector() const;
         NODISCARD virtual VisualProgramSharedPtr Clone() const;
         NODISCARD virtual OpenGLUInt GetProgramHandle() const;
+
+        void CreateShader(bool createGeometryShader);
+        void CreateVertexShader();
+        void CreatePixelShader();
+        void CreateGeometryShader();
 
     private:
         ShaderObjectAssociated vertexShader;

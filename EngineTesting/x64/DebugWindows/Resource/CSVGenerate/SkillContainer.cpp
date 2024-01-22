@@ -92,9 +92,8 @@ CSVConfigure::SkillContainer::ConstSkillSharedPtr CSVConfigure::SkillContainer::
         return (*lhs).GetKey() < (*rhs).GetKey();
     };
 
-    const auto iter = std::ranges::lower_bound(skill, std::make_shared<SkillBase>(key), function);
-
-    if (iter != skill.cend() && (*iter)->GetKey() == key)
+    if (const auto iter = std::ranges::lower_bound(skill, std::make_shared<SkillBase>(key), function);
+        iter != skill.cend() && (*iter)->GetKey() == key)
     {
         return *iter;
     }

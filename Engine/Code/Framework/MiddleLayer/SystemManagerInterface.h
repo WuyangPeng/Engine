@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/08 14:04)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/12 22:55)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_SYSTEM_MANAGER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_SYSTEM_MANAGER_INTERFACE_H
@@ -15,8 +15,10 @@
 #include "EngineMiddleLayerInterface.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/Helper/SharedPtrMacro.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
 
+FRAMEWORK_NON_COPY_EXPORT_IMPL(SystemManagerImpl);
 FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
 // 任务管理（分配相关任务至多处理器、线程管理等）。
@@ -34,18 +36,18 @@ namespace Framework
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        // 渲染中间层处理
+        /// 渲染中间层处理
         NODISCARD bool Paint() final;
         NODISCARD bool Move(const WindowPoint& point) final;
         NODISCARD bool Resize(WindowDisplay windowDisplay, const WindowSize& size) final;
 
-        // 按键消息中间层处理
+        /// 按键消息中间层处理
         NODISCARD bool KeyUp(int key, const WindowPoint& point) final;
         NODISCARD bool KeyDown(int key, const WindowPoint& point) final;
         NODISCARD bool SpecialKeyUp(int key, const WindowPoint& point) final;
         NODISCARD bool SpecialKeyDown(int key, const WindowPoint& point) final;
 
-        // 鼠标消息中间层处理
+        /// 鼠标消息中间层处理
         NODISCARD bool PassiveMotion(const WindowPoint& point) final;
         NODISCARD bool Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
         NODISCARD bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
@@ -62,11 +64,14 @@ namespace Framework
         ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Engine)
 
     private:
+        using SystemPackageType = CoreTools::NonCopyImpl<SystemManagerImpl>;
+
+    private:
         PackageType impl;
+        SystemPackageType system;
     };
 
-    using SystemManagerInterfaceSharedPtr = std::shared_ptr<SystemManagerInterface>;
-    using ConstSystemManagerInterfaceSharedPtr = std::shared_ptr<const SystemManagerInterface>;
+    CORE_TOOLS_SHARED_PTR_DECLARE(SystemManagerInterface);
 }
 
 #endif  // FRAMEWORK_MIDDLE_LAYER_SYSTEM_MANAGER_INTERFACE_H

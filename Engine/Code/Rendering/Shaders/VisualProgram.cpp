@@ -11,6 +11,7 @@
 
 #include "VisualProgram.h"
 #include "Detail/VisualProgramImpl.h"
+#include "System/OpenGL/Flags/OpenGLShaderFlags.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -23,6 +24,27 @@ Rendering::VisualProgram Rendering::VisualProgram::Create()
     return VisualProgram{ CoreTools::DisableNotThrow::Disable };
 }
 
+Rendering::VisualProgram::VisualProgramSharedPtr Rendering::VisualProgram::Create(const std::string& vertexShaderSource, const std::string& pixelShaderSource, const std::string& geometryShaderSource, const std::string& version, const ProgramDefines& defines)
+{
+    if (vertexShaderSource.empty() || pixelShaderSource.empty())
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("程序必须具有顶点着色器和像素着色器。"))
+    }
+
+    const auto programHandle = GLSLProgramHandle::Create();
+
+    GLSLShaderHandle vertexShaderHandle{ System::ShaderType::Vertex, vertexShaderSource, version, defines, programHandle.GetProgramHandle(), SYSTEM_TEXT("编译顶点着色器失败。") };
+    GLSLShaderHandle pixelShaderHandle{ System::ShaderType::Fragment, pixelShaderSource, version, defines, programHandle.GetProgramHandle(), SYSTEM_TEXT("编译像素着色器失败。") };
+    const auto geometryShaderHandle = !geometryShaderSource.empty() ? GLSLShaderHandle{ System::ShaderType::Geometry, geometryShaderSource, version, defines, programHandle.GetProgramHandle(), SYSTEM_TEXT("编译几何着色器失败。") } : GLSLShaderHandle{};
+
+    programHandle.Link();
+
+    const auto program = std::make_shared<VisualProgram>(programHandle, vertexShaderHandle, pixelShaderHandle, geometryShaderHandle);
+    program->CreateShader(geometryShaderHandle.IsShader());
+
+    return program;
+}
+
 Rendering::VisualProgram::VisualProgram(CoreTools::DisableNotThrow disableNotThrow)
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
@@ -31,7 +53,7 @@ Rendering::VisualProgram::VisualProgram(CoreTools::DisableNotThrow disableNotThr
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::VisualProgram::VisualProgram(OpenGLUInt programHandle, OpenGLUInt vertexShaderHandle, OpenGLUInt pixelShaderHandle, OpenGLUInt geometryShaderHandle)
+Rendering::VisualProgram::VisualProgram(const GLSLProgramHandle& programHandle, const GLSLShaderHandle& vertexShaderHandle, const GLSLShaderHandle& pixelShaderHandle, const GLSLShaderHandle& geometryShaderHandle)
     : impl{ CoreTools::ImplCreateUseFactory::Default, programHandle, vertexShaderHandle, pixelShaderHandle, geometryShaderHandle }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -177,4 +199,32 @@ Rendering::VisualProgram::OpenGLUInt Rendering::VisualProgram::GetProgramHandle(
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return impl->GetProgramHandle();
+}
+
+void Rendering::VisualProgram::CreateShader(bool createGeometryShader)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->CreateShader(createGeometryShader);
+}
+
+void Rendering::VisualProgram::CreateVertexShader()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->CreateVertexShader();
+}
+
+void Rendering::VisualProgram::CreatePixelShader()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->CreatePixelShader();
+}
+
+void Rendering::VisualProgram::CreateGeometryShader()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->CreateGeometryShader();
 }

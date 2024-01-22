@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/05 18:25)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/10 09:23)
 
 #ifndef RENDERING_LOCAL_EFFECTS_VISUAL_EFFECT_IMPL_H
 #define RENDERING_LOCAL_EFFECTS_VISUAL_EFFECT_IMPL_H
@@ -41,7 +41,7 @@ namespace Rendering
         using ConstantBufferObjectAssociated = CoreTools::ObjectAssociated<ConstantBuffer>;
         using Matrix4 = Mathematics::Matrix4F;
         using BaseRendererSharedPtr = std::shared_ptr<BaseRenderer>;
-        using BaseRendererWeakPtr = std::weak_ptr<BaseRenderer>; 
+        using BaseRendererWeakPtr = std::weak_ptr<BaseRenderer>;
 
     public:
         explicit VisualEffectImpl(CoreTools::DisableNotThrow disableNotThrow);

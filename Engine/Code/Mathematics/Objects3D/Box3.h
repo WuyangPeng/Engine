@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/26 17:33)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/12 10:27)
 
 #ifndef MATHEMATICS_OBJECTS_3D_BOX3_H
 #define MATHEMATICS_OBJECTS_3D_BOX3_H
@@ -71,9 +71,9 @@ namespace Mathematics
                  const Vector3& axis0,
                  const Vector3& axis1,
                  const Vector3& axis2,
-                 const Real extent0,
-                 const Real extent1,
-                 const Real extent2) noexcept;
+                 Real extent0,
+                 Real extent1,
+                 Real extent2) noexcept;
 
     private:
         static constexpr auto axisSize = 3;

@@ -10,7 +10,6 @@
 #ifndef OUTPUT_C_S_V_TESTING_H
 #define OUTPUT_C_S_V_TESTING_H
 
-
 #include "Input1.h"
 #include "Input1Base.h"
 #include "Input1ContainerDetail.h"

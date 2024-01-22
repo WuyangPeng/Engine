@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/06 17:27)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/10 10:06)
 
 #ifndef RENDERING_LOCAL_EFFECTS_LIGHT_AMBIENT_LIGHT_EFFECT_H
 #define RENDERING_LOCAL_EFFECTS_LIGHT_AMBIENT_LIGHT_EFFECT_H
@@ -15,7 +15,7 @@
 #include "LightEffect.h"
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
-#include "Rendering/LocalEffects/Lighting.h" 
+#include "Rendering/LocalEffects/Lighting.h"
 #include "Rendering/LocalEffects/Material.h"
 
 namespace Rendering
@@ -29,7 +29,8 @@ namespace Rendering
         using Colour = Colour<float>;
 
     public:
-        explicit AmbientLightEffect(ProgramFactory& factory,
+        explicit AmbientLightEffect(const std::string& name,
+                                    ProgramFactory& factory,
                                     const BaseRendererSharedPtr& baseRenderer,
                                     const MaterialSharedPtr& material,
                                     const LightSharedPtr& lighting);

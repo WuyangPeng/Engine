@@ -67,9 +67,6 @@
     <Filter Include="Detail 源文件\Detail">
       <UniqueIdentifier>{b32c8c6c-e65d-43c8-a878-e509903e85ed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dx9Renderer 头文件">
-      <UniqueIdentifier>{d5aa356f-ff24-4e9f-9fa6-37cd3a008bd2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GlobalEffects 头文件">
       <UniqueIdentifier>{d6284ec0-590d-4472-8347-49d3d66b9703}</UniqueIdentifier>
     </Filter>
@@ -402,6 +399,30 @@
     </Filter>
     <Filter Include="Visibility 头文件\Flags">
       <UniqueIdentifier>{de8039cf-c7dc-441d-a240-400d22950439}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectX11Renderer 头文件">
+      <UniqueIdentifier>{d5aa356f-ff24-4e9f-9fa6-37cd3a008bd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectX11Renderer 头文件\Detail">
+      <UniqueIdentifier>{185ebe1c-8f50-4deb-bb72-451f7d70d71d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectX11Renderer 头文件\Detail\HLSL">
+      <UniqueIdentifier>{a7b6c53f-d238-4ee8-aa67-e74b7f5a2e65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectX11Renderer 源文件">
+      <UniqueIdentifier>{5223e6d9-b9ef-4843-b566-1bd628982e11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectX11Renderer 源文件\Detail">
+      <UniqueIdentifier>{d7b67b86-faf1-445f-bc61-ab536facd63e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectX11Renderer 源文件\Detail\HLSL">
+      <UniqueIdentifier>{a5c4d299-ee99-4427-94bb-c4f2c8ef65c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 头文件\GLSL">
+      <UniqueIdentifier>{dbc591d4-2160-42ba-a775-56d92f65e5c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 源文件\GLSL">
+      <UniqueIdentifier>{95869f98-a231-4cc7-b92a-c06ae82e5635}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1551,6 +1572,15 @@
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\ProgramIndexUnitContainer.cpp">
       <Filter>OpenGLRenderer 源文件\Detail</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\DirectX11Renderer\Detail\HLSL\HLSLProgramFactory.cpp">
+      <Filter>DirectX11Renderer 源文件\Detail\HLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLShaderHandle.cpp">
+      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLProgramHandle.cpp">
+      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingLib.h">
@@ -1813,12 +1843,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Detail\SwitchNode.h">
       <Filter>Detail 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Renderer.h">
-      <Filter>Dx9Renderer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9RendererFwd.h">
-      <Filter>Dx9Renderer 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\GlobalEffects.h">
       <Filter>GlobalEffects 头文件</Filter>
@@ -3082,6 +3106,21 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\ProgramIndexUnitContainer.h">
       <Filter>OpenGLRenderer 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DirectX11Renderer\Detail\HLSL\HLSLProgramFactory.h">
+      <Filter>DirectX11Renderer 头文件\Detail\HLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DirectX11Renderer\DirectX11Renderer.h">
+      <Filter>DirectX11Renderer 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DirectX11Renderer\DirectX11RendererFwd.h">
+      <Filter>DirectX11Renderer 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLShaderHandle.h">
+      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLProgramHandle.h">
+      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

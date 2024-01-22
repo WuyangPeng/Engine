@@ -13,6 +13,8 @@
 #include "Rendering/RenderingDll.h"
 
 #include "System/OpenGL/Using/OpenGLUsing.h"
+#include "Rendering/OpenGLRenderer/GLSL/GLSLProgramHandle.h"
+#include "Rendering/OpenGLRenderer/GLSL/GLSLShaderHandle.h"
 #include "Rendering/Shaders/ShadersInternalFwd.h"
 
 #include <memory>
@@ -28,7 +30,7 @@ namespace Rendering
         using ComputeProgramSharedPtr = std::shared_ptr<ComputeProgramImpl>;
 
     public:
-        NODISCARD static ComputeProgramSharedPtr Create(OpenGLUInt programHandle, OpenGLUInt computeShaderHandle);
+        NODISCARD static ComputeProgramSharedPtr Create(const GLSLProgramHandle& programHandle, const GLSLShaderHandle& computeShaderHandle);
         NODISCARD static ComputeProgramSharedPtr Create();
 
         CLASS_INVARIANT_DECLARE;

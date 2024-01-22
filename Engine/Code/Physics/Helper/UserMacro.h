@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/02 14:05)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 15:51)
 
 #ifndef PHYSICS_MACRO_USER_MACRO_H
 #define PHYSICS_MACRO_USER_MACRO_H
@@ -25,8 +25,8 @@
 
 #define CLOSE_PHYSICS_MAX (((PHYSICS_ClOSE_END) << 1) - 1)
 
-// 编译测试（默认为0x08，最大值为0x0F）
-#define COMPILE_PHYSICS_CLOSE 0x00
+// 编译测试（默认为0B1000，最大值为0B1111）
+#define COMPILE_PHYSICS_CLOSE 0B0000
 
 static_assert(0 <= COMPILE_PHYSICS_CLOSE, "COMPILE_PHYSICS_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_PHYSICS_CLOSE <= CLOSE_PHYSICS_MAX, "COMPILE_PHYSICS_CLOSE Must be less than or equal CLOSE_MATHEMATICS_MAX.");

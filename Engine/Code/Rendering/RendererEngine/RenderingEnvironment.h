@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2024/01/02 15:18)
+/// 版本：1.0.0.4 (2024/01/17 16:52)
 
 #ifndef RENDERING_RENDERER_ENGINE_RENDERING_ENVIRONMENT_H
 #define RENDERING_RENDERER_ENGINE_RENDERING_ENVIRONMENT_H
@@ -33,8 +33,6 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        void Release();
-
         NODISCARD RenderingDevice GetRenderingDevice() const;
 
         NODISCARD int GetWidth() const noexcept;
@@ -44,6 +42,8 @@ namespace Rendering
         NODISCARD int GetNumMultiSamples() const noexcept;
 
         NODISCARD ColourType GetClearColor() const noexcept;
+
+        void Release();
 
     private:
         PackageType impl;

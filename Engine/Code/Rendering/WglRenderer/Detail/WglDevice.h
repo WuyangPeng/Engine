@@ -35,8 +35,10 @@ namespace Rendering
 
         NODISCARD RenderingDeviceSharedPtr Clone() const override;
 
-        void SwapBuffers(int syncInterval) override;
-        void ResetSize() override;
+        /// 支持清除颜色、深度和模具背面缓冲区。
+        void DisplayColorBuffer(int syncInterval) override;
+
+        void Resize(int width, int height) override;
 
     private:
         void Init();

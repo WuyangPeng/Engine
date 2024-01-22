@@ -12,6 +12,8 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "Rendering/OpenGLRenderer/GLSL/GLSLProgramHandle.h"
+#include "Rendering/OpenGLRenderer/GLSL/GLSLShaderHandle.h"
 #include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/Shaders/Detail/ComputeProgramImpl.h"
 #include "Rendering/Shaders/Reflection.h"
@@ -27,12 +29,7 @@ namespace Rendering
         using OpenGLUInt = System::OpenGLUInt;
 
     public:
-        GLSLComputeProgram(OpenGLUInt programHandle, OpenGLUInt computeShaderHandle);
-        ~GLSLComputeProgram() noexcept;
-        GLSLComputeProgram(const GLSLComputeProgram& rhs) = default;
-        GLSLComputeProgram& operator=(const GLSLComputeProgram& rhs) = default;
-        GLSLComputeProgram(GLSLComputeProgram&& rhs) noexcept = default;
-        GLSLComputeProgram& operator=(GLSLComputeProgram&& rhs) noexcept = default;
+        GLSLComputeProgram(const GLSLProgramHandle& programHandle, const GLSLShaderHandle& computeShaderHandle);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -42,8 +39,8 @@ namespace Rendering
         NODISCARD ComputeProgramSharedPtr Clone() const override;
 
     private:
-        OpenGLUInt programHandle;
-        OpenGLUInt computeShaderHandle;
+        GLSLProgramHandle programHandle;
+        GLSLShaderHandle computeShaderHandle;
         Reflection reflector;
     };
 }

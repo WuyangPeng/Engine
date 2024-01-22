@@ -14,7 +14,6 @@
 
 namespace OutputCSVTesting
 {
-
     class Input1;
     class Input1Base;
     class Input1Container;

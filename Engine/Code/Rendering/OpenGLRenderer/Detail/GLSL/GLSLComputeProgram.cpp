@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Rendering/Shaders/Reflection.h"
 
-Rendering::GLSLComputeProgram::GLSLComputeProgram(OpenGLUInt programHandle, OpenGLUInt computeShaderHandle)
+Rendering::GLSLComputeProgram::GLSLComputeProgram(const GLSLProgramHandle& programHandle, const GLSLShaderHandle& computeShaderHandle)
     : ParentType{},
       programHandle{ programHandle },
       computeShaderHandle{ computeShaderHandle },
@@ -30,14 +30,14 @@ Rendering::GLSLComputeProgram::OpenGLUInt Rendering::GLSLComputeProgram::GetProg
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return programHandle;
+    return programHandle.GetProgramHandle();
 }
 
 Rendering::GLSLComputeProgram::OpenGLUInt Rendering::GLSLComputeProgram::GetComputeShaderHandle() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return computeShaderHandle;
+    return computeShaderHandle.GetShaderHandle();
 }
 
 Rendering::Reflection Rendering::GLSLComputeProgram::GetReflector() const
@@ -52,22 +52,6 @@ Rendering::GLSLComputeProgram::ComputeProgramSharedPtr Rendering::GLSLComputePro
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return std::make_shared<ClassType>(*this);
-}
-
-Rendering::GLSLComputeProgram::~GLSLComputeProgram() noexcept
-{
-    RENDERING_SELF_CLASS_IS_VALID_9;
-
-    if (System::IsGLProgram(programHandle))
-    {
-        if (System::IsGLShader(computeShaderHandle))
-        {
-            System::DetachGLShader(programHandle, computeShaderHandle);
-            System::DeleteGLShader(computeShaderHandle);
-        }
-
-        System::DeleteGLProgram(programHandle);
-    }
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, GLSLComputeProgram)

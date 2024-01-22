@@ -92,9 +92,8 @@ OutputCSVTesting::Input2Container::ConstInput2SharedPtr OutputCSVTesting::Input2
         return (*lhs).GetKey() < (*rhs).GetKey();
     };
 
-    const auto iter = std::ranges::lower_bound(input2, std::make_shared<Input2Base>(key), function);
-
-    if (iter != input2.cend() && (*iter)->GetKey() == key)
+    if (const auto iter = std::ranges::lower_bound(input2, std::make_shared<Input2Base>(key), function);
+        iter != input2.cend() && (*iter)->GetKey() == key)
     {
         return *iter;
     }

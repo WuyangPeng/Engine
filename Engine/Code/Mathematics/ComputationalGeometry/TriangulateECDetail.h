@@ -191,7 +191,7 @@ void Mathematics::TriangulateEC<Real>::InitializePositions(const Positions& posi
             return;
         }
 
-        case QueryType::Interger:
+        case QueryType::Integer:
         {
             const auto aabb = Vector2Tools<Real>::ComputeExtremes(positions);
             const auto minValue = aabb.GetMinPoint();
@@ -403,7 +403,7 @@ int Mathematics::TriangulateEC<Real>::TriangleQuery(const Vector2& position, Que
         case QueryType::Int64:
             return System::EnumCastUnderlying(Query2Int64<Real>(triangleVec).ToTriangle(position, 0, 1, 2));
 
-        case QueryType::Interger:
+        case QueryType::Integer:
             return System::EnumCastUnderlying(Query2Integer<Real>(triangleVec).ToTriangle(position, 0, 1, 2));
 
         case QueryType::Real:

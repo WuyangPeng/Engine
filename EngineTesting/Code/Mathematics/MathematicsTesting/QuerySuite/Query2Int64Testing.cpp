@@ -74,7 +74,7 @@ void Mathematics::Query2Int64Testing::VerticesTest()
 
         for (auto m = 0; m < size; ++m)
         {
-            ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, query.GetVertice(m), vertices.at(m), 1e-10);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, query.GetVertex(m), vertices.at(m), 1e-10);
         }
     }
 }

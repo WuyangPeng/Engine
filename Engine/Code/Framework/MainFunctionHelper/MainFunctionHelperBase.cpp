@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/08 19:36)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 15:10)
 
 #include "Framework/FrameworkExport.h"
 
@@ -119,7 +119,6 @@ void Framework::MainFunctionHelperBase::DoMainFunctionHelperInit(const Environme
     InitUniqueIdManager();
     InitLog(environmentDirectory);
     InitInitTerm();
-    InitEnvironment();
     InitImpl(environmentDirectory);
 }
 
@@ -143,12 +142,6 @@ void Framework::MainFunctionHelperBase::InitInitTerm()
     mainFunctionSchedule = MainFunctionSchedule::InitTerm;
 }
 
-void Framework::MainFunctionHelperBase::InitEnvironment()
-{
-    CoreTools::Environment::Create();
-    mainFunctionSchedule = MainFunctionSchedule::Environment;
-}
-
 void Framework::MainFunctionHelperBase::InitImpl(const EnvironmentDirectory& environmentDirectory)
 {
     impl = std::make_shared<ImplType>(environmentDirectory);
@@ -158,7 +151,6 @@ void Framework::MainFunctionHelperBase::InitImpl(const EnvironmentDirectory& env
 void Framework::MainFunctionHelperBase::MainFunctionHelperDestroy()
 {
     DestroyMainImpl();
-    DestroyEnvironment();
     DestroyInitTerm();
     DestroyLog();
     DestroyUniqueIdManager();
@@ -169,15 +161,6 @@ void Framework::MainFunctionHelperBase::DestroyMainImpl() noexcept
     if (MainFunctionSchedule::Max <= mainFunctionSchedule)
     {
         impl.reset();
-        mainFunctionSchedule = MainFunctionSchedule::Environment;
-    }
-}
-
-void Framework::MainFunctionHelperBase::DestroyEnvironment() noexcept
-{
-    if (MainFunctionSchedule::Environment <= mainFunctionSchedule)
-    {
-        CoreTools::Environment::Destroy();
         mainFunctionSchedule = MainFunctionSchedule::InitTerm;
     }
 }

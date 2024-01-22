@@ -37,21 +37,6 @@
     <Filter Include="ParticleSystem 头文件">
       <UniqueIdentifier>{04bc9641-8f88-48d2-a77b-e23f946206b4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CollisionDetection 源文件">
-      <UniqueIdentifier>{b32bfef0-baa0-4400-ae38-f8d72207c7c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fluid 源文件">
-      <UniqueIdentifier>{9e5dcfe0-d2b0-4299-9f44-5b36c0047534}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Intersection 源文件">
-      <UniqueIdentifier>{30f550d5-ab77-49db-9aea-8ab3330eed11}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="LCPSolver 源文件">
-      <UniqueIdentifier>{aad5cb3b-33b4-4b06-a382-efc2b35d0dd5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Miscellaneous 源文件">
-      <UniqueIdentifier>{268e6c26-bf8f-4f5c-b532-b3e57255acf0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Helper 头文件">
       <UniqueIdentifier>{3f303636-8113-4d50-988a-0b95f23d8174}</UniqueIdentifier>
     </Filter>

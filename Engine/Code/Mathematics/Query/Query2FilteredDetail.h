@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/27 13:56)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 23:32)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_FILTERED_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY2_FILTERED_DETAIL_H
@@ -59,8 +59,8 @@ Mathematics::LineQueryType Mathematics::Query2Filtered<Real>::ToLine(const Vecto
     MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < this->GetNumVertices(), "索引错误！");
     MATHEMATICS_ASSERTION_0(0 <= rhsVerticesIndex && rhsVerticesIndex < this->GetNumVertices(), "索引错误！");
 
-    const auto vector0 = this->GetVertice(lhsVerticesIndex);
-    const auto vector1 = this->GetVertice(rhsVerticesIndex);
+    const auto vector0 = this->GetVertex(lhsVerticesIndex);
+    const auto vector1 = this->GetVertex(rhsVerticesIndex);
 
     const auto x0 = testVector.GetX() - vector0.GetX();
     const auto y0 = testVector.GetY() - vector0.GetY();
@@ -102,9 +102,9 @@ Mathematics::CircumcircleQueryType Mathematics::Query2Filtered<Real>::ToCircumci
     MATHEMATICS_ASSERTION_0(0 <= mhsVerticesIndex && mhsVerticesIndex < this->GetNumVertices(), "索引错误！");
     MATHEMATICS_ASSERTION_0(0 <= rhsVerticesIndex && rhsVerticesIndex < this->GetNumVertices(), "索引错误！");
 
-    const Vector2 lhsVector{ this->GetVertice(lhsVerticesIndex) };
-    const Vector2 mhsVector{ this->GetVertice(mhsVerticesIndex) };
-    const Vector2 rhsVector{ this->GetVertice(rhsVerticesIndex) };
+    const Vector2 lhsVector{ this->GetVertex(lhsVerticesIndex) };
+    const Vector2 mhsVector{ this->GetVertex(mhsVerticesIndex) };
+    const Vector2 rhsVector{ this->GetVertex(rhsVerticesIndex) };
 
     const auto lhsPlusTestX = lhsVector.GetX() + testVector.GetX();
     const auto lhsMinusTestX = lhsVector.GetX() - testVector.GetX();

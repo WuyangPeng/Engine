@@ -1,18 +1,17 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/06 10:17)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/10 09:59)
 
 #include "Rendering/RenderingExport.h"
 
 #include "LightEffect.h"
 #include "Detail/LightEffectImpl.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -44,7 +43,8 @@ CORE_TOOLS_WITH_IMPL_OBJECT_LINK_DEFINE(Rendering, LightEffect)
 CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, LightEffect)
 CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, LightEffect)
 
-Rendering::LightEffect::LightEffect(ProgramFactory& factory,
+Rendering::LightEffect::LightEffect(const std::string& name,
+                                    ProgramFactory& factory,
                                     const BaseRendererSharedPtr& baseRenderer,
                                     const std::string& vertexShaderFile,
                                     const std::string& pixelShaderFile,
@@ -54,7 +54,7 @@ Rendering::LightEffect::LightEffect(ProgramFactory& factory,
                                     int numMaterialConstantBytes,
                                     int numLightingConstantBytes,
                                     int numGeometryConstantBytes)
-    : ParentType{ factory, baseRenderer, vertexShaderFile, pixelShaderFile },
+    : ParentType{ name, factory, baseRenderer, vertexShaderFile, pixelShaderFile },
       impl{ material, lighting, geometry, numMaterialConstantBytes, numLightingConstantBytes, numGeometryConstantBytes }
 {
     const auto vertexShader = GetVertexShader();

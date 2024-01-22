@@ -31,7 +31,7 @@ namespace Rendering
         DELAY_COPY_UNSHARED_TYPE_DECLARE(RenderingDevice);
 
         using WindowsHdc = System::WindowsHdc;
-        using OpenGLRcHandleHglrc = System::OpenGLRcHandle;
+        using OpenGLRcHandle = System::OpenGLRcHandle;
         using WindowsHWnd = System::WindowsHWnd;
         using RenderingDeviceSharedPtr = std::shared_ptr<RenderingDeviceImpl>;
         using VertexBufferSharedPtr = std::shared_ptr<VertexBuffer>;
@@ -43,15 +43,14 @@ namespace Rendering
         using ComputeProgramSharedPtr = std::shared_ptr<ComputeProgram>;
 
     public:
-        RenderingDevice(WindowsHWnd hWnd, WindowsHdc device, OpenGLRcHandleHglrc immediate);
+        RenderingDevice(WindowsHWnd hWnd, WindowsHdc device, OpenGLRcHandle immediate);
         NODISCARD static RenderingDevice Create();
 
         CLASS_INVARIANT_DECLARE;
 
-        void SwapBuffers(int syncInterval);
-        void ResetSize();
         void InitDevice();
         void Release();
+        void DisplayColorBuffer(int syncInterval);
 
         void SetViewport(const Viewport& viewport);
         NODISCARD Viewport GetViewport() const;

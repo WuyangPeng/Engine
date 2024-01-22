@@ -31,8 +31,8 @@ namespace System
         NODISCARD WindowsHWnd GetHWnd() const noexcept;
         NODISCARD WindowsHdc GetWindowsDc();
         void ReleaseWindowsDcTest(WindowsHdc windowsDc);
-        NODISCARD OpenGLHglrc GetCreateWglContext(WindowsHdc windowsDc);
-        void DeleteWglContextTest(OpenGLHglrc openGLHglrc);
+        NODISCARD OpenGLRcHandle GetCreateWglContext(WindowsHdc windowsDc);
+        void DeleteWglContextTest(OpenGLRcHandle openGLHglrc);
         void SetWindowPixelFormatTest(WindowsHdc windowsDc);
 
     protected:

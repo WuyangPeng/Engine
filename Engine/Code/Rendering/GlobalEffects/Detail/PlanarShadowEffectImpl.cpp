@@ -201,7 +201,7 @@ void Rendering::PlanarShadowEffectImpl::GatherVisuals(const BaseRendererSharedPt
         visual != nullptr)
     {
         Colour<float> black{ 0.0f, 0.0f, 0.0f, 1.0f };
-        auto effect = std::make_shared<ConstantColorEffect>(*factory, engine, black);
+        auto effect = std::make_shared<ConstantColorEffect>("ConstantColorEffect", *factory, engine, black);
         casterVisuals.emplace_back(visual);
         casterEffects.emplace_back(effect);
         return;

@@ -16,8 +16,8 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
+#include "Rendering/LocalEffects/Lighting.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
-#include "Rendering/LocalEffects/Lighting.h" 
 #include "Rendering/Shaders/Shader.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, SpotLightEffect)
@@ -31,7 +31,8 @@ Rendering::SpotLightEffect::SpotLightEffect(ProgramFactory& factory,
                                             const MaterialSharedPtr& material,
                                             const LightSharedPtr& lighting,
                                             const LightCameraGeometrySharedPtr& geometry)
-    : ParentType{ factory,
+    : ParentType{ "SpotLightEffect",
+                  factory,
                   baseRenderer,
                   select ? "Resource/Shader/SpotLightEffect.ps.vs" : "Resource/Shader/SpotLightEffect.vs.vs",
                   select ? "Resource/Shader/SpotLightEffect.ps.ps" : "Resource/Shader/SpotLightEffect.vs.ps",

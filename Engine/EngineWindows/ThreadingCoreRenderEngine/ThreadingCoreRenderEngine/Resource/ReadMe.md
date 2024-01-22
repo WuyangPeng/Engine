@@ -18,7 +18,7 @@
 11. 使用min和max表示[min,max]区间，使用begin和end表示[begin,end)区间。
 12. 对直接抛出异常的函数使用[[noreturn]]，已定义宏SYSTEM_NORETURN。
 13. 对必须检查返回值的函数使用[[nodiscard]]，已定义宏NODISCARD和MAYBE_NULLPTR。
-14. 对可能不会使用的参数使用[[maybe_unused]]，已定义宏MAYBE_UNUSED。
+14. 对可能不会使用的参数使用[[maybe_unused]]，已定义宏MAYBE_UNUSED，或使用UnusedFunction函数消除警告。
 15. 对于没有break的case标签使用[[fallthrough]]，已定义宏FALLTHROUGH。
 16. 禁止注释掉代码，必需保留不执行的代码使用预处理器。
 17. 定义宏为空时，使用static_cast<void>(0)，可防止宏被用作右值。
@@ -26,9 +26,12 @@
 19. 整型转换不使用static_cast，转换失败抛出异常使用boost::numeric_cast，不能抛出异常使用gsl::narrow_cast消除警告。
 20. 使用make_shared和make_unique来创建智能指针，而不是new。
 21. 使用必要的noexcept、final和override。
-22. 如果一个析构函数调用了任何函数，这些函数都可能抛出异常，一个析构函数不能抛出异常，所以任何调用了其他函数的析构函数都应该捕获和管理它自己的异常。
+22. 如果一个析构函数调用了任何函数，这些函数都可能抛出异常，一个析构函数不能抛出异常，
+    所以任何调用了其他函数的析构函数都应该捕获和管理它自己的异常。
 23. 移动复制构造函数、移动赋值运算符、swap函数、析构函数必须定义为noexcept。
-24. 除特殊需求外，禁止返回空指针、传递空指针和使用裸指针。对必须要返回空指针的函数使用MAYBE_NULLPTR。尽可能使用特例模式或抛出异常来代替返回空指针。
+24. 除特殊需求外，禁止返回空指针、传递空指针和使用裸指针。
+    对必须要返回空指针的函数使用MAYBE_NULLPTR。
+    尽可能使用特例模式或抛出异常来代替返回空指针。
 25. 对于内置类型，优先使用bool、char、int、double和必要的size_t。
     需要使用其它类型时，尽量使用固定大小的整型。网络或系统相关调用必须使用固定大小的整型。
     非必要的情况不使用无符号数。

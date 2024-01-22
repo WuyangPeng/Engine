@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2024/01/04 09:31)
+/// 版本：1.0.0.4 (2024/01/17 16:53)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,7 +18,7 @@
 
 COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(Rendering, RenderingDevice)
 
-Rendering::RenderingDevice::RenderingDevice(WindowsHWnd hWnd, WindowsHdc device, OpenGLRcHandleHglrc immediate)
+Rendering::RenderingDevice::RenderingDevice(WindowsHWnd hWnd, WindowsHdc device, OpenGLRcHandle immediate)
     : impl{ CoreTools::ImplCreateUseFactory::Default, hWnd, device, immediate }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -39,18 +39,11 @@ Rendering::RenderingDevice::RenderingDevice(RenderingDeviceCreate renderingDevic
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, RenderingDevice)
 
-void Rendering::RenderingDevice::SwapBuffers(int syncInterval)
+void Rendering::RenderingDevice::DisplayColorBuffer(int syncInterval)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    impl->SwapBuffers(syncInterval);
-}
-
-void Rendering::RenderingDevice::ResetSize()
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    impl->ResetSize();
+    impl->DisplayColorBuffer(syncInterval);
 }
 
 void Rendering::RenderingDevice::InitDevice()
@@ -118,7 +111,7 @@ std::string Rendering::RenderingDevice::GetShaderExtendName() const
 
 void Rendering::RenderingDevice::Resize(int width, int height)
 {
-    RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
     return impl->Resize(width, height);
 }

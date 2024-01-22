@@ -16,6 +16,8 @@
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/NameMacro.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
+#include "Rendering/OpenGLRenderer/GLSL/GLSLProgramHandle.h"
+#include "Rendering/OpenGLRenderer/GLSL/GLSLShaderHandle.h"
 #include "Rendering/Shaders/ShadersFwd.h"
 
 #include <string>
@@ -36,10 +38,12 @@ namespace Rendering
         using ObjectRegister = CoreTools::ObjectRegister;
         using ShaderSharedPtr = std::shared_ptr<Shader>;
         using ConstShaderSharedPtr = std::shared_ptr<const Shader>;
+        using VisualProgramSharedPtr = std::shared_ptr<VisualProgram>;
 
     public:
         NODISCARD static VisualProgram Create();
-        VisualProgram(OpenGLUInt programHandle, OpenGLUInt vertexShaderHandle, OpenGLUInt pixelShaderHandle, OpenGLUInt geometryShaderHandle);
+        NODISCARD static VisualProgramSharedPtr Create(const std::string& vertexShaderSource, const std::string& pixelShaderSource, const std::string& geometryShaderSource, const std::string& version, const ProgramDefines& defines);
+        VisualProgram(const GLSLProgramHandle& programHandle, const GLSLShaderHandle& vertexShaderHandle, const GLSLShaderHandle& pixelShaderHandle, const GLSLShaderHandle& geometryShaderHandle);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -65,6 +69,11 @@ namespace Rendering
 
         NODISCARD Reflection GetReflector() const;
         NODISCARD OpenGLUInt GetProgramHandle() const;
+
+        void CreateShader(bool createGeometryShader);
+        void CreateVertexShader();
+        void CreatePixelShader();
+        void CreateGeometryShader();
 
     private:
         explicit VisualProgram(CoreTools::DisableNotThrow disableNotThrow);

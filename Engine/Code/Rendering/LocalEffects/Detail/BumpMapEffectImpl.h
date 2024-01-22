@@ -1,11 +1,11 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/07 13:40)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/10 10:22)
 
 #ifndef RENDERING_LOCAL_EFFECTS_BUMP_MAP_EFFECT_IMPL_H
 #define RENDERING_LOCAL_EFFECTS_BUMP_MAP_EFFECT_IMPL_H
@@ -30,9 +30,11 @@ namespace Rendering
         using ClassType = BumpMapEffectImpl;
 
         using Colour = Colour<float>;
+        using Math = Mathematics::Math<float>;
         using Vector2 = Mathematics::Vector2<float>;
         using Vector3 = Mathematics::Vector3<float>;
         using Vector4 = Mathematics::Vector4<float>;
+        using Vector3Tools = Mathematics::Vector3Tools<float>;
         using Texture2DSharedPtr = std::shared_ptr<Texture2D>;
         using ConstTexture2DSharedPtr = std::shared_ptr<const Texture2D>;
         using SamplerStateSharedPtr = std::shared_ptr<SamplerState>;

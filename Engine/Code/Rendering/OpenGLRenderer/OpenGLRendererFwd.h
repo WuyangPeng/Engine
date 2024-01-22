@@ -47,6 +47,8 @@ namespace Rendering
     class OpenGLInputLayoutAttribute;
     class OpenGLInputLayoutManager;
 
+    class GLSLShaderHandle;
+
 }
 
 #endif  // RENDERING_OPENGL_RENDERER_FWD_H

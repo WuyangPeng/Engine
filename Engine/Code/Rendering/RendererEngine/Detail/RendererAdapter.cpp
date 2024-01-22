@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2024/01/02 16:13)
+/// 版本：1.0.0.4 (2024/01/17 16:52)
 
 #include "Rendering/RenderingExport.h"
 
@@ -135,7 +135,7 @@ void Rendering::RendererAdapter::SwapBuffers(int syncInterval)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    renderingDevice.SwapBuffers(syncInterval);
+    renderingDevice.DisplayColorBuffer(syncInterval);
 }
 
 int64_t Rendering::RendererAdapter::DrawPrimitive(const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer, const VisualEffectSharedPtr& effect)
@@ -152,13 +152,6 @@ void Rendering::RendererAdapter::Release()
     renderingDevice.Release();
     rendererObjectBridge->Release();
     renderingEnvironment.Release();
-}
-
-void Rendering::RendererAdapter::ResetSize()
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    renderingDevice.ResetSize();
 }
 
 void Rendering::RendererAdapter::InitDevice()

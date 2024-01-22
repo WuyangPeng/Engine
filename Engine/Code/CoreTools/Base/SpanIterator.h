@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/23 10:48)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/10 20:05)
 
 #ifndef CORE_TOOLS_BASE_SPAN_ITERATOR_H
 #define CORE_TOOLS_BASE_SPAN_ITERATOR_H
@@ -45,8 +45,8 @@ namespace CoreTools
         SpanIterator<Iter>& operator--();
         NODISCARD SpanIterator<Iter> operator--(int);
 
-        SpanIterator<Iter>& operator+=(const int step);
-        SpanIterator<Iter>& operator-=(const int step);
+        SpanIterator<Iter>& operator+=(int step);
+        SpanIterator<Iter>& operator-=(int step);
 
         NODISCARD Iter GetBegin() const noexcept;
         NODISCARD Iter GetEnd() const noexcept;
@@ -60,6 +60,9 @@ namespace CoreTools
         template <typename T>
         void Increase(T value);
 
+        template <typename T, int Size>
+        NODISCARD std::array<T, Size> Increase();
+
         template <typename T>
         NODISCARD T GetValue(int step) const;
 
@@ -70,7 +73,7 @@ namespace CoreTools
         void SetValue(int step, T value);
 
         template <typename T, int Size>
-        void SetValue(int step, const std::array<T, Size>& value);
+        int SetValue(int step, const std::array<T, Size>& value);
 
     private:
         template <typename T>

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2024/01/02 15:11)
+/// 版本：1.0.0.4 (2024/01/17 16:52)
 
 #ifndef RENDERING_RENDERER_ENGINE_RENDERER_ADAPTER_H
 #define RENDERING_RENDERER_ENGINE_RENDERER_ADAPTER_H
@@ -82,7 +82,6 @@ namespace Rendering
 
         void InitDevice();
         void Release();
-        void ResetSize();
         void WaitForFinish();
         void Flush();
         void Execute(ComputeProgram& shared, int numXGroups, int numYGroups, int numZGroups);

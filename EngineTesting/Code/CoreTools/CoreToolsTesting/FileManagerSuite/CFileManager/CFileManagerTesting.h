@@ -11,6 +11,7 @@
 #define CORE_TOOLS_TESTING_C_FILE_MANAGER_TESTING_H
 
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/FileManager/Environment.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -43,6 +44,9 @@ namespace CoreTools
         NODISCARD static String GetFileName();
         NODISCARD static String GetFileManagerHelperFileName();
         NODISCARD static std::string GetFileManagerContent();
+
+    private:
+        Environment environment;
     };
 }
 

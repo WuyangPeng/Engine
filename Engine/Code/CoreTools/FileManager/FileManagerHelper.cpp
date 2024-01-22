@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/22 14:11)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 00:09)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -70,18 +70,18 @@ void CoreTools::FileManagerHelper::AppendToFile(const String& fileName, bool bin
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-CoreTools::FileBuffer CoreTools::FileManagerHelper::LoadFromFileUseEnvironment(const String& fileName, bool binaryFile)
+CoreTools::FileBuffer CoreTools::FileManagerHelper::LoadFromFileUseEnvironment(const Environment& environment, const String& fileName, bool binaryFile)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
     if (binaryFile)
-        return FileHandleHelper::LoadFromFileUseEnvironment(fileName);
+        return FileHandleHelper::LoadFromFileUseEnvironment(environment, fileName);
     else
-        return CFileManagerHelper::LoadFromFileUseEnvironment(fileName, binaryFile);
+        return CFileManagerHelper::LoadFromFileUseEnvironment(environment, fileName, binaryFile);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    return CFileManagerHelper::LoadFromFileUseEnvironment(fileName, binaryFile);
+    return CFileManagerHelper::LoadFromFileUseEnvironment(environment, fileName, binaryFile);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

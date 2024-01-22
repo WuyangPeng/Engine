@@ -52,7 +52,7 @@ void System::OpenGLGetCurrentWglContextTesting::GetContextTest(WindowsHdc window
     ASSERT_NOT_THROW_EXCEPTION_1(DeleteWglContextTest, openGLHglrc);
 }
 
-void System::OpenGLGetCurrentWglContextTesting::DoOpenGLGetCurrentWglContextTest(OpenGLHglrc openGLHglrc)
+void System::OpenGLGetCurrentWglContextTesting::DoOpenGLGetCurrentWglContextTest(OpenGLRcHandle openGLHglrc)
 {
     ASSERT_TRUE(OpenGLInit());
 

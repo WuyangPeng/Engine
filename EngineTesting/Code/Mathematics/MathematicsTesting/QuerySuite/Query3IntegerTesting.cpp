@@ -72,12 +72,12 @@ void Mathematics::Query3IntegerTesting::VerticesTest()
 
         Query3IntegerD query(vertices);
 
-        ASSERT_ENUM_EQUAL(query.GetType(), QueryType::Interger);
+        ASSERT_ENUM_EQUAL(query.GetType(), QueryType::Integer);
         ASSERT_EQUAL(query.GetNumVertices(), size);
 
         for (auto m = 0; m < size; ++m)
         {
-            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, query.GetVertice(m), vertices.at(m), 1e-10);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, query.GetVertex(m), vertices.at(m), 1e-10);
         }
     }
 }

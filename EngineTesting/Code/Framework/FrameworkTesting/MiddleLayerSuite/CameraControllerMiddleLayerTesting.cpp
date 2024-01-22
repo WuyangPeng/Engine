@@ -13,9 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
-#include "Rendering/DataTypes/TransformMatrixDetail.h"
 #include "Rendering/RendererEngine/EnvironmentParameter.h"
-#include "Rendering/SceneGraph/CameraManager.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MiddleLayer/CameraControllerMiddleLayerDetail.h"
 #include "Framework/MiddleLayer/CameraModelMiddleLayer.h"
@@ -43,14 +41,10 @@ void Framework::CameraControllerMiddleLayerTesting::DoRunUnitTest()
 
 void Framework::CameraControllerMiddleLayerTesting::MainTest()
 {
-    Rendering::CameraManager::Create();
-
     ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(KeyDownTest);
     ASSERT_NOT_THROW_EXCEPTION_0(TrackBallDownTest);
     ASSERT_NOT_THROW_EXCEPTION_0(RotateTrackBallTest);
-
-    Rendering::CameraManager::Destroy();
 }
 
 void Framework::CameraControllerMiddleLayerTesting::MiddleLayerTest()

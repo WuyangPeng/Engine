@@ -37,7 +37,7 @@ void Rendering::MaterialTesting::MainTest()
 
 void Rendering::MaterialTesting::BaseTest()
 {
-    auto firstMaterial = Material::Create();
+    auto firstMaterial = Material::Create("Material");
 
     ASSERT_TRUE(Approximate(firstMaterial->GetEmissive(), Material::Colour(0.0f, 0.0f, 0.0f, 1.0f), 1e-8f));
     ASSERT_TRUE(Approximate(firstMaterial->GetAmbient(), Material::Colour(0.0f, 0.0f, 0.0f, 1.0f), 1e-8f));
@@ -58,7 +58,7 @@ void Rendering::MaterialTesting::BaseTest()
     ASSERT_APPROXIMATE(firstMaterial->GetAlpha(), 0.0f, 1e-8f);
     ASSERT_APPROXIMATE(firstMaterial->GetSpecularExponent(), 1.0f, 1e-8f);
 
-    auto secondMaterial = Material::Create(Material::Colour(0.1f, 0.2f, 0.3f, 1.0f), Material::Colour(0.2f, 0.3f, 0.4f, 1.0f),
+    auto secondMaterial = Material::Create("Material", Material::Colour(0.1f, 0.2f, 0.3f, 1.0f), Material::Colour(0.2f, 0.3f, 0.4f, 1.0f),
                                            Material::Colour(0.5f, 0.6f, 0.7f, 0.0f), Material::Colour(0.8f, 0.9f, 1.0f, 1.0f));
 
     ASSERT_TRUE(Approximate(secondMaterial->GetEmissive(), Material::Colour(0.1f, 0.2f, 0.3f, 1.0f), 1e-8f));

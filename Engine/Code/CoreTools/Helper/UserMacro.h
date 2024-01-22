@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/22 11:03)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 00:11)
 
 #ifndef CORE_TOOLS_HELPER_USER_MACRO_H
 #define CORE_TOOLS_HELPER_USER_MACRO_H
@@ -24,8 +24,8 @@
 
 #define CLOSE_CORE_TOOLS_MAX (((CORE_TOOLS_ClOSE_END) << 1) - 1)
 
-// 编译测试（默认为0x10，最大值为0x1F）
-#define COMPILE_CORE_TOOLS_CLOSE 0x00
+// 编译测试（默认为0B0001'0000，最大值为0B0001'1111）
+#define COMPILE_CORE_TOOLS_CLOSE 0B0000'0000
 
 static_assert(0 <= COMPILE_CORE_TOOLS_CLOSE, "COMPILE_CORE_TOOLS_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_CORE_TOOLS_CLOSE <= CLOSE_CORE_TOOLS_MAX, "COMPILE_CORE_TOOLS_CLOSE Must be less than or equal CLOSE_CORE_TOOLS_MAX.");
@@ -86,7 +86,7 @@ static_assert(COMPILE_CORE_TOOLS_CLOSE <= CLOSE_CORE_TOOLS_MAX, "COMPILE_CORE_TO
 
         #define CORE_TOOLS_USE_OPEN_XLSX static_cast<void>(0)
 
-    #endif // defined(SYSTEM_PLATFORM_WIN32)
+    #endif  // defined(SYSTEM_PLATFORM_WIN32)
 
 #endif  // !defined(COMPILE_CORE_TOOLS_CLOSE) || (COMPILE_CORE_TOOLS_CLOSE & CLOSE_USE_USE_OPENXLSX) != CLOSE_USE_USE_OPENXLSX
 

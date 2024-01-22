@@ -43,7 +43,7 @@ std::string CoreTools::CFileManagerTesting::GetFileManagerContent()
 }
 
 CoreTools::CFileManagerTesting::CFileManagerTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream }, environment{ Environment::Create() }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -52,13 +52,9 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CFileManagerTesting)
 
 void CoreTools::CFileManagerTesting::DoRunUnitTest()
 {
-    Environment::Create();
-
-    ASSERT_TRUE(ENVIRONMENT_SINGLETON.InsertDirectory(GetDirectory()));
+    ASSERT_TRUE(environment.InsertDirectory(GetDirectory()));
 
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
-
-    Environment::Destroy();
 }
 
 void CoreTools::CFileManagerTesting::MainTest()
@@ -90,7 +86,7 @@ void CoreTools::CFileManagerTesting::LoadFromFileTest(bool binaryFile)
 
 void CoreTools::CFileManagerTesting::LoadFromFileUseEnvironmentTest(bool binaryFile)
 {
-    auto buffer = CFileManagerHelper::LoadFromFileUseEnvironment(GetFileName(), binaryFile);
+    auto buffer = CFileManagerHelper::LoadFromFileUseEnvironment(environment, GetFileName(), binaryFile);
 
     const std::string bufferContent{ buffer.begin(), buffer.end() };
 

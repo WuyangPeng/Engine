@@ -19,9 +19,8 @@ CSVConfigure::ChapterContainer::ConstChapterSharedPtr CSVConfigure::ChapterConta
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = std::ranges::find_if(chapter, function);
-
-    if (iter != chapter.cend())
+    if (const auto iter = std::ranges::find_if(chapter, function);
+        iter != chapter.cend())
     {
         return *iter;
     }

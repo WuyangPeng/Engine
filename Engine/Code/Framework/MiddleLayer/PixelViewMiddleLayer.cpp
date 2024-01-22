@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/08 16:24)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 15:04)
 
 #include "Framework/FrameworkExport.h"
 
@@ -30,11 +30,6 @@ Framework::PixelViewMiddleLayer::PixelViewMiddleLayer(MiddleLayerPlatform middle
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, PixelViewMiddleLayer)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, PixelViewMiddleLayer, IsDoFlip, bool);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, PixelViewMiddleLayer, DoFlip, bool, void);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, PixelViewMiddleLayer, GetScreenWidth, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, PixelViewMiddleLayer, GetScreenHeight, int);
 
 bool Framework::PixelViewMiddleLayer::Initialize()
 {
@@ -63,7 +58,7 @@ bool Framework::PixelViewMiddleLayer::Idle(int64_t timeDelta)
     if (const auto renderer = GetRenderer();
         ParentType::Idle(timeDelta) && renderer != nullptr)
     {
-        renderer->ClearBuffers(); 
+        renderer->ClearBuffers();
         ScreenOverlay();
 
         renderer->DisplayColorBuffer(0);
@@ -109,6 +104,34 @@ void Framework::PixelViewMiddleLayer::ScreenOverlay()
 
     // 存根在派生类。
     CoreTools::DisableNoexcept();
+}
+
+bool Framework::PixelViewMiddleLayer::IsDoFlip() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsDoFlip();
+}
+
+void Framework::PixelViewMiddleLayer::DoFlip(bool doFlip)
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->DoFlip(doFlip);
+}
+
+int Framework::PixelViewMiddleLayer::GetScreenWidth() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetScreenWidth();
+}
+
+int Framework::PixelViewMiddleLayer::GetScreenHeight() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetScreenHeight();
 }
 
 void Framework::PixelViewMiddleLayer::ClearScreen()

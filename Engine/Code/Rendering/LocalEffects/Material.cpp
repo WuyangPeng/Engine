@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/05 15:37)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/09 20:36)
 
 #include "Rendering/RenderingExport.h"
 
@@ -20,22 +20,22 @@
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Material)
 
-CORE_TOOLS_RTTI_DEFINE(Rendering, Material);
+CORE_TOOLS_RTTI_DEFINE(Rendering, Material)
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Material);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Material);
 
-Rendering::Material::MaterialSharedPtr Rendering::Material::Create()
+Rendering::Material::MaterialSharedPtr Rendering::Material::Create(const std::string& name)
 {
-    return std::make_shared<ClassType>(MaterialCreate::Init);
+    return std::make_shared<ClassType>(MaterialCreate::Init, name);
 }
 
-Rendering::Material::MaterialSharedPtr Rendering::Material::Create(const Colour& emissive, const Colour& ambient, const Colour& diffuse, const Colour& specular)
+Rendering::Material::MaterialSharedPtr Rendering::Material::Create(const std::string& name, const Colour& emissive, const Colour& ambient, const Colour& diffuse, const Colour& specular)
 {
-    return std::make_shared<ClassType>(MaterialCreate::Init, emissive, ambient, diffuse, specular);
+    return std::make_shared<ClassType>(MaterialCreate::Init, name, emissive, ambient, diffuse, specular);
 }
 
-Rendering::Material::Material(MaterialCreate materialCreate)
-    : ParentType{ "Material" },
+Rendering::Material::Material(MaterialCreate materialCreate, const std::string& name)
+    : ParentType{ name },
       impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     System::UnusedFunction(materialCreate);
@@ -43,8 +43,8 @@ Rendering::Material::Material(MaterialCreate materialCreate)
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Material::Material(MaterialCreate materialCreate, const Colour& emissive, const Colour& ambient, const Colour& diffuse, const Colour& specular)
-    : ParentType{ "Material" },
+Rendering::Material::Material(MaterialCreate materialCreate, const std::string& name, const Colour& emissive, const Colour& ambient, const Colour& diffuse, const Colour& specular)
+    : ParentType{ name },
       impl{ emissive, ambient, diffuse, specular }
 {
     System::UnusedFunction(materialCreate);
@@ -53,19 +53,6 @@ Rendering::Material::Material(MaterialCreate materialCreate, const Colour& emiss
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Material)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Material, GetEmissive, Rendering::Material::Colour)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Material, GetAmbient, Rendering::Material::Colour)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Material, GetDiffuse, Rendering::Material::Colour)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Material, GetSpecular, Rendering::Material::Colour)
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Material, SetEmissive, Colour, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Material, SetAmbient, Colour, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Material, SetDiffuse, Colour, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Material, SetSpecular, Colour, void)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Material, GetAlpha, float)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Material, GetSpecularExponent, float)
 
 Rendering::Material::Material(LoadConstructor loadConstructor)
     : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
@@ -136,4 +123,74 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::Material::CloneObject() const
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return std::make_shared<ClassType>(*this);
+}
+
+Rendering::Material::Colour Rendering::Material::GetEmissive() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetEmissive();
+}
+
+Rendering::Material::Colour Rendering::Material::GetAmbient() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetAmbient();
+}
+
+Rendering::Material::Colour Rendering::Material::GetDiffuse() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetDiffuse();
+}
+
+Rendering::Material::Colour Rendering::Material::GetSpecular() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetSpecular();
+}
+
+void Rendering::Material::SetEmissive(const Colour& emissive) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->SetEmissive(emissive);
+}
+
+void Rendering::Material::SetAmbient(const Colour& ambient) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->SetAmbient(ambient);
+}
+
+void Rendering::Material::SetDiffuse(const Colour& diffuse) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->SetDiffuse(diffuse);
+}
+
+void Rendering::Material::SetSpecular(const Colour& specular) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->SetSpecular(specular);
+}
+
+float Rendering::Material::GetAlpha() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetAlpha();
+}
+
+float Rendering::Material::GetSpecularExponent() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetSpecularExponent();
 }

@@ -10,7 +10,6 @@
 #include "Rendering/RenderingExport.h"
 
 #include "DirectionalLightTextureEffect.h"
-#include "Rendering/LocalEffects/Lighting.h" 
 #include "LightCameraGeometry.h"
 #include "Material.h"
 #include "Detail/DirectionalLightTextureEffectImpl.h"
@@ -18,6 +17,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
+#include "Rendering/LocalEffects/Lighting.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
 #include "Rendering/Resources/Textures/Texture2D.h"
 #include "Rendering/Shaders/Shader.h"
@@ -38,7 +38,8 @@ Rendering::DirectionalLightTextureEffect::DirectionalLightTextureEffect(ProgramF
                                                                         SamplerStateFilter filter,
                                                                         SamplerStateMode mode0,
                                                                         SamplerStateMode mode1)
-    : ParentType{ factory,
+    : ParentType{ "DirectionalLightTextureEffect",
+                  factory,
                   baseRenderer,
                   "Resource/Shader/DirectionalLightEffect.vs",
                   "Resource/Shader/DirectionalLightEffect.ps",

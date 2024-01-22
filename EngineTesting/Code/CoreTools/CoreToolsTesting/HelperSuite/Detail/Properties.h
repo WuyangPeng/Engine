@@ -54,7 +54,7 @@ namespace CoreTools
         TCRE_METHOD_PROPERTY_GET(int, const int&, ClassType, GetValue0, Value0, true);
         TCRE_METHOD_PROPERTY_GET(int, int, ClassType, GetValue1, Value1, true);
         TCRE_METHOD_PROPERTY_SET(std::string, const std::string&, ClassType, SetValue2, Value2, true);
-        TCRE_METHOD_PROPERTY_GETSET(uint32_t, uint32_t, const uint32_t&, ClassType, GetValue3, SetValue3, Value3, true);
+        TCRE_METHOD_PROPERTY_GET_SET(uint32_t, uint32_t, const uint32_t&, ClassType, GetValue3, SetValue3, Value3, true);
         TCRE_DECLARE_PROPERTY(ClassType, int, int, Value4, SetValue4, GetValue4);
         TCRE_DECLARE_PROPERTY(ClassType, std::string, const std::string&, Value5, SetValue5, GetValue5);
         TCRE_PROPERTY_READ(std::string, Value6, GetValue6);

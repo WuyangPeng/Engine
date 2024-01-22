@@ -33,7 +33,7 @@ Rendering::CubeMapEffect::CubeMapEffect(ProgramFactory& factory,
                                         SamplerStateMode mode0,
                                         SamplerStateMode mode1,
                                         float reflectivity)
-    : ParentType{ factory, baseRenderer, "Resource/Shader/CubeMapEffect.vs", "Resource/Shader/CubeMapEffect.ps" },
+    : ParentType{ "CubeMapEffect", factory, baseRenderer, "Resource/Shader/CubeMapEffect.vs", "Resource/Shader/CubeMapEffect.ps" },
       impl{ texture,
             filter,
             mode0,

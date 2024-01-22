@@ -8,8 +8,7 @@ $Copyright$
 #include "$Namespace$Fwd.h"
 #include "System/Helper/UnicodeUsing.h"
 $DataInclude$
-$StdInclude$
-namespace $Namespace$
+$StdInclude$namespace $Namespace$
 {
     class $ClassName$Base
     {

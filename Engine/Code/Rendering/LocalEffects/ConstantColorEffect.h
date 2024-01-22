@@ -1,11 +1,11 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/10 14:55)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/10 16:46)
 
 #ifndef RENDERING_LOCAL_EFFECTS_CONSTANT_COLOR_EFFECT_H
 #define RENDERING_LOCAL_EFFECTS_CONSTANT_COLOR_EFFECT_H
@@ -26,10 +26,11 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(ConstantColorEffect);
         using ParentType = VisualEffect;
+
         using Colour = Colour<float>;
 
     public:
-        ConstantColorEffect(ProgramFactory& factory, const BaseRendererSharedPtr& baseRenderer, const Colour& color);
+        ConstantColorEffect(const std::string& name, ProgramFactory& factory, const BaseRendererSharedPtr& baseRenderer, const Colour& color);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

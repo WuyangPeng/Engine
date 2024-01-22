@@ -19,9 +19,8 @@ CSVConfigure::SkillContainer::ConstSkillSharedPtr CSVConfigure::SkillContainer::
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = std::ranges::find_if(skill, function);
-
-    if (iter != skill.cend())
+    if (const auto iter = std::ranges::find_if(skill, function);
+        iter != skill.cend())
     {
         return *iter;
     }

@@ -29,12 +29,14 @@ int Rendering::ProgramIndexUnitContainer::AcquireUnit(OpenGLUInt program, OpenGL
     auto unit = 0;
     for (auto& item : linkContainer)
     {
+        /// 如果已分配并正在使用，是否增加链接计数？
         if (program == item.GetProgram() && index == item.GetIndex())
         {
             item.AddLinkCount();
             return unit;
         }
 
+        /// 找到一个以前使用过但现在可用的单元。
         if (item.GetLinkCount() == 0)
         {
             if (availUnit == -1)
@@ -46,8 +48,10 @@ int Rendering::ProgramIndexUnitContainer::AcquireUnit(OpenGLUInt program, OpenGL
         ++unit;
     }
 
+    /// 以前没有使用过的新单元号？
     if (availUnit == -1)
     {
+        /// 请考虑查询最大单元数，并检查是否未超过此数。
         availUnit = boost::numeric_cast<int>(linkContainer.size());
         linkContainer.emplace_back(1, program, index);
     }

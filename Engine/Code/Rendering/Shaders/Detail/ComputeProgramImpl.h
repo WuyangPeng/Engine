@@ -49,6 +49,8 @@ namespace Rendering
         NODISCARD virtual ComputeProgramSharedPtr Clone() const = 0;
         NODISCARD virtual OpenGLUInt GetProgramHandle() const noexcept = 0;
 
+        void CreateComputeShader();
+
     private:
         ShaderSharedPtr computeShader;
     };

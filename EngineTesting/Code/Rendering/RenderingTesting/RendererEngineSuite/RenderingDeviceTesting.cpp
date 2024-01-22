@@ -38,5 +38,5 @@ void Rendering::RenderingDeviceTesting::MainTest()
 void Rendering::RenderingDeviceTesting::SwapBuffersTest()
 {
     auto renderingDevice = RenderingDevice::Create();
-    renderingDevice.SwapBuffers(0);
+    renderingDevice.DisplayColorBuffer(0);
 }

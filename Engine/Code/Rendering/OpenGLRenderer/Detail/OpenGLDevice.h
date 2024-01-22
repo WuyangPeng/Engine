@@ -33,8 +33,7 @@ namespace Rendering
 
         NODISCARD RenderingDeviceSharedPtr Clone() const override;
 
-        void SwapBuffers(int syncInterval) override;
-        void ResetSize() override;
+        void DisplayColorBuffer(int syncInterval) override;
         void InitDevice() noexcept override;
         void Release() noexcept override;
 
@@ -46,7 +45,7 @@ namespace Rendering
         NODISCARD bool HasDepthRange01() const noexcept override;
         NODISCARD std::string GetShaderName(const std::string& name) const override;
         NODISCARD std::string GetShaderExtendName() const override;
-        NODISCARD void Resize(int width, int height) override;
+        void Resize(int width, int height) override;
 
         NODISCARD int64_t DrawPrimitive(RendererObjectBridge& rendererObjectBridge,
                                         const VertexBufferSharedPtr& vertexBuffer,
@@ -76,8 +75,12 @@ namespace Rendering
         void Disable(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program);
         void EnableConstantBuffers(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program);
         void DisableConstantBuffers(Shader& shader, OpenGLUInt program);
+        void EnableTextureBuffers(Shader& shader, OpenGLUInt program) noexcept;
+        void DisableTextureBuffers(Shader& shader, OpenGLUInt program) noexcept;
         void EnableStructuredBuffers(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program);
         void DisableStructuredBuffers(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program);
+        void EnableRawBuffers(Shader& shader, OpenGLUInt program) noexcept;
+        void DisableRawBuffers(Shader& shader, OpenGLUInt program) noexcept;
         void EnableTextures(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program);
         void DisableTextures(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program);
         void EnableTextureArrays(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program);
@@ -85,6 +88,7 @@ namespace Rendering
         void EnableSamplers(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program);
         void DisableSamplers(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program);
 
+        /// 支持绘图。
         NODISCARD static int64_t DrawPrimitive(const VertexBuffer& vertexBuffer, const IndexBuffer& indexBuffer);
 
     private:
@@ -96,6 +100,11 @@ namespace Rendering
         ProgramIndexUnitContainer textureImageUnit;
         ProgramIndexUnitContainer uniformUnit;
         ProgramIndexUnitContainer shaderStorageUnit;
+
+        /// 为每个声明用于执行的着色器的原子计数器缓冲区对象创建一个前端对象（对用户隐藏）。
+        /// 执行之后，这些对象将保留以供下次使用。
+        /// 只有当需要更大的缓冲区时，它们才会被销毁以创建新的缓冲区，但缓冲区大小永远不会变小。
+        /// 这里使用RawBuffer类型，因为根据定义，它是每个元素4个字节，其中4个字节是每个atomic_uint计数器的大小。
         RawBufferContainer atomicCounterRawBuffers;
     };
 }

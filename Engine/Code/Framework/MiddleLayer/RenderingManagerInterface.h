@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/08 14:03)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/13 14:29)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_RENDERING_MANAGER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_RENDERING_MANAGER_INTERFACE_H
@@ -15,10 +15,11 @@
 #include "EngineMiddleLayerInterface.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/Helper/SharedPtrMacro.h"
 #include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
 
-FRAMEWORK_NON_COPY_EXPORT_IMPL(ViewMiddleLayerImpl);
+FRAMEWORK_NON_COPY_EXPORT_IMPL(RenderingManagerImpl);
 FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
 // 渲染中间层接口类。
@@ -68,15 +69,14 @@ namespace Framework
         NODISCARD ConstRendererSharedPtr GetRenderer() const;
 
     private:
-        using ViewMiddleLayerPackageType = CoreTools::NonCopyImpl<ViewMiddleLayerImpl>;
+        using RenderingPackageType = CoreTools::NonCopyImpl<RenderingManagerImpl>;
 
     private:
         PackageType impl;
-        ViewMiddleLayerPackageType viewMiddleLayer;
+        RenderingPackageType rendering;
     };
 
-    using RenderingManagerInterfaceSharedPtr = std::shared_ptr<RenderingManagerInterface>;
-    using ConstRenderingManagerInterfaceSharedPtr = std::shared_ptr<const RenderingManagerInterface>;
+    CORE_TOOLS_SHARED_PTR_DECLARE(RenderingManagerInterface);
 }
 
 #endif  // FRAMEWORK_MIDDLE_LAYER_RENDERING_MANAGER_INTERFACE_H

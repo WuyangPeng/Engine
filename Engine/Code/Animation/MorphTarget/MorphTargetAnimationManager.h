@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/01 19:53)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/10 19:39)
 
 #ifndef ANIMATION_MORPH_TARGET_MORPH_TARGET_ANIMATION_MANAGER_H
 #define ANIMATION_MORPH_TARGET_MORPH_TARGET_ANIMATION_MANAGER_H

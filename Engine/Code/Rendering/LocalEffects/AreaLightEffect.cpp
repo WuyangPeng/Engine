@@ -1,11 +1,11 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/07 12:40)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/10 10:18)
 
 #include "Rendering/RenderingExport.h"
 
@@ -28,14 +28,16 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, AreaLightEffect)
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, AreaLightEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, AreaLightEffect);
 
-Rendering::AreaLightEffect::AreaLightEffect(ProgramFactory& factory,
+Rendering::AreaLightEffect::AreaLightEffect(const std::string& name,
+                                            ProgramFactory& factory,
                                             const BaseRendererSharedPtr& baseRenderer,
                                             SamplerStateFilter filter,
                                             SamplerStateMode mode0,
                                             SamplerStateMode mode1,
                                             const Texture2DSharedPtr& baseTexture,
                                             const Texture2DSharedPtr& normalTexture)
-    : ParentType{ factory,
+    : ParentType{ name,
+                  factory,
                   baseRenderer,
                   "Resource/Shader/AreaLightEffect.vs",
                   "Resource/Shader/AreaLightEffect.ps" },
@@ -44,7 +46,7 @@ Rendering::AreaLightEffect::AreaLightEffect(ProgramFactory& factory,
             mode1,
             baseTexture,
             normalTexture,
-            Material::Create()->GetStreamingSize(),
+            Material::Create("Material")->GetStreamingSize(),
             Rendering::GetStreamSize<Colour<float>>(),
             AreaLightEffectParameters::Create().GetStreamingSize() }
 {

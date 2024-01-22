@@ -11,7 +11,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/OpenGLRenderer/OpenGLVertexFormatDataDetail.h"
 #include "Rendering/Resources/Buffers/VertexFormat.h"
 
 Rendering::OpenGLVertexFormatDataTesting::OpenGLVertexFormatDataTesting(const OStreamShared& stream)

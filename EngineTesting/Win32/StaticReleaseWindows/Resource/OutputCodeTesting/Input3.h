@@ -45,7 +45,6 @@ namespace OutputCSVTesting
 
         NODISCARD String GetTest5() const override;
 
-
     private:
         int id;  // id
         bool test0;  // ≤‚ ‘0

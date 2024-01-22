@@ -1,21 +1,25 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/08 16:27)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/12 22:57)
 
 #include "Framework/FrameworkExport.h"
 
 #include "SystemManagerInterface.h"
 #include "Flags/SystemMiddleLayerFlags.h"
 #include "Detail/EngineMiddleLayerInterfaceImpl.h"
+#include "Detail/SystemManagerImpl.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
 Framework::SystemManagerInterface::SystemManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
-    : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ System::EnumCastUnderlying(SystemMiddleLayer::Count) }
+    : ParentType{ middleLayerPlatform, environmentDirectory },
+      impl{ System::EnumCastUnderlying(SystemMiddleLayer::Count) },
+      system{ CoreTools::DisableNotThrow::Disable }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }

@@ -13,6 +13,7 @@
 #include "Reflection.h"
 #include "Detail/ComputeProgramFactory.h"
 #include "Detail/ComputeProgramImpl.h"
+#include "System/OpenGL/Flags/OpenGLShaderFlags.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -24,6 +25,24 @@ Rendering::ComputeProgram Rendering::ComputeProgram::Create()
     return ComputeProgram{ CoreTools::DisableNotThrow::Disable };
 }
 
+Rendering::ComputeProgram::ComputeProgramSharedPtr Rendering::ComputeProgram::Create(const std::string& computeShaderSource, const std::string& version, const ProgramDefines& defines)
+{
+    if (computeShaderSource.empty())
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("程序必须具有计算着色器。 "))
+    }
+
+    const auto programHandle = GLSLProgramHandle::Create();
+
+    GLSLShaderHandle computeShaderHandle{ System::ShaderType::Compute, computeShaderSource, version, defines, programHandle.GetProgramHandle(), SYSTEM_TEXT("编译计算着色器失败。") };
+    programHandle.Link();
+
+    const auto program = std::make_shared<ComputeProgram>(programHandle, computeShaderHandle);
+    program->CreateComputeShader();
+
+    return program;
+}
+
 Rendering::ComputeProgram::ComputeProgram(CoreTools::DisableNotThrow disableNotThrow)
     : impl{ CoreTools::ImplCreateUseFactory::Default }
 {
@@ -32,7 +51,7 @@ Rendering::ComputeProgram::ComputeProgram(CoreTools::DisableNotThrow disableNotT
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::ComputeProgram::ComputeProgram(OpenGLUInt programHandle, OpenGLUInt computeShaderHandle)
+Rendering::ComputeProgram::ComputeProgram(const GLSLProgramHandle& programHandle, const GLSLShaderHandle& computeShaderHandle)
     : impl{ CoreTools::ImplCreateUseFactory::Default, programHandle, computeShaderHandle }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -66,6 +85,13 @@ Rendering::Reflection Rendering::ComputeProgram::GetReflector() const
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return impl->GetReflector();
+}
+
+void Rendering::ComputeProgram::CreateComputeShader()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->CreateComputeShader();
 }
 
 Rendering::ComputeProgram::OpenGLUInt Rendering::ComputeProgram::GetProgramHandle() const noexcept

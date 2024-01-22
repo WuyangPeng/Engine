@@ -49,7 +49,6 @@ namespace CSVConfigure
         {
             return  id * 100 + reward;
         }
-
     private:
         int id;  // Id
         int nextId;  // ÏÂÒ»¼¶Id

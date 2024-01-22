@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2024/01/02 15:09)
+/// 版本：1.0.0.4 (2024/01/17 10:52)
 
 #ifndef RENDERING_RENDERER_ENGINE_BASE_RENDERER_IMPL_H
 #define RENDERING_RENDERER_ENGINE_BASE_RENDERER_IMPL_H
@@ -114,7 +114,6 @@ namespace Rendering
 
         void InitDevice();
         void Release();
-        void ResetSize();
 
         void ClearColorBuffer();
         void ClearDepthBuffer();
@@ -127,6 +126,7 @@ namespace Rendering
         NODISCARD int64_t Draw(const OverlayEffectSharedPtr& overlay);
 
         void SetAllowOcclusionQuery(bool allow) noexcept;
+        void SetWarnOnNonemptyBridges(bool warn) noexcept;
 
         void Enable(const DrawTargetSharedPtr& target);
         void Disable(const DrawTargetSharedPtr& target);
@@ -164,7 +164,26 @@ namespace Rendering
         void WaitForFinish();
         void Flush();
 
+        void CopyGpuToGpu(const BufferSharedPtr& buffer0, const BufferSharedPtr& buffer1);
+
+        void CopyGpuToGpu(const TextureSingleSharedPtr& texture0, const TextureSingleSharedPtr& texture1);
+
+        void CopyGpuToGpu(const TextureSingleSharedPtr& texture0,
+                          const TextureSingleSharedPtr& texture1,
+                          int level);
+
+        void CopyGpuToGpu(const TextureArraySharedPtr& textureArray0,
+                          const TextureArraySharedPtr& textureArray1);
+
+        void CopyGpuToGpu(const TextureArraySharedPtr& textureArray0,
+                          const TextureArraySharedPtr& textureArray1,
+                          int item,
+                          int level);
+
     private:
+        /// 支持绘图。
+        /// 如果启用了遮挡查询，则返回值是通过深度和模具测试的样本数，实际上是绘制的像素数。
+        /// 如果遮挡查询被禁用，函数将返回0。
         NODISCARD int64_t DrawPrimitive(const VertexBufferSharedPtr& vertexBuffer,
                                         const IndexBufferSharedPtr& indexBuffer,
                                         const VisualEffectSharedPtr& effect);
@@ -179,10 +198,11 @@ namespace Rendering
     private:
         RendererTypes rendererTypes;
         RendererAdapter rendererAdapter;
-        RendererClear rendererClear;
-        GlobalFont globalFont;
-        GlobalState globalState;
+        RendererClear rendererClear;  // 清除值。
+        GlobalFont globalFont;  // 用于文本呈现的字体。
+        GlobalState globalState;  // 全局状态。
         bool allowOcclusionQuery;
+        bool warnOnNonemptyBridges;
     };
 }
 

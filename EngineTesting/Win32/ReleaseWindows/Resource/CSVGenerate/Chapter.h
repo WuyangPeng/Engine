@@ -49,7 +49,6 @@ namespace CSVConfigure
 
     private:
         void Checking() const;
-
     private:
         int id;  // Id
         int nextId;  // ÏÂÒ»¹ØId

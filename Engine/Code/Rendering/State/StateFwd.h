@@ -10,6 +10,8 @@
 #ifndef RENDERING_STATE_FWD_H
 #define RENDERING_STATE_FWD_H
 
+#include "CoreTools/Helper/SharedPtrMacro.h"
+
 namespace Rendering
 {
     class DrawingState;
@@ -19,6 +21,14 @@ namespace Rendering
     class DepthStencilState;
     class RasterizerState;
     class SamplerState;
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(DrawingState);
+    CORE_TOOLS_SHARED_PTR_DECLARE(BlendStateTarget);
+    CORE_TOOLS_SHARED_PTR_DECLARE(BlendState);
+    CORE_TOOLS_SHARED_PTR_DECLARE(DepthStencilStateFace);
+    CORE_TOOLS_SHARED_PTR_DECLARE(DepthStencilState);
+    CORE_TOOLS_SHARED_PTR_DECLARE(RasterizerState);
+    CORE_TOOLS_SHARED_PTR_DECLARE(SamplerState);
 
     class GlobalState;
 

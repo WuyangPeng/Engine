@@ -181,7 +181,6 @@ xcopy "$(ProjectDir)/Resource/GameTestingTemplate/" "$(AssistInclude)/../$(Platf
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/AssistToolsD.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -202,8 +201,7 @@ xcopy "$(ProjectDir)/Resource/GameTestingTemplate/" "$(AssistInclude)/../$(Platf
 </Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -227,7 +225,6 @@ xcopy "$(ProjectDir)/Resource/GameTestingTemplate/" "$(AssistInclude)/../$(Platf
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/AssistTools.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 </Command>
     </PostBuildEvent>
@@ -253,7 +250,6 @@ xcopy "$(ProjectDir)/Resource/GameTestingTemplate/" "$(AssistInclude)/../$(Platf
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -274,7 +270,6 @@ xcopy "$(ProjectDir)/Resource/GameTestingTemplate/" "$(AssistInclude)/../$(Platf
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/AssistToolsD.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -294,8 +289,7 @@ xcopy "$(ProjectDir)/Resource/GameTestingTemplate/" "$(AssistInclude)/../$(Platf
 </Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -322,7 +316,6 @@ xcopy "$(ProjectDir)/Resource/GameTestingTemplate/" "$(AssistInclude)/../$(Platf
 xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/AssistTools.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "$(ToolInclude)/GameTestingTemplate/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(ToolInclude)/GameTestingTemplate/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Log.json" "$(ToolInclude)/GameTestingTemplate/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/GameTestingTemplate/" "$(ToolInclude)/GameTestingTemplate/Resource/GameTestingTemplate/" /F /Y /E
 xcopy "$(ProjectDir)/../../../../x64/ReleaseWindows/GameTestingTemplate.exe" "$(ToolInclude)/GameTestingTemplate/" /F /Y /E
@@ -349,8 +342,7 @@ xcopy "$(ProjectDir)/Resource/GameTestingTemplate/" "$(AssistInclude)/../$(Platf
 </Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/GameTemplate.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

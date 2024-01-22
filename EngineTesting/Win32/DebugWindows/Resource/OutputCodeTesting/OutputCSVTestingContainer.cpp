@@ -32,9 +32,8 @@ OutputCSVTesting::OutputCSVTestingContainer::OutputCSVTestingContainer(const Str
 
 void OutputCSVTesting::OutputCSVTestingContainer::Parsing(const String& directory)
 {
-    const std::filesystem::path path{ directory };
-
-    for (const auto& inputPath : std::filesystem::directory_iterator(path))
+    for (const std::filesystem::path path{ directory };
+         const auto& inputPath : std::filesystem::directory_iterator(path))
     {
         Parsing(inputPath);
     }

@@ -115,7 +115,7 @@ void Mathematics::Delaunay3<Real>::Init()
             expand = Math<Real>::GetValue(1 << 10);
             query = std::make_shared<Query3Int64<Real>>(sVertices);
         }
-        else if (queryType == QueryType::Interger)
+        else if (queryType == QueryType::Integer)
         {
             expand = Math<Real>::GetValue(1 << 20);
             query = std::make_shared<Query3Integer<Real>>(sVertices);
@@ -665,7 +665,7 @@ void Mathematics::Delaunay3<Real>::LoadFile(const String& filename)
             query = std::make_shared<Query3Int64<Real>>(sVertices);
             break;
         }
-        case QueryType::Interger:
+        case QueryType::Integer:
         {
             query = std::make_shared<Query3Integer<Real>>(sVertices);
             break;

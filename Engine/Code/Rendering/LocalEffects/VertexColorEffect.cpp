@@ -14,7 +14,8 @@
 #include "Rendering/Shaders/Shader.h"
 
 Rendering::VertexColorEffect::VertexColorEffect(ProgramFactory& factory, const BaseRendererSharedPtr& baseRenderer)
-    : ParentType{ factory,
+    : ParentType{ "VertexColorEffect",
+                  factory,
                   baseRenderer,
                   "Resource/Shader/VertexColorEffect.vs",
                   "Resource/Shader/VertexColorEffect.ps" }

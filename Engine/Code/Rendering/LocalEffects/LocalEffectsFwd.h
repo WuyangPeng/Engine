@@ -5,10 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2024/01/09 19:07)
+/// 版本：1.0.0.4 (2024/01/10 09:22)
 
 #ifndef RENDERING_LOCAL_EFFECTS_FWD_H
 #define RENDERING_LOCAL_EFFECTS_FWD_H
+
+#include "CoreTools/Helper/SharedPtrMacro.h"
 
 namespace Rendering
 {
@@ -41,6 +43,8 @@ namespace Rendering
 
     enum class FontType;
     enum class LightType;
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(ConstantColorEffect);
 }
 
 #endif  // RENDERING_LOCAL_EFFECTS_FWD_H

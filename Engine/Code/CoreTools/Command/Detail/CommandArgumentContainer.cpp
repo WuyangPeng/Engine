@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/23 10:07)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/10 20:33)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,6 +14,8 @@
 #include "CoreTools/Command/CommandArgument.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+
+#include <ranges>
 
 using namespace std::literals;
 
@@ -175,9 +177,9 @@ std::string CoreTools::CommandArgumentContainer::ExcessArguments() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    for (const auto& element : commandArgument)
+    for (const auto& element : commandArgument | std::views::values)
     {
-        if (const auto& argument = element.second; !argument.IsUsed())
+        if (const auto& argument = element; !argument.IsUsed())
         {
             return argument.GetName();
         }
@@ -192,9 +194,9 @@ int CoreTools::CommandArgumentContainer::GetExcessArgumentsCount() const noexcep
 
     auto count = 0;
 
-    for (const auto& element : commandArgument)
+    for (const auto& element : commandArgument | std::views::values)
     {
-        if (const auto& argument = element.second; !argument.IsUsed())
+        if (const auto& argument = element; !argument.IsUsed())
         {
             ++count;
         }

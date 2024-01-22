@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/05 15:36)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2024/01/09 20:36)
 
 #ifndef RENDERING_LOCAL_EFFECTS_MATERIAL_H
 #define RENDERING_LOCAL_EFFECTS_MATERIAL_H
@@ -31,8 +31,8 @@ namespace Rendering
         using ConstMaterialSharedPtr = std::shared_ptr<const ClassType>;
 
     public:
-        NODISCARD static MaterialSharedPtr Create();
-        NODISCARD static MaterialSharedPtr Create(const Colour& emissive, const Colour& ambient, const Colour& diffuse, const Colour& specular);
+        NODISCARD static MaterialSharedPtr Create(const std::string& name);
+        NODISCARD static MaterialSharedPtr Create(const std::string& name, const Colour& emissive, const Colour& ambient, const Colour& diffuse, const Colour& specular);
 
     protected:
         enum class MaterialCreate
@@ -41,8 +41,8 @@ namespace Rendering
         };
 
     public:
-        explicit Material(MaterialCreate materialCreate);
-        Material(MaterialCreate materialCreate, const Colour& emissive, const Colour& ambient, const Colour& diffuse, const Colour& specular);
+        Material(MaterialCreate materialCreate, const std::string& name);
+        Material(MaterialCreate materialCreate, const std::string& name, const Colour& emissive, const Colour& ambient, const Colour& diffuse, const Colour& specular);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

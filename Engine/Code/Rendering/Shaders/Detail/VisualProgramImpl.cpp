@@ -20,10 +20,12 @@
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
 #include "Rendering/OpenGLRenderer/Detail/GLSL/GLSLVisualProgram.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
+#include "Rendering/Shaders/Flags/ReferenceType.h"
 #include "Rendering/Shaders/Reflection.h"
 #include "Rendering/Shaders/Shader.h"
 
-Rendering::VisualProgramImpl::VisualProgramSharedPtr Rendering::VisualProgramImpl::Create(OpenGLUInt programHandle, OpenGLUInt vertexShaderHandle, OpenGLUInt pixelShaderHandle, OpenGLUInt geometryShaderHandle)
+Rendering::VisualProgramImpl::VisualProgramSharedPtr Rendering::VisualProgramImpl::Create(const GLSLProgramHandle& programHandle, const GLSLShaderHandle& vertexShaderHandle, const GLSLShaderHandle& pixelShaderHandle, const GLSLShaderHandle& geometryShaderHandle)
 {
     return std::make_shared<GLSLVisualProgram>(programHandle, vertexShaderHandle, pixelShaderHandle, geometryShaderHandle);
 }
@@ -251,4 +253,47 @@ Rendering::VisualProgramImpl::ConstObjectSharedPtrContainer Rendering::VisualPro
     result.insert(result.end(), geometryResult.begin(), geometryResult.end());
 
     return result;
+}
+
+void Rendering::VisualProgramImpl::CreateVertexShader()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    const auto reflector = GetReflector();
+    const auto shader = std::make_shared<Shader>(GraphicsObjectType::VertexShader, RendererTypes::OpenGL, reflector, ReferenceType::Vertex);
+
+    SetVertexShader(shader);
+}
+
+void Rendering::VisualProgramImpl::CreatePixelShader()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    const auto reflector = GetReflector();
+    const auto shader = std::make_shared<Shader>(GraphicsObjectType::PixelShader, RendererTypes::OpenGL, reflector, ReferenceType::Pixel);
+
+    SetPixelShader(shader);
+}
+
+void Rendering::VisualProgramImpl::CreateGeometryShader()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    const auto reflector = GetReflector();
+    const auto shader = std::make_shared<Shader>(GraphicsObjectType::GeometryShader, RendererTypes::OpenGL, reflector, ReferenceType::Geometry);
+
+    SetGeometryShader(shader);
+}
+
+void Rendering::VisualProgramImpl::CreateShader(bool createGeometryShader)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    CreateVertexShader();
+    CreatePixelShader();
+
+    if (createGeometryShader)
+    {
+        CreateGeometryShader();
+    }
 }

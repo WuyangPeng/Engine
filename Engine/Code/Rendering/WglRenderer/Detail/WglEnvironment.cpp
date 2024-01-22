@@ -136,6 +136,7 @@ System::PixelFormatDescriptor Rendering::WglEnvironment::GetPixelFormatDescripto
 
 void Rendering::WglEnvironment::SetWindowPixelFormat(const PixelFormatDescriptor& pixelFormatDescriptor)
 {
+    /// 设置渲染上下文的像素格式。
     const auto pixelFormat = System::ChooseWindowPixelFormat(device, &pixelFormatDescriptor);
     if (pixelFormat == 0)
     {
@@ -150,12 +151,14 @@ void Rendering::WglEnvironment::SetWindowPixelFormat(const PixelFormatDescriptor
 
 void Rendering::WglEnvironment::CreateContext()
 {
+    /// 创建OpenGL上下文。
     immediate = System::CreateWglContext(device);
     if (immediate == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("wglCreateContext失败。"))
     }
 
+    /// 激活上下文。
     if (!System::MakeWglCurrent(device, immediate))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("wglMakeCurrent失败。"))

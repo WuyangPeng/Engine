@@ -10,13 +10,13 @@
 #include "Rendering/RenderingExport.h"
 
 #include "DirectionalLightEffect.h"
-#include "Rendering/LocalEffects/Lighting.h" 
 #include "LightCameraGeometry.h"
 #include "Material.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
+#include "Rendering/LocalEffects/Lighting.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
 #include "Rendering/Shaders/Shader.h"
 
@@ -31,7 +31,8 @@ Rendering::DirectionalLightEffect::DirectionalLightEffect(ProgramFactory& factor
                                                           const MaterialSharedPtr& material,
                                                           const LightSharedPtr& lighting,
                                                           const LightCameraGeometrySharedPtr& geometry)
-    : ParentType{ factory,
+    : ParentType{ "DirectionalLightEffect",
+                  factory,
                   baseRenderer,
                   select ? "Resource/Shader/DirectionalLightEffect.ps.vs" : "Resource/Shader/DirectionalLightEffect.vs.vs",
                   select ? "Resource/Shader/DirectionalLightEffect.ps.ps" : "Resource/Shader/DirectionalLightEffect.vs.ps",

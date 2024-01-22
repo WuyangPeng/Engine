@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎版本：0.9.0.11 (2023/06/08 17:07)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 23:35)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_H
 #define MATHEMATICS_QUERY_QUERY2_H
@@ -32,14 +32,14 @@ namespace Mathematics
 
     public:
         // 基类处理浮点查询。
-        explicit Query2(const VerticesType& vertices);
+        explicit Query2(VerticesType vertices) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         NODISCARD QueryType GetType() const noexcept override;
 
         NODISCARD int GetNumVertices() const;
-        NODISCARD Vector2 GetVertice(int index) const;
+        NODISCARD Vector2 GetVertex(int index) const;
 
         // 关于一个点的各种几何对象之间的关系查询。
 

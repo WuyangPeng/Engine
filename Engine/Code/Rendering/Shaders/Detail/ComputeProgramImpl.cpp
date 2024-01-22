@@ -13,6 +13,9 @@
 #include "NullComputeProgram.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
+#include "Rendering/Shaders/Flags/ReferenceType.h"
+#include "Rendering/Shaders/Reflection.h"
 #include "Rendering/Shaders/Shader.h"
 
 Rendering::ComputeProgramImpl::ComputeProgramImpl() noexcept
@@ -47,4 +50,14 @@ void Rendering::ComputeProgramImpl::SetComputeShader(const ShaderSharedPtr& shad
     }
 
     computeShader = shader;
+}
+
+void Rendering::ComputeProgramImpl::CreateComputeShader()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    const auto reflector = GetReflector();
+    const auto shader = std::make_shared<Shader>(GraphicsObjectType::ComputeShader, RendererTypes::OpenGL, reflector, ReferenceType::Compute);
+
+    SetComputeShader(shader);
 }

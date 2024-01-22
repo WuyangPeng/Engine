@@ -70,18 +70,11 @@ Rendering::OpenGLDevice::RenderingDeviceSharedPtr Rendering::OpenGLDevice::Clone
     return std::make_shared<ClassType>(*this);
 }
 
-void Rendering::OpenGLDevice::SwapBuffers(int syncInterval)
+void Rendering::OpenGLDevice::DisplayColorBuffer(int syncInterval)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     System::UnusedFunction(syncInterval);
-
-    CoreTools::DisableNoexcept();
-}
-
-void Rendering::OpenGLDevice::ResetSize()
-{
-    RENDERING_CLASS_IS_VALID_9;
 
     CoreTools::DisableNoexcept();
 }
@@ -185,6 +178,7 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(RendererObjectBridge& rendererObj
 
     if (EnableShaders(rendererObjectBridge, *effect, programHandle))
     {
+        // 启用顶点缓冲区和输入布局。
         RendererObjectBridge::RendererObjectSharedPtr gl4VertexBuffer{};
         OpenGLInputLayoutManager::OpenGLInputLayoutSharedPtr gl4Layout{};
         if (vertexBuffer->StandardUsage())
@@ -195,6 +189,7 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(RendererObjectBridge& rendererObj
             gl4Layout->Enable();
         }
 
+        // 启用索引缓冲区。
         RendererObjectBridge::RendererObjectSharedPtr gl4IndexBuffer{};
         if (indexBuffer != nullptr)
         {
@@ -204,11 +199,13 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(RendererObjectBridge& rendererObj
 
         numPixelsDrawn = DrawPrimitive(*vertexBuffer, *indexBuffer);
 
+        // 禁用顶点缓冲区和输入布局。
         if (vertexBuffer->StandardUsage())
         {
             gl4Layout->Disable();
         }
 
+        // 禁用索引缓冲区。
         if (gl4IndexBuffer != nullptr)
         {
             gl4IndexBuffer->Disable();
@@ -345,7 +342,9 @@ void Rendering::OpenGLDevice::Enable(RendererObjectBridge& rendererObjectBridge,
     RENDERING_CLASS_IS_VALID_9;
 
     EnableConstantBuffers(rendererObjectBridge, shader, program);
+    EnableTextureBuffers(shader, program);
     EnableStructuredBuffers(rendererObjectBridge, shader, program);
+    EnableRawBuffers(shader, program);
     EnableTextures(rendererObjectBridge, shader, program);
     EnableTextureArrays(rendererObjectBridge, shader, program);
     EnableSamplers(rendererObjectBridge, shader, program);
@@ -358,7 +357,9 @@ void Rendering::OpenGLDevice::Disable(RendererObjectBridge& rendererObjectBridge
     DisableSamplers(rendererObjectBridge, shader, program);
     DisableTextureArrays(rendererObjectBridge, shader, program);
     DisableTextures(rendererObjectBridge, shader, program);
+    DisableRawBuffers(shader, program);
     DisableStructuredBuffers(rendererObjectBridge, shader, program);
+    DisableTextureBuffers(shader, program);
     DisableConstantBuffers(shader, program);
 }
 
@@ -398,29 +399,48 @@ void Rendering::OpenGLDevice::DisableConstantBuffers(Shader& shader, OpenGLUInt 
     }
 }
 
+void Rendering::OpenGLDevice::EnableTextureBuffers(Shader& shader, OpenGLUInt program) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(shader, program);
+}
+
+void Rendering::OpenGLDevice::DisableTextureBuffers(Shader& shader, OpenGLUInt program) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(shader, program);
+}
+
 void Rendering::OpenGLDevice::EnableStructuredBuffers(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program)
 {
     RENDERING_CLASS_IS_VALID_9;
 
+    /// 配置着色器使用的原子计数器缓冲区对象。
     const auto& atomicCounters = shader.GetData(System::EnumCastUnderlying(ShaderDataLookup::AtomicCounterShaderDataLookup));
     const auto& atomicCounterBuffers = shader.GetData(System::EnumCastUnderlying(ShaderDataLookup::AtomicCounterBufferShaderDataLookup));
     for (auto atomicCounterBufferIndex = 0u; atomicCounterBufferIndex < atomicCounterBuffers.size(); ++atomicCounterBufferIndex)
     {
         auto const& atomicCounterBuffer = atomicCounterBuffers.at(atomicCounterBufferIndex);
 
+        // 是否分配新的原始缓冲区？
         if (atomicCounterRawBuffers.size() <= atomicCounterBufferIndex)
         {
             atomicCounterRawBuffers.emplace_back(nullptr);
         }
 
+        /// 查看在该索引处定义的当前原始缓冲区。如果刚插入新位置，则可能为nullptr。
         auto& rawBuffer = atomicCounterRawBuffers.at(atomicCounterBufferIndex);
 
+        /// 如果原始缓冲区不够大，请解除旧缓冲区的绑定，并准备创建新缓冲区。
         if (rawBuffer && rawBuffer->GetNumBytes() < (atomicCounterBuffer.GetNumBytes()))
         {
             rendererObjectBridge.UnbindRendererObject(rawBuffer);
             rawBuffer = nullptr;
         }
 
+        /// 查找当前映射的OpenGLAtomicCounterBuffer。
         std::shared_ptr<OpenGLAtomicCounterBuffer> openGLAtomicCounterBuffer = nullptr;
         if (rawBuffer)
         {
@@ -428,12 +448,15 @@ void Rendering::OpenGLDevice::EnableStructuredBuffers(RendererObjectBridge& rend
         }
         else
         {
+            /// 根据定义，RawBuffer包含4字节元素。我们不需要CPU端存储，但必须能够在缓冲区之间复制值。
             rawBuffer = std::make_shared<RawBuffer>("RawBuffer", (atomicCounterBuffer.GetNumBytes() + 3) / 4, false);
             rawBuffer->SetUsage(UsageType::DynamicUpdate);
 
+            /// 执行手动绑定操作，因为这是从RawBuffer到OpenGLAtomicCounterBuffer的特殊映射
             openGLAtomicCounterBuffer = boost::polymorphic_pointer_cast<OpenGLAtomicCounterBuffer>(rendererObjectBridge.BindRendererObject(RendererTypes::OpenGL, rawBuffer));
         }
 
+        /// 绑定此原子计数器缓冲区。
         openGLAtomicCounterBuffer->AttachToUnit(atomicCounterBuffer.GetBindPoint());
     }
 
@@ -450,22 +473,30 @@ void Rendering::OpenGLDevice::EnableStructuredBuffers(RendererObjectBridge& rend
                 const auto unit = shaderStorageUnit.AcquireUnit(program, blockIndex);
                 System::SetGLShaderStorageBlockBinding(program, blockIndex, unit);
 
+                /// 不要在此处使用glBindBufferBase。
+                /// 在OpenGLStructuredBuffer中使用AttachToUnit方法。
                 openGLStructuredBuffer->AttachToUnit(unit);
 
+                /// structuredBuffer.IsGpuWritable()标志用于指示是否存在与此结构化缓冲区相关联的原子计数器。
                 if (structuredBuffer.IsGpuWritable())
                 {
+                    /// 是否需要重置结构化缓冲区计数器？
                     if (!openGLStructuredBuffer->SetNumActiveElements())
                     {
                         LOG_SINGLETON_ENGINE_APPENDER(Info, Rendering, SYSTEM_TEXT("openGLStructuredBuffer SetNumActiveElements 失败。"));
                     }
 
+                    /// 此结构化缓冲区具有到相关原子计数器表项的索引。
                     auto const acIndex = structuredBuffer.GetExtra();
 
+                    /// 着色器中的相关计数器在哪里？
                     auto const acbIndex = atomicCounters.at(acIndex).GetBindPoint();
                     auto const acbOffset = atomicCounters.at(acIndex).GetExtra();
 
+                    /// 检索OpenGL原子计数器缓冲区对象。
                     auto openGLAtomicCounterBuffer = boost::polymorphic_pointer_cast<OpenGLAtomicCounterBuffer>(rendererObjectBridge.GetRendererObject(atomicCounterRawBuffers.at(acbIndex)));
 
+                    /// 将计数器值从结构化缓冲区对象复制到原子计数器缓冲区中的适当位置。
                     if (!openGLStructuredBuffer->CopyCounterValueToBuffer(openGLAtomicCounterBuffer.get(), acbOffset))
                     {
                         LOG_SINGLETON_ENGINE_APPENDER(Info, Rendering, SYSTEM_TEXT("openGLStructuredBuffer CopyCounterValueToBuffer 失败。"));
@@ -480,6 +511,7 @@ void Rendering::OpenGLDevice::DisableStructuredBuffers(RendererObjectBridge& ren
 {
     RENDERING_CLASS_IS_VALID_9;
 
+    /// 取消绑定任何原子计数器缓冲区。
     const auto& atomicCounters = shader.GetData(System::EnumCastUnderlying(ShaderDataLookup::AtomicCounterShaderDataLookup));
     const auto& atomicCounterBuffers = shader.GetData(System::EnumCastUnderlying(ShaderDataLookup::AtomicCounterBufferShaderDataLookup));
 
@@ -503,15 +535,20 @@ void Rendering::OpenGLDevice::DisableStructuredBuffers(RendererObjectBridge& ren
                 SetGLBindBufferBase(System::BindBuffer::ShaderStorageBuffer, unit, 0);
                 shaderStorageUnit.ReleaseUnit(unit);
 
+                /// structuredBuffer.IsGpuWritable()标志用于指示是否存在与此结构化缓冲区相关联的原子计数器。
                 if (structuredBuffer.IsGpuWritable())
                 {
+                    /// 此结构化缓冲区具有到相关原子计数器表项的索引。
                     auto const acIndex = structuredBuffer.GetExtra();
 
+                    /// 着色器中的相关计数器在哪里？
                     auto const acbIndex = atomicCounters.at(acIndex).GetBindPoint();
                     auto const acbOffset = atomicCounters.at(acIndex).GetExtra();
 
+                    /// 检索OpenGL原子计数器缓冲区对象。
                     auto openGLAtomicCounterBuffer = boost::polymorphic_pointer_cast<OpenGLAtomicCounterBuffer>(rendererObjectBridge.GetRendererObject(atomicCounterRawBuffers.at(acbIndex)));
 
+                    /// 将计数器值从结构化缓冲区对象复制到原子计数器缓冲区中的适当位置。
                     if (!openGLStructuredBuffer->CopyCounterValueFromBuffer(openGLAtomicCounterBuffer.get(), acbOffset))
                     {
                         LOG_SINGLETON_ENGINE_APPENDER(Info, Rendering, SYSTEM_TEXT("openGLStructuredBuffer openGLAtomicCounterBuffer 失败。"));
@@ -520,6 +557,20 @@ void Rendering::OpenGLDevice::DisableStructuredBuffers(RendererObjectBridge& ren
             }
         }
     }
+}
+
+void Rendering::OpenGLDevice::EnableRawBuffers(Shader& shader, OpenGLUInt program) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(shader, program);
+}
+
+void Rendering::OpenGLDevice::DisableRawBuffers(Shader& shader, OpenGLUInt program) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(shader, program);
 }
 
 void Rendering::OpenGLDevice::EnableTextures(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program)
@@ -536,9 +587,14 @@ void Rendering::OpenGLDevice::EnableTextures(RendererObjectBridge& rendererObjec
 
         const auto texture = boost::polymorphic_pointer_cast<OpenGLTextureSingle>(rendererObjectBridge.BindRendererObject(RendererTypes::OpenGL, textureSingle.GetGraphicsObject()));
 
+        // 根据惯例，textureSingle.IsGpuWritable()对“image*”为true，对“sampler*”为false
         const auto handle = texture->GetGLHandle();
         if (textureSingle.IsGpuWritable())
         {
+            /// 对于着色器中的“image*”对象，
+            /// 使用布局中的“readonly”或“writeonly”属性使用着色器编译器控制R/W/RW访问，
+            /// 然后在此处连接为GL_READ_WRITE。
+            /// 始终绑定级别0和所有层。
             const auto unit = textureImageUnit.AcquireUnit(program, textureSingle.GetBindPoint());
             System::SetGLUniform1(textureSingle.GetBindPoint(), unit);
             const auto format = texture->GetTexture()->GetFormat();
@@ -569,6 +625,7 @@ void Rendering::OpenGLDevice::DisableTextures(RendererObjectBridge& rendererObje
 
         const auto texture = boost::polymorphic_pointer_cast<OpenGLTextureSingle>(rendererObjectBridge.GetRendererObject(textureSingle.GetGraphicsObject()));
 
+        // 根据惯例，textureSingle.IsGpuWritable()对“image*”为true，对“sampler*”为false
         if (textureSingle.IsGpuWritable())
         {
             const auto unit = textureImageUnit.GetUnit(program, textureSingle.GetBindPoint());
@@ -576,6 +633,10 @@ void Rendering::OpenGLDevice::DisableTextures(RendererObjectBridge& rendererObje
         }
         else
         {
+            /// 对于着色器中的“image*”对象，
+            /// 使用布局中的“readonly”或“writeonly”属性使用着色器编译器控制R/W/RW访问，然后在此处连接为GL_READ_WRITE。
+            /// 始终绑定级别0和所有层。
+            /// 决定是否需要从图像单元中解除纹理绑定。glBindImageTexture(unit, 0, 0, 0, 0, 0, 0)。
             const auto unit = textureSamplerUnit.GetUnit(program, textureSingle.GetBindPoint());
             System::SetGLActiveTexture(EnumCastUnderlying(System::TextureNumber::Type0) + unit);
             SetGLBindTexture(texture->GetTarget(), 0);
@@ -744,6 +805,9 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(const VertexBuffer& vertexBuffer,
     }
     else
     {
+        /// 从关于gl_VertexID顶点着色器变量的OpenGL文档中：“gl_VertexID是一个顶点语言输入变量，它为顶点保存一个整数索引。
+        /// 该索引由glDrawArrays和其他不引用GL_ELEMENT_ARRAY_BUFFER内容的命令隐式生成，
+        /// 或由glDrawElements等命令从GL_ELEMENT_ARRAY_BUFFER的内容显式生成。”
         SetGLDrawArrays(topology, vertexOffset, numActiveVertices);
     }
 

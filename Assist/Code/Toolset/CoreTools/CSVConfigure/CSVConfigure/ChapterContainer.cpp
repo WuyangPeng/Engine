@@ -92,9 +92,8 @@ CSVConfigure::ChapterContainer::ConstChapterSharedPtr CSVConfigure::ChapterConta
         return (*lhs).GetKey() < (*rhs).GetKey();
     };
 
-    const auto iter = std::ranges::lower_bound(chapter, std::make_shared<ChapterBase>(key), function);
-
-    if (iter != chapter.cend() && (*iter)->GetKey() == key)
+    if (const auto iter = std::ranges::lower_bound(chapter, std::make_shared<ChapterBase>(key), function);
+        iter != chapter.cend() && (*iter)->GetKey() == key)
     {
         return *iter;
     }

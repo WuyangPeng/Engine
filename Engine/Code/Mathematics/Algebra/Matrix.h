@@ -39,6 +39,7 @@ namespace Mathematics
         using AVector = AVector<Real>;
         using Matrix3 = Matrix3<Real>;
         using Vector4 = Vector4<Real>;
+        using Matrix4 = Matrix4<Real>;
         using HomogeneousPoint = HomogeneousPoint<Real>;
 
         constexpr static auto rowSize = HomogeneousPoint::pointSize;
@@ -143,6 +144,8 @@ namespace Mathematics
 
         // Matrix的上3x3的块复制到Matrix3对象。
         NODISCARD Matrix3 GetMatrix3() const noexcept;
+
+        NODISCARD Matrix4 GetMatrix4() const noexcept;
 
         // 坐标访问
         NODISCARD EntryType GetData() const noexcept;

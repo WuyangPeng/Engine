@@ -510,7 +510,7 @@
     <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\PixelViewMiddleLayerImpl.h">
       <Filter>MiddleLayer 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\ViewMiddleLayerImpl.h">
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\RenderingManagerImpl.h">
       <Filter>MiddleLayer 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\CameraModelMiddleLayerImpl.h">
@@ -894,6 +894,9 @@
     <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidCallBackUnitTestSuiteDetail.h">
       <Filter>AndroidFrame 模板文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\SystemManagerImpl.h">
+      <Filter>MiddleLayer 头文件\Detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Framework\DllLib.cpp">
@@ -1049,7 +1052,7 @@
     <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\PixelViewMiddleLayerImpl.cpp">
       <Filter>MiddleLayer 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\ViewMiddleLayerImpl.cpp">
+    <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\RenderingManagerImpl.cpp">
       <Filter>MiddleLayer 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\ArtificialIntelligenceInterface.cpp">
@@ -1228,6 +1231,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Framework\Project\Detail\GenerateProjectName.cpp">
       <Filter>Project 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\SystemManagerImpl.cpp">
+      <Filter>MiddleLayer 源文件\Detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -13,7 +13,7 @@
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Mathematics/Algebra/AVector.h"
 #include "Mathematics/Algebra/Matrix.h"
-#include "Rendering/DataTypes/Transform.h"
+#include "Mathematics/Algebra/Transform.h"
 
 namespace Framework
 {
@@ -29,7 +29,7 @@ namespace Framework
         using AVector = Mathematics::AVectorF;
         using Matrix = Mathematics::MatrixF;
         using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
-        using Transform = Rendering::TransformF;
+        using Transform = Mathematics::TransformF;
 
     public:
         explicit CameraMiddleLayerTesting(const OStreamShared& stream);

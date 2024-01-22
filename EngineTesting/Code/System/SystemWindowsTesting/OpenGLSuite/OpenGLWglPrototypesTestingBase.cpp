@@ -44,7 +44,7 @@ void System::OpenGLWglPrototypesTestingBase::ReleaseWindowsDcTest(WindowsHdc win
     ASSERT_TRUE(ReleaseSystemDC(GetHWnd(), windowsDc));
 }
 
-System::OpenGLHglrc System::OpenGLWglPrototypesTestingBase::GetCreateWglContext(WindowsHdc windowsDc)
+System::OpenGLRcHandle System::OpenGLWglPrototypesTestingBase::GetCreateWglContext(WindowsHdc windowsDc)
 {
     const auto openGLHglrc = CreateWglContext(windowsDc);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(openGLHglrc, "创建Wgl环境失败。");
@@ -54,7 +54,7 @@ System::OpenGLHglrc System::OpenGLWglPrototypesTestingBase::GetCreateWglContext(
     return openGLHglrc;
 }
 
-void System::OpenGLWglPrototypesTestingBase::DeleteWglContextTest(OpenGLHglrc openGLHglrc)
+void System::OpenGLWglPrototypesTestingBase::DeleteWglContextTest(OpenGLRcHandle openGLHglrc)
 {
     ASSERT_TRUE(DeleteWglContext(openGLHglrc));
 }

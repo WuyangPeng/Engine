@@ -7,8 +7,7 @@ $Copyright$
 
 namespace $NameSpaceName$
 {
-$EnumDeclaration$
-$ClassDeclaration$    class $NameSpaceName$Container;
+$EnumDeclaration$$ClassDeclaration$    class $NameSpaceName$Container;
 }
 
 #endif  // $NamespaceUppercaseSeparator$_FWD_H

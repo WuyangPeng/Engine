@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/04 16:29)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 16:16)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_H
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_H
@@ -25,6 +25,7 @@ namespace Network
     public:
         using ClassType = MultipleMessage<E, ByteType, Types...>;
         using ParentType = MessageInterface;
+
         using MessageType = MultipleMessageContainer<E, ByteType, Types...>;
 
     public:

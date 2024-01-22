@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/26 19:38)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 23:17)
 
 #ifndef MATHEMATICS_RATIONAL_INT64_VECTOR_DETAIL_H
 #define MATHEMATICS_RATIONAL_INT64_VECTOR_DETAIL_H
@@ -75,7 +75,7 @@ Mathematics::Int64Vector<VectorSize> Mathematics::Int64Vector<VectorSize>::opera
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    Int64Vector<VectorSize> negative{};
+    Int64Vector negative{};
     for (auto i = 0; i < VectorSize; ++i)
     {
 #include SYSTEM_WARNING_PUSH

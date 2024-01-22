@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/26 15:06)
+/// 版本：1.0.0.4 (2024/01/13 23:58)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,6 +16,7 @@
 #include "CoreTools/FileManager/IFStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "Rendering/DirectX11Renderer/Detail/HLSL/HLSLProgramFactory.h"
 #include "Rendering/OpenGLRenderer/Detail/GLSL/GLSLProgramFactory.h"
 #include "Rendering/RendererEngine/Flags/RendererTypes.h"
 
@@ -104,7 +105,14 @@ std::string Rendering::ProgramFactoryImpl::GetStringFromFile(const std::string& 
 {
     const CoreTools::IFStreamManager manager{ CoreTools::StringConversion::MultiByteConversionStandard(fileName) };
 
-    return CoreTools::StringConversion::StandardConversionMultiByte(manager.GetFileContent());
+    auto shaderSource = CoreTools::StringConversion::StandardConversionMultiByte(manager.GetFileContent());
+
+    if (shaderSource.empty())
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("空的着色器源字符串。"s))
+    }
+
+    return shaderSource;
 }
 
 void Rendering::ProgramFactoryImpl::PushDefines()
@@ -154,6 +162,9 @@ Rendering::ProgramFactoryImpl::ProgramFactorySharedPtr Rendering::ProgramFactory
         case RendererTypes::OpenGLES:
             return GLSLProgramFactory::Create();
 
+        case RendererTypes::DirectX11:
+            return std::make_shared<HLSLProgramFactory>(CoreTools::DisableNotThrow::Disable);
+
         case RendererTypes::Windows:
             return std::make_shared<NullProgramFactory>(CoreTools::DisableNotThrow::Disable);
 
@@ -178,6 +189,13 @@ int Rendering::ProgramFactoryImpl::GetDefinesSize() const
     return defines.GetSize();
 }
 
+Rendering::ProgramDefines Rendering::ProgramFactoryImpl::GetProgramDefines() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return defines;
+}
+
 Rendering::ProgramFactoryImpl::ContainerConstIter Rendering::ProgramFactoryImpl::begin() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
@@ -190,4 +208,11 @@ Rendering::ProgramFactoryImpl::ContainerConstIter Rendering::ProgramFactoryImpl:
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return defines.end();
+}
+
+void Rendering::ProgramFactoryImpl::SetVersion(const std::string& defaultVersion)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    version = defaultVersion;
 }

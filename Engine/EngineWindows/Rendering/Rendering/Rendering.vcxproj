@@ -349,6 +349,7 @@
     <ClCompile Include="..\..\..\Code\Rendering\Detail\Detail\DlodNodeImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\DlodNode.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\SwitchNode.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\DirectX11Renderer\Detail\HLSL\HLSLProgramFactory.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DllLib.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DllMain.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\Detail\LightProjectorImpl.cpp" />
@@ -445,6 +446,8 @@
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLDepthStencilStateImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLGlobalState.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLRasterizerStateImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLProgramHandle.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLShaderHandle.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayout.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayoutAttribute.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayoutManager.cpp" />
@@ -760,9 +763,10 @@
     <ClInclude Include="..\..\..\Code\Rendering\Detail\DlodNode.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Flags\SwitchNodeType.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\SwitchNode.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DirectX11Renderer\Detail\HLSL\HLSLProgramFactory.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DirectX11Renderer\DirectX11Renderer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DirectX11Renderer\DirectX11RendererFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DllLib.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Renderer.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9RendererFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\Detail\LightProjectorImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\Detail\PlanarReflectionEffectImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\Detail\PlanarShadowEffectImpl.h" />
@@ -877,6 +881,8 @@
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLDepthStencilStateImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLGlobalState.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLRasterizerStateImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLProgramHandle.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLShaderHandle.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayout.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayoutAttribute.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayoutManager.h" />

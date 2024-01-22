@@ -253,9 +253,9 @@
 （6）OpenGL缓冲区 ：实现OpenGL缓冲区。
 
 ----------------------------
-26.	Dx9Renderer（Dx9渲染器）
+26.	DirectX11Renderer（DirectX11渲染器）
 
-封装了基于Direct3D的抽象API实现。
+封装了基于DirectX11的抽象API实现。
 
 （1）Direct3D映射：实现Direct3D映射。
 （2）Direct3D纹理：实现Direct3D纹理。

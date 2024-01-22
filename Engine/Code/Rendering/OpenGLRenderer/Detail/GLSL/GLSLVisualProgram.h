@@ -12,6 +12,7 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "Rendering/OpenGLRenderer/GLSL/GLSLProgramHandle.h"
 #include "Rendering/Shaders/Detail/VisualProgramImpl.h"
 #include "Rendering/Shaders/Reflection.h"
 
@@ -26,12 +27,7 @@ namespace Rendering
         using OpenGLUInt = System::OpenGLUInt;
 
     public:
-        GLSLVisualProgram(OpenGLUInt programHandle, OpenGLUInt vertexShaderHandle, OpenGLUInt pixelShaderHandle, OpenGLUInt geometryShaderHandle);
-        ~GLSLVisualProgram() noexcept;
-        GLSLVisualProgram(const GLSLVisualProgram& rhs) = default;
-        GLSLVisualProgram& operator=(const GLSLVisualProgram& rhs) = default;
-        GLSLVisualProgram(GLSLVisualProgram&& rhs) noexcept = default;
-        GLSLVisualProgram& operator=(GLSLVisualProgram&& rhs) noexcept = default;
+        GLSLVisualProgram(const GLSLProgramHandle& programHandle, const GLSLShaderHandle& vertexShaderHandle, const GLSLShaderHandle& pixelShaderHandle, const GLSLShaderHandle& geometryShaderHandle);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -44,10 +40,10 @@ namespace Rendering
         NODISCARD VisualProgramSharedPtr Clone() const override;
 
     private:
-        OpenGLUInt programHandle;
-        OpenGLUInt vertexShaderHandle;
-        OpenGLUInt pixelShaderHandle;
-        OpenGLUInt geometryShaderHandle;
+        GLSLProgramHandle programHandle;
+        GLSLShaderHandle vertexShaderHandle;
+        GLSLShaderHandle pixelShaderHandle;
+        GLSLShaderHandle geometryShaderHandle;
         Reflection reflector;
     };
 }

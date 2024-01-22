@@ -7,8 +7,8 @@
   "ProjectCapital": "THE_LAST_OVERLORD_TESTING",
   "ProjectAbbreviation": "TLOT",
   "EndYear": "2023",
-  "Version": "1.0.0.0",
-  "VersionNum": "1000000",
+  "Version": "1.0.0.2",
+  "VersionNum": "1000002",
   "TestingName": "TheLastOverlord",
 
   "Module": {
@@ -48,6 +48,12 @@
       "Uppercase": "LOGIN_SERVER"
     },
 
+    "PlayerServer": {
+      "ChineseName": "玩家服务器",
+      "ProjectServiceType": 2,
+      "Uppercase": "PLAYER_SERVER"
+    },
+
     "GameServer": {
       "ChineseName": "游戏服务器",
       "ProjectServiceType": 2,
@@ -64,6 +70,12 @@
       "ChineseName": "世界服务器",
       "ProjectServiceType": 2,
       "Uppercase": "WORLD_SERVER"
+    },
+
+    "CrossServer": {
+      "ChineseName": "跨服服务器",
+      "ProjectServiceType": 2,
+      "Uppercase": "CROSS_SERVER"
     },
 
     "OfflineServer": {

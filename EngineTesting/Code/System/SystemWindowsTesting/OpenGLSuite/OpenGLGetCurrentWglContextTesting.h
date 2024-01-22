@@ -32,7 +32,7 @@ namespace System
         void OpenGLGetCurrentWglContextTest();
 
         void GetContextTest(WindowsHdc windowsDc);
-        void DoOpenGLGetCurrentWglContextTest(OpenGLHglrc openGLHglrc);
+        void DoOpenGLGetCurrentWglContextTest(OpenGLRcHandle openGLHglrc);
     };
 }
 

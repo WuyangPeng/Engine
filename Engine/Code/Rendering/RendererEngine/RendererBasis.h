@@ -38,8 +38,10 @@ namespace Rendering
         void SetMultiSamplesNumber(int numMultiSamples);
 
     private:
+        // ´°¿Ú´óÐ¡¡£
         int windowWidth;
         int windowHeight;
+
         DataFormatType colorFormat;
         DataFormatType depthStencilFormat;
         int multiSamplesNumber;

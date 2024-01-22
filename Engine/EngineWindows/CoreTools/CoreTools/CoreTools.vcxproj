@@ -368,6 +368,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\FunctionDescribed.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\ImplStaticAssertHelper.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\Noexcept.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\NoexceptLog.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\NonCopyImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\NonCopyImplDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\PerformanceUnsharedImpl.h" />

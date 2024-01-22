@@ -1,17 +1,20 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/26 18:13)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/12 16:37)
 
 #ifndef FRAMEWORK_PROJECT_RESOURCE_PROJECT_MANAGER_IMPL_H
 #define FRAMEWORK_PROJECT_RESOURCE_PROJECT_MANAGER_IMPL_H
 
 #include "Example/Mathematics/DistanceAlignedBoxesCore/DistanceAlignedBoxesCoreDll.h"
 
+#include "Mathematics/Algebra/AxesAlignBoundingBox3.h"
+#include "Rendering/LocalEffects/LocalEffectsFwd.h"
+#include "Rendering/SceneGraph/SceneGraphFwd.h"
 #include "Rendering/State/StateFwd.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 
@@ -22,9 +25,16 @@ namespace DistanceAlignedBoxes
     public:
         using ClassType = ResourceManagerImpl;
 
-        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+        using AxesAlignBoundingBox3 = Mathematics::AxesAlignBoundingBox3F;
+        using Visual = Rendering::Visual;
+        using BlendState = Rendering::BlendState;
         using RasterizerState = Rendering::RasterizerState;
-        using RasterizerStateSharedPtr = std::shared_ptr<RasterizerState>;
+        using ConstantColorEffect = Rendering::ConstantColorEffect;
+        using VisualSharedPtr = Rendering::VisualSharedPtr;
+        using BlendStateSharedPtr = Rendering::BlendStateSharedPtr;
+        using RasterizerStateSharedPtr = Rendering::RasterizerStateSharedPtr;
+        using ConstantColorEffectSharedPtr = Rendering::ConstantColorEffectSharedPtr;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
     public:
         explicit ResourceManagerImpl(const EnvironmentDirectory& environmentDirectory);
@@ -36,6 +46,16 @@ namespace DistanceAlignedBoxes
     private:
         RasterizerStateSharedPtr noCullState;
         RasterizerStateSharedPtr noCullWireState;
+        BlendStateSharedPtr blendState;
+        VisualSharedPtr box0Mesh;
+        VisualSharedPtr box1Mesh;
+        ConstantColorEffectSharedPtr redEffect;
+        ConstantColorEffectSharedPtr blueEffect;
+        VisualSharedPtr sgment;
+        VisualSharedPtr point0;
+        VisualSharedPtr point1;
+        AxesAlignBoundingBox3 box0;
+        AxesAlignBoundingBox3 box1;
     };
 }
 

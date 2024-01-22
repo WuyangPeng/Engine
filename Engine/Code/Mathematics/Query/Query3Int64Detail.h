@@ -1,18 +1,17 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/27 13:58)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 23:34)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_INT64_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY3_INT64_DETAIL_H
 
 #include "Query3Int64.h"
-#include "QueryDotToolsDetail.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "QueryDotToolsDetail.h" 
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
@@ -60,9 +59,9 @@ Mathematics::PlaneQueryType Mathematics::Query3Int64<Real>::ToPlane(const Vector
     MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < this->GetNumVertices(), "索引错误！");
     MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < this->GetNumVertices(), "索引错误！");
 
-    const auto vector0 = this->GetVertice(v0);
-    const auto vector1 = this->GetVertice(v1);
-    const auto vector2 = this->GetVertice(v2);
+    const auto vector0 = this->GetVertex(v0);
+    const auto vector1 = this->GetVertex(v1);
+    const auto vector2 = this->GetVertex(v2);
 
     const int64_t x0{ boost::numeric_cast<int64_t>(testVector.GetX()) - boost::numeric_cast<int64_t>(vector0.GetX()) };
     const int64_t y0{ boost::numeric_cast<int64_t>(testVector.GetY()) - boost::numeric_cast<int64_t>(vector0.GetY()) };
@@ -99,10 +98,10 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Int64<Real>::ToCircumspher
     MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < this->GetNumVertices(), "索引错误！");
     MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < this->GetNumVertices(), "索引错误！");
 
-    const auto vector0 = this->GetVertice(v0);
-    const auto vector1 = this->GetVertice(v1);
-    const auto vector2 = this->GetVertice(v2);
-    const auto vector3 = this->GetVertice(v3);
+    const auto vector0 = this->GetVertex(v0);
+    const auto vector1 = this->GetVertex(v1);
+    const auto vector2 = this->GetVertex(v2);
+    const auto vector3 = this->GetVertex(v3);
 
     const auto s0x = boost::numeric_cast<int64_t>(vector0.GetX() + testVector.GetX());
     const auto d0x = boost::numeric_cast<int64_t>(vector0.GetX() - testVector.GetX());

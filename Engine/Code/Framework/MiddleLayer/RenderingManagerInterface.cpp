@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/08 16:26)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/13 14:31)
 
 #include "Framework/FrameworkExport.h"
 
 #include "RenderingManagerInterface.h"
 #include "Flags/RenderingMiddleLayerFlags.h"
 #include "Detail/EngineMiddleLayerInterfaceImpl.h"
-#include "Detail/ViewMiddleLayerImpl.h"
+#include "Detail/RenderingManagerImpl.h"
 #include "System/Helper/Tools.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
@@ -23,7 +23,7 @@
 Framework::RenderingManagerInterface::RenderingManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory },
       impl{ System::EnumCastUnderlying(RenderingMiddleLayer::Count) },
-      viewMiddleLayer{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+      rendering{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -40,7 +40,7 @@ bool Framework::RenderingManagerInterface::Create(const EnvironmentParameter& en
     {
         const auto rendererFileName = GetEnvironmentDirectory().GetDirectory(UpperDirectory::Configuration) + SYSTEM_TEXT("Renderer.json");
 
-        viewMiddleLayer->ResetRenderer(CoreTools::StringConversion::StandardConversionMultiByte(rendererFileName), environmentParameter);
+        rendering->ResetRenderer(CoreTools::StringConversion::StandardConversionMultiByte(rendererFileName), environmentParameter);
 
         return true;
     }
@@ -56,7 +56,7 @@ bool Framework::RenderingManagerInterface::Initialize()
 
     if (ParentType::Initialize())
     {
-        viewMiddleLayer->ClearColorBuffer();
+        rendering->ClearBuffers();
 
         return true;
     }
@@ -72,7 +72,7 @@ bool Framework::RenderingManagerInterface::Resize(WindowDisplay windowDisplay, c
 
     if (ParentType::Resize(windowDisplay, size))
     {
-        viewMiddleLayer->Resize(size.GetWindowWidth(), size.GetWindowHeight());
+        rendering->Resize(size.GetWindowWidth(), size.GetWindowHeight());
 
         return true;
     }
@@ -88,7 +88,7 @@ void Framework::RenderingManagerInterface::PreIdle()
 
     ParentType::PreIdle();
 
-    viewMiddleLayer->ClearBuffers();
+    rendering->ClearBuffers();
 }
 
 bool Framework::RenderingManagerInterface::Idle(int64_t timeDelta)
@@ -97,7 +97,7 @@ bool Framework::RenderingManagerInterface::Idle(int64_t timeDelta)
 
     if (ParentType::Idle(timeDelta))
     {
-        viewMiddleLayer->SwapBuffers();
+        rendering->SwapBuffers();
 
         return true;
     }
@@ -113,7 +113,7 @@ bool Framework::RenderingManagerInterface::Destroy()
 
     if (ParentType::Destroy())
     {
-        viewMiddleLayer->Release();
+        rendering->Release();
 
         return true;
     }
@@ -127,14 +127,14 @@ Rendering::BaseRendererSharedPtr Framework::RenderingManagerInterface::GetRender
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    return viewMiddleLayer->GetRenderer();
+    return rendering->GetRenderer();
 }
 
 Rendering::ConstBaseRendererSharedPtr Framework::RenderingManagerInterface::GetRenderer() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return viewMiddleLayer->GetRenderer();
+    return rendering->GetRenderer();
 }
 
 bool Framework::RenderingManagerInterface::KeyUp(int key, const WindowPoint& point)

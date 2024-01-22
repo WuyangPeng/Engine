@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/04 10:51)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 17:17)
 
 #ifndef NETWORK_HELPER_USER_MACRO_H
 #define NETWORK_HELPER_USER_MACRO_H
@@ -26,8 +26,8 @@
 
 #define CLOSE_NETWORK_MAX (((NETWORK_ClOSE_END) << 1) - 1)
 
-// 编译测试（默认为0x04，最大值为0x7F）
-#define COMPILE_NETWORK_CLOSE 0x04
+// 编译测试（默认为0B0000'0100，最大值为0B0111'1111）
+#define COMPILE_NETWORK_CLOSE 0B0000'0100
 
 static_assert(0 <= COMPILE_NETWORK_CLOSE, "COMPILE_NETWORK_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_NETWORK_CLOSE <= CLOSE_NETWORK_MAX, "COMPILE_NETWORK_CLOSE Must be less than or equal CLOSE_NETWORK_MAX.");

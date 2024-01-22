@@ -10,6 +10,7 @@
 #ifndef RENDERING_OPENGL_RENDERER_H
 #define RENDERING_OPENGL_RENDERER_H
 
+#include "GLSL/GLSLShaderHandle.h"
 #include "InputLayout/OpenGLInputLayout.h"
 #include "InputLayout/OpenGLInputLayoutAttribute.h"
 #include "InputLayout/OpenGLInputLayoutManager.h"

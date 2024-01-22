@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/05 18:25)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/10 09:23)
 
 #include "Rendering/RenderingExport.h"
 
@@ -275,24 +275,19 @@ void Rendering::VisualEffectImpl::SetProjectionViewWorldMatrix(const Matrix4& pr
 
     auto data = projectionViewWorldMatrixConstant->GetStorage();
 
-    for (const auto container = projectionViewWorldMatrix.GetContainer();
-         const auto& element : container)
-    {
-        data.Increase<float>(element);
-    }
+    data.SetValue(0, projectionViewWorldMatrix.GetCoordinate());
 }
 
 Rendering::VisualEffectImpl::Matrix4 Rendering::VisualEffectImpl::GetProjectionViewWorldMatrix() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto data = projectionViewWorldMatrixConstant->GetStorage();
+    const auto data = projectionViewWorldMatrixConstant->GetStorage();
 
-    Matrix4::ContainerType container{};
-    for (auto i = 0; i < Matrix4::matrixSize; ++i)
-    {
-        container.emplace_back(data.Increase<float>());
-    }
+    const auto container = data.GetValue<float, 16>(0);
 
-    return Matrix4{ container, Mathematics::MatrixMajorFlags::Row };
+    Matrix4 result{};
+    result.Set(container);
+
+    return result;
 }

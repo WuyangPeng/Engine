@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_TESTING_ENVIRONMENT_TESTING_H
 #define CORE_TOOLS_TESTING_ENVIRONMENT_TESTING_H
 
+#include "CoreTools/FileManager/Environment.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -39,10 +40,12 @@ namespace CoreTools
         void GetPathReadingFailureTest();
         void GetPathWritingFailureTest();
         void GetPathReadingAndWritingFailureTest();
-        void ConfigurationPathTest();
 
         NODISCARD static String GetEnvironmentFileName();
         NODISCARD static String GetEnvironmentPathFileName();
+
+    private:
+        Environment environment;
     };
 }
 

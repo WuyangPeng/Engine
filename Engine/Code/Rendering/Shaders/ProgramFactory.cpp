@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/26 15:11)
+/// 版本：1.0.0.4 (2024/01/13 23:56)
 
 #include "Rendering/RenderingExport.h"
 
@@ -57,6 +57,11 @@ Rendering::ProgramFactory::ComputeProgramSharedPtr Rendering::ProgramFactory::Cr
     return impl->CreateFromSource(computeShaderSource);
 }
 
+std::string Rendering::ProgramFactory::GetStringFromFile(const std::string& fileName)
+{
+    return ImplType::GetStringFromFile(fileName);
+}
+
 void Rendering::ProgramFactory::PushDefines()
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -83,4 +88,11 @@ void Rendering::ProgramFactory::PopFlags() noexcept
     RENDERING_CLASS_IS_VALID_9;
 
     return impl->PopFlags();
+}
+
+void Rendering::ProgramFactory::SetVersion(const std::string& defaultVersion)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetVersion(defaultVersion);
 }

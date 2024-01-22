@@ -76,7 +76,7 @@ void Mathematics::ConvexHull2<Real>::Init()
             expand = Math::GetValue(1 << 20);
             query = std::make_shared<Query2Int64<Real>>(sVertices);
         }
-        else if (queryType == QueryType::Interger)
+        else if (queryType == QueryType::Integer)
         {
             expand = Math::GetValue(1 << 24);
             query = std::make_shared<Query2Integer<Real>>(sVertices);
@@ -245,7 +245,7 @@ void Mathematics::ConvexHull2<Real>::LoadFile(const String& filename)
             query = std::make_shared<Query2Int64<Real>>(sVertices);
             break;
         }
-        case QueryType::Interger:
+        case QueryType::Integer:
         {
             query = std::make_shared<Query2Integer<Real>>(sVertices);
             break;

@@ -19,7 +19,6 @@
 #include <deque>
 #include <memory>
 
-
 namespace CSVConfigure
 {
     class EquipBase

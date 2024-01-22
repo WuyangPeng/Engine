@@ -16,6 +16,7 @@
     "DefaultProjectGenerationTesting": 1,
     "ClientProjectGenerationTesting": 1,
     "ReplaceProjectGenerationTesting": 1,
-    "Utf8ReplaceProjectGenerationTesting": 1
+    "Utf8ReplaceProjectGenerationTesting": 1,
+    "SlnProjectGenerationTesting": 1
   }
 }

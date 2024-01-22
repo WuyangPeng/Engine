@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/08 14:04)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 15:01)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_VIEW_MIDDLE_LAYER_H
 #define FRAMEWORK_MIDDLE_LAYER_VIEW_MIDDLE_LAYER_H
@@ -18,7 +18,7 @@
 #include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Framework/WindowCreate/WindowCreateFwd.h"
 
-FRAMEWORK_NON_COPY_EXPORT_IMPL(ViewMiddleLayerImpl);
+FRAMEWORK_NON_COPY_EXPORT_IMPL(RenderingManagerImpl);
 
 // 视图层类
 namespace Framework
@@ -26,6 +26,7 @@ namespace Framework
     class FRAMEWORK_DEFAULT_DECLARE ViewMiddleLayer : public ModelViewControllerMiddleLayer
     {
     public:
+        using ViewMiddleLayerImpl = RenderingManagerImpl;
         NON_COPY_TYPE_DECLARE(ViewMiddleLayer);
         using ParentType = ModelViewControllerMiddleLayer;
 

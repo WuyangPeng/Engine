@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/22 11:05)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 00:12)
 
 #ifndef CORE_TOOLS_HELPER_PROPERTIES_MACRO_H
 #define CORE_TOOLS_HELPER_PROPERTIES_MACRO_H
@@ -51,11 +51,11 @@
     }                                                                                                          \
     CoreTools::MethodPropertySet<value, reference, container, &container::SYSTEM_MULTIPLE_CONCATENATOR(property, Offset, __LINE__), &container::set> property
 
-#define TCRE_METHOD_PROPERTY_GETSET(value, getReference, setReference, container, get, set, property, isNoexcept) \
-    NODISCARD static ptrdiff_t SYSTEM_MULTIPLE_CONCATENATOR(property, Offset, __LINE__)() noexcept(isNoexcept)    \
-    {                                                                                                             \
-        return offsetof(container, property);                                                                     \
-    }                                                                                                             \
+#define TCRE_METHOD_PROPERTY_GET_SET(value, getReference, setReference, container, get, set, property, isNoexcept) \
+    NODISCARD static ptrdiff_t SYSTEM_MULTIPLE_CONCATENATOR(property, Offset, __LINE__)() noexcept(isNoexcept)     \
+    {                                                                                                              \
+        return offsetof(container, property);                                                                      \
+    }                                                                                                              \
     CoreTools::MethodPropertyGetSet<value, getReference, setReference, container, &container::SYSTEM_MULTIPLE_CONCATENATOR(property, Offset, __LINE__), &container::get, &container::set> property
 
 #define TCRE_DECLARE_PROPERTY(className, type, reference, name, set, get) \

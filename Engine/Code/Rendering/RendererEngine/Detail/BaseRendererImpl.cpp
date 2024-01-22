@@ -5,13 +5,13 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2024/01/02 16:05)
+/// 版本：1.0.0.4 (2024/01/17 10:52)
 
 #include "Rendering/RenderingExport.h"
 
 #include "BaseRendererImpl.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-#include "CoreTools/Contract/Noexcept.h"
+#include "CoreTools/Contract/NoexceptLog.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "Rendering/Base/DrawTargetBridge.h"
@@ -40,7 +40,8 @@ Rendering::BaseRendererImpl::BaseRendererImpl(RendererTypes rendererTypes, const
       rendererClear{},
       globalFont{ CreateGlobalFont(rendererTypes, rendererAdapter) },
       globalState{ rendererTypes, "BlendState", "DepthStencilState", "RasterizerState", rendererAdapter.GetRendererObjectBridge() },
-      allowOcclusionQuery{ false }
+      allowOcclusionQuery{ false },
+      warnOnNonemptyBridges{ true }
 {
     rendererClear.SetClearColor(renderingEnvironment.GetClearColor());
 
@@ -209,12 +210,12 @@ void Rendering::BaseRendererImpl::Unbind(Font* currentActiveFont) noexcept
     {
         using UnbindGraphicsObjectFuncType = void (ClassType::*)(const GraphicsObjectSharedPtr&);
 
-        CoreTools::NoexceptNoReturn<ClassType, UnbindGraphicsObjectFuncType>(*this, &ClassType::Unbind, currentActiveFont->GetVertexBuffer());
-        CoreTools::NoexceptNoReturn<ClassType, UnbindGraphicsObjectFuncType>(*this, &ClassType::Unbind, currentActiveFont->GetIndexBuffer());
-        CoreTools::NoexceptNoReturn<ClassType, UnbindGraphicsObjectFuncType>(*this, &ClassType::Unbind, currentActiveFont->GetTextEffect()->GetTranslate());
-        CoreTools::NoexceptNoReturn<ClassType, UnbindGraphicsObjectFuncType>(*this, &ClassType::Unbind, currentActiveFont->GetTextEffect()->GetColor());
-        CoreTools::NoexceptNoReturn<ClassType, UnbindGraphicsObjectFuncType>(*this, &ClassType::Unbind, currentActiveFont->GetTextEffect()->GetVertexShader());
-        CoreTools::NoexceptNoReturn<ClassType, UnbindGraphicsObjectFuncType>(*this, &ClassType::Unbind, currentActiveFont->GetTextEffect()->GetPixelShader());
+        CoreTools::NoexceptNoReturnUseLog<ClassType, UnbindGraphicsObjectFuncType>(*this, &ClassType::Unbind, currentActiveFont->GetVertexBuffer());
+        CoreTools::NoexceptNoReturnUseLog<ClassType, UnbindGraphicsObjectFuncType>(*this, &ClassType::Unbind, currentActiveFont->GetIndexBuffer());
+        CoreTools::NoexceptNoReturnUseLog<ClassType, UnbindGraphicsObjectFuncType>(*this, &ClassType::Unbind, currentActiveFont->GetTextEffect()->GetTranslate());
+        CoreTools::NoexceptNoReturnUseLog<ClassType, UnbindGraphicsObjectFuncType>(*this, &ClassType::Unbind, currentActiveFont->GetTextEffect()->GetColor());
+        CoreTools::NoexceptNoReturnUseLog<ClassType, UnbindGraphicsObjectFuncType>(*this, &ClassType::Unbind, currentActiveFont->GetTextEffect()->GetVertexShader());
+        CoreTools::NoexceptNoReturnUseLog<ClassType, UnbindGraphicsObjectFuncType>(*this, &ClassType::Unbind, currentActiveFont->GetTextEffect()->GetPixelShader());
     }
 }
 
@@ -391,13 +392,6 @@ void Rendering::BaseRendererImpl::Release()
     globalFont.Release();
     globalState.DestroyDefaultGlobalState();
     rendererAdapter.Release();
-}
-
-void Rendering::BaseRendererImpl::ResetSize()
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    rendererAdapter.ResetSize();
 }
 
 void Rendering::BaseRendererImpl::ClearColorBuffer()
@@ -785,4 +779,56 @@ int64_t Rendering::BaseRendererImpl::DrawPrimitive(const VertexBufferSharedPtr& 
     RENDERING_CLASS_IS_VALID_9;
 
     return rendererAdapter.DrawPrimitive(vertexBuffer, indexBuffer, effect);
+}
+
+void Rendering::BaseRendererImpl::CopyGpuToGpu(const BufferSharedPtr& buffer0, const BufferSharedPtr& buffer1)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(buffer0, buffer1);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("函数未实现。"))
+}
+
+void Rendering::BaseRendererImpl::CopyGpuToGpu(const TextureSingleSharedPtr& texture0, const TextureSingleSharedPtr& texture1)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(texture0, texture1);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("函数未实现。"))
+}
+
+void Rendering::BaseRendererImpl::CopyGpuToGpu(const TextureSingleSharedPtr& texture0, const TextureSingleSharedPtr& texture1, int level)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(texture0, texture1, level);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("函数未实现。"))
+}
+
+void Rendering::BaseRendererImpl::CopyGpuToGpu(const TextureArraySharedPtr& textureArray0, const TextureArraySharedPtr& textureArray1)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(textureArray0, textureArray1);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("函数未实现。"))
+}
+
+void Rendering::BaseRendererImpl::CopyGpuToGpu(const TextureArraySharedPtr& textureArray0, const TextureArraySharedPtr& textureArray1, int item, int level)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(textureArray0, textureArray1, item, level);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("函数未实现。"))
+}
+
+void Rendering::BaseRendererImpl::SetWarnOnNonemptyBridges(bool warn) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    warnOnNonemptyBridges = warn;
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/20 15:47)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 10:00)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -44,7 +44,6 @@ CLASS_INVARIANT_STUB_DEFINE(CoreTools, ObjectInterface);
 CORE_TOOLS_RTTI_BASE_DEFINE(CoreTools, ObjectInterface);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(CoreTools, ObjectInterface);
 
-// static
 bool CoreTools::ObjectInterface::RegisterFactory()
 {
     static InitTermRegisterFactory registerFactory{ ClassType::InitializeFactory, ClassType::TerminateFactory };
@@ -52,13 +51,11 @@ bool CoreTools::ObjectInterface::RegisterFactory()
     return true;
 }
 
-// static
 void CoreTools::ObjectInterface::InitializeFactory()
 {
     OBJECT_MANAGER_SINGLETON.Insert(GetCurrentRttiType().GetName(), Factory);
 }
 
-// static
 void CoreTools::ObjectInterface::TerminateFactory()
 {
     OBJECT_MANAGER_SINGLETON.Remove(GetCurrentRttiType().GetName());

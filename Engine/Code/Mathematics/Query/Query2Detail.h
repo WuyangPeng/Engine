@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/27 13:55)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 23:31)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY2_DETAIL_H
@@ -13,13 +13,12 @@
 #include "Query2.h"
 #include "QueryDotToolsDetail.h"
 #include "QuerySortTools.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::Query2<Real>::Query2(const VerticesType& vertices)
-    : ParentType{}, vertices{ vertices }
+Mathematics::Query2<Real>::Query2(VerticesType vertices) noexcept
+    : ParentType{}, vertices{ std::move(vertices) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -54,7 +53,7 @@ int Mathematics::Query2<Real>::GetNumVertices() const
 }
 
 template <typename Real>
-Mathematics::Vector2<Real> Mathematics::Query2<Real>::GetVertice(int index) const
+Mathematics::Vector2<Real> Mathematics::Query2<Real>::GetVertex(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -66,7 +65,7 @@ Mathematics::LineQueryType Mathematics::Query2<Real>::ToLine(int index, int lhsV
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return ToLine(GetVertice(index), lhsVerticesIndex, rhsVerticesIndex);
+    return ToLine(GetVertex(index), lhsVerticesIndex, rhsVerticesIndex);
 }
 
 template <typename Real>
@@ -105,7 +104,7 @@ Mathematics::TriangleQueryType Mathematics::Query2<Real>::ToTriangle(int index, 
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return ToTriangle(GetVertice(index), lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex);
+    return ToTriangle(GetVertex(index), lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex);
 }
 
 template <typename Real>
@@ -147,7 +146,7 @@ Mathematics::CircumcircleQueryType Mathematics::Query2<Real>::ToCircumcircle(int
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return ToCircumcircle(GetVertice(index), lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex);
+    return ToCircumcircle(GetVertex(index), lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex);
 }
 
 template <typename Real>

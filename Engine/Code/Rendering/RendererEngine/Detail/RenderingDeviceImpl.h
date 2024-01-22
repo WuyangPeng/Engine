@@ -48,11 +48,10 @@ namespace Rendering
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         NODISCARD virtual RenderingDeviceSharedPtr Clone() const = 0;
-        virtual void ResetSize() = 0;
         virtual void InitDevice() = 0;
         virtual void Release() = 0;
 
-        virtual void SwapBuffers(int syncInterval) = 0;
+        virtual void DisplayColorBuffer(int syncInterval) = 0;
 
         void SetSize(int x, int y) noexcept;
 

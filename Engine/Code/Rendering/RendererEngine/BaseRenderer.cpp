@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2024/01/02 16:15)
+/// 版本：1.0.0.4 (2024/01/17 10:51)
 
 #include "Rendering/RenderingExport.h"
 
@@ -13,14 +13,11 @@
 #include "RendererParameter.h"
 #include "Detail/BaseRendererImpl.h"
 #include "Detail/RendererFactory.h"
-#include "CoreTools/Base/Flags/UniqueIdSelect.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Base/TotalAllocation.h"
 #include "Rendering/DataTypes/ColourDetail.h"
-#include "Rendering/DataTypes/DataTypes.h"
 
 Rendering::BaseRenderer::BaseRenderer(const EnvironmentParameter& environmentParameter, const RendererParameter& rendererParameter)
     : impl{ CoreTools::ImplCreateUseFactory::Default, rendererParameter.GetRendererType(), RenderingEnvironment{ environmentParameter, rendererParameter } }
@@ -300,11 +297,39 @@ void Rendering::BaseRenderer::Flush()
     return impl->Flush();
 }
 
-void Rendering::BaseRenderer::ResetSize()
+void Rendering::BaseRenderer::CopyGpuToGpu(const BufferSharedPtr& buffer0, const BufferSharedPtr& buffer1)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return impl->ResetSize();
+    return impl->CopyGpuToGpu(buffer0, buffer1);
+}
+
+void Rendering::BaseRenderer::CopyGpuToGpu(const TextureSingleSharedPtr& texture0, const TextureSingleSharedPtr& texture1)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->CopyGpuToGpu(texture0, texture1);
+}
+
+void Rendering::BaseRenderer::CopyGpuToGpu(const TextureSingleSharedPtr& texture0, const TextureSingleSharedPtr& texture1, int level)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->CopyGpuToGpu(texture0, texture1, level);
+}
+
+void Rendering::BaseRenderer::CopyGpuToGpu(const TextureArraySharedPtr& textureArray0, const TextureArraySharedPtr& textureArray1)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->CopyGpuToGpu(textureArray0, textureArray1);
+}
+
+void Rendering::BaseRenderer::CopyGpuToGpu(const TextureArraySharedPtr& textureArray0, const TextureArraySharedPtr& textureArray1, int item, int level)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->CopyGpuToGpu(textureArray0, textureArray1, item, level);
 }
 
 void Rendering::BaseRenderer::InitDevice()
@@ -557,4 +582,11 @@ void Rendering::BaseRenderer::ClearBuffers()
     RENDERING_CLASS_IS_VALID_9;
 
     return impl->ClearBuffers();
+}
+
+void Rendering::BaseRenderer::SetWarnOnNonemptyBridges(bool warn) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetWarnOnNonemptyBridges(warn);
 }

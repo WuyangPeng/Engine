@@ -18,10 +18,10 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
+#include "Rendering/LocalEffects/Lighting.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
 #include "Rendering/Resources/Textures/Texture2D.h"
-#include "Rendering/LocalEffects/Lighting.h" 
 #include "Rendering/Shaders/Shader.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, SphereMapEffect)
@@ -37,7 +37,8 @@ Rendering::SphereMapEffect::SphereMapEffect(ProgramFactory& factory,
                                             SamplerStateFilter filter,
                                             SamplerStateMode mode0,
                                             SamplerStateMode mode1)
-    : ParentType{ factory,
+    : ParentType{ "SphereMapEffect",
+                  factory,
                   baseRenderer,
                   "Resource/Shader/SphereMapEffect.vs",
                   "Resource/Shader/SphereMapEffect.ps" },
