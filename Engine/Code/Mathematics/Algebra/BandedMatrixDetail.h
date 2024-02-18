@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/26 10:20)
+/// 标准：std:c++20
+/// 版本：1.0.0.5 (2024/02/18 13:19)
 
 #ifndef MATHEMATICS_ALGEBRA_BANDED_MATRIX_DETAIL_H
 #define MATHEMATICS_ALGEBRA_BANDED_MATRIX_DETAIL_H
@@ -16,6 +16,7 @@
 #include "Detail/BandedMatrixDataDetail.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Base/MathDetail.h"
 
 #include <gsl/util>
 
@@ -24,6 +25,15 @@ requires std::is_arithmetic_v<Real>
 Mathematics::BandedMatrix<Real>::BandedMatrix(int size, int lowerBandsNumber, int upperBandsNumber)
     : diagonalBandContainer(size), lowerBandData{ size, lowerBandsNumber }, upperBandData{ size, upperBandsNumber }
 {
+    if (size <= 0 ||
+        lowerBandsNumber < 0 ||
+        size <= lowerBandsNumber ||
+        upperBandsNumber < 0 ||
+        size <= upperBandsNumber)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("无效参数。"))
+    }
+
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
@@ -207,7 +217,11 @@ requires std::is_arithmetic_v<Real>
 const Real& Mathematics::BandedMatrix<Real>::operator()(int row, int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(0 <= row && row < GetSize() && 0 <= column && column < GetSize(), "无效 row 或 column 在 BandedMatrixImpl::operator\n");
+
+    if (row < 0 || GetSize() <= row || column < 0 || GetSize() <= column)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("无效 row 或 column 在 BandedMatrixImpl::operator\n"));
+    }
 
     if (column == row)
     {
@@ -263,6 +277,112 @@ typename Mathematics::BandedMatrix<Real>::VariableMatrix Mathematics::BandedMatr
     }
 
     return variableMatrix;
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+template <bool RowMajor>
+typename Mathematics::BandedMatrix<Real>::VariableMatrix Mathematics::BandedMatrix<Real>::ComputeInverse(Real epsilon) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto size = GetSize();
+
+    LexicoArray2<RowMajor, Real> inverseLexicoArray{ size, size, LexicoArray2<RowMajor, Real>::Container(size * size) };
+
+    for (auto row = 0; row < size; ++row)
+    {
+        for (auto column = 0; column < size; ++column)
+        {
+            if (row != column)
+            {
+                inverseLexicoArray(row, column) = Real{};
+            }
+            else
+            {
+                inverseLexicoArray(row, row) = Math::GetValue(1);
+            }
+        }
+    }
+
+    BandedMatrix result = *this;
+
+    /// 正向消除。
+    for (auto row = 0; row < size; ++row)
+    {
+        /// 枢轴必须为非零才能继续。
+        const auto diagonal = result(row, row);
+        if (Math::FAbs(diagonal) <= epsilon)
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("不存在逆矩阵。"))
+        }
+
+        Real invDiagonal = Math::GetValue(1) / diagonal;
+        result(row, row) = Math::GetValue(1);
+
+        /// 将行相乘，使其与对角线项1一致。
+        const auto columnMin = row + 1;
+        auto columnMax = columnMin + GetUpperBandsNumber();
+        if (size < columnMax)
+        {
+            columnMax = size;
+        }
+
+        for (auto c = columnMin; c < columnMax; ++c)
+        {
+            result(row, c) *= invDiagonal;
+        }
+        for (auto c = 0; c <= row; ++c)
+        {
+            inverseLexicoArray(row, c) *= invDiagonal;
+        }
+
+        /// 减少剩余的行数。
+        const auto rowMin = row + 1;
+        auto rowMax = rowMin + GetLowerBandsNumber();
+        if (size < rowMax)
+        {
+            rowMax = size;
+        }
+
+        for (auto r = rowMin; r < rowMax; ++r)
+        {
+            const auto mult = result(r, row);
+            result(r, row) = Real{};
+            for (auto c = columnMin; c < columnMax; ++c)
+            {
+                result(r, c) -= mult * result(row, c);
+            }
+            for (auto c = 0; c <= row; ++c)
+            {
+                inverseLexicoArray(r, c) -= mult * inverseLexicoArray(row, c);
+            }
+        }
+    }
+
+    /// 后向消除
+    for (auto row = size - 1; row >= 1; --row)
+    {
+        const auto rowMax = row - 1;
+        auto rowMin = row - GetUpperBandsNumber();
+
+        if (rowMin < 0)
+        {
+            rowMin = 0;
+        }
+
+        for (auto r = rowMax; r >= rowMin; --r)
+        {
+            const auto mult = result(r, row);
+            result(r, row) = Real{};
+            for (auto c = 0; c < size; ++c)
+            {
+                inverseLexicoArray(r, c) -= mult * inverseLexicoArray(row, c);
+            }
+        }
+    }
+
+    return VariableMatrix{ size, size, inverseLexicoArray.GetContainer() };
 }
 
 #endif  // MATHEMATICS_ALGEBRA_BANDED_MATRIX_DETAIL_H

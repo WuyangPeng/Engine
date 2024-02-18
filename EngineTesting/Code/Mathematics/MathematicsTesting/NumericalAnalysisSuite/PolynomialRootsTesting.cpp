@@ -359,7 +359,7 @@ void Mathematics::PolynomialRootsTesting::PolynomialTest()
 
         auto bound = firstPolynomialRoots.GetBound(firstPolynomial);
 
-        firstPolynomial.Compress(1e-6);
+        firstPolynomial.MakeCompress(1e-6);
         auto maxValue = 0.0;
         for (auto m = 0; m < firstPolynomial.GetDegree(); ++m)
         {

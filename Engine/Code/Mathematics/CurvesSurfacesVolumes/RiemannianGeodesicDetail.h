@@ -47,9 +47,9 @@ Mathematics::RiemannianGeodesic<Real>::RiemannianGeodesic(int dimension)
 
     for (auto i = 0; i < dimension; ++i)
     {
-        christoffel1.at(i).ResetSize(dimension, dimension);
-        christoffel2.at(i).ResetSize(dimension, dimension);
-        metricDerivative.at(i).ResetSize(dimension, dimension);
+        christoffel1.at(i).SetSize(dimension, dimension);
+        christoffel2.at(i).SetSize(dimension, dimension);
+        metricDerivative.at(i).SetSize(dimension, dimension);
     }
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -134,7 +134,7 @@ std::vector<Mathematics::VariableLengthVector<Real>> Mathematics::RiemannianGeod
 
     for (auto i = 0; i < quantity; ++i)
     {
-        path.at(i).ResetSize(dimension);
+        path.at(i).SetSize(dimension);
     }
 
     currentQuantity = 2;
@@ -372,7 +372,7 @@ void Mathematics::RiemannianGeodesic<Real>::ComputeMetricDerivative()
         {
             for (auto i1 = 0; i1 < dimension; ++i1)
             {
-                metricDerivative.at(derivative)[i0][i1] = christoffel1.at(derivative)[i0][i1] + christoffel1.at(derivative)[i1][i0];
+                metricDerivative.at(derivative)(i0, i1) = christoffel1.at(derivative)(i0, i1) + christoffel1.at(derivative)(i1, i0);
             }
         }
     }
@@ -392,9 +392,9 @@ bool Mathematics::RiemannianGeodesic<Real>::ComputeChristoffel2()
                 Real fValue{};
                 for (auto j = 0; j < dimension; ++j)
                 {
-                    fValue += metricInverse[i2][j] * christoffel1.at(j)[i0][i1];
+                    fValue += metricInverse(i2, j) * christoffel1.at(j)(i0, i1);
                 }
-                christoffel2.at(i2)[i0][i1] = fValue;
+                christoffel2.at(i2)(i0, i1) = fValue;
             }
         }
     }
@@ -407,7 +407,7 @@ void Mathematics::RiemannianGeodesic<Real>::SetMetric(int rows, int columns, Rea
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    metric[rows][columns] = value;
+    metric(rows, columns) = value;
 }
 
 template <typename Real>
@@ -415,7 +415,7 @@ Real Mathematics::RiemannianGeodesic<Real>::GetMetric(int rows, int columns) con
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return metric[rows][columns];
+    return metric(rows, columns);
 }
 
 template <typename Real>
@@ -423,7 +423,7 @@ void Mathematics::RiemannianGeodesic<Real>::SetChristoffel1(int index, int rows,
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    christoffel1.at(index)[rows][columns] = value;
+    christoffel1.at(index)(rows, columns) = value;
 }
 
 template <typename Real>
@@ -431,7 +431,7 @@ Real Mathematics::RiemannianGeodesic<Real>::GeChristoffel1(int index, int rows, 
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return christoffel1.at(index)[rows][columns];
+    return christoffel1.at(index)(rows, columns);
 }
 
 #endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_RIEMANNIAN_GEODESIC_DETAIL_H

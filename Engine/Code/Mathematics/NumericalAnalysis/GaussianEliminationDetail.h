@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/27 10:00)
+/// 标准：std:c++20
+/// 版本：1.0.0.5 (2024/01/30 15:40)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_GAUSSIAN_ELIMINATION_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_GAUSSIAN_ELIMINATION_DETAIL_H
@@ -20,19 +20,19 @@
 #include <gsl/util>
 
 template <typename Real>
-Mathematics::GaussianElimination<Real>::GaussianElimination(int numRows, const Container& matrix, bool wantInverse, const Container& b, int numCols, const Container& c, Real epsilon)
+Mathematics::GaussianElimination<Real>::GaussianElimination(int numRows, const Container& matrix, bool wantInverse, const Container& b, int numColumns, const Container& c, Real epsilon)
     : numRows{ numRows },
       matrix{ matrix },
       wantInverse{ wantInverse },
       b{ b },
-      numCols{ numCols },
+      numColumns{ numColumns },
       c{ c },
       epsilon{ epsilon },
       isInverse{ false },
       inverseMatrix{ numRows, numRows, matrix },
       determinant{ Math::GetValue(1) },
       x{ b },
-      y{ numRows, numCols, c }
+      y{ numRows, numColumns, c }
 {
     const auto numElement = numRows * numRows;
     if (matrix.empty() || numElement != boost::numeric_cast<int>(matrix.size()))
@@ -45,7 +45,7 @@ Mathematics::GaussianElimination<Real>::GaussianElimination(int numRows, const C
         THROW_EXCEPTION(SYSTEM_TEXT("b无效输入！"))
     }
 
-    const auto numCElement = numRows * numCols;
+    const auto numCElement = numRows * numColumns;
     if (!c.empty() && (boost::numeric_cast<int>(c.size()) != numCElement))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("c无效输入！"))
@@ -66,16 +66,18 @@ Mathematics::GaussianElimination<Real>::GaussianElimination(int numRows, const C
 template <typename Real>
 void Mathematics::GaussianElimination<Real>::Init()
 {
-    IndexContainer colIndex(numRows);
+    IndexContainer columnIndex(numRows);
     IndexContainer rowIndex(numRows);
     IndexContainer pivoted(numRows);
 
     auto odd = false;
 
+    /// 通过完全旋转消除。
     auto row = 0;
-    auto col = 0;
+    auto column = 0;
     for (auto i0 = 0; i0 < numRows; ++i0)
     {
+        /// 搜索矩阵（不包括旋转行）以获取最大绝对条目。
         Real maxValue = Math::GetValue(0);
         for (auto i1 = 0; i1 < numRows; ++i1)
         {
@@ -91,7 +93,7 @@ void Mathematics::GaussianElimination<Real>::Init()
                         {
                             maxValue = absValue;
                             row = i1;
-                            col = i2;
+                            column = i2;
                         }
                     }
                 }
@@ -100,6 +102,7 @@ void Mathematics::GaussianElimination<Real>::Init()
 
         if (maxValue <= epsilon)
         {
+            /// 矩阵是不可逆的。
             if (wantInverse)
             {
                 inverseMatrix.Clear();
@@ -120,76 +123,80 @@ void Mathematics::GaussianElimination<Real>::Init()
             return;
         }
 
-        pivoted.at(col) = true;
+        pivoted.at(column) = true;
 
-        if (row != col)
+        /// 交换行，使旋转行条目位于“col”中。
+        if (row != column)
         {
             odd = !odd;
             for (auto i = 0; i < numRows; ++i)
             {
-                std::swap(inverseMatrix(row, i), inverseMatrix(col, i));
+                std::swap(inverseMatrix(row, i), inverseMatrix(column, i));
             }
 
             if (!b.empty())
             {
-                std::swap(x.at(row), x.at(col));
+                std::swap(x.at(row), x.at(column));
             }
 
             if (!c.empty())
             {
-                for (auto i = 0; i < numCols; ++i)
+                for (auto i = 0; i < numColumns; ++i)
                 {
-                    std::swap(y(row, i), y(col, i));
+                    std::swap(y(row, i), y(column, i));
                 }
             }
         }
 
+        /// 跟踪行的排列。
         rowIndex.at(i0) = row;
-        colIndex.at(i0) = col;
+        columnIndex.at(i0) = column;
 
-        auto diagonal = inverseMatrix(col, col);
+        /// 缩放行，使旋转轴条目为1。
+        auto diagonal = inverseMatrix(column, column);
         determinant *= diagonal;
-        auto inv = Math::GetValue(1) / diagonal;
-        inverseMatrix(col, col) = Math::GetValue(1);
-        for (auto i2 = 0; i2 < numRows; ++i2)
+        auto inverse = Math::GetValue(1) / diagonal;
+        inverseMatrix(column, column) = Math::GetValue(1);
+        for (auto i = 0; i < numRows; ++i)
         {
-            inverseMatrix(col, i2) *= inv;
+            inverseMatrix(column, i) *= inverse;
         }
 
         if (!b.empty())
         {
-            x.at(col) *= inv;
+            x.at(column) *= inverse;
         }
 
         if (!c.empty())
         {
-            for (auto i2 = 0; i2 < numCols; ++i2)
+            for (auto i = 0; i < numColumns; ++i)
             {
-                y(col, i2) *= inv;
+                y(column, i) *= inverse;
             }
         }
 
+        // 将其他行中的旋转列位置归零。
         for (auto i1 = 0; i1 < numRows; ++i1)
         {
-            if (i1 != col)
+            if (i1 != column)
             {
-                auto save = inverseMatrix(i1, col);
-                inverseMatrix(i1, col) = Math::GetValue(0);
+                auto save = inverseMatrix(i1, column);
+                inverseMatrix(i1, column) = Math::GetValue(0);
                 for (auto i2 = 0; i2 < numRows; ++i2)
                 {
-                    inverseMatrix(i1, i2) -= inverseMatrix(col, i2) * save;
+                    inverseMatrix(i1, i2) -= inverseMatrix(column, i2) * save;
                 }
 
                 if (!b.empty())
                 {
-                    x.at(i1) -= x.at(col) * save;
+                    x.at(i1) -= x.at(column) * save;
                 }
 
                 if (!c.empty())
                 {
-                    for (auto i2 = 0; i2 < numCols; ++i2)
+                    for (auto i2 = 0; i2 < numColumns; ++i2)
                     {
-                        y(i1, i2) -= y(col, i2) * save;
+                        y(i1, i2) -= y(column, i2) * save;
                     }
                 }
             }
@@ -198,13 +205,14 @@ void Mathematics::GaussianElimination<Real>::Init()
 
     if (wantInverse)
     {
+        /// 重新排列行以撤消高斯消除中的任何排列。
         for (auto i1 = numRows - 1; i1 >= 0; --i1)
         {
-            if (rowIndex.at(i1) != colIndex.at(i1))
+            if (rowIndex.at(i1) != columnIndex.at(i1))
             {
                 for (auto i2 = 0; i2 < numRows; ++i2)
                 {
-                    std::swap(inverseMatrix(i2, rowIndex.at(i1)), inverseMatrix(i2, colIndex.at(i1)));
+                    std::swap(inverseMatrix(i2, rowIndex.at(i1)), inverseMatrix(i2, columnIndex.at(i1)));
                 }
             }
         }
@@ -234,7 +242,7 @@ bool Mathematics::GaussianElimination<Real>::IsValid() const noexcept
         return false;
     }
 
-    if (const auto numCElement = numRows * numCols;
+    if (const auto numCElement = numRows * numColumns;
         !c.empty() && (c.size() != gsl::narrow_cast<size_t>(numCElement)))
     {
         return false;

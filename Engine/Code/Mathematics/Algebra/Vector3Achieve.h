@@ -11,6 +11,7 @@
 #define MATHEMATICS_ALGEBRA_VECTOR3_ACHIEVE_H
 
 #include "BarycentricCoordinatesDetail.h"
+#include "Vector/VectorDetail.h"
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Vector3ToolsDetail.h"
@@ -35,6 +36,15 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3<Real>::IsValid() c
 }
 
 #endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+typename Mathematics::Vector3<Real>::AlgebraVector3 Mathematics::Vector3<Real>::GetVector() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return AlgebraVector3{ x, y, z };
+}
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>

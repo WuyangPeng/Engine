@@ -10,6 +10,7 @@
 #ifndef MATHEMATICS_RATIONAL_H
 #define MATHEMATICS_RATIONAL_H
 
+#include "CircleSortObjectDetail.h"
 #include "ConversionIntegerDetail.h"
 #include "ConversionRationalDetail.h"
 #include "FloatingPointAnalysisDetail.h"

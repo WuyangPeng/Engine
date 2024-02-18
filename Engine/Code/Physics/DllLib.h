@@ -16,12 +16,6 @@
 #include "CoreTools/CoreToolsLib.h"
 #include "Mathematics/MathematicsLib.h"
 
-#ifdef PHYSICS_TEMPLATE_TEST
-
-    #include "Rendering/RenderingLib.h"
-
-#endif  // PHYSICS_TEMPLATE_TEST
-
 #if defined(TCRE_USE_MSVC)
 
 #endif  // TCRE_USE_MSVC

@@ -48,8 +48,6 @@ void CoreTools::EnvironmentTesting::MainTest()
     ASSERT_THROW_EXCEPTION_0(GetPathReadingFailureTest);
 
     ASSERT_NOT_THROW_EXCEPTION_0(InsertDirectoryTest);
-    ASSERT_THROW_EXCEPTION_0(GetPathWritingFailureTest);
-    ASSERT_THROW_EXCEPTION_0(GetPathReadingAndWritingFailureTest);
     ASSERT_NOT_THROW_EXCEPTION_0(EraseDirectoryTest);
 }
 

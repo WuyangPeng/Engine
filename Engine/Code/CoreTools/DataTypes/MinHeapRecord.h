@@ -5,38 +5,42 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:43)
+/// 版本：1.0.0.5 (2024/01/22 16:47)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "MinHeapNode.h"
-
 namespace CoreTools
 {
-    template <typename T>
+    template <typename KeyType, typename ValueType>
     class MinHeapRecord final
     {
     public:
-        using ClassType = MinHeapRecord<T>;
+        using ClassType = MinHeapRecord<KeyType, ValueType>;
 
-        using MinHeapNode = MinHeapNode<T>;
+        static constexpr auto isArithmetic = std::is_arithmetic_v<KeyType> && std::is_arithmetic_v<ValueType>;
 
     public:
-        MinHeapRecord(int key, int handle, const T& weight) noexcept;
-        MinHeapRecord(int key, const MinHeapNode& minHeapNode) noexcept(std::is_arithmetic_v<T>);
+        MinHeapRecord() noexcept;
+        MinHeapRecord(int index, const KeyType& handle, const ValueType& weight) noexcept(isArithmetic);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD int GetKey() const noexcept;
-        NODISCARD int GetHandle() const noexcept;
-        NODISCARD T GetWeight() const noexcept(std::is_arithmetic_v<T>);
+        NODISCARD int GetIndex() const noexcept;
+        NODISCARD KeyType GetHandle() const noexcept(std::is_arithmetic_v<KeyType>);
+        NODISCARD ValueType GetWeight() const noexcept(std::is_arithmetic_v<ValueType>);
+
+        void SetIndex(int aIndex) noexcept;
+        void SetHandle(const KeyType& aHandle) noexcept(std::is_arithmetic_v<KeyType>);
+        void SetWeight(const ValueType& aWeight) noexcept(std::is_arithmetic_v<ValueType>);
+        void SetRecord(int aIndex, const KeyType& aHandle, const ValueType& aWeight) noexcept(isArithmetic);
 
     private:
-        int key;
-        MinHeapNode minHeapNode;
+        int index;
+        KeyType handle;
+        ValueType weight;
     };
 }
 

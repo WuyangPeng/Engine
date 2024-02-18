@@ -40,8 +40,8 @@ namespace Mathematics
         Vector3 axis;
     };
 
-    using Matrix3ExtractF = AxisAngle<float>;
-    using Matrix3ExtractD = AxisAngle<double>;
+    using AxisAngleF = AxisAngle<float>;
+    using AxisAngleD = AxisAngle<double>;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_AXIS_ANGLE_H

@@ -58,8 +58,8 @@ void Mathematics::CircleFit2Testing::FitTest()
             vertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
-        const CircleFit2D firstCircleFit2(vertices, 1000, true);
-        const CircleFit2D secondCircleFit2(vertices, 1000, false);
+        const CircleFit2D firstCircleFit2(vertices, 10000, true);
+        const CircleFit2D secondCircleFit2(vertices, 10000, false);
 
         const Circle2D firstCircle = firstCircleFit2.GetCircle();
         const Circle2D secondCircle = secondCircleFit2.GetCircle();

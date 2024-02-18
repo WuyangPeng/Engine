@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/26 11:02)
+/// 标准：std:c++20
+/// 版本：1.0.0.5 (2024/02/03 18:20)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_DETAIL_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_DETAIL_H
@@ -19,9 +19,9 @@
 #endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_QUATERNION_ACHIEVE)
 
 template <typename Real>
-bool Mathematics::operator==(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs)
+bool Mathematics::operator==(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs) noexcept
 {
-    return lhs.GetCoordinate() == rhs.GetCoordinate();
+    return lhs.GetW() == rhs.GetW() && lhs.GetX() == rhs.GetX() && lhs.GetY() == rhs.GetY() && lhs.GetZ() == rhs.GetZ();
 }
 
 template <typename Real>
@@ -46,13 +46,19 @@ bool Mathematics::operator<(const Quaternion<Real>& lhs, const Quaternion<Real>&
 template <typename Real>
 Mathematics::Quaternion<Real> Mathematics::operator*(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs) noexcept
 {
-    // 注意:  乘法一般不是可交换的，所以在大多数情况下，
-    // p * q != q * p
+    /// (x0*i + y0*j + z0*k + w0)*(x1*i + y1*j + z1*k + w1)
+    /// =
+    /// i*(+x0*w1 + y0*z1 - z0*y1 + w0*x1) +
+    /// j*(-x0*z1 + y0*w1 + z0*x1 + w0*y1) +
+    /// k*(+x0*y1 - y0*x1 + z0*w1 + w0*z1) +
+    /// 1*(-x0*x1 - y0*y1 - z0*z1 + w0*w1)
 
-    return Quaternion<Real>{ lhs.GetW() * rhs.GetW() - lhs.GetX() * rhs.GetX() - lhs.GetY() * rhs.GetY() - lhs.GetZ() * rhs.GetZ(),
-                             lhs.GetW() * rhs.GetX() + lhs.GetX() * rhs.GetW() + lhs.GetY() * rhs.GetZ() - lhs.GetZ() * rhs.GetY(),
-                             lhs.GetW() * rhs.GetY() + lhs.GetY() * rhs.GetW() + lhs.GetZ() * rhs.GetX() - lhs.GetX() * rhs.GetZ(),
-                             lhs.GetW() * rhs.GetZ() + lhs.GetZ() * rhs.GetW() + lhs.GetX() * rhs.GetY() - lhs.GetY() * rhs.GetX() };
+    const auto x = +lhs.GetX() * rhs.GetW() + lhs.GetY() * rhs.GetZ() - lhs.GetZ() * rhs.GetY() + lhs.GetW() * rhs.GetX();
+    const auto y = -lhs.GetX() * rhs.GetZ() + lhs.GetY() * rhs.GetW() + lhs.GetZ() * rhs.GetX() + lhs.GetW() * rhs.GetY();
+    const auto z = +lhs.GetX() * rhs.GetY() - lhs.GetY() * rhs.GetX() + lhs.GetZ() * rhs.GetW() + lhs.GetW() * rhs.GetZ();
+    const auto w = -lhs.GetX() * rhs.GetX() - lhs.GetY() * rhs.GetY() - lhs.GetZ() * rhs.GetZ() + lhs.GetW() * rhs.GetW();
+
+    return Quaternion<Real>{ w, x, y, z };
 }
 
 template <typename Real>
@@ -71,16 +77,16 @@ bool Mathematics::Approximate(const Quaternion<Real>& lhs, const Quaternion<Real
 }
 
 template <typename Real>
-std::ostream& Mathematics::operator<<(std::ostream& outFile, const Quaternion<Real>& quaternion)
+std::ostream& Mathematics::operator<<(std::ostream& stream, const Quaternion<Real>& quaternion)
 {
-    return outFile << "w = "
-                   << quaternion.GetW()
-                   << " x = "
-                   << quaternion.GetX()
-                   << " y = "
-                   << quaternion.GetY()
-                   << " z = "
-                   << quaternion.GetZ();
+    return stream << "w = "
+                  << quaternion.GetW()
+                  << " x = "
+                  << quaternion.GetX()
+                  << " y = "
+                  << quaternion.GetY()
+                  << " z = "
+                  << quaternion.GetZ();
 }
 
 #endif  // MATHEMATICS_ALGEBRA_QUATERNION_DETAIL_H

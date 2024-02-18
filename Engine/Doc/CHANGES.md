@@ -1,15 +1,18 @@
 @ingroup group_Documentation
 
-Threading Core Render Engine 1.0.0.5
+Threading Core Render Engine 1.0.0.6
 
 ----------------------------
 更新日志
 ----------------------------
-1.0.0.5（2024/01/22——2024/02/29）
+1.0.0.6（2024/02/19——2024/03/31）
 
 	完成功能： 
 	（引擎）
-	+ 实现OnIdleTimer。@
+	+ 实现Rotation。@
+	+ 实现Transform。@	
+	+ 实现ConvertCoordinates。@	
+	+ 实现Algebra。@
 	+ 实现WindowApplication。@
 	+ DistanceAlignedBoxes例子。@
 	+ GameClient显示一张图片。@
@@ -18,6 +21,45 @@ Threading Core Render Engine 1.0.0.5
 	（历史）
 	+ 窗口中显示文字。@
 	+ 千年史策http服务器。@	
+	
+----------------------------
+1.0.0.5（2024/01/22——2024/02/18）
+
+	完成功能： 
+	（引擎）
+	+ 实现Array2。 
+	+ 实现Array3。 
+	+ 实现Array4。
+	+ 实现AtomicMinMax。
+	+ 实现HashCombine。
+	+ 实现LexicoArray2。
+	+ 实现Logger。
+	+ 实现MinHeap。
+	+ 实现RangeIteration。
+	+ 实现SharedPtrCompare。
+	+ 实现SortPointsOnCircle。
+	+ 实现StringUtility。
+	+ 实现ThreadSafeMap。
+	+ 实现ThreadSafeQueue。
+	+ 实现Timer。
+	+ 实现WeakPtrCompare。
+	+ 实现LowLevel。
+	+ 实现Vector。
+	+ 实现Vector2。
+	+ 实现Vector3。
+	+ 实现Vector4。
+	+ 实现GaussianElimination。
+	+ 实现Matrix。
+	+ 实现Matrix2x2。
+	+ 实现Matrix3x3。
+	+ 实现Matrix4x4。
+	+ 实现AxisAngle。
+	+ 实现EulerAngles。
+	+ 实现Quaternion。
+	+ 实现GVector。
+	+ 实现GMatrix。
+	+ 实现Polynomial1。
+	+ 实现BandedMatrix。
 	
 ----------------------------
 1.0.0.4（2024/01/10——2024/01/21）

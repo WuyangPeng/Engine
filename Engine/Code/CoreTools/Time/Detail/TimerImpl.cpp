@@ -5,12 +5,13 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:18)
+/// 版本：1.0.0.5 (2024/01/25 09:57)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "TimerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "System/Time/Using/DeltaTimeUsing.h"
 
 CoreTools::TimerImpl::TimerImpl() noexcept
     : initialTime{ std::chrono::high_resolution_clock::now() }
@@ -53,7 +54,7 @@ double CoreTools::TimerImpl::GetSeconds() const noexcept
 
     const auto milliseconds = GetMilliseconds();
 
-    return static_cast<double>(milliseconds) / 1000.0;
+    return static_cast<double>(milliseconds) / System::gMillisecond;
 }
 
 void CoreTools::TimerImpl::Reset() noexcept

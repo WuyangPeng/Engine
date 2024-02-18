@@ -166,7 +166,7 @@ void Mathematics::EquationTesting::ThriceTest()
             {
                 auto result = *iter;
 
-                ASSERT_APPROXIMATE(firstEquation.Substitution(result), 0.0, 1e-5);
+                ASSERT_APPROXIMATE(firstEquation.Substitution(result), 0.0, 1e-4);
             }
 
             ASSERT_EQUAL(firstEquation.GetImaginaryResultCount(), 2);

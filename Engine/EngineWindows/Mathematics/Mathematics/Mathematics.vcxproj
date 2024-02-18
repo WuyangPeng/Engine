@@ -270,6 +270,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\AlgebraAggregate.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Angle\AlgebraAxisAngle.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Angle\EulerAngles.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\APoint.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\AQuaternion.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\AVector.cpp" />
@@ -284,6 +286,7 @@
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\BoundingSphere.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\CylindricalCoordinates.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Detail\AffineMatrix.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Detail\Matrix\MatrixTable.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Detail\TransformMatrix.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Euler.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\HomogeneousPoint.cpp" />
@@ -294,6 +297,7 @@
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Matrix3EigenDecomposition.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\AxisAngle.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Matrix4.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Matrix\AlgebraMatrix.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Plane.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Polynomial.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\PolynomialDivide.cpp" />
@@ -318,6 +322,7 @@
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector3Tools.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector4.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector4Tools.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector\Vector.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Approximation\CircleFit2.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Approximation\CylinderFit3.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Approximation\Detail\CylinderFit3Update.cpp" />
@@ -795,12 +800,17 @@
     <ClCompile Include="..\..\..\Code\Mathematics\Rational\RationalVector2.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Rational\RationalVector3.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Rational\SignRational.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Rational\SortPointsOnCircle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Algebra.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AlgebraAggregate.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AlgebraFwd.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\AlgebraStreamSize.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Angle\AxisAngle.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Angle\AxisAngleDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Angle\EulerAngles.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Angle\EulerAnglesDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\APoint.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\APointAchieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\APointDetail.h" />
@@ -841,12 +851,14 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\AffineMatrixDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\BandedMatrixData.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\BandedMatrixDataDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\Matrix\MatrixTable.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\Matrix\MatrixTableDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\TransformMatrix.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\TransformMatrixDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Euler.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\EulerAchieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\EulerDetail.h" />
-    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Flags\ExtractEulerResultType.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Flags\EulerResultType.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Flags\MatrixFlags.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Flags\QuaternionFlags.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\HomogeneousPoint.h" />
@@ -872,6 +884,14 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix4Achieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix4Detail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\MatrixDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix\Matrix.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix\Matrix2x2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix\Matrix2x2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix\Matrix3x3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix\Matrix3x3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix\Matrix4x4.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix\Matrix4x4Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix\MatrixDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Plane.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\PlaneAchieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\PlaneDetail.h" />
@@ -937,6 +957,14 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector4Tools.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector4ToolsAchieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector4ToolsDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector\Vector.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector\Vector2.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector\Vector2Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector\Vector3.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector\Vector3Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector\Vector4.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector\Vector4Detail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector\VectorDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Approximation.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationFwd.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Approximation\CircleFit2.h" />
@@ -2083,6 +2111,8 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Query\QueryDotToolsDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Query\QueryFwd.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Query\QuerySortTools.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\CircleSortObject.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\CircleSortObjectDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Rational\ConversionInteger.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Rational\ConversionIntegerDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Rational\ConversionRational.h" />

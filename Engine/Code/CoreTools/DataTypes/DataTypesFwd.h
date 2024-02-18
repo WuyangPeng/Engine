@@ -21,13 +21,10 @@ namespace CoreTools
     template <int Rows, int Columns, typename Type>
     class Table;
 
-    template <typename T>
-    class MinHeapNode;
-
-    template <typename T>
+    template <typename KeyType, typename ValueType>
     class MinHeapRecord;
 
-    template <typename T>
+    template <typename KeyType, typename ValueType>
     class MinHeap;
 
     template <typename Key, typename Value>

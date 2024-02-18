@@ -13,6 +13,22 @@
 #include <iterator>
 #include <type_traits>
 
+/// 支持使用auto关键字在基于范围的for循环中进行反向迭代。例如
+///  std::vector<int> numbers(4);
+///   int i = 0;
+///   for (auto& number : numbers)
+///   {
+///       number = i++;
+///       std::cout << number << ' ';
+///   }
+///   // Output:  0 1 2 3
+///
+///   for (const auto& number : gte::reverse(numbers))
+///   {
+///       std::cout << number << ' ';
+///   }
+///   // Output:  3 2 1 0
+
 namespace CoreTools
 {
     template <typename Iterator>
@@ -45,15 +61,9 @@ namespace CoreTools
               typename ReverseIterator = std::reverse_iterator<Iterator>>
     NODISCARD ReversalObject<ReverseIterator> Reverse(Iterable&& range) noexcept
     {
-        return ReversalObject<ReverseIterator>(ReverseIterator(std::end(range)), ReverseIterator(std::begin(range)));
+        return ReversalObject<ReverseIterator>{ ReverseIterator(std::end(range)), ReverseIterator(std::begin(range)) };
     }
 
-    /// 下面的例子说明了反向迭代。
-    ///  std::vector<int> numbers = { a list of numbers };
-    ///  for (const auto& element : gtl::reverse(numbers))
-    ///  {
-    ///      <do something with the element>;
-    ///  }
 }
 
 #endif  // CORE_TOOLS_TEMPLATE_TOOLS_RANGE_ITERATION_H

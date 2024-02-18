@@ -45,26 +45,26 @@ Mathematics::IntpAkimaUniform2<Real>::IntpAkimaUniform2(int xBound, int yBound, 
     {
         for (auto ix = 0; ix < xBoundM1; ++ix)
         {
-            xSlope[iy][ix + 2] = (f[iy][ix + 1] - f[iy][ix]) * invDX;
+            xSlope(iy, ix + 2) = (f(iy, ix + 1) - f(iy, ix)) * invDX;
         }
 
-        xSlope[iy][1] = (Math<Real>::GetValue(2)) * xSlope[iy][2] - xSlope[iy][3];
-        xSlope[iy][0] = (Math<Real>::GetValue(2)) * xSlope[iy][1] - xSlope[iy][2];
-        xSlope[iy][xBound + 1] = (Math<Real>::GetValue(2)) * xSlope[iy][xBound] - xSlope[iy][xBound - 1];
-        xSlope[iy][xBound + 2] = (Math<Real>::GetValue(2)) * xSlope[iy][xBound + 1] - xSlope[iy][xBound];
+        xSlope(iy, 1) = (Math<Real>::GetValue(2)) * xSlope(iy, 2) - xSlope(iy, 3);
+        xSlope(iy, 0) = (Math<Real>::GetValue(2)) * xSlope(iy, 1) - xSlope(iy, 2);
+        xSlope(iy, xBound + 1) = (Math<Real>::GetValue(2)) * xSlope(iy, xBound) - xSlope(iy, xBound - 1);
+        xSlope(iy, xBound + 2) = (Math<Real>::GetValue(2)) * xSlope(iy, xBound + 1) - xSlope(iy, xBound);
     }
 
     for (auto ix = 0; ix < xBound; ++ix)
     {
         for (auto iy = 0; iy < yBoundM1; ++iy)
         {
-            ySlope[ix][iy + 2] = (f[iy + 1][ix] - f[iy][ix]) * invDY;
+            ySlope(ix, iy + 2) = (f(iy + 1, ix) - f(iy, ix)) * invDY;
         }
 
-        ySlope[ix][1] = (Math<Real>::GetValue(2)) * ySlope[ix][2] - ySlope[ix][3];
-        ySlope[ix][0] = (Math<Real>::GetValue(2)) * ySlope[ix][1] - ySlope[ix][2];
-        ySlope[ix][yBound + 1] = (Math<Real>::GetValue(2)) * ySlope[ix][yBound] - ySlope[ix][yBound - 1];
-        ySlope[ix][yBound + 2] = (Math<Real>::GetValue(2)) * ySlope[ix][yBound + 1] - ySlope[ix][yBound];
+        ySlope(ix, 1) = (Math<Real>::GetValue(2)) * ySlope(ix, 2) - ySlope(ix, 3);
+        ySlope(ix, 0) = (Math<Real>::GetValue(2)) * ySlope(ix, 1) - ySlope(ix, 2);
+        ySlope(ix, yBound + 1) = (Math<Real>::GetValue(2)) * ySlope(ix, yBound) - ySlope(ix, yBound - 1);
+        ySlope(ix, yBound + 2) = (Math<Real>::GetValue(2)) * ySlope(ix, yBound + 1) - ySlope(ix, yBound);
     }
 
     VariableMatrix<Real> fx{ xBound, yBound };
@@ -75,7 +75,7 @@ Mathematics::IntpAkimaUniform2<Real>::IntpAkimaUniform2(int xBound, int yBound, 
         for (auto ix = 0; ix < xBound; ++ix)
         {
             std::vector<Real> derivative{ xSlope(iy, ix), xSlope(iy, ix + 1), xSlope(iy, ix + 2), xSlope(iy, ix + 3) };
-            fx[iy][ix] = ComputeDerivative(derivative);
+            fx(iy, ix) = ComputeDerivative(derivative);
         }
     }
 
@@ -84,7 +84,7 @@ Mathematics::IntpAkimaUniform2<Real>::IntpAkimaUniform2(int xBound, int yBound, 
         for (auto iy = 0; iy < yBound; ++iy)
         {
             std::vector<Real> derivative{ ySlope(ix, iy), ySlope(ix, iy + 1), ySlope(ix, iy + 2), ySlope(ix, iy + 3) };
-            fy[iy][ix] = ComputeDerivative(derivative);
+            fy(iy, ix) = ComputeDerivative(derivative);
         }
     }
 
@@ -97,33 +97,33 @@ Mathematics::IntpAkimaUniform2<Real>::IntpAkimaUniform2(int xBound, int yBound, 
     const auto iy1 = iy0 - 1;
     const auto iy2 = iy1 - 1;
 
-    fxy[0][0] = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(9)) * f[0][0] - (Math<Real>::GetValue(12)) * f[0][1] + (Math<Real>::GetValue(3)) * f[0][2] - (Math<Real>::GetValue(12)) * f[1][0] + (Math<Real>::GetValue(16)) * f[1][1] - (Math<Real>::GetValue(4)) * f[1][2] + (Math<Real>::GetValue(3)) * f[2][0] - (Math<Real>::GetValue(4)) * f[2][1] + f[2][2]);
+    fxy(0, 0) = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(9)) * f(0, 0) - (Math<Real>::GetValue(12)) * f(0, 1) + (Math<Real>::GetValue(3)) * f(0, 2) - (Math<Real>::GetValue(12)) * f(1, 0) + (Math<Real>::GetValue(16)) * f(1, 1) - (Math<Real>::GetValue(4)) * f(1, 2) + (Math<Real>::GetValue(3)) * f(2, 0) - (Math<Real>::GetValue(4)) * f(2, 1) + f(2, 2));
 
-    fxy[0][xBoundM1] = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(9)) * f[0][ix0] - (Math<Real>::GetValue(12)) * f[0][ix1] + (Math<Real>::GetValue(3)) * f[0][ix2] - (Math<Real>::GetValue(12)) * f[1][ix0] + (Math<Real>::GetValue(16)) * f[1][ix1] - (Math<Real>::GetValue(4)) * f[1][ix2] + (Math<Real>::GetValue(3)) * f[2][ix0] - (Math<Real>::GetValue(4)) * f[2][ix1] + f[2][ix2]);
+    fxy(0, xBoundM1) = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(9)) * f(0, ix0) - (Math<Real>::GetValue(12)) * f(0, ix1) + (Math<Real>::GetValue(3)) * f(0, ix2) - (Math<Real>::GetValue(12)) * f(1, ix0) + (Math<Real>::GetValue(16)) * f(1, ix1) - (Math<Real>::GetValue(4)) * f(1, ix2) + (Math<Real>::GetValue(3)) * f(2, ix0) - (Math<Real>::GetValue(4)) * f(2, ix1) + f(2, ix2));
 
-    fxy[yBoundM1][0] = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(9)) * f[iy0][0] - (Math<Real>::GetValue(12)) * f[iy0][1] + (Math<Real>::GetValue(3)) * f[iy0][2] - (Math<Real>::GetValue(12)) * f[iy1][0] + (Math<Real>::GetValue(16)) * f[iy1][1] - (Math<Real>::GetValue(4)) * f[iy1][2] + (Math<Real>::GetValue(3)) * f[iy2][0] - (Math<Real>::GetValue(4)) * f[iy2][1] + f[iy2][2]);
+    fxy(yBoundM1, 0) = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(9)) * f(iy0, 0) - (Math<Real>::GetValue(12)) * f(iy0, 1) + (Math<Real>::GetValue(3)) * f(iy0, 2) - (Math<Real>::GetValue(12)) * f(iy1, 0) + (Math<Real>::GetValue(16)) * f(iy1, 1) - (Math<Real>::GetValue(4)) * f(iy1, 2) + (Math<Real>::GetValue(3)) * f(iy2, 0) - (Math<Real>::GetValue(4)) * f(iy2, 1) + f(iy2, 2));
 
-    fxy[yBoundM1][xBoundM1] = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(9)) * f[iy0][ix0] - (Math<Real>::GetValue(12)) * f[iy0][ix1] + (Math<Real>::GetValue(3)) * f[iy0][ix2] - (Math<Real>::GetValue(12)) * f[iy1][ix0] + (Math<Real>::GetValue(16)) * f[iy1][ix1] - (Math<Real>::GetValue(4)) * f[iy1][ix2] + (Math<Real>::GetValue(3)) * f[iy2][ix0] - (Math<Real>::GetValue(4)) * f[iy2][ix1] + f[iy2][ix2]);
+    fxy(yBoundM1, xBoundM1) = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(9)) * f(iy0, ix0) - (Math<Real>::GetValue(12)) * f(iy0, ix1) + (Math<Real>::GetValue(3)) * f(iy0, ix2) - (Math<Real>::GetValue(12)) * f(iy1, ix0) + (Math<Real>::GetValue(16)) * f(iy1, ix1) - (Math<Real>::GetValue(4)) * f(iy1, ix2) + (Math<Real>::GetValue(3)) * f(iy2, ix0) - (Math<Real>::GetValue(4)) * f(iy2, ix1) + f(iy2, ix2));
 
     for (auto ix = 1; ix < xBoundM1; ++ix)
     {
-        fxy[0][ix] = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(3)) * (f[0][ix - 1] - f[0][ix + 1]) - (Math<Real>::GetValue(4)) * (f[1][ix - 1] - f[1][ix + 1]) + (f[2][ix - 1] - f[2][ix + 1]));
+        fxy(0, ix) = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(3)) * (f(0, ix - 1) - f(0, ix + 1)) - (Math<Real>::GetValue(4)) * (f(1, ix - 1) - f(1, ix + 1)) + (f(2, ix - 1) - f(2, ix + 1)));
 
-        fxy[yBoundM1][ix] = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(3)) * (f[iy0][ix - 1] - f[iy0][ix + 1]) - (Math<Real>::GetValue(4)) * (f[iy1][ix - 1] - f[iy1][ix + 1]) + (f[iy2][ix - 1] - f[iy2][ix + 1]));
+        fxy(yBoundM1, ix) = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(3)) * (f(iy0, ix - 1) - f(iy0, ix + 1)) - (Math<Real>::GetValue(4)) * (f(iy1, ix - 1) - f(iy1, ix + 1)) + (f(iy2, ix - 1) - f(iy2, ix + 1)));
     }
 
     for (auto iy = 1; iy < yBoundM1; ++iy)
     {
-        fxy[iy][0] = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(3)) * (f[iy - 1][0] - f[iy + 1][0]) - (Math<Real>::GetValue(4)) * (f[iy - 1][1] - f[iy + 1][1]) + (f[iy - 1][2] - f[iy + 1][2]));
+        fxy(iy, 0) = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(3)) * (f(iy - 1, 0) - f(iy + 1, 0)) - (Math<Real>::GetValue(4)) * (f(iy - 1, 1) - f(iy + 1, 1)) + (f(iy - 1, 2) - f(iy + 1, 2)));
 
-        fxy[iy][xBoundM1] = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(3)) * (f[iy - 1][ix0] - f[iy + 1][ix0]) - (Math<Real>::GetValue(4)) * (f[iy - 1][ix1] - f[iy + 1][ix1]) + (f[iy - 1][ix2] - f[iy + 1][ix2]));
+        fxy(iy, xBoundM1) = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(3)) * (f(iy - 1, ix0) - f(iy + 1, ix0)) - (Math<Real>::GetValue(4)) * (f(iy - 1, ix1) - f(iy + 1, ix1)) + (f(iy - 1, ix2) - f(iy + 1, ix2)));
     }
 
     for (auto iy = 1; iy < yBoundM1; ++iy)
     {
         for (auto ix = 1; ix < xBoundM1; ++ix)
         {
-            fxy[iy][ix] = Math<Real>::GetRational(1, 4) * invDXDY * (f[iy - 1][ix - 1] - f[iy - 1][ix + 1] - f[iy + 1][ix - 1] + f[iy + 1][ix + 1]);
+            fxy(iy, ix) = Math<Real>::GetRational(1, 4) * invDXDY * (f(iy - 1, ix - 1) - f(iy - 1, ix + 1) - f(iy + 1, ix - 1) + f(iy + 1, ix + 1));
         }
     }
 
@@ -132,13 +132,13 @@ Mathematics::IntpAkimaUniform2<Real>::IntpAkimaUniform2(int xBound, int yBound, 
     {
         for (auto ix = 0; ix < xBoundM1; ++ix)
         {
-            const Matrix2<Real> g{ f[iy][ix], f[iy + 1][ix], f[iy][ix + 1], f[iy + 1][ix + 1] };
+            const Matrix2<Real> g{ f(iy, ix), f(iy + 1, ix), f(iy, ix + 1), f(iy + 1, ix + 1) };
 
-            const Matrix2<Real> gx{ fx[iy][ix], fx[iy + 1][ix], fx[iy][ix + 1], fx[iy + 1][ix + 1] };
+            const Matrix2<Real> gx{ fx(iy, ix), fx(iy + 1, ix), fx(iy, ix + 1), fx(iy + 1, ix + 1) };
 
-            const Matrix2<Real> gy{ fy[iy][ix], fy[iy + 1][ix], fy[iy][ix + 1], fy[iy + 1][ix + 1] };
+            const Matrix2<Real> gy{ fy(iy, ix), fy(iy + 1, ix), fy(iy, ix + 1), fy(iy + 1, ix + 1) };
 
-            const Matrix2<Real> gxy{ fxy[iy][ix], fxy[iy + 1][ix], fxy[iy][ix + 1], fxy[iy + 1][ix + 1] };
+            const Matrix2<Real> gxy{ fxy(iy, ix), fxy(iy + 1, ix), fxy(iy, ix + 1), fxy(iy + 1, ix + 1) };
 
             Construct(poly.at(iy).at(ix), g, gx, gy, gxy);
         }

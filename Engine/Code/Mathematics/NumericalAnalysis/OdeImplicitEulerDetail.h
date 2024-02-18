@@ -28,7 +28,7 @@ Mathematics::OdeImplicitEuler<Real, UserDataType>::OdeImplicitEuler(int dimensio
       functionVector{ dimension },
       identity{ dimension, dimension }
 {
-    identity.SetIdentity();
+    identity.MakeIdentity();
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }

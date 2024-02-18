@@ -88,7 +88,7 @@ void Mathematics::VariableLengthVectorTesting::ConstructionTest()
 
     ASSERT_EQUAL(vector2.GetSize(), 0);
 
-    vector3.ResetSize(10);
+    vector3.SetSize(10);
 
     ASSERT_EQUAL(vector3.GetSize(), 10);
     ASSERT_EQUAL(vector2.GetSize(), 0);

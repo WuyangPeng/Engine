@@ -75,7 +75,7 @@ void Mathematics::OdeImplicitEulerTesting::SolverTest()
 
     VariableMatrixD derivativeFunctionMatrix = OdeImplicitEulerDerivativeFunction(tIn, xIn, this);
     VariableMatrixD identity(dimension, dimension);
-    identity.SetIdentity();
+    identity.MakeIdentity();
     VariableMatrixD derivative = identity - odeImplicitEulerTest.GetStepSize() * derivativeFunctionMatrix;
 
     VariableMatrixD derivativeInverse = LinearSystemD().Inverse(derivative);

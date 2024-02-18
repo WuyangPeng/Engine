@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:43)
+/// 版本：1.0.0.5 (2024/01/25 09:39)
 
 #ifndef CORE_TOOLS_DATA_TYPE_THREAD_SAFE_QUEUE_H
 #define CORE_TOOLS_DATA_TYPE_THREAD_SAFE_QUEUE_H
@@ -29,7 +29,7 @@ namespace CoreTools
         using PopResultType = std::pair<Element, bool>;
 
     public:
-        explicit ThreadSafeQueue(size_t maxNumElements = 0) noexcept;
+        explicit ThreadSafeQueue(int maxNumElements = 0) noexcept;
         ~ThreadSafeQueue() = default;
         ThreadSafeQueue(const ThreadSafeQueue& rhs);
         ThreadSafeQueue& operator=(const ThreadSafeQueue& rhs);
@@ -38,8 +38,8 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD size_t GetMaxNumElements() const;
-        NODISCARD size_t GetNumElements() const;
+        NODISCARD int GetMaxNumElements() const;
+        NODISCARD int GetNumElements() const;
         NODISCARD bool Push(ParamType element);
         NODISCARD PopResultType Pop();
 
@@ -50,7 +50,7 @@ namespace CoreTools
         NODISCARD ElementType GetThreadSafeQueue() const;
 
     private:
-        size_t maxNumElements;
+        int maxNumElements;
         ElementType queue;
         mutable std::mutex mutex;
     };

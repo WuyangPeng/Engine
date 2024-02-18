@@ -208,17 +208,17 @@ void Mathematics::NaturalSpline2<Real>::CreateClosedSpline()
     }
 
     VariableMatrix<Real> mat{ numSegments + 1, numSegments + 1 };
-    mat[0][0] = Math<Real>::GetValue(1);
-    mat[0][numSegments] = Math<Real>::GetValue(-1);
+    mat(0, 0) = Math<Real>::GetValue(1);
+    mat(0, numSegments) = Math<Real>::GetValue(-1);
     for (auto i = 1; i <= numSegments - 1; ++i)
     {
-        mat[i][i - 1] = dt.at(gsl::narrow_cast<size_t>(i) - 1);
-        mat[i][i] = (Math<Real>::GetValue(2)) * (dt.at(gsl::narrow_cast<size_t>(i) - 1) + dt.at(i));
-        mat[i][i + 1] = dt.at(i);
+        mat(i, i - 1) = dt.at(gsl::narrow_cast<size_t>(i) - 1);
+        mat(i, i) = (Math<Real>::GetValue(2)) * (dt.at(gsl::narrow_cast<size_t>(i) - 1) + dt.at(i));
+        mat(i, i + 1) = dt.at(i);
     }
-    mat[numSegments][numSegments - 1] = dt.at(gsl::narrow_cast<size_t>(numSegments) - 1);
-    mat[numSegments][0] = (Math<Real>::GetValue(2)) * (dt.at(gsl::narrow_cast<size_t>(numSegments) - 1) + dt.at(0));
-    mat[numSegments][1] = dt.at(0);
+    mat(numSegments, numSegments - 1) = dt.at(gsl::narrow_cast<size_t>(numSegments) - 1);
+    mat(numSegments, 0) = (Math<Real>::GetValue(2)) * (dt.at(gsl::narrow_cast<size_t>(numSegments) - 1) + dt.at(0));
+    mat(numSegments, 1) = dt.at(0);
 
     c.resize(gsl::narrow_cast<size_t>(numSegments) + 1);
     c.at(0) = Vector2<Real>::GetZero();

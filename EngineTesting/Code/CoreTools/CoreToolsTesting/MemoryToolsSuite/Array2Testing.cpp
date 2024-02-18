@@ -14,6 +14,11 @@
 #include "CoreTools/MemoryTools/Array2Detail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
+namespace CoreTools
+{
+    template class Array2<float>;
+}
+
 CoreTools::Array2Testing::Array2Testing(const OStreamShared& stream)
     : ParentType{ stream }
 {

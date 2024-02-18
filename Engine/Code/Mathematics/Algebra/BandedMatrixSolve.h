@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/26 14:43)
+/// 标准：std:c++20
+/// 版本：1.0.0.5 (2024/02/18 13:34)
 
 /// 所谓的带状矩阵即：在矩阵A中，
 /// 所有的非零元素都集中在以主对角线为中心的带状区域中。
@@ -36,8 +36,8 @@ namespace Mathematics
 
         using Math = Math<Real>;
         using BandedMatrix = BandedMatrix<Real>;
-        using VariableLengthVector = VariableLengthVector<Real>;
         using VariableMatrix = VariableMatrix<Real>;
+        using VariableLengthVector = VariableLengthVector<Real>;
         using ContainerType = std::vector<Real>;
 
     public:
@@ -52,30 +52,29 @@ namespace Mathematics
 
 #endif  // OPEN_CLASS_INVARIANT
 
-        // 成员访问
+        /// 成员访问
         NODISCARD int GetSize() const;
         NODISCARD int GetLowerBandsNumber() const;
         NODISCARD int GetUpperBandsNumber() const;
         NODISCARD int GetStreamSize() const;
         NODISCARD BandedMatrixSolveFlags GetSolve() const noexcept;
-        void SetEpsilon(Real newEpsilon) noexcept;
         NODISCARD Real GetEpsilon() const noexcept;
 
-        // 重设大小会清空原有数据。
-        void ResetSize(int size, int lowerBandsNumber, int upperBandsNumber, const Real newEpsilon = Math::GetZeroTolerance());
+        /// 重设大小会清空原有数据。
+        void ResetSize(int size, int lowerBandsNumber, int upperBandsNumber, Real aEpsilon = Math::GetZeroTolerance());
 
-        // 对角线
+        /// 对角线
         NODISCARD ContainerType GetDiagonalBand() const;
         void SetDiagonalBand(const ContainerType& diagonalBand);
 
-        // 下三角
-        // GetLowerBand(index):  0 <= index < LowerBandMax
+        /// 下三角
+        /// GetLowerBand(index):  0 <= index < LowerBandMax
         NODISCARD int GetLowerBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD ContainerType GetLowerBand(int index) const;
         void SetLowerBand(int index, const ContainerType& lowerBand);
 
-        // 上三角
-        // GetUpperBand(index):  0 <= index < UpperBandMax
+        /// 上三角
+        /// GetUpperBand(index):  0 <= index < UpperBandMax
         NODISCARD int GetUpperBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD ContainerType GetUpperBand(int index) const;
         void SetUpperBand(int index, const ContainerType& upperBand);
@@ -103,6 +102,9 @@ namespace Mathematics
         /// 函数的输入matrix是B，X被计算并被返回。
         /// 当且仅当有一个解决方案时，返回值是有效的，否则会抛出异常。
         /// 如果成功，包括Cholesky分解。（L在A的下三角部分和L^ T在A的上三角部分）
+        ///
+        /// RowMajor必须具有由模板参数指定的存储顺序。
+        template <bool RowMajor = true>
         NODISCARD VariableMatrix SolveSystem(const VariableMatrix& matrix);
 
         NODISCARD VariableMatrix ToInputVariableMatrix() const;
@@ -119,10 +121,12 @@ namespace Mathematics
 
         /// 线性系统为L * U * X = B，其中A = L * U和U = L^T，
         /// 减少到U * X = L^{-1} * B。返回值有效当且仅当操作成功。
+        template <bool RowMajor>
         NODISCARD VariableMatrix SolveLower(const VariableMatrix& matrix) const;
 
         /// 线性系统为U * X = L^{-1} * B，减少到 X = U^{-1} * L^{-1} * B。
         /// 返回值有效当且仅当操作成功。
+        template <bool RowMajor>
         NODISCARD VariableMatrix SolveUpper(const VariableMatrix& matrix) const;
 
     private:

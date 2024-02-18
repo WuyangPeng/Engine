@@ -407,8 +407,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\DataTypesFwd.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeap.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapDetail.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapNode.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapNodeDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecord.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\Table.h" />

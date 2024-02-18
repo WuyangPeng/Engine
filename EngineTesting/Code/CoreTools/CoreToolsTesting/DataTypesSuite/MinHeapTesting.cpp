@@ -36,7 +36,7 @@ void CoreTools::MinHeapTesting::MainTest()
 
 void CoreTools::MinHeapTesting::IntegerTest()
 {
-    MinHeap<int> minHeap{ 10 };
+    MinHeap<int, int> minHeap{ 10 };
 
     ASSERT_EQUAL(minHeap.GetMaxElements(), 10);
     ASSERT_EQUAL(minHeap.GetNumElements(), 0);
@@ -45,7 +45,7 @@ void CoreTools::MinHeapTesting::IntegerTest()
 
     ASSERT_EQUAL(minHeap.GetNumElements(), 1);
 
-    ASSERT_TRUE(minHeap.Update(0, 5));
+    minHeap.Update(0, 5);
 
     const auto minHeapRecord = minHeap.Remove();
 

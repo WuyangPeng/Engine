@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/26 15:16)
+/// 标准：std:c++20
+/// 版本：1.0.0.5 (2024/01/30 10:10)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR3_INFORMATION_H
 #define MATHEMATICS_ALGEBRA_VECTOR3_INFORMATION_H
@@ -20,6 +20,9 @@
 
 namespace Mathematics
 {
+    /// 获取有关矢量输入数组的内部信息。
+    /// 如果输入有效（points不这空，epsilon >= 0），
+    /// 在这种情况下，类成员有效。
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     class Vector3Information final
@@ -30,17 +33,21 @@ namespace Mathematics
         using Math = Math<Real>;
         using Vector3 = Vector3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using AxesAlignBoundingBox3D = AxesAlignBoundingBox3<Real>;
+        using AxesAlignBoundingBox3 = AxesAlignBoundingBox3<Real>;
         using ContainerType = std::vector<Vector3>;
+        using AlgebraVector3 = Algebra::Vector<3, Real>;
+        using AlgebraContainerType = std::vector<AlgebraVector3>;
 
     public:
-        // 值epsilon被使用在计算点集的维度时，作为相对误差。
+        /// 值epsilon被使用在计算点集的维度时，作为相对误差。
+        /// 构造函数根据输入集设置类成员。
         explicit Vector3Information(const ContainerType& points, Real epsilon = Math::GetZeroTolerance());
+        explicit Vector3Information(const AlgebraContainerType& points, Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD int GetDimension() const noexcept;
-        NODISCARD AxesAlignBoundingBox3D GetAABB() const noexcept;
+        NODISCARD AxesAlignBoundingBox3 GetAxesAlignBoundingBox() const noexcept;
         NODISCARD Real GetMaxRange() const noexcept;
         NODISCARD Vector3 GetOrigin() const noexcept;
         NODISCARD Vector3 GetDirectionX() const noexcept;
@@ -64,56 +71,62 @@ namespace Mathematics
         NODISCARD bool TestPointSetIsNearlyAPoint() noexcept;
         NODISCARD bool TestPointSetIsNearlyALineSegment();
         NODISCARD bool TestPointSetIsNearlyAPlanarPolygon();
+        NODISCARD static ContainerType GetContainer(const AlgebraContainerType& points);
 
     private:
         using IndexContainerType = std::array<int, Vector3::pointSize>;
 
     private:
         ContainerType points;
+
+        /// 一种非负公差，用于确定集合的内部维数。
         Real epsilon;
 
-        // 输入集的固有维度。
-        // 其中，参数“epsilon”被用于确定尺寸时提供容差。
+        /// 输入集的内部维度。
+        /// 其中，参数“epsilon”被用于确定尺寸时提供容差。
         int dimension;
 
-        // 输入集的轴对齐包围盒。
-        // 最大范围是aabb.max.x - aabb.min.x 、 aabb.max.y - aabb.min.y
-        // 和aabb.max.z - aabb.min.z的最大值。
-        AxesAlignBoundingBox3D aabb;
+        /// 输入集的轴对齐包围盒。
+        /// 最大范围是axesAlignBoundingBox.GetMaxPoint(0) - axesAlignBoundingBox.GetMinPoint(0) 、
+        /// axesAlignBoundingBox.GetMaxPoint(1) - axesAlignBoundingBox.GetMinPoint(1)和
+        /// axesAlignBoundingBox.GetMaxPoint(2) - axesAlignBoundingBox.GetMinPoint(2)的最大值。
+        AxesAlignBoundingBox3 axesAlignBoundingBox;
         Real maxRange;
 
-        // 坐标系。原点是对任何维度d都有效。
-        // 单位长度的方向向量只适用于0 <= i < d。
-        // 末端的索引是相对于输入的点的数组，并且也只适用于0 <= i < d。
-        // 如果d = 0，所有的点实际上是相同的，
-        // 但使用一个epsilon的可能会导致末端的索引不为零。
-        // 如果d = 1，所有点的位置在一条线段上。
-        // 当d = 2时，所有点不共线但在一个平面上。
-        // 当d = 3时，所有点是不共面的。
+        /// 坐标系。原点是对任何维度d都有效。
+        /// 单位长度的方向向量只适用于0 <= i < d。
+        /// 末端的索引是相对于输入的点的数组，并且也只适用于0 <= i < d。
+        /// 如果d = 0，所有的点实际上是相同的，
+        /// 但使用一个epsilon的可能会导致末端的索引不为零。
+        /// 如果d = 1，所有点的位置在一条线段上。
+        /// 当d = 2时，所有点不共线但在一个平面上。
+        /// 当d = 3时，所有点是不共面的。
         Vector3 origin;
         Vector3 directionX;
         Vector3 directionY;
         Vector3 directionZ;
 
-        // 定义最大空间范围的索引。
-        // 值m_MinExtreme和m_MaxExtreme是用于定义在坐标轴各个方向中
-        // 的一个最大范围的索引数。
-        // 如果维度是2，则m_PerpendicularExtreme是
-        // 垂直于相应的m_MinExtreme和m_MaxExtreme
-        // 最大范围生成的点的索引。
-        // 此外，如果维度是3，
-        // 则m_TetrahedronExtreme是垂直于由
-        // 其他末端点所定义的三角形方向上的最大范围的点。
-        // 由点V[minExtreme], V[maxExtreme],
-        // V[perpendicularExtreme]和V[tetrahedronExtreme]所形成的四面体，
-        // 是顺时针或逆时针，条件存储在m_ExtremeCCW。
+        /// 定义最大空间范围的索引。
+        /// 值minExtreme和maxExtreme是用于定义在坐标轴各个方向中
+        /// 的一个最大范围的索引数。
+        /// 如果维度是2，则perpendicularExtreme是
+        /// 垂直于相应的minExtreme和maxExtreme
+        /// 最大范围生成的点的索引。
+        /// 此外，如果维度是3，
+        /// 则tetrahedronExtreme是垂直于由
+        /// 其他末端点所定义的三角形方向上的最大范围的点。
+        /// 由点V[minExtreme], V[maxExtreme],
+        /// V[perpendicularExtreme]和V[tetrahedronExtreme]所形成的四面体，
+        /// 是顺时针或逆时针，条件存储在extremeCCW。
         int minExtreme;
         int maxExtreme;
         int perpendicularExtreme;
         int tetrahedronExtreme;
-        bool extremeCCW;  // 是否是逆时针
 
-        // 最小点和最大点索引
+        /// 是否是逆时针
+        bool extremeCCW;
+
+        /// 最小点和最大点索引
         IndexContainerType indexMin;
         IndexContainerType indexMax;
     };

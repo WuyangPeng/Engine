@@ -56,7 +56,7 @@ void Mathematics::Matrix3ExtractTesting::ExtractTest()
 
         const Matrix3D matrix0(vector0, angle);
 
-        const Matrix3ExtractD matrix3Extract = matrix0.ExtractAngleAxis();
+        const auto matrix3Extract = matrix0.ExtractAngleAxis();
 
         ASSERT_APPROXIMATE(matrix3Extract.GetAngle(), angle, 1e-10);
 

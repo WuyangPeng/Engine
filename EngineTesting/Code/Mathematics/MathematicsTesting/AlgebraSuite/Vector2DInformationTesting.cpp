@@ -109,9 +109,9 @@ void Mathematics::Vector2InformationTesting::AxesAlignBoundingBoxTest()
     const auto aabb = Vector2ToolsD::ComputeExtremes(vectors);
     Vector2InformationD secondInformation(vectors);
 
-    ASSERT_TRUE(Vector2ToolsD::Approximate(aabb.GetMinPoint(), secondInformation.GetAABB().GetMinPoint()));
+    ASSERT_TRUE(Vector2ToolsD::Approximate(aabb.GetMinPoint(), secondInformation.GetAxesAlignBoundingBox().GetMinPoint()));
 
-    ASSERT_TRUE(Vector2ToolsD::Approximate(aabb.GetMaxPoint(), secondInformation.GetAABB().GetMaxPoint()));
+    ASSERT_TRUE(Vector2ToolsD::Approximate(aabb.GetMaxPoint(), secondInformation.GetAxesAlignBoundingBox().GetMaxPoint()));
 
     const double xRange = aabb.GetMaxPoint().GetX() - aabb.GetMinPoint().GetX();
 
@@ -144,7 +144,7 @@ void Mathematics::Vector2InformationTesting::DirectionTest()
 
     Vector2InformationD information(vectors);
 
-    const auto ptr = information.GetAABB();
+    const auto ptr = information.GetAxesAlignBoundingBox();
 
     Vector2 minVector = ptr.GetMinPoint();
     Vector2 maxVector = ptr.GetMaxPoint();
@@ -222,7 +222,7 @@ void Mathematics::Vector2InformationTesting::ExtremeTest()
 
     Vector2InformationD information(vectors);
 
-    const auto ptr = information.GetAABB();
+    const auto ptr = information.GetAxesAlignBoundingBox();
 
     Vector2 minVector = ptr.GetMinPoint();
     Vector2 maxVector = ptr.GetMaxPoint();

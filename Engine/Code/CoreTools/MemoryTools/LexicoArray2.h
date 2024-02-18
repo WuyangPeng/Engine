@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:44)
+/// 版本：1.0.0.5 (2024/01/22 15:12)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_LEXICO_ARRAY2_H
 #define CORE_TOOLS_MEMORY_TOOLS_LEXICO_ARRAY2_H
@@ -16,31 +16,34 @@
 
 namespace CoreTools
 {
+    /// 一个模板类，用于提供符合行主序（RowMajor = true）或列主序（RowMajor = false）的二维数组访问。
     template <bool RowMajor, typename Real, int... Dimensions>
     class LexicoArray2
     {
     };
 
+    // 数组维度只有在运行时才知道。
     template <typename Real>
     class LexicoArray2<true, Real>
     {
     public:
         using ClassType = LexicoArray2<true, Real>;
+
         using Container = std::vector<Real>;
 
     public:
-        LexicoArray2(int numRows, int numCols, Container& matrix) noexcept;
+        LexicoArray2(int numRows, int numColumns, Container& matrix) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD int GetNumRows() const noexcept;
-        NODISCARD int GetNumCols() const noexcept;
-        NODISCARD Real& operator()(int row, int col);
-        NODISCARD const Real& operator()(int row, int col) const;
+        NODISCARD int GetNumColumns() const noexcept;
+        NODISCARD Real& operator()(int row, int column);
+        NODISCARD const Real& operator()(int row, int column) const;
 
     private:
         int numRows;
-        int numCols;
+        int numColumns;
         Container& matrix;
     };
 
@@ -49,61 +52,65 @@ namespace CoreTools
     {
     public:
         using ClassType = LexicoArray2<false, Real>;
+
         using Container = std::vector<Real>;
 
     public:
-        LexicoArray2(int numRows, int numCols, Container& matrix) noexcept;
+        LexicoArray2(int numRows, int numColumns, Container& matrix) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD int GetNumRows() const noexcept;
-        NODISCARD int GetNumCols() const noexcept;
-        NODISCARD Real& operator()(int row, int col);
-        NODISCARD const Real& operator()(int row, int col) const;
+        NODISCARD int GetNumColumns() const noexcept;
+        NODISCARD Real& operator()(int row, int column);
+        NODISCARD const Real& operator()(int row, int column) const;
 
     private:
         int numRows;
-        int numCols;
+        int numColumns;
         Container& matrix;
     };
 
-    template <typename Real, int NumRows, int NumCols>
-    class LexicoArray2<true, Real, NumRows, NumCols>
+    // 数组维度在编译时是已知的。
+    template <typename Real, int NumRows, int NumColumns>
+    class LexicoArray2<true, Real, NumRows, NumColumns>
     {
     public:
-        using ClassType = LexicoArray2<true, Real, NumRows, NumCols>;
+        using ClassType = LexicoArray2<true, Real, NumRows, NumColumns>;
+
         using Container = std::vector<Real>;
 
     public:
-        LexicoArray2(Container& matrix) noexcept;
+        explicit LexicoArray2(Container& matrix) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD static int GetNumRows() noexcept;
-        NODISCARD static int GetNumCols() noexcept;
-        NODISCARD Real& operator()(int row, int col);
-        NODISCARD const Real& operator()(int row, int col) const;
+        NODISCARD static int GetNumColumns() noexcept;
+        NODISCARD Real& operator()(int row, int column);
+        NODISCARD const Real& operator()(int row, int column) const;
 
     private:
         Container& matrix;
     };
 
-    template <typename Real, int NumRows, int NumCols>
-    class LexicoArray2<false, Real, NumRows, NumCols>
+    template <typename Real, int NumRows, int NumColumns>
+    class LexicoArray2<false, Real, NumRows, NumColumns>
     {
     public:
-        using ClassType = LexicoArray2<false, Real, NumRows, NumCols>;
+        using ClassType = LexicoArray2<false, Real, NumRows, NumColumns>;
+
         using Container = std::vector<Real>;
 
     public:
-        LexicoArray2(Container& matrix) noexcept;
+        explicit LexicoArray2(Container& matrix) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD static int GetNumRows() noexcept;
-        NODISCARD static int GetNumCols() noexcept;
-        NODISCARD Real& operator()(int row, int col);
-        NODISCARD const Real& operator()(int row, int col) const;
+        NODISCARD static int GetNumColumns() noexcept;
+        NODISCARD Real& operator()(int row, int column);
+        NODISCARD const Real& operator()(int row, int column) const;
 
     private:
         Container& matrix;

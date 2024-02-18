@@ -126,11 +126,11 @@ Mathematics::BSplineReduction<Real, TVector>::BSplineReduction(const CtrlPointsT
             if (numIntersections == 2)
             {
                 auto value = RombergIntegral<Real, BSplineReduction>{ 8, intr.GetIntersection(0), intr.GetIntersection(1), Integrand, this }.GetValue();
-                b[i0][i1] = value;
+                b(i0, i1) = value;
             }
             else
             {
-                b[i0][i1] = Math<Real>::GetValue(0);
+                b(i0, i1) = Math<Real>::GetValue(0);
             }
         }
     }
@@ -141,7 +141,7 @@ Mathematics::BSplineReduction<Real, TVector>::BSplineReduction(const CtrlPointsT
     {
         for (auto i1 = 0; i1 < quantity.at(1); ++i1)
         {
-            outCtrlPoints.at(i0) += ctrlPoints.at(i1) * prod[i0][i1];
+            outCtrlPoints.at(i0) += ctrlPoints.at(i1) * prod(i0, i1);
         }
     }
 

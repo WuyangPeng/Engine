@@ -29,7 +29,7 @@ namespace Mathematics
         using Math = Math<Real>;
 
     public:
-        Euler(ExtractEulerResultType type,
+        Euler(EulerResult type,
               ExtractEulerResultOrder order,
               Real x0Angle,
               Real y0Angle,
@@ -40,7 +40,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ExtractEulerResultType GetType() const noexcept;
+        NODISCARD EulerResult GetType() const noexcept;
         NODISCARD ExtractEulerResultOrder GetOrder() const noexcept;
         NODISCARD Real GetX0Angle() const noexcept;
         NODISCARD Real GetY0Angle() const noexcept;
@@ -52,7 +52,7 @@ namespace Mathematics
         void SetAngle(MatrixRotationAxis axisIndex, Real angle) noexcept;
 
     private:
-        ExtractEulerResultType extractEulerResultType;
+        EulerResult extractEulerResultType;
         ExtractEulerResultOrder order;
         Real x0Angle;
         Real y0Angle;

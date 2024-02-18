@@ -196,7 +196,7 @@ Real Mathematics::IntpBicubic2<Real>::operator()(Real x, Real y) const
                 xClamp = xBound - 1;
             }
 
-            result += q.at(row) * f[yClamp][xClamp] * p.at(col);
+            result += q.at(row) * f(yClamp, xClamp) * p.at(col);
         }
     }
 
@@ -362,7 +362,7 @@ Real Mathematics::IntpBicubic2<Real>::operator()(int xOrder, int yOrder, Real x,
                 xClamp = xBound - 1;
             }
 
-            result += q.at(row) * f[yClamp][xClamp] * p.at(col);
+            result += q.at(row) * f(yClamp, xClamp) * p.at(col);
         }
     }
     result *= xMult * yMult;

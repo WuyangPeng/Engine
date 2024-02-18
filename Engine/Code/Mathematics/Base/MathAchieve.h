@@ -238,7 +238,7 @@ Real Mathematics::Math<Real>::Sqrt(Real value) noexcept(gAssert < 3 || gMathemat
 {
     MATHEMATICS_ASSERTION_3(GetValue(0) <= value, "Sqrt的输入值不允许为负数！\n");
 
-    return sqrt(value);
+    return std::sqrt(value);
 }
 
 template <typename Real>

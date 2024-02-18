@@ -1,17 +1,16 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/26 10:13)
+/// 标准：std:c++20
+/// 版本：1.0.0.5 (2024/02/18 13:19)
 
 #ifndef MATHEMATICS_ALGEBRA_BANDED_MATRIX_DATA_DETAIL_H
 #define MATHEMATICS_ALGEBRA_BANDED_MATRIX_DATA_DETAIL_H
 
 #include "BandedMatrixData.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
@@ -143,14 +142,14 @@ void Mathematics::BandedMatrixData<Real>::SetBand(int index, const ContainerType
 {
     MATHEMATICS_CLASS_IS_VALID_3;
 
-    auto& value = bands.at(index);
+    auto& element = bands.at(index);
 
-    if (value.size() != band.size())
+    if (element.size() != band.size())
     {
         THROW_EXCEPTION(SYSTEM_TEXT("元素大小不相等。"s))
     }
 
-    value = band;
+    element = band;
 }
 
 template <typename Real>
@@ -167,7 +166,6 @@ requires std::is_arithmetic_v<Real>
 const Real& Mathematics::BandedMatrixData<Real>::operator()(int row, int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
-    MATHEMATICS_ASSERTION_0(0 <= row && row < size && 0 <= column && column < size, "无效 row 或 column 在 BandedMatrixData::operator\n");
 
     if (auto band = column - row;
         0 < band)
@@ -188,13 +186,17 @@ const Real& Mathematics::BandedMatrixData<Real>::operator()(int row, int column)
         }
     }
 
-    static auto dummy = Math::GetValue(0);
+    /// 对于operator(int,int)返回的不在带中的有效索引，
+    /// 在这种情况下，矩阵项为零。
+    static Real zero{};
 
-    MATHEMATICS_ASSERTION_1(Math::FAbs(dummy) <= Math::GetZeroTolerance(), "静态变量dummy值被修改！dummy值必须为零！");
+    MATHEMATICS_ASSERTION_1(Math::FAbs(zero) <= Math::GetZeroTolerance(), "静态变量dummy值被修改！dummy值必须为零！");
 
-    dummy = Math::GetValue(0);
+    /// 将该值设置为零，
+    /// 以防有人在前一次调用operator(int,int)时无意中修改了dummy。
+    zero = Math::GetValue(0);
 
-    return dummy;
+    return zero;
 }
 
 template <typename Real>
@@ -203,9 +205,9 @@ void Mathematics::BandedMatrixData<Real>::SetZero()
 {
     MATHEMATICS_CLASS_IS_VALID_3;
 
-    for (auto& value : bands)
+    for (auto& element : bands)
     {
-        std::ranges::fill(value, Math::GetValue(0));
+        std::ranges::fill(element, Math::GetValue(0));
     }
 }
 

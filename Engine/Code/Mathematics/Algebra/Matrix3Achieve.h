@@ -19,7 +19,7 @@
 #include "TridiagonalizeDetail.h"
 #include "Vector3Detail.h"
 #include "Vector3Tools.h"
-#include "Flags/ExtractEulerResultType.h"
+#include "Flags/EulerResultType.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -1046,7 +1046,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto xAngle = Math::ATan2(-GetValue<1, 2>(), GetValue<2, 2>());
             const auto zAngle = Math::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
 
-            return Euler{ ExtractEulerResultType::Unique, ExtractEulerResultOrder::XYZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::XYZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
         }
         else
         {
@@ -1057,7 +1057,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto xAngle = -Math::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
             constexpr auto zAngle = Math::GetValue(0);
 
-            return Euler{ ExtractEulerResultType::Difference, ExtractEulerResultOrder::XYZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::XYZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
         }
     }
     else
@@ -1069,7 +1069,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         const auto xAngle = Math::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
         constexpr auto zAngle = Math::GetValue(0);
 
-        return Euler{ ExtractEulerResultType::Sum, ExtractEulerResultOrder::XYZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::XYZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
     }
 }
 
@@ -1095,7 +1095,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto xAngle = Math::ATan2(GetValue<2, 1>(), GetValue<1, 1>());
             const auto yAngle = Math::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
 
-            return Euler{ ExtractEulerResultType::Unique, ExtractEulerResultOrder::XZY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::XZY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
         }
         else
         {
@@ -1106,7 +1106,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto xAngle = -Math::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
             constexpr auto yAngle = Math::GetValue(0);
 
-            return Euler{ ExtractEulerResultType::Difference, ExtractEulerResultOrder::XZY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::XZY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
         }
     }
     else
@@ -1118,7 +1118,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         const auto xAngle = Math::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
         constexpr auto yAngle = Math::GetValue(0);
 
-        return Euler{ ExtractEulerResultType::Sum, ExtractEulerResultOrder::XZY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::XZY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
     }
 }
 
@@ -1145,7 +1145,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto yAngle = Math::ATan2(GetValue<0, 2>(), GetValue<2, 2>());
             const auto zAngle = Math::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
 
-            return Euler{ ExtractEulerResultType::Unique, ExtractEulerResultOrder::YXZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::YXZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
         }
         else
         {
@@ -1156,7 +1156,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto yAngle = -Math::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
             constexpr auto zAngle = Math::GetValue(0);
 
-            return Euler{ ExtractEulerResultType::Difference, ExtractEulerResultOrder::YXZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::YXZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
         }
     }
     else
@@ -1168,7 +1168,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         const auto yAngle = Math::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
         constexpr auto zAngle = Math::GetValue(0);
 
-        return Euler{ ExtractEulerResultType::Sum, ExtractEulerResultOrder::YXZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::YXZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
     }
 }
 
@@ -1195,7 +1195,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto yAngle = Math::ATan2(-GetValue<2, 0>(), GetValue<0, 0>());
             const auto xAngle = Math::ATan2(-GetValue<1, 2>(), GetValue<1, 1>());
 
-            return Euler{ ExtractEulerResultType::Unique, ExtractEulerResultOrder::YZX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::YZX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
         }
         else
         {
@@ -1207,7 +1207,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto yAngle = -Math::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
             constexpr auto xAngle = Math::GetValue(0);
 
-            return Euler{ ExtractEulerResultType::Difference, ExtractEulerResultOrder::YZX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::YZX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
         }
     }
     else
@@ -1220,7 +1220,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         const auto yAngle = Math::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
         constexpr auto xAngle = Math::GetValue(0);
 
-        return Euler{ ExtractEulerResultType::Sum, ExtractEulerResultOrder::YZX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::YZX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
     }
 }
 
@@ -1248,7 +1248,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto zAngle = Math::ATan2(-GetValue<0, 1>(), GetValue<1, 1>());
             const auto yAngle = Math::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
 
-            return Euler{ ExtractEulerResultType::Unique, ExtractEulerResultOrder::ZXY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::ZXY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
         }
         else
         {
@@ -1260,7 +1260,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto zAngle = -Math::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
             constexpr auto yAngle = Math::GetValue(0);
 
-            return Euler{ ExtractEulerResultType::Difference, ExtractEulerResultOrder::ZXY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::ZXY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
         }
     }
     else
@@ -1273,7 +1273,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         const auto zAngle = Math::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
         constexpr auto yAngle = Math::GetValue(0);
 
-        return Euler{ ExtractEulerResultType::Sum, ExtractEulerResultOrder::ZXY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::ZXY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
     }
 }
 
@@ -1301,7 +1301,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto zAngle = Math::ATan2(GetValue<1, 0>(), GetValue<0, 0>());
             const auto xAngle = Math::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
 
-            return Euler{ ExtractEulerResultType::Unique, ExtractEulerResultOrder::ZYX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::ZYX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
         }
         else
         {
@@ -1313,7 +1313,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto zAngle = -Math::ATan2(GetValue<0, 1>(), GetValue<0, 2>());
             constexpr auto xAngle = Math::GetValue(0);
 
-            return Euler{ ExtractEulerResultType::Difference, ExtractEulerResultOrder::ZYX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::ZYX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
         }
     }
     else
@@ -1326,7 +1326,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         const auto zAngle = Math::ATan2(-GetValue<0, 1>(), -GetValue<0, 2>());
         constexpr auto xAngle = Math::GetValue(0);
 
-        return Euler{ ExtractEulerResultType::Sum, ExtractEulerResultOrder::ZYX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::ZYX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
     }
 }
 
@@ -1354,7 +1354,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto x0Angle = Math::ATan2(GetValue<1, 0>(), -GetValue<2, 0>());
             const auto x1Angle = Math::ATan2(GetValue<0, 1>(), GetValue<0, 2>());
 
-            return Euler{ ExtractEulerResultType::Unique, ExtractEulerResultOrder::XYX, x0Angle, yAngle, Math::GetValue(0), x1Angle, Math::GetValue(0), Math::GetValue(0) };
+            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::XYX, x0Angle, yAngle, Math::GetValue(0), x1Angle, Math::GetValue(0), Math::GetValue(0) };
         }
         else
         {
@@ -1364,7 +1364,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto x0Angle = -Math::ATan2(-GetValue<1, 2>(), GetValue<1, 1>());
             constexpr auto x1Angle = Math::GetValue(0);
 
-            return Euler{ ExtractEulerResultType::Difference, ExtractEulerResultOrder::XYX, x0Angle, yAngle, Math::GetValue(0), x1Angle, Math::GetValue(0), Math::GetValue(0) };
+            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::XYX, x0Angle, yAngle, Math::GetValue(0), x1Angle, Math::GetValue(0), Math::GetValue(0) };
         }
     }
     else
@@ -1374,7 +1374,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         const auto x0Angle = Math::ATan2(-GetValue<1, 2>(), GetValue<1, 1>());
         constexpr auto x1Angle = Math::GetValue(0);
 
-        return Euler{ ExtractEulerResultType::Sum, ExtractEulerResultOrder::XYX, x0Angle, yAngle, Math::GetValue(0), x1Angle, Math::GetValue(0), Math::GetValue(0) };
+        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::XYX, x0Angle, yAngle, Math::GetValue(0), x1Angle, Math::GetValue(0), Math::GetValue(0) };
     }
 }
 
@@ -1402,7 +1402,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto x0Angle = Math::ATan2(GetValue<2, 0>(), GetValue<1, 0>());
             const auto x1Angle = Math::ATan2(GetValue<0, 2>(), -GetValue<0, 1>());
 
-            return Euler{ ExtractEulerResultType::Unique, ExtractEulerResultOrder::XZX, x0Angle, Math::GetValue(0), zAngle, x1Angle, Math::GetValue(0), Math::GetValue(0) };
+            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::XZX, x0Angle, Math::GetValue(0), zAngle, x1Angle, Math::GetValue(0), Math::GetValue(0) };
         }
         else
         {
@@ -1412,7 +1412,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto x0Angle = -Math::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
             constexpr auto x1Angle = Math::GetValue(0);
 
-            return Euler{ ExtractEulerResultType::Difference, ExtractEulerResultOrder::XZX, x0Angle, Math::GetValue(0), zAngle, x1Angle, Math::GetValue(0), Math::GetValue(0) };
+            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::XZX, x0Angle, Math::GetValue(0), zAngle, x1Angle, Math::GetValue(0), Math::GetValue(0) };
         }
     }
     else
@@ -1423,7 +1423,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         const auto x0Angle = Math::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
         constexpr auto x1Angle = Math::GetValue(0);
 
-        return Euler{ ExtractEulerResultType::Sum, ExtractEulerResultOrder::XZX, x0Angle, Math::GetValue(0), zAngle, x1Angle, Math::GetValue(0), Math::GetValue(0) };
+        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::XZX, x0Angle, Math::GetValue(0), zAngle, x1Angle, Math::GetValue(0), Math::GetValue(0) };
     }
 }
 
@@ -1451,7 +1451,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto y0Angle = Math::ATan2(GetValue<0, 1>(), GetValue<2, 1>());
             const auto y1Angle = Math::ATan2(GetValue<1, 0>(), -GetValue<1, 2>());
 
-            return Euler{ ExtractEulerResultType::Unique, ExtractEulerResultOrder::YXY, xAngle, y0Angle, Math::GetValue(0), Math::GetValue(0), y1Angle, Math::GetValue(0) };
+            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::YXY, xAngle, y0Angle, Math::GetValue(0), Math::GetValue(0), y1Angle, Math::GetValue(0) };
         }
         else
         {
@@ -1461,7 +1461,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto y0Angle = -Math::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
             constexpr auto y1Angle = Math::GetValue(0);
 
-            return Euler{ ExtractEulerResultType::Difference, ExtractEulerResultOrder::YXY, xAngle, y0Angle, Math::GetValue(0), Math::GetValue(0), y1Angle, Math::GetValue(0) };
+            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::YXY, xAngle, y0Angle, Math::GetValue(0), Math::GetValue(0), y1Angle, Math::GetValue(0) };
         }
     }
     else
@@ -1472,7 +1472,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         const auto y0Angle = Math::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
         constexpr auto y1Angle = Math::GetValue(0);
 
-        return Euler{ ExtractEulerResultType::Sum, ExtractEulerResultOrder::YXY, xAngle, y0Angle, Math::GetValue(0), Math::GetValue(0), y1Angle, Math::GetValue(0) };
+        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::YXY, xAngle, y0Angle, Math::GetValue(0), Math::GetValue(0), y1Angle, Math::GetValue(0) };
     }
 }
 
@@ -1500,7 +1500,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto y0Angle = Math::ATan2(GetValue<2, 1>(), -GetValue<0, 1>());
             const auto y1Angle = Math::ATan2(GetValue<1, 2>(), GetValue<1, 0>());
 
-            return Euler{ ExtractEulerResultType::Unique, ExtractEulerResultOrder::YZY, Math::GetValue(0), y0Angle, zAngle, Math::GetValue(0), y1Angle, Math::GetValue(0) };
+            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::YZY, Math::GetValue(0), y0Angle, zAngle, Math::GetValue(0), y1Angle, Math::GetValue(0) };
         }
         else
         {
@@ -1510,7 +1510,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto y0Angle = -Math::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
             constexpr auto y1Angle = Math::GetValue(0);
 
-            return Euler{ ExtractEulerResultType::Difference, ExtractEulerResultOrder::YZY, Math::GetValue(0), y0Angle, zAngle, Math::GetValue(0), y1Angle, Math::GetValue(0) };
+            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::YZY, Math::GetValue(0), y0Angle, zAngle, Math::GetValue(0), y1Angle, Math::GetValue(0) };
         }
     }
     else
@@ -1521,7 +1521,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         const auto y0Angle = Math::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
         constexpr auto y1Angle = Math::GetValue(0);
 
-        return Euler{ ExtractEulerResultType::Sum, ExtractEulerResultOrder::YZY, Math::GetValue(0), y0Angle, zAngle, Math::GetValue(0), y1Angle, Math::GetValue(0) };
+        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::YZY, Math::GetValue(0), y0Angle, zAngle, Math::GetValue(0), y1Angle, Math::GetValue(0) };
     }
 }
 
@@ -1549,7 +1549,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto z0Angle = Math::ATan2(GetValue<0, 2>(), -GetValue<1, 2>());
             const auto z1Angle = Math::ATan2(GetValue<2, 0>(), GetValue<2, 1>());
 
-            return Euler{ ExtractEulerResultType::Unique, ExtractEulerResultOrder::ZXZ, xAngle, Math::GetValue(0), z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
+            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::ZXZ, xAngle, Math::GetValue(0), z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
         }
         else
         {
@@ -1559,7 +1559,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto z0Angle = -Math::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
             constexpr auto z1Angle = Math::GetValue(0);
 
-            return Euler{ ExtractEulerResultType::Difference, ExtractEulerResultOrder::ZXZ, xAngle, Math::GetValue(0), z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
+            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::ZXZ, xAngle, Math::GetValue(0), z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
         }
     }
     else
@@ -1570,7 +1570,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         const auto z0Angle = Math::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
         constexpr auto z1Angle = Math::GetValue(0);
 
-        return Euler{ ExtractEulerResultType::Sum, ExtractEulerResultOrder::ZXZ, xAngle, Math::GetValue(0), z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
+        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::ZXZ, xAngle, Math::GetValue(0), z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
     }
 }
 
@@ -1598,7 +1598,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto z0Angle = Math::ATan2(GetValue<1, 2>(), GetValue<0, 2>());
             const auto z1Angle = Math::ATan2(GetValue<2, 1>(), -GetValue<2, 0>());
 
-            return Euler{ ExtractEulerResultType::Unique, ExtractEulerResultOrder::ZYZ, Math::GetValue(0), yAngle, z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
+            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::ZYZ, Math::GetValue(0), yAngle, z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
         }
         else  // r22 = -1
         {
@@ -1608,7 +1608,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             const auto z0Angle = -Math::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
             constexpr auto z1Angle = Math::GetValue(0);
 
-            return Euler{ ExtractEulerResultType::Difference, ExtractEulerResultOrder::ZYZ, Math::GetValue(0), yAngle, z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
+            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::ZYZ, Math::GetValue(0), yAngle, z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
         }
     }
     else  // r22 = +1
@@ -1619,7 +1619,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         const auto z0Angle = Math::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
         constexpr auto z1Angle = Math::GetValue(0);
 
-        return Euler{ ExtractEulerResultType::Sum, ExtractEulerResultOrder::ZYZ, Math::GetValue(0), yAngle, z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
+        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::ZYZ, Math::GetValue(0), yAngle, z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
     }
 }
 

@@ -301,6 +301,42 @@
     <Filter Include="Algebra 源文件\Detail">
       <UniqueIdentifier>{b3bd582d-04d7-4384-90ea-cb2e8207c15c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Algebra 头文件\Vector">
+      <UniqueIdentifier>{d0fe7a69-4b50-452f-b3f2-1d19186734ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra 模板文件\Vector">
+      <UniqueIdentifier>{579c2ccf-aacd-4193-a73e-f9166e457f9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra 源文件\Vector">
+      <UniqueIdentifier>{65782279-9886-4711-9a5c-d8925263fd78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra 头文件\Matrix">
+      <UniqueIdentifier>{d7187826-ad9b-4b70-9be8-0c8122649019}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra 模板文件\Matrix">
+      <UniqueIdentifier>{92bf3824-e16e-4a4f-b176-8d309c909045}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra 源文件\Matrix">
+      <UniqueIdentifier>{0c637d14-0d75-4573-9d46-29cabab3d5f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra 模板文件\Detail\Matrix">
+      <UniqueIdentifier>{685615e2-6b29-4057-971a-8e121621182f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra 头文件\Detail\Matrix">
+      <UniqueIdentifier>{10da9cd3-5360-4447-9721-47094015bbb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra 源文件\Detail\Matrix">
+      <UniqueIdentifier>{4d326b32-1828-46fb-87a3-65bfd6df0f6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra 头文件\Angle">
+      <UniqueIdentifier>{636cdc60-c329-49a9-b412-9b28a3c413ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra 模板文件\Angle">
+      <UniqueIdentifier>{d3c4c528-82ff-4e31-ad0d-0d61e8e916f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra 源文件\Angle">
+      <UniqueIdentifier>{92b34786-10e9-46cf-a622-afe51098cb11}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Mathematics\DllLib.cpp">
@@ -1880,6 +1916,24 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\BoundingSphere.cpp">
       <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Rational\SortPointsOnCircle.cpp">
+      <Filter>Rational 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Vector\Vector.cpp">
+      <Filter>Algebra 源文件\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Matrix\AlgebraMatrix.cpp">
+      <Filter>Algebra 源文件\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Detail\Matrix\MatrixTable.cpp">
+      <Filter>Algebra 源文件\Detail\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Angle\AlgebraAxisAngle.cpp">
+      <Filter>Algebra 源文件\Angle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Angle\EulerAngles.cpp">
+      <Filter>Algebra 源文件\Angle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -4904,7 +4958,7 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Base\Flags\NumericalValueSymbol.h">
       <Filter>Base 头文件\Flags</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Flags\ExtractEulerResultType.h">
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Flags\EulerResultType.h">
       <Filter>Algebra 头文件\Flags</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Flags\MatrixFlags.h">
@@ -5881,6 +5935,78 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\BoundingSphereDetail.h">
       <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\CircleSortObject.h">
+      <Filter>Rational 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\CircleSortObjectDetail.h">
+      <Filter>Rational 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector\Vector.h">
+      <Filter>Algebra 头文件\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector\VectorDetail.h">
+      <Filter>Algebra 模板文件\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector\Vector2.h">
+      <Filter>Algebra 头文件\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector\Vector2Detail.h">
+      <Filter>Algebra 模板文件\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector\Vector3.h">
+      <Filter>Algebra 头文件\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector\Vector3Detail.h">
+      <Filter>Algebra 模板文件\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector\Vector4.h">
+      <Filter>Algebra 头文件\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector\Vector4Detail.h">
+      <Filter>Algebra 模板文件\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix\Matrix.h">
+      <Filter>Algebra 头文件\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix\MatrixDetail.h">
+      <Filter>Algebra 模板文件\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\Matrix\MatrixTable.h">
+      <Filter>Algebra 头文件\Detail\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\Matrix\MatrixTableDetail.h">
+      <Filter>Algebra 模板文件\Detail\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix\Matrix2x2.h">
+      <Filter>Algebra 头文件\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix\Matrix2x2Detail.h">
+      <Filter>Algebra 模板文件\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix\Matrix3x3.h">
+      <Filter>Algebra 头文件\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix\Matrix3x3Detail.h">
+      <Filter>Algebra 模板文件\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix\Matrix4x4.h">
+      <Filter>Algebra 头文件\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Matrix\Matrix4x4Detail.h">
+      <Filter>Algebra 模板文件\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Angle\AxisAngle.h">
+      <Filter>Algebra 头文件\Angle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Angle\AxisAngleDetail.h">
+      <Filter>Algebra 模板文件\Angle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Angle\EulerAngles.h">
+      <Filter>Algebra 头文件\Angle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Angle\EulerAnglesDetail.h">
+      <Filter>Algebra 模板文件\Angle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

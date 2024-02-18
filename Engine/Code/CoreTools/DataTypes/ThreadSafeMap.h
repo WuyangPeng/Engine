@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:43)
+/// 版本：1.0.0.5 (2024/01/25 09:34)
 
 #ifndef CORE_TOOLS_DATA_TYPE_THREAD_SAFE_MAP_H
 #define CORE_TOOLS_DATA_TYPE_THREAD_SAFE_MAP_H
@@ -29,6 +29,8 @@ namespace CoreTools
         using KeyParamType = typename ParamType<Key>::type;
         using ValueParamType = typename ParamType<Value>::type;
 
+        using ResultContainer = std::vector<Value>;
+
     public:
         ThreadSafeMap() noexcept = default;
         ~ThreadSafeMap() noexcept = default;
@@ -45,7 +47,7 @@ namespace CoreTools
         NODISCARD bool Remove(KeyParamType key);
         void RemoveAll();
         NODISCARD Value Get(KeyParamType key) const;
-        NODISCARD std::vector<Value> GatherAll() const;
+        NODISCARD ResultContainer GatherAll() const;
 
     private:
         using ContainerType = std::map<Key, Value>;

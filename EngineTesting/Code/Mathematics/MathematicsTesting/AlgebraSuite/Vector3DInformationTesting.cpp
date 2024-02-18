@@ -130,9 +130,9 @@ void Mathematics::Vector3InformationTesting::AxesAlignBoundingBoxTest()
     const auto aabb = Vector3ToolsD::ComputeExtremes(vectors);
     DoubleVector3Information secondInformation(vectors);
 
-    ASSERT_TRUE(Vector3ToolsD::Approximate(aabb.GetMinPoint(), secondInformation.GetAABB().GetMinPoint()));
+    ASSERT_TRUE(Vector3ToolsD::Approximate(aabb.GetMinPoint(), secondInformation.GetAxesAlignBoundingBox().GetMinPoint()));
 
-    ASSERT_TRUE(Vector3ToolsD::Approximate(aabb.GetMaxPoint(), secondInformation.GetAABB().GetMaxPoint()));
+    ASSERT_TRUE(Vector3ToolsD::Approximate(aabb.GetMaxPoint(), secondInformation.GetAxesAlignBoundingBox().GetMaxPoint()));
 
     const double xRange = aabb.GetMaxPoint().GetX() - aabb.GetMinPoint().GetX();
 
@@ -175,7 +175,7 @@ void Mathematics::Vector3InformationTesting::DirectionTest()
 
     DoubleVector3Information information(vectors);
 
-    const auto ptr = information.GetAABB();
+    const auto ptr = information.GetAxesAlignBoundingBox();
 
     Vector3D minVector = ptr.GetMinPoint();
     Vector3D maxVector = ptr.GetMaxPoint();
@@ -284,7 +284,7 @@ void Mathematics::Vector3InformationTesting::ExtremeTest()
 
     DoubleVector3Information information(vectors);
 
-    const auto ptr = information.GetAABB();
+    const auto ptr = information.GetAxesAlignBoundingBox();
 
     Vector3D minVector = ptr.GetMinPoint();
     Vector3D maxVector = ptr.GetMaxPoint();

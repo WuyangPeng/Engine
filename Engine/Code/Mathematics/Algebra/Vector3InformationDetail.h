@@ -1,15 +1,16 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/26 11:16)
+/// 标准：std:c++20
+/// 版本：1.0.0.5 (2024/01/30 10:11)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR3_TOOLS_INFORMATION_DETAIL_H
 #define MATHEMATICS_ALGEBRA_VECTOR3_TOOLS_INFORMATION_DETAIL_H
 
+#include "Vector/VectorDetail.h"
 #include "Vector3Information.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
@@ -25,7 +26,7 @@ Mathematics::Vector3Information<Real>::Vector3Information(const ContainerType& p
     : points{ points },
       epsilon{ epsilon },
       dimension{ -1 },
-      aabb{},
+      axesAlignBoundingBox{},
       maxRange{ Math::GetValue(0) },
       origin{},
       directionX{},
@@ -51,18 +52,40 @@ Mathematics::Vector3Information<Real>::Vector3Information(const ContainerType& p
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
+Mathematics::Vector3Information<Real>::Vector3Information(const AlgebraContainerType& points, Real epsilon)
+    : Vector3Information{ GetContainer(points), epsilon }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+typename Mathematics::Vector3Information<Real>::ContainerType Mathematics::Vector3Information<Real>::GetContainer(const AlgebraContainerType& points)
+{
+    ContainerType result{};
+
+    for (const auto& element : points)
+    {
+        result.emplace_back(element[0], element[1], element[2]);
+    }
+
+    return result;
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Vector3Information<Real>::Init()
 {
-    // 计算输入点的轴对齐包围盒。跟踪“points”当前最小值和最大值的索引。
+    /// 计算输入点的轴对齐包围盒。跟踪“points”当前最小值和最大值的索引。
     ComputeAxisAlignedBoundingBox();
 
-    // 确定边界框的最大范围。
+    /// 确定边界框的最大范围。
     DetermineMaximumRange();
 
-    // 原点是最小x值的点或最小y值或最小z值的点。
+    /// 原点是最小x值的点或最小y值或最小z值的点。
     origin = points.at(minExtreme);
 
-    // 测试点集是否是（几乎）一个点或一个线段或一个平面多边形
+    /// 测试点集是否是（几乎）一个点或一个线段或一个平面多边形
     if (!(TestPointSetIsNearlyAPoint() || TestPointSetIsNearlyALineSegment() || TestPointSetIsNearlyAPlanarPolygon()))
     {
         dimension = 3;
@@ -99,15 +122,15 @@ void Mathematics::Vector3Information<Real>::ComputeAxisAlignedBoundingBox()
         ++pointsIndex;
     }
 
-    aabb = AxesAlignBoundingBox3D{ min, max };
+    axesAlignBoundingBox = AxesAlignBoundingBox3{ min, max };
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
 void Mathematics::Vector3Information<Real>::DetermineMaximumRange()
 {
-    auto maxPoint = aabb.GetMaxPoint();
-    auto minPoint = aabb.GetMinPoint();
+    auto maxPoint = axesAlignBoundingBox.GetMaxPoint();
+    auto minPoint = axesAlignBoundingBox.GetMinPoint();
 
     maxRange = maxPoint.GetX() - minPoint.GetX();
 
@@ -131,6 +154,7 @@ void Mathematics::Vector3Information<Real>::DetermineMaximumRange()
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::TestPointSetIsNearlyAPoint() noexcept
 {
+    /// 测试向量集是否（几乎）是一个向量。
     if (maxRange < epsilon)
     {
         dimension = 0;
@@ -139,10 +163,9 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
         perpendicularExtreme = minExtreme;
         tetrahedronExtreme = minExtreme;
 
-        directionX.SetX(Math::GetValue(0));
-        directionX.SetY(Math::GetValue(0));
-        directionY.SetX(Math::GetValue(0));
-        directionY.SetY(Math::GetValue(0));
+        directionX.ZeroOut();
+        directionY.ZeroOut();
+        directionZ.ZeroOut();
 
         return true;
     }
@@ -153,9 +176,26 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::TestPointSetIsNearlyALineSegment()
 {
+    /// 测试向量集是否（几乎）是线段。我们需要{directionY，directionZ}来跨越directionX的正交补码。
     directionX = points.at(maxExtreme) - origin;
     directionX.Normalize(epsilon);
+    if (Math::FAbs(directionX[1]) < Math::FAbs(directionX[0]))
+    {
+        directionY[0] = -directionX[2];
+        directionY[1] = Real{};
+        directionY[2] = +directionX[0];
+    }
+    else
+    {
+        directionY[0] = Real{};
+        directionY[1] = +directionX[2];
+        directionY[2] = -directionX[1];
+    }
+    directionY.Normalize(epsilon);
+    directionZ = Vector3Tools::CrossProduct(directionX, directionY);
 
+    /// 计算点与直线的最大距离
+    /// origin + t * directionX
     auto maxDistance = Math::GetValue(0);
     perpendicularExtreme = minExtreme;
     auto index = 0;
@@ -177,6 +217,8 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
 
     if (maxDistance < epsilon * maxRange)
     {
+        /// 这些点（几乎）在线上
+        /// origin + t * directionX
         dimension = 1;
         perpendicularExtreme = maxExtreme;
         tetrahedronExtreme = maxExtreme;
@@ -190,11 +232,20 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::TestPointSetIsNearlyAPlanarPolygon()
 {
+    /// 测试向量集是否（几乎）是平面多边形。
+    /// 点v[extreme[perpendicularExtreme]离直线最远：origin + t * direction[0]。
+    /// 向量v[extreme[perpendicularExtreme]]- origin 不一定垂直于directionX，
+    /// 因此投影出directionX分量，使结果垂直于directionX。
     directionY = points.at(perpendicularExtreme) - origin;
     const auto dot = Vector3Tools::DotProduct(directionX, directionY);
     directionY -= dot * directionX;
     directionY.Normalize(epsilon);
+
+    /// 我们需要directionZ来跨越{directionX，directionY}的正交补码。
     directionZ = Vector3Tools::CrossProduct(directionX, directionY);
+
+    /// 计算点与平面的最大距离
+    /// origin+t0 * directionX + t1 * directionY
     auto maxDistance = Math::GetValue(0);
     auto maxSign = NumericalValueSymbol::Zero;
     tetrahedronExtreme = minExtreme;
@@ -218,6 +269,8 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
 
     if (maxDistance < epsilon * maxRange)
     {
+        /// 这些点（几乎）在平面上
+        /// origin + t0 * directionX + t1 * directionY
         dimension = 2;
         tetrahedronExtreme = perpendicularExtreme;
 
@@ -265,11 +318,11 @@ int Mathematics::Vector3Information<Real>::GetDimension() const noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::AxesAlignBoundingBox3<Real> Mathematics::Vector3Information<Real>::GetAABB() const noexcept
+Mathematics::AxesAlignBoundingBox3<Real> Mathematics::Vector3Information<Real>::GetAxesAlignBoundingBox() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return aabb;
+    return axesAlignBoundingBox;
 }
 
 template <typename Real>

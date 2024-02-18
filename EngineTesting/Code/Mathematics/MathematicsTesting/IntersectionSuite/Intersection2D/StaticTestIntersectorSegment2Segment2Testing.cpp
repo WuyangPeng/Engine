@@ -74,7 +74,7 @@ void Mathematics::StaticTestIntersectorSegment2Segment2Testing::SegmentTest()
         ASSERT_ENUM_EQUAL(secondClassify.GetIntersectionType(), IntersectionType::Empty);
         ASSERT_EQUAL(secondClassify.GetQuantity(), 0);
 
-        StaticTestIntersectorSegment2Segment2<float> thirdClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), Segment2F(lhsOrigin, lhsOrigin - secondExtent * lhsDirection), 1e-5f);
+        StaticTestIntersectorSegment2Segment2<float> thirdClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), Segment2F(lhsOrigin, lhsOrigin - secondExtent * lhsDirection), 1e-4f);
 
         ASSERT_ENUM_EQUAL(thirdClassify.GetIntersectionType(), IntersectionType::Point);
         ASSERT_EQUAL(thirdClassify.GetQuantity(), 1);

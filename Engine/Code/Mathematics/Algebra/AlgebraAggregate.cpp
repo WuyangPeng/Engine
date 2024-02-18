@@ -396,7 +396,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::PolynomialF& datum)
 
     const auto container = ReadVectorNotUseNumber<ValueType>();
 
-    datum.SetValue(container);
+    datum.SetCoefficients(container);
 }
 
 template <>
@@ -404,7 +404,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::PolynomialF& dat
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 
-    WriteContainerWithNumber(datum.GetValue());
+    WriteContainerWithNumber(datum.GetCoefficients());
 }
 
 template <>
@@ -416,7 +416,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::PolynomialD& datum)
 
     const auto container = ReadVectorNotUseNumber<ValueType>();
 
-    datum.SetValue(container);
+    datum.SetCoefficients(container);
 }
 
 template <>
@@ -424,7 +424,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::PolynomialD& dat
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 
-    WriteContainerWithNumber(datum.GetValue());
+    WriteContainerWithNumber(datum.GetCoefficients());
 }
 
 template <>

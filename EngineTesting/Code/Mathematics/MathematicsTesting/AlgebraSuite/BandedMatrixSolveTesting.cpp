@@ -283,9 +283,6 @@ void Mathematics::BandedMatrixSolveTesting::ConstructionTest()
             }
         }
     }
-
-    bandedMatrix3.SetEpsilon(1e-11);
-    ASSERT_APPROXIMATE(bandedMatrix3.GetEpsilon(), 1e-11, 1e-10);
 }
 
 void Mathematics::BandedMatrixSolveTesting::SolveTest()
@@ -365,7 +362,7 @@ void Mathematics::BandedMatrixSolveTesting::SolveTest()
         {
             for (auto column = 0; column < bandedMatrix0.GetSize(); ++column)
             {
-                variableMatrix0[row][column] = doubleRandomDistribution(generator);
+                variableMatrix0(row, column) = doubleRandomDistribution(generator);
             }
         }
 

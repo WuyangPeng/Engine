@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:43)
+/// 版本：1.0.0.5 (2024/01/25 09:37)
 
 #ifndef CORE_TOOLS_DATA_TYPE_THREAD_SAFE_MAP_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_THREAD_SAFE_MAP_DETAIL_H
@@ -133,7 +133,8 @@ Value CoreTools::ThreadSafeMap<Key, Value>::Get(KeyParamType key) const
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (const auto iter = threadSafeMap.find(key); iter != threadSafeMap.end())
+    if (const auto iter = threadSafeMap.find(key);
+        iter != threadSafeMap.cend())
     {
         return iter->second;
     }
@@ -144,13 +145,13 @@ Value CoreTools::ThreadSafeMap<Key, Value>::Get(KeyParamType key) const
 }
 
 template <typename Key, typename Value>
-std::vector<Value> CoreTools::ThreadSafeMap<Key, Value>::GatherAll() const
+typename CoreTools::ThreadSafeMap<Key, Value>::ResultContainer CoreTools::ThreadSafeMap<Key, Value>::GatherAll() const
 {
     const std::unique_lock holder{ mutex };
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    std::vector<Value> result{};
+    ResultContainer result{};
 
     result.reserve(threadSafeMap.size());
     for (const auto& value : threadSafeMap)

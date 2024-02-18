@@ -10,6 +10,7 @@
 #ifndef MATHEMATICS_ALGEBRA_VECTOR4_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_VECTOR4_ACHIEVE_H
 
+#include "Vector/Vector4Detail.h"
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Vector4.h"
@@ -27,6 +28,15 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector4<Real>::IsValid() c
 }
 
 #endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+typename Mathematics::Vector4<Real>::AlgebraVector4 Mathematics::Vector4<Real>::GetVector() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return AlgebraVector4{ x, y, z, w };
+}
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>

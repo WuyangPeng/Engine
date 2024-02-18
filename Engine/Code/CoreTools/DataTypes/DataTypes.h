@@ -11,7 +11,6 @@
 #define CORE_TOOLS_DATA_TYPES_H
 
 #include "MinHeapDetail.h"
-#include "MinHeapNodeDetail.h"
 #include "MinHeapRecordDetail.h"
 #include "TableDetail.h"
 #include "ThreadSafeMapDetail.h"

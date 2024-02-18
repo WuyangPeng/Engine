@@ -13,7 +13,7 @@
 #include "CoreTools/ObjectSystems/ObjectRegister.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/AQuaternionDetail.h"
-#include "Mathematics/Algebra/Flags/ExtractEulerResultType.h"
+#include "Mathematics/Algebra/Flags/EulerResultType.h"
 #include "Mathematics/Algebra/TransformDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"

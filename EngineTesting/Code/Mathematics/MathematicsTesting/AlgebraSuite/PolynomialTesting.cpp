@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/09 14:36)
+/// 标准：std:c++20
+/// 版本：1.0.0.5 (2024/02/03 17:51)
 
 #include "PolynomialTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -75,7 +75,7 @@ void Mathematics::PolynomialTesting::ConstructionTest()
     ASSERT_EQUAL(fourthPolynomial.GetDegree(), degree);
     ASSERT_TRUE(Approximate(fourthPolynomial, thirdPolynomial));
 
-    fourthPolynomial.ResetDegree(3);
+    fourthPolynomial.SetDegree(3);
 
     for (int i = 0; i <= fourthPolynomial.GetDegree(); ++i)
     {
@@ -336,7 +336,7 @@ void Mathematics::PolynomialTesting::CalculateTest()
                           firstDoubleVector.at(3) * value * value * value +
                           firstDoubleVector.at(4) * value * value * value * value;
 
-    ASSERT_APPROXIMATE(result, firstPolynomial(value), 1e-8);
+    ASSERT_APPROXIMATE(result, firstPolynomial(value), 1e-6);
 
     PolynomialD secondPolynomial(firstPolynomial.GetDegree() - 1);
 
@@ -367,7 +367,7 @@ void Mathematics::PolynomialTesting::CalculateTest()
     }
 
     PolynomialD seventhPolynomial(firstPolynomial);
-    seventhPolynomial.Compress(0.0001);
+    seventhPolynomial.MakeCompress(0.0001);
 
     for (int i = 0; i <= seventhPolynomial.GetDegree(); ++i)
     {

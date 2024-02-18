@@ -263,80 +263,80 @@ void Mathematics::NaturalSpline1<Real>::CreatePeriodicSpline()
         auto delta2 = delta * delta;
         auto delta3 = delta * delta2;
 
-        mat[j + 0][j + 0] = Math<Real>::GetValue(1);
-        mat[j + 0][j + 1] = Math<Real>::GetValue(0);
-        mat[j + 0][j + 2] = Math<Real>::GetValue(0);
-        mat[j + 0][j + 3] = Math<Real>::GetValue(0);
-        mat[j + 1][j + 0] = Math<Real>::GetValue(1);
-        mat[j + 1][j + 1] = delta;
-        mat[j + 1][j + 2] = delta2;
-        mat[j + 1][j + 3] = delta3;
-        mat[j + 2][j + 0] = Math<Real>::GetValue(0);
-        mat[j + 2][j + 1] = Math<Real>::GetValue(1);
-        mat[j + 2][j + 2] = (Math<Real>::GetValue(2)) * delta;
-        mat[j + 2][j + 3] = (Math<Real>::GetValue(3)) * delta2;
-        mat[j + 3][j + 0] = Math<Real>::GetValue(0);
-        mat[j + 3][j + 1] = Math<Real>::GetValue(0);
-        mat[j + 3][j + 2] = Math<Real>::GetValue(1);
-        mat[j + 3][j + 3] = (Math<Real>::GetValue(3)) * delta;
+        mat(j + 0, j + 0) = Math<Real>::GetValue(1);
+        mat(j + 0, j + 1) = Math<Real>::GetValue(0);
+        mat(j + 0, j + 2) = Math<Real>::GetValue(0);
+        mat(j + 0, j + 3) = Math<Real>::GetValue(0);
+        mat(j + 1, j + 0) = Math<Real>::GetValue(1);
+        mat(j + 1, j + 1) = delta;
+        mat(j + 1, j + 2) = delta2;
+        mat(j + 1, j + 3) = delta3;
+        mat(j + 2, j + 0) = Math<Real>::GetValue(0);
+        mat(j + 2, j + 1) = Math<Real>::GetValue(1);
+        mat(j + 2, j + 2) = (Math<Real>::GetValue(2)) * delta;
+        mat(j + 2, j + 3) = (Math<Real>::GetValue(3)) * delta2;
+        mat(j + 3, j + 0) = Math<Real>::GetValue(0);
+        mat(j + 3, j + 1) = Math<Real>::GetValue(0);
+        mat(j + 3, j + 2) = Math<Real>::GetValue(1);
+        mat(j + 3, j + 3) = (Math<Real>::GetValue(3)) * delta;
 
         const auto k = j + 4;
-        mat[j + 0][k + 0] = Math<Real>::GetValue(0);
-        mat[j + 0][k + 1] = Math<Real>::GetValue(0);
-        mat[j + 0][k + 2] = Math<Real>::GetValue(0);
-        mat[j + 0][k + 3] = Math<Real>::GetValue(0);
-        mat[j + 1][k + 0] = Math<Real>::GetValue(-1);
-        mat[j + 1][k + 1] = Math<Real>::GetValue(0);
-        mat[j + 1][k + 2] = Math<Real>::GetValue(0);
-        mat[j + 1][k + 3] = Math<Real>::GetValue(0);
-        mat[j + 2][k + 0] = Math<Real>::GetValue(0);
-        mat[j + 2][k + 1] = Math<Real>::GetValue(-1);
-        mat[j + 2][k + 2] = Math<Real>::GetValue(0);
-        mat[j + 2][k + 3] = Math<Real>::GetValue(0);
-        mat[j + 3][k + 0] = Math<Real>::GetValue(0);
-        mat[j + 3][k + 1] = Math<Real>::GetValue(0);
-        mat[j + 3][k + 2] = Math<Real>::GetValue(-1);
-        mat[j + 3][k + 3] = Math<Real>::GetValue(0);
+        mat(j + 0, k + 0) = Math<Real>::GetValue(0);
+        mat(j + 0, k + 1) = Math<Real>::GetValue(0);
+        mat(j + 0, k + 2) = Math<Real>::GetValue(0);
+        mat(j + 0, k + 3) = Math<Real>::GetValue(0);
+        mat(j + 1, k + 0) = Math<Real>::GetValue(-1);
+        mat(j + 1, k + 1) = Math<Real>::GetValue(0);
+        mat(j + 1, k + 2) = Math<Real>::GetValue(0);
+        mat(j + 1, k + 3) = Math<Real>::GetValue(0);
+        mat(j + 2, k + 0) = Math<Real>::GetValue(0);
+        mat(j + 2, k + 1) = Math<Real>::GetValue(-1);
+        mat(j + 2, k + 2) = Math<Real>::GetValue(0);
+        mat(j + 2, k + 3) = Math<Real>::GetValue(0);
+        mat(j + 3, k + 0) = Math<Real>::GetValue(0);
+        mat(j + 3, k + 1) = Math<Real>::GetValue(0);
+        mat(j + 3, k + 2) = Math<Real>::GetValue(-1);
+        mat(j + 3, k + 3) = Math<Real>::GetValue(0);
     }
 
     auto delta = times.at(gsl::narrow_cast<size_t>(i) + 1) - times.at(i);
     auto delta2 = delta * delta;
     auto delta3 = delta * delta2;
 
-    mat[j + 0][j + 0] = Math<Real>::GetValue(1);
-    mat[j + 0][j + 1] = Math<Real>::GetValue(0);
-    mat[j + 0][j + 2] = Math<Real>::GetValue(0);
-    mat[j + 0][j + 3] = Math<Real>::GetValue(0);
-    mat[j + 1][j + 0] = Math<Real>::GetValue(1);
-    mat[j + 1][j + 1] = delta;
-    mat[j + 1][j + 2] = delta2;
-    mat[j + 1][j + 3] = delta3;
-    mat[j + 2][j + 0] = Math<Real>::GetValue(0);
-    mat[j + 2][j + 1] = Math<Real>::GetValue(1);
-    mat[j + 2][j + 2] = (Math<Real>::GetValue(2)) * delta;
-    mat[j + 2][j + 3] = (Math<Real>::GetValue(3)) * delta2;
-    mat[j + 3][j + 0] = Math<Real>::GetValue(0);
-    mat[j + 3][j + 1] = Math<Real>::GetValue(0);
-    mat[j + 3][j + 2] = Math<Real>::GetValue(1);
-    mat[j + 3][j + 3] = (Math<Real>::GetValue(3)) * delta;
+    mat(j + 0, j + 0) = Math<Real>::GetValue(1);
+    mat(j + 0, j + 1) = Math<Real>::GetValue(0);
+    mat(j + 0, j + 2) = Math<Real>::GetValue(0);
+    mat(j + 0, j + 3) = Math<Real>::GetValue(0);
+    mat(j + 1, j + 0) = Math<Real>::GetValue(1);
+    mat(j + 1, j + 1) = delta;
+    mat(j + 1, j + 2) = delta2;
+    mat(j + 1, j + 3) = delta3;
+    mat(j + 2, j + 0) = Math<Real>::GetValue(0);
+    mat(j + 2, j + 1) = Math<Real>::GetValue(1);
+    mat(j + 2, j + 2) = (Math<Real>::GetValue(2)) * delta;
+    mat(j + 2, j + 3) = (Math<Real>::GetValue(3)) * delta2;
+    mat(j + 3, j + 0) = Math<Real>::GetValue(0);
+    mat(j + 3, j + 1) = Math<Real>::GetValue(0);
+    mat(j + 3, j + 2) = Math<Real>::GetValue(1);
+    mat(j + 3, j + 3) = (Math<Real>::GetValue(3)) * delta;
 
     constexpr auto k = 0;
-    mat[j + 0][k + 0] = Math<Real>::GetValue(0);
-    mat[j + 0][k + 1] = Math<Real>::GetValue(0);
-    mat[j + 0][k + 2] = Math<Real>::GetValue(0);
-    mat[j + 0][k + 3] = Math<Real>::GetValue(0);
-    mat[j + 1][k + 0] = Math<Real>::GetValue(-1);
-    mat[j + 1][k + 1] = Math<Real>::GetValue(0);
-    mat[j + 1][k + 2] = Math<Real>::GetValue(0);
-    mat[j + 1][k + 3] = Math<Real>::GetValue(0);
-    mat[j + 2][k + 0] = Math<Real>::GetValue(0);
-    mat[j + 2][k + 1] = Math<Real>::GetValue(-1);
-    mat[j + 2][k + 2] = Math<Real>::GetValue(0);
-    mat[j + 2][k + 3] = Math<Real>::GetValue(0);
-    mat[j + 3][k + 0] = Math<Real>::GetValue(0);
-    mat[j + 3][k + 1] = Math<Real>::GetValue(0);
-    mat[j + 3][k + 2] = Math<Real>::GetValue(-1);
-    mat[j + 3][k + 3] = Math<Real>::GetValue(0);
+    mat(j + 0, k + 0) = Math<Real>::GetValue(0);
+    mat(j + 0, k + 1) = Math<Real>::GetValue(0);
+    mat(j + 0, k + 2) = Math<Real>::GetValue(0);
+    mat(j + 0, k + 3) = Math<Real>::GetValue(0);
+    mat(j + 1, k + 0) = Math<Real>::GetValue(-1);
+    mat(j + 1, k + 1) = Math<Real>::GetValue(0);
+    mat(j + 1, k + 2) = Math<Real>::GetValue(0);
+    mat(j + 1, k + 3) = Math<Real>::GetValue(0);
+    mat(j + 2, k + 0) = Math<Real>::GetValue(0);
+    mat(j + 2, k + 1) = Math<Real>::GetValue(-1);
+    mat(j + 2, k + 2) = Math<Real>::GetValue(0);
+    mat(j + 2, k + 3) = Math<Real>::GetValue(0);
+    mat(j + 3, k + 0) = Math<Real>::GetValue(0);
+    mat(j + 3, k + 1) = Math<Real>::GetValue(0);
+    mat(j + 3, k + 2) = Math<Real>::GetValue(-1);
+    mat(j + 3, k + 3) = Math<Real>::GetValue(0);
 
     for (i = 0, j = 0; i < numSegments; ++i, j += 4)
     {
@@ -347,10 +347,10 @@ void Mathematics::NaturalSpline1<Real>::CreatePeriodicSpline()
     }
 
     VariableLengthVector<Real> coeff{ size };
-    //bool solved =
-    //   LinearSystem<Real>().Solve(mat, rhs.GetSize(), coeff.GetSize());
-    // MATHEMATICS_ASSERTION_0(solved, "Failed to solve linear system\n");
-    //WM5_UNUSED(solved);
+    // bool solved =
+    //    LinearSystem<Real>().Solve(mat, rhs.GetSize(), coeff.GetSize());
+    //  MATHEMATICS_ASSERTION_0(solved, "Failed to solve linear system\n");
+    // WM5_UNUSED(solved);
 
     for (i = 0, j = 0; i < numSegments; ++i)
     {

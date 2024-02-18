@@ -47,6 +47,7 @@ namespace Mathematics
         using BarycentricCoordinates = BarycentricCoordinates<Real, pointSize + 1>;
         using ArrayType = std::array<Real, pointSize>;
         using ToolsType = Vector2Tools<Real>;
+        using AlgebraVector2 = Algebra::Vector<2, Real>;
 
         using GetCoordinateFunction = Real (ClassType::*)() const noexcept;
         using SetCoordinateFunction = void (ClassType::*)(Real) noexcept;
@@ -72,6 +73,8 @@ namespace Mathematics
         explicit Vector2(const ArrayType& coordinate);
 
         CLASS_INVARIANT_DECLARE;
+
+        NODISCARD AlgebraVector2 GetVector() const noexcept;
 
         // ×ø±ê·ÃÎÊ
         NODISCARD Real GetX() const noexcept;

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:46)
+/// 版本：1.0.0.5 (2024/01/25 10:00)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_WEAK_PTR_COMPARE_H
 #define CORE_TOOLS_MEMORY_TOOLS_WEAK_PTR_COMPARE_H
@@ -16,6 +16,11 @@
 
 #include <memory>
 
+/// std::weak_ptr对象的比较运算符。
+/// 类型T必须实现比较运算符。
+/// 必须小心在管理基于std::weak_ptr比较排序的容器。
+/// 基础对象可能会发生更改，从而使容器排序无效。
+/// 如果对象在容器持续存在时没有更改，则可以安全使用这些对象。
 namespace CoreTools
 {
     template <typename T>
@@ -25,6 +30,7 @@ namespace CoreTools
         {
             auto lhsSharedPtr = lhs.lock();
             auto rhsSharedPtr = rhs.lock();
+
             return SharedPtrEqual<T>()(lhsSharedPtr, rhsSharedPtr);
         }
     };
@@ -45,6 +51,7 @@ namespace CoreTools
         {
             auto lhsSharedPtr = lhs.lock();
             auto rhsSharedPtr = rhs.lock();
+
             return SharedPtrLess<T>()(lhsSharedPtr, rhsSharedPtr);
         }
     };

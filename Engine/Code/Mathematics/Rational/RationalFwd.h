@@ -73,6 +73,9 @@ namespace Mathematics
 
     template <typename T>
     class SortPointsOnCircle;
+
+    template <typename T>
+    class CircleSortObject;
 }
 
 #endif  // MATHEMATICS_RATIONAL_FWD_H

@@ -48,6 +48,7 @@ namespace Mathematics
 
         using Math = Math<Real>;
         using ArrayType = std::array<Real, pointSize>;
+        using AlgebraVector4 = Algebra::Vector<4, Real>;
 
         using GetCoordinateFunction = Real (ClassType::*)() const noexcept;
         using SetCoordinateFunction = void (ClassType::*)(Real) noexcept;
@@ -71,6 +72,8 @@ namespace Mathematics
         explicit Vector4(const Vector4<RhsType>& vector);
 
         CLASS_INVARIANT_DECLARE;
+
+        NODISCARD AlgebraVector4 GetVector() const noexcept;
 
         void SetCoordinate(const ArrayType& coordinate) noexcept;
         NODISCARD ArrayType GetCoordinate() const noexcept;

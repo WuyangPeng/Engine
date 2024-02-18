@@ -14,6 +14,11 @@
 #include "CoreTools/MemoryTools/Array3Detail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
+namespace CoreTools
+{
+    template class Array3<float>;
+}
+
 CoreTools::Array3Testing::Array3Testing(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -76,7 +81,7 @@ void CoreTools::Array3Testing::ResultTest(const ArrayType& array3)
         {
             for (auto bound0Index = 0; bound0Index < bound0; ++bound0Index)
             {
-                ASSERT_EQUAL(array3.Get(bound0Index, bound1Index, bound2Index), resultCount);
+                ASSERT_EQUAL(array3(bound2Index, bound1Index, bound0Index), resultCount);
 
                 ++resultCount;
             }

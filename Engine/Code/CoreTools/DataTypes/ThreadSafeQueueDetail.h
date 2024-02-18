@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:43)
+/// 版本：1.0.0.5 (2024/01/25 09:40)
 
 #ifndef CORE_TOOLS_DATA_TYPE_THREAD_SAFE_QUEUE_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_THREAD_SAFE_QUEUE_DETAIL_H
@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Element>
-CoreTools::ThreadSafeQueue<Element>::ThreadSafeQueue(size_t maxNumElements) noexcept
+CoreTools::ThreadSafeQueue<Element>::ThreadSafeQueue(int maxNumElements) noexcept
     : maxNumElements{ maxNumElements }, queue{}, mutex{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -86,7 +86,7 @@ bool CoreTools::ThreadSafeQueue<Element>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Element>
-size_t CoreTools::ThreadSafeQueue<Element>::GetMaxNumElements() const
+int CoreTools::ThreadSafeQueue<Element>::GetMaxNumElements() const
 {
     const std::unique_lock holder{ mutex };
 
@@ -96,13 +96,13 @@ size_t CoreTools::ThreadSafeQueue<Element>::GetMaxNumElements() const
 }
 
 template <typename Element>
-size_t CoreTools::ThreadSafeQueue<Element>::GetNumElements() const
+int CoreTools::ThreadSafeQueue<Element>::GetNumElements() const
 {
     const std::unique_lock holder{ mutex };
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return queue.size();
+    return boost::numeric_cast<int>(queue.size());
 }
 
 template <typename Element>

@@ -11,9 +11,9 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Mathematics/Algebra/Flags/EulerResultType.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
-#include "Mathematics/Algebra/Flags/ExtractEulerResultType.h"
 
 #include <random>
 
@@ -669,7 +669,7 @@ void Mathematics::Matrix3Testing::ArithmeticCalculateTest()
         ASSERT_APPROXIMATE(angle, matrix6.ExtractAngle(), 1e-4f);
         ASSERT_TRUE(Vector3ToolsF::Approximate(matrix6.ExtractAxis(), vector0, 1e-5f));
 
-        const Matrix3ExtractF extract = matrix6.ExtractAngleAxis();
+        const auto extract = matrix6.ExtractAngleAxis();
 
         ASSERT_APPROXIMATE(angle, extract.GetAngle(), 1e-4f);
         ASSERT_TRUE(Vector3ToolsF::Approximate(extract.GetAxis(), vector0, 1e-5f));
@@ -781,7 +781,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(secondAngle, euler0.GetY0Angle(), 1e-10);
         ASSERT_APPROXIMATE(thirdAngle, euler0.GetZ0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Unique);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
 
         matrix0.MakeEulerXZY(firstAngle, secondAngle, thirdAngle);
 
@@ -791,7 +791,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(secondAngle, euler0.GetZ0Angle(), 1e-10);
         ASSERT_APPROXIMATE(thirdAngle, euler0.GetY0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Unique);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
 
         matrix0.MakeEulerYXZ(firstAngle, secondAngle, thirdAngle);
 
@@ -801,7 +801,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(secondAngle, euler0.GetX0Angle(), 1e-10);
         ASSERT_APPROXIMATE(thirdAngle, euler0.GetZ0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Unique);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
 
         matrix0.MakeEulerYZX(firstAngle, secondAngle, thirdAngle);
 
@@ -811,7 +811,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(secondAngle, euler0.GetZ0Angle(), 1e-10);
         ASSERT_APPROXIMATE(thirdAngle, euler0.GetX0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Unique);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
 
         matrix0.MakeEulerZXY(firstAngle, secondAngle, thirdAngle);
 
@@ -821,7 +821,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(secondAngle, euler0.GetX0Angle(), 1e-10);
         ASSERT_APPROXIMATE(thirdAngle, euler0.GetY0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Unique);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
 
         matrix0.MakeEulerZYX(firstAngle, secondAngle, thirdAngle);
 
@@ -831,7 +831,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(secondAngle, euler0.GetY0Angle(), 1e-10);
         ASSERT_APPROXIMATE(thirdAngle, euler0.GetX0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Unique);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
 
         matrix0.MakeEulerXYX(firstAngle, fourthAngle, thirdAngle);
 
@@ -841,7 +841,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(fourthAngle, euler0.GetY0Angle(), 1e-10);
         ASSERT_APPROXIMATE(thirdAngle, euler0.GetX1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Unique);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
 
         matrix0.MakeEulerXZX(firstAngle, fourthAngle, thirdAngle);
 
@@ -851,7 +851,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(fourthAngle, euler0.GetZ0Angle(), 1e-10);
         ASSERT_APPROXIMATE(thirdAngle, euler0.GetX1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Unique);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
 
         matrix0.MakeEulerYXY(firstAngle, fourthAngle, thirdAngle);
 
@@ -861,7 +861,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(fourthAngle, euler0.GetX0Angle(), 1e-10);
         ASSERT_APPROXIMATE(thirdAngle, euler0.GetY1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Unique);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
 
         matrix0.MakeEulerYZY(firstAngle, fourthAngle, thirdAngle);
 
@@ -871,7 +871,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(fourthAngle, euler0.GetZ0Angle(), 1e-10);
         ASSERT_APPROXIMATE(thirdAngle, euler0.GetY1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Unique);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
 
         matrix0.MakeEulerZXZ(firstAngle, fourthAngle, thirdAngle);
 
@@ -881,7 +881,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(fourthAngle, euler0.GetX0Angle(), 1e-10);
         ASSERT_APPROXIMATE(thirdAngle, euler0.GetZ1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Unique);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
 
         matrix0.MakeEulerZYZ(firstAngle, fourthAngle, thirdAngle);
 
@@ -891,7 +891,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(fourthAngle, euler0.GetY0Angle(), 1e-10);
         ASSERT_APPROXIMATE(thirdAngle, euler0.GetZ1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Unique);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
 
         // ≤‚ ‘Ãÿ ‚«Èøˆ
         matrix0.MakeEulerXYZ(firstAngle + thirdAngle, -MathD::GetHalfPI(), thirdAngle);
@@ -902,7 +902,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(-MathD::GetHalfPI(), euler0.GetY0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetZ0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Difference);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
 
         matrix0.MakeEulerXYZ(firstAngle - thirdAngle, MathD::GetHalfPI(), thirdAngle);
 
@@ -912,7 +912,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(MathD::GetHalfPI(), euler0.GetY0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetZ0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Sum);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
 
         matrix0.MakeEulerXZY(firstAngle + thirdAngle, MathD::GetHalfPI(), thirdAngle);
 
@@ -922,7 +922,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(MathD::GetHalfPI(), euler0.GetZ0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetY0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Difference);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
 
         matrix0.MakeEulerXZY(firstAngle - thirdAngle, -MathD::GetHalfPI(), thirdAngle);
 
@@ -932,7 +932,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(-MathD::GetHalfPI(), euler0.GetZ0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetY0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Sum);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
 
         matrix0.MakeEulerYXZ(firstAngle + thirdAngle, MathD::GetHalfPI(), thirdAngle);
 
@@ -942,7 +942,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(MathD::GetHalfPI(), euler0.GetX0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetZ0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Difference);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
 
         matrix0.MakeEulerYXZ(firstAngle - thirdAngle, -MathD::GetHalfPI(), thirdAngle);
 
@@ -952,7 +952,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(-MathD::GetHalfPI(), euler0.GetX0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetZ0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Sum);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
 
         matrix0.MakeEulerYZX(firstAngle + thirdAngle, -MathD::GetHalfPI(), thirdAngle);
 
@@ -962,7 +962,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(-MathD::GetHalfPI(), euler0.GetZ0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetX0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Difference);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
 
         matrix0.MakeEulerYZX(firstAngle - thirdAngle, MathD::GetHalfPI(), thirdAngle);
 
@@ -972,7 +972,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(MathD::GetHalfPI(), euler0.GetZ0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetX0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Sum);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
 
         matrix0.MakeEulerZXY(firstAngle + thirdAngle, -MathD::GetHalfPI(), thirdAngle);
 
@@ -982,7 +982,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(-MathD::GetHalfPI(), euler0.GetX0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetY0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Difference);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
 
         matrix0.MakeEulerZXY(firstAngle - thirdAngle, MathD::GetHalfPI(), thirdAngle);
 
@@ -992,7 +992,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(MathD::GetHalfPI(), euler0.GetX0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetY0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Sum);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
 
         matrix0.MakeEulerZYX(firstAngle + thirdAngle, MathD::GetHalfPI(), thirdAngle);
 
@@ -1002,7 +1002,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(MathD::GetHalfPI(), euler0.GetY0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetX0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Difference);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
 
         matrix0.MakeEulerZYX(firstAngle - thirdAngle, -MathD::GetHalfPI(), thirdAngle);
 
@@ -1012,7 +1012,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(-MathD::GetHalfPI(), euler0.GetY0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetX0Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Sum);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
 
         matrix0.MakeEulerXYX(firstAngle + thirdAngle, MathD::GetPI(), thirdAngle);
 
@@ -1022,7 +1022,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(MathD::GetPI(), euler0.GetY0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetX1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Difference);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
 
         matrix0.MakeEulerXYX(firstAngle - thirdAngle, 0.0f, thirdAngle);
 
@@ -1032,7 +1032,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(0.0f, euler0.GetY0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetX1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Sum);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
 
         matrix0.MakeEulerXZX(firstAngle + thirdAngle, MathD::GetPI(), thirdAngle);
 
@@ -1042,7 +1042,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(MathD::GetPI(), euler0.GetZ0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetX1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Difference);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
 
         matrix0.MakeEulerXZX(firstAngle - thirdAngle, 0.0f, thirdAngle);
 
@@ -1052,7 +1052,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(0.0f, euler0.GetZ0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetX1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Sum);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
 
         matrix0.MakeEulerYXY(firstAngle + thirdAngle, MathD::GetPI(), thirdAngle);
 
@@ -1062,7 +1062,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(MathD::GetPI(), euler0.GetX0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetY1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Difference);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
 
         matrix0.MakeEulerYXY(firstAngle - thirdAngle, 0.0f, thirdAngle);
 
@@ -1072,7 +1072,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(0.0f, euler0.GetX0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetY1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Sum);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
 
         matrix0.MakeEulerYZY(firstAngle + thirdAngle, MathD::GetPI(), thirdAngle);
 
@@ -1082,7 +1082,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(MathD::GetPI(), euler0.GetZ0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetY1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Difference);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
 
         matrix0.MakeEulerYZY(firstAngle - thirdAngle, 0.0f, thirdAngle);
 
@@ -1092,7 +1092,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(0.0f, euler0.GetZ0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetY1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Sum);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
 
         matrix0.MakeEulerZXZ(firstAngle + thirdAngle, MathD::GetPI(), thirdAngle);
 
@@ -1102,7 +1102,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(MathD::GetPI(), euler0.GetX0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetZ1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Difference);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
 
         matrix0.MakeEulerZXZ(firstAngle - thirdAngle, 0.0f, thirdAngle);
 
@@ -1112,7 +1112,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(0.0f, euler0.GetX0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetZ1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Sum);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
 
         matrix0.MakeEulerZYZ(firstAngle + thirdAngle, MathD::GetPI(), thirdAngle);
 
@@ -1122,7 +1122,7 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(MathD::GetPI(), euler0.GetY0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetZ1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Difference);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
 
         matrix0.MakeEulerZYZ(firstAngle - thirdAngle, 0.0f, thirdAngle);
 
@@ -1132,6 +1132,6 @@ void Mathematics::Matrix3Testing::EulerTest()
         ASSERT_APPROXIMATE(0.0f, euler0.GetY0Angle(), 1e-10);
         ASSERT_APPROXIMATE(0.0f, euler0.GetZ1Angle(), 1e-10);
 
-        ASSERT_ENUM_EQUAL(euler0.GetType(), ExtractEulerResultType::Sum);
+        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
     }
 }

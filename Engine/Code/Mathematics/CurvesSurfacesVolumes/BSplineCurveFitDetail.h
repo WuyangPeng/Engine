@@ -80,7 +80,7 @@ Mathematics::BSplineCurveFit<Real>::BSplineCurveFit(int dimension, int numSample
             dBasis.Compute(t, imin, imax);
             if (imin <= i0 && i0 <= imax)
             {
-                atMat[i0][i1] = dBasis.GetValue(i0 - imin);
+                atMat(i0, i1) = dBasis.GetValue(i0 - imin);
             }
         }
     }
@@ -91,7 +91,7 @@ Mathematics::BSplineCurveFit<Real>::BSplineCurveFit(int dimension, int numSample
     {
         for (auto i1 = 0; i1 < numSamples; ++i1)
         {
-            auto xValue = atMat[i0][i1];
+            auto xValue = atMat(i0, i1);
             for (auto j = 0; j < dimension; ++j)
             {
                 const auto controlDataIndex = i0 * dimension + j;

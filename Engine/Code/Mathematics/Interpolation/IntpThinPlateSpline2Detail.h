@@ -91,14 +91,14 @@ Mathematics::IntpThinPlateSpline2<Real>::IntpThinPlateSpline2(int quantity, cons
         {
             if (row == col)
             {
-                aMat[row][col] = smooth;
+                aMat(row, col) = smooth;
             }
             else
             {
                 auto dx = xValue.at(row) - xValue.at(col);
                 auto dy = yValue.at(row) - yValue.at(col);
                 auto t = Math<Real>::Sqrt(dx * dx + dy * dy);
-                aMat[row][col] = Kernel(t);
+                aMat(row, col) = Kernel(t);
             }
         }
     }
@@ -106,9 +106,9 @@ Mathematics::IntpThinPlateSpline2<Real>::IntpThinPlateSpline2(int quantity, cons
     VariableMatrix<Real> bMat{ quantity, 3 };
     for (auto row = 0; row < quantity; ++row)
     {
-        bMat[row][0] = Math<Real>::GetValue(1);
-        bMat[row][1] = xValue.at(row);
-        bMat[row][2] = yValue.at(row);
+        bMat(row, 0) = Math<Real>::GetValue(1);
+        bMat(row, 1) = xValue.at(row);
+        bMat(row, 2) = yValue.at(row);
     }
 
     VariableMatrix<Real> invAMat(quantity, quantity);
@@ -121,7 +121,7 @@ Mathematics::IntpThinPlateSpline2<Real>::IntpThinPlateSpline2(int quantity, cons
         return;
     }
 
-    VariableMatrix<Real> pMat = TransposeTimes(bMat, invAMat);
+    VariableMatrix<Real> pMat = TransposeMultiply(bMat, invAMat);
 
     VariableMatrix<Real> qMat = pMat * bMat;
 
@@ -141,7 +141,7 @@ Mathematics::IntpThinPlateSpline2<Real>::IntpThinPlateSpline2(int quantity, cons
         prod.at(row) = Math<Real>::GetValue(0);
         for (auto i = 0; i < quantity; ++i)
         {
-            prod.at(row) += pMat[row][i] * f.at(i);
+            prod.at(row) += pMat(row, i) * f.at(i);
         }
     }
 
@@ -150,7 +150,7 @@ Mathematics::IntpThinPlateSpline2<Real>::IntpThinPlateSpline2(int quantity, cons
         b.at(row) = Math<Real>::GetValue(0);
         for (auto i = 0; i < 3; ++i)
         {
-            b.at(row) += invQMat[row][i] * prod.at(i);
+            b.at(row) += invQMat(row, i) * prod.at(i);
         }
     }
 
@@ -160,7 +160,7 @@ Mathematics::IntpThinPlateSpline2<Real>::IntpThinPlateSpline2(int quantity, cons
         tmp.at(row) = f.at(row);
         for (auto i = 0; i < 3; ++i)
         {
-            tmp.at(row) -= bMat[row][i] * b.at(i);
+            tmp.at(row) -= bMat(row, i) * b.at(i);
         }
     }
 
@@ -169,7 +169,7 @@ Mathematics::IntpThinPlateSpline2<Real>::IntpThinPlateSpline2(int quantity, cons
         a.at(row) = Math<Real>::GetValue(0);
         for (auto i = 0; i < quantity; ++i)
         {
-            a.at(row) += invAMat[row][i] * tmp.at(i);
+            a.at(row) += invAMat(row, i) * tmp.at(i);
         }
     }
 

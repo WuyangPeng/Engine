@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:42)
+/// 版本：1.0.0.5 (2024/01/22 13:40)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_ARRAY3_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_ARRAY3_DETAIL_H
@@ -17,12 +17,65 @@
 #include <gsl/util>
 
 template <typename T>
+CoreTools::Array3<T>::Array3() noexcept
+    : bound0{}, bound1{}, bound2{}, objects{}, indirect1{}, indirect2{}
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+template <typename T>
 CoreTools::Array3<T>::Array3(int bound0, int bound1, int bound2)
     : bound0{ bound0 }, bound1{ bound1 }, bound2{ bound2 }, objects(GetObjectSize(bound0, bound1, bound2)), indirect1(GetObjectSize(bound1, bound2)), indirect2(bound2)
 {
     SetPointers();
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+template <typename T>
+CoreTools::Array3<T>::Array3(const Array3& rhs)
+    : bound0{ rhs.bound0 }, bound1{ rhs.bound1 }, bound2{ rhs.bound2 }, objects{ rhs.objects }, indirect1(GetObjectSize(rhs.bound1, rhs.bound2)), indirect2(rhs.bound2)
+{
+    SetPointers();
+
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+template <typename T>
+CoreTools::Array3<T>& CoreTools::Array3<T>::operator=(const Array3& rhs)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    bound0 = rhs.bound0;
+    bound1 = rhs.bound1;
+    bound2 = rhs.bound2;
+    objects = rhs.objects;
+
+    SetPointers();
+
+    return *this;
+}
+
+template <typename T>
+CoreTools::Array3<T>::Array3(Array3&& rhs) noexcept
+    : bound0{ rhs.bound0 }, bound1{ rhs.bound1 }, bound2{ rhs.bound2 }, objects{ std::move(rhs.objects) }, indirect1{ std::move(rhs.indirect1) }, indirect2{ std::move(rhs.indirect2) }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+template <typename T>
+CoreTools::Array3<T>& CoreTools::Array3<T>::operator=(Array3&& rhs) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    bound0 = rhs.bound0;
+    bound1 = rhs.bound1;
+    bound2 = rhs.bound2;
+    objects = std::move(rhs.objects);
+    indirect1 = std::move(rhs.indirect1);
+    indirect2 = std::move(rhs.indirect2);
+
+    return *this;
 }
 
 template <typename T>
@@ -101,19 +154,60 @@ T* const* CoreTools::Array3<T>::operator[](int slice) const
 template <typename T>
 T** CoreTools::Array3<T>::operator[](int slice)
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return indirect2.at(slice);
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26492)
+
+    return const_cast<T**>(static_cast<const ClassType&>(*this)[slice]);
+
+#include SYSTEM_WARNING_POP
 }
 
 template <typename T>
-T CoreTools::Array3<T>::Get(int index0, int index1, int index2) const
+const T* CoreTools::Array3<T>::operator()(int slice, int row) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    const auto index = index0 + index1 * bound0 + index2 * (bound0 * bound1);
+    const auto index = row + slice * bound1;
+
+    return indirect1.at(index);
+}
+
+template <typename T>
+T* CoreTools::Array3<T>::operator()(int slice, int row)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26492)
+
+    return const_cast<T*>(static_cast<const ClassType&>(*this)(slice, row));
+
+#include SYSTEM_WARNING_POP
+}
+
+template <typename T>
+const T& CoreTools::Array3<T>::operator()(int slice, int row, int column) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    const auto index = column + row * bound0 + slice * (bound0 * bound1);
 
     return objects.at(index);
+}
+
+template <typename T>
+T& CoreTools::Array3<T>::operator()(int slice, int row, int column)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26492)
+
+    return const_cast<T&>(static_cast<const ClassType&>(*this)(slice, row, column));
+
+#include SYSTEM_WARNING_POP
 }
 
 #endif  // CORE_TOOLS_MEMORY_TOOLS_ARRAY3_DETAIL_H

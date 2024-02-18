@@ -33,7 +33,7 @@ void Mathematics::SingularValueDecomposition<Real>::Calculate(const VariableMatr
 {
     // 从“矩阵计算”实现其他QR分解和奇异值分解代码，然后给用户指定这里使用哪些方法的能力。
 
-    const auto transposeTimesMatrix = TransposeTimes(matrix, matrix);
+    const auto transposeTimesMatrix = TransposeMultiply(matrix, matrix);
     EigenDecomposition<Real> eigenDecomposition{ transposeTimesMatrix };
     eigenDecomposition.Solve(false);
     const auto eigenvectors = eigenDecomposition.GetEigenvectors();
@@ -66,7 +66,7 @@ void Mathematics::SingularValueDecomposition<Real>::HouseholderQR()
         auto length = Math::GetValue(0);
         for (auto row = column; row < numRows; ++row)
         {
-            vector[row] = diagonal[row][column];
+            vector[row] = diagonal(row, column);
             length += vector[row] * vector[row];
         }
         length = Math::Sqrt(length);
@@ -88,7 +88,7 @@ void Mathematics::SingularValueDecomposition<Real>::HouseholderQR()
     }
 
     // 首先，使Q为identity。第二，提取Householder向量和以V-反射矩阵预乘Q。
-    left.SetIdentity();
+    left.MakeIdentity();
 
     for (auto column = numColumns - 1; 0 <= column; --column)
     {
@@ -134,7 +134,7 @@ void Mathematics::SingularValueDecomposition<Real>::HouseholderPremultiply(const
     {
         for (auto col = 0; col < numColumns; ++col)
         {
-            matrix[row][col] += vector[row] * wVector[col];
+            matrix(row, col) += vector[row] * wVector[col];
         }
     }
 }
@@ -149,7 +149,7 @@ void Mathematics::SingularValueDecomposition<Real>::HouseholderPostmultiply(cons
     {
         for (auto col = 0; col < numColumns; ++col)
         {
-            (matrix)[row][col] += transitionVector[row] * vector[col];
+            (matrix)(row, col) += transitionVector[row] * vector[col];
         }
     }
 }

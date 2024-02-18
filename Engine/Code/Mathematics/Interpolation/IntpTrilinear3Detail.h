@@ -255,7 +255,7 @@ Real Mathematics::IntpTrilinear3<Real>::operator()(Real x, Real y, Real z) const
                     xClamp = xBound - 1;
                 }
 
-                result += p.at(col) * q.at(row) * r.at(slice) * f.Get(xClamp, yClamp, zClamp);
+                result += p.at(col) * q.at(row) * r.at(slice) * f(xClamp, yClamp, zClamp);
             }
         }
     }
@@ -411,7 +411,7 @@ Real Mathematics::IntpTrilinear3<Real>::operator()(int xOrder, int yOrder, int z
                     xClamp = xBound - 1;
                 }
 
-                result += p.at(col) * q.at(row) * r.at(slice) * f.Get(xClamp, yClamp, zClamp);
+                result += p.at(col) * q.at(row) * r.at(slice) * f(xClamp, yClamp, zClamp);
             }
         }
     }

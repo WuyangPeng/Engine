@@ -12,6 +12,7 @@
 
 #include "IntpBSplineUniform.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
@@ -81,10 +82,10 @@ Mathematics::IntpBSplineUniform<Real>::IntpBSplineUniform(int dims, int degree, 
     {
         for (auto col = row; col <= degree; ++col)
         {
-            coeff[row][col] = Math<Real>::GetValue(1);
+            coeff(row, col) = Math<Real>::GetValue(1);
             for (auto i = 0; i <= row - 1; ++i)
             {
-                coeff[row][col] *= Math<Real>::GetValue(col - i);
+                coeff(row, col) *= Math<Real>::GetValue(col - i);
             }
         }
     }
@@ -107,7 +108,7 @@ Mathematics::IntpBSplineUniform<Real>::IntpBSplineUniform(int dims, int degree, 
         for (auto i = 0; i < dims; ++i)
         {
             const auto nextIndex = i + dims;
-            product.at(j) *= matrix[coord.at(i)][coord.at(nextIndex)];
+            product.at(j) *= matrix(coord.at(i), coord.at(nextIndex));
         }
 
         skip.at(j) = 1;
@@ -192,7 +193,7 @@ void Mathematics::IntpBSplineUniform<Real>::SetPolynomial(int order, Real diff, 
     auto diffPower = Math<Real>::GetValue(1);
     for (auto i = order; i <= degree; ++i)
     {
-        polynomial[i] = coeff[order][i] * diffPower;
+        polynomial[i] = coeff(order, i) * diffPower;
         diffPower *= diff;
     }
 }
@@ -284,7 +285,7 @@ Mathematics::VariableMatrix<Real> Mathematics::IntpBSplineUniform<Real>::BlendMa
     {
         for (auto col = 0; col <= degree; ++col)
         {
-            cMat[row][col] = 0;
+            cMat(row, col) = 0;
             for (auto i = col; i <= degree; ++i)
             {
                 auto prod = 1;
@@ -293,7 +294,7 @@ Mathematics::VariableMatrix<Real> Mathematics::IntpBSplineUniform<Real>::BlendMa
                     prod *= degree - row;
                 }
                 const auto index = degree - row;
-                cMat[row][col] += Math<Real>::GetValue(prod) * Choose(i, col) * aMat.at(degree).at(index).at(i);
+                cMat(row, col) += Math<Real>::GetValue(prod) * Choose(i, col) * aMat.at(degree).at(index).at(i);
             }
         }
     }
@@ -309,7 +310,7 @@ Mathematics::VariableMatrix<Real> Mathematics::IntpBSplineUniform<Real>::BlendMa
     {
         for (auto col = 0; col <= degree; ++col)
         {
-            matrix[row][col] = cMat[row][col] * invFactorial;
+            matrix(row, col) = cMat(row, col) * invFactorial;
         }
     }
 
@@ -358,7 +359,9 @@ int Mathematics::IntpBSplineUniform<Real>::GetBase(int index) const
 template <typename Real>
 Mathematics::VariableLengthVector<Real>& Mathematics::IntpBSplineUniform<Real>::GetPolynomial(int index)
 {
-    return poly[index];
+    System::UnusedFunction(index);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("º¯ÊýÎ´ÊµÏÖ"))
 }
 
 template <typename Real>
@@ -391,7 +394,7 @@ void Mathematics::IntpBSplineUniform<Real>::SetInter(int index, Real value)
 template <typename Real>
 Real Mathematics::IntpBSplineUniform<Real>::GetMatrix(int row, int column) const
 {
-    return matrix[row][column];
+    return matrix(row, column);
 }
 
 template <typename Real>

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:42)
+/// 版本：1.0.0.5 (2024/01/22 15:12)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_LEXICO_ARRAY2_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_LEXICO_ARRAY2_DETAIL_H
@@ -15,9 +15,9 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename Real>
-CoreTools::LexicoArray2<true, Real>::LexicoArray2(int numRows, int numCols, Container& matrix) noexcept
+CoreTools::LexicoArray2<true, Real>::LexicoArray2(int numRows, int numColumns, Container& matrix) noexcept
     : numRows{ numRows },
-      numCols{ numCols },
+      numColumns{ numColumns },
       matrix{ matrix }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -42,40 +42,40 @@ int CoreTools::LexicoArray2<true, Real>::GetNumRows() const noexcept
 }
 
 template <typename Real>
-int CoreTools::LexicoArray2<true, Real>::GetNumCols() const noexcept
+int CoreTools::LexicoArray2<true, Real>::GetNumColumns() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return numCols;
+    return numColumns;
 }
 
 template <typename Real>
-Real& CoreTools::LexicoArray2<true, Real>::operator()(int row, int col)
+Real& CoreTools::LexicoArray2<true, Real>::operator()(int row, int column)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
 
-    return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, col));
+    return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
 
 #include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
-const Real& CoreTools::LexicoArray2<true, Real>::operator()(int row, int col) const
+const Real& CoreTools::LexicoArray2<true, Real>::operator()(int row, int column) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto index = col + numCols * row;
+    const auto index = column + numColumns * row;
 
     return matrix.at(index);
 }
 
 template <typename Real>
-CoreTools::LexicoArray2<false, Real>::LexicoArray2(int numRows, int numCols, Container& matrix) noexcept
+CoreTools::LexicoArray2<false, Real>::LexicoArray2(int numRows, int numColumns, Container& matrix) noexcept
     : numRows{ numRows },
-      numCols{ numCols },
+      numColumns{ numColumns },
       matrix{ matrix }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -100,32 +100,32 @@ int CoreTools::LexicoArray2<false, Real>::GetNumRows() const noexcept
 }
 
 template <typename Real>
-int CoreTools::LexicoArray2<false, Real>::GetNumCols() const noexcept
+int CoreTools::LexicoArray2<false, Real>::GetNumColumns() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return numCols;
+    return numColumns;
 }
 
 template <typename Real>
-Real& CoreTools::LexicoArray2<false, Real>::operator()(int row, int col)
+Real& CoreTools::LexicoArray2<false, Real>::operator()(int row, int column)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
 
-    return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, col));
+    return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
 
 #include SYSTEM_WARNING_POP
 }
 
 template <typename Real>
-const Real& CoreTools::LexicoArray2<false, Real>::operator()(int row, int col) const
+const Real& CoreTools::LexicoArray2<false, Real>::operator()(int row, int column) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto index = row + numRows * col;
+    const auto index = row + numRows * column;
 
     return matrix.at(index);
 }
@@ -156,7 +156,7 @@ int CoreTools::LexicoArray2<true, Real, NumRows, NumCols>::GetNumRows() noexcept
 }
 
 template <typename Real, int NumRows, int NumCols>
-int CoreTools::LexicoArray2<true, Real, NumRows, NumCols>::GetNumCols() noexcept
+int CoreTools::LexicoArray2<true, Real, NumRows, NumCols>::GetNumColumns() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -164,24 +164,24 @@ int CoreTools::LexicoArray2<true, Real, NumRows, NumCols>::GetNumCols() noexcept
 }
 
 template <typename Real, int NumRows, int NumCols>
-Real& CoreTools::LexicoArray2<true, Real, NumRows, NumCols>::operator()(int row, int col)
+Real& CoreTools::LexicoArray2<true, Real, NumRows, NumCols>::operator()(int row, int column)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
 
-    return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, col));
+    return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
 
 #include SYSTEM_WARNING_POP
 }
 
 template <typename Real, int NumRows, int NumCols>
-const Real& CoreTools::LexicoArray2<true, Real, NumRows, NumCols>::operator()(int row, int col) const
+const Real& CoreTools::LexicoArray2<true, Real, NumRows, NumCols>::operator()(int row, int column) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto index = col + NumCols * row;
+    const auto index = column + NumCols * row;
 
     return matrix.at(index);
 }
@@ -212,7 +212,7 @@ int CoreTools::LexicoArray2<false, Real, NumRows, NumCols>::GetNumRows() noexcep
 }
 
 template <typename Real, int NumRows, int NumCols>
-int CoreTools::LexicoArray2<false, Real, NumRows, NumCols>::GetNumCols() noexcept
+int CoreTools::LexicoArray2<false, Real, NumRows, NumCols>::GetNumColumns() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -220,24 +220,24 @@ int CoreTools::LexicoArray2<false, Real, NumRows, NumCols>::GetNumCols() noexcep
 }
 
 template <typename Real, int NumRows, int NumCols>
-Real& CoreTools::LexicoArray2<false, Real, NumRows, NumCols>::operator()(int row, int col)
+Real& CoreTools::LexicoArray2<false, Real, NumRows, NumCols>::operator()(int row, int column)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
 
-    return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, col));
+    return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
 
 #include SYSTEM_WARNING_POP
 }
 
 template <typename Real, int NumRows, int NumCols>
-const Real& CoreTools::LexicoArray2<false, Real, NumRows, NumCols>::operator()(int row, int col) const
+const Real& CoreTools::LexicoArray2<false, Real, NumRows, NumCols>::operator()(int row, int column) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto index = row + NumRows * col;
+    const auto index = row + NumRows * column;
 
     return matrix.at(index);
 }

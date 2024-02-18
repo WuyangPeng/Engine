@@ -5,25 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 23:20)
+/// 版本：1.0.0.5 (2024/01/24 16:57)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_SORT_POINTS_ON_CIRCLE_DETAIL_H
 #define MATHEMATICS_RATIONAL_RATIONAL_SORT_POINTS_ON_CIRCLE_DETAIL_H
 
+#include "CircleSortObjectDetail.h"
 #include "SortPointsOnCircle.h"
-#include "Mathematics/Base/Math.h"
-
-template <typename T>
-Mathematics::SortPointsOnCircle<T>::SortObject::SortObject(const Vector2& w, int index)
-    : w{ w }, index{ index }
-{
-}
-
-template <typename T>
-Mathematics::SortPointsOnCircle<T>::SortObject::SortObject()
-    : w{}, index{}
-{
-}
+#include "Mathematics/Base/MathDetail.h"
 
 #ifdef OPEN_CLASS_INVARIANT
 
@@ -41,22 +30,7 @@ typename Mathematics::SortPointsOnCircle<T>::Indices Mathematics::SortPointsOnCi
                                                                                                  const Vector2& direction,
                                                                                                  bool sortCcw)
 {
-    const auto directionPerp = (sortCcw ? Vector2{ -direction[1], direction[0] } : Vector2{ direction[1], -direction[0] });
-    std::vector<SortObject> object{};
-    for (auto i = 0u; i < point.size(); ++i)
-    {
-        Vector2 vertex{ point[i][0] - center[0], point[i][1] - center[1] };
-        object.emplace_back({ direction[0] * vertex[0] + direction[1] * vertex[1], directionPerp[0] * vertex[0] + directionPerp[1] * vertex[1] }, i);
-    }
-    std::ranges::sort(object, LessThanByAngle);
-
-    Indices indices{};
-    for (auto i = 0u; i < point.size(); ++i)
-    {
-        indices.emplace_back(object[i].index);
-    }
-
-    return indices;
+    return Sort(point, center, direction, sortCcw, LessThanByAngle);
 }
 
 template <typename T>
@@ -65,34 +39,42 @@ typename Mathematics::SortPointsOnCircle<T>::Indices Mathematics::SortPointsOnCi
                                                                                                     const Vector2& direction,
                                                                                                     bool sortCcw)
 {
-    const auto directionPerp = (sortCcw ? Vector2{ -direction[1], direction[0] } : Vector2{ direction[1], -direction[0] });
-    std::vector<SortObject> object{};
+    return Sort(point, center, direction, sortCcw, LessThanByGeometry);
+}
+
+template <typename T>
+typename Mathematics::SortPointsOnCircle<T>::Indices Mathematics::SortPointsOnCircle<T>::Sort(const Points& point, const Vector2& center, const Vector2& direction, bool sortCcw, SortFunction sortFunction)
+{
+    const auto directionPerp = (sortCcw ? Vector2{ -direction.at(1), direction.at(0) } : Vector2{ direction.at(1), -direction.at(0) });
+    CircleSortObjectContainer object{};
     for (auto i = 0u; i < point.size(); ++i)
     {
-        Vector2 vertex{ point[i][0] - center[0], point[i][1] - center[1] };
-        object.emplace_back({ direction[0] * vertex[0] + direction[1] * vertex[1], directionPerp[0] * vertex[0] + directionPerp[1] * vertex[1] }, i);
+        Vector2 vertex{ point.at(i).at(0) - center.at(0), point.at(i).at(1) - center.at(1) };
+        object.emplace_back(Vector2{ direction.at(0) * vertex.at(0) + direction.at(1) * vertex.at(1),
+                                     directionPerp.at(0) * vertex.at(0) + directionPerp.at(1) * vertex.at(1) },
+                            i);
     }
-    std::ranges::sort(object, LessThanByGeometry);
+    std::ranges::sort(object, sortFunction);
 
     Indices indices{};
-    for (auto i = 0u; i < point.size(); ++i)
+    for (const auto& element : object)
     {
-        indices.emplace_back(object[i].index);
+        indices.emplace_back(element.GetIndex());
     }
 
     return indices;
 }
 
 template <typename T>
-bool Mathematics::SortPointsOnCircle<T>::LessThanByAngle(const SortObject& lhs, const SortObject& rhs)
+bool Mathematics::SortPointsOnCircle<T>::LessThanByAngle(const CircleSortObject& lhs, const CircleSortObject& rhs)
 {
-    const auto& x0 = lhs.w[0];
-    const auto& y0 = lhs.w[1];
-    const auto& x1 = rhs.w[0];
-    const auto& y1 = rhs.w[1];
+    const auto x0 = lhs.GetW(0);
+    const auto y0 = lhs.GetW(1);
+    const auto x1 = rhs.GetW(0);
+    const auto y1 = rhs.GetW(1);
 
-    const auto angle0 = Math<T>::ATan(y0, x0);
-    const auto angle1 = Math<T>::ATan(y1, x1);
+    const auto angle0 = Math<T>::ATan2(y0, x0);
+    const auto angle1 = Math<T>::ATan2(y1, x1);
     if (angle0 < angle1)
     {
         return true;
@@ -107,13 +89,13 @@ bool Mathematics::SortPointsOnCircle<T>::LessThanByAngle(const SortObject& lhs, 
 }
 
 template <typename T>
-bool Mathematics::SortPointsOnCircle<T>::LessThanByGeometry(const SortObject& object0, const SortObject& object1)
+bool Mathematics::SortPointsOnCircle<T>::LessThanByGeometry(const CircleSortObject& lhs, const CircleSortObject& rhs)
 {
-    const auto& x0 = object0.w[0];
-    const auto& y0 = object0.w[1];
-    const auto& x1 = object1.w[0];
-    const auto& y1 = object1.w[1];
-    const T zero{};
+    const auto x0 = lhs.GetW(0);
+    const auto y0 = lhs.GetW(1);
+    const auto x1 = rhs.GetW(0);
+    const auto y1 = rhs.GetW(1);
+    constexpr T zero{};
 
     if (y0 < zero && zero <= y1)
     {
@@ -135,7 +117,7 @@ bool Mathematics::SortPointsOnCircle<T>::LessThanByGeometry(const SortObject& ob
         return zero < x0;
     }
 
-    if (y0 == zero && Math<T>::Approximate(y1, zero))
+    if (Math<T>::Approximate(y0, zero) && Math<T>::Approximate(y1, zero))
     {
         return (x1 < zero && x1 < x0) || (zero < x0 && x0 < x1);
     }

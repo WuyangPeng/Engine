@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:42)
+/// 版本：1.0.0.5 (2024/01/22 16:49)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_DETAIL_H
@@ -13,52 +13,86 @@
 #include "MinHeapRecord.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-template <typename T>
-CoreTools::MinHeapRecord<T>::MinHeapRecord(int key, int handle, const T& weight) noexcept
-    : key{ key }, minHeapNode{ handle, weight }
+template <typename KeyType, typename ValueType>
+CoreTools::MinHeapRecord<KeyType, ValueType>::MinHeapRecord() noexcept
+    : index{ -1 }, handle{}, weight{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-template <typename T>
-CoreTools::MinHeapRecord<T>::MinHeapRecord(int key, const MinHeapNode& minHeapNode) noexcept(std::is_arithmetic_v<T>)
-    : key{ key }, minHeapNode{ minHeapNode }
+template <typename KeyType, typename ValueType>
+CoreTools::MinHeapRecord<KeyType, ValueType>::MinHeapRecord(int index, const KeyType& handle, const ValueType& weight) noexcept(isArithmetic)
+    : index{ index }, handle{ handle }, weight{ weight }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 
-template <typename T>
-bool CoreTools::MinHeapRecord<T>::IsValid() const noexcept
+template <typename KeyType, typename ValueType>
+bool CoreTools::MinHeapRecord<KeyType, ValueType>::IsValid() const noexcept
 {
     return true;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
 
-template <typename T>
-int CoreTools::MinHeapRecord<T>::GetKey() const noexcept
+template <typename KeyType, typename ValueType>
+int CoreTools::MinHeapRecord<KeyType, ValueType>::GetIndex() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return key;
+    return index;
 }
 
-template <typename T>
-int CoreTools::MinHeapRecord<T>::GetHandle() const noexcept
+template <typename KeyType, typename ValueType>
+KeyType CoreTools::MinHeapRecord<KeyType, ValueType>::GetHandle() const noexcept(std::is_arithmetic_v<KeyType>)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return minHeapNode.GetHandle();
+    return handle;
 }
 
-template <typename T>
-T CoreTools::MinHeapRecord<T>::GetWeight() const noexcept(std::is_arithmetic_v<T>)
+template <typename KeyType, typename ValueType>
+ValueType CoreTools::MinHeapRecord<KeyType, ValueType>::GetWeight() const noexcept(std::is_arithmetic_v<ValueType>)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return minHeapNode.GetWeight();
+    return weight;
+}
+
+template <typename KeyType, typename ValueType>
+void CoreTools::MinHeapRecord<KeyType, ValueType>::SetIndex(int aIndex) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    index = aIndex;
+}
+
+template <typename KeyType, typename ValueType>
+void CoreTools::MinHeapRecord<KeyType, ValueType>::SetHandle(const KeyType& aHandle) noexcept(std::is_arithmetic_v<KeyType>)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    handle = aHandle;
+}
+
+template <typename KeyType, typename ValueType>
+void CoreTools::MinHeapRecord<KeyType, ValueType>::SetWeight(const ValueType& aWeight) noexcept(std::is_arithmetic_v<ValueType>)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    weight = aWeight;
+}
+
+template <typename KeyType, typename ValueType>
+void CoreTools::MinHeapRecord<KeyType, ValueType>::SetRecord(int aIndex, const KeyType& aHandle, const ValueType& aWeight) noexcept(isArithmetic)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    SetIndex(aIndex);
+    SetHandle(aHandle);
+    SetWeight(aWeight);
 }
 
 #endif  // CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_DETAIL_H

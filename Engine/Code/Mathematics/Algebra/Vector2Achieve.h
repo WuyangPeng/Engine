@@ -11,6 +11,7 @@
 #define MATHEMATICS_ALGEBRA_VECTOR2_ACHIEVE_H
 
 #include "BarycentricCoordinatesDetail.h"
+#include "Vector/VectorDetail.h"
 #include "Vector2.h"
 #include "Vector2ToolsDetail.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
@@ -33,6 +34,15 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector2<Real>::IsValid() c
 }
 
 #endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+typename Mathematics::Vector2<Real>::AlgebraVector2 Mathematics::Vector2<Real>::GetVector() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return AlgebraVector2{ x, y };
+}
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>

@@ -91,7 +91,7 @@ namespace Mathematics
         using Math = Math<Real>;
 
     public:
-        LexicoArray2(const Container& matrix);
+        explicit LexicoArray2(const Container& matrix);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -119,7 +119,7 @@ namespace Mathematics
         using Math = Math<Real>;
 
     public:
-        LexicoArray2(const Container& matrix);
+        explicit LexicoArray2(const Container& matrix);
 
         CLASS_INVARIANT_DECLARE;
 

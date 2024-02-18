@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/26 11:05)
+/// 标准：std:c++20
+/// 版本：1.0.0.5 (2024/02/05 09:20)
 
 #ifndef MATHEMATICS_ALGEBRA_VARIABLE_LENGTH_VECTOR_DETAIL_H
 #define MATHEMATICS_ALGEBRA_VARIABLE_LENGTH_VECTOR_DETAIL_H
@@ -18,9 +18,6 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 #include <iostream>
-
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
@@ -54,7 +51,15 @@ Mathematics::VariableLengthVector<Real>::VariableLengthVector(ContainerType&& co
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-#include SYSTEM_WARNING_POP
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+Mathematics::VariableLengthVector<Real>::VariableLengthVector(int size, int dimension)
+    : VariableLengthVector{ size }
+{
+    MakeUnit(dimension);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
 
 #ifdef OPEN_CLASS_INVARIANT
 
@@ -95,7 +100,7 @@ Real& Mathematics::VariableLengthVector<Real>::operator[](int index)
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::VariableLengthVector<Real>::ResetSize(int size)
+void Mathematics::VariableLengthVector<Real>::SetSize(int size)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -104,9 +109,17 @@ void Mathematics::VariableLengthVector<Real>::ResetSize(int size)
         THROW_EXCEPTION(SYSTEM_TEXT("size为负数！"s));
     }
 
-    container.clear();
     container.resize(size);
     container.shrink_to_fit();
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+Mathematics::VariableLengthVector<Real> Mathematics::VariableLengthVector<Real>::operator+() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return *this;
 }
 
 template <typename Real>
@@ -116,9 +129,9 @@ Mathematics::VariableLengthVector<Real> Mathematics::VariableLengthVector<Real>:
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
     ContainerType result{};
-    for (auto value : container)
+    for (auto element : container)
     {
-        result.emplace_back(-value);
+        result.emplace_back(-element);
     }
 
     return VariableLengthVector{ std::move(result) };
@@ -137,12 +150,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 
     for (auto i = 0u; i < container.size(); ++i)
     {
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        container[i] += rhs.container[i];
-
-#include SYSTEM_WARNING_POP
+        container.at(i) += rhs.container.at(i);
     }
 
     return *this;
@@ -161,12 +169,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 
     for (auto i = 0u; i < container.size(); ++i)
     {
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        container[i] -= rhs.container[i];
-
-#include SYSTEM_WARNING_POP
+        container.at(i) -= rhs.container.at(i);
     }
 
     return *this;
@@ -178,9 +181,9 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    for (auto& value : container)
+    for (auto& element : container)
     {
-        value *= scalar;
+        element *= scalar;
     }
 
     return *this;
@@ -194,19 +197,13 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 
     if (Math::epsilon < Math::FAbs(scalar))
     {
-        for (auto& value : container)
-        {
-            value /= scalar;
-        }
+        this->operator*=(Math::GetValue(1) / scalar);
     }
     else
     {
         MATHEMATICS_ASSERTION_0(false, "除零错误！");
 
-        for (auto& value : container)
-        {
-            value = Math::maxReal;
-        }
+        MakeZero();
     }
 
     return *this;
@@ -214,54 +211,94 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::VariableLengthVector<Real>::Length() const noexcept(gMathematicsAssert < 2)
+Real Mathematics::VariableLengthVector<Real>::Length(bool robust) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Math::Sqrt(SquaredLength());
+    return Math::Sqrt(SquaredLength(robust));
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::VariableLengthVector<Real>::SquaredLength() const noexcept(gMathematicsAssert < 2)
+Real Mathematics::VariableLengthVector<Real>::SquaredLength(bool robust) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    auto squaredLength = Math::GetValue(0);
-
-    for (auto value : container)
+    if (robust)
     {
-        squaredLength += value * value;
-    }
-
-    MATHEMATICS_ASSERTION_2(0 <= squaredLength, "返回值不能为负数！");
-
-    return squaredLength;
-}
-
-template <typename Real>
-requires std::is_arithmetic_v<Real>
-void Mathematics::VariableLengthVector<Real>::Normalize(Real epsilon) noexcept(gMathematicsAssert < 2)
-{
-    MATHEMATICS_CLASS_IS_VALID_9;
-
-    auto length = Length();
-
-    if (epsilon < length)
-    {
-        for (auto& value : container)
+        auto maxComponent = Math::FAbs(container.at(0));
+        for (auto i = 1; i < GetSize(); ++i)
         {
-            value /= length;
+            auto component = Math::FAbs(container.at(i));
+            if (maxComponent < component)
+            {
+                maxComponent = component;
+            }
+        }
+
+        if (Real{} < maxComponent)
+        {
+            const auto scaled = (*this) / maxComponent;
+
+            return maxComponent * maxComponent * Dot(scaled, scaled);
+        }
+        else
+        {
+            return Real{};
         }
     }
     else
     {
-        MATHEMATICS_ASSERTION_2(false, "零向量不能正则化！");
+        return Dot(*this, *this);
+    }
+}
 
-        for (auto& value : container)
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+Real Mathematics::VariableLengthVector<Real>::Normalize(Real epsilon, bool robust)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (robust)
+    {
+        auto maxComponent = Math::FAbs(container.at(0));
+        for (auto i = 1; i < GetSize(); ++i)
         {
-            value = Math::GetValue(0);
+            auto component = Math::FAbs(container.at(i));
+            if (maxComponent < component)
+            {
+                maxComponent = component;
+            }
         }
+
+        Real length{};
+        if (epsilon < maxComponent)
+        {
+            (*this) /= maxComponent;
+            length = Math::Sqrt(Dot(*this, *this));
+            (*this) /= length;
+            length *= maxComponent;
+        }
+        else
+        {
+            MakeZero();
+        }
+
+        return length;
+    }
+    else
+    {
+        Real length = Math::Sqrt(Dot(*this, *this));
+        if (epsilon < length)
+        {
+            (*this) /= length;
+        }
+        else
+        {
+            MakeZero();
+        }
+
+        return length;
     }
 }
 
@@ -276,11 +313,11 @@ typename Mathematics::VariableLengthVector<Real>::ContainerType Mathematics::Var
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::VariableLengthVector<Real>::SetContainer(const ContainerType& newContainer)
+void Mathematics::VariableLengthVector<Real>::SetContainer(const ContainerType& aContainer)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    container = newContainer;
+    container = aContainer;
 }
 
 template <typename Real>
@@ -320,25 +357,89 @@ typename Mathematics::VariableLengthVector<Real>::ContainerTypeIter Mathematics:
 }
 
 template <typename Real>
-bool Mathematics::operator==(const VariableLengthVector<Real>& lhs, const VariableLengthVector<Real>& rhs)
+requires std::is_arithmetic_v<Real>
+void Mathematics::VariableLengthVector<Real>::MakeUnit(int dimension)
 {
-    if (lhs.GetSize() != rhs.GetSize())
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    std::fill(container.begin(), container.end(), Real{});
+    if (0 <= dimension && dimension < boost::numeric_cast<int>(container.size()))
+    {
+        container.at(dimension) = Math::GetValue(1);
+    }
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+Mathematics::VariableLengthVector<Real> Mathematics::VariableLengthVector<Real>::Zero(int size)
+{
+    return VariableLengthVector{ size };
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+Mathematics::VariableLengthVector<Real> Mathematics::VariableLengthVector<Real>::Unit(int size, int dimension)
+{
+    return VariableLengthVector{ size, dimension };
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+bool Mathematics::VariableLengthVector<Real>::Equal(const VariableLengthVector& rhs) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    if (GetSize() != rhs.GetSize())
     {
         return false;
     }
     else
     {
-        return lhs.GetContainer() == rhs.GetContainer();
+        return container == rhs.container;
     }
 }
 
 template <typename Real>
-bool Mathematics::operator<(const VariableLengthVector<Real>& lhs, const VariableLengthVector<Real>& rhs)
+requires std::is_arithmetic_v<Real>
+bool Mathematics::VariableLengthVector<Real>::Less(const VariableLengthVector& rhs) const
 {
-    return lhs.GetContainer() < rhs.GetContainer();
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    if (GetSize() != rhs.GetSize())
+    {
+        return GetSize() < rhs.GetSize();
+    }
+    else
+    {
+        return container < rhs.container;
+    }
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
+void Mathematics::VariableLengthVector<Real>::MakeZero()
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    std::fill(container.begin(), container.end(), Real{});
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+bool Mathematics::operator==(const VariableLengthVector<Real>& lhs, const VariableLengthVector<Real>& rhs)
+{
+    return lhs.Equal(rhs);
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+bool Mathematics::operator<(const VariableLengthVector<Real>& lhs, const VariableLengthVector<Real>& rhs)
+{
+    return lhs.Less(rhs);
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Dot(const VariableLengthVector<Real>& lhs, const VariableLengthVector<Real>& rhs)
 {
     if (lhs.GetSize() != rhs.GetSize())
@@ -346,7 +447,7 @@ Real Mathematics::Dot(const VariableLengthVector<Real>& lhs, const VariableLengt
         THROW_EXCEPTION(SYSTEM_TEXT("向量大小不同！"s));
     }
 
-    auto dotProduct = Math<Real>::GetValue(0);
+    Real dotProduct{};
 
     for (auto i = 0; i < lhs.GetSize(); ++i)
     {
@@ -357,7 +458,8 @@ Real Mathematics::Dot(const VariableLengthVector<Real>& lhs, const VariableLengt
 }
 
 template <typename Real>
-bool Mathematics::Approximate(const VariableLengthVector<Real>& lhs, const VariableLengthVector<Real>& rhs, const Real epsilon)
+requires std::is_arithmetic_v<Real>
+bool Mathematics::Approximate(const VariableLengthVector<Real>& lhs, const VariableLengthVector<Real>& rhs, Real epsilon)
 {
     if (lhs.GetSize() != rhs.GetSize())
     {
@@ -376,6 +478,165 @@ bool Mathematics::Approximate(const VariableLengthVector<Real>& lhs, const Varia
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
+Real Mathematics::Orthonormalize(int numInputs, std::vector<VariableLengthVector<Real>>& vector, bool robust)
+{
+    if (1 <= numInputs && numInputs <= vector.at(0).GetSize())
+    {
+        for (auto i = 1; i < numInputs; ++i)
+        {
+            if (vector.at(0).GetSize() != vector.at(i).GetSize())
+            {
+                THROW_EXCEPTION(SYSTEM_TEXT("大小不匹配。"))
+            }
+        }
+
+        auto minLength = vector.at(0).Normalize(robust);
+        for (auto i = 1; i < numInputs; ++i)
+        {
+            for (auto j = 0; j < i; ++j)
+            {
+                const auto dot = Dot(vector.at(i), vector.at(j));
+                vector.at(i) -= vector.at(j) * dot;
+            }
+
+            const auto length = vector.at(i).Normalize(robust);
+            if (length < minLength)
+            {
+                minLength = length;
+            }
+        }
+
+        return minLength;
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("无效输入。"))
+    }
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+void Mathematics::ComputeExtremes(int numVectors, const std::vector<VariableLengthVector<Real>>& vector, VariableLengthVector<Real>& vectorMin, VariableLengthVector<Real>& vectorMax)
+{
+    if (0 < numVectors)
+    {
+        for (auto i = 1; i < numVectors; ++i)
+        {
+            if (vector.at(0).GetSize() != vector.at(i).GetSize())
+            {
+                THROW_EXCEPTION(SYSTEM_TEXT("大小不匹配。"))
+            }
+        }
+
+        const auto size = vector.at(0).GetSize();
+        vectorMin = vector.at(0);
+        vectorMax = vectorMin;
+        for (auto j = 1; j < numVectors; ++j)
+        {
+            const auto& element = vector.at(j);
+            for (auto i = 0; i < size; ++i)
+            {
+                if (element[i] < vectorMin[i])
+                {
+                    vectorMin[i] = element[i];
+                }
+                else if (vectorMax[i] < element[i])
+                {
+                    vectorMax[i] = element[i];
+                }
+            }
+        }
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("无效输入。"))
+    }
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+Mathematics::VariableLengthVector<Real> Mathematics::HomogeneousLift(const VariableLengthVector<Real>& vector, Real last)
+{
+    const auto size = vector.GetSize();
+
+    VariableLengthVector result{ size + 1 };
+    for (auto i = 0; i < size; ++i)
+    {
+        result[i] = vector[i];
+    }
+    result[size] = last;
+
+    return result;
+}
+
+template <typename Real>
+Mathematics::VariableLengthVector<Real> Mathematics::HomogeneousProject(const VariableLengthVector<Real>& vector)
+{
+    if (const auto size = vector.GetSize();
+        1 < size)
+    {
+        VariableLengthVector<Real> result{ size - 1 };
+        for (auto i = 0; i < size - 1; ++i)
+        {
+            result[i] = vector[i];
+        }
+
+        return result;
+    }
+    else
+    {
+        return VariableLengthVector<Real>{};
+    }
+}
+
+template <typename Real>
+Mathematics::VariableLengthVector<Real> Mathematics::Lift(const VariableLengthVector<Real>& vector, int inject, Real value)
+{
+    const auto size = vector.GetSize();
+    VariableLengthVector<Real> result{ size + 1 };
+    auto i = 0;
+    for (; i < inject; ++i)
+    {
+        result[i] = vector[i];
+    }
+
+    result[i] = value;
+    auto j = i;
+    for (++j; i < size; ++i, ++j)
+    {
+        result[j] = vector[i];
+    }
+
+    return result;
+}
+
+template <typename Real>
+Mathematics::VariableLengthVector<Real> Mathematics::Project(const VariableLengthVector<Real>& vector, int reject)
+{
+    if (const auto size = vector.GetSize();
+        1 < size)
+    {
+        VariableLengthVector<Real> result{ size - 1 };
+        for (auto i = 0, j = 0; i < size - 1; ++i, ++j)
+        {
+            if (j == reject)
+            {
+                ++j;
+            }
+            result[i] = vector[j];
+        }
+
+        return result;
+    }
+    else
+    {
+        return VariableLengthVector<Real>{};
+    }
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
 std::ostream& Mathematics::operator<<(std::ostream& outFile, const VariableLengthVector<Real>& vector)
 {
     for (auto i = 0; i < vector.GetSize(); ++i)

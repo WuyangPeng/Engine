@@ -49,6 +49,7 @@ namespace Mathematics
         using ToolsType = Vector3Tools<Real>;
         using BarycentricCoordinates = BarycentricCoordinates<Real, pointSize + 1>;
         using ArrayType = std::array<Real, pointSize>;
+        using AlgebraVector3 = Algebra::Vector<3, Real>;
 
         using GetCoordinateFunction = Real (ClassType::*)() const noexcept;
         using SetCoordinateFunction = void (ClassType::*)(Real) noexcept;
@@ -74,6 +75,8 @@ namespace Mathematics
         explicit Vector3(const ArrayType& coordinate);
 
         CLASS_INVARIANT_DECLARE;
+
+        NODISCARD AlgebraVector3 GetVector() const noexcept;
 
         // ×ø±ê·ÃÎÊ
         NODISCARD Real GetX() const noexcept;

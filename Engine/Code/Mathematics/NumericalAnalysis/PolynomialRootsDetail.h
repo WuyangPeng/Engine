@@ -1279,7 +1279,7 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(const Polynomial& polynomial)
     MATHEMATICS_CLASS_IS_VALID_1;
 
     auto copyPolynomial = polynomial;
-    copyPolynomial.Compress(epsilon);
+    copyPolynomial.MakeCompress(epsilon);
     const auto degree = copyPolynomial.GetDegree();
     if (degree < 1)
     {
@@ -1573,7 +1573,7 @@ int Mathematics::PolynomialRoots<Real>::GetRootCount(const Polynomial& polynomia
     MATHEMATICS_CLASS_IS_VALID_1;
 
     const auto degree = polynomial.GetDegree();
-    auto coeff = polynomial.GetValue();
+    auto coeff = polynomial.GetCoefficients();
 
     if (degree == 0)
     {

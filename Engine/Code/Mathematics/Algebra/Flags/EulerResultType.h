@@ -12,17 +12,28 @@
 
 namespace Mathematics
 {
-    // 从旋转矩阵提取欧拉角。
-    enum class ExtractEulerResultType
+    /// 从旋转矩阵提取欧拉角。
+    /// 欧拉角的因子分解不一定是唯一的。
+    /// 设轴的整数索引为(N0,N1,N2)，它必须在集合中
+    ///   {(0,1,2),(0,2,1),(1,0,2),(1,2,0),(2,0,1),(2,1,0),
+    ///    (0,1,0),(0,2,0),(1,0,1),(1,2,1),(2,0,2),(2,1,2)}
+    // 设相应的角度为（angleN0,angleN1,angleN2）。
+    // 如果结果为EulerResult::Sum，则会出现多个解，因为angleN2+angleN0是常数。
+    // 如果结果为EulerResult:Difference，则会出现多个解，因为angleN2-angleN0是常数。
+    // 在任何一种类型的非唯一性中，函数都返回angleN0=0。
+    enum class EulerResult
     {
+        // 解决方案无效（轴索引不正确）。
+        Invalid,
+
         // 解决方案是独一无二的。
         Unique,
 
         // 解决方案不是唯一的。角度之和是恒定的。
-        Sum,
+        NotUniqueSum,
 
         // 解决方案不是唯一的。角度之差是恒定的。
-        Difference
+        NotUniqueDifference
     };
 
     enum class ExtractEulerResultOrder

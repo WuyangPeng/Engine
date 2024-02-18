@@ -114,7 +114,7 @@ void Mathematics::VariableMatrixTesting::ArithmeticCalculateTest()
             for (int column = 0; column < matrix0.GetColumnsNumber();
                  ++column)
             {
-                matrix0[row][column] = floatRandomDistribution(generator);
+                matrix0(row, column) = floatRandomDistribution(generator);
             }
         }
 
@@ -124,7 +124,7 @@ void Mathematics::VariableMatrixTesting::ArithmeticCalculateTest()
         {
             for (int column = 0; column < matrix1.GetColumnsNumber(); ++column)
             {
-                matrix1[row][column] = floatRandomDistribution(generator);
+                matrix1(row, column) = floatRandomDistribution(generator);
             }
         }
 
@@ -339,7 +339,7 @@ void Mathematics::VariableMatrixTesting::MatrixCalculateTest()
         {
             for (int column = 0; column < matrix0.GetColumnsNumber(); ++column)
             {
-                matrix0[row][column] = floatRandomDistribution(generator);
+                matrix0(row, column) = floatRandomDistribution(generator);
             }
         }
 
@@ -371,7 +371,7 @@ void Mathematics::VariableMatrixTesting::MatrixCalculateTest()
         {
             for (int column = 0; column < matrix0.GetColumnsNumber(); ++column)
             {
-                ASSERT_APPROXIMATE(matrix0[row][column], matrix1[column][row], 1e-10f);
+                ASSERT_APPROXIMATE(matrix0(row, column), matrix1(column, row), 1e-10f);
             }
         }
 
@@ -385,13 +385,13 @@ void Mathematics::VariableMatrixTesting::MatrixCalculateTest()
         {
             for (int columns = 0; columns < matrix0.GetColumnsNumber(); ++columns)
             {
-                vector3[rows] += matrix0[rows][columns] * vector1[columns];
+                vector3[rows] += matrix0(rows, columns) * vector1[columns];
             }
         }
 
         ASSERT_TRUE(Approximate(vector2, vector3, 1e-10f));
 
-        vector1.ResetSize(matrix0.GetRowsNumber());
+        vector1.SetSize(matrix0.GetRowsNumber());
 
         for (int index = 0; index < vector1.GetSize(); ++index)
         {
@@ -402,13 +402,14 @@ void Mathematics::VariableMatrixTesting::MatrixCalculateTest()
 
         ASSERT_EQUAL(vector2.GetSize(), matrix0.GetColumnsNumber());
 
-        vector3.ResetSize(matrix0.GetColumnsNumber());
+        vector3.SetSize(matrix0.GetColumnsNumber());
+        vector3.MakeZero();
 
         for (int rows = 0; rows < matrix0.GetRowsNumber(); ++rows)
         {
             for (int columns = 0; columns < matrix0.GetColumnsNumber(); ++columns)
             {
-                vector3[columns] += matrix0[rows][columns] * vector1[rows];
+                vector3[columns] += matrix0(rows, columns) * vector1[rows];
             }
         }
 
@@ -420,7 +421,7 @@ void Mathematics::VariableMatrixTesting::MatrixCalculateTest()
         {
             for (int column = 0; column < matrix2.GetColumnsNumber(); ++column)
             {
-                matrix2[row][column] = floatRandomDistribution(generator);
+                matrix2(row, column) = floatRandomDistribution(generator);
             }
         }
 
@@ -430,11 +431,11 @@ void Mathematics::VariableMatrixTesting::MatrixCalculateTest()
         {
             for (int column = 0; column < matrix3.GetColumnsNumber(); ++column)
             {
-                matrix3[row][column] = floatRandomDistribution(generator);
+                matrix3(row, column) = floatRandomDistribution(generator);
             }
         }
 
-        VariableMatrixD matrix4 = TransposeTimes(matrix2, matrix3);
+        VariableMatrixD matrix4 = TransposeMultiply(matrix2, matrix3);
         VariableMatrixD matrix5 = matrix2.Transpose() * matrix3;
 
         ASSERT_EQUAL(matrix4.GetRowsNumber(), matrix5.GetRowsNumber());
@@ -443,17 +444,17 @@ void Mathematics::VariableMatrixTesting::MatrixCalculateTest()
 
         ASSERT_TRUE(Approximate(matrix4, matrix5, 1e-8));
 
-        matrix3.ResetSize(integerRandomDistribution(generator), matrix2.GetColumnsNumber());
+        matrix3.SetSize(integerRandomDistribution(generator), matrix2.GetColumnsNumber());
 
         for (int row = 0; row < matrix3.GetRowsNumber(); ++row)
         {
             for (int column = 0; column < matrix3.GetColumnsNumber(); ++column)
             {
-                matrix3[row][column] = floatRandomDistribution(generator);
+                matrix3(row, column) = floatRandomDistribution(generator);
             }
         }
 
-        matrix4 = TimesTranspose(matrix2, matrix3);
+        matrix4 = MultiplyTranspose(matrix2, matrix3);
         matrix5 = matrix2 * matrix3.Transpose();
 
         ASSERT_EQUAL(matrix4.GetRowsNumber(), matrix5.GetRowsNumber());
@@ -462,17 +463,17 @@ void Mathematics::VariableMatrixTesting::MatrixCalculateTest()
 
         ASSERT_TRUE(Approximate(matrix4, matrix5, 1e-10));
 
-        matrix3.ResetSize(integerRandomDistribution(generator), matrix2.GetRowsNumber());
+        matrix3.SetSize(integerRandomDistribution(generator), matrix2.GetRowsNumber());
 
         for (int row = 0; row < matrix3.GetRowsNumber(); ++row)
         {
             for (int column = 0; column < matrix3.GetColumnsNumber(); ++column)
             {
-                matrix3[row][column] = floatRandomDistribution(generator);
+                matrix3(row, column) = floatRandomDistribution(generator);
             }
         }
 
-        matrix4 = TransposeTimesTranspose(matrix2, matrix3);
+        matrix4 = TransposeMultiplyTranspose(matrix2, matrix3);
         matrix5 = matrix2.Transpose() * matrix3.Transpose();
 
         ASSERT_EQUAL(matrix4.GetRowsNumber(), matrix5.GetRowsNumber());
@@ -504,8 +505,8 @@ void Mathematics::VariableMatrixTesting::CompareTest()
     VariableMatrixD matrix0(3, 5, firstDoubleVector);
     VariableMatrixD matrix1(3, 5, secondDoubleVector);
 
-    matrix0[0][0] = 0.0;
-    matrix1[0][0] = 1.0;
+    matrix0(0,0) = 0.0;
+    matrix1(0,0) = 1.0;
 
     ASSERT_TRUE(matrix0 == matrix0);
     ASSERT_FALSE(matrix0 != matrix0);

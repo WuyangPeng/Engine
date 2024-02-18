@@ -11,14 +11,14 @@
 #define MATHEMATICS_ALGEBRA_EULER_ACHIEVE_H
 
 #include "Euler.h"
-#include "Flags/ExtractEulerResultType.h"
+#include "Flags/EulerResultType.h"
 #include "Flags/MatrixFlags.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Euler<Real>::Euler(ExtractEulerResultType type, ExtractEulerResultOrder order, Real x0Angle, Real y0Angle, Real z0Angle, Real x1Angle, Real y1Angle, Real z1Angle) noexcept
+Mathematics::Euler<Real>::Euler(EulerResult type, ExtractEulerResultOrder order, Real x0Angle, Real y0Angle, Real z0Angle, Real x1Angle, Real y1Angle, Real z1Angle) noexcept
     : extractEulerResultType{ type },
       order{ order },
       x0Angle{ x0Angle },
@@ -55,7 +55,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Euler<Real>::IsValid() con
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::ExtractEulerResultType Mathematics::Euler<Real>::GetType() const noexcept
+Mathematics::EulerResult Mathematics::Euler<Real>::GetType() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

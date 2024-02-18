@@ -220,7 +220,7 @@ void Mathematics::EigenDecomposition<Real>::Tridiagonal2()
     subdiagonal.at(0) = matrix(0, 1);
     subdiagonal.at(1) = Math::GetValue(0);
 
-    solveMatrix.SetIdentity();
+    solveMatrix.MakeIdentity();
 
     isRotation = true;
 }
@@ -265,7 +265,7 @@ void Mathematics::EigenDecomposition<Real>::Tridiagonal3()
         diagonal.at(2) = m22;
         subdiagonal.at(0) = m01;
         subdiagonal.at(1) = m12;
-        solveMatrix.SetIdentity();
+        solveMatrix.MakeIdentity();
 
         isRotation = true;
     }
@@ -415,8 +415,8 @@ void Mathematics::EigenDecomposition<Real>::Step2()
                 }
             }
         }
-        diagonal.at(index) = solveMatrix[index][index];
-        solveMatrix[index][index] = Math::GetValue(1);
+        diagonal.at(index) = solveMatrix(index, index);
+        solveMatrix(index, index) = Math::GetValue(1);
         for (auto innerIndex = 0; innerIndex <= index - 1; ++innerIndex)
         {
             solveMatrix(innerIndex, index) = Math::GetValue(0);

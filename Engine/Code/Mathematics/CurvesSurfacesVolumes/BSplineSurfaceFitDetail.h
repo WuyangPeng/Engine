@@ -82,7 +82,7 @@ Mathematics::BSplineSurfaceFit<Real>::BSplineSurfaceFit(int degree0, int numCont
     std::array<VariableMatrix<Real>, 2> atMat{};
     for (auto dim = 0; dim < 2; dim++)
     {
-        atMat.at(dim).ResetSize(numSamples.at(dim), numControls.at(dim));
+        atMat.at(dim).SetSize(numSamples.at(dim), numControls.at(dim));
 
         for (auto i0 = 0; i0 < numControls.at(dim); ++i0)
         {
@@ -94,7 +94,7 @@ Mathematics::BSplineSurfaceFit<Real>::BSplineSurfaceFit(int degree0, int numCont
                 dBasis.at(dim)->Compute(t, imin, imax);
                 if (imin <= i0 && i0 <= imax)
                 {
-                    atMat.at(dim)[i0][i1] = dBasis.at(dim)->GetValue(i0 - imin);
+                    atMat.at(dim)(i0, i1) = dBasis.at(dim)->GetValue(i0 - imin);
                 }
             }
         }
@@ -112,10 +112,10 @@ Mathematics::BSplineSurfaceFit<Real>::BSplineSurfaceFit(int degree0, int numCont
             Vector3<Real> sum{};
             for (auto j1 = 0; j1 < numSamples.at(1); ++j1)
             {
-                auto x1Value = atMat.at(1)[i1][j1];
+                auto x1Value = atMat.at(1)(i1, j1);
                 for (auto j0 = 0; j0 < numSamples.at(0); ++j0)
                 {
-                    auto x0Value = atMat.at(0)[i0][j0];
+                    auto x0Value = atMat.at(0)(i0, j0);
                     sum += (x0Value * x1Value) * samples.at(j1).at(j0);
                 }
             }

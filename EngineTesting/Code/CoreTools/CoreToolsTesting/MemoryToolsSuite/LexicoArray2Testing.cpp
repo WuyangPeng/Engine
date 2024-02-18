@@ -45,7 +45,7 @@ void CoreTools::LexicoArray2Testing::RowMajorLexicoArray2Test()
 
     LexicoArray2<true, double, 5, 4> lexicoArray2{ container };
 
-    ASSERT_EQUAL(lexicoArray2.GetNumCols(), 4);
+    ASSERT_EQUAL(lexicoArray2.GetNumColumns(), 4);
     ASSERT_EQUAL(lexicoArray2.GetNumRows(), 5);
 
     auto index = 0;
@@ -69,7 +69,7 @@ void CoreTools::LexicoArray2Testing::ColumnMajorLexicoArray2Test()
 
     LexicoArray2<false, double, 5, 4> lexicoArray2{ container };
 
-    ASSERT_EQUAL(lexicoArray2.GetNumCols(), 4);
+    ASSERT_EQUAL(lexicoArray2.GetNumColumns(), 4);
     ASSERT_EQUAL(lexicoArray2.GetNumRows(), 5);
 
     auto index = 0;
@@ -93,7 +93,7 @@ void CoreTools::LexicoArray2Testing::RowMajorConstantLexicoArray2Test()
 
     LexicoArray2<true, double> lexicoArray2{ 5, 4, container };
 
-    ASSERT_EQUAL(lexicoArray2.GetNumCols(), 4);
+    ASSERT_EQUAL(lexicoArray2.GetNumColumns(), 4);
     ASSERT_EQUAL(lexicoArray2.GetNumRows(), 5);
 
     auto index = 0;
@@ -117,7 +117,7 @@ void CoreTools::LexicoArray2Testing::ColumnMajorConstantLexicoArray2Test()
 
     LexicoArray2<false, double> lexicoArray2{ 5, 4, container };
 
-    ASSERT_EQUAL(lexicoArray2.GetNumCols(), 4);
+    ASSERT_EQUAL(lexicoArray2.GetNumColumns(), 4);
     ASSERT_EQUAL(lexicoArray2.GetNumRows(), 5);
 
     auto index = 0;

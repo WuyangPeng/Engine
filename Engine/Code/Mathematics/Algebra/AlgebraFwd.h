@@ -198,7 +198,26 @@ namespace Mathematics
     requires std::is_floating_point_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BoundingSphere;
 
-    enum class ExtractEulerResultType;
+    namespace Algebra
+    {
+        template <int N, typename Real>
+        requires(1 <= N && N <= 4 && std::is_arithmetic_v<Real>)
+        class Vector;
+
+        template <int NumRows, int NumColumns, typename Real>
+        requires(1 <= NumRows && NumRows <= 4 && 1 <= NumColumns && NumColumns <= 4 && std::is_arithmetic_v<Real>)
+        class Matrix;
+
+        template <int N, typename Real>
+        requires(3 <= N && N <= 4 && std::is_arithmetic_v<Real>)
+        class AxisAngle;
+
+        template <typename Real>
+        requires(std::is_arithmetic_v<Real>)
+        class EulerAngles;
+    }
+
+    enum class EulerResult;
     enum class ExtractEulerResultOrder;
     enum class MatrixInitType;
     enum class MatrixMajorFlags;

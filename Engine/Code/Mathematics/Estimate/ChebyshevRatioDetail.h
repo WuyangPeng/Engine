@@ -97,7 +97,7 @@ std::array<T, 2> Mathematics::ChebyshevRatiosUsingCosAngle(T t, T cosAngle)
             // 角度A在(0,pi)中。
             const auto angle = std::acos(cosAngle);
             const auto sinAngle = std::sin(angle);
-            std::array<T, 2> f{ std::sin((Math<T>::GetValue(1) - t) * angle) / sinAngle, std::sin(t * angle) / sinAngle };
+            const std::array<T, 2> f{ std::sin((Math<T>::GetValue(1) - t) * angle) / sinAngle, std::sin(t * angle) / sinAngle };
 
             return f;
         }
@@ -111,7 +111,7 @@ std::array<T, 2> Mathematics::ChebyshevRatiosUsingCosAngle(T t, T cosAngle)
     {
         // 角度A为0。使用l'Hospital's规则，
         // lim_{A->0} sin(t*A)/sin(A) = lim_{A->0} t*cos(t*A)/cos(A) = t.
-        std::array<T, 2> f{ Math<T>::GetValue(1) - t, t };
+        const std::array<T, 2> f{ Math<T>::GetValue(1) - t, t };
 
         return f;
     }
