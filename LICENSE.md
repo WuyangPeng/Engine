@@ -1,6 +1,6 @@
 BSD 3-Clause License
 
-Copyright (c) 2023, Wuyang Peng
+Copyright (c) 2024, Wuyang Peng
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
