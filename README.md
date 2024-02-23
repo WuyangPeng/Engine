@@ -30,8 +30,7 @@ It can be used for activities such as:
 
 - Libs目录下为依赖库，如果出现依赖库错误，根据Engine\EngineWindows\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine\Resource下的Library.md进行修正。
 	
-- 执行Environment下的批处理文件SetIncludeEnv.bat和SetLibEnv.bat各两次
-			（LibsEnvironmentBaseInclude等变量需要使用其他的环境变量，所以需要执行两次）。
+- 执行Environment下的批处理文件SetIncludeEnv.bat和SetLibEnv.bat各两次（LibsEnvironmentBaseInclude等变量需要使用其他的环境变量，所以需要执行两次）。
 	
 - 执行MillenniumHistory、RiseOfHistory和TheLastOverlord工程$$Windows目录下的SetAllEnvironment.bat。
 	
@@ -51,5 +50,4 @@ It can be used for activities such as:
 	
 - 执行cd /data/github/Libs/Bat。
 	
-- 执行sh create_lib。如果出现依赖库错误，
-			根据Engine\EngineWindows\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine\Resource下的Library.md进行修正。
+- 执行sh create_lib。如果出现依赖库错误，根据Engine\EngineWindows\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine\Resource下的Library.md进行修正。
