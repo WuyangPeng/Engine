@@ -1,22 +1,30 @@
-# Engine
+# Threading Core Render Engine（线程核心渲染引擎）
 
-Engine is an open-source 3D rendering engine written in C++ and using OpenGL as graphic API.
+Engine is an open-source 3D rendering engine written in C++ and using OpenGL,OpenGLES,DirectX and Vulkan as graphic API.
 It can be used for activities such as:
   - Gaming
   - Scientific computation and visualization
+  
+引擎是一个开源的三维绘制引擎，用C++编写，使用OpenGL、OpenGLES、DirectX、Vulkan作为图形API。
+它可用于以下活动：
+	-游戏
+	-科学计算和可视化
 
-### Supported Platforms:
-- Windows
+### Supported Platforms（支持平台）:
+- windows
+- linux
+- Android
+- Macintosh
 
-## Setup
-
+## Setup（安装程序）:
 Before building, make sure your setup is correct : 
+在构建之前，请确保您的设置正确：
 
-### Setup Window machine
-
+### Setup Window machine（设置Window机器）:
 - Install Visual Studio 2022 Community or Professional, make sure to add "Desktop development with C++".
+- 安装Visual Studio 2022社区版或专业版，确保添加“使用C++进行桌面开发”。
 
-### compile
+### compile（编译）：
 
 	1. Windows平台
 
