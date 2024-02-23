@@ -13,8 +13,8 @@ It can be used for activities such as:
 ### Supported Platforms（支持平台）:
 - windows
 - linux
-- Android
-- Macintosh
+- android
+- macintosh
 
 ## Setup（安装程序）:
 - Before building, make sure your setup is correct : 
