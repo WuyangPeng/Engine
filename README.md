@@ -17,8 +17,8 @@ It can be used for activities such as:
 - Macintosh
 
 ## Setup（安装程序）:
-Before building, make sure your setup is correct : 
-在构建之前，请确保您的设置正确：
+- Before building, make sure your setup is correct : 
+- 在构建之前，请确保您的设置正确：
 
 ### Setup Window machine（设置Window机器）:
 - Install Visual Studio 2022 Community or Professional, make sure to add "Desktop development with C++".
