@@ -7,8 +7,8 @@ It can be used for activities such as:
   
 引擎是一个开源的三维绘制引擎，用C++编写，使用OpenGL、OpenGLES、DirectX、Vulkan作为图形API。
 它可用于以下活动：
-	-游戏
-	-科学计算和可视化
+  - 游戏
+  - 科学计算和可视化
 
 ### Supported Platforms（支持平台）:
 - windows
@@ -24,7 +24,7 @@ Before building, make sure your setup is correct :
 - Install Visual Studio 2022 Community or Professional, make sure to add "Desktop development with C++".
 - 安装Visual Studio 2022社区版或专业版，确保添加“使用C++进行桌面开发”。
 
-### compile（编译）：
+### Compile（编译）：
 
 	1. Windows平台
 
