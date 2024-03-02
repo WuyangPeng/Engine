@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:37)
+/// 版本：1.0.0.6 (2024/02/23 16:26)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_CODES_FLAGS_H
 #define SYSTEM_WINDOWS_WINDOWS_CODES_FLAGS_H
@@ -228,13 +228,13 @@ namespace System
         OemFinish = VK_OEM_FINISH,
         OemCopy = VK_OEM_COPY,
         OemAuto = VK_OEM_AUTO,
-        OemEnlw = VK_OEM_ENLW,
+        OemEnglishLowercase = VK_OEM_ENLW,
         OemBackTab = VK_OEM_BACKTAB,
 
         Attn = VK_ATTN,
-        Crsel = VK_CRSEL,
-        Exsel = VK_EXSEL,
-        Ereof = VK_EREOF,
+        CrSel = VK_CRSEL,
+        ExSel = VK_EXSEL,
+        ErEof = VK_EREOF,
         Play = VK_PLAY,
         Zoom = VK_ZOOM,
         NoName = VK_NONAME,
@@ -465,13 +465,13 @@ namespace System
         OemFinish = 0xF1,
         OemCopy = 0xF2,
         OemAuto = 0xF3,
-        OemEnlw = 0xF4,
+        OemEnglishLowercase = 0xF4,
         OemBackTab = 0xF5,
 
         Attn = 0xF6,
-        Crsel = 0xF7,
-        Exsel = 0xF8,
-        Ereof = 0xF9,
+        CrSel = 0xF7,
+        ExSel = 0xF8,
+        ErEof = 0xF9,
         Play = 0xFA,
         Zoom = 0xFB,
         NoName = 0xFC,

@@ -11,9 +11,9 @@
 #define SYSTEM_CHARACTER_STRING_SUITE_FORMAT_ERROR_MESSAGE_TESTING_BASE_H
 
 #include "FormatMessageTestingBase.h"
+#include "System/DynamicLink/Using/LoadLibraryUsing.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Windows/Flags/PlatformErrorFlags.h"
-#include "System/DynamicLink/Using/LoadLibraryUsing.h"
 
 #include <set>
 
@@ -40,8 +40,6 @@ namespace System
         NODISCARD bool IsWindowErrorValid(WindowError windowError) const;
         NODISCARD WindowErrorContainerConstIter GetComWindowErrorBegin() const noexcept;
         NODISCARD WindowErrorContainerConstIter GetComWindowErrorEnd() const noexcept;
-        NODISCARD bool IsExistInvalidWindowError() const noexcept;
-        NODISCARD bool IsExistValidWindowError() const noexcept;
         NODISCARD DynamicLinkModule CreateKernel32Dll();
         void FreeKernel32Dll(DynamicLinkModule kernel32Dll);
 
@@ -49,17 +47,8 @@ namespace System
         NODISCARD static bool IsFormatWindowErrorSuccess(WindowError windowError);
 
     private:
-        // Windows 7系统某些错误码信息不存在。
-        static constexpr auto windows7InvalidWindowError = WindowError::DeviceSupportInProgress;
-
-        // Windows 10系统增加了未文档化的错误码。
-        static constexpr auto windows10ValidWindowError = UnderlyingCastEnum<WindowError>(44);
-
-    private:
         WindowErrorContainer windowErrors;
         WindowErrorContainer comWindowErrors;
-        bool isExistInvalidWindowError;
-        bool isExistValidWindowError;
     };
 }
 

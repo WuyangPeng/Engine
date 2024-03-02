@@ -1,6 +1,7 @@
 TODO Level 3
  
-1.0.0.3
+1.0.0.6
 
-1. （OpenGL）使用工具自动化生成OpenGL Extensions代码。
-2. （Windows）使用工具自动化生成WindowError枚举。
+1.（Helper）考虑是否添加不同类型枚举之间的数学运算符。 
+2.（FileManager）安卓系统屏蔽GetEnvironment函数的调用，查看是否有解决方案。
+3.（Windows）禁止关闭控制台窗口，但最小化时依然可以关闭。

@@ -131,7 +131,7 @@ bool Mathematics::RotationTransformTesting::ConvertTest()
     transform0.SetRotate(rotate0);
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrix3FApproximateFunction, transform0.GetRotationMatrix3(), rotate0.GetMatrix3(), epsilon0);
-    ASSERT_APPROXIMATE_USE_FUNCTION(aQuaternionFApproximateFunction, transform0.GetRotationQuaternion(), AQuaternionF{ rotate0 }, epsilon0);
+    ASSERT_APPROXIMATE_USE_FUNCTION(aQuaternionFApproximateFunction, transform0.GetRotationAQuaternion(), AQuaternionF{ rotate0 }, epsilon0);
 
     const auto axisAngle0 = transform0.GetRotationAxisAngle();
     ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsF::Approximate, axisAngle0.GetAxis(), rotate0.GetMatrix3().ExtractAxis(), epsilon0);
@@ -152,7 +152,7 @@ bool Mathematics::RotationTransformTesting::ConvertTest()
     transform1.SetRotate(rotate1);
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrix3DApproximateFunction, transform1.GetRotationMatrix3(), rotate1.GetMatrix3(), epsilon1);
-    ASSERT_APPROXIMATE_USE_FUNCTION(aQuaternionDApproximateFunction, transform1.GetRotationQuaternion(), AQuaternionD{ rotate1 }, epsilon1);
+    ASSERT_APPROXIMATE_USE_FUNCTION(aQuaternionDApproximateFunction, transform1.GetRotationAQuaternion(), AQuaternionD{ rotate1 }, epsilon1);
 
     const auto axisAngle1 = transform1.GetRotationAxisAngle();
     ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, axisAngle1.GetAxis(), rotate1.GetMatrix3().ExtractAxis(), epsilon1);
@@ -340,8 +340,8 @@ bool Mathematics::RotationTransformTesting::SetAQuaternionRotationTest()
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixFApproximateFunction, transform0.GetHomogeneousMatrix(), rotate0, epsilon0);
 
-    ASSERT_TRUE(aQuaternionFApproximateFunction(transform0.GetRotationQuaternion(), quaternion0, epsilon0) ||
-                aQuaternionFApproximateFunction(transform0.GetRotationQuaternion(), -quaternion0, epsilon0));
+    ASSERT_TRUE(aQuaternionFApproximateFunction(transform0.GetRotationAQuaternion(), quaternion0, epsilon0) ||
+                aQuaternionFApproximateFunction(transform0.GetRotationAQuaternion(), -quaternion0, epsilon0));
 
     constexpr auto epsilon1 = 1e-6;
     TransformD transform1{};
@@ -351,8 +351,8 @@ bool Mathematics::RotationTransformTesting::SetAQuaternionRotationTest()
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixDApproximateFunction, transform1.GetHomogeneousMatrix(), rotate1, epsilon0);
 
-    ASSERT_TRUE(aQuaternionDApproximateFunction(transform1.GetRotationQuaternion(), quaternion1, epsilon1) ||
-                aQuaternionDApproximateFunction(transform1.GetRotationQuaternion(), -quaternion1, epsilon1));
+    ASSERT_TRUE(aQuaternionDApproximateFunction(transform1.GetRotationAQuaternion(), quaternion1, epsilon1) ||
+                aQuaternionDApproximateFunction(transform1.GetRotationAQuaternion(), -quaternion1, epsilon1));
 
     return true;
 }

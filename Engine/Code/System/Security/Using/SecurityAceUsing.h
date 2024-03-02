@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:26)
+/// 版本：1.0.0.6 (2024/02/28 10:45)
 
 #ifndef SYSTEM_SECURITY_SECURITY_ACE_USING_H
 #define SYSTEM_SECURITY_SECURITY_ACE_USING_H

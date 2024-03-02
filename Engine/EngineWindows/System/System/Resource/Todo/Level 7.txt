@@ -1,13 +1,12 @@
 TODO Level 7
 
-1.0.0.3
+1.0.0.6
 
-1.（Helper）使用最新版本的boost修改配置宏，或直接使用boost定义的宏。
-2.（MemoryTools）完成MemoryTools非Windows平台的实现：VirtualTools、
+1.（MemoryTools）完成MemoryTools非Windows平台的实现：VirtualTools、
 													 ViewOfFile、
 													 MemoryHelper、
 													 LocalTools。
-3.（Threading）完成Threading非Windows平台的实现： CriticalSection、
+2.（Threading）完成Threading非Windows平台的实现： CriticalSection、
 												  Semaphore、
 												  Event、
 												  Mutex、

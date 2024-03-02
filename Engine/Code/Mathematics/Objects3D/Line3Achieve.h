@@ -23,6 +23,13 @@ Mathematics::Line3<Real>::Line3(const Vector3& origin, const Vector3& direction,
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
+template <typename Real>
+Mathematics::Line3<Real>::Line3(const AlgebraLine3& line, Real epsilon)
+    : origin{ line.GetOrigin() }, direction{ line.GetDirection() }, epsilon{ epsilon }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>

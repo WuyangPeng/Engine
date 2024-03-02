@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:09)
+/// 版本：1.0.0.6 (2024/02/29 09:34)
 
 #ifndef SYSTEM_OPENGL_GLX_EXT_EXTENSIONS_H
 #define SYSTEM_OPENGL_GLX_EXT_EXTENSIONS_H

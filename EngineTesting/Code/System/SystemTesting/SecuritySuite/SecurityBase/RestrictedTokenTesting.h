@@ -34,7 +34,7 @@ namespace System
         static constexpr auto securitySidBufferSize = securityBufferSize * 2;
         using SecuritySidBufferType = std::array<SecuritySid, securitySidBufferSize>;
         using SecuritySidAndAttributesBufferType = std::array<SecuritySidAndAttributes, securityBufferSize>;
-        using LuidAndAttributesBufferType = std::array<LuidAndAttributes, securityBufferSize>;
+        using LuidAndAttributesBufferType = std::array<LocallyUniqueIdentifierAndAttributes, securityBufferSize>;
 
         using SpecifiesAdditionalPrivilegeOptionsContainer = std::vector<SpecifiesAdditionalPrivilegeOptions>;
 
@@ -50,7 +50,7 @@ namespace System
                                               int count,
                                               SecuritySidAndAttributes& securitySidAndAttributes);
         NODISCARD LuidAndAttributesBufferType GetPrivilegesToDelete();
-        void GetLookupPrivilegeValueTest(LuidAndAttributes& luidAndAttributes);
+        void GetLookupPrivilegeValueTest(LocallyUniqueIdentifierAndAttributes& luidAndAttributes);
         NODISCARD SecuritySidAndAttributesBufferType GetSidsToRestrict(SecuritySidBufferType& sid);
         void RestrictedTest(WindowsHandle tokenHandle,
                             SecuritySidAndAttributesBufferType& sidsToDisable,

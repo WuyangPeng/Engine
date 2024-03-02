@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:24)
+/// 版本：1.0.0.6 (2024/02/27 20:18)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_MESSAGE_BOX_FLAGS_H
 #define SYSTEM_SYSTEM_OUTPUT_MESSAGE_BOX_FLAGS_H
@@ -68,8 +68,8 @@ namespace System
         TopMost = MB_TOPMOST,
         Right = MB_RIGHT,
         RightToLeftReading = MB_RTLREADING,
-        ServiceNotification = MB_SERVICE_NOTIFICATION,  // 如果设置了此参数，则hwnd参数一定为nullptr。
-        ServiceNotificationNt3x = MB_SERVICE_NOTIFICATION_NT3X,
+        ServiceNotification = MB_SERVICE_NOTIFICATION,  // 如果设置了此参数，则hWnd参数一定为nullptr。
+        ServiceNotificationNt3X = MB_SERVICE_NOTIFICATION_NT3X,
     };
 
 #else  // !SYSTEM_PLATFORM_WIN32
@@ -125,7 +125,7 @@ namespace System
         Right = 0x00080000L,
         RightToLeftReading = 0x00100000L,
         ServiceNotification = 0x00200000L,
-        ServiceNotificationNt3x = 0x00040000L,
+        ServiceNotificationNt3X = 0x00040000L,
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32

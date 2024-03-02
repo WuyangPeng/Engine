@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/11/29 15:30)
+/// 版本：1.0.0.6 (2024/02/20 09:16)
 
 #ifndef RENDERING_DATA_TYPES_TRANSFORM_MATRIX_H
 #define RENDERING_DATA_TYPES_TRANSFORM_MATRIX_H
@@ -51,6 +51,8 @@ namespace Mathematics
         NODISCARD int GetStreamingSize() const noexcept;
 
     private:
+        /// 每当组件matrix、translate或scale之一发生变化时，
+        /// 请填写transformMatrix的条目。
         void Modification(const APoint& translate) noexcept;
         void Modification(const Matrix& matrix) noexcept;
         void Modification(const Matrix& rotate, const APoint& scale) noexcept;

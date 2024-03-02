@@ -46,11 +46,11 @@ boost（引擎直接关联）
 ----------------------------
 stlsoft（引擎直接关联）
 
-1. 版本：1.10.1-beta33。
+1. 版本：1.10.11。
 2. git地址：https://github.com/synesissoftware/STLSoft-1.10
-3. 在stlsoft.h第778行增加
-	# elif (_MSC_VER < 2000)
-	#   define STLSOFT_COMPILER_VERSION_STRING      "Visual C++ 16.x"
+3. 在stlsoft.h第795行增加
+	#  elif (_MSC_VER < 2000)
+	#   define STLSOFT_COMPILER_VERSION_STRING                  "Visual C++ 16.x"
 
 ----------------------------
 ACE（引擎通过宏NETWORK_USE_ACE关联）
@@ -99,31 +99,6 @@ mysql （引擎通过宏DATABASE_USE_MYSQL_C_API关联）
 5.  定义正确的BOOST_INCLUDE_DIR到($boost)。
 6.  boost.cmake 41行、304行、306行、314行改成当前使用的boost库版本。
 7.  定义正确的OPENSSL_ROOT_DIR到($openssl)，需要链接对应版本的openssl。
-
-如果需要编译服务器，还可能需要下面的修改（没有定义WITHOUT_SERVER，Win32版本不再被支持）： 
-1.  my_alloc.h、strings_strnxfrm-t.cc、strings_valid_check-t.cc、strings_utf8-t.cc、
-	sql_locale.cc、test_string_service_charset.cc、sql_commands_help_data.h、mem_root_deque.h另存为ANSI编码。
-2.  文件crc32.cc（在storage\innobase\ut下）
-    第227行开始改成
-	#if defined(_M_X64)  
-		crc_64bit = _mm_crc32_u64(crc_64bit, data);   
-	#else // !_M_X64 
-		ulint len = 8;  
-		const byte* buf = reinterpret_cast<byte*>(&data);
-		while (len > 0 && (reinterpret_cast<uintptr_t>(buf) & 7) != 0) {   
-			ut_crc32_8_hw(&crc_64bit, &buf, &len); 
-		}
-	#endif /* defined (_M_X64) */
-3.  文件tables_contained_in.h（在include下）
-    第67行开始改成
-    #if defined(_M_X64)  
-		_BitScanForward64(&idx, m_bits_left);  
-	#else // !_M_X64 
-		_BitScanForward(&idx, m_bits_left);
-	#endif /* defined (_M_X64) */
-4.  将目录include\boost_1_V_0中的V改成目前的boost库版本。
-5.  由于boost库版本不一致，导致编译不过时，使用mysql指定的boost版本，
-	需要旧版本的boost头文件复制到include\boost_1_V_0下，然后用include\boost_1_V_0原来的文件进行覆盖。
 
 ----------------------------
 mysql connector c++（引擎通过宏DATABASE_USE_MYSQL_CPP_CONNECTOR关联）

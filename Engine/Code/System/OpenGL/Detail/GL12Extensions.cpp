@@ -55,17 +55,17 @@ void System::GLDrawRangeElements(GLenum mode, GLuint start, GLuint end, GLsizei 
     SYSTEM_BODY_6(glDrawRangeElements, mode, start, end, count, type, indices);
 }
 
-void System::GLTexImage3D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void* pixels) noexcept
+void System::GLTexImage3D(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void* pixels) noexcept
 {
-    SYSTEM_BODY_10(glTexImage3D, target, level, internalformat, width, height, depth, border, format, type, pixels);
+    SYSTEM_BODY_10(glTexImage3D, target, level, internalFormat, width, height, depth, border, format, type, pixels);
 }
 
-void System::GLTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void* pixels) noexcept
+void System::GLTexSubImage3D(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLint zOffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void* pixels) noexcept
 {
-    SYSTEM_BODY_11(glTexSubImage3D, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+    SYSTEM_BODY_11(glTexSubImage3D, target, level, xOffset, yOffset, zOffset, width, height, depth, format, type, pixels);
 }
 
-void System::GLCopyTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
+void System::GLCopyTexSubImage3D(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLint zOffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
 {
-    SYSTEM_BODY_9(glCopyTexSubImage3D, target, level, xoffset, yoffset, zoffset, x, y, width, height);
+    SYSTEM_BODY_9(glCopyTexSubImage3D, target, level, xOffset, yOffset, zOffset, x, y, width, height);
 }

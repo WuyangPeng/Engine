@@ -44,14 +44,14 @@ void CoreTools::ThreadSafeQueueTesting::ThreadSafeQueueTest()
 
     ASSERT_TRUE(threadSafeQueue.Push(5));
 
-    ASSERT_RANGE(threadSafeQueue.GetNumElements(), 1u, 2u);
+    ASSERT_RANGE(threadSafeQueue.GetNumElements(), 1, 2);
 
     const auto result = threadSafeQueue.Pop();
 
     ASSERT_EQUAL(result.first, 5);
     ASSERT_TRUE(result.second);
 
-    ASSERT_RANGE(threadSafeQueue.GetNumElements(), 0u, 1u);
+    ASSERT_RANGE(threadSafeQueue.GetNumElements(), 0, 1);
 
     ASSERT_EQUAL(threadSafeQueue.GetMaxNumElements(), maxNumElements);
 }

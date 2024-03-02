@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:02)
+/// 版本：1.0.0.6 (2024/02/28 14:52)
 
 #ifndef SYSTEM_OPENGL_GET_OPENGL_FUNCTION_H
 #define SYSTEM_OPENGL_GET_OPENGL_FUNCTION_H
@@ -17,6 +17,7 @@
 
 namespace System
 {
+    /// 每个平台必须实现这个函数。
     MAYBE_NULLPTR void* GetOpenGLFunctionPointer(const char* glFunction) noexcept;
 
     template <typename Function>

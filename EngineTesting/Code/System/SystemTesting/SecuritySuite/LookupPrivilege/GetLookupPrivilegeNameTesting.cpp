@@ -43,7 +43,7 @@ void System::GetLookupPrivilegeNameTesting::GetLookupPrivilegeNameTest()
 
 void System::GetLookupPrivilegeNameTesting::DoGetLookupPrivilegeNameTest(const String& lookupPrivilegeName)
 {
-    LookupPrivilegeLuid uid{};
+    LookupPrivilegeLocallyUniqueIdentifier uid{};
     ASSERT_TRUE(GetLookupPrivilegeValue(nullptr, lookupPrivilegeName.c_str(), &uid));
 
     BufferType buffer{};

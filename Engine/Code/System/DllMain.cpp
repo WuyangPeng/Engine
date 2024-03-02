@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:13)
+/// 版本：1.0.0.6 (2024/02/21 18:07)
 
 #include "System/SystemExport.h"
 
@@ -15,10 +15,10 @@
 
 #if !defined(BUILDING_SYSTEM_STATIC) && defined(SYSTEM_PLATFORM_WIN32)
 
-int SYSTEM_WINAPI DllMain(MAYBE_UNUSED System::WindowsHInstance instance,
-                          MAYBE_UNUSED System::WindowsDWord reason,
-                          MAYBE_UNUSED System::WindowsVoidPtr reserved) noexcept
+int SYSTEM_WINAPI DllMain(System::WindowsHInstance instance, System::WindowsDWord reason, System::WindowsVoidPtr reserved) noexcept
 {
+    System::UnusedFunction(instance, reason, reserved);
+
     return System::gTrue;
 }
 
@@ -31,4 +31,4 @@ namespace System
     }
 }
 
-#endif  // !BUILDING_SYSTEM_STATIC
+#endif  // !defined(BUILDING_SYSTEM_STATIC) && defined(SYSTEM_PLATFORM_WIN32)

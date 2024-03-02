@@ -69,34 +69,34 @@ void System::GLSampleCoverage(GLfloat value, GLboolean invert) noexcept
     SYSTEM_BODY_2(glSampleCoverage, value, invert);
 }
 
-void System::GLCompressedTexImage3D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void* data) noexcept
+void System::GLCompressedTexImage3D(GLenum target, GLint level, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void* data) noexcept
 {
-    SYSTEM_BODY_9(glCompressedTexImage3D, target, level, internalformat, width, height, depth, border, imageSize, data);
+    SYSTEM_BODY_9(glCompressedTexImage3D, target, level, internalFormat, width, height, depth, border, imageSize, data);
 }
 
-void System::GLCompressedTexImage2D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void* data) noexcept
+void System::GLCompressedTexImage2D(GLenum target, GLint level, GLenum internalFormat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void* data) noexcept
 {
-    SYSTEM_BODY_8(glCompressedTexImage2D, target, level, internalformat, width, height, border, imageSize, data);
+    SYSTEM_BODY_8(glCompressedTexImage2D, target, level, internalFormat, width, height, border, imageSize, data);
 }
 
-void System::GLCompressedTexImage1D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void* data) noexcept
+void System::GLCompressedTexImage1D(GLenum target, GLint level, GLenum internalFormat, GLsizei width, GLint border, GLsizei imageSize, const void* data) noexcept
 {
-    SYSTEM_BODY_7(glCompressedTexImage1D, target, level, internalformat, width, border, imageSize, data);
+    SYSTEM_BODY_7(glCompressedTexImage1D, target, level, internalFormat, width, border, imageSize, data);
 }
 
-void System::GLCompressedTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void* data) noexcept
+void System::GLCompressedTexSubImage3D(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLint zOffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void* data) noexcept
 {
-    SYSTEM_BODY_11(glCompressedTexSubImage3D, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data);
+    SYSTEM_BODY_11(glCompressedTexSubImage3D, target, level, xOffset, yOffset, zOffset, width, height, depth, format, imageSize, data);
 }
 
-void System::GLCompressedTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void* data) noexcept
+void System::GLCompressedTexSubImage2D(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void* data) noexcept
 {
-    SYSTEM_BODY_9(glCompressedTexSubImage2D, target, level, xoffset, yoffset, width, height, format, imageSize, data);
+    SYSTEM_BODY_9(glCompressedTexSubImage2D, target, level, xOffset, yOffset, width, height, format, imageSize, data);
 }
 
-void System::GLCompressedTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void* data) noexcept
+void System::GLCompressedTexSubImage1D(GLenum target, GLint level, GLint xOffset, GLsizei width, GLenum format, GLsizei imageSize, const void* data) noexcept
 {
-    SYSTEM_BODY_7(glCompressedTexSubImage1D, target, level, xoffset, width, format, imageSize, data);
+    SYSTEM_BODY_7(glCompressedTexSubImage1D, target, level, xOffset, width, format, imageSize, data);
 }
 
 void System::GLGetCompressedTexImage(GLenum target, GLint level, void* img) noexcept

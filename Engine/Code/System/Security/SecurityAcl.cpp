@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:29)
+/// 版本：1.0.0.6 (2024/02/28 11:01)
 
 #include "System/SystemExport.h"
 
@@ -18,10 +18,7 @@ bool System::GetAccessControlListInformation(AccessCheckAclPtr acl, SecurityAclR
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetAclInformation(acl, aclInformation, sizeof(SecurityAclRevisionInformation), AclRevisionInformation) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetAclInformation(acl, aclInformation, sizeof(SecurityAclRevisionInformation), AclRevisionInformation) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -36,10 +33,7 @@ bool System::GetAccessControlListInformation(AccessCheckAclPtr acl, SecurityAclS
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetAclInformation(acl, aclInformation, sizeof(SecurityAclSizeInformation), AclSizeInformation) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetAclInformation(acl, aclInformation, sizeof(SecurityAclSizeInformation), AclSizeInformation) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -54,10 +48,7 @@ bool System::InitializeAccessControlList(AccessCheckAclPtr acl, WindowsDWord acl
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::InitializeAcl(acl, aclLength, EnumCastUnderlying(aclRevision)) != gFalse)
-        return true;
-    else
-        return false;
+    return ::InitializeAcl(acl, aclLength, EnumCastUnderlying(aclRevision)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -72,10 +63,7 @@ bool System::IsAccessControlListValid(AccessCheckAclPtr acl) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::IsValidAcl(acl) != gFalse)
-        return true;
-    else
-        return false;
+    return ::IsValidAcl(acl) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -90,10 +78,7 @@ bool System::SetAccessControlListInformation(AccessCheckAclPtr acl, SecurityAclR
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetAclInformation(acl, aclInformation, sizeof(SecurityAclRevisionInformation), AclRevisionInformation) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetAclInformation(acl, aclInformation, sizeof(SecurityAclRevisionInformation), AclRevisionInformation) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

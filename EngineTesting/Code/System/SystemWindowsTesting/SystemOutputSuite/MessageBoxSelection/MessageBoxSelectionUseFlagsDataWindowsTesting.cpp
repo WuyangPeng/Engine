@@ -53,7 +53,7 @@ System::MessageBoxSelectionUseFlagsDataWindowsTesting::MessageBoxSelectionUseFla
                  MessageBoxMisc::Right,
                  MessageBoxMisc::RightToLeftReading,
                  MessageBoxMisc::ServiceNotification,
-                 MessageBoxMisc::ServiceNotificationNt3x },
+                 MessageBoxMisc::ServiceNotificationNt3X },
       returnCollections{ { MessageBoxType::Ok, { DialogBoxCommand::IdOk } },
                          { MessageBoxType::OkCancel, { DialogBoxCommand::IdOk, DialogBoxCommand::IdCancel } },
                          { MessageBoxType::AbortRetryIgnore, { DialogBoxCommand::IdAbort, DialogBoxCommand::IdRetry, DialogBoxCommand::IdIgnore } },
@@ -87,7 +87,7 @@ System::MessageBoxSelectionUseFlagsDataWindowsTesting::MessageBoxSelectionUseFla
                         { MessageBoxMisc::Right, SYSTEM_TEXT("（文本右对齐）") },
                         { MessageBoxMisc::RightToLeftReading, SYSTEM_TEXT("（指定文本应为在希伯来和阿拉伯语系统中的从右到左显示）") },
                         { MessageBoxMisc::ServiceNotification, SYSTEM_TEXT("（调用者是通知用户事件的服务）") },
-                        { MessageBoxMisc::ServiceNotificationNt3x, SYSTEM_TEXT("（MessageBox不使用此标志）") } },
+                        { MessageBoxMisc::ServiceNotificationNt3X, SYSTEM_TEXT("（MessageBox不使用此标志）") } },
       maxSize{ CoreTools::MaxElement<size_t>({ typeFlags.size(), iconFlags.size(), defaultFlags.size(), modeFlags.size(), miscFlags.size() }) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;

@@ -39,6 +39,8 @@ namespace Mathematics::Algebra
         void SetAxis(int aAxis0, int aAxis1, int aAxis2) noexcept;
         void SetAngle(Real aAngle0, Real aAngle1, Real aAngle2) noexcept;
 
+        NODISCARD bool AxisIsEffective() const;
+
     private:
         using AxisType = std::array<int, 3>;
         using AngleType = std::array<Real, 3>;

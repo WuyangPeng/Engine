@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/12 10:25)
+/// 版本：1.0.0.6 (2024/02/26 17:13)
 
 #ifndef MATHEMATICS_OBJECTS_3D_FWD_H
 #define MATHEMATICS_OBJECTS_3D_FWD_H
@@ -40,6 +40,7 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Cone3;
 
     template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Cylinder3;
 
     template <typename Real>
@@ -52,6 +53,7 @@ namespace Mathematics
     class Ellipsoid3Coefficients;
 
     template <typename Real>
+    requires std::is_arithmetic_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Frustum3;
 
     template <typename Real>
@@ -70,6 +72,7 @@ namespace Mathematics
     class Rectangle3;
 
     template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
     class Lozenge3;
 
     template <typename Real>
@@ -77,6 +80,39 @@ namespace Mathematics
 
     template <typename Real>
     class ConvexPolyhedron3;
+
+    template <typename Real>
+    requires std::is_arithmetic_v<Real>
+    class ConvexMesh3;
+
+    namespace Algebra
+    {
+        template <typename Real>
+        requires std::is_arithmetic_v<Real>
+        class Circle3;
+
+        template <typename Real>
+        requires(std::is_arithmetic_v<Real>)
+        class ConvexPolyhedron3;
+
+        template <typename Real>
+        requires(std::is_arithmetic_v<Real>)
+        class Ellipse3;
+
+        template <typename Real>
+        requires(std::is_arithmetic_v<Real>)
+        class Polyhedron3;
+
+        template <typename Real>
+        requires(std::is_arithmetic_v<Real>)
+        class Tetrahedron3;
+
+        template <typename Real>
+        requires(std::is_arithmetic_v<Real>)
+        class Torus3;
+    }
+
+    enum class ConvexMesh3Type;
 }
 
 #endif  // MATHEMATICS_OBJECTS_3D_FWD_H

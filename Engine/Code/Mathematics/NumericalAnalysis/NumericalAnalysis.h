@@ -10,6 +10,9 @@
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_H
 
+#include "Algebra/GivensRotationDetail.h"
+#include "Algebra/SingularInfoDetail.h"
+#include "Algebra/SingularValueDecompositionDetail.h"
 #include "Bisect1Detail.h"
 #include "Bisect1RootDetail.h"
 #include "Bisect2Detail.h"
@@ -44,6 +47,7 @@
 #include "SingularValueDetail.h"
 #include "SparseMatrixDetail.h"
 #include "SparseMatrixIndex.h"
+#include "SymmetricEigensolverDetail.h"
 #include "TrapezoidRuleDetail.h"
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_H

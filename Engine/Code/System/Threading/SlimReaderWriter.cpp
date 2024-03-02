@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:19)
+/// 版本：1.0.0.6 (2024/02/27 18:06)
 
 #include "System/SystemExport.h"
 
@@ -88,10 +88,7 @@ bool System::TryAcquireSlimReaderWriterLockExclusive(SlimReaderWriterLockPtr sli
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::TryAcquireSRWLockExclusive(slimReaderWriterLock) != gFalse)
-        return true;
-    else
-        return false;
+    return ::TryAcquireSRWLockExclusive(slimReaderWriterLock) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -106,10 +103,7 @@ bool System::TryAcquireSlimReaderWriterLockShared(SlimReaderWriterLockPtr slimRe
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::TryAcquireSRWLockShared(slimReaderWriterLock) != gFalse)
-        return true;
-    else
-        return false;
+    return ::TryAcquireSRWLockShared(slimReaderWriterLock) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:06)
+/// 版本：1.0.0.6 (2024/02/28 17:56)
 
 #ifndef SYSTEM_OPENGL_GL_33_EXTENSIONS_H
 #define SYSTEM_OPENGL_GL_33_EXTENSIONS_H
@@ -17,7 +17,7 @@
 
 namespace System
 {
-    // OpenGL 3.3
+    /// OpenGL 3.3
 
     SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL33() noexcept;
 
@@ -29,28 +29,28 @@ namespace System
     SYSTEM_HIDDEN_DECLARE void GLDeleteSamplers(GLsizei count, const GLuint* samplers) noexcept;
     SYSTEM_HIDDEN_DECLARE NODISCARD GLboolean GLIsSampler(GLuint sampler) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLBindSampler(GLuint unit, GLuint sampler) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLSamplerParameteri(GLuint sampler, GLenum pname, GLint param) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLSamplerParameteriv(GLuint sampler, GLenum pname, const GLint* param) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLSamplerParameterf(GLuint sampler, GLenum pname, GLfloat param) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLSamplerParameterfv(GLuint sampler, GLenum pname, const GLfloat* param) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLSamplerParameterIiv(GLuint sampler, GLenum pname, const GLint* param) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLSamplerParameterIuiv(GLuint sampler, GLenum pname, const GLuint* param) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLGetSamplerParameteriv(GLuint sampler, GLenum pname, GLint* params) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLGetSamplerParameterIiv(GLuint sampler, GLenum pname, GLint* params) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLGetSamplerParameterfv(GLuint sampler, GLenum pname, GLfloat* params) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLGetSamplerParameterIuiv(GLuint sampler, GLenum pname, GLuint* params) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLSamplerParameterI(GLuint sampler, GLenum pName, GLint param) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLSamplerParameterIv(GLuint sampler, GLenum pName, const GLint* param) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLSamplerParameterF(GLuint sampler, GLenum pName, GLfloat param) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLSamplerParameterFv(GLuint sampler, GLenum pName, const GLfloat* param) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLSamplerParameterIiv(GLuint sampler, GLenum pName, const GLint* param) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLSamplerParameterIUiv(GLuint sampler, GLenum pName, const GLuint* param) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetSamplerParameterIv(GLuint sampler, GLenum pName, GLint* params) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetSamplerParameterIiv(GLuint sampler, GLenum pName, GLint* params) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetSamplerParameterFv(GLuint sampler, GLenum pName, GLfloat* params) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetSamplerParameterIUiv(GLuint sampler, GLenum pName, GLuint* params) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLQueryCounter(GLuint id, GLenum target) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLGetQueryObjecti64v(GLuint id, GLenum pname, GLint64* params) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLGetQueryObjectui64v(GLuint id, GLenum pname, GLuint64* params) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetQueryObjectI64V(GLuint id, GLenum pName, GLint64* params) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetQueryObjectUi64V(GLuint id, GLenum pName, GLuint64* params) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLVertexAttribDivisor(GLuint index, GLuint divisor) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLVertexAttribP1ui(GLuint index, GLenum type, GLboolean normalized, GLuint value) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLVertexAttribP1uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLVertexAttribP2ui(GLuint index, GLenum type, GLboolean normalized, GLuint value) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLVertexAttribP2uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLVertexAttribP3ui(GLuint index, GLenum type, GLboolean normalized, GLuint value) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLVertexAttribP3uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLVertexAttribP4ui(GLuint index, GLenum type, GLboolean normalized, GLuint value) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLVertexAttribP4uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLVertexAttribP1Ui(GLuint index, GLenum type, GLboolean normalized, GLuint value) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLVertexAttribP1Uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLVertexAttribP2Ui(GLuint index, GLenum type, GLboolean normalized, GLuint value) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLVertexAttribP2Uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLVertexAttribP3Ui(GLuint index, GLenum type, GLboolean normalized, GLuint value) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLVertexAttribP3Uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLVertexAttribP4Ui(GLuint index, GLenum type, GLboolean normalized, GLuint value) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLVertexAttribP4Uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value) noexcept;
 }
 
 #endif  // SYSTEM_OPENGL_GL_33_EXTENSIONS_H

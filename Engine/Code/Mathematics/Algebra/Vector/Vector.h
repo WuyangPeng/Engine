@@ -81,8 +81,8 @@ namespace Mathematics::Algebra
         NODISCARD static Vector GetUnit(int direction);
 
         /// 一元运算。
-        NODISCARD Vector operator+() noexcept;
-        NODISCARD Vector operator-();
+        NODISCARD Vector operator+() const noexcept;
+        NODISCARD Vector operator-() const;
 
         /// 线性代数运算。
         Vector& operator+=(const Vector& rhs);

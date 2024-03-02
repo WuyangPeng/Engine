@@ -44,6 +44,10 @@ namespace Mathematics
     class UniqueVerticesTriangles;
 
     class UnorderedTriangleKey;
+
+    template <typename VertexType, typename IndexType, int Dimension>
+    requires(std::is_integral_v<IndexType> && !std::is_same_v<IndexType, bool>)
+    class UniqueVerticesSimplices;
 }
 
 #endif  // MATHEMATICS_MESHES_FWD_H

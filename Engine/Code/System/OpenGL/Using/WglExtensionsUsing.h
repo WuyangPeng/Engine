@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:10)
+/// 版本：1.0.0.6 (2024/03/01 17:00)
 
 #ifndef SYSTEM_OPENGL_WGL_EXTENSIONS_USING_H
 #define SYSTEM_OPENGL_WGL_EXTENSIONS_USING_H
@@ -23,19 +23,19 @@ namespace System
     using PixelFormatDescriptor = PIXELFORMATDESCRIPTOR;
     using HEnhMetaFile = HENHMETAFILE;
     using OpenGLRcHandle = HGLRC;
-    using OpenGLColorref = COLORREF;
+    using OpenGLColorRef = COLORREF;
     using LayerPlaneDescriptor = LAYERPLANEDESCRIPTOR;
     using PointFloat = POINTFLOAT;
     using GlyphMetricsFloat = GLYPHMETRICSFLOAT;
     using GlyphMetricsFloatPtr = LPGLYPHMETRICSFLOAT;
     using OpenGLProc = PROC;
-    using WglHPBufferArb = HPBUFFERARB;
-    using WglHPBufferExt = HPBUFFEREXT;
+    using WglHpBufferArb = HPBUFFERARB;
+    using WglHpBufferExt = HPBUFFEREXT;
     using WglHGpuNv = HGPUNV;
     using WglGpuDevicePtr = PGPU_DEVICE;
     using WglHVideoOutputDeviceNv = HVIDEOOUTPUTDEVICENV;
     using WglHVideoInputDeviceNv = HVIDEOINPUTDEVICENV;
-    using WglHPVideoDev = HPVIDEODEV;
+    using WglHpVideoDev = HPVIDEODEV;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -81,7 +81,7 @@ namespace System
     };
     using OpenGLHglrc = OpenGLHglrcDeclare*;
 
-    using OpenGLColorref = uint32_t;
+    using OpenGLColorRef = uint32_t;
 
     struct LayerPlaneDescriptor
     {
@@ -108,7 +108,7 @@ namespace System
         uint8_t cAuxBuffers;
         uint8_t layerPlane;
         uint8_t bReserved;
-        OpenGLColorref crTransparent;
+        OpenGLColorRef crTransparent;
     };
 
     struct PointFloat
@@ -129,12 +129,12 @@ namespace System
 
     using OpenGLProc = int (*)();
 
-    struct WglHPBufferARBDeclare
+    struct WglHpBufferARBDeclare
     {
         int unused;
     };
-    using WglHPBufferArb = WglHPBufferARBDeclare*;
-    using WglHPBufferExt = WglHPBufferArb;
+    using WglHpBufferArb = WglHpBufferARBDeclare*;
+    using WglHpBufferExt = WglHpBufferArb;
 
     struct WglHGPUNVDeclare
     {
@@ -168,7 +168,7 @@ namespace System
     {
         int unused;
     };
-    using WglHPVideoDev = WglHPVideoDEVDeclare*;
+    using WglHpVideoDev = WglHPVideoDEVDeclare*;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

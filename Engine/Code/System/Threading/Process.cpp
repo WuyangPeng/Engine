@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:19)
+/// 版本：1.0.0.6 (2024/02/27 18:05)
 
 #include "System/SystemExport.h"
 
@@ -63,23 +63,16 @@ bool System::CreateSystemProcess(const TChar* applicationName,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CreateProcess(applicationName,
-                        commandLine,
-                        processAttributes,
-                        threadAttributes,
-                        BoolConversion(inheritHandles),
-                        EnumCastUnderlying(creationFlags),
-                        environment,
-                        currentDirectory,
-                        startupInfo,
-                        processInformation) != gFalse)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return ::CreateProcess(applicationName,
+                           commandLine,
+                           processAttributes,
+                           threadAttributes,
+                           BoolConversion(inheritHandles),
+                           EnumCastUnderlying(creationFlags),
+                           environment,
+                           currentDirectory,
+                           startupInfo,
+                           processInformation) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -157,10 +150,7 @@ bool System::SetProcessPriorityClass(WindowsHandle process, ProcessCreation prio
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetPriorityClass(process, EnumCastUnderlying(priorityClass)) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetPriorityClass(process, EnumCastUnderlying(priorityClass)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -205,10 +195,7 @@ bool System::CloseSystemProcess(WindowsHandle process) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(process) != gFalse)
-        return true;
-    else
-        return false;
+    return ::CloseHandle(process) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

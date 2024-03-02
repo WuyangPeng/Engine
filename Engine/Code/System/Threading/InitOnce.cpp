@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:19)
+/// 版本：1.0.0.6 (2024/02/27 18:03)
 
 #include "System/SystemExport.h"
 
@@ -31,10 +31,7 @@ bool System::SystemInitOnceExecuteOnce(InitOncePtr initOnce, InitOnceFunction in
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::InitOnceExecuteOnce(initOnce, initFunction, parameter, context) != gFalse)
-        return true;
-    else
-        return false;
+    return ::InitOnceExecuteOnce(initOnce, initFunction, parameter, context) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -49,10 +46,7 @@ bool System::SystemInitOnceBeginInitialize(InitOncePtr initOnce, InitOnceBeginIn
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::InitOnceBeginInitialize(initOnce, EnumCastUnderlying(flags), pending, context) != gFalse)
-        return true;
-    else
-        return false;
+    return ::InitOnceBeginInitialize(initOnce, EnumCastUnderlying(flags), pending, context) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -67,10 +61,7 @@ bool System::SystemInitOnceComplete(InitOncePtr initOnce, InitOnceBeginInitializ
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::InitOnceComplete(initOnce, EnumCastUnderlying(flags), context) != gFalse)
-        return true;
-    else
-        return false;
+    return ::InitOnceComplete(initOnce, EnumCastUnderlying(flags), context) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

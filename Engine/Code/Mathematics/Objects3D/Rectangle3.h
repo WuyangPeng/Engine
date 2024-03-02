@@ -13,6 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Algebra/Vector3.h"
+#include "Mathematics/Primitives/Rectangle.h"
 
 #include <vector>
 
@@ -29,12 +30,15 @@ namespace Mathematics
         using Math = Math<Real>;
         using Vector3 = Vector3<Real>;
         using VerticesType = std::vector<Vector3>;
+        using AlgebraRectangle3 = Algebra::Rectangle3<Real>;
 
     public:
         // 点Real(s,t) = C + s0 * U0 + s1 * U1，其中C是矩形的中心，U0和U1是单位长度的垂直轴。
         // 参数s0和s1是由约束|s0| <= e0 和|s1| <= e1，
         // 其中e0 > 0和e1 > 0称为矩形的范围。
+        Rectangle3() noexcept;
         Rectangle3(const Vector3& center, const Vector3& axis0, const Vector3& axis1, Real extent0, Real extent1, Real epsilon = Math::GetZeroTolerance()) noexcept;
+        explicit Rectangle3(const AlgebraRectangle3& rectangle3, Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
@@ -58,6 +62,8 @@ namespace Mathematics
 
         NODISCARD Rectangle3 GetMove(Real t, const Vector3& velocity) const;
 
+        NODISCARD AlgebraRectangle3 GetAlgebraRectangle3() const noexcept;
+
     private:
         static constexpr auto axisSize = 2;
 
@@ -71,6 +77,24 @@ namespace Mathematics
 
         Real epsilon;
     };
+
+    template <int N, typename Real>
+    NODISCARD bool operator==(const Rectangle3<Real>& lhs, const Rectangle3<Real>& rhs);
+
+    template <int N, typename Real>
+    NODISCARD bool operator!=(const Rectangle3<Real>& lhs, const Rectangle3<Real>& rhs);
+
+    template <int N, typename Real>
+    NODISCARD bool operator<(const Rectangle3<Real>& lhs, const Rectangle3<Real>& rhs);
+
+    template <int N, typename Real>
+    NODISCARD bool operator<=(const Rectangle3<Real>& lhs, const Rectangle3<Real>& rhs);
+
+    template <int N, typename Real>
+    NODISCARD bool operator>(const Rectangle3<Real>& lhs, const Rectangle3<Real>& rhs);
+
+    template <int N, typename Real>
+    NODISCARD bool operator>=(const Rectangle3<Real>& lhs, const Rectangle3<Real>& rhs);
 
     using Rectangle3F = Rectangle3<float>;
     using Rectangle3D = Rectangle3<double>;

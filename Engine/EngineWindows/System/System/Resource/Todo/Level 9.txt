@@ -1,6 +1,6 @@
 TODO Level 9
 
-1.0.0.3
+1.0.0.6
 
 1. （Security）完成Security非Windows平台的实现：LookupPrivilege、
 												CreateSecurity、
@@ -15,26 +15,13 @@ TODO Level 9
 											  DatabasePrototypes、
 											  WindowsExtensionPrototypes、
 											  WindowsSockEx。
-3. （Network）补全网络库API的调用。
-4. （OpenGL）考虑使用类和锁封装opengl是否存在的全局变量。
-5. （OpenGL）完成OpenGL非Windows平台的实现：OpenGLWglPrototypes。
-6. （DirectX）完成DirectX库：D3D11。
-6. （Vulkan）完成Vulkan库：Vulkan。
-7. （Windows）完成Windows非Windows平台的实现：WindowsCreate、
+3. （OpenGL）完成OpenGL非Windows平台的实现：OpenGLWglPrototypes。
+4. （Windows）完成Windows非Windows平台的实现：WindowsCreate、
 											  WindowsProcess、
 											  WindowsRegister、
 											  WindowsFontInformation、
 											  WindowsSystem、
 											  WindowsNamedPipe、
 											  WindowsUser。 
-8. （Windows）完成Windows非Windows平台的实现：LastWindowError。
-9. （Windows）WindowError宏补全Windows错误码。
-10.（Linux）完成Linux API以及其他平台对Linux API的虚拟实现。
-11.（Linux）实现移殖到Linux平台。
-12.（Macintosh）完成Macintosh API以及其他平台对Macintosh API的虚拟实现。 
-13.（Macintosh）实现移殖到Macintosh平台。
-14.（Android）完成Android API以及其他平台对Android API的虚拟实现。 
-15.（Android）实现移殖到Android平台。
-
-
-
+5. （Windows）完成Windows非Windows平台的实现：LastWindowError。
+6. （Windows）WindowError宏补全Windows错误码。

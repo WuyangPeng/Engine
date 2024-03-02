@@ -1,6 +1,10 @@
 TODO Level 5
 
-1.0.0.3
+1.0.0.6
 
-1. （Helper）考虑是否添加不同类型枚举之间的数学运算符。 
-2. （MemoryTools）完成MemoryTools非Windows平台的实现：HeapTools。
+1.（Linux）完成Linux API以及其他平台对Linux API的虚拟实现。
+2.（Linux）实现移殖到Linux平台。
+3.（Macintosh）完成Macintosh API以及其他平台对Macintosh API的虚拟实现。 
+4.（Macintosh）实现移殖到Macintosh平台。
+5.（Android）完成Android API以及其他平台对Android API的虚拟实现。 
+6.（Android）实现移殖到Android平台。

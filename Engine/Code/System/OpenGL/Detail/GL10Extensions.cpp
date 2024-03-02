@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:12)
+/// 版本：1.0.0.6 (2024/03/02 20:49)
 
 #include "System/SystemExport.h"
 
@@ -17,7 +17,7 @@
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/OpenGL/OpenGLUtility.h"
 
-// OpenGL 1.0
+/// OpenGL 1.0
 namespace System
 {
     auto existsOpenGL10 = ExistsOpenGLExtensions::Unknown;
@@ -235,34 +235,34 @@ void System::GLScissor(GLint x, GLint y, GLsizei width, GLsizei height) noexcept
     SYSTEM_PREVIOUSLY_BODY_4(glScissor, x, y, width, height);
 }
 
-void System::GLTexParameterf(GLenum target, GLenum pname, GLfloat param) noexcept
+void System::GLTexParameterF(GLenum target, GLenum pName, GLfloat param) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_3(glTexParameterf, target, pname, param);
+    SYSTEM_PREVIOUSLY_BODY_3(glTexParameterf, target, pName, param);
 }
 
-void System::GLTexParameterfv(GLenum target, GLenum pname, const GLfloat* params) noexcept
+void System::GLTexParameterFv(GLenum target, GLenum pName, const GLfloat* params) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_3(glTexParameterfv, target, pname, params);
+    SYSTEM_PREVIOUSLY_BODY_3(glTexParameterfv, target, pName, params);
 }
 
-void System::GLTexParameteri(GLenum target, GLenum pname, GLint param) noexcept
+void System::GLTexParameterI(GLenum target, GLenum pName, GLint param) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_3(glTexParameteri, target, pname, param);
+    SYSTEM_PREVIOUSLY_BODY_3(glTexParameteri, target, pName, param);
 }
 
-void System::GLTexParameteriv(GLenum target, GLenum pname, const GLint* params) noexcept
+void System::GLTexParameterIv(GLenum target, GLenum pName, const GLint* params) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_3(glTexParameteriv, target, pname, params);
+    SYSTEM_PREVIOUSLY_BODY_3(glTexParameteriv, target, pName, params);
 }
 
-void System::GLTexImage1D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void* pixels) noexcept
+void System::GLTexImage1D(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLint border, GLenum format, GLenum type, const void* pixels) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_8(glTexImage1D, target, level, internalformat, width, border, format, type, pixels);
+    SYSTEM_PREVIOUSLY_BODY_8(glTexImage1D, target, level, internalFormat, width, border, format, type, pixels);
 }
 
-void System::GLTexImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void* pixels) noexcept
+void System::GLTexImage2D(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void* pixels) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_9(glTexImage2D, target, level, internalformat, width, height, border, format, type, pixels);
+    SYSTEM_PREVIOUSLY_BODY_9(glTexImage2D, target, level, internalFormat, width, height, border, format, type, pixels);
 }
 
 void System::GLDrawBuffer(GLenum buf) noexcept
@@ -325,9 +325,9 @@ void System::GLFlush() noexcept
     SYSTEM_PREVIOUSLY_BODY_0(glFlush);
 }
 
-void System::GLBlendFunc(GLenum sfactor, GLenum dfactor) noexcept
+void System::GLBlendFunc(GLenum sFactor, GLenum dFactor) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_2(glBlendFunc, sfactor, dfactor);
+    SYSTEM_PREVIOUSLY_BODY_2(glBlendFunc, sFactor, dFactor);
 }
 
 void System::GLLogicOp(GLenum opcode) noexcept
@@ -340,9 +340,9 @@ void System::GLStencilFunc(GLenum func, GLint ref, GLuint mask) noexcept
     SYSTEM_PREVIOUSLY_BODY_3(glStencilFunc, func, ref, mask);
 }
 
-void System::GLStencilOp(GLenum fail, GLenum zfail, GLenum zpass) noexcept
+void System::GLStencilOp(GLenum fail, GLenum zFail, GLenum zPass) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_3(glStencilOp, fail, zfail, zpass);
+    SYSTEM_PREVIOUSLY_BODY_3(glStencilOp, fail, zFail, zPass);
 }
 
 void System::GLDepthFunc(GLenum func) noexcept
@@ -350,14 +350,14 @@ void System::GLDepthFunc(GLenum func) noexcept
     SYSTEM_PREVIOUSLY_BODY_1(glDepthFunc, func);
 }
 
-void System::GLPixelStoref(GLenum pname, GLfloat param) noexcept
+void System::GLPixelStoreF(GLenum pName, GLfloat param) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_2(glPixelStoref, pname, param);
+    SYSTEM_PREVIOUSLY_BODY_2(glPixelStoref, pName, param);
 }
 
-void System::GLPixelStorei(GLenum pname, GLint param) noexcept
+void System::GLPixelStoreI(GLenum pName, GLint param) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_2(glPixelStorei, pname, param);
+    SYSTEM_PREVIOUSLY_BODY_2(glPixelStorei, pName, param);
 }
 
 void System::GLReadBuffer(GLenum src) noexcept
@@ -370,14 +370,14 @@ void System::GLReadPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenu
     SYSTEM_PREVIOUSLY_BODY_7(glReadPixels, x, y, width, height, format, type, pixels);
 }
 
-void System::GLGetBooleanv(GLenum pname, GLboolean* data) noexcept
+void System::GLGetBooleanV(GLenum pName, GLboolean* data) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_2(glGetBooleanv, pname, data);
+    SYSTEM_PREVIOUSLY_BODY_2(glGetBooleanv, pName, data);
 }
 
-void System::GLGetDoublev(GLenum pname, GLdouble* data) noexcept
+void System::GLGetDoubleV(GLenum pName, GLdouble* data) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_2(glGetDoublev, pname, data);
+    SYSTEM_PREVIOUSLY_BODY_2(glGetDoublev, pName, data);
 }
 
 GLenum System::GLGetError() noexcept
@@ -385,14 +385,14 @@ GLenum System::GLGetError() noexcept
     SYSTEM_PREVIOUSLY_BODY_0_RESULT(glGetError, EnumCastUnderlying(OpenGLErrorCode::NoError));
 }
 
-void System::GLGetFloatv(GLenum pname, GLfloat* data) noexcept
+void System::GLGetFloatV(GLenum pName, GLfloat* data) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_2(glGetFloatv, pname, data);
+    SYSTEM_PREVIOUSLY_BODY_2(glGetFloatv, pName, data);
 }
 
-void System::GLGetIntegerv(GLenum pname, GLint* data) noexcept
+void System::GLGetIntegerV(GLenum pName, GLint* data) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_2(glGetIntegerv, pname, data);
+    SYSTEM_PREVIOUSLY_BODY_2(glGetIntegerv, pName, data);
 }
 
 const GLubyte* System::GLGetString(GLenum name) noexcept
@@ -405,24 +405,24 @@ void System::GLGetTexImage(GLenum target, GLint level, GLenum format, GLenum typ
     SYSTEM_PREVIOUSLY_BODY_5(glGetTexImage, target, level, format, type, pixels);
 }
 
-void System::GLGetTexParameterfv(GLenum target, GLenum pname, GLfloat* params) noexcept
+void System::GLGetTexParameterFv(GLenum target, GLenum pName, GLfloat* params) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_3(glGetTexParameterfv, target, pname, params);
+    SYSTEM_PREVIOUSLY_BODY_3(glGetTexParameterfv, target, pName, params);
 }
 
-void System::GLGetTexParameteriv(GLenum target, GLenum pname, GLint* params) noexcept
+void System::GLGetTexParameterIv(GLenum target, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_3(glGetTexParameteriv, target, pname, params);
+    SYSTEM_PREVIOUSLY_BODY_3(glGetTexParameteriv, target, pName, params);
 }
 
-void System::GLGetTexLevelParameterfv(GLenum target, GLint level, GLenum pname, GLfloat* params) noexcept
+void System::GLGetTexLevelParameterFv(GLenum target, GLint level, GLenum pName, GLfloat* params) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_4(glGetTexLevelParameterfv, target, level, pname, params);
+    SYSTEM_PREVIOUSLY_BODY_4(glGetTexLevelParameterfv, target, level, pName, params);
 }
 
-void System::GLGetTexLevelParameteriv(GLenum target, GLint level, GLenum pname, GLint* params) noexcept
+void System::GLGetTexLevelParameterIv(GLenum target, GLint level, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_4(glGetTexLevelParameteriv, target, level, pname, params);
+    SYSTEM_PREVIOUSLY_BODY_4(glGetTexLevelParameteriv, target, level, pName, params);
 }
 
 GLboolean System::GLIsEnabled(GLenum cap) noexcept

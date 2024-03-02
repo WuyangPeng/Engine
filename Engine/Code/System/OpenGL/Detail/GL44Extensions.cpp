@@ -67,9 +67,9 @@ void System::GLClearTexImage(GLuint texture, GLint level, GLenum format, GLenum 
     SYSTEM_BODY_5(glClearTexImage, texture, level, format, type, data);
 }
 
-void System::GLClearTexSubImage(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void* data) noexcept
+void System::GLClearTexSubImage(GLuint texture, GLint level, GLint xOffset, GLint yOffset, GLint zOffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void* data) noexcept
 {
-    SYSTEM_BODY_11(glClearTexSubImage, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+    SYSTEM_BODY_11(glClearTexSubImage, texture, level, xOffset, yOffset, zOffset, width, height, depth, format, type, data);
 }
 
 void System::GLBindBuffersBase(GLenum target, GLuint first, GLsizei count, const GLuint* buffers) noexcept

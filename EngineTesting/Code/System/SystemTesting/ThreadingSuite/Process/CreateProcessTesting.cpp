@@ -37,7 +37,7 @@ System::CreateProcessTesting::CreateProcessTesting(const OStreamShared& stream)
                         ProcessCreation::ProcessModeBackgroundBegin,
                         ProcessCreation::ProcessModeBackgroundEnd,
                         ProcessCreation::CreateBreakawayFromJob,
-                        ProcessCreation::CreatePreserveCodeAuthzLevel,
+                        ProcessCreation::CreatePreserveCodeAuthorizationLevel,
                         ProcessCreation::CreateDefaultErrorMode,
                         ProcessCreation::CreateNoWindow,
                         ProcessCreation::ProfileUser,

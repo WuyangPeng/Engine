@@ -570,7 +570,7 @@ Real Mathematics::Matrix3<Real>::ExtractAngle() const noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::ExtractAngleAxis() const
+typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::ExtractAngleAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -652,7 +652,7 @@ typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix3<Real>::Vector3 Mathematics::Matrix3<Real>::ExtractAxis() const
+typename Mathematics::Matrix3<Real>::Vector3 Mathematics::Matrix3<Real>::ExtractAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -1625,7 +1625,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::Matrix3<Real>::Slerp(Real t, const Matrix3& rot0, const Matrix3& rot1)
+void Mathematics::Matrix3<Real>::Slerp(Real t, const Matrix3& rot0, const Matrix3& rot1) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

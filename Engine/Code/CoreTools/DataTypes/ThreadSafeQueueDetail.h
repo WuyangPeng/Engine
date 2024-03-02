@@ -11,6 +11,7 @@
 #define CORE_TOOLS_DATA_TYPE_THREAD_SAFE_QUEUE_DETAIL_H
 
 #include "ThreadSafeQueue.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
@@ -112,7 +113,7 @@ bool CoreTools::ThreadSafeQueue<Element>::Push(ParamType element)
 
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (queue.size() < maxNumElements)
+    if (boost::numeric_cast<int>(queue.size()) < maxNumElements)
     {
         queue.emplace(element);
 

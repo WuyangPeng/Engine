@@ -99,9 +99,9 @@ System::RestrictedTokenTesting::LuidAndAttributesBufferType System::RestrictedTo
     return privilegesToDelete;
 }
 
-void System::RestrictedTokenTesting::GetLookupPrivilegeValueTest(LuidAndAttributes& luidAndAttributes)
+void System::RestrictedTokenTesting::GetLookupPrivilegeValueTest(LocallyUniqueIdentifierAndAttributes& luidAndAttributes)
 {
-    LookupPrivilegeLuid uid{};
+    LookupPrivilegeLocallyUniqueIdentifier uid{};
 
     ASSERT_TRUE(GetLookupPrivilegeValue(nullptr, GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::DebugName).c_str(), &uid));
 

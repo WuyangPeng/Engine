@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:11)
+/// 版本：1.0.0.6 (2024/03/01 17:37)
 
 #ifndef SYSTEM_OPENGL_OPENGL_TEXTURES_H
 #define SYSTEM_OPENGL_OPENGL_TEXTURES_H

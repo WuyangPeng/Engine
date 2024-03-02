@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/12 10:39)
+/// 版本：1.0.0.6 (2024/02/23 15:25)
 
 #ifndef MATHEMATICS_OBJECTS_3D_CYLINDER3_DETAIL_H
 #define MATHEMATICS_OBJECTS_3D_CYLINDER3_DETAIL_H

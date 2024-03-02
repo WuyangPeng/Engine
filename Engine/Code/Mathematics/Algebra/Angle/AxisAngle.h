@@ -38,6 +38,7 @@ namespace Mathematics::Algebra
 
         void SetAxis(const Vector& aAxis) noexcept;
         void SetAngle(Real aAngle) noexcept;
+        void MakeAxisZero();
 
     private:
         Vector axis;

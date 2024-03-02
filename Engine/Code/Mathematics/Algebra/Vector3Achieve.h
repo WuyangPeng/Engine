@@ -27,6 +27,14 @@ requires std::is_arithmetic_v<Real> Mathematics::Vector3<Real>::Vector3(const Ar
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+Mathematics::Vector3<Real>::Vector3(const AlgebraVector3& coordinate)
+    : x{ coordinate[0] }, y{ coordinate[1] }, z{ coordinate[2] }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>

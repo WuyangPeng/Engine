@@ -27,9 +27,9 @@
 /// 其中t > 0表示在xy平面内的逆时针旋转
 
 #include "AlgebraFwd.h"
+#include "AxisAngle.h"
 #include "Euler.h"
 #include "Matrix3EigenDecomposition.h"
-#include "AxisAngle.h"
 #include "Vector3.h"
 #include "Flags/MatrixFlags.h"
 #include "System/Helper/PragmaWarning/Operators.h"
@@ -167,8 +167,8 @@ namespace Mathematics
         // Orthonormalize函数使用Gram-Schmidt正交化施加到所述旋转矩阵。
         // 角度必须为弧度，而不是度数。
         NODISCARD Real ExtractAngle() const noexcept;
-        NODISCARD Vector3 ExtractAxis() const;
-        NODISCARD Matrix3Extract ExtractAngleAxis() const;
+        NODISCARD Vector3 ExtractAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD Matrix3Extract ExtractAngleAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
         void Orthonormalize();
 
         // 矩阵必须是对称矩阵。
@@ -321,7 +321,7 @@ namespace Mathematics
         /// 计算 Real(t) = R0*(Transpose(R0)*R1)^t
         /// 如果Q是一个旋转矩阵使用单位长度轴U和角A，
         /// 则Q^ t是一个旋转矩阵使用单位长度轴U和旋转角度t*A。
-        void Slerp(Real t, const Matrix3& rot0, const Matrix3& rot1);
+        void Slerp(Real t, const Matrix3& rot0, const Matrix3& rot1) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         NODISCARD ArrayType GetCoordinate() const noexcept;
         void Set(const ArrayType& coordinate);

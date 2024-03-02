@@ -39,7 +39,7 @@ void System::SetGLDeleteSamplers(OpenGLUInt samplers) noexcept
 
 void System::SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pName, OpenGLInt param) noexcept
 {
-    GLSamplerParameteri(sampler, EnumCastUnderlying(pName), param);
+    GLSamplerParameterI(sampler, EnumCastUnderlying(pName), param);
 }
 
 void System::SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pName, SamplerFilter param) noexcept
@@ -54,12 +54,12 @@ void System::SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pName, 
 
 void System::SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pName, OpenGLFloat param) noexcept
 {
-    GLSamplerParameterf(sampler, EnumCastUnderlying(pName), param);
+    GLSamplerParameterF(sampler, EnumCastUnderlying(pName), param);
 }
 
 void System::SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pName, const OpenGLFloat* param) noexcept
 {
-    GLSamplerParameterfv(sampler, EnumCastUnderlying(pName), param);
+    GLSamplerParameterFv(sampler, EnumCastUnderlying(pName), param);
 }
 
 void System::SetGLBindSampler(OpenGLUInt unit, OpenGLUInt sampler) noexcept

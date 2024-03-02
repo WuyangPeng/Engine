@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:03)
+/// 版本：1.0.0.6 (2024/02/28 14:54)
 
 #ifndef SYSTEM_OPENGL_GL_11_EXTENSIONS_H
 #define SYSTEM_OPENGL_GL_11_EXTENSIONS_H
@@ -17,21 +17,21 @@
 
 namespace System
 {
-    // OpenGL 1.1
+    /// OpenGL 1.1
     SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL11() noexcept;
 
     SYSTEM_HIDDEN_DECLARE void InitOpenGL11() noexcept;
 
     SYSTEM_HIDDEN_DECLARE void GLDrawArrays(GLenum mode, GLint first, GLsizei count) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLDrawElements(GLenum mode, GLsizei count, GLenum type, const void* indices) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLGetPointerv(GLenum pname, void** params) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetPointerV(GLenum pName, void** params) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLPolygonOffset(GLfloat factor, GLfloat units) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLCopyTexImage1D(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLCopyTexImage2D(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLCopyTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLCopyTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void* pixels) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLCopyTexImage1D(GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLint border) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLCopyTexImage2D(GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLCopyTexSubImage1D(GLenum target, GLint level, GLint xOffset, GLint x, GLint y, GLsizei width) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLCopyTexSubImage2D(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLTexSubImage1D(GLenum target, GLint level, GLint xOffset, GLsizei width, GLenum format, GLenum type, const void* pixels) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLTexSubImage2D(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLBindTexture(GLenum target, GLuint texture) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLDeleteTextures(GLsizei n, const GLuint* textures) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLGenTextures(GLsizei n, GLuint* textures) noexcept;

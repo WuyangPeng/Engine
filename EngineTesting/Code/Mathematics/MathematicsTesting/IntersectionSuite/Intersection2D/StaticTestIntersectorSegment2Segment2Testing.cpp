@@ -18,8 +18,8 @@
 
 namespace Mathematics
 {
-    template class StaticTestIntersectorSegment2Segment2<float>;
-    template class StaticTestIntersectorSegment2Segment2<double>;
+    template class StaticTestIntersector<Segment2F, Segment2F>;
+    template class StaticTestIntersector<Segment2D, Segment2D>;
 }
 
 Mathematics::StaticTestIntersectorSegment2Segment2Testing::StaticTestIntersectorSegment2Segment2Testing(const OStreamShared& streamShared)
@@ -64,33 +64,33 @@ void Mathematics::StaticTestIntersectorSegment2Segment2Testing::SegmentTest()
         const float firstExtent = MathF::FAbs(randomDistribution(generator));
         const float secondExtent = MathF::FAbs(randomDistribution(generator));
 
-        StaticTestIntersectorSegment2Segment2<float> firstClassify(Segment2F(firstExtent, lhsOrigin, lhsDirection), Segment2F(firstExtent, lhsOrigin, lhsDirection));
+        StaticTestIntersector firstClassify(Segment2F(firstExtent, lhsOrigin, lhsDirection), Segment2F(firstExtent, lhsOrigin, lhsDirection));
 
         ASSERT_ENUM_EQUAL(firstClassify.GetIntersectionType(), IntersectionType::Segment);
         ASSERT_EQUAL(firstClassify.GetQuantity(), 2);
 
-        StaticTestIntersectorSegment2Segment2<float> secondClassify(Segment2F(firstExtent, lhsOrigin, lhsDirection), Segment2F(firstExtent, rhsOrigin, lhsDirection));
+        StaticTestIntersector secondClassify(Segment2F(firstExtent, lhsOrigin, lhsDirection), Segment2F(firstExtent, rhsOrigin, lhsDirection));
 
         ASSERT_ENUM_EQUAL(secondClassify.GetIntersectionType(), IntersectionType::Empty);
         ASSERT_EQUAL(secondClassify.GetQuantity(), 0);
 
-        StaticTestIntersectorSegment2Segment2<float> thirdClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), Segment2F(lhsOrigin, lhsOrigin - secondExtent * lhsDirection), 1e-4f);
+        StaticTestIntersector<Segment2F, Segment2F> thirdClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), Segment2F(lhsOrigin, lhsOrigin - secondExtent * lhsDirection), 1e-4f);
 
         ASSERT_ENUM_EQUAL(thirdClassify.GetIntersectionType(), IntersectionType::Point);
         ASSERT_EQUAL(thirdClassify.GetQuantity(), 1);
 
-        StaticTestIntersectorSegment2Segment2<float> fourthClassify(Segment2F(firstExtent, lhsOrigin, lhsDirection), Segment2F(secondExtent, lhsOrigin, -lhsDirection));
+        StaticTestIntersector fourthClassify(Segment2F(firstExtent, lhsOrigin, lhsDirection), Segment2F(secondExtent, lhsOrigin, -lhsDirection));
 
         ASSERT_ENUM_EQUAL(fourthClassify.GetIntersectionType(), IntersectionType::Segment);
         ASSERT_EQUAL(fourthClassify.GetQuantity(), 2);
 
-        StaticTestIntersectorSegment2Segment2<float> fifthClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), Segment2F(lhsOrigin - lhsDirection, lhsOrigin - secondExtent * lhsDirection));
+        StaticTestIntersector fifthClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), Segment2F(lhsOrigin - lhsDirection, lhsOrigin - secondExtent * lhsDirection));
 
         ASSERT_ENUM_EQUAL(fifthClassify.GetIntersectionType(), IntersectionType::Empty);
         ASSERT_EQUAL(fifthClassify.GetQuantity(), 0);
 
-        StaticTestIntersectorSegment2Segment2<float> sixthClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection),
-                                                                   Segment2F(rhsOrigin, rhsOrigin + secondExtent * rhsDirection));
+        StaticTestIntersector sixthClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection),
+                                            Segment2F(rhsOrigin, rhsOrigin + secondExtent * rhsDirection));
 
         StaticTestIntersectorLine2Classify<float> seventhClassify(lhsOrigin, lhsDirection, rhsOrigin, rhsDirection, true);
 

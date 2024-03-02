@@ -125,54 +125,54 @@ void System::GLBindSampler(GLuint unit, GLuint sampler) noexcept
     SYSTEM_BODY_2(glBindSampler, unit, sampler);
 }
 
-void System::GLSamplerParameteri(GLuint sampler, GLenum pname, GLint param) noexcept
+void System::GLSamplerParameterI(GLuint sampler, GLenum pName, GLint param) noexcept
 {
-    SYSTEM_BODY_3(glSamplerParameteri, sampler, pname, param);
+    SYSTEM_BODY_3(glSamplerParameteri, sampler, pName, param);
 }
 
-void System::GLSamplerParameteriv(GLuint sampler, GLenum pname, const GLint* param) noexcept
+void System::GLSamplerParameterIv(GLuint sampler, GLenum pName, const GLint* param) noexcept
 {
-    SYSTEM_BODY_3(glSamplerParameteriv, sampler, pname, param);
+    SYSTEM_BODY_3(glSamplerParameteriv, sampler, pName, param);
 }
 
-void System::GLSamplerParameterf(GLuint sampler, GLenum pname, GLfloat param) noexcept
+void System::GLSamplerParameterF(GLuint sampler, GLenum pName, GLfloat param) noexcept
 {
-    SYSTEM_BODY_3(glSamplerParameterf, sampler, pname, param);
+    SYSTEM_BODY_3(glSamplerParameterf, sampler, pName, param);
 }
 
-void System::GLSamplerParameterfv(GLuint sampler, GLenum pname, const GLfloat* param) noexcept
+void System::GLSamplerParameterFv(GLuint sampler, GLenum pName, const GLfloat* param) noexcept
 {
-    SYSTEM_BODY_3(glSamplerParameterfv, sampler, pname, param);
+    SYSTEM_BODY_3(glSamplerParameterfv, sampler, pName, param);
 }
 
-void System::GLSamplerParameterIiv(GLuint sampler, GLenum pname, const GLint* param) noexcept
+void System::GLSamplerParameterIiv(GLuint sampler, GLenum pName, const GLint* param) noexcept
 {
-    SYSTEM_BODY_3(glSamplerParameterIiv, sampler, pname, param);
+    SYSTEM_BODY_3(glSamplerParameterIiv, sampler, pName, param);
 }
 
-void System::GLSamplerParameterIuiv(GLuint sampler, GLenum pname, const GLuint* param) noexcept
+void System::GLSamplerParameterIUiv(GLuint sampler, GLenum pName, const GLuint* param) noexcept
 {
-    SYSTEM_BODY_3(glSamplerParameterIuiv, sampler, pname, param);
+    SYSTEM_BODY_3(glSamplerParameterIuiv, sampler, pName, param);
 }
 
-void System::GLGetSamplerParameteriv(GLuint sampler, GLenum pname, GLint* params) noexcept
+void System::GLGetSamplerParameterIv(GLuint sampler, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_BODY_3(glGetSamplerParameteriv, sampler, pname, params);
+    SYSTEM_BODY_3(glGetSamplerParameteriv, sampler, pName, params);
 }
 
-void System::GLGetSamplerParameterIiv(GLuint sampler, GLenum pname, GLint* params) noexcept
+void System::GLGetSamplerParameterIiv(GLuint sampler, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_BODY_3(glGetSamplerParameterIiv, sampler, pname, params);
+    SYSTEM_BODY_3(glGetSamplerParameterIiv, sampler, pName, params);
 }
 
-void System::GLGetSamplerParameterfv(GLuint sampler, GLenum pname, GLfloat* params) noexcept
+void System::GLGetSamplerParameterFv(GLuint sampler, GLenum pName, GLfloat* params) noexcept
 {
-    SYSTEM_BODY_3(glGetSamplerParameterfv, sampler, pname, params);
+    SYSTEM_BODY_3(glGetSamplerParameterfv, sampler, pName, params);
 }
 
-void System::GLGetSamplerParameterIuiv(GLuint sampler, GLenum pname, GLuint* params) noexcept
+void System::GLGetSamplerParameterIUiv(GLuint sampler, GLenum pName, GLuint* params) noexcept
 {
-    SYSTEM_BODY_3(glGetSamplerParameterIuiv, sampler, pname, params);
+    SYSTEM_BODY_3(glGetSamplerParameterIuiv, sampler, pName, params);
 }
 
 void System::GLQueryCounter(GLuint id, GLenum target) noexcept
@@ -180,14 +180,14 @@ void System::GLQueryCounter(GLuint id, GLenum target) noexcept
     SYSTEM_BODY_2(glQueryCounter, id, target);
 }
 
-void System::GLGetQueryObjecti64v(GLuint id, GLenum pname, GLint64* params) noexcept
+void System::GLGetQueryObjectI64V(GLuint id, GLenum pName, GLint64* params) noexcept
 {
-    SYSTEM_BODY_3(glGetQueryObjecti64v, id, pname, params);
+    SYSTEM_BODY_3(glGetQueryObjecti64v, id, pName, params);
 }
 
-void System::GLGetQueryObjectui64v(GLuint id, GLenum pname, GLuint64* params) noexcept
+void System::GLGetQueryObjectUi64V(GLuint id, GLenum pName, GLuint64* params) noexcept
 {
-    SYSTEM_BODY_3(glGetQueryObjectui64v, id, pname, params);
+    SYSTEM_BODY_3(glGetQueryObjectui64v, id, pName, params);
 }
 
 void System::GLVertexAttribDivisor(GLuint index, GLuint divisor) noexcept
@@ -195,42 +195,42 @@ void System::GLVertexAttribDivisor(GLuint index, GLuint divisor) noexcept
     SYSTEM_BODY_2(glVertexAttribDivisor, index, divisor);
 }
 
-void System::GLVertexAttribP1ui(GLuint index, GLenum type, GLboolean normalized, GLuint value) noexcept
+void System::GLVertexAttribP1Ui(GLuint index, GLenum type, GLboolean normalized, GLuint value) noexcept
 {
     SYSTEM_BODY_4(glVertexAttribP1ui, index, type, normalized, value);
 }
 
-void System::GLVertexAttribP1uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value) noexcept
+void System::GLVertexAttribP1Uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value) noexcept
 {
     SYSTEM_BODY_4(glVertexAttribP1uiv, index, type, normalized, value);
 }
 
-void System::GLVertexAttribP2ui(GLuint index, GLenum type, GLboolean normalized, GLuint value) noexcept
+void System::GLVertexAttribP2Ui(GLuint index, GLenum type, GLboolean normalized, GLuint value) noexcept
 {
     SYSTEM_BODY_4(glVertexAttribP2ui, index, type, normalized, value);
 }
 
-void System::GLVertexAttribP2uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value) noexcept
+void System::GLVertexAttribP2Uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value) noexcept
 {
     SYSTEM_BODY_4(glVertexAttribP2uiv, index, type, normalized, value);
 }
 
-void System::GLVertexAttribP3ui(GLuint index, GLenum type, GLboolean normalized, GLuint value) noexcept
+void System::GLVertexAttribP3Ui(GLuint index, GLenum type, GLboolean normalized, GLuint value) noexcept
 {
     SYSTEM_BODY_4(glVertexAttribP3ui, index, type, normalized, value);
 }
 
-void System::GLVertexAttribP3uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value) noexcept
+void System::GLVertexAttribP3Uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value) noexcept
 {
     SYSTEM_BODY_4(glVertexAttribP3uiv, index, type, normalized, value);
 }
 
-void System::GLVertexAttribP4ui(GLuint index, GLenum type, GLboolean normalized, GLuint value) noexcept
+void System::GLVertexAttribP4Ui(GLuint index, GLenum type, GLboolean normalized, GLuint value) noexcept
 {
     SYSTEM_BODY_4(glVertexAttribP4ui, index, type, normalized, value);
 }
 
-void System::GLVertexAttribP4uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value) noexcept
+void System::GLVertexAttribP4Uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value) noexcept
 {
     SYSTEM_BODY_4(glVertexAttribP4uiv, index, type, normalized, value);
 }

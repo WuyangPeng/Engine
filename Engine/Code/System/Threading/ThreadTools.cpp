@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:20)
+/// 版本：1.0.0.6 (2024/02/27 18:20)
 
 #include "System/SystemExport.h"
 
@@ -34,10 +34,7 @@ bool System::GetThreadExitCode(ThreadHandle thread, WindowsDWordPtr exitCode) no
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetExitCodeThread(thread, exitCode) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetExitCodeThread(thread, exitCode) != gFalse;
 
 #else  // SYSTEM_PLATFORM_WIN32
 
@@ -67,10 +64,7 @@ bool System::SetSystemThreadPriorityBoost(ThreadHandle thread, bool disablePrior
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetThreadPriorityBoost(thread, disablePriorityBoost) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetThreadPriorityBoost(thread, disablePriorityBoost) != gFalse;
 
 #else  // SYSTEM_PLATFORM_WIN32
 
@@ -110,10 +104,7 @@ bool System::OpenSystemThreadToken(ThreadHandle thread, TokenStandardAccess stan
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::OpenThreadToken(thread, EnumCastUnderlying(standardAccess) | EnumCastUnderlying(specificAccess), BoolConversion(openAsSelf), tokenHandle) != gFalse)
-        return true;
-    else
-        return false;
+    return ::OpenThreadToken(thread, EnumCastUnderlying(standardAccess) | EnumCastUnderlying(specificAccess), BoolConversion(openAsSelf), tokenHandle) != gFalse;
 
 #else  // SYSTEM_PLATFORM_WIN32
 
@@ -128,10 +119,7 @@ bool System::SetSystemThreadToken(ThreadHandlePtr thread, WindowsHandle tokenHan
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetThreadToken(thread, tokenHandle) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetThreadToken(thread, tokenHandle) != gFalse;
 
 #else  // SYSTEM_PLATFORM_WIN32
 
@@ -146,10 +134,7 @@ bool System::GetSystemThreadTimes(ThreadHandle thread, FileTimePtr creationTime,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetThreadTimes(thread, creationTime, exitTime, kernelTime, userTime) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetThreadTimes(thread, creationTime, exitTime, kernelTime, userTime) != gFalse;
 
 #else  // SYSTEM_PLATFORM_WIN32
 
@@ -164,10 +149,7 @@ bool System::CloseTokenHandle(WindowsHandle tokenHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(tokenHandle) != gFalse)
-        return true;
-    else
-        return false;
+    return ::CloseHandle(tokenHandle) != gFalse;
 
 #else  // SYSTEM_PLATFORM_WIN32
 
@@ -182,10 +164,7 @@ bool System::ImpersonateThreadSelf(SecurityImpersonationLevel securityImpersonat
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::ImpersonateSelf(securityImpersonationLevel) != gFalse)
-        return true;
-    else
-        return false;
+    return ::ImpersonateSelf(securityImpersonationLevel) != gFalse;
 
 #else  // SYSTEM_PLATFORM_WIN32
 

@@ -12,8 +12,8 @@
 
 #include "BoundingSphere.h"
 #include "CoreTools/Base/SpanIteratorDetail.h"
-#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
@@ -35,7 +35,7 @@ Mathematics::BoundingSphere<T>::BoundingSphere(const APoint& center, T radius)
         THROW_EXCEPTION(SYSTEM_TEXT("半径必须为正数"s))
     }
 
-    RENDERING_SELF_CLASS_IS_VALID_1;
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -56,7 +56,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 void Mathematics::BoundingSphere<T>::SetCenter(const APoint& aCenter) noexcept
 {
-    RENDERING_CLASS_IS_VALID_1;
+    MATHEMATICS_CLASS_IS_VALID_1;
 
     center = aCenter;
 }
@@ -65,7 +65,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 void Mathematics::BoundingSphere<T>::SetRadius(T aRadius)
 {
-    RENDERING_CLASS_IS_VALID_1;
+    MATHEMATICS_CLASS_IS_VALID_1;
 
     if (aRadius < Math::GetValue(0))
     {
@@ -79,7 +79,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 typename Mathematics::BoundingSphere<T>::APoint Mathematics::BoundingSphere<T>::GetCenter() const noexcept
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     return center;
 }
@@ -88,7 +88,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 T Mathematics::BoundingSphere<T>::GetRadius() const noexcept
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     return radius;
 }
@@ -97,7 +97,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 Mathematics::NumericalValueSymbol Mathematics::BoundingSphere<T>::WhichSide(const Plane& plane, T epsilon) const noexcept
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     const auto signedDistance = plane.DistanceTo(center);
 
@@ -119,7 +119,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 void Mathematics::BoundingSphere<T>::GrowToContain(const BoundingSphere& bound, T epsilon)
 {
-    RENDERING_CLASS_IS_VALID_1;
+    MATHEMATICS_CLASS_IS_VALID_1;
 
     if (bound.radius <= epsilon)
     {
@@ -164,7 +164,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 Mathematics::BoundingSphere<T> Mathematics::BoundingSphere<T>::TransformBy(const Transform& transform) const
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     /// 谱范数（特征值的最大绝对值）小于或等于max-row-sum和max-col-sum的范数。因此，“范数”是最大尺度的近似值。
     BoundingSphere bound{ transform * center, transform.GetNorm() * radius };
@@ -176,7 +176,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 void Mathematics::BoundingSphere<T>::ComputeFromData(int numElements, int stride, SpanConstIterator data)
 {
-    RENDERING_CLASS_IS_VALID_1;
+    MATHEMATICS_CLASS_IS_VALID_1;
 
     APointContainer container{};
 
@@ -206,7 +206,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 void Mathematics::BoundingSphere<T>::ComputeFromData(const Vector3Container& data)
 {
-    RENDERING_CLASS_IS_VALID_1;
+    MATHEMATICS_CLASS_IS_VALID_1;
 
     APointContainer container{};
 
@@ -222,7 +222,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 void Mathematics::BoundingSphere<T>::ComputeFromData(const APointContainer& data)
 {
-    RENDERING_CLASS_IS_VALID_1;
+    MATHEMATICS_CLASS_IS_VALID_1;
 
     // 中点是位置的平均值
     APoint sum{};
@@ -254,7 +254,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 bool Mathematics::BoundingSphere<T>::TestIntersection(const APoint& origin, const AVector& direction, T tMin, T tMax) const
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     if (radius <= Math::GetZeroTolerance())
     {
@@ -279,7 +279,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 bool Mathematics::BoundingSphere<T>::TestLineIntersection(const APoint& origin, const AVector& direction, T tMax) const noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
-    RENDERING_ASSERTION_2(Math::Approximate(tMax, Math::maxReal), "tMax对线必须是无穷大。\n");
+    MATHEMATICS_ASSERTION_2(Math::Approximate(tMax, Math::maxReal), "tMax对线必须是无穷大。\n");
 
     System::UnusedFunction(tMax);
 
@@ -296,7 +296,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 bool Mathematics::BoundingSphere<T>::TestRayIntersection(const APoint& origin, const AVector& direction, T tMin) const noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
-    RENDERING_ASSERTION_2(Math::Approximate(tMin, Math::GetValue(0)), "tMin在射线中必须是零。\n");
+    MATHEMATICS_ASSERTION_2(Math::Approximate(tMin, Math::GetValue(0)), "tMin在射线中必须是零。\n");
 
     System::UnusedFunction(tMin);
 
@@ -328,7 +328,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 bool Mathematics::BoundingSphere<T>::TestSegmentIntersection(const APoint& origin, const AVector& direction, T tMin, T tMax) const
 {
-    RENDERING_ASSERTION_1(tMin < tMax, "tmin < tmax在线段中的必需的。\n");
+    MATHEMATICS_ASSERTION_1(tMin < tMax, "tmin < tmax在线段中的必需的。\n");
 
     // 测试球——线段相交
 
@@ -376,7 +376,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 void Mathematics::BoundingSphere<T>::ReadAggregate(CoreTools::BufferSource& source)
 {
-    RENDERING_CLASS_IS_VALID_1;
+    MATHEMATICS_CLASS_IS_VALID_1;
 
     APoint aCenter{};
     auto aRadius = Math::GetValue(0);
@@ -392,7 +392,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 void Mathematics::BoundingSphere<T>::WriteAggregate(CoreTools::BufferTarget& target) const
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     target.WriteAggregate(center);
     target.Write(radius);
@@ -402,7 +402,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 int Mathematics::BoundingSphere<T>::GetStreamingSize() const noexcept
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     return Mathematics::GetStreamSize(center) + CoreTools::GetStreamSize(radius);
 }

@@ -70,7 +70,7 @@ void System::GetGLShaderSource(OpenGLUInt shader, OpenGLSize bufSize, OpenGLSize
 bool System::GetGLShader(OpenGLUInt shader, ShaderStatus pName) noexcept
 {
     OpenGLInt params{};
-    GLGetShaderiv(shader, EnumCastUnderlying(pName), &params);
+    GLGetShaderIv(shader, EnumCastUnderlying(pName), &params);
 
     return params != GL_FALSE;
 }
@@ -78,7 +78,7 @@ bool System::GetGLShader(OpenGLUInt shader, ShaderStatus pName) noexcept
 int System::GetGLShader(OpenGLUInt shader, ShaderAttributes pName) noexcept
 {
     OpenGLInt params{};
-    GLGetShaderiv(shader, EnumCastUnderlying(pName), &params);
+    GLGetShaderIv(shader, EnumCastUnderlying(pName), &params);
 
     return params;
 }

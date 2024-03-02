@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:40)
+/// 版本：1.0.0.6 (2024/02/24 19:54)
 
 #ifndef SYSTEM_WINDOWS_ENGINEERING_H
 #define SYSTEM_WINDOWS_ENGINEERING_H
@@ -22,7 +22,10 @@ namespace System
     NODISCARD String SYSTEM_DEFAULT_DECLARE GetEngineeringExeSuffix();
     NODISCARD String SYSTEM_DEFAULT_DECLARE GetEngineeringDirectory();
 
-    NODISCARD size_t SYSTEM_DEFAULT_DECLARE GetLastSlashPosition(const String& path);
+    /// @brief 获取路径中最后一个斜杠的位置
+    /// @param path 要查找的路径字符串
+    /// @return 返回最后一个斜杠的位置，如果没有斜杠则返回npos
+    NODISCARD size_t SYSTEM_DEFAULT_DECLARE GetLastSlashPosition(const String& path) noexcept;
 
     NODISCARD constexpr int GetEngineeringOffsetValue() noexcept
     {
@@ -57,6 +60,9 @@ namespace System
         return offsetValue;
     }
 
+    /// @brief 计算一个整数的位数
+    /// @param number 要计算位数的整数
+    /// @return 返回整数的位数
     NODISCARD constexpr int NumDigits(int number) noexcept
     {
         auto digitsSoFar = 1;
@@ -67,7 +73,7 @@ namespace System
         return digitsSoFar;
     }
 
-    // 这个模板没有定义，用来让编译器打印某个型别的类型。
+    /// @brief 这个模板没有定义，用来让编译器打印某个型别的类型。
     template <typename T>
     class TypeDisplayer;
 }

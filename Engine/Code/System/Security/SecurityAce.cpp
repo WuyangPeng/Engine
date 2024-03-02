@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:29)
+/// 版本：1.0.0.6 (2024/02/28 11:00)
 
 #include "System/SystemExport.h"
 
@@ -18,10 +18,7 @@ bool System::AddAccessControlEntries(AccessCheckAclPtr acl, AccessControlListRev
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AddAce(acl, EnumCastUnderlying(aceRevision), startingAceIndex, aceList, aceListLength) != gFalse)
-        return true;
-    else
-        return false;
+    return ::AddAce(acl, EnumCastUnderlying(aceRevision), startingAceIndex, aceList, aceListLength) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -36,10 +33,7 @@ bool System::AddMandatoryAccessControlEntries(AccessCheckAclPtr acl, AccessContr
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AddMandatoryAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(mandatoryPolicy), labelSid) != gFalse)
-        return true;
-    else
-        return false;
+    return ::AddMandatoryAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(mandatoryPolicy), labelSid) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -54,10 +48,7 @@ bool System::DeleteAccessControlEntries(AccessCheckAclPtr acl, WindowsDWord aceI
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::DeleteAce(acl, aceIndex) != gFalse)
-        return true;
-    else
-        return false;
+    return ::DeleteAce(acl, aceIndex) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -72,10 +63,7 @@ bool System::FindFirstFreeAccessControlEntries(AccessCheckAclPtr acl, WindowsVoi
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::FindFirstFreeAce(acl, ace) != gFalse)
-        return true;
-    else
-        return false;
+    return ::FindFirstFreeAce(acl, ace) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -90,10 +78,7 @@ bool System::GetAccessControlEntries(AccessCheckAclPtr acl, WindowsDWord aceInde
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetAce(acl, aceIndex, ace) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetAce(acl, aceIndex, ace) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

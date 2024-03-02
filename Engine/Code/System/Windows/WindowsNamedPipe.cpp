@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:46)
+/// 版本：1.0.0.6 (2024/02/26 13:37)
 
 #include "System/SystemExport.h"
 
@@ -17,10 +17,7 @@ bool System::CreateSystemPipe(WindowsHandlePtr readPipe, WindowsHandlePtr writeP
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CreatePipe(readPipe, writePipe, pipeAttributes, size) != gFalse)
-        return true;
-    else
-        return false;
+    return ::CreatePipe(readPipe, writePipe, pipeAttributes, size) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -35,10 +32,7 @@ bool System::CloseSystemPipe(WindowsHandle pipeHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(pipeHandle) != gFalse)
-        return true;
-    else
-        return false;
+    return ::CloseHandle(pipeHandle) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

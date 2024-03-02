@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:43)
+/// 版本：1.0.0.6 (2024/02/24 19:57)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_SYSTEM_H
 #define SYSTEM_WINDOWS_WINDOWS_SYSTEM_H
@@ -18,7 +18,7 @@
 
 #include <iostream>
 
-// 系统相关函数。
+/// 系统相关函数。
 namespace System
 {
     void SYSTEM_DEFAULT_DECLARE GetWindowSystemInfo(WindowsSystemInfo& systemInfo) noexcept;

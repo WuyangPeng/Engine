@@ -55,7 +55,7 @@ namespace CoreTools::SimpleCSV
         NODISCARD XMLNode AppendChildV();
         NODISCARD std::string GetAttributeValue() const;
         NODISCARD static ValueType GetNumberType(const XMLNode& node);
-        NODISCARD static ValueType GetStringType(const std::string& attributeValue);
+        NODISCARD static ValueType GetStringType(const std::string& attributeValue) noexcept;
 
     private:
         CellWeakPtr cell;

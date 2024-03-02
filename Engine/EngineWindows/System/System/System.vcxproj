@@ -658,7 +658,6 @@
     <ClInclude Include="..\..\..\Code\System\OpenGL\Detail\GL45Extensions.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Detail\GL46Extensions.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Detail\GLExtensions.h" />
-    <ClInclude Include="..\..\..\Code\System\OpenGL\Detail\GLPlugin.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Detail\GLUtility.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Detail\GlxExtensions.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Detail\WglExtensions.h" />
@@ -796,11 +795,9 @@
     <ClInclude Include="..\..\..\Code\System\Windows\Flags\WindowsDisplayFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Windows\Flags\WindowsFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Windows\Flags\WindowsMessagesFlags.h" />
-    <ClInclude Include="..\..\..\Code\System\Windows\Flags\WindowsNamedPipeFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Windows\Flags\WindowsPictorialFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Windows\Flags\WindowsProcessFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Windows\Flags\WindowsKeyCodesFlags.h" />
-    <ClInclude Include="..\..\..\Code\System\Windows\Flags\WindowsSystemFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Windows\Fwd\WindowsFlagsFwd.h" />
     <ClInclude Include="..\..\..\Code\System\Windows\LastPlatformError.h" />
     <ClInclude Include="..\..\..\Code\System\Windows\Using\WindowsPictorialUsing.h" />
@@ -862,6 +859,7 @@
     <ClCompile Include="..\..\..\Code\System\Network\SocketPrototypes.cpp" />
     <ClCompile Include="..\..\..\Code\System\Network\WindowsExtensionPrototypes.cpp" />
     <ClCompile Include="..\..\..\Code\System\Network\WindowsSockEx.cpp" />
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GetOpenGLFunction.cpp" />
     <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL10Extensions.cpp" />
     <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL11Extensions.cpp" />
     <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GL12Extensions.cpp" />

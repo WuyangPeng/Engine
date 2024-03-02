@@ -35,7 +35,7 @@ void System::FormatErrorMessageReturnStringTesting::MainTest()
 
 void System::FormatErrorMessageReturnStringTesting::FormatErrorMessageReturnStringTest()
 {
-    for (auto windowError = WindowError::Success; windowError <= WindowError::AppHang; ++windowError)
+    for (auto windowError = WindowError::Success; windowError <= WindowError::DlpPolicySilentlyFail; ++windowError)
     {
         ASSERT_NOT_THROW_EXCEPTION_1(FormatErrorMessageTest, windowError);
     }
@@ -63,26 +63,12 @@ void System::FormatErrorMessageReturnStringTesting::FormatErrorMessageTest(Windo
 
 void System::FormatErrorMessageReturnStringTesting::FormatErrorMessageValidTest(WindowError windowError)
 {
-    if (IsExistInvalidWindowError())
-    {
-        ASSERT_NOT_THROW_EXCEPTION_1(FormatErrorMessageSuccessTest, windowError);
-    }
-    else
-    {
-        ASSERT_NOT_THROW_EXCEPTION_1(FormatErrorMessageUnknownTest, windowError);
-    }
+    ASSERT_NOT_THROW_EXCEPTION_1(FormatErrorMessageSuccessTest, windowError);
 }
 
 void System::FormatErrorMessageReturnStringTesting::FormatErrorMessageInvalidTest(WindowError windowError)
 {
-    if (IsExistValidWindowError())
-    {
-        ASSERT_NOT_THROW_EXCEPTION_1(FormatErrorMessageUnknownTest, windowError);
-    }
-    else
-    {
-        ASSERT_NOT_THROW_EXCEPTION_1(FormatErrorMessageFailTest, windowError);
-    }
+    ASSERT_NOT_THROW_EXCEPTION_1(FormatErrorMessageFailTest, windowError);
 }
 
 void System::FormatErrorMessageReturnStringTesting::FormatErrorMessageSuccessTest(WindowError windowError)

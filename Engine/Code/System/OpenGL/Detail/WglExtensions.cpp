@@ -43,45 +43,45 @@ void System::InitWgl10() noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-int System::ChoosePixelFormat(WindowsHdc hDc, const PixelFormatDescriptor* pPfd) noexcept
+int System::ChoosePixelFormat(WindowsHdc hdc, const PixelFormatDescriptor* pixelFormatDescriptor) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::ChoosePixelFormat(hDc, pPfd);
+    return ::ChoosePixelFormat(hdc, pixelFormatDescriptor);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDc, pPfd);
+    UnusedFunction(hdc, pixelFormatDescriptor);
 
     return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-int System::DescribePixelFormat(WindowsHdc hdc, int ipfd, WindowsUInt cjpfd, PixelFormatDescriptor* ppfd) noexcept
+int System::DescribePixelFormat(WindowsHdc hdc, int iPixelFormat, WindowsUInt nBytes, PixelFormatDescriptor* pixelFormatDescriptor) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::DescribePixelFormat(hdc, ipfd, cjpfd, ppfd);
+    return ::DescribePixelFormat(hdc, iPixelFormat, nBytes, pixelFormatDescriptor);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hdc, ipfd, cjpfd, ppfd);
+    UnusedFunction(hdc, iPixelFormat, nBytes, pixelFormatDescriptor);
 
     return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsUInt System::GetEnhMetaFilePixelFormat(HEnhMetaFile hemf, WindowsUInt cbBuffer, PixelFormatDescriptor* ppfd) noexcept
+System::WindowsUInt System::GetEnhMetaFilePixelFormat(HEnhMetaFile hEnhMetaFile, WindowsUInt cbBuffer, PixelFormatDescriptor* pixelFormatDescriptor) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::GetEnhMetaFilePixelFormat(hemf, cbBuffer, ppfd);
+    return ::GetEnhMetaFilePixelFormat(hEnhMetaFile, cbBuffer, pixelFormatDescriptor);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hemf, cbBuffer, ppfd);
+    UnusedFunction(hEnhMetaFile, cbBuffer, pixelFormatDescriptor);
 
     return 0u;
 
@@ -103,15 +103,15 @@ int System::GetPixelFormat(WindowsHdc hdc) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::SetPixelFormat(WindowsHdc hdc, int ipfd, const PixelFormatDescriptor* ppfd) noexcept
+System::WindowsBool System::SetPixelFormat(WindowsHdc hdc, int format, const PixelFormatDescriptor* pixelFormatDescriptor) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::SetPixelFormat(hdc, ipfd, ppfd);
+    return ::SetPixelFormat(hdc, format, pixelFormatDescriptor);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hdc, ipfd, ppfd);
+    UnusedFunction(hdc, format, pixelFormatDescriptor);
 
     return gFalse;
 
@@ -133,15 +133,15 @@ System::WindowsBool System::SwapBuffers(WindowsHdc hdc) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglCopyContext(OpenGLRcHandle hglrcSrc, OpenGLRcHandle hglrcDst, WindowsUInt mask) noexcept
+System::WindowsBool System::WglCopyContext(OpenGLRcHandle hGlRcSrc, OpenGLRcHandle hGlRcDst, WindowsUInt mask) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::wglCopyContext(hglrcSrc, hglrcDst, mask);
+    return ::wglCopyContext(hGlRcSrc, hGlRcDst, mask);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hglrcSrc, hglrcDst, mask);
+    UnusedFunction(hGlRcSrc, hGlRcDst, mask);
 
     return gFalse;
 
@@ -193,15 +193,15 @@ System::WindowsBool System::WglDeleteContext(OpenGLRcHandle oldContext) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglDescribeLayerPlane(WindowsHdc hDc, int pixelFormat, int layerPlane, WindowsUInt nBytes, LayerPlaneDescriptor* plpd) noexcept
+System::WindowsBool System::WglDescribeLayerPlane(WindowsHdc hDc, int pixelFormat, int layerPlane, WindowsUInt bytes, LayerPlaneDescriptor* layerPlaneDescriptor) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::wglDescribeLayerPlane(hDc, pixelFormat, layerPlane, nBytes, plpd);
+    return ::wglDescribeLayerPlane(hDc, pixelFormat, layerPlane, bytes, layerPlaneDescriptor);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDc, pixelFormat, layerPlane, nBytes, plpd);
+    UnusedFunction(hDc, pixelFormat, layerPlane, bytes, layerPlaneDescriptor);
 
     return gFalse;
 
@@ -234,30 +234,30 @@ System::WindowsHdc System::WglGetCurrentDC() noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-int System::WglGetLayerPaletteEntries(WindowsHdc hdc, int iLayerPlane, int iStart, int cEntries, OpenGLColorref* pcr) noexcept
+int System::WglGetLayerPaletteEntries(WindowsHdc hdc, int layerPlane, int start, int entries, OpenGLColorRef* pcr) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::wglGetLayerPaletteEntries(hdc, iLayerPlane, iStart, cEntries, pcr);
+    return ::wglGetLayerPaletteEntries(hdc, layerPlane, start, entries, pcr);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hdc, iLayerPlane, iStart, cEntries, pcr);
+    UnusedFunction(hdc, layerPlane, start, entries, pcr);
 
     return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::OpenGLProc System::WglGetProcAddress(const char* lpszProc) noexcept
+System::OpenGLProc System::WglGetProcAddress(const char* proc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::wglGetProcAddress(lpszProc);
+    return ::wglGetProcAddress(proc);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(lpszProc);
+    UnusedFunction(proc);
 
     return nullptr;
 
@@ -279,30 +279,30 @@ System::WindowsBool System::WglMakeCurrent(WindowsHdc hDc, OpenGLRcHandle newCon
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglRealizeLayerPalette(WindowsHdc hdc, int iLayerPlane, WindowsBool bRealize) noexcept
+System::WindowsBool System::WglRealizeLayerPalette(WindowsHdc hdc, int layerPlane, WindowsBool realize) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::wglRealizeLayerPalette(hdc, iLayerPlane, bRealize);
+    return ::wglRealizeLayerPalette(hdc, layerPlane, realize);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hdc, iLayerPlane, bRealize);
+    UnusedFunction(hdc, layerPlane, realize);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-int System::WglSetLayerPaletteEntries(WindowsHdc hdc, int iLayerPlane, int iStart, int cEntries, const OpenGLColorref* pcr) noexcept
+int System::WglSetLayerPaletteEntries(WindowsHdc hdc, int layerPlane, int start, int entries, const OpenGLColorRef* pcr) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::wglSetLayerPaletteEntries(hdc, iLayerPlane, iStart, cEntries, pcr);
+    return ::wglSetLayerPaletteEntries(hdc, layerPlane, start, entries, pcr);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hdc, iLayerPlane, iStart, cEntries, pcr);
+    UnusedFunction(hdc, layerPlane, start, entries, pcr);
 
     return 0;
 
@@ -339,90 +339,90 @@ System::WindowsBool System::WglSwapLayerBuffers(WindowsHdc hdc, WindowsUInt fuFl
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglUseFontBitmaps(WindowsHdc hDC, WindowsDWord first, WindowsDWord count, WindowsDWord listBase) noexcept
+System::WindowsBool System::WglUseFontBitmaps(WindowsHdc hdc, WindowsDWord first, WindowsDWord count, WindowsDWord listBase) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::wglUseFontBitmaps(hDC, first, count, listBase);
+    return ::wglUseFontBitmaps(hdc, first, count, listBase);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, first, count, listBase);
+    UnusedFunction(hdc, first, count, listBase);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglUseFontBitmapsA(WindowsHdc hDC, WindowsDWord first, WindowsDWord count, WindowsDWord listBase) noexcept
+System::WindowsBool System::WglUseFontBitmapsA(WindowsHdc hdc, WindowsDWord first, WindowsDWord count, WindowsDWord listBase) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::wglUseFontBitmapsA(hDC, first, count, listBase);
+    return ::wglUseFontBitmapsA(hdc, first, count, listBase);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, first, count, listBase);
+    UnusedFunction(hdc, first, count, listBase);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglUseFontBitmapsW(WindowsHdc hDC, WindowsDWord first, WindowsDWord count, WindowsDWord listBase) noexcept
+System::WindowsBool System::WglUseFontBitmapsW(WindowsHdc hdc, WindowsDWord first, WindowsDWord count, WindowsDWord listBase) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::wglUseFontBitmapsW(hDC, first, count, listBase);
+    return ::wglUseFontBitmapsW(hdc, first, count, listBase);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, first, count, listBase);
+    UnusedFunction(hdc, first, count, listBase);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglUseFontOutlines(WindowsHdc hDC, WindowsDWord first, WindowsDWord count, WindowsDWord listBase, float deviation, float extrusion, int format, GlyphMetricsFloatPtr lpgmf) noexcept
+System::WindowsBool System::WglUseFontOutlines(WindowsHdc hdc, WindowsDWord first, WindowsDWord count, WindowsDWord listBase, float deviation, float extrusion, int format, GlyphMetricsFloatPtr glyphMetricsFloat) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::wglUseFontOutlines(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
+    return ::wglUseFontOutlines(hdc, first, count, listBase, deviation, extrusion, format, glyphMetricsFloat);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
+    UnusedFunction(hdc, first, count, listBase, deviation, extrusion, format, glyphMetricsFloat);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglUseFontOutlinesA(WindowsHdc hDC, WindowsDWord first, WindowsDWord count, WindowsDWord listBase, float deviation, float extrusion, int format, GlyphMetricsFloatPtr lpgmf) noexcept
+System::WindowsBool System::WglUseFontOutlinesA(WindowsHdc hdc, WindowsDWord first, WindowsDWord count, WindowsDWord listBase, float deviation, float extrusion, int format, GlyphMetricsFloatPtr glyphMetricsFloat) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::wglUseFontOutlinesA(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
+    return ::wglUseFontOutlinesA(hdc, first, count, listBase, deviation, extrusion, format, glyphMetricsFloat);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
+    UnusedFunction(hdc, first, count, listBase, deviation, extrusion, format, glyphMetricsFloat);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglUseFontOutlinesW(WindowsHdc hDC, WindowsDWord first, WindowsDWord count, WindowsDWord listBase, float deviation, float extrusion, int format, GlyphMetricsFloatPtr lpgmf) noexcept
+System::WindowsBool System::WglUseFontOutlinesW(WindowsHdc hdc, WindowsDWord first, WindowsDWord count, WindowsDWord listBase, float deviation, float extrusion, int format, GlyphMetricsFloatPtr glyphMetricsFloat) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::wglUseFontOutlinesW(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
+    return ::wglUseFontOutlinesW(hdc, first, count, listBase, deviation, extrusion, format, glyphMetricsFloat);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
+    UnusedFunction(hdc, first, count, listBase, deviation, extrusion, format, glyphMetricsFloat);
 
     return gFalse;
 
@@ -477,58 +477,58 @@ void System::InitWglArbBufferRegion()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsHandle System::WglCreateBufferRegionARB(WindowsHdc hDC, int iLayerPlane, WindowsUInt uType) noexcept
+System::WindowsHandle System::WglCreateBufferRegionARB(WindowsHdc hdc, int layerPlane, WindowsUInt type) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglCreateBufferRegionARB, hDC, iLayerPlane, uType, nullptr);
+    SYSTEM_BODY_3_RESULT(wglCreateBufferRegionARB, hdc, layerPlane, type, nullptr);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, iLayerPlane, uType);
+    UnusedFunction(hdc, layerPlane, type);
 
     return nullptr;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-void System::WglDeleteBufferRegionARB(WindowsHandle hRegion) noexcept
+void System::WglDeleteBufferRegionARB(WindowsHandle region) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_1(wglDeleteBufferRegionARB, hRegion);
+    SYSTEM_BODY_1(wglDeleteBufferRegionARB, region);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hRegion);
+    UnusedFunction(region);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglSaveBufferRegionARB(WindowsHandle hRegion, int x, int y, int width, int height) noexcept
+System::WindowsBool System::WglSaveBufferRegionARB(WindowsHandle region, int x, int y, int width, int height) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_5_RESULT(wglSaveBufferRegionARB, hRegion, x, y, width, height, gFalse);
+    SYSTEM_BODY_5_RESULT(wglSaveBufferRegionARB, region, x, y, width, height, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hRegion, x, y, width, height);
+    UnusedFunction(region, x, y, width, height);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglRestoreBufferRegionARB(WindowsHandle hRegion, int x, int y, int width, int height, int xSrc, int ySrc) noexcept
+System::WindowsBool System::WglRestoreBufferRegionARB(WindowsHandle region, int x, int y, int width, int height, int xSrc, int ySrc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_7_RESULT(wglRestoreBufferRegionARB, hRegion, x, y, width, height, xSrc, ySrc, gFalse);
+    SYSTEM_BODY_7_RESULT(wglRestoreBufferRegionARB, region, x, y, width, height, xSrc, ySrc, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hRegion, x, y, width, height, xSrc, ySrc);
+    UnusedFunction(region, x, y, width, height, xSrc, ySrc);
 
     return gFalse;
 
@@ -607,15 +607,15 @@ void System::InitWglArbCreateContext()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::OpenGLRcHandle System::WglCreateContextAttribsARB(WindowsHdc hDC, OpenGLRcHandle hShareContext, const int* attribList) noexcept
+System::OpenGLRcHandle System::WglCreateContextAttribSArb(WindowsHdc hdc, OpenGLRcHandle shareContext, const int* attribList) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglCreateContextAttribsARB, hDC, hShareContext, attribList, nullptr);
+    SYSTEM_BODY_3_RESULT(wglCreateContextAttribsARB, hdc, shareContext, attribList, nullptr);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, hShareContext, attribList);
+    UnusedFunction(hdc, shareContext, attribList);
 
     return nullptr;
 
@@ -780,12 +780,12 @@ namespace System
     auto existsWglArbFramebufferSRGB = ExistsOpenGLExtensions::Unknown;
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglArbFramebufferSRGB() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglArbFrameBuffersRGB() noexcept
 {
     return existsWglArbFramebufferSRGB;
 }
 
-void System::InitWglArbFramebufferSRGB()
+void System::InitWglArbFrameBuffersRGB()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -847,22 +847,22 @@ void System::InitWglArbMakeCurrentRead()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglMakeContextCurrentARB(WindowsHdc hDrawDC, WindowsHdc hReadDC, OpenGLRcHandle hglrc) noexcept
+System::WindowsBool System::WglMakeContextCurrentARB(WindowsHdc drawDC, WindowsHdc readDC, OpenGLRcHandle hGlRc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglMakeContextCurrentARB, hDrawDC, hReadDC, hglrc, gFalse);
+    SYSTEM_BODY_3_RESULT(wglMakeContextCurrentARB, drawDC, readDC, hGlRc, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDrawDC, hReadDC, hglrc);
+    UnusedFunction(drawDC, readDC, hGlRc);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsHdc System::WglGetCurrentReadDCARB() noexcept
+System::WindowsHdc System::WglGetCurrentReadDcARB() noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -882,12 +882,12 @@ namespace System
     auto existsWglArbMultisample = ExistsOpenGLExtensions::Unknown;
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglArbMultisample() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglArbMultiSample() noexcept
 {
     return existsWglArbMultisample;
 }
 
-void System::InitWglArbMultisample()
+void System::InitWglArbMultiSample()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -955,75 +955,75 @@ void System::InitWglArbPBuffer()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WglHPBufferArb System::WglCreatePbufferARB(WindowsHdc hDC, int iPixelFormat, int iWidth, int iHeight, const int* piAttribList) noexcept
+System::WglHpBufferArb System::WglCreatePBufferARB(WindowsHdc hdC, int pixelFormat, int width, int height, const int* piAttribList) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_5_RESULT(wglCreatePbufferARB, hDC, iPixelFormat, iWidth, iHeight, piAttribList, nullptr);
+    SYSTEM_BODY_5_RESULT(wglCreatePbufferARB, hdC, pixelFormat, width, height, piAttribList, nullptr);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, iPixelFormat, iWidth, iHeight, piAttribList);
+    UnusedFunction(hdC, pixelFormat, width, height, piAttribList);
 
     return nullptr;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsHdc System::WglGetPbufferDCARB(WglHPBufferArb hPbuffer) noexcept
+System::WindowsHdc System::WglGetPBufferDcARB(WglHpBufferArb hPBuffer) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_1_RESULT(wglGetPbufferDCARB, hPbuffer, nullptr);
+    SYSTEM_BODY_1_RESULT(wglGetPbufferDCARB, hPBuffer, nullptr);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hPbuffer);
+    UnusedFunction(hPBuffer);
 
     return nullptr;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-int System::WglReleasePbufferDCARB(WglHPBufferArb hPbuffer, WindowsHdc hDC) noexcept
+int System::WglReleasePBufferDcARB(WglHpBufferArb hPBuffer, WindowsHdc hdc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglReleasePbufferDCARB, hPbuffer, hDC, 0);
+    SYSTEM_BODY_2_RESULT(wglReleasePbufferDCARB, hPBuffer, hdc, 0);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hPbuffer, hDC);
+    UnusedFunction(hPBuffer, hdc);
 
     return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglDestroyPbufferARB(WglHPBufferArb hPbuffer) noexcept
+System::WindowsBool System::WglDestroyPBufferARB(WglHpBufferArb hPBuffer) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_1_RESULT(wglDestroyPbufferARB, hPbuffer, gFalse);
+    SYSTEM_BODY_1_RESULT(wglDestroyPbufferARB, hPBuffer, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hPbuffer);
+    UnusedFunction(hPBuffer);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglQueryPbufferARB(WglHPBufferArb hPbuffer, int iAttribute, int* piValue) noexcept
+System::WindowsBool System::WglQueryPBufferARB(WglHpBufferArb hPBuffer, int attribute, int* piValue) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglQueryPbufferARB, hPbuffer, iAttribute, piValue, gFalse);
+    SYSTEM_BODY_3_RESULT(wglQueryPbufferARB, hPBuffer, attribute, piValue, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hPbuffer, iAttribute, piValue);
+    UnusedFunction(hPBuffer, attribute, piValue);
 
     return gFalse;
 
@@ -1074,45 +1074,45 @@ void System::InitWglArbPixelFormat()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGetPixelFormatAttribivARB(WindowsHdc hdc, int iPixelFormat, int iLayerPlane, WindowsUInt nAttributes, const int* piAttributes, int* piValues) noexcept
+System::WindowsBool System::WglGetPixelFormatAttribIvARB(WindowsHdc hdc, int pixelFormat, int layerPlane, WindowsUInt attributes, const int* piAttributes, int* piValues) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_6_RESULT(wglGetPixelFormatAttribivARB, hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues, gFalse);
+    SYSTEM_BODY_6_RESULT(wglGetPixelFormatAttribivARB, hdc, pixelFormat, layerPlane, attributes, piAttributes, piValues, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues);
+    UnusedFunction(hdc, pixelFormat, layerPlane, attributes, piAttributes, piValues);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGetPixelFormatAttribfvARB(WindowsHdc hdc, int iPixelFormat, int iLayerPlane, WindowsUInt nAttributes, const int* piAttributes, float* pfValues) noexcept
+System::WindowsBool System::WglGetPixelFormatAttribFvARB(WindowsHdc hdc, int pixelFormat, int layerPlane, WindowsUInt attributes, const int* piAttributes, float* pfValues) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_6_RESULT(wglGetPixelFormatAttribfvARB, hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues, gFalse);
+    SYSTEM_BODY_6_RESULT(wglGetPixelFormatAttribfvARB, hdc, pixelFormat, layerPlane, attributes, piAttributes, pfValues, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues);
+    UnusedFunction(hdc, pixelFormat, layerPlane, attributes, piAttributes, pfValues);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglChoosePixelFormatARB(WindowsHdc hdc, const int* piAttribIList, const float* pfAttribFList, WindowsUInt nMaxFormats, int* piFormats, WindowsUInt* nNumFormats) noexcept
+System::WindowsBool System::WglChoosePixelFormatARB(WindowsHdc hdc, const int* piAttribIList, const float* pfAttribFList, WindowsUInt maxFormats, int* piFormats, WindowsUInt* numFormats) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_6_RESULT(wglChoosePixelFormatARB, hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats, gFalse);
+    SYSTEM_BODY_6_RESULT(wglChoosePixelFormatARB, hdc, piAttribIList, pfAttribFList, maxFormats, piFormats, numFormats, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats);
+    UnusedFunction(hdc, piAttribIList, pfAttribFList, maxFormats, piFormats, numFormats);
 
     return gFalse;
 
@@ -1195,45 +1195,45 @@ void System::InitWglArbRenderTexture()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglBindTexImageARB(WglHPBufferArb hPbuffer, int iBuffer) noexcept
+System::WindowsBool System::WglBindTexImageARB(WglHpBufferArb hPBuffer, int buffer) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglBindTexImageARB, hPbuffer, iBuffer, gFalse);
+    SYSTEM_BODY_2_RESULT(wglBindTexImageARB, hPBuffer, buffer, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hPbuffer, iBuffer);
+    UnusedFunction(hPBuffer, buffer);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglReleaseTexImageARB(WglHPBufferArb hPbuffer, int iBuffer) noexcept
+System::WindowsBool System::WglReleaseTexImageARB(WglHpBufferArb hPBuffer, int buffer) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglReleaseTexImageARB, hPbuffer, iBuffer, gFalse);
+    SYSTEM_BODY_2_RESULT(wglReleaseTexImageARB, hPBuffer, buffer, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hPbuffer, iBuffer);
+    UnusedFunction(hPBuffer, buffer);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglSetPbufferAttribARB(WglHPBufferArb hPbuffer, const int* piAttribList) noexcept
+System::WindowsBool System::WglSetPBufferAttribARB(WglHpBufferArb hPBuffer, const int* piAttribList) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglSetPbufferAttribARB, hPbuffer, piAttribList, gFalse);
+    SYSTEM_BODY_2_RESULT(wglSetPbufferAttribARB, hPBuffer, piAttribList, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hPbuffer, piAttribList);
+    UnusedFunction(hPBuffer, piAttribList);
 
     return gFalse;
 
@@ -1313,12 +1313,12 @@ namespace System
     auto existsWgl3DFXMultisample = ExistsOpenGLExtensions::Unknown;
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWgl3DFXMultisample() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWgl3DfxMultiSample() noexcept
 {
     return existsWgl3DFXMultisample;
 }
 
-void System::InitWgl3DFXMultisample()
+void System::InitWgl3DfxMultiSample()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -1353,12 +1353,12 @@ namespace System
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWgl3DLStereoControl() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWgl3DlStereoControl() noexcept
 {
     return existsWgl3DLStereoControl;
 }
 
-void System::InitWgl3DLStereoControl()
+void System::InitWgl3DlStereoControl()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -1380,15 +1380,15 @@ void System::InitWgl3DLStereoControl()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglSetStereoEmitterState3DL(WindowsHdc hDC, WindowsUInt uState) noexcept
+System::WindowsBool System::WglSetStereoEmitterState3Dl(WindowsHdc hdC, WindowsUInt state) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglSetStereoEmitterState3DL, hDC, uState, gFalse);
+    SYSTEM_BODY_2_RESULT(wglSetStereoEmitterState3DL, hdC, state, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, uState);
+    UnusedFunction(hdC, state);
 
     return gFalse;
 
@@ -1453,7 +1453,7 @@ void System::InitWglAMDGpuAssociation()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsUInt System::WglGetGPUIDsAMD(WindowsUInt maxCount, WindowsUInt* ids) noexcept
+System::WindowsUInt System::WglGetGpuIdsAMD(WindowsUInt maxCount, WindowsUInt* ids) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -1468,7 +1468,7 @@ System::WindowsUInt System::WglGetGPUIDsAMD(WindowsUInt maxCount, WindowsUInt* i
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsInt System::WglGetGPUInfoAMD(WindowsUInt id, WindowsInt property, GLenum dataType, WindowsUInt size, void* data) noexcept
+System::WindowsInt System::WglGetGpuInfoAMD(WindowsUInt id, WindowsInt property, GLenum dataType, WindowsUInt size, void* data) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -1483,15 +1483,15 @@ System::WindowsInt System::WglGetGPUInfoAMD(WindowsUInt id, WindowsInt property,
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsUInt System::WglGetContextGPUIDAMD(OpenGLRcHandle hglrc) noexcept
+System::WindowsUInt System::WglGetContextGpuIdAMD(OpenGLRcHandle hGlRc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_1_RESULT(wglGetContextGPUIDAMD, hglrc, 0u);
+    SYSTEM_BODY_1_RESULT(wglGetContextGPUIDAMD, hGlRc, 0u);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hglrc);
+    UnusedFunction(hGlRc);
 
     return 0u;
 
@@ -1513,7 +1513,7 @@ System::OpenGLRcHandle System::WglCreateAssociatedContextAMD(WindowsUInt id) noe
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::OpenGLRcHandle System::WglCreateAssociatedContextAttribsAMD(WindowsUInt id, OpenGLRcHandle hShareContext, const int* attribList) noexcept
+System::OpenGLRcHandle System::WglCreateAssociatedContextAttribSAmd(WindowsUInt id, OpenGLRcHandle hShareContext, const int* attribList) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -1528,30 +1528,30 @@ System::OpenGLRcHandle System::WglCreateAssociatedContextAttribsAMD(WindowsUInt 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglDeleteAssociatedContextAMD(OpenGLRcHandle hglrc) noexcept
+System::WindowsBool System::WglDeleteAssociatedContextAMD(OpenGLRcHandle hGlRc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_1_RESULT(wglDeleteAssociatedContextAMD, hglrc, gFalse);
+    SYSTEM_BODY_1_RESULT(wglDeleteAssociatedContextAMD, hGlRc, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hglrc);
+    UnusedFunction(hGlRc);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglMakeAssociatedContextCurrentAMD(OpenGLRcHandle hglrc) noexcept
+System::WindowsBool System::WglMakeAssociatedContextCurrentAMD(OpenGLRcHandle hGlRc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_1_RESULT(wglMakeAssociatedContextCurrentAMD, hglrc, gFalse);
+    SYSTEM_BODY_1_RESULT(wglMakeAssociatedContextCurrentAMD, hGlRc, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hglrc);
+    UnusedFunction(hGlRc);
 
     return gFalse;
 
@@ -1571,7 +1571,7 @@ System::OpenGLRcHandle System::WglGetCurrentAssociatedContextAMD() noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-void System::WglBlitContextFramebufferAMD(OpenGLRcHandle dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) noexcept
+void System::WglBlitContextFrameBufferAMD(OpenGLRcHandle dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -1659,12 +1659,12 @@ namespace System
     auto existsWglExtColorspace = ExistsOpenGLExtensions::Unknown;
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglExtColorspace() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglExtColorSpace() noexcept
 {
     return existsWglExtColorspace;
 }
 
-void System::InitWglExtColorspace()
+void System::InitWglExtColorSpace()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -1944,12 +1944,12 @@ namespace System
     auto existsWglExtFramebufferSRGB = ExistsOpenGLExtensions::Unknown;
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglExtFramebufferSRGB() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglExtFrameBuffersRGB() noexcept
 {
     return existsWglExtFramebufferSRGB;
 }
 
-void System::InitWglExtFramebufferSRGB()
+void System::InitWglExtFrameBuffersRGB()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -2011,22 +2011,22 @@ void System::InitWglExtMakeCurrentRead()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglMakeContextCurrentEXT(WindowsHdc hDrawDC, WindowsHdc hReadDC, OpenGLRcHandle hglrc) noexcept
+System::WindowsBool System::WglMakeContextCurrentEXT(WindowsHdc drawDC, WindowsHdc readDC, OpenGLRcHandle hGlRc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglMakeContextCurrentEXT, hDrawDC, hReadDC, hglrc, gFalse);
+    SYSTEM_BODY_3_RESULT(wglMakeContextCurrentEXT, drawDC, readDC, hGlRc, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDrawDC, hReadDC, hglrc);
+    UnusedFunction(drawDC, readDC, hGlRc);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsHdc System::WglGetCurrentReadDCEXT() noexcept
+System::WindowsHdc System::WglGetCurrentReadDcEXT() noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -2046,12 +2046,12 @@ namespace System
     auto existsWglExtMultisample = ExistsOpenGLExtensions::Unknown;
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglExtMultisample() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglExtMultiSample() noexcept
 {
     return existsWglExtMultisample;
 }
 
-void System::InitWglExtMultisample()
+void System::InitWglExtMultiSample()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -2119,75 +2119,75 @@ void System::InitWglExtPBuffer()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WglHPBufferExt System::WglCreatePbufferEXT(WindowsHdc hDC, int iPixelFormat, int iWidth, int iHeight, const int* piAttribList) noexcept
+System::WglHpBufferExt System::WglCreatePBufferEXT(WindowsHdc hdc, int pixelFormat, int width, int height, const int* piAttribList) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_5_RESULT(wglCreatePbufferEXT, hDC, iPixelFormat, iWidth, iHeight, piAttribList, nullptr);
+    SYSTEM_BODY_5_RESULT(wglCreatePbufferEXT, hdc, pixelFormat, width, height, piAttribList, nullptr);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, iPixelFormat, iWidth, iHeight, piAttribList);
+    UnusedFunction(hdc, pixelFormat, width, height, piAttribList);
 
     return nullptr;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsHdc System::WglGetPbufferDCEXT(WglHPBufferExt hPbuffer) noexcept
+System::WindowsHdc System::WglGetPBufferDcEXT(WglHpBufferExt hPBuffer) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_1_RESULT(wglGetPbufferDCEXT, hPbuffer, nullptr);
+    SYSTEM_BODY_1_RESULT(wglGetPbufferDCEXT, hPBuffer, nullptr);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hPbuffer);
+    UnusedFunction(hPBuffer);
 
     return nullptr;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-int System::WglReleasePbufferDCEXT(WglHPBufferExt hPbuffer, WindowsHdc hDC) noexcept
+int System::WglReleasePBufferDcEXT(WglHpBufferExt hPBuffer, WindowsHdc hdc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglReleasePbufferDCEXT, hPbuffer, hDC, 0);
+    SYSTEM_BODY_2_RESULT(wglReleasePbufferDCEXT, hPBuffer, hdc, 0);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hPbuffer, hDC);
+    UnusedFunction(hPBuffer, hdc);
 
     return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglDestroyPbufferEXT(WglHPBufferExt hPbuffer) noexcept
+System::WindowsBool System::WglDestroyPBufferEXT(WglHpBufferExt hPBuffer) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_1_RESULT(wglDestroyPbufferEXT, hPbuffer, gFalse);
+    SYSTEM_BODY_1_RESULT(wglDestroyPbufferEXT, hPBuffer, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hPbuffer);
+    UnusedFunction(hPBuffer);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglQueryPbufferEXT(WglHPBufferExt hPbuffer, int iAttribute, int* piValue) noexcept
+System::WindowsBool System::WglQueryPBufferEXT(WglHpBufferExt hPBuffer, int attribute, int* piValue) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglQueryPbufferEXT, hPbuffer, iAttribute, piValue, gFalse);
+    SYSTEM_BODY_3_RESULT(wglQueryPbufferEXT, hPBuffer, attribute, piValue, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hPbuffer, iAttribute, piValue);
+    UnusedFunction(hPBuffer, attribute, piValue);
 
     return gFalse;
 
@@ -2238,45 +2238,45 @@ void System::InitWglExtPixelFormat()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGetPixelFormatAttribivEXT(WindowsHdc hdc, int iPixelFormat, int iLayerPlane, WindowsUInt nAttributes, int* piAttributes, int* piValues) noexcept
+System::WindowsBool System::WglGetPixelFormatAttribIvEXT(WindowsHdc hdc, int pixelFormat, int layerPlane, WindowsUInt attributes, int* piAttributes, int* piValues) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_6_RESULT(wglGetPixelFormatAttribivEXT, hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues, gFalse);
+    SYSTEM_BODY_6_RESULT(wglGetPixelFormatAttribivEXT, hdc, pixelFormat, layerPlane, attributes, piAttributes, piValues, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues);
+    UnusedFunction(hdc, pixelFormat, layerPlane, attributes, piAttributes, piValues);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGetPixelFormatAttribfvEXT(WindowsHdc hdc, int iPixelFormat, int iLayerPlane, WindowsUInt nAttributes, int* piAttributes, float* pfValues) noexcept
+System::WindowsBool System::WglGetPixelFormatAttribFvEXT(WindowsHdc hdc, int pixelFormat, int layerPlane, WindowsUInt attributes, int* piAttributes, float* pfValues) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_6_RESULT(wglGetPixelFormatAttribfvEXT, hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues, gFalse);
+    SYSTEM_BODY_6_RESULT(wglGetPixelFormatAttribfvEXT, hdc, pixelFormat, layerPlane, attributes, piAttributes, pfValues, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues);
+    UnusedFunction(hdc, pixelFormat, layerPlane, attributes, piAttributes, pfValues);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglChoosePixelFormatEXT(WindowsHdc hdc, const int* piAttribIList, const float* pfAttribFList, WindowsUInt nMaxFormats, int* piFormats, WindowsUInt* nNumFormats) noexcept
+System::WindowsBool System::WglChoosePixelFormatEXT(WindowsHdc hdc, const int* piAttribIList, const float* pfAttribFList, WindowsUInt maxFormats, int* piFormats, WindowsUInt* numFormats) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_6_RESULT(wglChoosePixelFormatEXT, hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats, gFalse);
+    SYSTEM_BODY_6_RESULT(wglChoosePixelFormatEXT, hdc, piAttribIList, pfAttribFList, maxFormats, piFormats, numFormats, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats);
+    UnusedFunction(hdc, piAttribIList, pfAttribFList, maxFormats, piFormats, numFormats);
 
     return gFalse;
 
@@ -2461,30 +2461,30 @@ void System::InitWglI3DDigitalVideoControl()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGetDigitalVideoParametersI3D(WindowsHdc hDC, int iAttribute, int* piValue) noexcept
+System::WindowsBool System::WglGetDigitalVideoParametersI3D(WindowsHdc hdc, int attribute, int* piValue) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglGetDigitalVideoParametersI3D, hDC, iAttribute, piValue, gFalse);
+    SYSTEM_BODY_3_RESULT(wglGetDigitalVideoParametersI3D, hdc, attribute, piValue, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, iAttribute, piValue);
+    UnusedFunction(hdc, attribute, piValue);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglSetDigitalVideoParametersI3D(WindowsHdc hDC, int iAttribute, const int* piValue) noexcept
+System::WindowsBool System::WglSetDigitalVideoParametersI3D(WindowsHdc hdc, int attribute, const int* piValue) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglSetDigitalVideoParametersI3D, hDC, iAttribute, piValue, gFalse);
+    SYSTEM_BODY_3_RESULT(wglSetDigitalVideoParametersI3D, hdc, attribute, piValue, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, iAttribute, piValue);
+    UnusedFunction(hdc, attribute, piValue);
 
     return gFalse;
 
@@ -2537,60 +2537,60 @@ void System::InitWglI3DGamma()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGetGammaTableParametersI3D(WindowsHdc hDC, int iAttribute, int* piValue) noexcept
+System::WindowsBool System::WglGetGammaTableParametersI3D(WindowsHdc hdc, int attribute, int* piValue) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglGetGammaTableParametersI3D, hDC, iAttribute, piValue, gFalse);
+    SYSTEM_BODY_3_RESULT(wglGetGammaTableParametersI3D, hdc, attribute, piValue, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, iAttribute, piValue);
+    UnusedFunction(hdc, attribute, piValue);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglSetGammaTableParametersI3D(WindowsHdc hDC, int iAttribute, const int* piValue) noexcept
+System::WindowsBool System::WglSetGammaTableParametersI3D(WindowsHdc hdc, int attribute, const int* piValue) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglSetGammaTableParametersI3D, hDC, iAttribute, piValue, gFalse);
+    SYSTEM_BODY_3_RESULT(wglSetGammaTableParametersI3D, hdc, attribute, piValue, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, iAttribute, piValue);
+    UnusedFunction(hdc, attribute, piValue);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGetGammaTableI3D(WindowsHdc hDC, int iEntries, WindowsUShort* puRed, WindowsUShort* puGreen, WindowsUShort* puBlue) noexcept
+System::WindowsBool System::WglGetGammaTableI3D(WindowsHdc hdc, int iEntries, WindowsUShort* puRed, WindowsUShort* puGreen, WindowsUShort* puBlue) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_5_RESULT(wglGetGammaTableI3D, hDC, iEntries, puRed, puGreen, puBlue, gFalse);
+    SYSTEM_BODY_5_RESULT(wglGetGammaTableI3D, hdc, iEntries, puRed, puGreen, puBlue, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, iEntries, puRed, puGreen, puBlue);
+    UnusedFunction(hdc, iEntries, puRed, puGreen, puBlue);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglSetGammaTableI3D(WindowsHdc hDC, int iEntries, const WindowsUShort* puRed, const WindowsUShort* puGreen, const WindowsUShort* puBlue) noexcept
+System::WindowsBool System::WglSetGammaTableI3D(WindowsHdc hdc, int iEntries, const WindowsUShort* puRed, const WindowsUShort* puGreen, const WindowsUShort* puBlue) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_5_RESULT(wglSetGammaTableI3D, hDC, iEntries, puRed, puGreen, puBlue, gFalse);
+    SYSTEM_BODY_5_RESULT(wglSetGammaTableI3D, hdc, iEntries, puRed, puGreen, puBlue, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, iEntries, puRed, puGreen, puBlue);
+    UnusedFunction(hdc, iEntries, puRed, puGreen, puBlue);
 
     return gFalse;
 
@@ -2621,12 +2621,12 @@ namespace System
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglI3DGenlock() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglI3DGenLock() noexcept
 {
     return existsWglI3DGenlock;
 }
 
-void System::InitWglI3DGenlock()
+void System::InitWglI3DGenLock()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -2659,180 +2659,180 @@ void System::InitWglI3DGenlock()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglEnableGenlockI3D(WindowsHdc hDC) noexcept
+System::WindowsBool System::WglEnableGenLockI3D(WindowsHdc hdc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_1_RESULT(wglEnableGenlockI3D, hDC, gFalse);
+    SYSTEM_BODY_1_RESULT(wglEnableGenlockI3D, hdc, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC);
+    UnusedFunction(hdc);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglDisableGenlockI3D(WindowsHdc hDC) noexcept
+System::WindowsBool System::WglDisableGenLockI3D(WindowsHdc hdc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_1_RESULT(wglDisableGenlockI3D, hDC, gFalse);
+    SYSTEM_BODY_1_RESULT(wglDisableGenlockI3D, hdc, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC);
+    UnusedFunction(hdc);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglIsEnabledGenlockI3D(WindowsHdc hDC, WindowsBool* pFlag) noexcept
+System::WindowsBool System::WglIsEnabledGenLockI3D(WindowsHdc hdc, WindowsBool* flag) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglIsEnabledGenlockI3D, hDC, pFlag, gFalse);
+    SYSTEM_BODY_2_RESULT(wglIsEnabledGenlockI3D, hdc, flag, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, pFlag);
+    UnusedFunction(hdc, flag);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGenlockSourceI3D(WindowsHdc hDC, WindowsUInt uSource) noexcept
+System::WindowsBool System::WglGenLockSourceI3D(WindowsHdc hdc, WindowsUInt source) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglGenlockSourceI3D, hDC, uSource, gFalse);
+    SYSTEM_BODY_2_RESULT(wglGenlockSourceI3D, hdc, source, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, uSource);
+    UnusedFunction(hdc, source);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGetGenlockSourceI3D(WindowsHdc hDC, WindowsUInt* uSource) noexcept
+System::WindowsBool System::WglGetGenLockSourceI3D(WindowsHdc hdc, WindowsUInt* source) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglGetGenlockSourceI3D, hDC, uSource, gFalse);
+    SYSTEM_BODY_2_RESULT(wglGetGenlockSourceI3D, hdc, source, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, uSource);
+    UnusedFunction(hdc, source);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGenlockSourceEdgeI3D(WindowsHdc hDC, WindowsUInt uEdge) noexcept
+System::WindowsBool System::WglGenLockSourceEdgeI3D(WindowsHdc hdc, WindowsUInt edge) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglGenlockSourceEdgeI3D, hDC, uEdge, gFalse);
+    SYSTEM_BODY_2_RESULT(wglGenlockSourceEdgeI3D, hdc, edge, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, uEdge);
+    UnusedFunction(hdc, edge);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGetGenlockSourceEdgeI3D(WindowsHdc hDC, WindowsUInt* uEdge) noexcept
+System::WindowsBool System::WglGetGenLockSourceEdgeI3D(WindowsHdc hdc, WindowsUInt* edge) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglGetGenlockSourceEdgeI3D, hDC, uEdge, gFalse);
+    SYSTEM_BODY_2_RESULT(wglGetGenlockSourceEdgeI3D, hdc, edge, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, uEdge);
+    UnusedFunction(hdc, edge);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGenlockSampleRateI3D(WindowsHdc hDC, WindowsUInt uRate) noexcept
+System::WindowsBool System::WglGenLockSampleRateI3D(WindowsHdc hdc, WindowsUInt rate) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglGenlockSampleRateI3D, hDC, uRate, gFalse);
+    SYSTEM_BODY_2_RESULT(wglGenlockSampleRateI3D, hdc, rate, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, uRate);
+    UnusedFunction(hdc, rate);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGetGenlockSampleRateI3D(WindowsHdc hDC, WindowsUInt* uRate) noexcept
+System::WindowsBool System::WglGetGenLockSampleRateI3D(WindowsHdc hdc, WindowsUInt* rate) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglGetGenlockSampleRateI3D, hDC, uRate, gFalse);
+    SYSTEM_BODY_2_RESULT(wglGetGenlockSampleRateI3D, hdc, rate, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, uRate);
+    UnusedFunction(hdc, rate);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGenlockSourceDelayI3D(WindowsHdc hDC, WindowsUInt uDelay) noexcept
+System::WindowsBool System::WglGenLockSourceDelayI3D(WindowsHdc hdc, WindowsUInt delay) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglGenlockSourceDelayI3D, hDC, uDelay, gFalse);
+    SYSTEM_BODY_2_RESULT(wglGenlockSourceDelayI3D, hdc, delay, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, uDelay);
+    UnusedFunction(hdc, delay);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGetGenlockSourceDelayI3D(WindowsHdc hDC, WindowsUInt* uDelay) noexcept
+System::WindowsBool System::WglGetGenLockSourceDelayI3D(WindowsHdc hdc, WindowsUInt* delay) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglGetGenlockSourceDelayI3D, hDC, uDelay, gFalse);
+    SYSTEM_BODY_2_RESULT(wglGetGenlockSourceDelayI3D, hdc, delay, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, uDelay);
+    UnusedFunction(hdc, delay);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglQueryGenlockMaxSourceDelayI3D(WindowsHdc hDC, WindowsUInt* uMaxLineDelay, WindowsUInt* uMaxPixelDelay) noexcept
+System::WindowsBool System::WglQueryGenLockMaxSourceDelayI3D(WindowsHdc hdc, WindowsUInt* maxLineDelay, WindowsUInt* maxPixelDelay) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglQueryGenlockMaxSourceDelayI3D, hDC, uMaxLineDelay, uMaxPixelDelay, gFalse);
+    SYSTEM_BODY_3_RESULT(wglQueryGenlockMaxSourceDelayI3D, hdc, maxLineDelay, maxPixelDelay, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, uMaxLineDelay, uMaxPixelDelay);
+    UnusedFunction(hdc, maxLineDelay, maxPixelDelay);
 
     return gFalse;
 
@@ -2885,60 +2885,60 @@ void System::InitWglI3DImageBuffer()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsVoidPtr System::WglCreateImageBufferI3D(WindowsHdc hDC, WindowsDWord dwSize, WindowsUInt uFlags) noexcept
+System::WindowsVoidPtr System::WglCreateImageBufferI3D(WindowsHdc hdc, WindowsDWord size, WindowsUInt flags) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglCreateImageBufferI3D, hDC, dwSize, uFlags, nullptr);
+    SYSTEM_BODY_3_RESULT(wglCreateImageBufferI3D, hdc, size, flags, nullptr);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, dwSize, uFlags);
+    UnusedFunction(hdc, size, flags);
 
     return nullptr;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglDestroyImageBufferI3D(WindowsHdc hDC, WindowsVoidPtr pAddress) noexcept
+System::WindowsBool System::WglDestroyImageBufferI3D(WindowsHdc hdc, WindowsVoidPtr address) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglDestroyImageBufferI3D, hDC, pAddress, gFalse);
+    SYSTEM_BODY_2_RESULT(wglDestroyImageBufferI3D, hdc, address, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, pAddress);
+    UnusedFunction(hdc, address);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglAssociateImageBufferEventsI3D(WindowsHdc hDC, const WindowsHandle* pEvent, const WindowsVoidPtr* pAddress, const WindowsDWord* pSize, WindowsUInt count) noexcept
+System::WindowsBool System::WglAssociateImageBufferEventsI3D(WindowsHdc hdc, const WindowsHandle* event, const WindowsVoidPtr* address, const WindowsDWord* size, WindowsUInt count) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_5_RESULT(wglAssociateImageBufferEventsI3D, hDC, pEvent, pAddress, pSize, count, gFalse);
+    SYSTEM_BODY_5_RESULT(wglAssociateImageBufferEventsI3D, hdc, event, address, size, count, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, pEvent, pAddress, pSize, count);
+    UnusedFunction(hdc, event, address, size, count);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglReleaseImageBufferEventsI3D(WindowsHdc hDC, const WindowsVoidPtr* pAddress, WindowsUInt count) noexcept
+System::WindowsBool System::WglReleaseImageBufferEventsI3D(WindowsHdc hdc, const WindowsVoidPtr* address, WindowsUInt count) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglReleaseImageBufferEventsI3D, hDC, pAddress, count, gFalse);
+    SYSTEM_BODY_3_RESULT(wglReleaseImageBufferEventsI3D, hdc, address, count, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, pAddress, count);
+    UnusedFunction(hdc, address, count);
 
     return gFalse;
 
@@ -3017,30 +3017,30 @@ System::WindowsBool System::WglDisableFrameLockI3D() noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglIsEnabledFrameLockI3D(WindowsBool* pFlag) noexcept
+System::WindowsBool System::WglIsEnabledFrameLockI3D(WindowsBool* flag) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_1_RESULT(wglIsEnabledFrameLockI3D, pFlag, gFalse);
+    SYSTEM_BODY_1_RESULT(wglIsEnabledFrameLockI3D, flag, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(pFlag);
+    UnusedFunction(flag);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglQueryFrameLockMasterI3D(WindowsBool* pFlag) noexcept
+System::WindowsBool System::WglQueryFrameLockMasterI3D(WindowsBool* flag) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_1_RESULT(wglQueryFrameLockMasterI3D, pFlag, gFalse);
+    SYSTEM_BODY_1_RESULT(wglQueryFrameLockMasterI3D, flag, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(pFlag);
+    UnusedFunction(flag);
 
     return gFalse;
 
@@ -3093,15 +3093,15 @@ void System::InitWglI3DSwapFrameUsage()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGetFrameUsageI3D(float* pUsage) noexcept
+System::WindowsBool System::WglGetFrameUsageI3D(float* usage) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_1_RESULT(wglGetFrameUsageI3D, pUsage, gFalse);
+    SYSTEM_BODY_1_RESULT(wglGetFrameUsageI3D, usage, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(pUsage);
+    UnusedFunction(usage);
 
     return gFalse;
 
@@ -3134,15 +3134,15 @@ System::WindowsBool System::WglEndFrameTrackingI3D() noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglQueryFrameTrackingI3D(WindowsDWord* pFrameCount, WindowsDWord* pMissedFrames, float* pLastMissedUsage) noexcept
+System::WindowsBool System::WglQueryFrameTrackingI3D(WindowsDWord* frameCount, WindowsDWord* missedFrames, float* lastMissedUsage) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglQueryFrameTrackingI3D, pFrameCount, pMissedFrames, pLastMissedUsage, gFalse);
+    SYSTEM_BODY_3_RESULT(wglQueryFrameTrackingI3D, frameCount, missedFrames, lastMissedUsage, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(pFrameCount, pMissedFrames, pLastMissedUsage);
+    UnusedFunction(frameCount, missedFrames, lastMissedUsage);
 
     return gFalse;
 
@@ -3171,12 +3171,12 @@ namespace System
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglNVDXInterop() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglNvDxInterop() noexcept
 {
     return existsWglNVDXInterop;
 }
 
-void System::InitWglNVDXIntero()
+void System::InitWglNvDxInterop()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3205,7 +3205,7 @@ void System::InitWglNVDXIntero()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglDXSetResourceShareHandleNV(void* dxObject, WindowsHandle shareHandle) noexcept
+System::WindowsBool System::WglDxSetResourceShareHandleNv(void* dxObject, WindowsHandle shareHandle) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3220,7 +3220,7 @@ System::WindowsBool System::WglDXSetResourceShareHandleNV(void* dxObject, Window
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsHandle System::WglDXOpenDeviceNV(void* dxDevice) noexcept
+System::WindowsHandle System::WglDxOpenDeviceNv(void* dxDevice) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3235,7 +3235,7 @@ System::WindowsHandle System::WglDXOpenDeviceNV(void* dxDevice) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglDXCloseDeviceNV(WindowsHandle hDevice) noexcept
+System::WindowsBool System::WglDxCloseDeviceNv(WindowsHandle hDevice) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3250,7 +3250,7 @@ System::WindowsBool System::WglDXCloseDeviceNV(WindowsHandle hDevice) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsHandle System::WglDXRegisterObjectNV(WindowsHandle hDevice, void* dxObject, GLuint name, GLenum type, GLenum access) noexcept
+System::WindowsHandle System::WglDxRegisterObjectNv(WindowsHandle hDevice, void* dxObject, GLuint name, GLenum type, GLenum access) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3265,7 +3265,7 @@ System::WindowsHandle System::WglDXRegisterObjectNV(WindowsHandle hDevice, void*
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglDXUnregisterObjectNV(WindowsHandle hDevice, WindowsHandle hObject) noexcept
+System::WindowsBool System::WglDxUnregisterObjectNv(WindowsHandle hDevice, WindowsHandle hObject) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3280,7 +3280,7 @@ System::WindowsBool System::WglDXUnregisterObjectNV(WindowsHandle hDevice, Windo
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglDXObjectAccessNV(WindowsHandle hObject, GLenum access) noexcept
+System::WindowsBool System::WglDxObjectAccessNv(WindowsHandle hObject, GLenum access) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3295,7 +3295,7 @@ System::WindowsBool System::WglDXObjectAccessNV(WindowsHandle hObject, GLenum ac
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglDXLockObjectsNV(WindowsHandle hDevice, GLint count, WindowsHandle* hObjects) noexcept
+System::WindowsBool System::WglDxLockObjectsNv(WindowsHandle hDevice, GLint count, WindowsHandle* hObjects) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3310,7 +3310,7 @@ System::WindowsBool System::WglDXLockObjectsNV(WindowsHandle hDevice, GLint coun
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglDXUnlockObjectsNV(WindowsHandle hDevice, GLint count, WindowsHandle* hObjects) noexcept
+System::WindowsBool System::WglDxUnlockObjectsNv(WindowsHandle hDevice, GLint count, WindowsHandle* hObjects) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3332,12 +3332,12 @@ namespace System
     auto existsWglNVDXInterop2 = ExistsOpenGLExtensions::Unknown;
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglNVDXInterop2() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglNvDxInterop2() noexcept
 {
     return existsWglNVDXInterop2;
 }
 
-void System::InitWglNVDXIntero2()
+void System::InitWglNvDxInterop2()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3370,12 +3370,12 @@ namespace System
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglNVCopyImage() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglNvCopyImage() noexcept
 {
     return existsWglNVCopyImage;
 }
 
-void System::InitWglNVCopyImage()
+void System::InitWglNvCopyImage()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3397,15 +3397,15 @@ void System::InitWglNVCopyImage()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglCopyImageSubDataNV(OpenGLRcHandle hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, OpenGLRcHandle hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth) noexcept
+System::WindowsBool System::WglCopyImageSubDataNv(OpenGLRcHandle hSrcRc, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, OpenGLRcHandle hDstRc, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_17_RESULT(wglCopyImageSubDataNV, hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth, gFalse);
+    SYSTEM_BODY_17_RESULT(wglCopyImageSubDataNV, hSrcRc, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRc, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth);
+    UnusedFunction(hSrcRc, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRc, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth);
 
     return gFalse;
 
@@ -3425,12 +3425,12 @@ namespace System
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglNVDelayBeforeSwap() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglNvDelayBeforeSwap() noexcept
 {
     return existsWglNVDelayBeforeSwap;
 }
 
-void System::InitWglNVDelayBeforeSwap()
+void System::InitWglNvDelayBeforeSwap()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3452,7 +3452,7 @@ void System::InitWglNVDelayBeforeSwap()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglDelayBeforeSwapNV(WindowsHdc hDC, GLfloat seconds) noexcept
+System::WindowsBool System::WglDelayBeforeSwapNv(WindowsHdc hDC, GLfloat seconds) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3474,12 +3474,12 @@ namespace System
     auto existsWglNVFloatBuffer = ExistsOpenGLExtensions::Unknown;
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglNVFloatBuffer() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglNvFloatBuffer() noexcept
 {
     return existsWglNVFloatBuffer;
 }
 
-void System::InitWglNVFloatBuffer()
+void System::InitWglNvFloatBuffer()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3516,12 +3516,12 @@ namespace System
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglNVGpuAffinity() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglNvGpuAffinity() noexcept
 {
     return existsWglNVGpuAffinity;
 }
 
-void System::InitWglNVGpuAffinity()
+void System::InitWglNvGpuAffinity()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3547,37 +3547,37 @@ void System::InitWglNVGpuAffinity()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglEnumGpusNV(WindowsUInt iGpuIndex, WglHGpuNv* phGpu) noexcept
+System::WindowsBool System::WglEnumGpusNv(WindowsUInt gpuIndex, WglHGpuNv* phGpu) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglEnumGpusNV, iGpuIndex, phGpu, gFalse);
+    SYSTEM_BODY_2_RESULT(wglEnumGpusNV, gpuIndex, phGpu, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(iGpuIndex, phGpu);
+    UnusedFunction(gpuIndex, phGpu);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglEnumGpuDevicesNV(WglHGpuNv hGpu, WindowsUInt iDeviceIndex, WglGpuDevicePtr lpGpuDevice) noexcept
+System::WindowsBool System::WglEnumGpuDevicesNv(WglHGpuNv hGpu, WindowsUInt deviceIndex, WglGpuDevicePtr gpuDevice) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglEnumGpuDevicesNV, hGpu, iDeviceIndex, lpGpuDevice, gFalse);
+    SYSTEM_BODY_3_RESULT(wglEnumGpuDevicesNV, hGpu, deviceIndex, gpuDevice, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hGpu, iDeviceIndex, lpGpuDevice);
+    UnusedFunction(hGpu, deviceIndex, gpuDevice);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsHdc System::WglCreateAffinityDCNV(const WglHGpuNv* phGpuList) noexcept
+System::WindowsHdc System::WglCreateAffinityDcNv(const WglHGpuNv* phGpuList) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3592,22 +3592,22 @@ System::WindowsHdc System::WglCreateAffinityDCNV(const WglHGpuNv* phGpuList) noe
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglEnumGpusFromAffinityDCNV(WindowsHdc hAffinityDC, WindowsUInt iGpuIndex, WglHGpuNv* hGpu) noexcept
+System::WindowsBool System::WglEnumGpusFromAffinityDcNv(WindowsHdc hAffinityDC, WindowsUInt gpuIndex, WglHGpuNv* hGpu) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglEnumGpusFromAffinityDCNV, hAffinityDC, iGpuIndex, hGpu, gFalse);
+    SYSTEM_BODY_3_RESULT(wglEnumGpusFromAffinityDCNV, hAffinityDC, gpuIndex, hGpu, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hAffinityDC, iGpuIndex, hGpu);
+    UnusedFunction(hAffinityDC, gpuIndex, hGpu);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglDeleteDCNV(WindowsHdc hdc) noexcept
+System::WindowsBool System::WglDeleteDcNv(WindowsHdc hdc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3629,12 +3629,12 @@ namespace System
     auto existsWglNVMultigpuContext = ExistsOpenGLExtensions::Unknown;
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglNVMultigpuContext() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglNvMultiGpuContext() noexcept
 {
     return existsWglNVMultigpuContext;
 }
 
-void System::InitWglNVMultigpuContext()
+void System::InitWglNvMultiGpuContext()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3661,12 +3661,12 @@ namespace System
     auto existsWglNVMultisampleCoverage = ExistsOpenGLExtensions::Unknown;
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglNVMultisampleCoverage() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglNvMultiSampleCoverage() noexcept
 {
     return existsWglNVMultisampleCoverage;
 }
 
-void System::InitWglNVMultisampleCoverage()
+void System::InitWglNvMultiSampleCoverage()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3701,12 +3701,12 @@ namespace System
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglNVPresentVideo() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglNvPresentVideo() noexcept
 {
     return existsWglNVPresentVideo;
 }
 
-void System::InitWglNVPresentVideo()
+void System::InitWglNvPresentVideo()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3730,45 +3730,45 @@ void System::InitWglNVPresentVideo()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-int System::WglEnumerateVideoDevicesNV(WindowsHdc hDc, WglHVideoOutputDeviceNv* phDeviceList) noexcept
+int System::WglEnumerateVideoDevicesNv(WindowsHdc hdc, WglHVideoOutputDeviceNv* phDeviceList) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglEnumerateVideoDevicesNV, hDc, phDeviceList, 0);
+    SYSTEM_BODY_2_RESULT(wglEnumerateVideoDevicesNV, hdc, phDeviceList, 0);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDc, phDeviceList);
+    UnusedFunction(hdc, phDeviceList);
 
     return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglBindVideoDeviceNV(WindowsHdc hDc, unsigned int uVideoSlot, WglHVideoOutputDeviceNv hVideoDevice, const int* piAttribList) noexcept
+System::WindowsBool System::WglBindVideoDeviceNv(WindowsHdc hdc, unsigned int videoSlot, WglHVideoOutputDeviceNv videoDevice, const int* piAttribList) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_4_RESULT(wglBindVideoDeviceNV, hDc, uVideoSlot, hVideoDevice, piAttribList, gFalse);
+    SYSTEM_BODY_4_RESULT(wglBindVideoDeviceNV, hdc, videoSlot, videoDevice, piAttribList, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDc, uVideoSlot, hVideoDevice, piAttribList);
+    UnusedFunction(hdc, videoSlot, videoDevice, piAttribList);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglQueryCurrentContextNV(int iAttribute, int* piValue) noexcept
+System::WindowsBool System::WglQueryCurrentContextNv(int attribute, int* piValue) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglQueryCurrentContextNV, iAttribute, piValue, gFalse);
+    SYSTEM_BODY_2_RESULT(wglQueryCurrentContextNV, attribute, piValue, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(iAttribute, piValue);
+    UnusedFunction(attribute, piValue);
 
     return gFalse;
 
@@ -3782,12 +3782,12 @@ namespace System
     auto existsWglNVRenderDepthTexture = ExistsOpenGLExtensions::Unknown;
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglNVRenderDepthTexture() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglNvRenderDepthTexture() noexcept
 {
     return existsWglNVRenderDepthTexture;
 }
 
-void System::InitWglNVRenderDepthTexture()
+void System::InitWglNvRenderDepthTexture()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3814,12 +3814,12 @@ namespace System
     auto existsWglNVRenderTextureRectangle = ExistsOpenGLExtensions::Unknown;
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglNVRenderTextureRectangle() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglNvRenderTextureRectangle() noexcept
 {
     return existsWglNVRenderTextureRectangle;
 }
 
-void System::InitWglNVRenderTextureRectangle()
+void System::InitWglNvRenderTextureRectangle()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3857,12 +3857,12 @@ namespace System
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglNVSwapGroup() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglNvSwapGroup() noexcept
 {
     return existsWglNVSwapGroup;
 }
 
-void System::InitWglNVSwapGroup()
+void System::InitWglNvSwapGroup()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3889,22 +3889,22 @@ void System::InitWglNVSwapGroup()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglJoinSwapGroupNV(WindowsHdc hDC, GLuint group) noexcept
+System::WindowsBool System::WglJoinSwapGroupNv(WindowsHdc hdc, GLuint group) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglJoinSwapGroupNV, hDC, group, gFalse);
+    SYSTEM_BODY_2_RESULT(wglJoinSwapGroupNV, hdc, group, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, group);
+    UnusedFunction(hdc, group);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglBindSwapBarrierNV(GLuint group, GLuint barrier) noexcept
+System::WindowsBool System::WglBindSwapBarrierNv(GLuint group, GLuint barrier) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3919,60 +3919,60 @@ System::WindowsBool System::WglBindSwapBarrierNV(GLuint group, GLuint barrier) n
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglQuerySwapGroupNV(WindowsHdc hDC, GLuint* group, GLuint* barrier) noexcept
+System::WindowsBool System::WglQuerySwapGroupNv(WindowsHdc hdc, GLuint* group, GLuint* barrier) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglQuerySwapGroupNV, hDC, group, barrier, gFalse);
+    SYSTEM_BODY_3_RESULT(wglQuerySwapGroupNV, hdc, group, barrier, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, group, barrier);
+    UnusedFunction(hdc, group, barrier);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglQueryMaxSwapGroupsNV(WindowsHdc hDC, GLuint* maxGroups, GLuint* maxBarriers) noexcept
+System::WindowsBool System::WglQueryMaxSwapGroupsNv(WindowsHdc hdc, GLuint* maxGroups, GLuint* maxBarriers) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglQueryMaxSwapGroupsNV, hDC, maxGroups, maxBarriers, gFalse);
+    SYSTEM_BODY_3_RESULT(wglQueryMaxSwapGroupsNV, hdc, maxGroups, maxBarriers, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, maxGroups, maxBarriers);
+    UnusedFunction(hdc, maxGroups, maxBarriers);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglQueryFrameCountNV(WindowsHdc hDC, GLuint* count) noexcept
+System::WindowsBool System::WglQueryFrameCountNv(WindowsHdc hdc, GLuint* count) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglQueryFrameCountNV, hDC, count, gFalse);
+    SYSTEM_BODY_2_RESULT(wglQueryFrameCountNV, hdc, count, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, count);
+    UnusedFunction(hdc, count);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglResetFrameCountNV(WindowsHdc hDC) noexcept
+System::WindowsBool System::WglResetFrameCountNv(WindowsHdc hdc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_1_RESULT(wglResetFrameCountNV, hDC, gFalse);
+    SYSTEM_BODY_1_RESULT(wglResetFrameCountNV, hdc, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC);
+    UnusedFunction(hdc);
 
     return gFalse;
 
@@ -3993,12 +3993,12 @@ namespace System
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglNVVertexArrayRange() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglNvVertexArrayRange() noexcept
 {
     return existsWglNVVertexArrayRange;
 }
 
-void System::InitWglNVVertexArrayRange()
+void System::InitWglNvVertexArrayRange()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -4021,22 +4021,22 @@ void System::InitWglNVVertexArrayRange()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-void* System::WglAllocateMemoryNV(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority) noexcept
+void* System::WglAllocateMemoryNv(GLsizei size, GLfloat readFreq, GLfloat writeFreq, GLfloat priority) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_4_RESULT(wglAllocateMemoryNV, size, readfreq, writefreq, priority, nullptr);
+    SYSTEM_BODY_4_RESULT(wglAllocateMemoryNV, size, readFreq, writeFreq, priority, nullptr);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(size, readfreq, writefreq, priority);
+    UnusedFunction(size, readFreq, writeFreq, priority);
 
     return nullptr;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-void System::WglFreeMemoryNV(void* pointer) noexcept
+void System::WglFreeMemoryNv(void* pointer) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -4066,12 +4066,12 @@ namespace System
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglNVVideoCapture() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglNvVideoCapture() noexcept
 {
     return existsWglNVVideoCapture;
 }
 
-void System::InitWglNVVideoCapture()
+void System::InitWglNvVideoCapture()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -4097,75 +4097,75 @@ void System::InitWglNVVideoCapture()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglBindVideoCaptureDeviceNV(WindowsUInt uVideoSlot, WglHVideoInputDeviceNv hDevice) noexcept
+System::WindowsBool System::WglBindVideoCaptureDeviceNv(WindowsUInt videoSlot, WglHVideoInputDeviceNv hDevice) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglBindVideoCaptureDeviceNV, uVideoSlot, hDevice, gFalse);
+    SYSTEM_BODY_2_RESULT(wglBindVideoCaptureDeviceNV, videoSlot, hDevice, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(uVideoSlot, hDevice);
+    UnusedFunction(videoSlot, hDevice);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsUInt System::WglEnumerateVideoCaptureDevicesNV(WindowsHdc hDc, WglHVideoInputDeviceNv* phDeviceList) noexcept
+System::WindowsUInt System::WglEnumerateVideoCaptureDevicesNv(WindowsHdc hdc, WglHVideoInputDeviceNv* phDeviceList) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglEnumerateVideoCaptureDevicesNV, hDc, phDeviceList, 0u);
+    SYSTEM_BODY_2_RESULT(wglEnumerateVideoCaptureDevicesNV, hdc, phDeviceList, 0u);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDc, phDeviceList);
+    UnusedFunction(hdc, phDeviceList);
 
     return 0u;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglLockVideoCaptureDeviceNV(WindowsHdc hDc, WglHVideoInputDeviceNv hDevice) noexcept
+System::WindowsBool System::WglLockVideoCaptureDeviceNv(WindowsHdc hdc, WglHVideoInputDeviceNv hDevice) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglLockVideoCaptureDeviceNV, hDc, hDevice, gFalse);
+    SYSTEM_BODY_2_RESULT(wglLockVideoCaptureDeviceNV, hdc, hDevice, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDc, hDevice);
+    UnusedFunction(hdc, hDevice);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglQueryVideoCaptureDeviceNV(WindowsHdc hDc, WglHVideoInputDeviceNv hDevice, int iAttribute, int* piValue) noexcept
+System::WindowsBool System::WglQueryVideoCaptureDeviceNv(WindowsHdc hdc, WglHVideoInputDeviceNv hDevice, int attribute, int* piValue) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_4_RESULT(wglQueryVideoCaptureDeviceNV, hDc, hDevice, iAttribute, piValue, gFalse);
+    SYSTEM_BODY_4_RESULT(wglQueryVideoCaptureDeviceNV, hdc, hDevice, attribute, piValue, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDc, hDevice, iAttribute, piValue);
+    UnusedFunction(hdc, hDevice, attribute, piValue);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglReleaseVideoCaptureDeviceNV(WindowsHdc hDc, WglHVideoInputDeviceNv hDevice) noexcept
+System::WindowsBool System::WglReleaseVideoCaptureDeviceNv(WindowsHdc hdc, WglHVideoInputDeviceNv hDevice) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglReleaseVideoCaptureDeviceNV, hDc, hDevice, gFalse);
+    SYSTEM_BODY_2_RESULT(wglReleaseVideoCaptureDeviceNV, hdc, hDevice, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDc, hDevice);
+    UnusedFunction(hdc, hDevice);
 
     return gFalse;
 
@@ -4190,12 +4190,12 @@ namespace System
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ExistsOpenGLExtensions System::IsExistsWglNVVideoOutput() noexcept
+System::ExistsOpenGLExtensions System::IsExistsWglNvVideoOutput() noexcept
 {
     return existsWglNVVideoOutput;
 }
 
-void System::InitWglNVVideoOutput()
+void System::InitWglNvVideoOutput()
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -4222,90 +4222,90 @@ void System::InitWglNVVideoOutput()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGetVideoDeviceNV(WindowsHdc hDC, int numDevices, WglHPVideoDev* hVideoDevice) noexcept
+System::WindowsBool System::WglGetVideoDeviceNv(WindowsHdc hdc, int numDevices, WglHpVideoDev* videoDevice) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglGetVideoDeviceNV, hDC, numDevices, hVideoDevice, gFalse);
+    SYSTEM_BODY_3_RESULT(wglGetVideoDeviceNV, hdc, numDevices, videoDevice, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDC, numDevices, hVideoDevice);
+    UnusedFunction(hdc, numDevices, videoDevice);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglReleaseVideoDeviceNV(WglHPVideoDev hVideoDevice) noexcept
+System::WindowsBool System::WglReleaseVideoDeviceNv(WglHpVideoDev videoDevice) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_1_RESULT(wglReleaseVideoDeviceNV, hVideoDevice, gFalse);
+    SYSTEM_BODY_1_RESULT(wglReleaseVideoDeviceNV, videoDevice, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hVideoDevice);
+    UnusedFunction(videoDevice);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglBindVideoImageNV(WglHPVideoDev hVideoDevice, WglHPBufferArb hPbuffer, int iVideoBuffer) noexcept
+System::WindowsBool System::WglBindVideoImageNv(WglHpVideoDev videoDevice, WglHpBufferArb hPBuffer, int videoBuffer) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglBindVideoImageNV, hVideoDevice, hPbuffer, iVideoBuffer, gFalse);
+    SYSTEM_BODY_3_RESULT(wglBindVideoImageNV, videoDevice, hPBuffer, videoBuffer, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hVideoDevice, hPbuffer, iVideoBuffer);
+    UnusedFunction(videoDevice, hPBuffer, videoBuffer);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglReleaseVideoImageNV(WglHPBufferArb hPbuffer, int iVideoBuffer) noexcept
+System::WindowsBool System::WglReleaseVideoImageNv(WglHpBufferArb hPBuffer, int videoBuffer) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_2_RESULT(wglReleaseVideoImageNV, hPbuffer, iVideoBuffer, gFalse);
+    SYSTEM_BODY_2_RESULT(wglReleaseVideoImageNV, hPBuffer, videoBuffer, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hPbuffer, iVideoBuffer);
+    UnusedFunction(hPBuffer, videoBuffer);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglSendPbufferToVideoNV(WglHPBufferArb hPbuffer, int iBufferType, unsigned long* pulCounterPbuffer, WindowsBool bBlock) noexcept
+System::WindowsBool System::WglSendPBufferToVideoNv(WglHpBufferArb hPBuffer, int bufferType, unsigned long* pulCounterPBuffer, WindowsBool block) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_4_RESULT(wglSendPbufferToVideoNV, hPbuffer, iBufferType, pulCounterPbuffer, bBlock, gFalse);
+    SYSTEM_BODY_4_RESULT(wglSendPbufferToVideoNV, hPBuffer, bufferType, pulCounterPBuffer, block, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hPbuffer, iBufferType, pulCounterPbuffer, bBlock);
+    UnusedFunction(hPBuffer, bufferType, pulCounterPBuffer, block);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglGetVideoInfoNV(WglHPVideoDev hpVideoDevice, unsigned long* pulCounterOutputPbuffer, unsigned long* pulCounterOutputVideo) noexcept
+System::WindowsBool System::WglGetVideoInfoNv(WglHpVideoDev hpVideoDevice, unsigned long* pulCounterOutputPBuffer, unsigned long* pulCounterOutputVideo) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_3_RESULT(wglGetVideoInfoNV, hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo, gFalse);
+    SYSTEM_BODY_3_RESULT(wglGetVideoInfoNV, hpVideoDevice, pulCounterOutputPBuffer, pulCounterOutputVideo, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo);
+    UnusedFunction(hpVideoDevice, pulCounterOutputPBuffer, pulCounterOutputVideo);
 
     return gFalse;
 
@@ -4394,60 +4394,60 @@ System::WindowsBool System::WglGetMscRateOML(WindowsHdc hdc, WindowsInt32* numer
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsInt64 System::WglSwapBuffersMscOML(WindowsHdc hdc, WindowsInt64 target_msc, WindowsInt64 divisor, WindowsInt64 remainder) noexcept
+System::WindowsInt64 System::WglSwapBuffersMscOML(WindowsHdc hdc, WindowsInt64 targetMsc, WindowsInt64 divisor, WindowsInt64 remainder) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_4_RESULT(wglSwapBuffersMscOML, hdc, target_msc, divisor, remainder, 0);
+    SYSTEM_BODY_4_RESULT(wglSwapBuffersMscOML, hdc, targetMsc, divisor, remainder, 0);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hdc, target_msc, divisor, remainder);
+    UnusedFunction(hdc, targetMsc, divisor, remainder);
 
     return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsInt64 System::WglSwapLayerBuffersMscOML(WindowsHdc hdc, WindowsInt fuPlanes, WindowsInt64 target_msc, WindowsInt64 divisor, WindowsInt64 remainder) noexcept
+System::WindowsInt64 System::WglSwapLayerBuffersMscOML(WindowsHdc hdc, WindowsInt fuPlanes, WindowsInt64 targetMsc, WindowsInt64 divisor, WindowsInt64 remainder) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_5_RESULT(wglSwapLayerBuffersMscOML, hdc, fuPlanes, target_msc, divisor, remainder, 0);
+    SYSTEM_BODY_5_RESULT(wglSwapLayerBuffersMscOML, hdc, fuPlanes, targetMsc, divisor, remainder, 0);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hdc, fuPlanes, target_msc, divisor, remainder);
+    UnusedFunction(hdc, fuPlanes, targetMsc, divisor, remainder);
 
     return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglWaitForMscOML(WindowsHdc hdc, WindowsInt64 target_msc, WindowsInt64 divisor, WindowsInt64 remainder, WindowsInt64* ust, WindowsInt64* msc, WindowsInt64* sbc) noexcept
+System::WindowsBool System::WglWaitForMscOML(WindowsHdc hdc, WindowsInt64 targetMsc, WindowsInt64 divisor, WindowsInt64 remainder, WindowsInt64* ust, WindowsInt64* msc, WindowsInt64* sbc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_7_RESULT(wglWaitForMscOML, hdc, target_msc, divisor, remainder, ust, msc, sbc, gFalse);
+    SYSTEM_BODY_7_RESULT(wglWaitForMscOML, hdc, targetMsc, divisor, remainder, ust, msc, sbc, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hdc, target_msc, divisor, remainder, ust, msc, sbc);
+    UnusedFunction(hdc, targetMsc, divisor, remainder, ust, msc, sbc);
 
     return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglWaitForSbcOML(WindowsHdc hdc, WindowsInt64 target_sbc, WindowsInt64* ust, WindowsInt64* msc, WindowsInt64* sbc) noexcept
+System::WindowsBool System::WglWaitForSbcOML(WindowsHdc hdc, WindowsInt64 targetSbc, WindowsInt64* ust, WindowsInt64* msc, WindowsInt64* sbc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    SYSTEM_BODY_5_RESULT(wglWaitForSbcOML, hdc, target_sbc, ust, msc, sbc, gFalse);
+    SYSTEM_BODY_5_RESULT(wglWaitForSbcOML, hdc, targetSbc, ust, msc, sbc, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hdc, target_sbc, ust, msc, sbc);
+    UnusedFunction(hdc, targetSbc, ust, msc, sbc);
 
     return gFalse;
 
@@ -4472,9 +4472,9 @@ bool System::InitWgl()
     InitWglArbCreateContextNoError();
     InitWglArbCreateContextProfile();
     InitWglArbCreateContextRobustness();
-    InitWglArbFramebufferSRGB();
+    InitWglArbFrameBuffersRGB();
     InitWglArbMakeCurrentRead();
-    InitWglArbMultisample();
+    InitWglArbMultiSample();
     InitWglArbPBuffer();
     InitWglArbPixelFormat();
     InitWglArbPixelFormatFloat();
@@ -4482,23 +4482,23 @@ bool System::InitWgl()
     InitWglArbRobustnessApplicationIsolation();
     InitWglArbRobustnessShareGroupIsolation();
 
-    InitWgl3DFXMultisample();
+    InitWgl3DfxMultiSample();
 
-    InitWgl3DLStereoControl();
+    InitWgl3DlStereoControl();
 
     InitWglAMDGpuAssociation();
 
     InitWglATIPixelFormatFloat();
     InitWglATIRenderTextureRectangle();
 
-    InitWglExtColorspace();
+    InitWglExtColorSpace();
     InitWglExtCreateContextEs2Profile();
     InitWglExtCreateContextEsProfile();
     InitWglExtDepthFloat();
     InitWglExtDisplayColorTable();
-    InitWglExtFramebufferSRGB();
+    InitWglExtFrameBuffersRGB();
     InitWglExtMakeCurrentRead();
-    InitWglExtMultisample();
+    InitWglExtMultiSample();
     InitWglExtPBuffer();
     InitWglExtPixelFormat();
     InitWglExtPixelFormatPackedFloat();
@@ -4507,25 +4507,25 @@ bool System::InitWgl()
 
     InitWglI3DDigitalVideoControl();
     InitWglI3DGamma();
-    InitWglI3DGenlock();
+    InitWglI3DGenLock();
     InitWglI3DImageBuffer();
     InitWglI3DSwapFrameUsage();
 
-    InitWglNVDXIntero();
-    InitWglNVDXIntero2();
-    InitWglNVCopyImage();
-    InitWglNVDelayBeforeSwap();
-    InitWglNVFloatBuffer();
-    InitWglNVGpuAffinity();
-    InitWglNVMultigpuContext();
-    InitWglNVMultisampleCoverage();
-    InitWglNVPresentVideo();
-    InitWglNVRenderDepthTexture();
-    InitWglNVRenderTextureRectangle();
-    InitWglNVSwapGroup();
-    InitWglNVVertexArrayRange();
-    InitWglNVVideoCapture();
-    InitWglNVVideoOutput();
+    InitWglNvDxInterop();
+    InitWglNvDxInterop2();
+    InitWglNvCopyImage();
+    InitWglNvDelayBeforeSwap();
+    InitWglNvFloatBuffer();
+    InitWglNvGpuAffinity();
+    InitWglNvMultiGpuContext();
+    InitWglNvMultiSampleCoverage();
+    InitWglNvPresentVideo();
+    InitWglNvRenderDepthTexture();
+    InitWglNvRenderTextureRectangle();
+    InitWglNvSwapGroup();
+    InitWglNvVertexArrayRange();
+    InitWglNvVideoCapture();
+    InitWglNvVideoOutput();
 
     InitWglOMLSyncControl();
 

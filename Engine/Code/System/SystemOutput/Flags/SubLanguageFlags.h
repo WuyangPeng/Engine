@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:24)
+/// 版本：1.0.0.6 (2024/02/28 10:14)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_SUB_LANGUAGE_FLAGS_H
 #define SYSTEM_SYSTEM_OUTPUT_SUB_LANGUAGE_FLAGS_H
@@ -16,7 +16,7 @@ namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    // 不赞成使用子语言ID概念，请改用语言环境名称，例如“en-US”，而不是类似0x0409的LCID。
+    /// 不赞成使用子语言ID概念，请改用语言环境名称，例如“en-US”，而不是类似0x0409的LCID。
     enum class SubLanguage
     {
         Neutral = SUBLANG_NEUTRAL,  // 语言中立
@@ -180,7 +180,7 @@ namespace System
         ScottishGaelic = SUBLANG_SCOTTISH_GAELIC,  // 苏格兰盖尔语（英国）
         SerbianBosniaHerzegovinaLatin = SUBLANG_SERBIAN_BOSNIA_HERZEGOVINA_LATIN,  // 塞尔维亚语（波斯尼亚和黑塞哥维那 - 拉丁语）
         SerbianBosniaHerzegovinaCyrillic = SUBLANG_SERBIAN_BOSNIA_HERZEGOVINA_CYRILLIC,  // 塞尔维亚语（波斯尼亚和黑塞哥维那 - 西里尔文）
-        SerbianMontenegroLatn = SUBLANG_SERBIAN_MONTENEGRO_LATIN,  // 塞尔维亚语（黑山 - 拉丁语）
+        SerbianMontenegroLatin = SUBLANG_SERBIAN_MONTENEGRO_LATIN,  // 塞尔维亚语（黑山 - 拉丁语）
         SerbianMontenegroCyrillic = SUBLANG_SERBIAN_MONTENEGRO_CYRILLIC,  // 塞尔维亚语（黑山 - 西里尔文）
         SerbianSerbiaLatin = SUBLANG_SERBIAN_SERBIA_LATIN,  // 塞尔维亚语（塞尔维亚 - 拉丁语）
         SerbianSerbiaCyrillic = SUBLANG_SERBIAN_SERBIA_CYRILLIC,  // 塞尔维亚语（塞尔维亚 - 西里尔文）
@@ -412,7 +412,7 @@ namespace System
         ScottishGaelic = 0x01,
         SerbianBosniaHerzegovinaLatin = 0x06,
         SerbianBosniaHerzegovinaCyrillic = 0x07,
-        SerbianMontenegroLatn = 0x0b,
+        SerbianMontenegroLatin = 0x0b,
         SerbianMontenegroCyrillic = 0x0c,
         SerbianSerbiaLatin = 0x09,
         SerbianSerbiaCyrillic = 0x0a,

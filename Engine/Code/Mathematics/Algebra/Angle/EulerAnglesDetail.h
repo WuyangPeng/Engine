@@ -99,4 +99,13 @@ void Mathematics::Algebra::EulerAngles<Real>::SetAngle(Real aAngle0, Real aAngle
     angle = { aAngle0, aAngle1, aAngle2 };
 }
 
+template <typename Real>
+requires(std::is_arithmetic_v<Real>)
+bool Mathematics::Algebra::EulerAngles<Real>::AxisIsEffective() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return 0 <= axis.at(0) && axis.at(0) < 3 && 0 <= axis.at(1) && axis.at(1) < 3 && 0 <= axis.at(2) && axis.at(2) < 3 && axis.at(0) != axis.at(1) && axis.at(1) != axis.at(2);
+}
+
 #endif  // MATHEMATICS_ALGEBRA_ALGEBRA_EULER_ANGLES_DETAIL_H

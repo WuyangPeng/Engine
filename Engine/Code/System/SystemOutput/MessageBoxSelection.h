@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:24)
+/// 版本：1.0.0.6 (2024/02/28 10:15)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_MESSAGE_BOX_SELECTION_H
 #define SYSTEM_SYSTEM_OUTPUT_MESSAGE_BOX_SELECTION_H
@@ -17,7 +17,7 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
-// 弹出消息选择框。
+/// 弹出消息选择框。
 namespace System
 {
     NODISCARD DialogBoxCommand SYSTEM_DEFAULT_DECLARE MessageBoxSelectionWithChar(const char* text, const char* caption) noexcept;

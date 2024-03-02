@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:59)
+/// 版本：1.0.0.6 (2024/02/27 17:37)
 
 #ifndef SYSTEM_THREADING_PROCESS_FLAGS_H
 #define SYSTEM_THREADING_PROCESS_FLAGS_H
@@ -48,7 +48,7 @@ namespace System
         ProcessModeBackgroundEnd = PROCESS_MODE_BACKGROUND_END,
 
         CreateBreakawayFromJob = CREATE_BREAKAWAY_FROM_JOB,
-        CreatePreserveCodeAuthzLevel = CREATE_PRESERVE_CODE_AUTHZ_LEVEL,
+        CreatePreserveCodeAuthorizationLevel = CREATE_PRESERVE_CODE_AUTHZ_LEVEL,
         CreateDefaultErrorMode = CREATE_DEFAULT_ERROR_MODE,
         CreateNoWindow = CREATE_NO_WINDOW,
 
@@ -119,7 +119,7 @@ namespace System
         ProcessModeBackgroundEnd = 0x00200000,
 
         CreateBreakawayFromJob = 0x01000000,
-        CreatePreserveCodeAuthzLevel = 0x02000000,
+        CreatePreserveCodeAuthorizationLevel = 0x02000000,
         CreateDefaultErrorMode = 0x04000000,
         CreateNoWindow = 0x08000000,
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:11)
+/// 版本：1.0.0.6 (2024/03/01 17:37)
 
 #ifndef SYSTEM_OPENGL_OPEN_GL_UTILITY_H
 #define SYSTEM_OPENGL_OPEN_GL_UTILITY_H
@@ -24,7 +24,7 @@ namespace System
 
     MAYBE_NULLPTR SYSTEM_DEFAULT_DECLARE void* GetFunctionPointer(const char* glFunction) noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE IsOpenGLSupportsExtension(const std::string& extension);
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE IsOpenGLSupportsExtension(const std::string& extension) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE IsWglSupportsExtension(const char* wglExtension);
 }
 

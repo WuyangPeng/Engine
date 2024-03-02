@@ -77,24 +77,24 @@ void System::InitOpenGL32() noexcept
     }
 }
 
-void System::GLDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, const void* indices, GLint basevertex) noexcept
+void System::GLDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, const void* indices, GLint baseVertex) noexcept
 {
-    SYSTEM_BODY_5(glDrawElementsBaseVertex, mode, count, type, indices, basevertex);
+    SYSTEM_BODY_5(glDrawElementsBaseVertex, mode, count, type, indices, baseVertex);
 }
 
-void System::GLDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void* indices, GLint basevertex) noexcept
+void System::GLDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void* indices, GLint baseVertex) noexcept
 {
-    SYSTEM_BODY_7(glDrawRangeElementsBaseVertex, mode, start, end, count, type, indices, basevertex);
+    SYSTEM_BODY_7(glDrawRangeElementsBaseVertex, mode, start, end, count, type, indices, baseVertex);
 }
 
-void System::GLDrawElementsInstancedBaseVertex(GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei instancecount, GLint basevertex) noexcept
+void System::GLDrawElementsInstancedBaseVertex(GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei instanceCount, GLint baseVertex) noexcept
 {
-    SYSTEM_BODY_6(glDrawElementsInstancedBaseVertex, mode, count, type, indices, instancecount, basevertex);
+    SYSTEM_BODY_6(glDrawElementsInstancedBaseVertex, mode, count, type, indices, instanceCount, baseVertex);
 }
 
-void System::GLMultiDrawElementsBaseVertex(GLenum mode, const GLsizei* count, GLenum type, const void* const* indices, GLsizei drawcount, const GLint* basevertex) noexcept
+void System::GLMultiDrawElementsBaseVertex(GLenum mode, const GLsizei* count, GLenum type, const void* const* indices, GLsizei drawCount, const GLint* baseVertex) noexcept
 {
-    SYSTEM_BODY_6(glMultiDrawElementsBaseVertex, mode, count, type, indices, drawcount, basevertex);
+    SYSTEM_BODY_6(glMultiDrawElementsBaseVertex, mode, count, type, indices, drawCount, baseVertex);
 }
 
 void System::GLProvokingVertex(GLenum mode) noexcept
@@ -127,47 +127,47 @@ void System::GLWaitSync(GLsync sync, GLbitfield flags, GLuint64 timeout) noexcep
     SYSTEM_BODY_3(glWaitSync, sync, flags, timeout);
 }
 
-void System::GLGetInteger64v(GLenum pname, GLint64* data) noexcept
+void System::GLGetInteger64V(GLenum pName, GLint64* data) noexcept
 {
-    SYSTEM_BODY_2(glGetInteger64v, pname, data);
+    SYSTEM_BODY_2(glGetInteger64v, pName, data);
 }
 
-void System::GLGetSynciv(GLsync sync, GLenum pname, GLsizei count, GLsizei* length, GLint* values) noexcept
+void System::GLGetSyncIv(GLsync sync, GLenum pName, GLsizei count, GLsizei* length, GLint* values) noexcept
 {
-    SYSTEM_BODY_5(glGetSynciv, sync, pname, count, length, values);
+    SYSTEM_BODY_5(glGetSynciv, sync, pName, count, length, values);
 }
 
-void System::GLGetInteger64i_v(GLenum target, GLuint index, GLint64* data) noexcept
+void System::GLGetInteger64Iv(GLenum target, GLuint index, GLint64* data) noexcept
 {
     SYSTEM_BODY_3(glGetInteger64i_v, target, index, data);
 }
 
-void System::GLGetBufferParameteri64v(GLenum target, GLenum pname, GLint64* params) noexcept
+void System::GLGetBufferParameterI64V(GLenum target, GLenum pName, GLint64* params) noexcept
 {
-    SYSTEM_BODY_3(glGetBufferParameteri64v, target, pname, params);
+    SYSTEM_BODY_3(glGetBufferParameteri64v, target, pName, params);
 }
 
-void System::GLFramebufferTexture(GLenum target, GLenum attachment, GLuint texture, GLint level) noexcept
+void System::GLFrameBufferTexture(GLenum target, GLenum attachment, GLuint texture, GLint level) noexcept
 {
     SYSTEM_BODY_4(glFramebufferTexture, target, attachment, texture, level);
 }
 
-void System::GLTexImage2DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations) noexcept
+void System::GLTexImage2DMultiSample(GLenum target, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations) noexcept
 {
-    SYSTEM_BODY_6(glTexImage2DMultisample, target, samples, internalformat, width, height, fixedsamplelocations);
+    SYSTEM_BODY_6(glTexImage2DMultisample, target, samples, internalFormat, width, height, fixedSampleLocations);
 }
 
-void System::GLTexImage3DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations) noexcept
+void System::GLTexImage3DMultiSample(GLenum target, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations) noexcept
 {
-    SYSTEM_BODY_7(glTexImage3DMultisample, target, samples, internalformat, width, height, depth, fixedsamplelocations);
+    SYSTEM_BODY_7(glTexImage3DMultisample, target, samples, internalFormat, width, height, depth, fixedSampleLocations);
 }
 
-void System::GLGetMultisamplefv(GLenum pname, GLuint index, GLfloat* val) noexcept
+void System::GLGetMultiSampleFv(GLenum pName, GLuint index, GLfloat* val) noexcept
 {
-    SYSTEM_BODY_3(glGetMultisamplefv, pname, index, val);
+    SYSTEM_BODY_3(glGetMultisamplefv, pName, index, val);
 }
 
-void System::GLSampleMaski(GLuint maskNumber, GLbitfield mask) noexcept
+void System::GLSampleMaskI(GLuint maskNumber, GLbitfield mask) noexcept
 {
     SYSTEM_BODY_2(glSampleMaski, maskNumber, mask);
 }

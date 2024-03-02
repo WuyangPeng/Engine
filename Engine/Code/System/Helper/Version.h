@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:59)
+/// 版本：1.0.0.6 (2024/02/21 09:20)
 
 #ifndef SYSTEM_HELPER_VERSION_H
 #define SYSTEM_HELPER_VERSION_H
@@ -15,6 +15,6 @@
 /// gTCREVersion / 10000 % 100 是次版本号
 /// gTCREVersion / 1000000 % 100 是主版本号
 
-constexpr auto gTCREVersion = 1000004;
+constexpr auto gTCREVersion = 1000006;
 
 #endif  // SYSTEM_HELPER_VERSION_H

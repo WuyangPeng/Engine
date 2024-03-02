@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:47)
+/// 版本：1.0.0.6 (2024/02/26 13:43)
 
 #include "System/SystemExport.h"
 
@@ -18,10 +18,7 @@ bool System::PostSystemThreadMessage(WindowsDWord threadId, WindowsMessages mess
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::PostThreadMessage(threadId, EnumCastUnderlying(message), wParam, lParam) != gFalse)
-        return true;
-    else
-        return false;
+    return ::PostThreadMessage(threadId, EnumCastUnderlying(message), wParam, lParam) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -36,10 +33,7 @@ bool System::SystemInvalidateRect(WindowsHWnd hWnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::InvalidateRect(hWnd, nullptr, gTrue) != gFalse)
-        return true;
-    else
-        return false;
+    return ::InvalidateRect(hWnd, nullptr, gTrue) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -54,10 +48,7 @@ bool System::UpdateSystemWindows(WindowsHWnd hWnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::UpdateWindow(hWnd) != gFalse)
-        return true;
-    else
-        return false;
+    return ::UpdateWindow(hWnd) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

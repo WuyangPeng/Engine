@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:11)
+/// 版本：1.0.0.6 (2024/03/01 17:35)
 
 #ifndef SYSTEM_OPENGL_OPENGL_BUFFERS_H
 #define SYSTEM_OPENGL_OPENGL_BUFFERS_H
@@ -49,7 +49,7 @@ namespace System
 
     void SYSTEM_DEFAULT_DECLARE SetGLDrawBuffers(OpenGLSize n, const OpenGLEnum* buffers) noexcept;
 
-    NODISCARD SYSTEM_DEFAULT_DECLARE void* GetGLMapForWrite(BindBuffer target, OpenGLUInt buffer) noexcept;
+    MAYBE_NULLPTR SYSTEM_DEFAULT_DECLARE void* GetGLMapForWrite(BindBuffer target, OpenGLUInt buffer) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLUnmap(BindBuffer target, OpenGLUInt buffer) noexcept;
 
     SYSTEM_DEFAULT_DECLARE void SetGLUniformBlockBinding(OpenGLUInt program, OpenGLUInt uniformBlockIndex, OpenGLUInt uniformBlockBinding) noexcept;

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:19)
+/// 版本：1.0.0.6 (2024/02/27 18:04)
 
 #include "System/SystemExport.h"
 
@@ -20,8 +20,7 @@
 
 #include <gsl/util>
 
-System::WindowsHandle
-    System::CreateSystemMutex(WindowSecurityAttributesPtr mutexAttributes, bool initialOwner, const TChar* name) noexcept
+System::WindowsHandle System::CreateSystemMutex(WindowSecurityAttributesPtr mutexAttributes, bool initialOwner, const TChar* name) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -60,10 +59,7 @@ bool System::CloseSystemMutex(WindowsHandle handle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(handle) != gFalse)
-        return true;
-    else
-        return false;
+    return ::CloseHandle(handle) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -78,10 +74,7 @@ bool System::ReleaseSystemMutex(WindowsHandle handle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::ReleaseMutex(handle) != gFalse)
-        return true;
-    else
-        return false;
+    return ::ReleaseMutex(handle) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -188,7 +181,7 @@ System::PThreadResult System::PThreadMutexAttributeSetType(PThreadMutexAttrT* at
 
     UnusedFunction(attribute);
 
-    return PThreadResult::ENomem;
+    return PThreadResult::ENoMem;
 
 #endif  // defined(SYSTEM_PLATFORM_LINUX) || defined(SYSTEM_PLATFORM_MACOS)
 }
@@ -207,13 +200,13 @@ System::PThreadResult System::PThreadMutexAttributeInit(PThreadMutexAttrT* attri
     if (attribute != nullptr)
         return PThreadResult::Successful;
     else
-        return PThreadResult::ENomem;
+        return PThreadResult::ENoMem;
 
 #else  // !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_WIN32
 
     UnusedFunction(attribute);
 
-    return PThreadResult::ENomem;
+    return PThreadResult::ENoMem;
 
 #endif  // defined(SYSTEM_PLATFORM_LINUX) || defined(SYSTEM_PLATFORM_MACOS)
 }
@@ -228,7 +221,7 @@ System::PThreadResult System::PThreadMutexInit(PThreadMutexAttrT* attribute, PTh
 
     if (attribute == nullptr || mutex == nullptr)
     {
-        return PThreadResult::EInval;
+        return PThreadResult::EInVal;
     }
     else
     {
@@ -236,14 +229,14 @@ System::PThreadResult System::PThreadMutexInit(PThreadMutexAttrT* attribute, PTh
         if (*mutex != nullptr)
             return PThreadResult::Successful;
         else
-            return PThreadResult::EInval;
+            return PThreadResult::EInVal;
     }
 
 #else  // !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_WIN32
 
     UnusedFunction(attribute, mutex);
 
-    return PThreadResult::EInval;
+    return PThreadResult::EInVal;
 
 #endif  // defined(SYSTEM_PLATFORM_LINUX) || defined(SYSTEM_PLATFORM_MACOS)
 }
@@ -259,13 +252,13 @@ System::PThreadResult System::PThreadMutexAttributeDestroy(PThreadMutexAttrT* at
     if (attribute != nullptr)
         return PThreadResult::Successful;
     else
-        return PThreadResult::EInval;
+        return PThreadResult::EInVal;
 
 #else  // !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_WIN32
 
     UnusedFunction(attribute);
 
-    return PThreadResult::EInval;
+    return PThreadResult::EInVal;
 
 #endif  // defined(SYSTEM_PLATFORM_LINUX) || defined(SYSTEM_PLATFORM_MACOS)
 }
@@ -281,17 +274,17 @@ System::PThreadResult System::PThreadMutexDestroy(PThreadMutexT* mutex) noexcept
 #elif defined(SYSTEM_PLATFORM_WIN32)
 
     if (mutex == nullptr)
-        return PThreadResult::EInval;
+        return PThreadResult::EInVal;
     else if (CloseSystemMutex(*mutex))
         return PThreadResult::Successful;
     else
-        return PThreadResult::EInval;
+        return PThreadResult::EInVal;
 
 #else  // !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_WIN32
 
     UnusedFunction(mutex);
 
-    return PThreadResult::EInval;
+    return PThreadResult::EInVal;
 
 #endif  // defined(SYSTEM_PLATFORM_LINUX) || defined(SYSTEM_PLATFORM_MACOS)
 }
@@ -305,17 +298,17 @@ System::PThreadResult System::PThreadMutexLock(PThreadMutexT* mutex) noexcept
 #elif defined(SYSTEM_PLATFORM_WIN32)
 
     if (mutex == nullptr)
-        return PThreadResult::EInval;
+        return PThreadResult::EInVal;
     else if (WaitForSystemMutex(*mutex))
         return PThreadResult::Successful;
     else
-        return PThreadResult::EInval;
+        return PThreadResult::EInVal;
 
 #else  // !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_WIN32
 
     UnusedFunction(mutex);
 
-    return PThreadResult::EInval;
+    return PThreadResult::EInVal;
 
 #endif  // defined(SYSTEM_PLATFORM_LINUX) || defined(SYSTEM_PLATFORM_MACOS)
 }
@@ -329,17 +322,17 @@ System::PThreadResult System::PThreadMutexUnlock(PThreadMutexT* mutex) noexcept
 #elif defined(SYSTEM_PLATFORM_WIN32)
 
     if (mutex == nullptr)
-        return PThreadResult::EInval;
+        return PThreadResult::EInVal;
     else if (ReleaseSystemMutex(*mutex))
         return PThreadResult::Successful;
     else
-        return PThreadResult::EInval;
+        return PThreadResult::EInVal;
 
 #else  // !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_WIN32
 
     UnusedFunction(mutex);
 
-    return PThreadResult::EInval;
+    return PThreadResult::EInVal;
 
 #endif  // defined(SYSTEM_PLATFORM_LINUX) || defined(SYSTEM_PLATFORM_MACOS)
 }
@@ -353,25 +346,22 @@ System::PThreadResult System::PThreadMutexTryLock(PThreadMutexT* mutex) noexcept
 #elif defined(SYSTEM_PLATFORM_WIN32)
 
     if (mutex == nullptr)
-        return PThreadResult::EInval;
+        return PThreadResult::EInVal;
     else if (WaitForSystemMutex(*mutex, EnumCastUnderlying(MutexWait::Ignore)) == MutexWaitReturn::Object0)
         return PThreadResult::Successful;
     else
-        return PThreadResult::EInval;
+        return PThreadResult::EInVal;
 
 #else  // !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_WIN32
 
     UnusedFunction(mutex);
 
-    return PThreadResult::EInval;
+    return PThreadResult::EInVal;
 
 #endif  // defined(SYSTEM_PLATFORM_LINUX) || defined(SYSTEM_PLATFORM_MACOS)
 }
 
 bool System::IsSystemMutexValid(WindowsHandle handle) noexcept
 {
-    if (handle != nullptr && handle != invalidHandleValue)
-        return true;
-    else
-        return false;
+    return handle != nullptr && handle != invalidHandleValue;
 }

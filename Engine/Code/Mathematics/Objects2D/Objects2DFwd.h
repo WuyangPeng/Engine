@@ -13,6 +13,7 @@
 namespace Mathematics
 {
     template <typename Real>
+    requires std::is_arithmetic_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Arc2;
 
     template <typename Real>
@@ -44,6 +45,17 @@ namespace Mathematics
 
     template <typename Real>
     class ConvexPolygon2;
+
+    template <typename Real>
+    requires std::is_arithmetic_v<Real>
+    class Sector2;
+
+    namespace Algebra
+    {
+        template <typename Real>
+        requires std::is_arithmetic_v<Real>
+        class Polygon2;
+    }
 }
 
 #endif  // MATHEMATICS_OBJECTS_2D_FWD_H

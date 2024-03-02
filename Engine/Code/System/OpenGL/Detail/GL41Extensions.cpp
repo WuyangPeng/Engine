@@ -225,17 +225,17 @@ void System::GLShaderBinary(GLsizei count, const GLuint* shaders, GLenum binaryF
     SYSTEM_BODY_5(glShaderBinary, count, shaders, binaryFormat, binary, length);
 }
 
-void System::GLGetShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype, GLint* range, GLint* precision) noexcept
+void System::GLGetShaderPrecisionFormat(GLenum shaderType, GLenum precisionType, GLint* range, GLint* precision) noexcept
 {
-    SYSTEM_BODY_4(glGetShaderPrecisionFormat, shadertype, precisiontype, range, precision);
+    SYSTEM_BODY_4(glGetShaderPrecisionFormat, shaderType, precisionType, range, precision);
 }
 
-void System::GLDepthRangef(GLfloat n, GLfloat f) noexcept
+void System::GLDepthRangeF(GLfloat n, GLfloat f) noexcept
 {
     SYSTEM_BODY_2(glDepthRangef, n, f);
 }
 
-void System::GLClearDepthf(GLfloat d) noexcept
+void System::GLClearDepthF(GLfloat d) noexcept
 {
     SYSTEM_BODY_1(glClearDepthf, d);
 }
@@ -250,9 +250,9 @@ void System::GLProgramBinary(GLuint program, GLenum binaryFormat, const void* bi
     SYSTEM_BODY_4(glProgramBinary, program, binaryFormat, binary, length);
 }
 
-void System::GLProgramParameteri(GLuint program, GLenum pname, GLint value) noexcept
+void System::GLProgramParameterI(GLuint program, GLenum pName, GLint value) noexcept
 {
-    SYSTEM_BODY_3(glProgramParameteri, program, pname, value);
+    SYSTEM_BODY_3(glProgramParameteri, program, pName, value);
 }
 
 void System::GLUseProgramStages(GLuint pipeline, GLbitfield stages, GLuint program) noexcept
@@ -265,7 +265,7 @@ void System::GLActiveShaderProgram(GLuint pipeline, GLuint program) noexcept
     SYSTEM_BODY_2(glActiveShaderProgram, pipeline, program);
 }
 
-GLuint System::GLCreateShaderProgramv(GLenum type, GLsizei count, const GLchar* const* strings) noexcept
+GLuint System::GLCreateShaderProgramV(GLenum type, GLsizei count, const GLchar* const* strings) noexcept
 {
     SYSTEM_BODY_3_RESULT(glCreateShaderProgramv, type, count, strings, 0u);
 }
@@ -290,27 +290,27 @@ GLboolean System::GLIsProgramPipeline(GLuint pipeline) noexcept
     SYSTEM_BODY_1_RESULT(glIsProgramPipeline, pipeline, GL_FALSE);
 }
 
-void System::GLGetProgramPipelineiv(GLuint pipeline, GLenum pname, GLint* params) noexcept
+void System::GLGetProgramPipelineIv(GLuint pipeline, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_BODY_3(glGetProgramPipelineiv, pipeline, pname, params);
+    SYSTEM_BODY_3(glGetProgramPipelineiv, pipeline, pName, params);
 }
 
-void System::GLProgramUniform1i(GLuint program, GLint location, GLint v0) noexcept
+void System::GLProgramUniform1I(GLuint program, GLint location, GLint v0) noexcept
 {
     SYSTEM_BODY_3(glProgramUniform1i, program, location, v0);
 }
 
-void System::GLProgramUniform1iv(GLuint program, GLint location, GLsizei count, const GLint* value) noexcept
+void System::GLProgramUniform1Iv(GLuint program, GLint location, GLsizei count, const GLint* value) noexcept
 {
     SYSTEM_BODY_4(glProgramUniform1iv, program, location, count, value);
 }
 
-void System::GLProgramUniform1f(GLuint program, GLint location, GLfloat v0) noexcept
+void System::GLProgramUniform1F(GLuint program, GLint location, GLfloat v0) noexcept
 {
     SYSTEM_BODY_3(glProgramUniform1f, program, location, v0);
 }
 
-void System::GLProgramUniform1fv(GLuint program, GLint location, GLsizei count, const GLfloat* value) noexcept
+void System::GLProgramUniform1Fv(GLuint program, GLint location, GLsizei count, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_4(glProgramUniform1fv, program, location, count, value);
 }
@@ -325,32 +325,32 @@ void System::GLProgramUniform1dv(GLuint program, GLint location, GLsizei count, 
     SYSTEM_BODY_4(glProgramUniform1dv, program, location, count, value);
 }
 
-void System::GLProgramUniform1ui(GLuint program, GLint location, GLuint v0) noexcept
+void System::GLProgramUniform1Ui(GLuint program, GLint location, GLuint v0) noexcept
 {
     SYSTEM_BODY_3(glProgramUniform1ui, program, location, v0);
 }
 
-void System::GLProgramUniform1uiv(GLuint program, GLint location, GLsizei count, const GLuint* value) noexcept
+void System::GLProgramUniform1Uiv(GLuint program, GLint location, GLsizei count, const GLuint* value) noexcept
 {
     SYSTEM_BODY_4(glProgramUniform1uiv, program, location, count, value);
 }
 
-void System::GLProgramUniform2i(GLuint program, GLint location, GLint v0, GLint v1) noexcept
+void System::GLProgramUniform2I(GLuint program, GLint location, GLint v0, GLint v1) noexcept
 {
     SYSTEM_BODY_4(glProgramUniform2i, program, location, v0, v1);
 }
 
-void System::GLProgramUniform2iv(GLuint program, GLint location, GLsizei count, const GLint* value) noexcept
+void System::GLProgramUniform2Iv(GLuint program, GLint location, GLsizei count, const GLint* value) noexcept
 {
     SYSTEM_BODY_4(glProgramUniform2iv, program, location, count, value);
 }
 
-void System::GLProgramUniform2f(GLuint program, GLint location, GLfloat v0, GLfloat v1) noexcept
+void System::GLProgramUniform2F(GLuint program, GLint location, GLfloat v0, GLfloat v1) noexcept
 {
     SYSTEM_BODY_4(glProgramUniform2f, program, location, v0, v1);
 }
 
-void System::GLProgramUniform2fv(GLuint program, GLint location, GLsizei count, const GLfloat* value) noexcept
+void System::GLProgramUniform2Fv(GLuint program, GLint location, GLsizei count, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_4(glProgramUniform2fv, program, location, count, value);
 }
@@ -365,32 +365,32 @@ void System::GLProgramUniform2dv(GLuint program, GLint location, GLsizei count, 
     SYSTEM_BODY_4(glProgramUniform2dv, program, location, count, value);
 }
 
-void System::GLProgramUniform2ui(GLuint program, GLint location, GLuint v0, GLuint v1) noexcept
+void System::GLProgramUniform2Ui(GLuint program, GLint location, GLuint v0, GLuint v1) noexcept
 {
     SYSTEM_BODY_4(glProgramUniform2ui, program, location, v0, v1);
 }
 
-void System::GLProgramUniform2uiv(GLuint program, GLint location, GLsizei count, const GLuint* value) noexcept
+void System::GLProgramUniform2Uiv(GLuint program, GLint location, GLsizei count, const GLuint* value) noexcept
 {
     SYSTEM_BODY_4(glProgramUniform2uiv, program, location, count, value);
 }
 
-void System::GLProgramUniform3i(GLuint program, GLint location, GLint v0, GLint v1, GLint v2) noexcept
+void System::GLProgramUniform3I(GLuint program, GLint location, GLint v0, GLint v1, GLint v2) noexcept
 {
     SYSTEM_BODY_5(glProgramUniform3i, program, location, v0, v1, v2);
 }
 
-void System::GLProgramUniform3iv(GLuint program, GLint location, GLsizei count, const GLint* value) noexcept
+void System::GLProgramUniform3Iv(GLuint program, GLint location, GLsizei count, const GLint* value) noexcept
 {
     SYSTEM_BODY_4(glProgramUniform3iv, program, location, count, value);
 }
 
-void System::GLProgramUniform3f(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2) noexcept
+void System::GLProgramUniform3F(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2) noexcept
 {
     SYSTEM_BODY_5(glProgramUniform3f, program, location, v0, v1, v2);
 }
 
-void System::GLProgramUniform3fv(GLuint program, GLint location, GLsizei count, const GLfloat* value) noexcept
+void System::GLProgramUniform3Fv(GLuint program, GLint location, GLsizei count, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_4(glProgramUniform3fv, program, location, count, value);
 }
@@ -405,32 +405,32 @@ void System::GLProgramUniform3dv(GLuint program, GLint location, GLsizei count, 
     SYSTEM_BODY_4(glProgramUniform3dv, program, location, count, value);
 }
 
-void System::GLProgramUniform3ui(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2) noexcept
+void System::GLProgramUniform3Ui(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2) noexcept
 {
     SYSTEM_BODY_5(glProgramUniform3ui, program, location, v0, v1, v2);
 }
 
-void System::GLProgramUniform3uiv(GLuint program, GLint location, GLsizei count, const GLuint* value) noexcept
+void System::GLProgramUniform3Uiv(GLuint program, GLint location, GLsizei count, const GLuint* value) noexcept
 {
     SYSTEM_BODY_4(glProgramUniform3uiv, program, location, count, value);
 }
 
-void System::GLProgramUniform4i(GLuint program, GLint location, GLint v0, GLint v1, GLint v2, GLint v3) noexcept
+void System::GLProgramUniform4I(GLuint program, GLint location, GLint v0, GLint v1, GLint v2, GLint v3) noexcept
 {
     SYSTEM_BODY_6(glProgramUniform4i, program, location, v0, v1, v2, v3);
 }
 
-void System::GLProgramUniform4iv(GLuint program, GLint location, GLsizei count, const GLint* value) noexcept
+void System::GLProgramUniform4Iv(GLuint program, GLint location, GLsizei count, const GLint* value) noexcept
 {
     SYSTEM_BODY_4(glProgramUniform4iv, program, location, count, value);
 }
 
-void System::GLProgramUniform4f(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3) noexcept
+void System::GLProgramUniform4F(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3) noexcept
 {
     SYSTEM_BODY_6(glProgramUniform4f, program, location, v0, v1, v2, v3);
 }
 
-void System::GLProgramUniform4fv(GLuint program, GLint location, GLsizei count, const GLfloat* value) noexcept
+void System::GLProgramUniform4Fv(GLuint program, GLint location, GLsizei count, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_4(glProgramUniform4fv, program, location, count, value);
 }
@@ -445,27 +445,27 @@ void System::GLProgramUniform4dv(GLuint program, GLint location, GLsizei count, 
     SYSTEM_BODY_4(glProgramUniform4dv, program, location, count, value);
 }
 
-void System::GLProgramUniform4ui(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3) noexcept
+void System::GLProgramUniform4Ui(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3) noexcept
 {
     SYSTEM_BODY_6(glProgramUniform4ui, program, location, v0, v1, v2, v3);
 }
 
-void System::GLProgramUniform4uiv(GLuint program, GLint location, GLsizei count, const GLuint* value) noexcept
+void System::GLProgramUniform4Uiv(GLuint program, GLint location, GLsizei count, const GLuint* value) noexcept
 {
     SYSTEM_BODY_4(glProgramUniform4uiv, program, location, count, value);
 }
 
-void System::GLProgramUniformMatrix2fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+void System::GLProgramUniformMatrix2Fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_5(glProgramUniformMatrix2fv, program, location, count, transpose, value);
 }
 
-void System::GLProgramUniformMatrix3fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+void System::GLProgramUniformMatrix3Fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_5(glProgramUniformMatrix3fv, program, location, count, transpose, value);
 }
 
-void System::GLProgramUniformMatrix4fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+void System::GLProgramUniformMatrix4Fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_5(glProgramUniformMatrix4fv, program, location, count, transpose, value);
 }
@@ -485,62 +485,62 @@ void System::GLProgramUniformMatrix4dv(GLuint program, GLint location, GLsizei c
     SYSTEM_BODY_5(glProgramUniformMatrix4dv, program, location, count, transpose, value);
 }
 
-void System::GLProgramUniformMatrix2x3fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+void System::GLProgramUniformMatrix2X3Fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_5(glProgramUniformMatrix2x3fv, program, location, count, transpose, value);
 }
 
-void System::GLProgramUniformMatrix3x2fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+void System::GLProgramUniformMatrix3X2Fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_5(glProgramUniformMatrix3x2fv, program, location, count, transpose, value);
 }
 
-void System::GLProgramUniformMatrix2x4fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+void System::GLProgramUniformMatrix2X4Fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_5(glProgramUniformMatrix2x4fv, program, location, count, transpose, value);
 }
 
-void System::GLProgramUniformMatrix4x2fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+void System::GLProgramUniformMatrix4X2Fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_5(glProgramUniformMatrix4x2fv, program, location, count, transpose, value);
 }
 
-void System::GLProgramUniformMatrix3x4fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+void System::GLProgramUniformMatrix3X4Fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_5(glProgramUniformMatrix3x4fv, program, location, count, transpose, value);
 }
 
-void System::GLProgramUniformMatrix4x3fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+void System::GLProgramUniformMatrix4X3Fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_5(glProgramUniformMatrix4x3fv, program, location, count, transpose, value);
 }
 
-void System::GLProgramUniformMatrix2x3dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
+void System::GLProgramUniformMatrix2X3Dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
 {
     SYSTEM_BODY_5(glProgramUniformMatrix2x3dv, program, location, count, transpose, value);
 }
 
-void System::GLProgramUniformMatrix3x2dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
+void System::GLProgramUniformMatrix3X2Dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
 {
     SYSTEM_BODY_5(glProgramUniformMatrix3x2dv, program, location, count, transpose, value);
 }
 
-void System::GLProgramUniformMatrix2x4dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
+void System::GLProgramUniformMatrix2X4Dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
 {
     SYSTEM_BODY_5(glProgramUniformMatrix2x4dv, program, location, count, transpose, value);
 }
 
-void System::GLProgramUniformMatrix4x2dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
+void System::GLProgramUniformMatrix4X2Dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
 {
     SYSTEM_BODY_5(glProgramUniformMatrix4x2dv, program, location, count, transpose, value);
 }
 
-void System::GLProgramUniformMatrix3x4dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
+void System::GLProgramUniformMatrix3X4Dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
 {
     SYSTEM_BODY_5(glProgramUniformMatrix3x4dv, program, location, count, transpose, value);
 }
 
-void System::GLProgramUniformMatrix4x3dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
+void System::GLProgramUniformMatrix4X3Dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
 {
     SYSTEM_BODY_5(glProgramUniformMatrix4x3dv, program, location, count, transpose, value);
 }
@@ -600,27 +600,27 @@ void System::GLVertexAttribLPointer(GLuint index, GLint size, GLenum type, GLsiz
     SYSTEM_BODY_5(glVertexAttribLPointer, index, size, type, stride, pointer);
 }
 
-void System::GLGetVertexAttribLdv(GLuint index, GLenum pname, GLdouble* params) noexcept
+void System::GLGetVertexAttribLdv(GLuint index, GLenum pName, GLdouble* params) noexcept
 {
-    SYSTEM_BODY_3(glGetVertexAttribLdv, index, pname, params);
+    SYSTEM_BODY_3(glGetVertexAttribLdv, index, pName, params);
 }
 
-void System::GLViewportArrayv(GLuint first, GLsizei count, const GLfloat* v) noexcept
+void System::GLViewportArrayV(GLuint first, GLsizei count, const GLfloat* v) noexcept
 {
     SYSTEM_BODY_3(glViewportArrayv, first, count, v);
 }
 
-void System::GLViewportIndexedf(GLuint index, GLfloat x, GLfloat y, GLfloat w, GLfloat h) noexcept
+void System::GLViewportIndexedF(GLuint index, GLfloat x, GLfloat y, GLfloat w, GLfloat h) noexcept
 {
     SYSTEM_BODY_5(glViewportIndexedf, index, x, y, w, h);
 }
 
-void System::GLViewportIndexedfv(GLuint index, const GLfloat* v) noexcept
+void System::GLViewportIndexedFv(GLuint index, const GLfloat* v) noexcept
 {
     SYSTEM_BODY_2(glViewportIndexedfv, index, v);
 }
 
-void System::GLScissorArrayv(GLuint first, GLsizei count, const GLint* v) noexcept
+void System::GLScissorArrayV(GLuint first, GLsizei count, const GLint* v) noexcept
 {
     SYSTEM_BODY_3(glScissorArrayv, first, count, v);
 }
@@ -630,12 +630,12 @@ void System::GLScissorIndexed(GLuint index, GLint left, GLint bottom, GLsizei wi
     SYSTEM_BODY_5(glScissorIndexed, index, left, bottom, width, height);
 }
 
-void System::GLScissorIndexedv(GLuint index, const GLint* v) noexcept
+void System::GLScissorIndexedV(GLuint index, const GLint* v) noexcept
 {
     SYSTEM_BODY_2(glScissorIndexedv, index, v);
 }
 
-void System::GLDepthRangeArrayv(GLuint first, GLsizei count, const GLdouble* v) noexcept
+void System::GLDepthRangeArrayV(GLuint first, GLsizei count, const GLdouble* v) noexcept
 {
     SYSTEM_BODY_3(glDepthRangeArrayv, first, count, v);
 }
@@ -645,12 +645,12 @@ void System::GLDepthRangeIndexed(GLuint index, GLdouble n, GLdouble f) noexcept
     SYSTEM_BODY_3(glDepthRangeIndexed, index, n, f);
 }
 
-void System::GLGetFloati_v(GLenum target, GLuint index, GLfloat* data) noexcept
+void System::GLGetFloatIv(GLenum target, GLuint index, GLfloat* data) noexcept
 {
     SYSTEM_BODY_3(glGetFloati_v, target, index, data);
 }
 
-void System::GLGetDoublei_v(GLenum target, GLuint index, GLdouble* data) noexcept
+void System::GLGetDoubleIv(GLenum target, GLuint index, GLdouble* data) noexcept
 {
     SYSTEM_BODY_3(glGetDoublei_v, target, index, data);
 }

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:47)
+/// 版本：1.0.0.6 (2024/02/26 13:42)
 
 #include "System/SystemExport.h"
 
@@ -30,10 +30,7 @@ bool System::GetNumaProcessorNodeNumber(WindowsUChar processor, WindowsUCharPtr 
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetNumaProcessorNode(processor, nodeNumber) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetNumaProcessorNode(processor, nodeNumber) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -48,10 +45,7 @@ bool System::SetSystemCurrentDirectory(const TChar* pathName) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetCurrentDirectory(pathName) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetCurrentDirectory(pathName) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -66,10 +60,7 @@ bool System::GetSystemUserName(TChar* buffer, WindowsDWord* bufferCount) noexcep
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetUserName(buffer, bufferCount) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetUserName(buffer, bufferCount) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -107,7 +98,7 @@ void System::BoolConversion(WindowsBool input, bool* result) noexcept
 {
     if (result != nullptr)
     {
-        *result = ((input != gFalse) ? true : false);
+        *result = input != gFalse;
     }
 }
 
@@ -128,10 +119,7 @@ bool System::GetSystemClientRect(WindowsHWnd hWnd, WindowsRect& windowsRect) noe
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetClientRect(hWnd, &windowsRect) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetClientRect(hWnd, &windowsRect) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

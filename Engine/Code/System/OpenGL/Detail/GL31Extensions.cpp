@@ -64,19 +64,19 @@ void System::InitOpenGL31() noexcept
     }
 }
 
-void System::GLDrawArraysInstanced(GLenum mode, GLint first, GLsizei count, GLsizei instancecount) noexcept
+void System::GLDrawArraysInstanced(GLenum mode, GLint first, GLsizei count, GLsizei instanceCount) noexcept
 {
-    SYSTEM_BODY_4(glDrawArraysInstanced, mode, first, count, instancecount);
+    SYSTEM_BODY_4(glDrawArraysInstanced, mode, first, count, instanceCount);
 }
 
-void System::GLDrawElementsInstanced(GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei instancecount) noexcept
+void System::GLDrawElementsInstanced(GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei instanceCount) noexcept
 {
-    SYSTEM_BODY_5(glDrawElementsInstanced, mode, count, type, indices, instancecount);
+    SYSTEM_BODY_5(glDrawElementsInstanced, mode, count, type, indices, instanceCount);
 }
 
-void System::GLTexBuffer(GLenum target, GLenum internalformat, GLuint buffer) noexcept
+void System::GLTexBuffer(GLenum target, GLenum internalFormat, GLuint buffer) noexcept
 {
-    SYSTEM_BODY_3(glTexBuffer, target, internalformat, buffer);
+    SYSTEM_BODY_3(glTexBuffer, target, internalFormat, buffer);
 }
 
 void System::GLPrimitiveRestartIndex(GLuint index) noexcept
@@ -94,9 +94,9 @@ void System::GLGetUniformIndices(GLuint program, GLsizei uniformCount, const GLc
     SYSTEM_BODY_4(glGetUniformIndices, program, uniformCount, uniformNames, uniformIndices);
 }
 
-void System::GLGetActiveUniformsiv(GLuint program, GLsizei uniformCount, const GLuint* uniformIndices, GLenum pname, GLint* params) noexcept
+void System::GLGetActiveUniformSiv(GLuint program, GLsizei uniformCount, const GLuint* uniformIndices, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_BODY_5(glGetActiveUniformsiv, program, uniformCount, uniformIndices, pname, params);
+    SYSTEM_BODY_5(glGetActiveUniformsiv, program, uniformCount, uniformIndices, pName, params);
 }
 
 void System::GLGetActiveUniformName(GLuint program, GLuint uniformIndex, GLsizei bufSize, GLsizei* length, GLchar* uniformName) noexcept
@@ -109,9 +109,9 @@ GLuint System::GLGetUniformBlockIndex(GLuint program, const GLchar* uniformBlock
     SYSTEM_BODY_2_RESULT(glGetUniformBlockIndex, program, uniformBlockName, 0u);
 }
 
-void System::GLGetActiveUniformBlockiv(GLuint program, GLuint uniformBlockIndex, GLenum pname, GLint* params) noexcept
+void System::GLGetActiveUniformBlockIv(GLuint program, GLuint uniformBlockIndex, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_BODY_4(glGetActiveUniformBlockiv, program, uniformBlockIndex, pname, params);
+    SYSTEM_BODY_4(glGetActiveUniformBlockiv, program, uniformBlockIndex, pName, params);
 }
 
 void System::GLGetActiveUniformBlockName(GLuint program, GLuint uniformBlockIndex, GLsizei bufSize, GLsizei* length, GLchar* uniformBlockName) noexcept

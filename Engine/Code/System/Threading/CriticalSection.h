@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:02)
+/// 版本：1.0.0.6 (2024/02/27 17:46)
 
 #ifndef SYSTEM_THREADING_CRITICAL_SECTION_H
 #define SYSTEM_THREADING_CRITICAL_SECTION_H
@@ -16,7 +16,7 @@
 #include "Using/CriticalSectionUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
-// 临界区
+/// 临界区
 namespace System
 {
     NODISCARD bool SYSTEM_DEFAULT_DECLARE InitializeSystemCriticalSection(ThreadingCriticalSectionPtr criticalSection, WindowsDWord spinCount, CriticalSectionInfo flags) noexcept;

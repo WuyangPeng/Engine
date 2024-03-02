@@ -412,7 +412,7 @@ typename Mathematics::Quaternion<Real>::ContainerType Mathematics::Quaternion<Re
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Quaternion<Real>::Vector3 Mathematics::Quaternion<Real>::ToAxis() const
+typename Mathematics::Quaternion<Real>::Vector3 Mathematics::Quaternion<Real>::ToAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -454,7 +454,7 @@ Real Mathematics::Quaternion<Real>::ToAngle() const noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Quaternion<Real>::AxisAngle Mathematics::Quaternion<Real>::ToAngleAxis() const
+typename Mathematics::Quaternion<Real>::AxisAngle Mathematics::Quaternion<Real>::ToAngleAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:19)
+/// 版本：1.0.0.6 (2024/02/27 18:06)
 
 #include "System/SystemExport.h"
 
@@ -105,10 +105,7 @@ bool System::ReleaseSystemSemaphore(WindowsHandle handle, WindowsLong releaseCou
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::ReleaseSemaphore(handle, releaseCount, previousCount) != gFalse)
-        return true;
-    else
-        return false;
+    return ::ReleaseSemaphore(handle, releaseCount, previousCount) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -123,10 +120,7 @@ bool System::CloseSystemSemaphore(WindowsHandle handle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(handle) != gFalse)
-        return true;
-    else
-        return false;
+    return ::CloseHandle(handle) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -154,8 +148,5 @@ System::WindowsHandle System::OpenSystemSemaphore(MutexStandardAccess desiredAcc
 
 bool System::IsSystemSemaphoreValid(WindowsHandle handle) noexcept
 {
-    if (handle != nullptr && handle != invalidHandleValue)
-        return true;
-    else
-        return false;
+    return handle != nullptr && handle != invalidHandleValue;
 }

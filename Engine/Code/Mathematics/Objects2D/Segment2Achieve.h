@@ -28,6 +28,13 @@ Mathematics::Segment2<Real>::Segment2(const Vector2& beginPoint, const Vector2& 
 }
 
 template <typename Real>
+Mathematics::Segment2<Real>::Segment2(const AlgebraVector2& beginPoint, const AlgebraVector2& endPoint, Real epsilon)
+    : Segment2{ Vector2{ beginPoint[0], beginPoint[1] }, Vector2{ endPoint[0], endPoint[1] }, epsilon }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+template <typename Real>
 Mathematics::Segment2<Real>::Segment2(Real extent, const Vector2& center, const Vector2& direction, Real epsilon)
     : beginPoint{ center - extent * direction },
       endPoint{ center + extent * direction },

@@ -280,19 +280,19 @@ void System::GLTransformFeedbackBufferRange(GLuint xfb, GLuint index, GLuint buf
     SYSTEM_BODY_5(glTransformFeedbackBufferRange, xfb, index, buffer, offset, size);
 }
 
-void System::GLGetTransformFeedbackiv(GLuint xfb, GLenum pname, GLint* param) noexcept
+void System::GLGetTransformFeedbackIv(GLuint xfb, GLenum pName, GLint* param) noexcept
 {
-    SYSTEM_BODY_3(glGetTransformFeedbackiv, xfb, pname, param);
+    SYSTEM_BODY_3(glGetTransformFeedbackiv, xfb, pName, param);
 }
 
-void System::GLGetTransformFeedbacki_v(GLuint xfb, GLenum pname, GLuint index, GLint* param) noexcept
+void System::GLGetTransformFeedbackIv(GLuint xfb, GLenum pName, GLuint index, GLint* param) noexcept
 {
-    SYSTEM_BODY_4(glGetTransformFeedbacki_v, xfb, pname, index, param);
+    SYSTEM_BODY_4(glGetTransformFeedbacki_v, xfb, pName, index, param);
 }
 
-void System::GLGetTransformFeedbacki64_v(GLuint xfb, GLenum pname, GLuint index, GLint64* param) noexcept
+void System::GLGetTransformFeedbackI64V(GLuint xfb, GLenum pName, GLuint index, GLint64* param) noexcept
 {
-    SYSTEM_BODY_4(glGetTransformFeedbacki64_v, xfb, pname, index, param);
+    SYSTEM_BODY_4(glGetTransformFeedbacki64_v, xfb, pName, index, param);
 }
 
 void System::GLCreateBuffers(GLsizei n, GLuint* buffers) noexcept
@@ -320,14 +320,14 @@ void System::GLCopyNamedBufferSubData(GLuint readBuffer, GLuint writeBuffer, GLi
     SYSTEM_BODY_5(glCopyNamedBufferSubData, readBuffer, writeBuffer, readOffset, writeOffset, size);
 }
 
-void System::GLClearNamedBufferData(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void* data) noexcept
+void System::GLClearNamedBufferData(GLuint buffer, GLenum internalFormat, GLenum format, GLenum type, const void* data) noexcept
 {
-    SYSTEM_BODY_5(glClearNamedBufferData, buffer, internalformat, format, type, data);
+    SYSTEM_BODY_5(glClearNamedBufferData, buffer, internalFormat, format, type, data);
 }
 
-void System::GLClearNamedBufferSubData(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void* data) noexcept
+void System::GLClearNamedBufferSubData(GLuint buffer, GLenum internalFormat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void* data) noexcept
 {
-    SYSTEM_BODY_7(glClearNamedBufferSubData, buffer, internalformat, offset, size, format, type, data);
+    SYSTEM_BODY_7(glClearNamedBufferSubData, buffer, internalFormat, offset, size, format, type, data);
 }
 
 void* System::GLMapNamedBuffer(GLuint buffer, GLenum access) noexcept
@@ -350,19 +350,19 @@ void System::GLFlushMappedNamedBufferRange(GLuint buffer, GLintptr offset, GLsiz
     SYSTEM_BODY_3(glFlushMappedNamedBufferRange, buffer, offset, length);
 }
 
-void System::GLGetNamedBufferParameteriv(GLuint buffer, GLenum pname, GLint* params) noexcept
+void System::GLGetNamedBufferParameterIv(GLuint buffer, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_BODY_3(glGetNamedBufferParameteriv, buffer, pname, params);
+    SYSTEM_BODY_3(glGetNamedBufferParameteriv, buffer, pName, params);
 }
 
-void System::GLGetNamedBufferParameteri64v(GLuint buffer, GLenum pname, GLint64* params) noexcept
+void System::GLGetNamedBufferParameterI64v(GLuint buffer, GLenum pName, GLint64* params) noexcept
 {
-    SYSTEM_BODY_3(glGetNamedBufferParameteri64v, buffer, pname, params);
+    SYSTEM_BODY_3(glGetNamedBufferParameteri64v, buffer, pName, params);
 }
 
-void System::GLGetNamedBufferPointerv(GLuint buffer, GLenum pname, void** params) noexcept
+void System::GLGetNamedBufferPointerV(GLuint buffer, GLenum pName, void** params) noexcept
 {
-    SYSTEM_BODY_3(glGetNamedBufferPointerv, buffer, pname, params);
+    SYSTEM_BODY_3(glGetNamedBufferPointerv, buffer, pName, params);
 }
 
 void System::GLGetNamedBufferSubData(GLuint buffer, GLintptr offset, GLsizeiptr size, void* data) noexcept
@@ -370,114 +370,114 @@ void System::GLGetNamedBufferSubData(GLuint buffer, GLintptr offset, GLsizeiptr 
     SYSTEM_BODY_4(glGetNamedBufferSubData, buffer, offset, size, data);
 }
 
-void System::GLCreateFramebuffers(GLsizei n, GLuint* framebuffers) noexcept
+void System::GLCreateFrameBuffers(GLsizei n, GLuint* frameBuffers) noexcept
 {
-    SYSTEM_BODY_2(glCreateFramebuffers, n, framebuffers);
+    SYSTEM_BODY_2(glCreateFramebuffers, n, frameBuffers);
 }
 
-void System::GLNamedFramebufferRenderbuffer(GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer) noexcept
+void System::GLNamedFrameBufferRenderBuffer(GLuint frameBuffer, GLenum attachment, GLenum renderBufferTarget, GLuint renderBuffer) noexcept
 {
-    SYSTEM_BODY_4(glNamedFramebufferRenderbuffer, framebuffer, attachment, renderbuffertarget, renderbuffer);
+    SYSTEM_BODY_4(glNamedFramebufferRenderbuffer, frameBuffer, attachment, renderBufferTarget, renderBuffer);
 }
 
-void System::GLNamedFramebufferParameteri(GLuint framebuffer, GLenum pname, GLint param) noexcept
+void System::GLNamedFrameBufferParameterI(GLuint frameBuffer, GLenum pName, GLint param) noexcept
 {
-    SYSTEM_BODY_3(glNamedFramebufferParameteri, framebuffer, pname, param);
+    SYSTEM_BODY_3(glNamedFramebufferParameteri, frameBuffer, pName, param);
 }
 
-void System::GLNamedFramebufferTexture(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level) noexcept
+void System::GLNamedFrameBufferTexture(GLuint frameBuffer, GLenum attachment, GLuint texture, GLint level) noexcept
 {
-    SYSTEM_BODY_4(glNamedFramebufferTexture, framebuffer, attachment, texture, level);
+    SYSTEM_BODY_4(glNamedFramebufferTexture, frameBuffer, attachment, texture, level);
 }
 
-void System::GLNamedFramebufferTextureLayer(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer) noexcept
+void System::GLNamedFrameBufferTextureLayer(GLuint frameBuffer, GLenum attachment, GLuint texture, GLint level, GLint layer) noexcept
 {
-    SYSTEM_BODY_5(glNamedFramebufferTextureLayer, framebuffer, attachment, texture, level, layer);
+    SYSTEM_BODY_5(glNamedFramebufferTextureLayer, frameBuffer, attachment, texture, level, layer);
 }
 
-void System::GLNamedFramebufferDrawBuffer(GLuint framebuffer, GLenum buf) noexcept
+void System::GLNamedFrameBufferDrawBuffer(GLuint frameBuffer, GLenum buf) noexcept
 {
-    SYSTEM_BODY_2(glNamedFramebufferDrawBuffer, framebuffer, buf);
+    SYSTEM_BODY_2(glNamedFramebufferDrawBuffer, frameBuffer, buf);
 }
 
-void System::GLNamedFramebufferDrawBuffers(GLuint framebuffer, GLsizei n, const GLenum* bufs) noexcept
+void System::GLNamedFrameBufferDrawBuffers(GLuint frameBuffer, GLsizei n, const GLenum* buffers) noexcept
 {
-    SYSTEM_BODY_3(glNamedFramebufferDrawBuffers, framebuffer, n, bufs);
+    SYSTEM_BODY_3(glNamedFramebufferDrawBuffers, frameBuffer, n, buffers);
 }
 
-void System::GLNamedFramebufferReadBuffer(GLuint framebuffer, GLenum src) noexcept
+void System::GLNamedFrameBufferReadBuffer(GLuint frameBuffer, GLenum src) noexcept
 {
-    SYSTEM_BODY_2(glNamedFramebufferReadBuffer, framebuffer, src);
+    SYSTEM_BODY_2(glNamedFramebufferReadBuffer, frameBuffer, src);
 }
 
-void System::GLInvalidateNamedFramebufferData(GLuint framebuffer, GLsizei numAttachments, const GLenum* attachments) noexcept
+void System::GLInvalidateNamedFrameBufferData(GLuint frameBuffer, GLsizei numAttachments, const GLenum* attachments) noexcept
 {
-    SYSTEM_BODY_3(glInvalidateNamedFramebufferData, framebuffer, numAttachments, attachments);
+    SYSTEM_BODY_3(glInvalidateNamedFramebufferData, frameBuffer, numAttachments, attachments);
 }
 
-void System::GLInvalidateNamedFramebufferSubData(GLuint framebuffer, GLsizei numAttachments, const GLenum* attachments, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
+void System::GLInvalidateNamedFrameBufferSubData(GLuint frameBuffer, GLsizei numAttachments, const GLenum* attachments, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
 {
-    SYSTEM_BODY_7(glInvalidateNamedFramebufferSubData, framebuffer, numAttachments, attachments, x, y, width, height);
+    SYSTEM_BODY_7(glInvalidateNamedFramebufferSubData, frameBuffer, numAttachments, attachments, x, y, width, height);
 }
 
-void System::GLClearNamedFramebufferiv(GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLint* value) noexcept
+void System::GLClearNamedFrameBufferIv(GLuint frameBuffer, GLenum buffer, GLint drawBuffer, const GLint* value) noexcept
 {
-    SYSTEM_BODY_4(glClearNamedFramebufferiv, framebuffer, buffer, drawbuffer, value);
+    SYSTEM_BODY_4(glClearNamedFramebufferiv, frameBuffer, buffer, drawBuffer, value);
 }
 
-void System::GLClearNamedFramebufferuiv(GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLuint* value) noexcept
+void System::GLClearNamedFrameBufferUiv(GLuint frameBuffer, GLenum buffer, GLint drawBuffer, const GLuint* value) noexcept
 {
-    SYSTEM_BODY_4(glClearNamedFramebufferuiv, framebuffer, buffer, drawbuffer, value);
+    SYSTEM_BODY_4(glClearNamedFramebufferuiv, frameBuffer, buffer, drawBuffer, value);
 }
 
-void System::GLClearNamedFramebufferfv(GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLfloat* value) noexcept
+void System::GLClearNamedFrameBufferFv(GLuint frameBuffer, GLenum buffer, GLint drawBuffer, const GLfloat* value) noexcept
 {
-    SYSTEM_BODY_4(glClearNamedFramebufferfv, framebuffer, buffer, drawbuffer, value);
+    SYSTEM_BODY_4(glClearNamedFramebufferfv, frameBuffer, buffer, drawBuffer, value);
 }
 
-void System::GLClearNamedFramebufferfi(GLuint framebuffer, GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil) noexcept
+void System::GLClearNamedFrameBufferFi(GLuint frameBuffer, GLenum buffer, GLint drawBuffer, GLfloat depth, GLint stencil) noexcept
 {
-    SYSTEM_BODY_5(glClearNamedFramebufferfi, framebuffer, buffer, drawbuffer, depth, stencil);
+    SYSTEM_BODY_5(glClearNamedFramebufferfi, frameBuffer, buffer, drawBuffer, depth, stencil);
 }
 
-void System::GLBlitNamedFramebuffer(GLuint readFramebuffer, GLuint drawFramebuffer, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) noexcept
+void System::GLBlitNamedFrameBuffer(GLuint readFrameBuffer, GLuint drawFrameBuffer, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) noexcept
 {
-    SYSTEM_BODY_12(glBlitNamedFramebuffer, readFramebuffer, drawFramebuffer, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+    SYSTEM_BODY_12(glBlitNamedFramebuffer, readFrameBuffer, drawFrameBuffer, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
 }
 
-GLenum System::GLCheckNamedFramebufferStatus(GLuint framebuffer, GLenum target) noexcept
+GLenum System::GLCheckNamedFrameBufferStatus(GLuint frameBuffer, GLenum target) noexcept
 {
-    SYSTEM_BODY_2_RESULT(glCheckNamedFramebufferStatus, framebuffer, target, 0);
+    SYSTEM_BODY_2_RESULT(glCheckNamedFramebufferStatus, frameBuffer, target, 0);
 }
 
-void System::GLGetNamedFramebufferParameteriv(GLuint framebuffer, GLenum pname, GLint* param) noexcept
+void System::GLGetNamedFrameBufferParameterIv(GLuint frameBuffer, GLenum pName, GLint* param) noexcept
 {
-    SYSTEM_BODY_3(glGetNamedFramebufferParameteriv, framebuffer, pname, param);
+    SYSTEM_BODY_3(glGetNamedFramebufferParameteriv, frameBuffer, pName, param);
 }
 
-void System::GLGetNamedFramebufferAttachmentParameteriv(GLuint framebuffer, GLenum attachment, GLenum pname, GLint* params) noexcept
+void System::GLGetNamedFrameBufferAttachmentParameterIv(GLuint frameBuffer, GLenum attachment, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_BODY_4(glGetNamedFramebufferAttachmentParameteriv, framebuffer, attachment, pname, params);
+    SYSTEM_BODY_4(glGetNamedFramebufferAttachmentParameteriv, frameBuffer, attachment, pName, params);
 }
 
-void System::GLCreateRenderbuffers(GLsizei n, GLuint* renderbuffers) noexcept
+void System::GLCreateRenderBuffers(GLsizei n, GLuint* renderBuffers) noexcept
 {
-    SYSTEM_BODY_2(glCreateRenderbuffers, n, renderbuffers);
+    SYSTEM_BODY_2(glCreateRenderbuffers, n, renderBuffers);
 }
 
-void System::GLNamedRenderbufferStorage(GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height) noexcept
+void System::GLNamedRenderBufferStorage(GLuint renderBuffer, GLenum internalFormat, GLsizei width, GLsizei height) noexcept
 {
-    SYSTEM_BODY_4(glNamedRenderbufferStorage, renderbuffer, internalformat, width, height);
+    SYSTEM_BODY_4(glNamedRenderbufferStorage, renderBuffer, internalFormat, width, height);
 }
 
-void System::GLNamedRenderbufferStorageMultisample(GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height) noexcept
+void System::GLNamedRenderBufferStorageMultiSample(GLuint renderBuffer, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height) noexcept
 {
-    SYSTEM_BODY_5(glNamedRenderbufferStorageMultisample, renderbuffer, samples, internalformat, width, height);
+    SYSTEM_BODY_5(glNamedRenderbufferStorageMultisample, renderBuffer, samples, internalFormat, width, height);
 }
 
-void System::GLGetNamedRenderbufferParameteriv(GLuint renderbuffer, GLenum pname, GLint* params) noexcept
+void System::GLGetNamedRenderBufferParameterIv(GLuint renderBuffer, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_BODY_3(glGetNamedRenderbufferParameteriv, renderbuffer, pname, params);
+    SYSTEM_BODY_3(glGetNamedRenderbufferParameteriv, renderBuffer, pName, params);
 }
 
 void System::GLCreateTextures(GLenum target, GLsizei n, GLuint* textures) noexcept
@@ -485,114 +485,114 @@ void System::GLCreateTextures(GLenum target, GLsizei n, GLuint* textures) noexce
     SYSTEM_BODY_3(glCreateTextures, target, n, textures);
 }
 
-void System::GLTextureBuffer(GLuint texture, GLenum internalformat, GLuint buffer) noexcept
+void System::GLTextureBuffer(GLuint texture, GLenum internalFormat, GLuint buffer) noexcept
 {
-    SYSTEM_BODY_3(glTextureBuffer, texture, internalformat, buffer);
+    SYSTEM_BODY_3(glTextureBuffer, texture, internalFormat, buffer);
 }
 
-void System::GLTextureBufferRange(GLuint texture, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size) noexcept
+void System::GLTextureBufferRange(GLuint texture, GLenum internalFormat, GLuint buffer, GLintptr offset, GLsizeiptr size) noexcept
 {
-    SYSTEM_BODY_5(glTextureBufferRange, texture, internalformat, buffer, offset, size);
+    SYSTEM_BODY_5(glTextureBufferRange, texture, internalFormat, buffer, offset, size);
 }
 
-void System::GLTextureStorage1D(GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width) noexcept
+void System::GLTextureStorage1D(GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width) noexcept
 {
-    SYSTEM_BODY_4(glTextureStorage1D, texture, levels, internalformat, width);
+    SYSTEM_BODY_4(glTextureStorage1D, texture, levels, internalFormat, width);
 }
 
-void System::GLTextureStorage2D(GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height) noexcept
+void System::GLTextureStorage2D(GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height) noexcept
 {
-    SYSTEM_BODY_5(glTextureStorage2D, texture, levels, internalformat, width, height);
+    SYSTEM_BODY_5(glTextureStorage2D, texture, levels, internalFormat, width, height);
 }
 
-void System::GLTextureStorage3D(GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth) noexcept
+void System::GLTextureStorage3D(GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth) noexcept
 {
-    SYSTEM_BODY_6(glTextureStorage3D, texture, levels, internalformat, width, height, depth);
+    SYSTEM_BODY_6(glTextureStorage3D, texture, levels, internalFormat, width, height, depth);
 }
 
-void System::GLTextureStorage2DMultisample(GLuint texture, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations) noexcept
+void System::GLTextureStorage2DMultiSample(GLuint texture, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations) noexcept
 {
-    SYSTEM_BODY_6(glTextureStorage2DMultisample, texture, samples, internalformat, width, height, fixedsamplelocations);
+    SYSTEM_BODY_6(glTextureStorage2DMultisample, texture, samples, internalFormat, width, height, fixedSampleLocations);
 }
 
-void System::GLTextureStorage3DMultisample(GLuint texture, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations) noexcept
+void System::GLTextureStorage3DMultiSample(GLuint texture, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations) noexcept
 {
-    SYSTEM_BODY_7(glTextureStorage3DMultisample, texture, samples, internalformat, width, height, depth, fixedsamplelocations);
+    SYSTEM_BODY_7(glTextureStorage3DMultisample, texture, samples, internalFormat, width, height, depth, fixedSampleLocations);
 }
 
-void System::GLTextureSubImage1D(GLuint texture, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void* pixels) noexcept
+void System::GLTextureSubImage1D(GLuint texture, GLint level, GLint xOffset, GLsizei width, GLenum format, GLenum type, const void* pixels) noexcept
 {
-    SYSTEM_BODY_7(glTextureSubImage1D, texture, level, xoffset, width, format, type, pixels);
+    SYSTEM_BODY_7(glTextureSubImage1D, texture, level, xOffset, width, format, type, pixels);
 }
 
-void System::GLTextureSubImage2D(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels) noexcept
+void System::GLTextureSubImage2D(GLuint texture, GLint level, GLint xOffset, GLint yOffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels) noexcept
 {
-    SYSTEM_BODY_9(glTextureSubImage2D, texture, level, xoffset, yoffset, width, height, format, type, pixels);
+    SYSTEM_BODY_9(glTextureSubImage2D, texture, level, xOffset, yOffset, width, height, format, type, pixels);
 }
 
-void System::GLTextureSubImage3D(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void* pixels) noexcept
+void System::GLTextureSubImage3D(GLuint texture, GLint level, GLint xOffset, GLint yOffset, GLint zOffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void* pixels) noexcept
 {
-    SYSTEM_BODY_11(glTextureSubImage3D, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+    SYSTEM_BODY_11(glTextureSubImage3D, texture, level, xOffset, yOffset, zOffset, width, height, depth, format, type, pixels);
 }
 
-void System::GLCompressedTextureSubImage1D(GLuint texture, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void* data) noexcept
+void System::GLCompressedTextureSubImage1D(GLuint texture, GLint level, GLint xOffset, GLsizei width, GLenum format, GLsizei imageSize, const void* data) noexcept
 {
-    SYSTEM_BODY_7(glCompressedTextureSubImage1D, texture, level, xoffset, width, format, imageSize, data);
+    SYSTEM_BODY_7(glCompressedTextureSubImage1D, texture, level, xOffset, width, format, imageSize, data);
 }
 
-void System::GLCompressedTextureSubImage2D(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void* data) noexcept
+void System::GLCompressedTextureSubImage2D(GLuint texture, GLint level, GLint xOffset, GLint yOffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void* data) noexcept
 {
-    SYSTEM_BODY_9(glCompressedTextureSubImage2D, texture, level, xoffset, yoffset, width, height, format, imageSize, data);
+    SYSTEM_BODY_9(glCompressedTextureSubImage2D, texture, level, xOffset, yOffset, width, height, format, imageSize, data);
 }
 
-void System::GLCompressedTextureSubImage3D(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void* data) noexcept
+void System::GLCompressedTextureSubImage3D(GLuint texture, GLint level, GLint xOffset, GLint yOffset, GLint zOffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void* data) noexcept
 {
-    SYSTEM_BODY_11(glCompressedTextureSubImage3D, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data);
+    SYSTEM_BODY_11(glCompressedTextureSubImage3D, texture, level, xOffset, yOffset, zOffset, width, height, depth, format, imageSize, data);
 }
 
-void System::GLCopyTextureSubImage1D(GLuint texture, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width) noexcept
+void System::GLCopyTextureSubImage1D(GLuint texture, GLint level, GLint xOffset, GLint x, GLint y, GLsizei width) noexcept
 {
-    SYSTEM_BODY_6(glCopyTextureSubImage1D, texture, level, xoffset, x, y, width);
+    SYSTEM_BODY_6(glCopyTextureSubImage1D, texture, level, xOffset, x, y, width);
 }
 
-void System::GLCopyTextureSubImage2D(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
+void System::GLCopyTextureSubImage2D(GLuint texture, GLint level, GLint xOffset, GLint yOffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
 {
-    SYSTEM_BODY_8(glCopyTextureSubImage2D, texture, level, xoffset, yoffset, x, y, width, height);
+    SYSTEM_BODY_8(glCopyTextureSubImage2D, texture, level, xOffset, yOffset, x, y, width, height);
 }
 
-void System::GLCopyTextureSubImage3D(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
+void System::GLCopyTextureSubImage3D(GLuint texture, GLint level, GLint xOffset, GLint yOffset, GLint zOffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
 {
-    SYSTEM_BODY_9(glCopyTextureSubImage3D, texture, level, xoffset, yoffset, zoffset, x, y, width, height);
+    SYSTEM_BODY_9(glCopyTextureSubImage3D, texture, level, xOffset, yOffset, zOffset, x, y, width, height);
 }
 
-void System::GLTextureParameterf(GLuint texture, GLenum pname, GLfloat param) noexcept
+void System::GLTextureParameterF(GLuint texture, GLenum pName, GLfloat param) noexcept
 {
-    SYSTEM_BODY_3(glTextureParameterf, texture, pname, param);
+    SYSTEM_BODY_3(glTextureParameterf, texture, pName, param);
 }
 
-void System::GLTextureParameterfv(GLuint texture, GLenum pname, const GLfloat* param) noexcept
+void System::GLTextureParameterFv(GLuint texture, GLenum pName, const GLfloat* param) noexcept
 {
-    SYSTEM_BODY_3(glTextureParameterfv, texture, pname, param);
+    SYSTEM_BODY_3(glTextureParameterfv, texture, pName, param);
 }
 
-void System::GLTextureParameteri(GLuint texture, GLenum pname, GLint param) noexcept
+void System::GLTextureParameterI(GLuint texture, GLenum pName, GLint param) noexcept
 {
-    SYSTEM_BODY_3(glTextureParameteri, texture, pname, param);
+    SYSTEM_BODY_3(glTextureParameteri, texture, pName, param);
 }
 
-void System::GLTextureParameterIiv(GLuint texture, GLenum pname, const GLint* params) noexcept
+void System::GLTextureParameterIiv(GLuint texture, GLenum pName, const GLint* params) noexcept
 {
-    SYSTEM_BODY_3(glTextureParameterIiv, texture, pname, params);
+    SYSTEM_BODY_3(glTextureParameterIiv, texture, pName, params);
 }
 
-void System::GLTextureParameterIuiv(GLuint texture, GLenum pname, const GLuint* params) noexcept
+void System::GLTextureParameterIUiv(GLuint texture, GLenum pName, const GLuint* params) noexcept
 {
-    SYSTEM_BODY_3(glTextureParameterIuiv, texture, pname, params);
+    SYSTEM_BODY_3(glTextureParameterIuiv, texture, pName, params);
 }
 
-void System::GLTextureParameteriv(GLuint texture, GLenum pname, const GLint* param) noexcept
+void System::GLTextureParameterIv(GLuint texture, GLenum pName, const GLint* param) noexcept
 {
-    SYSTEM_BODY_3(glTextureParameteriv, texture, pname, param);
+    SYSTEM_BODY_3(glTextureParameteriv, texture, pName, param);
 }
 
 void System::GLGenerateTextureMipmap(GLuint texture) noexcept
@@ -615,34 +615,34 @@ void System::GLGetCompressedTextureImage(GLuint texture, GLint level, GLsizei bu
     SYSTEM_BODY_4(glGetCompressedTextureImage, texture, level, bufSize, pixels);
 }
 
-void System::GLGetTextureLevelParameterfv(GLuint texture, GLint level, GLenum pname, GLfloat* params) noexcept
+void System::GLGetTextureLevelParameterFv(GLuint texture, GLint level, GLenum pName, GLfloat* params) noexcept
 {
-    SYSTEM_BODY_4(glGetTextureLevelParameterfv, texture, level, pname, params);
+    SYSTEM_BODY_4(glGetTextureLevelParameterfv, texture, level, pName, params);
 }
 
-void System::GLGetTextureLevelParameteriv(GLuint texture, GLint level, GLenum pname, GLint* params) noexcept
+void System::GLGetTextureLevelParameterIv(GLuint texture, GLint level, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_BODY_4(glGetTextureLevelParameteriv, texture, level, pname, params);
+    SYSTEM_BODY_4(glGetTextureLevelParameteriv, texture, level, pName, params);
 }
 
-void System::GLGetTextureParameterfv(GLuint texture, GLenum pname, GLfloat* params) noexcept
+void System::GLGetTextureParameterFv(GLuint texture, GLenum pName, GLfloat* params) noexcept
 {
-    SYSTEM_BODY_3(glGetTextureParameterfv, texture, pname, params);
+    SYSTEM_BODY_3(glGetTextureParameterfv, texture, pName, params);
 }
 
-void System::GLGetTextureParameterIiv(GLuint texture, GLenum pname, GLint* params) noexcept
+void System::GLGetTextureParameterIiv(GLuint texture, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_BODY_3(glGetTextureParameterIiv, texture, pname, params);
+    SYSTEM_BODY_3(glGetTextureParameterIiv, texture, pName, params);
 }
 
-void System::GLGetTextureParameterIuiv(GLuint texture, GLenum pname, GLuint* params) noexcept
+void System::GLGetTextureParameterIUiv(GLuint texture, GLenum pName, GLuint* params) noexcept
 {
-    SYSTEM_BODY_3(glGetTextureParameterIuiv, texture, pname, params);
+    SYSTEM_BODY_3(glGetTextureParameterIuiv, texture, pName, params);
 }
 
-void System::GLGetTextureParameteriv(GLuint texture, GLenum pname, GLint* params) noexcept
+void System::GLGetTextureParameterIv(GLuint texture, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_BODY_3(glGetTextureParameteriv, texture, pname, params);
+    SYSTEM_BODY_3(glGetTextureParameteriv, texture, pName, params);
 }
 
 void System::GLCreateVertexArrays(GLsizei n, GLuint* arrays) noexcept
@@ -650,69 +650,69 @@ void System::GLCreateVertexArrays(GLsizei n, GLuint* arrays) noexcept
     SYSTEM_BODY_2(glCreateVertexArrays, n, arrays);
 }
 
-void System::GLDisableVertexArrayAttrib(GLuint vaobj, GLuint index) noexcept
+void System::GLDisableVertexArrayAttrib(GLuint vaObj, GLuint index) noexcept
 {
-    SYSTEM_BODY_2(glDisableVertexArrayAttrib, vaobj, index);
+    SYSTEM_BODY_2(glDisableVertexArrayAttrib, vaObj, index);
 }
 
-void System::GLEnableVertexArrayAttrib(GLuint vaobj, GLuint index) noexcept
+void System::GLEnableVertexArrayAttrib(GLuint vaObj, GLuint index) noexcept
 {
-    SYSTEM_BODY_2(glEnableVertexArrayAttrib, vaobj, index);
+    SYSTEM_BODY_2(glEnableVertexArrayAttrib, vaObj, index);
 }
 
-void System::GLVertexArrayElementBuffer(GLuint vaobj, GLuint buffer) noexcept
+void System::GLVertexArrayElementBuffer(GLuint vaObj, GLuint buffer) noexcept
 {
-    SYSTEM_BODY_2(glVertexArrayElementBuffer, vaobj, buffer);
+    SYSTEM_BODY_2(glVertexArrayElementBuffer, vaObj, buffer);
 }
 
-void System::GLVertexArrayVertexBuffer(GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride) noexcept
+void System::GLVertexArrayVertexBuffer(GLuint vaObj, GLuint bindingIndex, GLuint buffer, GLintptr offset, GLsizei stride) noexcept
 {
-    SYSTEM_BODY_5(glVertexArrayVertexBuffer, vaobj, bindingindex, buffer, offset, stride);
+    SYSTEM_BODY_5(glVertexArrayVertexBuffer, vaObj, bindingIndex, buffer, offset, stride);
 }
 
-void System::GLVertexArrayVertexBuffers(GLuint vaobj, GLuint first, GLsizei count, const GLuint* buffers, const GLintptr* offsets, const GLsizei* strides) noexcept
+void System::GLVertexArrayVertexBuffers(GLuint vaObj, GLuint first, GLsizei count, const GLuint* buffers, const GLintptr* offsets, const GLsizei* strides) noexcept
 {
-    SYSTEM_BODY_6(glVertexArrayVertexBuffers, vaobj, first, count, buffers, offsets, strides);
+    SYSTEM_BODY_6(glVertexArrayVertexBuffers, vaObj, first, count, buffers, offsets, strides);
 }
 
-void System::GLVertexArrayAttribBinding(GLuint vaobj, GLuint attribindex, GLuint bindingindex) noexcept
+void System::GLVertexArrayAttribBinding(GLuint vaObj, GLuint attribIndex, GLuint bindingIndex) noexcept
 {
-    SYSTEM_BODY_3(glVertexArrayAttribBinding, vaobj, attribindex, bindingindex);
+    SYSTEM_BODY_3(glVertexArrayAttribBinding, vaObj, attribIndex, bindingIndex);
 }
 
-void System::GLVertexArrayAttribFormat(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset) noexcept
+void System::GLVertexArrayAttribFormat(GLuint vaObj, GLuint attribIndex, GLint size, GLenum type, GLboolean normalized, GLuint relativeOffset) noexcept
 {
-    SYSTEM_BODY_6(glVertexArrayAttribFormat, vaobj, attribindex, size, type, normalized, relativeoffset);
+    SYSTEM_BODY_6(glVertexArrayAttribFormat, vaObj, attribIndex, size, type, normalized, relativeOffset);
 }
 
-void System::GLVertexArrayAttribIFormat(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset) noexcept
+void System::GLVertexArrayAttribIFormat(GLuint vaObj, GLuint attribIndex, GLint size, GLenum type, GLuint relativeOffset) noexcept
 {
-    SYSTEM_BODY_5(glVertexArrayAttribIFormat, vaobj, attribindex, size, type, relativeoffset);
+    SYSTEM_BODY_5(glVertexArrayAttribIFormat, vaObj, attribIndex, size, type, relativeOffset);
 }
 
-void System::GLVertexArrayAttribLFormat(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset) noexcept
+void System::GLVertexArrayAttribLFormat(GLuint vaObj, GLuint attribIndex, GLint size, GLenum type, GLuint relativeOffset) noexcept
 {
-    SYSTEM_BODY_5(glVertexArrayAttribLFormat, vaobj, attribindex, size, type, relativeoffset);
+    SYSTEM_BODY_5(glVertexArrayAttribLFormat, vaObj, attribIndex, size, type, relativeOffset);
 }
 
-void System::GLVertexArrayBindingDivisor(GLuint vaobj, GLuint bindingindex, GLuint divisor) noexcept
+void System::GLVertexArrayBindingDivisor(GLuint vaObj, GLuint attribIndex, GLuint divisor) noexcept
 {
-    SYSTEM_BODY_3(glVertexArrayBindingDivisor, vaobj, bindingindex, divisor);
+    SYSTEM_BODY_3(glVertexArrayBindingDivisor, vaObj, attribIndex, divisor);
 }
 
-void System::GLGetVertexArrayiv(GLuint vaobj, GLenum pname, GLint* param) noexcept
+void System::GLGetVertexArrayIv(GLuint vaObj, GLenum pName, GLint* param) noexcept
 {
-    SYSTEM_BODY_3(glGetVertexArrayiv, vaobj, pname, param);
+    SYSTEM_BODY_3(glGetVertexArrayiv, vaObj, pName, param);
 }
 
-void System::GLGetVertexArrayIndexediv(GLuint vaobj, GLuint index, GLenum pname, GLint* param) noexcept
+void System::GLGetVertexArrayIndexedIv(GLuint vaObj, GLuint index, GLenum pName, GLint* param) noexcept
 {
-    SYSTEM_BODY_4(glGetVertexArrayIndexediv, vaobj, index, pname, param);
+    SYSTEM_BODY_4(glGetVertexArrayIndexediv, vaObj, index, pName, param);
 }
 
-void System::GLGetVertexArrayIndexed64iv(GLuint vaobj, GLuint index, GLenum pname, GLint64* param) noexcept
+void System::GLGetVertexArrayIndexed64Iv(GLuint vaObj, GLuint index, GLenum pName, GLint64* param) noexcept
 {
-    SYSTEM_BODY_4(glGetVertexArrayIndexed64iv, vaobj, index, pname, param);
+    SYSTEM_BODY_4(glGetVertexArrayIndexed64iv, vaObj, index, pName, param);
 }
 
 void System::GLCreateSamplers(GLsizei n, GLuint* samplers) noexcept
@@ -730,24 +730,24 @@ void System::GLCreateQueries(GLenum target, GLsizei n, GLuint* ids) noexcept
     SYSTEM_BODY_3(glCreateQueries, target, n, ids);
 }
 
-void System::GLGetQueryBufferObjecti64v(GLuint id, GLuint buffer, GLenum pname, GLintptr offset) noexcept
+void System::GLGetQueryBufferObjectI64V(GLuint id, GLuint buffer, GLenum pName, GLintptr offset) noexcept
 {
-    SYSTEM_BODY_4(glGetQueryBufferObjecti64v, id, buffer, pname, offset);
+    SYSTEM_BODY_4(glGetQueryBufferObjecti64v, id, buffer, pName, offset);
 }
 
-void System::GLGetQueryBufferObjectiv(GLuint id, GLuint buffer, GLenum pname, GLintptr offset) noexcept
+void System::GLGetQueryBufferObjectIv(GLuint id, GLuint buffer, GLenum pName, GLintptr offset) noexcept
 {
-    SYSTEM_BODY_4(glGetQueryBufferObjectiv, id, buffer, pname, offset);
+    SYSTEM_BODY_4(glGetQueryBufferObjectiv, id, buffer, pName, offset);
 }
 
-void System::GLGetQueryBufferObjectui64v(GLuint id, GLuint buffer, GLenum pname, GLintptr offset) noexcept
+void System::GLGetQueryBufferObjectUi64V(GLuint id, GLuint buffer, GLenum pName, GLintptr offset) noexcept
 {
-    SYSTEM_BODY_4(glGetQueryBufferObjectui64v, id, buffer, pname, offset);
+    SYSTEM_BODY_4(glGetQueryBufferObjectui64v, id, buffer, pName, offset);
 }
 
-void System::GLGetQueryBufferObjectuiv(GLuint id, GLuint buffer, GLenum pname, GLintptr offset) noexcept
+void System::GLGetQueryBufferObjectUiv(GLuint id, GLuint buffer, GLenum pName, GLintptr offset) noexcept
 {
-    SYSTEM_BODY_4(glGetQueryBufferObjectuiv, id, buffer, pname, offset);
+    SYSTEM_BODY_4(glGetQueryBufferObjectuiv, id, buffer, pName, offset);
 }
 
 void System::GLMemoryBarrierByRegion(GLbitfield barriers) noexcept
@@ -755,14 +755,14 @@ void System::GLMemoryBarrierByRegion(GLbitfield barriers) noexcept
     SYSTEM_BODY_1(glMemoryBarrierByRegion, barriers);
 }
 
-void System::GLGetTextureSubImage(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, GLsizei bufSize, void* pixels) noexcept
+void System::GLGetTextureSubImage(GLuint texture, GLint level, GLint xOffset, GLint yOffset, GLint zOffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, GLsizei bufSize, void* pixels) noexcept
 {
-    SYSTEM_BODY_12(glGetTextureSubImage, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, bufSize, pixels);
+    SYSTEM_BODY_12(glGetTextureSubImage, texture, level, xOffset, yOffset, zOffset, width, height, depth, format, type, bufSize, pixels);
 }
 
-void System::GLGetCompressedTextureSubImage(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei bufSize, void* pixels) noexcept
+void System::GLGetCompressedTextureSubImage(GLuint texture, GLint level, GLint xOffset, GLint yOffset, GLint zOffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei bufSize, void* pixels) noexcept
 {
-    SYSTEM_BODY_10(glGetCompressedTextureSubImage, texture, level, xoffset, yoffset, zoffset, width, height, depth, bufSize, pixels);
+    SYSTEM_BODY_10(glGetCompressedTextureSubImage, texture, level, xOffset, yOffset, zOffset, width, height, depth, bufSize, pixels);
 }
 
 GLenum System::GLGetGraphicsResetStatus() noexcept
@@ -770,37 +770,37 @@ GLenum System::GLGetGraphicsResetStatus() noexcept
     SYSTEM_BODY_0_RESULT(glGetGraphicsResetStatus, GL_NO_ERROR);
 }
 
-void System::GLGetnCompressedTexImage(GLenum target, GLint lod, GLsizei bufSize, void* pixels) noexcept
+void System::GLGetNCompressedTexImage(GLenum target, GLint lod, GLsizei bufSize, void* pixels) noexcept
 {
     SYSTEM_BODY_4(glGetnCompressedTexImage, target, lod, bufSize, pixels);
 }
 
-void System::GLGetnTexImage(GLenum target, GLint level, GLenum format, GLenum type, GLsizei bufSize, void* pixels) noexcept
+void System::GLGetNTexImage(GLenum target, GLint level, GLenum format, GLenum type, GLsizei bufSize, void* pixels) noexcept
 {
     SYSTEM_BODY_6(glGetnTexImage, target, level, format, type, bufSize, pixels);
 }
 
-void System::GLGetnUniformdv(GLuint program, GLint location, GLsizei bufSize, GLdouble* params) noexcept
+void System::GLGetNUniformDv(GLuint program, GLint location, GLsizei bufSize, GLdouble* params) noexcept
 {
     SYSTEM_BODY_4(glGetnUniformdv, program, location, bufSize, params);
 }
 
-void System::GLGetnUniformfv(GLuint program, GLint location, GLsizei bufSize, GLfloat* params) noexcept
+void System::GLGetNUniformFv(GLuint program, GLint location, GLsizei bufSize, GLfloat* params) noexcept
 {
     SYSTEM_BODY_4(glGetnUniformfv, program, location, bufSize, params);
 }
 
-void System::GLGetnUniformiv(GLuint program, GLint location, GLsizei bufSize, GLint* params) noexcept
+void System::GLGetNUniformIv(GLuint program, GLint location, GLsizei bufSize, GLint* params) noexcept
 {
     SYSTEM_BODY_4(glGetnUniformiv, program, location, bufSize, params);
 }
 
-void System::GLGetnUniformuiv(GLuint program, GLint location, GLsizei bufSize, GLuint* params) noexcept
+void System::GLGetNUniformUiv(GLuint program, GLint location, GLsizei bufSize, GLuint* params) noexcept
 {
     SYSTEM_BODY_4(glGetnUniformuiv, program, location, bufSize, params);
 }
 
-void System::GLReadnPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void* data) noexcept
+void System::GLReadNPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void* data) noexcept
 {
     SYSTEM_BODY_8(glReadnPixels, x, y, width, height, format, type, bufSize, data);
 }

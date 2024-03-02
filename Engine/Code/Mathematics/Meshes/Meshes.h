@@ -23,6 +23,7 @@
 #include "PlanarGraphDetail.h"
 #include "TetrahedronKey.h"
 #include "TriangleKey.h"
+#include "UniqueVerticesSimplicesDetail.h"
 #include "UniqueVerticesTrianglesDetail.h"
 #include "UnorderedTriangleKey.h"
 

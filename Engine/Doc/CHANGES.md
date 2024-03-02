@@ -1,26 +1,87 @@
 @ingroup group_Documentation
 
-Threading Core Render Engine 1.0.0.6
+Threading Core Render Engine 1.0.0.7
 
 ----------------------------
 更新日志
 ----------------------------
-1.0.0.6（2024/02/19——2024/03/31）
+1.0.0.7（2024/03/03——2024/03/31）
 
 	完成功能： 
 	（引擎）
-	+ 实现Rotation。@
-	+ 实现Transform。@	
-	+ 实现ConvertCoordinates。@	
-	+ 实现Algebra。@
+	+ APConversion。@
+	+ APInterval。@
+	+ ArbitraryPrecision。@
+	+ BitHacks。@
+	+ BSNumber。@
+	+ BSPrecision。@
+	+ BSRational。@
+	+ Constants。@
+	+ FPInterval。@
+	+ Functions。@
+	+ IEEEBinary。@
+	+ IEEEBinary16。@
+	+ QFNumber。@
+	+ SWInterval。@
+	+ TypeTraits。@
+	+ UIntegerALU32。@
+	+ UIntegerAP32。@
+	+ UIntegerFP32。@
+	+ 实现Arithmetic。@
 	+ 实现WindowApplication。@
 	+ DistanceAlignedBoxes例子。@
 	+ GameClient显示一张图片。@
-	+ linux系统通过编译。@		
+	+ linux系统通过编译。@
+	+ System工程整理。@
 	
-	（历史）
-	+ 窗口中显示文字。@
-	+ 千年史策http服务器。@	
+----------------------------
+1.0.0.6（2024/02/19——2024/03/02）
+
+	完成功能： 
+	（引擎）
+	+ 实现Rotation。
+	+ 实现Transform。
+	+ 实现ConvertCoordinates。
+	+ 实现Algebra。
+	+ ThreadingCoreRenderEngine工程整理。
+	+ 实现Arc2。
+	+ ThreadingCoreRenderEngineTesting工程整理。
+	+ ThreadingCoreRenderEngineAssist工程整理。
+	+ ThreadingCoreRenderEngineAssistTesting工程整理。
+	+ 实现Polygon2。
+	+ 实现Sector2。
+	+ 实现Primitives2D。
+	+ 实现Circle3。
+	+ 实现ConvexMesh3。
+	+ 实现AlignedBox。
+	+ 实现ConvexPolyhedron3。
+	+ 实现Line。
+	+ 实现Cylinder3。
+	+ 实现Ellipse3。
+	+ 实现Frustum3。
+	+ 实现Rectangle。
+	+ 实现Lozenge3。
+	+ 实现Polyhedron3。
+	+ 实现SingularValueDecomposition。
+	+ 实现Hyperplane。
+	+ 实现Tetrahedron3。
+	+ 实现Torus3。
+	+ 实现Primitives3D。
+	+ 实现CanonicalBox。
+	+ 实现Segment。
+	+ 实现Capsule。
+	+ 实现Ray。
+	+ 实现UniqueVerticesSimplices。
+	+ 实现Cone。
+	+ 实现Halfspace。
+	+ 实现SymmetricEigensolver。
+	+ 实现Hyperellipsoid。
+	+ 实现Hypersphere。
+	+ 实现OrientedBox。
+	+ 实现Triangle。
+	+ 实现SegmentMesh。
+	+ 实现PrimitivesND。
+	+ 实现Primitives。 
 	
 ----------------------------
 1.0.0.5（2024/01/22——2024/02/18）

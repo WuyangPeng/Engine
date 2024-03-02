@@ -35,7 +35,7 @@ void System::FormatErrorMessageUseLocalAllocTesting::MainTest()
 
 void System::FormatErrorMessageUseLocalAllocTesting::FormatErrorMessageUseLocalAllocTest()
 {
-    for (auto flag = WindowError::Success; flag <= WindowError::AppHang; ++flag)
+    for (auto flag = WindowError::Success; flag <= WindowError::DlpPolicySilentlyFail; ++flag)
     {
         WindowsHLocal errorMessage{ nullptr };
 
@@ -69,26 +69,12 @@ void System::FormatErrorMessageUseLocalAllocTesting::FormatErrorMessageTest(Wind
 
 void System::FormatErrorMessageUseLocalAllocTesting::FormatErrorMessageValidTest(WindowError windowError, WindowsHLocal& errorMessage)
 {
-    if (IsExistInvalidWindowError())
-    {
-        ASSERT_NOT_THROW_EXCEPTION_2(FormatErrorMessageSuccessTest, windowError, errorMessage);
-    }
-    else
-    {
-        ASSERT_NOT_THROW_EXCEPTION_2(FormatErrorMessageUnknownTest, windowError, errorMessage);
-    }
+    ASSERT_NOT_THROW_EXCEPTION_2(FormatErrorMessageSuccessTest, windowError, errorMessage);
 }
 
 void System::FormatErrorMessageUseLocalAllocTesting::FormatErrorMessageInvalidTest(WindowError windowError, WindowsHLocal& errorMessage)
 {
-    if (IsExistValidWindowError())
-    {
-        ASSERT_NOT_THROW_EXCEPTION_2(FormatErrorMessageUnknownTest, windowError, errorMessage);
-    }
-    else
-    {
-        ASSERT_NOT_THROW_EXCEPTION_2(FormatErrorMessageFailTest, windowError, errorMessage);
-    }
+    ASSERT_NOT_THROW_EXCEPTION_2(FormatErrorMessageFailTest, windowError, errorMessage);
 }
 
 void System::FormatErrorMessageUseLocalAllocTesting::FormatErrorMessageSuccessTest(WindowError windowError, WindowsHLocal& errorMessage)
@@ -99,7 +85,7 @@ void System::FormatErrorMessageUseLocalAllocTesting::FormatErrorMessageSuccessTe
 
 void System::FormatErrorMessageUseLocalAllocTesting::FormatErrorMessageFailTest(WindowError windowError, WindowsHLocal& errorMessage)
 {
-    ASSERT_FALSE(FormatErrorMessage(errorMessage, windowError));
+    ASSERT_FALSE_USE_MESSAGE(FormatErrorMessage(errorMessage, windowError), "WindowError = " + std::to_string(System::EnumCastUnderlying(windowError)));
     ASSERT_EQUAL_NULL_PTR(errorMessage);
 }
 

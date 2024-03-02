@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:41)
+/// 版本：1.0.0.6 (2024/02/24 19:56)
 
 #ifndef SYSTEM_WINDOWS_WINDOW_NAMED_PIPE_H
 #define SYSTEM_WINDOWS_WINDOW_NAMED_PIPE_H
@@ -15,7 +15,7 @@
 #include "Using/WindowsUsing.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
 
-// 命名管道的创建和关闭。
+/// 命名管道的创建和关闭。
 namespace System
 {
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CreateSystemPipe(WindowsHandlePtr readPipe,

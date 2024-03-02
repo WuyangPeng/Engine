@@ -14,6 +14,7 @@
 
 #include "Mathematics/Algebra/Vector3.h"
 #include "Mathematics/Base/MathDetail.h"
+#include "Mathematics/Primitives/Line.h"
 
 namespace Mathematics
 {
@@ -27,11 +28,13 @@ namespace Mathematics
 
         using Math = Math<Real>;
         using Vector3 = Vector3<Real>;
+        using AlgebraLine3 = Algebra::Line3<Real>;
 
     public:
         // 线表示为P+t*D，其中P是线原点，D是单位长度的方向向量，t是任意实数。
         // 用户必须确保D是单位长度。
         Line3(const Vector3& origin, const Vector3& direction, Real epsilon = Math::GetZeroTolerance()) noexcept;
+        explicit Line3(const AlgebraLine3& line, Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 

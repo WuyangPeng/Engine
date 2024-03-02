@@ -30,13 +30,13 @@ System::OpenGLSystemVersion System::GetOpenGLVersion() noexcept
     return GetOpenGLVersion(major, minor);
 }
 
-bool System::IsOpenGLSupportsExtension(const std::string& extension)
+bool System::IsOpenGLSupportsExtension(const std::string& extension) noexcept
 {
     const auto numExtensions = GetGLInteger(OpenGLQuery::NumExtensions);
 
     for (auto index = 0; index < numExtensions; ++index)
     {
-        if (const auto openglExtension = GLGetStringi(GL_EXTENSIONS, index);
+        if (const auto openglExtension = GLGetStringI(GL_EXTENSIONS, index);
             openglExtension != nullptr)
         {
 #include SYSTEM_WARNING_PUSH

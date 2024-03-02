@@ -104,19 +104,19 @@ void System::GLEndQuery(GLenum target) noexcept
     SYSTEM_BODY_1(glEndQuery, target);
 }
 
-void System::GLGetQueryiv(GLenum target, GLenum pname, GLint* params) noexcept
+void System::GLGetQueryIv(GLenum target, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_BODY_3(glGetQueryiv, target, pname, params);
+    SYSTEM_BODY_3(glGetQueryiv, target, pName, params);
 }
 
-void System::GLGetQueryObjectiv(GLuint id, GLenum pname, GLint* params) noexcept
+void System::GLGetQueryObjectIv(GLuint id, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_BODY_3(glGetQueryObjectiv, id, pname, params);
+    SYSTEM_BODY_3(glGetQueryObjectiv, id, pName, params);
 }
 
-void System::GLGetQueryObjectuiv(GLuint id, GLenum pname, GLuint* params) noexcept
+void System::GLGetQueryObjectUiv(GLuint id, GLenum pName, GLuint* params) noexcept
 {
-    SYSTEM_BODY_3(glGetQueryObjectuiv, id, pname, params);
+    SYSTEM_BODY_3(glGetQueryObjectuiv, id, pName, params);
 }
 
 void System::GLBindBuffer(GLenum target, GLuint buffer) noexcept
@@ -164,12 +164,12 @@ GLboolean System::GLUnmapBuffer(GLenum target) noexcept
     SYSTEM_BODY_1_RESULT(glUnmapBuffer, target, GL_FALSE);
 }
 
-void System::GLGetBufferParameteriv(GLenum target, GLenum pname, GLint* params) noexcept
+void System::GLGetBufferParameterIv(GLenum target, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_BODY_3(glGetBufferParameteriv, target, pname, params);
+    SYSTEM_BODY_3(glGetBufferParameteriv, target, pName, params);
 }
 
-void System::GLGetBufferPointerv(GLenum target, GLenum pname, void** params) noexcept
+void System::GLGetBufferPointerV(GLenum target, GLenum pName, void** params) noexcept
 {
-    SYSTEM_BODY_3(glGetBufferPointerv, target, pname, params);
+    SYSTEM_BODY_3(glGetBufferPointerv, target, pName, params);
 }

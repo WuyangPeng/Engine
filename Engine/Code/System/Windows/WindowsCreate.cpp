@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:44)
+/// 版本：1.0.0.6 (2024/02/26 13:03)
 
 #include "System/SystemExport.h"
 
@@ -16,6 +16,12 @@
 
 namespace System
 {
+    /// 获取指定窗口的信息。
+    ///
+    /// @param hWnd 窗口句柄。
+    /// @param result 存储窗口信息的字符串。
+    /// @param getWindowsInformationFunction 用于获取窗口信息的函数指针。
+    /// @return 如果成功获取窗口信息，则返回true，否则返回false。
     bool GetWindowsInformation(WindowsHWnd hWnd, String& result, GetWindowsInformationFunction getWindowsInformationFunction)
     {
         TCharContainer name{};
@@ -37,10 +43,7 @@ bool System::AdjustSystemWindowRect(WindowsRect* rect, WindowsStyles styles) noe
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AdjustWindowRect(rect, EnumCastUnderlying(styles), gFalse) != gFalse)
-        return true;
-    else
-        return false;
+    return ::AdjustWindowRect(rect, EnumCastUnderlying(styles), gFalse) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -143,15 +146,9 @@ bool System::RemoveMenuCloseButton(WindowsHWnd hWnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (const auto menu = GetWindowSystemMenu(hWnd);
-        menu != nullptr && RemoveSystemMenu(menu, SystemMenuCommand::Close, MenuItem::ByCommand))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    const auto menu = GetWindowSystemMenu(hWnd);
+
+    return menu != nullptr && RemoveSystemMenu(menu, SystemMenuCommand::Close, MenuItem::ByCommand);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -181,10 +178,7 @@ bool System::RemoveSystemMenu(WindowsHMenu menu, SystemMenuCommand position, Men
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::RemoveMenu(menu, EnumCastUnderlying(position), EnumCastUnderlying(flags)) != gFalse)
-        return true;
-    else
-        return false;
+    return ::RemoveMenu(menu, EnumCastUnderlying(position), EnumCastUnderlying(flags)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

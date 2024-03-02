@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:06)
+/// 版本：1.0.0.6 (2024/02/28 17:37)
 
 #ifndef SYSTEM_OPENGL_GL_21_EXTENSIONS_H
 #define SYSTEM_OPENGL_GL_21_EXTENSIONS_H
@@ -17,18 +17,18 @@
 
 namespace System
 {
-    // OpenGL 2.1
+    /// OpenGL 2.1
 
     SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL21() noexcept;
 
     void InitOpenGL21() noexcept;
 
-    SYSTEM_HIDDEN_DECLARE void GLUniformMatrix2x3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLUniformMatrix3x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLUniformMatrix2x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLUniformMatrix4x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLUniformMatrix3x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLUniformMatrix4x3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLUniformMatrix2X3Fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLUniformMatrix3X2Fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLUniformMatrix2X4Fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLUniformMatrix4X2Fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLUniformMatrix3X4Fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLUniformMatrix4X3Fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept;
 }
 
 #endif  // SYSTEM_OPENGL_GL_21_EXTENSIONS_H

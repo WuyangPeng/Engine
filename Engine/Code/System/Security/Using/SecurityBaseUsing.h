@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:27)
+/// 版本：1.0.0.6 (2024/02/28 10:45)
 
 #ifndef SYSTEM_SECURITY_SECURITY_BASE_USING_H
 #define SYSTEM_SECURITY_SECURITY_BASE_USING_H
@@ -167,7 +167,7 @@ namespace System
     struct SecurityTokenPrivileges
     {
         uint32_t PrivilegeCount;
-        LuidAndAttributes Privileges[1];
+        LocallyUniqueIdentifierAndAttributes Privileges[1];
     };
     using SecurityTokenPrivilegesPtr = SecurityTokenPrivileges*;
 
@@ -199,8 +199,8 @@ namespace System
         SecuritySidAndAttributesPtr RestrictedSids;
         uint32_t PrivilegeCount;
         uint32_t PrivilegeLength;
-        LuidAndAttributesPtr Privileges;
-        LookupPrivilegeLuid AuthenticationId;
+        LocallyUniqueIdentifierAndAttributesPtr Privileges;
+        LookupPrivilegeLocallyUniqueIdentifier AuthenticationId;
     };
     using SecurityTokenGroupsAndPrivilegesPtr = SecurityTokenGroupsAndPrivileges*;
 
@@ -242,7 +242,7 @@ namespace System
         SecuritySidAndAttributesHash SidHash;
         SecuritySidAndAttributesHash RestrictedSidHash;
         SecurityTokenPrivilegesPtr Privileges;
-        LookupPrivilegeLuid AuthenticationId;
+        LookupPrivilegeLocallyUniqueIdentifier AuthenticationId;
         SecurityTokenType TokenType;
         SecurityImpersonationLevel ImpersonationLevel;
         SecurityTokenMandatoryPolicy MandatoryPolicy;
@@ -265,14 +265,14 @@ namespace System
     struct SecurityTokenSource
     {
         char SourceName[tokenSourceLength];
-        LookupPrivilegeLuid SourceIdentifier;
+        LookupPrivilegeLocallyUniqueIdentifier SourceIdentifier;
     };
     using SecurityTokenSourcePtr = SecurityTokenSource*;
 
     struct SecurityTokenStatistics
     {
-        LookupPrivilegeLuid TokenId;
-        LookupPrivilegeLuid AuthenticationId;
+        LookupPrivilegeLocallyUniqueIdentifier TokenId;
+        LookupPrivilegeLocallyUniqueIdentifier AuthenticationId;
         WindowsLargeInteger ExpirationTime;
         SecurityTokenType TokenType;
         SecurityImpersonationLevel ImpersonationLevel;
@@ -280,22 +280,22 @@ namespace System
         uint32_t DynamicAvailable;
         uint32_t GroupCount;
         uint32_t PrivilegeCount;
-        LookupPrivilegeLuid ModifiedId;
+        LookupPrivilegeLocallyUniqueIdentifier ModifiedId;
     };
     using SecurityTokenStatisticsPtr = SecurityTokenStatistics*;
 
     struct SecurityTokenControl
     {
-        LookupPrivilegeLuid TokenId;
-        LookupPrivilegeLuid AuthenticationId;
-        LookupPrivilegeLuid ModifiedId;
+        LookupPrivilegeLocallyUniqueIdentifier TokenId;
+        LookupPrivilegeLocallyUniqueIdentifier AuthenticationId;
+        LookupPrivilegeLocallyUniqueIdentifier ModifiedId;
         SecurityTokenSource TokenSource;
     };
     using SecurityTokenControlPtr = SecurityTokenControl*;
 
     struct SecurityTokenOrigin
     {
-        LookupPrivilegeLuid OriginatingLogonSession;
+        LookupPrivilegeLocallyUniqueIdentifier OriginatingLogonSession;
     };
     using SecurityTokenOriginPtr = SecurityTokenOrigin*;
 

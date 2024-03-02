@@ -50,20 +50,20 @@ void System::LinkGLProgram(OpenGLUInt program) noexcept
 bool System::GetGLProgram(OpenGLUInt program, ProgramStatus pName) noexcept
 {
     OpenGLInt params{};
-    GLGetProgramiv(program, EnumCastUnderlying(pName), &params);
+    GLGetProgramIv(program, EnumCastUnderlying(pName), &params);
 
     return params != GL_FALSE;
 }
 
 void System::GetGLProgram(OpenGLUInt program, ProgramAttributes pName, ComputeWorkGroupSizeType& params) noexcept
 {
-    GLGetProgramiv(program, EnumCastUnderlying(pName), params.data());
+    GLGetProgramIv(program, EnumCastUnderlying(pName), params.data());
 }
 
 int System::GetGLProgram(OpenGLUInt program, ProgramAttributes pName) noexcept
 {
     OpenGLInt params{};
-    GLGetProgramiv(program, EnumCastUnderlying(pName), &params);
+    GLGetProgramIv(program, EnumCastUnderlying(pName), &params);
 
     return params;
 }
@@ -93,14 +93,14 @@ std::string System::GetGLProgramInfoLog(OpenGLUInt program)
 int System::GetGLProgramInterface(OpenGLUInt program, ProgramInterface programInterface, ProgramInterfaceName pName) noexcept
 {
     auto result = 0;
-    GLGetProgramInterfaceiv(program, EnumCastUnderlying(programInterface), EnumCastUnderlying(pName), &result);
+    GLGetProgramInterfaceIv(program, EnumCastUnderlying(programInterface), EnumCastUnderlying(pName), &result);
 
     return result;
 }
 
 void System::GetGLProgramResource(OpenGLUInt program, ProgramInterface programInterface, OpenGLUInt index, OpenGLSize propCount, const OpenGLEnum* props, OpenGLSize bufSize, OpenGLSize* length, OpenGLInt* params) noexcept
 {
-    GLGetProgramResourceiv(program, EnumCastUnderlying(programInterface), index, propCount, props, bufSize, length, params);
+    GLGetProgramResourceIv(program, EnumCastUnderlying(programInterface), index, propCount, props, bufSize, length, params);
 }
 
 void System::GetGLProgramResourceName(OpenGLUInt program, ProgramInterface programInterface, OpenGLUInt index, OpenGLSize bufSize, OpenGLSize* length, OpenGLChar* name) noexcept
@@ -125,5 +125,5 @@ void System::SetGLDispatchCompute(int numXGroups, int numYGroups, int numZGroups
 
 void System::SetGLUniform1(OpenGLInt location, OpenGLInt unit) noexcept
 {
-    GLUniform1i(location, unit);
+    GLUniform1I(location, unit);
 }

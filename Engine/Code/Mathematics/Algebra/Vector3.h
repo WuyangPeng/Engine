@@ -73,6 +73,7 @@ namespace Mathematics
         explicit Vector3(const Vector4<RhsType>& vector);
 
         explicit Vector3(const ArrayType& coordinate);
+        explicit Vector3(const AlgebraVector3& coordinate);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -110,31 +111,31 @@ namespace Mathematics
 
         // Ãÿ ‚Vector3
         // (0,0,0)
-        static constexpr Vector3 GetZero()
+        static constexpr Vector3 GetZero() noexcept
         {
             return Vector3{};
         }
 
         // (1,0,0)
-        static constexpr Vector3 GetUnitX()
+        static constexpr Vector3 GetUnitX() noexcept
         {
             return Vector3{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0) };
         }
 
         // (0,1,0)
-        static constexpr Vector3 GetUnitY()
+        static constexpr Vector3 GetUnitY() noexcept
         {
             return Vector3{ Math::GetValue(0), Math::GetValue(1), Math::GetValue(0) };
         }
 
         // (0,0,1)
-        static constexpr Vector3 GetUnitZ()
+        static constexpr Vector3 GetUnitZ() noexcept
         {
             return Vector3{ Math::GetValue(0), Math::GetValue(0), Math::GetValue(1) };
         }
 
         // (1,1,1)
-        static constexpr Vector3 GetOne()
+        static constexpr Vector3 GetOne() noexcept
         {
             return Vector3{ Math::GetValue(1), Math::GetValue(1), Math::GetValue(1) };
         }

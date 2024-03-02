@@ -129,7 +129,7 @@ CoreTools::SimpleCSV::ValueType CoreTools::SimpleCSV::CellValueProxyImpl::GetTyp
     return ValueType::Error;
 }
 
-CoreTools::SimpleCSV::ValueType CoreTools::SimpleCSV::CellValueProxyImpl::GetStringType(const std::string& attributeValue)
+CoreTools::SimpleCSV::ValueType CoreTools::SimpleCSV::CellValueProxyImpl::GetStringType(const std::string& attributeValue) noexcept
 {
     if (attributeValue == "s")
     {

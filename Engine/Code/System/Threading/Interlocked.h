@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:02)
+/// 版本：1.0.0.6 (2024/02/27 17:46)
 
 #ifndef SYSTEM_THREADING_INTERLOCKED_H
 #define SYSTEM_THREADING_INTERLOCKED_H
 
 #include "System/SystemDll.h"
 
-// 原子操作
+/// 原子操作
 namespace System
 {
     template <typename T>
@@ -32,7 +32,7 @@ namespace System
     NODISCARD T SystemInterlockedExchangeSubtract(T* addend, T value) noexcept(std::is_same_v<long, T>);
 
     template <typename T>
-    NODISCARD T SystemInterlockedCompareExchange(T* destination, T exchange, T comperand) noexcept(std::is_same_v<long, T>);
+    NODISCARD T SystemInterlockedCompareExchange(T* destination, T exchange, T comparisonOperand) noexcept(std::is_same_v<long, T>);
 
     template <typename T>
     NODISCARD T SystemInterlockedAnd(T* destination, T value) noexcept(std::is_same_v<long, T>);

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:49)
+/// 版本：1.0.0.6 (2024/02/27 09:51)
 
 #include "System/SystemExport.h"
 
@@ -35,6 +35,7 @@ int64_t System::GetTimeInSeconds(const DeltaTimeValueData& deltaTime) noexcept
 int64_t System::GetTimeInSeconds() noexcept
 {
     const auto microseconds = GetTimeInMicroseconds();
+
     return microseconds / gMicroseconds;
 }
 

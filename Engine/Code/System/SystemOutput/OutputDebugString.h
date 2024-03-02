@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:25)
+/// 版本：1.0.0.6 (2024/02/28 10:15)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_OUTPUT_DEBUG_STRING_H
 #define SYSTEM_SYSTEM_OUTPUT_OUTPUT_DEBUG_STRING_H
@@ -14,7 +14,7 @@
 
 #include "System/Helper/UnicodeUsing.h"
 
-// 消息输出到调试窗口。
+/// 消息输出到调试窗口。
 namespace System
 {
     void SYSTEM_DEFAULT_DECLARE OutputDebugStringWithChar(const char* outputString) noexcept;

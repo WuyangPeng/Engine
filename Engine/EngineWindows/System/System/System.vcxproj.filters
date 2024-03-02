@@ -1047,9 +1047,6 @@
     <ClInclude Include="..\..\..\Code\System\OpenGL\Detail\GLExtensions.h">
       <Filter>OpenGL 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\OpenGL\Detail\GLPlugin.h">
-      <Filter>OpenGL 头文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\OpenGL\Detail\GLUtility.h">
       <Filter>OpenGL 头文件\Detail</Filter>
     </ClInclude>
@@ -1075,9 +1072,6 @@
       <Filter>OpenGL 头文件\Flags</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\OpenGLFlagsFwd.h">
-      <Filter>OpenGL 头文件\Fwd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\GLPluginFwd.h">
       <Filter>OpenGL 头文件\Fwd</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\OpenGL\Using\GlutUsing.h">
@@ -1521,9 +1515,6 @@
     <ClInclude Include="..\..\..\Code\System\Windows\Flags\WindowsMessagesFlags.h">
       <Filter>Windows 头文件\Flags</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Windows\Flags\WindowsNamedPipeFlags.h">
-      <Filter>Windows 头文件\Flags</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Windows\Flags\WindowsPictorialFlags.h">
       <Filter>Windows 头文件\Flags</Filter>
     </ClInclude>
@@ -1531,9 +1522,6 @@
       <Filter>Windows 头文件\Flags</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Windows\Flags\WindowsKeyCodesFlags.h">
-      <Filter>Windows 头文件\Flags</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Windows\Flags\WindowsSystemFlags.h">
       <Filter>Windows 头文件\Flags</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\TypeIndex.h">
@@ -1905,6 +1893,9 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable28301.inl">
       <Filter>Helper 内联文件\PragmaWarning</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\GLPluginFwd.h">
+      <Filter>OpenGL 头文件\Fwd</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\DllLib.cpp">
@@ -2260,6 +2251,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLPolygon.cpp">
       <Filter>OpenGL 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\OpenGL\Detail\GetOpenGLFunction.cpp">
+      <Filter>OpenGL 源文件\Detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:37)
+/// 版本：1.0.0.6 (2024/02/23 16:36)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_MESSAGES_FLAGS_H
 #define SYSTEM_WINDOWS_WINDOWS_MESSAGES_FLAGS_H
@@ -73,7 +73,7 @@ namespace System
         QueryDragIcon = WM_QUERYDRAGICON,
         CompareItem = WM_COMPAREITEM,
 
-        GetObject = WM_GETOBJECT,
+        GetObjectMessage = WM_GETOBJECT,
 
         Compacting = WM_COMPACTING,
         CommNotify = WM_COMMNOTIFY,  // 不再支持
@@ -366,7 +366,7 @@ namespace System
         QueryDragIcon = 0x0037,
         CompareItem = 0x0039,
 
-        GetObject = 0x003D,
+        GetObjectMessage = 0x003D,
 
         Compacting = 0x0041,
         CommNotify = 0x0044,

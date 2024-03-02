@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:29)
+/// 版本：1.0.0.6 (2024/02/28 11:02)
 
 #include "System/SystemExport.h"
 
@@ -53,10 +53,7 @@ bool System::GetAdjustTokenGroups(WindowsHandle tokenHandle,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AdjustTokenGroups(tokenHandle, BoolConversion(resetToDefault), newState, bufferLength, previousState, returnLength) != gFalse)
-        return true;
-    else
-        return false;
+    return ::AdjustTokenGroups(tokenHandle, BoolConversion(resetToDefault), newState, bufferLength, previousState, returnLength) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -81,10 +78,7 @@ bool System::GetAdjustTokenPrivileges(WindowsHandle tokenHandle,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AdjustTokenPrivileges(tokenHandle, BoolConversion(disableAllPrivileges), newState, bufferLength, previousState, returnLength) != gFalse)
-        return true;
-    else
-        return false;
+    return ::AdjustTokenPrivileges(tokenHandle, BoolConversion(disableAllPrivileges), newState, bufferLength, previousState, returnLength) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -104,10 +98,7 @@ bool System::IsAreAllAccessesGranted(AccessGenericMask grantedAccess, AccessGene
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AreAllAccessesGranted(EnumCastUnderlying(grantedAccess), EnumCastUnderlying(desiredAccess)) != gFalse)
-        return true;
-    else
-        return false;
+    return ::AreAllAccessesGranted(EnumCastUnderlying(grantedAccess), EnumCastUnderlying(desiredAccess)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -122,10 +113,7 @@ bool System::IsAreAnyAccessesGranted(AccessGenericMask grantedAccess, AccessGene
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AreAnyAccessesGranted(EnumCastUnderlying(grantedAccess), EnumCastUnderlying(desiredAccess)) != gFalse)
-        return true;
-    else
-        return false;
+    return ::AreAnyAccessesGranted(EnumCastUnderlying(grantedAccess), EnumCastUnderlying(desiredAccess)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -141,29 +129,22 @@ bool System::CreateSystemRestrictedToken(WindowsHandle existingTokenHandle,
                                          WindowsDWord disableSidCount,
                                          SecuritySidAndAttributesPtr sidsToDisable,
                                          WindowsDWord deletePrivilegeCount,
-                                         LuidAndAttributesPtr privilegesToDelete,
+                                         LocallyUniqueIdentifierAndAttributesPtr privilegesToDelete,
                                          WindowsDWord restrictedSidCount,
                                          SecuritySidAndAttributesPtr sidsToRestrict,
                                          WindowsHandlePtr newTokenHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CreateRestrictedToken(existingTokenHandle,
-                                EnumCastUnderlying(flags),
-                                disableSidCount,
-                                sidsToDisable,
-                                deletePrivilegeCount,
-                                privilegesToDelete,
-                                restrictedSidCount,
-                                sidsToRestrict,
-                                newTokenHandle) != gFalse)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return ::CreateRestrictedToken(existingTokenHandle,
+                                   EnumCastUnderlying(flags),
+                                   disableSidCount,
+                                   sidsToDisable,
+                                   deletePrivilegeCount,
+                                   privilegesToDelete,
+                                   restrictedSidCount,
+                                   sidsToRestrict,
+                                   newTokenHandle) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -186,10 +167,7 @@ bool System::DuplicateSystemToken(WindowsHandle existingTokenHandle, SecurityImp
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::DuplicateToken(existingTokenHandle, impersonationLevel, duplicateTokenHandle) != gFalse)
-        return true;
-    else
-        return false;
+    return ::DuplicateToken(existingTokenHandle, impersonationLevel, duplicateTokenHandle) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -210,10 +188,7 @@ bool System::DuplicateSystemToken(WindowsHandle existingTokenHandle,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::DuplicateTokenEx(existingTokenHandle, EnumCastUnderlying(standardAccess) | EnumCastUnderlying(specificAccess), tokenAttributes, impersonationLevel, tokenType, newToken) != gFalse)
-        return true;
-    else
-        return false;
+    return ::DuplicateTokenEx(existingTokenHandle, EnumCastUnderlying(standardAccess) | EnumCastUnderlying(specificAccess), tokenAttributes, impersonationLevel, tokenType, newToken) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -238,10 +213,7 @@ bool System::GetSystemTokenInformation(WindowsHandle handle,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetTokenInformation(handle, tokenInformationClass, tokenInformation, tokenInformationLength, returnLength) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetTokenInformation(handle, tokenInformationClass, tokenInformation, tokenInformationLength, returnLength) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -256,10 +228,7 @@ bool System::IsSystemTokenRestricted(WindowsHandle tokenHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::IsTokenRestricted(tokenHandle) != gFalse)
-        return true;
-    else
-        return false;
+    return ::IsTokenRestricted(tokenHandle) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

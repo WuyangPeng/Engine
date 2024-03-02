@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:28)
+/// 版本：1.0.0.6 (2024/02/28 10:54)
 
 #include "System/SystemExport.h"
 
@@ -19,10 +19,7 @@ bool System::AddAccessAllowedAccessControlEntries(AccessCheckAclPtr acl, AccessC
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::AddAccessAllowedAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(accessMask), sid)) != gFalse)
-        return true;
-    else
-        return false;
+    return (::AddAccessAllowedAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(accessMask), sid)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -37,10 +34,7 @@ bool System::AddAccessAllowedAccessControlEntries(AccessCheckAclPtr acl, AccessC
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::AddAccessAllowedAceEx(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(accessMask), sid)) != gFalse)
-        return true;
-    else
-        return false;
+    return (::AddAccessAllowedAceEx(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(accessMask), sid)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -61,14 +55,7 @@ bool System::AddAccessAllowedObjectAccessControlEntries(AccessCheckAclPtr acl,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::AddAccessAllowedObjectAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(accessMask), objectTypeGuid, inheritedObjectTypeGuid, sid)) != gFalse)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return (::AddAccessAllowedObjectAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(accessMask), objectTypeGuid, inheritedObjectTypeGuid, sid)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -89,10 +76,7 @@ bool System::AddAccessDeniedAccessControlEntries(AccessCheckAclPtr acl, AccessCo
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AddAccessDeniedAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(accessMask), sid) != gFalse)
-        return true;
-    else
-        return false;
+    return ::AddAccessDeniedAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(accessMask), sid) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -107,10 +91,7 @@ bool System::AddAccessDeniedAccessControlEntries(AccessCheckAclPtr acl, AccessCo
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::AddAccessDeniedAceEx(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(accessMask), sid)) != gFalse)
-        return true;
-    else
-        return false;
+    return (::AddAccessDeniedAceEx(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(accessMask), sid)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -131,14 +112,7 @@ bool System::AddAccessDeniedObjectAccessControlEntries(AccessCheckAclPtr acl,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::AddAccessDeniedObjectAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(accessMask), objectTypeGuid, inheritedObjectTypeGuid, sid)) != gFalse)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return (::AddAccessDeniedObjectAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(accessMask), objectTypeGuid, inheritedObjectTypeGuid, sid)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -159,10 +133,7 @@ bool System::AddAuditAccessAccessControlEntries(AccessCheckAclPtr acl, AccessCon
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::AddAuditAccessAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(accessMask), sid, BoolConversion(auditSuccess), BoolConversion(auditFailure))) != gFalse)
-        return true;
-    else
-        return false;
+    return (::AddAuditAccessAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(accessMask), sid, BoolConversion(auditSuccess), BoolConversion(auditFailure))) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -183,20 +154,13 @@ bool System::AddAuditAccessAccessControlEntries(AccessCheckAclPtr acl,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::AddAuditAccessAceEx(acl,
-                               EnumCastUnderlying(aceRevision),
-                               EnumCastUnderlying(aceFlags),
-                               EnumCastUnderlying(accessMask),
-                               sid,
-                               BoolConversion(auditSuccess),
-                               BoolConversion(auditFailure))) != gFalse)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return (::AddAuditAccessAceEx(acl,
+                                  EnumCastUnderlying(aceRevision),
+                                  EnumCastUnderlying(aceFlags),
+                                  EnumCastUnderlying(accessMask),
+                                  sid,
+                                  BoolConversion(auditSuccess),
+                                  BoolConversion(auditFailure))) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -225,22 +189,15 @@ bool System::AddAuditAccessObjectAccessControlEntries(AccessCheckAclPtr acl,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::AddAuditAccessObjectAce(acl,
-                                   EnumCastUnderlying(aceRevision),
-                                   EnumCastUnderlying(aceFlags),
-                                   EnumCastUnderlying(accessMask),
-                                   objectTypeGuid,
-                                   inheritedObjectTypeGuid,
-                                   sid,
-                                   BoolConversion(auditSuccess),
-                                   BoolConversion(auditFailure))) != gFalse)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return (::AddAuditAccessObjectAce(acl,
+                                      EnumCastUnderlying(aceRevision),
+                                      EnumCastUnderlying(aceFlags),
+                                      EnumCastUnderlying(accessMask),
+                                      objectTypeGuid,
+                                      inheritedObjectTypeGuid,
+                                      sid,
+                                      BoolConversion(auditSuccess),
+                                      BoolConversion(auditFailure))) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

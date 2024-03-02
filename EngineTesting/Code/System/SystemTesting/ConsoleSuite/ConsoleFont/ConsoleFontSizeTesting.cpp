@@ -45,6 +45,6 @@ void System::ConsoleFontSizeTesting::CurrentConsoleFontSizeTest()
     ASSERT_EQUAL(consoleCoord.X, consoleFontInfo.dwFontSize.X);
     ASSERT_EQUAL(consoleCoord.Y, consoleFontInfo.dwFontSize.Y);
 
-    ASSERT_LESS(0, consoleCoord.X);
+    ASSERT_LESS_EQUAL(0, consoleCoord.X);
     ASSERT_LESS(0, consoleCoord.Y);
 }

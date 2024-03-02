@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:17)
+/// 版本：1.0.0.6 (2024/02/23 14:38)
 
 #ifndef SYSTEM_WINDOWS_EXCEPTION_FLAGS_H
 #define SYSTEM_WINDOWS_EXCEPTION_FLAGS_H

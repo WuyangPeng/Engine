@@ -10,6 +10,9 @@
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT2_SEGMENT2_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT2_SEGMENT2_H
 
+#include "Mathematics/MathematicsDll.h"
+
+#include "StaticTestIntersector.h"
 #include "Mathematics/Algebra/AlgebraFwd.h"
 #include "Mathematics/Algebra/Vector2.h"
 #include "Mathematics/Intersection/StaticIntersector.h"
@@ -18,10 +21,10 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorSegment2Segment2 : public StaticIntersector<Real, Vector2>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersector<Segment2<Real>, Segment2<Real>> : public StaticIntersector<Real, Vector2>
     {
     public:
-        using ClassType = StaticTestIntersectorSegment2Segment2<Real>;
+        using ClassType = StaticTestIntersector<Segment2<Real>, Segment2<Real>>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
         using Vector2 = Vector2<Real>;
@@ -30,7 +33,7 @@ namespace Mathematics
         using Math = typename ParentType::Math;
 
     public:
-        StaticTestIntersectorSegment2Segment2(const Segment2& lhsSegment, const Segment2& rhsSegment, const Real dotThreshold = Math::GetZeroTolerance(), const Real intervalThreshold = Math::GetValue(0));
+        StaticTestIntersector(const Segment2& lhsSegment, const Segment2& rhsSegment, const Real dotThreshold = Math::GetZeroTolerance(), const Real intervalThreshold = Math::GetValue(0));
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

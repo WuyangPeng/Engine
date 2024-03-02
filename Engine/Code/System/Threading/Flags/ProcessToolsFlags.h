@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:59)
+/// 版本：1.0.0.6 (2024/02/27 17:38)
 
 #ifndef SYSTEM_THREADING_PROCESS_TOOLS_FLAGS_H
 #define SYSTEM_THREADING_PROCESS_TOOLS_FLAGS_H
@@ -32,7 +32,7 @@ namespace System
         AlphaByteInstructions = PF_ALPHA_BYTE_INSTRUCTIONS,
         XmmiInstructionsAvailable = PF_XMMI_INSTRUCTIONS_AVAILABLE,
         Now3DInstructionsAvailable = PF_3DNOW_INSTRUCTIONS_AVAILABLE,
-        RdtscInstructionsAvailable = PF_RDTSC_INSTRUCTION_AVAILABLE,
+        RdTscInstructionsAvailable = PF_RDTSC_INSTRUCTION_AVAILABLE,
         PaeEnabled = PF_PAE_ENABLED,
         Xmmi64InstructionsAvailable = PF_XMMI64_INSTRUCTIONS_AVAILABLE,
         SseDazModeAvailable = PF_SSE_DAZ_MODE_AVAILABLE,
@@ -47,7 +47,7 @@ namespace System
     enum class ProcessShutdownParameters
     {
         Default = 0x00000001,
-        ShutdownNoretry = SHUTDOWN_NORETRY,
+        ShutdownNoRetry = SHUTDOWN_NORETRY,
     };
 
     enum class ProcessThreadAttribute
@@ -98,7 +98,7 @@ namespace System
         AlphaByteInstructions = 5,
         XmmiInstructionsAvailable = 6,
         Now3DInstructionsAvailable = 7,
-        RdtscInstructionsAvailable = 8,
+        RdTscInstructionsAvailable = 8,
         PaeEnabled = 9,
         Xmmi64InstructionsAvailable = 10,
         SseDazModeAvailable = 11,
@@ -113,7 +113,7 @@ namespace System
     enum class ProcessShutdownParameters
     {
         Default = 0x00000001,
-        ShutdownNoretry = 0x00000002,
+        ShutdownNoRetry = 0x00000002,
     };
 
     enum class ProcessThreadAttribute

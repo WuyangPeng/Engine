@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:24)
+/// 版本：1.0.0.6 (2024/02/27 20:18)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_DIALOG_BOX_COMMAND_FLAGS_H
 #define SYSTEM_SYSTEM_OUTPUT_DIALOG_BOX_COMMAND_FLAGS_H
 
 #include "System/Helper/Platform.h"
 
-// 对话框命令Id
+/// 对话框命令Id
 namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32

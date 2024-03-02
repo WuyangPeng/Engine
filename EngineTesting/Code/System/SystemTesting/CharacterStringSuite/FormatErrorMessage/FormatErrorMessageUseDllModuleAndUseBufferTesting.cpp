@@ -39,7 +39,7 @@ void System::FormatErrorMessageUseDllModuleAndUseBufferTesting::MainTest()
 
 void System::FormatErrorMessageUseDllModuleAndUseBufferTesting::FormatErrorMessageUseDllModuleAndUseBufferTest(ConstDynamicLinkModule dynamicLinkModule)
 {
-    for (auto flag = WindowError::Success; flag <= WindowError::AppHang; ++flag)
+    for (auto flag = WindowError::Success; flag <= WindowError::DlpPolicySilentlyFail; ++flag)
     {
         ASSERT_NOT_THROW_EXCEPTION_2(FormatErrorMessageTest, dynamicLinkModule, flag);
     }
@@ -67,26 +67,12 @@ void System::FormatErrorMessageUseDllModuleAndUseBufferTesting::FormatErrorMessa
 
 void System::FormatErrorMessageUseDllModuleAndUseBufferTesting::FormatErrorMessageValidTest(ConstDynamicLinkModule dynamicLinkModule, WindowError windowError)
 {
-    if (IsExistInvalidWindowError())
-    {
-        ASSERT_NOT_THROW_EXCEPTION_2(FormatErrorMessageSuccessTest, dynamicLinkModule, windowError);
-    }
-    else
-    {
-        ASSERT_NOT_THROW_EXCEPTION_2(FormatErrorMessageUnknownTest, dynamicLinkModule, windowError);
-    }
+    ASSERT_NOT_THROW_EXCEPTION_2(FormatErrorMessageSuccessTest, dynamicLinkModule, windowError);
 }
 
 void System::FormatErrorMessageUseDllModuleAndUseBufferTesting::FormatErrorMessageInvalidTest(ConstDynamicLinkModule dynamicLinkModule, WindowError windowError)
 {
-    if (IsExistValidWindowError())
-    {
-        ASSERT_NOT_THROW_EXCEPTION_2(FormatErrorMessageUnknownTest, dynamicLinkModule, windowError);
-    }
-    else
-    {
-        ASSERT_NOT_THROW_EXCEPTION_2(FormatErrorMessageFailTest, dynamicLinkModule, windowError);
-    }
+    ASSERT_NOT_THROW_EXCEPTION_2(FormatErrorMessageFailTest, dynamicLinkModule, windowError);
 }
 
 void System::FormatErrorMessageUseDllModuleAndUseBufferTesting::FormatErrorMessageSuccessTest(ConstDynamicLinkModule dynamicLinkModule, WindowError windowError)

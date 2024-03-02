@@ -106,9 +106,9 @@ void System::GLDrawElements(GLenum mode, GLsizei count, GLenum type, const void*
     SYSTEM_PREVIOUSLY_BODY_4(glDrawElements, mode, count, type, indices);
 }
 
-void System::GLGetPointerv(GLenum pname, void** params) noexcept
+void System::GLGetPointerV(GLenum pName, void** params) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_2(glGetPointerv, pname, params);
+    SYSTEM_PREVIOUSLY_BODY_2(glGetPointerv, pName, params);
 }
 
 void System::GLPolygonOffset(GLfloat factor, GLfloat units) noexcept
@@ -116,34 +116,34 @@ void System::GLPolygonOffset(GLfloat factor, GLfloat units) noexcept
     SYSTEM_PREVIOUSLY_BODY_2(glPolygonOffset, factor, units);
 }
 
-void System::GLCopyTexImage1D(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border) noexcept
+void System::GLCopyTexImage1D(GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLint border) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_7(glCopyTexImage1D, target, level, internalformat, x, y, width, border);
+    SYSTEM_PREVIOUSLY_BODY_7(glCopyTexImage1D, target, level, internalFormat, x, y, width, border);
 }
 
-void System::GLCopyTexImage2D(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border) noexcept
+void System::GLCopyTexImage2D(GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_8(glCopyTexImage2D, target, level, internalformat, x, y, width, height, border);
+    SYSTEM_PREVIOUSLY_BODY_8(glCopyTexImage2D, target, level, internalFormat, x, y, width, height, border);
 }
 
-void System::GLCopyTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width) noexcept
+void System::GLCopyTexSubImage1D(GLenum target, GLint level, GLint xOffset, GLint x, GLint y, GLsizei width) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_6(glCopyTexSubImage1D, target, level, xoffset, x, y, width);
+    SYSTEM_PREVIOUSLY_BODY_6(glCopyTexSubImage1D, target, level, xOffset, x, y, width);
 }
 
-void System::GLCopyTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
+void System::GLCopyTexSubImage2D(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_8(glCopyTexSubImage2D, target, level, xoffset, yoffset, x, y, width, height);
+    SYSTEM_PREVIOUSLY_BODY_8(glCopyTexSubImage2D, target, level, xOffset, yOffset, x, y, width, height);
 }
 
-void System::GLTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void* pixels) noexcept
+void System::GLTexSubImage1D(GLenum target, GLint level, GLint xOffset, GLsizei width, GLenum format, GLenum type, const void* pixels) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_7(glTexSubImage1D, target, level, xoffset, width, format, type, pixels);
+    SYSTEM_PREVIOUSLY_BODY_7(glTexSubImage1D, target, level, xOffset, width, format, type, pixels);
 }
 
-void System::GLTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels) noexcept
+void System::GLTexSubImage2D(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels) noexcept
 {
-    SYSTEM_PREVIOUSLY_BODY_9(glTexSubImage2D, target, level, xoffset, yoffset, width, height, format, type, pixels);
+    SYSTEM_PREVIOUSLY_BODY_9(glTexSubImage2D, target, level, xOffset, yOffset, width, height, format, type, pixels);
 }
 
 void System::GLBindTexture(GLenum target, GLuint texture) noexcept

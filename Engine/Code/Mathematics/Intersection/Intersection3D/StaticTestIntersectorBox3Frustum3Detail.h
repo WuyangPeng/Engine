@@ -107,7 +107,7 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
     diffDotMin.at(0) = frustum.GetDirectionMin() * diffDot.at(0);
     upDotMax.at(2) = frustum.GetRightBound() * diffDot.at(2);
     auto value0 = diffDotMin.at(0) - upDotMax.at(2);
-    auto mTwoRF = frustum.GetMTwoRF();
+    auto mTwoRF = frustum.GetMTwoRightF();
     if (value0 + radius < mTwoRF || value0 > radius)
     {
         this->SetIntersectionType(IntersectionType::Empty);
@@ -140,7 +140,7 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
     diffDotMin.at(1) = frustum.GetDirectionMin() * diffDot.at(1);
     diffDotMax.at(2) = frustum.GetUpBound() * diffDot.at(2);
     value0 = diffDotMin.at(1) - diffDotMax.at(2);
-    auto mTwoUf = frustum.GetMTwoUF();
+    auto mTwoUf = frustum.GetMTwoUpF();
     if (value0 + radius < mTwoUf || radius < value0)
     {
         this->SetIntersectionType(IntersectionType::Empty);

@@ -127,9 +127,9 @@ namespace Mathematics
         void FromRotationColumnVector3(const ContainerType& rotationColumn);
         NODISCARD ContainerType ToRotationColumnVector3() const;
         void FromAxisAngle(const Vector3& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
-        NODISCARD Vector3 ToAxis() const;
+        NODISCARD Vector3 ToAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD Real ToAngle() const noexcept;
-        NODISCARD AxisAngle ToAngleAxis() const;
+        NODISCARD AxisAngle ToAngleAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         /// 4-tupleµÄ³¤¶È
         NODISCARD Real Length() const noexcept(gAssert < 3 || gMathematicsAssert < 3);

@@ -73,7 +73,7 @@ void System::SetGLClearDepth(OpenGLDouble depth) noexcept
 System::OpenGLInt System::GetGLInteger(OpenGLQuery name) noexcept
 {
     OpenGLInt params{};
-    GLGetIntegerv(EnumCastUnderlying(name), &params);
+    GLGetIntegerV(EnumCastUnderlying(name), &params);
 
     return params;
 }
@@ -81,20 +81,20 @@ System::OpenGLInt System::GetGLInteger(OpenGLQuery name) noexcept
 System::OpenGLInt System::GetGLInteger(TextureTargetBinding name) noexcept
 {
     OpenGLInt params{};
-    GLGetIntegerv(EnumCastUnderlying(name), &params);
+    GLGetIntegerV(EnumCastUnderlying(name), &params);
 
     return params;
 }
 
 void System::GetGLInteger(OpenGLQuery name, OpenGLInt* data) noexcept
 {
-    GLGetIntegerv(EnumCastUnderlying(name), data);
+    GLGetIntegerV(EnumCastUnderlying(name), data);
 }
 
 bool System::GetGLBoolean(OpenGLQuery name) noexcept
 {
     OpenGLBoolean params{};
-    GLGetBooleanv(EnumCastUnderlying(name), &params);
+    GLGetBooleanV(EnumCastUnderlying(name), &params);
 
     return params != GL_FALSE;
 }
@@ -102,7 +102,7 @@ bool System::GetGLBoolean(OpenGLQuery name) noexcept
 System::OpenGLFloat System::GetGLFloat(OpenGLQuery name) noexcept
 {
     OpenGLFloat params{};
-    GLGetFloatv(EnumCastUnderlying(name), &params);
+    GLGetFloatV(EnumCastUnderlying(name), &params);
 
     return params;
 }
@@ -110,14 +110,14 @@ System::OpenGLFloat System::GetGLFloat(OpenGLQuery name) noexcept
 System::OpenGLDouble System::GetGLDouble(OpenGLQuery name) noexcept
 {
     OpenGLDouble params{};
-    GLGetDoublev(EnumCastUnderlying(name), &params);
+    GLGetDoubleV(EnumCastUnderlying(name), &params);
 
     return params;
 }
 
 void System::GetGLDouble(OpenGLQuery name, OpenGLDouble* data) noexcept
 {
-    GLGetDoublev(EnumCastUnderlying(name), data);
+    GLGetDoubleV(EnumCastUnderlying(name), data);
 }
 
 void System::EnableGLState(OpenGLEnable cap) noexcept
@@ -127,7 +127,7 @@ void System::EnableGLState(OpenGLEnable cap) noexcept
 
 void System::EnableGLState(OpenGLEnable target, OpenGLUInt index) noexcept
 {
-    GLEnablei(EnumCastUnderlying(target), index);
+    GLEnableI(EnumCastUnderlying(target), index);
 }
 
 void System::DisableGLState(OpenGLEnable cap) noexcept
@@ -137,7 +137,7 @@ void System::DisableGLState(OpenGLEnable cap) noexcept
 
 void System::DisableGLState(OpenGLEnable target, OpenGLUInt index) noexcept
 {
-    GLDisablei(EnumCastUnderlying(target), index);
+    GLDisableI(EnumCastUnderlying(target), index);
 }
 
 void System::SetGLBlendColor(OpenGLFloat red, OpenGLFloat green, OpenGLFloat blue, OpenGLFloat alpha) noexcept
@@ -152,7 +152,7 @@ void System::SetGLColorMask(OpenGLBoolean red, OpenGLBoolean green, OpenGLBoolea
 
 void System::SetGLSampleMask(OpenGLUInt maskNumber, OpenGLBitfield mask) noexcept
 {
-    GLSampleMaski(maskNumber, mask);
+    GLSampleMaskI(maskNumber, mask);
 }
 
 void System::SetGLBlendFuncSeparate(BlendStateMode sourceFactorRGB, BlendStateMode destinationFactorRGB, BlendStateMode sourceFactorAlpha, BlendStateMode destinationFactorAlpha) noexcept
@@ -167,17 +167,17 @@ void System::SetGLBlendEquationSeparate(BlendStateOperation modeRGB, BlendStateO
 
 void System::SetGLBlendEquationSeparate(OpenGLUInt index, BlendStateOperation modeRGB, BlendStateOperation modeAlpha) noexcept
 {
-    GLBlendEquationSeparatei(index, EnumCastUnderlying(modeRGB), EnumCastUnderlying(modeAlpha));
+    GLBlendEquationSeparateI(index, EnumCastUnderlying(modeRGB), EnumCastUnderlying(modeAlpha));
 }
 
 void System::SetGLBlendFuncSeparate(OpenGLUInt index, BlendStateMode sourceFactorRGB, BlendStateMode destinationFactorRGB, BlendStateMode sourceFactorAlpha, BlendStateMode destinationFactorAlpha) noexcept
 {
-    GLBlendFuncSeparatei(index, EnumCastUnderlying(sourceFactorRGB), EnumCastUnderlying(destinationFactorRGB), EnumCastUnderlying(sourceFactorAlpha), EnumCastUnderlying(destinationFactorAlpha));
+    GLBlendFuncSeparateI(index, EnumCastUnderlying(sourceFactorRGB), EnumCastUnderlying(destinationFactorRGB), EnumCastUnderlying(sourceFactorAlpha), EnumCastUnderlying(destinationFactorAlpha));
 }
 
 void System::SetGLColorMask(OpenGLUInt index, OpenGLBoolean red, OpenGLBoolean green, OpenGLBoolean blue, OpenGLBoolean alpha) noexcept
 {
-    GLColorMaski(index, red, green, blue, alpha);
+    GLColorMaskI(index, red, green, blue, alpha);
 }
 
 void System::SetGLDepthFunc(DepthStencilStateMode depthStencilStateMode) noexcept

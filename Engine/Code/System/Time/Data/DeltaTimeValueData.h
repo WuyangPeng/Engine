@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:48)
+/// 版本：1.0.0.6 (2024/02/27 09:49)
 
 #ifndef SYSTEM_TIME_DELTA_TIME_VALUE_H
 #define SYSTEM_TIME_DELTA_TIME_VALUE_H
@@ -14,7 +14,7 @@
 
 #include "System/Time/Using/DeltaTimeUsing.h"
 
-// 时间差值数据
+/// 时间差值数据
 namespace System
 {
     class SYSTEM_DEFAULT_DECLARE DeltaTimeValueData final

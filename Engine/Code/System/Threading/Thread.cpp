@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:19)
+/// 版本：1.0.0.6 (2024/02/27 18:18)
 
 #include "System/SystemExport.h"
 
@@ -51,10 +51,7 @@ bool System::CloseSystemThread(ThreadHandle thread) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(thread) != gFalse)
-        return true;
-    else
-        return false;
+    return ::CloseHandle(thread) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -125,10 +122,7 @@ bool System::SetSystemThreadPriority(ThreadHandle thread, int priority) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetThreadPriority(thread, priority) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetThreadPriority(thread, priority) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -256,17 +250,11 @@ bool System::IsThreadHandleValid(ThreadHandle threadHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (threadHandle != nullptr && threadHandle != invalidHandleValue)
-        return true;
-    else
-        return false;
+    return threadHandle != nullptr && threadHandle != invalidHandleValue;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    if (threadHandle != 0)
-        return true;
-    else
-        return false;
+    return threadHandle != 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

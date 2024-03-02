@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:27)
+/// 版本：1.0.0.6 (2024/02/28 10:46)
 
 #ifndef SYSTEM_SECURITY_LOOKUP_PRIVILEGE_H
 #define SYSTEM_SECURITY_LOOKUP_PRIVILEGE_H
@@ -17,12 +17,12 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
-// 查找权限
+/// 查找权限
 namespace System
 {
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetLookupPrivilegeValue(const TChar* systemName, const TChar* name, LookupPrivilegeLuidPtr luid) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetLookupPrivilegeValue(const TChar* systemName, const TChar* name, LookupPrivilegeLocallyUniqueIdentifierPtr locallyUniqueIdentifier) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetLookupPrivilegeName(const TChar* systemName,
-                                                                 LookupPrivilegeLuidPtr luid,
+                                                                 LookupPrivilegeLocallyUniqueIdentifierPtr locallyUniqueIdentifier,
                                                                  TChar* name,
                                                                  WindowsDWordPtr nameSize) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetLookupPrivilegeDisplayName(const TChar* systemName,

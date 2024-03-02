@@ -136,22 +136,22 @@ void System::GLMinSampleShading(GLfloat value) noexcept
     SYSTEM_BODY_1(glMinSampleShading, value);
 }
 
-void System::GLBlendEquationi(GLuint buf, GLenum mode) noexcept
+void System::GLBlendEquationI(GLuint buf, GLenum mode) noexcept
 {
     SYSTEM_BODY_2(glBlendEquationi, buf, mode);
 }
 
-void System::GLBlendEquationSeparatei(GLuint buf, GLenum modeRGB, GLenum modeAlpha) noexcept
+void System::GLBlendEquationSeparateI(GLuint buf, GLenum modeRGB, GLenum modeAlpha) noexcept
 {
     SYSTEM_BODY_3(glBlendEquationSeparatei, buf, modeRGB, modeAlpha);
 }
 
-void System::GLBlendFunci(GLuint buf, GLenum src, GLenum dst) noexcept
+void System::GLBlendFuncI(GLuint buf, GLenum src, GLenum dst) noexcept
 {
     SYSTEM_BODY_3(glBlendFunci, buf, src, dst);
 }
 
-void System::GLBlendFuncSeparatei(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha) noexcept
+void System::GLBlendFuncSeparateI(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha) noexcept
 {
     SYSTEM_BODY_5(glBlendFuncSeparatei, buf, srcRGB, dstRGB, srcAlpha, dstAlpha);
 }
@@ -221,89 +221,89 @@ void System::GLUniformMatrix4dv(GLint location, GLsizei count, GLboolean transpo
     SYSTEM_BODY_4(glUniformMatrix4dv, location, count, transpose, value);
 }
 
-void System::GLUniformMatrix2x3dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
+void System::GLUniformMatrix2X3dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
 {
     SYSTEM_BODY_4(glUniformMatrix2x3dv, location, count, transpose, value);
 }
 
-void System::GLUniformMatrix2x4dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
+void System::GLUniformMatrix2X4dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
 {
     SYSTEM_BODY_4(glUniformMatrix2x4dv, location, count, transpose, value);
 }
 
-void System::GLUniformMatrix3x2dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
+void System::GLUniformMatrix3X2dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
 {
     SYSTEM_BODY_4(glUniformMatrix3x2dv, location, count, transpose, value);
 }
 
-void System::GLUniformMatrix3x4dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
+void System::GLUniformMatrix3X4dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
 {
     SYSTEM_BODY_4(glUniformMatrix3x4dv, location, count, transpose, value);
 }
 
-void System::GLUniformMatrix4x2dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
+void System::GLUniformMatrix4X2dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
 {
     SYSTEM_BODY_4(glUniformMatrix4x2dv, location, count, transpose, value);
 }
 
-void System::GLUniformMatrix4x3dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
+void System::GLUniformMatrix4X3dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) noexcept
 {
     SYSTEM_BODY_4(glUniformMatrix4x3dv, location, count, transpose, value);
 }
 
-void System::GLGetUniformdv(GLuint program, GLint location, GLdouble* params) noexcept
+void System::GLGetUniformDv(GLuint program, GLint location, GLdouble* params) noexcept
 {
     SYSTEM_BODY_3(glGetUniformdv, program, location, params);
 }
 
-GLint System::GLGetSubroutineUniformLocation(GLuint program, GLenum shadertype, const GLchar* name) noexcept
+GLint System::GLGetSubroutineUniformLocation(GLuint program, GLenum shaderType, const GLchar* name) noexcept
 {
-    SYSTEM_BODY_3_RESULT(glGetSubroutineUniformLocation, program, shadertype, name, 0);
+    SYSTEM_BODY_3_RESULT(glGetSubroutineUniformLocation, program, shaderType, name, 0);
 }
 
-GLuint System::GLGetSubroutineIndex(GLuint program, GLenum shadertype, const GLchar* name) noexcept
+GLuint System::GLGetSubroutineIndex(GLuint program, GLenum shaderType, const GLchar* name) noexcept
 {
-    SYSTEM_BODY_3_RESULT(glGetSubroutineIndex, program, shadertype, name, 0u);
+    SYSTEM_BODY_3_RESULT(glGetSubroutineIndex, program, shaderType, name, 0u);
 }
 
-void System::GLGetActiveSubroutineUniformiv(GLuint program, GLenum shadertype, GLuint index, GLenum pname, GLint* values) noexcept
+void System::GLGetActiveSubroutineUniformIv(GLuint program, GLenum shaderType, GLuint index, GLenum pName, GLint* values) noexcept
 {
-    SYSTEM_BODY_5(glGetActiveSubroutineUniformiv, program, shadertype, index, pname, values);
+    SYSTEM_BODY_5(glGetActiveSubroutineUniformiv, program, shaderType, index, pName, values);
 }
 
-void System::GLGetActiveSubroutineUniformName(GLuint program, GLenum shadertype, GLuint index, GLsizei bufSize, GLsizei* length, GLchar* name) noexcept
+void System::GLGetActiveSubroutineUniformName(GLuint program, GLenum shaderType, GLuint index, GLsizei bufSize, GLsizei* length, GLchar* name) noexcept
 {
-    SYSTEM_BODY_6(glGetActiveSubroutineUniformName, program, shadertype, index, bufSize, length, name);
+    SYSTEM_BODY_6(glGetActiveSubroutineUniformName, program, shaderType, index, bufSize, length, name);
 }
 
-void System::GLGetActiveSubroutineName(GLuint program, GLenum shadertype, GLuint index, GLsizei bufSize, GLsizei* length, GLchar* name) noexcept
+void System::GLGetActiveSubroutineName(GLuint program, GLenum shaderType, GLuint index, GLsizei bufSize, GLsizei* length, GLchar* name) noexcept
 {
-    SYSTEM_BODY_6(glGetActiveSubroutineName, program, shadertype, index, bufSize, length, name);
+    SYSTEM_BODY_6(glGetActiveSubroutineName, program, shaderType, index, bufSize, length, name);
 }
 
-void System::GLUniformSubroutinesuiv(GLenum shadertype, GLsizei count, const GLuint* indices) noexcept
+void System::GLUniformSubroutinesUiv(GLenum shaderType, GLsizei count, const GLuint* indices) noexcept
 {
-    SYSTEM_BODY_3(glUniformSubroutinesuiv, shadertype, count, indices);
+    SYSTEM_BODY_3(glUniformSubroutinesuiv, shaderType, count, indices);
 }
 
-void System::GLGetUniformSubroutineuiv(GLenum shadertype, GLint location, GLuint* params) noexcept
+void System::GLGetUniformSubroutineUiv(GLenum shaderType, GLint location, GLuint* params) noexcept
 {
-    SYSTEM_BODY_3(glGetUniformSubroutineuiv, shadertype, location, params);
+    SYSTEM_BODY_3(glGetUniformSubroutineuiv, shaderType, location, params);
 }
 
-void System::GLGetProgramStageiv(GLuint program, GLenum shadertype, GLenum pname, GLint* values) noexcept
+void System::GLGetProgramStageIv(GLuint program, GLenum shaderType, GLenum pName, GLint* values) noexcept
 {
-    SYSTEM_BODY_4(glGetProgramStageiv, program, shadertype, pname, values);
+    SYSTEM_BODY_4(glGetProgramStageiv, program, shaderType, pName, values);
 }
 
-void System::GLPatchParameteri(GLenum pname, GLint value) noexcept
+void System::GLPatchParameterI(GLenum pName, GLint value) noexcept
 {
-    SYSTEM_BODY_2(glPatchParameteri, pname, value);
+    SYSTEM_BODY_2(glPatchParameteri, pName, value);
 }
 
-void System::GLPatchParameterfv(GLenum pname, const GLfloat* values) noexcept
+void System::GLPatchParameterFv(GLenum pName, const GLfloat* values) noexcept
 {
-    SYSTEM_BODY_2(glPatchParameterfv, pname, values);
+    SYSTEM_BODY_2(glPatchParameterfv, pName, values);
 }
 
 void System::GLBindTransformFeedback(GLenum target, GLuint id) noexcept
@@ -356,7 +356,7 @@ void System::GLEndQueryIndexed(GLenum target, GLuint index) noexcept
     SYSTEM_BODY_2(glEndQueryIndexed, target, index);
 }
 
-void System::GLGetQueryIndexediv(GLenum target, GLuint index, GLenum pname, GLint* params) noexcept
+void System::GLGetQueryIndexedIv(GLenum target, GLuint index, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_BODY_4(glGetQueryIndexediv, target, index, pname, params);
+    SYSTEM_BODY_4(glGetQueryIndexediv, target, index, pName, params);
 }

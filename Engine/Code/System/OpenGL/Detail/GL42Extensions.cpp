@@ -63,29 +63,29 @@ void System::InitOpenGL42() noexcept
     }
 }
 
-void System::GLDrawArraysInstancedBaseInstance(GLenum mode, GLint first, GLsizei count, GLsizei instancecount, GLuint baseinstance) noexcept
+void System::GLDrawArraysInstancedBaseInstance(GLenum mode, GLint first, GLsizei count, GLsizei instanceCount, GLuint baseInstance) noexcept
 {
-    SYSTEM_BODY_5(glDrawArraysInstancedBaseInstance, mode, first, count, instancecount, baseinstance);
+    SYSTEM_BODY_5(glDrawArraysInstancedBaseInstance, mode, first, count, instanceCount, baseInstance);
 }
 
-void System::GLDrawElementsInstancedBaseInstance(GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei instancecount, GLuint baseinstance) noexcept
+void System::GLDrawElementsInstancedBaseInstance(GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei instanceCount, GLuint baseInstance) noexcept
 {
-    SYSTEM_BODY_6(glDrawElementsInstancedBaseInstance, mode, count, type, indices, instancecount, baseinstance);
+    SYSTEM_BODY_6(glDrawElementsInstancedBaseInstance, mode, count, type, indices, instanceCount, baseInstance);
 }
 
-void System::GLDrawElementsInstancedBaseVertexBaseInstance(GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei instancecount, GLint basevertex, GLuint baseinstance) noexcept
+void System::GLDrawElementsInstancedBaseVertexBaseInstance(GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei instanceCount, GLint baseVertex, GLuint baseInstance) noexcept
 {
-    SYSTEM_BODY_7(glDrawElementsInstancedBaseVertexBaseInstance, mode, count, type, indices, instancecount, basevertex, baseinstance);
+    SYSTEM_BODY_7(glDrawElementsInstancedBaseVertexBaseInstance, mode, count, type, indices, instanceCount, baseVertex, baseInstance);
 }
 
-void System::GLGetInternalformativ(GLenum target, GLenum internalformat, GLenum pname, GLsizei count, GLint* params) noexcept
+void System::GLGetInternalFormatIv(GLenum target, GLenum internalFormat, GLenum pName, GLsizei count, GLint* params) noexcept
 {
-    SYSTEM_BODY_5(glGetInternalformativ, target, internalformat, pname, count, params);
+    SYSTEM_BODY_5(glGetInternalformativ, target, internalFormat, pName, count, params);
 }
 
-void System::GLGetActiveAtomicCounterBufferiv(GLuint program, GLuint bufferIndex, GLenum pname, GLint* params) noexcept
+void System::GLGetActiveAtomicCounterBufferIv(GLuint program, GLuint bufferIndex, GLenum pName, GLint* params) noexcept
 {
-    SYSTEM_BODY_4(glGetActiveAtomicCounterBufferiv, program, bufferIndex, pname, params);
+    SYSTEM_BODY_4(glGetActiveAtomicCounterBufferiv, program, bufferIndex, pName, params);
 }
 
 void System::GLBindImageTexture(GLuint unit, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLenum format) noexcept
@@ -98,27 +98,27 @@ void System::GLMemoryBarrier(GLbitfield barriers) noexcept
     SYSTEM_BODY_1(glMemoryBarrier, barriers);
 }
 
-void System::GLTexStorage1D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width) noexcept
+void System::GLTexStorage1D(GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width) noexcept
 {
-    SYSTEM_BODY_4(glTexStorage1D, target, levels, internalformat, width);
+    SYSTEM_BODY_4(glTexStorage1D, target, levels, internalFormat, width);
 }
 
-void System::GLTexStorage2D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height) noexcept
+void System::GLTexStorage2D(GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height) noexcept
 {
-    SYSTEM_BODY_5(glTexStorage2D, target, levels, internalformat, width, height);
+    SYSTEM_BODY_5(glTexStorage2D, target, levels, internalFormat, width, height);
 }
 
-void System::GLTexStorage3D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth) noexcept
+void System::GLTexStorage3D(GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth) noexcept
 {
-    SYSTEM_BODY_6(glTexStorage3D, target, levels, internalformat, width, height, depth);
+    SYSTEM_BODY_6(glTexStorage3D, target, levels, internalFormat, width, height, depth);
 }
 
-void System::GLDrawTransformFeedbackInstanced(GLenum mode, GLuint id, GLsizei instancecount) noexcept
+void System::GLDrawTransformFeedbackInstanced(GLenum mode, GLuint id, GLsizei instanceCount) noexcept
 {
-    SYSTEM_BODY_3(glDrawTransformFeedbackInstanced, mode, id, instancecount);
+    SYSTEM_BODY_3(glDrawTransformFeedbackInstanced, mode, id, instanceCount);
 }
 
-void System::GLDrawTransformFeedbackStreamInstanced(GLenum mode, GLuint id, GLuint stream, GLsizei instancecount) noexcept
+void System::GLDrawTransformFeedbackStreamInstanced(GLenum mode, GLuint id, GLuint stream, GLsizei instanceCount) noexcept
 {
-    SYSTEM_BODY_4(glDrawTransformFeedbackStreamInstanced, mode, id, stream, instancecount);
+    SYSTEM_BODY_4(glDrawTransformFeedbackStreamInstanced, mode, id, stream, instanceCount);
 }

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:02)
+/// 版本：1.0.0.6 (2024/02/27 17:51)
 
 #ifndef SYSTEM_THREADING_PROCESS_H
 #define SYSTEM_THREADING_PROCESS_H
@@ -17,7 +17,7 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
 
-// 进程的创建和销毁
+/// 进程的创建和销毁
 namespace System
 {
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CreateSystemProcess(const String& applicationName);

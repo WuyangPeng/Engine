@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/11/29 15:30)
+/// 版本：1.0.0.6 (2024/02/20 09:16)
 
 #ifndef MATHEMATICS_DATA_TYPES_TRANSFORM_MATRIX_DETAIL_H
 #define MATHEMATICS_DATA_TYPES_TRANSFORM_MATRIX_DETAIL_H
@@ -72,6 +72,9 @@ void Mathematics::TransformMatrix<Real>::MakeUnitScale()
 template <typename Real>
 void Mathematics::TransformMatrix<Real>::Modification(const APoint& translate) noexcept
 {
+    /// 对于仿射变换，transformMatrix的最后一行总是(0,0,0,1)，
+    /// 因此在构造函数中设置一次。没有必要在此处重置它。
+
 #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
     transformMatrix.SetValue<0, 3>(translate.GetX());

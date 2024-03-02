@@ -10,12 +10,12 @@
 #include "System/SystemExport.h"
 
 #include "GL10Extensions.h"
-#include "GLPlugin.h"
 #include "GLUtility.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/Noexcept.h"
 #include "System/OpenGL/Detail/GL11Extensions.h"
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
+#include "System/OpenGL/Fwd/GLPluginFwd.h"
 
 #include <gsl/util>
 #include <boost/assert.hpp>

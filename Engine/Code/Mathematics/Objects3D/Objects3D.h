@@ -5,15 +5,22 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/12 10:25)
+/// 版本：1.0.0.6 (2024/02/26 17:13)
 
 #ifndef MATHEMATICS_OBJECTS_3D_H
 #define MATHEMATICS_OBJECTS_3D_H
 
+#include "Algebra/Circle3Detail.h"
+#include "Algebra/ConvexPolyhedron3Detail.h"
+#include "Algebra/Ellipse3Detail.h"
+#include "Algebra/Polyhedron3Detail.h"
+#include "Algebra/Tetrahedron3Detail.h"
+#include "Algebra/Torus3Detail.h"
 #include "Box3Detail.h"
 #include "Capsule3Detail.h"
 #include "Circle3Detail.h"
 #include "Cone3Detail.h"
+#include "ConvexMesh3Detail.h"
 #include "ConvexPolyhedron3Detail.h"
 #include "Cylinder3Detail.h"
 #include "Ellipse3Detail.h"

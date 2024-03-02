@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:09)
+/// 版本：1.0.0.6 (2024/02/28 22:37)
 
 #ifndef SYSTEM_OPENGL_GL_46_EXTENSIONS_H
 #define SYSTEM_OPENGL_GL_46_EXTENSIONS_H
@@ -17,15 +17,15 @@
 
 namespace System
 {
-    // OpenGL 4.6
+    /// OpenGL 4.6
 
     SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL46() noexcept;
 
     void InitOpenGL46() noexcept;
 
     SYSTEM_HIDDEN_DECLARE void GLSpecializeShader(GLuint shader, const GLchar* pEntryPoint, GLuint numSpecializationConstants, const GLuint* pConstantIndex, const GLuint* pConstantValue) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLMultiDrawArraysIndirectCount(GLenum mode, const void* indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLMultiDrawElementsIndirectCount(GLenum mode, GLenum type, const void* indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLMultiDrawArraysIndirectCount(GLenum mode, const void* indirect, GLintptr drawCount, GLsizei maxDrawCount, GLsizei stride) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLMultiDrawElementsIndirectCount(GLenum mode, GLenum type, const void* indirect, GLintptr drawCount, GLsizei maxDrawCount, GLsizei stride) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLPolygonOffsetClamp(GLfloat factor, GLfloat units, GLfloat clamp) noexcept;
 }
 

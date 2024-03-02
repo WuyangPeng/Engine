@@ -78,7 +78,7 @@ void System::SetGLCopyBufferSubData(BindBuffer readTarget, BindBuffer writeTarge
 
 void System::GetGLGenFrameBuffers(OpenGLSize n, OpenGLUInt* frameBuffers) noexcept
 {
-    GLGenFramebuffers(n, frameBuffers);
+    GLGenFrameBuffers(n, frameBuffers);
 }
 
 System::OpenGLUInt System::GetGLGenFrameBuffers() noexcept
@@ -91,7 +91,7 @@ System::OpenGLUInt System::GetGLGenFrameBuffers() noexcept
 
 void System::SetGLDeleteFrameBuffers(OpenGLSize n, const OpenGLUInt* frameBuffers) noexcept
 {
-    GLDeleteFramebuffers(n, frameBuffers);
+    GLDeleteFrameBuffers(n, frameBuffers);
 }
 
 void System::SetGLDeleteFrameBuffers(OpenGLUInt frameBuffers) noexcept
@@ -101,7 +101,7 @@ void System::SetGLDeleteFrameBuffers(OpenGLUInt frameBuffers) noexcept
 
 void System::SetGLBindFrameBuffer(FrameBufferType target, OpenGLUInt frameBuffer) noexcept
 {
-    GLBindFramebuffer(EnumCastUnderlying(target), frameBuffer);
+    GLBindFrameBuffer(EnumCastUnderlying(target), frameBuffer);
 }
 
 void System::SetGLDrawBuffers(OpenGLSize n, const OpenGLEnum* buffers) noexcept

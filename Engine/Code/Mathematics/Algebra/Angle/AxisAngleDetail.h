@@ -76,4 +76,13 @@ void Mathematics::Algebra::AxisAngle<N, Real>::SetAngle(Real aAngle) noexcept
     angle = aAngle;
 }
 
+template <int N, typename Real>
+requires(3 <= N && N <= 4 && std::is_arithmetic_v<Real>)
+void Mathematics::Algebra::AxisAngle<N, Real>::MakeAxisZero()
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    axis.MakeZero();
+}
+
 #endif  // MATHEMATICS_ALGEBRA_ALGEBRA_AXIS_ANGLE_DETAIL_H

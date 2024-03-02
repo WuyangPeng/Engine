@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:26)
+/// 版本：1.0.0.6 (2024/02/28 10:38)
 
 #ifndef SYSTEM_SECURITY_SECURITY_SID_FLAGS_H
 #define SYSTEM_SECURITY_SECURITY_SID_FLAGS_H
@@ -41,7 +41,7 @@ namespace System
 
         Replicator = DOMAIN_ALIAS_RID_REPLICATOR,
         RasServers = DOMAIN_ALIAS_RID_RAS_SERVERS,
-        Prew2kCompAccess = DOMAIN_ALIAS_RID_PREW2KCOMPACCESS,
+        PreWindows2000CompAccess = DOMAIN_ALIAS_RID_PREW2KCOMPACCESS,
         RemoteDesktopUsers = DOMAIN_ALIAS_RID_REMOTE_DESKTOP_USERS,
         NetworkConfigurationOps = DOMAIN_ALIAS_RID_NETWORK_CONFIGURATION_OPS,
         IncomingForestTrustBuilder = DOMAIN_ALIAS_RID_INCOMING_FOREST_TRUST_BUILDERS,
@@ -56,7 +56,7 @@ namespace System
         CacheablePrincipalsGroup = DOMAIN_ALIAS_RID_CACHEABLE_PRINCIPALS_GROUP,
         NonCacheablePrincipalsGroup = DOMAIN_ALIAS_RID_NON_CACHEABLE_PRINCIPALS_GROUP,
         EventLogReadersGroup = DOMAIN_ALIAS_RID_EVENT_LOG_READERS_GROUP,
-        CertsvcDcomAccessGroup = DOMAIN_ALIAS_RID_CERTSVC_DCOM_ACCESS_GROUP,
+        CertSvcDcomAccessGroup = DOMAIN_ALIAS_RID_CERTSVC_DCOM_ACCESS_GROUP,
     };
 
     enum class WellKnownSecurity
@@ -165,7 +165,7 @@ namespace System
 
         Replicator = (0x00000228L),
         RasServers = (0x00000229L),
-        Prew2kCompAccess = (0x0000022AL),
+        PreWindows2000CompAccess = (0x0000022AL),
         RemoteDesktopUsers = (0x0000022BL),
         NetworkConfigurationOps = (0x0000022CL),
         IncomingForestTrustBuilder = (0x0000022DL),
@@ -180,7 +180,7 @@ namespace System
         CacheablePrincipalsGroup = (0x0000023BL),
         NonCacheablePrincipalsGroup = (0x0000023CL),
         EventLogReadersGroup = (0x0000023DL),
-        CertsvcDcomAccessGroup = (0x0000023EL),
+        CertSvcDcomAccessGroup = (0x0000023EL),
     };
 
     enum class WellKnownSecurity

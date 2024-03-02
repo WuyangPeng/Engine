@@ -1,15 +1,16 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/11/29 15:45)
+/// 版本：1.0.0.6 (2024/02/20 09:15)
 
 #ifndef MATHEMATICS_ALGEBRA_TRANSFORM_DETAIL_H
 #define MATHEMATICS_ALGEBRA_TRANSFORM_DETAIL_H
 
+#include "Angle/RotationDetail.h"
 #include "Transform.h"
 #include "Detail/AffineMatrixDetail.h"
 #include "Detail/TransformMatrixDetail.h"
@@ -67,6 +68,15 @@ bool Mathematics::Transform<Real>::IsValid() const noexcept
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
+Mathematics::Transform<Real>::operator Mathematics::Algebra::Matrix4x4<Real>() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return GetMatrix4x4();
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
 void Mathematics::Transform<Real>::MakeIdentity() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -83,8 +93,8 @@ void Mathematics::Transform<Real>::MakeUnitScale()
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    affineMatrix.MakeUnitScale();
     transformMatrix.MakeUnitScale();
+    affineMatrix.MakeUnitScale();
 
     inverseNeedsUpdate = true;
 }
@@ -126,6 +136,44 @@ void Mathematics::Transform<Real>::SetRotate(const Matrix& rotate) noexcept
     transformMatrix.SetRotate(affineMatrix.GetRotationOrGeneralMatrix(), affineMatrix.GetScale());
 
     inverseNeedsUpdate = true;
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+void Mathematics::Transform<Real>::SetRotate(const Matrix4x4& rotate)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    Matrix matrix{ MatrixInitType::Identity };
+
+    for (auto row = 0; row < 4; ++row)
+    {
+        for (auto column = 0; column < 4; ++column)
+        {
+            matrix(row, column) = rotate(row, column);
+        }
+    }
+
+    SetRotate(matrix);
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+void Mathematics::Transform<Real>::SetMatrix(const Matrix4x4& matrix)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    Matrix result{ MatrixInitType::Identity };
+
+    for (auto row = 0; row < 4; ++row)
+    {
+        for (auto column = 0; column < 4; ++column)
+        {
+            result(row, column) = matrix(row, column);
+        }
+    }
+
+    SetMatrix(result);
 }
 
 template <typename Real>
@@ -181,6 +229,24 @@ void Mathematics::Transform<Real>::SetTranslate(const Vector4& translate) noexce
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
+void Mathematics::Transform<Real>::SetTranslate(const AlgebraVector3& translate)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    SetTranslate(translate[0], translate[1], translate[2]);
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+void Mathematics::Transform<Real>::SetTranslate(const AlgebraVector4& translate)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    SetTranslate(translate[0], translate[1], translate[2]);
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
 void Mathematics::Transform<Real>::SetScale(const APoint& scale)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -221,6 +287,24 @@ void Mathematics::Transform<Real>::SetScale(const Vector4& scale)
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
+void Mathematics::Transform<Real>::SetScale(const AlgebraVector3& scale)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    SetScale(scale[0], scale[1], scale[2]);
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+void Mathematics::Transform<Real>::SetScale(const AlgebraVector4& scale)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    SetScale(scale[0], scale[1], scale[2]);
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
 void Mathematics::Transform<Real>::SetUniformScale(Real scale)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -244,11 +328,33 @@ typename Mathematics::Transform<Real>::Matrix Mathematics::Transform<Real>::GetR
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
+typename Mathematics::Transform<Real>::Matrix4x4 Mathematics::Transform<Real>::GetAlgebraRotate() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto rotate = GetRotate();
+
+    return Matrix4x4{ rotate.GetData() };
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
 typename Mathematics::Transform<Real>::Matrix Mathematics::Transform<Real>::GetMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
     return affineMatrix.GetRotationOrGeneralMatrix();
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+typename Mathematics::Transform<Real>::Matrix4x4 Mathematics::Transform<Real>::GetAlgebraMatrix() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto matrix = GetMatrix();
+
+    return Matrix4x4{ matrix.GetData() };
 }
 
 template <typename Real>
@@ -284,6 +390,39 @@ typename Mathematics::Transform<Real>::Vector4 Mathematics::Transform<Real>::Get
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
+typename Mathematics::Transform<Real>::AlgebraVector3 Mathematics::Transform<Real>::GetAlgebraTranslate() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto translationMatrix = affineMatrix.GetTranslate();
+
+    return AlgebraVector3{ translationMatrix.GetX(), translationMatrix.GetY(), translationMatrix.GetZ() };
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+typename Mathematics::Transform<Real>::AlgebraVector4 Mathematics::Transform<Real>::GetAlgebraTranslationW0() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto translationMatrix = affineMatrix.GetTranslate();
+
+    return AlgebraVector4{ translationMatrix.GetX(), translationMatrix.GetY(), translationMatrix.GetZ(), Math::GetValue(0) };
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+typename Mathematics::Transform<Real>::AlgebraVector4 Mathematics::Transform<Real>::GetAlgebraTranslationW1() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto translationMatrix = affineMatrix.GetTranslate();
+
+    return AlgebraVector4{ translationMatrix.GetX(), translationMatrix.GetY(), translationMatrix.GetZ(), Math::GetValue(1) };
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
 typename Mathematics::Transform<Real>::APoint Mathematics::Transform<Real>::GetScale() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -301,6 +440,28 @@ typename Mathematics::Transform<Real>::Vector4 Mathematics::Transform<Real>::Get
     const auto scaleMatrix = affineMatrix.GetScale();
 
     return Vector4{ scaleMatrix.GetX(), scaleMatrix.GetY(), scaleMatrix.GetZ(), Math::GetValue(1) };
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+typename Mathematics::Transform<Real>::AlgebraVector3 Mathematics::Transform<Real>::GetAlgebraScale() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto scaleMatrix = GetScale();
+
+    return AlgebraVector3{ scaleMatrix.GetX(), scaleMatrix.GetY(), scaleMatrix.GetZ() };
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+typename Mathematics::Transform<Real>::AlgebraVector4 Mathematics::Transform<Real>::GetAlgebraScaleW1() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto scaleMatrix = affineMatrix.GetScale();
+
+    return AlgebraVector4{ scaleMatrix.GetX(), scaleMatrix.GetY(), scaleMatrix.GetZ(), Math::GetValue(1) };
 }
 
 template <typename Real>
@@ -334,6 +495,45 @@ typename Mathematics::Transform<Real>::Matrix3 Mathematics::Transform<Real>::Get
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
+void Mathematics::Transform<Real>::SetRotation(const Matrix3x3& rotate)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    Matrix matrix{ MatrixInitType::Identity };
+
+    for (auto row = 0; row < 3; ++row)
+    {
+        for (auto column = 0; column < 3; ++column)
+        {
+            matrix(row, column) = rotate(row, column);
+        }
+    }
+
+    SetRotate(matrix);
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+typename Mathematics::Transform<Real>::Matrix3x3 Mathematics::Transform<Real>::GetRotationMatrix3x3() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Matrix3x3 matrix{};
+
+    const auto rotate = GetRotate();
+
+    for (auto row = 0; row < 3; ++row)
+    {
+        for (auto column = 0; column < 3; ++column)
+        {
+            matrix(row, column) = rotate(row, column);
+        }
+    }
+    return matrix;
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
 void Mathematics::Transform<Real>::SetRotation(const AQuaternion& quaternion) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -343,7 +543,7 @@ void Mathematics::Transform<Real>::SetRotation(const AQuaternion& quaternion) no
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::AQuaternion Mathematics::Transform<Real>::GetRotationQuaternion() const
+typename Mathematics::Transform<Real>::AQuaternion Mathematics::Transform<Real>::GetRotationAQuaternion() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -352,6 +552,26 @@ typename Mathematics::Transform<Real>::AQuaternion Mathematics::Transform<Real>:
     quaternion.FromRotationMatrix(GetRotate());
 
     return quaternion;
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+void Mathematics::Transform<Real>::SetRotation(const Quaternion& quaternion)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    SetRotate(static_cast<Matrix4x4>(Algebra::Rotation<4, Real>(quaternion)));
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+typename Mathematics::Transform<Real>::Quaternion Mathematics::Transform<Real>::GetRotationQuaternion() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto matrix = GetAlgebraMatrix();
+
+    return static_cast<Quaternion>(Algebra::Rotation<4, Real>(matrix));
 }
 
 template <typename Real>
@@ -378,6 +598,50 @@ typename Mathematics::Transform<Real>::AxisAngle Mathematics::Transform<Real>::G
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
+void Mathematics::Transform<Real>::SetRotation(const AlgebraAxisAngle3& axisAngle)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    const AlgebraAxisAngle4 axisAngle4{ HomogeneousLift(axisAngle.GetAxis(), Math::GetValue(1)), axisAngle.GetAngle() };
+
+    SetRotate(static_cast<Matrix4x4>(Algebra::Rotation<4, Real>(axisAngle4)));
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+typename Mathematics::Transform<Real>::AlgebraAxisAngle3 Mathematics::Transform<Real>::GetRotationAlgebraAxisAngle3() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto matrix = GetAlgebraMatrix();
+
+    const auto algebraAxisAngle4 = static_cast<AlgebraAxisAngle4>(Algebra::Rotation<4, Real>(matrix));
+
+    return AlgebraAxisAngle3{ HomogeneousProject(algebraAxisAngle4.GetAxis()), algebraAxisAngle4.GetAngle() };
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+void Mathematics::Transform<Real>::SetRotation(const AlgebraAxisAngle4& axisAngle)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    SetRotate(static_cast<Matrix4x4>(Algebra::Rotation<4, Real>(axisAngle)));
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+typename Mathematics::Transform<Real>::AlgebraAxisAngle4 Mathematics::Transform<Real>::GetRotationAlgebraAxisAngle4() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto matrix = GetAlgebraMatrix();
+
+    return static_cast<AlgebraAxisAngle4>(Algebra::Rotation<4, Real>(matrix));
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
 void Mathematics::Transform<Real>::SetRotation(const Euler& eulerAngles)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -397,6 +661,26 @@ typename Mathematics::Transform<Real>::Euler Mathematics::Transform<Real>::GetRo
     const auto matrix = GetRotate().GetMatrix3();
 
     return matrix.ExtractEuler(order);
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+void Mathematics::Transform<Real>::SetRotation(const EulerAngles& eulerAngles)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    SetRotate(static_cast<Matrix4x4>(Algebra::Rotation<4, Real>(eulerAngles)));
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+typename Mathematics::Transform<Real>::EulerAngles Mathematics::Transform<Real>::GetEulerAngles(int axis0, int axis1, int axis2) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto matrix = GetAlgebraMatrix();
+
+    return Algebra::Rotation<4, Real>(matrix)(axis0, axis1, axis2);
 }
 
 template <typename Real>
@@ -456,13 +740,20 @@ typename Mathematics::Transform<Real>::Matrix Mathematics::Transform<Real>::GetH
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::Matrix Mathematics::Transform<Real>::GetInverseMatrix(Real epsilon) const
+typename Mathematics::Transform<Real>::Matrix4x4 Mathematics::Transform<Real>::GetMatrix4x4() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto rotationOrGeneralMatrix = affineMatrix.GetRotationOrGeneralMatrix();
-    const auto scaleMatrix = affineMatrix.GetScale();
-    const auto translateMatrix = affineMatrix.GetTranslate();
+    const auto matrix = transformMatrix.GetMatrix();
+
+    return Matrix4x4{ matrix.GetData() };
+}
+
+template <typename Real>
+requires std::is_floating_point_v<Real>
+typename Mathematics::Transform<Real>::Matrix Mathematics::Transform<Real>::GetInverseMatrix(Real epsilon) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
     if (inverseNeedsUpdate)
     {
@@ -472,6 +763,10 @@ typename Mathematics::Transform<Real>::Matrix Mathematics::Transform<Real>::GetI
         }
         else
         {
+            const auto rotationOrGeneralMatrix = affineMatrix.GetRotationOrGeneralMatrix();
+            const auto scaleMatrix = affineMatrix.GetScale();
+            const auto translateMatrix = affineMatrix.GetTranslate();
+
             if (transformMatrix.IsRotationOrScaleMatrix())
             {
                 if (transformMatrix.IsUniformScale())
@@ -613,6 +908,7 @@ Mathematics::Transform<Real> Mathematics::Transform<Real>::GetInverseTransform(R
             const auto inverseRotation = rotationOrGeneralMatrix.Transpose();
             const auto inverseScale = Math::GetValue(1) / scaleMatrix.GetX();
             const auto inverseTransform = -inverseScale * (inverseRotation * GetTranslate());
+
             inverse.SetRotate(inverseRotation);
             inverse.SetUniformScale(inverseScale);
             inverse.SetTranslate(inverseTransform);
@@ -621,8 +917,9 @@ Mathematics::Transform<Real> Mathematics::Transform<Real>::GetInverseTransform(R
         {
             const auto rotationInverse = GetHomogeneousMatrix().Inverse(epsilon);
             const auto inverseTransform = rotationInverse.GetColumn(System::EnumCastUnderlying(HomogeneousPoint<Real>::PointIndex::W));
+
             inverse.SetMatrix(rotationInverse);
-            inverse.SetTranslate(APoint{ inverseTransform.GetX(), inverseTransform.GetY(), inverseTransform.GetZ() });
+            inverse.SetTranslate(inverseTransform.GetX(), inverseTransform.GetY(), inverseTransform.GetZ());
         }
     }
 
@@ -775,6 +1072,18 @@ void Mathematics::Transform<Real>::WriteAggregate(BufferTarget& target) const
 }
 
 template <typename Real>
+Mathematics::Vector4<Real> Mathematics::operator*(const Transform<Real>& transform, const Vector4<Real>& vector)
+{
+    return transform.GetAlgebraMatrix() * vector;
+}
+
+template <typename Real>
+Mathematics::Vector4<Real> Mathematics::operator*(const Vector4<Real>& vector, const Transform<Real>& transform)
+{
+    return vector * transform.GetAlgebraMatrix();
+}
+
+template <typename Real>
 Mathematics::Transform<Real> Mathematics::operator*(const Transform<Real>& lhs, const Transform<Real>& rhs)
 {
     if (lhs.IsIdentity())
@@ -834,7 +1143,7 @@ Mathematics::Transform<Real> Mathematics::operator*(const Transform<Real>& lhs, 
 #endif  // defined(MATHEMATICS_USE_MATRIX_VECTOR)
     }
 
-    // 在所有剩余的情况下，矩阵不能写成R * S * X + T。
+    /// 在所有剩余的情况下，矩阵不能写成R * S * X + T。
 
     const auto matrixA = (lhs.IsRotationOrScaleMatrix() ? lhs.GetMatrix().TimesDiagonal(lhs.GetScale()) : lhs.GetMatrix());
     const auto matrixB = (rhs.IsRotationOrScaleMatrix() ? rhs.GetMatrix().TimesDiagonal(rhs.GetScale()) : rhs.GetMatrix());
@@ -852,6 +1161,18 @@ Mathematics::Transform<Real> Mathematics::operator*(const Transform<Real>& lhs, 
 #endif  // defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
     return product;
+}
+
+template <typename Real>
+Mathematics::Algebra::Matrix4x4<Real> Mathematics::operator*(const Algebra::Matrix4x4<Real>& matrix, const Transform<Real>& transform)
+{
+    return matrix * transform.GetAlgebraMatrix();
+}
+
+template <typename Real>
+Mathematics::Algebra::Matrix4x4<Real> Mathematics::operator*(const Transform<Real>& transform, const Algebra::Matrix4x4<Real>& matrix)
+{
+    return transform.GetAlgebraMatrix() * matrix;
 }
 
 template <typename Real>
@@ -904,21 +1225,31 @@ bool Mathematics::Approximate(const Transform<Real>& lhs, const Transform<Real>&
 }
 
 template <typename Real>
-std::ostream& Mathematics::operator<<(std::ostream& out, const Transform<Real>& transform)
+std::ostream& Mathematics::operator<<(std::ostream& stream, const Transform<Real>& transform)
 {
     if (transform.IsRotationOrScaleMatrix())
     {
-        out << "Rotate:" << transform.GetRotate() << "　";
-        out << "Translate:" << transform.GetTranslate() << "　";
-        out << "Scale:" << transform.GetScale() << "　";
+        stream << "Rotate:"
+               << transform.GetRotate()
+               << "　"
+               << "Translate:"
+               << transform.GetTranslate()
+               << "　"
+               << "Scale:"
+               << transform.GetScale()
+               << "　";
     }
     else
     {
-        out << "Rotate:" << transform.GetMatrix() << "　";
-        out << "Translate:" << transform.GetTranslate() << "　";
+        stream << "Rotate:"
+               << transform.GetMatrix()
+               << "　"
+               << "Translate:"
+               << transform.GetTranslate()
+               << "　";
     }
 
-    return out;
+    return stream;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_TRANSFORM_DETAIL_H

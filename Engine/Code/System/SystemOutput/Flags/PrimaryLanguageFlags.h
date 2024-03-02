@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:24)
+/// 版本：1.0.0.6 (2024/02/28 10:13)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_PRIMARY_LANGUAGE_FLAGS_H
 #define SYSTEM_SYSTEM_OUTPUT_PRIMARY_LANGUAGE_FLAGS_H
@@ -16,7 +16,7 @@ namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    // 不建议使用语言ID概念，请改用语言环境名称，例如：“en”，而不是像0x09这样的LANGID。
+    /// 不建议使用语言ID概念，请改用语言环境名称，例如：“en”，而不是像0x09这样的LANG_ID。
     enum class PrimaryLanguage
     {
         Neutral = LANG_NEUTRAL,

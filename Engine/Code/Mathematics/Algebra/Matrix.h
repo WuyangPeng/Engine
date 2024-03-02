@@ -242,6 +242,9 @@ namespace Mathematics
         template <int Index>
         void Divide(Real value);
 
+        template <int RowIndex, int ColumnIndex>
+        void Divide(Real value);
+
         // 矩阵存储为行主序。将它们存储在指定的列主序的数组中，该数组有16个元素。
         NODISCARD ContainerType GetColumnMajor() const;
 
@@ -264,6 +267,8 @@ namespace Mathematics
         NODISCARD Matrix Transpose() const noexcept;  // M^T
         NODISCARD Matrix Adjoint() const noexcept;  // M^{adj}
         NODISCARD Matrix Inverse(const Real epsilon = Math::GetZeroTolerance()) const;  // M^{-1}
+
+        /// 反转输入矩阵的左上角3x3块。
         NODISCARD Matrix Invert3x3(const Real epsilon = Math::GetZeroTolerance()) const;
 
         NODISCARD Real Determinant() const noexcept;  // det(M)

@@ -51,7 +51,7 @@ System::MessageBoxFlagsDataTesting::MessageBoxFlagsDataTesting(const OStreamShar
                  MessageBoxMisc::Right,
                  MessageBoxMisc::RightToLeftReading,
                  MessageBoxMisc::ServiceNotification,
-                 MessageBoxMisc::ServiceNotificationNt3x },
+                 MessageBoxMisc::ServiceNotificationNt3X },
       maxSize{ CoreTools::MaxElement<size_t>({ typeFlags.size(), iconFlags.size(), defaultFlags.size(), modeFlags.size(), miscFlags.size() }) },
       randomEngine{ GetEngineRandomSeed() }
 {

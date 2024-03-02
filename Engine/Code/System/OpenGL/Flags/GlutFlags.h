@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:09)
+/// 版本：1.0.0.6 (2024/03/01 16:49)
 
 #ifndef SYSTEM_OPENGL_GLUT_FLAGS_H
 #define SYSTEM_OPENGL_GLUT_FLAGS_H
@@ -31,7 +31,7 @@ namespace System
         Index = GLUT_INDEX,
         Single = GLUT_SINGLE,
         Double = GLUT_DOUBLE,
-        Accum = GLUT_ACCUM,
+        Accumulation = GLUT_ACCUM,
         Alpha = GLUT_ALPHA,
         Depth = GLUT_DEPTH,
         Stencil = GLUT_STENCIL,
@@ -62,7 +62,7 @@ namespace System
         Index = 0x0001,
         Single = 0x0000,
         Double = 0x0002,
-        Accum = 0x0004,
+        Accumulation = 0x0004,
         Alpha = 0x0008,
         Depth = 0x0010,
         Stencil = 0x0020,

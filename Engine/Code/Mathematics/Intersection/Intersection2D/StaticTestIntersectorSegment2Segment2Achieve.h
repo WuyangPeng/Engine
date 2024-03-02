@@ -20,7 +20,7 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment2Segment2<Real>::StaticTestIntersectorSegment2Segment2(const Segment2& lhsSegment, const Segment2& rhsSegment, const Real dotThreshold, const Real intervalThreshold)
+Mathematics::StaticTestIntersector<Mathematics::Segment2<Real>, Mathematics::Segment2<Real>>::StaticTestIntersector(const Segment2& lhsSegment, const Segment2& rhsSegment, const Real dotThreshold, const Real intervalThreshold)
     : ParentType{ dotThreshold }, lhsSegment{ lhsSegment }, rhsSegment{ rhsSegment }, quantity{ 0 }, intervalThreshold{ intervalThreshold }
 {
     Test();
@@ -29,7 +29,7 @@ Mathematics::StaticTestIntersectorSegment2Segment2<Real>::StaticTestIntersectorS
 }
 
 template <typename Real>
-void Mathematics::StaticTestIntersectorSegment2Segment2<Real>::Test()
+void Mathematics::StaticTestIntersector<Mathematics::Segment2<Real>, Mathematics::Segment2<Real>>::Test()
 {
     auto dotThreshold = this->GetEpsilon();
     StaticTestIntersectorLine2Classify<Real> classify{ lhsSegment.GetCenterPoint(), lhsSegment.GetDirection(), rhsSegment.GetCenterPoint(), rhsSegment.GetDirection(), true, dotThreshold };
@@ -86,7 +86,7 @@ void Mathematics::StaticTestIntersectorSegment2Segment2<Real>::Test()
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::StaticTestIntersectorSegment2Segment2<Real>::IsValid() const noexcept
+bool Mathematics::StaticTestIntersector<Mathematics::Segment2<Real>, Mathematics::Segment2<Real>>::IsValid() const noexcept
 {
     if (ParentType::IsValid() && 0 <= quantity)
         return true;
@@ -97,7 +97,7 @@ bool Mathematics::StaticTestIntersectorSegment2Segment2<Real>::IsValid() const n
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-Mathematics::Segment2<Real> Mathematics::StaticTestIntersectorSegment2Segment2<Real>::GetLhsSegment() const noexcept
+Mathematics::Segment2<Real> Mathematics::StaticTestIntersector<Mathematics::Segment2<Real>, Mathematics::Segment2<Real>>::GetLhsSegment() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -105,7 +105,7 @@ Mathematics::Segment2<Real> Mathematics::StaticTestIntersectorSegment2Segment2<R
 }
 
 template <typename Real>
-Mathematics::Segment2<Real> Mathematics::StaticTestIntersectorSegment2Segment2<Real>::GetRhsSegment() const noexcept
+Mathematics::Segment2<Real> Mathematics::StaticTestIntersector<Mathematics::Segment2<Real>, Mathematics::Segment2<Real>>::GetRhsSegment() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -113,7 +113,7 @@ Mathematics::Segment2<Real> Mathematics::StaticTestIntersectorSegment2Segment2<R
 }
 
 template <typename Real>
-int Mathematics::StaticTestIntersectorSegment2Segment2<Real>::GetQuantity() const noexcept
+int Mathematics::StaticTestIntersector<Mathematics::Segment2<Real>, Mathematics::Segment2<Real>>::GetQuantity() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -121,7 +121,7 @@ int Mathematics::StaticTestIntersectorSegment2Segment2<Real>::GetQuantity() cons
 }
 
 template <typename Real>
-Real Mathematics::StaticTestIntersectorSegment2Segment2<Real>::GetIntervalThreshold() const noexcept
+Real Mathematics::StaticTestIntersector<Mathematics::Segment2<Real>, Mathematics::Segment2<Real>>::GetIntervalThreshold() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

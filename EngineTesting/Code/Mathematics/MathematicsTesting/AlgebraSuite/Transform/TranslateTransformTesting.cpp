@@ -126,7 +126,7 @@ void Mathematics::TranslateTransformTesting::ConvertTest()
     const auto transform0 = transformTool.ComputeTranslateTransformF();
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrix3FApproximateFunction, transform0.GetRotationMatrix3(), Matrix3F::GetIdentity(), epsilon0);
-    ASSERT_APPROXIMATE_USE_FUNCTION(aQuaternionFApproximateFunction, transform0.GetRotationQuaternion(), AQuaternionF::GetIdentity(), epsilon0);
+    ASSERT_APPROXIMATE_USE_FUNCTION(aQuaternionFApproximateFunction, transform0.GetRotationAQuaternion(), AQuaternionF::GetIdentity(), epsilon0);
 
     const auto axisAngle0 = transform0.GetRotationAxisAngle();
     ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsF::Approximate, axisAngle0.GetAxis(), Vector3F::GetUnitX(), epsilon0);
@@ -144,7 +144,7 @@ void Mathematics::TranslateTransformTesting::ConvertTest()
     const auto transform1 = transformTool.ComputeTranslateTransformD();
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrix3DApproximateFunction, transform1.GetRotationMatrix3(), Matrix3D::GetIdentity(), epsilon1);
-    ASSERT_APPROXIMATE_USE_FUNCTION(aQuaternionDApproximateFunction, transform1.GetRotationQuaternion(), AQuaternionD::GetIdentity(), epsilon1);
+    ASSERT_APPROXIMATE_USE_FUNCTION(aQuaternionDApproximateFunction, transform1.GetRotationAQuaternion(), AQuaternionD::GetIdentity(), epsilon1);
 
     const auto axisAngle1 = transform1.GetRotationAxisAngle();
     ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, axisAngle1.GetAxis(), Vector3D::GetUnitX(), epsilon1);

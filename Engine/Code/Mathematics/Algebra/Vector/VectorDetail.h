@@ -206,7 +206,7 @@ Mathematics::Algebra::Vector<N, Real> Mathematics::Algebra::Vector<N, Real>::Get
 
 template <int N, typename Real>
 requires(1 <= N && N <= 4 && std::is_arithmetic_v<Real>)
-Mathematics::Algebra::Vector<N, Real> Mathematics::Algebra::Vector<N, Real>::operator+() noexcept
+Mathematics::Algebra::Vector<N, Real> Mathematics::Algebra::Vector<N, Real>::operator+() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -215,7 +215,7 @@ Mathematics::Algebra::Vector<N, Real> Mathematics::Algebra::Vector<N, Real>::ope
 
 template <int N, typename Real>
 requires(1 <= N && N <= 4 && std::is_arithmetic_v<Real>)
-Mathematics::Algebra::Vector<N, Real> Mathematics::Algebra::Vector<N, Real>::operator-()
+Mathematics::Algebra::Vector<N, Real> Mathematics::Algebra::Vector<N, Real>::operator-() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

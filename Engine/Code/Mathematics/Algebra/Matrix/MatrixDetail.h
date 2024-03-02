@@ -300,7 +300,7 @@ template <int NumRows, int NumColumns, typename Real>
 requires(1 <= NumRows && NumRows <= 4 && 1 <= NumColumns && NumColumns <= 4 && std::is_arithmetic_v<Real>)
 Mathematics::Algebra::Matrix<NumRows, NumColumns, Real> Mathematics::Algebra::Matrix<NumRows, NumColumns, Real>::Unit(int row, int column)
 {
-    Matrix matrix;
+    Matrix matrix{};
 
     matrix.MakeUnit(row, column);
 
@@ -311,7 +311,7 @@ template <int NumRows, int NumColumns, typename Real>
 requires(1 <= NumRows && NumRows <= 4 && 1 <= NumColumns && NumColumns <= 4 && std::is_arithmetic_v<Real>)
 Mathematics::Algebra::Matrix<NumRows, NumColumns, Real> Mathematics::Algebra::Matrix<NumRows, NumColumns, Real>::Identity()
 {
-    Matrix matrix;
+    Matrix matrix{};
 
     matrix.MakeIdentity();
 

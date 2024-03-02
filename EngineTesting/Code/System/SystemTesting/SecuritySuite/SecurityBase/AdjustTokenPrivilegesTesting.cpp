@@ -89,7 +89,7 @@ void System::AdjustTokenPrivilegesTesting::DoGetAdjustTokenPrivilegesTest(Window
 
 void System::AdjustTokenPrivilegesTesting::PrivilegesTest(const String& lookupPrivilegeName, WindowsHandle tokenHandle)
 {
-    LookupPrivilegeLuid uid{};
+    LookupPrivilegeLocallyUniqueIdentifier uid{};
     ASSERT_TRUE(GetLookupPrivilegeValue(nullptr, lookupPrivilegeName.c_str(), &uid));
     ASSERT_LESS(0u, uid.LowPart);
 

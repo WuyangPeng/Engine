@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:03)
+/// 版本：1.0.0.6 (2024/02/28 14:53)
 
 #ifndef SYSTEM_OPENGL_GL_10_EXTENSIONS_H
 #define SYSTEM_OPENGL_GL_10_EXTENSIONS_H
@@ -18,7 +18,7 @@
 
 namespace System
 {
-    // OpenGL 1.0
+    /// OpenGL 1.0
     SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL10() noexcept;
 
     SYSTEM_HIDDEN_DECLARE void InitOpenGL10() noexcept;
@@ -30,12 +30,12 @@ namespace System
     SYSTEM_HIDDEN_DECLARE void GLPointSize(GLfloat size) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLPolygonMode(GLenum face, GLenum mode) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLScissor(GLint x, GLint y, GLsizei width, GLsizei height) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLTexParameterf(GLenum target, GLenum pname, GLfloat param) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLTexParameterfv(GLenum target, GLenum pname, const GLfloat* params) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLTexParameteri(GLenum target, GLenum pname, GLint param) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLTexParameteriv(GLenum target, GLenum pname, const GLint* params) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLTexImage1D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void* pixels) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLTexImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void* pixels) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLTexParameterF(GLenum target, GLenum pName, GLfloat param) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLTexParameterFv(GLenum target, GLenum pName, const GLfloat* params) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLTexParameterI(GLenum target, GLenum pName, GLint param) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLTexParameterIv(GLenum target, GLenum pName, const GLint* params) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLTexImage1D(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLint border, GLenum format, GLenum type, const void* pixels) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLTexImage2D(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void* pixels) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLDrawBuffer(GLenum buf) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLClear(GLbitfield mask) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLClearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) noexcept;
@@ -48,26 +48,26 @@ namespace System
     SYSTEM_HIDDEN_DECLARE void GLEnable(GLenum cap) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLFinish() noexcept;
     SYSTEM_HIDDEN_DECLARE void GLFlush() noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLBlendFunc(GLenum sfactor, GLenum dfactor) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLBlendFunc(GLenum sFactor, GLenum dFactor) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLLogicOp(GLenum opcode) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLStencilFunc(GLenum func, GLint ref, GLuint mask) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLStencilOp(GLenum fail, GLenum zfail, GLenum zpass) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLStencilOp(GLenum fail, GLenum zFail, GLenum zPass) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLDepthFunc(GLenum func) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLPixelStoref(GLenum pname, GLfloat param) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLPixelStorei(GLenum pname, GLint param) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLPixelStoreF(GLenum pName, GLfloat param) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLPixelStoreI(GLenum pName, GLint param) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLReadBuffer(GLenum src) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLReadPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, void* pixels) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLGetBooleanv(GLenum pname, GLboolean* data) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLGetDoublev(GLenum pname, GLdouble* data) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetBooleanV(GLenum pName, GLboolean* data) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetDoubleV(GLenum pName, GLdouble* data) noexcept;
     SYSTEM_HIDDEN_DECLARE NODISCARD GLenum GLGetError() noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLGetFloatv(GLenum pname, GLfloat* data) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLGetIntegerv(GLenum pname, GLint* data) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetFloatV(GLenum pName, GLfloat* data) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetIntegerV(GLenum pName, GLint* data) noexcept;
     SYSTEM_HIDDEN_DECLARE MAYBE_NULLPTR const GLubyte* GLGetString(GLenum name) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLGetTexImage(GLenum target, GLint level, GLenum format, GLenum type, void* pixels) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLGetTexParameterfv(GLenum target, GLenum pname, GLfloat* params) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLGetTexParameteriv(GLenum target, GLenum pname, GLint* params) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLGetTexLevelParameterfv(GLenum target, GLint level, GLenum pname, GLfloat* params) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLGetTexLevelParameteriv(GLenum target, GLint level, GLenum pname, GLint* params) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetTexParameterFv(GLenum target, GLenum pName, GLfloat* params) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetTexParameterIv(GLenum target, GLenum pName, GLint* params) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetTexLevelParameterFv(GLenum target, GLint level, GLenum pName, GLfloat* params) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetTexLevelParameterIv(GLenum target, GLint level, GLenum pName, GLint* params) noexcept;
     SYSTEM_HIDDEN_DECLARE NODISCARD GLboolean GLIsEnabled(GLenum cap) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLDepthRange(GLdouble n, GLdouble f) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLViewport(GLint x, GLint y, GLsizei width, GLsizei height) noexcept;

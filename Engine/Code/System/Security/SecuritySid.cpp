@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:29)
+/// 版本：1.0.0.6 (2024/02/28 11:08)
 
 #include "System/SystemExport.h"
 
@@ -151,10 +151,7 @@ bool System::InitializeSecurityIdentifier(SecuritySidPtr sid, SecuritySidIdentif
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::InitializeSid(sid, identifierAuthority, subAuthorityCount) != gFalse)
-        return true;
-    else
-        return false;
+    return ::InitializeSid(sid, identifierAuthority, subAuthorityCount) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -169,10 +166,7 @@ bool System::IsSecurityIdentifierValid(SecuritySidPtr sid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::IsValidSid(sid) != gFalse)
-        return true;
-    else
-        return false;
+    return ::IsValidSid(sid) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -187,10 +181,7 @@ bool System::IsWellKnownSecurityIdentifier(SecuritySidPtr sid, SecurityWellKnown
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::IsWellKnownSid(sid, wellKnownSidType) != gFalse)
-        return true;
-    else
-        return false;
+    return ::IsWellKnownSid(sid, wellKnownSidType) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

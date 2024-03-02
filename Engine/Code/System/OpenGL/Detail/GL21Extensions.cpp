@@ -51,32 +51,32 @@ void System::InitOpenGL21() noexcept
     }
 }
 
-void System::GLUniformMatrix2x3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+void System::GLUniformMatrix2X3Fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_4(glUniformMatrix2x3fv, location, count, transpose, value);
 }
 
-void System::GLUniformMatrix3x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+void System::GLUniformMatrix3X2Fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_4(glUniformMatrix3x2fv, location, count, transpose, value);
 }
 
-void System::GLUniformMatrix2x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+void System::GLUniformMatrix2X4Fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_4(glUniformMatrix2x4fv, location, count, transpose, value);
 }
 
-void System::GLUniformMatrix4x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+void System::GLUniformMatrix4X2Fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_4(glUniformMatrix4x2fv, location, count, transpose, value);
 }
 
-void System::GLUniformMatrix3x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+void System::GLUniformMatrix3X4Fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_4(glUniformMatrix3x4fv, location, count, transpose, value);
 }
 
-void System::GLUniformMatrix4x3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+void System::GLUniformMatrix4X3Fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
 {
     SYSTEM_BODY_4(glUniformMatrix4x3fv, location, count, transpose, value);
 }

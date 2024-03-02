@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:08)
+/// 版本：1.0.0.6 (2024/02/28 22:36)
 
 #ifndef SYSTEM_OPENGL_GL_44_EXTENSIONS_H
 #define SYSTEM_OPENGL_GL_44_EXTENSIONS_H
@@ -17,7 +17,7 @@
 
 namespace System
 {
-    // OpenGL 4.4
+    /// OpenGL 4.4
 
     SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL44() noexcept;
 
@@ -25,7 +25,7 @@ namespace System
 
     SYSTEM_HIDDEN_DECLARE void GLBufferStorage(GLenum target, GLsizeiptr size, const void* data, GLbitfield flags) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLClearTexImage(GLuint texture, GLint level, GLenum format, GLenum type, const void* data) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLClearTexSubImage(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void* data) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLClearTexSubImage(GLuint texture, GLint level, GLint xOffset, GLint yOffset, GLint zOffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void* data) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLBindBuffersBase(GLenum target, GLuint first, GLsizei count, const GLuint* buffers) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLBindBuffersRange(GLenum target, GLuint first, GLsizei count, const GLuint* buffers, const GLintptr* offsets, const GLsizeiptr* sizes) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLBindTextures(GLuint first, GLsizei count, const GLuint* textures) noexcept;

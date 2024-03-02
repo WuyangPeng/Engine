@@ -1,17 +1,19 @@
-/// Copyright (c) 2010-2023
+/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.1 (2023/11/29 15:45)
+/// 版本：1.0.0.6 (2024/02/20 09:15)
 
 #ifndef MATHEMATICS_ALGEBRA_TRANSFORM_H
 #define MATHEMATICS_ALGEBRA_TRANSFORM_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "Matrix/Matrix3x3.h"
+#include "Matrix/Matrix4x4.h"
 #include "Detail/AffineMatrix.h"
 #include "Detail/TransformMatrix.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
@@ -63,27 +65,43 @@ namespace Mathematics
         using Vector4 = Vector4<Real>;
         using Matrix3 = Matrix3<Real>;
         using AQuaternion = AQuaternion<Real>;
+        using Quaternion = Quaternion<Real>;
         using Euler = Euler<Real>;
         using AxisAngle = AxisAngle<Real>;
+        using Matrix3x3 = Algebra::Matrix3x3<Real>;
+        using Matrix4x4 = Algebra::Matrix4x4<Real>;
+        using AlgebraVector3 = Algebra::Vector3<Real>;
+        using AlgebraVector4 = Algebra::Vector4<Real>;
+        using AlgebraAxisAngle3 = Algebra::AxisAngle<3, Real>;
+        using AlgebraAxisAngle4 = Algebra::AxisAngle<4, Real>;
+        using EulerAngles = Algebra::EulerAngles<Real>;
 
     public:
-        // 默认构造函数产生单位转换。
+        /// 默认构造函数产生单位转换。
         Transform() noexcept;
         explicit Transform(Real scale) noexcept;
         Transform(Real s0, Real s1, Real s2) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        // 设置转换为单位矩阵。
+        NODISCARD explicit operator Matrix4x4() const;
+
+        /// 设置转换为单位矩阵。
         void MakeIdentity() noexcept;
 
-        // 设置转换的缩放值为1。
+        /// 设置转换的缩放值为1。
         void MakeUnitScale();
 
-        // 转换结构的提示。
-        NODISCARD bool IsIdentity() const noexcept;  // I
-        NODISCARD bool IsRotationOrScaleMatrix() const noexcept;  // R * S（已定义MATHEMATICS_USE_MATRIX_VECTOR）或S * R（未定义MATHEMATICS_USE_MATRIX_VECTOR）
-        NODISCARD bool IsUniformScale() const noexcept;  // R * S，S = c * I
+        /// 转换结构的提示。
+
+        /// M = I
+        NODISCARD bool IsIdentity() const noexcept;
+
+        /// R * S（已定义MATHEMATICS_USE_MATRIX_VECTOR）或S * R（未定义MATHEMATICS_USE_MATRIX_VECTOR）
+        NODISCARD bool IsRotationOrScaleMatrix() const noexcept;
+
+        /// R * S，S = c * I
+        NODISCARD bool IsUniformScale() const noexcept;
 
         /// 成员访问
         /// (1) Set* 函数设置IsIdentity提示为false。
@@ -96,72 +114,99 @@ namespace Mathematics
         /// (5) 所有Set*函数设置inverseNeedsUpdate为true。
         ///     当GetInverseMatrix被调用，这种情况逆矩阵必须被重新计算，并设置inverseNeedsUpdate为false。
 
-        // {{R,0},{0,1}}
+        /// {{R,0},{0,1}}
         void SetRotate(const Matrix& rotate) noexcept;
+        void SetRotate(const Matrix4x4& rotate);
 
-        // {{M,0},{0,1}}
+        /// {{M,0},{0,1}}
         void SetMatrix(const Matrix& matrix) noexcept;
+        void SetMatrix(const Matrix4x4& matrix);
 
         void SetTranslate(const APoint& translate) noexcept;
         void SetTranslate(Real x0, Real x1, Real x2) noexcept;
         void SetTranslate(const Vector3& translate) noexcept;
         void SetTranslate(const Vector4& translate) noexcept;
+        void SetTranslate(const AlgebraVector3& translate);
+        void SetTranslate(const AlgebraVector4& translate);
         void SetScale(const APoint& scale);
         void SetScale(Real s0, Real s1, Real s2);
         void SetScale(const Vector3& scale);
         void SetScale(const Vector4& scale);
+        void SetScale(const AlgebraVector3& scale);
+        void SetScale(const AlgebraVector4& scale);
         void SetUniformScale(Real scale);
 
-        // {{R,0},{0,1}}
+        /// {{R,0},{0,1}}
         NODISCARD Matrix GetRotate() const;
+        NODISCARD Matrix4x4 GetAlgebraRotate() const;
 
-        // {{M,0},{0,1}}
+        /// {{M,0},{0,1}}
         NODISCARD Matrix GetMatrix() const noexcept;
+        NODISCARD Matrix4x4 GetAlgebraMatrix() const;
 
-        // (x,y,z)
+        /// (x,y,z)
         NODISCARD APoint GetTranslate() const noexcept;
         NODISCARD Vector4 GetTranslationW0() const noexcept;
         NODISCARD Vector4 GetTranslationW1() const noexcept;
+        NODISCARD AlgebraVector3 GetAlgebraTranslate() const noexcept;
+        NODISCARD AlgebraVector4 GetAlgebraTranslationW0() const noexcept;
+        NODISCARD AlgebraVector4 GetAlgebraTranslationW1() const noexcept;
 
-        // (s0,s1,s2)
+        /// (s0,s1,s2)
         NODISCARD APoint GetScale() const;
         NODISCARD Vector4 GetScaleW1() const noexcept;
+        NODISCARD AlgebraVector3 GetAlgebraScale() const;
+        NODISCARD AlgebraVector4 GetAlgebraScaleW1() const noexcept;
 
         NODISCARD Real GetUniformScale() const;
 
-        // 用于设置/获取旋转的备用表示。
+        /// 用于设置/获取旋转的备用表示。
 
-        // 从3x3矩阵中设置/获取。
+        /// 从3x3矩阵中设置/获取。
         void SetRotation(const Matrix3& rotate);
         NODISCARD Matrix3 GetRotationMatrix3() const;
+        void SetRotation(const Matrix3x3& rotate);
+        NODISCARD Matrix3x3 GetRotationMatrix3x3() const;
 
-        // 四元数是单位长度。
+        /// 四元数是单位长度。
         void SetRotation(const AQuaternion& quaternion) noexcept;
-        NODISCARD AQuaternion GetRotationQuaternion() const;
+        NODISCARD AQuaternion GetRotationAQuaternion() const;
+        void SetRotation(const Quaternion& quaternion);
+        NODISCARD Quaternion GetRotationQuaternion() const;
 
+        /// 轴为单位长度，角度以弧度为单位。
         void SetRotation(const AxisAngle& axisAngle);
         NODISCARD AxisAngle GetRotationAxisAngle() const;
+        void SetRotation(const AlgebraAxisAngle3& axisAngle);
+        NODISCARD AlgebraAxisAngle3 GetRotationAlgebraAxisAngle3() const;
+        void SetRotation(const AlgebraAxisAngle4& axisAngle);
+        NODISCARD AlgebraAxisAngle4 GetRotationAlgebraAxisAngle4() const;
 
-        // Euler角度以弧度为单位。GetEulerAngles函数要求将order值设置为所需的轴顺序。
+        /// Euler角度以弧度为单位。GetEulerAngles函数要求将order值设置为所需的轴顺序。
         void SetRotation(const Euler& eulerAngles);
         NODISCARD Euler GetRotationEuler(ExtractEulerResultOrder order) const;
+
+        /// Euler角度以弧度为单位。GetEulerAngles函数要求根据axis值设置为所需的轴顺序。
+        void SetRotation(const EulerAngles& eulerAngles);
+        NODISCARD EulerAngles GetEulerAngles(int axis0, int axis1, int axis2) const;
 
         /// 对于M = R * S或M = S * R，返回绝对值中S的最大值。
         /// 对于一般的M，当定义MATHEMATICS_USE_MATRIX_VECTOR时返回最大的行绝对值和，
         /// 或者当未定义MATHEMATICS_USE_MATRIX_VECTOR时最大的列绝对值和，这是变换最大规模的合理度量。
         NODISCARD Real GetNorm() const;
 
-        // 矩阵-点乘法, M * p。
+        /// 矩阵-点乘法, M * p。
         NODISCARD APoint operator*(const APoint& point) const noexcept;
 
-        // 矩阵-向量乘法, M * v。
+        /// 矩阵-向量乘法, M * v。
         NODISCARD AVector operator*(const AVector& vector) const noexcept;
 
-        // 矩阵-矩阵乘法。
+        /// 矩阵-矩阵乘法。
         Transform& operator*=(const Transform& transform);
 
-        // 获取齐次矩阵。
+        /// 获取齐次矩阵。
         NODISCARD Matrix GetHomogeneousMatrix() const noexcept;
+        NODISCARD Matrix4x4 GetMatrix4x4() const;
 
         /// 获取齐次矩阵的逆，当需要时重新计算。
         /// 定义MATHEMATICS_USE_MATRIX_VECTOR
@@ -176,11 +221,12 @@ namespace Mathematics
         /// 并且逆矩阵的旋转矩阵，scale也相应地设置。
         NODISCARD Transform GetInverseTransform(Real epsilon = Math::GetZeroTolerance()) const;
 
-        // 流支持
+        /// 流支持
         NODISCARD int GetStreamingSize() const noexcept;
         void ReadAggregate(BufferSource& source);
         void WriteAggregate(BufferTarget& target) const;
 
+        /// 单位转换
         static constexpr Transform GetIdentityTransform() noexcept
         {
             return Transform{};
@@ -192,22 +238,37 @@ namespace Mathematics
 
     private:
         AffineMatrix affineMatrix;
-        // 完整的4x4齐次矩阵H = {{M,T},{0,1}}和它的逆矩阵为H^{-1} = {M^{-1},-M^{-1}*T},{0,1}}。 逆矩阵只在需要时计算。
+
+        /// 完整的4x4齐次矩阵H = {{M,T},{0,1}}和它的逆矩阵为H^{-1} = {M^{-1},-M^{-1}*T},{0,1}}。 逆矩阵只在需要时计算。
         TransformMatrix transformMatrix;
 
         mutable Matrix inverseMatrix;
         mutable bool inverseNeedsUpdate;
     };
 
+    /// 计算 M*V.
+    template <typename Real>
+    NODISCARD Vector4<Real> operator*(const Transform<Real>& transform, const Vector4<Real>& vector);
+
+    ///  计算V^T*M.
+    template <typename Real>
+    NODISCARD Vector4<Real> operator*(const Vector4<Real>& vector, const Transform<Real>& transform);
+
     template <typename Real>
     NODISCARD Transform<Real> operator*(const Transform<Real>& lhs, const Transform<Real>& rhs);
 
     template <typename Real>
+    NODISCARD Algebra::Matrix4x4<Real> operator*(const Algebra::Matrix4x4<Real>& matrix, const Transform<Real>& transform);
+
+    template <typename Real>
+    NODISCARD Algebra::Matrix4x4<Real> operator*(const Transform<Real>& transform, const Algebra::Matrix4x4<Real>& matrix);
+
+    template <typename Real>
     NODISCARD bool Approximate(const Transform<Real>& lhs, const Transform<Real>& rhs, Real epsilon = Math<Real>::GetZeroTolerance());
 
-    // 调试输出。
+    /// 调试输出。
     template <typename Real>
-    std::ostream& operator<<(std::ostream& out, const Transform<Real>& transform);
+    std::ostream& operator<<(std::ostream& stream, const Transform<Real>& transform);
 
     using TransformF = Transform<float>;
     using TransformD = Transform<double>;

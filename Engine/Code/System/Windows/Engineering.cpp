@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:44)
+/// 版本：1.0.0.6 (2024/02/26 12:56)
 
 #include "System/SystemExport.h"
 
@@ -79,16 +79,16 @@ System::String System::GetEngineeringDirectory()
 
     if (position == String::npos)
     {
-        return String{};
+        return name;
     }
 
     return name.substr(0, position + 1);
 }
 
-size_t System::GetLastSlashPosition(const String& path)
+size_t System::GetLastSlashPosition(const String& path) noexcept
 {
-    const auto backSlashPos = path.find_last_of(SYSTEM_TEXT("\\"s));
-    const auto forwardSlashPos = path.find_last_of(SYSTEM_TEXT("/"s));
+    const auto backSlashPos = path.find_last_of(SYSTEM_TEXT("\\"));
+    const auto forwardSlashPos = path.find_last_of(SYSTEM_TEXT("/"));
 
     if (backSlashPos == String::npos)
     {

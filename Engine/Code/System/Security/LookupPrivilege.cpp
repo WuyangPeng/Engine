@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:28)
+/// 版本：1.0.0.6 (2024/02/28 11:00)
 
 #include "System/SystemExport.h"
 
@@ -16,36 +16,30 @@
 
 #include <map>
 
-bool System::GetLookupPrivilegeValue(const TChar* systemName, const TChar* name, LookupPrivilegeLuidPtr luid) noexcept
+bool System::GetLookupPrivilegeValue(const TChar* systemName, const TChar* name, LookupPrivilegeLocallyUniqueIdentifierPtr locallyUniqueIdentifier) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::LookupPrivilegeValue(systemName, name, luid)) != gFalse)
-        return true;
-    else
-        return false;
+    return (::LookupPrivilegeValue(systemName, name, locallyUniqueIdentifier)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(systemName, name, luid);
+    UnusedFunction(systemName, name, locallyUniqueIdentifier);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetLookupPrivilegeName(const TChar* systemName, LookupPrivilegeLuidPtr luid, TChar* name, WindowsDWordPtr nameSize) noexcept
+bool System::GetLookupPrivilegeName(const TChar* systemName, LookupPrivilegeLocallyUniqueIdentifierPtr locallyUniqueIdentifier, TChar* name, WindowsDWordPtr nameSize) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::LookupPrivilegeName(systemName, luid, name, nameSize)) != gFalse)
-        return true;
-    else
-        return false;
+    return (::LookupPrivilegeName(systemName, locallyUniqueIdentifier, name, nameSize)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(systemName, luid, name, nameSize);
+    UnusedFunction(systemName, locallyUniqueIdentifier, name, nameSize);
 
     return false;
 
@@ -56,10 +50,7 @@ bool System::GetLookupPrivilegeDisplayName(const TChar* systemName, const TChar*
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::LookupPrivilegeDisplayName(systemName, name, displayName, displayNameSize, languageId)) != gFalse)
-        return true;
-    else
-        return false;
+    return (::LookupPrivilegeDisplayName(systemName, name, displayName, displayNameSize, languageId)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

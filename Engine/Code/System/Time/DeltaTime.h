@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:48)
+/// 版本：1.0.0.6 (2024/02/27 09:50)
 
 #ifndef SYSTEM_TIME_DELTA_TIME_H
 #define SYSTEM_TIME_DELTA_TIME_H
@@ -16,13 +16,13 @@
 
 namespace System
 {
-    // 获取当前时间
+    /// 获取当前时间
     NODISCARD SYSTEM_DEFAULT_DECLARE int64_t GetTimeInMicroseconds(const DeltaTimeValueData& deltaTime) noexcept;
     NODISCARD SYSTEM_DEFAULT_DECLARE int64_t GetTimeInSeconds(const DeltaTimeValueData& deltaTime) noexcept;
     NODISCARD SYSTEM_DEFAULT_DECLARE int64_t GetTimeInMicroseconds() noexcept;
     NODISCARD SYSTEM_DEFAULT_DECLARE int64_t GetTimeInSeconds() noexcept;
 
-    // 暂停控制台
+    /// 暂停控制台
     SYSTEM_DEFAULT_DECLARE void SystemPause() noexcept;
 }
 

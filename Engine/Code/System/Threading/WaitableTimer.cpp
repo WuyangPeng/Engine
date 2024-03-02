@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:21)
+/// 版本：1.0.0.6 (2024/02/27 18:21)
 
 #include "System/SystemExport.h"
 
@@ -56,10 +56,7 @@ bool System::CancelSystemWaitableTimer(WindowsHandle timer) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CancelWaitableTimer(timer) != gFalse)
-        return true;
-    else
-        return false;
+    return ::CancelWaitableTimer(timer) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -74,10 +71,7 @@ bool System::CloseSystemWaitableTimer(WindowsHandle timer) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(timer) != gFalse)
-        return true;
-    else
-        return false;
+    return ::CloseHandle(timer) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -163,10 +157,7 @@ bool System::SetSystemWaitableTimer(WindowsHandle timer,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetWaitableTimerEx(timer, dueTime, period, completionRoutine, argToCompletionRoutine, wakeContext, tolerableDelay) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetWaitableTimerEx(timer, dueTime, period, completionRoutine, argToCompletionRoutine, wakeContext, tolerableDelay) != gFalse;
 
 #else  // SYSTEM_PLATFORM_WIN32
 
@@ -186,10 +177,7 @@ bool System::SetSystemWaitableTimer(WindowsHandle timer,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetWaitableTimer(timer, dueTime, period, completionRoutine, argToCompletionRoutine, BoolConversion(resume)) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetWaitableTimer(timer, dueTime, period, completionRoutine, argToCompletionRoutine, BoolConversion(resume)) != gFalse;
 
 #else  // SYSTEM_PLATFORM_WIN32
 
@@ -217,8 +205,5 @@ System::WindowsHandle System::OpenSystemWaitableTimer(MutexStandardAccess desire
 
 bool System::IsWaitableTimerValid(WindowsHandle handle) noexcept
 {
-    if (handle != nullptr && handle != invalidHandleValue)
-        return true;
-    else
-        return false;
+    return handle != nullptr && handle != invalidHandleValue;
 }

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:29)
+/// 版本：1.0.0.6 (2024/02/28 11:04)
 
 #include "System/SystemExport.h"
 
@@ -21,10 +21,7 @@ bool System::InitializeSystemSecurityDescriptor(SecurityDescriptorPtr securityDe
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::InitializeSecurityDescriptor(securityDescriptor, EnumCastUnderlying(InitializeSecurityDescriptorRevision::Revision)) != gFalse)
-        return true;
-    else
-        return false;
+    return ::InitializeSecurityDescriptor(securityDescriptor, EnumCastUnderlying(InitializeSecurityDescriptorRevision::Revision)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -39,10 +36,7 @@ bool System::SetSystemSecurityDescriptorControl(SecurityDescriptorPtr securityDe
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetSecurityDescriptorControl(securityDescriptor, static_cast<SecurityDescriptorControl>(controlBitsOfInterest), static_cast<SecurityDescriptorControl>(controlBitsToSet)) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetSecurityDescriptorControl(securityDescriptor, static_cast<SecurityDescriptorControl>(controlBitsOfInterest), static_cast<SecurityDescriptorControl>(controlBitsToSet)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -57,10 +51,7 @@ bool System::SetSecurityDescriptorDiscretionaryAccessControlList(SecurityDescrip
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetSecurityDescriptorDacl(securityDescriptor, BoolConversion(daclPresent), dacl, daclDefaulted) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetSecurityDescriptorDacl(securityDescriptor, BoolConversion(daclPresent), dacl, daclDefaulted) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -75,10 +66,7 @@ bool System::SetSystemSecurityDescriptorGroup(SecurityDescriptorPtr securityDesc
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetSecurityDescriptorGroup(securityDescriptor, group, BoolConversion(groupDefaulted)) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetSecurityDescriptorGroup(securityDescriptor, group, BoolConversion(groupDefaulted)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -93,10 +81,7 @@ bool System::SetSystemSecurityDescriptorOwner(SecurityDescriptorPtr securityDesc
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetSecurityDescriptorOwner(securityDescriptor, group, BoolConversion(ownerDefaulted)) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetSecurityDescriptorOwner(securityDescriptor, group, BoolConversion(ownerDefaulted)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -111,10 +96,7 @@ bool System::SetSecurityDescriptorResourceManagerControl(SecurityDescriptorPtr s
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetSecurityDescriptorRMControl(securityDescriptor, rmControl) == EnumCastUnderlying<WindowsDWord>(SecurityDescriptorRmControlReturn::Success))
-        return true;
-    else
-        return false;
+    return ::SetSecurityDescriptorRMControl(securityDescriptor, rmControl) == EnumCastUnderlying<WindowsDWord>(SecurityDescriptorRmControlReturn::Success);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -129,10 +111,7 @@ bool System::SetSecurityDescriptorSystemAccessControlList(SecurityDescriptorPtr 
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetSecurityDescriptorSacl(securityDescriptor, BoolConversion(saclPresent), sacl, BoolConversion(saclDefaulted)) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetSecurityDescriptorSacl(securityDescriptor, BoolConversion(saclPresent), sacl, BoolConversion(saclDefaulted)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -264,10 +243,7 @@ bool System::GetSecurityDescriptorResourceManagerControl(SecurityDescriptorPtr s
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetSecurityDescriptorRMControl(securityDescriptor, rmControl) == EnumCastUnderlying<WindowsDWord>(SecurityDescriptorRmControlReturn::Success))
-        return true;
-    else
-        return false;
+    return ::GetSecurityDescriptorRMControl(securityDescriptor, rmControl) == EnumCastUnderlying<WindowsDWord>(SecurityDescriptorRmControlReturn::Success);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -309,10 +285,7 @@ bool System::IsSecurityDescriptorValid(SecurityDescriptorPtr securityDescriptor)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::IsValidSecurityDescriptor(securityDescriptor) != gFalse)
-        return true;
-    else
-        return false;
+    return ::IsValidSecurityDescriptor(securityDescriptor) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -327,11 +300,9 @@ bool System::GetUserObjectSystemSecurity(ThreadHandle obj, SecurityRequestedInfo
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (auto securityInformation = EnumCastUnderlying<SecurityInformation>(requested);
-        ::GetUserObjectSecurity(obj, &securityInformation, securityDescriptor, length, lengthNeeded) != gFalse)
-        return true;
-    else
-        return false;
+    auto securityInformation = EnumCastUnderlying<SecurityInformation>(requested);
+
+    return ::GetUserObjectSecurity(obj, &securityInformation, securityDescriptor, length, lengthNeeded) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

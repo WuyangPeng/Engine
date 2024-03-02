@@ -24,6 +24,27 @@ namespace System
     constexpr void UnusedFunction(MAYBE_UNUSED T&&... value) noexcept
     {
     }
+
+    NODISCARD static constexpr int GetPlus(int lhs, int rhs) noexcept
+    {
+        return lhs + rhs;
+    }
+
+    NODISCARD static constexpr int GetMinus(int lhs, int rhs) noexcept
+    {
+        return lhs - rhs;
+    }
+
+    NODISCARD static constexpr int GetProduct(int lhs, int rhs) noexcept
+    {
+        return lhs * rhs;
+    }
+
+    NODISCARD static constexpr int GetDivide(int lhs, int rhs) noexcept
+    {
+        return lhs / rhs;
+    }
+
 }
 
 #if defined(_DEBUG) && !defined(NDEBUG)

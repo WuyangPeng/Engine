@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:21)
+/// 版本：1.0.0.6 (2024/02/27 18:22)
 
 #ifndef SYSTEM_THREADING_INTERLOCKED_DETAIL_H
 #define SYSTEM_THREADING_INTERLOCKED_DETAIL_H
@@ -86,16 +86,16 @@ T System::SystemInterlockedExchangeSubtract(T* addend, T value) noexcept(std::is
 }
 
 template <typename T>
-T System::SystemInterlockedCompareExchange(T* destination, T exchange, T comperand) noexcept(std::is_same_v<long, T>)
+T System::SystemInterlockedCompareExchange(T* destination, T exchange, T comparisonOperand) noexcept(std::is_same_v<long, T>)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::InterlockedCompareExchange(destination, exchange, comperand);
+    return ::InterlockedCompareExchange(destination, exchange, comparisonOperand);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
     auto old = *destination;
-    if (old == comperand)
+    if (old == comparisonOperand)
     {
         *destination = exchange;
     }

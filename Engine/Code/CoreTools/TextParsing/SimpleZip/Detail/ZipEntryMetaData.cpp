@@ -12,6 +12,9 @@
 #include "ZipEntryMetaData.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26485)
+
 CoreTools::SimpleZip::ZipEntryMetaData::ZipEntryMetaData(const ZipEntryInfo& info)
     : index{ info.m_file_index },
       compressedSize{ info.m_comp_size },
@@ -25,6 +28,8 @@ CoreTools::SimpleZip::ZipEntryMetaData::ZipEntryMetaData(const ZipEntryInfo& inf
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
+
+#include SYSTEM_WARNING_POP
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleZip, ZipEntryMetaData)
 

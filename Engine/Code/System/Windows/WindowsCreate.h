@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:41)
+/// 版本：1.0.0.6 (2024/02/24 19:55)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_CREATE_H
 #define SYSTEM_WINDOWS_WINDOWS_CREATE_H
@@ -17,7 +17,7 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Helper/WindowsMacro.h"
 
-// 窗口创建和相关函数。
+/// 窗口创建和相关函数。
 namespace System
 {
     NODISCARD bool SYSTEM_DEFAULT_DECLARE AdjustSystemWindowRect(WindowsRect* rect, WindowsStyles styles) noexcept;

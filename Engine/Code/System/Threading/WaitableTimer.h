@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:04)
+/// 版本：1.0.0.6 (2024/02/27 17:53)
 
 #ifndef SYSTEM_THREADING_WAITABLE_TIMER_H
 #define SYSTEM_THREADING_WAITABLE_TIMER_H
@@ -17,7 +17,7 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
 
-// 等待计时器的创建、销毁、等待和设置。
+/// 等待计时器的创建、销毁、等待和设置。
 namespace System
 {
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemWaitableTimer(WindowSecurityAttributesPtr timerAttributes,

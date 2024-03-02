@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:58)
+/// 版本：1.0.0.6 (2024/02/27 17:37)
 
 #ifndef SYSTEM_THREADING_MUTEX_FLAGS_H
 #define SYSTEM_THREADING_MUTEX_FLAGS_H
@@ -38,12 +38,12 @@ namespace System
     enum class PThreadResult : uint32_t
     {
         Successful = 0,
-        ENomem = WAIT_FAILED,
+        ENoMem = WAIT_FAILED,
         EAgain = WAIT_FAILED,
         EPerm = WAIT_FAILED,
         EBusy = WAIT_FAILED,
-        EInval = WAIT_FAILED,
-        EDeadlk = WAIT_FAILED,
+        EInVal = WAIT_FAILED,
+        EDeadLk = WAIT_FAILED,
     };
 
     enum class PThreadMutexCompatibility
@@ -78,12 +78,12 @@ namespace System
     enum class PThreadResult : uint32_t
     {
         Successful = 0,
-        ENomem = ENOMEM,
+        ENoMem = ENOMEM,
         EAgain = EAGAIN,
         EPerm = EPERM,
         EBusy = EBUSY,
-        EInval = EINVAL,
-        EDeadlk = EDEADLK,
+        EInVal = EINVAL,
+        EDeadLk = EDEADLK,
     };
 
     enum class PThreadMutexCompatibility

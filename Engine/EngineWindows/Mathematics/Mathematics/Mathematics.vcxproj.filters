@@ -337,6 +337,45 @@
     <Filter Include="Algebra 源文件\Angle">
       <UniqueIdentifier>{92b34786-10e9-46cf-a622-afe51098cb11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects2D 模板文件\Algebra">
+      <UniqueIdentifier>{aec1f64c-1e83-4163-bd7d-1a28fbe803e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects2D 头文件\Algebra">
+      <UniqueIdentifier>{e9603c66-3771-41a7-9bd4-8dca4948f5b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects2D 源文件\Algebra">
+      <UniqueIdentifier>{3d2a21de-d081-4d2b-9848-b9945e04aae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects3D 模板文件\Algebra">
+      <UniqueIdentifier>{c40648c4-2ffc-4bb5-8e51-e62c5d8fac08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects3D 头文件\Algebra">
+      <UniqueIdentifier>{53ded395-e405-49f5-8825-32341eb5af6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects3D 源文件\Algebra">
+      <UniqueIdentifier>{bedccf99-c33f-49e8-93ca-dbb769c722a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects3D 头文件\Flags">
+      <UniqueIdentifier>{3a14930a-79ed-417a-9fe6-0a6b6246b710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Primitives 模板文件">
+      <UniqueIdentifier>{4554d9f8-d817-4261-a61a-1b70a0b16766}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Primitives 源文件">
+      <UniqueIdentifier>{b0389d05-5b46-40de-9592-a4e75bfb4057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NumericalAnalysis 头文件\Algebra">
+      <UniqueIdentifier>{68ee9a45-a996-4f38-bbe1-66c7409d4b31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NumericalAnalysis 模板文件\Algebra">
+      <UniqueIdentifier>{864da622-56c8-4a44-92ea-c0b09b22a82c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NumericalAnalysis 源文件\Algebra">
+      <UniqueIdentifier>{02e81712-ef70-441b-8422-cb578e46bb62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Primitives 头文件\Flags">
+      <UniqueIdentifier>{77b8aae4-6724-4551-a12d-254ee6c8e66a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Mathematics\DllLib.cpp">
@@ -1934,6 +1973,108 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Angle\EulerAngles.cpp">
       <Filter>Algebra 源文件\Angle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Angle\Rotation.cpp">
+      <Filter>Algebra 源文件\Angle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\ConvertCoordinates.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects2D\Algebra\AlgebraPolygon2.cpp">
+      <Filter>Objects2D 源文件\Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects2D\Sector2.cpp">
+      <Filter>Objects2D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Algebra\AlgebraCircle3.cpp">
+      <Filter>Objects3D 源文件\Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\ConvexMesh3.cpp">
+      <Filter>Objects3D 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Primitives\AlignedBox.cpp">
+      <Filter>Primitives 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Primitives\AlignedBoxCentered.cpp">
+      <Filter>Primitives 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Algebra\AlgebraConvexPolyhedron3.cpp">
+      <Filter>Objects3D 源文件\Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Primitives\Line.cpp">
+      <Filter>Primitives 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Algebra\AlgebraEllipse3.cpp">
+      <Filter>Objects3D 源文件\Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Primitives\Rectangle.cpp">
+      <Filter>Primitives 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Algebra\AlgebraPolyhedron3.cpp">
+      <Filter>Objects3D 源文件\Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Algebra\AlgebraTetrahedron3.cpp">
+      <Filter>Objects3D 源文件\Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Primitives\Hyperplane.cpp">
+      <Filter>Primitives 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Algebra\AlgebraSingularValueDecomposition.cpp">
+      <Filter>NumericalAnalysis 源文件\Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Algebra\SingularInfo.cpp">
+      <Filter>NumericalAnalysis 源文件\Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Algebra\AlgebraGivensRotation.cpp">
+      <Filter>NumericalAnalysis 源文件\Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Objects3D\Algebra\AlgebraTorus3.cpp">
+      <Filter>Objects3D 源文件\Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Primitives\CanonicalBox.cpp">
+      <Filter>Primitives 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Primitives\Segment.cpp">
+      <Filter>Primitives 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Primitives\Capsule.cpp">
+      <Filter>Primitives 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Primitives\Ray.cpp">
+      <Filter>Primitives 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\UniqueVerticesSimplices.cpp">
+      <Filter>Meshes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Primitives\Cone.cpp">
+      <Filter>Primitives 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Primitives\HalfSpace.cpp">
+      <Filter>Primitives 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\SymmetricEigensolver.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\GivensRotation.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\SortItem.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Primitives\HyperEllipsoid.cpp">
+      <Filter>Primitives 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Primitives\HyperSphere.cpp">
+      <Filter>Primitives 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Primitives\OrientedBox.cpp">
+      <Filter>Primitives 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Primitives\Triangle.cpp">
+      <Filter>Primitives 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Primitives\SegmentMesh.cpp">
+      <Filter>Primitives 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -6007,6 +6148,222 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Angle\EulerAnglesDetail.h">
       <Filter>Algebra 模板文件\Angle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Angle\Rotation.h">
+      <Filter>Algebra 头文件\Angle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Angle\RotationDetail.h">
+      <Filter>Algebra 模板文件\Angle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Flags\RotationType.h">
+      <Filter>Algebra 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\ConvertCoordinates.h">
+      <Filter>Algebra 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\ConvertCoordinatesDetail.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Algebra\Polygon2.h">
+      <Filter>Objects2D 头文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Algebra\Polygon2Detail.h">
+      <Filter>Objects2D 模板文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersector.h">
+      <Filter>Intersection 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Sector2.h">
+      <Filter>Objects2D 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects2D\Sector2Detail.h">
+      <Filter>Objects2D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Algebra\Circle3Detail.h">
+      <Filter>Objects3D 模板文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Algebra\Circle3.h">
+      <Filter>Objects3D 头文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\ConvexMesh3.h">
+      <Filter>Objects3D 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\ConvexMesh3Detail.h">
+      <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Flags\ConvexMesh3Type.h">
+      <Filter>Objects3D 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\AlignedBoxDetail.h">
+      <Filter>Primitives 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\AlignedBox.h">
+      <Filter>Primitives 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\AlignedBoxCentered.h">
+      <Filter>Primitives 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\AlignedBoxCenteredDetail.h">
+      <Filter>Primitives 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Algebra\ConvexPolyhedron3.h">
+      <Filter>Objects3D 头文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Algebra\ConvexPolyhedron3Detail.h">
+      <Filter>Objects3D 模板文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\Line.h">
+      <Filter>Primitives 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\LineDetail.h">
+      <Filter>Primitives 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Algebra\Ellipse3.h">
+      <Filter>Objects3D 头文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Algebra\Ellipse3Detail.h">
+      <Filter>Objects3D 模板文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\Rectangle.h">
+      <Filter>Primitives 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\RectangleDetail.h">
+      <Filter>Primitives 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Algebra\Polyhedron3.h">
+      <Filter>Objects3D 头文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Algebra\Polyhedron3Detail.h">
+      <Filter>Objects3D 模板文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Algebra\Tetrahedron3.h">
+      <Filter>Objects3D 头文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Algebra\Tetrahedron3Detail.h">
+      <Filter>Objects3D 模板文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\Hyperplane.h">
+      <Filter>Primitives 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\HyperplaneDetail.h">
+      <Filter>Primitives 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Algebra\SingularValueDecomposition.h">
+      <Filter>NumericalAnalysis 头文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Algebra\SingularValueDecompositionDetail.h">
+      <Filter>NumericalAnalysis 模板文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Algebra\SingularInfo.h">
+      <Filter>NumericalAnalysis 头文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Algebra\SingularInfoDetail.h">
+      <Filter>NumericalAnalysis 模板文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Algebra\GivensRotation.h">
+      <Filter>NumericalAnalysis 头文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Algebra\GivensRotationDetail.h">
+      <Filter>NumericalAnalysis 模板文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Algebra\Torus3.h">
+      <Filter>Objects3D 头文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\Algebra\Torus3Detail.h">
+      <Filter>Objects3D 模板文件\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\CanonicalBox.h">
+      <Filter>Primitives 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\CanonicalBoxDetail.h">
+      <Filter>Primitives 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\Segment.h">
+      <Filter>Primitives 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\SegmentDetail.h">
+      <Filter>Primitives 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\Capsule.h">
+      <Filter>Primitives 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\CapsuleDetail.h">
+      <Filter>Primitives 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\Ray.h">
+      <Filter>Primitives 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\RayDetail.h">
+      <Filter>Primitives 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\UniqueVerticesSimplices.h">
+      <Filter>Meshes 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\UniqueVerticesSimplicesDetail.h">
+      <Filter>Meshes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\Cone.h">
+      <Filter>Primitives 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\ConeDetail.h">
+      <Filter>Primitives 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\HalfSpace.h">
+      <Filter>Primitives 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\HalfSpaceDetail.h">
+      <Filter>Primitives 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SymmetricEigensolver.h">
+      <Filter>NumericalAnalysis 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SymmetricEigensolverDetail.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\GivensRotation.h">
+      <Filter>NumericalAnalysis 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\GivensRotationDetail.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SortItem.h">
+      <Filter>NumericalAnalysis 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SortItemDetail.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\HyperEllipsoid.h">
+      <Filter>Primitives 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\HyperEllipsoidDetail.h">
+      <Filter>Primitives 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\HyperSphere.h">
+      <Filter>Primitives 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\HyperSphereDetail.h">
+      <Filter>Primitives 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\OrientedBox.h">
+      <Filter>Primitives 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\OrientedBoxDetail.h">
+      <Filter>Primitives 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\Triangle.h">
+      <Filter>Primitives 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\TriangleDetail.h">
+      <Filter>Primitives 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\Flags\TopologyType.h">
+      <Filter>Primitives 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\SegmentMesh.h">
+      <Filter>Primitives 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Primitives\SegmentMeshDetail.h">
+      <Filter>Primitives 模板文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

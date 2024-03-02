@@ -198,6 +198,14 @@ void Mathematics::Matrix<Real>::Divide(Real value)
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
+template <int RowIndex, int ColumnIndex>
+void Mathematics::Matrix<Real>::Divide(Real value)
+{
+    Divide<RowIndex * columnSize + ColumnIndex>(value);
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix<Real>::EntryTypeConstIter Mathematics::Matrix<Real>::begin() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -752,40 +760,39 @@ Mathematics::Matrix<Real> Mathematics::Matrix<Real>::Invert3x3(const Real epsilo
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
     // 计算M (3x3)的伴随矩阵。
-    Matrix adjoint{ GetValue<5>() * GetValue<10>() - GetValue<6>() * GetValue<9>(),
-                    GetValue<2>() * GetValue<9>() - GetValue<1>() * GetValue<10>(),
-                    GetValue<1>() * GetValue<6>() - GetValue<2>() * GetValue<5>(),
-                    GetValue<3>(),
-                    GetValue<6>() * GetValue<8>() - GetValue<4>() * GetValue<10>(),
-                    GetValue<0>() * GetValue<10>() - GetValue<2>() * GetValue<8>(),
-                    GetValue<2>() * GetValue<4>() - GetValue<0>() * GetValue<6>(),
-                    GetValue<7>(),
-                    GetValue<4>() * GetValue<9>() - GetValue<5>() * GetValue<8>(),
-                    GetValue<1>() * GetValue<8>() - GetValue<0>() * GetValue<9>(),
-                    GetValue<0>() * GetValue<5>() - GetValue<1>() * GetValue<4>(),
-                    GetValue<11>(),
-                    GetValue<12>(),
-                    GetValue<13>(),
-                    GetValue<14>(),
-                    GetValue<15>() };
+    Matrix adjoint{ GetValue<1, 1>() * GetValue<2, 2>() - GetValue<1, 2>() * GetValue<2, 1>(),
+                    GetValue<0, 2>() * GetValue<2, 1>() - GetValue<0, 1>() * GetValue<2, 2>(),
+                    GetValue<0, 1>() * GetValue<1, 2>() - GetValue<0, 2>() * GetValue<1, 1>(),
+                    GetValue<0, 3>(),
+                    GetValue<1, 2>() * GetValue<2, 0>() - GetValue<1, 0>() * GetValue<2, 2>(),
+                    GetValue<0, 0>() * GetValue<2, 2>() - GetValue<0, 2>() * GetValue<2, 0>(),
+                    GetValue<0, 2>() * GetValue<1, 0>() - GetValue<0, 0>() * GetValue<1, 2>(),
+                    GetValue<1, 3>(),
+                    GetValue<1, 0>() * GetValue<2, 1>() - GetValue<1, 1>() * GetValue<2, 0>(),
+                    GetValue<0, 1>() * GetValue<2, 0>() - GetValue<0, 0>() * GetValue<2, 1>(),
+                    GetValue<0, 0>() * GetValue<1, 1>() - GetValue<0, 1>() * GetValue<1, 0>(),
+                    GetValue<2, 3>(),
+                    GetValue<3, 0>(),
+                    GetValue<3, 1>(),
+                    GetValue<3, 2>(),
+                    GetValue<3, 3>() };
 
     // 计算M的行列式。
-    const auto det = GetValue<0>() * adjoint.GetValue<0>() + GetValue<1>() * adjoint.GetValue<4>() + GetValue<2>() * adjoint.GetValue<8>();
-
-    if (epsilon < Math::FAbs(det))
+    if (const auto det = GetValue<0, 0>() * adjoint.GetValue<0, 0>() + GetValue<0, 1>() * adjoint.GetValue<1, 0>() + GetValue<0, 2>() * adjoint.GetValue<2, 0>();
+        epsilon < Math::FAbs(det))
     {
         // inverse(M) = adjoint(M) / determinant(M).
-        adjoint.template Divide<0>(det);
-        adjoint.template Divide<1>(det);
-        adjoint.template Divide<2>(det);
+        adjoint.template Divide<0, 0>(det);
+        adjoint.template Divide<0, 1>(det);
+        adjoint.template Divide<0, 2>(det);
 
-        adjoint.template Divide<4>(det);
-        adjoint.template Divide<5>(det);
-        adjoint.template Divide<6>(det);
+        adjoint.template Divide<1, 0>(det);
+        adjoint.template Divide<1, 1>(det);
+        adjoint.template Divide<1, 2>(det);
 
-        adjoint.template Divide<8>(det);
-        adjoint.template Divide<9>(det);
-        adjoint.template Divide<10>(det);
+        adjoint.template Divide<2, 0>(det);
+        adjoint.template Divide<2, 1>(det);
+        adjoint.template Divide<2, 2>(det);
 
         return adjoint;
     }

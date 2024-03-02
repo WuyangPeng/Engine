@@ -62,39 +62,39 @@ void System::InitOpenGL14() noexcept
     }
 }
 
-void System::GLBlendFuncSeparate(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha) noexcept
+void System::GLBlendFuncSeparate(GLenum sFactorRGB, GLenum dFactorRGB, GLenum sFactorAlpha, GLenum dFactorAlpha) noexcept
 {
-    SYSTEM_BODY_4(glBlendFuncSeparate, sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha);
+    SYSTEM_BODY_4(glBlendFuncSeparate, sFactorRGB, dFactorRGB, sFactorAlpha, dFactorAlpha);
 }
 
-void System::GLMultiDrawArrays(GLenum mode, const GLint* first, const GLsizei* count, GLsizei drawcount) noexcept
+void System::GLMultiDrawArrays(GLenum mode, const GLint* first, const GLsizei* count, GLsizei drawCount) noexcept
 {
-    SYSTEM_BODY_4(glMultiDrawArrays, mode, first, count, drawcount);
+    SYSTEM_BODY_4(glMultiDrawArrays, mode, first, count, drawCount);
 }
 
-void System::GLMultiDrawElements(GLenum mode, const GLsizei* count, GLenum type, const void* const* indices, GLsizei drawcount) noexcept
+void System::GLMultiDrawElements(GLenum mode, const GLsizei* count, GLenum type, const void* const* indices, GLsizei drawCount) noexcept
 {
-    SYSTEM_BODY_5(glMultiDrawElements, mode, count, type, indices, drawcount);
+    SYSTEM_BODY_5(glMultiDrawElements, mode, count, type, indices, drawCount);
 }
 
-void System::GLPointParameterf(GLenum pname, GLfloat param) noexcept
+void System::GLPointParameterF(GLenum pName, GLfloat param) noexcept
 {
-    SYSTEM_BODY_2(glPointParameterf, pname, param);
+    SYSTEM_BODY_2(glPointParameterf, pName, param);
 }
 
-void System::GLPointParameterfv(GLenum pname, const GLfloat* params) noexcept
+void System::GLPointParameterFv(GLenum pName, const GLfloat* params) noexcept
 {
-    SYSTEM_BODY_2(glPointParameterfv, pname, params);
+    SYSTEM_BODY_2(glPointParameterfv, pName, params);
 }
 
-void System::GLPointParameteri(GLenum pname, GLint param) noexcept
+void System::GLPointParameterI(GLenum pName, GLint param) noexcept
 {
-    SYSTEM_BODY_2(glPointParameteri, pname, param);
+    SYSTEM_BODY_2(glPointParameteri, pName, param);
 }
 
-void System::GLPointParameteriv(GLenum pname, const GLint* params) noexcept
+void System::GLPointParameterIv(GLenum pName, const GLint* params) noexcept
 {
-    SYSTEM_BODY_2(glPointParameteriv, pname, params);
+    SYSTEM_BODY_2(glPointParameteriv, pName, params);
 }
 
 void System::GLBlendColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) noexcept

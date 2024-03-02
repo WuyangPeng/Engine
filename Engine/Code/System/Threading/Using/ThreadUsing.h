@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:01)
+/// 版本：1.0.0.6 (2024/02/27 17:45)
 
 #ifndef SYSTEM_THREADING_THREAD_USING_H
 #define SYSTEM_THREADING_THREAD_USING_H
@@ -31,7 +31,7 @@ namespace System
 
     using StartAddress = unsigned (*)(void*);
 
-#else  // !SYSTEM_PLATFORM_WIN32
+#else  // !SYSTEM_PLATFORM_WIN32 && !SYSTEM_PLATFORM_LINUX
 
     using ThreadHandle = pthread_t;
     using ThreadHandlePtr = ThreadHandle*;

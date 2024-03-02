@@ -135,7 +135,7 @@ void System::GlutInitDisplayMode(bool multiSample) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 
-    constexpr auto glutMacro = GlutMacro::Double | GlutMacro::Rgba | GlutMacro::Depth | GlutMacro::Stencil | GlutMacro::Accum;
+    constexpr auto glutMacro = GlutMacro::Double | GlutMacro::Rgba | GlutMacro::Depth | GlutMacro::Stencil | GlutMacro::Accumulation;
 
     if (multiSample)
     {

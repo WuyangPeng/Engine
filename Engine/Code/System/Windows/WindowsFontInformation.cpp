@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:44)
+/// 版本：1.0.0.6 (2024/02/26 13:36)
 
 #include "System/SystemExport.h"
 
@@ -28,7 +28,7 @@ int System::GetStringWidth(WindowsHWnd hWnd, const String& text)
     if (GetSystemTextExtentPoint32(context, text.c_str(), boost::numeric_cast<int>(text.size()), &size) &&
         ReleaseSystemDC(hWnd, context))
     {
-        return gsl::narrow_cast<int>(size.cx);
+        return boost::numeric_cast<int>(size.cx);
     }
     else
     {
@@ -74,10 +74,7 @@ bool System::ReleaseSystemDC(WindowsHWnd hWnd, WindowsHdc hdc) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::ReleaseDC(hWnd, hdc) != 0)
-        return true;
-    else
-        return false;
+    return ::ReleaseDC(hWnd, hdc) != 0;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -92,10 +89,7 @@ bool System::GetSystemTextExtentPoint32(WindowsHdc hdc, const TChar* text, int c
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetTextExtentPoint32(hdc, text, character, pointSize) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetTextExtentPoint32(hdc, text, character, pointSize) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -110,10 +104,7 @@ bool System::GetSystemTextMetrics(WindowsHdc hdc, WindowsTextMetric* metric) noe
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetTextMetrics(hdc, metric) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetTextMetrics(hdc, metric) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

@@ -69,7 +69,7 @@ void System::PrintOpenGLInfo()
     std::cout << "extensions =\n";
     for (auto i = 0; i < numExtensions; i++)
     {
-        std::cout << "    " << GLGetStringi(GL_EXTENSIONS, i) << '\n';
+        std::cout << "    " << GLGetStringI(GL_EXTENSIONS, i) << '\n';
     }
 
 #ifdef SYSTEM_PLATFORM_WIN32

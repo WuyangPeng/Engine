@@ -26,18 +26,18 @@ void System::SetGLBindTexture(TextureTarget target, OpenGLUInt texture) noexcept
 
 void System::SetGLPixelStore(PixelStore pName, OpenGLInt param) noexcept
 {
-    GLPixelStorei(EnumCastUnderlying(pName), param);
+    GLPixelStoreI(EnumCastUnderlying(pName), param);
 }
 
 void System::SetGLTexturesParameter(TextureTarget target, TextureParameter pName, OpenGLInt param) noexcept
 {
-    GLTexParameteri(EnumCastUnderlying(target), EnumCastUnderlying(pName), param);
+    GLTexParameterI(EnumCastUnderlying(target), EnumCastUnderlying(pName), param);
 }
 
 System::OpenGLInt System::GetGLTexturesLevelParameter(TextureTarget target, OpenGLInt level, TextureLevelParameter pName) noexcept
 {
     OpenGLInt params{};
-    GLGetTexLevelParameteriv(EnumCastUnderlying(target), level, EnumCastUnderlying(pName), &params);
+    GLGetTexLevelParameterIv(EnumCastUnderlying(target), level, EnumCastUnderlying(pName), &params);
 
     return params;
 }
@@ -45,7 +45,7 @@ System::OpenGLInt System::GetGLTexturesLevelParameter(TextureTarget target, Open
 System::OpenGLInt System::GetGLTexturesLevelParameter(TextureCubeMap target, OpenGLInt level, TextureLevelParameter pName) noexcept
 {
     OpenGLInt params{};
-    GLGetTexLevelParameteriv(EnumCastUnderlying(target), level, EnumCastUnderlying(pName), &params);
+    GLGetTexLevelParameterIv(EnumCastUnderlying(target), level, EnumCastUnderlying(pName), &params);
 
     return params;
 }
@@ -130,7 +130,7 @@ void System::SetGLGenerateMipmap(TextureTarget target) noexcept
 
 void System::SetGLFrameBufferTexture2D(FrameBufferType target, ColorAttachment attachment, TextureTarget texTarget, OpenGLUInt texture, OpenGLInt level) noexcept
 {
-    GLFramebufferTexture2D(EnumCastUnderlying(target), EnumCastUnderlying(attachment), EnumCastUnderlying(texTarget), texture, level);
+    GLFrameBufferTexture2D(EnumCastUnderlying(target), EnumCastUnderlying(attachment), EnumCastUnderlying(texTarget), texture, level);
 }
 
 void System::SetGLActiveTexture(OpenGLEnum texture) noexcept

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:19)
+/// 版本：1.0.0.6 (2024/02/27 18:07)
 
 #include "System/SystemExport.h"
 
@@ -16,6 +16,8 @@
 #include "System/Threading/Flags/SemaphoreFlags.h"
 #include "System/Threading/Flags/SyncToolsFlags.h"
 #include "System/Windows/WindowsSystem.h"
+
+#include <gsl/util>
 
 #ifdef SYSTEM_PLATFORM_LINUX
 
@@ -40,7 +42,9 @@ System::SleepReturn System::SystemSleep(WindowsDWord milliseconds, bool alertabl
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<SleepReturn>(SleepEx(milliseconds, BoolConversion(alertable)));
+    const auto result = SleepEx(milliseconds, BoolConversion(alertable));
+
+    return UnderlyingCastEnum<SleepReturn>(gsl::narrow_cast<int>(result));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -57,7 +61,9 @@ System::MutexWaitReturn System::SystemSignalObjectAndWait(ThreadHandle objectToS
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<MutexWaitReturn>(SignalObjectAndWait(objectToSignal, objectToWaitOn, milliseconds, BoolConversion(alertable)));
+    const auto result = SignalObjectAndWait(objectToSignal, objectToWaitOn, milliseconds, BoolConversion(alertable));
+
+    return UnderlyingCastEnum<MutexWaitReturn>(gsl::narrow_cast<int>(result));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

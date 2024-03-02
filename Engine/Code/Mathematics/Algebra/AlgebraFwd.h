@@ -198,6 +198,9 @@ namespace Mathematics
     requires std::is_floating_point_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BoundingSphere;
 
+    template <int N, typename Real>
+    class ConvertCoordinates;
+
     namespace Algebra
     {
         template <int N, typename Real>
@@ -215,6 +218,12 @@ namespace Mathematics
         template <typename Real>
         requires(std::is_arithmetic_v<Real>)
         class EulerAngles;
+
+        template <int N, typename Real>
+        requires(3 <= N && N <= 4 && std::is_arithmetic_v<Real>)
+        class Rotation;
+
+        enum class RotationType;
     }
 
     enum class EulerResult;

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:18)
+/// 版本：1.0.0.6 (2024/02/27 18:02)
 
 #include "System/SystemExport.h"
 
@@ -57,10 +57,7 @@ bool System::CloseSystemEvent(WindowsHandle handle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(handle) != gFalse)
-        return true;
-    else
-        return false;
+    return ::CloseHandle(handle) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -75,10 +72,7 @@ bool System::SetSystemEvent(WindowsHandle handle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetEvent(handle) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetEvent(handle) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -93,10 +87,7 @@ bool System::ResetSystemEvent(WindowsHandle handle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::ResetEvent(handle) != gFalse)
-        return true;
-    else
-        return false;
+    return ::ResetEvent(handle) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -189,8 +180,5 @@ System::WindowsHandle System::OpenSystemEvent(MutexStandardAccess desiredAccess,
 
 bool System::IsSystemEventValid(WindowsHandle eventHandle) noexcept
 {
-    if (eventHandle != nullptr && eventHandle != invalidHandleValue)
-        return true;
-    else
-        return false;
+    return eventHandle != nullptr && eventHandle != invalidHandleValue;
 }

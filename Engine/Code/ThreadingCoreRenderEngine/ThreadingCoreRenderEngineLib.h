@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/18 16:27)
+/// 版本：1.0.0.6 (2024/02/20 19:42)
 
 #ifndef THREADING_CORE_RENDER_ENGINE_LIB_H
 #define THREADING_CORE_RENDER_ENGINE_LIB_H

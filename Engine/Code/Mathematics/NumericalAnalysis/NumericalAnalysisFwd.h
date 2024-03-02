@@ -123,6 +123,25 @@ namespace Mathematics
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE QDUDecompositionValue;
 
+    namespace Algebra
+    {
+        template <typename Real>
+        requires(std::is_arithmetic_v<Real>)
+        class SingularValueDecomposition;
+
+        template <typename Real>
+        requires(std::is_arithmetic_v<Real>)
+        class SingularInfo;
+
+        template <typename Real>
+        requires(std::is_arithmetic_v<Real>)
+        class GivensRotation;
+    }
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class SymmetricEigensolver;
+
     enum class Bisect2StorageType;
     enum class Bisect3StorageType;
     enum class QuantityType;

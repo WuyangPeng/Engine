@@ -53,14 +53,14 @@ void System::GLSpecializeShader(GLuint shader, const GLchar* pEntryPoint, GLuint
     SYSTEM_BODY_5(glSpecializeShader, shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue);
 }
 
-void System::GLMultiDrawArraysIndirectCount(GLenum mode, const void* indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride) noexcept
+void System::GLMultiDrawArraysIndirectCount(GLenum mode, const void* indirect, GLintptr drawCount, GLsizei maxDrawCount, GLsizei stride) noexcept
 {
-    SYSTEM_BODY_5(glMultiDrawArraysIndirectCount, mode, indirect, drawcount, maxdrawcount, stride);
+    SYSTEM_BODY_5(glMultiDrawArraysIndirectCount, mode, indirect, drawCount, maxDrawCount, stride);
 }
 
-void System::GLMultiDrawElementsIndirectCount(GLenum mode, GLenum type, const void* indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride) noexcept
+void System::GLMultiDrawElementsIndirectCount(GLenum mode, GLenum type, const void* indirect, GLintptr drawCount, GLsizei maxDrawCount, GLsizei stride) noexcept
 {
-    SYSTEM_BODY_6(glMultiDrawElementsIndirectCount, mode, type, indirect, drawcount, maxdrawcount, stride);
+    SYSTEM_BODY_6(glMultiDrawElementsIndirectCount, mode, type, indirect, drawCount, maxDrawCount, stride);
 }
 
 void System::GLPolygonOffsetClamp(GLfloat factor, GLfloat units, GLfloat clamp) noexcept

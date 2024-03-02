@@ -5,18 +5,16 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:20)
+/// 版本：1.0.0.6 (2024/02/27 18:19)
 
 #include "System/SystemExport.h"
 
 #include "ThreadLocalStorage.h"
-#include "Flags/ThreadLocalStorageFlags.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
-System::WindowsDWord
-    System::ThreadLocalStorageAlloc() noexcept
+System::WindowsDWord System::ThreadLocalStorageAlloc() noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -48,10 +46,7 @@ bool System::SetThreadLocalStorageValue(WindowsDWord threadLocalStorageIndex, Wi
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::TlsSetValue(threadLocalStorageIndex, threadLocalStorageValue) != gFalse)
-        return true;
-    else
-        return false;
+    return ::TlsSetValue(threadLocalStorageIndex, threadLocalStorageValue) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -66,10 +61,7 @@ bool System::ThreadLocalStorageFree(WindowsDWord threadLocalStorageIndex) noexce
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::TlsFree(threadLocalStorageIndex) != gFalse)
-        return true;
-    else
-        return false;
+    return ::TlsFree(threadLocalStorageIndex) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -78,12 +70,4 @@ bool System::ThreadLocalStorageFree(WindowsDWord threadLocalStorageIndex) noexce
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
-}
-
-bool System::IsThreadLocalStorageValid(WindowsDWord threadLocalStorageIndex) noexcept
-{
-    if (threadLocalStorageIndex != EnumCastUnderlying(ThreadLocalStorageIndexes::OutOfIndexes))
-        return true;
-    else
-        return false;
 }

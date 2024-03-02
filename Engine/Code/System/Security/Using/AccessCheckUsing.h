@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:26)
+/// 版本：1.0.0.6 (2024/02/28 10:43)
 
 #ifndef SYSTEM_SECURITY_ACCESS_CHECK_USING_H
 #define SYSTEM_SECURITY_ACCESS_CHECK_USING_H
@@ -20,26 +20,26 @@ namespace System
 
     using SecurityPrivilegeSet = PRIVILEGE_SET;
     using SecurityPrivilegeSetPtr = PPRIVILEGE_SET;
-    using LuidAndAttributes = LUID_AND_ATTRIBUTES;
-    using LuidAndAttributesPtr = PLUID_AND_ATTRIBUTES;
+    using LocallyUniqueIdentifierAndAttributes = LUID_AND_ATTRIBUTES;
+    using LocallyUniqueIdentifierAndAttributesPtr = PLUID_AND_ATTRIBUTES;
     using SecurityObjectTypeList = OBJECT_TYPE_LIST;
     using SecurityObjectTypeListPtr = POBJECT_TYPE_LIST;
     using SecurityAuditEventType = AUDIT_EVENT_TYPE;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    struct LuidAndAttributes
+    struct LocallyUniqueIdentifierAndAttributes
     {
-        LookupPrivilegeLuid Luid;
+        LookupPrivilegeLocallyUniqueIdentifier Luid;
         uint32_t Attributes;
     };
-    using LuidAndAttributesPtr = LuidAndAttributes*;
+    using LocallyUniqueIdentifierAndAttributesPtr = LocallyUniqueIdentifierAndAttributes*;
 
     struct SecurityPrivilegeSet
     {
         uint32_t PrivilegeCount;
         uint32_t Control;
-        LuidAndAttributes Privilege[1];
+        LocallyUniqueIdentifierAndAttributes Privilege[1];
     };
     using SecurityPrivilegeSetPtr = SecurityPrivilegeSet*;
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:10)
+/// 版本：1.0.0.6 (2024/03/01 16:50)
 
 #ifndef SYSTEM_OPENGL_OPENGL_FLAGS_H
 #define SYSTEM_OPENGL_OPENGL_FLAGS_H
@@ -428,7 +428,7 @@ namespace System
         Normal = 2,  // 属性 2
         Color = 3,  // 属性 3 - 4
         FogCoord = 5,  // 属性 5
-        Psize = 6,  // 属性 6
+        PSize = 6,  // 属性 6
         BlendIndices = 7,  //  属性 7
         TextureCoord = 8,  //  属性 8 - 13
         Tangent = 14,  //  属性 14
@@ -495,21 +495,21 @@ namespace System
         FloatMat2 = GL_FLOAT_MAT2,
         FloatMat3 = GL_FLOAT_MAT3,
         FloatMat4 = GL_FLOAT_MAT4,
-        FloatMat2x3 = GL_FLOAT_MAT2x3,
-        FloatMat2x4 = GL_FLOAT_MAT2x4,
-        FloatMat3x2 = GL_FLOAT_MAT3x2,
-        FloatMat3x4 = GL_FLOAT_MAT3x4,
-        FloatMat4x2 = GL_FLOAT_MAT4x2,
-        FloatMat4x3 = GL_FLOAT_MAT4x3,
+        FloatMat2X3 = GL_FLOAT_MAT2x3,
+        FloatMat2X4 = GL_FLOAT_MAT2x4,
+        FloatMat3X2 = GL_FLOAT_MAT3x2,
+        FloatMat3X4 = GL_FLOAT_MAT3x4,
+        FloatMat4X2 = GL_FLOAT_MAT4x2,
+        FloatMat4X3 = GL_FLOAT_MAT4x3,
         DoubleMat2 = GL_DOUBLE_MAT2,
         DoubleMat3 = GL_DOUBLE_MAT3,
         DoubleMat4 = GL_DOUBLE_MAT4,
-        DoubleMat2x3 = GL_DOUBLE_MAT2x3,
-        DoubleMat2x4 = GL_DOUBLE_MAT2x4,
-        DoubleMat3x2 = GL_DOUBLE_MAT3x2,
-        DoubleMat3x4 = GL_DOUBLE_MAT3x4,
-        DoubleMat4x2 = GL_DOUBLE_MAT4x2,
-        DoubleMat4x3 = GL_DOUBLE_MAT4x3,
+        DoubleMat2X3 = GL_DOUBLE_MAT2x3,
+        DoubleMat2X4 = GL_DOUBLE_MAT2x4,
+        DoubleMat3X2 = GL_DOUBLE_MAT3x2,
+        DoubleMat3X4 = GL_DOUBLE_MAT3x4,
+        DoubleMat4X2 = GL_DOUBLE_MAT4x2,
+        DoubleMat4X3 = GL_DOUBLE_MAT4x3,
         Sampler1D = GL_SAMPLER_1D,
         Sampler2D = GL_SAMPLER_2D,
         Sampler3D = GL_SAMPLER_3D,
@@ -585,7 +585,6 @@ namespace System
         UnsignedIntImage2DRect = GL_UNSIGNED_INT_IMAGE_2D_RECT,
         UnsignedIntAtomicCounter = GL_UNSIGNED_INT_ATOMIC_COUNTER,
     };
-
 }
 
 #endif  // SYSTEM_OPENGL_OPENGL_FLAGS_H

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:18)
+/// 版本：1.0.0.6 (2024/02/27 18:00)
 
 #include "System/SystemExport.h"
 
@@ -49,10 +49,7 @@ bool System::InitializeSystemCriticalSection(ThreadingCriticalSectionPtr critica
 
     #else  // (0x0600 <= _WIN32_WINNT)
 
-    if (::InitializeCriticalSectionEx(criticalSection, spinCount, EnumCastUnderlying(flags)) != gFalse)
-        return true;
-    else
-        return false;
+    return ::InitializeCriticalSectionEx(criticalSection, spinCount, EnumCastUnderlying(flags)) != gFalse;
 
     #endif  // (_WIN32_WINNT < 0x0600)
 
@@ -69,10 +66,7 @@ bool System::InitializeSystemCriticalSectionAndSpinCount(ThreadingCriticalSectio
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::InitializeCriticalSectionAndSpinCount(criticalSection, spinCount) != gFalse)
-        return true;
-    else
-        return false;
+    return ::InitializeCriticalSectionAndSpinCount(criticalSection, spinCount) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -140,10 +134,7 @@ bool System::TryEnterSystemCriticalSection(ThreadingCriticalSectionPtr criticalS
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::TryEnterCriticalSection(criticalSection) != gFalse)
-        return true;
-    else
-        return false;
+    return ::TryEnterCriticalSection(criticalSection) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

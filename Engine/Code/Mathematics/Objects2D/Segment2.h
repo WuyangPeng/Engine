@@ -14,6 +14,7 @@
 
 #include "Mathematics/Algebra/Vector2.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
+#include "Mathematics/Algebra/Vector/Vector2.h"
 #include "Mathematics/Base/MathDetail.h"
 
 namespace Mathematics
@@ -29,6 +30,7 @@ namespace Mathematics
         using Math = Math<Real>;
         using Vector2 = Vector2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
+        using AlgebraVector2 = Algebra::Vector2<Real>;
 
     public:
         // 线段被表示为(1-s) * P0 + s * P1，其中P0和P1是线段的端点和0 <= s <= 1。
@@ -40,6 +42,7 @@ namespace Mathematics
 
         // 构造函数计算center、direction和extent从beginPoint和endPoint
         Segment2(const Vector2& beginPoint, const Vector2& endPoint, Real epsilon = Math::GetZeroTolerance());
+        Segment2(const AlgebraVector2& beginPoint, const AlgebraVector2& endPoint, Real epsilon = Math::GetZeroTolerance());
 
         // 构造函数计算beginPoint和endPoint从center、direction和extent
         Segment2(Real extent, const Vector2& center, const Vector2& direction, Real epsilon = Math::GetZeroTolerance());

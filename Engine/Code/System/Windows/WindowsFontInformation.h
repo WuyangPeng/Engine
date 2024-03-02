@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 15:41)
+/// 版本：1.0.0.6 (2024/02/24 19:56)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_FONT_INFORMATION_H
 #define SYSTEM_WINDOWS_WINDOWS_FONT_INFORMATION_H
@@ -15,7 +15,7 @@
 #include "Using/WindowsUsing.h"
 #include "System/Helper/UnicodeUsing.h"
 
-// 字体信息函数。
+/// 字体信息函数。
 namespace System
 {
     NODISCARD int SYSTEM_DEFAULT_DECLARE GetStringWidth(WindowsHWnd hWnd, const String& text);

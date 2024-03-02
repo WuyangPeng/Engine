@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 16:02)
+/// 版本：1.0.0.6 (2024/02/27 17:46)
 
 #ifndef SYSTEM_THREADING_EVENT_H
 #define SYSTEM_THREADING_EVENT_H
@@ -17,7 +17,7 @@
 #include "System/Security/Using/SecurityBaseUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
-// 事件对象
+/// 事件对象
 namespace System
 {
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemEvent(WindowSecurityAttributesPtr securityAttributes,

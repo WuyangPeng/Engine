@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:10)
+/// 版本：1.0.0.6 (2024/03/01 16:57)
 
 #ifndef SYSTEM_OPENGL_OPENGL_WGL_PROTOTYPES_FLAGS_H
 #define SYSTEM_OPENGL_OPENGL_WGL_PROTOTYPES_FLAGS_H
@@ -34,9 +34,9 @@ namespace System
         SupportDirectDraw = PFD_SUPPORT_DIRECTDRAW,
         Direct3dAccelerated = PFD_DIRECT3D_ACCELERATED,
         SupportComposition = PFD_SUPPORT_COMPOSITION,
-        DepthDontCare = PFD_DEPTH_DONTCARE,
-        DoubleBufferDontCare = PFD_DOUBLEBUFFER_DONTCARE,
-        StereoDontCare = PFD_STEREO_DONTCARE,
+        DepthDoNotCare = PFD_DEPTH_DONTCARE,
+        DoubleBufferDoNotCare = PFD_DOUBLEBUFFER_DONTCARE,
+        StereoDoNotCare = PFD_STEREO_DONTCARE,
     };
 
     enum class PixelTypes
@@ -65,9 +65,9 @@ namespace System
         SupportDirectDraw = 0x00002000,
         Direct3dAccelerated = 0x00004000,
         SupportComposition = 0x00008000,
-        DepthDontCare = 0x20000000,
-        DoubleBufferDontCare = 0x40000000,
-        StereoDontCare = 0x80000000,
+        DepthDoNotCare = 0x20000000,
+        DoubleBufferDoNotCare = 0x40000000,
+        StereoDoNotCare = 0x80000000,
     };
 
     enum class PixelTypes

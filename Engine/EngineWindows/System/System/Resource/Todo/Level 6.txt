@@ -1,7 +1,10 @@
 TODO Level 6
 
-1.0.0.3
+1.0.0.6
 
 1.（SystemOutput）完成SystemOutput模块非Windows平台的实现：OutputDebugString、MessageBoxSelection。
 2.（SystemOutput）完成SystemOutput模块非Windows平台的实现：LanguageIDData、MessageBoxFlagsData相关的枚举定义。
-3.（Windows）禁止关闭控制台窗口，但最小化时依然可以关闭。
+3.（MemoryTools）完成MemoryTools非Windows平台的实现：HeapTools。
+4.（CharacterString）完成CharacterString非Windows平台的实现：CodePage。
+5.（CharacterString）完成CharacterString非Windows平台的实现：FormatErrorMessage、StringConversion、FormatString。
+6.（FileManager）完成FileManager非Windows平台的实现： File、FileTime、FileTools。

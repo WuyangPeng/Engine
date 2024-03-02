@@ -25,8 +25,8 @@
 
 namespace Mathematics
 {
-    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class StaticTestIntersectorSegment2Segment2<float>;
-    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class StaticTestIntersectorSegment2Segment2<double>;
+    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class StaticTestIntersector<Segment2F, Segment2F>;
+    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class StaticTestIntersector<Segment2D, Segment2D>;
 }
 
 #endif  // MATHEMATICS_EXPORT_TEMPLATE

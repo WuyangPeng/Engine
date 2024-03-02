@@ -34,7 +34,7 @@ namespace CoreTools
 
     private:
         using ThreadSafeQueueType = ThreadSafeQueue<int>;
-        static constexpr auto maxNumElements = 100u;
+        static constexpr auto maxNumElements = 100;
 
     private:
         ThreadSafeQueueType threadSafeQueue;

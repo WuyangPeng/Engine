@@ -10,6 +10,7 @@
 #ifndef MATHEMATICS_OBJECTS_2D_H
 #define MATHEMATICS_OBJECTS_2D_H
 
+#include "Algebra/Polygon2Detail.h"
 #include "Arc2Detail.h"
 #include "Box2Detail.h"
 #include "Circle2Detail.h"
@@ -19,6 +20,7 @@
 #include "Line2Detail.h"
 #include "Polygon2Detail.h"
 #include "Ray2Detail.h"
+#include "Sector2Detail.h"
 #include "Segment2Detail.h"
 #include "Triangle2Detail.h"
 
