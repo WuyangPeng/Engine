@@ -28,11 +28,8 @@ Threading Core Render Engine 1.0.0.7
 	+ UIntegerAP32。@
 	+ UIntegerFP32。@
 	+ 实现Arithmetic。@
-	+ 实现WindowApplication。@
-	+ DistanceAlignedBoxes例子。@
-	+ GameClient显示一张图片。@
-	+ linux系统通过编译。@
 	+ System工程整理。@
+	+ linux系统通过编译。@
 	
 ----------------------------
 1.0.0.6（2024/02/19——2024/03/02）
