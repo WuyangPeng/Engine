@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:17)
+/// 版本：1.0.0.7 (2024/03/05 16:38)
 
 #include "System/SystemExport.h"
 
@@ -23,10 +23,7 @@ bool System::EnumResourceLanguagesInLibrary(DynamicLinkModule module,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::EnumResourceLanguages(module, type, name, enumFunction, param) != gFalse)
-        return true;
-    else
-        return false;
+    return ::EnumResourceLanguages(module, type, name, enumFunction, param) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -47,10 +44,7 @@ bool System::EnumResourceLanguagesInLibrary(DynamicLinkModule module,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::EnumResourceLanguagesEx(module, type, name, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageId()) != gFalse)
-        return true;
-    else
-        return false;
+    return ::EnumResourceLanguagesEx(module, type, name, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageId()) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -68,10 +62,7 @@ bool System::EnumResourceNamesInLibrary(DynamicLinkModule module,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::EnumResourceNames(module, type, enumFunction, param) != gFalse)
-        return true;
-    else
-        return false;
+    return ::EnumResourceNames(module, type, enumFunction, param) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -91,10 +82,7 @@ bool System::EnumResourceNamesInLibrary(DynamicLinkModule module,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::EnumResourceNamesEx(module, type, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageId()) != gFalse)
-        return true;
-    else
-        return false;
+    return ::EnumResourceNamesEx(module, type, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageId()) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -109,10 +97,7 @@ bool System::EnumResourceTypesInLibrary(DynamicLinkModule module, EnumResourceTy
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::EnumResourceTypes(module, enumFunction, param) != gFalse)
-        return true;
-    else
-        return false;
+    return ::EnumResourceTypes(module, enumFunction, param) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -131,10 +116,7 @@ bool System::EnumResourceTypesInLibrary(DynamicLinkModule module,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::EnumResourceTypesEx(module, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageId()) != gFalse)
-        return true;
-    else
-        return false;
+    return ::EnumResourceTypesEx(module, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageId()) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

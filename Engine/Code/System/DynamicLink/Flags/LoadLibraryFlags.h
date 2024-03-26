@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:15)
+/// 版本：1.0.0.7 (2024/03/05 16:33)
 
 #ifndef SYSTEM_DYNAMIC_LINK_LOAD_LIBRARY_FLAGS_H
 #define SYSTEM_DYNAMIC_LINK_LOAD_LIBRARY_FLAGS_H
@@ -34,7 +34,7 @@ namespace System
         /// 告诉系统只需将Dll映射到调用进程的地址空间，
         /// 系统不会调用DllMain为进程和线程进行初始化和终止，
         /// 另外，该系统不会加载由指定模块引用附加的可执行模块。
-        DontResolveDllReferences = DONT_RESOLVE_DLL_REFERENCES,
+        DoNotResolveDllReferences = DONT_RESOLVE_DLL_REFERENCES,
 
         /// 告诉系统将Dll作为数据文件映射到进程的地址空间中，
         /// 同DONT_RESOLVE_DLL_REFERENCES一样，
@@ -46,7 +46,7 @@ namespace System
         WithAlteredSearchPath = LOAD_WITH_ALTERED_SEARCH_PATH,
 
         /// 用来关闭WinSafer所提供的验证，UAC特性已经取代了这项特性。
-        IgnoreCodeAuthzLevel = LOAD_IGNORE_CODE_AUTHZ_LEVEL,
+        IgnoreCodeAuthorizationLevel = LOAD_IGNORE_CODE_AUTHZ_LEVEL,
 
         /// 该标志与LOAD_LIBRARY_AS_DATAFILE相似，
         /// 但有一点略有不同，当系统载入Dll的时候，
@@ -58,10 +58,10 @@ namespace System
         /// 从而禁止任何其它应用程序在当前应用程序使用该Dll文件的时候对其进行修改。
         AsDatafileExclusive = LOAD_LIBRARY_AS_DATAFILE_EXCLUSIVE,
 
-        RtldLazy = 0,
-        RtldNow = 0,
-        RtldGlobal = 0,
-        RtldLocal = 0,
+        RuntimeLinkerLazy = 0,
+        RuntimeLinkerNow = 0,
+        RuntimeLinkerGlobal = 0,
+        RuntimeLinkerLocal = 0,
     };
 
     enum class DllMain
@@ -78,10 +78,10 @@ namespace System
     {
         Zero = 0,
         NoFlags = 0,
-        DontResolveDllReferences = 0,
+        DoNotResolveDllReferences = 0,
         AsDatafile = 0,
         WithAlteredSearchPath = 0,
-        IgnoreCodeAuthzLevel = 0,
+        IgnoreCodeAuthorizationLevel = 0,
         AsImageResource = 0,
         AsDatafileExclusive = 0,
 
@@ -89,22 +89,22 @@ namespace System
         /// 对于动态库中的未定义的符号不执行解析，
         /// 只对函数引用有效，
         /// 对于变量引用总是立即解析。
-        RtldLazy = RTLD_LAZY,
+        RuntimeLinkerLazy = RTLD_LAZY,
 
         /// 需要在dlopen返回前，
         /// 解析出所有未定义符号，
         /// 如果解析不出来，
         /// 在dlopen会返回nullptr。
-        RtldNow = RTLD_NOW,
+        RuntimeLinkerNow = RTLD_NOW,
 
         /// 动态库中定义的符号可被其后打开的其它库解析。
-        RtldGlobal = RTLD_GLOBAL,
+        RuntimeLinkerGlobal = RTLD_GLOBAL,
 
         /// 与RTLD_GLOBAL作用相反，
         /// 动态库中定义的符号不能被其后打开的其它库重定位。
         /// 如果没有指明是RTLD_GLOBAL还是RTLD_LOCAL，
         /// 则缺省为RTLD_LOCAL。
-        RtldLocal = RTLD_LOCAL,
+        RuntimeLinkerLocal = RTLD_LOCAL,
     };
 
     enum class DllMain

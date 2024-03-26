@@ -13,6 +13,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Rectangle3Detail.h"
+#include "Mathematics/Primitives/RectangleDetail.h"
 
 #include <random>
 

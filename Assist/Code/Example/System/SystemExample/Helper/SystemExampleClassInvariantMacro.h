@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/31 10:48)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/05 19:12)
 
 #ifndef SYSTEM_EXAMPLE_HELPER_SYSTEM_EXAMPLE_CLASS_INVARIANT_MACRO_H
 #define SYSTEM_EXAMPLE_HELPER_SYSTEM_EXAMPLE_CLASS_INVARIANT_MACRO_H
@@ -21,7 +21,7 @@
 
 #if !defined(SYSTEM_EXAMPLE_CLASS_INVARIANT_CONST_LEVEL)
 
-    #define SYSTEM_EXAMPLE_CLASS_INVARIANT_CONST_LEVEL 8
+    #define SYSTEM_EXAMPLE_CLASS_INVARIANT_CONST_LEVEL 1
 
 #endif  // SYSTEM_EXAMPLE_CLASS_INVARIANT_CONST_LEVEL
 

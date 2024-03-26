@@ -17,10 +17,8 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using namespace std::literals;
-
 ThreadingCoreRenderEngineAssist::EngineTesting::EngineTesting(const OStreamShared& stream)
-    : ParentType{ stream }, engineTestingName{ SYSTEM_TEXT("End"s) }
+    : ParentType{ stream }, engineTestingName{ SYSTEM_TEXT("End") }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:44)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/09 21:39)
 
 #include "FindResourceWindowsTesting.h"
 #include "System/DynamicLink/LoadResourceTools.h"
@@ -35,23 +35,23 @@ void System::FindResourceWindowsTesting::MainTest()
 
 void System::FindResourceWindowsTesting::FindResourceTest()
 {
-    for (const auto& typeName : *this)
+    for (const auto& [type, name] : *this)
     {
-        ASSERT_NOT_THROW_EXCEPTION_2(DoFindResourceTest, typeName.second, typeName.first);
+        ASSERT_NOT_THROW_EXCEPTION_2(DoFindResourceTest, name, type);
     }
 }
 
 void System::FindResourceWindowsTesting::FindResourceUseLanguageTest()
 {
-    for (const auto& typeName : *this)
+    for (const auto& [type, name] : *this)
     {
-        ASSERT_NOT_THROW_EXCEPTION_2(DoFindResourceUseLanguageTest, typeName.second, typeName.first);
+        ASSERT_NOT_THROW_EXCEPTION_2(DoFindResourceUseLanguageTest, name, type);
     }
 }
 
 void System::FindResourceWindowsTesting::DoFindResourceTest(const DynamicLinkCharType* type, WindowsWord name)
 {
-    const auto resource = FindResourceInLibrary(GetInstance(), type, MakeIntreSource(name));
+    const auto resource = FindResourceInLibrary(GetInstance(), type, MakeIntResource(name));
 
     ASSERT_UNEQUAL_NULL_PTR(resource);
 }
@@ -60,7 +60,7 @@ void System::FindResourceWindowsTesting::DoFindResourceUseLanguageTest(const Dyn
 {
     constexpr LanguageIdData languageIdData{};
 
-    const auto resource = FindResourceInLibrary(GetInstance(), type, MakeIntreSource(name), languageIdData);
+    const auto resource = FindResourceInLibrary(GetInstance(), type, MakeIntResource(name), languageIdData);
 
     ASSERT_UNEQUAL_NULL_PTR(resource);
 }

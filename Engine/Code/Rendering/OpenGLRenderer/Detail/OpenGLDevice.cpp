@@ -14,6 +14,7 @@
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/Network/SocketPrototypes.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
+#include "System/OpenGL/Flags/OpenGLTextureFlags.h"
 #include "System/OpenGL/OpenGLBase.h"
 #include "System/OpenGL/OpenGLBuffers.h"
 #include "System/OpenGL/OpenGLProgram.h"
@@ -797,7 +798,9 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(const VertexBuffer& vertexBuffer,
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-        const auto* data = reinterpret_cast<const void*>(gsl::narrow_cast<size_t>(indexSize) * gsl::narrow_cast<size_t>(offset));
+        const auto result = boost::numeric_cast<size_t>(indexSize) * boost::numeric_cast<size_t>(offset);
+
+        const auto* data = reinterpret_cast<const void*>(result);
 
 #include SYSTEM_WARNING_POP
 

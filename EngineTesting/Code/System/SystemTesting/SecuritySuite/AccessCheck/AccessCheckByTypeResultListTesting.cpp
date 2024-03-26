@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 13:56)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 13:35)
 
 #include "AccessCheckByTypeResultListTesting.h"
 #include "System/FileManager/Flags/FileFlags.h"
@@ -13,7 +13,6 @@
 #include "System/Helper/WindowsMacro.h"
 #include "System/Security/AccessCheck.h"
 #include "System/Security/CreateSecurity.h"
-#include "System/Security/SecurityBase.h"
 #include "System/Security/SecuritySid.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
@@ -67,7 +66,7 @@ void System::AccessCheckByTypeResultListTesting::DoAccessCheckTest(WindowsHandle
     }
 }
 
-void System::AccessCheckByTypeResultListTesting::GetAccessCheckTest(FileHandleDesiredAccess accessMask, BufferType& buffer, WindowsHandle impersonatedToken)
+void System::AccessCheckByTypeResultListTesting::GetAccessCheckTest(FileHandleDesiredAccess accessMask, CharBufferType& buffer, WindowsHandle impersonatedToken)
 {
     AccessCheckGenericMapping genericMapping{};
     const auto fileMapGenericMask = GetFileMapGenericMask(accessMask, genericMapping);

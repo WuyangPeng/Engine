@@ -206,13 +206,6 @@ long CoreTools::CFileManagerImpl::Tell() noexcept
     return System::Tell(file);
 }
 
-void CoreTools::CFileManagerImpl::Rewind() noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    return System::Rewind(file);
-}
-
 bool CoreTools::CFileManagerImpl::SetVBuffer(FileSetVBuf type, size_t size) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;

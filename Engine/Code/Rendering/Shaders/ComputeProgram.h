@@ -27,7 +27,7 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(ComputeProgram);
 
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
         using ShaderSharedPtr = std::shared_ptr<Shader>;
         using ConstShaderSharedPtr = std::shared_ptr<const Shader>;
         using ComputeProgramSharedPtr = std::shared_ptr<ComputeProgram>;

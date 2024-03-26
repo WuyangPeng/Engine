@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 17:08)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/09 21:34)
 
 #include "EnumResourceDataTesting.h"
 #include "System/DynamicLink/Data/EnumResourceData.h"
@@ -168,7 +168,7 @@ System::EnumResourceDataTesting::EnumResourceDataTesting(const OStreamShared& st
                     SubLanguage::SpanishHonduras,
                     SubLanguage::SpanishNicaragua,
                     SubLanguage::SpanishPuertoRico,
-                    SubLanguage::SpanishUS },
+                    SubLanguage::SpanishUs },
       types{ predefinedResourceTypesCursor,
              predefinedResourceTypesBitmap,
              predefinedResourceTypesIcon,
@@ -196,7 +196,7 @@ System::EnumResourceDataTesting::EnumResourceDataTesting(const OStreamShared& st
              minimumReservedManifestResourceId,
              maximumReservedManifestResourceId },
       names{ CreateNameFlags() },
-      maxSize{ CoreTools::MaxElement<size_t>({ primaryLanguages.size(), subLanguages.size(), types.size(), names.size() }) },
+      maxSize{ CoreTools::MaxElement({ primaryLanguages.size(), subLanguages.size(), types.size(), names.size() }) },
       randomEngine{ GetEngineRandomSeed() }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
@@ -211,7 +211,7 @@ System::EnumResourceDataTesting::NameContainer System::EnumResourceDataTesting::
 
     for (auto index = nameBeginIndex; index < nameEndIndex; ++index)
     {
-        result.emplace_back(MakeIntreSource(boost::numeric_cast<uint16_t>(index)));
+        result.emplace_back(MakeIntResource(boost::numeric_cast<uint16_t>(index)));
     }
 
     return result;

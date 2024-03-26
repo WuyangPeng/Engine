@@ -17,18 +17,18 @@
 
 namespace System
 {
-    void SYSTEM_DEFAULT_DECLARE GetGLGenSamplers(OpenGLSize count, OpenGLUInt* samplers) noexcept;
-    NODISCARD OpenGLUInt SYSTEM_DEFAULT_DECLARE GetGLGenSamplers() noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLDeleteSamplers(OpenGLSize count, const OpenGLUInt* samplers) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLDeleteSamplers(OpenGLUInt samplers) noexcept;
+    void SYSTEM_DEFAULT_DECLARE GetGLGenSamplers(OpenGLSize count, OpenGLUnsignedInt* samplers) noexcept;
+    NODISCARD OpenGLUnsignedInt SYSTEM_DEFAULT_DECLARE GetGLGenSamplers() noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLDeleteSamplers(OpenGLSize count, const OpenGLUnsignedInt* samplers) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLDeleteSamplers(OpenGLUnsignedInt samplers) noexcept;
 
-    void SYSTEM_DEFAULT_DECLARE SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pName, OpenGLInt param) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pName, TextureSamplerCoordinate param) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pName, SamplerFilter param) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pName, OpenGLFloat param) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLSamplerParameter(OpenGLUInt sampler, OpenGLTextureName pName, const OpenGLFloat* param) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLSamplerParameter(OpenGLUnsignedInt sampler, OpenGLTextureName pName, OpenGLInt param) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLSamplerParameter(OpenGLUnsignedInt sampler, OpenGLTextureName pName, TextureSamplerCoordinate param) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLSamplerParameter(OpenGLUnsignedInt sampler, OpenGLTextureName pName, SamplerFilter param) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLSamplerParameter(OpenGLUnsignedInt sampler, OpenGLTextureName pName, OpenGLFloat param) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLSamplerParameter(OpenGLUnsignedInt sampler, OpenGLTextureName pName, const OpenGLFloat* param) noexcept;
 
-    void SYSTEM_DEFAULT_DECLARE SetGLBindSampler(OpenGLUInt unit, OpenGLUInt sampler) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLBindSampler(OpenGLUnsignedInt unit, OpenGLUnsignedInt sampler) noexcept;
 }
 
 #endif  // SYSTEM_OPENGL_OPENGL_SAMPLERS_H

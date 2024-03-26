@@ -5,9 +5,9 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:53)
+/// 版本：1.0.0.7 (2024/03/04 17:08)
 
-// 警告：请勿使用reinterpret_cast，从void*开始的强制转换可使用static_cast。
+/// 警告：请勿使用reinterpret_cast，从void*开始的强制转换可使用static_cast。
 
 #if defined(TCRE_USE_MSVC)
 

@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:08)
+/// 版本：1.0.0.7 (2024/03/04 19:54)
 
 #ifndef SYSTEM_HELPER_QNXNTO_H
 #define SYSTEM_HELPER_QNXNTO_H
 
 #if defined(__QNXNTO__)
 
-    //  QNX 具体配置选项：
+    ///  QNX 具体配置选项：
 
     #define TCRE_SYSTEM_PLATFORM "QNX"
     #define SYSTEM_PLATFORM_QNXNTO static_cast<void>(0)

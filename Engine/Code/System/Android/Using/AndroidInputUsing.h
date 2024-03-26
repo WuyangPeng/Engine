@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:26)
+/// 版本：1.0.0.7 (2024/03/05 17:17)
 
 #ifndef SYSTEM_ANDROID_ANDROID_INPUT_USING_H
 #define SYSTEM_ANDROID_ANDROID_INPUT_USING_H
@@ -102,14 +102,15 @@ namespace System
     public:
         AndroidInputQueue() noexcept;
 
-        NODISCARD int GetSize() const noexcept;
+        NODISCARD static int GetSize() noexcept;
         NODISCARD AndroidInputEvent* GetCurrentAndroidInputEvent() noexcept;
 
     private:
         static constexpr auto size = 5;
+        using Container = std::array<AndroidInputEvent, size>;
 
     private:
-        std::array<AndroidInputEvent, size> androidInputEvent;
+        Container androidInputEvent;
     };
 }
 

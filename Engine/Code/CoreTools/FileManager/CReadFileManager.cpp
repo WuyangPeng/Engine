@@ -85,13 +85,6 @@ long CoreTools::CReadFileManager::Tell() noexcept
     return impl->Tell();
 }
 
-void CoreTools::CReadFileManager::Rewind() noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_9;
-
-    return impl->Rewind();
-}
-
 void CoreTools::CReadFileManager::Read(size_t itemSize, void* data)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;

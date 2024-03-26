@@ -19,7 +19,7 @@
 #include <string>
 #include <vector>
 
-    using namespace std::literals;
+using namespace std::literals;
 
 CoreTools::CReadFileManagerTesting::CReadFileManagerTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -130,8 +130,5 @@ void CoreTools::CReadFileManagerTesting::PositionTest()
 
     ASSERT_EQUAL(length, boost::numeric_cast<decltype(length)>(cFileManagerContent.size() + sizeof(size_t)));
 
-    manager.Rewind();
-    ASSERT_EQUAL(0, manager.GetPosition());
-
-    ASSERT_TRUE(manager.SetVBuffer(System::FileSetVBuffer::IOFBF, 256));
+    ASSERT_TRUE(manager.SetVBuffer(System::FileSetVBuffer::IoFullyBuffered, 256));
 }

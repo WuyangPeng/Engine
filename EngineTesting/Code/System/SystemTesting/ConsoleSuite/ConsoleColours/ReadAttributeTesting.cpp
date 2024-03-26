@@ -1,16 +1,17 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 16:38)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 18:28)
 
 #include "ReadAttributeTesting.h"
 #include "System/Console/ConsoleColour.h"
 #include "System/Console/ConsoleHandle.h"
 #include "System/Console/Using/ConsoleColourUsing.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -58,9 +59,9 @@ void System::ReadAttributeTesting::DoReadAttributeTest(StandardHandle standardHa
     const auto consoleHandle = GetStandardHandle(standardHandle);
 
     WindowsDWord numberOfAttributesRead{ 0 };
-    ASSERT_TRUE(ReadSystemConsoleOutputAttribute(consoleHandle, attribute.data(), bufferSize, readCoord, &numberOfAttributesRead));
+    ASSERT_TRUE(ReadSystemConsoleOutputAttribute(consoleHandle, attribute.data(), defaultBufferSize, readCoord, &numberOfAttributesRead));
 
-    ASSERT_EQUAL(numberOfAttributesRead, bufferSize);
+    ASSERT_EQUAL(boost::numeric_cast<int>(numberOfAttributesRead), defaultBufferSize);
 
     ASSERT_NOT_THROW_EXCEPTION_1(AttributeResultTest, attribute);
 }
@@ -69,9 +70,14 @@ void System::ReadAttributeTesting::AttributeResultTest(const AttributeType& attr
 {
     for (const auto word : attribute)
     {
-        // 根据TextColour、BackgroundColour和ConsoleCommon枚举的实际值所占的位得出0x000F、0x00F0和0xFF00的值。
-        ASSERT_TRUE(HasTextColour(UnderlyingCastEnum<TextColour>(word & textColourMask)));
-        ASSERT_TRUE(HasBackgroundColour(UnderlyingCastEnum<BackgroundColour>(word & backgroundColourMask)));
-        ASSERT_TRUE(HasConsoleCommon(UnderlyingCastEnum<ConsoleCommon>(word & consoleCommonMask)));
+        ASSERT_NOT_THROW_EXCEPTION_1(DoAttributeResultTest, word);
     }
+}
+
+void System::ReadAttributeTesting::DoAttributeResultTest(WindowsWord word)
+{
+    /// 根据TextColour、BackgroundColour和ConsoleCommon枚举的实际值所占的位得出0x000F、0x00F0和0xFF00的值。
+    ASSERT_TRUE(HasTextColour(UnderlyingCastEnum<TextColour>(word & textColourMask)));
+    ASSERT_TRUE(HasBackgroundColour(UnderlyingCastEnum<BackgroundColour>(word & backgroundColourMask)));
+    ASSERT_TRUE(HasConsoleCommon(UnderlyingCastEnum<ConsoleCommon>(word & consoleCommonMask)));
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:22)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:43)
 
 #include "OpenGLBindFrameBufferTesting.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
@@ -29,20 +29,20 @@ void System::OpenGLBindFrameBufferTesting::DoRunUnitTest()
 
 void System::OpenGLBindFrameBufferTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLBindFrameBufferTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(BindFrameBufferTest);
 }
 
-void System::OpenGLBindFrameBufferTesting::OpenGLBindFrameBufferTest()
+void System::OpenGLBindFrameBufferTesting::BindFrameBufferTest()
 {
     const auto frameBuffers = GetGLGenFrameBuffers();
     ASSERT_LESS(0u, frameBuffers);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(DoOpenGLBindFrameBufferTest, frameBuffers);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoBindFrameBufferTest, frameBuffers);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteFrameBufferTest, frameBuffers);
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteFrameBufferTest, frameBuffers);
 }
 
-void System::OpenGLBindFrameBufferTesting::DoOpenGLBindFrameBufferTest(OpenGLUInt frameBuffers) noexcept
+void System::OpenGLBindFrameBufferTesting::DoBindFrameBufferTest(OpenGLUnsignedInt frameBuffers) const noexcept
 {
     SetGLBindFrameBuffer(FrameBufferType::DrawFrameBuffer, frameBuffers);
     SetGLBindFrameBuffer(FrameBufferType::FrameBuffer, frameBuffers);

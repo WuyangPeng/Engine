@@ -1,11 +1,11 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/26 09:51)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/04 15:43)
 
 #ifndef MATHEMATICS_BASE_CONSTANTS_H
 #define MATHEMATICS_BASE_CONSTANTS_H
@@ -21,6 +21,7 @@ namespace Mathematics
     constexpr auto maxBisectionsBsRational = 0xFFFFFFFFu;
     constexpr auto maxBisectionsGeneric = 2048;
 
+    /// 涉及pi的常数。
     template <typename T>
     constexpr T pi = static_cast<T>(3.1415926535897931);
 
@@ -42,12 +43,14 @@ namespace Mathematics
     template <typename T>
     constexpr T invHalfPi = static_cast<T>(0.6366197723675813);
 
+    /// 度数和弧度之间的转换
     template <typename T>
     constexpr T degToRad = static_cast<T>(0.0174532925199433);
 
     template <typename T>
     constexpr T radToDeg = static_cast<T>(57.295779513082321);
 
+    /// 常用常量。
     template <typename T>
     constexpr T sqrt2 = static_cast<T>(1.4142135623730951);
 

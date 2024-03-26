@@ -1,13 +1,14 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 15:42)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 17:21)
 
 #include "GetSystemInfoTesting.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Windows/WindowsSystem.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
@@ -16,7 +17,7 @@
 System::GetSystemInfoTesting::GetSystemInfoTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, GetSystemInfoTesting)
@@ -45,7 +46,7 @@ void System::GetSystemInfoTesting::InfoTest()
 
 void System::GetSystemInfoTesting::GetNumaProcessorNodeNumberTest(WindowsDWord numberOfProcessors)
 {
-    for (WindowsUChar processor{ 0 }; processor < numberOfProcessors; ++processor)
+    for (WindowsUChar processor{ 0 }; processor < boost::numeric_cast<WindowsUChar>(numberOfProcessors); ++processor)
     {
         WindowsUChar nodeNumber{ 0 };
         ASSERT_TRUE(GetNumaProcessorNodeNumber(processor, &nodeNumber));

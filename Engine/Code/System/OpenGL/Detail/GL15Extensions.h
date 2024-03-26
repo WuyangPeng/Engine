@@ -18,7 +18,6 @@
 namespace System
 {
     /// OpenGL 1.5
-
     SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL15() noexcept;
 
     void InitOpenGL15() noexcept;

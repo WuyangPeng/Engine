@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:01)
+/// 版本：1.0.0.7 (2024/03/05 09:26)
 
 #ifndef SYSTEM_FILE_MANAGER_C_FILE_USING_H
 #define SYSTEM_FILE_MANAGER_C_FILE_USING_H
@@ -59,6 +59,8 @@ namespace System
     #define STAT_FUNCTION _tstat
 
 #endif  // SYSTEM_PLATFORM_LINUX
+
+    using CharContainer = std::vector<char>;
 }
 
 #endif  // SYSTEM_FILE_MANAGER_C_FILE_USING_H

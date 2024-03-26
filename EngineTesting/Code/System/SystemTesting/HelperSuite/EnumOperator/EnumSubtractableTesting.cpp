@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 09:45)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/08 11:02)
 
 #include "EnumSubtractableTesting.h"
 #include "System/Helper/EnumOperator.h"
@@ -17,7 +17,7 @@
 System::EnumSubtractableTesting::EnumSubtractableTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, EnumSubtractableTesting)
@@ -44,7 +44,7 @@ void System::EnumSubtractableTesting::SignedOperatorTest()
     ASSERT_ENUM_EQUAL(number, SignedNumber::NegativeOne);
 }
 
-void System::EnumSubtractableTesting::SignedConstexprOperatorTest() noexcept
+void System::EnumSubtractableTesting::SignedConstexprOperatorTest() const noexcept
 {
     constexpr auto number = SignedNumber::NegativeOne - 2;
 
@@ -60,7 +60,7 @@ void System::EnumSubtractableTesting::UnsignedOperatorTest()
     ASSERT_ENUM_EQUAL(number, Number::Three);
 }
 
-void System::EnumSubtractableTesting::UnsignedConstexprOperatorTest() noexcept
+void System::EnumSubtractableTesting::UnsignedConstexprOperatorTest() const noexcept
 {
     constexpr auto number = Number::Eight - 7;
 

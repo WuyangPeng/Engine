@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 16:11)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 14:17)
 
 #include "FormatStringMessageUseVaListAndUseBufferTesting.h"
 #include "System/CharacterString/FormatErrorMessage.h"
@@ -40,8 +40,6 @@ void System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringMessag
 void System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringMessageUseIndefiniteParameterTest(const TChar* message, ...)
 {
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26492)
 #include SYSTEM_WARNING_DISABLE(26826)
 
     va_list vaArguments{};
@@ -59,11 +57,11 @@ void System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringMessag
 
 void System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringMessageUseArgumentsTest(const TChar* message, va_list vaArguments)
 {
-    BufferType buffer{};
-    const auto size = FormatStringMessage(message, buffer.data(), bufferSize - 1, &vaArguments);
+    TCharBufferType buffer{};
+    const auto size = FormatStringMessage(message, buffer.data(), defaultBufferSize - 1, &vaArguments);
 
     ASSERT_LESS(0u, size);
-    ASSERT_LESS(size, bufferSize);
+    ASSERT_LESS(static_cast<int>(size), defaultBufferSize);
 
     const String testMessage{ buffer.data() };
     ASSERT_EQUAL(testMessage.size(), size);

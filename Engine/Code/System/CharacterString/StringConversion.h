@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:23)
+/// 版本：1.0.0.7 (2024/03/05 17:07)
 
 #ifndef SYSTEM_CHARACTER_STRING_STRING_CONVERSION_H
 #define SYSTEM_CHARACTER_STRING_STRING_CONVERSION_H
@@ -15,7 +15,7 @@
 #include "Fwd/CharacterStringFlagsFwd.h"
 #include "System/Helper/UnicodeUsing.h"
 
-// 字符串转换
+/// 字符串转换
 namespace System
 {
     NODISCARD int SYSTEM_DEFAULT_DECLARE MultiByteConversionWideChar(CodePage codePage,
@@ -51,7 +51,7 @@ namespace System
                                                                 char* multiByte,
                                                                 int multiByteLength) noexcept;
 
-    // lhsCount和rhsCount不包括空终止符
+    /// lhsCount和rhsCount不包括空终止符
     NODISCARD ComparesStringReturn SYSTEM_DEFAULT_DECLARE CompareStringUseLocale(LanguageLocale locale,
                                                                                  Compares compares,
                                                                                  const String& lhsString,

@@ -1,11 +1,11 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/14 15:40)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 10:34)
 
 #ifndef MATHEMATICS_ESTIMATE_ASIN_ESTIMATE_H
 #define MATHEMATICS_ESTIMATE_ASIN_ESTIMATE_H
@@ -16,7 +16,6 @@
 
 namespace Mathematics
 {
-
     /// 形式为f(x) = pi/2 - sqrt(1-x)*p(x)的asin(x)近似，
     /// 其中多项式 p(x)的次数为D，
     /// 最小化了所有次数为D的多项式中的最大值{|acos(x)/sqrt(1-x) - p(x)| : x in [0,1]} 。
@@ -43,7 +42,12 @@ namespace Mathematics
     requires(1 <= Degree && Degree <= 8)
     NODISCARD constexpr T GetASinEstimateMaxError()
     {
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
         return static_cast<T>(aSinEstimateMaxError[Degree - 1]);
+
+#include SYSTEM_WARNING_POP
     }
 }
 

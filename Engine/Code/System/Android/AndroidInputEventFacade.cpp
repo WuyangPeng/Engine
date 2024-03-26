@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:29)
+/// 版本：1.0.0.7 (2024/03/05 17:19)
 
 #include "System/SystemExport.h"
 
@@ -19,7 +19,7 @@ System::AndroidInputEventFacade::AndroidInputEventFacade(const AndroidInputEvent
 {
 }
 
-System::AndroidInputEventType System::AndroidInputEventFacade::GetType() noexcept
+System::AndroidInputEventType System::AndroidInputEventFacade::GetType() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -35,7 +35,7 @@ System::AndroidInputEventType System::AndroidInputEventFacade::GetType() noexcep
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-int32_t System::AndroidInputEventFacade::GetDeviceId() noexcept
+int32_t System::AndroidInputEventFacade::GetDeviceId() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -48,7 +48,7 @@ int32_t System::AndroidInputEventFacade::GetDeviceId() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-System::AndroidInputSource System::AndroidInputEventFacade::GetSource() noexcept
+System::AndroidInputSource System::AndroidInputEventFacade::GetSource() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -64,7 +64,7 @@ System::AndroidInputSource System::AndroidInputEventFacade::GetSource() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-System::AndroidKeyEventAction System::AndroidInputEventFacade::GetAction() noexcept
+System::AndroidKeyEventAction System::AndroidInputEventFacade::GetAction() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -80,7 +80,7 @@ System::AndroidKeyEventAction System::AndroidInputEventFacade::GetAction() noexc
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-System::AndroidKeyEventFlag System::AndroidInputEventFacade::GetFlags() noexcept
+System::AndroidKeyEventFlag System::AndroidInputEventFacade::GetFlags() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -96,7 +96,7 @@ System::AndroidKeyEventFlag System::AndroidInputEventFacade::GetFlags() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-System::AndroidKeyCodes System::AndroidInputEventFacade::GetKeyCode() noexcept
+System::AndroidKeyCodes System::AndroidInputEventFacade::GetKeyCode() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -112,7 +112,7 @@ System::AndroidKeyCodes System::AndroidInputEventFacade::GetKeyCode() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-int32_t System::AndroidInputEventFacade::GetScanCode() noexcept
+int32_t System::AndroidInputEventFacade::GetScanCode() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -125,7 +125,7 @@ int32_t System::AndroidInputEventFacade::GetScanCode() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-System::AndroidMeta System::AndroidInputEventFacade::GetMetaState() noexcept
+System::AndroidMeta System::AndroidInputEventFacade::GetMetaState() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -141,7 +141,7 @@ System::AndroidMeta System::AndroidInputEventFacade::GetMetaState() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-int32_t System::AndroidInputEventFacade::GetRepeatCount() noexcept
+int32_t System::AndroidInputEventFacade::GetRepeatCount() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -154,7 +154,7 @@ int32_t System::AndroidInputEventFacade::GetRepeatCount() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-int64_t System::AndroidInputEventFacade::GetDownTime() noexcept
+int64_t System::AndroidInputEventFacade::GetDownTime() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -167,7 +167,7 @@ int64_t System::AndroidInputEventFacade::GetDownTime() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-int64_t System::AndroidInputEventFacade::GetEventTime() noexcept
+int64_t System::AndroidInputEventFacade::GetEventTime() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 

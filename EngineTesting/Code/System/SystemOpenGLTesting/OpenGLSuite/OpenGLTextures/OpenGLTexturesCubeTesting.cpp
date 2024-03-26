@@ -1,13 +1,14 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:28)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/16 17:37)
 
 #include "OpenGLTexturesCubeTesting.h"
+#include "Detail/TexturesImage.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
 #include "System/OpenGL/OpenGLTextures.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -29,28 +30,31 @@ void System::OpenGLTexturesCubeTesting::DoRunUnitTest()
 
 void System::OpenGLTexturesCubeTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLTexturesCubeTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(TexturesCubeTest);
 }
 
-void System::OpenGLTexturesCubeTesting::OpenGLTexturesCubeTest()
+void System::OpenGLTexturesCubeTesting::TexturesCubeTest()
 {
     for (auto iter = GetTextureInternalFormatsBegin(); iter != GetTextureInternalFormatsEnd(); ++iter)
     {
-        if (*iter == TextureInternalFormat::R11F_G11F_B10F)
+        if (*iter != TextureInternalFormat::R11F_G11F_B10F)
         {
-            continue;
+            ASSERT_NOT_THROW_EXCEPTION_1(DoTexturesCubeTest, *iter);
         }
-
-        const auto texture = GetGLGenTextures();
-        ASSERT_LESS(0u, texture);
-
-        ASSERT_NOT_THROW_EXCEPTION_2(DoOpenGLTexturesCubeTest, *iter, texture);
-
-        ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteTextureTest, texture);
     }
 }
 
-void System::OpenGLTexturesCubeTesting::DoOpenGLTexturesCubeTest(TextureInternalFormat textureInternalFormat, OpenGLInt texture)
+void System::OpenGLTexturesCubeTesting::DoTexturesCubeTest(TextureInternalFormat textureInternalFormat)
+{
+    const auto texture = GetGLGenTextures();
+    ASSERT_LESS(0u, texture);
+
+    ASSERT_NOT_THROW_EXCEPTION_2(SetTexturesCubeTest, textureInternalFormat, texture);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteTextureTest, texture);
+}
+
+void System::OpenGLTexturesCubeTesting::SetTexturesCubeTest(TextureInternalFormat textureInternalFormat, OpenGLInt texture)
 {
     SetGLBindTexture(textureTarget, texture);
 
@@ -59,20 +63,25 @@ void System::OpenGLTexturesCubeTesting::DoOpenGLTexturesCubeTest(TextureInternal
     SetGLPixelStore(PixelStore::PackAlignment, 1);
     SetGLPixelStore(PixelStore::UnpackAlignment, 1);
 
-    ASSERT_NOT_THROW_EXCEPTION_0(GetGLTexturesLevelParameterTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetTexturesLevelParameterTest);
 
     ASSERT_NOT_THROW_EXCEPTION_1(GetTexturesImageTest, textureInternalFormat);
 
     SetGLGenerateMipmap(textureTarget);
 }
 
-void System::OpenGLTexturesCubeTesting::GetGLTexturesLevelParameterTest()
+void System::OpenGLTexturesCubeTesting::GetTexturesLevelParameterTest()
 {
     for (auto iter = GetTextureCubeMapBegin(); iter != GetTextureCubeMapEnd(); ++iter)
     {
-        ASSERT_EQUAL(GetGLTexturesLevelParameter(*iter, 0, TextureLevelParameter::Width), width);
-        ASSERT_EQUAL(GetGLTexturesLevelParameter(*iter, 0, TextureLevelParameter::Height), height);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoGetTexturesLevelParameterTest, *iter);
     }
+}
+
+void System::OpenGLTexturesCubeTesting::DoGetTexturesLevelParameterTest(TextureCubeMap target)
+{
+    ASSERT_EQUAL(GetGLTexturesLevelParameter(target, 0, TextureLevelParameter::Width), width);
+    ASSERT_EQUAL(GetGLTexturesLevelParameter(target, 0, TextureLevelParameter::Height), height);
 }
 
 void System::OpenGLTexturesCubeTesting::GetTexturesImageTest(TextureInternalFormat textureInternalFormat)
@@ -83,34 +92,31 @@ void System::OpenGLTexturesCubeTesting::GetTexturesImageTest(TextureInternalForm
     ASSERT_EQUAL(texturesData, result);
 }
 
-System::OpenGLTexturesCubeTesting::TexturesImageType System::OpenGLTexturesCubeTesting::GetTexturesData(TextureInternalFormat textureInternalFormat)
+System::OpenGLTexturesCubeTesting::TexturesImageType System::OpenGLTexturesCubeTesting::GetTexturesData(TextureInternalFormat textureInternalFormat) const
 {
     const auto texturesImageSize = width * height * GetTextureFormatSize(textureInternalFormat);
 
-    TexturesImageType texturesData{};
+    TexturesImage texturesImage{ width, height, GetTextureExternalFormat(textureInternalFormat), texturesImageSize, openGLData };
     auto imageValue = 'a';
     for (auto iter = GetTextureCubeMapBegin(); iter != GetTextureCubeMapEnd(); ++iter)
     {
-        TexturesImageType image(texturesImageSize, imageValue);
-        SetGLTexturesSubImage2D(*iter, 0, 0, 0, width, height, GetTextureExternalFormat(textureInternalFormat), openGLData, image.data());
-        texturesData.insert(texturesData.cend(), image.cbegin(), image.cend());
+        texturesImage.SetTexturesSubImage2D(imageValue, *iter);
+
         ++imageValue;
     }
 
-    return texturesData;
+    return texturesImage.GetTexturesImage();
 }
 
-System::OpenGLTexturesCubeTesting::TexturesImageType System::OpenGLTexturesCubeTesting::GetTexturesDataResult(TextureInternalFormat textureInternalFormat)
+System::OpenGLTexturesCubeTesting::TexturesImageType System::OpenGLTexturesCubeTesting::GetTexturesDataResult(TextureInternalFormat textureInternalFormat) const
 {
     const auto texturesImageSize = width * height * GetTextureFormatSize(textureInternalFormat);
 
-    TexturesImageType result{};
+    TexturesImage texturesImage{ width, height, GetTextureExternalFormat(textureInternalFormat), texturesImageSize, openGLData };
     for (auto iter = GetTextureCubeMapBegin(); iter != GetTextureCubeMapEnd(); ++iter)
     {
-        TexturesImageType image(texturesImageSize);
-        GetGLTexturesImage(*iter, 0, GetTextureExternalFormat(textureInternalFormat), openGLData, image.data());
-        result.insert(result.cend(), image.cbegin(), image.cend());
+        texturesImage.GetTexturesImage2D(*iter);
     }
 
-    return result;
+    return texturesImage.GetTexturesImage();
 }

@@ -16,13 +16,13 @@
 #include "System/Helper/Platform.h"
 #include "System/OpenGL/Using/OpenGLUsing.h"
 
-#if defined(SYSTEM_USE_GLUT) && defined(WIN32)
+#if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 
     #include "System/Helper/PragmaWarning/Freeglut.h"
 
-#endif  // defined(SYSTEM_USE_GLUT) && defined(WIN32)
+#endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 
-#if defined(SYSTEM_USE_GLUT) && defined(WIN32)
+#if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 
 namespace System
 {
@@ -70,7 +70,7 @@ namespace System
     };
 }
 
-#else  // !defined(SYSTEM_USE_GLUT) || !defined(WIN32)
+#else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
 namespace System
 {
@@ -117,6 +117,6 @@ namespace System
     };
 }
 
-#endif  // defined(SYSTEM_USE_GLUT) && defined(WIN32)
+#endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 
 #endif  // SYSTEM_OPENGL_GLUT_KEY_CODES_FLAGS_H

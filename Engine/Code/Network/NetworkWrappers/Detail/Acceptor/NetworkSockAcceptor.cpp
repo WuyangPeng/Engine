@@ -113,7 +113,7 @@ bool Network::NetworkSockAcceptor::EnableNonBlock() noexcept
     NETWORK_CLASS_IS_VALID_9;
 
     unsigned long nonBlock{ 1 };
-    return IoctlSocket(socketHandle, System::IoctlSocketCmd::FionBio, &nonBlock);
+    return IoctlSocket(socketHandle, System::IoctlSocketCmd::FIonBlockingIO, &nonBlock);
 }
 
 System::WinSocket Network::NetworkSockAcceptor::GetWinSocket() noexcept

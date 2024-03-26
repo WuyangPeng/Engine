@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 17:23)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 11:24)
 
 #include "CFileTestingBase.h"
 #include "System/FileManager/CFile.h"
@@ -15,15 +15,13 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <vector>
-
 System::CFileTestingBase::CFileTestingBase(const OStreamShared& stream)
     : ParentType{ stream },
       cFileContent{ CoreTools::Version::GetVersion() },
       fileName{ SYSTEM_FILE_TEXT("Resource/CFileTesting/CFileTestingText.txt") },
       originalBuffer{ cFileContent.begin(), cFileContent.end() }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, CFileTestingBase)
@@ -67,7 +65,7 @@ void System::CFileTestingBase::OriginalBufferEqualTest(const BufferType& buffer)
     ASSERT_EQUAL(buffer, originalBuffer);
 }
 
-size_t System::CFileTestingBase::WriteFile(FILE* file) noexcept
+size_t System::CFileTestingBase::WriteFile(FILE* file) const noexcept
 {
     SYSTEM_CLASS_IS_VALID_9;
 

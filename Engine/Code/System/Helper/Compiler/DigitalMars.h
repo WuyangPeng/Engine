@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:13)
+/// 版本：1.0.0.7 (2024/03/04 17:26)
 
 #ifndef SYSTEM_HELPER_DIGITAL_MARS_H
 #define SYSTEM_HELPER_DIGITAL_MARS_H
 
 #if defined(__DMC__)
 
-    // Digital Mars C++ 编译器设置：
+    /// Digital Mars C++ 编译器设置：
 
     #if (__DMC__ <= 0x840)
 
@@ -20,7 +20,7 @@
 
     #endif  // __DMC__ <= 0x840
 
-    // 最后已知的版本是：
+    /// 最后已知的版本是：
     #if (0x848 < __DMC__)
 
         #error "未知编译器未配置"

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 14:13)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/09 12:20)
 
 #include "MessageBoxSelectionUseLanguageIdDataTesting.h"
 #include "System/SystemOutput/Data/LanguageIdData.h"
@@ -20,7 +20,7 @@
 System::MessageBoxSelectionUseLanguageIdDataTesting::MessageBoxSelectionUseLanguageIdDataTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, MessageBoxSelectionUseLanguageIdDataTesting)
@@ -33,8 +33,6 @@ void System::MessageBoxSelectionUseLanguageIdDataTesting::DoRunUnitTest()
 void System::MessageBoxSelectionUseLanguageIdDataTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(OkCancelTest);
-
-    // SystemWindowsTesting有hWnd不为空时的测试。
 }
 
 void System::MessageBoxSelectionUseLanguageIdDataTesting::OkCancelTest()
@@ -42,7 +40,7 @@ void System::MessageBoxSelectionUseLanguageIdDataTesting::OkCancelTest()
     constexpr MessageBoxFlagsData flagsData{ MessageBoxType::OkCancel,
                                              MessageBoxIcon::Error,
                                              MessageBoxDefault::Button2,
-                                             MessageBoxMode::ApplModal,
+                                             MessageBoxMode::ApplicationModal,
                                              MessageBoxMisc::TopMost };
 
     constexpr LanguageIdData languageIdData{};

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:21)
+/// 版本：1.0.0.7 (2024/03/05 17:00)
 
 #include "System/SystemExport.h"
 
@@ -30,10 +30,7 @@ bool System::AllocConsole() noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AllocConsole() != gFalse)
-        return true;
-    else
-        return false;
+    return ::AllocConsole() != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -46,10 +43,7 @@ bool System::FreeConsole() noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::FreeConsole() != gFalse)
-        return true;
-    else
-        return false;
+    return ::FreeConsole() != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -62,38 +56,31 @@ bool System::ReOpenConsole(FILE*& file, const char* path, const char* mode, FILE
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (const auto result = freopen_s(&file, path, mode, stream);
-        result == 0)
-        return true;
-    else
-        return false;
+    return freopen_s(&file, path, mode, stream) == 0;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
     file = freopen(path, mode, stream);
 
-    if (file != nullptr)
-        return true;
-    else
-        return false;
+    return file != nullptr;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
 bool System::CloseConsole(FILE* file) noexcept
 {
-    if (const auto result = fclose(file);
-        result == 0)
-        return true;
-    else
-        return false;
+    return fclose(file) == 0;
 }
 
 bool System::RemoveConsoleCloseButton() noexcept
 {
     if (const auto hWnd = GetSystemConsoleWindow();
         hWnd != nullptr)
+    {
         return RemoveMenuCloseButton(hWnd);
+    }
     else
+    {
         return false;
+    }
 }

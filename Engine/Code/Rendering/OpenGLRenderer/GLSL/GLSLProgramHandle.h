@@ -22,7 +22,7 @@ namespace Rendering
     public:
         using ClassType = GLSLProgramHandle;
 
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
 
     public:
         NODISCARD static GLSLProgramHandle Create();

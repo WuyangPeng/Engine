@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:20)
+/// 版本：1.0.0.7 (2024/03/05 16:58)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_SCREEN_BUFFER_H
 #define SYSTEM_CONSOLE_CONSOLE_SCREEN_BUFFER_H
@@ -17,7 +17,7 @@
 #include "Using/ConsoleScreenBufferUsing.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
 
-// 控制台缓冲区的设置和获取。
+/// 控制台缓冲区的设置和获取。
 namespace System
 {
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemConsoleScreenBuffer(DesiredAccessGeneric desiredAccess,
@@ -28,7 +28,7 @@ namespace System
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemConsoleScreenBufferInfo(WindowsHandle consoleOutput, ConsoleScreenBufferInfoPtr consoleScreenBufferInfo) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemConsoleScreenBufferInfo(WindowsHandle consoleOutput, ConsoleScreenBufferInfoExPtr consoleScreenBufferInfoEx) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetConsoleHandleScreenBufferInfo(WindowsHandle consoleOutput, ConsoleScreenBufferInfoExPtr consoleScreenBufferInfoEx) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemConsoleScreenBufferInfo(WindowsHandle consoleOutput, ConsoleScreenBufferInfoExPtr consoleScreenBufferInfoEx) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemConsoleScreenBufferSize(WindowsHandle consoleOutput, ConsoleCoord size) noexcept;
 }
 

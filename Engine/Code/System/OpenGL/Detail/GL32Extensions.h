@@ -18,7 +18,6 @@
 namespace System
 {
     /// OpenGL 3.2
-
     SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL32() noexcept;
 
     void InitOpenGL32() noexcept;

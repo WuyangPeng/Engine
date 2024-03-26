@@ -1,14 +1,15 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:21)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:42)
 
 #include "OpenGLQueryTesting.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
+#include "System/OpenGL/Flags/OpenGLTextureFlags.h"
 #include "System/OpenGL/OpenGLBase.h"
 #include "System/OpenGL/OpenGLUtility.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -49,83 +50,70 @@ void System::OpenGLQueryTesting::MainTest()
 
 void System::OpenGLQueryTesting::NumExtensionsTest()
 {
-    const auto numExtensionsInteger = GetGLInteger(OpenGLQuery::NumExtensions);
+    ASSERT_NOT_THROW_EXCEPTION_1(GreaterZeroTest, OpenGLQuery::NumExtensions);
+}
 
-    ASSERT_LESS(0, numExtensionsInteger);
+void System::OpenGLQueryTesting::GreaterZeroTest(OpenGLQuery openGLQuery)
+{
+    const auto integerResult = GetGLInteger(openGLQuery);
 
-    const auto numExtensionsDouble = GetGLDouble(OpenGLQuery::NumExtensions);
+    ASSERT_LESS(0, integerResult);
 
-    ASSERT_LESS(0, numExtensionsDouble);
+    const auto doubleResult = GetGLDouble(openGLQuery);
 
-    const auto numExtensionsFloat = GetGLFloat(OpenGLQuery::NumExtensions);
+    ASSERT_LESS(0.0, doubleResult);
 
-    ASSERT_LESS(0, numExtensionsFloat);
+    const auto floatResult = GetGLFloat(openGLQuery);
 
-    const auto isNumExtensions = GetGLBoolean(OpenGLQuery::NumExtensions);
+    ASSERT_LESS(0.0f, floatResult);
 
-    ASSERT_TRUE(isNumExtensions);
+    const auto boolResult = GetGLBoolean(openGLQuery);
 
-    ASSERT_APPROXIMATE(numExtensionsDouble, numExtensionsInteger, Mathematics::MathD::epsilon);
-    ASSERT_APPROXIMATE(numExtensionsFloat, numExtensionsInteger, Mathematics::MathF::epsilon);
+    ASSERT_EQUAL(0 < integerResult, boolResult);
+
+    ASSERT_APPROXIMATE(doubleResult, integerResult, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(floatResult, integerResult, Mathematics::MathF::epsilon);
 }
 
 void System::OpenGLQueryTesting::MajorVersionTest()
 {
     const auto majorVersion = EnumCastUnderlying(GetOpenGLVersion()) / 10;
-    const auto majorVersionInteger = GetGLInteger(OpenGLQuery::MajorVersion);
+    ASSERT_NOT_THROW_EXCEPTION_2(EqualTest, OpenGLQuery::MajorVersion, majorVersion);
+}
 
-    ASSERT_EQUAL(majorVersion, majorVersionInteger);
+void System::OpenGLQueryTesting::EqualTest(OpenGLQuery openGLQuery, int version)
+{
+    const auto integerResult = GetGLInteger(openGLQuery);
 
-    const auto majorVersionDouble = GetGLDouble(OpenGLQuery::MajorVersion);
+    ASSERT_EQUAL(version, integerResult);
 
-    ASSERT_APPROXIMATE(majorVersion, majorVersionDouble, Mathematics::MathD::epsilon);
+    const auto doubleResult = GetGLDouble(openGLQuery);
 
-    const auto majorVersionFloat = GetGLFloat(OpenGLQuery::MajorVersion);
+    ASSERT_APPROXIMATE(version, doubleResult, Mathematics::MathD::epsilon);
 
-    ASSERT_APPROXIMATE(majorVersion, majorVersionFloat, Mathematics::MathF::epsilon);
+    const auto floatResult = GetGLFloat(openGLQuery);
 
-    const auto isMajorVersion = GetGLBoolean(OpenGLQuery::MajorVersion);
+    ASSERT_APPROXIMATE(version, floatResult, Mathematics::MathF::epsilon);
 
-    ASSERT_TRUE(isMajorVersion);
+    const auto boolResult = GetGLBoolean(openGLQuery);
+
+    ASSERT_EQUAL(0 < version, boolResult);
 }
 
 void System::OpenGLQueryTesting::MinorVersionTest()
 {
     const auto minorVersion = EnumCastUnderlying(GetOpenGLVersion()) % 10;
-    const auto minorVersionInteger = GetGLInteger(OpenGLQuery::MinorVersion);
-
-    ASSERT_EQUAL(minorVersion, minorVersionInteger);
-
-    const auto minorVersionDouble = GetGLDouble(OpenGLQuery::MinorVersion);
-
-    ASSERT_APPROXIMATE(minorVersion, minorVersionDouble, Mathematics::MathD::epsilon);
-
-    const auto minorVersionFloat = GetGLFloat(OpenGLQuery::MinorVersion);
-
-    ASSERT_APPROXIMATE(minorVersion, minorVersionFloat, Mathematics::MathF::epsilon);
-
-    const auto isMinorVersion = GetGLBoolean(OpenGLQuery::MinorVersion);
-
-    ASSERT_TRUE(isMinorVersion);
+    ASSERT_NOT_THROW_EXCEPTION_2(EqualTest, OpenGLQuery::MinorVersion, minorVersion);
 }
 
 void System::OpenGLQueryTesting::VertexArrayTest()
 {
-    const auto vertexArrayInteger = GetGLInteger(OpenGLQuery::VertexArray);
+    ASSERT_NOT_THROW_EXCEPTION_1(EqualZeroTest, OpenGLQuery::VertexArray);
+}
 
-    ASSERT_EQUAL(0, vertexArrayInteger);
-
-    const auto vertexArrayDouble = GetGLDouble(OpenGLQuery::VertexArray);
-
-    ASSERT_APPROXIMATE(0.0, vertexArrayDouble, Mathematics::MathD::epsilon);
-
-    const auto vertexArrayFloat = GetGLFloat(OpenGLQuery::VertexArray);
-
-    ASSERT_APPROXIMATE(0.0f, vertexArrayFloat, Mathematics::MathF::epsilon);
-
-    const auto isVertexArray = GetGLBoolean(OpenGLQuery::VertexArray);
-
-    ASSERT_EQUAL(false, isVertexArray);
+void System::OpenGLQueryTesting::EqualZeroTest(OpenGLQuery openGLQuery)
+{
+    ASSERT_NOT_THROW_EXCEPTION_2(EqualTest, openGLQuery, 0);
 }
 
 void System::OpenGLQueryTesting::TextureTargetBindingTest()
@@ -134,7 +122,7 @@ void System::OpenGLQueryTesting::TextureTargetBindingTest()
     {
         const auto result = GetGLInteger(textureTargetBinding);
 
-        ASSERT_EQUAL(0, result);
+        ASSERT_EQUAL(result, 0);
     }
 }
 
@@ -145,22 +133,34 @@ void System::OpenGLQueryTesting::ViewportTest()
 
     SetGLViewport(0, 0, width, height);
 
-    ViewportQueryType viewport{};
-    GetGLInteger(OpenGLQuery::Viewport, viewport.data());
+    const auto viewport = GetGLViewport();
 
     ASSERT_EQUAL(viewport.at(0), 0);
     ASSERT_EQUAL(viewport.at(1), 0);
     ASSERT_EQUAL(viewport.at(2), width);
     ASSERT_EQUAL(viewport.at(3), height);
+
+    ViewportQueryType query{};
+    GetGLInteger(OpenGLQuery::Viewport, query.data());
+
+    ASSERT_EQUAL(viewport, query);
 }
 
 void System::OpenGLQueryTesting::DepthRangeTest()
 {
-    SetGLDepthRange(0.0, 1.0);
+    constexpr auto nearDepthRange = 0.0;
+    constexpr auto farDepthRange = 1.0;
 
-    DepthRangeQueryType depthRange{};
-    GetGLDouble(OpenGLQuery::DepthRange, depthRange.data());
+    SetGLDepthRange(nearDepthRange, farDepthRange);
 
-    ASSERT_APPROXIMATE(depthRange.at(0), 0.0, Mathematics::MathD::epsilon);
-    ASSERT_APPROXIMATE(depthRange.at(1), 1.0, Mathematics::MathF::epsilon);
+    const auto depthRange = GetGLDepthRange();
+
+    ASSERT_APPROXIMATE(depthRange.at(0), nearDepthRange, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(depthRange.at(1), farDepthRange, Mathematics::MathF::epsilon);
+
+    DepthRangeQueryType query{};
+    GetGLDouble(OpenGLQuery::DepthRange, query.data());
+
+    ASSERT_APPROXIMATE(depthRange.at(0), query.at(0), Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(depthRange.at(1), query.at(1), Mathematics::MathF::epsilon);
 }

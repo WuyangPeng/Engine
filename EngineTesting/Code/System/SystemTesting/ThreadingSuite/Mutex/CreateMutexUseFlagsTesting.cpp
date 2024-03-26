@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 15:07)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/12 18:29)
 
 #include "CreateMutexUseFlagsTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -32,9 +32,9 @@ System::CreateMutexUseFlagsTesting::CreateMutexUseFlagsTesting(const OStreamShar
                              MutexStandardAccess::WriteOwner,
                              MutexStandardAccess::Synchronize },
       randomEngine{ GetEngineRandomSeed() },
-      maxSize{ CoreTools::MaxElement<size_t>({ createMutexContainer.size(), mutexSpecificAccesses.size(), mutexStandardAccesses.size() }) }
+      maxSize{ CoreTools::MaxElement({ createMutexContainer.size(), mutexSpecificAccesses.size(), mutexStandardAccesses.size() }) }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, CreateMutexUseFlagsTesting)
@@ -85,7 +85,7 @@ void System::CreateMutexUseFlagsTesting::CreateMutexUseNameTest()
 {
     for (auto index = 0u; index < maxSize; ++index)
     {
-        DoCreateMutexUseNameTest(index);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoCreateMutexUseNameTest, index);
     }
 }
 

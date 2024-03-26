@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 17:11)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 11:16)
 
 #ifndef SYSTEM_FILE_MANAGER_SUITE_C_FILE_TESTING_BASE_H
 #define SYSTEM_FILE_MANAGER_SUITE_C_FILE_TESTING_BASE_H
@@ -36,7 +36,7 @@ namespace System
         void CloseFile(FILE* file);
 
         NODISCARD virtual CFileString GetFileName() const;
-        NODISCARD size_t WriteFile(FILE* file) noexcept;
+        NODISCARD size_t WriteFile(FILE* file) const noexcept;
         NODISCARD std::string GetFileContent() const;
 
         void FileContentSizeEqualTest(size_t length);

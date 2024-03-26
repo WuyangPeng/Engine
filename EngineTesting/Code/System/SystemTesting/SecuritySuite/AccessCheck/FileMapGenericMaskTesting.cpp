@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 13:57)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 13:35)
 
 #include "FileMapGenericMaskTesting.h"
 #include "System/FileManager/Flags/FileFlags.h"
@@ -38,15 +38,18 @@ void System::FileMapGenericMaskTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(FileMapGenericMaskTest);
 }
 
+void System::FileMapGenericMaskTesting::DoFileMapGenericMaskTest(FileHandleDesiredAccess fileHandleDesiredAccess, AccessGenericMask accessGenericMask)
+{
+    AccessCheckGenericMapping genericMapping{};
+    const auto enlistmentMapGenericMask = GetFileMapGenericMask(fileHandleDesiredAccess, genericMapping);
+
+    ASSERT_ENUM_EQUAL(accessGenericMask, enlistmentMapGenericMask);
+}
+
 void System::FileMapGenericMaskTesting::FileMapGenericMaskTest()
 {
-    for (const auto& mask : masks)
+    for (const auto& [accessMask, genericMask] : masks)
     {
-        const auto accessMask = mask.first;
-
-        AccessCheckGenericMapping genericMapping{};
-        const auto enlistmentMapGenericMask = GetFileMapGenericMask(accessMask, genericMapping);
-
-        ASSERT_ENUM_EQUAL(mask.second, enlistmentMapGenericMask);
+        ASSERT_NOT_THROW_EXCEPTION_2(DoFileMapGenericMaskTest, accessMask, genericMask);
     }
 }

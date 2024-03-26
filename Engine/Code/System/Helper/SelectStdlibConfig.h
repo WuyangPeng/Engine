@@ -5,12 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:01)
+/// 版本：1.0.0.7 (2024/03/23 21:10)
 
 #ifndef SYSTEM_HELPER_SELECT_STDLIB_CONFIG_H
 #define SYSTEM_HELPER_SELECT_STDLIB_CONFIG_H
 
-// 定义宏TCRE_CPPLIB_VERSION表示标准库版本，定义TCRE_SYSTEM_STDLIB表示标准库名称。
+/// 定义宏TCRE_CPP_LIB_VERSION表示标准库版本，定义TCRE_SYSTEM_STD_LIB表示标准库名称。
 
 #include <cstddef>
 
@@ -53,57 +53,57 @@
 
     #if defined(__LIBCOMO__)
 
-        // Comeau STL
-        #define TCRE_STDLIB_CONFIG "StdLib/Libcomo.h"
+        /// Comeau STL
+        #define TCRE_STDLIB_CONFIG "StdLib/LibComo.h"
 
     #elif defined(__STD_RWCOMPILER_H__) || defined(_RWSTD_VER)
 
-        // Rogue Wave库
-        #define TCRE_STDLIB_CONFIG "StdLib/Roguewave.h"
+        /// Rogue Wave库
+        #define TCRE_STDLIB_CONFIG "StdLib/RogueWave.h"
 
     #elif defined(_LIBCPP_VERSION)
 
-        // libc++
-        #define TCRE_STDLIB_CONFIG "StdLib/Libcpp.h"
+        /// libc++
+        #define TCRE_STDLIB_CONFIG "StdLib/LibCpp.h"
 
     #elif defined(__GLIBCPP__) || defined(__GLIBCXX__)
 
-        // GNU libstdc++ 3
-        #define TCRE_STDLIB_CONFIG "StdLib/Libstdcpp3.h"
+        /// GNU libstdc++ 3
+        #define TCRE_STDLIB_CONFIG "StdLib/LibStdCpp3.h"
 
     #elif defined(__STL_CONFIG_H)
 
-        // 通用 SGI STL
+        /// 通用 SGI STL
         #define TCRE_STDLIB_CONFIG "StdLib/Sgi.h"
 
     #elif defined(__MSL_CPP__)
 
-        // MSL 标准库
+        /// MSL 标准库
         #define TCRE_STDLIB_CONFIG "StdLib/Msl.h"
 
     #elif defined(__IBMCPP__) && defined(__COMPILER_VER__) && defined(__MVS__)
 
-        // IBM z/OS XL C/C++
-        #define TCRE_STDLIB_CONFIG "StdLib/XlcppZos.h"
+        /// IBM z/OS XL C/C++
+        #define TCRE_STDLIB_CONFIG "StdLib/XlCppZos.h"
 
     #elif defined(__IBMCPP__)
 
-        // 采用默认的 VACPP std lib
-        #define TCRE_STDLIB_CONFIG "StdLib/Vacpp.hpp"
+        /// 采用默认的 VaCpp std lib
+        #define TCRE_STDLIB_CONFIG "StdLib/VaCpp.hpp"
 
     #elif defined(MSIPL_COMPILE_H)
 
-        // Modena C++ 标准库
+        /// Modena C++ 标准库
         #define TCRE_STDLIB_CONFIG "StdLib/Modena.h"
 
     #elif (defined(_YVALS) && !defined(__IBMCPP__)) || defined(_CPPLIB_VER)
 
-        // Dinkumware 库（这必须出现在任何可能的替换库之后）
+        /// Dinkumware 库（这必须出现在任何可能的替换库之后）
         #define TCRE_STDLIB_CONFIG "StdLib/Dinkumware.h"
 
     #else  // !defined(ALL_STDLIB)
 
-        // 这必须是放在最后，生成一个错误，如果我们无法识别库
+        /// 这必须是放在最后，生成一个错误，如果我们无法识别库
         #error "标准库无法被正确识别。"
 
     #endif  // defined(ALL_STDLIB)

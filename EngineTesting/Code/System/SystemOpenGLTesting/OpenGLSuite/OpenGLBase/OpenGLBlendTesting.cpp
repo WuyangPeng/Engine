@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:21)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:42)
 
 #include "OpenGLBlendTesting.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
@@ -96,12 +96,12 @@ System::OpenGLBlendTesting::OpenGLBlendTesting(const OStreamShared& stream)
                   BlendStateOperation::Min,
                   BlendStateOperation::Max },
       randomEngine{ GetEngineRandomSeed() },
-      maxSize{ CoreTools::MaxElement<size_t>({ sourceFactorRGBs.size(),
-                                               destinationFactorRGBs.size(),
-                                               sourceFactorAlphas.size(),
-                                               destinationFactorAlphas.size(),
-                                               modeRGBs.size(),
-                                               modeAlphas.size() }) }
+      maxSize{ CoreTools::MaxElement({ sourceFactorRGBs.size(),
+                                       destinationFactorRGBs.size(),
+                                       sourceFactorAlphas.size(),
+                                       destinationFactorAlphas.size(),
+                                       modeRGBs.size(),
+                                       modeAlphas.size() }) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -119,7 +119,7 @@ void System::OpenGLBlendTesting::MainTest()
     ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(RandomShuffleFlags);
 }
 
-void System::OpenGLBlendTesting::SetGLBlendColorTest() noexcept
+void System::OpenGLBlendTesting::SetGLBlendColorTest() const noexcept
 {
     SetGLBlendColor(1.0f, 1.0f, 1.0f, 0.0f);
 }
@@ -144,24 +144,34 @@ void System::OpenGLBlendTesting::SetGLBlendFuncSeparateTest()
 {
     for (auto index = 0u; index < maxSize; ++index)
     {
-        const auto sourceFactorRGB = sourceFactorRGBs.at(index % sourceFactorRGBs.size());
-        const auto destinationFactorRGB = destinationFactorRGBs.at(index % destinationFactorRGBs.size());
-        const auto sourceFactorAlpha = sourceFactorAlphas.at(index % sourceFactorAlphas.size());
-        const auto destinationFactorAlpha = destinationFactorAlphas.at(index % destinationFactorAlphas.size());
-
-        SetGLBlendFuncSeparate(sourceFactorRGB, destinationFactorRGB, sourceFactorAlpha, destinationFactorAlpha);
-        SetGLBlendFuncSeparate(0, sourceFactorRGB, destinationFactorRGB, sourceFactorAlpha, destinationFactorAlpha);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoSetGLBlendFuncSeparateTest, index);
     }
+}
+
+void System::OpenGLBlendTesting::DoSetGLBlendFuncSeparateTest(size_t index) const
+{
+    const auto sourceFactorRGB = sourceFactorRGBs.at(index % sourceFactorRGBs.size());
+    const auto destinationFactorRGB = destinationFactorRGBs.at(index % destinationFactorRGBs.size());
+    const auto sourceFactorAlpha = sourceFactorAlphas.at(index % sourceFactorAlphas.size());
+    const auto destinationFactorAlpha = destinationFactorAlphas.at(index % destinationFactorAlphas.size());
+
+    SetGLBlendFuncSeparate(sourceFactorRGB, destinationFactorRGB, sourceFactorAlpha, destinationFactorAlpha);
+    SetGLBlendFuncSeparate(0, sourceFactorRGB, destinationFactorRGB, sourceFactorAlpha, destinationFactorAlpha);
 }
 
 void System::OpenGLBlendTesting::SetGLBlendEquationSeparateTest()
 {
     for (auto index = 0u; index < maxSize; ++index)
     {
-        const auto modeRGB = modeRGBs.at(index % modeRGBs.size());
-        const auto modeAlpha = modeAlphas.at(index % modeAlphas.size());
-
-        SetGLBlendEquationSeparate(modeRGB, modeAlpha);
-        SetGLBlendEquationSeparate(0, modeRGB, modeAlpha);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoSetGLBlendEquationSeparateTest, index);
     }
+}
+
+void System::OpenGLBlendTesting::DoSetGLBlendEquationSeparateTest(size_t index) const
+{
+    const auto modeRGB = modeRGBs.at(index % modeRGBs.size());
+    const auto modeAlpha = modeAlphas.at(index % modeAlphas.size());
+
+    SetGLBlendEquationSeparate(modeRGB, modeAlpha);
+    SetGLBlendEquationSeparate(0, modeRGB, modeAlpha);
 }

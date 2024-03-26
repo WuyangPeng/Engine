@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 09:52)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/08 10:00)
 
 #include "MakeWordTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -17,7 +17,7 @@
 System::MakeWordTesting::MakeWordTesting(const OStreamShared& stream)
     : ParentType{ stream }, randomEngine{ GetEngineRandomSeed() }, distribution{ 0x0, maxReverseMakeWord - 1 }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, MakeWordTesting)
@@ -33,6 +33,14 @@ void System::MakeWordTesting::MainTest()
     ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(ReverseMakeWordTest);
 }
 
+void System::MakeWordTesting::DoMakeWordTest(int high, int low)
+{
+    const auto param = MakeWord(low, high);
+    const auto expectationParam = boost::numeric_cast<WindowsWord>(low + (high << makeWordShiftNum));
+
+    ASSERT_EQUAL(expectationParam, param);
+}
+
 void System::MakeWordTesting::MakeWordTest()
 {
     constexpr auto size = (1 << makeWordShiftNum);
@@ -40,10 +48,7 @@ void System::MakeWordTesting::MakeWordTest()
     {
         for (auto low = 0; low < size; ++low)
         {
-            const auto param = MakeWord(low, high);
-            const auto expectationParam = boost::numeric_cast<WindowsWord>(low + (high << makeWordShiftNum));
-
-            ASSERT_EQUAL(expectationParam, param);
+            ASSERT_NOT_THROW_EXCEPTION_2(DoMakeWordTest, high, low);
         }
     }
 }

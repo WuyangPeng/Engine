@@ -1,15 +1,16 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 16:31)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 18:25)
 
 #ifndef SYSTEM_CONSOLE_SUITE_CONSOLE_HANDLE_TESTING_H
 #define SYSTEM_CONSOLE_SUITE_CONSOLE_HANDLE_TESTING_H
 
+#include "System/FileManager/FileManagerFwd.h"
 #include "System/Console/Fwd/ConsoleFlagsFwd.h"
 #include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
@@ -18,6 +19,8 @@
 
 namespace System
 {
+    /// @brief 控制台句柄测试。
+    /// 测试资源在ConsoleHandleTesting目录下。
     class ConsoleHandleTesting final : public CoreTools::UnitTest
     {
     public:
@@ -28,6 +31,9 @@ namespace System
         explicit ConsoleHandleTesting(const OStreamShared& stream);
 
         CLASS_INVARIANT_FINAL_DECLARE;
+
+    private:
+        using StandardHandleContainer = std::vector<StandardHandle>;
 
     private:
         void DoRunUnitTest() override;
@@ -41,8 +47,7 @@ namespace System
 
         void PreviousHandleTest(StandardHandle standardHandle, WindowsHandle defaultHandle, WindowsHandle windowsHandle);
 
-    private:
-        using StandardHandleContainer = std::vector<StandardHandle>;
+        void StandardHandleTest(StandardHandle standardHandle, const String& fileName, FileHandleDesiredAccess access, FileHandleShareMode shareMode);
 
     private:
         StandardHandleContainer standardHandles;

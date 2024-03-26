@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:44)
+/// 版本：1.0.0.7 (2024/03/04 15:59)
 
 #include "System/SystemExport.h"
 
@@ -22,7 +22,7 @@ void System::MemorySet(void* bytes, int value, int byteSize) noexcept
     ::memset(bytes, value, byteSize);
 }
 
-void System::MemoryCopy(void* dst, const void* src, uint32_t count) noexcept
+void System::MemoryCopy(void* dst, const void* src, size_t count) noexcept
 {
     ::memcpy(dst, src, count);
 }

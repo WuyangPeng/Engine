@@ -18,7 +18,6 @@
 namespace System
 {
     /// OpenGL 4.2
-
     SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL42() noexcept;
 
     void InitOpenGL42() noexcept;

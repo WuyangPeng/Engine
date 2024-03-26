@@ -109,7 +109,7 @@ int Mathematics::Algebra::SingularValueDecomposition<Real>::Solve(const MatrixTy
 
         /// 找到最大序列{iMin,...,iMax}，对于该序列，超对角线条目并非全部有效为零。
         /// 回路端接， iMax != invalid，因为如果所有超对角线项都为零，
-        /// 则前面的if语句"if (numZero == mNumCols - 1)"将确保退出该函数
+        /// 则前面的if语句"if (numZero == numCols - 1)"将确保退出该函数
         auto iMax = numCols - 2;
         for (; iMax != 0; --iMax)
         {

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:04)
+/// 版本：1.0.0.7 (2024/03/05 09:27)
 
 #include "System/SystemExport.h"
 
@@ -25,27 +25,19 @@ bool System::OpenCFile(FILE*& file, const CFileString& fileName, const CFileStri
 #if defined(TCRE_USE_GCC)
 
     file = ::fopen(fileName.c_str(), mode.c_str());
-    if (file != nullptr)
-        return true;
-    else
-        return false;
+
+    return file != nullptr;
 
 #else  // !TCRE_USE_GCC
 
-    if (::_tfopen_s(&file, fileName.c_str(), mode.c_str()) == 0)
-        return true;
-    else
-        return false;
+    return ::_tfopen_s(&file, fileName.c_str(), mode.c_str()) == 0;
 
 #endif  // TCRE_USE_GCC
 }
 
 bool System::CloseCFile(FILE* file) noexcept
 {
-    if (::fclose(file) == 0)
-        return true;
-    else
-        return false;
+    return ::fclose(file) == 0;
 }
 
 size_t System::ReadCFile(void* buffer, size_t size, size_t count, FILE* stream) noexcept
@@ -84,10 +76,7 @@ bool System::GetFileLength(const CFileString& fileName, OffType* length) noexcep
 
 bool System::SetVBuffer(FILE* file, FileSetVBuffer type, size_t size) noexcept
 {
-    if (::setvbuf(file, nullptr, EnumCastUnderlying(type), size) == 0)
-        return true;
-    else
-        return false;
+    return ::setvbuf(file, nullptr, EnumCastUnderlying(type), size) == 0;
 }
 
 int System::GetCharacter(FILE* file) noexcept
@@ -97,31 +86,22 @@ int System::GetCharacter(FILE* file) noexcept
 
 bool System::UnGetCharacter(FILE* file, int character) noexcept
 {
-    if (::ungetc(character, file) == character)
-        return true;
-    else
-        return false;
+    return ::ungetc(character, file) == character;
 }
 
 bool System::PutCharacter(FILE* file, int character) noexcept
 {
-    if (::putc(character, file) == character)
-        return true;
-    else
-        return false;
+    return ::putc(character, file) == character;
 }
 
 bool System::PutString(FILE* file, const char* str) noexcept
 {
-    if (::fputs(str, file) != gCFileError)
-        return true;
-    else
-        return false;
+    return ::fputs(str, file) != gCFileError;
 }
 
 std::string System::GetString(FILE* file, int count)
 {
-    std::vector<char> result(count);
+    CharContainer result(count);
 
     if (::fgets(result.data(), count, file) != nullptr)
     {
@@ -135,26 +115,17 @@ std::string System::GetString(FILE* file, int count)
 
 bool System::IsEof(FILE* file) noexcept
 {
-    if (::feof(file) != 0)
-        return true;
-    else
-        return false;
+    return ::feof(file) != 0;
 }
 
 bool System::Flush(FILE* file) noexcept
 {
-    if (::fflush(file) == 0)
-        return true;
-    else
-        return false;
+    return ::fflush(file) == 0;
 }
 
 bool System::Seek(FILE* file, long offset, FileSeek whence) noexcept
 {
-    if (::fseek(file, offset, EnumCastUnderlying(whence)) == 0)
-        return true;
-    else
-        return false;
+    return ::fseek(file, offset, EnumCastUnderlying(whence)) == 0;
 }
 
 System::PosType System::GetPosition(FILE* file) noexcept
@@ -173,18 +144,10 @@ System::PosType System::GetPosition(FILE* file) noexcept
 
 bool System::SetPosition(FILE* file, PosType position) noexcept
 {
-    if (::fsetpos(file, &position) == 0)
-        return true;
-    else
-        return false;
+    return ::fsetpos(file, &position) == 0;
 }
 
 long System::Tell(FILE* file) noexcept
 {
     return ::ftell(file);
-}
-
-void System::Rewind(FILE* file) noexcept
-{
-    ::rewind(file);
 }

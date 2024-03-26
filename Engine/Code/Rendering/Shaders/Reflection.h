@@ -28,7 +28,7 @@ namespace Rendering
         COPY_UNSHARED_TYPE_DECLARE(Reflection);
 
         using OpenGLInt = System::OpenGLInt;
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
         using InputContainer = std::vector<ReflectionInput>;
         using OutputContainer = std::vector<ReflectionOutput>;
         using UniformContainer = std::vector<ReflectionUniform>;

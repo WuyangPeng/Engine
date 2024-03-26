@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 15:41)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 17:20)
 
 #include "EngineeringSuffixTesting.h"
 #include "System/Windows/Engineering.h"
@@ -16,7 +16,7 @@
 System::EngineeringSuffixTesting::EngineeringSuffixTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, EngineeringSuffixTesting)
@@ -31,10 +31,10 @@ void System::EngineeringSuffixTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(SuffixTest);
 }
 
-void System::EngineeringSuffixTesting::SuffixTest()
+void System::EngineeringSuffixTesting::SuffixTest() const
 {
-    MAYBE_UNUSED const auto suffix = GetEngineeringSuffix();
-    MAYBE_UNUSED const auto typesSuffix = GetEngineeringTypesSuffix();
-    MAYBE_UNUSED const auto exeSuffix = GetEngineeringExeSuffix();
-    MAYBE_UNUSED const auto directory = GetEngineeringDirectory();
+    std::ignore = GetEngineeringSuffix();
+    std::ignore = GetEngineeringTypesSuffix();
+    std::ignore = GetEngineeringExeSuffix();
+    std::ignore = GetEngineeringDirectory();
 }

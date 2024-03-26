@@ -117,7 +117,7 @@ bool Mathematics::SegmentMesh<N, Real>::IsValid() const noexcept
 
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
-Mathematics::TopologyType Mathematics::SegmentMesh<N, Real>::GetTopology() const
+Mathematics::TopologyType Mathematics::SegmentMesh<N, Real>::GetTopology() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

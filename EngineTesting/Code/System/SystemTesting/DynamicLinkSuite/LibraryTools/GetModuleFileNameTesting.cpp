@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 17:04)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/09 21:28)
 
 #include "GetModuleFileNameTesting.h"
 #include "System/DynamicLink/LibraryTools.h"
@@ -16,7 +16,7 @@
 System::GetModuleFileNameTesting::GetModuleFileNameTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, GetModuleFileNameTesting)
@@ -51,7 +51,7 @@ void System::GetModuleFileNameTesting::DoGetModuleFileNameSucceedTest(const Syst
 
 System::DynamicLinkString System::GetModuleFileNameTesting::GetDynamicLinkFileNameTest(System::DynamicLinkModule libraryModule)
 {
-    BufferType moduleFileName{};
+    DynamicLinkCharBufferType moduleFileName{};
     const auto maxFileNameLength = GetDynamicLinkFileName(libraryModule, moduleFileName.data(), gMaxPath);
 
     DynamicLinkString dllModuleFileName{ moduleFileName.data() };
@@ -74,13 +74,13 @@ void System::GetModuleFileNameTesting::GetModuleFileNameFailureTest()
     const auto libraryModule = GetDynamicLibrary();
     ASSERT_NOT_THROW_EXCEPTION_1(Destroy, libraryModule);
 
-    BufferType moduleFileName{};
+    DynamicLinkCharBufferType moduleFileName{};
     const auto maxFileNameLength = GetDynamicLinkFileName(libraryModule, moduleFileName.data(), gMaxPath);
 
     ASSERT_NOT_THROW_EXCEPTION_3(DllModuleFileNameFailureTest, maxFileNameLength, libraryModule, moduleFileName);
 }
 
-void System::GetModuleFileNameTesting::DllModuleFileNameFailureTest(WindowsDWord maxFileNameLength, DynamicLinkModule libraryModule, const BufferType& moduleFileName)
+void System::GetModuleFileNameTesting::DllModuleFileNameFailureTest(WindowsDWord maxFileNameLength, DynamicLinkModule libraryModule, const DynamicLinkCharBufferType& moduleFileName)
 {
     ASSERT_EQUAL(0u, maxFileNameLength);
 

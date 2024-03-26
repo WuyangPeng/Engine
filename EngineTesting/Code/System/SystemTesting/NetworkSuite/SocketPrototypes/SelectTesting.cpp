@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 10:59)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:14)
 
 #include "SelectTesting.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
@@ -136,13 +136,13 @@ void System::SelectTesting::WinSockFdClearTest(size_t index) noexcept
 
 void System::SelectTesting::RecvTest(size_t index)
 {
-    BufferType buffer{};
+    CharBufferType buffer{};
     auto count = 0;
-    auto remain = bufferSize - 1;
+    auto remain = defaultBufferSize - 1;
 
     while (0 < remain)
     {
-        const auto recvCount = Recv(GetWinSocket(index), &buffer.at(count), remain, SocketRecv::Default);
+        const auto recvCount = Recv(GetWinSocket(index), &buffer.at(count), remain, SocketReceive::Default);
 
         ASSERT_UNEQUAL(recvCount, socketError);
 
@@ -155,7 +155,7 @@ void System::SelectTesting::RecvTest(size_t index)
         count += recvCount;
     }
 
-    std::string recvResult{ buffer.data() };
+    const std::string recvResult{ buffer.data() };
 
     ASSERT_EQUAL(recvResult, "Hello");
 }

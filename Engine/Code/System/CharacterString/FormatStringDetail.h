@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:21)
+/// 版本：1.0.0.7 (2024/03/05 17:03)
 
 #ifndef SYSTEM_CHARACTER_STRING_FORMAT_DETAIL_H
 #define SYSTEM_CHARACTER_STRING_FORMAT_DETAIL_H
@@ -15,10 +15,8 @@
 #include "System/Helper/VariableTemplateType.h"
 
 template <typename... Types>
-int System::SnPrintF(char* buffer, size_t sizeInBytes, size_t maxCount, const char* format, Types... args) noexcept
+int System::SnPrintF(char* buffer, size_t sizeInBytes, size_t maxCount, const char* format, Types... args) noexcept requires(std::is_same_v<typename IsScalar<Types...>::Type, std::true_type>)
 {
-    static_assert(std::is_same_v<typename IsScalar<Types...>::Type, std::true_type>);
-
 #ifdef SYSTEM_PLATFORM_WIN32
 
     return ::_snprintf_s(buffer, sizeInBytes, maxCount, format, args...);

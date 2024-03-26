@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:05)
+/// 版本：1.0.0.7 (2024/03/05 09:34)
 
 #include "System/SystemExport.h"
 
@@ -16,19 +16,27 @@
 
 #include <filesystem>
 
-void System::DeleteFileDirectory(const String& pathName)
+namespace System
 {
-    for (const auto& element : std::filesystem::directory_iterator(pathName))
+    void RecursionDeleteFileDirectory(const std::filesystem::directory_entry& element)
     {
         if (element.is_directory())
         {
-            DeleteFileDirectory(element.path());
+            RecursionDeleteFileDirectory(element.path());
             std::filesystem::remove(element.path());
         }
         else if (element.is_regular_file())
         {
             std::filesystem::remove(element.path());
         }
+    }
+}
+
+void System::RecursionDeleteFileDirectory(const String& pathName)
+{
+    for (const auto& element : std::filesystem::directory_iterator(pathName))
+    {
+        RecursionDeleteFileDirectory(element);
     }
 }
 
@@ -57,7 +65,7 @@ bool System::CreateFileDirectory(const String& pathName, WindowSecurityAttribute
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::RemoveSystemDirectory(const TChar* pathName) noexcept
+bool System::DeleteFileDirectory(const TChar* pathName) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -83,10 +91,7 @@ bool System::GetDiskFreeSpaceWithRoot(const TChar* rootPathName,
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::GetDiskFreeSpace(rootPathName, sectorsPerCluster, bytesPerSector, numberOfFreeClusters, totalNumberOfClusters) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetDiskFreeSpace(rootPathName, sectorsPerCluster, bytesPerSector, numberOfFreeClusters, totalNumberOfClusters) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -104,10 +109,7 @@ bool System::GetDiskFreeSpaceWithRoot(const TChar* directoryName,
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::GetDiskFreeSpaceEx(directoryName, freeBytesAvailableToCaller, totalNumberOfBytes, totalNumberOfFreeBytes) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetDiskFreeSpaceEx(directoryName, freeBytesAvailableToCaller, totalNumberOfBytes, totalNumberOfFreeBytes) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

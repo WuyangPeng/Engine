@@ -1,16 +1,18 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/14 15:40)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 10:37)
 
 #ifndef MATHEMATICS_ESTIMATE_ATAN_ESTIMATE_H
 #define MATHEMATICS_ESTIMATE_ATAN_ESTIMATE_H
 
 #include "Mathematics/MathematicsDll.h"
+
+#include "System/Helper/PragmaWarning.h"
 
 #include <array>
 
@@ -90,7 +92,12 @@ namespace Mathematics
     requires((Degree & 1) == 1 && 1 <= (Degree - 1) / 2 && (Degree - 1) / 2 <= 6)
     NODISCARD constexpr T GetATanEstimateMaxError()
     {
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
         return static_cast<T>(aTanEstimateMaxError[(Degree - 3) / 2]);
+
+#include SYSTEM_WARNING_POP
     }
 }
 

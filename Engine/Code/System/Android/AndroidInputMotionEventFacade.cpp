@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:29)
+/// 版本：1.0.0.7 (2024/03/05 17:20)
 
 #include "System/SystemExport.h"
 
@@ -19,7 +19,7 @@ System::AndroidInputMotionEventFacade::AndroidInputMotionEventFacade(const Andro
 {
 }
 
-System::AndroidMotionEventAction System::AndroidInputMotionEventFacade::GetAction() noexcept
+System::AndroidMotionEventAction System::AndroidInputMotionEventFacade::GetAction() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -35,7 +35,7 @@ System::AndroidMotionEventAction System::AndroidInputMotionEventFacade::GetActio
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-System::AndroidMotionEventFlag System::AndroidInputMotionEventFacade::GetFlags() noexcept
+System::AndroidMotionEventFlag System::AndroidInputMotionEventFacade::GetFlags() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -51,7 +51,7 @@ System::AndroidMotionEventFlag System::AndroidInputMotionEventFacade::GetFlags()
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-System::AndroidMeta System::AndroidInputMotionEventFacade::GetMetaState() noexcept
+System::AndroidMeta System::AndroidInputMotionEventFacade::GetMetaState() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -67,7 +67,7 @@ System::AndroidMeta System::AndroidInputMotionEventFacade::GetMetaState() noexce
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-System::AndroidMotionEventButton System::AndroidInputMotionEventFacade::GetButtonState() noexcept
+System::AndroidMotionEventButton System::AndroidInputMotionEventFacade::GetButtonState() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -83,7 +83,7 @@ System::AndroidMotionEventButton System::AndroidInputMotionEventFacade::GetButto
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-System::AndroidMotionEventEdgeFlag System::AndroidInputMotionEventFacade::GetEdgeFlags() noexcept
+System::AndroidMotionEventEdgeFlag System::AndroidInputMotionEventFacade::GetEdgeFlags() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -99,7 +99,7 @@ System::AndroidMotionEventEdgeFlag System::AndroidInputMotionEventFacade::GetEdg
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-int64_t System::AndroidInputMotionEventFacade::GetDownTime() noexcept
+int64_t System::AndroidInputMotionEventFacade::GetDownTime() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -112,7 +112,7 @@ int64_t System::AndroidInputMotionEventFacade::GetDownTime() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-int64_t System::AndroidInputMotionEventFacade::GetEventTime() noexcept
+int64_t System::AndroidInputMotionEventFacade::GetEventTime() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -125,7 +125,7 @@ int64_t System::AndroidInputMotionEventFacade::GetEventTime() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetXOffset() noexcept
+float System::AndroidInputMotionEventFacade::GetXOffset() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -138,7 +138,7 @@ float System::AndroidInputMotionEventFacade::GetXOffset() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetYOffset() noexcept
+float System::AndroidInputMotionEventFacade::GetYOffset() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -151,7 +151,7 @@ float System::AndroidInputMotionEventFacade::GetYOffset() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetXPrecision() noexcept
+float System::AndroidInputMotionEventFacade::GetXPrecision() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -164,7 +164,7 @@ float System::AndroidInputMotionEventFacade::GetXPrecision() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetYPrecision() noexcept
+float System::AndroidInputMotionEventFacade::GetYPrecision() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -177,7 +177,7 @@ float System::AndroidInputMotionEventFacade::GetYPrecision() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-size_t System::AndroidInputMotionEventFacade::GetPointerCount() noexcept
+size_t System::AndroidInputMotionEventFacade::GetPointerCount() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -190,7 +190,7 @@ size_t System::AndroidInputMotionEventFacade::GetPointerCount() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-int32_t System::AndroidInputMotionEventFacade::GetPointerId(size_t pointerIndex) noexcept
+int32_t System::AndroidInputMotionEventFacade::GetPointerId(size_t pointerIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -205,7 +205,7 @@ int32_t System::AndroidInputMotionEventFacade::GetPointerId(size_t pointerIndex)
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-System::AndroidMotionEventToolType System::AndroidInputMotionEventFacade::GetToolType(size_t pointerIndex) noexcept
+System::AndroidMotionEventToolType System::AndroidInputMotionEventFacade::GetToolType(size_t pointerIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -223,7 +223,7 @@ System::AndroidMotionEventToolType System::AndroidInputMotionEventFacade::GetToo
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetRawX(size_t pointerIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetRawX(size_t pointerIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -238,7 +238,7 @@ float System::AndroidInputMotionEventFacade::GetRawX(size_t pointerIndex) noexce
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetRawY(size_t pointerIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetRawY(size_t pointerIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -253,7 +253,7 @@ float System::AndroidInputMotionEventFacade::GetRawY(size_t pointerIndex) noexce
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetX(size_t pointerIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetX(size_t pointerIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -268,7 +268,7 @@ float System::AndroidInputMotionEventFacade::GetX(size_t pointerIndex) noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetY(size_t pointerIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetY(size_t pointerIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -283,7 +283,7 @@ float System::AndroidInputMotionEventFacade::GetY(size_t pointerIndex) noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetPressure(size_t pointerIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetPressure(size_t pointerIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -298,7 +298,7 @@ float System::AndroidInputMotionEventFacade::GetPressure(size_t pointerIndex) no
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetSize(size_t pointerIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetSize(size_t pointerIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -313,7 +313,7 @@ float System::AndroidInputMotionEventFacade::GetSize(size_t pointerIndex) noexce
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetTouchMajor(size_t pointerIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetTouchMajor(size_t pointerIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -328,7 +328,7 @@ float System::AndroidInputMotionEventFacade::GetTouchMajor(size_t pointerIndex) 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetTouchMinor(size_t pointerIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetTouchMinor(size_t pointerIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -343,7 +343,7 @@ float System::AndroidInputMotionEventFacade::GetTouchMinor(size_t pointerIndex) 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetToolMajor(size_t pointerIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetToolMajor(size_t pointerIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -358,7 +358,7 @@ float System::AndroidInputMotionEventFacade::GetToolMajor(size_t pointerIndex) n
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetToolMinor(size_t pointerIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetToolMinor(size_t pointerIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -373,7 +373,7 @@ float System::AndroidInputMotionEventFacade::GetToolMinor(size_t pointerIndex) n
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetOrientation(size_t pointerIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetOrientation(size_t pointerIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -388,7 +388,7 @@ float System::AndroidInputMotionEventFacade::GetOrientation(size_t pointerIndex)
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetAxisValue(AndroidMotionEventAxis axis, size_t pointerIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetAxisValue(AndroidMotionEventAxis axis, size_t pointerIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -403,7 +403,7 @@ float System::AndroidInputMotionEventFacade::GetAxisValue(AndroidMotionEventAxis
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-size_t System::AndroidInputMotionEventFacade::GetHistorySize() noexcept
+size_t System::AndroidInputMotionEventFacade::GetHistorySize() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -416,7 +416,7 @@ size_t System::AndroidInputMotionEventFacade::GetHistorySize() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-int64_t System::AndroidInputMotionEventFacade::GetHistoricalEventTime(size_t historyIndex) noexcept
+int64_t System::AndroidInputMotionEventFacade::GetHistoricalEventTime(size_t historyIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -431,7 +431,7 @@ int64_t System::AndroidInputMotionEventFacade::GetHistoricalEventTime(size_t his
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetHistoricalRawX(size_t pointerIndex, size_t historyIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetHistoricalRawX(size_t pointerIndex, size_t historyIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -446,7 +446,7 @@ float System::AndroidInputMotionEventFacade::GetHistoricalRawX(size_t pointerInd
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetHistoricalRawY(size_t pointerIndex, size_t historyIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetHistoricalRawY(size_t pointerIndex, size_t historyIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -461,7 +461,7 @@ float System::AndroidInputMotionEventFacade::GetHistoricalRawY(size_t pointerInd
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetHistoricalX(size_t pointerIndex, size_t historyIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetHistoricalX(size_t pointerIndex, size_t historyIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -476,7 +476,7 @@ float System::AndroidInputMotionEventFacade::GetHistoricalX(size_t pointerIndex,
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetHistoricalY(size_t pointerIndex, size_t historyIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetHistoricalY(size_t pointerIndex, size_t historyIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -491,7 +491,7 @@ float System::AndroidInputMotionEventFacade::GetHistoricalY(size_t pointerIndex,
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetHistoricalPressure(size_t pointerIndex, size_t historyIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetHistoricalPressure(size_t pointerIndex, size_t historyIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -506,7 +506,7 @@ float System::AndroidInputMotionEventFacade::GetHistoricalPressure(size_t pointe
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetHistoricalSize(size_t pointerIndex, size_t historyIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetHistoricalSize(size_t pointerIndex, size_t historyIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -521,7 +521,7 @@ float System::AndroidInputMotionEventFacade::GetHistoricalSize(size_t pointerInd
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetHistoricalTouchMajor(size_t pointerIndex, size_t historyIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetHistoricalTouchMajor(size_t pointerIndex, size_t historyIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -536,7 +536,7 @@ float System::AndroidInputMotionEventFacade::GetHistoricalTouchMajor(size_t poin
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetHistoricalTouchMinor(size_t pointerIndex, size_t historyIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetHistoricalTouchMinor(size_t pointerIndex, size_t historyIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -551,7 +551,7 @@ float System::AndroidInputMotionEventFacade::GetHistoricalTouchMinor(size_t poin
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetHistoricalToolMajor(size_t pointerIndex, size_t historyIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetHistoricalToolMajor(size_t pointerIndex, size_t historyIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -566,7 +566,7 @@ float System::AndroidInputMotionEventFacade::GetHistoricalToolMajor(size_t point
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetHistoricalToolMinor(size_t pointerIndex, size_t historyIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetHistoricalToolMinor(size_t pointerIndex, size_t historyIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -581,7 +581,7 @@ float System::AndroidInputMotionEventFacade::GetHistoricalToolMinor(size_t point
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetHistoricalOrientation(size_t pointerIndex, size_t historyIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetHistoricalOrientation(size_t pointerIndex, size_t historyIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -596,7 +596,7 @@ float System::AndroidInputMotionEventFacade::GetHistoricalOrientation(size_t poi
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-float System::AndroidInputMotionEventFacade::GetHistoricalAxisValue(AndroidMotionEventAxis axis, size_t pointerIndex, size_t historyIndex) noexcept
+float System::AndroidInputMotionEventFacade::GetHistoricalAxisValue(AndroidMotionEventAxis axis, size_t pointerIndex, size_t historyIndex) const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 

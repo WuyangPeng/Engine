@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:17)
+/// 版本：1.0.0.7 (2024/03/05 16:39)
 
 #include "System/SystemExport.h"
 
@@ -37,17 +37,11 @@ bool System::FreeDynamicLibrary(DynamicLinkModule module) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::FreeLibrary(module) != gFalse)
-        return true;
-    else
-        return false;
+    return ::FreeLibrary(module) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    if (::dlclose(module) != 0)
-        return false;
-    else
-        return true;
+    return ::dlclose(module) != 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -69,10 +63,7 @@ bool System::DisableThreadDynamicLibraryCalls(DynamicLinkModule module) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::DisableThreadLibraryCalls(module) != gFalse)
-        return true;
-    else
-        return false;
+    return ::DisableThreadLibraryCalls(module) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

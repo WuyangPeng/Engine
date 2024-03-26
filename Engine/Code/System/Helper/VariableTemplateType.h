@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:59)
+/// 版本：1.0.0.7 (2024/03/04 22:56)
 
 #ifndef SYSTEM_HELPER_VARIABLE_TEMPLATE_TYPE_H
 #define SYSTEM_HELPER_VARIABLE_TEMPLATE_TYPE_H
@@ -28,6 +28,10 @@ namespace System
         {
             using Type = std::tuple_element_t<Index, std::tuple<Types...>>;
         };
+
+        template <size_t Index>
+        requires(Index < count)
+        using ElementType = typename Element<Index>::Type;
     };
 
     template <size_t Index, typename... Types>
@@ -55,6 +59,9 @@ namespace System
 
         using Type = typename IsScalarImpl<VariableTemplateType<Types...>::count - 1, Types...>::Type;
     };
+
+    template <typename... Types>
+    using IsScalarType = typename IsScalar<Types...>::Type;
 }
 
 #endif  // SYSTEM_HELPER_VARIABLE_TEMPLATE_TYPE_H

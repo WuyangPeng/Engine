@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:17)
+/// 版本：1.0.0.7 (2024/03/05 16:39)
 
 #include "System/SystemExport.h"
 
@@ -19,10 +19,7 @@ bool System::SetLibraryDirectory(const DynamicLinkCharType* pathName) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetDllDirectory(pathName) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetDllDirectory(pathName) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -50,13 +47,15 @@ System::WindowsDWord System::GetLibraryDirectory(WindowsDWord bufferLength, Dyna
 
 System::String System::GetLibraryDirectory()
 {
-    using BufferType = std::array<DynamicLinkCharType, gMaxPath>;
-
-    BufferType buffer{};
+    DynamicLinkCharBufferType buffer{};
 
     if (const auto size = GetLibraryDirectory(gMaxPath - 1, buffer.data());
         0 < size)
+    {
         return String{ buffer.data() };
+    }
     else
+    {
         return String{};
+    }
 }

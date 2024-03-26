@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 15:22)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 17:17)
 
 #include "GetMessageTesting.h"
 #include "System/Windows/Flags/WindowsMessagesFlags.h"
@@ -42,7 +42,7 @@ void System::GetMessageTesting::GetMessageTest()
     ASSERT_EQUAL(msg.hwnd, hWnd);
 
     WindowsHAccelerator accelerator{ nullptr };
-    MAYBE_UNUSED const auto result0 = SystemTranslateAccelerator(hWnd, accelerator, &msg);
-    MAYBE_UNUSED const auto result1 = TranslateSystemMessage(&msg);
-    MAYBE_UNUSED const auto result2 = DispatchSystemMessage(&msg);
+    std::ignore = SystemTranslateAccelerator(hWnd, accelerator, &msg);
+    std::ignore = TranslateSystemMessage(&msg);
+    std::ignore = DispatchSystemMessage(&msg);
 }

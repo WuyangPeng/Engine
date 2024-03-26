@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:43)
+/// 版本：1.0.0.7 (2024/03/04 15:57)
 
 #ifndef SYSTEM_MEMORY_TOOLS_HEAP_TOOLS_H
 #define SYSTEM_MEMORY_TOOLS_HEAP_TOOLS_H
@@ -17,7 +17,7 @@
 
 #include <type_traits>
 
-// 分配堆与内存工具。
+/// 分配堆与内存工具。
 namespace System
 {
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateProcessHeap(HeapCreate options, WindowsSize initialSize, WindowsSize maximumSize) noexcept;

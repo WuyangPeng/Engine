@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 10:48)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:12)
 
 #include "ConnectTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -62,13 +62,13 @@ void System::ConnectTesting::DoConnectTest(WinSocket socketHandle)
     ASSERT_NOT_THROW_EXCEPTION_1(RecvTest, socketHandle);
 }
 
-void System::ConnectTesting::SendTest(WinSocket socketHandle)
+void System::ConnectTesting::SendTest(WinSocket socketHandle) const
 {
     std::string sendMessage{ "GET /index.html HTTP/1.0\r\n\r\n" };
 
     auto sendNum = 0u;
 
-    std::vector<char> iov{ sendMessage.begin(), sendMessage.end() };
+    const std::vector<char> iov{ sendMessage.begin(), sendMessage.end() };
 
     do
     {
@@ -87,14 +87,14 @@ void System::ConnectTesting::SendTest(WinSocket socketHandle)
 
 void System::ConnectTesting::RecvTest(WinSocket socketHandle)
 {
-    BufferType buffer{};
+    CharBufferType buffer{};
     std::string data{};
 
     auto recvCount = 0;
     do
     {
-        recvCount = Recv(socketHandle, buffer.data(), bufferSize - 1, SocketRecv::Default);
-        ASSERT_LESS_EQUAL(recvCount, bufferSize - 1);
+        recvCount = Recv(socketHandle, buffer.data(), defaultBufferSize - 1, SocketReceive::Default);
+        ASSERT_LESS_EQUAL(recvCount, defaultBufferSize - 1);
 
         if (recvCount == socketError)
         {

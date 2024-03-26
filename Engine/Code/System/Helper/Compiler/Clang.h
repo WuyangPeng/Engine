@@ -5,12 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:13)
+/// 版本：1.0.0.7 (2024/03/04 17:24)
 
 #ifndef SYSTEM_HELPER_CLANG_H
 #define SYSTEM_HELPER_CLANG_H
 
-// Clang编译器设置：
+/// Clang编译器设置：
 
 #if defined(__clang__) && !defined(__CUDACC__) && !defined(__ibmxl__)
 
@@ -48,8 +48,7 @@
 
     /// 在定义__has_extension之前使用clang进行编译时，
     /// 即使编写了“defined(__has_extension) && __has_extension(xxx)”，
-    /// clang也会报告编译器错误，
-    /// 所以唯一的解决方法是：
+    /// clang也会报告编译器错误，所以唯一的解决方法是：
     #ifndef __has_extension
 
         #define __has_extension __has_feature
@@ -68,10 +67,10 @@
 
     #endif  // __has_cpp_attribute
 
-    // 自第一个版本以来，Clang一直支持“unused”属性。
+    /// 自第一个版本以来，Clang一直支持“unused”属性。
     #define MAYBE_UNUSED __attribute__((__unused__))
 
-    // FALLTHROUGH宏可用于注释switch标签之间的隐式的fall-through。
+    /// FALLTHROUGH宏可用于注释switch标签之间的隐式的fall-through。
     #if 201103L <= __cplusplus && defined(__has_warning)
 
         #if __has_feature(cxx_attributes) && __has_warning("-Wimplicit-fallthrough")

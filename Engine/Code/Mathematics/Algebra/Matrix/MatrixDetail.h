@@ -64,6 +64,30 @@ Mathematics::Algebra::Matrix<NumRows, NumColumns, Real>::Matrix(const BaseContai
 
 template <int NumRows, int NumColumns, typename Real>
 requires(1 <= NumRows && NumRows <= 4 && 1 <= NumColumns && NumColumns <= 4 && std::is_arithmetic_v<Real>)
+Mathematics::Algebra::Matrix<NumRows, NumColumns, Real>::Matrix(Real m00, Real m01, Real m10, Real m11) noexcept requires(NumRows == 2 && NumColumns == 2)
+    : table{ m00, m01, m10, m11 }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+template <int NumRows, int NumColumns, typename Real>
+requires(1 <= NumRows && NumRows <= 4 && 1 <= NumColumns && NumColumns <= 4 && std::is_arithmetic_v<Real>)
+Mathematics::Algebra::Matrix<NumRows, NumColumns, Real>::Matrix(Real m00, Real m01, Real m02, Real m10, Real m11, Real m12, Real m20, Real m21, Real m22) noexcept requires(NumRows == 3 && NumColumns == 3)
+    : table{ m00, m01, m02, m10, m11, m12, m20, m21, m22 }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+template <int NumRows, int NumColumns, typename Real>
+requires(1 <= NumRows && NumRows <= 4 && 1 <= NumColumns && NumColumns <= 4 && std::is_arithmetic_v<Real>)
+Mathematics::Algebra::Matrix<NumRows, NumColumns, Real>::Matrix(Real m00, Real m01, Real m02, Real m03, Real m10, Real m11, Real m12, Real m13, Real m20, Real m21, Real m22, Real m23, Real m30, Real m31, Real m32, Real m33) noexcept requires(NumRows == 4 && NumColumns == 4)
+    : table{ m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33 }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+template <int NumRows, int NumColumns, typename Real>
+requires(1 <= NumRows && NumRows <= 4 && 1 <= NumColumns && NumColumns <= 4 && std::is_arithmetic_v<Real>)
 Mathematics::Algebra::Matrix<NumRows, NumColumns, Real>::Matrix(int row, int column)
     : table{}
 {

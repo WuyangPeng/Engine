@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 16:14)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 14:21)
 
 #include "VsnPrintFTesting.h"
 #include "System/CharacterString/FormatStringDetail.h"
@@ -38,9 +38,9 @@ void System::VsnPrintFTesting::VsnPrintFTest()
 {
     const auto vsnPrintFTestResult = "7vsnprintf1"s;
 
-    BufferType buffer{};
+    CharBufferType buffer{};
 
-    VsnPrintFUseIndefiniteParameterTest(boost::numeric_cast<int>(vsnPrintFTestResult.size()), buffer.data(), bufferSize, "%d%s%d", 7, "vsnprintf", 1);
+    VsnPrintFUseIndefiniteParameterTest(boost::numeric_cast<int>(vsnPrintFTestResult.size()), buffer.data(), defaultBufferSize, "%d%s%d", 7, "vsnprintf", 1);
 
     ASSERT_EQUAL(std::string{ buffer.data() }, vsnPrintFTestResult);
 }
@@ -48,8 +48,6 @@ void System::VsnPrintFTesting::VsnPrintFTest()
 void System::VsnPrintFTesting::VsnPrintFUseIndefiniteParameterTest(int testStringSize, char* buffer, size_t size, const char* format, ...)
 {
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26492)
 #include SYSTEM_WARNING_DISABLE(26826)
 
     va_list arguments{};
@@ -59,7 +57,7 @@ void System::VsnPrintFTesting::VsnPrintFUseIndefiniteParameterTest(int testStrin
 
     va_end(arguments);
 
-    ASSERT_EQUAL(count, testStringSize);
-
 #include SYSTEM_WARNING_POP
+
+    ASSERT_EQUAL(count, testStringSize);
 }

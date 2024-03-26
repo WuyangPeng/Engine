@@ -15,6 +15,7 @@
 #include "FastNegativeExpDetail.h"
 #include "FastTrigonometricDetail.h"
 #include "Float.h"
+#include "Functions.h"
 #include "LexicoArray2Detail.h"
 #include "MathDetail.h"
 #include "RandomDetail.h"

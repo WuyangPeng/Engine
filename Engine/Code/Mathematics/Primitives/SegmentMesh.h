@@ -59,7 +59,7 @@ namespace Mathematics
         /// 成员访问。目前，顶点和索引是只读的。
         /// TODO:允许动态创建网格。
         /// 这需要重新设计，也应用于实现三角形网格基元的类似类。
-        NODISCARD TopologyType GetTopology() const;
+        NODISCARD TopologyType GetTopology() const noexcept;
 
         NODISCARD VerticesType GetVertices() const;
         NODISCARD IndicesType GetIndices() const;

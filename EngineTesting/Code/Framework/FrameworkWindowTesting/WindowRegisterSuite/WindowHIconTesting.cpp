@@ -57,7 +57,7 @@ void Framework::WindowHIconTesting::ConstructorTest()
     });
 
     const WindowHIcon windowHIcon{ instance, IDI_ICON1 };
-    ASSERT_EQUAL(windowHIcon.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntreSource(IDI_ICON1)));
+    ASSERT_EQUAL(windowHIcon.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntResource(IDI_ICON1)));
 }
 
 void Framework::WindowHIconTesting::CreateTest()
@@ -68,5 +68,5 @@ void Framework::WindowHIconTesting::CreateTest()
     });
 
     const auto windowHIcon = WindowHIcon::Create(instance, false, IDI_ICON1);
-    ASSERT_EQUAL(windowHIcon.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntreSource(IDI_ICON1)));
+    ASSERT_EQUAL(windowHIcon.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntResource(IDI_ICON1)));
 }

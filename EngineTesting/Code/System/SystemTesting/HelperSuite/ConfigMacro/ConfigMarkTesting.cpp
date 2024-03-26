@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 09:42)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/06 17:34)
 
 #include "ConfigMarkTesting.h"
 #include "System/Helper/ConfigMacro.h"
@@ -19,7 +19,7 @@
 System::ConfigMarkTesting::ConfigMarkTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, ConfigMarkTesting)
@@ -36,8 +36,9 @@ void System::ConfigMarkTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(NodiscardTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FallthroughTest);
     ASSERT_THROW_EXCEPTION_0(NoReturnTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ArchitectureTypeTest);
 
-    // 这里开启OPEN_DEPRECATED_MACRO会产生一个编译警告
+    /// 这里开启OPEN_DEPRECATED_MACRO会产生一个编译警告
 #ifdef OPEN_DEPRECATED_MACRO
 
     ASSERT_NOT_THROW_EXCEPTION_0(Deprecate);
@@ -45,7 +46,7 @@ void System::ConfigMarkTesting::MainTest()
 #endif  // OPEN_DEPRECATED_MACRO
 }
 
-void System::ConfigMarkTesting::UnusedTest() noexcept
+void System::ConfigMarkTesting::UnusedTest() const noexcept
 {
     MAYBE_UNUSED constexpr auto unused = 0;
 }
@@ -64,7 +65,7 @@ void System::ConfigMarkTesting::NodiscardTest()
     ASSERT_EQUAL(result, 4);
 }
 
-int System::ConfigMarkTesting::FallthroughTest() noexcept
+int System::ConfigMarkTesting::FallthroughTest() const noexcept
 {
     auto testValue = 1;
     switch (testValue)
@@ -83,16 +84,16 @@ int System::ConfigMarkTesting::FallthroughTest() noexcept
     return testValue;
 }
 
-int System::ConfigMarkTesting::NoReturnTest()
+int System::ConfigMarkTesting::NoReturnTest() const
 {
     NoReturn();
 }
 
-void System::ConfigMarkTesting::Deprecate() noexcept
+void System::ConfigMarkTesting::Deprecate() const noexcept
 {
 }
 
-const int* System::ConfigMarkTesting::GetNullptr() noexcept
+const int* System::ConfigMarkTesting::GetNullptr() const noexcept
 {
     return nullptr;
 }
@@ -100,4 +101,17 @@ const int* System::ConfigMarkTesting::GetNullptr() noexcept
 void System::ConfigMarkTesting::NoReturn()
 {
     THROW_WINDOWS_EXCEPTION
+}
+
+void System::ConfigMarkTesting::ArchitectureTypeTest() const noexcept
+{
+#ifdef TCRE_ARCHITECTURE_TYPE_64
+
+    static_assert(sizeof(size_t) == sizeof(uint64_t));
+
+#else  // !TCRE_ARCHITECTURE_TYPE_64
+
+    static_assert(sizeof(size_t) == sizeof(uint32_t));
+
+#endif  // TCRE_ARCHITECTURE_TYPE_64
 }

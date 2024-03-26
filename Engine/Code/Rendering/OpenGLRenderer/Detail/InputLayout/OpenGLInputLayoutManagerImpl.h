@@ -26,7 +26,7 @@ namespace Rendering
     public:
         using ClassType = OpenGLInputLayoutManagerImpl;
 
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
         using OpenGLInputLayoutSharedPtr = std::shared_ptr<OpenGLInputLayout>;
 
     public:

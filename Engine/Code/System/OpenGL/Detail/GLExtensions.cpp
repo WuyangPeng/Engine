@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:21)
+/// 版本：1.0.0.7 (2024/03/02 23:18)
 
 #include "System/SystemExport.h"
 
@@ -33,8 +33,7 @@
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/OpenGL/OpenGLUtility.h"
 
-// 访问OpenGL驱动程序的信息。
-
+/// 访问OpenGL驱动程序的信息。
 const char* System::GetVendorString() noexcept
 {
 #include SYSTEM_WARNING_PUSH
@@ -75,8 +74,7 @@ const char* System::GetShadingLanguageVersion() noexcept
 #include SYSTEM_WARNING_POP
 }
 
-// OpenGL的系统初始化
-
+/// OpenGL的系统初始化
 bool System::InitGL() noexcept
 {
     InitOpenGL10();

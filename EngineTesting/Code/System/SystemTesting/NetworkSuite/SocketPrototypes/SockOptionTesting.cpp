@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 11:03)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:14)
 
 #include "SockOptionTestingDetail.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
@@ -40,18 +40,18 @@ void System::SockOptionTesting::SockOptionTest()
     GetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::AcceptConn, WindowsBool>();
     SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::ConditionalAccept, WindowsBool>();
     SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::Debug, WindowsBool>();
-    SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::DontLinger, WindowsBool>();
-    SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::DontRoute, WindowsBool>();
+    SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::DoNotLinger, WindowsBool>();
+    SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::DoNotRoute, WindowsBool>();
     SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::Error, int>();
-    SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::ExclusiveAddrUse, WindowsBool>();
+    SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::ExclusiveAddressUse, WindowsBool>();
     SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::KeepAlive, WindowsBool>();
     SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::Linger, SocketLinger>();
     GetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::MaxMsgSize, unsigned int>();
-    SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::OobinLine, WindowsBool>();
+    SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::OobInLine, WindowsBool>();
     SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::PortScalability, WindowsBool>();
     GetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::ProtocolInfo, SocketProtocolInfo>();
     SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::RcvBuf, int>();
-    SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::ReuseAddr, WindowsBool>();
+    SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::ReuseAddress, WindowsBool>();
     SetAndGetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::SndBuf, int>();
     GetSockOptionTest<SocketLevelOption::Socket, SocketRetrievedOption::Type, int>();
     SetAndGetSockOptionTest<SocketLevelOption::IpProtoTcp, SocketRetrievedOption::TcpNoDelay, WindowsBool>();

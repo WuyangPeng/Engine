@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:27)
+/// 版本：1.0.0.7 (2024/03/05 17:19)
 
 #ifndef SYSTEM_ANDROID_ANDROID_INPUT_EVENT_FACADE_H
 #define SYSTEM_ANDROID_ANDROID_INPUT_EVENT_FACADE_H
@@ -25,17 +25,17 @@ namespace System
     public:
         explicit AndroidInputEventFacade(const AndroidInputEvent* androidInputEvent) noexcept;
 
-        NODISCARD AndroidInputEventType GetType() noexcept;
-        NODISCARD int32_t GetDeviceId() noexcept;
-        NODISCARD AndroidInputSource GetSource() noexcept;
-        NODISCARD AndroidKeyEventAction GetAction() noexcept;
-        NODISCARD AndroidKeyEventFlag GetFlags() noexcept;
-        NODISCARD AndroidKeyCodes GetKeyCode() noexcept;
-        NODISCARD int32_t GetScanCode() noexcept;
-        NODISCARD AndroidMeta GetMetaState() noexcept;
-        NODISCARD int32_t GetRepeatCount() noexcept;
-        NODISCARD int64_t GetDownTime() noexcept;
-        NODISCARD int64_t GetEventTime() noexcept;
+        NODISCARD AndroidInputEventType GetType() const noexcept;
+        NODISCARD int32_t GetDeviceId() const noexcept;
+        NODISCARD AndroidInputSource GetSource() const noexcept;
+        NODISCARD AndroidKeyEventAction GetAction() const noexcept;
+        NODISCARD AndroidKeyEventFlag GetFlags() const noexcept;
+        NODISCARD AndroidKeyCodes GetKeyCode() const noexcept;
+        NODISCARD int32_t GetScanCode() const noexcept;
+        NODISCARD AndroidMeta GetMetaState() const noexcept;
+        NODISCARD int32_t GetRepeatCount() const noexcept;
+        NODISCARD int64_t GetDownTime() const noexcept;
+        NODISCARD int64_t GetEventTime() const noexcept;
 
     private:
         const AndroidInputEvent* androidInputEvent;

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:23)
+/// 版本：1.0.0.7 (2024/03/05 17:07)
 
 #ifndef SYSTEM_CHARACTER_STRING_CODE_PAGE_H
 #define SYSTEM_CHARACTER_STRING_CODE_PAGE_H

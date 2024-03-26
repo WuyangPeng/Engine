@@ -33,12 +33,12 @@ namespace System
         OPENGL_EXTERN void OPENGL_STDCALL glPointSize(GLfloat size);
         OPENGL_EXTERN void OPENGL_STDCALL glPolygonMode(GLenum face, GLenum mode);
         OPENGL_EXTERN void OPENGL_STDCALL glScissor(GLint x, GLint y, GLsizei width, GLsizei height);
-        OPENGL_EXTERN void OPENGL_STDCALL glTexParameterf(GLenum target, GLenum pname, GLfloat param);
-        OPENGL_EXTERN void OPENGL_STDCALL glTexParameterfv(GLenum target, GLenum pname, const GLfloat* params);
-        OPENGL_EXTERN void OPENGL_STDCALL glTexParameteri(GLenum target, GLenum pname, GLint param);
-        OPENGL_EXTERN void OPENGL_STDCALL glTexParameteriv(GLenum target, GLenum pname, const GLint* params);
-        OPENGL_EXTERN void OPENGL_STDCALL glTexImage1D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void* pixels);
-        OPENGL_EXTERN void OPENGL_STDCALL glTexImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void* pixels);
+        OPENGL_EXTERN void OPENGL_STDCALL glTexParameterf(GLenum target, GLenum pName, GLfloat param);
+        OPENGL_EXTERN void OPENGL_STDCALL glTexParameterfv(GLenum target, GLenum pName, const GLfloat* params);
+        OPENGL_EXTERN void OPENGL_STDCALL glTexParameteri(GLenum target, GLenum pName, GLint param);
+        OPENGL_EXTERN void OPENGL_STDCALL glTexParameteriv(GLenum target, GLenum pName, const GLint* params);
+        OPENGL_EXTERN void OPENGL_STDCALL glTexImage1D(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLint border, GLenum format, GLenum type, const void* pixels);
+        OPENGL_EXTERN void OPENGL_STDCALL glTexImage2D(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void* pixels);
         OPENGL_EXTERN void OPENGL_STDCALL glDrawBuffer(GLenum buf);
         OPENGL_EXTERN void OPENGL_STDCALL glClear(GLbitfield mask);
         OPENGL_EXTERN void OPENGL_STDCALL glClearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
@@ -51,26 +51,26 @@ namespace System
         OPENGL_EXTERN void OPENGL_STDCALL glEnable(GLenum cap);
         OPENGL_EXTERN void OPENGL_STDCALL glFinish(void);
         OPENGL_EXTERN void OPENGL_STDCALL glFlush(void);
-        OPENGL_EXTERN void OPENGL_STDCALL glBlendFunc(GLenum sfactor, GLenum dfactor);
+        OPENGL_EXTERN void OPENGL_STDCALL glBlendFunc(GLenum sFactor, GLenum dFactor);
         OPENGL_EXTERN void OPENGL_STDCALL glLogicOp(GLenum opcode);
         OPENGL_EXTERN void OPENGL_STDCALL glStencilFunc(GLenum func, GLint ref, GLuint mask);
-        OPENGL_EXTERN void OPENGL_STDCALL glStencilOp(GLenum fail, GLenum zfail, GLenum zpass);
+        OPENGL_EXTERN void OPENGL_STDCALL glStencilOp(GLenum fail, GLenum zFail, GLenum zPass);
         OPENGL_EXTERN void OPENGL_STDCALL glDepthFunc(GLenum func);
-        OPENGL_EXTERN void OPENGL_STDCALL glPixelStoref(GLenum pname, GLfloat param);
-        OPENGL_EXTERN void OPENGL_STDCALL glPixelStorei(GLenum pname, GLint param);
+        OPENGL_EXTERN void OPENGL_STDCALL glPixelStoref(GLenum pName, GLfloat param);
+        OPENGL_EXTERN void OPENGL_STDCALL glPixelStorei(GLenum pName, GLint param);
         OPENGL_EXTERN void OPENGL_STDCALL glReadBuffer(GLenum src);
         OPENGL_EXTERN void OPENGL_STDCALL glReadPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, void* pixels);
-        OPENGL_EXTERN void OPENGL_STDCALL glGetBooleanv(GLenum pname, GLboolean* data);
-        OPENGL_EXTERN void OPENGL_STDCALL glGetDoublev(GLenum pname, GLdouble* data);
+        OPENGL_EXTERN void OPENGL_STDCALL glGetBooleanv(GLenum pName, GLboolean* data);
+        OPENGL_EXTERN void OPENGL_STDCALL glGetDoublev(GLenum pName, GLdouble* data);
         OPENGL_EXTERN GLenum OPENGL_STDCALL glGetError(void);
-        OPENGL_EXTERN void OPENGL_STDCALL glGetFloatv(GLenum pname, GLfloat* data);
-        OPENGL_EXTERN void OPENGL_STDCALL glGetIntegerv(GLenum pname, GLint* data);
+        OPENGL_EXTERN void OPENGL_STDCALL glGetFloatv(GLenum pName, GLfloat* data);
+        OPENGL_EXTERN void OPENGL_STDCALL glGetIntegerv(GLenum pName, GLint* data);
         OPENGL_EXTERN const GLubyte* OPENGL_STDCALL glGetString(GLenum name);
         OPENGL_EXTERN void OPENGL_STDCALL glGetTexImage(GLenum target, GLint level, GLenum format, GLenum type, void* pixels);
-        OPENGL_EXTERN void OPENGL_STDCALL glGetTexParameterfv(GLenum target, GLenum pname, GLfloat* params);
-        OPENGL_EXTERN void OPENGL_STDCALL glGetTexParameteriv(GLenum target, GLenum pname, GLint* params);
-        OPENGL_EXTERN void OPENGL_STDCALL glGetTexLevelParameterfv(GLenum target, GLint level, GLenum pname, GLfloat* params);
-        OPENGL_EXTERN void OPENGL_STDCALL glGetTexLevelParameteriv(GLenum target, GLint level, GLenum pname, GLint* params);
+        OPENGL_EXTERN void OPENGL_STDCALL glGetTexParameterfv(GLenum target, GLenum pName, GLfloat* params);
+        OPENGL_EXTERN void OPENGL_STDCALL glGetTexParameteriv(GLenum target, GLenum pName, GLint* params);
+        OPENGL_EXTERN void OPENGL_STDCALL glGetTexLevelParameterfv(GLenum target, GLint level, GLenum pName, GLfloat* params);
+        OPENGL_EXTERN void OPENGL_STDCALL glGetTexLevelParameteriv(GLenum target, GLint level, GLenum pName, GLint* params);
         OPENGL_EXTERN GLboolean OPENGL_STDCALL glIsEnabled(GLenum cap);
         OPENGL_EXTERN void OPENGL_STDCALL glDepthRange(GLdouble n, GLdouble f);
         OPENGL_EXTERN void OPENGL_STDCALL glViewport(GLint x, GLint y, GLsizei width, GLsizei height);
@@ -137,7 +137,7 @@ System::ExistsOpenGLExtensions System::IsExistsOpenGL10() noexcept
 
 void System::InitOpenGL10() noexcept
 {
-    if (OpenGLSystemVersion::Version10 <= System::GetOpenGLVersion())
+    if (OpenGLSystemVersion::Version10 <= GetOpenGLVersion())
     {
         existsOpenGL10 = ExistsOpenGLExtensions::Exists;
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 15:31)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/12 18:16)
 
 #include "SetWaitableTimerTesting.h"
 #include "System/Helper/Tools.h"
@@ -21,7 +21,7 @@
 System::SetWaitableTimerTesting::SetWaitableTimerTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, SetWaitableTimerTesting)
@@ -54,7 +54,7 @@ void System::SetWaitableTimerTesting::DoAsynchronousTest(WindowsHandle waitableT
     waitableTimerLargeInteger.QuadPart = -5 * base;
     constexpr WindowsLong period{ 5000 };
 
-    ASSERT_TRUE(SetSystemWaitableTimer(waitableTimerHandle, &waitableTimerLargeInteger, period, ClassType::TimerAPCProcedure, this, false));
+    ASSERT_TRUE(SetSystemWaitableTimer(waitableTimerHandle, &waitableTimerLargeInteger, period, ClassType::TimerApcProcedure, this, false));
 
     GetStream() << "等待" << -waitableTimerLargeInteger.QuadPart / base << "秒钟。\n";
 
@@ -83,7 +83,7 @@ void System::SetWaitableTimerTesting::DoAsynchronousUseTolerableDelayTest(Window
     constexpr WindowsLong period{ 5000 };
     constexpr WindowsULong tolerableDelay{ 1000 };
 
-    ASSERT_TRUE(SetSystemWaitableTimer(waitableTimerHandle, &waitableTimerLargeInteger, period, ClassType::TimerAPCProcedure, this, nullptr, tolerableDelay));
+    ASSERT_TRUE(SetSystemWaitableTimer(waitableTimerHandle, &waitableTimerLargeInteger, period, ClassType::TimerApcProcedure, this, nullptr, tolerableDelay));
 
     GetStream() << "等待" << -waitableTimerLargeInteger.QuadPart / base << "秒钟。\n";
 
@@ -94,7 +94,7 @@ void System::SetWaitableTimerTesting::DoAsynchronousUseTolerableDelayTest(Window
     ASSERT_ENUM_EQUAL(SystemSleep(EnumCastUnderlying(MutexWait::Infinite), true), SleepReturn::WaitIOCompletion);
 }
 
-void System::SetWaitableTimerTesting::TimerAPCProcedure(WindowsVoidPtr argToCompletionRoutine, WindowsDWord timerLowValue, WindowsDWord timerHighValue)
+void System::SetWaitableTimerTesting::TimerApcProcedure(WindowsVoidPtr argToCompletionRoutine, WindowsDWord timerLowValue, WindowsDWord timerHighValue)
 {
     UnusedFunction(timerLowValue, timerHighValue);
 

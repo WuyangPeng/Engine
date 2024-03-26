@@ -1,16 +1,18 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/14 15:40)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 10:27)
 
 #ifndef MATHEMATICS_ESTIMATE_ACOS_ESTIMATE_H
 #define MATHEMATICS_ESTIMATE_ACOS_ESTIMATE_H
 
 #include "Mathematics/MathematicsDll.h"
+
+#include "System/Helper/PragmaWarning.h"
 
 #include <array>
 
@@ -108,7 +110,12 @@ namespace Mathematics
     requires(1 <= Degree && Degree <= 8)
     NODISCARD constexpr T GetACosEstimateMaxError()
     {
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
         return static_cast<T>(aCosEstimateMaxError[Degree - 1]);
+
+#include SYSTEM_WARNING_POP
     }
 }
 

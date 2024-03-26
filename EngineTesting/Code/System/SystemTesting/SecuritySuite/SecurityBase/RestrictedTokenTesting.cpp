@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 14:08)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 14:29)
 
 #include "RestrictedTokenTesting.h"
 #include "System/Helper/SecuritySidMacro.h"
@@ -87,26 +87,26 @@ void System::RestrictedTokenTesting::InitializeSecurityIdentifierTest(SecuritySi
     securitySidAndAttributes.Sid = &securitySid;
 }
 
-System::RestrictedTokenTesting::LuidAndAttributesBufferType System::RestrictedTokenTesting::GetPrivilegesToDelete()
+System::RestrictedTokenTesting::LocallyUniqueIdentifierAndAttributesBufferType System::RestrictedTokenTesting::GetPrivilegesToDelete()
 {
-    LuidAndAttributesBufferType privilegesToDelete{};
+    LocallyUniqueIdentifierAndAttributesBufferType privilegesToDelete{};
 
-    for (auto& luidAndAttributes : privilegesToDelete)
+    for (auto& locallyUniqueIdentifierAndAttributes : privilegesToDelete)
     {
-        ASSERT_NOT_THROW_EXCEPTION_1(GetLookupPrivilegeValueTest, luidAndAttributes);
+        ASSERT_NOT_THROW_EXCEPTION_1(GetLookupPrivilegeValueTest, locallyUniqueIdentifierAndAttributes);
     }
 
     return privilegesToDelete;
 }
 
-void System::RestrictedTokenTesting::GetLookupPrivilegeValueTest(LocallyUniqueIdentifierAndAttributes& luidAndAttributes)
+void System::RestrictedTokenTesting::GetLookupPrivilegeValueTest(LocallyUniqueIdentifierAndAttributes& locallyUniqueIdentifierAndAttributes)
 {
     LookupPrivilegeLocallyUniqueIdentifier uid{};
 
     ASSERT_TRUE(GetLookupPrivilegeValue(nullptr, GetLookupPrivilegeNameDescription(LookupPrivilegeNameDescription::DebugName).c_str(), &uid));
 
-    luidAndAttributes.Luid = uid;
-    luidAndAttributes.Attributes = EnumCastUnderlying(SecurityTokenAttributesPrivilege::Enabled);
+    locallyUniqueIdentifierAndAttributes.Luid = uid;
+    locallyUniqueIdentifierAndAttributes.Attributes = EnumCastUnderlying(SecurityTokenAttributesPrivilege::Enabled);
 }
 
 System::RestrictedTokenTesting::SecuritySidAndAttributesBufferType System::RestrictedTokenTesting::GetSidsToRestrict(SecuritySidBufferType& sid)
@@ -125,7 +125,7 @@ System::RestrictedTokenTesting::SecuritySidAndAttributesBufferType System::Restr
 
 void System::RestrictedTokenTesting::RestrictedTest(WindowsHandle tokenHandle,
                                                     SecuritySidAndAttributesBufferType& sidsToDisable,
-                                                    LuidAndAttributesBufferType& privilegesToDelete,
+                                                    LocallyUniqueIdentifierAndAttributesBufferType& privilegesToDelete,
                                                     SecuritySidAndAttributesBufferType& sidsToRestrict)
 {
     for (const auto specifiesAdditionalPrivilegeOptions : specifiesAdditionalPrivilegeOptionsContainer)
@@ -137,7 +137,7 @@ void System::RestrictedTokenTesting::RestrictedTest(WindowsHandle tokenHandle,
 void System::RestrictedTokenTesting::DoRestrictedTest(WindowsHandle tokenHandle,
                                                       SpecifiesAdditionalPrivilegeOptions specifiesAdditionalPrivilegeOptions,
                                                       SecuritySidAndAttributesBufferType& sidsToDisable,
-                                                      LuidAndAttributesBufferType& privilegesToDelete,
+                                                      LocallyUniqueIdentifierAndAttributesBufferType& privilegesToDelete,
                                                       SecuritySidAndAttributesBufferType& sidsToRestrict)
 {
     WindowsHandle restrictedTokenHandle{ nullptr };

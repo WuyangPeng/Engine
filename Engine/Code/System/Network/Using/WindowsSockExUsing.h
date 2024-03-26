@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:27)
+/// 版本：1.0.0.7 (2024/03/03 21:04)
 
 #ifndef SYSTEM_NETWORK_WINDOWS_SOCK_EX_USING_H
 #define SYSTEM_NETWORK_WINDOWS_SOCK_EX_USING_H
@@ -65,8 +65,8 @@ namespace System
     using SocketAfProtocolsPtr = LPAFPROTOCOLS;
     using SocketBlob = BLOB;
     using SocketBlobPtr = LPBLOB;
-    using SocketCsAddrInfo = CSADDR_INFO;
-    using SocketCsAddrInfoPtr = LPCSADDR_INFO;
+    using SocketCsAddressInfo = CSADDR_INFO;
+    using SocketCsAddressInfoPtr = LPCSADDR_INFO;
     using SocketCompletion = WSACOMPLETION;
     using SocketCompletionPtr = LPWSACOMPLETION;
     using SocketCompletionType = WSACOMPLETIONTYPE;
@@ -82,8 +82,8 @@ namespace System
     using SocketESetServiceOp = WSAESETSERVICEOP;
     using SocketESetServiceOpPtr = LPWSAESETSERVICEOP;
 
-    using SocketPollfd = WSAPOLLFD;
-    using SocketPollfdPtr = LPWSAPOLLFD;
+    using SocketPollFd = WSAPOLLFD;
+    using SocketPollFdPtr = LPWSAPOLLFD;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -234,14 +234,14 @@ namespace System
     };
     using SocketBlobPtr = SocketBlob*;
 
-    struct SocketCsAddrInfo
+    struct SocketCsAddressInfo
     {
         SocketAddress LocalAddr;
         SocketAddress RemoteAddr;
         int iSocketType;
         int iProtocol;
     };
-    using SocketCsAddrInfoPtr = SocketCsAddrInfo*;
+    using SocketCsAddressInfoPtr = SocketCsAddressInfo*;
 
     struct SocketQuerySet
     {
@@ -257,7 +257,7 @@ namespace System
         SocketAfProtocolsPtr lpafpProtocols;
         TChar* lpszQueryString;
         uint32_t dwNumberOfCsAddrs;
-        SocketCsAddrInfoPtr lpcsaBuffer;
+        SocketCsAddressInfoPtr lpcsaBuffer;
         uint32_t dwOutputFlags;
         SocketBlobPtr lpBlob;
     };
@@ -351,13 +351,13 @@ namespace System
     };
     using SocketESetServiceOpPtr = SocketESetServiceOp*;
 
-    struct SocketPollfd
+    struct SocketPollFd
     {
         WinSocket fd;
         short events;
         short revents;
     };
-    using SocketPollfdPtr = SocketPollfd*;
+    using SocketPollFdPtr = SocketPollFd*;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

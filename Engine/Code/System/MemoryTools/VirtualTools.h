@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:44)
+/// 版本：1.0.0.7 (2024/03/04 15:58)
 
 #ifndef SYSTEM_MEMORY_TOOLS_VIRTUAL_TOOLS_H
 #define SYSTEM_MEMORY_TOOLS_VIRTUAL_TOOLS_H
@@ -16,7 +16,7 @@
 #include "Using/VirtualToolsUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
-// 虚拟内存工具。
+/// 虚拟内存工具。
 namespace System
 {
     MAYBE_NULLPTR WindowsVoidPtr SYSTEM_DEFAULT_DECLARE AllocateVirtual(WindowsVoidPtr address,

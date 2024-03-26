@@ -33,7 +33,7 @@ namespace Rendering
         using FactoryType = ReflectionFactory;
 
         using OpenGLInt = System::OpenGLInt;
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
         using InputContainer = std::vector<ReflectionInput>;
         using OutputContainer = std::vector<ReflectionOutput>;
         using UniformContainer = std::vector<ReflectionUniform>;

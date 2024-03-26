@@ -5,40 +5,40 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:14)
+/// 版本：1.0.0.7 (2024/03/04 17:27)
 
 #ifndef SYSTEM_HELPER_HP_ACC_H
 #define SYSTEM_HELPER_HP_ACC_H
 
-// HP aCC C++ 编译器设置：
-
 #ifdef __HP_aCC
 
-    // 版本检查：我们不支持版本33000之前的HP aCC：
+    /// HP aCC C++ 编译器设置：
+
+    /// 版本检查：我们不支持版本33000之前的HP aCC：
     #if __HP_aCC < 33000
 
         #error "编译器不被支持"
 
     #endif  // __HP_aCC < 33000
 
-    // 在PA-RISC上支持aCC的扩展检查
+    /// 在PA-RISC上支持aCC的扩展检查
     #if 30000 < __HP_aCC && __HP_aCC < 50000
 
         #if __HP_aCC < 38000
 
-            // 不支持版本A.03.80之前的版本
+            /// 不支持版本A.03.80之前的版本
             #error "编译器不被支持"
 
         #elif !defined(__hpxstd98)
 
-            // 必须使用选项+hpxstd98和比A.03.80更高版本进行编译
+            /// 必须使用选项+hpxstd98和比A.03.80更高版本进行编译
             #error "编译器选项“+hpxstd98”是正确支持所必需的"
 
         #endif  // PA-RISC
 
     #endif  // 30000 < __HP_aCC && __HP_aCC < 50000
 
-    // HP-UX/ia64的最后已的版本为61300，PA-RISC的最后已的版本为38000
+    /// HP-UX/ia64的最后已的版本为61300，PA-RISC的最后已的版本为38000
     #if ((61300 < __HP_aCC) || ((38000 < __HP_aCC) && defined(__hpxstd98)))
 
         #error "未知编译器版本"

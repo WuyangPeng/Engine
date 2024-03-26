@@ -27,10 +27,7 @@ bool System::AllocateAndInitializeSecurityIdentifier(SecuritySidIdentifierAuthor
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AllocateAndInitializeSid(identifierAuthority, subAuthorityCount, subAuthority0, subAuthority1, subAuthority2, subAuthority3, subAuthority4, subAuthority5, subAuthority6, subAuthority7, sid) != gFalse)
-        return true;
-    else
-        return false;
+    return ::AllocateAndInitializeSid(identifierAuthority, subAuthorityCount, subAuthority0, subAuthority1, subAuthority2, subAuthority3, subAuthority4, subAuthority5, subAuthority6, subAuthority7, sid) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -55,10 +52,7 @@ bool System::CopySecurityIdentifier(WindowsDWord destinationSidLength, SecurityS
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CopySid(destinationSidLength, destinationSid, sourceSid) != gFalse)
-        return true;
-    else
-        return false;
+    return ::CopySid(destinationSidLength, destinationSid, sourceSid) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -73,10 +67,7 @@ bool System::CreateWellKnownSecurityIdentifier(SecurityWellKnownSidType wellKnow
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CreateWellKnownSid(wellKnownSidType, domainSid, sid, sidCount) != gFalse)
-        return true;
-    else
-        return false;
+    return ::CreateWellKnownSid(wellKnownSidType, domainSid, sid, sidCount) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

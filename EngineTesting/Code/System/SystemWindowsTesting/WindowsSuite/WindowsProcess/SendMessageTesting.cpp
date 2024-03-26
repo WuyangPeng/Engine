@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 15:22)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 17:17)
 
 #include "SendMessageTesting.h"
 #include "System/Windows/Flags/WindowsMessagesFlags.h"
@@ -32,7 +32,7 @@ void System::SendMessageTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(SendMessageTest);
 }
 
-void System::SendMessageTesting::SendMessageTest() noexcept
+void System::SendMessageTesting::SendMessageTest() const noexcept
 {
-    MAYBE_UNUSED const auto result = SendSystemMessage(hWnd, WindowsMessages::User, 0, 0);
+    std::ignore = SendSystemMessage(hWnd, WindowsMessages::User, 0, 0);
 }

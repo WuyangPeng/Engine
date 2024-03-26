@@ -1,35 +1,117 @@
 @ingroup group_Documentation
 
-Threading Core Render Engine 1.0.0.7
+Threading Core Render Engine 1.0.0.8
 
 ----------------------------
 更新日志
 ----------------------------
-1.0.0.7（2024/03/03——2024/03/31）
+1.0.0.8（2024/03/27——2024/04/30）
 
 	完成功能： 
 	（引擎）
-	+ APConversion。@
-	+ APInterval。@
-	+ ArbitraryPrecision。@
-	+ BitHacks。@
-	+ BSNumber。@
-	+ BSPrecision。@
-	+ BSRational。@
-	+ Constants。@
-	+ FPInterval。@
-	+ Functions。@
-	+ IEEEBinary。@
-	+ IEEEBinary16。@
-	+ QFNumber。@
-	+ SWInterval。@
-	+ TypeTraits。@
-	+ UIntegerALU32。@
-	+ UIntegerAP32。@
-	+ UIntegerFP32。@
-	+ 实现Arithmetic。@
-	+ System工程整理。@
-	+ linux系统通过编译。@
+	+ 实现RootsGeneralPolynomial。@	
+	+ 实现RootsQuartic。@
+	+ 实现RotationEstimate。@
+	+ 实现SinEstimate。@
+	+ 实现SingularValueDecomposition。@
+	+ 实现Slerp。@
+	+ 实现SlerpEstimate。@
+	+ 实现SqrtEstimate。@
+	+ 实现SymmetricEigensolver。@
+	+ 实现SymmetricEigensolver2x2。@
+	+ 实现SymmetricEigensolver3x3。@
+	+ 实现TanEstimate。@
+	+ 实现UnsymmetricEigenvalues。@
+	+ 实现NumericalMethods。@
+	+ CoreTools工程整理。@
+	+ CoreTools Toolset工程整理。@
+	+ CoreTools单元测试工程整理。@
+	+ linux系统通过编译。@	
+
+----------------------------
+1.0.0.7（2024/03/03——2024/03/26）
+
+	完成功能： 
+	（引擎）
+	+ 实现QFNumber。
+	+ 实现BitHacks。
+	+ 实现Constants。
+	+ 实现Functions。
+	+ 实现IEEEBinary。
+	+ 实现IEEEBinary16。
+	+ 实现TypeTraits。
+	+ System工程整理。
+	+ System Toolset工程整理。
+	+ 实现UIntegerAP32。
+	+ 实现UIntegerFP32。
+	+ 实现UIntegerALU32。
+	+ 实现BSNumber。
+	+ 实现BSPrecision。
+	+ 实现BSRational。
+	+ 实现ArbitraryPrecision。
+	+ 实现APInterval。
+	+ 实现FPInterval。
+	+ 实现SWInterval。
+	+ 完成Helper。
+	+ 实现APConversion。
+	+ 实现Arithmetic。
+	+ 完成SystemOutput。
+	+ 完成DynamicLink。
+	+ 实现ACosEstimate。
+	+ 实现ASinEstimate。
+	+ 实现ATanEstimate。
+	+ 实现ChebyshevRatio。
+	+ 实现ChebyshevRatioEstimate。
+	+ 完成CharacterString。
+	+ 实现CholeskyDecomposition。
+	+ 实现CosEstimate。
+	+ 完成Console。
+	+ 实现CubicRootsQR。
+	+ 实现Exp2Estimate。
+	+ 实现ExpEstimate。
+	+ 实现GaussianElimination。
+	+ 完成MemoryTools。
+	+ 实现GaussNewtonMinimizer。
+	+ 实现RootsPolynomial。
+	+ 实现Integration。
+	+ 完成Threading。
+	+ 完成Time。
+	+ 实现InvSqrtEstimate。
+	+ 完成FileManager。
+	+ 实现LCPSolver。
+	+ 完成Security。
+	+ 完成Network。
+	+ 完成OpenGL。
+	+ 完成DirectX。
+	+ 完成Vulkan。
+	+ 完成Linux。
+	+ 完成Macintosh。
+	+ 完成Windows。
+	+ 完成Android。
+	+ System单元测试工程整理。
+	+ 实现LDLTDecomposition。
+	+ 实现LevenbergMarquardtMinimizer。
+	+ 实现LinearSystem。
+	+ 实现Log2Estimate。
+	+ 实现LogEstimate。
+	+ 实现Minimize1。
+	+ 实现MinimizeN。
+	+ 实现OdeSolver。
+	+ 实现OdeEuler。
+	+ 实现OdeImplicitEuler。
+	+ 实现OdeMidpoint。
+	+ 实现OdeRungeKutta4。
+	+ 实现PolynomialRoot。
+	+ 实现QuarticRootsQR。
+	+ 实现RemezAlgorithm。
+	+ 实现RootsBisection。
+	+ 实现RootsBisection1。
+	+ 实现RootsBisection2。
+	+ 实现RootsBrentsMethod。
+	+ 实现RootsLinear。
+	+ 实现RootsQuadratic。
+	+ 实现RootsCubic。
+	+ System工程整理。	
 	
 ----------------------------
 1.0.0.6（2024/02/19——2024/03/02）

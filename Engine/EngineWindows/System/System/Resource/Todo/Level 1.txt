@@ -1,5 +1,5 @@
 TODO Level 1
  
-1.0.0.6
+1.0.0.7
 
 1. （OpenGL）使用工具自动化生成OpenGL Extensions代码。

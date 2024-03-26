@@ -37,7 +37,7 @@ void GameTestingTemplate::GenerateEngine::Generate()
     const auto input = mainTree.get(SYSTEM_TEXT("input"), System::String{});
     const auto output = mainTree.get(SYSTEM_TEXT("output"), System::String{});
 
-    System::DeleteFileDirectory(output);
+    System::RecursionDeleteFileDirectory(output);
 
     const AssistTools::GenerateTestingEngine generateEngine{ input, output };
 

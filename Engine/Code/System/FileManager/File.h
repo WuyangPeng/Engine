@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:02)
+/// 版本：1.0.0.7 (2024/03/05 09:27)
 
 #ifndef SYSTEM_FILE_MANAGER_FILE_H
 #define SYSTEM_FILE_MANAGER_FILE_H
@@ -16,7 +16,7 @@
 #include "Using/CFileUsing.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
 
-// 文件的打开、关闭、创建、读写和删除。
+/// 文件的打开、关闭、创建、读写和删除。
 namespace System
 {
     NODISCARD WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemFile(const String& fileName,
@@ -24,7 +24,7 @@ namespace System
                                                                     FileHandleShareMode shareMode,
                                                                     WindowSecurityAttributesPtr securityAttributes,
                                                                     FileHandleCreationDisposition creation,
-                                                                    FileHandleAttributes attributes,
+                                                                    FileHandleAttribute attributes,
                                                                     FileHandleOther other,
                                                                     FileHandleSecurity security,
                                                                     WindowsHandle templateFile) noexcept;
@@ -38,7 +38,7 @@ namespace System
                                                                     FileHandleDesiredAccess access,
                                                                     FileHandleShareMode shareMode,
                                                                     FileHandleCreationDisposition creation,
-                                                                    FileHandleAttributes attributes,
+                                                                    FileHandleAttribute attributes,
                                                                     FileHandleOther other,
                                                                     FileHandleSecurity security) noexcept;
 

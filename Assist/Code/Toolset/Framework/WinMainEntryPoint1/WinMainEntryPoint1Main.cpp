@@ -12,7 +12,7 @@
 
 #include <vld.h>
 
-int SYSTEM_WINAPI WinMain(SYSTEM_IN System::WindowsHInstance instance, SYSTEM_IN_OPT System::WindowsHInstance previousInstance, SYSTEM_IN char* commandLine, SYSTEM_IN int showCommand)
+int SYSTEM_WIN_API WinMain(SYSTEM_IN System::WindowsHInstance instance, SYSTEM_IN_OPT System::WindowsHInstance previousInstance, SYSTEM_IN char* commandLine, SYSTEM_IN int showCommand)
 {
     System::UnusedFunction(showCommand);
 

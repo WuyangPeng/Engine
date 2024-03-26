@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:25)
+/// 版本：1.0.0.7 (2024/03/05 17:10)
 
 #include "System/SystemExport.h"
 
@@ -43,7 +43,7 @@ namespace System
 {
     NODISCARD int SYSTEM_HIDDEN_DECLARE IncreaseNullNumber(int readSize) noexcept
     {
-        // 错误统一返回0
+        /// 错误统一返回0
         if (readSize < 0)
             return 0;
         else
@@ -56,7 +56,7 @@ namespace System
 
         const auto readSize = gsl::narrow_cast<int>(::mbstowcs(wideChar, multiByte, wideCharLength));
 
-        // 返回值包括空终止符
+        /// 返回值包括空终止符
         return IncreaseNullNumber(readSize);
     }
 
@@ -66,7 +66,7 @@ namespace System
 
         const auto readSize = gsl::narrow_cast<int>(::wcstombs(multiByte, wideChar, multiByteLength));
 
-        // 返回值包括空终止符
+        /// 返回值包括空终止符
         return IncreaseNullNumber(readSize);
     }
 
@@ -102,7 +102,7 @@ int System::MultiByteConversionWideChar(CodePage codePage, MultiByte flag, const
 
     UnusedFunction(flag);
 
-    // 返回值包括空终止符
+    /// 返回值包括空终止符
     if (wideChar != nullptr)
         return MultiByteToWideCharUseMbstowcs(codePage, multiByte, wideChar, wideCharLength);
     else
@@ -141,7 +141,7 @@ int System::WideCharConversionMultiByte(CodePage codePage,
 
     UnusedFunction(flag, defaultChar, usedDefaultChar);
 
-    // 返回值包括空终止符
+    /// 返回值包括空终止符
     if (multiByte != nullptr)
         return WideCharToMultiByteUseWcstombs(codePage, wideChar, multiByte, multiByteLength);
     else

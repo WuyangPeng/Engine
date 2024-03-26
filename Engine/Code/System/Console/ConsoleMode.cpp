@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:21)
+/// 版本：1.0.0.7 (2024/03/05 17:02)
 
 #include "System/SystemExport.h"
 
@@ -18,10 +18,7 @@ bool System::GetSystemConsoleMode(WindowsHandle consoleHandle, WindowsDWordPtr m
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetConsoleMode(consoleHandle, mode) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetConsoleMode(consoleHandle, mode) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -36,10 +33,7 @@ bool System::SetSystemConsoleMode(WindowsHandle consoleHandle, ConsoleInputMode 
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetConsoleMode(consoleHandle, EnumCastUnderlying(mode)) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetConsoleMode(consoleHandle, EnumCastUnderlying(mode)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -54,10 +48,7 @@ bool System::SetSystemConsoleMode(WindowsHandle consoleHandle, ConsoleOutputMode
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetConsoleMode(consoleHandle, EnumCastUnderlying(mode)) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetConsoleMode(consoleHandle, EnumCastUnderlying(mode)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

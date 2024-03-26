@@ -26,7 +26,7 @@ namespace Rendering
         using ClassType = GLSLComputeProgram;
         using ParentType = ComputeProgramImpl;
 
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
 
     public:
         GLSLComputeProgram(const GLSLProgramHandle& programHandle, const GLSLShaderHandle& computeShaderHandle);

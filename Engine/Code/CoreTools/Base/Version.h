@@ -28,7 +28,7 @@ namespace CoreTools
     public:
         NODISCARD static constexpr int GetTCREFullVersion() noexcept
         {
-            return gTCREVersion;
+            return gTcreVersion;
         }
 
         /// @return 返回主版本号，“1.2.3.4”中的1。

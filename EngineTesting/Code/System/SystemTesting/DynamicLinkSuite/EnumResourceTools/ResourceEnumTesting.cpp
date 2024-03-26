@@ -1,13 +1,14 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
-///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
-///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 17:04)
-
 /// 原始文件在SystemTesting下，SystemWindowsTesting下的为自动复制文件，请勿修改。
+
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
+///
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
+///
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/09 21:27)
+
 #include "ResourceEnumTesting.h"
 #include "System/DynamicLink/EnumResourceTools.h"
 #include "System/DynamicLink/Flags/EnumResourceToolsFlags.h"
@@ -19,13 +20,15 @@
 
 System::ResourceEnumTesting::ResourceEnumTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      // 这里不测试ResourceEnum::Mui、ResourceEnum::MuiSystem
+      /// 支持的有效值：ResourceEnum::Ln、ResourceEnum::Mui、ResourceEnum::Validate
+      /// 不支持的值ResourceEnum::MuiSystem和ResourceEnum::ModuleExact。
+      /// TODO: ResourceEnum::Mui需要MUI文件，所以ResourceEnum::Mui和ResourceEnum::Mui | ResourceEnum::Validate测试失败。
       resourceEnum{ ResourceEnum::Default,
                     ResourceEnum::Ln,
                     ResourceEnum::Validate,
-                    ResourceEnum::ModuleExact,
+                    ResourceEnum::Ln | ResourceEnum::Mui,
                     ResourceEnum::Ln | ResourceEnum::Validate,
-                    ResourceEnum::Validate | ResourceEnum::ModuleExact },
+                    ResourceEnum::Ln | ResourceEnum::Validate | ResourceEnum::Mui },
       index{ 0 }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
@@ -35,18 +38,16 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, ResourceEnumTesting)
 
 void System::ResourceEnumTesting::DoRunUnitTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(LoadTestingLibrary);
+
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(FreeTestingLibrary);
 }
 
 void System::ResourceEnumTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(LoadTestingLibrary);
-
     ASSERT_NOT_THROW_EXCEPTION_0(EnumResourceTest);
-
-    ASSERT_NOT_THROW_EXCEPTION_0(FreeTestingLibrary);
-
-    // SystemWindowsTesting有dllModule为instance的测试。
 }
 
 void System::ResourceEnumTesting::EnumResourceTest()

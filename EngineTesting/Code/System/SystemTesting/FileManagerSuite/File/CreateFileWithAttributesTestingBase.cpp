@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 17:21)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 11:25)
 
 #include "CreateFileWithAttributesTestingBase.h"
 #include "System/FileManager/Flags/FileFlags.h"
@@ -19,7 +19,7 @@ using namespace std::literals;
 
 System::CreateFileWithAttributesTestingBase::CreateFileWithAttributesTestingBase(const OStreamShared& stream)
     : ParentType{ stream },
-      // FileHandleDesiredAccess::All需要管理员身份运行。
+      /// FileHandleDesiredAccess::All需要管理员身份运行。
       fileHandleDesiredAccesses{ FileHandleDesiredAccess::Read,
                                  FileHandleDesiredAccess::Write,
                                  FileHandleDesiredAccess::Execute,
@@ -34,23 +34,23 @@ System::CreateFileWithAttributesTestingBase::CreateFileWithAttributesTestingBase
                                       FileHandleCreationDisposition::OpenExisting,
                                       FileHandleCreationDisposition::OpenAlways,
                                       FileHandleCreationDisposition::TruncateExisting },
-      fileHandleAttributesContainer{ FileHandleAttributes::ReadOnly,
-                                     FileHandleAttributes::Hidden,
-                                     FileHandleAttributes::System,
-                                     FileHandleAttributes::Archive,
-                                     FileHandleAttributes::Device,
-                                     FileHandleAttributes::Normal,
-                                     FileHandleAttributes::Temporary,
-                                     FileHandleAttributes::Offline,
-                                     FileHandleAttributes::Encrypted,
-                                     FileHandleAttributes::IntegrityStream,
-                                     FileHandleAttributes::Virtual,
-                                     FileHandleAttributes::NoScrubData,
-                                     FileHandleAttributes::Ea,
-                                     FileHandleAttributes::Pinned,
-                                     FileHandleAttributes::Unpinned,
-                                     FileHandleAttributes::RecallOnOpen,
-                                     FileHandleAttributes::RecallOnDataAccess },
+      fileHandleAttributes{ FileHandleAttribute::ReadOnly,
+                            FileHandleAttribute::Hidden,
+                            FileHandleAttribute::System,
+                            FileHandleAttribute::Archive,
+                            FileHandleAttribute::Device,
+                            FileHandleAttribute::Normal,
+                            FileHandleAttribute::Temporary,
+                            FileHandleAttribute::Offline,
+                            FileHandleAttribute::Encrypted,
+                            FileHandleAttribute::IntegrityStream,
+                            FileHandleAttribute::Virtual,
+                            FileHandleAttribute::NoScrubData,
+                            FileHandleAttribute::Ea,
+                            FileHandleAttribute::Pinned,
+                            FileHandleAttribute::Unpinned,
+                            FileHandleAttribute::RecallOnOpen,
+                            FileHandleAttribute::RecallOnDataAccess },
       fileHandleOthers{ FileHandleOther::Default,
                         FileHandleOther::WriteThrough,
                         FileHandleOther::Overlapped,
@@ -70,19 +70,19 @@ System::CreateFileWithAttributesTestingBase::CreateFileWithAttributesTestingBase
                             FileHandleSecurity::Delegation,
                             FileHandleSecurity::ContextTracking,
                             FileHandleSecurity::EffectiveOnly,
-                            FileHandleSecurity::SqosPresent,
-                            FileHandleSecurity::ValidSqosFlags },
+                            FileHandleSecurity::SecurityQualityOfServicePresent,
+                            FileHandleSecurity::ValidSecurityQualityOfServiceFlags },
       randomEngine{ GetEngineRandomSeed() },
-      maxSize{ CoreTools::MaxElement<size_t>({ fileHandleDesiredAccesses.size(),
-                                               fileHandleShareModes.size(),
-                                               fileHandleCreationDispositions.size(),
-                                               fileHandleAttributesContainer.size(),
-                                               fileHandleOthers.size(),
-                                               fileHandleSecurities.size() }) },
+      maxSize{ CoreTools::MaxElement({ fileHandleDesiredAccesses.size(),
+                                       fileHandleShareModes.size(),
+                                       fileHandleCreationDispositions.size(),
+                                       fileHandleAttributes.size(),
+                                       fileHandleOthers.size(),
+                                       fileHandleSecurities.size() }) },
       extendName{ SYSTEM_TEXT(".txt"s) },
       fileNamePrefix{ SYSTEM_TEXT("Resource/FileTesting/CreateFile"s) }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, CreateFileWithAttributesTestingBase)
@@ -94,7 +94,7 @@ void System::CreateFileWithAttributesTestingBase::RandomFileHandleFlags()
     std::ranges::shuffle(fileHandleDesiredAccesses, randomEngine);
     std::ranges::shuffle(fileHandleShareModes, randomEngine);
     std::ranges::shuffle(fileHandleCreationDispositions, randomEngine);
-    std::ranges::shuffle(fileHandleAttributesContainer, randomEngine);
+    std::ranges::shuffle(fileHandleAttributes, randomEngine);
     std::ranges::shuffle(fileHandleOthers, randomEngine);
     std::ranges::shuffle(fileHandleSecurities, randomEngine);
 }
@@ -131,11 +131,11 @@ System::FileHandleCreationDisposition System::CreateFileWithAttributesTestingBas
     return fileHandleCreationDispositions.at(index % fileHandleCreationDispositions.size());
 }
 
-System::FileHandleAttributes System::CreateFileWithAttributesTestingBase::GetFileHandleAttributes(size_t index) const
+System::FileHandleAttribute System::CreateFileWithAttributesTestingBase::GetFileHandleAttributes(size_t index) const
 {
     SYSTEM_CLASS_IS_VALID_CONST_9;
 
-    return fileHandleAttributesContainer.at(index % fileHandleAttributesContainer.size());
+    return fileHandleAttributes.at(index % fileHandleAttributes.size());
 }
 
 System::FileHandleOther System::CreateFileWithAttributesTestingBase::GetFileHandleOther(size_t index) const

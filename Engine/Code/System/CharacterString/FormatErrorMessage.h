@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:23)
+/// 版本：1.0.0.7 (2024/03/05 17:07)
 
 #ifndef SYSTEM_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_H
 #define SYSTEM_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_H
@@ -34,14 +34,14 @@ namespace System
                                                                      WindowsDWord size,
                                                                      va_list* arguments) noexcept;
 
-    // errorMessage分配的内存需要使用LocalMemoryFree进行释放。
+    /// errorMessage分配的内存需要使用LocalMemoryFree进行释放。
     NODISCARD bool SYSTEM_DEFAULT_DECLARE FormatErrorMessage(WindowsHLocal& errorMessage, WindowError lastError) noexcept;
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatErrorMessage(WindowError lastError, TChar* buffer, WindowsDWord size) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE FormatErrorMessage(WindowsHLocal& errorMessage, ConstDynamicLinkModule module, WindowError lastError) noexcept;
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatErrorMessage(ConstDynamicLinkModule module, WindowError lastError, TChar* buffer, WindowsDWord size) noexcept;
     NODISCARD String SYSTEM_DEFAULT_DECLARE FormatErrorMessage(WindowError lastError);
 
-    // resultMessage分配的内存需要使用LocalMemoryFree进行释放。
+    /// resultMessage分配的内存需要使用LocalMemoryFree进行释放。
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, TChar* buffer, WindowsDWord size, WindowsDWordPtrSizeType* arguments) noexcept;
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, TChar* buffer, WindowsDWord size, va_list* arguments) noexcept;
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, WindowsHLocal& resultMessage, WindowsDWordPtrSizeType* arguments) noexcept;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 15:21)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 17:18)
 
 #include "RegisterClassTesting.h"
 #include "System/Helper/WindowsMacro.h"
@@ -51,12 +51,12 @@ void System::RegisterClassTesting::RegisterClassTest()
     windowsClassEx.cbClsExtra = 0;
     windowsClassEx.cbWndExtra = 0;
     windowsClassEx.hInstance = instance;
-    windowsClassEx.hIcon = LoadSystemIcon(instance, MakeIntreSource(IDI_TEST_ICON));
-    windowsClassEx.hCursor = LoadSystemCursor(instance, MakeIntreSource(IDC_TEST_CURSOR));
+    windowsClassEx.hIcon = LoadSystemIcon(instance, MakeIntResource(IDI_TEST_ICON));
+    windowsClassEx.hCursor = LoadSystemCursor(instance, MakeIntResource(IDC_TEST_CURSOR));
     windowsClassEx.hbrBackground = nullptr;
     windowsClassEx.lpszMenuName = windowMenuName.c_str();
     windowsClassEx.lpszClassName = newWindowMenuName.c_str();
-    windowsClassEx.hIconSm = LoadSystemIcon(instance, MakeIntreSource(IDI_TEST_ICON));
+    windowsClassEx.hIconSm = LoadSystemIcon(instance, MakeIntResource(IDI_TEST_ICON));
 
     ASSERT_UNEQUAL(RegisterSystemClass(&windowsClassEx), 0);
 }

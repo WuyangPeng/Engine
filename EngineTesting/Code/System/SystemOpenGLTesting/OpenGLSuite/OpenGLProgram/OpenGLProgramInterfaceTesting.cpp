@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:25)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:45)
 
 #include "OpenGLProgramInterfaceTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -45,7 +45,7 @@ void System::OpenGLProgramInterfaceTesting::ProgramResourceTest()
     ASSERT_NOT_THROW_EXCEPTION_1(DeleteGLProgramTest, programHandle);
 }
 
-void System::OpenGLProgramInterfaceTesting::DoProgramResourceTest(OpenGLUInt programHandle)
+void System::OpenGLProgramInterfaceTesting::DoProgramResourceTest(OpenGLUnsignedInt programHandle)
 {
     const auto shaderHandle = CreateGLShader(ShaderType::Vertex);
 
@@ -56,7 +56,7 @@ void System::OpenGLProgramInterfaceTesting::DoProgramResourceTest(OpenGLUInt pro
     ASSERT_NOT_THROW_EXCEPTION_1(DeleteGLShaderTest, shaderHandle);
 }
 
-void System::OpenGLProgramInterfaceTesting::ShaderTest(OpenGLUInt shaderHandle, OpenGLUInt programHandle)
+void System::OpenGLProgramInterfaceTesting::ShaderTest(OpenGLUnsignedInt shaderHandle, OpenGLUnsignedInt programHandle)
 {
     ASSERT_NOT_THROW_EXCEPTION_1(ShaderSourceTest, shaderHandle);
 
@@ -67,22 +67,25 @@ void System::OpenGLProgramInterfaceTesting::ShaderTest(OpenGLUInt shaderHandle, 
     LinkGLProgram(programHandle);
 }
 
-void System::OpenGLProgramInterfaceTesting::ProgramInterfaceTest(OpenGLUInt programHandle)
+void System::OpenGLProgramInterfaceTesting::ProgramInterfaceTest(OpenGLUnsignedInt programHandle)
 {
-    for (auto outer = 0u; outer < GetProgramInterfaceCount(); ++outer)
+    for (auto outer = 0; outer < GetProgramInterfaceCount(); ++outer)
     {
-        for (auto inner = 0u; inner < GetProgramInterfaceNameCount(); ++inner)
+        for (auto inner = 0; inner < GetProgramInterfaceNameCount(); ++inner)
         {
-            const auto programInterface = GetProgramInterface(outer);
-            const auto programInterfaceName = GetProgramInterfaceName(inner);
-
-            if (IsProgramInterfaceInvalid(programInterface, programInterfaceName))
-            {
-                continue;
-            }
-
-            const auto numResources = GetGLProgramInterface(programHandle, programInterface, programInterfaceName);
-            ASSERT_LESS_EQUAL(0, numResources);
+            ASSERT_NOT_THROW_EXCEPTION_3(DoProgramInterfaceTest, programHandle, outer, inner);
         }
+    }
+}
+
+void System::OpenGLProgramInterfaceTesting::DoProgramInterfaceTest(System::OpenGLUnsignedInt programHandle, int outer, int inner)
+{
+    const auto programInterface = GetProgramInterface(outer);
+    const auto programInterfaceName = GetProgramInterfaceName(inner);
+
+    if (!IsProgramInterfaceInvalid(programInterface, programInterfaceName))
+    {
+        const auto numResources = GetGLProgramInterface(programHandle, programInterface, programInterfaceName);
+        ASSERT_LESS_EQUAL(0, numResources);
     }
 }

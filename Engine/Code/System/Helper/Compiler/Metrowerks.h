@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:14)
+/// 版本：1.0.0.7 (2024/03/04 17:28)
 
 #ifndef SYSTEM_HELPER_METROWERKS_H
 #define SYSTEM_HELPER_METROWERKS_H
 
 #if defined(__MWERKS__)
 
-    // Metrowerks C++ 编译器设置：
+    /// Metrowerks C++ 编译器设置：
 
     #if __MWERKS__ < 0x2301
 

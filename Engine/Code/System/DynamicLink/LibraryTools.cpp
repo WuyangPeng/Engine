@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:17)
+/// 版本：1.0.0.7 (2024/03/05 16:39)
 
 #include "System/SystemExport.h"
 
@@ -35,10 +35,7 @@ bool System::GetDynamicLinkHandle(GetModuleHandleType flags, const DynamicLinkCh
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetModuleHandleEx(EnumCastUnderlying(flags), moduleName, module) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetModuleHandleEx(EnumCastUnderlying(flags), moduleName, module) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -66,9 +63,7 @@ System::WindowsDWord System::GetDynamicLinkFileName(DynamicLinkModule module, Dy
 
 System::DynamicLinkString System::GetDynamicLinkFileName(DynamicLinkModule module)
 {
-    using BufferType = std::array<DynamicLinkCharType, gMaxPath>;
-
-    BufferType moduleFileName{};
+    DynamicLinkCharBufferType moduleFileName{};
 
     if (const auto maxFileNameLength = GetDynamicLinkFileName(module, moduleFileName.data(), gMaxPath - 1);
         0 < maxFileNameLength)

@@ -29,12 +29,13 @@
     "FileStreamMacroTesting": 1,
     "NullCharTesting": 1,
     "StringStreamMacroTesting": 0,
-    "ToStringTesting": 1
+    "ToStringTesting": 1,
+    "CharBufferTesting": 1
   },
 
   "windowsMacroSuite": {
     "MakeLanguageIdTesting": 1000,
-    "MakeIntreSourceTesting": 1,
+    "MakeIntResourceTesting": 1,
     "MakeLanguageCidTesting": 1000,
     "HResultTesting": 1,
     "MakeWordTesting": 1000,
@@ -58,8 +59,7 @@
   "openGLMacroSuite": {
     "WglExtensionsMacroTesting": 1,
     "GlxExtensionsMacroTesting": 1,
-    "GlPluginMacroTesting": 1,
-    "GlUtilityMacroTesting": 1
+    "GlPluginMacroTesting": 1
   },
 
   "glUtilityMacroSuite": {
@@ -74,12 +74,13 @@
   "toolsSuite": {
     "GetArraySizeTesting": 1,
     "UnusedFunctionTesting": 1,
-    "DebugTesting": 1
+    "DebugTesting": 1,
+    "OperatorTesting": 1
   },
 
   "systemOutputSuite": {
-    "MessageBoxFlagsDataTesting": 100,
     "LanguageIdDataTesting": 100,
+    "MessageBoxFlagsDataTesting": 100,
     "OutputDebugStringTesting": 1
   },
 
@@ -96,7 +97,7 @@
 
   "loadLibrarySuite": {
     "LoadLibraryTesting": 1,
-    "GetProcAddressTesting": 1,
+    "GetProcessAddressTesting": 1,
     "FreeLibraryTesting": 1
   },
 
@@ -154,18 +155,17 @@
 
   "formatStringSuite": {
     "VsnPrintFTesting": 1,
-    "StrCatTesting": 1,
-    "StrLenTesting": 1,
-    "StrCpyTesting": 1,
-    "StrTokTesting": 1,
-    "StrStrTesting": 1,
+    "StringCatTesting": 1,
+    "StringLengthTesting": 1,
+    "StringCopyTesting": 1,
+    "StringTokenTesting": 1,
+    "StringStringTesting": 1,
     "SnPrintFTesting": 1
   },
 
   "consoleSuite": {
     "ConsoleHandleTesting": 1,
-    "ConsoleModeTesting": 1,
-    "ConsoleCodePageTesting": 0,
+    "ConsoleCodePageTesting": 1,
     "ConsoleCreateTesting": 1
   },
 
@@ -509,7 +509,7 @@
 
   "databasePrototypesSuite": {
     "WinSockHostTesting": 1,
-    "WinSockServEntTesting": 1,
+    "WinSockServerEntTesting": 1,
     "WinSockProtoEntTesting": 1
   },
 

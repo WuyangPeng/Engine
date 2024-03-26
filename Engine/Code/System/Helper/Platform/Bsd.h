@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:08)
+/// 版本：1.0.0.7 (2024/03/04 19:53)
 
 #ifndef SYSTEM_HELPER_BSD_H
 #define SYSTEM_HELPER_BSD_H
 
 #if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__DragonFly__)
 
-    //  通用 BSD 具体配置选项：
+    ///  通用 BSD 具体配置选项：
 
     #ifdef __FreeBSD__
 

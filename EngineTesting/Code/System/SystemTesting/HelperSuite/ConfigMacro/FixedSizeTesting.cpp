@@ -1,22 +1,21 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 09:43)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/06 17:34)
 
-#include "FixedSizeTesting.h"
+#include "FixedSizeTestingDetail.h"
 #include "System/Helper/ConfigMacro.h"
-#include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::FixedSizeTesting::FixedSizeTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, FixedSizeTesting)
@@ -34,90 +33,44 @@ void System::FixedSizeTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(Integer64Test);
 }
 
-void System::FixedSizeTesting::IntegerSizeTest()
+void System::FixedSizeTesting::IntegerSizeTest() const noexcept
 {
-    ASSERT_EQUAL(sizeof(int8_t), 1u);
-    ASSERT_EQUAL(sizeof(int16_t), 2u);
-    ASSERT_EQUAL(sizeof(int32_t), 4u);
-    ASSERT_EQUAL(sizeof(int64_t), 8u);
+    static_assert(sizeof(int8_t) == 1u);
+    static_assert(sizeof(int16_t) == 2u);
+    static_assert(sizeof(int32_t) == 4u);
+    static_assert(sizeof(int64_t) == 8u);
 
-    ASSERT_EQUAL(sizeof(uint8_t), 1u);
-    ASSERT_EQUAL(sizeof(uint16_t), 2u);
-    ASSERT_EQUAL(sizeof(uint32_t), 4u);
-    ASSERT_EQUAL(sizeof(uint64_t), 8u);
+    static_assert(sizeof(uint8_t) == 1u);
+    static_assert(sizeof(uint16_t) == 2u);
+    static_assert(sizeof(uint32_t) == 4u);
+    static_assert(sizeof(uint64_t) == 8u);
 }
 
 void System::FixedSizeTesting::IntegerMinCriticalTest()
 {
-    int8_t minInt8{ INT8_MIN };
-    --minInt8;
-    ASSERT_EQUAL(minInt8, INT8_MAX);
-
-    uint8_t minUInt8{ 0u };
-    --minUInt8;
-    ASSERT_EQUAL(minUInt8, UINT8_MAX);
-
-    int16_t minInt16{ INT16_MIN };
-    --minInt16;
-    ASSERT_EQUAL(minInt16, INT16_MAX);
-
-    uint16_t minUInt16{ 0u };
-    --minUInt16;
-    ASSERT_EQUAL(minUInt16, UINT16_MAX);
-
-    int32_t minInt32{ INT32_MIN };
-    --minInt32;
-    ASSERT_EQUAL(minInt32, INT32_MAX);
-
-    uint32_t minUInt32{ 0u };
-    --minUInt32;
-    ASSERT_EQUAL(minUInt32, UINT32_MAX);
-
-    int64_t minInt64{ INT64_MIN };
-    --minInt64;
-    ASSERT_EQUAL(minInt64, INT64_MAX);
-
-    uint64_t minUInt64{ 0u };
-    --minUInt64;
-    ASSERT_EQUAL(minUInt64, UINT64_MAX);
+    DoIntegerMinCriticalTest<int8_t>(INT8_MIN, INT8_MAX);
+    DoIntegerMinCriticalTest<uint8_t>(0u, UINT8_MAX);
+    DoIntegerMinCriticalTest<int16_t>(INT16_MIN, INT16_MAX);
+    DoIntegerMinCriticalTest<uint16_t>(0u, UINT16_MAX);
+    DoIntegerMinCriticalTest<int32_t>(INT32_MIN, INT32_MAX);
+    DoIntegerMinCriticalTest<uint32_t>(0u, UINT32_MAX);
+    DoIntegerMinCriticalTest<int64_t>(INT64_MIN, INT64_MAX);
+    DoIntegerMinCriticalTest<uint64_t>(0u, UINT64_MAX);
 }
 
 void System::FixedSizeTesting::IntegerMaxCriticalTest()
 {
-    int8_t maxInt8{ INT8_MAX };
-    ++maxInt8;
-    ASSERT_EQUAL(maxInt8, INT8_MIN);
-
-    uint8_t maxUInt8{ UINT8_MAX };
-    ++maxUInt8;
-    ASSERT_EQUAL(maxUInt8, 0u);
-
-    int16_t maxInt16{ INT16_MAX };
-    ++maxInt16;
-    ASSERT_EQUAL(maxInt16, INT16_MIN);
-
-    uint16_t maxUInt16{ UINT16_MAX };
-    ++maxUInt16;
-    ASSERT_EQUAL(maxUInt16, 0u);
-
-    int32_t maxInt32{ INT32_MAX };
-    ++maxInt32;
-    ASSERT_EQUAL(maxInt32, INT32_MIN);
-
-    uint32_t maxUInt32{ UINT32_MAX };
-    ++maxUInt32;
-    ASSERT_EQUAL(maxUInt32, 0u);
-
-    int64_t maxInt64{ INT64_MAX };
-    ++maxInt64;
-    ASSERT_EQUAL(maxInt64, INT64_MIN);
-
-    uint64_t maxUInt64{ UINT64_MAX };
-    ++maxUInt64;
-    ASSERT_EQUAL(maxUInt64, 0u);
+    DoIntegerMaxCriticalTest<int8_t>(INT8_MAX, INT8_MIN);
+    DoIntegerMaxCriticalTest<uint8_t>(UINT8_MAX, 0u);
+    DoIntegerMaxCriticalTest<int16_t>(INT16_MAX, INT16_MIN);
+    DoIntegerMaxCriticalTest<uint16_t>(UINT16_MAX, 0u);
+    DoIntegerMaxCriticalTest<int32_t>(INT32_MAX, INT32_MIN);
+    DoIntegerMaxCriticalTest<uint32_t>(UINT32_MAX, 0u);
+    DoIntegerMaxCriticalTest<int64_t>(INT64_MAX, INT64_MIN);
+    DoIntegerMaxCriticalTest<uint64_t>(UINT64_MAX, 0u);
 }
 
-void System::FixedSizeTesting::Integer64Test() noexcept
+void System::FixedSizeTesting::Integer64Test() const noexcept
 {
     MAYBE_UNUSED constexpr uint64_t uint64Value{ 0xFFFFFFFFFFFFULL };
     MAYBE_UNUSED constexpr int64_t int64Value{ 0xFFFFFFFFFFFELL };

@@ -16,6 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
+#include "System/OpenGL/Flags/OpenGLTextureFlags.h"
 
 Rendering::OpenGLTexture2Array::OpenGLTexture2Array(const Texture2DArraySharedPtr& texture2Array, const std::string& name)
     : ParentType{ texture2Array, name, TextureTarget::Texture2DArray, TextureTargetBinding::Binding2DArray }

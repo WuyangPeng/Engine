@@ -1,11 +1,11 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/18 16:59)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/12 09:58)
 
 #ifndef MATHEMATICS_ESTIMATE_EXP2_ESTIMATE_DETAIL_H
 #define MATHEMATICS_ESTIMATE_EXP2_ESTIMATE_DETAIL_H
@@ -33,11 +33,11 @@ template <typename T, int Degree>
 requires(1 <= Degree && Degree <= 7)
 T Mathematics::Exp2EstimateReal(T x)
 {
-    auto p = std::floor(x);
-    auto y = x - p;
-    auto poly = Exp2Estimate<T, Degree>(y);
-    auto power = static_cast<int32_t>(static_cast<double>(p));
-    auto result = std::ldexp(poly, power);
+    const auto p = std::floor(x);
+    const auto y = x - p;
+    const auto poly = Exp2Estimate<T, Degree>(y);
+    const auto power = static_cast<int32_t>(static_cast<double>(p));
+    const auto result = std::ldexp(poly, power);
 
     return result;
 }

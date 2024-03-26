@@ -133,7 +133,7 @@ void Framework::WindowPictorialTesting::RandomIconTest()
     const WindowPictorial pictorial{ instance, iconContainer.at(iconIndex).second, IDC_CURSOR1, brushContainer.at(brushIndex) };
 
     ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(nullptr, iconContainer.at(iconIndex).second));
-    ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntreSource(IDC_CURSOR1)));
+    ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntResource(IDC_CURSOR1)));
     ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(brushContainer.at(brushIndex)));
 }
 
@@ -144,7 +144,7 @@ void Framework::WindowPictorialTesting::RandomCursorTest()
 
     const WindowPictorial pictorial{ instance, IDI_ICON1, cursorContainer.at(cursorIndex).second, brushContainer.at(brushIndex) };
 
-    ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntreSource(IDI_ICON1)));
+    ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntResource(IDI_ICON1)));
     ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(nullptr, cursorContainer.at(cursorIndex).second));
     ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(brushContainer.at(brushIndex)));
 }
@@ -155,8 +155,8 @@ void Framework::WindowPictorialTesting::RandomBrushTest()
 
     const WindowPictorial pictorial{ instance, IDI_ICON1, IDC_CURSOR1, brushContainer.at(brushIndex) };
 
-    ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntreSource(IDI_ICON1)));
-    ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntreSource(IDC_CURSOR1)));
+    ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntResource(IDI_ICON1)));
+    ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntResource(IDC_CURSOR1)));
     ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(brushContainer.at(brushIndex)));
 }
 
@@ -181,7 +181,7 @@ void Framework::WindowPictorialTesting::DefaultIconTest()
     const WindowPictorial pictorial{ instance, true, iconContainer.at(iconIndex).first, false, IDC_CURSOR1, brushContainer.at(brushIndex) };
 
     ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(nullptr, iconContainer.at(iconIndex).second));
-    ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntreSource(IDC_CURSOR1)));
+    ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntResource(IDC_CURSOR1)));
     ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(brushContainer.at(brushIndex)));
 }
 
@@ -192,7 +192,7 @@ void Framework::WindowPictorialTesting::DefaultCursorTest()
 
     const WindowPictorial pictorial{ instance, false, IDI_ICON1, true, cursorContainer.at(cursorIndex).first, brushContainer.at(brushIndex) };
 
-    ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntreSource(IDI_ICON1)));
+    ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntResource(IDI_ICON1)));
     ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(nullptr, cursorContainer.at(cursorIndex).second));
     ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(brushContainer.at(brushIndex)));
 }
@@ -216,7 +216,7 @@ void Framework::WindowPictorialTesting::CustomIconAndCursorTest()
 
     const WindowPictorial pictorial{ instance, false, IDI_ICON1, false, IDC_CURSOR1, brushContainer.at(brushIndex) };
 
-    ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntreSource(IDI_ICON1)));
-    ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntreSource(IDC_CURSOR1)));
+    ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntResource(IDI_ICON1)));
+    ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntResource(IDC_CURSOR1)));
     ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(brushContainer.at(brushIndex)));
 }

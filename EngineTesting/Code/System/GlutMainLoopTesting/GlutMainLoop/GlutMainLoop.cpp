@@ -1,20 +1,21 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 13:40)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/14 09:13)
 
 #include "GlutMainLoop.h"
 #include "System/Console/ConsoleCreate.h"
+#include "System/Helper/Tools.h"
 #include "System/OpenGL/Flags/GlutFlags.h"
 #include "System/OpenGL/OpenGLGlut.h"
 
 #include <iostream>
 
-void GlutMainLoopTesting::GlutMainLoop(int argc, char** argv)
+void GlutMainLoopTesting::Init(int argc, char** argv) noexcept
 {
     System::GlutInit(&argc, argv);
 
@@ -22,37 +23,43 @@ void GlutMainLoopTesting::GlutMainLoop(int argc, char** argv)
     System::GlutInitContextVersion(4, 6);
     System::GlutInitWindowPosition(0, 0);
     System::GlutInitDisplayMode(true);
+}
 
-    MAYBE_UNUSED const auto windowId = System::GlutCreateWindow("OpenGL Glut Testing");
-
+void GlutMainLoopTesting::GlutMainLoop() noexcept
+{
     System::GlutDisplayFunc(RenderSceneCallback);
 
-    System::GlutSetOption(System::GlutOption::WindowClose, System::EnumCastUnderlying(System::GlutExtension::GlutMainLoopReturns));
+    GlutSetOption(System::GlutOption::WindowClose, System::GlutExtension::GlutMainLoopReturns);
 
-    MAYBE_UNUSED const auto result = System::RemoveConsoleCloseButton();
+    const auto result = System::RemoveConsoleCloseButton();
 
     System::GlutMainLoop();
+
+    System::UnusedFunction(result);
+}
+
+void GlutMainLoopTesting::GlutMainLoop(int argc, char** argv)
+{
+    Init(argc, argv);
+
+    if (const auto windowId = System::GlutCreateWindow("OpenGL Glut Testing");
+        0 < windowId)
+    {
+        GlutMainLoop();
+    }
 }
 
 void GlutMainLoopTesting::GlutLeaveMainLoop(int argc, char** argv)
 {
-    System::GlutInit(&argc, argv);
+    Init(argc, argv);
 
-    System::GlutInitWindowSize(800, 600);
-    System::GlutInitContextVersion(4, 6);
-    System::GlutInitWindowPosition(0, 0);
-    System::GlutInitDisplayMode(true);
+    if (const auto windowId = System::GlutCreateWindow("OpenGL Glut Testing Automatic Shutdown");
+        0 < windowId)
+    {
+        System::GlutTimerFunc(2000, TimerFunctionCallback, 1);
 
-    MAYBE_UNUSED const auto windowId = System::GlutCreateWindow("OpenGL Glut Testing");
-
-    System::GlutDisplayFunc(RenderSceneCallback);
-    System::GlutTimerFunc(2000, TimerFunctionCallback, 1);
-
-    System::GlutSetOption(System::GlutOption::WindowClose, System::EnumCastUnderlying(System::GlutExtension::GlutMainLoopReturns));
-
-    MAYBE_UNUSED const auto result = System::RemoveConsoleCloseButton();
-
-    System::GlutMainLoop();
+        GlutMainLoop();
+    }
 }
 
 void GlutMainLoopTesting::RenderSceneCallback() noexcept

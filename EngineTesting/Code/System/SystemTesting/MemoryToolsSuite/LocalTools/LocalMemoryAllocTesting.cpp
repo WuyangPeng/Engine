@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 10:05)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/12 10:16)
 
 #include "LocalMemoryAllocTesting.h"
 #include "System/MemoryTools/LocalTools.h"
@@ -33,13 +33,16 @@ void System::LocalMemoryAllocTesting::MainTest()
 
 void System::LocalMemoryAllocTesting::LocalMemoryAllocTest()
 {
-    constexpr WindowsSize localSize{ 256 * sizeof(TChar) };
-
     for (const auto localMemory : *this)
     {
-        const auto local = LocalMemoryAlloc(localMemory, localSize);
-        ASSERT_UNEQUAL_NULL_PTR(local);
-
-        ASSERT_NOT_THROW_EXCEPTION_1(LocalMemoryFreeTest, local);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoLocalMemoryAllocTest, localMemory);
     }
+}
+
+void System::LocalMemoryAllocTesting::DoLocalMemoryAllocTest(LocalMemory localMemory)
+{
+    const auto local = LocalMemoryAlloc(localMemory, localSize);
+    ASSERT_UNEQUAL_NULL_PTR(local);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(LocalMemoryFreeTest, local);
 }

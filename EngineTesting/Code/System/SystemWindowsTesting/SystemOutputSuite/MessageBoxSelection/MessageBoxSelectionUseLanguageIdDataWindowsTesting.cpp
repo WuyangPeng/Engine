@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:53)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/09 12:28)
 
 #include "MessageBoxSelectionUseLanguageIdDataWindowsTesting.h"
 #include "System/SystemOutput/Data/LanguageIdData.h"
@@ -170,7 +170,7 @@ System::MessageBoxSelectionUseLanguageIdDataWindowsTesting::MessageBoxSelectionU
                         SubLanguage::SpanishHonduras,
                         SubLanguage::SpanishNicaragua,
                         SubLanguage::SpanishPuertoRico,
-                        SubLanguage::SpanishUS },
+                        SubLanguage::SpanishUs },
       maxSize{ std::max(primaryLanguageFlags.size(), subLanguageFlags.size()) },
       randomEngine{ GetEngineRandomSeed() }
 {
@@ -217,7 +217,7 @@ void System::MessageBoxSelectionUseLanguageIdDataWindowsTesting::DoMessageBoxTes
     constexpr MessageBoxFlagsData flagsData{ MessageBoxType::YesNoCancel,
                                              MessageBoxIcon::Error,
                                              MessageBoxDefault::Button1,
-                                             MessageBoxMode::ApplModal,
+                                             MessageBoxMode::ApplicationModal,
                                              MessageBoxMisc::TopMost };
 
     const auto flag = MessageBoxSelection(hWnd,

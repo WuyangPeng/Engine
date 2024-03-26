@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:26)
+/// 版本：1.0.0.7 (2024/03/03 21:04)
 
 #ifndef SYSTEM_NETWORK_DATABASE_PROTOTYPES_USING_H
 #define SYSTEM_NETWORK_DATABASE_PROTOTYPES_USING_H
@@ -23,7 +23,7 @@ namespace System
 #ifdef SYSTEM_PLATFORM_WIN32
 
     using WinSockHostEnt = hostent;
-    using WinSockServEnt = servent;
+    using WinSockServerEnt = servent;
     using WinSockProtoEnt = protoent;
 
 #else  // !SYSTEM_PLATFORM_WIN32
@@ -37,7 +37,7 @@ namespace System
         char** h_addr_list;
     };
 
-    struct WinSockServEnt
+    struct WinSockServerEnt
     {
         char* s_name;
         char** s_aliases;

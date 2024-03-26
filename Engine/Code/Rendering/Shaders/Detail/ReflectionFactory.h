@@ -24,7 +24,7 @@ namespace Rendering
     public:
         using ClassType = ReflectionFactory;
 
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
         using ReflectionSharedPtr = std::shared_ptr<ReflectionImpl>;
 
     public:

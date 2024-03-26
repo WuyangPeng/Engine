@@ -5,20 +5,20 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:03)
+/// 版本：1.0.0.7 (2024/03/04 21:44)
 
 #ifndef SYSTEM_HELPER_CONFIG_MACRO_H
 #define SYSTEM_HELPER_CONFIG_MACRO_H
 
 #include "StringizeMacro.h"
 
-// 特定于平台的信息。
+/// 特定于平台的信息。
 #include "SelectPlatformConfig.h"
 
-// 特定于编译器的信息。
+/// 特定于编译器的信息。
 #include "SelectCompilerConfig.h"
 
-// 特定于标准库的信息。
+/// 特定于标准库的信息。
 #include "SelectStdlibConfig.h"
 
 #if !defined(SYSTEM_LITTLE_ENDIAN) && !defined(SYSTEM_BIG_ENDIAN)
@@ -33,11 +33,11 @@
 
 #endif  // SYSTEM_CPP_STANDARD
 
-#if SYSTEM_CPP_STANDARD < 17
+#if SYSTEM_CPP_STANDARD < 20
 
-    #error "使用C++17标准，不再兼容C++98、C++03编译器。"
+    #error "使用C++20标准，不再兼容C++98、C++03编译器。"
 
-#endif  // SYSTEM_CPP_STANDARD < 17
+#endif  // SYSTEM_CPP_STANDARD < 20
 
 #ifndef MAYBE_UNUSED
 
@@ -93,17 +93,17 @@
 
 #endif  // TCRE_SYSTEM_COMPILER
 
-#ifndef TCRE_CPPLIB_VERSION
+#ifndef TCRE_CPP_LIB_VERSION
 
     #error "没有定义标准库版本。"
 
-#endif  // TCRE_CPPLIB_VERSION
+#endif  // TCRE_CPP_LIB_VERSION
 
-#ifndef TCRE_SYSTEM_STDLIB
+#ifndef TCRE_SYSTEM_STD_LIB
 
     #error "没有定义标准库。"
 
-#endif  // TCRE_SYSTEM_STDLIB
+#endif  // TCRE_SYSTEM_STD_LIB
 
 #if defined(__x86_64__) ||  \
     defined(_M_X64) ||      \

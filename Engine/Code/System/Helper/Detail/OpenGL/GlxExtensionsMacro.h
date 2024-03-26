@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:13)
+/// 版本：1.0.0.7 (2024/03/04 19:53)
 
 #ifndef SYSTEM_HELPER_GLX_EXTENSIONS_MACRO_H
 #define SYSTEM_HELPER_GLX_EXTENSIONS_MACRO_H

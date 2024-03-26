@@ -5,23 +5,23 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:13)
+/// 版本：1.0.0.7 (2024/03/04 17:26)
 
 #ifndef SYSTEM_HELPER_COMEAU_H
 #define SYSTEM_HELPER_COMEAU_H
 
 #ifdef __COMO__
 
-    // Comeau C++ 编译器设置：
+    /// Comeau C++ 编译器设置：
 
-    // 版本检查：我们不知道版本4245之前的Comeau：
+    /// 版本检查：我们不知道版本4245之前的Comeau：
     #if __COMO_VERSION__ < 4245
 
         #error "编译器未配置"
 
     #endif  // __COMO_VERSION__ < 4245
 
-    // 最后已知的版本是4245：
+    /// 最后已知的版本是4245：
     #if (4245 < __COMO_VERSION__)
 
         #error "未知的编译器版本"

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:15)
+/// 版本：1.0.0.7 (2024/03/05 16:33)
 
 #ifndef SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_DATA_H
 #define SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_DATA_H
@@ -23,7 +23,7 @@ namespace System
         using ClassType = EnumResourceData;
 
     public:
-        // const DynamicLinkCharType*存的是使用宏MAKEINTRESOURCE强转的指针，不能解引用和打印。
+        /// const DynamicLinkCharType*存的是使用宏MAKEINTRESOURCE强转的指针，不能解引用和打印。
         constexpr EnumResourceData(const DynamicLinkCharType* type, const DynamicLinkCharType* name, WindowsWord language) noexcept
             : resourceType{ type }, name{ name }, language{ language }
         {

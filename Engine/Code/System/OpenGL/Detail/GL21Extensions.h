@@ -18,7 +18,6 @@
 namespace System
 {
     /// OpenGL 2.1
-
     SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL21() noexcept;
 
     void InitOpenGL21() noexcept;

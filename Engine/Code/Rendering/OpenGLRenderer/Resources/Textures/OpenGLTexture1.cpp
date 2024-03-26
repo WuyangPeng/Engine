@@ -12,6 +12,7 @@
 #include "OpenGLTexture1.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
+#include "System/OpenGL/Flags/OpenGLTextureFlags.h"
 #include "System/OpenGL/OpenGLTextures.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"

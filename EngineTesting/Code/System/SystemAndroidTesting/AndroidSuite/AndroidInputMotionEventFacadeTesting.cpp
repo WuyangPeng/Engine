@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 13:45)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 17:08)
 
 #include "AndroidInputMotionEventFacadeTesting.h"
 #include "System/Android/AndroidInputMotionEventFacade.h"
@@ -15,8 +15,8 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 
-System::AndroidInputMotionEventFacadeTesting::AndroidInputMotionEventFacadeTesting(const OStreamShared& streamShared)
-    : ParentType{ streamShared }, androidInputEvent{}
+System::AndroidInputMotionEventFacadeTesting::AndroidInputMotionEventFacadeTesting(const OStreamShared& stream)
+    : ParentType{ stream }, androidInputEvent{}
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -37,7 +37,7 @@ void System::AndroidInputMotionEventFacadeTesting::MainTest()
 
 void System::AndroidInputMotionEventFacadeTesting::AndroidInputMotionEventTest()
 {
-    AndroidInputMotionEventFacade androidInputMotionEvent{ &androidInputEvent };
+    const AndroidInputMotionEventFacade androidInputMotionEvent{ &androidInputEvent };
 
     ASSERT_ENUM_EQUAL(androidInputMotionEvent.GetAction(), AndroidMotionEventAction::Mask);
     ASSERT_ENUM_EQUAL(androidInputMotionEvent.GetFlags(), AndroidMotionEventFlag::WindowIsObscured);
@@ -55,8 +55,8 @@ void System::AndroidInputMotionEventFacadeTesting::AndroidInputMotionEventTest()
 
 void System::AndroidInputMotionEventFacadeTesting::AndroidInputMotionEventPointerIndexTest()
 {
-    AndroidInputMotionEventFacade androidInputMotionEvent{ &androidInputEvent };
-    constexpr size_t pointerIndex{};
+    const AndroidInputMotionEventFacade androidInputMotionEvent{ &androidInputEvent };
+    constexpr auto pointerIndex = 0;
 
     ASSERT_EQUAL(androidInputMotionEvent.GetPointerId(pointerIndex), 0);
     ASSERT_ENUM_EQUAL(androidInputMotionEvent.GetToolType(pointerIndex), AndroidMotionEventToolType::Unknown);
@@ -76,9 +76,9 @@ void System::AndroidInputMotionEventFacadeTesting::AndroidInputMotionEventPointe
 
 void System::AndroidInputMotionEventFacadeTesting::AndroidInputMotionEventHistoricalTest()
 {
-    AndroidInputMotionEventFacade androidInputMotionEvent{ &androidInputEvent };
-    constexpr size_t pointerIndex{};
-    constexpr size_t historyIndex{};
+    const AndroidInputMotionEventFacade androidInputMotionEvent{ &androidInputEvent };
+    constexpr auto pointerIndex = 0;
+    constexpr auto historyIndex = 0;
 
     ASSERT_EQUAL(androidInputMotionEvent.GetHistorySize(), 0u);
     ASSERT_EQUAL(androidInputMotionEvent.GetHistoricalEventTime(historyIndex), 0);

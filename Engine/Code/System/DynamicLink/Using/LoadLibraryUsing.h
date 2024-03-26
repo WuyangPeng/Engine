@@ -5,13 +5,13 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:15)
+/// 版本：1.0.0.7 (2024/03/05 16:37)
 
 #ifndef SYSTEM_DYNAMIC_LINK_LOAD_LIBRARY_USING_H
 #define SYSTEM_DYNAMIC_LINK_LOAD_LIBRARY_USING_H
 
-#include "System/Helper/Platform.h"
 #include "System/Helper/UnicodeUsing.h"
+#include "System/Windows/WindowsUser.h"
 
 #include <string>
 
@@ -42,6 +42,8 @@ namespace System
 #endif  // SYSTEM_PLATFORM_WIN32
 
     constexpr auto nullDynamicLinkChar = DYNAMIC_LINK_TEXT('\0');
+
+    using DynamicLinkCharBufferType = std::array<DynamicLinkCharType, gMaxPath>;
 }
 
 #endif  // SYSTEM_DYNAMIC_LINK_LOAD_LIBRARY_USING_H

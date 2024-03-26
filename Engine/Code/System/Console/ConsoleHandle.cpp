@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:21)
+/// 版本：1.0.0.7 (2024/03/05 17:01)
 
 #include "System/SystemExport.h"
 
@@ -31,20 +31,14 @@ System::WindowsHandle System::GetStandardHandle(StandardHandle standardHandle) n
 
 bool System::IsHandleValid(WindowsHandle handle) noexcept
 {
-    if (handle != invalidHandleValue && handle != nullptr)
-        return true;
-    else
-        return false;
+    return handle != invalidHandleValue && handle != nullptr;
 }
 
 bool System::SetStandardHandle(StandardHandle standardHandle, WindowsHandle handle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetStdHandle(EnumCastUnderlying(standardHandle), handle) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetStdHandle(EnumCastUnderlying(standardHandle), handle) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -59,10 +53,7 @@ bool System::SetStandardHandle(StandardHandle standardHandle, WindowsHandle hand
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetStdHandleEx(EnumCastUnderlying(standardHandle), handle, previousHandle) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetStdHandleEx(EnumCastUnderlying(standardHandle), handle, previousHandle) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

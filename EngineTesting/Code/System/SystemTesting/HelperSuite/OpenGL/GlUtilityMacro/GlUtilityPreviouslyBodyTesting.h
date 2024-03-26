@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 09:28)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/08 16:13)
 
 #ifndef SYSTEM_TESTING_HELPER_SUITE_GL_UTILITY_PREVIOUSLY_BODY_TESTING_H
 #define SYSTEM_TESTING_HELPER_SUITE_GL_UTILITY_PREVIOUSLY_BODY_TESTING_H
@@ -29,17 +29,17 @@ namespace System
         void DoRunUnitTest() override;
         void MainTest();
 
-        void PreviouslyBody0Test() noexcept;
-        void PreviouslyBody1Test() noexcept;
-        void PreviouslyBody2Test() noexcept;
-        void PreviouslyBody3Test() noexcept;
-        void PreviouslyBody4Test() noexcept;
-        void PreviouslyBody5Test() noexcept;
-        void PreviouslyBody6Test() noexcept;
-        void PreviouslyBody7Test() noexcept;
-        void PreviouslyBody8Test() noexcept;
-        void PreviouslyBody9Test() noexcept;
-        void PreviouslyBody10Test() noexcept;
+        void PreviouslyBody0Test() const noexcept;
+        void PreviouslyBody1Test() const noexcept;
+        void PreviouslyBody2Test() const noexcept;
+        void PreviouslyBody3Test() const noexcept;
+        void PreviouslyBody4Test() const noexcept;
+        void PreviouslyBody5Test() const noexcept;
+        void PreviouslyBody6Test() const noexcept;
+        void PreviouslyBody7Test() const noexcept;
+        void PreviouslyBody8Test() const noexcept;
+        void PreviouslyBody9Test() const noexcept;
+        void PreviouslyBody10Test() const noexcept;
     };
 }
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:22)
+/// 版本：1.0.0.7 (2024/03/02 23:20)
 
 #include "System/SystemExport.h"
 
@@ -14,6 +14,7 @@
 #include "System/Helper/PragmaWarning/Algorithm.h"
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/OpenGL/OpenGLWglPrototypes.h"
+#include "System/OpenGL/Using/OpenGLUsing.h"
 
 #include <array>
 #include <iostream>
@@ -84,7 +85,7 @@ System::OpenGLSystemVersion System::GetOpenGLVersion(int major, int minor) noexc
 
 namespace System
 {
-    // 支持错误检查。
+    /// 支持错误检查。
     constexpr auto errorStringSize = 9;
 
     constexpr std::array errorString{ "GL_INVALID_ENUM",
@@ -113,10 +114,10 @@ const char* System::GetOpenGLErrorString(OpenGLErrorCode code) noexcept
 
 void System::PrintExtensionsInfo(const char* extensions)
 {
-    std::vector<std::string> token{};
+    TokenSplitType token{};
     split(token, extensions, boost::is_any_of(" \t\n"), boost::token_compress_on);
-    for (const auto& value : token)
+    for (const auto& element : token)
     {
-        std::cout << "    " << value << "\n";
+        std::cout << "    " << element << "\n";
     }
 }

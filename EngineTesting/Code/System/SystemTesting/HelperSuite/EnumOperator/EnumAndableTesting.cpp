@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 09:44)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/08 10:57)
 
 #include "EnumAndableTesting.h"
 #include "System/Helper/EnumOperator.h"
@@ -17,7 +17,7 @@
 System::EnumAndableTesting::EnumAndableTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, EnumAndableTesting)
@@ -44,7 +44,7 @@ void System::EnumAndableTesting::SignedOperatorTest()
     ASSERT_ENUM_EQUAL(number, SignedNumber::One);
 }
 
-void System::EnumAndableTesting::SignedConstexprOperatorTest() noexcept
+void System::EnumAndableTesting::SignedConstexprOperatorTest() const noexcept
 {
     constexpr auto number = SignedNumber::Seven & SignedNumber::Nine;
 
@@ -60,7 +60,7 @@ void System::EnumAndableTesting::UnsignedOperatorTest()
     ASSERT_ENUM_EQUAL(number, Number::Two);
 }
 
-void System::EnumAndableTesting::UnsignedConstexprOperatorTest() noexcept
+void System::EnumAndableTesting::UnsignedConstexprOperatorTest() const noexcept
 {
     constexpr auto number = Number::Nine & Number::Six;
 

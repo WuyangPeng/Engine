@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:24)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:44)
 
 #include "OpenGLSetCopyBufferSubDataTesting.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
@@ -30,12 +30,12 @@ void System::OpenGLSetCopyBufferSubDataTesting::DoRunUnitTest()
 void System::OpenGLSetCopyBufferSubDataTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(RandomShuffle);
-    ASSERT_NOT_THROW_EXCEPTION_0(SetGLCopyBufferSubDataTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SetCopyBufferSubDataTest);
 }
 
 void System::OpenGLSetCopyBufferSubDataTesting::GetBufferSubDataTest(BindBuffer bindBuffer)
 {
-    const BufferDataType bufferData{};
+    constexpr BufferDataType bufferData{};
     SetGLBufferData(bindBuffer, bufferDataSize, bufferData.data(), BufferUsage::Dynamic);
 
     BufferDataType result{};
@@ -44,31 +44,29 @@ void System::OpenGLSetCopyBufferSubDataTesting::GetBufferSubDataTest(BindBuffer 
     ASSERT_EQUAL(bufferData, result);
 }
 
-void System::OpenGLSetCopyBufferSubDataTesting::SetGLCopyBufferSubDataTest()
+void System::OpenGLSetCopyBufferSubDataTesting::SetCopyBufferSubDataTest()
 {
     BufferType buffers{};
 
     GetGLGenBuffers(bufferSize, buffers.data());
 
-    ASSERT_NOT_THROW_EXCEPTION_1(DoSetGLCopyBufferSubDataTest, buffers);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoSetCopyBufferSubDataTest, buffers);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteBuffersTest, buffers);
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteBuffersTest, buffers);
 }
 
-void System::OpenGLSetCopyBufferSubDataTesting::DoSetGLCopyBufferSubDataTest(BufferType buffers)
+void System::OpenGLSetCopyBufferSubDataTesting::DoSetCopyBufferSubDataTest(BufferType buffers)
 {
-    for (auto index = 0u; index < GetSubDataBindBufferSize(); ++index)
+    for (auto index = 0; index < GetSubDataBindBufferSize(); ++index)
     {
         ASSERT_NOT_THROW_EXCEPTION_2(SetBindBufferTest, GetSubDataBindBuffer(index), buffers.at(index));
 
         ASSERT_NOT_THROW_EXCEPTION_1(GetBufferSubDataTest, GetSubDataBindBuffer(index));
     }
 
-    for (auto index = 0u; index < GetSubDataBindBufferSize(); ++index)
+    for (auto index = 0; index < GetSubDataBindBufferSize(); ++index)
     {
-        const auto nextIndex = index + 1;
-
-        ASSERT_NOT_THROW_EXCEPTION_2(CopyBufferSubDataTest, GetSubDataBindBuffer(index), GetSubDataBindBuffer(nextIndex));
+        ASSERT_NOT_THROW_EXCEPTION_2(CopyBufferSubDataTest, GetSubDataBindBuffer(index), GetSubDataBindBuffer(index + 1));
     }
 }
 

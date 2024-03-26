@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:14)
+/// 版本：1.0.0.7 (2024/03/08 19:32)
 
-#ifndef SYSTEM_HELPER_SUNPRO_CC_H
-#define SYSTEM_HELPER_SUNPRO_CC_H
+#ifndef SYSTEM_HELPER_SUN_PRO_CC_H
+#define SYSTEM_HELPER_SUN_PRO_CC_H
 
 #if defined(__SUNPRO_CC)
 
-    // Sun C++ 编译器设置：
+    /// Sun C++ 编译器设置：
 
     #if __SUNPRO_CC < 0x400
 
@@ -52,4 +52,4 @@
 
 #endif  // defined(__SUNPRO_CC)
 
-#endif  // SYSTEM_HELPER_SUNPRO_CC_H
+#endif  // SYSTEM_HELPER_SUN_PRO_CC_H

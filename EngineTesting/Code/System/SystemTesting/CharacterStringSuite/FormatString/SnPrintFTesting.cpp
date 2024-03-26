@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 16:12)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 14:18)
 
 #include "SnPrintFTesting.h"
 #include "System/CharacterString/FormatStringDetail.h"
@@ -41,16 +41,16 @@ void System::SnPrintFTesting::PrintTest()
 {
     const auto result = "5snprintf8"s;
 
-    BufferType buffer{ 'a' };
+    CharBufferType buffer{ 'a' };
 
-    const auto count = SnPrintF(buffer.data(), result.size() + 1, bufferSize - 1, "%d%s%d", 5, "snprintf", 8);
+    const auto count = SnPrintF(buffer.data(), result.size() + 1, defaultBufferSize - 1, "%d%s%d", 5, "snprintf", 8);
 
     ASSERT_EQUAL(count, boost::numeric_cast<int>(result.size()));
     ASSERT_EQUAL(std::string{ buffer.data() }, result);
 
 #ifdef OPEN_SN_PRINT_F_ERROR
 
-    SnPrintF(buffer.data(), result.size() + 1, bufferSize - 1, "%d%s%d", 5, result, 8);
+    std::ignore = SnPrintF(buffer.data(), result.size() + 1, defaultBufferSize - 1, "%d%s%d", 5, result, 8);
 
 #endif  // OPEN_SN_PRINT_F_ERROR
 }

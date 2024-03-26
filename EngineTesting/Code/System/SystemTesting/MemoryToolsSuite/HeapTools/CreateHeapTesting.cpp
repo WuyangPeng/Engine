@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 10:05)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/12 10:15)
 
 #include "CreateHeapTesting.h"
 #include "System/MemoryTools/HeapTools.h"
@@ -28,17 +28,22 @@ void System::CreateHeapTesting::DoRunUnitTest()
 
 void System::CreateHeapTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(CreateHeapSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CreateHeapSucceedTestLoop);
     ASSERT_NOT_THROW_EXCEPTION_0(CreateHeapFailureTest);
 }
 
-void System::CreateHeapTesting::CreateHeapSucceedTest()
+void System::CreateHeapTesting::CreateHeapSucceedTestLoop()
 {
-    for (auto heapCreate : *this)
+    for (const auto heapCreate : *this)
     {
-        ASSERT_NOT_THROW_EXCEPTION_1(DoCreateHeapSucceedTest, heapCreate);
-        ASSERT_NOT_THROW_EXCEPTION_1(CreateDefaultHeapSucceedTest, heapCreate);
+        ASSERT_NOT_THROW_EXCEPTION_1(CreateHeapSucceedTest, heapCreate);
     }
+}
+
+void System::CreateHeapTesting::CreateHeapSucceedTest(HeapCreate heapCreate)
+{
+    ASSERT_NOT_THROW_EXCEPTION_1(DoCreateHeapSucceedTest, heapCreate);
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateDefaultHeapSucceedTest, heapCreate);
 }
 
 void System::CreateHeapTesting::DoCreateHeapSucceedTest(HeapCreate flag)

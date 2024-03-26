@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 11:18)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:16)
 
 #include "WinSocketRecvFromTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -56,24 +56,23 @@ void System::WinSocketRecvFromTesting::DoRecvFromTest(WinSocket socketHandle)
 
     ASSERT_TRUE_FAILURE_THROW(Bind(socketHandle, &address), "Bind Error");
 
-    BufferType buffer{};
+    CharBufferType buffer{};
 
     auto index = 0;
-    auto remain = bufferSize;
+    auto remain = defaultBufferSize;
 
     while (0 < remain)
     {
-        WindowsDWord numberOfBytesRecvd{ 0 };
+        WindowsDWord numberOfBytesReceive{ 0 };
 
-        const auto recvCount = WinSocketRecvFromTest(buffer, index, remain, address, socketHandle, numberOfBytesRecvd);
-
-        if (recvCount == socketError)
+        if (const auto recvCount = WinSocketRecvFromTest(buffer, index, remain, address, socketHandle, numberOfBytesReceive);
+            recvCount == socketError)
         {
             break;
         }
 
-        remain -= boost::numeric_cast<int>(numberOfBytesRecvd);
-        index += boost::numeric_cast<int>(numberOfBytesRecvd);
+        remain -= boost::numeric_cast<int>(numberOfBytesReceive);
+        index += boost::numeric_cast<int>(numberOfBytesReceive);
     }
 
     const std::string result{ buffer.data() };
@@ -81,7 +80,7 @@ void System::WinSocketRecvFromTesting::DoRecvFromTest(WinSocket socketHandle)
     ASSERT_EQUAL(result, "Hello");
 }
 
-int System::WinSocketRecvFromTesting::WinSocketRecvFromTest(BufferType& buffer, int index, int remain, WinSockInternetAddress address, WinSocket socketHandle, WindowsDWord& numberOfBytesRecvd)
+int System::WinSocketRecvFromTesting::WinSocketRecvFromTest(CharBufferType& buffer, int index, int remain, WinSockInternetAddress address, WinSocket socketHandle, WindowsDWord& numberOfBytesRecvD)
 {
     WinSockBuf winSockBuf{};
     winSockBuf.buf = &buffer.at(index);
@@ -93,7 +92,7 @@ int System::WinSocketRecvFromTesting::WinSocketRecvFromTest(BufferType& buffer, 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-    const auto recvCount = WinSocketRecvFrom(socketHandle, &winSockBuf, 1, &numberOfBytesRecvd, &flags, reinterpret_cast<WinSockAddress*>(&address), &length, nullptr, nullptr);
+    const auto recvCount = WinSocketRecvFrom(socketHandle, &winSockBuf, 1, &numberOfBytesRecvD, &flags, reinterpret_cast<WinSockAddress*>(&address), &length, nullptr, nullptr);
 
 #include SYSTEM_WARNING_POP
 

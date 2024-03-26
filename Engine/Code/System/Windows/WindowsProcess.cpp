@@ -146,7 +146,7 @@ bool System::DefaultMessageBox(WindowsHWnd hWnd, const String& information, cons
     if (constexpr MessageBoxFlagsData flagsData{ MessageBoxType::YesNo,
                                                  MessageBoxIcon::Exclamation,
                                                  MessageBoxDefault::Button2,
-                                                 MessageBoxMode::ApplModal,
+                                                 MessageBoxMode::ApplicationModal,
                                                  MessageBoxMisc::NoMisc };
         MessageBoxSelection(hWnd, information.c_str(), title.c_str(), flagsData) == DialogBoxCommand::IdYes)
     {

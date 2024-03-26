@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:30)
+/// 版本：1.0.0.7 (2024/03/04 15:51)
 
 #ifndef SYSTEM_MEMORY_TOOLS_HEAP_TOOLS_DETAIL_H
 #define SYSTEM_MEMORY_TOOLS_HEAP_TOOLS_DETAIL_H
@@ -22,7 +22,7 @@ T* System::AllocateProcessHeap(size_t length) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return static_cast<T*>(AllocateProcessHeap(GetCurrentProcessHeap(), HeapCreate::ZeroMemory, length * sizeof(T)));
+    return static_cast<T*>(AllocateProcessHeap(GetCurrentProcessHeap(), HeapCreate::HeapZeroMemory, length * sizeof(T)));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -32,7 +32,8 @@ T* System::AllocateProcessHeap(size_t length) noexcept
 }
 
 template <typename T>
-requires(std::is_trivial_v<T> && std::is_standard_layout_v<T>) bool System::FreeProcessHeap(T* memory) noexcept
+requires(std::is_trivial_v<T> && std::is_standard_layout_v<T>)
+bool System::FreeProcessHeap(T* memory) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 

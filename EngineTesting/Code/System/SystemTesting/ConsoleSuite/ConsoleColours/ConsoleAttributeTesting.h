@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 16:28)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/17 19:37)
 
 #ifndef SYSTEM_CONSOLE_SUITE_CONSOLE_ATTRIBUTE_TESTING_H
 #define SYSTEM_CONSOLE_SUITE_CONSOLE_ATTRIBUTE_TESTING_H
@@ -29,8 +29,7 @@ namespace System
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     protected:
-        static constexpr auto bufferSize = 512u;
-        using AttributeType = std::array<WindowsWord, bufferSize>;
+        using AttributeType = std::array<WindowsWord, defaultBufferSize>;
         static constexpr auto textColourMask = 0x000F;
         static constexpr auto backgroundColourMask = 0x00F0;
         static constexpr auto consoleCommonMask = 0xFF00;
@@ -54,8 +53,8 @@ namespace System
         using ConsoleCommonContainer = std::vector<ConsoleCommon>;
 
     private:
-        TextColourContainer textColourContainer;
-        BackgroundColourContainer backgroundColourContainer;
+        TextColourContainer textColours;
+        BackgroundColourContainer backgroundColours;
         ConsoleCommonContainer consoleCommons;
         std::default_random_engine randomEngine;
         size_t maxSize;

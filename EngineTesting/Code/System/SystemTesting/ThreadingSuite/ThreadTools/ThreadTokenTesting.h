@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 14:39)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/12 18:09)
 
 #ifndef SYSTEM_THREADING_SUITE_THREAD_TOKEN_TESTING_H
 #define SYSTEM_THREADING_SUITE_THREAD_TOKEN_TESTING_H
@@ -43,7 +43,7 @@ namespace System
         void TokenThreadTest(ThreadHandle threadHandle, WindowsDWord threadId, ThreadHandle mutexHandle);
         void DoTokenThreadTest(size_t index, ThreadHandle threadHandle);
 
-        static WindowsDWord SYSTEM_WINAPI ThreadStartRoutine(void* threadParameter) noexcept;
+        static WindowsDWord SYSTEM_WIN_API ThreadStartRoutine(void* threadParameter) noexcept;
 
     private:
         using TokenStandardAccessContainer = std::vector<TokenStandardAccess>;

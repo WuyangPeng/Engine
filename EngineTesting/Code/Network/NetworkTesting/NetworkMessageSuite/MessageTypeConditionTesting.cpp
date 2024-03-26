@@ -38,7 +38,7 @@ void Network::MessageTypeConditionTesting::MainTest()
 
 void Network::MessageTypeConditionTesting::CompareTest()
 {
-    constexpr auto version = gTCRETestingVersion - 2;
+    constexpr auto version = gTcreTestingVersion - 2;
     const MessageTypeCondition messageTypeCondition0{ VersionsCondition::Less, version };
     const MessageTypeCondition messageTypeCondition1{ VersionsCondition::Greater, version };
     const MessageTypeCondition messageTypeCondition2{ VersionsCondition::GreaterEqual, version };
@@ -73,8 +73,8 @@ void Network::MessageTypeConditionTesting::CompareTest()
     ASSERT_EQUAL(messageTypeCondition4.GetMinVersion(), 0);
     ASSERT_EQUAL(messageTypeCondition0.GetMinVersion(), 0);
 
-    ASSERT_EQUAL(messageTypeCondition1.GetMaxVersion(), gTCRETestingVersion);
-    ASSERT_EQUAL(messageTypeCondition2.GetMaxVersion(), gTCRETestingVersion);
+    ASSERT_EQUAL(messageTypeCondition1.GetMaxVersion(), gTcreTestingVersion);
+    ASSERT_EQUAL(messageTypeCondition2.GetMaxVersion(), gTcreTestingVersion);
     ASSERT_EQUAL(messageTypeCondition3.GetMaxVersion(), version);
     ASSERT_EQUAL(messageTypeCondition4.GetMaxVersion(), version);
     ASSERT_EQUAL(messageTypeCondition0.GetMaxVersion(), version - 1);
@@ -87,7 +87,7 @@ void Network::MessageTypeConditionTesting::CompareTest()
 
 void Network::MessageTypeConditionTesting::RangeTest()
 {
-    constexpr auto version = gTCRETestingVersion - 2;
+    constexpr auto version = gTcreTestingVersion - 2;
     const MessageTypeCondition messageTypeCondition{ version - 1, version + 1 };
 
     ASSERT_FALSE(messageTypeCondition.IsVersionsConform(version - 2));
@@ -102,7 +102,7 @@ void Network::MessageTypeConditionTesting::RangeTest()
 
 void Network::MessageTypeConditionTesting::SpecificTest()
 {
-    constexpr auto version = gTCRETestingVersion - 5;
+    constexpr auto version = gTcreTestingVersion - 5;
     const MessageTypeCondition messageTypeCondition{ std::set{ version - 2, version + 3 } };
 
     ASSERT_FALSE(messageTypeCondition.IsVersionsConform(version - 3));
@@ -121,11 +121,11 @@ void Network::MessageTypeConditionTesting::AllTest()
 {
     const MessageTypeCondition messageTypeCondition = MessageTypeCondition::CreateNullCondition();
 
-    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTCRETestingVersion - 3));
-    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTCRETestingVersion - 2));
-    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTCRETestingVersion - 1));
-    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTCRETestingVersion));
-    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTCRETestingVersion + 1));
-    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTCRETestingVersion + 2));
-    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTCRETestingVersion + 3));
+    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTcreTestingVersion - 3));
+    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTcreTestingVersion - 2));
+    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTcreTestingVersion - 1));
+    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTcreTestingVersion));
+    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTcreTestingVersion + 1));
+    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTcreTestingVersion + 2));
+    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTcreTestingVersion + 3));
 }

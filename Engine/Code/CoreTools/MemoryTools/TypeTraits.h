@@ -14,10 +14,11 @@
 
 #include <type_traits>
 
+/// 键入traits以支持用于数值计算的std::enable_if条件编译。
 namespace CoreTools
 {
     /// float, double或long double的IsArbitraryPrecision<T>::value是'false'。
-    /// 对于自定义类型，需要特化为'true'。
+    /// 对于自定义类型BSNumber、BSRational 和 QFNumber，需要特化为'true'。
     template <typename T>
     struct IsArbitraryPrecisionInternal : std::false_type
     {
@@ -29,6 +30,7 @@ namespace CoreTools
     };
 
     /// float, double或long double的HasDivisionOperator<T>::value是'true'。
+    /// 任意精度算术的实现可以在ArbitraryPrecision.h中找到。
     template <typename T>
     struct HasDivisionOperatorInternal : std::false_type
     {
@@ -90,6 +92,7 @@ namespace CoreTools
     /// template <typename Numeric, IsNotDivisionType<Numeric> = 0>
     /// Numeric MemberFunction(Numeric inputs)
     /// { Numeric computations without divisions }
+    /// 典型的示例是当Numeric为 BSNumber<*>（不支持除法）或Numeric是BSRational<*> 时（支持除法）。
     template <typename T>
     using IsDivisionType = std::enable_if_t<HasDivisionOperator<T>::value, int>;
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:26)
+/// 版本：1.0.0.7 (2024/03/05 17:16)
 
 #ifndef SYSTEM_ANDROID_ANDROID_WINDOW_FLAGS_H
 #define SYSTEM_ANDROID_ANDROID_WINDOW_FLAGS_H
@@ -24,9 +24,9 @@ namespace System
 {
     enum class WindowFormat
     {
-        RGBA8888 = WINDOW_FORMAT_RGBA_8888,
-        RGBX8888 = WINDOW_FORMAT_RGBX_8888,
-        RGB565 = WINDOW_FORMAT_RGB_565,
+        Rgba8888 = WINDOW_FORMAT_RGBA_8888,
+        RgbX8888 = WINDOW_FORMAT_RGBX_8888,
+        Rgb565 = WINDOW_FORMAT_RGB_565,
     };
 }
 
@@ -36,9 +36,9 @@ namespace System
 {
     enum class WindowFormat
     {
-        RGBA8888 = 1,
-        RGBX8888 = 2,
-        RGB565 = 4,
+        Rgba8888 = 1,
+        RgbX8888 = 2,
+        Rgb565 = 4,
     };
 }
 

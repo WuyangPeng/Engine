@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:12)
+/// 版本：1.0.0.7 (2024/03/02 23:04)
 
 #include "System/SystemExport.h"
 
@@ -15,7 +15,7 @@
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/OpenGL/OpenGLUtility.h"
 
-// OpenGL 1.1
+/// OpenGL 1.1
 namespace System
 {
     auto existsOpenGL11 = ExistsOpenGLExtensions::Exists;
@@ -26,14 +26,14 @@ namespace System
     {
         OPENGL_EXTERN void OPENGL_STDCALL glDrawArrays(GLenum mode, GLint first, GLsizei count);
         OPENGL_EXTERN void OPENGL_STDCALL glDrawElements(GLenum mode, GLsizei count, GLenum type, const void* indices);
-        OPENGL_EXTERN void OPENGL_STDCALL glGetPointerv(GLenum pname, void** params);
+        OPENGL_EXTERN void OPENGL_STDCALL glGetPointerv(GLenum pName, void** params);
         OPENGL_EXTERN void OPENGL_STDCALL glPolygonOffset(GLfloat factor, GLfloat units);
-        OPENGL_EXTERN void OPENGL_STDCALL glCopyTexImage1D(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border);
-        OPENGL_EXTERN void OPENGL_STDCALL glCopyTexImage2D(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border);
-        OPENGL_EXTERN void OPENGL_STDCALL glCopyTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width);
-        OPENGL_EXTERN void OPENGL_STDCALL glCopyTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height);
-        OPENGL_EXTERN void OPENGL_STDCALL glTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void* pixels);
-        OPENGL_EXTERN void OPENGL_STDCALL glTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels);
+        OPENGL_EXTERN void OPENGL_STDCALL glCopyTexImage1D(GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLint border);
+        OPENGL_EXTERN void OPENGL_STDCALL glCopyTexImage2D(GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border);
+        OPENGL_EXTERN void OPENGL_STDCALL glCopyTexSubImage1D(GLenum target, GLint level, GLint xOffset, GLint x, GLint y, GLsizei width);
+        OPENGL_EXTERN void OPENGL_STDCALL glCopyTexSubImage2D(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLint x, GLint y, GLsizei width, GLsizei height);
+        OPENGL_EXTERN void OPENGL_STDCALL glTexSubImage1D(GLenum target, GLint level, GLint xOffset, GLsizei width, GLenum format, GLenum type, const void* pixels);
+        OPENGL_EXTERN void OPENGL_STDCALL glTexSubImage2D(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels);
         OPENGL_EXTERN void OPENGL_STDCALL glBindTexture(GLenum target, GLuint texture);
         OPENGL_EXTERN void OPENGL_STDCALL glDeleteTextures(GLsizei n, const GLuint* textures);
         OPENGL_EXTERN void OPENGL_STDCALL glGenTextures(GLsizei n, GLuint* textures);
@@ -67,7 +67,7 @@ System::ExistsOpenGLExtensions System::IsExistsOpenGL11() noexcept
 
 void System::InitOpenGL11() noexcept
 {
-    if (OpenGLSystemVersion::Version11 <= System::GetOpenGLVersion())
+    if (OpenGLSystemVersion::Version11 <= GetOpenGLVersion())
     {
         existsOpenGL11 = ExistsOpenGLExtensions::Exists;
 

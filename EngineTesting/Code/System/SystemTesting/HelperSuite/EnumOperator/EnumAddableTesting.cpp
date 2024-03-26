@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 09:44)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/08 10:47)
 
 #include "EnumAddableTesting.h"
 #include "System/Helper/EnumOperator.h"
@@ -17,7 +17,7 @@
 System::EnumAddableTesting::EnumAddableTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, EnumAddableTesting)
@@ -46,14 +46,14 @@ void System::EnumAddableTesting::SignedOperatorTest()
     ASSERT_ENUM_EQUAL(number, SignedNumber::Three);
 }
 
-void System::EnumAddableTesting::SignedConstexprOperator0Test() noexcept
+void System::EnumAddableTesting::SignedConstexprOperator0Test() const noexcept
 {
     constexpr auto number = SignedNumber::NegativeThree + 6;
 
     static_assert(number == SignedNumber::Three);
 }
 
-void System::EnumAddableTesting::SignedConstexprOperator1Test() noexcept
+void System::EnumAddableTesting::SignedConstexprOperator1Test() const noexcept
 {
     constexpr auto number = 9 + SignedNumber::NegativeTwo;
 
@@ -69,14 +69,14 @@ void System::EnumAddableTesting::UnsignedOperatorTest()
     ASSERT_ENUM_EQUAL(number, Number::Seven);
 }
 
-void System::EnumAddableTesting::UnsignedConstexprOperator0Test() noexcept
+void System::EnumAddableTesting::UnsignedConstexprOperator0Test() const noexcept
 {
     constexpr auto number = Number::One + 7;
 
     static_assert(number == Number::Eight);
 }
 
-void System::EnumAddableTesting::UnsignedConstexprOperator1Test() noexcept
+void System::EnumAddableTesting::UnsignedConstexprOperator1Test() const noexcept
 {
     constexpr auto number = 6 + Number::Two;
 

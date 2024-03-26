@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 17:08)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/09 21:33)
 
 #include "LoadStringTesting.h"
 #include "System/DynamicLink/LoadResourceTools.h"
@@ -14,8 +14,6 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Toolset/System/ResourcesLibrary/resource.h"
-
-#include <array>
 
 using namespace std::literals;
 
@@ -29,24 +27,21 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, LoadStringTesting)
 
 void System::LoadStringTesting::DoRunUnitTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(LoadTestingLibrary);
+
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(FreeTestingLibrary);
 }
 
 void System::LoadStringTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(LoadTestingLibrary);
-
     ASSERT_NOT_THROW_EXCEPTION_0(LoadStringTest);
-
-    ASSERT_NOT_THROW_EXCEPTION_0(FreeTestingLibrary);
-
-    // SystemWindowsTesting有dllModule为instance的测试。
 }
 
 void System::LoadStringTesting::LoadStringTest()
 {
-    using BufferType = std::array<DynamicLinkCharType, gMaxPath>;
-    BufferType stringTableValue{};
+    DynamicLinkCharBufferType stringTableValue{};
 
     const auto maxFileNameLength = LoadStringInLibrary(GetDllModule(), IDS_STRING1, stringTableValue.data(), gMaxPath - 1);
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 16:36)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 18:25)
 
 #include "ConsoleAttributeTesting.h"
 #include "System/Console/Flags/ConsoleColoursFlags.h"
@@ -16,38 +16,38 @@
 
 System::ConsoleAttributeTesting::ConsoleAttributeTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      textColourContainer{ TextColour::Black,
-                           TextColour::IntensifiedBlack,
-                           TextColour::Red,
-                           TextColour::IntensifiedRed,
-                           TextColour::Green,
-                           TextColour::IntensifiedGreen,
-                           TextColour::Blue,
-                           TextColour::IntensifiedBlue,
-                           TextColour::Yellow,
-                           TextColour::IntensifiedYellow,
-                           TextColour::Cyan,
-                           TextColour::IntensifiedCyan,
-                           TextColour::Magenta,
-                           TextColour::IntensifiedMagenta,
-                           TextColour::White,
-                           TextColour::IntensifiedWhite },
-      backgroundColourContainer{ BackgroundColour::Black,
-                                 BackgroundColour::IntensifiedBlack,
-                                 BackgroundColour::Red,
-                                 BackgroundColour::IntensifiedRed,
-                                 BackgroundColour::Green,
-                                 BackgroundColour::IntensifiedGreen,
-                                 BackgroundColour::Blue,
-                                 BackgroundColour::IntensifiedBlue,
-                                 BackgroundColour::Yellow,
-                                 BackgroundColour::IntensifiedYellow,
-                                 BackgroundColour::Cyan,
-                                 BackgroundColour::IntensifiedCyan,
-                                 BackgroundColour::Magenta,
-                                 BackgroundColour::IntensifiedMagenta,
-                                 BackgroundColour::White,
-                                 BackgroundColour::IntensifiedWhite },
+      textColours{ TextColour::Black,
+                   TextColour::IntensifiedBlack,
+                   TextColour::Red,
+                   TextColour::IntensifiedRed,
+                   TextColour::Green,
+                   TextColour::IntensifiedGreen,
+                   TextColour::Blue,
+                   TextColour::IntensifiedBlue,
+                   TextColour::Yellow,
+                   TextColour::IntensifiedYellow,
+                   TextColour::Cyan,
+                   TextColour::IntensifiedCyan,
+                   TextColour::Magenta,
+                   TextColour::IntensifiedMagenta,
+                   TextColour::White,
+                   TextColour::IntensifiedWhite },
+      backgroundColours{ BackgroundColour::Black,
+                         BackgroundColour::IntensifiedBlack,
+                         BackgroundColour::Red,
+                         BackgroundColour::IntensifiedRed,
+                         BackgroundColour::Green,
+                         BackgroundColour::IntensifiedGreen,
+                         BackgroundColour::Blue,
+                         BackgroundColour::IntensifiedBlue,
+                         BackgroundColour::Yellow,
+                         BackgroundColour::IntensifiedYellow,
+                         BackgroundColour::Cyan,
+                         BackgroundColour::IntensifiedCyan,
+                         BackgroundColour::Magenta,
+                         BackgroundColour::IntensifiedMagenta,
+                         BackgroundColour::White,
+                         BackgroundColour::IntensifiedWhite },
       consoleCommons{ ConsoleCommon::Default,
                       ConsoleCommon::LeadingByte,
                       ConsoleCommon::TrailingByte,
@@ -56,9 +56,9 @@ System::ConsoleAttributeTesting::ConsoleAttributeTesting(const OStreamShared& st
                       ConsoleCommon::GridRVertical,
                       ConsoleCommon::ReverseVideo,
                       ConsoleCommon::Underscore,
-                      ConsoleCommon::SbcsDbcs },
+                      ConsoleCommon::SingleByteCharacterSetDoubleByteCharacterSet },
       randomEngine{ GetEngineRandomSeed() },
-      maxSize{ CoreTools::MaxElement<size_t>({ GetStandardHandleSize(), textColourContainer.size(), backgroundColourContainer.size(), consoleCommons.size() }) }
+      maxSize{ CoreTools::MaxElement({ GetStandardHandleSize(), textColours.size(), backgroundColours.size(), consoleCommons.size() }) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -69,8 +69,8 @@ void System::ConsoleAttributeTesting::RandomShuffleConsoleFlags()
 {
     ASSERT_NOT_THROW_EXCEPTION_1(RandomShuffleStandardHandle, randomEngine);
 
-    std::ranges::shuffle(textColourContainer, randomEngine);
-    std::ranges::shuffle(backgroundColourContainer, randomEngine);
+    std::ranges::shuffle(textColours, randomEngine);
+    std::ranges::shuffle(backgroundColours, randomEngine);
     std::ranges::shuffle(consoleCommons, randomEngine);
 }
 
@@ -85,14 +85,14 @@ System::TextColour System::ConsoleAttributeTesting::GetTextColour(size_t index) 
 {
     SYSTEM_CLASS_IS_VALID_CONST_1;
 
-    return textColourContainer.at(index % textColourContainer.size());
+    return textColours.at(index % textColours.size());
 }
 
 System::BackgroundColour System::ConsoleAttributeTesting::GetBackgroundColour(size_t index) const
 {
     SYSTEM_CLASS_IS_VALID_CONST_1;
 
-    return backgroundColourContainer.at(index % backgroundColourContainer.size());
+    return backgroundColours.at(index % backgroundColours.size());
 }
 
 System::ConsoleCommon System::ConsoleAttributeTesting::GetConsoleCommon(size_t index) const
@@ -106,14 +106,14 @@ bool System::ConsoleAttributeTesting::HasTextColour(TextColour textColour) const
 {
     SYSTEM_CLASS_IS_VALID_CONST_1;
 
-    return std::ranges::find(textColourContainer, textColour) != textColourContainer.cend();
+    return std::ranges::find(textColours, textColour) != textColours.cend();
 }
 
 bool System::ConsoleAttributeTesting::HasBackgroundColour(BackgroundColour backgroundColour) const
 {
     SYSTEM_CLASS_IS_VALID_CONST_1;
 
-    return std::ranges::find(backgroundColourContainer, backgroundColour) != backgroundColourContainer.cend();
+    return std::ranges::find(backgroundColours, backgroundColour) != backgroundColours.cend();
 }
 
 bool System::ConsoleAttributeTesting::HasConsoleCommon(ConsoleCommon consoleCommon) const

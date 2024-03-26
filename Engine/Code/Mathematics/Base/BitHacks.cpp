@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/26 09:54)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/04 14:21)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -13,19 +13,30 @@
 #include "Log2OfPowerOfTwoDetail.h"
 #include "ScaledFloatToInt.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 #include <gsl/util>
 
-int Mathematics::BitHacks::Log2OfPowerOfTwo(uint32_t powerOfTwo)
+uint32_t Mathematics::BitHacks::Log2OfPowerOfTwo(uint32_t powerOfTwo) noexcept
 {
-    const Mathematics::Log2OfPowerOfTwo log2{ powerOfTwo };
+    auto log2 = (powerOfTwo & 0xAAAAAAAAu) != 0 ? 1 : 0;
 
-    return log2.GetLog2();
+    log2 |= (((powerOfTwo & 0xFFFF0000u) != 0) ? 1 : 0) << 4;
+    log2 |= (((powerOfTwo & 0xFF00FF00u) != 0) ? 1 : 0) << 3;
+    log2 |= (((powerOfTwo & 0xF0F0F0F0u) != 0) ? 1 : 0) << 2;
+    log2 |= (((powerOfTwo & 0xCCCCCCCCu) != 0) ? 1 : 0) << 1;
+
+    return log2;
 }
 
-int Mathematics::BitHacks::Log2OfPowerOfTwo(int32_t powerOfTwo)
+int32_t Mathematics::BitHacks::Log2OfPowerOfTwo(int32_t powerOfTwo)
 {
-    return Log2OfPowerOfTwo(boost::numeric_cast<uint32_t>(powerOfTwo));
+    if (powerOfTwo < 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("无效输入。"s))
+    }
+
+    return boost::numeric_cast<int32_t>(Log2OfPowerOfTwo(boost::numeric_cast<uint32_t>(powerOfTwo)));
 }
 
 int Mathematics::BitHacks::Log2OfPowerOfTwo(uint64_t powerOfTwo) noexcept
@@ -112,14 +123,14 @@ int Mathematics::BitHacks::GetLeadingBit(int64_t value)
     return GetLeadingBit(boost::numeric_cast<uint64_t>(value));
 }
 
-int Mathematics::BitHacks::GetTrailingBit(uint32_t value)
+int Mathematics::BitHacks::GetTrailingBit(int32_t value)
 {
 #ifndef BIT_HACKS_BETTER
 
-    static const std::array trailingBitTable{ 0, 1, 28, 2, 29, 14, 24, 3,
-                                              30, 22, 20, 15, 25, 17, 4, 8,
-                                              31, 27, 13, 23, 21, 19, 16, 7,
-                                              26, 12, 18, 6, 11, 5, 10, 9 };
+    static constexpr std::array trailingBitTable{ 0, 1, 28, 2, 29, 14, 24, 3,
+                                                  30, 22, 20, 15, 25, 17, 4, 8,
+                                                  31, 27, 13, 23, 21, 19, 16, 7,
+                                                  26, 12, 18, 6, 11, 5, 10, 9 };
 
     const auto key = (gsl::narrow_cast<uint32_t>((value & -value) * 0x077CB531u)) >> 27;
 
@@ -127,14 +138,26 @@ int Mathematics::BitHacks::GetTrailingBit(uint32_t value)
 
 #else  // !BIT_HACKS_BETTER
 
-    return GetNumTrailingZeroBits(value);
+    return GetTrailingBit(boost::numeric_cast<uint32_t>(value));
 
 #endif  // BIT_HACKS_BETTER
 }
 
-int Mathematics::BitHacks::GetTrailingBit(int32_t value)
+int Mathematics::BitHacks::GetTrailingBit(uint32_t value)
 {
-    return GetTrailingBit(boost::numeric_cast<uint32_t>(value));
+#ifndef BIT_HACKS_BETTER
+
+    /// GetTrailingBit(int32_t)函数包含实际实现。
+    /// 如果要实现基于uint32_t的函数，
+    /// （value&-value）语句会生成一个编译器警告，
+    /// 警告否定一个无符号整数，这需要额外的逻辑来避免。
+    return GetTrailingBit(boost::numeric_cast<int32_t>(value));
+
+#else  // !BIT_HACKS_BETTER
+
+    return GetNumTrailingZeroBits(value);
+
+#endif  // BIT_HACKS_BETTER
 }
 
 int Mathematics::BitHacks::GetTrailingBit(int64_t value)
@@ -176,10 +199,12 @@ uint32_t Mathematics::BitHacks::RoundUpToPowerOfTwo(uint32_t value)
         if (const auto mask = (1 << leading);
             (value & ~mask) == 0)
         {
+            /// 值是二的幂
             return value;
         }
         else
         {
+            /// 四舍五入到二的幂
             if ((mask & 0x80000000u) == 0)
                 return (mask << 1);
             else

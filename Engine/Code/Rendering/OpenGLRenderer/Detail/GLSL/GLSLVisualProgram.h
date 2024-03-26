@@ -24,7 +24,7 @@ namespace Rendering
         using ClassType = GLSLVisualProgram;
         using ParentType = VisualProgramImpl;
 
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
 
     public:
         GLSLVisualProgram(const GLSLProgramHandle& programHandle, const GLSLShaderHandle& vertexShaderHandle, const GLSLShaderHandle& pixelShaderHandle, const GLSLShaderHandle& geometryShaderHandle);

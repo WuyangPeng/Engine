@@ -5,12 +5,11 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:44)
+/// 版本：1.0.0.7 (2024/03/04 15:58)
 
 #include "System/SystemExport.h"
 
 #include "HeapTools.h"
-#include "Using/HeapToolsUsing.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
@@ -35,10 +34,7 @@ bool System::DestroyProcessHeap(WindowsHandle heap) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::HeapDestroy(heap) != gFalse)
-        return true;
-    else
-        return false;
+    return ::HeapDestroy(heap) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -75,10 +71,7 @@ bool System::FreeProcessHeap(WindowsHandle heap, HeapCreate flags, WindowsVoidPt
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::HeapFree(heap, EnumCastUnderlying(flags), memory) != gFalse)
-        return true;
-    else
-        return false;
+    return ::HeapFree(heap, EnumCastUnderlying(flags), memory) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -108,10 +101,7 @@ bool System::ValidateProcessHeap(WindowsHandle heap, HeapCreate flags, WindowsVo
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::HeapValidate(heap, EnumCastUnderlying(flags), memory) != gFalse)
-        return true;
-    else
-        return false;
+    return ::HeapValidate(heap, EnumCastUnderlying(flags), memory) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

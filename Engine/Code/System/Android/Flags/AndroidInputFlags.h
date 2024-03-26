@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:25)
+/// 版本：1.0.0.7 (2024/03/05 17:10)
 
 #ifndef SYSTEM_ANDROID_ANDROID_INPUT_FLAGS_H
 #define SYSTEM_ANDROID_ANDROID_INPUT_FLAGS_H
@@ -134,9 +134,9 @@ namespace System
         VerticalScroll = AMOTION_EVENT_AXIS_VSCROLL,
         HorizontalScroll = AMOTION_EVENT_AXIS_HSCROLL,
         Z = AMOTION_EVENT_AXIS_Z,
-        RX = AMOTION_EVENT_AXIS_RX,
-        RY = AMOTION_EVENT_AXIS_RY,
-        RZ = AMOTION_EVENT_AXIS_RZ,
+        Rx = AMOTION_EVENT_AXIS_RX,
+        Ry = AMOTION_EVENT_AXIS_RY,
+        Rz = AMOTION_EVENT_AXIS_RZ,
         HatX = AMOTION_EVENT_AXIS_HAT_X,
         HatY = AMOTION_EVENT_AXIS_HAT_Y,
         LeftTrigger = AMOTION_EVENT_AXIS_LTRIGGER,
@@ -393,9 +393,9 @@ namespace System
         VerticalScroll = 9,
         HorizontalScroll = 10,
         Z = 11,
-        RX = 12,
-        RY = 13,
-        RZ = 14,
+        Rx = 12,
+        Ry = 13,
+        Rz = 14,
         HatX = 15,
         HatY = 16,
         LeftTrigger = 17,

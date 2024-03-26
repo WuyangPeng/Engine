@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 10:08)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/12 10:23)
 
 #include "VirtualQueryTesting.h"
 #include "System/MemoryTools/Flags/VirtualToolsFlags.h"
@@ -47,11 +47,16 @@ void System::VirtualQueryTesting::QueryTest()
     for (auto index = 0u; index < GetMaxSize(); ++index)
     {
         ASSERT_NOT_THROW_EXCEPTION_1(DoQueryTest, index);
-        ASSERT_NOT_THROW_EXCEPTION_1(DoQueryUseProcessTest, index);
     }
 }
 
 void System::VirtualQueryTesting::DoQueryTest(size_t index)
+{
+    ASSERT_NOT_THROW_EXCEPTION_1(MemoryProtectTest, index);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoQueryUseProcessTest, index);
+}
+
+void System::VirtualQueryTesting::MemoryProtectTest(size_t index)
 {
     const auto memoryProtect = GetMemoryProtect(index);
 

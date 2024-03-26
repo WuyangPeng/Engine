@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:17)
+/// 版本：1.0.0.7 (2024/03/05 16:38)
 
 #ifndef SYSTEM_DYNAMIC_LINK_LOAD_RESOURCE_TOOLS_H
 #define SYSTEM_DYNAMIC_LINK_LOAD_RESOURCE_TOOLS_H
@@ -18,10 +18,10 @@
 #include "System/SystemOutput/Fwd/SystemOutputDataFwd.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
-// 加载动态链接库资源的辅助函数。
+/// 加载动态链接库资源的辅助函数。
 namespace System
 {
-    // 调整了type和name的参数顺序，使两个函数使用相同的顺序。
+    /// 调整了type和name的参数顺序，使两个函数使用相同的顺序。
     NODISCARD DynamicLinkResource SYSTEM_DEFAULT_DECLARE FindResourceInLibrary(DynamicLinkModule module,
                                                                                const DynamicLinkCharType* type,
                                                                                const DynamicLinkCharType* name) noexcept;

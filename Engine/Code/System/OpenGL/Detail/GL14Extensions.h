@@ -18,7 +18,6 @@
 namespace System
 {
     /// OpenGL 1.4
-
     SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL14() noexcept;
 
     void InitOpenGL14() noexcept;

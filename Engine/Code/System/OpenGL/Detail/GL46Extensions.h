@@ -18,7 +18,6 @@
 namespace System
 {
     /// OpenGL 4.6
-
     SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL46() noexcept;
 
     void InitOpenGL46() noexcept;

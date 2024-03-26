@@ -22,7 +22,7 @@ namespace System
     constexpr MessageBoxFlagsData defaultMessageBoxFlagsData{ MessageBoxType::YesNoCancel,
                                                               MessageBoxIcon::Error,
                                                               MessageBoxDefault::Button1,
-                                                              MessageBoxMode::ApplModal,
+                                                              MessageBoxMode::ApplicationModal,
                                                               MessageBoxMisc::TopMost };
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 13:45)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 17:09)
 
 #include "AndroidLooperTesting.h"
 #include "Detail/CallbackFunction.h"
@@ -16,8 +16,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::AndroidLooperTesting::AndroidLooperTesting(const OStreamShared& streamShared)
-    : ParentType{ streamShared }
+System::AndroidLooperTesting::AndroidLooperTesting(const OStreamShared& stream)
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -36,7 +36,7 @@ void System::AndroidLooperTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(AndroidLooperTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AndroidLooperPollTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AndroidLooperWakeTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(AndroidLooperFdTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(AndroidLooperFileDescriptorTest);
 }
 
 void System::AndroidLooperTesting::AndroidLooperForThreadTest()
@@ -49,7 +49,7 @@ void System::AndroidLooperTesting::AndroidLooperPrepareTest()
     ASSERT_EQUAL_NULL_PTR(AndroidLooperPrepare(0));
 }
 
-void System::AndroidLooperTesting::AndroidLooperTest() noexcept
+void System::AndroidLooperTesting::AndroidLooperTest() const noexcept
 {
     AndroidLooper looper{};
     AndroidLooperAcquire(&looper);
@@ -68,17 +68,17 @@ void System::AndroidLooperTesting::AndroidLooperPollTest()
     ASSERT_TRUE(((result & AndroidLooperEvent::Input) == AndroidLooperEvent::Input) || result == AndroidLooperEvent::Null);
 }
 
-void System::AndroidLooperTesting::AndroidLooperWakeTest() noexcept
+void System::AndroidLooperTesting::AndroidLooperWakeTest() const noexcept
 {
     AndroidLooper* looper{ nullptr };
 
     AndroidLooperWake(looper);
 }
 
-void System::AndroidLooperTesting::AndroidLooperFdTest()
+void System::AndroidLooperTesting::AndroidLooperFileDescriptorTest()
 {
     AndroidLooper looper{};
 
-    ASSERT_EQUAL(AndroidLooperAddFd(&looper, 0, LooperId::Main, AndroidLooperEvent::Error, Android::Looper::CallbackFunction, nullptr), 0);
+    ASSERT_EQUAL(AndroidLooperAddFileDescriptor(&looper, 0, LooperId::Main, AndroidLooperEvent::Error, Android::Looper::CallbackFunction, nullptr), 0);
     ASSERT_EQUAL(AndroidLooperRemoveFd(&looper, 0), 0);
 }

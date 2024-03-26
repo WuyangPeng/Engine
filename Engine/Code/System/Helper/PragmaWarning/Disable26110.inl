@@ -5,9 +5,9 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:50)
+/// 版本：1.0.0.7 (2024/03/04 17:04)
 
-// 警告：调用函数ReleaseSRWLockExclusive之前，调用者未能持有锁slimReaderWriterLock。
+/// 警告：调用函数ReleaseSRWLockExclusive之前，调用者未能持有锁slimReaderWriterLock。
 
 #if defined(TCRE_USE_MSVC)
 

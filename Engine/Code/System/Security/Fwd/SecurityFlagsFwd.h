@@ -14,39 +14,34 @@
 
 namespace System
 {
-    // AccessCheck
+    /// AccessCheck
     enum class AccessGenericMask;
 
-    // AddAccess
+    /// AddAccess
     enum class SpecificAccess;
 
-    // CreateSecurity
+    /// CreateSecurity
     enum class SecurityRequestedInformation : uint32_t;
     enum class SecurityAutoInherit;
 
-    // SecurityAce
+    /// SecurityAce
     enum class ControlAceInheritance;
     enum class MandatoryPolicy;
 
-    // SecurityAcl
+    /// SecurityAcl
     enum class AccessControlListRevision;
 
-    // SecurityBase
+    /// SecurityBase
     enum class SecurityTokenAttributesPrivilege : uint32_t;
     enum class SecurityTokenAttributesGroup : uint32_t;
     enum class SpecifiesAdditionalPrivilegeOptions;
 
-    // SecurityDescriptor
+    /// SecurityDescriptor
     enum class InitializeSecurityDescriptorRevision;
     enum class SecurityDescriptorControlBits;
     enum class SecurityDescriptorRmControlReturn;
 
-    // SecuritySid
-    enum class MandatoryLabelAuthority;
-    enum class WellKnownAliases;
-    enum class WellKnownSecurity;
-
-    // LookupPrivilegeName
+    /// LookupPrivilegeName
     enum class LookupPrivilegeNameDescription;
 }
 

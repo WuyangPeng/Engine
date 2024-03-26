@@ -38,7 +38,7 @@ void CoreTools::FormatErrorMessageImpl::InitMessage() noexcept
 
 void CoreTools::FormatErrorMessageImpl::AgainInitMessage() noexcept
 {
-    const ConstDynamicLinkModule dynamicLinkModule{ System::LoadDynamicLibrary(DYNAMIC_LINK_TEXT("netmsg.dll"), System::LoadLibraryType::DontResolveDllReferences) };
+    const ConstDynamicLinkModule dynamicLinkModule{ System::LoadDynamicLibrary(DYNAMIC_LINK_TEXT("netmsg.dll"), System::LoadLibraryType::DoNotResolveDllReferences) };
 
     InitNetworkMessage(dynamicLinkModule);
 }

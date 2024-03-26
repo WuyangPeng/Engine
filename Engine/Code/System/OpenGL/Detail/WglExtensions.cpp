@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:23)
+/// 版本：1.0.0.7 (2024/03/02 23:20)
 
 #include "System/SystemExport.h"
 
@@ -148,30 +148,30 @@ System::WindowsBool System::WglCopyContext(OpenGLRcHandle hGlRcSrc, OpenGLRcHand
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::OpenGLRcHandle System::WglCreateContext(WindowsHdc hDc) noexcept
+System::OpenGLRcHandle System::WglCreateContext(WindowsHdc hdc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::wglCreateContext(hDc);
+    return ::wglCreateContext(hdc);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDc);
+    UnusedFunction(hdc);
 
     return nullptr;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::OpenGLRcHandle System::WglCreateLayerContext(WindowsHdc hDc, int level) noexcept
+System::OpenGLRcHandle System::WglCreateLayerContext(WindowsHdc hdc, int level) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::wglCreateLayerContext(hDc, level);
+    return ::wglCreateLayerContext(hdc, level);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDc, level);
+    UnusedFunction(hdc, level);
 
     return nullptr;
 
@@ -193,15 +193,15 @@ System::WindowsBool System::WglDeleteContext(OpenGLRcHandle oldContext) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglDescribeLayerPlane(WindowsHdc hDc, int pixelFormat, int layerPlane, WindowsUInt bytes, LayerPlaneDescriptor* layerPlaneDescriptor) noexcept
+System::WindowsBool System::WglDescribeLayerPlane(WindowsHdc hdc, int pixelFormat, int layerPlane, WindowsUInt bytes, LayerPlaneDescriptor* layerPlaneDescriptor) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::wglDescribeLayerPlane(hDc, pixelFormat, layerPlane, bytes, layerPlaneDescriptor);
+    return ::wglDescribeLayerPlane(hdc, pixelFormat, layerPlane, bytes, layerPlaneDescriptor);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDc, pixelFormat, layerPlane, bytes, layerPlaneDescriptor);
+    UnusedFunction(hdc, pixelFormat, layerPlane, bytes, layerPlaneDescriptor);
 
     return gFalse;
 
@@ -264,15 +264,15 @@ System::OpenGLProc System::WglGetProcAddress(const char* proc) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::WglMakeCurrent(WindowsHdc hDc, OpenGLRcHandle newContext) noexcept
+System::WindowsBool System::WglMakeCurrent(WindowsHdc hdc, OpenGLRcHandle newContext) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::wglMakeCurrent(hDc, newContext);
+    return ::wglMakeCurrent(hdc, newContext);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hDc, newContext);
+    UnusedFunction(hdc, newContext);
 
     return gFalse;
 
@@ -429,9 +429,9 @@ System::WindowsBool System::WglUseFontOutlinesW(WindowsHdc hdc, WindowsDWord fir
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// ARB 扩展
+/// ARB 扩展
 
-// WGL_ARB_buffer_region
+/// WGL_ARB_buffer_region
 
 namespace System
 {
@@ -535,7 +535,7 @@ System::WindowsBool System::WglRestoreBufferRegionARB(WindowsHandle region, int 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_ARB_context_flush_control
+/// WGL_ARB_context_flush_control
 
 namespace System
 {
@@ -567,7 +567,7 @@ void System::InitWglArbContextFlushControl()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_ARB_create_context
+/// WGL_ARB_create_context
 
 namespace System
 {
@@ -622,7 +622,7 @@ System::OpenGLRcHandle System::WglCreateContextAttribSArb(WindowsHdc hdc, OpenGL
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_ARB_create_context_no_error
+/// WGL_ARB_create_context_no_error
 
 namespace System
 {
@@ -686,7 +686,7 @@ void System::InitWglArbCreateContextProfile()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_ARB_create_context_robustness
+/// WGL_ARB_create_context_robustness
 
 namespace System
 {
@@ -718,7 +718,7 @@ void System::InitWglArbCreateContextRobustness()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_ARB_extensions_string
+/// WGL_ARB_extensions_string
 
 namespace System
 {
@@ -773,7 +773,7 @@ const char* System::WglGetExtensionsStringARB(WindowsHdc hdc) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_ARB_framebuffer_sRGB
+/// WGL_ARB_framebuffer_sRGB
 
 namespace System
 {
@@ -805,7 +805,7 @@ void System::InitWglArbFrameBuffersRGB()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_ARB_make_current_read
+/// WGL_ARB_make_current_read
 
 namespace System
 {
@@ -875,16 +875,16 @@ System::WindowsHdc System::WglGetCurrentReadDcARB() noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_ARB_multisample
+/// WGL_ARB_multisample
 
 namespace System
 {
-    auto existsWglArbMultisample = ExistsOpenGLExtensions::Unknown;
+    auto existsWglArbMultiSample = ExistsOpenGLExtensions::Unknown;
 }
 
 System::ExistsOpenGLExtensions System::IsExistsWglArbMultiSample() noexcept
 {
-    return existsWglArbMultisample;
+    return existsWglArbMultiSample;
 }
 
 void System::InitWglArbMultiSample()
@@ -893,21 +893,21 @@ void System::InitWglArbMultiSample()
 
     if (SupportsWglExtension("WGL_ARB_multisample") || IsOpenGLSupportsExtension("WGL_ARB_multisample"))
     {
-        existsWglArbMultisample = ExistsOpenGLExtensions::Exists;
+        existsWglArbMultiSample = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglArbMultisample = ExistsOpenGLExtensions::NotExist;
+        existsWglArbMultiSample = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglArbMultisample = ExistsOpenGLExtensions::NotExist;
+    existsWglArbMultiSample = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_ARB_pbuffer
+/// WGL_ARB_pbuffer
 
 namespace System
 {
@@ -1030,7 +1030,7 @@ System::WindowsBool System::WglQueryPBufferARB(WglHpBufferArb hPBuffer, int attr
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_ARB_pixel_format
+/// WGL_ARB_pixel_format
 
 namespace System
 {
@@ -1119,7 +1119,7 @@ System::WindowsBool System::WglChoosePixelFormatARB(WindowsHdc hdc, const int* p
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_ARB_pixel_format_float
+/// WGL_ARB_pixel_format_float
 
 namespace System
 {
@@ -1151,7 +1151,7 @@ void System::InitWglArbPixelFormatFloat()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_ARB_render_texture
+/// WGL_ARB_render_texture
 
 namespace System
 {
@@ -1240,7 +1240,7 @@ System::WindowsBool System::WglSetPBufferAttribARB(WglHpBufferArb hPBuffer, cons
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_ARB_robustness_application_isolation
+/// WGL_ARB_robustness_application_isolation
 
 namespace System
 {
@@ -1272,7 +1272,7 @@ void System::InitWglArbRobustnessApplicationIsolation()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_ARB_robustness_share_group_isolation
+/// WGL_ARB_robustness_share_group_isolation
 
 namespace System
 {
@@ -1304,18 +1304,18 @@ void System::InitWglArbRobustnessShareGroupIsolation()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// 3DFX 扩展
+/// 3DFX 扩展
 
-// WGL_3DFX_multisample
+/// WGL_3DFX_multisample
 
 namespace System
 {
-    auto existsWgl3DFXMultisample = ExistsOpenGLExtensions::Unknown;
+    auto existsWgl3DFXMultiSample = ExistsOpenGLExtensions::Unknown;
 }
 
 System::ExistsOpenGLExtensions System::IsExistsWgl3DfxMultiSample() noexcept
 {
-    return existsWgl3DFXMultisample;
+    return existsWgl3DFXMultiSample;
 }
 
 void System::InitWgl3DfxMultiSample()
@@ -1324,23 +1324,23 @@ void System::InitWgl3DfxMultiSample()
 
     if (SupportsWglExtension("WGL_3DFX_multisample") || IsOpenGLSupportsExtension("WGL_3DFX_multisample"))
     {
-        existsWgl3DFXMultisample = ExistsOpenGLExtensions::Exists;
+        existsWgl3DFXMultiSample = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWgl3DFXMultisample = ExistsOpenGLExtensions::NotExist;
+        existsWgl3DFXMultiSample = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWgl3DFXMultisample = ExistsOpenGLExtensions::NotExist;
+    existsWgl3DFXMultiSample = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// 3DL 扩展
+/// 3DL 扩展
 
-// WGL_3DL_stereo_control
+/// WGL_3DL_stereo_control
 
 namespace System
 {
@@ -1395,9 +1395,9 @@ System::WindowsBool System::WglSetStereoEmitterState3Dl(WindowsHdc hdC, WindowsU
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// AMD 扩展
+/// AMD 扩展
 
-// WGL_AMD_gpu_association
+/// WGL_AMD_gpu_association
 
 namespace System
 {
@@ -1584,9 +1584,9 @@ void System::WglBlitContextFrameBufferAMD(OpenGLRcHandle dstCtx, GLint srcX0, GL
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// ATI 扩展
+/// ATI 扩展
 
-// WGL_ATI_pixel_format_float
+/// WGL_ATI_pixel_format_float
 
 namespace System
 {
@@ -1618,7 +1618,7 @@ void System::InitWglATIPixelFormatFloat()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_ATI_render_texture_rectangle
+/// WGL_ATI_render_texture_rectangle
 
 namespace System
 {
@@ -1650,18 +1650,18 @@ void System::InitWglATIRenderTextureRectangle()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// EXT 扩展
+/// EXT 扩展
 
-// WGL_EXT_colorspace
+/// WGL_EXT_colorspace
 
 namespace System
 {
-    auto existsWglExtColorspace = ExistsOpenGLExtensions::Unknown;
+    auto existsWglExtColorSpace = ExistsOpenGLExtensions::Unknown;
 }
 
 System::ExistsOpenGLExtensions System::IsExistsWglExtColorSpace() noexcept
 {
-    return existsWglExtColorspace;
+    return existsWglExtColorSpace;
 }
 
 void System::InitWglExtColorSpace()
@@ -1670,21 +1670,21 @@ void System::InitWglExtColorSpace()
 
     if (SupportsWglExtension("WGL_EXT_colorspace") || IsOpenGLSupportsExtension("WGL_EXT_colorspace"))
     {
-        existsWglExtColorspace = ExistsOpenGLExtensions::Exists;
+        existsWglExtColorSpace = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglExtColorspace = ExistsOpenGLExtensions::NotExist;
+        existsWglExtColorSpace = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglExtColorspace = ExistsOpenGLExtensions::NotExist;
+    existsWglExtColorSpace = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_EXT_create_context_es2_profile
+/// WGL_EXT_create_context_es2_profile
 
 namespace System
 {
@@ -1716,7 +1716,7 @@ void System::InitWglExtCreateContextEs2Profile()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_EXT_create_context_es_profile
+/// WGL_EXT_create_context_es_profile
 
 namespace System
 {
@@ -1748,7 +1748,7 @@ void System::InitWglExtCreateContextEsProfile()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_EXT_depth_float
+/// WGL_EXT_depth_float
 
 namespace System
 {
@@ -1780,7 +1780,7 @@ void System::InitWglExtDepthFloat()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_EXT_display_color_table
+/// WGL_EXT_display_color_table
 
 namespace System
 {
@@ -1884,7 +1884,7 @@ void System::WglDestroyDisplayColorTableEXT(GLushort id) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_EXT_extensions_string
+/// WGL_EXT_extensions_string
 
 namespace System
 {
@@ -1937,16 +1937,16 @@ const char* System::WglGetExtensionsStringEXT() noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_EXT_framebuffer_sRGB
+/// WGL_EXT_framebuffer_sRGB
 
 namespace System
 {
-    auto existsWglExtFramebufferSRGB = ExistsOpenGLExtensions::Unknown;
+    auto existsWglExtFrameBuffersRGB = ExistsOpenGLExtensions::Unknown;
 }
 
 System::ExistsOpenGLExtensions System::IsExistsWglExtFrameBuffersRGB() noexcept
 {
-    return existsWglExtFramebufferSRGB;
+    return existsWglExtFrameBuffersRGB;
 }
 
 void System::InitWglExtFrameBuffersRGB()
@@ -1955,21 +1955,21 @@ void System::InitWglExtFrameBuffersRGB()
 
     if (SupportsWglExtension("WGL_EXT_framebuffer_sRGB") || IsOpenGLSupportsExtension("WGL_EXT_framebuffer_sRGB"))
     {
-        existsWglExtFramebufferSRGB = ExistsOpenGLExtensions::Exists;
+        existsWglExtFrameBuffersRGB = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglExtFramebufferSRGB = ExistsOpenGLExtensions::NotExist;
+        existsWglExtFrameBuffersRGB = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglExtFramebufferSRGB = ExistsOpenGLExtensions::NotExist;
+    existsWglExtFrameBuffersRGB = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_EXT_make_current_read
+/// WGL_EXT_make_current_read
 
 namespace System
 {
@@ -2039,16 +2039,16 @@ System::WindowsHdc System::WglGetCurrentReadDcEXT() noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_EXT_multisample
+/// WGL_EXT_multisample
 
 namespace System
 {
-    auto existsWglExtMultisample = ExistsOpenGLExtensions::Unknown;
+    auto existsWglExtMultiSample = ExistsOpenGLExtensions::Unknown;
 }
 
 System::ExistsOpenGLExtensions System::IsExistsWglExtMultiSample() noexcept
 {
-    return existsWglExtMultisample;
+    return existsWglExtMultiSample;
 }
 
 void System::InitWglExtMultiSample()
@@ -2057,21 +2057,21 @@ void System::InitWglExtMultiSample()
 
     if (SupportsWglExtension("WGL_EXT_multisample") || IsOpenGLSupportsExtension("WGL_EXT_multisample"))
     {
-        existsWglExtMultisample = ExistsOpenGLExtensions::Exists;
+        existsWglExtMultiSample = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglExtMultisample = ExistsOpenGLExtensions::NotExist;
+        existsWglExtMultiSample = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglExtMultisample = ExistsOpenGLExtensions::NotExist;
+    existsWglExtMultiSample = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_EXT_pbuffer
+/// WGL_EXT_pbuffer
 
 namespace System
 {
@@ -2194,7 +2194,7 @@ System::WindowsBool System::WglQueryPBufferEXT(WglHpBufferExt hPBuffer, int attr
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_EXT_pixel_format
+/// WGL_EXT_pixel_format
 
 namespace System
 {
@@ -2283,7 +2283,7 @@ System::WindowsBool System::WglChoosePixelFormatEXT(WindowsHdc hdc, const int* p
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_EXT_pixel_format_packed_float
+/// WGL_EXT_pixel_format_packed_float
 
 namespace System
 {
@@ -2315,7 +2315,7 @@ void System::InitWglExtPixelFormatPackedFloat()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_EXT_swap_control
+/// WGL_EXT_swap_control
 
 namespace System
 {
@@ -2385,7 +2385,7 @@ int System::WglGetSwapIntervalEXT() noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_EXT_swap_control_tear
+/// WGL_EXT_swap_control_tear
 
 namespace System
 {
@@ -2417,9 +2417,9 @@ void System::InitWglExtSwapControlTear()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// I3D 扩展
+/// I3D 扩展
 
-// WGL_I3D_digital_video_control
+/// WGL_I3D_digital_video_control
 
 namespace System
 {
@@ -2491,7 +2491,7 @@ System::WindowsBool System::WglSetDigitalVideoParametersI3D(WindowsHdc hdc, int 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_I3D_gamma
+/// WGL_I3D_gamma
 
 namespace System
 {
@@ -2597,11 +2597,11 @@ System::WindowsBool System::WglSetGammaTableI3D(WindowsHdc hdc, int iEntries, co
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_I3D_genlock
+/// WGL_I3D_genlock
 
 namespace System
 {
-    auto existsWglI3DGenlock = ExistsOpenGLExtensions::Unknown;
+    auto existsWglI3DGenLock = ExistsOpenGLExtensions::Unknown;
 
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -2623,7 +2623,7 @@ namespace System
 
 System::ExistsOpenGLExtensions System::IsExistsWglI3DGenLock() noexcept
 {
-    return existsWglI3DGenlock;
+    return existsWglI3DGenLock;
 }
 
 void System::InitWglI3DGenLock()
@@ -2645,16 +2645,16 @@ void System::InitWglI3DGenLock()
         SYSTEM_GET_FUNCTION(wglGetGenlockSourceDelayI3D);
         SYSTEM_GET_FUNCTION(wglQueryGenlockMaxSourceDelayI3D);
 
-        existsWglI3DGenlock = ExistsOpenGLExtensions::Exists;
+        existsWglI3DGenLock = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglI3DGenlock = ExistsOpenGLExtensions::NotExist;
+        existsWglI3DGenLock = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglI3DGenlock = ExistsOpenGLExtensions::NotExist;
+    existsWglI3DGenLock = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -2839,7 +2839,7 @@ System::WindowsBool System::WglQueryGenLockMaxSourceDelayI3D(WindowsHdc hdc, Win
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_I3D_image_buffer
+/// WGL_I3D_image_buffer
 
 namespace System
 {
@@ -2945,7 +2945,7 @@ System::WindowsBool System::WglReleaseImageBufferEventsI3D(WindowsHdc hdc, const
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_I3D_swap_frame_lock
+/// WGL_I3D_swap_frame_lock
 
 namespace System
 {
@@ -3047,7 +3047,7 @@ System::WindowsBool System::WglQueryFrameLockMasterI3D(WindowsBool* flag) noexce
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_I3D_swap_frame_usage
+/// WGL_I3D_swap_frame_usage
 
 namespace System
 {
@@ -3149,13 +3149,13 @@ System::WindowsBool System::WglQueryFrameTrackingI3D(WindowsDWord* frameCount, W
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// NV 扩展
+/// NV 扩展
 
-// WGL_NV_DX_interop
+/// WGL_NV_DX_interop
 
 namespace System
 {
-    auto existsWglNVDXInterop = ExistsOpenGLExtensions::Unknown;
+    auto existsWglNvDxInterop = ExistsOpenGLExtensions::Unknown;
 
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3173,7 +3173,7 @@ namespace System
 
 System::ExistsOpenGLExtensions System::IsExistsWglNvDxInterop() noexcept
 {
-    return existsWglNVDXInterop;
+    return existsWglNvDxInterop;
 }
 
 void System::InitWglNvDxInterop()
@@ -3191,16 +3191,16 @@ void System::InitWglNvDxInterop()
         SYSTEM_GET_FUNCTION(wglDXLockObjectsNV);
         SYSTEM_GET_FUNCTION(wglDXUnlockObjectsNV);
 
-        existsWglNVDXInterop = ExistsOpenGLExtensions::Exists;
+        existsWglNvDxInterop = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglNVDXInterop = ExistsOpenGLExtensions::NotExist;
+        existsWglNvDxInterop = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglNVDXInterop = ExistsOpenGLExtensions::NotExist;
+    existsWglNvDxInterop = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -3325,16 +3325,16 @@ System::WindowsBool System::WglDxUnlockObjectsNv(WindowsHandle hDevice, GLint co
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_NV_DX_interop2
+/// WGL_NV_DX_interop2
 
 namespace System
 {
-    auto existsWglNVDXInterop2 = ExistsOpenGLExtensions::Unknown;
+    auto existsWglNvDxInterop2 = ExistsOpenGLExtensions::Unknown;
 }
 
 System::ExistsOpenGLExtensions System::IsExistsWglNvDxInterop2() noexcept
 {
-    return existsWglNVDXInterop2;
+    return existsWglNvDxInterop2;
 }
 
 void System::InitWglNvDxInterop2()
@@ -3343,25 +3343,25 @@ void System::InitWglNvDxInterop2()
 
     if (SupportsWglExtension("WGL_NV_DX_interop2") || IsOpenGLSupportsExtension("WGL_NV_DX_interop2"))
     {
-        existsWglNVDXInterop2 = ExistsOpenGLExtensions::Exists;
+        existsWglNvDxInterop2 = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglNVDXInterop2 = ExistsOpenGLExtensions::NotExist;
+        existsWglNvDxInterop2 = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglNVDXInterop2 = ExistsOpenGLExtensions::NotExist;
+    existsWglNvDxInterop2 = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_NV_copy_image
+/// WGL_NV_copy_image
 
 namespace System
 {
-    auto existsWglNVCopyImage = ExistsOpenGLExtensions::Unknown;
+    auto existsWglNvCopyImage = ExistsOpenGLExtensions::Unknown;
 
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3372,7 +3372,7 @@ namespace System
 
 System::ExistsOpenGLExtensions System::IsExistsWglNvCopyImage() noexcept
 {
-    return existsWglNVCopyImage;
+    return existsWglNvCopyImage;
 }
 
 void System::InitWglNvCopyImage()
@@ -3383,16 +3383,16 @@ void System::InitWglNvCopyImage()
     {
         SYSTEM_GET_FUNCTION(wglCopyImageSubDataNV);
 
-        existsWglNVCopyImage = ExistsOpenGLExtensions::Exists;
+        existsWglNvCopyImage = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglNVCopyImage = ExistsOpenGLExtensions::NotExist;
+        existsWglNvCopyImage = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglNVCopyImage = ExistsOpenGLExtensions::NotExist;
+    existsWglNvCopyImage = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -3412,11 +3412,11 @@ System::WindowsBool System::WglCopyImageSubDataNv(OpenGLRcHandle hSrcRc, GLuint 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_NV_delay_before_swap
+/// WGL_NV_delay_before_swap
 
 namespace System
 {
-    auto existsWglNVDelayBeforeSwap = ExistsOpenGLExtensions::Unknown;
+    auto existsWglNvDelayBeforeSwap = ExistsOpenGLExtensions::Unknown;
 
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3427,7 +3427,7 @@ namespace System
 
 System::ExistsOpenGLExtensions System::IsExistsWglNvDelayBeforeSwap() noexcept
 {
-    return existsWglNVDelayBeforeSwap;
+    return existsWglNvDelayBeforeSwap;
 }
 
 void System::InitWglNvDelayBeforeSwap()
@@ -3438,16 +3438,16 @@ void System::InitWglNvDelayBeforeSwap()
     {
         SYSTEM_GET_FUNCTION(wglDelayBeforeSwapNV);
 
-        existsWglNVDelayBeforeSwap = ExistsOpenGLExtensions::Exists;
+        existsWglNvDelayBeforeSwap = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglNVDelayBeforeSwap = ExistsOpenGLExtensions::NotExist;
+        existsWglNvDelayBeforeSwap = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglNVDelayBeforeSwap = ExistsOpenGLExtensions::NotExist;
+    existsWglNvDelayBeforeSwap = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -3467,16 +3467,16 @@ System::WindowsBool System::WglDelayBeforeSwapNv(WindowsHdc hDC, GLfloat seconds
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_NV_float_buffer
+/// WGL_NV_float_buffer
 
 namespace System
 {
-    auto existsWglNVFloatBuffer = ExistsOpenGLExtensions::Unknown;
+    auto existsWglNvFloatBuffer = ExistsOpenGLExtensions::Unknown;
 }
 
 System::ExistsOpenGLExtensions System::IsExistsWglNvFloatBuffer() noexcept
 {
-    return existsWglNVFloatBuffer;
+    return existsWglNvFloatBuffer;
 }
 
 void System::InitWglNvFloatBuffer()
@@ -3485,25 +3485,25 @@ void System::InitWglNvFloatBuffer()
 
     if (SupportsWglExtension("WGL_NV_float_buffer") || IsOpenGLSupportsExtension("WGL_NV_float_buffer"))
     {
-        existsWglNVFloatBuffer = ExistsOpenGLExtensions::Exists;
+        existsWglNvFloatBuffer = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglNVFloatBuffer = ExistsOpenGLExtensions::NotExist;
+        existsWglNvFloatBuffer = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglNVFloatBuffer = ExistsOpenGLExtensions::NotExist;
+    existsWglNvFloatBuffer = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_NV_gpu_affinity
+/// WGL_NV_gpu_affinity
 
 namespace System
 {
-    auto existsWglNVGpuAffinity = ExistsOpenGLExtensions::Unknown;
+    auto existsWglNvGpuAffinity = ExistsOpenGLExtensions::Unknown;
 
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3518,7 +3518,7 @@ namespace System
 
 System::ExistsOpenGLExtensions System::IsExistsWglNvGpuAffinity() noexcept
 {
-    return existsWglNVGpuAffinity;
+    return existsWglNvGpuAffinity;
 }
 
 void System::InitWglNvGpuAffinity()
@@ -3533,16 +3533,16 @@ void System::InitWglNvGpuAffinity()
         SYSTEM_GET_FUNCTION(wglEnumGpusFromAffinityDCNV);
         SYSTEM_GET_FUNCTION(wglDeleteDCNV);
 
-        existsWglNVGpuAffinity = ExistsOpenGLExtensions::Exists;
+        existsWglNvGpuAffinity = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglNVGpuAffinity = ExistsOpenGLExtensions::NotExist;
+        existsWglNvGpuAffinity = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglNVGpuAffinity = ExistsOpenGLExtensions::NotExist;
+    existsWglNvGpuAffinity = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -3622,16 +3622,16 @@ System::WindowsBool System::WglDeleteDcNv(WindowsHdc hdc) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_NV_multigpu_context
+/// WGL_NV_multigpu_context
 
 namespace System
 {
-    auto existsWglNVMultigpuContext = ExistsOpenGLExtensions::Unknown;
+    auto existsWglNVMultiGpuContext = ExistsOpenGLExtensions::Unknown;
 }
 
 System::ExistsOpenGLExtensions System::IsExistsWglNvMultiGpuContext() noexcept
 {
-    return existsWglNVMultigpuContext;
+    return existsWglNVMultiGpuContext;
 }
 
 void System::InitWglNvMultiGpuContext()
@@ -3640,30 +3640,30 @@ void System::InitWglNvMultiGpuContext()
 
     if (SupportsWglExtension("WGL_NV_multigpu_context") || IsOpenGLSupportsExtension("WGL_NV_multigpu_context"))
     {
-        existsWglNVMultigpuContext = ExistsOpenGLExtensions::Exists;
+        existsWglNVMultiGpuContext = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglNVMultigpuContext = ExistsOpenGLExtensions::NotExist;
+        existsWglNVMultiGpuContext = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglNVMultigpuContext = ExistsOpenGLExtensions::NotExist;
+    existsWglNVMultiGpuContext = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_NV_multisample_coverage
+/// WGL_NV_multisample_coverage
 
 namespace System
 {
-    auto existsWglNVMultisampleCoverage = ExistsOpenGLExtensions::Unknown;
+    auto existsWglNVMultiSampleCoverage = ExistsOpenGLExtensions::Unknown;
 }
 
 System::ExistsOpenGLExtensions System::IsExistsWglNvMultiSampleCoverage() noexcept
 {
-    return existsWglNVMultisampleCoverage;
+    return existsWglNVMultiSampleCoverage;
 }
 
 void System::InitWglNvMultiSampleCoverage()
@@ -3672,25 +3672,25 @@ void System::InitWglNvMultiSampleCoverage()
 
     if (SupportsWglExtension("WGL_NV_multisample_coverage") || IsOpenGLSupportsExtension("WGL_NV_multisample_coverage"))
     {
-        existsWglNVMultisampleCoverage = ExistsOpenGLExtensions::Exists;
+        existsWglNVMultiSampleCoverage = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglNVMultisampleCoverage = ExistsOpenGLExtensions::NotExist;
+        existsWglNVMultiSampleCoverage = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglNVMultisampleCoverage = ExistsOpenGLExtensions::NotExist;
+    existsWglNVMultiSampleCoverage = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_NV_present_video
+/// WGL_NV_present_video
 
 namespace System
 {
-    auto existsWglNVPresentVideo = ExistsOpenGLExtensions::Unknown;
+    auto existsWglNvPresentVideo = ExistsOpenGLExtensions::Unknown;
 
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3703,7 +3703,7 @@ namespace System
 
 System::ExistsOpenGLExtensions System::IsExistsWglNvPresentVideo() noexcept
 {
-    return existsWglNVPresentVideo;
+    return existsWglNvPresentVideo;
 }
 
 void System::InitWglNvPresentVideo()
@@ -3716,16 +3716,16 @@ void System::InitWglNvPresentVideo()
         SYSTEM_GET_FUNCTION(wglBindVideoDeviceNV);
         SYSTEM_GET_FUNCTION(wglQueryCurrentContextNV);
 
-        existsWglNVPresentVideo = ExistsOpenGLExtensions::Exists;
+        existsWglNvPresentVideo = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglNVPresentVideo = ExistsOpenGLExtensions::NotExist;
+        existsWglNvPresentVideo = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglNVPresentVideo = ExistsOpenGLExtensions::NotExist;
+    existsWglNvPresentVideo = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -3775,16 +3775,16 @@ System::WindowsBool System::WglQueryCurrentContextNv(int attribute, int* piValue
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_NV_render_depth_texture
+/// WGL_NV_render_depth_texture
 
 namespace System
 {
-    auto existsWglNVRenderDepthTexture = ExistsOpenGLExtensions::Unknown;
+    auto existsWglNvRenderDepthTexture = ExistsOpenGLExtensions::Unknown;
 }
 
 System::ExistsOpenGLExtensions System::IsExistsWglNvRenderDepthTexture() noexcept
 {
-    return existsWglNVRenderDepthTexture;
+    return existsWglNvRenderDepthTexture;
 }
 
 void System::InitWglNvRenderDepthTexture()
@@ -3793,30 +3793,30 @@ void System::InitWglNvRenderDepthTexture()
 
     if (SupportsWglExtension("WGL_NV_render_depth_texture") || IsOpenGLSupportsExtension("WGL_NV_render_depth_texture"))
     {
-        existsWglNVRenderDepthTexture = ExistsOpenGLExtensions::Exists;
+        existsWglNvRenderDepthTexture = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglNVRenderDepthTexture = ExistsOpenGLExtensions::NotExist;
+        existsWglNvRenderDepthTexture = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglNVRenderDepthTexture = ExistsOpenGLExtensions::NotExist;
+    existsWglNvRenderDepthTexture = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_NV_render_texture_rectangle
+/// WGL_NV_render_texture_rectangle
 
 namespace System
 {
-    auto existsWglNVRenderTextureRectangle = ExistsOpenGLExtensions::Unknown;
+    auto existsWglNvRenderTextureRectangle = ExistsOpenGLExtensions::Unknown;
 }
 
 System::ExistsOpenGLExtensions System::IsExistsWglNvRenderTextureRectangle() noexcept
 {
-    return existsWglNVRenderTextureRectangle;
+    return existsWglNvRenderTextureRectangle;
 }
 
 void System::InitWglNvRenderTextureRectangle()
@@ -3825,25 +3825,25 @@ void System::InitWglNvRenderTextureRectangle()
 
     if (SupportsWglExtension("WGL_NV_render_texture_rectangle") || IsOpenGLSupportsExtension("WGL_NV_render_texture_rectangle"))
     {
-        existsWglNVRenderTextureRectangle = ExistsOpenGLExtensions::Exists;
+        existsWglNvRenderTextureRectangle = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglNVRenderTextureRectangle = ExistsOpenGLExtensions::NotExist;
+        existsWglNvRenderTextureRectangle = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglNVRenderTextureRectangle = ExistsOpenGLExtensions::NotExist;
+    existsWglNvRenderTextureRectangle = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_NV_swap_group
+/// WGL_NV_swap_group
 
 namespace System
 {
-    auto existsWglNVSwapGroup = ExistsOpenGLExtensions::Unknown;
+    auto existsWglNvSwapGroup = ExistsOpenGLExtensions::Unknown;
 
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -3859,7 +3859,7 @@ namespace System
 
 System::ExistsOpenGLExtensions System::IsExistsWglNvSwapGroup() noexcept
 {
-    return existsWglNVSwapGroup;
+    return existsWglNvSwapGroup;
 }
 
 void System::InitWglNvSwapGroup()
@@ -3875,16 +3875,16 @@ void System::InitWglNvSwapGroup()
         SYSTEM_GET_FUNCTION(wglQueryFrameCountNV);
         SYSTEM_GET_FUNCTION(wglResetFrameCountNV);
 
-        existsWglNVSwapGroup = ExistsOpenGLExtensions::Exists;
+        existsWglNvSwapGroup = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglNVSwapGroup = ExistsOpenGLExtensions::NotExist;
+        existsWglNvSwapGroup = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglNVSwapGroup = ExistsOpenGLExtensions::NotExist;
+    existsWglNvSwapGroup = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -3979,7 +3979,7 @@ System::WindowsBool System::WglResetFrameCountNv(WindowsHdc hdc) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_NV_vertex_array_range
+/// WGL_NV_vertex_array_range
 
 namespace System
 {
@@ -4049,11 +4049,11 @@ void System::WglFreeMemoryNv(void* pointer) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_NV_video_capture
+/// WGL_NV_video_capture
 
 namespace System
 {
-    auto existsWglNVVideoCapture = ExistsOpenGLExtensions::Unknown;
+    auto existsWglNvVideoCapture = ExistsOpenGLExtensions::Unknown;
 
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -4068,7 +4068,7 @@ namespace System
 
 System::ExistsOpenGLExtensions System::IsExistsWglNvVideoCapture() noexcept
 {
-    return existsWglNVVideoCapture;
+    return existsWglNvVideoCapture;
 }
 
 void System::InitWglNvVideoCapture()
@@ -4083,16 +4083,16 @@ void System::InitWglNvVideoCapture()
         SYSTEM_GET_FUNCTION(wglQueryVideoCaptureDeviceNV);
         SYSTEM_GET_FUNCTION(wglReleaseVideoCaptureDeviceNV);
 
-        existsWglNVVideoCapture = ExistsOpenGLExtensions::Exists;
+        existsWglNvVideoCapture = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglNVVideoCapture = ExistsOpenGLExtensions::NotExist;
+        existsWglNvVideoCapture = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglNVVideoCapture = ExistsOpenGLExtensions::NotExist;
+    existsWglNvVideoCapture = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -4172,11 +4172,11 @@ System::WindowsBool System::WglReleaseVideoCaptureDeviceNv(WindowsHdc hdc, WglHV
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// WGL_NV_video_output
+/// WGL_NV_video_output
 
 namespace System
 {
-    auto existsWglNVVideoOutput = ExistsOpenGLExtensions::Unknown;
+    auto existsWglNvVideoOutput = ExistsOpenGLExtensions::Unknown;
 
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -4192,7 +4192,7 @@ namespace System
 
 System::ExistsOpenGLExtensions System::IsExistsWglNvVideoOutput() noexcept
 {
-    return existsWglNVVideoOutput;
+    return existsWglNvVideoOutput;
 }
 
 void System::InitWglNvVideoOutput()
@@ -4208,16 +4208,16 @@ void System::InitWglNvVideoOutput()
         SYSTEM_GET_FUNCTION(wglSendPbufferToVideoNV);
         SYSTEM_GET_FUNCTION(wglGetVideoInfoNV);
 
-        existsWglNVVideoOutput = ExistsOpenGLExtensions::Exists;
+        existsWglNvVideoOutput = ExistsOpenGLExtensions::Exists;
     }
     else
     {
-        existsWglNVVideoOutput = ExistsOpenGLExtensions::NotExist;
+        existsWglNvVideoOutput = ExistsOpenGLExtensions::NotExist;
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    existsWglNVVideoOutput = ExistsOpenGLExtensions::NotExist;
+    existsWglNvVideoOutput = ExistsOpenGLExtensions::NotExist;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -4312,9 +4312,9 @@ System::WindowsBool System::WglGetVideoInfoNv(WglHpVideoDev hpVideoDevice, unsig
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-// OML 扩展
+/// OML 扩展
 
-// WGL_OML_sync_control
+/// WGL_OML_sync_control
 
 namespace System
 {
@@ -4570,7 +4570,7 @@ bool System::SupportsWglExtension(const char* wglExtension)
         return false;
     }
 
-    const auto endPos = pos + StrLen(wglExtension);
+    const auto endPos = pos + StringLength(wglExtension);
 
     if (extension.size() <= endPos)
     {
@@ -4579,6 +4579,6 @@ bool System::SupportsWglExtension(const char* wglExtension)
 
     const auto end = extension.at(endPos);
 
-    // 扩展被发现,但确保它不是另一个扩展的合适子串。
+    /// 扩展被发现,但确保它不是另一个扩展的合适子串。
     return end == ' ' || end == 0 || end == '\t' || end == '\n';
 }

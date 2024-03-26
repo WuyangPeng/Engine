@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:13)
+/// 版本：1.0.0.7 (2024/03/04 17:26)
 
 #ifndef SYSTEM_HELPER_COMPAQ_CXX_H
 #define SYSTEM_HELPER_COMPAQ_CXX_H
 
 #ifdef _CRAYC
 
-    // Greenhills C 编译器设置：
+    /// Cray C++ 编译器设置：
 
     #ifndef SYSTEM_CPP_STANDARD
 
@@ -72,7 +72,7 @@
 
     #endif  // CRAY_VERSION < 80000
 
-    // 这些常量应该由编译器提供，至少在命令行上声明-hgnu时。
+    /// 这些常量应该由编译器提供，至少在命令行上声明-hgnu时。
     #ifndef __ATOMIC_RELAXED
 
         #define __ATOMIC_RELAXED 0

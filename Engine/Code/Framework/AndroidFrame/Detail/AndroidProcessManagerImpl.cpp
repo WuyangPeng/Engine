@@ -94,7 +94,7 @@ void Framework::AndroidProcessManagerImpl::Terminate()
 
 int Framework::AndroidProcessManagerImpl::HandleInput(AndroidApp* app, AndroidInputEvent* event)
 {
-    System::AndroidInputEventFacade androidInputEvent{ event };
+    const System::AndroidInputEventFacade androidInputEvent{ event };
 
     switch (const auto eventType = androidInputEvent.GetType();
             eventType)
@@ -140,7 +140,7 @@ void Framework::AndroidProcessManagerImpl::Display(AndroidApp* androidApp, int64
 int Framework::AndroidProcessManagerImpl::HandleKeyInput(AndroidApp* androidApp, AndroidInputEvent* event)
 {
     const auto handleKeyInputFunctionPointer = GetKeyHandleInputFunctionPointer();
-    System::AndroidInputEventFacade androidKeyEvent{ event };
+    const System::AndroidInputEventFacade androidKeyEvent{ event };
     const auto id = androidKeyEvent.GetAction();
 
     if (const auto iter = handleKeyInputFunctionPointer->find(id);
@@ -158,7 +158,7 @@ int Framework::AndroidProcessManagerImpl::HandleMotionInput(AndroidApp* androidA
 {
     const auto handleMotionInputFunctionPointer = GetMotionHandleInputFunctionPointer();
 
-    System::AndroidInputMotionEventFacade androidKeyEvent{ event };
+    const System::AndroidInputMotionEventFacade androidKeyEvent{ event };
     const auto id = androidKeyEvent.GetAction();
 
     if (const auto iter = handleMotionInputFunctionPointer->find(id);

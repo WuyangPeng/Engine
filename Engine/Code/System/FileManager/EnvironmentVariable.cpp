@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:04)
+/// 版本：1.0.0.7 (2024/03/05 09:30)
 
 #include "System/SystemExport.h"
 
@@ -38,20 +38,13 @@ bool System::GetEnvironment(const String& variableName, TChar*& environmentVaria
 
     #endif  // UNICODE
 
-    if (environmentVariable == nullptr)
-        return false;
-    else
-        return true;
+    return environmentVariable == nullptr;
 
 #else  // !TCRE_USE_GCC && !SYSTEM_PLATFORM_ANDROID
 
     size_t length{ 0 };
 
-    if (const auto error = _tdupenv_s(&environmentVariable, &length, variableName.c_str());
-        error != 0)
-        return false;
-    else
-        return true;
+    return _tdupenv_s(&environmentVariable, &length, variableName.c_str()) == 0;
 
 #endif  // ANDROID
 }

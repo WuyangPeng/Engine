@@ -1,6 +1,6 @@
 TODO Level 7
 
-1.0.0.6
+1.0.0.7
 
 1.（MemoryTools）完成MemoryTools非Windows平台的实现：VirtualTools、
 													 ViewOfFile、

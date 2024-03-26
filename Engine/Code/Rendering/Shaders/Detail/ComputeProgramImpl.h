@@ -26,7 +26,7 @@ namespace Rendering
         using ClassType = ComputeProgramImpl;
         using FactoryType = ComputeProgramFactory;
 
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
         using ShaderSharedPtr = std::shared_ptr<Shader>;
         using ConstShaderSharedPtr = std::shared_ptr<const Shader>;
         using ComputeProgramSharedPtr = std::shared_ptr<ComputeProgramImpl>;

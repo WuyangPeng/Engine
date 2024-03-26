@@ -25,7 +25,7 @@ Framework::WindowHCursor::WindowHCursor(const TChar* cursor) noexcept
 }
 
 Framework::WindowHCursor::WindowHCursor(HInstance instance, int cursor)
-    : hCursor{ System::LoadSystemCursor(instance, System::MakeIntreSource(boost::numeric_cast<System::WindowsWord>(cursor))) }
+    : hCursor{ System::LoadSystemCursor(instance, System::MakeIntResource(boost::numeric_cast<System::WindowsWord>(cursor))) }
 {
     CheckUpHCursor();
 

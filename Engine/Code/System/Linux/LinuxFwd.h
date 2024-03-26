@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:45)
+/// 版本：1.0.0.7 (2024/03/04 16:02)
 
 #ifndef SYSTEM_LINUX_FWD_H
 #define SYSTEM_LINUX_FWD_H

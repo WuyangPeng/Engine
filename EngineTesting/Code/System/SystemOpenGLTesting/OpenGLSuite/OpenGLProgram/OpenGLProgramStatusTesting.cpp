@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:26)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:46)
 
 #include "OpenGLProgramStatusTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -20,16 +20,16 @@
 System::OpenGLProgramStatusTesting::OpenGLProgramStatusTesting(const OStreamShared& stream)
     : ParentType{ stream },
       code{ "#version 400\n",
-            "uniform PVWMatrix\n",
+            "uniform ProjectionViewWorldMatrix\n",
             "{\n",
-            "     mat4 pvwMatrix;\n",
+            "     mat4 projectionViewWorldMatrix;\n",
             "};\n",
 
             "in vec3 modelPosition;\n",
 
             "void main()\n",
             "{\n",
-            "     gl_Position = pvwMatrix * vec4(modelPosition, 1.0f);\n",
+            "     gl_Position = projectionViewWorldMatrix * vec4(modelPosition, 1.0f);\n",
             "}\n" }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
@@ -57,7 +57,7 @@ void System::OpenGLProgramStatusTesting::ProgramStatusTest()
     ASSERT_NOT_THROW_EXCEPTION_1(DeleteGLProgramTest, programHandle);
 }
 
-void System::OpenGLProgramStatusTesting::DoProgramStatusTest(OpenGLUInt programHandle)
+void System::OpenGLProgramStatusTesting::DoProgramStatusTest(OpenGLUnsignedInt programHandle)
 {
     ASSERT_NOT_THROW_EXCEPTION_1(ProgramStatusFalseTest, programHandle);
 
@@ -65,23 +65,31 @@ void System::OpenGLProgramStatusTesting::DoProgramStatusTest(OpenGLUInt programH
 
     ASSERT_NOT_THROW_EXCEPTION_2(DoCreateGLShaderTest, shaderHandle, programHandle);
 
+    ASSERT_NOT_THROW_EXCEPTION_1(UseProgramTest, programHandle);
+
     ASSERT_NOT_THROW_EXCEPTION_1(DeleteGLShaderTest, shaderHandle);
 }
 
-void System::OpenGLProgramStatusTesting::ProgramStatusFalseTest(OpenGLUInt programHandle)
+void System::OpenGLProgramStatusTesting::ProgramStatusFalseTest(OpenGLUnsignedInt programHandle)
 {
     ASSERT_FALSE(GetGLProgram(programHandle, ProgramStatus::Link));
     ASSERT_FALSE(GetGLProgram(programHandle, ProgramStatus::Validate));
     ASSERT_FALSE(GetGLProgram(programHandle, ProgramStatus::Delete));
 }
 
-void System::OpenGLProgramStatusTesting::ValidateGLProgramTest(OpenGLUInt programHandle)
+void System::OpenGLProgramStatusTesting::ValidateGLProgramTest(OpenGLUnsignedInt programHandle)
 {
     ValidateGLProgram(programHandle);
     ASSERT_TRUE(GetGLProgram(programHandle, ProgramStatus::Validate));
 }
 
-void System::OpenGLProgramStatusTesting::DoCreateGLShaderTest(OpenGLUInt shaderHandle, OpenGLUInt programHandle)
+void System::OpenGLProgramStatusTesting::UseProgramTest(OpenGLUnsignedInt programHandle) const noexcept
+{
+    SetUseProgram(programHandle);
+    SetUseProgram(0);
+}
+
+void System::OpenGLProgramStatusTesting::DoCreateGLShaderTest(OpenGLUnsignedInt shaderHandle, OpenGLUnsignedInt programHandle)
 {
     SetGLShaderSource(shaderHandle, boost::numeric_cast<OpenGLSize>(code.size()), code.data(), nullptr);
 

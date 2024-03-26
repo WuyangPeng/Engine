@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:29)
+/// 版本：1.0.0.7 (2024/03/05 17:20)
 
 #include "System/SystemExport.h"
 
@@ -16,6 +16,7 @@
 
     #include "Flags/AndroidInputFlags.h"
     #include "Flags/AndroidNativeAppGlueFlags.h"
+    #include "System/Helper/PragmaWarning/NumericCast.h"
     #include "System/Windows/Flags/WindowsClassStyleFlags.h"
     #include "System/Windows/Flags/WindowsFlags.h"
     #include "System/Windows/Flags/WindowsPictorialFlags.h"
@@ -24,7 +25,7 @@
     #include "System/Windows/WindowsProcess.h"
     #include "System/Windows/WindowsRegister.h"
 
-    #include <gsl/util>
+    #include <map>
 
 #endif  // SYSTEM_PLATFORM_WIN32
 
@@ -57,14 +58,17 @@ namespace System
     AppCommand systemAppCommand = nullptr;
     InputEvent systemInputEvent = nullptr;
 
-    WindowsLResult SYSTEM_CALL_BACK AndroidProcess(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept;
+    WindowsLResult SYSTEM_CALL_BACK AndroidProcess(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam);
     NODISCARD WindowsClassEx GetWindowClass(const String& appName) noexcept;
     MAYBE_NULLPTR WindowsHWnd CreateSystemWindow(const String& appName);
 
-    NODISCARD WindowsLResult AppCommandEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept;
-    NODISCARD WindowsLResult KeyInputEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept;
-    NODISCARD WindowsLResult MotionInputEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept;
-    NODISCARD WindowsLResult Destroy(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept;
+    NODISCARD WindowsLResult AppCommandEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam);
+    NODISCARD WindowsLResult KeyInputEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam);
+    NODISCARD WindowsLResult MotionInputEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam);
+    NODISCARD WindowsLResult DestroyEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept;
+
+    using EventType = WindowsLResult (*)(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam);
+    using EventContainer = std::map<WindowsUInt, EventType>;
 }
 
 System::WindowsClassEx System::GetWindowClass(const String& appName) noexcept
@@ -90,9 +94,10 @@ System::WindowsClassEx System::GetWindowClass(const String& appName) noexcept
 System::WindowsHWnd System::CreateSystemWindow(const String& appName)
 {
     constexpr WindowsRect rect{ 0, 0, 800, 600 };
+    const auto windowsName = SYSTEM_TEXT("Android Virtual Window");
 
     const auto hWnd = CreateSystemWindow(appName,
-                                         SYSTEM_TEXT("Android Virtual Window"),
+                                         windowsName,
                                          WindowsStyles::Default,
                                          EnumCastUnderlying(WindowsPointUse::Default),
                                          EnumCastUnderlying(WindowsPointUse::Default),
@@ -138,54 +143,41 @@ System::WindowsHWnd System::CreateVirtualWindow(AndroidApp* androidApp, const St
     }
 }
 
-System::WindowsLResult SYSTEM_CALL_BACK System::AndroidProcess(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept
+System::WindowsLResult SYSTEM_CALL_BACK System::AndroidProcess(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam)
 {
-    switch (message)
+    static const EventContainer eventContainer{ { EnumCastUnderlying(AppCommandType::InitWindow), &AppCommandEvent },
+                                                { EnumCastUnderlying(AppCommandType::TermWindow), &AppCommandEvent },
+                                                { EnumCastUnderlying(AppCommandType::WindowResized), &AppCommandEvent },
+                                                { EnumCastUnderlying(AndroidKeyEventAction::Down), &KeyInputEvent },
+                                                { EnumCastUnderlying(AndroidKeyEventAction::Up), &KeyInputEvent },
+                                                { EnumCastUnderlying(AndroidMotionEventAction::Down), &MotionInputEvent },
+                                                { EnumCastUnderlying(AndroidMotionEventAction::Up), &MotionInputEvent },
+                                                { EnumCastUnderlying(AndroidMotionEventAction::Move), &MotionInputEvent },
+                                                { EnumCastUnderlying(AppCommandType::Destroy), &DestroyEvent } };
+
+    if (const auto iter = eventContainer.find(message);
+        iter != eventContainer.cend())
     {
-        case EnumCastUnderlying(AppCommandType::InitWindow):
-        case EnumCastUnderlying(AppCommandType::TermWindow):
-        case EnumCastUnderlying(AppCommandType::WindowResized):
-        {
-            return AppCommandEvent(hWnd, message, wParam, lParam);
-        }
-
-        case EnumCastUnderlying(AndroidKeyEventAction::Down):
-        case EnumCastUnderlying(AndroidKeyEventAction::Up):
-        {
-            return KeyInputEvent(hWnd, message, wParam, lParam);
-        }
-
-        case EnumCastUnderlying(AndroidMotionEventAction::Down):
-        case EnumCastUnderlying(AndroidMotionEventAction::Up):
-        case EnumCastUnderlying(AndroidMotionEventAction::Move):
-        {
-            return MotionInputEvent(hWnd, message, wParam, lParam);
-        }
-
-        case EnumCastUnderlying(AppCommandType::Destroy):
-        {
-            return Destroy(hWnd, message, wParam, lParam);
-        }
-
-        default:
-        {
-            return DefaultSystemWindowProcess(hWnd, static_cast<WindowsMessages>(message), wParam, lParam);
-        }
+        return iter->second(hWnd, message, wParam, lParam);
+    }
+    else
+    {
+        return DefaultSystemWindowProcess(hWnd, UnderlyingCastEnum<WindowsMessages>(boost::numeric_cast<int>(message)), wParam, lParam);
     }
 }
 
-System::WindowsLResult System::AppCommandEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept
+System::WindowsLResult System::AppCommandEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam)
 {
-    systemAppCommand(mainAndroidApp, gsl::narrow_cast<int32_t>(message));
+    systemAppCommand(mainAndroidApp, boost::numeric_cast<int32_t>(message));
 
-    return DefaultSystemWindowProcess(hWnd, static_cast<WindowsMessages>(message), wParam, lParam);
+    return DefaultSystemWindowProcess(hWnd, UnderlyingCastEnum<WindowsMessages>(boost::numeric_cast<int>(message)), wParam, lParam);
 }
 
-System::WindowsLResult System::KeyInputEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept
+System::WindowsLResult System::KeyInputEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam)
 {
     AndroidInputEvent androidInputEvent{ AndroidInputEventType::Key,
-                                         static_cast<AndroidKeyEventAction>(message),
-                                         UnderlyingCastEnum<AndroidKeyCodes>(gsl::narrow_cast<int>(wParam)) };
+                                         UnderlyingCastEnum<AndroidKeyEventAction>(boost::numeric_cast<int>(message)),
+                                         UnderlyingCastEnum<AndroidKeyCodes>(boost::numeric_cast<int>(wParam)) };
 
     systemInputEvent(mainAndroidApp, &androidInputEvent);
 
@@ -194,9 +186,9 @@ System::WindowsLResult System::KeyInputEvent(WindowsHWnd hWnd, WindowsUInt messa
     return 0;
 }
 
-System::WindowsLResult System::MotionInputEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept
+System::WindowsLResult System::MotionInputEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam)
 {
-    AndroidInputEvent androidInputEvent{ AndroidInputEventType::Motion, static_cast<AndroidMotionEventAction>(message) };
+    AndroidInputEvent androidInputEvent{ AndroidInputEventType::Motion, UnderlyingCastEnum<AndroidMotionEventAction>(boost::numeric_cast<int>(message)) };
 
     systemInputEvent(mainAndroidApp, &androidInputEvent);
 
@@ -205,7 +197,7 @@ System::WindowsLResult System::MotionInputEvent(WindowsHWnd hWnd, WindowsUInt me
     return 0;
 }
 
-System::WindowsLResult System::Destroy(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept
+System::WindowsLResult System::DestroyEvent(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam) noexcept
 {
     if (mainAndroidApp->GetRunning() == hWnd && PostSystemQuitMessage() == 0)
     {

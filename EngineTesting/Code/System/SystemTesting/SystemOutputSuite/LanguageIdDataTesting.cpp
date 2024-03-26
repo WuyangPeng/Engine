@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 14:14)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/09 10:19)
 
 #include "LanguageIdDataTesting.h"
 #include "System/Helper/WindowsMacro.h"
@@ -166,7 +166,7 @@ System::LanguageIdDataTesting::LanguageIdDataTesting(const OStreamShared& stream
                     SubLanguage::SpanishHonduras,
                     SubLanguage::SpanishNicaragua,
                     SubLanguage::SpanishPuertoRico,
-                    SubLanguage::SpanishUS },
+                    SubLanguage::SpanishUs },
       maxSize{ std::max(primaryLanguages.size(), subLanguages.size()) },
       randomEngine{ GetEngineRandomSeed() }
 {
@@ -214,12 +214,12 @@ void System::LanguageIdDataTesting::DoFlagsTest(size_t index)
     ASSERT_ENUM_EQUAL(languageIdData.GetPrimaryLanguage(), primaryLanguage);
     ASSERT_ENUM_EQUAL(languageIdData.GetSubLanguage(), subLanguage);
 
-    const auto languageID = MakeLanguageId(EnumCastUnderlying<uint16_t>(primaryLanguage), EnumCastUnderlying<uint16_t>(subLanguage));
+    const auto languageId = MakeLanguageId(EnumCastUnderlying<uint16_t>(primaryLanguage), EnumCastUnderlying<uint16_t>(subLanguage));
 
-    ASSERT_EQUAL(languageIdData.GetLanguageId(), languageID);
+    ASSERT_EQUAL(languageIdData.GetLanguageId(), languageId);
 }
 
-void System::LanguageIdDataTesting::DefaultFlagTest() noexcept
+void System::LanguageIdDataTesting::DefaultFlagTest() const noexcept
 {
     constexpr LanguageIdData languageIdData{};
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 17:16)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 13:02)
 
 #include "CreateDirectoryTesting.h"
 #include "System/FileManager/File.h"
@@ -18,9 +18,11 @@
 System::CreateDirectoryTesting::CreateDirectoryTesting(const OStreamShared& stream)
     : ParentType{ stream },
       directoryName{ SYSTEM_TEXT("Resource/NewDirectory") },
-      fileName{ directoryName + SYSTEM_TEXT("/CreateDirectory.txt") }
+      fileName{ directoryName + SYSTEM_TEXT("/CreateDirectory.txt") },
+      recursionDirectoryName{ SYSTEM_TEXT("Resource/NewDirectory/NewDirectory") },
+      recursionFileName{ recursionDirectoryName + SYSTEM_TEXT("/CreateDirectory.txt") }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, CreateDirectoryTesting)
@@ -37,6 +39,12 @@ void System::CreateDirectoryTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CreateFileSuccessTest);
     ASSERT_NOT_THROW_EXCEPTION_0(RemoveDirectoryTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CreateFileFailTest);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(CreateRecursionFileFailTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CreateRecursionDirectoryTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CreateRecursionFileSuccessTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(RemoveRecursionDirectoryTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CreateRecursionFileFailTest);
 }
 
 void System::CreateDirectoryTesting::CreateFileFailTest()
@@ -64,5 +72,34 @@ void System::CreateDirectoryTesting::RemoveDirectoryTest()
 {
     ASSERT_TRUE(RemoveSystemFile(fileName));
 
-    ASSERT_TRUE(RemoveSystemDirectory(directoryName.c_str()));
+    ASSERT_TRUE(DeleteFileDirectory(directoryName.c_str()));
+}
+
+void System::CreateDirectoryTesting::RemoveRecursionDirectoryTest()
+{
+    RecursionDeleteFileDirectory(directoryName);
+
+    ASSERT_TRUE(DeleteFileDirectory(directoryName.c_str()));
+}
+
+void System::CreateDirectoryTesting::CreateRecursionDirectoryTest() const noexcept
+{
+    CreateFileDirectory(directoryName);
+    CreateFileDirectory(recursionDirectoryName);
+}
+
+void System::CreateDirectoryTesting::CreateRecursionFileFailTest()
+{
+    const auto handle = CreateSystemFile(recursionFileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::CreateAlways);
+
+    ASSERT_FALSE(IsFileHandleValid(handle));
+}
+
+void System::CreateDirectoryTesting::CreateRecursionFileSuccessTest()
+{
+    const auto handle = CreateSystemFile(recursionFileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::CreateAlways);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(IsFileHandleValidTest, handle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, handle);
 }

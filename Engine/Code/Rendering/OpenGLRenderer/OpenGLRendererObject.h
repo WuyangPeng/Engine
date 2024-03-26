@@ -23,7 +23,7 @@ namespace Rendering
         using ClassType = OpenGLRendererObject;
         using ParentType = RendererObject;
 
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
 
     public:
         OpenGLRendererObject(const GraphicsObjectSharedPtr& graphicsObject, const std::string& name);

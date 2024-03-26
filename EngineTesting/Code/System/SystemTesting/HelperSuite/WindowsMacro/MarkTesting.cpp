@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 09:52)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/08 10:00)
 
 #include "MarkTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -15,7 +15,7 @@
 System::MarkTesting::MarkTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, MarkTesting)
@@ -32,15 +32,15 @@ void System::MarkTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(ParameterMarkTest);
 }
 
-void System::MarkTesting::CallBackTest() noexcept
+void System::MarkTesting::CallBackTest() const noexcept
 {
 }
 
-void System::MarkTesting::WinApiTest() noexcept
+void System::MarkTesting::WinApiTest() const noexcept
 {
 }
 
-void System::MarkTesting::ParameterMarkTest() noexcept
+void System::MarkTesting::ParameterMarkTest() const noexcept
 {
     constexpr auto in = 0;
     auto inOpt = 0;
@@ -52,7 +52,7 @@ void System::MarkTesting::ParameterMarkTest() noexcept
     DoParameterMarkTest(in, &inOpt, out, &outOpt, inOut, &inOutOpt);
 }
 
-void System::MarkTesting::DoParameterMarkTest(SYSTEM_IN int in, SYSTEM_IN_OPT int* inOpt, SYSTEM_OUT int& out, SYSTEM_OUT_OPT int* outOpt, SYSTEM_IN_OUT int& inOut, SYSTEM_IN_OUT_OPT int* inOutOpt) noexcept
+void System::MarkTesting::DoParameterMarkTest(SYSTEM_IN int in, SYSTEM_IN_OPT int* inOpt, SYSTEM_OUT int& out, SYSTEM_OUT_OPT int* outOpt, SYSTEM_IN_OUT int& inOut, SYSTEM_IN_OUT_OPT int* inOutOpt) const noexcept
 {
     if (inOpt != nullptr)
     {

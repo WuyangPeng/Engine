@@ -30,7 +30,7 @@ namespace Rendering
         using ClassType = VisualProgramImpl;
         using FactoryType = VisualProgramImpl;
 
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
         using ObjectLink = CoreTools::ObjectLink;
         using BufferTarget = CoreTools::BufferTarget;
         using BufferSource = CoreTools::BufferSource;

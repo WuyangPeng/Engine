@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 14:01)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 14:21)
 
 #include "CreateSecurityTestingBase.h"
 #include "System/Security/CreateSecurity.h"
@@ -114,15 +114,4 @@ void System::CreateSecurityTestingBase::DestroyPrivateObjectSecurityTest(Securit
     ASSERT_TRUE(DestroySystemPrivateObjectSecurity(&descriptor));
 }
 
-System::AccessCheckGenericMapping System::CreateSecurityTestingBase::GetAccessCheckGenericMapping() noexcept
-{
-    SYSTEM_CLASS_IS_VALID_1;
-
-    AccessCheckGenericMapping genericMapping{};
-    genericMapping.GenericRead = EnumCastUnderlying(AccessGenericMask::FileGenericRead);
-    genericMapping.GenericWrite = EnumCastUnderlying(AccessGenericMask::FileGenericWrite);
-    genericMapping.GenericExecute = EnumCastUnderlying(AccessGenericMask::FileGenericExecute);
-    genericMapping.GenericAll = EnumCastUnderlying(AccessGenericMask::FileAllAccess);
-
-    return genericMapping;
-}
+ 

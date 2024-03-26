@@ -27,6 +27,24 @@ namespace Mathematics::Algebra
 
     public:
         MatrixTable() noexcept;
+        MatrixTable(Real m00, Real m01, Real m10, Real m11) noexcept requires(NumRows == 2 && NumColumns == 2);
+        MatrixTable(Real m00, Real m01, Real m02, Real m10, Real m11, Real m12, Real m20, Real m21, Real m22) noexcept requires(NumRows == 3 && NumColumns == 3);
+        MatrixTable(Real m00,
+                    Real m01,
+                    Real m02,
+                    Real m03,
+                    Real m10,
+                    Real m11,
+                    Real m12,
+                    Real m13,
+                    Real m20,
+                    Real m21,
+                    Real m22,
+                    Real m23,
+                    Real m30,
+                    Real m31,
+                    Real m32,
+                    Real m33) noexcept requires(NumRows == 4 && NumColumns == 4);
 
         CLASS_INVARIANT_DECLARE;
 

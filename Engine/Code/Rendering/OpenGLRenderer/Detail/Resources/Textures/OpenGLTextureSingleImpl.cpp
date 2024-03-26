@@ -20,14 +20,14 @@ Rendering::OpenGLTextureSingleImpl::OpenGLTextureSingleImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, OpenGLTextureSingleImpl)
 
-System::OpenGLUInt Rendering::OpenGLTextureSingleImpl::GetLevelPixelUnpackBuffer(int index) const
+System::OpenGLUnsignedInt Rendering::OpenGLTextureSingleImpl::GetLevelPixelUnpackBuffer(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return levelPixelUnpackBuffer.at(index);
 }
 
-System::OpenGLUInt Rendering::OpenGLTextureSingleImpl::GetLevelPixelPackBuffer(int index) const
+System::OpenGLUnsignedInt Rendering::OpenGLTextureSingleImpl::GetLevelPixelPackBuffer(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

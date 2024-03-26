@@ -1,3 +1,7 @@
 TODO Level 3
 
-0.9.1.4
+1.0.0.7
+
+1.（DynamicLinkSuite）ResourceEnumTesting测试ResourceEnum::Mui失败，
+					  报错误：资源加载器找不到MUI文件。
+					  执行这个测试需要一个MUI文件。

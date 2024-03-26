@@ -14,39 +14,39 @@
 
 namespace System
 {
-    // Exception
+    /// Exception
     enum class Exception;
 
-    // PlatformError
+    /// PlatformError
     enum class Severity;
     enum class ErrorMode;
     enum class Facility;
     enum class WindowError;
 
-    // WindowsClassStyle
+    /// WindowsClassStyle
     enum class WindowsClassStyle;
 
-    // WindowsCreate
+    /// WindowsCreate
     enum class SystemMenuCommand;
     enum class MenuItem;
 
-    // WindowsDisplay
+    /// WindowsDisplay
     enum class WindowsDisplay;
 
-    // Windows
+    /// Windows
     enum class WindowsPointUse;
     enum class WindowsStyles : uint32_t;
 
-    // WindowsMessages
+    /// WindowsMessages
     enum class WindowsMessages;
 
-    // WindowsPictorial
+    /// WindowsPictorial
     enum class WindowsBrushTypes : uint32_t;
 
-    // WindowsProcess
+    /// WindowsProcess
     enum class PeekMessageOptions;
 
-    // WindowsKeyCodes
+    /// WindowsKeyCodes
     enum class WindowsKeyCodes;
     enum class WindowsModifiersCodes;
 }

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:22)
+/// 版本：1.0.0.7 (2024/03/05 17:04)
 
 #ifndef SYSTEM_CHARACTER_STRING_STRING_CONVERSION_FLAGS_H
 #define SYSTEM_CHARACTER_STRING_STRING_CONVERSION_FLAGS_H
@@ -30,35 +30,6 @@ namespace System
     {
         NoFlags = 0,
         NoBestFitChars = WC_NO_BEST_FIT_CHARS,
-    };
-
-    enum class LocaleSort
-    {
-        Default = SORT_DEFAULT,
-
-        InvariantMath = SORT_INVARIANT_MATH,
-
-        JapaneseXjis = SORT_JAPANESE_XJIS,
-        JapaneseUnicode = SORT_JAPANESE_UNICODE,
-        JapaneseRadicalStroke = SORT_JAPANESE_RADICALSTROKE,
-
-        ChineseBig5 = SORT_CHINESE_BIG5,
-        ChinesePrcp = SORT_CHINESE_PRCP,
-        ChineseUnicode = SORT_CHINESE_UNICODE,
-        ChinesePRC = SORT_CHINESE_PRC,
-        ChineseBopomofo = SORT_CHINESE_BOPOMOFO,
-        ChineseRadicalStroke = SORT_CHINESE_RADICALSTROKE,
-
-        KoreanKsc = SORT_KOREAN_KSC,
-        KoreanUnicode = SORT_KOREAN_UNICODE,
-
-        GermanPhoneBook = SORT_GERMAN_PHONE_BOOK,
-
-        HungarianDefault = SORT_HUNGARIAN_DEFAULT,
-        HungarianTechnical = SORT_HUNGARIAN_TECHNICAL,
-
-        GeorgianTraditional = SORT_GEORGIAN_TRADITIONAL,
-        GeorgianModern = SORT_GEORGIAN_MODERN,
     };
 
     enum class LanguageLocale
@@ -117,35 +88,6 @@ namespace System
         DefaultChar = 0x00000040,
         ErrInvalidChars = 0x00000080,
         NoBestFitChars = 0x00000400,
-    };
-
-    enum class LocaleSort
-    {
-        Default = 0x0,
-
-        InvariantMath = 0x1,
-
-        JapaneseXjis = 0x0,
-        JapaneseUnicode = 0x1,
-        JapaneseRadicalStroke = 0x4,
-
-        ChineseBig5 = 0x0,
-        ChinesePrcp = 0x0,
-        ChineseUnicode = 0x1,
-        ChinesePRC = 0x2,
-        ChineseBopomofo = 0x3,
-        ChineseRadicalStroke = 0x4,
-
-        KoreanKsc = 0x0,
-        KoreanUnicode = 0x1,
-
-        GermanPhoneBook = 0x1,
-
-        HungarianDefault = 0x0,
-        HungarianTechnical = 0x1,
-
-        GeorgianTraditional = 0x0,
-        GeorgianModern = 0x1,
     };
 
     static constexpr auto gLanguageSystemDefault = MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Neutral), EnumCastUnderlying(SubLanguage::SysDefault));

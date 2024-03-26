@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:15)
+/// 版本：1.0.0.7 (2024/03/05 16:37)
 
 #ifndef SYSTEM_DYNAMIC_LINK_LOAD_RESOURCE_TOOLS_USING_H
 #define SYSTEM_DYNAMIC_LINK_LOAD_RESOURCE_TOOLS_USING_H
@@ -21,7 +21,7 @@ namespace System
     using DynamicLinkResource = HRSRC;
     using DynamicLinkGlobal = HGLOBAL;
 
-    // 预定义资源类型，指针只能用来传递给LoadResourceTools中定义的函数，指针不能进行解引用和打印。
+    /// 预定义资源类型，指针只能用来传递给LoadResourceTools中定义的函数，指针不能进行解引用和打印。
     static const DynamicLinkCharType* predefinedResourceTypesCursor = RT_CURSOR;
     static const DynamicLinkCharType* predefinedResourceTypesBitmap = RT_BITMAP;
     static const DynamicLinkCharType* predefinedResourceTypesIcon = RT_ICON;
@@ -56,32 +56,32 @@ namespace System
 
     constexpr auto predefinedResourceTypesDifference = 11;
 
-    static const DynamicLinkCharType* predefinedResourceTypesCursor = MakeIntreSource(1);
-    static const DynamicLinkCharType* predefinedResourceTypesBitmap = MakeIntreSource(2);
-    static const DynamicLinkCharType* predefinedResourceTypesIcon = MakeIntreSource(3);
-    static const DynamicLinkCharType* predefinedResourceTypesMenu = MakeIntreSource(4);
-    static const DynamicLinkCharType* predefinedResourceTypesDialog = MakeIntreSource(5);
-    static const DynamicLinkCharType* predefinedResourceTypesString = MakeIntreSource(6);
-    static const DynamicLinkCharType* predefinedResourceTypesFontDir = MakeIntreSource(7);
-    static const DynamicLinkCharType* predefinedResourceTypesFont = MakeIntreSource(8);
-    static const DynamicLinkCharType* predefinedResourceTypesAccelerator = MakeIntreSource(9);
-    static const DynamicLinkCharType* predefinedResourceTypesRcData = MakeIntreSource(10);
-    static const DynamicLinkCharType* predefinedResourceTypesMessageTable = MakeIntreSource(11);
-    static const DynamicLinkCharType* predefinedResourceTypesGroupCursor = MakeIntreSource(reinterpret_cast<WindowsULongPtrSizeType>(predefinedResourceTypesCursor) + predefinedResourceTypesDifference);
-    static const DynamicLinkCharType* predefinedResourceTypesGroupIcon = MakeIntreSource(reinterpret_cast<WindowsULongPtrSizeType>(predefinedResourceTypesIcon) + predefinedResourceTypesDifference);
-    static const DynamicLinkCharType* predefinedResourceTypesVersion = MakeIntreSource(16);
-    static const DynamicLinkCharType* predefinedResourceTypesDlgInclude = MakeIntreSource(17);
-    static const DynamicLinkCharType* predefinedResourceTypesPlugPlay = MakeIntreSource(19);
-    static const DynamicLinkCharType* predefinedResourceTypesVxd = MakeIntreSource(20);
-    static const DynamicLinkCharType* predefinedResourceTypesAniCursor = MakeIntreSource(21);
-    static const DynamicLinkCharType* predefinedResourceTypesAniIcon = MakeIntreSource(22);
-    static const DynamicLinkCharType* predefinedResourceTypesHtml = MakeIntreSource(23);
-    static const DynamicLinkCharType* predefinedResourceTypesManifest = MakeIntreSource(24);
-    static const DynamicLinkCharType* createProcessManifestResourceId = MakeIntreSource(1);
-    static const DynamicLinkCharType* isolationAwareManifestResourceId = MakeIntreSource(2);
-    static const DynamicLinkCharType* isolationAwareNoStaticImportManifestResourceId = MakeIntreSource(3);
-    static const DynamicLinkCharType* minimumReservedManifestResourceId = MakeIntreSource(1);
-    static const DynamicLinkCharType* maximumReservedManifestResourceId = MakeIntreSource(16);
+    static const DynamicLinkCharType* predefinedResourceTypesCursor = MakeIntResource(1);
+    static const DynamicLinkCharType* predefinedResourceTypesBitmap = MakeIntResource(2);
+    static const DynamicLinkCharType* predefinedResourceTypesIcon = MakeIntResource(3);
+    static const DynamicLinkCharType* predefinedResourceTypesMenu = MakeIntResource(4);
+    static const DynamicLinkCharType* predefinedResourceTypesDialog = MakeIntResource(5);
+    static const DynamicLinkCharType* predefinedResourceTypesString = MakeIntResource(6);
+    static const DynamicLinkCharType* predefinedResourceTypesFontDir = MakeIntResource(7);
+    static const DynamicLinkCharType* predefinedResourceTypesFont = MakeIntResource(8);
+    static const DynamicLinkCharType* predefinedResourceTypesAccelerator = MakeIntResource(9);
+    static const DynamicLinkCharType* predefinedResourceTypesRcData = MakeIntResource(10);
+    static const DynamicLinkCharType* predefinedResourceTypesMessageTable = MakeIntResource(11);
+    static const DynamicLinkCharType* predefinedResourceTypesGroupCursor = MakeIntResource(reinterpret_cast<WindowsULongPtrSizeType>(predefinedResourceTypesCursor) + predefinedResourceTypesDifference);
+    static const DynamicLinkCharType* predefinedResourceTypesGroupIcon = MakeIntResource(reinterpret_cast<WindowsULongPtrSizeType>(predefinedResourceTypesIcon) + predefinedResourceTypesDifference);
+    static const DynamicLinkCharType* predefinedResourceTypesVersion = MakeIntResource(16);
+    static const DynamicLinkCharType* predefinedResourceTypesDlgInclude = MakeIntResource(17);
+    static const DynamicLinkCharType* predefinedResourceTypesPlugPlay = MakeIntResource(19);
+    static const DynamicLinkCharType* predefinedResourceTypesVxd = MakeIntResource(20);
+    static const DynamicLinkCharType* predefinedResourceTypesAniCursor = MakeIntResource(21);
+    static const DynamicLinkCharType* predefinedResourceTypesAniIcon = MakeIntResource(22);
+    static const DynamicLinkCharType* predefinedResourceTypesHtml = MakeIntResource(23);
+    static const DynamicLinkCharType* predefinedResourceTypesManifest = MakeIntResource(24);
+    static const DynamicLinkCharType* createProcessManifestResourceId = MakeIntResource(1);
+    static const DynamicLinkCharType* isolationAwareManifestResourceId = MakeIntResource(2);
+    static const DynamicLinkCharType* isolationAwareNoStaticImportManifestResourceId = MakeIntResource(3);
+    static const DynamicLinkCharType* minimumReservedManifestResourceId = MakeIntResource(1);
+    static const DynamicLinkCharType* maximumReservedManifestResourceId = MakeIntResource(16);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

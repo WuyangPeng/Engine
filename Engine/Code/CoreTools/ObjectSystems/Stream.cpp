@@ -15,7 +15,7 @@
 
 int CoreTools::Stream::GetStreamingSize(const char* input)
 {
-    const auto length = boost::numeric_cast<int>(System::StrLen(input));
+    const auto length = boost::numeric_cast<int>(System::StringLength(input));
 
     return GetStreamingSize(length);
 }

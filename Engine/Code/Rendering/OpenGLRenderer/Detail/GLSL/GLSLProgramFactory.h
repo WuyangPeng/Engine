@@ -26,7 +26,7 @@ namespace Rendering
         using ParentType = ProgramFactoryImpl;
 
         using String = System::String;
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
         using ShaderType = System::ShaderType;
 
     public:

@@ -61,7 +61,7 @@ void Framework::WindowHCursorTesting::ConstructorTest()
     });
 
     const WindowHCursor windowHIcon{ instance, IDC_CURSOR1 };
-    ASSERT_EQUAL(windowHIcon.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntreSource(IDC_CURSOR1)));
+    ASSERT_EQUAL(windowHIcon.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntResource(IDC_CURSOR1)));
 }
 
 void Framework::WindowHCursorTesting::CreateTest()
@@ -72,5 +72,5 @@ void Framework::WindowHCursorTesting::CreateTest()
     });
 
     const auto windowHCursor = WindowHCursor::Create(instance, false, IDC_CURSOR1);
-    ASSERT_EQUAL(windowHCursor.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntreSource(IDC_CURSOR1)));
+    ASSERT_EQUAL(windowHCursor.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntResource(IDC_CURSOR1)));
 }

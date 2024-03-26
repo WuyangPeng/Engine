@@ -42,32 +42,32 @@ void Network::MessageManagerTesting::MainTest()
 
 void Network::MessageManagerTesting::FullVersionTest()
 {
-    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.GetFullVersion(), gTCRETestingVersion);
+    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.GetFullVersion(), gTcreTestingVersion);
 
-    MESSAGE_MANAGER_SINGLETON.SetFullVersion(gTCRETestingVersion - 1);
+    MESSAGE_MANAGER_SINGLETON.SetFullVersion(gTcreTestingVersion - 1);
 
-    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.GetFullVersion(), gTCRETestingVersion - 1);
+    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.GetFullVersion(), gTcreTestingVersion - 1);
 
-    MESSAGE_MANAGER_SINGLETON.SetFullVersion(gTCRETestingVersion);
+    MESSAGE_MANAGER_SINGLETON.SetFullVersion(gTcreTestingVersion);
 
-    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.GetFullVersion(), gTCRETestingVersion);
+    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.GetFullVersion(), gTcreTestingVersion);
 }
 
 void Network::MessageManagerTesting::ManagerTest()
 {
     constexpr auto messageId = 6LL;
-    const MessageTypeCondition messageTypeCondition0{ VersionsCondition::Equality, gTCRETestingVersion - 1 };
-    const MessageTypeCondition messageTypeCondition1{ VersionsCondition::Equality, gTCRETestingVersion };
+    const MessageTypeCondition messageTypeCondition0{ VersionsCondition::Equality, gTcreTestingVersion - 1 };
+    const MessageTypeCondition messageTypeCondition1{ VersionsCondition::Equality, gTcreTestingVersion };
 
     MESSAGE_MANAGER_SINGLETON.Insert(messageId, messageTypeCondition1, TestNullMessage::Factory);
     MESSAGE_MANAGER_SINGLETON.Insert(messageId, messageTypeCondition0, TestDoubleNullMessage::Factory);
 
-    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageId, gTCRETestingVersion), TestNullMessage::Factory);
-    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageId, gTCRETestingVersion - 1), TestDoubleNullMessage::Factory);
+    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageId, gTcreTestingVersion), TestNullMessage::Factory);
+    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageId, gTcreTestingVersion - 1), TestDoubleNullMessage::Factory);
 
     MESSAGE_MANAGER_SINGLETON.Remove(messageId, messageTypeCondition1);
 
-    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageId, gTCRETestingVersion - 1), TestDoubleNullMessage::Factory);
+    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageId, gTcreTestingVersion - 1), TestDoubleNullMessage::Factory);
 
     MESSAGE_MANAGER_SINGLETON.Remove(messageId, messageTypeCondition0);
 }
@@ -75,31 +75,31 @@ void Network::MessageManagerTesting::ManagerTest()
 void Network::MessageManagerTesting::ExceptionTest()
 {
     constexpr auto messageId = 6LL;
-    MESSAGE_MANAGER_SINGLETON.Insert(messageId, MessageTypeCondition{ VersionsCondition::Equality, gTCRETestingVersion }, TestNullMessage::Factory);
+    MESSAGE_MANAGER_SINGLETON.Insert(messageId, MessageTypeCondition{ VersionsCondition::Equality, gTcreTestingVersion }, TestNullMessage::Factory);
 
-    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageId, gTCRETestingVersion), TestNullMessage::Factory);
+    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageId, gTcreTestingVersion), TestNullMessage::Factory);
 
     MESSAGE_MANAGER_SINGLETON.Remove(messageId);
 
-    MAYBE_UNUSED auto result = MESSAGE_MANAGER_SINGLETON.Find(messageId, gTCRETestingVersion);
+    MAYBE_UNUSED auto result = MESSAGE_MANAGER_SINGLETON.Find(messageId, gTcreTestingVersion);
 }
 
 void Network::MessageManagerTesting::DescribeTest()
 {
     constexpr auto messageDescribe = "Describe";
-    const MessageTypeCondition messageTypeCondition0{ VersionsCondition::Equality, gTCRETestingVersion - 1 };
-    const MessageTypeCondition messageTypeCondition1{ VersionsCondition::Equality, gTCRETestingVersion };
+    const MessageTypeCondition messageTypeCondition0{ VersionsCondition::Equality, gTcreTestingVersion - 1 };
+    const MessageTypeCondition messageTypeCondition1{ VersionsCondition::Equality, gTcreTestingVersion };
 
     MESSAGE_MANAGER_SINGLETON.Insert(messageDescribe, messageTypeCondition1, TestNullMessage::Factory);
     MESSAGE_MANAGER_SINGLETON.Insert(messageDescribe, messageTypeCondition0, TestDoubleNullMessage::Factory);
 
-    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageDescribe, gTCRETestingVersion), TestNullMessage::Factory);
-    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageDescribe, gTCRETestingVersion - 1), TestDoubleNullMessage::Factory);
+    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageDescribe, gTcreTestingVersion), TestNullMessage::Factory);
+    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageDescribe, gTcreTestingVersion - 1), TestDoubleNullMessage::Factory);
 }
 
 void Network::MessageManagerTesting::DescribeExceptionTest()
 {
     constexpr auto messageDescribe = "DescribeException";
 
-    MAYBE_UNUSED const auto result = MESSAGE_MANAGER_SINGLETON.Find(messageDescribe, gTCRETestingVersion);
+    MAYBE_UNUSED const auto result = MESSAGE_MANAGER_SINGLETON.Find(messageDescribe, gTcreTestingVersion);
 }

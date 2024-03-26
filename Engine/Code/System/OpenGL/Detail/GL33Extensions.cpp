@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:20)
+/// 版本：1.0.0.7 (2024/03/02 23:07)
 
 #include "System/SystemExport.h"
 
@@ -14,7 +14,7 @@
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/OpenGL/OpenGLUtility.h"
 
-// OpenGL 3.3
+/// OpenGL 3.3
 namespace System
 {
     auto existsOpenGL33 = ExistsOpenGLExtensions::Unknown;
@@ -56,7 +56,7 @@ System::ExistsOpenGLExtensions System::IsExistsOpenGL33() noexcept
 
 void System::InitOpenGL33() noexcept
 {
-    if (OpenGLSystemVersion::Version33 <= System::GetOpenGLVersion())
+    if (OpenGLSystemVersion::Version33 <= GetOpenGLVersion())
     {
         existsOpenGL33 = ExistsOpenGLExtensions::Exists;
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:01)
+/// 版本：1.0.0.7 (2024/03/05 09:27)
 
 #ifndef SYSTEM_FILE_MANAGER_C_FILE_H
 #define SYSTEM_FILE_MANAGER_C_FILE_H
@@ -15,7 +15,7 @@
 #include "Fwd/FileFlagsFwd.h"
 #include "Using/CFileUsing.h"
 
-// 通过FILE类型的文件操作
+/// 通过FILE类型的文件操作
 namespace System
 {
     NODISCARD bool SYSTEM_DEFAULT_DECLARE OpenCFile(FILE*& file, const CFileString& fileName, const CFileString& mode) noexcept;
@@ -40,8 +40,7 @@ namespace System
     NODISCARD bool SYSTEM_DEFAULT_DECLARE Seek(FILE* file, long offset, FileSeek whence) noexcept;
     NODISCARD PosType SYSTEM_DEFAULT_DECLARE GetPosition(FILE* file) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetPosition(FILE* file, PosType position) noexcept;
-    NODISCARD long SYSTEM_DEFAULT_DECLARE Tell(FILE* file) noexcept;
-    void SYSTEM_DEFAULT_DECLARE Rewind(FILE* file) noexcept;
+    NODISCARD long SYSTEM_DEFAULT_DECLARE Tell(FILE* file) noexcept; 
 }
 
 #endif  // SYSTEM_FILE_MANAGER_C_FILE_H

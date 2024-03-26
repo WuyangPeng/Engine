@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:04)
+/// 版本：1.0.0.7 (2024/03/05 09:30)
 
 #include "System/SystemExport.h"
 
@@ -26,17 +26,11 @@ bool System::RemoveSystemFile(const CFileString& fileName) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::DeleteFile(fileName.c_str()) != gFalse)
-        return true;
-    else
-        return false;
+    return ::DeleteFile(fileName.c_str()) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    if (::remove(fileName.c_str()) == 0)
-        return true;
-    else
-        return false;
+    return ::remove(fileName.c_str()) == 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -46,7 +40,7 @@ System::WindowsHandle System::CreateSystemFile(const String& fileName,
                                                FileHandleShareMode shareMode,
                                                WindowSecurityAttributesPtr securityAttributes,
                                                FileHandleCreationDisposition creation,
-                                               FileHandleAttributes attributes,
+                                               FileHandleAttribute attributes,
                                                FileHandleOther other,
                                                FileHandleSecurity security,
                                                WindowsHandle templateFile) noexcept
@@ -80,14 +74,14 @@ System::WindowsHandle System::CreateSystemFile(const String& fileName,
 
 System::WindowsHandle System::CreateSystemFile(const String& fileName, FileHandleDesiredAccess access, FileHandleShareMode shareMode, FileHandleCreationDisposition creation) noexcept
 {
-    return CreateSystemFile(fileName, access, shareMode, nullptr, creation, FileHandleAttributes::Normal, FileHandleOther::SequentialScan, FileHandleSecurity::Default, nullptr);
+    return CreateSystemFile(fileName, access, shareMode, nullptr, creation, FileHandleAttribute::Normal, FileHandleOther::SequentialScan, FileHandleSecurity::Default, nullptr);
 }
 
 System::WindowsHandle System::CreateSystemFile(const String& fileName,
                                                FileHandleDesiredAccess access,
                                                FileHandleShareMode shareMode,
                                                FileHandleCreationDisposition creation,
-                                               FileHandleAttributes attributes,
+                                               FileHandleAttribute attributes,
                                                FileHandleOther other,
                                                FileHandleSecurity security) noexcept
 {
@@ -98,10 +92,7 @@ bool System::CloseSystemFile(WindowsHandle file) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::CloseHandle(file) != gFalse)
-        return true;
-    else
-        return false;
+    return ::CloseHandle(file) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -114,10 +105,7 @@ bool System::CloseSystemFile(WindowsHandle file) noexcept
 
 bool System::IsFileHandleValid(WindowsHandle file) noexcept
 {
-    if (file != nullptr && file != invalidHandleValue)
-        return true;
-    else
-        return false;
+    return file != nullptr && file != invalidHandleValue;
 }
 
 bool System::GetFileLength(WindowsHandle file, uint64_t& fileSize) noexcept
@@ -168,10 +156,7 @@ bool System::GetFileLength(WindowsHandle file, WindowsLargeIntegerPtr fileSize) 
 
     #else  // !TCRE_USE_GCC
 
-    if (::GetFileSizeEx(file, fileSize) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetFileSizeEx(file, fileSize) != gFalse;
 
     #endif  // TCRE_USE_GCC
 
@@ -188,10 +173,7 @@ bool System::ReadSystemFile(WindowsHandle file, WindowsVoidPtr buffer, WindowsDW
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::ReadFile(file, buffer, numberOfBytesToRead, numberOfBytesRead, overlapped) != gFalse)
-        return true;
-    else
-        return false;
+    return ::ReadFile(file, buffer, numberOfBytesToRead, numberOfBytesRead, overlapped) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -211,10 +193,7 @@ bool System::ReadSystemFile(WindowsHandle file, WindowsVoidPtr buffer, WindowsDW
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::ReadFileEx(file, buffer, numberOfBytesToRead, overlapped, completionRoutine) != gFalse)
-        return true;
-    else
-        return false;
+    return ::ReadFileEx(file, buffer, numberOfBytesToRead, overlapped, completionRoutine) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -229,10 +208,7 @@ bool System::WriteSystemFile(WindowsHandle file, WindowsConstVoidPtr buffer, Win
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::WriteFile(file, buffer, numberOfBytesToWrite, numberOfBytesWritten, overlapped) != gFalse)
-        return true;
-    else
-        return false;
+    return ::WriteFile(file, buffer, numberOfBytesToWrite, numberOfBytesWritten, overlapped) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -252,10 +228,7 @@ bool System::WriteSystemFile(WindowsHandle file, WindowsConstVoidPtr buffer, Win
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::WriteFileEx(file, buffer, numberOfBytesToWrite, overlapped, completionRoutine) != gFalse)
-        return true;
-    else
-        return false;
+    return ::WriteFileEx(file, buffer, numberOfBytesToWrite, overlapped, completionRoutine) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -295,10 +268,7 @@ bool System::CopySystemFile(const String& existingFileName, const String& newFil
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::CopyFile(existingFileName.c_str(), newFileName.c_str(), BoolConversion(failIfExists)) != gFalse)
-        return true;
-    else
-        return false;
+    return ::CopyFile(existingFileName.c_str(), newFileName.c_str(), BoolConversion(failIfExists)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -340,10 +310,7 @@ bool System::SetSystemFilePointer(WindowsHandle file, WindowsLargeInteger distan
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetFilePointerEx(file, distanceToMove, newFilePointer, EnumCastUnderlying(moveMethod)) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetFilePointerEx(file, distanceToMove, newFilePointer, EnumCastUnderlying(moveMethod)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -358,10 +325,7 @@ bool System::SetEndOfSystemFile(WindowsHandle file) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetEndOfFile(file) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetEndOfFile(file) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -376,10 +340,7 @@ bool System::FlushSystemFileBuffers(WindowsHandle file) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::FlushFileBuffers(file) != gFalse)
-        return true;
-    else
-        return false;
+    return ::FlushFileBuffers(file) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -394,10 +355,7 @@ bool System::MoveSystemFile(const String& oldFileName, const String& newFileName
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::MoveFile(oldFileName.c_str(), newFileName.c_str()) != gFalse)
-        return true;
-    else
-        return false;
+    return ::MoveFile(oldFileName.c_str(), newFileName.c_str()) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

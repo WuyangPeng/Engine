@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:30)
+/// 版本：1.0.0.7 (2024/03/04 15:53)
 
 #ifndef SYSTEM_MEMORY_TOOLS_LOCAL_MEMORY_FLAGS_H
 #define SYSTEM_MEMORY_TOOLS_LOCAL_MEMORY_FLAGS_H
@@ -19,33 +19,33 @@ namespace System
 
     enum class LocalMemory
     {
-        // 分配固定内存，返回值是指向内存对象的指针。
+        /// 分配固定内存，返回值是指向内存对象的指针。
         Fixed = LMEM_FIXED,
 
-        // 分配可移动内存，返回值是内存对象的句柄，要将句柄转换为指针，请使用LocalLock函数，此值不能与Fixed组合使用。
-        Moveable = LMEM_MOVEABLE,
+        /// 分配可移动内存，返回值是内存对象的句柄，要将句柄转换为指针，请使用LocalLock函数，此值不能与Fixed组合使用。
+        MoveAble = LMEM_MOVEABLE,
 
-        // 将存储器内容初始化为零。
+        /// 将存储器内容初始化为零。
         ZeroInit = LMEM_ZEROINIT,
 
-        // 组合Moveable和ZeroInit。
+        /// 组合MoveAble和ZeroInit。
         LHnd = LHND,
 
-        // 组合Fixed和ZeroInit。
+        /// 组合Fixed和ZeroInit。
         LPtr = LPTR,
 
-        // 同Moveable
+        /// 同MoveAble
         NonZeroLHnd = NONZEROLHND,
 
-        // 同Fixed
+        /// 同Fixed
         NonZeroLPtr = NONZEROLPTR,
 
-        // ReAlloc选项，如果指定了Modify，则函数仅修改内存对象的属性（忽略bytes参数）。
+        /// ReAlloc选项，如果指定了Modify，则函数仅修改内存对象的属性（忽略bytes参数）。
         Modify = LMEM_MODIFY,
 
         InvalidHandle = LMEM_INVALID_HANDLE,
         LockCount = LMEM_LOCKCOUNT,
-        Discardable = LMEM_DISCARDABLE,
+        DiscardAble = LMEM_DISCARDABLE,
 
         NoCompact = LMEM_NOCOMPACT,
         NoDiscard = LMEM_NODISCARD,
@@ -58,17 +58,17 @@ namespace System
     enum class LocalMemory
     {
         Fixed = 0x0000,
-        Moveable = 0x0002,
+        MoveAble = 0x0002,
         ZeroInit = 0x0040,
-        LHnd = Moveable | ZeroInit,
+        LHnd = MoveAble | ZeroInit,
         LPtr = Fixed | ZeroInit,
-        NonZeroLHnd = Moveable,
+        NonZeroLHnd = MoveAble,
         NonZeroLPtr = Fixed,
         Modify = 0x0080,
 
         InvalidHandle = 0x8000,
         LockCount = 0x00FF,
-        Discardable = 0x0F00,
+        DiscardAble = 0x0F00,
 
         NoCompact = 0x0010,
         NoDiscard = 0x0020,

@@ -11,9 +11,9 @@
 
 #if defined(SYSTEM_USING_VC80) && defined(SYSTEM_USE_SPIN_COUNT_CRITICAL_SECTION)
 
-    // 查看评论在
-    // http://msdn.microsoft.com/en-us/library/ms683476(VS.85).aspx，
-    // 关于为什么这些#defines要在InitializeCriticalSectionAndSpinCount中暴露。
+    /// 查看评论在
+    /// http://msdn.microsoft.com/en-us/library/ms683476(VS.85).aspx，
+    /// 关于为什么这些#defines要在InitializeCriticalSectionAndSpinCount中暴露。
     #define WIN32_LEAN_AND_MEAN
     #define _WIN32_WINNT 0x0500
 
@@ -81,7 +81,7 @@ bool System::InitializeSystemCriticalSection(ThreadingCriticalSectionPtr critica
 {
 #if defined(SYSTEM_USE_SPIN_COUNT_CRITICAL_SECTION)
 
-    // 在MSVC2010文档中提到，堆管理器自旋锁设定为大约4000。让我们看看如何做到4096。
+    /// 在MSVC2010文档中提到，堆管理器自旋锁设定为大约4000。让我们看看如何做到4096。
     return InitializeSystemCriticalSectionAndSpinCount(criticalSection, 4096);
 
 #else  // !SYSTEM_SPIN_COUNT_CRITICAL_SECTION

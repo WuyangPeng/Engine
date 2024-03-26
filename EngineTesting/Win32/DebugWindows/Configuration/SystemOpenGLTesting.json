@@ -18,7 +18,8 @@
     "OpenGLDepthTesting": 1,
     "OpenGLMaskTesting": 1,
     "OpenGLStateTesting": 1,
-    "OpenGLStencilTesting": 1
+    "OpenGLStencilTesting": 1,
+    "OpenGLDrawTesting": 1
   },
 
   "openGLBuffersSuite": {
@@ -30,7 +31,8 @@
     "OpenGLBindFrameBufferTesting": 1,
     "OpenGLVertexArraysTesting": 1,
     "OpenGLBindVertexBufferTesting": 1,
-    "OpenGLDrawBuffersTesting": 1
+    "OpenGLDrawBuffersTesting": 1,
+    "OpenGLMapTesting": 1
   },
 
   "openGLTexturesSuite": {
@@ -43,7 +45,9 @@
     "OpenGLTextures3DTesting": 1,
     "OpenGLTexturesCubeTesting": 1,
     "OpenGLTexturesCubeArrayTesting": 1,
-    "OpenGLFrameBufferTextures2DTesting": 1
+    "OpenGLFrameBufferTextures2DTesting": 1,
+    "OpenGLActiveTextureTesting": 1,
+    "OpenGLBindImageTextureTesting": 1
   },
 
   "openGLPolygonSuite": {
@@ -72,7 +76,8 @@
     "OpenGLCreateShaderTesting": 1,
     "OpenGLGetUniformLocationTesting": 1,
     "OpenGLShaderAttributesTesting": 1,
-    "OpenGLShaderStatusTesting": 1
+    "OpenGLShaderStatusTesting": 1,
+    "OpenGLShaderStorageBlockBindingTesting": 1
   },
 
   "openGLGlutSuite": {

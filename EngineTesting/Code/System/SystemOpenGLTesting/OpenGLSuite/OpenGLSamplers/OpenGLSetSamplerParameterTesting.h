@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:03)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:39)
 
 #ifndef SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_SET_SAMPLER_PARAMETER_TESTING_H
 #define SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_SET_SAMPLER_PARAMETER_TESTING_H
@@ -29,16 +29,16 @@ namespace System
         void DoRunUnitTest() override;
         void MainTest();
 
-        void OpenGLSetSamplerParameterTest();
+        void SetSamplerParameterTest();
 
-        void SetOpenGLSetSamplerParameterTest(OpenGLInt sampler);
+        void DoSetSamplerParameterTest(OpenGLInt sampler);
 
-        void MinFilterTest(OpenGLInt sampler) noexcept;
-        void MagFilterTest(OpenGLInt sampler) noexcept;
-        void LodTest(OpenGLInt sampler) noexcept;
-        void WrapTest(OpenGLInt sampler) noexcept;
-        void LodBiasTest(OpenGLInt sampler) noexcept;
-        void BorderColorTest(OpenGLInt sampler) noexcept;
+        void MinFilterTest(OpenGLInt sampler) const noexcept;
+        void MagFilterTest(OpenGLInt sampler) const noexcept;
+        void LodTest(OpenGLInt sampler) const noexcept;
+        void WrapTest(OpenGLInt sampler) const noexcept;
+        void LodBiasTest(OpenGLInt sampler) const noexcept;
+        void BorderColorTest(OpenGLInt sampler) const noexcept;
 
     private:
         using BorderColorType = std::array<OpenGLFloat, 4>;

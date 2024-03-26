@@ -37,8 +37,8 @@ void CoreTools::VersionTesting::MainTest()
 
 void CoreTools::VersionTesting::GetTCREFullVersionTest() noexcept
 {
-    static_assert(Version::GetTCREFullVersion() == gTCREVersion);
-    static_assert(Version::GetTCREFullVersion() >= gTCRETestingVersion);
+    static_assert(Version::GetTCREFullVersion() == gTcreVersion);
+    static_assert(Version::GetTCREFullVersion() >= gTcreTestingVersion);
 }
 
 void CoreTools::VersionTesting::GetVersionTest()
@@ -52,11 +52,11 @@ void CoreTools::VersionTesting::GetVersionTest()
 
 void CoreTools::VersionTesting::GetTestingVersionTest()
 {
-    ASSERT_LESS_EQUAL(0, Version::GetMajor(gTCRETestingVersion));
-    ASSERT_LESS_EQUAL(0, Version::GetMinor(gTCRETestingVersion));
-    ASSERT_LESS_EQUAL(0, Version::GetBuild(gTCRETestingVersion));
-    ASSERT_LESS_EQUAL(0, Version::GetRevision(gTCRETestingVersion));
-    ASSERT_LESS_EQUAL(7u, Version::GetVersion(gTCRETestingVersion).size());
+    ASSERT_LESS_EQUAL(0, Version::GetMajor(gTcreTestingVersion));
+    ASSERT_LESS_EQUAL(0, Version::GetMinor(gTcreTestingVersion));
+    ASSERT_LESS_EQUAL(0, Version::GetBuild(gTcreTestingVersion));
+    ASSERT_LESS_EQUAL(0, Version::GetRevision(gTcreTestingVersion));
+    ASSERT_LESS_EQUAL(7u, Version::GetVersion(gTcreTestingVersion).size());
 }
 
 void CoreTools::VersionTesting::IsAtLeastTest()

@@ -18,7 +18,6 @@
 namespace System
 {
     /// OpenGL 3.1
-
     SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL31() noexcept;
 
     void InitOpenGL31() noexcept;

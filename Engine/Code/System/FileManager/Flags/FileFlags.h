@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:01)
+/// 版本：1.0.0.7 (2024/03/05 09:23)
 
 #ifndef SYSTEM_FILE_MANAGER_FILE_FLAGS_H
 #define SYSTEM_FILE_MANAGER_FILE_FLAGS_H
@@ -58,7 +58,7 @@ namespace System
         TruncateExisting = TRUNCATE_EXISTING,
     };
 
-    enum class FileHandleAttributes
+    enum class FileHandleAttribute
     {
         ReadOnly = FILE_ATTRIBUTE_READONLY,
         Hidden = FILE_ATTRIBUTE_HIDDEN,
@@ -111,8 +111,8 @@ namespace System
         ContextTracking = SECURITY_CONTEXT_TRACKING,
         EffectiveOnly = SECURITY_EFFECTIVE_ONLY,
 
-        SqosPresent = SECURITY_SQOS_PRESENT,
-        ValidSqosFlags = SECURITY_VALID_SQOS_FLAGS,
+        SecurityQualityOfServicePresent = SECURITY_SQOS_PRESENT,
+        ValidSecurityQualityOfServiceFlags = SECURITY_VALID_SQOS_FLAGS,
     };
 
     enum class FilePointer
@@ -150,7 +150,7 @@ namespace System
         TruncateExisting = 5,
     };
 
-    enum class FileHandleAttributes
+    enum class FileHandleAttribute
     {
         ReadOnly = 0x00000001,
         Hidden = 0x00000002,
@@ -203,8 +203,8 @@ namespace System
         ContextTracking = 0x00040000,
         EffectiveOnly = 0x00080000,
 
-        SqosPresent = 0x00100000,
-        ValidSqosFlags = 0x001F0000,
+        SecurityQualityOfServicePresent = 0x00100000,
+        ValidSecurityQualityOfServiceFlags = 0x001F0000,
     };
 
     enum class FilePointer

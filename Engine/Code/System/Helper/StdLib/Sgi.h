@@ -5,24 +5,24 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:04)
+/// 版本：1.0.0.7 (2024/03/04 21:43)
 
 #ifndef SYSTEM_HELPER_SGI_H
 #define SYSTEM_HELPER_SGI_H
 
 #if defined(__STL_CONFIG_H)
 
-    //  通用 SGI STL:
+    ///  通用 SGI STL:
 
-    #ifndef TCRE_CPPLIB_VERSION
+    #ifndef TCRE_CPP_LIB_VERSION
 
-        #define TCRE_CPPLIB_VERSION 1
+        #define TCRE_CPP_LIB_VERSION 1
 
-    #endif  // TCRE_CPPLIB_VERSION
+    #endif  // TCRE_CPP_LIB_VERSION
 
     #ifndef TCRE_STDLIB
 
-        #define TCRE_SYSTEM_STDLIB "SGI 标准库版本 "
+        #define TCRE_SYSTEM_STD_LIB "SGI 标准库版本 "
 
     #endif  // !TCRE_STDLIB
 

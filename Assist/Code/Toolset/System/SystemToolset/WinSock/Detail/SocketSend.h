@@ -1,17 +1,18 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/28 10:21)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/05 22:23)
 
 #ifndef SYSTEM_TOOLSET_SOCKET_SEND_H
 #define SYSTEM_TOOLSET_SOCKET_SEND_H
 
 #include "Toolset/System/SystemToolset/SystemToolsetDll.h"
 
+#include "System/Helper/UnicodeUsing.h"
 #include "System/Network/Using/SocketPrototypesUsing.h"
 #include "CoreTools/Helper/UserMacro.h"
 
@@ -39,8 +40,7 @@ namespace SystemToolset
         virtual void Send() = 0;
 
     protected:
-        static constexpr auto bufferSize = 256;
-        using BufferType = std::array<char, bufferSize>;
+        using CharBufferType = System::CharBufferType;
 
     protected:
         NODISCARD WinSocket GetWinSocket() const noexcept;
@@ -48,7 +48,7 @@ namespace SystemToolset
 
     private:
         WinSocket winSocket;
-        BufferType buffer;
+        CharBufferType buffer;
     };
 }
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:26)
+/// 版本：1.0.0.7 (2024/03/03 20:21)
 
 #ifndef SYSTEM_NETWORK_SOCKET_PROTOTYPES_FLAGS_H
 #define SYSTEM_NETWORK_SOCKET_PROTOTYPES_FLAGS_H
@@ -41,10 +41,10 @@ namespace System
         Iso = AF_ISO,
         Osi = AF_OSI,
         Ecma = AF_ECMA,
-        Datakit = AF_DATAKIT,
+        DataKit = AF_DATAKIT,
         Ccitt = AF_CCITT,
         Sna = AF_SNA,
-        DeCnet = AF_DECnet,
+        DecNet = AF_DECnet,
         Dli = AF_DLI,
         Lat = AF_LAT,
         HyLink = AF_HYLINK,
@@ -72,10 +72,10 @@ namespace System
         Iso = PF_ISO,
         Osi = PF_OSI,
         Ecma = PF_ECMA,
-        Datakit = PF_DATAKIT,
+        DataKit = PF_DATAKIT,
         Ccitt = PF_CCITT,
         Sna = PF_SNA,
-        DeCnet = PF_DECnet,
+        DecNet = PF_DECnet,
         Dli = PF_DLI,
         Lat = PF_LAT,
         HyLink = PF_HYLINK,
@@ -114,7 +114,7 @@ namespace System
         Max = IPPROTO_MAX,
     };
 
-    enum class SocketRecv
+    enum class SocketReceive
     {
         Default = 0x0,
         Oob = MSG_OOB,
@@ -126,7 +126,7 @@ namespace System
     {
         Default = 0x0,
         Oob = MSG_OOB,
-        DontRoute = MSG_DONTROUTE,
+        DoNotRoute = MSG_DONTROUTE,
     };
 
     enum class SocketLevelOption
@@ -139,28 +139,28 @@ namespace System
     {
         Debug = SO_DEBUG,
         AcceptConn = SO_ACCEPTCONN,
-        ReuseAddr = SO_REUSEADDR,
+        ReuseAddress = SO_REUSEADDR,
         KeepAlive = SO_KEEPALIVE,
-        DontRoute = SO_DONTROUTE,
+        DoNotRoute = SO_DONTROUTE,
         Broadcast = SO_BROADCAST,
         UseLoopBack = SO_USELOOPBACK,
         Linger = SO_LINGER,
-        OobinLine = SO_OOBINLINE,
+        OobInLine = SO_OOBINLINE,
 
-        DontLinger = SO_DONTLINGER,
+        DoNotLinger = SO_DONTLINGER,
 
         SndBuf = SO_SNDBUF,
         RcvBuf = SO_RCVBUF,
-        Sndlowat = SO_SNDLOWAT,
-        Rcvlowat = SO_RCVLOWAT,
-        Sndtimeo = SO_SNDTIMEO,
-        Rcvtimeo = SO_RCVTIMEO,
+        SendLowWater = SO_SNDLOWAT,
+        ReceiveLowWater = SO_RCVLOWAT,
+        SendTimeout = SO_SNDTIMEO,
+        ReceiveTimeout = SO_RCVTIMEO,
         Error = SO_ERROR,
         Type = SO_TYPE,
 
         BspState = SO_BSP_STATE,
         ConditionalAccept = SO_CONDITIONAL_ACCEPT,
-        ExclusiveAddrUse = SO_EXCLUSIVEADDRUSE,
+        ExclusiveAddressUse = SO_EXCLUSIVEADDRUSE,
         MaxMsgSize = SO_MAX_MSG_SIZE,
         PortScalability = SO_PORT_SCALABILITY,
         ProtocolInfo = SO_PROTOCOL_INFO,
@@ -191,10 +191,10 @@ namespace System
         Iso = 7,
         Osi = Iso,
         Ecma = 8,
-        Datakit = 9,
+        DataKit = 9,
         Ccitt = 10,
         Sna = 11,
-        DeCnet = 12,
+        DecNet = 12,
         Dli = 13,
         Lat = 14,
         HyLink = 15,
@@ -221,10 +221,10 @@ namespace System
         Iso = 7,
         Osi = Iso,
         Ecma = 8,
-        Datakit = 9,
+        DataKit = 9,
         Ccitt = 10,
         Sna = 11,
-        DeCnet = 12,
+        DecNet = 12,
         Dli = 13,
         Lat = 14,
         HyLink = 15,
@@ -262,7 +262,7 @@ namespace System
         Max = 256,
     };
 
-    enum class SocketRecv
+    enum class SocketReceive
     {
         Default = 0x0,
         Oob = 0x1,
@@ -274,7 +274,7 @@ namespace System
     {
         Default = 0x0,
         Oob = 0x1,
-        DontRoute = 0x4,
+        DoNotRoute = 0x4,
     };
 
     enum class SocketLevelOption
@@ -287,28 +287,28 @@ namespace System
     {
         Debug = 0x0001,
         AcceptConn = 0x0002,
-        ReuseAddr = 0x0004,
+        ReuseAddress = 0x0004,
         KeepAlive = 0x0008,
-        DontRoute = 0x0010,
+        DoNotRoute = 0x0010,
         Broadcast = 0x0020,
         UseLoopBack = 0x0040,
         Linger = 0x0080,
-        OobinLine = 0x0100,
+        OobInLine = 0x0100,
 
-        DontLinger = (~Linger),
+        DoNotLinger = (~Linger),
 
         SndBuf = 0x1001,
         RcvBuf = 0x1002,
-        Sndlowat = 0x1003,
-        Rcvlowat = 0x1004,
-        Sndtimeo = 0x1005,
-        Rcvtimeo = 0x1006,
+        SendLowWater = 0x1003,
+        ReceiveLowWater = 0x1004,
+        SendTimeout = 0x1005,
+        ReceiveTimeout = 0x1006,
         Error = 0x1007,
         Type = 0x1008,
 
         BspState = 0x1009,
         ConditionalAccept = 0x3002,
-        ExclusiveAddrUse = (~ReuseAddr),
+        ExclusiveAddressUse = (~ReuseAddress),
         MaxMsgSize = 0x2003,
         PortScalability = 0x3006,
         ProtocolInfo = 0x2005,
@@ -327,9 +327,9 @@ namespace System
 
     enum class IoctlSocketCmd : uint32_t
     {
-        FionBio = FIONBIO,
-        FionRead = FIONREAD,
-        Siocatmark = SIOCATMARK,
+        FIonBlockingIO = FIONBIO,
+        FIonRead = FIONREAD,
+        SocketIOControlsAtMark = SIOCATMARK,
     };
 }
 

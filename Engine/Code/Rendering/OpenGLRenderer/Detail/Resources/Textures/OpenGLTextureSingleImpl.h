@@ -24,7 +24,7 @@ namespace Rendering
     public:
         using ClassType = OpenGLTextureSingleImpl;
 
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
 
     public:
         OpenGLTextureSingleImpl() noexcept;

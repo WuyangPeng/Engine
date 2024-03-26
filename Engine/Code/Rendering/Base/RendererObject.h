@@ -28,7 +28,7 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(RendererObject);
 
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
 
         using GraphicsObjectSharedPtr = std::shared_ptr<GraphicsObject>;
         using ConstGraphicsObjectSharedPtr = std::shared_ptr<const GraphicsObject>;

@@ -14,67 +14,54 @@
 
 namespace System
 {
-    // ConditionVariable
+    /// ConditionVariable
     enum class ConditionVariableLockMode;
 
-    // CriticalSection
+    /// CriticalSection
     enum class CriticalSectionInfo;
 
-    // Event
+    /// Event
     enum class EventSpecificAccess;
     enum class CreateEventType;
 
-    // HandleTools
-    enum class HandleInformation;
-    enum class DuplicateOptions;
-
-    // InitOnce
+    /// InitOnce
     enum class InitOnceBeginInitialize;
 
-    // Mutex
+    /// Mutex
     enum class MutexCreate;
     enum class MutexSpecificAccess;
     enum class PThreadResult : uint32_t;
     enum class PThreadMutexCompatibility;
 
-    // Process
+    /// Process
     enum class ProcessCreation : uint32_t;
     enum class ProcessStandardAccess;
     enum class ProcessSpecificAccess;
 
-    // ProcessTools
-    enum class ProcessAffinity;
-    enum class ProcessorFeature;
-    enum class ProcessShutdownParameters;
-    enum class ProcessThreadAttribute;
-    enum class CtrlEvent;
-    enum class ProcessAttachConsole : uint32_t;
-    enum class ProcessExitCode;
-
-    // Semaphore
+    /// Semaphore
     enum class MutexWait : uint32_t;
     enum class MutexWaitReturn : uint32_t;
     enum class MutexStandardAccess;
     enum class SemaphoreSpecificAccess;
 
-    // SyncTools
+    /// SyncTools
     enum class SleepReturn;
 
-    // Thread
+    /// Thread
     enum class ThreadCreation;
     enum class ThreadPriority;
 
-    // ThreadLocalStorage
+    /// ThreadLocalStorage
     enum class ThreadLocalStorageIndexes : uint32_t;
 
-    // ThreadTools
+    /// ThreadTools
     enum class ThreadStandardAccess;
     enum class ThreadSpecificAccess;
     enum class TokenStandardAccess;
     enum class TokenSpecificAccess;
     enum class ThreadContextState;
 
-    // WaitableTimer
+    /// WaitableTimer
     enum class CreateWaitableTimerReset;
     enum class WaitableTimerSpecificAccess;
 }

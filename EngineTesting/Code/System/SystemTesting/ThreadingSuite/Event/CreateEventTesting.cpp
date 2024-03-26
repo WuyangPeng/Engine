@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 14:59)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/12 19:30)
 
 #include "CreateEventTesting.h"
 #include "System/Threading/Event.h"
@@ -31,9 +31,9 @@ System::CreateEventTesting::CreateEventTesting(const OStreamShared& stream)
                     CreateEventType::ManualReset,
                     CreateEventType::All },
       randomEngine{ GetEngineRandomSeed() },
-      maxSize{ CoreTools::MaxElement<size_t>({ eventStandardAccesses.size(), eventSpecificAccesses.size(), createEvents.size() }) }
+      maxSize{ CoreTools::MaxElement({ eventStandardAccesses.size(), eventSpecificAccesses.size(), createEvents.size() }) }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, CreateEventTesting)

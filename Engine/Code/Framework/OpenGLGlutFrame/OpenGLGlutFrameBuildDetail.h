@@ -91,7 +91,7 @@ bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::InitGlutFunctionLibrary
     System::GlutInitWindowSize(rendererParameter.GetWidth(), rendererParameter.GetHeight());
     System::GlutInitContextVersion(glutInformation.GetOpenGLMajorVersion(), glutInformation.GetOpenGLMinorVersion());
 
-    GlutSetOption(System::GlutOption::WindowClose, System::EnumCastUnderlying(System::GlutExtension::GlutMainLoopReturns));
+    GlutSetOption(System::GlutOption::WindowClose, System::GlutExtension::GlutMainLoopReturns);
 
     if (!System::RemoveConsoleCloseButton())
     {

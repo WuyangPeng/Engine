@@ -36,7 +36,7 @@ void Network::MessageTypeConditionOperatingTesting::MainTest()
 
 void Network::MessageTypeConditionOperatingTesting::OperatingTest()
 {
-    constexpr auto version = gTCRETestingVersion - 4;
+    constexpr auto version = gTcreTestingVersion - 4;
     const MessageTypeCondition messageTypeCondition0 = MessageTypeCondition::CreateNullCondition();
     const MessageTypeCondition messageTypeCondition1{ VersionsCondition::Greater, version };
     const MessageTypeCondition messageTypeCondition2{ VersionsCondition::GreaterEqual, version };

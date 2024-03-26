@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:27)
+/// 版本：1.0.0.7 (2024/03/05 17:18)
 
 #ifndef SYSTEM_ANDROID_ANDROID_WINDOW_USING_H
 #define SYSTEM_ANDROID_ANDROID_WINDOW_USING_H
@@ -44,14 +44,29 @@ namespace System
     public:
         using ClassType = AndroidNativeWindowBuffer;
 
+        static constexpr auto size = 6;
+        using ReservedType = std::array<uint32_t, size>;
+
     public:
         AndroidNativeWindowBuffer() noexcept;
 
-    private:
-        static constexpr auto size = 6;
+        NODISCARD int32_t GetWidth() const noexcept;
+        void SetWidth(int32_t aWidth) noexcept;
 
-    private:
-        using ReservedType = std::array<uint32_t, size>;
+        NODISCARD int32_t GetHeight() const noexcept;
+        void SetHeight(int32_t aHeight) noexcept;
+
+        NODISCARD int32_t GetStride() const noexcept;
+        void SetStride(int32_t aStride) noexcept;
+
+        NODISCARD int32_t GetFormat() const noexcept;
+        void SetFormat(int32_t aFormat) noexcept;
+
+        NODISCARD void* GetBits() noexcept;
+        void SetBits(void* aBits) noexcept;
+
+        NODISCARD ReservedType GetReserved() const noexcept;
+        void SetReserved(const ReservedType& aReserved) noexcept;
 
     private:
         int32_t width;

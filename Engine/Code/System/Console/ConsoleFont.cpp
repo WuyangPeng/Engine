@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:21)
+/// 版本：1.0.0.7 (2024/03/05 17:01)
 
 #include "System/SystemExport.h"
 
@@ -18,10 +18,7 @@ bool System::GetCurrentSystemConsoleFont(WindowsHandle consoleOutput, bool maxim
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetCurrentConsoleFont(consoleOutput, BoolConversion(maximumWindow), consoleCurrentFont) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetCurrentConsoleFont(consoleOutput, BoolConversion(maximumWindow), consoleCurrentFont) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -36,10 +33,7 @@ bool System::GetCurrentSystemConsoleFont(WindowsHandle consoleOutput, bool maxim
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetCurrentConsoleFontEx(consoleOutput, BoolConversion(maximumWindow), consoleCurrentFontEx) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetCurrentConsoleFontEx(consoleOutput, BoolConversion(maximumWindow), consoleCurrentFontEx) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -54,10 +48,7 @@ bool System::SetCurrentSystemConsoleFont(WindowsHandle consoleOutput, bool maxim
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetCurrentConsoleFontEx(consoleOutput, BoolConversion(maximumWindow), consoleCurrentFontEx) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetCurrentConsoleFontEx(consoleOutput, BoolConversion(maximumWindow), consoleCurrentFontEx) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

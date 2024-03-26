@@ -21,7 +21,7 @@ Rendering::OpenGLRendererObject::OpenGLRendererObject(const GraphicsObjectShared
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, OpenGLRendererObject)
 
-System::OpenGLUInt Rendering::OpenGLRendererObject::GetGLHandle() const noexcept
+System::OpenGLUnsignedInt Rendering::OpenGLRendererObject::GetGLHandle() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

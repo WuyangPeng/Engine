@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:05)
+/// 版本：1.0.0.7 (2024/03/05 09:33)
 
 #include "System/SystemExport.h"
 
@@ -41,10 +41,7 @@ bool System::FileTimeConvertLocalFileTime(const FileTime* fileTime, FileTimePtr 
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::FileTimeToLocalFileTime(fileTime, localFileTime) != gFalse)
-        return true;
-    else
-        return false;
+    return ::FileTimeToLocalFileTime(fileTime, localFileTime) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -59,10 +56,7 @@ bool System::GetSystemFileTime(WindowsHandle file, FileTimePtr creationTime, Fil
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::GetFileTime(file, creationTime, lastAccessTime, lastWriteTime) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetFileTime(file, creationTime, lastAccessTime, lastWriteTime) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -77,10 +71,7 @@ bool System::LocalFileTimeConvertFileTime(const FileTime* localFileTime, FileTim
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::LocalFileTimeToFileTime(localFileTime, fileTime) != gFalse)
-        return true;
-    else
-        return false;
+    return ::LocalFileTimeToFileTime(localFileTime, fileTime) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -95,10 +86,7 @@ bool System::SetSystemFileTime(WindowsHandle file, const FileTime* creationTime,
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::SetFileTime(file, creationTime, lastAccessTime, lastWriteTime) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetFileTime(file, creationTime, lastAccessTime, lastWriteTime) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

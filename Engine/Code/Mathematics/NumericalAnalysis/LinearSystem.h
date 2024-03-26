@@ -13,11 +13,24 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "SparseMatrix.h"
+#include "CoreTools/MemoryTools/LexicoArray2.h"
 #include "Mathematics/Algebra/BandedMatrix.h"
+#include "Mathematics/Algebra/Matrix/Matrix2x2.h"
+#include "Mathematics/Algebra/Matrix/Matrix3x3.h"
+#include "Mathematics/Algebra/Matrix/Matrix4x4.h"
 #include "Mathematics/Algebra/VariableLengthVector.h"
 #include "Mathematics/Algebra/VariableMatrix.h"
+#include "Mathematics/Algebra/Vector/Vector2.h"
 #include "Mathematics/Base/MathDetail.h"
 
+/// 求解矩阵A为NxN的线性方程组。
+/// 当a可逆时，函数的返回值为“true”。
+/// 在这种情况下，解决方案X和解决方案是有效的。
+/// 如果返回值为'false'，则A不可逆，X和Y无效，因此不要使用它们。
+/// 当矩阵被传递为Real*时，存储顺序被假定为与您选择的MATHEMATICS_USE_ROW_MAJOR或!MATHEMATICS_USE_ROW_MAJOR一致。
+//
+/// 使用共轭梯度算法的线性求解器基于G.H.Golub和Charles F.Van Loan在“矩阵计算，第二版”中的讨论，
+/// 约翰霍普金斯出版社，巴尔的摩医学院，1993年第四版。
 namespace Mathematics
 {
     template <typename Real>
@@ -38,6 +51,14 @@ namespace Mathematics
         using SparseMatrix = SparseMatrix<Real>;
         using VariableMatrix = VariableMatrix<Real>;
         using VariableLengthVector = VariableLengthVector<Real>;
+
+        using Matrix2x2 = Algebra::Matrix2x2<Real>;
+        using Matrix3x3 = Algebra::Matrix3x3<Real>;
+        using Matrix4x4 = Algebra::Matrix4x4<Real>;
+        using AlgebraVector2 = Algebra::Vector2<Real>;
+        using AlgebraVector3 = Algebra::Vector3<Real>;
+        using AlgebraVector4 = Algebra::Vector4<Real>;
+        using AlgebraSparseMatrix = std::map<std::array<int, 2>, Real>;
 
     public:
         explicit LinearSystem(Real zeroTolerance = Math::GetZeroTolerance()) noexcept;
@@ -78,7 +99,7 @@ namespace Mathematics
 
         // 必须保证lower和upper大小为size - 1的一维数组。
         // main、right和output大小为size的一维数组。
-        NODISCARD RealContainer SolveTridiagonal(int size, const RealContainer& lower, const RealContainer& mainDdiagonal, const RealContainer& upper, const RealContainer& right) const;
+        NODISCARD RealContainer SolveTriDiagonal(int size, const RealContainer& lower, const RealContainer& mainDdiagonal, const RealContainer& upper, const RealContainer& right) const;
 
         // 输入:
         //     矩阵是三对角矩阵。
@@ -132,6 +153,69 @@ namespace Mathematics
         // 输出:
         //     求逆失败抛出异常，否则返回逆矩阵
         NODISCARD VariableMatrix Invert(const BandedMatrix& matrix) const;
+
+        /// 通过直接反转矩阵来求解2x2、3x3和4x4系统。
+        /// 这避免了在小维度中高斯消除的开销。
+        NODISCARD static bool Solve(const Matrix2x2& a, const AlgebraVector2& b, AlgebraVector2& x);
+
+        NODISCARD static bool Solve(const Matrix3x3& a, const AlgebraVector3& b, AlgebraVector3& x);
+
+        NODISCARD static bool Solve(const Matrix4x4& a, const AlgebraVector4& b, AlgebraVector4& x);
+
+        /// 求解A*X = B，其中B为Nx1，解X为Nx1。
+        NODISCARD static bool Solve(int n, const RealContainer& a, const RealContainer& b, RealContainer& x);
+
+        /// 求解A*X = B，其中B为NxM，解X为NxM。
+        NODISCARD static bool Solve(int n, int m, const RealContainer& a, const RealContainer& b, RealContainer& x);
+
+        /// 求解A*X = B，其中A是三对角的。
+        /// 函数需要A的次对角线、对角线和超对角线。
+        /// 对角线输入必须有N个元素。
+        /// 次对角线和超对角线输入必须具有N-1个元素。
+        NODISCARD static bool SolveTriDiagonal(int n, const RealContainer& subDiagonal, const RealContainer& diagonal, const RealContainer& superDiagonal, const RealContainer& b, RealContainer& x);
+
+        /// 求解A*X = B，其中A是三对角的。
+        /// 该函数期望A的subDiagonal、对角线和superDiagonal。
+        /// 此外，subDiagonal元素是常数，对角线元素是常量，superDiagonal元素是常数。
+        NODISCARD static bool SolveConstantTriDiagonal(int n, Real subDiagonal, Real diagonal, Real superDiagonal, const RealContainer& b, RealContainer& x);
+
+        /// 使用共轭梯度法求解A*X=B，其中A是对称的。
+        /// 您必须指定迭代的最大次数和终止迭代的容差。
+        /// 公差的合理选择是1e-06f 表示 'float或1e-08 表示 'double'
+        NODISCARD static int SolveSymmetricConjugateGradient(int n, RealContainer& a, const RealContainer& b, RealContainer& x, int maxIterations, Real tolerance);
+
+        /// 使用共轭梯度法求解A*X = B，其中A是稀疏和对称的。
+        /// 对称矩阵A的非零项存储在映射中，该映射的键是对(i,j)，
+        /// 并且其值是实数。对(i,j)是值在数组中的位置。
+        /// 由于A是对称的，因此只应存储(i,j)和(j,i) 中的一个。
+        /// 列向量B被存储为连续值的数组。
+        /// 您必须指定迭代的最大次数和终止迭代的容差。
+        /// 公差的合理选择是1e-06f 表示 'float或1e-08 表示 'double'
+        NODISCARD static int SolveSymmetricConjugateGradient(int n, const AlgebraSparseMatrix& a, const RealContainer& b, RealContainer& x, int maxIterations, Real tolerance);
+
+#if defined(MATHEMATICS_USE_ROW_MAJOR)
+
+        using LexicoArray2 = CoreTools::LexicoArray2<true, Real>;
+
+#else  // !MATHEMATICS_USE_ROW_MAJOR
+
+        using LexicoArray2 = CoreTools::LexicoArray2<false, Real>;
+
+#endif  // MATHEMATICS_USE_ROW_MAJOR
+
+    private:
+        /// 支持共轭梯度法。
+        NODISCARD static Real Dot(int n, const RealContainer& u, const RealContainer& v);
+
+        static void Mul(int n, RealContainer& a, const RealContainer& x, RealContainer& p);
+
+        static void Mul(const AlgebraSparseMatrix& a, const RealContainer& x, RealContainer& p);
+
+        static void UpdateX(int n, RealContainer& x, Real alpha, const RealContainer& p);
+
+        static void UpdateR(int n, RealContainer& r, Real alpha, const RealContainer& w);
+
+        static void UpdateP(int n, RealContainer& p, Real beta, const RealContainer& r);
 
     private:
         // 线性系统求解容差。

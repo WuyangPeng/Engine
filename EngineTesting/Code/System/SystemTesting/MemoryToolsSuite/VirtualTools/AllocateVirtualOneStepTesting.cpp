@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 10:08)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/12 10:22)
 
 #include "AllocateVirtualOneStepTesting.h"
 #include "System/MemoryTools/VirtualTools.h"
@@ -36,18 +36,23 @@ bool System::AllocateVirtualOneStepTesting::AllocateVirtualTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(RandomShuffle);
 
-    ASSERT_NOT_THROW_EXCEPTION_0(AllocateVirtualOneStepTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(AllocateVirtualOneStepTestLoop);
 
     return true;
 }
 
-void System::AllocateVirtualOneStepTesting::AllocateVirtualOneStepTest()
+void System::AllocateVirtualOneStepTesting::AllocateVirtualOneStepTestLoop()
 {
     for (auto index = 0u; index < GetMaxSize(); ++index)
     {
-        ASSERT_NOT_THROW_EXCEPTION_1(DoAllocateVirtualOneStepTest, index);
-        ASSERT_NOT_THROW_EXCEPTION_1(DoAllocateVirtualOneStepUseProcessTest, index);
+        ASSERT_NOT_THROW_EXCEPTION_1(AllocateVirtualOneStepTest, index);
     }
+}
+
+void System::AllocateVirtualOneStepTesting::AllocateVirtualOneStepTest(size_t index)
+{
+    ASSERT_NOT_THROW_EXCEPTION_1(DoAllocateVirtualOneStepTest, index);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoAllocateVirtualOneStepUseProcessTest, index);
 }
 
 void System::AllocateVirtualOneStepTesting::DoAllocateVirtualOneStepTest(size_t index)
@@ -78,7 +83,7 @@ void System::AllocateVirtualOneStepTesting::DoAllocateVirtualOneStepUseProcessTe
     ASSERT_NOT_THROW_EXCEPTION_2(FreeVirtualUseProcessTest, GetCurrentProcessHandle(), baseVirtual);
 }
 
-void System::AllocateVirtualOneStepTesting::ReadWriteTest(MemoryProtect memoryProtect, char* basePage) noexcept
+void System::AllocateVirtualOneStepTesting::ReadWriteTest(MemoryProtect memoryProtect, char* basePage) const noexcept
 {
     if (basePage != nullptr)
     {

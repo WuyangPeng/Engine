@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 13:52)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:43)
 
 #include "OpenGLInitTesting.h"
 #include "System/OpenGL/OpenGLInit.h"
@@ -29,18 +29,22 @@ void System::OpenGLInitTesting::DoRunUnitTest()
 void System::OpenGLInitTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(OpenGLInitTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(InfoTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(PrintInfoTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLInfoTest);
 }
 
 void System::OpenGLInitTesting::OpenGLInitTest()
 {
     ASSERT_TRUE(OpenGLInit());
+}
 
+void System::OpenGLInitTesting::PrintInfoTest() const
+{
     PrintOpenGLInfo();
     PrintWglExtensionsInfo();
 }
 
-void System::OpenGLInitTesting::InfoTest()
+void System::OpenGLInitTesting::OpenGLInfoTest()
 {
     ASSERT_FALSE(GetOpenGLVendorString().empty());
     ASSERT_FALSE(GetOpenGLVersionString().empty());

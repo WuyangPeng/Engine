@@ -41,9 +41,9 @@ void CoreTools::LoadingLibraryTesting::LoadingNetMessageDllTest()
 {
     const auto netMessageDll = SYSTEM_TEXT("netmsg.dll"s);
 
-    LoadingLibrary library0{ netMessageDll, System::LoadLibraryType::DontResolveDllReferences };
+    LoadingLibrary library0{ netMessageDll, System::LoadLibraryType::DoNotResolveDllReferences };
 
-    LoadingLibrary library1{ netMessageDll, System::LoadLibraryType::DontResolveDllReferences };
+    LoadingLibrary library1{ netMessageDll, System::LoadLibraryType::DoNotResolveDllReferences };
 
     ASSERT_EQUAL(library0.GetLoadedModule(), library1.GetLoadedModule());
     ASSERT_UNEQUAL_NULL_PTR(library0.GetLoadedModule());
@@ -53,7 +53,7 @@ void CoreTools::LoadingLibraryTesting::LoadingErrorDllTest()
 {
     const auto errorDll = SYSTEM_TEXT("error.dll"s);
 
-    LoadingLibrary library{ errorDll, System::LoadLibraryType::DontResolveDllReferences };
+    LoadingLibrary library{ errorDll, System::LoadLibraryType::DoNotResolveDllReferences };
 }
 
 void CoreTools::LoadingLibraryTesting::GetProcessAddressTest()

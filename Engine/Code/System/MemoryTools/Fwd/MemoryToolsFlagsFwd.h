@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:31)
+/// 版本：1.0.0.7 (2024/03/04 15:57)
 
 #ifndef SYSTEM_MEMORY_TOOLS_MEMORY_TOOLS_FLAGS_FWD_H
 #define SYSTEM_MEMORY_TOOLS_MEMORY_TOOLS_FLAGS_FWD_H
@@ -14,23 +14,18 @@
 
 namespace System
 {
-    // HeapTools
+    /// HeapTools
     enum class HeapCreate;
     enum class ProcessHeap;
 
-    // LocalMemory
+    /// LocalMemory
     enum class LocalMemory;
 
-    // MemoryHelper
-    enum class WorkingSetSizesQuotaLimits;
-    enum class FileCache;
-    enum class WriteWatch;
-
-    // ViewOfFile
+    /// ViewOfFile
     enum class FileMapDesiredAccess;
     enum class FileMapProtection : uint32_t;
 
-    // VirtualTools
+    /// VirtualTools
     enum class MemoryAllocation : uint32_t;
     enum class MemoryProtect : uint32_t;
 }

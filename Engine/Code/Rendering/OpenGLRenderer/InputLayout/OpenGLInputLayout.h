@@ -24,7 +24,7 @@ namespace Rendering
     {
     public:
         COPY_UNSHARED_TYPE_DECLARE(OpenGLInputLayout);
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
 
     public:
         OpenGLInputLayout(OpenGLUInt programHandle, OpenGLUInt vertexBufferHandle, const VertexBuffer& vertexBuffer);

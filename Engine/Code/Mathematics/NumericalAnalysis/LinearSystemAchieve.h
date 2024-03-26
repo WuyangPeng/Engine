@@ -19,6 +19,10 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/MemoryTools/LexicoArray2Detail.h"
+#include "Mathematics/Algebra/Matrix/Matrix2x2Detail.h"
+#include "Mathematics/Algebra/Matrix/Matrix3x3Detail.h"
+#include "Mathematics/Algebra/Matrix/Matrix4x4Detail.h"
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 
@@ -140,7 +144,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
 }
 
 template <typename Real>
-typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::SolveTridiagonal(int size, const RealContainer& lower, const RealContainer& mainDdiagonal, const RealContainer& upper, const RealContainer& right) const
+typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::SolveTriDiagonal(int size, const RealContainer& lower, const RealContainer& mainDdiagonal, const RealContainer& upper, const RealContainer& right) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(0 < size, "传入的大小为零或负数！");
@@ -280,6 +284,307 @@ typename Mathematics::LinearSystem<Real>::VariableMatrix Mathematics::LinearSyst
     Mathematics::BandedMatrixInvert<Real> invert{ matrix, zeroTolerance };
 
     return invert.GetInvert();
+}
+
+template <typename Real>
+bool Mathematics::LinearSystem<Real>::Solve(const Matrix2x2& a, const AlgebraVector2& b, AlgebraVector2& x)
+{
+    auto invertible = false;
+    const auto inverseA = Algebra::Inverse(a, &invertible);
+    if (invertible)
+    {
+        x = inverseA * b;
+    }
+    else
+    {
+        x = AlgebraVector2::GetZero();
+    }
+
+    return invertible;
+}
+
+template <typename Real>
+bool Mathematics::LinearSystem<Real>::Solve(const Matrix3x3& a, const AlgebraVector3& b, AlgebraVector3& x)
+{
+    auto invertible = false;
+    const auto inverseA = Algebra::Inverse(a, &invertible);
+    if (invertible)
+    {
+        x = inverseA * b;
+    }
+    else
+    {
+        x = AlgebraVector3::GetZero();
+    }
+
+    return invertible;
+}
+
+template <typename Real>
+bool Mathematics::LinearSystem<Real>::Solve(const Matrix4x4& a, const AlgebraVector4& b, AlgebraVector4& x)
+{
+    auto invertible = false;
+    const auto inverseA = Algebra::Inverse(a, &invertible);
+    if (invertible)
+    {
+        x = inverseA * b;
+    }
+    else
+    {
+        x = AlgebraVector4::GetZero();
+    }
+
+    return invertible;
+}
+
+template <typename Real>
+bool Mathematics::LinearSystem<Real>::Solve(int n, const RealContainer& a, const RealContainer& b, RealContainer& x)
+{
+    if (GaussianElimination<Real> gaussianElimination{ n, a, false, b };
+        gaussianElimination.IsInverse())
+    {
+        x = gaussianElimination.GetX();
+
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+template <typename Real>
+bool Mathematics::LinearSystem<Real>::Solve(int n, int m, const RealContainer& a, const RealContainer& b, RealContainer& x)
+{
+    if (GaussianElimination<Real> gaussianElimination{ n, a, false, typename GaussianElimination<Real>::Container{}, m, b };
+        gaussianElimination.IsInverse())
+    {
+        x = gaussianElimination.GetY();
+
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+template <typename Real>
+bool Mathematics::LinearSystem<Real>::SolveTriDiagonal(int n, const RealContainer& subDiagonal, const RealContainer& diagonal, const RealContainer& superDiagonal, const RealContainer& b, RealContainer& x)
+{
+    if (Math::Approximate(diagonal.at(0), Real{}))
+    {
+        return false;
+    }
+
+    RealContainer tmp(boost::numeric_cast<size_t>(n) - 1);
+    auto expr = diagonal.at(0);
+    auto invExpr = Math::GetValue(1) / expr;
+    x.at(0) = b.at(0) * invExpr;
+
+    for (auto i0 = 0, i1 = 1; i1 < n; ++i0, ++i1)
+    {
+        tmp.at(i0) = superDiagonal.at(i0) * invExpr;
+        expr = diagonal.at(i1) - subDiagonal.at(i0) * tmp.at(i0);
+        if (Math::Approximate(expr, Real{}))
+        {
+            return false;
+        }
+        invExpr = Math::GetValue(1) / expr;
+        x.at(i1) = (b.at(i1) - subDiagonal.at(i0) * x.at(i0)) * invExpr;
+    }
+
+    for (auto i0 = n - 1, i1 = n - 2; i1 >= 0; --i0, --i1)
+    {
+        x.at(i1) -= tmp.at(i1) * x.at(i0);
+    }
+    return true;
+}
+
+template <typename Real>
+bool Mathematics::LinearSystem<Real>::SolveConstantTriDiagonal(int n, Real subDiagonal, Real diagonal, Real superDiagonal, const RealContainer& b, RealContainer& x)
+{
+    if (Math::Approximate(diagonal, Real{}))
+    {
+        return false;
+    }
+
+    RealContainer tmp(boost::numeric_cast<size_t>(n) - 1);
+    auto expr = diagonal;
+    auto invExpr = Math::GetValue(1) / expr;
+    x.at(0) = b.at(0) * invExpr;
+
+    for (auto i0 = 0, i1 = 1; i1 < n; ++i0, ++i1)
+    {
+        tmp.at(i0) = superDiagonal * invExpr;
+        expr = diagonal - subDiagonal * tmp.at(i0);
+        if (Math::Approximate(expr, Real{}))
+        {
+            return false;
+        }
+        invExpr = Math::GetValue(1) / expr;
+        x.at(i1) = (b.at(i1) - subDiagonal * x.at(i0)) * invExpr;
+    }
+
+    for (auto i0 = n - 1, i1 = n - 2; i1 >= 0; --i0, --i1)
+    {
+        x.at(i1) -= tmp.at(i1) * x.at(i0);
+    }
+    return true;
+}
+
+template <typename Real>
+int Mathematics::LinearSystem<Real>::SolveSymmetricConjugateGradient(int n, RealContainer& a, const RealContainer& b, RealContainer& x, int maxIterations, Real tolerance)
+{
+    /// 第一次迭代。
+    RealContainer r(n);
+    RealContainer p(n);
+    RealContainer w(n);
+
+    r = b;
+    std::fill(x.begin(), x.end(), Real{});
+
+    auto rho0 = Dot(n, r, r);
+    p = r;
+    Mul(n, a, p, w);
+    auto alpha = rho0 / Dot(n, p, w);
+    UpdateX(n, x, alpha, p);
+    UpdateR(n, r, alpha, w);
+    auto rho1 = Dot(n, r, r);
+
+    /// 剩下的迭代。
+    auto iteration = 1;
+    for (; iteration <= maxIterations; ++iteration)
+    {
+        const auto root0 = std::sqrt(rho1);
+        const auto norm = Dot(n, b, b);
+        const auto root1 = std::sqrt(norm);
+        if (root0 <= tolerance * root1)
+        {
+            break;
+        }
+
+        const auto beta = rho1 / rho0;
+        UpdateP(n, p, beta, r);
+        Mul(n, a, p, w);
+        alpha = rho1 / Dot(n, p, w);
+        UpdateX(n, x, alpha, p);
+        UpdateR(n, r, alpha, w);
+        rho0 = rho1;
+        rho1 = Dot(n, r, r);
+    }
+    return iteration;
+}
+
+template <typename Real>
+int Mathematics::LinearSystem<Real>::SolveSymmetricConjugateGradient(int n, AlgebraSparseMatrix const& a, const RealContainer& b, RealContainer& x, int maxIterations, Real tolerance)
+{
+    /// 第一次迭代。
+    RealContainer r(n);
+    RealContainer p(n);
+    RealContainer w(n);
+
+    r = b;
+    std::fill(x.begin(), x.end(), Real{});
+    auto rho0 = Dot(n, r, r);
+    p = r;
+    Mul(a, p, w);
+    auto alpha = rho0 / Dot(n, p, w);
+    UpdateX(n, x, alpha, p);
+    UpdateR(n, r, alpha, w);
+    auto rho1 = Dot(n, r, r);
+
+    /// 剩下的迭代。
+    auto iteration = 1;
+    for (; iteration <= maxIterations; ++iteration)
+    {
+        const auto root0 = std::sqrt(rho1);
+        auto norm = Dot(n, b, b);
+        const auto root1 = std::sqrt(norm);
+        if (root0 <= tolerance * root1)
+        {
+            break;
+        }
+
+        auto beta = rho1 / rho0;
+        UpdateP(n, p, beta, r);
+        Mul(a, p, w);
+        alpha = rho1 / Dot(n, p, w);
+        UpdateX(n, x, alpha, p);
+        UpdateR(n, r, alpha, w);
+        rho0 = rho1;
+        rho1 = Dot(n, r, r);
+    }
+    return iteration;
+}
+
+template <typename Real>
+Real Mathematics::LinearSystem<Real>::Dot(int n, const RealContainer& u, const RealContainer& v)
+{
+    Real dot{};
+    for (auto i = 0; i < n; ++i)
+    {
+        dot += u.at(i) * v.at(i);
+    }
+    return dot;
+}
+
+template <typename Real>
+void Mathematics::LinearSystem<Real>::Mul(int n, RealContainer& a, const RealContainer& x, RealContainer& p)
+{
+    LexicoArray2 matA{ n, n, a };
+
+    for (auto row = 0; row < n; ++row)
+    {
+        for (auto col = 0; col < n; ++col)
+        {
+            p.at(row) += matA(row, col) * x.at(col);
+        }
+    }
+}
+
+template <typename Real>
+void Mathematics::LinearSystem<Real>::Mul(const AlgebraSparseMatrix& a, const RealContainer& x, RealContainer& p)
+{
+    std::fill(p.begin(), p.end(), Real{});
+    for (const auto& element : a)
+    {
+        auto i = element.first.at(0);
+        auto j = element.first.at(1);
+        auto value = element.second;
+        p.at(i) += value * x.at(j);
+        if (i != j)
+        {
+            p.at(j) += value * x.at(i);
+        }
+    }
+}
+
+template <typename Real>
+void Mathematics::LinearSystem<Real>::UpdateX(int n, RealContainer& x, Real alpha, const RealContainer& p)
+{
+    for (auto i = 0; i < n; ++i)
+    {
+        x.at(i) += alpha * p.at(i);
+    }
+}
+
+template <typename Real>
+void Mathematics::LinearSystem<Real>::UpdateR(int n, RealContainer& r, Real alpha, const RealContainer& w)
+{
+    for (auto i = 0; i < n; ++i)
+    {
+        r.at(i) -= alpha * w.at(i);
+    }
+}
+
+template <typename Real>
+void Mathematics::LinearSystem<Real>::UpdateP(int n, RealContainer& p, Real beta, const RealContainer& r)
+{
+    for (auto i = 0; i < n; ++i)
+    {
+        p.at(i) = r.at(i) + beta * p.at(i);
+    }
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_ACHIEVE_H

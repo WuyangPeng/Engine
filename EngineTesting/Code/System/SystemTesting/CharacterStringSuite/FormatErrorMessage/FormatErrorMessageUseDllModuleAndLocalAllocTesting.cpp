@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 16:09)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 14:13)
 
 #include "FormatErrorMessageUseDllModuleAndLocalAllocTesting.h"
 #include "System/CharacterString/FormatErrorMessage.h"
@@ -39,46 +39,49 @@ void System::FormatErrorMessageUseDllModuleAndLocalAllocTesting::MainTest()
 
 void System::FormatErrorMessageUseDllModuleAndLocalAllocTesting::FormatErrorMessageUseDllModuleAndLocalAllocTest(ConstDynamicLinkModule dynamicLinkModule)
 {
+    /// 这里只测试到DlpPolicySilentlyFail，之后的Window错误码枚举并未完全补全，测试将失败。
     for (auto flag = WindowError::Success; flag <= WindowError::DlpPolicySilentlyFail; ++flag)
     {
-        WindowsHLocal errorMessage{ nullptr };
-
-        ASSERT_NOT_THROW_EXCEPTION_3(FormatErrorMessageTest, dynamicLinkModule, flag, errorMessage);
-        ASSERT_NOT_THROW_EXCEPTION_1(LocalMemoryFreeTest, errorMessage);
+        ASSERT_NOT_THROW_EXCEPTION_2(DoFormatErrorMessageUseDllModuleAndLocalAllocTest, dynamicLinkModule, flag);
     }
+}
+
+void System::FormatErrorMessageUseDllModuleAndLocalAllocTesting::DoFormatErrorMessageUseDllModuleAndLocalAllocTest(ConstDynamicLinkModule dynamicLinkModule, WindowError flag)
+{
+    WindowsHLocal errorMessage{ nullptr };
+
+    ASSERT_NOT_THROW_EXCEPTION_3(FormatErrorMessageTest, dynamicLinkModule, flag, errorMessage);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(LocalMemoryFreeTest, errorMessage);
 }
 
 void System::FormatErrorMessageUseDllModuleAndLocalAllocTesting::FormatComErrorMessageUseDllModuleAndLocalAllocTest(ConstDynamicLinkModule dynamicLinkModule)
 {
     for (auto iter = GetComWindowErrorBegin(); iter != GetComWindowErrorEnd(); ++iter)
     {
-        WindowsHLocal errorMessage{ nullptr };
-
-        ASSERT_NOT_THROW_EXCEPTION_3(FormatErrorMessageSuccessTest, dynamicLinkModule, *iter, errorMessage);
-        ASSERT_NOT_THROW_EXCEPTION_1(LocalMemoryFreeTest, errorMessage);
+        ASSERT_NOT_THROW_EXCEPTION_2(DoFormatComErrorMessageUseDllModuleAndLocalAllocTest, dynamicLinkModule, *iter);
     }
+}
+
+void System::FormatErrorMessageUseDllModuleAndLocalAllocTesting::DoFormatComErrorMessageUseDllModuleAndLocalAllocTest(ConstDynamicLinkModule dynamicLinkModule, WindowError flag)
+{
+    WindowsHLocal errorMessage{ nullptr };
+
+    ASSERT_NOT_THROW_EXCEPTION_3(FormatErrorMessageSuccessTest, dynamicLinkModule, flag, errorMessage);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(LocalMemoryFreeTest, errorMessage);
 }
 
 void System::FormatErrorMessageUseDllModuleAndLocalAllocTesting::FormatErrorMessageTest(ConstDynamicLinkModule dynamicLinkModule, WindowError windowError, WindowsHLocal& errorMessage)
 {
     if (IsWindowErrorValid(windowError))
     {
-        ASSERT_NOT_THROW_EXCEPTION_3(FormatErrorMessageValidTest, dynamicLinkModule, windowError, errorMessage);
+        ASSERT_NOT_THROW_EXCEPTION_3(FormatErrorMessageSuccessTest, dynamicLinkModule, windowError, errorMessage);
     }
     else
     {
-        ASSERT_NOT_THROW_EXCEPTION_3(FormatErrorMessageInvalidTest, dynamicLinkModule, windowError, errorMessage);
+        ASSERT_NOT_THROW_EXCEPTION_3(FormatErrorMessageFailTest, dynamicLinkModule, windowError, errorMessage);
     }
-}
-
-void System::FormatErrorMessageUseDllModuleAndLocalAllocTesting::FormatErrorMessageValidTest(ConstDynamicLinkModule dynamicLinkModule, WindowError windowError, WindowsHLocal& errorMessage)
-{
-    ASSERT_NOT_THROW_EXCEPTION_3(FormatErrorMessageSuccessTest, dynamicLinkModule, windowError, errorMessage);
-}
-
-void System::FormatErrorMessageUseDllModuleAndLocalAllocTesting::FormatErrorMessageInvalidTest(ConstDynamicLinkModule dynamicLinkModule, WindowError windowError, WindowsHLocal& errorMessage)
-{
-    ASSERT_NOT_THROW_EXCEPTION_3(FormatErrorMessageFailTest, dynamicLinkModule, windowError, errorMessage);
 }
 
 void System::FormatErrorMessageUseDllModuleAndLocalAllocTesting::FormatErrorMessageSuccessTest(ConstDynamicLinkModule dynamicLinkModule, WindowError windowError, WindowsHLocal& errorMessage)
@@ -91,16 +94,4 @@ void System::FormatErrorMessageUseDllModuleAndLocalAllocTesting::FormatErrorMess
 {
     ASSERT_FALSE(FormatErrorMessage(errorMessage, dynamicLinkModule, windowError));
     ASSERT_EQUAL_NULL_PTR(errorMessage);
-}
-
-void System::FormatErrorMessageUseDllModuleAndLocalAllocTesting::FormatErrorMessageUnknownTest(ConstDynamicLinkModule dynamicLinkModule, WindowError windowError, WindowsHLocal& errorMessage)
-{
-    if (FormatErrorMessage(errorMessage, dynamicLinkModule, windowError))
-    {
-        ASSERT_UNEQUAL_NULL_PTR(errorMessage);
-    }
-    else
-    {
-        ASSERT_EQUAL_NULL_PTR(errorMessage);
-    }
 }

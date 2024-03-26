@@ -75,6 +75,34 @@ namespace CoreTools
             return defaultResult;
         }
     }
+
+    template <typename Function, typename... T>
+    void NoexceptNoReturnUseLog(Function function, T&&... parameter) noexcept
+    {
+        try
+        {
+            function(std::forward<T>(parameter)...);
+        }
+        catch (...)
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("Noexcept 抛出异常。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        }
+    }
+
+    template <typename Result, typename Function, typename... T>
+    NODISCARD typename boost::call_traits<Result>::value_type NoexceptUseLog(Function function, typename boost::call_traits<Result>::param_type defaultResult, T&&... parameter) noexcept
+    {
+        try
+        {
+            return function(std::forward<T>(parameter)...);
+        }
+        catch (...)
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("Noexcept 抛出异常。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+
+            return defaultResult;
+        }
+    }
 }
 
 #endif  // CORE_TOOLS_CONTRACT_NOEXCEPT_LOG_H

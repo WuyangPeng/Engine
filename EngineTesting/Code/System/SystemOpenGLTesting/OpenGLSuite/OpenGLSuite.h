@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 13:51)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:41)
 
 #ifndef SYSTEM_OPENGL_TESTING_OPENGL_SUITE_H
 #define SYSTEM_OPENGL_TESTING_OPENGL_SUITE_H
@@ -13,6 +13,7 @@
 #include "OpenGLBase/OpenGLBaseTesting.h"
 #include "OpenGLBase/OpenGLBlendTesting.h"
 #include "OpenGLBase/OpenGLDepthTesting.h"
+#include "OpenGLBase/OpenGLDrawTesting.h"
 #include "OpenGLBase/OpenGLMaskTesting.h"
 #include "OpenGLBase/OpenGLQueryTesting.h"
 #include "OpenGLBase/OpenGLStateTesting.h"
@@ -22,6 +23,7 @@
 #include "OpenGLBuffers/OpenGLDrawBuffersTesting.h"
 #include "OpenGLBuffers/OpenGLFrameBufferTesting.h"
 #include "OpenGLBuffers/OpenGLGetBuffersTesting.h"
+#include "OpenGLBuffers/OpenGLMapTesting.h"
 #include "OpenGLBuffers/OpenGLSetBufferSubDataTesting.h"
 #include "OpenGLBuffers/OpenGLSetBufferTesting.h"
 #include "OpenGLBuffers/OpenGLSetCopyBufferSubDataTesting.h"
@@ -47,6 +49,8 @@
 #include "OpenGLShader/OpenGLGetUniformLocationTesting.h"
 #include "OpenGLShader/OpenGLShaderAttributesTesting.h"
 #include "OpenGLShader/OpenGLShaderStatusTesting.h"
+#include "OpenGLShader/OpenGLShaderStorageBlockBindingTesting.h"
+#include "OpenGLTextures/OpenGLActiveTextureTesting.h"
 #include "OpenGLTextures/OpenGLBindTexturesTesting.h"
 #include "OpenGLTextures/OpenGLFrameBufferTextures2DTesting.h"
 #include "OpenGLTextures/OpenGLGetTexturesTesting.h"

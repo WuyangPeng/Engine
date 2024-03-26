@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 14:10)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 14:31)
 
 #include "SecuritySidTestingBase.h"
 #include "System/Helper/SecuritySidMacro.h"
@@ -14,7 +14,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::SecuritySidTestingBase::SecuritySidTestingBase(const OStreamShared& stream)
-    : ParentType{ stream }, securitySIDIdentifierAuthorities{ GetSecuritySidIdentifierAuthorityContainer() }
+    : ParentType{ stream }, securitySidIdentifierAuthorities{ GetSecuritySidIdentifierAuthorityContainer() }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -41,12 +41,12 @@ System::SecuritySidTestingBase::SecuritySidIdentifierAuthorityContainerIter Syst
 {
     SYSTEM_CLASS_IS_VALID_CONST_1;
 
-    return securitySIDIdentifierAuthorities.begin();
+    return securitySidIdentifierAuthorities.begin();
 }
 
 System::SecuritySidTestingBase::SecuritySidIdentifierAuthorityContainerIter System::SecuritySidTestingBase::end() noexcept
 {
     SYSTEM_CLASS_IS_VALID_CONST_1;
 
-    return securitySIDIdentifierAuthorities.end();
+    return securitySidIdentifierAuthorities.end();
 }

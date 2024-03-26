@@ -1,15 +1,17 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:21)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:42)
 
 #include "OpenGLBaseTesting.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
 #include "System/OpenGL/OpenGLBase.h"
+#include "System/OpenGL/OpenGLGlut.h"
+#include "System/SystemOpenGLTesting/OpenGLSuite/OpenGLBuffers/OpenGLBindVertexBufferTestingDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -37,6 +39,7 @@ void System::OpenGLBaseTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(SetGLClearColorTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SetGLClearStencilTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SetGLClearDepthTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SetGLClearTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SetGLFrontFaceTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SetGLCullFaceTest);
 }
@@ -77,6 +80,18 @@ void System::OpenGLBaseTesting::SetGLClearStencilTest() noexcept
 void System::OpenGLBaseTesting::SetGLClearDepthTest() noexcept
 {
     SetGLClearDepth(1.0);
+}
+
+void System::OpenGLBaseTesting::SetGLClearTest() noexcept
+{
+    SetGLClear(OpenGLClearMask::ColorBufferBit);
+    SetGLClear(OpenGLClearMask::DepthBufferBit);
+    SetGLClear(OpenGLClearMask::StencilBufferBit);
+    SetGLClear(OpenGLClearMask::None);
+    SetGLClear(OpenGLClearMask::ColorBufferBit | OpenGLClearMask::DepthBufferBit);
+    SetGLClear(OpenGLClearMask::DepthBufferBit | OpenGLClearMask::StencilBufferBit);
+    SetGLClear(OpenGLClearMask::ColorBufferBit | OpenGLClearMask::StencilBufferBit);
+    SetGLClear(OpenGLClearMask::ColorBufferBit | OpenGLClearMask::DepthBufferBit | OpenGLClearMask::StencilBufferBit);
 }
 
 void System::OpenGLBaseTesting::SetGLFrontFaceTest() noexcept

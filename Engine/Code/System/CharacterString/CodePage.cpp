@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:23)
+/// 版本：1.0.0.7 (2024/03/05 17:08)
 
 #include "System/SystemExport.h"
 
@@ -15,14 +15,13 @@
 #include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
+#include <gsl/util>
+
 bool System::IsCodePageValid(CodePage codePage) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::IsValidCodePage(EnumCastUnderlying(codePage)) != gFalse)
-        return true;
-    else
-        return false;
+    return ::IsValidCodePage(EnumCastUnderlying(codePage)) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -37,7 +36,7 @@ System::CodePage System::GetAnsiCodePage() noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<CodePage>(::GetACP());
+    return UnderlyingCastEnum<CodePage>(gsl::narrow_cast<int>(::GetACP()));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -50,7 +49,7 @@ System::CodePage System::GetOemCodePage() noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<CodePage>(::GetOEMCP());
+    return UnderlyingCastEnum<CodePage>(gsl::narrow_cast<int>(::GetOEMCP()));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

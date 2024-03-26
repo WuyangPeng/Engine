@@ -5,12 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:01)
+/// 版本：1.0.0.7 (2024/03/04 22:55)
 
 #ifndef SYSTEM_HELPER_UNICODE_USING_H
 #define SYSTEM_HELPER_UNICODE_USING_H
 
-// Unicode字符和ANSI字符所需要的using声明和宏
+/// Unicode字符和ANSI字符所需要的using声明和宏
 
 #include "ConfigMacro.h"
 #include "EnumCast.h"
@@ -109,6 +109,11 @@ namespace System
 namespace System
 {
     constexpr auto nullChar = SYSTEM_TEXT('\0');
+
+    constexpr auto defaultBufferSize = 256;
+    using CharBufferType = std::array<char, defaultBufferSize>;
+    using WCharBufferType = std::array<wchar_t, defaultBufferSize>;
+    using TCharBufferType = std::array<TChar, defaultBufferSize>;
 }
 
 #endif  // SYSTEM_HELPER_UNICODE_USING_H

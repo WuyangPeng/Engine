@@ -1,16 +1,15 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:25)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:46)
 
 #include "OpenGLProgramResourceTestingBase.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/OpenGL/Flags/OpenGLProgramFlags.h"
-#include "System/OpenGL/Flags/OpenGLShaderFlags.h"
 #include "System/OpenGL/OpenGLShader.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
@@ -19,9 +18,9 @@
 System::OpenGLProgramResourceTestingBase::OpenGLProgramResourceTestingBase(const OStreamShared& stream)
     : ParentType{ stream },
       code{ "#version 400\n",
-            "uniform PVWMatrix\n",
+            "uniform ProjectionViewWorldMatrix\n",
             "{\n",
-            "     mat4 pvwMatrix;\n",
+            "     mat4 projectionViewWorldMatrix;\n",
             "};\n",
 
             "in vec3 modelPosition;\n",
@@ -29,7 +28,7 @@ System::OpenGLProgramResourceTestingBase::OpenGLProgramResourceTestingBase(const
 
             "void main()\n",
             "{\n",
-            "     gl_Position = pvwMatrix * vec4(modelPosition, 1.0f) * vec4(inPosition, 1.0f);\n",
+            "     gl_Position = projectionViewWorldMatrix * vec4(modelPosition, 1.0f) * vec4(inPosition, 1.0f);\n",
             "}\n" },
       programInterfaces{ ProgramInterface::Uniform,
                          ProgramInterface::UniformBlock,
@@ -66,11 +65,14 @@ bool System::OpenGLProgramResourceTestingBase::IsProgramInterfaceInvalid(Program
 {
     if (programInterfaceName == ProgramInterfaceName::MaxNameLength)
     {
-        return programInterface == ProgramInterface::AtomicCounterBuffer || programInterface == ProgramInterface::TransformFeedbackBuffer;
+        return programInterface == ProgramInterface::AtomicCounterBuffer ||
+               programInterface == ProgramInterface::TransformFeedbackBuffer;
     }
     else if (programInterfaceName == ProgramInterfaceName::MaxNumActiveVariables)
     {
-        return programInterface != ProgramInterface::UniformBlock && programInterface != ProgramInterface::AtomicCounterBuffer && programInterface != ProgramInterface::ShaderStorageBlock;
+        return programInterface != ProgramInterface::UniformBlock &&
+               programInterface != ProgramInterface::AtomicCounterBuffer &&
+               programInterface != ProgramInterface::ShaderStorageBlock;
     }
     else if (programInterfaceName == ProgramInterfaceName::MaxNumCompatibleSubroutines)
     {
@@ -85,27 +87,31 @@ bool System::OpenGLProgramResourceTestingBase::IsProgramInterfaceInvalid(Program
     return false;
 }
 
-void System::OpenGLProgramResourceTestingBase::ShaderSourceTest(OpenGLUInt shaderHandle)
+void System::OpenGLProgramResourceTestingBase::ShaderSourceTest(OpenGLUnsignedInt shaderHandle) const
 {
     SetGLShaderSource(shaderHandle, boost::numeric_cast<OpenGLSize>(code.size()), code.data(), nullptr);
 }
 
-System::ProgramInterface System::OpenGLProgramResourceTestingBase::GetProgramInterface(size_t index) const
+System::ProgramInterface System::OpenGLProgramResourceTestingBase::GetProgramInterface(int index) const
 {
-    return programInterfaces.at(index % programInterfaces.size());
+    const auto correctIndex = index % programInterfaces.size();
+
+    return programInterfaces.at(correctIndex);
 }
 
-System::ProgramInterfaceName System::OpenGLProgramResourceTestingBase::GetProgramInterfaceName(size_t index) const
+System::ProgramInterfaceName System::OpenGLProgramResourceTestingBase::GetProgramInterfaceName(int index) const
 {
-    return programInterfaceNames.at(index % programInterfaceNames.size());
+    const auto correctIndex = index % programInterfaceNames.size();
+
+    return programInterfaceNames.at(correctIndex);
 }
 
-size_t System::OpenGLProgramResourceTestingBase::GetProgramInterfaceCount() const noexcept
+int System::OpenGLProgramResourceTestingBase::GetProgramInterfaceCount() const
 {
-    return programInterfaces.size();
+    return boost::numeric_cast<int>(programInterfaces.size());
 }
 
-size_t System::OpenGLProgramResourceTestingBase::GetProgramInterfaceNameCount() const noexcept
+int System::OpenGLProgramResourceTestingBase::GetProgramInterfaceNameCount() const
 {
-    return programInterfaceNames.size();
+    return boost::numeric_cast<int>(programInterfaceNames.size());
 }

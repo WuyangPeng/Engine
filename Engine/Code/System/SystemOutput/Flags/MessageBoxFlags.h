@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/27 20:18)
+/// 版本：1.0.0.7 (2024/03/05 17:45)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_MESSAGE_BOX_FLAGS_H
 #define SYSTEM_SYSTEM_OUTPUT_MESSAGE_BOX_FLAGS_H
 
 #include "System/Helper/Platform.h"
 
-//  MessageBox() 标志
+///  MessageBox() 标志
 namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
@@ -52,7 +52,7 @@ namespace System
 
     enum class MessageBoxMode
     {
-        ApplModal = MB_APPLMODAL,
+        ApplicationModal = MB_APPLMODAL,
         SystemModal = MB_SYSTEMMODAL,
         TaskModal = MB_TASKMODAL,
     };
@@ -109,7 +109,7 @@ namespace System
 
     enum class MessageBoxMode
     {
-        ApplModal = 0x00000000L,
+        ApplicationModal = 0x00000000L,
         SystemModal = 0x00001000L,
         TaskModal = 0x00002000L,
     };

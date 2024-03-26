@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:25)
+/// 版本：1.0.0.7 (2024/03/03 00:13)
 
 #include "System/SystemExport.h"
 
@@ -19,8 +19,6 @@
 #include "Detail/WglExtensions.h"
 #include "System/CharacterString/FormatString.h"
 #include "System/Helper/PragmaWarning.h"
-
-using namespace std::literals;
 
 System::OpenGLSystemVersion System::GetOpenGLVersion() noexcept
 {
@@ -68,7 +66,7 @@ std::string System::GetOpenGLErrorDescription(OpenGLErrorCode code)
     }
     else
     {
-        return ""s;
+        return "";
     }
 }
 

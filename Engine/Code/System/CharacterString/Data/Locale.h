@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:22)
+/// 版本：1.0.0.7 (2024/03/05 17:03)
 
 #ifndef SYSTEM_CHARACTER_STRING_LOCALE_H
 #define SYSTEM_CHARACTER_STRING_LOCALE_H
@@ -13,18 +13,20 @@
 #include "System/SystemDll.h"
 
 #include "System/CharacterString/Fwd/CharacterStringFlagsFwd.h"
+#include "System/Helper/UnicodeUsing.h"
 
 #include <array>
 
 namespace System
 {
+    /// @brief 本地化
+    /// 警告：Locale类不是线程安全的。
     class SYSTEM_DEFAULT_DECLARE Locale
     {
     public:
         using ClassType = Locale;
 
-        constexpr static auto size = 256;
-        using LocaleType = std::array<char, size>;
+        using LocaleType = CharBufferType;
 
     public:
         explicit Locale(CodePage codePage);

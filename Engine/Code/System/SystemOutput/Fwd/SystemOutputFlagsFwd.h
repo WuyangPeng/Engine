@@ -14,20 +14,20 @@
 
 namespace System
 {
-    // DialogBoxCommand
+    /// DialogBoxCommand
     enum class DialogBoxCommand;
 
-    // MessageBox
+    /// MessageBox
     enum class MessageBoxType;
     enum class MessageBoxIcon;
     enum class MessageBoxDefault;
     enum class MessageBoxMode;
     enum class MessageBoxMisc;
 
-    // PrimaryLanguage
+    /// PrimaryLanguage
     enum class PrimaryLanguage;
 
-    // SubLanguage
+    /// SubLanguage
     enum class SubLanguage;
 }
 

@@ -20,7 +20,6 @@
 namespace System
 {
     /// WGL 1.0
-
     NODISCARD SYSTEM_HIDDEN_DECLARE ExistsOpenGLExtensions IsExistsWgl10() noexcept;
 
     SYSTEM_HIDDEN_DECLARE void InitWgl10() noexcept;
@@ -32,15 +31,15 @@ namespace System
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE SetPixelFormat(WindowsHdc hdc, int format, const PixelFormatDescriptor* pixelFormatDescriptor) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE SwapBuffers(WindowsHdc hdc) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglCopyContext(OpenGLRcHandle hGlRcSrc, OpenGLRcHandle hGlRcDst, WindowsUInt mask) noexcept;
-    NODISCARD OpenGLRcHandle SYSTEM_HIDDEN_DECLARE WglCreateContext(WindowsHdc hDc) noexcept;
-    NODISCARD OpenGLRcHandle SYSTEM_HIDDEN_DECLARE WglCreateLayerContext(WindowsHdc hDc, int level) noexcept;
+    NODISCARD OpenGLRcHandle SYSTEM_HIDDEN_DECLARE WglCreateContext(WindowsHdc hdc) noexcept;
+    NODISCARD OpenGLRcHandle SYSTEM_HIDDEN_DECLARE WglCreateLayerContext(WindowsHdc hdc, int level) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglDeleteContext(OpenGLRcHandle oldContext) noexcept;
-    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglDescribeLayerPlane(WindowsHdc hDc, int pixelFormat, int layerPlane, WindowsUInt bytes, LayerPlaneDescriptor* layerPlaneDescriptor) noexcept;
+    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglDescribeLayerPlane(WindowsHdc hdc, int pixelFormat, int layerPlane, WindowsUInt bytes, LayerPlaneDescriptor* layerPlaneDescriptor) noexcept;
     NODISCARD OpenGLRcHandle SYSTEM_HIDDEN_DECLARE WglGetCurrentContext() noexcept;
     NODISCARD WindowsHdc SYSTEM_HIDDEN_DECLARE WglGetCurrentDC() noexcept;
     NODISCARD int SYSTEM_HIDDEN_DECLARE WglGetLayerPaletteEntries(WindowsHdc hdc, int layerPlane, int start, int entries, OpenGLColorRef* pcr) noexcept;
     NODISCARD OpenGLProc SYSTEM_HIDDEN_DECLARE WglGetProcAddress(const char* proc) noexcept;
-    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglMakeCurrent(WindowsHdc hDc, OpenGLRcHandle newContext) noexcept;
+    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglMakeCurrent(WindowsHdc hdc, OpenGLRcHandle newContext) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglRealizeLayerPalette(WindowsHdc hdc, int layerPlane, WindowsBool realize) noexcept;
     NODISCARD int SYSTEM_HIDDEN_DECLARE WglSetLayerPaletteEntries(WindowsHdc hdc, int layerPlane, int start, int entries, const OpenGLColorRef* pcr) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglShareLists(OpenGLRcHandle hrcSrvShare, OpenGLRcHandle hrcSrvSource) noexcept;

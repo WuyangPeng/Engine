@@ -20,6 +20,8 @@ namespace System
     void SYSTEM_DEFAULT_DECLARE SetupRenderStatus() noexcept;
 
     void SYSTEM_DEFAULT_DECLARE ClearAllGLBufferBit() noexcept;
+    NODISCARD ViewportQueryType SYSTEM_DEFAULT_DECLARE GetGLViewport() noexcept;
+    NODISCARD DepthRangeQueryType SYSTEM_DEFAULT_DECLARE GetGLDepthRange() noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLViewport(OpenGLInt x, OpenGLInt y, OpenGLSize width, OpenGLSize height) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLDepthRange(OpenGLDouble nearDepthRange, OpenGLDouble farDepthRange) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLClearColor(OpenGLFloat red, OpenGLFloat green, OpenGLFloat blue, OpenGLFloat alpha) noexcept;
@@ -42,29 +44,29 @@ namespace System
 
     void SYSTEM_DEFAULT_DECLARE EnableGLState(OpenGLEnable cap) noexcept;
     void SYSTEM_DEFAULT_DECLARE DisableGLState(OpenGLEnable cap) noexcept;
-    void SYSTEM_DEFAULT_DECLARE EnableGLState(OpenGLEnable target, OpenGLUInt index) noexcept;
-    void SYSTEM_DEFAULT_DECLARE DisableGLState(OpenGLEnable target, OpenGLUInt index) noexcept;
+    void SYSTEM_DEFAULT_DECLARE EnableGLState(OpenGLEnable target, OpenGLUnsignedInt index) noexcept;
+    void SYSTEM_DEFAULT_DECLARE DisableGLState(OpenGLEnable target, OpenGLUnsignedInt index) noexcept;
 
     void SYSTEM_DEFAULT_DECLARE SetGLBlendColor(OpenGLFloat red, OpenGLFloat green, OpenGLFloat blue, OpenGLFloat alpha) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLBlendFuncSeparate(BlendStateMode sourceFactorRGB, BlendStateMode destinationFactorRGB, BlendStateMode sourceFactorAlpha, BlendStateMode destinationFactorAlpha) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLBlendFuncSeparate(OpenGLUInt index, BlendStateMode sourceFactorRGB, BlendStateMode destinationFactorRGB, BlendStateMode sourceFactorAlpha, BlendStateMode destinationFactorAlpha) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLBlendFuncSeparate(OpenGLUnsignedInt index, BlendStateMode sourceFactorRGB, BlendStateMode destinationFactorRGB, BlendStateMode sourceFactorAlpha, BlendStateMode destinationFactorAlpha) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLBlendEquationSeparate(BlendStateOperation modeRGB, BlendStateOperation modeAlpha) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLBlendEquationSeparate(OpenGLUInt index, BlendStateOperation modeRGB, BlendStateOperation modeAlpha) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLBlendEquationSeparate(OpenGLUnsignedInt index, BlendStateOperation modeRGB, BlendStateOperation modeAlpha) noexcept;
 
     void SYSTEM_DEFAULT_DECLARE SetGLDepthFunc(DepthStencilStateMode depthStencilStateMode) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLDepthMask(DepthStencilStateWriteMask flag) noexcept;
 
-    void SYSTEM_DEFAULT_DECLARE SetGLStencilFuncSeparate(RasterizerStateCullFace face, DepthStencilStateMode func, OpenGLInt ref, OpenGLUInt mask) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLStencilMaskSeparate(RasterizerStateCullFace face, OpenGLUInt mask) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLStencilFuncSeparate(RasterizerStateCullFace face, DepthStencilStateMode func, OpenGLInt ref, OpenGLUnsignedInt mask) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLStencilMaskSeparate(RasterizerStateCullFace face, OpenGLUnsignedInt mask) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLStencilOpSeparate(RasterizerStateCullFace face, DepthStencilStateOperation sFail, DepthStencilStateOperation dpFail, DepthStencilStateOperation dpPass) noexcept;
 
-    void SYSTEM_DEFAULT_DECLARE SetGLColorMask(OpenGLBoolean red, OpenGLBoolean green, OpenGLBoolean blue, OpenGLBoolean alpha) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLColorMask(OpenGLUInt index, OpenGLBoolean red, OpenGLBoolean green, OpenGLBoolean blue, OpenGLBoolean alpha) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLSampleMask(OpenGLUInt maskNumber, OpenGLBitfield mask) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLColorMask(bool red, bool green, bool blue, bool alpha) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLColorMask(OpenGLUnsignedInt index, bool red, bool green, bool blue, bool alpha) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLSampleMask(OpenGLUnsignedInt maskNumber, OpenGLBitfield mask) noexcept;
 
     void SYSTEM_DEFAULT_DECLARE SetGLFlush() noexcept;
 
-    void SYSTEM_DEFAULT_DECLARE SetGLDrawRangeElements(PrimitiveType mode, OpenGLUInt start, OpenGLUInt end, OpenGLSize count, OpenGLData type, const void* indices) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLDrawRangeElements(PrimitiveType mode, OpenGLUnsignedInt start, OpenGLUnsignedInt end, OpenGLSize count, OpenGLData type, const void* indices) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLDrawArrays(PrimitiveType mode, OpenGLInt first, OpenGLSize count) noexcept;
 }
 

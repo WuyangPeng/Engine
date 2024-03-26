@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 10:02)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/12 10:14)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_ALLOCATE_VIRTUAL_SEPARATION_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_ALLOCATE_VIRTUAL_SEPARATION_TESTING_H
@@ -31,10 +31,12 @@ namespace System
 
         NODISCARD bool AllocateVirtualTest();
 
-        void AllocateVirtualSeparationTest();
+        void AllocateVirtualSeparationTest(size_t index);
+        void AllocateVirtualSeparationTestLoop();
         void DoAllocateVirtualSeparationTest(size_t index);
         void DoAllocateVirtualSeparationUseProcessTest(size_t index);
-        void ReadWriteTest(MemoryProtect memoryProtect, char* basePage) noexcept;
+        void DoAllocateVirtualOnePageUseProcessTest(MemoryProtect memoryProtect, char*& nextVirtual);
+        void ReadWriteTest(MemoryProtect memoryProtect, char* basePage) const noexcept;
 
         void AllocateVirtualOnePageTest(char* baseVirtual, size_t index);
         void AllocateVirtualOnePageUseProcessTest(char* baseVirtual, size_t index);

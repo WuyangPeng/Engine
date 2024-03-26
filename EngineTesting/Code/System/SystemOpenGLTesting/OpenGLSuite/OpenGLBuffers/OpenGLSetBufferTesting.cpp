@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:23)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:44)
 
 #include "OpenGLSetBufferTesting.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
@@ -29,23 +29,23 @@ void System::OpenGLSetBufferTesting::DoRunUnitTest()
 
 void System::OpenGLSetBufferTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(SetGLBindBufferTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(SetGLBufferDataTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(SetGLBindBufferBaseTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(SetGLBindBufferRangeTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLSetBindBufferTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLSetBufferDataTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLSetBindBufferBaseTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLSetBindBufferRangeTest);
 }
 
-void System::OpenGLSetBufferTesting::SetGLBindBufferTest()
+void System::OpenGLSetBufferTesting::OpenGLSetBindBufferTest()
 {
     const auto buffer = GetGLGenBuffers();
     ASSERT_LESS(0u, buffer);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(DoSetGLBindBufferTest, buffer);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoOpenGLSetBindBufferTest, buffer);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteBufferTest, buffer);
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteBufferTest, buffer);
 }
 
-void System::OpenGLSetBufferTesting::DoSetGLBindBufferTest(OpenGLUInt buffer)
+void System::OpenGLSetBufferTesting::DoOpenGLSetBindBufferTest(OpenGLUnsignedInt buffer)
 {
     for (auto bindBuffer : *this)
     {
@@ -53,18 +53,18 @@ void System::OpenGLSetBufferTesting::DoSetGLBindBufferTest(OpenGLUInt buffer)
     }
 }
 
-void System::OpenGLSetBufferTesting::SetGLBufferDataTest()
+void System::OpenGLSetBufferTesting::OpenGLSetBufferDataTest()
 {
     BufferType buffers{};
 
     GetGLGenBuffers(bufferSize, buffers.data());
 
-    ASSERT_NOT_THROW_EXCEPTION_1(DoSetGLBufferDataTest, buffers);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoOpenGLSetBufferDataTest, buffers);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteBuffersTest, buffers);
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteBuffersTest, buffers);
 }
 
-void System::OpenGLSetBufferTesting::DoSetGLBufferDataTest(const BufferType& buffers)
+void System::OpenGLSetBufferTesting::DoOpenGLSetBufferDataTest(const BufferType& buffers)
 {
     auto index = 0;
     for (auto bindBuffer : *this)
@@ -75,7 +75,7 @@ void System::OpenGLSetBufferTesting::DoSetGLBufferDataTest(const BufferType& buf
     }
 }
 
-void System::OpenGLSetBufferTesting::SetBufferData(BindBuffer bindBuffer, const BufferType& buffers, int index)
+void System::OpenGLSetBufferTesting::SetBufferData(BindBuffer bindBuffer, const BufferType& buffers, int index) const
 {
     SetGLBindBuffer(bindBuffer, buffers.at(index % buffers.size()));
 
@@ -87,17 +87,17 @@ void System::OpenGLSetBufferTesting::SetBufferData(BindBuffer bindBuffer, const 
     SetGLBufferData(bindBuffer, bufferDataSize, bufferData.data(), BufferUsage::Stream);
 }
 
-void System::OpenGLSetBufferTesting::SetGLBindBufferBaseTest()
+void System::OpenGLSetBufferTesting::OpenGLSetBindBufferBaseTest()
 {
     const auto buffer = GetGLGenBuffers();
     ASSERT_LESS(0u, buffer);
 
-    DoSetGLBindBufferBaseTest(buffer);
+    DoOpenGLSetBindBufferBaseTest(buffer);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteBufferTest, buffer);
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteBufferTest, buffer);
 }
 
-void System::OpenGLSetBufferTesting::DoSetGLBindBufferBaseTest(OpenGLUInt buffer) noexcept
+void System::OpenGLSetBufferTesting::DoOpenGLSetBindBufferBaseTest(OpenGLUnsignedInt buffer) const noexcept
 {
     SetGLBindBufferBase(BindBuffer::ShaderStorageBuffer, 0, buffer);
     SetGLBindBufferBase(BindBuffer::UniformBuffer, 0, buffer);
@@ -105,17 +105,17 @@ void System::OpenGLSetBufferTesting::DoSetGLBindBufferBaseTest(OpenGLUInt buffer
     SetGLBindBufferBase(BindBuffer::TransformFeedbackBuffer, 0, buffer);
 }
 
-void System::OpenGLSetBufferTesting::SetGLBindBufferRangeTest()
+void System::OpenGLSetBufferTesting::OpenGLSetBindBufferRangeTest()
 {
     const auto buffer = GetGLGenBuffers();
     ASSERT_LESS(0u, buffer);
 
-    DoSetGLBindBufferRangeTest(buffer);
+    DoOpenGLSetBindBufferRangeTest(buffer);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteBufferTest, buffer);
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteBufferTest, buffer);
 }
 
-void System::OpenGLSetBufferTesting::DoSetGLBindBufferRangeTest(OpenGLUInt buffer) noexcept
+void System::OpenGLSetBufferTesting::DoOpenGLSetBindBufferRangeTest(OpenGLUnsignedInt buffer) const noexcept
 {
     SetGLBindBufferRange(BindBuffer::ShaderStorageBuffer, 0, buffer, 0, 4);
     SetGLBindBufferRange(BindBuffer::UniformBuffer, 0, buffer, 0, 4);

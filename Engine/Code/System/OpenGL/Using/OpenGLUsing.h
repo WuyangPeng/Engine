@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/03/01 16:59)
+/// 版本：1.0.0.7 (2024/03/24 20:49)
 
 #ifndef SYSTEM_OPENGL_OPENGL_USING_H
 #define SYSTEM_OPENGL_OPENGL_USING_H
@@ -14,6 +14,8 @@
 #include "System/Helper/UserMacro.h"
 
 #include <array>
+#include <string>
+#include <vector>
 
 namespace System
 {
@@ -24,19 +26,19 @@ namespace System
     using OpenGLShort = GLshort;
     using OpenGLInt = GLint;
     using OpenGLSize = GLsizei;
-    using OpenGLUByte = GLubyte;
-    using OpenGLUShort = GLushort;
-    using OpenGLUInt = GLuint;
+    using OpenGLUnsignedByte = GLubyte;
+    using OpenGLUnsignedShort = GLushort;
+    using OpenGLUnsignedInt = GLuint;
     using OpenGLFloat = GLfloat;
-    using OpenGLClampF = GLclampf;
+    using OpenGLClampFloat = GLclampf;
     using OpenGLDouble = GLdouble;
-    using OpenGLClampD = GLclampd;
+    using OpenGLClampDouble = GLclampd;
     using OpenGLVoid = GLvoid;
     using OpenGLIntPtr = GLintptr;
     using OpenGLSizePtr = GLsizeiptr;
     using OpenGLChar = GLchar;
     using OpenGLInt64 = GLint64;
-    using OpenGLUInt64 = GLuint64;
+    using OpenGLUnsignedInt64 = GLuint64;
     using OpenGLHalf = GLhalf;
 
     constexpr auto invalidGLIndex = GL_INVALID_INDEX;
@@ -44,6 +46,11 @@ namespace System
     using ComputeWorkGroupSizeType = std::array<OpenGLInt, 3>;
     using ViewportQueryType = std::array<OpenGLInt, 4>;
     using DepthRangeQueryType = std::array<OpenGLDouble, 2>;
+
+    using OpenGLEnumContainer = std::vector<OpenGLEnum>;
+    using OpenGLUnsignedIntIntContainer = std::vector<OpenGLUnsignedInt>;
+    using TokenSplitType = std::vector<std::string>;
+    using LogInfoType = std::vector<OpenGLChar>;
 }
 
 #endif  // SYSTEM_OPENGL_OPENGL_USING_H

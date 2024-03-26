@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:29)
+/// 版本：1.0.0.7 (2024/03/13 16:01)
 
 #ifndef SYSTEM_NETWORK_WINDOWS_SOCK_EX_H
 #define SYSTEM_NETWORK_WINDOWS_SOCK_EX_H
@@ -47,7 +47,7 @@ namespace System
                                                                  WinSockAddress* localAddress,
                                                                  WindowsDWordPtr remoteAddressLength,
                                                                  WinSockAddress* remoteAddress,
-                                                                 const WinSockTimeval* timeout) noexcept;
+                                                                 const WinSockTimeVal* timeout) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketHostToNetLong(WinSocket winSocket,
                                                                  unsigned long hostLong,
@@ -65,14 +65,14 @@ namespace System
     NODISCARD int SYSTEM_DEFAULT_DECLARE WinSocketRecv(WinSocket winSocket,
                                                        WinSockBufPtr buffers,
                                                        WindowsDWord bufferCount,
-                                                       WindowsDWordPtr numberOfBytesRecvd,
+                                                       WindowsDWordPtr numberOfBytesRecvD,
                                                        WindowsDWordPtr flags,
                                                        SocketOverlappedPtr overlapped,
                                                        SocketOverlappedCompletionRoutine completionRoutine) noexcept;
     NODISCARD int SYSTEM_DEFAULT_DECLARE WinSocketRecvFrom(WinSocket winSocket,
                                                            WinSockBufPtr buffers,
                                                            WindowsDWord bufferCount,
-                                                           WindowsDWordPtr numberOfBytesRecvd,
+                                                           WindowsDWordPtr numberOfBytesRecvD,
                                                            WindowsDWordPtr flags,
                                                            WinSockAddress* from,
                                                            WindowsIntPtr fromLen,

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/28 10:20)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/05 22:25)
 
 #include "Toolset/System/SystemToolset/SystemToolsetExport.h"
 
@@ -24,10 +24,7 @@ SystemToolset::SocketSend::SocketSend(WinSocket winSocket) noexcept
 
 bool SystemToolset::SocketSend::IsValid() const noexcept
 {
-    if (System::IsSocketValid(winSocket))
-        return true;
-    else
-        return false;
+    return System::IsSocketValid(winSocket);
 }
 
 #endif  // OPEN_CLASS_INVARIANT

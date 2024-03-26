@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:04)
+/// 版本：1.0.0.7 (2024/03/05 09:27)
 
 #ifndef SYSTEM_FILE_MANAGER_FILE_TIME_H
 #define SYSTEM_FILE_MANAGER_FILE_TIME_H
@@ -15,7 +15,7 @@
 #include "Fwd/FileFlagsFwd.h"
 #include "Using/FileUsing.h"
 
-// 文件时间的获取和设置
+/// 文件时间的获取和设置
 namespace System
 {
     NODISCARD ComparesFileTimeReturn SYSTEM_DEFAULT_DECLARE FileTimeCompare(const FileTime* lhsFileTime, const FileTime* rhsFileTime) noexcept;

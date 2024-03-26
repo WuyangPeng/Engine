@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:25)
+/// 版本：1.0.0.7 (2024/03/03 00:13)
 
 #include "System/SystemExport.h"
 
@@ -16,10 +16,7 @@
 
 bool System::IsWglSwapInterval(int interval) noexcept
 {
-    if (WglSwapIntervalEXT(interval) != gFalse)
-        return true;
-    else
-        return false;
+    return WglSwapIntervalEXT(interval) != gFalse;
 }
 
 int System::GetWglSwapInterval() noexcept
@@ -27,17 +24,14 @@ int System::GetWglSwapInterval() noexcept
     return WglGetSwapIntervalEXT();
 }
 
-System::OpenGLRcHandle System::CreateWglContext(WindowsHdc hDc) noexcept
+System::OpenGLRcHandle System::CreateWglContext(WindowsHdc hdc) noexcept
 {
-    return WglCreateContext(hDc);
+    return WglCreateContext(hdc);
 }
 
 bool SYSTEM_DEFAULT_DECLARE System::DeleteWglContext(OpenGLRcHandle oldContext) noexcept
 {
-    if (WglDeleteContext(oldContext) != gFalse)
-        return true;
-    else
-        return false;
+    return WglDeleteContext(oldContext) != gFalse;
 }
 
 System::OpenGLRcHandle System::GetCurrentWglContext() noexcept
@@ -47,10 +41,7 @@ System::OpenGLRcHandle System::GetCurrentWglContext() noexcept
 
 bool System::MakeWglCurrent(WindowsHdc hdc, OpenGLRcHandle newContext) noexcept
 {
-    if (WglMakeCurrent(hdc, newContext) != gFalse)
-        return true;
-    else
-        return false;
+    return WglMakeCurrent(hdc, newContext) != gFalse;
 }
 
 int System::ChooseWindowPixelFormat(WindowsHdc hdc, const PixelFormatDescriptor* pixelFormatDescriptor) noexcept
@@ -60,10 +51,7 @@ int System::ChooseWindowPixelFormat(WindowsHdc hdc, const PixelFormatDescriptor*
 
 bool System::SetWindowPixelFormat(WindowsHdc hdc, int format, const PixelFormatDescriptor* pixelFormatDescriptor) noexcept
 {
-    if (System::SetPixelFormat(hdc, format, pixelFormatDescriptor) != gFalse)
-        return true;
-    else
-        return false;
+    return System::SetPixelFormat(hdc, format, pixelFormatDescriptor) != gFalse;
 }
 
 System::OpenGLProc System::GetWglProcAddress(const char* glFunction) noexcept
@@ -73,26 +61,10 @@ System::OpenGLProc System::GetWglProcAddress(const char* glFunction) noexcept
 
 bool System::SwapDeviceBuffers(WindowsHdc hdc) noexcept
 {
-#if defined(SYSTEM_PLATFORM_WIN32)
-
-    if (System::SwapBuffers(hdc) != gFalse)
-        return true;
-    else
-        return false;
-
-#else  // !SYSTEM_PLATFORM_WIN32
-
-    UnusedFunction(hdc);
-
-    return false;
-
-#endif  // SYSTEM_PLATFORM_WIN32
+    return System::SwapBuffers(hdc) != gFalse;
 }
 
 bool System::DisplayColorBuffer(WindowsHdc hdc, int syncInterval) noexcept
 {
-    if (WglSwapIntervalEXT(0 < syncInterval ? 1 : 0) != gFalse && SwapDeviceBuffers(hdc))
-        return true;
-    else
-        return false;
+    return WglSwapIntervalEXT(0 < syncInterval ? 1 : 0) != gFalse && SwapDeviceBuffers(hdc);
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:25)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:46)
 
 #include "OpenGLProgramResourceTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -58,7 +58,7 @@ void System::OpenGLProgramResourceTesting::ProgramResourceTest()
     ASSERT_NOT_THROW_EXCEPTION_1(DeleteGLProgramTest, programHandle);
 }
 
-void System::OpenGLProgramResourceTesting::DoProgramResourceTest(OpenGLUInt programHandle)
+void System::OpenGLProgramResourceTesting::DoProgramResourceTest(OpenGLUnsignedInt programHandle)
 {
     const auto shaderHandle = CreateGLShader(ShaderType::Vertex);
 
@@ -69,7 +69,7 @@ void System::OpenGLProgramResourceTesting::DoProgramResourceTest(OpenGLUInt prog
     ASSERT_NOT_THROW_EXCEPTION_1(DeleteGLShaderTest, shaderHandle);
 }
 
-void System::OpenGLProgramResourceTesting::ShaderTest(OpenGLUInt shaderHandle, OpenGLUInt programHandle)
+void System::OpenGLProgramResourceTesting::ShaderTest(OpenGLUnsignedInt shaderHandle, OpenGLUnsignedInt programHandle)
 {
     ASSERT_NOT_THROW_EXCEPTION_1(ShaderSourceTest, shaderHandle);
 
@@ -80,7 +80,7 @@ void System::OpenGLProgramResourceTesting::ShaderTest(OpenGLUInt shaderHandle, O
     LinkGLProgram(programHandle);
 }
 
-void System::OpenGLProgramResourceTesting::ProgramPropertiesTest(OpenGLUInt programHandle)
+void System::OpenGLProgramResourceTesting::ProgramPropertiesTest(OpenGLUnsignedInt programHandle)
 {
     const auto numResources = GetGLProgramInterface(programHandle, ProgramInterface::ProgramInput, ProgramInterfaceName::ActiveResources);
 
@@ -90,7 +90,7 @@ void System::OpenGLProgramResourceTesting::ProgramPropertiesTest(OpenGLUInt prog
     }
 }
 
-void System::OpenGLProgramResourceTesting::DoProgramPropertiesTest(OpenGLUInt programHandle, int index)
+void System::OpenGLProgramResourceTesting::DoProgramPropertiesTest(OpenGLUnsignedInt programHandle, int index)
 {
     const auto numProperties = boost::numeric_cast<OpenGLSize>(properties.size());
 
@@ -104,10 +104,12 @@ void System::OpenGLProgramResourceTesting::DoProgramPropertiesTest(OpenGLUInt pr
     }
 }
 
-void System::OpenGLProgramResourceTesting::ProgramResourceNameTest(OpenGLUInt programHandle, int numBytes, int index)
+void System::OpenGLProgramResourceTesting::ProgramResourceNameTest(OpenGLUnsignedInt programHandle, int numBytes, int index)
 {
     if (numBytes <= 0)
+    {
         return;
+    }
 
     ResourceNameType name(numBytes);
     GetGLProgramResourceName(programHandle, ProgramInterface::ProgramInput, index, boost::numeric_cast<GLsizei>(numBytes), nullptr, name.data());

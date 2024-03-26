@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 16:37)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 18:25)
 
 #include "ConsoleColourTesting.h"
 #include "System/Console/ConsoleColour.h"
@@ -60,7 +60,7 @@ System::ConsoleColourTesting::ConsoleColourTesting(const OStreamShared& stream)
                                 { ConsoleCommon::GridRVertical, "右垂直线" },
                                 { ConsoleCommon::ReverseVideo, "反转前景和背景属性" },
                                 { ConsoleCommon::Underscore, "下划线" },
-                                { ConsoleCommon::SbcsDbcs, "SBCS或DBCS标志" } }
+                                { ConsoleCommon::SingleByteCharacterSetDoubleByteCharacterSet, "SBCS或DBCS标志" } }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -69,13 +69,13 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, ConsoleColourTesting)
 
 void System::ConsoleColourTesting::PrintMessage(StandardHandle standardHandle, TextColour textColour, BackgroundColour backgroundColour, ConsoleCommon consoleCommon) const
 {
-    auto& os = (standardHandle == StandardHandle::Output) ? std::cout : std::cerr;
+    auto& stream = (standardHandle == StandardHandle::Output) ? std::cout : std::cerr;
 
-    os << "这条信息在控制台中文本显示为"
-       << textColourDescription.at(textColour)
-       << "，背景为"
-       << backgroundColourDescription.at(backgroundColour)
-       << "，格式为"
-       << consoleCommonDescription.at(consoleCommon)
-       << "\n";
+    stream << "\n这条信息在控制台中文本显示为"
+           << textColourDescription.at(textColour)
+           << "，背景为"
+           << backgroundColourDescription.at(backgroundColour)
+           << "，格式为"
+           << consoleCommonDescription.at(consoleCommon)
+           << "\n";
 }

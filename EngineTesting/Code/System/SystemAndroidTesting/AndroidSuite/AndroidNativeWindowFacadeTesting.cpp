@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 13:44)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 17:09)
 
 #include "AndroidNativeWindowFacadeTesting.h"
 #include "System/Android/AndroidNativeWindowFacade.h"
@@ -14,8 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::AndroidNativeWindowFacadeTesting::AndroidNativeWindowFacadeTesting(const OStreamShared& streamShared, AndroidApp* androidApp)
-    : ParentType{ streamShared }, androidNativeWindow{ GetAndroidNativeWindow(androidApp) }
+System::AndroidNativeWindowFacadeTesting::AndroidNativeWindowFacadeTesting(const OStreamShared& stream, AndroidApp* androidApp)
+    : ParentType{ stream }, androidNativeWindow{ GetAndroidNativeWindow(androidApp) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -41,10 +41,7 @@ System::AndroidNativeWindow* System::AndroidNativeWindowFacadeTesting::GetAndroi
 
 bool System::AndroidNativeWindowFacadeTesting::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && androidNativeWindow != nullptr)
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && androidNativeWindow != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -68,8 +65,8 @@ void System::AndroidNativeWindowFacadeTesting::AndroidNativeWindowTest()
     androidNativeWindowFacade.Release();
     ASSERT_EQUAL(androidNativeWindowFacade.GetWidth(), 0);
     ASSERT_EQUAL(androidNativeWindowFacade.GetHeight(), 0);
-    ASSERT_ENUM_EQUAL(androidNativeWindowFacade.GetFormat(), WindowFormat::RGBA8888);
-    ASSERT_EQUAL(androidNativeWindowFacade.SetBuffersGeometry(0, 0, WindowFormat::RGB565), 0);
+    ASSERT_ENUM_EQUAL(androidNativeWindowFacade.GetFormat(), WindowFormat::Rgba8888);
+    ASSERT_EQUAL(androidNativeWindowFacade.SetBuffersGeometry(0, 0, WindowFormat::Rgb565), 0);
 }
 
 void System::AndroidNativeWindowFacadeTesting::AndroidNativeWindowLockTest()

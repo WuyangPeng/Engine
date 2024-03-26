@@ -54,7 +54,7 @@ int Framework::AndroidCallBackUnitTestSuite::KeyDownMessage(AndroidApp* androidA
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    System::AndroidInputEventFacade androidKeyEvent{ androidInputEvent };
+    const System::AndroidInputEventFacade androidKeyEvent{ androidInputEvent };
 
     switch (const auto keyCode = androidKeyEvent.GetKeyCode();
             keyCode)

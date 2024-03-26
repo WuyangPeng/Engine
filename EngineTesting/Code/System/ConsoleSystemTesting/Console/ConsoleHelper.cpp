@@ -1,14 +1,15 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 13:37)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 17:26)
 
 #include "ConsoleHelper.h"
 #include "System/Console/ConsoleCreate.h"
+#include "System/Console/Using/ConsoleCreateUsing.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
 
@@ -32,7 +33,7 @@ void ConsoleSystemTesting::ConsoleHelper::AllocConsole() noexcept
     {
         isSuccess = false;
 
-        LOG_SINGLETON_APPENDER(Error, User, SYSTEM_TEXT("创建控制台失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_APPENDER(Error, System, SYSTEM_TEXT("创建控制台失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -43,11 +44,11 @@ ConsoleSystemTesting::ConsoleHelper::~ConsoleHelper() noexcept
     FreeConsole();
 }
 
-void ConsoleSystemTesting::ConsoleHelper::FreeConsole() noexcept
+void ConsoleSystemTesting::ConsoleHelper::FreeConsole() const noexcept
 {
     if (!DoFreeConsole())
     {
-        LOG_SINGLETON_APPENDER(Error, User, SYSTEM_TEXT("销毁控制台失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_APPENDER(Error, System, SYSTEM_TEXT("销毁控制台失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -55,21 +56,7 @@ void ConsoleSystemTesting::ConsoleHelper::FreeConsole() noexcept
 
 bool ConsoleSystemTesting::ConsoleHelper::IsValid() const noexcept
 {
-    if (isSuccess)
-    {
-        if (in != nullptr && out != nullptr && error != nullptr)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    else
-    {
-        return true;
-    }
+    return !isSuccess || (in != nullptr && out != nullptr && error != nullptr);
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -90,13 +77,13 @@ void ConsoleSystemTesting::ConsoleHelper::PrintConsoleInfo()
 bool ConsoleSystemTesting::ConsoleHelper::DoAllocConsole() noexcept
 {
     return System::AllocConsole() &&
-           System::ReOpenConsole(out, "CONOUT$", "w+t", stdout) &&
-           System::ReOpenConsole(in, "CONIN$", "r+t", stdin) &&
-           System::ReOpenConsole(error, "CONOUT$", "w+t", stderr) &&
+           System::ReOpenConsole(out, System::stdOutPath, System::stdOutMode, stdout) &&
+           System::ReOpenConsole(in, System::stdInPath, System::stdInMode, stdin) &&
+           System::ReOpenConsole(error, System::stdOutPath, System::stdOutMode, stderr) &&
            System::RemoveConsoleCloseButton();
 }
 
-bool ConsoleSystemTesting::ConsoleHelper::DoFreeConsole() noexcept
+bool ConsoleSystemTesting::ConsoleHelper::DoFreeConsole() const noexcept
 {
     return System::CloseConsole(error) &&
            System::CloseConsole(in) &&

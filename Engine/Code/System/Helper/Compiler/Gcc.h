@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:14)
+/// 版本：1.0.0.7 (2024/03/04 17:27)
 
 #ifndef SYSTEM_HELPER_GCC_H
 #define SYSTEM_HELPER_GCC_H
 
 #if defined(__GNUC__) && !defined(__ibmxl__)
 
-    // GNU C++ 编译器设置：
+    /// GNU C++ 编译器设置：
 
     #ifndef TCRE_USE_GCC
 
@@ -26,7 +26,7 @@
 
     #endif  // GCC_VERSION
 
-    // 版本检查：
+    /// 版本检查：
     #if (GCC_VERSION < 30300)
 
         #error "编译器未配置"
@@ -47,7 +47,7 @@
 
         #ifdef __GXX_CONCEPTS__
 
-            // ConceptGCC 编译器：http://www.generic-programming.org/software/ConceptGCC/
+            /// ConceptGCC 编译器：http://www.generic-programming.org/software/ConceptGCC/
             #define TCRE_SYSTEM_COMPILER "ConceptGCC 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
         #else  // !__GXX_CONCEPTS__
@@ -95,7 +95,7 @@
 
     #endif  // (7 <= __GNUC__) && (SYSTEM_CPP_STANDARD < 17)
 
-    // 分支预测提示
+    /// 分支预测提示
     #define TCRE_LIKELY(x) __builtin_expect(x, 1)
     #define TCRE_UNLIKELY(x) __builtin_expect(x, 0)
 

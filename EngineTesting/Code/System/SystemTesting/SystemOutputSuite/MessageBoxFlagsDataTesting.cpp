@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 14:14)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/09 10:20)
 
 #include "MessageBoxFlagsDataTesting.h"
 #include "System/Helper/EnumCast.h"
@@ -18,41 +18,41 @@
 
 System::MessageBoxFlagsDataTesting::MessageBoxFlagsDataTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      typeFlags{ MessageBoxType::Ok,
-                 MessageBoxType::OkCancel,
-                 MessageBoxType::AbortRetryIgnore,
-                 MessageBoxType::YesNoCancel,
-                 MessageBoxType::YesNo,
-                 MessageBoxType::RetryCancel,
-                 MessageBoxType::CancelTryContinue },
-      iconFlags{ MessageBoxIcon::NoIcon,
-                 MessageBoxIcon::Hand,
-                 MessageBoxIcon::Question,
-                 MessageBoxIcon::Exclamation,
-                 MessageBoxIcon::Asterisk,
-                 MessageBoxIcon::UserIcon,
-                 MessageBoxIcon::Waning,
-                 MessageBoxIcon::Error,
-                 MessageBoxIcon::Information,
-                 MessageBoxIcon::Stop },
-      defaultFlags{ MessageBoxDefault::Button1,
-                    MessageBoxDefault::Button2,
-                    MessageBoxDefault::Button3,
-                    MessageBoxDefault::Button4 },
-      modeFlags{ MessageBoxMode::ApplModal,
-                 MessageBoxMode::SystemModal,
-                 MessageBoxMode::TaskModal },
-      miscFlags{ MessageBoxMisc::NoMisc,
-                 MessageBoxMisc::Help,
-                 MessageBoxMisc::NoFocus,
-                 MessageBoxMisc::SetForeground,
-                 MessageBoxMisc::DefaultDesktopOnly,
-                 MessageBoxMisc::TopMost,
-                 MessageBoxMisc::Right,
-                 MessageBoxMisc::RightToLeftReading,
-                 MessageBoxMisc::ServiceNotification,
-                 MessageBoxMisc::ServiceNotificationNt3X },
-      maxSize{ CoreTools::MaxElement<size_t>({ typeFlags.size(), iconFlags.size(), defaultFlags.size(), modeFlags.size(), miscFlags.size() }) },
+      messageBoxTypes{ MessageBoxType::Ok,
+                       MessageBoxType::OkCancel,
+                       MessageBoxType::AbortRetryIgnore,
+                       MessageBoxType::YesNoCancel,
+                       MessageBoxType::YesNo,
+                       MessageBoxType::RetryCancel,
+                       MessageBoxType::CancelTryContinue },
+      messageBoxIcons{ MessageBoxIcon::NoIcon,
+                       MessageBoxIcon::Hand,
+                       MessageBoxIcon::Question,
+                       MessageBoxIcon::Exclamation,
+                       MessageBoxIcon::Asterisk,
+                       MessageBoxIcon::UserIcon,
+                       MessageBoxIcon::Waning,
+                       MessageBoxIcon::Error,
+                       MessageBoxIcon::Information,
+                       MessageBoxIcon::Stop },
+      messageBoxDefaults{ MessageBoxDefault::Button1,
+                          MessageBoxDefault::Button2,
+                          MessageBoxDefault::Button3,
+                          MessageBoxDefault::Button4 },
+      messageBoxModes{ MessageBoxMode::ApplicationModal,
+                       MessageBoxMode::SystemModal,
+                       MessageBoxMode::TaskModal },
+      messageBoxMisc{ MessageBoxMisc::NoMisc,
+                      MessageBoxMisc::Help,
+                      MessageBoxMisc::NoFocus,
+                      MessageBoxMisc::SetForeground,
+                      MessageBoxMisc::DefaultDesktopOnly,
+                      MessageBoxMisc::TopMost,
+                      MessageBoxMisc::Right,
+                      MessageBoxMisc::RightToLeftReading,
+                      MessageBoxMisc::ServiceNotification,
+                      MessageBoxMisc::ServiceNotificationNt3X },
+      maxSize{ CoreTools::MaxElement<size_t>({ messageBoxTypes.size(), messageBoxIcons.size(), messageBoxDefaults.size(), messageBoxModes.size(), messageBoxMisc.size() }) },
       randomEngine{ GetEngineRandomSeed() }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
@@ -72,11 +72,11 @@ void System::MessageBoxFlagsDataTesting::MainTest()
 
 bool System::MessageBoxFlagsDataTesting::RandomShuffleFlags()
 {
-    std::ranges::shuffle(typeFlags, randomEngine);
-    std::ranges::shuffle(iconFlags, randomEngine);
-    std::ranges::shuffle(defaultFlags, randomEngine);
-    std::ranges::shuffle(modeFlags, randomEngine);
-    std::ranges::shuffle(miscFlags, randomEngine);
+    std::ranges::shuffle(messageBoxTypes, randomEngine);
+    std::ranges::shuffle(messageBoxIcons, randomEngine);
+    std::ranges::shuffle(messageBoxDefaults, randomEngine);
+    std::ranges::shuffle(messageBoxModes, randomEngine);
+    std::ranges::shuffle(messageBoxMisc, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(FlagsTest);
 
@@ -93,11 +93,11 @@ void System::MessageBoxFlagsDataTesting::FlagsTest()
 
 void System::MessageBoxFlagsDataTesting::DoFlagsTest(size_t index)
 {
-    const auto typeFlag = typeFlags.at(index % typeFlags.size());
-    const auto iconFlag = iconFlags.at(index % iconFlags.size());
-    const auto defaultFlag = defaultFlags.at(index % defaultFlags.size());
-    const auto modeFlag = modeFlags.at(index % modeFlags.size());
-    const auto miscFlag = miscFlags.at(index % miscFlags.size());
+    const auto typeFlag = messageBoxTypes.at(index % messageBoxTypes.size());
+    const auto iconFlag = messageBoxIcons.at(index % messageBoxIcons.size());
+    const auto defaultFlag = messageBoxDefaults.at(index % messageBoxDefaults.size());
+    const auto modeFlag = messageBoxModes.at(index % messageBoxModes.size());
+    const auto miscFlag = messageBoxMisc.at(index % messageBoxMisc.size());
 
     const auto flag = EnumCastUnderlying<WindowsUInt>(typeFlag) |
                       EnumCastUnderlying<WindowsUInt>(iconFlag) |

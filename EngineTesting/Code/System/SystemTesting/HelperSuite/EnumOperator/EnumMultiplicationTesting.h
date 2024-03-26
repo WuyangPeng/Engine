@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 09:27)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/08 10:59)
 
 #ifndef SYSTEM_TESTING_HELPER_SUITE_ENUM_MULTIPLICATION_TESTING_H
 #define SYSTEM_TESTING_HELPER_SUITE_ENUM_MULTIPLICATION_TESTING_H
@@ -14,6 +14,7 @@
 
 namespace System
 {
+    /// @brief 枚举乘法测试
     class EnumMultiplicationTesting final : public CoreTools::UnitTest
     {
     public:
@@ -29,10 +30,10 @@ namespace System
         void DoRunUnitTest() override;
         void MainTest();
 
-        void SignedConstexprOperator0Test() noexcept;
-        void SignedConstexprOperator1Test() noexcept;
-        void UnsignedConstexprOperator0Test() noexcept;
-        void UnsignedConstexprOperator1Test() noexcept;
+        void SignedConstexprOperator0Test() const noexcept;
+        void SignedConstexprOperator1Test() const noexcept;
+        void UnsignedConstexprOperator0Test() const noexcept;
+        void UnsignedConstexprOperator1Test() const noexcept;
     };
 }
 

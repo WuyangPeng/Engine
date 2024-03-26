@@ -25,7 +25,7 @@ Framework::WindowHIcon::WindowHIcon(const TChar* icon) noexcept
 }
 
 Framework::WindowHIcon::WindowHIcon(HInstance instance, int icon)
-    : hIcon{ System::LoadSystemIcon(instance, System::MakeIntreSource(boost::numeric_cast<System::WindowsWord>(icon))) }
+    : hIcon{ System::LoadSystemIcon(instance, System::MakeIntResource(boost::numeric_cast<System::WindowsWord>(icon))) }
 {
     CheckUpHIcon();
 

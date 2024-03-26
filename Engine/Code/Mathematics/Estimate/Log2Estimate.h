@@ -12,6 +12,8 @@
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "System/Helper/PragmaWarning.h"
+
 #include <array>
 
 /// 其中多项式 p(x)的次数为D，
@@ -105,7 +107,12 @@ namespace Mathematics
     requires(1 <= Degree && Degree <= 8)
     NODISCARD constexpr T GetLog2EstimateMaxError()
     {
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
         return static_cast<T>(log2EstimateMaxError[Degree - 1]);
+
+#include SYSTEM_WARNING_POP
     }
 }
 

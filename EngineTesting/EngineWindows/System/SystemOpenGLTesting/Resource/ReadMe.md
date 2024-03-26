@@ -18,7 +18,8 @@
 				   OpenGLDepthTesting¡¢
 				   OpenGLMaskTesting¡¢
 				   OpenGLStateTesting¡¢
-				   OpenGLStencilTesting¡£
+				   OpenGLStencilTesting¡¢
+				   OpenGLDrawTesting¡£
 £¨4£© OpenGL Buffers£ºOpenGLGetBufferTesting¡¢
 					  OpenGLSetBufferTesting¡¢
 					  OpenGLSetBufferSubDataTesting¡¢
@@ -27,7 +28,8 @@
 					  OpenGLBindFramebufferTesting¡¢
 					  OpenGLVertexArraysTesting¡¢
 					  OpenGLBindVertexBufferTesting¡¢
-					  OpenGLDrawBuffersTesting¡£
+					  OpenGLDrawBuffersTesting¡¢
+					  OpenGLMapTesting¡£
 £¨5£© OpenGL Textures£ºOpenGLGetTexturesTesting¡¢
 					   OpenGLBindTexturesTesting¡¢
 					   OpenGLPixelStoreTesting¡¢
@@ -37,7 +39,8 @@
 					   OpenGLTexturesCubeTesting¡¢
 					   OpenGLTextures3DTesting¡¢
 					   OpenGLTexturesCubeArrayTesting¡¢
-					   OpenGLFramebufferTextures2DTesting¡£
+					   OpenGLFramebufferTextures2DTesting¡¢
+					   OpenGLActiveTextureTesting¡£
 £¨6£© OpenGL Polygon£ºOpenGLPolygonModeTesting¡¢
 					  OpenGLPolygonOffsetTesting¡£
 £¨7£© OpenGL Samplers£ºOpenGLGetSamplersTesting¡¢
@@ -53,7 +56,8 @@
 					 OpenGLCreateShaderTesting¡¢
 					 OpenGLGetUniformLocationTesting¡¢
 					 OpenGLShaderAttributesTesting¡¢
-					 OpenGLShaderStatusTesting¡£
+					 OpenGLShaderStatusTesting¡¢
+					 OpenGLShaderStorageBlockBindingTesting¡£
 £¨10£©GLUT£ºOpenGLGlutCallbackTesting¡¢
 		    OpenGLGlutCreateWindowTesting¡¢
 		    OpenGLGlutDestroyTesting¡£

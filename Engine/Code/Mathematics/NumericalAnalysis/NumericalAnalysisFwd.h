@@ -136,17 +136,115 @@ namespace Mathematics
         template <typename Real>
         requires(std::is_arithmetic_v<Real>)
         class GivensRotation;
+
+        template <typename T>
+        class Minimize1;
+
+        template <typename T>
+        class MinimizeN;
+
+        template <typename Real, typename TVector>
+        class OdeSolver;
+
+        template <typename Real, typename UserDataType>
+        class OdeEuler;
+
+        template <typename Real, typename TVector, typename TMatrix>
+        class OdeImplicitEuler;
+
+        template <typename Real, typename TVector>
+        class OdeMidpoint;
+
+        template <typename Real, typename TVector>
+        class OdeRungeKutta4;
+
+        template <typename Real>
+        class PolynomialRoot;
     }
 
     template <typename Real>
     requires(std::is_arithmetic_v<Real>)
     class SymmetricEigensolver;
 
+    template <typename Real, int N>
+    requires(std::is_arithmetic_v<Real> && 0 <= N)
+    class CholeskyDecomposition;
+
+    template <typename Real, int BlockSize, int NumBlocks>
+    requires(std::is_arithmetic_v<Real> && 0 <= BlockSize && 0 <= NumBlocks)
+    class BlockCholeskyDecomposition;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class CubicRootsQr;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class GaussNewtonMinimizer;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class GaussNewtonMinimizerResult;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class Integration;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class RootsPolynomial;
+
+    template <typename Real, int... Dimensions>
+    requires(std::is_arithmetic_v<Real>)
+    class LinearComplementarityProblemSolver;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class LinearComplementarityProblemSolverShared;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class LinearComplementarityProblemSolverVariable;
+
+    template <typename T, int...>
+    class LdltDecomposition;
+
+    template <typename T>
+    class LevenbergMarquardtMinimizer;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class QuarticRootsQr;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class RootsBisection;
+
+    template <typename Real>
+    class RootsBisection1;
+
+    template <typename Real>
+    class RootsBisection2;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class RootsBrentsMethod;
+
+    template <typename T>
+    class RootsCubic;
+
+    template <typename T>
+    class RootsLinear;
+
+    template <typename T>
+    class RootsQuadratic;
+
     enum class Bisect2StorageType;
     enum class Bisect3StorageType;
     enum class QuantityType;
     enum class BisectRootType;
     enum class BrentsMethodRootType;
+    enum class LinearComplementarityProblemSolverType;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_FWD_H

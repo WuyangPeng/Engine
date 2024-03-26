@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 10:07)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/12 10:22)
 
 #include "ViewOfFileTesting.h"
 #include "System/MemoryTools/Flags/ViewOfFileFlags.h"
@@ -37,14 +37,19 @@ void System::ViewOfFileTesting::ViewOfFileTest()
 {
     for (auto index = 0u; index < GetMaxSize(); ++index)
     {
-        const auto fileMapDesiredAccess = GetFileMapDesiredAccess(index);
-
-        ASSERT_NOT_THROW_EXCEPTION_1(DoViewOfFileTest, fileMapDesiredAccess);
-        ASSERT_NOT_THROW_EXCEPTION_1(DoViewOfFileUseBaseAddressTest, fileMapDesiredAccess);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoViewOfFileTest, index);
     }
 }
 
-void System::ViewOfFileTesting::DoViewOfFileTest(FileMapDesiredAccess fileMapDesiredAccess)
+void System::ViewOfFileTesting::DoViewOfFileTest(unsigned index)
+{
+    const auto fileMapDesiredAccess = GetFileMapDesiredAccess(index);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(MapViewOfFileTest, fileMapDesiredAccess);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoViewOfFileUseBaseAddressTest, fileMapDesiredAccess);
+}
+
+void System::ViewOfFileTesting::MapViewOfFileTest(FileMapDesiredAccess fileMapDesiredAccess)
 {
     const auto fileMappingHandle = Create();
 

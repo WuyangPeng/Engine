@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:23)
+/// 版本：1.0.0.7 (2024/03/05 17:09)
 
 #include "System/SystemExport.h"
 
@@ -63,16 +63,17 @@ System::WindowsDWord System::FormatErrorMessage(FormatMessageOption flag,
 
 System::String System::FormatErrorMessage(WindowError lastError)
 {
-    constexpr auto bufferSize = 256u;
-    using BufferType = std::array<TChar, bufferSize>;
+    TCharBufferType buffer{};
 
-    BufferType buffer{};
-
-    if (const auto size = FormatErrorMessage(lastError, buffer.data(), bufferSize - 1);
+    if (const auto size = FormatErrorMessage(lastError, buffer.data(), defaultBufferSize - 1);
         0 < size)
+    {
         return String{ buffer.data() };
+    }
     else
+    {
         return String{};
+    }
 }
 
 bool System::FormatErrorMessage(WindowsHLocal& errorMessage, WindowError lastError) noexcept

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 10:02)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/12 10:14)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_VIRTUAL_QUERY_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_VIRTUAL_QUERY_TESTING_H
@@ -31,9 +31,11 @@ namespace System
         void MainTest();
 
         NODISCARD bool VirtualQueryTest();
+
         void QueryTest();
 
         void DoQueryTest(size_t index);
+        void MemoryProtectTest(size_t index);
         void DoQueryUseProcessTest(size_t index);
 
         void QueryMemoryBasicInformationTest(size_t index, WindowsVoidPtr baseVirtual);

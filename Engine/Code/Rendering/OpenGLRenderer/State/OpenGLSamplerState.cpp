@@ -11,6 +11,7 @@
 
 #include "OpenGLSamplerState.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
+#include "System/OpenGL/Flags/OpenGLTextureFlags.h"
 #include "System/OpenGL/OpenGLSamplers.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"

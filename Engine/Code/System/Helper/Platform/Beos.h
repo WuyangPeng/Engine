@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:09)
+/// 版本：1.0.0.7 (2024/03/04 19:53)
 
 #ifndef SYSTEM_HELPER_BEOS_H
 #define SYSTEM_HELPER_BEOS_H
 
 #if defined(__BEOS__)
 
-    //  BeOS 具体配置选项：
+    ///  BeOS 具体配置选项：
 
     #define TCRE_SYSTEM_PLATFORM "BeOS"
     #define SYSTEM_PLATFORM_BEOS static_cast<void>(0)

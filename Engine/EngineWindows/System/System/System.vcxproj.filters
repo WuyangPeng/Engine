@@ -528,22 +528,13 @@
     <ClInclude Include="..\..\..\Code\System\FileManager\Flags\FileTimeFlags.h">
       <Filter>FileManager 头文件\Flags</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\FileManager\Flags\FileToolsFlags.h">
-      <Filter>FileManager 头文件\Flags</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\FileManager\Flags\CFileFlags.h">
       <Filter>FileManager 头文件\Flags</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\FileManager\Fwd\FileFlagsFwd.h">
       <Filter>FileManager 头文件\Fwd</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\FileManager\Using\FileToolsUsing.h">
-      <Filter>FileManager 头文件\Using</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\FileManager\Using\FileUsing.h">
-      <Filter>FileManager 头文件\Using</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\FileManager\Using\FindFileUsing.h">
       <Filter>FileManager 头文件\Using</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\FileManager\Using\CFileUsing.h">
@@ -684,13 +675,13 @@
     <ClInclude Include="..\..\..\Code\System\Helper\Compiler\SunproCc.h">
       <Filter>Helper 头文件\Compiler</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\Compiler\Vacpp.h">
+    <ClInclude Include="..\..\..\Code\System\Helper\Compiler\VaCpp.h">
       <Filter>Helper 头文件\Compiler</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\Compiler\Visualc.h">
+    <ClInclude Include="..\..\..\Code\System\Helper\Compiler\VisualC.h">
       <Filter>Helper 头文件\Compiler</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\Compiler\Xlcpp.h">
+    <ClInclude Include="..\..\..\Code\System\Helper\Compiler\XlCpp.h">
       <Filter>Helper 头文件\Compiler</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\Compiler\Borland.h">
@@ -849,10 +840,10 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\AsioConnect.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\StdLib\Libcpp.h">
+    <ClInclude Include="..\..\..\Code\System\Helper\StdLib\LibCpp.h">
       <Filter>Helper 头文件\StdLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\StdLib\Libstdcpp3.h">
+    <ClInclude Include="..\..\..\Code\System\Helper\StdLib\LibStdCpp3.h">
       <Filter>Helper 头文件\StdLib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\StdLib\Modena.h">
@@ -861,7 +852,7 @@
     <ClInclude Include="..\..\..\Code\System\Helper\StdLib\Msl.h">
       <Filter>Helper 头文件\StdLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\StdLib\Roguewave.h">
+    <ClInclude Include="..\..\..\Code\System\Helper\StdLib\RogueWave.h">
       <Filter>Helper 头文件\StdLib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\StdLib\Sgi.h">
@@ -870,13 +861,13 @@
     <ClInclude Include="..\..\..\Code\System\Helper\StdLib\STLPort.h">
       <Filter>Helper 头文件\StdLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\StdLib\Vacpp.h">
+    <ClInclude Include="..\..\..\Code\System\Helper\StdLib\VaCpp.h">
       <Filter>Helper 头文件\StdLib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\StdLib\Dinkumware.h">
       <Filter>Helper 头文件\StdLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\StdLib\Libcomo.h">
+    <ClInclude Include="..\..\..\Code\System\Helper\StdLib\LibComo.h">
       <Filter>Helper 头文件\StdLib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Linux\Linux.h">
@@ -909,9 +900,6 @@
     <ClInclude Include="..\..\..\Code\System\MemoryTools\Flags\LocalMemoryFlags.h">
       <Filter>MemoryTools 头文件\Flags</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\MemoryTools\Flags\MemoryHelperFlags.h">
-      <Filter>MemoryTools 头文件\Flags</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\MemoryTools\Flags\ViewOfFileFlags.h">
       <Filter>MemoryTools 头文件\Flags</Filter>
     </ClInclude>
@@ -921,13 +909,7 @@
     <ClInclude Include="..\..\..\Code\System\MemoryTools\Fwd\MemoryToolsFlagsFwd.h">
       <Filter>MemoryTools 头文件\Fwd</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\MemoryTools\Using\MemoryHelperUsing.h">
-      <Filter>MemoryTools 头文件\Using</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\MemoryTools\Using\VirtualToolsUsing.h">
-      <Filter>MemoryTools 头文件\Using</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\MemoryTools\Using\HeapToolsUsing.h">
       <Filter>MemoryTools 头文件\Using</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\MemoryTools\VirtualTools.h">
@@ -958,9 +940,6 @@
       <Filter>MemoryTools 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Network\Flags\WindowsExtensionPrototypesFlags.h">
-      <Filter>Network 头文件\Flags</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Network\Flags\WindowsSockExFlags.h">
       <Filter>Network 头文件\Flags</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Network\Flags\SocketPrototypesFlags.h">
@@ -1117,9 +1096,6 @@
       <Filter>Security 头文件\Flags</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Security\Flags\SecurityDescriptorFlags.h">
-      <Filter>Security 头文件\Flags</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Security\Flags\SecuritySidFlags.h">
       <Filter>Security 头文件\Flags</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Security\Flags\AccessCheckFlags.h">
@@ -1287,9 +1263,6 @@
     <ClInclude Include="..\..\..\Code\System\Threading\Flags\ProcessFlags.h">
       <Filter>Threading 头文件\Flags</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Threading\Flags\ProcessToolsFlags.h">
-      <Filter>Threading 头文件\Flags</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Threading\Flags\SemaphoreFlags.h">
       <Filter>Threading 头文件\Flags</Filter>
     </ClInclude>
@@ -1320,16 +1293,10 @@
     <ClInclude Include="..\..\..\Code\System\Threading\Using\MutexUsing.h">
       <Filter>Threading 头文件\Using</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Threading\Using\ProcessToolsUsing.h">
-      <Filter>Threading 头文件\Using</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Threading\Using\ProcessUsing.h">
       <Filter>Threading 头文件\Using</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Threading\Using\SlimReaderWriterUsing.h">
-      <Filter>Threading 头文件\Using</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Threading\Using\ThreadToolsUsing.h">
       <Filter>Threading 头文件\Using</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Threading\Using\ThreadUsing.h">
@@ -1342,9 +1309,6 @@
       <Filter>Threading 头文件\Using</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Threading\Using\CriticalSectionUsing.h">
-      <Filter>Threading 头文件\Using</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Threading\Using\FiberToolsUsing.h">
       <Filter>Threading 头文件\Using</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Time\DeltaTime.h">
@@ -1401,19 +1365,16 @@
     <ClInclude Include="..\..\..\Code\System\OpenGL\Flags\OpenGLWglPrototypesFlags.h">
       <Filter>OpenGL 头文件\Flags</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Span.h">
-      <Filter>Helper 头文件\PragmaWarning</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\Compiler\Diab.h">
       <Filter>Helper 头文件\Compiler</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\Platform\Zos.h">
       <Filter>Helper 头文件\Platform</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\StdLib\XlcppZos.h">
+    <ClInclude Include="..\..\..\Code\System\Helper\StdLib\XlCppZos.h">
       <Filter>Helper 头文件\StdLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\Compiler\XlcppZos.h">
+    <ClInclude Include="..\..\..\Code\System\Helper\Compiler\XlCppZos.h">
       <Filter>Helper 头文件\Compiler</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Spirit.h">
@@ -1895,6 +1856,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\GLPluginFwd.h">
       <Filter>OpenGL 头文件\Fwd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Console\Using\ConsoleCreateUsing.h">
+      <Filter>Console 头文件\Using</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\OpenGL\Flags\OpenGLTextureFlags.h">
+      <Filter>OpenGL 头文件\Flags</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

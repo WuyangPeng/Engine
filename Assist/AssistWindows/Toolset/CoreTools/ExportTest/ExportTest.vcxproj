@@ -798,9 +798,7 @@
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\SoundEffectMacroShared.cpp" />
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\UserInterfaceMacroShared.cpp" />
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\DllLib.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\ExportClass.cpp" />
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\ExportFunction.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\NoExportClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt" />

@@ -21,7 +21,7 @@ namespace System
     template <typename T>
     NODISCARD T SystemInterlockedDecrement(T* addend) noexcept(std::is_same_v<long, T>);
 
-    // 返回的是原来的值。
+    /// 返回的是原来的值。
     template <typename T>
     NODISCARD T SystemInterlockedExchangeAdd(T* addend, T value) noexcept(std::is_same_v<long, T>);
 

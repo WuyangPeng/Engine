@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:28)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/16 17:35)
 
 #include "OpenGLTexturesCubeArrayTesting.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
@@ -29,30 +29,33 @@ void System::OpenGLTexturesCubeArrayTesting::DoRunUnitTest()
 
 void System::OpenGLTexturesCubeArrayTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLTexturesCubeTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(TexturesCubeTest);
 }
 
-void System::OpenGLTexturesCubeArrayTesting::OpenGLTexturesCubeTest()
+void System::OpenGLTexturesCubeArrayTesting::TexturesCubeTest()
 {
     for (auto iter = GetTextureInternalFormatsBegin(); iter != GetTextureInternalFormatsEnd(); ++iter)
     {
-        if (*iter == TextureInternalFormat::DepthComponent32F ||
-            *iter == TextureInternalFormat::Depth24Stencil8 ||
-            *iter == TextureInternalFormat::DepthComponent16)
+        if (*iter != TextureInternalFormat::DepthComponent32F &&
+            *iter != TextureInternalFormat::Depth24Stencil8 &&
+            *iter != TextureInternalFormat::DepthComponent16)
         {
-            continue;
+            ASSERT_NOT_THROW_EXCEPTION_1(DoTexturesCubeTest, *iter);
         }
-
-        const auto texture = GetGLGenTextures();
-        ASSERT_LESS(0u, texture);
-
-        ASSERT_NOT_THROW_EXCEPTION_2(DoOpenGLTexturesCubeTest, *iter, texture);
-
-        ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteTextureTest, texture);
     }
 }
 
-void System::OpenGLTexturesCubeArrayTesting::DoOpenGLTexturesCubeTest(TextureInternalFormat textureInternalFormat, OpenGLInt texture)
+void System::OpenGLTexturesCubeArrayTesting::DoTexturesCubeTest(TextureInternalFormat textureInternalFormat)
+{
+    const auto texture = GetGLGenTextures();
+    ASSERT_LESS(0u, texture);
+
+    ASSERT_NOT_THROW_EXCEPTION_2(SetTexturesCubeTest, textureInternalFormat, texture);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteTextureTest, texture);
+}
+
+void System::OpenGLTexturesCubeArrayTesting::SetTexturesCubeTest(TextureInternalFormat textureInternalFormat, OpenGLInt texture)
 {
     SetGLBindTexture(textureTarget, texture);
 
@@ -83,7 +86,7 @@ void System::OpenGLTexturesCubeArrayTesting::GetTexturesImageTest(TextureInterna
     ASSERT_EQUAL(texturesData, result);
 }
 
-System::OpenGLTexturesCubeArrayTesting::TexturesImageType System::OpenGLTexturesCubeArrayTesting::GetTexturesData(TextureInternalFormat textureInternalFormat)
+System::OpenGLTexturesCubeArrayTesting::TexturesImageType System::OpenGLTexturesCubeArrayTesting::GetTexturesData(TextureInternalFormat textureInternalFormat) const
 {
     const auto texturesImageSize = width * height * depth * GetTextureFormatSize(textureInternalFormat);
 
@@ -94,7 +97,7 @@ System::OpenGLTexturesCubeArrayTesting::TexturesImageType System::OpenGLTextures
     return texturesData;
 }
 
-System::OpenGLTexturesCubeArrayTesting::TexturesImageType System::OpenGLTexturesCubeArrayTesting::GetTexturesDataResult(TextureInternalFormat textureInternalFormat)
+System::OpenGLTexturesCubeArrayTesting::TexturesImageType System::OpenGLTexturesCubeArrayTesting::GetTexturesDataResult(TextureInternalFormat textureInternalFormat) const
 {
     const auto texturesImageSize = width * height * depth * GetTextureFormatSize(textureInternalFormat);
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:23)
+/// 版本：1.0.0.7 (2024/03/03 00:11)
 
 #include "System/SystemExport.h"
 
@@ -40,6 +40,7 @@ bool System::OpenGLInit()
 namespace System
 {
     using FunctionType = decltype(GetVersionString);
+
     void PrintOpenGLInfo(FunctionType function, const char* describe)
     {
         if (function != nullptr)

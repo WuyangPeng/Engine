@@ -5,20 +5,20 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:14)
+/// 版本：1.0.0.7 (2024/03/04 17:27)
 
 #ifndef SYSTEM_HELPER_INTEL_H
 #define SYSTEM_HELPER_INTEL_H
 
 #if defined(__INTEL_COMPILER) || defined(__ICL) || defined(__ICC) || defined(__ECC)
 
-    // Intel 编译器设置：
+    /// Intel 编译器设置：
 
     #if defined(__INTEL_COMPILER) && (1500 <= __INTEL_COMPILER) && (defined(_MSC_VER) || defined(__GNUC__))
 
         #ifdef _MSC_VER
 
-            #include "Visualc.h"
+            #include "VisualC.h"
 
             #undef MSVC_VERSION
             #undef MSVC_FULL_VERSION
@@ -76,7 +76,7 @@
 
     #endif  // __GNUC__
 
-    // 通过比较“icpc -dM -E”的输出确定的标志来确定有没有“-std=c++0x”
+    /// 通过比较“icpc -dM -E”的输出确定的标志来确定有没有“-std=c++0x”
     #if (!(defined(_WIN32) || defined(_WIN64)) && defined(__STDC_HOSTED__) && (__STDC_HOSTED__ && (TCRE_COMPILER_VERSION <= 1200))) || defined(__GXX_EXPERIMENTAL_CPP0X__) || defined(__GXX_EXPERIMENTAL_CXX0X__)
 
         #define SYSTEM_INTEL_STDCXX0X
@@ -119,7 +119,7 @@
 
     #endif  // defined(_WIN32) || defined(_WIN64)
 
-    // 版本检查：我们不支持版本6.0之前的Intel：
+    /// 版本检查：我们不支持版本6.0之前的Intel：
     #if TCRE_COMPILER_VERSION < 600
 
         #error "编译器未设置"

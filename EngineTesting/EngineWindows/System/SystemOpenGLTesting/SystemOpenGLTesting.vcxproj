@@ -281,6 +281,7 @@
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLBaseTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLBlendTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLDepthTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLDrawTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLMaskTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLQueryTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLStateTesting.h" />
@@ -292,6 +293,7 @@
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLFrameBufferTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLGetBuffersTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLBuffersTestingBase.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLMapTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLSetBufferSubDataTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLSetBufferTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLSetCopyBufferSubDataTesting.h" />
@@ -299,6 +301,7 @@
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLGlut\OpenGLGlutCallbackTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLGlut\OpenGLGlutCreateWindowTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLGlut\OpenGLGlutDestroyTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLGlut\OpenGLGlutTestingBase.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLPolygon\OpenGLPolygonModeTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLPolygon\OpenGLPolygonOffsetTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\ComputeWorkGroupSizeTesting.h" />
@@ -319,7 +322,10 @@
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLGetUniformLocationTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLShaderAttributesTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLShaderStatusTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLShaderStorageBlockBindingTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLShaderTestingBase.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\Detail\TexturesImage.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLActiveTextureTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLBindTexturesTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLFrameBufferTextures2DTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLGetTexturesTesting.h" />
@@ -345,6 +351,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLBaseTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLBlendTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLDepthTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLDrawTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLMaskTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLQueryTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLStateTesting.cpp" />
@@ -355,6 +362,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLFrameBufferTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLGetBuffersTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLBuffersTestingBase.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLMapTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLSetBufferSubDataTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLSetBufferTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLSetCopyBufferSubDataTesting.cpp" />
@@ -362,6 +370,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLGlut\OpenGLGlutCallbackTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLGlut\OpenGLGlutCreateWindowTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLGlut\OpenGLGlutDestroyTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLGlut\OpenGLGlutTestingBase.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLPolygon\OpenGLPolygonModeTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLPolygon\OpenGLPolygonOffsetTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\ComputeWorkGroupSizeTesting.cpp" />
@@ -382,7 +391,10 @@
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLGetUniformLocationTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLShaderAttributesTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLShaderStatusTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLShaderStorageBlockBindingTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLShaderTestingBase.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\Detail\TexturesImage.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLActiveTextureTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLBindTexturesTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLFrameBufferTextures2DTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLGetTexturesTesting.cpp" />

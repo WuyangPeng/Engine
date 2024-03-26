@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 14:08)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 14:29)
 
 #include "DuplicateTokenTesting.h"
 #include "System/Security/SecurityBase.h"
@@ -76,21 +76,26 @@ void System::DuplicateTokenTesting::DuplicateTokenTest()
 {
     const auto tokenHandle = OpenProcessToken();
 
-    ASSERT_NOT_THROW_EXCEPTION_1(DoDuplicateTokenTest, tokenHandle);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoDuplicateTokenTestLoop, tokenHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseTokenTest, tokenHandle);
 }
 
-void System::DuplicateTokenTesting::DoDuplicateTokenTest(WindowsHandle tokenHandle)
+void System::DuplicateTokenTesting::DoDuplicateTokenTestLoop(WindowsHandle tokenHandle)
 {
     for (auto index = 0u; index < maxSize; ++index)
     {
-        const auto securityImpersonation = securityImpersonationLevels.at(index % securityImpersonationLevels.size());
-
-        ASSERT_NOT_THROW_EXCEPTION_2(DuplicateTest, tokenHandle, securityImpersonation);
-
-        ASSERT_NOT_THROW_EXCEPTION_3(WindowSecurityAttributesDuplicateTest, index, tokenHandle, securityImpersonation);
+        ASSERT_NOT_THROW_EXCEPTION_2(DoDuplicateTokenTest, tokenHandle, index);
     }
+}
+
+void System::DuplicateTokenTesting::DoDuplicateTokenTest(WindowsHandle tokenHandle, size_t index)
+{
+    const auto securityImpersonation = securityImpersonationLevels.at(index % securityImpersonationLevels.size());
+
+    ASSERT_NOT_THROW_EXCEPTION_2(DuplicateTest, tokenHandle, securityImpersonation);
+
+    ASSERT_NOT_THROW_EXCEPTION_3(WindowSecurityAttributesDuplicateTest, index, tokenHandle, securityImpersonation);
 }
 
 void System::DuplicateTokenTesting::DuplicateTest(WindowsHandle tokenHandle, SecurityImpersonationLevel securityImpersonation)

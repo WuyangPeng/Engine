@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 09:28)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/08 16:12)
 
 #ifndef SYSTEM_TESTING_HELPER_SUITE_GL_UTILITY_PREVIOUSLY_BODY_RESULT_TESTING_H
 #define SYSTEM_TESTING_HELPER_SUITE_GL_UTILITY_PREVIOUSLY_BODY_RESULT_TESTING_H
@@ -29,12 +29,12 @@ namespace System
         void DoRunUnitTest() override;
         void MainTest();
 
-        NODISCARD int PreviouslyBody0Test() noexcept;
-        NODISCARD int PreviouslyBody1Test() noexcept;
-        NODISCARD int PreviouslyBody2Test() noexcept;
-        NODISCARD int PreviouslyBody3Test() noexcept;
-        NODISCARD int PreviouslyBody4Test() noexcept;
-        NODISCARD int PreviouslyBody5Test() noexcept;
+        NODISCARD int PreviouslyBody0Test() const noexcept;
+        NODISCARD int PreviouslyBody1Test() const noexcept;
+        NODISCARD int PreviouslyBody2Test() const noexcept;
+        NODISCARD int PreviouslyBody3Test() const noexcept;
+        NODISCARD int PreviouslyBody4Test() const noexcept;
+        NODISCARD int PreviouslyBody5Test() const noexcept;
     };
 }
 

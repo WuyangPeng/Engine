@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:56)
+/// 版本：1.0.0.7 (2024/03/04 22:57)
 
 #ifndef SYSTEM_HELPER_WINDOWS_MACRO_H
 #define SYSTEM_HELPER_WINDOWS_MACRO_H
@@ -65,7 +65,7 @@ namespace System
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
-    NODISCARD constexpr TChar* MakeIntreSource(WindowsWord id) noexcept
+    NODISCARD inline TChar* MakeIntResource(WindowsWord id) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
 
@@ -198,19 +198,19 @@ namespace System
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
 
-    // 异常码
+    /// 异常码
     constexpr auto exceptionShift = 0u;
 
-    // 设备码
+    /// 设备码
     constexpr auto facilityShift = 16u;
 
-    // 保留的(0)
+    /// 保留的(0)
     constexpr auto reservedShift = 28u;
 
-    // MS(0) 或 自定义(1)
+    /// MS(0) 或 自定义(1)
     constexpr auto customerShift = 29u;
 
-    // 严重性
+    /// 严重性
     constexpr auto severityShift = 30u;
 
     constexpr auto exceptionBit = (1u << facilityShift) - 1u;
@@ -221,7 +221,7 @@ namespace System
 #ifdef SYSTEM_USE_WINDOWS_MACRO
 
     #define SYSTEM_CALL_BACK CALLBACK
-    #define SYSTEM_WINAPI WINAPI
+    #define SYSTEM_WIN_API WINAPI
     #define SYSTEM_IN _In_
     #define SYSTEM_IN_OPT _In_opt_
     #define SYSTEM_OUT _Out_
@@ -232,7 +232,7 @@ namespace System
 #else  // !SYSTEM_USE_WINDOWS_MACRO
 
     #define SYSTEM_CALL_BACK __stdcall
-    #define SYSTEM_WINAPI __stdcall
+    #define SYSTEM_WIN_API __stdcall
     #define SYSTEM_IN
     #define SYSTEM_IN_OPT
     #define SYSTEM_OUT

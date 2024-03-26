@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 13:35)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:27)
 
 #include "OpenGLGlutTesting.h"
 #include "System/OpenGL/OpenGLGlut.h"
@@ -31,16 +31,12 @@ void System::OpenGLGlutTesting::DoRunUnitTest()
 void System::OpenGLGlutTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(GlutInitTest);
-
-    // SystemOpenGLTesting有OpenGL函数的测试。
-    // GlutMainLoopTesting有函数GlutMainLoop的测试。
 }
 
 void System::OpenGLGlutTesting::GlutInitTest() noexcept
 {
-    constexpr auto bufferSize = 1;
-    std::array<char, bufferSize> buffer{};
-    auto count = bufferSize;
+    CharBufferType buffer{};
+    auto count = 1;
     auto argv = buffer.data();
 
     GlutInit(&count, &argv);

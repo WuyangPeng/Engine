@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:21)
+/// 版本：1.0.0.7 (2024/03/05 17:02)
 
 #include "System/SystemExport.h"
 
@@ -38,10 +38,7 @@ bool System::CloseSystemConsole(WindowsHandle consoleHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(consoleHandle) != gFalse)
-        return true;
-    else
-        return false;
+    return ::CloseHandle(consoleHandle) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -63,10 +60,7 @@ bool System::GetSystemConsoleScreenBufferInfo(WindowsHandle consoleOutput, Conso
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetConsoleScreenBufferInfo(consoleOutput, consoleScreenBufferInfo) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetConsoleScreenBufferInfo(consoleOutput, consoleScreenBufferInfo) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -81,10 +75,7 @@ bool System::GetSystemConsoleScreenBufferInfo(WindowsHandle consoleOutput, Conso
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetConsoleScreenBufferInfoEx(consoleOutput, consoleScreenBufferInfoEx) != gFalse)
-        return true;
-    else
-        return false;
+    return ::GetConsoleScreenBufferInfoEx(consoleOutput, consoleScreenBufferInfoEx) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -95,14 +86,11 @@ bool System::GetSystemConsoleScreenBufferInfo(WindowsHandle consoleOutput, Conso
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SetConsoleHandleScreenBufferInfo(WindowsHandle consoleOutput, ConsoleScreenBufferInfoExPtr consoleScreenBufferInfoEx) noexcept
+bool System::SetSystemConsoleScreenBufferInfo(WindowsHandle consoleOutput, ConsoleScreenBufferInfoExPtr consoleScreenBufferInfoEx) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetConsoleScreenBufferInfoEx(consoleOutput, consoleScreenBufferInfoEx) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetConsoleScreenBufferInfoEx(consoleOutput, consoleScreenBufferInfoEx) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -117,10 +105,7 @@ bool System::SetSystemConsoleScreenBufferSize(WindowsHandle consoleOutput, Conso
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetConsoleScreenBufferSize(consoleOutput, size) != gFalse)
-        return true;
-    else
-        return false;
+    return ::SetConsoleScreenBufferSize(consoleOutput, size) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

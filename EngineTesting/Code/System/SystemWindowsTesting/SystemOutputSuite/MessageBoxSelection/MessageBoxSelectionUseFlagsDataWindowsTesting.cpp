@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:51)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/09 12:27)
 
 #include "MessageBoxSelectionUseFlagsDataWindowsTesting.h"
 #include "System/SystemOutput/Data/MessageBoxFlagsData.h"
@@ -41,7 +41,7 @@ System::MessageBoxSelectionUseFlagsDataWindowsTesting::MessageBoxSelectionUseFla
                     MessageBoxDefault::Button2,
                     MessageBoxDefault::Button3,
                     MessageBoxDefault::Button4 },
-      modeFlags{ MessageBoxMode::ApplModal,
+      modeFlags{ MessageBoxMode::ApplicationModal,
                  MessageBoxMode::SystemModal,
                  MessageBoxMode::TaskModal },
       miscFlags{ MessageBoxMisc::NoMisc,
@@ -75,7 +75,7 @@ System::MessageBoxSelectionUseFlagsDataWindowsTesting::MessageBoxSelectionUseFla
                            { MessageBoxDefault::Button2, SYSTEM_TEXT("（按钮2）") },
                            { MessageBoxDefault::Button3, SYSTEM_TEXT("（按钮3）") },
                            { MessageBoxDefault::Button4, SYSTEM_TEXT("（按钮4）") } },
-      modeDescriptions{ { MessageBoxMode::ApplModal, SYSTEM_TEXT("ApplModal样式") },
+      modeDescriptions{ { MessageBoxMode::ApplicationModal, SYSTEM_TEXT("ApplModal样式") },
                         { MessageBoxMode::SystemModal, SYSTEM_TEXT("SystemModal样式") },
                         { MessageBoxMode::TaskModal, SYSTEM_TEXT("TaskModal样式") } },
       miscDescriptions{ { MessageBoxMisc::NoMisc, SYSTEM_TEXT("（没有杂项）") },
@@ -97,10 +97,7 @@ System::MessageBoxSelectionUseFlagsDataWindowsTesting::MessageBoxSelectionUseFla
 
 bool System::MessageBoxSelectionUseFlagsDataWindowsTesting::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && hWnd != nullptr)
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && hWnd != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -155,7 +152,7 @@ void System::MessageBoxSelectionUseFlagsDataWindowsTesting::DoMessageBoxTest(siz
 
     const auto collection = returnCollections[typeFlag];
 
-    const auto iter = find(collection.cbegin(), collection.cend(), flag);
+    const auto iter = std::ranges::find(collection, flag);
 
     ASSERT_UNEQUAL(iter, collection.cend());
 }

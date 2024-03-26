@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 14:12)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/09 10:19)
 
 #ifndef SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_LANGUAGE_ID_DATA_TESTING_H
 #define SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_LANGUAGE_ID_DATA_TESTING_H
@@ -36,16 +36,16 @@ namespace System
         NODISCARD bool RandomShuffleFlags();
         void FlagsTest();
 
-        void DefaultFlagTest() noexcept;
+        void DefaultFlagTest() const noexcept;
         void DoFlagsTest(size_t index);
 
     private:
-        using PrimaryLanguageFlagsContainer = std::vector<PrimaryLanguage>;
-        using SubLanguageFlagsContainer = std::vector<SubLanguage>;
+        using PrimaryLanguageContainer = std::vector<PrimaryLanguage>;
+        using SubLanguageContainer = std::vector<SubLanguage>;
 
     private:
-        PrimaryLanguageFlagsContainer primaryLanguages;
-        SubLanguageFlagsContainer subLanguages;
+        PrimaryLanguageContainer primaryLanguages;
+        SubLanguageContainer subLanguages;
         size_t maxSize;
         std::default_random_engine randomEngine;
     };

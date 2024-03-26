@@ -10,7 +10,6 @@
 #ifndef SYSTEM_THREADING_PROCESS_USING_H
 #define SYSTEM_THREADING_PROCESS_USING_H
 
-#include "ThreadToolsUsing.h"
 #include "System/Helper/Platform.h"
 #include "System/Helper/UnicodeUsing.h"
 

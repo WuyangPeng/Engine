@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:18)
+/// 版本：1.0.0.7 (2024/03/05 16:54)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_COLORS_FLAGS_H
 #define SYSTEM_CONSOLE_CONSOLE_COLORS_FLAGS_H
@@ -72,7 +72,7 @@ namespace System
         ReverseVideo = COMMON_LVB_REVERSE_VIDEO,
         Underscore = COMMON_LVB_UNDERSCORE,
 
-        SbcsDbcs = COMMON_LVB_SBCSDBCS,
+        SingleByteCharacterSetDoubleByteCharacterSet = COMMON_LVB_SBCSDBCS,
     };
 
 #else  // !SYSTEM_PLATFORM_WIN32
@@ -131,7 +131,7 @@ namespace System
         GridRVertical = 0x1000,
         ReverseVideo = 0x4000,
         Underscore = 0x8000,
-        SbcsDbcs = 0x0300,
+        SingleByteCharacterSetDoubleByteCharacterSet = 0x0300,
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32

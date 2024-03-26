@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:26)
+/// 版本：1.0.0.7 (2024/03/22 13:05)
 
 #ifndef SYSTEM_ANDROID_ANDROID_FLAGS_FWD_H
 #define SYSTEM_ANDROID_ANDROID_FLAGS_FWD_H
@@ -14,7 +14,7 @@
 
 namespace System
 {
-    // AndroidInput
+    /// AndroidInput
     enum class AndroidKeyState;
     enum class AndroidMeta;
     enum class AndroidInputEventType;
@@ -31,19 +31,19 @@ namespace System
     enum class AndroidInputKeyboardType;
     enum class AndroidInputMotionRange;
 
-    // AndroidKeyCodes
+    /// AndroidKeyCodes
     enum class AndroidKeyCodes;
 
-    // AndroidLooper
+    /// AndroidLooper
     enum class AndroidLooperPrepareAllow;
     enum class AndroidLooperPoll;
     enum class AndroidLooperEvent;
 
-    // AndroidNativeAppGlue
+    /// AndroidNativeAppGlue
     enum class LooperId;
     enum class AppCommandType;
 
-    // AndroidNativeWindow
+    /// AndroidNativeWindow
     enum class WindowFormat;
 }
 

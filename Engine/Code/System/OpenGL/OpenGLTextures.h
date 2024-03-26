@@ -17,12 +17,12 @@
 
 namespace System
 {
-    void SYSTEM_DEFAULT_DECLARE GetGLGenTextures(OpenGLSize n, OpenGLUInt* textures) noexcept;
-    NODISCARD OpenGLUInt SYSTEM_DEFAULT_DECLARE GetGLGenTextures() noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLDeleteTextures(OpenGLSize n, const OpenGLUInt* textures) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLDeleteTextures(OpenGLUInt textures) noexcept;
+    void SYSTEM_DEFAULT_DECLARE GetGLGenTextures(OpenGLSize n, OpenGLUnsignedInt* textures) noexcept;
+    NODISCARD OpenGLUnsignedInt SYSTEM_DEFAULT_DECLARE GetGLGenTextures() noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLDeleteTextures(OpenGLSize n, const OpenGLUnsignedInt* textures) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLDeleteTextures(OpenGLUnsignedInt textures) noexcept;
 
-    void SYSTEM_DEFAULT_DECLARE SetGLBindTexture(TextureTarget target, OpenGLUInt texture) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLBindTexture(TextureTarget target, OpenGLUnsignedInt texture) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLPixelStore(PixelStore pName, OpenGLInt param) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLTexturesParameter(TextureTarget target, TextureParameter pName, OpenGLInt param) noexcept;
 
@@ -40,13 +40,12 @@ namespace System
 
     void SYSTEM_DEFAULT_DECLARE SetGLTexturesStorage3D(TextureTarget target, OpenGLSize levels, TextureInternalFormat internalFormat, OpenGLSize width, OpenGLSize height, OpenGLSize depth) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLTexturesSubImage3D(TextureTarget target, OpenGLInt level, OpenGLInt xOffset, OpenGLInt yOffset, OpenGLInt zOffset, OpenGLSize width, OpenGLSize height, OpenGLSize depth, TextureExternalFormat format, OpenGLData type, const void* pixels) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLTexturesSubImage3D(TextureCubeMap target, OpenGLInt level, OpenGLInt xOffset, OpenGLInt yOffset, OpenGLInt zOffset, OpenGLSize width, OpenGLSize height, OpenGLSize depth, TextureExternalFormat format, OpenGLData type, const void* pixels) noexcept;
 
     void SYSTEM_DEFAULT_DECLARE SetGLGenerateMipmap(TextureTarget target) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLFrameBufferTexture2D(FrameBufferType target, ColorAttachment attachment, TextureTarget texTarget, OpenGLUInt texture, OpenGLInt level) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLFrameBufferTexture2D(FrameBufferType target, ColorAttachment attachment, TextureTarget texTarget, OpenGLUnsignedInt texture, OpenGLInt level) noexcept;
 
     void SYSTEM_DEFAULT_DECLARE SetGLActiveTexture(OpenGLEnum texture) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLBindImageTexture(OpenGLUInt unit, OpenGLUInt texture, OpenGLInt level, bool layered, OpenGLInt layer, BufferLocking access, OpenGLEnum format) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLBindImageTexture(OpenGLUnsignedInt unit, OpenGLUnsignedInt texture, OpenGLInt level, bool layered, OpenGLInt layer, BufferLocking access, OpenGLEnum format) noexcept;
 }
 
 #endif  // SYSTEM_OPENGL_OPENGL_TEXTURES_H

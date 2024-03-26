@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 17:28)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/06 17:34)
 
 #ifndef SYSTEM_TESTING_HELPER_SUITE_STD_LIB_CONFIG_TESTING_H
 #define SYSTEM_TESTING_HELPER_SUITE_STD_LIB_CONFIG_TESTING_H
@@ -30,7 +30,7 @@ namespace System
         void MainTest();
 
         void StdLibTest();
-        void DinkumwareTest() noexcept;
+        void DinkumwareTest() const noexcept;
     };
 }
 

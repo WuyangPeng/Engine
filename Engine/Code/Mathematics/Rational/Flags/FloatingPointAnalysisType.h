@@ -20,6 +20,31 @@ namespace Mathematics
         QuietNaN,  //(exponent == 255) && (mantissa & 0x00400000)
         SignalingNaN,  // (exponent == 255) && (mantissa & 0x003FFFFF)
     };
+
+    /// 数字的类型。
+    enum class Classification
+    {
+        NegInfinity,
+        NegSubnormal,
+        NegNormal,
+        NegZero,
+        PosZero,
+        PosSubnormal,
+        PosNormal,
+        PosInfinity,
+        QuietNan,
+        SignalingNan
+    };
+
+    enum class BinaryScientificPrecisionType
+    {
+        IsFloat,
+        IsDouble,
+        IsInt32,
+        IsInt64,
+        IsUInt32,
+        IsUInt64,
+    };
 }
 
 #endif  // MATHEMATICS_RATIONAL_FLOATING_POINT_ANALYSIS_TYPE_H

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:22)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:43)
 
 #include "OpenGLBuffersTestingBase.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -46,37 +46,37 @@ void System::OpenGLBuffersTestingBase::RandomShuffle()
     std::ranges::shuffle(subDataBindBuffers, randomEngine);
 }
 
-void System::OpenGLBuffersTestingBase::SetBindBufferTest(BindBuffer type, OpenGLUInt buffer) noexcept
+void System::OpenGLBuffersTestingBase::SetBindBufferTest(BindBuffer type, OpenGLUnsignedInt buffer) const noexcept
 {
     SetGLBindBuffer(type, buffer);
 }
 
-void System::OpenGLBuffersTestingBase::SetGLDeleteBufferTest(OpenGLUInt buffer) noexcept
+void System::OpenGLBuffersTestingBase::DeleteBufferTest(OpenGLUnsignedInt buffer) const noexcept
 {
     SetGLDeleteBuffers(buffer);
 }
 
-void System::OpenGLBuffersTestingBase::SetGLDeleteBuffersTest(const BufferType& buffers) noexcept
+void System::OpenGLBuffersTestingBase::DeleteBuffersTest(const BufferType& buffers) const noexcept
 {
     SetGLDeleteBuffers(bufferSize, buffers.data());
 }
 
-void System::OpenGLBuffersTestingBase::SetGLDeleteFrameBufferTest(OpenGLUInt buffer) noexcept
+void System::OpenGLBuffersTestingBase::DeleteFrameBufferTest(OpenGLUnsignedInt buffer) const noexcept
 {
     SetGLDeleteFrameBuffers(buffer);
 }
 
-void System::OpenGLBuffersTestingBase::SetGLDeleteFrameBuffersTest(const BufferType& buffers) noexcept
+void System::OpenGLBuffersTestingBase::DeleteFrameBuffersTest(const BufferType& buffers) const noexcept
 {
     SetGLDeleteFrameBuffers(bufferSize, buffers.data());
 }
 
-void System::OpenGLBuffersTestingBase::SetGLDeleteVertexArrayTest(OpenGLUInt buffer) noexcept
+void System::OpenGLBuffersTestingBase::DeleteVertexArrayTest(OpenGLUnsignedInt buffer) const noexcept
 {
     SetGLDeleteVertexArrays(buffer);
 }
 
-void System::OpenGLBuffersTestingBase::SetGLDeleteVertexArraysTest(const BufferType& buffers) noexcept
+void System::OpenGLBuffersTestingBase::DeleteVertexArraysTest(const BufferType& buffers) const noexcept
 {
     SetGLDeleteVertexArrays(bufferSize, buffers.data());
 }
@@ -91,12 +91,14 @@ System::OpenGLBuffersTestingBase::BindBufferContainerConstIter System::OpenGLBuf
     return bindBuffers.cend();
 }
 
-System::BindBuffer System::OpenGLBuffersTestingBase::GetSubDataBindBuffer(size_t index) const
+System::BindBuffer System::OpenGLBuffersTestingBase::GetSubDataBindBuffer(int index) const
 {
-    return subDataBindBuffers.at(index % subDataBindBuffers.size());
+    const auto correctIndex = index % subDataBindBuffers.size();
+
+    return subDataBindBuffers.at(correctIndex);
 }
 
-size_t System::OpenGLBuffersTestingBase::GetSubDataBindBufferSize() const
+int System::OpenGLBuffersTestingBase::GetSubDataBindBufferSize() const
 {
-    return std::min(boost::numeric_cast<size_t>(bufferSize), subDataBindBuffers.size());
+    return std::min(bufferSize, boost::numeric_cast<int>(subDataBindBuffers.size()));
 }

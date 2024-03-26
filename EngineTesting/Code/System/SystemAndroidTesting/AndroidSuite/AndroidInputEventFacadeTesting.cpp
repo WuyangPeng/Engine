@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 13:46)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 17:08)
 
 #include "AndroidInputEventFacadeTesting.h"
 #include "System/Android/AndroidInputEventFacade.h"
@@ -15,8 +15,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::AndroidInputEventFacadeTesting::AndroidInputEventFacadeTesting(const OStreamShared& streamShared)
-    : ParentType{ streamShared }, androidInputEvent{}
+System::AndroidInputEventFacadeTesting::AndroidInputEventFacadeTesting(const OStreamShared& stream)
+    : ParentType{ stream }, androidInputEvent{}
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -35,7 +35,8 @@ void System::AndroidInputEventFacadeTesting::MainTest()
 
 void System::AndroidInputEventFacadeTesting::AndroidInputEventTest()
 {
-    AndroidInputEventFacade androidInputEventFacade{ &androidInputEvent };
+    const AndroidInputEventFacade androidInputEventFacade{ &androidInputEvent };
+
     ASSERT_ENUM_EQUAL(androidInputEventFacade.GetType(), AndroidInputEventType::Key);
     ASSERT_EQUAL(androidInputEventFacade.GetDeviceId(), 0);
     ASSERT_ENUM_EQUAL(androidInputEventFacade.GetSource(), AndroidInputSource::Unknown);

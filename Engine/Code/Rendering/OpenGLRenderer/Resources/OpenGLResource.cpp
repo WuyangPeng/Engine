@@ -43,7 +43,7 @@ void Rendering::OpenGLResource::Unmap(BindBuffer target) const noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return SetGLUnmap(target, GetGLHandle());
+    MAYBE_UNUSED const auto result = SetGLUnmap(target, GetGLHandle());
 }
 
 bool Rendering::OpenGLResource::PreparedForCopy(BufferLocking access) const

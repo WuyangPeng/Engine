@@ -64,6 +64,13 @@ Mathematics::GaussianElimination<Real>::GaussianElimination(int numRows, const C
 }
 
 template <typename Real>
+Mathematics::GaussianElimination<Real>::GaussianElimination(int numRows, const Container& matrix, bool wantInverse, const Container& b, Real epsilon)
+    : GaussianElimination{ numRows, matrix, wantInverse, b, 0, Container{}, epsilon }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+template <typename Real>
 void Mathematics::GaussianElimination<Real>::Init()
 {
     IndexContainer columnIndex(numRows);

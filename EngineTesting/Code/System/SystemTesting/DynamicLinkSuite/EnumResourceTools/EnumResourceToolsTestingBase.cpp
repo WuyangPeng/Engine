@@ -1,13 +1,14 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
-///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
-///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 17:04)
-
 /// 原始文件在SystemTesting下，SystemWindowsTesting下的为自动复制文件，请勿修改。
+
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
+///
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
+///
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/09 21:26)
+
 #include "EnumResourceToolsTestingBase.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"

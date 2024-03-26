@@ -1,14 +1,15 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:27)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:48)
 
 #include "OpenGLFrameBufferTextures2DTesting.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
+#include "System/OpenGL/Flags/OpenGLTextureFlags.h"
 #include "System/OpenGL/OpenGLBuffers.h"
 #include "System/OpenGL/OpenGLTextures.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -30,26 +31,26 @@ void System::OpenGLFrameBufferTextures2DTesting::DoRunUnitTest()
 
 void System::OpenGLFrameBufferTextures2DTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_1(OpenGLFrameBufferTextures2DTest, FrameBufferType::DrawFrameBuffer);
-    ASSERT_NOT_THROW_EXCEPTION_1(OpenGLFrameBufferTextures2DTest, FrameBufferType::FrameBuffer);
+    ASSERT_NOT_THROW_EXCEPTION_1(FrameBufferTextures2DTest, FrameBufferType::DrawFrameBuffer);
+    ASSERT_NOT_THROW_EXCEPTION_1(FrameBufferTextures2DTest, FrameBufferType::FrameBuffer);
 }
 
-void System::OpenGLFrameBufferTextures2DTesting::OpenGLFrameBufferTextures2DTest(FrameBufferType frameBufferType)
+void System::OpenGLFrameBufferTextures2DTesting::FrameBufferTextures2DTest(FrameBufferType frameBufferType)
 {
     const auto frameBuffers = GetGLGenFrameBuffers();
     ASSERT_LESS(0u, frameBuffers);
 
-    ASSERT_NOT_THROW_EXCEPTION_2(DoOpenGLFrameBufferTextures2DTest, frameBufferType, frameBuffers);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoFrameBufferTextures2DTest, frameBufferType, frameBuffers);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteFrameBufferTest, frameBuffers);
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteFrameBufferTest, frameBuffers);
 }
 
-void System::OpenGLFrameBufferTextures2DTesting::SetGLDeleteFrameBufferTest(OpenGLUInt buffer) noexcept
+void System::OpenGLFrameBufferTextures2DTesting::DeleteFrameBufferTest(OpenGLUnsignedInt buffer) const noexcept
 {
     SetGLDeleteFrameBuffers(buffer);
 }
 
-void System::OpenGLFrameBufferTextures2DTesting::DoOpenGLFrameBufferTextures2DTest(FrameBufferType frameBufferType, OpenGLInt frameBuffers)
+void System::OpenGLFrameBufferTextures2DTesting::DoFrameBufferTextures2DTest(FrameBufferType frameBufferType, OpenGLInt frameBuffers)
 {
     SetGLBindFrameBuffer(frameBufferType, frameBuffers);
 
@@ -58,10 +59,10 @@ void System::OpenGLFrameBufferTextures2DTesting::DoOpenGLFrameBufferTextures2DTe
 
     ASSERT_NOT_THROW_EXCEPTION_2(FrameBufferTexturesTest, frameBufferType, texture);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteTextureTest, texture);
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteTextureTest, texture);
 }
 
-void System::OpenGLFrameBufferTextures2DTesting::FrameBufferTexturesTest(FrameBufferType frameBufferType, OpenGLInt texture) noexcept
+void System::OpenGLFrameBufferTextures2DTesting::FrameBufferTexturesTest(FrameBufferType frameBufferType, OpenGLInt texture) const noexcept
 {
     SetGLBindTexture(TextureTarget::Texture2D, texture);
 

@@ -15,17 +15,18 @@
 					ConfigMarkTesting。
 （2） 用户宏：UserMacroTesting。
 （3） 字符串拼接宏：StringizeMacroTesting。 
-（4） Unicode字符 using 声明：StringMacroTesting、
-							  FileStreamMacroTesting、
-							  NullCharTesting、
-							  StringStreamMacroTesting、
-							  ToStringTesting。 
+（4） Unicode字符using声明：StringMacroTesting、
+							FileStreamMacroTesting、
+							NullCharTesting、
+							StringStreamMacroTesting、
+							ToStringTesting、
+							CharBufferTesting。 
 （5） 打印编译器信息宏：PragmaMessageMacroTesting。
 （6） 版本号：VersionTesting。
 （7） 导出标志宏：ExportMacroTesting。
-（8） Windows平台相关宏：MakeLanguageIDTesting、
+（8） Windows平台相关宏：MakeLanguageIdTesting、
 						 MakeIntreSourceTesting、
-						 MakeLanguageCIDTesting、  
+						 MakeLanguageCidTesting、  
 						 HResultTesting、
 						 MakeWordTesting、
 						 PtrToIntTesting、
@@ -59,14 +60,15 @@
 （17）可变参数模板类型：VariableTemplateTypeTesting。
 （18）工具：GetArraySizeTesting、
 			UnusedFunctionTesting、
-			DebugTesting。
+			DebugTesting、
+			OperatorTesting。
 
 ----------------------------
 2.	SystemOutputSuite
 
 对系统输出模块的单元测试，包括： 
-（1） 消息框标志数据：MessageBoxFlagsDataTesting。
-（2） 语言ID数据：LanguageIDDataTesting。
+（1） 语言ID数据：LanguageIdDataTesting。
+（2） 消息框标志数据：MessageBoxFlagsDataTesting。
 （3） 输出信息：OutputDebugStringTesting。
 （4） 消息框选择：MessageBoxSelectionUseYesNoCancelTesting、
 				  MessageBoxSelectionUseFlagsDataTesting、
@@ -117,11 +119,11 @@
 				CompareStringOrdinalUseBinaryTesting、
 				CaseInsensitiveComparisonTesting。
 （4） 格式化字符串：VsnPrintfTesting、
-					StrcatTesting、
-					StrlenTesting、
-					StrcpyTesting、
-					StrtokTesting、
-					StrstrTesting、
+					StringCatTesting、
+					StringLengthTesting、
+					StringCopyTesting、
+					StringTokenTesting、
+					StringStringTesting、
 					SNPrintfTesting。 
 
 ----------------------------
@@ -368,8 +370,8 @@
 				  SendToTesting、
 				  SelectTesting。 
 （2） 数据原型：WinSockHostTesting、
-				WinSockServentTesting、
-				WinSockProtoentTesting。
+				WinSockServerEntTesting、
+				WinSockProtoEntTesting。
 （3） Windows扩展原型：WindowsExtensionPrototypesTesting。
 （4） Windows套接字： GetWinSocketTesting、
 					  WinSocketAcceptTesting、
@@ -399,7 +401,7 @@
 13.	DirectXSuite 
 
 对DirectX模块的单元测试，包括：
-（1） DirectXD3D11：DirectXD3D11Testing。 
+（1） DirectXD3D12：DirectXD3D12Testing。 
 
 ----------------------------
 14.	VulkanSuite 

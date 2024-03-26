@@ -929,12 +929,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\ExportClass.cpp">
-      <Filter>System 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\NoExportClass.cpp">
-      <Filter>System 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\DllLib.cpp">
       <Filter>源文件</Filter>
     </ClCompile>

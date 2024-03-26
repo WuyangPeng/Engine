@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 10:08)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/12 10:23)
 
 #include "AllocateVirtualSeparationTesting.h"
 #include "System/MemoryTools/Flags/VirtualToolsFlags.h"
@@ -37,18 +37,23 @@ bool System::AllocateVirtualSeparationTesting::AllocateVirtualTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(RandomShuffle);
 
-    ASSERT_NOT_THROW_EXCEPTION_0(AllocateVirtualSeparationTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(AllocateVirtualSeparationTestLoop);
 
     return true;
 }
 
-void System::AllocateVirtualSeparationTesting::AllocateVirtualSeparationTest()
+void System::AllocateVirtualSeparationTesting::AllocateVirtualSeparationTestLoop()
 {
     for (auto index = 0u; index < GetMaxSize(); ++index)
     {
-        ASSERT_NOT_THROW_EXCEPTION_1(DoAllocateVirtualSeparationTest, index);
-        ASSERT_NOT_THROW_EXCEPTION_1(DoAllocateVirtualSeparationUseProcessTest, index);
+        ASSERT_NOT_THROW_EXCEPTION_1(AllocateVirtualSeparationTest, index);
     }
+}
+
+void System::AllocateVirtualSeparationTesting::AllocateVirtualSeparationTest(size_t index)
+{
+    ASSERT_NOT_THROW_EXCEPTION_1(DoAllocateVirtualSeparationTest, index);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoAllocateVirtualSeparationUseProcessTest, index);
 }
 
 void System::AllocateVirtualSeparationTesting::DoAllocateVirtualSeparationTest(size_t index)
@@ -100,14 +105,19 @@ void System::AllocateVirtualSeparationTesting::AllocateVirtualOnePageUseProcessT
     auto nextVirtual = baseVirtual;
     for (auto page = 0; page < pageLimit; ++page)
     {
-        nextVirtual = static_cast<char*>(AllocateVirtual(GetCurrentProcessHandle(), nextVirtual, GetOnePageSize(), MemoryAllocation::Commit, memoryProtect));
-        ASSERT_UNEQUAL_NULL_PTR(nextVirtual);
-
-        ASSERT_NOT_THROW_EXCEPTION_2(ReadWriteTest, memoryProtect, nextVirtual);
+        ASSERT_NOT_THROW_EXCEPTION_2(DoAllocateVirtualOnePageUseProcessTest, memoryProtect, nextVirtual);
     }
 }
 
-void System::AllocateVirtualSeparationTesting::ReadWriteTest(MemoryProtect memoryProtect, char* basePage) noexcept
+void System::AllocateVirtualSeparationTesting::DoAllocateVirtualOnePageUseProcessTest(MemoryProtect memoryProtect, char*& nextVirtual)
+{
+    nextVirtual = static_cast<char*>(AllocateVirtual(GetCurrentProcessHandle(), nextVirtual, GetOnePageSize(), MemoryAllocation::Commit, memoryProtect));
+    ASSERT_UNEQUAL_NULL_PTR(nextVirtual);
+
+    ASSERT_NOT_THROW_EXCEPTION_2(ReadWriteTest, memoryProtect, nextVirtual);
+}
+
+void System::AllocateVirtualSeparationTesting::ReadWriteTest(MemoryProtect memoryProtect, char* basePage) const noexcept
 {
     if (basePage != nullptr)
     {

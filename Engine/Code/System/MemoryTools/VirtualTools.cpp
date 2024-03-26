@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:44)
+/// 版本：1.0.0.7 (2024/03/04 16:00)
 
 #include "System/SystemExport.h"
 
@@ -17,8 +17,7 @@
 
 #include <gsl/util>
 
-System::WindowsVoidPtr
-    System::AllocateVirtual(WindowsVoidPtr address, WindowsSize size, MemoryAllocation allocationType, MemoryProtect protect) noexcept
+System::WindowsVoidPtr System::AllocateVirtual(WindowsVoidPtr address, WindowsSize size, MemoryAllocation allocationType, MemoryProtect protect) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -52,11 +51,9 @@ bool System::FreeVirtual(WindowsVoidPtr address) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (constexpr auto freeType = EnumCastUnderlying(MemoryAllocation::Release);
-        ::VirtualFree(address, 0, freeType) != gFalse)
-        return true;
-    else
-        return false;
+    constexpr auto freeType = EnumCastUnderlying(MemoryAllocation::Release);
+
+    return ::VirtualFree(address, 0, freeType) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -71,11 +68,9 @@ bool System::FreeVirtual(WindowsHandle process, WindowsVoidPtr address) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (constexpr auto freeType = EnumCastUnderlying(MemoryAllocation::Release);
-        ::VirtualFreeEx(process, address, 0, freeType) != gFalse)
-        return true;
-    else
-        return false;
+    constexpr auto freeType = EnumCastUnderlying(MemoryAllocation::Release);
+
+    return ::VirtualFreeEx(process, address, 0, freeType) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -146,11 +141,7 @@ bool System::GetVirtualQuery(WindowsVoidPtr address, MemoryBasicInformationPtr b
 
     constexpr auto memoryBasicInformationSize = sizeof(MemoryBasicInformation);
 
-    if (const auto size = ::VirtualQuery(address, buffer, memoryBasicInformationSize);
-        size == memoryBasicInformationSize)
-        return true;
-    else
-        return false;
+    return VirtualQuery(address, buffer, memoryBasicInformationSize) == memoryBasicInformationSize;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -167,11 +158,7 @@ bool System::GetVirtualQuery(WindowsHandle process, WindowsVoidPtr address, Memo
 
     constexpr auto memoryBasicInformationSize = sizeof(MemoryBasicInformation);
 
-    if (const auto size = ::VirtualQueryEx(process, address, buffer, memoryBasicInformationSize);
-        size == memoryBasicInformationSize)
-        return true;
-    else
-        return false;
+    return ::VirtualQueryEx(process, address, buffer, memoryBasicInformationSize) == memoryBasicInformationSize;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

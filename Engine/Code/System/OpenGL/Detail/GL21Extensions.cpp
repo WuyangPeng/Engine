@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:20)
+/// 版本：1.0.0.7 (2024/03/02 23:06)
 
 #include "System/SystemExport.h"
 
@@ -14,7 +14,7 @@
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/OpenGL/OpenGLUtility.h"
 
-// OpenGL 2.1
+/// OpenGL 2.1
 namespace System
 {
     auto existsOpenGL21 = ExistsOpenGLExtensions::Unknown;
@@ -34,7 +34,7 @@ System::ExistsOpenGLExtensions System::IsExistsOpenGL21() noexcept
 
 void System::InitOpenGL21() noexcept
 {
-    if (OpenGLSystemVersion::Version21 <= System::GetOpenGLVersion())
+    if (OpenGLSystemVersion::Version21 <= GetOpenGLVersion())
     {
         existsOpenGL21 = ExistsOpenGLExtensions::Exists;
 

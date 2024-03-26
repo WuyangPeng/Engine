@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:27)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:48)
 
 #include "OpenGLGetTexturesTesting.h"
 #include "System/OpenGL/OpenGLTextures.h"
@@ -28,29 +28,29 @@ void System::OpenGLGetTexturesTesting::DoRunUnitTest()
 
 void System::OpenGLGetTexturesTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLGetTextureTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLGetTexturesTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetTextureTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetTexturesTest);
 }
 
-void System::OpenGLGetTexturesTesting::OpenGLGetTextureTest()
+void System::OpenGLGetTexturesTesting::GetTextureTest()
 {
     const auto texture = GetGLGenTextures();
     ASSERT_LESS(0u, texture);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteTextureTest, texture);
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteTextureTest, texture);
 }
 
-void System::OpenGLGetTexturesTesting::OpenGLGetTexturesTest()
+void System::OpenGLGetTexturesTesting::GetTexturesTest()
 {
     TexturesType textures{};
 
     GetGLGenTextures(bufferSize, textures.data());
-    ASSERT_NOT_THROW_EXCEPTION_1(DoOpenGLGetTexturesTest, textures);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoGetTexturesTest, textures);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteTexturesTest, textures);
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteTexturesTest, textures);
 }
 
-void System::OpenGLGetTexturesTesting::DoOpenGLGetTexturesTest(const TexturesType& textures)
+void System::OpenGLGetTexturesTesting::DoGetTexturesTest(const TexturesType& textures)
 {
     for (auto texture : textures)
     {

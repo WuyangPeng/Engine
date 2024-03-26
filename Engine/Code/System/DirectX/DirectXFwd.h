@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:18)
+/// 版本：1.0.0.7 (2024/03/05 16:40)
 
 #ifndef SYSTEM_DIRECT_X_FWD_H
 #define SYSTEM_DIRECT_X_FWD_H

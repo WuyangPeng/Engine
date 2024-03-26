@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 10:05)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/12 10:16)
 
 #include "CurrentProcessHeapTesting.h"
 #include "System/MemoryTools/Flags/HeapToolsFlags.h"
@@ -60,7 +60,7 @@ void System::CurrentProcessHeapTesting::AfterCreateHeapTest(WindowsHandle defaul
 {
     HeapsType heaps{};
 
-    const auto heapSize = GetCurrentProcessHeaps(bufferSize, heaps.data());
+    const auto heapSize = GetCurrentProcessHeaps(defaultBufferSize, heaps.data());
     ASSERT_LESS(2u, heapSize);
 
     ASSERT_EQUAL(heaps.at(0), defaultHandle);
@@ -71,7 +71,7 @@ void System::CurrentProcessHeapTesting::DefaultHeapTest(WindowsHandle defaultHan
 {
     HeapsType heaps{};
 
-    const auto heapSize = GetCurrentProcessHeaps(bufferSize, heaps.data());
+    const auto heapSize = GetCurrentProcessHeaps(defaultBufferSize, heaps.data());
     ASSERT_LESS(1u, heapSize);
     ASSERT_EQUAL(heaps.at(0), defaultHandle);
 }

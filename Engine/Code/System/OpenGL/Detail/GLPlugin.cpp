@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:21)
+/// 版本：1.0.0.7 (2024/03/02 23:18)
 
 #include "System/SystemExport.h"
 
@@ -35,7 +35,7 @@ namespace System
 
     void DoReportGLError(const char* glFunction)
     {
-        // 这里直接调用glGetError，而不是GLGetError。
+        /// 这里直接调用glGetError，而不是GLGetError。
         auto code = UnderlyingCastEnum<OpenGLErrorCode>(gsl::narrow_cast<int>(glGetError()));
         while (code != OpenGLErrorCode::NoError)
         {

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:20)
+/// 版本：1.0.0.7 (2024/03/05 16:57)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_CREATE_H
 #define SYSTEM_CONSOLE_CONSOLE_CREATE_H
@@ -16,7 +16,7 @@
 
 #include <cstdio>
 
-// 控制台窗口的创建的销毁。
+/// 控制台窗口的创建的销毁。
 namespace System
 {
     MAYBE_NULLPTR WindowsHWnd SYSTEM_DEFAULT_DECLARE GetSystemConsoleWindow() noexcept;

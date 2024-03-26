@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 09:54)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/07 17:24)
 
 #include "VersionTesting.h"
 #include "System/Helper/Version.h"
@@ -16,7 +16,7 @@
 System::VersionTesting::VersionTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, VersionTesting)
@@ -35,15 +35,15 @@ void System::VersionTesting::VersionTest()
 {
     constexpr auto maxSubversion = 100;
 
-    constexpr auto revision = gTCREVersion % maxSubversion;
-    constexpr auto build = gTCREVersion / maxSubversion % maxSubversion;
-    constexpr auto minor = gTCREVersion / (maxSubversion * maxSubversion) % maxSubversion;
-    constexpr auto major = gTCREVersion / (maxSubversion * maxSubversion * maxSubversion) % maxSubversion;
+    constexpr auto revision = gTcreVersion % maxSubversion;
+    constexpr auto build = gTcreVersion / maxSubversion % maxSubversion;
+    constexpr auto minor = gTcreVersion / (maxSubversion * maxSubversion) % maxSubversion;
+    constexpr auto major = gTcreVersion / (maxSubversion * maxSubversion * maxSubversion) % maxSubversion;
 
     ASSERT_GREATER_EQUAL(revision, 0);
     ASSERT_GREATER_EQUAL(build, 0);
     ASSERT_GREATER_EQUAL(minor, 0);
     ASSERT_GREATER_EQUAL(major, 0);
 
-    ASSERT_TRUE(0 < revision || 0 < build || 0 < minor || 0 < major);
+    ASSERT_LESS(0, revision + build + minor + major);
 }

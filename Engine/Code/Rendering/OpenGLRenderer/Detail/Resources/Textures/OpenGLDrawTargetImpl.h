@@ -25,7 +25,7 @@ namespace Rendering
         using ClassType = OpenGLDrawTargetImpl;
 
         using OpenGLInt = System::OpenGLInt;
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
         using OpenGLSize = System::OpenGLSize;
         using OpenGLDouble = System::OpenGLDouble;
         using OpenGLTextureRenderTargetSharedPtr = std::shared_ptr<OpenGLTextureRenderTarget>;

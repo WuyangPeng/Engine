@@ -18,7 +18,6 @@
 namespace System
 {
     /// OpenGL 2.0
-
     SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL20() noexcept;
 
     void InitOpenGL20() noexcept;

@@ -20,7 +20,7 @@ namespace System
     NODISCARD bool SYSTEM_DEFAULT_DECLARE IsWglSwapInterval(int interval) noexcept;
     NODISCARD int SYSTEM_DEFAULT_DECLARE GetWglSwapInterval() noexcept;
 
-    NODISCARD OpenGLRcHandle SYSTEM_DEFAULT_DECLARE CreateWglContext(WindowsHdc hDc) noexcept;
+    NODISCARD OpenGLRcHandle SYSTEM_DEFAULT_DECLARE CreateWglContext(WindowsHdc hdc) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE DeleteWglContext(OpenGLRcHandle oldContext) noexcept;
     NODISCARD OpenGLRcHandle SYSTEM_DEFAULT_DECLARE GetCurrentWglContext() noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE MakeWglCurrent(WindowsHdc hdc, OpenGLRcHandle newContext) noexcept;

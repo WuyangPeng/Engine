@@ -15,7 +15,7 @@
 
 #if !defined(BUILDING_SYSTEM_STATIC) && defined(SYSTEM_PLATFORM_WIN32)
 
-int SYSTEM_WINAPI DllMain(System::WindowsHInstance instance, System::WindowsDWord reason, System::WindowsVoidPtr reserved) noexcept
+int SYSTEM_WIN_API DllMain(System::WindowsHInstance instance, System::WindowsDWord reason, System::WindowsVoidPtr reserved) noexcept
 {
     System::UnusedFunction(instance, reason, reserved);
 

@@ -1,15 +1,16 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:28)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:48)
 
 #include "OpenGLTexturesTestingBase.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
+#include "System/OpenGL/Flags/OpenGLTextureFlags.h"
 #include "System/OpenGL/OpenGLTextures.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
@@ -172,12 +173,12 @@ System::OpenGLTexturesTestingBase::OpenGLTexturesTestingBase(const OStreamShared
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, OpenGLTexturesTestingBase)
 
-void System::OpenGLTexturesTestingBase::SetGLDeleteTextureTest(OpenGLUInt texture) noexcept
+void System::OpenGLTexturesTestingBase::DeleteTextureTest(OpenGLUnsignedInt texture) const noexcept
 {
     SetGLDeleteTextures(texture);
 }
 
-void System::OpenGLTexturesTestingBase::SetGLDeleteTexturesTest(const TexturesType& textures) noexcept
+void System::OpenGLTexturesTestingBase::DeleteTexturesTest(const TexturesType& textures) const noexcept
 {
     SetGLDeleteTextures(bufferSize, textures.data());
 }

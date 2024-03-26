@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:14)
+/// 版本：1.0.0.7 (2024/03/04 17:28)
 
 #ifndef SYSTEM_HELPER_MPW_H
 #define SYSTEM_HELPER_MPW_H
 
 #if defined(__MRC__) || defined(__SC__)
 
-    // MPW C++ 编译器设置：
+    /// MPW C++ 编译器设置：
 
     #if MPW_CPLUS < 0x890
 

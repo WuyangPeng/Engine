@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 16:18)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 14:38)
 
 #include "CompareStringUseLocaleStringTesting.h"
 #include "System/CharacterString/Flags/StringConversionFlags.h"
@@ -47,7 +47,7 @@ System::CompareStringUseLocaleStringTesting::CompareStringUseLocaleStringTesting
                         L"a",
                         L"A",
                         L"0" },
-      maxSize{ CoreTools::MaxElement<size_t>({ languageLocaleStrings.size(), GetComparesSize(), comparesWStrings.size() }) },
+      maxSize{ CoreTools::MaxElement({ languageLocaleStrings.size(), GetComparesSize(), comparesWStrings.size() }) },
       randomEngine{ GetEngineRandomSeed() }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;

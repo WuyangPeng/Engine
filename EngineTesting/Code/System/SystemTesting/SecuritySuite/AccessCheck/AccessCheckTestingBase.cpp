@@ -1,14 +1,15 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 13:56)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 13:35)
 
 #include "AccessCheckTestingBase.h"
 #include "System/FileManager/Flags/FileFlags.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Security/CreateSecurity.h"
 #include "System/Security/Flags/CreateSecurityFlags.h"
 #include "System/Security/SecurityBase.h"
@@ -48,7 +49,7 @@ System::AccessCheckTestingBase::FileHandleDesiredAccessContainerConstIter System
     return fileHandleDesiredAccesses.cend();
 }
 
-System::AccessCheckTestingBase::BufferType System::AccessCheckTestingBase::GetFileSecurityBuffer()
+System::CharBufferType System::AccessCheckTestingBase::GetFileSecurityBuffer()
 {
     SYSTEM_CLASS_IS_VALID_1;
 
@@ -59,9 +60,9 @@ System::AccessCheckTestingBase::BufferType System::AccessCheckTestingBase::GetFi
     WindowsDWord neededLength{ 0 };
     ASSERT_FALSE(GetSystemFileSecurity(existingFileName, requestedInformation, nullptr, 0, &neededLength));
 
-    ASSERT_LESS_FAILURE_THROW(neededLength, bufferSize, "需增加array大小通过测试。");
+    ASSERT_LESS_FAILURE_THROW(boost::numeric_cast<int>(neededLength), defaultBufferSize, "需增加array大小通过测试。");
 
-    BufferType buffer{};
+    CharBufferType buffer{};
     WindowsDWord resultNeededLength{ 0 };
     ASSERT_TRUE(GetSystemFileSecurity(existingFileName, requestedInformation, buffer.data(), neededLength, &resultNeededLength));
     ASSERT_EQUAL(resultNeededLength, neededLength);

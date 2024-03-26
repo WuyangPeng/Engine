@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:06)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:40)
 
 #ifndef SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_TEXTURES_TESTING_BASE_H
 #define SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_TEXTURES_TESTING_BASE_H
@@ -31,7 +31,7 @@ namespace System
 
     protected:
         static constexpr auto bufferSize = 12;
-        using TexturesType = std::array<OpenGLUInt, bufferSize>;
+        using TexturesType = std::array<OpenGLUnsignedInt, bufferSize>;
         using TexturesImageType = std::vector<char>;
         using TextureTargetContainer = std::vector<TextureTarget>;
         using TextureTargetContainerConstIter = TextureTargetContainer::const_iterator;
@@ -43,8 +43,8 @@ namespace System
         using TextureFormatSizeMapping = std::map<TextureInternalFormat, int>;
 
     protected:
-        void SetGLDeleteTextureTest(OpenGLUInt texture) noexcept;
-        void SetGLDeleteTexturesTest(const TexturesType& textures) noexcept;
+        void DeleteTextureTest(OpenGLUnsignedInt texture) const noexcept;
+        void DeleteTexturesTest(const TexturesType& textures) const noexcept;
         NODISCARD TextureTargetContainerConstIter begin() const noexcept;
         NODISCARD TextureTargetContainerConstIter end() const noexcept;
         NODISCARD int GetTextureTargetSize() const;

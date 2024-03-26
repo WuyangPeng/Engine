@@ -5,13 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:25)
+/// 版本：1.0.0.7 (2024/03/03 00:12)
 
 #include "System/SystemExport.h"
 
 #include "OpenGLProgram.h"
 #include "Flags/OpenGLProgramFlags.h"
 #include "Detail/GL20Extensions.h"
+#include "Detail/GL31Extensions.h"
 #include "Detail/GL43Extensions.h"
 #include "System/Helper/EnumCast.h"
 
@@ -19,35 +20,32 @@
 
 using namespace std::literals;
 
-System::OpenGLUInt System::CreateGLProgram() noexcept
+System::OpenGLUnsignedInt System::CreateGLProgram() noexcept
 {
     return GLCreateProgram();
 }
 
-bool System::IsGLProgram(OpenGLUInt program) noexcept
+bool System::IsGLProgram(OpenGLUnsignedInt program) noexcept
 {
-    if (GLIsProgram(program) != GL_FALSE)
-        return true;
-    else
-        return false;
+    return GLIsProgram(program) != GL_FALSE;
 }
 
-void System::DeleteGLProgram(OpenGLUInt program) noexcept
+void System::DeleteGLProgram(OpenGLUnsignedInt program) noexcept
 {
     GLDeleteProgram(program);
 }
 
-void System::ValidateGLProgram(OpenGLUInt program) noexcept
+void System::ValidateGLProgram(OpenGLUnsignedInt program) noexcept
 {
     GLValidateProgram(program);
 }
 
-void System::LinkGLProgram(OpenGLUInt program) noexcept
+void System::LinkGLProgram(OpenGLUnsignedInt program) noexcept
 {
     GLLinkProgram(program);
 }
 
-bool System::GetGLProgram(OpenGLUInt program, ProgramStatus pName) noexcept
+bool System::GetGLProgram(OpenGLUnsignedInt program, ProgramStatus pName) noexcept
 {
     OpenGLInt params{};
     GLGetProgramIv(program, EnumCastUnderlying(pName), &params);
@@ -55,12 +53,20 @@ bool System::GetGLProgram(OpenGLUInt program, ProgramStatus pName) noexcept
     return params != GL_FALSE;
 }
 
-void System::GetGLProgram(OpenGLUInt program, ProgramAttributes pName, ComputeWorkGroupSizeType& params) noexcept
+void System::GetGLProgram(OpenGLUnsignedInt program, ProgramAttributes pName, ComputeWorkGroupSizeType& params) noexcept
 {
     GLGetProgramIv(program, EnumCastUnderlying(pName), params.data());
 }
 
-int System::GetGLProgram(OpenGLUInt program, ProgramAttributes pName) noexcept
+System::ComputeWorkGroupSizeType System::GetComputeWorkGroupSize(OpenGLUnsignedInt program) noexcept
+{
+    ComputeWorkGroupSizeType result{};
+    GetGLProgram(program, ProgramAttributes::ComputeWorkGroupSize, result);
+
+    return result;
+}
+
+int System::GetGLProgram(OpenGLUnsignedInt program, ProgramAttributes pName) noexcept
 {
     OpenGLInt params{};
     GLGetProgramIv(program, EnumCastUnderlying(pName), &params);
@@ -68,12 +74,12 @@ int System::GetGLProgram(OpenGLUInt program, ProgramAttributes pName) noexcept
     return params;
 }
 
-std::string System::GetGLProgramInfoLog(OpenGLUInt program)
+std::string System::GetGLProgramInfoLog(OpenGLUnsignedInt program)
 {
     if (const auto logLength = GetGLProgram(program, ProgramAttributes::InfoLogLength);
         0 < logLength)
     {
-        std::vector<OpenGLChar> log(logLength);
+        LogInfoType log(logLength);
         auto numWritten = 0;
         GLGetProgramInfoLog(program, logLength, &numWritten, log.data());
         std::string message{ log.begin(), log.end() };
@@ -90,7 +96,7 @@ std::string System::GetGLProgramInfoLog(OpenGLUInt program)
     }
 }
 
-int System::GetGLProgramInterface(OpenGLUInt program, ProgramInterface programInterface, ProgramInterfaceName pName) noexcept
+int System::GetGLProgramInterface(OpenGLUnsignedInt program, ProgramInterface programInterface, ProgramInterfaceName pName) noexcept
 {
     auto result = 0;
     GLGetProgramInterfaceIv(program, EnumCastUnderlying(programInterface), EnumCastUnderlying(pName), &result);
@@ -98,22 +104,22 @@ int System::GetGLProgramInterface(OpenGLUInt program, ProgramInterface programIn
     return result;
 }
 
-void System::GetGLProgramResource(OpenGLUInt program, ProgramInterface programInterface, OpenGLUInt index, OpenGLSize propCount, const OpenGLEnum* props, OpenGLSize bufSize, OpenGLSize* length, OpenGLInt* params) noexcept
+void System::GetGLProgramResource(OpenGLUnsignedInt program, ProgramInterface programInterface, OpenGLUnsignedInt index, OpenGLSize propCount, const OpenGLEnum* props, OpenGLSize bufSize, OpenGLSize* length, OpenGLInt* params) noexcept
 {
     GLGetProgramResourceIv(program, EnumCastUnderlying(programInterface), index, propCount, props, bufSize, length, params);
 }
 
-void System::GetGLProgramResourceName(OpenGLUInt program, ProgramInterface programInterface, OpenGLUInt index, OpenGLSize bufSize, OpenGLSize* length, OpenGLChar* name) noexcept
+void System::GetGLProgramResourceName(OpenGLUnsignedInt program, ProgramInterface programInterface, OpenGLUnsignedInt index, OpenGLSize bufSize, OpenGLSize* length, OpenGLChar* name) noexcept
 {
     GLGetProgramResourceName(program, EnumCastUnderlying(programInterface), index, bufSize, length, name);
 }
 
-System::OpenGLUInt System::GetGLProgramResourceIndex(OpenGLUInt program, ProgramInterface programInterface, const OpenGLChar* name) noexcept
+System::OpenGLUnsignedInt System::GetGLProgramResourceIndex(OpenGLUnsignedInt program, ProgramInterface programInterface, const OpenGLChar* name) noexcept
 {
     return GLGetProgramResourceIndex(program, EnumCastUnderlying(programInterface), name);
 }
 
-void System::SetUseProgram(OpenGLUInt program) noexcept
+void System::SetUseProgram(OpenGLUnsignedInt program) noexcept
 {
     GLUseProgram(program);
 }
@@ -126,4 +132,9 @@ void System::SetGLDispatchCompute(int numXGroups, int numYGroups, int numZGroups
 void System::SetGLUniform1(OpenGLInt location, OpenGLInt unit) noexcept
 {
     GLUniform1I(location, unit);
+}
+
+void System::SetGLUniformBlockBinding(OpenGLUnsignedInt program, OpenGLUnsignedInt uniformBlockIndex, OpenGLUnsignedInt uniformBlockBinding) noexcept
+{
+    GLUniformBlockBinding(program, uniformBlockIndex, uniformBlockBinding);
 }

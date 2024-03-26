@@ -1,14 +1,13 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 15:01)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/12 19:29)
 
 #include "WaitForEventTesting.h"
-#include "System/Helper/PragmaWarning/Thread.h"
 #include "System/Threading/Event.h"
 #include "System/Threading/Flags/SemaphoreFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -18,7 +17,7 @@
 System::WaitForEventTesting::WaitForEventTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, WaitForEventTesting)
@@ -80,24 +79,29 @@ void System::WaitForEventTesting::DoWaitEventTest(WindowsHandle eventHandle)
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread([this, eventHandle]() {
-            this->WaitForAutoEventTest0(eventHandle);
-        });
-
-        threadGroup.create_thread([this, eventHandle]() {
-            this->WaitForAutoEventTest1(eventHandle);
-        });
-
-        threadGroup.create_thread([this, eventHandle]() {
-            this->WaitForAutoEventTest2(eventHandle);
-        });
-
-        threadGroup.create_thread([this, eventHandle]() {
-            this->WaitForAutoEventTest3(eventHandle);
-        });
+        ASSERT_NOT_THROW_EXCEPTION_2(CreateThread, eventHandle, threadGroup);
     }
 
     ASSERT_TRUE(SetSystemEvent(eventHandle));
 
     threadGroup.join_all();
+}
+
+void System::WaitForEventTesting::CreateThread(WindowsHandle eventHandle, boost::thread_group& threadGroup)
+{
+    threadGroup.create_thread([this, eventHandle]() {
+        this->WaitForAutoEventTest0(eventHandle);
+    });
+
+    threadGroup.create_thread([this, eventHandle]() {
+        this->WaitForAutoEventTest1(eventHandle);
+    });
+
+    threadGroup.create_thread([this, eventHandle]() {
+        this->WaitForAutoEventTest2(eventHandle);
+    });
+
+    threadGroup.create_thread([this, eventHandle]() {
+        this->WaitForAutoEventTest3(eventHandle);
+    });
 }

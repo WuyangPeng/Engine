@@ -5,24 +5,24 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:13)
+/// 版本：1.0.0.7 (2024/03/04 17:23)
 
 #ifndef SYSTEM_HELPER_BORLAND_H
 #define SYSTEM_HELPER_BORLAND_H
 
-// Borland C++编译器设置：
+/// Borland C++编译器设置：
 
 #ifdef __BORLANDC__
 
-    // 版本检查：
+    /// 版本检查：
     #if __BORLANDC__ < 0x540
 
-        // 我们不支持版本5.4之前的Borland：
+        /// 我们不支持版本5.4之前的Borland：
         #error "编译器不支持配置——请重新配置"
 
     #elif (0x613 < __BORLANDC__)
 
-        // 所知的最后的编译器版本：
+        /// 所知的最后的编译器版本：
         #error "未知的编译器版本"
 
     #elif (__BORLANDC__ == 0x600)
@@ -55,7 +55,7 @@
 
     #endif  // TCRE_SYSTEM_COMPILER
 
-    // 支持宏以帮助标准库检测
+    /// 支持宏以帮助标准库检测
     #if (__BORLANDC__ < 0x560) || defined(_USE_OLD_RW_STL)
 
         #define TCRE_BCB_WITH_ROGUE_WAVE static_cast<void>(0)
@@ -73,7 +73,7 @@
     // 版本5.51及以下：
     #if (__BORLANDC__ <= 0x551)
 
-        // 缺少WCHAR_MAX/WCHAR_MIN的解决方法
+        /// 缺少WCHAR_MAX/WCHAR_MIN的解决方法
         #include <climits>
         #include <cwchar>
 
@@ -91,7 +91,7 @@
 
     #endif  // (__BORLANDC__ <= 0x551)
 
-    // Borland C ++ Builder 6及以下版本：
+    /// Borland C ++ Builder 6及以下版本：
     #if (__BORLANDC__ <= 0x564)
 
         #if defined(NDEBUG)
@@ -113,7 +113,7 @@
 
     #endif  // (__BORLANDC__ <= 0x564)
 
-    /// Borland C++ Builder 6默认使用STLPor，
+    /// Borland C++ Builder 6默认使用STLPort，
     /// 如果定义_USE_OLD_RW_STL，
     /// 那么我们对Rogue Wave实现具有0x560或更高版本，
     /// 这可能有std::DBL_MAX错误。
@@ -122,8 +122,7 @@
         /// <climits>部分不合标准，
         /// 一些宏定义了真正在命名空间std中的符号，
         /// 所以你最终不得不使用std::DBL_MAX这样的非法构造，
-        /// 作为一个修复，
-        /// 我们只需要包含float.h。
+        /// 作为一个修复，我们只需要包含float.h。
         #include <float.h>
 
     #endif  // defined(TCRE_BCB_WITH_ROGUE_WAVE)

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 16:38)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 18:27)
 
 #include "DefaultTextAttributeTesting.h"
 #include "System/Console/ConsoleColour.h"
@@ -37,8 +37,13 @@ void System::DefaultTextAttributeTesting::DefaultTextAttributeTest()
 {
     for (const auto standardHandle : *this)
     {
-        ASSERT_TRUE(SetSystemConsoleDefaultTextAttribute(GetStandardHandle(standardHandle)));
-
-        PrintMessage(standardHandle, TextColour::White, BackgroundColour::Black, ConsoleCommon::Default);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoDefaultTextAttributeTest, standardHandle);
     }
+}
+
+void System::DefaultTextAttributeTesting::DoDefaultTextAttributeTest(StandardHandle standardHandle)
+{
+    ASSERT_TRUE(SetSystemConsoleDefaultTextAttribute(GetStandardHandle(standardHandle)));
+
+    PrintMessage(standardHandle, TextColour::White, BackgroundColour::Black, ConsoleCommon::Default);
 }

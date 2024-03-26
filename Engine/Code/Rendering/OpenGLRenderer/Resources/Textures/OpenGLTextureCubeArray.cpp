@@ -12,6 +12,7 @@
 #include "OpenGLTextureCubeArray.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
+#include "System/OpenGL/Flags/OpenGLTextureFlags.h"
 #include "System/OpenGL/OpenGLTextures.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
@@ -114,10 +115,7 @@ void Rendering::OpenGLTextureCubeArray::LoadTextureLevel(int item, int level, co
         const auto height = texture->GetDimension(level, 1);
 
         auto const cube = texture->GetCubeIndexFor(item);
-        auto const face = texture->GetFaceIndexFor(item);
 
-        const auto targetFace = GetCubeFaceTarget(face);
-
-        SetGLTexturesSubImage3D(targetFace, level, 0, 0, cube, width, height, 1, GetExternalFormat(), GetExternalType(), data.GetData());
+        SetGLTexturesSubImage3D(TextureTarget::TextureCubeMapArray, level, 0, 0, cube, width, height, 1, GetExternalFormat(), GetExternalType(), data.GetData());
     }
 }

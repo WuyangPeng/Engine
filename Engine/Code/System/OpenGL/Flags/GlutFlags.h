@@ -14,13 +14,13 @@
 
 #include "System/Helper/Platform.h"
 
-#if defined(SYSTEM_USE_GLUT) && defined(WIN32)
+#if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 
     #include "System/Helper/PragmaWarning/Freeglut.h"
 
-#endif  // defined(SYSTEM_USE_GLUT) && defined(WIN32)
+#endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 
-#if defined(SYSTEM_USE_GLUT) && defined(WIN32)
+#if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 
 namespace System
 {
@@ -82,6 +82,6 @@ namespace System
     };
 }
 
-#endif  // defined(SYSTEM_USE_GLUT) && defined(WIN32)
+#endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 
 #endif  // SYSTEM_OPENGL_GLUT_FLAGS_H

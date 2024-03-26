@@ -22,7 +22,7 @@ namespace Rendering
         using ClassType = LinkInfo;
 
         using OpenGLInt = System::OpenGLInt;
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
 
     public:
         LinkInfo() noexcept;

@@ -143,8 +143,5 @@ void CoreTools::CWriteFileManagerTesting::PositionTest()
 
     ASSERT_EQUAL(length, boost::numeric_cast<decltype(length)>(cFileManagerContent.size() * 2 + 1 + sizeof(size_t)));
 
-    manager.Rewind();
-    ASSERT_EQUAL(0, manager.GetPosition());
-
-    ASSERT_TRUE(manager.SetVBuffer(System::FileSetVBuffer::IOFBF, 256));
+    ASSERT_TRUE(manager.SetVBuffer(System::FileSetVBuffer::IoFullyBuffered, 256));
 }

@@ -40,7 +40,7 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, TestingHelper)
 void Network::TestingHelper::CreateSingleton()
 {
     MessageManager::Create();
-    MESSAGE_MANAGER_SINGLETON.SetFullVersion(gTCRETestingVersion);
+    MESSAGE_MANAGER_SINGLETON.SetFullVersion(gTcreTestingVersion);
 
     CoreTools::InitTerm::ExecuteInitializer();
 }

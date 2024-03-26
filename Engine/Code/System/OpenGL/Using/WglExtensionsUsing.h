@@ -129,18 +129,18 @@ namespace System
 
     using OpenGLProc = int (*)();
 
-    struct WglHpBufferARBDeclare
+    struct WglHpBufferArbDeclare
     {
         int unused;
     };
-    using WglHpBufferArb = WglHpBufferARBDeclare*;
+    using WglHpBufferArb = WglHpBufferArbDeclare*;
     using WglHpBufferExt = WglHpBufferArb;
 
-    struct WglHGPUNVDeclare
+    struct WglHGpuNvDeclare
     {
         int unused;
     };
-    using WglHGpuNv = WglHGPUNVDeclare*;
+    using WglHGpuNv = WglHGpuNvDeclare*;
 
     struct WglGpuDevice
     {
@@ -164,11 +164,11 @@ namespace System
     };
     using WglHVideoInputDeviceNv = WglHVideoInputDeviceNVDeclare*;
 
-    struct WglHPVideoDEVDeclare
+    struct WglHPVideoDevDeclare
     {
         int unused;
     };
-    using WglHpVideoDev = WglHPVideoDEVDeclare*;
+    using WglHpVideoDev = WglHPVideoDevDeclare*;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 13:49)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 13:25)
 
 #ifndef SYSTEM_SECURITY_SUITE_RESTRICTED_TOKEN_TESTING_H
 #define SYSTEM_SECURITY_SUITE_RESTRICTED_TOKEN_TESTING_H
@@ -34,8 +34,7 @@ namespace System
         static constexpr auto securitySidBufferSize = securityBufferSize * 2;
         using SecuritySidBufferType = std::array<SecuritySid, securitySidBufferSize>;
         using SecuritySidAndAttributesBufferType = std::array<SecuritySidAndAttributes, securityBufferSize>;
-        using LuidAndAttributesBufferType = std::array<LocallyUniqueIdentifierAndAttributes, securityBufferSize>;
-
+        using LocallyUniqueIdentifierAndAttributesBufferType = std::array<LocallyUniqueIdentifierAndAttributes, securityBufferSize>;
         using SpecifiesAdditionalPrivilegeOptionsContainer = std::vector<SpecifiesAdditionalPrivilegeOptions>;
 
     private:
@@ -49,17 +48,17 @@ namespace System
         void InitializeSecurityIdentifierTest(SecuritySidBufferType& sid,
                                               int count,
                                               SecuritySidAndAttributes& securitySidAndAttributes);
-        NODISCARD LuidAndAttributesBufferType GetPrivilegesToDelete();
-        void GetLookupPrivilegeValueTest(LocallyUniqueIdentifierAndAttributes& luidAndAttributes);
+        NODISCARD LocallyUniqueIdentifierAndAttributesBufferType GetPrivilegesToDelete();
+        void GetLookupPrivilegeValueTest(LocallyUniqueIdentifierAndAttributes& locallyUniqueIdentifierAndAttributes);
         NODISCARD SecuritySidAndAttributesBufferType GetSidsToRestrict(SecuritySidBufferType& sid);
         void RestrictedTest(WindowsHandle tokenHandle,
                             SecuritySidAndAttributesBufferType& sidsToDisable,
-                            LuidAndAttributesBufferType& privilegesToDelete,
+                            LocallyUniqueIdentifierAndAttributesBufferType& privilegesToDelete,
                             SecuritySidAndAttributesBufferType& sidsToRestrict);
         void DoRestrictedTest(WindowsHandle tokenHandle,
                               SpecifiesAdditionalPrivilegeOptions specifiesAdditionalPrivilegeOptions,
                               SecuritySidAndAttributesBufferType& sidsToDisable,
-                              LuidAndAttributesBufferType& privilegesToDelete,
+                              LocallyUniqueIdentifierAndAttributesBufferType& privilegesToDelete,
                               SecuritySidAndAttributesBufferType& sidsToRestrict);
 
     private:

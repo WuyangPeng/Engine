@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:21)
+/// 版本：1.0.0.7 (2024/03/05 16:59)
 
 #include "System/SystemExport.h"
 
@@ -21,11 +21,9 @@ bool System::SetSystemConsoleTextAttribute(WindowsHandle handle, TextColour text
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (const auto attribute = gsl::narrow_cast<WindowsWord>(EnumCastUnderlying(textColour) | EnumCastUnderlying(backgroundColour) | EnumCastUnderlying(consoleCommon));
-        ::SetConsoleTextAttribute(handle, attribute) != gFalse)
-        return true;
-    else
-        return false;
+    const auto attribute = gsl::narrow_cast<WindowsWord>(EnumCastUnderlying(textColour) | EnumCastUnderlying(backgroundColour) | EnumCastUnderlying(consoleCommon));
+
+    return ::SetConsoleTextAttribute(handle, attribute) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -45,10 +43,7 @@ bool System::ReadSystemConsoleOutputAttribute(WindowsHandle consoleHandle, Windo
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::ReadConsoleOutputAttribute(consoleHandle, attribute, length, readCoord, numberOfAttributesRead) != gFalse)
-        return true;
-    else
-        return false;
+    return ::ReadConsoleOutputAttribute(consoleHandle, attribute, length, readCoord, numberOfAttributesRead) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -63,10 +58,7 @@ bool System::WriteSystemConsoleOutputAttribute(WindowsHandle consoleHandle, cons
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WriteConsoleOutputAttribute(consoleHandle, attribute, length, writeCoord, numberOfAttributesWritten) != gFalse)
-        return true;
-    else
-        return false;
+    return ::WriteConsoleOutputAttribute(consoleHandle, attribute, length, writeCoord, numberOfAttributesWritten) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -81,10 +73,7 @@ bool System::FillSystemConsoleOutputAttribute(WindowsHandle consoleHandle, Windo
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::FillConsoleOutputAttribute(consoleHandle, attribute, length, writeCoord, numberOfAttributesWritten) != gFalse)
-        return true;
-    else
-        return false;
+    return ::FillConsoleOutputAttribute(consoleHandle, attribute, length, writeCoord, numberOfAttributesWritten) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

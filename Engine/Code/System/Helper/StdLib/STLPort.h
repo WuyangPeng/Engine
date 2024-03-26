@@ -5,26 +5,26 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:04)
+/// 版本：1.0.0.7 (2024/03/04 21:43)
 
 #ifndef SYSTEM_HELPER_STL_PORT_H
 #define SYSTEM_HELPER_STL_PORT_H
 
 #if defined(__SGI_STL_PORT) || defined(_STLPORT_VERSION)
 
-    //  STLPort 标准库配置
+    ///  STLPort 标准库配置
 
-    #ifndef TCRE_CPPLIB_VERSION
+    #ifndef TCRE_CPP_LIB_VERSION
 
-        #define TCRE_CPPLIB_VERSION __SGI_STL_PORT
+        #define TCRE_CPP_LIB_VERSION __SGI_STL_PORT
 
-    #endif  // TCRE_CPPLIB_VERSION
+    #endif  // TCRE_CPP_LIB_VERSION
 
-    #ifndef TCRE_STDLIB
+    #ifndef TCRE_SYSTEM_STD_LIB
 
-        #define TCRE_SYSTEM_STDLIB "STLPort 标准库版本 " SYSTEM_STRINGIZE(TCRE_CPPLIB_VERSION)
+        #define TCRE_SYSTEM_STD_LIB "STLPort 标准库版本 " SYSTEM_STRINGIZE(TCRE_CPP_LIB_VERSION)
 
-    #endif  // !TCRE_STDLIB
+    #endif  // !TCRE_SYSTEM_STD_LIB
 
     #if !defined(__SGI_STL_PORT) && !defined(_STLPORT_VERSION)
 
@@ -44,7 +44,7 @@
 
     #endif  // !defined(CYGWIN) && (defined(__unix__) || defined(__unix) || defined(unix) || defined(__APPLE__) || defined(__APPLE) || defined(APPLE))
 
-    #define TCRE_USE_STLPORT static_cast<void>(0)
+    #define TCRE_USE_STL_PORT static_cast<void>(0)
 
 #endif  // defined(__SGI_STL_PORT) || defined(_STLPORT_VERSION)
 

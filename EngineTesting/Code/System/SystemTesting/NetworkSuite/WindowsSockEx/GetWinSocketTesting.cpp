@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 11:06)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:14)
 
 #include "GetWinSocketTesting.h"
 #include "System/Helper/WindowsMacro.h"
@@ -17,8 +17,8 @@
 #include "CoreTools/TemplateTools/MaxElement.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::GetWinSocketTesting::GetWinSocketTesting(const OStreamShared& tream)
-    : ParentType{ tream },
+System::GetWinSocketTesting::GetWinSocketTesting(const OStreamShared& stream)
+    : ParentType{ stream },
       protocolFamilies{ ProtocolFamilies::Inet },
       socketTypes{ SocketTypes::Dgram, SocketTypes::Stream },
       socketProtocols{ SocketProtocols::Ip, SocketProtocols::Tcp, SocketProtocols::Udp },

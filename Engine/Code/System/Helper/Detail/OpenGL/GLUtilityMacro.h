@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:09)
+/// 版本：1.0.0.7 (2024/03/04 19:52)
 
 #ifndef SYSTEM_HELPER_GL_UTILITY_MACRO_H
 #define SYSTEM_HELPER_GL_UTILITY_MACRO_H
@@ -15,13 +15,13 @@
 
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    // Microsoft Windows
+    /// Microsoft Windows
     #define OPENGL_STDCALL __stdcall
     #define OPENGL_EXTERN __declspec(dllimport)
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    // Macintosh, Linux
+    /// Macintosh, Linux
     #define OPENGL_STDCALL
     #define OPENGL_EXTERN extern
 
@@ -55,7 +55,7 @@ namespace System
 #define SYSTEM_GET_FUNCTION(glFunction) \
     System::GetFunction(SYSTEM_STRINGIZE(glFunction), glFunction)
 
-// 宏对于函数没有返回值。
+/// 宏对于函数没有返回值。
 
 #define SYSTEM_BODY_0(function)            \
     SYSTEM_ENTER_FUNCTION(function);       \
@@ -239,7 +239,7 @@ namespace System
     }                                                                                             \
     SYSTEM_EXIT_FUNCTION(function)
 
-// 宏对于函数有返回值。
+// 宏对函数有返回值。
 
 #define SYSTEM_BODY_0_RESULT(function, nullReturnValue) \
     using Type = decltype(function());                  \
@@ -403,7 +403,7 @@ namespace System
 
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    // 宏对于事先存在的函数没有返回值。
+    /// 宏对于事先存在的函数没有返回值。
 
     #define SYSTEM_PREVIOUSLY_BODY_0(function) \
         SYSTEM_ENTER_FUNCTION(function);       \
@@ -471,7 +471,7 @@ namespace System
         function(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);                               \
         SYSTEM_EXIT_FUNCTION(function)
 
-    // 宏对于事先存在的函数有返回值。
+    /// 宏对于事先存在的函数有返回值。
 
     #define SYSTEM_PREVIOUSLY_BODY_0_RESULT(function, nullReturnValue) \
         SYSTEM_ENTER_FUNCTION(function);                               \
@@ -550,7 +550,7 @@ namespace System
     #define SYSTEM_PREVIOUSLY_BODY_10(function, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) \
         SYSTEM_BODY_10(function, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
 
-    // 宏对于事先存在的函数有返回值。
+    /// 宏对于事先存在的函数有返回值。
 
     #define SYSTEM_PREVIOUSLY_BODY_0_RESULT(function, nullReturnValue) \
         SYSTEM_BODY_0_RESULT(function, nullReturnValue)

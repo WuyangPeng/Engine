@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:26)
+/// 版本：1.0.0.7 (2024/03/05 17:17)
 
 #ifndef SYSTEM_ANDROID_ANDROID_USING_FWD_H
 #define SYSTEM_ANDROID_ANDROID_USING_FWD_H
@@ -16,20 +16,20 @@
 
 namespace System
 {
-    // AndroidInput
+    /// AndroidInput
     class AndroidInputEvent;
     class AndroidInputQueue;
 
-    // AndroidLooper
+    /// AndroidLooper
     class AndroidLooper;
 
-    // AndroidNativeAppGlue
+    /// AndroidNativeAppGlue
     class AndroidNativeActivity;
     class AndroidConfiguration;
     class AndroidApp;
     class AndroidPollSource;
 
-    // AndroidNativeWindow
+    /// AndroidNativeWindow
     class AndroidNativeWindow;
     class AndroidNativeWindowBuffer;
     class AndroidRect;

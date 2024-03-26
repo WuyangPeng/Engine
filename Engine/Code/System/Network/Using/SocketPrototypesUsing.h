@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:26)
+/// 版本：1.0.0.7 (2024/03/03 21:04)
 
 #ifndef SYSTEM_NETWORK_SOCKET_PROTOTYPES_USING_H
 #define SYSTEM_NETWORK_SOCKET_PROTOTYPES_USING_H
@@ -39,12 +39,12 @@ namespace System
     using WinSocket = SOCKET;
     using WinSockAddress = sockaddr;
     using WinSockFdSet = fd_set;
-    using WinSockTimeval = timeval;
+    using WinSockTimeVal = timeval;
     using SocketLinger = LINGER;
 
     constexpr WinSocket invalidSocket{ INVALID_SOCKET };
     constexpr auto socketError = SOCKET_ERROR;
-    constexpr auto internetAddrAny = INADDR_ANY;
+    constexpr auto internetAddressAny = INADDR_ANY;
     constexpr auto fdSetSize = FD_SETSIZE;
     constexpr auto internetAddressLoopback = INADDR_LOOPBACK;
     constexpr auto soMaxConn = SOMAXCONN;
@@ -122,7 +122,7 @@ namespace System
 
     using WinSockFdSet = fd_set;
 
-    struct WinSockTimeval
+    struct WinSockTimeVal
     {
         long tv_sec;
         long tv_usec;
@@ -136,7 +136,7 @@ namespace System
 
     constexpr auto invalidSocket = static_cast<WinSocket>(~0);
     constexpr auto socketError = -1;
-    constexpr auto internetAddrAny = 0x00000000;
+    constexpr auto internetAddressAny = 0x00000000;
     constexpr auto internetAddressLoopback = 0x7f000001;
     constexpr auto soMaxConn = 0x7fffffff;
 

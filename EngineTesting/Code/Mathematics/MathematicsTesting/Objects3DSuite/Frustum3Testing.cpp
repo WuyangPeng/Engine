@@ -86,8 +86,8 @@ void Mathematics::Frustum3Testing::FrustumTest()
         ASSERT_APPROXIMATE(rightBound, frustum.GetRightBound(), 1e-10);
 
         ASSERT_APPROXIMATE(directionMax / directionMin, frustum.GetDirectionRatio(), 1e-10);
-        ASSERT_APPROXIMATE(-2.0 * upBound * directionMax, frustum.GetMTwoUF(), 1e-10);
-        ASSERT_APPROXIMATE(-2.0 * rightBound * directionMax, frustum.GetMTwoRF(), 1e-10);
+        ASSERT_APPROXIMATE(-2.0 * upBound * directionMax, frustum.GetMTwoUpF(), 1e-10);
+        ASSERT_APPROXIMATE(-2.0 * rightBound * directionMax, frustum.GetMTwoRightF(), 1e-10);
 
         auto vertex = frustum.ComputeVertices();
 

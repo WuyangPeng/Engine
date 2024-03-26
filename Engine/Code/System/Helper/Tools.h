@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:01)
+/// 版本：1.0.0.7 (2024/03/04 22:55)
 
 #ifndef SYSTEM_HELPER_TOOLS_H
 #define SYSTEM_HELPER_TOOLS_H
@@ -25,6 +25,8 @@ namespace System
     {
     }
 
+    /// 下面四个函数是用于消除编译器C26451警告。
+    /// 定义GetDivide函数主要为了对称。
     NODISCARD static constexpr int GetPlus(int lhs, int rhs) noexcept
     {
         return lhs + rhs;

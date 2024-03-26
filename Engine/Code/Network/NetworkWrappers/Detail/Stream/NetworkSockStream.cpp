@@ -30,7 +30,7 @@ int Network::NetworkSockStream::Receive(const MessageBufferSharedPtr& messageBuf
 
     System::UnusedFunction(messageBuffer);
 
-    return System::Recv(winSocket, messageBuffer->GetCurrentWriteBufferedPtr(), messageBuffer->GetSize(), System::SocketRecv::Default);
+    return System::Recv(winSocket, messageBuffer->GetCurrentWriteBufferedPtr(), messageBuffer->GetSize(), System::SocketReceive::Default);
 }
 
 int Network::NetworkSockStream::Send(const MessageBufferSharedPtr& messageBuffer)
@@ -48,7 +48,7 @@ void Network::NetworkSockStream::AsyncReceive(const EventInterfaceSharedPtr& eve
 
     System::UnusedFunction(eventInterface, messageBuffer);
 
-    MAYBE_UNUSED const auto result = Recv(winSocket, messageBuffer->GetCurrentWriteBufferedPtr(), messageBuffer->GetSize(), System::SocketRecv::Default);
+    MAYBE_UNUSED const auto result = Recv(winSocket, messageBuffer->GetCurrentWriteBufferedPtr(), messageBuffer->GetSize(), System::SocketReceive::Default);
 }
 
 void Network::NetworkSockStream::AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
@@ -86,7 +86,7 @@ bool Network::NetworkSockStream::EnableNonBlock() noexcept
     NETWORK_CLASS_IS_VALID_9;
 
     unsigned long nonBlock{ 1 };
-    return System::IoctlSocket(winSocket, System::IoctlSocketCmd::FionBio, &nonBlock);
+    return System::IoctlSocket(winSocket, System::IoctlSocketCmd::FIonBlockingIO, &nonBlock);
 }
 
 std::string Network::NetworkSockStream::GetRemoteAddress() const noexcept

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 16:08)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 14:08)
 
 #include "FormatErrorMessageReturnStringTesting.h"
 #include "System/CharacterString/FormatErrorMessage.h"
@@ -35,6 +35,7 @@ void System::FormatErrorMessageReturnStringTesting::MainTest()
 
 void System::FormatErrorMessageReturnStringTesting::FormatErrorMessageReturnStringTest()
 {
+    /// 这里只测试到DlpPolicySilentlyFail，之后的Window错误码枚举并未完全补全，测试将失败。
     for (auto windowError = WindowError::Success; windowError <= WindowError::DlpPolicySilentlyFail; ++windowError)
     {
         ASSERT_NOT_THROW_EXCEPTION_1(FormatErrorMessageTest, windowError);
@@ -53,22 +54,12 @@ void System::FormatErrorMessageReturnStringTesting::FormatErrorMessageTest(Windo
 {
     if (IsWindowErrorValid(windowError))
     {
-        ASSERT_NOT_THROW_EXCEPTION_1(FormatErrorMessageValidTest, windowError);
+        ASSERT_NOT_THROW_EXCEPTION_1(FormatErrorMessageSuccessTest, windowError);
     }
     else
     {
-        ASSERT_NOT_THROW_EXCEPTION_1(FormatErrorMessageInvalidTest, windowError);
+        ASSERT_NOT_THROW_EXCEPTION_1(FormatErrorMessageFailTest, windowError);
     }
-}
-
-void System::FormatErrorMessageReturnStringTesting::FormatErrorMessageValidTest(WindowError windowError)
-{
-    ASSERT_NOT_THROW_EXCEPTION_1(FormatErrorMessageSuccessTest, windowError);
-}
-
-void System::FormatErrorMessageReturnStringTesting::FormatErrorMessageInvalidTest(WindowError windowError)
-{
-    ASSERT_NOT_THROW_EXCEPTION_1(FormatErrorMessageFailTest, windowError);
 }
 
 void System::FormatErrorMessageReturnStringTesting::FormatErrorMessageSuccessTest(WindowError windowError)
@@ -81,10 +72,4 @@ void System::FormatErrorMessageReturnStringTesting::FormatErrorMessageFailTest(W
 {
     const auto message = FormatErrorMessage(windowError);
     ASSERT_TRUE(message.empty());
-}
-
-void System::FormatErrorMessageReturnStringTesting::FormatErrorMessageUnknownTest(WindowError windowError)
-{
-    const auto message = FormatErrorMessage(windowError);
-    ASSERT_LESS(message.size(), bufferSize);
 }

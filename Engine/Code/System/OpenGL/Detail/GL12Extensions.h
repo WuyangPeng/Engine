@@ -18,7 +18,6 @@
 namespace System
 {
     /// OpenGL 1.2
-
     SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL12() noexcept;
 
     void InitOpenGL12() noexcept;

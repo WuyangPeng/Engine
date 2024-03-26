@@ -6,10 +6,10 @@ Threading Core Render Engine
 @author 彭武阳，彭晔恩，彭晔泽
 联系作者：94458936@qq.com
 
-@version 1.0.0.7
+@version 1.0.0.8
 标准：std:c++20
 
-@date 2024/03/02 22:23
+@date 2024/03/26 21:20
 
 @section sec_Contents 内容
 

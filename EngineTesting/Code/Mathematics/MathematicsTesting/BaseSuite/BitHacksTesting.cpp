@@ -107,14 +107,14 @@ void Mathematics::BitHacksTesting::Log2OfPowerOfTwoTest()
 void Mathematics::BitHacksTesting::FixedValueLog2OfPowerOfTwoTest()
 {
     // πÃ∂®÷µ≤‚ ‘
-    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(1u), 0);
-    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(3u), 1);
-    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(4u), 2);
-    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(5u), 2);
-    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(8u), 3);
-    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(15u), 3);
-    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(31), 4);
-    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(32u), 5);
+    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(1u), 0u);
+    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(3u), 1u);
+    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(4u), 2u);
+    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(5u), 2u);
+    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(8u), 3u);
+    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(15u), 3u);
+    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(31u), 4u);
+    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(32u), 5u);
 }
 
 void Mathematics::BitHacksTesting::SignIntLog2OfPowerOfTwoTest()
@@ -149,7 +149,7 @@ void Mathematics::BitHacksTesting::UnsignIntLog2OfPowerOfTwoTest()
     {
         auto value = integerRandomDistribution(randomEngine);
 
-        ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(value), boost::numeric_cast<int32_t>(log(boost::numeric_cast<double>(value)) / log(2.0)));
+        ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(value), boost::numeric_cast<uint32_t>(log(boost::numeric_cast<double>(value)) / log(2.0)));
     }
 }
 

@@ -1,15 +1,14 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 16:41)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 18:31)
 
 #include "SetConsoleHandleScreenBufferInfoTesting.h"
 #include "System/Console/ConsoleScreenBuffer.h"
-#include "System/Console/Flags/ConsoleColoursFlags.h"
 #include "System/Console/Flags/ConsoleScreenBufferFlags.h"
 #include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
@@ -48,41 +47,20 @@ void System::SetConsoleHandleScreenBufferInfoTesting::SetConsoleScreenBufferInfo
 
     ASSERT_NOT_THROW_EXCEPTION_2(DoSetConsoleScreenBufferInfoTest, attributesConsoleHandle, originalConsoleScreenBufferInfo);
 
-    ASSERT_TRUE(SetConsoleHandleScreenBufferInfo(attributesConsoleHandle, &originalConsoleScreenBufferInfo));
+    ASSERT_TRUE(SetSystemConsoleScreenBufferInfo(attributesConsoleHandle, &originalConsoleScreenBufferInfo));
 }
 
 void System::SetConsoleHandleScreenBufferInfoTesting::DoSetConsoleScreenBufferInfoTest(WindowsHandle attributesConsoleHandle, const ConsoleScreenBufferInfoEx& consoleScreenBufferInfo)
 {
     auto setConsoleScreenBufferInfo = GetConsoleScreenBufferInfoEx(consoleScreenBufferInfo);
 
-    ASSERT_TRUE(SetConsoleHandleScreenBufferInfo(attributesConsoleHandle, &setConsoleScreenBufferInfo));
+    ASSERT_TRUE(SetSystemConsoleScreenBufferInfo(attributesConsoleHandle, &setConsoleScreenBufferInfo));
 
     auto currentConsoleScreenBufferInfo = GetWindowsStructDefaultSize<ConsoleScreenBufferInfoEx>();
 
     ASSERT_TRUE(GetSystemConsoleScreenBufferInfo(attributesConsoleHandle, &currentConsoleScreenBufferInfo));
 
     ASSERT_NOT_THROW_EXCEPTION_2(EqualTest, setConsoleScreenBufferInfo, currentConsoleScreenBufferInfo);
-}
-
-System::ConsoleScreenBufferInfoEx System::SetConsoleHandleScreenBufferInfoTesting::GetConsoleScreenBufferInfoEx(ConsoleScreenBufferInfoEx consoleScreenBufferInfo) const noexcept
-{
-    constexpr auto size = 36;
-
-    consoleScreenBufferInfo.dwSize.X = size;
-    consoleScreenBufferInfo.dwSize.Y = size;
-    consoleScreenBufferInfo.dwCursorPosition.X = 0;
-    consoleScreenBufferInfo.dwCursorPosition.Y = size / 2;
-    consoleScreenBufferInfo.wAttributes = static_cast<WindowsWord>(TextColour::Green);
-    consoleScreenBufferInfo.wPopupAttributes = static_cast<WindowsWord>(TextColour::Blue);
-    consoleScreenBufferInfo.srWindow.Top = 0;
-    consoleScreenBufferInfo.srWindow.Bottom = size - 1;
-    consoleScreenBufferInfo.srWindow.Left = 0;
-    consoleScreenBufferInfo.srWindow.Right = size - 1;
-    consoleScreenBufferInfo.dwMaximumWindowSize.X = size;
-    consoleScreenBufferInfo.dwMaximumWindowSize.Y = size;
-    consoleScreenBufferInfo.bFullscreenSupported = gTrue;
-
-    return consoleScreenBufferInfo;
 }
 
 void System::SetConsoleHandleScreenBufferInfoTesting::EqualTest(const ConsoleScreenBufferInfoEx& consoleScreenBufferInfo, const ConsoleScreenBufferInfoEx& currentConsoleScreenBufferInfo)

@@ -526,6 +526,12 @@
     <Filter Include="WindowsSuite 源文件\WindowsCreate">
       <UniqueIdentifier>{12512d5f-4ed9-451a-902e-ff48749ce035}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HelperSuite 模板文件">
+      <UniqueIdentifier>{5ced23ed-ec72-4d72-9e84-fd70880548e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 模板文件\ConfigMacro">
+      <UniqueIdentifier>{3967c6cc-9597-4e87-9cdc-93ebdc809015}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\Log.json">
@@ -787,7 +793,7 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\SoftwareExceptionTesting.h">
       <Filter>CharacterStringSuite 头文件\FormatErrorMessage</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrStrTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StringStringTesting.h">
       <Filter>CharacterStringSuite 头文件\FormatString</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\SnPrintFTesting.h">
@@ -862,7 +868,7 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\DatabasePrototypes\WinSockProtoEntTesting.h">
       <Filter>NetworkSuite 头文件\DatabasePrototypes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\DatabasePrototypes\WinSockServEntTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\DatabasePrototypes\WinSockServerEntTesting.h">
       <Filter>NetworkSuite 头文件\DatabasePrototypes</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\AcceptTesting.h">
@@ -1096,7 +1102,7 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\HResultTesting.h">
       <Filter>HelperSuite 头文件\WindowsMacro</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeIntreSourceTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeIntResourceTesting.h">
       <Filter>HelperSuite 头文件\WindowsMacro</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeLanguageIdTesting.h">
@@ -1159,7 +1165,7 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\FreeLibraryTesting.h">
       <Filter>DynamicLinkSuite 头文件\LoadLibrary</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\GetProcAddressTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\GetProcessAddressTesting.h">
       <Filter>DynamicLinkSuite 头文件\LoadLibrary</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\LoadLibraryTesting.h">
@@ -1243,16 +1249,16 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\VsnPrintFTesting.h">
       <Filter>CharacterStringSuite 头文件\FormatString</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrCatTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StringCatTesting.h">
       <Filter>CharacterStringSuite 头文件\FormatString</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrLenTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StringLengthTesting.h">
       <Filter>CharacterStringSuite 头文件\FormatString</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrCpyTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StringCopyTesting.h">
       <Filter>CharacterStringSuite 头文件\FormatString</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrTokTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StringTokenTesting.h">
       <Filter>CharacterStringSuite 头文件\FormatString</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\TextColourTesting.h">
@@ -1660,9 +1666,6 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatStringMessageUseArgumentTestingBase.h">
       <Filter>CharacterStringSuite 头文件\FormatErrorMessage</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\FormatStringTestingBase.h">
-      <Filter>CharacterStringSuite 头文件\FormatString</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\ConversionTestingBase.h">
       <Filter>CharacterStringSuite 头文件\StringConversion</Filter>
     </ClInclude>
@@ -1954,6 +1957,15 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsCreate\WindowsCreateWParamTesting.h">
       <Filter>WindowsSuite 头文件\WindowsCreate</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\ConfigMacro\FixedSizeTestingDetail.h">
+      <Filter>HelperSuite 模板文件\ConfigMacro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\OperatorTesting.h">
+      <Filter>HelperSuite 头文件\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsing\CharBufferTesting.h">
+      <Filter>HelperSuite 头文件\UnicodeUsing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\TestingHelper.cpp">
@@ -2034,7 +2046,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\SoftwareExceptionTesting.cpp">
       <Filter>CharacterStringSuite 源文件\FormatErrorMessage</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrStrTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StringStringTesting.cpp">
       <Filter>CharacterStringSuite 源文件\FormatString</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\SnPrintFTesting.cpp">
@@ -2115,7 +2127,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\DatabasePrototypes\WinSockProtoEntTesting.cpp">
       <Filter>NetworkSuite 源文件\DatabasePrototypes</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\DatabasePrototypes\WinSockServEntTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\DatabasePrototypes\WinSockServerEntTesting.cpp">
       <Filter>NetworkSuite 源文件\DatabasePrototypes</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\AcceptTesting.cpp">
@@ -2361,7 +2373,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\NoexceptTesting.cpp">
       <Filter>HelperSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeIntreSourceTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeIntResourceTesting.cpp">
       <Filter>HelperSuite 源文件\WindowsMacro</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeLanguageIdTesting.cpp">
@@ -2427,7 +2439,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\LoadLibraryTesting.cpp">
       <Filter>DynamicLinkSuite 源文件\LoadLibrary</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\GetProcAddressTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\GetProcessAddressTesting.cpp">
       <Filter>DynamicLinkSuite 源文件\LoadLibrary</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\FreeLibraryTesting.cpp">
@@ -2511,16 +2523,16 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\VsnPrintFTesting.cpp">
       <Filter>CharacterStringSuite 源文件\FormatString</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrCatTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StringCatTesting.cpp">
       <Filter>CharacterStringSuite 源文件\FormatString</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrLenTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StringLengthTesting.cpp">
       <Filter>CharacterStringSuite 源文件\FormatString</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrCpyTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StringCopyTesting.cpp">
       <Filter>CharacterStringSuite 源文件\FormatString</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrTokTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StringTokenTesting.cpp">
       <Filter>CharacterStringSuite 源文件\FormatString</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\TextColourTesting.cpp">
@@ -2916,9 +2928,6 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatStringMessageUseArgumentTestingBase.cpp">
       <Filter>CharacterStringSuite 源文件\FormatErrorMessage</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\FormatStringTestingBase.cpp">
-      <Filter>CharacterStringSuite 源文件\FormatString</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\ConversionTestingBase.cpp">
       <Filter>CharacterStringSuite 源文件\StringConversion</Filter>
     </ClCompile>
@@ -3209,6 +3218,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsCreate\WindowsCreateLParamTesting.cpp">
       <Filter>WindowsSuite 源文件\WindowsCreate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\OperatorTesting.cpp">
+      <Filter>HelperSuite 源文件\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsing\CharBufferTesting.cpp">
+      <Filter>HelperSuite 源文件\UnicodeUsing</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

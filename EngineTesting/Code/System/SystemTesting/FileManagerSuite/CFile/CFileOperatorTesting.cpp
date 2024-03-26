@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 17:23)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 11:24)
 
 #include "CFileOperatorTesting.h"
 #include "System/FileManager/CFile.h"
@@ -18,7 +18,7 @@
 System::CFileOperatorTesting::CFileOperatorTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, CFileOperatorTesting)
@@ -37,13 +37,17 @@ void System::CFileOperatorTesting::OperatorTest()
 {
     auto file = OpenFile(SYSTEM_FILE_TEXT("w+"));
 
+    ASSERT_NOT_THROW_EXCEPTION_1(DoOperatorTest, file);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, file);
+}
+
+void System::CFileOperatorTesting::DoOperatorTest(FILE* file)
+{
     ASSERT_NOT_THROW_EXCEPTION_1(IsEofTest, file);
     ASSERT_NOT_THROW_EXCEPTION_1(FlushTest, file);
     ASSERT_NOT_THROW_EXCEPTION_1(TellTest, file);
     ASSERT_NOT_THROW_EXCEPTION_1(PositionTest, file);
-    ASSERT_NOT_THROW_EXCEPTION_1(RewindTest, file);
-
-    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, file);
 }
 
 void System::CFileOperatorTesting::IsEofTest(FILE* file)
@@ -80,11 +84,6 @@ void System::CFileOperatorTesting::PositionTest(FILE* file)
 
     position = GetPosition(file);
     ASSERT_EQUAL(position, 1);
-}
-
-void System::CFileOperatorTesting::RewindTest(FILE* file) noexcept
-{
-    Rewind(file);
 }
 
 System::CFileString System::CFileOperatorTesting::GetFileName() const

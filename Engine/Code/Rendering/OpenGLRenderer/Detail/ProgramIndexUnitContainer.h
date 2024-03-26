@@ -27,7 +27,7 @@ namespace Rendering
         using ClassType = ProgramIndexUnitContainer;
 
         using OpenGLInt = System::OpenGLInt;
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
 
     public:
         ProgramIndexUnitContainer() noexcept;

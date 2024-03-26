@@ -23,6 +23,66 @@ Mathematics::Algebra::MatrixTable<NumRows, NumColumns, Real>::MatrixTable() noex
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
+template <int NumRows, int NumColumns, typename Real>
+requires(1 <= NumRows && NumRows <= 4 && 1 <= NumColumns && NumColumns <= 4 && std::is_arithmetic_v<Real>)
+Mathematics::Algebra::MatrixTable<NumRows, NumColumns, Real>::MatrixTable(Real m00, Real m01, Real m10, Real m11) noexcept requires(NumRows == 2 && NumColumns == 2)
+
+#if defined(MATHEMATICS_USE_ROW_MAJOR)
+
+    : storage{ std::array<Real, NumColumns>{ m00, m01 }, std::array<Real, NumColumns>{ m10, m11 } }
+
+#else  // !MATHEMATICS_USE_ROW_MAJOR
+
+    : storage{ std::array<Real, NumRows>{ m00, m10 }, std::array<Real, NumRows>{ m01, m11 } }
+
+#endif  // MATHEMATICS_USE_ROW_MAJOR
+
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+template <int NumRows, int NumColumns, typename Real>
+requires(1 <= NumRows && NumRows <= 4 && 1 <= NumColumns && NumColumns <= 4 && std::is_arithmetic_v<Real>)
+Mathematics::Algebra::MatrixTable<NumRows, NumColumns, Real>::MatrixTable(Real m00, Real m01, Real m02, Real m10, Real m11, Real m12, Real m20, Real m21, Real m22) noexcept requires(NumRows == 3 && NumColumns == 3)
+
+#if defined(MATHEMATICS_USE_ROW_MAJOR)
+
+    : storage{ std::array<Real, NumColumns>{ m00, m01, m02 }, std::array<Real, NumColumns>{ m10, m11, m12 }, std::array<Real, NumColumns>{ m20, m21, m22 } }
+
+#else  // !MATHEMATICS_USE_ROW_MAJOR
+
+    : storage{ std::array<Real, NumColumns>{ m00, m10, m20 }, std::array<Real, NumColumns>{ m01, m11, m21 }, std::array<Real, NumColumns>{ m02, m12, m22 } }
+
+#endif  // MATHEMATICS_USE_ROW_MAJOR
+
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+template <int NumRows, int NumColumns, typename Real>
+requires(1 <= NumRows && NumRows <= 4 && 1 <= NumColumns && NumColumns <= 4 && std::is_arithmetic_v<Real>)
+Mathematics::Algebra::MatrixTable<NumRows, NumColumns, Real>::MatrixTable(Real m00, Real m01, Real m02, Real m03, Real m10, Real m11, Real m12, Real m13, Real m20, Real m21, Real m22, Real m23, Real m30, Real m31, Real m32, Real m33) noexcept requires(NumRows == 4 && NumColumns == 4)
+
+#if defined(MATHEMATICS_USE_ROW_MAJOR)
+
+    : storage{ std::array<Real, NumColumns>{ m00, m01, m02, m03 },
+               std::array<Real, NumColumns>{ m10, m11, m12, m13 },
+               std::array<Real, NumColumns>{ m20, m21, m22, m23 },
+               std::array<Real, NumColumns>{ m30, m31, m32, m33 } }
+
+#else  // !MATHEMATICS_USE_ROW_MAJOR
+
+    : storage{ std::array<Real, NumColumns>{ m00, m10, m20, m30 },
+               std::array<Real, NumColumns>{ m01, m11, m21, m31 },
+               std::array<Real, NumColumns>{ m02, m12, m22, m32 },
+               std::array<Real, NumColumns>{ m03, m13, m23, m33 } }
+
+#endif  // MATHEMATICS_USE_ROW_MAJOR
+
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
 #ifdef OPEN_CLASS_INVARIANT
 
 template <int NumRows, int NumColumns, typename Real>

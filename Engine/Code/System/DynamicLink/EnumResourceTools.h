@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:16)
+/// 版本：1.0.0.7 (2024/03/05 16:37)
 
 #ifndef SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_TOOLS_H
 #define SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_TOOLS_H
@@ -18,7 +18,7 @@
 #include "System/SystemOutput/Fwd/SystemOutputDataFwd.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
-// 枚举动态链接库中的资源。
+/// 枚举动态链接库中的资源。
 namespace System
 {
     NODISCARD bool SYSTEM_DEFAULT_DECLARE EnumResourceLanguagesInLibrary(DynamicLinkModule module,

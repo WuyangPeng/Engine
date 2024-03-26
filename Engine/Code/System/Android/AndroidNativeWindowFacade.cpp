@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:29)
+/// 版本：1.0.0.7 (2024/03/05 17:20)
 
 #include "System/SystemExport.h"
 
@@ -40,7 +40,7 @@ void System::AndroidNativeWindowFacade::Release() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-int32_t System::AndroidNativeWindowFacade::GetWidth() noexcept
+int32_t System::AndroidNativeWindowFacade::GetWidth() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -53,7 +53,7 @@ int32_t System::AndroidNativeWindowFacade::GetWidth() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-int32_t System::AndroidNativeWindowFacade::GetHeight() noexcept
+int32_t System::AndroidNativeWindowFacade::GetHeight() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -66,7 +66,7 @@ int32_t System::AndroidNativeWindowFacade::GetHeight() noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-System::WindowFormat System::AndroidNativeWindowFacade::GetFormat() noexcept
+System::WindowFormat System::AndroidNativeWindowFacade::GetFormat() const noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -74,7 +74,7 @@ System::WindowFormat System::AndroidNativeWindowFacade::GetFormat() noexcept
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    return WindowFormat::RGBA8888;
+    return WindowFormat::Rgba8888;
 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }

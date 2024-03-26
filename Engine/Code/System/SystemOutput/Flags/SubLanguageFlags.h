@@ -148,7 +148,7 @@ namespace System
         MarathiIndia = SUBLANG_MARATHI_INDIA,  // 马拉地 （印度）
         MohawkMohawk = SUBLANG_MOHAWK_MOHAWK,  // 莫霍克 (莫霍克)
         MongolianCyrillicMongolia = SUBLANG_MONGOLIAN_CYRILLIC_MONGOLIA,  // 蒙古语（西里尔文，蒙古）
-        MongolianPRC = SUBLANG_MONGOLIAN_PRC,  // 蒙古语（蒙古）
+        MongolianPrc = SUBLANG_MONGOLIAN_PRC,  // 蒙古语（蒙古）
         NepaliIndia = SUBLANG_NEPALI_INDIA,  // 尼泊尔语（印度）
         NepaliNepal = SUBLANG_NEPALI_NEPAL,  // 尼泊尔语（尼泊尔）
         NorwegianBokmal = SUBLANG_NORWEGIAN_BOKMAL,  // 挪威语（博克马尔）
@@ -214,7 +214,7 @@ namespace System
         SpanishHonduras = SUBLANG_SPANISH_HONDURAS,  // 西班牙语（洪都拉斯）
         SpanishNicaragua = SUBLANG_SPANISH_NICARAGUA,  // 西班牙语（尼加拉瓜）
         SpanishPuertoRico = SUBLANG_SPANISH_PUERTO_RICO,  // 西班牙语（波多黎各）
-        SpanishUS = SUBLANG_SPANISH_US,  // 西班牙语（美国）
+        SpanishUs = SUBLANG_SPANISH_US,  // 西班牙语（美国）
         SwahiliKenya = SUBLANG_SWAHILI_KENYA,  // 斯瓦希里语（肯尼亚）
         Swedish = SUBLANG_SWEDISH,  // 瑞典语
         SwedishFinland = SUBLANG_SWEDISH_FINLAND,  // 瑞典语（芬兰）
@@ -380,7 +380,7 @@ namespace System
         MarathiIndia = 0x01,
         MohawkMohawk = 0x01,
         MongolianCyrillicMongolia = 0x01,
-        MongolianPRC = 0x02,
+        MongolianPrc = 0x02,
         NepaliIndia = 0x02,
         NepaliNepal = 0x01,
         NorwegianBokmal = 0x01,
@@ -446,7 +446,7 @@ namespace System
         SpanishHonduras = 0x12,
         SpanishNicaragua = 0x13,
         SpanishPuertoRico = 0x14,
-        SpanishUS = 0x15,
+        SpanishUs = 0x15,
         SwahiliKenya = 0x01,
         Swedish = 0x01,
         SwedishFinland = 0x02,

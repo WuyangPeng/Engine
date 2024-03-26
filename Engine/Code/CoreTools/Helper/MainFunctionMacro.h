@@ -62,19 +62,19 @@
 
 #else  // !TCRE_USE_GCC
 
-    #define DLL_MAIN_FUNCTION(namespaceName)                                                                                                \
-        CORE_TOOLS_MUTEX_INIT(namespaceName);                                                                                               \
-        int SYSTEM_WINAPI DllMain(System::WindowsHInstance instance, System::WindowsDWord reason, System::WindowsVoidPtr reserved) noexcept \
-        {                                                                                                                                   \
-            try                                                                                                                             \
-            {                                                                                                                               \
-                CoreTools::ExecuteDllMain(instance, reason, reserved, SYSTEM_MULTIPLE_CONCATENATOR(Get, namespaceName, Mutex)());           \
-            }                                                                                                                               \
-            catch (...)                                                                                                                     \
-            {                                                                                                                               \
-                System::OutputDebugStringWithTChar(SYSTEM_TEXT("ExecuteDllMain 抛出异常。"));                                               \
-            }                                                                                                                               \
-            return System::gTrue;                                                                                                           \
+    #define DLL_MAIN_FUNCTION(namespaceName)                                                                                                 \
+        CORE_TOOLS_MUTEX_INIT(namespaceName);                                                                                                \
+        int SYSTEM_WIN_API DllMain(System::WindowsHInstance instance, System::WindowsDWord reason, System::WindowsVoidPtr reserved) noexcept \
+        {                                                                                                                                    \
+            try                                                                                                                              \
+            {                                                                                                                                \
+                CoreTools::ExecuteDllMain(instance, reason, reserved, SYSTEM_MULTIPLE_CONCATENATOR(Get, namespaceName, Mutex)());            \
+            }                                                                                                                                \
+            catch (...)                                                                                                                      \
+            {                                                                                                                                \
+                System::OutputDebugStringWithTChar(SYSTEM_TEXT("ExecuteDllMain 抛出异常。"));                                                \
+            }                                                                                                                                \
+            return System::gTrue;                                                                                                            \
         }
 
 #endif  // TCRE_USE_GCC

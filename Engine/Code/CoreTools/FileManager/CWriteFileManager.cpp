@@ -78,13 +78,6 @@ long CoreTools::CWriteFileManager::Tell() noexcept
     return impl->Tell();
 }
 
-void CoreTools::CWriteFileManager::Rewind() noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_9;
-
-    return impl->Rewind();
-}
-
 void CoreTools::CWriteFileManager::Write(size_t itemSize, const void* data)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;

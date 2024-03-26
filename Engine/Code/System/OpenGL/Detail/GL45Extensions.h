@@ -18,7 +18,6 @@
 namespace System
 {
     /// OpenGL 4.5
-
     SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL45() noexcept;
 
     void InitOpenGL45() noexcept;

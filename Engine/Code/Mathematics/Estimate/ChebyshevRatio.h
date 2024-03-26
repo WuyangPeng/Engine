@@ -1,16 +1,18 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/21 14:28)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 13:26)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_CHEBYSHEV_RATIO_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_CHEBYSHEV_RATIO_H
 
 #include "Mathematics/MathematicsDll.h"
+
+#include <array>
 
 /// 对于[0,1]中的t和[0,pi)中的A，Chebyshev比率为f(t,A) = sin(t*A)/sin(A)。
 /// 实现ChebyshevRatio计算这个函数。

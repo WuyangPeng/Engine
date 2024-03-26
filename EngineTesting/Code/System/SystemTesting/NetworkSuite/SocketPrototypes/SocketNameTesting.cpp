@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 11:03)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:14)
 
 #include "SocketNameTesting.h"
 #include "System/Network/SocketPrototypes.h"
@@ -54,14 +54,14 @@ void System::SocketNameTesting::DoSocketNameTest(WinSocket socketHandle)
 
     ASSERT_NOT_THROW_EXCEPTION_1(GetSockNameTest, socketHandle);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(InetNtoaTest, peerName);
+    ASSERT_NOT_THROW_EXCEPTION_1(InetNToATest, peerName);
 
     ASSERT_NOT_THROW_EXCEPTION_2(WinSockInternetAddressTest, address, peerName);
 }
 
-void System::SocketNameTesting::InetNtoaTest(const WinSockInternetAddress& peerName)
+void System::SocketNameTesting::InetNToATest(const WinSockInternetAddress& peerName)
 {
-    const auto address = InetNtoa(peerName.sin_addr);
+    const auto address = InetNToA(peerName.sin_addr);
     ASSERT_EQUAL(GetConnectHostname(), address);
 }
 

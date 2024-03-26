@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:23)
+/// 版本：1.0.0.7 (2024/03/03 00:11)
 
 #include "System/SystemExport.h"
 
@@ -14,15 +14,15 @@
 #include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
-void System::GlutInit(int* pArgc, char** argv) noexcept
+void System::GlutInit(int* argc, char** argv) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 
-    ::glutInit(pArgc, argv);
+    ::glutInit(argc, argv);
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    UnusedFunction(pArgc, argv);
+    UnusedFunction(argc, argv);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -359,15 +359,15 @@ void System::GlutSetWindow(int window) noexcept
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
 
-void System::GlutSetOption(GlutOption what, int value) noexcept
+void System::GlutSetOption(GlutOption glutOption, GlutExtension glutExtension) noexcept
 {
 #if defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 
-    return ::glutSetOption(EnumCastUnderlying(what), value);
+    return ::glutSetOption(EnumCastUnderlying(glutOption), EnumCastUnderlying(glutExtension));
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    UnusedFunction(what, value);
+    UnusedFunction(glutOption, glutExtension);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }

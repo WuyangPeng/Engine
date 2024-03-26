@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:29)
+/// 版本：1.0.0.7 (2024/03/13 16:01)
 
 #include "System/SystemExport.h"
 
@@ -14,6 +14,21 @@
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning.h"
 #include "System/Helper/Tools.h"
+
+bool System::GetHostName(char* name, int nameLength) noexcept
+{
+#ifdef SYSTEM_PLATFORM_WIN32
+
+    return ::gethostname(name, nameLength) != socketError;
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    UnusedFunction(name, nameLength);
+
+    return false;
+
+#endif  // SYSTEM_PLATFORM_WIN32
+}
 
 System::WinSockHostEnt* System::GetHostByAddress(const InternetAddress* address, ProtocolFamilies type) noexcept
 {
@@ -56,25 +71,7 @@ System::WinSockHostEnt* System::GetHostByName(const char* name) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetHostName(char* name, int nameLength) noexcept
-{
-#ifdef SYSTEM_PLATFORM_WIN32
-
-    if (::gethostname(name, nameLength) != socketError)
-        return true;
-    else
-        return false;
-
-#else  // !SYSTEM_PLATFORM_WIN32
-
-    UnusedFunction(name, nameLength);
-
-    return false;
-
-#endif  // SYSTEM_PLATFORM_WIN32
-}
-
-System::WinSockServEnt* System::GetServerByPort(int port, const char* proto) noexcept
+System::WinSockServerEnt* System::GetServerByPort(int port, const char* proto) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -89,7 +86,7 @@ System::WinSockServEnt* System::GetServerByPort(int port, const char* proto) noe
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WinSockServEnt* System::GetServerByName(const char* name, const char* proto) noexcept
+System::WinSockServerEnt* System::GetServerByName(const char* name, const char* proto) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 

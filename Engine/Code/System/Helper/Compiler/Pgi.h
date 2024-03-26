@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:14)
+/// 版本：1.0.0.7 (2024/03/04 17:28)
 
 #ifndef SYSTEM_HELPER_PGI_H
 #define SYSTEM_HELPER_PGI_H
 
 #if defined(__PGI)
 
-    //  PGI C++ 编译器设置：
+    ///  PGI C++ 编译器设置：
 
     #ifndef SYSTEM_CPP_STANDARD
 
@@ -38,7 +38,7 @@
 
     #endif  // TCRE_SYSTEM_COMPILER
 
-    // PGI主要与GNU兼容。 所以从那开始。
+    /// PGI主要与GNU兼容。 所以从那开始。
     #include "Gcc.h"
 
 #endif  // defined(__PGI)

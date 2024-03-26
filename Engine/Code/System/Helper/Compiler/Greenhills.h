@@ -5,16 +5,16 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:14)
+/// 版本：1.0.0.7 (2024/03/08 19:31)
 
-#ifndef SYSTEM_HELPER_GREENHILLS_H
-#define SYSTEM_HELPER_GREENHILLS_H
+#ifndef SYSTEM_HELPER_GREEN_HILLS_H
+#define SYSTEM_HELPER_GREEN_HILLS_H
 
 #ifdef __ghs
 
-    // Greenhills C++ 编译器设置：
+    /// GreenHills C++ 编译器设置：
 
-    // 版本检查：
+    /// 版本检查：
     #if (__ghs < 0)
 
         #error "编译器未配置"
@@ -35,9 +35,9 @@
 
     #ifndef TCRE_USE_GREENHILLS
 
-        #define TCRE_USE_GREENHILLS 1
+        #define TCRE_USE_GREEN_HILLS 1
 
-    #endif  // TCRE_USE_GREENHILLS
+    #endif  // TCRE_USE_GREEN_HILLS
 
     #ifndef TCRE_COMPILER_VERSION
 
@@ -53,4 +53,4 @@
 
 #endif  // __ghs
 
-#endif  // SYSTEM_HELPER_GREENHILLS_H
+#endif  // SYSTEM_HELPER_GREEN_HILLS_H

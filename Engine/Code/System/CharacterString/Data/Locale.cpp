@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:23)
+/// 版本：1.0.0.7 (2024/03/05 17:08)
 
 #include "System/SystemExport.h"
 
@@ -32,7 +32,7 @@ System::Locale::~Locale() noexcept
 System::Locale::LocaleType System::Locale::GetLocaleType(const char* locale)
 {
     LocaleType result{};
-    MemoryCopy(result.data(), locale, std::min(size, boost::numeric_cast<int>(System::StrLen(locale))));
+    MemoryCopy(result.data(), locale, std::min(defaultBufferSize, boost::numeric_cast<int>(System::StringLength(locale))));
 
     return result;
 }

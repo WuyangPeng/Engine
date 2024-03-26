@@ -88,4 +88,12 @@
         MAYBE_UNUSED const auto dialogBoxCommand = System::MessageBoxSelectionWithTChar(SYSTEM_TEXT("Î´Öª´íÎó£¡"), SYSTEM_TEXT("´íÎó")); \
     }
 
+#define ASSERT_FAIL_THROW_EXCEPTION(condition, error) \
+    {                                                 \
+        if (!(condition))                             \
+        {                                             \
+            THROW_EXCEPTION(error);                   \
+        }                                             \
+    }
+
 #endif  // CORE_TOOLS_HELPER_EXCEPTION_MACRO_H

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 15:42)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 17:20)
 
 #include "WindowsCreateWParamTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -18,7 +18,7 @@ System::WindowsCreateWParamTesting::WindowsCreateWParamTesting(const OStreamShar
     : ParentType{ stream },
       generator{ GetEngineRandomSeed() }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, WindowsCreateWParamTesting)
@@ -31,8 +31,6 @@ void System::WindowsCreateWParamTesting::DoRunUnitTest()
 void System::WindowsCreateWParamTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(WParamTest);
-
-    // SystemWindowsTesting有其他windows函数的测试。
 }
 
 void System::WindowsCreateWParamTesting::WParamTest()

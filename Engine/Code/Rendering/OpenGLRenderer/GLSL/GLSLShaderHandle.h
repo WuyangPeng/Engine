@@ -25,7 +25,7 @@ namespace Rendering
         using ClassType = GLSLShaderHandle;
 
         using String = System::String;
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
         using ShaderType = System::ShaderType;
 
     public:

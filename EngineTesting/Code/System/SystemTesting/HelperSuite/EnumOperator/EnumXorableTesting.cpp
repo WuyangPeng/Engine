@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 09:45)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/08 11:03)
 
 #include "EnumXorableTesting.h"
 #include "System/Helper/EnumOperator.h"
@@ -17,7 +17,7 @@
 System::EnumXorableTesting::EnumXorableTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, EnumXorableTesting)
@@ -44,7 +44,7 @@ void System::EnumXorableTesting::SignedOperatorTest()
     ASSERT_ENUM_EQUAL(number, SignedNumber::Six);
 }
 
-void System::EnumXorableTesting::SignedConstexprOperatorTest() noexcept
+void System::EnumXorableTesting::SignedConstexprOperatorTest() const noexcept
 {
     constexpr auto number = SignedNumber::Seven ^ SignedNumber::Five;
 
@@ -60,7 +60,7 @@ void System::EnumXorableTesting::UnsignedOperatorTest()
     ASSERT_ENUM_EQUAL(number, Number::Five);
 }
 
-void System::EnumXorableTesting::UnsignedConstexprOperatorTest() noexcept
+void System::EnumXorableTesting::UnsignedConstexprOperatorTest() const noexcept
 {
     constexpr auto number = Number::Three ^ Number::Six;
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 13:50)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/06 16:45)
 
 #include "OpenGLGlutCallBack.h"
 #include "Testing.h"
@@ -68,6 +68,7 @@ CoreTools::Suite System::OpenGLGlutCallBack::GetOpenGLBaseSuite()
     ADD_TEST(openGLBaseSuite, OpenGLMaskTesting);
     ADD_TEST(openGLBaseSuite, OpenGLStateTesting);
     ADD_TEST(openGLBaseSuite, OpenGLStencilTesting);
+    ADD_TEST(openGLBaseSuite, OpenGLDrawTesting);
 
     return openGLBaseSuite;
 }
@@ -85,6 +86,7 @@ CoreTools::Suite System::OpenGLGlutCallBack::GetOpenGLBuffersSuite()
     ADD_TEST(openGLBuffersSuite, OpenGLVertexArraysTesting);
     ADD_TEST(openGLBuffersSuite, OpenGLBindVertexBufferTesting);
     ADD_TEST(openGLBuffersSuite, OpenGLDrawBuffersTesting);
+    ADD_TEST(openGLBuffersSuite, OpenGLMapTesting);
 
     return openGLBuffersSuite;
 }
@@ -103,6 +105,7 @@ CoreTools::Suite System::OpenGLGlutCallBack::GetOpenGLTexturesSuite()
     ADD_TEST(openGLTexturesSuite, OpenGLTextures3DTesting);
     ADD_TEST(openGLTexturesSuite, OpenGLTexturesCubeArrayTesting);
     ADD_TEST(openGLTexturesSuite, OpenGLFrameBufferTextures2DTesting);
+    ADD_TEST(openGLTexturesSuite, OpenGLActiveTextureTesting);
 
     return openGLTexturesSuite;
 }
@@ -152,6 +155,7 @@ CoreTools::Suite System::OpenGLGlutCallBack::GetOpenGLShaderSuite()
     ADD_TEST(openGLShaderSuite, OpenGLGetUniformLocationTesting);
     ADD_TEST(openGLShaderSuite, OpenGLShaderAttributesTesting);
     ADD_TEST(openGLShaderSuite, OpenGLShaderStatusTesting);
+    ADD_TEST(openGLShaderSuite, OpenGLShaderStorageBlockBindingTesting);
 
     return openGLShaderSuite;
 }

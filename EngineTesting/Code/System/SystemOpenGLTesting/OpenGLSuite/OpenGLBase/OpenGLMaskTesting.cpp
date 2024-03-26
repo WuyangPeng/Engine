@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:21)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:42)
 
 #include "OpenGLMaskTesting.h"
 #include "System/OpenGL/OpenGLBase.h"
@@ -32,13 +32,13 @@ void System::OpenGLMaskTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(SetGLSampleMaskTest);
 }
 
-void System::OpenGLMaskTesting::SetGLColorMaskTest() noexcept
+void System::OpenGLMaskTesting::SetGLColorMaskTest() const noexcept
 {
-    SetGLColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
-    SetGLColorMask(0, GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+    SetGLColorMask(false, false, false, false);
+    SetGLColorMask(0, true, true, true, true);
 }
 
-void System::OpenGLMaskTesting::SetGLSampleMaskTest() noexcept
+void System::OpenGLMaskTesting::SetGLSampleMaskTest() const noexcept
 {
     SetGLSampleMask(0, 0);
 }

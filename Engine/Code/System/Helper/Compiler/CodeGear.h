@@ -5,32 +5,32 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:13)
+/// 版本：1.0.0.7 (2024/03/04 17:25)
 
 #ifndef SYSTEM_HELPER_CODE_GEAR_H
 #define SYSTEM_HELPER_CODE_GEAR_H
 
 #ifdef __CODEGEARC__
 
-    // CodeGear C++编译器设置：
+    /// CodeGear C++编译器设置：
 
-    // 版本检查：最后已知的版本是0x621
+    /// 版本检查：最后已知的版本是0x621
     #if (0x740 < __CODEGEARC__)
 
         #error "未知版本"
 
     #endif  // 0x621 < __CODEGEARC__
 
-    // Clang增强的Windows编译器
+    /// Clang增强的Windows编译器
     #ifdef __clang__
 
         #include "Clang.h"
 
-        // Embarcadero驱动程序的特定设置
+        /// Embarcadero驱动程序的特定设置
         #define TCRE_EMBTC __CODEGEARC__
         #define TCRE_EMBTC_FULL_VER ((__clang_major__ << 16) | (__clang_minor__ << 8) | __clang_patchlevel__)
 
-        // 检测正在使用哪个Embarcadero驱动程序
+        /// 检测正在使用哪个Embarcadero驱动程序
         #if defined(TCRE_EMBTC)
 
             #if defined(_WIN64)
@@ -111,7 +111,7 @@
 
         #endif  // TCRE_SYSTEM_COMPILER
 
-        // 这些警告频繁发生在优化的模板代码中
+        /// 这些警告频繁发生在优化的模板代码中
         #pragma warn - 8004  // var赋值，但从未使用
         #pragma warn - 8008  // 条件总是真/假
         #pragma warn - 8066  // 死代码永远不会执行
@@ -120,13 +120,13 @@
 
         #if defined(NDEBUG)
 
-            // 修复不合标准的<cstring>
+            /// 修复不合标准的<cstring>
             #include <cstring>
             #undef strcmp
 
         #endif  // defined(NDEBUG)
 
-        // 修复不合标准的errno声明。
+        /// 修复不合标准的errno声明。
         #include <errno.h>
         #ifndef errno
 

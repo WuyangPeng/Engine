@@ -29,5 +29,5 @@ void ThreadingCoreRenderEngineAssist::VersionTesting::DoRunUnitTest()
 
 void ThreadingCoreRenderEngineAssist::VersionTesting::MainTest()
 {
-    ASSERT_GREATER_EQUAL(gTCREAssistVersion, gTCREAssistTestingVersion);
+    ASSERT_GREATER_EQUAL(gTcreAssistVersion, gTcreAssistTestingVersion);
 }

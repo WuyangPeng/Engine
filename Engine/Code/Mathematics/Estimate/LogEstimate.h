@@ -40,7 +40,12 @@ namespace Mathematics
     requires(1 <= Degree && Degree <= 8)
     NODISCARD constexpr T GetLogEstimateMaxError()
     {
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
         return GetLog2EstimateMaxError<T, Degree>();
+
+#include SYSTEM_WARNING_POP
     }
 }
 

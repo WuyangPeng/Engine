@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:22)
+/// 版本：1.0.0.7 (2024/03/05 17:06)
 
 #ifndef SYSTEM_CHARACTER_STRING_CHARACTER_STRING_FLAGS_FWD_H
 #define SYSTEM_CHARACTER_STRING_CHARACTER_STRING_FLAGS_FWD_H
@@ -14,17 +14,16 @@
 
 namespace System
 {
-    // CodePage
+    /// CodePage
     enum class CodePage;
 
-    // FormatMessage
+    /// FormatMessage
     enum class FormatMessageOption;
     enum class FormatMessageWidth;
 
-    // StringConversion
+    /// StringConversion
     enum class MultiByte;
     enum class WideChar;
-    enum class LocaleSort;
     enum class LanguageLocale;
     enum class Compares;
     enum class ComparesStringReturn;

@@ -18,7 +18,6 @@
 namespace System
 {
     /// OpenGL 1.3
-
     SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL13() noexcept;
 
     void InitOpenGL13() noexcept;

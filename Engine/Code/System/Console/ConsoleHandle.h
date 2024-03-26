@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:20)
+/// 版本：1.0.0.7 (2024/03/05 16:58)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_HANDLE_H
 #define SYSTEM_CONSOLE_CONSOLE_HANDLE_H
@@ -15,7 +15,7 @@
 #include "Fwd/ConsoleFlagsFwd.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
-// 控制台句柄的获取和设置。
+/// 控制台句柄的获取和设置。
 namespace System
 {
     NODISCARD WindowsHandle SYSTEM_DEFAULT_DECLARE GetStandardHandle(StandardHandle standardHandle) noexcept;

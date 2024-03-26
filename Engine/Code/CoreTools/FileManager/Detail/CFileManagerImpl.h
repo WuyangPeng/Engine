@@ -71,8 +71,7 @@ namespace CoreTools
         NODISCARD bool Seek(long offset, FileSeek whence) noexcept;
         NODISCARD PosType GetPosition();
         NODISCARD bool SetPosition(PosType position) noexcept;
-        NODISCARD long Tell() noexcept;
-        void Rewind() noexcept;
+        NODISCARD long Tell() noexcept; 
         NODISCARD bool SetVBuffer(FileSetVBuf type, size_t size) noexcept;
 
     private:

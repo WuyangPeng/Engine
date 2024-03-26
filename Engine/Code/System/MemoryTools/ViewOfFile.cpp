@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:44)
+/// 版本：1.0.0.7 (2024/03/04 15:59)
 
 #include "System/SystemExport.h"
 
@@ -104,10 +104,7 @@ bool System::FlushSystemViewOfFile(WindowsVoidPtr baseAddress, WindowsSize numbe
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::FlushViewOfFile(baseAddress, numberOfBytesToFlush) != gFalse)
-        return true;
-    else
-        return false;
+    return ::FlushViewOfFile(baseAddress, numberOfBytesToFlush) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -122,10 +119,7 @@ bool System::UnMapSystemViewOfFile(WindowsVoidPtr baseAddress) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::UnmapViewOfFile(baseAddress) != gFalse)
-        return true;
-    else
-        return false;
+    return ::UnmapViewOfFile(baseAddress) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -140,10 +134,7 @@ bool System::CloseFileMapping(WindowsHandle fileMappingHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(fileMappingHandle) != gFalse)
-        return true;
-    else
-        return false;
+    return ::CloseHandle(fileMappingHandle) != gFalse;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

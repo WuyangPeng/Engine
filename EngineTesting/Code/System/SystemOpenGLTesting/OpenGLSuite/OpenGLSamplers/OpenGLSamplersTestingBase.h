@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:03)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:38)
 
 #ifndef SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_SAMPLERS_TESTING_BASE_H
 #define SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_SAMPLERS_TESTING_BASE_H
@@ -28,11 +28,11 @@ namespace System
 
     protected:
         static constexpr auto bufferSize = 12;
-        using SamplersType = std::array<OpenGLUInt, bufferSize>;
+        using SamplersType = std::array<OpenGLUnsignedInt, bufferSize>;
 
     protected:
-        void SetGLDeleteSamplerTest(OpenGLInt sampler) noexcept;
-        void SetGLDeleteSamplersTest(const SamplersType& samplers) noexcept;
+        void DeleteSamplerTest(OpenGLInt sampler) const noexcept;
+        void DeleteSamplersTest(const SamplersType& samplers) const noexcept;
     };
 }
 

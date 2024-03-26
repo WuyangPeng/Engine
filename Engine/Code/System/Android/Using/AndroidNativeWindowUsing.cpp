@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:29)
+/// 版本：1.0.0.7 (2024/03/05 17:19)
 
 #include "System/SystemExport.h"
 
@@ -16,8 +16,68 @@
 #ifndef SYSTEM_PLATFORM_ANDROID
 
 System::AndroidNativeWindowBuffer::AndroidNativeWindowBuffer() noexcept
-    : width{ 0 }, height{ 0 }, stride{ 0 }, format{ EnumCastUnderlying(WindowFormat::RGBA8888) }, bits{}, reserved{}
+    : width{ 0 }, height{ 0 }, stride{ 0 }, format{ EnumCastUnderlying(WindowFormat::Rgba8888) }, bits{}, reserved{}
 {
+}
+
+int32_t System::AndroidNativeWindowBuffer::GetWidth() const noexcept
+{
+    return width;
+}
+
+void System::AndroidNativeWindowBuffer::SetWidth(int32_t aWidth) noexcept
+{
+    width = aWidth;
+}
+
+int32_t System::AndroidNativeWindowBuffer::GetHeight() const noexcept
+{
+    return height;
+}
+
+void System::AndroidNativeWindowBuffer::SetHeight(int32_t aHeight) noexcept
+{
+    height = aHeight;
+}
+
+int32_t System::AndroidNativeWindowBuffer::GetStride() const noexcept
+{
+    return stride;
+}
+
+void System::AndroidNativeWindowBuffer::SetStride(int32_t aStride) noexcept
+{
+    stride = aStride;
+}
+
+int32_t System::AndroidNativeWindowBuffer::GetFormat() const noexcept
+{
+    return format;
+}
+
+void System::AndroidNativeWindowBuffer::SetFormat(int32_t aFormat) noexcept
+{
+    format = aFormat;
+}
+
+void* System::AndroidNativeWindowBuffer::GetBits() noexcept
+{
+    return bits;
+}
+
+void System::AndroidNativeWindowBuffer::SetBits(void* aBits) noexcept
+{
+    bits = aBits;
+}
+
+System::AndroidNativeWindowBuffer::ReservedType System::AndroidNativeWindowBuffer::GetReserved() const noexcept
+{
+    return reserved;
+}
+
+void System::AndroidNativeWindowBuffer::SetReserved(const ReservedType& aReserved) noexcept
+{
+    reserved = aReserved;
 }
 
 System::AndroidRect::AndroidRect() noexcept

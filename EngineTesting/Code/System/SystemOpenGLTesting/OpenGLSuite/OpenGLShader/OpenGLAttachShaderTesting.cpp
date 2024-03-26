@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:26)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:47)
 
 #include "OpenGLAttachShaderTesting.h"
 #include "System/OpenGL/Flags/OpenGLShaderFlags.h"
@@ -43,7 +43,7 @@ void System::OpenGLAttachShaderTesting::AttachShaderTest()
     ASSERT_NOT_THROW_EXCEPTION_1(DeleteProgramTest, programHandle);
 }
 
-void System::OpenGLAttachShaderTesting::CreateShaderTest(OpenGLUInt programHandle)
+void System::OpenGLAttachShaderTesting::CreateShaderTest(OpenGLUnsignedInt programHandle)
 {
     const auto shaderHandle = CreateGLShader(ShaderType::Vertex);
     ASSERT_NOT_THROW_EXCEPTION_2(DoAttachShaderTest, programHandle, shaderHandle);
@@ -51,25 +51,25 @@ void System::OpenGLAttachShaderTesting::CreateShaderTest(OpenGLUInt programHandl
     ASSERT_NOT_THROW_EXCEPTION_1(DeleteShaderTest, shaderHandle);
 }
 
-void System::OpenGLAttachShaderTesting::DoAttachShaderTest(OpenGLUInt programHandle, OpenGLUInt shaderHandle)
+void System::OpenGLAttachShaderTesting::DoAttachShaderTest(OpenGLUnsignedInt programHandle, OpenGLUnsignedInt shaderHandle)
 {
     AttachGLShader(programHandle, shaderHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_2(GetAttachedGLShadersTest, programHandle, shaderHandle);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(GetGLShaderInfoLogTest, shaderHandle);
+    ASSERT_NOT_THROW_EXCEPTION_1(GetShaderInfoLogTest, shaderHandle);
 
     DetachGLShader(programHandle, shaderHandle);
 }
 
-void System::OpenGLAttachShaderTesting::GetAttachedGLShadersTest(OpenGLUInt programHandle, OpenGLUInt shaderHandle)
+void System::OpenGLAttachShaderTesting::GetAttachedGLShadersTest(OpenGLUnsignedInt programHandle, OpenGLUnsignedInt shaderHandle)
 {
-    OpenGLUInt shaderResult{ 0 };
+    OpenGLUnsignedInt shaderResult{ 0 };
     GetAttachedGLShaders(programHandle, 1, nullptr, &shaderResult);
     ASSERT_EQUAL(shaderResult, shaderHandle);
 }
 
-void System::OpenGLAttachShaderTesting::GetGLShaderInfoLogTest(OpenGLUInt shaderHandle)
+void System::OpenGLAttachShaderTesting::GetShaderInfoLogTest(OpenGLUnsignedInt shaderHandle)
 {
     const auto infoLog = GetGLShaderInfoLog(shaderHandle);
 

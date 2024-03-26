@@ -99,6 +99,16 @@ namespace Mathematics
             return static_cast<Real>(value);
         }
 
+        NODISCARD static constexpr Real GetValue(uint32_t value) noexcept
+        {
+            return static_cast<Real>(value);
+        }
+
+        NODISCARD static constexpr Real GetValue(double value) noexcept
+        {
+            return static_cast<Real>(value);
+        }
+
         NODISCARD static constexpr Real GetRational(int numerator, int denominator) noexcept
         {
             return GetValue(numerator) / GetValue(denominator);

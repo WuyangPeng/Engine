@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 09:53)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/08 10:37)
 
 #include "NetworkMacroTesting.h"
 #include "System/Helper/WindowsMacro.h"
@@ -24,23 +24,23 @@
 System::NetworkMacroTesting::NetworkMacroTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, NetworkMacroTesting)
 
 void System::NetworkMacroTesting::DoRunUnitTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(StartUp);
+
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(Cleanup);
 }
 
 void System::NetworkMacroTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(StartUp);
-
     ASSERT_NOT_THROW_EXCEPTION_0(FdTest);
-
-    ASSERT_NOT_THROW_EXCEPTION_0(Cleanup);
 }
 
 void System::NetworkMacroTesting::FdTest()
@@ -69,13 +69,6 @@ void System::NetworkMacroTesting::Cleanup()
 
 System::WinSocket System::NetworkMacroTesting::CreateWinSocket()
 {
-    constexpr uint16_t port{ 5300 };
-
-    WinSockInternetAddress address{};
-    address.sin_family = System::EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
-    address.sin_port = GetHostToNetShort(port);
-    address.sin_addr.s_addr = GetHostToNetLong(internetAddrAny);
-
     const auto socketHandle = CreateTcpSocket();
     ASSERT_TRUE_FAILURE_THROW(IsSocketValid(socketHandle), "socketHandle 是无效的。");
 

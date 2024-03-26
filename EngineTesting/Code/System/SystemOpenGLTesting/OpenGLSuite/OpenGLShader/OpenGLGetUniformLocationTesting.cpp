@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:27)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:47)
 
 #include "OpenGLGetUniformLocationTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -46,26 +46,34 @@ void System::OpenGLGetUniformLocationTesting::GetUniformLocationTest()
     ASSERT_NOT_THROW_EXCEPTION_1(DeleteProgramTest, programHandle);
 }
 
-void System::OpenGLGetUniformLocationTesting::DoGetUniformLocationTest(OpenGLUInt programHandle)
+void System::OpenGLGetUniformLocationTesting::DoGetUniformLocationTest(OpenGLUnsignedInt programHandle)
 {
     const auto shaderHandle = CreateGLShader(ShaderType::Vertex);
 
     ASSERT_NOT_THROW_EXCEPTION_1(ShaderSourceTest, shaderHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_2(UniformTest, shaderHandle, programHandle);
+    ASSERT_NOT_THROW_EXCEPTION_1(BlockBindingTest, programHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_1(DeleteShaderTest, shaderHandle);
 }
 
-void System::OpenGLGetUniformLocationTesting::UniformTest(OpenGLUInt shaderHandle, OpenGLUInt programHandle)
+void System::OpenGLGetUniformLocationTesting::UniformTest(OpenGLUnsignedInt shaderHandle, OpenGLUnsignedInt programHandle)
 {
-    const auto uniformName = GetuUniformName(shaderHandle, programHandle);
+    const auto uniformName = GetUniformName(shaderHandle, programHandle);
 
     const auto uniform = GetGLUniformLocation(programHandle, uniformName.c_str());
     ASSERT_UNEQUAL(uniform, 0);
+
+    SetGLUniform1(uniform, 0);
 }
 
-std::string System::OpenGLGetUniformLocationTesting::GetuUniformName(OpenGLUInt shaderHandle, OpenGLUInt programHandle)
+void System::OpenGLGetUniformLocationTesting::BlockBindingTest(OpenGLUnsignedInt programHandle) const noexcept
+{
+    SetGLUniformBlockBinding(programHandle, 0, 0);
+}
+
+std::string System::OpenGLGetUniformLocationTesting::GetUniformName(OpenGLUnsignedInt shaderHandle, OpenGLUnsignedInt programHandle)
 {
     CompileGLShader(shaderHandle);
 

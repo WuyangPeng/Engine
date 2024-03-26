@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 10:06)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/12 10:22)
 
 #include "FileMappingTestingBase.h"
 #include "System/FileManager/File.h"
@@ -19,8 +19,6 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/MaxElement.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using namespace std::literals;
 
 System::FileMappingTestingBase::FileMappingTestingBase(const OStreamShared& stream)
     : ParentType{ stream },
@@ -43,7 +41,7 @@ System::FileMappingTestingBase::FileMappingTestingBase(const OStreamShared& stre
                { MemoryProtect::ExecuteWriteCopy, FileHandleDesiredAccess::Read | FileHandleDesiredAccess::Execute },
                { MemoryProtect::ExecuteRead, FileHandleDesiredAccess::Read | FileHandleDesiredAccess::Execute },
                { MemoryProtect::ExecuteReadWrite, FileHandleDesiredAccess::ReadWrite | FileHandleDesiredAccess::Execute } },
-      maxSize{ CoreTools::MaxElement<size_t>({ memoryProtects.size(), fileMapProtections.size(), fileMapDesiredAccesses.size() }) },
+      maxSize{ CoreTools::MaxElement({ memoryProtects.size(), fileMapProtections.size(), fileMapDesiredAccesses.size() }) },
       randomEngine{ GetEngineRandomSeed() }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
@@ -93,7 +91,7 @@ System::FileHandleDesiredAccess System::FileMappingTestingBase::GetMapping(Memor
     SYSTEM_CLASS_IS_VALID_CONST_1;
 
     const auto iter = mapping.find(memoryProtect);
-    ASSERT_UNEQUAL_FAILURE_THROW(iter, mapping.end(), "");
+    ASSERT_UNEQUAL_FAILURE_THROW(iter, mapping.end(), "mapping查找失败。");
 
     return iter->second;
 }
@@ -102,14 +100,14 @@ System::String System::FileMappingTestingBase::GetFileMappingName() const
 {
     SYSTEM_CLASS_IS_VALID_CONST_1;
 
-    return SYSTEM_TEXT("Resource/FileMappingTesting/FileMappingTest.txt"s);
+    return SYSTEM_TEXT("Resource/FileMappingTesting/FileMappingTest.txt");
 }
 
 System::String System::FileMappingTestingBase::GetLoopTestFileName() const
 {
     SYSTEM_CLASS_IS_VALID_CONST_1;
 
-    return SYSTEM_TEXT("FileMappingTestingFileMap"s) + System::ToString(GetTimeInSeconds()) + GetEngineeringTypesSuffix();
+    return SYSTEM_TEXT("FileMappingTestingFileMap") + ToString(GetTimeInSeconds()) + GetEngineeringTypesSuffix();
 }
 
 void System::FileMappingTestingBase::CloseFileTest(WindowsHandle fileHandle)

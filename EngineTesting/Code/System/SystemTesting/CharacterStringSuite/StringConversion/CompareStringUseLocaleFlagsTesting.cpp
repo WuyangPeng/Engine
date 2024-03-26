@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 16:16)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 14:23)
 
 #include "CompareStringUseLocaleFlagsTesting.h"
 #include "System/CharacterString/Flags/StringConversionFlags.h"
@@ -17,12 +17,13 @@
 
 System::CompareStringUseLocaleFlagsTesting::CompareStringUseLocaleFlagsTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      // 这里不测试CustomUIDefault和CustomUnspecified。
+      /// TODO: LanguageLocale::CustomUiDefault测试失败。
       languageLocales{ LanguageLocale::SystemDefault,
                        LanguageLocale::UserDefault,
                        LanguageLocale::CustomDefault,
                        LanguageLocale::Neutral,
-                       LanguageLocale::Invariant },
+                       LanguageLocale::Invariant,
+                       LanguageLocale::CustomUnspecified },
       comparesStrings{ SYSTEM_TEXT("啊"),
                        SYSTEM_TEXT("吧"),
                        SYSTEM_TEXT("抽"),
@@ -49,7 +50,7 @@ System::CompareStringUseLocaleFlagsTesting::CompareStringUseLocaleFlagsTesting(c
                        SYSTEM_TEXT("a"),
                        SYSTEM_TEXT("A"),
                        SYSTEM_TEXT("0") },
-      maxSize{ CoreTools::MaxElement<size_t>({ languageLocales.size(), GetComparesSize(), comparesStrings.size() }) },
+      maxSize{ CoreTools::MaxElement({ languageLocales.size(), GetComparesSize(), comparesStrings.size() }) },
       randomEngine{ GetEngineRandomSeed() }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;

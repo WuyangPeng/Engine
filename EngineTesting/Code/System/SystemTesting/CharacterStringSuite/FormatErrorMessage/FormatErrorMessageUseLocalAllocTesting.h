@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 15:52)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 14:02)
 
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_FORMAT_ERROR_MESSAGE_USE_LOCAL_ALLOC_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_FORMAT_ERROR_MESSAGE_USE_LOCAL_ALLOC_TESTING_H
@@ -35,9 +35,9 @@ namespace System
         void FormatErrorMessageTest(WindowError windowError, WindowsHLocal& errorMessage);
         void FormatErrorMessageSuccessTest(WindowError windowError, WindowsHLocal& errorMessage);
         void FormatErrorMessageFailTest(WindowError windowError, WindowsHLocal& errorMessage);
-        void FormatErrorMessageUnknownTest(WindowError windowError, WindowsHLocal& errorMessage);
-        void FormatErrorMessageValidTest(WindowError windowError, WindowsHLocal& errorMessage);
-        void FormatErrorMessageInvalidTest(WindowError windowError, WindowsHLocal& errorMessage);
+
+        void DoFormatErrorMessageUseLocalAllocTest(WindowError flag);
+        void DoFormatComErrorMessageUseLocalAllocTest(WindowError flag);
     };
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 15:32)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/06 16:42)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -13,10 +13,8 @@
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 
-using namespace std::literals;
-
 System::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "系统库"s }
+    : ParentType{ argc, argv, "系统库" }
 {
     InitSuite();
 
@@ -49,7 +47,7 @@ void System::TestingHelper::InitSuite()
 
 void System::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("帮助"s);
+    auto helperSuite = GenerateSuite("帮助");
 
     helperSuite.AddSuite(GetConfigMacroSuite());
     ADD_TEST(helperSuite, UserMacroTesting);
@@ -76,7 +74,8 @@ void System::TestingHelper::AddHelperSuite()
 
 CoreTools::Suite System::TestingHelper::GetConfigMacroSuite()
 {
-    auto configMacroSuite = GenerateSuite("配置宏"s);
+    /// 测试ConfigMacro.h
+    auto configMacroSuite = GenerateSuite("配置宏");
 
     ADD_TEST(configMacroSuite, FixedSizeTesting);
     ADD_TEST(configMacroSuite, CompilerConfigTesting);
@@ -90,23 +89,24 @@ CoreTools::Suite System::TestingHelper::GetConfigMacroSuite()
 
 CoreTools::Suite System::TestingHelper::GetUnicodeUsingSuite()
 {
-    auto unicodeUsingSuite = GenerateSuite("Unicode Using"s);
+    auto unicodeUsingSuite = GenerateSuite("Unicode Using");
 
     ADD_TEST(unicodeUsingSuite, StringMacroTesting);
     ADD_TEST(unicodeUsingSuite, FileStreamMacroTesting);
     ADD_TEST(unicodeUsingSuite, NullCharTesting);
     ADD_TEST(unicodeUsingSuite, StringStreamMacroTesting);
     ADD_TEST(unicodeUsingSuite, ToStringTesting);
+    ADD_TEST(unicodeUsingSuite, CharBufferTesting);
 
     return unicodeUsingSuite;
 }
 
 CoreTools::Suite System::TestingHelper::GetWindowsMacroSuite()
 {
-    auto windowsMacroSuite = GenerateSuite("Windows宏"s);
+    auto windowsMacroSuite = GenerateSuite("Windows宏");
 
     ADD_TEST(windowsMacroSuite, MakeLanguageIdTesting);
-    ADD_TEST(windowsMacroSuite, MakeIntreSourceTesting);
+    ADD_TEST(windowsMacroSuite, MakeIntResourceTesting);
     ADD_TEST(windowsMacroSuite, MakeLanguageCidTesting);
     ADD_TEST(windowsMacroSuite, HResultTesting);
     ADD_TEST(windowsMacroSuite, MakeWordTesting);
@@ -118,7 +118,7 @@ CoreTools::Suite System::TestingHelper::GetWindowsMacroSuite()
 
 CoreTools::Suite System::TestingHelper::GetEnumOperatorSuite()
 {
-    auto enumOperatorSuite = GenerateSuite("枚举运算符"s);
+    auto enumOperatorSuite = GenerateSuite("枚举运算符");
 
     ADD_TEST(enumOperatorSuite, EnumAddableTesting);
     ADD_TEST(enumOperatorSuite, EnumSubtractableTesting);
@@ -136,7 +136,7 @@ CoreTools::Suite System::TestingHelper::GetEnumOperatorSuite()
 
 CoreTools::Suite System::TestingHelper::GetOpenGLMacroSuite()
 {
-    auto openGLMacroSuite = GenerateSuite("OpenGL宏"s);
+    auto openGLMacroSuite = GenerateSuite("OpenGL宏");
 
     ADD_TEST(openGLMacroSuite, WglExtensionsMacroTesting);
     ADD_TEST(openGLMacroSuite, GlxExtensionsMacroTesting);
@@ -148,7 +148,7 @@ CoreTools::Suite System::TestingHelper::GetOpenGLMacroSuite()
 
 CoreTools::Suite System::TestingHelper::GetGlUtilityMacroSuite()
 {
-    auto glUtilityMacroSuite = GenerateSuite("OpenGL工具宏"s);
+    auto glUtilityMacroSuite = GenerateSuite("OpenGL工具宏");
 
     ADD_TEST(glUtilityMacroSuite, GlUtilityMarkTesting);
     ADD_TEST(glUtilityMacroSuite, GlUtilityGetFunctionTesting);
@@ -162,21 +162,22 @@ CoreTools::Suite System::TestingHelper::GetGlUtilityMacroSuite()
 
 CoreTools::Suite System::TestingHelper::GetToolsSuite()
 {
-    auto toolsSuite = GenerateSuite("工具宏"s);
+    auto toolsSuite = GenerateSuite("工具宏");
 
     ADD_TEST(toolsSuite, GetArraySizeTesting);
     ADD_TEST(toolsSuite, UnusedFunctionTesting);
     ADD_TEST(toolsSuite, DebugTesting);
+    ADD_TEST(toolsSuite, OperatorTesting);
 
     return toolsSuite;
 }
 
 void System::TestingHelper::AddSystemOutputSuite()
 {
-    auto systemOutputSuite = GenerateSuite("系统输出"s);
+    auto systemOutputSuite = GenerateSuite("系统输出");
 
-    ADD_TEST(systemOutputSuite, MessageBoxFlagsDataTesting);
     ADD_TEST(systemOutputSuite, LanguageIdDataTesting);
+    ADD_TEST(systemOutputSuite, MessageBoxFlagsDataTesting);
     ADD_TEST(systemOutputSuite, OutputDebugStringTesting);
     systemOutputSuite.AddSuite(GetMessageBoxSelectionSuite());
 
@@ -185,7 +186,7 @@ void System::TestingHelper::AddSystemOutputSuite()
 
 CoreTools::Suite System::TestingHelper::GetMessageBoxSelectionSuite()
 {
-    auto messageBoxSelectionSuite = GenerateSuite("消息框选择"s);
+    auto messageBoxSelectionSuite = GenerateSuite("消息框选择");
 
     ADD_TEST(messageBoxSelectionSuite, MessageBoxSelectionUseYesNoCancelTesting);
     ADD_TEST(messageBoxSelectionSuite, MessageBoxSelectionUseFlagsDataTesting);
@@ -196,7 +197,7 @@ CoreTools::Suite System::TestingHelper::GetMessageBoxSelectionSuite()
 
 void System::TestingHelper::AddDynamicLinkSuite()
 {
-    auto dynamicLinkSuite = GenerateSuite("动态链接库"s);
+    auto dynamicLinkSuite = GenerateSuite("动态链接库");
 
     dynamicLinkSuite.AddSuite(GetLoadLibrarySuite());
     dynamicLinkSuite.AddSuite(GetLibraryToolsSuite());
@@ -210,10 +211,10 @@ void System::TestingHelper::AddDynamicLinkSuite()
 
 CoreTools::Suite System::TestingHelper::GetLoadLibrarySuite()
 {
-    auto loadLibrarySuite = GenerateSuite("加载动态链接库"s);
+    auto loadLibrarySuite = GenerateSuite("加载动态链接库");
 
     ADD_TEST(loadLibrarySuite, LoadLibraryTesting);
-    ADD_TEST(loadLibrarySuite, GetProcAddressTesting);
+    ADD_TEST(loadLibrarySuite, GetProcessAddressTesting);
     ADD_TEST(loadLibrarySuite, FreeLibraryTesting);
 
     return loadLibrarySuite;
@@ -221,7 +222,7 @@ CoreTools::Suite System::TestingHelper::GetLoadLibrarySuite()
 
 CoreTools::Suite System::TestingHelper::GetLibraryToolsSuite()
 {
-    auto libraryToolsSuite = GenerateSuite("动态链接库工具"s);
+    auto libraryToolsSuite = GenerateSuite("动态链接库工具");
 
     ADD_TEST(libraryToolsSuite, GetModuleFileNameTesting);
     ADD_TEST(libraryToolsSuite, GetModuleHandleTesting);
@@ -231,7 +232,7 @@ CoreTools::Suite System::TestingHelper::GetLibraryToolsSuite()
 
 CoreTools::Suite System::TestingHelper::GetLoadResourceToolsSuite()
 {
-    auto loadResourceToolsSuite = GenerateSuite("加载资源工具"s);
+    auto loadResourceToolsSuite = GenerateSuite("加载资源工具");
 
     ADD_TEST(loadResourceToolsSuite, FindResourceTesting);
     ADD_TEST(loadResourceToolsSuite, LoadResourceTesting);
@@ -242,7 +243,7 @@ CoreTools::Suite System::TestingHelper::GetLoadResourceToolsSuite()
 
 CoreTools::Suite System::TestingHelper::GetEnumResourceToolsSuite()
 {
-    auto enumResourceToolsSuite = GenerateSuite("枚举资源工具"s);
+    auto enumResourceToolsSuite = GenerateSuite("枚举资源工具");
 
     ADD_TEST(enumResourceToolsSuite, EnumResourceToolsTesting);
     ADD_TEST(enumResourceToolsSuite, ResourceEnumTesting);
@@ -252,7 +253,7 @@ CoreTools::Suite System::TestingHelper::GetEnumResourceToolsSuite()
 
 void System::TestingHelper::AddCharacterStringSuite()
 {
-    auto characterStringSuite = GenerateSuite("字符串库"s);
+    auto characterStringSuite = GenerateSuite("字符串库");
 
     characterStringSuite.AddSuite(GetFormatErrorMessageSuite());
     characterStringSuite.AddSuite(GetCodePageSuite());
@@ -264,7 +265,7 @@ void System::TestingHelper::AddCharacterStringSuite()
 
 CoreTools::Suite System::TestingHelper::GetFormatErrorMessageSuite()
 {
-    auto formatErrorMessageSuite = GenerateSuite("格式化错误消息"s);
+    auto formatErrorMessageSuite = GenerateSuite("格式化错误消息");
 
     ADD_TEST(formatErrorMessageSuite, FormatErrorMessageUseLocalAllocTesting);
     ADD_TEST(formatErrorMessageSuite, FormatErrorMessageUseBufferTesting);
@@ -284,7 +285,7 @@ CoreTools::Suite System::TestingHelper::GetFormatErrorMessageSuite()
 
 CoreTools::Suite System::TestingHelper::GetCodePageSuite()
 {
-    auto codePageSuite = GenerateSuite("代码页"s);
+    auto codePageSuite = GenerateSuite("代码页");
 
     ADD_TEST(codePageSuite, CodePageValidTesting);
     ADD_TEST(codePageSuite, CodePageTesting);
@@ -295,7 +296,7 @@ CoreTools::Suite System::TestingHelper::GetCodePageSuite()
 
 CoreTools::Suite System::TestingHelper::GetStringConversionSuite()
 {
-    auto stringConversionSuite = GenerateSuite("字符串转换"s);
+    auto stringConversionSuite = GenerateSuite("字符串转换");
 
     ADD_TEST(stringConversionSuite, MultiByteConversionWideCharTesting);
     ADD_TEST(stringConversionSuite, WideCharConversionMultiByteTesting);
@@ -311,14 +312,14 @@ CoreTools::Suite System::TestingHelper::GetStringConversionSuite()
 
 CoreTools::Suite System::TestingHelper::GetFormatStringSuite()
 {
-    auto formatStringSuite = GenerateSuite("格式化消息"s);
+    auto formatStringSuite = GenerateSuite("格式化消息");
 
     ADD_TEST(formatStringSuite, VsnPrintFTesting);
-    ADD_TEST(formatStringSuite, StrCatTesting);
-    ADD_TEST(formatStringSuite, StrLenTesting);
-    ADD_TEST(formatStringSuite, StrCpyTesting);
-    ADD_TEST(formatStringSuite, StrTokTesting);
-    ADD_TEST(formatStringSuite, StrStrTesting);
+    ADD_TEST(formatStringSuite, StringCatTesting);
+    ADD_TEST(formatStringSuite, StringLengthTesting);
+    ADD_TEST(formatStringSuite, StringCopyTesting);
+    ADD_TEST(formatStringSuite, StringTokenTesting);
+    ADD_TEST(formatStringSuite, StringStringTesting);
     ADD_TEST(formatStringSuite, SnPrintFTesting);
 
     return formatStringSuite;
@@ -326,7 +327,7 @@ CoreTools::Suite System::TestingHelper::GetFormatStringSuite()
 
 void System::TestingHelper::AddConsoleSuite()
 {
-    auto consoleSuite = GenerateSuite("控制台"s);
+    auto consoleSuite = GenerateSuite("控制台");
 
     ADD_TEST(consoleSuite, ConsoleHandleTesting);
     consoleSuite.AddSuite(GetConsoleColourSuite());
@@ -341,7 +342,7 @@ void System::TestingHelper::AddConsoleSuite()
 
 CoreTools::Suite System::TestingHelper::GetConsoleColourSuite()
 {
-    auto consoleColourSuite = GenerateSuite("控制台颜色"s);
+    auto consoleColourSuite = GenerateSuite("控制台颜色");
 
     ADD_TEST(consoleColourSuite, TextColourTesting);
     ADD_TEST(consoleColourSuite, BackgroundColourTesting);
@@ -356,7 +357,7 @@ CoreTools::Suite System::TestingHelper::GetConsoleColourSuite()
 
 CoreTools::Suite System::TestingHelper::GetConsoleFontSuite()
 {
-    auto consoleFontSuite = GenerateSuite("控制台字体"s);
+    auto consoleFontSuite = GenerateSuite("控制台字体");
 
     ADD_TEST(consoleFontSuite, ConsoleFontSizeTesting);
     ADD_TEST(consoleFontSuite, CurrentConsoleFontTesting);
@@ -367,7 +368,7 @@ CoreTools::Suite System::TestingHelper::GetConsoleFontSuite()
 
 CoreTools::Suite System::TestingHelper::GetConsoleModeSuite()
 {
-    auto consoleModeSuite = GenerateSuite("控制台模式"s);
+    auto consoleModeSuite = GenerateSuite("控制台模式");
 
     ADD_TEST(consoleModeSuite, ConsoleInputModeTesting);
     ADD_TEST(consoleModeSuite, ConsoleOutputModeTesting);
@@ -377,7 +378,7 @@ CoreTools::Suite System::TestingHelper::GetConsoleModeSuite()
 
 CoreTools::Suite System::TestingHelper::GetConsoleScreenBufferSuite()
 {
-    auto consoleScreenBufferSuite = GenerateSuite("控制台缓冲区"s);
+    auto consoleScreenBufferSuite = GenerateSuite("控制台缓冲区");
 
     ADD_TEST(consoleScreenBufferSuite, CreateSystemConsoleScreenBufferTesting);
     ADD_TEST(consoleScreenBufferSuite, ConsoleScreenBufferInfoTesting);
@@ -389,7 +390,7 @@ CoreTools::Suite System::TestingHelper::GetConsoleScreenBufferSuite()
 
 void System::TestingHelper::AddMemoryToolsSuite()
 {
-    auto memoryToolsSuite = GenerateSuite("内存工具库"s);
+    auto memoryToolsSuite = GenerateSuite("内存工具库");
 
     memoryToolsSuite.AddSuite(GetHeapToolsSuite());
     memoryToolsSuite.AddSuite(GetVirtualToolsSuite());
@@ -402,7 +403,7 @@ void System::TestingHelper::AddMemoryToolsSuite()
 
 CoreTools::Suite System::TestingHelper::GetHeapToolsSuite()
 {
-    auto heapToolsSuite = GenerateSuite("堆工具库"s);
+    auto heapToolsSuite = GenerateSuite("堆工具库");
 
     ADD_TEST(heapToolsSuite, CreateHeapTesting);
     ADD_TEST(heapToolsSuite, AllocateHeapTesting);
@@ -416,7 +417,7 @@ CoreTools::Suite System::TestingHelper::GetHeapToolsSuite()
 
 CoreTools::Suite System::TestingHelper::GetVirtualToolsSuite()
 {
-    auto virtualToolsSuite = GenerateSuite("虚拟内存工具库"s);
+    auto virtualToolsSuite = GenerateSuite("虚拟内存工具库");
 
     ADD_TEST(virtualToolsSuite, AllocateVirtualOneStepTesting);
     ADD_TEST(virtualToolsSuite, AllocateVirtualSeparationTesting);
@@ -428,7 +429,7 @@ CoreTools::Suite System::TestingHelper::GetVirtualToolsSuite()
 
 CoreTools::Suite System::TestingHelper::GetViewOfFileSuite()
 {
-    auto viewOfFileSuite = GenerateSuite("文件映射库"s);
+    auto viewOfFileSuite = GenerateSuite("文件映射库");
 
     ADD_TEST(viewOfFileSuite, CreateFileMappingTesting);
     ADD_TEST(viewOfFileSuite, OpenFileMappingTesting);
@@ -439,7 +440,7 @@ CoreTools::Suite System::TestingHelper::GetViewOfFileSuite()
 
 CoreTools::Suite System::TestingHelper::GetMemoryHelperSuite()
 {
-    auto memoryHelperSuite = GenerateSuite("内存帮助库"s);
+    auto memoryHelperSuite = GenerateSuite("内存帮助库");
 
     ADD_TEST(memoryHelperSuite, MemorySetTesting);
     ADD_TEST(memoryHelperSuite, MemoryCopyTesting);
@@ -452,7 +453,7 @@ CoreTools::Suite System::TestingHelper::GetMemoryHelperSuite()
 
 CoreTools::Suite System::TestingHelper::GetLocalToolsSuite()
 {
-    auto localToolsSuite = GenerateSuite("局部内存库"s);
+    auto localToolsSuite = GenerateSuite("局部内存库");
 
     ADD_TEST(localToolsSuite, LocalMemoryAllocTesting);
     ADD_TEST(localToolsSuite, LocalMemorySizeTesting);
@@ -462,7 +463,7 @@ CoreTools::Suite System::TestingHelper::GetLocalToolsSuite()
 
 void System::TestingHelper::AddThreadingSuite()
 {
-    auto threadingSuite = GenerateSuite("线程库"s);
+    auto threadingSuite = GenerateSuite("线程库");
 
     threadingSuite.AddSuite(GetCriticalSectionSuite());
     threadingSuite.AddSuite(GetSemaphoreSuite());
@@ -485,7 +486,7 @@ void System::TestingHelper::AddThreadingSuite()
 
 CoreTools::Suite System::TestingHelper::GetCriticalSectionSuite()
 {
-    auto criticalSectionSuite = GenerateSuite("临界区"s);
+    auto criticalSectionSuite = GenerateSuite("临界区");
 
     ADD_TEST(criticalSectionSuite, CriticalSectionTesting);
     ADD_TEST(criticalSectionSuite, CriticalSectionThreadTesting);
@@ -497,7 +498,7 @@ CoreTools::Suite System::TestingHelper::GetCriticalSectionSuite()
 
 CoreTools::Suite System::TestingHelper::GetSemaphoreSuite()
 {
-    auto semaphoreSuite = GenerateSuite("信号量"s);
+    auto semaphoreSuite = GenerateSuite("信号量");
 
     ADD_TEST(semaphoreSuite, CreateSemaphoreThreadTesting);
     ADD_TEST(semaphoreSuite, CreateSemaphoreThreadUseNameTesting);
@@ -511,7 +512,7 @@ CoreTools::Suite System::TestingHelper::GetSemaphoreSuite()
 
 CoreTools::Suite System::TestingHelper::GetEventSuite()
 {
-    auto eventSuite = GenerateSuite("事件对象"s);
+    auto eventSuite = GenerateSuite("事件对象");
 
     ADD_TEST(eventSuite, CreateEventTesting);
     ADD_TEST(eventSuite, CreateEventUseNameTesting);
@@ -527,7 +528,7 @@ CoreTools::Suite System::TestingHelper::GetEventSuite()
 
 CoreTools::Suite System::TestingHelper::GetMutexSuite()
 {
-    auto mutexSuite = GenerateSuite("互斥锁"s);
+    auto mutexSuite = GenerateSuite("互斥锁");
 
     ADD_TEST(mutexSuite, CreateDefaultMutexTesting);
     ADD_TEST(mutexSuite, CreateMutexTesting);
@@ -544,7 +545,7 @@ CoreTools::Suite System::TestingHelper::GetMutexSuite()
 
 CoreTools::Suite System::TestingHelper::GetSlimReaderWriterSuite()
 {
-    auto slimReaderWriterSuite = GenerateSuite("读写锁"s);
+    auto slimReaderWriterSuite = GenerateSuite("读写锁");
 
     ADD_TEST(slimReaderWriterSuite, SlimReaderWriterInitializeTesting);
     ADD_TEST(slimReaderWriterSuite, SlimReaderWriterReaderTesting);
@@ -555,7 +556,7 @@ CoreTools::Suite System::TestingHelper::GetSlimReaderWriterSuite()
 
 CoreTools::Suite System::TestingHelper::GetConditionVariableSuite()
 {
-    auto conditionVariableSuite = GenerateSuite("条件变量"s);
+    auto conditionVariableSuite = GenerateSuite("条件变量");
 
     ADD_TEST(conditionVariableSuite, ConditionVariableSlimReaderWriterLockTesting);
     ADD_TEST(conditionVariableSuite, ConditionVariableCriticalSectionTesting);
@@ -565,7 +566,7 @@ CoreTools::Suite System::TestingHelper::GetConditionVariableSuite()
 
 CoreTools::Suite System::TestingHelper::GetInitOnceSuite()
 {
-    auto initOnceSuite = GenerateSuite("一次对象"s);
+    auto initOnceSuite = GenerateSuite("一次对象");
 
     ADD_TEST(initOnceSuite, InitOnceSynchronousTesting);
     ADD_TEST(initOnceSuite, InitOnceAsynchronousTesting);
@@ -575,7 +576,7 @@ CoreTools::Suite System::TestingHelper::GetInitOnceSuite()
 
 CoreTools::Suite System::TestingHelper::GetWaitableTimerSuite()
 {
-    auto waitableTimerSuite = GenerateSuite("定时器"s);
+    auto waitableTimerSuite = GenerateSuite("定时器");
 
     ADD_TEST(waitableTimerSuite, CreateWaitableTimerManualTesting);
     ADD_TEST(waitableTimerSuite, CreateWaitableTimerSynchronizationTesting);
@@ -593,7 +594,7 @@ CoreTools::Suite System::TestingHelper::GetWaitableTimerSuite()
 
 CoreTools::Suite System::TestingHelper::GetSyncToolsSuite()
 {
-    auto syncToolsSuite = GenerateSuite("同步工具"s);
+    auto syncToolsSuite = GenerateSuite("同步工具");
 
     ADD_TEST(syncToolsSuite, SleepTesting);
     ADD_TEST(syncToolsSuite, SignalObjectAndWaitTesting);
@@ -603,7 +604,7 @@ CoreTools::Suite System::TestingHelper::GetSyncToolsSuite()
 
 CoreTools::Suite System::TestingHelper::GetInterlockedSuite()
 {
-    auto interlockedSuite = GenerateSuite("原子操作"s);
+    auto interlockedSuite = GenerateSuite("原子操作");
 
     ADD_TEST(interlockedSuite, InterlockedTesting);
     ADD_TEST(interlockedSuite, InterlockedSubtractTesting);
@@ -614,7 +615,7 @@ CoreTools::Suite System::TestingHelper::GetInterlockedSuite()
 
 CoreTools::Suite System::TestingHelper::GetThreadSuite()
 {
-    auto threadSuite = GenerateSuite("线程"s);
+    auto threadSuite = GenerateSuite("线程");
 
     ADD_TEST(threadSuite, CreateDefaultThreadTesting);
     ADD_TEST(threadSuite, CreateSuspendedThreadTesting);
@@ -629,7 +630,7 @@ CoreTools::Suite System::TestingHelper::GetThreadSuite()
 
 CoreTools::Suite System::TestingHelper::GetThreadToolsSuite()
 {
-    auto threadToolsSuite = GenerateSuite("线程工具"s);
+    auto threadToolsSuite = GenerateSuite("线程工具");
 
     ADD_TEST(threadToolsSuite, OpenThreadTesting);
     ADD_TEST(threadToolsSuite, PriorityBoostTesting);
@@ -641,7 +642,7 @@ CoreTools::Suite System::TestingHelper::GetThreadToolsSuite()
 
 CoreTools::Suite System::TestingHelper::GetProcessSuite()
 {
-    auto processSuite = GenerateSuite("进程"s);
+    auto processSuite = GenerateSuite("进程");
 
     ADD_TEST(processSuite, CreateDefaultProcessTesting);
     ADD_TEST(processSuite, CreateProcessTesting);
@@ -655,7 +656,7 @@ CoreTools::Suite System::TestingHelper::GetProcessSuite()
 
 CoreTools::Suite System::TestingHelper::GetProcessToolsSuite()
 {
-    auto processToolsSuite = GenerateSuite("进程工具"s);
+    auto processToolsSuite = GenerateSuite("进程工具");
 
     ADD_TEST(processToolsSuite, ProcessTokenTesting);
 
@@ -664,7 +665,7 @@ CoreTools::Suite System::TestingHelper::GetProcessToolsSuite()
 
 void System::TestingHelper::AddTimeSuite()
 {
-    auto timeSuite = GenerateSuite("时间"s);
+    auto timeSuite = GenerateSuite("时间");
 
     ADD_TEST(timeSuite, CurrentDeltaTimeTesting);
     ADD_TEST(timeSuite, DeltaTimeValueDataTesting);
@@ -676,7 +677,7 @@ void System::TestingHelper::AddTimeSuite()
 
 void System::TestingHelper::AddFileManagerSuite()
 {
-    auto fileManagerSuite = GenerateSuite("文件管理库"s);
+    auto fileManagerSuite = GenerateSuite("文件管理库");
 
     fileManagerSuite.AddSuite(GetCFileSuite());
     fileManagerSuite.AddSuite(GetFileSuite());
@@ -689,7 +690,7 @@ void System::TestingHelper::AddFileManagerSuite()
 
 CoreTools::Suite System::TestingHelper::GetCFileSuite()
 {
-    auto cFileSuite = GenerateSuite("C函数文件"s);
+    auto cFileSuite = GenerateSuite("C函数文件");
 
     ADD_TEST(cFileSuite, CFileOpenTesting);
     ADD_TEST(cFileSuite, CFileWriteReadTesting);
@@ -702,7 +703,7 @@ CoreTools::Suite System::TestingHelper::GetCFileSuite()
 
 CoreTools::Suite System::TestingHelper::GetFileSuite()
 {
-    auto fileSuite = GenerateSuite("文件"s);
+    auto fileSuite = GenerateSuite("文件");
 
     ADD_TEST(fileSuite, CreateExistingFileTesting);
     ADD_TEST(fileSuite, CreateFileWithDefaultAttributesTesting);
@@ -728,7 +729,7 @@ CoreTools::Suite System::TestingHelper::GetFileSuite()
 
 CoreTools::Suite System::TestingHelper::GetFileToolsSuite()
 {
-    auto fileToolsSuite = GenerateSuite("文件工具"s);
+    auto fileToolsSuite = GenerateSuite("文件工具");
 
     ADD_TEST(fileToolsSuite, CreateDirectoryTesting);
     ADD_TEST(fileToolsSuite, DiskFreeTesting);
@@ -738,7 +739,7 @@ CoreTools::Suite System::TestingHelper::GetFileToolsSuite()
 
 CoreTools::Suite System::TestingHelper::GetFileTimeSuite()
 {
-    auto fileTimeSuite = GenerateSuite("文件时间"s);
+    auto fileTimeSuite = GenerateSuite("文件时间");
 
     ADD_TEST(fileTimeSuite, FileTimeCompareTesting);
     ADD_TEST(fileTimeSuite, FileTimeConvertTesting);
@@ -749,7 +750,7 @@ CoreTools::Suite System::TestingHelper::GetFileTimeSuite()
 
 void System::TestingHelper::AddSecuritySuite()
 {
-    auto securitySuite = GenerateSuite("安全性"s);
+    auto securitySuite = GenerateSuite("安全性");
 
     securitySuite.AddSuite(GetLookupPrivilegeSuite());
     securitySuite.AddSuite(GetCreateSecuritySuite());
@@ -766,7 +767,7 @@ void System::TestingHelper::AddSecuritySuite()
 
 CoreTools::Suite System::TestingHelper::GetLookupPrivilegeSuite()
 {
-    auto lookupPrivilegeSuite = GenerateSuite("查找权限"s);
+    auto lookupPrivilegeSuite = GenerateSuite("查找权限");
 
     ADD_TEST(lookupPrivilegeSuite, GetLookupPrivilegeDisplayNameTesting);
     ADD_TEST(lookupPrivilegeSuite, GetLookupPrivilegeNameTesting);
@@ -777,7 +778,7 @@ CoreTools::Suite System::TestingHelper::GetLookupPrivilegeSuite()
 
 CoreTools::Suite System::TestingHelper::GetCreateSecuritySuite()
 {
-    auto createSecuritySuite = GenerateSuite("创建安全"s);
+    auto createSecuritySuite = GenerateSuite("创建安全");
 
     ADD_TEST(createSecuritySuite, FileSecurityTesting);
     ADD_TEST(createSecuritySuite, KernelObjectSecurityTesting);
@@ -794,7 +795,7 @@ CoreTools::Suite System::TestingHelper::GetCreateSecuritySuite()
 
 CoreTools::Suite System::TestingHelper::GetSecuritySidSuite()
 {
-    auto securitySidSuite = GenerateSuite("安全系统识别码"s);
+    auto securitySidSuite = GenerateSuite("安全系统识别码");
 
     ADD_TEST(securitySidSuite, InitializeSecurityIdentifierTesting);
     ADD_TEST(securitySidSuite, AllocateAndInitializeSecurityIdentifierTesting);
@@ -807,7 +808,7 @@ CoreTools::Suite System::TestingHelper::GetSecuritySidSuite()
 
 CoreTools::Suite System::TestingHelper::GetSecurityAclSuite()
 {
-    auto securityAclSuite = GenerateSuite("访问控制列表"s);
+    auto securityAclSuite = GenerateSuite("访问控制列表");
 
     ADD_TEST(securityAclSuite, InitializeAclTesting);
     ADD_TEST(securityAclSuite, AclInformationTesting);
@@ -817,7 +818,7 @@ CoreTools::Suite System::TestingHelper::GetSecurityAclSuite()
 
 CoreTools::Suite System::TestingHelper::GetSecurityDescriptorSuite()
 {
-    auto securityDescriptorSuite = GenerateSuite("安全描述符"s);
+    auto securityDescriptorSuite = GenerateSuite("安全描述符");
 
     ADD_TEST(securityDescriptorSuite, UserObjectSecurityTesting);
     ADD_TEST(securityDescriptorSuite, InitializeSecurityDescriptorTesting);
@@ -833,7 +834,7 @@ CoreTools::Suite System::TestingHelper::GetSecurityDescriptorSuite()
 
 CoreTools::Suite System::TestingHelper::GetSecurityAceSuite()
 {
-    auto securityAceSuite = GenerateSuite("访问控制项"s);
+    auto securityAceSuite = GenerateSuite("访问控制项");
 
     ADD_TEST(securityAceSuite, AddAccessControlEntriesTesting);
     ADD_TEST(securityAceSuite, FindFirstFreeAccessControlEntriesTesting);
@@ -844,7 +845,7 @@ CoreTools::Suite System::TestingHelper::GetSecurityAceSuite()
 
 CoreTools::Suite System::TestingHelper::GetAddAccessSuite()
 {
-    auto addAccessSuite = GenerateSuite("增加访问"s);
+    auto addAccessSuite = GenerateSuite("增加访问");
 
     ADD_TEST(addAccessSuite, AddAccessAllowedAceTesting);
     ADD_TEST(addAccessSuite, AddAccessAllowedAceUseAceFlagsTesting);
@@ -859,7 +860,7 @@ CoreTools::Suite System::TestingHelper::GetAddAccessSuite()
 
 CoreTools::Suite System::TestingHelper::GetSecurityBaseSuite()
 {
-    auto securityBaseSuite = GenerateSuite("安全基础"s);
+    auto securityBaseSuite = GenerateSuite("安全基础");
 
     ADD_TEST(securityBaseSuite, IsSystemTokenElevatedTesting);
     ADD_TEST(securityBaseSuite, TokenInformationTesting);
@@ -879,7 +880,7 @@ CoreTools::Suite System::TestingHelper::GetSecurityBaseSuite()
 
 CoreTools::Suite System::TestingHelper::GetAccessCheckSuite()
 {
-    auto accessCheckSuite = GenerateSuite("访问检查"s);
+    auto accessCheckSuite = GenerateSuite("访问检查");
 
     ADD_TEST(accessCheckSuite, MapGenericMaskTesting);
     ADD_TEST(accessCheckSuite, EnlistmentMapGenericMaskTesting);
@@ -896,7 +897,7 @@ CoreTools::Suite System::TestingHelper::GetAccessCheckSuite()
 
 void System::TestingHelper::AddNetworkSuite()
 {
-    auto networkSuite = GenerateSuite("网络"s);
+    auto networkSuite = GenerateSuite("网络");
 
     networkSuite.AddSuite(GetSocketPrototypesSuite());
     networkSuite.AddSuite(GetDatabasePrototypesSuite());
@@ -908,7 +909,7 @@ void System::TestingHelper::AddNetworkSuite()
 
 CoreTools::Suite System::TestingHelper::GetSocketPrototypesSuite()
 {
-    auto socketPrototypesSuite = GenerateSuite("套接字原型"s);
+    auto socketPrototypesSuite = GenerateSuite("套接字原型");
 
     ADD_TEST(socketPrototypesSuite, GetSocketTesting);
     ADD_TEST(socketPrototypesSuite, HostNetConversionTesting);
@@ -927,10 +928,10 @@ CoreTools::Suite System::TestingHelper::GetSocketPrototypesSuite()
 
 CoreTools::Suite System::TestingHelper::GetDatabasePrototypesSuite()
 {
-    auto databasePrototypesSuite = GenerateSuite("数据原型"s);
+    auto databasePrototypesSuite = GenerateSuite("数据原型");
 
     ADD_TEST(databasePrototypesSuite, WinSockHostTesting);
-    ADD_TEST(databasePrototypesSuite, WinSockServEntTesting);
+    ADD_TEST(databasePrototypesSuite, WinSockServerEntTesting);
     ADD_TEST(databasePrototypesSuite, WinSockProtoEntTesting);
 
     return databasePrototypesSuite;
@@ -938,7 +939,7 @@ CoreTools::Suite System::TestingHelper::GetDatabasePrototypesSuite()
 
 CoreTools::Suite System::TestingHelper::GetWindowsSockExSuite()
 {
-    auto windowsSockExSuite = GenerateSuite("Windows套接字扩展"s);
+    auto windowsSockExSuite = GenerateSuite("Windows套接字扩展");
 
     ADD_TEST(windowsSockExSuite, GetWinSocketTesting);
     ADD_TEST(windowsSockExSuite, WinSocketAcceptTesting);
@@ -953,7 +954,7 @@ CoreTools::Suite System::TestingHelper::GetWindowsSockExSuite()
 
 void System::TestingHelper::AddOpenGLSuite()
 {
-    auto openGLSuite = GenerateSuite("OpenGL"s);
+    auto openGLSuite = GenerateSuite("OpenGL");
 
     ADD_TEST(openGLSuite, OpenGLUtilityTesting);
     ADD_TEST(openGLSuite, OpenGLGlutTesting);
@@ -972,7 +973,7 @@ void System::TestingHelper::AddOpenGLSuite()
 
 void System::TestingHelper::AddDirectXSuite()
 {
-    auto directXSuite = GenerateSuite("DirectX"s);
+    auto directXSuite = GenerateSuite("DirectX");
 
     ADD_TEST(directXSuite, DirectXD3D12Testing);
 
@@ -981,7 +982,7 @@ void System::TestingHelper::AddDirectXSuite()
 
 void System::TestingHelper::AddVulkanSuite()
 {
-    auto vulkanSuite = GenerateSuite("vulkan"s);
+    auto vulkanSuite = GenerateSuite("vulkan");
 
     ADD_TEST(vulkanSuite, VulkanTesting);
 
@@ -990,7 +991,7 @@ void System::TestingHelper::AddVulkanSuite()
 
 void System::TestingHelper::AddWindowsSuite()
 {
-    auto windowsSuite = GenerateSuite("Windows"s);
+    auto windowsSuite = GenerateSuite("Windows");
 
     ADD_TEST(windowsSuite, LastPlatformErrorTesting);
     AddSuite(GetWindowsCreateSuite());
@@ -1007,7 +1008,7 @@ void System::TestingHelper::AddWindowsSuite()
 
 CoreTools::Suite System::TestingHelper::GetWindowsCreateSuite()
 {
-    auto windowsCreateSuite = GenerateSuite("Windows创建"s);
+    auto windowsCreateSuite = GenerateSuite("Windows创建");
 
     ADD_TEST(windowsCreateSuite, WindowsCreateLParamTesting);
     ADD_TEST(windowsCreateSuite, WindowsCreateWParamTesting);
@@ -1017,7 +1018,7 @@ CoreTools::Suite System::TestingHelper::GetWindowsCreateSuite()
 
 CoreTools::Suite System::TestingHelper::GetEngineeringSuite()
 {
-    auto engineeringSuite = GenerateSuite("Windows引擎"s);
+    auto engineeringSuite = GenerateSuite("Windows引擎");
 
     ADD_TEST(engineeringSuite, EngineeringNumDigitsTesting);
     ADD_TEST(engineeringSuite, EngineeringOffsetTesting);
@@ -1030,7 +1031,7 @@ CoreTools::Suite System::TestingHelper::GetEngineeringSuite()
 
 CoreTools::Suite System::TestingHelper::GetWindowsSystemSuite()
 {
-    auto windowsSystemSuite = GenerateSuite("Windows系统"s);
+    auto windowsSystemSuite = GenerateSuite("Windows系统");
 
     ADD_TEST(windowsSystemSuite, GetSystemInfoTesting);
     ADD_TEST(windowsSystemSuite, DebugBreakTesting);
@@ -1046,7 +1047,7 @@ CoreTools::Suite System::TestingHelper::GetWindowsSystemSuite()
 
 void System::TestingHelper::AddLinuxSuite()
 {
-    auto linuxSuite = GenerateSuite("Linux"s);
+    auto linuxSuite = GenerateSuite("Linux");
 
     ADD_TEST(linuxSuite, LinuxNativeWindowTesting);
 
@@ -1055,7 +1056,7 @@ void System::TestingHelper::AddLinuxSuite()
 
 void System::TestingHelper::AddMacintoshSuite()
 {
-    auto macintoshSuite = GenerateSuite("Macintosh"s);
+    auto macintoshSuite = GenerateSuite("Macintosh");
 
     ADD_TEST(macintoshSuite, MacintoshNativeWindowTesting);
 
@@ -1064,7 +1065,7 @@ void System::TestingHelper::AddMacintoshSuite()
 
 void System::TestingHelper::AddAndroidSuite()
 {
-    auto androidSuite = GenerateSuite("安卓"s);
+    auto androidSuite = GenerateSuite("安卓");
 
     ADD_TEST(androidSuite, AndroidInputEventFacadeTesting);
     ADD_TEST(androidSuite, AndroidInputMotionEventFacadeTesting);

@@ -66,7 +66,7 @@ namespace Rendering
                      int numZGroups) override;
 
     private:
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
 
     private:
         NODISCARD bool EnableShaders(RendererObjectBridge& rendererObjectBridge, VisualEffect& effect, OpenGLUInt program);

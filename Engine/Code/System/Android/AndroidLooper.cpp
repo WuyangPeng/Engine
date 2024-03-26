@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:29)
+/// 版本：1.0.0.7 (2024/03/05 17:20)
 
 #include "System/SystemExport.h"
 
@@ -128,15 +128,15 @@ void System::AndroidLooperWake(AndroidLooper* looper) noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-int32_t System::AndroidLooperAddFd(AndroidLooper* looper, int32_t fd, LooperId ident, AndroidLooperEvent events, AndroidLooperCallbackFunction callback, void* data) noexcept
+int32_t System::AndroidLooperAddFileDescriptor(AndroidLooper* looper, int32_t fileDescriptor, LooperId ident, AndroidLooperEvent events, AndroidLooperCallbackFunction callback, void* data) noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
-    return ALooper_addFd(looper, fd, ident, events, callback, data);
+    return ALooper_addFd(looper, fileDescriptor, ident, events, callback, data);
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    UnusedFunction(looper, fd, ident, events, callback, data);
+    UnusedFunction(looper, fileDescriptor, ident, events, callback, data);
 
     return 0;
 

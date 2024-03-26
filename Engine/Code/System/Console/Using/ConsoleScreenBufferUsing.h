@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:20)
+/// 版本：1.0.0.7 (2024/03/05 16:56)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_SCREEN_BUFFER_USING_H
 #define SYSTEM_CONSOLE_CONSOLE_SCREEN_BUFFER_USING_H
@@ -17,15 +17,12 @@ namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    using ConsoleColorRef = COLORREF;
     using ConsoleScreenBufferInfo = CONSOLE_SCREEN_BUFFER_INFO;
     using ConsoleScreenBufferInfoPtr = PCONSOLE_SCREEN_BUFFER_INFO;
     using ConsoleScreenBufferInfoEx = CONSOLE_SCREEN_BUFFER_INFOEX;
     using ConsoleScreenBufferInfoExPtr = PCONSOLE_SCREEN_BUFFER_INFOEX;
 
 #else  // !SYSTEM_PLATFORM_WIN32
-
-    using ConsoleColorRef = uint32_t;
 
     struct ConsoleSmallRect
     {

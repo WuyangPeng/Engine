@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 16:20)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 14:38)
 
 #include "WideCharConversionUtf8Testing.h"
 #include "System/CharacterString/StringConversion.h"
@@ -16,7 +16,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::WideCharConversionUtf8Testing::WideCharConversionUtf8Testing(const OStreamShared& stream)
-    : ParentType{ stream, 31, CoreTools::CFileManagerHelper::LoadFromFile("Resource/StringConversionTesting/WideCharConversionUtf8.txt") },  // 英文按1个长度算，中文按3个长度算，包括终止符。
+    : ParentType{ stream, 31, CoreTools::CFileManagerHelper::LoadFromFile("Resource/StringConversionTesting/WideCharConversionUtf8.txt") },  /// 英文按1个长度算，中文按3个长度算，包括终止符。
       wideCharInitial{ L"WideChar字符串转换为Utf8" },
       wideCharInitialLength{ boost::numeric_cast<int>(wideCharInitial.size() + 1) }
 {

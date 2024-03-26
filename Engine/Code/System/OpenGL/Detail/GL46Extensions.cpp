@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:21)
+/// 版本：1.0.0.7 (2024/03/02 23:10)
 
 #include "System/SystemExport.h"
 
@@ -15,7 +15,7 @@
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/OpenGL/OpenGLUtility.h"
 
-// OpenGL 4.6
+/// OpenGL 4.6
 namespace System
 {
     auto existsOpenGL46 = ExistsOpenGLExtensions::Unknown;
@@ -33,7 +33,7 @@ System::ExistsOpenGLExtensions System::IsExistsOpenGL46() noexcept
 
 void System::InitOpenGL46() noexcept
 {
-    if (OpenGLSystemVersion::Version45 <= System::GetOpenGLVersion())
+    if (OpenGLSystemVersion::Version45 <= GetOpenGLVersion())
     {
         SYSTEM_GET_FUNCTION(glSpecializeShader);
         SYSTEM_GET_FUNCTION(glMultiDrawArraysIndirectCount);

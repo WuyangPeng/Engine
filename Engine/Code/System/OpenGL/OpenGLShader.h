@@ -19,24 +19,24 @@
 
 namespace System
 {
-    NODISCARD OpenGLUInt SYSTEM_DEFAULT_DECLARE CreateGLShader(ShaderType type) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE IsGLShader(OpenGLUInt shader) noexcept;
-    void SYSTEM_DEFAULT_DECLARE DeleteGLShader(OpenGLUInt shader) noexcept;
+    NODISCARD OpenGLUnsignedInt SYSTEM_DEFAULT_DECLARE CreateGLShader(ShaderType type) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE IsGLShader(OpenGLUnsignedInt shader) noexcept;
+    void SYSTEM_DEFAULT_DECLARE DeleteGLShader(OpenGLUnsignedInt shader) noexcept;
 
-    void SYSTEM_DEFAULT_DECLARE AttachGLShader(OpenGLUInt program, OpenGLUInt shader) noexcept;
-    void SYSTEM_DEFAULT_DECLARE GetAttachedGLShaders(OpenGLUInt program, OpenGLSize maxCount, OpenGLSize* count, OpenGLUInt* shaders) noexcept;
-    void SYSTEM_DEFAULT_DECLARE DetachGLShader(OpenGLUInt program, OpenGLUInt shader) noexcept;
+    void SYSTEM_DEFAULT_DECLARE AttachGLShader(OpenGLUnsignedInt program, OpenGLUnsignedInt shader) noexcept;
+    void SYSTEM_DEFAULT_DECLARE GetAttachedGLShaders(OpenGLUnsignedInt program, OpenGLSize maxCount, OpenGLSize* count, OpenGLUnsignedInt* shaders) noexcept;
+    void SYSTEM_DEFAULT_DECLARE DetachGLShader(OpenGLUnsignedInt program, OpenGLUnsignedInt shader) noexcept;
 
-    void SYSTEM_DEFAULT_DECLARE CompileGLShader(OpenGLUInt shader) noexcept;
-    void SYSTEM_DEFAULT_DECLARE SetGLShaderSource(OpenGLUInt shader, OpenGLSize count, const OpenGLChar* const* string, const OpenGLInt* length) noexcept;
-    void SYSTEM_DEFAULT_DECLARE GetGLShaderSource(OpenGLUInt shader, OpenGLSize bufSize, OpenGLSize* length, OpenGLChar* source) noexcept;
+    void SYSTEM_DEFAULT_DECLARE CompileGLShader(OpenGLUnsignedInt shader) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLShaderSource(OpenGLUnsignedInt shader, OpenGLSize count, const OpenGLChar* const* string, const OpenGLInt* length) noexcept;
+    void SYSTEM_DEFAULT_DECLARE GetGLShaderSource(OpenGLUnsignedInt shader, OpenGLSize bufSize, OpenGLSize* length, OpenGLChar* source) noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetGLShader(OpenGLUInt shader, ShaderStatus pName) noexcept;
-    NODISCARD int SYSTEM_DEFAULT_DECLARE GetGLShader(OpenGLUInt shader, ShaderAttributes pName) noexcept;
-    NODISCARD std::string SYSTEM_DEFAULT_DECLARE GetGLShaderInfoLog(OpenGLUInt shader);
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetGLShader(OpenGLUnsignedInt shader, ShaderStatus pName) noexcept;
+    NODISCARD int SYSTEM_DEFAULT_DECLARE GetGLShader(OpenGLUnsignedInt shader, ShaderAttributes pName) noexcept;
+    NODISCARD std::string SYSTEM_DEFAULT_DECLARE GetGLShaderInfoLog(OpenGLUnsignedInt shader);
 
-    NODISCARD OpenGLInt SYSTEM_DEFAULT_DECLARE GetGLUniformLocation(OpenGLUInt program, const OpenGLChar* name) noexcept;
-    SYSTEM_DEFAULT_DECLARE void SetGLShaderStorageBlockBinding(OpenGLUInt program, OpenGLUInt storageBlockIndex, OpenGLUInt storageBlockBinding) noexcept;
+    NODISCARD OpenGLInt SYSTEM_DEFAULT_DECLARE GetGLUniformLocation(OpenGLUnsignedInt program, const OpenGLChar* name) noexcept;
+    SYSTEM_DEFAULT_DECLARE void SetGLShaderStorageBlockBinding(OpenGLUnsignedInt program, OpenGLUnsignedInt storageBlockIndex, OpenGLUnsignedInt storageBlockBinding) noexcept;
 }
 
 #endif  // SYSTEM_OPENGL_OPENGL_SHADER_H

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:27)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/16 17:28)
 
 #include "OpenGLBindTexturesTesting.h"
 #include "System/OpenGL/OpenGLTextures.h"
@@ -28,23 +28,28 @@ void System::OpenGLBindTexturesTesting::DoRunUnitTest()
 
 void System::OpenGLBindTexturesTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLBindTexturesTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(BindTexturesTest);
 }
 
-void System::OpenGLBindTexturesTesting::OpenGLBindTexturesTest()
+void System::OpenGLBindTexturesTesting::BindTexturesTest()
 {
-    for (auto textureTarget : *this)
+    for (const auto textureTarget : *this)
     {
-        const auto texture = GetGLGenTextures();
-        ASSERT_LESS(0u, texture);
-
-        ASSERT_NOT_THROW_EXCEPTION_2(DoOpenGLBindTexturesTest, textureTarget, texture);
-
-        ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteTextureTest, texture);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoBindTexturesTest, textureTarget);
     }
 }
 
-void System::OpenGLBindTexturesTesting::DoOpenGLBindTexturesTest(TextureTarget textureTarget, OpenGLUInt texture) noexcept
+void System::OpenGLBindTexturesTesting::DoBindTexturesTest(TextureTarget textureTarget)
+{
+    const auto texture = GetGLGenTextures();
+    ASSERT_LESS(0u, texture);
+
+    ASSERT_NOT_THROW_EXCEPTION_2(SetBindTexturesTest, textureTarget, texture);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteTextureTest, texture);
+}
+
+void System::OpenGLBindTexturesTesting::SetBindTexturesTest(TextureTarget textureTarget, OpenGLUnsignedInt texture) const noexcept
 {
     SetGLBindTexture(textureTarget, texture);
 }

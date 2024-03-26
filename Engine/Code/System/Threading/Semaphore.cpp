@@ -16,6 +16,8 @@
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/WindowsSystem.h"
 
+#include <gsl/util>
+
 System::WindowsHandle System::CreateSystemSemaphore(WindowSecurityAttributesPtr semaphoreAttributes, WindowsLong initialCount, WindowsLong maximumCount, const TChar* name) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
@@ -45,7 +47,7 @@ System::MutexWaitReturn System::WaitForSystemSemaphore(WindowsHandle handle, Win
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<MutexWaitReturn>(::WaitForSingleObject(handle, milliseconds));
+    return UnderlyingCastEnum<MutexWaitReturn>(gsl::narrow_cast<int>(::WaitForSingleObject(handle, milliseconds)));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -60,7 +62,7 @@ System::MutexWaitReturn System::WaitForSystemSemaphore(WindowsHandle handle, Win
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<MutexWaitReturn>(::WaitForSingleObjectEx(handle, milliseconds, BoolConversion(alertable)));
+    return UnderlyingCastEnum<MutexWaitReturn>(gsl::narrow_cast<int>(::WaitForSingleObjectEx(handle, milliseconds, BoolConversion(alertable))));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -75,7 +77,7 @@ System::MutexWaitReturn System::WaitForSystemSemaphore(WindowsDWord count, const
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<MutexWaitReturn>(::WaitForMultipleObjectsEx(count, handle, BoolConversion(waitAll), milliseconds, BoolConversion(alertable)));
+    return UnderlyingCastEnum<MutexWaitReturn>(gsl::narrow_cast<int>(::WaitForMultipleObjectsEx(count, handle, BoolConversion(waitAll), milliseconds, BoolConversion(alertable))));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -90,7 +92,7 @@ System::MutexWaitReturn System::WaitForSystemSemaphore(WindowsDWord count, const
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<MutexWaitReturn>(::WaitForMultipleObjects(count, handle, BoolConversion(waitAll), milliseconds));
+    return UnderlyingCastEnum<MutexWaitReturn>(gsl::narrow_cast<int>(::WaitForMultipleObjects(count, handle, BoolConversion(waitAll), milliseconds)));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

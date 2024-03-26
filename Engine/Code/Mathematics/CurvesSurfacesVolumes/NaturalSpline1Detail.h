@@ -179,7 +179,7 @@ void Mathematics::NaturalSpline1<Real>::CreateFreeSpline()
         upper.erase(upper.begin());
     }
 
-    c = LinearSystem<Real>().SolveTridiagonal(numSegmentsM1, delta, diagonal, upper, rhs);
+    c = LinearSystem<Real>().SolveTriDiagonal(numSegmentsM1, delta, diagonal, upper, rhs);
     c.insert(c.begin(), Math<Real>::GetValue(0));
     c.emplace_back(Math<Real>::GetValue(0));
 
@@ -230,7 +230,7 @@ void Mathematics::NaturalSpline1<Real>::CreateClampedSpline(Real slopeFirst, Rea
         lower.emplace_back(delta.at(i));
     }
 
-    b = LinearSystem<Real>().SolveTridiagonal(numSegmentsM1, lower, diagonal, delta, rhs);
+    b = LinearSystem<Real>().SolveTriDiagonal(numSegmentsM1, lower, diagonal, delta, rhs);
     b.insert(c.begin(), slopeFirst);
     b.emplace_back(slopeLast);
 

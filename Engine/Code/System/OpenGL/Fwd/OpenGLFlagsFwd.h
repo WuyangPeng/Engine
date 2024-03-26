@@ -14,33 +14,26 @@
 
 namespace System
 {
-    // GLExtensions
+    /// GLExtensions
     enum class ExistsOpenGLExtensions;
     enum class OpenGLErrorCode;
     enum class OpenGLSystemVersion;
 
-    // Glut
+    /// Glut
     enum class GlutMacro;
     enum class GlutExtension;
     enum class GlutOption;
 
-    // GlutKeyCodes
+    /// GlutKeyCodes
     enum class GlutKeyCodes;
     enum class GlutModifiersCodes;
 
-    // OpenGL
+    /// OpenGL
     enum class OpenGLClearMask;
     enum class OpenGLQuery;
-    enum class TextureTarget;
-    enum class TextureParameter;
-    enum class TextureLevelParameter;
     enum class PixelStore;
-    enum class ClientState;
     enum class OpenGLData;
     enum class BindBuffer;
-    enum class TextureInternalFormat;
-    enum class TextureExternalFormat;
-    enum class TextureFormat;
     enum class BlendStateMode;
     enum class BlendStateOperation;
     enum class DepthStencilStateMode;
@@ -48,38 +41,41 @@ namespace System
     enum class DepthStencilStateWriteMask;
     enum class RasterizerStateCullFace;
     enum class RasterizerStateFillMode;
-    enum class OpenGLAttribute;
     enum class BufferLocking;
     enum class BufferUsage;
     enum class SamplerFilter;
-    enum class TextureTargetBinding;
-    enum class TextureType;
-    enum class TextureSamplerCoordinate;
     enum class PrimitiveType;
-    enum class TextureCubeMap;
-    enum class TextureNumber;
     enum class ColorAttachment;
-    enum class CheckFrameBufferStatus;
     enum class FrameBufferType;
-    enum class AttributeUsage;
     enum class OpenGLEnable;
     enum class OpenGLFrontFace;
-    enum class OpenGLTextureName;
     enum class GLSLReflectionEnumType;
 
-    // OpenGLProgram
+    /// OpenGLProgram
     enum class ProgramStatus;
     enum class ProgramAttributes;
     enum class ProgramInterface;
     enum class ProgramInterfaceName;
     enum class ProgramProperties;
 
-    // OpenGLShader
+    /// OpenGLShader
     enum class ShaderType;
     enum class ShaderStatus;
     enum class ShaderAttributes;
 
-    // Wgl
+    /// OpenGLTexture
+    enum class TextureTarget;
+    enum class TextureParameter;
+    enum class TextureLevelParameter;
+    enum class TextureInternalFormat;
+    enum class TextureExternalFormat;
+    enum class TextureTargetBinding;
+    enum class TextureSamplerCoordinate;
+    enum class TextureCubeMap;
+    enum class TextureNumber;
+    enum class OpenGLTextureName;
+
+    /// Wgl
     enum class PixelFormatDescriptorFlags : uint32_t;
     enum class PixelTypes;
 }

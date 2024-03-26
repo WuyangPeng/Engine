@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 14:01)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 14:21)
 
 #include "FileSecurityTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -14,12 +14,10 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using namespace std::literals;
-
 System::FileSecurityTesting::FileSecurityTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      existingFileName{ SYSTEM_TEXT("Resource/FileTesting/CreateExistingFile.txt"s) },
-      setFileName{ SYSTEM_TEXT("Resource/AttributesTesting/AttributesTestFile.txt"s) }
+      existingFileName{ SYSTEM_TEXT("Resource/FileTesting/CreateExistingFile.txt") },
+      setFileName{ SYSTEM_TEXT("Resource/AttributesTesting/AttributesTestFile.txt") }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }

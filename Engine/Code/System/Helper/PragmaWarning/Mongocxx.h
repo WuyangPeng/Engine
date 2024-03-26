@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:06)
+/// 版本：1.0.0.7 (2024/03/04 19:58)
 
 #ifndef SYSTEM_HELPER_PRAGMA_WARNING_MONGO_CXX_H
 #define SYSTEM_HELPER_PRAGMA_WARNING_MONGO_CXX_H

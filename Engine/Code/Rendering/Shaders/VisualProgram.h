@@ -31,7 +31,7 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(VisualProgram);
 
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
         using ObjectLink = CoreTools::ObjectLink;
         using BufferTarget = CoreTools::BufferTarget;
         using BufferSource = CoreTools::BufferSource;

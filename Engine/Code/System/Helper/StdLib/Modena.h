@@ -5,26 +5,26 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:04)
+/// 版本：1.0.0.7 (2024/03/04 21:43)
 
 #ifndef SYSTEM_HELPER_MODENA_H
 #define SYSTEM_HELPER_MODENA_H
 
 #if defined(MSIPL_COMPILE_H)
 
-    //  Modena C++ 标准库（自带 KAI C++)
+    ///  Modena C++ 标准库（自带 KAI C++)
 
-    #ifndef TCRE_CPPLIB_VERSION
+    #ifndef TCRE_CPP_LIB_VERSION
 
-        #define TCRE_CPPLIB_VERSION 1
+        #define TCRE_CPP_LIB_VERSION 1
 
-    #endif  // TCRE_CPPLIB_VERSION
+    #endif  // TCRE_CPP_LIB_VERSION
 
-    #ifndef TCRE_STDLIB
+    #ifndef TCRE_SYSTEM_STD_LIB
 
-        #define TCRE_SYSTEM_STDLIB "Modena C++ 标准库"
+        #define TCRE_SYSTEM_STD_LIB "Modena C++ 标准库"
 
-    #endif  // !TCRE_STDLIB
+    #endif  // !TCRE_SYSTEM_STD_LIB
 
     #define TCRE_USE_MODENA static_cast<void>(0)
 

@@ -1,25 +1,24 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/28 10:18)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/05 22:28)
 
 #include "Toolset/System/SystemToolset/SystemToolsetExport.h"
 
 #include "WinSockStart.h"
+#include "System/Helper/Noexcept.h"
 #include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Network/Flags/WindowsExtensionPrototypesFlags.h"
 #include "System/Network/Using/WindowsExtensionPrototypesUsing.h"
 #include "System/Network/WindowsExtensionPrototypes.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-#include "CoreTools/Contract/Noexcept.h"
 #include "Toolset/System/SystemToolset/Helper/SystemToolsetClassInvariantMacro.h"
 
-#include <exception>
 #include <iostream>
 
 SystemToolset::WinSockStart SystemToolset::WinSockStart::Create()
@@ -56,7 +55,7 @@ SystemToolset::WinSockStart::~WinSockStart() noexcept
 {
     SYSTEM_TOOLSET_SELF_CLASS_IS_VALID_9;
 
-    CoreTools::NoexceptNoReturn(*this, &ClassType::WinSockCleanup);
+    System::NoexceptNoReturn(&ClassType::WinSockCleanup);
 }
 
 CLASS_INVARIANT_STUB_DEFINE(SystemToolset, WinSockStart)

@@ -1,11 +1,11 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/09/18 16:54)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/12 09:58)
 
 #ifndef MATHEMATICS_ESTIMATE_EXP_ESTIMATE_H
 #define MATHEMATICS_ESTIMATE_EXP_ESTIMATE_H
@@ -49,7 +49,12 @@ namespace Mathematics
     requires(1 <= Degree && Degree <= 7)
     NODISCARD T constexpr GetExpEstimateMaxError()
     {
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
         return static_cast<T>(expEstimateMaxError[Degree - 1]);
+
+#include SYSTEM_WARNING_POP
     }
 }
 

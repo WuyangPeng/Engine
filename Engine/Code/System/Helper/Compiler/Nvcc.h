@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 18:14)
+/// 版本：1.0.0.7 (2024/03/04 17:28)
 
 #ifndef SYSTEM_HELPER_NVCC_H
 #define SYSTEM_HELPER_NVCC_H
@@ -14,7 +14,7 @@
 
     #define TCRE_USE_NVCC
 
-    // NVIDIA CUDA C++ 编译器设置：
+    /// NVIDIA CUDA C++ 编译器设置：
 
     #if defined(__CUDACC_VER_MAJOR__) && defined(__CUDACC_VER_MINOR__) && defined(__CUDACC_VER_BUILD__)
 
@@ -22,7 +22,7 @@
 
     #else  // !(defined(__CUDACC_VER_MAJOR__) && defined(__CUDACC_VER_MINOR__) && defined(__CUDACC_VER_BUILD__))
 
-        // 我们不知道CUDA版本是什么，但是肯定是在7.5之前的版本：
+        /// 我们不知道CUDA版本是什么，但是肯定是在7.5之前的版本：
         #define TCRE_CUDA_VERSION 7000000
 
     #endif  // defined(__CUDACC_VER_MAJOR__) && defined(__CUDACC_VER_MINOR__) && defined(__CUDACC_VER_BUILD__)
@@ -35,7 +35,7 @@
 
     #endif  // TCRE_SYSTEM_COMPILER
 
-    // NVIDIA特定支持（TCRE_GPU_ENABLED）：将一个函数或方法标记为在主机和设备上启用
+    /// NVIDIA特定支持（TCRE_GPU_ENABLED）：将一个函数或方法标记为在主机和设备上启用
     #define TCRE_GPU_ENABLED __host__ __device__
 
 #endif  // defined(__CUDACC__)

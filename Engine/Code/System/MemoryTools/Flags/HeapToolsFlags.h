@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 17:30)
+/// 版本：1.0.0.7 (2024/03/04 15:51)
 
 #ifndef SYSTEM_MEMORY_TOOLS_HEAP_TOOLS_FLAGS_H
 #define SYSTEM_MEMORY_TOOLS_HEAP_TOOLS_FLAGS_H
@@ -21,11 +21,11 @@ namespace System
         Default = 0,
         NoSerialize = HEAP_NO_SERIALIZE,
 
-        // 程序捕获异常，这个标志被忽略。
+        /// 程序捕获异常，这个标志被忽略。
         GenerateExceptions = HEAP_GENERATE_EXCEPTIONS,
 
         CreateEnableExecute = HEAP_CREATE_ENABLE_EXECUTE,
-        ZeroMemory = HEAP_ZERO_MEMORY,
+        HeapZeroMemory = HEAP_ZERO_MEMORY,
         ReAllocInPlaceOnly = HEAP_REALLOC_IN_PLACE_ONLY,
 
         GrowAble = HEAP_GROWABLE,
@@ -47,7 +47,7 @@ namespace System
         UncommittedRange = PROCESS_HEAP_UNCOMMITTED_RANGE,
         EntryBusy = PROCESS_HEAP_ENTRY_BUSY,
         HeapSegAlloc = PROCESS_HEAP_SEG_ALLOC,
-        EntryMoveable = PROCESS_HEAP_ENTRY_MOVEABLE,
+        EntryMoveAble = PROCESS_HEAP_ENTRY_MOVEABLE,
         EntryDdeShare = PROCESS_HEAP_ENTRY_DDESHARE,
     };
 
@@ -59,7 +59,7 @@ namespace System
         NoSerialize = 0x00000001,
 
         GenerateExceptions = 0x00000004,
-        ZeroMemory = 0x00000008,
+        HeapZeroMemory = 0x00000008,
         ReAllocInPlaceOnly = 0x00000010,
 
         GrowAble = 0x00000002,
@@ -82,7 +82,7 @@ namespace System
         UncommittedRange = 0x0002,
         EntryBusy = 0x0004,
         HeapSegAlloc = 0x0008,
-        EntryMoveable = 0x0010,
+        EntryMoveAble = 0x0010,
         EntryDdeShare = 0x0020,
     };
 

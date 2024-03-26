@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 13:45)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 17:09)
 
 #include "AndroidInputQueueFacadeTesting.h"
 
@@ -18,8 +18,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::AndroidInputQueueFacadeTesting::AndroidInputQueueFacadeTesting(const OStreamShared& streamShared, AndroidApp* androidApp)
-    : ParentType{ streamShared }, androidInputQueue{ GetAndroidInputQueue(androidApp) }
+System::AndroidInputQueueFacadeTesting::AndroidInputQueueFacadeTesting(const OStreamShared& stream, AndroidApp* androidApp)
+    : ParentType{ stream }, androidInputQueue{ GetAndroidInputQueue(androidApp) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -28,14 +28,14 @@ System::AndroidInputQueue* System::AndroidInputQueueFacadeTesting::GetAndroidInp
 {
     if (androidApp == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("androidApp为空。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("androidApp为空。"))
     }
 
     const auto androidInputQueue = androidApp->GetInputQueue();
 
     if (androidInputQueue == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("InputQueue为空。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("InputQueue为空。"))
     }
 
     return androidInputQueue;
@@ -45,10 +45,7 @@ System::AndroidInputQueue* System::AndroidInputQueueFacadeTesting::GetAndroidInp
 
 bool System::AndroidInputQueueFacadeTesting::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && androidInputQueue != nullptr)
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && androidInputQueue != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -65,7 +62,7 @@ void System::AndroidInputQueueFacadeTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(AndroidInputQueueEventTest);
 }
 
-void System::AndroidInputQueueFacadeTesting::AndroidInputQueueLooperTest() noexcept
+void System::AndroidInputQueueFacadeTesting::AndroidInputQueueLooperTest() const noexcept
 {
     AndroidInputQueueFacade androidInputQueueFacade{ androidInputQueue };
 
@@ -76,7 +73,7 @@ void System::AndroidInputQueueFacadeTesting::AndroidInputQueueLooperTest() noexc
 
 void System::AndroidInputQueueFacadeTesting::AndroidInputQueueHasEventsTest()
 {
-    AndroidInputQueueFacade androidInputQueueFacade{ androidInputQueue };
+    const AndroidInputQueueFacade androidInputQueueFacade{ androidInputQueue };
 
     ASSERT_EQUAL(androidInputQueueFacade.HasEvents(), 0);
 }
@@ -87,6 +84,7 @@ void System::AndroidInputQueueFacadeTesting::AndroidInputQueueEventTest()
 
     AndroidInputEvent outEvent{};
     auto outEventPtr = &outEvent;
+
     ASSERT_EQUAL(androidInputQueueFacade.GetEvent(&outEventPtr), androidInputQueue->GetSize());
     ASSERT_EQUAL(androidInputQueueFacade.PreviousDispatchEvent(&outEvent), 0);
     androidInputQueueFacade.FinishEvent(&outEvent, 0);

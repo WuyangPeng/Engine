@@ -19,8 +19,9 @@
 	  使用的C++标准：SYSTEM_CPP_STANDARD。
 	  选择的平台名称：TCRE_SYSTEM_PLATFORM。使用的平台：SYSTEM_PLATFORM_XXX。
 	  选择的编译器版本：TCRE_COMPILER_VERSION，编译器名称：TCRE_SYSTEM_COMPILER，使用的编译器：TCRE_USE_XXX。 
-	  选择的标准库版本：TCRE_CPPLIB_VERSION、标准库名称：TCRE_SYSTEM_STDLIB，使用的标准库：TCRE_USE_XXX。
-（2） 用户宏：用于是否使用静态库、检查GL错误、是否使用Windows宏、DirectX、自旋锁、OpenGL2、glut和glfw等用户设定。
+	  选择的标准库版本：TCRE_CPP_LIB_VERSION、标准库名称：TCRE_SYSTEM_STD_LIB，使用的标准库：TCRE_USE_XXX。
+	  64位或32位程序：TCRE_ARCHITECTURE_TYPE_64和TCRE_ARCHITECTURE_TYPE_32。
+（2） 用户宏：用于是否使用静态库、检查GL错误、是否使用Windows宏、DirectX12、自旋锁、glut、glfw和vulkan等用户设定。
 （3） 字符串拼接宏：用于在宏中拼接字符串。 
 （4） Unicode字符using声明：根据是否定义宏UNICODE来决定字符类型是char还是wchar_t。
 （5） 打印编译器信息宏：打印正在使用的编译器信息。

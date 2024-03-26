@@ -27,7 +27,7 @@ namespace Rendering
     public:
         using ClassType = OpenGLInputLayoutImpl;
 
-        using OpenGLUInt = System::OpenGLUInt;
+        using OpenGLUInt = System::OpenGLUnsignedInt;
         using OpenGLData = System::OpenGLData;
 
     public:

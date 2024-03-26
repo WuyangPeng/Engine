@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 16:41)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 18:31)
 
 #include "ConsoleHandleTesting.h"
 #include "System/Console/ConsoleHandle.h"
@@ -59,23 +59,23 @@ void System::ConsoleHandleTesting::DoHandleTest(StandardHandle standardHandle)
 void System::ConsoleHandleTesting::OutputHandleTest(StandardHandle standardHandle)
 {
     const auto outputFileName = SYSTEM_TEXT("Resource/ConsoleHandleTesting/OutputHandleTest.txt"s);
-    const auto outputHandle = CreateSystemFile(outputFileName, FileHandleDesiredAccess::Write, FileHandleShareMode::Prevents, FileHandleCreationDisposition::OpenAlways);
-    ASSERT_TRUE(IsFileHandleValid(outputHandle));
-
-    ASSERT_NOT_THROW_EXCEPTION_2(SetStandardHandleTest, standardHandle, outputHandle);
-
-    ASSERT_TRUE(CloseSystemFile(outputHandle));
+    StandardHandleTest(standardHandle, outputFileName, FileHandleDesiredAccess::Write, FileHandleShareMode::Prevents);
 }
 
 void System::ConsoleHandleTesting::InputHandleTest(StandardHandle standardHandle)
 {
     const auto inputFileName = SYSTEM_TEXT("Resource/ConsoleHandleTesting/InputHandleTest.txt"s);
-    const auto inputHandle = CreateSystemFile(inputFileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenAlways);
-    ASSERT_TRUE(IsFileHandleValid(inputHandle));
+    StandardHandleTest(standardHandle, inputFileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead);
+}
 
-    ASSERT_NOT_THROW_EXCEPTION_2(SetStandardHandleTest, standardHandle, inputHandle);
+void System::ConsoleHandleTesting::StandardHandleTest(StandardHandle standardHandle, const String& fileName, FileHandleDesiredAccess access, FileHandleShareMode shareMode)
+{
+    const auto handle = CreateSystemFile(fileName, access, shareMode, FileHandleCreationDisposition::OpenAlways);
+    ASSERT_TRUE(IsFileHandleValid(handle));
 
-    ASSERT_TRUE(CloseSystemFile(inputHandle));
+    ASSERT_NOT_THROW_EXCEPTION_2(SetStandardHandleTest, standardHandle, handle);
+
+    ASSERT_TRUE(CloseSystemFile(handle));
 }
 
 void System::ConsoleHandleTesting::SetStandardHandleTest(StandardHandle standardHandle, WindowsHandle windowsHandle)

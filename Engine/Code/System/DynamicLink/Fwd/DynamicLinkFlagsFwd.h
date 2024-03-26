@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.3 (2023/12/21 19:15)
+/// 版本：1.0.0.7 (2024/03/05 16:37)
 
 #ifndef SYSTEM_DYNAMIC_LINK_DYNAMIC_LINK_FLAGS_FWD_H
 #define SYSTEM_DYNAMIC_LINK_DYNAMIC_LINK_FLAGS_FWD_H
@@ -14,13 +14,13 @@
 
 namespace System
 {
-    // EnumResourceTools
+    /// EnumResourceTools
     enum class ResourceEnum;
 
-    // GetModuleHandle
+    /// GetModuleHandle
     enum class GetModuleHandleType;
 
-    // LoadLibrary
+    /// LoadLibrary
     enum class LoadLibraryType : uint32_t;
     enum class DllMain;
 }

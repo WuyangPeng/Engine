@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/09/01 10:58)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:14)
 
 #include "RecvFromTesting.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
@@ -51,14 +51,14 @@ void System::RecvFromTesting::DoRecvFromTest(WinSocket socketHandle)
 {
     auto address = BindInit(socketHandle);
 
-    BufferType buffer{};
+    CharBufferType buffer{};
     auto index = 0;
-    auto remain = bufferSize;
+    auto remain = defaultBufferSize;
     int length{ sizeof(address) };
 
     while (0 < remain)
     {
-        const auto recvCount = RecvFrom(socketHandle, &buffer.at(index), remain, SocketRecv::Default, &address, &length);
+        const auto recvCount = RecvFrom(socketHandle, &buffer.at(index), remain, SocketReceive::Default, &address, &length);
 
         ASSERT_UNEQUAL(recvCount, socketError);
 

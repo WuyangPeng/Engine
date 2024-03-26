@@ -11,7 +11,7 @@
 			(1).  LowLevel。（完成）
 			(2).  Algebra。（完成）
 			(3).  Primitives。（完成）
-			(4).  Arithmetic。
+			(4).  Arithmetic。（完成）
 			(5).  NumericalMethods。
 			(6).  Approximation。
 			(7).  ComputationalGeometry。
@@ -32,28 +32,7 @@
 		  6.  Geometric Tools GTE代码合并（GraphicsDX11库）。 
 		  7.  Geometric Tools GTE代码合并（ApplicationsDX11库）。
 		  8.  Geometric Tools GTE代码合并（Samples库）。
-		  9.  引擎实现（System库）。
-			(1).  库。
-				-  Windows。（完成）
-				-  Vulkan。（完成）
-				-  Time。（完成）
-				-  Threading。（完成）
-				-  SystemOutput。（完成）
-				-  Security。（完成）
-				-  OpenGL。
-				-  Network。
-				-  MemoryTools。
-				-  Macintosh。
-				-  Linux。
-				-  Helper。
-				-  FileManager。
-				-  DynamicLink。
-				-  DirectX。
-				-  Console。
-				-  CharacterString。
-				-  Android。
-			(2).  辅助库。
-			(3).  单元测试。			
+		  9.  引擎实现（System库）。（完成）
 		  10. 引擎实现（CoreTools库）。
 ----------------------------
 引擎（1.0.1.0——1.0.1.?）

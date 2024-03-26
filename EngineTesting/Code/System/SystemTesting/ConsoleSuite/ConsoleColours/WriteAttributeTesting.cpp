@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 16:39)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/11 18:28)
 
 #include "WriteAttributeTesting.h"
 #include "System/Console/ConsoleColour.h"
@@ -55,34 +55,34 @@ void System::WriteAttributeTesting::WriteAttributeTest()
 {
     for (const auto standardHandle : *this)
     {
-        const auto consoleHandle = GetStandardHandle(standardHandle);
-
-        ASSERT_NOT_THROW_EXCEPTION_1(DoWriteAttributeTest, consoleHandle);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoWriteAttributeTest, standardHandle);
     }
 }
 
-void System::WriteAttributeTesting::DoWriteAttributeTest(WindowsHandle consoleHandle)
+void System::WriteAttributeTesting::DoWriteAttributeTest(StandardHandle standardHandle)
 {
+    const auto consoleHandle = GetStandardHandle(standardHandle);
+
     constexpr ConsoleCoord coord{ 0, 0 };
     const auto writeAttribute = GetWriteAttribute();
 
     WindowsDWord numberOfAttributesWrite{ 0 };
-    ASSERT_TRUE(WriteSystemConsoleOutputAttribute(consoleHandle, writeAttribute.data(), bufferSize, coord, &numberOfAttributesWrite));
+    ASSERT_TRUE(WriteSystemConsoleOutputAttribute(consoleHandle, writeAttribute.data(), defaultBufferSize, coord, &numberOfAttributesWrite));
 
     ASSERT_EQUAL(numberOfAttributesWrite, writeAttribute.size());
 
     AttributeType readAttribute{};
     WindowsDWord numberOfAttributesRead{ 0 };
-    ASSERT_TRUE(ReadSystemConsoleOutputAttribute(consoleHandle, readAttribute.data(), bufferSize, coord, &numberOfAttributesRead));
+    ASSERT_TRUE(ReadSystemConsoleOutputAttribute(consoleHandle, readAttribute.data(), defaultBufferSize, coord, &numberOfAttributesRead));
 
     ReadAttributeTest(readAttribute, writeAttribute);
 }
 
-System::WriteAttributeTesting::AttributeType System::WriteAttributeTesting::GetWriteAttribute()
+System::WriteAttributeTesting::AttributeType System::WriteAttributeTesting::GetWriteAttribute() const
 {
     AttributeType writeAttribute{};
 
-    for (auto index = 0u; index < bufferSize; ++index)
+    for (auto index = 0; index < defaultBufferSize; ++index)
     {
         const auto textColour = GetTextColour(index);
         const auto backgroundColour = GetBackgroundColour(index);
@@ -97,9 +97,14 @@ System::WriteAttributeTesting::AttributeType System::WriteAttributeTesting::GetW
 
 void System::WriteAttributeTesting::ReadAttributeTest(const AttributeType& readAttribute, const AttributeType& writeAttribute)
 {
-    for (auto index = 0u; index < bufferSize; ++index)
+    for (auto index = 0; index < defaultBufferSize; ++index)
     {
-        ASSERT_NOT_THROW_EXCEPTION_3(ColourEqualTest, readAttribute.at(index), writeAttribute.at(index), textColourMask);
-        ASSERT_NOT_THROW_EXCEPTION_3(ColourEqualTest, readAttribute.at(index), writeAttribute.at(index), backgroundColourMask);
+        ASSERT_NOT_THROW_EXCEPTION_2(DoReadAttributeTest, readAttribute.at(index), writeAttribute.at(index));
     }
+}
+
+void System::WriteAttributeTesting::DoReadAttributeTest(WindowsWord readAttribute, WindowsWord writeAttribute)
+{
+    ASSERT_NOT_THROW_EXCEPTION_3(ColourEqualTest, readAttribute, writeAttribute, textColourMask);
+    ASSERT_NOT_THROW_EXCEPTION_3(ColourEqualTest, readAttribute, writeAttribute, backgroundColourMask);
 }

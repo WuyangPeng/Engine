@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.4 (2023/08/31 14:26)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/13 16:47)
 
 #include "OpenGLGetSamplersTesting.h"
 #include "System/OpenGL/OpenGLSamplers.h"
@@ -28,29 +28,40 @@ void System::OpenGLGetSamplersTesting::DoRunUnitTest()
 
 void System::OpenGLGetSamplersTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLGetSamplerTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLGetSamplersTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetSamplerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetSamplersTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(BindSamplerTest);
 }
 
-void System::OpenGLGetSamplersTesting::OpenGLGetSamplerTest()
+void System::OpenGLGetSamplersTesting::GetSamplerTest()
 {
     const auto sampler = GetGLGenSamplers();
     ASSERT_LESS(0u, sampler);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteSamplerTest, sampler);
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteSamplerTest, sampler);
 }
 
-void System::OpenGLGetSamplersTesting::OpenGLGetSamplersTest()
+void System::OpenGLGetSamplersTesting::GetSamplersTest()
 {
     SamplersType samplers{};
 
     GetGLGenSamplers(bufferSize, samplers.data());
-    ASSERT_NOT_THROW_EXCEPTION_1(DoOpenGLGetSamplersTest, samplers);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoGetSamplersTest, samplers);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(SetGLDeleteSamplersTest, samplers);
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteSamplersTest, samplers);
 }
 
-void System::OpenGLGetSamplersTesting::DoOpenGLGetSamplersTest(const SamplersType& samplers)
+void System::OpenGLGetSamplersTesting::BindSamplerTest()
+{
+    const auto sampler = GetGLGenSamplers();
+    ASSERT_LESS(0u, sampler);
+
+    SetGLBindSampler(0, sampler);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteSamplerTest, sampler);
+}
+
+void System::OpenGLGetSamplersTesting::DoGetSamplersTest(const SamplersType& samplers)
 {
     for (auto sampler : samplers)
     {
