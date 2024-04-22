@@ -76,7 +76,7 @@
 	
 	<s:Boolean x:Key="/Default/Environment/Feedback/SendActivityLogs/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/Feedback/ShouldPrompt/@EntryValue">False</s:Boolean>
-	<s:Int64 x:Key="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue">4029</s:Int64>
+	<s:Int64 x:Key="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue">4095</s:Int64>
 	<s:Boolean x:Key="/Default/Environment/OpenDocument/OpenDocumentAfterModification/@EntryValue">True</s:Boolean>
 	
 	
@@ -97,22 +97,22 @@
 	<s:Int64 x:Key="/Default/Environment/SearchAndNavigation/DefaultOccurrencesGroupingIndices/=JetBrains_002EReSharper_002EFeature_002EServices_002ERefactorings_002EConflicts_002EOccurrences_002EConflictOccurrencesDescriptor/@EntryIndexedValue">9</s:Int64>
 	<s:Int64 x:Key="/Default/Environment/SearchAndNavigation/DefaultOccurrencesGroupingIndices/=JetBrains_002EReSharper_002EI18n_002EServices_002EResxEditor_002EResxEditorOccurrenceBrowserDescriptor/@EntryIndexedValue">2</s:Int64>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EApplication_002EExceptionReport_002EUserLoginInformationMigrateSettings/@EntryIndexedValue">True</s:Boolean>
-	<s:String x:Key="/Default/Environment/UpdatesManger/LastUpdateCheck/@EntryValue">04/12/2024 10:05:40</s:String>
-	<s:String x:Key="/Default/Environment/UpdatesManger/LastUpdateCheckPerHost/=ReSharperPlatformVs17/@EntryIndexedValue">04/12/2024 01:40:44</s:String>
+	<s:String x:Key="/Default/Environment/UpdatesManger/LastUpdateCheck/@EntryValue">04/22/2024 11:03:04</s:String>
+	<s:String x:Key="/Default/Environment/UpdatesManger/LastUpdateCheckPerHost/=ReSharperPlatformVs17/@EntryIndexedValue">04/22/2024 03:07:59</s:String>
 	<s:String x:Key="/Default/GrammarAndSpelling/GrammarChecking/LanguagesStates/=_4E2D_6587/@EntryIndexedValue">Enabled</s:String>
 	
 	
 	
 	
 	
-	<s:String x:Key="/Default/Housekeeping/DiskCleanup/LastRunTime/@EntryValue">04/11/2024 10:12:02</s:String>
+	<s:String x:Key="/Default/Housekeeping/DiskCleanup/LastRunTime/@EntryValue">04/22/2024 11:07:04</s:String>
 	<s:Boolean x:Key="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=AutoNamingFeatureSuggester/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=EditorConfigFeatureSuggester/@EntryIndexedValue">True</s:Boolean>
 	
 	<s:Boolean x:Key="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Housekeeping/IntellisenseHousekeeping/HintUsed/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/OptionsDialogView/Position/@EntryValue">[168,38](1024,768)</s:String>
-	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/RefactoringWizardWindow/Location/@EntryValue">34,-165</s:String>
+	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/RefactoringWizardWindow/Location/@EntryValue">34,-275</s:String>
 	<s:Boolean x:Key="/Default/Housekeeping/LiveTemplatesHousekeeping/HotspotSessionHintIsShown/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue">CppNaming</s:String>
 	
@@ -204,7 +204,7 @@
 /// 联系作者：94458936@qq.com&#xD;
 ///&#xD;
 /// 标准：std:c++20&#xD;
-/// 版本：1.0.0.8 ($TIME$)&#xD;
+/// 版本：1.0.0.9 ($TIME$)&#xD;
 &#xD;
 #include "$Namespace$/$Namespace$Export.h"&#xD;
 &#xD;
@@ -250,7 +250,7 @@ CLASS_INVARIANT_STUB_DEFINE($Namespace$, $ClassName$) </s:String>
 /// 联系作者：94458936@qq.com&#xD;
 ///&#xD;
 /// 标准：std:c++20&#xD;
-/// 版本：1.0.0.8 ($TIME$)</s:String>
+/// 版本：1.0.0.9 ($TIME$)</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/CustomProperties/=Extension/@EntryIndexedValue">h</s:String>
@@ -284,7 +284,7 @@ CLASS_INVARIANT_STUB_DEFINE($Namespace$, $ClassName$) </s:String>
 /// 联系作者：94458936@qq.com&#xD;
 ///&#xD;
 /// 标准：std:c++20&#xD;
-/// 版本：1.0.0.8 ($TIME$)&#xD;
+/// 版本：1.0.0.9 ($TIME$)&#xD;
 &#xD;
 #ifndef $Namespace$_XX_$ClassName$_H&#xD;
 #define $Namespace$_XX_$ClassName$_H&#xD;
@@ -336,7 +336,7 @@ namespace $Namespace$&#xD;
 /// 联系作者：94458936@qq.com&#xD;
 ///&#xD;
 /// 标准：std:c++20&#xD;
-/// 版本：1.0.0.8 ($TIME$)&#xD;
+/// 版本：1.0.0.9 ($TIME$)&#xD;
 &#xD;
 #include "$Namespace$/$Namespace$Export.h"&#xD;
 &#xD;
@@ -378,7 +378,7 @@ CLASS_INVARIANT_STUB_DEFINE($Namespace$, $ClassName$) </s:String>
 /// 联系作者：94458936@qq.com&#xD;
 ///&#xD;
 /// 标准：std:c++20&#xD;
-/// 版本：1.0.0.8 ($TIME$)&#xD;
+/// 版本：1.0.0.9 ($TIME$)&#xD;
 &#xD;
 #include "$Namespace$/$Namespace$Export.h"&#xD;
 &#xD;
@@ -422,7 +422,7 @@ namespace Mathematics&#xD;
 /// 联系作者：94458936@qq.com&#xD;
 ///&#xD;
 /// 标准：std:c++20&#xD;
-/// 版本：1.0.0.8 ($TIME$)&#xD;
+/// 版本：1.0.0.9 ($TIME$)&#xD;
 &#xD;
 #ifndef $Namespace$_XX_$ClassName$_H&#xD;
 #define $Namespace$_XX_$ClassName$_H&#xD;
@@ -480,7 +480,7 @@ namespace $Namespace$&#xD;
 /// 联系作者：94458936@qq.com&#xD;
 ///&#xD;
 /// 标准：std:c++20&#xD;
-/// 版本：1.0.0.8 ($TIME$)&#xD;
+/// 版本：1.0.0.9 ($TIME$)&#xD;
 &#xD;
 #ifndef $Namespace$_XX_$ClassName$_H&#xD;
 #define $Namespace$_XX_$ClassName$_H&#xD;
@@ -560,7 +560,7 @@ namespace $Namespace$&#xD;
 /// 联系作者：94458936@qq.com&#xD;
 ///&#xD;
 /// 标准：std:c++20&#xD;
-/// 版本：1.0.0.8 ($TIME$)&#xD;
+/// 版本：1.0.0.9 ($TIME$)&#xD;
 &#xD;
 #ifndef $Namespace$_XX_$ClassName$_DETAIL_H&#xD;
 #define $Namespace$_XX_$ClassName$_DETAIL_H&#xD;
