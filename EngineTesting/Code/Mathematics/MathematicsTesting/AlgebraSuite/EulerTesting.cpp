@@ -77,8 +77,8 @@ void Mathematics::EulerTesting::EulerXYZTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), xAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), yAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), zAngle, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XYZ);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::Unique);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XYZ);
 
         matrix0.MakeEulerXYZ(xAngle - zAngle, MathD::GetHalfPI(), zAngle);
 
@@ -87,8 +87,8 @@ void Mathematics::EulerTesting::EulerXYZTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), xAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), MathD::GetHalfPI(), 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), 0.0, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XYZ);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XYZ);
 
         matrix0.MakeEulerXYZ(xAngle + zAngle, -MathD::GetHalfPI(), zAngle);
 
@@ -97,8 +97,8 @@ void Mathematics::EulerTesting::EulerXYZTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), xAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), -MathD::GetHalfPI(), 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), 0.0, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XYZ);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XYZ);
     }
 }
 
@@ -123,8 +123,8 @@ void Mathematics::EulerTesting::EulerXZYTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), xAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), yAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), zAngle, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XZY);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::Unique);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XZY);
 
         matrix0.MakeEulerXZY(xAngle + yAngle, MathD::GetHalfPI(), yAngle);
 
@@ -133,8 +133,8 @@ void Mathematics::EulerTesting::EulerXZYTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), xAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), 0.0, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), MathD::GetHalfPI(), 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XZY);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XZY);
 
         matrix0.MakeEulerXZY(xAngle - yAngle, -MathD::GetHalfPI(), yAngle);
 
@@ -143,8 +143,8 @@ void Mathematics::EulerTesting::EulerXZYTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), xAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), 0.0, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), -MathD::GetHalfPI(), 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XZY);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XZY);
     }
 }
 
@@ -169,8 +169,8 @@ void Mathematics::EulerTesting::EulerYXZTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), xAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), yAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), zAngle, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YXZ);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::Unique);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YXZ);
 
         matrix0.MakeEulerYXZ(yAngle + zAngle, MathD::GetHalfPI(), zAngle);
 
@@ -179,8 +179,8 @@ void Mathematics::EulerTesting::EulerYXZTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), MathD::GetHalfPI(), 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), yAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), 0.0, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YXZ);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YXZ);
 
         matrix0.MakeEulerYXZ(yAngle - zAngle, -MathD::GetHalfPI(), zAngle);
 
@@ -189,8 +189,8 @@ void Mathematics::EulerTesting::EulerYXZTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), -MathD::GetHalfPI(), 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), yAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), 0.0, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YXZ);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YXZ);
     }
 }
 
@@ -215,8 +215,8 @@ void Mathematics::EulerTesting::EulerYZXTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), xAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), yAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), zAngle, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YZX);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::Unique);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YZX);
 
         matrix0.MakeEulerYZX(yAngle + xAngle, -MathD::GetHalfPI(), xAngle);
 
@@ -225,8 +225,8 @@ void Mathematics::EulerTesting::EulerYZXTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), 0.0, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), yAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), -MathD::GetHalfPI(), 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YZX);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YZX);
 
         matrix0.MakeEulerYZX(yAngle - xAngle, MathD::GetHalfPI(), xAngle);
 
@@ -235,8 +235,8 @@ void Mathematics::EulerTesting::EulerYZXTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), 0.0, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), yAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), MathD::GetHalfPI(), 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YZX);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YZX);
     }
 }
 
@@ -261,8 +261,8 @@ void Mathematics::EulerTesting::EulerZXYTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), xAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), yAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), zAngle, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZXY);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::Unique);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZXY);
 
         matrix0.MakeEulerZXY(zAngle + yAngle, -MathD::GetHalfPI(), yAngle);
 
@@ -271,8 +271,8 @@ void Mathematics::EulerTesting::EulerZXYTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), -MathD::GetHalfPI(), 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), 0.0, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), zAngle, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZXY);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZXY);
 
         matrix0.MakeEulerZXY(zAngle - yAngle, MathD::GetHalfPI(), yAngle);
 
@@ -281,8 +281,8 @@ void Mathematics::EulerTesting::EulerZXYTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), MathD::GetHalfPI(), 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), 0.0, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), zAngle, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZXY);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZXY);
     }
 }
 
@@ -307,8 +307,8 @@ void Mathematics::EulerTesting::EulerZYXTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), xAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), yAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), zAngle, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZYX);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::Unique);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZYX);
 
         matrix0.MakeEulerZYX(zAngle + xAngle, MathD::GetHalfPI(), xAngle);
 
@@ -317,8 +317,8 @@ void Mathematics::EulerTesting::EulerZYXTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), 0.0, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), MathD::GetHalfPI(), 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), zAngle, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZYX);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZYX);
 
         matrix0.MakeEulerZYX(zAngle - xAngle, -MathD::GetHalfPI(), xAngle);
 
@@ -327,8 +327,8 @@ void Mathematics::EulerTesting::EulerZYXTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), 0.0, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), -MathD::GetHalfPI(), 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), zAngle, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZYX);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZYX);
     }
 }
 
@@ -353,8 +353,8 @@ void Mathematics::EulerTesting::EulerXYXTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), x0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), yAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetX1Angle(), x1Angle, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XYX);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::Unique);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XYX);
 
         matrix0.MakeEulerXYX(x0Angle - x1Angle, 0.0, x1Angle);
 
@@ -363,8 +363,8 @@ void Mathematics::EulerTesting::EulerXYXTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), x0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), 0.0, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetX1Angle(), 0.0, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XYX);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XYX);
 
         matrix0.MakeEulerXYX(x0Angle + x1Angle, MathD::GetPI(), x1Angle);
 
@@ -373,8 +373,8 @@ void Mathematics::EulerTesting::EulerXYXTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), x0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), MathD::GetPI(), 1e-10);
         ASSERT_APPROXIMATE(euler0.GetX1Angle(), 0.0, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XYX);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XYX);
     }
 }
 
@@ -399,8 +399,8 @@ void Mathematics::EulerTesting::EulerXZXTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), x0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), zAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetX1Angle(), x1Angle, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XZX);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::Unique);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XZX);
 
         matrix0.MakeEulerXZX(x0Angle + x1Angle, MathD::GetPI(), x1Angle);
 
@@ -409,8 +409,8 @@ void Mathematics::EulerTesting::EulerXZXTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), x0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), MathD::GetPI(), 1e-10);
         ASSERT_APPROXIMATE(euler0.GetX1Angle(), 0.0, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XZX);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XZX);
 
         matrix0.MakeEulerXZX(x0Angle - x1Angle, 0.0, x1Angle);
 
@@ -419,8 +419,8 @@ void Mathematics::EulerTesting::EulerXZXTest()
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), x0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), 0.0, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetX1Angle(), 0.0, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XZX);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::XZX);
     }
 }
 
@@ -445,8 +445,8 @@ void Mathematics::EulerTesting::EulerYXYTest()
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), y0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), xAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY1Angle(), y1Angle, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YXY);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::Unique);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YXY);
 
         matrix0.MakeEulerYXY(y0Angle + y1Angle, MathD::GetPI(), y1Angle);
 
@@ -455,8 +455,8 @@ void Mathematics::EulerTesting::EulerYXYTest()
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), y0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), MathD::GetPI(), 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY1Angle(), 0.0, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YXY);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YXY);
 
         matrix0.MakeEulerYXY(y0Angle - y1Angle, 0.0, y1Angle);
 
@@ -465,8 +465,8 @@ void Mathematics::EulerTesting::EulerYXYTest()
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), y0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), 0.0, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY1Angle(), 0.0, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YXY);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YXY);
     }
 }
 
@@ -491,8 +491,8 @@ void Mathematics::EulerTesting::EulerYZYTest()
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), y0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), zAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY1Angle(), y1Angle, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YZY);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::Unique);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YZY);
 
         matrix0.MakeEulerYZY(y0Angle + y1Angle, MathD::GetPI(), y1Angle);
 
@@ -501,8 +501,8 @@ void Mathematics::EulerTesting::EulerYZYTest()
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), y0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), MathD::GetPI(), 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY1Angle(), 0.0, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YZY);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YZY);
 
         matrix0.MakeEulerYZY(y0Angle - y1Angle, 0.0, y1Angle);
 
@@ -511,8 +511,8 @@ void Mathematics::EulerTesting::EulerYZYTest()
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), y0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), 0.0, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY1Angle(), 0.0, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YZY);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::YZY);
     }
 }
 
@@ -537,8 +537,8 @@ void Mathematics::EulerTesting::EulerZXZTest()
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), z0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), xAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ1Angle(), z1Angle, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZXZ);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::Unique);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZXZ);
 
         matrix0.MakeEulerZXZ(z0Angle + z1Angle, MathD::GetPI(), z1Angle);
 
@@ -547,8 +547,8 @@ void Mathematics::EulerTesting::EulerZXZTest()
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), z0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), MathD::GetPI(), 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ1Angle(), 0.0, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZXZ);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZXZ);
 
         matrix0.MakeEulerZXZ(z0Angle - z1Angle, 0.0, z1Angle);
 
@@ -557,8 +557,8 @@ void Mathematics::EulerTesting::EulerZXZTest()
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), z0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetX0Angle(), 0.0, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ1Angle(), 0.0, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZXZ);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZXZ);
     }
 }
 
@@ -583,8 +583,8 @@ void Mathematics::EulerTesting::EulerZYZTest()
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), z0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), yAngle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ1Angle(), z1Angle, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::Unique);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZYZ);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::Unique);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZYZ);
 
         matrix0.MakeEulerZYZ(z0Angle + z1Angle, MathD::GetPI(), z1Angle);
 
@@ -593,8 +593,8 @@ void Mathematics::EulerTesting::EulerZYZTest()
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), z0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), MathD::GetPI(), 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ1Angle(), 0.0, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZYZ);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueDifference);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZYZ);
 
         matrix0.MakeEulerZYZ(z0Angle - z1Angle, 0.0, z1Angle);
 
@@ -603,7 +603,7 @@ void Mathematics::EulerTesting::EulerZYZTest()
         ASSERT_APPROXIMATE(euler0.GetZ0Angle(), z0Angle, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetY0Angle(), 0.0, 1e-10);
         ASSERT_APPROXIMATE(euler0.GetZ1Angle(), 0.0, 1e-10);
-        ASSERT_ENUM_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
-        ASSERT_ENUM_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZYZ);
+        ASSERT_EQUAL(euler0.GetType(), EulerResult::NotUniqueSum);
+        ASSERT_EQUAL(euler0.GetOrder(), ExtractEulerResultOrder::ZYZ);
     }
 }

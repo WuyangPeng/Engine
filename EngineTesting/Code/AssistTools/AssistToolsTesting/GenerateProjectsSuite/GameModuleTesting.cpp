@@ -47,6 +47,6 @@ void AssistTools::GameModuleTesting::GameModuleReadTest()
 
     ASSERT_EQUAL(gameModule.GetModuleName(), moduleName);
     ASSERT_EQUAL(gameModule.GetChineseName(), chineseName);
-    ASSERT_ENUM_EQUAL(gameModule.GetProjectServiceType(), projectServiceType);
+    ASSERT_EQUAL(gameModule.GetProjectServiceType(), projectServiceType);
     ASSERT_EQUAL(gameModule.GetUppercaseName(), uppercaseName);
 }

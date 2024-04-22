@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:42)
+/// 版本：1.0.0.8 (2024/04/11 16:08)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_CONTAINER_ADAPTER_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_CONTAINER_ADAPTER_DETAIL_H
@@ -17,7 +17,8 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename T, int N>
-requires(N > 0) CoreTools::ContainerAdapter<T, N>::ContainerAdapter(T* elements, int numElements)
+requires(N > 0)
+CoreTools::ContainerAdapter<T, N>::ContainerAdapter(T* elements, int numElements)
     : elements{ elements }
 {
     if (elements == nullptr)
@@ -52,7 +53,8 @@ CoreTools::ContainerAdapter<T, N>& CoreTools::ContainerAdapter<T, N>::operator=(
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename T, int N>
-requires(N > 0) bool CoreTools::ContainerAdapter<T, N>::IsValid() const noexcept
+requires(N > 0)
+bool CoreTools::ContainerAdapter<T, N>::IsValid() const noexcept
 {
     return elements != nullptr;
 }
@@ -60,7 +62,8 @@ requires(N > 0) bool CoreTools::ContainerAdapter<T, N>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T, int N>
-requires(N > 0) T* CoreTools::ContainerAdapter<T, N>::GetData() noexcept
+requires(N > 0)
+T* CoreTools::ContainerAdapter<T, N>::GetData() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -68,7 +71,8 @@ requires(N > 0) T* CoreTools::ContainerAdapter<T, N>::GetData() noexcept
 }
 
 template <typename T, int N>
-requires(N > 0) const T* CoreTools::ContainerAdapter<T, N>::GetData() const noexcept
+requires(N > 0)
+const T* CoreTools::ContainerAdapter<T, N>::GetData() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -76,7 +80,8 @@ requires(N > 0) const T* CoreTools::ContainerAdapter<T, N>::GetData() const noex
 }
 
 template <typename T, int N>
-requires(N > 0) const T& CoreTools::ContainerAdapter<T, N>::operator[](int index) const
+requires(N > 0)
+const T& CoreTools::ContainerAdapter<T, N>::operator[](int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -94,7 +99,8 @@ requires(N > 0) const T& CoreTools::ContainerAdapter<T, N>::operator[](int index
 }
 
 template <typename T, int N>
-requires(N > 0) T& CoreTools::ContainerAdapter<T, N>::operator[](int index)
+requires(N > 0)
+T& CoreTools::ContainerAdapter<T, N>::operator[](int index)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -102,7 +108,8 @@ requires(N > 0) T& CoreTools::ContainerAdapter<T, N>::operator[](int index)
 }
 
 template <typename T, int N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::iterator CoreTools::ContainerAdapter<T, N>::begin() noexcept
+requires(N > 0)
+typename CoreTools::ContainerAdapter<T, N>::iterator CoreTools::ContainerAdapter<T, N>::begin() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -110,7 +117,8 @@ requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::iterator CoreTools::
 }
 
 template <typename T, int N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreTools::ContainerAdapter<T, N>::begin() const noexcept
+requires(N > 0)
+typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreTools::ContainerAdapter<T, N>::begin() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -118,7 +126,8 @@ requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreT
 }
 
 template <typename T, int N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::iterator CoreTools::ContainerAdapter<T, N>::end() noexcept
+requires(N > 0)
+typename CoreTools::ContainerAdapter<T, N>::iterator CoreTools::ContainerAdapter<T, N>::end() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -126,7 +135,8 @@ requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::iterator CoreTools::
 }
 
 template <typename T, int N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreTools::ContainerAdapter<T, N>::end() const noexcept
+requires(N > 0)
+typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreTools::ContainerAdapter<T, N>::end() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -134,7 +144,8 @@ requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreT
 }
 
 template <typename T, int N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::reverse_iterator CoreTools::ContainerAdapter<T, N>::rbegin() noexcept
+requires(N > 0)
+typename CoreTools::ContainerAdapter<T, N>::reverse_iterator CoreTools::ContainerAdapter<T, N>::rbegin() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -142,7 +153,8 @@ requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::reverse_iterator Cor
 }
 
 template <typename T, int N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterator CoreTools::ContainerAdapter<T, N>::rbegin() const noexcept
+requires(N > 0)
+typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterator CoreTools::ContainerAdapter<T, N>::rbegin() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -150,7 +162,8 @@ requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterat
 }
 
 template <typename T, int N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::reverse_iterator CoreTools::ContainerAdapter<T, N>::rend() noexcept
+requires(N > 0)
+typename CoreTools::ContainerAdapter<T, N>::reverse_iterator CoreTools::ContainerAdapter<T, N>::rend() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -158,7 +171,8 @@ requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::reverse_iterator Cor
 }
 
 template <typename T, int N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterator CoreTools::ContainerAdapter<T, N>::rend() const noexcept
+requires(N > 0)
+typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterator CoreTools::ContainerAdapter<T, N>::rend() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -166,7 +180,8 @@ requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterat
 }
 
 template <typename T, int N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreTools::ContainerAdapter<T, N>::cbegin() const noexcept
+requires(N > 0)
+typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreTools::ContainerAdapter<T, N>::cbegin() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -174,7 +189,8 @@ requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreT
 }
 
 template <typename T, int N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreTools::ContainerAdapter<T, N>::cend() const noexcept
+requires(N > 0)
+typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreTools::ContainerAdapter<T, N>::cend() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -182,7 +198,8 @@ requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreT
 }
 
 template <typename T, int N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterator CoreTools::ContainerAdapter<T, N>::crbegin() const noexcept
+requires(N > 0)
+typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterator CoreTools::ContainerAdapter<T, N>::crbegin() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -190,7 +207,8 @@ requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterat
 }
 
 template <typename T, int N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterator CoreTools::ContainerAdapter<T, N>::crend() const noexcept
+requires(N > 0)
+typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterator CoreTools::ContainerAdapter<T, N>::crend() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -198,7 +216,8 @@ requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterat
 }
 
 template <typename T, int N>
-requires(N > 0) void CoreTools::ContainerAdapter<T, N>::Fill(const T& value)
+requires(N > 0)
+void CoreTools::ContainerAdapter<T, N>::Fill(const T& value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -222,10 +241,7 @@ CoreTools::ContainerAdapter<T>::ContainerAdapter(T* elements, int numElements)
 template <typename T>
 bool CoreTools::ContainerAdapter<T>::IsValid() const noexcept
 {
-    if (0 < numElements && elements != nullptr)
-        return true;
-    else
-        return false;
+    return 0 < numElements && elements != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

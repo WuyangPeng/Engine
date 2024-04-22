@@ -5,9 +5,9 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:23)
+/// 版本：1.0.0.8 (2024/04/12 14:16)
 
-// 约束：必须是POD
+/// 约束：必须是POD
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_MUST_BE_POD_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_MUST_BE_POD_H
 
@@ -20,7 +20,7 @@ namespace CoreTools
     {
         ~MustBePod()
         {
-            MAYBE_UNUSED void (*ptr)() = Constranints;
+            MAYBE_UNUSED void (*ptr)() = Constraint;
         }
 
         MustBePod() noexcept = default;
@@ -30,7 +30,7 @@ namespace CoreTools
         MustBePod& operator=(MustBePod&& rhs) noexcept = default;
 
     private:
-        constexpr static void Constranints() noexcept
+        constexpr static void Constraint() noexcept
         {
             MAYBE_UNUSED const union
             {
@@ -44,7 +44,7 @@ namespace CoreTools
     {
         ~MustBePodOrVoid()
         {
-            MAYBE_UNUSED void (*ptr)() = Constranints;
+            MAYBE_UNUSED void (*ptr)() = Constraint;
         }
 
         MustBePodOrVoid() noexcept = default;
@@ -54,7 +54,7 @@ namespace CoreTools
         MustBePodOrVoid& operator=(MustBePodOrVoid&& rhs) noexcept = default;
 
     private:
-        constexpr static void Constranints() noexcept
+        constexpr static void Constraint() noexcept
         {
             MAYBE_UNUSED const union
             {

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 17:49)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/16 15:22)
 
 #include "StdRecursiveMutexTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -34,7 +34,6 @@ void CoreTools::StdRecursiveMutexTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MultiThreadingLockingFailureTest);
 }
 
-// 递归测试
 void CoreTools::StdRecursiveMutexTesting::RecursionTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateRecursionTestHolder);
@@ -50,7 +49,6 @@ void CoreTools::StdRecursiveMutexTesting::CreateRecursionTestHolder()
     ScopedMutex holder3{ stdMutex };
 }
 
-// 多线程锁成功测试
 void CoreTools::StdRecursiveMutexTesting::MultiThreadingLockingSuccessTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateLockingSuccessThread);
@@ -106,7 +104,6 @@ void CoreTools::StdRecursiveMutexTesting::StaticValueTest()
     ASSERT_EQUAL(testValue, original);
 }
 
-// 多线程锁失败测试
 void CoreTools::StdRecursiveMutexTesting::MultiThreadingLockingFailureTest()
 {
     stdDllMutex.Initialize();

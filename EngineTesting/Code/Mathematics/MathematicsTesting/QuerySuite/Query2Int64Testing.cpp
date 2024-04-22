@@ -69,7 +69,7 @@ void Mathematics::Query2Int64Testing::VerticesTest()
 
         Query2Int64D query(vertices);
 
-        ASSERT_ENUM_EQUAL(query.GetType(), QueryType::Int64);
+        ASSERT_EQUAL(query.GetType(), QueryType::Int64);
         ASSERT_EQUAL(query.GetNumVertices(), size);
 
         for (auto m = 0; m < size; ++m)
@@ -105,8 +105,8 @@ void Mathematics::Query2Int64Testing::LineTest()
 
         Query2Int64D query(vertices);
 
-        ASSERT_ENUM_EQUAL(query.ToLine(secondIndex, secondIndex, thirdIndex), LineQueryType::OnLine);
-        ASSERT_ENUM_EQUAL(query.ToLine(thirdIndex, secondIndex, thirdIndex), LineQueryType::OnLine);
+        ASSERT_EQUAL(query.ToLine(secondIndex, secondIndex, thirdIndex), LineQueryType::OnLine);
+        ASSERT_EQUAL(query.ToLine(thirdIndex, secondIndex, thirdIndex), LineQueryType::OnLine);
     }
 }
 
@@ -146,9 +146,9 @@ void Mathematics::Query2Int64Testing::TriangleTest()
         const Vector2 vector2 = vertices.at(thirdIndex);
         const Vector2 vector3 = vertices.at(fourthIndex);
 
-        ASSERT_ENUM_EQUAL(query.ToTriangle(secondIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
-        ASSERT_ENUM_EQUAL(query.ToTriangle(thirdIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
-        ASSERT_ENUM_EQUAL(query.ToTriangle(fourthIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
+        ASSERT_EQUAL(query.ToTriangle(secondIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
+        ASSERT_EQUAL(query.ToTriangle(thirdIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
+        ASSERT_EQUAL(query.ToTriangle(fourthIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
 
         const LineQueryType sign0 = query.ToLine(firstIndex, thirdIndex, fourthIndex);
         const LineQueryType sign1 = query.ToLine(firstIndex, secondIndex, fourthIndex);
@@ -157,17 +157,17 @@ void Mathematics::Query2Int64Testing::TriangleTest()
         if (sign0 == LineQueryType::Right || sign1 == LineQueryType::Left ||
             sign2 == LineQueryType::Right)
         {
-            ASSERT_ENUM_EQUAL(query.ToTriangle(firstIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::Outside);
+            ASSERT_EQUAL(query.ToTriangle(firstIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::Outside);
         }
         else if (sign0 == LineQueryType::OnLine ||
                  sign1 == LineQueryType::OnLine ||
                  sign2 == LineQueryType::OnLine)
         {
-            ASSERT_ENUM_EQUAL(query.ToTriangle(firstIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
+            ASSERT_EQUAL(query.ToTriangle(firstIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
         }
         else
         {
-            ASSERT_ENUM_EQUAL(query.ToTriangle(firstIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::Inside);
+            ASSERT_EQUAL(query.ToTriangle(firstIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::Inside);
         }
     }
 }
@@ -199,8 +199,8 @@ void Mathematics::Query2Int64Testing::CircumcircleTest()
 
         Query2Int64D query(vertices);
 
-        ASSERT_ENUM_EQUAL(query.ToCircumcircle(secondIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::OnCircumcircle);
-        ASSERT_ENUM_EQUAL(query.ToCircumcircle(thirdIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::OnCircumcircle);
-        ASSERT_ENUM_EQUAL(query.ToCircumcircle(fourthIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::OnCircumcircle);
+        ASSERT_EQUAL(query.ToCircumcircle(secondIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::OnCircumcircle);
+        ASSERT_EQUAL(query.ToCircumcircle(thirdIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::OnCircumcircle);
+        ASSERT_EQUAL(query.ToCircumcircle(fourthIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::OnCircumcircle);
     }
 }

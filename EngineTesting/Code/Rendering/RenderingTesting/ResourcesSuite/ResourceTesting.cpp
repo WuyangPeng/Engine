@@ -67,17 +67,17 @@ void Rendering::ResourceTesting::DefaultTest()
     ASSERT_EQUAL(resourceTest.GetNumElements(), 0);
     ASSERT_EQUAL(resourceTest.GetElementSize(), 0);
     ASSERT_EQUAL(resourceTest.GetNumBytes(), 0);
-    ASSERT_ENUM_EQUAL(resourceTest.GetUsage(), UsageType::Immutable);
-    ASSERT_ENUM_EQUAL(resourceTest.GetCopy(), CopyType::None);
+    ASSERT_EQUAL(resourceTest.GetUsage(), UsageType::Immutable);
+    ASSERT_EQUAL(resourceTest.GetCopy(), CopyType::None);
     ASSERT_EQUAL(resourceTest.GetOffset(), 0);
     ASSERT_EQUAL(resourceTest.GetNumActiveElements(), 0);
     ASSERT_EQUAL(resourceTest.GetNumActiveBytes(), 0);
 
     resourceTest.SetUsage(UsageType::DynamicUpdate);
-    ASSERT_ENUM_EQUAL(resourceTest.GetUsage(), UsageType::DynamicUpdate);
+    ASSERT_EQUAL(resourceTest.GetUsage(), UsageType::DynamicUpdate);
 
     resourceTest.SetCopy(CopyType::Bidirectional);
-    ASSERT_ENUM_EQUAL(resourceTest.GetCopy(), CopyType::Bidirectional);
+    ASSERT_EQUAL(resourceTest.GetCopy(), CopyType::Bidirectional);
 }
 
 void Rendering::ResourceTesting::CreateStorageTest()

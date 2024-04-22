@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:41)
+/// 版本：1.0.0.8 (2024/04/02 18:11)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_SIMPLE_CSV_CONVERSION_H
 #define CORE_TOOLS_TEXT_PARSING_SIMPLE_CSV_CONVERSION_H
@@ -28,6 +28,9 @@ namespace CoreTools
         using ParentType = ExcelConversionCSVImpl;
 
         using String = System::String;
+        using Row = SimpleCSV::Row;
+        using CellValue = SimpleCSV::CellValue;
+        using Worksheet = SimpleCSV::Worksheet;
 
     public:
         SimpleCSVConversion(const std::string& xlsxFileName, String csvFileName);
@@ -35,19 +38,28 @@ namespace CoreTools
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        void Conversion();
-
-        void ObtainRelated(const SimpleCSV::Worksheet& xlWorksheet);
-        NODISCARD std::string GetContent(bool isFirstPage, const SimpleCSV::Worksheet& xlWorksheet) const;
-        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, const SimpleCSV::Row& xlRow) const;
-        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, int columnIndex, const SimpleCSV::CellValue& xlCellValue) const;
-        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, int columnIndex, const std::string& column) const;
-        NODISCARD bool IsIgnore(const SimpleCSV::Worksheet& xlWorksheet) const;
-
-        void SaveIntoFile(const std::string& content) const;
+        using IndexContainer = std::set<int>;
+        using Container = std::vector<std::string>;
 
     private:
-        using IndexContainer = std::set<int>;
+        void Conversion();
+
+        void ObtainRelated(const Worksheet& worksheet);
+        NODISCARD std::string GetContent(bool isFirstPage, const Worksheet& worksheet) const;
+        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, const Row& row) const;
+        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, int columnIndex, const CellValue& cellValue) const;
+
+        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, int columnIndex, const std::string& column) const;
+        NODISCARD static bool IsIgnore(const Worksheet& worksheet);
+
+        void ObtainRelated(int excludeIndex, const CellValue& element);
+        NODISCARD std::string GetFirstPageBitFieldContent(int columnIndex, const std::string& column) const;
+        NODISCARD static std::string GetStringFieldContent(const std::string& column);
+        NODISCARD static std::string GetBitArrayFieldContent(const std::string& column);
+        NODISCARD static std::string GetBitFieldContent(const std::string& column);
+        NODISCARD static std::string GetBitArrayFieldContent(bool isEnd, const std::string& element);
+
+        void SaveIntoFile(const std::string& content) const;
 
     private:
         SimpleCSVDocument document;

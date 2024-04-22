@@ -94,6 +94,15 @@ typename Mathematics::Algebra::Ellipse3<Real>::Vector2 Mathematics::Algebra::Ell
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
+Real Mathematics::Algebra::Ellipse3<Real>::GetExtent(int index) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return extent[index];
+}
+
+template <typename Real>
+requires(std::is_arithmetic_v<Real>)
 void Mathematics::Algebra::Ellipse3<Real>::SetCenter(const Vector3& aCenter) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -126,6 +135,15 @@ void Mathematics::Algebra::Ellipse3<Real>::SetExtent(const Vector2& aExtent) noe
     MATHEMATICS_CLASS_IS_VALID_9;
 
     extent = aExtent;
+}
+
+template <typename Real>
+requires(std::is_arithmetic_v<Real>)
+void Mathematics::Algebra::Ellipse3<Real>::SetAxis(int index, const Vector3& aAxis)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    axis.at(index) = aAxis;
 }
 
 template <typename Real>

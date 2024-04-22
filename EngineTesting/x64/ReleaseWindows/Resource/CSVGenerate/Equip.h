@@ -41,7 +41,7 @@ namespace CSVConfigure
 
         NODISCARD String GetEquipName() const override;
 
-        NODISCARD System::TChar GetLogo() const noexcept override;
+        NODISCARD Char GetLogo() const noexcept override;
 
         NODISCARD CoreTools::Vector3 GetPosition() const noexcept override;
 
@@ -59,7 +59,7 @@ namespace CSVConfigure
         int nextId;  // 下一关ID
         int reward;  // 过关奖励
         String equipName;  // 装备名称
-        System::TChar logo;  // 标识
+        Char logo;  // 标识
         CoreTools::Vector3 position;  // 位置
         BoolContainer mask;  // 掩码
         int heroId;  // 英雄Id

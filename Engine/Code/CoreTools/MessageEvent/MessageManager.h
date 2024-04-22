@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:49)
+/// 版本：1.0.0.8 (2024/04/12 15:22)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_MESSAGE_MANAGER_H
 #define CORE_TOOLS_MESSAGE_EVENT_MESSAGE_MANAGER_H
@@ -47,7 +47,7 @@ namespace CoreTools
         void CallEvent(MessageManagerEventType eventType, const CallbackParameters& callbackParameters);
         void DelayCallEvent(MessageManagerEventType eventType, const CallbackParameters& callbackParameters, int32_t delayTime);
 
-        // 不关心回调顺序时调用这个，优先级将被忽略。
+        /// 不关心回调顺序时调用这个，优先级将被忽略。
         void CallEventUnordered(MessageManagerEventType eventType, const CallbackParameters& callbackParameters);
         void DelayCallEventUnordered(MessageManagerEventType eventType, const CallbackParameters& callbackParameters, int32_t delayTime);
 

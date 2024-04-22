@@ -92,7 +92,7 @@ void System::CompareStringOrdinalUseBinaryTesting::CompareStringTest(size_t inde
 void System::CompareStringOrdinalUseBinaryTesting::CompareStringEqualTest(const std::wstring& comparesWString)
 {
     const auto returnFlag = CompareStringOrdinalUseBinary(comparesWString, comparesWString, false);
-    ASSERT_ENUM_EQUAL(returnFlag, ComparesStringReturn::Equal);
+    ASSERT_EQUAL(returnFlag, ComparesStringReturn::Equal);
 }
 
 void System::CompareStringOrdinalUseBinaryTesting::CompareStringOppositeTest(const std::wstring& lhsComparesWString, const std::wstring& rhsComparesWString)

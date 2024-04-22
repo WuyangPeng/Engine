@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:19)
+/// 版本：1.0.0.8 (2024/03/29 22:34)
 
 #ifndef CORE_TOOLS_CHARACTER_STRING_MULTI_BYTE_CONVERSION_WIDE_CHAR_H
 #define CORE_TOOLS_CHARACTER_STRING_MULTI_BYTE_CONVERSION_WIDE_CHAR_H
@@ -17,7 +17,7 @@
 #include <string>
 #include <vector>
 
-// 多字节字符串转换为宽字符串
+/// 多字节字符串转换为宽字符串
 namespace CoreTools
 {
     class CORE_TOOLS_HIDDEN_DECLARE MultiByteConversionWideChar final

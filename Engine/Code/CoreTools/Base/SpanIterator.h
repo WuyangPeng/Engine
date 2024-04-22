@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:05)
+/// 版本：1.0.0.8 (2024/03/28 16:37)
 
 #ifndef CORE_TOOLS_BASE_SPAN_ITERATOR_H
 #define CORE_TOOLS_BASE_SPAN_ITERATOR_H
@@ -51,42 +51,56 @@ namespace CoreTools
         NODISCARD Iter GetBegin() const noexcept;
         NODISCARD Iter GetEnd() const noexcept;
         NODISCARD Iter GetCurrent() const noexcept;
+        NODISCARD Iter Get(int step) const;
 
         NODISCARD DifferenceType GetRemainingCount() const noexcept;
 
+        /// Increase函数修改current。
         template <typename T>
+        requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
         NODISCARD T Increase();
 
         template <typename T>
+        requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
         void Increase(T value);
 
         template <typename T, int Size>
+        requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
         NODISCARD std::array<T, Size> Increase();
 
+        template <typename T, int Size>
+        requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
+        void Increase(const std::array<T, Size>& value);
+
+        /// GetValue和SetValue函数不修改current。
         template <typename T>
+        requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
         NODISCARD T GetValue(int step) const;
 
         template <typename T, int Size>
+        requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
         NODISCARD std::array<T, Size> GetValue(int step) const;
 
         template <typename T>
+        requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
         void SetValue(int step, T value);
 
         template <typename T, int Size>
-        int SetValue(int step, const std::array<T, Size>& value);
+        requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
+        void SetValue(int step, const std::array<T, Size>& value);
 
     private:
         template <typename T>
-        NODISCARD const T& ReinterpretCast() const;
+        NODISCARD const T& ReinterpretCast() const requires(std::is_arithmetic_v<ValueType> && std::is_arithmetic_v<T>);
 
         template <typename T>
-        NODISCARD T& ReinterpretCast();
+        NODISCARD T& ReinterpretCast() requires(std::is_arithmetic_v<ValueType> && std::is_arithmetic_v<T>);
 
         template <typename T>
-        NODISCARD const T& ReinterpretCast(int step) const;
+        NODISCARD const T& ReinterpretCast(int step) const requires(std::is_arithmetic_v<ValueType> && std::is_arithmetic_v<T>);
 
         template <typename T>
-        NODISCARD T& ReinterpretCast(int step);
+        NODISCARD T& ReinterpretCast(int step) requires(std::is_arithmetic_v<ValueType> && std::is_arithmetic_v<T>);
 
     private:
         Iter begin{};
@@ -97,7 +111,7 @@ namespace CoreTools
     template <typename Iter>
     NODISCARD typename Iter::difference_type operator-(const SpanIterator<Iter>& lhs, const SpanIterator<Iter>& rhs);
 
-    // 交互两个迭代器的值。
+    /// 交换两个迭代器的值。
     template <typename Iter>
     void IterSwap(const SpanIterator<Iter>& lhs, const SpanIterator<Iter>& rhs);
 }

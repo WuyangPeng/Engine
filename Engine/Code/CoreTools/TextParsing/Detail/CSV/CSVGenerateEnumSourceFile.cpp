@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:56)
+/// 版本：1.0.0.8 (2024/04/10 17:34)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,16 +15,35 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/CharacterString/StringUtility.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/Detail/Parsing.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
 CoreTools::CSVGenerateEnumSourceFile::CSVGenerateEnumSourceFile(const CSVContent& csvContent, const CodeMappingAnalysis& codeMappingAnalysis)
-    : ParentType{ csvContent.GetCSVHead(), codeMappingAnalysis }, csvContent{ csvContent }
+    : ParentType{ csvContent.GetCSVHead(), codeMappingAnalysis },
+      csvContent{ csvContent },
+      templateName{ SYSTEM_TEXT("/FlagsCpp.txt") },
+
+      space{ GetSpace(csvContent.GetCSVHead(), codeMappingAnalysis) },
+      classMemberType{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("ClassMemberType")) },
+      endClassMemberType{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("EndClassMemberType")) },
+      classMemberName{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("ClassMemberName")) },
+      endClassMemberName{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("EndClassMemberName")) },
+      classMemberNote{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("ClassMemberNote")) },
+      endClassMemberNote{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("EndClassMemberNote")) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+}
+
+System::String CoreTools::CSVGenerateEnumSourceFile::GetSpace(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis)
+{
+    auto typeDescribe = codeMappingAnalysis.GetElement(SYSTEM_TEXT("TypeDescribe"));
+    boost::algorithm::replace_all(typeDescribe, SYSTEM_TEXT("$ClassName$"), csvHead.GetCSVClassName());
+    String space(typeDescribe.size(), SYSTEM_TEXT(' '));
+
+    return space;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CSVGenerateEnumSourceFile)
@@ -41,140 +60,77 @@ System::String CoreTools::CSVGenerateEnumSourceFile::GetFilePrefix() const
 
 System::String CoreTools::CSVGenerateEnumSourceFile::GetFileSuffix() const
 {
-    auto result = GetSuffix();
-
-    result += TextParsing::gSourceFileExtensionName;
-
-    return result;
+    return GetSuffix() + TextParsing::gSourceFileExtensionName.data();
 }
 
 System::String CoreTools::CSVGenerateEnumSourceFile::GetContent(const String& codeDirectory) const
 {
-    auto content = GetTemplateContent(codeDirectory + SYSTEM_TEXT("/FlagsCpp.txt"));
-
-    const auto codeMapping = GetCodeMappingAnalysis();
-
-    auto typeDescribe = codeMapping.GetElement(SYSTEM_TEXT("TypeDescribe"));
-    boost::algorithm::replace_all(typeDescribe, SYSTEM_TEXT("$ClassName$"), GetCSVClassName());
-    String space(typeDescribe.size(), SYSTEM_TEXT(' '));
+    auto content = GetTemplateContent(codeDirectory + templateName);
 
     const auto head = GetCSVHead();
-
     const auto idIndex = head.GetDataIndex(TextParsing::gIdSmall);
     const auto nameIndex = head.GetDataIndex(TextParsing::gEnumName);
     const auto describeIndex = head.GetDataIndex(TextParsing::gEnumDescribe);
 
-    const auto size = csvContent.GetCount();
-
-    const auto classMemberType = codeMapping.GetElement(SYSTEM_TEXT("ClassMemberType"));
-
-    String classMemberTypeContent{};
-    for (auto i = 0; i < size; ++i)
-    {
-        const auto column = csvContent.GetContent(i);
-
-        const auto result = Parsing::GetSplitComma(column);
-
-        const auto& id = result.at(idIndex);
-
-        auto name = result.at(nameIndex);
-        trim_if(name, boost::is_any_of(TextParsing::gQuotationMarks));
-
-        auto describe = StringConversion::Utf8ConversionStandard(result.at(describeIndex));
-        trim_if(describe, boost::is_any_of(TextParsing::gQuotationMarks));
-
-        auto copyClassMemberType = classMemberType;
-        if (i == size - 1)
-        {
-            copyClassMemberType = space + codeMapping.GetElement(SYSTEM_TEXT("EndClassMemberType"));
-        }
-        else if (i != 0)
-        {
-            copyClassMemberType = space + copyClassMemberType;
-        }
-
-        boost::algorithm::replace_all(copyClassMemberType, SYSTEM_TEXT("$EnumName$"), name);
-        boost::algorithm::replace_all(copyClassMemberType, SYSTEM_TEXT("$EnumValue$"), id);
-        boost::algorithm::replace_all(copyClassMemberType, SYSTEM_TEXT("$EnumNameNote$"), describe);
-
-        classMemberTypeContent += copyClassMemberType;
-    }
-
-    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ClassMemberType$"), classMemberTypeContent);
-
-    const auto classMemberName = codeMapping.GetElement(SYSTEM_TEXT("ClassMemberName"));
-
-    String classMemberNameContent{};
-    for (auto i = 0; i < size; ++i)
-    {
-        const auto column = csvContent.GetContent(i);
-
-        const auto result = Parsing::GetSplitComma(column);
-
-        const auto& id = result.at(idIndex);
-
-        auto name = result.at(nameIndex);
-        trim_if(name, boost::is_any_of(TextParsing::gQuotationMarks));
-
-        auto describe = StringConversion::Utf8ConversionStandard(result.at(describeIndex));
-        trim_if(describe, boost::is_any_of(TextParsing::gQuotationMarks));
-
-        auto copyClassMemberName = classMemberName;
-        if (i == size - 1)
-        {
-            copyClassMemberName = space + codeMapping.GetElement(SYSTEM_TEXT("EndClassMemberName"));
-        }
-        else if (i != 0)
-        {
-            copyClassMemberName = space + copyClassMemberName;
-        }
-
-        boost::algorithm::replace_all(copyClassMemberName, SYSTEM_TEXT("$EnumName$"), name);
-        boost::algorithm::replace_all(copyClassMemberName, SYSTEM_TEXT("$EnumValue$"), id);
-        boost::algorithm::replace_all(copyClassMemberName, SYSTEM_TEXT("$EnumNameNote$"), describe);
-
-        classMemberNameContent += copyClassMemberName;
-        classMemberNameContent += SYSTEM_TEXT("\n");
-    }
-
-    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ClassMemberName$"), classMemberNameContent);
-
-    const auto classMemberNote = codeMapping.GetElement(SYSTEM_TEXT("ClassMemberNote"));
-
-    String classMemberNoteContent{};
-    for (auto i = 0; i < size; ++i)
-    {
-        const auto column = csvContent.GetContent(i);
-
-        const auto result = Parsing::GetSplitComma(column);
-
-        const auto& id = result.at(idIndex);
-
-        auto name = result.at(nameIndex);
-        trim_if(name, boost::is_any_of(TextParsing::gQuotationMarks));
-
-        auto describe = StringConversion::Utf8ConversionStandard(result.at(describeIndex));
-        trim_if(describe, boost::is_any_of(TextParsing::gQuotationMarks));
-
-        auto copyClassMemberNote = classMemberNote;
-        if (i == size - 1)
-        {
-            copyClassMemberNote = space + codeMapping.GetElement(SYSTEM_TEXT("EndClassMemberNote"));
-        }
-        else if (i != 0)
-        {
-            copyClassMemberNote = space + copyClassMemberNote;
-        }
-
-        boost::algorithm::replace_all(copyClassMemberNote, SYSTEM_TEXT("$EnumName$"), name);
-        boost::algorithm::replace_all(copyClassMemberNote, SYSTEM_TEXT("$EnumValue$"), id);
-        boost::algorithm::replace_all(copyClassMemberNote, SYSTEM_TEXT("$EnumNameNote$"), describe);
-
-        classMemberNoteContent += copyClassMemberNote;
-        classMemberNoteContent += SYSTEM_TEXT("\n");
-    }
-
-    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ClassMemberNote$"), classMemberNoteContent);
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ClassMemberType$"), GetClassMemberTypeContent(idIndex, nameIndex, describeIndex));
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ClassMemberName$"), GetClassMemberNameContent(idIndex, nameIndex, describeIndex));
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ClassMemberNote$"), GetClassMemberNoteContent(idIndex, nameIndex, describeIndex));
 
     return ReplaceTemplate(content);
+}
+
+System::String CoreTools::CSVGenerateEnumSourceFile::GetClassMemberTypeContent(int idIndex, int nameIndex, int describeIndex) const
+{
+    String content{};
+    for (auto index = 0; index < csvContent.GetCount(); ++index)
+    {
+        content += GetClassMemberTypeContent(idIndex, nameIndex, describeIndex, index, classMemberType, endClassMemberType);
+    }
+
+    return content;
+}
+
+System::String CoreTools::CSVGenerateEnumSourceFile::GetClassMemberNameContent(int idIndex, int nameIndex, int describeIndex) const
+{
+    String content{};
+    for (auto index = 0; index < csvContent.GetCount(); ++index)
+    {
+        content += GetClassMemberTypeContent(idIndex, nameIndex, describeIndex, index, classMemberName, endClassMemberName);
+        content += TextParsing::gNewlineCharacter;
+    }
+
+    return content;
+}
+
+System::String CoreTools::CSVGenerateEnumSourceFile::GetClassMemberNoteContent(int idIndex, int nameIndex, int describeIndex) const
+{
+    String content{};
+    for (auto index = 0; index < csvContent.GetCount(); ++index)
+    {
+        content += GetClassMemberTypeContent(idIndex, nameIndex, describeIndex, index, classMemberNote, endClassMemberNote);
+        content += TextParsing::gNewlineCharacter;
+    }
+
+    return content;
+}
+
+System::String CoreTools::CSVGenerateEnumSourceFile::GetClassMemberTypeContent(int idIndex, int nameIndex, int describeIndex, int index, const String& original, const String& end) const
+{
+    const auto column = csvContent.GetContent(index);
+    const auto result = Parsing::GetSplitComma(column);
+    const auto& id = result.at(idIndex);
+
+    auto name = result.at(nameIndex);
+    trim_if(name, boost::is_any_of(TextParsing::gQuotationMarks));
+
+    auto describe = StringConversion::Utf8ConversionStandard(result.at(describeIndex));
+    trim_if(describe, boost::is_any_of(TextParsing::gQuotationMarks));
+
+    auto content = (index == csvContent.GetCount() - 1) ? space + end : (index != 0 ? space + original : original);
+
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$EnumName$"), name);
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$EnumValue$"), id);
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$EnumNameNote$"), describe);
+
+    return content;
 }

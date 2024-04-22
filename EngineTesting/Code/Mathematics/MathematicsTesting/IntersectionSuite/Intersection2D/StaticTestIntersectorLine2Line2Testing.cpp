@@ -62,17 +62,17 @@ void Mathematics::StaticTestIntersectorLine2Line2Testing::LineTest()
 
         StaticTestIntersectorLine2Line2<float> firstClassify(Line2F(lhsOrigin, lhsDirection), Line2F(lhsOrigin, lhsDirection));
 
-        ASSERT_ENUM_EQUAL(firstClassify.GetIntersectionType(), IntersectionType::Line);
+        ASSERT_EQUAL(firstClassify.GetIntersectionType(), IntersectionType::Line);
         ASSERT_EQUAL(firstClassify.GetQuantity(), INT_MAX);
 
         StaticTestIntersectorLine2Line2<float> secondClassify(Line2F(lhsOrigin, lhsDirection), Line2F(rhsOrigin, lhsDirection));
 
-        ASSERT_ENUM_EQUAL(secondClassify.GetIntersectionType(), IntersectionType::Empty);
+        ASSERT_EQUAL(secondClassify.GetIntersectionType(), IntersectionType::Empty);
         ASSERT_EQUAL(secondClassify.GetQuantity(), 0);
 
         StaticTestIntersectorLine2Line2<float> thirdClassify(Line2F(lhsOrigin, lhsDirection), Line2F(rhsOrigin, rhsDirection));
 
-        ASSERT_ENUM_EQUAL(thirdClassify.GetIntersectionType(), IntersectionType::Point);
+        ASSERT_EQUAL(thirdClassify.GetIntersectionType(), IntersectionType::Point);
         ASSERT_EQUAL(thirdClassify.GetQuantity(), 1);
     }
 }

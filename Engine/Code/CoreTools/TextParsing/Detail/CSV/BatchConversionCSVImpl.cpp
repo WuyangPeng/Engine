@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:54)
+/// 版本：1.0.0.8 (2024/04/03 09:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,24 +17,26 @@
 #include "CoreTools/TextParsing/Detail/FileNameParsing.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-CoreTools::BatchConversionCSVImpl::BatchConversionCSVImpl(const String& nativeFileName, const String& outputDirectory)
+CoreTools::BatchConversionCSVImpl::BatchConversionCSVImpl(String nativeFileName, String outputDirectory)
+    : nativeFileName{ std::move(nativeFileName) }, outputDirectory{ std::move(outputDirectory) }
 {
-    ExecutionFile(nativeFileName, outputDirectory);
+    ExecutionFile();
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, BatchConversionCSVImpl)
 
-void CoreTools::BatchConversionCSVImpl::ExecutionFile(const String& nativeFileName, const String& outputDirectory)
+void CoreTools::BatchConversionCSVImpl::ExecutionFile() const
 {
-    if (const auto outputFile = GetOutputFile(nativeFileName, outputDirectory); !outputFile.empty())
+    if (const auto outputFile = GetOutputFile();
+        !outputFile.empty())
     {
-        ExcelConversionCSV excelConversionCSV{ StringConversion::StandardConversionMultiByte(nativeFileName), outputFile, false };
+        const ExcelConversionCSV excelConversionCSV{ StringConversion::StandardConversionMultiByte(nativeFileName), outputFile, false };
     }
 }
 
-System::String CoreTools::BatchConversionCSVImpl::GetOutputFile(const String& nativeFileName, const String& outputDirectory)
+System::String CoreTools::BatchConversionCSVImpl::GetOutputFile() const
 {
     if (nativeFileName.find(TextParsing::gXlsxExtension) != nativeFileName.size() - TextParsing::gXlsxExtension.size())
     {

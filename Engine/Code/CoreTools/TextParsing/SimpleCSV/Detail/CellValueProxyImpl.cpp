@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:05)
+/// 版本：1.0.0.8 (2024/04/11 11:03)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,8 +20,6 @@
 #include "CoreTools/TextParsing/SimpleCSV/Flags/ValueTypeFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/SharedStrings.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
-
-using namespace std::literals;
 
 CoreTools::SimpleCSV::CellValueProxyImpl::CellValueProxyImpl() noexcept
     : cell{}
@@ -96,7 +94,8 @@ std::string CoreTools::SimpleCSV::CellValueProxyImpl::GetAttributeValue() const
 
     const auto attribute = cellNode.attribute("t");
 
-    if (const auto attributeValue = attribute.value(); attributeValue != nullptr)
+    if (const auto attributeValue = attribute.value();
+        attributeValue != nullptr)
     {
         return attributeValue;
     }
@@ -113,7 +112,8 @@ CoreTools::SimpleCSV::ValueType CoreTools::SimpleCSV::CellValueProxyImpl::GetTyp
     const auto cellNode = GetXMLNode();
     const auto node = cellNode.child("v");
 
-    if (const auto attributeValue = GetAttributeValue(); attributeValue.empty() && !node)
+    if (const auto attributeValue = GetAttributeValue();
+        attributeValue.empty() && !node)
     {
         return ValueType::Empty;
     }
@@ -155,7 +155,10 @@ CoreTools::SimpleCSV::ValueType CoreTools::SimpleCSV::CellValueProxyImpl::GetStr
 
 CoreTools::SimpleCSV::ValueType CoreTools::SimpleCSV::CellValueProxyImpl::GetNumberType(const XMLNode& node)
 {
-    if (const std::string numberString{ node.text().get() }; numberString.find('.') != std::string::npos || numberString.find("E-") != std::string::npos || numberString.find("e-") != std::string::npos)
+    if (const std::string numberString{ node.text().get() };
+        numberString.find('.') != std::string::npos ||
+        numberString.find("E-") != std::string::npos ||
+        numberString.find("e-") != std::string::npos)
     {
         return ValueType::Float;
     }
@@ -172,15 +175,15 @@ std::string CoreTools::SimpleCSV::CellValueProxyImpl::GetTypeAsString() const
     switch (GetType())
     {
         case ValueType::Empty:
-            return "empty"s;
+            return "empty";
         case ValueType::Boolean:
-            return "boolean"s;
+            return "boolean";
         case ValueType::Integer:
-            return "integer"s;
+            return "integer";
         case ValueType::Float:
-            return "float"s;
+            return "float";
         case ValueType::String:
-            return "string"s;
+            return "string";
         default:
             return "error";
     }
@@ -239,14 +242,14 @@ void CoreTools::SimpleCSV::CellValueProxyImpl::SetString(const std::string& stri
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto cellNode = AppendAttributeT();
-    cellNode = AppendChildV();
+    std::ignore = AppendAttributeT();
+    const auto cellNode = AppendChildV();
 
     cellNode.attribute("t").set_value("s");
 
     const auto cellSharedPtr = cell.lock();
 
-    if (!cellSharedPtr)
+    if (cellSharedPtr == nullptr)
     {
         THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("cell已被释放。"s))
     }

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:38)
+/// 版本：1.0.0.8 (2024/04/11 13:53)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_ASYNCHRONOUS_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_ASYNCHRONOUS_H
@@ -24,7 +24,7 @@ CORE_TOOLS_NON_COPY_EXPORT_IMPL(LogAsynchronousImpl);
 
 namespace CoreTools
 {
-    // 由于实现类本身使用了锁，单例不再使用锁。
+    /// 由于实现类本身使用了锁，单例不再使用锁。
     class CORE_TOOLS_DEFAULT_DECLARE LogAsynchronous final : public Singleton<LogAsynchronous, MutexCreate::UseNull>
     {
     public:

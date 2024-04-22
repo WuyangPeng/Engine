@@ -12,7 +12,7 @@
 #include "EntityHeaderFileGenerationImpl.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
 #include "CoreTools/CharacterString/StringUtility.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Database/DatabaseEntityCodeGeneration/CodeEntity.h"
@@ -33,7 +33,7 @@ System::String Database::EntityHeaderFileGenerationImpl::GetContent() const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    CoreTools::IFStreamManager streamManager{ fileName };
+    CoreTools::IFileStreamManager streamManager{ fileName };
     streamManager.SetSimplifiedChinese();
 
     auto content = streamManager.GetFileContent();

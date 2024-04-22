@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/13 13:55)
+/// 版本：1.0.0.8 (2024/03/30 22:32)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_ENVIRONMENT_VARIABLE_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_ENVIRONMENT_VARIABLE_IMPL_H
@@ -16,7 +16,7 @@
 
 #include <string>
 
-// 获取字符串对应的环境变量。
+/// 获取字符串对应的环境变量。
 namespace CoreTools
 {
     class CORE_TOOLS_HIDDEN_DECLARE EnvironmentVariableImpl final

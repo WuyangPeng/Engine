@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:35)
+/// 版本：1.0.0.8 (2024/03/30 15:00)
 
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_COLORS_DETAIL_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_COLORS_DETAIL_H
@@ -14,6 +14,7 @@
 #include "System/Console/ConsoleColour.h"
 #include "System/Console/Flags/ConsoleColoursFlags.h"
 #include "System/Helper/Tools.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
@@ -25,7 +26,7 @@ CoreTools::ConsoleColors<Handle> CoreTools::ConsoleColors<Handle>::Create()
 
 template <CoreTools::StandardHandle Handle>
 CoreTools::ConsoleColors<Handle>::ConsoleColors(DisableNotThrow disableNotThrow)
-    : console{ ConsoleInstanceHandle::Create() }, textColor{ TextColour::White }, backgroundColor{ BackgroundColour::Black }
+    : console{ ConsoleInstanceHandle::Create() }, textColor{ defaultTextColor }, backgroundColor{ defaultBackgroundColor }
 {
     System::UnusedFunction(disableNotThrow);
 
@@ -46,9 +47,6 @@ template <CoreTools::StandardHandle Handle>
 void CoreTools::ConsoleColors<Handle>::ResetColor()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    constexpr auto defaultTextColor = TextColour::White;
-    constexpr auto defaultBackgroundColor = BackgroundColour::Black;
 
     if (auto handle = console.GetHandle();
         !System::SetSystemConsoleTextAttribute(handle, defaultTextColor, defaultBackgroundColor, System::ConsoleCommon::Default))

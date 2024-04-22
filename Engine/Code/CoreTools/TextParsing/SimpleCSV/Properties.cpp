@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:02)
+/// 版本：1.0.0.8 (2024/04/11 11:27)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -61,7 +61,8 @@ void CoreTools::SimpleCSV::Properties::DeleteProperty(const std::string& name)
 
     const auto xmlDocument = GetXmlDocument();
 
-    if (const auto property = xmlDocument->first_child().child(name.c_str()); property != nullptr)
+    if (const auto property = xmlDocument->first_child().child(name.c_str());
+        property != nullptr)
     {
         xmlDocument->first_child().remove_child(property);
     }

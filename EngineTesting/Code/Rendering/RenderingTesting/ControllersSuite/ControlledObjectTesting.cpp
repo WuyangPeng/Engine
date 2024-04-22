@@ -227,7 +227,7 @@ void Rendering::ControlledObjectTesting::StreamTest()
 
 void Rendering::ControlledObjectTesting::EqualTest(const ControllerTest& lhs, const ControllerTest& rhs)
 {
-    ASSERT_ENUM_EQUAL(lhs.GetRepeat(), rhs.GetRepeat());
+    ASSERT_EQUAL(lhs.GetRepeat(), rhs.GetRepeat());
     ASSERT_APPROXIMATE(lhs.GetMinTime(), rhs.GetMinTime(), Mathematics::MathD::GetZeroTolerance());
     ASSERT_APPROXIMATE(lhs.GetMaxTime(), rhs.GetMaxTime(), Mathematics::MathD::GetZeroTolerance());
     ASSERT_APPROXIMATE(lhs.GetPhase(), rhs.GetPhase(), Mathematics::MathD::GetZeroTolerance());

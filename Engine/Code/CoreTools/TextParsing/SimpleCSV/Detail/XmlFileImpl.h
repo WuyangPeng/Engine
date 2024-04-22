@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:47)
+/// 版本：1.0.0.8 (2024/04/02 17:46)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_XML_FILE_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_XML_FILE_IMPL_H
@@ -57,7 +57,7 @@ namespace CoreTools::SimpleCSV
         NODISCARD ConstXmlDataSharedPtr GetXmlDataSharedPtr() const;
 
     private:
-        // 底层XML数据对象
+        /// 底层XML数据对象
         XmlDataWeakPtr xmlData;
         DocumentWeakPtr document;
     };

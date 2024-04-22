@@ -70,7 +70,7 @@ void AssistTools::GameParameterAnalysisTesting::ParameterDefaultTest()
     ASSERT_EQUAL(gameParameterAnalysis.GetGameParameter(GameParameterType::ProjectAbbreviation), SYSTEM_TEXT(""));
     ASSERT_EQUAL(gameParameterAnalysis.GetGameParameter(GameParameterType::EndYear), System::ToString(CoreTools::Year::GetCurrentYear()));
     ASSERT_EQUAL(gameParameterAnalysis.GetGameParameter(GameParameterType::Version), CoreTools::StringConversion::MultiByteConversionStandard(CoreTools::Version::GetVersion()));
-    ASSERT_EQUAL(gameParameterAnalysis.GetGameParameter(GameParameterType::VersionNum), System::ToString(CoreTools::Version::GetTCREFullVersion()));
+    ASSERT_EQUAL(gameParameterAnalysis.GetGameParameter(GameParameterType::VersionNum), System::ToString(CoreTools::Version::GetTcreFullVersion()));
     ASSERT_EQUAL(gameParameterAnalysis.GetGameParameter(GameParameterType::TestingName), SYSTEM_TEXT(""));
 }
 
@@ -84,7 +84,7 @@ void AssistTools::GameParameterAnalysisTesting::ModuleTest()
          iter != gameParameterAnalysis.GetModuleEnd();
          ++iter)
     {
-        ASSERT_ENUM_EQUAL(iter->GetProjectServiceType(), ProjectServiceType::Server);
+        ASSERT_EQUAL(iter->GetProjectServiceType(), ProjectServiceType::Server);
         ASSERT_FALSE(iter->GetChineseName().empty());
         ASSERT_FALSE(iter->GetUppercaseName().empty());
         ASSERT_FALSE(iter->GetModuleName().empty());
@@ -101,7 +101,7 @@ void AssistTools::GameParameterAnalysisTesting::ModuleDefaultTest()
          iter != gameParameterAnalysis.GetModuleEnd();
          ++iter)
     {
-        ASSERT_ENUM_EQUAL(iter->GetProjectServiceType(), ProjectServiceType::Tools);
+        ASSERT_EQUAL(iter->GetProjectServiceType(), ProjectServiceType::Tools);
         ASSERT_TRUE(iter->GetChineseName().empty());
         ASSERT_TRUE(iter->GetUppercaseName().empty());
         ASSERT_FALSE(iter->GetModuleName().empty());

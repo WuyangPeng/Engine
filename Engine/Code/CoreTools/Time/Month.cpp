@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:19)
+/// 版本：1.0.0.8 (2024/04/11 22:31)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,10 +22,7 @@ CoreTools::Month::Month(int month) noexcept
 
 bool CoreTools::Month::IsValid() const noexcept
 {
-    if (0 < month && month <= 12)
-        return true;
-    else
-        return false;
+    return 0 < month && month <= 12;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

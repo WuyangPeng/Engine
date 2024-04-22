@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:58)
+/// 版本：1.0.0.8 (2024/04/11 22:22)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -32,11 +32,11 @@ void CoreTools::FileOutStream::Save(const String& fileName)
 
     const auto version = Version::GetVersion();
 
-    // 保存该文件的版本号到磁盘。
+    /// 保存该文件的版本号到磁盘。
     CFileManagerHelper::SaveIntoFile(fileName, true, boost::numeric_cast<int>(version.size()), version.c_str());
 
     const auto fileBufferPtr = bufferOutStream.GetBufferOutStreamInformation();
 
-    // 保存场景图从内存到磁盘。
+    /// 保存场景图从内存到磁盘。
     CFileManagerHelper::AppendToFile(fileName, true, boost::numeric_cast<int>(fileBufferPtr->GetSize()), fileBufferPtr->GetBufferBegin());
 }

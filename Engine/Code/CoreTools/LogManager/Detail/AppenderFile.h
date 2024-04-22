@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:35)
+/// 版本：1.0.0.8 (2024/04/11 13:48)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_APPENDER_FILE_H
 #define CORE_TOOLS_LOG_MANAGER_APPENDER_FILE_H
@@ -46,10 +46,10 @@ namespace CoreTools
         NODISCARD bool IsBackup() const noexcept override;
 
     private:
-        using OStreamManagerPtr = std::shared_ptr<OFStreamManager>;
+        using StreamManagerSharedPtr = std::shared_ptr<OFileStreamManager>;
 
     private:
-        NODISCARD bool IsExceedMaxSize(const OFStreamManager& stream, PosType increaseSize) const;
+        NODISCARD bool IsExceedMaxSize(const OFileStreamManager& stream, PosType increaseSize) const;
         void BackupFile(const String& fullName) const;
 
         void DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) const override;

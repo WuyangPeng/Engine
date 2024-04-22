@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:50)
+/// 版本：1.0.0.8 (2024/04/12 15:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -42,7 +42,8 @@ CoreTools::EntityManagerImpl::EntitySharedPtr CoreTools::EntityManagerImpl::GetE
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (const auto entity = container.find(entityId); entity != container.cend())
+    if (const auto entity = container.find(entityId);
+        entity != container.cend())
     {
         auto ptr = entity->second.lock();
 

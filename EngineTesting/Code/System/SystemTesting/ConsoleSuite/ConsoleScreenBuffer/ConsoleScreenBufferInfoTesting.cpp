@@ -76,9 +76,9 @@ void System::ConsoleScreenBufferInfoTesting::GetSystemConsoleScreenBufferInfoTes
 
 void System::ConsoleScreenBufferInfoTesting::EqualTest(const ConsoleScreenBufferInfo& consoleScreenBufferInfo, const ConsoleScreenBufferInfoEx& consoleScreenBufferInfoEx)
 {
-    ASSERT_ENUM_EQUAL(UnderlyingCastEnum<TextColour>(consoleScreenBufferInfo.wAttributes), TextColour::White);
-    ASSERT_ENUM_EQUAL(UnderlyingCastEnum<TextColour>(consoleScreenBufferInfoEx.wAttributes), TextColour::White);
-    ASSERT_ENUM_EQUAL(UnderlyingCastEnum<TextColour>(consoleScreenBufferInfoEx.wPopupAttributes), TextColour::White);
+    ASSERT_EQUAL(UnderlyingCastEnum<TextColour>(consoleScreenBufferInfo.wAttributes), TextColour::White);
+    ASSERT_EQUAL(UnderlyingCastEnum<TextColour>(consoleScreenBufferInfoEx.wAttributes), TextColour::White);
+    ASSERT_EQUAL(UnderlyingCastEnum<TextColour>(consoleScreenBufferInfoEx.wPopupAttributes), TextColour::White);
 
     ASSERT_EQUAL(consoleScreenBufferInfo.dwCursorPosition.X, consoleScreenBufferInfoEx.dwCursorPosition.X);
     ASSERT_EQUAL(consoleScreenBufferInfo.dwCursorPosition.Y, consoleScreenBufferInfoEx.dwCursorPosition.Y);

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 17:29)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/16 15:03)
 
 #include "ErrorTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
@@ -112,10 +112,10 @@ void CoreTools::ErrorTesting::ThrowExceptionTest()
 {
     SetPlatformLastError(System::WindowError::BadLength);
 
-    THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("%1% %2% %3%")) % 21 % 22 % SYSTEM_TEXT("这里测试抛出异常。")).str())
+    Error::ThrowError(CORE_TOOLS_FUNCTION_DESCRIBED, (Error::Format(SYSTEM_TEXT("%1% %2% %3%")) % 21 % 22 % SYSTEM_TEXT("这里测试抛出异常。")).str());
 }
 
 void CoreTools::ErrorTesting::ThrowLastExceptionTest()
 {
-    THROW_LAST_ERROR_EXCEPTION(System::WindowError::FileNotFound, (Error::Format(SYSTEM_TEXT("%1% %2% %3%")) % 21 % 22 % SYSTEM_TEXT("这里测试抛出异常。")).str())
+    Error::ThrowError(CORE_TOOLS_FUNCTION_DESCRIBED, System::WindowError::FileNotFound, (Error::Format(SYSTEM_TEXT("%1% %2% %3%")) % 21 % 22 % SYSTEM_TEXT("这里测试抛出异常。")).str());
 }

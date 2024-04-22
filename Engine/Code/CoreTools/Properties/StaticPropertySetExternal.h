@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:16)
+/// 版本：1.0.0.8 (2024/04/12 14:53)
 
 #ifndef CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_SET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_SET_EXTERNAL_H
@@ -17,11 +17,10 @@
 namespace CoreTools
 {
     template <typename Reference, void (*PropertyFunction)(Reference)>
+    requires(std::is_reference_v<Reference>)
     class StaticPropertySetExternal final
     {
     public:
-        static_assert(std::is_reference_v<Reference>, "Reference is not reference.");
-
         using ReferenceType = Reference;
         using ClassType = StaticPropertySetExternal<ReferenceType, PropertyFunction>;
 

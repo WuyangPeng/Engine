@@ -26,7 +26,7 @@ void Framework::MiddleLayerInterfaceTestingBase::MiddleLayerMemberTest()
 {
     auto middleLayer = std::make_shared<TestingType>(middleLayerPlatform, environmentDirectory);
 
-    ASSERT_ENUM_EQUAL(middleLayer->GetMiddleLayerPlatform(), middleLayerPlatform);
+    ASSERT_EQUAL(middleLayer->GetMiddleLayerPlatform(), middleLayerPlatform);
     ASSERT_EQUAL(middleLayer->GetEnvironmentDirectory().GetEngineEnvironment(), environmentDirectory.GetEngineEnvironment());
     ASSERT_EQUAL(middleLayer->GetEnvironmentDirectory().GetEngineDirectory(), environmentDirectory.GetEngineDirectory());
 }

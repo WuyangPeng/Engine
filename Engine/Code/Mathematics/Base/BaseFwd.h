@@ -37,9 +37,6 @@ namespace Mathematics
     using Float2 = CoreTools::Tuple<2, float>;
     using Float3 = CoreTools::Tuple<3, float>;
     using Float4 = CoreTools::Tuple<4, float>;
-
-    template <bool RowMajor, typename Real, int... Dimensions>
-    class LexicoArray2;
 }
 
 #endif  // MATHEMATICS_BASE_FWD_H

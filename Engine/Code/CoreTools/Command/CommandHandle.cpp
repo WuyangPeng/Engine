@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:35)
+/// 版本：1.0.0.8 (2024/04/12 14:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -152,14 +152,7 @@ std::string CoreTools::CommandHandle::GetFileName() const
 
 bool CoreTools::CommandHandle::IsArgumentOutOfRange(double value) const noexcept
 {
-    if ((minSet && value < small) || (maxSet && large < value) || (infSet && value <= small) || (supSet && large <= value))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return (minSet && value < small) || (maxSet && large < value) || (infSet && value <= small) || (supSet && large <= value);
 }
 
 void CoreTools::CommandHandle::ClearBoundary() noexcept

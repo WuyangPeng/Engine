@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:25)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/18 22:08)
 
 #include "LogFilterManagerTesting.h"
 #include "System/Helper/EnumOperator.h"
@@ -30,6 +30,7 @@ void CoreTools::LogFilterManagerTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
+
 void CoreTools::LogFilterManagerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ValidTest);
@@ -47,19 +48,19 @@ void CoreTools::LogFilterManagerTesting::ValidTest()
 
 void CoreTools::LogFilterManagerTesting::GetLogFilterTypeTest()
 {
-    ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("System"s)), LogFilter::System);
-    ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("CoreTools"s)), LogFilter::CoreTools);
-    ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Mathematics"s)), LogFilter::Mathematics);
-    ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Database"s)), LogFilter::Database);
-    ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("SoundEffect"s)), LogFilter::SoundEffect);
-    ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Script"s)), LogFilter::Script);
-    ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Network"s)), LogFilter::Network);
-    ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Rendering"s)), LogFilter::Rendering);
-    ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Physics"s)), LogFilter::Physics);
-    ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Imagics"s)), LogFilter::Imagics);
-    ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("ArtificialIntelligence"s)), LogFilter::ArtificialIntelligence);
-    ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("UserInterface"s)), LogFilter::UserInterface);
-    ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("AssistTools"s)), LogFilter::AssistTools);
-    ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Framework"s)), LogFilter::Framework);
-    ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("User"s)), LogFilter::User);
+    ASSERT_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("System"s)), LogFilter::System);
+    ASSERT_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("CoreTools"s)), LogFilter::CoreTools);
+    ASSERT_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Mathematics"s)), LogFilter::Mathematics);
+    ASSERT_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Database"s)), LogFilter::Database);
+    ASSERT_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("SoundEffect"s)), LogFilter::SoundEffect);
+    ASSERT_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Script"s)), LogFilter::Script);
+    ASSERT_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Network"s)), LogFilter::Network);
+    ASSERT_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Rendering"s)), LogFilter::Rendering);
+    ASSERT_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Physics"s)), LogFilter::Physics);
+    ASSERT_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Imagics"s)), LogFilter::Imagics);
+    ASSERT_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("ArtificialIntelligence"s)), LogFilter::ArtificialIntelligence);
+    ASSERT_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("UserInterface"s)), LogFilter::UserInterface);
+    ASSERT_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("AssistTools"s)), LogFilter::AssistTools);
+    ASSERT_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Framework"s)), LogFilter::Framework);
+    ASSERT_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("User"s)), LogFilter::User);
 }

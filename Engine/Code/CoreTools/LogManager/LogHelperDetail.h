@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:35)
+/// 版本：1.0.0.8 (2024/04/11 13:09)
 
 #ifndef CORE_TOOLS_LOG_HELPER_LOG_DETAIL_H
 #define CORE_TOOLS_LOG_HELPER_LOG_DETAIL_H
@@ -20,7 +20,8 @@ CoreTools::LogHelper::LogHelper(LogLevel logLevel, LogFilter logFilter, const Fu
 {
     try
     {
-        if (LogMessage logMessage{ logLevel, logFilter, functionDescribed }; !logMessage.IsDisabled())
+        if (LogMessage logMessage{ logLevel, logFilter, functionDescribed };
+            !logMessage.IsDisabled())
         {
             Process(logMessage, std::forward<Types>(arguments)...);
         }
@@ -38,7 +39,8 @@ CoreTools::LogHelper::LogHelper(const LogFileName& fileName, LogLevel logLevel, 
 {
     try
     {
-        if (LogMessage logMessage{ fileName, logLevel, logFilter, functionDescribed }; !logMessage.IsDisabled())
+        if (LogMessage logMessage{ fileName, logLevel, logFilter, functionDescribed };
+            !logMessage.IsDisabled())
         {
             Process(logMessage, std::forward<Types>(arguments)...);
         }

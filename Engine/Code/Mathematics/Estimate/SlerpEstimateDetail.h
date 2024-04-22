@@ -21,7 +21,7 @@ std::array<T, N> Mathematics::SlerpEstimate(T t, const std::array<T, N>& q0, con
     T cosA{};
     for (auto i = 0; i < N; ++i)
     {
-        cosA += q0[i] * q1[i];
+        cosA += q0.at(i) * q1.at(i);
     }
 
     auto f = ChebyshevRatioEstimate<T, D>(t, cosA);
@@ -30,7 +30,7 @@ std::array<T, N> Mathematics::SlerpEstimate(T t, const std::array<T, N>& q0, con
     result.fill(T{});
     for (auto i = 0; i < N; ++i)
     {
-        result[i] += f[0] * q0[i] + f[1] * q1[i];
+        result.at(i) += f.at(0) * q0.at(i) + f.at(1) * q1.at(i);
     }
 
     return result;
@@ -46,7 +46,7 @@ std::array<T, N> Mathematics::SlerpEstimate(T t, const std::array<T, N>& q0, con
 
     for (auto i = 0; i < N; ++i)
     {
-        result[i] += f[0] * q0[i] + f[1] * q1[i];
+        result.at(i) += f.at(0) * q0.at(i) + f.at(1) * q1.at(i);
     }
 
     return result;
@@ -64,7 +64,7 @@ std::array<T, N> Mathematics::SlerpEstimate(T t, std::array<T, N> const& q0, con
         auto f = ChebyshevRatioEstimate<T, D>(twoT, cosAH);
         for (auto i = 0; i < N; ++i)
         {
-            result[i] += f[0] * q0[i] + f[1] * qh[i];
+            result.at(i) += f.at(0) * q0.at(i) + f.at(1) * qh.at(i);
         }
     }
     else
@@ -72,7 +72,7 @@ std::array<T, N> Mathematics::SlerpEstimate(T t, std::array<T, N> const& q0, con
         auto f = ChebyshevRatioEstimate<T, D>(twoT - Math<T>::GetValue(1), cosAH);
         for (auto i = 0; i < N; ++i)
         {
-            result[i] += f[0] * qh[i] + f[1] * q1[i];
+            result.at(i) += f.at(0) * qh.at(i) + f.at(1) * q1.at(i);
         }
     }
 

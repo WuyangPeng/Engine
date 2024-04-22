@@ -214,7 +214,7 @@ void System::SoftwareExceptionTesting::DoMakeSoftwareExceptionTest(size_t index)
 
     const auto softwareException = MakeSoftwareException(severity, facility, exception);
 
-    ASSERT_ENUM_EQUAL(UnderlyingCastEnum<Severity>(softwareException >> severityShift), severity);
-    ASSERT_ENUM_EQUAL(UnderlyingCastEnum<Facility>((softwareException & facilityBit) >> facilityShift), facility);
+    ASSERT_EQUAL(UnderlyingCastEnum<Severity>(softwareException >> severityShift), severity);
+    ASSERT_EQUAL(UnderlyingCastEnum<Facility>((softwareException & facilityBit) >> facilityShift), facility);
     ASSERT_EQUAL(softwareException & exceptionBit, exception);
 }

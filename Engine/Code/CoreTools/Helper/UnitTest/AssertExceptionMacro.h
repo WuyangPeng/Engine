@@ -5,15 +5,15 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:17)
+/// 版本：1.0.0.8 (2024/03/28 11:05)
 
-// 单元测试类所需要的异常断言宏
+/// 单元测试类所需要的异常断言宏
 #ifndef CORE_TOOLS_HELPER_ASSERT_EXCEPTION_MACRO_H
 #define CORE_TOOLS_HELPER_ASSERT_EXCEPTION_MACRO_H
 
 #include "CoreTools/Helper/FunctionDescribedMacro.h"
 
-// 要测试的function不允许重载。
+/// 要测试的function不允许重载。
 #define ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_0(function, message) \
     AssertNotThrowException(this, &ClassType::function, (CORE_TOOLS_FUNCTION_DESCRIBED), (message))
 

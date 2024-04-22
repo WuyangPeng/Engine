@@ -295,12 +295,6 @@
     <Filter Include="Base 头文件\Flags">
       <UniqueIdentifier>{dba5c63c-b7eb-4de4-9d48-ba14e5f932ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Zlib 头文件">
-      <UniqueIdentifier>{1740f262-ea5a-4099-ab70-c12061a375b6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Freetype 头文件">
-      <UniqueIdentifier>{deb1eaad-a4df-4427-95f1-e2625e790ac7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Exception 模板文件">
       <UniqueIdentifier>{81cb76c6-1fd2-408a-bffb-ae0783ecaf7a}</UniqueIdentifier>
     </Filter>
@@ -438,6 +432,9 @@
     </Filter>
     <Filter Include="TextParsing 配置文件\CSV">
       <UniqueIdentifier>{d2635421-7039-4df8-8620-b21fc786db01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FileManager 模板文件">
+      <UniqueIdentifier>{c8b3acaf-129f-413a-97a6-03c243df6ac8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -582,7 +579,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheck32Table.h">
       <Filter>CyclicRedundancyCheck 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckCCITTTable.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckCcittTable.h">
       <Filter>CyclicRedundancyCheck 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckHandleImpl.h">
@@ -603,10 +600,10 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck32.h">
       <Filter>CyclicRedundancyCheck 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCCITT.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCcitt.h">
       <Filter>CyclicRedundancyCheck 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCCITTUsingTable.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCcittUsingTable.h">
       <Filter>CyclicRedundancyCheck 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckFwd.h">
@@ -738,10 +735,10 @@
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\FileManagerHelper.h">
       <Filter>FileManager 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\IFStreamManager.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\IFileStreamManager.h">
       <Filter>FileManager 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\OFStreamManager.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\OFileStreamManager.h">
       <Filter>FileManager 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\ReadAndWriteFileHandle.h">
@@ -789,16 +786,16 @@
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\FileManagerFactory.h">
       <Filter>FileManager 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\IFStreamManagerImpl.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\IFileStreamManagerImpl.h">
       <Filter>FileManager 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\IFStreamSeekManager.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\IFileStreamSeekManager.h">
       <Filter>FileManager 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\OFStreamManagerImpl.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\OFileStreamManagerImpl.h">
       <Filter>FileManager 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\OFStreamSeekManager.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\OFileStreamSeekManager.h">
       <Filter>FileManager 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadAndWriteFileHandleImpl.h">
@@ -1818,18 +1815,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\DllLib.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Zlib\Zlib.h">
-      <Filter>Zlib 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Zlib\ZlibFwd.h">
-      <Filter>Zlib 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Freetype\Freetype.h">
-      <Filter>Freetype 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Freetype\FreetypeFwd.h">
-      <Filter>Freetype 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Exception\GameError.h">
       <Filter>Exception 头文件</Filter>
     </ClInclude>
@@ -1992,7 +1977,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\ByteSwapper.h">
       <Filter>FileManager 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\TypeAliaser.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\TypeAlias.h">
       <Filter>FileManager 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\GetRequiredBits.h">
@@ -2250,10 +2235,10 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetNameImpl.h">
       <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsIdImpl.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelationshipIdImpl.h">
       <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsTargetImpl.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelationshipTargetImpl.h">
       <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetTypeImpl.h">
@@ -2415,10 +2400,10 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetName.h">
       <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsId.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelationshipId.h">
       <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsTarget.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelationshipTarget.h">
       <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetType.h">
@@ -2452,9 +2437,6 @@
       <Filter>TextParsing 头文件\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Flags\TextParsingConstant.h">
-      <Filter>TextParsing 头文件\Flags</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Flags\JsonFlags.h">
       <Filter>TextParsing 头文件\Flags</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\CSV\CSVRowDetail.h">
@@ -2721,9 +2703,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\LatticeDetail.h">
       <Filter>MemoryTools 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\TypeTraits.h">
-      <Filter>MemoryTools 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MultiArray.h">
       <Filter>MemoryTools 头文件</Filter>
     </ClInclude>
@@ -2777,6 +2756,21 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\NoexceptLog.h">
       <Filter>Contract 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CheckItemSize.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\GenerateRandomNameDetail.h">
+      <Filter>FileManager 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSV\BatchConversionCodeImpl.h">
+      <Filter>TextParsing 头文件\Detail\CSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipHelper.h">
+      <Filter>TextParsing 头文件\SimpleZip\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\TypeTraits.h">
+      <Filter>MemoryTools 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2849,7 +2843,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckHandleImpl.cpp">
       <Filter>CyclicRedundancyCheck 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckCCITTTable.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckCcittTable.cpp">
       <Filter>CyclicRedundancyCheck 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheck32Table.cpp">
@@ -2864,10 +2858,10 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck32.cpp">
       <Filter>CyclicRedundancyCheck 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCCITT.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCcitt.cpp">
       <Filter>CyclicRedundancyCheck 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCCITTUsingTable.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCcittUsingTable.cpp">
       <Filter>CyclicRedundancyCheck 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckHandle.cpp">
@@ -2939,10 +2933,10 @@
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\FileManagerHelper.cpp">
       <Filter>FileManager 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\IFStreamManager.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\IFileStreamManager.cpp">
       <Filter>FileManager 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\OFStreamManager.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\OFileStreamManager.cpp">
       <Filter>FileManager 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\ReadAndWriteFileHandle.cpp">
@@ -3005,16 +2999,16 @@
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\FileManagerFactory.cpp">
       <Filter>FileManager 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\IFStreamManagerImpl.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\IFileStreamManagerImpl.cpp">
       <Filter>FileManager 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\IFStreamSeekManager.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\IFileStreamSeekManager.cpp">
       <Filter>FileManager 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\OFStreamManagerImpl.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\OFileStreamManagerImpl.cpp">
       <Filter>FileManager 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\OFStreamSeekManager.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\OFileStreamSeekManager.cpp">
       <Filter>FileManager 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadAndWriteFileHandleImpl.cpp">
@@ -3051,9 +3045,6 @@
       <Filter>LogManager 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderManagerImpl.cpp">
-      <Filter>LogManager 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderPrintFlagsExist.cpp">
       <Filter>LogManager 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\ErrorConsoleTextColorsManager.cpp">
@@ -3608,10 +3599,10 @@
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetIdImpl.cpp">
       <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsIdImpl.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelationshipIdImpl.cpp">
       <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsTargetImpl.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelationshipTargetImpl.cpp">
       <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySharedStringsImpl.cpp">
@@ -3710,10 +3701,10 @@
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetName.cpp">
       <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsId.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelationshipId.cpp">
       <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsTarget.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelationshipTarget.cpp">
       <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetType.cpp">
@@ -3952,6 +3943,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\FileNameParsing.cpp">
       <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSV\BatchConversionCodeImpl.cpp">
+      <Filter>TextParsing 源文件\Detail\CSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipHelper.cpp">
+      <Filter>TextParsing 源文件\SimpleZip\Detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -51,4 +51,4 @@ namespace CsvOutput
     };
 }
 
-#endif  // CSV_OUTPUT_CONTAINER_H
+#endif  // CSV_OUTPUT_CSV_OUTPUT_CONTAINER_H

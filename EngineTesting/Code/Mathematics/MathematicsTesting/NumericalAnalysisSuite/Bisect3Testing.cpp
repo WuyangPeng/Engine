@@ -44,7 +44,7 @@ void Mathematics::Bisect3Testing::HaveSolutionTest()
     ASSERT_APPROXIMATE(FirstEquation(root.GetXRoot(), root.GetYRoot(), root.GetZRoot()), 0.0f, 0.01);
     ASSERT_APPROXIMATE(SecondEquation(root.GetXRoot(), root.GetYRoot(), root.GetZRoot()), 0.0f, 0.01);
     ASSERT_APPROXIMATE(ThirdEquation(root.GetXRoot(), root.GetYRoot(), root.GetZRoot()), 0.0f, 0.01);
-    ASSERT_ENUM_EQUAL(root.GetBisectRootType(), BisectRootType::HaveSolution);
+    ASSERT_EQUAL(root.GetBisectRootType(), BisectRootType::HaveSolution);
 }
 
 void Mathematics::Bisect3Testing::NoSolutionTest()
@@ -53,7 +53,7 @@ void Mathematics::Bisect3Testing::NoSolutionTest()
 
     const Bisect3RootD root = bisect3.Bisect(0.8, -0.1, 0.9, 0.9, 0.1, 1.12);
 
-    ASSERT_ENUM_EQUAL(root.GetBisectRootType(), BisectRootType::NoSolution);
+    ASSERT_EQUAL(root.GetBisectRootType(), BisectRootType::NoSolution);
 }
 
 void Mathematics::Bisect3Testing::UnknownTest()
@@ -66,5 +66,5 @@ void Mathematics::Bisect3Testing::UnknownTest()
     ASSERT_TRUE(-0.1 <= root.GetYRoot() && root.GetYRoot() <= 0.1);
     ASSERT_TRUE(0.9 <= root.GetZRoot() && root.GetZRoot() <= 1.12);
 
-    ASSERT_ENUM_EQUAL(root.GetBisectRootType(), BisectRootType::Unknown);
+    ASSERT_EQUAL(root.GetBisectRootType(), BisectRootType::Unknown);
 }

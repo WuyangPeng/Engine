@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:43)
+/// 版本：1.0.0.8 (2024/04/11 18:12)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_RAW_ITERATORS_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_RAW_ITERATORS_DETAIL_H
@@ -30,10 +30,7 @@ CoreTools::RawConstIterator<T>::RawConstIterator(pointer pointer, int offset) no
 template <typename T>
 bool CoreTools::RawConstIterator<T>::IsValid() const noexcept
 {
-    if (master != nullptr)
-        return true;
-    else
-        return false;
+    return master != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -323,6 +320,14 @@ CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator-(ptrdiff_t offset)
     auto current = *this;
 
     return current -= offset;
+}
+
+template <typename T>
+ptrdiff_t CoreTools::RawIterator<T>::operator-(const ParentType& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return ParentType::operator-(rhs);
 }
 
 #include SYSTEM_WARNING_POP

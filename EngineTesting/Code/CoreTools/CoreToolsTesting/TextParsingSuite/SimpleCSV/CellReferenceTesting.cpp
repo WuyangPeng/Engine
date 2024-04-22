@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:11)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 16:25)
 
 #include "CellReferenceTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -14,8 +14,6 @@
 #include "CoreTools/TextParsing/SimpleCSV/CellReference.h"
 #include "CoreTools/TextParsing/SimpleCSV/Constants.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using namespace std::literals;
 
 CoreTools::CellReferenceTesting::CellReferenceTesting(const OStreamShared& stream)
     : ParentType{ stream },
@@ -39,15 +37,16 @@ void CoreTools::CellReferenceTesting::MainTest()
     ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(TwoLetterRowTest);
     ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(ThreeLetterRowTest);
     ASSERT_NOT_THROW_EXCEPTION_0(OperatorTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetColumnTest);
 }
 
 void CoreTools::CellReferenceTesting::CellAddressTest()
 {
-    const SimpleCSV::CellReference cellReference{ "A1"s };
+    const SimpleCSV::CellReference cellReference{ "A1" };
 
     ASSERT_EQUAL(cellReference.GetColumn(), 1);
     ASSERT_EQUAL(cellReference.GetRow(), 1);
-    ASSERT_EQUAL(cellReference.GetAddress(), "A1"s);
+    ASSERT_EQUAL(cellReference.GetAddress(), "A1");
 }
 
 bool CoreTools::CellReferenceTesting::RowTest()
@@ -143,7 +142,7 @@ bool CoreTools::CellReferenceTesting::ThreeLetterRowTest()
     cellReference2.SetAddress("A1");
     ASSERT_EQUAL(cellReference2.GetColumn(), 1);
     ASSERT_EQUAL(cellReference2.GetRow(), 1);
-    ASSERT_EQUAL(cellReference2.GetAddress(), "A1"s);
+    ASSERT_EQUAL(cellReference2.GetAddress(), "A1");
 
     cellReference2.SetAddress(cellReference0.GetAddress());
     ASSERT_EQUAL(cellReference0, cellReference2);
@@ -153,8 +152,8 @@ bool CoreTools::CellReferenceTesting::ThreeLetterRowTest()
 
 void CoreTools::CellReferenceTesting::OperatorTest()
 {
-    const SimpleCSV::CellReference cellReference0{ "A1"s };
-    const SimpleCSV::CellReference cellReference1{ "A2"s };
+    const SimpleCSV::CellReference cellReference0{ "A1" };
+    const SimpleCSV::CellReference cellReference1{ "A2" };
 
     ASSERT_FALSE(cellReference0 < cellReference0);
     ASSERT_FALSE(cellReference1 < cellReference1);
@@ -176,4 +175,9 @@ void CoreTools::CellReferenceTesting::OperatorTest()
 
     ASSERT_FALSE(cellReference0 == cellReference1);
     ASSERT_TRUE(cellReference0 != cellReference1);
+}
+
+void CoreTools::CellReferenceTesting::GetColumnTest()
+{
+    ASSERT_EQUAL(SimpleCSV::CellReference::GetColumn("A1"), 1);
 }

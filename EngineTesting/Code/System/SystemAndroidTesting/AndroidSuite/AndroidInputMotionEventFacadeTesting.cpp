@@ -39,11 +39,11 @@ void System::AndroidInputMotionEventFacadeTesting::AndroidInputMotionEventTest()
 {
     const AndroidInputMotionEventFacade androidInputMotionEvent{ &androidInputEvent };
 
-    ASSERT_ENUM_EQUAL(androidInputMotionEvent.GetAction(), AndroidMotionEventAction::Mask);
-    ASSERT_ENUM_EQUAL(androidInputMotionEvent.GetFlags(), AndroidMotionEventFlag::WindowIsObscured);
-    ASSERT_ENUM_EQUAL(androidInputMotionEvent.GetMetaState(), AndroidMeta::None);
-    ASSERT_ENUM_EQUAL(androidInputMotionEvent.GetButtonState(), AndroidMotionEventButton::Primary);
-    ASSERT_ENUM_EQUAL(androidInputMotionEvent.GetEdgeFlags(), AndroidMotionEventEdgeFlag::None);
+    ASSERT_EQUAL(androidInputMotionEvent.GetAction(), AndroidMotionEventAction::Mask);
+    ASSERT_EQUAL(androidInputMotionEvent.GetFlags(), AndroidMotionEventFlag::WindowIsObscured);
+    ASSERT_EQUAL(androidInputMotionEvent.GetMetaState(), AndroidMeta::None);
+    ASSERT_EQUAL(androidInputMotionEvent.GetButtonState(), AndroidMotionEventButton::Primary);
+    ASSERT_EQUAL(androidInputMotionEvent.GetEdgeFlags(), AndroidMotionEventEdgeFlag::None);
     ASSERT_EQUAL(androidInputMotionEvent.GetDownTime(), 0);
     ASSERT_EQUAL(androidInputMotionEvent.GetEventTime(), 0);
     ASSERT_APPROXIMATE_FLOAT_ZERO(androidInputMotionEvent.GetXOffset());
@@ -59,7 +59,7 @@ void System::AndroidInputMotionEventFacadeTesting::AndroidInputMotionEventPointe
     constexpr auto pointerIndex = 0;
 
     ASSERT_EQUAL(androidInputMotionEvent.GetPointerId(pointerIndex), 0);
-    ASSERT_ENUM_EQUAL(androidInputMotionEvent.GetToolType(pointerIndex), AndroidMotionEventToolType::Unknown);
+    ASSERT_EQUAL(androidInputMotionEvent.GetToolType(pointerIndex), AndroidMotionEventToolType::Unknown);
     ASSERT_APPROXIMATE_FLOAT_ZERO(androidInputMotionEvent.GetRawX(pointerIndex));
     ASSERT_APPROXIMATE_FLOAT_ZERO(androidInputMotionEvent.GetRawY(pointerIndex));
     ASSERT_APPROXIMATE_FLOAT_ZERO(androidInputMotionEvent.GetX(pointerIndex));

@@ -57,11 +57,13 @@ namespace Mathematics::Algebra
         NODISCARD AxisType GetAxis() const noexcept;
         NODISCARD Vector3 GetAxis(int index) const;
         NODISCARD Vector2 GetExtent() const noexcept;
+        NODISCARD Real GetExtent(int index) const;
 
         NODISCARD void SetCenter(const Vector3& aCenter) noexcept;
         NODISCARD void SetNormal(const Vector3& aNormal) noexcept;
         NODISCARD void SetAxis(const AxisType& aAxis) noexcept;
         NODISCARD void SetExtent(const Vector2& aExtent) noexcept;
+        NODISCARD void SetAxis(int index, const Vector3& aAxis);
 
     private:
         Vector3 center;

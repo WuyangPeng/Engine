@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:11)
+/// 版本：1.0.0.8 (2024/03/30 18:03)
 
 #ifndef CORE_TOOLS_THREADING_THREAD_GROUP_H
 #define CORE_TOOLS_THREADING_THREAD_GROUP_H
@@ -29,9 +29,6 @@ namespace CoreTools
     public:
         NODISCARD static ThreadGroup Create();
 
-    private:
-        explicit ThreadGroup(DisableNotThrow disableNotThrow);
-
     public:
         CLASS_INVARIANT_DECLARE;
 
@@ -39,6 +36,8 @@ namespace CoreTools
         void AddThread(Function&& function, Args&&... args);
 
     private:
+        explicit ThreadGroup(DisableNotThrow disableNotThrow);
+
         void AddThread(std::thread thread);
 
     private:

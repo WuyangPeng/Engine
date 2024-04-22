@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:34)
+/// 版本：1.0.0.8 (2024/04/12 14:23)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -24,10 +24,7 @@ bool CoreTools::CommandArgumentType::IsArgumentsName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (!argument.empty() && argument.at(0) == '-' && 1 < argument.size())
-        return true;
-    else
-        return false;
+    return !argument.empty() && argument.at(0) == '-' && 1 < argument.size();
 }
 
 bool CoreTools::CommandArgumentType::IsDigit() const
@@ -36,7 +33,8 @@ bool CoreTools::CommandArgumentType::IsDigit() const
 
     if (!argument.empty())
     {
-        if (const auto firstArgument = argument.at(0); firstArgument != '-' && isdigit(static_cast<int>(firstArgument)))
+        if (const auto firstArgument = argument.at(0);
+            firstArgument != '-' && isdigit(static_cast<int>(firstArgument)))
         {
             return true;
         }
@@ -49,8 +47,5 @@ bool CoreTools::CommandArgumentType::IsString() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (!argument.empty() && argument.at(0) != '-')
-        return true;
-    else
-        return false;
+    return !argument.empty() && argument.at(0) != '-';
 }

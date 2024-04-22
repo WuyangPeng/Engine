@@ -5,13 +5,13 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:06)
+/// 版本：1.0.0.8 (2024/04/01 10:47)
 
 #include "CoreTools/CoreToolsExport.h"
 
+#include "CheckItemSize.h"
 #include "WriteFileHandleImpl.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -26,10 +26,7 @@ CoreTools::WriteFileHandleImpl::WriteFileHandleImpl(const String& fileName, File
 
 bool CoreTools::WriteFileHandleImpl::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && InterfaceType::IsValid())
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && InterfaceType::IsValid();
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -45,7 +42,7 @@ void CoreTools::WriteFileHandleImpl::Write(size_t itemSize, const void* data)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
+    CheckItemSize(itemSize);
     CORE_TOOLS_ASSERTION_0(data != nullptr, "数据无效");
 
     Write(itemSize, 1, data);
@@ -55,7 +52,7 @@ void CoreTools::WriteFileHandleImpl::Write(size_t itemSize, size_t itemsNumber, 
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
+    CheckItemSize(itemSize);
     CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "数据无效");
 
     WriteToFile(itemSize, itemsNumber, data);
@@ -65,7 +62,5 @@ void CoreTools::WriteFileHandleImpl::ReadFromFile(size_t itemSize, size_t itemsN
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CORE_TOOLS_ASSERTION_4(false, "WriteFileHandleImpl禁止调用ReadFromFile！");
-
-    System::UnusedFunction(itemSize, itemsNumber, data);
+    FunctionProhibitedFromCalling("WriteFileHandleImpl禁止调用ReadFromFile！", itemSize, itemsNumber, data);
 }

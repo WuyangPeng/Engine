@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:11)
+/// 版本：1.0.0.8 (2024/03/30 18:03)
 
 #ifndef CORE_TOOLS_THREADING_THREAD_MANAGER_H
 #define CORE_TOOLS_THREADING_THREAD_MANAGER_H
@@ -29,21 +29,20 @@ namespace CoreTools
     public:
         NODISCARD static ThreadManager Create();
 
-    private:
-        explicit ThreadManager(DisableNotThrow disableNotThrow);
-
-    public:
         CLASS_INVARIANT_DECLARE;
 
         void AddThread(void* function, void* userData, int processorNumber = 0, ThreadSize stackSize = 0);
 
         void AddThreadUsePriority(void* function, void* userData, int priority, int processorNumber = 0, ThreadSize stackSize = 0);
 
-        // 启动和停止线程。
+        /// 启动和停止线程。
         void Resume();
         void Suspend();
 
         void Wait();
+
+    private:
+        explicit ThreadManager(DisableNotThrow disableNotThrow);
 
     private:
         PackageType impl;

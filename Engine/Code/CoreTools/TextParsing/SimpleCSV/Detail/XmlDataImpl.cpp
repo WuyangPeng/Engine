@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:03)
+/// 版本：1.0.0.8 (2024/04/11 11:25)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -62,14 +62,7 @@ CoreTools::SimpleCSV::XmlDataImpl& CoreTools::SimpleCSV::XmlDataImpl::operator=(
 
 bool CoreTools::SimpleCSV::XmlDataImpl::IsValid() const noexcept
 {
-    if (xmlDocument != nullptr)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return xmlDocument != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

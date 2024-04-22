@@ -12,6 +12,10 @@
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "System/Helper/PragmaWarning.h"
+
+#include <array>
+
 /// sin(x)的极小极大多项式近似。
 /// 次数为D的多项式p(x)只有奇数次幂项，要求具有线性项x，并且p(pi/2) = sin(pi/2) = 1。
 /// 在上述约束条件下，最小化了所有次数为D的多项式中的最大值{|sin(x) - p(x)| : x in [-pi/2,pi/2]}。
@@ -80,7 +84,12 @@ namespace Mathematics
     requires((Degree & 1) == 1 && 1 <= ((Degree - 1) / 2) && ((Degree - 1) / 2) <= 5)
     NODISCARD T constexpr GetSinEstimateMaxError()
     {
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
         return static_cast<T>(sinEstimateMaxError[(Degree - 3) / 2]);
+
+#include SYSTEM_WARNING_POP
     }
 }
 

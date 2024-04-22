@@ -211,8 +211,8 @@ void System::LanguageIdDataTesting::DoFlagsTest(size_t index)
 
     const LanguageIdData languageIdData{ primaryLanguage, subLanguage };
 
-    ASSERT_ENUM_EQUAL(languageIdData.GetPrimaryLanguage(), primaryLanguage);
-    ASSERT_ENUM_EQUAL(languageIdData.GetSubLanguage(), subLanguage);
+    ASSERT_EQUAL(languageIdData.GetPrimaryLanguage(), primaryLanguage);
+    ASSERT_EQUAL(languageIdData.GetSubLanguage(), subLanguage);
 
     const auto languageId = MakeLanguageId(EnumCastUnderlying<uint16_t>(primaryLanguage), EnumCastUnderlying<uint16_t>(subLanguage));
 

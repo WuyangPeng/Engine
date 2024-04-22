@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:06)
+/// 版本：1.0.0.8 (2024/03/28 16:37)
 
 #ifndef CORE_TOOLS_BASE_UNIQUE_ID_MANAGER_H
 #define CORE_TOOLS_BASE_UNIQUE_ID_MANAGER_H
@@ -48,13 +48,13 @@ namespace CoreTools
         NODISCARD int64_t NextDefaultUniqueId();
 
         template <typename E>
-        static void Create(E count);
+        static void Create(E count) requires(std::is_enum_v<E>);
 
         template <typename E>
-        NODISCARD int64_t NextUniqueId(E index);
+        NODISCARD int64_t NextUniqueId(E index) requires(std::is_enum_v<E>);
 
         template <typename E>
-        void SetUniqueId(E index, int64_t latestIndex);
+        void SetUniqueId(E index, int64_t latestIndex) requires(std::is_enum_v<E>);
 
         void SetUniqueId(int index, int64_t latestIndex);
 

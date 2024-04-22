@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:32)
+/// 版本：1.0.0.8 (2024/04/12 14:21)
 
 #ifndef CORE_TOOLS_COMMAND_COMMAND_LINE_INFORMATION_IMPL_H
 #define CORE_TOOLS_COMMAND_COMMAND_LINE_INFORMATION_IMPL_H
@@ -30,7 +30,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        // 返回第一个未处理参数的名字。
+        /// 返回第一个未处理参数的名字。
         NODISCARD std::string ExcessArguments() const;
         NODISCARD int GetExcessArgumentsCount() const noexcept;
 

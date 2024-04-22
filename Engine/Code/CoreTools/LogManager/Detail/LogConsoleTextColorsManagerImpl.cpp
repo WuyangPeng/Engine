@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:41)
+/// 版本：1.0.0.8 (2024/04/11 14:03)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,6 +13,7 @@
 #include "LogConsoleTextColorsManagerImpl.h"
 #include "OutputConsoleTextColorsManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/LogManager/Flags/LogManagerFlags.h"
 
 CoreTools::LogConsoleTextColorsManagerImpl::LogConsoleTextColorsManagerImpl(LogLevel logLevel) noexcept
     : logLevel{ logLevel }
@@ -34,19 +35,19 @@ CoreTools::TextColour CoreTools::LogConsoleTextColorsManagerImpl::GetTextColor(L
     switch (logLevel)
     {
         case LogLevel::Trace:
-            return System::TextColour::White;
+            return TextColour::White;
         case LogLevel::Debug:
-            return System::TextColour::Cyan;
+            return TextColour::Cyan;
         case LogLevel::Info:
-            return System::TextColour::Green;
+            return TextColour::Green;
         case LogLevel::Warn:
-            return System::TextColour::Yellow;
+            return TextColour::Yellow;
         case LogLevel::Error:
-            return System::TextColour::Red;
+            return TextColour::Red;
         case LogLevel::Fatal:
-            return System::TextColour::Red;
+            return TextColour::Red;
         default:
-            return System::TextColour::White;
+            return TextColour::White;
     }
 }
 

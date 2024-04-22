@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:13)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 16:49)
 
 #include "DocumentTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -23,8 +23,8 @@
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySharedStrings.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetId.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetName.h"
-#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetRelsId.h"
-#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetRelsTarget.h"
+#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetRelationshipId.h"
+#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetRelationshipTarget.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetType.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetVisibility.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QueryXmlData.h"
@@ -34,8 +34,6 @@
 #include "CoreTools/TextParsing/SimpleCSV/Worksheet.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
-
-using namespace std::literals;
 
 CoreTools::DocumentTesting::DocumentTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -62,35 +60,35 @@ void CoreTools::DocumentTesting::MainTest()
 
 void CoreTools::DocumentTesting::WorkbookTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
     const auto workbook = document->GetWorkbook();
     auto worksheetNames = workbook.GetWorksheetNames();
 
-    ASSERT_EQUAL(document->GetName(), "Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    ASSERT_EQUAL(document->GetName(), "Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 }
 
 void CoreTools::DocumentTesting::CreateTest()
 {
-    const auto document = SimpleCSV::Document::Create("Resource/CSVTesting/ExcelConversionCSVTestingTest.xlsx"s);
+    const auto document = SimpleCSV::Document::Create("Resource/CSVTesting/ExcelConversionCSVTestingTest.xlsx");
 
     document->Save();
-    document->SaveAs("Resource/CSVTesting/ExcelConversionCSVTestingTest1.xlsx"s);
+    document->SaveAs("Resource/CSVTesting/ExcelConversionCSVTestingTest1.xlsx");
 }
 
 void CoreTools::DocumentTesting::RemoveFile()
 {
-    DeleteFileTools deleteFileTools0{ SYSTEM_TEXT("Resource/CSVTesting/ExcelConversionCSVTestingTest.xlsx"s) };
-    DeleteFileTools deleteFileTools1{ SYSTEM_TEXT("Resource/CSVTesting/ExcelConversionCSVTestingTest1.xlsx"s) };
+    DeleteFileTools deleteFileTools0{ SYSTEM_TEXT("Resource/CSVTesting/ExcelConversionCSVTestingTest.xlsx") };
+    DeleteFileTools deleteFileTools1{ SYSTEM_TEXT("Resource/CSVTesting/ExcelConversionCSVTestingTest1.xlsx") };
 }
 
 void CoreTools::DocumentTesting::PropertyTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
-    document->SetProperty(SimpleCSV::Property::Title, "Title"s);
+    document->SetProperty(SimpleCSV::Property::Title, "Title");
     const auto title = document->GetProperty(SimpleCSV::Property::Title);
-    ASSERT_EQUAL(title, "Title"s);
+    ASSERT_EQUAL(title, "Title");
 
     document->DeleteProperty(SimpleCSV::Property::Title);
     ASSERT_TRUE(document->GetProperty(SimpleCSV::Property::Title).empty());
@@ -102,72 +100,72 @@ void CoreTools::DocumentTesting::PropertyTest()
 
 void CoreTools::DocumentTesting::ExecuteCommandTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
     auto workbook = document->GetWorkbook();
     auto worksheet = workbook.GetSheet(1);
 
-    document->ExecuteCommand(SimpleCSV::CommandSetSheetName{ "rId1"s, worksheet.GetName(), "Sheet4"s });
+    document->ExecuteCommand(SimpleCSV::CommandSetSheetName{ "rId1", worksheet.GetName(), "Sheet4" });
 
     worksheet = workbook.GetSheet(1);
-    ASSERT_EQUAL(worksheet.GetName(), "Sheet4"s);
+    ASSERT_EQUAL(worksheet.GetName(), "Sheet4");
 
-    document->ExecuteCommand(SimpleCSV::CommandSetSheetIndex{ "rId1"s, 2 });
+    document->ExecuteCommand(SimpleCSV::CommandSetSheetIndex{ "rId1", 2 });
 
     worksheet = workbook.GetSheet(2);
-    ASSERT_EQUAL(worksheet.GetName(), "Sheet4"s);
+    ASSERT_EQUAL(worksheet.GetName(), "Sheet4");
 
     document->ExecuteCommand(SimpleCSV::CommandResetCalcChain{});
     document->ExecuteCommand(SimpleCSV::CommandAddSharedStrings{});
 
     ASSERT_EQUAL(workbook.GetSheetCount(), 3);
-    document->ExecuteCommand(SimpleCSV::CommandAddWorksheet{ "Sheet5"s, "/xl/worksheets/sheet4.xml" });
-    workbook.PrepareSheetMetadata("Sheet5"s, 4);
+    document->ExecuteCommand(SimpleCSV::CommandAddWorksheet{ "Sheet5", "/xl/worksheets/sheet4.xml" });
+    workbook.PrepareSheetMetadata("Sheet5", 4);
     ASSERT_EQUAL(workbook.GetSheetCount(), 4);
 
     worksheet = workbook.GetSheet(4);
-    ASSERT_EQUAL(worksheet.GetName(), "Sheet5"s);
+    ASSERT_EQUAL(worksheet.GetName(), "Sheet5");
 
-    document->ExecuteCommand(SimpleCSV::CommandCloneSheet{ "rId1"s, "Sheet6"s });
+    document->ExecuteCommand(SimpleCSV::CommandCloneSheet{ "rId1", "Sheet6" });
 
     worksheet = workbook.GetSheet(5);
-    ASSERT_EQUAL(worksheet.GetName(), "Sheet6"s);
+    ASSERT_EQUAL(worksheet.GetName(), "Sheet6");
 
     worksheet = workbook.GetSheet(2);
-    document->ExecuteCommand(SimpleCSV::CommandDeleteSheet{ "rId2"s, worksheet.GetName() });
+    document->ExecuteCommand(SimpleCSV::CommandDeleteSheet{ "rId2", worksheet.GetName() });
 }
 
 void CoreTools::DocumentTesting::ExecuteQueryTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
-    const auto querySheetName = document->ExecuteQuery(SimpleCSV::QuerySheetName{ "rId1"s });
-    ASSERT_EQUAL(querySheetName.GetSheetId(), "rId1"s);
-    ASSERT_EQUAL(querySheetName.GetSheetName(), "Sheet1"s);
+    const auto querySheetName = document->ExecuteQuery(SimpleCSV::QuerySheetName{ "rId1" });
+    ASSERT_EQUAL(querySheetName.GetSheetId(), "rId1");
+    ASSERT_EQUAL(querySheetName.GetSheetName(), "Sheet1");
 
-    const auto querySheetVisibility = document->ExecuteQuery(SimpleCSV::QuerySheetVisibility{ "rId1"s });
-    ASSERT_EQUAL(querySheetVisibility.GetSheetId(), "rId1"s);
+    const auto querySheetVisibility = document->ExecuteQuery(SimpleCSV::QuerySheetVisibility{ "rId1" });
+    ASSERT_EQUAL(querySheetVisibility.GetSheetId(), "rId1");
 
-    const auto querySheetType = document->ExecuteQuery(SimpleCSV::QuerySheetType{ "rId1"s });
-    ASSERT_EQUAL(querySheetType.GetSheetId(), "rId1"s);
-    ASSERT_ENUM_EQUAL(querySheetType.GetSheetType(), SimpleCSV::ContentType::Worksheet);
+    const auto querySheetType = document->ExecuteQuery(SimpleCSV::QuerySheetType{ "rId1" });
+    ASSERT_EQUAL(querySheetType.GetSheetId(), "rId1");
+    ASSERT_EQUAL(querySheetType.GetSheetType(), SimpleCSV::ContentType::Worksheet);
 
-    const auto querySheetId = document->ExecuteQuery(SimpleCSV::QuerySheetId{ "Sheet1"s });
-    ASSERT_EQUAL(querySheetId.GetSheetId(), "rId1"s);
-    ASSERT_EQUAL(querySheetId.GetSheetName(), "Sheet1"s);
+    const auto querySheetId = document->ExecuteQuery(SimpleCSV::QuerySheetId{ "Sheet1" });
+    ASSERT_EQUAL(querySheetId.GetSheetId(), "rId1");
+    ASSERT_EQUAL(querySheetId.GetSheetName(), "Sheet1");
 
-    const auto querySheetRelsId = document->ExecuteQuery(SimpleCSV::QuerySheetRelsId{ "/xl/worksheets/sheet1.xml"s });
-    ASSERT_EQUAL(querySheetRelsId.GetSheetId(), "rId1"s);
-    ASSERT_EQUAL(querySheetRelsId.GetSheetPath(), "/xl/worksheets/sheet1.xml"s);
+    const auto querySheetRelsId = document->ExecuteQuery(SimpleCSV::QuerySheetRelationshipId{ "/xl/worksheets/sheet1.xml" });
+    ASSERT_EQUAL(querySheetRelsId.GetSheetId(), "rId1");
+    ASSERT_EQUAL(querySheetRelsId.GetSheetPath(), "/xl/worksheets/sheet1.xml");
 
-    const auto querySheetRelsTarget = document->ExecuteQuery(SimpleCSV::QuerySheetRelsTarget{ "rId1"s });
-    ASSERT_EQUAL(querySheetRelsTarget.GetSheetId(), "rId1"s);
+    const auto querySheetRelsTarget = document->ExecuteQuery(SimpleCSV::QuerySheetRelationshipTarget{ "rId1" });
+    ASSERT_EQUAL(querySheetRelsTarget.GetSheetId(), "rId1");
     ASSERT_FALSE(querySheetRelsTarget.GetSheetTarget().empty());
 
     const auto querySharedStrings = document->ExecuteQuery(SimpleCSV::QuerySharedStrings::Create());
     ASSERT_UNEQUAL_NULL_PTR(querySharedStrings.GetSharedStrings());
 
-    const auto queryXmlData = document->ExecuteQuery(SimpleCSV::QueryXmlData{ "xl/worksheets/sheet1.xml"s });
-    ASSERT_EQUAL(queryXmlData.GetXmlPath(), "xl/worksheets/sheet1.xml"s);
+    const auto queryXmlData = document->ExecuteQuery(SimpleCSV::QueryXmlData{ "xl/worksheets/sheet1.xml" });
+    ASSERT_EQUAL(queryXmlData.GetXmlPath(), "xl/worksheets/sheet1.xml");
     ASSERT_UNEQUAL_NULL_PTR(queryXmlData.GetXmlData());
 }

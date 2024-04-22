@@ -61,12 +61,12 @@ void Mathematics::FloatingPointAnalysisTesting::NumericalValueSymbolTest()
 
         if (0.0 <= firstValue)
         {
-            ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(firstFloatingPointAnalysis.GetSymbol(), NumericalValueSymbol::Positive);
             ASSERT_EQUAL(firstFloatingPointAnalysis.GetSymbolValue(), 0u);
         }
         else
         {
-            ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(firstFloatingPointAnalysis.GetSymbol(), NumericalValueSymbol::Negative);
             ASSERT_EQUAL(firstFloatingPointAnalysis.GetSymbolValue(), 1u);
         }
 
@@ -75,12 +75,12 @@ void Mathematics::FloatingPointAnalysisTesting::NumericalValueSymbolTest()
 
         if (0.0 <= secondValue)
         {
-            ASSERT_ENUM_EQUAL(secondFloatingPointAnalysis.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(secondFloatingPointAnalysis.GetSymbol(), NumericalValueSymbol::Positive);
             ASSERT_EQUAL(secondFloatingPointAnalysis.GetSymbolValue(), 0u);
         }
         else
         {
-            ASSERT_ENUM_EQUAL(secondFloatingPointAnalysis.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(secondFloatingPointAnalysis.GetSymbol(), NumericalValueSymbol::Negative);
             ASSERT_EQUAL(secondFloatingPointAnalysis.GetSymbolValue(), 1u);
         }
 
@@ -89,12 +89,12 @@ void Mathematics::FloatingPointAnalysisTesting::NumericalValueSymbolTest()
 
         if (0.0 <= thirdValue)
         {
-            ASSERT_ENUM_EQUAL(thirdFloatingPointAnalysis.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(thirdFloatingPointAnalysis.GetSymbol(), NumericalValueSymbol::Positive);
             ASSERT_EQUAL(thirdFloatingPointAnalysis.GetSymbolValue(), 0u);
         }
         else
         {
-            ASSERT_ENUM_EQUAL(thirdFloatingPointAnalysis.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(thirdFloatingPointAnalysis.GetSymbol(), NumericalValueSymbol::Negative);
             ASSERT_EQUAL(thirdFloatingPointAnalysis.GetSymbolValue(), 1u);
         }
 
@@ -103,12 +103,12 @@ void Mathematics::FloatingPointAnalysisTesting::NumericalValueSymbolTest()
 
         if (0.0 <= fourthValue)
         {
-            ASSERT_ENUM_EQUAL(fourthFloatingPointAnalysis.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(fourthFloatingPointAnalysis.GetSymbol(), NumericalValueSymbol::Positive);
             ASSERT_EQUAL(fourthFloatingPointAnalysis.GetSymbolValue(), 0u);
         }
         else
         {
-            ASSERT_ENUM_EQUAL(fourthFloatingPointAnalysis.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(fourthFloatingPointAnalysis.GetSymbol(), NumericalValueSymbol::Negative);
             ASSERT_EQUAL(fourthFloatingPointAnalysis.GetSymbolValue(), 1u);
         }
     }
@@ -129,7 +129,7 @@ void Mathematics::FloatingPointAnalysisTesting::ExponentTest()
         auto firstValue = randomDistribution0(generator);
         const FloatingPointAnalysis<float> firstFloatingPointAnalysis(firstValue);
 
-        ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
+        ASSERT_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
 
         const auto firstRealExponent = firstFloatingPointAnalysis.GetRealExponent();
         auto secondValue = MathF::Pow(2, static_cast<float>(firstRealExponent));
@@ -137,14 +137,14 @@ void Mathematics::FloatingPointAnalysisTesting::ExponentTest()
 
         ASSERT_EQUAL(firstFloatingPointAnalysis.GetExponent(), secondFloatingPointAnalysis.GetExponent());
 
-        ASSERT_ENUM_EQUAL(secondFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
+        ASSERT_EQUAL(secondFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
 
         ASSERT_EQUAL(firstFloatingPointAnalysis.GetRealExponent(), secondFloatingPointAnalysis.GetRealExponent());
 
         auto thirdValue = randomDistribution1(generator);
         const FloatingPointAnalysis<double> thirdFloatingPointAnalysis(thirdValue);
 
-        ASSERT_ENUM_EQUAL(thirdFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
+        ASSERT_EQUAL(thirdFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
 
         const auto secondRealExponent = thirdFloatingPointAnalysis.GetRealExponent();
         auto fourthValue = MathD::Pow(2, static_cast<double>(secondRealExponent));
@@ -152,14 +152,14 @@ void Mathematics::FloatingPointAnalysisTesting::ExponentTest()
 
         ASSERT_EQUAL(thirdFloatingPointAnalysis.GetExponent(), fourthFloatingPointAnalysis.GetExponent());
 
-        ASSERT_ENUM_EQUAL(fourthFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
+        ASSERT_EQUAL(fourthFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
 
         ASSERT_EQUAL(thirdFloatingPointAnalysis.GetRealExponent(), fourthFloatingPointAnalysis.GetRealExponent());
 
         auto fifthValue = thirdRandomDistribution(generator);
         const FloatingPointAnalysis<float> fifthFloatingPointAnalysis(fifthValue);
 
-        ASSERT_ENUM_EQUAL(fifthFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
+        ASSERT_EQUAL(fifthFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
 
         const auto thirdRealExponent = fifthFloatingPointAnalysis.GetRealExponent();
         auto sixthValue = MathF::Pow(2, static_cast<float>(thirdRealExponent));
@@ -167,14 +167,14 @@ void Mathematics::FloatingPointAnalysisTesting::ExponentTest()
 
         ASSERT_EQUAL(fifthFloatingPointAnalysis.GetExponent(), sixthFloatingPointAnalysis.GetExponent());
 
-        ASSERT_ENUM_EQUAL(sixthFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
+        ASSERT_EQUAL(sixthFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
 
         ASSERT_EQUAL(fifthFloatingPointAnalysis.GetRealExponent(), sixthFloatingPointAnalysis.GetRealExponent());
 
         auto seventhValue = fourthRandomDistribution(generator);
         const FloatingPointAnalysis<double> seventhFloatingPointAnalysis(seventhValue);
 
-        ASSERT_ENUM_EQUAL(seventhFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
+        ASSERT_EQUAL(seventhFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
 
         const auto eighthRealExponent = seventhFloatingPointAnalysis.GetRealExponent();
         auto eighthValue = MathD::Pow(2, static_cast<double>(eighthRealExponent));
@@ -182,7 +182,7 @@ void Mathematics::FloatingPointAnalysisTesting::ExponentTest()
 
         ASSERT_EQUAL(seventhFloatingPointAnalysis.GetExponent(), eighthFloatingPointAnalysis.GetExponent());
 
-        ASSERT_ENUM_EQUAL(eighthFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
+        ASSERT_EQUAL(eighthFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
 
         ASSERT_EQUAL(seventhFloatingPointAnalysis.GetRealExponent(), eighthFloatingPointAnalysis.GetRealExponent());
     }
@@ -218,7 +218,7 @@ void Mathematics::FloatingPointAnalysisTesting::MantissaTest()
 
         const FloatingPointAnalysis<float> secondFloatingPointAnalysis(secondValue);
 
-        ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetSymbol(), secondFloatingPointAnalysis.GetSymbol());
+        ASSERT_EQUAL(firstFloatingPointAnalysis.GetSymbol(), secondFloatingPointAnalysis.GetSymbol());
 
         ASSERT_EQUAL(firstFloatingPointAnalysis.GetRealExponent(), secondFloatingPointAnalysis.GetRealExponent());
 
@@ -242,7 +242,7 @@ void Mathematics::FloatingPointAnalysisTesting::MantissaTest()
 
         const FloatingPointAnalysis<double> fourthFloatingPointAnalysis(fourthValue);
 
-        ASSERT_ENUM_EQUAL(thirdFloatingPointAnalysis.GetSymbol(), fourthFloatingPointAnalysis.GetSymbol());
+        ASSERT_EQUAL(thirdFloatingPointAnalysis.GetSymbol(), fourthFloatingPointAnalysis.GetSymbol());
 
         ASSERT_EQUAL(thirdFloatingPointAnalysis.GetRealExponent(), fourthFloatingPointAnalysis.GetRealExponent());
 
@@ -266,7 +266,7 @@ void Mathematics::FloatingPointAnalysisTesting::MantissaTest()
 
         const FloatingPointAnalysis<float> sixthFloatingPointAnalysis(sixthValue);
 
-        ASSERT_ENUM_EQUAL(fifthFloatingPointAnalysis.GetSymbol(), sixthFloatingPointAnalysis.GetSymbol());
+        ASSERT_EQUAL(fifthFloatingPointAnalysis.GetSymbol(), sixthFloatingPointAnalysis.GetSymbol());
 
         ASSERT_EQUAL(fifthFloatingPointAnalysis.GetRealExponent(), sixthFloatingPointAnalysis.GetRealExponent());
 
@@ -290,7 +290,7 @@ void Mathematics::FloatingPointAnalysisTesting::MantissaTest()
 
         const FloatingPointAnalysis<double> eighthFloatingPointAnalysis(eighthValue);
 
-        ASSERT_ENUM_EQUAL(seventhFloatingPointAnalysis.GetSymbol(), eighthFloatingPointAnalysis.GetSymbol());
+        ASSERT_EQUAL(seventhFloatingPointAnalysis.GetSymbol(), eighthFloatingPointAnalysis.GetSymbol());
 
         ASSERT_EQUAL(seventhFloatingPointAnalysis.GetRealExponent(), eighthFloatingPointAnalysis.GetRealExponent());
 
@@ -320,16 +320,16 @@ void Mathematics::FloatingPointAnalysisTesting::FloatTypeTest()
     if (firstValue == signalValue)
     {
         // 有些编译器不支持SignalingNaN
-        ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::SignalingNaN);
+        ASSERT_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::SignalingNaN);
     }
     else
     {
-        ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::QuietNaN);
+        ASSERT_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::QuietNaN);
     }
 
 #else  // !_DEBUG
 
-    ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::SignalingNaN);
+    ASSERT_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::SignalingNaN);
 
 #endif  // _DEBUG
 
@@ -337,19 +337,19 @@ void Mathematics::FloatingPointAnalysisTesting::FloatTypeTest()
 
     const FloatingPointAnalysis<float> secondFloatingPointAnalysis(fifthValue);
 
-    ASSERT_ENUM_EQUAL(secondFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::QuietNaN);
+    ASSERT_EQUAL(secondFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::QuietNaN);
 
     fifthValue = *reinterpret_cast<const float*>(&thirdValue);
 
     const FloatingPointAnalysis<float> thirdFloatingPointAnalysis(fifthValue);
 
-    ASSERT_ENUM_EQUAL(thirdFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Infinity);
+    ASSERT_EQUAL(thirdFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Infinity);
 
     fifthValue = *reinterpret_cast<const float*>(&fourthValue);
 
     const FloatingPointAnalysis<float> fourthFloatingPointAnalysis(fifthValue);
 
-    ASSERT_ENUM_EQUAL(fourthFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Zero);
+    ASSERT_EQUAL(fourthFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Zero);
 }
 
 void Mathematics::FloatingPointAnalysisTesting::DoubleTypeTest()
@@ -368,16 +368,16 @@ void Mathematics::FloatingPointAnalysisTesting::DoubleTypeTest()
 
     if (firstValue == signalValue)
     {
-        ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::SignalingNaN);
+        ASSERT_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::SignalingNaN);
     }
     else
     {
-        ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::QuietNaN);
+        ASSERT_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::QuietNaN);
     }
 
 #else  // !_DEBUG
 
-    ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::SignalingNaN);
+    ASSERT_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::SignalingNaN);
 
 #endif  // _DEBUG
 
@@ -385,19 +385,19 @@ void Mathematics::FloatingPointAnalysisTesting::DoubleTypeTest()
 
     const FloatingPointAnalysis<double> secondFloatingPointAnalysis(fifthValue);
 
-    ASSERT_ENUM_EQUAL(secondFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::QuietNaN);
+    ASSERT_EQUAL(secondFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::QuietNaN);
 
     fifthValue = *reinterpret_cast<const double*>(&thirdValue);
 
     const FloatingPointAnalysis<double> thirdFloatingPointAnalysis(fifthValue);
 
-    ASSERT_ENUM_EQUAL(thirdFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Infinity);
+    ASSERT_EQUAL(thirdFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Infinity);
 
     fifthValue = *reinterpret_cast<const double*>(&fourthValue);
 
     const FloatingPointAnalysis<double> fourthFloatingPointAnalysis(fifthValue);
 
-    ASSERT_ENUM_EQUAL(fourthFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Zero);
+    ASSERT_EQUAL(fourthFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Zero);
 }
 
 #include SYSTEM_WARNING_POP

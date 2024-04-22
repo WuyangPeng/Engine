@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:33)
+/// 版本：1.0.0.8 (2024/04/12 14:22)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -73,7 +73,7 @@ void CoreTools::AnalysisCommandArgumentContainer::Init(const char* commandLine)
 
 void CoreTools::AnalysisCommandArgumentContainer::AddCommandArguments()
 {
-    // 从1开始索引
+    /// 从1开始索引
     auto index = firstCheckIndex;
     const auto argumentsNumber = boost::numeric_cast<int>(argumentContainer.size());
     while (index < argumentsNumber)
@@ -102,7 +102,8 @@ CoreTools::AnalysisCommandArgumentContainer::ArgumentsType CoreTools::AnalysisCo
 {
     const auto& argumentsName = argumentContainer.at(index);
 
-    if (const CommandArgumentType argumentsNameType{ argumentsName }; argumentsNameType.IsArgumentsName())
+    if (const CommandArgumentType argumentsNameType{ argumentsName };
+        argumentsNameType.IsArgumentsName())
     {
         return GetNextArgumentsType(index);
     }
@@ -120,7 +121,8 @@ CoreTools::AnalysisCommandArgumentContainer::ArgumentsType CoreTools::AnalysisCo
     {
         const auto& argumentsValue = argumentContainer.at(nextIndex);
 
-        if (const CommandArgumentType argumentsValueType{ argumentsValue }; !argumentsValueType.IsArgumentsName())
+        if (const CommandArgumentType argumentsValueType{ argumentsValue };
+            !argumentsValueType.IsArgumentsName())
         {
             return ArgumentsType::FullArgument;
         }
@@ -146,7 +148,8 @@ void CoreTools::AnalysisCommandArgumentContainer::AddNoValueArgument(int index)
 {
     const auto& arguments = argumentContainer.at(index);
 
-    if (const CommandArgumentType commandArgumentType{ arguments }; commandArgumentType.IsArgumentsName())
+    if (const CommandArgumentType commandArgumentType{ arguments };
+        commandArgumentType.IsArgumentsName())
     {
         const auto argumentsName = arguments.substr(1, arguments.size() - 1);
         commandArgumentContainer->AddArgument(index, argumentsName);
@@ -164,14 +167,7 @@ void CoreTools::AnalysisCommandArgumentContainer::AddEndArgumentValue(int index)
 
 bool CoreTools::AnalysisCommandArgumentContainer::IsValid() const noexcept
 {
-    if (commandArgumentContainer != nullptr && commandArgumentContainer->GetArgumentsNumber() == gsl::narrow_cast<int>(argumentContainer.size()))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return commandArgumentContainer != nullptr && commandArgumentContainer->GetArgumentsNumber() == gsl::narrow_cast<int>(argumentContainer.size());
 }
 
 #endif  // OPEN_CLASS_INVARIANT

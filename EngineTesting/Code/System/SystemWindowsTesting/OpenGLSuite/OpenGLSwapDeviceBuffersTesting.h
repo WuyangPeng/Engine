@@ -21,7 +21,7 @@ namespace System
         using ParentType = OpenGLWglPrototypesTestingBase;
 
     public:
-        explicit OpenGLSwapDeviceBuffersTesting(const OStreamShared& stream, WindowsHWnd hwnd);
+        explicit OpenGLSwapDeviceBuffersTesting(const OStreamShared& stream, WindowsHWnd hWnd);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 

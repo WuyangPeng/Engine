@@ -5,15 +5,13 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:00)
+/// 版本：1.0.0.8 (2024/04/11 11:29)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "XmlData.h"
 #include "Detail/XmlDataImpl.h"
-#include "System/Helper/PragmaWarning/PugiXml.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 CoreTools::SimpleCSV::XmlData::XmlData(const DocumentSharedPtr& parentDocument, const std::string& xmlPath, const std::string& xmlId, ContentType xmlType)
     : impl{ parentDocument, xmlPath, xmlId, xmlType }

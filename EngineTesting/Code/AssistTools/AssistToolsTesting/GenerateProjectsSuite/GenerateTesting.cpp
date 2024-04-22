@@ -8,7 +8,7 @@
 ///	°æ±¾£º1.0.0.0 (2023/11/08 15:42)
 
 #include "GenerateTesting.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -49,7 +49,7 @@ void AssistTools::GenerateTesting::RegularFileTest(const String& fileName)
         return;
     }
 
-    const CoreTools::IFStreamManager streamManager{ fileName };
+    const CoreTools::IFileStreamManager streamManager{ fileName };
 
     const auto content = streamManager.GetFileContent();
 

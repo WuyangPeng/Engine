@@ -24,4 +24,3 @@ TODO Level 9
 											  WindowsNamedPipe、
 											  WindowsUser。 
 5. （Windows）完成Windows非Windows平台的实现：LastWindowError。
-6. （Windows）WindowError宏补全Windows错误码。

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:32)
+/// 版本：1.0.0.8 (2024/04/12 14:20)
 
 #ifndef CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_CONTAINER_H
 #define CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_CONTAINER_H
@@ -51,7 +51,7 @@ namespace CoreTools
         NODISCARD bool IsString(const std::string& argumentsName) const;
         NODISCARD bool IsExist(const std::string& argumentsName) const;
 
-        // 返回第一个未处理参数的名字。
+        /// 返回第一个未处理参数的名字。
         NODISCARD std::string ExcessArguments() const;
         NODISCARD int GetExcessArgumentsCount() const noexcept;
 

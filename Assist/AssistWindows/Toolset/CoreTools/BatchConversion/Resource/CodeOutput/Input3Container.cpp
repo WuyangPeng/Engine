@@ -40,9 +40,9 @@ void CsvOutput::Input3Container::Load(const CSVContent& csvContent)
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
-    for (auto i = 0; i < size; ++i)
+    for (auto index = 0; index < size; ++index)
     {
-        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(index) };
 
         input3.emplace_back(std::make_shared<Input3>(csvRow));
     }
@@ -77,14 +77,14 @@ void CsvOutput::Input3Container::Unique()
 
 CLASS_INVARIANT_STUB_DEFINE(CsvOutput, Input3Container)
 
-CsvOutput::Input3Container::ConstInput3BaseSharedPtr CsvOutput::Input3Container::GetFirstInput3() const
+CsvOutput::Input3Container::ConstInput3SharedPtr CsvOutput::Input3Container::GetFirstInput3() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return input3.at(0);
 }
 
-CsvOutput::Input3Container::ConstInput3BaseSharedPtr CsvOutput::Input3Container::GetInput3(int key) const
+CsvOutput::Input3Container::ConstInput3SharedPtr CsvOutput::Input3Container::GetInput3(int key) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -92,9 +92,8 @@ CsvOutput::Input3Container::ConstInput3BaseSharedPtr CsvOutput::Input3Container:
         return (*lhs).GetKey() < (*rhs).GetKey();
     };
 
-    const auto iter = std::ranges::lower_bound(input3, std::make_shared<Input3Base>(key), function);
-
-    if (iter != input3.cend() && (*iter)->GetKey() == key)
+    if (const auto iter = std::ranges::lower_bound(input3, std::make_shared<Input3Base>(key), function);
+        iter != input3.cend() && (*iter)->GetKey() == key)
     {
         return *iter;
     }

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.5 (2024/01/24 21:50)
+/// 版本：1.0.0.8 (2024/03/29 22:36)
 
 #ifndef CORE_TOOLS_CHARACTER_STRING_STRING_UTILITY_H
 #define CORE_TOOLS_CHARACTER_STRING_STRING_UTILITY_H
@@ -24,6 +24,7 @@ namespace CoreTools
     public:
         using ClassType = StringUtility;
 
+        using TChar = System::TChar;
         using String = System::String;
         using TokensType = std::vector<std::string>;
 
@@ -36,7 +37,7 @@ namespace CoreTools
         /// 在C++字符串的默认区域设置中，
         /// 空白字符是空格(0x20, ' ')、换行符(0x0C, '\f')、换行(0x0A, '\n')、回车符(0x0D, '\r')、水平制表符(0x09, '\t') 和垂直制表符(0x0B, '\v')。
         /// 见 https://en.cppreference.com/w/cpp/string/byte/isspace
-        /// 对于ASCII值表以及相关的is*和isw*函数，（带有'int ch'输入），返回0或!0
+        /// 对于ASCII值表以及相关的is*和isw*函数，带有'int ch'输入，返回0或非零。
         NODISCARD static TokensType GetTokens(const std::string& input, const std::string& whiteSpace);
 
         /// 对于基础文本提取，在GetTokens(...)中选择'whiteSpace'为ASCII值0x00-0x20,0x7F-0xFF。
@@ -49,6 +50,13 @@ namespace CoreTools
         NODISCARD static String ToFirstLetterUpper(const String& character);
         NODISCARD static String ToFirstLetterLower(const String& character);
         NODISCARD static String ToUpperMacro(const String& character);
+
+    private:
+        using ChangeFirstLetterFunction = TChar (*)(TChar ch, const std::locale& locale);
+
+    private:
+        NODISCARD static String ChangeFirstLetter(const String& character, ChangeFirstLetterFunction function);
+        NODISCARD static String ToUpperMacro(const TChar& character, const std::locale& locale, bool isFirstChar);
     };
 }
 

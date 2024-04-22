@@ -128,28 +128,28 @@ void Mathematics::IntegerDataTesting::ConversionTest()
     ASSERT_EQUAL(firstIntegerData[2], uint16_t(0xF458));
     ASSERT_EQUAL(firstIntegerData[3], uint16_t(0xF000));
 
-    ASSERT_ENUM_EQUAL(firstIntegerData.GetSign(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(firstIntegerData.GetSign(), NumericalValueSymbol::Positive);
     ASSERT_FALSE(firstIntegerData.IsZero());
 
     IntegerDataAmend<3> firstIntegerDataAmend(firstIntegerData);
     firstIntegerDataAmend.Negative();
 
-    ASSERT_ENUM_EQUAL(firstIntegerData.GetSign(), NumericalValueSymbol::Negative);
+    ASSERT_EQUAL(firstIntegerData.GetSign(), NumericalValueSymbol::Negative);
     ASSERT_FALSE(firstIntegerData.IsZero());
 
     firstIntegerData.SetZero();
     ASSERT_TRUE(firstIntegerData.IsZero());
-    ASSERT_ENUM_EQUAL(firstIntegerData.GetSign(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(firstIntegerData.GetSign(), NumericalValueSymbol::Positive);
 
     IntegerData<3> secondIntegerData(uint64_t{ 0 });
 
     ASSERT_TRUE(secondIntegerData.IsZero());
-    ASSERT_ENUM_EQUAL(secondIntegerData.GetSign(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(secondIntegerData.GetSign(), NumericalValueSymbol::Positive);
 
     IntegerDataAmend<3> secondIntegerDataAmend(secondIntegerData);
     secondIntegerDataAmend.Negative();
 
-    ASSERT_ENUM_EQUAL(secondIntegerData.GetSign(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(secondIntegerData.GetSign(), NumericalValueSymbol::Positive);
     ASSERT_TRUE(secondIntegerData.IsZero());
 }
 
@@ -160,7 +160,7 @@ void Mathematics::IntegerDataTesting::CompareTest()
     IntegerData<2> firstIntegerData(data);
     const IntegerData<2> secondIntegerData(data);
 
-    ASSERT_ENUM_EQUAL(IntegerData<2>::UnsignedDataCompare(firstIntegerData, secondIntegerData), NumericalValueSymbol::Zero);
+    ASSERT_EQUAL(IntegerData<2>::UnsignedDataCompare(firstIntegerData, secondIntegerData), NumericalValueSymbol::Zero);
 
     ASSERT_TRUE(firstIntegerData == secondIntegerData);
     ASSERT_FALSE(firstIntegerData < secondIntegerData);
@@ -172,14 +172,14 @@ void Mathematics::IntegerDataTesting::CompareTest()
 
     firstIntegerData[0] = gsl::narrow_cast<uint16_t>(0x0000);
 
-    ASSERT_ENUM_EQUAL(IntegerData<2>::UnsignedDataCompare(firstIntegerData, secondIntegerData), NumericalValueSymbol::Negative);
+    ASSERT_EQUAL(IntegerData<2>::UnsignedDataCompare(firstIntegerData, secondIntegerData), NumericalValueSymbol::Negative);
 
     ASSERT_FALSE(firstIntegerData == secondIntegerData);
     ASSERT_TRUE(firstIntegerData < secondIntegerData);
 
     firstIntegerData[0] = gsl::narrow_cast<uint16_t>(0xFFFF);
 
-    ASSERT_ENUM_EQUAL(IntegerData<2>::UnsignedDataCompare(firstIntegerData, secondIntegerData), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(IntegerData<2>::UnsignedDataCompare(firstIntegerData, secondIntegerData), NumericalValueSymbol::Positive);
 
     ASSERT_FALSE(firstIntegerData == secondIntegerData);
     ASSERT_FALSE(firstIntegerData < secondIntegerData);
@@ -197,7 +197,7 @@ void Mathematics::IntegerDataTesting::FloatingPointConversionTest()
     ASSERT_EQUAL(firstIntegerData[0], uint16_t(0xDCD5));
     ASSERT_EQUAL(firstIntegerData[1], uint16_t(0x0032));
 
-    ASSERT_ENUM_EQUAL(firstIntegerData.GetSign(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(firstIntegerData.GetSign(), NumericalValueSymbol::Positive);
     ASSERT_FALSE(firstIntegerData.IsZero());
 
     IntegerData<3> secondIntegerData(-22223333.011113333f);  // -22223334
@@ -210,7 +210,7 @@ void Mathematics::IntegerDataTesting::FloatingPointConversionTest()
     ASSERT_EQUAL(secondIntegerData[4], uint16_t(0xFFFF));
     ASSERT_EQUAL(secondIntegerData[5], uint16_t(0xFFFF));
 
-    ASSERT_ENUM_EQUAL(secondIntegerData.GetSign(), NumericalValueSymbol::Negative);
+    ASSERT_EQUAL(secondIntegerData.GetSign(), NumericalValueSymbol::Negative);
     ASSERT_FALSE(secondIntegerData.IsZero());
 
     IntegerData<3> thirdIntegerData(2222222.33333);
@@ -218,7 +218,7 @@ void Mathematics::IntegerDataTesting::FloatingPointConversionTest()
     ASSERT_EQUAL(thirdIntegerData[0], uint16_t(0xE88E));
     ASSERT_EQUAL(thirdIntegerData[1], uint16_t(0x0021));
 
-    ASSERT_ENUM_EQUAL(thirdIntegerData.GetSign(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(thirdIntegerData.GetSign(), NumericalValueSymbol::Positive);
     ASSERT_FALSE(thirdIntegerData.IsZero());
 
     IntegerData<3> fourthIntegerData(-22223333.311113333);
@@ -231,6 +231,6 @@ void Mathematics::IntegerDataTesting::FloatingPointConversionTest()
     ASSERT_EQUAL(fourthIntegerData[4], uint16_t(0xFFFF));
     ASSERT_EQUAL(fourthIntegerData[5], uint16_t(0xFFFF));
 
-    ASSERT_ENUM_EQUAL(fourthIntegerData.GetSign(), NumericalValueSymbol::Negative);
+    ASSERT_EQUAL(fourthIntegerData.GetSign(), NumericalValueSymbol::Negative);
     ASSERT_FALSE(fourthIntegerData.IsZero());
 }

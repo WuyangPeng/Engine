@@ -5,13 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:54)
+/// 版本：1.0.0.8 (2024/04/03 09:14)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CSVTypeConversion.h"
 #include "CoreTools/CharacterString/StringConversion.h"
-#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 
@@ -23,7 +22,8 @@ std::string CoreTools::CSVTypeConversion::GetTypeDescribe(CSVFormatType csvForma
 {
     static const auto typeDescribe = GetFormatTypeConversionDescribe();
 
-    if (const auto iter = typeDescribe.find(csvFormatType); iter != typeDescribe.cend())
+    if (const auto iter = typeDescribe.find(csvFormatType);
+        iter != typeDescribe.cend())
     {
         return iter->second;
     }
@@ -37,7 +37,8 @@ CoreTools::CSVFormatType CoreTools::CSVTypeConversion::GetFormatType(const Strin
 {
     static const auto typeDescribe = GetDescribeConversionFormatType();
 
-    if (const auto iter = typeDescribe.find(describe); iter != typeDescribe.cend())
+    if (const auto iter = typeDescribe.find(describe);
+        iter != typeDescribe.cend())
     {
         return iter->second;
     }
@@ -67,9 +68,9 @@ CoreTools::CSVTypeConversion::DescribeConversionFormatType CoreTools::CSVTypeCon
 
     DescribeConversionFormatType result{};
 
-    for (const auto& element : typeDescribe)
+    for (const auto& [type, describe] : typeDescribe)
     {
-        result.emplace(StringConversion::MultiByteConversionStandard(element.second), element.first);
+        result.emplace(StringConversion::MultiByteConversionStandard(describe), type);
     }
 
     return result;
@@ -101,7 +102,7 @@ CoreTools::CSVTypeConversion::DataTypeDescribeContainer CoreTools::CSVTypeConver
                                            SYSTEM_TEXT("GetChar"sv),
                                            SYSTEM_TEXT("System::TChar"sv),
                                            SYSTEM_TEXT("return SYSTEM_TEXT('\\0');\n"sv),
-                                           SYSTEM_TEXT("System::TChar"sv) },
+                                           SYSTEM_TEXT("Char"sv) },
 
                                          { CSVDataType::Int,
                                            SYSTEM_TEXT("int"sv),
@@ -312,9 +313,9 @@ CoreTools::CSVTypeConversion::DataTypeConversionDescribe CoreTools::CSVTypeConve
 
     DataTypeConversionDescribe result{};
 
-    for (const auto& value : container)
+    for (const auto& element : container)
     {
-        result.emplace(value.GetCsvDataType(), StringConversion::StandardConversionMultiByte(value.GetDescribe().data()));
+        result.emplace(element.GetCsvDataType(), StringConversion::StandardConversionMultiByte(element.GetDescribe().data()));
     }
 
     return result;
@@ -324,7 +325,8 @@ std::string CoreTools::CSVTypeConversion::GetTypeDescribe(CSVDataType csvDataTyp
 {
     static const auto typeDescribe = GetDataTypeConversionDescribe();
 
-    if (const auto iter = typeDescribe.find(csvDataType); iter != typeDescribe.cend())
+    if (const auto iter = typeDescribe.find(csvDataType);
+        iter != typeDescribe.cend())
     {
         return iter->second;
     }
@@ -340,36 +342,42 @@ CoreTools::CSVTypeConversion::DescribeConversionDataType CoreTools::CSVTypeConve
 
     DescribeConversionDataType result{};
 
-    for (const auto& value : container)
+    for (const auto& element : container)
     {
-        result.emplace(value.GetDescribe(), value.GetCsvDataType());
+        result.emplace(element.GetDescribe(), element.GetCsvDataType());
     }
 
     return result;
+}
+
+CoreTools::CSVDataType CoreTools::CSVTypeConversion::GetEnumDataType(const String& describe)
+{
+    if (describe.find(SYSTEM_TEXT("enum[]"s)) != String::npos)
+    {
+        return CSVDataType::EnumArray;
+    }
+    else if (describe.find(SYSTEM_TEXT("enum"s)) != String::npos)
+    {
+        return CSVDataType::Enum;
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到对应的类型。\n"s))
+    }
 }
 
 CoreTools::CSVDataType CoreTools::CSVTypeConversion::GetDataType(const String& describe)
 {
     static const auto typeDescribe = GetDescribeConversionDataType();
 
-    if (const auto iter = typeDescribe.find(describe); iter != typeDescribe.cend())
+    if (const auto iter = typeDescribe.find(describe);
+        iter != typeDescribe.cend())
     {
         return iter->second;
     }
     else
     {
-        if (describe.find(SYSTEM_TEXT("enum[]"s)) != String::npos)
-        {
-            return CSVDataType::EnumArray;
-        }
-        else if (describe.find(SYSTEM_TEXT("enum"s)) != String::npos)
-        {
-            return CSVDataType::Enum;
-        }
-        else
-        {
-            THROW_EXCEPTION(SYSTEM_TEXT("未找到对应的类型。\n"s))
-        }
+        return GetEnumDataType(describe);
     }
 }
 
@@ -381,7 +389,8 @@ CoreTools::CSVTypeConversion::DataTypeConversionActualType CoreTools::CSVTypeCon
 
     for (const auto& value : container)
     {
-        if (const auto actualType = value.GetActualType(); !actualType.empty())
+        if (const auto actualType = value.GetActualType();
+            !actualType.empty())
         {
             result.emplace(value.GetCsvDataType(), actualType);
         }
@@ -394,7 +403,8 @@ System::String CoreTools::CSVTypeConversion::GetActualType(CSVDataType csvDataTy
 {
     static const auto typeDescribe = GetDataTypeConversionActualType();
 
-    if (const auto iter = typeDescribe.find(csvDataType); iter != typeDescribe.cend())
+    if (const auto iter = typeDescribe.find(csvDataType);
+        iter != typeDescribe.cend())
     {
         return iter->second;
     }
@@ -410,11 +420,12 @@ CoreTools::CSVTypeConversion::DataTypeConversionFunctionName CoreTools::CSVTypeC
 
     DataTypeConversionActualType result{};
 
-    for (const auto& value : container)
+    for (const auto& element : container)
     {
-        if (const auto actualType = value.GetActualType(); !actualType.empty())
+        if (const auto actualType = element.GetActualType();
+            !actualType.empty())
         {
-            result.emplace(value.GetCsvDataType(), value.GetFunctionName());
+            result.emplace(element.GetCsvDataType(), element.GetFunctionName());
         }
     }
 
@@ -425,7 +436,8 @@ System::String CoreTools::CSVTypeConversion::GetFunctionName(CSVDataType csvData
 {
     static const auto typeDescribe = GetDataTypeConversionFunctionName();
 
-    if (const auto iter = typeDescribe.find(csvDataType); iter != typeDescribe.cend())
+    if (const auto iter = typeDescribe.find(csvDataType);
+        iter != typeDescribe.cend())
     {
         return iter->second;
     }
@@ -439,7 +451,8 @@ System::String CoreTools::CSVTypeConversion::GetValueType(CSVDataType csvDataTyp
 {
     static const auto typeDescribe = GetDataTypeConversionValueType();
 
-    if (const auto iter = typeDescribe.find(csvDataType); iter != typeDescribe.cend())
+    if (const auto iter = typeDescribe.find(csvDataType);
+        iter != typeDescribe.cend())
     {
         return iter->second;
     }
@@ -455,11 +468,12 @@ CoreTools::CSVTypeConversion::DataTypeConversionValueType CoreTools::CSVTypeConv
 
     DataTypeConversionValueType result{};
 
-    for (const auto& value : container)
+    for (const auto& element : container)
     {
-        if (const auto valueType = value.GetValueType(); !valueType.empty())
+        if (const auto valueType = element.GetValueType();
+            !valueType.empty())
         {
-            result.emplace(value.GetCsvDataType(), valueType);
+            result.emplace(element.GetCsvDataType(), valueType);
         }
     }
 
@@ -472,11 +486,12 @@ CoreTools::CSVTypeConversion::DataTypeConversionBaseReturnDescribe CoreTools::CS
 
     DataTypeConversionValueType result{};
 
-    for (const auto& value : container)
+    for (const auto& element : container)
     {
-        if (const auto baseReturnDescribe = value.GetBaseReturnDescribe(); !baseReturnDescribe.empty())
+        if (const auto baseReturnDescribe = element.GetBaseReturnDescribe();
+            !baseReturnDescribe.empty())
         {
-            result.emplace(value.GetCsvDataType(), baseReturnDescribe);
+            result.emplace(element.GetCsvDataType(), baseReturnDescribe);
         }
     }
 
@@ -487,7 +502,8 @@ System::String CoreTools::CSVTypeConversion::GetBaseReturnDescribe(CSVDataType c
 {
     static const auto baseReturnDescribe = GetDataTypeConversionBaseReturnDescribe();
 
-    if (const auto iter = baseReturnDescribe.find(csvDataType); iter != baseReturnDescribe.cend())
+    if (const auto iter = baseReturnDescribe.find(csvDataType);
+        iter != baseReturnDescribe.cend())
     {
         return iter->second;
     }
@@ -501,7 +517,8 @@ System::String CoreTools::CSVTypeConversion::GetAbbreviation(CSVDataType csvData
 {
     static const auto abbreviation = GetDataTypeConversionAbbreviation();
 
-    if (const auto iter = abbreviation.find(csvDataType); iter != abbreviation.cend())
+    if (const auto iter = abbreviation.find(csvDataType);
+        iter != abbreviation.cend())
     {
         return iter->second;
     }
@@ -517,11 +534,12 @@ CoreTools::CSVTypeConversion::DataTypeConversionAbbreviation CoreTools::CSVTypeC
 
     DataTypeConversionAbbreviation result{};
 
-    for (const auto& value : container)
+    for (const auto& element : container)
     {
-        if (const auto abbreviation = value.GetAbbreviation(); !abbreviation.empty())
+        if (const auto abbreviation = element.GetAbbreviation();
+            !abbreviation.empty())
         {
-            result.emplace(value.GetCsvDataType(), abbreviation);
+            result.emplace(element.GetCsvDataType(), abbreviation);
         }
     }
 

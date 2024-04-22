@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:41)
+/// 版本：1.0.0.8 (2024/04/02 22:52)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_OPEN_XLSX_CONVERSION_H
 #define CORE_TOOLS_TEXT_PARSING_OPEN_XLSX_CONVERSION_H
@@ -39,6 +39,9 @@ namespace CoreTools
         using ParentType = ExcelConversionCSVImpl;
 
         using String = System::String;
+        using Row = OpenXLSX::XLRow;
+        using CellValue = OpenXLSX::XLCellValue;
+        using Worksheet = OpenXLSX::XLWorksheet;
 
     public:
         OpenXLSXConversion(const std::string& xlsxFileName, String csvFileName);
@@ -46,19 +49,29 @@ namespace CoreTools
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
+        using IndexContainer = std::set<int>;
+        using Container = std::vector<std::string>;
+
+    private:
         void Conversion();
 
-        void ObtainRelated(const OpenXLSX::XLWorksheet& xlWorksheet);
-        NODISCARD std::string GetContent(bool isFirstPage, const OpenXLSX::XLWorksheet& xlWorksheet);
-        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, const OpenXLSX::XLRow& xlRow);
-        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, int columnIndex, const OpenXLSX::XLCellValue& xlCellValue);
-        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, int columnIndex, const std::string& column);
-        NODISCARD bool IsIgnore(const OpenXLSX::XLWorksheet& xlWorksheet) const;
+        void ObtainRelated(const Worksheet& worksheet);
+        NODISCARD std::string GetContent(bool isFirstPage, const Worksheet& worksheet) const;
+        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, const Row& row) const;
+        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, int columnIndex, const CellValue& xlCellValue) const;
+
+        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, int columnIndex, const std::string& column) const;
+        NODISCARD static bool IsIgnore(const Worksheet& worksheet);
 
         void SaveIntoFile(const std::string& content) const;
 
-    private:
-        using IndexContainer = std::set<int>;
+        void ObtainRelated(int excludeIndex, const CellValue& element);
+        NODISCARD std::string GetFirstPageBitFieldContent(int columnIndex, const std::string& column) const;
+        NODISCARD static std::string GetStringFieldContent(const std::string& column);
+
+        NODISCARD static std::string GetBitArrayFieldContent(const std::string& column);
+        NODISCARD static std::string GetBitFieldContent(const std::string& column);
+        NODISCARD static std::string GetBitArrayFieldContent(bool isEnd, const std::string& element);
 
     private:
         OpenXLSXDocument document;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 20:28)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/16 17:02)
 
 #include "ReadAndWriteFileHandleTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -17,8 +17,6 @@
 
 #include <string>
 #include <vector>
-
-using namespace std::literals;
 
 CoreTools::ReadAndWriteFileHandleTesting::ReadAndWriteFileHandleTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -78,12 +76,12 @@ void CoreTools::ReadAndWriteFileHandleTesting::ReadFileHandleTest()
 
 System::String CoreTools::ReadAndWriteFileHandleTesting::GetFileHandleName()
 {
-    return SYSTEM_TEXT("Resource/FileHandleTesting/ReadAndWriteFileHandleTestingText.txt"s);
+    return SYSTEM_TEXT("Resource/FileHandleTesting/ReadAndWriteFileHandleTestingText.txt");
 }
 
 std::string CoreTools::ReadAndWriteFileHandleTesting::GetFileHandleContent()
 {
-    return "FileHandle Testing Text"s;
+    return "FileHandle Testing Text";
 }
 
 void CoreTools::ReadAndWriteFileHandleTesting::GetFileByteSizeTest()

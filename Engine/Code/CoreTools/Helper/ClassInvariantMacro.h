@@ -5,9 +5,9 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:16)
+/// 版本：1.0.0.8 (2024/03/28 11:04)
 
-// 类不变式所需要的宏
+/// 类不变式所需要的宏
 #ifndef CORE_TOOLS_HELPER_CLASS_INVARIANT_MACRO_H
 #define CORE_TOOLS_HELPER_CLASS_INVARIANT_MACRO_H
 
@@ -41,18 +41,18 @@
 
 #if defined(OPEN_CLASS_INVARIANT)
 
-    #define CLASS_IS_VALID                           \
-        CoreTools::CheckInvariant<ClassType>         \
-        {                                            \
-            (*this), (CORE_TOOLS_FUNCTION_DESCRIBED) \
+    #define CLASS_IS_VALID                                                                 \
+        CoreTools::CheckInvariant<ClassType> SYSTEM_CONCATENATOR(checkInvariant, __LINE__) \
+        {                                                                                  \
+            (*this), (CORE_TOOLS_FUNCTION_DESCRIBED)                                       \
         }
     #define CLASS_IS_VALID_CONST                                                                               \
-        CoreTools::CheckInvariant<ClassType>                                                                   \
+        CoreTools::CheckInvariant<ClassType> SYSTEM_CONCATENATOR(checkInvariant, __LINE__)                     \
         {                                                                                                      \
             (*this), (CORE_TOOLS_FUNCTION_DESCRIBED), (CoreTools::CheckInvariantConditions::OnlyPostCondition) \
         }
     #define SELF_CLASS_IS_VALID                                                                               \
-        CoreTools::CheckInvariant<ClassType>                                                                  \
+        CoreTools::CheckInvariant<ClassType> SYSTEM_CONCATENATOR(checkInvariant, __LINE__)                    \
         {                                                                                                     \
             (*this), (CORE_TOOLS_FUNCTION_DESCRIBED), (CoreTools::CheckInvariantConditions::OnlyPreCondition) \
         }

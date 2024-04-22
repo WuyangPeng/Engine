@@ -62,7 +62,7 @@ void CoreTools::EventSlotTesting::SlotTest()
 
     ASSERT_EQUAL(eventSubclass->GetValue(), value + value);
 
-    ASSERT_ENUM_EQUAL(eventSlot.GetPriority(), eventPriority);
+    ASSERT_EQUAL(eventSlot.GetPriority(), eventPriority);
 
     eventSubclass.reset();
     ASSERT_EQUAL_NULL_PTR(eventSubclass);

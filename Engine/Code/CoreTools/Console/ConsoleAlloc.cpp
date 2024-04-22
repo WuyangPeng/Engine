@@ -5,12 +5,13 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:36)
+/// 版本：1.0.0.8 (2024/03/30 14:51)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ConsoleAlloc.h"
 #include "System/Console/ConsoleCreate.h"
+#include "System/Console/Using/ConsoleCreateUsing.h"
 #include "System/Helper/Tools.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -18,8 +19,6 @@
 #include "CoreTools/LogManager/LogAsynchronous.h"
 
 #include <string>
-
-using namespace std::literals;
 
 CoreTools::ConsoleAlloc CoreTools::ConsoleAlloc::Create()
 {
@@ -54,7 +53,8 @@ bool CoreTools::ConsoleAlloc::IsValid() const noexcept
 
 void CoreTools::ConsoleAlloc::OpenConsole()
 {
-    if (const auto allocSuccess = System::AllocConsole(); !allocSuccess)
+    if (const auto allocSuccess = System::AllocConsole();
+        !allocSuccess)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("控制台创建错误。"s))
     }
@@ -64,14 +64,9 @@ void CoreTools::ConsoleAlloc::OpenConsole()
 
 void CoreTools::ConsoleAlloc::ReOpenConsole()
 {
-    const auto outPath = "CONOUT$"s;
-    const auto inPath = "CONOUT$"s;
-    const auto outMode = "w+t"s;
-    const auto inMode = "r+t"s;
-
-    if (!(System::ReOpenConsole(out, outPath.c_str(), outMode.c_str(), stdout) &&
-          System::ReOpenConsole(in, inPath.c_str(), inMode.c_str(), stdin) &&
-          System::ReOpenConsole(error, outPath.c_str(), outMode.c_str(), stderr) &&
+    if (!(System::ReOpenConsole(out, System::stdOutPath, System::stdOutMode, stdout) &&
+          System::ReOpenConsole(in, System::stdInPath, System::stdInMode, stdin) &&
+          System::ReOpenConsole(error, System::stdOutPath, System::stdOutMode, stderr) &&
           System::RemoveConsoleCloseButton()))
     {
         CloseConsole();
@@ -80,15 +75,14 @@ void CoreTools::ConsoleAlloc::ReOpenConsole()
     }
 }
 
+void CoreTools::ConsoleAlloc::LogWait()
+{
+    LOG_ASYNCHRONOUS_SINGLETON.Wait();
+}
+
 void CoreTools::ConsoleAlloc::CloseConsole() const noexcept
 {
-    try
-    {
-        LOG_ASYNCHRONOUS_SINGLETON.Wait();
-    }
-    catch (...)
-    {
-    }
+    System::NoexceptNoReturn(&ClassType::LogWait);
 
     CloseConsole(out);
     CloseConsole(in);
@@ -96,7 +90,7 @@ void CoreTools::ConsoleAlloc::CloseConsole() const noexcept
 
     if (!System::FreeConsole())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("关闭控制台错误。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        System::OutputDebugStringWithTChar(SYSTEM_TEXT("关闭控制台错误。"));
     }
 }
 
@@ -104,6 +98,6 @@ void CoreTools::ConsoleAlloc::CloseConsole(FILE* file) noexcept
 {
     if (file != nullptr && !System::CloseConsole(file))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("释放控制台文件描述符错误。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        System::OutputDebugStringWithTChar(SYSTEM_TEXT("释放控制台文件描述符错误。"));
     }
 }

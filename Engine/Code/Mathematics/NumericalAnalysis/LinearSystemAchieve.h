@@ -532,7 +532,7 @@ Real Mathematics::LinearSystem<Real>::Dot(int n, const RealContainer& u, const R
 template <typename Real>
 void Mathematics::LinearSystem<Real>::Mul(int n, RealContainer& a, const RealContainer& x, RealContainer& p)
 {
-    LexicoArray2 matA{ n, n, a };
+    LexicoArray2 matA{ n, n, a.begin(), a.end() };
 
     for (auto row = 0; row < n; ++row)
     {

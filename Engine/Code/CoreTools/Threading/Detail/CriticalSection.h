@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:10)
+/// 版本：1.0.0.8 (2024/03/30 18:00)
 
 #ifndef CORE_TOOLS_THREADING_CRITICAL_SECTION_H
 #define CORE_TOOLS_THREADING_CRITICAL_SECTION_H
@@ -15,7 +15,7 @@
 #include "MutexImpl.h"
 #include "System/Threading/Using/CriticalSectionUsing.h"
 
-// 临界区类
+/// 临界区类
 namespace CoreTools
 {
     class CORE_TOOLS_HIDDEN_DECLARE CriticalSection final : public MutexImpl
@@ -23,6 +23,7 @@ namespace CoreTools
     public:
         using ClassType = CriticalSection;
         using ParentType = MutexImpl;
+
         using ThreadingCriticalSection = System::ThreadingCriticalSection;
 
     public:

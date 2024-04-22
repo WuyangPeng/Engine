@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:36)
+/// 版本：1.0.0.8 (2024/04/12 14:47)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,8 +13,6 @@
 #include "CoreTools/FileManager/EnvironmentVariable.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-
-using namespace std::literals;
 
 CoreTools::TestingInformationHelperImpl::TestingInformationHelperImpl(DisableNotThrow disableNotThrow)
     : testingInformation{}, file{}, isPrintRun{ false }, randomSeed{ 0 }
@@ -40,11 +38,12 @@ void CoreTools::TestingInformationHelperImpl::AnalysisFile()
     Tree mainTree{};
     read_json("Configuration/Testing.json", mainTree);
 
-    for (const auto& tree : mainTree)
+    for (const auto& [fileName, tree] : mainTree)
     {
-        if (const auto isOpen = tree.second.get_value(0); isOpen != 0)
+        if (const auto isOpen = tree.get_value(0);
+            isOpen != 0)
         {
-            file.emplace_back(tree.first);
+            file.emplace_back(fileName);
         }
     }
 }
@@ -54,7 +53,7 @@ void CoreTools::TestingInformationHelperImpl::AnalysisJson()
     for (const auto& fileName : file)
     {
         Tree tree{};
-        read_json("Configuration/"s + fileName + ".json"s, tree);
+        read_json("Configuration/" + fileName + ".json", tree);
         AnalysisInformation(tree);
     }
 }
@@ -63,16 +62,17 @@ void CoreTools::TestingInformationHelperImpl::AnalysisInformation(Tree& tree)
 {
     for (const auto& [suiteName, element] : tree)
     {
-        for (const auto& information : element)
+        for (const auto& [testingName, testLoopCount] : element)
         {
-            testingInformation.Insert(suiteName, information.first, information.second.get_value(0));
+            testingInformation.Insert(suiteName, testingName, testLoopCount.get_value(0));
         }
     }
 }
 
 void CoreTools::TestingInformationHelperImpl::AnalysisTestingInformation()
 {
-    if (const EnvironmentVariable printRunEnvironmentVariable{ SYSTEM_TEXT("PrintRun"s) }; printRunEnvironmentVariable.GetVariable() != SYSTEM_TEXT("0"s))
+    if (const EnvironmentVariable printRunEnvironmentVariable{ SYSTEM_TEXT("PrintRun") };
+        printRunEnvironmentVariable.GetVariable() != SYSTEM_TEXT("0"))
     {
         isPrintRun = true;
     }
@@ -81,7 +81,7 @@ void CoreTools::TestingInformationHelperImpl::AnalysisTestingInformation()
         isPrintRun = false;
     }
 
-    const EnvironmentVariable randomSeedEnvironmentVariable{ SYSTEM_TEXT("RandomSeed"s) };
+    const EnvironmentVariable randomSeedEnvironmentVariable{ SYSTEM_TEXT("RandomSeed") };
 
     randomSeed = std::stoi(randomSeedEnvironmentVariable.GetVariable());
 }

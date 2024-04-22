@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:19)
+/// 版本：1.0.0.8 (2024/04/12 15:20)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_DEFAULT_STATE_MACHINE_BASE_DETAIL_H
 #define CORE_TOOLS_STATE_MACHINE_DEFAULT_STATE_MACHINE_BASE_DETAIL_H
@@ -45,10 +45,7 @@ void CoreTools::StateMachineBase<EntityType, EventType>::Register(EntityTypePtr 
 template <typename EntityType, typename EventType>
 bool CoreTools::StateMachineBase<EntityType, EventType>::IsValid() const noexcept
 {
-    if (currentState)
-        return true;
-    else
-        return false;
+    return currentState != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

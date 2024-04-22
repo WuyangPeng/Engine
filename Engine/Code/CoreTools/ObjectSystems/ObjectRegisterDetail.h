@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:53)
+/// 版本：1.0.0.8 (2024/04/11 21:59)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_DETAIL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_DETAIL_H
@@ -16,6 +16,7 @@
 #include <type_traits>
 
 template <typename T>
+requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
 int64_t CoreTools::ObjectRegister::Register(const T& object)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -31,6 +32,7 @@ int64_t CoreTools::ObjectRegister::Register(const T& object)
 }
 
 template <typename T>
+requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
 int64_t CoreTools::ObjectRegister::RegisterWeakPtr(const T& object)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -46,12 +48,10 @@ int64_t CoreTools::ObjectRegister::RegisterWeakPtr(const T& object)
 }
 
 template <typename T>
+requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::value_type::ObjectType>)
 void CoreTools::ObjectRegister::RegisterContainer(const T& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    using ValueType = typename T::value_type;
-    static_assert(std::is_base_of_v<ObjectInterface, typename ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     for (const auto& object : objects)
     {
@@ -60,11 +60,10 @@ void CoreTools::ObjectRegister::RegisterContainer(const T& objects)
 }
 
 template <typename T, int Size>
+requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::value_type::ObjectType> && 0 <= Size)
 void CoreTools::ObjectRegister::RegisterContainer(const std::array<T, Size>& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    static_assert(std::is_base_of_v<ObjectInterface, typename T::ObjectType>, "T::ObjectType is not base of ObjectInterface");
 
     for (const auto& object : objects)
     {

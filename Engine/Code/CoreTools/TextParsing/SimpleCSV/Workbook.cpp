@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:00)
+/// 版本：1.0.0.8 (2024/04/11 11:29)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,16 +20,14 @@
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/CommandCloneSheet.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/CommandDeleteSheet.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySharedStrings.h"
-#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetRelsId.h"
-#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetRelsTarget.h"
+#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetRelationshipId.h"
+#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetRelationshipTarget.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetType.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QueryXmlData.h"
 
 #include <algorithm>
 #include <iterator>
 #include <vector>
-
-using namespace std::literals;
 
 CoreTools::SimpleCSV::Workbook::Workbook(const XmlDataSharedPtr& xmlData)
     : ParentType{ xmlData }
@@ -60,7 +58,7 @@ CoreTools::SimpleCSV::Worksheet CoreTools::SimpleCSV::Workbook::GetSheet(const s
     const auto xmlId = attribute.attribute(TextParsing::gRId.data()).value();
 
     const auto parentDocument = GetParentDocument();
-    const auto xmlPath = parentDocument->ExecuteQuery(QuerySheetRelsTarget{ xmlId }).GetSheetTarget();
+    const auto xmlPath = parentDocument->ExecuteQuery(QuerySheetRelationshipTarget{ xmlId }).GetSheetTarget();
     return Worksheet{ parentDocument->ExecuteQuery(QueryXmlData{ TextParsing::gX1.data() + xmlPath }).GetXmlData() };
 }
 
@@ -209,7 +207,7 @@ void CoreTools::SimpleCSV::Workbook::PrepareSheetMetadata(const std::string& she
     const auto sheetPath = TextParsing::gWorksheets.data() + std::to_string(internalId) + TextParsing::gXML.data();
     node.append_attribute(TextParsing::gName.data()) = sheetName.c_str();
     node.append_attribute(TextParsing::gSheetId.data()) = std::to_string(internalId).c_str();
-    node.append_attribute(TextParsing::gRId.data()) = GetParentDocument()->ExecuteQuery(QuerySheetRelsId{ sheetPath }).GetSheetId().c_str();
+    node.append_attribute(TextParsing::gRId.data()) = GetParentDocument()->ExecuteQuery(QuerySheetRelationshipId{ sheetPath }).GetSheetId().c_str();
 }
 
 void CoreTools::SimpleCSV::Workbook::SetSheetName(const std::string& sheetRId, const std::string& newName)

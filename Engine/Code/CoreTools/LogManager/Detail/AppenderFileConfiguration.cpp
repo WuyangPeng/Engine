@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:40)
+/// 版本：1.0.0.8 (2024/04/11 13:58)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -34,10 +34,7 @@ CoreTools::AppenderFileConfiguration::AppenderFileConfiguration(String directory
 
 bool CoreTools::AppenderFileConfiguration::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && 0 < maxFileSize)
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && 0 < maxFileSize;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

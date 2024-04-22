@@ -66,7 +66,7 @@ void Framework::CameraModelMiddleLayerTesting::MiddleLayerTest()
 
     middleLayer.SetViewMiddleLayer(cameraViewMiddleLayer);
 
-    ASSERT_ENUM_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
+    ASSERT_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
     ASSERT_TRUE(middleLayer.PreCreate());

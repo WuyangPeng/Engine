@@ -1,12 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:25)
-
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/18 22:10)
 #include "LogLevelManagerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
@@ -28,9 +27,11 @@ void CoreTools::LogLevelManagerTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
+
 void CoreTools::LogLevelManagerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ValidTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetLogLevelTest);
 }
 
 void CoreTools::LogLevelManagerTesting::ValidTest()
@@ -40,4 +41,15 @@ void CoreTools::LogLevelManagerTesting::ValidTest()
         auto describe = LogLevelManager::GetLogLevelDescribe(logLevel);
         ASSERT_FALSE(describe.empty());
     }
+}
+
+void CoreTools::LogLevelManagerTesting::GetLogLevelTest()
+{
+    ASSERT_EQUAL(LogLevelManager::GetLogLevel("Disabled"), LogLevel::Disabled);
+    ASSERT_EQUAL(LogLevelManager::GetLogLevel("Trace"), LogLevel::Trace);
+    ASSERT_EQUAL(LogLevelManager::GetLogLevel("Debug"), LogLevel::Debug);
+    ASSERT_EQUAL(LogLevelManager::GetLogLevel("Info"), LogLevel::Info);
+    ASSERT_EQUAL(LogLevelManager::GetLogLevel("Warn"), LogLevel::Warn);
+    ASSERT_EQUAL(LogLevelManager::GetLogLevel("Error"), LogLevel::Error);
+    ASSERT_EQUAL(LogLevelManager::GetLogLevel("Fatal"), LogLevel::Fatal);
 }

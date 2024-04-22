@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:07)
+/// 版本：1.0.0.8 (2024/04/11 10:59)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -26,7 +26,8 @@ CoreTools::SimpleCSV::QuerySharedStringsImpl::SharedStringsSharedPtr CoreTools::
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (auto sharedStringsSharedPtr = sharedStrings.lock(); sharedStringsSharedPtr != nullptr)
+    if (auto sharedStringsSharedPtr = sharedStrings.lock();
+        sharedStringsSharedPtr != nullptr)
     {
         return sharedStringsSharedPtr;
     }

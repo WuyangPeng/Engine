@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:17)
+/// 版本：1.0.0.8 (2024/03/28 11:06)
 
 #ifndef CORE_TOOLS_HELPER_COPY_UNSHARED_MACRO_H
 #define CORE_TOOLS_HELPER_COPY_UNSHARED_MACRO_H

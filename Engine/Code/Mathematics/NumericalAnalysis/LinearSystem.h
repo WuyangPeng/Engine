@@ -195,11 +195,11 @@ namespace Mathematics
 
 #if defined(MATHEMATICS_USE_ROW_MAJOR)
 
-        using LexicoArray2 = CoreTools::LexicoArray2<true, Real>;
+        using LexicoArray2 = CoreTools::LexicoArray2<true, typename RealContainer::iterator>;
 
 #else  // !MATHEMATICS_USE_ROW_MAJOR
 
-        using LexicoArray2 = CoreTools::LexicoArray2<false, Real>;
+        using LexicoArray2 = CoreTools::LexicoArray2<false, typename RealContainer::iterator>;
 
 #endif  // MATHEMATICS_USE_ROW_MAJOR
 

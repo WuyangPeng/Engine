@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:14)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/22 16:49)
 
 #include "EnumObject.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -73,10 +73,7 @@ void CoreTools::EnumObject::AllocationArray1(EnumObjectEnum value)
 
 bool CoreTools::EnumObject::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && !enumArray1.empty())
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && !enumArray1.empty();
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -87,14 +84,14 @@ int CoreTools::EnumObject::GetStreamingSize() const
 
     auto size = ParentType::GetStreamingSize();
 
-    // WriteEnum
+    /// WriteEnum
     size += CoreTools::GetStreamSize(enumValue);
 
-    // WriteEnumWithNumber
+    /// WriteEnumWithNumber
     size += sizeof(int32_t);
     size += bufferSize * CoreTools::GetStreamSize(enumValue);
 
-    // WriteEnumWithoutNumber
+    /// WriteEnumWithoutNumber
     size += bufferSize * CoreTools::GetStreamSize(enumValue);
 
     return size;

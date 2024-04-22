@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:12)
+/// 版本：1.0.0.8 (2024/03/28 10:55)
 
 #ifndef CORE_TOOLS_HELPER_STREAM_MACRO_H
 #define CORE_TOOLS_HELPER_STREAM_MACRO_H
@@ -26,7 +26,7 @@
         const auto endLoad = source.GetBytesRead();                                                    \
         const auto usedLoad = endLoad - beginLoad + CoreTools::GetStreamSize(GetRttiType().GetName()); \
         const auto usedReported = ClassType::GetStreamingSize();                                       \
-        ASSERTION_2(usedLoad == usedReported, "读取不匹配的字节数：读取 = %d，所需 = %d\n", usedLoad, usedReported)
+        CORE_TOOLS_ASSERTION_0(usedLoad == usedReported, "读取不匹配的字节数：读取 = %d，所需 = %d\n", usedLoad, usedReported)
 
     #define CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target) \
         const auto beginSave = target.GetBytesWritten()
@@ -35,14 +35,14 @@
         const auto endSave = target.GetBytesWritten();           \
         const auto usedSave = endSave - beginSave;               \
         const auto usedReported = ClassType::GetStreamingSize(); \
-        ASSERTION_2(usedSave == usedReported, "保存不匹配的字节数：保存 = %d，所需 = %d\n", usedSave, usedReported)
+        CORE_TOOLS_ASSERTION_0(usedSave == usedReported, "保存不匹配的字节数：保存 = %d，所需 = %d\n", usedSave, usedReported)
 
 #else  // !defined(CORE_TOOLS_USE_ASSERT) || USER_ASSERT_LEVEL < 2
 
-    #define CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source)
-    #define CORE_TOOLS_END_DEBUG_STREAM_LOAD(source)
-    #define CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target)
-    #define CORE_TOOLS_END_DEBUG_STREAM_SAVE(target)
+    #define CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source) static_cast<void>(0)
+    #define CORE_TOOLS_END_DEBUG_STREAM_LOAD(source) static_cast<void>(0)
+    #define CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target) static_cast<void>(0)
+    #define CORE_TOOLS_END_DEBUG_STREAM_SAVE(target) static_cast<void>(0)
 
 #endif  // defined(CORE_TOOLS_USE_ASSERT) && 2 <= USER_ASSERT_LEVEL
 
@@ -70,7 +70,7 @@ public:                                                  \
 #define CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(namespaceName, className)                                \
     CoreTools::ObjectInterfaceSharedPtr namespaceName::className::Factory(CoreTools::BufferSource&) \
     {                                                                                               \
-        THROW_EXCEPTION(SYSTEM_TEXT("抽象类没有工厂！\n"s));                                        \
+        THROW_EXCEPTION(SYSTEM_TEXT("抽象类没有工厂！\n"s))                                         \
     }
 
 #define CORE_TOOLS_FACTORY_DEFINE(namespaceName, className)                                                \
@@ -96,20 +96,20 @@ public:                                                  \
     namespaceName::className::className(LoadConstructor loadConstructor)            \
         : ParentType{ loadConstructor }                                             \
     {                                                                               \
-        SELF_CLASS_IS_VALID_0;                                                      \
+        CORE_TOOLS_SELF_CLASS_IS_VALID_1;                                           \
     }
 
 #define CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_CONSTRUCTOR_DEFINE(namespaceName, className)                 \
     namespaceName::className::className(LoadConstructor loadConstructor)                              \
         : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default } \
     {                                                                                                 \
-        SELF_CLASS_IS_VALID_0;                                                                        \
+        CORE_TOOLS_SELF_CLASS_IS_VALID_1;                                                             \
     }
 
 #define CORE_TOOLS_WITH_IMPL_OBJECT_GET_STREAMING_SIZE_DEFINE(namespaceName, className) \
     int namespaceName::className::GetStreamingSize() const                              \
     {                                                                                   \
-        CLASS_IS_VALID_CONST_0;                                                         \
+        CORE_TOOLS_CLASS_IS_VALID_CONST_1;                                              \
         auto size = ParentType::GetStreamingSize();                                     \
         size += impl->GetStreamingSize();                                               \
         return size;                                                                    \
@@ -118,14 +118,14 @@ public:                                                  \
 #define CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(namespaceName, className)             \
     int64_t namespaceName::className::Register(CoreTools::ObjectRegister& target) const \
     {                                                                                   \
-        CLASS_IS_VALID_CONST_0;                                                         \
+        CORE_TOOLS_CLASS_IS_VALID_CONST_1;                                              \
         return ParentType::Register(target);                                            \
     }
 
 #define CORE_TOOLS_WITH_IMPL_OBJECT_REGISTER_DEFINE(namespaceName, className)           \
     int64_t namespaceName::className::Register(CoreTools::ObjectRegister& target) const \
     {                                                                                   \
-        CLASS_IS_VALID_CONST_0;                                                         \
+        CORE_TOOLS_CLASS_IS_VALID_CONST_1;                                              \
         const auto registerId = ParentType::Register(target);                           \
         if (registerId != 0)                                                            \
         {                                                                               \
@@ -137,7 +137,7 @@ public:                                                  \
 #define CORE_TOOLS_WITH_IMPL_OBJECT_SAVE_DEFINE(namespaceName, className)      \
     void namespaceName::className::Save(CoreTools::BufferTarget& target) const \
     {                                                                          \
-        CLASS_IS_VALID_CONST_0;                                                \
+        CORE_TOOLS_CLASS_IS_VALID_CONST_1;                                     \
         CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);                            \
         ParentType::Save(target);                                              \
         impl->Save(target);                                                    \
@@ -147,14 +147,14 @@ public:                                                  \
 #define CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(namespaceName, className) \
     void namespaceName::className::Link(CoreTools::ObjectLink& source)  \
     {                                                                   \
-        CLASS_IS_VALID_0;                                               \
+        CORE_TOOLS_CLASS_IS_VALID_1;                                    \
         ParentType::Link(source);                                       \
     }
 
 #define CORE_TOOLS_WITH_IMPL_OBJECT_LINK_DEFINE(namespaceName, className) \
     void namespaceName::className::Link(CoreTools::ObjectLink& source)    \
     {                                                                     \
-        CLASS_IS_VALID_0;                                                 \
+        CORE_TOOLS_CLASS_IS_VALID_1;                                      \
         ParentType::Link(source);                                         \
         impl->Link(source);                                               \
     }
@@ -162,14 +162,14 @@ public:                                                  \
 #define CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(namespaceName, className) \
     void namespaceName::className::PostLink()                                \
     {                                                                        \
-        CLASS_IS_VALID_0;                                                    \
+        CORE_TOOLS_CLASS_IS_VALID_1;                                         \
         ParentType::PostLink();                                              \
     }
 
 #define CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(namespaceName, className) \
     void namespaceName::className::Load(CoreTools::BufferSource& source)  \
     {                                                                     \
-        CLASS_IS_VALID_0;                                                 \
+        CORE_TOOLS_CLASS_IS_VALID_1;                                      \
         CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);                       \
         ParentType::Load(source);                                         \
         impl->Load(source);                                               \

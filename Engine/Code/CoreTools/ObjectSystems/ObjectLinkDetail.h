@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:53)
+/// 版本：1.0.0.8 (2024/04/11 21:59)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_DETAIL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_DETAIL_H
@@ -17,11 +17,10 @@
 #include <type_traits>
 
 template <typename T>
+requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
 void CoreTools::ObjectLink::ResolveLink(T& object)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    static_assert(std::is_base_of_v<ObjectInterface, typename T::ObjectType>, "T::ObjectType is not base of ObjectInterface");
 
     if (object.associated != 0)
     {
@@ -30,16 +29,14 @@ void CoreTools::ObjectLink::ResolveLink(T& object)
 }
 
 template <typename T>
+requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::value_type::ObjectType>)
 void CoreTools::ObjectLink::ResolveLinkContainer(T& object)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    using ValueType = typename T::value_type;
-    static_assert(std::is_base_of_v<ObjectInterface, typename ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
-
-    for (auto& value : object)
+    for (auto& element : object)
     {
-        ResolveLink(value);
+        ResolveLink(element);
     }
 }
 

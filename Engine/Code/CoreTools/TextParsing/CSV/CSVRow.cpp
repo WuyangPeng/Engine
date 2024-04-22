@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:54)
+/// 版本：1.0.0.8 (2024/04/03 00:14)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -35,7 +35,7 @@ int CoreTools::CSVRow::GetCount() const
     return impl->GetCount();
 }
 
-CoreTools::CSVRow::String CoreTools::CSVRow::GetString(const String& field) const
+System::String CoreTools::CSVRow::GetString(const String& field) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -49,7 +49,7 @@ bool CoreTools::CSVRow::GetBool(const String& field) const
     return impl->GetBool(field);
 }
 
-CoreTools::CSVRow::TChar CoreTools::CSVRow::GetChar(const String& field) const
+System::TChar CoreTools::CSVRow::GetChar(const String& field) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -203,7 +203,7 @@ CoreTools::CSVRow::IntVector4Container CoreTools::CSVRow::GetIntVector4Array(con
     return impl->GetIntVector4Array(field);
 }
 
-CoreTools::CSVRow::String CoreTools::CSVRow::GetEnumString(const String& field) const
+System::String CoreTools::CSVRow::GetEnumString(const String& field) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

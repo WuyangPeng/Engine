@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:36)
+/// 版本：1.0.0.8 (2024/04/12 14:47)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -32,9 +32,11 @@ int CoreTools::TestingInformation::GetLoopCount(const std::string& suiteName, co
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (const auto iter = suiteContainer.find(suiteName); iter != suiteContainer.cend())
+    if (const auto iter = suiteContainer.find(suiteName);
+        iter != suiteContainer.cend())
     {
-        if (const auto testingIter = iter->second.find(testingName); testingIter != iter->second.cend())
+        if (const auto testingIter = iter->second.find(testingName);
+            testingIter != iter->second.cend())
         {
             return testingIter->second;
         }

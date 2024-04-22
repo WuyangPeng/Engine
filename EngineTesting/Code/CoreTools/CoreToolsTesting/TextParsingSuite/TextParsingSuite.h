@@ -1,35 +1,28 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 10:28)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 09:37)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_H
 
-#include "BatchConversionCSVTesting.h"
-#include "BatchConversionCodeTesting.h"
-#include "CSVConfigureLoadingTesting.h"
-#include "CSVConfigureTesting.h"
-#include "CSVContentTesting.h"
-#include "CSVDataTesting.h"
-#include "CSVGenerateTesting.h"
-#include "CSVHeadTesting.h"
-#include "CSVRowTesting.h"
-#include "CSVTotalGenerateTesting.h"
-#include "CSVTypeConversionTesting.h"
-#include "DataTypeDescribeTesting.h"
-#include "ExcelConversionCSVTesting.h"
-#include "JsonConfigureTesting.h"
-#include "JsonGenerateTesting.h"
-#include "JsonHeadTesting.h"
-#include "JsonNodeContainerTesting.h"
-#include "JsonNodeTesting.h"
-#include "JsonRowTesting.h"
-#include "JsonTotalGenerateTesting.h"
+#include "CSV/CSVConfigureLoadingTesting.h"
+#include "CSV/CSVConfigureTesting.h"
+#include "CSV/CSVContentTesting.h"
+#include "CSV/CSVDataTesting.h"
+#include "CSV/CSVGenerateTesting.h"
+#include "CSV/CSVHeadTesting.h"
+#include "CSV/CSVRowTesting.h"
+#include "CSV/CSVTotalGenerateTesting.h"
+#include "CSV/CSVTypeConversionTesting.h"
+#include "CSV/DataTypeDescribeTesting.h"
+#include "Excel/BatchConversionCSVTesting.h"
+#include "Excel/BatchConversionCodeTesting.h"
+#include "Excel/ExcelConversionCSVTesting.h"
 #include "SimpleCSV/AppPropertiesTesting.h"
 #include "SimpleCSV/CellIteratorTesting.h"
 #include "SimpleCSV/CellRangeTesting.h"

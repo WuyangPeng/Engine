@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:36)
+/// 版本：1.0.0.8 (2024/03/29 23:46)
 
 #ifndef CORE_TOOLS_EXCEPTION_GAME_ERROR_DETAIL_H
 #define CORE_TOOLS_EXCEPTION_GAME_ERROR_DETAIL_H
@@ -15,6 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename E>
+requires(std::is_enum_v<E>)
 CoreTools::GameError<E>::GameError(const FunctionDescribed& functionDescribed, const LastError& lastError, E errorCode, const String& message)
     : ParentType{ functionDescribed, lastError, message }, errorCode{ errorCode }
 {
@@ -22,6 +23,7 @@ CoreTools::GameError<E>::GameError(const FunctionDescribed& functionDescribed, c
 }
 
 template <typename E>
+requires(std::is_enum_v<E>)
 CoreTools::GameError<E>::GameError(const FunctionDescribed& functionDescribed, WindowError lastError, E errorCode, const String& message)
     : ParentType{ functionDescribed, lastError, message }, errorCode{ errorCode }
 {
@@ -31,6 +33,7 @@ CoreTools::GameError<E>::GameError(const FunctionDescribed& functionDescribed, W
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename E>
+requires(std::is_enum_v<E>)
 bool CoreTools::GameError<E>::IsValid() const noexcept
 {
     return ParentType::IsValid();
@@ -39,6 +42,7 @@ bool CoreTools::GameError<E>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename E>
+requires(std::is_enum_v<E>)
 E CoreTools::GameError<E>::GetErrorCode() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
@@ -47,6 +51,7 @@ E CoreTools::GameError<E>::GetErrorCode() const noexcept
 }
 
 template <typename E>
+requires(std::is_enum_v<E>)
 System::String CoreTools::GameError<E>::GetError() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
@@ -64,19 +69,18 @@ System::String CoreTools::GameError<E>::GetError() const
 }
 
 template <typename E>
+requires(std::is_enum_v<E>)
 System::String CoreTools::GameError<E>::GetErrorCodeDescribed() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    using namespace std::literals;
-
-    const auto errorCodeDescribed = SYSTEM_TEXT("错误码 = "s) + System::ToString(System::EnumCastUnderlying(errorCode));
+    const auto errorCodeDescribed = SYSTEM_TEXT("错误码 = ") + System::ToString(System::EnumCastUnderlying(errorCode));
 
     EXCEPTION_TRY
     {
         const auto errorName = StringConversion::MultiByteConversionStandard(typeid(ClassType).name());
 
-        return SYSTEM_TEXT("异常名："s) + errorName + SYSTEM_TEXT("，"s) + errorCodeDescribed + SYSTEM_TEXT("，"s);
+        return SYSTEM_TEXT("异常名：") + errorName + SYSTEM_TEXT("，") + errorCodeDescribed + SYSTEM_TEXT("，");
     }
     EXCEPTION_ENGINE_EXCEPTION_CATCH(CoreTools)
 

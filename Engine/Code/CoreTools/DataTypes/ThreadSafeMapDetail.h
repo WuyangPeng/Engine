@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.5 (2024/01/25 09:37)
+/// 版本：1.0.0.8 (2024/04/11 14:47)
 
 #ifndef CORE_TOOLS_DATA_TYPE_THREAD_SAFE_MAP_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_THREAD_SAFE_MAP_DETAIL_H
@@ -13,6 +13,8 @@
 #include "ThreadSafeMap.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+
+#include <ranges>
 
 #ifdef OPEN_CLASS_INVARIANT
 
@@ -152,11 +154,11 @@ typename CoreTools::ThreadSafeMap<Key, Value>::ResultContainer CoreTools::Thread
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     ResultContainer result{};
-
     result.reserve(threadSafeMap.size());
-    for (const auto& value : threadSafeMap)
+
+    for (const auto& element : threadSafeMap | std::views::values)
     {
-        result.emplace_back(value.second);
+        result.emplace_back(element);
     }
 
     return result;

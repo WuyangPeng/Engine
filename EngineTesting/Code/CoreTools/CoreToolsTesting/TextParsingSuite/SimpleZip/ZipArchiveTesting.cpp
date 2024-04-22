@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 10:34)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 09:41)
 
 #include "ZipArchiveTesting.h"
 #include "System/CharacterString/FormatString.h"
@@ -22,10 +22,8 @@
 #include "CoreTools/TextParsing/SimpleZip/ZipEntry.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using namespace std::literals;
-
 CoreTools::ZipArchiveTesting::ZipArchiveTesting(const OStreamShared& stream)
-    : ParentType{ stream }, entryName{ "Test.txt"s }, data{ "12345678"s }
+    : ParentType{ stream }, entryName{ "Test.txt" }, data{ "12345678" }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -83,7 +81,7 @@ void CoreTools::ZipArchiveTesting::RemoveFile()
 
 void CoreTools::ZipArchiveTesting::DefaultTest()
 {
-    SimpleZip::ZipArchive zipArchive = SimpleZip::ZipArchive::Create();
+    auto zipArchive = SimpleZip::ZipArchive::Create();
 
     zipArchive.AddEntry(entryName, data);
 }

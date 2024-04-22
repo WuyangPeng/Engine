@@ -55,7 +55,7 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing::SameTest()
 
         StaticFindIntersectorCircle2Circle2<float> intersector(circle2, circle2);
 
-        ASSERT_ENUM_EQUAL(IntersectionType::Other, intersector.GetIntersectionType());
+        ASSERT_EQUAL(IntersectionType::Other, intersector.GetIntersectionType());
         ASSERT_TRUE(intersector.IsIntersection());
 
         ASSERT_APPROXIMATE_USE_FUNCTION(Approximate<float>, intersector.GetLhsCircle(), circle2, 1e-8f);
@@ -110,7 +110,7 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing::EmptyTest()
 
         StaticFindIntersectorCircle2Circle2<float> intersector(lhsCircle2, rhsCircle2);
 
-        ASSERT_ENUM_EQUAL(IntersectionType::Empty, intersector.GetIntersectionType());
+        ASSERT_EQUAL(IntersectionType::Empty, intersector.GetIntersectionType());
         ASSERT_FALSE(intersector.IsIntersection());
 
         ASSERT_APPROXIMATE_USE_FUNCTION(Approximate<float>, intersector.GetLhsCircle(), lhsCircle2, 1e-8f);
@@ -146,7 +146,7 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing::TangentTest()
 
         StaticFindIntersectorCircle2Circle2<float> intersector(lhsCircle2, rhsCircle2, 1e-3f);
 
-        ASSERT_ENUM_EQUAL(IntersectionType::Point, intersector.GetIntersectionType());
+        ASSERT_EQUAL(IntersectionType::Point, intersector.GetIntersectionType());
         ASSERT_TRUE(intersector.IsIntersection());
 
         ASSERT_APPROXIMATE_USE_FUNCTION(Approximate<float>, intersector.GetLhsCircle(), lhsCircle2, 1e-8f);
@@ -207,7 +207,7 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing::PointTest()
 
         StaticFindIntersectorCircle2Circle2<float> intersector(lhsCircle2, rhsCircle2);
 
-        ASSERT_ENUM_EQUAL(IntersectionType::Point, intersector.GetIntersectionType());
+        ASSERT_EQUAL(IntersectionType::Point, intersector.GetIntersectionType());
         ASSERT_TRUE(intersector.IsIntersection());
 
         ASSERT_APPROXIMATE_USE_FUNCTION(Approximate<float>, intersector.GetLhsCircle(), lhsCircle2, 1e-8f);

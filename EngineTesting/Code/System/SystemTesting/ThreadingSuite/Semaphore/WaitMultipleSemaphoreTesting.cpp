@@ -50,7 +50,7 @@ void System::WaitMultipleSemaphoreTesting::ThreadTest()
 void System::WaitMultipleSemaphoreTesting::WaitForSemaphoreTest0(const Container& semaphoreHandles)
 {
     const auto flag = WaitForSystemSemaphore(boost::numeric_cast<WindowsDWord>(semaphoreHandles.size()), semaphoreHandles.data(), true, EnumCastUnderlying(MutexWait::Infinite));
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+    ASSERT_UNEQUAL(flag, MutexWaitReturn::Failed);
 
     if (flag != MutexWaitReturn::Failed)
     {
@@ -64,7 +64,7 @@ void System::WaitMultipleSemaphoreTesting::WaitForSemaphoreTest0(const Container
 void System::WaitMultipleSemaphoreTesting::WaitForSemaphoreTest1(const Container& semaphoreHandles)
 {
     const auto flag = WaitForSystemSemaphore(boost::numeric_cast<WindowsDWord>(semaphoreHandles.size()), semaphoreHandles.data(), true, EnumCastUnderlying(MutexWait::Infinite), true);
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+    ASSERT_UNEQUAL(flag, MutexWaitReturn::Failed);
 
     if (flag != MutexWaitReturn::Failed)
     {
@@ -78,7 +78,7 @@ void System::WaitMultipleSemaphoreTesting::WaitForSemaphoreTest1(const Container
 void System::WaitMultipleSemaphoreTesting::WaitForSemaphoreTest2(const Container& semaphoreHandles)
 {
     const auto flag = WaitForSystemSemaphore(boost::numeric_cast<WindowsDWord>(semaphoreHandles.size()), semaphoreHandles.data(), true, EnumCastUnderlying(MutexWait::Infinite), false);
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+    ASSERT_UNEQUAL(flag, MutexWaitReturn::Failed);
 
     if (flag != MutexWaitReturn::Failed)
     {

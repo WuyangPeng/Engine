@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:56)
+/// 版本：1.0.0.8 (2024/04/11 22:16)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_FWD_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_FWD_H
@@ -16,6 +16,13 @@
 
 namespace CoreTools
 {
+    class ObjectRegister;
+    class BufferTarget;
+    class BufferSource;
+    class ObjectLink;
+    class ObjectInterface;
+    class Object;
+
     class InitTermContainer;
     class InitTerm;
     class Rtti;
@@ -30,23 +37,20 @@ namespace CoreTools
     struct UniqueObject;
 
     template <typename T>
+    requires(std::is_base_of_v<ObjectInterface, T>)
     struct ObjectAssociated;
 
     template <typename T>
+    requires(std::is_base_of_v<ObjectInterface, T>)
     struct ConstObjectAssociated;
 
     template <typename T>
+    requires(std::is_base_of_v<ObjectInterface, T>)
     struct WeakObjectAssociated;
 
     template <typename T>
+    requires(std::is_base_of_v<ObjectInterface, T>)
     struct ConstWeakObjectAssociated;
-
-    class ObjectRegister;
-    class BufferTarget;
-    class BufferSource;
-    class ObjectLink;
-    class ObjectInterface;
-    class Object;
 
     CORE_TOOLS_SHARED_PTR_DECLARE(ObjectRegister);
     CORE_TOOLS_SHARED_PTR_DECLARE(BufferTarget);
@@ -59,7 +63,6 @@ namespace CoreTools
     class FileOutStream;
     class BufferInStream;
     class FileInStream;
-    class ObjectInterfaceSmartPointerLess;
     class ObjectManager;
 }
 

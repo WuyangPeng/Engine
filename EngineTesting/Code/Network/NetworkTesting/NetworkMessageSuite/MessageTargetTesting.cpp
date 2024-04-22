@@ -221,7 +221,7 @@ void Network::MessageTargetTesting::VerificationEnum(ParserStrategy parserStrate
     auto resultParserStrategy = ParserStrategy::End;
     messageSource.ReadEnum(resultParserStrategy);
 
-    ASSERT_ENUM_EQUAL(parserStrategy, resultParserStrategy);
+    ASSERT_EQUAL(parserStrategy, resultParserStrategy);
 
     int32_t parserStrategyBufferSize{ 0 };
     messageSource.Read(parserStrategyBufferSize);

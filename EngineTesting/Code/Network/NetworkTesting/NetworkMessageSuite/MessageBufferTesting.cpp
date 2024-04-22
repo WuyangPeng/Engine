@@ -73,64 +73,64 @@ void Network::MessageBufferTesting::LoopTest(int aTestLoopCount)
 void Network::MessageBufferTesting::InitTest()
 {
     const MessageBuffer messageBuffer0{ BuffBlockSize::Size256, ParserStrategy::LittleEndian };
-    ASSERT_ENUM_EQUAL(messageBuffer0.GetParserStrategy(), ParserStrategy::LittleEndian);
+    ASSERT_EQUAL(messageBuffer0.GetParserStrategy(), ParserStrategy::LittleEndian);
     ASSERT_EQUAL(messageBuffer0.GetSize(), System::EnumCastUnderlying(BuffBlockSize::Size256));
 
     const MessageBuffer messageBuffer1{ BuffBlockSize::Size512, ParserStrategy::BigEndian };
-    ASSERT_ENUM_EQUAL(messageBuffer1.GetParserStrategy(), ParserStrategy::BigEndian);
+    ASSERT_EQUAL(messageBuffer1.GetParserStrategy(), ParserStrategy::BigEndian);
     ASSERT_EQUAL(messageBuffer1.GetSize(), System::EnumCastUnderlying(BuffBlockSize::Size512));
 
     const MessageBuffer messageBuffer2{ BuffBlockSize::Size1024, ParserStrategy::LittleEndian };
-    ASSERT_ENUM_EQUAL(messageBuffer2.GetParserStrategy(), ParserStrategy::LittleEndian);
+    ASSERT_EQUAL(messageBuffer2.GetParserStrategy(), ParserStrategy::LittleEndian);
     ASSERT_EQUAL(messageBuffer2.GetSize(), System::EnumCastUnderlying(BuffBlockSize::Size1024));
 
     const MessageBuffer messageBuffer3{ BuffBlockSize::Size2048, ParserStrategy::BigEndian };
-    ASSERT_ENUM_EQUAL(messageBuffer3.GetParserStrategy(), ParserStrategy::BigEndian);
+    ASSERT_EQUAL(messageBuffer3.GetParserStrategy(), ParserStrategy::BigEndian);
     ASSERT_EQUAL(messageBuffer3.GetSize(), System::EnumCastUnderlying(BuffBlockSize::Size2048));
 
     const MessageBuffer messageBuffer4{ BuffBlockSize::Size4096, ParserStrategy::LittleEndian };
-    ASSERT_ENUM_EQUAL(messageBuffer4.GetParserStrategy(), ParserStrategy::LittleEndian);
+    ASSERT_EQUAL(messageBuffer4.GetParserStrategy(), ParserStrategy::LittleEndian);
     ASSERT_EQUAL(messageBuffer4.GetSize(), System::EnumCastUnderlying(BuffBlockSize::Size4096));
 
     const MessageBuffer messageBuffer5{ BuffBlockSize::Size8K, ParserStrategy::BigEndian };
-    ASSERT_ENUM_EQUAL(messageBuffer5.GetParserStrategy(), ParserStrategy::BigEndian);
+    ASSERT_EQUAL(messageBuffer5.GetParserStrategy(), ParserStrategy::BigEndian);
     ASSERT_EQUAL(messageBuffer5.GetSize(), System::EnumCastUnderlying(BuffBlockSize::Size8K));
 
     const MessageBuffer messageBuffer6{ BuffBlockSize::Size16K, ParserStrategy::LittleEndian };
-    ASSERT_ENUM_EQUAL(messageBuffer6.GetParserStrategy(), ParserStrategy::LittleEndian);
+    ASSERT_EQUAL(messageBuffer6.GetParserStrategy(), ParserStrategy::LittleEndian);
     ASSERT_EQUAL(messageBuffer6.GetSize(), System::EnumCastUnderlying(BuffBlockSize::Size16K));
 
     const MessageBuffer messageBuffer7{ BuffBlockSize::Size32K, ParserStrategy::BigEndian };
-    ASSERT_ENUM_EQUAL(messageBuffer7.GetParserStrategy(), ParserStrategy::BigEndian);
+    ASSERT_EQUAL(messageBuffer7.GetParserStrategy(), ParserStrategy::BigEndian);
     ASSERT_EQUAL(messageBuffer7.GetSize(), System::EnumCastUnderlying(BuffBlockSize::Size32K));
 
     const MessageBuffer messageBuffer8{ BuffBlockSize::Size64K, ParserStrategy::LittleEndian };
-    ASSERT_ENUM_EQUAL(messageBuffer8.GetParserStrategy(), ParserStrategy::LittleEndian);
+    ASSERT_EQUAL(messageBuffer8.GetParserStrategy(), ParserStrategy::LittleEndian);
     ASSERT_EQUAL(messageBuffer8.GetSize(), System::EnumCastUnderlying(BuffBlockSize::Size64K));
 
     const MessageBuffer messageBuffer9{ BuffBlockSize::Size128K, ParserStrategy::BigEndian };
-    ASSERT_ENUM_EQUAL(messageBuffer9.GetParserStrategy(), ParserStrategy::BigEndian);
+    ASSERT_EQUAL(messageBuffer9.GetParserStrategy(), ParserStrategy::BigEndian);
     ASSERT_EQUAL(messageBuffer9.GetSize(), System::EnumCastUnderlying(BuffBlockSize::Size128K));
 
     const MessageBuffer messageBuffer10{ BuffBlockSize::Size256K, ParserStrategy::LittleEndian };
-    ASSERT_ENUM_EQUAL(messageBuffer10.GetParserStrategy(), ParserStrategy::LittleEndian);
+    ASSERT_EQUAL(messageBuffer10.GetParserStrategy(), ParserStrategy::LittleEndian);
     ASSERT_EQUAL(messageBuffer10.GetSize(), System::EnumCastUnderlying(BuffBlockSize::Size256K));
 
     const MessageBuffer messageBuffer11{ BuffBlockSize::Size512K, 0, ParserStrategy::BigEndian };
-    ASSERT_ENUM_EQUAL(messageBuffer11.GetParserStrategy(), ParserStrategy::BigEndian);
+    ASSERT_EQUAL(messageBuffer11.GetParserStrategy(), ParserStrategy::BigEndian);
     ASSERT_EQUAL(messageBuffer11.GetSize(), System::EnumCastUnderlying(BuffBlockSize::Size512K));
 
     constexpr auto size = 256;
     const MessageBuffer messageBuffer12{ BuffBlockSize::Automatic, size, ParserStrategy::LittleEndian };
-    ASSERT_ENUM_EQUAL(messageBuffer12.GetParserStrategy(), ParserStrategy::LittleEndian);
+    ASSERT_EQUAL(messageBuffer12.GetParserStrategy(), ParserStrategy::LittleEndian);
     ASSERT_EQUAL(messageBuffer12.GetSize(), size);
 
     const MessageBuffer messageBuffer13{ size * 2, ParserStrategy::BigEndian };
-    ASSERT_ENUM_EQUAL(messageBuffer13.GetParserStrategy(), ParserStrategy::BigEndian);
+    ASSERT_EQUAL(messageBuffer13.GetParserStrategy(), ParserStrategy::BigEndian);
     ASSERT_EQUAL(messageBuffer13.GetSize(), size * 2);
 
     const MessageBuffer messageBuffer14{ messageBuffer13 };
-    ASSERT_ENUM_EQUAL(messageBuffer14.GetParserStrategy(), messageBuffer13.GetParserStrategy());
+    ASSERT_EQUAL(messageBuffer14.GetParserStrategy(), messageBuffer13.GetParserStrategy());
     ASSERT_EQUAL(messageBuffer14.GetSize(), messageBuffer13.GetSize());
 }
 

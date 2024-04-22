@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:42)
+/// 版本：1.0.0.8 (2024/04/11 14:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,8 +16,6 @@
 #include "CoreTools/LogManager/Flags/LogManagerFlags.h"
 #include "CoreTools/LogManager/LogFilterManager.h"
 #include "CoreTools/LogManager/LogLevelManager.h"
-
-using namespace std::literals;
 
 CoreTools::LogMessagePrefixImpl::LogMessagePrefixImpl(AppenderPrint appenderFlags, LogLevel level, LogFilter filter)
     : prefix{}, appenderPrint{ appenderFlags }, level{ level }, filter{ filter }
@@ -43,7 +41,7 @@ void CoreTools::LogMessagePrefixImpl::GenerateTimestampPrefix()
     {
         const auto nowTime = boost::posix_time::second_clock::local_time();
 
-        prefix += (SYSTEM_TEXT("【"s) + boost::posix_time::to_simple_string_type<System::TChar>(nowTime) + SYSTEM_TEXT("】"s));
+        prefix += (SYSTEM_TEXT("【") + boost::posix_time::to_simple_string_type<System::TChar>(nowTime) + SYSTEM_TEXT("】"));
     }
 }
 
@@ -51,7 +49,7 @@ void CoreTools::LogMessagePrefixImpl::GenerateLogLevelPrefix()
 {
     if (AppenderPrintFlagsExist::IsExist(appenderPrint, AppenderPrint::PrefixLogLevel))
     {
-        prefix += (SYSTEM_TEXT("【"s) + LogLevelManager::GetLogLevelDescribe(level) + SYSTEM_TEXT("】"s));
+        prefix += (SYSTEM_TEXT("【") + LogLevelManager::GetLogLevelDescribe(level) + SYSTEM_TEXT("】"));
     }
 }
 
@@ -59,7 +57,7 @@ void CoreTools::LogMessagePrefixImpl::GenerateLogFilterPrefix()
 {
     if (AppenderPrintFlagsExist::IsExist(appenderPrint, AppenderPrint::PrefixLogFilterType))
     {
-        prefix += (SYSTEM_TEXT("【"s) + LogFilterManager::GetLogFilterDescribe(filter) + SYSTEM_TEXT("】"s));
+        prefix += (SYSTEM_TEXT("【") + LogFilterManager::GetLogFilterDescribe(filter) + SYSTEM_TEXT("】"));
     }
 }
 

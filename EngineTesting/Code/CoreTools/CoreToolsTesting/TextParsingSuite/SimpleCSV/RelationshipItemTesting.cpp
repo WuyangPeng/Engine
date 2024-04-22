@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:14)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 16:53)
 
 #include "RelationshipItemTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -19,7 +19,6 @@
 #include "Mathematics/Base/MathDetail.h"
 
 using System::operator++;
-using namespace std::literals;
 
 CoreTools::RelationshipItemTesting::RelationshipItemTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -42,16 +41,17 @@ void CoreTools::RelationshipItemTesting::MainTest()
 
 void CoreTools::RelationshipItemTesting::RelationshipItemTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
     const auto data = make_shared<SimpleCSV::XmlData>(document, "xl/_rels/workbook.xml.rels");
 
-    for (const SimpleCSV::Relationships relationships{ data }; const auto& relationshipItem : relationships.GetRelationships())
+    for (const SimpleCSV::Relationships relationships{ data };
+         const auto& relationshipItem : relationships.GetRelationships())
     {
         ASSERT_EQUAL(relationshipItem.GetId(), relationships.GetRelationshipById(relationshipItem.GetId()).GetId());
         ASSERT_EQUAL(relationshipItem.GetTarget(), relationships.GetRelationshipByTarget(relationshipItem.GetTarget()).GetTarget());
 
-        ASSERT_ENUM_EQUAL(SimpleCSV::RelationshipItem::GetTypeFromString(SimpleCSV::RelationshipItem::GetStringFromType(relationshipItem.GetType())), relationshipItem.GetType());
+        ASSERT_EQUAL(SimpleCSV::RelationshipItem::GetTypeFromString(SimpleCSV::RelationshipItem::GetStringFromType(relationshipItem.GetType())), relationshipItem.GetType());
     }
 }
 
@@ -59,6 +59,6 @@ void CoreTools::RelationshipItemTesting::TypeStringTest()
 {
     for (auto relationshipType = SimpleCSV::RelationshipType::CoreProperties; relationshipType <= SimpleCSV::RelationshipType::ControlProperties; ++relationshipType)
     {
-        ASSERT_ENUM_EQUAL(SimpleCSV::RelationshipItem::GetTypeFromString(SimpleCSV::RelationshipItem::GetStringFromType(relationshipType)), relationshipType);
+        ASSERT_EQUAL(SimpleCSV::RelationshipItem::GetTypeFromString(SimpleCSV::RelationshipItem::GetStringFromType(relationshipType)), relationshipType);
     }
 }

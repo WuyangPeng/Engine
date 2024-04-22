@@ -7,8 +7,8 @@
 /// 标准：std:c++20
 /// 自动生成
 
-#include "CSVConfigureContainer.h"
 #include "Equip.h"
+#include "CSVConfigureContainer.h"
 #include "HeroContainer.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:38)
+/// 版本：1.0.0.8 (2024/03/28 15:23)
 
 #ifndef CORE_TOOLS_CONTRACT_IMPL_STATIC_ASSERT_HELPER_H
 #define CORE_TOOLS_CONTRACT_IMPL_STATIC_ASSERT_HELPER_H
@@ -20,11 +20,11 @@ namespace CoreTools
     {
     };
 
-    // NonConstMember：定义非常量成员函数，且在调用时不复制类。
-    // NonConstCopyMember：定义非常量成员函数，且在调用时复制类，以产生一个独立的副本。
-    // CopyConstructor：定义复制构造函数和赋值运算符。
+    /// NonConstMember：定义非常量成员函数，且在调用时不复制类。
+    /// NonConstCopyMember：定义非常量成员函数，且在调用时复制类，以产生一个独立的副本。
+    /// CopyConstructor：定义复制构造函数和赋值运算符。
 
-    // 类必须共享资源，复制只是复制类的指针成员。所有共享类必须以Share作为后缀
+    /// 类必须共享资源，复制只是复制类的指针成员。所有共享类必须以Share作为后缀
     struct ShareClasses
     {
     public:
@@ -34,7 +34,7 @@ namespace CoreTools
         using CopyConstructor = FalseType;
     };
 
-    // 类没有修改自身的成员函数，为了提高性能，复制只是复制类的指针成员。
+    /// 类没有修改自身的成员函数，为了提高性能，复制只是复制类的指针成员。
     struct PerformanceUnsharedClasses
     {
     public:
@@ -44,7 +44,7 @@ namespace CoreTools
         using CopyConstructor = FalseType;
     };
 
-    // 类有修改自身的成员函数，复制会复制一份独立的副本。
+    /// 类有修改自身的成员函数，复制会复制一份独立的副本。
     struct CopyUnsharedClasses
     {
     public:
@@ -54,8 +54,8 @@ namespace CoreTools
         using CopyConstructor = TrueType;
     };
 
-    // 类有修改自身的成员函数，只有当调用非常量成员函数时，类才会去复制一份独立的副本。
-    // 对于导出类有虚函数的情况下，禁止使用延迟复制。
+    /// 类有修改自身的成员函数，只有当调用非常量成员函数时，类才会去复制一份独立的副本。
+    /// 对于导出类有虚函数的情况下，禁止使用延迟复制。
     struct DelayCopyUnsharedClasses
     {
     public:
@@ -65,7 +65,7 @@ namespace CoreTools
         using CopyConstructor = FalseType;
     };
 
-    // 类禁止复制
+    /// 类禁止复制
     struct NonCopyClasses
     {
     public:

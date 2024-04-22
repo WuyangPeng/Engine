@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:06)
+/// 版本：1.0.0.8 (2024/04/11 11:00)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "QuerySheetVisibilityImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-CoreTools::SimpleCSV::QuerySheetVisibilityImpl::QuerySheetVisibilityImpl(std::string sheetId) noexcept
+    CoreTools::SimpleCSV::QuerySheetVisibilityImpl::QuerySheetVisibilityImpl(std::string sheetId) noexcept
     : sheetId{ std::move(sheetId) }, sheetVisibility{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:47)
+/// 版本：1.0.0.8 (2024/04/02 17:45)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CONTENT_FLAGS_H
 #define CORE_TOOLS_TEXT_PARSING_CONTENT_FLAGS_H
@@ -30,13 +30,13 @@ namespace CoreTools::SimpleCSV
         ChartColorStyle,
         ControlProperties,
         CalculationChain,
-        VBAProject,
+        VbaProject,
         CoreProperties,
         ExtendedProperties,
         CustomProperties,
         Comments,
         Table,
-        VMLDrawing,
+        VmlDrawing,
         Unknown
     };
 }

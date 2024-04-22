@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:57)
+/// 版本：1.0.0.8 (2024/04/10 18:12)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,8 +16,8 @@
 #include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Exception/Error.h"
 #include "CoreTools/FileManager/FileManagerHelper.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
-#include "CoreTools/FileManager/OFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
+#include "CoreTools/FileManager/OFileStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
@@ -49,54 +49,6 @@ void CoreTools::CSVGenerateImpl::GenerateFile(const String& codeDirectory, const
     }
 }
 
-System::String CoreTools::CSVGenerateImpl::GenerateHeaderGuard() const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    const auto headerGuard = StringUtility::ToUpperMacro(csvHead.GetNameSpace() + GetCSVClassName() + GetFileSuffix());
-
-    String content{ TextParsing::gIfndef };
-
-    content += headerGuard;
-    content += TextParsing::gNewlineCharacter;
-
-    content += TextParsing::gDefine;
-    content += headerGuard;
-    content += TextParsing::gNewlineCharacter;
-
-    content += TextParsing::gNewlineCharacter;
-
-    return content;
-}
-
-System::String CoreTools::CSVGenerateImpl::GenerateNameSpace() const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    String content{ TextParsing::gNamespace };
-
-    content += TextParsing::gSpace;
-    content += csvHead.GetNameSpace();
-    content += TextParsing::gNewlineCharacter;
-    content += TextParsing::gFunctionBeginBrackets;
-
-    return content;
-}
-
-System::String CoreTools::CSVGenerateImpl::GenerateHeaderGuardEndif() const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    const auto headerGuard = StringUtility::ToUpperMacro(csvHead.GetNameSpace() + GetCSVClassName() + GetFileSuffix());
-
-    String content{ TextParsing::gEndif };
-
-    content += headerGuard;
-    content += TextParsing::gNewlineCharacter;
-
-    return content;
-}
-
 System::String CoreTools::CSVGenerateImpl::GetKeyTypeDescribe() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
@@ -110,9 +62,10 @@ System::String CoreTools::CSVGenerateImpl::GetKeyTypeDescribe() const
     }
     else
     {
-        for (const auto result = csvHead.GetKeyName(); const auto& value : result)
+        for (const auto result = csvHead.GetKeyName();
+             const auto& element : result)
         {
-            if (csvHead.GetDataType(value) == CSVDataType::Int64)
+            if (csvHead.GetDataType(element) == CSVDataType::Int64)
             {
                 return CSVTypeConversion::GetActualType(CSVDataType::Int64);
             }
@@ -122,11 +75,25 @@ System::String CoreTools::CSVGenerateImpl::GetKeyTypeDescribe() const
     return CSVTypeConversion::GetActualType(CSVDataType::Int);
 }
 
+CoreTools::CSVGenerateImpl::String CoreTools::CSVGenerateImpl::GetKey() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return csvHead.GetKey();
+}
+
 CoreTools::CodeMappingAnalysis CoreTools::CSVGenerateImpl::GetCodeMappingAnalysis() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return codeMappingAnalysis;
+}
+
+CoreTools::CSVGenerateImpl::String CoreTools::CSVGenerateImpl::GetCodeMappingElement(const String& codeKey) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return codeMappingAnalysis.GetElement(codeKey);
 }
 
 CoreTools::CSVGenerateImpl::String CoreTools::CSVGenerateImpl::GetNameSpace() const
@@ -161,7 +128,7 @@ System::String CoreTools::CSVGenerateImpl::GetOldContent(const String& fileName)
 
     try
     {
-        IFStreamManager iFStreamManager{ fileName };
+        IFileStreamManager iFStreamManager{ fileName };
 
         iFStreamManager.SetSimplifiedChinese();
 
@@ -169,7 +136,7 @@ System::String CoreTools::CSVGenerateImpl::GetOldContent(const String& fileName)
     }
     catch (const Error&)
     {
-        // 文件不存在是正常的。
+        /// 文件不存在是正常的。
         return String{};
     }
 }
@@ -179,6 +146,48 @@ CoreTools::CSVFormatType CoreTools::CSVGenerateImpl::GetCSVFormatType() const no
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return csvHead.GetCSVFormatType();
+}
+
+bool CoreTools::CSVGenerateImpl::IsCSVFormatTypeMap() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return csvHead.GetCSVFormatType() == CSVFormatType::TreeMap || csvHead.GetCSVFormatType() == CSVFormatType::HashMap;
+}
+
+bool CoreTools::CSVGenerateImpl::HasDataType(CSVDataType csvDataType) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return csvHead.HasDataType(csvDataType);
+}
+
+bool CoreTools::CSVGenerateImpl::HasMapping() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return csvHead.HasMapping();
+}
+
+bool CoreTools::CSVGenerateImpl::HasVectorArrayDataType() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return csvHead.HasVectorArrayDataType();
+}
+
+bool CoreTools::CSVGenerateImpl::HasArrayDataType() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return csvHead.HasArrayDataType();
+}
+
+bool CoreTools::CSVGenerateImpl::HasScope() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return csvHead.HasScope();
 }
 
 CoreTools::CSVHead CoreTools::CSVGenerateImpl::GetCSVHead() const noexcept
@@ -192,7 +201,7 @@ CoreTools::CSVGenerateImpl::String CoreTools::CSVGenerateImpl::GetTemplateConten
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    IFStreamManager streamManager{ fileName };
+    IFileStreamManager streamManager{ fileName };
     streamManager.SetSimplifiedChinese();
 
     return streamManager.GetFileContent();
@@ -215,4 +224,126 @@ CoreTools::CSVGenerateImpl::String CoreTools::CSVGenerateImpl::ReplaceTemplate(c
     boost::algorithm::replace_all(result, SYSTEM_TEXT("$SmallClassName$"), StringUtility::ToFirstLetterLower(GetCSVClassName()));
 
     return result;
+}
+
+System::String CoreTools::CSVGenerateImpl::GetCodeKey(const String& codeKey)
+{
+    return SYSTEM_TEXT("$") + codeKey + SYSTEM_TEXT("$");
+}
+
+CoreTools::CSVGenerateImpl::String CoreTools::CSVGenerateImpl::GetReplaceContent(const String& data, StringView codeKey, StringView name)
+{
+    auto copyData = data;
+
+    boost::algorithm::replace_all(copyData, GetCodeKey(codeKey.data()), name);
+
+    return copyData + TextParsing::gNewlineCharacter;
+}
+
+CoreTools::CSVGenerateImpl::String CoreTools::CSVGenerateImpl::GetReplaceContent(const String& data, const ReplaceType& replace)
+{
+    auto copyData = data;
+
+    for (const auto& element : replace)
+    {
+        boost::algorithm::replace_all(copyData, GetCodeKey(element.first.data()), element.second);
+    }
+
+    return copyData + TextParsing::gNewlineCharacter;
+}
+
+System::String CoreTools::CSVGenerateImpl::GetElementIsNoexceptReplace(CSVDataType csvDataType)
+{
+    if (CSVDataType::Bool <= csvDataType && csvDataType <= CSVDataType::IntVector4)
+    {
+        return SYSTEM_TEXT(" noexcept");
+    }
+    else
+    {
+        return SYSTEM_TEXT("");
+    }
+}
+
+CoreTools::CSVGenerateImpl::String CoreTools::CSVGenerateImpl::GetSmallElementTypeReplace(const String& valueType)
+{
+    if (valueType == SYSTEM_TEXT("System::String"))
+    {
+        return SYSTEM_TEXT("String");
+    }
+    else
+    {
+        return valueType;
+    }
+}
+
+CoreTools::CSVGenerateImpl::String CoreTools::CSVGenerateImpl::GetElementTypeReplace(CSVDataType csvDataType, const String& abbreviation, const String& actualType)
+{
+    if (CSVDataType::BoolArray <= csvDataType)
+    {
+        return SYSTEM_TEXT("$Namespace$::$ClassName$::") + abbreviation;
+    }
+    else if (csvDataType == CSVDataType::Enum)
+    {
+        return SYSTEM_TEXT("$Namespace$::") + abbreviation;
+    }
+    else
+    {
+        return actualType;
+    }
+}
+
+System::String CoreTools::CSVGenerateImpl::GetDataIncludeContent(const String& codeKey) const
+{
+    const auto dataInclude = GetCodeMappingElement(codeKey);
+
+    String content{};
+
+    for (const auto& element : GetHeadContentContainer())
+    {
+        content += GetDataIncludeContent(dataInclude, element.first.first, element.first.second, element.second);
+    }
+
+    return content;
+}
+
+System::String CoreTools::CSVGenerateImpl::GetDataIncludeContent(const String& dataInclude, CSVDataType first, CSVDataType second, StringView vectorName) const
+{
+    if (HasDataType(first) || HasDataType(second))
+    {
+        return GetReplaceContent(dataInclude, TextParsing::gVectorName, vectorName);
+    }
+
+    return String{};
+}
+
+System::String CoreTools::CSVGenerateImpl::GetBaseClassUsingHasMappingContent() const
+{
+    String content{};
+
+    for (auto index = 0; index < csvHead.GetCount(); ++index)
+    {
+        content += GetBaseClassUsingHasMappingContent(index);
+    }
+
+    return content;
+}
+
+CoreTools::CSVGenerateImpl::String CoreTools::CSVGenerateImpl::GetBaseClassUsingHasMappingContent(int index) const
+{
+    String content{};
+
+    if (const auto mapping = csvHead.GetMapping(index);
+        !mapping.empty())
+    {
+        const auto mappingUpper = StringUtility::ToFirstLetterUpper(mapping);
+
+        content += GetReplaceContent(GetCodeMappingElement(SYSTEM_TEXT("BaseClassMappingUsing")), TextParsing::gMappingType, mappingUpper);
+
+        if (CSVDataType::BoolArray <= csvHead.GetDataType(index))
+        {
+            content += GetReplaceContent(GetCodeMappingElement(SYSTEM_TEXT("BaseClassMappingContainerUsing")), TextParsing::gMappingType, mappingUpper);
+        }
+    }
+
+    return content;
 }

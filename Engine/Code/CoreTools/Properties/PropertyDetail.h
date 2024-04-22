@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:13)
+/// 版本：1.0.0.8 (2024/04/12 15:08)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_DETAIL_H
@@ -29,11 +29,13 @@ CoreTools::Property<Id, T, V, R, FunctionSet, FunctionGet>::Property(V value)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Id, typename T, typename V, typename R, void (T::*FunctionSet)(R), R (T::*FunctionGet)() const>
 bool CoreTools::Property<Id, T, V, R, FunctionSet, FunctionGet>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 #include SYSTEM_WARNING_PUSH

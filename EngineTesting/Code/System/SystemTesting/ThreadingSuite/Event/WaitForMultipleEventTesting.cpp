@@ -47,19 +47,19 @@ void System::WaitForMultipleEventTesting::WaitMultipleObjectsTest()
 void System::WaitForMultipleEventTesting::WaitForManualEventTest0(const Container& eventHandle)
 {
     const auto flag = WaitForSystemEvent(boost::numeric_cast<WindowsDWord>(eventHandle.size()), eventHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite));
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+    ASSERT_UNEQUAL(flag, MutexWaitReturn::Failed);
 }
 
 void System::WaitForMultipleEventTesting::WaitForManualEventTest1(const Container& eventHandle)
 {
     const auto flag = WaitForSystemEvent(boost::numeric_cast<WindowsDWord>(eventHandle.size()), eventHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite), true);
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+    ASSERT_UNEQUAL(flag, MutexWaitReturn::Failed);
 }
 
 void System::WaitForMultipleEventTesting::WaitForManualEventTest2(const Container& eventHandle)
 {
     const auto flag = WaitForSystemEvent(boost::numeric_cast<WindowsDWord>(eventHandle.size()), eventHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite), false);
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+    ASSERT_UNEQUAL(flag, MutexWaitReturn::Failed);
 }
 
 System::WaitForMultipleEventTesting::Container System::WaitForMultipleEventTesting::GetEventHandle()

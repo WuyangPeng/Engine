@@ -52,11 +52,11 @@ void System::FileTimeCompareTesting::DoFileTimeTest(WindowsHandle handle)
     FileTime lastWriteTime{};
     ASSERT_TRUE(GetSystemFileTime(handle, &creationTime, &lastAccessTime, &lastWriteTime));
 
-    ASSERT_ENUM_EQUAL(FileTimeCompare(&lastAccessTime, &lastAccessTime), ComparesFileTimeReturn::Equal);
+    ASSERT_EQUAL(FileTimeCompare(&lastAccessTime, &lastAccessTime), ComparesFileTimeReturn::Equal);
 
     auto newLastWriteTime = lastAccessTime;
     ++newLastWriteTime.dwHighDateTime;
 
-    ASSERT_ENUM_EQUAL(FileTimeCompare(&lastAccessTime, &newLastWriteTime), ComparesFileTimeReturn::Earlier);
-    ASSERT_ENUM_EQUAL(FileTimeCompare(&newLastWriteTime, &lastAccessTime), ComparesFileTimeReturn::Later);
+    ASSERT_EQUAL(FileTimeCompare(&lastAccessTime, &newLastWriteTime), ComparesFileTimeReturn::Earlier);
+    ASSERT_EQUAL(FileTimeCompare(&newLastWriteTime, &lastAccessTime), ComparesFileTimeReturn::Later);
 }

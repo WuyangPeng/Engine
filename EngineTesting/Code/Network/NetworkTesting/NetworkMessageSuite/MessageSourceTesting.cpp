@@ -191,7 +191,7 @@ void Network::MessageSourceTesting::ReadEnumTest(ParserStrategy parserStrategy, 
     auto resultParserStrategy = ParserStrategy::End;
     messageSource.ReadEnum(resultParserStrategy);
 
-    ASSERT_ENUM_EQUAL(parserStrategy, resultParserStrategy);
+    ASSERT_EQUAL(parserStrategy, resultParserStrategy);
 
     bytesRead += CoreTools::GetStreamSize(resultParserStrategy);
     ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);

@@ -277,18 +277,6 @@
     <Filter Include="UnitTestSuiteSuite 头文件\Detail">
       <UniqueIdentifier>{03d4cfd7-c0db-42f5-bc3e-cc32485110a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ZlibSuite 头文件">
-      <UniqueIdentifier>{89237dc5-f8bc-4c8c-b522-1b69432d2397}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ZlibSuite 源文件">
-      <UniqueIdentifier>{40b207f4-f913-42bc-912e-3429a8c66f17}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FreetypeSuite 头文件">
-      <UniqueIdentifier>{6246fa5b-78da-4e91-8962-a3a697a7ab1e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FreetypeSuite 源文件">
-      <UniqueIdentifier>{9118251e-6e61-4577-8dcd-26a5a54b718b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="StateMachineSuite 模板文件">
       <UniqueIdentifier>{a159183f-9a6c-468b-a1d8-5152679136f4}</UniqueIdentifier>
     </Filter>
@@ -469,15 +457,6 @@
     <Filter Include="资源文件\CSVGenerate\Flags">
       <UniqueIdentifier>{a3987ac5-5773-4925-86ca-34fc879d508b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="资源文件\JsonTesting">
-      <UniqueIdentifier>{283b8c17-be97-484a-a0db-35c72af94d1a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="资源文件\JsonConfigure">
-      <UniqueIdentifier>{c612ad7e-0243-4d64-a0bf-169bee2a6e04}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="资源文件\JsonGenerate">
-      <UniqueIdentifier>{9a1e5203-d1f8-4841-a07f-a6c5c32aba8e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="HelperSuite 头文件\AssertException">
       <UniqueIdentifier>{eee1b147-a10d-4e87-ad60-242f62de5c4c}</UniqueIdentifier>
     </Filter>
@@ -510,6 +489,24 @@
     </Filter>
     <Filter Include="CharacterStringSuite 源文件\CodeMapping">
       <UniqueIdentifier>{ab320bbc-e705-434e-8b88-806cd06673e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsingSuite 源文件\Excel">
+      <UniqueIdentifier>{6c976478-7dcc-4e1e-93c9-28bb86d6b5a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsingSuite 头文件\Excel">
+      <UniqueIdentifier>{d494570f-c3f4-448f-be40-7a46716c858d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsingSuite 头文件\CSV">
+      <UniqueIdentifier>{2fca7419-05b8-4d27-983f-c0951e9dad33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsingSuite 源文件\CSV">
+      <UniqueIdentifier>{6cd88671-dd32-4b6e-89d7-435697b83f2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataTypesSuite 头文件\Detail">
+      <UniqueIdentifier>{ce63c2a8-a074-4380-a64c-a2a1c6c2225a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataTypesSuite 源文件\Detail">
+      <UniqueIdentifier>{9cae5691-2b7e-4817-87c3-f9717160e380}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1152,12 +1149,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\TestObject.h">
       <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ZlibSuite\ZlibSuite.h">
-      <Filter>ZlibSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FreetypeSuite\FreetypeSuite.h">
-      <Filter>FreetypeSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\PlayerDetail.h">
       <Filter>StateMachineSuite 模板文件\Detail</Filter>
     </ClInclude>
@@ -1401,7 +1392,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\ByteSwapperTesting.h">
       <Filter>FileManagerSuite 头文件\Endian</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\TypeAliaserTesting.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\TypeAliasTesting.h">
       <Filter>FileManagerSuite 头文件\Endian</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManager\CFileManagerTesting.h">
@@ -1413,10 +1404,10 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManager\CReadFileManagerTesting.h">
       <Filter>FileManagerSuite 头文件\CFileManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\OFStreamManagerTesting.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\OFileStreamManagerTesting.h">
       <Filter>FileManagerSuite 头文件\StreamManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\IFStreamManagerTesting.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\IFileStreamManagerTesting.h">
       <Filter>FileManagerSuite 头文件\StreamManager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandle\FileHandleTesting.h">
@@ -1469,9 +1460,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Detail\FileEvent.h">
       <Filter>FileManagerSuite 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\ExcelConversionCSVTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\GenerateRandomNameTesting.h">
       <Filter>FileManagerSuite 头文件</Filter>
@@ -1626,24 +1614,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\DocumentTesting.h">
       <Filter>TextParsingSuite 头文件\SimpleCSV</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\BatchConversionCSVTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVTypeConversionTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVHeadTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVRowTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVContentTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVGenerateTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Resource\CSVGenerate\ChapterBase.h">
       <Filter>资源文件\CSVGenerate</Filter>
     </ClInclude>
@@ -1655,9 +1625,6 @@
     </ClInclude>
     <ClInclude Include="Resource\CSVGenerate\ChapterContainerDetail.h">
       <Filter>资源文件\CSVGenerate</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVTotalGenerateTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="Resource\CSVGenerate\CSVConfigure.h">
       <Filter>资源文件\CSVGenerate</Filter>
@@ -1722,30 +1689,6 @@
     <ClInclude Include="Resource\CSVGenerate\CSVConfigureContainer.h">
       <Filter>资源文件\CSVGenerate</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonHeadTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonNodeTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonNodeContainerTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonGenerateTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonRowTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonConfigureTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\DataTypeDescribeTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\HeapAllocateTesting.h">
       <Filter>MemoryToolsSuite 头文件</Filter>
     </ClInclude>
@@ -1802,12 +1745,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\StringUtilityTesting.h">
       <Filter>CharacterStringSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVDataTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonTotalGenerateTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CoroutineSuite\CoroutineSuite.h">
       <Filter>CoroutineSuite 头文件</Filter>
@@ -1917,9 +1854,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestStreamTesting.h">
       <Filter>UnitTestSuiteSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\BatchConversionCodeTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Resource\OutputCodeTesting\Input1Container.h">
       <Filter>资源文件\OutputCodeTesting</Filter>
     </ClInclude>
@@ -1965,9 +1899,6 @@
     <ClInclude Include="Resource\OutputCodeTesting\Input1Base.h">
       <Filter>资源文件\OutputCodeTesting</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureLoadingTesting.h">
-      <Filter>TextParsingSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\ContainerAdapterTestingDetail.h">
       <Filter>MemoryToolsSuite 模板文件</Filter>
     </ClInclude>
@@ -1976,6 +1907,60 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CodeMapping\CodeMappingTesting.h">
       <Filter>CharacterStringSuite 头文件\CodeMapping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\CustomAssert\FunctionProhibitedFromCallingTesting.h">
+      <Filter>HelperSuite 头文件\CustomAssert</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\NoexceptLogTesting.h">
+      <Filter>ContractSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\BatchConversionCodeTesting.h">
+      <Filter>TextParsingSuite 头文件\Excel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\BatchConversionCSVTesting.h">
+      <Filter>TextParsingSuite 头文件\Excel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\ExcelConversionCSVTesting.h">
+      <Filter>TextParsingSuite 头文件\Excel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVConfigureLoadingTesting.h">
+      <Filter>TextParsingSuite 头文件\CSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVConfigureTesting.h">
+      <Filter>TextParsingSuite 头文件\CSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVContentTesting.h">
+      <Filter>TextParsingSuite 头文件\CSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVDataTesting.h">
+      <Filter>TextParsingSuite 头文件\CSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVGenerateTesting.h">
+      <Filter>TextParsingSuite 头文件\CSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVHeadTesting.h">
+      <Filter>TextParsingSuite 头文件\CSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVRowTesting.h">
+      <Filter>TextParsingSuite 头文件\CSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVTotalGenerateTesting.h">
+      <Filter>TextParsingSuite 头文件\CSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVTypeConversionTesting.h">
+      <Filter>TextParsingSuite 头文件\CSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\DataTypeDescribeTesting.h">
+      <Filter>TextParsingSuite 头文件\CSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogAppenderIOManagerSignTesting.h">
+      <Filter>LogManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordTesting.h">
+      <Filter>DataTypesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\Detail\VertexTest.h">
+      <Filter>DataTypesSuite 头文件\Detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2738,7 +2723,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\ByteSwapperTesting.cpp">
       <Filter>FileManagerSuite 源文件\Endian</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\TypeAliaserTesting.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\TypeAliasTesting.cpp">
       <Filter>FileManagerSuite 源文件\Endian</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManager\CFileManagerTesting.cpp">
@@ -2750,10 +2735,10 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManager\CReadFileManagerTesting.cpp">
       <Filter>FileManagerSuite 源文件\CFileManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\OFStreamManagerTesting.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\OFileStreamManagerTesting.cpp">
       <Filter>FileManagerSuite 源文件\StreamManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\IFStreamManagerTesting.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\IFileStreamManagerTesting.cpp">
       <Filter>FileManagerSuite 源文件\StreamManager</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandle\FileHandleTesting.cpp">
@@ -2806,9 +2791,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Detail\FileEvent.cpp">
       <Filter>FileManagerSuite 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\ExcelConversionCSVTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\GenerateRandomNameTesting.cpp">
       <Filter>FileManagerSuite 源文件</Filter>
@@ -2963,24 +2945,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\DocumentTesting.cpp">
       <Filter>TextParsingSuite 源文件\SimpleCSV</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\BatchConversionCSVTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVTypeConversionTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVHeadTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVRowTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVContentTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVGenerateTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Resource\CSVGenerate\ChapterBase.cpp">
       <Filter>资源文件\CSVGenerate</Filter>
     </ClCompile>
@@ -2989,9 +2953,6 @@
     </ClCompile>
     <ClCompile Include="Resource\CSVGenerate\ChapterContainer.cpp">
       <Filter>资源文件\CSVGenerate</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVTotalGenerateTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="Resource\CSVGenerate\EquipContainer.cpp">
       <Filter>资源文件\CSVGenerate</Filter>
@@ -3038,30 +2999,6 @@
     <ClCompile Include="Resource\CSVGenerate\CSVConfigureContainer.cpp">
       <Filter>资源文件\CSVGenerate</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonHeadTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonNodeContainerTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonNodeTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonGenerateTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonRowTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonConfigureTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\DataTypeDescribeTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\HeapAllocateTesting.cpp">
       <Filter>MemoryToolsSuite 源文件</Filter>
     </ClCompile>
@@ -3085,12 +3022,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\StringUtilityTesting.cpp">
       <Filter>CharacterStringSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVDataTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonTotalGenerateTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TupleLessTesting.cpp">
       <Filter>DataTypesSuite 源文件</Filter>
@@ -3197,9 +3128,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestStreamTesting.cpp">
       <Filter>UnitTestSuiteSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\BatchConversionCodeTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Resource\OutputCodeTesting\Input2.cpp">
       <Filter>资源文件\OutputCodeTesting</Filter>
     </ClCompile>
@@ -3230,14 +3158,65 @@
     <ClCompile Include="Resource\OutputCodeTesting\Input1Container.cpp">
       <Filter>资源文件\OutputCodeTesting</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureLoadingTesting.cpp">
-      <Filter>TextParsingSuite 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CodeMapping\CodeMappingAnalysisTesting.cpp">
       <Filter>CharacterStringSuite 源文件\CodeMapping</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CodeMapping\CodeMappingTesting.cpp">
       <Filter>CharacterStringSuite 源文件\CodeMapping</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\CustomAssert\FunctionProhibitedFromCallingTesting.cpp">
+      <Filter>HelperSuite 源文件\CustomAssert</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\NoexceptLogTesting.cpp">
+      <Filter>ContractSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\BatchConversionCodeTesting.cpp">
+      <Filter>TextParsingSuite 源文件\Excel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\BatchConversionCSVTesting.cpp">
+      <Filter>TextParsingSuite 源文件\Excel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\ExcelConversionCSVTesting.cpp">
+      <Filter>TextParsingSuite 源文件\Excel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVConfigureLoadingTesting.cpp">
+      <Filter>TextParsingSuite 源文件\CSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVConfigureTesting.cpp">
+      <Filter>TextParsingSuite 源文件\CSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVContentTesting.cpp">
+      <Filter>TextParsingSuite 源文件\CSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVDataTesting.cpp">
+      <Filter>TextParsingSuite 源文件\CSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVGenerateTesting.cpp">
+      <Filter>TextParsingSuite 源文件\CSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVHeadTesting.cpp">
+      <Filter>TextParsingSuite 源文件\CSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVRowTesting.cpp">
+      <Filter>TextParsingSuite 源文件\CSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVTotalGenerateTesting.cpp">
+      <Filter>TextParsingSuite 源文件\CSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVTypeConversionTesting.cpp">
+      <Filter>TextParsingSuite 源文件\CSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\DataTypeDescribeTesting.cpp">
+      <Filter>TextParsingSuite 源文件\CSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogAppenderIOManagerSignTesting.cpp">
+      <Filter>LogManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordTesting.cpp">
+      <Filter>DataTypesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\Detail\VertexTest.cpp">
+      <Filter>DataTypesSuite 源文件\Detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3289,10 +3268,10 @@
     <Text Include="Resource\FileManagerTesting\FileManagerHelperTestingText.txt">
       <Filter>资源文件\FileManagerTesting</Filter>
     </Text>
-    <Text Include="Resource\StreamManagerTesting\IFStreamManagerTest.txt">
+    <Text Include="Resource\StreamManagerTesting\IFileStreamManagerTest.txt">
       <Filter>资源文件\StreamManagerTesting</Filter>
     </Text>
-    <Text Include="Resource\StreamManagerTesting\OFStreamManagerTest.txt">
+    <Text Include="Resource\StreamManagerTesting\OFileStreamManagerTest.txt">
       <Filter>资源文件\StreamManagerTesting</Filter>
     </Text>
     <Text Include="Resource\CFileManagerTesting\CWriteFileManagerTestingText.txt">
@@ -3467,9 +3446,6 @@
     </None>
     <None Include="Resource\CSVConfigure\LineType.csv">
       <Filter>资源文件\CSVConfigure</Filter>
-    </None>
-    <None Include="Resource\JsonTesting\Log.json">
-      <Filter>资源文件\JsonTesting</Filter>
     </None>
     <None Include="Resource\CSVEngineering\CSVEngineering.json">
       <Filter>资源文件\CSVEngineering</Filter>

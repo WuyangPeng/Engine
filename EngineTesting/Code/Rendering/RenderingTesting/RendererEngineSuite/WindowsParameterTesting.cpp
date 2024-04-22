@@ -75,7 +75,7 @@ void Rendering::WindowsParameterTesting::ExecuteTest(const WindowsParameter& win
     ASSERT_EQUAL(windowsParameter.IsIconDefault(), isIconDefault);
     ASSERT_EQUAL(windowsParameter.GetCursor(), cursor);
     ASSERT_EQUAL(windowsParameter.IsCursorDefault(), isCursorDefault);
-    ASSERT_ENUM_EQUAL(windowsParameter.GetBackground(), background);
+    ASSERT_EQUAL(windowsParameter.GetBackground(), background);
 }
 
 void Rendering::WindowsParameterTesting::SetClearColorTest(WindowsParameter& windowsParameter)

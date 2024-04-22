@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:33)
+/// 版本：1.0.0.8 (2024/04/12 14:21)
 
 #ifndef CORE_TOOLS_COMMAND_COMMAND_H
 #define CORE_TOOLS_COMMAND_COMMAND_H
@@ -27,12 +27,12 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        // 返回第一个未处理参数的名字。
+        /// 返回第一个未处理参数的名字。
         NODISCARD std::string ExcessArguments() const;
         NODISCARD int GetExcessArgumentsCount() const noexcept;
 
-        // 设置数字参数的范围。
-        // 如果范围是必需的，他们必须为每个参数设置。
+        /// 设置数字参数的范围。
+        /// 如果范围是必需的，他们必须为每个参数设置。
         CommandHandle& SetMinValue(double value) noexcept;
         CommandHandle& SetMaxValue(double value) noexcept;
         CommandHandle& SetInfValue(double value) noexcept;
@@ -40,13 +40,13 @@ namespace CoreTools
 
         void ClearBoundary() noexcept;
 
-        // 下列方法每个的返回值是参数数组中的索引选项和值。
+        /// 下列方法每个的返回值是参数数组中的索引选项和值。
 
-        // 使用布尔方法在不采取任何参数的选项，例如下面的例子
-        // MyProgram -debug -x 10 -y 20 -fileName fileName
-        // 选项 -debug 没有参数。
+        /// 使用布尔方法在不采取任何参数的选项，例如下面的例子
+        /// MyProgram -debug -x 10 -y 20 -fileName fileName
+        /// 选项 -debug 没有参数。
 
-        // 返回存在的选项
+        /// 返回存在的选项
         NODISCARD bool GetBoolean(const std::string& name) const;
 
         NODISCARD int GetInteger(const std::string& name) const;
@@ -62,16 +62,16 @@ namespace CoreTools
         NODISCARD bool IsArgumentOutOfRange(double value) const noexcept;
 
     private:
-        // 命令行信息。
+        /// 命令行信息。
         CommandLineInformation commandLineInformation;
 
-        // 参数的边界检查。
-        double small;  // 数值参数的下界 (min 或 inf)
-        double large;  // 数值参数的上界 (max 或 sup)
-        bool minSet;  // 如果为真，比较：small <= arg
-        bool maxSet;  // 如果为真，比较：arg <= large
-        bool infSet;  // 如果为真，比较：small < arg
-        bool supSet;  // 如果为真，比较：arg < large
+        /// 参数的边界检查。
+        double small;  /// 数值参数的下界 (min 或 inf)
+        double large;  /// 数值参数的上界 (max 或 sup)
+        bool minSet;  /// 如果为真，比较：small <= arg
+        bool maxSet;  /// 如果为真，比较：arg <= large
+        bool infSet;  /// 如果为真，比较：small < arg
+        bool supSet;  /// 如果为真，比较：arg < large
     };
 }
 

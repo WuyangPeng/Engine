@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.5 (2024/01/22 13:36)
+/// 版本：1.0.0.8 (2024/04/11 15:43)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_ARRAY2_H
 #define CORE_TOOLS_MEMORY_TOOLS_ARRAY2_H
@@ -26,7 +26,7 @@ namespace CoreTools
         using ClassType = Array2<T>;
 
     public:
-        /// 支持动态调整大小、复制或移动。 
+        /// 支持动态调整大小、复制或移动。
         Array2() noexcept;
 
         /// 该数组具有bound0列和bound1行。
@@ -46,7 +46,7 @@ namespace CoreTools
         ///   10 11 12
         ///   数组indirect指向 00 10。
         ///   T* row1 = myArray[1];
-        ///   T row1Col2 = myArray[1][2];
+        ///   T row1Column2 = myArray[1][2];
         NODISCARD int GetBound0() const noexcept;
         NODISCARD int GetBound1() const noexcept;
 

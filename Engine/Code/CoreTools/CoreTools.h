@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:02)
+/// 版本：1.0.0.8 (2024/03/27 22:10)
 
 #ifndef CORE_TOOLS_H
 #define CORE_TOOLS_H
@@ -21,7 +21,6 @@
 #include "EngineConfiguration/EngineConfiguration.h"
 #include "Exception/Exception.h"
 #include "FileManager/FileManager.h"
-#include "Freetype/Freetype.h"
 #include "Helper/Helper.h"
 #include "LogManager/LogManager.h"
 #include "MainFunctionHelper/MainFunctionHelper.h"
@@ -39,7 +38,6 @@
 #include "Threading/Threading.h"
 #include "Time/Time.h"
 #include "UnitTestSuite/UnitTestSuite.h"
-#include "Zlib/Zlib.h"
 #include "Network/Network.h"
 
 #endif  // CORE_TOOLS_H

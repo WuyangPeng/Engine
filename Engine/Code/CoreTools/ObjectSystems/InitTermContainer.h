@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:55)
+/// 版本：1.0.0.8 (2024/04/11 22:14)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_INIT_TERM_CONTAINER_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_INIT_TERM_CONTAINER_H
@@ -32,8 +32,10 @@ namespace CoreTools
         void Execute();
 
     private:
-        // 这个数目必须足够大，以支持你的应用程序。如果你的应用程序触发此断言，修改这个值然后重新编译。
-        // 其目标是避免执行期间premain和postmain的动态分配，从而使其更容易管理和跟踪内存使用情况。
+        /// 这个数目必须足够大，以支持你的应用程序。
+        /// 如果你的应用程序触发此断言，修改这个值然后重新编译。
+        /// 其目标是避免执行期间preMain和postMain的动态分配，
+        /// 从而使其更容易管理和跟踪内存使用情况。
         static constexpr auto maxElements = 256;
         static_assert(0 < maxElements);
 

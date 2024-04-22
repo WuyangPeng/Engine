@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:00)
+/// 版本：1.0.0.8 (2024/04/11 22:20)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -43,7 +43,6 @@ CoreTools::Object::Object(LoadConstructor value)
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, Object);
 
-// 名字
 std::string CoreTools::Object::GetName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
@@ -62,13 +61,13 @@ int CoreTools::Object::GetStreamingSize() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    // RTTI名
+    /// RTTI名
     int size = GetStreamSize(GetRttiType().GetName());
 
-    // UniqueId
+    /// UniqueId
     size += GetStreamSize<int64_t>();
 
-    // 对象名
+    /// 对象名
     size += GetStreamSize(objectName.GetName());
 
     return size;
@@ -87,13 +86,13 @@ void CoreTools::Object::Save(BufferTarget& target) const
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
-    // 写入RTTI名用于加载期间查找工厂函数。
+    /// 写入RTTI名用于加载期间查找工厂函数。
     target.Write(GetRttiType().GetName());
 
-    // 写入对象的唯一标识符。这是加载和链接时使用。
+    /// 写入对象的唯一标识符。这是加载和链接时使用。
     target.WriteUniqueId(shared_from_this());
 
-    // 写入对象的名字。
+    /// 写入对象的名字。
     target.Write(objectName.GetName());
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
@@ -105,14 +104,14 @@ void CoreTools::Object::Link(ObjectLink& source)
 
     System::UnusedFunction(source);
 
-    // Object没有Object*成员。
+    /// Object没有Object*成员。
 
     DisableNoexcept();
 }
 
 void CoreTools::Object::PostLink()
 {
-    // Object 没有后链接语义。
+    /// Object 没有后链接语义。
 
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -125,12 +124,12 @@ void CoreTools::Object::Load(BufferSource& source)
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
-    // RTTI名已经在流中读取，以查找正确的对象加载函数。
+    /// RTTI名已经在流中读取，以查找正确的对象加载函数。
 
-    // 读取的对象的唯一标识符。这提供信息在链接阶段。
+    /// 读取的对象的唯一标识符。这提供信息在链接阶段。
     source.ReadUniqueId(*this);
 
-    // 读取对象名字。
+    /// 读取对象名字。
     const auto name = source.ReadString();
 
     SetName(name);

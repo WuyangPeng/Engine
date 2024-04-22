@@ -4,3 +4,4 @@ TODO Level 2
 
 1.（Helper）使用最新版本的boost修改配置宏，或直接使用boost定义的宏。
 2.（Windows）使用工具自动化生成WindowError枚举。
+3.（Windows）WindowError宏补全Windows错误码。

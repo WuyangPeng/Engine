@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:12)
+/// 版本：1.0.0.8 (2024/04/12 15:08)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_SET_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_SET_DETAIL_H
@@ -40,6 +40,7 @@ CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Container, Fu
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Value,
           typename GetReference,
           typename SetReference,
@@ -51,6 +52,7 @@ bool CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Containe
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Value,

@@ -39,14 +39,14 @@ void System::EnumCastTesting::MainTest()
 void System::EnumCastTesting::CastTest()
 {
     ASSERT_EQUAL(EnumCastUnderlying(Number::One), 1u);
-    ASSERT_ENUM_EQUAL(UnderlyingCastEnum<SignedNumber>(-1), SignedNumber::NegativeOne);
+    ASSERT_EQUAL(UnderlyingCastEnum<SignedNumber>(-1), SignedNumber::NegativeOne);
     ASSERT_EQUAL(EnumCastUnderlying<int>(Number::Two), 2);
 
     auto value = Number::One;
 
     UnderlyingCastEnumPtr(2, &value);
 
-    ASSERT_ENUM_EQUAL(value, Number::Two);
+    ASSERT_EQUAL(value, Number::Two);
 
     UnderlyingCastEnumPtr<SignedNumber>(2, nullptr);
 }
@@ -62,7 +62,7 @@ void System::EnumCastTesting::WindowErrorCastTest()
 
     const auto resultWindowError = UnderlyingCastEnum<WindowError>(underlyingTypeValue);
 
-    ASSERT_ENUM_EQUAL(originalWindowError, resultWindowError);
+    ASSERT_EQUAL(originalWindowError, resultWindowError);
 }
 
 void System::EnumCastTesting::ConstexprCastTest()
@@ -75,7 +75,7 @@ void System::EnumCastTesting::ConstexprCastTest()
 
     constexpr auto resultWindowError = UnderlyingCastEnum<WindowError>(originalUnderlyingTypeValue);
 
-    ASSERT_ENUM_EQUAL(resultWindowError, WindowError::Success);
+    ASSERT_EQUAL(resultWindowError, WindowError::Success);
 
     constexpr auto resultUnderlyingTypeValue = EnumCastUnderlying<int>(resultWindowError);
 

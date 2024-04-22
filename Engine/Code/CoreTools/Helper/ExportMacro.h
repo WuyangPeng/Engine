@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:14)
+/// 版本：1.0.0.8 (2024/03/28 11:03)
 
 #ifndef CORE_TOOLS_HELPER_EXPORT_MACRO_H
 #define CORE_TOOLS_HELPER_EXPORT_MACRO_H
@@ -73,7 +73,7 @@
 
 #endif  // defined(BUILDING_STATIC) || defined(TCRE_USE_GCC)
 
-// Export
+/// Export
 #define CORE_TOOLS_EXPORT(implClassName, type) \
     EXPORT_##type(CoreTools, implClassName, CORE_TOOLS_DEFAULT_DECLARE)
 
@@ -122,7 +122,7 @@
 #define FRAMEWORK_EXPORT(implClassName, type) \
     EXPORT_##type(Framework, implClassName, FRAMEWORK_DEFAULT_DECLARE)
 
-// Copy Export
+/// Copy Export
 #define CORE_TOOLS_COPY_EXPORT(className, implClassName, type) \
     EXPORT_##type(CoreTools, className, implClassName, CORE_TOOLS_DEFAULT_DECLARE)
 
@@ -171,7 +171,7 @@
 #define FRAMEWORK_COPY_EXPORT(className, implClassName, type) \
     EXPORT_##type(Framework, className, implClassName, FRAMEWORK_DEFAULT_DECLARE)
 
-// Export Unique
+/// Export Unique
 #define CORE_TOOLS_EXPORT_UNIQUE_PTR(implClassName) \
     EXPORT_UNIQUE_PTR(CoreTools, implClassName, CORE_TOOLS_DEFAULT_DECLARE)
 
@@ -220,7 +220,7 @@
 #define FRAMEWORK_EXPORT_UNIQUE_PTR(implClassName) \
     EXPORT_UNIQUE_PTR(Framework, implClassName, FRAMEWORK_DEFAULT_DECLARE)
 
-// Export Impl
+/// Export Impl
 #define EXPORT_IMPL(implClassName, namespaceName, classShareType) \
     namespaceName##_EXPORT(implClassName, SHARED_PTR);            \
     namespaceName##_EXPORT(implClassName, classShareType)
@@ -233,12 +233,12 @@
     namespaceName##_EXPORT(implClassName, CONST_SHARED_PTR);            \
     namespaceName##_EXPORT(implClassName, classShareType)
 
-// Type Declare
+/// Type Declare
 #define TYPE_DECLARE(className)  \
     using ClassType = className; \
     using ImplType = SYSTEM_CONCATENATOR(className, Impl)
 
-// Clone
+/// Clone
 #define COPY_UNSHARED_CLONE_SELF_DECLARE \
     NODISCARD static SharedPtr Clone(const ImplType& impl)
 

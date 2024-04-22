@@ -52,21 +52,21 @@ void System::WaitForWaitableTimerTesting::WaitForWaitableTimer0Test(WindowsHandl
 
 void System::WaitForWaitableTimerTesting::WaitForWaitableTimer1Test(WindowsHandle waitableTimerHandle)
 {
-    ASSERT_ENUM_EQUAL(WaitForSystemWaitableTimer(waitableTimerHandle, EnumCastUnderlying(MutexWait::Infinite)), MutexWaitReturn::Object0);
+    ASSERT_EQUAL(WaitForSystemWaitableTimer(waitableTimerHandle, EnumCastUnderlying(MutexWait::Infinite)), MutexWaitReturn::Object0);
 
     ASSERT_NOT_THROW_EXCEPTION_1(ResetSystemWaitableTimer, waitableTimerHandle);
 }
 
 void System::WaitForWaitableTimerTesting::WaitForWaitableTimer2Test(WindowsHandle waitableTimerHandle)
 {
-    ASSERT_ENUM_EQUAL(WaitForSystemWaitableTimer(waitableTimerHandle, EnumCastUnderlying(MutexWait::Infinite), true), MutexWaitReturn::Object0);
+    ASSERT_EQUAL(WaitForSystemWaitableTimer(waitableTimerHandle, EnumCastUnderlying(MutexWait::Infinite), true), MutexWaitReturn::Object0);
 
     ASSERT_NOT_THROW_EXCEPTION_1(ResetSystemWaitableTimer, waitableTimerHandle);
 }
 
 void System::WaitForWaitableTimerTesting::WaitForWaitableTimer3Test(WindowsHandle waitableTimerHandle)
 {
-    ASSERT_ENUM_EQUAL(WaitForSystemWaitableTimer(waitableTimerHandle, EnumCastUnderlying(MutexWait::Infinite), false), MutexWaitReturn::Object0);
+    ASSERT_EQUAL(WaitForSystemWaitableTimer(waitableTimerHandle, EnumCastUnderlying(MutexWait::Infinite), false), MutexWaitReturn::Object0);
 
     ASSERT_NOT_THROW_EXCEPTION_1(ResetSystemWaitableTimer, waitableTimerHandle);
 }

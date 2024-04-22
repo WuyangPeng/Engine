@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:50)
+/// 版本：1.0.0.8 (2024/04/12 15:21)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_LESS_H
 #define CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_LESS_H
@@ -32,7 +32,7 @@ namespace CoreTools
         NODISCARD bool operator()(const Telegram& lhs, const Telegram& rhs) const;
 
     private:
-        NODISCARD bool DoNotCompareTime(const Telegram& lhs, const Telegram& rhs) const;
+        NODISCARD static bool DoNotCompareTime(const Telegram& lhs, const Telegram& rhs);
 
     private:
         int64_t difference;

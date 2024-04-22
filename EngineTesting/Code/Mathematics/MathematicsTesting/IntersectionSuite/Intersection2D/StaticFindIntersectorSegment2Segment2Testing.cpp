@@ -76,32 +76,32 @@ void Mathematics::StaticFindIntersectorSegment2Segment2Testing::SegmentTest()
 
         StaticFindIntersectorSegment2Segment2<float> firstClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection));
 
-        ASSERT_ENUM_EQUAL(firstClassify.GetIntersectionType(), IntersectionType::Segment);
+        ASSERT_EQUAL(firstClassify.GetIntersectionType(), IntersectionType::Segment);
         ASSERT_EQUAL(firstClassify.GetQuantity(), 2);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin, firstClassify.GetPoint(0), 1e-6f);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin + firstExtent * lhsDirection, firstClassify.GetPoint(1), 1e-6f);
 
         StaticFindIntersectorSegment2Segment2<float> secondClassify(Segment2F(firstExtent, lhsOrigin, lhsDirection), Segment2F(firstExtent, rhsOrigin, lhsDirection));
 
-        ASSERT_ENUM_EQUAL(secondClassify.GetIntersectionType(), IntersectionType::Empty);
+        ASSERT_EQUAL(secondClassify.GetIntersectionType(), IntersectionType::Empty);
         ASSERT_EQUAL(secondClassify.GetQuantity(), 0);
 
         StaticFindIntersectorSegment2Segment2<float> thirdClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), Segment2F(lhsOrigin, lhsOrigin - secondExtent * lhsDirection), 1e-5f);
 
-        ASSERT_ENUM_EQUAL(thirdClassify.GetIntersectionType(), IntersectionType::Point);
+        ASSERT_EQUAL(thirdClassify.GetIntersectionType(), IntersectionType::Point);
         ASSERT_EQUAL(thirdClassify.GetQuantity(), 1);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin, thirdClassify.GetPoint(0), 1e-6f);
 
         StaticFindIntersectorSegment2Segment2<float> fourthClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), Segment2F(lhsOrigin + lhsDirection, lhsOrigin - secondExtent * lhsDirection), 1e-5f);
 
-        ASSERT_ENUM_EQUAL(fourthClassify.GetIntersectionType(), IntersectionType::Segment);
+        ASSERT_EQUAL(fourthClassify.GetIntersectionType(), IntersectionType::Segment);
         ASSERT_EQUAL(fourthClassify.GetQuantity(), 2);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin, fourthClassify.GetPoint(0), 1e-6f);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin + lhsDirection, fourthClassify.GetPoint(1), 1e-5f);
 
         StaticFindIntersectorSegment2Segment2<float> fifthClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), Segment2F(lhsOrigin - lhsDirection, lhsOrigin - secondExtent * lhsDirection));
 
-        ASSERT_ENUM_EQUAL(fifthClassify.GetIntersectionType(), IntersectionType::Empty);
+        ASSERT_EQUAL(fifthClassify.GetIntersectionType(), IntersectionType::Empty);
         ASSERT_EQUAL(fifthClassify.GetQuantity(), 0);
 
         StaticFindIntersectorSegment2Segment2<float> sixthClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection),
@@ -113,13 +113,13 @@ void Mathematics::StaticFindIntersectorSegment2Segment2Testing::SegmentTest()
             seventhClassify.GetParameter0() <= firstExtent &&
             seventhClassify.GetParameter1() <= secondExtent)
         {
-            ASSERT_ENUM_EQUAL(sixthClassify.GetIntersectionType(), IntersectionType::Point);
+            ASSERT_EQUAL(sixthClassify.GetIntersectionType(), IntersectionType::Point);
             ASSERT_EQUAL(sixthClassify.GetQuantity(), 1);
             ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin + seventhClassify.GetParameter0() * lhsDirection, sixthClassify.GetPoint(0), 1e-5f);
         }
         else
         {
-            ASSERT_ENUM_EQUAL(sixthClassify.GetIntersectionType(), IntersectionType::Empty);
+            ASSERT_EQUAL(sixthClassify.GetIntersectionType(), IntersectionType::Empty);
             ASSERT_EQUAL(sixthClassify.GetQuantity(), 0);
         }
     }

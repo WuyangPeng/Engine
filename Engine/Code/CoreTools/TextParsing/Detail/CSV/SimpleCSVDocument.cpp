@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:58)
+/// 版本：1.0.0.8 (2024/04/11 10:44)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -29,10 +29,7 @@ CoreTools::SimpleCSVDocument::SimpleCSVDocument(const std::string& xlsxFileName)
 
 bool CoreTools::SimpleCSVDocument::IsValid() const noexcept
 {
-    if (!xlsxFileName.empty())
-        return true;
-    else
-        return false;
+    return !xlsxFileName.empty();
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -43,7 +40,7 @@ void CoreTools::SimpleCSVDocument::Init()
     worksheetNames = workbook.GetWorksheetNames();
 }
 
-CoreTools::SimpleCSV::Worksheet CoreTools::SimpleCSVDocument::GetFirstXLWorksheet()
+CoreTools::SimpleCSV::Worksheet CoreTools::SimpleCSVDocument::GetFirstWorksheet()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -55,7 +52,7 @@ CoreTools::SimpleCSV::Worksheet CoreTools::SimpleCSVDocument::GetFirstXLWorkshee
     return worksheet;
 }
 
-CoreTools::SimpleCSVDocument::WorksheetContainer CoreTools::SimpleCSVDocument::GetXLWorksheet()
+CoreTools::SimpleCSVDocument::WorksheetContainer CoreTools::SimpleCSVDocument::GetWorksheet()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

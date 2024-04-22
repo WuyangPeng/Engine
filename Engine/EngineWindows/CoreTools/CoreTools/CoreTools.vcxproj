@@ -391,13 +391,13 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck16.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck32.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCCITT.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCCITTUsingTable.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCcitt.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCcittUsingTable.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckFwd.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckHandle.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheck16Table.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheck32Table.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckCCITTTable.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckCcittTable.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckHandleImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Flags\SpecifyCheckSumPowersFlags.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\IntelCheckSum.h" />
@@ -444,6 +444,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\DeleteFileTools.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\BufferIOImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CFileManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CheckItemSize.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CommonCopyFileTools.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CopyFileToolsFactory.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\CopyFileToolsImpl.h" />
@@ -459,10 +460,10 @@
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\FileBufferImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\FileHandleImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\FileManagerFactory.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\IFStreamManagerImpl.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\IFStreamSeekManager.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\OFStreamManagerImpl.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\OFStreamSeekManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\IFileStreamManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\IFileStreamSeekManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\OFileStreamManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\OFileStreamSeekManager.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadAndWriteFileHandleImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadBufferIOImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadFileAsynchronous.h" />
@@ -488,18 +489,17 @@
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\FileManagerInternalFwd.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Flags\BufferIOFlags.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\GenerateRandomName.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\IFStreamManager.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\OFStreamManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\GenerateRandomNameDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\IFileStreamManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\OFileStreamManager.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\ReadAndWriteFileHandle.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\ReadBufferIO.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\ReadFileHandle.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\ReadFileManager.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\TypeAliaser.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\TypeAlias.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\WriteBufferIO.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\WriteFileHandle.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\WriteFileManager.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\Freetype\Freetype.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\Freetype\FreetypeFwd.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\SystemCustomAssertMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\SystemClassInvariantMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\Export\CopyUnsharedMacro.h" />
@@ -857,6 +857,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Data\Vector2.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Data\Vector3.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Data\Vector4.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSV\BatchConversionCodeImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSV\BatchConversionCSVImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSV\CSVContentImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSV\CSVGenerateBaseHeadFile.h" />
@@ -899,7 +900,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Flags\CSVCondition.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Flags\TextParsingConstant.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Flags\CSVFlags.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Flags\JsonFlags.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\AppProperties.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Cell.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CellValueDetail.h" />
@@ -919,8 +919,8 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetId.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetIndex.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetName.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsId.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsTarget.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelationshipId.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelationshipTarget.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetType.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetVisibility.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QueryXmlData.h" />
@@ -945,8 +945,8 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetIdImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetIndexImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetNameImpl.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsIdImpl.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsTargetImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelationshipIdImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelationshipTargetImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetTypeImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetVisibilityImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QueryXmlDataImpl.h" />
@@ -1001,6 +1001,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipArchiveImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipEntryImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipEntryMetaData.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipHelper.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipReader.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipWriter.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\SimpleZipInternalFwd.h" />
@@ -1073,8 +1074,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestSuite.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestSuiteFwd.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestSuiteInternalFwd.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\Zlib\Zlib.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\Zlib\ZlibFwd.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\Base\Detail\LoadingLibraryImpl.cpp" />
@@ -1110,12 +1109,12 @@
     <ClCompile Include="..\..\..\Code\CoreTools\Contract\TriggerAssert.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck16.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck32.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCCITT.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCCITTUsingTable.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCcitt.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckCcittUsingTable.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheckHandle.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheck16Table.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheck32Table.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckCCITTTable.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckCcittTable.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\Detail\CyclicRedundancyCheckHandleImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\IntelCheckSum.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SevenModElevenCheckSum.cpp" />
@@ -1152,10 +1151,10 @@
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\FileBufferImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\FileHandleImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\FileManagerFactory.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\IFStreamManagerImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\IFStreamSeekManager.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\OFStreamManagerImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\OFStreamSeekManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\IFileStreamManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\IFileStreamSeekManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\OFileStreamManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\OFileStreamSeekManager.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadAndWriteFileHandleImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadBufferIOImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadFileAsynchronous.cpp" />
@@ -1177,8 +1176,8 @@
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\FileHandleHelper.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\FileManagerHelper.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\GenerateRandomName.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\IFStreamManager.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\OFStreamManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\IFileStreamManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\OFileStreamManager.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\ReadAndWriteFileHandle.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\ReadBufferIO.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\FileManager\ReadFileHandle.cpp" />
@@ -1195,7 +1194,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderFileConfiguration.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderManagerImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderPrintFlagsExist.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\ErrorConsoleTextColorsManager.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAppenderIOManagerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAsynchronousImpl.cpp" />
@@ -1290,6 +1288,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\CSV\CSVTotalGenerate.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\CSV\CSVTypeConversion.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\CSV\ExcelConversionCSV.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSV\BatchConversionCodeImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSV\BatchConversionCSVImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSV\CSVContentImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSV\CSVGenerateBaseHeadFile.cpp" />
@@ -1344,8 +1343,8 @@
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetId.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetIndex.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetName.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsId.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsTarget.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelationshipId.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelationshipTarget.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetType.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetVisibility.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QueryXmlData.cpp" />
@@ -1369,8 +1368,8 @@
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetIdImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetIndexImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetNameImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsIdImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsTargetImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelationshipIdImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelationshipTargetImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetTypeImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetVisibilityImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QueryXmlDataImpl.cpp" />
@@ -1414,6 +1413,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipArchiveImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipEntryImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipEntryMetaData.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipHelper.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipReader.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipWriter.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\ZipArchive.cpp" />

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:39)
+/// 版本：1.0.0.8 (2024/03/30 22:33)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_FILE_BUFFER_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_FILE_BUFFER_IMPL_H

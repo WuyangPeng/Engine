@@ -127,7 +127,7 @@ void Mathematics::StaticFindIntersectorArc2Arc2Testing::EmptyTest()
 
         ApproximateFunction approximate = Approximate<float>;
 
-        ASSERT_ENUM_EQUAL(IntersectionType::Empty, firstIntersector.GetIntersectionType());
+        ASSERT_EQUAL(IntersectionType::Empty, firstIntersector.GetIntersectionType());
         ASSERT_FALSE(firstIntersector.IsIntersection());
         ASSERT_APPROXIMATE_USE_FUNCTION(approximate, firstIntersector.GetLhsArc(), firstArc, 1e-8f);
         ASSERT_APPROXIMATE_USE_FUNCTION(approximate, firstIntersector.GetRhsArc(), secondArc, 1e-8f);

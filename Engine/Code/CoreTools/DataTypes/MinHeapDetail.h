@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.5 (2024/01/23 10:30)
+/// 版本：1.0.0.8 (2024/04/11 14:50)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_DETAIL_H
@@ -17,6 +17,8 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
+#include <numeric>
+
 template <typename KeyType, typename ValueType>
 CoreTools::MinHeap<KeyType, ValueType>::MinHeap(int maxElements)
     : numElements{ 0 },
@@ -25,7 +27,7 @@ CoreTools::MinHeap<KeyType, ValueType>::MinHeap(int maxElements)
 {
     Reset(maxElements);
 
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_3;
 }
 
 template <typename KeyType, typename ValueType>
@@ -35,17 +37,7 @@ bool CoreTools::MinHeap<KeyType, ValueType>::IsValid() const noexcept
     {
         for (auto childIndex = 1; childIndex < numElements; ++childIndex)
         {
-            const auto parentIndex = (childIndex - 1) / 2;
-
-            const auto& child = records.at(GetRecordKey(childIndex));
-            const auto& parent = records.at(GetRecordKey(parentIndex));
-
-            if (child.GetWeight() < parent.GetWeight())
-            {
-                return false;
-            }
-
-            if (parent.GetIndex() != parentIndex)
+            if (!IsValid(childIndex))
             {
                 return false;
             }
@@ -60,19 +52,37 @@ bool CoreTools::MinHeap<KeyType, ValueType>::IsValid() const noexcept
 }
 
 template <typename KeyType, typename ValueType>
+bool CoreTools::MinHeap<KeyType, ValueType>::IsValid(int childIndex) const
+{
+    const auto parentIndex = (childIndex - 1) / 2;
+
+    const auto& child = records.at(GetRecordKey(childIndex));
+    const auto& parent = records.at(GetRecordKey(parentIndex));
+
+    if (child.GetWeight() < parent.GetWeight())
+    {
+        return false;
+    }
+
+    if (parent.GetIndex() != parentIndex)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+template <typename KeyType, typename ValueType>
 void CoreTools::MinHeap<KeyType, ValueType>::Reset(int maxElements)
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_3;
 
     numElements = 0;
     if (0 < maxElements)
     {
         pointers.resize(maxElements);
         records.resize(maxElements);
-        for (auto i = 0; i < maxElements; ++i)
-        {
-            pointers.at(i) = i;
-        }
+        std::iota(pointers.begin(), pointers.end(), 0);
     }
     else
     {
@@ -84,7 +94,7 @@ void CoreTools::MinHeap<KeyType, ValueType>::Reset(int maxElements)
 template <typename KeyType, typename ValueType>
 int CoreTools::MinHeap<KeyType, ValueType>::GetMaxElements() const
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_3;
 
     return boost::numeric_cast<int>(records.size());
 }
@@ -92,7 +102,7 @@ int CoreTools::MinHeap<KeyType, ValueType>::GetMaxElements() const
 template <typename KeyType, typename ValueType>
 int CoreTools::MinHeap<KeyType, ValueType>::GetNumElements() const noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_3;
 
     return numElements;
 }
@@ -100,16 +110,16 @@ int CoreTools::MinHeap<KeyType, ValueType>::GetNumElements() const noexcept
 template <typename KeyType, typename ValueType>
 CoreTools::MinHeapRecord<KeyType, ValueType> CoreTools::MinHeap<KeyType, ValueType>::GetMinimum() const
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_3;
 
     if (0 < numElements)
     {
-        // 从最小堆的根中获取最小值。
+        /// 从最小堆的根中获取最小值。
         return records.at(GetRecordKey(0));
     }
     else
     {
-        // 如果故意取消分配权重，则无效。
+        /// 如果故意取消分配权重，则无效。
         THROW_EXCEPTION(SYSTEM_TEXT("最小堆为空。"))
     }
 }
@@ -117,11 +127,11 @@ CoreTools::MinHeapRecord<KeyType, ValueType> CoreTools::MinHeap<KeyType, ValueTy
 template <typename KeyType, typename ValueType>
 int CoreTools::MinHeap<KeyType, ValueType>::Insert(const KeyType& handle, const ValueType& weight)
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_3;
 
     if (GetMaxElements() <= numElements)
     {
-        // 堆满后立即返回。
+        /// 堆满后立即返回。
         THROW_EXCEPTION(SYSTEM_TEXT("最小堆已满。"))
     }
 
@@ -138,21 +148,21 @@ int CoreTools::MinHeap<KeyType, ValueType>::Insert(const KeyType& handle, const 
 
         if (records.at(GetRecordKey(parentIndex)).GetWeight() <= weight)
         {
-            // 父对象的权重小于或等于子对象的值。我们现在有一个最小堆。
+            /// 父对象的权重小于或等于子对象的值。我们现在有一个最小堆。
             break;
         }
 
-        // 父对象的值大于子对象的值。交换父对象和子对象。
+        /// 父对象的值大于子对象的值。交换父对象和子对象。
 
-        // 将父对象移动到子对象的槽中。
+        /// 将父对象移动到子对象的槽中。
         pointers.at(childIndex) = GetRecordKey(parentIndex);
         SetIndex(childIndex);
 
-        // 将子对象移动到父对象的槽中。
+        /// 将子对象移动到父对象的槽中。
         pointers.at(parentIndex) = record.GetIndex();
         SetIndex(parentIndex);
 
-        // 向上传播。
+        /// 向上传播。
         childIndex = parentIndex;
     }
 
@@ -162,16 +172,17 @@ int CoreTools::MinHeap<KeyType, ValueType>::Insert(const KeyType& handle, const 
 template <typename KeyType, typename ValueType>
 CoreTools::MinHeapRecord<KeyType, ValueType> CoreTools::MinHeap<KeyType, ValueType>::Remove()
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_3;
 
     if (numElements == 0)
     {
-        // 如果故意取消分配权重，则无效。
+        /// 如果故意取消分配权重，则无效。
         THROW_EXCEPTION(SYSTEM_TEXT("最小堆为空。"))
     }
 
-    // 从最小堆的根中获取最小值。
+    /// 从最小堆的根中获取最小值。
     const auto root = records.at(GetRecordKey(0));
+    const auto rootIndex = GetRecordKey(0);
 
     /// 将树恢复为堆。抽象地说，记录是堆的新根。
     /// 它通过父子交换沿着树向下移动，直到它位于将树恢复为堆的位置。
@@ -185,7 +196,7 @@ CoreTools::MinHeapRecord<KeyType, ValueType> CoreTools::MinHeap<KeyType, ValueTy
     {
         if (childIndex < lastIndex)
         {
-            // 如有必要，选择具有最小值的子对象作为与父对象交换的对象。
+            /// 如有必要，选择具有最小值的子对象作为与父对象交换的对象。
             if (const auto nextChildIndex = childIndex + 1;
                 records.at(GetRecordKey(nextChildIndex)).GetWeight() < records.at(GetRecordKey(childIndex)).GetWeight())
             {
@@ -195,26 +206,26 @@ CoreTools::MinHeapRecord<KeyType, ValueType> CoreTools::MinHeap<KeyType, ValueTy
 
         if (record.GetWeight() <= records.at(GetRecordKey(childIndex)).GetWeight())
         {
-            // 树现在成了最小堆。
+            /// 树现在成了最小堆。
             break;
         }
 
-        // 将子对象移动到父对象的槽中。
+        /// 将子对象移动到父对象的槽中。
         pointers.at(parentIndex) = GetRecordKey(childIndex);
         SetIndex(parentIndex);
 
-        // 向下传播。
+        /// 向下传播。
         parentIndex = childIndex;
         childIndex = 2 * childIndex + 1;
     }
 
-    // 上一个“最后”记录被移到根上，并沿着树传播到它的最终安息地，将树恢复为堆。
-    // 插槽pointers.at(parentIndex) 就是那个休息的地方.
-    pointers.at(parentIndex) = record.GetIndex();
+    /// 上一个“最后”记录被移到根上，并沿着树传播到它的最终位置，将树恢复为堆。
+    /// 插槽pointers.at(parentIndex) 就是最终位置.
+    pointers.at(parentIndex) = GetRecordKey(record.GetIndex());
     SetIndex(parentIndex);
 
-    // 旧的根记录不能丢失。将其连接到包含旧的最后一条记录的插槽中。
-    pointers.at(lastIndex) = root.GetIndex();
+    /// 旧的根记录不能丢失。将其连接到包含旧的最后一条记录的插槽中。
+    pointers.at(lastIndex) = rootIndex;
     SetIndex(lastIndex);
 
     return root;
@@ -223,95 +234,112 @@ CoreTools::MinHeapRecord<KeyType, ValueType> CoreTools::MinHeap<KeyType, ValueTy
 template <typename KeyType, typename ValueType>
 void CoreTools::MinHeap<KeyType, ValueType>::Update(int index, const ValueType& weight)
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_3;
 
     const auto oldWeight = records.at(index).GetWeight();
     if (oldWeight < weight)
     {
-        records.at(index).SetWeight(weight);
-
-        // 新值大于旧值。把它传播到叶子上。
-        auto parentIndex = records.at(index).GetIndex();
-        auto childIndex = 2 * parentIndex + 1;
-        while (childIndex < numElements)
-        {
-            // 至少存在一个子项。找到最大值之一。
-            auto maxChildIndex = 0;
-            if (const auto nextChildIndex = childIndex + 1;
-                nextChildIndex < numElements)
-            {
-                // 有两个子节点。
-                if (records.at(GetRecordKey(childIndex)).GetWeight() <= records.at(GetRecordKey(nextChildIndex)).GetWeight())
-                {
-                    maxChildIndex = childIndex;
-                }
-                else
-                {
-                    maxChildIndex = nextChildIndex;
-                }
-            }
-            else
-            {
-                maxChildIndex = childIndex;
-            }
-
-            if (weight <= records.at(GetRecordKey(maxChildIndex)).GetWeight())
-            {
-                // 新值位于将树恢复为最小堆的正确位置。
-                break;
-            }
-
-            // 子项的值大于父项的值。交换父对象和子对象：
-
-            /// 将子对象移动到父对象的槽中。
-            pointers.at(parentIndex) = GetRecordKey(maxChildIndex);
-            SetIndex(parentIndex);
-
-            /// 将父对象移动到子对象的槽中。
-            pointers.at(maxChildIndex) = records.at(index).GetIndex();
-            SetIndex(maxChildIndex);
-
-            // 向下传播。
-            parentIndex = maxChildIndex;
-            childIndex = 2 * parentIndex + 1;
-        }
+        UpdateGreater(index, weight);
     }
     else if (weight < oldWeight)
     {
-        records.at(index).SetWeight(weight);
+        UpdateLess(index, weight);
+    }
+}
 
-        // 新值小于旧值。将其向根部传播。
-        auto childIndex = records.at(index).GetIndex();
-        while (childIndex > 0)
+template <typename KeyType, typename ValueType>
+void CoreTools::MinHeap<KeyType, ValueType>::UpdateGreater(int index, const ValueType& weight)
+{
+    records.at(index).SetWeight(weight);
+
+    /// 新值大于旧值。把它传播到节点上。
+    auto parentIndex = records.at(index).GetIndex();
+    auto childIndex = 2 * parentIndex + 1;
+    while (childIndex < numElements)
+    {
+        /// 至少存在一个子项。找到最大值之一。
+        const auto maxChildIndex = GetMaxChildIndex(childIndex);
+
+        if (weight <= records.at(GetRecordKey(maxChildIndex)).GetWeight())
         {
-            const auto parentIndex = (childIndex - 1) / 2;
-
-            if (records.at(GetRecordKey(parentIndex)).GetWeight() <= weight)
-            {
-                // 新值位于将树恢复为最小堆堆的正确位置。
-                break;
-            }
-
-            // 父对象的值小于子对象的值。交换子对象和父对象。
-
-            /// 将子对象移动到父对象的槽中。
-            pointers.at(childIndex) = GetRecordKey(parentIndex);
-            records.at(GetRecordKey(childIndex)).SetIndex(childIndex);
-
-            /// 将父对象移动到子对象的槽中。
-            pointers.at(parentIndex) = records.at(index).GetIndex();
-            records.at(GetRecordKey(parentIndex)).SetIndex(parentIndex);
-
-            // 向下传播。
-            childIndex = parentIndex;
+            /// 新值位于将树恢复为最小堆的正确位置。
+            break;
         }
+
+        /// 子项的值大于父项的值。交换父对象和子对象：
+
+        /// 将子对象移动到父对象的槽中。
+        pointers.at(parentIndex) = GetRecordKey(maxChildIndex);
+        SetIndex(parentIndex);
+
+        /// 将父对象移动到子对象的槽中。
+        pointers.at(maxChildIndex) = index;
+        SetIndex(maxChildIndex);
+
+        /// 向下传播。
+        parentIndex = maxChildIndex;
+        childIndex = 2 * parentIndex + 1;
+    }
+}
+
+template <typename KeyType, typename ValueType>
+int CoreTools::MinHeap<KeyType, ValueType>::GetMaxChildIndex(int childIndex)
+{
+    if (const auto nextChildIndex = childIndex + 1;
+        nextChildIndex < numElements)
+    {
+        /// 有两个子节点。
+        if (records.at(GetRecordKey(childIndex)).GetWeight() <= records.at(GetRecordKey(nextChildIndex)).GetWeight())
+        {
+            return childIndex;
+        }
+        else
+        {
+            return nextChildIndex;
+        }
+    }
+    else
+    {
+        return childIndex;
+    }
+}
+
+template <typename KeyType, typename ValueType>
+void CoreTools::MinHeap<KeyType, ValueType>::UpdateLess(int index, const ValueType& weight)
+{
+    records.at(index).SetWeight(weight);
+
+    /// 新值小于旧值。将其向根部传播。
+    auto childIndex = records.at(index).GetIndex();
+    while (childIndex > 0)
+    {
+        const auto parentIndex = (childIndex - 1) / 2;
+
+        if (records.at(GetRecordKey(parentIndex)).GetWeight() <= weight)
+        {
+            /// 新值位于将树恢复为最小堆堆的正确位置。
+            break;
+        }
+
+        /// 父对象的值小于子对象的值。交换子对象和父对象。
+
+        /// 将子对象移动到父对象的槽中。
+        pointers.at(childIndex) = GetRecordKey(parentIndex);
+        records.at(GetRecordKey(childIndex)).SetIndex(childIndex);
+
+        /// 将父对象移动到子对象的槽中。
+        pointers.at(parentIndex) = index;
+        records.at(GetRecordKey(parentIndex)).SetIndex(parentIndex);
+
+        /// 向下传播。
+        childIndex = parentIndex;
     }
 }
 
 template <typename KeyType, typename ValueType>
 CoreTools::MinHeapRecord<KeyType, ValueType> CoreTools::MinHeap<KeyType, ValueType>::GetRecord(int index) const
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_3;
 
     return records.at(index);
 }
@@ -319,7 +347,7 @@ CoreTools::MinHeapRecord<KeyType, ValueType> CoreTools::MinHeap<KeyType, ValueTy
 template <typename KeyType, typename ValueType>
 KeyType CoreTools::MinHeap<KeyType, ValueType>::GetHandle(int index) const
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_3;
 
     return records.at(index).GetHandle();
 }
@@ -327,7 +355,7 @@ KeyType CoreTools::MinHeap<KeyType, ValueType>::GetHandle(int index) const
 template <typename KeyType, typename ValueType>
 ValueType CoreTools::MinHeap<KeyType, ValueType>::GetWeight(int index) const
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_3;
 
     return records.at(index).GetWeight();
 }

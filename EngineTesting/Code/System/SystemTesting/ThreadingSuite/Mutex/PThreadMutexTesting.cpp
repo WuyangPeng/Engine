@@ -52,9 +52,9 @@ void System::PThreadMutexTesting::ThreadTest()
 
 void System::PThreadMutexTesting::PThreadMutexInitTest(PThreadMutexAttrT& attribute, PThreadMutexT& mutex)
 {
-    ASSERT_ENUM_EQUAL(PThreadMutexAttributeInit(&attribute), PThreadResult::Successful);
-    ASSERT_ENUM_EQUAL(PThreadMutexAttributeSetType(&attribute), PThreadResult::Successful);
-    ASSERT_ENUM_EQUAL(PThreadMutexInit(&attribute, &mutex), PThreadResult::Successful);
+    ASSERT_EQUAL(PThreadMutexAttributeInit(&attribute), PThreadResult::Successful);
+    ASSERT_EQUAL(PThreadMutexAttributeSetType(&attribute), PThreadResult::Successful);
+    ASSERT_EQUAL(PThreadMutexInit(&attribute, &mutex), PThreadResult::Successful);
 }
 
 void System::PThreadMutexTesting::CreateThread(PThreadMutexT& mutex)
@@ -72,8 +72,8 @@ void System::PThreadMutexTesting::CreateThread(PThreadMutexT& mutex)
 
 void System::PThreadMutexTesting::PThreadMutexDestroyTest(PThreadMutexT& mutex, PThreadMutexAttrT& attribute)
 {
-    ASSERT_ENUM_EQUAL(PThreadMutexDestroy(&mutex), PThreadResult::Successful);
-    ASSERT_ENUM_EQUAL(PThreadMutexAttributeDestroy(&attribute), PThreadResult::Successful);
+    ASSERT_EQUAL(PThreadMutexDestroy(&mutex), PThreadResult::Successful);
+    ASSERT_EQUAL(PThreadMutexAttributeDestroy(&attribute), PThreadResult::Successful);
 }
 
 void System::PThreadMutexTesting::TryLockTest()
@@ -92,7 +92,7 @@ void System::PThreadMutexTesting::TryLockTest()
 
 void System::PThreadMutexTesting::TryLockTimeoutThreadTest(PThreadMutexT& mutex)
 {
-    ASSERT_ENUM_EQUAL(PThreadMutexLock(&mutex), PThreadResult::Successful);
+    ASSERT_EQUAL(PThreadMutexLock(&mutex), PThreadResult::Successful);
 
     boost::thread thread{ [this, &mutex]() {
         this->TryLockTimeoutTest(&mutex);
@@ -100,7 +100,7 @@ void System::PThreadMutexTesting::TryLockTimeoutThreadTest(PThreadMutexT& mutex)
 
     thread.join();
 
-    ASSERT_ENUM_EQUAL(PThreadMutexUnlock(&mutex), PThreadResult::Successful);
+    ASSERT_EQUAL(PThreadMutexUnlock(&mutex), PThreadResult::Successful);
 }
 
 void System::PThreadMutexTesting::TryLockSuccessThreadTest(PThreadMutexT& mutex)
@@ -114,7 +114,7 @@ void System::PThreadMutexTesting::TryLockSuccessThreadTest(PThreadMutexT& mutex)
 
 void System::PThreadMutexTesting::WaitForMutexTest(PThreadMutexT* mutex)
 {
-    ASSERT_ENUM_EQUAL(PThreadMutexLock(mutex), PThreadResult::Successful);
+    ASSERT_EQUAL(PThreadMutexLock(mutex), PThreadResult::Successful);
 
     const auto original = threadSum;
 
@@ -127,17 +127,17 @@ void System::PThreadMutexTesting::WaitForMutexTest(PThreadMutexT* mutex)
 
     ++threadSum;
 
-    ASSERT_ENUM_EQUAL(PThreadMutexUnlock(mutex), PThreadResult::Successful);
+    ASSERT_EQUAL(PThreadMutexUnlock(mutex), PThreadResult::Successful);
 }
 
 void System::PThreadMutexTesting::TryLockTimeoutTest(PThreadMutexT* mutex)
 {
-    ASSERT_ENUM_UNEQUAL(PThreadMutexTryLock(mutex), PThreadResult::Successful);
+    ASSERT_UNEQUAL(PThreadMutexTryLock(mutex), PThreadResult::Successful);
 }
 
 void System::PThreadMutexTesting::TryLockSuccessTest(PThreadMutexT* mutex)
 {
-    ASSERT_ENUM_EQUAL(PThreadMutexTryLock(mutex), PThreadResult::Successful);
+    ASSERT_EQUAL(PThreadMutexTryLock(mutex), PThreadResult::Successful);
 
-    ASSERT_ENUM_EQUAL(PThreadMutexUnlock(mutex), PThreadResult::Successful);
+    ASSERT_EQUAL(PThreadMutexUnlock(mutex), PThreadResult::Successful);
 }

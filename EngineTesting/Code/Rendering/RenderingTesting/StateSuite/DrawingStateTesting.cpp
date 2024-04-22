@@ -71,7 +71,7 @@ void Rendering::DrawingStateTesting::DrawingStateTrueTest(GraphicsObjectType typ
     auto drawingStateTest = DrawingStateTest::Create(name, type);
 
     ASSERT_EQUAL(drawingStateTest->GetName(), name);
-    ASSERT_ENUM_EQUAL(drawingStateTest->GetType(), type);
+    ASSERT_EQUAL(drawingStateTest->GetType(), type);
 
     ASSERT_TRUE(drawingStateTest->IsDrawingState());
 

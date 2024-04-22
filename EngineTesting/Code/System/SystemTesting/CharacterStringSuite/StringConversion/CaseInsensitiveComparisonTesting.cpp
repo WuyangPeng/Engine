@@ -51,8 +51,8 @@ void System::CaseInsensitiveComparisonTesting::CaseInsensitiveComparisonTest()
 void System::CaseInsensitiveComparisonTesting::CompareStringOrdinalUseBinaryTest(wchar_t lower, wchar_t capital)
 {
     const auto ignoreCaseResult = CompareStringOrdinalUseBinary(std::wstring{ lower }, std::wstring{ capital }, true);
-    ASSERT_ENUM_EQUAL(ignoreCaseResult, ComparesStringReturn::Equal);
+    ASSERT_EQUAL(ignoreCaseResult, ComparesStringReturn::Equal);
 
     const auto caseResult = CompareStringOrdinalUseBinary(std::wstring{ lower }, std::wstring{ capital }, false);
-    ASSERT_ENUM_EQUAL(caseResult, ComparesStringReturn::GreaterThan);
+    ASSERT_EQUAL(caseResult, ComparesStringReturn::GreaterThan);
 }

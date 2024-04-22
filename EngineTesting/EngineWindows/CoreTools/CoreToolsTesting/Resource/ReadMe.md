@@ -20,7 +20,8 @@
 （4） 类不变式宏：ClassInvariantMacroTesting、
 			      ModuleClassInvariantMacroTesting。
 （5） 断言宏：CustomAssertMacroTesting、
-			  ModuleCustomAssertMacroTesting。
+			  ModuleCustomAssertMacroTesting、
+			  FunctionProhibitedFromCallingTesting。
 （6） 导出宏：ExportMacroTesting、
 			  ModuleExportMacroTesting、
 			  CopyModuleExportMacroTesting、
@@ -102,8 +103,8 @@
 （3）忽略大小写的字符类：CaseInsensitiveStringTesting、
 						 CaseInsensitiveStringIOStreamTesting。 
 （4）字符串工具：StringUtilityTesting。
-（5）代码映射：CodeMappingTesting、★★★
-			   CodeMappingAnalysis。★★★
+（5）代码映射：CodeMappingTesting、
+			   CodeMappingAnalysisTesting。
 
 ----------------------------
 5.   ExceptionSuite 
@@ -146,14 +147,14 @@
 对文件管理模块的单元测试，包括：
 （1）字节序：ByteSwapperTesting、
 			 ByteSwapTesting、
-			 TypeAliaserTesting、
+			 TypeAliasTesting、
 			 EndianTesting。
 （2）文件缓冲区：FileBufferTesting。
 （3）C文件管理：CWriteFileManagerTesting、
 			    CReadFileManagerTesting、
 				CFileManagerTesting。
-（4）C++文件管理：OFStreamManagerTesting、
-				  IFStreamManagerTesting。
+（4）C++文件管理：OFileStreamManagerTesting、
+				  IFileStreamManagerTesting。
 （5）删除文件工具：DeleteFileToolsTesting。
 （6）复制文件工具：CopyFileToolsTesting。
 （7）Handle文件管理：WriteFileHandleTesting、
@@ -197,6 +198,7 @@
 				  RowRangeTesting、
 				  RowTesting、
 				  RowDataProxyTesting、
+				  RowIteratorTesting、
 				  SheetBaseTesting、
 				  WorksheetTesting、
 				  AppPropertiesTesting、
@@ -239,13 +241,6 @@
 			  CSVConfigureTesting、
 			  DataTypeDescribeTesting、
 			  CSVConfigureLoadingTesting。
-（7）json解析： JsonHeadTesting、
-				JsonNodeContainerTesting、
-				JsonNodeTesting、
-				JsonGenerateTesting、
-				JsonRowTesting、
-				JsonConfigureTesting、
-				JsonTotalGenerateTesting。 
 
 ----------------------------
 10.	 LogManagerSuite 
@@ -261,7 +256,8 @@
 			 AppenderTesting。
 （6）日志记录器：LoggerTesting。
 （7）日志文件名：LogFileNameTesting。
-（8）日志IO管理：LogAppenderIOManagerTesting。
+（8）日志IO管理：LogAppenderIOManagerTesting、
+				 LogAppenderIOManagerSignTesting。
 （9）日志管理：LogTesting、
 			   LogAsynchronousTesting、
 			   LogHelperTesting。
@@ -273,7 +269,8 @@
 （1）元组：TupleTesting、
 		   TupleLessTesting。
 （2）表：TableTesting。
-（3）最小堆：MinHeapTesting。
+（3）最小堆：MinHeapRecordTesting、
+			 MinHeapTesting。
 （4）线程安全容器：ThreadSafeMapTesting、
 				   ThreadSafeQueueTesting。
 
@@ -314,13 +311,13 @@
 					  FileInStreamTesting、
 					  FileOutStreamTesting、
 					  InTopLevelTesting、
-					  StreamSizeTesting、
-					  StreamTesting。
-（5） 对象系统管理器：ObjectLinkTesting、
-					  ObjectManagerTesting、
-					  ObjectRegisterTesting、
-					  ObjectTesting、
 					  OutTopLevelTesting、
+					  StreamSizeTesting、
+					  StreamTesting、
+					  ObjectLinkTesting、
+					  ObjectRegisterTesting。
+（5） 对象系统管理器：ObjectManagerTesting、
+					  ObjectTesting、					 
 					  ConstObjectAssociatedTesting、
 					  ConstWeakObjectAssociatedTesting、
 					  ObjectAssociatedTesting、
@@ -479,19 +476,7 @@
 （1） 网络。
 
 ----------------------------
-29.  ZlibSuite 
-
-对zlib模块的单元测试，包括：
-（1） zlib。
-
-----------------------------
-30.  FreetypeSuite 
-
-对freetype模块的单元测试，包括：
-（1）freetype。
-
-----------------------------
-31.  CoroutineSuite 
+29.  CoroutineSuite 
 
 对协程模块的单元测试，包括：
 （1）协程。

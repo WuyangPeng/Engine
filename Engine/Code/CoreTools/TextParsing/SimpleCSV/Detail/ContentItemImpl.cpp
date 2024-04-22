@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:05)
+/// 版本：1.0.0.8 (2024/04/11 11:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -53,13 +53,13 @@ CoreTools::SimpleCSV::ContentItemImpl::StringFromTypeContent CoreTools::SimpleCS
                                                  { ContentType::ChartColorStyle, "application/vnd.ms-office.chartcolorstyle+xml"s },
                                                  { ContentType::ControlProperties, "application/vnd.ms-excel.controlproperties+xml"s },
                                                  { ContentType::CalculationChain, "application/vnd.openxmlformats-officedocument.spreadsheetml.calcChain+xml"s },
-                                                 { ContentType::VBAProject, "application/vnd.ms-office.vbaProject"s },
+                                                 { ContentType::VbaProject, "application/vnd.ms-office.vbaProject"s },
                                                  { ContentType::CoreProperties, "application/vnd.openxmlformats-package.core-properties+xml"s },
                                                  { ContentType::ExtendedProperties, "application/vnd.openxmlformats-officedocument.extended-properties+xml"s },
                                                  { ContentType::CustomProperties, "application/vnd.openxmlformats-officedocument.custom-properties+xml"s },
                                                  { ContentType::Comments, "application/vnd.openxmlformats-officedocument.spreadsheetml.comments+xml"s },
                                                  { ContentType::Table, "application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml"s },
-                                                 { ContentType::VMLDrawing, "application/vnd.openxmlformats-officedocument.vmlDrawing"s } };
+                                                 { ContentType::VmlDrawing, "application/vnd.openxmlformats-officedocument.vmlDrawing"s } };
 
     return stringFromTypeContent;
 }
@@ -70,9 +70,9 @@ CoreTools::SimpleCSV::ContentItemImpl::TypeFromStringContent CoreTools::SimpleCS
 
     TypeFromStringContent typeFromStringContent{};
 
-    for (const auto& element : stringFromTypeContent)
+    for (const auto& [contentType, element] : stringFromTypeContent)
     {
-        typeFromStringContent.emplace(element.second, element.first);
+        typeFromStringContent.emplace(element, contentType);
     }
 
     return typeFromStringContent;
@@ -82,7 +82,8 @@ CoreTools::SimpleCSV::ContentType CoreTools::SimpleCSV::ContentItemImpl::GetType
 {
     static const auto typeFromStringContent = GetTypeFromStringContent();
 
-    if (const auto iter = typeFromStringContent.find(typeString); iter != typeFromStringContent.cend())
+    if (const auto iter = typeFromStringContent.find(typeString);
+        iter != typeFromStringContent.cend())
     {
         return iter->second;
     }
@@ -94,7 +95,8 @@ std::string CoreTools::SimpleCSV::ContentItemImpl::GetStringFromType(ContentType
 {
     static const auto stringFromTypeContent = GetStringFromTypeContent();
 
-    if (const auto iter = stringFromTypeContent.find(type); iter != stringFromTypeContent.cend())
+    if (const auto iter = stringFromTypeContent.find(type);
+        iter != stringFromTypeContent.cend())
     {
         return iter->second;
     }

@@ -39,9 +39,9 @@ void System::WindowsExtensionPrototypesTesting::MainTest()
 void System::WindowsExtensionPrototypesTesting::WinSockLastErrorTest()
 {
     const auto errorSuccess = GetWinSockLastError();
-    ASSERT_ENUM_EQUAL(WinSockLastError::ErrorSuccess, errorSuccess);
+    ASSERT_EQUAL(WinSockLastError::ErrorSuccess, errorSuccess);
 
     SetWinSockLastError(WinSockLastError::Cancelled);
     const auto lastError = GetWinSockLastError();
-    ASSERT_ENUM_EQUAL(WinSockLastError::Cancelled, lastError);
+    ASSERT_EQUAL(WinSockLastError::Cancelled, lastError);
 }

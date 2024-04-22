@@ -31,6 +31,6 @@ namespace CSVConfigure
 }
 
 template <>
-NODISCARD CSVConfigure::VectorType CoreTools::CSVRow::StringCastEnum<CSVConfigure::VectorType>(const String& describe) const
-;
+NODISCARD CSVConfigure::VectorType CoreTools::CSVRow::StringCastEnum<CSVConfigure::VectorType>(const String& describe) const;
+
 #endif  // C_S_V_CONFIGURE_VECTOR_TYPE_H

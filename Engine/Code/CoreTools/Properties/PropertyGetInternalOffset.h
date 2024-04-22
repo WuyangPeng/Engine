@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:15)
+/// 版本：1.0.0.8 (2024/04/12 15:02)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_GET_INTERNAL_OFFSET_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_GET_INTERNAL_OFFSET_H
@@ -14,12 +14,12 @@
 
 #include "CoreTools/Helper/PropertiesMacro.h"
 
-// 使用方式：
-// 类必须是1字节对齐
-// #pragma pack(push, 1)
-// 需要定义一个类似下面的静态函数：
-// static ptrdiff_t GetOffset()
-// { enum { offset = offsetof(Class, Property) }; return offset; }
+/// 使用方式：
+/// 类必须是1字节对齐
+/// #pragma pack(push, 1)
+/// 需要定义一个类似下面的静态函数：
+/// static ptrdiff_t GetOffset()
+/// { enum { offset = offsetof(Class, Property) }; return offset; }
 
 namespace CoreTools
 {

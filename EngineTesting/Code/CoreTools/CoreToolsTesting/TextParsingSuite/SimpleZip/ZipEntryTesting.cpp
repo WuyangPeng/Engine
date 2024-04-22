@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 10:35)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 09:42)
 
 #include "ZipEntryTesting.h"
 #include "System/CharacterString/FormatString.h"
@@ -93,7 +93,7 @@ void CoreTools::ZipEntryTesting::ZipEntryInfoTest()
     zipEntry.SetData(SimpleZip::ZipEntryData{ '1', '2' });
     ASSERT_EQUAL(2u, zipEntry.GetEntrySize());
 
-    zipEntry.SetData("12345"s);
+    zipEntry.SetData("12345");
     ASSERT_EQUAL(5u, zipEntry.GetEntrySize());
 }
 
@@ -169,13 +169,13 @@ void CoreTools::ZipEntryTesting::ZipEntryDataTest()
     zipEntry.SetData(SimpleZip::ZipEntryData{ '1', '2', '3' });
     ASSERT_EQUAL(3u, zipEntry.GetEntrySize());
 
-    zipEntry.SetData("12345"s);
+    zipEntry.SetData("12345");
     ASSERT_EQUAL(5u, zipEntry.GetEntrySize());
 }
 
 void CoreTools::ZipEntryTesting::StringDataTest()
 {
-    SimpleZip::ZipEntry zipEntry{ "ZipEntryInfo.zip", "12"s };
+    SimpleZip::ZipEntry zipEntry{ "ZipEntryInfo.zip", "12" };
 
     const auto zipEntryData = zipEntry.GetEntryData();
     ASSERT_FALSE(zipEntryData.empty());
@@ -216,7 +216,7 @@ void CoreTools::ZipEntryTesting::StringDataTest()
     zipEntry.SetData(SimpleZip::ZipEntryData{ '1', '2', '3' });
     ASSERT_EQUAL(3u, zipEntry.GetEntrySize());
 
-    zipEntry.SetData("12345"s);
+    zipEntry.SetData("12345");
     ASSERT_EQUAL(5u, zipEntry.GetEntrySize());
 }
 
@@ -248,7 +248,7 @@ void CoreTools::ZipEntryTesting::ReaderExtractFileToMemTest()
     mz_zip_archive archive{};
     if (!mz_zip_reader_init_file(&archive, zipArchiveFileName.c_str(), 0))
     {
-        THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(mz_zip_get_error_string(archive.m_last_error)));
+        THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(mz_zip_get_error_string(archive.m_last_error)))
     }
 
     const auto fileIndex = boost::numeric_cast<mz_uint32>(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::ZipFile));

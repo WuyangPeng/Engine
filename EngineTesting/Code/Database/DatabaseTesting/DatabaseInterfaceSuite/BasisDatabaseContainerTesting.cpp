@@ -88,7 +88,7 @@ void Database::BasisDatabaseContainerTesting::GetAnyValueTest()
 
     for (const auto& value : basisDatabaseContainer)
     {
-        ASSERT_ENUM_EQUAL(value.GetDataType(), DataType::Int32);
+        ASSERT_EQUAL(value.GetDataType(), DataType::Int32);
         ASSERT_EQUAL(std::any_cast<int32_t>(value.GetAnyValue()), 7);
     }
 

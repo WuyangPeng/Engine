@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:12)
+/// 版本：1.0.0.8 (2024/03/28 10:58)
 
 #ifndef CORE_TOOLS_HELPER_RTTI_MACRO_H
 #define CORE_TOOLS_HELPER_RTTI_MACRO_H
@@ -27,7 +27,7 @@
 #define CORE_TOOLS_RTTI_DEFINE(namespaceName, className)                                                                                         \
     const CoreTools::Rtti& namespaceName::className::GetRttiType() const noexcept                                                                \
     {                                                                                                                                            \
-        CLASS_IS_VALID_CONST_0;                                                                                                                  \
+        CORE_TOOLS_CLASS_IS_VALID_CONST_1;                                                                                                       \
         return GetCurrentRttiType();                                                                                                             \
     }                                                                                                                                            \
     const CoreTools::Rtti& namespaceName::className::GetCurrentRttiType() noexcept                                                               \
@@ -39,7 +39,7 @@
 #define CORE_TOOLS_RTTI_BASE_DEFINE(namespaceName, className)                                                          \
     const CoreTools::Rtti& namespaceName::className::GetRttiType() const noexcept                                      \
     {                                                                                                                  \
-        CLASS_IS_VALID_CONST_0;                                                                                        \
+        CORE_TOOLS_CLASS_IS_VALID_CONST_1;                                                                             \
         return GetCurrentRttiType();                                                                                   \
     }                                                                                                                  \
     const CoreTools::Rtti& namespaceName::className::GetCurrentRttiType() noexcept                                     \

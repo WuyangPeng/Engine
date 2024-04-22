@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:16)
+/// 版本：1.0.0.8 (2024/04/12 15:01)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_GET_SET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_GET_SET_EXTERNAL_H
@@ -21,6 +21,9 @@ namespace CoreTools
               GetReference (T::*PropertyGet)() const,
               typename SetReference,
               void (T::*PropertySet)(SetReference)>
+    requires(std::is_const_v<std::remove_reference_t<GetReference>> &&
+             std::is_reference_v<GetReference> &&
+             std::is_reference_v<SetReference>)
     class PropertyGetSetExternal final
     {
     public:

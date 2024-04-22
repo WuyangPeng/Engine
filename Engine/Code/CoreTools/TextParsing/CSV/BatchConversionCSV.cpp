@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:53)
+/// 版本：1.0.0.8 (2024/04/03 00:12)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -30,16 +30,21 @@ void CoreTools::BatchConversionCSV::Execution(const String& inputDirectory, cons
     for (const std::filesystem::path path{ StringConversion::StandardConversionWideChar(inputDirectory) };
          const auto& inputPath : std::filesystem::directory_iterator(path))
     {
+        Execution(outputDirectory, inputPath);
+    }
+}
+
+void CoreTools::BatchConversionCSV::Execution(const String& outputDirectory, const DirectoryEntry& inputPath)
+{
 #ifdef SYSTEM_PLATFORM_LINUX
 
-        const auto& nativeFileName = StringConversion::MultiByteConversionStandard(inputPath.path().native());
+    const auto& nativeFileName = StringConversion::MultiByteConversionStandard(inputPath.path().native());
 
 #else  // !SYSTEM_PLATFORM_LINUX
 
-        const auto& nativeFileName = StringConversion::WideCharConversionStandard(inputPath.path().native());
+    const auto& nativeFileName = StringConversion::WideCharConversionStandard(inputPath.path().native());
 
 #endif  // SYSTEM_PLATFORM_LINUX
 
-        const BatchConversionCSVImpl impl{ nativeFileName, outputDirectory };
-    }
+    const BatchConversionCSVImpl impl{ nativeFileName, outputDirectory };
 }

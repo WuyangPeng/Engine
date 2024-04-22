@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:49)
+/// 版本：1.0.0.8 (2024/04/02 15:45)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ROW_DATA_PROXY_H
 #define CORE_TOOLS_TEXT_PARSING_ROW_DATA_PROXY_H
@@ -58,22 +58,27 @@ namespace CoreTools::SimpleCSV
         NODISCARD explicit operator std::deque<CellValue>() const;
         NODISCARD explicit operator std::list<CellValue>() const;
 
-        template <typename T, std::enable_if_t<!std::is_same_v<T, RowDataProxy> && TextParsing::RowDataProxyConditionType<T>::value, T>* = nullptr>
+        template <typename T>
+        requires(!std::is_same_v<T, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<T>::value)
         RowDataProxy& operator=(const T& rhs);
 
-        template <typename Container, std::enable_if_t<!std::is_same_v<Container, RowDataProxy> && TextParsing::RowDataProxyConditionType<Container>::value, Container>* = nullptr>
+        template <typename Container>
+        requires(!std::is_same_v<Container, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<Container>::value)
         NODISCARD explicit operator Container() const;
 
     private:
-        template <typename Container, std::enable_if_t<!std::is_same_v<Container, RowDataProxy> && TextParsing::RowDataProxyConditionType<Container>::value, Container>* = nullptr>
+        template <typename Container>
+        requires(!std::is_same_v<Container, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<Container>::value)
         NODISCARD Container ConvertContainer() const;
 
         NODISCARD ConstXMLDocumentSharedPtr GetDocument();
 
-        template <typename T, std::enable_if_t<!std::is_same_v<T, RowDataProxy> && TextParsing::RowDataProxyConditionType<T>::value, T>* = nullptr>
+        template <typename T>
+        requires(!std::is_same_v<T, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<T>::value)
         void SetCellValue(const T& rhs);
 
-        template <typename T, std::enable_if_t<!std::is_same_v<T, RowDataProxy> && TextParsing::RowDataProxyConditionType<T>::value, T>* = nullptr>
+        template <typename T>
+        requires(!std::is_same_v<T, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<T>::value)
         void SetContainer(const T& rhs);
 
     private:

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:30)
+/// 版本：1.0.0.8 (2024/04/02 22:51)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_ENUM_HEAD_FILE_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_ENUM_HEAD_FILE_H
@@ -34,8 +34,13 @@ namespace CoreTools
         NODISCARD String GetFileSuffix() const override;
         NODISCARD String GetContent(const String& codeDirectory) const override;
 
+        NODISCARD String GetClassNameMemberContent() const;
+        NODISCARD String GetClassNameMemberContent(int idIndex, int nameIndex, int describeIndex, int index) const;
+
     private:
         CSVContent csvContent;
+        String templateName;
+        String classNameMember;
     };
 }
 

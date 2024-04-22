@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:14)
+/// 版本：1.0.0.8 (2024/03/28 11:02)
 
 #ifndef CORE_TOOLS_HELPER_GET_REQUIRED_BITS_H
 #define CORE_TOOLS_HELPER_GET_REQUIRED_BITS_H
@@ -14,11 +14,9 @@
 
 namespace CoreTools
 {
-    template <int Value, int Bits>
+    template <uint64_t Value, int Bits>
     struct GetRequiredBitsHelper
     {
-        static_assert(0 <= Value);
-
         static constexpr auto result = GetRequiredBitsHelper<(Value >> 1), Bits + 1>::result;
     };
 
@@ -28,11 +26,9 @@ namespace CoreTools
         static constexpr auto result = Bits;
     };
 
-    template <int Value>
+    template <uint64_t Value>
     struct GetRequiredBits
     {
-        static_assert(0 <= Value);
-
         static constexpr auto result = GetRequiredBitsHelper<Value, 0>::result;
     };
 }

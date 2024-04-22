@@ -5,14 +5,13 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:50)
+/// 版本：1.0.0.8 (2024/04/12 15:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CallbackParameters.h"
 #include "Detail/CallbackParametersImplDetail.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 CoreTools::CallbackParameters::CallbackParameters(int count)
     : impl{ count }
@@ -126,7 +125,7 @@ void CoreTools::CallbackParameters::SetValue(int index, const ParametersInterfac
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    // 复制一份，确保CallbackParameters内保存的smartPointer无法被二次修改。
+    /// 复制一份，确保CallbackParameters内保存的smartPointer无法被二次修改。
     return impl->SetValue<ConstParametersInterfaceSharedPtr>(index, parameters.Clone());
 }
 

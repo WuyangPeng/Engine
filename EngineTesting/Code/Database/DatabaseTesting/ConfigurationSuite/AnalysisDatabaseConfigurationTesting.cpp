@@ -39,7 +39,7 @@ void Database::AnalysisDatabaseConfigurationTesting::ConfigurationTest()
 
     const auto gameServer = analysisDatabaseConfiguration.GetConfigurationStrategy(SYSTEM_TEXT("GameServerDB"));
 
-    ASSERT_ENUM_EQUAL(gameServer.GetWrappersStrategy(), WrappersStrategy::MysqlConnector);
+    ASSERT_EQUAL(gameServer.GetWrappersStrategy(), WrappersStrategy::MysqlConnector);
     ASSERT_EQUAL(gameServer.GetIp(), "43.139.123.106");
     ASSERT_EQUAL(gameServer.GetPort(), 33060);
     ASSERT_EQUAL(gameServer.GetDBHostName(), "tcretest");
@@ -50,7 +50,7 @@ void Database::AnalysisDatabaseConfigurationTesting::ConfigurationTest()
 
     const auto gameClient = analysisDatabaseConfiguration.GetConfigurationStrategy(SYSTEM_TEXT("GameClientDB"));
 
-    ASSERT_ENUM_EQUAL(gameClient.GetWrappersStrategy(), WrappersStrategy::SQLite);
+    ASSERT_EQUAL(gameClient.GetWrappersStrategy(), WrappersStrategy::SQLite);
     ASSERT_EQUAL(gameClient.GetIp(), "127.0.0.1");
     ASSERT_EQUAL(gameClient.GetPort(), 8011);
     ASSERT_EQUAL(gameClient.GetDBHostName(), "dbName");

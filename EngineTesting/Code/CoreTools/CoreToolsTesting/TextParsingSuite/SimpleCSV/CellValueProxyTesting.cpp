@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:12)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 16:35)
 
 #include "CellValueProxyTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -57,27 +57,27 @@ void CoreTools::CellValueProxyTesting::CellValueProxyTypeTest()
     auto cell = worksheet.GetCell(1, 1);
     auto cellValueProxy = cell->GetValue();
 
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
 
     cell = worksheet.GetCell(6, 1);
     cellValueProxy = cell->GetValue();
 
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Integer);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Integer);
 
     cell = worksheet.GetCell(6, 2);
     cellValueProxy = cell->GetValue();
 
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
 
     cell = worksheet.GetCell(6, 5);
     cellValueProxy = cell->GetValue();
 
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Float);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Float);
 
     cell = worksheet.GetCell(3, 5);
     cellValueProxy = cell->GetValue();
 
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Empty);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Empty);
 }
 
 void CoreTools::CellValueProxyTesting::CellValueProxySetTest()
@@ -93,27 +93,27 @@ void CoreTools::CellValueProxyTesting::CellValueProxySetTest()
     auto cellValueProxy = cell->GetValue();
 
     cellValueProxy.SetError();
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Error);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Error);
     ASSERT_EQUAL(cellValueProxy.GetTypeAsString(), "error"s);
 
     cellValueProxy.Clear();
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Empty);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Empty);
     ASSERT_EQUAL(cellValueProxy.GetTypeAsString(), "empty"s);
 
     cellValueProxy.SetInteger(10);
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Integer);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Integer);
     ASSERT_EQUAL(cellValueProxy.GetTypeAsString(), "integer"s);
 
     cellValueProxy.SetBoolean(false);
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Boolean);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Boolean);
     ASSERT_EQUAL(cellValueProxy.GetTypeAsString(), "boolean"s);
 
     cellValueProxy.SetFloat(1.1);
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Float);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Float);
     ASSERT_EQUAL(cellValueProxy.GetTypeAsString(), "float"s);
 
     cellValueProxy.SetString("cellValueProxy"s);
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
     ASSERT_EQUAL(cellValueProxy.GetTypeAsString(), "string"s);
 }
 
@@ -130,7 +130,7 @@ void CoreTools::CellValueProxyTesting::CellValueTest()
     const auto cellValueProxy = cell->GetValue();
 
     const auto cellValue = cellValueProxy.GetValue();
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), cellValue.GetType());
+    ASSERT_EQUAL(cellValueProxy.GetType(), cellValue.GetType());
 }
 
 void CoreTools::CellValueProxyTesting::CreateEmptyTest()
@@ -153,31 +153,37 @@ void CoreTools::CellValueProxyTesting::CellValueSetTest()
     auto cellValueProxy = cell->GetValue();
 
     cellValueProxy.Set(5);
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Integer);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Integer);
     ASSERT_EQUAL(cellValueProxy.Get<int>(), 5);
 
     cellValueProxy.Set(5.1);
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Float);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Float);
     ASSERT_APPROXIMATE(cellValueProxy.Get<double>(), 5.1, Mathematics::MathD::epsilon);
 
     cellValueProxy.Set("cellValueProxy");
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
     ASSERT_EQUAL(cellValueProxy.Get<std::string>(), "cellValueProxy"s);
 
     cellValueProxy.Set("proxy"sv);
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
     ASSERT_EQUAL(cellValueProxy.Get<std::string>(), "proxy"s);
 
     cellValueProxy.Set("cellValue"s);
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
     ASSERT_EQUAL(cellValueProxy.Get<std::string>(), "cellValue");
 
     auto cellValue = cellValueProxy.GetValue();
     cellValue.Set(9);
 
     cellValueProxy.Set(cellValue);
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Integer);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Integer);
     ASSERT_EQUAL(cellValueProxy.Get<int>(), 9);
+
+    cellValue.Set(10);
+
+    cellValueProxy.SetCellValue(cellValue);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Integer);
+    ASSERT_EQUAL(cellValueProxy.Get<int>(), 10);
 }
 
 void CoreTools::CellValueProxyTesting::CellValueEqualTest()
@@ -193,26 +199,26 @@ void CoreTools::CellValueProxyTesting::CellValueEqualTest()
     auto cellValueProxy = cell->GetValue();
 
     cellValueProxy = 5;
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Integer);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Integer);
     ASSERT_EQUAL(cellValueProxy.Get<int>(), 5);
 
     cellValueProxy = 5.1;
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Float);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Float);
     ASSERT_APPROXIMATE(cellValueProxy.Get<double>(), 5.1, Mathematics::MathD::epsilon);
 
     cellValueProxy = "cellValueProxy";
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
     ASSERT_EQUAL(cellValueProxy.Get<std::string>(), "cellValueProxy"s);
 
     cellValueProxy = "cellValue"s;
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
     ASSERT_EQUAL(cellValueProxy.Get<std::string>(), "cellValue");
 
     auto cellValue = cellValueProxy.GetValue();
     cellValue.Set(9);
 
     cellValueProxy = cellValue;
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Integer);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Integer);
     ASSERT_EQUAL(cellValueProxy.Get<int>(), 9);
 }
 
@@ -227,5 +233,5 @@ void CoreTools::CellValueProxyTesting::CellTest()
 
     const auto cell = worksheet.GetCell(1, 1);
     const SimpleCSV::CellValueProxy cellValueProxy{ cell };
-    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
+    ASSERT_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
 }

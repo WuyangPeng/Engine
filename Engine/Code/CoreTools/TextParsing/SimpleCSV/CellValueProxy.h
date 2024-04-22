@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:48)
+/// 版本：1.0.0.8 (2024/04/02 17:39)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CELL_VALUE_PROXY_H
 #define CORE_TOOLS_TEXT_PARSING_CELL_VALUE_PROXY_H
@@ -46,13 +46,16 @@ namespace CoreTools::SimpleCSV
     public:
         CLASS_INVARIANT_DECLARE;
 
-        template <typename T, std::enable_if_t<TextParsing::cellValueProxyCondition<T> || std::is_same_v<std::decay_t<T>, CoreTools::SimpleCSV::CellValue>>* = nullptr>
+        template <typename T>
+        requires(CoreTools::TextParsing::cellValueProxyCondition<T> || std::is_same_v<std::decay_t<T>, CoreTools::SimpleCSV::CellValue>)
         CellValueProxy& operator=(T&& rhs);
 
-        template <typename T, std::enable_if_t<TextParsing::cellValueProxyCondition<T> || std::is_same_v<std::decay_t<T>, CoreTools::SimpleCSV::CellValue>>* = nullptr>
+        template <typename T>
+        requires(CoreTools::TextParsing::cellValueProxyCondition<T> || std::is_same_v<std::decay_t<T>, CoreTools::SimpleCSV::CellValue>)
         void Set(T&& rhs);
 
-        template <typename T, std::enable_if_t<TextParsing::cellValueCondition<T>>* = nullptr>
+        template <typename T>
+        requires(CoreTools::TextParsing::cellValueProxyCondition<T>)
         NODISCARD T Get() const;
 
         void Clear();

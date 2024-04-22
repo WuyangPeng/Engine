@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:13)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 16:52)
 
 #include "PropertiesTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -16,8 +16,6 @@
 #include "CoreTools/TextParsing/SimpleCSV/Row.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
-
-using namespace std::literals;
 
 CoreTools::PropertiesTesting::PropertiesTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -39,13 +37,13 @@ void CoreTools::PropertiesTesting::MainTest()
 
 void CoreTools::PropertiesTesting::PropertiesTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
-    document->SetProperty(SimpleCSV::Property::Title, "TCRE"s);
+    document->SetProperty(SimpleCSV::Property::Title, "TCRE");
 
-    ASSERT_EQUAL(document->GetProperty(SimpleCSV::Property::Title), "TCRE"s);
+    ASSERT_EQUAL(document->GetProperty(SimpleCSV::Property::Title), "TCRE");
 
     document->DeleteProperty(SimpleCSV::Property::Title);
 
-    ASSERT_EQUAL(document->GetProperty(SimpleCSV::Property::Title), ""s);
+    ASSERT_EQUAL(document->GetProperty(SimpleCSV::Property::Title), "");
 }

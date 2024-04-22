@@ -78,7 +78,7 @@ void System::VirtualProtectTesting::SetVirtualProtectTest(size_t index, WindowsV
 
     auto oldMemoryProtect = MemoryProtect::NoAccess;
     ASSERT_TRUE(SetVirtualProtect(baseVirtual, GetPageSize(), changeMemoryProtect, &oldMemoryProtect));
-    ASSERT_ENUM_EQUAL(oldMemoryProtect & memoryProtect, oldMemoryProtect);
+    ASSERT_EQUAL(oldMemoryProtect & memoryProtect, oldMemoryProtect);
 }
 
 void System::VirtualProtectTesting::DoProtectUseProcessTest(size_t index)
@@ -104,5 +104,5 @@ void System::VirtualProtectTesting::SetVirtualProtectUseProcessTest(size_t index
     auto oldMemoryProtect = MemoryProtect::NoAccess;
 
     ASSERT_TRUE(SetVirtualProtect(GetCurrentProcessHandle(), baseVirtual, GetPageSize(), changeMemoryProtect, &oldMemoryProtect));
-    ASSERT_ENUM_EQUAL(oldMemoryProtect & memoryProtect, oldMemoryProtect);
+    ASSERT_EQUAL(oldMemoryProtect & memoryProtect, oldMemoryProtect);
 }

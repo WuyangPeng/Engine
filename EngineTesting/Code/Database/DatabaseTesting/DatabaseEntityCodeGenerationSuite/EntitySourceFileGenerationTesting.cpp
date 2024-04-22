@@ -9,7 +9,7 @@
 
 #include "EntitySourceFileGenerationTesting.h"
 #include "CoreTools/CharacterString/CodeMappingAnalysis.h"
-#include "CoreTools/FileManager/OFStreamManager.h"
+#include "CoreTools/FileManager/OFileStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
@@ -48,7 +48,7 @@ void Database::EntitySourceFileGenerationTesting::CodeSourceFileGenerationTest()
                                                                codeEntityClass,
                                                                codeMappingAnalysis };
 
-        CoreTools::OFStreamManager streamManager{ SYSTEM_TEXT("Resource/DatabaseEntity/") + codeEntityClass.GetEntityClassName() + SYSTEM_TEXT(".cpp"), false };
+        CoreTools::OFileStreamManager streamManager{ SYSTEM_TEXT("Resource/DatabaseEntity/") + codeEntityClass.GetEntityClassName() + SYSTEM_TEXT(".cpp"), false };
         streamManager.SetSimplifiedChinese();
 
         streamManager << entitySourceFileGeneration.GetContent();

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/12 23:07)
+/// 版本：1.0.0.8 (2024/04/01 10:13)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -45,11 +45,6 @@ bool CoreTools::EnvironmentImpl::InsertDirectory(const String& directory)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (directory.empty())
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("Insert需要非空输入。"))
-    }
-
     const auto forwardSlashDirectory = GetReplaceBackslash(directory);
 
     if (const auto iter = std::ranges::find(directories, forwardSlashDirectory);
@@ -67,17 +62,14 @@ bool CoreTools::EnvironmentImpl::EraseDirectory(const String& directory)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (!directory.empty())
+    const auto forwardSlashDirectory = GetReplaceBackslash(directory);
+
+    if (const auto result = std::ranges::remove(directories, forwardSlashDirectory);
+        result.begin() != result.end())
     {
-        const auto forwardSlashDirectory = GetReplaceBackslash(directory);
+        directories.erase(result.begin(), result.end());
 
-        if (const auto result = std::ranges::remove(directories, forwardSlashDirectory);
-            result.begin() != result.end())
-        {
-            directories.erase(result.begin(), result.end());
-
-            return true;
-        }
+        return true;
     }
 
     return false;
@@ -85,7 +77,7 @@ bool CoreTools::EnvironmentImpl::EraseDirectory(const String& directory)
 
 System::String CoreTools::EnvironmentImpl::GetReplaceBackslash(String directory)
 {
-    CORE_TOOLS_ASSERTION_0(!directory.empty(), "目录必须非空。");
+    ASSERT_FAIL_THROW_EXCEPTION(!directory.empty(), SYSTEM_TEXT("目录必须非空。"))
 
     boost::algorithm::replace_all(directory, SYSTEM_TEXT("\\"), SYSTEM_TEXT("/"));
 
@@ -95,7 +87,7 @@ System::String CoreTools::EnvironmentImpl::GetReplaceBackslash(String directory)
     }
     else
     {
-        // 确保所有目录都以斜杠结尾。
+        /// 确保所有目录都以斜杠结尾。
         return directory + TextParsing::gForwardSlash;
     }
 }

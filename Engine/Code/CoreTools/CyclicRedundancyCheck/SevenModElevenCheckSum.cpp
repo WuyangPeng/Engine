@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:41)
+/// 版本：1.0.0.8 (2024/04/12 15:16)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,8 +14,6 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 #include <array>
-
-using namespace std::literals;
 
 int CoreTools::SevenModElevenCheckSum::GetPowers(int index)
 {
@@ -54,11 +52,11 @@ void CoreTools::SevenModElevenCheckSum::Calculation(const char* data, int length
     }
 
     auto sum = 0;
-    auto position = 0;  // 数据中的数字是什么
+    auto position = 0;  /// 数据中的数字是什么
 
     for (auto i = length; 0 < i; --i)
     {
-        // 判断是否是数字
+        /// 判断是否是数字
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
@@ -67,19 +65,19 @@ void CoreTools::SevenModElevenCheckSum::Calculation(const char* data, int length
             THROW_EXCEPTION(SYSTEM_TEXT("无效数字\n"s))
         }
 
-        // 将数字字符转换为数字
+        /// 将数字字符转换为数字
         const int digit{ data[i - 1] - '0' };
 
 #include SYSTEM_WARNING_POP
 
-        // 查找幂，乘以digit，加到和
+        /// 查找幂，乘以digit，加到和
 
         sum += GetPowers(position) * digit;
 
         ++position;
     }
 
-    // 得到的和求模11
+    /// 得到的和求模11
     auto mod = sum % 11;
 
     if (mod == 10)

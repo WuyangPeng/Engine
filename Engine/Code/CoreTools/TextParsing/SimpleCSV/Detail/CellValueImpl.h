@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:46)
+/// 版本：1.0.0.8 (2024/04/02 17:52)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CELL_VALUE_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CELL_VALUE_IMPL_H
@@ -35,13 +35,16 @@ namespace CoreTools::SimpleCSV
 
         CLASS_INVARIANT_DECLARE;
 
-        template <typename T, std::enable_if_t<TextParsing::cellValueCondition<T>>* = nullptr>
+        template <typename T>
+        requires(TextParsing::cellValueCondition<T>)
         CellValueImpl& operator=(T rhs);
 
-        template <typename T, std::enable_if_t<TextParsing::cellValueCondition<T>>* = nullptr>
+        template <typename T>
+        requires(TextParsing::cellValueCondition<T>)
         void Set(T rhs);
 
-        template <typename T, std::enable_if_t<TextParsing::cellValueCondition<T>>* = nullptr>
+        template <typename T>
+        requires(TextParsing::cellValueCondition<T>)
         NODISCARD T Get() const;
 
         void Clear() noexcept;
@@ -52,7 +55,10 @@ namespace CoreTools::SimpleCSV
         NODISCARD bool IsLess(const CellValueImpl& rhs) const noexcept;
 
     private:
-        std::variant<std::string, int64_t, double, bool> cellValue;
+        using VariantType = std::variant<std::string, int64_t, double, bool>;
+
+    private:
+        VariantType cellValue;
         ValueType cellType;
     };
 }

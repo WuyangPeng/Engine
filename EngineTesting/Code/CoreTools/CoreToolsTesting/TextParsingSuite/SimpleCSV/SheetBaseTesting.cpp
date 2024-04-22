@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:14)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 17:05)
 
 #include "SheetBaseTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -17,8 +17,6 @@
 #include "CoreTools/TextParsing/SimpleCSV/Worksheet.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
-
-using namespace std::literals;
 
 CoreTools::SheetBaseTesting::SheetBaseTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -40,13 +38,13 @@ void CoreTools::SheetBaseTesting::MainTest()
 
 void CoreTools::SheetBaseTesting::SheetBaseTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
     auto workbook = document->GetWorkbook();
     const auto worksheetNames = workbook.GetWorksheetNames();
     const auto& worksheetName = worksheetNames.at(0);
     auto worksheet = workbook.GetWorksheet(worksheetName);
 
-    worksheet.SetName("sheetName"s);
-    ASSERT_EQUAL("sheetName"s, worksheet.GetName());
+    worksheet.SetName("sheetName");
+    ASSERT_EQUAL("sheetName", worksheet.GetName());
 }

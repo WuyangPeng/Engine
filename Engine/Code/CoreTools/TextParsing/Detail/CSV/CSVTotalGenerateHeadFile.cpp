@@ -5,20 +5,25 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:58)
+/// 版本：1.0.0.8 (2024/04/11 10:16)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CSVTotalGenerateHeadFile.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
 #include "CoreTools/CharacterString/StringUtility.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
+#include <ranges>
+
 CoreTools::CSVTotalGenerateHeadFile::CSVTotalGenerateHeadFile(const String& nameSpace, const CSVHeadContainer& csvHeadContainer, const CodeMappingAnalysis& codeMappingAnalysis)
-    : ParentType{ nameSpace, csvHeadContainer, codeMappingAnalysis }
+    : ParentType{ nameSpace, csvHeadContainer, codeMappingAnalysis },
+      templateName{ SYSTEM_TEXT("/CSVEngineering.txt") },
+      includeEnum{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("IncludeEnum")) },
+      includeClass{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("IncludeClass")) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -32,79 +37,64 @@ System::String CoreTools::CSVTotalGenerateHeadFile::GetFileSuffix() const
 
 System::String CoreTools::CSVTotalGenerateHeadFile::GetContent(const String& codeDirectory) const
 {
-    auto content = GetTemplateContent(codeDirectory + SYSTEM_TEXT("/CSVEngineering.txt"));
+    auto content = GetTemplateContent(codeDirectory + templateName);
 
-    EnumType enumType{};
-    DataType dataType{};
+    const auto enumType = GetEnumType();
+    const auto dataType = GetHeadData();
 
-    for (const auto& element : GetCSVHeadContainer())
-    {
-        if (element.GetCSVFormatType() == CSVFormatType::Enum)
-        {
-            enumType.emplace(element.GetCSVClassName());
-        }
-        else
-        {
-            dataType.emplace(element.GetCSVClassName(), element);
-        }
-    }
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$IncludeEnum$"), GetIncludeEnumContent(enumType));
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$IncludeClass$"), GetIncludeClassContent(dataType));
 
-    const auto codeMapping = GetCodeMappingAnalysis();
-    const auto includeEnumDeclaration = codeMapping.GetElement(SYSTEM_TEXT("IncludeEnum"));
+    return ReplaceTemplate(content);
+}
 
-    String includeEnumContent{};
+System::String CoreTools::CSVTotalGenerateHeadFile::GetIncludeEnumContent(const ContainerType& enumType) const
+{
+    String content{};
     for (const auto& element : enumType)
     {
-        auto copyIncludeEnumDeclaration = includeEnumDeclaration;
-        boost::algorithm::replace_all(copyIncludeEnumDeclaration, SYSTEM_TEXT("$EnumName$"), element);
-
-        includeEnumContent += copyIncludeEnumDeclaration;
-        includeEnumContent += SYSTEM_TEXT("\n");
+        content += GetIncludeEnumContent(element);
     }
 
     if (!enumType.empty())
     {
-        includeEnumContent += SYSTEM_TEXT("\n");
+        content += TextParsing::gNewlineCharacter;
     }
 
-    boost::algorithm::replace_all(content, SYSTEM_TEXT("$IncludeEnum$"), includeEnumContent);
+    return content;
+}
 
-    const auto includeClassDeclaration = codeMapping.GetElement(SYSTEM_TEXT("IncludeClass"));
+System::String CoreTools::CSVTotalGenerateHeadFile::GetIncludeEnumContent(const String& element) const
+{
+    auto content = includeEnum;
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$EnumName$"), element);
 
-    String includeClassContent{};
-    for (const auto& element : dataType)
+    return content + TextParsing::gNewlineCharacter;
+}
+
+System::String CoreTools::CSVTotalGenerateHeadFile::GetIncludeClassContent(const HeadDataType& dataType) const
+{
+    /// 这里根据名字对包含的头文件进行了排序。
+    /// 如果要去除key，需要对容器排序以保证逻辑正确。
+    String content{};
+    for (const auto& csvHead : dataType | std::views::values)
     {
-        auto copyIncludeClassDeclaration = includeClassDeclaration;
-
-        if (element.second.GetCSVFormatType() == CSVFormatType::Default ||
-            element.second.GetCSVFormatType() == CSVFormatType::Vector ||
-            element.second.GetCSVFormatType() == CSVFormatType::Key)
-        {
-            boost::algorithm::replace_all(copyIncludeClassDeclaration, SYSTEM_TEXT("$IncludeBaseClass$"), codeMapping.GetElement(SYSTEM_TEXT("IncludeBaseClass")));
-        }
-        else
-        {
-            boost::algorithm::replace_all(copyIncludeClassDeclaration, SYSTEM_TEXT("$IncludeBaseClass$"), SYSTEM_TEXT(""));
-        }
-
-        boost::algorithm::replace_all(copyIncludeClassDeclaration, SYSTEM_TEXT("$IncludeChildClass$"), codeMapping.GetElement(SYSTEM_TEXT("IncludeChildClass")));
-
-        if (element.second.GetCSVFormatType() == CSVFormatType::Unique)
-        {
-            boost::algorithm::replace_all(copyIncludeClassDeclaration, SYSTEM_TEXT("$IncludeContainerClass$"), codeMapping.GetElement(SYSTEM_TEXT("IncludeContainerClass")));
-        }
-        else
-        {
-            boost::algorithm::replace_all(copyIncludeClassDeclaration, SYSTEM_TEXT("$IncludeContainerClass$"), codeMapping.GetElement(SYSTEM_TEXT("IncludeContainerDetailClass")));
-        }
-
-        boost::algorithm::replace_all(copyIncludeClassDeclaration, SYSTEM_TEXT("$ClassName$"), element.second.GetCSVClassName());
-
-        includeClassContent += copyIncludeClassDeclaration;
-        includeClassContent += SYSTEM_TEXT("\n");
+        content += GetIncludeClassContent(csvHead);
     }
 
-    boost::algorithm::replace_all(content, SYSTEM_TEXT("$IncludeClass$"), includeClassContent);
+    return content;
+}
 
-    return ReplaceTemplate(content);
+System::String CoreTools::CSVTotalGenerateHeadFile::GetIncludeClassContent(const CSVHead& csvHead) const
+{
+    const auto codeMapping = GetCodeMappingAnalysis();
+
+    auto content = includeClass;
+
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$IncludeBaseClass$"), csvHead.HasBase() ? codeMapping.GetElement(SYSTEM_TEXT("IncludeBaseClass")) : SYSTEM_TEXT(""));
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$IncludeChildClass$"), codeMapping.GetElement(SYSTEM_TEXT("IncludeChildClass")));
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$IncludeContainerClass$"), csvHead.GetCSVFormatType() == CSVFormatType::Unique ? codeMapping.GetElement(SYSTEM_TEXT("IncludeContainerClass")) : codeMapping.GetElement(SYSTEM_TEXT("IncludeContainerDetailClass")));
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ClassName$"), csvHead.GetCSVClassName());
+
+    return content + TextParsing::gNewlineCharacter;
 }

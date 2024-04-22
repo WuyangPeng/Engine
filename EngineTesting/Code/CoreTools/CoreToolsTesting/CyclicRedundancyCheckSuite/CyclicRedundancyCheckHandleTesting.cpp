@@ -53,7 +53,7 @@ void CoreTools::CyclicRedundancyCheckHandleTesting::HandleTest()
 
     for (auto i = 0; i < 8; ++i)
     {
-        const auto cCITT = CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.GetCCITT(i);
+        const auto cCITT = CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.GetCcitt(i);
 
         ASSERT_LESS_EQUAL(0u, cCITT);
     }

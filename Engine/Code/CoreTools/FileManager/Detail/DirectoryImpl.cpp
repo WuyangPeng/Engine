@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:46)
+/// 版本：1.0.0.8 (2024/04/01 09:51)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,11 +16,9 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-#include <array>
-
 System::String CoreTools::DirectoryImpl::GetDirectoryName(const String& directoryName)
 {
-    std::array<System::TChar, System::gMaxPath> systemCurrentDirectory{};
+    DirectoryType systemCurrentDirectory{};
 
     if (const auto result = System::GetSystemCurrentDirectory(System::gMaxPath, systemCurrentDirectory.data());
         0 < result && directoryName != systemCurrentDirectory.data())
@@ -47,12 +45,10 @@ CoreTools::DirectoryImpl::~DirectoryImpl() noexcept
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 
-    if (!directoryName.empty())
+    if (!directoryName.empty() &&
+        !System::SetSystemCurrentDirectory(directoryName.c_str()))
     {
-        if (!System::SetSystemCurrentDirectory(directoryName.c_str()))
-        {
-            LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("设置当前目录"), directoryName, SYSTEM_TEXT("失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-        }
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("设置当前目录"), directoryName, SYSTEM_TEXT("失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

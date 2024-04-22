@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:22)
+/// 版本：1.0.0.8 (2024/04/12 11:20)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_SUITE_PRINT_MANAGER_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_SUITE_PRINT_MANAGER_H
@@ -16,9 +16,8 @@
 #include "CoreTools/UnitTestSuite/UnitTestSuiteInternalFwd.h"
 
 #include <memory>
-#include <string>
 
-// 单元测试套件类输出信息管理类，SuitePrintManage为内部接口类，可输出信息头、名称、测试结果和当前时间。
+/// 单元测试套件类输出信息管理类，SuitePrintManage为内部接口类，可输出信息头、名称、测试结果和当前时间。
 namespace CoreTools
 {
     class CORE_TOOLS_HIDDEN_DECLARE SuitePrintManager final

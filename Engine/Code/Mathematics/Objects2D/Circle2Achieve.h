@@ -58,6 +58,46 @@ void Mathematics::Circle2<Real>::SetCircle(const Vector2& aCenter, Real aRadius)
 }
 
 template <typename Real>
+void Mathematics::Circle2<Real>::SetCenter(const Vector2& aCenter) noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    center = aCenter;
+}
+
+template <typename Real>
+void Mathematics::Circle2<Real>::SetCenter(const AlgebraVector2& aCenter)
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    center = Vector2{ aCenter[0], aCenter[1] };
+}
+
+template <typename Real>
+void Mathematics::Circle2<Real>::SetCenterX(Real x) noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    center.SetX(x);
+}
+
+template <typename Real>
+void Mathematics::Circle2<Real>::SetCenterY(Real y) noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    center.SetY(y);
+}
+
+template <typename Real>
+void Mathematics::Circle2<Real>::SetRadius(Real aRadius) noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    radius = aRadius;
+}
+
+template <typename Real>
 Real Mathematics::Circle2<Real>::GetRadius() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;

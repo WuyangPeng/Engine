@@ -45,7 +45,8 @@ namespace Mathematics::Algebra
         /// 计算多项式F(x)的根的紧区间[xMin,xMax]。
         /// 输入signFMin和signFMax在{-1,1}中，并且是初始xMin和xMax的F(xMin)和F(xMax)的理论符号。
         /// 他们被要求有相反的标志。为了提高速度，使用浮点运算执行二等分。
-        static void PolynomialRootBisect(const std::function<Real(Real)>& function, int signFMin, int signFMax, Real& xMin, Real& xMax);
+        static void PolynomialRootBisect(const std::function<Real(Real)>& function, int signFMin, int signFMax, Real& xMin, Real& xMax) requires(std::is_arithmetic_v<Real>);
+        static void PolynomialRootBisect(const std::function<Real(Real)>& function, int signFMin, int signFMax, Real& xMin, Real& xMax) requires(!std::is_arithmetic_v<Real>);
 
     private:
         /// x是根估计 ，m是x的多重性。

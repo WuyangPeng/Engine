@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:18)
+/// 版本：1.0.0.8 (2024/03/29 22:31)
 
 #ifndef CORE_TOOLS_CHARACTER_STRING_CASE_INSENSITIVE_STRING_DETAIL_H
 #define CORE_TOOLS_CHARACTER_STRING_CASE_INSENSITIVE_STRING_DETAIL_H
@@ -13,26 +13,24 @@
 #include "CaseInsensitiveString.h"
 #include "System/Helper/PragmaWarning.h"
 
-#include <cwctype>
-
 template <typename CharT>
 bool CoreTools::CaseInsensitiveStringTraits<CharT>::eq(CharType lhs, CharType rhs) noexcept
 {
-    return toupper(lhs) == toupper(rhs);
+    return std::toupper(lhs) == std::toupper(rhs);
 }
 
 template <typename CharT>
 bool CoreTools::CaseInsensitiveStringTraits<CharT>::lt(CharType lhs, CharType rhs) noexcept
 {
-    return toupper(lhs) < toupper(rhs);
+    return std::toupper(lhs) < std::toupper(rhs);
 }
 
 template <typename CharT>
-int CoreTools::CaseInsensitiveStringTraits<CharT>::ToLower(const CharType* value) noexcept
+int CoreTools::CaseInsensitiveStringTraits<CharT>::ToLower(const CharType* character) noexcept
 {
-    if (value != nullptr)
+    if (character != nullptr)
     {
-        return tolower(*value);
+        return std::tolower(*character);
     }
     else
     {
@@ -83,7 +81,7 @@ const typename CoreTools::CaseInsensitiveStringTraits<CharT>::CharType* CoreTool
     const auto lowerCharacter = tolower(character);
     for (auto i = 0u; i < count; ++i)
     {
-        if (tolower(*first) == lowerCharacter)
+        if (std::tolower(*first) == lowerCharacter)
         {
             return first;
         }

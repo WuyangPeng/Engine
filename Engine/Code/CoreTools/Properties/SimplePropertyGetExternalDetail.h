@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:13)
+/// 版本：1.0.0.8 (2024/04/12 15:07)
 
 #ifndef CORE_TOOLS_PROPERTIES_SIMPLE_PROPERTY_GET_EXTERNAL_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_SIMPLE_PROPERTY_GET_EXTERNAL_DETAIL_H
@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename Value, typename ConstReference>
+requires(std::is_const_v<std::remove_reference_t<ConstReference>> && std::is_reference_v<ConstReference>)
 CoreTools::SimplePropertyGetExternal<Value, ConstReference>::SimplePropertyGetExternal(const ValueType& value) noexcept
     : value{ value }
 {
@@ -23,6 +24,7 @@ CoreTools::SimplePropertyGetExternal<Value, ConstReference>::SimplePropertyGetEx
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Value, typename ConstReference>
+requires(std::is_const_v<std::remove_reference_t<ConstReference>> && std::is_reference_v<ConstReference>)
 bool CoreTools::SimplePropertyGetExternal<Value, ConstReference>::IsValid() const noexcept
 {
     return true;
@@ -31,6 +33,7 @@ bool CoreTools::SimplePropertyGetExternal<Value, ConstReference>::IsValid() cons
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Value, typename ConstReference>
+requires(std::is_const_v<std::remove_reference_t<ConstReference>> && std::is_reference_v<ConstReference>)
 CoreTools::SimplePropertyGetExternal<Value, ConstReference>::operator ConstReferenceType() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;

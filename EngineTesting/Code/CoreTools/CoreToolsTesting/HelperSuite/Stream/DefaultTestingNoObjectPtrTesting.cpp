@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 16:21)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/14 00:04)
 
 #include "DefaultTestingNoObjectPtrTesting.h"
 #include "CoreTools/CoreToolsTesting/HelperSuite/Detail/DefaultTestingNoObjectPtr.h"
@@ -63,7 +63,7 @@ void CoreTools::DefaultTestingNoObjectPtrTesting::SaveStreamTest()
 
 void CoreTools::DefaultTestingNoObjectPtrTesting::LoadStreamTest()
 {
-    const auto streamObject = DefaultTestingNoObjectPtr::Create("name"s);
+    const auto streamObject = DefaultTestingNoObjectPtr::Create("name");
 
     const auto fileBuffer = std::make_shared<FileBuffer>(bufferSize);
 
@@ -74,7 +74,7 @@ void CoreTools::DefaultTestingNoObjectPtrTesting::LoadStreamTest()
 
 void CoreTools::DefaultTestingNoObjectPtrTesting::LinkStreamTest()
 {
-    const auto streamObject = DefaultTestingNoObjectPtr::Create("name"s);
+    const auto streamObject = DefaultTestingNoObjectPtr::Create("name");
 
     const auto link = ObjectLink::Create();
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:06)
+/// 版本：1.0.0.8 (2024/04/11 11:00)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -39,7 +39,8 @@ CoreTools::SimpleCSV::QueryXmlDataImpl::XmlDataSharedPtr CoreTools::SimpleCSV::Q
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (auto xmlDataSharedPtr = xmlData.lock(); xmlDataSharedPtr != nullptr)
+    if (auto xmlDataSharedPtr = xmlData.lock();
+        xmlDataSharedPtr != nullptr)
     {
         return xmlDataSharedPtr;
     }

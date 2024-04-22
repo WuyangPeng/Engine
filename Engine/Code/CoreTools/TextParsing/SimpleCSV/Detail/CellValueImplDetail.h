@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:26)
+/// 版本：1.0.0.8 (2024/04/02 11:20)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_XML_CELL_VALUE_IMPL_DETAIL_H
 #define CORE_TOOLS_TEXT_PARSING_XML_CELL_VALUE_IMPL_DETAIL_H
@@ -16,7 +16,8 @@
 #include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 
-template <typename T, std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
+template <typename T>
+requires(CoreTools::TextParsing::cellValueCondition<T>)
 CoreTools::SimpleCSV::CellValueImpl& CoreTools::SimpleCSV::CellValueImpl::operator=(T rhs)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -28,7 +29,8 @@ CoreTools::SimpleCSV::CellValueImpl& CoreTools::SimpleCSV::CellValueImpl::operat
     return *this;
 }
 
-template <typename T, std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
+template <typename T>
+requires(CoreTools::TextParsing::cellValueCondition<T>)
 void CoreTools::SimpleCSV::CellValueImpl::Set(T rhs)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -36,7 +38,8 @@ void CoreTools::SimpleCSV::CellValueImpl::Set(T rhs)
     *this = rhs;
 }
 
-template <typename T, std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
+template <typename T>
+requires(CoreTools::TextParsing::cellValueCondition<T>)
 T CoreTools::SimpleCSV::CellValueImpl::Get() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;

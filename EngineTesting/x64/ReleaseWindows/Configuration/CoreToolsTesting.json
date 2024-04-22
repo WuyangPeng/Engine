@@ -13,12 +13,6 @@
     "HashCombineTesting": 1
   },
 
-  "assertExceptionMacroSuite": {
-    "AssertNotThrowExceptionTesting": 1,
-    "AssertThrowExceptionTesting": 1,
-    "AssertExecuteLoopNotThrowTesting": 100
-  },
-
   "assertTestMacroSuite": {
     "AssertTestExceptionThrowTesting": 0,
     "AssertTestConditionTesting": 1,
@@ -28,6 +22,12 @@
     "AssertTestRangeTesting": 1
   },
 
+  "assertExceptionMacroSuite": {
+    "AssertNotThrowExceptionTesting": 1,
+    "AssertThrowExceptionTesting": 1,
+    "AssertExecuteLoopNotThrowTesting": 100
+  },
+
   "classInvariantMacroSuite": {
     "ClassInvariantMacroTesting": 1,
     "ModuleClassInvariantMacroTesting": 1
@@ -35,7 +35,8 @@
 
   "customAssertMacroSuite": {
     "CustomAssertMacroTesting": 1,
-    "ModuleCustomAssertMacroTesting": 1
+    "ModuleCustomAssertMacroTesting": 1,
+    "FunctionProhibitedFromCallingTesting": 0
   },
 
   "exportMacroSuite": {
@@ -97,6 +98,7 @@
     "TriggerAssertTesting": 0,
     "CheckInvariantTesting": 1,
     "NoexceptTesting": 1,
+    "NoexceptLogTesting": 0,
     "AssertionTesting": 0
   },
 
@@ -119,8 +121,8 @@
   },
 
   "characterStringSuite": {
-    "StringConversionTesting": 1,
     "FormatErrorMessageTesting": 1,
+    "StringConversionTesting": 1,
     "StringUtilityTesting": 1
   },
 
@@ -174,7 +176,7 @@
   "endianSuite": {
     "ByteSwapTesting": 1,
     "ByteSwapperTesting": 1,
-    "TypeAliaserTesting": 1,
+    "TypeAliasTesting": 1,
     "EndianTesting": 1
   },
 
@@ -185,8 +187,8 @@
   },
 
   "streamManagerSuite": {
-    "OFStreamManagerTesting": 1,
-    "IFStreamManagerTesting": 1
+    "OFileStreamManagerTesting": 1,
+    "IFileStreamManagerTesting": 1
   },
 
   "fileHandleSuite": {
@@ -220,26 +222,6 @@
   },
 
   "textParsingSuite": {
-    "CSVDataTesting": 1,
-    "ExcelConversionCSVTesting": 1,
-    "BatchConversionCSVTesting": 1,
-    "CSVTypeConversionTesting": 1,
-    "CSVHeadTesting": 1,
-    "CSVRowTesting": 1,
-    "CSVContentTesting": 1,
-    "CSVGenerateTesting": 1,
-    "CSVTotalGenerateTesting": 1,
-    "CSVConfigureTesting": 1,
-    "DataTypeDescribeTesting": 1,
-    "JsonHeadTesting": 1,
-    "JsonNodeContainerTesting": 1,
-    "JsonNodeTesting": 1,
-    "JsonGenerateTesting": 1,
-    "JsonRowTesting": 1,
-    "JsonConfigureTesting": 1,
-    "JsonTotalGenerateTesting": 1,
-    "BatchConversionCodeTesting": 1,
-    "CSVConfigureLoadingTesting": 1
   },
 
   "simpleZipSuite": {
@@ -302,6 +284,25 @@
     "QueryXmlDataTesting": 1
   },
 
+  "excelSuite": {
+    "ExcelConversionCSVTesting": 1,
+    "BatchConversionCSVTesting": 1,
+    "BatchConversionCodeTesting": 1
+  },
+
+  "csvSuite": {
+    "CSVDataTesting": 1,
+    "CSVTypeConversionTesting": 1,
+    "CSVHeadTesting": 1,
+    "CSVRowTesting": 1,
+    "CSVContentTesting": 1,
+    "CSVGenerateTesting": 1,
+    "CSVTotalGenerateTesting": 1,
+    "CSVConfigureTesting": 1,
+    "DataTypeDescribeTesting": 1,
+    "CSVConfigureLoadingTesting": 1
+  },
+
   "logManagerSuite": {
     "LogFilterManagerTesting": 1,
     "LogLevelManagerTesting": 1,
@@ -313,7 +314,8 @@
     "LoggerTesting": 1,
     "AppenderManagerTesting": 1,
     "LogFileNameTesting": 1,
-    "LogAppenderIOManagerTesting": 0,
+    "LogAppenderIOManagerTesting": 1,
+    "LogAppenderIOManagerSignTesting": 0,
     "LogTesting": 1,
     "LogAsynchronousTesting": 1,
     "LogHelperTesting": 1
@@ -323,6 +325,7 @@
     "TupleTesting": 1,
     "TupleLessTesting": 1,
     "TableTesting": 1,
+    "MinHeapRecordTesting": 1,
     "MinHeapTesting": 1,
     "ThreadSafeMapTesting": 1,
     "ThreadSafeQueueTesting": 1
@@ -490,14 +493,6 @@
   },
 
   "networkSuite": {
-
-  },
-
-  "zlibSuite": {
-
-  },
-
-  "freetypeSuite": {
 
   },
 

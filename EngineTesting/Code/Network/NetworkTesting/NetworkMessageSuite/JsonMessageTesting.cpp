@@ -147,5 +147,5 @@ void Network::JsonMessageTesting::MessageTest()
 
     ASSERT_TRUE(testJsonMessage->IsExactlyTypeOf(testJsonMessage));
 
-    ASSERT_ENUM_EQUAL(testJsonMessage->GetMessageHeadStrategy(), MessageHeadStrategy::UseJson | MessageHeadStrategy::UseSubId);
+    ASSERT_EQUAL(testJsonMessage->GetMessageHeadStrategy(), MessageHeadStrategy::UseJson | MessageHeadStrategy::UseSubId);
 }

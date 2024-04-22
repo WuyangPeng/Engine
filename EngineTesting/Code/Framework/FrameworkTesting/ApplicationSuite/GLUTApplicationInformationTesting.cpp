@@ -42,5 +42,5 @@ void Framework::GLUTApplicationInformationTesting::InformationTest()
 
     ASSERT_EQUAL(information.GetOpenGLMajorVersion(), majorVersion);
     ASSERT_EQUAL(information.GetOpenGLMinorVersion(), minorVersion);
-    ASSERT_ENUM_EQUAL(information.GetFrame(), frame);
+    ASSERT_EQUAL(information.GetFrame(), frame);
 }

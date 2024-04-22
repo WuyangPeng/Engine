@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:33)
+/// 版本：1.0.0.8 (2024/04/12 14:23)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,8 +16,6 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 #include <ranges>
-
-using namespace std::literals;
 
 CoreTools::CommandArgumentContainer::CommandArgumentContainer(int argumentsNumber)
     : argumentsNumber{ argumentsNumber }
@@ -70,9 +68,8 @@ void CoreTools::CommandArgumentContainer::SetUsed(const std::string& argumentsNa
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    const auto iter = commandArgument.find(argumentsName);
-
-    if (iter != commandArgument.cend())
+    if (const auto iter = commandArgument.find(argumentsName);
+        iter != commandArgument.cend())
     {
         auto& argument = iter->second;
 
@@ -179,7 +176,8 @@ std::string CoreTools::CommandArgumentContainer::ExcessArguments() const
 
     for (const auto& element : commandArgument | std::views::values)
     {
-        if (const auto& argument = element; !argument.IsUsed())
+        if (const auto& argument = element;
+            !argument.IsUsed())
         {
             return argument.GetName();
         }
@@ -196,7 +194,8 @@ int CoreTools::CommandArgumentContainer::GetExcessArgumentsCount() const noexcep
 
     for (const auto& element : commandArgument | std::views::values)
     {
-        if (const auto& argument = element; !argument.IsUsed())
+        if (const auto& argument = element;
+            !argument.IsUsed())
         {
             ++count;
         }

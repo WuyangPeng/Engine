@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:43)
+/// 版本：1.0.0.8 (2024/03/30 22:54)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_FILE_ASYNCHRONOUS_H
 #define CORE_TOOLS_FILE_MANAGER_FILE_ASYNCHRONOUS_H
@@ -22,7 +22,7 @@ CORE_TOOLS_NON_COPY_EXPORT_IMPL(FileAsynchronousImpl);
 
 namespace CoreTools
 {
-    // 由于实现类本身使用了锁，单例不再使用锁。
+    /// 由于实现类本身使用了锁，单例不再使用锁。
     class CORE_TOOLS_DEFAULT_DECLARE FileAsynchronous final : public Singleton<FileAsynchronous, MutexCreate::UseNull>
     {
     public:
@@ -47,7 +47,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        // 调用方需要保证事件回调的多线程安全问题。
+        /// 调用方需要保证事件回调的多线程安全问题。
         void RegisteredReadFile(const String& fileName, bool binaryFile, const FileEventInterfaceSharedPtr& event);
         void RegisteredWriteFile(const String& fileName, bool binaryFile, const ConstFileBufferSharedPtr& fileBuffer, bool append);
         void RegisteredWriteFile(const String& fileName, bool binaryFile, const FileEventInterfaceSharedPtr& event, const ConstFileBufferSharedPtr& fileBuffer, bool append);

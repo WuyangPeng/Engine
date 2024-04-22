@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:03)
+/// 版本：1.0.0.8 (2024/04/11 11:26)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -42,7 +42,8 @@ void CoreTools::SimpleCSV::AppProperties::DeleteSheetName(const std::string& tit
 
     const auto xmlDocument = GetXmlDocument();
 
-    for (const auto documentElement = xmlDocument->document_element(); const auto& iter : GetSheetNames(documentElement).children())
+    for (const auto documentElement = xmlDocument->document_element();
+         const auto& iter : GetSheetNames(documentElement).children())
     {
         if (iter.child_value() == title)
         {
@@ -60,7 +61,8 @@ void CoreTools::SimpleCSV::AppProperties::SetSheetName(const std::string& oldTit
 
     const auto xmlDocument = GetXmlDocument();
 
-    for (const auto documentElement = xmlDocument->document_element(); const auto& iter : GetSheetNames(documentElement).children())
+    for (const auto documentElement = xmlDocument->document_element();
+         const auto& iter : GetSheetNames(documentElement).children())
     {
         if (iter.child_value() == oldTitle)
         {
@@ -106,7 +108,8 @@ void CoreTools::SimpleCSV::AppProperties::DeleteProperty(const std::string& name
 
     const auto xmlDocument = GetXmlDocument();
 
-    if (const auto property = xmlDocument->first_child().child(name.c_str()); property != nullptr)
+    if (const auto property = xmlDocument->first_child().child(name.c_str());
+        property != nullptr)
     {
         xmlDocument->first_child().remove_child(property);
     }

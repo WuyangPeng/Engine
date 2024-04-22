@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:14)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 17:03)
 
 #include "RowTesting.h"
 #include "System/Helper/PragmaWarning/PugiXml.h"
@@ -20,8 +20,6 @@
 #include "CoreTools/TextParsing/SimpleCSV/Worksheet.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
-
-using namespace std::literals;
 
 CoreTools::RowTesting::RowTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -46,7 +44,7 @@ void CoreTools::RowTesting::MainTest()
 
 void CoreTools::RowTesting::RowTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
     auto workbook = document->GetWorkbook();
     const auto worksheetNames = workbook.GetWorksheetNames();
@@ -85,14 +83,15 @@ void CoreTools::RowTesting::RowTest()
 
 void CoreTools::RowTesting::RowCellTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
     auto workbook = document->GetWorkbook();
     const auto worksheetNames = workbook.GetWorksheetNames();
     const auto& worksheetName = worksheetNames.at(0);
     const auto worksheet = workbook.GetWorksheet(worksheetName);
 
-    for (auto rows = worksheet.GetRows(); const auto& row : rows)
+    for (auto rows = worksheet.GetRows();
+         const auto& row : rows)
     {
         const auto cellCount = row.GetCellCount();
         auto rowDataRange = row.GetCells();
@@ -116,14 +115,15 @@ void CoreTools::RowTesting::RowCellTest()
 
 void CoreTools::RowTesting::ContainerTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
     auto workbook = document->GetWorkbook();
     const auto worksheetNames = workbook.GetWorksheetNames();
     const auto& worksheetName = worksheetNames.at(0);
     const auto worksheet = workbook.GetWorksheet(worksheetName);
 
-    for (auto rows = worksheet.GetRows(); const auto& row : rows)
+    for (auto rows = worksheet.GetRows();
+         const auto& row : rows)
     {
         const auto values = row.GetValues<std::vector<SimpleCSV::CellValue>>();
         ASSERT_EQUAL(row.GetCellCount(), boost::numeric_cast<int>(values.size()));
@@ -132,14 +132,15 @@ void CoreTools::RowTesting::ContainerTest()
 
 void CoreTools::RowTesting::OperatorTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
     auto workbook = document->GetWorkbook();
     const auto worksheetNames = workbook.GetWorksheetNames();
     const auto& worksheetName = worksheetNames.at(0);
     const auto worksheet = workbook.GetWorksheet(worksheetName);
 
-    for (auto rows = worksheet.GetRows(); const auto& row : rows)
+    for (auto rows = worksheet.GetRows();
+         const auto& row : rows)
     {
         ASSERT_TRUE(row.IsSame(row));
         ASSERT_FALSE(row.IsLess(row));

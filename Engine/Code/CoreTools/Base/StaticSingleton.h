@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:06)
+/// 版本：1.0.0.8 (2024/03/28 16:37)
 
 #ifndef CORE_TOOLS_BASE_STATIC_SINGLETON_H
 #define CORE_TOOLS_BASE_STATIC_SINGLETON_H
@@ -31,6 +31,9 @@ namespace CoreTools
         NODISCARD static PointType GetSingletonPtr() noexcept;
 
     protected:
+        static constexpr auto isStdMutex = MutexCreate == MutexCreate::UseOriginalStd || MutexCreate == MutexCreate::UseOriginalStdRecursive;
+
+    protected:
         enum class SingletonCreate
         {
             Init,
@@ -38,7 +41,8 @@ namespace CoreTools
 
         explicit StaticSingleton(SingletonCreate singletonCreate) noexcept;
         ~StaticSingleton() noexcept = default;
-        NODISCARD static MutexType& GetMutex();
+        NODISCARD static MutexType& GetMutex() requires(isStdMutex);
+        NODISCARD static MutexType& GetMutex() requires(!isStdMutex);
 
     public:
         StaticSingleton(const StaticSingleton& rhs) noexcept = delete;

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:01)
+/// 版本：1.0.0.8 (2024/04/11 22:19)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,10 +22,7 @@ CoreTools::Rtti::Rtti(const char* name, const Rtti* baseType) noexcept
 
 bool CoreTools::Rtti::IsValid() const noexcept
 {
-    if (name != nullptr)
-        return true;
-    else
-        return false;
+    return name != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

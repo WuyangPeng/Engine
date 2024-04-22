@@ -75,4 +75,3 @@ CSVConfigure::VectorType CoreTools::CSVRow::StringCastEnum<CSVConfigure::VectorT
 
     return CSVConfigure::StringCastVectorType(describe);
 }
-

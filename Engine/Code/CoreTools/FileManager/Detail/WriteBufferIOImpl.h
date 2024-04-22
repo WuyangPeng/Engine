@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:40)
+/// 版本：1.0.0.8 (2024/03/30 22:50)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_WRITE_BUFFER_IO_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_WRITE_BUFFER_IO_IMPL_H
@@ -36,7 +36,7 @@ namespace CoreTools
         NODISCARD ConstFileBufferSharedPtr GetFileBuffer() const noexcept;
 
     private:
-        // 当且仅当写入的字节数等于data的大小，操作是成功的。否则抛出Error异常。
+        /// 当且仅当写入的字节数等于data的大小，操作是成功的。否则抛出Error异常。
         uint32_t WriteToBuffer(size_t itemSize, size_t itemsNumber, const void* data);
 
     private:

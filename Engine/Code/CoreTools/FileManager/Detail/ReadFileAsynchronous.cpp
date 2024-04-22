@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:05)
+/// 版本：1.0.0.8 (2024/04/01 10:45)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -29,7 +29,8 @@ void CoreTools::ReadFileAsynchronous::AsynchronousExecution(const FileAsynchrono
 
     const auto event = fileAsynchronousParameter.GetEvent();
 
-    if (const auto eventSharedPtr = event.lock(); eventSharedPtr)
+    if (const auto eventSharedPtr = event.lock();
+        eventSharedPtr != nullptr)
     {
         eventSharedPtr->EventFunction(fileAsynchronousParameter, fileBuffer);
     }

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:59)
+/// 版本：1.0.0.8 (2024/04/11 10:55)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -31,14 +31,7 @@ CoreTools::ScopeExpressionParsing::ScopeExpressionParsing(const String& scopeExp
 
 bool CoreTools::ScopeExpressionParsing::IsValid() const noexcept
 {
-    if (!scopeExpression.empty())
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return !scopeExpression.empty();
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -49,7 +42,8 @@ System::String CoreTools::ScopeExpressionParsing::Parsing() const
 
     const auto scopeExpressionResult = GetScopeExpressionResult();
 
-    switch (const auto firstChar = scopeExpression.front(); firstChar)
+    switch (const auto firstChar = scopeExpression.front();
+            firstChar)
     {
         case TextParsing::gLeftSquareBrackets:
         {

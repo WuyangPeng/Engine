@@ -5,22 +5,45 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:56)
+/// 版本：1.0.0.8 (2024/04/10 14:50)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CSVGenerateDataSourceFile.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
 #include "CoreTools/CharacterString/StringUtility.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
 #include <set>
 
-CoreTools::CSVGenerateDataSourceFile::CSVGenerateDataSourceFile(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis) noexcept
-    : ParentType{ csvHead, codeMappingAnalysis }
+CoreTools::CSVGenerateDataSourceFile::CSVGenerateDataSourceFile(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis)
+    : ParentType{ csvHead, codeMappingAnalysis },
+      templateName{ SYSTEM_TEXT("/EntityCpp.txt") },
+
+      dataCheckingCall{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("DataCheckingCall")) },
+      dataIsValidStubDefine{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("DataIsValidStubDefine")) },
+      includeUserClassInvariantMacro{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("IncludeUserClassInvariantMacro")) },
+      exceptionMacroInclude{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("ExceptionMacroInclude")) },
+      numericCastInclude{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("NumericCastInclude")) },
+      includeChildClass{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("IncludeChildClass")) },
+      includeNamespaceContainer{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("IncludeNamespaceContainer")) },
+      includeMappingContainer{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("IncludeMappingContainer")) },
+      beginDataClassMember{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("BeginDataClassMember")) },
+      dataClassMember{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("DataClassMember")) },
+      endDataClassMember{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("EndDataClassMember")) },
+      dataCheckingDefine{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("DataCheckingDefine")) },
+      dataCheckingCondition{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("DataCheckingCondition")) },
+      dataIsValidDefine{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("DataIsValidDefine")) },
+      dataGetFunctionDefine{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("DataGetFunctionDefine")) },
+      dataGetCountArrayFunctionDefine{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("DataGetCountArrayFunctionDefine")) },
+      dataGetValueArrayFunctionDefine{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("DataGetValueArrayFunctionDefine")) },
+      dataGetBeginIterArrayFunctionDefine{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("DataGetBeginIterArrayFunctionDefine")) },
+      dataGetEndIterArrayFunctionDefine{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("DataGetEndIterArrayFunctionDefine")) },
+      dataGetMappingFunctionDefine{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("DataGetMappingFunctionDefine")) },
+      dataGetMappingArrayFunctionDefine{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("DataGetMappingArrayFunctionDefine")) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -39,172 +62,233 @@ System::String CoreTools::CSVGenerateDataSourceFile::GetFilePrefix() const
 
 System::String CoreTools::CSVGenerateDataSourceFile::GetFileSuffix() const
 {
-    auto result = GetSuffix();
-
-    result += TextParsing::gSourceFileExtensionName;
-
-    return result;
+    return GetSuffix() + TextParsing::gSourceFileExtensionName.data();
 }
 
 System::String CoreTools::CSVGenerateDataSourceFile::GetContent(const String& codeDirectory) const
 {
-    auto content = GetTemplateContent(codeDirectory + SYSTEM_TEXT("/EntityCpp.txt"));
+    auto content = GetTemplateContent(codeDirectory + templateName);
 
     const auto codeMapping = GetCodeMappingAnalysis();
-
-    std::set<String> dataIncludeContainer{};
-
-    auto includeChildClass = codeMapping.GetElement(SYSTEM_TEXT("IncludeChildClass"));
-    boost::algorithm::replace_all(includeChildClass, SYSTEM_TEXT("$ClassName$"), GetCSVClassName());
-    dataIncludeContainer.emplace(includeChildClass);
-
     const auto head = GetCSVHead();
 
-    if (head.HasMapping())
-    {
-        auto includeNamespaceContainer = codeMapping.GetElement(SYSTEM_TEXT("IncludeNamespaceContainer"));
-        boost::algorithm::replace_all(includeNamespaceContainer, SYSTEM_TEXT("$Namespace$"), GetNameSpace());
-        dataIncludeContainer.emplace(includeNamespaceContainer);
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$DataInclude$"), GetDataIncludeContent());
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$DataClassMember$"), GetDataClassMemberContent());
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$DataCheckingCall$"), HasScope() ? dataCheckingCall : SYSTEM_TEXT(""));
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$DataCheckingDefine$"), HasScope() ? GetDataCheckingDefine() : SYSTEM_TEXT(""));
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$DataIsValidDefine$"), HasScope() ? GetDataIsValidDefine() : dataIsValidStubDefine);
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$DataGetFunctionDefine$"), GetDataGetFunctionDefineContent());
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$KeyName$"), GetCSVFormatType() == CSVFormatType::Key ? head.GetKey() : head.GetVariableName(0));
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ClassIsValidLevel$"), HasScope() ? SYSTEM_TEXT("1") : SYSTEM_TEXT("9"));
 
-        const auto count = head.GetCount();
-        for (auto index = 0; index < count; ++index)
-        {
-            if (const auto mapping = head.GetMapping(index);
-                !mapping.empty())
-            {
-                const auto element = StringUtility::ToFirstLetterUpper(mapping);
-                auto includeMappingContainer = codeMapping.GetElement(SYSTEM_TEXT("IncludeMappingContainer"));
-                boost::algorithm::replace_all(includeMappingContainer, SYSTEM_TEXT("$MappingType$"), element);
+    return ReplaceTemplate(content);
+}
 
-                dataIncludeContainer.emplace(includeMappingContainer);
-            }
-        }
-    }
+System::String CoreTools::CSVGenerateDataSourceFile::GetDataIncludeContent() const
+{
+    const auto dataIncludeContainer = GetDataIncludeContainer();
 
-    String dataIncludeContent{};
+    String content{};
     for (const auto& element : dataIncludeContainer)
     {
-        dataIncludeContent += element;
+        content += element;
     }
 
-    if (head.HasArrayDataType())
+    if (HasArrayDataType())
     {
-        dataIncludeContent += SYSTEM_TEXT("#include \"System/Helper/PragmaWarning/NumericCast.h\"\n");
+        content += numericCastInclude;
     }
 
-    dataIncludeContent += codeMapping.GetElement(SYSTEM_TEXT("IncludeUserClassInvariantMacro"));
+    content += includeUserClassInvariantMacro;
 
-    if (head.HasScope())
+    if (HasScope())
     {
-        dataIncludeContent += SYSTEM_TEXT("#include \"CoreTools/Helper/ExceptionMacro.h\"\n");
+        content += exceptionMacroInclude;
     }
 
-    boost::algorithm::replace_all(content, SYSTEM_TEXT("$DataInclude$"), dataIncludeContent);
+    return content;
+}
 
-    const auto beginDataClassMember = codeMapping.GetElement(SYSTEM_TEXT("BeginDataClassMember"));
-    const auto dataClassMember = codeMapping.GetElement(SYSTEM_TEXT("DataClassMember"));
-    const auto endDataClassMember = codeMapping.GetElement(SYSTEM_TEXT("EndDataClassMember"));
+CoreTools::CSVGenerateDataSourceFile::SubclassIncludeContainer CoreTools::CSVGenerateDataSourceFile::GetDataIncludeContainer() const
+{
+    SubclassIncludeContainer container{ includeChildClass };
 
-    String dataClassMemberContent{};
+    if (HasMapping())
+    {
+        container.emplace(includeNamespaceContainer);
+
+        const auto result = GetDataIncludeMappingContainer();
+
+        container.insert(result.begin(), result.end());
+    }
+
+    return container;
+}
+
+System::String CoreTools::CSVGenerateDataSourceFile::GetDataIncludeMappingContainer(const CSVHead& head, int index) const
+{
+    if (const auto mapping = head.GetMapping(index);
+        !mapping.empty())
+    {
+        const auto element = StringUtility::ToFirstLetterUpper(mapping);
+
+        auto result = includeMappingContainer;
+        boost::algorithm::replace_all(result, GetCodeKey(TextParsing::gMappingType.data()), element);
+
+        return result;
+    }
+
+    return SYSTEM_TEXT("");
+}
+
+CoreTools::CSVGenerateDataSourceFile::SubclassIncludeContainer CoreTools::CSVGenerateDataSourceFile::GetDataIncludeMappingContainer() const
+{
+    const auto head = GetCSVHead();
+
+    SubclassIncludeContainer container{};
+
     for (auto index = 0; index < head.GetCount(); ++index)
     {
-        const auto functionName = head.GetFunctionName(index);
-        const auto actualType = head.GetActualType(index);
-        const auto valueType = head.GetValueType(index);
-        const auto abbreviation = head.GetAbbreviation(index);
-        const auto variableName = head.GetVariableName(index);
-
-        auto copyDataClassMember = dataClassMember;
-        if (index == head.GetCount() - 1)
+        if (const auto result = GetDataIncludeMappingContainer(head, index);
+            !result.empty())
         {
-            copyDataClassMember = endDataClassMember;
+            container.emplace(result);
         }
-        else if (index == 0)
-        {
-            copyDataClassMember = beginDataClassMember;
-        }
-
-        boost::algorithm::replace_all(copyDataClassMember, SYSTEM_TEXT("$ElementType$"), functionName);
-        boost::algorithm::replace_all(copyDataClassMember, SYSTEM_TEXT("$ElementName$"), variableName);
-
-        dataClassMemberContent += copyDataClassMember;
-        dataClassMemberContent += SYSTEM_TEXT("\n");
     }
 
-    boost::algorithm::replace_all(content, SYSTEM_TEXT("$DataClassMember$"), dataClassMemberContent);
+    return container;
+}
 
-    if (head.HasScope())
+System::String CoreTools::CSVGenerateDataSourceFile::GetDataClassMemberContent() const
+{
+    const auto head = GetCSVHead();
+
+    String content{};
+    for (auto index = 0; index < head.GetCount(); ++index)
     {
-        boost::algorithm::replace_all(content, SYSTEM_TEXT("$DataCheckingCall$"), codeMapping.GetElement(SYSTEM_TEXT("DataCheckingCall")));
-
-        auto dataCheckingDefine = codeMapping.GetElement(SYSTEM_TEXT("DataCheckingDefine"));
-
-        const auto checkingCondition = codeMapping.GetElement(SYSTEM_TEXT("DataCheckingCondition"));
-
-        String checkingConditionContent{};
-        auto first = true;
-        for (auto index = 0; index < head.GetCount(); ++index)
-        {
-            if (const auto scope = head.GetScope(index);
-                !scope.empty())
-            {
-                if (!first)
-                {
-                    checkingConditionContent += SYSTEM_TEXT("\n");
-                    first = false;
-                }
-
-                auto copyCheckingCondition = checkingCondition;
-
-                boost::algorithm::replace_all(copyCheckingCondition, SYSTEM_TEXT("$CheckingTypeCondition$"), head.GetScopeExpression(index));
-                boost::algorithm::replace_all(copyCheckingCondition, SYSTEM_TEXT("$ElementType$"), head.GetVariableName(index));
-
-                checkingConditionContent += copyCheckingCondition;
-            }
-        }
-
-        boost::algorithm::replace_all(dataCheckingDefine, SYSTEM_TEXT("$DataCheckingCondition$"), checkingConditionContent);
-
-        boost::algorithm::replace_all(content, SYSTEM_TEXT("$DataCheckingDefine$"), dataCheckingDefine);
-
-        auto dataIsValidDefine = codeMapping.GetElement(SYSTEM_TEXT("DataIsValidDefine"));
-
-        String checkingIsValidConditionContent{};
-        first = true;
-        for (auto index = 0; index < head.GetCount(); ++index)
-        {
-            if (const auto scope = head.GetScope(index);
-                !scope.empty())
-            {
-                if (!first)
-                {
-                    checkingIsValidConditionContent += SYSTEM_TEXT("\n");
-                    first = false;
-                }
-
-                checkingIsValidConditionContent += SYSTEM_TEXT("        (") + head.GetScopeExpression(index) + SYSTEM_TEXT(")");
-            }
-        }
-
-        boost::algorithm::replace_all(dataIsValidDefine, SYSTEM_TEXT("$CheckingIsValidCondition$"), checkingIsValidConditionContent);
-        boost::algorithm::replace_all(content, SYSTEM_TEXT("$DataIsValidDefine$"), dataIsValidDefine);
+        content += GetDataClassMemberContent(head, index);
     }
-    else
+
+    return content;
+}
+
+System::String CoreTools::CSVGenerateDataSourceFile::GetDataClassMemberContent(const CSVHead& head, int index) const
+{
+    const auto functionName = head.GetFunctionName(index);
+    const auto actualType = head.GetActualType(index);
+    const auto valueType = head.GetValueType(index);
+    const auto abbreviation = head.GetAbbreviation(index);
+    const auto variableName = head.GetVariableName(index);
+
+    return GetReplaceContent(index == 0 ? beginDataClassMember : ((index == head.GetCount() - 1) ? endDataClassMember : dataClassMember),
+                             { { TextParsing::gElementType, functionName },
+                               { TextParsing::gElementName, variableName } });
+}
+
+System::String CoreTools::CSVGenerateDataSourceFile::GetDataCheckingDefine() const
+{
+    auto result = dataCheckingDefine;
+
+    boost::algorithm::replace_all(result, SYSTEM_TEXT("$DataCheckingCondition$"), GetDataCheckingCondition());
+
+    return result;
+}
+
+System::String CoreTools::CSVGenerateDataSourceFile::GetDataCheckingCondition() const
+{
+    String content{};
+
+    auto isFirst = true;
+    const auto head = GetCSVHead();
+    for (auto index = 0; index < head.GetCount(); ++index)
     {
-        boost::algorithm::replace_all(content, SYSTEM_TEXT("$DataCheckingCall$"), SYSTEM_TEXT(""));
-        boost::algorithm::replace_all(content, SYSTEM_TEXT("$DataCheckingDefine$"), SYSTEM_TEXT(""));
-        boost::algorithm::replace_all(content, SYSTEM_TEXT("$DataIsValidDefine$"), codeMapping.GetElement(SYSTEM_TEXT("DataIsValidStubDefine")));
+        if (const auto result = GetDataCheckingCondition(head, isFirst, index);
+            result.empty())
+        {
+            content += result;
+            isFirst = false;
+        }
     }
 
-    const auto dataGetFunctionDefine = codeMapping.GetElement(SYSTEM_TEXT("DataGetFunctionDefine"));
-    const auto dataGetCountArrayFunction = codeMapping.GetElement(SYSTEM_TEXT("DataGetCountArrayFunctionDefine"));
-    const auto dataGetValueArrayFunction = codeMapping.GetElement(SYSTEM_TEXT("DataGetValueArrayFunctionDefine"));
-    const auto dataGetBeginIterArrayFunction = codeMapping.GetElement(SYSTEM_TEXT("DataGetBeginIterArrayFunctionDefine"));
-    const auto dataGetEndIterArrayFunction = codeMapping.GetElement(SYSTEM_TEXT("DataGetEndIterArrayFunctionDefine"));
-    const auto dataGetMappingFunction = codeMapping.GetElement(SYSTEM_TEXT("DataGetMappingFunctionDefine"));
-    const auto dataGetMappingArrayFunction = codeMapping.GetElement(SYSTEM_TEXT("DataGetMappingArrayFunctionDefine"));
+    return content;
+}
 
-    String dataGetFunctionDefineContent{};
+System::String CoreTools::CSVGenerateDataSourceFile::GetDataCheckingCondition(const CSVHead& head, bool isFirst, int index) const
+{
+    String content{};
+
+    if (const auto scope = head.GetScope(index);
+        !scope.empty())
+    {
+        if (!isFirst)
+        {
+            content += TextParsing::gNewlineCharacter;
+        }
+
+        auto copyCheckingCondition = dataCheckingCondition;
+
+        boost::algorithm::replace_all(copyCheckingCondition, GetCodeKey(TextParsing::gCheckingTypeCondition.data()), head.GetScopeExpression(index));
+        boost::algorithm::replace_all(copyCheckingCondition, GetCodeKey(TextParsing::gElementType.data()), head.GetVariableName(index));
+
+        content += copyCheckingCondition;
+    }
+
+    return content;
+}
+
+System::String CoreTools::CSVGenerateDataSourceFile::GetDataIsValidDefine() const
+{
+    auto content = dataIsValidDefine;
+
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$CheckingIsValidCondition$"), GetCheckingIsValidConditionContent());
+
+    return content;
+}
+
+System::String CoreTools::CSVGenerateDataSourceFile::GetCheckingIsValidConditionContent() const
+{
+    String content{};
+
+    const auto head = GetCSVHead();
+    auto isFirst = true;
+    for (auto index = 0; index < head.GetCount(); ++index)
+    {
+        if (const auto result = GetCheckingIsValidConditionContent(head, isFirst, index);
+            !result.empty())
+        {
+            content += result;
+            isFirst = false;
+        }
+    }
+
+    return content;
+}
+
+System::String CoreTools::CSVGenerateDataSourceFile::GetCheckingIsValidConditionContent(const CSVHead& head, bool isFirst, int index)
+{
+    String content{};
+
+    if (const auto scope = head.GetScope(index);
+        !scope.empty())
+    {
+        if (!isFirst)
+        {
+            content += TextParsing::gNewlineCharacter;
+        }
+
+        content += SYSTEM_TEXT("        (");
+        content += head.GetScopeExpression(index);
+        content += SYSTEM_TEXT(")");
+    }
+
+    return content;
+}
+
+System::String CoreTools::CSVGenerateDataSourceFile::GetDataGetFunctionDefineContent() const
+{
+    String content{};
+
+    const auto head = GetCSVHead();
     for (auto index = 0; index < head.GetCount(); ++index)
     {
         const auto functionVariableName = head.GetFunctionVariableName(index);
@@ -215,134 +299,80 @@ System::String CoreTools::CSVGenerateDataSourceFile::GetContent(const String& co
         const auto upperVariableName = head.GetUpperVariableName(index);
         const auto variableName = head.GetVariableName(index);
 
-        auto copyDataGetFunctionDefine = dataGetFunctionDefine;
-
-        if (CSVDataType::BoolArray <= dataType)
-        {
-            boost::algorithm::replace_all(copyDataGetFunctionDefine, SYSTEM_TEXT("$ElementType$"), SYSTEM_TEXT("$Namespace$::$ClassName$::") + abbreviation);
-        }
-        else if (dataType == CSVDataType::Enum)
-        {
-            boost::algorithm::replace_all(copyDataGetFunctionDefine, SYSTEM_TEXT("$ElementType$"), SYSTEM_TEXT("$Namespace$::") + abbreviation);
-        }
-        else
-        {
-            boost::algorithm::replace_all(copyDataGetFunctionDefine, SYSTEM_TEXT("$ElementType$"), actualType);
-        }
-
-        boost::algorithm::replace_all(copyDataGetFunctionDefine, SYSTEM_TEXT("$ElementName$"), functionVariableName);
-
-        if (CSVDataType::Bool <= dataType && dataType <= CSVDataType::IntVector4)
-        {
-            boost::algorithm::replace_all(copyDataGetFunctionDefine, SYSTEM_TEXT("$ElementIsNoexcept$"), SYSTEM_TEXT(" noexcept"));
-        }
-        else
-        {
-            boost::algorithm::replace_all(copyDataGetFunctionDefine, SYSTEM_TEXT("$ElementIsNoexcept$"), SYSTEM_TEXT(""));
-        }
-
-        boost::algorithm::replace_all(copyDataGetFunctionDefine, SYSTEM_TEXT("$SmallElementName$"), variableName);
-
-        dataGetFunctionDefineContent += copyDataGetFunctionDefine;
-        dataGetFunctionDefineContent += SYSTEM_TEXT("\n");
-
-        if (CSVDataType::BoolArray <= dataType)
-        {
-            auto copyDataGetCountArrayFunction = dataGetCountArrayFunction;
-
-            boost::algorithm::replace_all(copyDataGetCountArrayFunction, SYSTEM_TEXT("$ElementName$"), upperVariableName);
-            boost::algorithm::replace_all(copyDataGetCountArrayFunction, SYSTEM_TEXT("$ElementType$"), abbreviation);
-            boost::algorithm::replace_all(copyDataGetCountArrayFunction, SYSTEM_TEXT("$SmallElementName$"), variableName);
-
-            dataGetFunctionDefineContent += copyDataGetCountArrayFunction;
-            dataGetFunctionDefineContent += SYSTEM_TEXT("\n");
-
-            auto copyDataGetValueArrayFunction = dataGetValueArrayFunction;
-
-            boost::algorithm::replace_all(copyDataGetValueArrayFunction, SYSTEM_TEXT("$ElementName$"), upperVariableName);
-            boost::algorithm::replace_all(copyDataGetValueArrayFunction, SYSTEM_TEXT("$ElementType$"), abbreviation);
-
-            boost::algorithm::replace_all(copyDataGetValueArrayFunction, SYSTEM_TEXT("$SmallElementType$"), valueType);
-            boost::algorithm::replace_all(copyDataGetValueArrayFunction, SYSTEM_TEXT("$SmallElementName$"), variableName);
-
-            dataGetFunctionDefineContent += copyDataGetValueArrayFunction;
-            dataGetFunctionDefineContent += SYSTEM_TEXT("\n");
-
-            auto copyDataGetBeginIterArrayFunction = dataGetBeginIterArrayFunction;
-
-            boost::algorithm::replace_all(copyDataGetBeginIterArrayFunction, SYSTEM_TEXT("$ElementName$"), upperVariableName);
-            boost::algorithm::replace_all(copyDataGetBeginIterArrayFunction, SYSTEM_TEXT("$ElementType$"), abbreviation);
-            boost::algorithm::replace_all(copyDataGetBeginIterArrayFunction, SYSTEM_TEXT("$SmallElementName$"), variableName);
-
-            dataGetFunctionDefineContent += copyDataGetBeginIterArrayFunction;
-            dataGetFunctionDefineContent += SYSTEM_TEXT("\n");
-
-            auto copyDataGetEndIterArrayFunction = dataGetEndIterArrayFunction;
-
-            boost::algorithm::replace_all(copyDataGetEndIterArrayFunction, SYSTEM_TEXT("$ElementName$"), upperVariableName);
-            boost::algorithm::replace_all(copyDataGetEndIterArrayFunction, SYSTEM_TEXT("$ElementType$"), abbreviation);
-
-            boost::algorithm::replace_all(copyDataGetEndIterArrayFunction, SYSTEM_TEXT("$SmallElementName$"), variableName);
-
-            dataGetFunctionDefineContent += copyDataGetEndIterArrayFunction;
-            dataGetFunctionDefineContent += SYSTEM_TEXT("\n");
-        }
-
-        if (const auto mapping = head.GetMapping(index);
-            !mapping.empty())
-        {
-            const auto mappingUpper = StringUtility::ToFirstLetterUpper(mapping);
-
-            if (CSVDataType::BoolArray <= dataType)
-            {
-                auto copyDataGetMappingArrayFunction = dataGetMappingArrayFunction;
-
-                boost::algorithm::replace_all(copyDataGetMappingArrayFunction, SYSTEM_TEXT("$ElementName$"), upperVariableName);
-                boost::algorithm::replace_all(copyDataGetMappingArrayFunction, SYSTEM_TEXT("$MappingType$"), mappingUpper);
-
-                boost::algorithm::replace_all(copyDataGetMappingArrayFunction, SYSTEM_TEXT("$SmallElementName$"), variableName);
-
-                dataGetFunctionDefineContent += copyDataGetMappingArrayFunction;
-                dataGetFunctionDefineContent += SYSTEM_TEXT("\n");
-            }
-            else
-            {
-                auto copyDataGetMappingFunction = dataGetMappingFunction;
-
-                boost::algorithm::replace_all(copyDataGetMappingFunction, SYSTEM_TEXT("$ElementName$"), upperVariableName);
-                boost::algorithm::replace_all(copyDataGetMappingFunction, SYSTEM_TEXT("$MappingType$"), mappingUpper);
-
-                boost::algorithm::replace_all(copyDataGetMappingFunction, SYSTEM_TEXT("$SmallElementName$"), variableName);
-
-                dataGetFunctionDefineContent += copyDataGetMappingFunction;
-                dataGetFunctionDefineContent += SYSTEM_TEXT("\n");
-            }
-        }
+        content += GetDataGetFunctionDefineContent(head, index, functionVariableName, dataType, actualType, valueType, abbreviation, upperVariableName, variableName);
     }
 
-    boost::algorithm::replace_all(content, SYSTEM_TEXT("$DataGetFunctionDefine$"), dataGetFunctionDefineContent);
+    return content;
+}
 
-    boost::algorithm::replace_all(content, SYSTEM_TEXT("$Namespace$"), GetNameSpace());
-    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ClassName$"), GetCSVClassName());
-    boost::algorithm::replace_all(content, SYSTEM_TEXT("$SmallClassName$"), StringUtility::ToFirstLetterLower(GetCSVClassName()));
+System::String CoreTools::CSVGenerateDataSourceFile::GetDataGetFunctionDefineContent(const CSVHead& head,
+                                                                                     int index,
+                                                                                     const String& functionVariableName,
+                                                                                     CSVDataType dataType,
+                                                                                     const String& actualType,
+                                                                                     const String& valueType,
+                                                                                     const String& abbreviation,
+                                                                                     const String& upperVariableName,
+                                                                                     const String& variableName) const
+{
+    auto content = GetReplaceContent(dataGetFunctionDefine,
+                                     { { TextParsing::gElementType, GetElementTypeReplace(dataType, abbreviation, actualType) },
+                                       { TextParsing::gElementName, functionVariableName },
+                                       { TextParsing::gElementIsNoexcept, GetElementIsNoexceptReplace(dataType) },
+                                       { TextParsing::gSmallElementName, variableName } });
 
-    if (head.GetCSVFormatType() == CSVFormatType::Key)
+    if (CSVDataType::BoolArray <= dataType)
     {
-        boost::algorithm::replace_all(content, SYSTEM_TEXT("$KeyName$"), head.GetKey());
-    }
-    else
-    {
-        boost::algorithm::replace_all(content, SYSTEM_TEXT("$KeyName$"), head.GetVariableName(0));
+        content += GetDataGetArrayFunctionDefineContent(valueType, abbreviation, upperVariableName, variableName);
     }
 
-    if (head.HasScope())
+    if (const auto mapping = head.GetMapping(index);
+        !mapping.empty())
     {
-        boost::algorithm::replace_all(content, SYSTEM_TEXT("$ClassIsValidLevel$"), SYSTEM_TEXT("1"));
-    }
-    else
-    {
-        boost::algorithm::replace_all(content, SYSTEM_TEXT("$ClassIsValidLevel$"), SYSTEM_TEXT("9"));
+        content += GetDataGetMappingFunctionDefineContent(dataType, upperVariableName, variableName, mapping);
     }
 
-    return ReplaceTemplate(content);
+    return content;
+}
+
+System::String CoreTools::CSVGenerateDataSourceFile::GetDataGetArrayFunctionDefineContent(const String& valueType,
+                                                                                          const String& abbreviation,
+                                                                                          const String& upperVariableName,
+                                                                                          const String& variableName) const
+{
+    auto content = GetReplaceContent(dataGetCountArrayFunctionDefine,
+                                     { { TextParsing::gElementType, abbreviation },
+                                       { TextParsing::gElementName, upperVariableName },
+                                       { TextParsing::gSmallElementName, variableName } });
+
+    content += GetReplaceContent(dataGetValueArrayFunctionDefine,
+                                 { { TextParsing::gElementType, abbreviation },
+                                   { TextParsing::gElementName, upperVariableName },
+                                   { TextParsing::gSmallElementType, valueType },
+                                   { TextParsing::gSmallElementName, variableName } });
+
+    content += GetReplaceContent(dataGetBeginIterArrayFunctionDefine,
+                                 { { TextParsing::gElementType, abbreviation },
+                                   { TextParsing::gElementName, upperVariableName },
+                                   { TextParsing::gSmallElementName, variableName } });
+
+    content += GetReplaceContent(dataGetEndIterArrayFunctionDefine,
+                                 { { TextParsing::gElementType, abbreviation },
+                                   { TextParsing::gElementName, upperVariableName },
+                                   { TextParsing::gSmallElementName, variableName } });
+
+    return content;
+}
+
+System::String CoreTools::CSVGenerateDataSourceFile::GetDataGetMappingFunctionDefineContent(CSVDataType dataType,
+                                                                                            const String& upperVariableName,
+                                                                                            const String& variableName,
+                                                                                            const String& mapping) const
+{
+    const auto mappingUpper = StringUtility::ToFirstLetterUpper(mapping);
+
+    return GetReplaceContent(CSVDataType::BoolArray <= dataType ? dataGetMappingArrayFunctionDefine : dataGetMappingFunctionDefine,
+                             { { TextParsing::gElementType, mappingUpper },
+                               { TextParsing::gElementName, upperVariableName },
+                               { TextParsing::gElementIsNoexcept, variableName } });
 }

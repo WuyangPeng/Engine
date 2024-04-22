@@ -51,7 +51,7 @@ void System::WaitForEventTesting::WaitForAutoEventTest0(WindowsHandle eventHandl
 void System::WaitForEventTesting::WaitForAutoEventTest1(WindowsHandle eventHandle)
 {
     const auto flag = WaitForSystemEvent(eventHandle, EnumCastUnderlying(MutexWait::Infinite));
-    ASSERT_ENUM_EQUAL(flag, MutexWaitReturn::Object0);
+    ASSERT_EQUAL(flag, MutexWaitReturn::Object0);
 
     ASSERT_TRUE(SetSystemEvent(eventHandle));
 }
@@ -59,7 +59,7 @@ void System::WaitForEventTesting::WaitForAutoEventTest1(WindowsHandle eventHandl
 void System::WaitForEventTesting::WaitForAutoEventTest2(WindowsHandle eventHandle)
 {
     const auto flag = WaitForSystemEvent(eventHandle, EnumCastUnderlying(MutexWait::Infinite), true);
-    ASSERT_ENUM_EQUAL(flag, MutexWaitReturn::Object0);
+    ASSERT_EQUAL(flag, MutexWaitReturn::Object0);
 
     ASSERT_TRUE(SetSystemEvent(eventHandle));
 }
@@ -67,7 +67,7 @@ void System::WaitForEventTesting::WaitForAutoEventTest2(WindowsHandle eventHandl
 void System::WaitForEventTesting::WaitForAutoEventTest3(WindowsHandle eventHandle)
 {
     const auto flag = WaitForSystemEvent(eventHandle, EnumCastUnderlying(MutexWait::Infinite), false);
-    ASSERT_ENUM_EQUAL(flag, MutexWaitReturn::Object0);
+    ASSERT_EQUAL(flag, MutexWaitReturn::Object0);
 
     ASSERT_TRUE(SetSystemEvent(eventHandle));
 }

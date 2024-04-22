@@ -188,7 +188,7 @@ void Mathematics::RootsCubic<T>::ComputeClassifiers(const Rational& rM0, const R
 }
 
 template <typename T>
-int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots)
+int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots) requires(std::is_arithmetic_v<T>)
 {
     const auto signD0 = rD0.GetSign();
     const auto signD1 = rD1.GetSign();
@@ -293,6 +293,143 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         auto b = std::max(Math::GetValue(1), std::max(std::fabs(d0), std::fabs(d1)));
         auto f = [&d0, &d1](T x) noexcept {
             return std::fma(x, std::fma(x, x, d1), d0);
+        };
+
+        /// 区间[-b,b]上的双截。
+        const Rational half{ 0.5 };
+        auto xMin = -b;
+        auto xMax = b;
+        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        rRoots.at(0) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
+        return 1;
+    }
+    else  // delta = 0
+    {
+        /// 一个实根，重数1。
+        /// 一个实根，多重数2。
+        /// 根是有理数，所以对于每个根x，F(x) = 0 。
+        auto rX0 = Rational{ -3, 2 } * rD0 / rD1;
+        auto rX1 = Rational{ -2 } * rX0;
+        if (rX0 < rX1)
+        {
+            rRoots.at(0) = { rX0, 2 };
+            rRoots.at(1) = { rX1, 1 };
+        }
+        else
+        {
+            rRoots.at(0) = { rX1, 1 };
+            rRoots.at(1) = { rX0, 2 };
+        }
+        return 2;
+    }
+}
+
+template <typename T>
+int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots) requires(!std::is_arithmetic_v<T>)
+{
+    const auto signD0 = rD0.GetSign();
+    const auto signD1 = rD1.GetSign();
+    if (signD0 == 0)
+    {
+        if (signD1 > 0)
+        {
+            /// 一个实根，重数1。
+            rRoots.at(0) = { Rational{ 0 }, 1 };
+            return 1;
+        }
+        else if (signD1 < 0)
+        {
+            std::array quadraticRoot{ RationalPolynomialRoot::CreateZero(), RationalPolynomialRoot::CreateZero() };
+            /// 三个实根，每个复数为1。
+            auto numRoots = RootsQuadratic::ComputeDepressedRoots(true, rD1, quadraticRoot);
+            rRoots.at(0) = quadraticRoot.at(0);
+            rRoots.at(1) = quadraticRoot.at(1);
+            rRoots.at(numRoots++) = { Rational(0), 1 };
+            std::sort(rRoots.begin(), rRoots.begin() + numRoots);
+            return numRoots;
+        }
+        else  // signD1 = 0
+        {
+            /// 一个实根，多重数3。
+            rRoots.at(0) = { Rational(0), 3 };
+            return 1;
+        }
+    }
+
+    if (signD1 == 0)  // 和 d0 != 0
+    {
+        /// 一个实根，重数1。
+        auto d0 = static_cast<T>(rD0);
+        auto b = std::max(T{ 1 }, Fabs(d0));
+        auto f = [&d0](T x) {
+            return Fma(x, x * x, d0);
+        };
+
+        /// 区间[-b,b]上的双截。
+        const Rational half{ 0.5 };
+        auto xMin = -b;
+        auto xMax = b;
+        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        rRoots.at(0) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
+        return 1;
+    }
+
+    auto rDelta = Rational{ -27 } * rD0 * rD0 + Rational{ -4 } * rD1 * rD1 * rD1;
+
+    if (const auto signDelta = rDelta.GetSign();
+        signDelta > 0)
+    {
+        /// 三个实根，每个复数为1。
+        ///  F(x) = x^3 + d1 * x + d0的导数是F'(x) = 3 * x^2 + d1，
+        ///  并且必须有两个实根x0和x1，这意味着d1 < 0。
+        ///  设s = sqrt(-d1 / 3)。
+        ///  F'(x) 根是x0 = -s 和 x1 = s。
+        ///  使用萨缪尔森不等式，根的边界区间是[-2 * s, 2 * s]。
+        ///  将区间划分为[-2 * s, -s], [-s, s]和[s, 2 * s]。
+        ///  在每个区间上使用平分来估计F(x)的根。
+        std::array rQRoots{ RationalPolynomialRoot::CreateZero(), RationalPolynomialRoot::CreateZero() };
+        MAYBE_UNUSED const auto roots = RootsQuadratic::ComputeDepressedRoots(true, Rational(1, 3) * rD1, rQRoots);
+        auto rS = rQRoots.at(1).GetX();
+        auto rTwoS = Rational{ 2 } * rS;
+        auto d0 = static_cast<T>(rD0);
+        auto d1 = static_cast<T>(rD1);
+        auto s = static_cast<T>(rS);
+        auto twoS = static_cast<T>(rTwoS);
+        auto f = [&d0, &d1](T x) {
+            return Fma(x, Fma(x, x, d1), d0);
+        };
+
+        const Rational half{ 0.5 };
+
+        /// 区间[-2 * s, s]上的双截
+        auto xMin = -twoS;
+        auto xMax = -s;
+        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        rRoots.at(0) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
+
+        /// 区间[-2 * s, s]上的双截
+        xMin = -s;
+        xMax = s;
+        PolynomialRoot::PolynomialRootBisect(f, +1, -1, xMin, xMax);
+        rRoots.at(1) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
+
+        /// 区间[s, 2 * s]上的双截
+        xMin = s;
+        xMax = twoS;
+        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        rRoots.at(2) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
+        return 3;
+    }
+    else if (signDelta < 0)
+    {
+        /// 一个实根，重数1。
+        /// F(x)的柯西界为b = max{1,|d0|,|d1|}。
+        /// 在区间 [-b,b]上使用平分来估计根。
+        auto d0 = static_cast<T>(rD0);
+        auto d1 = static_cast<T>(rD1);
+        auto b = std::max(T{ 1 }, std::max(Fabs(d0), Fabs(d1)));
+        auto f = [&d0, &d1](T x) {
+            return Fma(x, Fma(x, x, d1), d0);
         };
 
         /// 区间[-b,b]上的双截。

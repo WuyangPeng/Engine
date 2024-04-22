@@ -335,15 +335,15 @@ void Mathematics::BandedMatrixSolveTesting::SolveTest()
             bandedMatrix0(index, index) = bandedMatrix0(index - 1, index - 1) * bandedMatrix0(index, index - 1) + doubleRandomDistribution(generator);
         }
 
-        ASSERT_ENUM_EQUAL(bandedMatrix0.GetSolve(), BandedMatrixSolveFlags::Unsolved);
+        ASSERT_EQUAL(bandedMatrix0.GetSolve(), BandedMatrixSolveFlags::Unsolved);
 
         if (!bandedMatrix0.CholeskyFactor())
         {
-            ASSERT_ENUM_EQUAL(bandedMatrix0.GetSolve(), BandedMatrixSolveFlags::Failure);
+            ASSERT_EQUAL(bandedMatrix0.GetSolve(), BandedMatrixSolveFlags::Failure);
             continue;
         }
 
-        ASSERT_ENUM_EQUAL(bandedMatrix0.GetSolve(), BandedMatrixSolveFlags::Succeed);
+        ASSERT_EQUAL(bandedMatrix0.GetSolve(), BandedMatrixSolveFlags::Succeed);
 
         VariableLengthVectorD vector0(bandedMatrix0.GetSize());
 
@@ -383,14 +383,14 @@ void Mathematics::BandedMatrixSolveTesting::SolveTest()
     bandedMatrix4(2, 1) = 8;
     bandedMatrix4(2, 2) = 6;
 
-    ASSERT_ENUM_EQUAL(bandedMatrix4.GetSolve(), BandedMatrixSolveFlags::Unsolved);
+    ASSERT_EQUAL(bandedMatrix4.GetSolve(), BandedMatrixSolveFlags::Unsolved);
 
     if (!bandedMatrix4.CholeskyFactor())
     {
-        ASSERT_ENUM_EQUAL(bandedMatrix4.GetSolve(), BandedMatrixSolveFlags::Failure);
+        ASSERT_EQUAL(bandedMatrix4.GetSolve(), BandedMatrixSolveFlags::Failure);
     }
     else
     {
-        ASSERT_ENUM_EQUAL(bandedMatrix4.GetSolve(), BandedMatrixSolveFlags::Succeed);
+        ASSERT_EQUAL(bandedMatrix4.GetSolve(), BandedMatrixSolveFlags::Succeed);
     }
 }

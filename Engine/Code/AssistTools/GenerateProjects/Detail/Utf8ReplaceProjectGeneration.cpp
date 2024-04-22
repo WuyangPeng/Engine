@@ -10,7 +10,7 @@
 #include "AssistTools/AssistToolsExport.h"
 
 #include "Utf8ReplaceProjectGeneration.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 
 AssistTools::Utf8ReplaceProjectGeneration::Utf8ReplaceProjectGeneration(const String& fileName, const GameParameterAnalysis& gameParameterAnalysis, const CodeMappingAnalysis& codeMappingAnalysis)
@@ -31,7 +31,7 @@ AssistTools::ProjectGenerationImpl::String AssistTools::Utf8ReplaceProjectGenera
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const CoreTools::IFStreamManager streamManager{ GetFileName() };
+    const CoreTools::IFileStreamManager streamManager{ GetFileName() };
 
     return streamManager.GetFileContent();
 }

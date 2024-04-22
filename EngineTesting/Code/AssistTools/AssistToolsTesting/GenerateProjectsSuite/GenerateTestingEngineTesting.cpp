@@ -8,7 +8,7 @@
 ///	°æ±¾£º1.0.0.0 (2023/11/08 15:42)
 
 #include "GenerateTestingEngineTesting.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"

@@ -50,7 +50,7 @@ void System::ReleaseSemaphoreTesting::WaitForSemaphoreTest(WindowsHandle semapho
 {
     const auto flag = WaitForSystemSemaphore(semaphoreHandle, EnumCastUnderlying(MutexWait::Infinite));
 
-    ASSERT_ENUM_EQUAL(flag, MutexWaitReturn::Object0);
+    ASSERT_EQUAL(flag, MutexWaitReturn::Object0);
 
     if (flag == MutexWaitReturn::Object0)
     {

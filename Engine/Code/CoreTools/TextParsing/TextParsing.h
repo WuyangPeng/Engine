@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:51)
+/// 版本：1.0.0.8 (2024/04/02 11:14)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_H
 #define CORE_TOOLS_TEXT_PARSING_H
@@ -43,8 +43,8 @@
 #include "SimpleCSV/CommandQuery/QuerySheetId.h"
 #include "SimpleCSV/CommandQuery/QuerySheetIndex.h"
 #include "SimpleCSV/CommandQuery/QuerySheetName.h"
-#include "SimpleCSV/CommandQuery/QuerySheetRelsId.h"
-#include "SimpleCSV/CommandQuery/QuerySheetRelsTarget.h"
+#include "SimpleCSV/CommandQuery/QuerySheetRelationshipId.h"
+#include "SimpleCSV/CommandQuery/QuerySheetRelationshipTarget.h"
 #include "SimpleCSV/CommandQuery/QuerySheetType.h"
 #include "SimpleCSV/CommandQuery/QuerySheetVisibility.h"
 #include "SimpleCSV/CommandQuery/QueryXmlData.h"

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.5 (2024/01/23 10:00)
+/// 版本：1.0.0.8 (2024/04/11 14:37)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_H
@@ -65,15 +65,15 @@
 ///        Vertex vertex = minHeapRecord.GetHandle();
 ///
 ///        // 从双链接列表中删除'vertex'。
-///        Vertex vp = minHeap.GetHandle(records.at(vertex.previous));
-///        Vertex vc = minHeap.GetHandle(records.at(vertex.current));
-///        Vertex vn = minHeap.GetHandle(records.at(vertex.next));
-///        vp.next = vc.next;
-///        vn.previous = vc.previous;
+///        Vertex vertexPrevious = minHeap.GetHandle(records.at(vertex.previous));
+///        Vertex vertexCurrent = minHeap.GetHandle(records.at(vertex.current));
+///        Vertex vertexNext = minHeap.GetHandle(records.at(vertex.next));
+///        vertexPrevious.next = vertexCurrent.next;
+///        vertexNext.previous = vertexCurrent.previous;
 ///
 ///        // 更新最小堆中邻居的权重。
-///        minHeap.Update(records.at(vertex.previous), Weight(positions, vp));
-///        minHeap.Update(records.at(vertex.next), Weight(positions, vn));
+///        minHeap.Update(records.at(vertex.previous), Weight(positions, vertexPrevious));
+///        minHeap.Update(records.at(vertex.next), Weight(positions, vertexNext));
 ///    }
 namespace CoreTools
 {
@@ -91,6 +91,7 @@ namespace CoreTools
 
         /// 支持调试。函数测试数据结构是否是有效的最小堆。
         NODISCARD bool IsValid() const noexcept;
+        NODISCARD bool IsValid(int childIndex) const;
 
         /// 清除最小堆，使其具有指定的最大元素，
         /// numElements为零，keys设置为records的自然顺序。
@@ -139,15 +140,19 @@ namespace CoreTools
         NODISCARD int GetRecordKey(int index) const;
         void SetIndex(int index);
 
+        void UpdateGreater(int index, const ValueType& weight);
+        void UpdateLess(int index, const ValueType& weight);
+        NODISCARD int GetMaxChildIndex(int childIndex);
+
     private:
         /// 使用两级存储系统。pointers有两个作用。
         /// 首先，它们对每个插入的值都是唯一的，以便支持最小堆的Update()功能。
         /// 其次，它们避免了在堆中进行排序时对Record对象进行潜在的昂贵复制。
 
-        // 支持二叉树拓扑结构和排序。
+        /// 支持二叉树拓扑结构和排序。
         int numElements;
 
-        // 二进制树节点上的用户指定信息。
+        /// 二进制树节点上的用户指定信息。
         MinHeapRecordContainer records;
 
         KeysContainer pointers;

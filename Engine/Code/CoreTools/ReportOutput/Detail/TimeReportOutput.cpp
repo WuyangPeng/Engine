@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:18)
+/// 版本：1.0.0.8 (2024/04/12 11:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,8 +20,6 @@
 
 #include <sstream>
 
-using namespace std::literals;
-
 CoreTools::TimeReportOutput::TimeReportOutput(std::string timeDescribe, int borderLineLength, const OStreamShared& streamShared) noexcept
     : EquidistantReportOutputImpl{ borderLineLength, streamShared }, timeDescribe{ std::move(timeDescribe) }
 {
@@ -35,7 +33,7 @@ void CoreTools::TimeReportOutput::PrintCurrentTime()
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     const auto nowTime = boost::posix_time::second_clock::local_time();
-    const auto formattingTime = timeDescribe + "时间："s + to_simple_string(nowTime);
+    const auto formattingTime = timeDescribe + "时间：" + to_simple_string(nowTime);
 
     std::stringstream ss{};
 
@@ -50,20 +48,24 @@ void CoreTools::TimeReportOutput::PrintCostTime(const CpuTimer& cpuTime)
 
     auto logLevel = LogLevel::Disabled;
 
-    if (10.0e9 <= cpuTime.elapsed().wall || 10.0e9 <= cpuTime.elapsed().user || 10.0e9 <= cpuTime.elapsed().system)
+    constexpr auto fatalTime = 10000000000ll;
+    constexpr auto errorTime = 5000000000ll;
+    constexpr auto warnTime = 1000000000ll;
+
+    if (fatalTime <= cpuTime.elapsed().wall || fatalTime <= cpuTime.elapsed().user || fatalTime <= cpuTime.elapsed().system)
     {
         logLevel = LogLevel::Fatal;
     }
-    else if (5.0e9 <= cpuTime.elapsed().wall || 5.0e9 <= cpuTime.elapsed().user || 5.0e9 <= cpuTime.elapsed().system)
+    else if (errorTime <= cpuTime.elapsed().wall || errorTime <= cpuTime.elapsed().user || errorTime <= cpuTime.elapsed().system)
     {
         logLevel = LogLevel::Error;
     }
-    else if (1.0e9 <= cpuTime.elapsed().wall || 1.0e9 <= cpuTime.elapsed().user || 1.0e9 <= cpuTime.elapsed().system)
+    else if (warnTime <= cpuTime.elapsed().wall || warnTime <= cpuTime.elapsed().user || warnTime <= cpuTime.elapsed().system)
     {
         logLevel = LogLevel::Warn;
     }
 
-    const auto costTime = timeDescribe + "时间：\n"s + cpuTime.format();
+    const auto costTime = timeDescribe + "时间：\n" + cpuTime.format();
 
     LOG_ASYNCHRONOUS_SINGLETON.Registered(GetStream(), costTime, logLevel);
 }

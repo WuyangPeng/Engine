@@ -24,7 +24,7 @@ namespace CsvOutput
         using ClassType = Input1;
         using ParentType = Input1Base;
 
-        using CSVRow = CoreTools::CSVRow;
+        using CSVRow = CoreTools::CSVRow; 
 
     public:
         explicit Input1(const CSVRow& csvRow);
@@ -37,7 +37,7 @@ namespace CsvOutput
 
         NODISCARD bool IsTest0() const noexcept override;
 
-        NODISCARD System::TChar GetTest1() const noexcept override;
+        NODISCARD Char GetTest1() const noexcept override;
 
         NODISCARD double GetTest2() const noexcept override;
 
@@ -54,7 +54,7 @@ namespace CsvOutput
     private:
         int id;  // id
         bool test0;  // ≤‚ ‘0
-        System::TChar test1;  // ≤‚ ‘1
+        Char test1;  // ≤‚ ‘1
         double test2;  // ≤‚ ‘2
         int test4;  // ≤‚ ‘4
         String test5;  // ≤‚ ‘5

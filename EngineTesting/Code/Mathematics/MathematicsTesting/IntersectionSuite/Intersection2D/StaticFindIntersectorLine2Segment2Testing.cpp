@@ -59,31 +59,31 @@ void Mathematics::StaticFindIntersectorLine2Segment2Testing::SegmentTest()
 
         StaticFindIntersectorLine2Segment2<float> firstClassify(Line2F(lhsOrigin, lhsDirection), Segment2F(extent, lhsOrigin, lhsDirection));
 
-        ASSERT_ENUM_EQUAL(firstClassify.GetIntersectionType(), IntersectionType::Segment);
+        ASSERT_EQUAL(firstClassify.GetIntersectionType(), IntersectionType::Segment);
         ASSERT_EQUAL(firstClassify.GetQuantity(), INT_MAX);
         ASSERT_THROW_EXCEPTION_1(ExceptionTest, firstClassify);
 
         StaticFindIntersectorLine2Segment2<float> secondClassify(Line2F(lhsOrigin, lhsDirection), Segment2F(extent, rhsOrigin, lhsDirection));
 
-        ASSERT_ENUM_EQUAL(secondClassify.GetIntersectionType(), IntersectionType::Empty);
+        ASSERT_EQUAL(secondClassify.GetIntersectionType(), IntersectionType::Empty);
         ASSERT_EQUAL(secondClassify.GetQuantity(), 0);
         ASSERT_THROW_EXCEPTION_1(ExceptionTest, secondClassify);
 
         StaticFindIntersectorLine2Segment2<float> thirdClassify(Line2F(lhsOrigin, lhsDirection), Segment2F(extent, lhsOrigin, -lhsDirection));
 
-        ASSERT_ENUM_EQUAL(thirdClassify.GetIntersectionType(), IntersectionType::Segment);
+        ASSERT_EQUAL(thirdClassify.GetIntersectionType(), IntersectionType::Segment);
         ASSERT_EQUAL(thirdClassify.GetQuantity(), INT_MAX);
         ASSERT_THROW_EXCEPTION_1(ExceptionTest, thirdClassify);
 
         StaticFindIntersectorLine2Segment2<float> fourthClassify(Line2F(lhsOrigin, lhsDirection), Segment2F(extent, lhsOrigin + lhsDirection, -lhsDirection));
 
-        ASSERT_ENUM_EQUAL(fourthClassify.GetIntersectionType(), IntersectionType::Segment);
+        ASSERT_EQUAL(fourthClassify.GetIntersectionType(), IntersectionType::Segment);
         ASSERT_EQUAL(fourthClassify.GetQuantity(), INT_MAX);
         ASSERT_THROW_EXCEPTION_1(ExceptionTest, fourthClassify);
 
         StaticFindIntersectorLine2Segment2<float> fifthClassify(Line2F(lhsOrigin, lhsDirection), Segment2F(extent, lhsOrigin - lhsDirection, -lhsDirection));
 
-        ASSERT_ENUM_EQUAL(fifthClassify.GetIntersectionType(), IntersectionType::Segment);
+        ASSERT_EQUAL(fifthClassify.GetIntersectionType(), IntersectionType::Segment);
         ASSERT_EQUAL(fifthClassify.GetQuantity(), INT_MAX);
         ASSERT_THROW_EXCEPTION_1(ExceptionTest, fifthClassify);
 
@@ -94,7 +94,7 @@ void Mathematics::StaticFindIntersectorLine2Segment2Testing::SegmentTest()
 
         if (MathF::FAbs(seventhClassify.GetParameter1()) <= sixthClassify.GetSegment().GetExtent())
         {
-            ASSERT_ENUM_EQUAL(sixthClassify.GetIntersectionType(), IntersectionType::Point);
+            ASSERT_EQUAL(sixthClassify.GetIntersectionType(), IntersectionType::Point);
             ASSERT_EQUAL(sixthClassify.GetQuantity(), 1);
 
             Vector2F point0 = sixthClassify.GetPoint() - lhsOrigin;
@@ -111,7 +111,7 @@ void Mathematics::StaticFindIntersectorLine2Segment2Testing::SegmentTest()
         }
         else
         {
-            ASSERT_ENUM_EQUAL(sixthClassify.GetIntersectionType(), IntersectionType::Empty);
+            ASSERT_EQUAL(sixthClassify.GetIntersectionType(), IntersectionType::Empty);
             ASSERT_EQUAL(sixthClassify.GetQuantity(), 0);
             ASSERT_THROW_EXCEPTION_1(ExceptionTest, sixthClassify);
         }

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:40)
+/// 版本：1.0.0.8 (2024/03/30 22:50)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_READ_FILE_MANAGER_INTERFACE_H
 #define CORE_TOOLS_FILE_MANAGER_READ_FILE_MANAGER_INTERFACE_H
@@ -28,6 +28,8 @@ namespace CoreTools
         using ReadFileManagerSharedPtr = std::shared_ptr<ReadFileManagerInterface>;
 
     public:
+        NODISCARD static ReadFileManagerSharedPtr Create(const String& fileName);
+
         ReadFileManagerInterface() = default;
         virtual ~ReadFileManagerInterface() noexcept = default;
         ReadFileManagerInterface(const ReadFileManagerInterface&) noexcept = default;
@@ -41,9 +43,6 @@ namespace CoreTools
 
         virtual void Read(size_t itemSize, void* data) = 0;
         virtual void Read(size_t itemSize, size_t itemsNumber, void* data) = 0;
-
-    public:
-        NODISCARD static ReadFileManagerSharedPtr Create(const String& fileName);
     };
 }
 

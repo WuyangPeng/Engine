@@ -104,7 +104,7 @@ void System::CompareStringUseLocaleFlagsTesting::CompareStringTest(size_t index)
 void System::CompareStringUseLocaleFlagsTesting::CompareStringEqualTest(LanguageLocale languageLocale, Compares compare, const String& comparesString)
 {
     const auto result = CompareStringUseLocale(languageLocale, compare, comparesString, comparesString);
-    ASSERT_ENUM_EQUAL(result, ComparesStringReturn::Equal);
+    ASSERT_EQUAL(result, ComparesStringReturn::Equal);
 }
 
 void System::CompareStringUseLocaleFlagsTesting::CompareStringOppositeTest(LanguageLocale languageLocale, Compares compare, const String& lhsComparesString, const String& rhsComparesString)

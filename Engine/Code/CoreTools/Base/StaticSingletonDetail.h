@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:04)
+/// 版本：1.0.0.8 (2024/03/28 16:45)
 
 #ifndef CORE_TOOLS_BASE_STATIC_SINGLETON_DETAIL_H
 #define CORE_TOOLS_BASE_STATIC_SINGLETON_DETAIL_H
@@ -34,20 +34,19 @@ typename CoreTools::StaticSingleton<T, MutexCreate>::PointType CoreTools::Static
 }
 
 template <typename T, CoreTools::MutexCreate MutexCreate>
-typename CoreTools::StaticSingleton<T, MutexCreate>::MutexType& CoreTools::StaticSingleton<T, MutexCreate>::GetMutex()
+typename CoreTools::StaticSingleton<T, MutexCreate>::MutexType& CoreTools::StaticSingleton<T, MutexCreate>::GetMutex() requires(isStdMutex)
 {
-    if constexpr (MutexCreate == MutexCreate::UseOriginalStd || MutexCreate == MutexCreate::UseOriginalStdRecursive)
-    {
-        static MutexType mutex{};
+    static MutexType mutex{};
 
-        return mutex;
-    }
-    else
-    {
-        static MutexType mutex{ MutexCreate };
+    return mutex;
+}
 
-        return mutex;
-    }
+template <typename T, CoreTools::MutexCreate MutexCreate>
+typename CoreTools::StaticSingleton<T, MutexCreate>::MutexType& CoreTools::StaticSingleton<T, MutexCreate>::GetMutex() requires(!isStdMutex)
+{
+    static MutexType mutex{ MutexCreate };
+
+    return mutex;
 }
 
 #endif  // CORE_TOOLS_BASE_STATIC_SINGLETON_DETAIL_H

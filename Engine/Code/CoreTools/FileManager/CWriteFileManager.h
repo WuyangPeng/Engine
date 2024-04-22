@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:43)
+/// 版本：1.0.0.8 (2024/03/30 22:53)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_C_WRITE_FILE_MANAGER_H
 #define CORE_TOOLS_FILE_MANAGER_C_WRITE_FILE_MANAGER_H
@@ -40,7 +40,8 @@ namespace CoreTools
 
         NODISCARD uint32_t GetFileByteSize() const;
 
-        // 当且仅当写入的字节数等于data的大小，操作是成功的。否则抛出Error异常。
+        /// 当且仅当写入的字节数等于data的大小，操作是成功的。
+        /// 否则抛出Error异常。
         void Write(size_t itemSize, const void* data);
         void Write(size_t itemSize, size_t itemsNumber, const void* data);
 
@@ -51,7 +52,7 @@ namespace CoreTools
         NODISCARD bool Seek(long offset, FileSeek whence) noexcept;
         NODISCARD PosType GetPosition();
         NODISCARD bool SetPosition(PosType position) noexcept;
-        NODISCARD long Tell() noexcept; 
+        NODISCARD long Tell() noexcept;
         NODISCARD bool SetVBuffer(FileSetVBuffer type, size_t size) noexcept;
 
     private:

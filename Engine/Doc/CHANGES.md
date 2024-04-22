@@ -1,32 +1,65 @@
 @ingroup group_Documentation
 
-Threading Core Render Engine 1.0.0.8
+Threading Core Render Engine 1.0.0.9
 
 ----------------------------
 更新日志
+----------------------------
+1.0.0.9（2024/04/22——2024/05/31）
+
+	完成功能： 
+	（引擎）
+	+ 实现ObjectSystemsSuite。@
+	+ 实现TimeSuite。@
+	+ 实现ReportOutputSuite。@
+	+ 实现UnitTestSuiteSuite 。@
+	+ 实现TemplateToolsSuite。@
+	+ 实现CommandSuite。@
+	+ 实现MainFunctionHelperSuite。@
+	+ 实现ModuleInitializerTerminatorSuite。@
+	+ 实现SyntacticParserSuite。@
+	+ 实现PerformanceProfilerSuite。@
+	+ 实现EngineConfigurationSuite。@
+	+ 实现PropertiesSuite。@
+	+ 实现CyclicRedundancyCheckSuite。@
+	+ 实现MessageEventSuite。@
+	+ 实现StateMachineManagerSuite。@ 
+	+ CoreTools单元测试工程整理。@
+	+ CoreTools工程整理。@
+	+ linux系统通过编译。@	
+	
 ----------------------------
 1.0.0.8（2024/03/27——2024/04/30）
 
 	完成功能： 
 	（引擎）
-	+ 实现RootsGeneralPolynomial。@	
-	+ 实现RootsQuartic。@
-	+ 实现RotationEstimate。@
-	+ 实现SinEstimate。@
-	+ 实现SingularValueDecomposition。@
-	+ 实现Slerp。@
-	+ 实现SlerpEstimate。@
-	+ 实现SqrtEstimate。@
-	+ 实现SymmetricEigensolver。@
-	+ 实现SymmetricEigensolver2x2。@
-	+ 实现SymmetricEigensolver3x3。@
-	+ 实现TanEstimate。@
-	+ 实现UnsymmetricEigenvalues。@
-	+ 实现NumericalMethods。@
-	+ CoreTools工程整理。@
-	+ CoreTools Toolset工程整理。@
-	+ CoreTools单元测试工程整理。@
-	+ linux系统通过编译。@	
+	+ 实现RootsGeneralPolynomial。
+	+ 实现RootsQuartic。
+	+ 实现RotationEstimate。
+	+ 实现SinEstimate。
+	+ 实现SingularValueDecomposition。
+	+ 实现Slerp。
+	+ 实现SlerpEstimate。
+	+ 实现SqrtEstimate。
+	+ 实现TanEstimate。
+	+ 实现SymmetricEigensolver。
+	+ 实现SymmetricEigensolver2x2。
+	+ 实现SymmetricEigensolver3x3。	
+	+ 实现UnsymmetricEigenvalues。
+	+ 实现NumericalMethods。
+	+ 实现ApprCircle2。
+	+ 实现ApprQuery。
+	+ 实现ApprHeightLine2。
+	+ 实现ApprCone3。
+	+ 实现ApprGaussian2。
+	+ 实现ApprGaussian3。
+	+ 实现ContOrientedBox2。
+	+ 实现ApprEllipse2。
+	+ 实现OBBTree。
+	+ 实现OBBTreeOfPoints。
+	+ 实现ApprCone3EllipseAndPoints。
+	+ CoreTools工程整理。
+	+ CoreTools Toolset工程整理。 
 
 ----------------------------
 1.0.0.7（2024/03/03——2024/03/26）

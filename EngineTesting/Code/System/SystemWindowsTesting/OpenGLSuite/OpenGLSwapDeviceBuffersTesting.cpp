@@ -14,8 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::OpenGLSwapDeviceBuffersTesting::OpenGLSwapDeviceBuffersTesting(const OStreamShared& stream, WindowsHWnd hwnd)
-    : ParentType{ stream, hwnd }
+System::OpenGLSwapDeviceBuffersTesting::OpenGLSwapDeviceBuffersTesting(const OStreamShared& stream, WindowsHWnd hWnd)
+    : ParentType{ stream, hWnd }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }

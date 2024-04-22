@@ -12,6 +12,7 @@
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "Mathematics/Algebra/Vector/Vector2.h"
 #include "Mathematics/Algebra/Vector2.h"
 
 #include <iosfwd>
@@ -28,6 +29,7 @@ namespace Mathematics
 
         using Math = Math<Real>;
         using Vector2 = Vector2<Real>;
+        using AlgebraVector2 = Algebra::Vector2<Real>;
 
     public:
         Circle2(const Vector2& center, Real radius) noexcept;
@@ -39,6 +41,11 @@ namespace Mathematics
         NODISCARD Real GetRadius() const noexcept;
 
         void SetCircle(const Vector2& aCenter, Real aRadius) noexcept;
+        void SetCenter(const Vector2& aCenter) noexcept;
+        void SetCenter(const AlgebraVector2& aCenter);
+        void SetCenterX(Real x) noexcept;
+        void SetCenterY(Real y) noexcept;
+        void SetRadius(Real aRadius) noexcept;
 
     private:
         Vector2 center;

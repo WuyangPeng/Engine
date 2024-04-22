@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:15)
+/// 版本：1.0.0.8 (2024/04/12 15:03)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_H
@@ -16,7 +16,7 @@
 
 namespace CoreTools
 {
-    // 需要通过宏TCRE_DECLARE_PROPERTY来声明属性
+    /// 需要通过宏TCRE_DECLARE_PROPERTY来声明属性
     template <typename Id, typename T, typename V, typename R, void (T::*FunctionSet)(R), R (T::*FunctionGet)() const>
     class Property final : PropertyBase<Id, T>
     {

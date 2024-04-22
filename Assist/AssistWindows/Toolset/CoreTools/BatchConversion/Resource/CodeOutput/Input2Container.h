@@ -25,8 +25,8 @@ namespace CsvOutput
     public:
         using ClassType = Input2Container;
 
-        using ConstInput2BaseSharedPtr = std::shared_ptr<const Input2Base>;
-        using Container = std::vector<ConstInput2BaseSharedPtr>;
+        using ConstInput2SharedPtr = std::shared_ptr<const Input2MappingType>;
+        using Container = std::vector<ConstInput2SharedPtr>;
         using CSVContent = CoreTools::CSVContent;
 
     public:
@@ -34,14 +34,14 @@ namespace CsvOutput
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConstInput2BaseSharedPtr GetFirstInput2() const;
-        NODISCARD ConstInput2BaseSharedPtr GetInput2(int key) const;
+        NODISCARD ConstInput2SharedPtr GetFirstInput2() const;
+        NODISCARD ConstInput2SharedPtr GetInput2(int key) const;
         NODISCARD Container GetContainer() const;
 
         NODISCARD int GetContainerSize() const;
 
         template <typename Function>
-        NODISCARD ConstInput2BaseSharedPtr GetFirstInput2(Function function) const;
+        NODISCARD ConstInput2SharedPtr GetFirstInput2(Function function) const;
 
         template <typename Function>
         NODISCARD Container GetInput2(Function function) const;

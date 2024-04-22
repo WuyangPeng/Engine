@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:38)
+/// 版本：1.0.0.8 (2024/03/28 14:53)
 
 #ifndef CORE_TOOLS_CONTRACT_IMPL_FLAGS_H
 #define CORE_TOOLS_CONTRACT_IMPL_FLAGS_H

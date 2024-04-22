@@ -82,15 +82,15 @@ void Rendering::BlendStateTargetTesting::BlendStateTargetValueTest()
 {
     ASSERT_EQUAL(blendStateTarget.IsEnable(), enable);
 
-    ASSERT_ENUM_EQUAL(blendStateTarget.GetSourceColor(), sourceColor);
-    ASSERT_ENUM_EQUAL(blendStateTarget.GetDestinationColor(), destinationColor);
-    ASSERT_ENUM_EQUAL(blendStateTarget.GetOperationColor(), operationColor);
+    ASSERT_EQUAL(blendStateTarget.GetSourceColor(), sourceColor);
+    ASSERT_EQUAL(blendStateTarget.GetDestinationColor(), destinationColor);
+    ASSERT_EQUAL(blendStateTarget.GetOperationColor(), operationColor);
 
-    ASSERT_ENUM_EQUAL(blendStateTarget.GetSourceAlpha(), sourceAlpha);
-    ASSERT_ENUM_EQUAL(blendStateTarget.GetDestinationAlpha(), destinationAlpha);
-    ASSERT_ENUM_EQUAL(blendStateTarget.GetOperationAlpha(), operationAlpha);
+    ASSERT_EQUAL(blendStateTarget.GetSourceAlpha(), sourceAlpha);
+    ASSERT_EQUAL(blendStateTarget.GetDestinationAlpha(), destinationAlpha);
+    ASSERT_EQUAL(blendStateTarget.GetOperationAlpha(), operationAlpha);
 
-    ASSERT_ENUM_EQUAL(blendStateTarget.GetMask(), mask);
+    ASSERT_EQUAL(blendStateTarget.GetMask(), mask);
 }
 
 void Rendering::BlendStateTargetTesting::BlendStateTargetSaveTest()

@@ -11,7 +11,7 @@
 
 #include "GenerateFile.h"
 #include "ProjectGenerationReplace.h"
-#include "CoreTools/FileManager/OFStreamManager.h"
+#include "CoreTools/FileManager/OFileStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "AssistTools/GenerateProjects/Flags/ProjectGenerationType.h"
 #include "AssistTools/GenerateProjects/ProjectGeneration.h"
@@ -211,7 +211,7 @@ void AssistTools::GenerateFile::GenerateByContent(const String& content, const S
 
 void AssistTools::GenerateFile::GenerateByContent(const String& content, const String& outputFileName)
 {
-    CoreTools::OFStreamManager streamManager{ outputFileName, false };
+    CoreTools::OFileStreamManager streamManager{ outputFileName, false };
     streamManager.SetSimplifiedChinese();
 
     streamManager << content;
@@ -226,7 +226,7 @@ void AssistTools::GenerateFile::GenerateByContentUtf8(const String& content, con
 
 void AssistTools::GenerateFile::GenerateByContentUtf8(const String& content, const String& outputFileName)
 {
-    CoreTools::OFStreamManager streamManager{ outputFileName, false };
+    CoreTools::OFileStreamManager streamManager{ outputFileName, false };
 
     streamManager << content;
 }

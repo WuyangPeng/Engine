@@ -1,15 +1,15 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:25)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/18 22:09)
 
 #include "LogHelperTesting.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/UnitTest/AssertExceptionMacro.h"
 #include "CoreTools/Helper/UnitTest/AssertTestMacro.h"
@@ -83,7 +83,7 @@ void CoreTools::LogHelperTesting::WriteMessageTest() noexcept
 
 void CoreTools::LogHelperTesting::FileContentTest()
 {
-    const IFStreamManager fileManager{ logHelperTestingFullName };
+    const IFileStreamManager fileManager{ logHelperTestingFullName };
 
     const auto fileContent = fileManager.GetFileContent();
 

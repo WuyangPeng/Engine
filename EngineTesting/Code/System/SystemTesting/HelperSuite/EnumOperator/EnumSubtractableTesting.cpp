@@ -41,7 +41,7 @@ void System::EnumSubtractableTesting::SignedOperatorTest()
 
     number -= 4;
 
-    ASSERT_ENUM_EQUAL(number, SignedNumber::NegativeOne);
+    ASSERT_EQUAL(number, SignedNumber::NegativeOne);
 }
 
 void System::EnumSubtractableTesting::SignedConstexprOperatorTest() const noexcept
@@ -57,7 +57,7 @@ void System::EnumSubtractableTesting::UnsignedOperatorTest()
 
     number -= 4;
 
-    ASSERT_ENUM_EQUAL(number, Number::Three);
+    ASSERT_EQUAL(number, Number::Three);
 }
 
 void System::EnumSubtractableTesting::UnsignedConstexprOperatorTest() const noexcept

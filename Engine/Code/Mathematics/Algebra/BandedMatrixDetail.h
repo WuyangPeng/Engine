@@ -287,8 +287,8 @@ typename Mathematics::BandedMatrix<Real>::VariableMatrix Mathematics::BandedMatr
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     const auto size = GetSize();
-
-    LexicoArray2<RowMajor, Real> inverseLexicoArray{ size, size, LexicoArray2<RowMajor, Real>::Container(size * size) };
+    typename std::vector<Real> container(size * size);
+    CoreTools::LexicoArray2<RowMajor, typename std::vector<Real>::iterator> inverseLexicoArray{ size, size, container.begin(), container.end() };
 
     for (auto row = 0; row < size; ++row)
     {

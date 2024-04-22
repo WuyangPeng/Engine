@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.5 (2024/01/22 15:09)
+/// 版本：1.0.0.8 (2024/03/28 11:02)
 
 #ifndef CORE_TOOLS_HELPER_HASH_COMBINE_H
 #define CORE_TOOLS_HELPER_HASH_COMBINE_H
@@ -26,7 +26,7 @@ namespace CoreTools
         return seed;
     }
 
-    // 使用种子创建哈希值的函数。
+    /// 使用种子创建哈希值的函数。
     template <typename T>
     NODISCARD size_t DoHashValue(size_t seed, T&& value) noexcept
     {
@@ -41,7 +41,7 @@ namespace CoreTools
         return DoHashValue(seed, std::forward<Tail>(arguments)...);
     }
 
-    // 用于从参数列表中创建哈希值的函数。
+    /// 用于从参数列表中创建哈希值的函数。
     template <typename... Tail>
     NODISCARD size_t HashValue(Tail&&... arguments) noexcept
     {

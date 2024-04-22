@@ -5,15 +5,15 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:43)
+/// 版本：1.0.0.8 (2024/04/11 14:45)
 
 #ifndef CORE_TOOLS_DATA_TYPE_TUPLE_H
 #define CORE_TOOLS_DATA_TYPE_TUPLE_H
 
-// 类T可以是原生数据或数据类有下面的成员函数：
-// T::T();
-// T::T(const T&);
-// T& T::operator= (const T&);
+/// 类T可以是原生数据或数据类有下面的成员函数：
+/// T::T();
+/// T::T(const T&);
+/// T& T::operator= (const T&);
 
 #include "CoreTools/CoreToolsDll.h"
 
@@ -59,10 +59,6 @@ namespace CoreTools
     private:
         ArrayType tuple;
     };
-
-    // 类T可以是原生数据或数据类有下面的成员函数：
-    // bool operator== (const T&,const T&);
-    // bool operator< (const T&,const T&);
 
     template <int Dimension, typename Type>
     NODISCARD bool operator==(const Tuple<Dimension, Type>& lhs, const Tuple<Dimension, Type>& rhs);

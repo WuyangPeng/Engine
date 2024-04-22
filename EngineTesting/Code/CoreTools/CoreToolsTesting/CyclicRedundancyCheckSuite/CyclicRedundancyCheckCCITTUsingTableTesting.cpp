@@ -9,8 +9,8 @@
 
 #include "CyclicRedundancyCheckCCITTUsingTableTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/CyclicRedundancyCheck/CyclicRedundancyCheckCCITT.h"
-#include "CoreTools/CyclicRedundancyCheck/CyclicRedundancyCheckCCITTUsingTable.h"
+#include "CoreTools/CyclicRedundancyCheck/CyclicRedundancyCheckCcitt.h"
+#include "CoreTools/CyclicRedundancyCheck/CyclicRedundancyCheckCcittUsingTable.h"
 #include "CoreTools/CyclicRedundancyCheck/CyclicRedundancyCheckHandle.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -44,19 +44,19 @@ void CoreTools::CyclicRedundancyCheckCCITTUsingTableTesting::CCITTTest()
 {
     std::array buff{ '8', '3', '1', '4', '7', '0', '2', '9', '6', '5', '7', '7' };
 
-    const CyclicRedundancyCheckCCITTUsingTable cyclicRedundancyCheckCCITT0{ buff.data(), boost::numeric_cast<int>(buff.size()) };
+    const CyclicRedundancyCheckCcittUsingTable cyclicRedundancyCheckCCITT0{ buff.data(), boost::numeric_cast<int>(buff.size()) };
 
     const auto check0 = cyclicRedundancyCheckCCITT0.GetCyclicRedundancyCheck();
 
     buff.at(4) = '2';
 
-    const CyclicRedundancyCheckCCITTUsingTable cyclicRedundancyCheckCCITT1{ buff.data(), boost::numeric_cast<int>(buff.size()) };
+    const CyclicRedundancyCheckCcittUsingTable cyclicRedundancyCheckCCITT1{ buff.data(), boost::numeric_cast<int>(buff.size()) };
 
     const auto check1 = cyclicRedundancyCheckCCITT1.GetCyclicRedundancyCheck();
 
     ASSERT_UNEQUAL(check0, check1);
 
-    const CyclicRedundancyCheckCCITT cyclicRedundancyCheckCCITT2{ buff.data(), boost::numeric_cast<int>(buff.size()) };
+    const CyclicRedundancyCheckCcitt cyclicRedundancyCheckCCITT2{ buff.data(), boost::numeric_cast<int>(buff.size()) };
 
     const auto check2 = cyclicRedundancyCheckCCITT2.GetCyclicRedundancyCheck();
 

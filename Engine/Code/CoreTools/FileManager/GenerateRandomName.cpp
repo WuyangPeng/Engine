@@ -5,34 +5,13 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:09)
+/// 版本：1.0.0.8 (2024/04/01 10:51)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "GenerateRandomName.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
-
-#include <random>
+#include "GenerateRandomNameDetail.h"
 
 using namespace std::literals;
-
-template <typename T>
-T CoreTools::GenerateRandomName::GetName(int length, const T& letters, const T& extensionName)
-{
-    static_assert(std::is_same_v<T, std::string> || std::is_same_v<T, std::wstring>);
-
-    std::random_device randomDevice{};
-    std::default_random_engine generator{ randomDevice() };
-    std::uniform_int_distribution<int> distribution{ 0, boost::numeric_cast<int>(letters.size() - 1) };
-
-    T result{};
-    for (auto i = 0; i < length; ++i)
-    {
-        result += letters.at(distribution(generator));
-    }
-
-    return result + extensionName;
-}
 
 std::string CoreTools::GenerateRandomName::GetName(int length, const std::string& extensionName)
 {

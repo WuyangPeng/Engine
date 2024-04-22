@@ -91,23 +91,23 @@ void Mathematics::IntegerDataAmendTesting::NegativeTest()
     ASSERT_EQUAL(firstIntegerData[2], uint16_t(0xF458));
     ASSERT_EQUAL(firstIntegerData[3], uint16_t(0xF000));
 
-    ASSERT_ENUM_EQUAL(firstIntegerData.GetSign(), NumericalValueSymbol::Negative);
+    ASSERT_EQUAL(firstIntegerData.GetSign(), NumericalValueSymbol::Negative);
     ASSERT_FALSE(firstIntegerData.IsZero());
 
     IntegerDataAmend<4> firstIntegerDataAmend(firstIntegerData);
     firstIntegerDataAmend.Negative();
 
-    ASSERT_ENUM_EQUAL(firstIntegerData.GetSign(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(firstIntegerData.GetSign(), NumericalValueSymbol::Positive);
     ASSERT_FALSE(firstIntegerData.IsZero());
 
     IntegerData<5> secondIntegerData{ uint64_t{} };
 
     ASSERT_TRUE(secondIntegerData.IsZero());
-    ASSERT_ENUM_EQUAL(secondIntegerData.GetSign(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(secondIntegerData.GetSign(), NumericalValueSymbol::Positive);
 
     IntegerDataAmend<5> secondIntegerDataAmend(secondIntegerData);
     secondIntegerDataAmend.Negative();
 
-    ASSERT_ENUM_EQUAL(secondIntegerData.GetSign(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(secondIntegerData.GetSign(), NumericalValueSymbol::Positive);
     ASSERT_TRUE(secondIntegerData.IsZero());
 }

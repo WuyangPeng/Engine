@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:17)
+/// 版本：1.0.0.8 (2024/03/30 18:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -54,11 +54,11 @@ void CoreTools::WindowsMutex::Enter()
         THROW_EXCEPTION(SYSTEM_TEXT("进入Mutex失败。"s))
     }
 
-    // 结果:
-    // WAIT_ABANDONED(0x00000080)
-    // WAIT_OBJECT_0(0x00000000)，有信号
-    // WAIT_TIMEOUT(0x00000102), [对INFINITE不可能]
-    // WAIT_FAILED(0xFFFFFFFF)，无信号
+    /// 结果:
+    /// WAIT_ABANDONED(0x00000080)
+    /// WAIT_OBJECT_0(0x00000000)，有信号
+    /// WAIT_TIMEOUT(0x00000102), [对INFINITE不可能]
+    /// WAIT_FAILED(0xFFFFFFFF)，无信号
 }
 
 void CoreTools::WindowsMutex::Leave() noexcept
@@ -75,8 +75,7 @@ bool CoreTools::WindowsMutex::TryEnter() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (const auto result = System::WaitForSystemMutex(mutex, 0); result == System::MutexWaitReturn::Object0)
-        return true;
-    else
-        return false;
+    const auto result = System::WaitForSystemMutex(mutex, 0);
+
+    return result == System::MutexWaitReturn::Object0;
 }

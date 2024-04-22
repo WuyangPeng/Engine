@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:59)
+/// 版本：1.0.0.8 (2024/04/11 10:54)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -35,7 +35,8 @@ void CoreTools::FormatParsing::Parsing(const FileContent& fileContent)
 {
     constexpr auto index = System::EnumCastUnderlying(CSVType::Format) - 1;
 
-    if (const auto& formatContent = fileContent.at(index); !formatContent.empty())
+    if (const auto& formatContent = fileContent.at(index);
+        !formatContent.empty())
     {
         Parsing(formatContent);
     }
@@ -46,9 +47,9 @@ void CoreTools::FormatParsing::Parsing(const String& formatContent)
     const auto column = Parsing::GetSplitComma(formatContent);
 
     auto firstIndex = true;
-    for (const auto& value : column)
+    for (const auto& element : column)
     {
-        ParsingColumn(value, firstIndex);
+        ParsingColumn(element, firstIndex);
         firstIndex = false;
     }
 }
@@ -81,19 +82,14 @@ CoreTools::FormatParsing::Element CoreTools::FormatParsing::GetElement(const Str
 
 bool CoreTools::FormatParsing::IsInterval(const String& single) noexcept
 {
-    if (single.find(TextParsing::gLeftSquareBrackets) != String::npos ||
-        single.find(TextParsing::gRightSquareBrackets) != String::npos ||
-        single.find(TextParsing::gLeftBrackets) != String::npos ||
-        single.find(TextParsing::gRightBrackets) != String::npos ||
-        single.find(TextParsing::gLeftAngleBracket) != String::npos ||
-        single.find(TextParsing::gRightAngleBracket) != String::npos ||
-        single.find(TextParsing::gLeftBrace) != String::npos ||
-        single.find(TextParsing::gRightBrace) != String::npos)
-    {
-        return true;
-    }
-
-    return false;
+    return single.find(TextParsing::gLeftSquareBrackets) != String::npos ||
+           single.find(TextParsing::gRightSquareBrackets) != String::npos ||
+           single.find(TextParsing::gLeftBrackets) != String::npos ||
+           single.find(TextParsing::gRightBrackets) != String::npos ||
+           single.find(TextParsing::gLeftAngleBracket) != String::npos ||
+           single.find(TextParsing::gRightAngleBracket) != String::npos ||
+           single.find(TextParsing::gLeftBrace) != String::npos ||
+           single.find(TextParsing::gRightBrace) != String::npos;
 }
 
 void CoreTools::FormatParsing::ParsingColumn(const String& column, bool firstIndex)
@@ -187,14 +183,7 @@ void CoreTools::FormatParsing::ParsingKey(const String& single)
 
 bool CoreTools::FormatParsing::IsValid() const noexcept
 {
-    if (scope.size() == mapping.size())
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return scope.size() == mapping.size();
 }
 
 #endif  // OPEN_CLASS_INVARIANT

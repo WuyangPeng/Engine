@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 10:58)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 17:15)
 
 #include "QuerySharedStringsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -13,8 +13,6 @@
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySharedStrings.h"
 #include "CoreTools/TextParsing/SimpleCSV/Document.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using namespace std::literals;
 
 CoreTools::QuerySharedStringsTesting::QuerySharedStringsTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -36,7 +34,7 @@ void CoreTools::QuerySharedStringsTesting::MainTest()
 
 void CoreTools::QuerySharedStringsTesting::QuerySharedStringsTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
     const auto sharedStrings = document->GetWorkbook().GetSharedStrings();
     const SimpleCSV::QuerySharedStrings querySharedStrings{ sharedStrings };
 

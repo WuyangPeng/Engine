@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 Network::MessageManagerImpl::MessageManagerImpl() noexcept
-    : idFactories{}, describeFactories{}, fullVersion{ CoreTools::Version::GetTCREFullVersion() }
+    : idFactories{}, describeFactories{}, fullVersion{ CoreTools::Version::GetTcreFullVersion() }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }

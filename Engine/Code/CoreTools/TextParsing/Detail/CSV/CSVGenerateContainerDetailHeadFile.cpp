@@ -5,20 +5,24 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:55)
+/// 版本：1.0.0.8 (2024/04/10 10:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CSVGenerateContainerDetailHeadFile.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
 #include "CoreTools/CharacterString/StringUtility.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-CoreTools::CSVGenerateContainerDetailHeadFile::CSVGenerateContainerDetailHeadFile(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis) noexcept
-    : ParentType{ csvHead, codeMappingAnalysis }
+CoreTools::CSVGenerateContainerDetailHeadFile::CSVGenerateContainerDetailHeadFile(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis)
+    : ParentType{ csvHead, codeMappingAnalysis },
+      templateName{ SYSTEM_TEXT("/EntityContainerDetailH.txt") },
+
+      getEntityMapFirstDefine{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("GetEntityMapFirstDefine")) },
+      getEntityFirstDefine{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("GetEntityFirstDefine")) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -37,31 +41,15 @@ System::String CoreTools::CSVGenerateContainerDetailHeadFile::GetFilePrefix() co
 
 System::String CoreTools::CSVGenerateContainerDetailHeadFile::GetFileSuffix() const
 {
-    auto result = GetSuffix();
-
-    result += TextParsing::gDetailHeadFileExtensionName;
-
-    return result;
+    return GetSuffix() + TextParsing::gDetailHeadFileExtensionName.data();
 }
 
 System::String CoreTools::CSVGenerateContainerDetailHeadFile::GetContent(const String& codeDirectory) const
 {
-    auto content = GetTemplateContent(codeDirectory + SYSTEM_TEXT("/EntityContainerDetailH.txt"));
+    auto content = GetTemplateContent(codeDirectory + templateName);
 
-    const auto codeMapping = GetCodeMappingAnalysis();
-
-    if (const auto head = GetCSVHead();
-        head.GetCSVFormatType() == CSVFormatType::TreeMap ||
-        head.GetCSVFormatType() == CSVFormatType::HashMap)
-    {
-        boost::algorithm::replace_all(content, SYSTEM_TEXT("$GetEntityFirstDefine$"), codeMapping.GetElement(SYSTEM_TEXT("GetEntityMapFirstDefine")));
-        boost::algorithm::replace_all(content, SYSTEM_TEXT("$ElementSecond$"), SYSTEM_TEXT("element.second"));
-    }
-    else
-    {
-        boost::algorithm::replace_all(content, SYSTEM_TEXT("$GetEntityFirstDefine$"), codeMapping.GetElement(SYSTEM_TEXT("GetEntityFirstDefine")));
-        boost::algorithm::replace_all(content, SYSTEM_TEXT("$ElementSecond$"), SYSTEM_TEXT("element"));
-    }
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$GetEntityFirstDefine$"), IsCSVFormatTypeMap() ? getEntityMapFirstDefine : getEntityFirstDefine);
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ElementSecond$"), IsCSVFormatTypeMap() ? SYSTEM_TEXT("element.second") : SYSTEM_TEXT("element"));
 
     return ReplaceTemplate(content);
 }

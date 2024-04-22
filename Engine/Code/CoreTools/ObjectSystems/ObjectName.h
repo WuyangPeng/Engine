@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:56)
+/// 版本：1.0.0.8 (2024/04/11 22:16)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_NAME_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_NAME_H
@@ -22,7 +22,7 @@ CORE_TOOLS_DELAY_COPY_UNSHARED_EXPORT_IMPL(ObjectName, ObjectNameImpl);
 
 namespace CoreTools
 {
-    // Object类的名字
+    /// Object类的名字
     class CORE_TOOLS_DEFAULT_DECLARE ObjectName final
     {
     public:

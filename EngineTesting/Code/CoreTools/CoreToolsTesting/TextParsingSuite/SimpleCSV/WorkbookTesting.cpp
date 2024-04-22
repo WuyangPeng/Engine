@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:15)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 17:07)
 
 #include "WorkbookTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -144,8 +144,8 @@ void CoreTools::WorkbookTesting::TypeTest()
     {
         auto sheet = workbook.GetSheet(i + 1);
 
-        ASSERT_ENUM_EQUAL(workbook.GetTypeOfSheet(sheet.GetName()), SimpleCSV::SheetType::Worksheet);
-        ASSERT_ENUM_EQUAL(workbook.GetTypeOfSheet(i + 1), SimpleCSV::SheetType::Worksheet);
+        ASSERT_EQUAL(workbook.GetTypeOfSheet(sheet.GetName()), SimpleCSV::SheetType::Worksheet);
+        ASSERT_EQUAL(workbook.GetTypeOfSheet(i + 1), SimpleCSV::SheetType::Worksheet);
     }
 
     ASSERT_EQUAL(workbook.GetSheetCount(), count);
@@ -158,7 +158,8 @@ void CoreTools::WorkbookTesting::SheetNamesTest()
 
     auto workbook = document->GetWorkbook();
 
-    for (const auto& worksheetNames = workbook.GetWorksheetNames(); const auto& name : worksheetNames)
+    for (const auto& worksheetNames = workbook.GetWorksheetNames();
+         const auto& name : worksheetNames)
     {
         auto worksheet = workbook.GetChartSheet(name);
         ASSERT_EQUAL(worksheet.GetName(), name);
@@ -174,7 +175,8 @@ void CoreTools::WorkbookTesting::ExistsTest()
 
     const auto workbook = document->GetWorkbook();
 
-    for (const auto worksheetNames = workbook.GetWorksheetNames(); const auto& name : worksheetNames)
+    for (const auto worksheetNames = workbook.GetWorksheetNames();
+         const auto& name : worksheetNames)
     {
         ASSERT_TRUE(workbook.IsSheetExists(name));
         ASSERT_TRUE(workbook.IsWorksheetExists(name));

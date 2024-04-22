@@ -1,13 +1,14 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 16:56)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/15 09:53)
 
 #include "TriggerAssertTesting.h"
+#include "System/Time/DeltaTime.h"
 #include "CoreTools/Contract/Flags/CheckInvariantFlags.h"
 #include "CoreTools/Contract/TriggerAssert.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -23,6 +24,13 @@ CoreTools::TriggerAssertTesting::TriggerAssertTesting(const OStreamShared& strea
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, TriggerAssertTesting)
+
+void CoreTools::TriggerAssertTesting::PrintTipsMessage()
+{
+    GetStream() << "这个测试会触发失败断言，请按否取消。\n";
+
+    System::SystemPause();
+}
 
 void CoreTools::TriggerAssertTesting::DoRunUnitTest()
 {

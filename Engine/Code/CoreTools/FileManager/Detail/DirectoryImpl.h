@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:39)
+/// 版本：1.0.0.8 (2024/03/30 22:31)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_DIRECTORY_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_DIRECTORY_IMPL_H
@@ -13,6 +13,9 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
+
+#include <array>
 
 namespace CoreTools
 {
@@ -33,6 +36,9 @@ namespace CoreTools
         DirectoryImpl& operator=(DirectoryImpl&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
+
+    private:
+        using DirectoryType = std::array<System::TChar, System::gMaxPath>;
 
     private:
         NODISCARD static String GetDirectoryName(const String& directoryName);

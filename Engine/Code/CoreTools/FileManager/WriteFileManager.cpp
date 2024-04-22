@@ -5,11 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:10)
+/// 版本：1.0.0.8 (2024/04/01 10:52)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "WriteFileManager.h"
+#include "Flags/BufferIOFlags.h"
 #include "Detail/FileManagerFactory.h"
 #include "Detail/WriteFileManagerInterface.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -56,17 +57,21 @@ void CoreTools::WriteFileManager::SaveStdString(const std::string& name)
 
     if (0 < length)
     {
-        constexpr auto alignedLength = 4;
-
         Write(sizeof(char), length, name.c_str());
 
-        // 字符串被写入四个字节的倍数。
-        if (auto padding = (length % alignedLength); 0 < padding)
-        {
-            constexpr std::array<char, alignedLength> zero{};
-            padding = alignedLength - padding;
+        SaveAlignedString(length);
+    }
+}
 
-            Write(sizeof(char), padding, zero.data());
-        }
+void CoreTools::WriteFileManager::SaveAlignedString(int length)
+{
+    /// 字符串被写入四个字节的倍数。
+    if (auto padding = (length % alignedLength);
+        0 < padding)
+    {
+        constexpr std::array<char, alignedLength> zero{};
+        padding = alignedLength - padding;
+
+        Write(sizeof(char), padding, zero.data());
     }
 }

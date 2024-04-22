@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:45)
+/// 版本：1.0.0.8 (2024/03/30 23:26)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -23,10 +23,7 @@ CoreTools::BufferIOImpl::BufferIOImpl() noexcept
 
 bool CoreTools::BufferIOImpl::IsValid() const noexcept
 {
-    if (0 <= bytesProcessed)
-        return true;
-    else
-        return false;
+    return 0 <= bytesProcessed;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -41,8 +38,7 @@ int CoreTools::BufferIOImpl::GetBytesProcessed() const noexcept
 void CoreTools::BufferIOImpl::IncrementBytesProcessed(int bytesNumber)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
-
-    CORE_TOOLS_ASSERTION_2(0 < bytesNumber, "增量必须是正数！\n");
+    CORE_TOOLS_ASSERTION_0(0 < bytesNumber, "增量必须是正数！\n");
 
     const auto nextBytesProcessed = bytesProcessed + bytesNumber;
 

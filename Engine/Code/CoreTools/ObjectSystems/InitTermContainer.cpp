@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:59)
+/// 版本：1.0.0.8 (2024/04/11 22:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -25,10 +25,7 @@ CoreTools::InitTermContainer::InitTermContainer() noexcept
 
 bool CoreTools::InitTermContainer::IsValid() const noexcept
 {
-    if (0 <= numFunction && numFunction <= maxElements)
-        return true;
-    else
-        return false;
+    return 0 <= numFunction && numFunction <= maxElements;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -51,7 +48,7 @@ void CoreTools::InitTermContainer::Execute()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    // 无法保证function()调用不抛出异常，编译器误报。
+    /// 无法保证function()调用不抛出异常，编译器误报。
     DisableNoexcept();
 
     auto index = 0;

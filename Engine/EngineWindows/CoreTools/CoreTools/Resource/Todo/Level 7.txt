@@ -1,6 +1,6 @@
 TODO Level 7
  
-1.0.0.4
+1.0.0.8
 
 1.  （Contract）根据loki的Checker.h对类不变式进行扩充。
 2.  （UnitTestSuite）单元测试增加以随机顺序运行测试。

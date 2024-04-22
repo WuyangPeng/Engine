@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:37)
+/// 版本：1.0.0.8 (2024/03/28 15:23)
 
 #ifndef CORE_TOOLS_CONTRACT_NOEXCEPT_H
 #define CORE_TOOLS_CONTRACT_NOEXCEPT_H
@@ -29,10 +29,11 @@ namespace CoreTools
 #include SYSTEM_WARNING_POP
 
     /// 捕获成员函数所有异常，这些函数的目的是为了消除编译器警告，其目的并不是为了实现noexcept函数。
-    /// 日志库也使用这些函数，所以出错时不打印日志。
+    /// 日志库使用这些函数，所以出错时不打印日志。
     /// 只允许在以下情况下使用：
     /// 1. 析构函数调用的函数。
     /// 2. 函数抛出异常的概率很低（如内存不足），定义成noexcept，可以方便上层函数的调用。
+    /// 除了捕获日志库的异常外，其他情况下尽量使用NoexceptLog。
     template <typename T, typename Function, typename... ParamType>
     void NoexceptNoReturn(const T& master, Function function, ParamType&&... parameter) noexcept
     {

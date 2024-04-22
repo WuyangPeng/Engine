@@ -62,12 +62,12 @@ void System::ConsoleCodePageTesting::ConsoleCodePageTest(CodePage codePage)
 {
     ASSERT_TRUE(SetConsoleCodePage(codePage));
 
-    ASSERT_ENUM_EQUAL(GetConsoleCodePage(), codePage);
+    ASSERT_EQUAL(GetConsoleCodePage(), codePage);
 }
 
 void System::ConsoleCodePageTesting::ConsoleOutputCodePageTest(CodePage codePage)
 {
     ASSERT_TRUE(SetConsoleOutputCodePage(codePage));
 
-    ASSERT_ENUM_EQUAL(GetConsoleOutputCodePage(), codePage);
+    ASSERT_EQUAL(GetConsoleOutputCodePage(), codePage);
 }

@@ -55,7 +55,7 @@ void System::WaitForMultipleWaitableTimerTesting::CreateSynchronizationTest()
 void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer0Test(const Container& waitableTimerHandles)
 {
     const auto flag = WaitForSystemWaitableTimer(boost::numeric_cast<WindowsDWord>(waitableTimerHandles.size()), waitableTimerHandles.data(), true, EnumCastUnderlying(MutexWait::Infinite));
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+    ASSERT_UNEQUAL(flag, MutexWaitReturn::Failed);
 
     ResetSystemWaitableTimer(waitableTimerHandles);
 }
@@ -63,7 +63,7 @@ void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer0Test(cons
 void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer1Test(const Container& waitableTimerHandles)
 {
     const auto flag = WaitForSystemWaitableTimer(boost::numeric_cast<WindowsDWord>(waitableTimerHandles.size()), waitableTimerHandles.data(), true, EnumCastUnderlying(MutexWait::Infinite), false);
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+    ASSERT_UNEQUAL(flag, MutexWaitReturn::Failed);
 
     ResetSystemWaitableTimer(waitableTimerHandles);
 }
@@ -71,7 +71,7 @@ void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer1Test(cons
 void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer2Test(const Container& waitableTimerHandles)
 {
     const auto flag = WaitForSystemWaitableTimer(boost::numeric_cast<WindowsDWord>(waitableTimerHandles.size()), waitableTimerHandles.data(), true, EnumCastUnderlying(MutexWait::Infinite), true);
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+    ASSERT_UNEQUAL(flag, MutexWaitReturn::Failed);
 
     ResetSystemWaitableTimer(waitableTimerHandles);
 }

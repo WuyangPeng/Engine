@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:21)
+/// 版本：1.0.0.8 (2024/04/12 14:18)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_LITERAL_CAST_DETAIL_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_LITERAL_CAST_DETAIL_H
@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename T, int64_t V>
-void CoreTools::LiteralCast<T, V>::Constranints() noexcept
+void CoreTools::LiteralCast<T, V>::Constraint() noexcept
 {
     static_assert(V <= stlsoft::limit_traits<T>::maximum_value, "V must <= maximum_value");
     static_assert(stlsoft::limit_traits<T>::minimum_value <= V, "V must >= minimum_value");
@@ -36,7 +36,7 @@ CoreTools::LiteralCast<T, V>::~LiteralCast()
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 
-    MAYBE_UNUSED void (*ptr)() = Constranints;
+    MAYBE_UNUSED void (*ptr)() = Constraint;
 }
 
 template <typename T, int64_t V>

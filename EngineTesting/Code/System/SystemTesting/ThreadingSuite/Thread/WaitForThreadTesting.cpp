@@ -62,7 +62,7 @@ void System::WaitForThreadTesting::WaitThread1Test()
     ASSERT_LESS(0u, threadId);
 
     const auto flag = WaitForSystemThread(threadHandle, EnumCastUnderlying(MutexWait::Infinite));
-    ASSERT_ENUM_EQUAL(flag, MutexWaitReturn::Object0);
+    ASSERT_EQUAL(flag, MutexWaitReturn::Object0);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
 }
@@ -76,7 +76,7 @@ void System::WaitForThreadTesting::WaitThread2Test()
     ASSERT_LESS(0u, threadId);
 
     const auto flag = WaitForSystemThread(threadHandle, EnumCastUnderlying(MutexWait::Infinite), true);
-    ASSERT_ENUM_EQUAL(flag, MutexWaitReturn::Object0);
+    ASSERT_EQUAL(flag, MutexWaitReturn::Object0);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
 }
@@ -90,7 +90,7 @@ void System::WaitForThreadTesting::WaitThread3Test()
     ASSERT_LESS(0u, threadId);
 
     const auto flag = WaitForSystemThread(threadHandle, EnumCastUnderlying(MutexWait::Infinite), false);
-    ASSERT_ENUM_EQUAL(flag, MutexWaitReturn::Object0);
+    ASSERT_EQUAL(flag, MutexWaitReturn::Object0);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
 }

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:40)
+/// 版本：1.0.0.8 (2024/03/30 22:50)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_READ_FILE_HANDLE_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_READ_FILE_HANDLE_IMPL_H
@@ -36,7 +36,7 @@ namespace CoreTools
         void Read(size_t itemSize, size_t itemsNumber, void* data) override;
 
     private:
-        // 禁止调用以下成员函数
+        /// 禁止调用以下成员函数
         void WriteToFile(size_t itemSize, size_t itemsNumber, const void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4) override;
         void AppendToFile(size_t itemSize, size_t itemsNumber, const void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4) override;
     };

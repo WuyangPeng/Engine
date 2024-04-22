@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:58)
+/// 版本：1.0.0.8 (2024/04/11 22:22)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -36,7 +36,7 @@ void CoreTools::FileInStream::Load(const System::String& fileName)
 
     const auto readSize = manager.GetFileByteSize();
 
-    // 获取该文件的版本。
+    /// 获取该文件的版本。
     const auto version = Version::GetVersion();
 
     const auto length = version.length();
@@ -49,14 +49,14 @@ void CoreTools::FileInStream::Load(const System::String& fileName)
 
     manager.Read(CoreTools::GetStreamSize<char>(), bufferInformation->GetSize(), bufferInformation->GetBufferBegin());
 
-    // 比较所需的文件版本。
+    /// 比较所需的文件版本。
     if (const std::string fileVersion{ bufferInformation->GetBufferBegin(), length };
         fileVersion != version)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("版本字符串不匹配！"s))
     }
 
-    // 从缓冲区重构场景图。
+    /// 从缓冲区重构场景图。
     const BufferInStream stream{ bufferInformation, boost::numeric_cast<int>(length) };
 
     inTopLevel = stream.GetTopLevel();

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:14)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/22 16:50)
 
 #include "IntObject.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -59,10 +59,7 @@ void CoreTools::IntObject::AllocationArray1(int value)
 
 bool CoreTools::IntObject::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && !intArray1.empty())
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && !intArray1.empty();
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -87,14 +84,14 @@ int CoreTools::IntObject::GetStreamingSize() const
 
     auto size = ParentType::GetStreamingSize();
 
-    // WriteInt
+    /// WriteInt
     size += sizeof(intValue);
 
-    // WriteIntWithNumber
+    /// WriteIntWithNumber
     size += sizeof(int32_t);
     size += bufferSize * sizeof(intValue);
 
-    // WriteIntWithoutNumber
+    /// WriteIntWithoutNumber
     size += bufferSize * sizeof(intValue);
 
     return size;

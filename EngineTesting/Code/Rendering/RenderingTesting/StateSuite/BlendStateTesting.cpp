@@ -60,7 +60,7 @@ void Rendering::BlendStateTesting::AccessTest()
     const auto name = GetGraphicsObjectName();
 
     ASSERT_EQUAL(blendState->GetName(), name);
-    ASSERT_ENUM_EQUAL(blendState->GetType(), GetGraphicsObjectType());
+    ASSERT_EQUAL(blendState->GetType(), GetGraphicsObjectType());
 
     ASSERT_TRUE(blendState->IsDrawingState());
 

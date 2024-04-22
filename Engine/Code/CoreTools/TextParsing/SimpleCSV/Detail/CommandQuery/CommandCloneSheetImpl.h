@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:44)
+/// 版本：1.0.0.8 (2024/04/02 17:58)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_COMMAND_CLONE_SHEET_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_COMMAND_CLONE_SHEET_IMPL_H
@@ -30,10 +30,10 @@ namespace CoreTools::SimpleCSV
         NODISCARD std::string GetCloneName() const;
 
     private:
-        // 要克隆的工作表的ID
+        /// 要克隆的工作表的ID
         std::string sheetId;
 
-        // 要克隆的工作表的名字
+        /// 要克隆的工作表的名字
         std::string cloneName;
     };
 }

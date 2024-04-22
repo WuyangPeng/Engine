@@ -12,6 +12,10 @@
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "System/Helper/PragmaWarning.h"
+
+#include <array>
+
 /// sqrt(x)的极小极大多项式近似。
 /// 其中多项式 p(x)的次数为D，
 /// 最小化了所有次数为D的多项式中的最大值{|sqrt(x) - p(x)| : x in [1,2]}。
@@ -112,7 +116,12 @@ namespace Mathematics
     requires(1 <= Degree && Degree <= 8)
     NODISCARD constexpr T GetSqrtEstimateMaxError()
     {
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
         return static_cast<T>(sqrtEstimateMaxError[Degree - 1]);
+
+#include SYSTEM_WARNING_POP
     }
 }
 

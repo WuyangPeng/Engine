@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:37)
+/// 版本：1.0.0.8 (2024/04/12 14:49)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,8 +19,6 @@
 #include "CoreTools/Threading/DllMutex.h"
 
 #include <stdexcept>
-
-using namespace std::literals;
 
 void CoreTools::DllFunctionHelper::InitializeMutex(DllMutex* mutex)
 {
@@ -40,7 +38,7 @@ void CoreTools::DllFunctionHelper::InitializeMutex(DllMutex* mutex)
     }
     catch (...)
     {
-        JudgeUserSelectionWithTChar(SYSTEM_TEXT("未知错误！"s));
+        JudgeUserSelectionWithTChar(SYSTEM_TEXT("未知错误！"));
     }
 }
 
@@ -64,20 +62,20 @@ void CoreTools::DllFunctionHelper::JudgeSelection(System::DialogBoxCommand selec
     {
         case System::DialogBoxCommand::IdYes:
         {
-            // 调试断点。
+            /// 调试断点。
             System::DebugBreak();
 
             break;
         }
         case System::DialogBoxCommand::IdNo:
         {
-            // 继续执行。
+            /// 继续执行。
             break;
         }
         case System::DialogBoxCommand::IdCancel:
         default:
         {
-            // 终止执行。
+            /// 终止执行。
             System::Exit();
             break;
         }

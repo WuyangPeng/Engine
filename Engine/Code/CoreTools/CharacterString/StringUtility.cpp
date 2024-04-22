@@ -5,17 +5,20 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.5 (2024/01/24 21:50)
+/// 版本：1.0.0.8 (2024/03/29 23:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "StringUtility.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 #include <gsl/util>
 #include <algorithm>
 #include <iterator>
 #include <locale>
+
+using namespace std::literals;
 
 std::wstring CoreTools::StringUtility::ConvertNarrowToWide(const std::string& input)
 {
@@ -78,21 +81,21 @@ CoreTools::StringUtility::TokensType CoreTools::StringUtility::GetTokens(const s
 
     while (!tokenString.empty())
     {
-        // 查找token的开始位置。
+        /// 查找token的开始位置。
         const auto begin = tokenString.find_first_not_of(whiteSpace);
         if (begin == std::string::npos)
         {
-            // 已找到所有令牌。
+            /// 已找到所有令牌。
             break;
         }
 
-        // 删除空白。
+        /// 删除空白。
         if (0 < begin)
         {
             tokenString = tokenString.substr(begin);
         }
 
-        // 查找token的结束位置。
+        /// 查找token的结束位置。
         if (const auto end = tokenString.find_first_of(whiteSpace);
             end != std::string::npos)
         {
@@ -102,7 +105,7 @@ CoreTools::StringUtility::TokensType CoreTools::StringUtility::GetTokens(const s
         }
         else
         {
-            // 这是最后一个token。
+            /// 这是最后一个token。
             tokens.emplace_back(tokenString);
             break;
         }
@@ -152,30 +155,27 @@ CoreTools::StringUtility::TokensType CoreTools::StringUtility::GetAdvancedTextTo
 
 System::String CoreTools::StringUtility::ToFirstLetterUpper(const String& character)
 {
-    auto result = character;
-
-    if (result.empty())
-    {
-        return result;
-    }
-
-    const std::locale locale{};
-    result.at(0) = std::toupper(result.at(0), locale);
-
-    return result;
+    return ChangeFirstLetter(character, std::toupper);
 }
 
 System::String CoreTools::StringUtility::ToFirstLetterLower(const String& character)
 {
-    auto result = character;
+    return ChangeFirstLetter(character, std::tolower);
+}
 
-    if (result.empty())
+CoreTools::StringUtility::String CoreTools::StringUtility::ChangeFirstLetter(const String& character, ChangeFirstLetterFunction function)
+{
+    ASSERT_FAIL_THROW_EXCEPTION(function != nullptr, SYSTEM_TEXT("function指针为空。"));
+
+    if (character.empty())
     {
-        return result;
+        return character;
     }
 
+    auto result = character;
+
     const std::locale locale{};
-    result.at(0) = std::tolower(result.at(0), locale);
+    result.at(0) = function(result.at(0), locale);
 
     return result;
 }
@@ -187,29 +187,35 @@ System::String CoreTools::StringUtility::ToUpperMacro(const String& character)
     const std::locale locale{};
 
     auto firstChar = true;
-    for (const auto value : character)
+    for (const auto element : character)
     {
-        if (value == SYSTEM_TEXT(' '))
+        if (const auto upperCharacter = ToUpperMacro(element, locale, firstChar);
+            !upperCharacter.empty())
         {
-            continue;
+            result += upperCharacter;
+            firstChar = false;
         }
-
-        if (!firstChar && std::isupper(value, locale))
-        {
-            result += SYSTEM_TEXT('_');
-            result += value;
-        }
-        else if (value == SYSTEM_TEXT('.'))
-        {
-            result += SYSTEM_TEXT('_');
-        }
-        else
-        {
-            result += std::toupper(value, locale);
-        }
-
-        firstChar = false;
     }
 
     return result;
+}
+
+CoreTools::StringUtility::String CoreTools::StringUtility::ToUpperMacro(const TChar& character, const std::locale& locale, bool isFirstChar)
+{
+    if (character == SYSTEM_TEXT(' '))
+    {
+        return SYSTEM_TEXT("");
+    }
+    else if (!isFirstChar && std::isupper(character, locale))
+    {
+        return SYSTEM_TEXT("_"s) + character;
+    }
+    else if (character == SYSTEM_TEXT('.'))
+    {
+        return SYSTEM_TEXT("_");
+    }
+    else
+    {
+        return String{ std::toupper(character, locale) };
+    }
 }

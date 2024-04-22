@@ -46,8 +46,7 @@
     "OpenGLTexturesCubeTesting": 1,
     "OpenGLTexturesCubeArrayTesting": 1,
     "OpenGLFrameBufferTextures2DTesting": 1,
-    "OpenGLActiveTextureTesting": 1,
-    "OpenGLBindImageTextureTesting": 1
+    "OpenGLActiveTextureTesting": 1
   },
 
   "openGLPolygonSuite": {

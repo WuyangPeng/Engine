@@ -62,7 +62,7 @@ void Framework::ModelViewControllerMiddleLayerContainerTesting::MiddleLayerTest(
 
     TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    ASSERT_ENUM_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
+    ASSERT_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
     ASSERT_TRUE(middleLayer.PreCreate());
@@ -100,7 +100,7 @@ void Framework::ModelViewControllerMiddleLayerContainerTesting::PixelMiddleLayer
 
     PixelTestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    ASSERT_ENUM_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
+    ASSERT_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
     ASSERT_TRUE(middleLayer.PreCreate());
@@ -138,7 +138,7 @@ void Framework::ModelViewControllerMiddleLayerContainerTesting::CameraMiddleLaye
 
     CameraTestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    ASSERT_ENUM_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
+    ASSERT_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
     ASSERT_TRUE(middleLayer.PreCreate());

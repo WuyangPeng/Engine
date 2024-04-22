@@ -74,17 +74,17 @@ void Rendering::VertexBufferTesting::DefaultTest()
     ASSERT_EQUAL(vertexBuffer->GetNumElements(), numVertices);
     ASSERT_EQUAL(vertexBuffer->GetElementSize(), 0);
     ASSERT_EQUAL(vertexBuffer->GetNumBytes(), 0);
-    ASSERT_ENUM_EQUAL(vertexBuffer->GetUsage(), UsageType::Immutable);
-    ASSERT_ENUM_EQUAL(vertexBuffer->GetCopy(), CopyType::None);
+    ASSERT_EQUAL(vertexBuffer->GetUsage(), UsageType::Immutable);
+    ASSERT_EQUAL(vertexBuffer->GetCopy(), CopyType::None);
     ASSERT_EQUAL(vertexBuffer->GetOffset(), 0);
     ASSERT_EQUAL(vertexBuffer->GetNumActiveElements(), numVertices);
     ASSERT_EQUAL(vertexBuffer->GetNumActiveBytes(), 0);
 
     vertexBuffer->SetUsage(UsageType::DynamicUpdate);
-    ASSERT_ENUM_EQUAL(vertexBuffer->GetUsage(), UsageType::DynamicUpdate);
+    ASSERT_EQUAL(vertexBuffer->GetUsage(), UsageType::DynamicUpdate);
 
     vertexBuffer->SetCopy(CopyType::Bidirectional);
-    ASSERT_ENUM_EQUAL(vertexBuffer->GetCopy(), CopyType::Bidirectional);
+    ASSERT_EQUAL(vertexBuffer->GetCopy(), CopyType::Bidirectional);
 }
 
 void Rendering::VertexBufferTesting::CreateStorageTest()

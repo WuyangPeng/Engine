@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:35)
+/// 版本：1.0.0.8 (2024/04/11 13:10)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_APPENDER_CONSOLE_H
 #define CORE_TOOLS_LOG_MANAGER_APPENDER_CONSOLE_H
@@ -14,7 +14,7 @@
 
 #include "AppenderImpl.h"
 
-namespace CoreTools
+    namespace CoreTools
 {
     class CORE_TOOLS_HIDDEN_DECLARE AppenderConsole final : public AppenderImpl
     {

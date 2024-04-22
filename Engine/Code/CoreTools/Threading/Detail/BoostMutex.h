@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:09)
+/// 版本：1.0.0.8 (2024/03/30 18:00)
 
 #ifndef CORE_TOOLS_THREADING_BOOST_MUTEX_H
 #define CORE_TOOLS_THREADING_BOOST_MUTEX_H
@@ -16,7 +16,7 @@
 
 #include "System/Helper/PragmaWarning/Mutex.h"
 
-// boost锁是不可递归的。重入会死锁，而不是抛出异常。
+/// boost锁是不可递归的。重入会死锁，而不是抛出异常。
 namespace CoreTools
 {
     class CORE_TOOLS_HIDDEN_DECLARE BoostMutex final : public MutexImpl

@@ -1,11 +1,11 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:06)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/22 15:57)
 
 #include "Array4Testing.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -77,7 +77,7 @@ void CoreTools::Array4Testing::InitArray(ArrayType& array4)
 
 void CoreTools::Array4Testing::ResultTest(const ArrayType& array4)
 {
-    auto resultCount = 0;
+    auto count = 0;
     for (auto bound3Index = 0; bound3Index < bound3; ++bound3Index)
     {
         for (auto bound2Index = 0; bound2Index < bound2; ++bound2Index)
@@ -86,14 +86,9 @@ void CoreTools::Array4Testing::ResultTest(const ArrayType& array4)
             {
                 for (auto bound0Index = 0; bound0Index < bound0; ++bound0Index)
                 {
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
+                    ASSERT_EQUAL(array4(bound3Index, bound2Index, bound1Index, bound0Index), count);
 
-                    ASSERT_EQUAL(array4[bound3Index][bound2Index][bound1Index][bound0Index], resultCount);
-
-#include SYSTEM_WARNING_POP
-
-                    ++resultCount;
+                    ++count;
                 }
             }
         }

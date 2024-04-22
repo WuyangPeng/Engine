@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:53)
+/// 版本：1.0.0.8 (2024/04/11 21:50)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_DETAIL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_DETAIL_H
@@ -18,12 +18,10 @@
 #include <type_traits>
 
 template <typename T>
+requires(std::is_same_v<typename T::value_type, bool>)
 void CoreTools::BufferTarget::WriteBoolContainerWithNumber(const T& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    using ValueType = typename T::value_type;
-    static_assert(std::is_same_v<ValueType, bool>, "ValueType is not bool");
 
     const auto size = boost::numeric_cast<int32_t>(objects.size());
 
@@ -33,12 +31,10 @@ void CoreTools::BufferTarget::WriteBoolContainerWithNumber(const T& objects)
 }
 
 template <typename T>
+requires(std::is_same_v<typename T::value_type, bool>)
 void CoreTools::BufferTarget::WriteBoolContainerWithoutNumber(const T& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    using ValueType = typename T::value_type;
-    static_assert(std::is_same_v<ValueType, bool>, "ValueType is not bool");
 
     for (const auto object : objects)
     {
@@ -47,6 +43,7 @@ void CoreTools::BufferTarget::WriteBoolContainerWithoutNumber(const T& objects)
 }
 
 template <int Size>
+requires(0 <= Size)
 void CoreTools::BufferTarget::WriteContainer(const std::array<bool, Size>& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -55,12 +52,10 @@ void CoreTools::BufferTarget::WriteContainer(const std::array<bool, Size>& objec
 }
 
 template <typename T>
+requires(std::is_same_v<typename T::value_type, std::string> || std::is_same_v<typename T::value_type, const char*>)
 void CoreTools::BufferTarget::WriteStringContainerWithNumber(const T& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    using ValueType = typename T::value_type;
-    static_assert(std::is_same_v<ValueType, std::string> || std::is_same_v<ValueType, const char*>, "ValueType is not string");
 
     const auto size = boost::numeric_cast<int32_t>(objects.size());
 
@@ -70,12 +65,10 @@ void CoreTools::BufferTarget::WriteStringContainerWithNumber(const T& objects)
 }
 
 template <typename T>
+requires(std::is_same_v<typename T::value_type, std::string> || std::is_same_v<typename T::value_type, const char*>)
 void CoreTools::BufferTarget::WriteStringContainerWithoutNumber(const T& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    using ValueType = typename T::value_type;
-    static_assert(std::is_same_v<ValueType, std::string> || std::is_same_v<ValueType, const char*>, "ValueType is not string");
 
     for (const auto& object : objects)
     {
@@ -84,6 +77,7 @@ void CoreTools::BufferTarget::WriteStringContainerWithoutNumber(const T& objects
 }
 
 template <int Size>
+requires(0 <= Size)
 void CoreTools::BufferTarget::WriteContainer(const std::array<std::string, Size>& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -92,6 +86,7 @@ void CoreTools::BufferTarget::WriteContainer(const std::array<std::string, Size>
 }
 
 template <int Size>
+requires(0 <= Size)
 void CoreTools::BufferTarget::WriteContainer(const std::array<const char*, Size>& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -100,22 +95,19 @@ void CoreTools::BufferTarget::WriteContainer(const std::array<const char*, Size>
 }
 
 template <typename T>
+requires(std::is_arithmetic_v<T>)
 void CoreTools::BufferTarget::Write(T datum)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
     Write(CoreTools::GetStreamSize(datum), &datum);
 }
 
 template <typename T>
+requires(std::is_arithmetic_v<typename T::value_type>)
 void CoreTools::BufferTarget::WriteContainerWithNumber(const T& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    using ValueType = typename T::value_type;
-    static_assert(std::is_arithmetic_v<ValueType>, "ValueType is not arithmetic");
 
     const auto size = boost::numeric_cast<int32_t>(objects.size());
 
@@ -125,12 +117,10 @@ void CoreTools::BufferTarget::WriteContainerWithNumber(const T& objects)
 }
 
 template <typename T>
+requires(std::is_arithmetic_v<typename T::value_type>)
 void CoreTools::BufferTarget::WriteContainerWithoutNumber(const T& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    using ValueType = typename T::value_type;
-    static_assert(std::is_arithmetic_v<ValueType>, "ValueType is not arithmetic");
 
     for (auto object : objects)
     {
@@ -139,32 +129,28 @@ void CoreTools::BufferTarget::WriteContainerWithoutNumber(const T& objects)
 }
 
 template <typename T, int Size>
+requires(std::is_arithmetic_v<T> && 0 <= Size)
 void CoreTools::BufferTarget::WriteContainer(const std::array<T, Size>& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
     Write(CoreTools::GetStreamSize<T>(), objects.size(), objects.data());
 }
 
 template <typename T>
+requires(std::is_enum_v<T>)
 void CoreTools::BufferTarget::WriteEnum(T datum)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    static_assert(std::is_enum_v<T>, "T is not enum");
 
     Write(CoreTools::GetStreamSize(datum), &datum);
 }
 
 template <typename T>
+requires(std::is_enum_v<typename T::value_type>)
 void CoreTools::BufferTarget::WriteEnumContainerWithNumber(const T& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    using ValueType = typename T::value_type;
-    static_assert(std::is_enum_v<ValueType>, "ValueType is not enum");
 
     const auto size = boost::numeric_cast<int32_t>(objects.size());
 
@@ -174,12 +160,10 @@ void CoreTools::BufferTarget::WriteEnumContainerWithNumber(const T& objects)
 }
 
 template <typename T>
+requires(std::is_enum_v<typename T::value_type>)
 void CoreTools::BufferTarget::WriteEnumContainerWithoutNumber(const T& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    using ValueType = typename T::value_type;
-    static_assert(std::is_enum_v<ValueType>, "ValueType is not enum");
 
     for (auto object : objects)
     {
@@ -188,11 +172,10 @@ void CoreTools::BufferTarget::WriteEnumContainerWithoutNumber(const T& objects)
 }
 
 template <typename T, int Size>
+requires(std::is_enum_v<T> && 0 <= Size)
 void CoreTools::BufferTarget::WriteEnumContainer(const std::array<T, Size>& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    static_assert(std::is_enum_v<T>, "T is not enum");
 
     Write(CoreTools::GetStreamSize<T>(), objects.size(), objects.data());
 }
@@ -229,11 +212,10 @@ void CoreTools::BufferTarget::WriteAggregateContainer(const std::array<T, Size>&
 }
 
 template <typename T>
+requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
 void CoreTools::BufferTarget::WriteObjectAssociated(const T& object)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    static_assert(std::is_base_of_v<ObjectInterface, typename T::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     if (object.object != nullptr)
     {
@@ -246,11 +228,10 @@ void CoreTools::BufferTarget::WriteObjectAssociated(const T& object)
 }
 
 template <typename T>
+requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
 void CoreTools::BufferTarget::WriteWeakObjectAssociated(const T& object)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    static_assert(std::is_base_of_v<ObjectInterface, typename T::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     if (object.object.lock() != nullptr)
     {
@@ -263,12 +244,10 @@ void CoreTools::BufferTarget::WriteWeakObjectAssociated(const T& object)
 }
 
 template <typename T>
+requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::value_type::ObjectType>)
 void CoreTools::BufferTarget::WriteObjectAssociatedContainerWithNumber(const T& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    using ValueType = typename T::value_type;
-    static_assert(std::is_base_of_v<ObjectInterface, typename ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     auto size = boost::numeric_cast<int32_t>(objects.size());
 
@@ -278,12 +257,10 @@ void CoreTools::BufferTarget::WriteObjectAssociatedContainerWithNumber(const T& 
 }
 
 template <typename T>
+requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::value_type::ObjectType>)
 void CoreTools::BufferTarget::WriteObjectAssociatedContainerWithoutNumber(const T& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    using ValueType = typename T::value_type;
-    static_assert(std::is_base_of_v<ObjectInterface, typename ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     for (const auto& object : objects)
     {
@@ -292,11 +269,10 @@ void CoreTools::BufferTarget::WriteObjectAssociatedContainerWithoutNumber(const 
 }
 
 template <typename T, int Size>
+requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType> && 0 <= Size)
 void CoreTools::BufferTarget::WriteObjectAssociatedContainer(const std::array<T, Size>& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
-
-    static_assert(std::is_base_of_v<ObjectInterface, typename T::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     WriteObjectAssociatedContainerWithoutNumber(objects);
 }

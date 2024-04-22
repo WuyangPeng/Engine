@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:44)
+/// 版本：1.0.0.8 (2024/04/11 14:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -38,7 +38,8 @@ System::String CoreTools::LogFilterManager::GetLogFilterDescribe(LogFilter logFi
                                                        { LogFilter::Framework, SYSTEM_TEXT("框架"s) },
                                                        { LogFilter::User, SYSTEM_TEXT("用户自定义"s) } };
 
-    if (const auto iter = describe.find(logFilterType); iter != describe.cend())
+    if (const auto iter = describe.find(logFilterType);
+        iter != describe.cend())
     {
         return iter->second;
     }

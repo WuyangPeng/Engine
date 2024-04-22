@@ -166,7 +166,7 @@ void Mathematics::RootsQuadratic<T>::ComputeClassifiers(const Rational& rM0, con
 }
 
 template <typename T>
-int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection(const Rational& rD0, RationalPolynomialRootContainer& rRoots)
+int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection(const Rational& rD0, RationalPolynomialRootContainer& rRoots) requires(std::is_arithmetic_v<T>)
 {
     const auto signD0 = rD0.GetSign();
     if (signD0 > 0)
@@ -193,6 +193,43 @@ int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection(const Rationa
 
     /// 区间[0,b]上的双截。多项式是一个偶函数，所以我们不必在区间[-b,0]上平分。
     auto xMin = T{};
+    auto xMax = b;
+    PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+    auto average = Rational{ 0.5 } * (Rational{ xMin } + Rational{ xMax });
+    rRoots.at(1) = { average, 1 };
+    average.Negate();
+    rRoots.at(0) = { average, 1 };
+    return 2;
+}
+
+template <typename T>
+int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection(const Rational& rD0, RationalPolynomialRootContainer& rRoots) requires(!std::is_arithmetic_v<T>)
+{
+    const auto signD0 = rD0.GetSign();
+    if (signD0 > 0)
+    {
+        /// 两个非实根，每个根的重数为1。
+        return 0;
+    }
+
+    if (signD0 == 0)
+    {
+        /// 一个实根，多重数2。
+        rRoots.at(0) = { Rational{ 0 }, 2 };
+        return 1;
+    }
+
+    /// 两个实根，每个根的复数为1。
+    /// F(x)的柯西界为b = max{1,|d_0|}$。
+    /// 使用区间 [-b,b]上的平分来估计根。
+    auto d0 = static_cast<T>(rD0);
+    auto b = std::max(T{ 1 }, Fabs(d0));
+    auto f = [&d0](T x) {
+        return Fma(x, x, d0);
+    };
+
+    /// 区间[0,b]上的双截。多项式是一个偶函数，所以我们不必在区间[-b,0]上平分。
+    auto xMin = T{ 0 };
     auto xMax = b;
     PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
     auto average = Rational{ 0.5 } * (Rational{ xMin } + Rational{ xMax });

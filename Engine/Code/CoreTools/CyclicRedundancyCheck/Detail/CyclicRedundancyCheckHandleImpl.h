@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:39)
+/// 版本：1.0.0.8 (2024/04/12 15:12)
 
 #ifndef CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_IMPL_H
 #define CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_IMPL_H
@@ -14,7 +14,7 @@
 
 #include "CyclicRedundancyCheck16Table.h"
 #include "CyclicRedundancyCheck32Table.h"
-#include "CyclicRedundancyCheckCCITTTable.h"
+#include "CyclicRedundancyCheckCcittTable.h"
 
 namespace CoreTools
 {
@@ -28,12 +28,12 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD uint16_t GetCCITT(int index) const;
+        NODISCARD uint16_t GetCcitt(int index) const;
         NODISCARD uint16_t Get16Table(int index) const;
         NODISCARD uint32_t Get32Table(int index) const;
 
     private:
-        CyclicRedundancyCheckCCITTTable ccitt;
+        CyclicRedundancyCheckCcittTable ccitt;
         CyclicRedundancyCheck16Table table16;
         CyclicRedundancyCheck32Table table32;
     };

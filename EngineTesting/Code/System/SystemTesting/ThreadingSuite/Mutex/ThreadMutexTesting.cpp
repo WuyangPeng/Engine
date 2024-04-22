@@ -75,12 +75,12 @@ void System::ThreadMutexTesting::WaitForMutexTest(WindowsHandle mutexHandle)
 
 void System::ThreadMutexTesting::TryLockTimeoutTest(WindowsHandle mutexHandle)
 {
-    ASSERT_ENUM_EQUAL(WaitForSystemMutex(mutexHandle, 0), MutexWaitReturn::Timeout);
+    ASSERT_EQUAL(WaitForSystemMutex(mutexHandle, 0), MutexWaitReturn::Timeout);
 }
 
 void System::ThreadMutexTesting::TryLockSuccessTest(WindowsHandle mutexHandle)
 {
-    ASSERT_ENUM_EQUAL(WaitForSystemMutex(mutexHandle, 0), MutexWaitReturn::Object0);
+    ASSERT_EQUAL(WaitForSystemMutex(mutexHandle, 0), MutexWaitReturn::Object0);
 
     ASSERT_TRUE(ReleaseSystemMutex(mutexHandle));
 }

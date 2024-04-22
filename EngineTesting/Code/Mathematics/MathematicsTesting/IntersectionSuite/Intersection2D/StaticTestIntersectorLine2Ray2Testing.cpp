@@ -63,27 +63,27 @@ void Mathematics::StaticTestIntersectorLine2Ray2Testing::RayTest()
 
         StaticTestIntersectorLine2Ray2<float> firstClassify(Line2F(lhsOrigin, lhsDirection), Ray2F(lhsOrigin, lhsDirection));
 
-        ASSERT_ENUM_EQUAL(firstClassify.GetIntersectionType(), IntersectionType::Ray);
+        ASSERT_EQUAL(firstClassify.GetIntersectionType(), IntersectionType::Ray);
         ASSERT_EQUAL(firstClassify.GetQuantity(), INT_MAX);
 
         StaticTestIntersectorLine2Ray2<float> secondClassify(Line2F(lhsOrigin, lhsDirection), Ray2F(rhsOrigin, lhsDirection));
 
-        ASSERT_ENUM_EQUAL(secondClassify.GetIntersectionType(), IntersectionType::Empty);
+        ASSERT_EQUAL(secondClassify.GetIntersectionType(), IntersectionType::Empty);
         ASSERT_EQUAL(secondClassify.GetQuantity(), 0);
 
         StaticTestIntersectorLine2Ray2<float> thirdClassify(Line2F(lhsOrigin, lhsDirection), Ray2F(lhsOrigin, -lhsDirection));
 
-        ASSERT_ENUM_EQUAL(thirdClassify.GetIntersectionType(), IntersectionType::Ray);
+        ASSERT_EQUAL(thirdClassify.GetIntersectionType(), IntersectionType::Ray);
         ASSERT_EQUAL(thirdClassify.GetQuantity(), INT_MAX);
 
         StaticTestIntersectorLine2Ray2<float> fourthClassify(Line2F(lhsOrigin, lhsDirection), Ray2F(lhsOrigin + lhsDirection, -lhsDirection));
 
-        ASSERT_ENUM_EQUAL(fourthClassify.GetIntersectionType(), IntersectionType::Ray);
+        ASSERT_EQUAL(fourthClassify.GetIntersectionType(), IntersectionType::Ray);
         ASSERT_EQUAL(fourthClassify.GetQuantity(), INT_MAX);
 
         StaticTestIntersectorLine2Ray2<float> fifthClassify(Line2F(lhsOrigin, lhsDirection), Ray2F(lhsOrigin - lhsDirection, -lhsDirection));
 
-        ASSERT_ENUM_EQUAL(fifthClassify.GetIntersectionType(), IntersectionType::Ray);
+        ASSERT_EQUAL(fifthClassify.GetIntersectionType(), IntersectionType::Ray);
         ASSERT_EQUAL(fifthClassify.GetQuantity(), INT_MAX);
 
         StaticTestIntersectorLine2Ray2<float> sixthClassify(Line2F(lhsOrigin, lhsDirection), Ray2F(rhsOrigin, rhsDirection));
@@ -92,12 +92,12 @@ void Mathematics::StaticTestIntersectorLine2Ray2Testing::RayTest()
 
         if (0.0f <= seventhClassify.GetParameter1())
         {
-            ASSERT_ENUM_EQUAL(sixthClassify.GetIntersectionType(), IntersectionType::Point);
+            ASSERT_EQUAL(sixthClassify.GetIntersectionType(), IntersectionType::Point);
             ASSERT_EQUAL(sixthClassify.GetQuantity(), 1);
         }
         else
         {
-            ASSERT_ENUM_EQUAL(sixthClassify.GetIntersectionType(), IntersectionType::Empty);
+            ASSERT_EQUAL(sixthClassify.GetIntersectionType(), IntersectionType::Empty);
             ASSERT_EQUAL(sixthClassify.GetQuantity(), 0);
         }
     }

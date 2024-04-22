@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:41)
+/// 版本：1.0.0.8 (2024/04/02 13:21)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_FLAGS_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_FLAGS_H
@@ -34,7 +34,7 @@ namespace CoreTools
         Unique,
     };
 
-    // Bit，Vector2等数据使用分隔符|，Array数据使用分隔符&。
+    /// Bit，Vector2等数据使用分隔符|，Array数据使用分隔符&。
     enum class CSVDataType
     {
         String,

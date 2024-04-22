@@ -70,17 +70,17 @@ void Rendering::BufferTesting::DefaultTest()
     ASSERT_EQUAL(bufferTest.GetNumElements(), 0);
     ASSERT_EQUAL(bufferTest.GetElementSize(), 0);
     ASSERT_EQUAL(bufferTest.GetNumBytes(), 0);
-    ASSERT_ENUM_EQUAL(bufferTest.GetUsage(), UsageType::Immutable);
-    ASSERT_ENUM_EQUAL(bufferTest.GetCopy(), CopyType::None);
+    ASSERT_EQUAL(bufferTest.GetUsage(), UsageType::Immutable);
+    ASSERT_EQUAL(bufferTest.GetCopy(), CopyType::None);
     ASSERT_EQUAL(bufferTest.GetOffset(), 0);
     ASSERT_EQUAL(bufferTest.GetNumActiveElements(), 0);
     ASSERT_EQUAL(bufferTest.GetNumActiveBytes(), 0);
 
     bufferTest.SetUsage(UsageType::DynamicUpdate);
-    ASSERT_ENUM_EQUAL(bufferTest.GetUsage(), UsageType::DynamicUpdate);
+    ASSERT_EQUAL(bufferTest.GetUsage(), UsageType::DynamicUpdate);
 
     bufferTest.SetCopy(CopyType::Bidirectional);
-    ASSERT_ENUM_EQUAL(bufferTest.GetCopy(), CopyType::Bidirectional);
+    ASSERT_EQUAL(bufferTest.GetCopy(), CopyType::Bidirectional);
 }
 
 void Rendering::BufferTesting::CreateStorageTest()

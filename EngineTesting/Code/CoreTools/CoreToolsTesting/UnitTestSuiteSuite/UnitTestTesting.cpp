@@ -157,8 +157,8 @@ void CoreTools::UnitTestTesting::AssertEqualTest()
     ASSERT_EQUAL_NULL_PTR(this);
     ASSERT_UNEQUAL_NULL_PTR(ptr);
     ASSERT_UNEQUAL_NULL_PTR(this);
-    ASSERT_ENUM_EQUAL(TestEnum::Ten, TestEnum::Ten);
-    ASSERT_ENUM_UNEQUAL(TestEnum::Ten, TestEnum::Fifteen);
+    ASSERT_EQUAL(TestEnum::Ten, TestEnum::Ten);
+    ASSERT_UNEQUAL(TestEnum::Ten, TestEnum::Fifteen);
     constexpr auto value = 1.0f;
     ASSERT_FLOATING_POINT_COMPLETE_EQUAL(value, value);
     ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL(value, value + 0.00001f);
@@ -249,10 +249,10 @@ void CoreTools::UnitTestTesting::AssertCompareTest()
     ASSERT_GREATER_EQUAL(7, 7);
     ASSERT_GREATER_EQUAL(1.0f, 1.11f);
 
-    ASSERT_ENUM_LESS(TestEnum::Ten, TestEnum::Fifteen);
-    ASSERT_ENUM_LESS_EQUAL(TestEnum::Ten, TestEnum::Ten);
-    ASSERT_ENUM_GREATER(TestEnum::Fifteen, TestEnum::Ten);
-    ASSERT_ENUM_GREATER_EQUAL(TestEnum::Fifteen, TestEnum::Ten);
+    ASSERT_LESS(TestEnum::Ten, TestEnum::Fifteen);
+    ASSERT_LESS_EQUAL(TestEnum::Ten, TestEnum::Ten);
+    ASSERT_GREATER(TestEnum::Fifteen, TestEnum::Ten);
+    ASSERT_GREATER_EQUAL(TestEnum::Fifteen, TestEnum::Ten);
 
     ASSERT_LESS_USE_MESSAGE(1, 7, "≤‚ ‘ASSERT_LESS_USE_MESSAGE");
     ASSERT_LESS_USE_MESSAGE(10, 2, "≤‚ ‘ASSERT_LESS_USE_MESSAGE");

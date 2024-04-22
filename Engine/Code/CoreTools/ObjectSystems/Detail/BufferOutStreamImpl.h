@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:53)
+/// 版本：1.0.0.8 (2024/04/11 22:08)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_OUT_STREAM_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_OUT_STREAM_IMPL_H
@@ -44,10 +44,10 @@ namespace CoreTools
         void SaveToBuffer();
 
     private:
-        // 顶层对象的流。
+        /// 顶层对象的流。
         OutTopLevel topLevel;
 
-        // 存储objects，对顶层对象使用图的深度优先遍历。
+        /// 存储objects，对顶层对象使用图的深度优先遍历。
         ObjectRegisterSharedPtr objectRegister;
 
         BufferTargetSharedPtr target;

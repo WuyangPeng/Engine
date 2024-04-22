@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:04)
+/// 版本：1.0.0.8 (2024/03/28 16:44)
 
 #ifndef CORE_TOOLS_BASE_SPAN_ITERATOR_DETAIL_H
 #define CORE_TOOLS_BASE_SPAN_ITERATOR_DETAIL_H
@@ -35,10 +35,7 @@ bool CoreTools::SpanIterator<Iter>::IsValid() const noexcept
 {
     try
     {
-        if (begin <= current && current <= end)
-            return true;
-        else
-            return false;
+        return begin <= current && current <= end;
     }
     catch (...)
     {
@@ -187,6 +184,29 @@ Iter CoreTools::SpanIterator<Iter>::GetCurrent() const noexcept
 }
 
 template <typename Iter>
+Iter CoreTools::SpanIterator<Iter>::Get(int step) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    if (step == 0)
+    {
+        return current;
+    }
+
+    if (step > 0 && end - current < step)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("迭代器增加时越界。"s))
+    }
+
+    if (step < 0 && current - begin < -step)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("迭代器减少时越界。"s))
+    }
+
+    return current + step;
+}
+
+template <typename Iter>
 typename CoreTools::SpanIterator<Iter>::DifferenceType CoreTools::SpanIterator<Iter>::GetRemainingCount() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
@@ -196,12 +216,9 @@ typename CoreTools::SpanIterator<Iter>::DifferenceType CoreTools::SpanIterator<I
 
 template <typename Iter>
 template <typename T>
-const T& CoreTools::SpanIterator<Iter>::ReinterpretCast() const
+const T& CoreTools::SpanIterator<Iter>::ReinterpretCast() const requires(std::is_arithmetic_v<ValueType> && std::is_arithmetic_v<T>)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
-
-    static_assert(std::is_arithmetic_v<ValueType>, "ValueType must be arithmetic.");
-    static_assert(std::is_arithmetic_v<T>, "T must be arithmetic.");
 
     const auto remainingCount = GetRemainingCount();
     if (remainingCount * sizeof(ValueType) < sizeof(T))
@@ -220,7 +237,7 @@ const T& CoreTools::SpanIterator<Iter>::ReinterpretCast() const
 
 template <typename Iter>
 template <typename T>
-T& CoreTools::SpanIterator<Iter>::ReinterpretCast()
+T& CoreTools::SpanIterator<Iter>::ReinterpretCast() requires(std::is_arithmetic_v<ValueType> && std::is_arithmetic_v<T>)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -234,19 +251,17 @@ T& CoreTools::SpanIterator<Iter>::ReinterpretCast()
 
 template <typename Iter>
 template <typename T>
-const T& CoreTools::SpanIterator<Iter>::ReinterpretCast(int step) const
+const T& CoreTools::SpanIterator<Iter>::ReinterpretCast(int step) const requires(std::is_arithmetic_v<ValueType> && std::is_arithmetic_v<T>)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    static_assert(std::is_arithmetic_v<ValueType>, "ValueType must be arithmetic.");
-    static_assert(std::is_arithmetic_v<T>, "T must be arithmetic.");
-
-    const auto endStep = current + step * sizeof(ValueType);
-
-    if (end <= endStep)
+    const auto remainingCount = GetRemainingCount();
+    if ((remainingCount - step) * sizeof(ValueType) < sizeof(T))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("迭代器长度不足"s))
     }
+
+    const auto endStep = current + step;
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26473)
@@ -259,7 +274,7 @@ const T& CoreTools::SpanIterator<Iter>::ReinterpretCast(int step) const
 
 template <typename Iter>
 template <typename T>
-T& CoreTools::SpanIterator<Iter>::ReinterpretCast(int step)
+T& CoreTools::SpanIterator<Iter>::ReinterpretCast(int step) requires(std::is_arithmetic_v<ValueType> && std::is_arithmetic_v<T>)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -273,6 +288,7 @@ T& CoreTools::SpanIterator<Iter>::ReinterpretCast(int step)
 
 template <typename Iter>
 template <typename T>
+requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
 T CoreTools::SpanIterator<Iter>::Increase()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
@@ -286,6 +302,7 @@ T CoreTools::SpanIterator<Iter>::Increase()
 
 template <typename Iter>
 template <typename T>
+requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
 void CoreTools::SpanIterator<Iter>::Increase(T value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
@@ -299,6 +316,7 @@ void CoreTools::SpanIterator<Iter>::Increase(T value)
 
 template <typename Iter>
 template <typename T, int Size>
+requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
 std::array<T, Size> CoreTools::SpanIterator<Iter>::Increase()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
@@ -313,7 +331,22 @@ std::array<T, Size> CoreTools::SpanIterator<Iter>::Increase()
 }
 
 template <typename Iter>
+template <typename T, int Size>
+requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
+void CoreTools::SpanIterator<Iter>::Increase(const std::array<T, Size>& value)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    SetValue(0, value);
+
+    constexpr auto proportion = sizeof(T) / sizeof(ValueType);
+
+    *this += Size * proportion;
+}
+
+template <typename Iter>
 template <typename T>
+requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
 T CoreTools::SpanIterator<Iter>::GetValue(int step) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
@@ -323,35 +356,23 @@ T CoreTools::SpanIterator<Iter>::GetValue(int step) const
 
 template <typename Iter>
 template <typename T, int Size>
+requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
 NODISCARD std::array<T, Size> CoreTools::SpanIterator<Iter>::GetValue(int step) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    constexpr auto proportion = sizeof(T) / sizeof(ValueType);
-
-    const auto* endPosition = &ReinterpretCast<T>(step + Size * proportion);
+    const auto* beginPosition = &ReinterpretCast<T>(step);
 
     std::array<T, Size> result{};
 
-    auto index = Size;
-    for (auto& element : result)
-    {
-#include SYSTEM_WARNING_PUSH
-
-#include SYSTEM_WARNING_DISABLE(26481)
-
-        element = *(endPosition - index);
-
-#include SYSTEM_WARNING_POP
-
-        --index;
-    }
+    std::copy_n(beginPosition, Size, result.begin());
 
     return result;
 }
 
 template <typename Iter>
 template <typename T>
+requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
 void CoreTools::SpanIterator<Iter>::SetValue(int step, T value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
@@ -363,27 +384,17 @@ void CoreTools::SpanIterator<Iter>::SetValue(int step, T value)
 
 template <typename Iter>
 template <typename T, int Size>
-int CoreTools::SpanIterator<Iter>::SetValue(int step, const std::array<T, Size>& value)
+requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
+void CoreTools::SpanIterator<Iter>::SetValue(int step, const std::array<T, Size>& value)
 {
-    constexpr auto proportion = sizeof(T) / sizeof(ValueType);
+    auto* beginPosition = &ReinterpretCast<T>(step);
 
-    auto* endPosition = &ReinterpretCast<T>(step + Size * proportion);
-
-    auto index = Size;
-    for (const auto& element : value)
-    {
 #include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26459)
 
-#include SYSTEM_WARNING_DISABLE(26481)
-
-        *(endPosition - index) = element;
+    std::copy_n(value.begin(), Size, beginPosition);
 
 #include SYSTEM_WARNING_POP
-
-        --index;
-    }
-
-    return step + Size * proportion;
 }
 
 template <typename Iter>
@@ -393,6 +404,7 @@ typename Iter::difference_type CoreTools::operator-(const SpanIterator<Iter>& lh
     {
         return lhs.GetCurrent() - rhs.GetCurrent();
     }
+    else
     {
         THROW_EXCEPTION(SYSTEM_TEXT("迭代器起始位置不相同。"s))
     }
@@ -401,7 +413,14 @@ typename Iter::difference_type CoreTools::operator-(const SpanIterator<Iter>& lh
 template <typename Iter>
 void CoreTools::IterSwap(const SpanIterator<Iter>& lhs, const SpanIterator<Iter>& rhs)
 {
-    iter_swap(lhs.GetCurrent(), rhs.GetCurrent());
+    if (lhs.GetBegin() == rhs.GetBegin() && lhs.GetEnd() == rhs.GetEnd())
+    {
+        iter_swap(lhs.GetCurrent(), rhs.GetCurrent());
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("迭代器起始位置不相同。"s))
+    }
 }
 
 #endif  // CORE_TOOLS_BASE_SPAN_ITERATOR_DETAIL_H

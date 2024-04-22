@@ -123,19 +123,19 @@ void Mathematics::Plane3Testing::DistanceTest()
         ASSERT_APPROXIMATE(plane.DistanceTo(point1), 0.0, 1e-10);
         ASSERT_APPROXIMATE(plane.DistanceTo(point2), 0.0, 1e-10);
 
-        ASSERT_ENUM_EQUAL(plane.WhichSide(point0), NumericalValueSymbol::Zero);
-        ASSERT_ENUM_EQUAL(plane.WhichSide(point1), NumericalValueSymbol::Zero);
-        ASSERT_ENUM_EQUAL(plane.WhichSide(point2), NumericalValueSymbol::Zero);
+        ASSERT_EQUAL(plane.WhichSide(point0), NumericalValueSymbol::Zero);
+        ASSERT_EQUAL(plane.WhichSide(point1), NumericalValueSymbol::Zero);
+        ASSERT_EQUAL(plane.WhichSide(point2), NumericalValueSymbol::Zero);
 
         const Vector3D fourthPoint(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
         auto distance = plane.DistanceTo(fourthPoint);
 
         if (MathD::GetZeroTolerance() < distance)
-            ASSERT_ENUM_EQUAL(plane.WhichSide(fourthPoint), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(plane.WhichSide(fourthPoint), NumericalValueSymbol::Positive);
         else if (distance < MathD::GetZeroTolerance())
-            ASSERT_ENUM_EQUAL(plane.WhichSide(fourthPoint), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(plane.WhichSide(fourthPoint), NumericalValueSymbol::Negative);
         else
-            ASSERT_ENUM_EQUAL(plane.WhichSide(fourthPoint), NumericalValueSymbol::Zero);
+            ASSERT_EQUAL(plane.WhichSide(fourthPoint), NumericalValueSymbol::Zero);
     }
 }

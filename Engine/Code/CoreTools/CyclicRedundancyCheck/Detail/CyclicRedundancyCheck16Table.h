@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:40)
+/// 版本：1.0.0.8 (2024/04/12 15:09)
 
 #ifndef CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_16_TABLE_H
 #define CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_16_TABLE_H
@@ -16,10 +16,10 @@
 
 namespace CoreTools
 {
-    //  0x0000, 0xCC01, 0xD801, 0x1400,
-    //  0xF001, 0x3C00, 0x2800, 0xE401,
-    //  0xA001, 0x6C00, 0x7800, 0xB401,
-    //  0x5000, 0x9C01, 0x8801, 0x4400
+    ///  0x0000, 0xCC01, 0xD801, 0x1400,
+    ///  0xF001, 0x3C00, 0x2800, 0xE401,
+    ///  0xA001, 0x6C00, 0x7800, 0xB401,
+    ///  0x5000, 0x9C01, 0x8801, 0x4400
     class CORE_TOOLS_HIDDEN_DECLARE CyclicRedundancyCheck16Table final
     {
     public:

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:41)
+/// 版本：1.0.0.8 (2024/04/11 14:03)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -29,10 +29,7 @@ CoreTools::LogAsynchronousParameter::LogAsynchronousParameter(String fileName, L
 
 bool CoreTools::LogAsynchronousParameter::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && appenderManager != nullptr)
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && appenderManager != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

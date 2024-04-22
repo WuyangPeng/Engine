@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:11)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 16:24)
 
 #include "CellRangeTesting.h"
 #include "System/Helper/PragmaWarning/PugiXml.h"
@@ -19,8 +19,6 @@
 #include "CoreTools/TextParsing/SimpleCSV/Worksheet.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
-
-using namespace std::literals;
 
 CoreTools::CellRangeTesting::CellRangeTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -43,7 +41,7 @@ void CoreTools::CellRangeTesting::MainTest()
 
 void CoreTools::CellRangeTesting::CellRangeTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
     auto workbook = document->GetWorkbook();
     const auto worksheetNames = workbook.GetWorksheetNames();
@@ -74,7 +72,7 @@ void CoreTools::CellRangeTesting::CellRangeTest()
 
 void CoreTools::CellRangeTesting::CellRangeIteratorTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
     auto workbook = document->GetWorkbook();
     const auto worksheetNames = workbook.GetWorksheetNames();
@@ -85,9 +83,9 @@ void CoreTools::CellRangeTesting::CellRangeIteratorTest()
 
     auto row = 1;
     auto column = 1;
-    for (const auto& value : cellRange)
+    for (const auto& element : cellRange)
     {
-        const auto cellReference = value.GetCellReference();
+        const auto cellReference = element.GetCellReference();
 
         ASSERT_EQUAL(cellReference.GetRow(), row);
         ASSERT_EQUAL(cellReference.GetColumn(), column);

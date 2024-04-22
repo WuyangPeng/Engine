@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:22)
+/// 版本：1.0.0.8 (2024/04/12 11:22)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_COMPOSITE_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_COMPOSITE_H
@@ -15,7 +15,7 @@
 #include "UnitTestInterface.h"
 #include "UnitTestStream.h"
 
-// 使用组合模式封装UnitTest类和SuiteImpl类。
+/// 使用组合模式封装UnitTest类和SuiteImpl类。
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE UnitTestComposite : public UnitTestStream, public UnitTestInterface

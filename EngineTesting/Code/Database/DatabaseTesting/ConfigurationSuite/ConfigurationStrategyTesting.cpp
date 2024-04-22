@@ -35,7 +35,7 @@ void Database::ConfigurationStrategyTesting::ConfigurationTest()
 {
     const ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector, "127.0.0.1", 8010u, "Server", "root", "password" };
 
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::MysqlConnector);
+    ASSERT_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::MysqlConnector);
     ASSERT_EQUAL(configurationStrategy.GetIp(), "127.0.0.1");
     ASSERT_EQUAL(configurationStrategy.GetPort(), 8010);
     ASSERT_EQUAL(configurationStrategy.GetDBHostName(), "Server");
@@ -61,7 +61,7 @@ void Database::ConfigurationStrategyTesting::FlagsOptionTest()
 
     const ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector, "127.0.0.1", 8010, "Server", "root", "password", false, 10, 100, 1000, 1, flagsOption, stringOption, booleanOption, intOption, sslOption, dbMapping };
 
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::MysqlConnector);
+    ASSERT_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::MysqlConnector);
     ASSERT_EQUAL(configurationStrategy.GetIp(), "127.0.0.1");
     ASSERT_EQUAL(configurationStrategy.GetPort(), 8010);
     ASSERT_EQUAL(configurationStrategy.GetDBHostName(), "Server");

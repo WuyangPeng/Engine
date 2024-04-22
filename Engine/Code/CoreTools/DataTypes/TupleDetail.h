@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:43)
+/// 版本：1.0.0.8 (2024/04/11 14:46)
 
 #ifndef CORE_TOOLS_DATA_TYPE_TUPLE_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_TUPLE_DETAIL_H
@@ -100,15 +100,14 @@ Type CoreTools::Tuple<Dimension, Type>::GetSum() const noexcept
 
     Type sum{};
 
-    for (const auto& value : tuple)
+    for (const auto& element : tuple)
     {
-        sum += value;
+        sum += element;
     }
 
     return sum;
 }
 
-// 非成员函数
 template <int Dimension, typename Type>
 bool CoreTools::operator==(const Tuple<Dimension, Type>& lhs, const Tuple<Dimension, Type>& rhs)
 {
@@ -124,9 +123,9 @@ bool CoreTools::operator<(const Tuple<Dimension, Type>& lhs, const Tuple<Dimensi
 template <int Dimension, typename Type>
 std::ostream& CoreTools::operator<<(std::ostream& os, const Tuple<Dimension, Type>& tuple)
 {
-    for (const auto& value : tuple)
+    for (const auto& element : tuple)
     {
-        os << value << " ";
+        os << element << " ";
     }
 
     return os;

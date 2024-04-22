@@ -12,8 +12,12 @@
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "System/Helper/PragmaWarning.h"
 #include "Mathematics/Algebra/AlgebraFwd.h"
 
+#include <array>
+
+/// 旋转矩阵可以使用涉及三角项和多项式项的系数估计来构建。
 namespace Mathematics
 {
     //  rotc0(t) = sin(t)/t的常数。
@@ -336,28 +340,48 @@ namespace Mathematics
     requires((Degree & 1) == 0 && 4 <= Degree && Degree <= 16)
     NODISCARD constexpr T GetRotC0EstimateMaxError()
     {
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
         return static_cast<T>(rotation0EstimateMaxError[(Degree - 4) / 2]);
+
+#include SYSTEM_WARNING_POP
     }
 
     template <typename T, int Degree>
     requires((Degree & 1) == 0 && 4 <= Degree && Degree <= 16)
     NODISCARD constexpr T GetRotC1EstimateMaxError()
     {
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
         return static_cast<T>(rotation1EstimateMaxError[(Degree - 4) / 2]);
+
+#include SYSTEM_WARNING_POP
     }
 
     template <typename T, int Degree>
     requires((Degree & 1) == 0 && 4 <= Degree && Degree <= 16)
     NODISCARD constexpr T GetRotC2EstimateMaxError()
     {
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
         return static_cast<T>(rotation2EstimateMaxError[(Degree - 4) / 2]);
+
+#include SYSTEM_WARNING_POP
     }
 
     template <typename T, int Degree>
     requires((Degree & 1) == 0 && 4 <= Degree && Degree <= 16)
     NODISCARD constexpr T GetRotC3EstimateMaxError()
     {
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
         return static_cast<T>(rotation3EstimateMaxError[(Degree - 4) / 2]);
+
+#include SYSTEM_WARNING_POP
     }
 
     /// 构造旋转矩阵的估计

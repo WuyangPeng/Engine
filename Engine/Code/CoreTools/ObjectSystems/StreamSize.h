@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:57)
+/// 版本：1.0.0.8 (2024/04/11 22:17)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_STREAM_SIZE_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_STREAM_SIZE_H
@@ -23,7 +23,7 @@
 
 namespace CoreTools
 {
-    // 模板SteamSize被流系统使用
+    /// 模板SteamSize被流系统使用
     template <typename T, typename Enable = void>
     struct StreamSize
     {
@@ -40,7 +40,7 @@ namespace CoreTools
         }
     };
 
-    // 一个独特的Id是一个有符号整数写入8个字节到磁盘上。
+    /// 一个独特的Id是一个有符号整数写入8个字节到磁盘上。
     template <typename T>
     struct StreamSize<T, std::enable_if_t<IsObjectAssociated<T>::result>>
     {
@@ -57,7 +57,7 @@ namespace CoreTools
         }
     };
 
-    // 一个bool值被写入4字节到磁盘上。
+    /// 一个bool值被写入4字节到磁盘上。
     template <>
     struct StreamSize<bool>
     {

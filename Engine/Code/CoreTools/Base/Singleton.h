@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:05)
+/// 版本：1.0.0.8 (2024/03/28 16:36)
 
 /// 自动Singleton基类的声明，这个基类需要手动控制创建和销毁。
 /// 如果实例化顺序并不重要，可以通过将派生类设为全局或局部静态，
@@ -37,9 +37,13 @@ namespace CoreTools
         NODISCARD static PointType GetSingletonPtr() noexcept;
 
     protected:
+        static constexpr auto isStdMutex = MutexCreate == MutexCreate::UseOriginalStd || MutexCreate == MutexCreate::UseOriginalStdRecursive;
+
+    protected:
         Singleton() noexcept;
         ~Singleton() noexcept;
-        NODISCARD static MutexType& GetMutex();
+        NODISCARD static MutexType& GetMutex() noexcept requires(isStdMutex);
+        NODISCARD static MutexType& GetMutex() requires(!isStdMutex);
 
     public:
         Singleton(const Singleton& rhs) noexcept = delete;

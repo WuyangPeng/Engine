@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:16)
+/// 版本：1.0.0.8 (2024/03/30 18:08)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -43,16 +43,6 @@ void CoreTools::StdRecursiveMutex::Leave() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    EXCEPTION_TRY
-    {
-        DoLeave();
-    }
-    EXCEPTION_STD_EXCEPTION_CATCH(CoreTools)
-    EXCEPTION_UNKNOWN_CATCH(CoreTools)
-}
-
-void CoreTools::StdRecursiveMutex::DoLeave() noexcept
-{
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26110)
 

@@ -12,8 +12,8 @@
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "CoreTools/MemoryTools/LexicoArray2.h"
 #include "Mathematics/Base/BaseFwd.h"
-#include "Mathematics/Base/LexicoArray2.h"
 
 #include <vector>
 
@@ -54,11 +54,11 @@ namespace Mathematics
 
 #ifdef MATHEMATICS_USE_ROW_MAJOR
 
-        using LexicoArray2 = LexicoArray2<true, Real>;
+        using LexicoArray2 = CoreTools::LexicoArray2<true, typename Container::iterator>;
 
 #else  // !MATHEMATICS_USE_ROW_MAJOR
 
-        using LexicoArray2 = LexicoArray2<false, Real>;
+        using LexicoArray2 = CoreTools::LexicoArray2<false, typename Container::iterator>;
 
 #endif  // MATHEMATICS_USE_ROW_MAJOR
 

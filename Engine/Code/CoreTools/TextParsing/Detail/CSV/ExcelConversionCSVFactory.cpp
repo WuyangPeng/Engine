@@ -5,14 +5,13 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:58)
+/// 版本：1.0.0.8 (2024/04/11 10:20)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ExcelConversionCSVFactory.h"
 #include "OpenXLSXConversion.h"
 #include "SimpleCSVConversion.h"
-#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::ExcelConversionCSVFactory::ExcelConversionCSVSharedPtr CoreTools::ExcelConversionCSVFactory::Create(const std::string& xlsxFileName, const String& csvFileName, bool useOpenXlsx)
 {

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:18)
+/// 版本：1.0.0.8 (2024/04/12 11:11)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,8 +19,6 @@
 #include <iomanip>
 #include <sstream>
 
-using namespace std::literals;
-
 CoreTools::UnitTestSuiteReportOutputImpl::UnitTestSuiteReportOutputImpl(const std::string& timeDescribe, int borderLineLength, const OStreamShared& streamShared)
     : ParentType{ timeDescribe, borderLineLength, streamShared }
 {
@@ -29,19 +27,19 @@ CoreTools::UnitTestSuiteReportOutputImpl::UnitTestSuiteReportOutputImpl(const st
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, UnitTestSuiteReportOutputImpl)
 
-void CoreTools::UnitTestSuiteReportOutputImpl::PrintTestName(const std::string& testName)
+void CoreTools::UnitTestSuiteReportOutputImpl::PrintTestName(const std::string& testName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    const auto characterString = "测试 \""s + testName + "\"："s;
+    const auto characterString = "测试 \"" + testName + "\"：";
     PrintString(characterString);
 }
 
-void CoreTools::UnitTestSuiteReportOutputImpl::PrintSuiteName(const std::string& suiteName)
+void CoreTools::UnitTestSuiteReportOutputImpl::PrintSuiteName(const std::string& suiteName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    const auto characterString = "测试套件 \""s + suiteName + "\"："s;
+    const auto characterString = "测试套件 \"" + suiteName + "\"：";
     PrintString(characterString);
 }
 

@@ -49,13 +49,13 @@ void Network::AnalysisNetworkConfigurationTesting::GameServerTest(const TestingT
 {
     const auto gameServer = analysisNetworkConfiguration.GetConfigurationStrategy(SYSTEM_TEXT("GameServer"));
 
-    ASSERT_ENUM_EQUAL(gameServer.GetWrappersStrategy(), WrappersStrategy::Ace);
-    ASSERT_ENUM_EQUAL(gameServer.GetServerStrategy(), ServerStrategy::Iterative);
-    ASSERT_ENUM_EQUAL(gameServer.GetClientStrategy(), ClientStrategy::Disable);
-    ASSERT_ENUM_EQUAL(gameServer.GetMessageStrategy(), MessageStrategy::Iovec);
-    ASSERT_ENUM_EQUAL(gameServer.GetConnectStrategy(), ConnectStrategy::Udp);
-    ASSERT_ENUM_EQUAL(gameServer.GetParserStrategy(), ParserStrategy::BigEndian);
-    ASSERT_ENUM_EQUAL(gameServer.GetOpenSslStrategy(), OpenSslStrategy::OpenSsl);
+    ASSERT_EQUAL(gameServer.GetWrappersStrategy(), WrappersStrategy::Ace);
+    ASSERT_EQUAL(gameServer.GetServerStrategy(), ServerStrategy::Iterative);
+    ASSERT_EQUAL(gameServer.GetClientStrategy(), ClientStrategy::Disable);
+    ASSERT_EQUAL(gameServer.GetMessageStrategy(), MessageStrategy::Iovec);
+    ASSERT_EQUAL(gameServer.GetConnectStrategy(), ConnectStrategy::Udp);
+    ASSERT_EQUAL(gameServer.GetParserStrategy(), ParserStrategy::BigEndian);
+    ASSERT_EQUAL(gameServer.GetOpenSslStrategy(), OpenSslStrategy::OpenSsl);
 
     const auto configurationSubStrategy = gameServer.GetConfigurationSubStrategy();
 
@@ -82,13 +82,13 @@ void Network::AnalysisNetworkConfigurationTesting::GameClientTest(const TestingT
 {
     const auto gameClient = analysisNetworkConfiguration.GetConfigurationStrategy(SYSTEM_TEXT("GameClient"));
 
-    ASSERT_ENUM_EQUAL(gameClient.GetWrappersStrategy(), WrappersStrategy::Network);
-    ASSERT_ENUM_EQUAL(gameClient.GetServerStrategy(), ServerStrategy::Disable);
-    ASSERT_ENUM_EQUAL(gameClient.GetClientStrategy(), ClientStrategy::Cache);
-    ASSERT_ENUM_EQUAL(gameClient.GetMessageStrategy(), MessageStrategy::Iovec);
-    ASSERT_ENUM_EQUAL(gameClient.GetConnectStrategy(), ConnectStrategy::Tcp);
-    ASSERT_ENUM_EQUAL(gameClient.GetParserStrategy(), ParserStrategy::LittleEndian);
-    ASSERT_ENUM_EQUAL(gameClient.GetOpenSslStrategy(), OpenSslStrategy::Default);
+    ASSERT_EQUAL(gameClient.GetWrappersStrategy(), WrappersStrategy::Network);
+    ASSERT_EQUAL(gameClient.GetServerStrategy(), ServerStrategy::Disable);
+    ASSERT_EQUAL(gameClient.GetClientStrategy(), ClientStrategy::Cache);
+    ASSERT_EQUAL(gameClient.GetMessageStrategy(), MessageStrategy::Iovec);
+    ASSERT_EQUAL(gameClient.GetConnectStrategy(), ConnectStrategy::Tcp);
+    ASSERT_EQUAL(gameClient.GetParserStrategy(), ParserStrategy::LittleEndian);
+    ASSERT_EQUAL(gameClient.GetOpenSslStrategy(), OpenSslStrategy::Default);
 
     const auto configurationSubStrategy = gameClient.GetConfigurationSubStrategy();
 

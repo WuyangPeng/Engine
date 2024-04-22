@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:14)
+/// 版本：1.0.0.8 (2024/04/12 15:07)
 
 #ifndef CORE_TOOLS_PROPERTIES_SIMPLE_PROPERTY_SET_EXTERNAL_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_SIMPLE_PROPERTY_SET_EXTERNAL_DETAIL_H
@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename Value, typename Reference>
+requires(std::is_reference_v<Reference>)
 CoreTools::SimplePropertySetExternal<Value, Reference>::SimplePropertySetExternal(ValueType& value) noexcept
     : value{ value }
 {
@@ -23,6 +24,7 @@ CoreTools::SimplePropertySetExternal<Value, Reference>::SimplePropertySetExterna
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Value, typename Reference>
+requires(std::is_reference_v<Reference>)
 bool CoreTools::SimplePropertySetExternal<Value, Reference>::IsValid() const noexcept
 {
     return true;
@@ -31,6 +33,7 @@ bool CoreTools::SimplePropertySetExternal<Value, Reference>::IsValid() const noe
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Value, typename Reference>
+requires(std::is_reference_v<Reference>)
 CoreTools::SimplePropertySetExternal<Value, Reference>& CoreTools::SimplePropertySetExternal<Value, Reference>::operator=(ReferenceType aValue)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;

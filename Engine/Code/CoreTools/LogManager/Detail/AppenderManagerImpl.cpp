@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:40)
+/// 版本：1.0.0.8 (2024/04/11 13:59)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,6 +14,8 @@
 #include "CoreTools/LogManager/Appender.h"
 #include "CoreTools/LogManager/LogMessage.h"
 #include "CoreTools/LogManager/Logger.h"
+
+#include <ranges>
 
 using namespace std::literals;
 
@@ -77,7 +79,8 @@ void CoreTools::AppenderManagerImpl::Write(const LogMessage& message) const
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    if (const auto level = GetLogLevelType(message); level != LogLevel::Disabled && level <= message.GetLogLevel() && !message.GetMessageDescribe().empty())
+    if (const auto level = GetLogLevelType(message);
+        level != LogLevel::Disabled && level <= message.GetLogLevel() && !message.GetMessageDescribe().empty())
     {
         DoWrite(message);
     }
@@ -87,7 +90,8 @@ void CoreTools::AppenderManagerImpl::Write(const String& name, const LogMessage&
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    if (const auto level = GetLogLevelType(message); level != LogLevel::Disabled && level <= message.GetLogLevel() && !message.GetMessageDescribe().empty() && GetDefaultAppenderName() != name)
+    if (const auto level = GetLogLevelType(message);
+        level != LogLevel::Disabled && level <= message.GetLogLevel() && !message.GetMessageDescribe().empty() && GetDefaultAppenderName() != name)
     {
         DoWrite(name, message);
     }
@@ -95,7 +99,8 @@ void CoreTools::AppenderManagerImpl::Write(const String& name, const LogMessage&
 
 CoreTools::LogLevel CoreTools::AppenderManagerImpl::GetLogLevelType(const LogMessage& message) const
 {
-    if (const auto iter = loggers.find(message.GetLogFilterType()); iter != loggers.cend())
+    if (const auto iter = loggers.find(message.GetLogFilterType());
+        iter != loggers.cend())
         return iter->second.GetLogLevel();
     else
         return LogLevel::Disabled;
@@ -103,7 +108,8 @@ CoreTools::LogLevel CoreTools::AppenderManagerImpl::GetLogLevelType(const LogMes
 
 CoreTools::LogLevel CoreTools::AppenderManagerImpl::GetMinLogLevelType(LogFilter logFilter) const
 {
-    if (const auto iter = loggers.find(logFilter); iter != loggers.cend())
+    if (const auto iter = loggers.find(logFilter);
+        iter != loggers.cend())
         return std::min(minLogLevel, iter->second.GetLogLevel());
     else
         return LogLevel::Disabled;
@@ -111,22 +117,24 @@ CoreTools::LogLevel CoreTools::AppenderManagerImpl::GetMinLogLevelType(LogFilter
 
 void CoreTools::AppenderManagerImpl::DoWrite(const LogMessage& message) const
 {
-    for (auto& element : appenders)
+    for (auto& element : appenders | std::views::values)
     {
-        if (element.second.IsDefault())
+        if (element.IsDefault())
         {
-            element.second.Write(message);
+            element.Write(message);
         }
     }
 }
 
 void CoreTools::AppenderManagerImpl::DoWrite(const System::String& name, const LogMessage& message)
 {
-    if (const auto iter = appenders.find(name); iter != appenders.cend())
+    if (const auto iter = appenders.find(name);
+        iter != appenders.cend())
     {
         iter->second.Write(message);
     }
-    else if (IsAppenderExist(GetDefaultAppenderName()) && CreateFileAppender(name))
+    else if (IsAppenderExist(GetDefaultAppenderName()) &&
+             CreateFileAppender(name))
     {
         DoWrite(name, message);
     }
@@ -150,15 +158,15 @@ bool CoreTools::AppenderManagerImpl::IsAppenderExist(const String& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto iter = appenders.find(name); iter != appenders.cend())
-        return true;
-    else
-        return false;
+    const auto iter = appenders.find(name);
+
+    return iter != appenders.cend();
 }
 
 bool CoreTools::AppenderManagerImpl::CreateFileAppender(const String& fileName)
 {
-    if (const auto iter = appenders.find(GetDefaultAppenderName()); iter != appenders.cend())
+    if (const auto iter = appenders.find(GetDefaultAppenderName());
+        iter != appenders.cend())
     {
         const auto& appender = iter->second;
 

@@ -10,14 +10,17 @@
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_H
 
-#include "ConvexHullDetail.h"
 #include "ConvexHull1Detail.h"
 #include "ConvexHull2Detail.h"
 #include "ConvexHull3Detail.h"
-#include "DelaunayDetail.h"
+#include "ConvexHullDetail.h"
 #include "Delaunay1Detail.h"
 #include "Delaunay2Detail.h"
 #include "Delaunay3Detail.h"
+#include "DelaunayDetail.h"
+#include "OrientedBoundingBoxNodeDetail.h"
+#include "OrientedBoundingBoxTreeDetail.h"
+#include "OrientedBoundingBoxTreeOfPointsDetail.h"
 #include "TriangulateECDetail.h"
- 
-#endif // MATHEMATICS_COMPUTATIONAL_GEOMETRY_H
+
+#endif  // MATHEMATICS_COMPUTATIONAL_GEOMETRY_H

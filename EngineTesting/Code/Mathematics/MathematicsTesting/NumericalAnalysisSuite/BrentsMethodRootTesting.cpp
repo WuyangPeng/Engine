@@ -68,7 +68,7 @@ void Mathematics::BrentsMethodRootTesting::UnknownTest()
 
     const BrentsMethodRootD brentsMethodRoot(root, function, type);
 
-    ASSERT_ENUM_EQUAL(brentsMethodRoot.GetBrentsMethodRootType(), type);
+    ASSERT_EQUAL(brentsMethodRoot.GetBrentsMethodRootType(), type);
     ASSERT_APPROXIMATE(brentsMethodRoot.GetRoot(), root, 1e-8f);
     ASSERT_APPROXIMATE(brentsMethodRoot.GetFunction(), function, 1e-8f);
 }
@@ -79,7 +79,7 @@ void Mathematics::BrentsMethodRootTesting::NoSolutionFunctionTest()
 
     const BrentsMethodRootD brentsMethodRoot;
 
-    ASSERT_ENUM_EQUAL(brentsMethodRoot.GetBrentsMethodRootType(), type);
+    ASSERT_EQUAL(brentsMethodRoot.GetBrentsMethodRootType(), type);
 
     MAYBE_UNUSED auto value = brentsMethodRoot.GetFunction();
 }

@@ -239,6 +239,33 @@ namespace Mathematics
     template <typename T>
     class RootsQuadratic;
 
+    template <typename T>
+    requires(std::is_arithmetic_v<T>)
+    class RootsGeneralPolynomial;
+
+    template <typename T>
+    class RootsQuartic;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class SymmetricEigensolver2x2;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class SortEigenstuff;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class SymmetricEigensolver3x3;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class NISymmetricEigensolver3x3;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class UnsymmetricEigenvalues;
+
     enum class Bisect2StorageType;
     enum class Bisect3StorageType;
     enum class QuantityType;

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:30)
+/// 版本：1.0.0.8 (2024/04/02 22:51)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_CSV_GENERATE_CONTAINER_SOURCE_FILE_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_CSV_GENERATE_CONTAINER_SOURCE_FILE_H
@@ -32,6 +32,25 @@ namespace CoreTools
         NODISCARD String GetFilePrefix() const override;
         NODISCARD String GetFileSuffix() const override;
         NODISCARD String GetContent(const String& codeDirectory) const override;
+
+        NODISCARD String GetFirstContainerDefineReplace() const;
+        NODISCARD String GetEntityContainerIncludeReplace() const;
+        NODISCARD String GetCallUniqueReplace() const;
+        NODISCARD String GetUniqueFunctionDefineReplace() const;
+        NODISCARD String GetLoadFunctionDefineReplace() const;
+        NODISCARD String GetShrinkToFitCallReplace() const;
+        NODISCARD String GetFirstContainerReturnReplace() const;
+        NODISCARD String GetSharedPtrDefineReplace() const;
+        NODISCARD String GetContainerByKeyDefineReplace() const;
+        NODISCARD String GetOriginalContainerDefineReplace() const;
+        NODISCARD String GetContainerSizeDefineReplace() const;
+        NODISCARD String GetUniqueDefineReplace() const;
+        NODISCARD String GetIsVectorReplace() const;
+        NODISCARD String GetIsMapReplace() const;
+        NODISCARD String GetSharedPtrDefineReturnReplace() const;
+
+    private:
+        String templateName;
     };
 }
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:10)
+/// 版本：1.0.0.8 (2024/03/30 18:01)
 
 #ifndef CORE_TOOLS_THREADING_THREAD_MANAGER_IMPL_H
 #define CORE_TOOLS_THREADING_THREAD_MANAGER_IMPL_H
@@ -36,7 +36,7 @@ namespace CoreTools
 
         void AddThreadUsePriority(void* function, void* userData, int priority, int processorNumber = 0, ThreadSize stackSize = 0);
 
-        // 启动和停止线程。
+        /// 启动和停止线程。
         void Resume();
         void Suspend();
 

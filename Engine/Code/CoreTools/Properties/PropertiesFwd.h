@@ -5,29 +5,30 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:15)
+/// 版本：1.0.0.8 (2024/04/12 15:04)
 
 #ifndef CORE_TOOLS_PROPERTIES_FWD_H
 #define CORE_TOOLS_PROPERTIES_FWD_H
 
 namespace CoreTools
 {
-    template <typename Value,
-              typename ConstReference>
+    template <typename Value, typename ConstReference>
+    requires(std::is_const_v<std::remove_reference_t<ConstReference>> && std::is_reference_v<ConstReference>)
     class SimplePropertyGetExternal;
 
-    template <typename Value,
-              typename Reference>
+    template <typename Value, typename Reference>
+    requires(std::is_reference_v<Reference>)
     class SimplePropertySetExternal;
 
     template <typename T,
               typename ConstReference,
               ConstReference (T::*PropertyFunction)() const>
+    requires(std::is_const_v<std::remove_reference_t<ConstReference>> &&
+             std::is_reference_v<ConstReference>)
     class PropertyGetExternal;
 
-    template <typename T,
-              typename Reference,
-              void (T::*PropertyFunction)(Reference)>
+    template <typename T, typename Reference, void (T::*PropertyFunction)(Reference)>
+    requires(std::is_reference_v<Reference>)
     class PropertySetExternal;
 
     template <typename T,
@@ -35,14 +36,17 @@ namespace CoreTools
               GetReference (T::*PropertyGet)() const,
               typename SetReference,
               void (T::*PropertySet)(SetReference)>
+    requires(std::is_const_v<std::remove_reference_t<GetReference>> &&
+             std::is_reference_v<GetReference> &&
+             std::is_reference_v<SetReference>)
     class PropertyGetSetExternal;
 
-    template <typename ConstReference,
-              ConstReference (*PropertyFunction)()>
+    template <typename ConstReference, ConstReference (*PropertyFunction)()>
+    requires(std::is_const_v<std::remove_reference_t<ConstReference>> && std::is_reference_v<ConstReference>)
     class StaticPropertyGetExternal;
 
-    template <typename Reference,
-              void (*PropertyFunction)(Reference)>
+    template <typename Reference, void (*PropertyFunction)(Reference)>
+    requires(std::is_reference_v<Reference>)
     class StaticPropertySetExternal;
 
     template <typename GetReference,

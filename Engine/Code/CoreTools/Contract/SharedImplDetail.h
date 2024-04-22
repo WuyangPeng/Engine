@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:36)
+/// 版本：1.0.0.8 (2024/03/28 16:06)
 
 #ifndef CORE_TOOLS_CONTRACT_SHARED_IMPL_DETAIL_H
 #define CORE_TOOLS_CONTRACT_SHARED_IMPL_DETAIL_H
@@ -48,10 +48,7 @@ CoreTools::SharedImpl<T>::SharedImpl(ImplCreateUseDefaultConstruction implCreate
 template <typename T>
 bool CoreTools::SharedImpl<T>::IsValid() const noexcept
 {
-    if (impl != nullptr)
-        return true;
-    else
-        return false;
+    return impl != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

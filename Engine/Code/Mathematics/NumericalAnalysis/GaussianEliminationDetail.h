@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Mathematics/Base/LexicoArray2Detail.h"
+#include "CoreTools/MemoryTools/LexicoArray2Detail.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <gsl/util>
@@ -29,10 +29,10 @@ Mathematics::GaussianElimination<Real>::GaussianElimination(int numRows, const C
       c{ c },
       epsilon{ epsilon },
       isInverse{ false },
-      inverseMatrix{ numRows, numRows, matrix },
+      inverseMatrix{ numRows, numRows, this->matrix.begin(), this->matrix.end() },
       determinant{ Math::GetValue(1) },
       x{ b },
-      y{ numRows, numColumns, c }
+      y{ numRows, numColumns, this->c.begin(), this->c.end() }
 {
     const auto numElement = numRows * numRows;
     if (matrix.empty() || numElement != boost::numeric_cast<int>(matrix.size()))
@@ -112,7 +112,7 @@ void Mathematics::GaussianElimination<Real>::Init()
             /// 矩阵是不可逆的。
             if (wantInverse)
             {
-                inverseMatrix.Clear();
+                inverseMatrix.FillZero();
             }
 
             determinant = Math::GetValue(0);
@@ -124,7 +124,7 @@ void Mathematics::GaussianElimination<Real>::Init()
 
             if (!c.empty())
             {
-                y.Clear();
+                y.FillZero();
             }
 
             return;
@@ -260,7 +260,7 @@ bool Mathematics::GaussianElimination<Real>::IsValid() const noexcept
         return false;
     }
 
-    if (const auto numYElement = y.GetNumRows() * y.GetNumCols();
+    if (const auto numYElement = y.GetNumRows() * y.GetNumColumns();
         c.size() != gsl::narrow_cast<size_t>(numYElement))
     {
         return false;
@@ -284,7 +284,7 @@ typename Mathematics::GaussianElimination<Real>::Container Mathematics::Gaussian
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return inverseMatrix.GetContainer();
+    return inverseMatrix.template GetContainer<std::vector<Real>>();
 }
 
 template <typename Real>
@@ -300,7 +300,7 @@ typename Mathematics::GaussianElimination<Real>::Container Mathematics::Gaussian
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return y.GetContainer();
+    return y.template GetContainer<std::vector<Real>>();
 }
 
 template <typename Real>

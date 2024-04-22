@@ -2268,5 +2268,8 @@
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26437.inl">
       <Filter>Helper 内联文件\PragmaWarning</Filter>
     </None>
+    <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26445.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </None>
   </ItemGroup>
 </Project>

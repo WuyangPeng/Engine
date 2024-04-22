@@ -21,7 +21,7 @@ NODISCARD std::array<T, N> Mathematics::Slerp(T t, const std::array<T, N>& q0, c
     T cosA{};
     for (auto i = 0; i < N; ++i)
     {
-        cosA += q0[i] * q1[i];
+        cosA += q0.at(i) * q1.at(i);
     }
 
     auto f = ChebyshevRatiosUsingCosAngle<T>(t, cosA);
@@ -29,7 +29,7 @@ NODISCARD std::array<T, N> Mathematics::Slerp(T t, const std::array<T, N>& q0, c
     std::fill(result.begin(), result.end(), T{});
     for (auto i = 0; i < N; ++i)
     {
-        result[i] += f[0] * q0[i] + f[1] * q1[i];
+        result.at(i) += f.at(0) * q0.at(i) + f.at(1) * q1.at(i);
     }
     return result;
 }
@@ -44,7 +44,7 @@ NODISCARD std::array<T, N> Mathematics::Slerp(T t, const std::array<T, N>& q0, c
     result.fill(T{});
     for (auto i = 0; i < N; ++i)
     {
-        result[i] += f[0] * q0[i] + f[1] * q1[i];
+        result.at(i) += f.at(0) * q0.at(i) + f.at(1) * q1.at(i);
     }
     return result;
 }
@@ -63,15 +63,15 @@ NODISCARD std::array<T, N> Mathematics::Slerp(T t, const std::array<T, N>& q0, c
         f = ChebyshevRatiosUsingCosAngle<T>(twoT, cosAH);
         for (auto i = 0; i < N; ++i)
         {
-            result[i] += f[0] * q0[i] + f[1] * qh[i];
+            result.at(i) += f.at(0) * q0.at(i) + f.at(1) * qh.at(i);
         }
     }
     else
     {
-        f = ChebyshevRatiosUsingCosAngle<T>(twoT - C_<T>(1), cosAH);
+        f = ChebyshevRatiosUsingCosAngle<T>(twoT - Math<T>::GetValue(1), cosAH);
         for (auto i = 0; i < N; ++i)
         {
-            result[i] += f[0] * qh[i] + f[1] * q1[i];
+            result.at(i) += f.at(0) * qh.at(i) + f.at(1) * q1.at(i);
         }
     }
     return result;

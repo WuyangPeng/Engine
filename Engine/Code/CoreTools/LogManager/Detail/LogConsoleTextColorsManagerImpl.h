@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:36)
+/// 版本：1.0.0.8 (2024/04/11 13:51)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_CONSOLE_TEXT_COLOR_MANAGER_IMPL_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_CONSOLE_TEXT_COLOR_MANAGER_IMPL_H
@@ -13,7 +13,7 @@
 #include "CoreTools/Console/ConsoleFwd.h"
 #include "CoreTools/LogManager/LogManagerInternalFwd.h"
 
-namespace CoreTools
+    namespace CoreTools
 {
     class LogConsoleTextColorsManagerImpl
     {

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:19)
+/// 版本：1.0.0.8 (2024/04/11 22:31)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -27,10 +27,7 @@ CoreTools::MillisecondTimer::MillisecondTimer(int64_t millisecond)
 
 bool CoreTools::MillisecondTimer::IsValid() const noexcept
 {
-    if (0 <= millisecond)
-        return true;
-    else
-        return false;
+    return 0 <= millisecond;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -56,17 +53,16 @@ bool CoreTools::MillisecondTimer::IsElapsed() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto elapsedTime = GetElapsedTime(); millisecond <= elapsedTime)
-        return true;
-    else
-        return false;
+    const auto elapsedTime = GetElapsedTime();
+
+    return millisecond <= elapsedTime;
 }
 
 int64_t CoreTools::MillisecondTimer::GetNowTime() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return impl->GetNowTimeInMicroseconds() / System::gMillisecond;
+    return ImplType::GetNowTimeInMicroseconds() / System::gMillisecond;
 }
 
 void CoreTools::MillisecondTimer::ReTiming(int64_t aMillisecond)

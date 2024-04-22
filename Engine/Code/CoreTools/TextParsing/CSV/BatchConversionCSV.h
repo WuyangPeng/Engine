@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:27)
+/// 版本：1.0.0.8 (2024/04/02 13:18)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_BATCH_CONVERSION_CSV_H
 #define CORE_TOOLS_TEXT_PARSING_BATCH_CONVERSION_CSV_H
@@ -13,6 +13,8 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
+
+#include <filesystem>
 
 namespace CoreTools
 {
@@ -29,7 +31,11 @@ namespace CoreTools
         CLASS_INVARIANT_DECLARE;
 
     private:
+        using DirectoryEntry = std::filesystem::directory_entry;
+
+    private:
         static void Execution(const String& inputDirectory, const String& outputDirectory);
+        static void Execution(const String& outputDirectory, const DirectoryEntry& inputPath);
     };
 }
 

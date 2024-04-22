@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:44)
+/// 版本：1.0.0.8 (2024/03/30 22:57)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_READ_FILE_MANAGER_H
 #define CORE_TOOLS_FILE_MANAGER_READ_FILE_MANAGER_H
@@ -36,11 +36,17 @@ namespace CoreTools
 
         NODISCARD int GetFileByteSize() const;
 
-        // 当且仅当读出的字节数等于data的大小，操作是成功的。否则抛出Error异常。
+        /// 当且仅当读出的字节数等于data的大小，操作是成功的。否则抛出Error异常。
         void Read(size_t itemSize, void* data);
         void Read(size_t itemSize, size_t itemsNumber, void* data);
 
         NODISCARD std::string LoadStdString();
+
+    private:
+        using StdStringBufferType = std::vector<char>;
+
+    private:
+        NODISCARD std::string LoadStdString(int length);
 
     private:
         PackageType impl;

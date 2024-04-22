@@ -107,11 +107,11 @@ void System::MessageBoxFlagsDataTesting::DoFlagsTest(size_t index)
 
     const MessageBoxFlagsData flagsData{ typeFlag, iconFlag, defaultFlag, modeFlag, miscFlag };
 
-    ASSERT_ENUM_EQUAL(flagsData.GetMessageBoxType(), typeFlag);
-    ASSERT_ENUM_EQUAL(flagsData.GetMessageBoxIcon(), iconFlag);
-    ASSERT_ENUM_EQUAL(flagsData.GetMessageBoxDefault(), defaultFlag);
-    ASSERT_ENUM_EQUAL(flagsData.GetMessageBoxMode(), modeFlag);
-    ASSERT_ENUM_EQUAL(flagsData.GetMessageBoxMisc(), miscFlag);
+    ASSERT_EQUAL(flagsData.GetMessageBoxType(), typeFlag);
+    ASSERT_EQUAL(flagsData.GetMessageBoxIcon(), iconFlag);
+    ASSERT_EQUAL(flagsData.GetMessageBoxDefault(), defaultFlag);
+    ASSERT_EQUAL(flagsData.GetMessageBoxMode(), modeFlag);
+    ASSERT_EQUAL(flagsData.GetMessageBoxMisc(), miscFlag);
 
     ASSERT_EQUAL(flagsData.GetFlag(), flag);
 }

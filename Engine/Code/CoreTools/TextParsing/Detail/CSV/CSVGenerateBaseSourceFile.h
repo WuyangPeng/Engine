@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:29)
+/// 版本：1.0.0.8 (2024/04/02 22:51)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_BASE_SOURCE_FILE_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_BASE_SOURCE_FILE_H
@@ -23,7 +23,7 @@ namespace CoreTools
         using ParentType = CSVGenerateImpl;
 
     public:
-        CSVGenerateBaseSourceFile(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis) noexcept;
+        CSVGenerateBaseSourceFile(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -32,6 +32,42 @@ namespace CoreTools
         NODISCARD String GetFilePrefix() const override;
         NODISCARD String GetFileSuffix() const override;
         NODISCARD String GetContent(const String& codeDirectory) const override;
+        NODISCARD String GetBaseGetFunctionDefineContent() const;
+        NODISCARD String GetBaseGetFunctionDefineContent(const CSVHead& head,
+                                                         int index,
+                                                         const String& functionVariableName,
+                                                         CSVDataType dataType,
+                                                         const String& actualType,
+                                                         const String& valueType,
+                                                         const String& abbreviation,
+                                                         const String& upperVariableName) const;
+        NODISCARD String GetCopyBaseGetFunctionDefine(const String& functionVariableName,
+                                                      CSVDataType dataType,
+                                                      const String& actualType,
+                                                      const String& abbreviation) const;
+        NODISCARD String GetBaseGetArrayFunctionDefineContent(CSVDataType dataType,
+                                                                  const String& valueType,
+                                                                  const String& abbreviation,
+                                                                  const String& upperVariableName) const;
+        NODISCARD String GetBaseGetMappingFunctionDefineContent(const CSVHead& head,
+                                                                int index,
+                                                                CSVDataType dataType,
+                                                                const String& upperVariableName) const;
+        NODISCARD String GetBaseGetFunctionDefine(CSVDataType dataType) const;
+
+    private:
+        String templateName;
+
+        String baseGetFunctionDefine;
+        String baseStringGetFunctionDefine;
+        String baseArrayGetFunctionDefine;
+        String baseEnumGetFunctionDefine;
+        String baseGetCountArrayFunction;
+        String baseGetValueArrayFunction;
+        String baseGetBeginIterArrayFunction;
+        String baseGetEndIterArrayFunction;
+        String baseGetMappingFunction;
+        String baseGetMappingArrayFunction;
     };
 }
 

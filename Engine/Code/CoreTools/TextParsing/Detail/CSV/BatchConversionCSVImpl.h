@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:29)
+/// 版本：1.0.0.8 (2024/04/02 22:50)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_BATCH_CONVERSION_CSV_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_BATCH_CONVERSION_CSV_IMPL_H
@@ -24,14 +24,18 @@ namespace CoreTools
         using String = System::String;
 
     public:
-        BatchConversionCSVImpl(const String& nativeFileName, const String& outputDirectory);
+        BatchConversionCSVImpl(String nativeFileName, String outputDirectory);
 
         CLASS_INVARIANT_DECLARE;
 
     private:
-        void ExecutionFile(const String& nativeFileName, const String& outputDirectory);
+        void ExecutionFile() const;
 
-        NODISCARD static String GetOutputFile(const String& nativeFileName, const String& outputDirectory);
+        NODISCARD String GetOutputFile() const;
+
+    private:
+        String nativeFileName;
+        String outputDirectory;
     };
 }
 

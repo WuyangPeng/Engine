@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:32)
+/// 版本：1.0.0.8 (2024/04/12 14:20)
 
 #ifndef CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_PACKAGE_H
 #define CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_PACKAGE_H
@@ -39,7 +39,7 @@ namespace CoreTools
     private:
         int index;
         std::string name;
-        bool used;  // 跟踪已处理的参数
+        bool used;  /// 跟踪已处理的参数
     };
 }
 

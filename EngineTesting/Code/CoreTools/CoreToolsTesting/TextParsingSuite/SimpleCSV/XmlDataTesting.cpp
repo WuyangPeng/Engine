@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:15)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 17:11)
 
 #include "XmlDataTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -51,7 +51,7 @@ void CoreTools::XmlDataTesting::XmlDataTest()
     ASSERT_UNEQUAL_NULL_PTR(xmlData.GetXmlDocument());
     ASSERT_EQUAL(xmlData.GetXmlId(), xmlId);
     ASSERT_EQUAL(xmlData.GetXmlPath(), xmlPath);
-    ASSERT_ENUM_EQUAL(xmlData.GetXmlType(), contentType);
+    ASSERT_EQUAL(xmlData.GetXmlType(), contentType);
     xmlData.SetRawData(document->ExtractXmlFromArchive("_rels/.rels"s));
     rawData0 = xmlData.GetRawData();
     ASSERT_UNEQUAL(rawData0.find("Relationships"s), System::String::npos);
@@ -70,5 +70,5 @@ void CoreTools::XmlDataTesting::ConstXmlDataTest()
     ASSERT_UNEQUAL_NULL_PTR(xmlData.GetXmlDocument());
     ASSERT_EQUAL(xmlData.GetXmlId(), xmlId);
     ASSERT_EQUAL(xmlData.GetXmlPath(), xmlPath);
-    ASSERT_ENUM_EQUAL(xmlData.GetXmlType(), contentType);
+    ASSERT_EQUAL(xmlData.GetXmlType(), contentType);
 }

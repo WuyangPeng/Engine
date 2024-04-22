@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.5 (2024/01/25 09:57)
+/// 版本：1.0.0.8 (2024/04/11 22:28)
 
 #ifndef CORE_TOOLS_TIME_TIMER_H
 #define CORE_TOOLS_TIME_TIMER_H
@@ -25,7 +25,7 @@ namespace CoreTools
         COPY_UNSHARED_TYPE_DECLARE(Timer);
 
     public:
-        // 构造高分辨率计时器（64位）。
+        /// 构造高分辨率计时器（64位）。
         NODISCARD static Timer Create();
 
     private:
@@ -34,13 +34,13 @@ namespace CoreTools
     public:
         CLASS_INVARIANT_DECLARE;
 
-        // 获取相对于初始时间的当前时间。
+        /// 获取相对于初始时间的当前时间。
         NODISCARD int64_t GetNanoseconds() const noexcept;
         NODISCARD int64_t GetMicroseconds() const noexcept;
         NODISCARD int64_t GetMilliseconds() const noexcept;
         NODISCARD double GetSeconds() const noexcept;
 
-        // 重置使当前时间为初始时间。
+        /// 重置使当前时间为初始时间。
         void Reset() noexcept;
 
     private:

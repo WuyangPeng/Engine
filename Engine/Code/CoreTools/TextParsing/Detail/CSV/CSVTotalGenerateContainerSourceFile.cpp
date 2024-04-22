@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:58)
+/// 版本：1.0.0.8 (2024/04/11 09:23)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,13 +13,25 @@
 #include "System/Helper/PragmaWarning/Algorithm.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/CharacterString/StringUtility.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
 CoreTools::CSVTotalGenerateContainerSourceFile::CSVTotalGenerateContainerSourceFile(const String& nameSpace, const CSVHeadContainer& csvHeadContainer, const CodeMappingAnalysis& codeMappingAnalysis)
-    : ParentType{ nameSpace, csvHeadContainer, codeMappingAnalysis }
+    : ParentType{ nameSpace, csvHeadContainer, codeMappingAnalysis },
+      templateName{ SYSTEM_TEXT("/EngineeringContainerCpp.txt") },
+      containerInclude{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("ContainerInclude")) },
+      containerMember{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("ContainerMember")) },
+      beginContainerMember{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("BeginContainerMember")) },
+      endContainerMember{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("EndContainerMember")) },
+      elseSetContainer{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("ElseSetContainer")) },
+      setContainer{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("SetContainer")) },
+      verifyContainer{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("VerifyContainer")) },
+      getContainerDefine{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("GetContainerDefine")) },
+      containerNotEqualNullptr{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("ContainerNotEqualNullptr")) },
+      beginContainerNotEqualNullptr{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("BeginContainerNotEqualNullptr")) },
+      endContainerNotEqualNullptr{ codeMappingAnalysis.GetElement(SYSTEM_TEXT("EndContainerNotEqualNullptr")) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -33,145 +45,146 @@ System::String CoreTools::CSVTotalGenerateContainerSourceFile::GetFileSuffix() c
 
 System::String CoreTools::CSVTotalGenerateContainerSourceFile::GetContent(const String& codeDirectory) const
 {
-    auto content = GetTemplateContent(codeDirectory + SYSTEM_TEXT("/EngineeringContainerCpp.txt"));
+    auto content = GetTemplateContent(codeDirectory + templateName);
 
-    EnumType dataType{};
+    const auto dataType = GetDataType();
 
-    for (const auto& element : GetCSVHeadContainer())
-    {
-        if (element.GetCSVFormatType() != CSVFormatType::Enum)
-        {
-            dataType.emplace(element.GetCSVClassName());
-        }
-    }
-
-    const auto codeMapping = GetCodeMappingAnalysis();
-    const auto containerInclude = codeMapping.GetElement(SYSTEM_TEXT("ContainerInclude"));
-
-    String containerIncludeContent{};
-    for (const auto& element : dataType)
-    {
-        auto copyContainerInclude = containerInclude;
-
-        boost::algorithm::replace_all(copyContainerInclude, SYSTEM_TEXT("$ClassName$"), element);
-
-        containerIncludeContent += copyContainerInclude;
-        containerIncludeContent += SYSTEM_TEXT("\n");
-    }
-
-    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerInclude$"), containerIncludeContent);
-
-    const auto containerMember = codeMapping.GetElement(SYSTEM_TEXT("ContainerMember"));
-
-    String containerMemberContent{};
-    auto containerMemberIndex = 0;
-    for (const auto& element : dataType)
-    {
-        auto copyContainerMember = containerMember;
-
-        if (containerMemberIndex == 0)
-        {
-            copyContainerMember = codeMapping.GetElement(SYSTEM_TEXT("BeginContainerMember"));
-        }
-        else if (containerMemberIndex == boost::numeric_cast<int>(dataType.size() - 1))
-        {
-            copyContainerMember = codeMapping.GetElement(SYSTEM_TEXT("EndContainerMember"));
-        }
-
-        boost::algorithm::replace_all(copyContainerMember, SYSTEM_TEXT("$SmallClassName$"), StringUtility::ToFirstLetterLower(element));
-
-        containerMemberContent += copyContainerMember;
-        containerMemberContent += SYSTEM_TEXT("\n");
-
-        ++containerMemberIndex;
-    }
-
-    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerMember$"), containerMemberContent);
-
-    const auto setContainer = codeMapping.GetElement(SYSTEM_TEXT("ElseSetContainer"));
-
-    String setContainerContent{};
-    auto setContainerIndex = 0;
-    for (const auto& element : dataType)
-    {
-        auto copySetContainer = setContainer;
-
-        if (setContainerIndex == 0)
-        {
-            copySetContainer = codeMapping.GetElement(SYSTEM_TEXT("SetContainer"));
-        }
-
-        boost::algorithm::replace_all(copySetContainer, SYSTEM_TEXT("$ClassName$"), element);
-        boost::algorithm::replace_all(copySetContainer, SYSTEM_TEXT("$SmallClassName$"), StringUtility::ToFirstLetterLower(element));
-
-        setContainerContent += copySetContainer;
-        setContainerContent += SYSTEM_TEXT("\n");
-
-        ++setContainerIndex;
-    }
-
-    boost::algorithm::replace_all(content, SYSTEM_TEXT("$SetContainer$"), setContainerContent);
-
-    const auto verifyContainer = codeMapping.GetElement(SYSTEM_TEXT("VerifyContainer"));
-
-    String verifyContainerContent{};
-    for (const auto& element : dataType)
-    {
-        auto copyVerifyContainer = verifyContainer;
-
-        boost::algorithm::replace_all(copyVerifyContainer, SYSTEM_TEXT("$SmallClassName$"), StringUtility::ToFirstLetterLower(element));
-
-        verifyContainerContent += copyVerifyContainer;
-        verifyContainerContent += SYSTEM_TEXT("\n");
-    }
-
-    boost::algorithm::replace_all(content, SYSTEM_TEXT("$VerifyContainer$"), verifyContainerContent);
-
-    const auto containerNotEqualNullptr = codeMapping.GetElement(SYSTEM_TEXT("ContainerNotEqualNullptr"));
-
-    String containerNotEqualNullptrContent{};
-    auto containerNotEqualNullptrIndex = 0;
-    for (const auto& element : dataType)
-    {
-        auto copyContainerNotEqualNullptr = containerNotEqualNullptr;
-
-        if (containerNotEqualNullptrIndex == 0)
-        {
-            copyContainerNotEqualNullptr = codeMapping.GetElement(SYSTEM_TEXT("BeginContainerNotEqualNullptr"));
-        }
-        else if (containerNotEqualNullptrIndex == boost::numeric_cast<int>(dataType.size() - 1))
-        {
-            copyContainerNotEqualNullptr = codeMapping.GetElement(SYSTEM_TEXT("EndContainerNotEqualNullptr"));
-        }
-
-        boost::algorithm::replace_all(copyContainerNotEqualNullptr, SYSTEM_TEXT("$SmallClassName$"), StringUtility::ToFirstLetterLower(element));
-
-        containerNotEqualNullptrContent += copyContainerNotEqualNullptr;
-        if (containerNotEqualNullptrIndex != boost::numeric_cast<int>(dataType.size() - 1))
-        {
-            containerNotEqualNullptrContent += SYSTEM_TEXT("\n");
-        }
-
-        ++containerNotEqualNullptrIndex;
-    }
-
-    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerNotEqualNullptr$"), containerNotEqualNullptrContent);
-
-    const auto getContainerDefine = codeMapping.GetElement(SYSTEM_TEXT("GetContainerDefine"));
-
-    String getContainerDefineContent{};
-    for (const auto& element : dataType)
-    {
-        auto copyGetContainerDefine = getContainerDefine;
-
-        boost::algorithm::replace_all(copyGetContainerDefine, SYSTEM_TEXT("$ClassName$"), element);
-        boost::algorithm::replace_all(copyGetContainerDefine, SYSTEM_TEXT("$SmallClassName$"), StringUtility::ToFirstLetterLower(element));
-
-        getContainerDefineContent += copyGetContainerDefine;
-        getContainerDefineContent += SYSTEM_TEXT("\n");
-    }
-
-    boost::algorithm::replace_all(content, SYSTEM_TEXT("$GetContainerDefine$"), getContainerDefineContent);
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerInclude$"), GetContainerIncludeContent(dataType));
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerMember$"), GetContainerMemberContent(dataType));
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$SetContainer$"), GetSetContainerContent(dataType));
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$VerifyContainer$"), GetVerifyContainerContent(dataType));
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ContainerNotEqualNullptr$"), GetContainerNotEqualNullptrContent(dataType));
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$GetContainerDefine$"), GetContainerDefineContent(dataType));
 
     return ReplaceTemplate(content);
+}
+
+System::String CoreTools::CSVTotalGenerateContainerSourceFile::GetContainerIncludeContent(const ContainerType& dataType) const
+{
+    String content{};
+    for (const auto& element : dataType)
+    {
+        content += ReplaceClassName(containerInclude, element);
+    }
+
+    return content;
+}
+
+System::String CoreTools::CSVTotalGenerateContainerSourceFile::GetContainerMemberContent(const ContainerType& dataType) const
+{
+    String content{};
+
+    auto index = 0;
+    for (const auto& element : dataType)
+    {
+        content += GetContainerMemberContent(index, boost::numeric_cast<int>(dataType.size()), element);
+
+        ++index;
+    }
+
+    return content;
+}
+
+System::String CoreTools::CSVTotalGenerateContainerSourceFile::GetContainerMemberContent(int index, int size, const String& element) const
+{
+    auto content = index == 0 ? beginContainerMember : (index == size - 1 ? endContainerMember : containerMember);
+
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$SmallClassName$"), StringUtility::ToFirstLetterLower(element));
+
+    return content + TextParsing::gNewlineCharacter;
+}
+
+System::String CoreTools::CSVTotalGenerateContainerSourceFile::GetSetContainerContent(const ContainerType& dataType) const
+{
+    String content{};
+    auto index = 0;
+    for (const auto& element : dataType)
+    {
+        content += GetSetContainerContent(index, element);
+
+        ++index;
+    }
+
+    return content;
+}
+
+System::String CoreTools::CSVTotalGenerateContainerSourceFile::GetSetContainerContent(int index, const String& element) const
+{
+    auto content = index == 0 ? setContainer : elseSetContainer;
+
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ClassName$"), element);
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$SmallClassName$"), StringUtility::ToFirstLetterLower(element));
+
+    return content + TextParsing::gNewlineCharacter;
+}
+
+System::String CoreTools::CSVTotalGenerateContainerSourceFile::GetVerifyContainerContent(const ContainerType& dataType) const
+{
+    String content{};
+    for (const auto& element : dataType)
+    {
+        content += GetVerifyContainerContent(element);
+    }
+
+    return content;
+}
+
+System::String CoreTools::CSVTotalGenerateContainerSourceFile::GetVerifyContainerContent(const String& element) const
+{
+    auto content = verifyContainer;
+
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$SmallClassName$"), StringUtility::ToFirstLetterLower(element));
+
+    return content + TextParsing::gNewlineCharacter;
+}
+
+System::String CoreTools::CSVTotalGenerateContainerSourceFile::GetContainerNotEqualNullptrContent(const ContainerType& dataType) const
+{
+    String content{};
+    auto index = 0;
+
+    for (const auto& element : dataType)
+    {
+        content += GetContainerNotEqualNullptrContent(index, boost::numeric_cast<int>(dataType.size()), element);
+
+        ++index;
+    }
+
+    return content;
+}
+
+System::String CoreTools::CSVTotalGenerateContainerSourceFile::GetContainerNotEqualNullptrContent(int index, int size, const String& element) const
+{
+    auto content = index == 0 ? beginContainerNotEqualNullptr : (index == size - 1 ? endContainerNotEqualNullptr : containerNotEqualNullptr);
+
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$SmallClassName$"), StringUtility::ToFirstLetterLower(element));
+
+    if (index != size - 1)
+    {
+        content += TextParsing::gNewlineCharacter;
+    }
+
+    return content;
+}
+
+System::String CoreTools::CSVTotalGenerateContainerSourceFile::GetContainerDefineContent(const ContainerType& dataType) const
+{
+    String content{};
+
+    for (const auto& element : dataType)
+    {
+        content += GetContainerDefineContent(element);
+    }
+
+    return content;
+}
+
+System::String CoreTools::CSVTotalGenerateContainerSourceFile::GetContainerDefineContent(const String& element) const
+{
+    auto content = getContainerDefine;
+
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$ClassName$"), element);
+    boost::algorithm::replace_all(content, SYSTEM_TEXT("$SmallClassName$"), StringUtility::ToFirstLetterLower(element));
+
+    return content + TextParsing::gNewlineCharacter;
 }

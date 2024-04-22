@@ -21,7 +21,8 @@ namespace System
     /// 只允许在以下情况下使用：
     /// 1. 析构函数调用的函数。
     /// 2. 函数抛出异常的概率很低（如内存不足），定义成noexcept，可以方便上层函数的调用。
-    /// 如果不是System库的函数，尽量不要使用这些函数，使用NoexceptUseLog函数替代。
+    /// 如果不是System库的函数，或捕获日志库的异常，
+    /// 尽量不要使用这些函数，使用NoexceptUseLog函数替代。
 
     template <typename Function, typename... T>
     void NoexceptNoReturn(Function function, T&&... parameter) noexcept

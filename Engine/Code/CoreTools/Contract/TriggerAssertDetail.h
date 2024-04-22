@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:37)
+/// 版本：1.0.0.8 (2024/03/28 16:06)
 
 #ifndef CORE_TOOLS_CONTRACT_TRIGGER_ASSERT_DETAIL_H
 #define CORE_TOOLS_CONTRACT_TRIGGER_ASSERT_DETAIL_H

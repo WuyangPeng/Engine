@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:12)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 16:40)
 
 #include "CellValueTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -51,7 +51,7 @@ void CoreTools::CellValueTesting::CreateDefaultTest()
 {
     const auto cellValue = SimpleCSV::CellValue::CreateDefault();
 
-    ASSERT_ENUM_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Empty);
+    ASSERT_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Empty);
     ASSERT_EQUAL(cellValue.GetString(), ""s);
     ASSERT_EQUAL(cellValue.GetTypeAsString(), "empty"s);
 }
@@ -60,7 +60,7 @@ void CoreTools::CellValueTesting::CreateErrorTest()
 {
     const auto cellValue = SimpleCSV::CellValue::CreateError();
 
-    ASSERT_ENUM_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Error);
+    ASSERT_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Error);
     ASSERT_EQUAL(cellValue.GetString(), ""s);
     ASSERT_EQUAL(cellValue.GetTypeAsString(), "error"s);
 }
@@ -69,7 +69,7 @@ void CoreTools::CellValueTesting::CreateBoolTest()
 {
     const SimpleCSV::CellValue cellValue{ true };
 
-    ASSERT_ENUM_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Boolean);
+    ASSERT_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Boolean);
     ASSERT_EQUAL(cellValue.GetBool(), true);
     ASSERT_EQUAL(cellValue.GetTypeAsString(), "boolean"s);
 }
@@ -78,13 +78,13 @@ void CoreTools::CellValueTesting::CreateIntTest()
 {
     const SimpleCSV::CellValue cellValue0{ 11 };
 
-    ASSERT_ENUM_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::Integer);
+    ASSERT_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::Integer);
     ASSERT_EQUAL(cellValue0.GetIntegral(), 11);
     ASSERT_EQUAL(cellValue0.GetTypeAsString(), "integer"s);
 
     const SimpleCSV::CellValue cellValue1{ 11LL };
 
-    ASSERT_ENUM_EQUAL(cellValue1.GetType(), SimpleCSV::ValueType::Integer);
+    ASSERT_EQUAL(cellValue1.GetType(), SimpleCSV::ValueType::Integer);
     ASSERT_EQUAL(cellValue1.GetIntegral(), 11);
     ASSERT_EQUAL(cellValue1.GetTypeAsString(), "integer"s);
 }
@@ -93,7 +93,7 @@ void CoreTools::CellValueTesting::CreateDoubleTest()
 {
     const SimpleCSV::CellValue cellValue{ 1.2 };
 
-    ASSERT_ENUM_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Float);
+    ASSERT_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Float);
     ASSERT_APPROXIMATE(cellValue.GetDouble(), 1.2, Mathematics::MathD::epsilon);
     ASSERT_EQUAL(cellValue.GetTypeAsString(), "float"s);
 }
@@ -102,13 +102,13 @@ void CoreTools::CellValueTesting::CreateStringTest()
 {
     const SimpleCSV::CellValue cellValue0{ "cellValue0" };
 
-    ASSERT_ENUM_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::String);
+    ASSERT_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::String);
     ASSERT_EQUAL(cellValue0.GetString(), "cellValue0"s);
     ASSERT_EQUAL(cellValue0.GetTypeAsString(), "string"s);
 
     const SimpleCSV::CellValue cellValue1{ "cellValue1"s };
 
-    ASSERT_ENUM_EQUAL(cellValue1.GetType(), SimpleCSV::ValueType::String);
+    ASSERT_EQUAL(cellValue1.GetType(), SimpleCSV::ValueType::String);
     ASSERT_EQUAL(cellValue1.GetString(), "cellValue1"s);
     ASSERT_EQUAL(cellValue1.GetTypeAsString(), "string"s);
 }
@@ -118,7 +118,7 @@ void CoreTools::CellValueTesting::ClearTest()
     SimpleCSV::CellValue cellValue{ true };
 
     cellValue.Clear();
-    ASSERT_ENUM_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Empty);
+    ASSERT_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Empty);
     ASSERT_EQUAL(cellValue.GetString(), ""s);
     ASSERT_EQUAL(cellValue.GetTypeAsString(), "empty"s);
 }
@@ -128,7 +128,7 @@ void CoreTools::CellValueTesting::CellValueErrorTest()
     SimpleCSV::CellValue cellValue{ true };
 
     cellValue.SetError();
-    ASSERT_ENUM_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Error);
+    ASSERT_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Error);
     ASSERT_EQUAL(cellValue.GetString(), ""s);
     ASSERT_EQUAL(cellValue.GetTypeAsString(), "error"s);
 }
@@ -137,32 +137,32 @@ void CoreTools::CellValueTesting::CellValueSetTest()
 {
     auto cellValue0 = SimpleCSV::CellValue::CreateDefault();
 
-    ASSERT_ENUM_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::Empty);
+    ASSERT_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::Empty);
     ASSERT_EQUAL(cellValue0.Get<std::string>(), ""s);
 
     cellValue0.Set(5);
-    ASSERT_ENUM_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::Integer);
+    ASSERT_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::Integer);
     ASSERT_EQUAL(cellValue0.Get<int>(), 5);
 
     cellValue0.Set(5.9);
-    ASSERT_ENUM_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::Float);
+    ASSERT_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::Float);
     ASSERT_APPROXIMATE(cellValue0.Get<double>(), 5.9, Mathematics::MathD::epsilon);
 
     cellValue0.Set(true);
-    ASSERT_ENUM_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::Boolean);
+    ASSERT_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::Boolean);
     ASSERT_EQUAL(cellValue0.Get<bool>(), true);
 
     cellValue0.Set("cellValue0");
-    ASSERT_ENUM_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::String);
+    ASSERT_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::String);
     ASSERT_EQUAL(cellValue0.Get<std::string>(), "cellValue0"s);
 
     cellValue0.Set("cellValue1"s);
-    ASSERT_ENUM_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::String);
+    ASSERT_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::String);
     ASSERT_EQUAL(cellValue0.Get<std::string>(), "cellValue1"s);
 
     auto cellValue1 = SimpleCSV::CellValue::CreateDefault();
     cellValue1.Set(cellValue0);
-    ASSERT_ENUM_EQUAL(cellValue1.GetType(), SimpleCSV::ValueType::String);
+    ASSERT_EQUAL(cellValue1.GetType(), SimpleCSV::ValueType::String);
     ASSERT_EQUAL(cellValue1.Get<std::string>(), "cellValue1"s);
 }
 
@@ -170,27 +170,27 @@ void CoreTools::CellValueTesting::CellValueEqualTest()
 {
     auto cellValue = SimpleCSV::CellValue::CreateDefault();
 
-    ASSERT_ENUM_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Empty);
+    ASSERT_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Empty);
     ASSERT_EQUAL(static_cast<std::string>(cellValue), ""s);
 
     cellValue = 5;
-    ASSERT_ENUM_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Integer);
+    ASSERT_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Integer);
     ASSERT_EQUAL(static_cast<int>(cellValue), 5);
 
     cellValue = 5.9;
-    ASSERT_ENUM_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Float);
+    ASSERT_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Float);
     ASSERT_APPROXIMATE(static_cast<double>(cellValue), 5.9, Mathematics::MathD::epsilon);
 
     cellValue = true;
-    ASSERT_ENUM_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Boolean);
+    ASSERT_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Boolean);
     ASSERT_EQUAL(static_cast<bool>(cellValue), true);
 
     cellValue = "cellValue0";
-    ASSERT_ENUM_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::String);
+    ASSERT_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::String);
     ASSERT_EQUAL(static_cast<std::string>(cellValue), "cellValue0"s);
 
     cellValue = "cellValue1"s;
-    ASSERT_ENUM_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::String);
+    ASSERT_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::String);
     ASSERT_EQUAL(static_cast<std::string>(cellValue), "cellValue1"s);
 }
 
@@ -206,6 +206,8 @@ void CoreTools::CellValueTesting::EqualTest()
     ASSERT_FALSE(cellValue0 != cellValue0);
     ASSERT_FALSE(cellValue1 != cellValue1);
     ASSERT_FALSE(cellValue1 == cellValue0);
+
+    ASSERT_TRUE(cellValue0.IsEqual(cellValue0));
 }
 
 void CoreTools::CellValueTesting::LessTest()
@@ -222,6 +224,8 @@ void CoreTools::CellValueTesting::LessTest()
 
         ASSERT_FALSE(cellValue0 > cellValue1);
         ASSERT_FALSE(cellValue0 >= cellValue1);
+
+        ASSERT_TRUE(cellValue0.IsLess(cellValue1));
     }
     else
     {
@@ -232,6 +236,8 @@ void CoreTools::CellValueTesting::LessTest()
 
         ASSERT_FALSE(cellValue1 > cellValue0);
         ASSERT_FALSE(cellValue1 >= cellValue0);
+
+        ASSERT_FALSE(cellValue0.IsLess(cellValue1));
     }
 }
 

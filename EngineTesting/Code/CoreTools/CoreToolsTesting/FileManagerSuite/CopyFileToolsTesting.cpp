@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 19:13)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/16 16:04)
 
 #include "CopyFileToolsTesting.h"
 #include "CoreTools/FileManager/CopyFileTools.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -21,7 +21,7 @@ using namespace std::literals;
 
 System::String CoreTools::CopyFileToolsTesting::GetCopyFileName()
 {
-    return SYSTEM_TEXT("Resource/CopyFile.txt"s);
+    return SYSTEM_TEXT("Resource/CopyFile.txt");
 }
 
 CoreTools::CopyFileToolsTesting::CopyFileToolsTesting(const OStreamShared& stream)
@@ -55,7 +55,7 @@ void CoreTools::CopyFileToolsTesting::CopyFileTest()
 void CoreTools::CopyFileToolsTesting::VerificationTest()
 {
     const auto cFileManagerHelpContent = SYSTEM_TEXT("CFileManagerHelper Testing Text"s);
-    const IFStreamManager manager{ GetCopyFileName() };
+    const IFileStreamManager manager{ GetCopyFileName() };
 
     ASSERT_EQUAL(manager.GetFileContent(), cFileManagerHelpContent);
 }

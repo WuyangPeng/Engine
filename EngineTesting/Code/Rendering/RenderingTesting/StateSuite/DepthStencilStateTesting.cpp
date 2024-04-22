@@ -64,7 +64,7 @@ void Rendering::DepthStencilStateTesting::AccessTest()
     const auto name = GetGraphicsObjectName();
 
     ASSERT_EQUAL(depthStencilState->GetName(), name);
-    ASSERT_ENUM_EQUAL(depthStencilState->GetType(), GetGraphicsObjectType());
+    ASSERT_EQUAL(depthStencilState->GetType(), GetGraphicsObjectType());
 
     ASSERT_TRUE(depthStencilState->IsDrawingState());
 
@@ -189,8 +189,8 @@ void Rendering::DepthStencilStateTesting::DepthStencilStateTest()
 void Rendering::DepthStencilStateTesting::DepthStencilStateValueTest()
 {
     ASSERT_EQUAL(depthStencilState->IsDepthEnable(), depthEnable);
-    ASSERT_ENUM_EQUAL(depthStencilState->GetWriteMask(), writeMask);
-    ASSERT_ENUM_EQUAL(depthStencilState->GetComparison(), comparison);
+    ASSERT_EQUAL(depthStencilState->GetWriteMask(), writeMask);
+    ASSERT_EQUAL(depthStencilState->GetComparison(), comparison);
     ASSERT_EQUAL(depthStencilState->IsStencilEnable(), stencilEnable);
     ASSERT_EQUAL(depthStencilState->GetStencilReadMask(), stencilReadMask);
     ASSERT_EQUAL(depthStencilState->GetStencilWriteMask(), stencilWriteMask);

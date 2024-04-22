@@ -46,7 +46,7 @@ void Framework::ControllerMiddleLayerTesting::MiddleLayerTest()
 
     ControllerMiddleLayer<WindowApplicationTrait> middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    ASSERT_ENUM_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
+    ASSERT_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
 
     const auto modelMiddleLayer = std::make_shared<ModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 

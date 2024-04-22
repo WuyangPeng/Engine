@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:11)
+/// 版本：1.0.0.8 (2024/03/30 18:04)
 
 #ifndef CORE_TOOLS_THREADING_TRY_SCOPED_MUTEX_H
 #define CORE_TOOLS_THREADING_TRY_SCOPED_MUTEX_H

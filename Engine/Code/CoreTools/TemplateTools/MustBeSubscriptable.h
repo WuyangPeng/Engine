@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:23)
+/// 版本：1.0.0.8 (2024/04/12 14:15)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_MUST_BE_SUBSCRIPTABLE_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_MUST_BE_SUBSCRIPTABLE_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-// 约束：必须可以按下标访问
+/// 约束：必须可以按下标访问
 namespace CoreTools
 {
     template <typename T>
@@ -26,11 +26,11 @@ namespace CoreTools
 
         ~MustBeSubscriptable()
         {
-            MAYBE_UNUSED void (*ptr)(const T&) = Constranints;
+            MAYBE_UNUSED void (*ptr)(const T&) = Constraint;
         }
 
     private:
-        static void Constranints(const T& tIsNoSubscriptable) noexcept(noexcept(tIsNoSubscriptable[0]))
+        static void Constraint(const T& tIsNoSubscriptable) noexcept(noexcept(tIsNoSubscriptable[0]))
         {
             MAYBE_UNUSED constexpr auto size = sizeof(tIsNoSubscriptable[0]);
 
@@ -54,11 +54,11 @@ namespace CoreTools
 
         ~MustBeSubscriptableAsDecayablePointer()
         {
-            MAYBE_UNUSED void (*ptr)(const T&) = Constranints;
+            MAYBE_UNUSED void (*ptr)(const T&) = Constraint;
         }
 
     private:
-        static void Constranints(T const& TIsNoSubscriptableAsDecayablePointer) noexcept
+        static void Constraint(T const& TIsNoSubscriptableAsDecayablePointer) noexcept
         {
             MAYBE_UNUSED constexpr auto size = sizeof(0 [TIsNoSubscriptableAsDecayablePointer]);
         }

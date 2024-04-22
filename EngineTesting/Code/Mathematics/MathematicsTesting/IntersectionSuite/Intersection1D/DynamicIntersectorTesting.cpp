@@ -68,7 +68,7 @@ void Mathematics::DynamicIntersectorTesting::IntersectionTypeTest()
 
             DynamicIntersectorTest<double, Vector3> intersectorTest(tMax, lhsVelocity, rhsVelocity, IntersectionType(i), contactTime, 1e-10);
 
-            ASSERT_ENUM_EQUAL(intersectorTest.GetIntersectionType(), IntersectionType(i));
+            ASSERT_EQUAL(intersectorTest.GetIntersectionType(), IntersectionType(i));
             ASSERT_APPROXIMATE(intersectorTest.GetEpsilon(), 1e-10, 1e-10);
 
             if (intersectorTest.GetIntersectionType() == IntersectionType::Empty)

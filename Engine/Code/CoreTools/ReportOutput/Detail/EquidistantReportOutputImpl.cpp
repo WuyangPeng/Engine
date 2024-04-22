@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:17)
+/// 版本：1.0.0.8 (2024/04/12 11:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,10 +22,7 @@ CoreTools::EquidistantReportOutputImpl::EquidistantReportOutputImpl(int borderLi
 
 bool CoreTools::EquidistantReportOutputImpl::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && 0 < borderLineLength)
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && 0 < borderLineLength;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

@@ -459,8 +459,8 @@ template <bool RowMajor>
 typename Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::BandedMatrixSolve<Real>::SolveLower(const VariableMatrix& matrix) const
 {
     const auto size = GetSize();
-
-    LexicoArray2<RowMajor, Real> data{ size, matrix.GetColumnsNumber(), matrix.GetContainer() };
+    std::vector<Real> container{ matrix.GetContainer() };
+    CoreTools::LexicoArray2<RowMajor, typename std::vector<Real>::iterator> data{ size, matrix.GetColumnsNumber(), container.begin(), container.end() };
 
     for (auto row = 0; row < size; ++row)
     {
@@ -486,7 +486,7 @@ typename Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::Bande
         }
     }
 
-    return VariableMatrix{ matrix.GetRowsNumber(), matrix.GetColumnsNumber(), data.GetContainer() };
+    return VariableMatrix{ matrix.GetRowsNumber(), matrix.GetColumnsNumber(), data.template GetContainer<std::vector<Real>>() };
 }
 
 template <typename Real>
@@ -496,7 +496,8 @@ typename Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::Bande
 {
     const auto size = GetSize();
 
-    LexicoArray2<RowMajor, Real> data{ size, matrix.GetColumnsNumber(), matrix.GetContainer() };
+    std::vector<Real> container{ matrix.GetContainer() };
+    CoreTools::LexicoArray2<RowMajor, typename std::vector<Real>::iterator> data{ size, matrix.GetColumnsNumber(), container.begin(), container.end() };
 
     for (auto row = GetSize() - 1; 0 <= row; --row)
     {
@@ -522,7 +523,7 @@ typename Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::Bande
         }
     }
 
-    return VariableMatrix{ matrix.GetRowsNumber(), matrix.GetColumnsNumber(), data.GetContainer() };
+    return VariableMatrix{ matrix.GetRowsNumber(), matrix.GetColumnsNumber(), data.template GetContainer<std::vector<Real>>() };
 }
 
 #endif  // MATHEMATICS_ALGEBRA_BANDED_MATRIX_SOLVE_DETAIL_H

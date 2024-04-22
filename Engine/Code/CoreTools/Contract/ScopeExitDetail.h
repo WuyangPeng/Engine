@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:36)
+/// 版本：1.0.0.8 (2024/03/28 16:05)
 
 #ifndef CORE_TOOLS_CONTRACT_SCOPE_EXIT_DETAIL_H
 #define CORE_TOOLS_CONTRACT_SCOPE_EXIT_DETAIL_H
@@ -32,7 +32,8 @@ CoreTools::ScopeExit<T>::~ScopeExit() noexcept
     }
     catch (...)
     {
-        // 忽略所有异常
+        /// 忽略所有异常
+        /// 由于断言库使用这个类，这里不能调用日志库的函数记录错误日志。
         System::OutputDebugStringWithTChar(SYSTEM_TEXT("ScopeExit 析构抛出异常"));
     }
 }

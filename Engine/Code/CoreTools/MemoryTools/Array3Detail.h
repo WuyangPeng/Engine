@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.5 (2024/01/22 13:40)
+/// 版本：1.0.0.8 (2024/04/11 16:03)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_ARRAY3_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_ARRAY3_DETAIL_H
@@ -105,16 +105,9 @@ void CoreTools::Array3<T>::SetPointers()
 template <typename T>
 bool CoreTools::Array3<T>::IsValid() const noexcept
 {
-    if (gsl::narrow_cast<int>(objects.size()) == bound0 * bound1 * bound2 &&
-        gsl::narrow_cast<int>(indirect1.size()) == bound1 * bound2 &&
-        gsl::narrow_cast<int>(indirect2.size()) == bound2)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return gsl::narrow_cast<int>(objects.size()) == bound0 * bound1 * bound2 &&
+           gsl::narrow_cast<int>(indirect1.size()) == bound1 * bound2 &&
+           gsl::narrow_cast<int>(indirect2.size()) == bound2;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

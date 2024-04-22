@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:44)
+/// 版本：1.0.0.8 (2024/04/11 14:07)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,8 +14,6 @@
 #include "Detail/LogMessageImpl.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/LogManager/LogFileName.h"
 
 COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(CoreTools, LogMessage)
 

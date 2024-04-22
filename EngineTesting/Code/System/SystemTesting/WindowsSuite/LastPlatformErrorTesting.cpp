@@ -39,7 +39,7 @@ void System::LastPlatformErrorTesting::MainTest()
 
 void System::LastPlatformErrorTesting::LastErrorTest()
 {
-    ASSERT_ENUM_EQUAL(WindowError::Success, GetPlatformLastError());
+    ASSERT_EQUAL(WindowError::Success, GetPlatformLastError());
 
     for (auto flag = WindowError::Success; flag <= WindowError::AppHang; ++flag)
     {
@@ -53,12 +53,12 @@ void System::LastPlatformErrorTesting::DoLastErrorTest(WindowError flag)
 
     const auto result = GetPlatformLastError();
 
-    ASSERT_ENUM_EQUAL(flag, result);
+    ASSERT_EQUAL(flag, result);
 }
 
 void System::LastPlatformErrorTesting::LastErrorModeTest()
 {
-    ASSERT_ENUM_EQUAL(defaultFlag, GetPlatformErrorMode());
+    ASSERT_EQUAL(defaultFlag, GetPlatformErrorMode());
 
     for (auto errorMode : errorModes)
     {
@@ -74,12 +74,12 @@ void System::LastPlatformErrorTesting::NoAlignmentFaultExceptTest()
 
     MAYBE_UNUSED const auto result = SetPlatformErrorMode(unableRemoveFlag);
 
-    ASSERT_ENUM_EQUAL(unableRemoveFlag, GetPlatformErrorMode());
+    ASSERT_EQUAL(unableRemoveFlag, GetPlatformErrorMode());
 
     const auto previousMode = SetPlatformErrorMode(defaultFlag);
 
-    ASSERT_ENUM_EQUAL(unableRemoveFlag, GetPlatformErrorMode());
-    ASSERT_ENUM_EQUAL(previousMode, GetPlatformErrorMode());
+    ASSERT_EQUAL(unableRemoveFlag, GetPlatformErrorMode());
+    ASSERT_EQUAL(previousMode, GetPlatformErrorMode());
 }
 
 void System::LastPlatformErrorTesting::DoLastErrorModeTest(ErrorMode mode)
@@ -87,6 +87,6 @@ void System::LastPlatformErrorTesting::DoLastErrorModeTest(ErrorMode mode)
     const auto previousMode = GetPlatformErrorMode();
     const auto testPreviousMode = SetPlatformErrorMode(mode);
 
-    ASSERT_ENUM_EQUAL(previousMode, testPreviousMode);
-    ASSERT_ENUM_EQUAL(mode, GetPlatformErrorMode());
+    ASSERT_EQUAL(previousMode, testPreviousMode);
+    ASSERT_EQUAL(mode, GetPlatformErrorMode());
 }

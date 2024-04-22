@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:03)
+/// 版本：1.0.0.8 (2024/04/01 10:23)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -106,18 +106,25 @@ void CoreTools::FileAsynchronousImpl::WaitThread()
             return isStop || !fileContainer.empty();
         });
 
-        Execution();
+        Execution(uniqueLock);
 
     } while (!isStop || !fileContainer.empty());
 }
 
-void CoreTools::FileAsynchronousImpl::Execution()
+void CoreTools::FileAsynchronousImpl::Execution(UniqueLock& uniqueLock)
 {
     if (!fileContainer.empty())
     {
         EXCEPTION_TRY
         {
             const auto fileAsynchronousParameter = ExtractNextReadFile();
+
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26110)
+
+            uniqueLock.unlock();
+
+#include SYSTEM_WARNING_POP
 
             AsynchronousExecution(fileAsynchronousParameter);
         }

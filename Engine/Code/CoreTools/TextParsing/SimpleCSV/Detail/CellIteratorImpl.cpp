@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:05)
+/// 版本：1.0.0.8 (2024/04/11 11:01)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -75,7 +75,8 @@ CoreTools::SimpleCSV::CellIteratorImpl& CoreTools::SimpleCSV::CellIteratorImpl::
 
     CheckDocument();
 
-    if (const auto nextCellReference = GetNextCellReference(); nextCellReference <= bottomRight)
+    if (const auto nextCellReference = GetNextCellReference();
+        nextCellReference <= bottomRight)
     {
         AddCurrentCell(nextCellReference);
     }
@@ -134,7 +135,8 @@ int CoreTools::SimpleCSV::CellIteratorImpl::Distance(const CellIteratorImpl& las
 
 void CoreTools::SimpleCSV::CellIteratorImpl::AddCurrentCell(const CellReference& nextCellReference)
 {
-    if (const auto cellReference = currentCell->GetCellReference(); nextCellReference.GetRow() == cellReference.GetRow())
+    if (const auto cellReference = currentCell->GetCellReference();
+        nextCellReference.GetRow() == cellReference.GetRow())
     {
         AddSameRowCurrentCell(nextCellReference);
     }

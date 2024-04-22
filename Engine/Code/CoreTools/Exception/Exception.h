@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:37)
+/// 版本：1.0.0.8 (2024/03/29 23:49)
 
 #ifndef CORE_TOOLS_EXCEPTION_H
 #define CORE_TOOLS_EXCEPTION_H

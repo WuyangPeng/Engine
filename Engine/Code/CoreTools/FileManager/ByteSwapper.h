@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:42)
+/// 版本：1.0.0.8 (2024/03/30 22:52)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_BYTE_SWAPPER_H
 #define CORE_TOOLS_FILE_MANAGER_BYTE_SWAPPER_H
@@ -13,11 +13,11 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "ByteSwap.h"
-#include "TypeAliaser.h"
+#include "TypeAlias.h"
 
 namespace CoreTools
 {
-    template <typename T, size_t Size>
+    template <typename T, int Size>
     class ByteSwapper;
 
     template <typename T>
@@ -42,8 +42,8 @@ namespace CoreTools
     public:
         NODISCARD static T Swap(T inData) noexcept
         {
-            const auto result = ByteSwap2(TypeAliaser<T, uint16_t>(inData).Get());
-            return TypeAliaser<uint16_t, T>(result).Get();
+            const auto result = ByteSwap2(TypeAlias<T, uint16_t>(inData).Get());
+            return TypeAlias<uint16_t, T>(result).Get();
         }
     };
 
@@ -56,8 +56,8 @@ namespace CoreTools
     public:
         NODISCARD static T Swap(T inData) noexcept
         {
-            const auto result = ByteSwap4(TypeAliaser<T, uint32_t>(inData).Get());
-            return TypeAliaser<uint32_t, T>(result).Get();
+            const auto result = ByteSwap4(TypeAlias<T, uint32_t>(inData).Get());
+            return TypeAlias<uint32_t, T>(result).Get();
         }
     };
 
@@ -70,8 +70,8 @@ namespace CoreTools
     public:
         NODISCARD static T Swap(T inData) noexcept
         {
-            const auto result = ByteSwap8(TypeAliaser<T, uint64_t>(inData).Get());
-            return TypeAliaser<uint64_t, T>(result).Get();
+            const auto result = ByteSwap8(TypeAlias<T, uint64_t>(inData).Get());
+            return TypeAlias<uint64_t, T>(result).Get();
         }
     };
 

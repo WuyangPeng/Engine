@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 16:56)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/15 09:47)
 
 #include "FunctionDescribedTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -33,13 +33,14 @@ void CoreTools::FunctionDescribedTesting::MainTest()
 void CoreTools::FunctionDescribedTesting::FunctionDescribedTest() noexcept
 {
     constexpr const char* currentFunction{ __func__ };
-    constexpr const char* fileName{ __FILE__ };
+    constexpr const auto* fileName = __FILE__;
     constexpr auto line = 37;
 
-    constexpr FunctionDescribed functionDescribed{ currentFunction, fileName, line };
+    constexpr FunctionDescribed functionDescribed0{ currentFunction, fileName, line };
+    constexpr FunctionDescribed functionDescribed1{ currentFunction, fileName, line };
 
-    static_assert(currentFunction == functionDescribed.GetCurrentFunction());
-    static_assert(fileName == functionDescribed.GetFileName());
-    static_assert(line == functionDescribed.GetLine());
-    static_assert(functionDescribed == functionDescribed);
+    static_assert(currentFunction == functionDescribed0.GetCurrentFunction());
+    static_assert(fileName == functionDescribed0.GetFileName());
+    static_assert(line == functionDescribed0.GetLine());
+    static_assert(functionDescribed0 == functionDescribed1);
 }

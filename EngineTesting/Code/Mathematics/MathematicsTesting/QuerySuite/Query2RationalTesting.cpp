@@ -70,7 +70,7 @@ void Mathematics::Query2RationalTesting::VerticesTest()
 
         Query2RationalD query(vertices);
 
-        ASSERT_ENUM_EQUAL(query.GetType(), QueryType::Rational);
+        ASSERT_EQUAL(query.GetType(), QueryType::Rational);
         ASSERT_EQUAL(query.GetNumVertices(), size);
 
         for (auto m = 0; m < size; ++m)
@@ -106,8 +106,8 @@ void Mathematics::Query2RationalTesting::LineTest()
 
         Query2RationalD query(vertices);
 
-        ASSERT_ENUM_EQUAL(query.ToLine(secondIndex, secondIndex, thirdIndex), LineQueryType::OnLine);
-        ASSERT_ENUM_EQUAL(query.ToLine(thirdIndex, secondIndex, thirdIndex), LineQueryType::OnLine);
+        ASSERT_EQUAL(query.ToLine(secondIndex, secondIndex, thirdIndex), LineQueryType::OnLine);
+        ASSERT_EQUAL(query.ToLine(thirdIndex, secondIndex, thirdIndex), LineQueryType::OnLine);
 
         if (firstIndex != secondIndex && secondIndex != thirdIndex && firstIndex != thirdIndex)
         {
@@ -124,15 +124,15 @@ void Mathematics::Query2RationalTesting::LineTest()
 
             if (SignRational<32>(0) < dotPerp)
             {
-                ASSERT_ENUM_EQUAL(query.ToLine(firstIndex, secondIndex, thirdIndex), LineQueryType::Right);
+                ASSERT_EQUAL(query.ToLine(firstIndex, secondIndex, thirdIndex), LineQueryType::Right);
             }
             else if (dotPerp < SignRational<32>(0))
             {
-                ASSERT_ENUM_EQUAL(query.ToLine(firstIndex, secondIndex, thirdIndex), LineQueryType::Left);
+                ASSERT_EQUAL(query.ToLine(firstIndex, secondIndex, thirdIndex), LineQueryType::Left);
             }
             else
             {
-                ASSERT_ENUM_EQUAL(query.ToLine(firstIndex, secondIndex, thirdIndex), LineQueryType::OnLine);
+                ASSERT_EQUAL(query.ToLine(firstIndex, secondIndex, thirdIndex), LineQueryType::OnLine);
             }
         }
     }
@@ -169,9 +169,9 @@ void Mathematics::Query2RationalTesting::TriangleTest()
             std::swap(secondIndex, thirdIndex);
         }
 
-        ASSERT_ENUM_EQUAL(query.ToTriangle(secondIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
-        ASSERT_ENUM_EQUAL(query.ToTriangle(thirdIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
-        ASSERT_ENUM_EQUAL(query.ToTriangle(fourthIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
+        ASSERT_EQUAL(query.ToTriangle(secondIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
+        ASSERT_EQUAL(query.ToTriangle(thirdIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
+        ASSERT_EQUAL(query.ToTriangle(fourthIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
 
         const LineQueryType sign0 = query.ToLine(firstIndex, thirdIndex, fourthIndex);
         const LineQueryType sign1 = query.ToLine(firstIndex, secondIndex, fourthIndex);
@@ -179,15 +179,15 @@ void Mathematics::Query2RationalTesting::TriangleTest()
 
         if (sign0 == LineQueryType::Right || sign1 == LineQueryType::Left || sign2 == LineQueryType::Right)
         {
-            ASSERT_ENUM_EQUAL(query.ToTriangle(firstIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::Outside);
+            ASSERT_EQUAL(query.ToTriangle(firstIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::Outside);
         }
         else if (sign0 == LineQueryType::OnLine || sign1 == LineQueryType::OnLine || sign2 == LineQueryType::OnLine)
         {
-            ASSERT_ENUM_EQUAL(query.ToTriangle(firstIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
+            ASSERT_EQUAL(query.ToTriangle(firstIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
         }
         else
         {
-            ASSERT_ENUM_EQUAL(query.ToTriangle(firstIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::Inside);
+            ASSERT_EQUAL(query.ToTriangle(firstIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::Inside);
         }
     }
 }
@@ -219,9 +219,9 @@ void Mathematics::Query2RationalTesting::CircumcircleTest()
 
         Query2RationalD query(vertices);
 
-        ASSERT_ENUM_EQUAL(query.ToCircumcircle(secondIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::OnCircumcircle);
-        ASSERT_ENUM_EQUAL(query.ToCircumcircle(thirdIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::OnCircumcircle);
-        ASSERT_ENUM_EQUAL(query.ToCircumcircle(fourthIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::OnCircumcircle);
+        ASSERT_EQUAL(query.ToCircumcircle(secondIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::OnCircumcircle);
+        ASSERT_EQUAL(query.ToCircumcircle(thirdIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::OnCircumcircle);
+        ASSERT_EQUAL(query.ToCircumcircle(fourthIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::OnCircumcircle);
 
         if (firstIndex != secondIndex && secondIndex != thirdIndex &&
             thirdIndex != fourthIndex && fourthIndex != firstIndex &&
@@ -252,15 +252,15 @@ void Mathematics::Query2RationalTesting::CircumcircleTest()
 
             if (SignRational<32>() < det)
             {
-                ASSERT_ENUM_EQUAL(query.ToCircumcircle(firstIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::Inside);
+                ASSERT_EQUAL(query.ToCircumcircle(firstIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::Inside);
             }
             else if (det < SignRational<32>())
             {
-                ASSERT_ENUM_EQUAL(query.ToCircumcircle(firstIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::Outside);
+                ASSERT_EQUAL(query.ToCircumcircle(firstIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::Outside);
             }
             else
             {
-                ASSERT_ENUM_EQUAL(query.ToCircumcircle(firstIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::OnCircumcircle);
+                ASSERT_EQUAL(query.ToCircumcircle(firstIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::OnCircumcircle);
             }
         }
     }

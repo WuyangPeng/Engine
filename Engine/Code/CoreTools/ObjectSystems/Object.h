@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:55)
+/// 版本：1.0.0.8 (2024/04/11 22:15)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_H
@@ -19,8 +19,8 @@
 #include <string>
 #include <vector>
 
-// 根类对象系统的根类。
-// 它提供了一个面向对象库的一些基本服务，这是一个抽象类。
+/// 根类对象系统的根类。
+/// 它提供了一个面向对象库的一些基本服务，这是一个抽象类。
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE Object : public ObjectInterface
@@ -39,7 +39,7 @@ namespace CoreTools
         CORE_TOOLS_NAMES_DECLARE;
 
     public:
-        // 对象名字
+        /// 对象名字
         NODISCARD std::string GetName() const;
         void SetName(const std::string& name);
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:13)
+/// 版本：1.0.0.8 (2024/04/12 15:07)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_SET_EXTERNAL_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_SET_EXTERNAL_DETAIL_H
@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename T, typename Reference, void (T::*PropertyFunction)(Reference)>
+requires(std::is_reference_v<Reference>)
 CoreTools::PropertySetExternal<T, Reference, PropertyFunction>::PropertySetExternal(T& object) noexcept
     : object{ object }
 {
@@ -23,6 +24,7 @@ CoreTools::PropertySetExternal<T, Reference, PropertyFunction>::PropertySetExter
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename T, typename Reference, void (T::*PropertyFunction)(Reference)>
+requires(std::is_reference_v<Reference>)
 bool CoreTools::PropertySetExternal<T, Reference, PropertyFunction>::IsValid() const noexcept
 {
     return true;
@@ -31,6 +33,7 @@ bool CoreTools::PropertySetExternal<T, Reference, PropertyFunction>::IsValid() c
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T, typename Reference, void (T::*PropertyFunction)(Reference)>
+requires(std::is_reference_v<Reference>)
 CoreTools::PropertySetExternal<T, Reference, PropertyFunction>& CoreTools::PropertySetExternal<T, Reference, PropertyFunction>::operator=(ReferenceType value) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;

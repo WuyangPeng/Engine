@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:13)
+/// 版本：1.0.0.8 (2024/03/28 10:59)
 
 #ifndef CORE_TOOLS_HELPER_NAME_MACRO_H
 #define CORE_TOOLS_HELPER_NAME_MACRO_H
@@ -47,7 +47,7 @@
 #define CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(namespaceName, className)                                                                    \
     CoreTools::ObjectSharedPtr namespaceName::className::GetObjectByName(const std::string& name)                                             \
     {                                                                                                                                         \
-        CLASS_IS_VALID_0;                                                                                                                     \
+        CORE_TOOLS_CLASS_IS_VALID_1;                                                                                                          \
         const auto found = ParentType::GetObjectByName(name);                                                                                 \
         if (!found->IsNullObject())                                                                                                           \
         {                                                                                                                                     \
@@ -60,7 +60,7 @@
     }                                                                                                                                         \
     namespaceName::className::ObjectSharedPtrContainer namespaceName::className::GetAllObjectsByName(const std::string& name)                 \
     {                                                                                                                                         \
-        CLASS_IS_VALID_0;                                                                                                                     \
+        CORE_TOOLS_CLASS_IS_VALID_1;                                                                                                          \
         auto parentObjects = ParentType::GetAllObjectsByName(name);                                                                           \
         const auto implObjects = impl->GetAllObjectsByName(name);                                                                             \
         parentObjects.insert(parentObjects.end(), implObjects.begin(), implObjects.end());                                                    \
@@ -68,7 +68,7 @@
     }                                                                                                                                         \
     CoreTools::ConstObjectSharedPtr namespaceName::className::GetConstObjectByName(const std::string& name) const                             \
     {                                                                                                                                         \
-        CLASS_IS_VALID_CONST_0;                                                                                                               \
+        CORE_TOOLS_CLASS_IS_VALID_CONST_1;                                                                                                    \
         const auto found = ParentType::GetConstObjectByName(name);                                                                            \
         if (!found->IsNullObject())                                                                                                           \
         {                                                                                                                                     \
@@ -81,7 +81,7 @@
     }                                                                                                                                         \
     namespaceName::className::ConstObjectSharedPtrContainer namespaceName::className::GetAllConstObjectsByName(const std::string& name) const \
     {                                                                                                                                         \
-        CLASS_IS_VALID_CONST_0;                                                                                                               \
+        CORE_TOOLS_CLASS_IS_VALID_CONST_1;                                                                                                    \
         auto parentObjects = ParentType::GetAllConstObjectsByName(name);                                                                      \
         const auto implObjects = impl->GetAllConstObjectsByName(name);                                                                        \
         parentObjects.insert(parentObjects.end(), implObjects.begin(), implObjects.end());                                                    \

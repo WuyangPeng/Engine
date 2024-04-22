@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:03)
+/// 版本：1.0.0.8 (2024/03/27 22:10)
 
 #ifndef CORE_TOOLS_FWD_H
 #define CORE_TOOLS_FWD_H
@@ -21,7 +21,6 @@
 #include "EngineConfiguration/EngineConfigurationFwd.h"
 #include "Exception/ExceptionFwd.h"
 #include "FileManager/FileManagerFwd.h"
-#include "Freetype/FreetypeFwd.h"
 #include "Helper/HelperFwd.h"
 #include "LogManager/LogManagerFwd.h"
 #include "MainFunctionHelper/MainFunctionHelperFwd.h"
@@ -39,7 +38,6 @@
 #include "Threading/ThreadingFwd.h"
 #include "Time/TimeFwd.h"
 #include "UnitTestSuite/UnitTestSuiteFwd.h"
-#include "Zlib/ZlibFwd.h"
 #include "Network/NetworkFwd.h"
 
 #endif  // CORE_TOOLS_FWD_H

@@ -131,19 +131,19 @@ void Mathematics::Tetrahedron3Testing::TetrahedronTest()
 
             faceIndices = Tetrahedron3D::GetFaceIndices(m);
 
-            ASSERT_ENUM_EQUAL(firstPlaneVector.at(m).WhichSide(tetrahedron.GetVertex(faceIndices.at(0))), NumericalValueSymbol::Zero);
+            ASSERT_EQUAL(firstPlaneVector.at(m).WhichSide(tetrahedron.GetVertex(faceIndices.at(0))), NumericalValueSymbol::Zero);
 
-            ASSERT_ENUM_EQUAL(firstPlaneVector.at(m).WhichSide(tetrahedron.GetVertex(faceIndices.at(1))), NumericalValueSymbol::Zero);
+            ASSERT_EQUAL(firstPlaneVector.at(m).WhichSide(tetrahedron.GetVertex(faceIndices.at(1))), NumericalValueSymbol::Zero);
 
-            ASSERT_ENUM_EQUAL(firstPlaneVector.at(m).WhichSide(tetrahedron.GetVertex(faceIndices.at(2))), NumericalValueSymbol::Zero);
+            ASSERT_EQUAL(firstPlaneVector.at(m).WhichSide(tetrahedron.GetVertex(faceIndices.at(2))), NumericalValueSymbol::Zero);
         }
 
-        ASSERT_ENUM_EQUAL(firstPlaneVector.at(0).WhichSide(tetrahedron.GetVertex(3)), NumericalValueSymbol::Negative);
+        ASSERT_EQUAL(firstPlaneVector.at(0).WhichSide(tetrahedron.GetVertex(3)), NumericalValueSymbol::Negative);
 
-        ASSERT_ENUM_EQUAL(firstPlaneVector.at(1).WhichSide(tetrahedron.GetVertex(2)), NumericalValueSymbol::Negative);
+        ASSERT_EQUAL(firstPlaneVector.at(1).WhichSide(tetrahedron.GetVertex(2)), NumericalValueSymbol::Negative);
 
-        ASSERT_ENUM_EQUAL(firstPlaneVector.at(2).WhichSide(tetrahedron.GetVertex(1)), NumericalValueSymbol::Negative);
+        ASSERT_EQUAL(firstPlaneVector.at(2).WhichSide(tetrahedron.GetVertex(1)), NumericalValueSymbol::Negative);
 
-        ASSERT_ENUM_EQUAL(firstPlaneVector.at(3).WhichSide(tetrahedron.GetVertex(0)), NumericalValueSymbol::Negative);
+        ASSERT_EQUAL(firstPlaneVector.at(3).WhichSide(tetrahedron.GetVertex(0)), NumericalValueSymbol::Negative);
     }
 }

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:14)
+/// 版本：1.0.0.8 (2024/04/12 15:05)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_H
@@ -14,14 +14,14 @@
 
 #include "CoreTools/Helper/PropertiesMacro.h"
 
-// 使用宏TCRE_METHOD_PROPERTY_GET定义属性
+/// 使用宏TCRE_METHOD_PROPERTY_GET定义属性
 namespace CoreTools
 {
-    template <typename Value,  // 实际属性值类型
-              typename ConstReference,  // 引用类型
-              typename Container,  // 封闭类
-              ptrdiff_t (*FunctionOffset)(),  // 指针函数提供容器内偏移属性
-              ConstReference (Container::*FunctionGet)() const>  // 指向返回R的const成员函数的指针
+    template <typename Value,  /// 实际属性值类型
+              typename ConstReference,  /// 引用类型
+              typename Container,  /// 封闭类
+              ptrdiff_t (*FunctionOffset)(),  /// 指针函数提供容器内偏移属性
+              ConstReference (Container::*FunctionGet)() const>  /// 指向返回R的const成员函数的指针
     class MethodPropertyGet final
     {
     public:

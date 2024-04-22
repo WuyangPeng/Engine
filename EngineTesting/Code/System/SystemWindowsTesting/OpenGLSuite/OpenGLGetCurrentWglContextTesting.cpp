@@ -45,11 +45,11 @@ void System::OpenGLGetCurrentWglContextTesting::GetContextTest(WindowsHdc window
 {
     ASSERT_NOT_THROW_EXCEPTION_1(SetWindowPixelFormatTest, windowsDc);
 
-    const auto openGLHglrc = GetCreateWglContext(windowsDc);
+    const auto openGLRcHandle = GetCreateWglContext(windowsDc);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(DoOpenGLGetCurrentWglContextTest, openGLHglrc);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoOpenGLGetCurrentWglContextTest, openGLRcHandle);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(DeleteWglContextTest, openGLHglrc);
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteWglContextTest, openGLRcHandle);
 }
 
 void System::OpenGLGetCurrentWglContextTesting::DoOpenGLGetCurrentWglContextTest(OpenGLRcHandle openGLRcHandle)

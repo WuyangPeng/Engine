@@ -95,6 +95,46 @@ namespace Mathematics
 
     template <typename Real, int S>
     class PolynomialFitPowersData;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class ApproximationCircle2;
+
+    template <typename Real, typename ObservationType>
+    requires(std::is_arithmetic_v<Real>)
+    class ApproximationQuery;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class ApproximationHeightLine2;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class ApproximationCone3;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class ApproximationGaussian2;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class ApproximationGaussian3;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class ApproximationEllipse2;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class ApproximationCone3EllipseAndPoints;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class ApproximationCone3ExtractEllipses;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class ApproximationConvexQuadByRect;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_FWD_H

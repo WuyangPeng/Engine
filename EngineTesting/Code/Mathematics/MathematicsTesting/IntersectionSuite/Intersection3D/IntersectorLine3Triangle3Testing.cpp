@@ -112,7 +112,7 @@ void Mathematics::IntersectorLine3Triangle3Testing::FindTest()
 
         if (MathD::FAbs(directionDotNormal) <= MathD::GetZeroTolerance())
         {
-            ASSERT_ENUM_EQUAL(intersectionType, IntersectionType::Empty);
+            ASSERT_EQUAL(intersectionType, IntersectionType::Empty);
         }
         else
         {
@@ -138,7 +138,7 @@ void Mathematics::IntersectorLine3Triangle3Testing::FindTest()
                 {
                     if (directionDotOriginCrossEdge2 + directionDotEdge1CrossOrigin <= directionDotNormal)
                     {
-                        ASSERT_ENUM_EQUAL(intersectionType, IntersectionType::Point);
+                        ASSERT_EQUAL(intersectionType, IntersectionType::Point);
                         const double originDotNormal = -sign * Vector3ToolsD::DotProduct(lineOrigin, normal);
 
                         const double lineParameter = originDotNormal / directionDotNormal;
@@ -153,17 +153,17 @@ void Mathematics::IntersectorLine3Triangle3Testing::FindTest()
                     }
                     else
                     {
-                        ASSERT_ENUM_EQUAL(intersectionType, IntersectionType::Empty);
+                        ASSERT_EQUAL(intersectionType, IntersectionType::Empty);
                     }
                 }
                 else
                 {
-                    ASSERT_ENUM_EQUAL(intersectionType, IntersectionType::Empty);
+                    ASSERT_EQUAL(intersectionType, IntersectionType::Empty);
                 }
             }
             else
             {
-                ASSERT_ENUM_EQUAL(intersectionType, IntersectionType::Empty);
+                ASSERT_EQUAL(intersectionType, IntersectionType::Empty);
             }
         }
     }
@@ -235,7 +235,7 @@ void Mathematics::IntersectorLine3Triangle3Testing::IntersectTest()
 
         if (MathF::FAbs(directionDotNormal) <= MathF::GetZeroTolerance())
         {
-            ASSERT_ENUM_EQUAL(intersectionType, IntersectionType::Empty);
+            ASSERT_EQUAL(intersectionType, IntersectionType::Empty);
         }
         else
         {
@@ -261,21 +261,21 @@ void Mathematics::IntersectorLine3Triangle3Testing::IntersectTest()
                 {
                     if (directionDotNormal <= directionDotOriginCrossEdge2 + directionDotEdge1CrossOrigin)
                     {
-                        ASSERT_ENUM_EQUAL(intersectionType, IntersectionType::Point);
+                        ASSERT_EQUAL(intersectionType, IntersectionType::Point);
                     }
                     else
                     {
-                        ASSERT_ENUM_EQUAL(intersectionType, IntersectionType::Empty);
+                        ASSERT_EQUAL(intersectionType, IntersectionType::Empty);
                     }
                 }
                 else
                 {
-                    ASSERT_ENUM_EQUAL(intersectionType, IntersectionType::Empty);
+                    ASSERT_EQUAL(intersectionType, IntersectionType::Empty);
                 }
             }
             else
             {
-                ASSERT_ENUM_EQUAL(intersectionType, IntersectionType::Empty);
+                ASSERT_EQUAL(intersectionType, IntersectionType::Empty);
             }
         }
     }

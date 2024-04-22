@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:21)
+/// 版本：1.0.0.8 (2024/03/29 23:07)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,8 +18,6 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
 
-using namespace std::literals;
-
 CoreTools::FormatErrorMessageImpl::FormatErrorMessageImpl(WindowError lastError) noexcept
     : lastError{ lastError }, errorMessage{ nullptr }
 {
@@ -30,7 +28,7 @@ CoreTools::FormatErrorMessageImpl::FormatErrorMessageImpl(WindowError lastError)
 
 void CoreTools::FormatErrorMessageImpl::InitMessage() noexcept
 {
-    if (!System::FormatErrorMessage(errorMessage, lastError))
+    if (!FormatErrorMessage(errorMessage, lastError))
     {
         AgainInitMessage();
     }
@@ -38,7 +36,7 @@ void CoreTools::FormatErrorMessageImpl::InitMessage() noexcept
 
 void CoreTools::FormatErrorMessageImpl::AgainInitMessage() noexcept
 {
-    const ConstDynamicLinkModule dynamicLinkModule{ System::LoadDynamicLibrary(DYNAMIC_LINK_TEXT("netmsg.dll"), System::LoadLibraryType::DoNotResolveDllReferences) };
+    const ConstDynamicLinkModule dynamicLinkModule{ LoadDynamicLibrary(DYNAMIC_LINK_TEXT("netmsg.dll"), System::LoadLibraryType::DoNotResolveDllReferences) };
 
     InitNetworkMessage(dynamicLinkModule);
 }
@@ -57,7 +55,7 @@ void CoreTools::FormatErrorMessageImpl::InitNetworkMessage(ConstDynamicLinkModul
 
 void CoreTools::FormatErrorMessageImpl::LoadedModuleSucceed(ConstDynamicLinkModule module) noexcept
 {
-    if (!System::FormatErrorMessage(errorMessage, module, lastError))
+    if (!FormatErrorMessage(errorMessage, module, lastError))
     {
         LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("获取错误代码‘"), EnumCastUnderlying(lastError), SYSTEM_TEXT("’的文字描述失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
@@ -95,6 +93,6 @@ System::String CoreTools::FormatErrorMessageImpl::GetErrorMessage() const
     }
     else
     {
-        return SYSTEM_TEXT("未发现这个错误代码的文字描述。"s);
+        return SYSTEM_TEXT("未发现这个错误代码的文字描述。");
     }
 }

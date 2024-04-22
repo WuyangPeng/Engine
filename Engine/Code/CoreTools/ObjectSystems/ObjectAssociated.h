@@ -5,21 +5,23 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:55)
+/// 版本：1.0.0.8 (2024/04/11 22:15)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_ASSOCIATED_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_ASSOCIATED_H
 
+#include "CoreTools/CoreToolsDll.h"
+
 #include "ObjectInterface.h"
 #include "ObjectType.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 
 namespace CoreTools
 {
     template <typename T>
+    requires(std::is_base_of_v<ObjectInterface, T>)
     struct ObjectAssociated final
     {
-        static_assert(std::is_base_of_v<ObjectInterface, T>, "T is not base of ObjectInterface");
-
         using ClassType = ObjectAssociated<T>;
         using ObjectType = T;
         using ObjectSharedPtr = std::shared_ptr<T>;
@@ -62,7 +64,7 @@ namespace CoreTools
         NODISCARD ObjectSharedPtr Clone() const
         {
             if (object != nullptr)
-                return object->Clone();
+                return boost::polymorphic_pointer_cast<T>(object->CloneObject());
             else
                 return object;
         }

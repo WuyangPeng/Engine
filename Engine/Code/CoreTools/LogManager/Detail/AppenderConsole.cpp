@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:40)
+/// 版本：1.0.0.8 (2024/04/11 13:56)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -46,7 +46,7 @@ void CoreTools::AppenderConsole::DoWrite(const LogMessage& message, const LogMes
 
     const auto messageDescribe = message.GetMessageDescribe();
 
-    // 错误消息打印到错误控制台
+    /// 错误消息打印到错误控制台
     if (message.GetLogLevel() == LogLevel::Error || message.GetLogLevel() == LogLevel::Fatal)
     {
         CERR << prefix.GetPrefix() << messageDescribe << postfix.GetPostfix();

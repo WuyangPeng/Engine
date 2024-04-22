@@ -50,7 +50,7 @@ void Mathematics::Bisect2RootTesting::HaveSolutionTest()
 
     ASSERT_APPROXIMATE(bisect2Root.GetXRoot(), rootX, 1e-10);
     ASSERT_APPROXIMATE(bisect2Root.GetYRoot(), rootY, 1e-10);
-    ASSERT_ENUM_EQUAL(bisect2Root.GetBisectRootType(), type);
+    ASSERT_EQUAL(bisect2Root.GetBisectRootType(), type);
 }
 
 void Mathematics::Bisect2RootTesting::NoSolutionXTest()
@@ -59,7 +59,7 @@ void Mathematics::Bisect2RootTesting::NoSolutionXTest()
 
     const Bisect2RootD bisect2Root;
 
-    ASSERT_ENUM_EQUAL(bisect2Root.GetBisectRootType(), type);
+    ASSERT_EQUAL(bisect2Root.GetBisectRootType(), type);
 
     MAYBE_UNUSED auto value = bisect2Root.GetXRoot();
 }
@@ -70,7 +70,7 @@ void Mathematics::Bisect2RootTesting::NoSolutionYTest()
 
     const Bisect2RootD bisect2Root;
 
-    ASSERT_ENUM_EQUAL(bisect2Root.GetBisectRootType(), type);
+    ASSERT_EQUAL(bisect2Root.GetBisectRootType(), type);
 
     MAYBE_UNUSED auto value = bisect2Root.GetYRoot();
 }
@@ -83,7 +83,7 @@ void Mathematics::Bisect2RootTesting::UnknownTest()
 
     const Bisect2RootF bisect2Root(rootX, rootY, type);
 
-    ASSERT_ENUM_EQUAL(bisect2Root.GetBisectRootType(), type);
+    ASSERT_EQUAL(bisect2Root.GetBisectRootType(), type);
     ASSERT_APPROXIMATE(bisect2Root.GetXRoot(), rootX, 1e-8f);
     ASSERT_APPROXIMATE(bisect2Root.GetYRoot(), rootY, 1e-8f);
 }

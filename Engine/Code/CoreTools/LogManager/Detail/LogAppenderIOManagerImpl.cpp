@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:41)
+/// 版本：1.0.0.8 (2024/04/11 14:01)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,8 +19,6 @@
 #include "CoreTools/LogManager/AppenderManager.h"
 #include "CoreTools/LogManager/LogAsynchronous.h"
 #include "CoreTools/LogManager/LogMessage.h"
-
-using namespace std::literals;
 
 CoreTools::LogAppenderIOManagerImpl::LogAppenderIOManagerImpl(LogLevel logLevel, AppenderManagerSharedPtr appenderManager) noexcept
     : logLevel{ logLevel },
@@ -40,10 +38,7 @@ CoreTools::LogAppenderIOManagerImpl::LogAppenderIOManagerImpl() noexcept
 
 bool CoreTools::LogAppenderIOManagerImpl::IsValid() const noexcept
 {
-    if (logLevel != LogLevel::MaxLogLevels)
-        return true;
-    else
-        return false;
+    return logLevel != LogLevel::MaxLogLevels;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

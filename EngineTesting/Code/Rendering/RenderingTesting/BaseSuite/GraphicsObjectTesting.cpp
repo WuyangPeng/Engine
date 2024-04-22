@@ -57,7 +57,7 @@ void Rendering::GraphicsObjectTesting::AccessTest()
         auto graphicsObjectTest = GraphicsObjectTest::Create(name, type);
 
         ASSERT_EQUAL(graphicsObjectTest->GetName(), name);
-        ASSERT_ENUM_EQUAL(graphicsObjectTest->GetType(), type);
+        ASSERT_EQUAL(graphicsObjectTest->GetType(), type);
 
         ASSERT_NOT_THROW_EXCEPTION_2(BufferTest, type, *graphicsObjectTest);
         ASSERT_NOT_THROW_EXCEPTION_2(TextureTest, type, *graphicsObjectTest);

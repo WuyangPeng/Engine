@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:37)
+/// 版本：1.0.0.8 (2024/03/28 15:54)
 
 #ifndef CORE_TOOLS_CONTRACT_TRIGGER_ASSERT_H
 #define CORE_TOOLS_CONTRACT_TRIGGER_ASSERT_H
@@ -42,7 +42,7 @@ namespace CoreTools
     private:
         template <typename Type, typename... Types>
         void Process(const FunctionDescribed& functionDescribed, Format& format, Type&& argument, Types&&... arguments);
-        void Process(const FunctionDescribed& functionDescribed, const Format& format);
+        void Process(const FunctionDescribed& functionDescribed, const Format& format) const;
 
         NODISCARD std::string GenerateMessagePrefix(const FunctionDescribed& functionDescribed) const;
         NODISCARD static std::string GenerateMessagePrefix(const FunctionDescribed& functionDescribed, const std::string& triggerAssertCheckMessage);

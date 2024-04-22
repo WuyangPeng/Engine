@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:46)
+/// 版本：1.0.0.8 (2024/04/01 09:46)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,10 +19,8 @@
 
 #include <vector>
 
-using namespace std::literals;
-
 CoreTools::CWriteFileManagerImpl::CWriteFileManagerImpl(const String& fileName, bool addition)
-    : ParentType{ fileName, addition ? SYSTEM_TEXT("abS"s) : SYSTEM_TEXT("wbS"s) }
+    : ParentType{ fileName, addition ? SYSTEM_TEXT("abS") : SYSTEM_TEXT("wbS") }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -31,10 +29,7 @@ CoreTools::CWriteFileManagerImpl::CWriteFileManagerImpl(const String& fileName, 
 
 bool CoreTools::CWriteFileManagerImpl::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && InterfaceType::IsValid())
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && InterfaceType::IsValid();
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -50,18 +45,12 @@ void CoreTools::CWriteFileManagerImpl::Write(size_t itemSize, const void* data)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
-    CORE_TOOLS_ASSERTION_0(data != nullptr, "数据无效");
-
     Write(itemSize, 1, data);
 }
 
 void CoreTools::CWriteFileManagerImpl::Write(size_t itemSize, size_t itemsNumber, const void* data)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
-
-    CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
-    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "数据无效");
 
 #ifdef SYSTEM_BIG_ENDIAN
 
@@ -81,9 +70,11 @@ void CoreTools::CWriteFileManagerImpl::Write(size_t itemSize, size_t itemsNumber
 
 #ifdef SYSTEM_BIG_ENDIAN
 
-// private
 size_t CoreTools::CWriteFileManagerImpl::WriteToFileWithBigEndian(size_t itemSize, size_t itemsNumber, const void* data)
 {
+    CheckItemSize(itemSize);
+    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "数据无效");
+
     switch (itemSize)
     {
         case 2:
@@ -133,9 +124,7 @@ size_t CoreTools::CWriteFileManagerImpl::ReadFromFile(size_t itemSize, size_t it
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    System::UnusedFunction(itemSize, itemsNumber, data);
-
-    CORE_TOOLS_ASSERTION_4(false, "CWriteFileManageImpl禁止调用ReadFromFile！");
+    FunctionProhibitedFromCalling("CWriteFileManageImpl禁止调用ReadFromFile！", itemSize, itemsNumber, data);
 
     return 0;
 }
@@ -144,7 +133,7 @@ int CoreTools::CWriteFileManagerImpl::GetCharacter() noexcept(gAssert < 4 || gCo
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CORE_TOOLS_ASSERTION_4(false, "CWriteFileManageImpl禁止调用GetCharacter！");
+    FunctionProhibitedFromCalling("CWriteFileManageImpl禁止调用GetCharacter！");
 
     return System::gCFileError;
 }
@@ -153,9 +142,7 @@ bool CoreTools::CWriteFileManagerImpl::UnGetCharacter(int character) noexcept(gA
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    System::UnusedFunction(character);
-
-    CORE_TOOLS_ASSERTION_4(false, "CWriteFileManageImpl禁止调用UnGetCharacter！");
+    FunctionProhibitedFromCalling("CWriteFileManageImpl禁止调用UnGetCharacter！", character);
 
     return false;
 }
@@ -164,9 +151,7 @@ std::string CoreTools::CWriteFileManagerImpl::GetString(int count) noexcept(gAss
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    System::UnusedFunction(count);
-
-    CORE_TOOLS_ASSERTION_4(false, "CWriteFileManageImpl禁止调用GetString！");
+    FunctionProhibitedFromCalling("CWriteFileManageImpl禁止调用GetString！", count);
 
     return std::string{};
 }

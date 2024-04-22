@@ -51,5 +51,5 @@ void System::EnlistmentMapGenericMaskTesting::DoEnlistmentMapGenericMaskTest(Fil
     AccessCheckGenericMapping genericMapping{};
     const auto enlistmentMapGenericMask = GetEnlistmentMapGenericMask(fileHandleDesiredAccess, genericMapping);
 
-    ASSERT_ENUM_EQUAL(accessGenericMask, enlistmentMapGenericMask);
+    ASSERT_EQUAL(accessGenericMask, enlistmentMapGenericMask);
 }

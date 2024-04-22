@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:05)
+/// 版本：1.0.0.8 (2024/04/11 11:02)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -48,10 +48,7 @@ CoreTools::SimpleCSV::CellReferenceImpl::CellReferenceImpl(int row, const std::s
 
 bool CoreTools::SimpleCSV::CellReferenceImpl::IsValid() const noexcept
 {
-    if (0 < row && 0 < column && !cellAddress.empty())
-        return true;
-    else
-        return false;
+    return 0 < row && 0 < column && !cellAddress.empty();
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -63,7 +60,7 @@ int CoreTools::SimpleCSV::CellReferenceImpl::GetRow() const noexcept
     return row;
 }
 
-// 设置CellReference对象的行。如果数字大于16384（最大值），该行设置为 16384。
+/// 设置CellReference对象的行。如果数字大于16384（最大值），该行设置为 16384。
 void CoreTools::SimpleCSV::CellReferenceImpl::SetRow(int aRow)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
@@ -79,7 +76,7 @@ int CoreTools::SimpleCSV::CellReferenceImpl::GetColumn() const noexcept
     return column;
 }
 
-// 设置CellReference对象的列。如果数字大于1048576（最大值），该列设置为1048576。
+/// 设置CellReference对象的列。如果数字大于1048576（最大值），该列设置为1048576。
 void CoreTools::SimpleCSV::CellReferenceImpl::SetColumn(int aColumn)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
@@ -146,18 +143,18 @@ std::string CoreTools::SimpleCSV::CellReferenceImpl::GetColumnAsString(int aColu
 {
     std::string result{};
 
-    // 如果列名中有一个字母：
+    /// 如果列名中有一个字母：
     if (aColumn <= alphabetSize)
     {
         result += boost::numeric_cast<char>(aColumn + asciiOffset);
     }
-    // 如果列名中有两个字母：
+    /// 如果列名中有两个字母：
     else if (aColumn > alphabetSize && aColumn <= alphabetSize * (alphabetSize + 1))
     {
         result += boost::numeric_cast<char>((aColumn - (alphabetSize + 1)) / alphabetSize + asciiOffset + 1);
         result += boost::numeric_cast<char>((aColumn - (alphabetSize + 1)) % alphabetSize + asciiOffset + 1);
     }
-    // 如果列名中有三个字母：
+    /// 如果列名中有三个字母：
     else
     {
         constexpr auto step = (alphabetSize * (alphabetSize + 1)) + 1;

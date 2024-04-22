@@ -12,6 +12,8 @@
 
 #include "Mathematics/MathematicsDll.h"
 
+#include <array>
+
 /// 该文件中实现的前两个slerp估计需要[0,pi/2]中的角度，因为这些估计基于具有相同角度要求的Chebyshev比率估计。使用qh输入的第三个函数估计允许[0,pi)中的角度。
 namespace Mathematics
 {

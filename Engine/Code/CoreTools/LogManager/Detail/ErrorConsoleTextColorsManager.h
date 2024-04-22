@@ -5,10 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:36)
+/// 版本：1.0.0.8 (2024/04/11 13:49)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_ERROR_CONSOLE_TEXT_COLOR_MANAGER_H
 #define CORE_TOOLS_LOG_MANAGER_ERROR_CONSOLE_TEXT_COLOR_MANAGER_H
+
+#include "CoreTools/CoreToolsDll.h"
 
 #include "LogConsoleTextColorsManagerImpl.h"
 #include "System/Console/Flags/ConsoleHandleFlags.h"
@@ -28,7 +30,7 @@ namespace CoreTools
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        using ErrorManager = ConsoleTextColorsManager<System::StandardHandle::Error>;
+        using ErrorManager = ConsoleTextColorsManager<StandardHandle::Error>;
 
     private:
         ErrorManager consoleTextColorsManager;

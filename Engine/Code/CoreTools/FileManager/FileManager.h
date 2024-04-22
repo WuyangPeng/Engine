@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:44)
+/// 版本：1.0.0.8 (2024/03/30 22:55)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_H
 #define CORE_TOOLS_FILE_MANAGER_H
@@ -28,13 +28,13 @@
 #include "FileHandleHelper.h"
 #include "FileManagerHelper.h"
 #include "GenerateRandomName.h"
-#include "IFStreamManager.h"
-#include "OFStreamManager.h"
+#include "IFileStreamManager.h"
+#include "OFileStreamManager.h"
 #include "ReadAndWriteFileHandle.h"
 #include "ReadBufferIO.h"
 #include "ReadFileHandle.h"
 #include "ReadFileManager.h"
-#include "TypeAliaser.h"
+#include "TypeAlias.h"
 #include "WriteBufferIO.h"
 #include "WriteFileHandle.h"
 #include "WriteFileManager.h"

@@ -67,7 +67,7 @@ void Rendering::RasterizerStateTesting::AccessTest()
     const auto name = GetGraphicsObjectName();
 
     ASSERT_EQUAL(rasterizerState->GetName(), name);
-    ASSERT_ENUM_EQUAL(rasterizerState->GetType(), GetGraphicsObjectType());
+    ASSERT_EQUAL(rasterizerState->GetType(), GetGraphicsObjectType());
 
     ASSERT_TRUE(rasterizerState->IsDrawingState());
 
@@ -185,8 +185,8 @@ void Rendering::RasterizerStateTesting::RasterizerStateTest()
 
 void Rendering::RasterizerStateTesting::RasterizerStateValueTest()
 {
-    ASSERT_ENUM_EQUAL(rasterizerState->GetFill(), fill);
-    ASSERT_ENUM_EQUAL(rasterizerState->GetCull(), cull);
+    ASSERT_EQUAL(rasterizerState->GetFill(), fill);
+    ASSERT_EQUAL(rasterizerState->GetCull(), cull);
     ASSERT_EQUAL(rasterizerState->IsFrontCcw(), frontCCW);
     ASSERT_EQUAL(rasterizerState->GetDepthBias(), depthBias);
     ASSERT_EQUAL(rasterizerState->GetDepthBiasClamp(), depthBiasClamp);

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:40)
+/// 版本：1.0.0.8 (2024/04/11 13:54)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -59,19 +59,21 @@ void CoreTools::AnalysisAppenderManager::AnalysisLogger()
 {
     using UnderlyingType = std::underlying_type_t<LogLevel>;
 
-    for (const auto& loggerTree : mainTree.get_child(gLogger.data()))
+    for (const auto& [describe, levelType] : mainTree.get_child(gLogger.data()))
     {
-        if (const auto filterType = LogFilterManager::GetLogFilterType(loggerTree.first);
-            LogFilter::System <= filterType && filterType < LogFilter::MaxLogFilter)
+        if (const auto filterType = LogFilterManager::GetLogFilterType(describe);
+            LogFilter::System <= filterType &&
+            filterType < LogFilter::MaxLogFilter)
         {
-            InsertLogger(System::UnderlyingCastEnum<LogLevel>(loggerTree.second.get_value<UnderlyingType>()), filterType);
+            InsertLogger(System::UnderlyingCastEnum<LogLevel>(levelType.get_value<UnderlyingType>()), filterType);
         }
     }
 }
 
 void CoreTools::AnalysisAppenderManager::InsertLogger(LogLevel levelType, LogFilter filterType)
 {
-    if (levelType < LogLevel::Disabled || LogLevel::MaxLogLevels <= levelType || !appenderManager->InsertLogger(Logger(filterType, levelType)))
+    if (levelType < LogLevel::Disabled || LogLevel::MaxLogLevels <= levelType ||
+        !appenderManager->InsertLogger(Logger(filterType, levelType)))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("插入记录器失败！"))
     }
@@ -94,7 +96,8 @@ bool CoreTools::AnalysisAppenderManager::AnalysisConsoleAppender()
     const auto appenderFlags = System::UnderlyingCastEnum<AppenderPrint>(consoleTree.get(gFlags.data(), 0));
 
     if (const auto logLevelType = System::UnderlyingCastEnum<LogLevel>(consoleTree.get(gLogLevel.data(), 0));
-        LogLevel::Disabled <= logLevelType && logLevelType < LogLevel::MaxLogLevels)
+        LogLevel::Disabled <= logLevelType &&
+        logLevelType < LogLevel::MaxLogLevels)
     {
         const Appender appender{ appenderFlags, logLevelType };
 
@@ -110,11 +113,11 @@ bool CoreTools::AnalysisAppenderManager::AnalysisFileAppender()
 {
     auto result = true;
 
-    const auto assoc = appenderTree.equal_range(gAppenderFile.data());
+    const auto [begin, end] = appenderTree.equal_range(gAppenderFile.data());
 
-    for (auto assocIter = assoc.first, endIter = assoc.second; assocIter != endIter; ++assocIter)
+    for (auto iter = begin; iter != end; ++iter)
     {
-        if (!InsertAppender(assocIter->second))
+        if (!InsertAppender(iter->second))
         {
             result = false;
         }
@@ -172,10 +175,7 @@ bool CoreTools::AnalysisAppenderManager::AnalysisFileConfigurationAppender()
 
 bool CoreTools::AnalysisAppenderManager::IsValid() const noexcept
 {
-    if (appenderManager != nullptr)
-        return true;
-    else
-        return false;
+    return appenderManager != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

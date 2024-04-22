@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:42)
+/// 版本：1.0.0.8 (2024/04/11 16:10)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_HEAP_ALLOCATE_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_HEAP_ALLOCATE_DETAIL_H
@@ -18,18 +18,17 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename T>
+requires(std::is_trivial_v<T> && std::is_standard_layout_v<T>)
 CoreTools::HeapAllocate<T>::HeapAllocate(int length)
     : length{ length }, point{ System::AllocateProcessHeap<T>(length) }
 {
-    if (point == nullptr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("分配Heap失败。"s))
-    }
+    ASSERT_FAIL_THROW_EXCEPTION(point != nullptr, SYSTEM_TEXT("分配Heap失败。"))
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename T>
+requires(std::is_trivial_v<T> && std::is_standard_layout_v<T>)
 CoreTools::HeapAllocate<T>::~HeapAllocate() noexcept
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -40,17 +39,16 @@ CoreTools::HeapAllocate<T>::~HeapAllocate() noexcept
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename T>
+requires(std::is_trivial_v<T> && std::is_standard_layout_v<T>)
 bool CoreTools::HeapAllocate<T>::IsValid() const noexcept
 {
-    if (point != nullptr)
-        return true;
-    else
-        return false;
+    return point != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
+requires(std::is_trivial_v<T> && std::is_standard_layout_v<T>)
 int CoreTools::HeapAllocate<T>::GetLength() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
@@ -59,6 +57,7 @@ int CoreTools::HeapAllocate<T>::GetLength() const noexcept
 }
 
 template <typename T>
+requires(std::is_trivial_v<T> && std::is_standard_layout_v<T>)
 int CoreTools::HeapAllocate<T>::GetByteLength() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
@@ -67,7 +66,8 @@ int CoreTools::HeapAllocate<T>::GetByteLength() const
 }
 
 template <typename T>
-const typename CoreTools::HeapAllocate<T>::Point CoreTools::HeapAllocate<T>::GetPoint() const noexcept
+requires(std::is_trivial_v<T> && std::is_standard_layout_v<T>)
+typename CoreTools::HeapAllocate<T>::ConstPoint CoreTools::HeapAllocate<T>::GetPoint() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -75,6 +75,7 @@ const typename CoreTools::HeapAllocate<T>::Point CoreTools::HeapAllocate<T>::Get
 }
 
 template <typename T>
+requires(std::is_trivial_v<T> && std::is_standard_layout_v<T>)
 typename CoreTools::HeapAllocate<T>::Point CoreTools::HeapAllocate<T>::GetPoint() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;

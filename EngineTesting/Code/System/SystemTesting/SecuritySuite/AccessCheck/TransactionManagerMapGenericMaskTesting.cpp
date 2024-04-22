@@ -51,5 +51,5 @@ void System::TransactionManagerMapGenericMaskTesting::DoTransactionManagerMapGen
     AccessCheckGenericMapping genericMapping{};
     const auto enlistmentMapGenericMask = GetTransactionManagerMapGenericMask(fileHandleDesiredAccess, genericMapping);
 
-    ASSERT_ENUM_EQUAL(accessGenericMask, enlistmentMapGenericMask);
+    ASSERT_EQUAL(accessGenericMask, enlistmentMapGenericMask);
 }

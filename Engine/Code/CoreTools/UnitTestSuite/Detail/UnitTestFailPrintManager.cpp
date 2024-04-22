@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:23)
+/// 版本：1.0.0.8 (2024/04/12 11:30)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -24,10 +24,7 @@ CoreTools::UnitTestFailPrintManager::UnitTestFailPrintManager(UnitTest& unitTest
 
 bool CoreTools::UnitTestFailPrintManager::IsValid() const noexcept
 {
-    if (reportOutput != nullptr)
-        return true;
-    else
-        return false;
+    return reportOutput != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

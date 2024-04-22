@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:43)
+/// 版本：1.0.0.8 (2024/04/11 14:46)
 
 #ifndef CORE_TOOLS_DATA_TYPE_TUPLE_LESS_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_TUPLE_LESS_DETAIL_H
@@ -25,10 +25,7 @@ CoreTools::TupleLess<Dimension, Type>::TupleLess(int index) noexcept
 template <int Dimension, typename Type>
 bool CoreTools::TupleLess<Dimension, Type>::IsValid() const noexcept
 {
-    if (0 <= index && index < Dimension)
-        return true;
-    else
-        return false;
+    return 0 <= index && index < Dimension;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

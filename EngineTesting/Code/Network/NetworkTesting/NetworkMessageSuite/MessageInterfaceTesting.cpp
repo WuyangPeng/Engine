@@ -163,5 +163,5 @@ void Network::MessageInterfaceTesting::UseSubIdTest()
 
     ASSERT_TRUE(testMessage->IsExactlyTypeOf(testMessage));
 
-    ASSERT_ENUM_EQUAL(testMessage->GetMessageHeadStrategy(), MessageHeadStrategy::UseSubId);
+    ASSERT_EQUAL(testMessage->GetMessageHeadStrategy(), MessageHeadStrategy::UseSubId);
 }

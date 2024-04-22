@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:14)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 16:56)
 
 #include "RowDataIteratorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -20,8 +20,6 @@
 #include "CoreTools/TextParsing/SimpleCSV/Worksheet.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
-
-using namespace std::literals;
 
 CoreTools::RowDataIteratorTesting::RowDataIteratorTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -44,7 +42,7 @@ void CoreTools::RowDataIteratorTesting::MainTest()
 
 void CoreTools::RowDataIteratorTesting::RowDataIteratorTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
     auto workbook = document->GetWorkbook();
     const auto worksheetNames = workbook.GetWorksheetNames();
@@ -54,9 +52,9 @@ void CoreTools::RowDataIteratorTesting::RowDataIteratorTest()
     auto rows = worksheet.GetRows();
 
     auto row = 1;
-    for (const auto& value : rows)
+    for (const auto& element : rows)
     {
-        auto rowDataRange = value.GetCells();
+        auto rowDataRange = element.GetCells();
 
         auto column = 1;
         for (auto iter = rowDataRange.begin(); iter != rowDataRange.end(); ++iter)
@@ -82,7 +80,7 @@ void CoreTools::RowDataIteratorTesting::RowDataIteratorTest()
 
 void CoreTools::RowDataIteratorTesting::SuffixIteratorTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
     auto workbook = document->GetWorkbook();
     const auto worksheetNames = workbook.GetWorksheetNames();
@@ -92,11 +90,12 @@ void CoreTools::RowDataIteratorTesting::SuffixIteratorTest()
     auto rows = worksheet.GetRows();
 
     auto row = 1;
-    for (const auto& value : rows)
+    for (const auto& element : rows)
     {
-        auto rowDataRange = value.GetCells();
+        auto rowDataRange = element.GetCells();
 
         auto column = 1;
+        /// 测试RowDataIterator operator++(int)
         for (auto iter = rowDataRange.begin(); iter != rowDataRange.end(); iter++)
         {
             ASSERT_FALSE(iter.IsSame(rowDataRange.end()));

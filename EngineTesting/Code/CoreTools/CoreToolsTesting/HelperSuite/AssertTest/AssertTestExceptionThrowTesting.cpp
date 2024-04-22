@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 15:30)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/12 21:31)
 
 #include "AssertTestExceptionThrowTesting.h"
 #include "System/Time/DeltaTime.h"
@@ -40,7 +40,7 @@ void CoreTools::AssertTestExceptionThrowTesting::MainTest()
     ASSERT_THROW_EXCEPTION_0(AssertEqualDoNotUseMessageFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertEnumEqualFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertSignedEnumEqualFailureThrowExceptionTest);
-    ASSERT_THROW_EXCEPTION_0(AssertFloatingPointCompleteEquallFailureThrowExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(AssertFloatingPointCompleteEqualFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertThreeEqualFailureThrowExceptionTest);
 
     ASSERT_THROW_EXCEPTION_0(AssertUnequalFailureThrowExceptionTest);
@@ -136,7 +136,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEnumEqualFailureThrowExce
     constexpr auto lhsExpression = MacroTestEnum::One;
     constexpr auto rhsExpression = MacroTestEnum::Two;
 
-    ASSERT_ENUM_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_ENUM_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
+    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumEqualFailureThrowExceptionTest()
@@ -146,7 +146,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumEqualFailureThr
     constexpr auto lhsExpression = MacroTestSignedEnum::NegativeOne;
     constexpr auto rhsExpression = MacroTestSignedEnum::Zero;
 
-    ASSERT_ENUM_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_SIGNED_ENUM_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
+    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_SIGNED_ENUM_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertThreeEqualFailureThrowExceptionTest()
@@ -160,7 +160,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertThreeEqualFailureThrowExc
     ASSERT_THREE_EQUAL_FAILURE_THROW(lhsExpression, mhsExpression, rhsExpression, "测试ASSERT_THREE_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
-void CoreTools::AssertTestExceptionThrowTesting::AssertFloatingPointCompleteEquallFailureThrowExceptionTest()
+void CoreTools::AssertTestExceptionThrowTesting::AssertFloatingPointCompleteEqualFailureThrowExceptionTest()
 {
     ++failedNumber;
 
@@ -199,7 +199,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEnumUnequalFailureThrowEx
     constexpr auto lhsExpression = MacroTestEnum::One;
     constexpr auto rhsExpression = MacroTestEnum::One;
 
-    ASSERT_ENUM_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_UNENUM_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
+    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_UNENUM_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumUnequalFailureThrowExceptionTest()
@@ -209,7 +209,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumUnequalFailureT
     constexpr auto lhsExpression = MacroTestSignedEnum::NegativeOne;
     constexpr auto rhsExpression = MacroTestSignedEnum::NegativeOne;
 
-    ASSERT_ENUM_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_SIGNED_ENUM_UNEQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
+    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_SIGNED_ENUM_UNEQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertFloatingPointCompleteUnequalFailureThrowExceptionTest()
@@ -277,7 +277,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEnumLessFailureThrowExcep
     constexpr auto lhsExpression = MacroTestEnum::One;
     constexpr auto rhsExpression = MacroTestEnum::One;
 
-    ASSERT_ENUM_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_ENUM_LESS未通过的情况抛出异常。存在一个正常的测试失败！");
+    ASSERT_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_LESS未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumLessFailureThrowExceptionTest()
@@ -287,7 +287,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumLessFailureThro
     constexpr auto lhsExpression = MacroTestSignedEnum::NegativeOne;
     constexpr auto rhsExpression = MacroTestSignedEnum::NegativeOne;
 
-    ASSERT_ENUM_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_SIGNED_ENUM_LESS未通过的情况抛出异常。存在一个正常的测试失败！");
+    ASSERT_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_SIGNED_ENUM_LESS未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertLessEqualFailureThrowExceptionTest()
@@ -307,7 +307,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEnumLessEqualFailureThrow
     constexpr auto lhsExpression = MacroTestEnum::Two;
     constexpr auto rhsExpression = MacroTestEnum::One;
 
-    ASSERT_ENUM_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_ENUM_LESS_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
+    ASSERT_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_LESS_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumLessEqualFailureThrowExceptionTest()
@@ -317,7 +317,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumLessEqualFailur
     constexpr auto lhsExpression = MacroTestSignedEnum::Zero;
     constexpr auto rhsExpression = MacroTestSignedEnum::NegativeOne;
 
-    ASSERT_ENUM_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_SIGNED_ENUM_LESS_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
+    ASSERT_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_SIGNED_ENUM_LESS_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertGreaterFailureThrowExceptionTest()
@@ -337,7 +337,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEnumGreaterFailureThrowEx
     constexpr auto lhsExpression = MacroTestEnum::One;
     constexpr auto rhsExpression = MacroTestEnum::Two;
 
-    ASSERT_ENUM_GREATER_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_ENUM_GREATER未通过的情况抛出异常。存在一个正常的测试失败！");
+    ASSERT_GREATER_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_GREATER未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumGreaterFailureThrowExceptionTest()
@@ -347,7 +347,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumGreaterFailureT
     constexpr auto lhsExpression = MacroTestSignedEnum::NegativeOne;
     constexpr auto rhsExpression = MacroTestSignedEnum::Zero;
 
-    ASSERT_ENUM_GREATER_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_SIGNED_ENUM_GREATER未通过的情况抛出异常。存在一个正常的测试失败！");
+    ASSERT_GREATER_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_SIGNED_ENUM_GREATER未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertGreaterEqualFailureThrowExceptionTest()
@@ -367,7 +367,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEnumGreaterEqualFailureTh
     constexpr auto lhsExpression = MacroTestEnum::One;
     constexpr auto rhsExpression = MacroTestEnum::Two;
 
-    ASSERT_ENUM_GREATER_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_ENUM_GREATER_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
+    ASSERT_GREATER_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_GREATER_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumGreaterEqualFailureThrowExceptionTest()
@@ -377,7 +377,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumGreaterEqualFai
     constexpr auto lhsExpression = MacroTestSignedEnum::NegativeOne;
     constexpr auto rhsExpression = MacroTestSignedEnum::Zero;
 
-    ASSERT_ENUM_GREATER_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_SIGNED_ENUM_GREATER_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
+    ASSERT_GREATER_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_SIGNED_ENUM_GREATER_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertEqualNullptrFailureThrowExceptionTest()

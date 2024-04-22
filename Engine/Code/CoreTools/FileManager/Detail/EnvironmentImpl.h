@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/12 23:06)
+/// 版本：1.0.0.8 (2024/03/30 22:32)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_ENVIRONMENT_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_ENVIRONMENT_IMPL_H
@@ -16,7 +16,6 @@
 #include "CoreTools/FileManager/Environment.h"
 #include "CoreTools/FileManager/FileManagerFwd.h"
 
-#include <map>
 #include <string>
 
 namespace CoreTools
@@ -52,7 +51,7 @@ namespace CoreTools
         using DirectoriesContainer = std::vector<String>;
 
     private:
-        // GetPath*要搜索的目录列表。
+        /// GetPath*要搜索的目录列表。
         DirectoriesContainer directories;
     };
 }

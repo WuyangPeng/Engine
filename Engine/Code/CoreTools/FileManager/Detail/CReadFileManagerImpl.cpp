@@ -5,21 +5,18 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:46)
+/// 版本：1.0.0.8 (2024/04/01 09:44)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CReadFileManagerImpl.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/Helper/Tools.h"
 #include "CoreTools/FileManager/Endian.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using namespace std::literals;
-
 CoreTools::CReadFileManagerImpl::CReadFileManagerImpl(const String& fileName)
-    : ParentType{ fileName, SYSTEM_TEXT("rbS"s) }
+    : ParentType{ fileName, SYSTEM_TEXT("rbS") }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -28,10 +25,7 @@ CoreTools::CReadFileManagerImpl::CReadFileManagerImpl(const String& fileName)
 
 bool CoreTools::CReadFileManagerImpl::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && InterfaceType::IsValid())
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && InterfaceType::IsValid();
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -47,9 +41,6 @@ void CoreTools::CReadFileManagerImpl::Read(size_t itemSize, void* data)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
-    CORE_TOOLS_ASSERTION_0(data != nullptr, "数据无效");
-
     Read(itemSize, 1, data);
 }
 
@@ -57,10 +48,8 @@ void CoreTools::CReadFileManagerImpl::Read(size_t itemSize, size_t itemsNumber, 
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
-    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "数据无效");
-
-    if (const auto readNumber = ReadFromFile(itemSize, itemsNumber, data); readNumber != itemsNumber)
+    if (const auto readNumber = ReadFromFile(itemSize, itemsNumber, data);
+        readNumber != itemsNumber)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("读入文件数据错误！"s))
     }
@@ -75,35 +64,29 @@ void CoreTools::CReadFileManagerImpl::Read(size_t itemSize, size_t itemsNumber, 
 #endif  // SYSTEM_BIG_ENDIAN
 }
 
-size_t CoreTools::CReadFileManagerImpl::WriteToFile(size_t itemSize, size_t itemsNumber, const void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
+size_t CoreTools::CReadFileManagerImpl::WriteToFile(size_t itemSize, size_t itemsNumber, const void* data) noexcept(gAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    System::UnusedFunction(itemSize, itemsNumber, data);
-
-    CORE_TOOLS_ASSERTION_4(false, "CReadFileManageImpl禁止调用WriteToFile！");
+    FunctionProhibitedFromCalling("CReadFileManageImpl禁止调用WriteToFile！", itemSize, itemsNumber, data);
 
     return 0;
 }
 
-bool CoreTools::CReadFileManagerImpl::PutCharacter(int character) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
+bool CoreTools::CReadFileManagerImpl::PutCharacter(int character) noexcept(gAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    System::UnusedFunction(character);
-
-    CORE_TOOLS_ASSERTION_4(false, "CReadFileManageImpl禁止调用PutCharacter！");
+    FunctionProhibitedFromCalling("CReadFileManageImpl禁止调用PutCharacter！", character);
 
     return false;
 }
 
-bool CoreTools::CReadFileManagerImpl::PutString(const std::string& str) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
+bool CoreTools::CReadFileManagerImpl::PutString(const std::string& str) noexcept(gAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    System::UnusedFunction(str);
-
-    CORE_TOOLS_ASSERTION_4(false, "CReadFileManageImpl禁止调用PutString！");
+    FunctionProhibitedFromCalling("CReadFileManageImpl禁止调用PutString！", str);
 
     return false;
 }

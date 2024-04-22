@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:25)
+/// 版本：1.0.0.8 (2024/04/12 14:03)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_TINY_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_TINY_H
@@ -270,9 +270,9 @@ namespace CoreTools
     struct TinyEraseRange<Tiny, 0, 3>
     {
         using ClassType = TinyEraseRange<Tiny, 0, 3>;
-        using FirstTempEraseType = typename boost::mpl::erase<Tiny, TinyIterator<Tiny, TinyTwo>>::type;
-        using SecondTempEraseType = typename boost::mpl::erase<FirstTempEraseType, TinyIterator<FirstTempEraseType, TinyOne>>::type;
-        using type = typename boost::mpl::erase<SecondTempEraseType, TinyIterator<SecondTempEraseType, TinyZero>>::type;
+        using TempEraseType0 = typename boost::mpl::erase<Tiny, TinyIterator<Tiny, TinyTwo>>::type;
+        using TempEraseType1 = typename boost::mpl::erase<TempEraseType0, TinyIterator<TempEraseType0, TinyOne>>::type;
+        using type = typename boost::mpl::erase<TempEraseType1, TinyIterator<TempEraseType1, TinyZero>>::type;
     };
 
     template <typename Tiny>

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:39)
+/// 版本：1.0.0.8 (2024/04/02 22:52)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_HEAD_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_HEAD_IMPL_H
@@ -50,7 +50,6 @@ namespace CoreTools
         NODISCARD CSVFormatType GetCSVFormatType() const noexcept;
         NODISCARD String GetNameSpace() const;
         NODISCARD String GetCSVClassName() const;
-        NODISCARD String GetCompleteClassName() const;
         NODISCARD String GetKey() const;
         NODISCARD KeyName GetKeyName() const;
         NODISCARD int GetCount() const;
@@ -66,8 +65,6 @@ namespace CoreTools
         NODISCARD String GetActualType(int index) const;
         NODISCARD String GetAbbreviation(int index) const;
         NODISCARD String GetValueType(int index) const;
-        NODISCARD String GetActualTypeByNameSpace(int index) const;
-        NODISCARD String GetAbbreviationByNameSpace(int index, const String& className) const;
         NODISCARD int GetDataIndex(const String& field) const;
         NODISCARD int GetDataIndex(const StringView& field) const;
         NODISCARD bool HasDataField(const String& field) const;
@@ -80,6 +77,7 @@ namespace CoreTools
         NODISCARD bool HasDataType(CSVDataType csvDataType) const;
         NODISCARD bool HasVectorArrayDataType() const;
         NODISCARD bool HasArrayDataType() const;
+        NODISCARD bool HasBase() const noexcept;
 
     private:
         using Annotation = std::vector<String>;

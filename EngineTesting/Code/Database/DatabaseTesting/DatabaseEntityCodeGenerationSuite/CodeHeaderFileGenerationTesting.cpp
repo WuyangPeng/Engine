@@ -9,7 +9,7 @@
 
 #include "CodeHeaderFileGenerationTesting.h"
 #include "CoreTools/CharacterString/CodeMappingAnalysis.h"
-#include "CoreTools/FileManager/OFStreamManager.h"
+#include "CoreTools/FileManager/OFileStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
@@ -42,7 +42,7 @@ void Database::CodeHeaderFileGenerationTesting::CodeHeaderFileGenerationTest()
 
     const CodeHeaderFileGeneration codeHeaderFileGeneration{ SYSTEM_TEXT("Resource/DatabaseEntity/DatabaseEntity.txt"), codeEntityAnalysis, codeMappingAnalysis };
 
-    CoreTools::OFStreamManager streamManager{ SYSTEM_TEXT("Resource/DatabaseEntity/DatabaseEntity.h"), false };
+    CoreTools::OFileStreamManager streamManager{ SYSTEM_TEXT("Resource/DatabaseEntity/DatabaseEntity.h"), false };
     streamManager.SetSimplifiedChinese();
 
     streamManager << codeHeaderFileGeneration.GetContent();

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.5 (2024/01/25 09:39)
+/// 版本：1.0.0.8 (2024/04/11 14:45)
 
 #ifndef CORE_TOOLS_DATA_TYPE_THREAD_SAFE_QUEUE_H
 #define CORE_TOOLS_DATA_TYPE_THREAD_SAFE_QUEUE_H

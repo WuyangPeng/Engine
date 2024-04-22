@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:48)
+/// 版本：1.0.0.8 (2024/04/02 17:39)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_DOCUMENT_H
 #define CORE_TOOLS_TEXT_PARSING_DOCUMENT_H
@@ -16,8 +16,8 @@
 #include "CommandQuery/QuerySharedStrings.h"
 #include "CommandQuery/QuerySheetId.h"
 #include "CommandQuery/QuerySheetName.h"
-#include "CommandQuery/QuerySheetRelsId.h"
-#include "CommandQuery/QuerySheetRelsTarget.h"
+#include "CommandQuery/QuerySheetRelationshipId.h"
+#include "CommandQuery/QuerySheetRelationshipTarget.h"
 #include "CommandQuery/QuerySheetType.h"
 #include "CommandQuery/QuerySheetVisibility.h"
 #include "CommandQuery/QueryXmlData.h"
@@ -82,9 +82,9 @@ namespace CoreTools::SimpleCSV
         NODISCARD QuerySheetVisibility ExecuteQuery(const QuerySheetVisibility& query) const;
         NODISCARD QuerySheetType ExecuteQuery(const QuerySheetType& query) const;
         NODISCARD QuerySheetId ExecuteQuery(const QuerySheetId& query) const;
-        NODISCARD QuerySheetRelsId ExecuteQuery(const QuerySheetRelsId& query) const;
-        NODISCARD QuerySheetRelsTarget ExecuteQuery(const QuerySheetRelsTarget& query) const;
-        NODISCARD QuerySharedStrings ExecuteQuery(MAYBE_UNUSED const QuerySharedStrings& query) const;
+        NODISCARD QuerySheetRelationshipId ExecuteQuery(const QuerySheetRelationshipId& query) const;
+        NODISCARD QuerySheetRelationshipTarget ExecuteQuery(const QuerySheetRelationshipTarget& query) const;
+        NODISCARD QuerySharedStrings ExecuteQuery(const QuerySharedStrings& query) const;
         NODISCARD QueryXmlData ExecuteQuery(const QueryXmlData& query) const;
 
     private:

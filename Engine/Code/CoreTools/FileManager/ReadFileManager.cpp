@@ -5,11 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:10)
+/// 版本：1.0.0.8 (2024/04/01 10:52)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ReadFileManager.h"
+#include "Flags/BufferIOFlags.h"
 #include "Detail/FileManagerFactory.h"
 #include "Detail/ReadFileManagerInterface.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -19,7 +20,7 @@
 #include <vector>
 
 CoreTools::ReadFileManager::ReadFileManager(const String& fileName)
-    : impl{ CoreTools::ImplCreateUseFactory::Default, fileName }
+    : impl{ ImplCreateUseFactory::Default, fileName }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -51,8 +52,6 @@ std::string CoreTools::ReadFileManager::LoadStdString()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    constexpr auto alignedLength = 4;
-
     int32_t length{ 0 };
 
     Read(sizeof(int32_t), &length);
@@ -61,6 +60,11 @@ std::string CoreTools::ReadFileManager::LoadStdString()
         return std::string{};
     }
 
+    return LoadStdString(length);
+}
+
+std::string CoreTools::ReadFileManager::LoadStdString(int length)
+{
     auto padding = (length % alignedLength);
     if (0 < padding)
     {
@@ -68,7 +72,7 @@ std::string CoreTools::ReadFileManager::LoadStdString()
     }
 
     const auto numBytes = length + padding;
-    std::vector<char> text(numBytes);
+    StdStringBufferType text(numBytes);
     Read(sizeof(char), numBytes, text.data());
 
     return std::string{ text.data(), boost::numeric_cast<size_t>(length) };

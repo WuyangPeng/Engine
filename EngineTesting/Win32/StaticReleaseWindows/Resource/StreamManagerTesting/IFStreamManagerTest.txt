@@ -1,1 +1,0 @@
-IFStreamManagerTest test text

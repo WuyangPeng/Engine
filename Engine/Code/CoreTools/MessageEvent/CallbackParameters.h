@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:48)
+/// 版本：1.0.0.8 (2024/04/12 15:23)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_CALLBACK_PARAMETERS_H
 #define CORE_TOOLS_MESSAGE_EVENT_CALLBACK_PARAMETERS_H
@@ -66,11 +66,11 @@ namespace CoreTools
         NODISCARD String GetTStringValue(int index) const;
         NODISCARD ConstParametersInterfaceSharedPtr GetParametersInterfaceValue(int index) const;
 
-        // 向下转型，必须保证转型成功。
+        /// 向下转型，必须保证转型成功。
         template <typename ConstSubclass>
         NODISCARD std::shared_ptr<const ConstSubclass> GetParametersInterfacePolymorphicDowncast(int index) const;
 
-        // 向下转型，失败抛出异常。
+        /// 向下转型，失败抛出异常。
         template <typename ConstSubclass>
         NODISCARD std::shared_ptr<const ConstSubclass> GetParametersInterfacePolymorphicCast(int index) const;
 

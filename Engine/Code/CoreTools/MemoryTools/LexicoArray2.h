@@ -5,34 +5,38 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.5 (2024/01/22 15:12)
+/// 版本：1.0.0.8 (2024/04/11 15:49)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_LEXICO_ARRAY2_H
 #define CORE_TOOLS_MEMORY_TOOLS_LEXICO_ARRAY2_H
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "CoreTools/Base/SpanIterator.h"
+
 #include <vector>
 
 namespace CoreTools
 {
     /// 一个模板类，用于提供符合行主序（RowMajor = true）或列主序（RowMajor = false）的二维数组访问。
-    template <bool RowMajor, typename Real, int... Dimensions>
+    template <bool RowMajor, typename Iter, int... Dimensions>
     class LexicoArray2
     {
     };
 
-    // 数组维度只有在运行时才知道。
-    template <typename Real>
-    class LexicoArray2<true, Real>
+    /// 数组维度只有在运行时才知道。
+    template <typename Iter>
+    class LexicoArray2<true, Iter>
     {
     public:
-        using ClassType = LexicoArray2<true, Real>;
+        using ClassType = LexicoArray2<true, Iter>;
 
-        using Container = std::vector<Real>;
+        using SpanIterator = SpanIterator<Iter>;
+        using Real = typename SpanIterator::ValueType;
 
     public:
-        LexicoArray2(int numRows, int numColumns, Container& matrix) noexcept;
+        LexicoArray2(int numRows, int numColumns, const SpanIterator& matrix) noexcept;
+        LexicoArray2(int numRows, int numColumns, const Iter& begin, const Iter& end) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -41,22 +45,29 @@ namespace CoreTools
         NODISCARD Real& operator()(int row, int column);
         NODISCARD const Real& operator()(int row, int column) const;
 
+        template <typename Container>
+        NODISCARD Container GetContainer() const;
+
+        void FillZero();
+
     private:
         int numRows;
         int numColumns;
-        Container& matrix;
+        SpanIterator matrix;
     };
 
-    template <typename Real>
-    class LexicoArray2<false, Real>
+    template <typename Iter>
+    class LexicoArray2<false, Iter>
     {
     public:
-        using ClassType = LexicoArray2<false, Real>;
+        using ClassType = LexicoArray2<false, Iter>;
 
-        using Container = std::vector<Real>;
+        using SpanIterator = SpanIterator<Iter>;
+        using Real = typename SpanIterator::ValueType;
 
     public:
-        LexicoArray2(int numRows, int numColumns, Container& matrix) noexcept;
+        LexicoArray2(int numRows, int numColumns, const SpanIterator& matrix) noexcept;
+        LexicoArray2(int numRows, int numColumns, const Iter& begin, const Iter& end) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -65,23 +76,30 @@ namespace CoreTools
         NODISCARD Real& operator()(int row, int column);
         NODISCARD const Real& operator()(int row, int column) const;
 
+        template <typename Container>
+        NODISCARD Container GetContainer() const;
+
+        void FillZero();
+
     private:
         int numRows;
         int numColumns;
-        Container& matrix;
+        SpanIterator matrix;
     };
 
-    // 数组维度在编译时是已知的。
-    template <typename Real, int NumRows, int NumColumns>
-    class LexicoArray2<true, Real, NumRows, NumColumns>
+    /// 数组维度在编译时是已知的。
+    template <typename Iter, int NumRows, int NumColumns>
+    class LexicoArray2<true, Iter, NumRows, NumColumns>
     {
     public:
-        using ClassType = LexicoArray2<true, Real, NumRows, NumColumns>;
+        using ClassType = LexicoArray2<true, Iter, NumRows, NumColumns>;
 
-        using Container = std::vector<Real>;
+        using SpanIterator = SpanIterator<Iter>;
+        using Real = typename SpanIterator::ValueType;
 
     public:
-        explicit LexicoArray2(Container& matrix) noexcept;
+        explicit LexicoArray2(const SpanIterator& matrix) noexcept;
+        LexicoArray2(const Iter& begin, const Iter& end) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -90,20 +108,27 @@ namespace CoreTools
         NODISCARD Real& operator()(int row, int column);
         NODISCARD const Real& operator()(int row, int column) const;
 
+        template <typename Container>
+        NODISCARD Container GetContainer() const;
+
+        void FillZero();
+
     private:
-        Container& matrix;
+        SpanIterator matrix;
     };
 
-    template <typename Real, int NumRows, int NumColumns>
-    class LexicoArray2<false, Real, NumRows, NumColumns>
+    template <typename Iter, int NumRows, int NumColumns>
+    class LexicoArray2<false, Iter, NumRows, NumColumns>
     {
     public:
-        using ClassType = LexicoArray2<false, Real, NumRows, NumColumns>;
+        using ClassType = LexicoArray2<false, Iter, NumRows, NumColumns>;
 
-        using Container = std::vector<Real>;
+        using SpanIterator = SpanIterator<Iter>;
+        using Real = typename SpanIterator::ValueType;
 
     public:
-        explicit LexicoArray2(Container& matrix) noexcept;
+        explicit LexicoArray2(const SpanIterator& matrix) noexcept;
+        LexicoArray2(const Iter& begin, const Iter& end) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -112,8 +137,13 @@ namespace CoreTools
         NODISCARD Real& operator()(int row, int column);
         NODISCARD const Real& operator()(int row, int column) const;
 
+        template <typename Container>
+        NODISCARD Container GetContainer() const;
+
+        void FillZero();
+
     private:
-        Container& matrix;
+        SpanIterator matrix;
     };
 }
 

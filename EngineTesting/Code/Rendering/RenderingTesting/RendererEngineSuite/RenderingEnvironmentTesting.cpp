@@ -70,7 +70,7 @@ void Rendering::RenderingEnvironmentTesting::ParameterTest()
 
     ASSERT_EQUAL(renderingEnvironment.GetHeight(), 768);
     ASSERT_EQUAL(renderingEnvironment.GetWidth(), 1024);
-    ASSERT_ENUM_EQUAL(renderingEnvironment.GetColorFormat(), DataFormatType::R32G32B32A32Float);
-    ASSERT_ENUM_EQUAL(renderingEnvironment.GetDepthStencilFormat(), DataFormatType::D24UNormS8UInt);
+    ASSERT_EQUAL(renderingEnvironment.GetColorFormat(), DataFormatType::R32G32B32A32Float);
+    ASSERT_EQUAL(renderingEnvironment.GetDepthStencilFormat(), DataFormatType::D24UNormS8UInt);
     ASSERT_EQUAL(renderingEnvironment.GetNumMultiSamples(), 1);
 }

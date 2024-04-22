@@ -129,7 +129,7 @@ const AssistTools::GameParameterAnalysisImpl::GameParameterContainer& AssistTool
                                                           GameParameter{ GameParameterType::ProjectAbbreviation },
                                                           GameParameter{ GameParameterType::EndYear, std::to_string(CoreTools::Year::GetCurrentYear()) },
                                                           GameParameter{ GameParameterType::Version, CoreTools::Version::GetVersion() },
-                                                          GameParameter{ GameParameterType::VersionNum, std::to_string(CoreTools::Version::GetTCREFullVersion()) },
+                                                          GameParameter{ GameParameterType::VersionNum, std::to_string(CoreTools::Version::GetTcreFullVersion()) },
                                                           GameParameter{ GameParameterType::TestingName } };
 
     return gameParameterContainer;

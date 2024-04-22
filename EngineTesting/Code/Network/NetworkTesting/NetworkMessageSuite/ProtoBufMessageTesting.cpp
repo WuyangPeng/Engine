@@ -160,5 +160,5 @@ void Network::ProtoBufMessageTesting::MessageTest()
 
     ASSERT_TRUE(playerResponse->IsExactlyTypeOf(playerResponse));
 
-    ASSERT_ENUM_EQUAL(playerResponse->GetMessageHeadStrategy(), MessageHeadStrategy::UseProtoBuf | MessageHeadStrategy::UseSubId);
+    ASSERT_EQUAL(playerResponse->GetMessageHeadStrategy(), MessageHeadStrategy::UseProtoBuf | MessageHeadStrategy::UseSubId);
 }

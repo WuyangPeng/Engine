@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:48)
+/// 版本：1.0.0.8 (2024/04/12 15:25)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_MESSAGE_TELEGRAM_MANAGER_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_MESSAGE_TELEGRAM_MANAGER_DETAIL_H
@@ -126,7 +126,8 @@ void CoreTools::TelegramMessageManager<EventType>::DispatchDelayEvent(int64_t cu
 template <typename EventType>
 void CoreTools::TelegramMessageManager<EventType>::DisposeEvent(const Telegram& telegram)
 {
-    for (auto receiver = telegram.GetReceiver(); auto id : receiver)
+    for (auto receiver = telegram.GetReceiver();
+         auto id : receiver)
     {
         EXCEPTION_TRY
         {
@@ -166,7 +167,8 @@ void CoreTools::TelegramMessageManager<EventType>::DisposeEvent(int64_t entityId
 {
     const auto entity = ENTITY_MANAGER_SINGLETON.GetEntity(entityId);
 
-    if (auto eventEntity = boost::polymorphic_pointer_downcast<EventEntity>(entity); !eventEntity->EventFunction(telegram))
+    if (auto eventEntity = boost::polymorphic_pointer_downcast<EventEntity>(entity);
+        !eventEntity->EventFunction(telegram))
     {
         LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("EventFunction 失败"));
     }

@@ -80,7 +80,7 @@ void Rendering::GraphicsObjectTestingBase::CloneObjectTrueTest(GraphicsObjectTyp
     const auto clone = boost::polymorphic_pointer_cast<TestingType>(testingType->CloneObject());
 
     ASSERT_EQUAL(testingType->GetName(), clone->GetName());
-    ASSERT_ENUM_EQUAL(testingType->GetType(), clone->GetType());
+    ASSERT_EQUAL(testingType->GetType(), clone->GetType());
 }
 
 template <typename TestingType>
@@ -143,7 +143,7 @@ void Rendering::GraphicsObjectTestingBase::GetObjectByNameTest(const TestingType
     const auto object = boost::polymorphic_pointer_cast<TestingType>(clone->GetObjectByName(name));
 
     ASSERT_EQUAL(testingType.GetName(), object->GetName());
-    ASSERT_ENUM_EQUAL(testingType.GetType(), object->GetType());
+    ASSERT_EQUAL(testingType.GetType(), object->GetType());
 }
 
 template <typename TestingType>
@@ -153,7 +153,7 @@ void Rendering::GraphicsObjectTestingBase::GetConstObjectByNameTest(const Testin
     const auto constObject = boost::polymorphic_pointer_cast<const TestingType>(clone->GetConstObjectByName(name));
 
     ASSERT_EQUAL(testingType.GetName(), constObject->GetName());
-    ASSERT_ENUM_EQUAL(testingType.GetType(), constObject->GetType());
+    ASSERT_EQUAL(testingType.GetType(), constObject->GetType());
 }
 
 template <typename TestingType>
@@ -167,7 +167,7 @@ void Rendering::GraphicsObjectTestingBase::GetAllObjectsByNameTest(const Testing
     const auto object = boost::polymorphic_pointer_cast<TestingType>(allObject.at(0));
 
     ASSERT_EQUAL(testingType.GetName(), object->GetName());
-    ASSERT_ENUM_EQUAL(testingType.GetType(), object->GetType());
+    ASSERT_EQUAL(testingType.GetType(), object->GetType());
 }
 
 template <typename TestingType>
@@ -181,7 +181,7 @@ void Rendering::GraphicsObjectTestingBase::GetAllConstObjectsByNameTest(const Te
     const auto constObject = boost::polymorphic_pointer_cast<const TestingType>(allConstObject.at(0));
 
     ASSERT_EQUAL(testingType.GetName(), constObject->GetName());
-    ASSERT_ENUM_EQUAL(testingType.GetType(), constObject->GetType());
+    ASSERT_EQUAL(testingType.GetType(), constObject->GetType());
 }
 
 template <typename TestingType>

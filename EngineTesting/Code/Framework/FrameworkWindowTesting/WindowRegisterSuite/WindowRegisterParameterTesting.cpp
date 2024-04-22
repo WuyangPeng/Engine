@@ -47,7 +47,7 @@ void Framework::WindowRegisterParameterTesting::DefaultTest()
     const WindowRegisterParameter parameter{ instance };
 
     ASSERT_EQUAL(parameter.GetHInstance(), instance);
-    ASSERT_ENUM_EQUAL(parameter.GetStyle(), System::WindowsClassStyle::CommonUse);
+    ASSERT_EQUAL(parameter.GetStyle(), System::WindowsClassStyle::CommonUse);
     ASSERT_EQUAL(parameter.GetWindowClassExtra(), 0);
     ASSERT_EQUAL(parameter.GetWindowExtra(), 0);
 }
@@ -61,7 +61,7 @@ void Framework::WindowRegisterParameterTesting::FullyTest()
     const WindowRegisterParameter parameter{ instance, styles, windowClassExtra, windowExtra };
 
     ASSERT_EQUAL(parameter.GetHInstance(), instance);
-    ASSERT_ENUM_EQUAL(parameter.GetStyle(), styles);
+    ASSERT_EQUAL(parameter.GetStyle(), styles);
     ASSERT_EQUAL(parameter.GetWindowClassExtra(), windowClassExtra);
     ASSERT_EQUAL(parameter.GetWindowExtra(), windowExtra);
 }

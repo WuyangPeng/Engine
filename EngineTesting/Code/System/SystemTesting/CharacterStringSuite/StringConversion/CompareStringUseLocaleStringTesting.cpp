@@ -101,7 +101,7 @@ void System::CompareStringUseLocaleStringTesting::CompareStringTest(size_t index
 void System::CompareStringUseLocaleStringTesting::CompareStringEqualTest(const wchar_t* languageLocaleString, Compares compare, const std::wstring& comparesWString)
 {
     const auto result = CompareStringUseLocale(languageLocaleString, compare, comparesWString, comparesWString);
-    ASSERT_ENUM_EQUAL(result, ComparesStringReturn::Equal);
+    ASSERT_EQUAL(result, ComparesStringReturn::Equal);
 }
 
 void System::CompareStringUseLocaleStringTesting::CompareStringOppositeTest(const wchar_t* languageLocaleString, Compares compare, const std::wstring& lhsComparesWString, const std::wstring& rhsComparesWString)

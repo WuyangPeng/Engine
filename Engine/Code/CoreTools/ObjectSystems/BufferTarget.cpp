@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:58)
+/// 版本：1.0.0.8 (2024/04/11 22:22)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -50,7 +50,7 @@ void CoreTools::BufferTarget::Write(const std::string& datum)
     {
         Write(sizeof(char), length, datum.c_str());
 
-        // 字符串被写入为4字节的倍数。
+        /// 字符串被写入为4字节的倍数。
         constexpr std::array<char, gDefaultSize> zero{};
 
         if (auto padding = length % gDefaultSize; 0 < padding)

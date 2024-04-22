@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:12)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 16:47)
 
 #include "ContentItemTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -20,7 +20,6 @@
 #include "Mathematics/Base/MathDetail.h"
 
 using System::operator++;
-using namespace std::literals;
 
 CoreTools::ContentItemTesting::ContentItemTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -43,68 +42,69 @@ void CoreTools::ContentItemTesting::MainTest()
 
 void CoreTools::ContentItemTesting::ContentItemTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
     const auto data = make_shared<SimpleCSV::XmlData>(document, "[Content_Types].xml");
 
     for (const SimpleCSV::ContentTypes contentTypes{ data };
          const auto& item : contentTypes.GetContentItems())
     {
-        switch (const auto type = item.GetType(); type)
+        switch (const auto type = item.GetType();
+                type)
         {
             case SimpleCSV::ContentType::Workbook:
             {
                 auto path = item.GetPath();
-                ASSERT_UNEQUAL(path.find("workbook"s), std::string::npos);
-                ASSERT_UNEQUAL(path.find("xml"s), std::string::npos);
+                ASSERT_UNEQUAL(path.find("workbook"), std::string::npos);
+                ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
             }
             break;
             case SimpleCSV::ContentType::Worksheet:
             {
                 auto path = item.GetPath();
-                ASSERT_UNEQUAL(path.find("sheet"s), std::string::npos);
-                ASSERT_UNEQUAL(path.find("xml"s), std::string::npos);
+                ASSERT_UNEQUAL(path.find("sheet"), std::string::npos);
+                ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
             }
             break;
             case SimpleCSV::ContentType::Theme:
             {
                 auto path = item.GetPath();
-                ASSERT_UNEQUAL(path.find("theme"s), std::string::npos);
-                ASSERT_UNEQUAL(path.find("xml"s), std::string::npos);
+                ASSERT_UNEQUAL(path.find("theme"), std::string::npos);
+                ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
             }
             break;
             case SimpleCSV::ContentType::Styles:
             {
                 auto path = item.GetPath();
-                ASSERT_UNEQUAL(path.find("styles"s), std::string::npos);
-                ASSERT_UNEQUAL(path.find("xml"s), std::string::npos);
+                ASSERT_UNEQUAL(path.find("styles"), std::string::npos);
+                ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
             }
             break;
             case SimpleCSV::ContentType::SharedStrings:
             {
                 auto path = item.GetPath();
-                ASSERT_UNEQUAL(path.find("sharedStrings"s), std::string::npos);
-                ASSERT_UNEQUAL(path.find("xml"s), std::string::npos);
+                ASSERT_UNEQUAL(path.find("sharedStrings"), std::string::npos);
+                ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
             }
             break;
             case SimpleCSV::ContentType::CoreProperties:
             {
                 auto path = item.GetPath();
-                ASSERT_UNEQUAL(path.find("core"s), std::string::npos);
-                ASSERT_UNEQUAL(path.find("xml"s), std::string::npos);
+                ASSERT_UNEQUAL(path.find("core"), std::string::npos);
+                ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
             }
             break;
             case SimpleCSV::ContentType::ExtendedProperties:
             {
                 auto path = item.GetPath();
-                ASSERT_UNEQUAL(path.find("app"s), std::string::npos);
-                ASSERT_UNEQUAL(path.find("xml"s), std::string::npos);
+                ASSERT_UNEQUAL(path.find("app"), std::string::npos);
+                ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
             }
             break;
             case SimpleCSV::ContentType::CustomProperties:
             {
                 auto path = item.GetPath();
-                ASSERT_UNEQUAL(path.find("custom"s), std::string::npos);
-                ASSERT_UNEQUAL(path.find("xml"s), std::string::npos);
+                ASSERT_UNEQUAL(path.find("custom"), std::string::npos);
+                ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
             }
             break;
             default:
@@ -115,8 +115,8 @@ void CoreTools::ContentItemTesting::ContentItemTest()
 
 void CoreTools::ContentItemTesting::TypeStringTest()
 {
-    for (auto contentType = SimpleCSV::ContentType::Workbook; contentType <= SimpleCSV::ContentType::VMLDrawing; ++contentType)
+    for (auto contentType = SimpleCSV::ContentType::Workbook; contentType <= SimpleCSV::ContentType::VmlDrawing; ++contentType)
     {
-        ASSERT_ENUM_EQUAL(SimpleCSV::ContentItem::GetTypeFromString(SimpleCSV::ContentItem::GetStringFromType(contentType)), contentType);
+        ASSERT_EQUAL(SimpleCSV::ContentItem::GetTypeFromString(SimpleCSV::ContentItem::GetStringFromType(contentType)), contentType);
     }
 }

@@ -179,7 +179,12 @@
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CodeInput" /F /Y
-xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y</Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CodeInput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CodeInput/" /F /Y
+xcopy "$(ProjectDir)/Resource/Input/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/Input/" /F /Y
+xcopy "$(ProjectDir)/Resource/CodeOutput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CodeOutput/" /F /Y
+xcopy "$(ProjectDir)/Resource/CsvOutput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CsvOutput/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
@@ -194,7 +199,12 @@ xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CodeInput" /F /Y
-xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y</Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CodeInput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CodeInput/" /F /Y
+xcopy "$(ProjectDir)/Resource/Input/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/Input/" /F /Y
+xcopy "$(ProjectDir)/Resource/CodeOutput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CodeOutput/" /F /Y
+xcopy "$(ProjectDir)/Resource/CsvOutput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CsvOutput/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -216,7 +226,12 @@ xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CodeInput" /F /Y
-xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y</Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CodeInput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CodeInput/" /F /Y
+xcopy "$(ProjectDir)/Resource/Input/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/Input/" /F /Y
+xcopy "$(ProjectDir)/Resource/CodeOutput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CodeOutput/" /F /Y
+xcopy "$(ProjectDir)/Resource/CsvOutput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CsvOutput/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
@@ -235,7 +250,12 @@ xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CodeInput" /F /Y
-xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y</Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CodeInput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CodeInput/" /F /Y
+xcopy "$(ProjectDir)/Resource/Input/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/Input/" /F /Y
+xcopy "$(ProjectDir)/Resource/CodeOutput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CodeOutput/" /F /Y
+xcopy "$(ProjectDir)/Resource/CsvOutput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CsvOutput/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -253,7 +273,12 @@ xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CodeInput" /F /Y
-xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y</Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CodeInput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CodeInput/" /F /Y
+xcopy "$(ProjectDir)/Resource/Input/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/Input/" /F /Y
+xcopy "$(ProjectDir)/Resource/CodeOutput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CodeOutput/" /F /Y
+xcopy "$(ProjectDir)/Resource/CsvOutput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CsvOutput/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -268,7 +293,12 @@ xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CodeInput" /F /Y
-xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y</Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CodeInput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CodeInput/" /F /Y
+xcopy "$(ProjectDir)/Resource/Input/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/Input/" /F /Y
+xcopy "$(ProjectDir)/Resource/CodeOutput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CodeOutput/" /F /Y
+xcopy "$(ProjectDir)/Resource/CsvOutput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CsvOutput/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -290,7 +320,12 @@ xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CodeInput" /F /Y
-xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y</Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CodeInput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CodeInput/" /F /Y
+xcopy "$(ProjectDir)/Resource/Input/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/Input/" /F /Y
+xcopy "$(ProjectDir)/Resource/CodeOutput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CodeOutput/" /F /Y
+xcopy "$(ProjectDir)/Resource/CsvOutput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CsvOutput/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
@@ -309,7 +344,12 @@ xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.json" "$(ProjectDir)/Resource/CodeInput" /F /Y
-xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y</Command>
+xcopy "$(EngineInclude)/CoreTools/TextParsing/CSV/*.txt" "$(ProjectDir)/Resource/CodeInput" /F /Y
+xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CodeInput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CodeInput/" /F /Y
+xcopy "$(ProjectDir)/Resource/Input/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/Input/" /F /Y
+xcopy "$(ProjectDir)/Resource/CodeOutput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CodeOutput/" /F /Y
+xcopy "$(ProjectDir)/Resource/CsvOutput/*.*" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/Resource/CsvOutput/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

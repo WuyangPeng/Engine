@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:27)
+/// 版本：1.0.0.8 (2024/04/02 13:19)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_ROW_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_ROW_H
@@ -76,14 +76,17 @@ namespace CoreTools
         NODISCARD IntVector3Container GetIntVector3Array(const String& field) const;
         NODISCARD IntVector4Container GetIntVector4Array(const String& field) const;
 
-        // StringCastEnum需要特化，这里没有提供定义。
+        /// StringCastEnum需要特化，这里没有提供定义。
         template <typename E>
+        requires(std::is_enum_v<E>)
         NODISCARD E StringCastEnum(const String& describe) const;
 
         template <typename E>
+        requires(std::is_enum_v<E>)
         NODISCARD E GetEnum(const String& field) const;
 
         template <typename E>
+        requires(std::is_enum_v<E>)
         NODISCARD std::vector<E> GetEnumArray(const String& field) const;
 
     private:

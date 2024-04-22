@@ -5,10 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:55)
+/// 版本：1.0.0.8 (2024/04/11 22:11)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_CONST_WEAK_OBJECT_ASSOCIATED_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_CONST_WEAK_OBJECT_ASSOCIATED_H
+
+#include "CoreTools/CoreToolsDll.h"
 
 #include "ObjectInterface.h"
 #include "ObjectType.h"
@@ -16,10 +18,9 @@
 namespace CoreTools
 {
     template <typename T>
+    requires(std::is_base_of_v<ObjectInterface, T>)
     struct ConstWeakObjectAssociated final
     {
-        static_assert(std::is_base_of_v<ObjectInterface, T>, "T is not base of ObjectInterface");
-
         using ClassType = ConstWeakObjectAssociated<T>;
         using ObjectType = T;
         using ConstObjectWeakPtr = std::weak_ptr<const T>;

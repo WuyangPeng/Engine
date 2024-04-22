@@ -10,8 +10,6 @@
 #ifndef MATHEMATICS_CONTAINMENT_H
 #define MATHEMATICS_CONTAINMENT_H
 
-#include "ScribeCircle2CircumscribeDetail.h"
-#include "ScribeCircle2InscribeDetail.h"
 #include "ContBox2Detail.h"
 #include "ContBox3Detail.h"
 #include "ContCapsule3Detail.h"
@@ -21,15 +19,18 @@
 #include "ContEllipsoid3Detail.h"
 #include "ContEllipsoid3MinCRDetail.h"
 #include "ContLozenge3Detail.h"
-#include "ContMinCircle2Detail.h"
-#include "ContMinSphere3Detail.h"
-#include "ContPointInPolygon2Detail.h"
-#include "ContScribeCircle3Sphere3Detail.h"
-#include "ContSphere3Detail.h"
 #include "ContMinBox2Detail.h"
 #include "ContMinBox3Detail.h"
+#include "ContMinCircle2Detail.h"
+#include "ContMinSphere3Detail.h"
+#include "ContOrientedBox2Detail.h"
+#include "ContPointInPolygon2Detail.h"
+#include "ContPointInPolyhedron3Detail.h"
+#include "ContScribeCircle3Sphere3Detail.h"
 #include "ContSeparatePoints2Detail.h"
 #include "ContSeparatePoints3Detail.h"
-#include "ContPointInPolyhedron3Detail.h"
+#include "ContSphere3Detail.h"
+#include "ScribeCircle2CircumscribeDetail.h"
+#include "ScribeCircle2InscribeDetail.h"
 
-#endif // MATHEMATICS_CONTAINMENT_H
+#endif  // MATHEMATICS_CONTAINMENT_H

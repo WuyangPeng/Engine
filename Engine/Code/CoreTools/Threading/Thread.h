@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:11)
+/// 版本：1.0.0.8 (2024/03/30 18:03)
 
 #ifndef CORE_TOOLS_THREADING_THREAD_H
 #define CORE_TOOLS_THREADING_THREAD_H
@@ -32,7 +32,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        // 启动和停止线程。
+        /// 启动和停止线程。
         void Resume();
         void Suspend();
 

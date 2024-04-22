@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:19)
+/// 版本：1.0.0.8 (2024/04/11 22:30)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -58,12 +58,12 @@ int64_t CoreTools::DeltaTimeManager::GetNowTimeInMicroseconds() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return impl->GetNowTimeInMicroseconds();
+    return ImplType::GetNowTimeInMicroseconds();
 }
 
 int64_t CoreTools::DeltaTimeManager::GetNowTimeInSeconds() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return impl->GetNowTimeInSeconds();
+    return ImplType::GetNowTimeInSeconds();
 }

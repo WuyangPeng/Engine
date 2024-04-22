@@ -39,11 +39,11 @@ void System::SleepTesting::SleepTest()
 
     GetStream() << "µÈ´ý5ÃëÖÓ¡£\n";
 
-    ASSERT_ENUM_EQUAL(SystemSleep(sleepTime, true), SleepReturn::Succeed);
+    ASSERT_EQUAL(SystemSleep(sleepTime, true), SleepReturn::Succeed);
 
     GetStream() << "µÈ´ý5ÃëÖÓ¡£\n";
 
-    ASSERT_ENUM_EQUAL(SystemSleep(sleepTime, false), SleepReturn::Succeed);
+    ASSERT_EQUAL(SystemSleep(sleepTime, false), SleepReturn::Succeed);
 
     GetStream() << "µÈ´ý5ÃëÖÓ¡£\n";
 

@@ -69,10 +69,10 @@ void Rendering::AmbientLightEffect::UpdateMaterialConstant()
     auto data = materialConstant->GetStorage();
 
     const auto emissive = material->GetEmissive();
-    const auto step = data.SetValue(0, emissive.GetPoint());
+    data.SetValue(0, emissive.GetPoint());
 
     const auto ambient = material->GetAmbient();
-    data.SetValue(step, ambient.GetPoint());
+    data.SetValue(boost::numeric_cast<int>(emissive.GetPoint().size()) * boost::numeric_cast<int>(sizeof(Colour::ArrayType::value_type)), ambient.GetPoint());
 
     ParentType::UpdateMaterialConstant();
 }

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:41)
+/// 版本：1.0.0.8 (2024/03/30 22:50)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_WRITE_FILE_MANAGER_INTERFACE_H
 #define CORE_TOOLS_FILE_MANAGER_WRITE_FILE_MANAGER_INTERFACE_H
@@ -29,6 +29,8 @@ namespace CoreTools
         using WriteFileManagerSharedPtr = std::shared_ptr<WriteFileManagerInterface>;
 
     public:
+        NODISCARD static WriteFileManagerSharedPtr Create(const String& fileName, bool addition);
+
         WriteFileManagerInterface() = default;
         virtual ~WriteFileManagerInterface() noexcept = default;
 
@@ -43,9 +45,6 @@ namespace CoreTools
 
         virtual void Write(size_t itemSize, const void* data) = 0;
         virtual void Write(size_t itemSize, size_t itemsNumber, const void* data) = 0;
-
-    public:
-        NODISCARD static WriteFileManagerSharedPtr Create(const String& fileName, bool addition);
     };
 }
 

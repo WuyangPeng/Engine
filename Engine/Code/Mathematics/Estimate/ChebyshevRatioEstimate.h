@@ -12,6 +12,10 @@
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "Mathematics/Base/MathDetail.h"
+
+#include <array>
+
 /// 对于[0,1]中的t和[0,pi/2]中的A，Chebyshev比为f(t,A) = sin(t*A)/sin(A)。
 /// 设x = cos(A) ， y = 1 - cos(A)，都在[0,1]中。作为y的函数， f(t,y)的级数表示为
 /// f(t,y) = sum_{i=0}^{infinity} c_{i}(t) y^{i}，
@@ -63,13 +67,13 @@ namespace Mathematics
     template <typename T, int Degree>
     NODISCARD constexpr T GetChebyshevRatioACoefficient(int i)
     {
-        return (Degree != (i + 1) ? Math<T>::GetValue(1) : static_cast<T>(chebyshevRatioEstimateU[i])) / (static_cast<T>(i + 1) * static_cast<T>(2 * (i + 1) + 1));
+        return (Degree != (i + 1) ? Math<T>::GetValue(1) : static_cast<T>(chebyshevRatioEstimateU.at(i))) / (static_cast<T>(i + 1) * static_cast<T>(2 * (i + 1) + 1));
     }
 
     template <typename T, int Degree>
     NODISCARD constexpr T GetChebyshevRatioBCoefficient(int i)
     {
-        return (Degree != (i + 1) ? Math<T>::GetValue(1) : static_cast<T>(chebyshevRatioEstimateU[i])) * static_cast<T>(i + 1) / static_cast<T>(2 * (i + 1) + 1);
+        return (Degree != (i + 1) ? Math<T>::GetValue(1) : static_cast<T>(chebyshevRatioEstimateU.at(i))) * static_cast<T>(i + 1) / static_cast<T>(2 * (i + 1) + 1);
     }
 
     // ChebyshevRatio<T>::DegreeReal的常数。

@@ -70,7 +70,7 @@ void Mathematics::Query3FilteredTesting::VerticesTest()
 
         Query3FilteredD query(vertices, 0.0);
 
-        ASSERT_ENUM_EQUAL(query.GetType(), QueryType::Filtered);
+        ASSERT_EQUAL(query.GetType(), QueryType::Filtered);
         ASSERT_EQUAL(query.GetNumVertices(), size);
 
         for (auto m = 0; m < size; ++m)
@@ -110,9 +110,9 @@ void Mathematics::Query3FilteredTesting::PlaneTest()
 
         Query3FilteredD firstQuery(firstVertices, 0.0);
 
-        ASSERT_ENUM_EQUAL(firstQuery.ToPlane(secondIndex, secondIndex, thirdIndex, fourthIndex), PlaneQueryType::OnPlane);
-        ASSERT_ENUM_EQUAL(firstQuery.ToPlane(thirdIndex, secondIndex, thirdIndex, fourthIndex), PlaneQueryType::OnPlane);
-        ASSERT_ENUM_EQUAL(firstQuery.ToPlane(fourthIndex, secondIndex, thirdIndex, fourthIndex), PlaneQueryType::OnPlane);
+        ASSERT_EQUAL(firstQuery.ToPlane(secondIndex, secondIndex, thirdIndex, fourthIndex), PlaneQueryType::OnPlane);
+        ASSERT_EQUAL(firstQuery.ToPlane(thirdIndex, secondIndex, thirdIndex, fourthIndex), PlaneQueryType::OnPlane);
+        ASSERT_EQUAL(firstQuery.ToPlane(fourthIndex, secondIndex, thirdIndex, fourthIndex), PlaneQueryType::OnPlane);
 
         if (firstIndex != secondIndex && secondIndex != thirdIndex && firstIndex != thirdIndex && thirdIndex != fourthIndex && secondIndex != fourthIndex && firstIndex != fourthIndex)
         {
@@ -127,22 +127,22 @@ void Mathematics::Query3FilteredTesting::PlaneTest()
 
             if (0.0 < det)
             {
-                ASSERT_ENUM_EQUAL(firstQuery.ToPlane(vector0, secondIndex, thirdIndex, fourthIndex), PlaneQueryType::PositiveSide);
+                ASSERT_EQUAL(firstQuery.ToPlane(vector0, secondIndex, thirdIndex, fourthIndex), PlaneQueryType::PositiveSide);
             }
             else if (det < 0.0)
             {
-                ASSERT_ENUM_EQUAL(firstQuery.ToPlane(vector0, secondIndex, thirdIndex, fourthIndex), PlaneQueryType::NegativeSide);
+                ASSERT_EQUAL(firstQuery.ToPlane(vector0, secondIndex, thirdIndex, fourthIndex), PlaneQueryType::NegativeSide);
             }
             else
             {
-                ASSERT_ENUM_EQUAL(firstQuery.ToPlane(vector0, secondIndex, thirdIndex, fourthIndex), PlaneQueryType::OnPlane);
+                ASSERT_EQUAL(firstQuery.ToPlane(vector0, secondIndex, thirdIndex, fourthIndex), PlaneQueryType::OnPlane);
             }
         }
 
         Query3FilteredD secondQuery(secondVertices, 1.0);
         Query3RationalD thirdQuery(secondVertices);
 
-        ASSERT_ENUM_EQUAL(secondQuery.ToPlane(firstIndex, secondIndex, thirdIndex, fourthIndex), thirdQuery.ToPlane(firstIndex, secondIndex, thirdIndex, fourthIndex));
+        ASSERT_EQUAL(secondQuery.ToPlane(firstIndex, secondIndex, thirdIndex, fourthIndex), thirdQuery.ToPlane(firstIndex, secondIndex, thirdIndex, fourthIndex));
     }
 }
 
@@ -182,10 +182,10 @@ void Mathematics::Query3FilteredTesting::TetrahedronTest()
             std::swap(secondIndex, thirdIndex);
         }
 
-        ASSERT_ENUM_EQUAL(firstQuery.ToTetrahedron(secondIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::OnTetrahedron);
-        ASSERT_ENUM_EQUAL(firstQuery.ToTetrahedron(thirdIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::OnTetrahedron);
-        ASSERT_ENUM_EQUAL(firstQuery.ToTetrahedron(fourthIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::OnTetrahedron);
-        ASSERT_ENUM_EQUAL(firstQuery.ToTetrahedron(fifthIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::OnTetrahedron);
+        ASSERT_EQUAL(firstQuery.ToTetrahedron(secondIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::OnTetrahedron);
+        ASSERT_EQUAL(firstQuery.ToTetrahedron(thirdIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::OnTetrahedron);
+        ASSERT_EQUAL(firstQuery.ToTetrahedron(fourthIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::OnTetrahedron);
+        ASSERT_EQUAL(firstQuery.ToTetrahedron(fifthIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::OnTetrahedron);
 
         const auto sign0 = firstQuery.ToPlane(firstIndex, thirdIndex, fourthIndex, fifthIndex);
         const auto sign1 = firstQuery.ToPlane(firstIndex, secondIndex, fourthIndex, fifthIndex);
@@ -195,15 +195,15 @@ void Mathematics::Query3FilteredTesting::TetrahedronTest()
         if (sign0 == PlaneQueryType::PositiveSide || sign1 == PlaneQueryType::NegativeSide ||
             sign2 == PlaneQueryType::PositiveSide || sign3 == PlaneQueryType::NegativeSide)
         {
-            ASSERT_ENUM_EQUAL(firstQuery.ToTetrahedron(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::Outside);
+            ASSERT_EQUAL(firstQuery.ToTetrahedron(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::Outside);
         }
         else if (sign0 == PlaneQueryType::OnPlane || sign1 == PlaneQueryType::OnPlane || sign2 == PlaneQueryType::OnPlane || sign3 == PlaneQueryType::OnPlane)
         {
-            ASSERT_ENUM_EQUAL(firstQuery.ToTetrahedron(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::OnTetrahedron);
+            ASSERT_EQUAL(firstQuery.ToTetrahedron(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::OnTetrahedron);
         }
         else
         {
-            ASSERT_ENUM_EQUAL(firstQuery.ToTetrahedron(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::Inside);
+            ASSERT_EQUAL(firstQuery.ToTetrahedron(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::Inside);
         }
 
         Query3FilteredD secondQuery(secondVertices, 1.0);
@@ -214,7 +214,7 @@ void Mathematics::Query3FilteredTesting::TetrahedronTest()
             std::swap(secondIndex, thirdIndex);
         }
 
-        ASSERT_ENUM_EQUAL(secondQuery.ToTetrahedron(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), thirdQuery.ToTetrahedron(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex));
+        ASSERT_EQUAL(secondQuery.ToTetrahedron(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), thirdQuery.ToTetrahedron(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex));
     }
 }
 
@@ -249,10 +249,10 @@ void Mathematics::Query3FilteredTesting::CircumspherTest()
 
         Query3FilteredD firstQuery(firstVertices, 0.0);
 
-        ASSERT_ENUM_EQUAL(firstQuery.ToCircumsphere(secondIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::OnCircumsphere);
-        ASSERT_ENUM_EQUAL(firstQuery.ToCircumsphere(thirdIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::OnCircumsphere);
-        ASSERT_ENUM_EQUAL(firstQuery.ToCircumsphere(fourthIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::OnCircumsphere);
-        ASSERT_ENUM_EQUAL(firstQuery.ToCircumsphere(fifthIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::OnCircumsphere);
+        ASSERT_EQUAL(firstQuery.ToCircumsphere(secondIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::OnCircumsphere);
+        ASSERT_EQUAL(firstQuery.ToCircumsphere(thirdIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::OnCircumsphere);
+        ASSERT_EQUAL(firstQuery.ToCircumsphere(fourthIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::OnCircumsphere);
+        ASSERT_EQUAL(firstQuery.ToCircumsphere(fifthIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::OnCircumsphere);
 
         if (firstIndex != secondIndex && secondIndex != thirdIndex &&
             thirdIndex != fourthIndex && fourthIndex != firstIndex &&
@@ -287,21 +287,21 @@ void Mathematics::Query3FilteredTesting::CircumspherTest()
 
             if (0.0 < det)
             {
-                ASSERT_ENUM_EQUAL(firstQuery.ToCircumsphere(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::Inside);
+                ASSERT_EQUAL(firstQuery.ToCircumsphere(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::Inside);
             }
             else if (det < 0.0)
             {
-                ASSERT_ENUM_EQUAL(firstQuery.ToCircumsphere(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::Outside);
+                ASSERT_EQUAL(firstQuery.ToCircumsphere(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::Outside);
             }
             else
             {
-                ASSERT_ENUM_EQUAL(firstQuery.ToCircumsphere(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::OnCircumsphere);
+                ASSERT_EQUAL(firstQuery.ToCircumsphere(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::OnCircumsphere);
             }
         }
 
         Query3FilteredD secondQuery(secondVertices, 1.0);
         Query3RationalD thirdQuery(secondVertices);
 
-        ASSERT_ENUM_EQUAL(secondQuery.ToCircumsphere(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), thirdQuery.ToCircumsphere(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex));
+        ASSERT_EQUAL(secondQuery.ToCircumsphere(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), thirdQuery.ToCircumsphere(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex));
     }
 }

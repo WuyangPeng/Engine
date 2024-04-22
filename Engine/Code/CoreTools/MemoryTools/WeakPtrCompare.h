@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.5 (2024/01/25 10:00)
+/// 版本：1.0.0.8 (2024/04/11 15:51)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_WEAK_PTR_COMPARE_H
 #define CORE_TOOLS_MEMORY_TOOLS_WEAK_PTR_COMPARE_H

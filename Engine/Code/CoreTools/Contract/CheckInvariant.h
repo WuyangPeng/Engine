@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:38)
+/// 版本：1.0.0.8 (2024/03/28 14:58)
 
 #ifndef CORE_TOOLS_CONTRACT_CHECK_INVARIANT_H
 #define CORE_TOOLS_CONTRACT_CHECK_INVARIANT_H
@@ -15,7 +15,7 @@
 
 #include <string>
 
-// 验证类不变式的工具类
+/// 验证类不变式的工具类
 namespace CoreTools
 {
     template <typename T>

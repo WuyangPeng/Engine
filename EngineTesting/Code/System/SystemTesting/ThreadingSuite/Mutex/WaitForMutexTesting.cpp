@@ -53,7 +53,7 @@ void System::WaitForMutexTesting::WaitForMutexTest0(WindowsHandle mutexHandle)
 void System::WaitForMutexTesting::WaitForMutexTest1(WindowsHandle mutexHandle)
 {
     const auto flag = WaitForSystemMutex(mutexHandle, EnumCastUnderlying(MutexWait::Infinite));
-    ASSERT_ENUM_EQUAL(flag, MutexWaitReturn::Object0);
+    ASSERT_EQUAL(flag, MutexWaitReturn::Object0);
 
     ASSERT_TRUE(ReleaseSystemMutex(mutexHandle));
 }
@@ -61,7 +61,7 @@ void System::WaitForMutexTesting::WaitForMutexTest1(WindowsHandle mutexHandle)
 void System::WaitForMutexTesting::WaitForMutexTest2(WindowsHandle mutexHandle)
 {
     const auto flag = WaitForSystemMutex(mutexHandle, EnumCastUnderlying(MutexWait::Infinite), true);
-    ASSERT_ENUM_EQUAL(flag, MutexWaitReturn::Object0);
+    ASSERT_EQUAL(flag, MutexWaitReturn::Object0);
 
     ASSERT_TRUE(ReleaseSystemMutex(mutexHandle));
 }
@@ -69,7 +69,7 @@ void System::WaitForMutexTesting::WaitForMutexTest2(WindowsHandle mutexHandle)
 void System::WaitForMutexTesting::WaitForMutexTest3(WindowsHandle mutexHandle)
 {
     const auto flag = WaitForSystemMutex(mutexHandle, EnumCastUnderlying(MutexWait::Infinite), false);
-    ASSERT_ENUM_EQUAL(flag, MutexWaitReturn::Object0);
+    ASSERT_EQUAL(flag, MutexWaitReturn::Object0);
 
     ASSERT_TRUE(ReleaseSystemMutex(mutexHandle));
 }

@@ -13,7 +13,7 @@
 #include "ProgramFactoryImpl.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Rendering/DirectX11Renderer/Detail/HLSL/HLSLProgramFactory.h"
@@ -103,7 +103,7 @@ Rendering::ProgramFactoryImpl::ComputeProgramSharedPtr Rendering::ProgramFactory
 
 std::string Rendering::ProgramFactoryImpl::GetStringFromFile(const std::string& fileName)
 {
-    const CoreTools::IFStreamManager manager{ CoreTools::StringConversion::MultiByteConversionStandard(fileName) };
+    const CoreTools::IFileStreamManager manager{ CoreTools::StringConversion::MultiByteConversionStandard(fileName) };
 
     auto shaderSource = CoreTools::StringConversion::StandardConversionMultiByte(manager.GetFileContent());
 

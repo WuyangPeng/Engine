@@ -1,11 +1,11 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:09)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/22 16:21)
 
 #include "MultiArrayTesting.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -39,6 +39,8 @@ void CoreTools::MultiArrayTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(OrderRToLTest);
     ASSERT_NOT_THROW_EXCEPTION_0(OrderLToRConstantTest);
     ASSERT_NOT_THROW_EXCEPTION_0(OrderRToLConstantTest);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(CompareTest);
 }
 
 void CoreTools::MultiArrayTesting::SizeTest()
@@ -399,4 +401,27 @@ void CoreTools::MultiArrayTesting::OrderRToLConstantTest()
             }
         }
     }
+}
+
+void CoreTools::MultiArrayTesting::CompareTest()
+{
+    const MultiArray<int, true, 5, 6, 10> lattice0{};
+
+    ASSERT_TRUE(lattice0 == lattice0);
+    ASSERT_FALSE(lattice0 != lattice0);
+
+    ASSERT_FALSE(lattice0 < lattice0);
+    ASSERT_FALSE(lattice0 > lattice0);
+    ASSERT_TRUE(lattice0 <= lattice0);
+    ASSERT_TRUE(lattice0 >= lattice0);
+
+    const MultiArray<int, true> lattice1{ 5, 6, 10 };
+
+    ASSERT_TRUE(lattice1 == lattice1);
+    ASSERT_FALSE(lattice1 != lattice1);
+
+    ASSERT_FALSE(lattice1 < lattice1);
+    ASSERT_FALSE(lattice1 > lattice1);
+    ASSERT_TRUE(lattice1 <= lattice1);
+    ASSERT_TRUE(lattice1 >= lattice1);
 }

@@ -231,7 +231,7 @@ void Mathematics::LinearSystemTesting::SolveTridiagonalTest()
         main.at(gsl::narrow_cast<size_t>(size) - 1) = floatRandomDistribution(generator);
         input.at(gsl::narrow_cast<size_t>(size) - 1) = floatRandomDistribution(generator);
 
-        auto output = linearsystem.SolveTridiagonal(size, lower, main, upper, input);
+        auto output = linearsystem.SolveTriDiagonal(size, lower, main, upper, input);
 
         VariableMatrixD matrix0(size, size);
 

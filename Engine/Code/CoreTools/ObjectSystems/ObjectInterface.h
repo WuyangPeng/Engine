@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:55)
+/// 版本：1.0.0.8 (2024/04/11 22:15)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_INTERFACE_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_INTERFACE_H
@@ -29,6 +29,7 @@ namespace CoreTools
     {
     public:
         using ClassType = ObjectInterface;
+
         CORE_TOOLS_SHARED_PTR_DECLARE(ObjectInterface);
         using FactoryFunction = ObjectInterfaceSharedPtr (*)(BufferSource& stream);
 
@@ -46,14 +47,14 @@ namespace CoreTools
         CORE_TOOLS_RTTI_DECLARE;
 
     public:
-        // 运行时类型信息。
+        /// 运行时类型信息。
         NODISCARD bool IsExactly(const Rtti& type) const noexcept;
         NODISCARD bool IsDerived(const Rtti& type) const noexcept;
         NODISCARD bool IsExactlyTypeOf(const ObjectInterface* object) const noexcept;
         NODISCARD bool IsDerivedTypeOf(const ObjectInterface* object) const noexcept;
 
     public:
-        // 流
+        /// 流
         NODISCARD static bool RegisterFactory();
         static void InitializeFactory();
         static void TerminateFactory();
@@ -73,7 +74,7 @@ namespace CoreTools
         NODISCARD virtual ObjectInterfaceSharedPtr CloneObject() const = 0;
 
     protected:
-        // 加载系统所使用的构造函数。
+        /// 加载系统所使用的构造函数。
         enum class LoadConstructor
         {
             ConstructorLoader

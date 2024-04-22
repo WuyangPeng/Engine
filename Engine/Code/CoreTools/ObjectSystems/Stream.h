@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:56)
+/// 版本：1.0.0.8 (2024/04/11 22:17)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_STREAM_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_STREAM_H
@@ -25,8 +25,9 @@ namespace CoreTools
         using ClassType = Stream;
 
     public:
-        // 这个函数返回存储字符串所需的字节数。字符串长度首先作为一个int32被存储，后面跟着它的字符。
-        // 该字符串用零填充，使总存储数使用四个字节的倍数。
+        /// 这个函数返回存储字符串所需的字节数。
+        /// 字符串长度首先作为一个int32被存储，后面跟着它的字符。
+        /// 该字符串用零填充，使总存储数使用四个字节的倍数。
         template <typename T, std::enable_if_t<std::is_constructible_v<std::decay_t<T>, const char*>>* = nullptr>
         NODISCARD static int GetStreamingSize(T&& input)
         {

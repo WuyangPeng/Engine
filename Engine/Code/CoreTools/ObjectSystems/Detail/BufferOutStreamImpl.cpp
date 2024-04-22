@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:57)
+/// 版本：1.0.0.8 (2024/04/11 22:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -31,7 +31,8 @@ void CoreTools::BufferOutStreamImpl::GenerateBuffer()
 {
     Register();
 
-    if (const auto bufferSize = GetBufferSize(); 0 < bufferSize)
+    if (const auto bufferSize = GetBufferSize();
+        0 < bufferSize)
     {
         ResetBufferSize(bufferSize);
         SaveToBuffer();
@@ -61,7 +62,7 @@ int CoreTools::BufferOutStreamImpl::GetBufferSize() const
         bufferSize += value.object->GetStreamingSize();
     }
 
-    // 调整缓冲区大小考虑到了“Top Level”字符串。
+    /// 调整缓冲区大小考虑到了“Top Level”字符串。
     const auto topLevelBytesNumber = Stream::GetStreamingSize(TopLevel::GetTopLevelDescription());
     bufferSize += topLevelBytesNumber * topLevel.GetTopLevelSize();
 
@@ -72,20 +73,20 @@ void CoreTools::BufferOutStreamImpl::ResetBufferSize(int bufferSize)
 {
     CORE_TOOLS_ASSERTION_0(0 < bufferSize, "缓冲区大小小于或等于0！");
 
-    // 创建对象将要被写入的缓冲区。
+    /// 创建对象将要被写入的缓冲区。
     target = make_shared<BufferTarget>(bufferSize, objectRegister);
 }
 
 void CoreTools::BufferOutStreamImpl::SaveToBuffer()
 {
-    // 保存对象到目标缓冲区。
-    for (const auto& value : *objectRegister)
+    /// 保存对象到目标缓冲区。
+    for (const auto& element : *objectRegister)
     {
-        if (topLevel.IsTopLevel(value.object))
+        if (topLevel.IsTopLevel(element.object))
         {
             target->Write(TopLevel::GetTopLevelDescription().data());
         }
-        value.object->Save(*target);
+        element.object->Save(*target);
     }
 }
 
@@ -93,10 +94,7 @@ void CoreTools::BufferOutStreamImpl::SaveToBuffer()
 
 bool CoreTools::BufferOutStreamImpl::IsValid() const noexcept
 {
-    if (target != nullptr)
-        return true;
-    else
-        return false;
+    return target != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

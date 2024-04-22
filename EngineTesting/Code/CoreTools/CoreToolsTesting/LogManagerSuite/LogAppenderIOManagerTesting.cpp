@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:24)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/18 22:05)
 
 #include "LogAppenderIOManagerTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
@@ -13,7 +13,7 @@
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -36,9 +36,6 @@ namespace
     const auto stringTest = "stringTest"s;
     const auto wStringTest = L"wstringTest"s;
     const CoreTools::Error errorTest{ CoreTools::FunctionDescribed{ "", __FILE__, __LINE__ }, System::WindowError::NoError, SYSTEM_TEXT("errorTest"s) };
-    const auto promptMessage = SYSTEM_TEXT("本次断言触发只是测试，并没有错误产生。"s);
-    const auto cancelMessage = SYSTEM_TEXT("请点击“否”取消。"s);
-    const auto attentionMessage = SYSTEM_TEXT("请注意断言文件名及行号是否显示正确！"s);
 }
 
 CoreTools::LogAppenderIOManagerTesting::LogAppenderIOManagerTesting(const OStreamShared& stream)
@@ -61,7 +58,6 @@ void CoreTools::LogAppenderIOManagerTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(IntegerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StringTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ExceptionTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(LogAppenderIOManageSignTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FileContentTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DeleteFileTest);
 }
@@ -106,28 +102,9 @@ void CoreTools::LogAppenderIOManagerTesting::ExceptionTest()
     manager << logMessage;
 }
 
-void CoreTools::LogAppenderIOManagerTesting::LogAppenderIOManageSignTest()
-{
-    const auto appenderManager = GetAppenderManager();
-
-    auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
-
-    LogMessage logMessage{ LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-
-    logMessage << promptMessage
-               << LogAppenderIOManageSign::AlwaysConsole
-               << SYSTEM_TEXT(' ')
-               << cancelMessage
-               << SYSTEM_TEXT('\n')
-               << attentionMessage
-               << LogAppenderIOManageSign::TriggerAssert;
-
-    manager << logMessage;
-}
-
 void CoreTools::LogAppenderIOManagerTesting::FileContentTest()
 {
-    IFStreamManager fileManager{ logAppenderIOManagerTestingFullName };
+    IFileStreamManager fileManager{ logAppenderIOManagerTestingFullName };
     fileManager.SetSimplifiedChinese();
 
     auto fileContent = fileManager.GetFileContent();
@@ -136,7 +113,6 @@ void CoreTools::LogAppenderIOManagerTesting::FileContentTest()
     ASSERT_UNEQUAL(fileContent.find(StringConversion::MultiByteConversionStandard(stringTest)), System::String::npos);
     ASSERT_UNEQUAL(fileContent.find(StringConversion::WideCharConversionStandard(wStringTest)), System::String::npos);
     ASSERT_UNEQUAL(fileContent.find(errorTest.GetError()), System::String::npos);
-    ASSERT_UNEQUAL(fileContent.find(promptMessage + SYSTEM_TEXT(' ') + cancelMessage + SYSTEM_TEXT('\n') + attentionMessage), System::String::npos);
 }
 
 void CoreTools::LogAppenderIOManagerTesting::DeleteFileTest()
@@ -152,8 +128,8 @@ CoreTools::LogAppenderIOManagerTesting::AppenderManagerSharedPtr CoreTools::LogA
 
     auto manager = AppenderManager::Create();
 
-    MAYBE_UNUSED const auto result0 = manager->InsertLogger(logger);
-    MAYBE_UNUSED const auto result1 = manager->InsertAppender(SYSTEM_TEXT("FileAppender"s), appender);
+    std::ignore = manager->InsertLogger(logger);
+    std::ignore = manager->InsertAppender(SYSTEM_TEXT("FileAppender"s), appender);
 
     return manager;
 }

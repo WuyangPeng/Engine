@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:16)
+/// 版本：1.0.0.8 (2024/03/30 18:09)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -48,10 +48,7 @@ CoreTools::ThreadImpl::~ThreadImpl() noexcept
 
 bool CoreTools::ThreadImpl::IsValid() const noexcept
 {
-    if (thread != nullptr && function != nullptr)
-        return true;
-    else
-        return false;
+    return thread != nullptr && function != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -67,7 +64,8 @@ void CoreTools::ThreadImpl::Resume() const
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    if (const auto result = System::ResumeSystemThread(thread); result == failResult)
+    if (const auto result = System::ResumeSystemThread(thread);
+        result == failResult)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("线程恢复失败！"s))
     }
@@ -77,7 +75,8 @@ void CoreTools::ThreadImpl::Suspend() const
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    if (const auto result = System::SuspendSystemThread(thread); result == failResult)
+    if (const auto result = System::SuspendSystemThread(thread);
+        result == failResult)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("线程挂起失败！"s))
     }
@@ -114,7 +113,8 @@ int CoreTools::ThreadImpl::GetThreadPriority() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto priority = System::GetSystemThreadPriority(thread); priority == EnumCastUnderlying(System::ThreadPriority::ErrorReturn))
+    if (const auto priority = System::GetSystemThreadPriority(thread);
+        priority == EnumCastUnderlying(System::ThreadPriority::ErrorReturn))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("获取线程优先级失败！"s))
     }

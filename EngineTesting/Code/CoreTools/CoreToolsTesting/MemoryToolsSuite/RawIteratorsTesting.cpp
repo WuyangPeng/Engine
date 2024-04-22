@@ -1,11 +1,11 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:09)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/22 15:32)
 
 #include "RawIteratorsTesting.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -13,6 +13,8 @@
 #include "CoreTools/Helper/UnitTest/AssertTestMacro.h"
 #include "CoreTools/MemoryTools/RawIteratorsDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
+#include <numeric>
 
 CoreTools::RawIteratorsTesting::RawIteratorsTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -35,11 +37,8 @@ void CoreTools::RawIteratorsTesting::MainTest()
 
 void CoreTools::RawIteratorsTesting::RawConstIteratorTest()
 {
-    std::vector<int> container{};
-    for (auto i = 0; i < 20; ++i)
-    {
-        container.emplace_back(i);
-    }
+    std::vector<int> container(20);
+    std::iota(container.begin(), container.end(), 0);
 
     RawConstIterator rawConstIterator{ container.data() };
 
@@ -92,11 +91,8 @@ void CoreTools::RawIteratorsTesting::RawConstIteratorTest()
 
 void CoreTools::RawIteratorsTesting::RawIteratorTest()
 {
-    std::vector<int> container{};
-    for (auto i = 0; i < 20; ++i)
-    {
-        container.emplace_back(i);
-    }
+    std::vector<int> container(20);
+    std::iota(container.begin(), container.end(), 0);
 
     RawIterator rawIterator{ container.data() };
 
@@ -108,6 +104,7 @@ void CoreTools::RawIteratorsTesting::RawIteratorTest()
     ASSERT_EQUAL(*rawIterator, 1);
     ASSERT_EQUAL(rawIterator, result);
     ASSERT_LESS_EQUAL(result, rawIterator);
+    ASSERT_EQUAL(rawIterator - result, 0);
 
     result = rawIterator++;
 
@@ -115,6 +112,7 @@ void CoreTools::RawIteratorsTesting::RawIteratorTest()
     ASSERT_EQUAL(*rawIterator, 2);
     ASSERT_UNEQUAL(rawIterator, result);
     ASSERT_LESS(result, rawIterator);
+    ASSERT_EQUAL(rawIterator - result, 1);
 
     result = --rawIterator;
 
@@ -122,6 +120,7 @@ void CoreTools::RawIteratorsTesting::RawIteratorTest()
     ASSERT_EQUAL(*rawIterator, 1);
     ASSERT_EQUAL(rawIterator, result);
     ASSERT_LESS_EQUAL(result, rawIterator);
+    ASSERT_EQUAL(rawIterator - result, 0);
 
     result = rawIterator--;
 
@@ -129,6 +128,7 @@ void CoreTools::RawIteratorsTesting::RawIteratorTest()
     ASSERT_EQUAL(*rawIterator, 0);
     ASSERT_UNEQUAL(rawIterator, result);
     ASSERT_GREATER(result, rawIterator);
+    ASSERT_EQUAL(rawIterator - result, -1);
 
     rawIterator += 5;
     ASSERT_EQUAL(*rawIterator, 5);

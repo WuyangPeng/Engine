@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:44)
+/// 版本：1.0.0.8 (2024/03/30 22:55)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_FWD_H
 #define CORE_TOOLS_FILE_MANAGER_FWD_H
@@ -20,18 +20,19 @@ namespace CoreTools
 
     class Endian;
 
-    template <typename T, size_t Size>
+    template <typename T, int Size>
     class ByteSwapper;
 
     template <typename From, typename To>
-    class TypeAliaser;
+    requires(sizeof(From) == sizeof(To))
+    class TypeAlias;
 
     class FileBuffer;
     class CFileManagerHelper;
     class CReadFileManager;
     class CWriteFileManager;
-    class IFStreamManager;
-    class OFStreamManager;
+    class IFileStreamManager;
+    class OFileStreamManager;
     class DeleteFileTools;
     class CopyFileTools;
     class FileHandleHelper;

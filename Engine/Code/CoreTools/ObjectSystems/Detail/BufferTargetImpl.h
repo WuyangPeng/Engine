@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:53)
+/// 版本：1.0.0.8 (2024/04/11 22:09)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_IMPL_H
@@ -33,11 +33,11 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        // 原生数据写入函数。
+        /// 原生数据写入函数。
         void Write(size_t itemSize, const void* data);
         void Write(size_t itemSize, size_t itemsNumber, const void* data);
 
-        // 帮助函数
+        /// 帮助函数
         NODISCARD int GetBytesWritten() const noexcept;
         void WriteUniqueId(const ConstObjectInterfaceSharedPtr& object);
 

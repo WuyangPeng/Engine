@@ -157,9 +157,9 @@ void Mathematics::PlaneTesting::DistanceTest()
         ASSERT_APPROXIMATE(plane.DistanceTo(point1), 0.0, 1e-10);
         ASSERT_APPROXIMATE(plane.DistanceTo(point2), 0.0, 1e-10);
 
-        ASSERT_ENUM_EQUAL(plane.WhichSide(point0), NumericalValueSymbol::Zero);
-        ASSERT_ENUM_EQUAL(plane.WhichSide(point1), NumericalValueSymbol::Zero);
-        ASSERT_ENUM_EQUAL(plane.WhichSide(point2), NumericalValueSymbol::Zero);
+        ASSERT_EQUAL(plane.WhichSide(point0), NumericalValueSymbol::Zero);
+        ASSERT_EQUAL(plane.WhichSide(point1), NumericalValueSymbol::Zero);
+        ASSERT_EQUAL(plane.WhichSide(point2), NumericalValueSymbol::Zero);
 
         const APointD fourthPoint(randomDistribution(generator),
                                   randomDistribution(generator),
@@ -169,10 +169,10 @@ void Mathematics::PlaneTesting::DistanceTest()
         const double epsilon = plane.GetEpsilon();
 
         if (epsilon < distance)
-            ASSERT_ENUM_EQUAL(plane.WhichSide(fourthPoint), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(plane.WhichSide(fourthPoint), NumericalValueSymbol::Positive);
         else if (distance < epsilon)
-            ASSERT_ENUM_EQUAL(plane.WhichSide(fourthPoint), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(plane.WhichSide(fourthPoint), NumericalValueSymbol::Negative);
         else
-            ASSERT_ENUM_EQUAL(plane.WhichSide(fourthPoint), NumericalValueSymbol::Zero);
+            ASSERT_EQUAL(plane.WhichSide(fourthPoint), NumericalValueSymbol::Zero);
     }
 }

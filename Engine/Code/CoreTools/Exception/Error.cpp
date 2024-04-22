@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:38)
+/// 版本：1.0.0.8 (2024/03/29 23:53)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -68,12 +68,12 @@ const CoreTools::FunctionDescribed& CoreTools::Error::GetFunctionDescribed() con
 
 void CoreTools::Error::ThrowError(const FunctionDescribed& functionDescribed, WindowError lastError, const String& message)
 {
-    throw ClassType{ functionDescribed, lastError, message };
+    throw Error{ functionDescribed, lastError, message };
 }
 
 void CoreTools::Error::ThrowError(const FunctionDescribed& functionDescribed, const String& message)
 {
     const LastError lastError{};
 
-    throw ClassType{ functionDescribed, lastError, message };
+    throw Error{ functionDescribed, lastError, message };
 }

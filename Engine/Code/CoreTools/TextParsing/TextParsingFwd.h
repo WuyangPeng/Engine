@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:51)
+/// 版本：1.0.0.8 (2024/04/02 11:14)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_FWD_H
 #define CORE_TOOLS_TEXT_PARSING_FWD_H
@@ -44,8 +44,8 @@ namespace CoreTools::SimpleCSV
     class QuerySheetVisibility;
     class QuerySheetType;
     class QuerySheetId;
-    class QuerySheetRelsId;
-    class QuerySheetRelsTarget;
+    class QuerySheetRelationshipId;
+    class QuerySheetRelationshipTarget;
     class QuerySharedStrings;
     class QueryXmlData;
 
@@ -108,9 +108,6 @@ namespace CoreTools
 
     class BatchConversionCode;
 
-    enum class JsonDataType;
-    enum class JsonGenerateType;
-    enum class JsonTotalGenerateType;
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_FWD_H

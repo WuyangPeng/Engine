@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:45)
+/// 版本：1.0.0.8 (2024/04/11 15:50)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_RAW_ITERATORS_H
 #define CORE_TOOLS_MEMORY_TOOLS_RAW_ITERATORS_H
@@ -16,7 +16,8 @@
 
 #include <iterator>
 
-// ContainerAdapter类依赖于原始指针的迭代器的实现。类RawConstIterator和RawIterator提供了这一点。
+/// ContainerAdapter类依赖于原始指针的迭代器的实现。
+/// 类RawConstIterator和RawIterator提供了这一点。
 namespace CoreTools
 {
     template <typename T>
@@ -56,7 +57,7 @@ namespace CoreTools
         RawConstIterator& operator-=(ptrdiff_t offset) noexcept;
         NODISCARD RawConstIterator operator-(ptrdiff_t offset) const noexcept;
 
-        NODISCARD ptrdiff_t operator-(RawConstIterator const& rhs) const noexcept;
+        NODISCARD virtual ptrdiff_t operator-(const RawConstIterator& rhs) const noexcept;
 
         NODISCARD bool operator==(const RawConstIterator& rhs) const noexcept;
         NODISCARD bool operator<(const RawConstIterator& rhs) const noexcept;
@@ -97,6 +98,8 @@ namespace CoreTools
 
         RawIterator& operator-=(ptrdiff_t offset) noexcept;
         NODISCARD RawIterator operator-(ptrdiff_t offset) const noexcept;
+
+        NODISCARD ptrdiff_t operator-(const ParentType& rhs) const noexcept;
     };
 
 }

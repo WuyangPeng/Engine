@@ -45,7 +45,7 @@ void System::WaitForMultipleThreadTesting::WaitMultipleObjects0Test()
     const auto threadHandle = CreateThread();
 
     const auto flag = WaitForSystemThread(boost::numeric_cast<WindowsDWord>(threadHandle.size()), threadHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite));
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+    ASSERT_UNEQUAL(flag, MutexWaitReturn::Failed);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseThread, threadHandle);
 }
@@ -55,7 +55,7 @@ void System::WaitForMultipleThreadTesting::WaitMultipleObjects1Test()
     const auto threadHandle = CreateThread();
 
     const auto flag = WaitForSystemThread(boost::numeric_cast<WindowsDWord>(threadHandle.size()), threadHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite), true);
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+    ASSERT_UNEQUAL(flag, MutexWaitReturn::Failed);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseThread, threadHandle);
 }
@@ -65,7 +65,7 @@ void System::WaitForMultipleThreadTesting::WaitMultipleObjects2Test()
     const auto threadHandle = CreateThread();
 
     const auto flag = WaitForSystemThread(boost::numeric_cast<WindowsDWord>(threadHandle.size()), threadHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite), false);
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+    ASSERT_UNEQUAL(flag, MutexWaitReturn::Failed);
 
     CloseThread(threadHandle);
 }

@@ -12,6 +12,7 @@
 
 #include "RotationEstimate.h"
 #include "Mathematics/Algebra/Matrix3.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename T, int Degree>
@@ -85,9 +86,9 @@ T Mathematics::RotC3Estimate(T t)
 template <typename T, int Degree>
 Mathematics::Matrix3<T> Mathematics::RotationEstimate(const Vector3<T>& point)
 {
-    auto identity = Matrix3<T>::GetIdentity();
+    const auto identity = Matrix3<T>::GetIdentity();
 
-    Matrix3<T> s{ Math<T>::GetValue(0), -point[2], point[1], point[2], Math<T>::GetValue(0), -point[0], -point[1], point[0], Math<T>::GetValue(0) };
+    const Matrix3<T> s{ Math<T>::GetValue(0), -point[2], point[1], point[2], Math<T>::GetValue(0), -point[0], -point[1], point[0], Math<T>::GetValue(0) };
 
     auto p0P0 = point[0] * point[0];
     auto p0P1 = point[0] * point[1];
@@ -95,9 +96,9 @@ Mathematics::Matrix3<T> Mathematics::RotationEstimate(const Vector3<T>& point)
     auto p1P1 = point[1] * point[1];
     auto p1P2 = point[1] * point[2];
     auto p2P2 = point[2] * point[2];
-    Matrix3<T> sSquare{ -(p1P1 + p2P2), p0P1, p0P2, p0P1, -(p0P0 + p2P2), p1P2, p0P2, p1P2, -(p0P0 + p1P1) };
+    const Matrix3<T> sSquare{ -(p1P1 + p2P2), p0P1, p0P2, p0P1, -(p0P0 + p2P2), p1P2, p0P2, p1P2, -(p0P0 + p1P1) };
 
-    auto t = Length(point);
+    auto t = Vector3Tools<T>::GetLength(point);
     auto a = RotC0Estimate<T, Degree>(t);
     auto b = RotC1Estimate<T, Degree>(t);
 
@@ -107,11 +108,11 @@ Mathematics::Matrix3<T> Mathematics::RotationEstimate(const Vector3<T>& point)
 template <typename T, int Degree>
 std::array<Mathematics::Matrix3<T>, 3> Mathematics::RotationDerivativeEstimate(const Vector3<T>& point)
 {
-    std::array<Matrix3<T>, 3> skewE{ Matrix3<T>{ Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(-1), Math<T>::GetVaule(0), Math<T>::GetVaule(1), Math<T>::GetVaule(0) },
-                                     Matrix3<T>{ Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(1), Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(-1), Math<T>::GetVaule(0), Math<T>::GetVaule(0) },
-                                     Matrix3<T>{ Math<T>::GetVaule(0), Math<T>::GetVaule(-1), Math<T>::GetVaule(0), Math<T>::GetVaule(1), Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(0) } };
+    std::array<Matrix3<T>, 3> skewE{ Matrix3<T>{ Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(-1), Math<T>::GetValue(0), Math<T>::GetValue(1), Math<T>::GetValue(0) },
+                                     Matrix3<T>{ Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(1), Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(-1), Math<T>::GetValue(0), Math<T>::GetValue(0) },
+                                     Matrix3<T>{ Math<T>::GetValue(0), Math<T>::GetValue(-1), Math<T>::GetValue(0), Math<T>::GetValue(1), Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(0) } };
 
-    Matrix3<T> s{ Math<T>::GetVaule(0), -point[2], point[1], point[2], Math<T>::GetVaule(0), -point[0], -point[1], point[0], Math<T>::GetVaule(0) };
+    const Matrix3<T> s{ Math<T>::GetValue(0), -point[2], point[1], point[2], Math<T>::GetValue(0), -point[0], -point[1], point[0], Math<T>::GetValue(0) };
 
     auto p0P0 = point[0] * point[0];
     auto p0P1 = point[0] * point[1];
@@ -119,18 +120,18 @@ std::array<Mathematics::Matrix3<T>, 3> Mathematics::RotationDerivativeEstimate(c
     auto p1P1 = point[1] * point[1];
     auto p1P2 = point[1] * point[2];
     auto p2P2 = point[2] * point[2];
-    Matrix3<T> sSquare{ -(p1P1 + p2P2), p0P1, p0P2, p0P1, -(p0P0 + p2P2), p1P2, p0P2, p1P2, -(p0P0 + p1P1) };
+    const Matrix3<T> sSquare{ -(p1P1 + p2P2), p0P1, p0P2, p0P1, -(p0P0 + p2P2), p1P2, p0P2, p1P2, -(p0P0 + p1P1) };
 
-    auto t = Length(point);
+    auto t = Vector3Tools<T>::GetLength(point);
     auto a = RotC0Estimate<T, Degree>(t);
     auto b = RotC1Estimate<T, Degree>(t);
     auto c = RotC2Estimate<T, Degree>(t);
     auto d = RotC3Estimate<T, Degree>(t);
 
-    std::array<Matrix3<T>, 3> rotationDerivativeEstimateReal{};
+    std::array<Matrix3<T>, 3> rotationDerivativeEstimateReal{ Matrix3<T>{}, Matrix3<T>{}, Matrix3<T>{} };
     for (auto i = 0; i < 3; ++i)
     {
-        rotationDerivativeEstimateReal[i] = a * skewE[i] + b * (s * skewE[i] + skewE[i] * s) - point[i] * (c * s + d * sSquare);
+        rotationDerivativeEstimateReal.at(i) = a * skewE.at(i) + b * (s * skewE.at(i) + skewE.at(i) * s) - point[i] * (c * s + d * sSquare);
     }
     return rotationDerivativeEstimateReal;
 }
@@ -140,11 +141,11 @@ void Mathematics::RotationAndDerivativeEstimate(const Vector3<T>& point, Matrix3
 {
     auto identity = Matrix3<T>::GetIdentity();
 
-    std::array<Matrix3<T>, 3> skewE{ Matrix3<T>{ Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(-1), Math<T>::GetVaule(0), Math<T>::GetVaule(1), Math<T>::GetVaule(0) },
-                                     Matrix3<T>{ Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(1), Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(-1), Math<T>::GetVaule(0), Math<T>::GetVaule(0) },
-                                     Matrix3<T>{ Math<T>::GetVaule(0), Math<T>::GetVaule(-1), Math<T>::GetVaule(0), Math<T>::GetVaule(1), Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(0), Math<T>::GetVaule(0) } };
+    std::array<Matrix3<T>, 3> skewE{ Matrix3<T>{ Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(-1), Math<T>::GetValue(0), Math<T>::GetValue(1), Math<T>::GetValue(0) },
+                                     Matrix3<T>{ Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(1), Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(-1), Math<T>::GetValue(0), Math<T>::GetValue(0) },
+                                     Matrix3<T>{ Math<T>::GetValue(0), Math<T>::GetValue(-1), Math<T>::GetValue(0), Math<T>::GetValue(1), Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(0), Math<T>::GetValue(0) } };
 
-    Matrix3<T> s{ Math<T>::GetVaule(0), -point[2], point[1], point[2], Math<T>::GetVaule(0), -point[0], -point[1], point[0], Math<T>::GetVaule(0) };
+    Matrix3<T> s{ Math<T>::GetValue(0), -point[2], point[1], point[2], Math<T>::GetValue(0), -point[0], -point[1], point[0], Math<T>::GetValue(0) };
 
     auto p0P0 = point[0] * point[0];
     auto p0P1 = point[0] * point[1];

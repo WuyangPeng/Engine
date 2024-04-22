@@ -58,7 +58,8 @@ int CoreTools::WideCharConversionMultiByte::GetConversionLength()
 
 void CoreTools::WideCharConversionMultiByte::CreateTarget()
 {
-    if (const auto length = GetConversionLength(); 0 < length)
+    if (const auto length = GetConversionLength();
+        0 < length)
     {
         target.resize(length);
     }
@@ -82,14 +83,7 @@ void CoreTools::WideCharConversionMultiByte::FinishConversion()
 
 bool CoreTools::WideCharConversionMultiByte::IsValid() const noexcept
 {
-    if (0 < lengthOfMultiByteString && lengthOfMultiByteString <= gsl::narrow_cast<int>(target.size()))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return 0 < lengthOfMultiByteString && lengthOfMultiByteString <= gsl::narrow_cast<int>(target.size());
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -98,10 +92,12 @@ std::string CoreTools::WideCharConversionMultiByte::GetMultiByteRepresentation()
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
+    const auto length = lengthOfMultiByteString - 1;
+
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
-    return std::string{ target.data(), target.data() + lengthOfMultiByteString - 1 };
+    return std::string{ target.data(), target.data() + length };
 
 #include SYSTEM_WARNING_POP
 }

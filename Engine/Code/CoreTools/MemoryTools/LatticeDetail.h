@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:42)
+/// 版本：1.0.0.8 (2024/04/11 18:10)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_LATTICE_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_LATTICE_DETAIL_H
@@ -61,8 +61,8 @@ std::array<int, sizeof...(Sizes)> CoreTools::Lattice<OrderLToR, Sizes...>::GetCo
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    // i = x[0] + b[0] * (x[1] + b[1] * (x[2] + ...)
-    // tuple = (x[0], ..., x[n-1])
+    /// i = x[0] + b[0] * (x[1] + b[1] * (x[2] + ...)
+    /// tuple = (x[0], ..., x[n-1])
     std::array<int, sizeof...(Sizes)> tuple{};
 
     for (auto dimension = 0u; dimension < sizeof...(Sizes); ++dimension)
@@ -103,8 +103,8 @@ std::array<int, sizeof...(Sizes)> CoreTools::Lattice<OrderLToR, Sizes...>::GetCo
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    // i = x[n-1] + b[n-1] * (x[n-2] + b[n-2] * (x[n-3] + ...)
-    // tuple = (x[0], ..., x[n-1])
+    /// i = x[n-1] + b[n-1] * (x[n-2] + b[n-2] * (x[n-3] + ...)
+    /// tuple = (x[0], ..., x[n-1])
     std::array<int, sizeof...(Sizes)> tuple{};
 
     for (auto i = 0, dimension = gsl::narrow_cast<int>(sizeof...(Sizes) - 1); i < sizeof...(Sizes); ++i, --dimension)
@@ -116,6 +116,54 @@ std::array<int, sizeof...(Sizes)> CoreTools::Lattice<OrderLToR, Sizes...>::GetCo
     }
 
     return tuple;
+}
+
+template <bool OrderLToR, int... Sizes>
+bool CoreTools::Lattice<OrderLToR, Sizes...>::operator==(const Lattice& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return true;
+}
+
+template <bool OrderLToR, int... Sizes>
+bool CoreTools::Lattice<OrderLToR, Sizes...>::operator!=(const Lattice& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return false;
+}
+
+template <bool OrderLToR, int... Sizes>
+bool CoreTools::Lattice<OrderLToR, Sizes...>::operator<(const Lattice& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return false;
+}
+
+template <bool OrderLToR, int... Sizes>
+bool CoreTools::Lattice<OrderLToR, Sizes...>::operator<=(const Lattice& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return true;
+}
+
+template <bool OrderLToR, int... Sizes>
+bool CoreTools::Lattice<OrderLToR, Sizes...>::operator>(const Lattice& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return false;
+}
+
+template <bool OrderLToR, int... Sizes>
+bool CoreTools::Lattice<OrderLToR, Sizes...>::operator>=(const Lattice& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return true;
 }
 
 template <bool OrderLToR, int... Sizes>
@@ -332,8 +380,8 @@ typename CoreTools::Lattice<OrderLToR>::SizeType CoreTools::Lattice<OrderLToR>::
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    // i = x[0] + b[0] * (x[1] + b[1] * (x[2] + ...)
-    // tuple = (x[0], ..., x[n-1])
+    /// i = x[0] + b[0] * (x[1] + b[1] * (x[2] + ...)
+    /// tuple = (x[0], ..., x[n-1])
     const auto numDimensions = GetDimensions();
 
     SizeType tuple(numDimensions);
@@ -354,8 +402,8 @@ typename CoreTools::Lattice<OrderLToR>::SizeType CoreTools::Lattice<OrderLToR>::
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    // i = x[n-1] + b[n-1] * (x[n-2] + b[n-2] * (x[n-3] + ...)
-    // tuple = (x[0], ..., x[n-1])
+    /// i = x[n-1] + b[n-1] * (x[n-2] + b[n-2] * (x[n-3] + ...)
+    /// tuple = (x[0], ..., x[n-1])
     const auto numDimensions = GetDimensions();
 
     SizeType tuple(numDimensions);
@@ -378,11 +426,43 @@ bool CoreTools::Lattice<OrderLToR>::operator==(const Lattice& rhs) const noexcep
 }
 
 template <bool OrderLToR>
+bool CoreTools::Lattice<OrderLToR>::operator!=(const Lattice& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return sizes != rhs.sizes;
+}
+
+template <bool OrderLToR>
 bool CoreTools::Lattice<OrderLToR>::operator<(const Lattice& rhs) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return sizes < rhs.sizes;
+}
+
+template <bool OrderLToR>
+bool CoreTools::Lattice<OrderLToR>::operator<=(const Lattice& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return sizes <= rhs.sizes;
+}
+
+template <bool OrderLToR>
+bool CoreTools::Lattice<OrderLToR>::operator>(const Lattice& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return sizes > rhs.sizes;
+}
+
+template <bool OrderLToR>
+bool CoreTools::Lattice<OrderLToR>::operator>=(const Lattice& rhs) const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return sizes >= rhs.sizes;
 }
 
 template <bool OrderLToR>
@@ -417,7 +497,7 @@ int CoreTools::Lattice<OrderLToR>::MetaGetIndexLToR(First first, Successors... s
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return gsl::narrow_cast<int>(first) + sizes.at(sizes.size() - 1 - sizeof...(Successors)) * MetaGetIndexLToR(successors...);
+    return boost::numeric_cast<int>(first) + sizes.at(sizes.size() - 1 - sizeof...(Successors)) * MetaGetIndexLToR(successors...);
 }
 
 template <bool OrderLToR>

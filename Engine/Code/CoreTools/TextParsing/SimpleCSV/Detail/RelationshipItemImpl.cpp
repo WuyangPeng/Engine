@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:04)
+/// 版本：1.0.0.8 (2024/04/11 11:12)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -50,7 +50,7 @@ CoreTools::SimpleCSV::RelationshipItemImpl::StringFromTypeRelationship CoreTools
                                                            { RelationshipType::Styles, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles"s },
                                                            { RelationshipType::SharedStrings, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings"s },
                                                            { RelationshipType::CalculationChain, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/calcChain"s },
-                                                           { RelationshipType::VBAProject, "http://schemas.microsoft.com/office/2006/relationships/vbaProject"s },
+                                                           { RelationshipType::VbaProject, "http://schemas.microsoft.com/office/2006/relationships/vbaProject"s },
                                                            { RelationshipType::ExternalLink, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/externalLink"s },
                                                            { RelationshipType::Theme, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme"s },
                                                            { RelationshipType::ChartSheet, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/chartsheet"s },
@@ -61,7 +61,7 @@ CoreTools::SimpleCSV::RelationshipItemImpl::StringFromTypeRelationship CoreTools
                                                            { RelationshipType::Chart, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart"s },
                                                            { RelationshipType::ExternalLinkPath, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/externalLinkPath"s },
                                                            { RelationshipType::PrinterSettings, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/printerSettings"s },
-                                                           { RelationshipType::VMLDrawing, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/vmlDrawing"s },
+                                                           { RelationshipType::VmlDrawing, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/vmlDrawing"s },
                                                            { RelationshipType::ControlProperties, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/ctrlProp"s } };
 
     return stringFromTypeRelationship;
@@ -71,7 +71,8 @@ CoreTools::SimpleCSV::RelationshipType CoreTools::SimpleCSV::RelationshipItemImp
 {
     static const auto typeFromStringRelationship = GetTypeFromStringRelationship();
 
-    if (const auto iter = typeFromStringRelationship.find(typeString); iter != typeFromStringRelationship.cend())
+    if (const auto iter = typeFromStringRelationship.find(typeString);
+        iter != typeFromStringRelationship.cend())
     {
         return iter->second;
     }
@@ -83,7 +84,8 @@ std::string CoreTools::SimpleCSV::RelationshipItemImpl::GetStringFromType(Relati
 {
     static const auto stringFromTypeRelationship = GetStringFromTypeRelationship();
 
-    if (const auto iter = stringFromTypeRelationship.find(type); iter != stringFromTypeRelationship.cend())
+    if (const auto iter = stringFromTypeRelationship.find(type);
+        iter != stringFromTypeRelationship.cend())
     {
         return iter->second;
     }

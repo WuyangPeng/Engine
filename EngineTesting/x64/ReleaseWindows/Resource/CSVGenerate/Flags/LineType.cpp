@@ -75,4 +75,3 @@ CSVConfigure::LineType CoreTools::CSVRow::StringCastEnum<CSVConfigure::LineType>
 
     return CSVConfigure::StringCastLineType(describe);
 }
-

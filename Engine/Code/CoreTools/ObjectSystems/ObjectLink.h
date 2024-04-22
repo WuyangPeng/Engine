@@ -57,8 +57,11 @@ namespace CoreTools
         NODISCARD LinkSequentialContainerIter end() noexcept;
 
         template <typename T>
+        requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
         void ResolveLink(T& object);
+
         template <typename T>
+        requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::value_type::ObjectType>)
         void ResolveLinkContainer(T& object);
 
     private:

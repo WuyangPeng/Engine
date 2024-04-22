@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:58)
+/// 版本：1.0.0.8 (2024/04/11 10:44)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -24,8 +24,6 @@
 #include "CoreTools/TextParsing/SimpleCSV/RowIterator.h"
 #include "CoreTools/TextParsing/SimpleCSV/RowRange.h"
 
-using namespace std::literals;
-
 CoreTools::SimpleCSVConversion::SimpleCSVConversion(const std::string& xlsxFileName, String csvFileName)
     : ParentType{}, document{ xlsxFileName }, csvFileName{ std::move(csvFileName) }, exclude{}, stringField{}, bitField{}, bitArrayField{}
 {
@@ -38,21 +36,21 @@ CLASS_INVARIANT_STUB_DEFINE(CoreTools, SimpleCSVConversion)
 
 void CoreTools::SimpleCSVConversion::Conversion()
 {
-    const auto firstXlWorksheet = document.GetFirstXLWorksheet();
-    ObtainRelated(firstXlWorksheet);
+    const auto firstWorksheet = document.GetFirstWorksheet();
+    ObtainRelated(firstWorksheet);
 
-    const auto xlWorksheets = document.GetXLWorksheet();
+    const auto worksheets = document.GetWorksheet();
 
     std::string content{};
     auto isFirstPage = true;
-    for (const auto& xlWorksheet : xlWorksheets)
+    for (const auto& worksheet : worksheets)
     {
-        if (IsIgnore(xlWorksheet))
+        if (IsIgnore(worksheet))
         {
             continue;
         }
 
-        content += GetContent(isFirstPage, xlWorksheet);
+        content += GetContent(isFirstPage, worksheet);
         isFirstPage = false;
     }
 
@@ -61,66 +59,68 @@ void CoreTools::SimpleCSVConversion::Conversion()
     SaveIntoFile(content);
 }
 
-bool CoreTools::SimpleCSVConversion::IsIgnore(const SimpleCSV::Worksheet& xlWorksheet) const
+bool CoreTools::SimpleCSVConversion::IsIgnore(const Worksheet& worksheet)
 {
-    if (xlWorksheet.GetRowCount() == 0 || xlWorksheet.GetColumnCount() == 0)
+    if (worksheet.GetRowCount() == 0 || worksheet.GetColumnCount() == 0)
     {
         return true;
     }
 
-    const auto& xlCell = xlWorksheet.GetCell(System::EnumCastUnderlying(CSVType::Format), 1);
+    const auto& cell = worksheet.GetCell(System::EnumCastUnderlying(CSVType::Format), 1);
 
-    if (const auto& xlCellValueProxy = xlCell->GetValue();
-        xlCellValueProxy.GetType() == SimpleCSV::ValueType::String && xlCellValueProxy.Get<std::string>() == CSVTypeConversion::GetTypeDescribe(CSVFormatType::Ignore))
-    {
-        return true;
-    }
+    const auto& xlCellValueProxy = cell->GetValue();
 
-    return false;
+    return xlCellValueProxy.GetType() == SimpleCSV::ValueType::String &&
+           xlCellValueProxy.Get<std::string>() == CSVTypeConversion::GetTypeDescribe(CSVFormatType::Ignore);
 }
 
-void CoreTools::SimpleCSVConversion::ObtainRelated(const SimpleCSV::Worksheet& xlWorksheet)
+void CoreTools::SimpleCSVConversion::ObtainRelated(const Worksheet& worksheet)
 {
-    const auto& dataTypeRow = xlWorksheet.GetRow(System::EnumCastUnderlying(CSVType::DataType));
+    const auto& dataTypeRow = worksheet.GetRow(System::EnumCastUnderlying(CSVType::DataType));
     auto excludeIndex = 0;
-    for (const auto& value : dataTypeRow->GetValues<std::vector<SimpleCSV::CellValue>>())
+    for (const auto& element : dataTypeRow->GetValues<std::vector<SimpleCSV::CellValue>>())
     {
-        if (const auto valueType = value.GetType();
+        if (const auto valueType = element.GetType();
             valueType != SimpleCSV::ValueType::String && valueType != SimpleCSV::ValueType::Empty)
         {
             continue;
         }
 
-        auto column = value.Get<std::string>();
-
-        // 去除头尾空格
-        boost::algorithm::trim(column);
-        if (column.empty())
-        {
-            exclude.emplace(excludeIndex);
-        }
-        else if (column.find(CSVTypeConversion::GetTypeDescribe(CSVDataType::String)) != std::string::npos)
-        {
-            stringField.emplace(excludeIndex);
-        }
-        else if (column.find(CSVTypeConversion::GetTypeDescribe(CSVDataType::BitArray)) != std::string::npos)
-        {
-            bitArrayField.emplace(excludeIndex);
-        }
-        else if (column.find(CSVTypeConversion::GetTypeDescribe(CSVDataType::Bit)) != std::string::npos)
-        {
-            bitField.emplace(excludeIndex);
-        }
+        ObtainRelated(excludeIndex, element);
 
         ++excludeIndex;
     }
 }
 
-std::string CoreTools::SimpleCSVConversion::GetContent(bool isFirstPage, const SimpleCSV::Worksheet& xlWorksheet) const
+void CoreTools::SimpleCSVConversion::ObtainRelated(int excludeIndex, const CellValue& element)
+{
+    auto column = element.Get<std::string>();
+
+    /// 去除头尾空格
+    boost::algorithm::trim(column);
+    if (column.empty())
+    {
+        exclude.emplace(excludeIndex);
+    }
+    else if (column.find(CSVTypeConversion::GetTypeDescribe(CSVDataType::String)) != std::string::npos)
+    {
+        stringField.emplace(excludeIndex);
+    }
+    else if (column.find(CSVTypeConversion::GetTypeDescribe(CSVDataType::BitArray)) != std::string::npos)
+    {
+        bitArrayField.emplace(excludeIndex);
+    }
+    else if (column.find(CSVTypeConversion::GetTypeDescribe(CSVDataType::Bit)) != std::string::npos)
+    {
+        bitField.emplace(excludeIndex);
+    }
+}
+
+std::string CoreTools::SimpleCSVConversion::GetContent(bool isFirstPage, const Worksheet& worksheet) const
 {
     std::string content{};
     auto rowIndex = 0;
-    for (const auto& xlRowRange : xlWorksheet.GetRows())
+    for (const auto& xlRowRange : worksheet.GetRows())
     {
         content += GetContent(isFirstPage, rowIndex, xlRowRange);
         ++rowIndex;
@@ -128,13 +128,13 @@ std::string CoreTools::SimpleCSVConversion::GetContent(bool isFirstPage, const S
     return content;
 }
 
-std::string CoreTools::SimpleCSVConversion::GetContent(bool isFirstPage, int rowIndex, const SimpleCSV::Row& xlRow) const
+std::string CoreTools::SimpleCSVConversion::GetContent(bool isFirstPage, int rowIndex, const Row& row) const
 {
     std::string content{};
 
     auto columnIndex = 0;
 
-    const auto& xlCellValues = xlRow.GetValues<std::vector<SimpleCSV::CellValue>>();
+    const auto& xlCellValues = row.GetValues<std::vector<SimpleCSV::CellValue>>();
     if (xlCellValues.empty() || (xlCellValues.at(0).GetType() == SimpleCSV::ValueType::Empty))
     {
         return content;
@@ -151,7 +151,7 @@ std::string CoreTools::SimpleCSVConversion::GetContent(bool isFirstPage, int row
         content += GetContent(isFirstPage, rowIndex, columnIndex, xlCellValue);
         ++columnIndex;
 
-        if (columnIndex != boost::numeric_cast<int>(xlRow.GetCellCount()))
+        if (columnIndex != boost::numeric_cast<int>(row.GetCellCount()))
         {
             content += ',';
         }
@@ -162,31 +162,32 @@ std::string CoreTools::SimpleCSVConversion::GetContent(bool isFirstPage, int row
     return content;
 }
 
-std::string CoreTools::SimpleCSVConversion::GetContent(bool isFirstPage, int rowIndex, int columnIndex, const SimpleCSV::CellValue& xlCellValue) const
+std::string CoreTools::SimpleCSVConversion::GetContent(bool isFirstPage, int rowIndex, int columnIndex, const CellValue& cellValue) const
 {
-    switch (const auto xlValueType = xlCellValue.GetType(); xlValueType)
+    switch (const auto xlValueType = cellValue.GetType();
+            xlValueType)
     {
         case SimpleCSV::ValueType::Boolean:
         {
-            const auto column = xlCellValue.Get<bool>();
+            const auto column = cellValue.Get<bool>();
 
             return GetContent(isFirstPage, rowIndex, columnIndex, std::to_string(column));
         }
         case SimpleCSV::ValueType::Integer:
         {
-            const auto column = xlCellValue.Get<int64_t>();
+            const auto column = cellValue.Get<int64_t>();
 
             return GetContent(isFirstPage, rowIndex, columnIndex, std::to_string(column));
         }
         case SimpleCSV::ValueType::Float:
         {
-            const auto column = xlCellValue.Get<double>();
+            const auto column = cellValue.Get<double>();
 
             return GetContent(isFirstPage, rowIndex, columnIndex, std::to_string(column));
         }
         case SimpleCSV::ValueType::String:
         {
-            auto column = xlCellValue.Get<std::string>();
+            auto column = cellValue.Get<std::string>();
             boost::algorithm::trim(column);
 
             return GetContent(isFirstPage, rowIndex, columnIndex, column);
@@ -200,73 +201,110 @@ std::string CoreTools::SimpleCSVConversion::GetContent(bool isFirstPage, int row
 
 std::string CoreTools::SimpleCSVConversion::GetContent(bool isFirstPage, int rowIndex, int columnIndex, const std::string& column) const
 {
-    if (isFirstPage && rowIndex + 1 == System::EnumCastUnderlying(CSVType::DataType))
+    if (isFirstPage)
     {
-        if (bitField.contains(columnIndex))
+        if (rowIndex + 1 == System::EnumCastUnderlying(CSVType::DataType))
         {
-            return CSVTypeConversion::GetTypeDescribe(CSVDataType::Int);
+            return GetFirstPageBitFieldContent(columnIndex, column);
         }
-        else if (bitArrayField.contains(columnIndex))
-        {
-            return CSVTypeConversion::GetTypeDescribe(CSVDataType::IntArray);
-        }
-        else
+        else if (rowIndex < System::EnumCastUnderlying(CSVType::VariableName))
         {
             return column;
         }
     }
-    if (isFirstPage && rowIndex < System::EnumCastUnderlying(CSVType::VariableName))
-    {
-        return column;
-    }
-    else if (stringField.contains(columnIndex))
-    {
-        auto result = column;
 
-        boost::replace_all(result, ","s, "\\,"s);
-
-        return "\""s + result + "\""s;
+    if (stringField.contains(columnIndex))
+    {
+        return GetStringFieldContent(column);
     }
     else if (bitArrayField.contains(columnIndex))
     {
-        std::vector<std::string> firstSplit{};
-        split(firstSplit, column, boost::is_any_of("&"), boost::token_compress_on);
-        std::string result{};
-        auto index = 0u;
-        for (const auto& value : firstSplit)
-        {
-            std::vector<std::string> secondSplit{};
-            split(secondSplit, value, boost::is_any_of(" \t|"), boost::token_compress_on);
-            auto bit = 0;
-            for (const auto& bitValue : secondSplit)
-            {
-                bit |= (1 << (boost::lexical_cast<int>(bitValue) - 1));
-            }
-            result += std::to_string(bit);
-            ++index;
-            if (index != firstSplit.size())
-            {
-                result += "&";
-            }
-        }
-
-        return result;
+        return GetBitArrayFieldContent(column);
     }
     else if (bitField.contains(columnIndex))
     {
-        std::vector<std::string> result{};
-        split(result, column, boost::is_any_of(" \t|"), boost::token_compress_on);
-        int bit = 0;
-        for (const auto& bitValue : result)
-        {
-            bit |= (1 << (boost::lexical_cast<int>(bitValue) - 1));
-        }
-        return std::to_string(bit);
+        return GetBitFieldContent(column);
     }
     else
     {
         return column;
     }
+}
+
+std::string CoreTools::SimpleCSVConversion::GetFirstPageBitFieldContent(int columnIndex, const std::string& column) const
+{
+    if (bitField.contains(columnIndex))
+    {
+        return CSVTypeConversion::GetTypeDescribe(CSVDataType::Int);
+    }
+    else if (bitArrayField.contains(columnIndex))
+    {
+        return CSVTypeConversion::GetTypeDescribe(CSVDataType::IntArray);
+    }
+    else
+    {
+        return column;
+    }
+}
+
+std::string CoreTools::SimpleCSVConversion::GetStringFieldContent(const std::string& column)
+{
+    auto result = column;
+
+    boost::replace_all(result, ",", "\\,");
+
+    return "\"" + result + "\"";
+}
+
+std::string CoreTools::SimpleCSVConversion::GetBitArrayFieldContent(const std::string& column)
+{
+    Container container{};
+    split(container, column, boost::is_any_of("&"), boost::token_compress_on);
+
+    std::string result{};
+    auto index = 0u;
+    for (const auto& element : container)
+    {
+        ++index;
+        result += GetBitArrayFieldContent(index == container.size(), element);
+    }
+
+    return result;
+}
+
+std::string CoreTools::SimpleCSVConversion::GetBitArrayFieldContent(bool isEnd, const std::string& element)
+{
+    Container container{};
+    split(container, element, boost::is_any_of(" \t|"), boost::token_compress_on);
+
+    std::string result{};
+    auto bit = 0;
+    for (const auto& bitValue : container)
+    {
+        bit |= (1 << (boost::lexical_cast<int>(bitValue) - 1));
+    }
+    result += std::to_string(bit);
+
+    if (!isEnd)
+    {
+        result += "&";
+    }
+
+    return result;
+}
+
+std::string CoreTools::SimpleCSVConversion::GetBitFieldContent(const std::string& column)
+{
+    Container result{};
+    split(result, column, boost::is_any_of(" \t|"), boost::token_compress_on);
+
+    int bit = 0;
+    for (const auto& bitValue : result)
+    {
+        bit |= (1 << (boost::lexical_cast<int>(bitValue) - 1));
+    }
+
+    return std::to_string(bit);
 }
 
 void CoreTools::SimpleCSVConversion::SaveIntoFile(const std::string& content) const

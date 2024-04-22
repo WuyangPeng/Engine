@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:38)
+/// 版本：1.0.0.8 (2024/04/11 13:52)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_APPENDER_H
 #define CORE_TOOLS_LOG_MANAGER_APPENDER_H
@@ -30,10 +30,10 @@ namespace CoreTools
         using String = System::String;
 
     public:
-        // 创建AppenderConsole
+        /// 创建AppenderConsole
         explicit Appender(AppenderPrint appenderFlags, LogLevel logLevel = LogLevel::Disabled);
 
-        // 创建AppenderFile
+        /// 创建AppenderFile
         Appender(const String& directory,
                  const String& fileName,
                  AppenderPrint appenderFlags,
@@ -42,7 +42,7 @@ namespace CoreTools
                  bool backup,
                  const String& extensionName);
 
-        // 创建AppenderFileConfiguration
+        /// 创建AppenderFileConfiguration
         Appender(const String& directory,
                  AppenderPrint appenderFlags,
                  LogLevel logLevel,

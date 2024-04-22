@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 17:07)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/15 14:43)
 
 #include "SpanIteratorTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -35,9 +35,11 @@ void CoreTools::SpanIteratorTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(DereferenceTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StepTest);
     ASSERT_NOT_THROW_EXCEPTION_0(IncreaseTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(IncreaseArrayTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SubtractionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(IterSwapTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ConstTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetSetValueTest);
 }
 
 void CoreTools::SpanIteratorTesting::BaseTest()
@@ -51,6 +53,10 @@ void CoreTools::SpanIteratorTesting::BaseTest()
     ASSERT_EQUAL(span.GetCurrent(), test.begin());
 
     ASSERT_EQUAL(span.GetRemainingCount(), boost::numeric_cast<int>(test.size()));
+
+    ASSERT_EQUAL(span.GetData(), test.data());
+
+    ASSERT_EQUAL(span.Get(5), test.begin() + 5);
 }
 
 void CoreTools::SpanIteratorTesting::DereferenceTest()
@@ -114,6 +120,27 @@ void CoreTools::SpanIteratorTesting::IncreaseTest()
     ASSERT_EQUAL(span.Increase<int32_t>(), increase);
 }
 
+void CoreTools::SpanIteratorTesting::IncreaseArrayTest()
+{
+    std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
+
+    SpanIterator span{ test.begin(), test.end() };
+
+    const auto result = span.Increase<int32_t, 5>();
+    constexpr std::array testValue{ 1, 2, 3, 4, 5 };
+
+    ASSERT_EQUAL(result, testValue);
+
+    ASSERT_EQUAL(*span.GetCurrent(), 6);
+
+    span.Increase<int32_t, 2>({ 8, 9 });
+
+    ASSERT_EQUAL(span.GetCurrent(), span.GetEnd());
+
+    ASSERT_EQUAL(test.at(5), 8);
+    ASSERT_EQUAL(test.at(6), 9);
+}
+
 void CoreTools::SpanIteratorTesting::SubtractionTest()
 {
     std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
@@ -156,4 +183,31 @@ void CoreTools::SpanIteratorTesting::ConstTest()
     ASSERT_EQUAL(span.GetCurrent(), test.begin());
 
     ASSERT_EQUAL(span.GetRemainingCount(), boost::numeric_cast<int>(test.size()));
+}
+
+void CoreTools::SpanIteratorTesting::GetSetValueTest()
+{
+    std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
+
+    SpanIterator span{ test.begin(), test.end() };
+
+    const auto value0 = span.GetValue<int32_t>(1);
+
+    ASSERT_EQUAL(value0, 2);
+
+    span.SetValue(2, 8);
+
+    ASSERT_EQUAL(test.at(2), 8);
+
+    const auto value1 = span.GetValue<int32_t, 5>(2);
+
+    constexpr std::array value2{ 8, 4, 5, 6, 7 };
+
+    ASSERT_EQUAL(value1, value2);
+
+    span.SetValue<int32_t, 5>(1, value2);
+
+    const std::vector value3{ 1, 8, 4, 5, 6, 7, 7 };
+
+    ASSERT_EQUAL(test, value3);
 }

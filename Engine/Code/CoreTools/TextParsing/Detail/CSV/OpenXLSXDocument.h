@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:41)
+/// 版本：1.0.0.8 (2024/04/02 18:11)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_OPEN_XLSX_DOCUMENT_H
 #define CORE_TOOLS_TEXT_PARSING_OPEN_XLSX_DOCUMENT_H
@@ -28,25 +28,27 @@ namespace CoreTools
         using ClassType = OpenXLSXDocument;
 
         using String = System::String;
-        using XLWorksheetContainer = std::vector<OpenXLSX::XLWorksheet>;
+        using Worksheet = OpenXLSX::XLWorksheet;
+        using WorksheetContainer = std::vector<OpenXLSX::XLWorksheet>;
 
     public:
         explicit OpenXLSXDocument(const std::string& xlsxFileName);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD OpenXLSX::XLWorksheet GetFirstXLWorksheet();
-        NODISCARD XLWorksheetContainer GetXLWorksheet();
+        NODISCARD Worksheet GetFirstWorksheet();
+        NODISCARD WorksheetContainer GetWorksheet();
 
     private:
         using WorksheetNameContainer = std::vector<std::string>;
+        using Document = OpenXLSX::XLDocument;
 
     private:
         void Init();
 
     private:
         std::string xlsxFileName;
-        OpenXLSX::XLDocument document;
+        Document document;
         WorksheetNameContainer worksheetNames;
     };
 }

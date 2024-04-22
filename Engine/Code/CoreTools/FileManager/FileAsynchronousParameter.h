@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:43)
+/// 版本：1.0.0.8 (2024/03/30 22:54)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_FILE_ASYNCHRONOUS_PARAMETER_H
 #define CORE_TOOLS_FILE_MANAGER_FILE_ASYNCHRONOUS_PARAMETER_H
@@ -29,8 +29,8 @@ namespace CoreTools
 
     public:
         FileAsynchronousParameter(const String& fileName, bool binaryFile, const FileEventInterfaceSharedPtr& event);
-        FileAsynchronousParameter(const String& fileName, bool binaryFile, const ConstFileBufferSharedPtr& FileBuffer, bool append);
-        FileAsynchronousParameter(const String& fileName, bool binaryFile, const FileEventInterfaceSharedPtr& event, const ConstFileBufferSharedPtr& FileBuffer, bool append);
+        FileAsynchronousParameter(const String& fileName, bool binaryFile, const ConstFileBufferSharedPtr& fileBuffer, bool append);
+        FileAsynchronousParameter(const String& fileName, bool binaryFile, const FileEventInterfaceSharedPtr& event, const ConstFileBufferSharedPtr& fileBuffer, bool append);
 
         CLASS_INVARIANT_DECLARE;
 

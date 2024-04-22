@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:18)
+/// 版本：1.0.0.8 (2024/04/11 22:29)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -47,10 +47,7 @@ System::String CoreTools::CustomTime::GetSystemTimeDescribe(const String& dateFo
 
 bool CoreTools::CustomTime::IsValid() const noexcept
 {
-    if (0 <= startTime && 0 <= currentTime && 0 <= timeLastTick)
-        return true;
-    else
-        return false;
+    return 0 <= startTime && 0 <= currentTime && 0 <= timeLastTick;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

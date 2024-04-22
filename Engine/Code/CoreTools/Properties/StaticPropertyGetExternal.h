@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:16)
+/// 版本：1.0.0.8 (2024/04/12 14:56)
 
 #ifndef CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_GET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_GET_EXTERNAL_H
@@ -17,12 +17,10 @@
 namespace CoreTools
 {
     template <typename ConstReference, ConstReference (*PropertyFunction)()>
+    requires(std::is_const_v<std::remove_reference_t<ConstReference>> && std::is_reference_v<ConstReference>)
     class StaticPropertyGetExternal final
     {
     public:
-        static_assert(std::is_const_v<std::remove_reference_t<ConstReference>>, "ConstReference is not const.");
-        static_assert(std::is_reference_v<ConstReference>, "ConstReference is not reference.");
-
         using ConstReferenceType = ConstReference;
         using ClassType = StaticPropertyGetExternal<ConstReferenceType, PropertyFunction>;
 

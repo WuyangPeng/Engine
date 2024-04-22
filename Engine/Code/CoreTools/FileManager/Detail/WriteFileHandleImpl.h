@@ -5,14 +5,15 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:40)
+/// 版本：1.0.0.8 (2024/03/30 22:50)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_WRITE_FILE_HANDLE_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_WRITE_FILE_HANDLE_IMPL_H
 
+#include "CoreTools/CoreToolsDll.h"
+
 #include "FileHandleImpl.h"
 #include "WriteFileManagerInterface.h"
-#include "System/FileManager/File.h"
 #include "System/FileManager/Flags/FileFlags.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 
@@ -38,7 +39,7 @@ namespace CoreTools
         void Write(size_t itemSize, size_t itemsNumber, const void* data) override;
 
     private:
-        // 禁止调用以下成员函数
+        /// 禁止调用以下成员函数
         void ReadFromFile(size_t itemSize, size_t itemsNumber, void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4) override;
     };
 }

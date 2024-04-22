@@ -26,6 +26,7 @@ namespace CSVConfigure
     public:
         using ClassType = EquipBase;
 
+        using Char = System::TChar;
         using String = System::String;
         using BoolContainer = std::deque<bool>;
         using BoolContainerConstIter = BoolContainer::const_iterator;
@@ -53,7 +54,7 @@ namespace CSVConfigure
 
         NODISCARD virtual String GetEquipName() const;
 
-        NODISCARD virtual System::TChar GetLogo() const noexcept;
+        NODISCARD virtual Char GetLogo() const noexcept;
 
         NODISCARD virtual CoreTools::Vector3 GetPosition() const noexcept;
 

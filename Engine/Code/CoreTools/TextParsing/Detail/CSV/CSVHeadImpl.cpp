@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:57)
+/// 版本：1.0.0.8 (2024/04/10 18:17)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,7 +14,7 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/CharacterString/StringUtility.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
@@ -61,7 +61,8 @@ void CoreTools::CSVHeadImpl::ParsingFormatType()
 {
     constexpr auto index = System::EnumCastUnderlying(CSVType::Format) - 1;
 
-    if (const auto content = fileContent.at(index); !content.empty())
+    if (const auto content = fileContent.at(index);
+        !content.empty())
     {
         const FormatTypeParsing formatTypeParsing{ content };
         formatType = formatTypeParsing.GetCSVFormatType();
@@ -81,7 +82,8 @@ void CoreTools::CSVHeadImpl::ParsingDataType()
     constexpr auto index = System::EnumCastUnderlying(CSVType::DataType) - 1;
     const auto content = fileContent.at(index);
 
-    for (const auto column = Parsing::GetSplitComma(content); const auto& element : column)
+    for (const auto column = Parsing::GetSplitComma(content);
+         const auto& element : column)
     {
         const auto type = ParsingDataType(element);
 
@@ -96,6 +98,7 @@ CoreTools::CSVDataType CoreTools::CSVHeadImpl::ParsingDataType(const String& ele
     {
         THROW_EXCEPTION(SYSTEM_TEXT("bit类型不应该存在于csv中。"s))
     }
+
     dataType.emplace_back(type);
 
     return type;
@@ -128,9 +131,10 @@ void CoreTools::CSVHeadImpl::ParsingVariableName()
     constexpr auto index = System::EnumCastUnderlying(CSVType::VariableName) - 1;
     const auto content = fileContent.at(index);
 
-    for (const auto column = Parsing::GetSplitComma(content); const auto& value : column)
+    for (const auto column = Parsing::GetSplitComma(content);
+         const auto& element : column)
     {
-        variableName.emplace_back(StringUtility::ToFirstLetterLower(value));
+        variableName.emplace_back(StringUtility::ToFirstLetterLower(element));
     }
 }
 
@@ -138,14 +142,7 @@ void CoreTools::CSVHeadImpl::ParsingVariableName()
 
 bool CoreTools::CSVHeadImpl::IsValid() const noexcept
 {
-    if (!fileContent.empty() && dataType.size() == variableName.size())
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return !fileContent.empty() && dataType.size() == variableName.size();
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -244,9 +241,9 @@ CoreTools::CSVDataType CoreTools::CSVHeadImpl::GetDataType(const String& field) 
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     auto index = 0;
-    for (const auto& value : variableName)
+    for (const auto& element : variableName)
     {
-        if (value == field)
+        if (element == field)
         {
             return GetDataType(index);
         }
@@ -261,7 +258,8 @@ int CoreTools::CSVHeadImpl::GetDataIndex(const String& field) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto iter = std::ranges::find(variableName, field); iter != variableName.cend())
+    if (const auto iter = std::ranges::find(variableName, field);
+        iter != variableName.cend())
     {
         return boost::numeric_cast<int>(iter - variableName.begin());
     }
@@ -273,7 +271,8 @@ int CoreTools::CSVHeadImpl::GetDataIndex(const StringView& field) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto iter = std::ranges::find(variableName, field); iter != variableName.cend())
+    if (const auto iter = std::ranges::find(variableName, field);
+        iter != variableName.cend())
     {
         return boost::numeric_cast<int>(iter - variableName.begin());
     }
@@ -285,28 +284,14 @@ bool CoreTools::CSVHeadImpl::HasDataField(const String& field) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto iter = std::ranges::find(variableName, field); iter != variableName.cend())
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return std::ranges::find(variableName, field) != variableName.cend();
 }
 
 bool CoreTools::CSVHeadImpl::HasDataField(const StringView& field) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto iter = std::ranges::find(variableName, field); iter != variableName.cend())
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return std::ranges::find(variableName, field) != variableName.cend();
 }
 
 System::String CoreTools::CSVHeadImpl::GetVariableName(int index) const
@@ -327,73 +312,46 @@ bool CoreTools::CSVHeadImpl::HasDataType(CSVDataType csvDataType) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto iter = std::ranges::find(dataType, csvDataType); iter != dataType.cend())
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return std::ranges::find(dataType, csvDataType) != dataType.cend();
 }
 
 bool CoreTools::CSVHeadImpl::HasVectorArrayDataType() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto iter = std::ranges::find_if(dataType, [](auto value) {
-            if (CSVDataType::CharArray <= value && value <= CSVDataType::IntVector4Array)
-                return true;
-            else
-                return false;
-        });
-        iter != dataType.cend())
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    const auto iter = std::ranges::find_if(dataType, [](auto value) {
+        return CSVDataType::CharArray <= value && value <= CSVDataType::IntVector4Array;
+    });
+
+    return iter != dataType.cend();
 }
 
 bool CoreTools::CSVHeadImpl::HasArrayDataType() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto iter = std::ranges::find_if(dataType, [](auto value) {
-            if (CSVDataType::BoolArray <= value && value <= CSVDataType::IntVector4Array)
-                return true;
-            else
-                return false;
-        });
-        iter != dataType.cend())
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    const auto iter = std::ranges::find_if(dataType, [](auto value) {
+        return CSVDataType::BoolArray <= value && value <= CSVDataType::IntVector4Array;
+    });
+
+    return iter != dataType.cend();
 }
 
-System::String CoreTools::CSVHeadImpl::GetCompleteClassName() const
+bool CoreTools::CSVHeadImpl::HasBase() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    auto completeClassName = pathSplitParsing.GetNameSpace();
-
-    completeClassName += TextParsing::gDoubleColon;
-    completeClassName += pathSplitParsing.GetCSVClassName();
-
-    return completeClassName;
+    return formatType == CSVFormatType::Default ||
+           formatType == CSVFormatType::Vector ||
+           formatType == CSVFormatType::Key;
 }
 
 System::String CoreTools::CSVHeadImpl::GetActualType(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto type = GetDataType(index); type == CSVDataType::Enum || type == CSVDataType::EnumArray)
+    if (const auto type = GetDataType(index);
+        type == CSVDataType::Enum || type == CSVDataType::EnumArray)
     {
         return GetEnumTypeName(index);
     }
@@ -407,28 +365,14 @@ System::String CoreTools::CSVHeadImpl::GetValueType(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto type = GetDataType(index); type == CSVDataType::Enum || type == CSVDataType::EnumArray)
+    if (const auto type = GetDataType(index);
+        type == CSVDataType::Enum || type == CSVDataType::EnumArray)
     {
         return GetEnumTypeName(index);
     }
     else
     {
         return CSVTypeConversion::GetValueType(type);
-    }
-}
-
-System::String CoreTools::CSVHeadImpl::GetActualTypeByNameSpace(int index) const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
-
-    if (const auto type = GetDataType(index);
-        type == CSVDataType::Enum || type == CSVDataType::EnumArray)
-    {
-        return pathSplitParsing.GetNameSpace() + TextParsing::gDoubleColon.data() + GetEnumTypeName(index);
-    }
-    else
-    {
-        return CSVTypeConversion::GetActualType(type);
     }
 }
 
@@ -451,7 +395,8 @@ System::String CoreTools::CSVHeadImpl::GetFunctionVariableName(int index) const
 
     auto upperVariableName = GetUpperVariableName(index);
 
-    if (const auto type = GetDataType(index); type == CSVDataType::Bool)
+    if (const auto type = GetDataType(index);
+        type == CSVDataType::Bool)
     {
         if (upperVariableName.find(TextParsing::gIs) != 0u)
         {
@@ -496,7 +441,8 @@ System::String CoreTools::CSVHeadImpl::GetFunctionName(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto type = GetDataType(index); type == CSVDataType::Enum || type == CSVDataType::EnumArray)
+    if (const auto type = GetDataType(index);
+        type == CSVDataType::Enum || type == CSVDataType::EnumArray)
     {
         String result{ TextParsing::gGetEnum };
 
@@ -533,35 +479,13 @@ System::String CoreTools::CSVHeadImpl::GetAbbreviation(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto type = GetDataType(index); type == CSVDataType::Enum || type == CSVDataType::EnumArray)
+    if (const auto type = GetDataType(index);
+        type == CSVDataType::Enum || type == CSVDataType::EnumArray)
     {
         return GetEnumTypeName(index);
     }
     else
     {
         return CSVTypeConversion::GetAbbreviation(type);
-    }
-}
-
-System::String CoreTools::CSVHeadImpl::GetAbbreviationByNameSpace(int index, const String& className) const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
-
-    if (const auto type = GetDataType(index);
-        type == CSVDataType::Enum || type == CSVDataType::EnumArray)
-    {
-        return pathSplitParsing.GetNameSpace() + TextParsing::gDoubleColon.data() + GetEnumTypeName(index);
-    }
-    else if (type < CSVDataType::BoolArray)
-    {
-        return CSVTypeConversion::GetActualType(type);
-    }
-    else
-    {
-        return pathSplitParsing.GetNameSpace() +
-               TextParsing::gDoubleColon.data() +
-               className +
-               TextParsing::gDoubleColon.data() +
-               CSVTypeConversion::GetAbbreviation(type);
     }
 }

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:49)
+/// 版本：1.0.0.8 (2024/04/02 15:22)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_SHARED_STRINGS_H
 #define CORE_TOOLS_TEXT_PARSING_SHARED_STRINGS_H
@@ -22,7 +22,7 @@ template class CORE_TOOLS_DEFAULT_DECLARE CoreTools::CopyUnsharedImpl<CoreTools:
 
 namespace CoreTools::SimpleCSV
 {
-    class CORE_TOOLS_DEFAULT_DECLARE SharedStrings : public XmlFile
+    class CORE_TOOLS_DEFAULT_DECLARE SharedStrings final : public XmlFile
     {
     public:
         COPY_UNSHARED_TYPE_DECLARE(SharedStrings);

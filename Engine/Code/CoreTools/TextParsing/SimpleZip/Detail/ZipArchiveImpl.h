@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:50)
+/// 版本：1.0.0.8 (2024/04/08 11:44)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ZIP_ARCHIVE_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_ZIP_ARCHIVE_IMPL_H
@@ -89,20 +89,33 @@ namespace CoreTools::SimpleZip
         void Open();
         void Close() noexcept;
         void CheckZipReader() const;
+        void CreateZipWriter() const;
 
         void DeleteSameEntries();
         void AddFolderEntries();
+        void AddFolderEntries(const std::string& entry);
         void MoveZipFile(const std::string& saveFileName, const std::string& randomFileName);
+        void SaveZipWriter(const std::string& randomFileName) const;
+        void ReaderExtractFileToMem(const std::string& name, ZipEntry& result) const;
+        void Register(const std::string& name);
 
         ZipEntry AddEntryImpl(const std::string& name, const ZipEntryData& data);
+        ZipEntry DoAddEntryImpl(const std::string& name, const ZipEntryData& data);
 
-        NODISCARD std::string GetRandomFileName(const std::string& saveFileName) const;
+        NODISCARD std::string GetSaveFileName(const std::string& fileName) const;
 
-        static void GetEntryNames(const std::string& dir, EntryNamesType& result);
+        NODISCARD static std::string GetRandomFileName(const std::string& saveFileName);
+        static void RemoveConditionDir(const std::string& dir, EntryNamesType& result);
+        static void RemoveRootDepth(const std::string& dir, EntryNamesType& result);
+        static void ExtractEntry(const std::string& dest, const ZipEntry& entry);
+        static void DoMoveZipFile(const std::string& saveFileName, const std::string& randomFileName);
 
     private:
         using ZipEntryType = std::vector<ZipEntry>;
         using ZipReaderSharedPtr = std::shared_ptr<ZipReader>;
+
+    private:
+        NODISCARD static bool IsMeetConditionZipEntry(bool includeDirs, bool includeFiles, const ZipEntry& item) noexcept;
 
     private:
         std::string archivePath;

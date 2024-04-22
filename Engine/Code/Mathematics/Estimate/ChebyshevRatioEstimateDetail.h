@@ -60,10 +60,10 @@ std::array<T, 2> Mathematics::ChebyshevRatioEstimate(T t, T x)
     std::array<T, 2> f{ term0, term1 };
     for (auto i = 0; i < Degree; ++i)
     {
-        term0 *= (b[i] - a[i] * sqr0) * y;
-        term1 *= (b[i] - a[i] * sqr1) * y;
-        f[0] += term0;
-        f[1] += term1;
+        term0 *= (b.at(i) - a.at(i) * sqr0) * y;
+        term1 *= (b.at(i) - a.at(i) * sqr1) * y;
+        f.at(0) += term0;
+        f.at(1) += term1;
     }
 
     return f;
@@ -109,10 +109,10 @@ std::array<T, 2> Mathematics::ChebyshevRatioEstimateReal(T t, T x)
     std::array<T, 2> f{ term0, term1 };
     for (auto i = 0; i < Degree; ++i)
     {
-        term0 *= (b[i] - a[i] * sqr0) * y;
-        term1 *= (b[i] - a[i] * sqr1) * y;
-        f[0] += term0;
-        f[1] += term1;
+        term0 *= (b.at(i) - a.at(i) * sqr0) * y;
+        term1 *= (b.at(i) - a.at(i) * sqr1) * y;
+        f.at(0) += term0;
+        f.at(1) += term1;
     }
 
     return f;

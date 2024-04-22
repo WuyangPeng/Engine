@@ -5,9 +5,9 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:13)
+/// 版本：1.0.0.8 (2024/03/28 11:02)
 
-// 日志类所需要的宏
+/// 日志类所需要的宏
 #ifndef CORE_TOOLS_HELPER_LOG_MACRO_H
 #define CORE_TOOLS_HELPER_LOG_MACRO_H
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:41)
+/// 版本：1.0.0.8 (2024/04/12 15:16)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "CoreTools/Threading/Mutex.h"
 
-SINGLETON_GET_PTR_DEFINE(CoreTools, CyclicRedundancyCheckHandle);
+    SINGLETON_GET_PTR_DEFINE(CoreTools, CyclicRedundancyCheckHandle);
 
 CoreTools::CyclicRedundancyCheckHandle::CyclicRedundancyCheckHandleUniquePtr CoreTools::CyclicRedundancyCheckHandle::cyclicRedundancyCheckHandle{};
 
@@ -40,13 +40,13 @@ CoreTools::CyclicRedundancyCheckHandle::CyclicRedundancyCheckHandle(CyclicRedund
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CyclicRedundancyCheckHandle)
 
-uint16_t CoreTools::CyclicRedundancyCheckHandle::GetCCITT(int index) const
+uint16_t CoreTools::CyclicRedundancyCheckHandle::GetCcitt(int index) const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return impl->GetCCITT(index);
+    return impl->GetCcitt(index);
 }
 
 uint16_t CoreTools::CyclicRedundancyCheckHandle::Get16Table(int index) const

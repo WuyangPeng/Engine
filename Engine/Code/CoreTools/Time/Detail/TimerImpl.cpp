@@ -5,13 +5,13 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.5 (2024/01/25 09:57)
+/// 版本：1.0.0.8 (2024/04/11 22:29)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "TimerImpl.h"
-#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::TimerImpl::TimerImpl() noexcept
     : initialTime{ std::chrono::high_resolution_clock::now() }

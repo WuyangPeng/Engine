@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:22)
+/// 版本：1.0.0.8 (2024/04/12 11:20)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_O_STREAM_SHARED_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_O_STREAM_SHARED_H
@@ -20,7 +20,7 @@ CORE_TOOLS_SHARED_EXPORT_IMPL(OStreamImpl);
 
 namespace CoreTools
 {
-    // 共享类
+    /// 共享类
     class CORE_TOOLS_DEFAULT_DECLARE OStreamShared final
     {
     public:

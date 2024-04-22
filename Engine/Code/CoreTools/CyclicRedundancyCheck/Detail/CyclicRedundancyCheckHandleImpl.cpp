@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:40)
+/// 版本：1.0.0.8 (2024/04/12 15:14)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,11 +20,11 @@ CoreTools::CyclicRedundancyCheckHandleImpl::CyclicRedundancyCheckHandleImpl() no
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CyclicRedundancyCheckHandleImpl)
 
-uint16_t CoreTools::CyclicRedundancyCheckHandleImpl::GetCCITT(int index) const
+uint16_t CoreTools::CyclicRedundancyCheckHandleImpl::GetCcitt(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return ccitt.GetCCITT(index);
+    return ccitt.GetCcitt(index);
 }
 
 uint16_t CoreTools::CyclicRedundancyCheckHandleImpl::Get16Table(int index) const

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:17)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/22 17:25)
 
 #include "FileInStreamTesting.h"
 #include "Detail/BoolObject.h"
@@ -70,18 +70,18 @@ void CoreTools::FileInStreamTesting::FileStreamTest()
     ASSERT_EQUAL_FAILURE_THROW(inTopLevel.GetTopLevelSize(), 3, "FileInStream is empty.");
 
     auto index = 0;
-    for (const auto& value : inTopLevel)
+    for (const auto& element : inTopLevel)
     {
         switch (index)
         {
             case 0:
-                ASSERT_EQUAL(value->GetRttiType().GetName(), BoolObject::GetCurrentRttiType().GetName());
+                ASSERT_EQUAL(element->GetRttiType().GetName(), BoolObject::GetCurrentRttiType().GetName());
                 break;
             case 1:
-                ASSERT_EQUAL(value->GetRttiType().GetName(), EnumObject::GetCurrentRttiType().GetName());
+                ASSERT_EQUAL(element->GetRttiType().GetName(), EnumObject::GetCurrentRttiType().GetName());
                 break;
             case 2:
-                ASSERT_EQUAL(value->GetRttiType().GetName(), IntObject::GetCurrentRttiType().GetName());
+                ASSERT_EQUAL(element->GetRttiType().GetName(), IntObject::GetCurrentRttiType().GetName());
                 break;
             default:
                 break;

@@ -72,36 +72,36 @@ void Rendering::StructuredBufferTesting::DefaultTest()
     ASSERT_EQUAL(structuredBuffer.GetNumElements(), numElements);
     ASSERT_EQUAL(structuredBuffer.GetElementSize(), elementSize);
     ASSERT_EQUAL(structuredBuffer.GetNumBytes(), numBytes);
-    ASSERT_ENUM_EQUAL(structuredBuffer.GetUsage(), UsageType::Immutable);
-    ASSERT_ENUM_EQUAL(structuredBuffer.GetCopy(), CopyType::None);
+    ASSERT_EQUAL(structuredBuffer.GetUsage(), UsageType::Immutable);
+    ASSERT_EQUAL(structuredBuffer.GetCopy(), CopyType::None);
     ASSERT_EQUAL(structuredBuffer.GetOffset(), 0);
     ASSERT_EQUAL(structuredBuffer.GetNumActiveElements(), numElements);
     ASSERT_EQUAL(structuredBuffer.GetNumActiveBytes(), numBytes);
-    ASSERT_ENUM_EQUAL(structuredBuffer.GetCounterType(), CounterType::None);
+    ASSERT_EQUAL(structuredBuffer.GetCounterType(), CounterType::None);
     ASSERT_FALSE(structuredBuffer.GetKeepInternalCount());
 
     structuredBuffer.SetUsage(UsageType::DynamicUpdate);
-    ASSERT_ENUM_EQUAL(structuredBuffer.GetUsage(), UsageType::DynamicUpdate);
+    ASSERT_EQUAL(structuredBuffer.GetUsage(), UsageType::DynamicUpdate);
 
     structuredBuffer.SetCopy(CopyType::Bidirectional);
-    ASSERT_ENUM_EQUAL(structuredBuffer.GetCopy(), CopyType::Bidirectional);
+    ASSERT_EQUAL(structuredBuffer.GetCopy(), CopyType::Bidirectional);
 
     structuredBuffer.SetKeepInternalCount(true);
     ASSERT_FALSE(structuredBuffer.GetKeepInternalCount());
 
     structuredBuffer.MakeAppendConsume();
-    ASSERT_ENUM_EQUAL(structuredBuffer.GetCounterType(), CounterType::AppendConsume);
-    ASSERT_ENUM_EQUAL(structuredBuffer.GetUsage(), UsageType::ShaderOutput);
+    ASSERT_EQUAL(structuredBuffer.GetCounterType(), CounterType::AppendConsume);
+    ASSERT_EQUAL(structuredBuffer.GetUsage(), UsageType::ShaderOutput);
 
     structuredBuffer.SetKeepInternalCount(true);
     ASSERT_TRUE(structuredBuffer.GetKeepInternalCount());
 
     structuredBuffer.SetUsage(UsageType::DynamicUpdate);
-    ASSERT_ENUM_EQUAL(structuredBuffer.GetUsage(), UsageType::DynamicUpdate);
+    ASSERT_EQUAL(structuredBuffer.GetUsage(), UsageType::DynamicUpdate);
 
     structuredBuffer.MakeCounter();
-    ASSERT_ENUM_EQUAL(structuredBuffer.GetCounterType(), CounterType::Counter);
-    ASSERT_ENUM_EQUAL(structuredBuffer.GetUsage(), UsageType::ShaderOutput);
+    ASSERT_EQUAL(structuredBuffer.GetCounterType(), CounterType::Counter);
+    ASSERT_EQUAL(structuredBuffer.GetUsage(), UsageType::ShaderOutput);
 }
 
 void Rendering::StructuredBufferTesting::CreateStorageTest()

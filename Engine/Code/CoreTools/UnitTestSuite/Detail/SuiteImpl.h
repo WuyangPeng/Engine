@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:22)
+/// 版本：1.0.0.8 (2024/04/12 11:20)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_SUITE_IMPL_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_SUITE_IMPL_H
@@ -17,7 +17,8 @@
 #include <string>
 #include <vector>
 
-// 单元测试套件类。SuiteImpl为内部接口类，可增加或删除单元测试，并获取测试的结果。
+/// 单元测试套件类。
+/// SuiteImpl为内部接口类，可增加或删除单元测试，并获取测试的结果。
 namespace CoreTools
 {
     class CORE_TOOLS_HIDDEN_DECLARE SuiteImpl final : public UnitTestComposite
@@ -27,7 +28,7 @@ namespace CoreTools
         using ParentType = UnitTestComposite;
 
     public:
-        explicit SuiteImpl(const std::string& name, const OStreamShared& streamShared, bool printRunUnitTest);
+        explicit SuiteImpl(std::string name, const OStreamShared& streamShared, bool printRunUnitTest) noexcept;
 
         CLASS_INVARIANT_FINAL_DECLARE;
 

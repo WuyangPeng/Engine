@@ -76,17 +76,17 @@ void Rendering::IndexBufferTesting::DefaultTest()
     ASSERT_EQUAL(indexBuffer->GetNumElements(), numPrimitives);
     ASSERT_EQUAL(indexBuffer->GetElementSize(), 0);
     ASSERT_EQUAL(indexBuffer->GetNumBytes(), 0);
-    ASSERT_ENUM_EQUAL(indexBuffer->GetUsage(), UsageType::Immutable);
-    ASSERT_ENUM_EQUAL(indexBuffer->GetCopy(), CopyType::None);
+    ASSERT_EQUAL(indexBuffer->GetUsage(), UsageType::Immutable);
+    ASSERT_EQUAL(indexBuffer->GetCopy(), CopyType::None);
     ASSERT_EQUAL(indexBuffer->GetOffset(), 0);
     ASSERT_EQUAL(indexBuffer->GetNumActiveElements(), numPrimitives);
     ASSERT_EQUAL(indexBuffer->GetNumActiveBytes(), 0);
 
     indexBuffer->SetUsage(UsageType::DynamicUpdate);
-    ASSERT_ENUM_EQUAL(indexBuffer->GetUsage(), UsageType::DynamicUpdate);
+    ASSERT_EQUAL(indexBuffer->GetUsage(), UsageType::DynamicUpdate);
 
     indexBuffer->SetCopy(CopyType::Bidirectional);
-    ASSERT_ENUM_EQUAL(indexBuffer->GetCopy(), CopyType::Bidirectional);
+    ASSERT_EQUAL(indexBuffer->GetCopy(), CopyType::Bidirectional);
 }
 
 void Rendering::IndexBufferTesting::CreateStorageTest()
@@ -100,7 +100,7 @@ void Rendering::IndexBufferTesting::CreateStorageTest()
     ASSERT_EQUAL(indexBuffer0->GetNumBytes(), numBytes);
     ASSERT_EQUAL(indexBuffer0->GetNumActiveElements(), numPrimitives);
     ASSERT_EQUAL(indexBuffer0->GetNumActiveBytes(), numBytes);
-    ASSERT_ENUM_EQUAL(indexBuffer0->GetPrimitiveType(), IndexFormatType::PolygonPoint);
+    ASSERT_EQUAL(indexBuffer0->GetPrimitiveType(), IndexFormatType::PolygonPoint);
     ASSERT_EQUAL(indexBuffer0->GetNumPrimitives(), numPrimitives);
 
     indexBuffer0->DestroyStorage();
@@ -118,7 +118,7 @@ void Rendering::IndexBufferTesting::CreateStorageTest()
     ASSERT_EQUAL(indexBuffer1->GetNumBytes(), numBytes);
     ASSERT_EQUAL(indexBuffer1->GetNumActiveElements(), numPrimitives);
     ASSERT_EQUAL(indexBuffer1->GetNumActiveBytes(), numBytes);
-    ASSERT_ENUM_EQUAL(indexBuffer1->GetPrimitiveType(), IndexFormatType::PolygonPoint);
+    ASSERT_EQUAL(indexBuffer1->GetPrimitiveType(), IndexFormatType::PolygonPoint);
     ASSERT_EQUAL(indexBuffer1->GetNumPrimitives(), numPrimitives);
 
     indexBuffer1->CreateStorage();

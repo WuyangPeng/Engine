@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 20:35)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/16 17:07)
 
 #include "ReadFileManagerTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -19,8 +19,6 @@
 
 #include <string>
 #include <vector>
-
-using namespace std::literals;
 
 CoreTools::ReadFileManagerTesting::ReadFileManagerTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -87,10 +85,10 @@ void CoreTools::ReadFileManagerTesting::GetFileByteSizeTest()
 
 System::String CoreTools::ReadFileManagerTesting::GetFileName()
 {
-    return SYSTEM_TEXT("Resource/FileManagerTesting/ReadFileManagerTestingText.txt"s);
+    return SYSTEM_TEXT("Resource/FileManagerTesting/ReadFileManagerTestingText.txt");
 }
 
 std::string CoreTools::ReadFileManagerTesting::GetFileContent()
 {
-    return "ReadFileManager Testing Text"s;
+    return "ReadFileManager Testing Text";
 }

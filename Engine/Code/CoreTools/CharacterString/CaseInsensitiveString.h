@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:19)
+/// 版本：1.0.0.8 (2024/03/29 22:32)
 
 #ifndef CORE_TOOLS_CHARACTER_STRING_CASE_INSENSITIVE_STRING_H
 #define CORE_TOOLS_CHARACTER_STRING_CASE_INSENSITIVE_STRING_H
@@ -40,7 +40,7 @@ namespace CoreTools
 
     private:
         NODISCARD static int Compare(const CharType* lhs, const CharType* rhs) noexcept;
-        NODISCARD static int ToLower(const CharType* value) noexcept;
+        NODISCARD static int ToLower(const CharType* character) noexcept;
     };
 
     using CaseInsensitiveCStringTraits = CaseInsensitiveStringTraits<char>;

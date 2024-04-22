@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:23)
+/// 版本：1.0.0.8 (2024/04/12 11:31)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,10 +20,8 @@
 #include <algorithm>
 #include <functional>
 
-using namespace std::literals;
-
-CoreTools::SuiteImpl::SuiteImpl(const std::string& name, const OStreamShared& streamShared, bool printRunUnitTest)
-    : ParentType{ streamShared }, suiteName{ name }, unitTestCollection{}, printRunUnitTest{ printRunUnitTest }
+CoreTools::SuiteImpl::SuiteImpl(std::string name, const OStreamShared& streamShared, bool printRunUnitTest) noexcept
+    : ParentType{ streamShared }, suiteName{ std::move(name) }, unitTestCollection{}, printRunUnitTest{ printRunUnitTest }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_3;
 }
@@ -32,23 +30,14 @@ CoreTools::SuiteImpl::SuiteImpl(const std::string& name, const OStreamShared& st
 
 bool CoreTools::SuiteImpl::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && IsUnitTestValid())
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && IsUnitTestValid();
 }
 
 bool CoreTools::SuiteImpl::IsUnitTestValid() const noexcept
 {
-    for (const auto& unitTest : unitTestCollection)
-    {
-        if (unitTest == nullptr)
-        {
-            return false;
-        }
-    }
-
-    return true;
+    return std::ranges::all_of(unitTestCollection, [](const auto& element) noexcept {
+        return element != nullptr;
+    });
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -144,8 +133,8 @@ void CoreTools::SuiteImpl::RunUnitTest()
 {
     CORE_TOOLS_CLASS_IS_VALID_3;
 
-    std::ranges::for_each(unitTestCollection, [printRunUnitTest = printRunUnitTest](auto& unitTest) {
-        if (printRunUnitTest)
+    std::ranges::for_each(unitTestCollection, [isPrint = printRunUnitTest](auto& unitTest) {
+        if (isPrint)
         {
             unitTest->PrintRunUnitTest();
         }
@@ -158,7 +147,7 @@ void CoreTools::SuiteImpl::PrintRunUnitTest()
 {
     CORE_TOOLS_CLASS_IS_VALID_3;
 
-    const auto runSuite = "正在运行测试套件 \""s + GetName() + "\"。\n"s;
+    const auto runSuite = "正在运行测试套件 \"" + GetName() + "\"。\n";
 
     LOG_ASYNCHRONOUS_SINGLETON.Registered(GetStream(), runSuite);
 }

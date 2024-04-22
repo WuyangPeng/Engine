@@ -1,11 +1,11 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:09)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/22 16:25)
 
 #include "MultiArrayAdapterTesting.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -40,6 +40,8 @@ void CoreTools::MultiArrayAdapterTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(OrderLRoTConstantTest);
 
     ASSERT_NOT_THROW_EXCEPTION_0(MultiArrayAdapterTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CompareTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ResetTest);
 }
 
 void CoreTools::MultiArrayAdapterTesting::SizeTest()
@@ -47,7 +49,7 @@ void CoreTools::MultiArrayAdapterTesting::SizeTest()
     constexpr Lattice<true, 5, 6, 10> lattice{};
     std::vector<int> container(lattice.GetSize());
 
-    const MultiArrayAdapter<int, true, 5, 6, 10> lattice0{ container.data() };
+    MultiArrayAdapter<int, true, 5, 6, 10> lattice0{ container.data() };
 
     static_assert(lattice0.GetDimensions() == 3);
 
@@ -321,4 +323,42 @@ void CoreTools::MultiArrayAdapterTesting::MultiArrayAdapterTest()
             }
         }
     }
+}
+
+void CoreTools::MultiArrayAdapterTesting::CompareTest()
+{
+    constexpr Lattice<true, 5, 6, 10> lattice{};
+    std::vector<int> container(lattice.GetSize());
+    const MultiArrayAdapter<int, true, 5, 6, 10> lattice0{ container.data() };
+
+    ASSERT_TRUE(lattice0 == lattice0);
+    ASSERT_FALSE(lattice0 != lattice0);
+
+    ASSERT_FALSE(lattice0 < lattice0);
+    ASSERT_FALSE(lattice0 > lattice0);
+    ASSERT_TRUE(lattice0 <= lattice0);
+    ASSERT_TRUE(lattice0 >= lattice0);
+
+    const MultiArrayAdapter<int, true> lattice1{ { 5, 6, 10 }, container.data() };
+
+    ASSERT_TRUE(lattice1 == lattice1);
+    ASSERT_FALSE(lattice1 != lattice1);
+
+    ASSERT_FALSE(lattice1 < lattice1);
+    ASSERT_FALSE(lattice1 > lattice1);
+    ASSERT_TRUE(lattice1 <= lattice1);
+    ASSERT_TRUE(lattice1 >= lattice1);
+}
+
+void CoreTools::MultiArrayAdapterTesting::ResetTest()
+{
+    constexpr Lattice<true, 5, 6, 10> lattice{};
+    std::vector<int> container0(lattice.GetSize());
+    std::vector<int> container1(lattice.GetSize());
+    MultiArrayAdapter<int, true, 5, 6, 10> lattice0{ container0.data() };
+
+    lattice0.Reset(container1.data());
+
+    MultiArrayAdapter<int, true> lattice1{ { 5, 6, 10 }, container0.data() };
+    lattice1.Reset({ 5, 6, 10 }, container1.data());
 }

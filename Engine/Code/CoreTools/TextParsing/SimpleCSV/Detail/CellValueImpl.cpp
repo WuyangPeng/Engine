@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:05)
+/// 版本：1.0.0.8 (2024/04/11 11:02)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,8 +13,6 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/SimpleCSV/CellValueProxy.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/ValueTypeFlags.h"
-
-using namespace std::literals;
 
 CoreTools::SimpleCSV::CellValueImpl::CellValueImpl() noexcept
     : cellValue{ std::string{} }, cellType{ ValueType::Empty }
@@ -84,17 +82,17 @@ std::string CoreTools::SimpleCSV::CellValueImpl::GetTypeAsString() const
     switch (GetType())
     {
         case ValueType::Empty:
-            return "empty"s;
+            return "empty";
         case ValueType::Boolean:
-            return "boolean"s;
+            return "boolean";
         case ValueType::Integer:
-            return "integer"s;
+            return "integer";
         case ValueType::Float:
-            return "float"s;
+            return "float";
         case ValueType::String:
-            return "string"s;
+            return "string";
         default:
-            return "error"s;
+            return "error";
     }
 }
 

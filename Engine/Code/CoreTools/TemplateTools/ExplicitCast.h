@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:22)
+/// 版本：1.0.0.8 (2024/04/12 14:17)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_EXPLICIT_CAST_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_EXPLICIT_CAST_H
@@ -32,7 +32,7 @@ namespace CoreTools
         ValueType value;
     };
 
-    // 转换成非const引用不可用
+    /// 转换成非const引用不可用
     template <typename T>
     class ExplicitCast<T&> final
     {
@@ -73,7 +73,7 @@ namespace CoreTools
         const T& value;
     };
 
-    // 转换成非const指针不可用
+    /// 转换成非const指针不可用
     template <typename T>
     class ExplicitCast<T*> final
     {

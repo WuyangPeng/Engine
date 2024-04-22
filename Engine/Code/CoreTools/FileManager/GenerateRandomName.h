@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:44)
+/// 版本：1.0.0.8 (2024/03/30 22:56)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_GENERATE_RANDOM_NAME_H
 #define CORE_TOOLS_FILE_MANAGER_GENERATE_RANDOM_NAME_H
@@ -14,10 +14,9 @@
 
 #include "System/Helper/UnicodeUsing.h"
 
-// 生成一个随机文件名，用于在修改和保存存档文件时生成临时存档。
+/// 生成一个随机文件名，用于在修改和保存存档文件时生成临时存档。
 namespace CoreTools
 {
-
     class CORE_TOOLS_DEFAULT_DECLARE GenerateRandomName
     {
     public:
@@ -32,6 +31,7 @@ namespace CoreTools
 
     private:
         template <typename T>
+        requires(std::is_same_v<T, std::string> || std::is_same_v<T, std::wstring>)
         NODISCARD static T GetName(int length, const T& letters, const T& extensionName);
     };
 }

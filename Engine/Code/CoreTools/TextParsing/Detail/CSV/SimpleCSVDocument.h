@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:41)
+/// 版本：1.0.0.8 (2024/04/02 18:08)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_SIMPLE_CSV_DOCUMENT_H
 #define CORE_TOOLS_TEXT_PARSING_SIMPLE_CSV_DOCUMENT_H
@@ -27,18 +27,20 @@ namespace CoreTools
         using ClassType = SimpleCSVDocument;
 
         using String = System::String;
-        using WorksheetContainer = std::vector<SimpleCSV::Worksheet>;
+        using Worksheet = SimpleCSV::Worksheet;
+        using Document = SimpleCSV::Document;
+        using WorksheetContainer = std::vector<Worksheet>;
 
     public:
         explicit SimpleCSVDocument(const std::string& xlsxFileName);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD SimpleCSV::Worksheet GetFirstXLWorksheet();
-        NODISCARD WorksheetContainer GetXLWorksheet();
+        NODISCARD Worksheet GetFirstWorksheet();
+        NODISCARD WorksheetContainer GetWorksheet();
 
     private:
-        using DocumentSharedPtr = std::shared_ptr<SimpleCSV::Document>;
+        using DocumentSharedPtr = std::shared_ptr<Document>;
         using WorksheetNameContainer = std::vector<std::string>;
 
     private:

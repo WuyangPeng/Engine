@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/28 14:52)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/12 17:35)
 
 #include "TestingHelper.h"
 #include "UnitTestHelper.h"
@@ -24,10 +24,10 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CMainFunctionHelper, TestingHelper)
 
 int CMainFunctionHelper::TestingHelper::DoRun()
 {
-    std::cout << "argc = " << GetArgc() << std::endl;
+    std::cout << "argc = " << GetArgc() << '\n';
     for (auto i = 0; i < GetArgc(); ++i)
     {
-        std::cout << "argv = " << GetArgv(i) << std::endl;
+        std::cout << "argv = " << GetArgv(i) << '\n';
     }
 
     const std::string suiteName{ "suiteName" };

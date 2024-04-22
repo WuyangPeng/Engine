@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:04)
+/// 版本：1.0.0.8 (2024/03/28 16:38)
 
 #ifndef CORE_TOOLS_BASE_SINGLETON_DETAIL_H
 #define CORE_TOOLS_BASE_SINGLETON_DETAIL_H
@@ -73,22 +73,19 @@ void CoreTools::Singleton<T, MutexCreate>::CheckSingleton() noexcept(gAssert < 0
 }
 
 template <typename T, CoreTools::MutexCreate MutexCreate>
-typename CoreTools::Singleton<T, MutexCreate>::MutexType& CoreTools::Singleton<T, MutexCreate>::GetMutex()
+typename CoreTools::Singleton<T, MutexCreate>::MutexType& CoreTools::Singleton<T, MutexCreate>::GetMutex() noexcept requires(isStdMutex)
 {
-    if constexpr (MutexCreate == MutexCreate::UseOriginalStd || MutexCreate == MutexCreate::UseOriginalStdRecursive)
-    {
-        static MutexType mutex{};
+    static MutexType mutex{};
 
-        CoreTools::DisableNoexcept();
+    return mutex;
+}
 
-        return mutex;
-    }
-    else
-    {
-        static MutexType mutex{ MutexCreate };
+template <typename T, CoreTools::MutexCreate MutexCreate>
+typename CoreTools::Singleton<T, MutexCreate>::MutexType& CoreTools::Singleton<T, MutexCreate>::GetMutex() requires(!isStdMutex)
+{
+    static MutexType mutex{ MutexCreate };
 
-        return mutex;
-    }
+    return mutex;
 }
 
 #endif  // CORE_TOOLS_BASE_SINGLETON_DETAIL_H

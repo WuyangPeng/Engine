@@ -9,7 +9,7 @@
 
 #include "CyclicRedundancyCheckCCITTTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/CyclicRedundancyCheck/CyclicRedundancyCheckCCITT.h"
+#include "CoreTools/CyclicRedundancyCheck/CyclicRedundancyCheckCcitt.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -38,13 +38,13 @@ void CoreTools::CyclicRedundancyCheckCCITTTesting::CCITTTest()
 {
     std::array buff{ '8', '3', '1', '4', '7', '0', '2', '9', '6', '5', '7', '7' };
 
-    const CyclicRedundancyCheckCCITT cyclicRedundancyCheckCCITT0{ buff.data(), boost::numeric_cast<int>(buff.size()) };
+    const CyclicRedundancyCheckCcitt cyclicRedundancyCheckCCITT0{ buff.data(), boost::numeric_cast<int>(buff.size()) };
 
     const auto check0 = cyclicRedundancyCheckCCITT0.GetCyclicRedundancyCheck();
 
     buff.at(4) = '2';
 
-    const CyclicRedundancyCheckCCITT cyclicRedundancyCheckCCITT1{ buff.data(), boost::numeric_cast<int>(buff.size()) };
+    const CyclicRedundancyCheckCcitt cyclicRedundancyCheckCCITT1{ buff.data(), boost::numeric_cast<int>(buff.size()) };
 
     const auto check1 = cyclicRedundancyCheckCCITT1.GetCyclicRedundancyCheck();
 

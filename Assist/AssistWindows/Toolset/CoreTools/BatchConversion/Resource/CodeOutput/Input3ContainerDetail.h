@@ -15,13 +15,12 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Function>
-CsvOutput::Input3Container::ConstInput3BaseSharedPtr CsvOutput::Input3Container::GetFirstInput3(Function function) const
+CsvOutput::Input3Container::ConstInput3SharedPtr CsvOutput::Input3Container::GetFirstInput3(Function function) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = std::ranges::find_if(input3, function);
-
-    if (iter != input3.cend())
+    if (const auto iter = std::ranges::find_if(input3, function);
+        iter != input3.cend())
     {
         return *iter;
     }

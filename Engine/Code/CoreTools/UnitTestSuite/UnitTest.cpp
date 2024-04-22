@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:24)
+/// 版本：1.0.0.8 (2024/04/12 11:23)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -24,8 +24,6 @@
 #include "CoreTools/LogManager/LogConsoleTextColorsManager.h"
 
 #include <iomanip>
-
-using namespace std::literals;
 
 CoreTools::UnitTest::UnitTest(const OStreamShared& streamShared)
     : ParentType{ streamShared }, unitTestData{ std::make_shared<UnitTestData>() }, cpuTimer{ CpuTimerData::CreateSharedPtr() }
@@ -58,10 +56,7 @@ CoreTools::UnitTest& CoreTools::UnitTest::operator=(UnitTest&& rhs) noexcept
 
 bool CoreTools::UnitTest::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && unitTestData != nullptr && cpuTimer != nullptr)
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && unitTestData != nullptr && cpuTimer != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -104,7 +99,7 @@ void CoreTools::UnitTest::PrintReport()
 {
     constexpr auto characterWidth = 10;
 
-    UnitTestPrintManager manager{ *this, "测试"s + GetTestModeDescribe() };
+    UnitTestPrintManager manager{ *this, "测试" + GetTestModeDescribe() };
 
     manager.PrintTestName();
     manager.PrintTestResult(characterWidth);
@@ -113,7 +108,7 @@ void CoreTools::UnitTest::PrintReport()
 
 std::string CoreTools::UnitTest::GetTestModeDescribe() const
 {
-    return "花费"s;
+    return "花费";
 }
 
 void CoreTools::UnitTest::ResetTestData()
@@ -325,27 +320,10 @@ void CoreTools::UnitTest::AssertFloatingPointCompleteUnequal(double lhs, double 
     AssertUnequal(completeLhs, completeRhs, functionDescribed, errorMessage, failureThrow);
 }
 
-void CoreTools::UnitTest::AssertEqual(wchar_t lhs, wchar_t rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
-{
-    if (const auto condition = (lhs == rhs); condition)
-    {
-        AssertTrue();
-    }
-    else
-    {
-        std::stringstream stream{};
-
-        stream << StringConversion::WideCharConversionMultiByte(std::wstring{ lhs }) << "不等于" << StringConversion::WideCharConversionMultiByte(std::wstring{ rhs });
-
-        const auto described = GetAssertDescribed(stream.str(), errorMessage);
-
-        AssertTest(condition, functionDescribed, described, failureThrow);
-    }
-}
-
 void CoreTools::UnitTest::AssertEqual(const SimpleCSV::CellValue& lhs, const SimpleCSV::CellValue& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-    if (const auto condition = (lhs == rhs); condition)
+    if (const auto condition = (lhs == rhs);
+        condition)
     {
         AssertTrue();
     }
@@ -357,7 +335,7 @@ void CoreTools::UnitTest::AssertEqual(const SimpleCSV::CellValue& lhs, const Sim
 
 void CoreTools::UnitTest::PrintRunUnitTest()
 {
-    const auto runUnitTest = "正在运行测试 \""s + GetName() + "\"。\n"s;
+    const auto runUnitTest = "正在运行测试 \"" + GetName() + "\"。\n";
 
     LOG_ASYNCHRONOUS_SINGLETON.Registered(GetStream(), runUnitTest);
 

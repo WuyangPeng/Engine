@@ -5,14 +5,13 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:59)
+/// 版本：1.0.0.8 (2024/04/07 16:22)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ZipEntry.h"
 #include "Detail/ZipEntryImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools::SimpleZip, ZipEntry)
 

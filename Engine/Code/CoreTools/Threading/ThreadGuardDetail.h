@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:09)
+/// 版本：1.0.0.8 (2024/03/30 17:59)
 
 #ifndef CORE_TOOLS_THREADING_THREAD_GUARD_DETAIL_H
 #define CORE_TOOLS_THREADING_THREAD_GUARD_DETAIL_H

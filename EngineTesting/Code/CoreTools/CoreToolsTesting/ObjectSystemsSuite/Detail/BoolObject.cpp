@@ -1,13 +1,14 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:14)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/22 16:49)
 
 #include "BoolObject.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
@@ -31,6 +32,11 @@ CoreTools::BoolObject::BoolObject(DisableNotThrow disableNotThrow)
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 
     CORE_TOOLS_ASSERTION_1(IsLoadValidity(), "载入的数据出现错误！");
+}
+
+CoreTools::BoolObject::BoolObjectSharedPtr CoreTools::BoolObject::Create()
+{
+    return std::make_shared<ClassType>(DisableNotThrow::Disable);
 }
 
 CoreTools::BoolObject::BoolObject(LoadConstructor loadConstructor)
@@ -75,10 +81,7 @@ bool CoreTools::BoolObject::IsLoadValidity() const
 
 bool CoreTools::BoolObject::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && !boolArray1.empty())
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && !boolArray1.empty();
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -89,14 +92,14 @@ int CoreTools::BoolObject::GetStreamingSize() const
 
     auto size = ParentType::GetStreamingSize();
 
-    // WriteBool
+    /// WriteBool
     size += GetStreamSize(boolValue);
 
-    // WriteBoolWithNumber
+    /// WriteBoolWithNumber
     size += sizeof(int32_t);
     size += bufferSize * GetStreamSize(boolValue);
 
-    // WriteBoolWithoutNumber
+    /// WriteBoolWithoutNumber
     size += bufferSize * GetStreamSize(boolValue);
 
     return size;

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:43)
+/// 版本：1.0.0.8 (2024/04/11 15:46)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_HEAP_ALLOCATE_H
 #define CORE_TOOLS_MEMORY_TOOLS_HEAP_ALLOCATE_H
@@ -15,6 +15,7 @@
 namespace CoreTools
 {
     template <typename T>
+    requires(std::is_trivial_v<T> && std::is_standard_layout_v<T>)
     class HeapAllocate final
     {
     public:
@@ -39,7 +40,7 @@ namespace CoreTools
 
         NODISCARD int GetLength() const noexcept;
         NODISCARD int GetByteLength() const;
-        NODISCARD const Point GetPoint() const noexcept;
+        NODISCARD ConstPoint GetPoint() const noexcept;
         NODISCARD Point GetPoint() noexcept;
 
     private:

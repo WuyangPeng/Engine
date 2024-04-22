@@ -64,10 +64,10 @@ void Rendering::DepthStencilStateFaceTesting::DepthStencilStateFaceTest()
 
 void Rendering::DepthStencilStateFaceTesting::DepthStencilStateFaceValueTest()
 {
-    ASSERT_ENUM_EQUAL(depthStencilStateFace.GetFail(), fail);
-    ASSERT_ENUM_EQUAL(depthStencilStateFace.GetDepthFail(), depthFail);
-    ASSERT_ENUM_EQUAL(depthStencilStateFace.GetPass(), pass);
-    ASSERT_ENUM_EQUAL(depthStencilStateFace.GetComparison(), comparison);
+    ASSERT_EQUAL(depthStencilStateFace.GetFail(), fail);
+    ASSERT_EQUAL(depthStencilStateFace.GetDepthFail(), depthFail);
+    ASSERT_EQUAL(depthStencilStateFace.GetPass(), pass);
+    ASSERT_EQUAL(depthStencilStateFace.GetComparison(), comparison);
 }
 
 void Rendering::DepthStencilStateFaceTesting::DepthStencilStateFaceSaveTest()

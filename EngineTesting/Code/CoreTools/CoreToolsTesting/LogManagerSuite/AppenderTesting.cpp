@@ -1,17 +1,17 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:24)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/18 21:57)
 
 #include "AppenderTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
 #include "System/Helper/PragmaWarning/PosixTime.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/LogManager/Appender.h"
@@ -69,14 +69,13 @@ void CoreTools::AppenderTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(SetLogLevelTest);
 }
 
-// Console测试
 void CoreTools::AppenderTesting::ConsoleTest()
 {
     Appender appender{ AppenderPrint::All, LogLevel::Trace };
 
-    ASSERT_ENUM_EQUAL(appender.GetFlags(), AppenderPrint::All);
-    ASSERT_ENUM_EQUAL(appender.GetLogLevel(), LogLevel::Trace);
-    ASSERT_ENUM_EQUAL(appender.GetAppenderType(), AppenderType::Console);
+    ASSERT_EQUAL(appender.GetFlags(), AppenderPrint::All);
+    ASSERT_EQUAL(appender.GetLogLevel(), LogLevel::Trace);
+    ASSERT_EQUAL(appender.GetAppenderType(), AppenderType::Console);
 
     LogMessage traceMessage{ LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
     traceMessage << gConsoleTraceMessage;
@@ -112,7 +111,6 @@ void CoreTools::AppenderTesting::ConsoleTest()
     ASSERT_FALSE(appender.IsDefault());
 }
 
-// File测试
 void CoreTools::AppenderTesting::FileTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(FileLogTest);
@@ -127,9 +125,9 @@ void CoreTools::AppenderTesting::FileLogTest()
     constexpr auto maxFileSize = 100000;
     Appender appender{ gAppenderTestingPathName, gAppenderTestingFileName, AppenderPrint::All, LogLevel::Trace, maxFileSize, true, gExtensionName };
 
-    ASSERT_ENUM_EQUAL(appender.GetFlags(), AppenderPrint::All);
-    ASSERT_ENUM_EQUAL(appender.GetLogLevel(), LogLevel::Trace);
-    ASSERT_ENUM_EQUAL(appender.GetAppenderType(), AppenderType::File);
+    ASSERT_EQUAL(appender.GetFlags(), AppenderPrint::All);
+    ASSERT_EQUAL(appender.GetLogLevel(), LogLevel::Trace);
+    ASSERT_EQUAL(appender.GetAppenderType(), AppenderType::File);
 
     LogMessage traceMessage{ LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
     traceMessage << gFileTraceMessage;
@@ -167,7 +165,7 @@ void CoreTools::AppenderTesting::FileLogTest()
 
 void CoreTools::AppenderTesting::FileContentTest()
 {
-    const IFStreamManager fileManager{ appenderTestingFullName };
+    const IFileStreamManager fileManager{ appenderTestingFullName };
 
     const auto fileContent = fileManager.GetFileContent();
 
@@ -192,7 +190,7 @@ void CoreTools::AppenderTesting::BackupFileTest()
 
 void CoreTools::AppenderTesting::BackupFileContentTest()
 {
-    const IFStreamManager fileManager{ appenderTestingFullName };
+    const IFileStreamManager fileManager{ appenderTestingFullName };
 
     const auto fileContent = fileManager.GetFileContent();
 
@@ -204,7 +202,7 @@ void CoreTools::AppenderTesting::BackupFileContentTest()
     ASSERT_EQUAL(fileContent.find(gFileErrorMessage), System::String::npos);
     ASSERT_EQUAL(fileContent.find(gFileFatalMessage), System::String::npos);
 
-    const IFStreamManager backupFileManager{ backupFileName };
+    const IFileStreamManager backupFileManager{ backupFileName };
 
     const auto backupFileContent = backupFileManager.GetFileContent();
 
@@ -222,7 +220,7 @@ void CoreTools::AppenderTesting::DeleteFileTest()
     DeleteFileTools backupFile{ backupFileName };
 }
 
-System::String CoreTools::AppenderTesting::GetBackupFileName()
+System::String CoreTools::AppenderTesting::GetBackupFileName() const
 {
     System::String backupName{ appenderTestingName };
 
@@ -241,11 +239,11 @@ void CoreTools::AppenderTesting::SetLogLevelTest()
 {
     Appender appender(AppenderPrint::All, LogLevel::Trace);
 
-    ASSERT_ENUM_EQUAL(appender.GetLogLevel(), LogLevel::Trace);
+    ASSERT_EQUAL(appender.GetLogLevel(), LogLevel::Trace);
 
     appender.SetLogLevel(LogLevel::Fatal);
 
-    ASSERT_ENUM_EQUAL(appender.GetLogLevel(), LogLevel::Fatal);
+    ASSERT_EQUAL(appender.GetLogLevel(), LogLevel::Fatal);
 }
 
 void CoreTools::AppenderTesting::FileConfigurationTest()
@@ -253,9 +251,9 @@ void CoreTools::AppenderTesting::FileConfigurationTest()
     constexpr auto maxFileSize = 100000;
     Appender appender{ gAppenderTestingPathName, AppenderPrint::All, LogLevel::Trace, maxFileSize, true, gExtensionName };
 
-    ASSERT_ENUM_EQUAL(appender.GetFlags(), AppenderPrint::All);
-    ASSERT_ENUM_EQUAL(appender.GetLogLevel(), LogLevel::Trace);
-    ASSERT_ENUM_EQUAL(appender.GetAppenderType(), AppenderType::FileConfiguration);
+    ASSERT_EQUAL(appender.GetFlags(), AppenderPrint::All);
+    ASSERT_EQUAL(appender.GetLogLevel(), LogLevel::Trace);
+    ASSERT_EQUAL(appender.GetAppenderType(), AppenderType::FileConfiguration);
 
     LogMessage traceMessage{ LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
     traceMessage << gFileTraceMessage;

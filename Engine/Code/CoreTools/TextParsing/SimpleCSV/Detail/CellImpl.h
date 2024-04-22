@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:45)
+/// 版本：1.0.0.8 (2024/04/02 17:53)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CELL_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CELL_IMPL_H
@@ -21,7 +21,7 @@
 #include <memory>
 #include <string>
 
-// 封装电子表格单元格的属性和行为的实现类。
+/// 封装电子表格单元格的属性和行为的实现类。
 namespace CoreTools::SimpleCSV
 {
     class CORE_TOOLS_HIDDEN_DECLARE CellImpl final

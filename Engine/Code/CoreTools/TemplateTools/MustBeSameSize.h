@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:23)
+/// 版本：1.0.0.8 (2024/04/12 14:15)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_MUST_BE_SAME_SIZE_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_MUST_BE_SAME_SIZE_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-// 约束：两个类大小必须相等，可能依赖于硬件架构或编译器。
+/// 约束：两个类大小必须相等，可能依赖于硬件架构或编译器。
 namespace CoreTools
 {
     template <typename T>
@@ -38,7 +38,7 @@ namespace CoreTools
     {
         ~MustBeSameSize()
         {
-            MAYBE_UNUSED void (*ptr)() = Constranints;
+            MAYBE_UNUSED void (*ptr)() = Constraint;
         }
 
         MustBeSameSize() noexcept = default;
@@ -48,7 +48,7 @@ namespace CoreTools
         MustBeSameSize& operator=(MustBeSameSize&& rhs) noexcept = default;
 
     private:
-        constexpr static void Constranints() noexcept
+        constexpr static void Constraint() noexcept
         {
             constexpr auto t1NotSameSizeAsT2 = static_cast<uint32_t>(static_cast<int>(SizeOf<T1>::Value) == static_cast<int>(SizeOf<T2>::Value));
 

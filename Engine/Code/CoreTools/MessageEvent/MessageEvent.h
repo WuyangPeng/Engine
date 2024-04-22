@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:49)
+/// 版本：1.0.0.8 (2024/04/12 15:22)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_H
 #define CORE_TOOLS_MESSAGE_EVENT_H

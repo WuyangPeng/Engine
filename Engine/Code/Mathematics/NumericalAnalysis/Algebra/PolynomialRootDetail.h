@@ -94,7 +94,69 @@ bool Mathematics::Algebra::operator<(const PolynomialRoot<Real>& lhs, const Poly
 }
 
 template <typename Real>
-void Mathematics::Algebra::PolynomialRoot<Real>::PolynomialRootBisect(const std::function<Real(Real)>& function, int signFMin, int signFMax, Real& xMin, Real& xMax)
+void Mathematics::Algebra::PolynomialRoot<Real>::PolynomialRootBisect(const std::function<Real(Real)>& function, int signFMin, int signFMax, Real& xMin, Real& xMax) requires(!std::is_arithmetic_v<Real>)
+{
+    const auto fMin = function(xMin);
+    const auto trueSignFMin = (fMin > Real{ 0 } ? +1 : (fMin < Real{ 0 } ? -1 : 0));
+    if (trueSignFMin == signFMin)
+    {
+        const auto fMax = function(xMax);
+        const auto trueSignFMax = (fMax > Real{ 0 } ? +1 : (fMax < Real{ 0 } ? -1 : 0));
+        if (trueSignFMax == signFMax)
+        {
+            /// 这些标志是正确的平分线。
+            /// 当中点处的函数值为0时，迭代算法终止。
+            /// 或者，当当前间隔的中点等于其中一个间隔端点时，它终止，此时间隔端点是连续的浮点数。
+            /// 上限maxBisections足够大以确保循环终止，但典型的迭代次数要小得多。
+            constexpr auto maxBisections = 4096;
+            for (auto iteration = 1; iteration < maxBisections; ++iteration)
+            {
+                auto x = Real{ 1 } / Real{ 2 } * (xMin + xMax);
+                auto f = function(x);
+
+                if (x == xMin || x == xMax)
+                {
+                    /// 浮点数xMin和xMax是连续的，
+                    /// 在这种情况下，细分无法在它们之间产生浮点数。
+                    /// 将边界间隔返回给调用者以进行进一步处理。
+                    return;
+                }
+
+                const auto signF = (f > Real{ 0 } ? 1 : (f < Real{ 0 } ? -1 : 0));
+                if (signF == 0)
+                {
+                    /// 该函数恰好为零，并且找到了根。
+                    xMin = x;
+                    xMax = x;
+                    return;
+                }
+
+                /// 将正确的端点更新为中点。
+                if (signF == signFMin)
+                {
+                    xMin = x;
+                }
+                else  // signF == signFMax
+                {
+                    xMax = x;
+                }
+            }
+        }
+        else
+        {
+            /// 浮点舍入误差会妨碍对根的多重性进行正确分类。
+            xMin = xMax;
+        }
+    }
+    else
+    {
+        /// 浮点舍入误差会妨碍对根的多重性进行正确分类。
+        xMax = xMin;
+    }
+}
+
+template <typename Real>
+void Mathematics::Algebra::PolynomialRoot<Real>::PolynomialRootBisect(const std::function<Real(Real)>& function, int signFMin, int signFMax, Real& xMin, Real& xMax) requires(std::is_arithmetic_v<Real>)
 {
     const auto fMin = function(xMin);
     const auto trueSignFMin = (fMin > Real{} ? +1 : (fMin < Real{} ? -1 : 0));

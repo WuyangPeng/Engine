@@ -36,7 +36,7 @@ requires((Degree & 1) == 1 && 1 <= ((Degree - 1) / 2) && ((Degree - 1) / 2) <= 5
 T Mathematics::SinEstimateReal(T x)
 {
     // 将x映射到[-pi,pi]中的r。
-    auto r = std::remainder(x, Math<T>::GetTwoPI());
+    const auto r = std::remainder(x, Math<T>::GetTwoPI());
 
     // 用sin(y) = sin(x)将R映射到y在[-pi/2,pi/2] 中。
     if (Math<T>::GetHalfPI() < r)

@@ -174,9 +174,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>xcopy "$(EngineTestingInclude)/../EngineWindows/CoreTools/CoreToolsTesting/Resource/JsonGenerate/*.*" "$(AssistInclude)/Toolset/CoreTools/JsonConfigure/JsonConfigure/" /F /Y</Command>
-    </PreBuildEvent>
+    <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <ClCompile>
@@ -188,9 +186,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>xcopy "$(EngineTestingInclude)/../EngineWindows/CoreTools/CoreToolsTesting/Resource/JsonGenerate/*.*" "$(AssistInclude)/Toolset/CoreTools/JsonConfigure/JsonConfigure/" /F /Y</Command>
-    </PreBuildEvent>
+    <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -206,9 +202,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>xcopy "$(EngineTestingInclude)/../EngineWindows/CoreTools/CoreToolsTesting/Resource/JsonGenerate/*.*" "$(AssistInclude)/Toolset/CoreTools/JsonConfigure/JsonConfigure/" /F /Y</Command>
-    </PreBuildEvent>
+    <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <ClCompile>
@@ -224,9 +218,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>xcopy "$(EngineTestingInclude)/../EngineWindows/CoreTools/CoreToolsTesting/Resource/JsonGenerate/*.*" "$(AssistInclude)/Toolset/CoreTools/JsonConfigure/JsonConfigure/" /F /Y</Command>
-    </PreBuildEvent>
+    <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -238,9 +230,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>xcopy "$(EngineTestingInclude)/../EngineWindows/CoreTools/CoreToolsTesting/Resource/JsonGenerate/*.*" "$(AssistInclude)/Toolset/CoreTools/JsonConfigure/JsonConfigure/" /F /Y</Command>
-    </PreBuildEvent>
+    <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <ClCompile>
@@ -252,9 +242,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>xcopy "$(EngineTestingInclude)/../EngineWindows/CoreTools/CoreToolsTesting/Resource/JsonGenerate/*.*" "$(AssistInclude)/Toolset/CoreTools/JsonConfigure/JsonConfigure/" /F /Y</Command>
-    </PreBuildEvent>
+    <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -270,9 +258,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>xcopy "$(EngineTestingInclude)/../EngineWindows/CoreTools/CoreToolsTesting/Resource/JsonGenerate/*.*" "$(AssistInclude)/Toolset/CoreTools/JsonConfigure/JsonConfigure/" /F /Y</Command>
-    </PreBuildEvent>
+    <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <ClCompile>
@@ -289,9 +275,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent />
-    <PreBuildEvent>
-      <Command>xcopy "$(EngineTestingInclude)/../EngineWindows/CoreTools/CoreToolsTesting/Resource/JsonGenerate/*.*" "$(AssistInclude)/Toolset/CoreTools/JsonConfigure/JsonConfigure/" /F /Y</Command>
-    </PreBuildEvent>
+    <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt" />

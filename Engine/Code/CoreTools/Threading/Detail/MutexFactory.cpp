@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:16)
+/// 版本：1.0.0.8 (2024/03/30 18:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -28,8 +28,6 @@
 
 #endif  // SYSTEM_PLATFORM_WIN32
 
-using std::make_shared;
-
 CoreTools::MutexFactory::MutexImplSharedPtr CoreTools::MutexFactory::Create(MutexCreate mutexCreate)
 {
     switch (mutexCreate)
@@ -37,37 +35,37 @@ CoreTools::MutexFactory::MutexImplSharedPtr CoreTools::MutexFactory::Create(Mute
 #if defined(SYSTEM_PLATFORM_WIN32)
 
         case MutexCreate::UseDefault:
-            return make_shared<WindowsMutex>();
+            return std::make_shared<StdRecursiveMutex>();
 
         case MutexCreate::UseCriticalSection:
-            return make_shared<CriticalSection>();
+            return std::make_shared<CriticalSection>();
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
         case MutexCreate::UseDefault:
             FALLTHROUGH;
         case MutexCreate::UseCriticalSection:
-            return make_shared<ThreadMutex>();
+            return std::make_shared<StdRecursiveMutex>();
 
 #endif  // SYSTEM_PLATFORM_WIN32
 
         case MutexCreate::UseStd:
             FALLTHROUGH;
         case MutexCreate::UseOriginalStd:
-            return make_shared<StdMutex>();
+            return std::make_shared<StdMutex>();
 
         case MutexCreate::UseStdRecursive:
             FALLTHROUGH;
         case MutexCreate::UseOriginalStdRecursive:
-            return make_shared<StdRecursiveMutex>();
+            return std::make_shared<StdRecursiveMutex>();
 
         case MutexCreate::UseBoost:
-            return make_shared<BoostMutex>();
+            return std::make_shared<BoostMutex>();
 
         case MutexCreate::UseBoostRecursive:
-            return make_shared<BoostRecursiveMutex>();
+            return std::make_shared<BoostRecursiveMutex>();
 
         default:
-            return make_shared<NullMutex>();
+            return std::make_shared<NullMutex>();
     }
 }

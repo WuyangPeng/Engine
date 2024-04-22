@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:43)
+/// 版本：1.0.0.8 (2024/04/11 15:45)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_CONTAINER_ADAPTER_H
 #define CORE_TOOLS_MEMORY_TOOLS_CONTAINER_ADAPTER_H
@@ -21,7 +21,7 @@
 namespace CoreTools
 {
     /// 容器的主要模板具有std::vector的大部分接口，但源数据是一个原始指针。
-    /// 这支持的函数可以接受std::array<T,N>类型的参数，或者对于N＞0（编译时已知大小），接受ContainerAdapter<T,N>类型的自变量。
+    /// 这支持的函数可以接受std::array<T,N>类型的参数，或者对于N>0（编译时已知大小），接受ContainerAdapter<T,N>类型的自变量。
     /// 它支持可以接受std::vector<T>类型或ContainerAdapter<T>（大小仅在运行时已知）类型的参数的函数。
     template <typename T, int...>
     class ContainerAdapter;

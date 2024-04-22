@@ -57,7 +57,7 @@ void System::SignalObjectAndWaitTesting::WaitForMutexTest(WindowsHandle eventHan
     const auto mutexHandle = CreateSystemMutex(nullptr, nullptr, MutexCreate::InitialOwner, MutexStandardAccess::Synchronize, MutexSpecificAccess::ModifyState);
     ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
 
-    ASSERT_ENUM_EQUAL(SystemSignalObjectAndWait(eventHandle, mutexHandle, EnumCastUnderlying(MutexWait::Infinite), false), MutexWaitReturn::Object0);
+    ASSERT_EQUAL(SystemSignalObjectAndWait(eventHandle, mutexHandle, EnumCastUnderlying(MutexWait::Infinite), false), MutexWaitReturn::Object0);
 
     ASSERT_TRUE(CloseSystemMutex(mutexHandle));
 }

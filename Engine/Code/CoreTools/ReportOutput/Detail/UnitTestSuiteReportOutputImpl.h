@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:17)
+/// 版本：1.0.0.8 (2024/04/12 11:05)
 
 #ifndef CORE_TOOLS_REPORT_OUTPUT_CORE_TOOLS_SUITE_REPORT_OUTPUT_IMPL_H
 #define CORE_TOOLS_REPORT_OUTPUT_CORE_TOOLS_SUITE_REPORT_OUTPUT_IMPL_H
@@ -31,8 +31,8 @@ namespace CoreTools
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        void PrintTestName(const std::string& testName);
-        void PrintSuiteName(const std::string& suiteName);
+        void PrintTestName(const std::string& testName) const;
+        void PrintSuiteName(const std::string& suiteName) const;
         void PrintTestResult(int passedNumber, int failedNumber, int errorNumber, int characterWidth);
 
     private:

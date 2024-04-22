@@ -5,14 +5,17 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:14)
+/// 版本：1.0.0.8 (2024/03/28 11:04)
 
 #ifndef CORE_TOOLS_HELPER_CUSTOM_ASSERT_MACRO_H
 #define CORE_TOOLS_HELPER_CUSTOM_ASSERT_MACRO_H
 
 #include "FunctionDescribedMacro.h"
+#include "CoreTools/Contract/ContractFwd.h"
 
-// 用来启用或禁用各种断言子系统的宏。目前断言系统只在Microsoft Visual Studio中实现。
+#include <string>
+
+/// 用来启用或禁用各种断言子系统的宏。目前断言系统只在Microsoft Visual Studio中实现。
 #if defined(OPEN_ASSERT) || defined(OPEN_IMPORTANT_EXCEPTION_ASSERT)
 
     #if defined(SYSTEM_PLATFORM_WIN32) && defined(TCRE_USE_MSVC)
@@ -147,5 +150,11 @@ constexpr auto gAssertDebug = false;
     #define ASSERTION_USE_FUNCTION_DESCRIBED_4(condition, functionDescribed, format, ...) (static_cast<void>(0))
 
 #endif  // 4 <= ASSERT_LEVEL
+
+template <typename... T>
+void FunctionProhibitedFromCalling(MAYBE_UNUSED const char* describe, MAYBE_UNUSED T&&... value) noexcept(gAssert < 4)
+{
+    ASSERTION_4(false, describe);
+}
 
 #endif  // CORE_TOOLS_HELPER_CUSTOM_ASSERT_MACRO_H

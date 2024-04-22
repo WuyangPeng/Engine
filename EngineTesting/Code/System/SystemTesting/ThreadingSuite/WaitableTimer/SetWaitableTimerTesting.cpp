@@ -58,11 +58,11 @@ void System::SetWaitableTimerTesting::DoAsynchronousTest(WindowsHandle waitableT
 
     GetStream() << "µÈ´ý" << -waitableTimerLargeInteger.QuadPart / base << "ÃëÖÓ¡£\n";
 
-    ASSERT_ENUM_EQUAL(SystemSleep(EnumCastUnderlying(MutexWait::Infinite), true), SleepReturn::WaitIOCompletion);
+    ASSERT_EQUAL(SystemSleep(EnumCastUnderlying(MutexWait::Infinite), true), SleepReturn::WaitIOCompletion);
 
     GetStream() << "µÈ´ý" << period / 1000 << "ÃëÖÓ¡£\n";
 
-    ASSERT_ENUM_EQUAL(SystemSleep(EnumCastUnderlying(MutexWait::Infinite), true), SleepReturn::WaitIOCompletion);
+    ASSERT_EQUAL(SystemSleep(EnumCastUnderlying(MutexWait::Infinite), true), SleepReturn::WaitIOCompletion);
 }
 
 void System::SetWaitableTimerTesting::AsynchronousUseTolerableDelayTest()
@@ -87,11 +87,11 @@ void System::SetWaitableTimerTesting::DoAsynchronousUseTolerableDelayTest(Window
 
     GetStream() << "µÈ´ý" << -waitableTimerLargeInteger.QuadPart / base << "ÃëÖÓ¡£\n";
 
-    ASSERT_ENUM_EQUAL(SystemSleep(EnumCastUnderlying(MutexWait::Infinite), true), SleepReturn::WaitIOCompletion);
+    ASSERT_EQUAL(SystemSleep(EnumCastUnderlying(MutexWait::Infinite), true), SleepReturn::WaitIOCompletion);
 
     GetStream() << "µÈ´ý" << period / 1000 << "ÃëÖÓ¡£\n";
 
-    ASSERT_ENUM_EQUAL(SystemSleep(EnumCastUnderlying(MutexWait::Infinite), true), SleepReturn::WaitIOCompletion);
+    ASSERT_EQUAL(SystemSleep(EnumCastUnderlying(MutexWait::Infinite), true), SleepReturn::WaitIOCompletion);
 }
 
 void System::SetWaitableTimerTesting::TimerApcProcedure(WindowsVoidPtr argToCompletionRoutine, WindowsDWord timerLowValue, WindowsDWord timerHighValue)

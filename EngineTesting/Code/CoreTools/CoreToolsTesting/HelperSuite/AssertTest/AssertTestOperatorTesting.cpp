@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+/// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+/// ¡™œµ◊˜’ﬂ£∫94458936@qq.com
 ///
-///	±Í◊º£∫std:c++20
-///	∞Ê±æ£∫0.9.1.5 (2023/10/24 15:30)
+/// ±Í◊º£∫std:c++20
+/// ∞Ê±æ£∫1.0.0.8 (2024/04/12 21:31)
 
 #include "AssertTestOperatorTesting.h"
 #include "CoreTools/CoreToolsTesting/HelperSuite/Detail/MacroTestEnum.h"
@@ -98,7 +98,7 @@ void CoreTools::AssertTestOperatorTesting::AssertOperatorDoNotUseMessageFailureT
     constexpr auto rhsExpression = 6;
 
     ASSERT_EQUAL_FAILURE_THROW(lhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_UNEQUAL(lhsExpression, rhsExpression);
+    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertEnumOperatorTest()
@@ -106,12 +106,12 @@ void CoreTools::AssertTestOperatorTesting::AssertEnumOperatorTest()
     constexpr auto lhsExpression = MacroTestEnum::One;
     constexpr auto rhsExpression = MacroTestEnum::Two;
 
-    ASSERT_ENUM_EQUAL(lhsExpression, lhsExpression);
-    ASSERT_ENUM_UNEQUAL(lhsExpression, rhsExpression);
-    ASSERT_ENUM_LESS(lhsExpression, rhsExpression);
-    ASSERT_ENUM_LESS_EQUAL(lhsExpression, rhsExpression);
-    ASSERT_ENUM_GREATER(rhsExpression, lhsExpression);
-    ASSERT_ENUM_GREATER_EQUAL(rhsExpression, lhsExpression);
+    ASSERT_EQUAL(lhsExpression, lhsExpression);
+    ASSERT_UNEQUAL(lhsExpression, rhsExpression);
+    ASSERT_LESS(lhsExpression, rhsExpression);
+    ASSERT_LESS_EQUAL(lhsExpression, rhsExpression);
+    ASSERT_GREATER(rhsExpression, lhsExpression);
+    ASSERT_GREATER_EQUAL(rhsExpression, lhsExpression);
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertEnumOperatorMessageTest()
@@ -119,12 +119,12 @@ void CoreTools::AssertTestOperatorTesting::AssertEnumOperatorMessageTest()
     constexpr auto lhsExpression = MacroTestEnum::One;
     constexpr auto rhsExpression = MacroTestEnum::Two;
 
-    ASSERT_ENUM_EQUAL_USE_MESSAGE(lhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_UNEQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_LESS_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_LESS_EQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_GREATER_USE_MESSAGE(rhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_GREATER_EQUAL_USE_MESSAGE(rhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_EQUAL_USE_MESSAGE(lhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_UNEQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
+    ASSERT_LESS_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
+    ASSERT_LESS_EQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
+    ASSERT_GREATER_USE_MESSAGE(rhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_GREATER_EQUAL_USE_MESSAGE(rhsExpression, lhsExpression, "≤‚ ‘");
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertEnumOperatorFailureThrowTest()
@@ -132,12 +132,12 @@ void CoreTools::AssertTestOperatorTesting::AssertEnumOperatorFailureThrowTest()
     constexpr auto lhsExpression = MacroTestEnum::One;
     constexpr auto rhsExpression = MacroTestEnum::Two;
 
-    ASSERT_ENUM_EQUAL_FAILURE_THROW(lhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_GREATER_FAILURE_THROW(rhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_GREATER_EQUAL_FAILURE_THROW(rhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
+    ASSERT_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
+    ASSERT_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
+    ASSERT_GREATER_FAILURE_THROW(rhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_GREATER_EQUAL_FAILURE_THROW(rhsExpression, lhsExpression, "≤‚ ‘");
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertSignedEnumOperatorTest()
@@ -145,12 +145,12 @@ void CoreTools::AssertTestOperatorTesting::AssertSignedEnumOperatorTest()
     constexpr auto lhsExpression = MacroTestSignedEnum::NegativeOne;
     constexpr auto rhsExpression = MacroTestSignedEnum::Zero;
 
-    ASSERT_ENUM_EQUAL(lhsExpression, lhsExpression);
-    ASSERT_ENUM_UNEQUAL(lhsExpression, rhsExpression);
-    ASSERT_ENUM_LESS(lhsExpression, rhsExpression);
-    ASSERT_ENUM_LESS_EQUAL(lhsExpression, rhsExpression);
-    ASSERT_ENUM_GREATER(rhsExpression, lhsExpression);
-    ASSERT_ENUM_GREATER_EQUAL(rhsExpression, lhsExpression);
+    ASSERT_EQUAL(lhsExpression, lhsExpression);
+    ASSERT_UNEQUAL(lhsExpression, rhsExpression);
+    ASSERT_LESS(lhsExpression, rhsExpression);
+    ASSERT_LESS_EQUAL(lhsExpression, rhsExpression);
+    ASSERT_GREATER(rhsExpression, lhsExpression);
+    ASSERT_GREATER_EQUAL(rhsExpression, lhsExpression);
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertSignedEnumOperatorMessageTest()
@@ -158,12 +158,12 @@ void CoreTools::AssertTestOperatorTesting::AssertSignedEnumOperatorMessageTest()
     constexpr auto lhsExpression = MacroTestSignedEnum::NegativeOne;
     constexpr auto rhsExpression = MacroTestSignedEnum::Zero;
 
-    ASSERT_ENUM_EQUAL_USE_MESSAGE(lhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_UNEQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_LESS_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_LESS_EQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_GREATER_USE_MESSAGE(rhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_GREATER_EQUAL_USE_MESSAGE(rhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_EQUAL_USE_MESSAGE(lhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_UNEQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
+    ASSERT_LESS_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
+    ASSERT_LESS_EQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
+    ASSERT_GREATER_USE_MESSAGE(rhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_GREATER_EQUAL_USE_MESSAGE(rhsExpression, lhsExpression, "≤‚ ‘");
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertSignedEnumOperatorFailureThrowTest()
@@ -171,12 +171,12 @@ void CoreTools::AssertTestOperatorTesting::AssertSignedEnumOperatorFailureThrowT
     constexpr auto lhsExpression = MacroTestSignedEnum::NegativeOne;
     constexpr auto rhsExpression = MacroTestSignedEnum::Zero;
 
-    ASSERT_ENUM_EQUAL_FAILURE_THROW(lhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_GREATER_FAILURE_THROW(rhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_ENUM_GREATER_EQUAL_FAILURE_THROW(rhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
+    ASSERT_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
+    ASSERT_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
+    ASSERT_GREATER_FAILURE_THROW(rhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_GREATER_EQUAL_FAILURE_THROW(rhsExpression, lhsExpression, "≤‚ ‘");
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertThreeOperatorTest()

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:37)
+/// 版本：1.0.0.8 (2024/03/28 15:54)
 
 #ifndef CORE_TOOLS_CONTRACT_SHARED_IMPL_H
 #define CORE_TOOLS_CONTRACT_SHARED_IMPL_H
@@ -18,7 +18,7 @@
 
 namespace CoreTools
 {
-    // 类必须共享资源，复制只是复制类的指针成员。所有共享类必须以Shared作为后缀。
+    /// 类必须共享资源，复制只是复制类的指针成员。所有共享类必须以Shared作为后缀。
     template <typename T>
     class SharedImpl final
     {

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:14)
+/// 版本：1.0.0.8 (2024/04/12 15:07)
 
 #ifndef CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_GET_EXTERNAL_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_GET_EXTERNAL_DETAIL_H
@@ -16,6 +16,7 @@
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename ConstReference, ConstReference (*PropertyFunction)()>
+requires(std::is_const_v<std::remove_reference_t<ConstReference>> && std::is_reference_v<ConstReference>)
 bool CoreTools::StaticPropertyGetExternal<ConstReference, PropertyFunction>::IsValid() const noexcept
 {
     return true;
@@ -24,6 +25,7 @@ bool CoreTools::StaticPropertyGetExternal<ConstReference, PropertyFunction>::IsV
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename ConstReference, ConstReference (*PropertyFunction)()>
+requires(std::is_const_v<std::remove_reference_t<ConstReference>> && std::is_reference_v<ConstReference>)
 CoreTools::StaticPropertyGetExternal<ConstReference, PropertyFunction>::operator ConstReferenceType() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;

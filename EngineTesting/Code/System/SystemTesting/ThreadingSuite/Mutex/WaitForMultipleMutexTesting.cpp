@@ -50,7 +50,7 @@ void System::WaitForMultipleMutexTesting::WaitMultipleObjectsTest()
 void System::WaitForMultipleMutexTesting::WaitForMutexTest0(const Container& mutexHandles)
 {
     const auto flag = WaitForSystemMutex(boost::numeric_cast<WindowsDWord>(mutexHandles.size()), mutexHandles.data(), true, EnumCastUnderlying(MutexWait::Infinite));
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+    ASSERT_UNEQUAL(flag, MutexWaitReturn::Failed);
 
     for (const auto handle : mutexHandles)
     {
@@ -61,7 +61,7 @@ void System::WaitForMultipleMutexTesting::WaitForMutexTest0(const Container& mut
 void System::WaitForMultipleMutexTesting::WaitForMutexTest1(const Container& mutexHandles)
 {
     const auto flag = WaitForSystemMutex(boost::numeric_cast<WindowsDWord>(mutexHandles.size()), mutexHandles.data(), true, EnumCastUnderlying(MutexWait::Infinite), true);
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+    ASSERT_UNEQUAL(flag, MutexWaitReturn::Failed);
 
     for (const auto handle : mutexHandles)
     {
@@ -72,7 +72,7 @@ void System::WaitForMultipleMutexTesting::WaitForMutexTest1(const Container& mut
 void System::WaitForMultipleMutexTesting::WaitForMutexTest2(const Container& mutexHandles)
 {
     const auto flag = WaitForSystemMutex(boost::numeric_cast<WindowsDWord>(mutexHandles.size()), mutexHandles.data(), true, EnumCastUnderlying(MutexWait::Infinite), false);
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+    ASSERT_UNEQUAL(flag, MutexWaitReturn::Failed);
 
     for (const auto handle : mutexHandles)
     {

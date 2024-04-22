@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:27)
+/// 版本：1.0.0.8 (2024/04/02 13:18)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_BATCH_CONVERSION_CODE_H
 #define CORE_TOOLS_TEXT_PARSING_BATCH_CONVERSION_CODE_H
@@ -13,13 +13,16 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+
+CORE_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(BatchConversionCodeImpl);
 
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE BatchConversionCode final
     {
     public:
-        using ClassType = BatchConversionCode;
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(BatchConversionCode);
 
         using String = System::String;
 
@@ -27,9 +30,6 @@ namespace CoreTools
         explicit BatchConversionCode(const String& inputDirectory, const String& codeDirectory, const String& outputDirectory);
 
         CLASS_INVARIANT_DECLARE;
-
-    private:
-        void LoadConfigure(const String& inputDirectory, const String& codeDirectory, const String& outputDirectory);
     };
 }
 

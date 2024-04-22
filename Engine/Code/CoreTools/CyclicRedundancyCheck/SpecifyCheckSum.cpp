@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:41)
+/// 版本：1.0.0.8 (2024/04/12 15:16)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,8 +17,6 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 #include <array>
-
-using namespace std::literals;
 
 int CoreTools::SpecifyCheckSum::GetSevenPowers(int index)
 {
@@ -67,37 +65,37 @@ void CoreTools::SpecifyCheckSum::Calculation(const char* data, int length)
 
     std::array<char, powersSize> buffer{};
 
-    // 获得原始数字的校验和
+    /// 获得原始数字的校验和
     originalCheckSum = GetCheckSum(data, length);
 
-    // 现在将数字复制到缓冲区，我们将在那里进行转置。
+    /// 现在将数字复制到缓冲区，我们将在那里进行转置。
     System::MemoryCopy(buffer.data(), data, length);
 
-    // 做转置和校验和
+    /// 做转置和校验和
     for (auto index = 0; index < length - 1; ++index)
     {
-        // 是否有转置可能？如果两位数相同，则不能转置; 所以跳过这些，否则他们会产生虚假的碰撞。
+        /// 是否有转置可能？如果两位数相同，则不能转置; 所以跳过这些，否则他们会产生虚假的碰撞。
         const auto nextIndex = index + 1;
 
         if (buffer.at(index) == buffer.at(nextIndex))
             continue;
 
-        // 否则，做转置
+        /// 否则，做转置
         std::swap(buffer.at(nextIndex), buffer.at(index));
 
-        // 得到校验和
+        /// 得到校验和
         if (const auto transpositionCheckSum = GetCheckSum(buffer.data(), boost::numeric_cast<int>(buffer.size())); transpositionCheckSum == originalCheckSum)
         {
             ++collisions;
         }
 
-        // 现在撤消这个转置
+        /// 现在撤消这个转置
 
         std::swap(buffer.at(nextIndex), buffer.at(index));
     }
 }
 
-int CoreTools::SpecifyCheckSum::GetCheckSum(const char* data, int length)
+int CoreTools::SpecifyCheckSum::GetCheckSum(const char* data, int length) const
 {
     if (data == nullptr)
     {
@@ -139,25 +137,25 @@ int CoreTools::SpecifyCheckSum::GetCheckSum(const char* data, int length)
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
-        // 判断是否是数字
+        /// 判断是否是数字
         if (!isdigit(data[i - 1]))
         {
             THROW_EXCEPTION(SYSTEM_TEXT("无效数字\n"s))
         }
 
-        // 将数字字符转换为数字
+        /// 将数字字符转换为数字
         const int digit{ data[i - 1] - '0' };
 
 #include SYSTEM_WARNING_POP
 
-        // 查找幂，乘以digit，加到和
+        /// 查找幂，乘以digit，加到和
 
         sum += function(position) * static_cast<int64_t>(digit);
 
         ++position;
     }
 
-    // 根据方法得到总和模数
+    /// 根据方法得到总和模数
     sum %= mod;
 
     if (mod != 11 && mod != 26 && mod != 10)

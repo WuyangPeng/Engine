@@ -58,13 +58,13 @@ void System::NetworkMacroTesting::StartUp()
     constexpr auto versionRequested = MakeWord(2, 2);
     const auto startUp = WinSockStartUp(versionRequested, &wsaData);
 
-    ASSERT_ENUM_EQUAL(startUp, WinSockStartUpReturn::Successful);
+    ASSERT_EQUAL(startUp, WinSockStartUpReturn::Successful);
 }
 
 void System::NetworkMacroTesting::Cleanup()
 {
     const auto cleanup = WinSockCleanup();
-    ASSERT_ENUM_EQUAL(cleanup, WinSockCleanupReturn::Successful);
+    ASSERT_EQUAL(cleanup, WinSockCleanupReturn::Successful);
 }
 
 System::WinSocket System::NetworkMacroTesting::CreateWinSocket()

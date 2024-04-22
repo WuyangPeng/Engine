@@ -31,6 +31,6 @@ namespace CSVConfigure
 }
 
 template <>
-NODISCARD CSVConfigure::LineType CoreTools::CSVRow::StringCastEnum<CSVConfigure::LineType>(const String& describe) const
-;
+NODISCARD CSVConfigure::LineType CoreTools::CSVRow::StringCastEnum<CSVConfigure::LineType>(const String& describe) const;
+
 #endif  // C_S_V_CONFIGURE_LINE_TYPE_H

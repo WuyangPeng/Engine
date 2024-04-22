@@ -113,35 +113,35 @@ void Rendering::ControllerTesting::ValueTest()
 {
     const auto controllerTest = ControllerTest::Create(controllerTestName);
 
-    ASSERT_ENUM_EQUAL(controllerTest->GetRepeat(), ControllerRepeatType::Clamp);
+    ASSERT_EQUAL(controllerTest->GetRepeat(), ControllerRepeatType::Clamp);
     ASSERT_APPROXIMATE_DOUBLE_ZERO(controllerTest->GetMinTime());
     ASSERT_APPROXIMATE_DOUBLE_ZERO(controllerTest->GetMaxTime());
     ASSERT_APPROXIMATE_DOUBLE_ZERO(controllerTest->GetPhase());
     ASSERT_APPROXIMATE(controllerTest->GetFrequency(), 1.0, Mathematics::MathD::GetZeroTolerance());
 
     controllerTest->SetRepeat(ControllerRepeatType::Wrap);
-    ASSERT_ENUM_EQUAL(controllerTest->GetRepeat(), ControllerRepeatType::Wrap);
+    ASSERT_EQUAL(controllerTest->GetRepeat(), ControllerRepeatType::Wrap);
     ASSERT_APPROXIMATE_DOUBLE_ZERO(controllerTest->GetMinTime());
     ASSERT_APPROXIMATE_DOUBLE_ZERO(controllerTest->GetMaxTime());
     ASSERT_APPROXIMATE_DOUBLE_ZERO(controllerTest->GetPhase());
     ASSERT_APPROXIMATE(controllerTest->GetFrequency(), 1.0, Mathematics::MathD::GetZeroTolerance());
 
     controllerTest->SetTime(1.0, 5.0);
-    ASSERT_ENUM_EQUAL(controllerTest->GetRepeat(), ControllerRepeatType::Wrap);
+    ASSERT_EQUAL(controllerTest->GetRepeat(), ControllerRepeatType::Wrap);
     ASSERT_APPROXIMATE(controllerTest->GetMinTime(), 1.0, Mathematics::MathD::GetZeroTolerance());
     ASSERT_APPROXIMATE(controllerTest->GetMaxTime(), 5.0, Mathematics::MathD::GetZeroTolerance());
     ASSERT_APPROXIMATE_DOUBLE_ZERO(controllerTest->GetPhase());
     ASSERT_APPROXIMATE(controllerTest->GetFrequency(), 1.0, Mathematics::MathD::GetZeroTolerance());
 
     controllerTest->SetPhase(2.0);
-    ASSERT_ENUM_EQUAL(controllerTest->GetRepeat(), ControllerRepeatType::Wrap);
+    ASSERT_EQUAL(controllerTest->GetRepeat(), ControllerRepeatType::Wrap);
     ASSERT_APPROXIMATE(controllerTest->GetMinTime(), 1.0, Mathematics::MathD::GetZeroTolerance());
     ASSERT_APPROXIMATE(controllerTest->GetMaxTime(), 5.0, Mathematics::MathD::GetZeroTolerance());
     ASSERT_APPROXIMATE(controllerTest->GetPhase(), 2.0, Mathematics::MathD::GetZeroTolerance());
     ASSERT_APPROXIMATE(controllerTest->GetFrequency(), 1.0, Mathematics::MathD::GetZeroTolerance());
 
     controllerTest->SetFrequency(4.0);
-    ASSERT_ENUM_EQUAL(controllerTest->GetRepeat(), ControllerRepeatType::Wrap);
+    ASSERT_EQUAL(controllerTest->GetRepeat(), ControllerRepeatType::Wrap);
     ASSERT_APPROXIMATE(controllerTest->GetMinTime(), 1.0, Mathematics::MathD::GetZeroTolerance());
     ASSERT_APPROXIMATE(controllerTest->GetMaxTime(), 5.0, Mathematics::MathD::GetZeroTolerance());
     ASSERT_APPROXIMATE(controllerTest->GetPhase(), 2.0, Mathematics::MathD::GetZeroTolerance());
@@ -172,7 +172,7 @@ void Rendering::ControllerTesting::StreamTest()
 
     const auto begin = boost::polymorphic_pointer_cast<ControllerTest>(*inTopLevel.begin());
 
-    ASSERT_ENUM_EQUAL(controllerTest->GetRepeat(), begin->GetRepeat());
+    ASSERT_EQUAL(controllerTest->GetRepeat(), begin->GetRepeat());
     ASSERT_APPROXIMATE(controllerTest->GetMinTime(), begin->GetMinTime(), Mathematics::MathD::GetZeroTolerance());
     ASSERT_APPROXIMATE(controllerTest->GetMaxTime(), begin->GetMaxTime(), Mathematics::MathD::GetZeroTolerance());
     ASSERT_APPROXIMATE(controllerTest->GetPhase(), begin->GetPhase(), Mathematics::MathD::GetZeroTolerance());

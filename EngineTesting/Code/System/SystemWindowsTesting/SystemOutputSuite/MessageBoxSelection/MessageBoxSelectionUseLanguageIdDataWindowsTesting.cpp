@@ -226,5 +226,5 @@ void System::MessageBoxSelectionUseLanguageIdDataWindowsTesting::DoMessageBoxTes
                                           flagsData,
                                           languageIdData);
 
-    ASSERT_ENUM_UNEQUAL(DialogBoxCommand::IdCreationFailed, flag);
+    ASSERT_UNEQUAL(DialogBoxCommand::IdCreationFailed, flag);
 }

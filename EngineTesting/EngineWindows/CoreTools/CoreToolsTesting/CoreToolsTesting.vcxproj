@@ -193,7 +193,8 @@ xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/
 xcopy "$(ProjectDir)/Resource/OutputCodeTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCodeTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVEngineering/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
@@ -225,7 +226,8 @@ xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/
 xcopy "$(ProjectDir)/Resource/OutputCodeTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCodeTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVEngineering/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -261,7 +263,8 @@ xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/
 xcopy "$(ProjectDir)/Resource/OutputCodeTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCodeTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVEngineering/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
@@ -297,7 +300,8 @@ xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/
 xcopy "$(ProjectDir)/Resource/OutputCodeTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCodeTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVEngineering/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -329,7 +333,8 @@ xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/
 xcopy "$(ProjectDir)/Resource/OutputCodeTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCodeTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVEngineering/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -361,7 +366,8 @@ xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/
 xcopy "$(ProjectDir)/Resource/OutputCodeTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCodeTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVEngineering/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -397,7 +403,8 @@ xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/
 xcopy "$(ProjectDir)/Resource/OutputCodeTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCodeTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVEngineering/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
@@ -433,7 +440,8 @@ xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/
 xcopy "$(ProjectDir)/Resource/OutputCodeTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCodeTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVEngineering/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -475,6 +483,7 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\NonCopyImplTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\PerformanceUnsharedImplTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\SharedImplTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\NoexceptLogTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\NoexceptTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\ScopeExitTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\TriggerAssertTesting.h" />
@@ -489,6 +498,8 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SevenModElevenCheckSumTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SpecifyCheckSumTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\DataTypesSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\Detail\VertexTest.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TableTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\ThreadSafeMapTesting.h" />
@@ -514,7 +525,7 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\ByteSwapperTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\ByteSwapTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\EndianTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\TypeAliaserTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\TypeAliasTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Environment\EnvironmentTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Environment\EnvironmentVariableTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileAsynchronous\FileAsynchronousParameterTesting.h" />
@@ -531,9 +542,8 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManager\ReadFileManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManager\WriteFileManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\GenerateRandomNameTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\IFStreamManagerTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\OFStreamManagerTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FreetypeSuite\FreetypeSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\IFileStreamManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\OFileStreamManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertExecuteLoopNotThrowTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertNotThrowExceptionTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertThrowExceptionTesting.h" />
@@ -545,6 +555,7 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestRangeTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\ClassInvariant\ModuleClassInvariantMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\CustomAssert\CustomAssertMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\CustomAssert\FunctionProhibitedFromCallingTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\CustomAssert\ModuleCustomAssertMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\CallConstMemberFunctionMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\InitializeTerminator.h" />
@@ -602,6 +613,7 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroTestingDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\AppenderManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\AppenderTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogAppenderIOManagerSignTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogAppenderIOManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogAsynchronousTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogConsoleTextColorsManagerTesting.h" />
@@ -786,26 +798,19 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ValueScopeTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\BatchConversionCodeTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\BatchConversionCSVTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureLoadingTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVContentTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVDataTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVGenerateTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVHeadTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVRowTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVTotalGenerateTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVTypeConversionTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\DataTypeDescribeTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\ExcelConversionCSVTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonConfigureTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonGenerateTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonHeadTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonNodeContainerTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonNodeTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonRowTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonTotalGenerateTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVConfigureLoadingTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVConfigureTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVContentTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVDataTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVGenerateTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVHeadTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVRowTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVTotalGenerateTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVTypeConversionTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\DataTypeDescribeTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\BatchConversionCodeTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\BatchConversionCSVTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\ExcelConversionCSVTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\AppPropertiesTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellIteratorTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellRangeTesting.h" />
@@ -884,7 +889,6 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestStreamTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestSuiteSuite.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ZlibSuite\ZlibSuite.h" />
     <ClInclude Include="Resource\CSVGenerate\Chapter.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
@@ -1185,6 +1189,7 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\NonCopyImplTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\PerformanceUnsharedImplTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\SharedImplTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\NoexceptLogTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\NoexceptTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\ScopeExitTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\TriggerAssertTesting.cpp" />
@@ -1196,6 +1201,8 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\IntelCheckSumTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SevenModElevenCheckSumTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SpecifyCheckSumTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\Detail\VertexTest.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TableTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\ThreadSafeMapTesting.cpp" />
@@ -1218,7 +1225,7 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\ByteSwapperTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\ByteSwapTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\EndianTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\TypeAliaserTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\TypeAliasTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Environment\EnvironmentTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Environment\EnvironmentVariableTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileAsynchronous\FileAsynchronousParameterTesting.cpp" />
@@ -1234,8 +1241,8 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManager\ReadFileManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManager\WriteFileManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\GenerateRandomNameTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\IFStreamManagerTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\OFStreamManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\IFileStreamManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\OFileStreamManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertExecuteLoopNotThrowTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertNotThrowExceptionTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertThrowExceptionTesting.cpp" />
@@ -1247,6 +1254,7 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestRangeTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\ClassInvariant\ModuleClassInvariantMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\CustomAssert\CustomAssertMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\CustomAssert\FunctionProhibitedFromCallingTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\CustomAssert\ModuleCustomAssertMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\CallConstMemberFunctionMacro.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\InitializeTerminator.cpp" />
@@ -1293,6 +1301,7 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\AppenderManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\AppenderTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogAppenderIOManagerSignTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogAppenderIOManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogAsynchronousTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogConsoleTextColorsManagerTesting.cpp" />
@@ -1451,26 +1460,19 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingMain.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\BatchConversionCodeTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\BatchConversionCSVTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureLoadingTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVContentTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVDataTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVGenerateTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVHeadTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVRowTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVTotalGenerateTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVTypeConversionTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\DataTypeDescribeTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\ExcelConversionCSVTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonConfigureTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonGenerateTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonHeadTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonNodeContainerTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonNodeTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonRowTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonTotalGenerateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVConfigureLoadingTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVConfigureTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVContentTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVDataTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVGenerateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVHeadTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVRowTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVTotalGenerateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\CSVTypeConversionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSV\DataTypeDescribeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\BatchConversionCodeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\BatchConversionCSVTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\ExcelConversionCSVTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\AppPropertiesTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellIteratorTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellRangeTesting.cpp" />
@@ -1765,8 +1767,8 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering
     <Text Include="Resource\FileManagerTesting\ReadFileManagerTestingText.txt" />
     <Text Include="Resource\FileManagerTesting\WriteFileManagerTestingText.txt" />
     <Text Include="Resource\SimpleZipTesting\Placeholder.txt" />
-    <Text Include="Resource\StreamManagerTesting\IFStreamManagerTest.txt" />
-    <Text Include="Resource\StreamManagerTesting\OFStreamManagerTest.txt" />
+    <Text Include="Resource\StreamManagerTesting\IFileStreamManagerTest.txt" />
+    <Text Include="Resource\StreamManagerTesting\OFileStreamManagerTest.txt" />
     <Text Include="Resource\Todo\Level 0.txt" />
     <Text Include="Resource\Todo\Level 1.txt" />
     <Text Include="Resource\Todo\Level 2.txt" />
@@ -1811,7 +1813,6 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering
     <None Include="Resource\InputCSVTesting\Input1.xlsx" />
     <None Include="Resource\InputCSVTesting\Input2.xlsx" />
     <None Include="Resource\InputCSVTesting\Input3.xlsx" />
-    <None Include="Resource\JsonTesting\Log.json" />
     <None Include="Resource\OutputCSVTesting\Input1.csv" />
     <None Include="Resource\OutputCSVTesting\Input2.csv" />
     <None Include="Resource\OutputCSVTesting\Input3.csv" />

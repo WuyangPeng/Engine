@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:14)
+/// 版本：1.0.0.8 (2024/04/12 15:06)
 
 #ifndef CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_SET_INTERNAL_H
 #define CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_SET_INTERNAL_H
@@ -16,9 +16,9 @@
 
 namespace CoreTools
 {
-    template <typename Value,  // 实际属性值类型
-              typename Reference,  // 引用类型
-              typename Container>  // 封闭类
+    template <typename Value,  /// 实际属性值类型
+              typename Reference,  /// 引用类型
+              typename Container>  /// 封闭类
     class DirectPropertySetInternal final
     {
     public:

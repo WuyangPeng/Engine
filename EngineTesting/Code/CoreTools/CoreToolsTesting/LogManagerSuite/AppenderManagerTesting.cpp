@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:23)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/18 21:52)
 
 #include "AppenderManagerTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/LogManager/Appender.h"
@@ -60,9 +60,9 @@ void CoreTools::AppenderManagerTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(AppenderTest);
     ASSERT_NOT_THROW_EXCEPTION_0(WriteMessageTest);
     ASSERT_NOT_THROW_EXCEPTION_0(GetMinLogLevelTypeTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(AppenderNameTest);
 }
 
-// Logger测试
 void CoreTools::AppenderManagerTesting::LoggerTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(LoggerSucceedTest);
@@ -101,7 +101,6 @@ void CoreTools::AppenderManagerTesting::RemoveLoggerFailTest()
     ASSERT_FALSE(manager->RemoveLogger(LogFilter::AssistTools));
 }
 
-// Appender测试
 void CoreTools::AppenderManagerTesting::AppenderTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(AppenderSucceedTest);
@@ -141,7 +140,6 @@ void CoreTools::AppenderManagerTesting::RemoveAppenderFailTest()
     ASSERT_FALSE(manager->RemoveAppender(SYSTEM_TEXT("OStream"s)));
 }
 
-// WriteMessage测试
 void CoreTools::AppenderManagerTesting::WriteMessageTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(WriteMessageToFileTest);
@@ -169,7 +167,7 @@ void CoreTools::AppenderManagerTesting::WriteMessageToFileTest()
     LogMessage traceMessage(LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED);
     traceMessage << gTraceMessage;
 
-    // 这条消息被写入gAppenderManagerTestingFileName
+    /// 这条消息被写入gAppenderManagerTestingFileName
     manager->Write(traceMessage);
 
     const Logger logger1(LogFilter::System, LogLevel::Info);
@@ -178,13 +176,13 @@ void CoreTools::AppenderManagerTesting::WriteMessageToFileTest()
     LogMessage debugMessage{ LogLevel::Debug, LogFilter::System, CORE_TOOLS_FUNCTION_DESCRIBED };
     debugMessage << gDebugMessage;
 
-    // 这条消息没有被写入gAppenderManagerTestingFileName
+    /// 这条消息没有被写入gAppenderManagerTestingFileName
     manager->Write(debugMessage);
 
     LogMessage infoMessage{ LogLevel::Info, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
     infoMessage << gInfoMessage;
 
-    // 这条消息被写入gAppenderManagerTestingFileName
+    /// 这条消息被写入gAppenderManagerTestingFileName
     manager->Write(infoMessage);
 
     appender.SetLogLevel(LogLevel::Error);
@@ -194,25 +192,25 @@ void CoreTools::AppenderManagerTesting::WriteMessageToFileTest()
     LogMessage warnMessage{ LogLevel::Warn, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
     warnMessage << gWarnMessage;
 
-    // 这条消息没有被写入gAppenderManagerTestingFileName
+    /// 这条消息没有被写入gAppenderManagerTestingFileName
     manager->Write(warnMessage);
 
     LogMessage errorMessage{ LogLevel::Error, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
     errorMessage << gErrorMessage;
 
-    // 这条消息被写入gAppenderManagerTestingFileName
+    /// 这条消息被写入gAppenderManagerTestingFileName
     manager->Write(errorMessage);
 
     LogMessage fatalMessage{ LogLevel::Fatal, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
     fatalMessage << gFatalMessage;
 
-    // 这条消息被写入gAppenderManagerTestingFileName
+    /// 这条消息被写入gAppenderManagerTestingFileName
     manager->Write(fatalMessage);
 }
 
 void CoreTools::AppenderManagerTesting::FileContentTest()
 {
-    const IFStreamManager fileManager{ appenderManagerTestingFullName };
+    const IFileStreamManager fileManager{ appenderManagerTestingFullName };
 
     const auto fileContent = fileManager.GetFileContent();
 
@@ -273,7 +271,7 @@ void CoreTools::AppenderManagerTesting::WriteMessageToDefaultFileTest()
 
 void CoreTools::AppenderManagerTesting::DefaultFileContentTest()
 {
-    const IFStreamManager fileManager{ appenderManagerTestingFullName };
+    const IFileStreamManager fileManager{ appenderManagerTestingFullName };
 
     const auto fileContent = fileManager.GetFileContent();
 
@@ -293,4 +291,10 @@ void CoreTools::AppenderManagerTesting::GetMinLogLevelTypeTest()
     ASSERT_FALSE(manager->InsertLogger(Logger(LogFilter::CoreTools, LogLevel::Info)));
 
     ASSERT_EQUAL(manager->GetMinLogLevelType(LogFilter::CoreTools), LogLevel::Debug);
+}
+
+void CoreTools::AppenderManagerTesting::AppenderNameTest()
+{
+    ASSERT_EQUAL(AppenderManager::GetDefaultAppenderName(), SYSTEM_TEXT("Default"));
+    ASSERT_EQUAL(AppenderManager::GetConsoleAppenderName(), SYSTEM_TEXT("Console"));
 }

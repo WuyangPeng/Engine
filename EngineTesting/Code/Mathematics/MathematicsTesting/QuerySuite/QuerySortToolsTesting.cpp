@@ -53,11 +53,11 @@ void Mathematics::QuerySortToolsTesting::SortTwoValueTest()
 
         if (firstValue <= secondValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
         }
         else
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
         }
     }
 }
@@ -82,27 +82,27 @@ void Mathematics::QuerySortToolsTesting::SortThreeValueTest()
 
         if (firstValue <= secondValue && secondValue <= thirdValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
         }
         else if (firstValue <= thirdValue && thirdValue <= secondValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
         }
         else if (secondValue <= firstValue && firstValue <= thirdValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
         }
         else if (secondValue <= thirdValue && thirdValue <= firstValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
         }
         else if (thirdValue <= firstValue && firstValue <= secondValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
         }
         else if (thirdValue <= secondValue && secondValue <= firstValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
         }
     }
 }
@@ -129,83 +129,83 @@ void Mathematics::QuerySortToolsTesting::SortFourValueTest()
 
         if (firstValue <= secondValue && secondValue <= thirdValue && thirdValue <= fourthValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
         }
         else if (firstValue <= secondValue && secondValue <= fourthValue && fourthValue <= thirdValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
         }
         else if (firstValue <= thirdValue && thirdValue <= secondValue && secondValue <= fourthValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
         }
         else if (firstValue <= thirdValue && thirdValue <= fourthValue && fourthValue <= secondValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
         }
         else if (secondValue <= firstValue && firstValue <= thirdValue && thirdValue <= fourthValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
         }
         else if (secondValue <= firstValue && firstValue <= fourthValue && fourthValue <= thirdValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
         }
         else if (secondValue <= thirdValue && thirdValue <= firstValue && firstValue <= fourthValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
         }
         else if (secondValue <= thirdValue && thirdValue <= fourthValue && fourthValue <= firstValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
         }
         else if (thirdValue <= firstValue && firstValue <= secondValue && secondValue <= fourthValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
         }
         else if (thirdValue <= firstValue && firstValue <= fourthValue && fourthValue <= secondValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
         }
         else if (thirdValue <= secondValue && secondValue <= firstValue && firstValue <= fourthValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
         }
         else if (thirdValue <= secondValue && secondValue <= fourthValue && fourthValue <= firstValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
         }
         else if (thirdValue <= fourthValue && fourthValue <= firstValue && firstValue <= secondValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
         }
         else if (thirdValue <= fourthValue && fourthValue <= secondValue && secondValue <= firstValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
         }
         else if (fourthValue <= firstValue && firstValue <= secondValue && secondValue <= thirdValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
         }
         else if (fourthValue <= firstValue && firstValue <= thirdValue && thirdValue <= secondValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
         }
         else if (fourthValue < secondValue && secondValue <= firstValue && firstValue <= thirdValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
         }
         else if (fourthValue <= secondValue && secondValue <= thirdValue && thirdValue <= firstValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
         }
         else if (fourthValue <= thirdValue && thirdValue <= firstValue && firstValue <= secondValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Negative);
         }
         else if (fourthValue <= thirdValue && thirdValue <= secondValue && secondValue <= firstValue)
         {
-            ASSERT_ENUM_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(querySortTools.GetSymbol(), NumericalValueSymbol::Positive);
         }
     }
 }

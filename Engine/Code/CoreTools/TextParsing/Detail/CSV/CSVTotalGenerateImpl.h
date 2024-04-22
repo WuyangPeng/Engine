@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:39)
+/// 版本：1.0.0.8 (2024/04/02 22:52)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_TOTAL_GENERATE_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_TOTAL_GENERATE_IMPL_H
@@ -22,7 +22,6 @@
 
 namespace CoreTools
 {
-
     class CORE_TOOLS_HIDDEN_DECLARE CSVTotalGenerateImpl
     {
     public:
@@ -45,8 +44,8 @@ namespace CoreTools
         virtual void GenerateFile(const String& codeDirectory, const String& directory) const;
 
     protected:
-        using EnumType = std::set<String>;
-        using DataType = std::map<String, CSVHead>;
+        using ContainerType = std::set<String>;
+        using HeadDataType = std::map<String, CSVHead>;
 
     protected:
         NODISCARD CodeMappingAnalysis GetCodeMappingAnalysis() const noexcept;
@@ -55,6 +54,11 @@ namespace CoreTools
 
         NODISCARD static String GetTemplateContent(const String& fileName);
         NODISCARD String ReplaceTemplate(const String& content) const;
+
+        NODISCARD ContainerType GetDataType() const;
+        NODISCARD ContainerType GetEnumType() const;
+        NODISCARD HeadDataType GetHeadData() const;
+        NODISCARD static String ReplaceClassName(String content, const String& element);
 
     private:
         NODISCARD static String GetOldContent(const String& fileName);

@@ -57,11 +57,11 @@ void Mathematics::ConversionRationalTesting::NumericalValueSymbolTest()
 
         if (0.0 <= firstValue)
         {
-            ASSERT_ENUM_EQUAL(firstConversionRational.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(firstConversionRational.GetSymbol(), NumericalValueSymbol::Positive);
         }
         else
         {
-            ASSERT_ENUM_EQUAL(firstConversionRational.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(firstConversionRational.GetSymbol(), NumericalValueSymbol::Negative);
         }
 
         auto secondValue = randomDistribution1(generator);
@@ -69,11 +69,11 @@ void Mathematics::ConversionRationalTesting::NumericalValueSymbolTest()
 
         if (0.0 <= secondValue)
         {
-            ASSERT_ENUM_EQUAL(secondConversionRational.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(secondConversionRational.GetSymbol(), NumericalValueSymbol::Positive);
         }
         else
         {
-            ASSERT_ENUM_EQUAL(secondConversionRational.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(secondConversionRational.GetSymbol(), NumericalValueSymbol::Negative);
         }
 
         auto thirdValue = thirdRandomDistribution(generator);
@@ -81,11 +81,11 @@ void Mathematics::ConversionRationalTesting::NumericalValueSymbolTest()
 
         if (0.0 <= thirdValue)
         {
-            ASSERT_ENUM_EQUAL(thirdConversionRational.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(thirdConversionRational.GetSymbol(), NumericalValueSymbol::Positive);
         }
         else
         {
-            ASSERT_ENUM_EQUAL(thirdConversionRational.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(thirdConversionRational.GetSymbol(), NumericalValueSymbol::Negative);
         }
 
         auto fourthValue = fourthRandomDistribution(generator);
@@ -93,11 +93,11 @@ void Mathematics::ConversionRationalTesting::NumericalValueSymbolTest()
 
         if (0.0 <= fourthValue)
         {
-            ASSERT_ENUM_EQUAL(fourthConversionRational.GetSymbol(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(fourthConversionRational.GetSymbol(), NumericalValueSymbol::Positive);
         }
         else
         {
-            ASSERT_ENUM_EQUAL(fourthConversionRational.GetSymbol(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(fourthConversionRational.GetSymbol(), NumericalValueSymbol::Negative);
         }
     }
 }
@@ -222,7 +222,7 @@ void Mathematics::ConversionRationalTesting::MantissaTest()
 
         const ConversionRational<float> secondConversionRational(secondValue);
 
-        ASSERT_ENUM_EQUAL(firstConversionRational.GetSymbol(), secondConversionRational.GetSymbol());
+        ASSERT_EQUAL(firstConversionRational.GetSymbol(), secondConversionRational.GetSymbol());
 
         ASSERT_EQUAL(firstConversionRational.GetNumeratorShifting(), secondConversionRational.GetNumeratorShifting());
 
@@ -247,7 +247,7 @@ void Mathematics::ConversionRationalTesting::MantissaTest()
 
         const ConversionRational<double> fourthConversionRational(fourthValue);
 
-        ASSERT_ENUM_EQUAL(thirdConversionRational.GetSymbol(), fourthConversionRational.GetSymbol());
+        ASSERT_EQUAL(thirdConversionRational.GetSymbol(), fourthConversionRational.GetSymbol());
 
         ASSERT_EQUAL(thirdConversionRational.GetNumeratorShifting(), fourthConversionRational.GetNumeratorShifting());
 
@@ -272,7 +272,7 @@ void Mathematics::ConversionRationalTesting::MantissaTest()
 
         const ConversionRational<float> sixthConversionRational(sixthValue);
 
-        ASSERT_ENUM_EQUAL(fifthConversionRational.GetSymbol(), sixthConversionRational.GetSymbol());
+        ASSERT_EQUAL(fifthConversionRational.GetSymbol(), sixthConversionRational.GetSymbol());
 
         ASSERT_EQUAL(fifthConversionRational.GetDenominatorShifting(), sixthConversionRational.GetDenominatorShifting());
 
@@ -297,7 +297,7 @@ void Mathematics::ConversionRationalTesting::MantissaTest()
 
         const ConversionRational<double> eighthConversionRational(eighthValue);
 
-        ASSERT_ENUM_EQUAL(seventhIntegerConversion.GetSymbol(), eighthConversionRational.GetSymbol());
+        ASSERT_EQUAL(seventhIntegerConversion.GetSymbol(), eighthConversionRational.GetSymbol());
 
         ASSERT_EQUAL(seventhIntegerConversion.GetDenominatorShifting(), eighthConversionRational.GetDenominatorShifting());
 
@@ -315,7 +315,7 @@ void Mathematics::ConversionRationalTesting::IntegerTest()
 
     ASSERT_EQUAL(firstIntegerConversion.GetNumeratorShifting(), 0);
     ASSERT_EQUAL(firstIntegerConversion.GetNumeratorMantissa(), 20);
-    ASSERT_ENUM_EQUAL(firstIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(firstIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
     ASSERT_EQUAL(firstIntegerConversion.GetDenominatorShifting(), 0);
     ASSERT_EQUAL(firstIntegerConversion.GetDenominatorMantissa(), 1);
     ASSERT_EQUAL(firstIntegerConversion.GetMaxShifting(), Log2OfPowerOfTwo<uint32_t>(22).GetLog2());
@@ -325,7 +325,7 @@ void Mathematics::ConversionRationalTesting::IntegerTest()
 
     ASSERT_EQUAL(secondIntegerConversion.GetNumeratorShifting(), 0);
     ASSERT_EQUAL(secondIntegerConversion.GetNumeratorMantissa(), 120);
-    ASSERT_ENUM_EQUAL(secondIntegerConversion.GetSymbol(), NumericalValueSymbol::Negative);
+    ASSERT_EQUAL(secondIntegerConversion.GetSymbol(), NumericalValueSymbol::Negative);
     ASSERT_EQUAL(secondIntegerConversion.GetDenominatorShifting(), 0);
     ASSERT_EQUAL(secondIntegerConversion.GetDenominatorMantissa(), 1);
     ASSERT_EQUAL(secondIntegerConversion.GetMaxShifting(), Log2OfPowerOfTwo<uint32_t>(120).GetLog2());
@@ -335,7 +335,7 @@ void Mathematics::ConversionRationalTesting::IntegerTest()
 
     ASSERT_EQUAL(thirdIntegerConversion.GetNumeratorShifting(), 0);
     ASSERT_EQUAL(thirdIntegerConversion.GetNumeratorMantissa(), 0);
-    ASSERT_ENUM_EQUAL(thirdIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(thirdIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
     ASSERT_EQUAL(thirdIntegerConversion.GetDenominatorShifting(), 0);
     ASSERT_EQUAL(thirdIntegerConversion.GetDenominatorMantissa(), 1);
     ASSERT_EQUAL(thirdIntegerConversion.GetMaxShifting(), 0);
@@ -348,7 +348,7 @@ void Mathematics::ConversionRationalTesting::UnsignedIntegerTest()
 
     ASSERT_EQUAL(firstIntegerConversion.GetNumeratorShifting(), 0);
     ASSERT_EQUAL(firstIntegerConversion.GetNumeratorMantissa(), 20);
-    ASSERT_ENUM_EQUAL(firstIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(firstIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
     ASSERT_EQUAL(firstIntegerConversion.GetDenominatorShifting(), 0);
     ASSERT_EQUAL(firstIntegerConversion.GetDenominatorMantissa(), 1);
     ASSERT_EQUAL(firstIntegerConversion.GetMaxShifting(), Log2OfPowerOfTwo<uint32_t>(22).GetLog2());
@@ -358,7 +358,7 @@ void Mathematics::ConversionRationalTesting::UnsignedIntegerTest()
 
     ASSERT_EQUAL(secondIntegerConversion.GetNumeratorShifting(), 0);
     ASSERT_EQUAL(secondIntegerConversion.GetNumeratorMantissa(), 120);
-    ASSERT_ENUM_EQUAL(secondIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(secondIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
     ASSERT_EQUAL(secondIntegerConversion.GetDenominatorShifting(), 0);
     ASSERT_EQUAL(secondIntegerConversion.GetDenominatorMantissa(), 1);
     ASSERT_EQUAL(secondIntegerConversion.GetMaxShifting(), Log2OfPowerOfTwo<uint8_t>(120).GetLog2());
@@ -368,7 +368,7 @@ void Mathematics::ConversionRationalTesting::UnsignedIntegerTest()
 
     ASSERT_EQUAL(thirdIntegerConversion.GetNumeratorShifting(), 0);
     ASSERT_EQUAL(thirdIntegerConversion.GetNumeratorMantissa(), 0);
-    ASSERT_ENUM_EQUAL(thirdIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(thirdIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
     ASSERT_EQUAL(thirdIntegerConversion.GetDenominatorShifting(), 0);
     ASSERT_EQUAL(thirdIntegerConversion.GetDenominatorMantissa(), 1);
     ASSERT_EQUAL(thirdIntegerConversion.GetMaxShifting(), 0);

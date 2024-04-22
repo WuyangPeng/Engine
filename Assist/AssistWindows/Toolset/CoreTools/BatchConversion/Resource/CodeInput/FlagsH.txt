@@ -21,6 +21,6 @@ $ClassNameMember$    };
 }
 
 template <>
-NODISCARD $Namespace$::$ClassName$ CoreTools::CSVRow::StringCastEnum<$Namespace$::$ClassName$>(const String& describe) const
-;
+NODISCARD $Namespace$::$ClassName$ CoreTools::CSVRow::StringCastEnum<$Namespace$::$ClassName$>(const String& describe) const;
+
 #endif  // $NamespaceUppercaseSeparator$_$ClassNameUppercase$_H

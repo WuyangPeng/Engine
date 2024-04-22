@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:38)
+/// 版本：1.0.0.8 (2024/03/28 14:53)
 
 #ifndef CORE_TOOLS_CONTRACT_ASSERTION_H
 #define CORE_TOOLS_CONTRACT_ASSERTION_H
@@ -14,7 +14,7 @@
 
 #include "CoreTools/Contract/ContractFwd.h"
 
-// 使用CoreTools的Assertion用于文件/行跟踪。
+/// 使用CoreTools的Assertion用于文件/行跟踪。
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE Assertion final

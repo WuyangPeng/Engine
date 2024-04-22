@@ -41,8 +41,8 @@ void System::EnumDecrementableTesting::SignedPrefixOperatorTest()
 
     const auto result = --number;
 
-    ASSERT_ENUM_EQUAL(number, SignedNumber::NegativeThree);
-    ASSERT_ENUM_EQUAL(result, SignedNumber::NegativeThree);
+    ASSERT_EQUAL(number, SignedNumber::NegativeThree);
+    ASSERT_EQUAL(result, SignedNumber::NegativeThree);
 }
 
 void System::EnumDecrementableTesting::SignedSuffixOperator0Test()
@@ -51,8 +51,8 @@ void System::EnumDecrementableTesting::SignedSuffixOperator0Test()
 
     const auto result = number--;
 
-    ASSERT_ENUM_EQUAL(number, SignedNumber::NegativeTwo);
-    ASSERT_ENUM_EQUAL(result, SignedNumber::NegativeOne);
+    ASSERT_EQUAL(number, SignedNumber::NegativeTwo);
+    ASSERT_EQUAL(result, SignedNumber::NegativeOne);
 }
 
 void System::EnumDecrementableTesting::UnsignedPrefixOperatorTest()
@@ -61,8 +61,8 @@ void System::EnumDecrementableTesting::UnsignedPrefixOperatorTest()
 
     const auto result = --number;
 
-    ASSERT_ENUM_EQUAL(number, Number::Two);
-    ASSERT_ENUM_EQUAL(result, Number::Two);
+    ASSERT_EQUAL(number, Number::Two);
+    ASSERT_EQUAL(result, Number::Two);
 }
 
 void System::EnumDecrementableTesting::UnsignedSuffixOperator0Test()
@@ -71,6 +71,6 @@ void System::EnumDecrementableTesting::UnsignedSuffixOperator0Test()
 
     const auto result = number--;
 
-    ASSERT_ENUM_EQUAL(number, Number::One);
-    ASSERT_ENUM_EQUAL(result, Number::Two);
+    ASSERT_EQUAL(number, Number::One);
+    ASSERT_EQUAL(result, Number::Two);
 }

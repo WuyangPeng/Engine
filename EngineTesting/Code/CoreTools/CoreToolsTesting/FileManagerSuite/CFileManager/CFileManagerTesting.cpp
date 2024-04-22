@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 20:21)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/16 16:31)
 
 #include "CFileManagerTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -18,16 +18,14 @@
 
 #include <string>
 
-using namespace std::literals;
-
 System::String CoreTools::CFileManagerTesting::GetDirectory()
 {
-    return SYSTEM_TEXT("Resource/CFileManagerTesting/"s);
+    return SYSTEM_TEXT("Resource/CFileManagerTesting/");
 }
 
 System::String CoreTools::CFileManagerTesting::GetFileName()
 {
-    return SYSTEM_TEXT("CFileManagerHelperTestingText.txt"s);
+    return SYSTEM_TEXT("CFileManagerHelperTestingText.txt");
 }
 
 System::String CoreTools::CFileManagerTesting::GetFileManagerHelperFileName()
@@ -39,7 +37,7 @@ System::String CoreTools::CFileManagerTesting::GetFileManagerHelperFileName()
 
 std::string CoreTools::CFileManagerTesting::GetFileManagerContent()
 {
-    return "CFileManagerHelper Testing Text"s;
+    return "CFileManagerHelper Testing Text";
 }
 
 CoreTools::CFileManagerTesting::CFileManagerTesting(const OStreamShared& stream)
@@ -82,6 +80,8 @@ void CoreTools::CFileManagerTesting::LoadFromFileTest(bool binaryFile)
     const std::string bufferContent{ buffer.begin(), buffer.end() };
 
     ASSERT_EQUAL(bufferContent, GetFileManagerContent());
+
+    ASSERT_EQUAL(GetFileManagerContent(), CFileManagerHelper::LoadFromFile(StringConversion::StandardConversionMultiByte(GetFileManagerHelperFileName())));
 }
 
 void CoreTools::CFileManagerTesting::LoadFromFileUseEnvironmentTest(bool binaryFile)

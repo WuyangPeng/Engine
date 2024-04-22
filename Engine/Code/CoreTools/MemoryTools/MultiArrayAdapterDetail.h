@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:42)
+/// 版本：1.0.0.8 (2024/04/11 18:11)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_ADAPTER_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_ADAPTER_DETAIL_H
@@ -33,10 +33,7 @@ CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::MultiArrayAdapter(T* conta
 template <typename T, bool OrderLToR, int... Sizes>
 bool CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && container != nullptr)
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && container != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -173,7 +170,12 @@ bool CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator==(const Mult
 
     for (auto i = 0; i < this->GetSize(); ++i)
     {
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
         if (container[i] != rhs.container[i])
+
+#include SYSTEM_WARNING_POP
         {
             return false;
         }
@@ -189,6 +191,9 @@ bool CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator<(const Multi
 
     for (auto i = 0; i < this->GetSize(); ++i)
     {
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
         if (container[i] < rhs.container[i])
         {
             return true;
@@ -198,6 +203,8 @@ bool CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator<(const Multi
         {
             return false;
         }
+
+#include SYSTEM_WARNING_POP
     }
 
     return false;
@@ -349,14 +356,19 @@ bool CoreTools::MultiArrayAdapter<T, OrderLToR>::operator==(const MultiArrayAdap
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (ParentType::operator!=(rhs))
+    if (!ParentType::operator==(rhs))
     {
         return false;
     }
 
     for (auto i = 0; i < this->GetSize(); ++i)
     {
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
         if (container[i] != rhs.container[i])
+
+#include SYSTEM_WARNING_POP
         {
             return false;
         }
@@ -382,6 +394,9 @@ bool CoreTools::MultiArrayAdapter<T, OrderLToR>::operator<(const MultiArrayAdapt
 
     for (auto i = 0; i < this->GetSize(); ++i)
     {
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
         if (container[i] < rhs.container[i])
         {
             return true;
@@ -391,6 +406,8 @@ bool CoreTools::MultiArrayAdapter<T, OrderLToR>::operator<(const MultiArrayAdapt
         {
             return false;
         }
+
+#include SYSTEM_WARNING_POP
     }
 
     return false;

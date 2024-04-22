@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:18)
+/// 版本：1.0.0.8 (2024/04/11 22:27)
 
 #ifndef CORE_TOOLS_TIME_DELTA_TIME_MANAGER_IMPL_H
 #define CORE_TOOLS_TIME_DELTA_TIME_MANAGER_IMPL_H
@@ -31,8 +31,8 @@ namespace CoreTools
         NODISCARD void ResetCurrentTime() noexcept;
         NODISCARD int64_t GetElapsedTimeInMicroseconds() const noexcept;
         NODISCARD int64_t GetElapsedTimeInSeconds() const noexcept;
-        NODISCARD int64_t GetNowTimeInMicroseconds() const noexcept;
-        NODISCARD int64_t GetNowTimeInSeconds() const noexcept;
+        NODISCARD static int64_t GetNowTimeInMicroseconds() noexcept;
+        NODISCARD static int64_t GetNowTimeInSeconds() noexcept;
 
     private:
         DeltaTimeValueData initial;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 16:21)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/14 00:04)
 
 #include "DebugStreamMacroTesting.h"
 #include "CoreTools/CoreToolsTesting/HelperSuite/Detail/StreamObject.h"
@@ -18,8 +18,6 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using namespace std::literals;
 
 CoreTools::DebugStreamMacroTesting::DebugStreamMacroTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -46,7 +44,7 @@ void CoreTools::DebugStreamMacroTesting::MainTest()
 
 void CoreTools::DebugStreamMacroTesting::SaveStreamTest()
 {
-    const auto streamObject = StreamObject::Create("name"s);
+    const auto streamObject = StreamObject::Create("name");
 
     const auto objectRegister = ObjectRegister::Create();
 
@@ -60,7 +58,7 @@ void CoreTools::DebugStreamMacroTesting::SaveStreamTest()
 
 void CoreTools::DebugStreamMacroTesting::LoadStreamTest()
 {
-    const auto streamObject = StreamObject::Create("name"s);
+    const auto streamObject = StreamObject::Create("name");
 
     const auto fileBuffer = std::make_shared<FileBuffer>(bufferSize);
 

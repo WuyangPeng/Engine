@@ -287,19 +287,19 @@ void Mathematics::MathTesting::FloatBaseMathTest()
 
         if (MathF::epsilon < firstFloatValue)
         {
-            ASSERT_ENUM_EQUAL(MathF::Sign(firstFloatValue), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(MathF::Sign(firstFloatValue), NumericalValueSymbol::Positive);
 
-            ASSERT_ENUM_EQUAL(MathF::Sign(-firstFloatValue), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(MathF::Sign(-firstFloatValue), NumericalValueSymbol::Negative);
         }
         else if (firstFloatValue < -MathF::epsilon)
         {
-            ASSERT_ENUM_EQUAL(MathF::Sign(firstFloatValue), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(MathF::Sign(firstFloatValue), NumericalValueSymbol::Negative);
 
-            ASSERT_ENUM_EQUAL(MathF::Sign(-firstFloatValue), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(MathF::Sign(-firstFloatValue), NumericalValueSymbol::Positive);
         }
         else
         {
-            ASSERT_ENUM_EQUAL(MathF::Sign(firstFloatValue), NumericalValueSymbol::Zero);
+            ASSERT_EQUAL(MathF::Sign(firstFloatValue), NumericalValueSymbol::Zero);
         }
     }
 }
@@ -332,19 +332,19 @@ void Mathematics::MathTesting::DoubleBaseMathTest()
 
         if (MathD::epsilon < firstDoubleValue)
         {
-            ASSERT_ENUM_EQUAL(MathD::Sign(firstDoubleValue), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(MathD::Sign(firstDoubleValue), NumericalValueSymbol::Positive);
 
-            ASSERT_ENUM_EQUAL(MathD::Sign(-firstDoubleValue), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(MathD::Sign(-firstDoubleValue), NumericalValueSymbol::Negative);
         }
         else if (firstDoubleValue < -MathD::epsilon)
         {
-            ASSERT_ENUM_EQUAL(MathD::Sign(firstDoubleValue), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(MathD::Sign(firstDoubleValue), NumericalValueSymbol::Negative);
 
-            ASSERT_ENUM_EQUAL(MathD::Sign(-firstDoubleValue), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(MathD::Sign(-firstDoubleValue), NumericalValueSymbol::Positive);
         }
         else
         {
-            ASSERT_ENUM_EQUAL(MathD::Sign(firstDoubleValue), NumericalValueSymbol::Zero);
+            ASSERT_EQUAL(MathD::Sign(firstDoubleValue), NumericalValueSymbol::Zero);
         }
     }
 }
@@ -352,9 +352,9 @@ void Mathematics::MathTesting::DoubleBaseMathTest()
 void Mathematics::MathTesting::BaseMathBoundaryTest()
 {
     // ¹Ì¶¨Öµ²âÊÔ
-    ASSERT_ENUM_EQUAL(MathF::Sign(MathF::GetValue(0)), NumericalValueSymbol::Zero);
+    ASSERT_EQUAL(MathF::Sign(MathF::GetValue(0)), NumericalValueSymbol::Zero);
 
-    ASSERT_ENUM_EQUAL(MathD::Sign(MathD::GetValue(0)), NumericalValueSymbol::Zero);
+    ASSERT_EQUAL(MathD::Sign(MathD::GetValue(0)), NumericalValueSymbol::Zero);
 }
 
 // Log²âÊÔ

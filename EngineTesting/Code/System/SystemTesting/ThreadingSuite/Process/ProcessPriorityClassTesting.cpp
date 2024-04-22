@@ -55,11 +55,11 @@ void System::ProcessPriorityClassTesting::BackgroundProcessingTest()
 
     ASSERT_TRUE(SetProcessPriorityClass(GetCurrentProcessHandle(), ProcessCreation::ProcessModeBackgroundBegin));
 
-    ASSERT_ENUM_EQUAL(priorityClassFlag, GetProcessPriorityClass(GetCurrentProcessHandle()));
+    ASSERT_EQUAL(priorityClassFlag, GetProcessPriorityClass(GetCurrentProcessHandle()));
 
     ASSERT_TRUE(SetProcessPriorityClass(GetCurrentProcessHandle(), ProcessCreation::ProcessModeBackgroundEnd));
 
-    ASSERT_ENUM_EQUAL(priorityClassFlag, GetProcessPriorityClass(GetCurrentProcessHandle()));
+    ASSERT_EQUAL(priorityClassFlag, GetProcessPriorityClass(GetCurrentProcessHandle()));
 }
 
 void System::ProcessPriorityClassTesting::DoPriorityClassTest(ProcessCreation processPriority)
@@ -72,12 +72,12 @@ void System::ProcessPriorityClassTesting::DoPriorityClassTest(ProcessCreation pr
 
     ASSERT_TRUE(CreateSystemProcess(GetProcessFullPath().c_str(), nullptr, nullptr, nullptr, true, creationFlag, nullptr, nullptr, &startupInfo, &processInformation));
 
-    ASSERT_ENUM_EQUAL(normalPriorityClassFlag, GetProcessPriorityClass(processInformation.hProcess));
+    ASSERT_EQUAL(normalPriorityClassFlag, GetProcessPriorityClass(processInformation.hProcess));
     ASSERT_TRUE(SetProcessPriorityClass(processInformation.hProcess, processPriority));
 
     if (processPriority != ProcessCreation::RealTimePriorityClass)
     {
-        ASSERT_ENUM_EQUAL(processPriority, GetProcessPriorityClass(processInformation.hProcess));
+        ASSERT_EQUAL(processPriority, GetProcessPriorityClass(processInformation.hProcess));
     }
 
     ASSERT_EQUAL(ResumeSystemThread(processInformation.hThread), 1u);

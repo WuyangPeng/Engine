@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:03)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 10:34)
 
 #include "AppPropertiesTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -17,8 +17,6 @@
 #include "CoreTools/TextParsing/SimpleCSV/Worksheet.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
-
-using namespace std::literals;
 
 CoreTools::AppPropertiesTesting::AppPropertiesTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -43,60 +41,60 @@ void CoreTools::AppPropertiesTesting::MainTest()
 
 void CoreTools::AppPropertiesTesting::AppendSheetNameTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
     auto workbook = document->GetWorkbook();
     auto worksheetNames = workbook.GetWorksheetNames();
 
     const auto size = worksheetNames.size();
 
-    workbook.AddWorksheet("SheetName4"s);
+    workbook.AddWorksheet("SheetName4");
 
     worksheetNames = workbook.GetWorksheetNames();
 
     ASSERT_EQUAL(worksheetNames.size(), size + 1);
-    ASSERT_EQUAL(worksheetNames.at(worksheetNames.size() - 1), "SheetName4"s);
+    ASSERT_EQUAL(worksheetNames.at(worksheetNames.size() - 1), "SheetName4");
 }
 
 void CoreTools::AppPropertiesTesting::DeleteSheetNameTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
     auto workbook = document->GetWorkbook();
     auto worksheetNames = workbook.GetWorksheetNames();
 
     const auto size = worksheetNames.size();
 
-    workbook.DeleteSheet("Sheet3"s);
+    workbook.DeleteSheet("Sheet3");
 
     worksheetNames = workbook.GetWorksheetNames();
 
     ASSERT_EQUAL(worksheetNames.size(), size - 1);
-    ASSERT_EQUAL(worksheetNames.at(worksheetNames.size() - 1), "Sheet2"s);
+    ASSERT_EQUAL(worksheetNames.at(worksheetNames.size() - 1), "Sheet2");
 }
 
 void CoreTools::AppPropertiesTesting::SetSheetNameTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
     auto workbook = document->GetWorkbook();
     const auto worksheetNames = workbook.GetWorksheetNames();
     const auto& worksheetName = worksheetNames.at(0);
     auto worksheet = workbook.GetWorksheet(worksheetName);
 
-    worksheet.SetName("sheetName"s);
-    ASSERT_EQUAL("sheetName"s, worksheet.GetName());
+    worksheet.SetName("sheetName");
+    ASSERT_EQUAL("sheetName", worksheet.GetName());
 }
 
 void CoreTools::AppPropertiesTesting::PropertyTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
 
-    document->SetProperty(SimpleCSV::Property::Company, "TCRE"s);
+    document->SetProperty(SimpleCSV::Property::Company, "TCRE");
 
-    ASSERT_EQUAL(document->GetProperty(SimpleCSV::Property::Company), "TCRE"s);
+    ASSERT_EQUAL(document->GetProperty(SimpleCSV::Property::Company), "TCRE");
 
     document->DeleteProperty(SimpleCSV::Property::Company);
 
-    ASSERT_EQUAL(document->GetProperty(SimpleCSV::Property::Company), ""s);
+    ASSERT_EQUAL(document->GetProperty(SimpleCSV::Property::Company), "");
 }

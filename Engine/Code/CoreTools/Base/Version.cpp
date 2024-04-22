@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:06)
+/// 版本：1.0.0.8 (2024/03/28 16:48)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,7 +14,7 @@
 
 std::string CoreTools::Version::GetVersion()
 {
-    return GetVersion(GetTCREFullVersion());
+    return GetVersion(GetTcreFullVersion());
 }
 
 std::string CoreTools::Version::GetVersion(int version)
@@ -27,7 +27,7 @@ std::string CoreTools::Version::GetVersion(int version)
 
 bool CoreTools::Version::IsAtLeast(int major, int minor, int build, int revision) noexcept
 {
-    return IsAtLeast(GetTCREFullVersion(), major, minor, build, revision);
+    return IsAtLeast(GetTcreFullVersion(), major, minor, build, revision);
 }
 
 bool CoreTools::Version::IsAtLeast(int version, int major, int minor, int build, int revision) noexcept

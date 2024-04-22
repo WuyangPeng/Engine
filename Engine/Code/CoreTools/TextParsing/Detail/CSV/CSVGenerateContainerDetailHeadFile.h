@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:30)
+/// 版本：1.0.0.8 (2024/04/02 22:51)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_CONTAINER_DETAIL_HEAD_FILE_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_CONTAINER_DETAIL_HEAD_FILE_H
@@ -23,7 +23,7 @@ namespace CoreTools
         using ParentType = CSVGenerateImpl;
 
     public:
-        CSVGenerateContainerDetailHeadFile(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis) noexcept;
+        CSVGenerateContainerDetailHeadFile(const CSVHead& csvHead, const CodeMappingAnalysis& codeMappingAnalysis);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -32,6 +32,12 @@ namespace CoreTools
         NODISCARD String GetFilePrefix() const override;
         NODISCARD String GetFileSuffix() const override;
         NODISCARD String GetContent(const String& codeDirectory) const override;
+
+    private:
+        String templateName;
+
+        String getEntityMapFirstDefine;
+        String getEntityFirstDefine;
     };
 }
 

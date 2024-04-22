@@ -148,7 +148,7 @@ void System::MessageBoxSelectionUseFlagsDataWindowsTesting::DoMessageBoxTest(siz
 
     const auto flag = MessageBoxSelection(GetHWnd(miscFlag), text.c_str(), caption.c_str(), flagsData);
 
-    ASSERT_ENUM_UNEQUAL(DialogBoxCommand::IdCreationFailed, flag);
+    ASSERT_UNEQUAL(DialogBoxCommand::IdCreationFailed, flag);
 
     const auto collection = returnCollections[typeFlag];
 

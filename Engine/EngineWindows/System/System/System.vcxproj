@@ -925,6 +925,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26437.inl" />
+    <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26445.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26826.inl" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />

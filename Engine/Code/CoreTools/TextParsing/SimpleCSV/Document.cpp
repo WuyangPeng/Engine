@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:02)
+/// 版本：1.0.0.8 (2024/04/11 11:27)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -167,14 +167,14 @@ CoreTools::SimpleCSV::QuerySheetId CoreTools::SimpleCSV::Document::ExecuteQuery(
     return impl->ExecuteQuery(query);
 }
 
-CoreTools::SimpleCSV::QuerySheetRelsId CoreTools::SimpleCSV::Document::ExecuteQuery(const QuerySheetRelsId& query) const
+CoreTools::SimpleCSV::QuerySheetRelationshipId CoreTools::SimpleCSV::Document::ExecuteQuery(const QuerySheetRelationshipId& query) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->ExecuteQuery(query);
 }
 
-CoreTools::SimpleCSV::QuerySheetRelsTarget CoreTools::SimpleCSV::Document::ExecuteQuery(const QuerySheetRelsTarget& query) const
+CoreTools::SimpleCSV::QuerySheetRelationshipTarget CoreTools::SimpleCSV::Document::ExecuteQuery(const QuerySheetRelationshipTarget& query) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

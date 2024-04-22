@@ -5,11 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:45)
+/// 版本：1.0.0.8 (2024/03/30 23:27)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CFileManagerImpl.h"
+#include "CheckItemSize.h"
 #include "System/FileManager/CFile.h"
 #include "System/Helper/PragmaWarning/Format.h"
 #include "CoreTools/CharacterString/StringConversion.h"
@@ -53,10 +54,7 @@ void CoreTools::CFileManagerImpl::Close() const noexcept
 
 bool CoreTools::CFileManagerImpl::IsValid() const noexcept
 {
-    if (file != nullptr)
-        return true;
-    else
-        return false;
+    return file != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -65,7 +63,7 @@ size_t CoreTools::CFileManagerImpl::ReadFromFile(size_t itemSize, size_t itemsNu
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
+    CheckItemSize(itemSize);
     CORE_TOOLS_ASSERTION_0(0u < itemsNumber && data != nullptr, "准备写入的数据无效！");
 
     return System::ReadCFile(data, itemSize, itemsNumber, file);
@@ -75,7 +73,7 @@ size_t CoreTools::CFileManagerImpl::WriteToFile(size_t itemSize, size_t itemsNum
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
+    CheckItemSize(itemSize);
     CORE_TOOLS_ASSERTION_0(0u < itemsNumber && data != nullptr, "准备读取的数据无效！");
 
     return System::WriteCFile(data, itemSize, itemsNumber, file);
@@ -137,50 +135,45 @@ std::string CoreTools::CFileManagerImpl::GetString(int count)
     return System::GetString(file, count);
 }
 
-bool CoreTools::CFileManagerImpl::IsEof() noexcept
+bool CoreTools::CFileManagerImpl::IsEof() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     return System::IsEof(file);
 }
 
-bool CoreTools::CFileManagerImpl::Flush() noexcept
+bool CoreTools::CFileManagerImpl::Flush() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     return System::Flush(file);
 }
 
-bool CoreTools::CFileManagerImpl::Seek(long offset, FileSeek whence) noexcept
+bool CoreTools::CFileManagerImpl::Seek(long offset, FileSeek whence) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     return System::Seek(file, offset, whence);
 }
 
-CoreTools::CFileManagerImpl::PosType CoreTools::CFileManagerImpl::GetPosition()
+CoreTools::CFileManagerImpl::PosType CoreTools::CFileManagerImpl::GetPosition() const
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
-
-#if !defined(TCRE_USE_GCC)
-
-    constexpr PosType errorPosition{ -1 };
-
-    if (const auto position = System::GetPosition(file); position != errorPosition)
-    {
-        return position;
-    }
-    else
-    {
-        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("获取文件“%1%”的位置失败！"s)) % fileName).str())
-    }
-
-#else  // defined(TCRE_USE_GCC)
 
     constexpr PosType errorPosition{ -1 };
 
     if (const auto position = System::GetPosition(file);
+
+#if !defined(TCRE_USE_GCC)
+
+        position != errorPosition)
+
+#else  // defined(TCRE_USE_GCC)
+
         memcmp(&position, &errorPosition, sizeof(PosType)) != 0)
+
+#endif  // !defined(TCRE_USE_GCC)
+
     {
         return position;
     }
@@ -188,25 +181,23 @@ CoreTools::CFileManagerImpl::PosType CoreTools::CFileManagerImpl::GetPosition()
     {
         THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("获取文件“%1%”的位置失败！"s)) % fileName).str())
     }
-
-#endif  // !defined(TCRE_USE_GCC)
 }
 
-bool CoreTools::CFileManagerImpl::SetPosition(PosType position) noexcept
+bool CoreTools::CFileManagerImpl::SetPosition(PosType position) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     return System::SetPosition(file, position);
 }
 
-long CoreTools::CFileManagerImpl::Tell() noexcept
+long CoreTools::CFileManagerImpl::Tell() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     return System::Tell(file);
 }
 
-bool CoreTools::CFileManagerImpl::SetVBuffer(FileSetVBuf type, size_t size) noexcept
+bool CoreTools::CFileManagerImpl::SetVBuffer(FileSetVBuffer type, size_t size) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

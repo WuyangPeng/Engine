@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:36)
+/// 版本：1.0.0.8 (2024/03/28 16:04)
 
 #ifndef CORE_TOOLS_CONTRACT_NON_COPY_IMPL_DETAIL_H
 #define CORE_TOOLS_CONTRACT_NON_COPY_IMPL_DETAIL_H
@@ -48,10 +48,7 @@ CoreTools::NonCopyImpl<T>::NonCopyImpl(ImplCreateUseDefaultConstruction implCrea
 template <typename T>
 bool CoreTools::NonCopyImpl<T>::IsValid() const noexcept
 {
-    if (impl != nullptr)
-        return true;
-    else
-        return false;
+    return impl != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

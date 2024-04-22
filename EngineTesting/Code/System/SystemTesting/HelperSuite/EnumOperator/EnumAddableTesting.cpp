@@ -43,7 +43,7 @@ void System::EnumAddableTesting::SignedOperatorTest()
 
     number += 4;
 
-    ASSERT_ENUM_EQUAL(number, SignedNumber::Three);
+    ASSERT_EQUAL(number, SignedNumber::Three);
 }
 
 void System::EnumAddableTesting::SignedConstexprOperator0Test() const noexcept
@@ -66,7 +66,7 @@ void System::EnumAddableTesting::UnsignedOperatorTest()
 
     number += 5;
 
-    ASSERT_ENUM_EQUAL(number, Number::Seven);
+    ASSERT_EQUAL(number, Number::Seven);
 }
 
 void System::EnumAddableTesting::UnsignedConstexprOperator0Test() const noexcept

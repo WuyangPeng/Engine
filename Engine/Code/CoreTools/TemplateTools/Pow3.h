@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:24)
+/// 版本：1.0.0.8 (2024/04/12 14:14)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_POW3_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_POW3_H
@@ -16,7 +16,7 @@
 
 namespace CoreTools
 {
-    // 主模板计算3 到 Nth
+    /// 主模板计算3 到 Nth
     template <int N>
     class Pow3
     {
@@ -27,7 +27,7 @@ namespace CoreTools
         };
     };
 
-    // 完整的特化结束递归
+    /// 完整的特化结束递归
     template <>
     class Pow3<0>
     {

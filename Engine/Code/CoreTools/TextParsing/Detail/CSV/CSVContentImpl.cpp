@@ -5,16 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:54)
+/// 版本：1.0.0.8 (2024/04/03 09:27)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CSVContentImpl.h"
-#include "System/Helper/PragmaWarning/Algorithm.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Base/SpanIteratorDetail.h"
-#include "CoreTools/CharacterString/StringConversion.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/TextParsing/Detail/FileNameParsing.h"
@@ -32,7 +30,7 @@ CoreTools::CSVContentImpl::CSVContentImpl(const String& fileName)
 
 void CoreTools::CSVContentImpl::Parsing()
 {
-    const IFStreamManager streamManager{ fileName };
+    const IFileStreamManager streamManager{ fileName };
 
     fileContent = streamManager.GetFileContent(TextParsing::gNewline);
 
@@ -46,10 +44,7 @@ void CoreTools::CSVContentImpl::Parsing()
 
 bool CoreTools::CSVContentImpl::IsValid() const noexcept
 {
-    if (fileHeaderSize <= fileContent.size())
-        return true;
-    else
-        return false;
+    return fileHeaderSize <= fileContent.size();
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -62,7 +57,7 @@ CoreTools::CSVHead CoreTools::CSVContentImpl::GetCSVHead() const
 
     spanIterator += System::EnumCastUnderlying(CSVType::VariableName);
 
-    const FileContent content{ fileContent.cbegin(), spanIterator.GetCurrent() };
+    const FileContent content{ spanIterator.GetBegin(), spanIterator.GetCurrent() };
 
     return CSVHead{ fileName, content };
 }

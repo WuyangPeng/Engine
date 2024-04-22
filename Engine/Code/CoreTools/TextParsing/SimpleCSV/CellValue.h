@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:48)
+/// 版本：1.0.0.8 (2024/04/02 17:39)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CELL_VALUE_H
 #define CORE_TOOLS_TEXT_PARSING_CELL_VALUE_H
@@ -43,16 +43,20 @@ namespace CoreTools::SimpleCSV
 
         CLASS_INVARIANT_DECLARE;
 
-        template <typename T, std::enable_if_t<TextParsing::cellValueCondition<T>>* = nullptr>
+        template <typename T>
+        requires(CoreTools::TextParsing::cellValueCondition<T>)
         CellValue& operator=(T rhs);
 
-        template <typename T, std::enable_if_t<std::is_same_v<T, CellValue> || TextParsing::cellValueCondition<T>>* = nullptr>
+        template <typename T>
+        requires(std::is_same_v<T, CoreTools::SimpleCSV::CellValue> || CoreTools::TextParsing::cellValueCondition<T>)
         void Set(T rhs) noexcept(std::is_same_v<T, CellValue>);
 
-        template <typename T, std::enable_if_t<TextParsing::cellValueCondition<T>>* = nullptr>
+        template <typename T>
+        requires(CoreTools::TextParsing::cellValueCondition<T>)
         NODISCARD T Get() const;
 
-        template <typename T, std::enable_if_t<TextParsing::cellValueCondition<T>>* = nullptr>
+        template <typename T>
+        requires(CoreTools::TextParsing::cellValueCondition<T>)
         NODISCARD explicit operator T() const;
 
         NODISCARD bool GetBool() const;

@@ -5,15 +5,15 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:40)
+/// 版本：1.0.0.8 (2024/04/11 13:56)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "AppenderFile.h"
 #include "System/FileManager/FileTools.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
-#include "CoreTools/FileManager/OFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
+#include "CoreTools/FileManager/OFileStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/LogManager/LogMessage.h"
 #include "CoreTools/LogManager/LogMessagePostfix.h"
@@ -46,7 +46,7 @@ void CoreTools::AppenderFile::Init(const String& newDirectory)
     NewDirectory(newDirectory);
 
     const auto fullName = GetFullName(prefixName, extensionName);
-    auto streamManager = make_shared<OFStreamManager>(fullName, true);
+    auto streamManager = make_shared<OFileStreamManager>(fullName, true);
     streamManager->SetSimplifiedChinese();
 
     if (IsExceedMaxSize(*streamManager, 0))
@@ -60,10 +60,7 @@ void CoreTools::AppenderFile::Init(const String& newDirectory)
 
 bool CoreTools::AppenderFile::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && 0 < maxFileSize)
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && 0 < maxFileSize;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -79,7 +76,7 @@ void CoreTools::AppenderFile::DoWrite(const LogMessage& message, const LogMessag
 {
     const auto fullName = GetFullName(prefixName, extensionName);
 
-    auto streamManager = make_shared<OFStreamManager>(fullName, true);
+    auto streamManager = make_shared<OFileStreamManager>(fullName, true);
     streamManager->SetSimplifiedChinese();
 
     const auto messageDescribe = message.GetMessageDescribe();
@@ -90,7 +87,7 @@ void CoreTools::AppenderFile::DoWrite(const LogMessage& message, const LogMessag
         streamManager.reset();
         BackupFile(fullName);
 
-        OFStreamManager newStreamManager{ fullName, false };
+        OFileStreamManager newStreamManager{ fullName, false };
         newStreamManager.SetSimplifiedChinese();
 
         newStreamManager << fullMessage;
@@ -101,7 +98,7 @@ void CoreTools::AppenderFile::DoWrite(const LogMessage& message, const LogMessag
     }
 }
 
-bool CoreTools::AppenderFile::IsExceedMaxSize(const OFStreamManager& stream, PosType increaseSize) const
+bool CoreTools::AppenderFile::IsExceedMaxSize(const OFileStreamManager& stream, PosType increaseSize) const
 {
 #if !defined(TCRE_USE_GCC)
 
@@ -122,8 +119,8 @@ void CoreTools::AppenderFile::BackupFile(const String& fullName) const
 {
     if (backup)
     {
-        const IFStreamManager manager{ fullName };
-        MAYBE_UNUSED const auto name = manager.BackupFile();
+        const IFileStreamManager manager{ fullName };
+        std::ignore = manager.BackupFile();
     }
 }
 
@@ -146,7 +143,7 @@ System::String CoreTools::AppenderFile::GetPrefixName(const String& directory, c
 
 void CoreTools::AppenderFile::NewDirectory(const String& directory) noexcept
 {
-    MAYBE_UNUSED const auto result = System::CreateFileDirectory(directory, nullptr);
+    System::CreateFileDirectory(directory);
 }
 
 System::String CoreTools::AppenderFile::GetDirectory() const

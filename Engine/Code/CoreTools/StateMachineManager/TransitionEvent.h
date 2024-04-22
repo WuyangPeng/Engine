@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:20)
+/// 版本：1.0.0.8 (2024/04/12 15:18)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_TRANSITION_EVENT_H
 #define CORE_TOOLS_STATE_MACHINE_TRANSITION_EVENT_H

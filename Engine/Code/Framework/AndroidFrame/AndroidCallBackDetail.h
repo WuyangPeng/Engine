@@ -74,7 +74,7 @@ void Framework::AndroidCallBack<MiddleLayer>::ResizedMessage(AndroidApp* android
         if (const auto nativeWindow = androidApp->GetNativeWindow();
             nativeWindow != nullptr)
         {
-            System::AndroidNativeWindowFacade androidNativeWindow{ nativeWindow };
+            const System::AndroidNativeWindowFacade androidNativeWindow{ nativeWindow };
             const auto width = androidNativeWindow.GetWidth();
             const auto height = androidNativeWindow.GetHeight();
 
@@ -162,7 +162,7 @@ int Framework::AndroidCallBack<MiddleLayer>::KeyDownMessage(AndroidApp* androidA
 
     if (androidApp != nullptr)
     {
-        System::AndroidInputEventFacade androidKeyEvent{ androidInputEvent };
+        const System::AndroidInputEventFacade androidKeyEvent{ androidInputEvent };
         const auto flags = androidKeyEvent.GetFlags();
         const auto keyCode = System::EnumCastUnderlying(androidKeyEvent.GetKeyCode());
 
@@ -192,7 +192,7 @@ int Framework::AndroidCallBack<MiddleLayer>::KeyUpMessage(AndroidApp* androidApp
 
     if (androidApp != nullptr)
     {
-        System::AndroidInputEventFacade androidKeyEvent{ androidInputEvent };
+        const System::AndroidInputEventFacade androidKeyEvent{ androidInputEvent };
         const auto flags = androidKeyEvent.GetFlags();
         const auto keyCode = System::EnumCastUnderlying(androidKeyEvent.GetKeyCode());
 
@@ -222,7 +222,7 @@ int Framework::AndroidCallBack<MiddleLayer>::ActionDownMessage(AndroidApp* andro
 
     if (androidApp != nullptr)
     {
-        System::AndroidInputMotionEventFacade androidKeyEvent{ androidInputEvent };
+        const System::AndroidInputMotionEventFacade androidKeyEvent{ androidInputEvent };
         const auto xOffset = boost::numeric_cast<int>(androidKeyEvent.GetXOffset());
         const auto yOffset = boost::numeric_cast<int>(androidKeyEvent.GetYOffset());
 
@@ -245,7 +245,7 @@ int Framework::AndroidCallBack<MiddleLayer>::ActionUpMessage(AndroidApp* android
 
     if (androidApp != nullptr)
     {
-        System::AndroidInputMotionEventFacade androidKeyEvent{ androidInputEvent };
+        const System::AndroidInputMotionEventFacade androidKeyEvent{ androidInputEvent };
         const auto xOffset = boost::numeric_cast<int>(androidKeyEvent.GetXOffset());
         const auto yOffset = boost::numeric_cast<int>(androidKeyEvent.GetYOffset());
 
@@ -266,7 +266,7 @@ int Framework::AndroidCallBack<MiddleLayer>::ActionMoveMessage(AndroidApp* andro
 
     if (androidApp != nullptr)
     {
-        System::AndroidInputMotionEventFacade androidKeyEvent{ androidInputEvent };
+        const System::AndroidInputMotionEventFacade androidKeyEvent{ androidInputEvent };
         const auto xOffset = boost::numeric_cast<int>(androidKeyEvent.GetXOffset());
         const auto yOffset = boost::numeric_cast<int>(androidKeyEvent.GetYOffset());
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:58)
+/// 版本：1.0.0.8 (2024/04/11 10:43)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -29,10 +29,7 @@ CoreTools::OpenXLSXDocument::OpenXLSXDocument(const std::string& xlsxFileName)
 
 bool CoreTools::OpenXLSXDocument::IsValid() const noexcept
 {
-    if (!xlsxFileName.empty())
-        return true;
-    else
-        return false;
+    return !xlsxFileName.empty();
 }
 
     #endif  // OPEN_CLASS_INVARIANT
@@ -45,7 +42,7 @@ void CoreTools::OpenXLSXDocument::Init()
     worksheetNames = xlWorkbook.worksheetNames();
 }
 
-OpenXLSX::XLWorksheet CoreTools::OpenXLSXDocument::GetFirstXLWorksheet()
+CoreTools::OpenXLSXDocument::Worksheet CoreTools::OpenXLSXDocument::GetFirstWorksheet()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -57,11 +54,11 @@ OpenXLSX::XLWorksheet CoreTools::OpenXLSXDocument::GetFirstXLWorksheet()
     return xlWorksheet;
 }
 
-CoreTools::OpenXLSXDocument::XLWorksheetContainer CoreTools::OpenXLSXDocument::GetXLWorksheet()
+CoreTools::OpenXLSXDocument::WorksheetContainer CoreTools::OpenXLSXDocument::GetWorksheet()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    XLWorksheetContainer result{};
+    WorksheetContainer result{};
 
     auto xlWorkbook = document.workbook();
 

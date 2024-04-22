@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:57)
+/// 版本：1.0.0.8 (2024/04/11 22:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -27,10 +27,7 @@ CoreTools::ObjectLinkImpl::ObjectLinkImpl() noexcept
 
 bool CoreTools::ObjectLinkImpl::IsValid() const noexcept
 {
-    if (linked.size() == ordered.size())
-        return true;
-    else
-        return false;
+    return linked.size() == ordered.size();
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -39,7 +36,8 @@ CoreTools::ObjectInterfaceSharedPtr CoreTools::ObjectLinkImpl::GetObjectInterfac
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto iter = linked.find(uniqueID); iter != linked.cend())
+    if (const auto iter = linked.find(uniqueID);
+        iter != linked.cend())
     {
         return iter->second;
     }

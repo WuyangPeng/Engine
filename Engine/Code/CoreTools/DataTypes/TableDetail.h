@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:42)
+/// 版本：1.0.0.8 (2024/04/11 14:49)
 
 #ifndef CORE_TOOLS_DATA_TYPE_TABLE_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_TABLE_DETAIL_H
@@ -219,7 +219,6 @@ typename CoreTools::Table<Rows, Columns, Type>::ArrayType CoreTools::Table<Rows,
     return entry;
 }
 
-// 非成员函数
 template <int Rows, int Columns, typename Type>
 bool CoreTools::operator==(const Table<Rows, Columns, Type>& lhs, const Table<Rows, Columns, Type>& rhs)
 {

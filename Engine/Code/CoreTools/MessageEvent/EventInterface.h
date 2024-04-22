@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:49)
+/// 版本：1.0.0.8 (2024/04/12 15:23)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_EVENT_INTERFACE_H
 #define CORE_TOOLS_MESSAGE_EVENT_EVENT_INTERFACE_H
@@ -22,9 +22,9 @@ template class CORE_TOOLS_DEFAULT_DECLARE std::enable_shared_from_this<CoreTools
 
 namespace CoreTools
 {
-    // 如果只需要一个回调函数，子类继承EventFunction。
-    // 如果需要多个回调函数，子类重定义using CallbackMemberFunction = bool (ClassType::*)(const CallbackParameters& callbackParameters);
-    // 再定义多个类似EventFunction的函数。
+    /// 如果只需要一个回调函数，子类继承EventFunction。
+    /// 如果需要多个回调函数，子类重定义using CallbackMemberFunction = bool (ClassType::*)(const CallbackParameters& callbackParameters);
+    /// 再定义多个类似EventFunction的函数。
     class CORE_TOOLS_DEFAULT_DECLARE EventInterface : public std::enable_shared_from_this<EventInterface>
     {
     public:

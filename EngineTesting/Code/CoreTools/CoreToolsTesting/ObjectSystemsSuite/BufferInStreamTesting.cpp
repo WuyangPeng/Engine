@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:15)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/22 16:57)
 
 #include "BufferInStreamTesting.h"
 #include "Detail/BoolObject.h"
@@ -54,10 +54,10 @@ void CoreTools::BufferInStreamTesting::BufferInStreamTest()
     ASSERT_EQUAL_FAILURE_THROW(inTopLevel.GetTopLevelSize(), 3, "top level 大小错误。");
 
     std::vector<ObjectInterfaceSharedPtr> objects{};
-    for (const auto& value : inTopLevel)
+    for (const auto& element : inTopLevel)
     {
-        ASSERT_TRUE(inTopLevel.IsTopLevel(value));
-        objects.emplace_back(value);
+        ASSERT_TRUE(inTopLevel.IsTopLevel(element));
+        objects.emplace_back(element);
     }
 
     ASSERT_TRUE(objects.at(0)->IsExactly(BoolObject::GetCurrentRttiType()));
@@ -65,7 +65,7 @@ void CoreTools::BufferInStreamTesting::BufferInStreamTest()
     ASSERT_TRUE(objects.at(2)->IsExactly(IntObject::GetCurrentRttiType()));
 }
 
-CoreTools::ConstFileBufferSharedPtr CoreTools::BufferInStreamTesting::GetBufferInformation() const
+CoreTools::ConstFileBufferSharedPtr CoreTools::BufferInStreamTesting::GetBufferInformation()
 {
     auto outTopLevel = OutTopLevel::Create();
 

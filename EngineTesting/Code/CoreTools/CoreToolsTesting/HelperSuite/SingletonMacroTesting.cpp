@@ -1,13 +1,14 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 15:27)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/13 21:08)
 
 #include "SingletonMacroTesting.h"
+#include "CoreTools/CoreToolsTesting/BaseSuite/Detail/StaticSingletonSubclass.h"
 #include "Detail/SingletonMacro.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -36,6 +37,7 @@ void CoreTools::SingletonMacroTesting::MainTest()
     mutex.Initialize();
 
     ASSERT_NOT_THROW_EXCEPTION_0(SingletonTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(StaticSingletonTest);
 
     mutex.Delete();
 }
@@ -47,4 +49,9 @@ void CoreTools::SingletonMacroTesting::SingletonTest()
     SingletonMacro::GetSingleton().DoNothing();
 
     SingletonMacro::Destroy();
+}
+
+void CoreTools::SingletonMacroTesting::StaticSingletonTest()
+{
+    StaticSingletonSubclass::GetSingleton().DoNothing();
 }

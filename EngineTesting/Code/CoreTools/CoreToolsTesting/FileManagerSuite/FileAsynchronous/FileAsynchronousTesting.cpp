@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 20:37)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/16 16:48)
 
 #include "FileAsynchronousTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -22,8 +22,6 @@
 
 #include <string>
 #include <vector>
-
-using namespace std::literals;
 
 CoreTools::FileAsynchronousTesting::FileAsynchronousTesting(const OStreamShared& stream)
     : ParentType{ stream }, callBackCount{ 0 }
@@ -110,12 +108,12 @@ void CoreTools::FileAsynchronousTesting::RegisteredReadFileTest()
 
 System::String CoreTools::FileAsynchronousTesting::GetFileName()
 {
-    return SYSTEM_TEXT("Resource/FileAsynchronousTesting/FileAsynchronousText.txt"s);
+    return SYSTEM_TEXT("Resource/FileAsynchronousTesting/FileAsynchronousText.txt");
 }
 
 std::string CoreTools::FileAsynchronousTesting::GetContent()
 {
-    return "FileAsynchronous Testing Text"s;
+    return "FileAsynchronous Testing Text";
 }
 
 void CoreTools::FileAsynchronousTesting::EventFunction(const FileAsynchronousParameter& fileAsynchronousParameter, const FileBuffer& fileBuffer)

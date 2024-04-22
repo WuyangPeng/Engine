@@ -60,8 +60,8 @@ requires(std::is_arithmetic_v<Real>)
 template <typename Rational>
 void Mathematics::RootsPolynomial<Real>::SolveCubic(const Rational& p0, const Rational& p1, const Rational& p2, const Rational& p3, std::map<Real, int>& rmMap)
 {
-    const Rational rat2{ 2 };
-    const Rational rat3{ 3 };
+    constexpr Rational rat2{ 2 };
+    constexpr Rational rat3{ 3 };
     const auto q0 = p0 / p3;
     const auto q1 = p1 / p3;
     const auto q2 = p2 / p3;
@@ -76,7 +76,7 @@ void Mathematics::RootsPolynomial<Real>::SolveCubic(const Rational& p0, const Ra
     for (auto& rm : rmLocalMap)
     {
         const auto root = rm.first - q2Third;
-        rmMap.insert(static_cast<Real>(root), rm.second);
+        rmMap.insert({ static_cast<Real>(root), rm.second });
     }
 }
 
@@ -293,7 +293,7 @@ void Mathematics::RootsPolynomial<Real>::SolveDepressedQuadratic(const Rational&
     if (c0 < zero)
     {
         /// 两个简单的根。
-        Rational root1{ std::sqrt(static_cast<double>(-c0)) };
+        Rational root1{ std::sqrt(static_cast<Real>(-c0)) };
         const auto root0 = -root1;
         rmMap.emplace(root0, 1);
         rmMap.emplace(root1, 1);
@@ -322,7 +322,7 @@ void Mathematics::RootsPolynomial<Real>::SolveDepressedCubic(const Rational& c0,
     if (Math::Approximate(c0, zero))
     {
         SolveDepressedQuadratic(c1, rmMap);
-        auto iter = rmMap.find(zero);
+        const auto iter = rmMap.find(zero);
         if (iter != rmMap.end())
         {
             /// 二次方的根为零，所以重数必须增加。
@@ -337,18 +337,18 @@ void Mathematics::RootsPolynomial<Real>::SolveDepressedCubic(const Rational& c0,
     }
 
     /// 处理c0的特殊情况 c0 != 0 and c1 = 0.
-    constexpr auto oneThird = 1.0 / 3.0;
+    constexpr auto oneThird = Math::GetRational(1, 3);
     if (Math::Approximate(c1, zero))
     {
         /// 一个简单的真正根。
         Rational root0{};
         if (c0 > zero)
         {
-            root0 = Rational{ -std::pow(static_cast<double>(c0), oneThird) };
+            root0 = -std::pow(static_cast<Real>(c0), oneThird);
         }
         else
         {
-            root0 = Rational{ std::pow(-static_cast<double>(c0), oneThird) };
+            root0 = std::pow(-static_cast<Real>(c0), oneThird);
         }
         rmMap.emplace(root0, 1);
 
@@ -359,11 +359,11 @@ void Mathematics::RootsPolynomial<Real>::SolveDepressedCubic(const Rational& c0,
     }
 
     /// 此时， c0 != 0和 c1 != 0.
-    const Rational rat2{ 2 };
-    const Rational rat3{ 3 };
-    const Rational rat4{ 4 };
-    const Rational rat27{ 27 };
-    const Rational rat108{ 108 };
+    constexpr Rational rat2{ 2 };
+    constexpr Rational rat3{ 3 };
+    constexpr Rational rat4{ 4 };
+    constexpr Rational rat27{ 27 };
+    constexpr Rational rat108{ 108 };
 
     const auto delta = -(rat4 * c1 * c1 * c1 + rat27 * c0 * c0);
     if (delta > zero)
@@ -374,13 +374,13 @@ void Mathematics::RootsPolynomial<Real>::SolveDepressedCubic(const Rational& c0,
         const auto betaIm = std::sqrt(deltaDiv108);
         const auto theta = std::atan2(betaIm, betaRe);
         const auto thetaDiv3 = theta / rat3;
-        const auto angle = static_cast<double>(thetaDiv3);
+        const auto angle = static_cast<Real>(thetaDiv3);
         Rational cs{ std::cos(angle) };
         Rational sn{ std::sin(angle) };
         const auto rhoSqr = betaRe * betaRe + betaIm * betaIm;
-        Rational rhoPowThird{ std::pow(static_cast<double>(rhoSqr), 1.0 / 6.0) };
+        Rational rhoPowThird{ std::pow(static_cast<Real>(rhoSqr), Math::GetRational(1, 6)) };
         const auto temp0 = rhoPowThird * cs;
-        const auto temp1 = rhoPowThird * sn * Rational{ std::sqrt(3.0) };
+        const auto temp1 = rhoPowThird * sn * std::sqrt(Math::GetValue(3));
         const auto root0 = rat2 * temp0;
         const auto root1 = -temp0 - temp1;
         const auto root2 = -temp0 + temp1;
@@ -393,24 +393,24 @@ void Mathematics::RootsPolynomial<Real>::SolveDepressedCubic(const Rational& c0,
         /// 一个简单的根。
         const auto deltaDiv108 = delta / rat108;
         const auto temp0 = -c0 / rat2;
-        Rational temp1{ std::sqrt(-static_cast<double>(deltaDiv108)) };
-        const auto temp2 = temp0 - temp1;
-        const auto temp3 = temp0 + temp1;
+        Rational temp1{ std::sqrt(-static_cast<Real>(deltaDiv108)) };
+        auto temp2 = temp0 - temp1;
+        auto temp3 = temp0 + temp1;
         if (temp2 >= zero)
         {
-            temp2 = Rational{ std::pow(static_cast<double>(temp2), oneThird) };
+            temp2 = std::pow(static_cast<Real>(temp2), oneThird);
         }
         else
         {
-            temp2 = Rational{ -std::pow(-static_cast<double>(temp2), oneThird) };
+            temp2 = -std::pow(-static_cast<Real>(temp2), oneThird);
         }
         if (temp3 >= zero)
         {
-            temp3 = Rational{ std::pow(static_cast<double>(temp3), oneThird) };
+            temp3 = std::pow(static_cast<Real>(temp3), oneThird);
         }
         else
         {
-            temp3 = Rational{ -std::pow(-static_cast<double>(temp3), oneThird) };
+            temp3 = -std::pow(-static_cast<Real>(temp3), oneThird);
         }
         const auto root0 = temp2 + temp3;
         rmMap.emplace(root0, 1);

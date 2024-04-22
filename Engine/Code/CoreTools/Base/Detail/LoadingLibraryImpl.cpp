@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:06)
+/// 版本：1.0.0.8 (2024/03/28 16:47)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,8 +15,6 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
-
-using namespace std::literals;
 
 CoreTools::LoadingLibraryImpl::LoadingLibraryImpl(const String& fileName, LoadLibraryType flags)
     : fileName{ StringConversion::StandardConversionDynamicLinkString(fileName) },
@@ -44,10 +42,7 @@ CoreTools::LoadingLibraryImpl::~LoadingLibraryImpl() noexcept
 
 bool CoreTools::LoadingLibraryImpl::IsValid() const noexcept
 {
-    if (library != nullptr)
-        return true;
-    else
-        return false;
+    return library != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

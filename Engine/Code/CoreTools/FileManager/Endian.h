@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:43)
+/// 版本：1.0.0.8 (2024/03/30 22:53)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_ENDIAN_H
 #define CORE_TOOLS_FILE_MANAGER_ENDIAN_H
@@ -16,7 +16,7 @@
 
 namespace CoreTools
 {
-    // 字节存储顺序，结果将通过参数返回，调用者必须保持迭代器的有效性。
+    /// 字节存储顺序，结果将通过参数返回，调用者必须保持迭代器的有效性。
     class CORE_TOOLS_DEFAULT_DECLARE Endian final
     {
     public:
@@ -26,13 +26,13 @@ namespace CoreTools
         Endian() = delete;
 
     public:
-        // 测试机器的字节顺序是否是big endian。
+        /// 测试机器的字节顺序是否是big endian。
         NODISCARD static bool IsBigEndian() noexcept(gAssert < 0 || gCoreToolsAssert < 0);
 
-        // 测试机器的字节顺序是否是little endian。
+        /// 测试机器的字节顺序是否是little endian。
         NODISCARD static bool IsLittleEndian() noexcept(gAssert < 0 || gCoreToolsAssert < 0);
 
-        // 交换字节顺序
+        /// 交换字节顺序
         static void Swap2ByteOrder(void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0);
         static void Swap2ByteOrder(size_t itemsNumber, void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0);
         static void Swap4ByteOrder(void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0);

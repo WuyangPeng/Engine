@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:47)
+/// 版本：1.0.0.8 (2024/04/12 15:24)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_EVENT_SLOT_MANAGER_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_EVENT_SLOT_MANAGER_DETAIL_H
@@ -144,7 +144,8 @@ void CoreTools::EventSlotManager<EventSlot>::DispatchDelayEvent(int64_t currentT
 template <typename EventSlot>
 void CoreTools::EventSlotManager<EventSlot>::CallEvent(int64_t currentTime)
 {
-    for (auto iter = relationDelayContainer.begin(); iter != relationDelayContainer.end();)
+    for (auto iter = relationDelayContainer.begin();
+         iter != relationDelayContainer.end();)
     {
         if (iter->first <= currentTime)
         {
@@ -165,7 +166,8 @@ void CoreTools::EventSlotManager<EventSlot>::CallEvent(int64_t currentTime)
 template <typename EventSlot>
 void CoreTools::EventSlotManager<EventSlot>::CallEventUnordered(int64_t currentTime)
 {
-    for (auto iter = unorderedDelayContainer.begin(); iter != unorderedDelayContainer.end();)
+    for (auto iter = unorderedDelayContainer.begin();
+         iter != unorderedDelayContainer.end();)
     {
         if (iter->first <= currentTime)
         {

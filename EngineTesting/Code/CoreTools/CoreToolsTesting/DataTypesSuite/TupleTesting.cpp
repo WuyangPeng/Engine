@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:30)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/19 10:08)
 
 #include "TupleTesting.h"
 #include "CoreTools/DataTypes/TupleDetail.h"
@@ -45,10 +45,10 @@ void CoreTools::TupleTesting::MainTest()
 
 void CoreTools::TupleTesting::IntegerTest()
 {
-    // 固定值测试
+    /// 固定值测试
     Tuple<4, int> tuple0{};
 
-    // 测试默认构造函数
+    /// 测试默认构造函数
     ASSERT_EQUAL(tuple0[0], 0);
     ASSERT_EQUAL(tuple0[1], 0);
     ASSERT_EQUAL(tuple0[2], 0);
@@ -66,7 +66,7 @@ void CoreTools::TupleTesting::IntegerTest()
 
     Tuple tuple1{ tuple0 };
 
-    // 测试复制构造函数
+    /// 测试复制构造函数
     ASSERT_EQUAL(tuple1[0], 1);
     ASSERT_EQUAL(tuple1[1], 22);
     ASSERT_EQUAL(tuple1[2], 334);
@@ -87,7 +87,7 @@ void CoreTools::TupleTesting::IntegerTest()
     ASSERT_EQUAL(tuple0[2], 334);
     ASSERT_EQUAL(tuple0[3], 44);
 
-    // 测试赋值运算符
+    /// 测试赋值运算符
     tuple0 = tuple1;
 
     ASSERT_EQUAL(tuple0[0], 121);
@@ -98,10 +98,10 @@ void CoreTools::TupleTesting::IntegerTest()
 
 void CoreTools::TupleTesting::StringTest()
 {
-    // 固定值测试
+    /// 固定值测试
     Tuple<2, std::string> tuple0{};
 
-    // 测试默认构造函数
+    /// 测试默认构造函数
     ASSERT_EQUAL(tuple0[0], "");
     ASSERT_EQUAL(tuple0[1], "");
 
@@ -113,7 +113,7 @@ void CoreTools::TupleTesting::StringTest()
 
     Tuple tuple1{ tuple0 };
 
-    // 测试复制构造函数
+    /// 测试复制构造函数
     ASSERT_EQUAL(tuple1[0], "first");
     ASSERT_EQUAL(tuple1[1], "second");
 
@@ -132,7 +132,7 @@ void CoreTools::TupleTesting::StringTest()
     ASSERT_EQUAL(tuple1[0], "second");
     ASSERT_EQUAL(tuple1[1], "first");
 
-    // 测试赋值运算符
+    /// 测试赋值运算符
     ASSERT_EQUAL(tuple0[0], "second");
     ASSERT_EQUAL(tuple0[1], "first");
 }
@@ -187,7 +187,7 @@ void CoreTools::TupleTesting::CompileErrorTest() noexcept
 {
 #ifdef COMPILE_ERROR_TEST
 
-    // 以下代码无法通过编译
+    /// 以下代码无法通过编译
     Tuple<1, int> tuple0{ 5, 6 };
     Tuple<2, int> tuple1{ 5, 6, 7 };
     Tuple<3, int> tuple2{ 5, 6, 7, 8 };
@@ -201,9 +201,9 @@ void CoreTools::TupleTesting::ForEachTest()
     const Tuple<4, int> tuple{ 1, 2, 3, 4 };
 
     auto index = 1;
-    for (const auto value : tuple)
+    for (const auto element : tuple)
     {
-        ASSERT_EQUAL(value, index);
+        ASSERT_EQUAL(element, index);
 
         ++index;
     }
@@ -214,9 +214,9 @@ void CoreTools::TupleTesting::SumTest()
     const Tuple<4, int> tuple{ 1, 2, 3, 4 };
 
     auto sum = 0;
-    for (const auto value : tuple)
+    for (const auto element : tuple)
     {
-        sum += value;
+        sum += element;
     }
 
     ASSERT_EQUAL(sum, tuple.GetSum());

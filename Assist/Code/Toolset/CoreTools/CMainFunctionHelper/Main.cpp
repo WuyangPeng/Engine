@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/28 14:52)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/12 17:35)
 
 #include "Helper.h"
 #include "TestingHelper.h"
@@ -18,12 +18,12 @@ int main(int argc, char** argv)
 {
     {
         CMainFunctionHelper::Helper helper{ argc, argv };
-        MAYBE_UNUSED const auto result = helper.Run();
+        std::ignore = helper.Run();
     }
 
     {
         CMainFunctionHelper::TestingHelper testingHelper{ argc, argv };
-        MAYBE_UNUSED const auto result = testingHelper.Run();
+        std::ignore = testingHelper.Run();
     }
 
     System::SystemPause();

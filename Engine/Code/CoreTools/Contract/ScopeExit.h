@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:37)
+/// 版本：1.0.0.8 (2024/03/28 15:54)
 
 #ifndef CORE_TOOLS_CONTRACT_SCOPE_EXIT_H
 #define CORE_TOOLS_CONTRACT_SCOPE_EXIT_H
@@ -26,12 +26,12 @@ namespace CoreTools
         explicit ScopeExit(T function) noexcept(noexcept(T()));
         ~ScopeExit() noexcept;
 
-        CLASS_INVARIANT_DECLARE;
-
         ScopeExit(const ScopeExit&) = delete;
         ScopeExit& operator=(const ScopeExit&) = delete;
         ScopeExit(ScopeExit&&) noexcept = delete;
         ScopeExit& operator=(ScopeExit&&) noexcept = delete;
+
+        CLASS_INVARIANT_DECLARE;
 
     private:
         T function;

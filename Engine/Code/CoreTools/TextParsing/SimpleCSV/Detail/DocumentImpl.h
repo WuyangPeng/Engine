@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:46)
+/// 版本：1.0.0.8 (2024/04/02 17:51)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_DOCUMENT_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_DOCUMENT_IMPL_H
@@ -15,8 +15,8 @@
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySharedStrings.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetId.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetIndex.h"
-#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetRelsId.h"
-#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetRelsTarget.h"
+#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetRelationshipId.h"
+#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetRelationshipTarget.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetType.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetVisibility.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QueryXmlData.h"
@@ -55,6 +55,7 @@ namespace CoreTools::SimpleCSV
         NODISCARD Workbook GetWorkbook() const;
         void ResetCalcChain();
         NODISCARD std::string GetProperty(Property prop) const;
+
         void SetProperty(Property prop, const std::string& value);
 
         void DeleteProperty(Property aProperty);
@@ -75,8 +76,8 @@ namespace CoreTools::SimpleCSV
         NODISCARD QuerySheetVisibility ExecuteQuery(const QuerySheetVisibility& query) const;
         NODISCARD QuerySheetType ExecuteQuery(const QuerySheetType& query) const;
         NODISCARD QuerySheetId ExecuteQuery(const QuerySheetId& query) const;
-        NODISCARD QuerySheetRelsId ExecuteQuery(const QuerySheetRelsId& query) const;
-        NODISCARD QuerySheetRelsTarget ExecuteQuery(const QuerySheetRelsTarget& query) const;
+        NODISCARD QuerySheetRelationshipId ExecuteQuery(const QuerySheetRelationshipId& query) const;
+        NODISCARD QuerySheetRelationshipTarget ExecuteQuery(const QuerySheetRelationshipTarget& query) const;
         NODISCARD QuerySharedStrings ExecuteQuery(const QuerySharedStrings& query) const;
         NODISCARD QueryXmlData ExecuteQuery(const QueryXmlData& query) const;
 
@@ -95,13 +96,29 @@ namespace CoreTools::SimpleCSV
 
     private:
         using DocumentWeakPtr = std::weak_ptr<Document>;
+        using ZipArchive = SimpleZip::ZipArchive;
 
     private:
         NODISCARD XmlDataSharedPtr GetXmlData(const std::string& path);
         NODISCARD ConstXmlDataSharedPtr GetXmlData(const std::string& path) const;
-        void DoCreate();
+        void DoCreate() const;
 
         void SetAppVersionProperty(const std::string& value);
+
+        void OpenContentItems(const DocumentSharedPtr& document);
+        void OpenContentItems(const DocumentSharedPtr& document, const ContentItem& item);
+        void DoSetAppVersionProperty(const std::string& value);
+
+        void ExecuteCommand(const CommandCloneSheet& command,
+                            const DocumentSharedPtr& documentSharedPtr,
+                            int internalId,
+                            const std::string& sheetPath);
+        void ExecuteCommandIsWorksheet(const CommandCloneSheet& command,
+                                       const DocumentSharedPtr& documentSharedPtr,
+                                       const std::string& sheetPath);
+        void ExecuteCommandIsChartSheet(const CommandCloneSheet& command,
+                                        const DocumentSharedPtr& documentSharedPtr,
+                                        const std::string& sheetPath);
 
     private:
         DocumentWeakPtr documentWeakPtr;
@@ -114,7 +131,7 @@ namespace CoreTools::SimpleCSV
         PropertiesSharedPtr coreProperties;
         SharedStringsSharedPtr sharedStrings;
         WorkbookSharedPtr workbook;
-        SimpleZip::ZipArchive archive;
+        ZipArchive archive;
     };
 }
 

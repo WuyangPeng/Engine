@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:50)
+/// 版本：1.0.0.8 (2024/04/02 15:21)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_XML_FILE_H
 #define CORE_TOOLS_TEXT_PARSING_XML_FILE_H
@@ -46,13 +46,13 @@ namespace CoreTools::SimpleCSV
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
     protected:
-        // 获取对象所表示的XML数据的方法。
+        /// 获取对象所表示的XML数据的方法。
         NODISCARD std::string GetXmlData() const;
 
-        // 提供对象表示的XML数据。
+        /// 提供对象表示的XML数据。
         void SetXmlData(const std::string& data);
 
-        // 此函数返回对象的关系ID（Relationships对象中使用的ID）。
+        /// 此函数返回对象的关系ID（Relationships对象中使用的ID）。
         NODISCARD std::string GetRelationshipId() const;
 
         NODISCARD DocumentSharedPtr GetParentDocument();

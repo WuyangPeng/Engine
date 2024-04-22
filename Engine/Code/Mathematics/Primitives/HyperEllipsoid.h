@@ -72,9 +72,13 @@ namespace Mathematics
 
         NODISCARD AxisType GetAxis() const noexcept;
         void SetAxis(const AxisType& aAxis) noexcept;
+        NODISCARD Vector GetAxis(int index) const;
+        NODISCARD void SetAxis(int index, const Vector& aAxis);
 
         NODISCARD Vector GetExtent() const noexcept;
         void SetExtent(const Vector& aExtent) noexcept;
+        NODISCARD Real GetExtent(int index) const;
+        void SetExtent(int index, Real aExtent);
 
         /// 计算 M = sum_{d=0}^{N-1} U[d]*U[d]^T/e[d]^2.
         NODISCARD Matrix GetM() const;

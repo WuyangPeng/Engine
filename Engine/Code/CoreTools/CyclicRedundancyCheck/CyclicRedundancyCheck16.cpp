@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:40)
+/// 版本：1.0.0.8 (2024/04/12 15:14)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -34,12 +34,12 @@ void CoreTools::CyclicRedundancyCheck16::Calculation(const char* data, int lengt
 
 #include SYSTEM_WARNING_POP
 
-            // 低4位
+            /// 低4位
             const auto lower = CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get16Table(cyclicRedundancyCheck & 0xF);
             cyclicRedundancyCheck = (cyclicRedundancyCheck >> 4) & 0x0FFF;
             cyclicRedundancyCheck = cyclicRedundancyCheck ^ lower ^ CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get16Table(value & 0xF);
 
-            // 高4位
+            /// 高4位
             const auto upper = CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get16Table(cyclicRedundancyCheck & 0xF);
             cyclicRedundancyCheck = (cyclicRedundancyCheck >> 4) & 0x0FFF;
             cyclicRedundancyCheck = cyclicRedundancyCheck ^ upper ^ CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get16Table((value >> 4) & 0xF);

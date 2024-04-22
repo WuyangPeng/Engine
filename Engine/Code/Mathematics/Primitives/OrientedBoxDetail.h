@@ -90,6 +90,24 @@ void Mathematics::OrientedBox<N, Real>::SetAxis(const AxisType& aAxis) noexcept
 
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+typename Mathematics::OrientedBox<N, Real>::Vector Mathematics::OrientedBox<N, Real>::GetAxis(int index) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return axis.at(index);
+}
+
+template <int N, typename Real>
+requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+void Mathematics::OrientedBox<N, Real>::SetAxis(int index, const Vector& aAxis)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    axis.at(index) = aAxis;
+}
+
+template <int N, typename Real>
+requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 typename Mathematics::OrientedBox<N, Real>::Vector Mathematics::OrientedBox<N, Real>::GetExtent() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -104,6 +122,24 @@ void Mathematics::OrientedBox<N, Real>::SetExtent(const Vector& aExtent) noexcep
     MATHEMATICS_CLASS_IS_VALID_9;
 
     extent = aExtent;
+}
+
+template <int N, typename Real>
+requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+Real Mathematics::OrientedBox<N, Real>::GetExtent(int index) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return extent[index];
+}
+
+template <int N, typename Real>
+requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+void Mathematics::OrientedBox<N, Real>::SetExtent(int index, Real aExtent)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    extent[index] = aExtent;
 }
 
 template <int N, typename Real>

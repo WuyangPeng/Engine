@@ -41,6 +41,18 @@ namespace Mathematics
 
     template <typename Real>
     class TriangulateEC;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class OrientedBoundingBoxTree;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class OrientedBoundingBoxNode;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class OrientedBoundingBoxTreeOfPoints;
 }
 
 #endif  // MATHEMATICS_COMPUTATIONAL_GEOMETRY_FWD_H

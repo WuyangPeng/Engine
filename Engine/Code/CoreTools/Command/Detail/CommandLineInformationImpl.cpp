@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:34)
+/// 版本：1.0.0.8 (2024/04/12 14:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -39,10 +39,7 @@ CoreTools::CommandLineInformationImpl::CommandLineInformationImpl(const char* co
 
 bool CoreTools::CommandLineInformationImpl::IsValid() const noexcept
 {
-    if (commandArgumentContainer != nullptr)
-        return true;
-    else
-        return false;
+    return commandArgumentContainer != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -58,10 +55,7 @@ bool CoreTools::CommandLineInformationImpl::GetBoolean(const std::string& name) 
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (commandArgumentContainer->IsExist(name))
-        return true;
-    else
-        return false;
+    return commandArgumentContainer->IsExist(name);
 }
 
 int CoreTools::CommandLineInformationImpl::GetInteger(const std::string& name) const

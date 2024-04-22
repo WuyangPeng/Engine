@@ -68,6 +68,10 @@ namespace Mathematics
 
     template <typename Real>
     class ContScribeCircle3Sphere3;
+
+    template <typename Real>
+    requires(std::is_arithmetic_v<Real>)
+    class ContOrientedBox2;
 }
 
 #endif  // MATHEMATICS_CONTAINMENT_FWD_H

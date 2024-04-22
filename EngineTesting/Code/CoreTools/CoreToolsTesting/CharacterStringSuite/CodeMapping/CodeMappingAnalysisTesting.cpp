@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：1.0.0.0 (2023/11/08 14:18)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/16 14:59)
 
 #include "CodeMappingAnalysisTesting.h"
 #include "CoreTools/CharacterString/CodeMappingAnalysis.h"
@@ -44,30 +44,22 @@ void CoreTools::CodeMappingAnalysisTesting::MainTest()
 
 void CoreTools::CodeMappingAnalysisTesting::MultiByteGetElementFailTest()
 {
-    const auto fileName = StringConversion::StandardConversionMultiByte(nonExistentFileName);
-
-    const CodeMappingAnalysis codeMappingAnalysis{ fileName };
+    const CodeMappingAnalysis codeMappingAnalysis{ nonExistentFileName };
 }
 
 void CoreTools::CodeMappingAnalysisTesting::MultiByteGetElementSuccessTest()
 {
-    const auto fileName = StringConversion::StandardConversionMultiByte(csvEngineeringFileName);
-
-    const CodeMappingAnalysis codeMappingAnalysis{ fileName };
+    const CodeMappingAnalysis codeMappingAnalysis{ csvEngineeringFileName };
     ASSERT_EQUAL(codeMappingAnalysis.GetElement(key), element);
 }
 
 void CoreTools::CodeMappingAnalysisTesting::WideCharGetElementFailTest()
 {
-    const auto fileName = StringConversion::StandardConversionWideChar(nonExistentFileName);
-
-    const CodeMappingAnalysis codeMappingAnalysis{ fileName };
+    const CodeMappingAnalysis codeMappingAnalysis{ nonExistentFileName };
 }
 
 void CoreTools::CodeMappingAnalysisTesting::WideCharGetElementSuccessTest()
 {
-    const auto fileName = StringConversion::StandardConversionWideChar(csvEngineeringFileName);
-
-    const CodeMappingAnalysis codeMappingAnalysis{ fileName };
+    const CodeMappingAnalysis codeMappingAnalysis{ csvEngineeringFileName };
     ASSERT_EQUAL(codeMappingAnalysis.GetElement(key), element);
 }

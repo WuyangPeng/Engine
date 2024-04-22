@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:26)
+/// 版本：1.0.0.8 (2024/04/02 11:17)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_ROW_DETAIL_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_ROW_DETAIL_H
@@ -14,20 +14,18 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename E>
+requires(std::is_enum_v<E>)
 E CoreTools::CSVRow::GetEnum(const String& field) const
 {
-    static_assert(std::is_enum_v<E>, "E must be an enum.");
-
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return StringCastEnum<E>(GetEnumString(field));
 }
 
 template <typename E>
+requires(std::is_enum_v<E>)
 std::vector<E> CoreTools::CSVRow::GetEnumArray(const String& field) const
 {
-    static_assert(std::is_enum_v<E>, "E must be an enum.");
-
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     std::vector<E> result{};

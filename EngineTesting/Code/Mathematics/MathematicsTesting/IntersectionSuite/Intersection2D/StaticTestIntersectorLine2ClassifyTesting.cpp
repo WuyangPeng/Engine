@@ -63,15 +63,15 @@ void Mathematics::StaticTestIntersectorLine2ClassifyTesting::LineTest()
 
         StaticTestIntersectorLine2Classify<float> firstClassify(lhsOrigin, lhsDirection, lhsOrigin, lhsDirection);
 
-        ASSERT_ENUM_EQUAL(firstClassify.GetIntersectionType(), IntersectionType::Line);
+        ASSERT_EQUAL(firstClassify.GetIntersectionType(), IntersectionType::Line);
 
         StaticTestIntersectorLine2Classify<float> secondClassify(lhsOrigin, lhsDirection, rhsOrigin, lhsDirection);
 
-        ASSERT_ENUM_EQUAL(secondClassify.GetIntersectionType(), IntersectionType::Empty);
+        ASSERT_EQUAL(secondClassify.GetIntersectionType(), IntersectionType::Empty);
 
         StaticTestIntersectorLine2Classify<float> thirdClassify(lhsOrigin, lhsDirection, rhsOrigin, rhsDirection);
 
-        ASSERT_ENUM_EQUAL(thirdClassify.GetIntersectionType(), IntersectionType::Point);
+        ASSERT_EQUAL(thirdClassify.GetIntersectionType(), IntersectionType::Point);
 
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate,
                                         lhsOrigin + thirdClassify.GetParameter0() * lhsDirection,

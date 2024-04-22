@@ -35,7 +35,7 @@ void System::OpenGLVersionTesting::MainTest()
 void System::OpenGLVersionTesting::VersionTest()
 {
     const auto version = GetOpenGLVersion();
-    ASSERT_ENUM_UNEQUAL(version, OpenGLSystemVersion::VersionNone);
+    ASSERT_UNEQUAL(version, OpenGLSystemVersion::VersionNone);
 
-    ASSERT_ENUM_LESS_EQUAL(OpenGLSystemVersion::Version46, version);
+    ASSERT_LESS_EQUAL(OpenGLSystemVersion::Version46, version);
 }

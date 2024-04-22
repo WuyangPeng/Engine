@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 19:13)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/16 16:05)
 
 #include "DirectoryTesting.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
@@ -17,8 +17,6 @@
 
 #include <array>
 #include <string>
-
-using namespace std::literals;
 
 CoreTools::DirectoryTesting::DirectoryTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -40,19 +38,21 @@ void CoreTools::DirectoryTesting::MainTest()
 
 void CoreTools::DirectoryTesting::DirectoryTest()
 {
-    std::array<System::TChar, System::gMaxPath> systemCurrentDirectory{};
+    System::TCharContainer systemCurrentDirectory{};
     auto result = System::GetSystemCurrentDirectory(System::gMaxPath, systemCurrentDirectory.data());
     ASSERT_LESS(0u, result);
+
     System::String oldDirectoryName{ systemCurrentDirectory.data() };
     boost::algorithm::replace_all(oldDirectoryName, SYSTEM_TEXT("\\"), SYSTEM_TEXT("/"));
 
     {
-        const auto directoryName = oldDirectoryName + SYSTEM_TEXT("/Resource"s);
+        const auto directoryName = oldDirectoryName + SYSTEM_TEXT("/Resource");
         Directory directory{ directoryName };
 
         systemCurrentDirectory.fill(0);
         result = System::GetSystemCurrentDirectory(System::gMaxPath, systemCurrentDirectory.data());
         ASSERT_LESS(0u, result);
+
         System::String resultDirectoryName{ systemCurrentDirectory.data() };
         boost::algorithm::replace_all(resultDirectoryName, SYSTEM_TEXT("\\"), SYSTEM_TEXT("/"));
         ASSERT_EQUAL(directoryName, resultDirectoryName);
@@ -61,6 +61,7 @@ void CoreTools::DirectoryTesting::DirectoryTest()
     systemCurrentDirectory.fill(0);
     result = System::GetSystemCurrentDirectory(System::gMaxPath, systemCurrentDirectory.data());
     ASSERT_LESS(0u, result);
+
     System::String resultDirectoryName{ systemCurrentDirectory.data() };
     boost::algorithm::replace_all(resultDirectoryName, SYSTEM_TEXT("\\"), SYSTEM_TEXT("/"));
     ASSERT_EQUAL(oldDirectoryName, resultDirectoryName);

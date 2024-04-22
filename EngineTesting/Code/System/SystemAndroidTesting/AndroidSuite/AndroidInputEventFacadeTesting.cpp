@@ -37,14 +37,14 @@ void System::AndroidInputEventFacadeTesting::AndroidInputEventTest()
 {
     const AndroidInputEventFacade androidInputEventFacade{ &androidInputEvent };
 
-    ASSERT_ENUM_EQUAL(androidInputEventFacade.GetType(), AndroidInputEventType::Key);
+    ASSERT_EQUAL(androidInputEventFacade.GetType(), AndroidInputEventType::Key);
     ASSERT_EQUAL(androidInputEventFacade.GetDeviceId(), 0);
-    ASSERT_ENUM_EQUAL(androidInputEventFacade.GetSource(), AndroidInputSource::Unknown);
-    ASSERT_ENUM_EQUAL(androidInputEventFacade.GetAction(), AndroidKeyEventAction::Down);
-    ASSERT_ENUM_EQUAL(androidInputEventFacade.GetFlags(), AndroidKeyEventFlag::Null);
-    ASSERT_ENUM_EQUAL(androidInputEventFacade.GetKeyCode(), AndroidKeyCodes::Unknown);
+    ASSERT_EQUAL(androidInputEventFacade.GetSource(), AndroidInputSource::Unknown);
+    ASSERT_EQUAL(androidInputEventFacade.GetAction(), AndroidKeyEventAction::Down);
+    ASSERT_EQUAL(androidInputEventFacade.GetFlags(), AndroidKeyEventFlag::Null);
+    ASSERT_EQUAL(androidInputEventFacade.GetKeyCode(), AndroidKeyCodes::Unknown);
     ASSERT_EQUAL(androidInputEventFacade.GetScanCode(), 0);
-    ASSERT_ENUM_EQUAL(androidInputEventFacade.GetMetaState(), AndroidMeta::None);
+    ASSERT_EQUAL(androidInputEventFacade.GetMetaState(), AndroidMeta::None);
     ASSERT_EQUAL(androidInputEventFacade.GetRepeatCount(), 0);
     ASSERT_EQUAL(androidInputEventFacade.GetDownTime(), 0);
     ASSERT_EQUAL(androidInputEventFacade.GetEventTime(), 0);

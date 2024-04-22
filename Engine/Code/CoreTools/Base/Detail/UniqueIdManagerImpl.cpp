@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:06)
+/// 版本：1.0.0.8 (2024/03/28 16:47)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -24,10 +24,7 @@ CoreTools::UniqueIdManagerImpl::UniqueIdManagerImpl(int count)
 
 bool CoreTools::UniqueIdManagerImpl::IsValid() const noexcept
 {
-    if (!uniqueId.empty())
-        return true;
-    else
-        return false;
+    return !uniqueId.empty();
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -50,7 +47,8 @@ void CoreTools::UniqueIdManagerImpl::SetUniqueId(int index, int64_t latestIndex)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    if (auto& currentUniqueId = uniqueId.at(index); currentUniqueId < latestIndex)
+    if (auto& currentUniqueId = uniqueId.at(index);
+        currentUniqueId < latestIndex)
     {
         currentUniqueId = latestIndex;
     }

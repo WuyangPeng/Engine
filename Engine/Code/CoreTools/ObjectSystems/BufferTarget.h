@@ -54,30 +54,38 @@ namespace CoreTools
 
         // 写入对象指针（uniqueID在磁盘上为[无效]内存指针）。
         template <typename T>
+        requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
         void WriteObjectAssociated(const T& object);
 
         template <typename T>
+        requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
         void WriteWeakObjectAssociated(const T& object);
 
         template <typename T>
+        requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::value_type::ObjectType>)
         void WriteObjectAssociatedContainerWithNumber(const T& objects);
 
         template <typename T>
+        requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::value_type::ObjectType>)
         void WriteObjectAssociatedContainerWithoutNumber(const T& objects);
 
         template <typename T, int Size>
+        requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType> && 0 <= Size)
         void WriteObjectAssociatedContainer(const std::array<T, Size>& objects);
 
         // 写入bool值为4字节。
         void Write(bool datum);
 
         template <typename T>
+        requires(std::is_same_v<typename T::value_type, bool>)
         void WriteBoolContainerWithNumber(const T& objects);
 
         template <typename T>
+        requires(std::is_same_v<typename T::value_type, bool>)
         void WriteBoolContainerWithoutNumber(const T& objects);
 
         template <int Size>
+        requires(0 <= Size)
         void WriteContainer(const std::array<bool, Size>& objects);
 
         // 写入字符串，在字符串之前写入4个字节代表长度。没有空终止符。
@@ -85,41 +93,53 @@ namespace CoreTools
         void Write(const std::string& datum);
 
         template <typename T>
+        requires(std::is_same_v<typename T::value_type, std::string> || std::is_same_v<typename T::value_type, const char*>)
         void WriteStringContainerWithNumber(const T& objects);
 
         template <typename T>
+        requires(std::is_same_v<typename T::value_type, std::string> || std::is_same_v<typename T::value_type, const char*>)
         void WriteStringContainerWithoutNumber(const T& objects);
 
         template <int Size>
+        requires(0 <= Size)
         void WriteContainer(const std::array<std::string, Size>& objects);
 
         template <int Size>
+        requires(0 <= Size)
         void WriteContainer(const std::array<const char*, Size>& objects);
 
         // 原生数据写入函数。
         template <typename T>
+        requires(std::is_arithmetic_v<T>)
         void Write(T datum);
 
         template <typename T>
+        requires(std::is_arithmetic_v<typename T::value_type>)
         void WriteContainerWithNumber(const T& objects);
 
         template <typename T>
+        requires(std::is_arithmetic_v<typename T::value_type>)
         void WriteContainerWithoutNumber(const T& objects);
 
         template <typename T, int Size>
+        requires(std::is_arithmetic_v<T> && 0 <= Size)
         void WriteContainer(const std::array<T, Size>& objects);
 
         // 写入枚举值。
         template <typename T>
+        requires(std::is_enum_v<T>)
         void WriteEnum(T datum);
 
         template <typename T>
+        requires(std::is_enum_v<typename T::value_type>)
         void WriteEnumContainerWithNumber(const T& objects);
 
         template <typename T>
+        requires(std::is_enum_v<typename T::value_type>)
         void WriteEnumContainerWithoutNumber(const T& objects);
 
         template <typename T, int Size>
+        requires(std::is_enum_v<T> && 0 <= Size)
         void WriteEnumContainer(const std::array<T, Size>& objects);
 
         // 帮助函数

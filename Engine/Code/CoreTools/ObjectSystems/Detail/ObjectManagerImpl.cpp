@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:57)
+/// 版本：1.0.0.8 (2024/04/11 22:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -28,7 +28,8 @@ CoreTools::ObjectManagerImpl::FactoryFunction CoreTools::ObjectManagerImpl::Find
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (const auto iter = factories.find(name); iter != factories.cend())
+    if (const auto iter = factories.find(name);
+        iter != factories.cend())
     {
         return iter->second;
     }

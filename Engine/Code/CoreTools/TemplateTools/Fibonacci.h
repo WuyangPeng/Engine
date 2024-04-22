@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:22)
+/// 版本：1.0.0.8 (2024/04/12 14:16)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_FIBONACCI_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_FIBONACCI_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-namespace CoreTools
+    namespace CoreTools
 {
     template <uint32_t N>
     struct Fibonacci

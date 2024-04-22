@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:22)
+/// 版本：1.0.0.8 (2024/04/12 11:21)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_H
@@ -13,6 +13,7 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "UnitTestComposite.h"
+#include "System/Helper/PragmaWarning/TypeTraits.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Exception/ExceptionFwd.h"
@@ -26,7 +27,8 @@
 EXPORT_SHARED_PTR(CoreTools, CpuTimerData, CORE_TOOLS_DEFAULT_DECLARE);
 EXPORT_SHARED_PTR(CoreTools, UnitTestData, CORE_TOOLS_DEFAULT_DECLARE);
 
-// 单元测试类。UnitTest为外部接口基类，子类要运行的测试在DoRunUnitTest函数中运行。
+/// 单元测试类。
+/// UnitTest为外部接口基类，子类要运行的测试在DoRunUnitTest函数中运行。
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE UnitTest : public UnitTestComposite
@@ -35,6 +37,7 @@ namespace CoreTools
         using ClassType = UnitTest;
         using ParentType = UnitTestComposite;
 
+        /// 让子类可以直接使用OStreamShared
         using OStreamShared = CoreTools::OStreamShared;
 
     public:
@@ -59,7 +62,8 @@ namespace CoreTools
         void PrintRunUnitTest() final;
 
     protected:
-        // Assert用来测试对象的值是否符合预期。Error用来测试是否正确抛出异常。
+        /// Assert用来测试对象的值是否符合预期。
+        /// Error用来测试是否正确抛出异常。
 
         void AssertTest(bool condition,
                         const FunctionDescribed& functionDescribed,
@@ -72,6 +76,12 @@ namespace CoreTools
         void ErrorTest(bool condition, const FunctionDescribed& functionDescribed, const std::string_view& errorMessage);
 
         template <typename LhsType, typename RhsType>
+        requires(!(std::is_same_v<std::remove_all_extents_t<LhsType>, char> && std::is_same_v<std::remove_all_extents_t<RhsType>, char>) &&
+                 !(std::is_same_v<std::remove_all_extents_t<LhsType>, wchar_t> && std::is_same_v<std::remove_all_extents_t<RhsType>, wchar_t>) &&
+                 !(std::is_constructible_v<std::string, LhsType> && std::is_constructible_v<std::string, RhsType>) &&
+                 !(std::is_constructible_v<std::wstring, LhsType> && std::is_constructible_v<std::wstring, RhsType>) &&
+                 boost::has_equal_to<LhsType, RhsType, bool>::value &&
+                 !(std::is_enum_v<LhsType> && std::is_enum_v<RhsType>))
         void AssertEqual(const LhsType& lhs,
                          const RhsType& rhs,
                          const FunctionDescribed& functionDescribed,
@@ -79,13 +89,15 @@ namespace CoreTools
                          bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
-        void AssertEnumEqual(const LhsType& lhs,
-                             const RhsType& rhs,
-                             const FunctionDescribed& functionDescribed,
-                             const std::string& errorMessage = std::string{},
-                             bool failureThrow = false);
+        requires(std::is_enum_v<LhsType> && std::is_enum_v<RhsType>)
+        void AssertEqual(const LhsType& lhs,
+                         const RhsType& rhs,
+                         const FunctionDescribed& functionDescribed,
+                         const std::string& errorMessage = std::string{},
+                         bool failureThrow = false);
 
         template <typename LhsType, typename MhsType, typename RhsType>
+        requires(boost::has_equal_to<LhsType, MhsType, bool>::value && boost::has_equal_to<RhsType, MhsType, bool>::value)
         void AssertEqual(const LhsType& lhs,
                          const MhsType& mhs,
                          const RhsType& rhs,
@@ -94,6 +106,32 @@ namespace CoreTools
                          bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
+        requires((std::is_same_v<std::remove_all_extents_t<LhsType>, wchar_t> && std::is_same_v<std::remove_all_extents_t<RhsType>, wchar_t>) ||
+                 (std::is_constructible_v<std::wstring, LhsType> && std::is_constructible_v<std::wstring, RhsType>))
+        void AssertEqual(const LhsType& lhs,
+                         const RhsType& rhs,
+                         const FunctionDescribed& functionDescribed,
+                         const std::string& errorMessage = std::string{},
+                         bool failureThrow = false);
+
+        template <typename LhsType, typename RhsType>
+        requires((std::is_same_v<std::remove_all_extents_t<LhsType>, char> && std::is_same_v<std::remove_all_extents_t<RhsType>, char>) ||
+                 (std::is_constructible_v<std::string, LhsType> && std::is_constructible_v<std::string, RhsType>))
+        void AssertEqual(const LhsType& lhs,
+                         const RhsType& rhs,
+                         const FunctionDescribed& functionDescribed,
+                         const std::string& errorMessage = std::string{},
+                         bool failureThrow = false);
+
+        void AssertEqual(const SimpleCSV::CellValue& lhs,
+                         const SimpleCSV::CellValue& rhs,
+                         const FunctionDescribed& functionDescribed,
+                         const std::string& errorMessage = std::string{},
+                         bool failureThrow = false);
+
+        template <typename LhsType, typename RhsType>
+        requires(boost::has_not_equal_to<LhsType, RhsType, bool>::value &&
+                 !(std::is_enum_v<LhsType> && std::is_enum_v<RhsType>))
         void AssertUnequal(const LhsType& lhs,
                            const RhsType& rhs,
                            const FunctionDescribed& functionDescribed,
@@ -101,13 +139,15 @@ namespace CoreTools
                            bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
-        void AssertEnumUnequal(const LhsType& lhs,
-                               const RhsType& rhs,
-                               const FunctionDescribed& functionDescribed,
-                               const std::string& errorMessage = std::string{},
-                               bool failureThrow = false);
+        requires(std::is_enum_v<LhsType> && std::is_enum_v<RhsType>)
+        void AssertUnequal(const LhsType& lhs,
+                           const RhsType& rhs,
+                           const FunctionDescribed& functionDescribed,
+                           const std::string& errorMessage = std::string{},
+                           bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
+        requires(boost::has_minus<LhsType, RhsType>::value && boost::has_less_equal<std::common_type_t<LhsType, RhsType>, double, bool>::value)
         void AssertApproximate(const LhsType& lhs,
                                const RhsType& rhs,
                                const std::common_type_t<LhsType, RhsType>& epsilon,
@@ -124,8 +164,9 @@ namespace CoreTools
                                           const std::string& errorMessage = std::string{},
                                           bool failureThrow = false);
 
-        // 测试是否在范围内。lhs <= test <= rhs。
+        /// 测试是否在范围内。lhs <= test <= rhs。
         template <typename TestType, typename RangeType>
+        requires(boost::has_less_equal<RangeType, TestType, bool>::value && boost::has_less_equal<TestType, RangeType, bool>::value)
         void AssertRange(const TestType& test,
                          const RangeType& lhs,
                          const RangeType& rhs,
@@ -134,34 +175,7 @@ namespace CoreTools
                          bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
-        void AssertEnumLess(const LhsType& lhs,
-                            const RhsType& rhs,
-                            const FunctionDescribed& functionDescribed,
-                            const std::string& errorMessage = std::string{},
-                            bool failureThrow = false);
-
-        template <typename LhsType, typename RhsType>
-        void AssertEnumLessEqual(const LhsType& lhs,
-                                 const RhsType& rhs,
-                                 const FunctionDescribed& functionDescribed,
-                                 const std::string& errorMessage = std::string{},
-                                 bool failureThrow = false);
-
-        template <typename LhsType, typename RhsType>
-        void AssertEnumGreater(const LhsType& lhs,
-                               const RhsType& rhs,
-                               const FunctionDescribed& functionDescribed,
-                               const std::string& errorMessage = std::string{},
-                               bool failureThrow = false);
-
-        template <typename LhsType, typename RhsType>
-        void AssertEnumGreaterEqual(const LhsType& lhs,
-                                    const RhsType& rhs,
-                                    const FunctionDescribed& functionDescribed,
-                                    const std::string& errorMessage = std::string{},
-                                    bool failureThrow = false);
-
-        template <typename LhsType, typename RhsType>
+        requires(std::is_enum_v<LhsType> && std::is_enum_v<RhsType>)
         void AssertLess(const LhsType& lhs,
                         const RhsType& rhs,
                         const FunctionDescribed& functionDescribed,
@@ -169,6 +183,7 @@ namespace CoreTools
                         bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
+        requires(std::is_enum_v<LhsType> && std::is_enum_v<RhsType>)
         void AssertLessEqual(const LhsType& lhs,
                              const RhsType& rhs,
                              const FunctionDescribed& functionDescribed,
@@ -176,6 +191,7 @@ namespace CoreTools
                              bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
+        requires(std::is_enum_v<LhsType> && std::is_enum_v<RhsType>)
         void AssertGreater(const LhsType& lhs,
                            const RhsType& rhs,
                            const FunctionDescribed& functionDescribed,
@@ -183,6 +199,43 @@ namespace CoreTools
                            bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
+        requires(std::is_enum_v<LhsType> && std::is_enum_v<RhsType>)
+        void AssertGreaterEqual(const LhsType& lhs,
+                                const RhsType& rhs,
+                                const FunctionDescribed& functionDescribed,
+                                const std::string& errorMessage = std::string{},
+                                bool failureThrow = false);
+
+        template <typename LhsType, typename RhsType>
+        requires(boost::has_less<LhsType, RhsType, bool>::value &&
+                 !(std::is_enum_v<LhsType> && std::is_enum_v<RhsType>))
+        void AssertLess(const LhsType& lhs,
+                        const RhsType& rhs,
+                        const FunctionDescribed& functionDescribed,
+                        const std::string& errorMessage = std::string{},
+                        bool failureThrow = false);
+
+        template <typename LhsType, typename RhsType>
+        requires(boost::has_less_equal<LhsType, RhsType, bool>::value &&
+                 !(std::is_enum_v<LhsType> && std::is_enum_v<RhsType>))
+        void AssertLessEqual(const LhsType& lhs,
+                             const RhsType& rhs,
+                             const FunctionDescribed& functionDescribed,
+                             const std::string& errorMessage = std::string{},
+                             bool failureThrow = false);
+
+        template <typename LhsType, typename RhsType>
+        requires(boost::has_greater<LhsType, RhsType, bool>::value &&
+                 !(std::is_enum_v<LhsType> && std::is_enum_v<RhsType>))
+        void AssertGreater(const LhsType& lhs,
+                           const RhsType& rhs,
+                           const FunctionDescribed& functionDescribed,
+                           const std::string& errorMessage = std::string{},
+                           bool failureThrow = false);
+
+        template <typename LhsType, typename RhsType>
+        requires(boost::has_greater_equal<LhsType, RhsType, bool>::value &&
+                 !(std::is_enum_v<LhsType> && std::is_enum_v<RhsType>))
         void AssertGreaterEqual(const LhsType& lhs,
                                 const RhsType& rhs,
                                 const FunctionDescribed& functionDescribed,
@@ -190,15 +243,23 @@ namespace CoreTools
                                 bool failureThrow = false);
 
         template <typename PtrType>
-        void AssertEqualNullPtr(const PtrType& ptr, const FunctionDescribed& functionDescribed, const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertEqualNullPtr(const PtrType& ptr,
+                                const FunctionDescribed& functionDescribed,
+                                const std::string& errorMessage = std::string{},
+                                bool failureThrow = false);
 
         template <typename PtrType>
-        void AssertUnequalNullPtr(const PtrType& ptr, const FunctionDescribed& functionDescribed, const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertUnequalNullPtr(const PtrType& ptr,
+                                  const FunctionDescribed& functionDescribed,
+                                  const std::string& errorMessage = std::string{},
+                                  bool failureThrow = false);
 
         template <typename TestClass, typename Function, typename... Types>
+        requires(std::is_member_function_pointer_v<Function> && std::is_base_of_v<CoreTools::UnitTest, TestClass>)
         void AssertNotThrowException(TestClass* test, Function function, const FunctionDescribed& functionDescribed, const std::string& errorMessage, Types&&... args);
 
         template <typename TestClass, typename Function, typename... Types>
+        requires(std::is_member_function_pointer_v<Function> && std::is_base_of_v<CoreTools::UnitTest, TestClass>)
         void AssertThrowException(TestClass* test, Function function, const FunctionDescribed& functionDescribed, const std::string& errorMessage, Types&&... args);
 
         void AssertFloatingPointCompleteEqual(float lhs,
@@ -225,35 +286,8 @@ namespace CoreTools
                                                 const std::string& errorMessage = std::string{},
                                                 bool failureThrow = false);
 
-        template <typename LhsType, typename RhsType>
-        requires std::is_constructible_v<std::wstring, LhsType> && std::is_constructible_v<std::wstring, RhsType>
-        void AssertEqual(const LhsType& lhs,
-                         const RhsType& rhs,
-                         const FunctionDescribed& functionDescribed,
-                         const std::string& errorMessage = std::string{},
-                         bool failureThrow = false);
-
-        template <typename LhsType, typename RhsType>
-        requires(std::is_constructible_v<std::string, LhsType> && std::is_constructible_v<std::string, RhsType>)
-        void AssertEqual(const LhsType& lhs,
-                         const RhsType& rhs,
-                         const FunctionDescribed& functionDescribed,
-                         const std::string& errorMessage = std::string{},
-                         bool failureThrow = false);
-
-        void AssertEqual(wchar_t lhs,
-                         wchar_t rhs,
-                         const FunctionDescribed& functionDescribed,
-                         const std::string& errorMessage = std::string{},
-                         bool failureThrow = false);
-
-        void AssertEqual(const SimpleCSV::CellValue& lhs,
-                         const SimpleCSV::CellValue& rhs,
-                         const FunctionDescribed& functionDescribed,
-                         const std::string& errorMessage = std::string{},
-                         bool failureThrow = false);
-
         template <typename TestClass, typename Function>
+        requires(std::is_member_function_pointer_v<Function> && std::is_base_of_v<CoreTools::UnitTest, TestClass>)
         void ExecuteLoopTesting(TestClass* test, Function function);
 
         virtual void PrintTipsMessage();

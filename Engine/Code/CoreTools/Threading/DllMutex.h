@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:10)
+/// 版本：1.0.0.8 (2024/03/30 18:02)
 
 #ifndef CORE_TOOLS_THREADING_DLL_MUTEX_H
 #define CORE_TOOLS_THREADING_DLL_MUTEX_H
@@ -26,7 +26,7 @@ namespace CoreTools
         NON_COPY_TYPE_DECLARE(DllMutex);
 
     public:
-        // 参数UseCriticalSection只对Windows平台有效，非Windows平台会自动转换成UseDefault。
+        /// 参数UseCriticalSection只对Windows平台有效，非Windows平台会自动转换成UseDefault。
         explicit DllMutex(MutexCreate mutexCreate);
         virtual ~DllMutex() noexcept = default;
         DllMutex(const DllMutex& rhs) = delete;

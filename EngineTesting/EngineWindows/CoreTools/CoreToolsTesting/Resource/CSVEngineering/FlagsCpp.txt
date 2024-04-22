@@ -60,4 +60,3 @@ $Namespace$::$ClassName$ CoreTools::CSVRow::StringCastEnum<$Namespace$::$ClassNa
 
     return $Namespace$::StringCast$ClassName$(describe);
 }
-

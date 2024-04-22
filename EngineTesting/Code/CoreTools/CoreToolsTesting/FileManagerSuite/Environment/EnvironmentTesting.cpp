@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 20:36)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/16 16:43)
 
 #include "EnvironmentTesting.h"
 #include "CoreTools/FileManager/Environment.h"
@@ -13,8 +13,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using namespace std::literals;
 
 CoreTools::EnvironmentTesting::EnvironmentTesting(const OStreamShared& stream)
     : ParentType{ stream }, environment{ Environment::Create() }
@@ -31,12 +29,12 @@ void CoreTools::EnvironmentTesting::DoRunUnitTest()
 
 System::String CoreTools::EnvironmentTesting::GetEnvironmentFileName()
 {
-    return SYSTEM_TEXT("EnvironmentTestingText.txt"s);
+    return SYSTEM_TEXT("EnvironmentTestingText.txt");
 }
 
 System::String CoreTools::EnvironmentTesting::GetEnvironmentPathFileName()
 {
-    return SYSTEM_TEXT("Resource/EnvironmentTesting/EnvironmentTestingText.txt"s);
+    return SYSTEM_TEXT("Resource/EnvironmentTesting/EnvironmentTestingText.txt");
 }
 
 void CoreTools::EnvironmentTesting::MainTest()
@@ -55,16 +53,18 @@ void CoreTools::EnvironmentTesting::InsertDirectoryTest()
 {
     ASSERT_EQUAL(environment.GetNumDirectories(), 0);
 
-    ASSERT_TRUE(environment.InsertDirectory(SYSTEM_TEXT("Resource/EnvironmentTesting/"s)));
+    ASSERT_TRUE(environment.InsertDirectory(SYSTEM_TEXT("Resource/EnvironmentTesting/")));
 
     ASSERT_EQUAL(environment.GetNumDirectories(), 1);
+
+    ASSERT_EQUAL(environment.GetDirectory(0), SYSTEM_TEXT("Resource/EnvironmentTesting/"));
 }
 
 void CoreTools::EnvironmentTesting::EraseDirectoryTest()
 {
     ASSERT_EQUAL(environment.GetNumDirectories(), 1);
 
-    ASSERT_TRUE(environment.EraseDirectory(SYSTEM_TEXT("Resource/EnvironmentTesting/"s)));
+    ASSERT_TRUE(environment.EraseDirectory(SYSTEM_TEXT("Resource/EnvironmentTesting/")));
 
     ASSERT_EQUAL(environment.GetNumDirectories(), 0);
 }

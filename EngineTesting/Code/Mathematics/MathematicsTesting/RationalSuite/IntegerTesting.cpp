@@ -667,11 +667,11 @@ void Mathematics::IntegerTesting::SignTest()
 
         if (static_cast<uint16_t>(firstInteger[39]) & 0x8000)
         {
-            ASSERT_ENUM_EQUAL(firstInteger.GetSign(), NumericalValueSymbol::Negative);
+            ASSERT_EQUAL(firstInteger.GetSign(), NumericalValueSymbol::Negative);
         }
         else
         {
-            ASSERT_ENUM_EQUAL(firstInteger.GetSign(), NumericalValueSymbol::Positive);
+            ASSERT_EQUAL(firstInteger.GetSign(), NumericalValueSymbol::Positive);
         }
     }
 }

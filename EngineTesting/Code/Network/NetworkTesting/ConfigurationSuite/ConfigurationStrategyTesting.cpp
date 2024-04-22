@@ -39,13 +39,13 @@ void Network::ConfigurationStrategyTesting::DefaultTest()
 {
     const auto configurationStrategy = ConfigurationStrategy::Create();
 
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::Boost);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetServerStrategy(), ServerStrategy::Disable);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetClientStrategy(), ClientStrategy::Disable);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetMessageStrategy(), MessageStrategy::Default);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetConnectStrategy(), ConnectStrategy::Tcp);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetParserStrategy(), ParserStrategy::LittleEndian);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetOpenSslStrategy(), OpenSslStrategy::Default);
+    ASSERT_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::Boost);
+    ASSERT_EQUAL(configurationStrategy.GetServerStrategy(), ServerStrategy::Disable);
+    ASSERT_EQUAL(configurationStrategy.GetClientStrategy(), ClientStrategy::Disable);
+    ASSERT_EQUAL(configurationStrategy.GetMessageStrategy(), MessageStrategy::Default);
+    ASSERT_EQUAL(configurationStrategy.GetConnectStrategy(), ConnectStrategy::Tcp);
+    ASSERT_EQUAL(configurationStrategy.GetParserStrategy(), ParserStrategy::LittleEndian);
+    ASSERT_EQUAL(configurationStrategy.GetOpenSslStrategy(), OpenSslStrategy::Default);
 
     const auto configurationSubStrategy = configurationStrategy.GetConfigurationSubStrategy();
 
@@ -83,14 +83,14 @@ void Network::ConfigurationStrategyTesting::ServerTest()
                                                        "172.0.1.1",
                                                        8010 };
 
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::Ace);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetServerStrategy(), ServerStrategy::Iterative);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetClientStrategy(), ClientStrategy::Disable);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetMessageStrategy(), MessageStrategy::Iovec);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetConnectStrategy(), ConnectStrategy::Udp);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetParserStrategy(), ParserStrategy::BigEndian);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetOpenSslStrategy(), OpenSslStrategy::OpenSsl);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetSocketSendMessage(), SocketSendMessage::Immediately);
+    ASSERT_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::Ace);
+    ASSERT_EQUAL(configurationStrategy.GetServerStrategy(), ServerStrategy::Iterative);
+    ASSERT_EQUAL(configurationStrategy.GetClientStrategy(), ClientStrategy::Disable);
+    ASSERT_EQUAL(configurationStrategy.GetMessageStrategy(), MessageStrategy::Iovec);
+    ASSERT_EQUAL(configurationStrategy.GetConnectStrategy(), ConnectStrategy::Udp);
+    ASSERT_EQUAL(configurationStrategy.GetParserStrategy(), ParserStrategy::BigEndian);
+    ASSERT_EQUAL(configurationStrategy.GetOpenSslStrategy(), OpenSslStrategy::OpenSsl);
+    ASSERT_EQUAL(configurationStrategy.GetSocketSendMessage(), SocketSendMessage::Immediately);
 
     const auto configurationSubStrategy = configurationStrategy.GetConfigurationSubStrategy();
 
@@ -131,14 +131,14 @@ void Network::ConfigurationStrategyTesting::ClientTest()
                                                        "172.0.1.1",
                                                        8010 };
 
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::Ace);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetServerStrategy(), ServerStrategy::Disable);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetClientStrategy(), ClientStrategy::Cache);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetMessageStrategy(), MessageStrategy::Iovec);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetConnectStrategy(), ConnectStrategy::Udp);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetParserStrategy(), ParserStrategy::BigEndian);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetOpenSslStrategy(), OpenSslStrategy::OpenSsl);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetSocketSendMessage(), SocketSendMessage::Cache);
+    ASSERT_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::Ace);
+    ASSERT_EQUAL(configurationStrategy.GetServerStrategy(), ServerStrategy::Disable);
+    ASSERT_EQUAL(configurationStrategy.GetClientStrategy(), ClientStrategy::Cache);
+    ASSERT_EQUAL(configurationStrategy.GetMessageStrategy(), MessageStrategy::Iovec);
+    ASSERT_EQUAL(configurationStrategy.GetConnectStrategy(), ConnectStrategy::Udp);
+    ASSERT_EQUAL(configurationStrategy.GetParserStrategy(), ParserStrategy::BigEndian);
+    ASSERT_EQUAL(configurationStrategy.GetOpenSslStrategy(), OpenSslStrategy::OpenSsl);
+    ASSERT_EQUAL(configurationStrategy.GetSocketSendMessage(), SocketSendMessage::Cache);
 
     const auto configurationSubStrategy = configurationStrategy.GetConfigurationSubStrategy();
 

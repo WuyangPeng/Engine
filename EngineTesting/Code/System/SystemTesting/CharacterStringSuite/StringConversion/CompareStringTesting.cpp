@@ -26,13 +26,13 @@ void System::CompareStringTesting::CompareTest(ComparesStringReturn lhs, Compare
     switch (lhs)
     {
         case ComparesStringReturn::LessThan:
-            ASSERT_ENUM_EQUAL(ComparesStringReturn::GreaterThan, rhs);
+            ASSERT_EQUAL(ComparesStringReturn::GreaterThan, rhs);
             break;
         case ComparesStringReturn::GreaterThan:
-            ASSERT_ENUM_EQUAL(ComparesStringReturn::LessThan, rhs);
+            ASSERT_EQUAL(ComparesStringReturn::LessThan, rhs);
             break;
         default:
-            ASSERT_ENUM_EQUAL(lhs, rhs);
+            ASSERT_EQUAL(lhs, rhs);
             break;
     }
 }

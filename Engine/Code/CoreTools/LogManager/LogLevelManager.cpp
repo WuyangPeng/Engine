@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:44)
+/// 版本：1.0.0.8 (2024/04/11 14:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,29 +15,27 @@
 
 #include <map>
 
-using namespace std::literals;
-
 System::String CoreTools::LogLevelManager::GetLogLevelDescribe(LogLevel logLevelType)
 {
     switch (logLevelType)
     {
         case LogLevel::Disabled:
-            return SYSTEM_TEXT("禁用"s);
+            return SYSTEM_TEXT("禁用");
         case LogLevel::Trace:
-            return SYSTEM_TEXT("跟踪"s);
+            return SYSTEM_TEXT("跟踪");
         case LogLevel::Debug:
-            return SYSTEM_TEXT("调试"s);
+            return SYSTEM_TEXT("调试");
         case LogLevel::Info:
-            return SYSTEM_TEXT("一般"s);
+            return SYSTEM_TEXT("一般");
         case LogLevel::Warn:
-            return SYSTEM_TEXT("警告"s);
+            return SYSTEM_TEXT("警告");
         case LogLevel::Error:
-            return SYSTEM_TEXT("错误"s);
+            return SYSTEM_TEXT("错误");
         case LogLevel::Fatal:
-            return SYSTEM_TEXT("致命错误"s);
+            return SYSTEM_TEXT("致命错误");
         default:
             CORE_TOOLS_ASSERTION_2(false, "未找到日志等级的相关描述！");
-            return SYSTEM_TEXT(""s);
+            return SYSTEM_TEXT("");
     }
 }
 

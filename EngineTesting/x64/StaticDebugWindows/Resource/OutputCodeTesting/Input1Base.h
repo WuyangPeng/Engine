@@ -22,6 +22,7 @@ namespace OutputCSVTesting
     public:
         using ClassType = Input1Base;
 
+        using Char = System::TChar;
         using String = System::String;
 
     public:
@@ -42,7 +43,7 @@ namespace OutputCSVTesting
 
         NODISCARD virtual bool IsTest0() const noexcept;
 
-        NODISCARD virtual System::TChar GetTest1() const noexcept;
+        NODISCARD virtual Char GetTest1() const noexcept;
 
         NODISCARD virtual double GetTest2() const noexcept;
 

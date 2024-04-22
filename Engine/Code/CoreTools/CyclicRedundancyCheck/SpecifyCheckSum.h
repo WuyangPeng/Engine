@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:39)
+/// 版本：1.0.0.8 (2024/04/12 15:13)
 
 #ifndef CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_SPECIFY_CHECK_SUM_H
 #define CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_SPECIFY_CHECK_SUM_H
@@ -31,7 +31,7 @@ namespace CoreTools
 
     private:
         void Calculation(const char* data, int length);
-        NODISCARD int GetCheckSum(const char* data, int length);
+        NODISCARD int GetCheckSum(const char* data, int length) const;
 
     private:
         static constexpr auto powersSize = 10;

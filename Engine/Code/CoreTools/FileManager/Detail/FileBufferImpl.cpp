@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:03)
+/// 版本：1.0.0.8 (2024/04/01 10:27)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -90,10 +90,13 @@ void CoreTools::FileBufferImpl::CopyBuffer(const BufferTypeConstIter& begin, con
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto index = 0;
-    for (auto iter = begin; iter != end; ++iter)
+    if (const auto size = end - begin;
+        size <= GetSize())
     {
-        buffer.at(index) = *iter;
-        ++index;
+        std::copy_n(begin, size, buffer.begin());
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("缓冲区大小不足。"))
     }
 }

@@ -49,7 +49,7 @@ void Mathematics::IntersectorTesting::IntersectionTypeTest()
     {
         IntersectorTest<float, Vector2> intersectorTest(IntersectionType(i), 1e-8f);
 
-        ASSERT_ENUM_EQUAL(intersectorTest.GetIntersectionType(), IntersectionType(i));
+        ASSERT_EQUAL(intersectorTest.GetIntersectionType(), IntersectionType(i));
         ASSERT_APPROXIMATE(intersectorTest.GetEpsilon(), 1e-8f, 1e-8f);
 
         if (intersectorTest.GetIntersectionType() == IntersectionType::Empty)

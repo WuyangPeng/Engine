@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:28)
+/// 版本：1.0.0.8 (2024/04/02 13:19)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_DATA_TYPE_DESCRIBE_H
 #define CORE_TOOLS_TEXT_PARSING_DATA_TYPE_DESCRIBE_H
@@ -25,13 +25,13 @@ namespace CoreTools
         using StringView = System::StringView;
 
     public:
-        constexpr DataTypeDescribe(CSVDataType csvDataType,
-                                   StringView describe,
-                                   StringView actualType,
-                                   StringView functionName,
-                                   StringView valueType,
-                                   StringView baseReturnDescribe,
-                                   StringView abbreviation)
+        constexpr DataTypeDescribe(const CSVDataType csvDataType,
+                                   const StringView describe,
+                                   const StringView actualType,
+                                   const StringView functionName,
+                                   const StringView valueType,
+                                   const StringView baseReturnDescribe,
+                                   const StringView abbreviation)
             : csvDataType{ csvDataType },
               describe{ describe },
               actualType{ actualType },

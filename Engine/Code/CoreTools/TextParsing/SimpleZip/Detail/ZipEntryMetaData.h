@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:51)
+/// 版本：1.0.0.8 (2024/04/02 15:19)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ZIP_ENTRY_META_DATA_H
 #define CORE_TOOLS_TEXT_PARSING_ZIP_ENTRY_META_DATA_H
@@ -48,7 +48,7 @@ namespace CoreTools::SimpleZip
         bool isSupported;
         std::string fileName;
         std::string comment;
-        const time_t time;
+        time_t time;
     };
 }
 

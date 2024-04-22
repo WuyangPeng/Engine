@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:04)
+/// 版本：1.0.0.8 (2024/04/11 11:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -460,7 +460,7 @@ void CoreTools::SimpleCSV::DocumentImpl::Create(const DocumentSharedPtr& documen
     Open(document);
 }
 
-void CoreTools::SimpleCSV::DocumentImpl::DoCreate()
+void CoreTools::SimpleCSV::DocumentImpl::DoCreate() const
 {
     const auto outfile = StringConversion::MultiByteConversionStandard(filePath);
 
@@ -488,28 +488,38 @@ void CoreTools::SimpleCSV::DocumentImpl::Open(const DocumentSharedPtr& document)
         ExecuteCommand(CommandAddSharedStrings{});
     }
 
-    for (const auto& item : contentTypes->GetContentItems())
-    {
-        if (item.GetPath().substr(0, 4) == "/xl/" && !(item.GetPath() == "/xl/workbook.xml"))
-        {
-            data.emplace_back(std::make_shared<XmlData>(document,
-                                                        item.GetPath().substr(1),
-                                                        wbkRelationships->GetRelationshipByTarget(item.GetPath().substr(4)).GetId(),
-                                                        item.GetType()));
-        }
-        else
-        {
-            data.emplace_back(std::make_shared<XmlData>(document,
-                                                        item.GetPath().substr(1),
-                                                        docRelationships->GetRelationshipByTarget(item.GetPath().substr(1)).GetId(),
-                                                        item.GetType()));
-        }
-    }
+    OpenContentItems(document);
 
     coreProperties = std::make_shared<Properties>(GetXmlData("docProps/core.xml"));
     appProperties = std::make_shared<AppProperties>(GetXmlData("docProps/app.xml"));
     sharedStrings = std::make_shared<SharedStrings>(GetXmlData("xl/sharedStrings.xml"));
     workbook = std::make_shared<Workbook>(GetXmlData("xl/workbook.xml"));
+}
+
+void CoreTools::SimpleCSV::DocumentImpl::OpenContentItems(const DocumentSharedPtr& document)
+{
+    for (const auto& item : contentTypes->GetContentItems())
+    {
+        OpenContentItems(document, item);
+    }
+}
+
+void CoreTools::SimpleCSV::DocumentImpl::OpenContentItems(const DocumentSharedPtr& document, const ContentItem& item)
+{
+    if (item.GetPath().substr(0, 4) == "/xl/" && item.GetPath() != "/xl/workbook.xml")
+    {
+        data.emplace_back(std::make_shared<XmlData>(document,
+                                                    item.GetPath().substr(1),
+                                                    wbkRelationships->GetRelationshipByTarget(item.GetPath().substr(4)).GetId(),
+                                                    item.GetType()));
+    }
+    else
+    {
+        data.emplace_back(std::make_shared<XmlData>(document,
+                                                    item.GetPath().substr(1),
+                                                    docRelationships->GetRelationshipByTarget(item.GetPath().substr(1)).GetId(),
+                                                    item.GetType()));
+    }
 }
 
 void CoreTools::SimpleCSV::DocumentImpl::Save()
@@ -608,7 +618,7 @@ void CoreTools::SimpleCSV::DocumentImpl::SetAppVersionProperty(const std::string
 {
     try
     {
-        MAYBE_UNUSED const auto result = std::stof(value);
+        std::ignore = std::stof(value);
     }
     catch (...)
     {
@@ -617,16 +627,21 @@ void CoreTools::SimpleCSV::DocumentImpl::SetAppVersionProperty(const std::string
 
     if (value.find('.') != std::string::npos)
     {
-        if (!value.substr(value.find('.') + 1).empty() && value.substr(value.find('.') + 1).size() <= 5)
+        DoSetAppVersionProperty(value);
+    }
+    else
+    {
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "无效的属性值。"s)
+    }
+}
+
+void CoreTools::SimpleCSV::DocumentImpl::DoSetAppVersionProperty(const std::string& value)
+{
+    if (!value.substr(value.find('.') + 1).empty() && value.substr(value.find('.') + 1).size() <= 5)
+    {
+        if (!value.substr(0, value.find('.')).empty() && value.substr(0, value.find('.')).size() <= 2)
         {
-            if (!value.substr(0, value.find('.')).empty() && value.substr(0, value.find('.')).size() <= 2)
-            {
-                appProperties->SetProperty("AppVersion", value);
-            }
-            else
-            {
-                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "无效的属性值。"s)
-            }
+            appProperties->SetProperty("AppVersion", value);
         }
         else
         {
@@ -926,9 +941,9 @@ void CoreTools::SimpleCSV::DocumentImpl::ExecuteCommand(const CommandCloneSheet&
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto documentSharedPtr = documentWeakPtr.lock();
+    const auto documentSharedPtr = documentWeakPtr.lock();
 
-    if (!documentSharedPtr)
+    if (documentSharedPtr == nullptr)
     {
         THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s))
     }
@@ -940,44 +955,62 @@ void CoreTools::SimpleCSV::DocumentImpl::ExecuteCommand(const CommandCloneSheet&
         THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, "Sheet named \""s + command.GetCloneName() + "\" already exists."s)
     }
 
+    ExecuteCommand(command, documentSharedPtr, internalId, sheetPath);
+}
+
+void CoreTools::SimpleCSV::DocumentImpl::ExecuteCommand(const CommandCloneSheet& command,
+                                                        const DocumentSharedPtr& documentSharedPtr,
+                                                        int internalId,
+                                                        const std::string& sheetPath)
+{
     if (wbkRelationships->GetRelationshipById(command.GetSheetId()).GetType() == RelationshipType::Worksheet)
     {
-        contentTypes->AddOverride(sheetPath, ContentType::Worksheet);
-        wbkRelationships->AddRelationship(RelationshipType::Worksheet, sheetPath.substr(4));
-        appProperties->AppendSheetName(command.GetCloneName());
-
-        if (const auto result = std::ranges::find_if(data, [&](const auto& item) {
-                return item->GetXmlPath().substr(3) == wbkRelationships->GetRelationshipById(command.GetSheetId()).GetTarget();
-            });
-            result != data.cend())
-        {
-            archive.AddEntry(sheetPath.substr(1), (*result)->GetRawData());
-            data.emplace_back(std::make_shared<XmlData>(documentSharedPtr,
-                                                        sheetPath.substr(1),
-                                                        wbkRelationships->GetRelationshipByTarget(sheetPath.substr(4)).GetId(),
-                                                        ContentType::Worksheet));
-        }
+        ExecuteCommandIsWorksheet(command, documentSharedPtr, sheetPath);
     }
     else
     {
-        contentTypes->AddOverride(sheetPath, ContentType::ChartSheet);
-        wbkRelationships->AddRelationship(RelationshipType::ChartSheet, sheetPath.substr(4));
-        appProperties->AppendSheetName(command.GetCloneName());
-
-        if (const auto result = std::ranges::find_if(data, [&](const auto& item) {
-                return item->GetXmlPath().substr(3) == wbkRelationships->GetRelationshipById(command.GetSheetId()).GetTarget();
-            });
-            result != data.cend())
-        {
-            archive.AddEntry(sheetPath.substr(1), (*result)->GetRawData());
-            data.emplace_back(std::make_shared<XmlData>(documentSharedPtr,
-                                                        sheetPath.substr(1),
-                                                        wbkRelationships->GetRelationshipByTarget(sheetPath.substr(4)).GetId(),
-                                                        ContentType::ChartSheet));
-        }
+        ExecuteCommandIsChartSheet(command, documentSharedPtr, sheetPath);
     }
 
     workbook->PrepareSheetMetadata(command.GetCloneName(), internalId);
+}
+
+void CoreTools::SimpleCSV::DocumentImpl::ExecuteCommandIsWorksheet(const CommandCloneSheet& command, const DocumentSharedPtr& documentSharedPtr, const std::string& sheetPath)
+{
+    contentTypes->AddOverride(sheetPath, ContentType::Worksheet);
+    wbkRelationships->AddRelationship(RelationshipType::Worksheet, sheetPath.substr(4));
+    appProperties->AppendSheetName(command.GetCloneName());
+
+    if (const auto result = std::ranges::find_if(data, [&](const auto& item) {
+            return item->GetXmlPath().substr(3) == wbkRelationships->GetRelationshipById(command.GetSheetId()).GetTarget();
+        });
+        result != data.cend())
+    {
+        archive.AddEntry(sheetPath.substr(1), (*result)->GetRawData());
+        data.emplace_back(std::make_shared<XmlData>(documentSharedPtr,
+                                                    sheetPath.substr(1),
+                                                    wbkRelationships->GetRelationshipByTarget(sheetPath.substr(4)).GetId(),
+                                                    ContentType::Worksheet));
+    }
+}
+
+void CoreTools::SimpleCSV::DocumentImpl::ExecuteCommandIsChartSheet(const CommandCloneSheet& command, const DocumentSharedPtr& documentSharedPtr, const std::string& sheetPath)
+{
+    contentTypes->AddOverride(sheetPath, ContentType::ChartSheet);
+    wbkRelationships->AddRelationship(RelationshipType::ChartSheet, sheetPath.substr(4));
+    appProperties->AppendSheetName(command.GetCloneName());
+
+    if (const auto result = std::ranges::find_if(data, [&](const auto& item) {
+            return item->GetXmlPath().substr(3) == wbkRelationships->GetRelationshipById(command.GetSheetId()).GetTarget();
+        });
+        result != data.cend())
+    {
+        archive.AddEntry(sheetPath.substr(1), (*result)->GetRawData());
+        data.emplace_back(std::make_shared<XmlData>(documentSharedPtr,
+                                                    sheetPath.substr(1),
+                                                    wbkRelationships->GetRelationshipByTarget(sheetPath.substr(4)).GetId(),
+                                                    ContentType::ChartSheet));
+    }
 }
 
 CoreTools::SimpleCSV::QuerySheetName CoreTools::SimpleCSV::DocumentImpl::ExecuteQuery(const QuerySheetName& query) const
@@ -1022,18 +1055,18 @@ CoreTools::SimpleCSV::QuerySheetId CoreTools::SimpleCSV::DocumentImpl::ExecuteQu
     return QuerySheetId{ query.GetSheetName(), workbook->GetSheetId(query.GetSheetName()) };
 }
 
-CoreTools::SimpleCSV::QuerySheetRelsId CoreTools::SimpleCSV::DocumentImpl::ExecuteQuery(const QuerySheetRelsId& query) const
+CoreTools::SimpleCSV::QuerySheetRelationshipId CoreTools::SimpleCSV::DocumentImpl::ExecuteQuery(const QuerySheetRelationshipId& query) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return QuerySheetRelsId{ query.GetSheetPath(), wbkRelationships->GetRelationshipByTarget(query.GetSheetPath().substr(4)).GetId() };
+    return QuerySheetRelationshipId{ query.GetSheetPath(), wbkRelationships->GetRelationshipByTarget(query.GetSheetPath().substr(4)).GetId() };
 }
 
-CoreTools::SimpleCSV::QuerySheetRelsTarget CoreTools::SimpleCSV::DocumentImpl::ExecuteQuery(const QuerySheetRelsTarget& query) const
+CoreTools::SimpleCSV::QuerySheetRelationshipTarget CoreTools::SimpleCSV::DocumentImpl::ExecuteQuery(const QuerySheetRelationshipTarget& query) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return QuerySheetRelsTarget{ query.GetSheetId(), wbkRelationships->GetRelationshipById(query.GetSheetId()).GetTarget() };
+    return QuerySheetRelationshipTarget{ query.GetSheetId(), wbkRelationships->GetRelationshipById(query.GetSheetId()).GetTarget() };
 }
 
 CoreTools::SimpleCSV::QuerySharedStrings CoreTools::SimpleCSV::DocumentImpl::ExecuteQuery(const QuerySharedStrings& query) const

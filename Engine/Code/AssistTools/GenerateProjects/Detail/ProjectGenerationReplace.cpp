@@ -11,8 +11,7 @@
 
 #include "ProjectGenerationReplace.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
-#include "System/Helper/PragmaWarning/PosixTime.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "System/Helper/PragmaWarning/PosixTime.h" 
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "AssistTools/GenerateProjects/Flags/GameParameterType.h"
 #include "AssistTools/GenerateProjects/Flags/ProjectServiceType.h"

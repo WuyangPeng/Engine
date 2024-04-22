@@ -4,5 +4,3 @@ TODO Level 4
 
 1. （Network）补全网络库API的调用。
 2. （OpenGL）考虑使用类和锁封装opengl是否存在的全局变量。
-3. （DirectX）完成DirectX库：D3D11。
-4. （Vulkan）完成Vulkan库：Vulkan。

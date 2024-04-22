@@ -113,7 +113,7 @@ void Mathematics::StaticFindIntersectorArc2Circle2Testing::EmptyTest()
 
         CircleApproximateFunction circleApproximate = Approximate<float>;
 
-        ASSERT_ENUM_EQUAL(IntersectionType::Empty, firstIntersector.GetIntersectionType());
+        ASSERT_EQUAL(IntersectionType::Empty, firstIntersector.GetIntersectionType());
         ASSERT_FALSE(firstIntersector.IsIntersection());
         ASSERT_APPROXIMATE_USE_FUNCTION(arcApproximate, firstIntersector.GetArc(), firstArc, 1e-8f);
         ASSERT_APPROXIMATE_USE_FUNCTION(circleApproximate, firstIntersector.GetCircle(), firstCircle, 1e-8f);

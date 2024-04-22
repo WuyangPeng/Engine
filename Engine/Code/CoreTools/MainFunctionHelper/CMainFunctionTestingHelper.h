@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:35)
+/// 版本：1.0.0.8 (2024/04/12 14:45)
 
 #ifndef CORE_TOOLS_MAIN_FUNCTION_HELPER_C_MAIN_FUNCTION_TESTING_HELPER_H
 #define CORE_TOOLS_MAIN_FUNCTION_HELPER_C_MAIN_FUNCTION_TESTING_HELPER_H
@@ -24,6 +24,7 @@ namespace CoreTools
     public:
         using ClassType = CMainFunctionTestingHelper;
         using ParentType = CMainFunctionHelper;
+
         using UnitTestSharedPtr = std::shared_ptr<UnitTestComposite>;
 
     public:

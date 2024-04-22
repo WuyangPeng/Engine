@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:08)
+/// 版本：1.0.0.8 (2024/04/01 10:50)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,14 +19,14 @@ CoreTools::FileAsynchronousParameter::FileAsynchronousParameter(const String& fi
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::FileAsynchronousParameter::FileAsynchronousParameter(const String& fileName, bool binaryFile, const ConstFileBufferSharedPtr& FileBuffer, bool append)
-    : impl{ fileName, binaryFile, FileBuffer, append }
+CoreTools::FileAsynchronousParameter::FileAsynchronousParameter(const String& fileName, bool binaryFile, const ConstFileBufferSharedPtr& fileBuffer, bool append)
+    : impl{ fileName, binaryFile, fileBuffer, append }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::FileAsynchronousParameter::FileAsynchronousParameter(const String& fileName, bool binaryFile, const FileEventInterfaceSharedPtr& event, const ConstFileBufferSharedPtr& FileBuffer, bool append)
-    : impl{ fileName, binaryFile, event, FileBuffer, append }
+CoreTools::FileAsynchronousParameter::FileAsynchronousParameter(const String& fileName, bool binaryFile, const FileEventInterfaceSharedPtr& event, const ConstFileBufferSharedPtr& fileBuffer, bool append)
+    : impl{ fileName, binaryFile, event, fileBuffer, append }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

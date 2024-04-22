@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：1.0.0.0 (2023/11/08 12:39)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/12 18:14)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -53,8 +53,6 @@ void CoreTools::TestingHelper::InitSuite()
     AddMessageEventSuite();
     AddStateMachineSuite();
     AddNetworkSuite();
-    AddZlibSuite();
-    AddFreeTypeSuite();
     AddCoroutineSuite();
 }
 
@@ -63,8 +61,8 @@ void CoreTools::TestingHelper::AddHelperSuite()
     auto helperSuite = GenerateSuite("帮助");
 
     ADD_TEST(helperSuite, FunctionDescribedMacroTesting);
-    helperSuite.AddSuite(GetAssertExceptionMacroSuite());
     helperSuite.AddSuite(GetAssertTestMacroSuite());
+    helperSuite.AddSuite(GetAssertExceptionMacroSuite());
     helperSuite.AddSuite(GetClassInvariantMacroSuite());
     helperSuite.AddSuite(GetCustomAssertMacroSuite());
     helperSuite.AddSuite(GetExportMacroSuite());
@@ -129,6 +127,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetCustomAssertMacroSuite()
 
     ADD_TEST(customAssertMacroSuite, CustomAssertMacroTesting);
     ADD_TEST(customAssertMacroSuite, ModuleCustomAssertMacroTesting);
+    ADD_TEST(customAssertMacroSuite, FunctionProhibitedFromCallingTesting);
 
     return customAssertMacroSuite;
 }
@@ -230,6 +229,7 @@ void CoreTools::TestingHelper::AddContractSuite()
     ADD_TEST(contractSuite, TriggerAssertTesting);
     ADD_TEST(contractSuite, CheckInvariantTesting);
     ADD_TEST(contractSuite, NoexceptTesting);
+    ADD_TEST(contractSuite, NoexceptLogTesting);
     ADD_TEST(contractSuite, AssertionTesting);
     contractSuite.AddSuite(GetImplSuite());
 
@@ -268,8 +268,8 @@ void CoreTools::TestingHelper::AddCharacterStringSuite()
 {
     auto characterStringSuite = GenerateSuite("字符串类");
 
-    ADD_TEST(characterStringSuite, StringConversionTesting);
     ADD_TEST(characterStringSuite, FormatErrorMessageTesting);
+    ADD_TEST(characterStringSuite, StringConversionTesting);
     characterStringSuite.AddSuite(GetCaseInsensitiveStringSuite());
     ADD_TEST(characterStringSuite, StringUtilityTesting);
     characterStringSuite.AddSuite(GetCodeMappingSuite());
@@ -367,7 +367,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetEndianSuite()
 
     ADD_TEST(endianSuite, ByteSwapTesting);
     ADD_TEST(endianSuite, ByteSwapperTesting);
-    ADD_TEST(endianSuite, TypeAliaserTesting);
+    ADD_TEST(endianSuite, TypeAliasTesting);
     ADD_TEST(endianSuite, EndianTesting);
 
     return endianSuite;
@@ -388,8 +388,8 @@ CoreTools::Suite CoreTools::TestingHelper::GetStreamManagerSuite()
 {
     auto streamManagerSuite = GenerateSuite("C++文件管理");
 
-    ADD_TEST(streamManagerSuite, OFStreamManagerTesting);
-    ADD_TEST(streamManagerSuite, IFStreamManagerTesting);
+    ADD_TEST(streamManagerSuite, OFileStreamManagerTesting);
+    ADD_TEST(streamManagerSuite, IFileStreamManagerTesting);
 
     return streamManagerSuite;
 }
@@ -455,26 +455,8 @@ void CoreTools::TestingHelper::AddTextParsingSuite()
 
     textParsingSuite.AddSuite(GetSimpleZipSuite());
     textParsingSuite.AddSuite(GetSimpleCSVSuite());
-    ADD_TEST(textParsingSuite, CSVDataTesting);
-    ADD_TEST(textParsingSuite, ExcelConversionCSVTesting);
-    ADD_TEST(textParsingSuite, BatchConversionCSVTesting);
-    ADD_TEST(textParsingSuite, CSVTypeConversionTesting);
-    ADD_TEST(textParsingSuite, CSVHeadTesting);
-    ADD_TEST(textParsingSuite, CSVRowTesting);
-    ADD_TEST(textParsingSuite, CSVContentTesting);
-    ADD_TEST(textParsingSuite, CSVGenerateTesting);
-    ADD_TEST(textParsingSuite, CSVTotalGenerateTesting);
-    ADD_TEST(textParsingSuite, CSVConfigureTesting);
-    ADD_TEST(textParsingSuite, DataTypeDescribeTesting);
-    ADD_TEST(textParsingSuite, JsonHeadTesting);
-    ADD_TEST(textParsingSuite, JsonNodeContainerTesting);
-    ADD_TEST(textParsingSuite, JsonNodeTesting);
-    ADD_TEST(textParsingSuite, JsonGenerateTesting);
-    ADD_TEST(textParsingSuite, JsonRowTesting);
-    ADD_TEST(textParsingSuite, JsonConfigureTesting);
-    ADD_TEST(textParsingSuite, JsonTotalGenerateTesting);
-    ADD_TEST(textParsingSuite, BatchConversionCodeTesting);
-    ADD_TEST(textParsingSuite, CSVConfigureLoadingTesting);
+    textParsingSuite.AddSuite(GetExcelSuite());
+    textParsingSuite.AddSuite(GetCSVSuite());
 
     AddSuite(textParsingSuite);
 }
@@ -561,6 +543,35 @@ CoreTools::Suite CoreTools::TestingHelper::GetQuerySuite()
     return querySuite;
 }
 
+CoreTools::Suite CoreTools::TestingHelper::GetExcelSuite()
+{
+    auto excelSuite = GenerateSuite("excel");
+
+    ADD_TEST(excelSuite, ExcelConversionCSVTesting);
+    ADD_TEST(excelSuite, BatchConversionCSVTesting);
+    ADD_TEST(excelSuite, BatchConversionCodeTesting);
+
+    return excelSuite;
+}
+
+CoreTools::Suite CoreTools::TestingHelper::GetCSVSuite()
+{
+    auto csvSuite = GenerateSuite("CSV");
+
+    ADD_TEST(csvSuite, CSVDataTesting);
+    ADD_TEST(csvSuite, CSVTypeConversionTesting);
+    ADD_TEST(csvSuite, CSVHeadTesting);
+    ADD_TEST(csvSuite, CSVRowTesting);
+    ADD_TEST(csvSuite, CSVContentTesting);
+    ADD_TEST(csvSuite, CSVGenerateTesting);
+    ADD_TEST(csvSuite, CSVTotalGenerateTesting);
+    ADD_TEST(csvSuite, CSVConfigureTesting);
+    ADD_TEST(csvSuite, DataTypeDescribeTesting);
+    ADD_TEST(csvSuite, CSVConfigureLoadingTesting);
+
+    return csvSuite;
+}
+
 void CoreTools::TestingHelper::AddLogManagerSuite()
 {
     auto logManagerSuite = GenerateSuite("日志管理库");
@@ -576,6 +587,7 @@ void CoreTools::TestingHelper::AddLogManagerSuite()
     ADD_TEST(logManagerSuite, AppenderManagerTesting);
     ADD_TEST(logManagerSuite, LogFileNameTesting);
     ADD_TEST(logManagerSuite, LogAppenderIOManagerTesting);
+    ADD_TEST(logManagerSuite, LogAppenderIOManagerSignTesting);
     ADD_TEST(logManagerSuite, LogTesting);
     ADD_TEST(logManagerSuite, LogAsynchronousTesting);
     ADD_TEST(logManagerSuite, LogHelperTesting);
@@ -590,6 +602,7 @@ void CoreTools::TestingHelper::AddDataTypesSuite()
     ADD_TEST(dataTypesSuite, TupleTesting);
     ADD_TEST(dataTypesSuite, TupleLessTesting);
     ADD_TEST(dataTypesSuite, TableTesting);
+    ADD_TEST(dataTypesSuite, MinHeapRecordTesting);
     ADD_TEST(dataTypesSuite, MinHeapTesting);
     ADD_TEST(dataTypesSuite, ThreadSafeMapTesting);
     ADD_TEST(dataTypesSuite, ThreadSafeQueueTesting);
@@ -837,20 +850,6 @@ void CoreTools::TestingHelper::AddNetworkSuite()
     auto networkSuite = GenerateSuite("网络");
 
     AddSuite(networkSuite);
-}
-
-void CoreTools::TestingHelper::AddZlibSuite()
-{
-    auto zlibSuite = GenerateSuite("zlib");
-
-    AddSuite(zlibSuite);
-}
-
-void CoreTools::TestingHelper::AddFreeTypeSuite()
-{
-    auto freeTypeSuite = GenerateSuite("freeType");
-
-    AddSuite(freeTypeSuite);
 }
 
 void CoreTools::TestingHelper::AddCoroutineSuite()

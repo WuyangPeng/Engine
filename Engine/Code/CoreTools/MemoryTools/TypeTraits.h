@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:46)
+/// 版本：1.0.0.8 (2024/04/11 15:51)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_TYPE_TRAITS_H
 #define CORE_TOOLS_MEMORY_TOOLS_TYPE_TRAITS_H
@@ -18,7 +18,7 @@
 namespace CoreTools
 {
     /// float, double或long double的IsArbitraryPrecision<T>::value是'false'。
-    /// 对于自定义类型BSNumber、BSRational 和 QFNumber，需要特化为'true'。
+    /// 对于自定义类型BinaryScientificNumber、BinaryScientificRational 和 QuadraticFieldsNumber，需要特化为'true'。
     template <typename T>
     struct IsArbitraryPrecisionInternal : std::false_type
     {
@@ -92,7 +92,7 @@ namespace CoreTools
     /// template <typename Numeric, IsNotDivisionType<Numeric> = 0>
     /// Numeric MemberFunction(Numeric inputs)
     /// { Numeric computations without divisions }
-    /// 典型的示例是当Numeric为 BSNumber<*>（不支持除法）或Numeric是BSRational<*> 时（支持除法）。
+    /// 典型的示例是当Numeric为 BinaryScientificNumber<*>（不支持除法）或Numeric是BinaryScientificRational<*> 时（支持除法）。
     template <typename T>
     using IsDivisionType = std::enable_if_t<HasDivisionOperator<T>::value, int>;
 

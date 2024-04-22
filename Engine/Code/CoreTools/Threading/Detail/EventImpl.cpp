@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:13)
+/// 版本：1.0.0.8 (2024/03/30 18:05)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -54,10 +54,7 @@ CoreTools::EventImpl::~EventImpl() noexcept
 
 bool CoreTools::EventImpl::IsValid() const noexcept
 {
-    if (System::IsSystemEventValid(handle))
-        return true;
-    else
-        return false;
+    return System::IsSystemEventValid(handle);
 }
 
 #endif  // OPEN_CLASS_INVARIANT

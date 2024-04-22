@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:42)
+/// 版本：1.0.0.8 (2024/04/11 14:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,8 +16,6 @@
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/LogManager/Flags/LogManagerFlags.h"
-
-using namespace std::literals;
 
 CoreTools::LogMessagePostfixImpl::LogMessagePostfixImpl(AppenderPrint appenderPrint, LogLevel level, const FunctionDescribed& functionDescribed)
     : postfix{}, appenderPrint{ appenderPrint }, level{ level }, functionDescribed{ functionDescribed }
@@ -39,7 +37,7 @@ void CoreTools::LogMessagePostfixImpl::GenerateFunctionDescribedPostfix()
 {
     if (AppenderPrintFlagsExist::IsExist(appenderPrint, AppenderPrint::PostfixFunctionDescribed))
     {
-        boost::format format{ "【文件：%1%，函数：%2%（第%3%行）。】\n"s };
+        boost::format format{ "【文件：%1%，函数：%2%（第%3%行）。】\n" };
 
         format % functionDescribed.GetFileName();
         format % functionDescribed.GetCurrentFunction();
@@ -49,7 +47,7 @@ void CoreTools::LogMessagePostfixImpl::GenerateFunctionDescribedPostfix()
     }
     else
     {
-        postfix += SYSTEM_TEXT("\n"s);
+        postfix += SYSTEM_TEXT("\n");
     }
 }
 

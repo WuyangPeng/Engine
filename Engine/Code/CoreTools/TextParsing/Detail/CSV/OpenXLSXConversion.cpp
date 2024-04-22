@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:58)
+/// 版本：1.0.0.8 (2024/04/11 10:20)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,10 +22,14 @@
 
 #ifdef CORE_TOOLS_USE_OPEN_XLSX
 
-using namespace std::literals;
-
 CoreTools::OpenXLSXConversion::OpenXLSXConversion(const std::string& xlsxFileName, String csvFileName)
-    : ParentType{}, document{ xlsxFileName }, csvFileName{ std::move(csvFileName) }, exclude{}, stringField{}, bitField{}, bitArrayField{}
+    : ParentType{},
+      document{ xlsxFileName },
+      csvFileName{ std::move(csvFileName) },
+      exclude{},
+      stringField{},
+      bitField{},
+      bitArrayField{}
 {
     Conversion();
 
@@ -36,21 +40,21 @@ CLASS_INVARIANT_STUB_DEFINE(CoreTools, OpenXLSXConversion)
 
 void CoreTools::OpenXLSXConversion::Conversion()
 {
-    const auto firstXlWorksheet = document.GetFirstXLWorksheet();
-    ObtainRelated(firstXlWorksheet);
+    const auto firstWorksheet = document.GetFirstWorksheet();
+    ObtainRelated(firstWorksheet);
 
-    const auto xlWorksheets = document.GetXLWorksheet();
+    const auto worksheets = document.GetWorksheet();
 
     std::string content{};
     auto isFirstPage = true;
-    for (const auto& xlWorksheet : xlWorksheets)
+    for (const auto& worksheet : worksheets)
     {
-        if (IsIgnore(xlWorksheet))
+        if (IsIgnore(worksheet))
         {
             continue;
         }
 
-        content += GetContent(isFirstPage, xlWorksheet);
+        content += GetContent(isFirstPage, worksheet);
         isFirstPage = false;
     }
 
@@ -59,84 +63,90 @@ void CoreTools::OpenXLSXConversion::Conversion()
     SaveIntoFile(content);
 }
 
-bool CoreTools::OpenXLSXConversion::IsIgnore(const OpenXLSX::XLWorksheet& xlWorksheet) const
+bool CoreTools::OpenXLSXConversion::IsIgnore(const Worksheet& worksheet)
 {
-    if (xlWorksheet.rowCount() == 0 || xlWorksheet.columnCount() == 0)
+    if (worksheet.rowCount() == 0 || worksheet.columnCount() == 0)
     {
         return true;
     }
 
-    const auto& xlCell = xlWorksheet.cell(System::EnumCastUnderlying(CSVType::Format), 1);
+    const auto& cell = worksheet.cell(System::EnumCastUnderlying(CSVType::Format), 1);
 
-    if (const auto& xlCellValueProxy = xlCell.value(); xlCellValueProxy.type() == OpenXLSX::XLValueType::String && xlCellValueProxy.get<std::string>() == CSVTypeConversion::GetTypeDescribe(CSVFormatType::Ignore))
-    {
-        return true;
-    }
+    const auto& cellValueProxy = cell.value();
 
-    return false;
+    return cellValueProxy.type() == OpenXLSX::XLValueType::String &&
+           cellValueProxy.get<std::string>() == CSVTypeConversion::GetTypeDescribe(CSVFormatType::Ignore);
 }
 
-void CoreTools::OpenXLSXConversion::ObtainRelated(const OpenXLSX::XLWorksheet& xlWorksheet)
+void CoreTools::OpenXLSXConversion::ObtainRelated(const Worksheet& worksheet)
 {
-    const auto& dataTypeRow = xlWorksheet.row(System::EnumCastUnderlying(CSVType::DataType));
+    const auto& dataTypeRow = worksheet.row(System::EnumCastUnderlying(CSVType::DataType));
     auto excludeIndex = 0;
-    for (const auto& value : dataTypeRow.values<std::vector<OpenXLSX::XLCellValue>>())
+    for (const auto& element : dataTypeRow.values<std::vector<OpenXLSX::XLCellValue>>())
     {
-        if (const auto valueType = value.type(); valueType != OpenXLSX::XLValueType::String && valueType != OpenXLSX::XLValueType::Empty)
+        if (const auto valueType = element.type();
+            valueType != OpenXLSX::XLValueType::String &&
+            valueType != OpenXLSX::XLValueType::Empty)
         {
             continue;
         }
 
-        auto column = value.get<std::string>();
-
-        // 去除头尾空格
-        boost::algorithm::trim(column);
-        if (column.empty())
-        {
-            exclude.emplace(excludeIndex);
-        }
-        else if (column.find(CSVTypeConversion::GetTypeDescribe(CSVDataType::String)) != std::string::npos)
-        {
-            stringField.emplace(excludeIndex);
-        }
-        else if (column.find(CSVTypeConversion::GetTypeDescribe(CSVDataType::BitArray)) != std::string::npos)
-        {
-            bitArrayField.emplace(excludeIndex);
-        }
-        else if (column.find(CSVTypeConversion::GetTypeDescribe(CSVDataType::Bit)) != std::string::npos)
-        {
-            bitField.emplace(excludeIndex);
-        }
+        ObtainRelated(excludeIndex, element);
 
         ++excludeIndex;
     }
 }
 
-std::string CoreTools::OpenXLSXConversion::GetContent(bool isFirstPage, const OpenXLSX::XLWorksheet& xlWorksheet)
+void CoreTools::OpenXLSXConversion::ObtainRelated(int excludeIndex, const CellValue& element)
+{
+    auto column = element.get<std::string>();
+
+    /// 去除头尾空格
+    boost::algorithm::trim(column);
+    if (column.empty())
+    {
+        exclude.emplace(excludeIndex);
+    }
+    else if (column.find(CSVTypeConversion::GetTypeDescribe(CSVDataType::String)) != std::string::npos)
+    {
+        stringField.emplace(excludeIndex);
+    }
+    else if (column.find(CSVTypeConversion::GetTypeDescribe(CSVDataType::BitArray)) != std::string::npos)
+    {
+        bitArrayField.emplace(excludeIndex);
+    }
+    else if (column.find(CSVTypeConversion::GetTypeDescribe(CSVDataType::Bit)) != std::string::npos)
+    {
+        bitField.emplace(excludeIndex);
+    }
+}
+
+std::string CoreTools::OpenXLSXConversion::GetContent(bool isFirstPage, const Worksheet& worksheet) const
 {
     std::string content{};
     auto rowIndex = 0;
-    for (const auto& xlRowRange : xlWorksheet.rows())
+    for (const auto& rowRange : worksheet.rows())
     {
-        content += GetContent(isFirstPage, rowIndex, xlRowRange);
+        content += GetContent(isFirstPage, rowIndex, rowRange);
         ++rowIndex;
     }
     return content;
 }
 
-std::string CoreTools::OpenXLSXConversion::GetContent(bool isFirstPage, int rowIndex, const OpenXLSX::XLRow& xlRow)
+std::string CoreTools::OpenXLSXConversion::GetContent(bool isFirstPage, int rowIndex, const Row& row) const
 {
     std::string content{};
 
     auto columnIndex = 0;
 
-    const auto& xlCellValues = xlRow.values<std::vector<OpenXLSX::XLCellValue>>();
-    if (xlCellValues.empty() || (xlCellValues.at(0).type() == OpenXLSX::XLValueType::Empty))
+    const auto& cellValues = row.values<std::vector<OpenXLSX::XLCellValue>>();
+    if (cellValues.empty() ||
+        (cellValues.at(0).type() == OpenXLSX::XLValueType::Empty))
     {
         return content;
     }
 
-    for (const auto& xlCellValue : xlCellValues)
+    for (const auto& cellValue : cellValues)
     {
         if (exclude.contains(columnIndex))
         {
@@ -144,10 +154,10 @@ std::string CoreTools::OpenXLSXConversion::GetContent(bool isFirstPage, int rowI
             continue;
         }
 
-        content += GetContent(isFirstPage, rowIndex, columnIndex, xlCellValue);
+        content += GetContent(isFirstPage, rowIndex, columnIndex, cellValue);
         ++columnIndex;
 
-        if (columnIndex != boost::numeric_cast<int>(xlRow.cellCount()))
+        if (columnIndex != boost::numeric_cast<int>(row.cellCount()))
         {
             content += ',';
         }
@@ -158,9 +168,10 @@ std::string CoreTools::OpenXLSXConversion::GetContent(bool isFirstPage, int rowI
     return content;
 }
 
-std::string CoreTools::OpenXLSXConversion::GetContent(bool isFirstPage, int rowIndex, int columnIndex, const OpenXLSX::XLCellValue& xlCellValue)
+std::string CoreTools::OpenXLSXConversion::GetContent(bool isFirstPage, int rowIndex, int columnIndex, const CellValue& xlCellValue) const
 {
-    switch (const auto xlValueType = xlCellValue.type(); xlValueType)
+    switch (const auto xlValueType = xlCellValue.type();
+            xlValueType)
     {
         case OpenXLSX::XLValueType::Boolean:
         {
@@ -194,76 +205,107 @@ std::string CoreTools::OpenXLSXConversion::GetContent(bool isFirstPage, int rowI
     return "";
 }
 
-std::string CoreTools::OpenXLSXConversion::GetContent(bool isFirstPage, int rowIndex, int columnIndex, const std::string& column)
+std::string CoreTools::OpenXLSXConversion::GetContent(bool isFirstPage, int rowIndex, int columnIndex, const std::string& column) const
 {
-    if (isFirstPage && rowIndex + 1 == System::EnumCastUnderlying(CSVType::DataType))
+    if (isFirstPage)
     {
-        if (bitField.contains(columnIndex))
-        {
-            return CSVTypeConversion::GetTypeDescribe(CSVDataType::Int);
-        }
-        else if (bitArrayField.contains(columnIndex))
-        {
-            return CSVTypeConversion::GetTypeDescribe(CSVDataType::IntArray);
-        }
-        else
-        {
+        if (rowIndex + 1 == System::EnumCastUnderlying(CSVType::DataType))
+            return GetFirstPageBitFieldContent(columnIndex, column);
+        else if (rowIndex < System::EnumCastUnderlying(CSVType::VariableName))
             return column;
-        }
     }
 
-    if (isFirstPage && rowIndex < System::EnumCastUnderlying(CSVType::VariableName))
+    if (stringField.contains(columnIndex))
     {
-        return column;
-    }
-    else if (stringField.contains(columnIndex))
-    {
-        auto result = column;
-
-        boost::replace_all(result, ","s, "\\,"s);
-
-        return "\""s + result + "\""s;
+        return GetStringFieldContent(column);
     }
     else if (bitArrayField.contains(columnIndex))
     {
-        std::vector<std::string> firstSplit{};
-        split(firstSplit, column, boost::is_any_of("&"), boost::token_compress_on);
-        std::string result{};
-        auto index = 0u;
-        for (const auto& value : firstSplit)
-        {
-            std::vector<std::string> secondSplit{};
-            split(secondSplit, value, boost::is_any_of(" \t|"), boost::token_compress_on);
-            auto bit = 0;
-            for (const auto& bitValue : secondSplit)
-            {
-                bit |= (1 << (boost::lexical_cast<int>(bitValue) - 1));
-            }
-            result += std::to_string(bit);
-            ++index;
-            if (index != firstSplit.size())
-            {
-                result += "&";
-            }
-        }
-
-        return result;
+        return GetBitArrayFieldContent(column);
     }
     else if (bitField.contains(columnIndex))
     {
-        std::vector<std::string> result{};
-        split(result, column, boost::is_any_of(" \t|"), boost::token_compress_on);
-        auto bit = 0;
-        for (const auto& bitValue : result)
-        {
-            bit |= (1 << (boost::lexical_cast<int>(bitValue) - 1));
-        }
-        return std::to_string(bit);
+        return GetBitFieldContent(column);
     }
     else
     {
         return column;
     }
+}
+
+std::string CoreTools::OpenXLSXConversion::GetFirstPageBitFieldContent(int columnIndex, const std::string& column) const
+{
+    if (bitField.contains(columnIndex))
+    {
+        return CSVTypeConversion::GetTypeDescribe(CSVDataType::Int);
+    }
+    else if (bitArrayField.contains(columnIndex))
+    {
+        return CSVTypeConversion::GetTypeDescribe(CSVDataType::IntArray);
+    }
+    else
+    {
+        return column;
+    }
+}
+
+std::string CoreTools::OpenXLSXConversion::GetStringFieldContent(const std::string& column)
+{
+    auto result = column;
+
+    boost::replace_all(result, ",", "\\,");
+
+    return "\"" + result + "\"";
+}
+
+std::string CoreTools::OpenXLSXConversion::GetBitArrayFieldContent(const std::string& column)
+{
+    Container container{};
+    split(container, column, boost::is_any_of("&"), boost::token_compress_on);
+
+    std::string result{};
+    auto index = 0u;
+    for (const auto& element : container)
+    {
+        ++index;
+        result += GetBitArrayFieldContent(index == container.size(), element);
+    }
+
+    return result;
+}
+
+std::string CoreTools::OpenXLSXConversion::GetBitArrayFieldContent(bool isEnd, const std::string& element)
+{
+    std::string result{};
+
+    Container container{};
+    split(container, element, boost::is_any_of(" \t|"), boost::token_compress_on);
+
+    auto bit = 0;
+    for (const auto& bitValue : container)
+    {
+        bit |= (1 << (boost::lexical_cast<int>(bitValue) - 1));
+    }
+    result += std::to_string(bit);
+
+    if (!isEnd)
+    {
+        result += "&";
+    }
+
+    return result;
+}
+
+std::string CoreTools::OpenXLSXConversion::GetBitFieldContent(const std::string& column)
+{
+    Container result{};
+    split(result, column, boost::is_any_of(" \t|"), boost::token_compress_on);
+    auto bit = 0;
+    for (const auto& bitValue : result)
+    {
+        bit |= (1 << (boost::lexical_cast<int>(bitValue) - 1));
+    }
+    return std::to_string(bit);
 }
 
 void CoreTools::OpenXLSXConversion::SaveIntoFile(const std::string& content) const

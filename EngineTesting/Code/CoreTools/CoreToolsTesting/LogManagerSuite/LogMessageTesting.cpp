@@ -1,21 +1,20 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:26)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/18 22:13)
 
 #include "LogMessageTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/Windows/Flags/PlatformErrorFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/LogManager/Flags/LogManagerFlags.h"
 #include "CoreTools/LogManager/LogMessage.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-#include <System/Windows/Flags/PlatformErrorFlags.h>
 
 using namespace std::literals;
 
@@ -31,6 +30,7 @@ void CoreTools::LogMessageTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
+
 void CoreTools::LogMessageTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(LogLevelTest);
@@ -41,6 +41,7 @@ void CoreTools::LogMessageTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(ExceptionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StringTest);
     ASSERT_NOT_THROW_EXCEPTION_0(IntegerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(IsDisabledTest);
 }
 
 void CoreTools::LogMessageTesting::LogLevelTest()
@@ -48,7 +49,8 @@ void CoreTools::LogMessageTesting::LogLevelTest()
     LogMessage message{ LogLevel::Error, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
     message << SYSTEM_TEXT("抛出异常！"s);
 
-    ASSERT_ENUM_EQUAL(message.GetLogLevel(), LogLevel::Error);
+    ASSERT_EQUAL(message.GetLogLevel(), LogLevel::Error);
+    ASSERT_FALSE(message.IsDisabled());
 }
 
 void CoreTools::LogMessageTesting::LogFilterTest()
@@ -56,7 +58,8 @@ void CoreTools::LogMessageTesting::LogFilterTest()
     LogMessage message{ LogLevel::Fatal, LogFilter::Rendering, CORE_TOOLS_FUNCTION_DESCRIBED };
     message << SYSTEM_TEXT("图像渲染失败！"s);
 
-    ASSERT_ENUM_EQUAL(message.GetLogFilterType(), LogFilter::Rendering);
+    ASSERT_EQUAL(message.GetLogFilterType(), LogFilter::Rendering);
+    ASSERT_FALSE(message.IsDisabled());
 }
 
 void CoreTools::LogMessageTesting::MessageTest()
@@ -70,6 +73,7 @@ void CoreTools::LogMessageTesting::MessageTest()
     ASSERT_EQUAL(message.GetMessageDescribe(), error);
     ASSERT_EQUAL(message.GetMessageSize(), boost::numeric_cast<int>(error.size()));
     ASSERT_EQUAL(message.GetFunctionDescribed(), functionDescribed);
+    ASSERT_FALSE(message.IsDisabled());
 }
 
 void CoreTools::LogMessageTesting::GetFileNameTest()
@@ -78,8 +82,9 @@ void CoreTools::LogMessageTesting::GetFileNameTest()
 
     const LogMessage message{ logFileName, LogLevel::Error, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
 
-    ASSERT_ENUM_EQUAL(message.GetLogLevel(), LogLevel::Error);
+    ASSERT_EQUAL(message.GetLogLevel(), LogLevel::Error);
     ASSERT_EQUAL(message.GetFileName(), logFileName.GetFileName());
+    ASSERT_FALSE(message.IsDisabled());
 }
 
 void CoreTools::LogMessageTesting::LogAppenderIOManageSignTest()
@@ -161,4 +166,12 @@ void CoreTools::LogMessageTesting::IntegerTest()
     ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("4")), std::string::npos);
     ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("5")), std::string::npos);
     ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("6")), std::string::npos);
+}
+
+void CoreTools::LogMessageTesting::IsDisabledTest()
+{
+    LogMessage message{ LogLevel::Disabled, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
+    message << SYSTEM_TEXT("抛出异常！"s);
+
+    ASSERT_TRUE(message.IsDisabled());
 }

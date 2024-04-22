@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:05)
+/// 版本：1.0.0.8 (2024/03/28 16:36)
 
 #ifndef CORE_TOOLS_BASE_LOADING_LIBRARY_H
 #define CORE_TOOLS_BASE_LOADING_LIBRARY_H
@@ -25,7 +25,6 @@ CORE_TOOLS_NON_COPY_EXPORT_IMPL(LoadingLibraryImpl);
 namespace CoreTools
 {
     /// @brief  加载动态库
-    /// @invariant  impl != nullptr。
     class CORE_TOOLS_DEFAULT_DECLARE LoadingLibrary final
     {
     public:

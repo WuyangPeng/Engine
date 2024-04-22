@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:54)
+/// 版本：1.0.0.8 (2024/04/03 00:13)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,6 +13,7 @@
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Detail/CSV/CSVHeadImpl.h"
+#include "CoreTools/TextParsing/Flags/CSVFlags.h"
 
 CoreTools::CSVHead::CSVHead(const String& path, const FileContent& fileContent)
     : impl{ path, fileContent }
@@ -29,28 +30,21 @@ CoreTools::CSVFormatType CoreTools::CSVHead::GetCSVFormatType() const noexcept
     return impl->GetCSVFormatType();
 }
 
-CoreTools::CSVHead::String CoreTools::CSVHead::GetNameSpace() const
+System::String CoreTools::CSVHead::GetNameSpace() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetNameSpace();
 }
 
-CoreTools::CSVHead::String CoreTools::CSVHead::GetCSVClassName() const
+System::String CoreTools::CSVHead::GetCSVClassName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetCSVClassName();
 }
 
-CoreTools::CSVHead::String CoreTools::CSVHead::GetCompleteClassName() const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return impl->GetCompleteClassName();
-}
-
-CoreTools::CSVHead::String CoreTools::CSVHead::GetKey() const
+System::String CoreTools::CSVHead::GetKey() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -71,7 +65,7 @@ int CoreTools::CSVHead::GetCount() const
     return impl->GetCount();
 }
 
-CoreTools::CSVHead::String CoreTools::CSVHead::GetMapping(int index) const
+System::String CoreTools::CSVHead::GetMapping(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -85,7 +79,7 @@ bool CoreTools::CSVHead::HasMapping() const noexcept
     return impl->HasMapping();
 }
 
-CoreTools::CSVHead::String CoreTools::CSVHead::GetScope(int index) const
+System::String CoreTools::CSVHead::GetScope(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -99,21 +93,21 @@ bool CoreTools::CSVHead::HasScope() const noexcept
     return impl->HasScope();
 }
 
-CoreTools::CSVHead::String CoreTools::CSVHead::GetScopeExpression(int index) const
+System::String CoreTools::CSVHead::GetScopeExpression(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetScopeExpression(index);
 }
 
-CoreTools::CSVHead::String CoreTools::CSVHead::GetDefaultValue(int index) const
+System::String CoreTools::CSVHead::GetDefaultValue(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetDefaultValue(index);
 }
 
-CoreTools::CSVHead::String CoreTools::CSVHead::GetAnnotation(int index) const
+System::String CoreTools::CSVHead::GetAnnotation(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -134,32 +128,25 @@ CoreTools::CSVDataType CoreTools::CSVHead::GetDataType(const String& field) cons
     return impl->GetDataType(field);
 }
 
-CoreTools::CSVHead::String CoreTools::CSVHead::GetActualType(int index) const
+System::String CoreTools::CSVHead::GetActualType(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetActualType(index);
 }
 
-CoreTools::CSVHead::String CoreTools::CSVHead::GetAbbreviation(int index) const
+System::String CoreTools::CSVHead::GetAbbreviation(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetAbbreviation(index);
 }
 
-CoreTools::CSVHead::String CoreTools::CSVHead::GetValueType(int index) const
+System::String CoreTools::CSVHead::GetValueType(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetValueType(index);
-}
-
-CoreTools::CSVHead::String CoreTools::CSVHead::GetActualTypeByNameSpace(int index) const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return impl->GetActualTypeByNameSpace(index);
 }
 
 bool CoreTools::CSVHead::HasDataField(const String& field) const
@@ -190,35 +177,35 @@ int CoreTools::CSVHead::GetDataIndex(const StringView& field) const
     return impl->GetDataIndex(field);
 }
 
-CoreTools::CSVHead::String CoreTools::CSVHead::GetEnumTypeName(int index) const
+System::String CoreTools::CSVHead::GetEnumTypeName(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetEnumTypeName(index);
 }
 
-CoreTools::CSVHead::String CoreTools::CSVHead::GetVariableName(int index) const
+System::String CoreTools::CSVHead::GetVariableName(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetVariableName(index);
 }
 
-CoreTools::CSVHead::String CoreTools::CSVHead::GetUpperVariableName(int index) const
+System::String CoreTools::CSVHead::GetUpperVariableName(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetUpperVariableName(index);
 }
 
-CoreTools::CSVHead::String CoreTools::CSVHead::GetFunctionVariableName(int index) const
+System::String CoreTools::CSVHead::GetFunctionVariableName(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetFunctionVariableName(index);
 }
 
-CoreTools::CSVHead::String CoreTools::CSVHead::GetFunctionName(int index) const
+System::String CoreTools::CSVHead::GetFunctionName(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -246,9 +233,9 @@ bool CoreTools::CSVHead::HasArrayDataType() const
     return impl->HasArrayDataType();
 }
 
-System::String CoreTools::CSVHead::GetAbbreviationByNameSpace(int index, const String& className) const
+bool CoreTools::CSVHead::HasBase() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return impl->GetAbbreviationByNameSpace(index, className);
+    return impl->HasBase();
 }

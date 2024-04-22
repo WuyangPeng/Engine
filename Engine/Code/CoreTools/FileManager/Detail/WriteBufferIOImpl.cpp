@@ -5,10 +5,11 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:05)
+/// 版本：1.0.0.8 (2024/04/01 10:46)
 
 #include "CoreTools/CoreToolsExport.h"
 
+#include "CheckItemSize.h"
 #include "WriteBufferIOImpl.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/MemoryTools/MemoryHelper.h"
@@ -16,8 +17,6 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-
-using namespace std::literals;
 
 CoreTools::WriteBufferIOImpl::WriteBufferIOImpl(int bufferSize)
     : ParentType{}, buffer{ std::make_shared<FileBuffer>(bufferSize) }
@@ -29,10 +28,7 @@ CoreTools::WriteBufferIOImpl::WriteBufferIOImpl(int bufferSize)
 
 bool CoreTools::WriteBufferIOImpl::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && buffer != nullptr)
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && buffer != nullptr;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -41,7 +37,7 @@ void CoreTools::WriteBufferIOImpl::Write(size_t itemSize, const void* data)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
+    CheckItemSize(itemSize);
     CORE_TOOLS_ASSERTION_0(data != nullptr, "数据无效");
 
     WriteToBuffer(itemSize, 1, data);
@@ -51,7 +47,7 @@ void CoreTools::WriteBufferIOImpl::Write(size_t itemSize, size_t itemsNumber, co
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
+    CheckItemSize(itemSize);
     CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "数据无效");
 
     WriteToBuffer(itemSize, itemsNumber, data);
@@ -61,7 +57,7 @@ uint32_t CoreTools::WriteBufferIOImpl::WriteToBuffer(size_t itemSize, size_t ite
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
+    CheckItemSize(itemSize);
     CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "准备读取的数据无效！");
     CORE_TOOLS_ASSERTION_2(GetBufferIOType() == BufferIO::Write, "缓冲区不支持写入！");
 
@@ -70,7 +66,7 @@ uint32_t CoreTools::WriteBufferIOImpl::WriteToBuffer(size_t itemSize, size_t ite
     if (const auto nextBytesProcessed = GetBytesProcessed() + numberToCopy;
         nextBytesProcessed <= GetBytesTotal())
     {
-        // 获得缓冲区当前指针位置。
+        /// 获得缓冲区当前指针位置。
         auto target = buffer->GetBuffer(GetBytesProcessed());
 
         SetBytesProcessed(nextBytesProcessed);

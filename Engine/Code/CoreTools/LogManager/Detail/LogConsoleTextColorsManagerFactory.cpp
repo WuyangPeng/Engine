@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:41)
+/// 版本：1.0.0.8 (2024/04/11 14:03)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,6 +13,7 @@
 #include "LogConsoleTextColorsManagerFactory.h"
 #include "LogConsoleTextColorsManagerImpl.h"
 #include "OutputConsoleTextColorsManager.h"
+#include "CoreTools/LogManager/Flags/LogManagerFlags.h"
 #include "CoreTools/UnitTestSuite/OStreamShared.h"
 
 CoreTools::LogConsoleTextColorsManagerFactory::LogConsoleTextColorsManagerPtr CoreTools::LogConsoleTextColorsManagerFactory::Create(LogLevel logLevel)

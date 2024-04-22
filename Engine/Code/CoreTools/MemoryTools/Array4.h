@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.5 (2024/01/22 14:00)
+/// 版本：1.0.0.8 (2024/04/11 15:44)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_ARRAY4_H
 #define CORE_TOOLS_MEMORY_TOOLS_ARRAY4_H
@@ -44,7 +44,7 @@ namespace CoreTools
         //   T*** cuboid1 = myArray[1];
         //   T** cuboid1Slice2 = myArray[1][2];
         //   T* cuboid1Slice2Row3 = myArray[1][2][3];
-        //   T cuboid1Slice2Row3Col4 = myArray[1][2][3][4];
+        //   T cuboid1Slice2Row3Column4 = myArray[1][2][3][4];
         NODISCARD int GetBound0() const noexcept;
         NODISCARD int GetBound1() const noexcept;
         NODISCARD int GetBound2() const noexcept;

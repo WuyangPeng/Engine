@@ -5,10 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 21:37)
+/// 版本：1.0.0.8 (2024/03/29 23:52)
 
 #ifndef CORE_TOOLS_EXCEPTION_FWD_H
 #define CORE_TOOLS_EXCEPTION_FWD_H
+
+#include <type_traits>
 
 namespace CoreTools
 {
@@ -16,6 +18,7 @@ namespace CoreTools
     class Error;
 
     template <typename E>
+    requires(std::is_enum_v<E>)
     class GameError;
 }
 

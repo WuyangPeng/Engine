@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:50)
+/// 版本：1.0.0.8 (2024/04/02 15:22)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_WORKSHEET_H
 #define CORE_TOOLS_TEXT_PARSING_WORKSHEET_H
@@ -53,9 +53,15 @@ namespace CoreTools::SimpleCSV
         NODISCARD Color GetColor() const override;
 
     private:
-        void Init();
+        using CountType = std::vector<int>;
 
-        void Init(XMLNode colsNode);
+    private:
+        void Init();
+        void SetDimensionNode();
+
+        static void Init(XMLNode colsNode);
+        static void Init(XMLNode colsNode, XMLNode currentNode);
+        static void Init(XMLNode colsNode, XMLNode currentNode, int index);
 
         static void SetTabColor(const XMLDocument& xmlDocument, const Color& color);
         NODISCARD static Color GetTabColor(const XMLDocument& xmlDocument);
@@ -64,9 +70,17 @@ namespace CoreTools::SimpleCSV
         NODISCARD static bool TabIsSelected(const XMLDocument& xmlDocument);
 
         NODISCARD XMLNode GetCellNode(int rowNumber, int columnNumber) const;
-        NODISCARD XMLNode GetCellNodeInColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode) const;
-        NODISCARD XMLNode GetCellNodeInTwoColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode) const;
-        NODISCARD XMLNode GetCellNodeGreaterTwoColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode) const;
+        NODISCARD static XMLNode GetCellNodeInColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode);
+        NODISCARD static XMLNode GetCellNodeInTwoColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode);
+        NODISCARD static XMLNode GetCellNodeGreaterTwoColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode);
+
+        NODISCARD static XMLNode GetFirstChildPreviousSibling(int columnNumber, const XMLNode& rowNode);
+        NODISCARD static XMLNode GetLastChildPreviousSibling(int columnNumber, const XMLNode& rowNode);
+
+        NODISCARD XMLNode GetFirstChildColumnsByInsertChildBefore() const;
+        static void AppendAttribute(int columnNumber, int attributeMin, XMLNode firstChildColumns, XMLNode& columnNode);
+
+        NODISCARD CountType GetCellCount() const;
     };
 }
 

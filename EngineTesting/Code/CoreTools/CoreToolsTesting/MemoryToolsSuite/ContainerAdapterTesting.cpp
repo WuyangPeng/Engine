@@ -1,11 +1,11 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:08)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/22 16:00)
 
 #include "ContainerAdapterTestingDetail.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -67,11 +67,11 @@ void CoreTools::ContainerAdapterTesting::ContainerAdapterArrayResetTest()
 {
     std::vector array{ 1, 2, 3, 4, 5, 6, 7, 8 };
 
-    ContainerAdapter<int, 8> container0{ array.data() };
+    ContainerAdapter<int, 8> container{ array.data() };
 
-    ASSERT_EQUAL(container0.size(), 8);
+    ASSERT_EQUAL(container.size(), 8);
 
-    const auto oldData = container0.GetData();
+    const auto oldData = container.GetData();
 
     ASSERT_UNEQUAL_NULL_PTR(oldData);
 }
@@ -82,7 +82,7 @@ void CoreTools::ContainerAdapterTesting::ContainerAdapterArrayAccessTest()
 
     ContainerAdapter<int, 8> container{ array.data() };
 
-    for (auto i = 0; i < container.size(); ++i)
+    for (auto i = 0; i < ContainerAdapter<int, 8>::size(); ++i)
     {
         ASSERT_EQUAL(container[i], i + 1);
     }
@@ -128,7 +128,7 @@ void CoreTools::ContainerAdapterTesting::ContainerAdapterArrayFillTest()
 
     container.Fill(5);
 
-    for (auto i = 0; i < container.size(); ++i)
+    for (auto i = 0; i < ContainerAdapter<int, 8>::size(); ++i)
     {
         ASSERT_EQUAL(container[i], 5);
     }
@@ -206,17 +206,17 @@ void CoreTools::ContainerAdapterTesting::ComputedAverage0Test()
 {
     std::vector<std::array<double, 2>> container0{ { 1.0, 2.0 }, { 3.0, 4.0 }, { 5.0, 6.0 }, { 7.0, 8.0 } };
 
-    const auto average0 = ComputeAverage0(container0);
+    const auto average0 = ComputeAverage(container0);
     ASSERT_APPROXIMATE(average0.at(0), 4.0, Mathematics::MathD::GetZeroTolerance());
     ASSERT_APPROXIMATE(average0.at(1), 5.0, Mathematics::MathD::GetZeroTolerance());
 
     const ContainerAdapter<std::array<double, 2>, 4> container1{ container0.data() };
-    const auto average1 = ComputeAverage0(container1);
+    const auto average1 = ComputeAverage(container1);
     ASSERT_APPROXIMATE(average1.at(0), 4.0, Mathematics::MathD::GetZeroTolerance());
     ASSERT_APPROXIMATE(average1.at(1), 5.0, Mathematics::MathD::GetZeroTolerance());
 
     const ContainerAdapter<std::array<double, 2>> container2{ container0.data(), 4 };
-    const auto average2 = ComputeAverage0(container2);
+    const auto average2 = ComputeAverage(container2);
     ASSERT_APPROXIMATE(average2.at(0), 4.0, Mathematics::MathD::GetZeroTolerance());
     ASSERT_APPROXIMATE(average2.at(1), 5.0, Mathematics::MathD::GetZeroTolerance());
 }
@@ -225,17 +225,17 @@ void CoreTools::ContainerAdapterTesting::ComputedAverage1Test()
 {
     std::vector<std::vector<double>> container0{ { 1.0, 2.0 }, { 3.0, 4.0 }, { 5.0, 6.0 }, { 7.0, 8.0 } };
 
-    const auto average0 = ComputeAverage0(container0);
+    const auto average0 = ComputeAverage(container0);
     ASSERT_APPROXIMATE(average0.at(0), 4.0, Mathematics::MathD::GetZeroTolerance());
     ASSERT_APPROXIMATE(average0.at(1), 5.0, Mathematics::MathD::GetZeroTolerance());
 
     const ContainerAdapter<std::vector<double>, 4> container1{ container0.data() };
-    const auto average1 = ComputeAverage0(container1);
+    const auto average1 = ComputeAverage(container1);
     ASSERT_APPROXIMATE(average1.at(0), 4.0, Mathematics::MathD::GetZeroTolerance());
     ASSERT_APPROXIMATE(average1.at(1), 5.0, Mathematics::MathD::GetZeroTolerance());
 
     const ContainerAdapter<std::vector<double>> container2{ container0.data(), 4 };
-    const auto average2 = ComputeAverage0(container2);
+    const auto average2 = ComputeAverage(container2);
     ASSERT_APPROXIMATE(average2.at(0), 4.0, Mathematics::MathD::GetZeroTolerance());
     ASSERT_APPROXIMATE(average2.at(1), 5.0, Mathematics::MathD::GetZeroTolerance());
 }

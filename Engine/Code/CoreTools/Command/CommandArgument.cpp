@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:34)
+/// 版本：1.0.0.8 (2024/04/12 14:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -127,7 +127,7 @@ void CoreTools::CommandArgument::AddEndArgumentValue(const std::string& value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    // 由于重设了impl，不进行Copy调用。
+    /// 由于重设了impl，不进行Copy调用。
     if (const auto iter = impl.GetConstImpl();
         iter->IsNoValue())
     {

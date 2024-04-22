@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:17)
+/// 版本：1.0.0.8 (2024/03/28 11:05)
 
 #ifndef CORE_TOOLS_HELPER_ASSERT_TEST_MACRO_DETAIL_H
 #define CORE_TOOLS_HELPER_ASSERT_TEST_MACRO_DETAIL_H
@@ -21,9 +21,6 @@
 #define ASSERT_EQUAL_DETAIL(lhs, rhs, message, isFailureThrow) \
     ASSERT_COMPARE_DETAIL((AssertEqual), (lhs), (rhs), (message), (isFailureThrow))
 
-#define ASSERT_ENUM_EQUAL_DETAIL(lhs, rhs, message, isFailureThrow) \
-    ASSERT_COMPARE_DETAIL((AssertEnumEqual), (lhs), (rhs), (message), (isFailureThrow))
-
 #define ASSERT_THREE_EQUAL_DETAIL(lhs, mhs, rhs, message, isFailureThrow) \
     AssertEqual((lhs), (mhs), (rhs), (CORE_TOOLS_FUNCTION_DESCRIBED), (message), (isFailureThrow))
 
@@ -32,9 +29,6 @@
 
 #define ASSERT_UNEQUAL_DETAIL(lhs, rhs, message, isFailureThrow) \
     ASSERT_COMPARE_DETAIL((AssertUnequal), (lhs), (rhs), (message), (isFailureThrow))
-
-#define ASSERT_ENUM_UNEQUAL_DETAIL(lhs, rhs, message, isFailureThrow) \
-    ASSERT_COMPARE_DETAIL((AssertEnumUnequal), (lhs), (rhs), (message), (isFailureThrow))
 
 #define ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL_DETAIL(lhs, rhs, message, isFailureThrow) \
     ASSERT_COMPARE_DETAIL((AssertFloatingPointCompleteUnequal), (lhs), (rhs), (message), (isFailureThrow))
@@ -60,25 +54,13 @@
 #define ASSERT_LESS_DETAIL(lhs, rhs, message, isFailureThrow) \
     ASSERT_COMPARE_DETAIL((AssertLess), (lhs), (rhs), (message), (isFailureThrow))
 
-#define ASSERT_ENUM_LESS_DETAIL(lhs, rhs, message, isFailureThrow) \
-    ASSERT_COMPARE_DETAIL((AssertEnumLess), (lhs), (rhs), (message), (isFailureThrow))
-
 #define ASSERT_LESS_EQUAL_DETAIL(lhs, rhs, message, isFailureThrow) \
     ASSERT_COMPARE_DETAIL((AssertLessEqual), (lhs), (rhs), (message), (isFailureThrow))
-
-#define ASSERT_ENUM_LESS_EQUAL_DETAIL(lhs, rhs, message, isFailureThrow) \
-    ASSERT_COMPARE_DETAIL((AssertEnumLessEqual), (lhs), (rhs), (message), (isFailureThrow))
 
 #define ASSERT_GREATER_DETAIL(lhs, rhs, message, isFailureThrow) \
     ASSERT_COMPARE_DETAIL((AssertGreater), (lhs), (rhs), (message), (isFailureThrow))
 
-#define ASSERT_ENUM_GREATER_DETAIL(lhs, rhs, message, isFailureThrow) \
-    ASSERT_COMPARE_DETAIL((AssertEnumGreater), (lhs), (rhs), (message), (isFailureThrow))
-
 #define ASSERT_GREATER_EQUAL_DETAIL(lhs, rhs, message, isFailureThrow) \
     ASSERT_COMPARE_DETAIL((AssertGreaterEqual), (lhs), (rhs), (message), (isFailureThrow))
-
-#define ASSERT_ENUM_GREATER_EQUAL_DETAIL(lhs, rhs, message, isFailureThrow) \
-    ASSERT_COMPARE_DETAIL((AssertEnumGreaterEqual), (lhs), (rhs), (message), (isFailureThrow))
 
 #endif  // CORE_TOOLS_HELPER_ASSERT_TEST_MACRO_DETAIL_H

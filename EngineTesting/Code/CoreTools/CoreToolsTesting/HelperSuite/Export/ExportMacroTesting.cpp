@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 16:00)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/13 10:41)
 
 #include "ExportMacroTestingDetail.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -58,12 +58,12 @@ void CoreTools::ExportMacroTesting::MainTest()
 
 void CoreTools::ExportMacroTesting::ExportSharedPtrMacroTest()
 {
-    const auto macro = ExportTest::ExportSharedPtrMacro::Create();
+    std::ignore = ExportTest::ExportSharedPtrMacro::Create();
 }
 
-void CoreTools::ExportMacroTesting::ExportUniquePtrMacroTest() noexcept
+void CoreTools::ExportMacroTesting::ExportUniquePtrMacroTest()  
 {
-    const ExportTest::ExportUniquePtrMacro macro{};
+    std::ignore = std::make_unique<ExportTest::ExportUniquePtrMacro>();
 }
 
 void CoreTools::ExportMacroTesting::ExportSharedImplMacroSharedTest()
@@ -83,13 +83,13 @@ void CoreTools::ExportMacroTesting::ExportSharedImplMacroSharedTest()
 
 void CoreTools::ExportMacroTesting::ExportNonCopyImplMacroTest()
 {
-    const auto macro = ExportTest::ExportNonCopyImplMacro::Create();
+    std::ignore = ExportTest::ExportNonCopyImplMacro::Create();
 }
 
 void CoreTools::ExportMacroTesting::ExportPerformanceUnsharedImplMacroTest()
 {
     constexpr auto count = 10;
-    ExportTest::ExportPerformanceUnsharedImplMacro original{ count };
+    const ExportTest::ExportPerformanceUnsharedImplMacro original{ count };
 
     const auto copy = original;
 

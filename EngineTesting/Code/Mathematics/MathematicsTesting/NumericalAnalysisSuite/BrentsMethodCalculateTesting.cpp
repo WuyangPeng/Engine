@@ -53,7 +53,7 @@ void Mathematics::BrentsMethodCalculateTesting::HaveSolutionTest()
 
     ASSERT_APPROXIMATE(Solution(root.GetRoot(), this), 0.0, 1e-5);
     ASSERT_APPROXIMATE(root.GetFunction(), 0.0, 1e-5);
-    ASSERT_ENUM_EQUAL(root.GetBrentsMethodRootType(), BrentsMethodRootType::HaveSolution);
+    ASSERT_EQUAL(root.GetBrentsMethodRootType(), BrentsMethodRootType::HaveSolution);
 }
 
 void Mathematics::BrentsMethodCalculateTesting::NoSolutionTest()

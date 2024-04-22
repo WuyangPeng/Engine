@@ -45,7 +45,7 @@ void Framework::WindowCreateParameterTesting::ValueTest()
     const WindowCreateParameter parameter{ windowsName, style, hWnd, menu, leftTopCorner };
 
     ASSERT_EQUAL(parameter.GetWindowsName(), windowsName);
-    ASSERT_ENUM_EQUAL(parameter.GetStyle(), style);
+    ASSERT_EQUAL(parameter.GetStyle(), style);
     ASSERT_EQUAL(parameter.GetParent(), hWnd);
     ASSERT_EQUAL(parameter.GetMenu(), menu);
     ASSERT_EQUAL(parameter.GetLeftTopCorner(), leftTopCorner);

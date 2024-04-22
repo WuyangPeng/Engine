@@ -11,7 +11,7 @@
 
 #include "ProjectGenerationImpl.h"
 #include "System/Helper/PragmaWarning/PosixTime.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "AssistTools/GenerateProjects/Flags/GameParameterType.h"
 #include "AssistTools/GenerateProjects/GameModule.h"
@@ -49,7 +49,7 @@ System::String AssistTools::ProjectGenerationImpl::GetTemplateContent() const
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    CoreTools::IFStreamManager streamManager{ fileName };
+    CoreTools::IFileStreamManager streamManager{ fileName };
     streamManager.SetSimplifiedChinese();
 
     return streamManager.GetFileContent();

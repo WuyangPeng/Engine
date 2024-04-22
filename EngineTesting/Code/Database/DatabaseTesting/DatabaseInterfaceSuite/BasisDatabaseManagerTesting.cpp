@@ -40,8 +40,8 @@ void Database::BasisDatabaseManagerTesting::BasisTest()
     const BasisDatabaseContainer key{ BasisDatabase{ "key", 1 } };
     const BasisDatabaseManager basisDatabaseManager{ WrappersStrategy::Mongo, "basis", ChangeType::Insert, key };
 
-    ASSERT_ENUM_EQUAL(basisDatabaseManager.GetChangeType(), ChangeType::Insert);
-    ASSERT_ENUM_EQUAL(basisDatabaseManager.GetWrappersStrategy(), WrappersStrategy::Mongo);
+    ASSERT_EQUAL(basisDatabaseManager.GetChangeType(), ChangeType::Insert);
+    ASSERT_EQUAL(basisDatabaseManager.GetWrappersStrategy(), WrappersStrategy::Mongo);
     ASSERT_EQUAL(basisDatabaseManager.GetDatabaseName(), "basis");
 
     const auto database = basisDatabaseManager.GetDatabase();

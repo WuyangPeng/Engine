@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 17:49)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/16 15:20)
 
 #include "BoostMutexTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -34,7 +34,6 @@ void CoreTools::BoostMutexTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MultiThreadingLockingFailureTest);
 }
 
-// 递归测试
 void CoreTools::BoostMutexTesting::RecursionTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateRecursionTestHolder);
@@ -48,7 +47,6 @@ void CoreTools::BoostMutexTesting::CreateRecursionTestHolder()
     ASSERT_FALSE(holder2.IsSuccess());
 }
 
-// 多线程锁成功测试
 void CoreTools::BoostMutexTesting::MultiThreadingLockingSuccessTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateLockingSuccessThread);
@@ -104,7 +102,6 @@ void CoreTools::BoostMutexTesting::StaticValueTest()
     ASSERT_EQUAL(testValue, original);
 }
 
-// 多线程锁失败测试
 void CoreTools::BoostMutexTesting::MultiThreadingLockingFailureTest()
 {
     boostDllMutex.Initialize();

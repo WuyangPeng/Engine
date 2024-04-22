@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:59)
+/// 版本：1.0.0.8 (2024/04/11 10:55)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -77,14 +77,7 @@ void CoreTools::PathSplitParsing::ParsingClassName(const SplitContainer& splitCo
 
 bool CoreTools::PathSplitParsing::IsValid() const noexcept
 {
-    if (!path.empty() && !nameSpace.empty() && !className.empty())
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return !path.empty() && !nameSpace.empty() && !className.empty();
 }
 
 #endif  // OPEN_CLASS_INVARIANT

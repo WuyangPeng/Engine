@@ -41,7 +41,7 @@ void System::EnumOrableTesting::SignedOperatorTest()
 
     number |= SignedNumber::Five;
 
-    ASSERT_ENUM_EQUAL(number, SignedNumber::Seven);
+    ASSERT_EQUAL(number, SignedNumber::Seven);
 }
 
 void System::EnumOrableTesting::SignedConstexprOperatorTest() const noexcept
@@ -57,7 +57,7 @@ void System::EnumOrableTesting::UnsignedOperatorTest()
 
     number |= Number::Three;
 
-    ASSERT_ENUM_EQUAL(number, Number::Seven);
+    ASSERT_EQUAL(number, Number::Seven);
 }
 
 void System::EnumOrableTesting::UnsignedConstexprOperatorTest() const noexcept

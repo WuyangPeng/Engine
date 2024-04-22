@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:22)
+/// 版本：1.0.0.8 (2024/04/12 11:21)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_SUITE_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_SUITE_H
@@ -19,7 +19,8 @@
 
 EXPORT_SHARED_PTR(CoreTools, UnitTestComposite, CORE_TOOLS_DEFAULT_DECLARE);
 
-// 单元测试套件类。Suite为外部接口类，可增加或删除单元测试，并获取测试的结果。
+/// 单元测试套件类。
+/// Suite为外部接口类，可增加或删除单元测试，并获取测试的结果。
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE Suite final

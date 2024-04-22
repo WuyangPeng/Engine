@@ -5,13 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:05)
+/// 版本：1.0.0.8 (2024/04/01 10:42)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ReadAndWriteFileHandleImpl.h"
 #include "System/FileManager/Flags/FileFlags.h"
-#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
@@ -27,18 +26,12 @@ void CoreTools::ReadAndWriteFileHandleImpl::Read(size_t itemSize, void* data)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
-    CORE_TOOLS_ASSERTION_0(data != nullptr, "数据无效");
-
     Read(itemSize, 1, data);
 }
 
 void CoreTools::ReadAndWriteFileHandleImpl::Read(size_t itemSize, size_t itemsNumber, void* data)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
-
-    CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
-    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "数据无效");
 
     ReadFromFile(itemSize, itemsNumber, data);
 }
@@ -47,18 +40,12 @@ void CoreTools::ReadAndWriteFileHandleImpl::Write(size_t itemSize, const void* d
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
-    CORE_TOOLS_ASSERTION_0(data != nullptr, "数据无效");
-
     Write(itemSize, 1, data);
 }
 
 void CoreTools::ReadAndWriteFileHandleImpl::Write(size_t itemSize, size_t itemsNumber, const void* data)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
-
-    CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
-    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "数据无效");
 
     WriteToFile(itemSize, itemsNumber, data);
 }

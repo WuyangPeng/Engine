@@ -5,14 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:38)
+/// 版本：1.0.0.8 (2024/04/11 13:54)
 
 #ifndef CORE_TOOLS_LOG_LOG_MANAGER_INTERNAL_FWD_H
 #define CORE_TOOLS_LOG_LOG_MANAGER_INTERNAL_FWD_H
 
 #include "LogManagerFwd.h"
 
-namespace CoreTools
+    namespace CoreTools
 {
     class AppenderFactory;
     class LogConsoleTextColorsManagerFactory;

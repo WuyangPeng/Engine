@@ -43,7 +43,7 @@ void System::FileMapGenericMaskTesting::DoFileMapGenericMaskTest(FileHandleDesir
     AccessCheckGenericMapping genericMapping{};
     const auto enlistmentMapGenericMask = GetFileMapGenericMask(fileHandleDesiredAccess, genericMapping);
 
-    ASSERT_ENUM_EQUAL(accessGenericMask, enlistmentMapGenericMask);
+    ASSERT_EQUAL(accessGenericMask, enlistmentMapGenericMask);
 }
 
 void System::FileMapGenericMaskTesting::FileMapGenericMaskTest()

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:53)
+/// 版本：1.0.0.8 (2024/04/11 22:09)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_IMPL_H
@@ -49,7 +49,7 @@ namespace CoreTools
         using LinkAssociatedContainer = std::map<int64_t, ObjectInterfaceSharedPtr>;
 
     private:
-        // 存储图形加载过程中的顶层对象。
+        /// 存储图形加载过程中的顶层对象。
         LinkAssociatedContainer linked;
         LinkSequentialContainer ordered;
     };

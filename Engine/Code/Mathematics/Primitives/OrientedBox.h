@@ -49,9 +49,13 @@ namespace Mathematics
 
         NODISCARD AxisType GetAxis() const noexcept;
         void SetAxis(const AxisType& aAxis) noexcept;
+        NODISCARD Vector GetAxis(int index) const;
+        void SetAxis(int index, const Vector& aAxis);
 
         NODISCARD Vector GetExtent() const noexcept;
         void SetExtent(const Vector& aExtent) noexcept;
+        NODISCARD Real GetExtent(int index) const;
+        void SetExtent(int index, Real aExtent);
 
         /// 计算长方体的顶点。
         /// 如果索引i具有比特模式i = b[N-1]...b[0]，

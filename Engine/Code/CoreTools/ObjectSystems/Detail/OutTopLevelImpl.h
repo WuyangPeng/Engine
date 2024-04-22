@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:54)
+/// 版本：1.0.0.8 (2024/04/11 22:09)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OUT_TOP_LEVEL_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OUT_TOP_LEVEL_IMPL_H
@@ -33,11 +33,11 @@ namespace CoreTools
         NODISCARD ConstObjectContainerConstIter begin() const noexcept;
         NODISCARD ConstObjectContainerConstIter end() const noexcept;
 
-        // 对顶层的对象进行保存。
+        /// 对顶层的对象进行保存。
         void Insert(const ObjectInterfaceSharedPtr& object);
 
     private:
-        // 顶层对象的流。
+        /// 顶层对象的流。
         ConstObjectContainer topLevel;
     };
 }

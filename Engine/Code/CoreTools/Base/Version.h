@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:06)
+/// 版本：1.0.0.8 (2024/03/28 16:37)
 
 #ifndef CORE_TOOLS_BASE_VERSION_H
 #define CORE_TOOLS_BASE_VERSION_H
@@ -26,7 +26,7 @@ namespace CoreTools
     class CORE_TOOLS_DEFAULT_DECLARE Version final
     {
     public:
-        NODISCARD static constexpr int GetTCREFullVersion() noexcept
+        NODISCARD static constexpr int GetTcreFullVersion() noexcept
         {
             return gTcreVersion;
         }
@@ -40,7 +40,7 @@ namespace CoreTools
 
         NODISCARD static constexpr int GetMajor() noexcept
         {
-            return GetMajor(GetTCREFullVersion());
+            return GetMajor(GetTcreFullVersion());
         }
 
         /// @return 返回次版本号，“1.2.3.4”中的2。
@@ -53,7 +53,7 @@ namespace CoreTools
 
         NODISCARD static constexpr int GetMinor() noexcept
         {
-            return GetMinor(GetTCREFullVersion());
+            return GetMinor(GetTcreFullVersion());
         }
 
         /// @return 返回内部版本号，“1.2.3.4”中的3。
@@ -65,7 +65,7 @@ namespace CoreTools
 
         NODISCARD static constexpr int GetBuild() noexcept
         {
-            return GetBuild(GetTCREFullVersion());
+            return GetBuild(GetTcreFullVersion());
         }
 
         /// @return 返回修订号，“1.2.3.4”中的4。
@@ -77,7 +77,7 @@ namespace CoreTools
 
         NODISCARD static constexpr int GetRevision() noexcept
         {
-            return GetRevision(GetTCREFullVersion());
+            return GetRevision(GetTcreFullVersion());
         }
 
         /// @return 返回一个完整的版本号为字符串，如“1.2.3.4”。

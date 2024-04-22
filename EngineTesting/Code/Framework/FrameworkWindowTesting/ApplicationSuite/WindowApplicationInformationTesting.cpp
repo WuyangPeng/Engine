@@ -66,7 +66,7 @@ void Framework::WindowApplicationInformationTesting::InformationTest()
     ASSERT_EQUAL(information.GetHeight(), height);
     ASSERT_EQUAL(information.GetWindowSize(), size);
     ASSERT_APPROXIMATE(information.GetAspectRatio(), boost::numeric_cast<float>(width) / boost::numeric_cast<float>(height), Mathematics::MathF::epsilon);
-    ASSERT_ENUM_EQUAL(information.GetStyle(), System::WindowsStyles::Default);
+    ASSERT_EQUAL(information.GetStyle(), System::WindowsStyles::Default);
     ASSERT_EQUAL(information.GetWindowName().GetWindowClassName(), windowName);
     ASSERT_TRUE(information.GetWindowName().GetWindowMenuName().empty());
 
@@ -108,7 +108,7 @@ void Framework::WindowApplicationInformationTesting::AllowResizeTest()
     ASSERT_EQUAL(information.GetHeight(), height);
     ASSERT_EQUAL(information.GetWindowSize(), size);
     ASSERT_APPROXIMATE(information.GetAspectRatio(), boost::numeric_cast<float>(width) / boost::numeric_cast<float>(height), Mathematics::MathF::epsilon);
-    ASSERT_ENUM_EQUAL(information.GetStyle(), System::WindowsStyles::Default);
+    ASSERT_EQUAL(information.GetStyle(), System::WindowsStyles::Default);
     ASSERT_EQUAL(information.GetWindowName().GetWindowClassName(), windowName);
     ASSERT_TRUE(information.GetWindowName().GetWindowMenuName().empty());
 
@@ -143,7 +143,7 @@ void Framework::WindowApplicationInformationTesting::NotAllowedResizeTest()
     ASSERT_EQUAL(information.GetHeight(), height);
     ASSERT_EQUAL(information.GetWindowSize(), size);
     ASSERT_APPROXIMATE(information.GetAspectRatio(), boost::numeric_cast<float>(width) / boost::numeric_cast<float>(height), Mathematics::MathF::epsilon);
-    ASSERT_ENUM_EQUAL(information.GetStyle(), System::WindowsStyles::Overlapped | System::WindowsStyles::Caption | System::WindowsStyles::SysMenu | System::WindowsStyles::MinimizeBox | System::WindowsStyles::Visible);
+    ASSERT_EQUAL(information.GetStyle(), System::WindowsStyles::Overlapped | System::WindowsStyles::Caption | System::WindowsStyles::SysMenu | System::WindowsStyles::MinimizeBox | System::WindowsStyles::Visible);
     ASSERT_EQUAL(information.GetWindowName().GetWindowClassName(), windowName);
     ASSERT_TRUE(information.GetWindowName().GetWindowMenuName().empty());
 

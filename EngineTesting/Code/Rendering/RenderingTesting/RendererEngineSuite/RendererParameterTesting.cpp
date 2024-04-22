@@ -66,10 +66,10 @@ void Rendering::RendererParameterTesting::AccessTest()
 
 void Rendering::RendererParameterTesting::ExecuteTest(const RendererParameter& rendererParameter)
 {
-    ASSERT_ENUM_EQUAL(rendererParameter.GetRendererType(), rendererType);
+    ASSERT_EQUAL(rendererParameter.GetRendererType(), rendererType);
 
-    ASSERT_ENUM_EQUAL(rendererParameter.GetColorFormat(), colorFormat);
-    ASSERT_ENUM_EQUAL(rendererParameter.GetDepthStencilFormat(), depthStencilFormat);
+    ASSERT_EQUAL(rendererParameter.GetColorFormat(), colorFormat);
+    ASSERT_EQUAL(rendererParameter.GetDepthStencilFormat(), depthStencilFormat);
     ASSERT_EQUAL(rendererParameter.GetNumMultiSamples(), multiSamplesNumber);
 
     ASSERT_TRUE(Approximate(rendererParameter.GetClearColor(), colour, 1e-8f));
@@ -93,8 +93,8 @@ void Rendering::RendererParameterTesting::ExecuteTest(const RendererParameter& r
 
     const auto rendererBasis = rendererParameter.GetRendererBasis();
 
-    ASSERT_ENUM_EQUAL(rendererBasis.GetColorFormat(), rendererParameter.GetColorFormat());
-    ASSERT_ENUM_EQUAL(rendererBasis.GetDepthStencilFormat(), rendererParameter.GetDepthStencilFormat());
+    ASSERT_EQUAL(rendererBasis.GetColorFormat(), rendererParameter.GetColorFormat());
+    ASSERT_EQUAL(rendererBasis.GetDepthStencilFormat(), rendererParameter.GetDepthStencilFormat());
     ASSERT_EQUAL(rendererBasis.GetNumMultiSamples(), rendererParameter.GetNumMultiSamples());
     ASSERT_EQUAL(rendererBasis.GetWidth(), rendererParameter.GetWidth());
     ASSERT_EQUAL(rendererBasis.GetHeight(), rendererParameter.GetHeight());

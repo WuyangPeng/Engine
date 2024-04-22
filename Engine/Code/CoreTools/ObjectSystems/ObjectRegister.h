@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:56)
+/// 版本：1.0.0.8 (2024/04/11 22:16)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_H
@@ -30,6 +30,7 @@ namespace CoreTools
     {
     public:
         DELAY_COPY_UNSHARED_TYPE_DECLARE(ObjectRegister);
+
         using ObjectRegisterSharedPtr = std::shared_ptr<ClassType>;
 
     public:
@@ -55,15 +56,19 @@ namespace CoreTools
         NODISCARD ConstRegisterContainerConstIter end() const noexcept;
 
         template <typename T>
+        requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
         int64_t Register(const T& object);
 
         template <typename T>
+        requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
         int64_t RegisterWeakPtr(const T& object);
 
         template <typename T>
+        requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::value_type::ObjectType>)
         void RegisterContainer(const T& objects);
 
         template <typename T, int Size>
+        requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::value_type::ObjectType> && 0 <= Size)
         void RegisterContainer(const std::array<T, Size>& objects);
 
     private:

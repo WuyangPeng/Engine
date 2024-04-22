@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:54)
+/// 版本：1.0.0.8 (2024/04/11 22:09)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_NAME_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_NAME_IMPL_H
@@ -14,7 +14,7 @@
 
 #include <string>
 
-// Object类的名字
+/// Object类的名字
 namespace CoreTools
 {
     class CORE_TOOLS_HIDDEN_DECLARE ObjectNameImpl final

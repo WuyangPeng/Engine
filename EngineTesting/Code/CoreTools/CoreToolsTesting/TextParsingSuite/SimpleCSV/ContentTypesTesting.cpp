@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:13)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/17 16:48)
 
 #include "ContentTypesTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -17,8 +17,6 @@
 #include "CoreTools/TextParsing/SimpleCSV/Row.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
-
-using namespace std::literals;
 
 CoreTools::ContentTypesTesting::ContentTypesTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -40,7 +38,7 @@ void CoreTools::ContentTypesTesting::MainTest()
 
 void CoreTools::ContentTypesTesting::ContentTypesTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
     const auto data = make_shared<SimpleCSV::XmlData>(document, "[Content_Types].xml");
 
     SimpleCSV::ContentTypes contentTypes{ data };
@@ -52,7 +50,7 @@ void CoreTools::ContentTypesTesting::ContentTypesTest()
         auto contentItem = contentTypes.GetContentItem(item.GetPath());
 
         ASSERT_EQUAL(contentItem.GetPath(), item.GetPath());
-        ASSERT_ENUM_EQUAL(contentItem.GetType(), item.GetType());
+        ASSERT_EQUAL(contentItem.GetType(), item.GetType());
     }
 
     contentTypes.AddOverride("/xl/worksheets/sheet4.xml", SimpleCSV::ContentType::Worksheet);

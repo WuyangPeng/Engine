@@ -60,7 +60,7 @@ void System::WaitSemaphoreTesting::WaitForSemaphoreTest1(WindowsHandle semaphore
 {
     const auto flag = WaitForSystemSemaphore(semaphoreHandle, EnumCastUnderlying(MutexWait::Infinite));
 
-    ASSERT_ENUM_EQUAL(flag, MutexWaitReturn::Object0);
+    ASSERT_EQUAL(flag, MutexWaitReturn::Object0);
 
     if (flag == MutexWaitReturn::Object0)
     {
@@ -72,7 +72,7 @@ void System::WaitSemaphoreTesting::WaitForSemaphoreTest2(WindowsHandle semaphore
 {
     const auto flag = WaitForSystemSemaphore(semaphoreHandle, EnumCastUnderlying(MutexWait::Infinite), true);
 
-    ASSERT_ENUM_EQUAL(flag, MutexWaitReturn::Object0);
+    ASSERT_EQUAL(flag, MutexWaitReturn::Object0);
 
     if (flag == MutexWaitReturn::Object0)
     {
@@ -84,7 +84,7 @@ void System::WaitSemaphoreTesting::WaitForSemaphoreTest3(WindowsHandle semaphore
 {
     const auto flag = WaitForSystemSemaphore(semaphoreHandle, EnumCastUnderlying(MutexWait::Infinite), false);
 
-    ASSERT_ENUM_EQUAL(flag, MutexWaitReturn::Object0);
+    ASSERT_EQUAL(flag, MutexWaitReturn::Object0);
 
     if (flag == MutexWaitReturn::Object0)
     {

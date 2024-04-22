@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:14)
+/// 版本：1.0.0.8 (2024/04/12 15:06)
 
 #ifndef CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_GET_INTERNAL_H
 #define CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_GET_INTERNAL_H
@@ -14,27 +14,27 @@
 
 #include "CoreTools/Helper/PropertiesMacro.h"
 
-// 使用方式：
-// 类通过友元实现对属性的只读访问。
-// 如一个类，定义如下：
-// class PropTester {
-// public: CoreTools::DirectPropertyGetInternal<int, int, PropTester> Prop;
-// 如果需要提供修改值的接口：
-// public: void SetPropValue(int i)	{ Prop.value = i;	}
-// };
+/// 使用方式：
+/// 类通过友元实现对属性的只读访问。
+/// 如一个类，定义如下：
+/// class PropTester {
+/// public: CoreTools::DirectPropertyGetInternal<int, int, PropTester> Prop;
+/// 如果需要提供修改值的接口：
+/// public: void SetPropValue(int i)	{ Prop.value = i;	}
+/// };
 
-// 使用方式如下：
-// PropTester tester;
-// 只读访问：
-// int i = tester.Prop;
-// 设置值：
-// tester.SetPropValue(100);
+/// 使用方式如下：
+/// PropTester tester{};
+/// 只读访问：
+/// int i = tester.Prop;
+/// 设置值：
+/// tester.SetPropValue(100);
 
 namespace CoreTools
 {
-    template <typename Value,  // 实际属性值类型
-              typename Reference,  // 引用类型
-              typename Container>  // 封闭类
+    template <typename Value,  /// 实际属性值类型
+              typename Reference,  /// 引用类型
+              typename Container>  /// 封闭类
     class DirectPropertyGetInternal final
     {
     public:
@@ -69,7 +69,7 @@ namespace CoreTools
         TCRE_DECLARE_TEMPLATE_PARAM_AS_FRIEND(ContainerType);
 
     public:
-        // 提供对该属性的只读访问
+        /// 提供对该属性的只读访问
         NODISCARD operator ReferenceType() const noexcept;
 
     private:

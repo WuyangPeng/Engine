@@ -2244,6 +2244,93 @@
     <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\RootsQuadratic.cpp">
       <Filter>NumericalAnalysis 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\RootsGeneralPolynomial.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\RootsQuartic.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Estimate\RotationEstimate.cpp">
+      <Filter>Estimate 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Estimate\SinEstimate.cpp">
+      <Filter>Estimate 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Estimate\Slerp.cpp">
+      <Filter>Estimate 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Estimate\SlerpEstimate.cpp">
+      <Filter>Estimate 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Estimate\SqrtEstimate.cpp">
+      <Filter>Estimate 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Estimate\TanEstimate.cpp">
+      <Filter>Estimate 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\SymmetricEigensolver2x2.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\SortEigenstuff.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\SymmetricEigensolver3x3.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\UnsymmetricEigenvalues.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\NISymmetricEigensolver3x3.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\ApproximationCircle2.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\ApproximationQuery.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\ApproximationHeightLine2.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\ApproximationCone3.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\ApproximationGaussian2.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\ApproximationGaussian3.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContOrientedBox2.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\ApproximationEllipse2.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\OrientedBoundingBoxTree.cpp">
+      <Filter>ComputationalGeometry 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\OrientedBoundingBoxNode.cpp">
+      <Filter>ComputationalGeometry 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\OrientedBoundingBoxTreeOfPoints.cpp">
+      <Filter>ComputationalGeometry 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\OrientedBoundingBoxProjectionInfo.cpp">
+      <Filter>ComputationalGeometry 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\ApproximationCone3EllipseAndPoints.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\ApproximationCone3ExtractEllipses.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\ApproximationCone3EllipseAndPointsControl.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\ApproximationConvexQuadByRect.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsLib.h">
@@ -6050,12 +6137,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\GaussianEliminationDetail.h">
       <Filter>NumericalAnalysis 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Base\LexicoArray2.h">
-      <Filter>Base 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Base\LexicoArray2Detail.h">
-      <Filter>Base 模板文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Primitives\Primitives.h">
       <Filter>Primitives 头文件</Filter>
     </ClInclude>
@@ -6799,6 +6880,144 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\RootsQuadraticDetail.h">
       <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\RootsGeneralPolynomial.h">
+      <Filter>NumericalAnalysis 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\RootsGeneralPolynomialDetail.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\RootsQuartic.h">
+      <Filter>NumericalAnalysis 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\RootsQuarticDetail.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SymmetricEigensolver2x2.h">
+      <Filter>NumericalAnalysis 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SymmetricEigensolver2x2Detail.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SortEigenstuff.h">
+      <Filter>NumericalAnalysis 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SortEigenstuffDetail.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SymmetricEigensolver3x3.h">
+      <Filter>NumericalAnalysis 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SymmetricEigensolver3x3Detail.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\UnsymmetricEigenvalues.h">
+      <Filter>NumericalAnalysis 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\UnsymmetricEigenvaluesDetail.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\NISymmetricEigensolver3x3.h">
+      <Filter>NumericalAnalysis 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\NISymmetricEigensolver3x3Detail.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationCircle2.h">
+      <Filter>Approximation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationCircle2Detail.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationQuery.h">
+      <Filter>Approximation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationQueryDetail.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationHeightLine2.h">
+      <Filter>Approximation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationHeightLine2Detail.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationCone3.h">
+      <Filter>Approximation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationCone3Detail.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationGaussian2.h">
+      <Filter>Approximation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationGaussian2Detail.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationGaussian3.h">
+      <Filter>Approximation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationGaussian3Detail.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContOrientedBox2.h">
+      <Filter>Containment 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Containment\ContOrientedBox2Detail.h">
+      <Filter>Containment 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationEllipse2.h">
+      <Filter>Approximation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationEllipse2Detail.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\OrientedBoundingBoxTree.h">
+      <Filter>ComputationalGeometry 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\OrientedBoundingBoxTreeDetail.h">
+      <Filter>ComputationalGeometry 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\OrientedBoundingBoxNode.h">
+      <Filter>ComputationalGeometry 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\OrientedBoundingBoxNodeDetail.h">
+      <Filter>ComputationalGeometry 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\OrientedBoundingBoxTreeOfPoints.h">
+      <Filter>ComputationalGeometry 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\OrientedBoundingBoxTreeOfPointsDetail.h">
+      <Filter>ComputationalGeometry 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\OrientedBoundingBoxProjectionInfo.h">
+      <Filter>ComputationalGeometry 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\OrientedBoundingBoxProjectionInfoDetail.h">
+      <Filter>ComputationalGeometry 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationCone3EllipseAndPoints.h">
+      <Filter>Approximation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationCone3EllipseAndPointsDetail.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationCone3ExtractEllipses.h">
+      <Filter>Approximation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationCone3ExtractEllipsesDetail.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationCone3EllipseAndPointsControl.h">
+      <Filter>Approximation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationCone3EllipseAndPointsControlDetail.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationConvexQuadByRect.h">
+      <Filter>Approximation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationConvexQuadByRectDetail.h">
+      <Filter>Approximation 模板文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

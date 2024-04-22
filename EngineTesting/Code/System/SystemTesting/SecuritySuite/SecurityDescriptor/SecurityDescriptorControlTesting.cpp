@@ -57,10 +57,10 @@ void System::SecurityDescriptorControlTesting::DoControlTest(SecurityDescriptor&
 
     WindowsDWord revision{ 0 };
     ASSERT_TRUE(GetSystemSecurityDescriptorControl(&securityDescriptor, &result, &revision));
-    ASSERT_ENUM_EQUAL(result, bits);
+    ASSERT_EQUAL(result, bits);
 
     ASSERT_TRUE(SetSystemSecurityDescriptorControl(&securityDescriptor, bits, SecurityDescriptorControlBits::Clear));
 
     ASSERT_TRUE(GetSystemSecurityDescriptorControl(&securityDescriptor, &result, &revision));
-    ASSERT_ENUM_EQUAL(result, SecurityDescriptorControlBits::Clear);
+    ASSERT_EQUAL(result, SecurityDescriptorControlBits::Clear);
 }

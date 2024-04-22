@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:00)
+/// 版本：1.0.0.8 (2024/04/11 11:29)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -79,7 +79,7 @@ CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Worksheet::GetCellNode(int r
     }
 }
 
-CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Worksheet::GetCellNodeInColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode) const
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Worksheet::GetCellNodeInColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode)
 {
     const CellReference cellRef{ rowNumber, columnNumber };
 
@@ -89,13 +89,19 @@ CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Worksheet::GetCellNodeInColu
     return rowNode.last_child();
 }
 
-CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Worksheet::GetCellNodeInTwoColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode) const
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Worksheet::GetLastChildPreviousSibling(int columnNumber, const XMLNode& rowNode)
 {
     auto cellNode = rowNode.last_child();
     while (columnNumber < CellReference::GetColumn(GetAttributeR(cellNode)))
     {
         cellNode = cellNode.previous_sibling();
     }
+    return cellNode;
+}
+
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Worksheet::GetCellNodeInTwoColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode)
+{
+    auto cellNode = GetLastChildPreviousSibling(columnNumber, rowNode);
 
     if (CellReference::GetColumn(GetAttributeR(cellNode)) < columnNumber)
     {
@@ -108,13 +114,9 @@ CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Worksheet::GetCellNodeInTwoC
     return cellNode;
 }
 
-CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Worksheet::GetCellNodeGreaterTwoColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode) const
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Worksheet::GetCellNodeGreaterTwoColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode)
 {
-    auto cellNode = rowNode.first_child();
-    while (CellReference::GetColumn(GetAttributeR(cellNode)) < columnNumber)
-    {
-        cellNode = cellNode.next_sibling();
-    }
+    auto cellNode = GetFirstChildPreviousSibling(columnNumber, rowNode);
 
     if (columnNumber < CellReference::GetColumn(GetAttributeR(cellNode)))
     {
@@ -124,6 +126,16 @@ CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Worksheet::GetCellNodeGreate
         cellNode.append_attribute(TextParsing::gAttributeR.data()).set_value(cellRef.GetAddress().c_str());
     }
 
+    return cellNode;
+}
+
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Worksheet::GetFirstChildPreviousSibling(int columnNumber, const XMLNode& rowNode)
+{
+    auto cellNode = rowNode.first_child();
+    while (CellReference::GetColumn(GetAttributeR(cellNode)) < columnNumber)
+    {
+        cellNode = cellNode.next_sibling();
+    }
     return cellNode;
 }
 
@@ -215,37 +227,52 @@ CoreTools::SimpleCSV::Column CoreTools::SimpleCSV::Worksheet::GetColumn(int colu
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto xmlDocument = GetXmlDocument();
+    const auto firstChildColumns = GetFirstChildColumnsByInsertChildBefore();
 
-    if (!GetFirstChildColumns())
-    {
-        xmlDocument->root().insert_child_before(TextParsing::gColumns.data(), GetSheetData());
-    }
-
-    auto column = GetFirstChildColumns();
-
-    auto columnNode = column.find_child([&](const auto& node) {
+    auto columnNode = firstChildColumns.find_child([&](const auto& node) {
         return columnNumber <= GetAttributeMin(node);
     });
 
-    if (const auto attributeMin = GetAttributeMin(columnNode); attributeMin < 0 || columnNumber < attributeMin)
+    if (const auto attributeMin = GetAttributeMin(columnNode);
+        attributeMin < 0 || columnNumber < attributeMin)
     {
-        if (columnNumber < attributeMin)
-        {
-            columnNode = column.insert_child_before(TextParsing::gColumn.data(), columnNode);
-        }
-        else
-        {
-            columnNode = column.append_child(TextParsing::gColumn.data());
-        }
-
-        columnNode.append_attribute(TextParsing::gMin.data()) = columnNumber;
-        columnNode.append_attribute(TextParsing::gMax.data()) = columnNumber;
-        columnNode.append_attribute(TextParsing::gWidth.data()) = 10;
-        columnNode.append_attribute(TextParsing::gCustomWidth.data()) = 1;
+        AppendAttribute(columnNumber, attributeMin, firstChildColumns, columnNode);
     }
 
-    return Column{ xmlDocument, columnNode };
+    return Column{ GetXmlDocument(), columnNode };
+}
+
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Worksheet::GetFirstChildColumnsByInsertChildBefore() const
+{
+    const auto xmlDocument = GetXmlDocument();
+
+    auto column = GetFirstChildColumns();
+
+    if (column == nullptr)
+    {
+        xmlDocument->root().insert_child_before(TextParsing::gColumns.data(), GetSheetData());
+
+        column = GetFirstChildColumns();
+    }
+
+    return column;
+}
+
+void CoreTools::SimpleCSV::Worksheet::AppendAttribute(int columnNumber, int attributeMin, XMLNode firstChildColumns, XMLNode& columnNode)
+{
+    if (columnNumber < attributeMin)
+    {
+        columnNode = firstChildColumns.insert_child_before(TextParsing::gColumn.data(), columnNode);
+    }
+    else
+    {
+        columnNode = firstChildColumns.append_child(TextParsing::gColumn.data());
+    }
+
+    columnNode.append_attribute(TextParsing::gMin.data()) = columnNumber;
+    columnNode.append_attribute(TextParsing::gMax.data()) = columnNumber;
+    columnNode.append_attribute(TextParsing::gWidth.data()) = 10;
+    columnNode.append_attribute(TextParsing::gCustomWidth.data()) = 1;
 }
 
 CoreTools::SimpleCSV::CellReference CoreTools::SimpleCSV::Worksheet::GetLastCell() const
@@ -259,15 +286,10 @@ int CoreTools::SimpleCSV::Worksheet::GetColumnCount() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    using CountType = std::vector<int>;
+    const auto counts = GetCellCount();
 
-    CountType counts{};
-    for (const auto& row : GetRows())
-    {
-        counts.emplace_back(row.GetCellCount());
-    }
-
-    if (const auto iter = std::ranges::max_element(counts); iter != counts.cend())
+    if (const auto iter = std::ranges::max_element(counts);
+        iter != counts.cend())
     {
         return *iter;
     }
@@ -275,6 +297,17 @@ int CoreTools::SimpleCSV::Worksheet::GetColumnCount() const
     {
         THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("Worksheet GetColumnCount 错误。"s))
     }
+}
+
+CoreTools::SimpleCSV::Worksheet::CountType CoreTools::SimpleCSV::Worksheet::GetCellCount() const
+{
+    CountType counts{};
+    for (const auto& row : GetRows())
+    {
+        counts.emplace_back(row.GetCellCount());
+    }
+
+    return counts;
 }
 
 int CoreTools::SimpleCSV::Worksheet::GetRowCount() const
@@ -364,7 +397,20 @@ bool CoreTools::SimpleCSV::Worksheet::TabIsSelected(const XMLDocument& xmlDocume
 
 void CoreTools::SimpleCSV::Worksheet::Init()
 {
+    SetDimensionNode();
+
     const auto xmlDocument = GetXmlDocument();
+    if (const auto colsNode = xmlDocument->first_child().child(TextParsing::gColumns.data());
+        colsNode.type() != pugi::node_null)
+    {
+        Init(colsNode);
+    }
+}
+
+void CoreTools::SimpleCSV::Worksheet::SetDimensionNode()
+{
+    const auto xmlDocument = GetXmlDocument();
+
     auto dimensionNode = xmlDocument->document_element().child(TextParsing::gDimension.data());
 
     const std::string dimensions{ dimensionNode.attribute(TextParsing::gRef.data()).value() };
@@ -377,12 +423,6 @@ void CoreTools::SimpleCSV::Worksheet::Init()
     {
         dimensionNode.set_value(dimensions.substr(position + 1).c_str());
     }
-
-    if (const auto colsNode = xmlDocument->first_child().child(TextParsing::gColumns.data());
-        colsNode.type() != pugi::node_null)
-    {
-        Init(colsNode);
-    }
 }
 
 void CoreTools::SimpleCSV::Worksheet::Init(XMLNode colsNode)
@@ -390,24 +430,35 @@ void CoreTools::SimpleCSV::Worksheet::Init(XMLNode colsNode)
     auto currentNode = colsNode.first_child();
     while (currentNode != nullptr)
     {
-        const auto min = GetAttributeMin(currentNode);
-        const auto max = GetAttributeMax(currentNode);
-        if (min != max)
-        {
-            currentNode.attribute(TextParsing::gMin.data()).set_value(max);
-            for (auto i = min; i < max; ++i)
-            {
-                auto newNode = colsNode.insert_child_before(TextParsing::gColumn.data(), currentNode);
-                auto attr = currentNode.first_attribute();
-                while (attr != nullptr)
-                {
-                    newNode.append_attribute(attr.name()) = attr.value();
-                    attr = attr.next_attribute();
-                }
-                newNode.attribute(TextParsing::gMin.data()) = i;
-                newNode.attribute(TextParsing::gMax.data()) = i;
-            }
-        }
+        Init(colsNode, currentNode);
+
         currentNode = currentNode.next_sibling();
     }
+}
+
+void CoreTools::SimpleCSV::Worksheet::Init(XMLNode colsNode, XMLNode currentNode)
+{
+    const auto min = GetAttributeMin(currentNode);
+    const auto max = GetAttributeMax(currentNode);
+    if (min != max)
+    {
+        currentNode.attribute(TextParsing::gMin.data()).set_value(max);
+        for (auto index = min; index < max; ++index)
+        {
+            Init(colsNode, currentNode, index);
+        }
+    }
+}
+
+void CoreTools::SimpleCSV::Worksheet::Init(XMLNode colsNode, XMLNode currentNode, int index)
+{
+    auto newNode = colsNode.insert_child_before(TextParsing::gColumn.data(), currentNode);
+    auto attr = currentNode.first_attribute();
+    while (attr != nullptr)
+    {
+        newNode.append_attribute(attr.name()) = attr.value();
+        attr = attr.next_attribute();
+    }
+    newNode.attribute(TextParsing::gMin.data()) = index;
+    newNode.attribute(TextParsing::gMax.data()) = index;
 }

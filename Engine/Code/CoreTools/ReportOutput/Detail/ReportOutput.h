@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:17)
+/// 版本：1.0.0.8 (2024/04/12 11:05)
 
 #ifndef CORE_TOOLS_REPORT_OUTPUT_REPORT_OUTPUT_H
 #define CORE_TOOLS_REPORT_OUTPUT_REPORT_OUTPUT_H
@@ -37,9 +37,9 @@ namespace CoreTools
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        void PrintString(const std::string& characterString, LogLevel logLevel = LogLevel::Trace);
-        void PrintNewLine();
-        void PrintNumber(int number, LogLevel logLevel = LogLevel::Trace);
+        void PrintString(const std::string& characterString, LogLevel logLevel = LogLevel::Trace) const;
+        void PrintNewLine() const;
+        void PrintNumber(int number, LogLevel logLevel = LogLevel::Trace) const;
 
     protected:
         NODISCARD OStreamShared GetStream() noexcept;

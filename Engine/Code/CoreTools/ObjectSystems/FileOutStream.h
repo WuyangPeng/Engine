@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:55)
+/// 版本：1.0.0.8 (2024/04/11 22:12)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_FILE_OUT_STREAM_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_FILE_OUT_STREAM_H
@@ -18,7 +18,8 @@
 
 #include <string>
 
-/// 写objects到硬盘文件。版本号字符串在顶层对象之前，被首先写入。
+/// 写objects到硬盘文件。
+/// 版本号字符串在顶层对象之前，被首先写入。
 /// 当操作失败时，抛出Error异常。
 namespace CoreTools
 {
@@ -43,7 +44,7 @@ namespace CoreTools
         void Save(const String& fileName);
 
     private:
-        // 将场景图写入到缓冲器中。
+        /// 将场景图写入到缓冲器中。
         BufferOutStream bufferOutStream;
     };
 }

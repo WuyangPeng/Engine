@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:39)
+/// 版本：1.0.0.8 (2024/04/02 22:52)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_ROW_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_ROW_IMPL_H
@@ -84,8 +84,12 @@ namespace CoreTools
 
     private:
         void RowParsing();
+
         void StringNotExistCommaParsing();
         void StringExistCommaParsing();
+        void StringNotExistCommaParsing(int index, String& element);
+        void StringExistCommaParsing(String& lastCache, size_t& lastLocation, int& index, size_t location);
+        void StringExistCommaParsing(int index, String& lastCache);
 
         NODISCARD VectorType GetVectorType(const String& field) const;
         NODISCARD ArrayType GetArrayType(const String& field) const;
@@ -97,6 +101,9 @@ namespace CoreTools
 
         template <typename T>
         NODISCARD std::vector<T> GetValueArray(const String& field) const;
+
+    private:
+        void TrimString(int index, String& remaining) const;
 
     private:
         CSVHead csvHead;

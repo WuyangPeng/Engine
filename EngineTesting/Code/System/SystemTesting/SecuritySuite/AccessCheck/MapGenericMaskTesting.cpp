@@ -45,5 +45,5 @@ void System::MapGenericMaskTesting::MapGenericMaskTest()
 
     GetMapGenericMask(&accessMask, &genericMapping);
 
-    ASSERT_ENUM_EQUAL(AccessGenericMask::FileGenericRead | AccessGenericMask::FileGenericWrite, UnderlyingCastEnum<AccessGenericMask>(accessMask));
+    ASSERT_EQUAL(AccessGenericMask::FileGenericRead | AccessGenericMask::FileGenericWrite, UnderlyingCastEnum<AccessGenericMask>(accessMask));
 }

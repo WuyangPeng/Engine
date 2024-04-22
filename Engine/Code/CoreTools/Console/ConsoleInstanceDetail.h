@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:35)
+/// 版本：1.0.0.8 (2024/03/30 14:59)
 
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_INSTANCE_DETAIL_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_INSTANCE_DETAIL_H
@@ -42,10 +42,7 @@ CoreTools::ConsoleInstance<Handle>::ConsoleInstance(DisableNotThrow disableNotTh
 template <CoreTools::StandardHandle Handle>
 bool CoreTools::ConsoleInstance<Handle>::IsValid() const noexcept
 {
-    if (System::IsHandleValid(handle))
-        return true;
-    else
-        return false;
+    return System::IsHandleValid(handle);
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -53,7 +50,7 @@ bool CoreTools::ConsoleInstance<Handle>::IsValid() const noexcept
 template <CoreTools::StandardHandle Handle>
 typename CoreTools::ConsoleInstance<Handle>::ConsoleHandle CoreTools::ConsoleInstance<Handle>::GetHandle() const noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return handle;
 }

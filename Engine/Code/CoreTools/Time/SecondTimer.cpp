@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:19)
+/// 版本：1.0.0.8 (2024/04/11 22:31)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -25,10 +25,7 @@ CoreTools::SecondTimer::SecondTimer(int64_t second)
 
 bool CoreTools::SecondTimer::IsValid() const noexcept
 {
-    if (0 <= second)
-        return true;
-    else
-        return false;
+    return 0 <= second;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -39,7 +36,8 @@ int64_t CoreTools::SecondTimer::GetRemain() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto elapsedTime = GetElapsedTime(); elapsedTime <= second)
+    if (const auto elapsedTime = GetElapsedTime();
+        elapsedTime <= second)
         return second - elapsedTime;
     else
         return 0;
@@ -56,17 +54,16 @@ bool CoreTools::SecondTimer::IsElapsed() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto elapsedTime = GetElapsedTime(); second <= elapsedTime)
-        return true;
-    else
-        return false;
+    const auto elapsedTime = GetElapsedTime();
+
+    return second <= elapsedTime;
 }
 
 int64_t CoreTools::SecondTimer::GetNowTime() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return impl->GetNowTimeInSeconds();
+    return ImplType::GetNowTimeInSeconds();
 }
 
 void CoreTools::SecondTimer::ReTiming(int64_t aSecond)

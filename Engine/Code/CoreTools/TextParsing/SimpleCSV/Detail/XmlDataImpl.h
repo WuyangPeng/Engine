@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:47)
+/// 版本：1.0.0.8 (2024/04/02 17:46)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_XML_DATA_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_XML_DATA_IMPL_H
@@ -61,11 +61,20 @@ namespace CoreTools::SimpleCSV
         static constexpr auto loadFlags = pugi::parse_default | pugi::parse_ws_pcdata;
 
     private:
-        DocumentWeakPtr parentDocument;  // 指向父Document对象的指针。
-        std::string xmlPath;  // .xlsx zip 存档中XML数据的路径。
-        std::string xmlId;  // XML数据的关系ID。
-        ContentType xmlType;  // XML数据表示的类型。
-        XMLDocumentSharedPtr xmlDocument;  // 底层 XMLDocument 对象
+        /// 指向父Document对象的指针。
+        DocumentWeakPtr parentDocument;
+
+        /// .xlsx zip 存档中XML数据的路径。
+        std::string xmlPath;
+
+        /// XML数据的关系ID。
+        std::string xmlId;
+
+        /// XML数据表示的类型。
+        ContentType xmlType;
+
+        /// 底层 XMLDocument 对象
+        XMLDocumentSharedPtr xmlDocument;
     };
 }
 

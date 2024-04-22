@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.5 (2024/01/22 13:40)
+/// 版本：1.0.0.8 (2024/04/11 15:44)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_ARRAY3_H
 #define CORE_TOOLS_MEMORY_TOOLS_ARRAY3_H
@@ -53,7 +53,7 @@ namespace CoreTools
         ///   数组indirect2指向 000 100。
         ///   T** slice1 = myArray[1];
         ///   T* slice1row2 = myArray[1][2];
-        ///   T slice1Row2Col3 = myArray[1][2][3];
+        ///   T slice1Row2Column3 = myArray[1][2][3];
         NODISCARD int GetBound0() const noexcept;
         NODISCARD int GetBound1() const noexcept;
         NODISCARD int GetBound2() const noexcept;

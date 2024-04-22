@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:05)
+/// 版本：1.0.0.8 (2024/04/11 11:00)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -84,7 +84,8 @@ std::string CoreTools::SimpleCSV::CellImpl::GetFormula() const
 
     const auto formulaNode = GetFormulaNode();
 
-    if (const auto formula = formulaNode.text().get(); formula != nullptr)
+    if (const auto formula = formulaNode.text().get();
+        formula != nullptr)
     {
         return formula;
     }
@@ -135,7 +136,7 @@ CoreTools::SimpleCSV::CellImpl::SharedStringsSharedPtr CoreTools::SimpleCSV::Cel
 
     auto sharedStringsSharedPtr = sharedStrings.lock();
 
-    if (!sharedStringsSharedPtr)
+    if (sharedStringsSharedPtr == nullptr)
     {
         THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("sharedStrings已被释放。"s))
     }

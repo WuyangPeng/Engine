@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:22)
+/// 版本：1.0.0.8 (2024/04/12 11:20)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_SUITE_TEST_FAIL_PRINT_MANAGER_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_SUITE_TEST_FAIL_PRINT_MANAGER_H
@@ -19,7 +19,7 @@
 #include <memory>
 #include <string>
 
-// 单元测试类输出错误信息管理类，UnitTestFailPrintManage为内部接口类，可输出测试错误信息。
+/// 单元测试类输出错误信息管理类，UnitTestFailPrintManage为内部接口类，可输出测试错误信息。
 namespace CoreTools
 {
     class CORE_TOOLS_HIDDEN_DECLARE UnitTestFailPrintManager final

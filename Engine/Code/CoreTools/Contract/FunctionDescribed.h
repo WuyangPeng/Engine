@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:38)
+/// 版本：1.0.0.8 (2024/03/28 15:04)
 
 #ifndef CORE_TOOLS_CONTRACT_FUNCTION_DESCRIBED_H
 #define CORE_TOOLS_CONTRACT_FUNCTION_DESCRIBED_H
@@ -16,7 +16,7 @@
 
 namespace CoreTools
 {
-    // FunctionDescribed类不导出
+    /// FunctionDescribed类不导出
     class FunctionDescribed final
     {
     public:
@@ -51,7 +51,7 @@ namespace CoreTools
 
     NODISCARD constexpr bool operator==(const FunctionDescribed& lhs, const FunctionDescribed& rhs)
     {
-        // 这里直接比较字符串指针，而不是实际的值。
+        /// 这里直接比较字符串指针，而不是实际的值。
         return lhs.GetCurrentFunction() == rhs.GetCurrentFunction() && lhs.GetFileName() == rhs.GetFileName() && lhs.GetLine() == rhs.GetLine();
     }
 }

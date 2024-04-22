@@ -5,10 +5,11 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:00)
+/// 版本：1.0.0.8 (2024/04/07 20:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
+#include "ZipHelper.h"
 #include "ZipWriter.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -32,7 +33,7 @@ CoreTools::SimpleZip::ZipWriter::~ZipWriter() noexcept
 
 void CoreTools::SimpleZip::ZipWriter::Init() noexcept
 {
-    // 准备一个存档文件；
+    /// 准备一个存档文件
     mz_zip_writer_init_file(&archive, archivePath.c_str(), 0);
 }
 
@@ -42,7 +43,7 @@ void CoreTools::SimpleZip::ZipWriter::Close() noexcept
 
     if (!isClose)
     {
-        // 完成并关闭临时存档
+        /// 完成并关闭临时存档
         mz_zip_writer_finalize_archive(&archive);
         mz_zip_writer_end(&archive);
 
@@ -63,10 +64,10 @@ void CoreTools::SimpleZip::ZipWriter::ValidateFileArchive() const
 
 #include SYSTEM_WARNING_POP
 
-    // 验证临时文件
+    /// 验证临时文件
     if (!mz_zip_validate_file_archive(archivePath.c_str(), 0, &errorData))
     {
-        THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(mz_zip_get_error_string(errorData)))
+        THROW_EXCEPTION(GetArchiveLastError(errorData))
     }
 }
 
@@ -86,16 +87,18 @@ void CoreTools::SimpleZip::ZipWriter::AddZipEntry(const ZipEntry& zipEntry, mz_z
 
     if (!zipEntry.IsModified())
     {
-        if (!mz_zip_writer_add_from_zip_reader(&archive, readArchive, zipEntry.GetIndex()))
-        {
-            THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(mz_zip_get_error_string(archive.m_last_error)))
-        }
+        ZipWriterAddFromZipReader(zipEntry, readArchive);
     }
     else
     {
-        if (!zipEntry.WriterAddMem(&archive))
-        {
-            THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(mz_zip_get_error_string(archive.m_last_error)))
-        }
+        ASSERT_FAIL_THROW_EXCEPTION(zipEntry.WriterAddMem(&archive), GetArchiveLastError(archive.m_last_error));
+    }
+}
+
+void CoreTools::SimpleZip::ZipWriter::ZipWriterAddFromZipReader(const ZipEntry& zipEntry, mz_zip_archive* readArchive)
+{
+    if (!mz_zip_writer_add_from_zip_reader(&archive, readArchive, zipEntry.GetIndex()))
+    {
+        THROW_EXCEPTION(GetArchiveLastError(archive.m_last_error))
     }
 }

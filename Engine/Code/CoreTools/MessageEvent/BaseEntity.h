@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:48)
+/// 版本：1.0.0.8 (2024/04/12 15:24)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_BASE_GAME_ENTITY_H
 #define CORE_TOOLS_MESSAGE_EVENT_BASE_GAME_ENTITY_H
@@ -16,7 +16,7 @@
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
-template class CORE_TOOLS_DEFAULT_DECLARE std::weak_ptr<CoreTools::BaseEntity>;
+    template class CORE_TOOLS_DEFAULT_DECLARE std::weak_ptr<CoreTools::BaseEntity>;
 template class CORE_TOOLS_DEFAULT_DECLARE std::enable_shared_from_this<CoreTools::BaseEntity>;
 
 namespace CoreTools

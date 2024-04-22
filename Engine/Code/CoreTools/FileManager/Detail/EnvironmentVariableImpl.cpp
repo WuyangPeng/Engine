@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 00:03)
+/// 版本：1.0.0.8 (2024/04/01 10:23)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -26,9 +26,10 @@ CoreTools::EnvironmentVariableImpl::EnvironmentVariableImpl(const String& variab
 
 void CoreTools::EnvironmentVariableImpl::GainEnv(const String& variableName)
 {
-    if (!System::GetEnvironment(variableName, environmentVariable) || environmentVariable == nullptr)
+    if (!System::GetEnvironment(variableName, environmentVariable) ||
+        environmentVariable == nullptr)
     {
-        // Mac OS X Lion的任何getenv的调用将返回nullptr。这个技巧解决这个问题。
+        /// Mac OS X Lion的任何getenv的调用将返回nullptr。这个技巧解决这个问题。
         boost::property_tree::basic_ptree<String, String> mainTree{};
 
         read_json("Configuration/EnvironmentVariable.json", mainTree);

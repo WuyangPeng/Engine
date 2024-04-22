@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:37)
+/// 版本：1.0.0.8 (2024/03/28 15:47)
 
 #ifndef CORE_TOOLS_CONTRACT_NOEXCEPT_LOG_H
 #define CORE_TOOLS_CONTRACT_NOEXCEPT_LOG_H
@@ -77,7 +77,7 @@ namespace CoreTools
     }
 
     template <typename Function, typename... T>
-    void NoexceptNoReturnUseLog(Function function, T&&... parameter) noexcept
+    void StaticNoexceptNoReturnUseLog(Function function, T&&... parameter) noexcept
     {
         try
         {
@@ -90,7 +90,7 @@ namespace CoreTools
     }
 
     template <typename Result, typename Function, typename... T>
-    NODISCARD typename boost::call_traits<Result>::value_type NoexceptUseLog(Function function, typename boost::call_traits<Result>::param_type defaultResult, T&&... parameter) noexcept
+    NODISCARD typename boost::call_traits<Result>::value_type StaticNoexceptUseLog(Function function, typename boost::call_traits<Result>::param_type defaultResult, T&&... parameter) noexcept
     {
         try
         {

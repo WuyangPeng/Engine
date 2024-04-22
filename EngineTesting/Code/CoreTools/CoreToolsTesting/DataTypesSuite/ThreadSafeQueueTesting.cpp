@@ -46,10 +46,10 @@ void CoreTools::ThreadSafeQueueTesting::ThreadSafeQueueTest()
 
     ASSERT_RANGE(threadSafeQueue.GetNumElements(), 1, 2);
 
-    const auto result = threadSafeQueue.Pop();
+    const auto [element, result] = threadSafeQueue.Pop();
 
-    ASSERT_EQUAL(result.first, 5);
-    ASSERT_TRUE(result.second);
+    ASSERT_EQUAL(element, 5);
+    ASSERT_TRUE(result);
 
     ASSERT_RANGE(threadSafeQueue.GetNumElements(), 0, 1);
 

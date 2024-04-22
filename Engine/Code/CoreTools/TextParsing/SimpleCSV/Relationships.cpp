@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:01)
+/// 版本：1.0.0.8 (2024/04/11 11:27)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -75,7 +75,7 @@ void CoreTools::SimpleCSV::Relationships::DeleteRelationship(const RelationshipI
     DeleteRelationship(item.GetId());
 }
 
-int CoreTools::SimpleCSV::Relationships::GetNewRelsId(XMLNode relationshipsNode)
+int CoreTools::SimpleCSV::Relationships::GetNewRelationshipId(XMLNode relationshipsNode)
 {
     constexpr auto idBeginIndex = 3;
 
@@ -104,7 +104,7 @@ CoreTools::SimpleCSV::RelationshipItem CoreTools::SimpleCSV::Relationships::AddR
 
     const auto typeString = RelationshipItem::GetStringFromType(type);
 
-    const auto id = "rId" + std::to_string(GetNewRelsId(xmlDocument->document_element()));
+    const auto id = "rId" + std::to_string(GetNewRelationshipId(xmlDocument->document_element()));
 
     auto node = xmlDocument->document_element().append_child("Relationship");
     node.append_attribute(TextParsing::gId.data()).set_value(id.c_str());

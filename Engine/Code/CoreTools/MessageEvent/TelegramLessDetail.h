@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 09:48)
+/// 版本：1.0.0.8 (2024/04/12 15:25)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_LESS_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_LESS_DETAIL_H
@@ -28,10 +28,7 @@ CoreTools::TelegramLess<EventType>::TelegramLess(int64_t difference) noexcept
 template <typename EventType>
 bool CoreTools::TelegramLess<EventType>::IsValid() const noexcept
 {
-    if (0 <= difference)
-        return true;
-    else
-        return false;
+    return 0 <= difference;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -61,7 +58,7 @@ bool CoreTools::TelegramLess<EventType>::operator()(const Telegram& lhs, const T
 }
 
 template <typename EventType>
-bool CoreTools::TelegramLess<EventType>::DoNotCompareTime(const Telegram& lhs, const Telegram& rhs) const
+bool CoreTools::TelegramLess<EventType>::DoNotCompareTime(const Telegram& lhs, const Telegram& rhs)
 {
     if (lhs.GetMessageType() < rhs.GetMessageType())
         return true;

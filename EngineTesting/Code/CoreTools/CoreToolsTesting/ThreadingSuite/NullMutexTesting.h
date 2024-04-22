@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/24 17:48)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/16 15:18)
 
 #ifndef CORE_TOOLS_THREADING_SUITE_NULL_MUTEX_TESTING_H
 #define CORE_TOOLS_THREADING_SUITE_NULL_MUTEX_TESTING_H
@@ -38,16 +38,16 @@ namespace CoreTools
         void MultiThreadingLockingSuccessTest();
         void MultiThreadingLockingFailureTest();
 
-        // 递归测试
+        /// 递归测试
         void CreateRecursionTestHolder();
 
-        // 多线程锁成功测试
+        /// 多线程锁成功测试
         void CreateLockingSuccessThread();
         void CreateThread(Function function);
         void MultiThreadingSuccessCallBack();
         void StaticValueTest();
 
-        // 多线程锁失败测试
+        /// 多线程锁失败测试
         void CreateLockingFailureThread();
         void MultiThreadingFailureCallBack();
         void CreateFailureCallBackHolder();

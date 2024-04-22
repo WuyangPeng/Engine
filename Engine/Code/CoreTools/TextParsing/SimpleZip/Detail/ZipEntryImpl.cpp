@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:00)
+/// 版本：1.0.0.8 (2024/04/07 16:25)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -25,7 +25,7 @@
 CoreTools::SimpleZip::ZipEntryImpl::ZipEntryImpl(const ZipEntryInfo& info)
     : entryInfo{ info }, entryData{}, isModified{ false }
 {
-    //  更新索引计数器。
+    ///  更新索引计数器。
     UNIQUE_ID_MANAGER_SINGLETON.SetUniqueId(UniqueIdSelect::ZipFile, info.m_file_index);
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -54,7 +54,7 @@ CoreTools::SimpleZip::ZipEntryInfo CoreTools::SimpleZip::ZipEntryImpl::CreateInf
 
     const gsl::span span{ info.m_filename };
 
-    const auto result = std::ranges ::copy(fileName, span.begin());
+    std::ranges::copy(fileName, span.begin());
 
     return info;
 }
@@ -136,7 +136,7 @@ void CoreTools::SimpleZip::ZipEntryImpl::SetFileName(const std::string& name)
     const gsl::span span{ entryInfo.m_filename };
 
     std::ranges::fill(entryInfo.m_filename, '\0');
-    const auto result = std::ranges::copy(name, span.begin());
+    std::ranges::copy(name, span.begin());
 }
 
 uint32_t CoreTools::SimpleZip::ZipEntryImpl::GetIndex() const noexcept
@@ -232,6 +232,7 @@ bool CoreTools::SimpleZip::ZipEntryImpl::WriterAddMem(mz_zip_archive* archive) c
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
+    /// 这里是将MZ_DEFAULT_COMPRESSION（-1）转换成无符号数。
     return mz_zip_writer_add_mem(archive,
                                  GetFileName().c_str(),
                                  entryData.data(),

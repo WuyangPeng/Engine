@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:37)
+/// 版本：1.0.0.8 (2024/03/28 15:54)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,7 +19,7 @@
 
 using namespace std::literals;
 
-void CoreTools::TriggerAssert::Process(const FunctionDescribed& functionDescribed, const Format& format)
+void CoreTools::TriggerAssert::Process(const FunctionDescribed& functionDescribed, const Format& format) const
 {
     const auto messagePrefix = GenerateMessagePrefix(functionDescribed);
 
@@ -63,7 +63,7 @@ std::string CoreTools::TriggerAssert::GenerateMessagePrefix(const FunctionDescri
 
 std::string CoreTools::TriggerAssert::GenerateMessagePrefix(const FunctionDescribed& functionDescribed, const std::string& triggerAssertCheckMessage)
 {
-    // 消息前缀。
+    /// 消息前缀。
     Format format{ GetMessagePrefix() };
 
     format % triggerAssertCheckMessage % functionDescribed.GetFileName() % functionDescribed.GetCurrentFunction() % functionDescribed.GetLine();
@@ -75,7 +75,7 @@ std::string CoreTools::TriggerAssert::GenerateMessagePrefix(const FunctionDescri
 
 void CoreTools::TriggerAssert::WriteToOutputDebug(const std::string& message) noexcept
 {
-    // 消息输出到调试窗口。
+    /// 消息输出到调试窗口。
     System::OutputDebugStringWithChar(message.c_str());
 }
 
@@ -85,7 +85,7 @@ void CoreTools::TriggerAssert::WriteToOutputDebug(const std::string& message) no
 
 void CoreTools::TriggerAssert::JudgeUserSelection(const std::string& message) const
 {
-    // 给用户一个机会调试断点，继续，或终止执行。
+    /// 给用户一个机会调试断点，继续，或终止执行。
     const auto debugMessage = message + GetDebugPrompt();
 
     const auto type = System::MessageBoxSelectionWithChar(debugMessage.c_str(), GetMessageBoxTitle().c_str());
@@ -99,14 +99,14 @@ void CoreTools::TriggerAssert::JudgeSelection(DialogBoxCommand selection, const 
     {
         case DialogBoxCommand::IdYes:
         {
-            // 调试断点。
+            /// 调试断点。
             System::DebugBreak();
 
             break;
         }
         case DialogBoxCommand::IdNo:
         {
-            // 继续执行。
+            /// 继续执行。
 
             break;
         }
@@ -115,12 +115,12 @@ void CoreTools::TriggerAssert::JudgeSelection(DialogBoxCommand selection, const 
         {
             if (triggerAssertCheck == TriggerAssertCheck::Assertion)
             {
-                // 拋出异常。
+                /// 拋出异常。
                 THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(message))
             }
             else
             {
-                // 退出程序。
+                /// 退出程序。
                 System::Exit();
             }
 

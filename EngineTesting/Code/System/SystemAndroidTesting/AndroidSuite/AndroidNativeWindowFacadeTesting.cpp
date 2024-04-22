@@ -65,7 +65,7 @@ void System::AndroidNativeWindowFacadeTesting::AndroidNativeWindowTest()
     androidNativeWindowFacade.Release();
     ASSERT_EQUAL(androidNativeWindowFacade.GetWidth(), 0);
     ASSERT_EQUAL(androidNativeWindowFacade.GetHeight(), 0);
-    ASSERT_ENUM_EQUAL(androidNativeWindowFacade.GetFormat(), WindowFormat::Rgba8888);
+    ASSERT_EQUAL(androidNativeWindowFacade.GetFormat(), WindowFormat::Rgba8888);
     ASSERT_EQUAL(androidNativeWindowFacade.SetBuffersGeometry(0, 0, WindowFormat::Rgb565), 0);
 }
 

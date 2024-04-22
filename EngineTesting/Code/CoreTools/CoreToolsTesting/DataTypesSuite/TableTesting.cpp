@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:30)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/19 10:28)
 
 #include "TableTesting.h"
 #include "CoreTools/DataTypes/TableDetail.h"
@@ -250,7 +250,7 @@ void CoreTools::TableTesting::CompileErrorTest() noexcept
 {
 #ifdef COMPILE_ERROR_TEST
 
-    // 以下代码无法通过编译
+    /// 以下代码无法通过编译
     Table<2, 2, int> table1{ 5, 6, 7, 8, 9, 10, 11, 12, 13 };
     Table<3, 3, int> table2{ 5, 6, 7, 8 };
     Table<4, 4, int> table3{ 5, 6, 7, 8 };
@@ -263,9 +263,9 @@ void CoreTools::TableTesting::ForEachTest()
     const Table<2, 2, int> tuple{ 1, 2, 3, 4 };
 
     auto index = 1;
-    for (const auto value : tuple)
+    for (const auto element : tuple)
     {
-        ASSERT_EQUAL(value, index);
+        ASSERT_EQUAL(element, index);
 
         ++index;
     }
@@ -276,9 +276,9 @@ void CoreTools::TableTesting::GetCoordinateTest()
     const Table<2, 2, int> tuple{ 1, 2, 3, 4 };
 
     auto index = 1;
-    for (const auto value : tuple.GetCoordinate())
+    for (const auto element : tuple.GetCoordinate())
     {
-        ASSERT_EQUAL(value, index);
+        ASSERT_EQUAL(element, index);
 
         ++index;
     }

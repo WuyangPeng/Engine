@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:26)
+/// 版本：1.0.0.8 (2024/04/02 11:33)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ROW_DATA_PROXY_DETAIL_H
 #define CORE_TOOLS_TEXT_PARSING_ROW_DATA_PROXY_DETAIL_H
@@ -18,7 +18,8 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
 
-template <typename T, std::enable_if_t<!std::is_same_v<T, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<T>::value, T>*>
+template <typename T>
+requires(!std::is_same_v<T, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<T>::value)
 CoreTools::SimpleCSV::RowDataProxy& CoreTools::SimpleCSV::RowDataProxy::operator=(const T& rhs)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -43,20 +44,22 @@ CoreTools::SimpleCSV::RowDataProxy& CoreTools::SimpleCSV::RowDataProxy::operator
     return *this;
 }
 
-template <typename T, std::enable_if_t<!std::is_same_v<T, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<T>::value, T>*>
+template <typename T>
+requires(!std::is_same_v<T, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<T>::value)
 void CoreTools::SimpleCSV::RowDataProxy::SetCellValue(const T& rhs)
 {
     auto size = boost::numeric_cast<int>(rhs.size());
     DeleteCellValues(size);
 
-    for (auto value = rhs.rbegin(); value != rhs.rend(); ++value)
+    for (auto iter = rhs.rbegin(); iter != rhs.rend(); ++iter)
     {
-        PrependCellValue(*value, size);
+        PrependCellValue(*iter, size);
         --size;
     }
 }
 
-template <typename T, std::enable_if_t<!std::is_same_v<T, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<T>::value, T>*>
+template <typename T>
+requires(!std::is_same_v<T, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<T>::value)
 void CoreTools::SimpleCSV::RowDataProxy::SetContainer(const T& rhs)
 {
     RowDataRange range{ GetDocument(), GetRowNode(), 1, boost::numeric_cast<int>(rhs.size()), GetSharedStrings() };
@@ -75,7 +78,8 @@ void CoreTools::SimpleCSV::RowDataProxy::SetContainer(const T& rhs)
     }
 }
 
-template <typename Container, std::enable_if_t<!std::is_same_v<Container, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<Container>::value, Container>*>
+template <typename Container>
+requires(!std::is_same_v<Container, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<Container>::value)
 CoreTools::SimpleCSV::RowDataProxy::operator Container() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
@@ -83,21 +87,22 @@ CoreTools::SimpleCSV::RowDataProxy::operator Container() const
     return ConvertContainer<Container>();
 }
 
-template <typename Container, std::enable_if_t<!std::is_same_v<Container, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<Container>::value, Container>*>
+template <typename Container>
+requires(!std::is_same_v<Container, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<Container>::value)
 Container CoreTools::SimpleCSV::RowDataProxy::ConvertContainer() const
 {
     Container container{};
 
     for (auto iter = std::inserter(container, container.end());
-         const auto& value : GetValues())
+         const auto& element : GetValues())
     {
         if constexpr (std::is_same_v<typename Container::value_type, CellValue>)
         {
-            *iter++ = value;
+            *iter++ = element;
         }
         else
         {
-            *iter++ = value.Get<typename Container::value_type>();
+            *iter++ = element.Get<typename Container::value_type>();
         }
     }
 

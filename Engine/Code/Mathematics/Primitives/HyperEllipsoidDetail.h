@@ -92,6 +92,24 @@ void Mathematics::HyperEllipsoid<N, Real>::SetAxis(const AxisType& aAxis) noexce
 
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+typename Mathematics::HyperEllipsoid<N, Real>::Vector Mathematics::HyperEllipsoid<N, Real>::GetAxis(int index) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return axis.at(index);
+}
+
+template <int N, typename Real>
+requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+void Mathematics::HyperEllipsoid<N, Real>::SetAxis(int index, const Vector& aAxis)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    axis.at(index) = aAxis;
+}
+
+template <int N, typename Real>
+requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 typename Mathematics::HyperEllipsoid<N, Real>::Vector Mathematics::HyperEllipsoid<N, Real>::GetExtent() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -106,6 +124,24 @@ void Mathematics::HyperEllipsoid<N, Real>::SetExtent(const Vector& aExtent) noex
     MATHEMATICS_CLASS_IS_VALID_9;
 
     extent = aExtent;
+}
+
+template <int N, typename Real>
+requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+Real Mathematics::HyperEllipsoid<N, Real>::GetExtent(int index) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return extent[index];
+}
+
+template <int N, typename Real>
+requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+void Mathematics::HyperEllipsoid<N, Real>::SetExtent(int index, Real aExtent)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    extent[index] = aExtent;
 }
 
 template <int N, typename Real>

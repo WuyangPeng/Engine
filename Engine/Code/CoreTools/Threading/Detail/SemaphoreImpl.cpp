@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 11:16)
+/// 版本：1.0.0.8 (2024/03/30 18:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -42,10 +42,7 @@ CoreTools::SemaphoreImpl::~SemaphoreImpl() noexcept
 
 bool CoreTools::SemaphoreImpl::IsValid() const noexcept
 {
-    if (System::IsSystemSemaphoreValid(handle) && 0 <= currentCount && currentCount <= maximumCount)
-        return true;
-    else
-        return false;
+    return System::IsSystemSemaphoreValid(handle) && 0 <= currentCount && currentCount <= maximumCount;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -53,7 +50,7 @@ bool CoreTools::SemaphoreImpl::IsValid() const noexcept
 void CoreTools::SemaphoreImpl::Release(int releaseCount)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
-    CORE_TOOLS_ASSERTION_1(0 < releaseCount, "要释放的信号量数目为负数。");
+    CORE_TOOLS_ASSERTION_0(0 < releaseCount, "要释放的信号量数目为负数。");
 
     currentCount += releaseCount;
 

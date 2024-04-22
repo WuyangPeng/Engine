@@ -5,15 +5,15 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:43)
+/// 版本：1.0.0.8 (2024/04/11 14:44)
 
 #ifndef CORE_TOOLS_DATA_TYPE_TABLE_H
 #define CORE_TOOLS_DATA_TYPE_TABLE_H
 
-// 类T可以是原生数据或数据类有下面的成员函数：
-// T::T();
-// T::T(const T&);
-// T& T::operator= (const T&);
+/// 类T可以是原生数据或数据类有下面的成员函数：
+/// T::T();
+/// T::T(const T&);
+/// T& T::operator= (const T&);
 
 #include "CoreTools/CoreToolsDll.h"
 
@@ -35,7 +35,7 @@ namespace CoreTools
         using RowTuple = Tuple<Rows, Type>;
         using ParamType = typename boost::call_traits<Type>::param_type;
 
-        // 该数组存储为行主序。
+        /// 该数组存储为行主序。
         static constexpr auto elementNumber = Rows * Columns;
 
         using ArrayType = std::array<Type, elementNumber>;

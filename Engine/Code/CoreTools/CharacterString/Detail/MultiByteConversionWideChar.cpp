@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/10 20:21)
+/// 版本：1.0.0.8 (2024/03/29 23:07)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -82,14 +82,7 @@ void CoreTools::MultiByteConversionWideChar::FinishConversion()
 
 bool CoreTools::MultiByteConversionWideChar::IsValid() const noexcept
 {
-    if (0 < lengthOfWideCharString && lengthOfWideCharString <= gsl::narrow_cast<int>(target.size()))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return 0 < lengthOfWideCharString && lengthOfWideCharString <= gsl::narrow_cast<int>(target.size());
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -98,10 +91,12 @@ std::wstring CoreTools::MultiByteConversionWideChar::GetWideCharRepresentation()
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
+    const auto length = lengthOfWideCharString - 1;
+
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
-    return std::wstring{ target.data(), target.data() + lengthOfWideCharString - 1 };
+    return std::wstring{ target.data(), target.data() + length };
 
 #include SYSTEM_WARNING_POP
 }

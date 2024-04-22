@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 10:51)
+/// 版本：1.0.0.8 (2024/04/02 15:20)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ZIP_READER_H
 #define CORE_TOOLS_TEXT_PARSING_ZIP_READER_H
@@ -43,6 +43,7 @@ namespace CoreTools::SimpleZip
     private:
         void Init();
         void Close() noexcept;
+        NODISCARD ZipEntryInfo GetZipEntryInfo(mz_uint index);
 
     private:
         std::string archivePath;
