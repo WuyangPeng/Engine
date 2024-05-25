@@ -5,12 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/18 22:08)
+/// 版本：1.0.0.9 (2024/05/11 14:28)
 
 #include "LogFilterManagerTesting.h"
 #include "System/Helper/EnumOperator.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/LogManager/Flags/LogManagerFlags.h"
 #include "CoreTools/LogManager/LogFilterManager.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -41,9 +41,14 @@ void CoreTools::LogFilterManagerTesting::ValidTest()
 {
     for (auto logFilter = LogFilter::System; logFilter < LogFilter::MaxLogFilter; ++logFilter)
     {
-        auto describe = LogFilterManager::GetLogFilterDescribe(logFilter);
-        ASSERT_FALSE(describe.empty());
+        ASSERT_NOT_THROW_EXCEPTION_1(DoValidTest, logFilter);
     }
+}
+
+void CoreTools::LogFilterManagerTesting::DoValidTest(CoreTools::LogFilter logFilter)
+{
+    const auto describe = LogFilterManager::GetLogFilterDescribe(logFilter);
+    ASSERT_FALSE(describe.empty());
 }
 
 void CoreTools::LogFilterManagerTesting::GetLogFilterTypeTest()

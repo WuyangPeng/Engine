@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/12 18:27)
+/// 版本：1.0.0.9 (2024/05/07 21:37)
 
 #include "UserMacroTesting.h"
 #include "Detail/NameFinalMacro.h"
@@ -29,18 +29,18 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, UserMacroTesting)
 
 void CoreTools::UserMacroTesting::DoRunUnitTest()
 {
+    ObjectManager::Create();
+
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+
+    ObjectManager::Destroy();
 }
 
 void CoreTools::UserMacroTesting::MainTest()
 {
-    ObjectManager::Create();
-
     ASSERT_NOT_THROW_EXCEPTION_0(IsValidTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CloseCoreToolsMaxTest);
     ASSERT_NOT_THROW_EXCEPTION_0(MacroExistTest);
-
-    ObjectManager::Destroy();
 }
 
 void CoreTools::UserMacroTesting::IsValidTest() noexcept(!gOpenClassInvariant)

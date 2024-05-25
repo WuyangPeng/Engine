@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 17:02)
+/// 版本：1.0.0.9 (2024/05/02 22:51)
 
 #include "ReadAndWriteFileHandleTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -39,6 +39,16 @@ void CoreTools::ReadAndWriteFileHandleTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(GetFileByteSizeTest);
 }
 
+System::String CoreTools::ReadAndWriteFileHandleTesting::GetFileHandleName()
+{
+    return SYSTEM_TEXT("Resource/FileHandleTesting/ReadAndWriteFileHandleTestingText.txt");
+}
+
+std::string CoreTools::ReadAndWriteFileHandleTesting::GetFileHandleContent()
+{
+    return "FileHandle Testing Text";
+}
+
 void CoreTools::ReadAndWriteFileHandleTesting::ClearFile()
 {
     WriteFileHandle handle{ GetFileHandleName() };
@@ -61,32 +71,36 @@ void CoreTools::ReadAndWriteFileHandleTesting::ReadFileHandleTest()
     const auto content = GetFileHandleContent();
     ReadAndWriteFileHandle manager{ GetFileHandleName() };
 
+    const auto size = GetSize(content, manager);
+
+    ASSERT_NOT_THROW_EXCEPTION_3(ReadResultTest, content, manager, size);
+}
+
+size_t CoreTools::ReadAndWriteFileHandleTesting::GetSize(const std::string& content, ReadAndWriteFileHandle& manager)
+{
     size_t size{ 0 };
     manager.Read(sizeof(decltype(size)), &size);
 
     ASSERT_EQUAL(size, content.size());
 
-    std::vector<char> buffer(size);
+    return size;
+}
+
+void CoreTools::ReadAndWriteFileHandleTesting::ReadResultTest(const std::string& content, ReadAndWriteFileHandle& manager, size_t size)
+{
+    BufferType buffer(size);
     manager.Read(sizeof(char), size, buffer.data());
 
-    const std::string bufferContent{ buffer.begin(), buffer.end() };
+    const std::string result{ buffer.begin(), buffer.end() };
 
-    ASSERT_EQUAL(bufferContent, content);
-}
-
-System::String CoreTools::ReadAndWriteFileHandleTesting::GetFileHandleName()
-{
-    return SYSTEM_TEXT("Resource/FileHandleTesting/ReadAndWriteFileHandleTestingText.txt");
-}
-
-std::string CoreTools::ReadAndWriteFileHandleTesting::GetFileHandleContent()
-{
-    return "FileHandle Testing Text";
+    ASSERT_EQUAL(result, content);
 }
 
 void CoreTools::ReadAndWriteFileHandleTesting::GetFileByteSizeTest()
 {
+    const auto content = GetFileHandleContent();
+
     const ReadAndWriteFileHandle handle{ GetFileHandleName() };
 
-    ASSERT_EQUAL(handle.GetFileLength(), GetFileHandleContent().size() + sizeof(size_t));
+    ASSERT_EQUAL(handle.GetFileLength(), content.size() + sizeof(size_t));
 }

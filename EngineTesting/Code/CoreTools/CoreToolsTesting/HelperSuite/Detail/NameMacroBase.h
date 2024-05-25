@@ -22,7 +22,7 @@ namespace CoreTools
 
     public:
         NameMacroBase() noexcept;
-        virtual ~NameMacroBase() = default;
+        virtual ~NameMacroBase() noexcept = default;
         NameMacroBase(const NameMacroBase&) noexcept = default;
         NameMacroBase& operator=(const NameMacroBase&) noexcept = default;
         NameMacroBase(NameMacroBase&&) noexcept = default;

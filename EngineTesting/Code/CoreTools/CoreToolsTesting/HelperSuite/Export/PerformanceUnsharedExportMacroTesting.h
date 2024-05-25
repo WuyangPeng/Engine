@@ -26,6 +26,9 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        static constexpr auto count = 10;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 

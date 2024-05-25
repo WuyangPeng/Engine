@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 16:48)
+/// 版本：1.0.0.9 (2024/05/19 20:04)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_SUITE_ERROR_OBJECT_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_SUITE_ERROR_OBJECT_H
@@ -15,7 +15,7 @@
 
 namespace CoreTools
 {
-    /// 这个类没有正确的包含：
+    /// 这个类没有正确地包含：
     /// CORE_TOOLS_REGISTER_STREAM(ErrorObject);
 
     class ErrorObject final : public Object

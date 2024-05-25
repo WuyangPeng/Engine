@@ -34,16 +34,19 @@ namespace CoreTools
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
     private:
+        static constexpr auto bufferSize = 5;
+
+        using EnumArrayType = std::vector<EnumObjectEnum>;
+
+    private:
         void AllocationArray0(EnumObjectEnum value);
         void AllocationArray1(EnumObjectEnum value);
         NODISCARD bool IsLoadValidity() const;
 
     private:
-        static constexpr auto bufferSize = 5;
-
         EnumObjectEnum enumValue;
-        std::vector<EnumObjectEnum> enumArray0;
-        std::vector<EnumObjectEnum> enumArray1;
+        EnumArrayType enumArray0;
+        EnumArrayType enumArray1;
     };
 
 #include SYSTEM_WARNING_PUSH

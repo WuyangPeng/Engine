@@ -38,8 +38,8 @@ namespace CoreTools
         void GetPathWritingSucceedTest();
         void GetPathReadingAndWritingSucceedTest();
         void GetPathReadingFailureTest();
-        void GetPathWritingFailureTest();
-        void GetPathReadingAndWritingFailureTest();
+        void GetPathWritingFailureTest() const;
+        void GetPathReadingAndWritingFailureTest() const;
 
         NODISCARD static String GetEnvironmentFileName();
         NODISCARD static String GetEnvironmentPathFileName();

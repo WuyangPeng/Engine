@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/13 20:39)
+/// 版本：1.0.0.9 (2024/05/06 19:50)
 
 #include "RttiMacroTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -34,13 +34,22 @@ void CoreTools::RttiMacroTesting::MainTest()
 
 void CoreTools::RttiMacroTesting::RttiTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(GetRttiTypeTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetCurrentRttiTypeTest);
+}
+
+void CoreTools::RttiMacroTesting::GetCurrentRttiTypeTest()
+{
     ASSERT_EQUAL(GetRttiName(), GetRttiType().GetName());
     ASSERT_EQUAL(GetBaseRttiName(), ParentType::GetRttiType().GetName());
     ASSERT_TRUE(GetRttiType().IsExactly(ClassType::GetRttiType()));
     ASSERT_FALSE(GetRttiType().IsExactly(ParentType::GetRttiType()));
     ASSERT_TRUE(GetRttiType().IsDerived(ParentType::GetRttiType()));
     ASSERT_FALSE(ParentType::GetRttiType().IsExactly(GetRttiType()));
+}
 
+void CoreTools::RttiMacroTesting::GetRttiTypeTest()
+{
     ASSERT_EQUAL(GetRttiName(), GetCurrentRttiType().GetName());
     ASSERT_EQUAL(GetBaseRttiName(), ParentType::GetCurrentRttiType().GetName());
     ASSERT_TRUE(GetCurrentRttiType().IsExactly(ClassType::GetRttiType()));

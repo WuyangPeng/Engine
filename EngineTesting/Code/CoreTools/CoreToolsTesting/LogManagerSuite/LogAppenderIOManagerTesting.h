@@ -29,21 +29,20 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using AppenderManagerSharedPtr = std::shared_ptr<AppenderManager>;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
-        
+
         void IntegerTest();
         void StringTest();
-        void ExceptionTest(); 
+        void ExceptionTest();
         void FileContentTest();
         void DeleteFileTest();
 
         void SetAppenderManagerTest();
 
-    private:
-        using AppenderManagerSharedPtr = std::shared_ptr<AppenderManager>;
-
-    private:
         NODISCARD static AppenderManagerSharedPtr GetAppenderManager();
 
     private:

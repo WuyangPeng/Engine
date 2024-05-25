@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/13 10:39)
+/// 版本：1.0.0.9 (2024/05/05 23:15)
 
 #ifndef CORE_TOOLS_HELPER_SUITE_DELAY_COPY_UNSHARED_EXPORT_MACRO_TESTING_DETAIL_H
 #define CORE_TOOLS_HELPER_SUITE_DELAY_COPY_UNSHARED_EXPORT_MACRO_TESTING_DETAIL_H
@@ -16,7 +16,6 @@
 template <typename T>
 void CoreTools::DelayCopyUnsharedExportMacroTesting::DelayCopyUnsharedExportTest()
 {
-    constexpr auto count = 10;
     T original{ count };
 
     auto copy = original;
@@ -25,16 +24,18 @@ void CoreTools::DelayCopyUnsharedExportMacroTesting::DelayCopyUnsharedExportTest
     ASSERT_EQUAL(copy.GetAddress(), original.GetAddress());
 
     original.SetCount(0);
-
-    ASSERT_EQUAL(original.GetCount(), 0);
-    ASSERT_EQUAL(copy.GetCount(), count);
-    ASSERT_UNEQUAL(copy.GetAddress(), original.GetAddress());
+    CountTest(original, copy, 0, count);
 
     copy.SetCount(1);
+    CountTest(original, copy, 0, 1);
+}
 
-    ASSERT_EQUAL(original.GetCount(), 0);
-    ASSERT_EQUAL(copy.GetCount(), 1);
-    ASSERT_UNEQUAL(copy.GetAddress(), original.GetAddress());
+template <typename T>
+void CoreTools::DelayCopyUnsharedExportMacroTesting::CountTest(const T& lhs, const T& rhs, int lhsCount, int rhsCount)
+{
+    ASSERT_EQUAL(lhs.GetCount(), lhsCount);
+    ASSERT_EQUAL(rhs.GetCount(), rhsCount);
+    ASSERT_UNEQUAL(lhs.GetAddress(), rhs.GetAddress());
 }
 
 #endif  // CORE_TOOLS_HELPER_SUITE_DELAY_COPY_UNSHARED_EXPORT_MACRO_TESTING_DETAIL_H

@@ -32,13 +32,16 @@ namespace CoreTools
         void DisableNoexceptTest();
         void NoexceptTest();
 
-        void Function0();
-        void Function1(int parameter);
+        void NoexceptNoConstTest();
+        void NoexceptConstTest();
+
+        SYSTEM_NORETURN void Function0();
+        SYSTEM_NORETURN void Function1(int parameter);
         NODISCARD int Function2();
         NODISCARD int Function3(int parameter);
 
-        void ConstFunction0() const;
-        void ConstFunction1(int parameter) const;
+        SYSTEM_NORETURN void ConstFunction0() const;
+        SYSTEM_NORETURN void ConstFunction1(int parameter) const;
         NODISCARD int ConstFunction2() const;
         NODISCARD int ConstFunction3(int parameter) const;
     };

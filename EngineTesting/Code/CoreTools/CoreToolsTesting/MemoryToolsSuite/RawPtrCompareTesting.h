@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_DATA_TYPES_SUITE_RAW_PTR_COMPARE_TESTING_H
 #define CORE_TOOLS_DATA_TYPES_SUITE_RAW_PTR_COMPARE_TESTING_H
 
+#include "CoreTools/MemoryTools/RawIterators.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,10 +27,23 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        static constexpr auto size = 20;
+
+        using ContainerType = std::vector<int>;
+        using RawConstIteratorType = RawConstIterator<int>;
+
+    private:
         void MainTest();
         void DoRunUnitTest() override;
 
         void RawPtrCompareTest();
+
+        void RawPtrEqualTest(const RawConstIteratorType& lhsRawConstIterator, const RawConstIteratorType& rhsRawConstIterator);
+        void RawPtrUnequalTest(const RawConstIteratorType& lhsRawConstIterator, const RawConstIteratorType& rhsRawConstIterator);
+        void RawPtrLessTest(const RawConstIteratorType& lhsRawConstIterator, const RawConstIteratorType& rhsRawConstIterator);
+        void RawPtrLessEqualTest(const RawConstIteratorType& lhsRawConstIterator, const RawConstIteratorType& rhsRawConstIterator);
+        void RawPtrGreaterTest(const RawConstIteratorType& lhsRawConstIterator, const RawConstIteratorType& rhsRawConstIterator);
+        void RawPtrGreaterEqualTest(const RawConstIteratorType& lhsRawConstIterator, const RawConstIteratorType& rhsRawConstIterator);
     };
 }
 

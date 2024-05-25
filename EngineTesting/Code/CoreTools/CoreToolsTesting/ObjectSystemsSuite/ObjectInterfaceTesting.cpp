@@ -1,11 +1,11 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:18)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/05/23 17:24)
 
 #include "ObjectInterfaceTesting.h"
 #include "Detail/TestObject.h"
@@ -14,6 +14,11 @@
 #include "CoreTools/Helper/UnitTest/AssertTestMacro.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
+namespace
+{
+    const auto gTestObject = "TestObject";
+}
 
 CoreTools::ObjectInterfaceTesting::ObjectInterfaceTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -41,22 +46,35 @@ void CoreTools::ObjectInterfaceTesting::ObjectInterfaceTest()
 {
     const auto testObject = TestObject::Create();
 
-    ASSERT_FALSE(testObject->IsNullObject());
+    ASSERT_NOT_THROW_EXCEPTION_1(BaseTest, *testObject);
+    ASSERT_NOT_THROW_EXCEPTION_1(GetObjectByNameTest, testObject);
+    ASSERT_NOT_THROW_EXCEPTION_1(UniqueIdTest, *testObject);
+}
 
-    ASSERT_EQUAL(testObject->GetName(), "TestObject");
+void CoreTools::ObjectInterfaceTesting::BaseTest(const TestObject& testObject)
+{
+    ASSERT_FALSE(testObject.IsNullObject());
 
-    ASSERT_EQUAL(testObject->GetRttiType().GetName(), TestObject::GetCurrentRttiType().GetName());
+    ASSERT_EQUAL(testObject.GetName(), gTestObject);
 
-    ASSERT_EQUAL(testObject->GetObjectByName("TestObject"), testObject);
-    ASSERT_EQUAL(testObject->GetConstObjectByName("TestObject"), testObject);
+    ASSERT_EQUAL(testObject.GetRttiType().GetName(), TestObject::GetCurrentRttiType().GetName());
+}
 
-    ASSERT_EQUAL(testObject->GetAllObjectsByName("TestObject").at(0), testObject);
-    ASSERT_EQUAL(testObject->GetAllConstObjectsByName("TestObject").at(0), testObject);
+void CoreTools::ObjectInterfaceTesting::GetObjectByNameTest(const TestObjectSharedPtr& testObject)
+{
+    ASSERT_EQUAL(testObject->GetObjectByName(gTestObject), testObject);
+    ASSERT_EQUAL(testObject->GetConstObjectByName(gTestObject), testObject);
 
-    testObject->SetUniqueId(11);
-    ASSERT_EQUAL(testObject->GetUniqueId(), 11);
+    ASSERT_EQUAL(testObject->GetAllObjectsByName(gTestObject).at(0), testObject);
+    ASSERT_EQUAL(testObject->GetAllConstObjectsByName(gTestObject).at(0), testObject);
+}
 
-    const auto cloneObject = testObject->CloneObject();
+void CoreTools::ObjectInterfaceTesting::UniqueIdTest(TestObject& testObject)
+{
+    testObject.SetUniqueId(uniqueId);
+    ASSERT_EQUAL(testObject.GetUniqueId(), uniqueId);
 
-    ASSERT_EQUAL(cloneObject->GetUniqueId(), 11);
+    const auto cloneObject = testObject.CloneObject();
+
+    ASSERT_EQUAL(cloneObject->GetUniqueId(), uniqueId);
 }

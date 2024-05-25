@@ -1,11 +1,11 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:35)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/04/23 12:38)
 
 #include "RangeIterationTesting.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -39,9 +39,9 @@ void CoreTools::RangeIterationTesting::RangeIterationTest()
     const auto reverse = Reverse(container);
 
     auto index = 0;
-    for (const auto value : reverse)
+    for (const auto element : reverse)
     {
-        ASSERT_EQUAL(container.at(container.size() - index - 1), value);
+        ASSERT_EQUAL(container.at(container.size() - index - 1), element);
         ++index;
     }
 }

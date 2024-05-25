@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_DATA_TYPES_SUITE_OBJECT_INTERFACE_TESTING_H
 #define CORE_TOOLS_DATA_TYPES_SUITE_OBJECT_INTERFACE_TESTING_H
 
+#include "Detail/TestObject.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,10 +27,18 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        static constexpr auto uniqueId = 11;
+        using TestObjectSharedPtr = std::shared_ptr<TestObject>;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void ObjectInterfaceTest();
+
+        void BaseTest(const TestObject& testObject);
+        void GetObjectByNameTest(const TestObjectSharedPtr& testObject);
+        void UniqueIdTest(TestObject& testObject);
     };
 }
 

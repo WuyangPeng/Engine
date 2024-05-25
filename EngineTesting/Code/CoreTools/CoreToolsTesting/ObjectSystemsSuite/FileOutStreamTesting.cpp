@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 17:26)
+/// 版本：1.0.0.9 (2024/05/23 16:58)
 
 #include "FileOutStreamTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -13,7 +13,7 @@
 #include "CoreTools/FileManager/CFileManagerHelper.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/FileInStream.h"
 #include "CoreTools/ObjectSystems/FileOutStream.h"
 #include "CoreTools/ObjectSystems/NullObject.h"
@@ -22,9 +22,11 @@
 
 using namespace std::literals;
 
-namespace CoreTools
+namespace
 {
+    const auto gResource = SYSTEM_TEXT("Resource/");
     const auto gFileName = SYSTEM_TEXT("FileOutStream.txt"s);
+    const auto gFullFileName = gResource + gFileName;
 }
 
 CoreTools::FileOutStreamTesting::FileOutStreamTesting(const OStreamShared& stream)
@@ -46,12 +48,12 @@ void CoreTools::FileOutStreamTesting::DoRunUnitTest()
 
 void CoreTools::FileOutStreamTesting::MainTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(SaveFileOutStream);
     ASSERT_NOT_THROW_EXCEPTION_0(WriteNullObjectTest);
-
     ASSERT_NOT_THROW_EXCEPTION_0(DeleteFileTest);
 }
 
-void CoreTools::FileOutStreamTesting::WriteNullObjectTest()
+void CoreTools::FileOutStreamTesting::SaveFileOutStream() const
 {
     OutTopLevel outTopLevel = OutTopLevel::Create();
 
@@ -59,9 +61,12 @@ void CoreTools::FileOutStreamTesting::WriteNullObjectTest()
 
     FileOutStream fileOutStream{ outTopLevel };
 
-    fileOutStream.Save(SYSTEM_TEXT("Resource/") + gFileName);
+    fileOutStream.Save(gFullFileName);
+}
 
-    const FileInStream fileInputStream{ SYSTEM_TEXT("Resource/") + gFileName };
+void CoreTools::FileOutStreamTesting::WriteNullObjectTest()
+{
+    const FileInStream fileInputStream{ gFullFileName };
 
     const auto inTopLevel = fileInputStream.GetInTopLevel();
 
@@ -73,7 +78,7 @@ void CoreTools::FileOutStreamTesting::WriteNullObjectTest()
     }
 }
 
-void CoreTools::FileOutStreamTesting::DeleteFileTest()
+void CoreTools::FileOutStreamTesting::DeleteFileTest() const
 {
-    DeleteFileTools deleteFileTools{ SYSTEM_TEXT("Resource/") + gFileName };
+    DeleteFileTools deleteFileTools{ gFullFileName };
 }

@@ -12,6 +12,8 @@
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
+#include <System/Windows/Flags/PlatformErrorFlags.h>
+
 namespace CoreTools
 {
     class LastErrorTesting final : public UnitTest
@@ -19,6 +21,8 @@ namespace CoreTools
     public:
         using ClassType = LastErrorTesting;
         using ParentType = UnitTest;
+
+        using WindowError = System::WindowError;
 
     public:
         explicit LastErrorTesting(const OStreamShared& stream);
@@ -30,6 +34,9 @@ namespace CoreTools
         void MainTest();
 
         void LastErrorTest();
+
+        void DoLastError0(WindowError fileNotFound);
+        void DoLastError1();
     };
 }
 

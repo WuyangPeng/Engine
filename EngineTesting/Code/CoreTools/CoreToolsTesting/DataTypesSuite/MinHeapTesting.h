@@ -10,6 +10,8 @@
 #ifndef CORE_TOOLS_DATA_TYPES_SUITE_MIN_HEAP_TESTING_H
 #define CORE_TOOLS_DATA_TYPES_SUITE_MIN_HEAP_TESTING_H
 
+#include "Detail/VertexTest.h"
+#include "CoreTools/DataTypes/MinHeap.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,6 +28,15 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using TestingType = MinHeap<VertexTest, double>;
+        using IntegerTestingType = MinHeap<int, int>;
+        using RecordsType = std::vector<int>;
+
+        static constexpr auto numVertices = 30;
+        static constexpr auto numMinHeap = 100;
+        static constexpr auto numResetMinHeap = 80;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
@@ -34,6 +45,16 @@ namespace CoreTools
         void RemoveTest();
         void UpdateTest();
         void HandleTest();
+
+        void BaseNumElementsTest(IntegerTestingType& minHeap);
+        void BaseRemoveTest(IntegerTestingType& minHeap);
+        void IntegerNumElementsTest(const IntegerTestingType& minHeap, int numElements);
+
+        void RecordTest(const TestingType& minHeap, int index);
+        NODISCARD static RecordsType CreateRecords(TestingType& minHeap);
+        NODISCARD double GetLastWeight(TestingType& minHeap, double weight);
+        void WeightUpdateTest(TestingType& minHeap, int index);
+        void NumElementsTest(const TestingType& minHeap, int numElements);
     };
 }
 

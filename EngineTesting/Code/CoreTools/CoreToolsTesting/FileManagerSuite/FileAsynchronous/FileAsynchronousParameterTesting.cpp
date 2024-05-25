@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 16:48)
+/// 版本：1.0.0.9 (2024/04/30 23:46)
 
 #include "FileAsynchronousParameterTesting.h"
 #include "CoreTools/CoreToolsTesting/FileManagerSuite/Detail/FileEvent.h"
@@ -54,16 +54,16 @@ void CoreTools::FileAsynchronousParameterTesting::BaseTest()
     ASSERT_FALSE(fileAsynchronousParameter.IsAppend());
 }
 
-void CoreTools::FileAsynchronousParameterTesting::FileBufferFailTest()
+void CoreTools::FileAsynchronousParameterTesting::FileBufferFailTest() const
 {
     const std::shared_ptr fileEvent{ FileEvent::Create() };
     const FileAsynchronousParameter fileAsynchronousParameter{ GetFileName(), true, fileEvent };
-    MAYBE_UNUSED auto fileBuffer = fileAsynchronousParameter.GetFileBuffer();
+    std::ignore = fileAsynchronousParameter.GetFileBuffer();
 }
 
 void CoreTools::FileAsynchronousParameterTesting::FileBufferTest()
 {
-    const auto fileBuffer = std::make_shared<FileBuffer>(100);
+    const auto fileBuffer = std::make_shared<FileBuffer>(fileBufferCount);
     const FileAsynchronousParameter fileAsynchronousParameter{ GetFileName(), false, fileBuffer, true };
 
     ASSERT_EQUAL(fileAsynchronousParameter.GetFileName(), GetFileName());
@@ -76,7 +76,7 @@ void CoreTools::FileAsynchronousParameterTesting::FileBufferTest()
 void CoreTools::FileAsynchronousParameterTesting::EventTest()
 {
     const std::shared_ptr fileEvent{ FileEvent::Create() };
-    const auto fileBuffer = std::make_shared<FileBuffer>(100);
+    const auto fileBuffer = std::make_shared<FileBuffer>(fileBufferCount);
     const FileAsynchronousParameter fileAsynchronousParameter{ GetFileName(), false, fileEvent, fileBuffer, true };
 
     ASSERT_EQUAL(fileAsynchronousParameter.GetFileName(), GetFileName());

@@ -15,6 +15,7 @@
 
 namespace CoreTools
 {
+    const auto nonExistentKey = SYSTEM_TEXT("nonExistentKey");
     const auto key = SYSTEM_TEXT("key");
     const auto element = SYSTEM_TEXT("element");
 }
@@ -43,9 +44,7 @@ void CoreTools::CodeMappingTesting::GetElementFailTest()
 {
     const auto codeMapping = CodeMapping::Create();
 
-    const auto result = codeMapping.GetElement(SYSTEM_TEXT("nonExistentKey"));
-
-    ASSERT_FALSE(result.empty() || !result.empty());
+    std::ignore = codeMapping.GetElement(nonExistentKey);
 }
 
 void CoreTools::CodeMappingTesting::InsertSuccessTest()

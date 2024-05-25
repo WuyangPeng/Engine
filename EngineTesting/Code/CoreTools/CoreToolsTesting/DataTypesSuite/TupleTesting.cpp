@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/19 10:08)
+/// 版本：1.0.0.9 (2024/04/28 13:02)
 
 #include "TupleTesting.h"
 #include "CoreTools/DataTypes/TupleDetail.h"
@@ -46,141 +46,182 @@ void CoreTools::TupleTesting::MainTest()
 void CoreTools::TupleTesting::IntegerTest()
 {
     /// 固定值测试
-    Tuple<4, int> tuple0{};
+    Tuple4 tuple0{};
 
     /// 测试默认构造函数
-    ASSERT_EQUAL(tuple0[0], 0);
-    ASSERT_EQUAL(tuple0[1], 0);
-    ASSERT_EQUAL(tuple0[2], 0);
-    ASSERT_EQUAL(tuple0[3], 0);
+    ASSERT_NOT_THROW_EXCEPTION_1(IntegerZeroTest, tuple0);
 
-    tuple0[0] = 1;
-    tuple0[1] = 22;
-    tuple0[2] = 334;
-    tuple0[3] = 44;
-
-    ASSERT_EQUAL(tuple0[0], 1);
-    ASSERT_EQUAL(tuple0[1], 22);
-    ASSERT_EQUAL(tuple0[2], 334);
-    ASSERT_EQUAL(tuple0[3], 44);
+    ASSERT_NOT_THROW_EXCEPTION_2(IntegerAssignment, tuple0, 1);
+    ASSERT_NOT_THROW_EXCEPTION_2(IntegerOriginalTest, tuple0, 1);
 
     Tuple tuple1{ tuple0 };
 
     /// 测试复制构造函数
-    ASSERT_EQUAL(tuple1[0], 1);
-    ASSERT_EQUAL(tuple1[1], 22);
-    ASSERT_EQUAL(tuple1[2], 334);
-    ASSERT_EQUAL(tuple1[3], 44);
+    ASSERT_NOT_THROW_EXCEPTION_2(IntegerOriginalTest, tuple1, 1);
 
-    tuple1[0] = 121;
-    tuple1[1] = 2221;
-    tuple1[2] = 3343;
-    tuple1[3] = 442;
-
-    ASSERT_EQUAL(tuple1[0], 121);
-    ASSERT_EQUAL(tuple1[1], 2221);
-    ASSERT_EQUAL(tuple1[2], 3343);
-    ASSERT_EQUAL(tuple1[3], 442);
-
-    ASSERT_EQUAL(tuple0[0], 1);
-    ASSERT_EQUAL(tuple0[1], 22);
-    ASSERT_EQUAL(tuple0[2], 334);
-    ASSERT_EQUAL(tuple0[3], 44);
+    ASSERT_NOT_THROW_EXCEPTION_2(IntegerAssignment, tuple1, 4);
+    ASSERT_NOT_THROW_EXCEPTION_2(IntegerOriginalTest, tuple1, 4);
+    ASSERT_NOT_THROW_EXCEPTION_2(IntegerOriginalTest, tuple0, 1);
 
     /// 测试赋值运算符
     tuple0 = tuple1;
 
-    ASSERT_EQUAL(tuple0[0], 121);
-    ASSERT_EQUAL(tuple0[1], 2221);
-    ASSERT_EQUAL(tuple0[2], 3343);
-    ASSERT_EQUAL(tuple0[3], 442);
+    ASSERT_NOT_THROW_EXCEPTION_2(IntegerOriginalTest, tuple0, 4);
+}
+
+void CoreTools::TupleTesting::IntegerZeroTest(const Tuple4& tuple)
+{
+    for (auto i = 0; i < Tuple4::tupleDimension; ++i)
+    {
+        ASSERT_EQUAL(tuple[i], 0);
+    }
+}
+
+void CoreTools::TupleTesting::IntegerAssignment(Tuple4& tuple, int value)
+{
+    for (auto i = 0; i < Tuple4::tupleDimension; ++i)
+    {
+        tuple[i] = value + i;
+    }
+}
+
+void CoreTools::TupleTesting::IntegerOriginalTest(const Tuple4& tuple, int value)
+{
+    for (auto i = 0; i < Tuple4::tupleDimension; ++i)
+    {
+        ASSERT_EQUAL(tuple[i], value + i);
+    }
 }
 
 void CoreTools::TupleTesting::StringTest()
 {
     /// 固定值测试
-    Tuple<2, std::string> tuple0{};
+    StringTuple2 tuple0{};
 
     /// 测试默认构造函数
-    ASSERT_EQUAL(tuple0[0], "");
-    ASSERT_EQUAL(tuple0[1], "");
+    ASSERT_NOT_THROW_EXCEPTION_1(StringZeroTest, tuple0);
 
-    tuple0[0] = "first";
-    tuple0[1] = "second";
+    ASSERT_NOT_THROW_EXCEPTION_2(StringAssignment, tuple0, 0);
 
-    ASSERT_EQUAL(tuple0[0], "first");
-    ASSERT_EQUAL(tuple0[1], "second");
+    ASSERT_NOT_THROW_EXCEPTION_2(StringOriginalTest, tuple0, 0);
 
     Tuple tuple1{ tuple0 };
 
     /// 测试复制构造函数
-    ASSERT_EQUAL(tuple1[0], "first");
-    ASSERT_EQUAL(tuple1[1], "second");
+    ASSERT_NOT_THROW_EXCEPTION_2(StringOriginalTest, tuple1, 0);
 
-    tuple1[0] = "second";
-    tuple1[1] = "first";
-
-    ASSERT_EQUAL(tuple0[0], "first");
-    ASSERT_EQUAL(tuple0[1], "second");
-    ASSERT_EQUAL(tuple1[0], "second");
-    ASSERT_EQUAL(tuple1[1], "first");
-
-    tuple0 = tuple1;
-
-    ASSERT_EQUAL(tuple0[0], "second");
-    ASSERT_EQUAL(tuple0[1], "first");
-    ASSERT_EQUAL(tuple1[0], "second");
-    ASSERT_EQUAL(tuple1[1], "first");
+    ASSERT_NOT_THROW_EXCEPTION_2(StringAssignment, tuple1, 2);
+    ASSERT_NOT_THROW_EXCEPTION_2(StringOriginalTest, tuple0, 0);
+    ASSERT_NOT_THROW_EXCEPTION_2(StringOriginalTest, tuple1, 2);
 
     /// 测试赋值运算符
-    ASSERT_EQUAL(tuple0[0], "second");
-    ASSERT_EQUAL(tuple0[1], "first");
+    tuple0 = tuple1;
+
+    ASSERT_NOT_THROW_EXCEPTION_2(StringOriginalTest, tuple0, 2);
+    ASSERT_NOT_THROW_EXCEPTION_2(StringOriginalTest, tuple1, 2);
+}
+
+void CoreTools::TupleTesting::StringZeroTest(const StringTuple2& tuple)
+{
+    for (auto i = 0; i < StringTuple2::tupleDimension; ++i)
+    {
+        ASSERT_TRUE(tuple[i].empty());
+    }
+}
+
+void CoreTools::TupleTesting::StringAssignment(StringTuple2& tuple, int value)
+{
+    for (auto i = 0; i < StringTuple2::tupleDimension; ++i)
+    {
+        tuple[i] = "test" + std::to_string(value + i);
+    }
+}
+
+void CoreTools::TupleTesting::StringOriginalTest(const StringTuple2& tuple, int value)
+{
+    for (auto i = 0; i < StringTuple2::tupleDimension; ++i)
+    {
+        ASSERT_EQUAL(tuple[i], "test" + std::to_string(value + i));
+    }
 }
 
 void CoreTools::TupleTesting::OperatorTest()
 {
-    Tuple<4, int> lhsTuple{};
-    Tuple<4, int> rhsTuple{};
-
-    lhsTuple[0] = 0;
-    lhsTuple[1] = 0;
-    lhsTuple[2] = 0;
-    lhsTuple[3] = 0;
-    rhsTuple[0] = 0;
-    rhsTuple[1] = 0;
-    rhsTuple[2] = 0;
-    rhsTuple[3] = 0;
+    Tuple4 lhsTuple = CreateTuple4();
+    const Tuple4 rhsTuple = CreateTuple4();
 
     ASSERT_TRUE(lhsTuple == rhsTuple);
     ASSERT_FALSE(lhsTuple != rhsTuple);
+    ASSERT_FALSE(rhsTuple < lhsTuple);
+    ASSERT_TRUE(rhsTuple <= lhsTuple);
+    ASSERT_FALSE(lhsTuple > rhsTuple);
+    ASSERT_TRUE(lhsTuple >= rhsTuple);
 
     lhsTuple[0] = 1;
 
+    ASSERT_FALSE(lhsTuple == rhsTuple);
+    ASSERT_TRUE(lhsTuple != rhsTuple);
     ASSERT_TRUE(rhsTuple < lhsTuple);
     ASSERT_TRUE(rhsTuple <= lhsTuple);
     ASSERT_TRUE(lhsTuple > rhsTuple);
     ASSERT_TRUE(lhsTuple >= rhsTuple);
 }
 
+CoreTools::TupleTesting::Tuple4 CoreTools::TupleTesting::CreateTuple4()
+{
+    Tuple4 tuple{};
+
+    for (auto i = 0; i < Tuple4::tupleDimension; ++i)
+    {
+        tuple[i] = i;
+    }
+
+    return tuple;
+}
+
 void CoreTools::TupleTesting::ConstructorTest()
 {
-    Tuple<1, int> tuple0{ 5 };
+    ASSERT_NOT_THROW_EXCEPTION_0(Constructor0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Constructor1Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Constructor2Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Constructor3Test);
+}
 
-    ASSERT_EQUAL(tuple0[0], 5);
+void CoreTools::TupleTesting::Constructor0Test()
+{
+    Tuple1 tuple{ 5 };
 
-    Tuple<2, std::string> tuple1{ "first", "second" };
+    ASSERT_EQUAL(tuple[0], 5);
+}
 
-    ASSERT_EQUAL(tuple1[0], "first");
-    ASSERT_EQUAL(tuple1[1], "second");
+void CoreTools::TupleTesting::Constructor1Test()
+{
+    Tuple<2, std::string> tuple{ "test0", "test1" };
 
-    const Tuple<3, Tuple<2, uint32_t>> tuple2{ Tuple<2, uint32_t>{ 5, 8 }, Tuple<2, uint32_t>{ 6, 9 }, Tuple<2, uint32_t>{ 1, 5 } };
+    ASSERT_EQUAL(tuple[0], "test0");
+    ASSERT_EQUAL(tuple[1], "test1");
+}
 
-    Tuple<4, char> tuple3{ 'm', 'u', 'i', 'p' };
+void CoreTools::TupleTesting::Constructor2Test()
+{
+    const Tuple<3, Tuple2> tuple{ Tuple2{ 1, 2 }, Tuple2{ 3, 4 }, Tuple2{ 5, 6 } };
 
-    ASSERT_EQUAL(tuple3[0], 'm');
-    ASSERT_EQUAL(tuple3[1], 'u');
-    ASSERT_EQUAL(tuple3[2], 'i');
-    ASSERT_EQUAL(tuple3[3], 'p');
+    ASSERT_EQUAL(tuple[0][0], 1);
+    ASSERT_EQUAL(tuple[0][1], 2);
+    ASSERT_EQUAL(tuple[1][0], 3);
+    ASSERT_EQUAL(tuple[1][1], 4);
+    ASSERT_EQUAL(tuple[2][0], 5);
+    ASSERT_EQUAL(tuple[2][1], 6);
+}
+
+void CoreTools::TupleTesting::Constructor3Test()
+{
+    Tuple<4, char> tuple{ 'a', 'b', 'c', 'd' };
+
+    ASSERT_EQUAL(tuple[0], 'a');
+    ASSERT_EQUAL(tuple[1], 'b');
+    ASSERT_EQUAL(tuple[2], 'c');
+    ASSERT_EQUAL(tuple[3], 'd');
 }
 
 void CoreTools::TupleTesting::CompileErrorTest() noexcept
@@ -188,17 +229,17 @@ void CoreTools::TupleTesting::CompileErrorTest() noexcept
 #ifdef COMPILE_ERROR_TEST
 
     /// 以下代码无法通过编译
-    Tuple<1, int> tuple0{ 5, 6 };
-    Tuple<2, int> tuple1{ 5, 6, 7 };
-    Tuple<3, int> tuple2{ 5, 6, 7, 8 };
-    Tuple<4, int> tuple3{ 5 };
+    Tuple1 tuple0{ 5, 6 };
+    Tuple2 tuple1{ 5, 6, 7 };
+    Tuple3 tuple2{ 5, 6, 7, 8 };
+    Tuple4 tuple3{ 5 };
 
 #endif  // COMPILE_ERROR_TEST
 }
 
 void CoreTools::TupleTesting::ForEachTest()
 {
-    const Tuple<4, int> tuple{ 1, 2, 3, 4 };
+    const Tuple4 tuple{ 1, 2, 3, 4 };
 
     auto index = 1;
     for (const auto element : tuple)
@@ -211,7 +252,7 @@ void CoreTools::TupleTesting::ForEachTest()
 
 void CoreTools::TupleTesting::SumTest()
 {
-    const Tuple<4, int> tuple{ 1, 2, 3, 4 };
+    const Tuple4 tuple{ 1, 2, 3, 4 };
 
     auto sum = 0;
     for (const auto element : tuple)

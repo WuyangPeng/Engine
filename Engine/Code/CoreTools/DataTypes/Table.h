@@ -36,7 +36,9 @@ namespace CoreTools
         using ParamType = typename boost::call_traits<Type>::param_type;
 
         /// 该数组存储为行主序。
-        static constexpr auto elementNumber = Rows * Columns;
+        static constexpr auto rowsNumber = Rows;
+        static constexpr auto columnsNumber = Columns;
+        static constexpr auto elementNumber = rowsNumber * columnsNumber;
 
         using ArrayType = std::array<Type, elementNumber>;
         using ArrayTypeConstIter = typename ArrayType::const_iterator;

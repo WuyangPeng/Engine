@@ -43,6 +43,8 @@ namespace CoreTools
         NODISCARD static String GetFileHandleHelperName();
         NODISCARD static std::string GetFileHandleHelperContent();
 
+        void ContentTest(const FileBuffer& buffer, const std::string& content);
+
     private:
         Environment environment;
     };

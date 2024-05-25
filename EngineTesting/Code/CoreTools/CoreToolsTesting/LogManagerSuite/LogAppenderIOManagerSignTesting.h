@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/18 21:51)
+/// 版本：1.0.0.9 (2024/05/07 21:49)
 
 #ifndef LOG_MANAGER_LOG_APPENDER_IO_MANAGER_SIGN_TESTING_H
 #define LOG_MANAGER_LOG_APPENDER_IO_MANAGER_SIGN_TESTING_H
@@ -32,6 +32,9 @@ namespace CoreTools
         void PrintTipsMessage() override;
 
     private:
+        using AppenderManagerSharedPtr = std::shared_ptr<AppenderManager>;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
@@ -39,11 +42,8 @@ namespace CoreTools
         void FileContentTest();
         void DeleteFileTest();
 
-    private:
-        using AppenderManagerSharedPtr = std::shared_ptr<AppenderManager>;
-
-    private:
         NODISCARD static AppenderManagerSharedPtr GetAppenderManager();
+        NODISCARD static LogMessage GetLogMessage();
 
     private:
         String logAppenderIOManagerTestingName;

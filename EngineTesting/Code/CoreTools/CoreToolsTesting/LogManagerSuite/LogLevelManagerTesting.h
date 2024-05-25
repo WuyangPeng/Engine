@@ -31,6 +31,8 @@ namespace CoreTools
 
         void ValidTest();
         void GetLogLevelTest();
+
+        void DoValidTest(LogLevel logLevel);
     };
 }
 

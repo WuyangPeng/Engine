@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:44)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/04/23 12:57)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_SUITE_PLAYER_H
 #define CORE_TOOLS_STATE_MACHINE_SUITE_PLAYER_H
 
 #include "State.h"
 #include "CoreTools/CoreToolsTesting/StateMachineSuite/Flags/States.h"
-#include "CoreTools/StateMachineManager/StateMachineDetail.h"
+#include "CoreTools/StateMachineManager/StateMachine.h"
 #include "CoreTools/StateMachineManager/StateMachineRow.h"
 
 #include <boost/mpl/vector.hpp>
@@ -57,7 +57,7 @@ namespace CoreTools
         NODISCARD StateType NoTransition(StateType state, const EventType& eventType) noexcept;
 
     private:
-        static constexpr States initialState = States::Empty;
+        static constexpr auto initialState = States::Empty;
     };
 }
 

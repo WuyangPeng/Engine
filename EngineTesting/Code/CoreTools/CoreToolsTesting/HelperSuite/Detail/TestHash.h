@@ -13,9 +13,6 @@
 #include "CoreTools/CoreToolsTesting/HelperSuite/HelperSuiteFwd.h"
 #include "CoreTools/Helper/UserMacro.h"
 
-#include <string>
-#include <vector>
-
 namespace CoreTools
 {
     class TestHash

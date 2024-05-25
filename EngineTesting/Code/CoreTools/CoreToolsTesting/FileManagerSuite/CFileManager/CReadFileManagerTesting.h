@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_TESTING_C_READ_FILE_MANAGER_TESTING_H
 #define CORE_TOOLS_TESTING_C_READ_FILE_MANAGER_TESTING_H
 
+#include "CoreTools/FileManager/FileManagerFwd.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -34,11 +35,20 @@ namespace CoreTools
         void WriteFileTest();
         void CReadFileManagerTest();
         void GetFileByteSizeTest();
+
         void GetCharacterTest();
         void PositionTest();
 
         NODISCARD static String GetFileName();
-        NODISCARD static std::string GetFileManagerContent();
+
+        NODISCARD size_t ReadSizeTest(CReadFileManager& manager);
+        void ReadBufferTest(CReadFileManager& manager, size_t size);
+        void DoGetCharacterTest(CReadFileManager& manager, size_t size);
+        void DoPositionTest(CReadFileManager& manager);
+        void MiscellaneousTest(CReadFileManager& manager);
+
+    private:
+        std::string fileManagerContent;
     };
 }
 

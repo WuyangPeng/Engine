@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/19 10:28)
+/// 版本：1.0.0.9 (2024/04/26 23:23)
 
 #include "TableTesting.h"
 #include "CoreTools/DataTypes/TableDetail.h"
@@ -45,205 +45,271 @@ void CoreTools::TableTesting::MainTest()
 
 void CoreTools::TableTesting::IntegerTest()
 {
-    Table<3, 2, int> table0{};
+    IntegerTestingType table0{};
 
-    const Tuple<2, int> rowTuple0(1, 22);
-    const Tuple<2, int> rowTuple1(12, 221);
-    const Tuple<2, int> rowTuple2(134, 2233);
+    auto table1 = IntegerRowTest(table0);
 
-    table0.SetRow(0, rowTuple0);
-    table0.SetRow(1, rowTuple1);
-    table0.SetRow(2, rowTuple2);
+    ASSERT_NOT_THROW_EXCEPTION_2(IntegerColumnTest, table0, table1);
 
-    Table table1{ table0 };
+    ASSERT_NOT_THROW_EXCEPTION_1(IntegerSquareBracketsTest, table1);
+}
 
-    ASSERT_EQUAL(table0(0, 0), 1);
-    ASSERT_EQUAL(table0(0, 1), 22);
-    ASSERT_EQUAL(table0(1, 0), 12);
-    ASSERT_EQUAL(table0(1, 1), 221);
-    ASSERT_EQUAL(table0(2, 0), 134);
-    ASSERT_EQUAL(table0(2, 1), 2233);
-    ASSERT_EQUAL(table0.GetRow(0), rowTuple0);
-    ASSERT_EQUAL(table0.GetRow(1), rowTuple1);
-    ASSERT_EQUAL(table0.GetRow(2), rowTuple2);
+CoreTools::TableTesting::IntegerTestingType CoreTools::TableTesting::IntegerRowTest(IntegerTestingType& table)
+{
+    const IntegerTuple2 rowTuple0{ 1, 2 };
+    const IntegerTuple2 rowTuple1{ 3, 4 };
+    const IntegerTuple2 rowTuple2{ 5, 6 };
 
-    ASSERT_EQUAL(table1(0, 0), 1);
-    ASSERT_EQUAL(table1(0, 1), 22);
-    ASSERT_EQUAL(table1(1, 0), 12);
-    ASSERT_EQUAL(table1(1, 1), 221);
-    ASSERT_EQUAL(table1(2, 0), 134);
-    ASSERT_EQUAL(table1(2, 1), 2233);
-    ASSERT_EQUAL(table1.GetRow(0), rowTuple0);
-    ASSERT_EQUAL(table1.GetRow(1), rowTuple1);
-    ASSERT_EQUAL(table1.GetRow(2), rowTuple2);
+    table.SetRow(0, rowTuple0);
+    table.SetRow(1, rowTuple1);
+    table.SetRow(2, rowTuple2);
 
-    const Tuple<3, int> columnTuple0{ 1221, 2212, 221232 };
-    const Tuple<3, int> columnTuple1{ 123, 22131, 221312 };
+    const Table result{ table };
 
-    table1.SetColumn(0, columnTuple0);
-    table1.SetColumn(1, columnTuple1);
+    DoIntegerRowTest(table, rowTuple0, rowTuple1, rowTuple2);
+    DoIntegerRowTest(result, rowTuple0, rowTuple1, rowTuple2);
 
-    table0 = table1;
+    return result;
+}
 
-    ASSERT_EQUAL(table0(0, 0), 1221);
-    ASSERT_EQUAL(table0(0, 1), 123);
-    ASSERT_EQUAL(table0(1, 0), 2212);
-    ASSERT_EQUAL(table0(1, 1), 22131);
-    ASSERT_EQUAL(table0(2, 0), 221232);
-    ASSERT_EQUAL(table0(2, 1), 221312);
-    ASSERT_EQUAL(table0.GetColumn(0), columnTuple0);
-    ASSERT_EQUAL(table0.GetColumn(1), columnTuple1);
+void CoreTools::TableTesting::DoIntegerRowTest(const IntegerTestingType& table, const IntegerTuple2& rowTuple0, const IntegerTuple2& rowTuple1, const IntegerTuple2& rowTuple2)
+{
+    ASSERT_EQUAL(table(0, 0), 1);
+    ASSERT_EQUAL(table(0, 1), 2);
+    ASSERT_EQUAL(table(1, 0), 3);
+    ASSERT_EQUAL(table(1, 1), 4);
+    ASSERT_EQUAL(table(2, 0), 5);
+    ASSERT_EQUAL(table(2, 1), 6);
+    ASSERT_EQUAL(table.GetRow(0), rowTuple0);
+    ASSERT_EQUAL(table.GetRow(1), rowTuple1);
+    ASSERT_EQUAL(table.GetRow(2), rowTuple2);
+}
 
-    ASSERT_EQUAL(table1(0, 0), 1221);
-    ASSERT_EQUAL(table1(0, 1), 123);
-    ASSERT_EQUAL(table1(1, 0), 2212);
-    ASSERT_EQUAL(table1(1, 1), 22131);
-    ASSERT_EQUAL(table1(2, 0), 221232);
-    ASSERT_EQUAL(table1(2, 1), 221312);
-    ASSERT_EQUAL(table1.GetColumn(0), columnTuple0);
-    ASSERT_EQUAL(table1.GetColumn(1), columnTuple1);
+void CoreTools::TableTesting::IntegerColumnTest(IntegerTestingType& lhs, IntegerTestingType& rhs)
+{
+    const IntegerTuple3 columnTuple0{ 7, 8, 9 };
+    const IntegerTuple3 columnTuple1{ 10, 11, 12 };
 
+    rhs.SetColumn(0, columnTuple0);
+    rhs.SetColumn(1, columnTuple1);
+
+    lhs = rhs;
+
+    ASSERT_NOT_THROW_EXCEPTION_3(DoIntegerColumnTest, lhs, columnTuple0, columnTuple1);
+    ASSERT_NOT_THROW_EXCEPTION_3(DoIntegerColumnTest, rhs, columnTuple0, columnTuple1);
+}
+
+void CoreTools::TableTesting::DoIntegerColumnTest(const IntegerTestingType& table, const IntegerTuple3& columnTuple0, const IntegerTuple3& columnTuple1)
+{
+    ASSERT_EQUAL(table(0, 0), 7);
+    ASSERT_EQUAL(table(0, 1), 10);
+    ASSERT_EQUAL(table(1, 0), 8);
+    ASSERT_EQUAL(table(1, 1), 11);
+    ASSERT_EQUAL(table(2, 0), 9);
+    ASSERT_EQUAL(table(2, 1), 12);
+    ASSERT_EQUAL(table.GetColumn(0), columnTuple0);
+    ASSERT_EQUAL(table.GetColumn(1), columnTuple1);
+}
+
+void CoreTools::TableTesting::IntegerSquareBracketsTest(const IntegerTestingType& table)
+{
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
-    ASSERT_EQUAL(*(table1[0]), 1221);
-    ASSERT_EQUAL(*(table1[0] + 1), 123);
-    ASSERT_EQUAL(*(table1[1]), 2212);
-    ASSERT_EQUAL(*(table1[1] + 1), 22131);
-    ASSERT_EQUAL(*(table1[2]), 221232);
-    ASSERT_EQUAL(*(table1[2] + 1), 221312);
+    ASSERT_EQUAL(*(table[0]), 7);
+    ASSERT_EQUAL(*(table[0] + 1), 10);
+    ASSERT_EQUAL(*(table[1]), 8);
+    ASSERT_EQUAL(*(table[1] + 1), 11);
+    ASSERT_EQUAL(*(table[2]), 9);
+    ASSERT_EQUAL(*(table[2] + 1), 12);
 
 #include SYSTEM_WARNING_POP
 }
 
 void CoreTools::TableTesting::StringTest()
 {
-    Table<2, 2, std::string> table0{};
+    StringTestingType table0{};
 
-    const Tuple<2, std::string> rowTuple0("first0", "first1");
-    const Tuple<2, std::string> rowTuple1("second0", "second1");
+    auto table1 = StringRowTest(table0);
 
-    table0.SetRow(0, rowTuple0);
-    table0.SetRow(1, rowTuple1);
+    ASSERT_NOT_THROW_EXCEPTION_2(StringColumnTest, table0, table1);
 
-    Table table1{ table0 };
+    ASSERT_NOT_THROW_EXCEPTION_1(StringSquareBracketsTest, table1);
+}
 
-    ASSERT_EQUAL(table0(0, 0), "first0");
-    ASSERT_EQUAL(table0(0, 1), "first1");
-    ASSERT_EQUAL(table0(1, 0), "second0");
-    ASSERT_EQUAL(table0(1, 1), "second1");
-    ASSERT_EQUAL(table0.GetRow(0), rowTuple0);
-    ASSERT_EQUAL(table0.GetRow(1), rowTuple1);
+CoreTools::TableTesting::StringTestingType CoreTools::TableTesting::StringRowTest(StringTestingType& table)
+{
+    const StringTuple rowTuple0("test0", "test1");
+    const StringTuple rowTuple1("test2", "test3");
 
-    ASSERT_EQUAL(table1(0, 0), "first0");
-    ASSERT_EQUAL(table1(0, 1), "first1");
-    ASSERT_EQUAL(table1(1, 0), "second0");
-    ASSERT_EQUAL(table1(1, 1), "second1");
-    ASSERT_EQUAL(table1.GetRow(0), rowTuple0);
-    ASSERT_EQUAL(table1.GetRow(1), rowTuple1);
+    table.SetRow(0, rowTuple0);
+    table.SetRow(1, rowTuple1);
 
-    const Tuple<2, std::string> columnTuple1{ "second1", "second0" };
-    const Tuple<2, std::string> columnTuple2{ "first1", "first0" };
+    Table result{ table };
 
-    table1.SetColumn(0, columnTuple1);
-    table1.SetColumn(1, columnTuple2);
+    ASSERT_NOT_THROW_EXCEPTION_3(DoStringRowTest, table, rowTuple0, rowTuple1);
+    ASSERT_NOT_THROW_EXCEPTION_3(DoStringRowTest, result, rowTuple0, rowTuple1);
 
-    table0 = table1;
+    return result;
+}
 
-    ASSERT_EQUAL(table0(0, 0), "second1");
-    ASSERT_EQUAL(table0(0, 1), "first1");
-    ASSERT_EQUAL(table0(1, 0), "second0");
-    ASSERT_EQUAL(table0(1, 1), "first0");
-    ASSERT_EQUAL(table0.GetColumn(0), columnTuple1);
-    ASSERT_EQUAL(table0.GetColumn(1), columnTuple2);
+void CoreTools::TableTesting::DoStringRowTest(const StringTestingType& table, const StringTuple& rowTuple0, const StringTuple& rowTuple1)
+{
+    ASSERT_EQUAL(table(0, 0), "test0");
+    ASSERT_EQUAL(table(0, 1), "test1");
+    ASSERT_EQUAL(table(1, 0), "test2");
+    ASSERT_EQUAL(table(1, 1), "test3");
+    ASSERT_EQUAL(table.GetRow(0), rowTuple0);
+    ASSERT_EQUAL(table.GetRow(1), rowTuple1);
+}
 
-    ASSERT_EQUAL(table1(0, 0), "second1");
-    ASSERT_EQUAL(table1(0, 1), "first1");
-    ASSERT_EQUAL(table1(1, 0), "second0");
-    ASSERT_EQUAL(table1(1, 1), "first0");
-    ASSERT_EQUAL(table1.GetColumn(0), columnTuple1);
-    ASSERT_EQUAL(table1.GetColumn(1), columnTuple2);
+void CoreTools::TableTesting::StringColumnTest(StringTestingType& lhs, StringTestingType& rhs)
+{
+    const StringTuple columnTuple0{ "test4", "test5" };
+    const StringTuple columnTuple1{ "test6", "test7" };
 
+    rhs.SetColumn(0, columnTuple0);
+    rhs.SetColumn(1, columnTuple1);
+
+    lhs = rhs;
+
+    ASSERT_NOT_THROW_EXCEPTION_3(DoStringColumnTest, lhs, columnTuple0, columnTuple1);
+    ASSERT_NOT_THROW_EXCEPTION_3(DoStringColumnTest, rhs, columnTuple0, columnTuple1);
+}
+
+void CoreTools::TableTesting::DoStringColumnTest(const StringTestingType& table, const StringTuple& columnTuple0, const StringTuple& columnTuple1)
+{
+    ASSERT_EQUAL(table(0, 0), "test4");
+    ASSERT_EQUAL(table(0, 1), "test6");
+    ASSERT_EQUAL(table(1, 0), "test5");
+    ASSERT_EQUAL(table(1, 1), "test7");
+    ASSERT_EQUAL(table.GetColumn(0), columnTuple0);
+    ASSERT_EQUAL(table.GetColumn(1), columnTuple1);
+}
+
+void CoreTools::TableTesting::StringSquareBracketsTest(const StringTestingType& table)
+{
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
-    ASSERT_EQUAL(*(table1[0]), "second1");
-    ASSERT_EQUAL(*(table1[0] + 1), "first1");
-    ASSERT_EQUAL(*(table1[1]), "second0");
-    ASSERT_EQUAL(*(table1[1] + 1), "first0");
+    ASSERT_EQUAL(*(table[0]), "test4");
+    ASSERT_EQUAL(*(table[0] + 1), "test6");
+    ASSERT_EQUAL(*(table[1]), "test5");
+    ASSERT_EQUAL(*(table[1] + 1), "test7");
 
 #include SYSTEM_WARNING_POP
 }
 
 void CoreTools::TableTesting::OperatorTest()
 {
-    Table<2, 2, int> table0{};
-    Table<2, 2, int> table1{};
-
-    table0(0, 0) = 0;
-    table0(0, 1) = 0;
-    table0(1, 0) = 0;
-    table0(1, 1) = 0;
-    table1(0, 0) = 0;
-    table1(0, 1) = 0;
-    table1(1, 0) = 0;
-    table1(1, 1) = 0;
+    auto table0 = CreateTestingType2();
+    const auto table1 = CreateTestingType2();
 
     ASSERT_TRUE(table0 == table1);
     ASSERT_FALSE(table0 != table1);
+    ASSERT_FALSE(table1 < table0);
+    ASSERT_TRUE(table1 <= table0);
+    ASSERT_FALSE(table0 > table1);
+    ASSERT_TRUE(table0 >= table1);
 
     table0(0, 0) = 1;
 
+    ASSERT_FALSE(table0 == table1);
+    ASSERT_TRUE(table0 != table1);
     ASSERT_TRUE(table1 < table0);
     ASSERT_TRUE(table1 <= table0);
     ASSERT_TRUE(table0 > table1);
     ASSERT_TRUE(table0 >= table1);
 }
 
+CoreTools::TableTesting::TestingType2 CoreTools::TableTesting::CreateTestingType2()
+{
+    TestingType2 table{};
+
+    auto index = 0;
+    for (auto row = 0; row < TestingType2::rowsNumber; ++row)
+    {
+        for (auto column = 0; column < TestingType2::columnsNumber; ++column)
+        {
+            table(row, column) = index;
+            ++index;
+        }
+    }
+
+    return table;
+}
+
 void CoreTools::TableTesting::ConstructorTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(Constructor2Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Constructor3Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Constructor4Test);
+}
+
+void CoreTools::TableTesting::Constructor2Test()
+{
+    TestingType2 table{ 1, 2, 3, 4 };
+
+    auto index = 1;
+    for (auto row = 0; row < TestingType2::rowsNumber; ++row)
+    {
+        for (auto column = 0; column < TestingType2::columnsNumber; ++column)
+        {
 #include SYSTEM_WARNING_PUSH
+
 #include SYSTEM_WARNING_DISABLE(26481)
 
-    Table<2, 2, int> table0{ 1, 2, 3, 4 };
-
-    ASSERT_EQUAL(table0[0][0], 1);
-    ASSERT_EQUAL(table0[0][1], 2);
-    ASSERT_EQUAL(table0[1][0], 3);
-    ASSERT_EQUAL(table0[1][1], 4);
-
-    Table<3, 3, int> table1{ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-
-    ASSERT_EQUAL(table1[0][0], 1);
-    ASSERT_EQUAL(table1[0][1], 2);
-    ASSERT_EQUAL(table1[0][2], 3);
-    ASSERT_EQUAL(table1[1][0], 4);
-    ASSERT_EQUAL(table1[1][1], 5);
-    ASSERT_EQUAL(table1[1][2], 6);
-    ASSERT_EQUAL(table1[2][0], 7);
-    ASSERT_EQUAL(table1[2][1], 8);
-    ASSERT_EQUAL(table1[2][2], 9);
-
-    Table<4, 4, int> table2{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
-
-    ASSERT_EQUAL(table2[0][0], 1);
-    ASSERT_EQUAL(table2[0][1], 2);
-    ASSERT_EQUAL(table2[0][2], 3);
-    ASSERT_EQUAL(table2[0][3], 4);
-    ASSERT_EQUAL(table2[1][0], 5);
-    ASSERT_EQUAL(table2[1][1], 6);
-    ASSERT_EQUAL(table2[1][2], 7);
-    ASSERT_EQUAL(table2[1][3], 8);
-    ASSERT_EQUAL(table2[2][0], 9);
-    ASSERT_EQUAL(table2[2][1], 10);
-    ASSERT_EQUAL(table2[2][2], 11);
-    ASSERT_EQUAL(table2[2][3], 12);
-    ASSERT_EQUAL(table2[3][0], 13);
-    ASSERT_EQUAL(table2[3][1], 14);
-    ASSERT_EQUAL(table2[3][2], 15);
-    ASSERT_EQUAL(table2[3][3], 16);
+            ASSERT_EQUAL(table[row][column], index);
 
 #include SYSTEM_WARNING_POP
+
+            ++index;
+        }
+    }
+}
+
+void CoreTools::TableTesting::Constructor3Test()
+{
+    TestingType3 table{ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+    auto index = 1;
+    for (auto row = 0; row < TestingType3::rowsNumber; ++row)
+    {
+        for (auto column = 0; column < TestingType3::columnsNumber; ++column)
+        {
+#include SYSTEM_WARNING_PUSH
+
+#include SYSTEM_WARNING_DISABLE(26481)
+
+            ASSERT_EQUAL(table[row][column], index);
+
+#include SYSTEM_WARNING_POP
+
+            ++index;
+        }
+    }
+}
+
+void CoreTools::TableTesting::Constructor4Test()
+{
+    TestingType4 table{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+
+    auto index = 1;
+    for (auto row = 0; row < TestingType4::rowsNumber; ++row)
+    {
+        for (auto column = 0; column < TestingType4::columnsNumber; ++column)
+        {
+#include SYSTEM_WARNING_PUSH
+
+#include SYSTEM_WARNING_DISABLE(26481)
+
+            ASSERT_EQUAL(table[row][column], index);
+
+#include SYSTEM_WARNING_POP
+
+            ++index;
+        }
+    }
 }
 
 void CoreTools::TableTesting::CompileErrorTest() noexcept
@@ -251,16 +317,16 @@ void CoreTools::TableTesting::CompileErrorTest() noexcept
 #ifdef COMPILE_ERROR_TEST
 
     /// 以下代码无法通过编译
-    Table<2, 2, int> table1{ 5, 6, 7, 8, 9, 10, 11, 12, 13 };
-    Table<3, 3, int> table2{ 5, 6, 7, 8 };
-    Table<4, 4, int> table3{ 5, 6, 7, 8 };
+    TestingType2 table1{ 5, 6, 7, 8, 9, 10, 11, 12, 13 };
+    TestingType3 table2{ 5, 6, 7, 8 };
+    TestingType4 table3{ 5, 6, 7, 8 };
 
 #endif  // COMPILE_ERROR_TEST
 }
 
 void CoreTools::TableTesting::ForEachTest()
 {
-    const Table<2, 2, int> tuple{ 1, 2, 3, 4 };
+    const TestingType2 tuple{ 1, 2, 3, 4 };
 
     auto index = 1;
     for (const auto element : tuple)
@@ -273,7 +339,7 @@ void CoreTools::TableTesting::ForEachTest()
 
 void CoreTools::TableTesting::GetCoordinateTest()
 {
-    const Table<2, 2, int> tuple{ 1, 2, 3, 4 };
+    const TestingType2 tuple{ 1, 2, 3, 4 };
 
     auto index = 1;
     for (const auto element : tuple.GetCoordinate())

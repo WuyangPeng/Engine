@@ -24,4 +24,4 @@ CoreTools::AbstractObject::AbstractObject(const std::string& name)
 
 CoreTools::AbstractObject::~AbstractObject() = default;
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, AbstractObject);
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, AbstractObject)

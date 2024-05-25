@@ -20,7 +20,7 @@
 #include <vector>
 
 CoreTools::CWriteFileManagerTesting::CWriteFileManagerTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream }, fileManagerContent{ "CFileManager Testing Text" }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -42,91 +42,92 @@ void CoreTools::CWriteFileManagerTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(PositionTest);
 }
 
-void CoreTools::CWriteFileManagerTesting::CWriteFileManagerTest()
-{
-    const auto cFileManagerContent = GetFileManagerContent();
-    CWriteFileManager manager{ GetFileName() };
-
-    const auto size = cFileManagerContent.size();
-    manager.Write(sizeof(decltype(size)), &size);
-
-    manager.Write(sizeof(char), size, cFileManagerContent.c_str());
-}
-
-void CoreTools::CWriteFileManagerTesting::WriteResultTest()
-{
-    const auto cFileManagerContent = GetFileManagerContent();
-    CReadFileManager manager{ GetFileName() };
-
-    size_t size{ 0u };
-    manager.Read(sizeof(decltype(size)), &size);
-
-    ASSERT_EQUAL(size, cFileManagerContent.size());
-
-    std::vector<char> buffer(size);
-    manager.Read(sizeof(char), size, buffer.data());
-
-    const std::string bufferContent{ buffer.begin(), buffer.end() };
-
-    ASSERT_EQUAL(bufferContent, cFileManagerContent);
-}
-
 System::String CoreTools::CWriteFileManagerTesting::GetFileName()
 {
     return SYSTEM_TEXT("Resource/CFileManagerTesting/CWriteFileManagerTestingText.txt");
 }
 
-std::string CoreTools::CWriteFileManagerTesting::GetFileManagerContent()
+void CoreTools::CWriteFileManagerTesting::CWriteFileManagerTest()
 {
-    return "CFileManager Testing Text";
+    CWriteFileManager manager{ GetFileName() };
+
+    const auto size = fileManagerContent.size();
+
+    manager.Write(sizeof(decltype(size)), &size);
+    manager.Write(sizeof(char), size, fileManagerContent.c_str());
+}
+
+void CoreTools::CWriteFileManagerTesting::WriteResultTest()
+{
+    CReadFileManager manager{ GetFileName() };
+
+    const auto size = ReadSizeTest(manager);
+
+    ASSERT_NOT_THROW_EXCEPTION_3(ReadBufferTest, manager, size, fileManagerContent);
+}
+
+size_t CoreTools::CWriteFileManagerTesting::ReadSizeTest(CReadFileManager& manager)
+{
+    size_t size{ 0u };
+    manager.Read(sizeof(decltype(size)), &size);
+
+    ASSERT_EQUAL(size, fileManagerContent.size());
+
+    return size;
+}
+
+void CoreTools::CWriteFileManagerTesting::ReadBufferTest(CReadFileManager& manager, size_t size, const std::string& content)
+{
+    std::vector<char> buffer(size);
+    manager.Read(sizeof(char), size, buffer.data());
+
+    const std::string bufferContent{ buffer.begin(), buffer.end() };
+
+    ASSERT_EQUAL(bufferContent, content);
 }
 
 void CoreTools::CWriteFileManagerTesting::GetFileByteSizeTest()
 {
-    const auto cFileManagerContent = GetFileManagerContent();
     const CWriteFileManager manager{ GetFileName(), true };
 
-    const auto size = cFileManagerContent.size();
+    const auto size = fileManagerContent.size();
 
     ASSERT_EQUAL(manager.GetFileByteSize(), size + sizeof(decltype(size)));
 }
 
 void CoreTools::CWriteFileManagerTesting::PutTest()
 {
-    const auto cFileManagerContent = GetFileManagerContent();
     CWriteFileManager manager{ GetFileName(), true };
 
     ASSERT_TRUE(manager.PutCharacter('a'));
-    ASSERT_TRUE(manager.PutString(cFileManagerContent));
+    ASSERT_TRUE(manager.PutString(fileManagerContent));
     ASSERT_FALSE(manager.IsEof());
     ASSERT_TRUE(manager.Flush());
 }
 
 void CoreTools::CWriteFileManagerTesting::PutWriteResultTest()
 {
-    auto cFileManagerContent = GetFileManagerContent();
+    auto result = fileManagerContent;
     CReadFileManager manager{ GetFileName() };
 
-    size_t size{ 0u };
-    manager.Read(sizeof(decltype(size)), &size);
+    std::ignore = ReadSizeTest(manager);
 
-    ASSERT_EQUAL(size, cFileManagerContent.size());
+    result += 'a';
+    result += fileManagerContent;
 
-    cFileManagerContent += 'a';
-    cFileManagerContent += GetFileManagerContent();
-
-    std::vector<char> buffer(cFileManagerContent.size());
-    manager.Read(sizeof(char), buffer.size(), buffer.data());
-
-    const std::string bufferContent{ buffer.begin(), buffer.end() };
-
-    ASSERT_EQUAL(bufferContent, cFileManagerContent);
+    ASSERT_NOT_THROW_EXCEPTION_3(ReadBufferTest, manager, result.size(), result);
 }
 
 void CoreTools::CWriteFileManagerTesting::PositionTest()
 {
-    const auto cFileManagerContent = GetFileManagerContent();
     CWriteFileManager manager{ GetFileName(), true };
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DoPositionTest, manager);
+    ASSERT_NOT_THROW_EXCEPTION_1(MiscellaneousTest, manager);
+}
+
+void CoreTools::CWriteFileManagerTesting::DoPositionTest(CWriteFileManager& manager)
+{
     ASSERT_EQUAL(0, manager.GetPosition());
 
     ASSERT_TRUE(manager.Seek(1, System::FileSeek::Cur));
@@ -134,12 +135,15 @@ void CoreTools::CWriteFileManagerTesting::PositionTest()
 
     ASSERT_TRUE(manager.SetPosition(8));
     ASSERT_EQUAL(8, manager.GetPosition());
+}
 
+void CoreTools::CWriteFileManagerTesting::MiscellaneousTest(CWriteFileManager& manager)
+{
     ASSERT_TRUE(manager.Seek(0, System::FileSeek::End));
 
     const auto length = manager.Tell();
 
-    ASSERT_EQUAL(length, boost::numeric_cast<decltype(length)>(cFileManagerContent.size() * 2 + 1 + sizeof(size_t)));
+    ASSERT_EQUAL(length, boost::numeric_cast<decltype(length)>(fileManagerContent.size() * 2 + 1 + sizeof(size_t)));
 
     ASSERT_TRUE(manager.SetVBuffer(System::FileSetVBuffer::IoFullyBuffered, 256));
 }

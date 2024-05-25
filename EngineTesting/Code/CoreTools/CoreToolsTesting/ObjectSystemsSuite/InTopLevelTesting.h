@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_SUITE_IN_TOP_LEVEL_TESTING_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_SUITE_IN_TOP_LEVEL_TESTING_H
 
+#include "CoreTools/ObjectSystems/InTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -30,6 +31,7 @@ namespace CoreTools
         void MainTest();
 
         void BasisTest();
+        void BasisResultTest(InTopLevel& inTopLevel);
     };
 }
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 16:31)
+/// 版本：1.0.0.9 (2024/04/30 19:58)
 
 #include "CFileManagerTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -17,6 +17,26 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 #include <string>
+
+CoreTools::CFileManagerTesting::CFileManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream }, environment{ Environment::Create() }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CFileManagerTesting)
+
+void CoreTools::CFileManagerTesting::DoRunUnitTest()
+{
+    ASSERT_TRUE(environment.InsertDirectory(GetDirectory()));
+
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
+
+void CoreTools::CFileManagerTesting::MainTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(CFileManagerHelperTest);
+}
 
 System::String CoreTools::CFileManagerTesting::GetDirectory()
 {
@@ -40,26 +60,6 @@ std::string CoreTools::CFileManagerTesting::GetFileManagerContent()
     return "CFileManagerHelper Testing Text";
 }
 
-CoreTools::CFileManagerTesting::CFileManagerTesting(const OStreamShared& stream)
-    : ParentType{ stream }, environment{ Environment::Create() }
-{
-    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
-
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CFileManagerTesting)
-
-void CoreTools::CFileManagerTesting::DoRunUnitTest()
-{
-    ASSERT_TRUE(environment.InsertDirectory(GetDirectory()));
-
-    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
-}
-
-void CoreTools::CFileManagerTesting::MainTest()
-{
-    ASSERT_NOT_THROW_EXCEPTION_0(CFileManagerHelperTest);
-}
-
 void CoreTools::CFileManagerTesting::CFileManagerHelperTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_1(SaveIntoFileTest, false);
@@ -75,7 +75,7 @@ void CoreTools::CFileManagerTesting::CFileManagerHelperTest()
 
 void CoreTools::CFileManagerTesting::LoadFromFileTest(bool binaryFile)
 {
-    auto buffer = CFileManagerHelper::LoadFromFile(GetFileManagerHelperFileName(), binaryFile);
+    const auto buffer = CFileManagerHelper::LoadFromFile(GetFileManagerHelperFileName(), binaryFile);
 
     const std::string bufferContent{ buffer.begin(), buffer.end() };
 
@@ -86,7 +86,7 @@ void CoreTools::CFileManagerTesting::LoadFromFileTest(bool binaryFile)
 
 void CoreTools::CFileManagerTesting::LoadFromFileUseEnvironmentTest(bool binaryFile)
 {
-    auto buffer = CFileManagerHelper::LoadFromFileUseEnvironment(environment, GetFileName(), binaryFile);
+    const auto buffer = CFileManagerHelper::LoadFromFileUseEnvironment(environment, GetFileName(), binaryFile);
 
     const std::string bufferContent{ buffer.begin(), buffer.end() };
 
@@ -99,13 +99,11 @@ void CoreTools::CFileManagerTesting::AppendToFileTest(bool binaryFile)
 
     CFileManagerHelper::AppendToFile(GetFileManagerHelperFileName(), binaryFile, boost::numeric_cast<int>(content.size()), content.c_str());
 
-    auto buffer = CFileManagerHelper::LoadFromFile(GetFileManagerHelperFileName(), binaryFile);
-
-    const std::string bufferContent{ buffer.begin(), buffer.end() };
+    const auto buffer = CFileManagerHelper::LoadFromFile(GetFileManagerHelperFileName(), binaryFile);
 
     content += GetFileManagerContent();
 
-    ASSERT_EQUAL(bufferContent, content);
+    ASSERT_NOT_THROW_EXCEPTION_2(ResultTest, content, buffer);
 }
 
 void CoreTools::CFileManagerTesting::SaveIntoFileTest(bool binaryFile)
@@ -114,9 +112,14 @@ void CoreTools::CFileManagerTesting::SaveIntoFileTest(bool binaryFile)
 
     CFileManagerHelper::SaveIntoFile(GetFileManagerHelperFileName(), binaryFile, boost::numeric_cast<int>(content.size()), content.c_str());
 
-    auto buffer = CFileManagerHelper::LoadFromFile(GetFileManagerHelperFileName(), binaryFile);
+    const auto buffer = CFileManagerHelper::LoadFromFile(GetFileManagerHelperFileName(), binaryFile);
 
-    const std::string bufferContent{ buffer.begin(), buffer.end() };
+    ASSERT_NOT_THROW_EXCEPTION_2(ResultTest, content, buffer);
+}
 
-    ASSERT_EQUAL(bufferContent, content);
+void CoreTools::CFileManagerTesting::ResultTest(const std::string& content, const FileBuffer& buffer)
+{
+    const std::string result{ buffer.begin(), buffer.end() };
+
+    ASSERT_EQUAL(result, content);
 }

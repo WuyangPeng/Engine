@@ -73,13 +73,12 @@ namespace CoreTools
     class RawIterator;
 
     template <bool OrderLToR, int... Sizes>
-    requires(sizeof...(Sizes) >= 1)
     class Lattice;
 
-    template <typename T, bool OrderLToR, size_t... Sizes>
+    template <typename T, bool OrderLToR, int... Sizes>
     class MultiArray;
 
-    template <typename T, bool OrderLToR, size_t... Sizes>
+    template <typename T, bool OrderLToR, int... Sizes>
     class MultiArrayAdapter;
 }
 

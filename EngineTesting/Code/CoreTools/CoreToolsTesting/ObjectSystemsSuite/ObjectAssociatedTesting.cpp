@@ -36,29 +36,59 @@ void CoreTools::ObjectAssociatedTesting::MainTest()
 
 void CoreTools::ObjectAssociatedTesting::ObjectAssociatedTest()
 {
-    const ObjectAssociated<Object> objectAssociated0{};
-
-    ASSERT_EQUAL(objectAssociated0.associated, 0);
-    ASSERT_EQUAL_NULL_PTR(objectAssociated0.object);
+    ASSERT_NOT_THROW_EXCEPTION_0(ObjectAssociated0Test);
 
     const auto boolObject = std::make_shared<BoolObject>(DisableNotThrow::Disable);
-    const ObjectAssociated<Object> objectAssociated1{ boolObject };
+    ASSERT_NOT_THROW_EXCEPTION_1(ObjectAssociated1Test, boolObject);
 
-    ASSERT_EQUAL(objectAssociated1.associated, 0);
-    ASSERT_EQUAL(objectAssociated1.object, boolObject);
+    const ObjectAssociated objectAssociated{ boolObject, associated };
 
-    ASSERT_EQUAL(objectAssociated1->GetRttiType().GetName(), BoolObject::GetCurrentRttiType().GetName());
+    ASSERT_NOT_THROW_EXCEPTION_2(ObjectAssociated2Test, boolObject, objectAssociated);
 
-    const ObjectAssociated<Object> objectAssociated2{ boolObject, 9 };
+    ASSERT_NOT_THROW_EXCEPTION_1(ObjectAssociated3Test, objectAssociated);
 
-    ASSERT_EQUAL(objectAssociated2.associated, 9);
-    ASSERT_EQUAL(objectAssociated2.object, boolObject);
+    ASSERT_NOT_THROW_EXCEPTION_0(ObjectAssociated4Test);
+}
 
-    ASSERT_EQUAL((*objectAssociated2).GetRttiType().GetName(), BoolObject::GetCurrentRttiType().GetName());
+void CoreTools::ObjectAssociatedTesting::ObjectAssociated0Test()
+{
+    const ObjectAssociated objectAssociated{};
 
-    boolObject->SetUniqueId(5);
+    ASSERT_EQUAL(objectAssociated.associated, 0);
+    ASSERT_EQUAL_NULL_PTR(objectAssociated.object);
+}
 
-    const auto objectAssociated3 = objectAssociated2.Clone();
+void CoreTools::ObjectAssociatedTesting::ObjectAssociated1Test(const BoolObjectSharedPtr& boolObject)
+{
+    const ObjectAssociated objectAssociated{ boolObject };
 
-    ASSERT_EQUAL(objectAssociated3->GetUniqueId(), 5);
+    ASSERT_EQUAL(objectAssociated.associated, 0);
+    ASSERT_EQUAL(objectAssociated.object, boolObject);
+
+    ASSERT_EQUAL(objectAssociated->GetRttiType().GetName(), BoolObject::GetCurrentRttiType().GetName());
+}
+
+void CoreTools::ObjectAssociatedTesting::ObjectAssociated2Test(const BoolObjectSharedPtr& boolObject, const ObjectAssociated& objectAssociated)
+{
+    ASSERT_EQUAL(objectAssociated.associated, associated);
+    ASSERT_EQUAL(objectAssociated.object, boolObject);
+
+    ASSERT_EQUAL((*objectAssociated).GetRttiType().GetName(), BoolObject::GetCurrentRttiType().GetName());
+
+    boolObject->SetUniqueId(uniqueId);
+}
+
+void CoreTools::ObjectAssociatedTesting::ObjectAssociated3Test(const ObjectAssociated& objectAssociated)
+{
+    const auto clone = objectAssociated.Clone();
+
+    ASSERT_EQUAL(clone->GetUniqueId(), uniqueId);
+}
+
+void CoreTools::ObjectAssociatedTesting::ObjectAssociated4Test()
+{
+    const ObjectAssociated objectAssociated{ associated };
+
+    ASSERT_EQUAL(objectAssociated.associated, associated);
+    ASSERT_EQUAL_NULL_PTR(objectAssociated.object);
 }

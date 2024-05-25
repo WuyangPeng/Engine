@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/15 10:20)
+/// 版本：1.0.0.9 (2024/04/25 22:24)
 
 #ifndef CORE_TOOLS_CONTRACT_SUITE_IMPL_STATIC_ASSERT_HELPER_TESTING_H
 #define CORE_TOOLS_CONTRACT_SUITE_IMPL_STATIC_ASSERT_HELPER_TESTING_H
@@ -29,7 +29,13 @@ namespace CoreTools
         void DoRunUnitTest() override;
         void MainTest();
 
-        void StaticAssertTest() noexcept;
+        void StaticAssertTest();
+
+        void ShareClassesStaticAssertTest() noexcept;
+        void PerformanceUnsharedClassesStaticAssertTest() noexcept;
+        void CopyUnsharedClassesStaticAssertTest() noexcept;
+        void DelayCopyUnsharedClassesStaticAssertTest() noexcept;
+        void NonCopyClassesStaticAssertTest() noexcept;
     };
 }
 

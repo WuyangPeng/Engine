@@ -47,17 +47,17 @@ void CoreTools::CopyFileToolsTesting::MainTest()
 
 void CoreTools::CopyFileToolsTesting::CopyFileTest()
 {
-    const auto cFileManagerHelpFileName = SYSTEM_TEXT("Resource/CFileManagerTesting/CFileManagerHelperTestingText.txt"s);
+    const auto fileManagerHelpFileName = SYSTEM_TEXT("Resource/CFileManagerTesting/CFileManagerHelperTestingText.txt"s);
 
-    CopyFileTools tools{ cFileManagerHelpFileName, GetCopyFileName() };
+    CopyFileTools tools{ fileManagerHelpFileName, GetCopyFileName() };
 }
 
 void CoreTools::CopyFileToolsTesting::VerificationTest()
 {
-    const auto cFileManagerHelpContent = SYSTEM_TEXT("CFileManagerHelper Testing Text"s);
-    const IFileStreamManager manager{ GetCopyFileName() };
+    const auto fileManagerHelpContent = SYSTEM_TEXT("CFileManagerHelper Testing Text"s);
 
-    ASSERT_EQUAL(manager.GetFileContent(), cFileManagerHelpContent);
+    const IFileStreamManager manager{ GetCopyFileName() };
+    ASSERT_EQUAL(manager.GetFileContent(), fileManagerHelpContent);
 }
 
 void CoreTools::CopyFileToolsTesting::DeleteFileTest()

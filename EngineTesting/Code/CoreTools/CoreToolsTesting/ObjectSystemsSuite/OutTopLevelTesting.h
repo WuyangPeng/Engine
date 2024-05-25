@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_SUITE_OUT_TOP_LEVEL_TESTING_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_SUITE_OUT_TOP_LEVEL_TESTING_H
 
+#include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -30,6 +31,8 @@ namespace CoreTools
         void MainTest();
 
         void TopLevelTest();
+
+        NODISCARD OutTopLevel GetOutTopLevel();
     };
 }
 

@@ -5,11 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 15:32)
+/// 版本：1.0.0.9 (2024/05/18 20:15)
 
 #ifndef CORE_TOOLS_DATA_TYPES_SUITE_RAW_ITERATORS_TESTING_H
 #define CORE_TOOLS_DATA_TYPES_SUITE_RAW_ITERATORS_TESTING_H
 
+#include "CoreTools/MemoryTools/RawIterators.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,11 +27,32 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        static constexpr auto size = 20;
+
+        using ContainerType = std::vector<int>;
+        using RawConstIteratorType = RawConstIterator<int>;
+        using RawIteratorType = RawIterator<int>;
+
+    private:
         void MainTest();
         void DoRunUnitTest() override;
 
         void RawConstIteratorTest();
         void RawIteratorTest();
+
+        void ConstPrefixAdditionOperatorTest(RawConstIteratorType& rawConstIterator);
+        void ConstSuffixAdditionOperatorTest(RawConstIteratorType& rawConstIterator);
+        void ConstPrefixSubtractionOperatorTest(RawConstIteratorType& rawConstIterator);
+        void ConstSuffixSubtractionOperatorTest(RawConstIteratorType& rawConstIterator);
+        void ConstAdditionOperatorTest(RawConstIteratorType& rawConstIterator);
+        void ConstSubtractionOperatorTest(RawConstIteratorType& rawConstIterator);
+
+        void PrefixAdditionOperatorTest(RawIteratorType& rawIterator);
+        void SuffixAdditionOperatorTest(RawIteratorType& rawIterator);
+        void PrefixSubtractionOperatorTest(RawIteratorType& rawIterator);
+        void SuffixSubtractionOperatorTest(RawIteratorType& rawIterator);
+        void AdditionOperatorTest(RawIteratorType& rawIterator);
+        void SubtractionOperatorTest(RawIteratorType& rawIterator);
     };
 }
 

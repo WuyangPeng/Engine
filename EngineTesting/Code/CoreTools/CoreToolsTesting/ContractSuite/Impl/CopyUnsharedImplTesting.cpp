@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/15 10:20)
+/// 版本：1.0.0.9 (2024/04/25 22:08)
 
 #include "CopyUnsharedImplTesting.h"
 #include "CoreTools/Contract/CopyUnsharedImplDetail.h"
@@ -36,65 +36,61 @@ void CoreTools::CopyUnsharedImplTesting::MainTest()
 
 void CoreTools::CopyUnsharedImplTesting::DefaultTest()
 {
-    constexpr auto count = 10;
     TestingType copyUnsharedImpl0{ count };
-
     ASSERT_EQUAL(copyUnsharedImpl0->GetCount(), count);
 
     auto copyUnsharedImpl1 = copyUnsharedImpl0;
+    ASSERT_NOT_THROW_EXCEPTION_3(AddressUnequalTest, copyUnsharedImpl0, copyUnsharedImpl1, count);
 
-    ASSERT_EQUAL((*copyUnsharedImpl1).GetCount(), count);
-    ASSERT_UNEQUAL(copyUnsharedImpl0->GetAddress(), copyUnsharedImpl1->GetAddress());
-
-    copyUnsharedImpl0->SetCount(1);
-
-    ASSERT_EQUAL(copyUnsharedImpl0->GetCount(), 1);
-    ASSERT_EQUAL(copyUnsharedImpl1->GetCount(), count);
+    ASSERT_NOT_THROW_EXCEPTION_2(SetCountTest, copyUnsharedImpl0, copyUnsharedImpl1);
 
     const auto copyUnsharedImpl2 = copyUnsharedImpl1;
-
-    ASSERT_EQUAL((*copyUnsharedImpl2).GetCount(), count);
-    ASSERT_UNEQUAL(copyUnsharedImpl2->GetAddress(), copyUnsharedImpl1->GetAddress());
+    ASSERT_NOT_THROW_EXCEPTION_3(AddressUnequalTest, copyUnsharedImpl1, copyUnsharedImpl2, count);
 
     copyUnsharedImpl1 = copyUnsharedImpl0;
+    ASSERT_NOT_THROW_EXCEPTION_3(AddressUnequalTest, copyUnsharedImpl0, copyUnsharedImpl1, modify);
+}
 
-    ASSERT_EQUAL(copyUnsharedImpl1->GetCount(), 1);
-    ASSERT_UNEQUAL(copyUnsharedImpl1->GetAddress(), copyUnsharedImpl0->GetAddress());
+void CoreTools::CopyUnsharedImplTesting::AddressUnequalTest(const TestingType& lhs, const TestingType& rhs, int aCount)
+{
+    ASSERT_EQUAL((*rhs).GetCount(), aCount);
+    ASSERT_UNEQUAL(lhs->GetAddress(), rhs->GetAddress());
+}
+
+void CoreTools::CopyUnsharedImplTesting::SetCountTest(TestingType& lhs, const TestingType& rhs)
+{
+    lhs->SetCount(1);
+    ASSERT_EQUAL(lhs->GetCount(), modify);
+    ASSERT_EQUAL(rhs->GetCount(), count);
 }
 
 void CoreTools::CopyUnsharedImplTesting::UseFactoryTest()
 {
-    constexpr auto count = 12;
-    TestingType copyUnsharedImpl0{ ImplCreateUseFactory::Default, count };
+    TestingType copyUnsharedImpl{ ImplCreateUseFactory::Default, count };
 
-    ASSERT_EQUAL(copyUnsharedImpl0->GetCount(), count);
+    ASSERT_NOT_THROW_EXCEPTION_2(CountTest, copyUnsharedImpl, count);
+}
 
-    auto copyUnsharedImpl1 = copyUnsharedImpl0;
+void CoreTools::CopyUnsharedImplTesting::CountTest(TestingType& copyUnsharedImpl, int aCount)
+{
+    ASSERT_EQUAL(copyUnsharedImpl->GetCount(), aCount);
 
-    ASSERT_EQUAL(copyUnsharedImpl1->GetCount(), count);
-    ASSERT_UNEQUAL(copyUnsharedImpl0->GetAddress(), copyUnsharedImpl1->GetAddress());
+    auto copy = copyUnsharedImpl;
 
-    copyUnsharedImpl0->SetCount(1);
+    ASSERT_EQUAL(copy->GetCount(), aCount);
+    ASSERT_UNEQUAL(copyUnsharedImpl->GetAddress(), copy->GetAddress());
 
-    ASSERT_EQUAL(copyUnsharedImpl0->GetCount(), 1);
-    ASSERT_EQUAL(copyUnsharedImpl1->GetCount(), count);
+    copyUnsharedImpl->SetCount(modify);
+
+    ASSERT_EQUAL(copyUnsharedImpl->GetCount(), modify);
+    ASSERT_EQUAL(copy->GetCount(), aCount);
 }
 
 void CoreTools::CopyUnsharedImplTesting::UseUseDefaultConstructionTest()
 {
-    TestingType copyUnsharedImpl0{ ImplCreateUseDefaultConstruction::Default };
+    TestingType copyUnsharedImpl{ ImplCreateUseDefaultConstruction::Default };
 
-    ASSERT_EQUAL(copyUnsharedImpl0->GetCount(), 0);
-
-    auto copyUnsharedImpl1 = copyUnsharedImpl0;
-
-    ASSERT_EQUAL(copyUnsharedImpl1->GetCount(), 0);
-    ASSERT_UNEQUAL(copyUnsharedImpl0->GetAddress(), copyUnsharedImpl1->GetAddress());
-
-    copyUnsharedImpl0->SetCount(1);
-
-    ASSERT_EQUAL(copyUnsharedImpl0->GetCount(), 1);
-    ASSERT_EQUAL(copyUnsharedImpl1->GetCount(), 0);
+    ASSERT_NOT_THROW_EXCEPTION_2(CountTest, copyUnsharedImpl, 0);
 }
 
 CoreTools::CopyUnsharedImplTesting::ImplSharedPtr CoreTools::CopyUnsharedImplTesting::Clone(const Impl& impl)

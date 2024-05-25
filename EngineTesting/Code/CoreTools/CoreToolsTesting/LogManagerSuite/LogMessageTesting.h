@@ -33,11 +33,16 @@ namespace CoreTools
         void LogFilterTest();
         void MessageTest();
         void GetFileNameTest();
-        void LogAppenderIOManageSignTest();
-        void ExceptionTest();
+        void LogAppenderIOManageAlwaysConsoleTest();
+        void LogAppenderIOManageTriggerAssertTest();
+        void ErrorExceptionTest();
+        void StdExceptionTest();
         void StringTest();
         void IntegerTest();
         void IsDisabledTest();
+
+        NODISCARD static LogMessage GetStringLogMessage();
+        NODISCARD static LogMessage GetIntegerLogMessage();
     };
 }
 

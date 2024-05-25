@@ -28,15 +28,18 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        static constexpr auto fileBufferCount = 100;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void BaseTest();
-        void FileBufferFailTest();
+        void FileBufferFailTest() const;
         void FileBufferTest();
         void EventTest();
 
-        NODISCARD String GetFileName();
+        NODISCARD static String GetFileName();
     };
 }
 

@@ -26,10 +26,20 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using WeakPtr = std::weak_ptr<int>;
+
+    private:
         void MainTest();
         void DoRunUnitTest() override;
 
         void WeakPtrCompareTest();
+
+        void WeakPtrEqualTest(const WeakPtr& lhsWeakPtr, const WeakPtr& rhsWeakPtr);
+        void WeakPtrUnequalTest(const WeakPtr& lhsWeakPtr, const WeakPtr& rhsWeakPtr);
+        void WeakPtrLessTest(const WeakPtr& lhsWeakPtr, const WeakPtr& rhsWeakPtr);
+        void WeakPtrLessEqualTest(const WeakPtr& lhsWeakPtr, const WeakPtr& rhsWeakPtr);
+        void WeakPtrGreaterTest(const WeakPtr& lhsWeakPtr, const WeakPtr& rhsWeakPtr);
+        void WeakPtrGreaterEqualTest(const WeakPtr& lhsWeakPtr, const WeakPtr& rhsWeakPtr);
     };
 }
 

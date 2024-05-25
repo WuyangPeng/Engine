@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 17:08)
+/// 版本：1.0.0.9 (2024/05/03 23:21)
 
 #include "IFileStreamManagerTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -14,16 +14,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-System::String CoreTools::IFileStreamManagerTesting::GetIFileStreamFileName()
-{
-    return SYSTEM_TEXT("Resource/StreamManagerTesting/IFileStreamManagerTest.txt");
-}
-
-System::String CoreTools::IFileStreamManagerTesting::GetIFileStreamFileContent()
-{
-    return SYSTEM_TEXT("IFileStreamManagerTest test text");
-}
 
 CoreTools::IFileStreamManagerTesting::IFileStreamManagerTesting(const OStreamShared& stream)
     : ParentType{ stream }, backupFile{}
@@ -49,20 +39,41 @@ void CoreTools::IFileStreamManagerTesting::MainTest()
     ASSERT_THROW_EXCEPTION_0(IFileStreamManagerBackupFileTest);
 }
 
+System::String CoreTools::IFileStreamManagerTesting::GetIFileStreamFileName()
+{
+    return SYSTEM_TEXT("Resource/StreamManagerTesting/IFileStreamManagerTest.txt");
+}
+
+System::String CoreTools::IFileStreamManagerTesting::GetIFileStreamFileContent()
+{
+    return SYSTEM_TEXT("IFileStreamManagerTest test text");
+}
+
 void CoreTools::IFileStreamManagerTesting::IFileStreamManagerSucceedTest()
 {
-    const auto ifStreamFileContent = GetIFileStreamFileContent();
+    const auto fileStreamFileContent = GetIFileStreamFileContent();
+
     IFileStreamManager manager{ GetIFileStreamFileName() };
     manager.SetSimplifiedChinese();
 
+    ASSERT_NOT_THROW_EXCEPTION_2(BackupFileTest, fileStreamFileContent, manager);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(StreamTest, manager);
+}
+
+void CoreTools::IFileStreamManagerTesting::BackupFileTest(const String& fileStreamFileContent, const IFileStreamManager& manager)
+{
     /// 备份两次
     backupFile = manager.BackupFile();
     backupFile = manager.BackupFile();
 
     /// 测试两次
-    ASSERT_EQUAL(manager.GetFileContent(), ifStreamFileContent);
-    ASSERT_EQUAL(manager.GetFileContent(), ifStreamFileContent);
+    ASSERT_EQUAL(manager.GetFileContent(), fileStreamFileContent);
+    ASSERT_EQUAL(manager.GetFileContent(), fileStreamFileContent);
+}
 
+void CoreTools::IFileStreamManagerTesting::StreamTest(IFileStreamManager& manager)
+{
     String result{};
     manager.GetFileStream() >> result;
 
@@ -74,8 +85,8 @@ void CoreTools::IFileStreamManagerTesting::IFileStreamManagerBackupFileTest()
     IFileStreamManager backupManager{ backupFile };
     backupManager.SetSimplifiedChinese();
 
-    const auto ifStreamFileContent = GetIFileStreamFileContent();
-    ASSERT_EQUAL(backupManager.GetFileContent(), ifStreamFileContent + ifStreamFileContent);
+    const auto content = GetIFileStreamFileContent();
+    ASSERT_EQUAL(backupManager.GetFileContent(), content + content);
 }
 
 void CoreTools::IFileStreamManagerTesting::IFileStreamManagerDeleteBackupFileTest()

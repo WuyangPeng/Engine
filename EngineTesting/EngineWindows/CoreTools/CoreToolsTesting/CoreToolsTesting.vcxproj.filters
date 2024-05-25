@@ -172,14 +172,8 @@
     <Filter Include="ModuleInitializerTerminatorSuite 头文件">
       <UniqueIdentifier>{1166d1cf-daa7-4206-95b5-733340ab658f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ModuleInitializerTerminatorSuite 源文件">
-      <UniqueIdentifier>{936ca48e-646a-4fb7-93ef-11455a55a12f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="NetworkSuite 头文件">
       <UniqueIdentifier>{9bf2d42a-e76c-4c16-84c2-4c9e6e476570}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NetworkSuite 源文件">
-      <UniqueIdentifier>{60d8ba4a-25db-44ab-8c7f-24431e1a36b4}</UniqueIdentifier>
     </Filter>
     <Filter Include="ObjectSystemsSuite 头文件">
       <UniqueIdentifier>{67cc10a3-4af1-46d4-b040-85cb31cae865}</UniqueIdentifier>
@@ -192,9 +186,6 @@
     </Filter>
     <Filter Include="ObjectSystemsSuite 头文件\Detail">
       <UniqueIdentifier>{2934f73d-1e9a-4ceb-a783-f6a0fcffe448}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PerformanceProfilerSuite 源文件">
-      <UniqueIdentifier>{1ed4ac38-4a40-457b-854d-91d6cf866484}</UniqueIdentifier>
     </Filter>
     <Filter Include="PerformanceProfilerSuite 头文件">
       <UniqueIdentifier>{1a0d59e6-6aac-403f-a6a8-4f3c041df127}</UniqueIdentifier>
@@ -234,9 +225,6 @@
     </Filter>
     <Filter Include="SyntacticParserSuite 头文件">
       <UniqueIdentifier>{0b694c85-6f67-40fb-a170-c6e4d671c18e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SyntacticParserSuite 源文件">
-      <UniqueIdentifier>{a11dad25-cafc-4e51-b952-93f3345be7d2}</UniqueIdentifier>
     </Filter>
     <Filter Include="TemplateToolsSuite 头文件">
       <UniqueIdentifier>{eaa1bf0e-94c3-4c08-bbf2-a017b524c00a}</UniqueIdentifier>
@@ -472,9 +460,6 @@
     <Filter Include="CoroutineSuite 头文件">
       <UniqueIdentifier>{0e45e068-a775-4235-9a8d-c7c3cb6a1de9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CoroutineSuite 源文件">
-      <UniqueIdentifier>{e1b20191-c643-422b-bb43-5d1f1f6427c9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="资源文件\OutputCodeTesting">
       <UniqueIdentifier>{ca7f6c4a-db74-4443-8592-f1f0a82c7355}</UniqueIdentifier>
     </Filter>
@@ -508,6 +493,9 @@
     <Filter Include="DataTypesSuite 源文件\Detail">
       <UniqueIdentifier>{9cae5691-2b7e-4817-87c3-f9717160e380}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FileManagerSuite 模板文件">
+      <UniqueIdentifier>{7a408f03-4bc1-4ddf-bf51-8ac9e610f1e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\BaseSuite.h">
@@ -537,7 +525,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandSuite.h">
       <Filter>CommandSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandTesting.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandHandleTesting.h">
       <Filter>CommandSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleColorsTesting.h">
@@ -555,10 +543,10 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheck32Testing.h">
       <Filter>CyclicRedundancyCheckSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCCITTTesting.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCcittTesting.h">
       <Filter>CyclicRedundancyCheckSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCCITTUsingTableTesting.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCcittUsingTableTesting.h">
       <Filter>CyclicRedundancyCheckSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckHandleTesting.h">
@@ -1962,6 +1950,21 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\Detail\VertexTest.h">
       <Filter>DataTypesSuite 头文件\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\YearTesting.h">
+      <Filter>TimeSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\MonthTesting.h">
+      <Filter>TimeSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DayTesting.h">
+      <Filter>TimeSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIO\BufferIOTesting.h">
+      <Filter>FileManagerSuite 头文件\BufferIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\GenerateRandomNameTestingDetail.h">
+      <Filter>FileManagerSuite 模板文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp">
@@ -2087,7 +2090,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleTesting.cpp">
       <Filter>ConsoleSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandTesting.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandHandleTesting.cpp">
       <Filter>CommandSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandArgumentTesting.cpp">
@@ -2102,10 +2105,10 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheck32Testing.cpp">
       <Filter>CyclicRedundancyCheckSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCCITTTesting.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCcittTesting.cpp">
       <Filter>CyclicRedundancyCheckSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCCITTUsingTableTesting.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCcittUsingTableTesting.cpp">
       <Filter>CyclicRedundancyCheckSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckHandleTesting.cpp">
@@ -3217,6 +3220,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\Detail\VertexTest.cpp">
       <Filter>DataTypesSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\YearTesting.cpp">
+      <Filter>TimeSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\MonthTesting.cpp">
+      <Filter>TimeSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DayTesting.cpp">
+      <Filter>TimeSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIO\BufferIOTesting.cpp">
+      <Filter>FileManagerSuite 源文件\BufferIO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -20,6 +20,8 @@ namespace CoreTools
         using ClassType = DeleteFileToolsTesting;
         using ParentType = UnitTest;
 
+        using String = System::String;
+
     public:
         explicit DeleteFileToolsTesting(const OStreamShared& stream);
 
@@ -29,6 +31,7 @@ namespace CoreTools
         void DoRunUnitTest() override;
         void MainTest();
 
+        void CreateFileTest(const String& fileName);
         void DeleteFileSucceedTest();
     };
 }

@@ -31,6 +31,10 @@ namespace CoreTools
 
         void InitTermTest();
 
+        void ExecuteInitializerTest();
+        void ExecuteTerminatorTest();
+        void InitTermAddTest();
+
         static void Initializer() noexcept;
         static void Terminator() noexcept;
 

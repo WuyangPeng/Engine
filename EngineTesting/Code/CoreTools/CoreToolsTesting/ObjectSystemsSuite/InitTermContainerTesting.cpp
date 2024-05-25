@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 17:26)
+/// 版本：1.0.0.9 (2024/05/23 17:01)
 
 #include "InitTermContainerTesting.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -37,21 +37,38 @@ void CoreTools::InitTermContainerTesting::MainTest()
 
     InitTermContainer initTermContainer{};
 
+    ASSERT_NOT_THROW_EXCEPTION_1(AddExecuteFunction0Test, initTermContainer);
+    ASSERT_NOT_THROW_EXCEPTION_1(Execute0Test, initTermContainer);
+    ASSERT_NOT_THROW_EXCEPTION_1(AddExecuteFunction1Test, initTermContainer);
+    ASSERT_NOT_THROW_EXCEPTION_1(Execute1Test, initTermContainer);
+}
+
+void CoreTools::InitTermContainerTesting::AddExecuteFunction0Test(InitTermContainer& initTermContainer)
+{
     initTermContainer.AddExecuteFunction(Initializer);
 
     ASSERT_FALSE(initializeCall);
     ASSERT_FALSE(terminateCall);
+}
 
+void CoreTools::InitTermContainerTesting::Execute0Test(InitTermContainer& initTermContainer)
+{
     initTermContainer.Execute();
 
     ASSERT_TRUE(initializeCall);
     ASSERT_FALSE(terminateCall);
+}
 
+void CoreTools::InitTermContainerTesting::AddExecuteFunction1Test(InitTermContainer& initTermContainer)
+{
     initTermContainer.AddExecuteFunction(Terminator);
 
     ASSERT_TRUE(initializeCall);
     ASSERT_FALSE(terminateCall);
+}
 
+void CoreTools::InitTermContainerTesting::Execute1Test(InitTermContainer& initTermContainer)
+{
     initTermContainer.Execute();
 
     ASSERT_TRUE(initializeCall);

@@ -34,6 +34,9 @@ namespace CoreTools
         void MainTest() override;
 
         void RttiTest() override;
+
+        void GetCurrentRttiTypeTest() override;
+        void GetRttiTypeTest() override;
     };
 }
 

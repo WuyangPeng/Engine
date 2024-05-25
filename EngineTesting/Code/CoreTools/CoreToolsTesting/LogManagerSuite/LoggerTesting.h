@@ -30,6 +30,7 @@ namespace CoreTools
         void MainTest();
 
         void BaseTest();
+        void DoBaseTest(const Logger& logger, LogLevel logLevel);
     };
 }
 

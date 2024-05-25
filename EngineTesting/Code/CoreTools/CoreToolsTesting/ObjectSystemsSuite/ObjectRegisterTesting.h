@@ -5,11 +5,15 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 16:53)
+/// 版本：1.0.0.9 (2024/05/24 15:12)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_SUITE_OBJECT_REGISTER_TESTING_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_SUITE_OBJECT_REGISTER_TESTING_H
 
+#include "Detail/BoolObject.h"
+#include "Detail/EnumObject.h"
+#include "CoreTools/ObjectSystems/Object.h"
+#include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,6 +30,10 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using ObjectAssociated = ObjectAssociated<Object>;
+        using WeakObjectAssociated = WeakObjectAssociated<Object>;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
@@ -35,6 +43,16 @@ namespace CoreTools
         void RegisterWeakObjectSucceedTest();
         void RegisterObjectContainerSucceedTest();
         void RegisterObjectArraySucceedTest();
+
+        void RegisterRootSucceedResultTest(const ObjectRegister& objectRegister);
+        void RegisterObjectSucceedResultTest(const ObjectRegister& objectRegister);
+        void RegisterWeakObjectSucceedResultTest(const ObjectRegister& objectRegister);
+        void RegisterObjectContainerSucceedResultTest(const ObjectRegister& objectRegister);
+        void RegisterObjectArraySucceedResultTest(const ObjectRegister& objectRegister);
+
+    private:
+        BoolObjectSharedPtr boolObject;
+        EnumObjectSharedPtr enumObject;
     };
 }
 

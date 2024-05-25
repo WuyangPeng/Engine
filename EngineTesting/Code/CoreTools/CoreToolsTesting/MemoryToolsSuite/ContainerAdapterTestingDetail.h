@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 15:59)
+/// 版本：1.0.0.9 (2024/05/14 20:48)
 
 #ifndef CORE_TOOLS_DATA_TYPES_SUITE_CONTAINER_ADAPTER_TESTING_DETAIL_H
 #define CORE_TOOLS_DATA_TYPES_SUITE_CONTAINER_ADAPTER_TESTING_DETAIL_H
@@ -14,18 +14,28 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Container, typename ElementType>
-ElementType CoreTools::ContainerAdapterTesting::ComputeAverage(const Container& container)
+ElementType CoreTools::ContainerAdapterTesting::ComputeSum(const Container& container)
 {
     using T = typename ElementType::value_type;
 
     ElementType average{ T{}, T{} };
-    for (auto& point : container)
+    for (const auto& point : container)
     {
         for (auto i = 0u; i < point.size(); ++i)
         {
             average.at(i) += point.at(i);
         }
     }
+
+    return average;
+}
+
+template <typename Container, typename ElementType>
+ElementType CoreTools::ContainerAdapterTesting::ComputeAverage(const Container& container)
+{
+    using T = typename ElementType::value_type;
+
+    auto average = ComputeSum(container);
 
     for (auto i = 0u; i < average.size(); ++i)
     {

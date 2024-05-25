@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_DATA_TYPES_SUITE_LOG_ASYNCHRONOUS_TESTING_H
 #define CORE_TOOLS_DATA_TYPES_SUITE_LOG_ASYNCHRONOUS_TESTING_H
 
+#include "CoreTools/LogManager/AppenderManager.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -28,6 +29,9 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using AppenderManagerSharedPtr = AppenderManager::AppenderManagerSharedPtr;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
@@ -35,6 +39,12 @@ namespace CoreTools
         void FileContentTest();
         void DeleteFileTest();
         void WriteMessageToDefaultFileTest();
+
+        void InitAppenderManager(const Appender& appender, const Logger& logger, AppenderManager& manager);
+        void RegisteredTest(const AppenderManagerSharedPtr& manager, LogLevel logLevel, const String& message);
+        void WriteMessageToFileRegisteredTest(const AppenderManagerSharedPtr& manager);
+        void WriteMessageToDefaultFileRegisteredTest(const AppenderManagerSharedPtr& manager);
+        void DefaultFileRegisteredTest(const AppenderManagerSharedPtr& manager, LogLevel logLevel, const String& message);
 
     private:
         String logAsynchronousTestingName;

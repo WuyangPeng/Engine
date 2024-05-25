@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/15 09:50)
+/// 版本：1.0.0.9 (2024/04/26 13:12)
 
 #include "ScopeExitTesting.h"
 #include "CoreTools/Contract/ScopeExitDetail.h"
@@ -35,11 +35,14 @@ void CoreTools::ScopeExitTesting::ScopeExitTest()
 {
     testValue = 0;
 
-    {
-        ScopeExit<FunctionType> scopeExit{ &ClassType::AddTestValue };
-    }
+    ASSERT_NOT_THROW_EXCEPTION_0(DoScopeExitTest);
 
     ASSERT_EQUAL(testValue, 1);
+}
+
+void CoreTools::ScopeExitTesting::DoScopeExitTest() noexcept
+{
+    ScopeExit<FunctionType> scopeExit{ &ClassType::AddTestValue };
 }
 
 void CoreTools::ScopeExitTesting::AddTestValue() noexcept

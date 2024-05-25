@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_TESTING_I_FILE_STREAM_MANAGER_TESTING_H
 #define CORE_TOOLS_TESTING_I_FILE_STREAM_MANAGER_TESTING_H
 
+#include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -39,6 +40,9 @@ namespace CoreTools
 
         static NODISCARD String GetIFileStreamFileName();
         static NODISCARD String GetIFileStreamFileContent();
+
+        void BackupFileTest(const String& fileStreamFileContent, const IFileStreamManager& manager);
+        void StreamTest(IFileStreamManager& manager);
 
     private:
         System::String backupFile;

@@ -40,17 +40,36 @@ void CoreTools::ReadFileManagerTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(GetFileByteSizeTest);
 }
 
+System::String CoreTools::ReadFileManagerTesting::GetFileName()
+{
+    return SYSTEM_TEXT("Resource/FileManagerTesting/ReadFileManagerTestingText.txt");
+}
+
+std::string CoreTools::ReadFileManagerTesting::GetFileContent()
+{
+    return "ReadFileManager Testing Text";
+}
+
 void CoreTools::ReadFileManagerTesting::WriteFileManagerTest()
 {
     WriteFileManager manager{ GetFileName() };
 
     const auto content = GetFileContent();
 
+    ASSERT_NOT_THROW_EXCEPTION_2(WriteSizeTest, manager, content);
+    ASSERT_NOT_THROW_EXCEPTION_2(SaveStdStringTest, manager, content);
+}
+
+void CoreTools::ReadFileManagerTesting::WriteSizeTest(WriteFileManager& manager, const std::string& content)
+{
     const auto size = content.size();
     manager.Write(sizeof(decltype(size)), &size);
 
     manager.Write(sizeof(char), size, content.data());
+}
 
+void CoreTools::ReadFileManagerTesting::SaveStdStringTest(WriteFileManager& manager, const std::string& content)
+{
     manager.SaveStdString(content);
 }
 
@@ -59,18 +78,34 @@ void CoreTools::ReadFileManagerTesting::ReadFileManagerTest()
     const auto content = GetFileContent();
     ReadFileManager manager{ GetFileName() };
 
+    const auto size = GetReadSize(manager, content);
+
+    ASSERT_NOT_THROW_EXCEPTION_3(ReadResultTest, manager, content, size);
+    ASSERT_NOT_THROW_EXCEPTION_2(LoadStdStringTest, manager, content);
+}
+
+void CoreTools::ReadFileManagerTesting::ReadResultTest(ReadFileManager& manager, const std::string& content, size_t size)
+{
+    BufferType buffer(size);
+    manager.Read(sizeof(char), size, buffer.data());
+
+    const std::string result{ buffer.begin(), buffer.end() };
+
+    ASSERT_EQUAL(result, content);
+}
+
+size_t CoreTools::ReadFileManagerTesting::GetReadSize(ReadFileManager& manager, const std::string& content)
+{
     size_t size{ 0 };
     manager.Read(sizeof(decltype(size)), &size);
 
     ASSERT_EQUAL(size, content.size());
 
-    std::vector<char> buffer(size);
-    manager.Read(sizeof(char), size, buffer.data());
+    return size;
+}
 
-    const std::string bufferContent{ buffer.begin(), buffer.end() };
-
-    ASSERT_EQUAL(bufferContent, content);
-
+void CoreTools::ReadFileManagerTesting::LoadStdStringTest(ReadFileManager& manager, const std::string& content)
+{
     const auto stdString = manager.LoadStdString();
     ASSERT_EQUAL(stdString, content);
 }
@@ -81,14 +116,4 @@ void CoreTools::ReadFileManagerTesting::GetFileByteSizeTest()
     const auto fineContent = GetFileContent();
 
     ASSERT_EQUAL(manager.GetFileByteSize(), boost::numeric_cast<int>(fineContent.size() + sizeof(size_t) + CoreTools::GetStreamSize(fineContent)));
-}
-
-System::String CoreTools::ReadFileManagerTesting::GetFileName()
-{
-    return SYSTEM_TEXT("Resource/FileManagerTesting/ReadFileManagerTestingText.txt");
-}
-
-std::string CoreTools::ReadFileManagerTesting::GetFileContent()
-{
-    return "ReadFileManager Testing Text";
 }

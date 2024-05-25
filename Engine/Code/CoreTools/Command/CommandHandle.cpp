@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/12 14:24)
+/// 版本：1.0.0.9 (2024/04/24 13:17)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,8 +20,8 @@ CoreTools::CommandHandle::CommandHandle(int argumentsNumber, char** arguments)
       large{ 0.0 },
       minSet{ false },
       maxSet{ false },
-      infSet{ false },
-      supSet{ false }
+      infimumSet{ false },
+      supremumSet{ false }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -32,8 +32,8 @@ CoreTools::CommandHandle::CommandHandle(const char* commandLine)
       large{ 0.0 },
       minSet{ false },
       maxSet{ false },
-      infSet{ false },
-      supSet{ false }
+      infimumSet{ false },
+      supremumSet{ false }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -67,22 +67,22 @@ CoreTools::CommandHandle& CoreTools::CommandHandle::SetMaxValue(double value) no
     return *this;
 }
 
-CoreTools::CommandHandle& CoreTools::CommandHandle::SetInfValue(double value) noexcept
+CoreTools::CommandHandle& CoreTools::CommandHandle::SetInfimumValue(double value) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     small = value;
-    infSet = true;
+    infimumSet = true;
 
     return *this;
 }
 
-CoreTools::CommandHandle& CoreTools::CommandHandle::SetSupValue(double value) noexcept
+CoreTools::CommandHandle& CoreTools::CommandHandle::SetSupremumValue(double value) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     large = value;
-    supSet = true;
+    supremumSet = true;
 
     return *this;
 }
@@ -152,7 +152,7 @@ std::string CoreTools::CommandHandle::GetFileName() const
 
 bool CoreTools::CommandHandle::IsArgumentOutOfRange(double value) const noexcept
 {
-    return (minSet && value < small) || (maxSet && large < value) || (infSet && value <= small) || (supSet && large <= value);
+    return (minSet && value < small) || (maxSet && large < value) || (infimumSet && value <= small) || (supremumSet && large <= value);
 }
 
 void CoreTools::CommandHandle::ClearBoundary() noexcept
@@ -161,8 +161,8 @@ void CoreTools::CommandHandle::ClearBoundary() noexcept
 
     minSet = false;
     maxSet = false;
-    infSet = false;
-    supSet = false;
+    infimumSet = false;
+    supremumSet = false;
     large = 0.0;
     small = 0.0;
 }

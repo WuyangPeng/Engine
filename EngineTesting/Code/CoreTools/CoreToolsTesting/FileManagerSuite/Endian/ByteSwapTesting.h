@@ -29,9 +29,16 @@ namespace CoreTools
         void DoRunUnitTest() override;
         void MainTest();
 
-        void ByteSwap2Test() noexcept;
-        void ByteSwap4Test() noexcept;
-        void ByteSwap8Test() noexcept;
+        void ByteSwap2Test();
+        void ByteSwap4Test();
+        void ByteSwap8Test();
+
+        void DoByteSwap2Test() noexcept;
+        void ByteSwap2Original() noexcept;
+        void DoByteSwap4Test() noexcept;
+        void ByteSwap4Original() noexcept;
+        void DoByteSwap8Test() noexcept;
+        void ByteSwap8Original() noexcept;
     };
 }
 

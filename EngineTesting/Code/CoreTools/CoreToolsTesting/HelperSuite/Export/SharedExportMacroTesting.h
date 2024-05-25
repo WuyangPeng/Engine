@@ -26,11 +26,17 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        static constexpr auto count = 10;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         template <typename T>
         void SharedExportTest();
+
+        template <typename T>
+        void CountTest(const T& lhs, const T& rhs, int lhsCount, int rhsCount);
     };
 }
 

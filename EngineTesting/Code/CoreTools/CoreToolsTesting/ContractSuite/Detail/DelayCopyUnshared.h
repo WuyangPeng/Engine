@@ -34,8 +34,10 @@ namespace CoreTools
 
         NODISCARD int GetCount() const noexcept;
         void SetCount(int count);
+
         NODISCARD int GetDereferenceCount() const noexcept;
         void SetDereferenceCount(int count);
+
         NODISCARD size_t GetAddress() const noexcept;
 
         static NODISCARD ImplSharedPtr Clone(const Impl& impl);

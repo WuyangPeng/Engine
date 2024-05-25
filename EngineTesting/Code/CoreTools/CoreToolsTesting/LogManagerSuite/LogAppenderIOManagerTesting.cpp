@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/18 22:05)
+/// 版本：1.0.0.9 (2024/05/11 14:08)
 
 #include "LogAppenderIOManagerTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
@@ -15,7 +15,7 @@
 #include "CoreTools/FileManager/DeleteFileTools.h"
 #include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/LogManager/Appender.h"
 #include "CoreTools/LogManager/AppenderManager.h"

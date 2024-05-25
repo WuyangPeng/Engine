@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_TESTING_O_FILE_STREAM_MANAGER_TESTING_H
 #define CORE_TOOLS_TESTING_O_FILE_STREAM_MANAGER_TESTING_H
 
+#include "CoreTools/FileManager/OFileStreamManager.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -35,6 +36,9 @@ namespace CoreTools
         void OFileStreamManagerSizeTest();
         static NODISCARD String GetOFileStreamFileName();
         static NODISCARD String GetOFileStreamFileContent();
+
+        void OriginalSizeTest(const OFileStreamManager& manager, const String& fileStreamFileContent);
+        void ExpansionSizeTest(OFileStreamManager& manager, const String& fileStreamFileContent);
     };
 }
 

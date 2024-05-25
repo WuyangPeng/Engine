@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 15:30)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/05/19 19:51)
 
 #include "TelegramMessageManagerTesting.h"
 #include "Detail/Entity.h"
@@ -25,17 +25,17 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, TelegramMessageManagerTesting)
 
 void CoreTools::TelegramMessageManagerTesting::DoRunUnitTest()
 {
+    EntityManager::Create();
+
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+
+    EntityManager::Destroy();
 }
 
 void CoreTools::TelegramMessageManagerTesting::MainTest()
 {
-    EntityManager::Create();
-
     ASSERT_NOT_THROW_EXCEPTION_0(AllEventTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SpecifiedEventTest);
-
-    EntityManager::Destroy();
 }
 
 void CoreTools::TelegramMessageManagerTesting::AllEventTest()
@@ -44,33 +44,50 @@ void CoreTools::TelegramMessageManagerTesting::AllEventTest()
 
     ASSERT_EQUAL(entity->GetValue(), 1);
 
-    CallbackParameters callbackParameters{ 0 };
-    callbackParameters.SetValue(0, 10);
+    const auto telegram = GetTelegram();
 
-    const Telegram<> telegram{ 1, 3, 2, callbackParameters };
-
-    TelegramMessageManager<> telegramMessageManager{ 5 };
+    TelegramMessageManager telegramMessageManager{ 5 };
 
     ASSERT_TRUE(telegramMessageManager.RegisterAllEvent(entity->GetEntityId()));
 
-    // 只会产生一次事件
-    telegramMessageManager.CallEvent(telegram);
-    telegramMessageManager.CallEvent(telegram);
-    telegramMessageManager.CallEvent(telegram);
+    ASSERT_NOT_THROW_EXCEPTION_2(CallEventTest, telegramMessageManager, telegram);
 
-    ASSERT_EQUAL(entity->GetValue(), 1);
+    ASSERT_NOT_THROW_EXCEPTION_3(DoAllEventTest, *entity, telegram, telegramMessageManager);
+}
 
-    telegramMessageManager.DispatchDelayEvent(5);
-
-    ASSERT_EQUAL(entity->GetValue(), 11);
-
-    ASSERT_TRUE(telegramMessageManager.UnRegisterAllEvent(entity->GetEntityId()));
-
-    telegramMessageManager.CallEvent(telegram);
+void CoreTools::TelegramMessageManagerTesting::DoAllEventTest(const Entity& entity, const TelegramType& telegram, TelegramMessageManagerType& telegramMessageManager)
+{
+    ASSERT_EQUAL(entity.GetValue(), 1);
 
     telegramMessageManager.DispatchDelayEvent(5);
 
-    ASSERT_EQUAL(entity->GetValue(), 11);
+    ASSERT_EQUAL(entity.GetValue(), 11);
+
+    ASSERT_TRUE(telegramMessageManager.UnRegisterAllEvent(entity.GetEntityId()));
+
+    telegramMessageManager.CallEvent(telegram);
+
+    telegramMessageManager.DispatchDelayEvent(5);
+
+    ASSERT_EQUAL(entity.GetValue(), 11);
+}
+
+CoreTools::TelegramMessageManagerTesting::TelegramType CoreTools::TelegramMessageManagerTesting::GetTelegram()
+{
+    CallbackParameters callbackParameters{ 0 };
+    callbackParameters.SetValue(0, 10);
+
+    const TelegramType telegram{ 1, 3, 2, callbackParameters };
+
+    return telegram;
+}
+
+void CoreTools::TelegramMessageManagerTesting::CallEventTest(TelegramMessageManagerType& telegramMessageManager, const TelegramType& telegram) const
+{
+    /// 只会产生一次事件
+    telegramMessageManager.CallEvent(telegram);
+    telegramMessageManager.CallEvent(telegram);
+    telegramMessageManager.CallEvent(telegram);
 }
 
 void CoreTools::TelegramMessageManagerTesting::SpecifiedEventTest()
@@ -79,52 +96,67 @@ void CoreTools::TelegramMessageManagerTesting::SpecifiedEventTest()
 
     ASSERT_EQUAL(entity->GetValue(), 1);
 
-    CallbackParameters callbackParameters{ 0 };
-    callbackParameters.SetValue(0, 10);
+    const auto telegram = GetTelegram();
 
-    const Telegram<> telegram0{ 1, entity->GetEntityId(), 3, 2, callbackParameters };
-
-    TelegramMessageManager<> telegramMessageManager{ 5 };
+    TelegramMessageManager telegramMessageManager{ 5 };
 
     ASSERT_TRUE(telegramMessageManager.Register(3, entity->GetEntityId()));
 
-    // 只会产生一次事件
-    telegramMessageManager.CallEvent(telegram0);
-    telegramMessageManager.CallEvent(telegram0);
-    telegramMessageManager.CallEvent(telegram0);
+    ASSERT_NOT_THROW_EXCEPTION_2(CallEventTest, telegramMessageManager, telegram);
 
-    ASSERT_EQUAL(entity->GetValue(), 1);
+    ASSERT_NOT_THROW_EXCEPTION_2(DispatchDelayEventTest, *entity, telegramMessageManager);
+
+    ASSERT_NOT_THROW_EXCEPTION_2(DoCallEvent0Test, *entity, telegramMessageManager);
+
+    ASSERT_NOT_THROW_EXCEPTION_3(DoCallEvent1Test, *entity, telegram, telegramMessageManager);
+}
+
+void CoreTools::TelegramMessageManagerTesting::DoCallEvent0Test(const Entity& entity, TelegramMessageManagerType& telegramMessageManager)
+{
+    CallbackParameters callbackParameters{ 0 };
+    callbackParameters.SetValue(0, 10);
+
+    const Telegram telegram{ 1, entity.GetEntityId() + 1, 3, 2, callbackParameters };
+
+    telegramMessageManager.CallEvent(telegram);
 
     telegramMessageManager.DispatchDelayEvent(5);
 
-    ASSERT_EQUAL(entity->GetValue(), 11);
+    ASSERT_EQUAL(entity.GetValue(), 11);
+}
 
-    const Telegram<> telegram1{ 1, entity->GetEntityId() + 1, 3, 2, callbackParameters };
+void CoreTools::TelegramMessageManagerTesting::DoCallEvent1Test(const Entity& entity, const TelegramType& telegram0, TelegramMessageManagerType& telegramMessageManager)
+{
+    CallbackParameters callbackParameters{ 0 };
+    callbackParameters.SetValue(0, 10);
 
+    const Telegram telegram1{ 1, entity.GetEntityId(), 3, 8, callbackParameters };
+
+    telegramMessageManager.CallEventImmediately(9, telegram1);
+
+    ASSERT_EQUAL(entity.GetValue(), 21);
+
+    telegramMessageManager.CallEvent(telegram0);
     telegramMessageManager.CallEvent(telegram1);
-
-    telegramMessageManager.DispatchDelayEvent(5);
-
-    ASSERT_EQUAL(entity->GetValue(), 11);
-
-    const Telegram<> telegram2{ 1, entity->GetEntityId(), 3, 8, callbackParameters };
-
-    telegramMessageManager.CallEventImmediately(9, telegram2);
-
-    ASSERT_EQUAL(entity->GetValue(), 21);
-
-    telegramMessageManager.CallEvent(telegram0);
-    telegramMessageManager.CallEvent(telegram2);
 
     telegramMessageManager.DispatchDelayEvent(9);
 
-    ASSERT_EQUAL(entity->GetValue(), 41);
+    ASSERT_EQUAL(entity.GetValue(), 41);
 
-    ASSERT_TRUE(telegramMessageManager.UnRegister(3, entity->GetEntityId()));
+    ASSERT_TRUE(telegramMessageManager.UnRegister(3, entity.GetEntityId()));
 
     telegramMessageManager.CallEvent(telegram0);
 
     telegramMessageManager.DispatchDelayEvent(5);
 
-    ASSERT_EQUAL(entity->GetValue(), 41);
+    ASSERT_EQUAL(entity.GetValue(), 41);
+}
+
+void CoreTools::TelegramMessageManagerTesting::DispatchDelayEventTest(const Entity& entity, TelegramMessageManagerType& telegramMessageManager)
+{
+    ASSERT_EQUAL(entity.GetValue(), 1);
+
+    telegramMessageManager.DispatchDelayEvent(5);
+
+    ASSERT_EQUAL(entity.GetValue(), 11);
 }

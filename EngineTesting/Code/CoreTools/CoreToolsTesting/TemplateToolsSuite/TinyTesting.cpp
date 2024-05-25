@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:35)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/04/23 12:40)
 
 #include "TinyTesting.h"
 #include "Detail/TinyTest.h"
@@ -13,6 +13,10 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/Tiny.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
+#define TINY_COMPILE_ERROR
+
+#undef TINY_COMPILE_ERROR
 
 CoreTools::TinyTesting::TinyTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -89,11 +93,11 @@ void CoreTools::TinyTesting::PushBackTest() noexcept
     using Tiny5 = boost::mpl::push_back<Tiny4, int>::type;
     using Tiny6 = boost::mpl::push_back<Tiny2, long>::type;
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
     using InvalidTiny = boost::mpl::push_back<Tiny3, int>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
 
     BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny5, Tiny2>::type::value));
     BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny6, Tiny3>::type::value));
@@ -129,11 +133,11 @@ void CoreTools::TinyTesting::PushFrontTest() noexcept
     using Tiny5 = boost::mpl::push_front<Tiny1, const long>::type;
     using Tiny6 = boost::mpl::push_front<Tiny2, unsigned short&>::type;
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
     using InvalidTiny = boost::mpl::push_front<Tiny3, int>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
 
     BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny4, Tiny1>::type::value));
     BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny5, Tiny2>::type::value));
@@ -146,45 +150,45 @@ void CoreTools::TinyTesting::EmptyTest() noexcept
 
     MAYBE_UNUSED TinyTest<Tiny0>::type tiny0;
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
     using InvalidType0 = boost::mpl::at<Tiny0, TinyZero>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
 
     using Beg = boost::mpl::begin<Tiny0>::type;
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
     using InvalidType1 = boost::mpl::next<Beg>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
     using InvalidType2 = boost::mpl::deref<Beg>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
 
     using End = boost::mpl::end<Tiny0>::type;
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
     using InvalidType3 = boost::mpl::prior<End>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
     using InvalidType4 = boost::mpl::advance<Beg, TinyOne>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
     using InvalidType5 = boost::mpl::advance<End, boost::mpl::int_<-1>>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
 }
 
 void CoreTools::TinyTesting::IteratorTest() noexcept
@@ -214,11 +218,11 @@ void CoreTools::TinyTesting::IteratorTest() noexcept
 
         using TinyIterator6 = TinyIterator<TinyIterator5, TinyZero>;
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
         using InvalidTinyIterator = boost::mpl::insert<TinyIterator5, TinyIterator6, bool>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
     }
 
     {
@@ -231,11 +235,11 @@ void CoreTools::TinyTesting::IteratorTest() noexcept
         BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator3, Tiny<int, char, long>>::type::value));
         using TinyIterator4 = TinyIterator<TinyIterator3, TinyOne>;
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
         using InvalidTinyIterator = boost::mpl::insert<TinyIterator3, TinyIterator4, bool>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
     }
 
     {
@@ -244,11 +248,11 @@ void CoreTools::TinyTesting::IteratorTest() noexcept
         BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator1, Tiny<char*, const long, long>>::type::value));
         using TinyIterator2 = TinyIterator<TinyIterator1, TinyTwo>;
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
         using InvalidTinyIterator = boost::mpl::insert<TinyIterator1, TinyIterator2, char>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
     }
 
     {
@@ -259,11 +263,11 @@ void CoreTools::TinyTesting::IteratorTest() noexcept
         using Tiny6 = boost::mpl::pop_front<Tiny1>::type;
         BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny6, Tiny<>>::type::value));
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
         using InvalidType = boost::mpl::pop_front<Tiny0>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
     }
 
     {
@@ -274,11 +278,11 @@ void CoreTools::TinyTesting::IteratorTest() noexcept
         using Tiny6 = boost::mpl::pop_back<Tiny1>::type;
         BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny6, Tiny<>>::type::value));
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
         using InvalidType = boost::mpl::pop_back<Tiny6>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
     }
 }
 
@@ -320,11 +324,11 @@ void CoreTools::TinyTesting::EraseTest() noexcept
 
         using TinyIterator2 = TinyIterator<Tiny2, TinyTwo>;
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
         using Invalid = boost::mpl::erase<Tiny2, TinyIterator2>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
     }
 
     {
@@ -334,21 +338,21 @@ void CoreTools::TinyTesting::EraseTest() noexcept
 
         using TinyIterator1 = TinyIterator<Tiny1, TinyOne>;
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
         using Invalid = boost::mpl::erase<Tiny1, TinyIterator1>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
     }
 
     {
         using TinyIterator0 = TinyIterator<Tiny0, TinyZero>;
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
         using Invalid = boost::mpl::erase<Tiny0, TinyIterator0>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
     }
 
     {
@@ -357,11 +361,11 @@ void CoreTools::TinyTesting::EraseTest() noexcept
         using TinyIterator2 = TinyIterator<Tiny3, TinyTwo>;
         using TinyIterator3 = TinyIterator<Tiny3, TinyThree>;
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
         using Invalid0 = boost::mpl::erase<Tiny3, TinyIterator0, TinyIterator0>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
 
         using Erase0 = boost::mpl::erase<Tiny3, TinyIterator0, TinyIterator1>::type;
         BOOST_STATIC_ASSERT((boost::mpl::equal<Erase0, Tiny<const long, char*>>::type::value));
@@ -372,11 +376,11 @@ void CoreTools::TinyTesting::EraseTest() noexcept
         using Erase2 = boost::mpl::erase<Tiny3, TinyIterator0, TinyIterator3>::type;
         BOOST_STATIC_ASSERT((boost::mpl::equal<Erase2, Tiny<>>::type::value));
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
         using Invalid1 = boost::mpl::erase<Tiny3, TinyIterator1, TinyIterator1>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
 
         using Erase3 = boost::mpl::erase<Tiny3, TinyIterator1, TinyIterator2>::type;
         BOOST_STATIC_ASSERT((boost::mpl::equal<Erase3, Tiny<unsigned short&, char*>>::type::value));
@@ -384,11 +388,11 @@ void CoreTools::TinyTesting::EraseTest() noexcept
         using Erase4 = boost::mpl::erase<Tiny3, TinyIterator1, TinyIterator3>::type;
         BOOST_STATIC_ASSERT((boost::mpl::equal<Erase4, Tiny<unsigned short&>>::type::value));
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
         using Invalid2 = boost::mpl::erase<Tiny3, TinyIterator2, TinyIterator2>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
 
         using Erase5 = boost::mpl::erase<Tiny3, TinyIterator2, TinyIterator3>::type;
         BOOST_STATIC_ASSERT((boost::mpl::equal<Erase5, Tiny<unsigned short&, const long>>::type::value));
@@ -406,26 +410,26 @@ void CoreTools::TinyTesting::EraseTest() noexcept
         using Erase1 = boost::mpl::erase<Tiny2, TinyIterator0, TinyIterator2>::type;
         BOOST_STATIC_ASSERT((boost::mpl::equal<Erase1, Tiny<>>::type::value));
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
         using Invalid0 = boost::mpl::erase<Tiny3, TinyIterator0, TinyIterator3>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
 
         using Erase2 = boost::mpl::erase<Tiny2, TinyIterator1, TinyIterator2>::type;
         BOOST_STATIC_ASSERT((boost::mpl::equal<Erase2, Tiny<const long>>::type::value));
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
         using Invalid1 = boost::mpl::erase<Tiny2, TinyIterator1, TinyIterator3>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
         using Invalid2 = boost::mpl::erase<Tiny2, TinyIterator2, TinyIterator3>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
     }
 
     {
@@ -436,27 +440,27 @@ void CoreTools::TinyTesting::EraseTest() noexcept
         using e0 = boost::mpl::erase<Tiny1, TinyIterator0, TinyIterator1>::type;
         BOOST_STATIC_ASSERT((boost::mpl::equal<e0, Tiny<>>::type::value));
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
         using Invalid0 = boost::mpl::erase<Tiny1, TinyIterator0, TinyIterator2>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
         using Invalid1 = boost::mpl::erase<Tiny1, TinyIterator1, TinyIterator2>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
     }
 
     {
         using TinyIterator0 = TinyIterator<Tiny0, TinyZero>;
         using TinyIterator1 = TinyIterator<Tiny0, TinyOne>;
 
-#if 0  // 这里应该产生编译错误。
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
         using Invalid = boost::mpl::erase<Tiny0, TinyIterator0, TinyIterator1>::type;
 
-#endif  // 0
+#endif  // TINY_COMPILE_ERROR
     }
 }

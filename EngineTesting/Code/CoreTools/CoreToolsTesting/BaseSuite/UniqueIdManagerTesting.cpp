@@ -14,6 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
+using System::operator++;
+
 CoreTools::UniqueIdManagerTesting::UniqueIdManagerTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -29,60 +31,99 @@ void CoreTools::UniqueIdManagerTesting::DoRunUnitTest()
 
 void CoreTools::UniqueIdManagerTesting::MainTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(DefaultUniqueIdManagerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(UniqueIdManagerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(EnumUniqueIdManagerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SetUniqueIdTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(EnumSetUniqueIdTest);
 }
 
-void CoreTools::UniqueIdManagerTesting::UniqueIdManagerTest()
+void CoreTools::UniqueIdManagerTesting::DefaultUniqueIdManagerTest()
 {
     const auto defaultUniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextDefaultUniqueId();
     ASSERT_LESS(0, defaultUniqueId);
 
     ASSERT_EQUAL(UNIQUE_ID_MANAGER_SINGLETON.NextDefaultUniqueId(), defaultUniqueId + 1);
+}
 
-    auto uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(0);
+void CoreTools::UniqueIdManagerTesting::UniqueIdManagerTest()
+{
+    for (auto index = 0; index < System::EnumCastUnderlying(UniqueIdSelect::Max); ++index)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_1(DoUniqueIdManagerTest, index);
+    }
+}
+
+void CoreTools::UniqueIdManagerTesting::DoUniqueIdManagerTest(int index)
+{
+    const auto uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(index);
     ASSERT_LESS(0, uniqueId);
 
-    ASSERT_EQUAL(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(0), uniqueId + 1);
+    ASSERT_EQUAL(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(index), uniqueId + 1);
+}
 
-    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(1);
+void CoreTools::UniqueIdManagerTesting::EnumUniqueIdManagerTest()
+{
+    for (auto index = UniqueIdSelect::Default; index < UniqueIdSelect::Max; ++index)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_1(DoEnumUniqueIdManagerTest, index);
+    }
+}
+
+void CoreTools::UniqueIdManagerTesting::DoEnumUniqueIdManagerTest(UniqueIdSelect index)
+{
+    const auto uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(index);
     ASSERT_LESS(0, uniqueId);
 
-    ASSERT_EQUAL(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(1), uniqueId + 1);
-
-    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::Entity);
-    ASSERT_LESS(0, uniqueId);
-
-    ASSERT_EQUAL(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::Entity), uniqueId + 1);
+    ASSERT_EQUAL(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(index), uniqueId + 1);
 }
 
 void CoreTools::UniqueIdManagerTesting::SetUniqueIdTest()
 {
-    auto uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(0);
+    for (auto index = 0; index < System::EnumCastUnderlying(UniqueIdSelect::Max); ++index)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_1(DoSetUniqueIdTest, index);
+    }
+}
+
+void CoreTools::UniqueIdManagerTesting::DoSetUniqueIdTest(int index)
+{
+    auto uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(index);
     ASSERT_LESS(0, uniqueId);
 
-    auto initUniqueId = uniqueId + 100;
-    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueId(0, initUniqueId);
+    const auto initUniqueId = uniqueId + step;
+    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueId(index, initUniqueId);
 
-    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(0);
+    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(index);
     ASSERT_EQUAL(uniqueId, initUniqueId + 1);
 
-    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueId(0, 99);
+    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueId(index, step - 1);
 
-    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(0);
+    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(index);
     ASSERT_EQUAL(uniqueId, initUniqueId + 2);
+}
 
-    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::Entity);
+void CoreTools::UniqueIdManagerTesting::EnumSetUniqueIdTest()
+{
+    for (auto index = UniqueIdSelect::Default; index < UniqueIdSelect::Max; ++index)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_1(DoEnumSetUniqueIdTest, index);
+    }
+}
+
+void CoreTools::UniqueIdManagerTesting::DoEnumSetUniqueIdTest(UniqueIdSelect index)
+{
+    auto uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(index);
     ASSERT_LESS(0, uniqueId);
 
-    initUniqueId = uniqueId + 110;
-    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueId(UniqueIdSelect::Entity, initUniqueId);
+    const auto initUniqueId = uniqueId + nextStep;
+    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueId(index, initUniqueId);
 
-    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::Entity);
+    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(index);
     ASSERT_EQUAL(uniqueId, initUniqueId + 1);
 
-    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueId(UniqueIdSelect::Entity, 105);
+    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueId(index, nextStep - 5);
 
-    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::Entity);
+    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(index);
     ASSERT_EQUAL(uniqueId, initUniqueId + 2);
 }

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/19 14:46)
+/// 版本：1.0.0.9 (2024/04/26 17:18)
 
 #include "MinHeapRecordTesting.h"
 #include "Detail/VertexTest.h"
@@ -64,39 +64,59 @@ void CoreTools::MinHeapRecordTesting::MinHeapRecordTest()
 
 void CoreTools::MinHeapRecordTesting::SetMinHeapRecordTest()
 {
-    MinHeapRecord<VertexTest, double> minHeapRecord{};
+    TestingType minHeapRecord{};
 
+    ASSERT_NOT_THROW_EXCEPTION_1(IndexTest, minHeapRecord);
+    ASSERT_NOT_THROW_EXCEPTION_1(HandleZeroTest, minHeapRecord);
+    ASSERT_NOT_THROW_EXCEPTION_1(HandleEqualTest, minHeapRecord);
+    ASSERT_NOT_THROW_EXCEPTION_1(WeightTest, minHeapRecord);
+    ASSERT_NOT_THROW_EXCEPTION_1(RecordTest, minHeapRecord);
+}
+
+void CoreTools::MinHeapRecordTesting::IndexTest(TestingType& minHeapRecord)
+{
     ASSERT_EQUAL(minHeapRecord.GetIndex(), -1);
 
     minHeapRecord.SetIndex(1);
     ASSERT_EQUAL(minHeapRecord.GetIndex(), 1);
+}
 
-    const VertexTest vertexTest0{ 0, 1, 2 };
-
+void CoreTools::MinHeapRecordTesting::HandleZeroTest(const TestingType& minHeapRecord)
+{
     ASSERT_EQUAL(minHeapRecord.GetHandle().GetCurrent(), 0);
     ASSERT_EQUAL(minHeapRecord.GetHandle().GetNext(), 0);
     ASSERT_EQUAL(minHeapRecord.GetHandle().GetPrevious(), 0);
+}
 
-    minHeapRecord.SetHandle(vertexTest0);
+void CoreTools::MinHeapRecordTesting::HandleEqualTest(TestingType& minHeapRecord)
+{
+    const VertexTest vertexTest{ 0, 1, 2 };
+    minHeapRecord.SetHandle(vertexTest);
 
     const auto handle0 = minHeapRecord.GetHandle();
-    ASSERT_EQUAL(handle0.GetCurrent(), vertexTest0.GetCurrent());
-    ASSERT_EQUAL(handle0.GetNext(), vertexTest0.GetNext());
-    ASSERT_EQUAL(handle0.GetPrevious(), vertexTest0.GetPrevious());
+    ASSERT_EQUAL(handle0.GetCurrent(), vertexTest.GetCurrent());
+    ASSERT_EQUAL(handle0.GetNext(), vertexTest.GetNext());
+    ASSERT_EQUAL(handle0.GetPrevious(), vertexTest.GetPrevious());
+}
 
+void CoreTools::MinHeapRecordTesting::WeightTest(TestingType& minHeapRecord)
+{
     ASSERT_APPROXIMATE_DOUBLE_ZERO(minHeapRecord.GetWeight());
 
     minHeapRecord.SetWeight(2.0);
     ASSERT_APPROXIMATE(minHeapRecord.GetWeight(), 2.0, Mathematics::MathD::GetZeroTolerance());
+}
 
-    const VertexTest vertexTest1{ 1, 2, 3 };
+void CoreTools::MinHeapRecordTesting::RecordTest(TestingType& minHeapRecord)
+{
+    const VertexTest vertexTest{ 1, 2, 3 };
 
-    minHeapRecord.SetRecord(3, vertexTest1, 5.0);
+    minHeapRecord.SetRecord(3, vertexTest, 5.0);
 
     const auto handle1 = minHeapRecord.GetHandle();
     ASSERT_EQUAL(minHeapRecord.GetIndex(), 3);
-    ASSERT_EQUAL(handle1.GetCurrent(), vertexTest1.GetCurrent());
-    ASSERT_EQUAL(handle1.GetNext(), vertexTest1.GetNext());
-    ASSERT_EQUAL(handle1.GetPrevious(), vertexTest1.GetPrevious());
+    ASSERT_EQUAL(handle1.GetCurrent(), vertexTest.GetCurrent());
+    ASSERT_EQUAL(handle1.GetNext(), vertexTest.GetNext());
+    ASSERT_EQUAL(handle1.GetPrevious(), vertexTest.GetPrevious());
     ASSERT_APPROXIMATE(minHeapRecord.GetWeight(), 5.0, Mathematics::MathD::GetZeroTolerance());
 }

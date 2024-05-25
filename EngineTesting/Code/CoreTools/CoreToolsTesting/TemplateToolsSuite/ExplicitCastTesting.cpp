@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:33)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/04/23 12:35)
 
 #include "ExplicitCastTesting.h"
 #include "Detail/ExplicitCastTest.h"
@@ -14,6 +14,10 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/ExplicitCastDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
+#define EXPLICIT_CAST_COMPILE_ERROR
+
+#undef EXPLICIT_CAST_COMPILE_ERROR
 
 CoreTools::ExplicitCastTesting::ExplicitCastTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -41,23 +45,23 @@ void CoreTools::ExplicitCastTesting::CastTest()
     StringTest(ExplicitCast<const std::string&>(explicitCastTest));
     PtrTest(ExplicitCast<const std::string*>(explicitCastTest));
 
-#if 0  // 这里应该产生编译错误。
+#ifdef EXPLICIT_CAST_COMPILE_ERROR  // 这里应该产生编译错误。
 
     IntegerTest(explicitCastTest);
 
-#endif  // 0
+#endif  // EXPLICIT_CAST_COMPILE_ERROR
 
-#if 0  // 这里应该产生编译错误。
+#ifdef EXPLICIT_CAST_COMPILE_ERROR  // 这里应该产生编译错误。
 
     StringTest(explicitCastTest);
 
-#endif  // 0
+#endif  // EXPLICIT_CAST_COMPILE_ERROR
 
-#if 0  // 这里应该产生编译错误。
+#ifdef EXPLICIT_CAST_COMPILE_ERROR  // 这里应该产生编译错误。
 
     PtrTest(explicitCastTest);
 
-#endif  // 0
+#endif  // EXPLICIT_CAST_COMPILE_ERROR
 }
 
 void CoreTools::ExplicitCastTesting::IntegerTest(int value)

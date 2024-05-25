@@ -27,14 +27,14 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using ThreadSafeQueueType = ThreadSafeQueue<int>;
+        static constexpr auto maxNumElements = 100;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void ThreadSafeQueueTest();
-
-    private:
-        using ThreadSafeQueueType = ThreadSafeQueue<int>;
-        static constexpr auto maxNumElements = 100;
 
     private:
         ThreadSafeQueueType threadSafeQueue;

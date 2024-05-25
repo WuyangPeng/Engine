@@ -31,6 +31,11 @@ namespace CoreTools
         {
         }
 
+        explicit ObjectAssociated(int64_t associated) noexcept
+            : object{ nullptr }, associated{ associated }
+        {
+        }
+
         ObjectAssociated(ObjectSharedPtr object, const int64_t associated) noexcept
             : object{ std::move(object) }, associated{ associated }
         {

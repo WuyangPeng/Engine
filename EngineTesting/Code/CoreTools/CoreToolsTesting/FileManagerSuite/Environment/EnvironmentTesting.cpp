@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 16:43)
+/// 版本：1.0.0.9 (2024/04/30 23:44)
 
 #include "EnvironmentTesting.h"
 #include "CoreTools/FileManager/Environment.h"
@@ -89,21 +89,21 @@ void CoreTools::EnvironmentTesting::GetPathReadingFailureTest()
     environment.EraseAllDirectories();
 
     const auto environmentFileName = GetEnvironmentFileName();
-    MAYBE_UNUSED auto result = environment.GetPathReading(environmentFileName);
+    std::ignore = environment.GetPathReading(environmentFileName);
 }
 
-void CoreTools::EnvironmentTesting::GetPathWritingFailureTest()
+void CoreTools::EnvironmentTesting::GetPathWritingFailureTest() const
 {
     WriteFileManager manager{ GetEnvironmentPathFileName() };
 
     const auto environmentFileName = GetEnvironmentFileName();
-    MAYBE_UNUSED auto result = environment.GetPathWriting(environmentFileName);
+    std::ignore = environment.GetPathWriting(environmentFileName);
 }
 
-void CoreTools::EnvironmentTesting::GetPathReadingAndWritingFailureTest()
+void CoreTools::EnvironmentTesting::GetPathReadingAndWritingFailureTest() const
 {
     WriteFileManager manager{ GetEnvironmentPathFileName() };
 
     const auto environmentFileName = GetEnvironmentFileName();
-    MAYBE_UNUSED auto result = environment.GetPathReadingAndWriting(environmentFileName);
+    std::ignore = environment.GetPathReadingAndWriting(environmentFileName);
 }

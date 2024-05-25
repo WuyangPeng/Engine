@@ -5,10 +5,11 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 14:51)
+/// 版本：1.0.0.9 (2024/04/23 21:15)
 
 #include "CaseInsensitiveStringIOStreamTesting.h"
 #include "CoreTools/CharacterString/CaseInsensitiveStringDetail.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -29,13 +30,17 @@ void CoreTools::CaseInsensitiveStringIOStreamTesting::DoRunUnitTest()
 void CoreTools::CaseInsensitiveStringIOStreamTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(WStreamTest);
 }
 
 void CoreTools::CaseInsensitiveStringIOStreamTesting::StreamTest()
 {
     const CaseInsensitiveString string0{ "stRinG" };
-    GetStream() << string0 << "\n";
+    GetStream() << string0 << '\n';
+}
 
+void CoreTools::CaseInsensitiveStringIOStreamTesting::WStreamTest()
+{
     const CaseInsensitiveWString string1{ L"STRiNG" };
-    GetStream() << string1 << "\n";
+    GetStream() << string1 << '\n';
 }

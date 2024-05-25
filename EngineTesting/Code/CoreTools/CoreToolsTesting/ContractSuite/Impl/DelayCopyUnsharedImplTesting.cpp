@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/15 10:21)
+/// 版本：1.0.0.9 (2024/04/25 22:08)
 
 #include "DelayCopyUnsharedImplTesting.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
@@ -36,66 +36,60 @@ void CoreTools::DelayCopyUnsharedImplTesting::MainTest()
 
 void CoreTools::DelayCopyUnsharedImplTesting::DefaultTest()
 {
-    constexpr auto count = 10;
     DelayCopyUnshared delayCopyUnsharedImpl0{ count };
-
     ASSERT_EQUAL(delayCopyUnsharedImpl0.GetDereferenceCount(), count);
 
     const auto delayCopyUnsharedImpl1 = delayCopyUnsharedImpl0;
+    ASSERT_NOT_THROW_EXCEPTION_2(AddressEqualTest, delayCopyUnsharedImpl0, delayCopyUnsharedImpl1);
 
-    ASSERT_EQUAL(delayCopyUnsharedImpl1.GetCount(), count);
-    ASSERT_EQUAL(delayCopyUnsharedImpl0.GetAddress(), delayCopyUnsharedImpl1.GetAddress());
-
-    delayCopyUnsharedImpl0.SetDereferenceCount(1);
-
-    ASSERT_UNEQUAL(delayCopyUnsharedImpl0.GetAddress(), delayCopyUnsharedImpl1.GetAddress());
-    ASSERT_EQUAL(delayCopyUnsharedImpl0.GetCount(), 1);
-    ASSERT_EQUAL(delayCopyUnsharedImpl1.GetCount(), count);
+    delayCopyUnsharedImpl0.SetDereferenceCount(modify);
+    ASSERT_NOT_THROW_EXCEPTION_2(AddressUnequalTest, delayCopyUnsharedImpl0, delayCopyUnsharedImpl1);
 
     delayCopyUnsharedImpl0 = delayCopyUnsharedImpl1;
-    ASSERT_EQUAL(delayCopyUnsharedImpl0.GetCount(), count);
-    ASSERT_EQUAL(delayCopyUnsharedImpl0.GetAddress(), delayCopyUnsharedImpl1.GetAddress());
+    ASSERT_NOT_THROW_EXCEPTION_2(AddressEqualTest, delayCopyUnsharedImpl0, delayCopyUnsharedImpl1);
 
-    delayCopyUnsharedImpl0.SetCount(1);
+    delayCopyUnsharedImpl0.SetCount(modify);
+    ASSERT_NOT_THROW_EXCEPTION_2(AddressUnequalTest, delayCopyUnsharedImpl0, delayCopyUnsharedImpl1);
+}
 
-    ASSERT_UNEQUAL(delayCopyUnsharedImpl0.GetAddress(), delayCopyUnsharedImpl1.GetAddress());
-    ASSERT_EQUAL(delayCopyUnsharedImpl0.GetCount(), 1);
-    ASSERT_EQUAL(delayCopyUnsharedImpl1.GetCount(), count);
+void CoreTools::DelayCopyUnsharedImplTesting::AddressEqualTest(const DelayCopyUnshared& lhs, const DelayCopyUnshared& rhs)
+{
+    ASSERT_EQUAL(lhs.GetAddress(), rhs.GetAddress());
+    ASSERT_EQUAL(lhs.GetCount(), count);
+    ASSERT_EQUAL(rhs.GetCount(), count);
+}
+
+void CoreTools::DelayCopyUnsharedImplTesting::AddressUnequalTest(const DelayCopyUnshared& lhs, const DelayCopyUnshared& rhs)
+{
+    ASSERT_UNEQUAL(lhs.GetAddress(), rhs.GetAddress());
+    ASSERT_EQUAL(lhs.GetCount(), modify);
+    ASSERT_EQUAL(rhs.GetCount(), count);
 }
 
 void CoreTools::DelayCopyUnsharedImplTesting::UseFactoryTest()
 {
-    constexpr auto count = 12;
-    DelayCopyUnshared delayCopyUnsharedImpl0{ ImplCreateUseFactory::Default, count };
-
-    ASSERT_EQUAL(delayCopyUnsharedImpl0.GetCount(), count);
-
-    const auto delayCopyUnsharedImpl1 = delayCopyUnsharedImpl0;
-
-    ASSERT_EQUAL(delayCopyUnsharedImpl1.GetCount(), count);
-    ASSERT_EQUAL(delayCopyUnsharedImpl0.GetAddress(), delayCopyUnsharedImpl1.GetAddress());
-
-    delayCopyUnsharedImpl0.SetCount(1);
-
-    ASSERT_UNEQUAL(delayCopyUnsharedImpl0.GetAddress(), delayCopyUnsharedImpl1.GetAddress());
-    ASSERT_EQUAL(delayCopyUnsharedImpl0.GetCount(), 1);
-    ASSERT_EQUAL(delayCopyUnsharedImpl1.GetCount(), count);
+    DelayCopyUnshared delayCopyUnsharedImpl{ ImplCreateUseFactory::Default, count };
+    ASSERT_NOT_THROW_EXCEPTION_2(CountTest, delayCopyUnsharedImpl, count);
 }
 
 void CoreTools::DelayCopyUnsharedImplTesting::UseUseDefaultConstructionTest()
 {
-    DelayCopyUnshared delayCopyUnsharedImpl0{ ImplCreateUseDefaultConstruction::Default };
+    DelayCopyUnshared delayCopyUnsharedImpl{ ImplCreateUseDefaultConstruction::Default };
+    ASSERT_NOT_THROW_EXCEPTION_2(CountTest, delayCopyUnsharedImpl, 0);
+}
 
-    ASSERT_EQUAL(delayCopyUnsharedImpl0.GetCount(), 0);
+void CoreTools::DelayCopyUnsharedImplTesting::CountTest(DelayCopyUnshared& delayCopyUnsharedImpl, int aCount)
+{
+    ASSERT_EQUAL(delayCopyUnsharedImpl.GetCount(), aCount);
 
-    const auto delayCopyUnsharedImpl1 = delayCopyUnsharedImpl0;
+    const auto delayCopy = delayCopyUnsharedImpl;
 
-    ASSERT_EQUAL(delayCopyUnsharedImpl1.GetCount(), 0);
-    ASSERT_EQUAL(delayCopyUnsharedImpl0.GetAddress(), delayCopyUnsharedImpl1.GetAddress());
+    ASSERT_EQUAL(delayCopy.GetCount(), aCount);
+    ASSERT_EQUAL(delayCopyUnsharedImpl.GetAddress(), delayCopy.GetAddress());
 
-    delayCopyUnsharedImpl0.SetCount(1);
+    delayCopyUnsharedImpl.SetCount(modify);
 
-    ASSERT_UNEQUAL(delayCopyUnsharedImpl0.GetAddress(), delayCopyUnsharedImpl1.GetAddress());
-    ASSERT_EQUAL(delayCopyUnsharedImpl0.GetCount(), 1);
-    ASSERT_EQUAL(delayCopyUnsharedImpl1.GetCount(), 0);
+    ASSERT_UNEQUAL(delayCopyUnsharedImpl.GetAddress(), delayCopy.GetAddress());
+    ASSERT_EQUAL(delayCopyUnsharedImpl.GetCount(), modify);
+    ASSERT_EQUAL(delayCopy.GetCount(), aCount);
 }

@@ -55,7 +55,7 @@ void CoreTools::TestingObjectPtrTesting::SaveStreamTest()
 
     BufferTarget target{ bufferSize, objectRegister };
 
-    const ConstObjectAssociated<TestingObjectPtr> constObjectAssociated{ streamObject, 1 };
+    const ConstObjectAssociated constObjectAssociated{ streamObject, 1 };
     ASSERT_LESS(0, objectRegister->Register(constObjectAssociated));
 
     streamObject->Save(target);

@@ -5,11 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 15:59)
+/// 版本：1.0.0.9 (2024/05/15 20:15)
 
 #ifndef CORE_TOOLS_DATA_TYPES_SUITE_CONTAINER_ADAPTER_TESTING_H
 #define CORE_TOOLS_DATA_TYPES_SUITE_CONTAINER_ADAPTER_TESTING_H
 
+#include "CoreTools/MemoryTools/MemoryToolsFwd.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -24,6 +25,18 @@ namespace CoreTools
         explicit ContainerAdapterTesting(const OStreamShared& stream);
 
         CLASS_INVARIANT_FINAL_DECLARE;
+
+    private:
+        static constexpr auto beginNumber = 1;
+        static constexpr auto containerAdapterSize = 8;
+        using IntContainerAdapter8 = ContainerAdapter<int, containerAdapterSize>;
+        using IntContainerAdapter = ContainerAdapter<int>;
+        using ArrayAverageContainer = std::vector<std::array<double, 2>>;
+        using VectorAverageContainer = std::vector<std::vector<double>>;
+        using Array2ContainerAdapter4 = ContainerAdapter<std::array<double, 2>, 4>;
+        using Array2ContainerAdapter = ContainerAdapter<std::array<double, 2>>;
+        using VectorContainerAdapter4 = ContainerAdapter<std::vector<double>, 4>;
+        using VectorContainerAdapter = ContainerAdapter<std::vector<double>>;
 
     private:
         void MainTest();
@@ -42,10 +55,25 @@ namespace CoreTools
         void ContainerAdapterVectorAccessTest();
 
         template <typename Container, typename ElementType = typename Container::value_type>
+        NODISCARD ElementType ComputeSum(const Container& container);
+
+        template <typename Container, typename ElementType = typename Container::value_type>
         NODISCARD ElementType ComputeAverage(const Container& container);
 
         void ComputedAverage0Test();
         void ComputedAverage1Test();
+        void ComputedAverage2Test();
+        void ComputedAverage3Test();
+
+        void ContainerAdapterArrayAccessBeginTest(IntContainerAdapter8& container);
+        void ContainerAdapterArrayAccessConstBeginTest(const IntContainerAdapter8& container);
+        void ContainerAdapterArrayAccessReverseBeginTest(IntContainerAdapter8& container);
+        void ContainerAdapterArrayAccessReverseConstBeginTest(const IntContainerAdapter8& container);
+
+        void ContainerAdapterVectorAccessBeginTest(IntContainerAdapter& container);
+        void ContainerAdapterVectorAccessConstBeginTest(const IntContainerAdapter& container);
+        void ContainerAdapterVectorAccessReverseBeginTest(IntContainerAdapter& container);
+        void ContainerAdapterVectorAccessReverseConstBeginTest(const IntContainerAdapter& container);
     };
 }
 

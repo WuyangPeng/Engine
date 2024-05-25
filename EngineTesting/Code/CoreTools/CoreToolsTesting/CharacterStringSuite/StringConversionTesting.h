@@ -30,22 +30,35 @@ namespace CoreTools
         void MainTest();
 
         void MultiByteConversionWideCharTest();
+        void ChineseMultiByteConversionWideCharTest();
         void WideCharConversionMultiByteTest();
+        void ChineseWideCharConversionMultiByteTest();
 
         void StandardConversionWideCharTest();
+        void ChineseStandardConversionWideCharTest();
         void StandardConversionMultiByteTest();
+        void ChineseStandardConversionMultiByteTest();
         void MultiByteConversionStandardTest();
+        void ChineseMultiByteConversionStandardTest();
         void WideCharConversionStandardTest();
+        void ChineseWideCharConversionStandardTest();
 
         void StandardConversionDynamicLinkStringTest();
+        void ChineseStandardConversionDynamicLinkStringTest();
         void DynamicLinkStringConversionMultiByteTest();
+        void ChineseDynamicLinkStringConversionMultiByteTest();
         void DynamicLinkStringConversionStandardTest();
+        void ChineseDynamicLinkStringConversionStandardTest();
 
         void StandardConversionCFileStringTest();
+        void ChineseStandardConversionCFileStringTest();
 
         void Utf8ConversionWideCharTest();
+        void ChineseUtf8ConversionWideCharTest();
         void Utf8ConversionStandardTest();
+        void ChineseUtf8ConversionStandardTest();
         void Utf8ConversionMultiByteTest();
+        void ChineseUtf8ConversionMultiByteTest();
 
         void WideCharUtf8ConversionStandardTest();
         void WideCharUtf8ConversionStandardEnglishTest();

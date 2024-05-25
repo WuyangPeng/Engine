@@ -1,11 +1,11 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 11:30)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/04/28 12:53)
 
 #include "ThreadSafeQueueTesting.h"
 #include "CoreTools/DataTypes/ThreadSafeQueueDetail.h"
@@ -31,19 +31,17 @@ void CoreTools::ThreadSafeQueueTesting::DoRunUnitTest()
 
 void CoreTools::ThreadSafeQueueTesting::MainTest()
 {
-    std::thread thread0{ &ClassType::ThreadSafeQueueTest, this };
+    std::thread thread{ &ClassType::ThreadSafeQueueTest, this };
 
     ASSERT_NOT_THROW_EXCEPTION_0(ThreadSafeQueueTest);
 
-    thread0.join();
+    thread.join();
 }
 
 void CoreTools::ThreadSafeQueueTesting::ThreadSafeQueueTest()
 {
     ASSERT_EQUAL(threadSafeQueue.GetMaxNumElements(), maxNumElements);
-
     ASSERT_TRUE(threadSafeQueue.Push(5));
-
     ASSERT_RANGE(threadSafeQueue.GetNumElements(), 1, 2);
 
     const auto [element, result] = threadSafeQueue.Pop();
@@ -52,6 +50,5 @@ void CoreTools::ThreadSafeQueueTesting::ThreadSafeQueueTest()
     ASSERT_TRUE(result);
 
     ASSERT_RANGE(threadSafeQueue.GetNumElements(), 0, 1);
-
     ASSERT_EQUAL(threadSafeQueue.GetMaxNumElements(), maxNumElements);
 }

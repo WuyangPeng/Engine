@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 15:45)
+/// 版本：1.0.0.9 (2024/05/18 20:16)
 
 #include "RawPtrCompareTesting.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -37,33 +37,58 @@ void CoreTools::RawPtrCompareTesting::MainTest()
 
 void CoreTools::RawPtrCompareTesting::RawPtrCompareTest()
 {
-    std::vector<int> container(20);
+    ContainerType container(size);
     std::iota(container.begin(), container.end(), 0);
 
     const RawConstIterator lhsRawConstIterator{ container.data() };
 
     const auto rhsRawConstIterator = lhsRawConstIterator + 5;
 
+    ASSERT_NOT_THROW_EXCEPTION_2(RawPtrEqualTest, lhsRawConstIterator, rhsRawConstIterator);
+    ASSERT_NOT_THROW_EXCEPTION_2(RawPtrUnequalTest, lhsRawConstIterator, rhsRawConstIterator);
+    ASSERT_NOT_THROW_EXCEPTION_2(RawPtrLessTest, lhsRawConstIterator, rhsRawConstIterator);
+    ASSERT_NOT_THROW_EXCEPTION_2(RawPtrLessEqualTest, lhsRawConstIterator, rhsRawConstIterator);
+    ASSERT_NOT_THROW_EXCEPTION_2(RawPtrGreaterTest, lhsRawConstIterator, rhsRawConstIterator);
+    ASSERT_NOT_THROW_EXCEPTION_2(RawPtrGreaterEqualTest, lhsRawConstIterator, rhsRawConstIterator);
+}
+
+void CoreTools::RawPtrCompareTesting::RawPtrEqualTest(const RawConstIteratorType& lhsRawConstIterator, const RawConstIteratorType& rhsRawConstIterator)
+{
     ASSERT_FALSE(RawPtrEqual<int>()(lhsRawConstIterator, rhsRawConstIterator));
     ASSERT_TRUE(RawPtrEqual<int>()(lhsRawConstIterator, lhsRawConstIterator));
     ASSERT_TRUE(RawPtrEqual<int>()(rhsRawConstIterator, rhsRawConstIterator));
+}
 
+void CoreTools::RawPtrCompareTesting::RawPtrUnequalTest(const RawConstIteratorType& lhsRawConstIterator, const RawConstIteratorType& rhsRawConstIterator)
+{
     ASSERT_TRUE(RawPtrUnequal<int>()(lhsRawConstIterator, rhsRawConstIterator));
     ASSERT_FALSE(RawPtrUnequal<int>()(lhsRawConstIterator, lhsRawConstIterator));
     ASSERT_FALSE(RawPtrUnequal<int>()(rhsRawConstIterator, rhsRawConstIterator));
+}
 
+void CoreTools::RawPtrCompareTesting::RawPtrLessTest(const RawConstIteratorType& lhsRawConstIterator, const RawConstIteratorType& rhsRawConstIterator)
+{
     ASSERT_TRUE(RawPtrLess<int>()(lhsRawConstIterator, rhsRawConstIterator));
     ASSERT_FALSE(RawPtrLess<int>()(lhsRawConstIterator, lhsRawConstIterator));
     ASSERT_FALSE(RawPtrLess<int>()(rhsRawConstIterator, rhsRawConstIterator));
+}
 
+void CoreTools::RawPtrCompareTesting::RawPtrLessEqualTest(const RawConstIteratorType& lhsRawConstIterator, const RawConstIteratorType& rhsRawConstIterator)
+{
     ASSERT_TRUE(RawPtrLessEqual<int>()(lhsRawConstIterator, rhsRawConstIterator));
     ASSERT_TRUE(RawPtrLessEqual<int>()(lhsRawConstIterator, lhsRawConstIterator));
     ASSERT_TRUE(RawPtrLessEqual<int>()(rhsRawConstIterator, rhsRawConstIterator));
+}
 
+void CoreTools::RawPtrCompareTesting::RawPtrGreaterTest(const RawConstIteratorType& lhsRawConstIterator, const RawConstIteratorType& rhsRawConstIterator)
+{
     ASSERT_FALSE(RawPtrGreater<int>()(lhsRawConstIterator, rhsRawConstIterator));
     ASSERT_FALSE(RawPtrGreater<int>()(lhsRawConstIterator, lhsRawConstIterator));
     ASSERT_FALSE(RawPtrGreater<int>()(rhsRawConstIterator, rhsRawConstIterator));
+}
 
+void CoreTools::RawPtrCompareTesting::RawPtrGreaterEqualTest(const RawConstIteratorType& lhsRawConstIterator, const RawConstIteratorType& rhsRawConstIterator)
+{
     ASSERT_FALSE(RawPtrGreaterEqual<int>()(lhsRawConstIterator, rhsRawConstIterator));
     ASSERT_TRUE(RawPtrGreaterEqual<int>()(lhsRawConstIterator, lhsRawConstIterator));
     ASSERT_TRUE(RawPtrGreaterEqual<int>()(rhsRawConstIterator, rhsRawConstIterator));

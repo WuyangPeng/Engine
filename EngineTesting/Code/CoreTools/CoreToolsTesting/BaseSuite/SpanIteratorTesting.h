@@ -26,12 +26,20 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        static constexpr auto size = 10;
+        using IntContainer = std::vector<int32_t>;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void BaseTest();
         void DereferenceTest();
         void StepTest();
+        void PrefixPlusTest();
+        void SuffixPlusTest();
+        void PrefixSubtractionTest();
+        void SuffixSubtractionTest();
         void IncreaseTest();
         void IncreaseArrayTest();
         void SubtractionTest();

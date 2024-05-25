@@ -12,7 +12,6 @@
 
 #include "CoreTools/FileManager/FileEventInterface.h"
 #include "CoreTools/FileManager/FileManagerFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {

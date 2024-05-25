@@ -23,9 +23,10 @@ namespace ConsoleCoreToolsTesting
     public:
         using ClassType = TestingHelper;
         using ParentType = WindowMainFunctionHelper;
+
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
         using EnvironmentDirectory = Framework::EnvironmentDirectory;
         using WindowApplicationInformation = Framework::WindowApplicationInformation;
-        using ConsoleAlloc = CoreTools::ConsoleAlloc;
 
     public:
         TestingHelper(WindowsHInstance instance,

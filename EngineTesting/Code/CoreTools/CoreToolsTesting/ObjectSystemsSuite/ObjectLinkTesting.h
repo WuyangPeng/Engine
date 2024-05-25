@@ -10,6 +10,10 @@
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_SUITE_OBJECT_LINK_TESTING_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_SUITE_OBJECT_LINK_TESTING_H
 
+#include "Detail/BoolObject.h"
+#include "Detail/EnumObject.h"
+#include "Detail/IntObject.h"
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,6 +30,11 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using ObjectLinkSharedPtr = std::shared_ptr<ObjectLink>;
+        using ObjectAssociated = ObjectAssociated<Object>;
+        using ObjectAssociatedContainer = std::vector<ObjectAssociated>;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
@@ -33,6 +42,15 @@ namespace CoreTools
         void SortTest();
         void ResolveLinkTest();
         void ResolveLinkContainerTest();
+
+        NODISCARD ObjectLinkSharedPtr CreateObjectLink();
+        void BeforeSortTest(const ObjectLink& objectLink);
+        void SortResultTest(const ObjectLink& objectLink);
+
+    private:
+        BoolObjectSharedPtr boolObject;
+        EnumObjectSharedPtr enumObject;
+        IntObjectSharedPtr intObject;
     };
 }
 

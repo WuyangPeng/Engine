@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_CONTRACT_SUITE_DELAY_COPY_UNSHARED_IMPL_TESTING_H
 #define CORE_TOOLS_CONTRACT_SUITE_DELAY_COPY_UNSHARED_IMPL_TESTING_H
 
+#include "CoreTools/CoreToolsTesting/ContractSuite/Detail/DelayCopyUnshared.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -32,6 +33,14 @@ namespace CoreTools
         void DefaultTest();
         void UseFactoryTest();
         void UseUseDefaultConstructionTest();
+
+        void CountTest(DelayCopyUnshared& delayCopyUnsharedImpl, int aCount);
+        void AddressEqualTest(const DelayCopyUnshared& lhs, const DelayCopyUnshared& rhs);
+        void AddressUnequalTest(const DelayCopyUnshared& lhs, const DelayCopyUnshared& rhs);
+
+    private:
+        static constexpr auto count = 12;
+        static constexpr auto modify = 1;
     };
 }
 

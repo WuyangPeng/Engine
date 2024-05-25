@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 15:28)
+/// 版本：1.0.0.9 (2024/05/15 21:27)
 
 #include "HeapAllocateTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -34,8 +34,6 @@ void CoreTools::HeapAllocateTesting::MainTest()
 
 void CoreTools::HeapAllocateTesting::CharTest()
 {
-    constexpr auto size = 10;
-
     HeapAllocate<char> heap{ size };
 
     ASSERT_EQUAL(heap.GetLength(), size);
@@ -45,8 +43,6 @@ void CoreTools::HeapAllocateTesting::CharTest()
 
 void CoreTools::HeapAllocateTesting::DoubleTest()
 {
-    constexpr auto size = 20;
-
     const HeapAllocate<double> heap{ size };
 
     ASSERT_EQUAL(heap.GetLength(), size);

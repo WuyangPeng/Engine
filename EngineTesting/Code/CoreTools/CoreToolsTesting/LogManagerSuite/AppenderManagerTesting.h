@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_LOG_MANAGER_SUITE_LOGGER_MANAGER_TESTING_H
 #define CORE_TOOLS_LOG_MANAGER_SUITE_LOGGER_MANAGER_TESTING_H
 
+#include "CoreTools/LogManager/AppenderManager.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -28,6 +29,9 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using AppenderManagerSharedPtr = AppenderManager::AppenderManagerSharedPtr;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
@@ -42,6 +46,20 @@ namespace CoreTools
         void InsertLoggerFailTest();
         void RemoveLoggerFailTest();
 
+        void InsertLoggerSucceedTest(AppenderManager& manager);
+        void RemoveLoggerSucceedTest(AppenderManager& manager);
+
+        void WriteTraceMessageTest(const AppenderManager& manager) const;
+        void WriteDebugMessageDoNothingTest(const AppenderManager& manager) const;
+        void WriteInfoMessageTest(const AppenderManager& manager) const;
+        void WriteWarnMessageDoNothingTest(const AppenderManager& manager) const;
+        void WriteErrorMessageTest(const AppenderManager& manager) const;
+        void WriteFatalMessageTest(const AppenderManager& manager) const;
+
+        NODISCARD AppenderManagerSharedPtr InitTraceLogger(const Appender& appender);
+        void InitInfoLogger(AppenderManager& manager);
+        void InitFileAppender(Appender& appender, AppenderManager& manager);
+
         /// Appender≤‚ ‘
         void AppenderSucceedTest();
         void InsertAppenderFailTest();
@@ -55,6 +73,8 @@ namespace CoreTools
         /// WriteMessageDefaultFile≤‚ ‘
         void WriteMessageToDefaultFileTest();
         void DefaultFileContentTest();
+
+        void DoWriteMessageToDefaultFileTest(AppenderManager& manager, LogLevel logLevel, const String& message);
 
     private:
         String appenderManagerTestingName;

@@ -25,6 +25,8 @@ namespace CoreTools
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
+        CORE_TOOLS_RTTI_FINAL_DECLARE;
+
     protected:
         NODISCARD const char* GetFinalRttiName() const noexcept;
 
@@ -34,7 +36,8 @@ namespace CoreTools
 
         void RttiTest() override;
 
-        CORE_TOOLS_RTTI_FINAL_DECLARE;
+        void GetCurrentRttiTypeTest() override;
+        void GetRttiTypeTest() override;
     };
 }
 

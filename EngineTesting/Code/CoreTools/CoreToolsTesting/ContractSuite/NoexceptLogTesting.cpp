@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/15 09:58)
+/// 版本：1.0.0.9 (2024/04/26 13:06)
 
 #include "NoexceptLogTesting.h"
 #include "System/Helper/Tools.h"
@@ -44,16 +44,29 @@ void CoreTools::NoexceptLogTesting::MainTest()
 
 void CoreTools::NoexceptLogTesting::NoexceptUseLogTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(NoexceptUseLogNoConstTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(NoexceptUseLogConstTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(NoexceptUseLogStaticTest);
+}
+
+void CoreTools::NoexceptLogTesting::NoexceptUseLogNoConstTest()
+{
     NoexceptNoReturnUseLog(*this, &ClassType::Function0);
     NoexceptNoReturnUseLog(*this, &ClassType::Function1, 0);
     ASSERT_EQUAL(NoexceptUseLog<int>(*this, &ClassType::Function2, 0), 0);
     ASSERT_EQUAL((NoexceptUseLog<int>(*this, &ClassType::Function3, 3, 1)), 3);
+}
 
+void CoreTools::NoexceptLogTesting::NoexceptUseLogConstTest()
+{
     NoexceptNoReturnUseLog(*this, &ClassType::ConstFunction0);
     NoexceptNoReturnUseLog(*this, &ClassType::ConstFunction1, 0);
     ASSERT_EQUAL(NoexceptUseLog<int>(*this, &ClassType::ConstFunction2, 0), 0);
     ASSERT_EQUAL((NoexceptUseLog<int>(*this, &ClassType::ConstFunction3, 2, 1)), 2);
+}
 
+void CoreTools::NoexceptLogTesting::NoexceptUseLogStaticTest()
+{
     StaticNoexceptNoReturnUseLog(&ClassType::StaticFunction0);
     StaticNoexceptNoReturnUseLog(&ClassType::StaticFunction1, 2);
     ASSERT_EQUAL(StaticNoexceptUseLog<int>(&ClassType::StaticFunction2, 0), 0);

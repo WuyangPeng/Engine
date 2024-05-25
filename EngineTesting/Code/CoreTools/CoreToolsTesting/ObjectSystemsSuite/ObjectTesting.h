@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_SUITE_OBJECT_TESTING_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_SUITE_OBJECT_TESTING_H
 
+#include "Detail/TestObject.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -30,6 +31,10 @@ namespace CoreTools
         void MainTest();
 
         void ObjectTest();
+
+        void GetNameTest(const TestObject& testObject);
+        void GetObjectByNameTest(const TestObjectSharedPtr& testObject);
+        void SetNameTest(TestObject& testObject);
     };
 }
 

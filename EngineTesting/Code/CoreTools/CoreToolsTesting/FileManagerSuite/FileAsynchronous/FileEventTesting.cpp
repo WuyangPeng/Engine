@@ -43,7 +43,7 @@ System::String CoreTools::FileEventTesting::GetFileName()
 void CoreTools::FileEventTesting::FileEventTest()
 {
     const std::shared_ptr fileEvent{ FileEvent::Create() };
-    const FileBuffer fileBuffer{ 100 };
+    const FileBuffer fileBuffer{ fileBufferCount };
     const FileAsynchronousParameter fileAsynchronousParameter{ GetFileName(), true, fileEvent };
 
     fileEvent->EventFunction(fileAsynchronousParameter, fileBuffer);

@@ -13,7 +13,7 @@
 #include "Detail/IntObject.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/InTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
@@ -49,6 +49,11 @@ void CoreTools::InTopLevelTesting::BasisTest()
     inTopLevel.Insert(std::make_shared<EnumObject>(DisableNotThrow::Disable));
     inTopLevel.Insert(std::make_shared<IntObject>(DisableNotThrow::Disable));
 
+    ASSERT_NOT_THROW_EXCEPTION_1(BasisResultTest, inTopLevel);
+}
+
+void CoreTools::InTopLevelTesting::BasisResultTest(InTopLevel& inTopLevel)
+{
     ASSERT_EQUAL(inTopLevel.GetTopLevelSize(), 3);
 
     for (const auto& element : inTopLevel)

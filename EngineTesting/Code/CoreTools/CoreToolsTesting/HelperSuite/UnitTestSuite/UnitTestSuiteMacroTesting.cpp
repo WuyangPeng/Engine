@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/14 11:39)
+/// 版本：1.0.0.9 (2024/05/06 19:58)
 
 #include "UnitTestSuiteMacroTestingDetail.h"
 #include "CoreTools/CoreToolsTesting/HelperSuite/Detail/UnitTestSuiteAddTestMacroTesting.h"
@@ -15,7 +15,9 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 CoreTools::UnitTestSuiteMacroTesting::UnitTestSuiteMacroTesting(const OStreamShared& stream, bool isPrintRun)
-    : ParentType{ stream }, unitTestSuiteMacroSuite{ "单元测试宏测试", GetStream(), isPrintRun }, isPrintRun{ isPrintRun }
+    : ParentType{ stream },
+      unitTestSuiteMacroSuite{ "单元测试宏测试", GetStream(), isPrintRun },
+      isPrintRun{ isPrintRun }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

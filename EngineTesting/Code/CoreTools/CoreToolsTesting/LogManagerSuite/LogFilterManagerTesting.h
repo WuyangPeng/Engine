@@ -31,6 +31,7 @@ namespace CoreTools
 
         void ValidTest();
         void GetLogFilterTypeTest();
+        void DoValidTest(CoreTools::LogFilter logFilter);
     };
 }
 

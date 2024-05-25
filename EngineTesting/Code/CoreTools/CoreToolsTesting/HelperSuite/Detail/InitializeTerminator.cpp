@@ -8,7 +8,7 @@
 /// °æ±¾£º1.0.0.8 (2024/04/13 20:27)
 
 #include "InitializeTerminator.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, InitializeTerminator)
 

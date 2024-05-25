@@ -5,13 +5,13 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/18 22:13)
+/// 版本：1.0.0.9 (2024/05/11 14:40)
 
 #include "LogMessageTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Windows/Flags/PlatformErrorFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/LogManager/Flags/LogManagerFlags.h"
 #include "CoreTools/LogManager/LogMessage.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -37,8 +37,10 @@ void CoreTools::LogMessageTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(LogFilterTest);
     ASSERT_NOT_THROW_EXCEPTION_0(MessageTest);
     ASSERT_NOT_THROW_EXCEPTION_0(GetFileNameTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(LogAppenderIOManageSignTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ExceptionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(LogAppenderIOManageAlwaysConsoleTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(LogAppenderIOManageTriggerAssertTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ErrorExceptionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(StdExceptionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StringTest);
     ASSERT_NOT_THROW_EXCEPTION_0(IntegerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(IsDisabledTest);
@@ -87,7 +89,7 @@ void CoreTools::LogMessageTesting::GetFileNameTest()
     ASSERT_FALSE(message.IsDisabled());
 }
 
-void CoreTools::LogMessageTesting::LogAppenderIOManageSignTest()
+void CoreTools::LogMessageTesting::LogAppenderIOManageAlwaysConsoleTest()
 {
     LogMessage message{ LogLevel::Warn, LogFilter::Network, CORE_TOOLS_FUNCTION_DESCRIBED };
 
@@ -98,14 +100,22 @@ void CoreTools::LogMessageTesting::LogAppenderIOManageSignTest()
 
     ASSERT_TRUE(message.HasAlwaysConsole());
     ASSERT_FALSE(message.HasTriggerAssert());
+}
+
+void CoreTools::LogMessageTesting::LogAppenderIOManageTriggerAssertTest()
+{
+    LogMessage message{ LogLevel::Warn, LogFilter::Network, CORE_TOOLS_FUNCTION_DESCRIBED };
+
+    ASSERT_FALSE(message.HasAlwaysConsole());
+    ASSERT_FALSE(message.HasTriggerAssert());
 
     message << LogAppenderIOManageSign::TriggerAssert;
 
-    ASSERT_TRUE(message.HasAlwaysConsole());
+    ASSERT_FALSE(message.HasAlwaysConsole());
     ASSERT_TRUE(message.HasTriggerAssert());
 }
 
-void CoreTools::LogMessageTesting::ExceptionTest()
+void CoreTools::LogMessageTesting::ErrorExceptionTest()
 {
     const auto functionDescribed = CORE_TOOLS_FUNCTION_DESCRIBED;
 
@@ -118,6 +128,11 @@ void CoreTools::LogMessageTesting::ExceptionTest()
     ASSERT_EQUAL(message.GetFunctionDescribed(), functionDescribed);
 
     ASSERT_UNEQUAL(message.GetMessageDescribe().find(error.GetError()), std::string::npos);
+}
+
+void CoreTools::LogMessageTesting::StdExceptionTest()
+{
+    LogMessage message{ LogLevel::Warn, LogFilter::Network, CORE_TOOLS_FUNCTION_DESCRIBED };
 
     const std::exception exception("exception");
 
@@ -127,6 +142,20 @@ void CoreTools::LogMessageTesting::ExceptionTest()
 }
 
 void CoreTools::LogMessageTesting::StringTest()
+{
+    const auto message = GetStringLogMessage();
+
+    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT('a')), std::string::npos);
+    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT('b')), std::string::npos);
+    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("cc")), std::string::npos);
+    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("dd")), std::string::npos);
+    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("ee")), std::string::npos);
+    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("ff")), std::string::npos);
+    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("gg")), std::string::npos);
+    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("hh")), std::string::npos);
+}
+
+CoreTools::LogMessage CoreTools::LogMessageTesting::GetStringLogMessage()
 {
     LogMessage message{ LogLevel::Warn, LogFilter::Network, CORE_TOOLS_FUNCTION_DESCRIBED };
 
@@ -139,17 +168,22 @@ void CoreTools::LogMessageTesting::StringTest()
     message << "gg"sv;
     message << L"hh"sv;
 
-    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT('a')), std::string::npos);
-    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT('b')), std::string::npos);
-    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("cc")), std::string::npos);
-    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("dd")), std::string::npos);
-    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("ee")), std::string::npos);
-    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("ff")), std::string::npos);
-    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("gg")), std::string::npos);
-    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("hh")), std::string::npos);
+    return message;
 }
 
 void CoreTools::LogMessageTesting::IntegerTest()
+{
+    const auto message = GetIntegerLogMessage();
+
+    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT('1')), std::string::npos);
+    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT('2')), std::string::npos);
+    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("3")), std::string::npos);
+    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("4")), std::string::npos);
+    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("5")), std::string::npos);
+    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("6")), std::string::npos);
+}
+
+CoreTools::LogMessage CoreTools::LogMessageTesting::GetIntegerLogMessage()
 {
     LogMessage message{ LogLevel::Warn, LogFilter::Network, CORE_TOOLS_FUNCTION_DESCRIBED };
 
@@ -160,12 +194,7 @@ void CoreTools::LogMessageTesting::IntegerTest()
     message << 5.0f;
     message << 6.0;
 
-    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT('1')), std::string::npos);
-    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT('2')), std::string::npos);
-    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("3")), std::string::npos);
-    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("4")), std::string::npos);
-    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("5")), std::string::npos);
-    ASSERT_UNEQUAL(message.GetMessageDescribe().find(SYSTEM_TEXT("6")), std::string::npos);
+    return message;
 }
 
 void CoreTools::LogMessageTesting::IsDisabledTest()

@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_BASE_SUITE_UNIQUE_ID_MANAGER_TESTING_H
 #define CORE_TOOLS_BASE_SUITE_UNIQUE_ID_MANAGER_TESTING_H
 
+#include "CoreTools/Base/Flags/UniqueIdSelect.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,11 +27,23 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        static constexpr auto step = 100;
+        static constexpr auto nextStep = 200;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
+        void DefaultUniqueIdManagerTest();
         void UniqueIdManagerTest();
+        void EnumUniqueIdManagerTest();
         void SetUniqueIdTest();
+        void EnumSetUniqueIdTest();
+
+        void DoUniqueIdManagerTest(int index);
+        void DoEnumUniqueIdManagerTest(UniqueIdSelect index);
+        void DoSetUniqueIdTest(int index);
+        void DoEnumSetUniqueIdTest(UniqueIdSelect index);
     };
 }
 

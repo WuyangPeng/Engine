@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 16:41)
+/// 版本：1.0.0.9 (2024/04/30 22:37)
 
 #include "EndianTesting.h"
 #include "CoreTools/FileManager/Endian.h"
@@ -17,7 +17,13 @@
 #include <vector>
 
 CoreTools::EndianTesting::EndianTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      originalUInt16{ 0x1234, 0x5678, 0x9ABC, 0xDEF0, 0x159D },
+      swapUInt16{ 0x3412, 0x7856, 0xBC9A, 0xF0DE, 0x9D15 },
+      originalUInt32{ 0x12345678, 0x9ABCDEF0, 0x159D26AE, 0x37BF48C0 },
+      swapUInt32{ 0x78563412, 0xF0DEBC9A, 0xAE269D15, 0xC048BF37 },
+      originalUInt64{ 0x123456789ABCDEF0, 0x159D26AE37BF48C0, 0x0FEDCBA987654321 },
+      swapUInt64{ 0xF0DEBC9A78563412, 0xC048BF37AE269D15, 0x21436587A9CBED0F }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -54,105 +60,180 @@ void CoreTools::EndianTesting::ByteOrderTest()
 
 void CoreTools::EndianTesting::Swap2ByteOrderTest()
 {
-    constexpr auto arraySize = 5;
-    std::array<uint16_t, arraySize> value{ 0x1234, 0x5678, 0x9012, 0x3456, 0x7890 };
+    auto value = originalUInt16;
 
+    ASSERT_NOT_THROW_EXCEPTION_1(Swap2ByteOrder0Test, value);
+    ASSERT_NOT_THROW_EXCEPTION_1(Swap2ByteOrder1Test, value);
+    ASSERT_NOT_THROW_EXCEPTION_1(Swap2ByteOrder2Test, value);
+    ASSERT_NOT_THROW_EXCEPTION_1(Swap2ByteOrder3Test, value);
+    ASSERT_NOT_THROW_EXCEPTION_1(Swap2ByteOrder4Test, value);
+}
+
+void CoreTools::EndianTesting::Swap2ByteOrder0Test(UInt16Array& value)
+{
     Endian::Swap2ByteOrder(value.data());
-    ASSERT_EQUAL(value.at(0), uint16_t{ 0x3412 });
+    ASSERT_EQUAL(value.at(0), swapUInt16.at(0));
+    for (auto i = 1u; i < value.size(); ++i)
+    {
+        ASSERT_EQUAL(value.at(i), originalUInt16.at(i));
+    }
+}
 
-    Endian::Swap2ByteOrder(arraySize, value.data());
-    ASSERT_EQUAL(value.at(0), uint16_t{ 0x1234 });
-    ASSERT_EQUAL(value.at(1), uint16_t{ 0x7856 });
-    ASSERT_EQUAL(value.at(2), uint16_t{ 0x1290 });
-    ASSERT_EQUAL(value.at(3), uint16_t{ 0x5634 });
-    ASSERT_EQUAL(value.at(4), uint16_t{ 0x9078 });
+void CoreTools::EndianTesting::Swap2ByteOrder1Test(UInt16Array& value)
+{
+    Endian::Swap2ByteOrder(uint16ArraySize, value.data());
+    ASSERT_EQUAL(value.at(0), originalUInt16.at(0));
+    for (auto i = 1u; i < value.size(); ++i)
+    {
+        ASSERT_EQUAL(value.at(i), swapUInt16.at(i));
+    }
+}
 
+void CoreTools::EndianTesting::Swap2ByteOrder2Test(UInt16Array& value)
+{
     Endian::SwapByteOrder(sizeof(uint16_t), value.data());
-    ASSERT_EQUAL(value.at(0), uint16_t{ 0x3412 });
+    for (auto i = 0u; i < value.size(); ++i)
+    {
+        ASSERT_EQUAL(value.at(i), swapUInt16.at(i));
+    }
+}
 
-    Endian::SwapByteOrder(sizeof(uint16_t), arraySize, value.data());
-    ASSERT_EQUAL(value.at(0), uint16_t{ 0x1234 });
-    ASSERT_EQUAL(value.at(1), uint16_t{ 0x5678 });
-    ASSERT_EQUAL(value.at(2), uint16_t{ 0x9012 });
-    ASSERT_EQUAL(value.at(3), uint16_t{ 0x3456 });
-    ASSERT_EQUAL(value.at(4), uint16_t{ 0x7890 });
+void CoreTools::EndianTesting::Swap2ByteOrder3Test(UInt16Array& value)
+{
+    Endian::SwapByteOrder(sizeof(uint16_t), uint16ArraySize, value.data());
+    for (auto i = 0u; i < value.size(); ++i)
+    {
+        ASSERT_EQUAL(value.at(i), originalUInt16.at(i));
+    }
+}
 
-    std::vector<uint16_t> target(arraySize);
-    Endian::Swap2ByteOrderToTarget(arraySize, value.data(), target.data());
-    ASSERT_EQUAL(target.at(0), uint16_t{ 0x3412 });
-    ASSERT_EQUAL(target.at(1), uint16_t{ 0x7856 });
-    ASSERT_EQUAL(target.at(2), uint16_t{ 0x1290 });
-    ASSERT_EQUAL(target.at(3), uint16_t{ 0x5634 });
-    ASSERT_EQUAL(target.at(4), uint16_t{ 0x9078 });
-    ASSERT_EQUAL(value.at(0), uint16_t{ 0x1234 });
-    ASSERT_EQUAL(value.at(1), uint16_t{ 0x5678 });
-    ASSERT_EQUAL(value.at(2), uint16_t{ 0x9012 });
-    ASSERT_EQUAL(value.at(3), uint16_t{ 0x3456 });
-    ASSERT_EQUAL(value.at(4), uint16_t{ 0x7890 });
+void CoreTools::EndianTesting::Swap2ByteOrder4Test(const UInt16Array& value)
+{
+    UInt16Array target{};
+    Endian::Swap2ByteOrderToTarget(uint16ArraySize, value.data(), target.data());
+    for (auto i = 0u; i < value.size(); ++i)
+    {
+        ASSERT_EQUAL(target.at(i), swapUInt16.at(i));
+        ASSERT_EQUAL(value.at(i), originalUInt16.at(i));
+    }
 }
 
 void CoreTools::EndianTesting::Swap4ByteOrderTest()
 {
-    constexpr auto arraySize = 4;
-    std::array<uint32_t, arraySize> value{ 0x12345678, 0x56789012, 0x90123456, 0x34567890 };
+    auto value = originalUInt32;
 
+    ASSERT_NOT_THROW_EXCEPTION_1(Swap4ByteOrder0Test, value);
+    ASSERT_NOT_THROW_EXCEPTION_1(Swap4ByteOrder1Test, value);
+    ASSERT_NOT_THROW_EXCEPTION_1(Swap4ByteOrder2Test, value);
+    ASSERT_NOT_THROW_EXCEPTION_1(Swap4ByteOrder3Test, value);
+    ASSERT_NOT_THROW_EXCEPTION_1(Swap4ByteOrder4Test, value);
+}
+
+void CoreTools::EndianTesting::Swap4ByteOrder0Test(UInt32Array& value)
+{
     Endian::Swap4ByteOrder(value.data());
-    ASSERT_EQUAL(value.at(0), 0x78563412u);
+    ASSERT_EQUAL(value.at(0), swapUInt32.at(0));
+    for (auto i = 1u; i < value.size(); ++i)
+    {
+        ASSERT_EQUAL(value.at(i), originalUInt32.at(i));
+    }
+}
 
-    Endian::Swap4ByteOrder(arraySize, value.data());
-    ASSERT_EQUAL(value.at(0), 0x12345678u);
-    ASSERT_EQUAL(value.at(1), 0x12907856u);
-    ASSERT_EQUAL(value.at(2), 0x56341290u);
-    ASSERT_EQUAL(value.at(3), 0x90785634u);
+void CoreTools::EndianTesting::Swap4ByteOrder1Test(UInt32Array& value)
+{
+    Endian::Swap4ByteOrder(uint32ArraySize, value.data());
+    ASSERT_EQUAL(value.at(0), originalUInt32.at(0));
+    for (auto i = 1u; i < value.size(); ++i)
+    {
+        ASSERT_EQUAL(value.at(i), swapUInt32.at(i));
+    }
+}
 
+void CoreTools::EndianTesting::Swap4ByteOrder2Test(UInt32Array& value)
+{
     Endian::SwapByteOrder(sizeof(uint32_t), value.data());
-    ASSERT_EQUAL(value.at(0), 0x78563412u);
+    for (auto i = 0u; i < value.size(); ++i)
+    {
+        ASSERT_EQUAL(value.at(i), swapUInt32.at(i));
+    }
+}
 
-    Endian::SwapByteOrder(sizeof(uint32_t), arraySize, value.data());
-    ASSERT_EQUAL(value.at(0), 0x12345678u);
-    ASSERT_EQUAL(value.at(1), 0x56789012u);
-    ASSERT_EQUAL(value.at(2), 0x90123456u);
-    ASSERT_EQUAL(value.at(3), 0x34567890u);
+void CoreTools::EndianTesting::Swap4ByteOrder3Test(UInt32Array& value)
+{
+    Endian::SwapByteOrder(sizeof(uint32_t), uint32ArraySize, value.data());
+    for (auto i = 0u; i < value.size(); ++i)
+    {
+        ASSERT_EQUAL(value.at(i), originalUInt32.at(i));
+    }
+}
 
-    std::vector<uint32_t> target(arraySize);
-    Endian::Swap4ByteOrderToTarget(arraySize, value.data(), target.data());
-    ASSERT_EQUAL(target.at(0), 0x78563412u);
-    ASSERT_EQUAL(target.at(1), 0x12907856u);
-    ASSERT_EQUAL(target.at(2), 0x56341290u);
-    ASSERT_EQUAL(target.at(3), 0x90785634u);
-    ASSERT_EQUAL(value.at(0), 0x12345678u);
-    ASSERT_EQUAL(value.at(1), 0x56789012u);
-    ASSERT_EQUAL(value.at(2), 0x90123456u);
-    ASSERT_EQUAL(value.at(3), 0x34567890u);
+void CoreTools::EndianTesting::Swap4ByteOrder4Test(const UInt32Array& value)
+{
+    UInt32Array target{};
+    Endian::Swap4ByteOrderToTarget(uint32ArraySize, value.data(), target.data());
+    for (auto i = 0u; i < value.size(); ++i)
+    {
+        ASSERT_EQUAL(target.at(i), swapUInt32.at(i));
+        ASSERT_EQUAL(value.at(i), originalUInt32.at(i));
+    }
 }
 
 void CoreTools::EndianTesting::Swap8ByteOrderTest()
 {
-    constexpr auto arraySize = 3;
-    std::array<uint64_t, arraySize> value{ 0x1234567890123456, 0x5678901234567890, 0x9012345678901234 };
+    auto value = originalUInt64;
 
+    ASSERT_NOT_THROW_EXCEPTION_1(Swap8ByteOrder0Test, value);
+    ASSERT_NOT_THROW_EXCEPTION_1(Swap8ByteOrder1Test, value);
+    ASSERT_NOT_THROW_EXCEPTION_1(Swap8ByteOrder2Test, value);
+    ASSERT_NOT_THROW_EXCEPTION_1(Swap8ByteOrder3Test, value);
+    ASSERT_NOT_THROW_EXCEPTION_1(Swap8ByteOrder4Test, value);
+}
+
+void CoreTools::EndianTesting::Swap8ByteOrder0Test(UInt64Array& value)
+{
     Endian::Swap8ByteOrder(value.data());
-    ASSERT_EQUAL(value.at(0), 0x5634129078563412u);
+    ASSERT_EQUAL(value.at(0), swapUInt64.at(0));
+    for (auto i = 1u; i < value.size(); ++i)
+    {
+        ASSERT_EQUAL(value.at(i), originalUInt64.at(i));
+    }
+}
 
-    Endian::Swap8ByteOrder(arraySize, value.data());
-    ASSERT_EQUAL(value.at(0), 0x1234567890123456u);
-    ASSERT_EQUAL(value.at(1), 0x9078563412907856u);
-    ASSERT_EQUAL(value.at(2), 0x3412907856341290u);
+void CoreTools::EndianTesting::Swap8ByteOrder1Test(UInt64Array& value)
+{
+    Endian::Swap8ByteOrder(uint64ArraySize, value.data());
+    ASSERT_EQUAL(value.at(0), originalUInt64.at(0));
+    for (auto i = 1u; i < value.size(); ++i)
+    {
+        ASSERT_EQUAL(value.at(i), swapUInt64.at(i));
+    }
+}
 
+void CoreTools::EndianTesting::Swap8ByteOrder2Test(UInt64Array& value)
+{
     Endian::SwapByteOrder(sizeof(uint64_t), value.data());
-    ASSERT_EQUAL(value.at(0), 0x5634129078563412u);
+    for (auto i = 0u; i < value.size(); ++i)
+    {
+        ASSERT_EQUAL(value.at(i), swapUInt64.at(i));
+    }
+}
 
-    Endian::SwapByteOrder(sizeof(uint64_t), arraySize, value.data());
-    ASSERT_EQUAL(value.at(0), 0x1234567890123456u);
-    ASSERT_EQUAL(value.at(1), 0x5678901234567890u);
-    ASSERT_EQUAL(value.at(2), 0x9012345678901234u);
+void CoreTools::EndianTesting::Swap8ByteOrder3Test(UInt64Array& value)
+{
+    Endian::SwapByteOrder(sizeof(uint64_t), uint64ArraySize, value.data());
+    for (auto i = 0u; i < value.size(); ++i)
+    {
+        ASSERT_EQUAL(value.at(i), originalUInt64.at(i));
+    }
+}
 
-    std::vector<uint64_t> target(arraySize);
-    Endian::Swap8ByteOrderToTarget(arraySize, value.data(), target.data());
-    ASSERT_EQUAL(target.at(0), 0x5634129078563412u);
-    ASSERT_EQUAL(target.at(1), 0x9078563412907856u);
-    ASSERT_EQUAL(target.at(2), 0x3412907856341290u);
-    ASSERT_EQUAL(value.at(0), 0x1234567890123456u);
-    ASSERT_EQUAL(value.at(1), 0x5678901234567890u);
-    ASSERT_EQUAL(value.at(2), 0x9012345678901234u);
+void CoreTools::EndianTesting::Swap8ByteOrder4Test(const UInt64Array& value)
+{
+    UInt64Array target{};
+    Endian::Swap8ByteOrderToTarget(uint64ArraySize, value.data(), target.data());
+    for (auto i = 0u; i < value.size(); ++i)
+    {
+        ASSERT_EQUAL(target.at(i), swapUInt64.at(i));
+        ASSERT_EQUAL(value.at(i), originalUInt64.at(i));
+    }
 }

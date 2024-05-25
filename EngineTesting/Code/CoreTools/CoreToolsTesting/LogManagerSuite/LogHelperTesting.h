@@ -31,10 +31,13 @@ namespace CoreTools
         void DoRunUnitTest() override;
         void MainTest();
 
-        void WriteMessageTest() noexcept;
+        void WriteMessageTest();
         void FileContentTest();
         void DeleteFileTest();
-        void WriteMessageToFileTest() noexcept;
+        void WriteMessageToFileTest();
+
+        void DoWriteMessageTest(LogLevel logLevel, const String& message) noexcept;
+        void DoWriteMessageToFileTest(LogLevel logLevel, const String& message) noexcept;
 
     private:
         String logHelperTestingName;

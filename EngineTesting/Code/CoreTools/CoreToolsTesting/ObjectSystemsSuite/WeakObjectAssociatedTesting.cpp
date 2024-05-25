@@ -1,11 +1,11 @@
-﻿///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:19)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/04/22 21:04)
 
 #include "WeakObjectAssociatedTesting.h"
 #include "Detail/BoolObject.h"
@@ -37,19 +37,34 @@ void CoreTools::WeakObjectAssociatedTesting::MainTest()
 
 void CoreTools::WeakObjectAssociatedTesting::WeakObjectAssociatedTest()
 {
-    const WeakObjectAssociated<Object> objectAssociated0{};
-
-    ASSERT_EQUAL(objectAssociated0.associated, 0);
-    ASSERT_EQUAL_NULL_PTR(objectAssociated0.object.lock());
+    ASSERT_NOT_THROW_EXCEPTION_0(WeakObjectAssociated0Test);
 
     const auto boolObject = std::make_shared<BoolObject>(DisableNotThrow::Disable);
-    const WeakObjectAssociated<Object> objectAssociated1{ boolObject };
 
-    ASSERT_EQUAL(objectAssociated1.associated, 0);
-    ASSERT_EQUAL(objectAssociated1.object.lock(), boolObject);
+    ASSERT_NOT_THROW_EXCEPTION_1(WeakObjectAssociated1Test, boolObject);
+    ASSERT_NOT_THROW_EXCEPTION_1(WeakObjectAssociated2Test, boolObject);
+}
 
-    const WeakObjectAssociated<Object> objectAssociated2{ boolObject, 9 };
+void CoreTools::WeakObjectAssociatedTesting::WeakObjectAssociated0Test()
+{
+    const WeakObjectAssociated objectAssociated{};
 
-    ASSERT_EQUAL(objectAssociated2.associated, 9);
-    ASSERT_EQUAL(objectAssociated2.object.lock(), boolObject);
+    ASSERT_EQUAL(objectAssociated.associated, 0);
+    ASSERT_EQUAL_NULL_PTR(objectAssociated.object.lock());
+}
+
+void CoreTools::WeakObjectAssociatedTesting::WeakObjectAssociated1Test(const BoolObjectSharedPtr& boolObject)
+{
+    const WeakObjectAssociated objectAssociated{ boolObject };
+
+    ASSERT_EQUAL(objectAssociated.associated, 0);
+    ASSERT_EQUAL(objectAssociated.object.lock(), boolObject);
+}
+
+void CoreTools::WeakObjectAssociatedTesting::WeakObjectAssociated2Test(const BoolObjectSharedPtr& boolObject)
+{
+    const WeakObjectAssociated objectAssociated{ boolObject, 9 };
+
+    ASSERT_EQUAL(objectAssociated.associated, 9);
+    ASSERT_EQUAL(objectAssociated.object.lock(), boolObject);
 }

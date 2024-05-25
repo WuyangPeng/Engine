@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/15 09:58)
+/// 版本：1.0.0.9 (2024/04/26 13:06)
 
 #include "NoexceptTesting.h"
 #include "System/Helper/Tools.h"
@@ -42,11 +42,20 @@ void CoreTools::NoexceptTesting::DisableNoexceptTest()
 
 void CoreTools::NoexceptTesting::NoexceptTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(NoexceptNoConstTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(NoexceptConstTest);
+}
+
+void CoreTools::NoexceptTesting::NoexceptNoConstTest()
+{
     NoexceptNoReturn(*this, &ClassType::Function0);
     NoexceptNoReturn(*this, &ClassType::Function1, 0);
     ASSERT_EQUAL(Noexcept<int>(*this, &ClassType::Function2, 0), 0);
     ASSERT_EQUAL((Noexcept<int>(*this, &ClassType::Function3, 2, 1)), 2);
+}
 
+void CoreTools::NoexceptTesting::NoexceptConstTest()
+{
     NoexceptNoReturn(*this, &ClassType::ConstFunction0);
     NoexceptNoReturn(*this, &ClassType::ConstFunction1, 0);
     ASSERT_EQUAL(Noexcept<int>(*this, &ClassType::ConstFunction2, 0), 0);

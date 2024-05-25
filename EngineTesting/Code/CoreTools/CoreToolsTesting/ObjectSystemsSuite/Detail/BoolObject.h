@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 16:48)
+/// 版本：1.0.0.9 (2024/05/19 20:03)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_SUITE_BOOL_OBJECT_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_SUITE_BOOL_OBJECT_H
@@ -36,17 +36,20 @@ namespace CoreTools
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
     private:
+        static constexpr auto bufferSize = 5;
+
+        using BoolArrayType = std::vector<bool>;
+
+    private:
         void AllocationArray0(bool value);
         void AllocationArray1(bool value);
 
         NODISCARD bool IsLoadValidity() const;
 
     private:
-        static constexpr auto bufferSize = 5;
-
         bool boolValue;
-        std::vector<bool> boolArray0;
-        std::vector<bool> boolArray1;
+        BoolArrayType boolArray0;
+        BoolArrayType boolArray1;
     };
 
 #include SYSTEM_WARNING_PUSH

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:34)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/04/23 12:37)
 
 #include "Pow3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -31,9 +31,6 @@ void CoreTools::Pow3Testing::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(Pow3Test);
 }
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26812)
-
 void CoreTools::Pow3Testing::Pow3Test()
 {
     ASSERT_EQUAL(Pow3<5>::Result, 3 * 3 * 3 * 3 * 3);
@@ -41,5 +38,3 @@ void CoreTools::Pow3Testing::Pow3Test()
     ASSERT_EQUAL(Pow3<7>::Result, 3 * 3 * 3 * 3 * 3 * 3 * 3);
     ASSERT_EQUAL(Pow3<10>::Result, 3 * 3 * 3 * 3 * 3 * 3 * 3 * 3 * 3 * 3);
 }
-
-#include SYSTEM_WARNING_POP

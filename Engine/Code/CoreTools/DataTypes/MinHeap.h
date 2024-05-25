@@ -16,6 +16,7 @@
 #include "MinHeapRecord.h"
 
 #include <type_traits>
+#include <vector>
 
 /// 最小堆是一种二叉树，其节点具有权重，并且具有父节点的权重小于或等于其子节点的权重的约束。
 /// 该数据结构可以用作优先级队列。

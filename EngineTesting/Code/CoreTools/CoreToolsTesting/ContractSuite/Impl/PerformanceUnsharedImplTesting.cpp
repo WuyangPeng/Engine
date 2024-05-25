@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/15 10:21)
+/// 版本：1.0.0.9 (2024/04/26 12:45)
 
 #include "PerformanceUnsharedImplTesting.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
@@ -36,48 +36,41 @@ void CoreTools::PerformanceUnsharedImplTesting::MainTest()
 
 void CoreTools::PerformanceUnsharedImplTesting::DefaultTest()
 {
-    constexpr auto count = 12;
     TestingType performanceUnsharedImpl0{ count };
-
     ASSERT_EQUAL((*performanceUnsharedImpl0).GetCount(), count);
 
     const auto performanceUnsharedImpl1 = performanceUnsharedImpl0;
-
-    ASSERT_EQUAL(performanceUnsharedImpl1->GetCount(), count);
-    ASSERT_EQUAL(performanceUnsharedImpl0->GetAddress(), performanceUnsharedImpl1->GetAddress());
+    ASSERT_NOT_THROW_EXCEPTION_3(AddressEqualTest, performanceUnsharedImpl0, performanceUnsharedImpl1, count);
 
     const auto performanceUnsharedImpl2 = performanceUnsharedImpl1;
-
-    ASSERT_EQUAL((*performanceUnsharedImpl2).GetCount(), count);
-    ASSERT_EQUAL(performanceUnsharedImpl2->GetAddress(), performanceUnsharedImpl1->GetAddress());
+    ASSERT_NOT_THROW_EXCEPTION_3(AddressEqualTest, performanceUnsharedImpl1, performanceUnsharedImpl2, count);
 
     performanceUnsharedImpl0 = performanceUnsharedImpl2;
-
-    ASSERT_EQUAL(performanceUnsharedImpl0->GetCount(), count);
-    ASSERT_EQUAL(performanceUnsharedImpl0->GetAddress(), performanceUnsharedImpl1->GetAddress());
+    ASSERT_NOT_THROW_EXCEPTION_3(AddressEqualTest, performanceUnsharedImpl1, performanceUnsharedImpl0, count);
 }
 
 void CoreTools::PerformanceUnsharedImplTesting::UseFactoryTest()
 {
-    constexpr auto count = 12;
     const TestingType performanceUnsharedImpl0{ ImplCreateUseFactory::Default, count };
-
     ASSERT_EQUAL(performanceUnsharedImpl0->GetCount(), count);
 
     const auto performanceUnsharedImpl1 = performanceUnsharedImpl0;
-
-    ASSERT_EQUAL(performanceUnsharedImpl1->GetCount(), count);
-    ASSERT_EQUAL(performanceUnsharedImpl0->GetAddress(), performanceUnsharedImpl1->GetAddress());
+    ASSERT_NOT_THROW_EXCEPTION_3(AddressEqualTest, performanceUnsharedImpl0, performanceUnsharedImpl1, count);
 }
 
 void CoreTools::PerformanceUnsharedImplTesting::UseUseDefaultConstructionTest()
 {
     const TestingType performanceUnsharedImpl0{ ImplCreateUseDefaultConstruction::Default };
-
     ASSERT_EQUAL(performanceUnsharedImpl0->GetCount(), 0);
 
     const auto performanceUnsharedImpl1 = performanceUnsharedImpl0;
+    ASSERT_NOT_THROW_EXCEPTION_3(AddressEqualTest, performanceUnsharedImpl0, performanceUnsharedImpl1, 0);
+}
 
-    ASSERT_EQUAL(performanceUnsharedImpl1->GetCount(), 0);
-    ASSERT_EQUAL(performanceUnsharedImpl0->GetAddress(), performanceUnsharedImpl1->GetAddress());
+void CoreTools::PerformanceUnsharedImplTesting::AddressEqualTest(const TestingType& lhs, const TestingType& rhs, int aCount)
+{
+    ASSERT_EQUAL(lhs->GetCount(), aCount);
+    ASSERT_EQUAL(rhs->GetCount(), aCount);
+    ASSERT_EQUAL((*rhs).GetCount(), aCount);
+    ASSERT_EQUAL(lhs->GetAddress(), rhs->GetAddress());
 }

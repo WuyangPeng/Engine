@@ -1,17 +1,17 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:26)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/04/23 10:21)
 
 #include "UnitTestSuiteReportOutputTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning/Timer.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/ReportOutput/UnitTestSuiteReportOutput.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
@@ -32,12 +32,12 @@ void CoreTools::UnitTestSuiteReportOutputTesting::DoRunUnitTest()
 
 void CoreTools::UnitTestSuiteReportOutputTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(UnitTestSuiteReportOutputEquilongTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(UnitTestSuiteReportOutputEquidistantTest);
     ASSERT_NOT_THROW_EXCEPTION_0(UnitTestSuiteReportOutputTimeTest);
     ASSERT_NOT_THROW_EXCEPTION_0(UnitTestSuiteReportOutputTestResultTest);
 }
 
-void CoreTools::UnitTestSuiteReportOutputTesting::UnitTestSuiteReportOutputEquilongTest()
+void CoreTools::UnitTestSuiteReportOutputTesting::UnitTestSuiteReportOutputEquidistantTest()
 {
     const auto characterContent = "这里的文字被两行-包围，且与文字长度一致!"s;
     UnitTestSuiteReportOutput output{ "测试"s, 40, GetStream() };

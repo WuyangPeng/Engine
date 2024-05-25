@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/19 15:39)
+/// 版本：1.0.0.9 (2024/04/28 12:53)
 
 #include "ThreadSafeMapTesting.h"
 #include "CoreTools/DataTypes/ThreadSafeMapDetail.h"
@@ -31,11 +31,11 @@ void CoreTools::ThreadSafeMapTesting::DoRunUnitTest()
 
 void CoreTools::ThreadSafeMapTesting::MainTest()
 {
-    std::thread thread0{ &ClassType::ThreadSafeMapTest, this };
+    std::thread thread{ &ClassType::ThreadSafeMapTest, this };
 
     ASSERT_NOT_THROW_EXCEPTION_0(ThreadSafeMapTest);
 
-    thread0.join();
+    thread.join();
 
     ASSERT_NOT_THROW_EXCEPTION_0(ThreadSafeMapRemoveTest);
 }
@@ -45,9 +45,7 @@ void CoreTools::ThreadSafeMapTesting::ThreadSafeMapTest()
     threadSafeMap.Insert(1, 2);
 
     ASSERT_TRUE(threadSafeMap.HasElements());
-
     ASSERT_TRUE(threadSafeMap.Exists(1));
-
     ASSERT_EQUAL(threadSafeMap.Get(1), 2);
 
     threadSafeMap.Insert(2, 3);

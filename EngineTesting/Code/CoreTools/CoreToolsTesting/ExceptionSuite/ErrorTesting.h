@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_EXCEPTION_SUITE_ERROR_TESTING_H
 #define CORE_TOOLS_EXCEPTION_SUITE_ERROR_TESTING_H
 
+#include "CoreTools/Exception/Error.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -19,6 +20,8 @@ namespace CoreTools
     public:
         using ClassType = ErrorTesting;
         using ParentType = UnitTest;
+
+        using String = System::String;
 
     public:
         explicit ErrorTesting(const OStreamShared& stream);
@@ -35,6 +38,10 @@ namespace CoreTools
         void ComErrorTest();
         void ThrowExceptionTest();
         void ThrowLastExceptionTest();
+
+        void FunctionDescribedTest(const FunctionDescribed& functionDescribed, const Error& error);
+
+        NODISCARD static Error::Format GetOpenFileError(const String& fileName);
     };
 }
 

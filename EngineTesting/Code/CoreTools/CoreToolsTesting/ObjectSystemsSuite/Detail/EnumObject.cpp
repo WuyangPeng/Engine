@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 16:49)
+/// 版本：1.0.0.9 (2024/05/19 20:23)
 
 #include "EnumObject.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -34,12 +34,16 @@ CoreTools::EnumObject::EnumObject(DisableNotThrow disableNotThrow)
 bool CoreTools::EnumObject::IsLoadValidity() const
 {
     if (enumValue == EnumObjectEnum::Ten || enumArray0.empty() || enumArray1.empty())
+    {
         return false;
+    }
 
     for (auto i = 0; i < bufferSize; ++i)
     {
         if (enumArray0.at(i) == EnumObjectEnum::Five || enumArray1.at(i) == EnumObjectEnum::Ten)
+        {
             return false;
+        }
     }
 
     return true;
@@ -85,14 +89,13 @@ int CoreTools::EnumObject::GetStreamingSize() const
     auto size = ParentType::GetStreamingSize();
 
     /// WriteEnum
-    size += CoreTools::GetStreamSize(enumValue);
+    size += GetStreamSize(enumValue);
 
     /// WriteEnumWithNumber
-    size += sizeof(int32_t);
-    size += bufferSize * CoreTools::GetStreamSize(enumValue);
+    size += GetStreamSize(enumArray0);
 
     /// WriteEnumWithoutNumber
-    size += bufferSize * CoreTools::GetStreamSize(enumValue);
+    size += bufferSize * GetStreamSize(enumValue);
 
     return size;
 }

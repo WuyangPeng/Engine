@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/18 22:06)
+/// 版本：1.0.0.9 (2024/05/11 14:11)
 
 #include "LogAsynchronousTesting.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
@@ -78,44 +78,39 @@ void CoreTools::LogAsynchronousTesting::WriteMessageToFileTest()
 {
     const Appender appender{ gLogAsynchronousTestingPathName, gLogAsynchronousTestingFileName, AppenderPrint::All, LogLevel::Trace, 100000, true, SYSTEM_TEXT("log"s) };
 
-    const Logger logger0{ LogFilter::CoreTools, LogLevel::Trace };
+    const Logger logger{ LogFilter::CoreTools, LogLevel::Trace };
 
     const auto manager = AppenderManager::Create();
 
-    ASSERT_TRUE(manager->InsertLogger(logger0));
-    ASSERT_TRUE(manager->InsertAppender(SYSTEM_TEXT("FileAppender"s), appender));
+    ASSERT_NOT_THROW_EXCEPTION_3(InitAppenderManager, appender, logger, *manager);
 
-    ASSERT_EQUAL(manager->GetMinLogLevelType(LogFilter::CoreTools), LogLevel::Trace);
+    ASSERT_NOT_THROW_EXCEPTION_1(WriteMessageToFileRegisteredTest, manager);
+}
 
-    LogMessage traceMessage(LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED);
-    traceMessage << gTraceMessage;
+void CoreTools::LogAsynchronousTesting::WriteMessageToFileRegisteredTest(const AppenderManagerSharedPtr& manager)
+{
+    ASSERT_NOT_THROW_EXCEPTION_3(RegisteredTest, manager, LogLevel::Trace, gTraceMessage);
+    ASSERT_NOT_THROW_EXCEPTION_3(RegisteredTest, manager, LogLevel::Debug, gDebugMessage);
+    ASSERT_NOT_THROW_EXCEPTION_3(RegisteredTest, manager, LogLevel::Info, gInfoMessage);
+    ASSERT_NOT_THROW_EXCEPTION_3(RegisteredTest, manager, LogLevel::Warn, gWarnMessage);
+    ASSERT_NOT_THROW_EXCEPTION_3(RegisteredTest, manager, LogLevel::Error, gErrorMessage);
+    ASSERT_NOT_THROW_EXCEPTION_3(RegisteredTest, manager, LogLevel::Fatal, gFatalMessage);
+}
 
-    LOG_ASYNCHRONOUS_SINGLETON.Registered(traceMessage, manager);
+void CoreTools::LogAsynchronousTesting::InitAppenderManager(const Appender& appender, const Logger& logger, AppenderManager& manager)
+{
+    ASSERT_TRUE(manager.InsertLogger(logger));
+    ASSERT_TRUE(manager.InsertAppender(SYSTEM_TEXT("FileAppender"s), appender));
 
-    LogMessage debugMessage{ LogLevel::Debug, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    debugMessage << gDebugMessage;
+    ASSERT_EQUAL(manager.GetMinLogLevelType(LogFilter::CoreTools), LogLevel::Trace);
+}
 
-    LOG_ASYNCHRONOUS_SINGLETON.Registered(debugMessage, manager);
+void CoreTools::LogAsynchronousTesting::RegisteredTest(const AppenderManagerSharedPtr& manager, LogLevel logLevel, const String& message)
+{
+    LogMessage logMessage(logLevel, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED);
+    logMessage << message;
 
-    LogMessage infoMessage{ LogLevel::Info, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    infoMessage << gInfoMessage;
-
-    LOG_ASYNCHRONOUS_SINGLETON.Registered(infoMessage, manager);
-
-    LogMessage warnMessage{ LogLevel::Warn, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    warnMessage << gWarnMessage;
-
-    LOG_ASYNCHRONOUS_SINGLETON.Registered(warnMessage, manager);
-
-    LogMessage errorMessage{ LogLevel::Error, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    errorMessage << gErrorMessage;
-
-    LOG_ASYNCHRONOUS_SINGLETON.Registered(errorMessage, manager);
-
-    LogMessage fatalMessage{ LogLevel::Fatal, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    fatalMessage << gFatalMessage;
-
-    LOG_ASYNCHRONOUS_SINGLETON.Registered(fatalMessage, manager);
+    LOG_ASYNCHRONOUS_SINGLETON.Registered(logMessage, manager);
 }
 
 void CoreTools::LogAsynchronousTesting::FileContentTest()
@@ -148,33 +143,23 @@ void CoreTools::LogAsynchronousTesting::WriteMessageToDefaultFileTest()
     ASSERT_TRUE(manager->InsertLogger(logger));
     ASSERT_TRUE(manager->InsertAppender(SYSTEM_TEXT("Default"s), appender));
 
-    LogMessage traceMessage(LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED);
-    traceMessage << gTraceMessage;
+    ASSERT_NOT_THROW_EXCEPTION_1(WriteMessageToDefaultFileRegisteredTest, manager);
+}
 
-    LOG_ASYNCHRONOUS_SINGLETON.Registered(gLogAsynchronousTestingFileName, traceMessage, manager);
+void CoreTools::LogAsynchronousTesting::WriteMessageToDefaultFileRegisteredTest(const AppenderManagerSharedPtr& manager)
+{
+    ASSERT_NOT_THROW_EXCEPTION_3(DefaultFileRegisteredTest, manager, LogLevel::Trace, gTraceMessage);
+    ASSERT_NOT_THROW_EXCEPTION_3(DefaultFileRegisteredTest, manager, LogLevel::Debug, gDebugMessage);
+    ASSERT_NOT_THROW_EXCEPTION_3(DefaultFileRegisteredTest, manager, LogLevel::Info, gInfoMessage);
+    ASSERT_NOT_THROW_EXCEPTION_3(DefaultFileRegisteredTest, manager, LogLevel::Warn, gWarnMessage);
+    ASSERT_NOT_THROW_EXCEPTION_3(DefaultFileRegisteredTest, manager, LogLevel::Error, gErrorMessage);
+    ASSERT_NOT_THROW_EXCEPTION_3(DefaultFileRegisteredTest, manager, LogLevel::Fatal, gFatalMessage);
+}
 
-    LogMessage debugMessage{ LogLevel::Debug, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    debugMessage << gDebugMessage;
+void CoreTools::LogAsynchronousTesting::DefaultFileRegisteredTest(const AppenderManagerSharedPtr& manager, LogLevel logLevel, const String& message)
+{
+    LogMessage logMessage{ logLevel, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
+    logMessage << message;
 
-    LOG_ASYNCHRONOUS_SINGLETON.Registered(gLogAsynchronousTestingFileName, debugMessage, manager);
-
-    LogMessage infoMessage{ LogLevel::Info, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    infoMessage << gInfoMessage;
-
-    LOG_ASYNCHRONOUS_SINGLETON.Registered(gLogAsynchronousTestingFileName, infoMessage, manager);
-
-    LogMessage warnMessage{ LogLevel::Warn, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    warnMessage << gWarnMessage;
-
-    LOG_ASYNCHRONOUS_SINGLETON.Registered(gLogAsynchronousTestingFileName, warnMessage, manager);
-
-    LogMessage errorMessage{ LogLevel::Error, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    errorMessage << gErrorMessage;
-
-    LOG_ASYNCHRONOUS_SINGLETON.Registered(gLogAsynchronousTestingFileName, errorMessage, manager);
-
-    LogMessage fatalMessage{ LogLevel::Fatal, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    fatalMessage << gFatalMessage;
-
-    LOG_ASYNCHRONOUS_SINGLETON.Registered(gLogAsynchronousTestingFileName, fatalMessage, manager);
+    LOG_ASYNCHRONOUS_SINGLETON.Registered(gLogAsynchronousTestingFileName, logMessage, manager);
 }

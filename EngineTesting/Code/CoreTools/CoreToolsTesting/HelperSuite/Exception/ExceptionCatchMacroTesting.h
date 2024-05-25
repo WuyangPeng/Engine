@@ -25,6 +25,9 @@ namespace CoreTools
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
+    protected:
+        void PrintTipsMessage() override;
+
     private:
         void DoRunUnitTest() override;
         void MainTest();
@@ -33,8 +36,6 @@ namespace CoreTools
         void Catch1Test();
         void Catch2Test();
         void Catch3Test();
-
-        void PrintTipsMessage() override;
     };
 }
 

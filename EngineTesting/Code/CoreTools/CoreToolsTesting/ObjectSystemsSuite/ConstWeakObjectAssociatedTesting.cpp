@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 17:22)
+/// 版本：1.0.0.9 (2024/05/22 18:08)
 
 #include "ConstWeakObjectAssociatedTesting.h"
 #include "Detail/BoolObject.h"
@@ -37,13 +37,23 @@ void CoreTools::ConstWeakObjectAssociatedTesting::MainTest()
 void CoreTools::ConstWeakObjectAssociatedTesting::ConstWeakObjectAssociatedTest()
 {
     const auto boolObject = std::make_shared<BoolObject>(DisableNotThrow::Disable);
-    const ConstWeakObjectAssociated<Object> constObjectAssociated0{ boolObject };
 
-    ASSERT_EQUAL(constObjectAssociated0.associated, 0);
-    ASSERT_EQUAL(constObjectAssociated0.object.lock(), boolObject);
+    ASSERT_NOT_THROW_EXCEPTION_1(ConstWeakObjectAssociated0Test, boolObject);
+    ASSERT_NOT_THROW_EXCEPTION_1(ConstWeakObjectAssociated1Test, boolObject);
+}
 
-    const ConstWeakObjectAssociated<Object> constObjectAssociated1{ boolObject, 9 };
+void CoreTools::ConstWeakObjectAssociatedTesting::ConstWeakObjectAssociated0Test(const BoolObjectSharedPtr& boolObject)
+{
+    const TestingType constObjectAssociated{ boolObject };
 
-    ASSERT_EQUAL(constObjectAssociated1.associated, 9);
-    ASSERT_EQUAL(constObjectAssociated1.object.lock(), boolObject);
+    ASSERT_EQUAL(constObjectAssociated.associated, 0);
+    ASSERT_EQUAL(constObjectAssociated.object.lock(), boolObject);
+}
+
+void CoreTools::ConstWeakObjectAssociatedTesting::ConstWeakObjectAssociated1Test(const BoolObjectSharedPtr& boolObject)
+{
+    const TestingType constObjectAssociated{ boolObject, 9 };
+
+    ASSERT_EQUAL(constObjectAssociated.associated, 9);
+    ASSERT_EQUAL(constObjectAssociated.object.lock(), boolObject);
 }

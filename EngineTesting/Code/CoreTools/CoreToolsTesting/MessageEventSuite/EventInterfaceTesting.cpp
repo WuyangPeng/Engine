@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 15:30)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/04/23 13:02)
 
 #include "EventInterfaceTesting.h"
 #include "Detail/EventSubclass.h"
@@ -35,8 +35,6 @@ void CoreTools::EventInterfaceTesting::MainTest()
 
 void CoreTools::EventInterfaceTesting::EventSubclassTest()
 {
-    constexpr auto value = 5;
-
     const EventInterfaceSharedPtr basePointer{ std::make_shared<EventSubclass>(value) };
 
     ASSERT_UNEQUAL_NULL_PTR(basePointer);
@@ -47,9 +45,14 @@ void CoreTools::EventInterfaceTesting::EventSubclassTest()
 
     ASSERT_EQUAL(eventSubclass->GetValue(), value);
 
+    ASSERT_NOT_THROW_EXCEPTION_1(EventFunctionTest, *eventSubclass);
+}
+
+void CoreTools::EventInterfaceTesting::EventFunctionTest(EventSubclass& eventSubclass)
+{
     CallbackParameters callbackParameters{ 1 };
     callbackParameters.SetValue(0, 100);
-    ASSERT_TRUE(eventSubclass->EventFunction(callbackParameters));
+    ASSERT_TRUE(eventSubclass.EventFunction(callbackParameters));
 
-    ASSERT_EQUAL(eventSubclass->GetValue(), value + 100);
+    ASSERT_EQUAL(eventSubclass.GetValue(), value + 100);
 }

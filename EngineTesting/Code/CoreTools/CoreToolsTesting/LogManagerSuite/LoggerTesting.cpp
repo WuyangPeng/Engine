@@ -9,7 +9,7 @@
 
 #include "LoggerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/LogManager/Logger.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
@@ -40,14 +40,16 @@ void CoreTools::LoggerTesting::BaseTest()
 
     const Logger logger1{ logger0 };
 
-    ASSERT_EQUAL(logger1.GetLogLevel(), LogLevel::Info);
-    ASSERT_EQUAL(logger1.GetLogFilterType(), LogFilter::Mathematics);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoBaseTest, logger1, LogLevel::Info);
 
     logger0.SetLogLevel(LogLevel::Warn);
 
-    ASSERT_EQUAL(logger0.GetLogLevel(), LogLevel::Warn);
-    ASSERT_EQUAL(logger0.GetLogFilterType(), LogFilter::Mathematics);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoBaseTest, logger0, LogLevel::Warn);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoBaseTest, logger1, LogLevel::Info);
+}
 
-    ASSERT_EQUAL(logger1.GetLogLevel(), LogLevel::Info);
-    ASSERT_EQUAL(logger1.GetLogFilterType(), LogFilter::Mathematics);
+void CoreTools::LoggerTesting::DoBaseTest(const Logger& logger, LogLevel logLevel)
+{
+    ASSERT_EQUAL(logger.GetLogLevel(), logLevel);
+    ASSERT_EQUAL(logger.GetLogFilterType(), LogFilter::Mathematics);
 }

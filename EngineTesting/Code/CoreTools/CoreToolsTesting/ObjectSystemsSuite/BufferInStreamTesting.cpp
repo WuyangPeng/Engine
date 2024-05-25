@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 16:57)
+/// 版本：1.0.0.9 (2024/05/19 20:37)
 
 #include "BufferInStreamTesting.h"
 #include "Detail/BoolObject.h"
@@ -13,7 +13,7 @@
 #include "Detail/IntObject.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/InitTerm.h"
@@ -53,16 +53,9 @@ void CoreTools::BufferInStreamTesting::BufferInStreamTest()
 
     ASSERT_EQUAL_FAILURE_THROW(inTopLevel.GetTopLevelSize(), 3, "top level 大小错误。");
 
-    std::vector<ObjectInterfaceSharedPtr> objects{};
-    for (const auto& element : inTopLevel)
-    {
-        ASSERT_TRUE(inTopLevel.IsTopLevel(element));
-        objects.emplace_back(element);
-    }
+    const auto objects = GetObjectContainer(inTopLevel);
 
-    ASSERT_TRUE(objects.at(0)->IsExactly(BoolObject::GetCurrentRttiType()));
-    ASSERT_TRUE(objects.at(1)->IsExactly(EnumObject::GetCurrentRttiType()));
-    ASSERT_TRUE(objects.at(2)->IsExactly(IntObject::GetCurrentRttiType()));
+    ASSERT_NOT_THROW_EXCEPTION_1(IsExactlyTest, objects);
 }
 
 CoreTools::ConstFileBufferSharedPtr CoreTools::BufferInStreamTesting::GetBufferInformation()
@@ -76,4 +69,23 @@ CoreTools::ConstFileBufferSharedPtr CoreTools::BufferInStreamTesting::GetBufferI
     const BufferOutStream bufferOutStream{ outTopLevel };
 
     return bufferOutStream.GetBufferOutStreamInformation();
+}
+
+void CoreTools::BufferInStreamTesting::IsExactlyTest(const ObjectContainer& objects)
+{
+    ASSERT_TRUE(objects.at(0)->IsExactly(BoolObject::GetCurrentRttiType()));
+    ASSERT_TRUE(objects.at(1)->IsExactly(EnumObject::GetCurrentRttiType()));
+    ASSERT_TRUE(objects.at(2)->IsExactly(IntObject::GetCurrentRttiType()));
+}
+
+CoreTools::BufferInStreamTesting::ObjectContainer CoreTools::BufferInStreamTesting::GetObjectContainer(const InTopLevel& inTopLevel)
+{
+    ObjectContainer objects{};
+    for (const auto& element : inTopLevel)
+    {
+        ASSERT_TRUE(inTopLevel.IsTopLevel(element));
+        objects.emplace_back(element);
+    }
+
+    return objects;
 }

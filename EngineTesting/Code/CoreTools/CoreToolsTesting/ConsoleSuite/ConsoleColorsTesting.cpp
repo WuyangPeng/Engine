@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 15:07)
+/// 版本：1.0.0.9 (2024/04/24 22:20)
 
 #include "ConsoleColorsTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -18,13 +18,6 @@
 CoreTools::ConsoleColorsTesting::ConsoleColorsTesting(const OStreamShared& stream)
     : ParentType{ stream }, console{ OutputConsoleColors::Create() }
 {
-#if !defined(TCRE_USE_GCC)
-
-    COUT.imbue(std::locale("chs"));
-    CERR.imbue(std::locale("chs"));
-
-#endif  // TCRE_USE_GCC
-
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
@@ -91,6 +84,5 @@ void CoreTools::ConsoleColorsTesting::ColorsTest()
 void CoreTools::ConsoleColorsTesting::ResetColorsTest()
 {
     console.ResetColor();
-
     GetStream() << "这条信息在控制台中文本显示为白色，背景为黑色。\n";
 }

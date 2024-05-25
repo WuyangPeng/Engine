@@ -26,6 +26,11 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using Atomic = std::atomic<int>;
+
+        static constexpr auto threadCount = 5;
+
+    private:
         void MainTest();
         void DoRunUnitTest() override;
 
@@ -35,9 +40,7 @@ namespace CoreTools
         void AtomicMaxTest();
 
     private:
-        std::atomic<int> atomic;
-
-        static constexpr auto threadCount = 5;
+        Atomic atomic;
     };
 }
 

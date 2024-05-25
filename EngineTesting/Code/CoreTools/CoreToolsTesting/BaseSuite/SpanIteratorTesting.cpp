@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/15 14:43)
+/// 版本：1.0.0.9 (2024/04/23 17:33)
 
 #include "SpanIteratorTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -13,6 +13,8 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
+#include <numeric>
 
 using namespace std::literals;
 
@@ -34,6 +36,10 @@ void CoreTools::SpanIteratorTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DereferenceTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StepTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(PrefixPlusTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SuffixPlusTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(PrefixSubtractionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SuffixSubtractionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(IncreaseTest);
     ASSERT_NOT_THROW_EXCEPTION_0(IncreaseArrayTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SubtractionTest);
@@ -44,19 +50,21 @@ void CoreTools::SpanIteratorTesting::MainTest()
 
 void CoreTools::SpanIteratorTesting::BaseTest()
 {
-    std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
+    IntContainer test(size);
+    std::iota(test.begin(), test.end(), 0);
 
     const SpanIterator span{ test.begin(), test.end() };
 
     ASSERT_EQUAL(span.GetBegin(), test.begin());
     ASSERT_EQUAL(span.GetEnd(), test.end());
     ASSERT_EQUAL(span.GetCurrent(), test.begin());
-
     ASSERT_EQUAL(span.GetRemainingCount(), boost::numeric_cast<int>(test.size()));
-
     ASSERT_EQUAL(span.GetData(), test.data());
 
-    ASSERT_EQUAL(span.Get(5), test.begin() + 5);
+    for (auto index = 0; index < size; ++index)
+    {
+        ASSERT_EQUAL(span.Get(index), test.begin() + index);
+    }
 }
 
 void CoreTools::SpanIteratorTesting::DereferenceTest()
@@ -71,50 +79,113 @@ void CoreTools::SpanIteratorTesting::DereferenceTest()
 
 void CoreTools::SpanIteratorTesting::StepTest()
 {
-    std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
+    IntContainer test(size);
+    std::iota(test.begin(), test.end(), 0);
 
     SpanIterator span{ test.begin(), test.end(), test.begin() };
-
     ASSERT_EQUAL(*span, test.at(0));
 
-    auto result = span++;
+    constexpr auto step0 = 5;
+    span += step0;
+    ASSERT_EQUAL(*span, test.at(step0));
 
-    ASSERT_EQUAL(*result, test.at(0));
-    ASSERT_EQUAL(*span, test.at(1));
+    constexpr auto step1 = 3;
+    span -= step1;
+    ASSERT_EQUAL(*span, test.at(step0 - step1));
+}
 
-    result = ++span;
+void CoreTools::SpanIteratorTesting::PrefixPlusTest()
+{
+    IntContainer test(size);
+    std::iota(test.begin(), test.end(), 0);
 
-    ASSERT_EQUAL(*result, test.at(2));
-    ASSERT_EQUAL(*span, test.at(2));
+    SpanIterator span0{ test.begin(), test.end(), test.begin() };
+    ASSERT_EQUAL(*span0, test.at(0));
 
-    result = span--;
+    auto span1 = ++span0;
 
-    ASSERT_EQUAL(*result, test.at(2));
-    ASSERT_EQUAL(*span, test.at(1));
+    ASSERT_EQUAL(*span1, test.at(1));
+    ASSERT_EQUAL(*span0, test.at(1));
+    ASSERT_EQUAL(span1.GetCurrent(), span0.GetCurrent());
 
-    result = --span;
+    span0 = ++span1;
 
-    ASSERT_EQUAL(*result, test.at(0));
-    ASSERT_EQUAL(*span, test.at(0));
+    ASSERT_EQUAL(*span1, test.at(2));
+    ASSERT_EQUAL(*span0, test.at(2));
+    ASSERT_EQUAL(span1.GetCurrent(), span0.GetCurrent());
+}
 
-    span += 3;
+void CoreTools::SpanIteratorTesting::SuffixPlusTest()
+{
+    IntContainer test(size);
+    std::iota(test.begin(), test.end(), 0);
 
-    ASSERT_EQUAL(*span, test.at(3));
+    SpanIterator span0{ test.begin(), test.end(), test.begin() };
+    ASSERT_EQUAL(*span0, test.at(0));
 
-    span -= 2;
+    auto span1 = span0++;
 
-    ASSERT_EQUAL(*span, test.at(1));
+    ASSERT_EQUAL(*span1, test.at(0));
+    ASSERT_EQUAL(*span0, test.at(1));
+    ASSERT_UNEQUAL(span1.GetCurrent(), span0.GetCurrent());
+
+    const auto span2 = span1++;
+
+    ASSERT_EQUAL(*span2, test.at(0));
+    ASSERT_EQUAL(*span1, test.at(1));
+    ASSERT_UNEQUAL(span2.GetCurrent(), span1.GetCurrent());
+}
+
+void CoreTools::SpanIteratorTesting::PrefixSubtractionTest()
+{
+    IntContainer test(size);
+    std::iota(test.begin(), test.end(), 0);
+
+    constexpr auto beginStep = 5;
+    SpanIterator span0{ test.begin(), test.end(), test.begin() + beginStep };
+
+    auto span1 = --span0;
+
+    ASSERT_EQUAL(*span1, test.at(beginStep - 1));
+    ASSERT_EQUAL(*span0, test.at(beginStep - 1));
+    ASSERT_EQUAL(span1.GetCurrent(), span0.GetCurrent());
+
+    span0 = --span1;
+
+    ASSERT_EQUAL(*span1, test.at(beginStep - 2));
+    ASSERT_EQUAL(*span0, test.at(beginStep - 2));
+    ASSERT_EQUAL(span1.GetCurrent(), span0.GetCurrent());
+}
+
+void CoreTools::SpanIteratorTesting::SuffixSubtractionTest()
+{
+    IntContainer test(size);
+    std::iota(test.begin(), test.end(), 0);
+
+    constexpr auto beginStep = 5;
+    SpanIterator span0{ test.begin(), test.end(), test.begin() + beginStep };
+
+    auto span1 = span0--;
+
+    ASSERT_EQUAL(*span1, test.at(beginStep));
+    ASSERT_EQUAL(*span0, test.at(beginStep - 1));
+    ASSERT_UNEQUAL(span1.GetCurrent(), span0.GetCurrent());
+
+    const auto span2 = span1--;
+
+    ASSERT_EQUAL(*span2, test.at(beginStep));
+    ASSERT_EQUAL(*span1, test.at(beginStep - 1));
+    ASSERT_UNEQUAL(span1.GetCurrent(), span2.GetCurrent());
 }
 
 void CoreTools::SpanIteratorTesting::IncreaseTest()
 {
-    std::vector<char> test(10);
+    std::vector<char> test(size);
 
     SpanIterator span{ test.begin(), test.end(), test.begin() };
     constexpr int32_t increase{ 5 };
 
     span.Increase(increase);
-
     span -= sizeof(increase);
 
     ASSERT_EQUAL(span.Increase<int32_t>(), increase);
@@ -122,28 +193,29 @@ void CoreTools::SpanIteratorTesting::IncreaseTest()
 
 void CoreTools::SpanIteratorTesting::IncreaseArrayTest()
 {
-    std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
+    IntContainer test0(size);
+    std::iota(test0.begin(), test0.end(), 1);
 
-    SpanIterator span{ test.begin(), test.end() };
+    std::array<int32_t, size / 2> test1{};
+    std::iota(test1.begin(), test1.end(), 1);
 
-    const auto result = span.Increase<int32_t, 5>();
-    constexpr std::array testValue{ 1, 2, 3, 4, 5 };
+    SpanIterator span{ test0.begin(), test0.end() };
+    const auto result = span.Increase<int32_t, size / 2>();
 
-    ASSERT_EQUAL(result, testValue);
-
+    ASSERT_EQUAL(result, test1);
     ASSERT_EQUAL(*span.GetCurrent(), 6);
 
-    span.Increase<int32_t, 2>({ 8, 9 });
+    span.Increase<int32_t, size / 2>(test1);
 
     ASSERT_EQUAL(span.GetCurrent(), span.GetEnd());
-
-    ASSERT_EQUAL(test.at(5), 8);
-    ASSERT_EQUAL(test.at(6), 9);
+    ASSERT_EQUAL(test0.at(5), 1);
+    ASSERT_EQUAL(test0.at(6), 2);
 }
 
 void CoreTools::SpanIteratorTesting::SubtractionTest()
 {
-    std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
+    IntContainer test(size);
+    std::iota(test.begin(), test.end(), 0);
 
     const SpanIterator span0{ test.begin(), test.end(), test.begin() };
     SpanIterator span1{ test.begin(), test.end(), test.begin() };
@@ -157,7 +229,8 @@ void CoreTools::SpanIteratorTesting::SubtractionTest()
 
 void CoreTools::SpanIteratorTesting::IterSwapTest()
 {
-    std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
+    IntContainer test(size);
+    std::iota(test.begin(), test.end(), 1);
 
     const SpanIterator span0{ test.begin(), test.end(), test.begin() };
     SpanIterator span1{ test.begin(), test.end(), test.begin() };
@@ -174,40 +247,38 @@ void CoreTools::SpanIteratorTesting::IterSwapTest()
 
 void CoreTools::SpanIteratorTesting::ConstTest()
 {
-    const std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
+    IntContainer test(size);
+    std::iota(test.begin(), test.end(), 0);
 
     const SpanIterator span{ test.begin(), test.end() };
 
     ASSERT_EQUAL(span.GetBegin(), test.begin());
     ASSERT_EQUAL(span.GetEnd(), test.end());
     ASSERT_EQUAL(span.GetCurrent(), test.begin());
-
     ASSERT_EQUAL(span.GetRemainingCount(), boost::numeric_cast<int>(test.size()));
 }
 
 void CoreTools::SpanIteratorTesting::GetSetValueTest()
 {
-    std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
+    IntContainer test(size);
+    std::iota(test.begin(), test.end(), 1);
 
     SpanIterator span{ test.begin(), test.end() };
 
     const auto value0 = span.GetValue<int32_t>(1);
-
     ASSERT_EQUAL(value0, 2);
 
-    span.SetValue(2, 8);
+    constexpr auto modify = 8;
+    constexpr auto step = 2;
 
-    ASSERT_EQUAL(test.at(2), 8);
+    span.SetValue(step, modify);
+    ASSERT_EQUAL(test.at(step), modify);
 
-    const auto value1 = span.GetValue<int32_t, 5>(2);
-
-    constexpr std::array value2{ 8, 4, 5, 6, 7 };
-
+    const auto value1 = span.GetValue<int32_t, 5>(step);
+    constexpr std::array value2{ modify, 4, 5, 6, 7 };
     ASSERT_EQUAL(value1, value2);
 
     span.SetValue<int32_t, 5>(1, value2);
-
-    const std::vector value3{ 1, 8, 4, 5, 6, 7, 7 };
-
+    const std::vector value3{ 1, modify, 4, 5, 6, 7, 7, 8, 9, 10 };
     ASSERT_EQUAL(test, value3);
 }

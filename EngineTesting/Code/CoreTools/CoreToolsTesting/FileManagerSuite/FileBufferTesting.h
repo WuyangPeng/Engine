@@ -27,6 +27,9 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        static constexpr auto bufferSize = 10;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
@@ -37,6 +40,14 @@ namespace CoreTools
         void CopyBufferTest();
 
         void Init(FileBuffer& fileBuffer, int step) const;
+        void GetBufferEqualTest(const FileBuffer& lhs, const FileBuffer& rhs);
+        void InitByForEach(FileBuffer& fileBuffer);
+        void CopyByForEachTest(const FileBuffer& fileBuffer);
+        void DoCopyTest(const FileBuffer& fileBuffer);
+
+        NODISCARD const char* ShallowCopyTest(const FileBuffer& lhs, const char* lhsPtr, const FileBuffer& rhs);
+        void DeepCopyTest(const char* ptr0, const char* ptr1, FileBuffer& fileBuffer);
+        void NoChangeTest(const FileBuffer& lhs, const FileBuffer& rhs);
     };
 }
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/18 22:00)
+/// 版本：1.0.0.9 (2024/05/11 13:58)
 
 #include "LogAppenderIOManagerSignTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
@@ -15,7 +15,7 @@
 #include "CoreTools/FileManager/DeleteFileTools.h"
 #include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/LogManager/Appender.h"
 #include "CoreTools/LogManager/AppenderManager.h"
@@ -70,6 +70,13 @@ void CoreTools::LogAppenderIOManagerSignTesting::LogAppenderIOManageSignTest()
 
     auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
 
+    const auto logMessage = GetLogMessage();
+
+    manager << logMessage;
+}
+
+CoreTools::LogMessage CoreTools::LogAppenderIOManagerSignTesting::GetLogMessage()
+{
     LogMessage logMessage{ LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
 
     logMessage << promptMessage
@@ -80,7 +87,7 @@ void CoreTools::LogAppenderIOManagerSignTesting::LogAppenderIOManageSignTest()
                << attentionMessage
                << LogAppenderIOManageSign::TriggerAssert;
 
-    manager << logMessage;
+    return logMessage;
 }
 
 void CoreTools::LogAppenderIOManagerSignTesting::FileContentTest()
@@ -88,8 +95,9 @@ void CoreTools::LogAppenderIOManagerSignTesting::FileContentTest()
     IFileStreamManager fileManager{ logAppenderIOManagerTestingFullName };
     fileManager.SetSimplifiedChinese();
 
-    auto fileContent = fileManager.GetFileContent();
-    ASSERT_UNEQUAL(fileContent.find(promptMessage + SYSTEM_TEXT(' ') + cancelMessage + SYSTEM_TEXT('\n') + attentionMessage), System::String::npos);
+    const auto fileContent = fileManager.GetFileContent();
+    const auto message = promptMessage + SYSTEM_TEXT(' ') + cancelMessage + SYSTEM_TEXT('\n') + attentionMessage;
+    ASSERT_UNEQUAL(fileContent.find(message), System::String::npos);
 }
 
 void CoreTools::LogAppenderIOManagerSignTesting::DeleteFileTest()

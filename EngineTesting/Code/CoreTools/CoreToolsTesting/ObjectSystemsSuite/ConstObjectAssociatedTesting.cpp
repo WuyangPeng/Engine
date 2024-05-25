@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 17:05)
+/// 版本：1.0.0.9 (2024/05/22 17:58)
 
 #include "ConstObjectAssociatedTesting.h"
 #include "Detail/BoolObject.h"
@@ -36,25 +36,44 @@ void CoreTools::ConstObjectAssociatedTesting::MainTest()
 
 void CoreTools::ConstObjectAssociatedTesting::ConstObjectAssociatedTest()
 {
-    const ConstObjectAssociated<Object> constObjectAssociated0{};
-
-    ASSERT_EQUAL(constObjectAssociated0.associated, 0);
-    ASSERT_EQUAL_NULL_PTR(constObjectAssociated0.object);
+    ASSERT_NOT_THROW_EXCEPTION_0(ConstObjectAssociated0Test);
 
     const auto boolObject = std::make_shared<BoolObject>(DisableNotThrow::Disable);
-    const ConstObjectAssociated<Object> constObjectAssociated1{ boolObject };
+    ASSERT_NOT_THROW_EXCEPTION_1(ConstObjectAssociated1Test, boolObject);
 
-    ASSERT_EQUAL(constObjectAssociated1.associated, 0);
-    ASSERT_EQUAL(constObjectAssociated1.object, boolObject);
+    const TestingType constObjectAssociated{ boolObject, associated };
+    ASSERT_NOT_THROW_EXCEPTION_2(ConstObjectAssociated2Test, boolObject, constObjectAssociated);
 
-    const ConstObjectAssociated<Object> constObjectAssociated2{ boolObject, 9 };
+    ASSERT_NOT_THROW_EXCEPTION_1(ConstObjectAssociated3Test, constObjectAssociated);
+}
 
-    ASSERT_EQUAL(constObjectAssociated2.associated, 9);
-    ASSERT_EQUAL(constObjectAssociated2.object, boolObject);
+void CoreTools::ConstObjectAssociatedTesting::ConstObjectAssociated0Test()
+{
+    const TestingType constObjectAssociated{};
 
-    boolObject->SetUniqueId(5);
+    ASSERT_EQUAL(constObjectAssociated.associated, 0);
+    ASSERT_EQUAL_NULL_PTR(constObjectAssociated.object);
+}
 
-    const auto constObjectAssociated3 = constObjectAssociated2.Clone();
+void CoreTools::ConstObjectAssociatedTesting::ConstObjectAssociated1Test(const BoolObjectSharedPtr& boolObject)
+{
+    const TestingType constObjectAssociated{ boolObject };
 
-    ASSERT_EQUAL(constObjectAssociated3->GetUniqueId(), 5);
+    ASSERT_EQUAL(constObjectAssociated.associated, 0);
+    ASSERT_EQUAL(constObjectAssociated.object, boolObject);
+}
+
+void CoreTools::ConstObjectAssociatedTesting::ConstObjectAssociated2Test(const BoolObjectSharedPtr& boolObject, const TestingType& constObjectAssociated)
+{
+    ASSERT_EQUAL(constObjectAssociated.associated, associated);
+    ASSERT_EQUAL(constObjectAssociated.object, boolObject);
+
+    boolObject->SetUniqueId(uniqueId);
+}
+
+void CoreTools::ConstObjectAssociatedTesting::ConstObjectAssociated3Test(const TestingType& constObjectAssociated)
+{
+    const auto clone = constObjectAssociated.Clone();
+
+    ASSERT_EQUAL(clone->GetUniqueId(), uniqueId);
 }

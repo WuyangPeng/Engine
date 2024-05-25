@@ -5,11 +5,10 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 16:08)
+/// 版本：1.0.0.9 (2024/05/04 23:44)
 
-#include "GenerateRandomNameTesting.h"
+#include "GenerateRandomNameTestingDetail.h"
 #include "CoreTools/FileManager/GenerateRandomName.h"
-#include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
@@ -42,8 +41,7 @@ void CoreTools::GenerateRandomNameTesting::StringTest()
 
     const auto name = GenerateRandomName::GetName(length, extensionName);
 
-    ASSERT_EQUAL(name.size(), length + extensionName.size() + 1);
-    ASSERT_EQUAL(name.find(extensionName), name.size() - extensionName.size());
+    ASSERT_NOT_THROW_EXCEPTION_3(ResultTest<std::string>, length, name, extensionName);
 }
 
 void CoreTools::GenerateRandomNameTesting::WStringTest()
@@ -53,12 +51,7 @@ void CoreTools::GenerateRandomNameTesting::WStringTest()
 
     const auto name = GenerateRandomName::GetName(length, extensionName);
 
-    if (name.find(extensionName) != std::string::npos)
-    {
-        ASSERT_EQUAL(name.find(extensionName), name.size() - extensionName.size());
-    }
-
-    ASSERT_EQUAL(name.size(), length + extensionName.size() + 1);
+    ASSERT_NOT_THROW_EXCEPTION_3(ResultTest<std::wstring>, length, name, extensionName);
 }
 
 void CoreTools::GenerateRandomNameTesting::TStringTest()
@@ -68,6 +61,5 @@ void CoreTools::GenerateRandomNameTesting::TStringTest()
 
     const auto name = GenerateRandomName::GetName(length, extensionName);
 
-    ASSERT_EQUAL(name.size(), length + extensionName.size() + 1);
-    ASSERT_EQUAL(name.find(extensionName), name.size() - extensionName.size());
+    ASSERT_NOT_THROW_EXCEPTION_3(ResultTest<String>, length, name, extensionName);
 }

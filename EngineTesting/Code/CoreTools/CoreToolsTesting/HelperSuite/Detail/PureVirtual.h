@@ -21,7 +21,7 @@ namespace CoreTools
 
     public:
         PureVirtual() noexcept = default;
-        virtual ~PureVirtual() = default;
+        virtual ~PureVirtual() noexcept = default;
         PureVirtual(const PureVirtual&) noexcept = default;
         PureVirtual& operator=(const PureVirtual&) noexcept = default;
         PureVirtual(PureVirtual&&) noexcept = default;

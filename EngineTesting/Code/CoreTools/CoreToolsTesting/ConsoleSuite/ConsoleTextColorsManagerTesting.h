@@ -30,6 +30,7 @@ namespace CoreTools
         void MainTest();
 
         void ConsoleTextColorsManageTest();
+        void DoConsoleTextColorsManagerTest();
     };
 }
 

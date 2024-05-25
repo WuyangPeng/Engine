@@ -36,6 +36,10 @@ namespace CoreTools
         void DefaultTest();
         void UseFactoryTest();
         void UseUseDefaultConstructionTest();
+
+    private:
+        static constexpr auto count = 10;
+        static constexpr auto modify = 1;
     };
 }
 

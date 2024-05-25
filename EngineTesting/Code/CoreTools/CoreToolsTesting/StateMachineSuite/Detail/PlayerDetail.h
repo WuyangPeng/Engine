@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	引擎测试版本：0.9.0.6 (2023/04/25 10:50)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/04/23 12:57)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_SUITE_PLAYER_DETAIL_H
 #define CORE_TOOLS_STATE_MACHINE_SUITE_PLAYER_DETAIL_H

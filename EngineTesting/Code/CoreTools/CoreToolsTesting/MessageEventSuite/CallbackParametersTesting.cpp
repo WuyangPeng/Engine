@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 15:29)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/04/23 13:01)
 
 #include "CallbackParametersTesting.h"
 #include "Detail/Parameters.h"
@@ -40,21 +40,14 @@ void CoreTools::CallbackParametersTesting::BuiltInTest()
 {
     CallbackParameters callbackParameters{ 0 };
 
-    constexpr bool value0{ true };
-    constexpr int8_t value1{ 2 };
-    constexpr uint8_t value2{ 3 };
-    constexpr int16_t value3{ 4 };
-    constexpr uint16_t value4{ 5 };
-    constexpr int value5{ 6 };
-    constexpr uint32_t value6{ 7 };
-    constexpr int64_t value7{ 8 };
-    constexpr uint64_t value8{ 9 };
-    constexpr float value9{ 10.0f };
-    constexpr double value10{ 11.0 };
-    const std::string value11{ "value11" };
-    const std::wstring value12{ L"value12" };
-    const System::String value13{ SYSTEM_TEXT("value13") };
+    ASSERT_NOT_THROW_EXCEPTION_1(SetValueTest, callbackParameters);
+    ASSERT_NOT_THROW_EXCEPTION_1(GetValueTest, callbackParameters);
 
+    ASSERT_EQUAL(callbackParameters.GetContainerSize(), 14);
+}
+
+void CoreTools::CallbackParametersTesting::SetValueTest(CallbackParameters& callbackParameters)
+{
     callbackParameters.SetValue(13, value13);
     callbackParameters.SetValue(12, value12);
     callbackParameters.SetValue(11, value11);
@@ -69,7 +62,10 @@ void CoreTools::CallbackParametersTesting::BuiltInTest()
     callbackParameters.SetValue(2, value2);
     callbackParameters.SetValue(1, value1);
     callbackParameters.SetValue(0, value0);
+}
 
+void CoreTools::CallbackParametersTesting::GetValueTest(const CallbackParameters& callbackParameters)
+{
     ASSERT_EQUAL(callbackParameters.GetBoolValue(0), value0);
     ASSERT_EQUAL(callbackParameters.GetInt8Value(1), value1);
     ASSERT_EQUAL(callbackParameters.GetUInt8Value(2), value2);
@@ -79,13 +75,11 @@ void CoreTools::CallbackParametersTesting::BuiltInTest()
     ASSERT_EQUAL(callbackParameters.GetUInt32Value(6), value6);
     ASSERT_EQUAL(callbackParameters.GetInt64Value(7), value7);
     ASSERT_EQUAL(callbackParameters.GetUInt64Value(8), value8);
-    ASSERT_APPROXIMATE(callbackParameters.GetFloatValue(9), value9, Mathematics::MathF::GetExponent());
-    ASSERT_APPROXIMATE(callbackParameters.GetDoubleValue(10), value10, Mathematics::MathD::GetExponent());
+    ASSERT_APPROXIMATE(callbackParameters.GetFloatValue(9), value9, Mathematics::MathF::GetZeroTolerance());
+    ASSERT_APPROXIMATE(callbackParameters.GetDoubleValue(10), value10, Mathematics::MathD::GetZeroTolerance());
     ASSERT_EQUAL(callbackParameters.GetStringValue(11), value11);
     ASSERT_EQUAL(callbackParameters.GetWStringValue(12), value12);
     ASSERT_EQUAL(callbackParameters.GetTStringValue(13), value13);
-
-    ASSERT_EQUAL(callbackParameters.GetContainerSize(), 14);
 }
 
 void CoreTools::CallbackParametersTesting::ParametersInterfaceTest()
@@ -97,17 +91,32 @@ void CoreTools::CallbackParametersTesting::ParametersInterfaceTest()
 
     callbackParameters.SetValue(0, *pointer);
 
-    auto cloneSmartPointer = boost::polymorphic_pointer_cast<const Parameters>(callbackParameters.GetParametersInterfaceValue(0));
-
-    ASSERT_EQUAL(cloneSmartPointer->GetValue(), testValue);
+    ASSERT_NOT_THROW_EXCEPTION_2(ParametersInterface0Test, testValue, callbackParameters);
 
     pointer->SetValue(0);
 
-    cloneSmartPointer = callbackParameters.GetParametersInterfacePolymorphicDowncast<const Parameters>(0);
+    ASSERT_NOT_THROW_EXCEPTION_2(ParametersInterface1Test, testValue, callbackParameters);
+
+    ASSERT_NOT_THROW_EXCEPTION_2(ParametersInterface2Test, testValue, callbackParameters);
+}
+
+void CoreTools::CallbackParametersTesting::ParametersInterface0Test(const int testValue, const CallbackParameters& callbackParameters)
+{
+    const auto cloneSmartPointer = boost::polymorphic_pointer_cast<const Parameters>(callbackParameters.GetParametersInterfaceValue(0));
 
     ASSERT_EQUAL(cloneSmartPointer->GetValue(), testValue);
+}
 
-    cloneSmartPointer = callbackParameters.GetParametersInterfacePolymorphicCast<const Parameters>(0);
+void CoreTools::CallbackParametersTesting::ParametersInterface1Test(const int testValue, const CallbackParameters& callbackParameters)
+{
+    const auto cloneSmartPointer = callbackParameters.GetParametersInterfacePolymorphicDowncast<const Parameters>(0);
+
+    ASSERT_EQUAL(cloneSmartPointer->GetValue(), testValue);
+}
+
+void CoreTools::CallbackParametersTesting::ParametersInterface2Test(const int testValue, const CallbackParameters& callbackParameters)
+{
+    const auto cloneSmartPointer = callbackParameters.GetParametersInterfacePolymorphicCast<const Parameters>(0);
 
     ASSERT_EQUAL(cloneSmartPointer->GetValue(), testValue);
 }
@@ -120,7 +129,7 @@ void CoreTools::CallbackParametersTesting::InvalidParametersTest()
 
     callbackParameters.SetValue(1, setValue);
 
-    MAYBE_UNUSED const auto value = callbackParameters.GetInt8Value(0);
+    std::ignore = callbackParameters.GetInt8Value(0);
 }
 
 void CoreTools::CallbackParametersTesting::InvalidTypeTest()
@@ -131,5 +140,5 @@ void CoreTools::CallbackParametersTesting::InvalidTypeTest()
 
     callbackParameters.SetValue(0, setValue);
 
-    MAYBE_UNUSED const auto value = callbackParameters.GetInt8Value(0);
+    std::ignore = callbackParameters.GetInt8Value(0);
 }

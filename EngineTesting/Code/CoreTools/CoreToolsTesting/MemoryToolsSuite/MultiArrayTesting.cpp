@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 16:21)
+/// 版本：1.0.0.9 (2024/05/17 21:05)
 
 #include "MultiArrayTesting.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/UnitTest/AssertTestMacro.h"
 #include "CoreTools/MemoryTools/MultiArrayDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Mathematics/Base/Math.h"
+#include "Mathematics/Base/MathDetail.h"
 
 CoreTools::MultiArrayTesting::MultiArrayTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -45,206 +45,310 @@ void CoreTools::MultiArrayTesting::MainTest()
 
 void CoreTools::MultiArrayTesting::SizeTest()
 {
-    const MultiArray<int, true, 5, 6, 10> lattice0{};
+    ASSERT_NOT_THROW_EXCEPTION_0(Size0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Size1Test);
+}
 
-    static_assert(lattice0.GetDimensions() == 3);
+void CoreTools::MultiArrayTesting::Size0Test()
+{
+    const MultiArray<int, true, latticeSize0, latticeSize1, latticeSize2> lattice{};
 
-    ASSERT_EQUAL(lattice0.GetSize(0), 5);
-    ASSERT_EQUAL(lattice0.GetSize(1), 6);
-    ASSERT_EQUAL(lattice0.GetSize(2), 10);
+    static_assert(lattice.GetDimensions() == 3);
 
-    static_assert(lattice0.GetSize() == 5 * 6 * 10);
+    ASSERT_EQUAL(lattice.GetSize(0), latticeSize0);
+    ASSERT_EQUAL(lattice.GetSize(1), latticeSize1);
+    ASSERT_EQUAL(lattice.GetSize(2), latticeSize2);
 
-    const MultiArray<int, true> lattice1{ 5, 6, 10 };
+    static_assert(lattice.GetSize() == latticeSize0 * latticeSize1 * latticeSize2);
+}
 
-    ASSERT_EQUAL(lattice1.GetDimensions(), 3);
+void CoreTools::MultiArrayTesting::Size1Test()
+{
+    const MultiArray<int, true> lattice{ latticeSize0, latticeSize1, latticeSize2 };
 
-    ASSERT_EQUAL(lattice1.GetSize(0), 5);
-    ASSERT_EQUAL(lattice1.GetSize(1), 6);
-    ASSERT_EQUAL(lattice1.GetSize(2), 10);
+    ASSERT_EQUAL(lattice.GetDimensions(), 3);
 
-    ASSERT_EQUAL(lattice1.GetSize(), 5 * 6 * 10);
+    ASSERT_EQUAL(lattice.GetSize(0), latticeSize0);
+    ASSERT_EQUAL(lattice.GetSize(1), latticeSize1);
+    ASSERT_EQUAL(lattice.GetSize(2), latticeSize2);
+
+    ASSERT_EQUAL(lattice.GetSize(), latticeSize0 * latticeSize1 * latticeSize2);
 }
 
 void CoreTools::MultiArrayTesting::GetIndexTest()
 {
-    const MultiArray<int, true, 5, 6, 10> lattice0{};
+    ASSERT_NOT_THROW_EXCEPTION_0(GetIndex0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetIndex1Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetIndex2Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetIndex3Test);
+}
 
-    const auto index0 = lattice0.GetIndex(1, 2, 3);
+void CoreTools::MultiArrayTesting::GetIndex0Test()
+{
+    const MultiArray<int, true, latticeSize0, latticeSize1, latticeSize2> lattice{};
 
-    ASSERT_EQUAL(index0, 1 + 5 * (2 + 6 * 3));
+    const auto index = lattice.GetIndex(tuple0, tuple1, tuple2);
 
-    const MultiArray<int, false, 5, 6, 10> lattice1{};
+    ASSERT_EQUAL(index, tuple0 + latticeSize0 * (tuple1 + latticeSize1 * tuple2));
+}
 
-    const auto index1 = lattice1.GetIndex(1, 2, 3);
+void CoreTools::MultiArrayTesting::GetIndex1Test()
+{
+    const MultiArray<int, false, latticeSize0, latticeSize1, latticeSize2> lattice{};
 
-    ASSERT_EQUAL(index1, 3 + 10 * (2 + 6 * 1));
+    const auto index = lattice.GetIndex(tuple0, tuple1, tuple2);
 
-    const MultiArray<int, true> lattice2{ 5, 6, 10 };
+    ASSERT_EQUAL(index, tuple2 + latticeSize2 * (tuple1 + latticeSize1 * tuple0));
+}
 
-    const auto index2 = lattice2.GetIndex(1, 2, 3);
+void CoreTools::MultiArrayTesting::GetIndex2Test()
+{
+    const MultiArray<int, true> lattice{ latticeSize0, latticeSize1, latticeSize2 };
 
-    ASSERT_EQUAL(index2, 1 + 5 * (2 + 6 * 3));
+    const auto index = lattice.GetIndex(tuple0, tuple1, tuple2);
 
-    const MultiArray<int, false> lattice3{ 5, 6, 10 };
+    ASSERT_EQUAL(index, tuple0 + latticeSize0 * (tuple1 + latticeSize1 * tuple2));
+}
 
-    const auto index3 = lattice3.GetIndex(1, 2, 3);
+void CoreTools::MultiArrayTesting::GetIndex3Test()
+{
+    const MultiArray<int, false> lattice{ latticeSize0, latticeSize1, latticeSize2 };
 
-    ASSERT_EQUAL(index3, 3 + 10 * (2 + 6 * 1));
+    const auto index = lattice.GetIndex(tuple0, tuple1, tuple2);
+
+    ASSERT_EQUAL(index, tuple2 + latticeSize2 * (tuple1 + latticeSize1 * tuple0));
 }
 
 void CoreTools::MultiArrayTesting::GetIndexArrayTest()
 {
-    const MultiArray<int, true, 5, 6, 10> lattice0{};
+    ASSERT_NOT_THROW_EXCEPTION_0(GetIndexArray0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetIndexArray1Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetIndexArray2Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetIndexArray3Test);
+}
 
-    const auto index0 = lattice0.GetIndex({ 4, 7, 8 });
+void CoreTools::MultiArrayTesting::GetIndexArray0Test()
+{
+    const MultiArray<int, true, latticeSize0, latticeSize1, latticeSize2> lattice{};
 
-    ASSERT_EQUAL(index0, 4 + 5 * (7 + 6 * 8));
+    const auto index = lattice.GetIndex({ latticeSize3, latticeSize4, latticeSize5 });
 
-    const MultiArray<int, false, 5, 6, 10> lattice1{};
+    ASSERT_EQUAL(index, latticeSize3 + latticeSize0 * (latticeSize4 + latticeSize1 * latticeSize5));
+}
 
-    const auto index1 = lattice1.GetIndex({ 4, 7, 8 });
+void CoreTools::MultiArrayTesting::GetIndexArray1Test()
+{
+    const MultiArray<int, false, latticeSize0, latticeSize1, latticeSize2> lattice{};
 
-    ASSERT_EQUAL(index1, 8 + 10 * (7 + 6 * 4));
+    const auto index = lattice.GetIndex({ latticeSize3, latticeSize4, latticeSize5 });
 
-    const MultiArray<int, true> lattice2{ MultiArray<int, true>::SizeType{ 5, 6, 10 } };
+    ASSERT_EQUAL(index, latticeSize5 + latticeSize2 * (latticeSize4 + latticeSize1 * latticeSize3));
+}
 
-    const auto index2 = lattice2.GetIndex({ 4, 7, 8 });
+void CoreTools::MultiArrayTesting::GetIndexArray2Test()
+{
+    const MultiArray<int, true> lattice{ MultiArray<int, true>::SizeType{ latticeSize0, latticeSize1, latticeSize2 } };
 
-    ASSERT_EQUAL(index2, 4 + 5 * (7 + 6 * 8));
+    const auto index = lattice.GetIndex({ latticeSize3, latticeSize4, latticeSize5 });
 
-    const MultiArray<int, false> lattice3{ MultiArray<int, false>::SizeType{ 5, 6, 10 } };
+    ASSERT_EQUAL(index, latticeSize3 + latticeSize0 * (latticeSize4 + latticeSize1 * latticeSize5));
+}
 
-    const auto index3 = lattice3.GetIndex({ 4, 7, 8 });
+void CoreTools::MultiArrayTesting::GetIndexArray3Test()
+{
+    const MultiArray<int, false> lattice{ MultiArray<int, false>::SizeType{ latticeSize0, latticeSize1, latticeSize2 } };
 
-    ASSERT_EQUAL(index3, 8 + 10 * (7 + 6 * 4));
+    const auto index = lattice.GetIndex({ latticeSize3, latticeSize4, latticeSize5 });
+
+    ASSERT_EQUAL(index, latticeSize5 + latticeSize2 * (latticeSize4 + latticeSize1 * latticeSize3));
 }
 
 void CoreTools::MultiArrayTesting::CoordinateTest()
 {
-    const MultiArray<int, true, 5, 6, 10> lattice0{};
+    ASSERT_NOT_THROW_EXCEPTION_0(Coordinate0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Coordinate1Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Coordinate2Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Coordinate3Test);
+}
 
-    const auto coordinate0 = lattice0.GetCoordinate<>(6);
+void CoreTools::MultiArrayTesting::Coordinate0Test()
+{
+    const MultiArray<int, true, latticeSize0, latticeSize1, latticeSize2> lattice{};
 
-    const auto index0 = lattice0.GetIndex(coordinate0);
+    const auto coordinate = lattice.GetCoordinate<>(tuple3);
 
-    ASSERT_EQUAL(index0, 6);
+    const auto index = lattice.GetIndex(coordinate);
 
-    const MultiArray<int, false, 5, 6, 10> lattice1{};
+    ASSERT_EQUAL(index, tuple3);
+}
 
-    const auto coordinate1 = lattice1.GetCoordinate<>(61);
+void CoreTools::MultiArrayTesting::Coordinate1Test()
+{
+    const MultiArray<int, false, latticeSize0, latticeSize1, latticeSize2> lattice{};
 
-    const auto index1 = lattice1.GetIndex(coordinate1);
+    const auto coordinate = lattice.GetCoordinate<>(tuple4);
 
-    ASSERT_EQUAL(index1, 61);
+    const auto index = lattice.GetIndex(coordinate);
 
-    const MultiArray<int, true> lattice2{ 5, 6, 10 };
+    ASSERT_EQUAL(index, tuple4);
+}
 
-    const auto coordinate2 = lattice2.GetCoordinate<>(6);
+void CoreTools::MultiArrayTesting::Coordinate2Test()
+{
+    const MultiArray<int, true> lattice{ latticeSize0, latticeSize1, latticeSize2 };
 
-    const auto index2 = lattice2.GetIndex(coordinate2);
+    const auto coordinate = lattice.GetCoordinate<>(tuple3);
 
-    ASSERT_EQUAL(index2, 6);
+    const auto index = lattice.GetIndex(coordinate);
 
-    const MultiArray<int, false> lattice3{ 5, 6, 10 };
+    ASSERT_EQUAL(index, tuple3);
+}
 
-    const auto coordinate3 = lattice2.GetCoordinate<>(61);
+void CoreTools::MultiArrayTesting::Coordinate3Test()
+{
+    const MultiArray<int, false> lattice{ latticeSize0, latticeSize1, latticeSize2 };
 
-    const auto index3 = lattice2.GetIndex(coordinate3);
+    const auto coordinate = lattice.GetCoordinate<>(tuple4);
 
-    ASSERT_EQUAL(index3, 61);
+    const auto index = lattice.GetIndex(coordinate);
+
+    ASSERT_EQUAL(index, tuple4);
 }
 
 void CoreTools::MultiArrayTesting::OrderLToRTest()
 {
-    MultiArray<int, true> multiArray0{ 5, 6, 8 };
+    ASSERT_NOT_THROW_EXCEPTION_0(OrderLToR0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(OrderLToR1Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(OrderLToR2Test);
+}
 
-    ASSERT_UNEQUAL_NULL_PTR(multiArray0.GetData());
+void CoreTools::MultiArrayTesting::OrderLToR0Test()
+{
+    MultiArrayType0 multiArray{ latticeSize0, latticeSize1, latticeSize5 };
 
-    multiArray0.Fill(5);
+    ASSERT_UNEQUAL_NULL_PTR(multiArray.GetData());
 
-    for (auto i = 0; i < multiArray0.GetSize(); ++i)
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderLToR0FillTest, multiArray);
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderLToR0ValueTest, multiArray);
+}
+
+void CoreTools::MultiArrayTesting::OrderLToR0FillTest(MultiArrayType0& multiArray)
+{
+    multiArray.Fill(tuple5);
+
+    for (auto i = 0; i < multiArray.GetSize(); ++i)
     {
-        ASSERT_EQUAL(multiArray0[i], 5);
-        multiArray0[i] = i;
+        ASSERT_EQUAL(multiArray[i], tuple5);
+        multiArray[i] = i;
     }
+}
 
+void CoreTools::MultiArrayTesting::OrderLToR0ValueTest(MultiArrayType0& multiArray)
+{
     auto index = 0;
-    for (auto i0 = 0; i0 < 8; ++i0)
+    for (auto i0 = 0; i0 < latticeSize5; ++i0)
     {
-        for (auto i1 = 0; i1 < 6; ++i1)
+        for (auto i1 = 0; i1 < latticeSize1; ++i1)
         {
-            for (auto i2 = 0; i2 < 5; ++i2)
+            for (auto i2 = 0; i2 < latticeSize0; ++i2)
             {
-                ASSERT_EQUAL(multiArray0(i2, i1, i0), index);
-                ASSERT_EQUAL(multiArray0({ i2, i1, i0 }), index);
+                ASSERT_EQUAL(multiArray(i2, i1, i0), index);
+                ASSERT_EQUAL(multiArray({ i2, i1, i0 }), index);
                 ++index;
             }
         }
     }
+}
 
-    MultiArray<float, true, 2, 3, 5> multiArray1{};
+void CoreTools::MultiArrayTesting::OrderLToR1Test()
+{
+    MultiArrayType1 multiArray{};
 
-    for (auto x2 = 0, i = 0; x2 < multiArray1.GetSize(2); ++x2)
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderLToR1InitTest, multiArray);
+    ASSERT_NOT_THROW_EXCEPTION_2(OrderLToR1ResultTest, multiArray, original);
+
+    for (auto i = 0; i < multiArray.GetSize(); ++i)
     {
-        for (auto x1 = 0; x1 < multiArray1.GetSize(1); ++x1)
+        multiArray[i] += increase;
+    }
+
+    ASSERT_NOT_THROW_EXCEPTION_2(OrderLToR1ResultTest, multiArray, original + increase);
+}
+
+void CoreTools::MultiArrayTesting::OrderLToR1InitTest(MultiArrayType1& multiArray)
+{
+    for (auto x2 = 0, i = 0; x2 < multiArray.GetSize(2); ++x2)
+    {
+        for (auto x1 = 0; x1 < multiArray.GetSize(1); ++x1)
         {
-            for (auto x0 = 0; x0 < multiArray1.GetSize(0); ++x0, ++i)
+            for (auto x0 = 0; x0 < multiArray.GetSize(0); ++x0, ++i)
             {
-                multiArray1(x0, x1, x2) = static_cast<float>(i + 1);
+                multiArray(x0, x1, x2) = i + original;
             }
         }
     }
+}
 
-    for (auto i = 0; i < multiArray1.GetSize(); ++i)
+void CoreTools::MultiArrayTesting::OrderLToR1ResultTest(MultiArrayType1& multiArray, float step)
+{
+    for (auto x2 = 0, i = 0; x2 < multiArray.GetSize(2); ++x2)
     {
-        multiArray1[i] += 2.0f;
-    }
-
-    for (auto x2 = 0, i = 0; x2 < multiArray1.GetSize(2); ++x2)
-    {
-        for (auto x1 = 0; x1 < multiArray1.GetSize(1); ++x1)
+        for (auto x1 = 0; x1 < multiArray.GetSize(1); ++x1)
         {
-            for (auto x0 = 0; x0 < multiArray1.GetSize(0); ++x0, ++i)
+            for (auto x0 = 0; x0 < multiArray.GetSize(0); ++x0, ++i)
             {
-                ASSERT_APPROXIMATE(multiArray1(x0, x1, x2), static_cast<float>(i + 3), Mathematics::MathF::GetZeroTolerance());
+                ASSERT_APPROXIMATE(multiArray(x0, x1, x2), i + step, Mathematics::MathF::GetZeroTolerance());
 
                 const std::array x{ x0, x1, x2 };
 
-                ASSERT_APPROXIMATE(multiArray1(x), static_cast<float>(i + 3), Mathematics::MathF::GetZeroTolerance());
+                ASSERT_APPROXIMATE(multiArray(x), i + step, Mathematics::MathF::GetZeroTolerance());
             }
         }
     }
+}
 
-    MultiArray<float, true> multiArray2{ 2, 3, 5 };
+void CoreTools::MultiArrayTesting::OrderLToR2Test()
+{
+    MultiArrayType2 multiArray{ latticeSize6, latticeSize7, latticeSize8 };
 
-    for (auto x2 = 0, i = 0; x2 < multiArray2.GetSize(2); ++x2)
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderLToR2InitTest, multiArray);
+    ASSERT_NOT_THROW_EXCEPTION_2(OrderLToR2ResultTest, multiArray, original);
+
+    for (auto i = 0; i < multiArray.GetSize(); ++i)
     {
-        for (auto x1 = 0; x1 < multiArray2.GetSize(1); ++x1)
+        multiArray[i] += increase;
+    }
+
+    ASSERT_NOT_THROW_EXCEPTION_2(OrderLToR2ResultTest, multiArray, original + increase);
+}
+
+void CoreTools::MultiArrayTesting::OrderLToR2InitTest(MultiArrayType2& multiArray)
+{
+    for (auto x2 = 0, i = 0; x2 < multiArray.GetSize(2); ++x2)
+    {
+        for (auto x1 = 0; x1 < multiArray.GetSize(1); ++x1)
         {
-            for (auto x0 = 0; x0 < multiArray2.GetSize(0); ++x0, ++i)
+            for (auto x0 = 0; x0 < multiArray.GetSize(0); ++x0, ++i)
             {
-                multiArray2(x0, x1, x2) = static_cast<float>(i + 1);
+                multiArray(x0, x1, x2) = i + original;
             }
         }
     }
+}
 
-    for (auto i = 0; i < multiArray2.GetSize(); ++i)
+void CoreTools::MultiArrayTesting::OrderLToR2ResultTest(MultiArrayType2& multiArray, float step)
+{
+    for (auto x2 = 0, i = 0; x2 < multiArray.GetSize(2); ++x2)
     {
-        multiArray2[i] += 2.0f;
-    }
-
-    for (auto x2 = 0, i = 0; x2 < multiArray2.GetSize(2); ++x2)
-    {
-        for (auto x1 = 0; x1 < multiArray2.GetSize(1); ++x1)
+        for (auto x1 = 0; x1 < multiArray.GetSize(1); ++x1)
         {
-            for (auto x0 = 0; x0 < multiArray2.GetSize(0); ++x0, ++i)
+            for (auto x0 = 0; x0 < multiArray.GetSize(0); ++x0, ++i)
             {
-                ASSERT_APPROXIMATE(multiArray2(x0, x1, x2), static_cast<float>(i + 3), Mathematics::MathF::GetZeroTolerance());
+                ASSERT_APPROXIMATE(multiArray(x0, x1, x2), i + step, Mathematics::MathF::GetZeroTolerance());
 
                 const std::vector x{ x0, x1, x2 };
 
-                ASSERT_APPROXIMATE(multiArray2(x), static_cast<float>(i + 3), Mathematics::MathF::GetZeroTolerance());
+                ASSERT_APPROXIMATE(multiArray(x), i + step, Mathematics::MathF::GetZeroTolerance());
             }
         }
     }
@@ -252,94 +356,142 @@ void CoreTools::MultiArrayTesting::OrderLToRTest()
 
 void CoreTools::MultiArrayTesting::OrderRToLTest()
 {
-    MultiArray<int, false> multiArray0{ 5, 6, 8 };
+    ASSERT_NOT_THROW_EXCEPTION_0(OrderRToL0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(OrderRToL1Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(OrderRToL2Test);
+}
 
-    ASSERT_UNEQUAL_NULL_PTR(multiArray0.GetData());
+void CoreTools::MultiArrayTesting::OrderRToL0Test()
+{
+    MultiArrayType3 multiArray{ latticeSize0, latticeSize1, latticeSize5 };
 
-    multiArray0.Fill(5);
+    ASSERT_UNEQUAL_NULL_PTR(multiArray.GetData());
 
-    for (auto i = 0; i < multiArray0.GetSize(); ++i)
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderRToL0FillTest, multiArray);
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderRToL0ValueTest, multiArray);
+}
+
+void CoreTools::MultiArrayTesting::OrderRToL0FillTest(MultiArrayType3& multiArray)
+{
+    multiArray.Fill(tuple5);
+
+    for (auto i = 0; i < multiArray.GetSize(); ++i)
     {
-        ASSERT_EQUAL(multiArray0[i], 5);
-        multiArray0[i] = i;
+        ASSERT_EQUAL(multiArray[i], tuple5);
+    }
+}
+
+void CoreTools::MultiArrayTesting::OrderRToL0ValueTest(MultiArrayType3& multiArray)
+{
+    for (auto i = 0; i < multiArray.GetSize(); ++i)
+    {
+        multiArray[i] = i;
     }
 
     auto index = 0;
-    for (auto i0 = 0; i0 < 5; ++i0)
+    for (auto i0 = 0; i0 < latticeSize0; ++i0)
     {
-        for (auto i1 = 0; i1 < 6; ++i1)
+        for (auto i1 = 0; i1 < latticeSize1; ++i1)
         {
-            for (auto i2 = 0; i2 < 8; ++i2)
+            for (auto i2 = 0; i2 < latticeSize5; ++i2)
             {
-                ASSERT_EQUAL(multiArray0(i0, i1, i2), index);
-                ASSERT_EQUAL(multiArray0({ i0, i1, i2 }), index);
+                ASSERT_EQUAL(multiArray(i0, i1, i2), index);
+                ASSERT_EQUAL(multiArray({ i0, i1, i2 }), index);
                 ++index;
             }
         }
     }
+}
 
-    MultiArray<float, false, 2, 3, 5> multiArray1{};
+void CoreTools::MultiArrayTesting::OrderRToL1Test()
+{
+    MultiArrayType4 multiArray{};
 
-    for (auto x2 = 0, i = 0; x2 < multiArray1.GetSize(0); ++x2)
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderRToL1InitTest, multiArray);
+    ASSERT_NOT_THROW_EXCEPTION_2(OrderRToL1ResultTest, multiArray, original);
+
+    for (auto i = 0; i < multiArray.GetSize(); ++i)
     {
-        for (auto x1 = 0; x1 < multiArray1.GetSize(1); ++x1)
+        multiArray[i] += increase;
+    }
+
+    ASSERT_NOT_THROW_EXCEPTION_2(OrderRToL1ResultTest, multiArray, original + increase);
+}
+
+void CoreTools::MultiArrayTesting::OrderRToL1InitTest(MultiArrayType4& multiArray)
+{
+    for (auto x2 = 0, i = 0; x2 < multiArray.GetSize(0); ++x2)
+    {
+        for (auto x1 = 0; x1 < multiArray.GetSize(1); ++x1)
         {
-            for (auto x0 = 0; x0 < multiArray1.GetSize(2); ++x0, ++i)
+            for (auto x0 = 0; x0 < multiArray.GetSize(2); ++x0, ++i)
             {
-                multiArray1(x2, x1, x0) = static_cast<float>(i + 1);
+                multiArray(x2, x1, x0) = i + original;
             }
         }
     }
+}
 
-    for (auto i = 0; i < multiArray1.GetSize(); ++i)
+void CoreTools::MultiArrayTesting::OrderRToL1ResultTest(MultiArrayType4& multiArray, float step)
+{
+    for (auto x2 = 0, i = 0; x2 < multiArray.GetSize(0); ++x2)
     {
-        multiArray1[i] += 2.0f;
-    }
-
-    for (auto x2 = 0, i = 0; x2 < multiArray1.GetSize(0); ++x2)
-    {
-        for (auto x1 = 0; x1 < multiArray1.GetSize(1); ++x1)
+        for (auto x1 = 0; x1 < multiArray.GetSize(1); ++x1)
         {
-            for (auto x0 = 0; x0 < multiArray1.GetSize(2); ++x0, ++i)
+            for (auto x0 = 0; x0 < multiArray.GetSize(2); ++x0, ++i)
             {
-                ASSERT_APPROXIMATE(multiArray1(x2, x1, x0), static_cast<float>(i + 3), Mathematics::MathF::GetZeroTolerance());
+                ASSERT_APPROXIMATE(multiArray(x2, x1, x0), i + step, Mathematics::MathF::GetZeroTolerance());
 
                 const std::array x{ x2, x1, x0 };
 
-                ASSERT_APPROXIMATE(multiArray1(x), static_cast<float>(i + 3), Mathematics::MathF::GetZeroTolerance());
+                ASSERT_APPROXIMATE(multiArray(x), i + step, Mathematics::MathF::GetZeroTolerance());
             }
         }
     }
+}
 
-    MultiArray<float, false> multiArray2{ 2, 3, 5 };
+void CoreTools::MultiArrayTesting::OrderRToL2Test()
+{
+    MultiArrayType5 multiArray{ latticeSize6, latticeSize7, latticeSize8 };
 
-    for (auto x2 = 0, i = 0; x2 < multiArray2.GetSize(0); ++x2)
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderRToL2InitTest, multiArray);
+    ASSERT_NOT_THROW_EXCEPTION_2(OrderRToL2ResultTest, multiArray, original);
+
+    for (auto i = 0; i < multiArray.GetSize(); ++i)
     {
-        for (auto x1 = 0; x1 < multiArray2.GetSize(1); ++x1)
+        multiArray[i] += increase;
+    }
+
+    ASSERT_NOT_THROW_EXCEPTION_2(OrderRToL2ResultTest, multiArray, original + increase);
+}
+
+void CoreTools::MultiArrayTesting::OrderRToL2InitTest(MultiArrayType5& multiArray)
+{
+    for (auto x2 = 0, i = 0; x2 < multiArray.GetSize(0); ++x2)
+    {
+        for (auto x1 = 0; x1 < multiArray.GetSize(1); ++x1)
         {
-            for (auto x0 = 0; x0 < multiArray2.GetSize(2); ++x0, ++i)
+            for (auto x0 = 0; x0 < multiArray.GetSize(2); ++x0, ++i)
             {
-                multiArray2(x2, x1, x0) = static_cast<float>(i + 1);
+                multiArray(x2, x1, x0) = i + original;
             }
         }
     }
+}
 
-    for (auto i = 0; i < multiArray2.GetSize(); ++i)
+void CoreTools::MultiArrayTesting::OrderRToL2ResultTest(MultiArrayType5& multiArray, float step)
+{
+    for (auto x2 = 0, i = 0; x2 < multiArray.GetSize(0); ++x2)
     {
-        multiArray2[i] += 2.0f;
-    }
-
-    for (auto x2 = 0, i = 0; x2 < multiArray2.GetSize(0); ++x2)
-    {
-        for (auto x1 = 0; x1 < multiArray2.GetSize(1); ++x1)
+        for (auto x1 = 0; x1 < multiArray.GetSize(1); ++x1)
         {
-            for (auto x0 = 0; x0 < multiArray2.GetSize(2); ++x0, ++i)
+            for (auto x0 = 0; x0 < multiArray.GetSize(2); ++x0, ++i)
             {
-                ASSERT_APPROXIMATE(multiArray2(x2, x1, x0), static_cast<float>(i + 3), Mathematics::MathF::GetZeroTolerance());
+                ASSERT_APPROXIMATE(multiArray(x2, x1, x0), i + step, Mathematics::MathF::GetZeroTolerance());
 
                 const std::vector x{ x2, x1, x0 };
 
-                ASSERT_APPROXIMATE(multiArray2(x), static_cast<float>(i + 3), Mathematics::MathF::GetZeroTolerance());
+                ASSERT_APPROXIMATE(multiArray(x), i + step, Mathematics::MathF::GetZeroTolerance());
             }
         }
     }
@@ -347,24 +499,37 @@ void CoreTools::MultiArrayTesting::OrderRToLTest()
 
 void CoreTools::MultiArrayTesting::OrderLToRConstantTest()
 {
-    MultiArray<int, true, 5, 6, 8> multiArray{};
+    MultiArrayType6 multiArray{};
 
     ASSERT_UNEQUAL_NULL_PTR(multiArray.GetData());
 
-    multiArray.Fill(5);
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderLToRConstantFillTest, multiArray);
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderLToRConstantValueTest, multiArray);
+}
+
+void CoreTools::MultiArrayTesting::OrderLToRConstantFillTest(MultiArrayType6& multiArray)
+{
+    multiArray.Fill(tuple5);
 
     for (auto i = 0; i < multiArray.GetSize(); ++i)
     {
-        ASSERT_EQUAL(multiArray[i], 5);
+        ASSERT_EQUAL(multiArray[i], tuple5);
+    }
+}
+
+void CoreTools::MultiArrayTesting::OrderLToRConstantValueTest(MultiArrayType6& multiArray)
+{
+    for (auto i = 0; i < multiArray.GetSize(); ++i)
+    {
         multiArray[i] = i;
     }
 
     auto index = 0;
-    for (auto i0 = 0; i0 < 8; ++i0)
+    for (auto i0 = 0; i0 < latticeSize5; ++i0)
     {
-        for (auto i1 = 0; i1 < 6; ++i1)
+        for (auto i1 = 0; i1 < latticeSize1; ++i1)
         {
-            for (auto i2 = 0; i2 < 5; ++i2)
+            for (auto i2 = 0; i2 < latticeSize0; ++i2)
             {
                 ASSERT_EQUAL(multiArray(i2, i1, i0), index);
                 ASSERT_EQUAL(multiArray({ i2, i1, i0 }), index);
@@ -376,24 +541,37 @@ void CoreTools::MultiArrayTesting::OrderLToRConstantTest()
 
 void CoreTools::MultiArrayTesting::OrderRToLConstantTest()
 {
-    MultiArray<int, false, 5, 6, 8> multiArray{};
+    MultiArrayType7 multiArray{};
 
     ASSERT_UNEQUAL_NULL_PTR(multiArray.GetData());
 
-    multiArray.Fill(5);
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderRToLConstantFillTest, multiArray);
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderRToLConstantValueTest, multiArray);
+}
+
+void CoreTools::MultiArrayTesting::OrderRToLConstantFillTest(MultiArrayType7& multiArray)
+{
+    multiArray.Fill(tuple5);
 
     for (auto i = 0; i < multiArray.GetSize(); ++i)
     {
-        ASSERT_EQUAL(multiArray[i], 5);
+        ASSERT_EQUAL(multiArray[i], tuple5);
+    }
+}
+
+void CoreTools::MultiArrayTesting::OrderRToLConstantValueTest(MultiArrayType7& multiArray)
+{
+    for (auto i = 0; i < multiArray.GetSize(); ++i)
+    {
         multiArray[i] = i;
     }
 
     auto index = 0;
-    for (auto i0 = 0; i0 < 5; ++i0)
+    for (auto i0 = 0; i0 < latticeSize0; ++i0)
     {
-        for (auto i1 = 0; i1 < 6; ++i1)
+        for (auto i1 = 0; i1 < latticeSize1; ++i1)
         {
-            for (auto i2 = 0; i2 < 8; ++i2)
+            for (auto i2 = 0; i2 < latticeSize5; ++i2)
             {
                 ASSERT_EQUAL(multiArray(i0, i1, i2), index);
                 ASSERT_EQUAL(multiArray({ i0, i1, i2 }), index);
@@ -405,23 +583,32 @@ void CoreTools::MultiArrayTesting::OrderRToLConstantTest()
 
 void CoreTools::MultiArrayTesting::CompareTest()
 {
-    const MultiArray<int, true, 5, 6, 10> lattice0{};
+    ASSERT_NOT_THROW_EXCEPTION_0(Compare0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Compare1Test);
+}
 
-    ASSERT_TRUE(lattice0 == lattice0);
-    ASSERT_FALSE(lattice0 != lattice0);
+void CoreTools::MultiArrayTesting::Compare0Test()
+{
+    const MultiArray<int, true, latticeSize0, latticeSize1, latticeSize2> lattice{};
 
-    ASSERT_FALSE(lattice0 < lattice0);
-    ASSERT_FALSE(lattice0 > lattice0);
-    ASSERT_TRUE(lattice0 <= lattice0);
-    ASSERT_TRUE(lattice0 >= lattice0);
+    ASSERT_TRUE(lattice == lattice);
+    ASSERT_FALSE(lattice != lattice);
 
-    const MultiArray<int, true> lattice1{ 5, 6, 10 };
+    ASSERT_FALSE(lattice < lattice);
+    ASSERT_FALSE(lattice > lattice);
+    ASSERT_TRUE(lattice <= lattice);
+    ASSERT_TRUE(lattice >= lattice);
+}
 
-    ASSERT_TRUE(lattice1 == lattice1);
-    ASSERT_FALSE(lattice1 != lattice1);
+void CoreTools::MultiArrayTesting::Compare1Test()
+{
+    const MultiArray<int, true> lattice{ latticeSize0, latticeSize1, latticeSize2 };
 
-    ASSERT_FALSE(lattice1 < lattice1);
-    ASSERT_FALSE(lattice1 > lattice1);
-    ASSERT_TRUE(lattice1 <= lattice1);
-    ASSERT_TRUE(lattice1 >= lattice1);
+    ASSERT_TRUE(lattice == lattice);
+    ASSERT_FALSE(lattice != lattice);
+
+    ASSERT_FALSE(lattice < lattice);
+    ASSERT_FALSE(lattice > lattice);
+    ASSERT_TRUE(lattice <= lattice);
+    ASSERT_TRUE(lattice >= lattice);
 }

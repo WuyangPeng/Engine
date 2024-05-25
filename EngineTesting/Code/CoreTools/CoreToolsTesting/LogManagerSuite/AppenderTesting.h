@@ -28,6 +28,9 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        static constexpr auto maxFileSize = 100000;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
@@ -42,6 +45,20 @@ namespace CoreTools
         void BackupFileTest();
         void BackupFileContentTest();
         void DeleteFileTest();
+
+        void BackupFileOriginalContentTest();
+        void DoBackupFileContentTest();
+
+        void ConsoleAppenderTypeTest(const Appender& appender);
+        void ConsoleWriteMessageTest(const Appender& appender);
+        void ConsoleBaseTest(Appender& appender);
+        void FileLogAppenderTypeTest(const Appender& appender);
+        void FileLogWriteMessageTest(const Appender& appender);
+        void FileLogBaseTest(Appender& appender);
+        void FileConfigurationAppenderTypeTest(const Appender& appender);
+        void FileConfigurationWriteMessageTest(const Appender& appender);
+        void FileConfigurationBaseTest(Appender& appender);
+        void WriteMessageTest(const Appender& appender, LogLevel logLevel, LogFilter logFilter, const String& message);
 
         NODISCARD String GetBackupFileName() const;
 

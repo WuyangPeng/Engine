@@ -11,6 +11,7 @@
 #define CORE_TOOLS_TESTING_READ_AND_WRITE_FILE_HANDLE_TESTING_H
 
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/FileManager/FileManagerFwd.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -29,16 +30,23 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using BufferType = std::vector<char>;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void ClearFile();
         void WriteFileHandleTest();
+
         void ReadFileHandleTest();
         void GetFileByteSizeTest();
 
         NODISCARD static String GetFileHandleName();
         NODISCARD static std::string GetFileHandleContent();
+
+        NODISCARD size_t GetSize(const std::string& content, ReadAndWriteFileHandle& manager);
+        void ReadResultTest(const std::string& content, ReadAndWriteFileHandle& manager, size_t size);
     };
 }
 

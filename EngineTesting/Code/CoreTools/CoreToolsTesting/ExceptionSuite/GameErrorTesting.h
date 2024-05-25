@@ -10,6 +10,8 @@
 #ifndef CORE_TOOLS_EXCEPTION_SUITE_GAME_ERROR_TESTING_H
 #define CORE_TOOLS_EXCEPTION_SUITE_GAME_ERROR_TESTING_H
 
+#include "Detail/GameErrorType.h"
+#include "CoreTools/CoreToolsTesting/HelperSuite/Detail/AbstractObject.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -20,10 +22,17 @@ namespace CoreTools
         using ClassType = GameErrorTesting;
         using ParentType = UnitTest;
 
+        using String = System::String;
+
     public:
         explicit GameErrorTesting(const OStreamShared& stream);
 
         CLASS_INVARIANT_FINAL_DECLARE;
+
+    private:
+        using GameError = GameError<GameErrorType>;
+
+        static const String message;
 
     private:
         void DoRunUnitTest() override;
@@ -31,6 +40,8 @@ namespace CoreTools
 
         void LastErrorTest();
         void ComErrorTest();
+
+        void ErrorTest(const FunctionDescribed& functionDescribed, GameErrorType gameErrorType, const GameError& gameError);
     };
 }
 

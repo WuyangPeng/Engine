@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 16:49)
+/// 版本：1.0.0.9 (2024/05/19 20:24)
 
 #include "BoolObject.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -66,12 +66,16 @@ void CoreTools::BoolObject::AllocationArray1(bool value)
 bool CoreTools::BoolObject::IsLoadValidity() const
 {
     if (boolValue == true || boolArray0.empty() || boolArray1.empty())
+    {
         return false;
+    }
 
     for (auto i = 0; i < bufferSize; ++i)
     {
         if (boolArray0.at(i) == false || boolArray1.at(i) == true)
+        {
             return false;
+        }
     }
 
     return true;
@@ -96,8 +100,7 @@ int CoreTools::BoolObject::GetStreamingSize() const
     size += GetStreamSize(boolValue);
 
     /// WriteBoolWithNumber
-    size += sizeof(int32_t);
-    size += bufferSize * GetStreamSize(boolValue);
+    size += GetStreamSize(boolArray0);
 
     /// WriteBoolWithoutNumber
     size += bufferSize * GetStreamSize(boolValue);

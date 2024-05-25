@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/14 11:36)
+/// 版本：1.0.0.9 (2024/05/06 19:23)
 
 #ifndef CORE_TOOLS_HELPER_SUITE_ABSTRACT_OBJECT_H
 #define CORE_TOOLS_HELPER_SUITE_ABSTRACT_OBJECT_H
@@ -23,7 +23,7 @@ namespace CoreTools
 
     public:
         explicit AbstractObject(const std::string& name);
-        virtual ~AbstractObject() = 0;
+        virtual ~AbstractObject() noexcept = 0;
 
         AbstractObject(const AbstractObject& rhs) = default;
         AbstractObject& operator=(const AbstractObject& rhs) = default;

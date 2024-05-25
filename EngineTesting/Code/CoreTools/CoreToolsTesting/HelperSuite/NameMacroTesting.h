@@ -10,6 +10,8 @@
 #ifndef CORE_TOOLS_HELPER_SUITE_NAME_MACRO_TESTING_H
 #define CORE_TOOLS_HELPER_SUITE_NAME_MACRO_TESTING_H
 
+#include "Detail/NameMacro.h"
+#include "Detail/NameMacroBase.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,12 +28,28 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using NameMacroSharedPtr = NameMacro::NameMacroSharedPtr;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void BaseTest();
         void ImplTest();
         void FinalTest();
+
+        void BaseGetObjectByNameTest(NameMacroBase& nameMacroBase);
+        void BaseGetConstObjectByNameTest(const NameMacroBase& nameMacroBase);
+        void BaseGetAllObjectsByNameTest(NameMacroBase& nameMacroBase);
+        void BaseGetAllConstObjectsByNameTest(const NameMacroBase& nameMacroBase);
+        void ImplGetObjectByNameTest(NameMacro& nameMacro);
+        void ImplGetConstObjectByNameTest(const NameMacro& nameMacro);
+        void ImplGetAllObjectsByNameTest(NameMacro& nameMacro);
+        void ImplGetAllConstObjectsByNameTest(const NameMacro& nameMacro);
+        void FinalGetObjectByNameTest(NameMacro& nameFinalMacro);
+        void FinalGetConstObjectByNameTest(const NameMacro& nameFinalMacro);
+        void FinalGetAllObjectsByNameTest(NameMacro& nameFinalMacro);
+        void FinalGetAllConstObjectsByNameTest(const NameMacro& nameFinalMacro);
 
     private:
         std::string name;

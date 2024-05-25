@@ -5,11 +5,13 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/14 00:03)
+/// 版本：1.0.0.9 (2024/05/06 19:55)
 
 #ifndef CORE_TOOLS_HELPER_SUITE_TESTING_OBJECT_PTR_TESTING_H
 #define CORE_TOOLS_HELPER_SUITE_TESTING_OBJECT_PTR_TESTING_H
 
+#include "CoreTools/CoreToolsTesting/HelperSuite/Detail/TestingObjectPtr.h"
+#include "CoreTools/ObjectSystems/ConstObjectAssociated.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,6 +28,10 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using ConstObjectAssociated = ConstObjectAssociated<TestingObjectPtr>;
+        static constexpr auto bufferSize = 256;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
@@ -33,9 +39,6 @@ namespace CoreTools
         void LoadStreamTest();
         void LinkStreamTest();
         void GetStreamingSizeTest();
-
-    private:
-        static constexpr auto bufferSize = 256;
     };
 }
 

@@ -29,6 +29,10 @@ namespace CoreTools
     private:
         using ArrayType = Array3<int>;
 
+        static constexpr auto bound0 = 5;
+        static constexpr auto bound1 = 10;
+        static constexpr auto bound2 = 7;
+
     private:
         void MainTest();
         void DoRunUnitTest() override;
@@ -36,11 +40,6 @@ namespace CoreTools
         void Array3Test();
         void InitArray(ArrayType& array3);
         void ResultTest(const ArrayType& array3);
-
-    private:
-        static constexpr auto bound0 = 5;
-        static constexpr auto bound1 = 10;
-        static constexpr auto bound2 = 7;
     };
 }
 

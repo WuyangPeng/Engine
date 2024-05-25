@@ -67,12 +67,16 @@ bool CoreTools::IntObject::IsValid() const noexcept
 bool CoreTools::IntObject::IsLoadValidity() const
 {
     if (intValue != 5 || intArray0.empty() || intArray1.empty())
+    {
         return false;
+    }
 
     for (auto i = 0; i < bufferSize; ++i)
     {
         if (intArray0.at(i) != 4 || intArray1.at(i) != 5)
+        {
             return false;
+        }
     }
 
     return true;
@@ -88,8 +92,7 @@ int CoreTools::IntObject::GetStreamingSize() const
     size += sizeof(intValue);
 
     /// WriteIntWithNumber
-    size += sizeof(int32_t);
-    size += bufferSize * sizeof(intValue);
+    size += GetStreamSize(intArray0);
 
     /// WriteIntWithoutNumber
     size += bufferSize * sizeof(intValue);

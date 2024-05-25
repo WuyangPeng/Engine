@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:37)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/04/24 22:01)
 
 #include "CommandLineInformationTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -16,6 +16,11 @@
 #include "Mathematics/Base/MathDetail.h"
 
 #include <vector>
+
+namespace
+{
+    const auto* commandLine = "MyProgram -debug -integer 5 -float 6.4 -double 5.2 -string value -fileName filename";
+}
 
 CoreTools::CommandLineInformationTesting::CommandLineInformationTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -45,72 +50,94 @@ void CoreTools::CommandLineInformationTesting::MainTest()
 
 void CoreTools::CommandLineInformationTesting::LineInformationSucceedTest(CommandLineInformation& commandLineInformation)
 {
-    auto count = commandLineInformation.GetExcessArgumentsCount();
+    ASSERT_NOT_THROW_EXCEPTION_1(AnalysisBoolTest, commandLineInformation);
+    ASSERT_NOT_THROW_EXCEPTION_1(AnalysisDoubleTest, commandLineInformation);
+    ASSERT_NOT_THROW_EXCEPTION_1(AnalysisFileNameTest, commandLineInformation);
+    ASSERT_NOT_THROW_EXCEPTION_1(AnalysisFloatTest, commandLineInformation);
+    ASSERT_NOT_THROW_EXCEPTION_1(AnalysisIntegerTest, commandLineInformation);
+    ASSERT_NOT_THROW_EXCEPTION_1(AnalysisStringTest, commandLineInformation);
 
+    const auto count = commandLineInformation.GetExcessArgumentsCount();
+    ASSERT_EQUAL(count, 0);
+}
+
+void CoreTools::CommandLineInformationTesting::AnalysisBoolTest(CommandLineInformation& commandLineInformation)
+{
+    const auto count = commandLineInformation.GetExcessArgumentsCount();
     ASSERT_EQUAL(count, 6);
 
-    auto excessArguments = commandLineInformation.ExcessArguments();
+    const auto excessArguments = commandLineInformation.ExcessArguments();
     ASSERT_EQUAL(excessArguments, "debug");
     ASSERT_TRUE(commandLineInformation.GetBoolean(excessArguments));
+
     commandLineInformation.SetUsed(excessArguments);
-
     ASSERT_FALSE(commandLineInformation.GetBoolean("debug1"));
+}
 
-    count = commandLineInformation.GetExcessArgumentsCount();
-
+void CoreTools::CommandLineInformationTesting::AnalysisDoubleTest(CommandLineInformation& commandLineInformation)
+{
+    const auto count = commandLineInformation.GetExcessArgumentsCount();
     ASSERT_EQUAL(count, 5);
 
-    excessArguments = commandLineInformation.ExcessArguments();
+    const auto excessArguments = commandLineInformation.ExcessArguments();
     ASSERT_EQUAL(excessArguments, "double");
     ASSERT_APPROXIMATE(commandLineInformation.GetDouble(excessArguments), 5.2, Mathematics::MathD::GetZeroTolerance());
+
     commandLineInformation.SetUsed(excessArguments);
+}
 
-    count = commandLineInformation.GetExcessArgumentsCount();
-
+void CoreTools::CommandLineInformationTesting::AnalysisFileNameTest(CommandLineInformation& commandLineInformation)
+{
+    const auto count = commandLineInformation.GetExcessArgumentsCount();
     ASSERT_EQUAL(count, 4);
 
-    excessArguments = commandLineInformation.ExcessArguments();
+    const auto excessArguments = commandLineInformation.ExcessArguments();
     ASSERT_EQUAL(excessArguments, "fileName");
     ASSERT_EQUAL(commandLineInformation.GetFileName(), "filename");
 
     commandLineInformation.SetFileNameUsed();
+}
 
-    count = commandLineInformation.GetExcessArgumentsCount();
-
+void CoreTools::CommandLineInformationTesting::AnalysisFloatTest(CommandLineInformation& commandLineInformation)
+{
+    const auto count = commandLineInformation.GetExcessArgumentsCount();
     ASSERT_EQUAL(count, 3);
 
-    excessArguments = commandLineInformation.ExcessArguments();
+    const auto excessArguments = commandLineInformation.ExcessArguments();
     ASSERT_EQUAL(excessArguments, "float");
     ASSERT_APPROXIMATE(commandLineInformation.GetFloat(excessArguments), 6.4f, Mathematics::MathF::GetZeroTolerance());
+
     commandLineInformation.SetUsed(excessArguments);
+}
 
-    count = commandLineInformation.GetExcessArgumentsCount();
-
+void CoreTools::CommandLineInformationTesting::AnalysisIntegerTest(CommandLineInformation& commandLineInformation)
+{
+    const auto count = commandLineInformation.GetExcessArgumentsCount();
     ASSERT_EQUAL(count, 2);
 
-    excessArguments = commandLineInformation.ExcessArguments();
+    const auto excessArguments = commandLineInformation.ExcessArguments();
     ASSERT_EQUAL(excessArguments, "integer");
     ASSERT_EQUAL(commandLineInformation.GetInteger(excessArguments), 5);
+
     commandLineInformation.SetUsed(excessArguments);
+}
 
-    count = commandLineInformation.GetExcessArgumentsCount();
-
+void CoreTools::CommandLineInformationTesting::AnalysisStringTest(CommandLineInformation& commandLineInformation)
+{
+    const auto count = commandLineInformation.GetExcessArgumentsCount();
     ASSERT_EQUAL(count, 1);
 
-    excessArguments = commandLineInformation.ExcessArguments();
+    const auto excessArguments = commandLineInformation.ExcessArguments();
     ASSERT_EQUAL(excessArguments, "string");
     ASSERT_EQUAL(commandLineInformation.GetString(excessArguments), "value");
+
     commandLineInformation.SetUsed(excessArguments);
-
-    count = commandLineInformation.GetExcessArgumentsCount();
-
-    ASSERT_EQUAL(count, 0);
 }
 
 void CoreTools::CommandLineInformationTesting::MainCommandLineInformationSucceedTest()
 {
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26465)
+
 #include SYSTEM_WARNING_DISABLE(26492)
 
     std::vector charVector{ const_cast<char*>("MyProgram"),
@@ -140,8 +167,6 @@ void CoreTools::CommandLineInformationTesting::MainCommandLineInformationSucceed
 
 void CoreTools::CommandLineInformationTesting::WinMainCommandLineInformationSucceedTest()
 {
-    const auto* commandLine = "MyProgram -debug -integer 5 -float 6.4 -double 5.2 -string value -fileName filename";
-
     CommandLineInformation commandLineInformation{ commandLine };
 
     ASSERT_NOT_THROW_EXCEPTION_1(LineInformationSucceedTest, commandLineInformation);
@@ -150,7 +175,7 @@ void CoreTools::CommandLineInformationTesting::WinMainCommandLineInformationSucc
 void CoreTools::CommandLineInformationTesting::GetBooleanFalseTest()
 {
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26465)
+
 #include SYSTEM_WARNING_DISABLE(26492)
 
     std::vector charVector{ const_cast<char*>("MyProgram"), const_cast<char*>("-debug") };
@@ -164,35 +189,29 @@ void CoreTools::CommandLineInformationTesting::GetBooleanFalseTest()
 
 void CoreTools::CommandLineInformationTesting::GetIntegerExceptionTest()
 {
-    const auto* commandLine = "MyProgram -debug -integer 51 -float 16.4 -double 5.21 -string value -fileName value";
-
     const CommandLineInformation commandLineInformation{ commandLine };
 
-    MAYBE_UNUSED const auto value = commandLineInformation.GetInteger("fileName");
+    std::ignore = commandLineInformation.GetInteger("fileName");
 }
 
 void CoreTools::CommandLineInformationTesting::GetFloatExceptionTest()
 {
-    const auto* commandLine = "MyProgram -debug -integer 51 -float 16.4 -double 5.21 -string value fileName";
-
     const CommandLineInformation commandLineInformation{ commandLine };
 
-    MAYBE_UNUSED const auto value = commandLineInformation.GetFloat("Float");
+    std::ignore = commandLineInformation.GetFloat("Float");
 }
 
 void CoreTools::CommandLineInformationTesting::GetDoubleExceptionTest()
 {
-    const auto* commandLine = "MyProgram -debug -integer   51 -float 16.4 -double 5.21 -string value -fileName value";
-
     const CommandLineInformation commandLineInformation{ commandLine };
 
-    MAYBE_UNUSED const auto value = commandLineInformation.GetDouble("debug");
+    std::ignore = commandLineInformation.GetDouble("debug");
 }
 
 void CoreTools::CommandLineInformationTesting::GetStringExceptionTest()
 {
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26465)
+
 #include SYSTEM_WARNING_DISABLE(26492)
 
     std::vector charVector{ const_cast<char*>("MyProgram"),
@@ -204,13 +223,13 @@ void CoreTools::CommandLineInformationTesting::GetStringExceptionTest()
 
     const CommandLineInformation commandLineInformation{ boost::numeric_cast<int>(charVector.size()), charVector.data() };
 
-    MAYBE_UNUSED auto value = commandLineInformation.GetString("value");
+    std::ignore = commandLineInformation.GetString("value");
 }
 
 void CoreTools::CommandLineInformationTesting::GetFileNameExceptionTest()
 {
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26465)
+
 #include SYSTEM_WARNING_DISABLE(26492)
 
     std::vector charVector{ const_cast<char*>("MyProgram"), const_cast<char*>("-debug") };
@@ -219,14 +238,14 @@ void CoreTools::CommandLineInformationTesting::GetFileNameExceptionTest()
 
     const CommandLineInformation commandLineInformation{ boost::numeric_cast<int>(charVector.size()), charVector.data() };
 
-    MAYBE_UNUSED auto value = commandLineInformation.GetFileName();
+    std::ignore = commandLineInformation.GetFileName();
 }
 
 void CoreTools::CommandLineInformationTesting::WinMainNullCommandLineInformationSucceedTest()
 {
-    const auto* commandLine = R"("E:/TCRE/Engine/EngineWindows/Framework/../../DebugWindows/FrameworkTestingD.exe")";
+    const auto* path = R"("E:/TCRE/Engine/EngineWindows/Framework/../../DebugWindows/FrameworkTestingD.exe")";
 
-    const CommandLineInformation commandLineInformation{ commandLine };
+    const CommandLineInformation commandLineInformation{ path };
 
     ASSERT_EQUAL(commandLineInformation.GetExcessArgumentsCount(), 0);
 }

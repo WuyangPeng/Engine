@@ -5,10 +5,10 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/12 14:21)
+/// 版本：1.0.0.9 (2024/04/24 13:17)
 
-#ifndef CORE_TOOLS_COMMAND_COMMAND_H
-#define CORE_TOOLS_COMMAND_COMMAND_H
+#ifndef CORE_TOOLS_COMMAND_COMMAND_HANDLE_H
+#define CORE_TOOLS_COMMAND_COMMAND_HANDLE_H
 
 #include "CoreTools/CoreToolsDll.h"
 
@@ -35,8 +35,8 @@ namespace CoreTools
         /// 如果范围是必需的，他们必须为每个参数设置。
         CommandHandle& SetMinValue(double value) noexcept;
         CommandHandle& SetMaxValue(double value) noexcept;
-        CommandHandle& SetInfValue(double value) noexcept;
-        CommandHandle& SetSupValue(double value) noexcept;
+        CommandHandle& SetInfimumValue(double value) noexcept;
+        CommandHandle& SetSupremumValue(double value) noexcept;
 
         void ClearBoundary() noexcept;
 
@@ -70,9 +70,9 @@ namespace CoreTools
         double large;  /// 数值参数的上界 (max 或 sup)
         bool minSet;  /// 如果为真，比较：small <= arg
         bool maxSet;  /// 如果为真，比较：arg <= large
-        bool infSet;  /// 如果为真，比较：small < arg
-        bool supSet;  /// 如果为真，比较：arg < large
+        bool infimumSet;  /// 如果为真，比较：small < arg
+        bool supremumSet;  /// 如果为真，比较：arg < large
     };
 }
 
-#endif  // CORE_TOOLS_COMMAND_COMMAND_H
+#endif  // CORE_TOOLS_COMMAND_COMMAND_HANDLE_H

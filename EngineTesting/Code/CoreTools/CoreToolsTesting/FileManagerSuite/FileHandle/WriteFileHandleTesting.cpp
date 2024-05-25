@@ -38,6 +38,16 @@ void CoreTools::WriteFileHandleTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(GetFileByteSizeTest);
 }
 
+System::String CoreTools::WriteFileHandleTesting::GetFileHandleName()
+{
+    return SYSTEM_TEXT("Resource/FileHandleTesting/WriteFileHandleTestingText.txt");
+}
+
+std::string CoreTools::WriteFileHandleTesting::GetFileHandleContent()
+{
+    return "FileHandle Testing Text";
+}
+
 void CoreTools::WriteFileHandleTesting::WriteFileHandleTest()
 {
     WriteFileHandle handle{ GetFileHandleName() };
@@ -55,32 +65,36 @@ void CoreTools::WriteFileHandleTesting::WriteResultTest()
     const auto content = GetFileHandleContent();
     ReadFileHandle manager{ GetFileHandleName() };
 
+    const auto size = GetSize(content, manager);
+
+    ASSERT_NOT_THROW_EXCEPTION_3(ReadResultTest, content, manager, size);
+}
+
+size_t CoreTools::WriteFileHandleTesting::GetSize(const std::string& content, ReadFileHandle& manager)
+{
     size_t size{ 0 };
     manager.Read(sizeof(decltype(size)), &size);
 
     ASSERT_EQUAL(size, content.size());
 
-    std::vector<char> buffer(size);
+    return size;
+}
+
+void CoreTools::WriteFileHandleTesting::ReadResultTest(const std::string& content, ReadFileHandle& manager, size_t size)
+{
+    BufferType buffer(size);
     manager.Read(sizeof(char), size, buffer.data());
 
-    const std::string bufferContent{ buffer.begin(), buffer.end() };
+    const std::string result{ buffer.begin(), buffer.end() };
 
-    ASSERT_EQUAL(bufferContent, content);
-}
-
-System::String CoreTools::WriteFileHandleTesting::GetFileHandleName()
-{
-    return SYSTEM_TEXT("Resource/FileHandleTesting/WriteFileHandleTestingText.txt");
-}
-
-std::string CoreTools::WriteFileHandleTesting::GetFileHandleContent()
-{
-    return "FileHandle Testing Text";
+    ASSERT_EQUAL(result, content);
 }
 
 void CoreTools::WriteFileHandleTesting::GetFileByteSizeTest()
 {
+    const auto content = GetFileHandleContent();
+
     const WriteFileHandle handle{ GetFileHandleName(), System::FileHandleCreationDisposition::OpenExisting };
 
-    ASSERT_EQUAL(handle.GetFileByteSize(), boost::numeric_cast<int>(GetFileHandleContent().size() + sizeof(size_t)));
+    ASSERT_EQUAL(handle.GetFileByteSize(), boost::numeric_cast<int>(content.size() + sizeof(size_t)));
 }

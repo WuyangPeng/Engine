@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_DATA_TYPES_SUITE_INIT_TERM_CONTAINER_TESTING_H
 #define CORE_TOOLS_DATA_TYPES_SUITE_INIT_TERM_CONTAINER_TESTING_H
 
+#include "CoreTools/ObjectSystems/InitTermContainer.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -31,6 +32,11 @@ namespace CoreTools
 
         static void Initializer() noexcept;
         static void Terminator() noexcept;
+
+        void AddExecuteFunction0Test(InitTermContainer& initTermContainer);
+        void Execute0Test(InitTermContainer& initTermContainer);
+        void AddExecuteFunction1Test(InitTermContainer& initTermContainer);
+        void Execute1Test(InitTermContainer& initTermContainer);
 
     private:
         static bool initializeCall;

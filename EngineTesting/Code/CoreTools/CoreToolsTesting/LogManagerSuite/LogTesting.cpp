@@ -5,12 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/18 22:17)
+/// 版本：1.0.0.9 (2024/05/11 14:41)
 
 #include "LogTesting.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/LogManager/Appender.h"
 #include "CoreTools/LogManager/Log.h"
@@ -71,35 +71,20 @@ void CoreTools::LogTesting::OutTest() noexcept
 
 void CoreTools::LogTesting::MessageTest()
 {
-    LogMessage traceMessage(LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED);
-    traceMessage << gTraceMessage;
+    ASSERT_NOT_THROW_EXCEPTION_2(DoMessageTest, LogLevel::Trace, gTraceMessage);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoMessageTest, LogLevel::Debug, gDebugMessage);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoMessageTest, LogLevel::Info, gInfoMessage);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoMessageTest, LogLevel::Warn, gWarnMessage);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoMessageTest, LogLevel::Error, gErrorMessage);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoMessageTest, LogLevel::Fatal, gFatalMessage);
+}
+
+void CoreTools::LogTesting::DoMessageTest(LogLevel logLevel, const String& message)
+{
+    LogMessage traceMessage(logLevel, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED);
+    traceMessage << message;
 
     LOG_SINGLETON.Write(traceMessage);
-
-    LogMessage debugMessage{ LogLevel::Debug, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    debugMessage << gDebugMessage;
-
-    LOG_SINGLETON.Write(debugMessage);
-
-    LogMessage infoMessage{ LogLevel::Info, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    infoMessage << gInfoMessage;
-
-    LOG_SINGLETON.Write(infoMessage);
-
-    LogMessage warnMessage{ LogLevel::Warn, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    warnMessage << gWarnMessage;
-
-    LOG_SINGLETON.Write(warnMessage);
-
-    LogMessage errorMessage{ LogLevel::Error, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    errorMessage << gErrorMessage;
-
-    LOG_SINGLETON.Write(errorMessage);
-
-    LogMessage fatalMessage{ LogLevel::Fatal, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    fatalMessage << gFatalMessage;
-
-    LOG_SINGLETON.Write(fatalMessage);
 }
 
 void CoreTools::LogTesting::GetMinLogLevelTypeTest()

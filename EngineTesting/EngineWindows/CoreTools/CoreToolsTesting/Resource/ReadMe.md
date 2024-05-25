@@ -330,7 +330,10 @@
 
 对时间模块的单元测试，包括：
 （1）时间：DeltaTimeManagerTesting、
-		   DateTesting。
+		   DateTesting、
+		   YearTesting、
+		   MonthTesting、
+		   DayTesting。
 （2）计时器：SecondTimerTesting、
 			 MillisecondTimerTesting。
 （3）定制时间器：CustomTimeTesting。
@@ -382,14 +385,15 @@
 对命令行模块的单元测试，包括：
 （1） 命令行参数：CommandArgumentTesting。
 （2） 命令行信息：CommandLineInformationTesting。
-（3） 命令行：CommandTesting。
+（3） 命令行：CommandHandleTesting。
 
 ----------------------------
 19.	 MainFunctionHelperSuite 
 
 对主函数帮助模块的单元测试，包括：
 （1）测试信息帮助：TestingInformationHelperTesting。
-（2）动态链接库函数帮助：DllFunctionHelperTesting。
+（2）动态链接库函数帮助：DllFunctionHelperTesting、
+						 ExecuteDllMainTesting。
 （3）主函数帮助：CMainFunctionHelperTesting。
 （4）主函数测试帮助：CMainFunctionTestingHelperTesting。
 
@@ -436,8 +440,8 @@
 25.	 CyclicRedundancyCheckSuite 
 
 对CRC模块的单元测试，包括：
-（1）CheckSum校验码算法：CyclicRedundancyCheckCCITTTesting、
-						 CyclicRedundancyCheckCCITTUsingTableTesting、
+（1）CheckSum校验码算法：CyclicRedundancyCheckCcittTesting、
+						 CyclicRedundancyCheckCcittUsingTableTesting、
 						 CyclicRedundancyCheckHandleTesting、
 						 IntelCheckSumTesting、
 						 SevenModElevenCheckSumTesting、

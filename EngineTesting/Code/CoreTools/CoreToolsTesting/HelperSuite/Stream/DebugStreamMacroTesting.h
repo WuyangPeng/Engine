@@ -26,14 +26,14 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        static constexpr auto bufferSize = 256;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void SaveStreamTest();
         void LoadStreamTest();
-
-    private:
-        static constexpr auto bufferSize = 256;
     };
 }
 

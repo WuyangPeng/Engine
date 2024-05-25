@@ -105,7 +105,7 @@ namespace CoreTools
     };
 
     template <typename T>
-    struct StreamSize<std::vector<T>, std::enable_if_t<std::is_arithmetic_v<T>>>
+    struct StreamSize<std::vector<T>, std::enable_if_t<std::is_arithmetic_v<T> || std::is_enum_v<T>>>
     {
         NODISCARD static int GetStreamSize(const std::vector<T>& value)
         {

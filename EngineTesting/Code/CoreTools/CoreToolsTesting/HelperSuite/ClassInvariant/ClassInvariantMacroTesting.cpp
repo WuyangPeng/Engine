@@ -35,7 +35,7 @@ void CoreTools::ClassInvariantMacroTesting::MainTest()
 
 void CoreTools::ClassInvariantMacroTesting::StubMacroTest() noexcept
 {
-    const ClassInvariantStubMacroTesting classInvariantStubMacroTesting{};
+    constexpr ClassInvariantStubMacroTesting classInvariantStubMacroTesting{};
 }
 
 void CoreTools::ClassInvariantMacroTesting::LevelTest()

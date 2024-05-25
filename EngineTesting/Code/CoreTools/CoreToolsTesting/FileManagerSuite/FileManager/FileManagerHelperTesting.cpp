@@ -5,13 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 17:03)
+/// 版本：1.0.0.9 (2024/05/03 23:11)
 
 #include "FileManagerHelperTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/FileManager/FileManagerHelper.h"
-#include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -72,34 +71,33 @@ void CoreTools::FileManagerHelperTesting::LoadFromFileTest(bool binaryFile)
 {
     const auto buffer = FileManagerHelper::LoadFromFile(GetFileManagerHelperName(), binaryFile);
 
-    const std::string bufferContent{ buffer.begin(), buffer.end() };
+    ASSERT_NOT_THROW_EXCEPTION_2(ContentTest, buffer, GetFileManagerHelperContent());
+}
 
-    ASSERT_EQUAL(bufferContent, GetFileManagerHelperContent());
+void CoreTools::FileManagerHelperTesting::ContentTest(const FileBuffer& buffer, const std::string& content)
+{
+    const std::string result{ buffer.begin(), buffer.end() };
+
+    ASSERT_EQUAL(result, content);
 }
 
 void CoreTools::FileManagerHelperTesting::LoadFromFileUseEnvironmentTest(bool binaryFile)
 {
     const auto buffer = FileManagerHelper::LoadFromFileUseEnvironment(environment, GetFileName(), binaryFile);
 
-    const std::string bufferContent{ buffer.begin(), buffer.end() };
-
-    ASSERT_EQUAL(bufferContent, GetFileManagerHelperContent());
+    ASSERT_NOT_THROW_EXCEPTION_2(ContentTest, buffer, GetFileManagerHelperContent());
 }
 
 void CoreTools::FileManagerHelperTesting::AppendToFileTest(bool binaryFile)
 {
-    auto content = GetFileManagerHelperContent();
+    const auto content = GetFileManagerHelperContent();
     const auto fileName = GetFileManagerHelperName();
 
     FileManagerHelper::AppendToFile(fileName, binaryFile, boost::numeric_cast<int>(content.size()), content.c_str());
 
     const auto buffer = FileManagerHelper::LoadFromFile(fileName, binaryFile);
 
-    const std::string bufferContent{ buffer.begin(), buffer.end() };
-
-    content += GetFileManagerHelperContent();
-
-    ASSERT_EQUAL(bufferContent, content);
+    ASSERT_NOT_THROW_EXCEPTION_2(ContentTest, buffer, content + content);
 }
 
 void CoreTools::FileManagerHelperTesting::SaveIntoFileTest(bool binaryFile)
@@ -111,9 +109,7 @@ void CoreTools::FileManagerHelperTesting::SaveIntoFileTest(bool binaryFile)
 
     const auto buffer = FileManagerHelper::LoadFromFile(fileName, binaryFile);
 
-    const std::string bufferContent{ buffer.begin(), buffer.end() };
-
-    ASSERT_EQUAL(bufferContent, content);
+    ASSERT_NOT_THROW_EXCEPTION_2(ContentTest, buffer, GetFileManagerHelperContent());
 }
 
 void CoreTools::FileManagerHelperTesting::IsFileExistsTest()

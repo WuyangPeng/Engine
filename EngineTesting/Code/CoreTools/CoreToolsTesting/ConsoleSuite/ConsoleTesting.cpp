@@ -37,7 +37,6 @@ void CoreTools::ConsoleTesting::MainTest()
 void CoreTools::ConsoleTesting::InputHandleTest()
 {
     const auto console = ConsoleInstance<StandardHandle::Input>::Create();
-
     const auto handle = console.GetHandle();
 
     ASSERT_UNEQUAL_NULL_PTR(handle);
@@ -47,7 +46,6 @@ void CoreTools::ConsoleTesting::InputHandleTest()
 void CoreTools::ConsoleTesting::OutputHandleTest()
 {
     const auto console = ConsoleInstance<StandardHandle::Output>::Create();
-
     const auto handle = console.GetHandle();
 
     ASSERT_UNEQUAL_NULL_PTR(handle);
@@ -57,7 +55,6 @@ void CoreTools::ConsoleTesting::OutputHandleTest()
 void CoreTools::ConsoleTesting::ErrorHandleTest()
 {
     const auto console = ConsoleInstance<StandardHandle::Error>::Create();
-
     const auto handle = console.GetHandle();
 
     ASSERT_UNEQUAL_NULL_PTR(handle);

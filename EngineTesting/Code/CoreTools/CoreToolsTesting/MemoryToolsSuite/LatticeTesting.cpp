@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 16:04)
+/// 版本：1.0.0.9 (2024/05/15 21:28)
 
 #include "LatticeTesting.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -39,218 +39,332 @@ void CoreTools::LatticeTesting::MainTest()
 
 void CoreTools::LatticeTesting::SizeTest()
 {
-    constexpr Lattice<true, 5, 6, 10> lattice0{};
+    ASSERT_NOT_THROW_EXCEPTION_0(Size0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Size1Test);
+}
 
-    static_assert(lattice0.GetDimensions() == 3);
+void CoreTools::LatticeTesting::Size0Test()
+{
+    constexpr Lattice<true, latticeSize0, latticeSize1, latticeSize2> lattice{};
 
-    ASSERT_EQUAL(lattice0.GetSize(0), 5);
-    ASSERT_EQUAL(lattice0.GetSize(1), 6);
-    ASSERT_EQUAL(lattice0.GetSize(2), 10);
+    static_assert(lattice.GetDimensions() == 3);
 
-    static_assert(lattice0.GetSize() == 5 * 6 * 10);
+    ASSERT_EQUAL(lattice.GetSize(0), latticeSize0);
+    ASSERT_EQUAL(lattice.GetSize(1), latticeSize1);
+    ASSERT_EQUAL(lattice.GetSize(2), latticeSize2);
 
-    const Lattice<true> lattice1{ 5, 6, 10 };
+    static_assert(lattice.GetSize() == latticeSize0 * latticeSize1 * latticeSize2);
+}
 
-    ASSERT_EQUAL(lattice1.GetDimensions(), 3);
+void CoreTools::LatticeTesting::Size1Test()
+{
+    const Lattice<true> lattice{ latticeSize0, latticeSize1, latticeSize2 };
 
-    ASSERT_EQUAL(lattice1.GetSize(0), 5);
-    ASSERT_EQUAL(lattice1.GetSize(1), 6);
-    ASSERT_EQUAL(lattice1.GetSize(2), 10);
+    ASSERT_EQUAL(lattice.GetDimensions(), 3);
 
-    ASSERT_EQUAL(lattice1.GetSize(), 5 * 6 * 10);
+    ASSERT_EQUAL(lattice.GetSize(0), latticeSize0);
+    ASSERT_EQUAL(lattice.GetSize(1), latticeSize1);
+    ASSERT_EQUAL(lattice.GetSize(2), latticeSize2);
+
+    ASSERT_EQUAL(lattice.GetSize(), latticeSize0 * latticeSize1 * latticeSize2);
 }
 
 void CoreTools::LatticeTesting::GetIndexTest()
 {
-    constexpr Lattice<true, 5, 6, 10> lattice0{};
+    ASSERT_NOT_THROW_EXCEPTION_0(GetIndex0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetIndex1Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetIndex2Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetIndex3Test);
+}
 
-    const auto index0 = lattice0.GetIndex(1, 2, 3);
+void CoreTools::LatticeTesting::GetIndex0Test()
+{
+    constexpr Lattice<true, latticeSize0, latticeSize1, latticeSize2> lattice{};
 
-    ASSERT_EQUAL(index0, 1 + 5 * (2 + 6 * 3));
+    const auto index = lattice.GetIndex(index0, index1, index2);
 
-    constexpr Lattice<false, 5, 6, 10> lattice1{};
+    ASSERT_EQUAL(index, index0 + latticeSize0 * (index1 + latticeSize1 * index2));
+}
 
-    const auto index1 = lattice1.GetIndex(1, 2, 3);
+void CoreTools::LatticeTesting::GetIndex1Test()
+{
+    constexpr Lattice<false, latticeSize0, latticeSize1, latticeSize2> lattice{};
 
-    ASSERT_EQUAL(index1, 3 + 10 * (2 + 6 * 1));
+    const auto index = lattice.GetIndex(index0, index1, index2);
 
-    const Lattice<true> lattice2{ 5, 6, 10 };
+    ASSERT_EQUAL(index, index2 + latticeSize2 * (index1 + latticeSize1 * index0));
+}
 
-    const auto index2 = lattice2.GetIndex(1, 2, 3);
+void CoreTools::LatticeTesting::GetIndex2Test()
+{
+    const Lattice<true> lattice{ latticeSize0, latticeSize1, latticeSize2 };
 
-    ASSERT_EQUAL(index2, 1 + 5 * (2 + 6 * 3));
+    const auto index = lattice.GetIndex(index0, index1, index2);
 
-    const Lattice<false> lattice3{ 5, 6, 10 };
+    ASSERT_EQUAL(index, index0 + latticeSize0 * (index1 + latticeSize1 * index2));
+}
 
-    const auto index3 = lattice3.GetIndex(1, 2, 3);
+void CoreTools::LatticeTesting::GetIndex3Test()
+{
+    const Lattice<false> lattice{ latticeSize0, latticeSize1, latticeSize2 };
 
-    ASSERT_EQUAL(index3, 3 + 10 * (2 + 6 * 1));
+    const auto index = lattice.GetIndex(index0, index1, index2);
+
+    ASSERT_EQUAL(index, index2 + latticeSize2 * (index1 + latticeSize1 * index0));
 }
 
 void CoreTools::LatticeTesting::GetIndexArrayTest()
 {
-    constexpr Lattice<true, 5, 6, 10> lattice0{};
+    ASSERT_NOT_THROW_EXCEPTION_0(GetIndexArray0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetIndexArray1Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetIndexArray2Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetIndexArray3Test);
+}
 
-    const auto index0 = lattice0.GetIndex({ 4, 7, 8 });
+void CoreTools::LatticeTesting::GetIndexArray0Test()
+{
+    constexpr Lattice<true, latticeSize0, latticeSize1, latticeSize2> lattice{};
 
-    ASSERT_EQUAL(index0, 4 + 5 * (7 + 6 * 8));
+    const auto index = lattice.GetIndex({ index3, index4, index5 });
 
-    constexpr Lattice<false, 5, 6, 10> lattice1{};
+    ASSERT_EQUAL(index, index3 + latticeSize0 * (index4 + latticeSize1 * index5));
+}
 
-    const auto index1 = lattice1.GetIndex({ 4, 7, 8 });
+void CoreTools::LatticeTesting::GetIndexArray1Test()
+{
+    constexpr Lattice<false, latticeSize0, latticeSize1, latticeSize2> lattice{};
 
-    ASSERT_EQUAL(index1, 8 + 10 * (7 + 6 * 4));
+    const auto index = lattice.GetIndex({ index3, index4, index5 });
 
-    const Lattice<true> lattice2{ Lattice<true>::SizeType{ 5, 6, 10 } };
+    ASSERT_EQUAL(index, index5 + latticeSize2 * (index4 + latticeSize1 * index3));
+}
 
-    const auto index2 = lattice2.GetIndex({ 4, 7, 8 });
+void CoreTools::LatticeTesting::GetIndexArray2Test()
+{
+    const Lattice<true> lattice{ Lattice<true>::SizeType{ latticeSize0, latticeSize1, latticeSize2 } };
 
-    ASSERT_EQUAL(index2, 4 + 5 * (7 + 6 * 8));
+    const auto index = lattice.GetIndex({ index3, index4, index5 });
 
-    const Lattice<false> lattice3{ Lattice<false>::SizeType{ 5, 6, 10 } };
+    ASSERT_EQUAL(index, index3 + latticeSize0 * (index4 + latticeSize1 * index5));
+}
 
-    const auto index3 = lattice3.GetIndex({ 4, 7, 8 });
+void CoreTools::LatticeTesting::GetIndexArray3Test()
+{
+    const Lattice<false> lattice3{ Lattice<false>::SizeType{ latticeSize0, latticeSize1, latticeSize2 } };
 
-    ASSERT_EQUAL(index3, 8 + 10 * (7 + 6 * 4));
+    const auto index = lattice3.GetIndex({ index3, index4, index5 });
+
+    ASSERT_EQUAL(index, index5 + latticeSize2 * (index4 + latticeSize1 * index3));
 }
 
 void CoreTools::LatticeTesting::CoordinateTest()
 {
-    constexpr Lattice<true, 5, 6, 10> lattice0{};
+    ASSERT_NOT_THROW_EXCEPTION_0(Coordinate0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Coordinate1Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Coordinate2Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Coordinate3Test);
+}
 
-    const auto coordinate0 = lattice0.GetCoordinate<>(6);
+void CoreTools::LatticeTesting::Coordinate0Test()
+{
+    constexpr Lattice<true, latticeSize0, latticeSize1, latticeSize2> lattice{};
 
-    const auto index0 = lattice0.GetIndex(coordinate0);
+    const auto coordinate = lattice.GetCoordinate<>(index6);
 
-    ASSERT_EQUAL(index0, 6);
+    const auto index = lattice.GetIndex(coordinate);
 
-    constexpr Lattice<false, 5, 6, 10> lattice1{};
+    ASSERT_EQUAL(index, index6);
+}
 
-    const auto coordinate1 = lattice1.GetCoordinate<>(61);
+void CoreTools::LatticeTesting::Coordinate1Test()
+{
+    constexpr Lattice<false, latticeSize0, latticeSize1, latticeSize2> lattice{};
 
-    const auto index1 = lattice1.GetIndex(coordinate1);
+    const auto coordinate = lattice.GetCoordinate<>(index7);
 
-    ASSERT_EQUAL(index1, 61);
+    const auto index = lattice.GetIndex(coordinate);
 
-    const Lattice<true> lattice2{ 5, 6, 10 };
+    ASSERT_EQUAL(index, index7);
+}
 
-    const auto coordinate2 = lattice2.GetCoordinate<>(6);
+void CoreTools::LatticeTesting::Coordinate2Test()
+{
+    const Lattice<true> lattice{ latticeSize0, latticeSize1, latticeSize2 };
 
-    const auto index2 = lattice2.GetIndex(coordinate2);
+    const auto coordinate = lattice.GetCoordinate<>(index6);
 
-    ASSERT_EQUAL(index2, 6);
+    const auto index = lattice.GetIndex(coordinate);
 
-    const Lattice<false> lattice3{ 5, 6, 10 };
+    ASSERT_EQUAL(index, index6);
+}
 
-    const auto coordinate3 = lattice2.GetCoordinate<>(61);
+void CoreTools::LatticeTesting::Coordinate3Test()
+{
+    const Lattice<false> lattice{ latticeSize0, latticeSize1, latticeSize2 };
 
-    const auto index3 = lattice2.GetIndex(coordinate3);
+    const auto coordinate = lattice.GetCoordinate<>(index7);
 
-    ASSERT_EQUAL(index3, 61);
+    const auto index = lattice.GetIndex(coordinate);
+
+    ASSERT_EQUAL(index, index7);
 }
 
 void CoreTools::LatticeTesting::OrderLToRTest()
 {
-    const Lattice<true, 2, 3, 5> lattice0{};
+    ASSERT_NOT_THROW_EXCEPTION_0(OrderLToR0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(OrderLToR1Test);
+}
 
-    for (auto x2 = 0, i = 0; x2 < lattice0.GetSize(2); ++x2)
+void CoreTools::LatticeTesting::OrderLToR0Test()
+{
+    const LatticeType0 lattice{};
+
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderLToRIndex0Test, lattice);
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderLToRSize0Test, lattice);
+}
+
+void CoreTools::LatticeTesting::OrderLToRIndex0Test(const LatticeType0& lattice)
+{
+    for (auto x2 = 0, i = 0; x2 < lattice.GetSize(2); ++x2)
     {
-        for (auto x1 = 0; x1 < lattice0.GetSize(1); ++x1)
+        for (auto x1 = 0; x1 < lattice.GetSize(1); ++x1)
         {
-            for (auto x0 = 0; x0 < lattice0.GetSize(0); ++x0, ++i)
+            for (auto x0 = 0; x0 < lattice.GetSize(0); ++x0, ++i)
             {
-                ASSERT_EQUAL(lattice0.GetIndex(x0, x1, x2), i);
+                ASSERT_EQUAL(lattice.GetIndex(x0, x1, x2), i);
 
                 const std::array x{ x0, x1, x2 };
-                ASSERT_EQUAL(lattice0.GetIndex(x), i);
+                ASSERT_EQUAL(lattice.GetIndex(x), i);
             }
         }
     }
+}
 
-    for (auto i = 0; i < lattice0.GetSize(); ++i)
+void CoreTools::LatticeTesting::OrderLToRSize0Test(const LatticeType0& lattice)
+{
+    for (auto i = 0; i < lattice.GetSize(); ++i)
     {
-        const auto x = lattice0.GetCoordinate(i);
+        const auto x = lattice.GetCoordinate(i);
 
-        ASSERT_EQUAL(x.at(0), i % 2);
-        ASSERT_EQUAL(x.at(1), (i / 2) % 3);
-        ASSERT_EQUAL(x.at(2), (i / 2) / 3);
+        ASSERT_EQUAL(x.at(0), i % latticeSize3);
+        ASSERT_EQUAL(x.at(1), (i / latticeSize3) % latticeSize4);
+        ASSERT_EQUAL(x.at(2), (i / latticeSize3) / latticeSize4);
     }
+}
 
-    const Lattice<true> lattice1{ 2, 3, 5 };
+void CoreTools::LatticeTesting::OrderLToR1Test()
+{
+    const Lattice<true> lattice{ latticeSize3, latticeSize4, latticeSize5 };
 
-    for (auto x2 = 0, i = 0; x2 < lattice1.GetSize(2); ++x2)
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderLToRIndex1Test, lattice);
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderLToRSize1Test, lattice);
+}
+
+void CoreTools::LatticeTesting::OrderLToRIndex1Test(const LatticeType1& lattice)
+{
+    for (auto x2 = 0, i = 0; x2 < lattice.GetSize(2); ++x2)
     {
-        for (auto x1 = 0; x1 < lattice1.GetSize(1); ++x1)
+        for (auto x1 = 0; x1 < lattice.GetSize(1); ++x1)
         {
-            for (auto x0 = 0; x0 < lattice1.GetSize(0); ++x0, ++i)
+            for (auto x0 = 0; x0 < lattice.GetSize(0); ++x0, ++i)
             {
-                ASSERT_EQUAL(lattice1.GetIndex(x0, x1, x2), i);
+                ASSERT_EQUAL(lattice.GetIndex(x0, x1, x2), i);
 
                 const std::vector x{ x0, x1, x2 };
-                ASSERT_EQUAL(lattice1.GetIndex(x), i);
+                ASSERT_EQUAL(lattice.GetIndex(x), i);
             }
         }
     }
+}
 
-    for (auto i = 0; i < lattice1.GetSize(); ++i)
+void CoreTools::LatticeTesting::OrderLToRSize1Test(const LatticeType1& lattice)
+{
+    for (auto i = 0; i < lattice.GetSize(); ++i)
     {
-        const auto x = lattice1.GetCoordinate(i);
+        const auto x = lattice.GetCoordinate(i);
 
-        ASSERT_EQUAL(x.at(0), i % 2);
-        ASSERT_EQUAL(x.at(1), (i / 2) % 3);
-        ASSERT_EQUAL(x.at(2), (i / 2) / 3);
+        ASSERT_EQUAL(x.at(0), i % latticeSize3);
+        ASSERT_EQUAL(x.at(1), (i / latticeSize3) % latticeSize4);
+        ASSERT_EQUAL(x.at(2), (i / latticeSize3) / latticeSize4);
     }
 }
 
 void CoreTools::LatticeTesting::OrderRToLTest()
 {
-    const Lattice<false, 2, 3, 5> lattice0{};
+    ASSERT_NOT_THROW_EXCEPTION_0(OrderRToL0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(OrderRToL1Test);
+}
 
-    for (auto x2 = 0, i = 0; x2 < lattice0.GetSize(0); ++x2)
+void CoreTools::LatticeTesting::OrderRToL0Test()
+{
+    const LatticeType2 lattice{};
+
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderRToLIndex0Test, lattice);
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderRToLSize0Test, lattice);
+}
+
+void CoreTools::LatticeTesting::OrderRToLIndex0Test(const LatticeType2& lattice)
+{
+    for (auto x2 = 0, i = 0; x2 < lattice.GetSize(0); ++x2)
     {
-        for (auto x1 = 0; x1 < lattice0.GetSize(1); ++x1)
+        for (auto x1 = 0; x1 < lattice.GetSize(1); ++x1)
         {
-            for (auto x0 = 0; x0 < lattice0.GetSize(2); ++x0, ++i)
+            for (auto x0 = 0; x0 < lattice.GetSize(2); ++x0, ++i)
             {
-                ASSERT_EQUAL(lattice0.GetIndex(x2, x1, x0), i);
+                ASSERT_EQUAL(lattice.GetIndex(x2, x1, x0), i);
 
                 const std::array x{ x2, x1, x0 };
-                ASSERT_EQUAL(lattice0.GetIndex(x), i);
+                ASSERT_EQUAL(lattice.GetIndex(x), i);
             }
         }
     }
+}
 
-    for (auto i = 0; i < lattice0.GetSize(); ++i)
+void CoreTools::LatticeTesting::OrderRToLSize0Test(const LatticeType2& lattice)
+{
+    for (auto i = 0; i < lattice.GetSize(); ++i)
     {
-        const auto x = lattice0.GetCoordinate(i);
+        const auto x = lattice.GetCoordinate(i);
 
-        ASSERT_EQUAL(x.at(2), i % 5);
-        ASSERT_EQUAL(x.at(1), (i / 5) % 3);
-        ASSERT_EQUAL(x.at(0), (i / 5) / 3);
+        ASSERT_EQUAL(x.at(2), i % latticeSize5);
+        ASSERT_EQUAL(x.at(1), (i / latticeSize5) % latticeSize4);
+        ASSERT_EQUAL(x.at(0), (i / latticeSize5) / latticeSize4);
     }
+}
 
-    const Lattice<false> lattice1{ 2, 3, 5 };
+void CoreTools::LatticeTesting::OrderRToL1Test()
+{
+    const LatticeType3 lattice{ latticeSize3, latticeSize4, latticeSize5 };
 
-    for (auto x2 = 0, i = 0; x2 < lattice1.GetSize(0); ++x2)
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderRToLIndex1Test, lattice);
+    ASSERT_NOT_THROW_EXCEPTION_1(OrderRToLSize1Test, lattice);
+}
+
+void CoreTools::LatticeTesting::OrderRToLIndex1Test(const LatticeType3& lattice)
+{
+    for (auto x2 = 0, i = 0; x2 < lattice.GetSize(0); ++x2)
     {
-        for (auto x1 = 0; x1 < lattice1.GetSize(1); ++x1)
+        for (auto x1 = 0; x1 < lattice.GetSize(1); ++x1)
         {
-            for (auto x0 = 0; x0 < lattice1.GetSize(2); ++x0, ++i)
+            for (auto x0 = 0; x0 < lattice.GetSize(2); ++x0, ++i)
             {
-                ASSERT_EQUAL(lattice1.GetIndex(x2, x1, x0), i);
+                ASSERT_EQUAL(lattice.GetIndex(x2, x1, x0), i);
 
                 const std::vector x{ x2, x1, x0 };
-                ASSERT_EQUAL(lattice1.GetIndex(x), i);
+                ASSERT_EQUAL(lattice.GetIndex(x), i);
             }
         }
     }
+}
 
-    for (auto i = 0; i < lattice1.GetSize(); ++i)
+void CoreTools::LatticeTesting::OrderRToLSize1Test(const LatticeType3& lattice)
+{
+    for (auto i = 0; i < lattice.GetSize(); ++i)
     {
-        const auto x = lattice1.GetCoordinate(i);
+        const auto x = lattice.GetCoordinate(i);
 
-        ASSERT_EQUAL(x.at(2), i % 5);
-        ASSERT_EQUAL(x.at(1), (i / 5) % 3);
-        ASSERT_EQUAL(x.at(0), (i / 5) / 3);
+        ASSERT_EQUAL(x.at(2), i % latticeSize5);
+        ASSERT_EQUAL(x.at(1), (i / latticeSize5) % latticeSize4);
+        ASSERT_EQUAL(x.at(0), (i / latticeSize5) / latticeSize4);
     }
 }

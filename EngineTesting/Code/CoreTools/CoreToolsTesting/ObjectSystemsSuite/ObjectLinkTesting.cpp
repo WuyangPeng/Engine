@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:18)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/05/23 19:47)
 
 #include "ObjectLinkTesting.h"
 #include "Detail/BoolObject.h"
@@ -14,7 +14,7 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/NullObject.h"
 #include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
@@ -22,7 +22,10 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 CoreTools::ObjectLinkTesting::ObjectLinkTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      boolObject{ std::make_shared<BoolObject>(DisableNotThrow::Disable) },
+      enumObject{ std::make_shared<EnumObject>(DisableNotThrow::Disable) },
+      intObject{ std::make_shared<IntObject>(DisableNotThrow::Disable) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -48,17 +51,7 @@ void CoreTools::ObjectLinkTesting::MainTest()
 
 void CoreTools::ObjectLinkTesting::InsertObjectTest()
 {
-    const auto objectLink = ObjectLink::Create();
-
-    ASSERT_EQUAL(objectLink->GetOrderedSize(), 0);
-
-    const auto boolObject = std::make_shared<BoolObject>(DisableNotThrow::Disable);
-    const auto enumObject = std::make_shared<EnumObject>(DisableNotThrow::Disable);
-    const auto intObject = std::make_shared<IntObject>(DisableNotThrow::Disable);
-
-    objectLink->Insert(1, boolObject);
-    objectLink->Insert(3, intObject);
-    objectLink->Insert(2, enumObject);
+    const auto objectLink = CreateObjectLink();
 
     ASSERT_EQUAL(objectLink->GetOrderedSize(), 3);
 
@@ -67,33 +60,45 @@ void CoreTools::ObjectLinkTesting::InsertObjectTest()
     ASSERT_EQUAL(objectLink->GetObjectInterface(3), intObject);
 }
 
-void CoreTools::ObjectLinkTesting::SortTest()
+CoreTools::ObjectLinkTesting::ObjectLinkSharedPtr CoreTools::ObjectLinkTesting::CreateObjectLink()
 {
     const auto objectLink = ObjectLink::Create();
 
     ASSERT_EQUAL(objectLink->GetOrderedSize(), 0);
 
-    const auto boolObject = std::make_shared<BoolObject>(DisableNotThrow::Disable);
-    const auto enumObject = std::make_shared<EnumObject>(DisableNotThrow::Disable);
-    const auto intObject = std::make_shared<IntObject>(DisableNotThrow::Disable);
-
     objectLink->Insert(1, boolObject);
     objectLink->Insert(3, intObject);
     objectLink->Insert(2, enumObject);
 
+    return objectLink;
+}
+
+void CoreTools::ObjectLinkTesting::SortTest()
+{
+    const auto objectLink = CreateObjectLink();
+
+    ASSERT_NOT_THROW_EXCEPTION_1(BeforeSortTest, *objectLink);
+
+    objectLink->Sort();
+
+    ASSERT_NOT_THROW_EXCEPTION_1(SortResultTest, *objectLink);
+}
+
+void CoreTools::ObjectLinkTesting::BeforeSortTest(const ObjectLink& objectLink)
+{
     auto index = 0;
-    for (const auto& value : *objectLink)
+    for (const auto& element : objectLink)
     {
         switch (index)
         {
             case 0:
-                ASSERT_EQUAL(value->GetRttiType().GetName(), BoolObject::GetCurrentRttiType().GetName());
+                ASSERT_EQUAL(element->GetRttiType().GetName(), BoolObject::GetCurrentRttiType().GetName());
                 break;
             case 1:
-                ASSERT_EQUAL(value->GetRttiType().GetName(), IntObject::GetCurrentRttiType().GetName());
+                ASSERT_EQUAL(element->GetRttiType().GetName(), IntObject::GetCurrentRttiType().GetName());
                 break;
             case 2:
-                ASSERT_EQUAL(value->GetRttiType().GetName(), EnumObject::GetCurrentRttiType().GetName());
+                ASSERT_EQUAL(element->GetRttiType().GetName(), EnumObject::GetCurrentRttiType().GetName());
                 break;
             default:
                 break;
@@ -101,22 +106,23 @@ void CoreTools::ObjectLinkTesting::SortTest()
 
         ++index;
     }
+}
 
-    objectLink->Sort();
-
-    index = 0;
-    for (const auto& value : *objectLink)
+void CoreTools::ObjectLinkTesting::SortResultTest(const ObjectLink& objectLink)
+{
+    auto index = 0;
+    for (const auto& element : objectLink)
     {
         switch (index)
         {
             case 0:
-                ASSERT_EQUAL(value->GetRttiType().GetName(), BoolObject::GetCurrentRttiType().GetName());
+                ASSERT_EQUAL(element->GetRttiType().GetName(), BoolObject::GetCurrentRttiType().GetName());
                 break;
             case 1:
-                ASSERT_EQUAL(value->GetRttiType().GetName(), EnumObject::GetCurrentRttiType().GetName());
+                ASSERT_EQUAL(element->GetRttiType().GetName(), EnumObject::GetCurrentRttiType().GetName());
                 break;
             case 2:
-                ASSERT_EQUAL(value->GetRttiType().GetName(), IntObject::GetCurrentRttiType().GetName());
+                ASSERT_EQUAL(element->GetRttiType().GetName(), IntObject::GetCurrentRttiType().GetName());
                 break;
             default:
                 break;
@@ -128,55 +134,20 @@ void CoreTools::ObjectLinkTesting::SortTest()
 
 void CoreTools::ObjectLinkTesting::ResolveLinkTest()
 {
-    const auto objectLink = ObjectLink::Create();
+    const auto objectLink = CreateObjectLink();
 
-    ASSERT_EQUAL(objectLink->GetOrderedSize(), 0);
+    ObjectAssociated objectAssociated{ 2 };
 
-    const auto boolObject = std::make_shared<BoolObject>(DisableNotThrow::Disable);
-    const auto enumObject = std::make_shared<EnumObject>(DisableNotThrow::Disable);
-    const auto intObject = std::make_shared<IntObject>(DisableNotThrow::Disable);
+    objectLink->ResolveLink(objectAssociated);
 
-    objectLink->Insert(1, boolObject);
-    objectLink->Insert(3, intObject);
-    objectLink->Insert(2, enumObject);
-
-    ObjectAssociated<Object> objectAssociated0{};
-
-    objectAssociated0.associated = 2;
-
-    objectLink->ResolveLink(objectAssociated0);
-
-    ASSERT_EQUAL(objectAssociated0.object->GetRttiType().GetName(), EnumObject::GetCurrentRttiType().GetName());
+    ASSERT_EQUAL(objectAssociated.object->GetRttiType().GetName(), EnumObject::GetCurrentRttiType().GetName());
 }
 
 void CoreTools::ObjectLinkTesting::ResolveLinkContainerTest()
 {
-    const auto objectLink = ObjectLink::Create();
+    const auto objectLink = CreateObjectLink();
 
-    ASSERT_EQUAL(objectLink->GetOrderedSize(), 0);
-
-    const auto boolObject = std::make_shared<BoolObject>(DisableNotThrow::Disable);
-    const auto enumObject = std::make_shared<EnumObject>(DisableNotThrow::Disable);
-    const auto intObject = std::make_shared<IntObject>(DisableNotThrow::Disable);
-
-    objectLink->Insert(1, boolObject);
-    objectLink->Insert(3, intObject);
-    objectLink->Insert(2, enumObject);
-
-    std::vector<ObjectAssociated<Object>> object{};
-
-    ObjectAssociated<Object> objectAssociated0{};
-    objectAssociated0.associated = 2;
-
-    ObjectAssociated<Object> objectAssociated1{};
-    objectAssociated1.associated = 3;
-
-    ObjectAssociated<Object> objectAssociated2{};
-    objectAssociated2.associated = 1;
-
-    object.emplace_back(objectAssociated0);
-    object.emplace_back(objectAssociated1);
-    object.emplace_back(objectAssociated2);
+    ObjectAssociatedContainer object{ ObjectAssociated{ 2 }, ObjectAssociated{ 3 }, ObjectAssociated{ 1 } };
 
     objectLink->ResolveLinkContainer(object);
 

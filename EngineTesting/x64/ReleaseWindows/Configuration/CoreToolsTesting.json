@@ -383,7 +383,10 @@
     "DeltaTimeManagerTesting": 1,
     "MillisecondTimerTesting": 0,
     "SecondTimerTesting": 0,
-    "DateTesting": 1
+    "DateTesting": 1,
+    "YearTesting": 1,
+    "MonthTesting": 1,
+    "DayTesting": 1
   },
 
   "reportOutputSuite": {
@@ -424,7 +427,7 @@
   "commandSuite": {
     "CommandArgumentTesting": 1,
     "CommandLineInformationTesting": 1,
-    "CommandTesting": 1
+    "CommandHandleTesting": 1
   },
 
   "mainFunctionHelperSuite": {
@@ -465,9 +468,9 @@
     "IntelCheckSumTesting": 1,
     "SevenModElevenCheckSumTesting": 1,
     "SpecifyCheckSumTesting": 1,
-    "CyclicRedundancyCheckCCITTTesting": 1,
+    "CyclicRedundancyCheckCcittTesting": 1,
     "CyclicRedundancyCheckHandleTesting": 1,
-    "CyclicRedundancyCheckCCITTUsingTableTesting": 1,
+    "CyclicRedundancyCheckCcittUsingTableTesting": 1,
     "CyclicRedundancyCheck16Testing": 1,
     "CyclicRedundancyCheck32Testing": 1
   },

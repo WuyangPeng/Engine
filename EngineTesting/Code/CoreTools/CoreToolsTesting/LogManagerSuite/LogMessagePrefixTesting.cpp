@@ -9,7 +9,7 @@
 
 #include "LogMessagePrefixTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/LogManager/Flags/LogManagerFlags.h"
 #include "CoreTools/LogManager/LogFilterManager.h"
 #include "CoreTools/LogManager/LogLevelManager.h"
@@ -78,10 +78,8 @@ void CoreTools::LogMessagePrefixTesting::LogFilterTest()
 void CoreTools::LogMessagePrefixTesting::NoPrefixTest()
 {
     const LogMessagePrefix prefixNone{ AppenderPrint::None, LogLevel::Info, LogFilter::Network };
-
     ASSERT_EQUAL(0, prefixNone.GetPrefixSize());
 
     const LogMessagePrefix prefixDisabled{ AppenderPrint::PrefixLogFilterType, LogLevel::Disabled, LogFilter::Mathematics };
-
     ASSERT_EQUAL(0, prefixDisabled.GetPrefixSize());
 }

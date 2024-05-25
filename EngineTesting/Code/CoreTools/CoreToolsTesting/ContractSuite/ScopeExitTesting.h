@@ -33,6 +33,8 @@ namespace CoreTools
         void MainTest();
 
         void ScopeExitTest();
+        void DoScopeExitTest() noexcept;
+
         static void AddTestValue() noexcept;
 
     private:

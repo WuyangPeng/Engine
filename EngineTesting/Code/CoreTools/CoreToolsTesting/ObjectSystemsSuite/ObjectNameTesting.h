@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_SUITE_NAME_TESTING_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_SUITE_NAME_TESTING_H
 
+#include "CoreTools/ObjectSystems/ObjectName.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -30,6 +31,12 @@ namespace CoreTools
         void MainTest();
 
         void NameTest();
+        void SetNameTest(const ObjectName& objectName0, ObjectName& objectName1, const ObjectName& objectName2);
+        void IsExactlyTest(const ObjectName& objectName0, const ObjectName& objectName1, const ObjectName& objectName2);
+
+    private:
+        std::string string0;
+        std::string string1;
     };
 }
 

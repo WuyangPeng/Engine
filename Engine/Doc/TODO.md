@@ -4,9 +4,15 @@
 TODO
 ----------------------------
 System
-	 
-	1. £¨OpenGL£©Ê¹ÓÃglfwÀ´Ö§³ÖOpenGL¡¢OpenGL ESºÍVulkan¿çÆ½Ì¨API¡£
-	2. £¨Vulkan£©Íê³ÉVulkan¿â£ºVulkan¡£
-	3. £¨DirectX£©Íê³ÉDirectX¿â£ºD3D12¡£
+     
+    1. ï¼ˆOpenGLï¼‰ä½¿ç”¨glfwæ¥æ”¯æŒOpenGLã€OpenGL ESå’ŒVulkanè·¨å¹³å°APIã€‚
+    2. ï¼ˆVulkanï¼‰å®ŒæˆVulkanåº“ï¼šVulkanã€‚
+    3. ï¼ˆDirectXï¼‰å®ŒæˆDirectXåº“ï¼šD3D12ã€‚
+
+---------------------------- 
+CoreTools
+     
+    1. ï¼ˆBaseï¼‰ä¿®æ­£å•ä¾‹åœ¨é™æ€åº“å’ŒåŠ¨æ€åº“æ··ç”¨æ—¶äº§ç”Ÿçš„é—®é¢˜ã€‚
+    2. ï¼ˆTextParsingï¼‰jsonè§£æã€‚ 
 
 ---------------------------- 

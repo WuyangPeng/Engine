@@ -13,6 +13,7 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "TypeTraits.h"
+#include "System/Helper/PragmaWarning.h"
 
 #include <gsl/util>
 #include <array>

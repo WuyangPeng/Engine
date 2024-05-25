@@ -5,17 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/14 12:12)
+/// 版本：1.0.0.9 (2024/05/06 19:59)
 
 #include "HashCombineTesting.h"
-#include "Detail/TestHash.h"
-#include "Detail/TestHashKey.h"
+
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/UserMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-#include <unordered_map>
 
 CoreTools::HashCombineTesting::HashCombineTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -37,20 +34,30 @@ void CoreTools::HashCombineTesting::MainTest()
 
 void CoreTools::HashCombineTesting::HashCombineTest()
 {
-    std::unordered_map<TestHashKey, int, TestHash> container{};
+    UnorderedMap container{};
 
-    const TestHashKey testHashKey{ "TestHashKey1" };
+    const TestHashKey testHashKey{ "TestHashKey0" };
+
+    ASSERT_NOT_THROW_EXCEPTION_2(SizeTest, container, testHashKey);
+    ASSERT_NOT_THROW_EXCEPTION_2(FindTest, container, testHashKey);
+}
+
+void CoreTools::HashCombineTesting::SizeTest(UnorderedMap& container, const TestHashKey& testHashKey)
+{
     container.emplace(testHashKey, 1);
 
     ASSERT_EQUAL(container.size(), 1u);
 
-    container.emplace(TestHashKey{ "TestHashKey2" }, 2);
+    container.emplace(TestHashKey{ "TestHashKey1" }, 2);
 
     ASSERT_EQUAL(container.size(), 2u);
+}
 
+void CoreTools::HashCombineTesting::FindTest(UnorderedMap& container, const TestHashKey& testHashKey)
+{
     auto iter = container.find(testHashKey);
 
-    ASSERT_UNEQUAL_FAILURE_THROW(iter, container.cend(), "TestHashKey1值未找到。");
+    ASSERT_UNEQUAL_FAILURE_THROW(iter, container.cend(), "TestHashKey0值未找到。");
 
     ASSERT_EQUAL(iter->second, 1);
 

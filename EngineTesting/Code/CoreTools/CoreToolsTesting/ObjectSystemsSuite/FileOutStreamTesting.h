@@ -29,8 +29,9 @@ namespace CoreTools
         void DoRunUnitTest() override;
         void MainTest();
 
+        void SaveFileOutStream() const;
         void WriteNullObjectTest();
-        void DeleteFileTest();
+        void DeleteFileTest() const;
     };
 }
 

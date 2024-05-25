@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/15 10:21)
+/// 版本：1.0.0.9 (2024/04/26 12:47)
 
 #include "SharedImplTesting.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
@@ -36,61 +36,53 @@ void CoreTools::SharedImplTesting::MainTest()
 
 void CoreTools::SharedImplTesting::DefaultTest()
 {
-    constexpr auto count = 12;
     TestingType sharedImpl0{ count };
-
     ASSERT_EQUAL((*sharedImpl0).GetCount(), count);
 
     auto sharedImpl1 = sharedImpl0;
+    ASSERT_NOT_THROW_EXCEPTION_3(AddressEqualTest, sharedImpl0, sharedImpl1, count);
 
-    ASSERT_EQUAL(sharedImpl1->GetCount(), count);
-    ASSERT_EQUAL(sharedImpl0->GetAddress(), sharedImpl1->GetAddress());
-
-    sharedImpl0->SetCount(1);
-
-    ASSERT_EQUAL(sharedImpl0->GetCount(), 1);
-    ASSERT_EQUAL(sharedImpl1->GetCount(), 1);
-    ASSERT_EQUAL(sharedImpl0->GetAddress(), sharedImpl1->GetAddress());
+    sharedImpl0->SetCount(modify);
+    ASSERT_NOT_THROW_EXCEPTION_3(AddressEqualTest, sharedImpl0, sharedImpl1, modify);
 
     const auto sharedImpl2 = sharedImpl1;
+    ASSERT_NOT_THROW_EXCEPTION_3(AddressEqualTest, sharedImpl1, sharedImpl2, modify);
+}
 
-    ASSERT_EQUAL((*sharedImpl2).GetCount(), 1);
-    ASSERT_EQUAL(sharedImpl2->GetAddress(), sharedImpl1->GetAddress());
+void CoreTools::SharedImplTesting::AddressEqualTest(const TestingType& lhs, const TestingType& rhs, int aCount)
+{
+    ASSERT_EQUAL((*lhs).GetCount(), aCount);
+    ASSERT_EQUAL(lhs->GetCount(), aCount);
+    ASSERT_EQUAL(rhs->GetCount(), aCount);
+    ASSERT_EQUAL(lhs->GetAddress(), rhs->GetAddress());
 }
 
 void CoreTools::SharedImplTesting::UseFactoryTest()
 {
-    constexpr auto count = 12;
-    TestingType sharedImpl0{ ImplCreateUseFactory::Default, count };
+    TestingType sharedImpl{ ImplCreateUseFactory::Default, count };
 
-    ASSERT_EQUAL(sharedImpl0->GetCount(), count);
-
-    auto sharedImpl1 = sharedImpl0;
-
-    ASSERT_EQUAL(sharedImpl1->GetCount(), count);
-    ASSERT_EQUAL(sharedImpl0->GetAddress(), sharedImpl1->GetAddress());
-
-    sharedImpl0->SetCount(1);
-
-    ASSERT_EQUAL(sharedImpl0->GetCount(), 1);
-    ASSERT_EQUAL(sharedImpl1->GetCount(), 1);
-    ASSERT_EQUAL(sharedImpl0->GetAddress(), sharedImpl1->GetAddress());
+    ASSERT_NOT_THROW_EXCEPTION_2(CountTest, sharedImpl, count);
 }
 
 void CoreTools::SharedImplTesting::UseUseDefaultConstructionTest()
 {
-    TestingType sharedImpl0{ ImplCreateUseDefaultConstruction::Default };
+    TestingType sharedImpl{ ImplCreateUseDefaultConstruction::Default };
 
-    ASSERT_EQUAL(sharedImpl0->GetCount(), 0);
+    ASSERT_NOT_THROW_EXCEPTION_2(CountTest, sharedImpl, 0);
+}
 
-    auto sharedImpl1 = sharedImpl0;
+void CoreTools::SharedImplTesting::CountTest(TestingType& sharedImpl, int aCount)
+{
+    ASSERT_EQUAL(sharedImpl->GetCount(), aCount);
 
-    ASSERT_EQUAL(sharedImpl1->GetCount(), 0);
-    ASSERT_EQUAL(sharedImpl0->GetAddress(), sharedImpl1->GetAddress());
+    auto copy = sharedImpl;
 
-    sharedImpl0->SetCount(1);
+    ASSERT_EQUAL(copy->GetCount(), aCount);
+    ASSERT_EQUAL(sharedImpl->GetAddress(), copy->GetAddress());
 
-    ASSERT_EQUAL(sharedImpl0->GetCount(), 1);
-    ASSERT_EQUAL(sharedImpl1->GetCount(), 1);
-    ASSERT_EQUAL(sharedImpl0->GetAddress(), sharedImpl1->GetAddress());
+    sharedImpl->SetCount(modify);
+
+    ASSERT_EQUAL(sharedImpl->GetCount(), modify);
+    ASSERT_EQUAL(copy->GetCount(), modify);
+    ASSERT_EQUAL(sharedImpl->GetAddress(), copy->GetAddress());
 }

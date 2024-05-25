@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 16:12)
+/// 版本：1.0.0.9 (2024/04/28 21:52)
 
 #include "WriteBufferIOTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -16,11 +16,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 #include <string>
-
-std::string CoreTools::WriteBufferIOTesting::GetBufferIOContent()
-{
-    return "BufferIO Testing Text";
-}
 
 CoreTools::WriteBufferIOTesting::WriteBufferIOTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -44,46 +39,68 @@ void CoreTools::WriteBufferIOTesting::MainTest()
 void CoreTools::WriteBufferIOTesting::WriteBufferIOBasisTest()
 {
     const auto content = GetBufferIOContent();
+    const auto bufferSize = GetBufferSize();
 
-    const auto size = boost::numeric_cast<int>(content.size());
-    WriteBufferIO writeBuffer{ size };
+    WriteBufferIO writeBuffer{ bufferSize };
 
-    ASSERT_EQUAL(writeBuffer.GetBytesTotal(), size);
-    ASSERT_EQUAL(writeBuffer.GetBytesProcessed(), 0);
+    ASSERT_NOT_THROW_EXCEPTION_3(BytesTest, bufferSize, 0, writeBuffer);
 
-    writeBuffer.IncrementBytesProcessed(size / 2);
+    const auto halfSize = boost::numeric_cast<int>(bufferSize / 2);
 
-    ASSERT_EQUAL(writeBuffer.GetBytesTotal(), size);
-    ASSERT_EQUAL(writeBuffer.GetBytesProcessed(), size / 2);
+    writeBuffer.IncrementBytesProcessed(halfSize);
+
+    ASSERT_NOT_THROW_EXCEPTION_3(BytesTest, bufferSize, halfSize, writeBuffer);
+}
+
+void CoreTools::WriteBufferIOTesting::BytesTest(int bytesTotal, int bytesProcessed, const WriteBufferIO& writeBuffer)
+{
+    ASSERT_EQUAL(writeBuffer.GetBytesTotal(), bytesTotal);
+    ASSERT_EQUAL(writeBuffer.GetBytesProcessed(), bytesProcessed);
 }
 
 void CoreTools::WriteBufferIOTesting::WriteBufferIOWriteTest()
 {
     const auto content = GetBufferIOContent();
-    const auto size = content.size();
-    const auto bufferSize = size + sizeof(decltype(size));
+    const auto size = GetBufferIOContentSize();
+    const auto bufferSize = GetBufferSize();
 
-    WriteBufferIO writeBuffer{ boost::numeric_cast<int>(bufferSize) };
-
-    writeBuffer.Write(sizeof(decltype(size)), &size);
-
-    ASSERT_EQUAL(writeBuffer.GetBytesProcessed(), boost::numeric_cast<int>(sizeof(decltype(size))));
-
-    writeBuffer.Write(sizeof(char), size, content.c_str());
-
-    ASSERT_EQUAL(writeBuffer.GetBytesProcessed(), writeBuffer.GetBytesTotal());
-    ASSERT_EQUAL(writeBuffer.GetBytesProcessed(), boost::numeric_cast<int>(bufferSize));
+    WriteBufferIO writeBuffer{ bufferSize };
+    WriteTest(content, size, bufferSize, writeBuffer);
 
     const auto fileBuffer = writeBuffer.GetFileBuffer();
 
     ReadBufferIO readBuffer{ fileBuffer };
+    ASSERT_NOT_THROW_EXCEPTION_3(ReadBufferTest, content, size, readBuffer);
+}
 
-    size_t resultSize{};
-    readBuffer.Read(sizeof(decltype(size)), &resultSize);
-    ASSERT_EQUAL(size, resultSize);
+void CoreTools::WriteBufferIOTesting::WriteTest(const std::string& content, size_t size, int bufferSize, WriteBufferIO& writeBuffer)
+{
+    writeBuffer.Write(sizeof(decltype(size)), &size);
+    ASSERT_EQUAL(writeBuffer.GetBytesProcessed(), boost::numeric_cast<int>(sizeof(decltype(size))));
 
-    BufferType result(resultSize);
-    readBuffer.Read(sizeof(char), resultSize, result.data());
-    const std::string testResult{ result.begin(), result.end() };
-    ASSERT_EQUAL(testResult, content);
+    writeBuffer.Write(sizeof(char), size, content.c_str());
+    ASSERT_NOT_THROW_EXCEPTION_3(BytesTest, bufferSize, writeBuffer.GetBytesTotal(), writeBuffer);
+    ASSERT_NOT_THROW_EXCEPTION_3(BytesTest, bufferSize, bufferSize, writeBuffer);
+}
+
+void CoreTools::WriteBufferIOTesting::ReadBufferTest(const std::string& content, size_t size, ReadBufferIO& readBuffer)
+{
+    ASSERT_NOT_THROW_EXCEPTION_2(SizeTest, size, readBuffer);
+
+    ASSERT_NOT_THROW_EXCEPTION_3(DoReadBufferTest, content, size, readBuffer);
+}
+
+void CoreTools::WriteBufferIOTesting::SizeTest(size_t size, ReadBufferIO& readBuffer)
+{
+    size_t result{};
+    readBuffer.Read(sizeof(decltype(size)), &result);
+    ASSERT_EQUAL(size, result);
+}
+
+void CoreTools::WriteBufferIOTesting::DoReadBufferTest(const std::string& content, size_t size, CoreTools::ReadBufferIO& readBuffer)
+{
+    BufferType buffer(size);
+    readBuffer.Read(sizeof(char), size, buffer.data());
+    const std::string result{ buffer.begin(), buffer.end() };
+    ASSERT_EQUAL(result, content);
 }

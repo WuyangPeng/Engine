@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:22)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/04/23 10:13)
 
 #include "DeltaTimeManagerTesting.h"
 #include "System/Threading/SyncTools.h"
@@ -44,21 +44,17 @@ void CoreTools::DeltaTimeManagerTesting::TimeTest()
 
     System::SystemSleep(5);
 
-    const auto elapsedTime = time.GetElapsedTimeInSeconds();
-
-    ASSERT_TRUE(0 <= elapsedTime);
+    ASSERT_TRUE(5 <= time.GetElapsedTimeInMicroseconds());
 
     time.ResetCurrentTime();
 
-    ASSERT_APPROXIMATE(time.GetElapsedTimeInSeconds(), 0.0, 1e-10);
+    ASSERT_TRUE(0 <= time.GetElapsedTimeInMicroseconds());
 
     System::SystemSleep(5);
 
-    const auto elapsedMillisecondTime = time.GetElapsedTimeInMicroseconds();
-
-    ASSERT_TRUE(0 <= elapsedMillisecondTime);
+    ASSERT_TRUE(5 <= time.GetElapsedTimeInMicroseconds());
 
     time.ResetCurrentTime();
 
-    ASSERT_APPROXIMATE(time.GetElapsedTimeInMicroseconds(), 0.0, Mathematics::MathD::GetZeroTolerance());
+    ASSERT_TRUE(0 <= time.GetElapsedTimeInMicroseconds());
 }

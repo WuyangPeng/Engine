@@ -32,6 +32,13 @@ namespace CoreTools
         void ByteSwap2Test();
         void ByteSwap4Test();
         void ByteSwap8Test();
+
+        void DoByteSwap2Test();
+        void ByteSwap2Original();
+        void DoByteSwap4Test();
+        void ByteSwap4Original();
+        void DoByteSwap8Test();
+        void ByteSwap8Original();
     };
 }
 

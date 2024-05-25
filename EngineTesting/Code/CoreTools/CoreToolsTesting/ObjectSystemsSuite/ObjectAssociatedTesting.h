@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_DATA_TYPES_SUITE_OBJECT_ASSOCIATED_TESTING_H
 #define CORE_TOOLS_DATA_TYPES_SUITE_OBJECT_ASSOCIATED_TESTING_H
 
+#include "Detail/BoolObject.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,10 +27,22 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using ObjectAssociated = ObjectAssociated<Object>;
+
+        static constexpr auto associated = 9;
+        static constexpr auto uniqueId = 5;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void ObjectAssociatedTest();
+
+        void ObjectAssociated0Test();
+        void ObjectAssociated1Test(const BoolObjectSharedPtr& boolObject);
+        void ObjectAssociated2Test(const BoolObjectSharedPtr& boolObject, const ObjectAssociated& objectAssociated);
+        void ObjectAssociated3Test(const ObjectAssociated& objectAssociated);
+        void ObjectAssociated4Test();
     };
 }
 

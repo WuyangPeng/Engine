@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 16:04)
+/// 版本：1.0.0.9 (2024/05/03 23:29)
 
 #include "DeleteFileToolsTesting.h"
 #include "CoreTools/FileManager/CWriteFileManager.h"
@@ -38,9 +38,12 @@ void CoreTools::DeleteFileToolsTesting::DeleteFileSucceedTest()
 {
     const auto deleteFileName = SYSTEM_TEXT("Resource/DeleteTestingText.txt"s);
 
-    {
-        CWriteFileManager manager{ deleteFileName };
-    }
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateFileTest, deleteFileName);
 
     DeleteFileTools deleteFileTools{ deleteFileName };
+}
+
+void CoreTools::DeleteFileToolsTesting::CreateFileTest(const String& fileName)
+{
+    CWriteFileManager manager{ fileName };
 }

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 15:46)
+/// 版本：1.0.0.9 (2024/05/18 20:24)
 
 #ifndef CORE_TOOLS_DATA_TYPES_SUITE_SHARED_PTR_COMPARE_TESTING_H
 #define CORE_TOOLS_DATA_TYPES_SUITE_SHARED_PTR_COMPARE_TESTING_H
@@ -26,10 +26,20 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using SharedPtr = std::shared_ptr<int>;
+
+    private:
         void MainTest();
         void DoRunUnitTest() override;
 
         void SharedPtrCompareTest();
+
+        void SharedPtrEqualTest(const SharedPtr& lhsSharedPtr, const SharedPtr& rhsSharedPtr);
+        void SharedPtrUnequalTest(const SharedPtr& lhsSharedPtr, const SharedPtr& rhsSharedPtr);
+        void SharedPtrLessTest(const SharedPtr& lhsSharedPtr, const SharedPtr& rhsSharedPtr);
+        void SharedPtrLessEqualTest(const SharedPtr& lhsSharedPtr, const SharedPtr& rhsSharedPtr);
+        void SharedPtrGreaterTest(const SharedPtr& lhsSharedPtr, const SharedPtr& rhsSharedPtr);
+        void SharedPtrGreaterEqualTest(const SharedPtr& lhsSharedPtr, const SharedPtr& rhsSharedPtr);
     };
 }
 

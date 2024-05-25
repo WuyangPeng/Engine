@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 15:03)
+/// 版本：1.0.0.9 (2024/04/28 21:42)
 
 #include "GameErrorTesting.h"
 #include "Detail/GameErrorType.h"
@@ -16,6 +16,8 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 using namespace std::literals;
+
+const System::String CoreTools::GameErrorTesting::message = SYSTEM_TEXT("message"s);
 
 CoreTools::GameErrorTesting::GameErrorTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -40,28 +42,23 @@ void CoreTools::GameErrorTesting::LastErrorTest()
 {
     const LastError lastError{};
     const auto functionDescribed = CORE_TOOLS_FUNCTION_DESCRIBED;
-    const auto message = SYSTEM_TEXT("message"s);
     constexpr auto gameErrorType = GameErrorType::Error;
     const GameError gameError{ functionDescribed, lastError, gameErrorType, message };
 
-    ASSERT_EQUAL(functionDescribed.GetCurrentFunction(), gameError.GetCurrentFunction());
-    ASSERT_EQUAL(functionDescribed.GetFileName(), gameError.GetFileName());
-    ASSERT_EQUAL(functionDescribed.GetLine(), gameError.GetLine());
-
-    ASSERT_EQUAL(functionDescribed, gameError.GetFunctionDescribed());
-
-    ASSERT_EQUAL(gameErrorType, gameError.GetErrorCode());
-
-    ASSERT_UNEQUAL(gameError.GetError().find(message), System::String::npos);
+    ASSERT_NOT_THROW_EXCEPTION_3(ErrorTest, functionDescribed, gameErrorType, gameError);
 }
 
 void CoreTools::GameErrorTesting::ComErrorTest()
 {
     const auto functionDescribed = CORE_TOOLS_FUNCTION_DESCRIBED;
-    const auto message = SYSTEM_TEXT("message"s);
     constexpr auto gameErrorType = GameErrorType::Error;
     const GameError gameError{ functionDescribed, System::WindowError::EUnexpected, gameErrorType, message };
 
+    ASSERT_NOT_THROW_EXCEPTION_3(ErrorTest, functionDescribed, gameErrorType, gameError);
+}
+
+void CoreTools::GameErrorTesting::ErrorTest(const FunctionDescribed& functionDescribed, GameErrorType gameErrorType, const GameError& gameError)
+{
     ASSERT_EQUAL(functionDescribed.GetCurrentFunction(), gameError.GetCurrentFunction());
     ASSERT_EQUAL(functionDescribed.GetFileName(), gameError.GetFileName());
     ASSERT_EQUAL(functionDescribed.GetLine(), gameError.GetLine());

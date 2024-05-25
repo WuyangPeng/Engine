@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 16:37)
+/// 版本：1.0.0.9 (2024/04/30 20:25)
 
 #include "CReadFileManagerTesting.h"
 #include "System/FileManager/Flags/CFileFlags.h"
@@ -20,7 +20,8 @@
 #include <vector>
 
 CoreTools::CReadFileManagerTesting::CReadFileManagerTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      fileManagerContent{ "CFileManager Testing Text" }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -41,79 +42,91 @@ void CoreTools::CReadFileManagerTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(PositionTest);
 }
 
-void CoreTools::CReadFileManagerTesting::WriteFileTest()
-{
-    const auto cFileManagerContent = GetFileManagerContent();
-    CWriteFileManager manager{ GetFileName() };
-
-    const auto size = cFileManagerContent.size();
-    manager.Write(sizeof(decltype(size)), &size);
-
-    manager.Write(sizeof(char), size, cFileManagerContent.c_str());
-}
-
-void CoreTools::CReadFileManagerTesting::CReadFileManagerTest()
-{
-    const auto cFileManagerContent = GetFileManagerContent();
-    CReadFileManager manager{ GetFileName() };
-
-    size_t size{ 0u };
-    manager.Read(sizeof(decltype(size)), &size);
-
-    ASSERT_EQUAL(size, cFileManagerContent.size());
-
-    std::vector<char> buffer(size);
-    manager.Read(sizeof(char), size, buffer.data());
-
-    const std::string bufferContent{ buffer.begin(), buffer.end() };
-
-    ASSERT_EQUAL(bufferContent, cFileManagerContent);
-}
-
 System::String CoreTools::CReadFileManagerTesting::GetFileName()
 {
     return SYSTEM_TEXT("Resource/CFileManagerTesting/CReadFileManagerTestingText.txt");
 }
 
-std::string CoreTools::CReadFileManagerTesting::GetFileManagerContent()
+void CoreTools::CReadFileManagerTesting::WriteFileTest()
 {
-    return "CFileManager Testing Text";
+    CWriteFileManager manager{ GetFileName() };
+
+    const auto size = fileManagerContent.size();
+
+    manager.Write(sizeof(decltype(size)), &size);
+    manager.Write(sizeof(char), size, fileManagerContent.c_str());
+}
+
+void CoreTools::CReadFileManagerTesting::CReadFileManagerTest()
+{
+    CReadFileManager manager{ GetFileName() };
+
+    const auto size = ReadSizeTest(manager);
+
+    ASSERT_NOT_THROW_EXCEPTION_2(ReadBufferTest, manager, size);
+}
+
+size_t CoreTools::CReadFileManagerTesting::ReadSizeTest(CReadFileManager& manager)
+{
+    size_t size{ 0u };
+    manager.Read(sizeof(decltype(size)), &size);
+
+    ASSERT_EQUAL(size, fileManagerContent.size());
+
+    return size;
+}
+
+void CoreTools::CReadFileManagerTesting::ReadBufferTest(CReadFileManager& manager, size_t size)
+{
+    std::vector<char> buffer(size);
+    manager.Read(sizeof(char), size, buffer.data());
+
+    const std::string result{ buffer.begin(), buffer.end() };
+    ASSERT_EQUAL(result, fileManagerContent);
 }
 
 void CoreTools::CReadFileManagerTesting::GetFileByteSizeTest()
 {
-    const auto cFileManagerContent = GetFileManagerContent();
     const CReadFileManager manager{ GetFileName() };
 
-    const auto size = cFileManagerContent.size();
+    const auto size = fileManagerContent.size();
 
     ASSERT_EQUAL(manager.GetFileByteSize(), boost::numeric_cast<int>(size + sizeof(decltype(size))));
 }
 
 void CoreTools::CReadFileManagerTesting::GetCharacterTest()
 {
-    const auto cFileManagerContent = GetFileManagerContent();
     CReadFileManager manager{ GetFileName() };
 
-    size_t size{ 0u };
-    manager.Read(sizeof(decltype(size)), &size);
+    const auto size = ReadSizeTest(manager);
 
-    const auto character = manager.GetCharacter();
-    ASSERT_EQUAL(character, cFileManagerContent.at(0));
-
-    ASSERT_TRUE(manager.UnGetCharacter(cFileManagerContent.at(0)));
-
-    const auto content = manager.GetString(boost::numeric_cast<int>(size + 1));
-    ASSERT_EQUAL(content, cFileManagerContent);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoGetCharacterTest, manager, size);
 
     ASSERT_FALSE(manager.IsEof());
     ASSERT_TRUE(manager.Flush());
 }
 
+void CoreTools::CReadFileManagerTesting::DoGetCharacterTest(CReadFileManager& manager, size_t size)
+{
+    const auto character = manager.GetCharacter();
+    ASSERT_EQUAL(character, fileManagerContent.at(0));
+
+    ASSERT_TRUE(manager.UnGetCharacter(fileManagerContent.at(0)));
+
+    const auto content = manager.GetString(boost::numeric_cast<int>(size + 1));
+    ASSERT_EQUAL(content, fileManagerContent);
+}
+
 void CoreTools::CReadFileManagerTesting::PositionTest()
 {
-    const auto cFileManagerContent = GetFileManagerContent();
     CReadFileManager manager{ GetFileName() };
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DoPositionTest, manager);
+    ASSERT_NOT_THROW_EXCEPTION_1(MiscellaneousTest, manager);
+}
+
+void CoreTools::CReadFileManagerTesting::DoPositionTest(CReadFileManager& manager)
+{
     ASSERT_EQUAL(0, manager.GetPosition());
 
     ASSERT_TRUE(manager.Seek(1, System::FileSeek::Cur));
@@ -121,12 +134,14 @@ void CoreTools::CReadFileManagerTesting::PositionTest()
 
     ASSERT_TRUE(manager.SetPosition(8));
     ASSERT_EQUAL(8, manager.GetPosition());
+}
 
+void CoreTools::CReadFileManagerTesting::MiscellaneousTest(CReadFileManager& manager)
+{
     ASSERT_TRUE(manager.Seek(0, System::FileSeek::End));
 
     const auto length = manager.Tell();
-
-    ASSERT_EQUAL(length, boost::numeric_cast<decltype(length)>(cFileManagerContent.size() + sizeof(size_t)));
+    ASSERT_EQUAL(length, boost::numeric_cast<decltype(length)>(fileManagerContent.size() + sizeof(size_t)));
 
     ASSERT_TRUE(manager.SetVBuffer(System::FileSetVBuffer::IoFullyBuffered, 256));
 }

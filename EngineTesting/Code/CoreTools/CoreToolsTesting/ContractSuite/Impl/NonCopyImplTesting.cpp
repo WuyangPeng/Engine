@@ -36,39 +36,30 @@ void CoreTools::NonCopyImplTesting::MainTest()
 
 void CoreTools::NonCopyImplTesting::DefaultTest()
 {
-    constexpr auto count = 10;
     TestingType nonCopyImpl{ count };
-
     ASSERT_EQUAL((*nonCopyImpl).GetCount(), count);
 
-    nonCopyImpl->SetCount(1);
-
-    ASSERT_EQUAL(nonCopyImpl->GetCount(), 1);
+    nonCopyImpl->SetCount(modify);
+    ASSERT_EQUAL(nonCopyImpl->GetCount(), modify);
 }
 
 void CoreTools::NonCopyImplTesting::UseFactoryTest()
 {
-    constexpr auto count = 10;
     TestingType nonCopyImpl{ ImplCreateUseFactory::Default, count };
-
     ASSERT_EQUAL(nonCopyImpl->GetCount(), count);
 
-    nonCopyImpl->SetCount(1);
-
-    ASSERT_EQUAL(nonCopyImpl->GetCount(), 1);
+    nonCopyImpl->SetCount(modify);
+    ASSERT_EQUAL(nonCopyImpl->GetCount(), modify);
 }
 
 void CoreTools::NonCopyImplTesting::UseUseDefaultConstructionTest()
 {
     const TestingType nonCopyImpl0{ ImplCreateUseDefaultConstruction::Default };
-
     ASSERT_EQUAL((*nonCopyImpl0).GetCount(), 0);
 
     TestingType nonCopyImpl1{ ImplCreateUseDefaultConstruction::Default };
-
     ASSERT_EQUAL((*nonCopyImpl1).GetCount(), 0);
 
-    nonCopyImpl1->SetCount(1);
-
-    ASSERT_EQUAL(nonCopyImpl1->GetCount(), 1);
+    nonCopyImpl1->SetCount(modify);
+    ASSERT_EQUAL(nonCopyImpl1->GetCount(), modify);
 }

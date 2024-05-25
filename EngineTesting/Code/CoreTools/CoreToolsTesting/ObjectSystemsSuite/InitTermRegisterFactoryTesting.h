@@ -32,6 +32,9 @@ namespace CoreTools
         static void Initializer() noexcept;
         static void Terminator() noexcept;
 
+        void ExecuteInitializerTest();
+        void ExecuteTerminatorTest();
+
     private:
         static bool initializeCall;
         static bool terminateCall;

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 16:05)
+/// 版本：1.0.0.9 (2024/05/04 22:40)
 
 #include "DirectoryTesting.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
@@ -38,31 +38,32 @@ void CoreTools::DirectoryTesting::MainTest()
 
 void CoreTools::DirectoryTesting::DirectoryTest()
 {
-    System::TCharContainer systemCurrentDirectory{};
-    auto result = System::GetSystemCurrentDirectory(System::gMaxPath, systemCurrentDirectory.data());
-    ASSERT_LESS(0u, result);
+    const auto oldDirectoryName = GetDirectory();
 
-    System::String oldDirectoryName{ systemCurrentDirectory.data() };
-    boost::algorithm::replace_all(oldDirectoryName, SYSTEM_TEXT("\\"), SYSTEM_TEXT("/"));
+    ASSERT_NOT_THROW_EXCEPTION_1(DoDirectoryTest, oldDirectoryName);
 
-    {
-        const auto directoryName = oldDirectoryName + SYSTEM_TEXT("/Resource");
-        Directory directory{ directoryName };
+    const auto resultDirectoryName = GetDirectory();
 
-        systemCurrentDirectory.fill(0);
-        result = System::GetSystemCurrentDirectory(System::gMaxPath, systemCurrentDirectory.data());
-        ASSERT_LESS(0u, result);
-
-        System::String resultDirectoryName{ systemCurrentDirectory.data() };
-        boost::algorithm::replace_all(resultDirectoryName, SYSTEM_TEXT("\\"), SYSTEM_TEXT("/"));
-        ASSERT_EQUAL(directoryName, resultDirectoryName);
-    }
-
-    systemCurrentDirectory.fill(0);
-    result = System::GetSystemCurrentDirectory(System::gMaxPath, systemCurrentDirectory.data());
-    ASSERT_LESS(0u, result);
-
-    System::String resultDirectoryName{ systemCurrentDirectory.data() };
-    boost::algorithm::replace_all(resultDirectoryName, SYSTEM_TEXT("\\"), SYSTEM_TEXT("/"));
     ASSERT_EQUAL(oldDirectoryName, resultDirectoryName);
+}
+
+void CoreTools::DirectoryTesting::DoDirectoryTest(const String& oldDirectoryName)
+{
+    const auto directoryName = oldDirectoryName + SYSTEM_TEXT("/Resource");
+    Directory directory{ directoryName };
+
+    const auto newDirectoryName = GetDirectory();
+    ASSERT_EQUAL(directoryName, newDirectoryName);
+}
+
+System::String CoreTools::DirectoryTesting::GetDirectory()
+{
+    System::TCharContainer systemCurrentDirectory{};
+    const auto result = System::GetSystemCurrentDirectory(System::gMaxPath, systemCurrentDirectory.data());
+    ASSERT_LESS(0u, result);
+
+    System::String directoryName{ systemCurrentDirectory.data() };
+    boost::algorithm::replace_all(directoryName, SYSTEM_TEXT("\\"), SYSTEM_TEXT("/"));
+
+    return directoryName;
 }

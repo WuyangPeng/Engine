@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 15:32)
+/// 版本：1.0.0.9 (2024/05/18 20:15)
 
 #include "RawIteratorsTesting.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -37,67 +37,102 @@ void CoreTools::RawIteratorsTesting::MainTest()
 
 void CoreTools::RawIteratorsTesting::RawConstIteratorTest()
 {
-    std::vector<int> container(20);
+    ContainerType container(size);
     std::iota(container.begin(), container.end(), 0);
 
     RawConstIterator rawConstIterator{ container.data() };
 
     ASSERT_EQUAL(*rawConstIterator, 0);
 
-    auto result = ++rawConstIterator;
+    ASSERT_NOT_THROW_EXCEPTION_1(ConstPrefixAdditionOperatorTest, rawConstIterator);
+    ASSERT_NOT_THROW_EXCEPTION_1(ConstSuffixAdditionOperatorTest, rawConstIterator);
+    ASSERT_NOT_THROW_EXCEPTION_1(ConstPrefixSubtractionOperatorTest, rawConstIterator);
+    ASSERT_NOT_THROW_EXCEPTION_1(ConstSuffixSubtractionOperatorTest, rawConstIterator);
+    ASSERT_NOT_THROW_EXCEPTION_1(ConstAdditionOperatorTest, rawConstIterator);
+    ASSERT_NOT_THROW_EXCEPTION_1(ConstSubtractionOperatorTest, rawConstIterator);
+}
+
+void CoreTools::RawIteratorsTesting::ConstPrefixAdditionOperatorTest(RawConstIteratorType& rawConstIterator)
+{
+    const auto result = ++rawConstIterator;
 
     ASSERT_EQUAL(*result, 1);
     ASSERT_EQUAL(*rawConstIterator, 1);
     ASSERT_EQUAL(rawConstIterator, result);
     ASSERT_EQUAL(rawConstIterator - result, 0);
     ASSERT_LESS_EQUAL(result, rawConstIterator);
+}
 
-    result = rawConstIterator++;
+void CoreTools::RawIteratorsTesting::ConstSuffixAdditionOperatorTest(RawConstIteratorType& rawConstIterator)
+{
+    const auto result = rawConstIterator++;
 
     ASSERT_EQUAL(*result, 1);
     ASSERT_EQUAL(*rawConstIterator, 2);
     ASSERT_UNEQUAL(rawConstIterator, result);
     ASSERT_EQUAL(rawConstIterator - result, 1);
     ASSERT_LESS(result, rawConstIterator);
+}
 
-    result = --rawConstIterator;
+void CoreTools::RawIteratorsTesting::ConstPrefixSubtractionOperatorTest(RawConstIteratorType& rawConstIterator)
+{
+    const auto result = --rawConstIterator;
 
     ASSERT_EQUAL(*result, 1);
     ASSERT_EQUAL(*rawConstIterator, 1);
     ASSERT_EQUAL(rawConstIterator, result);
     ASSERT_EQUAL(rawConstIterator - result, 0);
     ASSERT_LESS_EQUAL(result, rawConstIterator);
+}
 
-    result = rawConstIterator--;
+void CoreTools::RawIteratorsTesting::ConstSuffixSubtractionOperatorTest(RawConstIteratorType& rawConstIterator)
+{
+    const auto result = rawConstIterator--;
 
     ASSERT_EQUAL(*result, 1);
     ASSERT_EQUAL(*rawConstIterator, 0);
     ASSERT_UNEQUAL(rawConstIterator, result);
     ASSERT_EQUAL(rawConstIterator - result, -1);
     ASSERT_GREATER(result, rawConstIterator);
+}
 
+void CoreTools::RawIteratorsTesting::ConstAdditionOperatorTest(RawConstIteratorType& rawConstIterator)
+{
     rawConstIterator += 5;
     ASSERT_EQUAL(*rawConstIterator, 5);
 
-    result = rawConstIterator + 5;
+    const auto result = rawConstIterator + 5;
     ASSERT_EQUAL(*result, 10);
+}
 
+void CoreTools::RawIteratorsTesting::ConstSubtractionOperatorTest(RawConstIteratorType& rawConstIterator)
+{
     rawConstIterator -= 2;
     ASSERT_EQUAL(*rawConstIterator, 3);
 
-    result = rawConstIterator - 1;
+    const auto result = rawConstIterator - 1;
     ASSERT_EQUAL(*result, 2);
 }
 
 void CoreTools::RawIteratorsTesting::RawIteratorTest()
 {
-    std::vector<int> container(20);
+    ContainerType container(size);
     std::iota(container.begin(), container.end(), 0);
 
     RawIterator rawIterator{ container.data() };
 
     ASSERT_EQUAL(*rawIterator, 0);
 
+    ASSERT_NOT_THROW_EXCEPTION_1(PrefixAdditionOperatorTest, rawIterator);
+    ASSERT_NOT_THROW_EXCEPTION_1(SuffixAdditionOperatorTest, rawIterator);
+    ASSERT_NOT_THROW_EXCEPTION_1(PrefixSubtractionOperatorTest, rawIterator);
+    ASSERT_NOT_THROW_EXCEPTION_1(SuffixSubtractionOperatorTest, rawIterator);
+    ASSERT_NOT_THROW_EXCEPTION_1(AdditionOperatorTest, rawIterator);
+    ASSERT_NOT_THROW_EXCEPTION_1(SubtractionOperatorTest, rawIterator);
+}
+
+void CoreTools::RawIteratorsTesting::PrefixAdditionOperatorTest(RawIteratorType& rawIterator)
+{
     auto result = ++rawIterator;
 
     ASSERT_EQUAL(*result, 1);
@@ -105,40 +140,55 @@ void CoreTools::RawIteratorsTesting::RawIteratorTest()
     ASSERT_EQUAL(rawIterator, result);
     ASSERT_LESS_EQUAL(result, rawIterator);
     ASSERT_EQUAL(rawIterator - result, 0);
+}
 
-    result = rawIterator++;
+void CoreTools::RawIteratorsTesting::SuffixAdditionOperatorTest(RawIteratorType& rawIterator)
+{
+    auto result = rawIterator++;
 
     ASSERT_EQUAL(*result, 1);
     ASSERT_EQUAL(*rawIterator, 2);
     ASSERT_UNEQUAL(rawIterator, result);
     ASSERT_LESS(result, rawIterator);
     ASSERT_EQUAL(rawIterator - result, 1);
+}
 
-    result = --rawIterator;
+void CoreTools::RawIteratorsTesting::PrefixSubtractionOperatorTest(RawIteratorType& rawIterator)
+{
+    auto result = --rawIterator;
 
     ASSERT_EQUAL(*result, 1);
     ASSERT_EQUAL(*rawIterator, 1);
     ASSERT_EQUAL(rawIterator, result);
     ASSERT_LESS_EQUAL(result, rawIterator);
     ASSERT_EQUAL(rawIterator - result, 0);
+}
 
-    result = rawIterator--;
+void CoreTools::RawIteratorsTesting::SuffixSubtractionOperatorTest(RawIteratorType& rawIterator)
+{
+    auto result = rawIterator--;
 
     ASSERT_EQUAL(*result, 1);
     ASSERT_EQUAL(*rawIterator, 0);
     ASSERT_UNEQUAL(rawIterator, result);
     ASSERT_GREATER(result, rawIterator);
     ASSERT_EQUAL(rawIterator - result, -1);
+}
 
+void CoreTools::RawIteratorsTesting::AdditionOperatorTest(RawIteratorType& rawIterator)
+{
     rawIterator += 5;
     ASSERT_EQUAL(*rawIterator, 5);
 
-    result = rawIterator + 5;
+    auto result = rawIterator + 5;
     ASSERT_EQUAL(*result, 10);
+}
 
+void CoreTools::RawIteratorsTesting::SubtractionOperatorTest(RawIteratorType& rawIterator)
+{
     rawIterator -= 2;
     ASSERT_EQUAL(*rawIterator, 3);
 
-    result = rawIterator - 1;
+    auto result = rawIterator - 1;
     ASSERT_EQUAL(*result, 2);
 }

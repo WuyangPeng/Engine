@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/18 22:09)
+/// 版本：1.0.0.9 (2024/05/11 14:31)
 
 #include "LogHelperTesting.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
@@ -66,19 +66,19 @@ void CoreTools::LogHelperTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(DeleteFileTest);
 }
 
-void CoreTools::LogHelperTesting::WriteMessageTest() noexcept
+void CoreTools::LogHelperTesting::WriteMessageTest()  
 {
-    const LogHelper logHelper0(LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, gTraceMessage);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoWriteMessageTest, LogLevel::Trace, gTraceMessage);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoWriteMessageTest, LogLevel::Debug, gDebugMessage);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoWriteMessageTest, LogLevel::Info, gInfoMessage);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoWriteMessageTest, LogLevel::Warn, gWarnMessage);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoWriteMessageTest, LogLevel::Error, gErrorMessage);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoWriteMessageTest, LogLevel::Fatal, gFatalMessage);
+}
 
-    const LogHelper logHelper1(LogLevel::Debug, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, gDebugMessage);
-
-    const LogHelper logHelper2(LogLevel::Info, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, gInfoMessage);
-
-    const LogHelper logHelper3(LogLevel::Warn, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, gWarnMessage);
-
-    const LogHelper logHelper4(LogLevel::Error, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, gErrorMessage);
-
-    const LogHelper logHelper5(LogLevel::Fatal, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, gFatalMessage);
+void CoreTools::LogHelperTesting::DoWriteMessageTest(LogLevel logLevel, const String& message) noexcept
+{
+    const LogHelper logHelper(logLevel, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, message);
 }
 
 void CoreTools::LogHelperTesting::FileContentTest()
@@ -100,17 +100,17 @@ void CoreTools::LogHelperTesting::DeleteFileTest()
     DeleteFileTools file{ logHelperTestingFullName };
 }
 
-void CoreTools::LogHelperTesting::WriteMessageToFileTest() noexcept
+void CoreTools::LogHelperTesting::WriteMessageToFileTest()  
 {
-    const LogHelper logHelper0(LogFileName{ gLogHelperTestingFileName.c_str() }, LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, gTraceMessage);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoWriteMessageToFileTest, LogLevel::Trace, gTraceMessage);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoWriteMessageToFileTest, LogLevel::Debug, gDebugMessage);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoWriteMessageToFileTest, LogLevel::Info, gInfoMessage);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoWriteMessageToFileTest, LogLevel::Warn, gWarnMessage);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoWriteMessageToFileTest, LogLevel::Error, gErrorMessage);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoWriteMessageToFileTest, LogLevel::Fatal, gFatalMessage);
+}
 
-    const LogHelper logHelper1(LogFileName{ gLogHelperTestingFileName.c_str() }, LogLevel::Debug, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, gDebugMessage);
-
-    const LogHelper logHelper2(LogFileName{ gLogHelperTestingFileName.c_str() }, LogLevel::Info, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, gInfoMessage);
-
-    const LogHelper logHelper3(LogFileName{ gLogHelperTestingFileName.c_str() }, LogLevel::Warn, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, gWarnMessage);
-
-    const LogHelper logHelper4(LogFileName{ gLogHelperTestingFileName.c_str() }, LogLevel::Error, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, gErrorMessage);
-
-    const LogHelper logHelper5(LogFileName{ gLogHelperTestingFileName.c_str() }, LogLevel::Fatal, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, gFatalMessage);
+void CoreTools::LogHelperTesting::DoWriteMessageToFileTest(LogLevel logLevel, const String& message) noexcept
+{
+    const LogHelper logHelper(LogFileName{ gLogHelperTestingFileName.c_str() }, logLevel, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, message);
 }

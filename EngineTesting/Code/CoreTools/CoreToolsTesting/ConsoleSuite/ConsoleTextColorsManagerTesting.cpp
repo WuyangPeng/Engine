@@ -36,11 +36,14 @@ void CoreTools::ConsoleTextColorsManagerTesting::MainTest()
 
 void CoreTools::ConsoleTextColorsManagerTesting::ConsoleTextColorsManageTest()
 {
-    {
-        ConsoleTextColorsManager<StandardHandle::Error> manager{ TextColour::Yellow, false };
-
-        std::cerr << "这条信息在控制台中显示为黄色。\n";
-    }
+    ASSERT_NOT_THROW_EXCEPTION_0(DoConsoleTextColorsManagerTest);
 
     std::cerr << "这条信息在控制台中显示为白色。\n";
+}
+
+void CoreTools::ConsoleTextColorsManagerTesting::DoConsoleTextColorsManagerTest()
+{
+    ConsoleTextColorsManager<StandardHandle::Error> manager{ TextColour::Yellow, false };
+
+    std::cerr << "这条信息在控制台中显示为黄色。\n";
 }

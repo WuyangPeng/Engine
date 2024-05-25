@@ -1,32 +1,59 @@
 @ingroup group_Documentation
 
-Threading Core Render Engine 1.0.0.9
+Threading Core Render Engine 1.0.0.10
 
 ----------------------------
 更新日志
 ----------------------------
-1.0.0.9（2024/04/22——2024/05/31）
+1.0.0.10（2024/05/26——2024/06/30）
 
 	完成功能： 
 	（引擎）
-	+ 实现ObjectSystemsSuite。@
-	+ 实现TimeSuite。@
-	+ 实现ReportOutputSuite。@
-	+ 实现UnitTestSuiteSuite 。@
-	+ 实现TemplateToolsSuite。@
-	+ 实现CommandSuite。@
-	+ 实现MainFunctionHelperSuite。@
-	+ 实现ModuleInitializerTerminatorSuite。@
-	+ 实现SyntacticParserSuite。@
-	+ 实现PerformanceProfilerSuite。@
-	+ 实现EngineConfigurationSuite。@
-	+ 实现PropertiesSuite。@
-	+ 实现CyclicRedundancyCheckSuite。@
-	+ 实现MessageEventSuite。@
-	+ 实现StateMachineManagerSuite。@ 
-	+ CoreTools单元测试工程整理。@
 	+ CoreTools工程整理。@
+	+ 实现ParametricCurve。@
+	+ 实现ApprConvexQuadByRect。@
+	+ 实现ApprCurveByArcs。@
+	+ 实现ApprCylinder3。@	
+	+ 实现ApprEllipseByArcs。@
+	+ 实现ApprEllipsoid3。@	
+	+ 实现ApprGreatCircle3。@	
+	+ 实现ApprHeightPlane3。@
+	+ 实现ApprOrthogonalLine2。@
+	+ 实现ApprOrthogonalLine3。@
+	+ 实现ApprOrthogonalPlane3。@
+	+ 实现ApprParaboloid3。@
+	+ 实现ApprParallelLines2。@
+	+ 实现ApprPolynomial2。@
+	+ 实现ApprPolynomial3。@
+	+ 实现ApprPolynomial4。@
+	+ 实现ApprPolynomialSpecial2。@
+	+ 实现ApprPolynomialSpecial3。@
+	+ 实现ApprPolynomialSpecial4。@
+	+ 实现ApprQuadratic2。@
+	+ 实现ApprQuadratic3。@	
+	+ 实现ApprSphere3。@
+	+ 实现ApprTorus3。@
+	+ 实现Approximation。@
 	+ linux系统通过编译。@	
+	
+----------------------------
+1.0.0.9（2024/04/22——2024/05/25）
+
+	完成功能： 
+	（引擎）
+	+ 实现ObjectSystemsSuite。
+	+ 实现TimeSuite。
+	+ 实现ReportOutputSuite。
+	+ 实现UnitTestSuiteSuite。
+	+ 实现TemplateToolsSuite。
+	+ 实现CommandSuite。
+	+ 实现MainFunctionHelperSuite。
+	+ 实现EngineConfigurationSuite。
+	+ 实现PropertiesSuite。
+	+ 实现MessageEventSuite。
+	+ 实现StateMachineManagerSuite。
+	+ 实现CyclicRedundancyCheckSuite。
+	+ CoreTools单元测试工程整理。	
 	
 ----------------------------
 1.0.0.8（2024/03/27——2024/04/30）

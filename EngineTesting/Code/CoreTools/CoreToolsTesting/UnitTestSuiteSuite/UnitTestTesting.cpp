@@ -1,14 +1,15 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:28)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/04/23 10:52)
 
 #include "UnitTestTesting.h"
 #include "Detail/TestEnum.h"
+#include "System/Time/DeltaTime.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -26,13 +27,17 @@ CoreTools::UnitTestTesting::UnitTestTesting(const OStreamShared& stream)
 
 bool CoreTools::UnitTestTesting::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && 0 <= passNumber && 0 <= failNumber && 0 <= errorNumber)
-        return true;
-    else
-        return false;
+    return ParentType::IsValid() && 0 <= passNumber && 0 <= failNumber && 0 <= errorNumber;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
+
+void CoreTools::UnitTestTesting::PrintTipsMessage()
+{
+    GetStream() << "这个测试测试单元测试本身，会出现测试失败和测试错误，请按“否”取消。\n";
+
+    System::SystemPause();
+}
 
 void CoreTools::UnitTestTesting::DoRunUnitTest()
 {
@@ -67,13 +72,13 @@ void CoreTools::UnitTestTesting::NameTest()
 {
     ASSERT_EQUAL(GetName(), typeid(*this).name());
 
-    // NameTest包含一个ASSERT_EQUAL成功测试和一个ASSERT_NOT_THROW成功测试。
+    /// NameTest包含一个ASSERT_EQUAL成功测试和一个ASSERT_NOT_THROW成功测试。
     passNumber += 2;
 }
 
 void CoreTools::UnitTestTesting::StreamTest() noexcept
 {
-    // StreamTest包含0个ASSERT成功测试和一个ASSERT_NOT_THROW成功测试。
+    /// StreamTest包含0个ASSERT成功测试和一个ASSERT_NOT_THROW成功测试。
     passNumber += 1;
 }
 
@@ -90,7 +95,7 @@ void CoreTools::UnitTestTesting::AssertTestTest()
 
     GetStream() << "以上代码测试单元测试未通过的情况。\n";
 
-    // 上面有5个测试。其中4个为成功测试，1个为失败测试。
+    /// 上面有5个测试。其中4个为成功测试，1个为失败测试。
     passNumber += 4;
     failNumber += 1;
 
@@ -98,7 +103,7 @@ void CoreTools::UnitTestTesting::AssertTestTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    // 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
+    /// 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
     passNumber += 4;
 }
 
@@ -106,7 +111,7 @@ void CoreTools::UnitTestTesting::AssertTrueTest() noexcept
 {
     AssertTrue();
 
-    // AssertTrueTest包含1个ASSERT成功测试。
+    /// AssertTrueTest包含1个ASSERT成功测试。
     passNumber += 2;
 }
 
@@ -123,7 +128,7 @@ void CoreTools::UnitTestTesting::ErrorTestTest()
 
     GetStream() << "以上代码测试单元测试未通过的情况。\n";
 
-    // 上面有5个测试。其中4个为成功测试，1个为错误测试。
+    /// 上面有5个测试。其中4个为成功测试，1个为错误测试。
     passNumber += 4;
     errorNumber += 1;
 
@@ -131,7 +136,7 @@ void CoreTools::UnitTestTesting::ErrorTestTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    // 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
+    /// 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
     passNumber += 4;
 }
 
@@ -191,7 +196,7 @@ void CoreTools::UnitTestTesting::AssertEqualTest()
 
     GetStream() << "以上代码测试单元测试未通过的情况。\n";
 
-    // 上面有40个测试。其中25个为成功测试，15个为失败测试。
+    /// 上面有40个测试。其中25个为成功测试，15个为失败测试。
     passNumber += 25;
     failNumber += 15;
 
@@ -199,7 +204,7 @@ void CoreTools::UnitTestTesting::AssertEqualTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    // 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
+    /// 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
     passNumber += 4;
 }
 
@@ -218,7 +223,7 @@ void CoreTools::UnitTestTesting::AssertStringTest()
     ASSERT_EQUAL('1', '1');
     ASSERT_EQUAL(L'1', L'1');
 
-    // 上面有10个ASSERT_EQUAL成功测试。
+    /// 上面有10个ASSERT_EQUAL成功测试。
     passNumber += 11;
 }
 
@@ -226,7 +231,7 @@ void CoreTools::UnitTestTesting::AssertCellValueTest()
 {
     ASSERT_EQUAL(SimpleCSV::CellValue{ 7 }, SimpleCSV::CellValue{ 7 });
 
-    // 上面有1个ASSERT_EQUAL成功测试。
+    /// 上面有1个ASSERT_EQUAL成功测试。
     passNumber += 2;
 }
 
@@ -267,7 +272,7 @@ void CoreTools::UnitTestTesting::AssertCompareTest()
 
     GetStream() << "以上代码测试单元测试未通过的情况。\n";
 
-    // 上面有27个测试。其中17个为成功测试，10个为失败测试。
+    /// 上面有27个测试。其中17个为成功测试，10个为失败测试。
     passNumber += 17;
     failNumber += 10;
 
@@ -275,7 +280,7 @@ void CoreTools::UnitTestTesting::AssertCompareTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    // 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
+    /// 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
     passNumber += 4;
 }
 
@@ -296,7 +301,7 @@ void CoreTools::UnitTestTesting::AssertNotThrowTest()
 
     GetStream() << "以上代码测试单元测试未通过的情况。\n";
 
-    // 上面有9个测试。其中6个为成功测试，3个为错误测试。
+    /// 上面有9个测试。其中6个为成功测试，3个为错误测试。
     passNumber += 6;
     errorNumber += 3;
 
@@ -304,7 +309,7 @@ void CoreTools::UnitTestTesting::AssertNotThrowTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    // 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
+    /// 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
     passNumber += 4;
 }
 
@@ -325,7 +330,7 @@ void CoreTools::UnitTestTesting::AssertThrowTest()
 
     GetStream() << "以上代码测试单元测试未通过的情况。\n";
 
-    // 上面有9个测试。其中6个为成功测试，3个为错误测试。
+    /// 上面有9个测试。其中6个为成功测试，3个为错误测试。
     passNumber += 6;
     errorNumber += 3;
 
@@ -333,7 +338,7 @@ void CoreTools::UnitTestTesting::AssertThrowTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    // 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
+    /// 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
     passNumber += 4;
 }
 

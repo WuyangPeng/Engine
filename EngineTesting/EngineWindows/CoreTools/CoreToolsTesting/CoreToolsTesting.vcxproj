@@ -465,7 +465,7 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandArgumentTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandLineInformationTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandSuite.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandHandleTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleAllocTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleColorsTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleSuite.h" />
@@ -490,8 +490,8 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CoroutineSuite\CoroutineSuite.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheck16Testing.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheck32Testing.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCCITTTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCCITTUsingTableTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCcittTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCcittUsingTableTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckHandleTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckSuite.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\IntelCheckSumTesting.h" />
@@ -513,6 +513,7 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\ExceptionSuite.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\GameErrorTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\LastErrorTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIO\BufferIOTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIO\WriteBufferIOTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIO\ReadBufferIOTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManager\CFileManagerTesting.h" />
@@ -542,6 +543,7 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManager\ReadFileManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManager\WriteFileManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\GenerateRandomNameTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\GenerateRandomNameTestingDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\IFileStreamManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\OFileStreamManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertExecuteLoopNotThrowTesting.h" />
@@ -878,10 +880,13 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\WindowsMutexTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\CustomTimeTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DateTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DayTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DeltaTimeManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\MillisecondTimerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\MonthTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\SecondTimerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\TimeSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\YearTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\Detail\TestEnum.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\OStreamSharedTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\SuiteTesting.h" />
@@ -1173,7 +1178,7 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\StringUtilityTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandArgumentTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandLineInformationTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandHandleTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleAllocTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleColorsTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleTesting.cpp" />
@@ -1195,8 +1200,8 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\TriggerAssertTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheck16Testing.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheck32Testing.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCCITTTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCCITTUsingTableTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCcittTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCcittUsingTableTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckHandleTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\IntelCheckSumTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SevenModElevenCheckSumTesting.cpp" />
@@ -1213,6 +1218,7 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\ErrorTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\GameErrorTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\LastErrorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIO\BufferIOTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIO\WriteBufferIOTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIO\ReadBufferIOTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManager\CFileManagerTesting.cpp" />
@@ -1538,9 +1544,12 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\WindowsMutexTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\CustomTimeTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DayTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DeltaTimeManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\MillisecondTimerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\MonthTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\SecondTimerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\YearTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\OStreamSharedTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\SuiteTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestCompositeTesting.cpp" />

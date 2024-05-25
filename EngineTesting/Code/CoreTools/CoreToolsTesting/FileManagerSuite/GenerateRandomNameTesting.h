@@ -26,13 +26,20 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using String = System::String;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void StringTest();
         void WStringTest();
         void TStringTest();
+
+        template <typename T>
+        void ResultTest(int length, const T& name, const T& extensionName);
     };
+
 }
 
 #endif  // CORE_TOOLS_TESTING_GENERATE_RANDOM_NAME_TESTING_H

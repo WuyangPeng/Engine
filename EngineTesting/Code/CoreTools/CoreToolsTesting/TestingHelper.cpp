@@ -676,6 +676,9 @@ void CoreTools::TestingHelper::AddTimeSuite()
     ADD_TEST(timeSuite, MillisecondTimerTesting);
     ADD_TEST(timeSuite, SecondTimerTesting);
     ADD_TEST(timeSuite, DateTesting);
+    ADD_TEST(timeSuite, YearTesting);
+    ADD_TEST(timeSuite, MonthTesting);
+    ADD_TEST(timeSuite, DayTesting);
 
     AddSuite(timeSuite);
 }
@@ -736,7 +739,7 @@ void CoreTools::TestingHelper::AddCommandSuite()
 
     ADD_TEST(commandSuite, CommandArgumentTesting);
     ADD_TEST(commandSuite, CommandLineInformationTesting);
-    ADD_TEST(commandSuite, CommandTesting);
+    ADD_TEST(commandSuite, CommandHandleTesting);
 
     AddSuite(commandSuite);
 }
@@ -806,9 +809,9 @@ void CoreTools::TestingHelper::AddCyclicRedundancyCheckSuite()
     ADD_TEST(cyclicRedundancyCheckSuite, IntelCheckSumTesting);
     ADD_TEST(cyclicRedundancyCheckSuite, SevenModElevenCheckSumTesting);
     ADD_TEST(cyclicRedundancyCheckSuite, SpecifyCheckSumTesting);
-    ADD_TEST(cyclicRedundancyCheckSuite, CyclicRedundancyCheckCCITTTesting);
+    ADD_TEST(cyclicRedundancyCheckSuite, CyclicRedundancyCheckCcittTesting);
     ADD_TEST(cyclicRedundancyCheckSuite, CyclicRedundancyCheckHandleTesting);
-    ADD_TEST(cyclicRedundancyCheckSuite, CyclicRedundancyCheckCCITTUsingTableTesting);
+    ADD_TEST(cyclicRedundancyCheckSuite, CyclicRedundancyCheckCcittUsingTableTesting);
     ADD_TEST(cyclicRedundancyCheckSuite, CyclicRedundancyCheck16Testing);
     ADD_TEST(cyclicRedundancyCheckSuite, CyclicRedundancyCheck32Testing);
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 15:03)
+/// 版本：1.0.0.9 (2024/04/28 21:38)
 
 #include "ErrorTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
@@ -44,49 +44,45 @@ void CoreTools::ErrorTesting::MainTest()
 void CoreTools::ErrorTesting::NormalErrorTest()
 {
     const auto errorDescription = SYSTEM_TEXT("错误"s);
-
     SetPlatformLastError(System::WindowError::Success);
 
     const LastError lastError{};
     const auto functionDescribed = CORE_TOOLS_FUNCTION_DESCRIBED;
     const Error normalError{ functionDescribed, lastError, errorDescription };
 
-    ASSERT_EQUAL(functionDescribed.GetCurrentFunction(), normalError.GetCurrentFunction());
-    ASSERT_EQUAL(functionDescribed.GetFileName(), normalError.GetFileName());
-    ASSERT_EQUAL(functionDescribed.GetLine(), normalError.GetLine());
-
-    ASSERT_EQUAL(functionDescribed, normalError.GetFunctionDescribed());
+    ASSERT_NOT_THROW_EXCEPTION_2(FunctionDescribedTest, functionDescribed, normalError);
 
     ASSERT_EQUAL(normalError.GetError(), errorDescription);
+}
+
+void CoreTools::ErrorTesting::FunctionDescribedTest(const FunctionDescribed& functionDescribed, const Error& error)
+{
+    ASSERT_EQUAL(functionDescribed.GetCurrentFunction(), error.GetCurrentFunction());
+    ASSERT_EQUAL(functionDescribed.GetFileName(), error.GetFileName());
+    ASSERT_EQUAL(functionDescribed.GetLine(), error.GetLine());
+
+    ASSERT_EQUAL(functionDescribed, error.GetFunctionDescribed());
 }
 
 void CoreTools::ErrorTesting::WindowsErrorTest()
 {
     const auto errorDescription = SYSTEM_TEXT("环境不正确。"s);
-
     SetPlatformLastError(System::WindowError::BadEnvironment);
 
     const LastError lastError{};
     const auto functionDescribed = CORE_TOOLS_FUNCTION_DESCRIBED;
     const Error windowsError{ functionDescribed, lastError, System::String() };
-    auto windowsErrorString = windowsError.GetError();
 
-    ASSERT_EQUAL(functionDescribed.GetCurrentFunction(), windowsError.GetCurrentFunction());
-    ASSERT_EQUAL(functionDescribed.GetFileName(), windowsError.GetFileName());
-    ASSERT_EQUAL(functionDescribed.GetLine(), windowsError.GetLine());
+    ASSERT_NOT_THROW_EXCEPTION_2(FunctionDescribedTest, functionDescribed, windowsError);
 
-    ASSERT_EQUAL(functionDescribed, windowsError.GetFunctionDescribed());
-
-    ASSERT_UNEQUAL(windowsErrorString.find(errorDescription), System::String::npos);
+    auto errorResult = windowsError.GetError();
+    ASSERT_UNEQUAL(errorResult.find(errorDescription), System::String::npos);
 }
 
 void CoreTools::ErrorTesting::OpenFileErrorTest()
 {
     const auto fileName = SYSTEM_TEXT("File.txt"s);
-    Error::Format format{ SYSTEM_TEXT("%1% %2%") };
-    format % SYSTEM_TEXT("系统找不到指定的文件 ");
-    format % fileName;
-
+    const auto format = GetOpenFileError(fileName);
     SetPlatformLastError(System::WindowError::FileNotFound);
 
     const LastError lastError{};
@@ -95,6 +91,15 @@ void CoreTools::ErrorTesting::OpenFileErrorTest()
     const auto openFileErrorString = openFileError.GetError();
 
     ASSERT_EQUAL(openFileErrorString.find(format.str()), System::String::npos);
+}
+
+CoreTools::Error::Format CoreTools::ErrorTesting::GetOpenFileError(const String& fileName)
+{
+    Error::Format format{ SYSTEM_TEXT("%1% %2%") };
+    format % SYSTEM_TEXT("系统找不到指定的文件 ");
+    format % fileName;
+
+    return format;
 }
 
 void CoreTools::ErrorTesting::ComErrorTest()
@@ -112,10 +117,13 @@ void CoreTools::ErrorTesting::ThrowExceptionTest()
 {
     SetPlatformLastError(System::WindowError::BadLength);
 
-    Error::ThrowError(CORE_TOOLS_FUNCTION_DESCRIBED, (Error::Format(SYSTEM_TEXT("%1% %2% %3%")) % 21 % 22 % SYSTEM_TEXT("这里测试抛出异常。")).str());
+    Error::ThrowError(CORE_TOOLS_FUNCTION_DESCRIBED,
+                      (Error::Format(SYSTEM_TEXT("%1% %2% %3%")) % 21 % 22 % SYSTEM_TEXT("这里测试抛出异常。")).str());
 }
 
 void CoreTools::ErrorTesting::ThrowLastExceptionTest()
 {
-    Error::ThrowError(CORE_TOOLS_FUNCTION_DESCRIBED, System::WindowError::FileNotFound, (Error::Format(SYSTEM_TEXT("%1% %2% %3%")) % 21 % 22 % SYSTEM_TEXT("这里测试抛出异常。")).str());
+    Error::ThrowError(CORE_TOOLS_FUNCTION_DESCRIBED,
+                      System::WindowError::FileNotFound,
+                      (Error::Format(SYSTEM_TEXT("%1% %2% %3%")) % 21 % 22 % SYSTEM_TEXT("这里测试抛出异常。")).str());
 }

@@ -31,6 +31,13 @@ namespace CoreTools
 
         void StreamSizeTest();
 
+        void SingedStreamSizeTest();
+        void UnSingedStreamSizeTest();
+        void FloatStreamSizeTest();
+        void StringStreamSizeTest();
+        void EnumStreamSizeTest();
+        void BoolStreamSizeTest();
+
         void Int16StreamTest();
         void ObjectAssociatedTest();
         void BoolStreamTest();

@@ -36,6 +36,9 @@ namespace CoreTools
         virtual void MainTest();
 
         virtual void RttiTest();
+
+        virtual void GetCurrentRttiTypeTest();
+        virtual void GetRttiTypeTest();
     };
 }
 

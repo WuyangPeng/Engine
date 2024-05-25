@@ -35,19 +35,25 @@ void CoreTools::LastErrorTesting::MainTest()
 
 void CoreTools::LastErrorTesting::LastErrorTest()
 {
-    constexpr auto fileNotFound = System::WindowError::FileNotFound;
+    constexpr auto fileNotFound = WindowError::FileNotFound;
 
+    ASSERT_NOT_THROW_EXCEPTION_1(DoLastError0, fileNotFound);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(DoLastError1);
+}
+
+void CoreTools::LastErrorTesting::DoLastError0(const WindowError fileNotFound)
+{
     SetPlatformLastError(fileNotFound);
 
-    {
-        const LastError lastError{};
+    const LastError lastError{};
 
-        ASSERT_EQUAL(lastError.GetLastError(), fileNotFound);
-    }
+    ASSERT_EQUAL(lastError.GetLastError(), fileNotFound);
+}
 
-    {
-        const LastError lastError{};
+void CoreTools::LastErrorTesting::DoLastError1()
+{
+    const LastError lastError{};
 
-        ASSERT_EQUAL(lastError.GetLastError(), System::WindowError::Success);
-    }
+    ASSERT_EQUAL(lastError.GetLastError(), System::WindowError::Success);
 }

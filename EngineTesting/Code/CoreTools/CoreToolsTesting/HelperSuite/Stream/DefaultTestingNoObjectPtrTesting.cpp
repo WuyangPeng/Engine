@@ -5,16 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/14 00:04)
+/// 版本：1.0.0.9 (2024/05/06 19:51)
 
 #include "DefaultTestingNoObjectPtrTesting.h"
-#include "CoreTools/CoreToolsTesting/HelperSuite/Detail/DefaultTestingNoObjectPtr.h"
 #include "CoreTools/FileManager/FileBuffer.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/ConstObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
@@ -55,7 +53,7 @@ void CoreTools::DefaultTestingNoObjectPtrTesting::SaveStreamTest()
 
     BufferTarget target{ bufferSize, objectRegister };
 
-    const ConstObjectAssociated<DefaultTestingNoObjectPtr> constObjectAssociated{ streamObject, 1 };
+    const ConstObjectAssociated constObjectAssociated{ streamObject, 1 };
     ASSERT_LESS(0, objectRegister->Register(constObjectAssociated));
 
     streamObject->Save(target);

@@ -1,15 +1,13 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 15:30)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/05/18 22:48)
 
 #include "EventSlotTesting.h"
-#include "Flags/EventPriorityFlags.h"
-#include "Detail/EventSubclass.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/CallbackParameters.h"
@@ -29,11 +27,6 @@ void CoreTools::EventSlotTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-namespace CoreTools
-{
-    using TestingType = EventSlot<EventSubclass, EventPriority>;
-}
-
 void CoreTools::EventSlotTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(SlotTest);
@@ -43,17 +36,15 @@ void CoreTools::EventSlotTesting::MainTest()
 
 void CoreTools::EventSlotTesting::SlotTest()
 {
-    constexpr auto value = 5;
-
-    auto eventSubclass = std::make_shared<EventSubclass>(value);
-
-    ASSERT_UNEQUAL_NULL_PTR(eventSubclass);
-    ASSERT_EQUAL(eventSubclass->GetValue(), value);
-
-    constexpr auto eventPriority = EventPriority::High;
+    auto eventSubclass = GetEventSubclass();
 
     TestingType eventSlot{ eventSubclass, eventPriority, &EventInterface::EventFunction };
 
+    ASSERT_NOT_THROW_EXCEPTION_2(DoSlotTest, eventSubclass, eventSlot);
+}
+
+void CoreTools::EventSlotTesting::DoSlotTest(EventSubclassSharedPtr& eventSubclass, TestingType& eventSlot)
+{
     CallbackParameters callbackParameters{ 0 };
 
     callbackParameters.SetValue(0, value);
@@ -68,14 +59,19 @@ void CoreTools::EventSlotTesting::SlotTest()
     ASSERT_EQUAL_NULL_PTR(eventSubclass);
 }
 
-void CoreTools::EventSlotTesting::OperatorTest()
+CoreTools::EventSlotTesting::EventSubclassSharedPtr CoreTools::EventSlotTesting::GetEventSubclass()
 {
-    constexpr auto value = 5;
-
     const auto eventSubclass = std::make_shared<EventSubclass>(value);
 
     ASSERT_UNEQUAL_NULL_PTR(eventSubclass);
     ASSERT_EQUAL(eventSubclass->GetValue(), value);
+
+    return eventSubclass;
+}
+
+void CoreTools::EventSlotTesting::OperatorTest()
+{
+    const auto eventSubclass = GetEventSubclass();
 
     constexpr auto highEventPriority = EventPriority::High;
     constexpr auto lowEventPriority = EventPriority::Low;
@@ -88,17 +84,13 @@ void CoreTools::EventSlotTesting::OperatorTest()
 
 void CoreTools::EventSlotTesting::UInt64PriorityTest()
 {
-    using UInt64TestingType = EventSlot<EventSubclass, uint64_t>;
+    const auto eventSubclass = GetEventSubclass();
 
-    constexpr auto value = 5;
+    constexpr auto highEventPriority = 2;
+    constexpr auto lowEventPriority = 1;
 
-    const auto eventSubclass = std::make_shared<EventSubclass>(value);
-
-    ASSERT_UNEQUAL_NULL_PTR(eventSubclass);
-    ASSERT_EQUAL(eventSubclass->GetValue(), value);
-
-    const UInt64TestingType eventSlot0{ eventSubclass, 2, &EventInterface::EventFunction };
-    const UInt64TestingType eventSlot1{ eventSubclass, 1, &EventInterface::EventFunction };
+    const UInt64TestingType eventSlot0{ eventSubclass, highEventPriority, &EventInterface::EventFunction };
+    const UInt64TestingType eventSlot1{ eventSubclass, lowEventPriority, &EventInterface::EventFunction };
 
     ASSERT_LESS(eventSlot1, eventSlot0);
 }

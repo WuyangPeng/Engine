@@ -36,6 +36,13 @@ namespace CoreTools
         void DefaultTest();
         void UseFactoryTest();
         void UseUseDefaultConstructionTest();
+
+        void CountTest(TestingType& sharedImpl, int aCount);
+        void AddressEqualTest(const TestingType& lhs, const TestingType& rhs, int aCount);
+
+    private:
+        static constexpr auto count = 12;
+        static constexpr auto modify = 1;
     };
 }
 

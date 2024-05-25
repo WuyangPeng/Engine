@@ -34,18 +34,22 @@ namespace CoreTools
 
         void NoexceptUseLogTest();
 
-        void Function0();
-        void Function1(int parameter);
+        void NoexceptUseLogNoConstTest();
+        void NoexceptUseLogConstTest();
+        void NoexceptUseLogStaticTest();
+
+        SYSTEM_NORETURN void Function0();
+        SYSTEM_NORETURN void Function1(int parameter);
         NODISCARD int Function2();
         NODISCARD int Function3(int parameter);
 
-        void ConstFunction0() const;
-        void ConstFunction1(int parameter) const;
+        SYSTEM_NORETURN void ConstFunction0() const;
+        SYSTEM_NORETURN void ConstFunction1(int parameter) const;
         NODISCARD int ConstFunction2() const;
         NODISCARD int ConstFunction3(int parameter) const;
 
-        static void StaticFunction0();
-        static void StaticFunction1(int parameter);
+        SYSTEM_NORETURN static void StaticFunction0();
+        SYSTEM_NORETURN static void StaticFunction1(int parameter);
         NODISCARD static int StaticFunction2();
         NODISCARD static int StaticFunction3(int parameter);
     };

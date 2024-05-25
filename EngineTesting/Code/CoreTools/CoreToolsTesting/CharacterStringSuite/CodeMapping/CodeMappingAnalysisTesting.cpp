@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 14:59)
+/// 版本：1.0.0.9 (2024/04/23 21:19)
 
 #include "CodeMappingAnalysisTesting.h"
 #include "CoreTools/CharacterString/CodeMappingAnalysis.h"
@@ -44,22 +44,22 @@ void CoreTools::CodeMappingAnalysisTesting::MainTest()
 
 void CoreTools::CodeMappingAnalysisTesting::MultiByteGetElementFailTest()
 {
-    const CodeMappingAnalysis codeMappingAnalysis{ nonExistentFileName };
+    const CodeMappingAnalysis codeMappingAnalysis{ StringConversion::StandardConversionMultiByte(nonExistentFileName) };
 }
 
 void CoreTools::CodeMappingAnalysisTesting::MultiByteGetElementSuccessTest()
 {
-    const CodeMappingAnalysis codeMappingAnalysis{ csvEngineeringFileName };
+    const CodeMappingAnalysis codeMappingAnalysis{ StringConversion::StandardConversionMultiByte(csvEngineeringFileName) };
     ASSERT_EQUAL(codeMappingAnalysis.GetElement(key), element);
 }
 
 void CoreTools::CodeMappingAnalysisTesting::WideCharGetElementFailTest()
 {
-    const CodeMappingAnalysis codeMappingAnalysis{ nonExistentFileName };
+    const CodeMappingAnalysis codeMappingAnalysis{ StringConversion::StandardConversionWideChar(nonExistentFileName) };
 }
 
 void CoreTools::CodeMappingAnalysisTesting::WideCharGetElementSuccessTest()
 {
-    const CodeMappingAnalysis codeMappingAnalysis{ csvEngineeringFileName };
+    const CodeMappingAnalysis codeMappingAnalysis{ StringConversion::StandardConversionWideChar(csvEngineeringFileName) };
     ASSERT_EQUAL(codeMappingAnalysis.GetElement(key), element);
 }

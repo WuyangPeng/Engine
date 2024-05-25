@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 17:26)
+/// 版本：1.0.0.9 (2024/05/23 17:07)
 
 #include "InitTermRegisterFactoryTesting.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -38,11 +38,20 @@ void CoreTools::InitTermRegisterFactoryTesting::MainTest()
 
     const InitTermRegisterFactory initTermRegisterFactory{ Initializer, Terminator };
 
+    ASSERT_NOT_THROW_EXCEPTION_0(ExecuteInitializerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ExecuteTerminatorTest);
+}
+
+void CoreTools::InitTermRegisterFactoryTesting::ExecuteInitializerTest()
+{
     InitTerm::ExecuteInitializer();
 
     ASSERT_TRUE(initializeCall);
     ASSERT_FALSE(terminateCall);
+}
 
+void CoreTools::InitTermRegisterFactoryTesting::ExecuteTerminatorTest()
+{
     InitTerm::ExecuteTerminator();
 
     ASSERT_TRUE(initializeCall);

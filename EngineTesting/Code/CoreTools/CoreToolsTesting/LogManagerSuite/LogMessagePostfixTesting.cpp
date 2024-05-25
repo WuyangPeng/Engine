@@ -5,12 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/18 22:13)
+/// 版本：1.0.0.9 (2024/05/11 14:36)
 
 #include "LogMessagePostfixTesting.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/LogManager/Flags/LogManagerFlags.h"
 #include "CoreTools/LogManager/LogMessagePostfix.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/15 10:09)
+/// 版本：1.0.0.9 (2024/04/26 13:00)
 
 #include "AssertionTesting.h"
 #include "System/Time/DeltaTime.h"
@@ -24,6 +24,13 @@ CoreTools::AssertionTesting::AssertionTesting(const OStreamShared& stream)
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, AssertionTesting)
 
+void CoreTools::AssertionTesting::PrintTipsMessage()
+{
+    GetStream() << "这个测试会触发失败断言，请按否取消。\n";
+
+    System::SystemPause();
+}
+
 void CoreTools::AssertionTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
@@ -40,11 +47,4 @@ void CoreTools::AssertionTesting::AssertionFailTest()
     const auto cancelMessage = "请点击“否”取消。"s;
 
     const Assertion assertion{ false, CORE_TOOLS_FUNCTION_DESCRIBED, "%s%s\n", promptMessage, cancelMessage };
-}
-
-void CoreTools::AssertionTesting::PrintTipsMessage()
-{
-    GetStream() << "这个测试会触发失败断言，请按否取消。\n";
-
-    System::SystemPause();
 }

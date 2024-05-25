@@ -19,6 +19,7 @@ namespace CoreTools
     public:
         using ClassType = MemberFunctionStaticAssertMacroTesting;
         using ParentType = UnitTest;
+
         using ClassShareType = CopyUnsharedClasses;
 
     public:

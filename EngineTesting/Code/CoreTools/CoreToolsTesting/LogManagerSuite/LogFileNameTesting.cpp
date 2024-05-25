@@ -9,7 +9,7 @@
 
 #include "LogFileNameTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/LogManager/LogFileName.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
@@ -27,6 +27,7 @@ void CoreTools::LogFileNameTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
+
 void CoreTools::LogFileNameTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(LogFileNameTest);

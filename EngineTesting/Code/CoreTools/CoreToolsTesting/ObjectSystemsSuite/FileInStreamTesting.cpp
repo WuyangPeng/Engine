@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 17:25)
+/// 版本：1.0.0.9 (2024/05/23 16:54)
 
 #include "FileInStreamTesting.h"
 #include "Detail/BoolObject.h"
@@ -14,7 +14,7 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/FileInStream.h"
 #include "CoreTools/ObjectSystems/FileOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
@@ -22,9 +22,11 @@
 
 using namespace std::literals;
 
-namespace CoreTools
+namespace
 {
+    const auto gResource = SYSTEM_TEXT("Resource/");
     const auto gFileName = SYSTEM_TEXT("FileInStream.txt"s);
+    const auto gFullFileName = gResource + gFileName;
 }
 
 CoreTools::FileInStreamTesting::FileInStreamTesting(const OStreamShared& stream)
@@ -46,12 +48,12 @@ void CoreTools::FileInStreamTesting::DoRunUnitTest()
 
 void CoreTools::FileInStreamTesting::MainTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(SaveFileOutStream);
     ASSERT_NOT_THROW_EXCEPTION_0(FileStreamTest);
-
     ASSERT_NOT_THROW_EXCEPTION_0(DeleteFileTest);
 }
 
-void CoreTools::FileInStreamTesting::FileStreamTest()
+void CoreTools::FileInStreamTesting::SaveFileOutStream() const
 {
     OutTopLevel outTopLevel = OutTopLevel::Create();
 
@@ -61,37 +63,50 @@ void CoreTools::FileInStreamTesting::FileStreamTest()
 
     FileOutStream fileOutStream{ outTopLevel };
 
-    fileOutStream.Save(SYSTEM_TEXT("Resource/") + gFileName);
+    fileOutStream.Save(gFullFileName);
+}
 
-    const FileInStream fileInputStream{ SYSTEM_TEXT("Resource/") + gFileName };
+void CoreTools::FileInStreamTesting::FileStreamTest()
+{
+    const FileInStream fileInputStream{ gFullFileName };
 
     const auto inTopLevel = fileInputStream.GetInTopLevel();
 
     ASSERT_EQUAL_FAILURE_THROW(inTopLevel.GetTopLevelSize(), 3, "FileInStream is empty.");
 
+    ASSERT_NOT_THROW_EXCEPTION_1(FileStreamResultTest, inTopLevel);
+}
+
+void CoreTools::FileInStreamTesting::FileStreamResultTest(const InTopLevel& inTopLevel)
+{
     auto index = 0;
     for (const auto& element : inTopLevel)
     {
-        switch (index)
-        {
-            case 0:
-                ASSERT_EQUAL(element->GetRttiType().GetName(), BoolObject::GetCurrentRttiType().GetName());
-                break;
-            case 1:
-                ASSERT_EQUAL(element->GetRttiType().GetName(), EnumObject::GetCurrentRttiType().GetName());
-                break;
-            case 2:
-                ASSERT_EQUAL(element->GetRttiType().GetName(), IntObject::GetCurrentRttiType().GetName());
-                break;
-            default:
-                break;
-        }
+        ASSERT_NOT_THROW_EXCEPTION_2(DoFileStreamResultTest, index, *element);
 
         ++index;
     }
 }
 
-void CoreTools::FileInStreamTesting::DeleteFileTest()
+void CoreTools::FileInStreamTesting::DoFileStreamResultTest(int index, const ObjectInterface& element)
 {
-    DeleteFileTools deleteFileTools{ SYSTEM_TEXT("Resource/") + gFileName };
+    switch (index)
+    {
+        case 0:
+            ASSERT_EQUAL(element.GetRttiType().GetName(), BoolObject::GetCurrentRttiType().GetName());
+            break;
+        case 1:
+            ASSERT_EQUAL(element.GetRttiType().GetName(), EnumObject::GetCurrentRttiType().GetName());
+            break;
+        case 2:
+            ASSERT_EQUAL(element.GetRttiType().GetName(), IntObject::GetCurrentRttiType().GetName());
+            break;
+        default:
+            break;
+    }
+}
+
+void CoreTools::FileInStreamTesting::DeleteFileTest() const
+{
+    DeleteFileTools deleteFileTools{ gFullFileName };
 }

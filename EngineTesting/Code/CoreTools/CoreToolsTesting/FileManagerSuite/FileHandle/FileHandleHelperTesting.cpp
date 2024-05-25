@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 16:51)
+/// 版本：1.0.0.9 (2024/05/02 22:47)
 
 #include "FileHandleHelperTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -62,36 +62,35 @@ void CoreTools::FileHandleHelperTesting::MainTest()
 
 void CoreTools::FileHandleHelperTesting::LoadFromFileTest()
 {
-    auto buffer = FileHandleHelper::LoadFromFile(GetFileHandleHelperName());
+    const auto buffer = FileHandleHelper::LoadFromFile(GetFileHandleHelperName());
 
+    ASSERT_NOT_THROW_EXCEPTION_2(ContentTest, buffer, GetFileHandleHelperContent());
+}
+
+void CoreTools::FileHandleHelperTesting::ContentTest(const FileBuffer& buffer, const std::string& content)
+{
     const std::string bufferContent{ buffer.begin(), buffer.end() };
 
-    ASSERT_EQUAL(bufferContent, GetFileHandleHelperContent());
+    ASSERT_EQUAL(bufferContent, content);
 }
 
 void CoreTools::FileHandleHelperTesting::LoadFromFileUseEnvironmentTest()
 {
-    auto buffer = FileHandleHelper::LoadFromFileUseEnvironment(environment, GetFileName());
+    const auto buffer = FileHandleHelper::LoadFromFileUseEnvironment(environment, GetFileName());
 
-    const std::string bufferContent{ buffer.begin(), buffer.end() };
-
-    ASSERT_EQUAL(bufferContent, GetFileHandleHelperContent());
+    ASSERT_NOT_THROW_EXCEPTION_2(ContentTest, buffer, GetFileHandleHelperContent());
 }
 
 void CoreTools::FileHandleHelperTesting::AppendToFileTest()
 {
-    auto content = GetFileHandleHelperContent();
+    const auto content = GetFileHandleHelperContent();
     const auto fileHandleHelperName = GetFileHandleHelperName();
 
     FileHandleHelper::AppendToFile(fileHandleHelperName, boost::numeric_cast<int>(content.size()), content.c_str());
 
     const auto buffer = FileHandleHelper::LoadFromFile(fileHandleHelperName);
 
-    const std::string bufferContent{ buffer.begin(), buffer.end() };
-
-    content += GetFileHandleHelperContent();
-
-    ASSERT_EQUAL(bufferContent, content);
+    ASSERT_NOT_THROW_EXCEPTION_2(ContentTest, buffer, content + content);
 }
 
 void CoreTools::FileHandleHelperTesting::SaveIntoFileTest()
@@ -103,7 +102,5 @@ void CoreTools::FileHandleHelperTesting::SaveIntoFileTest()
 
     const auto buffer = FileHandleHelper::LoadFromFile(fileHandleHelperName);
 
-    const std::string bufferContent{ buffer.begin(), buffer.end() };
-
-    ASSERT_EQUAL(bufferContent, content);
+    ASSERT_NOT_THROW_EXCEPTION_2(ContentTest, buffer, content);
 }

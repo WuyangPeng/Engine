@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 15:09)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/04/23 13:09)
 
 #include "SpecifyCheckSumTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -37,20 +37,28 @@ void CoreTools::SpecifyCheckSumTesting::MainTest()
 
 void CoreTools::SpecifyCheckSumTesting::SumTest()
 {
-    std::array buff{ '8', '3', '1', '4', '7', '0', '2', '9', '6', '5' };
+    ASSERT_NOT_THROW_EXCEPTION_0(SevenTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(Nine0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Nine1Test);
+}
 
-    const SpecifyCheckSum sevenModElevenCheckSum0{ buff.data(), boost::numeric_cast<int>(buff.size()), SpecifyCheckSumPowers::Seven, 11 };
-
+void CoreTools::SpecifyCheckSumTesting::SevenTest()
+{
+    const SpecifyCheckSum sevenModElevenCheckSum0{ buffer.data(), boost::numeric_cast<int>(buffer.size()), SpecifyCheckSumPowers::Seven, 11 };
     ASSERT_RANGE(sevenModElevenCheckSum0.GetOriginalCheckSum(), 0, 9);
     ASSERT_LESS_EQUAL(0, sevenModElevenCheckSum0.GetCollisions());
+}
 
-    const SpecifyCheckSum sevenModElevenCheckSum1{ buff.data(), boost::numeric_cast<int>(buff.size()), SpecifyCheckSumPowers::Nine, 26 };
-
+void CoreTools::SpecifyCheckSumTesting::Nine0Test()
+{
+    const SpecifyCheckSum sevenModElevenCheckSum1{ buffer.data(), boost::numeric_cast<int>(buffer.size()), SpecifyCheckSumPowers::Nine, 26 };
     ASSERT_RANGE(sevenModElevenCheckSum1.GetOriginalCheckSum(), -25, 25);
     ASSERT_LESS_EQUAL(0, sevenModElevenCheckSum1.GetCollisions());
+}
 
-    const SpecifyCheckSum sevenModElevenCheckSum2{ buff.data(), boost::numeric_cast<int>(buff.size()), SpecifyCheckSumPowers::Nine, 10 };
-
+void CoreTools::SpecifyCheckSumTesting::Nine1Test()
+{
+    const SpecifyCheckSum sevenModElevenCheckSum2{ buffer.data(), boost::numeric_cast<int>(buffer.size()), SpecifyCheckSumPowers::Nine, 10 };
     ASSERT_RANGE(sevenModElevenCheckSum2.GetOriginalCheckSum(), -9, 9);
     ASSERT_LESS_EQUAL(0, sevenModElevenCheckSum2.GetCollisions());
 }

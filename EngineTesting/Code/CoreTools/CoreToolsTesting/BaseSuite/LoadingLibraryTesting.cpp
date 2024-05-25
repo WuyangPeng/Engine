@@ -16,6 +16,11 @@
 
 using namespace std::literals;
 
+namespace CoreTools
+{
+    const auto kernel32Dll = SYSTEM_TEXT("Kernel32.dll"s);
+}
+
 CoreTools::LoadingLibraryTesting::LoadingLibraryTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -58,8 +63,6 @@ void CoreTools::LoadingLibraryTesting::LoadingErrorDllTest()
 
 void CoreTools::LoadingLibraryTesting::GetProcessAddressTest()
 {
-    const auto kernel32Dll = SYSTEM_TEXT("Kernel32.dll"s);
-
     LoadingLibrary library{ kernel32Dll, System::LoadLibraryType::NoFlags };
 
     ASSERT_UNEQUAL_NULL_PTR(library.GetLoadedModule());
@@ -68,8 +71,6 @@ void CoreTools::LoadingLibraryTesting::GetProcessAddressTest()
 
 void CoreTools::LoadingLibraryTesting::GetProcessAddressErrorTest()
 {
-    const auto kernel32Dll = SYSTEM_TEXT("Kernel32.dll"s);
-
     LoadingLibrary library{ kernel32Dll, System::LoadLibraryType::NoFlags };
 
     ASSERT_UNEQUAL_NULL_PTR(library.GetLoadedModule());

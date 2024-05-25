@@ -1,19 +1,17 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.5 (2023/10/25 14:37)
+/// 标准：std:c++20
+/// 版本：1.0.0.9 (2024/04/24 21:26)
 
 #include "CommandArgumentTesting.h"
 #include "CoreTools/Command/CommandArgument.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using namespace std::literals;
 
 CoreTools::CommandArgumentTesting::CommandArgumentTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -30,8 +28,10 @@ void CoreTools::CommandArgumentTesting::DoRunUnitTest()
 
 void CoreTools::CommandArgumentTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(NumberTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(StringTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(Number0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Number1Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(String0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(String1Test);
     ASSERT_NOT_THROW_EXCEPTION_0(NoValueTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CopyTest);
     ASSERT_THROW_EXCEPTION_0(NumberExceptionTest);
@@ -39,64 +39,71 @@ void CoreTools::CommandArgumentTesting::MainTest()
     ASSERT_THROW_EXCEPTION_0(NoValueExceptionTest);
 }
 
-void CoreTools::CommandArgumentTesting::NumberTest()
+void CoreTools::CommandArgumentTesting::IsUsedTest(CommandArgument& commandArgument0)
 {
-    CommandArgument commandArgument0{ 5, "Number"s, "1"s };
-
-    ASSERT_EQUAL(commandArgument0.GetIndex(), 5);
-    ASSERT_EQUAL(commandArgument0.GetName(), "Number"s);
-    ASSERT_EQUAL(commandArgument0.GetInteger(), 1);
-    ASSERT_APPROXIMATE(commandArgument0.GetFloat(), 1.0f, 1e-8f);
-    ASSERT_APPROXIMATE(commandArgument0.GetDouble(), 1.0, 1e-10);
-
-    ASSERT_TRUE(commandArgument0.IsInteger());
-    ASSERT_TRUE(commandArgument0.IsFloat());
-    ASSERT_TRUE(commandArgument0.IsDouble());
-    ASSERT_FALSE(commandArgument0.IsString());
-    ASSERT_FALSE(commandArgument0.IsNoValue());
-
     ASSERT_FALSE(commandArgument0.IsUsed());
 
     commandArgument0.SetUsed();
 
     ASSERT_TRUE(commandArgument0.IsUsed());
-
-    const CommandArgument commandArgument1{ 5, "number"s, "2"s };
-
-    ASSERT_EQUAL(commandArgument1.GetName(), "number"s);
 }
 
-void CoreTools::CommandArgumentTesting::StringTest()
+void CoreTools::CommandArgumentTesting::Number0Test()
 {
-    CommandArgument commandArgument0{ 2, "String"s, "Test"s };
+    CommandArgument commandArgument{ 5, "Number", "1" };
 
-    ASSERT_EQUAL(commandArgument0.GetIndex(), 2);
-    ASSERT_EQUAL(commandArgument0.GetName(), "String"s);
-    ASSERT_EQUAL(commandArgument0.GetString(), "Test"s);
+    ASSERT_EQUAL(commandArgument.GetIndex(), 5);
+    ASSERT_EQUAL(commandArgument.GetName(), "Number");
+    ASSERT_EQUAL(commandArgument.GetInteger(), 1);
+    ASSERT_APPROXIMATE(commandArgument.GetFloat(), 1.0f, 1e-8f);
+    ASSERT_APPROXIMATE(commandArgument.GetDouble(), 1.0, 1e-10);
 
-    ASSERT_FALSE(commandArgument0.IsInteger());
-    ASSERT_FALSE(commandArgument0.IsFloat());
-    ASSERT_FALSE(commandArgument0.IsDouble());
-    ASSERT_TRUE(commandArgument0.IsString());
-    ASSERT_FALSE(commandArgument0.IsNoValue());
+    ASSERT_TRUE(commandArgument.IsInteger());
+    ASSERT_TRUE(commandArgument.IsFloat());
+    ASSERT_TRUE(commandArgument.IsDouble());
+    ASSERT_FALSE(commandArgument.IsString());
+    ASSERT_FALSE(commandArgument.IsNoValue());
 
-    ASSERT_FALSE(commandArgument0.IsUsed());
+    ASSERT_NOT_THROW_EXCEPTION_1(IsUsedTest, commandArgument);
+}
 
-    commandArgument0.SetUsed();
+void CoreTools::CommandArgumentTesting::Number1Test()
+{
+    const CommandArgument commandArgument{ 5, "number", "2" };
 
-    ASSERT_TRUE(commandArgument0.IsUsed());
+    ASSERT_EQUAL(commandArgument.GetName(), "number");
+}
 
-    const CommandArgument commandArgument1{ 2, "string"s, "test"s };
+void CoreTools::CommandArgumentTesting::String0Test()
+{
+    CommandArgument commandArgument{ 2, "String", "Test" };
 
-    ASSERT_EQUAL(commandArgument1.GetName(), "string"s);
+    ASSERT_EQUAL(commandArgument.GetIndex(), 2);
+    ASSERT_EQUAL(commandArgument.GetName(), "String");
+    ASSERT_EQUAL(commandArgument.GetString(), "Test");
+
+    ASSERT_FALSE(commandArgument.IsInteger());
+    ASSERT_FALSE(commandArgument.IsFloat());
+    ASSERT_FALSE(commandArgument.IsDouble());
+    ASSERT_TRUE(commandArgument.IsString());
+    ASSERT_FALSE(commandArgument.IsNoValue());
+
+    ASSERT_NOT_THROW_EXCEPTION_1(IsUsedTest, commandArgument);
+}
+
+void CoreTools::CommandArgumentTesting::String1Test()
+{
+    const CommandArgument commandArgument{ 2, "string", "test" };
+
+    ASSERT_EQUAL(commandArgument.GetName(), "string");
 }
 
 void CoreTools::CommandArgumentTesting::NoValueTest()
 {
-    CommandArgument commandArgument{ 2, "NoValue"s };
+    CommandArgument commandArgument{ 2, "NoValue" };
 
     ASSERT_EQUAL(commandArgument.GetIndex(), 2);
-    ASSERT_EQUAL(commandArgument.GetName(), "NoValue"s);
+    ASSERT_EQUAL(commandArgument.GetName(), "NoValue");
 
     ASSERT_FALSE(commandArgument.IsInteger());
     ASSERT_FALSE(commandArgument.IsFloat());
@@ -104,46 +111,42 @@ void CoreTools::CommandArgumentTesting::NoValueTest()
     ASSERT_FALSE(commandArgument.IsString());
     ASSERT_TRUE(commandArgument.IsNoValue());
 
-    ASSERT_FALSE(commandArgument.IsUsed());
-
-    commandArgument.SetUsed();
-
-    ASSERT_TRUE(commandArgument.IsUsed());
+    ASSERT_NOT_THROW_EXCEPTION_1(IsUsedTest, commandArgument);
 }
 
 void CoreTools::CommandArgumentTesting::CopyTest()
 {
-    const CommandArgument commandArgument0{ 5, "Number"s, "Test"s };
+    const CommandArgument commandArgument0{ 5, "Number", "Test" };
 
     auto commandArgument1 = commandArgument0;
 
     ASSERT_EQUAL(commandArgument1.GetIndex(), 5);
-    ASSERT_EQUAL(commandArgument1.GetName(), "Number"s);
-    ASSERT_EQUAL(commandArgument1.GetString(), "Test"s);
+    ASSERT_EQUAL(commandArgument1.GetName(), "Number");
+    ASSERT_EQUAL(commandArgument1.GetString(), "Test");
 
     commandArgument1.AddEndArgumentValue("Test");
 
-    ASSERT_EQUAL(commandArgument1.GetString(), "Test Test"s);
-    ASSERT_EQUAL(commandArgument0.GetString(), "Test"s);
+    ASSERT_EQUAL(commandArgument1.GetString(), "Test Test");
+    ASSERT_EQUAL(commandArgument0.GetString(), "Test");
 }
 
 void CoreTools::CommandArgumentTesting::NumberExceptionTest()
 {
-    const CommandArgument commandArgument{ 5, "Number"s, "1"s };
+    const CommandArgument commandArgument{ 5, "Number", "1" };
 
-    MAYBE_UNUSED auto value = commandArgument.GetString();
+    std::ignore = commandArgument.GetString();
 }
 
 void CoreTools::CommandArgumentTesting::StringExceptionTest()
 {
-    const CommandArgument commandArgument{ 5, "String"s, "Test"s };
+    const CommandArgument commandArgument{ 5, "String", "Test" };
 
-    MAYBE_UNUSED const auto value = commandArgument.GetFloat();
+    std::ignore = commandArgument.GetFloat();
 }
 
 void CoreTools::CommandArgumentTesting::NoValueExceptionTest()
 {
-    const CommandArgument commandArgument{ 5, "NoValue"s };
+    const CommandArgument commandArgument{ 5, "NoValue" };
 
-    MAYBE_UNUSED const auto value = commandArgument.GetInteger();
+    std::ignore = commandArgument.GetInteger();
 }

@@ -14,14 +14,14 @@
 
 #include <memory>
 
-    namespace CoreTools
+namespace CoreTools
 {
     class Impl final
     {
     public:
         using ClassType = Impl;
-
         using FactoryType = ClassType;
+
         using ImplSharedPtr = std::shared_ptr<ClassType>;
 
     public:

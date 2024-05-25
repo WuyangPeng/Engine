@@ -10,6 +10,8 @@
 #ifndef CORE_TOOLS_HELPER_SUITE_DEFAULT_TESTING_NO_OBJECT_PTR_TESTING_H
 #define CORE_TOOLS_HELPER_SUITE_DEFAULT_TESTING_NO_OBJECT_PTR_TESTING_H
 
+#include "CoreTools/CoreToolsTesting/HelperSuite/Detail/DefaultTestingNoObjectPtr.h"
+#include "CoreTools/ObjectSystems/ConstObjectAssociated.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,6 +28,10 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using ConstObjectAssociated = ConstObjectAssociated<DefaultTestingNoObjectPtr>;
+        static constexpr auto bufferSize = 256;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
@@ -33,9 +39,6 @@ namespace CoreTools
         void LoadStreamTest();
         void LinkStreamTest();
         void GetStreamingSizeTest();
-
-    private:
-        static constexpr auto bufferSize = 256;
     };
 }
 

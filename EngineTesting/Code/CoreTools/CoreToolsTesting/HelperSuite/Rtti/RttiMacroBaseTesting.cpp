@@ -34,10 +34,19 @@ void CoreTools::RttiMacroBaseTesting::MainTest()
 
 void CoreTools::RttiMacroBaseTesting::RttiTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(GetRttiTypeTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetCurrentRttiTypeTest);
+}
+
+void CoreTools::RttiMacroBaseTesting::GetRttiTypeTest()
+{
     ASSERT_EQUAL(GetBaseRttiName(), GetRttiType().GetName());
     ASSERT_TRUE(GetRttiType().IsExactly(ClassType::GetRttiType()));
     ASSERT_TRUE(GetRttiType().IsDerived(ClassType::GetRttiType()));
+}
 
+void CoreTools::RttiMacroBaseTesting::GetCurrentRttiTypeTest()
+{
     ASSERT_EQUAL(GetBaseRttiName(), GetCurrentRttiType().GetName());
     ASSERT_TRUE(GetCurrentRttiType().IsExactly(ClassType::GetRttiType()));
     ASSERT_TRUE(GetCurrentRttiType().IsDerived(ClassType::GetRttiType()));

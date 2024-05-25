@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/18 21:57)
+/// 版本：1.0.0.9 (2024/05/10 20:24)
 
 #include "AppenderTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
@@ -13,7 +13,7 @@
 #include "CoreTools/FileManager/DeleteFileTools.h"
 #include "CoreTools/FileManager/IFileStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/LogManager/Appender.h"
 #include "CoreTools/LogManager/LogMessage.h"
 #include "CoreTools/Time/CustomTime.h"
@@ -73,34 +73,30 @@ void CoreTools::AppenderTesting::ConsoleTest()
 {
     Appender appender{ AppenderPrint::All, LogLevel::Trace };
 
+    ASSERT_NOT_THROW_EXCEPTION_1(ConsoleAppenderTypeTest, appender);
+    ASSERT_NOT_THROW_EXCEPTION_1(ConsoleWriteMessageTest, appender);
+    ASSERT_NOT_THROW_EXCEPTION_1(ConsoleBaseTest, appender);
+}
+
+void CoreTools::AppenderTesting::ConsoleAppenderTypeTest(const Appender& appender)
+{
     ASSERT_EQUAL(appender.GetFlags(), AppenderPrint::All);
     ASSERT_EQUAL(appender.GetLogLevel(), LogLevel::Trace);
     ASSERT_EQUAL(appender.GetAppenderType(), AppenderType::Console);
+}
 
-    LogMessage traceMessage{ LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    traceMessage << gConsoleTraceMessage;
-    appender.Write(traceMessage);
+void CoreTools::AppenderTesting::ConsoleWriteMessageTest(const Appender& appender)
+{
+    WriteMessageTest(appender, LogLevel::Trace, LogFilter::CoreTools, gConsoleTraceMessage);
+    WriteMessageTest(appender, LogLevel::Debug, LogFilter::Framework, gConsoleDebugMessage);
+    WriteMessageTest(appender, LogLevel::Info, LogFilter::Mathematics, gConsoleInfoMessage);
+    WriteMessageTest(appender, LogLevel::Warn, LogFilter::Rendering, gConsoleWarnMessage);
+    WriteMessageTest(appender, LogLevel::Error, LogFilter::Physics, gConsoleErrorMessage);
+    WriteMessageTest(appender, LogLevel::Fatal, LogFilter::System, gConsoleFatalMessage);
+}
 
-    LogMessage debugMessage{ LogLevel::Debug, LogFilter::Framework, CORE_TOOLS_FUNCTION_DESCRIBED };
-    debugMessage << gConsoleDebugMessage;
-    appender.Write(debugMessage);
-
-    LogMessage infoMessage{ LogLevel::Info, LogFilter::Mathematics, CORE_TOOLS_FUNCTION_DESCRIBED };
-    infoMessage << gConsoleInfoMessage;
-    appender.Write(infoMessage);
-
-    LogMessage warnMessage{ LogLevel::Warn, LogFilter::Rendering, CORE_TOOLS_FUNCTION_DESCRIBED };
-    warnMessage << gConsoleWarnMessage;
-    appender.Write(warnMessage);
-
-    LogMessage errorMessage{ LogLevel::Error, LogFilter::Physics, CORE_TOOLS_FUNCTION_DESCRIBED };
-    errorMessage << gConsoleErrorMessage;
-    appender.Write(errorMessage);
-
-    LogMessage fatalMessage{ LogLevel::Fatal, LogFilter::System, CORE_TOOLS_FUNCTION_DESCRIBED };
-    fatalMessage << gConsoleFatalMessage;
-    appender.Write(fatalMessage);
-
+void CoreTools::AppenderTesting::ConsoleBaseTest(Appender& appender)
+{
     ASSERT_TRUE(appender.GetDirectory().empty());
     ASSERT_TRUE(appender.GetExtensionName().empty());
     ASSERT_EQUAL(appender.GetMaxFileSize(), 0);
@@ -109,6 +105,13 @@ void CoreTools::AppenderTesting::ConsoleTest()
     ASSERT_TRUE(appender.IsDefault());
     appender.SetIsDefault(false);
     ASSERT_FALSE(appender.IsDefault());
+}
+
+void CoreTools::AppenderTesting::WriteMessageTest(const Appender& appender, LogLevel logLevel, LogFilter logFilter, const String& message)
+{
+    LogMessage logMessage{ logLevel, logFilter, CORE_TOOLS_FUNCTION_DESCRIBED };
+    logMessage << message;
+    appender.Write(logMessage);
 }
 
 void CoreTools::AppenderTesting::FileTest()
@@ -122,37 +125,32 @@ void CoreTools::AppenderTesting::FileTest()
 
 void CoreTools::AppenderTesting::FileLogTest()
 {
-    constexpr auto maxFileSize = 100000;
     Appender appender{ gAppenderTestingPathName, gAppenderTestingFileName, AppenderPrint::All, LogLevel::Trace, maxFileSize, true, gExtensionName };
 
+    ASSERT_NOT_THROW_EXCEPTION_1(FileLogAppenderTypeTest, appender);
+    ASSERT_NOT_THROW_EXCEPTION_1(FileLogWriteMessageTest, appender);
+    ASSERT_NOT_THROW_EXCEPTION_1(FileLogBaseTest, appender);
+}
+
+void CoreTools::AppenderTesting::FileLogAppenderTypeTest(const Appender& appender)
+{
     ASSERT_EQUAL(appender.GetFlags(), AppenderPrint::All);
     ASSERT_EQUAL(appender.GetLogLevel(), LogLevel::Trace);
     ASSERT_EQUAL(appender.GetAppenderType(), AppenderType::File);
+}
 
-    LogMessage traceMessage{ LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    traceMessage << gFileTraceMessage;
-    appender.Write(traceMessage);
+void CoreTools::AppenderTesting::FileLogWriteMessageTest(const Appender& appender)
+{
+    WriteMessageTest(appender, LogLevel::Trace, LogFilter::CoreTools, gFileTraceMessage);
+    WriteMessageTest(appender, LogLevel::Debug, LogFilter::System, gFileDebugMessage);
+    WriteMessageTest(appender, LogLevel::Info, LogFilter::SoundEffect, gFileInfoMessage);
+    WriteMessageTest(appender, LogLevel::Warn, LogFilter::Physics, gFileWarnMessage);
+    WriteMessageTest(appender, LogLevel::Error, LogFilter::Rendering, gFileErrorMessage);
+    WriteMessageTest(appender, LogLevel::Fatal, LogFilter::Framework, gFileFatalMessage);
+}
 
-    LogMessage debugMessage{ LogLevel::Debug, LogFilter::System, CORE_TOOLS_FUNCTION_DESCRIBED };
-    debugMessage << gFileDebugMessage;
-    appender.Write(debugMessage);
-
-    LogMessage infoMessage{ LogLevel::Info, LogFilter::SoundEffect, CORE_TOOLS_FUNCTION_DESCRIBED };
-    infoMessage << gFileInfoMessage;
-    appender.Write(infoMessage);
-
-    LogMessage warnMessage{ LogLevel::Warn, LogFilter::Physics, CORE_TOOLS_FUNCTION_DESCRIBED };
-    warnMessage << gFileWarnMessage;
-    appender.Write(warnMessage);
-
-    LogMessage errorMessage{ LogLevel::Error, LogFilter::Rendering, CORE_TOOLS_FUNCTION_DESCRIBED };
-    errorMessage << gFileErrorMessage;
-    appender.Write(errorMessage);
-
-    LogMessage fatalMessage{ LogLevel::Fatal, LogFilter::Framework, CORE_TOOLS_FUNCTION_DESCRIBED };
-    fatalMessage << gFileFatalMessage;
-    appender.Write(fatalMessage);
-
+void CoreTools::AppenderTesting::FileLogBaseTest(Appender& appender)
+{
     ASSERT_EQUAL(appender.GetDirectory(), gAppenderTestingPathName);
     ASSERT_EQUAL(appender.GetExtensionName(), gExtensionName);
     ASSERT_EQUAL(appender.GetMaxFileSize(), maxFileSize);
@@ -190,6 +188,12 @@ void CoreTools::AppenderTesting::BackupFileTest()
 
 void CoreTools::AppenderTesting::BackupFileContentTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(BackupFileOriginalContentTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(DoBackupFileContentTest);
+}
+
+void CoreTools::AppenderTesting::BackupFileOriginalContentTest()
+{
     const IFileStreamManager fileManager{ appenderTestingFullName };
 
     const auto fileContent = fileManager.GetFileContent();
@@ -201,11 +205,15 @@ void CoreTools::AppenderTesting::BackupFileContentTest()
     ASSERT_EQUAL(fileContent.find(gFileWarnMessage), System::String::npos);
     ASSERT_EQUAL(fileContent.find(gFileErrorMessage), System::String::npos);
     ASSERT_EQUAL(fileContent.find(gFileFatalMessage), System::String::npos);
+}
 
+void CoreTools::AppenderTesting::DoBackupFileContentTest()
+{
     const IFileStreamManager backupFileManager{ backupFileName };
 
     const auto backupFileContent = backupFileManager.GetFileContent();
 
+    ASSERT_EQUAL(backupFileContent.find(gBackupMessage), System::String::npos);
     ASSERT_UNEQUAL(backupFileContent.find(gFileTraceMessage), System::String::npos);
     ASSERT_UNEQUAL(backupFileContent.find(gFileDebugMessage), System::String::npos);
     ASSERT_UNEQUAL(backupFileContent.find(gFileInfoMessage), System::String::npos);
@@ -248,37 +256,32 @@ void CoreTools::AppenderTesting::SetLogLevelTest()
 
 void CoreTools::AppenderTesting::FileConfigurationTest()
 {
-    constexpr auto maxFileSize = 100000;
     Appender appender{ gAppenderTestingPathName, AppenderPrint::All, LogLevel::Trace, maxFileSize, true, gExtensionName };
 
+    ASSERT_NOT_THROW_EXCEPTION_1(FileConfigurationAppenderTypeTest, appender);
+    ASSERT_NOT_THROW_EXCEPTION_1(FileConfigurationWriteMessageTest, appender);
+    ASSERT_NOT_THROW_EXCEPTION_1(FileConfigurationBaseTest, appender);
+}
+
+void CoreTools::AppenderTesting::FileConfigurationAppenderTypeTest(const Appender& appender)
+{
     ASSERT_EQUAL(appender.GetFlags(), AppenderPrint::All);
     ASSERT_EQUAL(appender.GetLogLevel(), LogLevel::Trace);
     ASSERT_EQUAL(appender.GetAppenderType(), AppenderType::FileConfiguration);
+}
 
-    LogMessage traceMessage{ LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    traceMessage << gFileTraceMessage;
-    appender.Write(traceMessage);
+void CoreTools::AppenderTesting::FileConfigurationWriteMessageTest(const Appender& appender)
+{
+    WriteMessageTest(appender, LogLevel::Trace, LogFilter::CoreTools, gFileTraceMessage);
+    WriteMessageTest(appender, LogLevel::Debug, LogFilter::System, gFileDebugMessage);
+    WriteMessageTest(appender, LogLevel::Info, LogFilter::SoundEffect, gFileInfoMessage);
+    WriteMessageTest(appender, LogLevel::Warn, LogFilter::Physics, gFileWarnMessage);
+    WriteMessageTest(appender, LogLevel::Error, LogFilter::Rendering, gFileErrorMessage);
+    WriteMessageTest(appender, LogLevel::Fatal, LogFilter::Framework, gFileFatalMessage);
+}
 
-    LogMessage debugMessage{ LogLevel::Debug, LogFilter::System, CORE_TOOLS_FUNCTION_DESCRIBED };
-    debugMessage << gFileDebugMessage;
-    appender.Write(debugMessage);
-
-    LogMessage infoMessage{ LogLevel::Info, LogFilter::SoundEffect, CORE_TOOLS_FUNCTION_DESCRIBED };
-    infoMessage << gFileInfoMessage;
-    appender.Write(infoMessage);
-
-    LogMessage warnMessage{ LogLevel::Warn, LogFilter::Physics, CORE_TOOLS_FUNCTION_DESCRIBED };
-    warnMessage << gFileWarnMessage;
-    appender.Write(warnMessage);
-
-    LogMessage errorMessage{ LogLevel::Error, LogFilter::Rendering, CORE_TOOLS_FUNCTION_DESCRIBED };
-    errorMessage << gFileErrorMessage;
-    appender.Write(errorMessage);
-
-    LogMessage fatalMessage{ LogLevel::Fatal, LogFilter::Framework, CORE_TOOLS_FUNCTION_DESCRIBED };
-    fatalMessage << gFileFatalMessage;
-    appender.Write(fatalMessage);
-
+void CoreTools::AppenderTesting::FileConfigurationBaseTest(Appender& appender)
+{
     ASSERT_EQUAL(appender.GetDirectory(), gAppenderTestingPathName);
     ASSERT_EQUAL(appender.GetExtensionName(), gExtensionName);
     ASSERT_EQUAL(appender.GetMaxFileSize(), maxFileSize);

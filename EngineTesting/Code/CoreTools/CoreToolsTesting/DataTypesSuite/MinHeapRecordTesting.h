@@ -10,6 +10,8 @@
 #ifndef CORE_TOOLS_DATA_TYPES_SUITE_MIN_HEAP_RECORD_TESTING_H
 #define CORE_TOOLS_DATA_TYPES_SUITE_MIN_HEAP_RECORD_TESTING_H
 
+#include "Detail/VertexTest.h"
+#include "CoreTools/DataTypes/MinHeapRecord.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,12 +28,21 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using TestingType = MinHeapRecord<VertexTest, double>;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void DefaultTest();
         void MinHeapRecordTest();
         void SetMinHeapRecordTest();
+
+        void IndexTest(TestingType& minHeapRecord);
+        void HandleZeroTest(const TestingType& minHeapRecord);
+        void HandleEqualTest(TestingType& minHeapRecord);
+        void WeightTest(TestingType& minHeapRecord);
+        void RecordTest(TestingType& minHeapRecord);
     };
 }
 

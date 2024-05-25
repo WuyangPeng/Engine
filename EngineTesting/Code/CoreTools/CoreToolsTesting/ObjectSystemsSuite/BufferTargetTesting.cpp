@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/22 17:04)
+/// 版本：1.0.0.9 (2024/05/22 17:11)
 
 #include "BufferTargetTesting.h"
 #include "Detail/BoolObject.h"
@@ -13,7 +13,7 @@
 #include "Detail/IntObject.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ConstObjectAssociated.h"
@@ -24,10 +24,13 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
 
-using namespace std::literals;
-
 CoreTools::BufferTargetTesting::BufferTargetTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      boolObjectAssociated{ CreateBoolObjectAssociated() },
+      intObjectAssociated{ CreateIntObjectAssociated() },
+      objectAssociatedContainer0{ intObjectAssociated, boolObjectAssociated, boolObjectAssociated, intObjectAssociated, boolObjectAssociated },
+      objectAssociatedContainer1{ intObjectAssociated, boolObjectAssociated, boolObjectAssociated, intObjectAssociated, boolObjectAssociated, intObjectAssociated },
+      objectAssociatedContainer2{ intObjectAssociated, boolObjectAssociated, boolObjectAssociated, intObjectAssociated, boolObjectAssociated, intObjectAssociated, boolObjectAssociated }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -55,313 +58,423 @@ void CoreTools::BufferTargetTesting::MainTest()
 
 void CoreTools::BufferTargetTesting::WriteBoolTest()
 {
+    const auto fileBuffer = GetBoolFileBuffer();
+
+    BufferSource bufferSource{ fileBuffer };
+
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadBool0Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadBool1Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadBool2Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadBool3Test, bufferSource);
+}
+
+CoreTools::ConstFileBufferSharedPtr CoreTools::BufferTargetTesting::GetBoolFileBuffer()
+{
     const auto objectRegister = ObjectRegister::Create();
 
-    BufferTarget bufferTarget{ 256, objectRegister };
+    BufferTarget bufferTarget{ bufferSize, objectRegister };
 
     bufferTarget.Write(true);
 
     ASSERT_EQUAL(bufferTarget.GetBytesWritten(), GetStreamSize(true));
 
-    constexpr std::array container0{ true, false, true, false, true };
-    constexpr std::array container1{ false, false, true, false, true, true };
-    constexpr std::array container2{ true, false, true, false, false, true, true };
+    bufferTarget.WriteBoolContainerWithNumber(boolContainer0);
+    bufferTarget.WriteBoolContainerWithoutNumber(boolContainer1);
+    bufferTarget.WriteContainer(boolContainer2);
 
-    bufferTarget.WriteBoolContainerWithNumber(container0);
-    bufferTarget.WriteBoolContainerWithoutNumber(container1);
-    bufferTarget.WriteContainer(container2);
+    return bufferTarget.GetFileBuffer();
+}
 
-    const auto fileBuffer = bufferTarget.GetFileBuffer();
-
-    BufferSource bufferSource{ fileBuffer };
-
+void CoreTools::BufferTargetTesting::ReadBool0Test(BufferSource& bufferSource)
+{
     ASSERT_TRUE(bufferSource.ReadBool());
+}
 
+void CoreTools::BufferTargetTesting::ReadBool1Test(BufferSource& bufferSource)
+{
     int32_t size{};
     bufferSource.Read(size);
 
-    ASSERT_EQUAL(size, 5);
+    ASSERT_EQUAL(size, boost::numeric_cast<int>(boolSize0));
 
-    std::array<bool, container0.size()> result0{};
-    bufferSource.ReadContainer(result0);
-    ASSERT_EQUAL(container0, result0);
+    BoolContainer0 result{};
+    bufferSource.ReadContainer(result);
+    ASSERT_EQUAL(boolContainer0, result);
+}
 
-    std::array<bool, container1.size()> result1{};
-    bufferSource.ReadContainer(result1);
-    ASSERT_EQUAL(container1, result1);
+void CoreTools::BufferTargetTesting::ReadBool2Test(BufferSource& bufferSource)
+{
+    BoolContainer1 result{};
+    bufferSource.ReadContainer(result);
+    ASSERT_EQUAL(boolContainer1, result);
+}
 
-    std::array<bool, container2.size()> result2{};
-    bufferSource.ReadContainer(result2);
-    ASSERT_EQUAL(container2, result2);
+void CoreTools::BufferTargetTesting::ReadBool3Test(BufferSource& bufferSource)
+{
+    BoolContainer2 result{};
+    bufferSource.ReadContainer(result);
+    ASSERT_EQUAL(boolContainer2, result);
 }
 
 void CoreTools::BufferTargetTesting::WriteStringTest()
 {
-    const auto objectRegister = ObjectRegister::Create();
-
-    BufferTarget bufferTarget{ 512, objectRegister };
-
-    bufferTarget.Write("test1");
-    bufferTarget.Write("test2"s);
-
-    const std::array container0{ "test1"s, "test2"s, "test3"s, "test4"s, "test5"s };
-    const std::array container1{ "test1"s, "test2"s, "test3"s, "test4"s, "test5"s, "test6"s };
-    const std::array container2{ "test1"s, "test2"s, "test3"s, "test4"s, "test5"s, "test6"s, "test7"s };
-    constexpr std::array container3{ "test1", "test2", "test3", "test4", "test5", "test6", "test7" };
-
-    bufferTarget.WriteStringContainerWithNumber(container0);
-    bufferTarget.WriteStringContainerWithoutNumber(container1);
-    bufferTarget.WriteContainer(container2);
-    bufferTarget.WriteContainer(container3);
-
-    const auto fileBuffer = bufferTarget.GetFileBuffer();
+    const auto fileBuffer = GetStringFileBuffer();
 
     BufferSource bufferSource{ fileBuffer };
 
-    ASSERT_EQUAL(bufferSource.ReadString(), "test1");
-    ASSERT_EQUAL(bufferSource.ReadString(), "test2");
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadString0Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadString1Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadString2Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadString3Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadString4Test, bufferSource);
+}
 
+CoreTools::ConstFileBufferSharedPtr CoreTools::BufferTargetTesting::GetStringFileBuffer()
+{
+    const auto objectRegister = ObjectRegister::Create();
+
+    BufferTarget bufferTarget{ bufferSize, objectRegister };
+
+    bufferTarget.Write(stringTest0.c_str());
+    bufferTarget.Write(stringTest1);
+
+    bufferTarget.WriteStringContainerWithNumber(stringContainer0);
+    bufferTarget.WriteStringContainerWithoutNumber(stringContainer1);
+    bufferTarget.WriteContainer(stringContainer2);
+    bufferTarget.WriteContainer(stringContainer3);
+
+    return bufferTarget.GetFileBuffer();
+}
+
+void CoreTools::BufferTargetTesting::ReadString0Test(BufferSource& bufferSource)
+{
+    ASSERT_EQUAL(bufferSource.ReadString(), stringTest0);
+    ASSERT_EQUAL(bufferSource.ReadString(), stringTest1);
+}
+
+void CoreTools::BufferTargetTesting::ReadString1Test(BufferSource& bufferSource)
+{
     int32_t size{};
     bufferSource.Read(size);
 
-    ASSERT_EQUAL(size, 5);
+    ASSERT_EQUAL(size, boost::numeric_cast<int>(stringContainer0.size()));
 
-    std::array<std::string, container0.size()> result0{};
-    bufferSource.ReadContainer(result0);
-    ASSERT_EQUAL(container0, result0);
+    StringContainer0 result{};
+    bufferSource.ReadContainer(result);
+    ASSERT_EQUAL(stringContainer0, result);
+}
 
-    std::array<std::string, container1.size()> result1{};
-    bufferSource.ReadContainer(result1);
-    ASSERT_EQUAL(container1, result1);
+void CoreTools::BufferTargetTesting::ReadString2Test(BufferSource& bufferSource)
+{
+    StringContainer1 result{};
+    bufferSource.ReadContainer(result);
+    ASSERT_EQUAL(stringContainer1, result);
+}
 
-    std::array<std::string, container2.size()> result2{};
-    bufferSource.ReadContainer(result2);
-    ASSERT_EQUAL(container2, result2);
+void CoreTools::BufferTargetTesting::ReadString3Test(BufferSource& bufferSource)
+{
+    StringContainer2 result{};
+    bufferSource.ReadContainer(result);
+    ASSERT_EQUAL(stringContainer2, result);
+}
 
-    std::array<std::string, container3.size()> result3{};
-    bufferSource.ReadContainer(result3);
+void CoreTools::BufferTargetTesting::ReadString4Test(BufferSource& bufferSource)
+{
+    StringContainer3 result{};
+    bufferSource.ReadContainer(result);
 
-    for (auto i = 0u; i < container3.size(); ++i)
+    for (auto i = 0u; i < stringContainer3.size(); ++i)
     {
-        ASSERT_EQUAL(container3.at(i), result3.at(i));
+        ASSERT_EQUAL(stringContainer3.at(i), result.at(i));
     }
 }
 
 void CoreTools::BufferTargetTesting::WriteIntTest()
 {
-    const auto objectRegister = ObjectRegister::Create();
-
-    BufferTarget bufferTarget{ 256, objectRegister };
-
-    bufferTarget.Write(51);
-
-    constexpr std::array container0{ 1, 2, 3, 4, 5 };
-    constexpr std::array container1{ 6, 7, 8, 9, 1, 2 };
-    constexpr std::array container2{ 3, 4, 5, 6, 7, 8, 9 };
-
-    bufferTarget.WriteContainerWithNumber(container0);
-    bufferTarget.WriteContainerWithoutNumber(container1);
-    bufferTarget.WriteContainer(container2);
-
-    const auto fileBuffer = bufferTarget.GetFileBuffer();
+    const auto fileBuffer = GetIntFileBuffer();
 
     BufferSource bufferSource{ fileBuffer };
 
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadInt0Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadInt1Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadInt2Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadInt3Test, bufferSource);
+}
+
+CoreTools::ConstFileBufferSharedPtr CoreTools::BufferTargetTesting::GetIntFileBuffer()
+{
+    const auto objectRegister = ObjectRegister::Create();
+
+    BufferTarget bufferTarget{ bufferSize, objectRegister };
+
+    bufferTarget.Write(intValue);
+
+    bufferTarget.WriteContainerWithNumber(intContainer0);
+    bufferTarget.WriteContainerWithoutNumber(intContainer1);
+    bufferTarget.WriteContainer(intContainer2);
+
+    return bufferTarget.GetFileBuffer();
+}
+
+void CoreTools::BufferTargetTesting::ReadInt0Test(BufferSource& bufferSource)
+{
     int32_t result{};
     bufferSource.Read(result);
 
-    ASSERT_EQUAL(result, 51);
+    ASSERT_EQUAL(result, intValue);
+}
 
+void CoreTools::BufferTargetTesting::ReadInt1Test(BufferSource& bufferSource)
+{
     int32_t size{};
     bufferSource.Read(size);
 
-    ASSERT_EQUAL(size, 5);
+    ASSERT_EQUAL(size, boost::numeric_cast<int>(intContainer0.size()));
 
-    std::array<int, container0.size()> result0{};
-    bufferSource.ReadContainer(result0);
-    ASSERT_EQUAL(container0, result0);
+    IntContainer0 result{};
+    bufferSource.ReadContainer(result);
+    ASSERT_EQUAL(intContainer0, result);
+}
 
-    std::array<int, container1.size()> result1{};
-    bufferSource.ReadContainer(result1);
-    ASSERT_EQUAL(container1, result1);
+void CoreTools::BufferTargetTesting::ReadInt2Test(BufferSource& bufferSource)
+{
+    IntContainer1 result{};
+    bufferSource.ReadContainer(result);
+    ASSERT_EQUAL(intContainer1, result);
+}
 
-    std::array<int, container2.size()> result2{};
-    bufferSource.ReadContainer(result2);
-    ASSERT_EQUAL(container2, result2);
+void CoreTools::BufferTargetTesting::ReadInt3Test(BufferSource& bufferSource)
+{
+    IntContainer2 result{};
+    bufferSource.ReadContainer(result);
+    ASSERT_EQUAL(intContainer2, result);
 }
 
 void CoreTools::BufferTargetTesting::WriteEnumTest()
 {
-    const auto objectRegister = ObjectRegister::Create();
-
-    BufferTarget bufferTarget{ 256, objectRegister };
-
-    bufferTarget.WriteEnum(BufferTargetTestingEnum::Fifteen);
-
-    constexpr std::array container0{ BufferTargetTestingEnum::Fifteen, BufferTargetTestingEnum::Ten, BufferTargetTestingEnum::Fifteen, BufferTargetTestingEnum::Ten, BufferTargetTestingEnum::Fifteen };
-    constexpr std::array container1{ BufferTargetTestingEnum::Fifteen, BufferTargetTestingEnum::Ten, BufferTargetTestingEnum::Fifteen };
-    constexpr std::array container2{ BufferTargetTestingEnum::Fifteen, BufferTargetTestingEnum::Ten, BufferTargetTestingEnum::Ten, BufferTargetTestingEnum::Ten };
-
-    bufferTarget.WriteEnumContainerWithNumber(container0);
-    bufferTarget.WriteEnumContainerWithoutNumber(container1);
-    bufferTarget.WriteEnumContainer(container2);
-
-    const auto fileBuffer = bufferTarget.GetFileBuffer();
+    const auto fileBuffer = GetEnumFileBuffer();
 
     BufferSource bufferSource{ fileBuffer };
 
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadEnum0Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadEnum1Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadEnum2Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadEnum3Test, bufferSource);
+}
+
+CoreTools::ConstFileBufferSharedPtr CoreTools::BufferTargetTesting::GetEnumFileBuffer()
+{
+    const auto objectRegister = ObjectRegister::Create();
+
+    BufferTarget bufferTarget{ bufferSize, objectRegister };
+
+    bufferTarget.WriteEnum(enumValue);
+
+    bufferTarget.WriteEnumContainerWithNumber(enumContainer0);
+    bufferTarget.WriteEnumContainerWithoutNumber(enumContainer1);
+    bufferTarget.WriteEnumContainer(enumContainer2);
+
+    return bufferTarget.GetFileBuffer();
+}
+
+void CoreTools::BufferTargetTesting::ReadEnum0Test(BufferSource& bufferSource)
+{
     BufferTargetTestingEnum result{};
     bufferSource.ReadEnum(result);
 
-    ASSERT_EQUAL(result, BufferTargetTestingEnum::Fifteen);
+    ASSERT_EQUAL(result, enumValue);
+}
 
+void CoreTools::BufferTargetTesting::ReadEnum1Test(BufferSource& bufferSource)
+{
     int32_t size{};
     bufferSource.Read(size);
 
-    ASSERT_EQUAL(size, 5);
+    ASSERT_EQUAL(size, boost::numeric_cast<int>(enumContainer0.size()));
 
-    std::array<BufferTargetTestingEnum, container0.size()> result0{};
-    bufferSource.ReadEnumContainer(result0);
-    ASSERT_EQUAL(container0, result0);
+    EnumContainer0 result{};
+    bufferSource.ReadEnumContainer(result);
+    ASSERT_EQUAL(enumContainer0, result);
+}
 
-    std::array<BufferTargetTestingEnum, container1.size()> result1{};
-    bufferSource.ReadEnumContainer(result1);
-    ASSERT_EQUAL(container1, result1);
+void CoreTools::BufferTargetTesting::ReadEnum2Test(BufferSource& bufferSource)
+{
+    EnumContainer1 result{};
+    bufferSource.ReadEnumContainer(result);
+    ASSERT_EQUAL(enumContainer1, result);
+}
 
-    std::array<BufferTargetTestingEnum, container2.size()> result2{};
-    bufferSource.ReadEnumContainer(result2);
-    ASSERT_EQUAL(container2, result2);
+void CoreTools::BufferTargetTesting::ReadEnum3Test(BufferSource& bufferSource)
+{
+    EnumContainer2 result{};
+    bufferSource.ReadEnumContainer(result);
+    ASSERT_EQUAL(enumContainer2, result);
 }
 
 void CoreTools::BufferTargetTesting::WriteAggregateTest()
 {
-    const auto objectRegister = ObjectRegister::Create();
-
-    BufferTarget bufferTarget{ 512, objectRegister };
-
-    constexpr Mathematics::Vector4D color{ 1.0, 2.0, 3.0, 4.0 };
-
-    bufferTarget.WriteAggregate(color);
-
-    constexpr std::array container0{ Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
-                                     Mathematics::Vector4D{ 5.0, 6.0, 7.0, 8.0 },
-                                     Mathematics::Vector4D{ 9.0, 1.0, 2.0, 3.0 },
-                                     Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 },
-                                     Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 } };
-    constexpr std::array container1{ Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 },
-                                     Mathematics::Vector4D{ 5.0, 6.0, 7.0, 8.0 } };
-    constexpr std::array container2{ Mathematics::Vector4D{ 9.0, 1.0, 2.0, 3.0 },
-                                     Mathematics::Vector4D{ 4.0, 5.0, 6.0, 7.0 },
-                                     Mathematics::Vector4D{ 1.0, 2.0, 3.0, 4.0 } };
-
-    bufferTarget.WriteAggregateContainerWithNumber(container0);
-    bufferTarget.WriteAggregateContainerWithoutNumber(container1);
-    bufferTarget.WriteAggregateContainer(container2);
-
-    const auto fileBuffer = bufferTarget.GetFileBuffer();
+    const auto fileBuffer = GetAggregateFileBuffer();
 
     BufferSource bufferSource{ fileBuffer };
 
-    Mathematics::Vector4D result{};
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadAggregate0Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadAggregate1Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadAggregate2Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadAggregate3Test, bufferSource);
+}
+
+CoreTools::ConstFileBufferSharedPtr CoreTools::BufferTargetTesting::GetAggregateFileBuffer()
+{
+    const auto objectRegister = ObjectRegister::Create();
+
+    BufferTarget bufferTarget{ bufferSize, objectRegister };
+
+    bufferTarget.WriteAggregate(color);
+    bufferTarget.WriteAggregateContainerWithNumber(aggregateContainer0);
+    bufferTarget.WriteAggregateContainerWithoutNumber(aggregateContainer1);
+    bufferTarget.WriteAggregateContainer(aggregateContainer2);
+
+    return bufferTarget.GetFileBuffer();
+}
+
+void CoreTools::BufferTargetTesting::ReadAggregate0Test(BufferSource& bufferSource)
+{
+    Vector4D result{};
     bufferSource.ReadAggregate(result);
 
-    ASSERT_APPROXIMATE_USE_FUNCTION(Mathematics::Vector4ToolsD::Approximate, result, color, Mathematics::MathD::GetZeroTolerance());
+    ASSERT_APPROXIMATE_USE_FUNCTION(Vector4ToolsD::Approximate, result, color, zeroTolerance);
+}
 
+void CoreTools::BufferTargetTesting::ReadAggregate1Test(BufferSource& bufferSource)
+{
     int32_t size{};
     bufferSource.Read(size);
 
-    ASSERT_EQUAL(size, 5);
+    ASSERT_EQUAL(size, boost::numeric_cast<int>(aggregateContainer0.size()));
 
-    std::array<Mathematics::Vector4D, container0.size()> result0{};
-    bufferSource.ReadAggregateContainer(result0);
-    for (auto i = 0u; i < container0.size(); ++i)
+    AggregateContainer0 result{};
+    bufferSource.ReadAggregateContainer(result);
+    for (auto i = 0u; i < aggregateContainer0.size(); ++i)
     {
-        ASSERT_APPROXIMATE_USE_FUNCTION(Mathematics::Vector4ToolsD::Approximate, container0.at(i), result0.at(i), Mathematics::MathD::GetZeroTolerance());
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector4ToolsD::Approximate, aggregateContainer0.at(i), result.at(i), zeroTolerance);
     }
+}
 
-    std::array<Mathematics::Vector4D, container1.size()> result1{};
-    bufferSource.ReadAggregateContainer(result1);
-    for (auto i = 0u; i < container1.size(); ++i)
+void CoreTools::BufferTargetTesting::ReadAggregate2Test(BufferSource& bufferSource)
+{
+    AggregateContainer1 result{};
+    bufferSource.ReadAggregateContainer(result);
+    for (auto i = 0u; i < aggregateContainer1.size(); ++i)
     {
-        ASSERT_APPROXIMATE_USE_FUNCTION(Mathematics::Vector4ToolsD::Approximate, container1.at(i), result1.at(i), Mathematics::MathD::GetZeroTolerance());
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector4ToolsD::Approximate, aggregateContainer1.at(i), result.at(i), zeroTolerance);
     }
+}
 
-    std::array<Mathematics::Vector4D, container2.size()> result2{};
-    bufferSource.ReadAggregateContainer(result2);
-    for (auto i = 0u; i < container2.size(); ++i)
+void CoreTools::BufferTargetTesting::ReadAggregate3Test(BufferSource& bufferSource)
+{
+    AggregateContainer2 result{};
+    bufferSource.ReadAggregateContainer(result);
+    for (auto i = 0u; i < aggregateContainer2.size(); ++i)
     {
-        ASSERT_APPROXIMATE_USE_FUNCTION(Mathematics::Vector4ToolsD::Approximate, container2.at(i), result2.at(i), Mathematics::MathD::GetZeroTolerance());
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector4ToolsD::Approximate, aggregateContainer2.at(i), result.at(i), zeroTolerance);
     }
 }
 
 void CoreTools::BufferTargetTesting::WriteObjectAssociatedTest()
 {
+    const auto fileBuffer = GetObjectAssociatedFileBuffer();
+
+    BufferSource bufferSource{ fileBuffer };
+
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadObjectAssociated0Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadObjectAssociated1Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadObjectAssociated2Test, bufferSource);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReadObjectAssociated3Test, bufferSource);
+}
+
+CoreTools::ConstObjectInterfaceAssociated CoreTools::BufferTargetTesting::CreateBoolObjectAssociated()
+{
+    const auto boolObject = std::make_shared<BoolObject>(DisableNotThrow::Disable);
+    boolObject->SetUniqueId(uniqueId0);
+
+    return ConstObjectInterfaceAssociated{ boolObject };
+}
+
+CoreTools::ConstObjectInterfaceAssociated CoreTools::BufferTargetTesting::CreateIntObjectAssociated()
+{
+    const auto intObject = std::make_shared<IntObject>(DisableNotThrow::Disable);
+    intObject->SetUniqueId(uniqueId1);
+
+    return ConstObjectInterfaceAssociated{ intObject };
+}
+
+CoreTools::ConstFileBufferSharedPtr CoreTools::BufferTargetTesting::GetObjectAssociatedFileBuffer() const
+{
     const auto objectRegister = ObjectRegister::Create();
 
-    BufferTarget bufferTarget{ 256, objectRegister };
+    BufferTarget bufferTarget{ bufferSize, objectRegister };
 
-    const auto boolObject = std::make_shared<BoolObject>(DisableNotThrow::Disable);
-    boolObject->SetUniqueId(1);
-    const ConstObjectInterfaceAssociated boolObjectAssociated{ boolObject };
-
-    const auto intObject = std::make_shared<IntObject>(DisableNotThrow::Disable);
-    intObject->SetUniqueId(2);
-    const ConstObjectInterfaceAssociated intObjectAssociated{ intObject };
-    const ConstWeakObjectAssociated<ObjectInterface> intWeakObjectAssociated{ intObject };
+    const ConstWeakObjectAssociated<ObjectInterface> intWeakObjectAssociated{ intObjectAssociated.object };
 
     objectRegister->Register(boolObjectAssociated);
     objectRegister->Register(intObjectAssociated);
 
-    bufferTarget.WriteUniqueId(intObject);
+    bufferTarget.WriteUniqueId(intObjectAssociated.object);
     bufferTarget.WriteObjectAssociated(boolObjectAssociated);
     bufferTarget.WriteWeakObjectAssociated(intWeakObjectAssociated);
 
-    const std::array container0{ intObjectAssociated, boolObjectAssociated, boolObjectAssociated, intObjectAssociated, boolObjectAssociated };
-    const std::array container1{ intObjectAssociated, boolObjectAssociated, boolObjectAssociated, intObjectAssociated, boolObjectAssociated, intObjectAssociated };
-    const std::array container2{ intObjectAssociated, boolObjectAssociated, boolObjectAssociated, intObjectAssociated, boolObjectAssociated, intObjectAssociated, boolObjectAssociated };
+    bufferTarget.WriteObjectAssociatedContainerWithNumber(objectAssociatedContainer0);
+    bufferTarget.WriteObjectAssociatedContainerWithoutNumber(objectAssociatedContainer1);
+    bufferTarget.WriteObjectAssociatedContainer(objectAssociatedContainer2);
 
-    bufferTarget.WriteObjectAssociatedContainerWithNumber(container0);
-    bufferTarget.WriteObjectAssociatedContainerWithoutNumber(container1);
-    bufferTarget.WriteObjectAssociatedContainer(container2);
+    return bufferTarget.GetFileBuffer();
+}
 
-    const auto fileBuffer = bufferTarget.GetFileBuffer();
-
-    BufferSource bufferSource{ fileBuffer };
-
+void CoreTools::BufferTargetTesting::ReadObjectAssociated0Test(BufferSource& bufferSource)
+{
     int64_t result{};
 
     bufferSource.Read(result);
-    ASSERT_EQUAL(result, 2);
+    ASSERT_EQUAL(result, uniqueId1);
 
     bufferSource.Read(result);
-    ASSERT_EQUAL(result, 1);
+    ASSERT_EQUAL(result, uniqueId0);
 
     bufferSource.Read(result);
-    ASSERT_EQUAL(result, 2);
+    ASSERT_EQUAL(result, uniqueId1);
+}
 
+void CoreTools::BufferTargetTesting::ReadObjectAssociated1Test(BufferSource& bufferSource)
+{
     int32_t size{};
     bufferSource.Read(size);
 
-    ASSERT_EQUAL(size, 5);
+    ASSERT_EQUAL(size, boost::numeric_cast<int>(objectAssociatedContainer0.size()));
 
-    std::array<int64_t, container0.size()> result0{};
-    bufferSource.ReadContainer(result0);
-    for (auto i = 0u; i < container0.size(); ++i)
+    ObjectAssociatedInt64Container0 result{};
+    bufferSource.ReadContainer(result);
+    for (auto i = 0u; i < objectAssociatedContainer0.size(); ++i)
     {
-        ASSERT_EQUAL(container0.at(i).object->GetUniqueId(), result0.at(i));
+        ASSERT_EQUAL(objectAssociatedContainer0.at(i).object->GetUniqueId(), result.at(i));
     }
+}
 
-    std::array<int64_t, container1.size()> result1{};
-    bufferSource.ReadContainer(result1);
-    for (auto i = 0u; i < container1.size(); ++i)
+void CoreTools::BufferTargetTesting::ReadObjectAssociated2Test(BufferSource& bufferSource)
+{
+    ObjectAssociatedInt64Container1 result{};
+    bufferSource.ReadContainer(result);
+    for (auto i = 0u; i < objectAssociatedContainer1.size(); ++i)
     {
-        ASSERT_EQUAL(container1.at(i).object->GetUniqueId(), result1.at(i));
+        ASSERT_EQUAL(objectAssociatedContainer1.at(i).object->GetUniqueId(), result.at(i));
     }
+}
 
-    std::array<int64_t, container2.size()> result2{};
-    bufferSource.ReadContainer(result2);
-    for (auto i = 0u; i < container2.size(); ++i)
+void CoreTools::BufferTargetTesting::ReadObjectAssociated3Test(BufferSource& bufferSource)
+{
+    ObjectAssociatedInt64Container2 result{};
+    bufferSource.ReadContainer(result);
+    for (auto i = 0u; i < objectAssociatedContainer2.size(); ++i)
     {
-        ASSERT_EQUAL(container2.at(i).object->GetUniqueId(), result2.at(i));
+        ASSERT_EQUAL(objectAssociatedContainer2.at(i).object->GetUniqueId(), result.at(i));
     }
 }

@@ -61,24 +61,20 @@ void CoreTools::ExportMacroTesting::ExportSharedPtrMacroTest()
     std::ignore = ExportTest::ExportSharedPtrMacro::Create();
 }
 
-void CoreTools::ExportMacroTesting::ExportUniquePtrMacroTest()  
+void CoreTools::ExportMacroTesting::ExportUniquePtrMacroTest()
 {
     std::ignore = std::make_unique<ExportTest::ExportUniquePtrMacro>();
 }
 
 void CoreTools::ExportMacroTesting::ExportSharedImplMacroSharedTest()
 {
-    constexpr auto count = 10;
     ExportTest::ExportSharedImplMacroShared lhsMacro{ count };
 
     const auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
+    CountTest(lhsMacro, rhsMacro, count, count);
 
     lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
+    CountTest(lhsMacro, rhsMacro, 0, 0);
 }
 
 void CoreTools::ExportMacroTesting::ExportNonCopyImplMacroTest()
@@ -88,17 +84,15 @@ void CoreTools::ExportMacroTesting::ExportNonCopyImplMacroTest()
 
 void CoreTools::ExportMacroTesting::ExportPerformanceUnsharedImplMacroTest()
 {
-    constexpr auto count = 10;
     const ExportTest::ExportPerformanceUnsharedImplMacro original{ count };
 
     const auto copy = original;
 
-    ASSERT_EQUAL(copy.GetCount(), count);
+    CountTest(original, copy, count, count);
 }
 
 void CoreTools::ExportMacroTesting::ExportImplMacroTest()
 {
-    constexpr auto count = 10;
     const ExportImplMacro macro{ count };
 
     ASSERT_EQUAL(macro.GetCount(), count);
@@ -106,7 +100,6 @@ void CoreTools::ExportMacroTesting::ExportImplMacroTest()
 
 void CoreTools::ExportMacroTesting::ExportConstImplMacroTest()
 {
-    constexpr auto count = 10;
     const ExportConstImplMacro macro{ count };
 
     ASSERT_EQUAL(macro.GetCount(), count);

@@ -5,10 +5,11 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/18 22:10)
+/// 版本：1.0.0.9 (2024/05/11 14:36)
+
 #include "LogLevelManagerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/LogManager/Flags/LogManagerFlags.h"
 #include "CoreTools/LogManager/LogLevelManager.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -38,9 +39,14 @@ void CoreTools::LogLevelManagerTesting::ValidTest()
 {
     for (auto logLevel = LogLevel::Disabled; logLevel < LogLevel::MaxLogLevels; ++logLevel)
     {
-        auto describe = LogLevelManager::GetLogLevelDescribe(logLevel);
-        ASSERT_FALSE(describe.empty());
+        ASSERT_NOT_THROW_EXCEPTION_1(DoValidTest, logLevel);
     }
+}
+
+void CoreTools::LogLevelManagerTesting::DoValidTest(LogLevel logLevel)
+{
+    const auto describe = LogLevelManager::GetLogLevelDescribe(logLevel);
+    ASSERT_FALSE(describe.empty());
 }
 
 void CoreTools::LogLevelManagerTesting::GetLogLevelTest()

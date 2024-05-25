@@ -5,23 +5,21 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 16:11)
+/// 版本：1.0.0.9 (2024/04/28 21:52)
 
 #ifndef CORE_TOOLS_TESTING_WRITE_BUFFER_IO_TESTING_H
 #define CORE_TOOLS_TESTING_WRITE_BUFFER_IO_TESTING_H
 
-#include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "BufferIOTesting.h"
+#include "CoreTools/FileManager/FileManagerFwd.h"
 
 namespace CoreTools
 {
-    class WriteBufferIOTesting final : public UnitTest
+    class WriteBufferIOTesting final : public BufferIOTesting
     {
     public:
         using ClassType = WriteBufferIOTesting;
-        using ParentType = UnitTest;
-
-        using String = System::String;
+        using ParentType = BufferIOTesting;
 
     public:
         explicit WriteBufferIOTesting(const OStreamShared& stream);
@@ -35,10 +33,11 @@ namespace CoreTools
         void WriteBufferIOBasisTest();
         void WriteBufferIOWriteTest();
 
-        NODISCARD static std::string GetBufferIOContent();
-
-    private:
-        using BufferType = std::vector<char>;
+        void BytesTest(int bytesTotal, int bytesProcessed, const WriteBufferIO& writeBuffer);
+        void WriteTest(const std::string& content, size_t size, int bufferSize, WriteBufferIO& writeBuffer);
+        void DoReadBufferTest(const std::string& content, size_t size, CoreTools::ReadBufferIO& readBuffer);
+        void SizeTest(size_t size, ReadBufferIO& readBuffer);
+        void ReadBufferTest(const std::string& content, size_t size, ReadBufferIO& readBuffer);
     };
 }
 
