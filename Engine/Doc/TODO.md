@@ -16,3 +16,9 @@ CoreTools
     2. （TextParsing）json解析。 
 
 ---------------------------- 
+Network
+     
+    1. （Nats）完成Nats库：Nats。
+    2. （Kafka）完成Kafka库：Kafka。
+
+---------------------------- 

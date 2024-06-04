@@ -8,33 +8,9 @@ Threading Core Render Engine 1.0.0.11
 1.0.0.11（2024/06/05——2024/06/30）
 
 	完成功能： 
-	（引擎）
-	+ Network工程整理。@
-	+ 实现ParametricCurve。@
-	+ 实现ApprConvexQuadByRect。@
-	+ 实现ApprCurveByArcs。@
-	+ 实现ApprCylinder3。@	
-	+ 实现ApprEllipseByArcs。@
-	+ 实现ApprEllipsoid3。@	
-	+ 实现ApprGreatCircle3。@	
-	+ 实现ApprHeightPlane3。@
-	+ 实现ApprOrthogonalLine2。@
-	+ 实现ApprOrthogonalLine3。@
-	+ 实现ApprOrthogonalPlane3。@
-	+ 实现ApprParaboloid3。@
-	+ 实现ApprParallelLines2。@
-	+ 实现ApprPolynomial2。@
-	+ 实现ApprPolynomial3。@
-	+ 实现ApprPolynomial4。@
-	+ 实现ApprPolynomialSpecial2。@
-	+ 实现ApprPolynomialSpecial3。@
-	+ 实现ApprPolynomialSpecial4。@
-	+ 实现ApprQuadratic2。@
-	+ 实现ApprQuadratic3。@	
-	+ 实现ApprSphere3。@
-	+ 实现ApprTorus3。@
-	+ 实现Approximation。@
+	（引擎）	
 	+ linux系统通过编译。@
+	+ cocos2d-x base模块合并。 @
 	
 ----------------------------
 1.0.0.10（2024/05/26——2024/06/04）

@@ -9,67 +9,52 @@
 
 实现内容：1.  引擎实现（System库）。（完成）
 		  2.  引擎实现（CoreTools库）。（完成）
-		  3.  引擎实现（Network库）。
-		  4.  Geometric Tools GTE代码合并（Mathematics库）。 
+		  3.  Geometric Tools GTE代码合并（Mathematics库）。 
 			(1).  LowLevel。（完成）
 			(2).  Algebra。（完成）
 			(3).  Primitives。（完成）
 			(4).  Arithmetic。（完成）
-			(5).  NumericalMethods。（完成）
-			(6).  Approximation。
-			(7).  ComputationalGeometry。
-			(8).  Containment。
-			(9).  CurvesSurfacesVolumes。
-			(10). Distance。
-			(11). Imagics。
-			(12). Interpolation。
-			(13). Intersection。
-			(14). Meshes。
-			(15). Miscellaneous。			
-			(16). Physics。
-			(17). Projection。		  
+			(5).  NumericalMethods。（完成） 
+		  4.  cocos2d-x代码合并。 
+			(1).  base。 
+			(2).  EventDispatcher。 
 ----------------------------
 引擎（1.0.1.0——1.0.1.?）
 
 时间（2024/07/01——2024/12/31）
 
-实现内容：1.  Geometric Tools GTE代码合并（Graphics库）。 
-		  2.  Geometric Tools GTE代码合并（MathematicsGPU库）。 
-		  3.  Geometric Tools GTE代码合并（GraphicsGL45库）。 
-		  4.  Geometric Tools GTE代码合并（ApplicationsGL45库）。
-		  5.  Geometric Tools GTE代码合并（GraphicsDX11库）。 
-		  6.  Geometric Tools GTE代码合并（ApplicationsDX11库）。
-		  7.  Geometric Tools GTE代码合并（Samples库）。
-		  8.  Cocos2d-x代码合并。
-		  9.  引擎实现（Database库、Script库）。
+实现内容：1.  Geometric Tools GTE代码合并（Mathematics库）。 
+	      2.  Geometric Tools GTE代码合并（Graphics库）。 
+		  3.  Geometric Tools GTE代码合并（MathematicsGPU库）。 
+		  4.  Geometric Tools GTE代码合并（GraphicsGL45库）。 
+		  5.  Geometric Tools GTE代码合并（ApplicationsGL45库）。
+		  6.  Geometric Tools GTE代码合并（GraphicsDX11库）。 
+		  7.  Geometric Tools GTE代码合并（ApplicationsDX11库）。
+		  8.  Geometric Tools GTE代码合并（Samples库）。
 ----------------------------
 引擎（1.0.2.0——1.0.2.?）
 
 时间（2025/01/01——2025/06/30）
 
-实现内容：1. ogre-next代码合并。
-		  2. 引擎实现（Mathematics库、SoundEffect库、InputOutput库）。
+实现内容：1. ogre-next代码合并。  
 ----------------------------
 引擎（1.0.3.0——1.0.3.?）
 
 时间（2025/07/01——2025/12/30）
 
-实现内容：1. Geometric Tools GTL代码合并。 
-		  2. 引擎实现（ResourceManager库、Rendering库、Physics库、Imagics库）。
+实现内容：1. Geometric Tools GTL代码合并。  
 ----------------------------
 引擎（1.0.4.0——1.0.4.?）
 
 时间（2026/01/01——2026/06/30）
 
-实现内容：1. ogre代码合并。 
-		  2. 引擎实现（Animation库、Rendering库、ArtificialIntellegence库、UserInterface库）。
+实现内容：1. ogre代码合并。  
 ----------------------------
 引擎（1.0.5.0——1.0.5.?）
 
 时间（2026/07/01——2026/12/31）
 
-实现内容：1. WildMagic5代码合并。 
-		  2. 引擎实现（AssistTools库、Framework库）。
+实现内容：1. WildMagic5代码合并。  
 ----------------------------
 引擎辅助（1.1.0.0——1.1.0.?）
 
