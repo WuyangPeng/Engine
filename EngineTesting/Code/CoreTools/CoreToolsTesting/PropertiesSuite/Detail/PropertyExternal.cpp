@@ -9,6 +9,9 @@
 
 #include "PropertyExternal.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Properties/PropertyGetExternalDetail.h"
+#include "CoreTools/Properties/PropertyGetSetExternalDetail.h"
+#include "CoreTools/Properties/PropertySetExternalDetail.h"
 
 CoreTools::PropertyExternal::PropertyExternal() noexcept
     : value{}, getType{ *this }, setType{ *this }, getSetType{ *this }

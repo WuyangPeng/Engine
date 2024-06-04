@@ -5,18 +5,18 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.9 (2024/04/23 12:53)
+/// 版本：1.0.0.10 (2024/05/27 19:39)
 
 #ifndef CORE_TOOLS_PROPERTIES_SUITE_METHOD_PROPERTY_H
 #define CORE_TOOLS_PROPERTIES_SUITE_METHOD_PROPERTY_H
 
 #include "CoreTools/Helper/UserMacro.h"
-#include "CoreTools/Properties/MethodPropertyGetDetail.h"
-#include "CoreTools/Properties/MethodPropertyGetExternalDetail.h"
-#include "CoreTools/Properties/MethodPropertyGetSetDetail.h"
-#include "CoreTools/Properties/MethodPropertyGetSetExternalDetail.h"
-#include "CoreTools/Properties/MethodPropertySetDetail.h"
-#include "CoreTools/Properties/MethodPropertySetExternalDetail.h"
+#include "CoreTools/Properties/MethodPropertyGet.h"
+#include "CoreTools/Properties/MethodPropertyGetExternal.h"
+#include "CoreTools/Properties/MethodPropertyGetSet.h"
+#include "CoreTools/Properties/MethodPropertyGetSetExternal.h"
+#include "CoreTools/Properties/MethodPropertySet.h"
+#include "CoreTools/Properties/MethodPropertySetExternal.h"
 
 namespace CoreTools
 {

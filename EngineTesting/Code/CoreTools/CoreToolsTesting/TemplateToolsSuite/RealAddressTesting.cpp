@@ -35,10 +35,10 @@ void CoreTools::RealAddressTesting::MainTest()
 
 void CoreTools::RealAddressTesting::AddressTest()
 {
-    RealAddressTest volatile realAddressTest0{};
-    RealAddressTest const realAddressTest1{};
+    volatile RealAddressTest realAddressTest0{};
+    const RealAddressTest realAddressTest1{};
     RealAddressTest realAddressTest2;
-    RealAddressTestAddress const realAddressTest3{};
+    const RealAddressTestAddress realAddressTest3{};
 
     ASSERT_TRUE(&realAddressTest0 == nullptr);
     ASSERT_TRUE(&realAddressTest1 == nullptr);

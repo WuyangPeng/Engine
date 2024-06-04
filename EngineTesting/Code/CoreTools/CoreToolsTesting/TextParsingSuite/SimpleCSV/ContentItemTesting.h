@@ -26,11 +26,25 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using ContentItem = SimpleCSV::ContentItem;
+        using ContentType = SimpleCSV::ContentType;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void ContentItemTest();
         void TypeStringTest();
+
+        void DoContentItemTest(const ContentItem& item);
+        void ContentTypeTest(const ContentItem& item);
+        void WorksheetTest(const ContentItem& item);
+        void ThemeTest(const ContentItem& item);
+        void StylesTest(const ContentItem& item);
+        void SharedStringsTest(const ContentItem& item);
+        void CorePropertiesTest(const ContentItem& item);
+        void ExtendedPropertiesTest(const ContentItem& item);
+        void CustomPropertiesTest(const ContentItem& item);
     };
 }
 

@@ -5,11 +5,16 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.9 (2024/04/23 12:54)
-///	版本：0.9.1.5 (2023/10/25 14:43)
+/// 版本：1.0.0.10 (2024/05/27 19:39)
 
 #include "MethodProperty.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Properties/MethodPropertyGetDetail.h"
+#include "CoreTools/Properties/MethodPropertyGetExternalDetail.h"
+#include "CoreTools/Properties/MethodPropertyGetSetDetail.h"
+#include "CoreTools/Properties/MethodPropertyGetSetExternalDetail.h"
+#include "CoreTools/Properties/MethodPropertySetDetail.h"
+#include "CoreTools/Properties/MethodPropertySetExternalDetail.h"
 
 CoreTools::MethodProperty::MethodProperty() noexcept
     : getType{}, setType{}, getSetType{}, getExternalType{}, setExternalType{}, getSetExternalType{}, value{ 0 }

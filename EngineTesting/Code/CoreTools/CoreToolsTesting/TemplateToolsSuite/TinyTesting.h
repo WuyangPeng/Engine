@@ -29,13 +29,32 @@ namespace CoreTools
         void DoRunUnitTest() override;
         void MainTest();
 
-        void InitTest() noexcept;
+        void InitTest();
         void PushBackTest() noexcept;
         void ClearTest() noexcept;
         void PushFrontTest() noexcept;
         void EmptyTest() noexcept;
-        void IteratorTest() noexcept;
-        void EraseTest() noexcept;
+        void IteratorTest();
+        void EraseTest();
+
+        void InitSizeTest() noexcept;
+        void InitEmptyTest() noexcept;
+        void InitFrontBackTest() noexcept;
+
+        void Iterator0Test() noexcept;
+        void Iterator1Test() noexcept;
+        void Iterator2Test() noexcept;
+        void Iterator3Test() noexcept;
+        void Iterator4Test() noexcept;
+
+        void Empty0Test() noexcept;
+        void Empty1Test() noexcept;
+        void Empty2Test() noexcept;
+        void Empty3Test() noexcept;
+        void Empty4Test() noexcept;
+        void Empty5Test() noexcept;
+        void Empty6Test() noexcept;
+        void Empty7Test() noexcept;
     };
 }
 

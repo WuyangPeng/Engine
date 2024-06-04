@@ -5,11 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 17:00)
+/// 版本：1.0.0.10 (2024/06/01 14:36)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_ROW_ITERATOR_TESTING_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_ROW_ITERATOR_TESTING_H
 
+#include "CoreTools/TextParsing/SimpleCSV/Document.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,11 +27,28 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using Worksheet = SimpleCSV::Worksheet;
+        using Document = SimpleCSV::Document;
+        using Workbook = SimpleCSV::Workbook;
+        using DocumentSharedPtr = Document::DocumentSharedPtr;
+        using RowRange = SimpleCSV::RowRange;
+        using RowIterator = SimpleCSV::RowIterator;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void RowIteratorTest();
         void SuffixIteratorTest();
+
+        NODISCARD Worksheet GetWorkSheet();
+
+        void DoRowIteratorTest(RowRange& rows, RowIterator& iter);
+        void DoSuffixIteratorTest(RowRange& rows, RowIterator& iter);
+
+    private:
+        DocumentSharedPtr document;
+        Workbook workbook;
     };
 }
 

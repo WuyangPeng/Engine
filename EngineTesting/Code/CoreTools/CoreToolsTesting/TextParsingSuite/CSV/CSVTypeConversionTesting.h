@@ -36,6 +36,21 @@ namespace CoreTools
         void ValueTypeTest();
         void BaseReturnDescribeTest();
         void GetAbbreviationTest();
+
+        void GetTypeDescribe0Test();
+        void GetTypeDescribe1Test();
+        void GetDataType0Test();
+        void GetDataType1Test();
+        void GetTypeDescribe2Test();
+        void GetFormatType0Test();
+        void GetActualType0Test();
+        void GetActualType1Test();
+        void GetFunctionName0Test();
+        void GetFunctionName1Test();
+        void GetValueType0Test();
+        void GetValueType1Test();
+        void GetAbbreviation0Test();
+        void GetAbbreviation1Test();
     };
 }
 

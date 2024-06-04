@@ -73,14 +73,23 @@ void CoreTools::SuiteTesting::AddSuiteTest()
 {
     const auto suiteName = "SuiteName"s;
 
-    Suite suite0{ suiteName, GetStream(), true };
+    Suite suite{ suiteName, GetStream(), true };
 
-    suite0.AddTest(std::make_shared<FunctionDescribedTesting>(GetStream()));
+    ASSERT_NOT_THROW_EXCEPTION_1(AddSuite0Test, suite);
+    ASSERT_NOT_THROW_EXCEPTION_2(AddSuite1Test, suiteName, suite);
+}
 
-    ASSERT_EQUAL(suite0.GetPassedNumber(), 0);
-    ASSERT_EQUAL(suite0.GetFailedNumber(), 0);
-    ASSERT_EQUAL(suite0.GetErrorNumber(), 0);
+void CoreTools::SuiteTesting::AddSuite0Test(Suite& suite)
+{
+    suite.AddTest(std::make_shared<FunctionDescribedTesting>(GetStream()));
 
+    ASSERT_EQUAL(suite.GetPassedNumber(), 0);
+    ASSERT_EQUAL(suite.GetFailedNumber(), 0);
+    ASSERT_EQUAL(suite.GetErrorNumber(), 0);
+}
+
+void CoreTools::SuiteTesting::AddSuite1Test(const std::string& suiteName, Suite& suite0)
+{
     Suite suite1{ suiteName, GetStream(), true };
     suite1.AddSuite(suite0);
 

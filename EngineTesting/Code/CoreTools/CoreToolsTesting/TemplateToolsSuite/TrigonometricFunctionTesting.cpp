@@ -41,16 +41,26 @@ void CoreTools::TrigonometricFunctionTesting::RecursiveVsNonRecursiveTest()
 {
     for (auto rad = 0.0; rad < 2 * Mathematics::MathD::GetPI(); rad += 0.01)
     {
-        ASSERT_APPROXIMATE(TrigonometricFunction::RecursiveSine(rad), TrigonometricFunction::NonRecursiveSine(rad), 1e-04);
-        ASSERT_APPROXIMATE(NON_RECURSIVE_SINE(rad), TrigonometricFunction::NonRecursiveSine(rad), Mathematics::MathD::GetZeroTolerance());
+        ASSERT_NOT_THROW_EXCEPTION_1(DoRecursiveVsNonRecursiveTest, rad);
     }
+}
+
+void CoreTools::TrigonometricFunctionTesting::DoRecursiveVsNonRecursiveTest(double rad)
+{
+    ASSERT_APPROXIMATE(TrigonometricFunction::RecursiveSine(rad), TrigonometricFunction::NonRecursiveSine(rad), 1e-04);
+    ASSERT_APPROXIMATE(NON_RECURSIVE_SINE(rad), TrigonometricFunction::NonRecursiveSine(rad), Mathematics::MathD::GetZeroTolerance());
 }
 
 void CoreTools::TrigonometricFunctionTesting::NonRecursiveCorrectTest()
 {
     for (auto rad = 0.0; rad < 2 * Mathematics::MathD::GetPI(); rad += 0.01)
     {
-        ASSERT_APPROXIMATE(Mathematics::MathD::Sin(rad), TrigonometricFunction::NonRecursiveSine(rad), 1e-04);
-        ASSERT_APPROXIMATE(NON_RECURSIVE_COSINE(rad) * NON_RECURSIVE_TANGENT(rad), TrigonometricFunction::NonRecursiveSine(rad), Mathematics::MathD::GetZeroTolerance());
+        ASSERT_NOT_THROW_EXCEPTION_1(DoNonRecursiveCorrectTest, rad);
     }
+}
+
+void CoreTools::TrigonometricFunctionTesting::DoNonRecursiveCorrectTest(double rad)
+{
+    ASSERT_APPROXIMATE(Mathematics::MathD::Sin(rad), TrigonometricFunction::NonRecursiveSine(rad), 1e-04);
+    ASSERT_APPROXIMATE(NON_RECURSIVE_COSINE(rad) * NON_RECURSIVE_TANGENT(rad), TrigonometricFunction::NonRecursiveSine(rad), Mathematics::MathD::GetZeroTolerance());
 }

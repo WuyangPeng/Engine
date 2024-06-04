@@ -31,6 +31,8 @@ namespace CoreTools
 
         void RecursiveVsNonRecursiveTest();
         void NonRecursiveCorrectTest();
+        void DoRecursiveVsNonRecursiveTest(double rad);
+        void DoNonRecursiveCorrectTest(double rad);
     };
 }
 

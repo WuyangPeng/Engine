@@ -37,8 +37,10 @@ void CoreTools::ConstraintTesting::DoRunUnitTest()
 void CoreTools::ConstraintTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MustBePodTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MustBePodOrVoidTest);
     ASSERT_NOT_THROW_EXCEPTION_0(MustBeSameSizeTest);
     ASSERT_NOT_THROW_EXCEPTION_0(MustBeSubscriptableTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MustBeSubscriptableAsDecayablePointerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(MustHaveBaseTest);
 }
 
@@ -57,7 +59,10 @@ void CoreTools::ConstraintTesting::MustBePodTest() noexcept
     MAYBE_UNUSED MustBePod<ConstraintTesting> constraintTestingMustBePod{};
 
 #endif  // CONSTRAINT_COMPILE_ERROR
+}
 
+void CoreTools::ConstraintTesting::MustBePodOrVoidTest() noexcept
+{
     MAYBE_UNUSED const MustBePodOrVoid<float> floatMustBePodOrVoid{};
     MAYBE_UNUSED constexpr MustBePodOrVoid<void> voidMustBePodOrVoid{};
 
@@ -90,7 +95,10 @@ void CoreTools::ConstraintTesting::MustBeSubscriptableTest() noexcept
     MAYBE_UNUSED MustBeSubscriptable<int> integerMustBeSubscriptable{};
 
 #endif  // CONSTRAINT_COMPILE_ERROR
+}
 
+void CoreTools::ConstraintTesting::MustBeSubscriptableAsDecayablePointerTest() noexcept
+{
     MAYBE_UNUSED const MustBeSubscriptableAsDecayablePointer<std::string*> stringPtrMustBeSubscriptableAsDecayablePointer{};
 
 #ifdef CONSTRAINT_COMPILE_ERROR  // 这里应该产生编译错误。

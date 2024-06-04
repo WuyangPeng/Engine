@@ -29,7 +29,8 @@ namespace CoreTools
         void DoRunUnitTest() override;
         void MainTest();
 
-        void QuerySheetVisibilityTest();
+        void QuerySheetVisibility0Test();
+        void QuerySheetVisibility1Test();
     };
 }
 

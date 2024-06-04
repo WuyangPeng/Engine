@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 17:00)
+/// 版本：1.0.0.10 (2024/06/01 14:39)
 
 #include "RowIteratorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -21,7 +21,9 @@
 #include "Mathematics/Base/MathDetail.h"
 
 CoreTools::RowIteratorTesting::RowIteratorTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      document{ SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx") },
+      workbook{ document->GetWorkbook() }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -40,53 +42,61 @@ void CoreTools::RowIteratorTesting::MainTest()
 
 void CoreTools::RowIteratorTesting::RowIteratorTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheet = GetWorkSheet();
 
     auto rows = worksheet.GetRows();
 
     for (auto iter = rows.begin(); iter != rows.end(); ++iter)
     {
-        ASSERT_FALSE(iter.IsSame(rows.end()));
-        ASSERT_FALSE(iter == rows.end());
-
-        auto rowDataRange = iter->GetCells();
-
-        ASSERT_UNEQUAL_NULL_PTR(rowDataRange.GetDocument());
-
-        rowDataRange = (*iter).GetCells();
-
-        ASSERT_UNEQUAL_NULL_PTR(rowDataRange.GetDocument());
+        ASSERT_NOT_THROW_EXCEPTION_2(DoRowIteratorTest, rows, iter);
     }
+}
+
+void CoreTools::RowIteratorTesting::DoRowIteratorTest(RowRange& rows, RowIterator& iter)
+{
+    ASSERT_FALSE(iter.IsSame(rows.end()));
+    ASSERT_FALSE(iter == rows.end());
+
+    auto rowDataRange = iter->GetCells();
+
+    ASSERT_UNEQUAL_NULL_PTR(rowDataRange.GetDocument());
+
+    rowDataRange = (*iter).GetCells();
+
+    ASSERT_UNEQUAL_NULL_PTR(rowDataRange.GetDocument());
 }
 
 void CoreTools::RowIteratorTesting::SuffixIteratorTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheet = GetWorkSheet();
 
     auto rows = worksheet.GetRows();
 
     /// 测试RowIterator operator++(int)
     for (auto iter = rows.begin(); iter != rows.end(); iter++)
     {
-        ASSERT_FALSE(iter.IsSame(rows.end()));
-        ASSERT_FALSE(iter == rows.end());
-
-        auto rowDataRange = iter->GetCells();
-
-        ASSERT_UNEQUAL_NULL_PTR(rowDataRange.GetDocument());
-
-        rowDataRange = (*iter).GetCells();
-
-        ASSERT_UNEQUAL_NULL_PTR(rowDataRange.GetDocument());
+        ASSERT_NOT_THROW_EXCEPTION_2(DoSuffixIteratorTest, rows, iter);
     }
+}
+
+void CoreTools::RowIteratorTesting::DoSuffixIteratorTest(RowRange& rows, RowIterator& iter)
+{
+    ASSERT_FALSE(iter.IsSame(rows.end()));
+    ASSERT_FALSE(iter == rows.end());
+
+    auto rowDataRange = iter->GetCells();
+
+    ASSERT_UNEQUAL_NULL_PTR(rowDataRange.GetDocument());
+
+    rowDataRange = (*iter).GetCells();
+
+    ASSERT_UNEQUAL_NULL_PTR(rowDataRange.GetDocument());
+}
+
+CoreTools::RowIteratorTesting::Worksheet CoreTools::RowIteratorTesting::GetWorkSheet()
+{
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    const auto& worksheetName = worksheetNames.at(0);
+
+    return workbook.GetWorksheet(worksheetName);
 }

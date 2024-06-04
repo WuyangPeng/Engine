@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_APP_PROPERTIES_TESTING_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_APP_PROPERTIES_TESTING_H
 
+#include "CoreTools/TextParsing/SimpleCSV/Document.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -35,6 +36,9 @@ namespace CoreTools
         void DeleteSheetNameTest();
         void SetSheetNameTest();
         void PropertyTest();
+
+    private:
+        std::string docPath;
     };
 }
 

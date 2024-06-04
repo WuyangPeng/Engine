@@ -49,13 +49,22 @@ void CoreTools::ZipArchiveTesting::CreateZipArchiveTest()
 
     ASSERT_FALSE(zipArchive.HasEntry(entryName));
 
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateZipArchiveAddEntryTest, zipArchive);
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateZipArchiveDeleteEntryTest, zipArchive);
+}
+
+void CoreTools::ZipArchiveTesting::CreateZipArchiveAddEntryTest(ZipArchive& zipArchive)
+{
     zipArchive.AddEntry(entryName, data);
 
     ASSERT_TRUE(zipArchive.HasEntry(entryName));
     ASSERT_EQUAL(zipArchive.GetEntry(entryName), data);
 
     zipArchive.Save();
+}
 
+void CoreTools::ZipArchiveTesting::CreateZipArchiveDeleteEntryTest(ZipArchive& zipArchive)
+{
     zipArchive.DeleteEntry(entryName);
 
     ASSERT_FALSE(zipArchive.HasEntry(entryName));

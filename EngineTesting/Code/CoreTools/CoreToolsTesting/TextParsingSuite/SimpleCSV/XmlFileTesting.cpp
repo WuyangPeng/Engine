@@ -12,14 +12,15 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/SimpleCSV/Document.h"
-#include "CoreTools/TextParsing/SimpleCSV/Flags/ContentFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/XmlData.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 using namespace std::literals;
 
 CoreTools::XmlFileTesting::XmlFileTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      xmlPath{ "[Content_Types].xml" },
+      xmlId{ "[Content_Types].xml" }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -39,39 +40,42 @@ void CoreTools::XmlFileTesting::MainTest()
 
 void CoreTools::XmlFileTesting::DefaultXmlFileTest()
 {
-    auto xmlPath = "[Content_Types].xml"s;
-    const auto xmlId = "[Content_Types].xml"s;
-    constexpr auto contentType = SimpleCSV::ContentType::ChartSheet;
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
     const auto xmlData = make_shared<SimpleCSV::XmlData>(document, xmlPath, xmlId, contentType);
 
     XmlFileTest xmlFileTest{ xmlData };
 
     ASSERT_EQUAL(xmlFileTest.GetParentDocumentByXmlFile(), document);
 
-    auto rawData0 = xmlFileTest.GetXmlDataByXmlFile();
-    ASSERT_UNEQUAL(rawData0.find("ContentType"s), System::String::npos);
+    ASSERT_NOT_THROW_EXCEPTION_2(DefaultXmlFile0Test, *document, xmlFileTest);
+    ASSERT_NOT_THROW_EXCEPTION_1(DefaultXmlFile1Test, xmlFileTest);
+}
 
+void CoreTools::XmlFileTesting::DefaultXmlFile0Test(Document& document, XmlFileTest& xmlFileTest)
+{
+    const auto rawData = xmlFileTest.GetXmlDataByXmlFile();
+    ASSERT_UNEQUAL(rawData.find("ContentType"s), System::String::npos);
     ASSERT_EQUAL(xmlFileTest.GetRelationshipIdByXmlFile(), xmlId);
-    xmlFileTest.SetXmlDataByXmlFile(document->ExtractXmlFromArchive("_rels/.rels"s));
-    rawData0 = xmlFileTest.GetXmlDataByXmlFile();
-    ASSERT_UNEQUAL(rawData0.find("Relationships"s), System::String::npos);
+    xmlFileTest.SetXmlDataByXmlFile(document.ExtractXmlFromArchive("_rels/.rels"s));
+}
+
+void CoreTools::XmlFileTesting::DefaultXmlFile1Test(const XmlFileTest& xmlFileTest)
+{
+    const auto rawData = xmlFileTest.GetXmlDataByXmlFile();
+    ASSERT_UNEQUAL(rawData.find("Relationships"s), System::String::npos);
 }
 
 void CoreTools::XmlFileTesting::ConstXmlFileTest()
 {
-    auto xmlPath = "[Content_Types].xml"s;
-    const auto xmlId = "[Content_Types].xml"s;
-    constexpr auto contentType = SimpleCSV::ContentType::ChartSheet;
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
     const auto xmlData = make_shared<SimpleCSV::XmlData>(document, xmlPath, xmlId, contentType);
 
     const XmlFileTest xmlFileTest{ xmlData };
 
     ASSERT_EQUAL(xmlFileTest.GetParentDocumentByXmlFile(), document);
 
-    auto rawData0 = xmlFileTest.GetXmlDataByXmlFile();
-    ASSERT_UNEQUAL(rawData0.find("ContentType"s), System::String::npos);
+    const auto rawData = xmlFileTest.GetXmlDataByXmlFile();
+    ASSERT_UNEQUAL(rawData.find("ContentType"s), System::String::npos);
 
     ASSERT_EQUAL(xmlFileTest.GetRelationshipIdByXmlFile(), xmlId);
 }

@@ -26,10 +26,17 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using Relationships = SimpleCSV::Relationships;
+        using RelationshipItem = SimpleCSV::RelationshipItem;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void RelationshipsTest();
+
+        void GetRelationshipByIdTest(const Relationships& relationships, const RelationshipItem& relationshipItem);
+        void RelationshipsOperationTest(Relationships& relationships);
     };
 }
 

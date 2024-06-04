@@ -21,12 +21,14 @@ namespace CoreTools
         using ClassType = CSVRowTesting;
         using ParentType = UnitTest;
 
-        using String = System::String;
-
     public:
         explicit CSVRowTesting(const OStreamShared& stream);
 
         CLASS_INVARIANT_FINAL_DECLARE;
+
+    private:
+        using String = System::String;
+        using FileContent = std::vector<String>;
 
     private:
         void DoRunUnitTest() override;
@@ -34,12 +36,31 @@ namespace CoreTools
 
         void CreateCSV();
         NODISCARD CSVHead ReadFile();
+        NODISCARD static FileContent GetFileContent(const FileContent& content);
+
         void CSVRow0Test();
         void CSVRow1Test();
+
+        void CSVRow0BaseTest(const CSVRow& csvRow);
+        void CSVRow0VectorTest(const CSVRow& csvRow);
+        void CSVRow0IntVectorTest(const CSVRow& csvRow);
+        void CSVRow0ArrayTest(const CSVRow& csvRow);
+        void CSVRow0VectorArrayTest(const CSVRow& csvRow);
+        void CSVRow0IntVectorArrayTest(const CSVRow& csvRow);
+        void CSVRow0StringArrayTest(const CSVRow& csvRow);
+
+        void CSVRow1BaseTest(const CSVRow& csvRow);
+        void CSVRow1VectorTest(const CSVRow& csvRow);
+        void CSVRow1IntVectorTest(const CSVRow& csvRow);
+        void CSVRow1ArrayTest(const CSVRow& csvRow);
+        void CSVRow1VectorArrayTest(const CSVRow& csvRow);
+        void CSVRow1IntVectorArrayTest(const CSVRow& csvRow);
+        void CSVRow1StringArrayTest(const CSVRow& csvRow);
 
     private:
         String rowContent0;
         String rowContent1;
+        String csvFileName;
     };
 }
 

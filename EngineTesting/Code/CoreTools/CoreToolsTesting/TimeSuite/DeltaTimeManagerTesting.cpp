@@ -28,6 +28,7 @@ void CoreTools::DeltaTimeManagerTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
+
 void CoreTools::DeltaTimeManagerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(TimeTest);
@@ -37,11 +38,21 @@ void CoreTools::DeltaTimeManagerTesting::TimeTest()
 {
     auto time = DeltaTimeManager::Create();
 
+    ASSERT_NOT_THROW_EXCEPTION_1(TimeBaseTest, time);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(ResetCurrentTimeTest, time);
+}
+
+void CoreTools::DeltaTimeManagerTesting::TimeBaseTest(const DeltaTimeManager& time)
+{
     ASSERT_APPROXIMATE(time.GetElapsedTimeInSeconds(), 0.0, 1e-10);
     ASSERT_LESS(0, time.GetNowTimeInSeconds());
     ASSERT_LESS(0, time.GetNowTimeInMicroseconds());
     ASSERT_EQUAL(time.GetNowTimeInSeconds(), time.GetNowTimeInMicroseconds() / System::gMicroseconds);
+}
 
+void CoreTools::DeltaTimeManagerTesting::ResetCurrentTimeTest(DeltaTimeManager& time)
+{
     System::SystemSleep(5);
 
     ASSERT_TRUE(5 <= time.GetElapsedTimeInMicroseconds());

@@ -8,7 +8,7 @@
 时间（2023/11/08——2024/06/30）
 
 实现内容：1.  引擎实现（System库）。（完成）
-		  2.  引擎实现（CoreTools库）。
+		  2.  引擎实现（CoreTools库）。（完成）
 		  3.  引擎实现（Network库）。
 		  4.  Geometric Tools GTE代码合并（Mathematics库）。 
 			(1).  LowLevel。（完成）

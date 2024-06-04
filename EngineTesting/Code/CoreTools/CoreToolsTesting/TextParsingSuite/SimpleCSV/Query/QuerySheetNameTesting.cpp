@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 17:16)
+/// 版本：1.0.0.10 (2024/06/03 16:21)
 
 #include "QuerySheetNameTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -30,20 +30,25 @@ void CoreTools::QuerySheetNameTesting::DoRunUnitTest()
 
 void CoreTools::QuerySheetNameTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetNameTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetName0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetName1Test);
 }
 
-void CoreTools::QuerySheetNameTesting::QuerySheetNameTest()
+void CoreTools::QuerySheetNameTesting::QuerySheetName0Test()
 {
     const auto sheetId = "sheetId"s;
     const auto sheetName = "sheetName"s;
-    const SimpleCSV::QuerySheetName querySheetName0{ sheetId, sheetName };
+    const SimpleCSV::QuerySheetName querySheetName{ sheetId, sheetName };
 
-    ASSERT_EQUAL(sheetId, querySheetName0.GetSheetId());
-    ASSERT_EQUAL(sheetName, querySheetName0.GetSheetName());
+    ASSERT_EQUAL(sheetId, querySheetName.GetSheetId());
+    ASSERT_EQUAL(sheetName, querySheetName.GetSheetName());
+}
 
-    const SimpleCSV::QuerySheetName querySheetName1{ sheetId };
+void CoreTools::QuerySheetNameTesting::QuerySheetName1Test()
+{
+    const auto sheetId = "sheetId"s;
+    const SimpleCSV::QuerySheetName querySheetName{ sheetId };
 
-    ASSERT_EQUAL(sheetId, querySheetName1.GetSheetId());
-    ASSERT_TRUE(querySheetName1.GetSheetName().empty());
+    ASSERT_EQUAL(sheetId, querySheetName.GetSheetId());
+    ASSERT_TRUE(querySheetName.GetSheetName().empty());
 }

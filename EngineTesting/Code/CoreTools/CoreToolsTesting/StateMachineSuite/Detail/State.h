@@ -25,7 +25,8 @@ namespace CoreTools
 
     struct CdDetected
     {
-        CdDetected(const char*, const std::vector<clock_t>&) noexcept;
+        using ClockContainer = std::vector<clock_t>;
+        CdDetected(const char*, const ClockContainer&) noexcept;
     };
 
     struct Pause

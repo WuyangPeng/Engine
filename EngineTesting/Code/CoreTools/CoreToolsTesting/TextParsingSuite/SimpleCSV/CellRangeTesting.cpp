@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 16:24)
+/// 版本：1.0.0.10 (2024/06/03 15:43)
 
 #include "CellRangeTesting.h"
 #include "System/Helper/PragmaWarning/PugiXml.h"
@@ -21,7 +21,8 @@
 #include "Mathematics/Base/MathDetail.h"
 
 CoreTools::CellRangeTesting::CellRangeTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      document{ SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx") }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -41,12 +42,7 @@ void CoreTools::CellRangeTesting::MainTest()
 
 void CoreTools::CellRangeTesting::CellRangeTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheet = GetWorkSheet();
 
     auto cellRange = worksheet.GetRange();
 
@@ -63,6 +59,7 @@ void CoreTools::CellRangeTesting::CellRangeTest()
     ASSERT_EQUAL(bottomRight.GetRow(), 10);
     ASSERT_EQUAL(bottomRight.GetColumn(), 8);
 
+    auto workbook = document->GetWorkbook();
     ASSERT_EQUAL(cellRange.GetSharedStrings(), workbook.GetSharedStrings());
 
     const auto xmlNode = cellRange.GetDataNode();
@@ -72,12 +69,7 @@ void CoreTools::CellRangeTesting::CellRangeTest()
 
 void CoreTools::CellRangeTesting::CellRangeIteratorTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheet = GetWorkSheet();
 
     auto cellRange = worksheet.GetRange();
 
@@ -85,10 +77,7 @@ void CoreTools::CellRangeTesting::CellRangeIteratorTest()
     auto column = 1;
     for (const auto& element : cellRange)
     {
-        const auto cellReference = element.GetCellReference();
-
-        ASSERT_EQUAL(cellReference.GetRow(), row);
-        ASSERT_EQUAL(cellReference.GetColumn(), column);
+        ASSERT_NOT_THROW_EXCEPTION_3(DoCellRangeIteratorTest, row, column, element);
 
         ++column;
         if (column > 8)
@@ -97,4 +86,23 @@ void CoreTools::CellRangeTesting::CellRangeIteratorTest()
             ++row;
         }
     }
+}
+
+void CoreTools::CellRangeTesting::DoCellRangeIteratorTest(int row, int column, const Cell& element)
+{
+    const auto cellReference = element.GetCellReference();
+
+    ASSERT_EQUAL(cellReference.GetRow(), row);
+    ASSERT_EQUAL(cellReference.GetColumn(), column);
+}
+
+CoreTools::CellRangeTesting::Worksheet CoreTools::CellRangeTesting::GetWorkSheet()
+{
+    document = Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
+
+    auto workbook = document->GetWorkbook();
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    const auto& worksheetName = worksheetNames.at(0);
+
+    return workbook.GetWorksheet(worksheetName);
 }

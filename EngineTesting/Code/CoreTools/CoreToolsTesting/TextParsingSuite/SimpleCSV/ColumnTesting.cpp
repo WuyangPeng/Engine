@@ -46,6 +46,11 @@ void CoreTools::ColumnTesting::ColumnTest()
     const auto& worksheetName = worksheetNames.at(0);
     const auto worksheet = workbook.GetWorksheet(worksheetName);
 
+    ASSERT_NOT_THROW_EXCEPTION_1(DoColumnTest, worksheet);
+}
+
+void CoreTools::ColumnTesting::DoColumnTest(const Worksheet& worksheet)
+{
     auto column = worksheet.GetColumn(1);
 
     const auto xmlNode = column.GetColumnNode();

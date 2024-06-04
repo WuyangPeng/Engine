@@ -25,10 +25,10 @@ namespace CoreTools
 
     public:
         template <typename V>
-        ValueScope(Reference value, V const& set) noexcept(std::is_arithmetic_v<T>);
+        ValueScope(Reference value, const V& set) noexcept(std::is_arithmetic_v<T>);
 
         template <typename V1, typename V2>
-        ValueScope(Reference value, V1 const& set, V2 const& revert) noexcept(std::is_arithmetic_v<T>);
+        ValueScope(Reference value, const V1& set, const V2& revert) noexcept(std::is_arithmetic_v<T>);
 
         ~ValueScope() noexcept;
 

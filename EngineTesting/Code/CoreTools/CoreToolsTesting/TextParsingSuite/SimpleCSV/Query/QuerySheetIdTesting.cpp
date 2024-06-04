@@ -30,20 +30,25 @@ void CoreTools::QuerySheetIdTesting::DoRunUnitTest()
 
 void CoreTools::QuerySheetIdTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetIdTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetId0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetId1Test);
 }
 
-void CoreTools::QuerySheetIdTesting::QuerySheetIdTest()
+void CoreTools::QuerySheetIdTesting::QuerySheetId0Test()
 {
     const auto sheetId = "sheetId"s;
     const auto sheetName = "sheetName"s;
-    const SimpleCSV::QuerySheetId querySheetId0{ sheetName, sheetId };
+    const SimpleCSV::QuerySheetId querySheetId{ sheetName, sheetId };
 
-    ASSERT_EQUAL(sheetId, querySheetId0.GetSheetId());
-    ASSERT_EQUAL(sheetName, querySheetId0.GetSheetName());
+    ASSERT_EQUAL(sheetId, querySheetId.GetSheetId());
+    ASSERT_EQUAL(sheetName, querySheetId.GetSheetName());
+}
 
-    const SimpleCSV::QuerySheetId querySheetId1{ sheetName };
+void CoreTools::QuerySheetIdTesting::QuerySheetId1Test()
+{
+    const auto sheetName = "sheetName"s;
+    const SimpleCSV::QuerySheetId querySheetId{ sheetName };
 
-    ASSERT_TRUE(querySheetId1.GetSheetId().empty());
-    ASSERT_EQUAL(sheetName, querySheetId1.GetSheetName());
+    ASSERT_TRUE(querySheetId.GetSheetId().empty());
+    ASSERT_EQUAL(sheetName, querySheetId.GetSheetName());
 }

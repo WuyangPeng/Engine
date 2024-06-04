@@ -8,14 +8,11 @@
 /// °æ±¾£º1.0.0.9 (2024/04/23 12:54)
 
 #include "DirectPropertyInternal.h"
-#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-CoreTools::DirectPropertyInternal::DirectPropertyInternal(DisableNotThrow disableNotThrow)
-    : getType{ "Init" }, setType{ "SetType" }
+CoreTools::DirectPropertyInternal::DirectPropertyInternal(const std::string& getType, const std::string& setType)
+    : getType{ getType }, setType{ setType }
 {
-    System::UnusedFunction(disableNotThrow);
-
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 

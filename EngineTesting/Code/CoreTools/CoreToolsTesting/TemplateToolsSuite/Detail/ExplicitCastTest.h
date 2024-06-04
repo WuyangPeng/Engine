@@ -31,8 +31,8 @@ namespace CoreTools
         NODISCARD operator ExplicitCast<const std::string&>() const noexcept;
         NODISCARD operator ExplicitCast<const std::string*>() const noexcept;
 
-        operator ExplicitCast<short*>() = delete;
-        operator ExplicitCast<short&>() = delete;
+        operator ExplicitCast<short*>();
+        operator ExplicitCast<short&>();
 
     private:
         int integer;

@@ -5,9 +5,10 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.9 (2024/04/23 12:36)
+/// 版本：1.0.0.10 (2024/05/29 20:22)
 
 #include "FibonacciTesting.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/Fibonacci.h"
@@ -42,14 +43,14 @@ void CoreTools::FibonacciTesting::RecursiveVsNonRecursiveTest()
 
 void CoreTools::FibonacciTesting::TemplateVersionTest()
 {
-    ASSERT_TRUE(FIBONACCI(0) == NonRecursiveFibonacci(0));
-    ASSERT_TRUE(FIBONACCI(1) == NonRecursiveFibonacci(1));
-    ASSERT_TRUE(FIBONACCI(2) == NonRecursiveFibonacci(2));
-    ASSERT_TRUE(FIBONACCI(3) == NonRecursiveFibonacci(3));
-    ASSERT_TRUE(FIBONACCI(4) == NonRecursiveFibonacci(4));
-    ASSERT_TRUE(FIBONACCI(5) == NonRecursiveFibonacci(5));
-    ASSERT_TRUE(FIBONACCI(6) == NonRecursiveFibonacci(6));
-    ASSERT_TRUE(FIBONACCI(7) == NonRecursiveFibonacci(7));
-    ASSERT_TRUE(FIBONACCI(8) == NonRecursiveFibonacci(8));
-    ASSERT_TRUE(FIBONACCI(9) == NonRecursiveFibonacci(9));
+    ASSERT_EQUAL(FIBONACCI(0), boost::numeric_cast<int>(NonRecursiveFibonacci(0)));
+    ASSERT_EQUAL(FIBONACCI(1), boost::numeric_cast<int>(NonRecursiveFibonacci(1)));
+    ASSERT_EQUAL(FIBONACCI(2), boost::numeric_cast<int>(NonRecursiveFibonacci(2)));
+    ASSERT_EQUAL(FIBONACCI(3), boost::numeric_cast<int>(NonRecursiveFibonacci(3)));
+    ASSERT_EQUAL(FIBONACCI(4), boost::numeric_cast<int>(NonRecursiveFibonacci(4)));
+    ASSERT_EQUAL(FIBONACCI(5), boost::numeric_cast<int>(NonRecursiveFibonacci(5)));
+    ASSERT_EQUAL(FIBONACCI(6), boost::numeric_cast<int>(NonRecursiveFibonacci(6)));
+    ASSERT_EQUAL(FIBONACCI(7), boost::numeric_cast<int>(NonRecursiveFibonacci(7)));
+    ASSERT_EQUAL(FIBONACCI(8), boost::numeric_cast<int>(NonRecursiveFibonacci(8)));
+    ASSERT_EQUAL(FIBONACCI(9), boost::numeric_cast<int>(NonRecursiveFibonacci(9)));
 }

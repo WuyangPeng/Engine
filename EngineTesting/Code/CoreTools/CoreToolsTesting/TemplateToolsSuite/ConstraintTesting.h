@@ -30,8 +30,10 @@ namespace CoreTools
         void MainTest();
 
         void MustBePodTest() noexcept;
+        void MustBePodOrVoidTest() noexcept;
         void MustBeSameSizeTest() noexcept;
         void MustBeSubscriptableTest() noexcept;
+        void MustBeSubscriptableAsDecayablePointerTest() noexcept;
         void MustHaveBaseTest() noexcept;
     };
 }

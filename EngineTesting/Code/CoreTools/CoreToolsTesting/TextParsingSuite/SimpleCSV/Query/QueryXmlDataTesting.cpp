@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 17:16)
+/// 版本：1.0.0.10 (2024/06/03 16:11)
 
 #include "QueryXmlDataTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -17,7 +17,8 @@
 using namespace std::literals;
 
 CoreTools::QueryXmlDataTesting::QueryXmlDataTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      xmlPath{ "xmlPath" }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -31,28 +32,30 @@ void CoreTools::QueryXmlDataTesting::DoRunUnitTest()
 
 void CoreTools::QueryXmlDataTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(QueryXmlDataTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(QueryXmlData0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(QueryXmlData1Test);
     ASSERT_THROW_EXCEPTION_0(ExceptionTest);
 }
 
-void CoreTools::QueryXmlDataTesting::QueryXmlDataTest()
+void CoreTools::QueryXmlDataTesting::QueryXmlData0Test()
 {
-    const auto xmlPath = "xmlPath"s;
     const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
     const auto xmlData = std::make_shared<SimpleCSV::XmlData>(document, "[Content_Types].xml");
-    const SimpleCSV::QueryXmlData querySheetName0{ xmlPath, xmlData };
+    const SimpleCSV::QueryXmlData querySheetName{ xmlPath, xmlData };
 
-    ASSERT_EQUAL(xmlPath, querySheetName0.GetXmlPath());
-    ASSERT_EQUAL(xmlData, querySheetName0.GetXmlData());
+    ASSERT_EQUAL(xmlPath, querySheetName.GetXmlPath());
+    ASSERT_EQUAL(xmlData, querySheetName.GetXmlData());
+}
 
-    const SimpleCSV::QueryXmlData querySheetName1{ xmlPath };
+void CoreTools::QueryXmlDataTesting::QueryXmlData1Test()
+{
+    const SimpleCSV::QueryXmlData querySheetName{ xmlPath };
 
-    ASSERT_EQUAL(xmlPath, querySheetName1.GetXmlPath());
+    ASSERT_EQUAL(xmlPath, querySheetName.GetXmlPath());
 }
 
 void CoreTools::QueryXmlDataTesting::ExceptionTest()
 {
-    const auto xmlPath = "xmlPath"s;
     const SimpleCSV::QueryXmlData querySheetName{ xmlPath };
 
     ASSERT_FALSE(querySheetName.GetXmlData());

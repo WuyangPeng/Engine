@@ -21,7 +21,7 @@ namespace CoreTools
         using Beg = typename boost::mpl::begin<Tiny>::type;
         using Item = typename boost::mpl::deref<typename boost::mpl::advance<Beg, Pos>::type>::type;
 
-        static_assert((std::is_same<ItemAt, Item>::value));
+        static_assert(std::is_same_v<ItemAt, Item>);
 
         using ClassType = CheckAt<Tiny, Pos>;
         using type = CheckAt<Tiny, Pos>;
@@ -33,7 +33,7 @@ namespace CoreTools
         using ClassType = TinyTest<Tiny>;
         using type = TinyTest<Tiny>;
 
-        static_assert((std::is_same<Tiny, typename Tiny::type>::value));
+        static_assert(std::is_same_v<Tiny, typename Tiny::type>);
 
         using Beg = typename boost::mpl::begin<Tiny>::type;
         using End = typename boost::mpl::end<Tiny>::type;
@@ -43,9 +43,7 @@ namespace CoreTools
         static_assert(Size::value == Distance::value);
 
         using CheckAt2 = typename boost::mpl::eval_if<boost::mpl::greater<Size, TinyTwo>, CheckAt<Tiny, TinyTwo>, boost::mpl::true_>::type;
-
         using CheckAt1 = typename boost::mpl::eval_if<boost::mpl::greater<Size, TinyOne>, CheckAt<Tiny, TinyOne>, boost::mpl::true_>::type;
-
         using CheckAt0 = typename boost::mpl::eval_if<boost::mpl::greater<Size, TinyZero>, CheckAt<Tiny, TinyZero>, boost::mpl::true_>::type;
     };
 }

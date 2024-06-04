@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_STATE_MACHINE_SUITE_STATE_ENTITY_TESTING_H
 #define CORE_TOOLS_STATE_MACHINE_SUITE_STATE_ENTITY_TESTING_H
 
+#include "Detail/PlayerEntity.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,10 +27,23 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using PlayerEntitySharedPtr = std::shared_ptr<PlayerEntity>;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void PlayerTest();
+        void StateTest(const PlayerEntity& playerEntity);
+        NODISCARD static PlayerEntitySharedPtr MakeEntity();
+
+        void EventFunction0Test(PlayerEntity& playerEntity);
+        void EventFunction1Test(PlayerEntity& playerEntity);
+        void EventFunction2Test(PlayerEntity& playerEntity);
+        void EventFunction3Test(PlayerEntity& playerEntity);
+        void EventFunction4Test(PlayerEntity& playerEntity);
+        void EventFunction5Test(PlayerEntity& playerEntity);
+        void EventFunction6Test(PlayerEntity& playerEntity);
     };
 }
 

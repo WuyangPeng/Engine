@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 15:21)
+/// 版本：1.0.0.10 (2024/06/03 16:27)
 
 #include "EventTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -40,15 +40,18 @@ void CoreTools::EventTesting::MainTest()
 
 void CoreTools::EventTesting::ManualResetTrueCreateThreadTest()
 {
-    {
-        auto thread = ThreadGroup::Create();
-
-        thread.AddThread(&ClassType::Thread0, this);
-        thread.AddThread(&ClassType::Thread1, this);
-        thread.AddThread(&ClassType::Thread2, this);
-    }
+    ASSERT_NOT_THROW_EXCEPTION_0(DoManualResetTrueCreateThreadTest);
 
     ThreadGuard threadGuard{ &ClassType::Thread3, this };
+}
+
+void CoreTools::EventTesting::DoManualResetTrueCreateThreadTest()
+{
+    auto thread = ThreadGroup::Create();
+
+    thread.AddThread(&ClassType::Thread0, this);
+    thread.AddThread(&ClassType::Thread1, this);
+    thread.AddThread(&ClassType::Thread2, this);
 }
 
 void CoreTools::EventTesting::Thread0()
@@ -91,15 +94,18 @@ void CoreTools::EventTesting::Thread3()
     manualResetTrueEvent.ResetEvent();
 }
 
+void CoreTools::EventTesting::DoManualResetFalseCreateThreadTest()
+{
+    auto thread = ThreadGroup::Create();
+
+    thread.AddThread(&ClassType::Thread4, this);
+    thread.AddThread(&ClassType::Thread5, this);
+    thread.AddThread(&ClassType::Thread4, this);
+}
+
 void CoreTools::EventTesting::ManualResetFalseCreateThreadTest()
 {
-    {
-        auto thread = ThreadGroup::Create();
-
-        thread.AddThread(&ClassType::Thread4, this);
-        thread.AddThread(&ClassType::Thread5, this);
-        thread.AddThread(&ClassType::Thread4, this);
-    }
+    ASSERT_NOT_THROW_EXCEPTION_0(DoManualResetFalseCreateThreadTest);
 
     ThreadGuard threadGuard{ &ClassType::Thread6, this };
 }

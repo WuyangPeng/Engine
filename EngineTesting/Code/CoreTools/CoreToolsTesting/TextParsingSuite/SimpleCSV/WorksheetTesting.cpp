@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 17:10)
+/// 版本：1.0.0.10 (2024/06/01 10:55)
 
 #include "WorksheetTesting.h"
 #include "System/Helper/PragmaWarning/PugiXml.h"
@@ -25,7 +25,10 @@
 using namespace std::literals;
 
 CoreTools::WorksheetTesting::WorksheetTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      docPath{ "Resource/CSVTesting/ExcelConversionCSVTesting.xlsx" },
+      document{ SimpleCSV::Document::Open(docPath) },
+      worksheet{ GetWorkSheet(*document) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -51,77 +54,91 @@ void CoreTools::WorksheetTesting::MainTest()
 
 void CoreTools::WorksheetTesting::WorksheetCellTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    ASSERT_NOT_THROW_EXCEPTION_0(WorksheetCell0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(WorksheetCell1Test);
+}
 
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+void CoreTools::WorksheetTesting::WorksheetCell0Test()
+{
+    const auto cell = worksheet.GetCell(1, 5);
+    const auto cellReference = cell->GetCellReference();
 
-    const auto cell0 = worksheet.GetCell(1, 5);
-    const auto cellReference0 = cell0->GetCellReference();
+    ASSERT_EQUAL(cellReference.GetRow(), 1);
+    ASSERT_EQUAL(cellReference.GetColumn(), 5);
+}
 
-    ASSERT_EQUAL(cellReference0.GetRow(), 1);
-    ASSERT_EQUAL(cellReference0.GetColumn(), 5);
+void CoreTools::WorksheetTesting::WorksheetCell1Test()
+{
+    const auto cell = worksheet.GetCell("B6");
+    const auto cellReference = cell->GetCellReference();
 
-    const auto cell1 = worksheet.GetCell("B6");
-    const auto cellReference1 = cell1->GetCellReference();
+    ASSERT_EQUAL(cellReference.GetRow(), 6);
+    ASSERT_EQUAL(cellReference.GetColumn(), 2);
 
-    ASSERT_EQUAL(cellReference1.GetRow(), 6);
-    ASSERT_EQUAL(cellReference1.GetColumn(), 2);
+    ASSERT_NOT_THROW_EXCEPTION_1(WorksheetCell2Test, cellReference);
+}
 
-    const auto cell2 = worksheet.GetCell(cellReference1);
-    const auto cellReference2 = cell1->GetCellReference();
+void CoreTools::WorksheetTesting::WorksheetCell2Test(const CellReference& cellReference)
+{
+    const auto cell = worksheet.GetCell(cellReference);
+    const auto result = cell->GetCellReference();
 
-    ASSERT_EQUAL(cellReference2.GetRow(), 6);
-    ASSERT_EQUAL(cellReference2.GetColumn(), 2);
+    ASSERT_EQUAL(result.GetRow(), 6);
+    ASSERT_EQUAL(result.GetColumn(), 2);
 }
 
 void CoreTools::WorksheetTesting::WorksheetRangeTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    ASSERT_NOT_THROW_EXCEPTION_0(WorksheetRange0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(WorksheetRange1Test);
+}
 
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+void CoreTools::WorksheetTesting::WorksheetRange0Test()
+{
+    const auto cellRange = worksheet.GetRange();
 
-    const auto cellRange0 = worksheet.GetRange();
+    ASSERT_EQUAL(cellRange.GetNumRows(), 10);
+    ASSERT_EQUAL(cellRange.GetNumColumns(), 8);
+}
 
-    ASSERT_EQUAL(cellRange0.GetNumRows(), 10);
-    ASSERT_EQUAL(cellRange0.GetNumColumns(), 8);
+void CoreTools::WorksheetTesting::WorksheetRange1Test()
+{
+    const auto cellRange = worksheet.GetRange(SimpleCSV::CellReference{ 2, 2 }, SimpleCSV::CellReference{ 4, 5 });
 
-    const auto cellRange1 = worksheet.GetRange(SimpleCSV::CellReference{ 2, 2 }, SimpleCSV::CellReference{ 4, 5 });
-
-    ASSERT_EQUAL(cellRange1.GetNumRows(), 3);
-    ASSERT_EQUAL(cellRange1.GetNumColumns(), 4);
+    ASSERT_EQUAL(cellRange.GetNumRows(), 3);
+    ASSERT_EQUAL(cellRange.GetNumColumns(), 4);
 }
 
 void CoreTools::WorksheetTesting::WorksheetRowRangeTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    ASSERT_NOT_THROW_EXCEPTION_0(WorksheetRowRange0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(WorksheetRowRange1Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(WorksheetRowRange2Test);
+}
 
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
-
-    auto rowRange = worksheet.GetRows();
-
-    for (const auto& row : rowRange)
+void CoreTools::WorksheetTesting::WorksheetRowRange0Test()
+{
+    for (auto rowRange = worksheet.GetRows();
+         const auto& row : rowRange)
     {
         auto rowDataRange = row.GetCells();
 
         ASSERT_UNEQUAL_NULL_PTR(rowDataRange.GetDocument());
     }
+}
 
-    rowRange = worksheet.GetRows(4);
+void CoreTools::WorksheetTesting::WorksheetRowRange1Test()
+{
+    const auto rowRange = worksheet.GetRows(4);
 
     ASSERT_EQUAL(rowRange.GetFirstRow(), 1);
     ASSERT_EQUAL(rowRange.GetLastRow(), 4);
     ASSERT_EQUAL(rowRange.GetRowCount(), 4);
+}
 
-    rowRange = worksheet.GetRows(1, 3);
+void CoreTools::WorksheetTesting::WorksheetRowRange2Test()
+{
+    const auto rowRange = worksheet.GetRows(1, 3);
 
     ASSERT_EQUAL(rowRange.GetFirstRow(), 1);
     ASSERT_EQUAL(rowRange.GetLastRow(), 3);
@@ -130,13 +147,6 @@ void CoreTools::WorksheetTesting::WorksheetRowRangeTest()
 
 void CoreTools::WorksheetTesting::WorksheetRowTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
-
     const auto row = worksheet.GetRow(2);
 
     const auto cellCount = row->GetCellCount();
@@ -149,13 +159,6 @@ void CoreTools::WorksheetTesting::WorksheetRowTest()
 
 void CoreTools::WorksheetTesting::WorksheetColumnTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
-
     const auto column = worksheet.GetColumn(2);
 
     ASSERT_UNEQUAL_NULL_PTR(column.GetColumnNode());
@@ -163,13 +166,6 @@ void CoreTools::WorksheetTesting::WorksheetColumnTest()
 
 void CoreTools::WorksheetTesting::LastCellTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
-
     const auto cellReference = worksheet.GetLastCell();
 
     ASSERT_EQUAL(cellReference.GetRow(), 10);
@@ -181,13 +177,6 @@ void CoreTools::WorksheetTesting::LastCellTest()
 
 void CoreTools::WorksheetTesting::SelectedTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    auto worksheet = workbook.GetWorksheet(worksheetName);
-
     worksheet.SetSelected(false);
 
     ASSERT_FALSE(worksheet.IsSelected());
@@ -199,17 +188,21 @@ void CoreTools::WorksheetTesting::SelectedTest()
 
 void CoreTools::WorksheetTesting::ColorTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const Color color{ 255, 126, 64, 32 };
 
-    auto workbook = document->GetWorkbook();
+    worksheet.SetColor(color);
+
+    ASSERT_EQUAL(worksheet.GetColor().GetAlpha(), color.GetAlpha());
+    ASSERT_EQUAL(worksheet.GetColor().GetRed(), color.GetRed());
+    ASSERT_EQUAL(worksheet.GetColor().GetGreen(), color.GetGreen());
+    ASSERT_EQUAL(worksheet.GetColor().GetBlue(), color.GetBlue());
+}
+
+CoreTools::WorksheetTesting::Worksheet CoreTools::WorksheetTesting::GetWorkSheet(const Document& document)
+{
+    auto workbook = document.GetWorkbook();
     const auto worksheetNames = workbook.GetWorksheetNames();
     const auto& worksheetName = worksheetNames.at(0);
-    auto worksheet = workbook.GetWorksheet(worksheetName);
 
-    worksheet.SetColor(SimpleCSV::Color{ 255, 126, 64, 32 });
-
-    ASSERT_EQUAL(worksheet.GetColor().GetAlpha(), 255);
-    ASSERT_EQUAL(worksheet.GetColor().GetRed(), 126);
-    ASSERT_EQUAL(worksheet.GetColor().GetGreen(), 64);
-    ASSERT_EQUAL(worksheet.GetColor().GetBlue(), 32);
+    return workbook.GetWorksheet(worksheetName);
 }

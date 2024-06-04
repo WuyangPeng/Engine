@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 16:45)
+/// 版本：1.0.0.10 (2024/06/01 17:49)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_COLOR_TESTING_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_COLOR_TESTING_H
@@ -26,12 +26,19 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using Color = SimpleCSV::Color;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void DefaultColorTest();
         void RgbColorTest();
         void RgbaColorTest();
+
+        void DefaultColorGetHexTest(const Color& color0);
+        void RgbColorGetHexTest(const Color& color0);
+        void RgbaColorGetHexTest(const Color& color0);
     };
 }
 

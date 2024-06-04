@@ -14,7 +14,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 CoreTools::StaticPropertyExternalTesting::StaticPropertyExternalTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream }, setValue{ "set" }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -28,34 +28,50 @@ void CoreTools::StaticPropertyExternalTesting::DoRunUnitTest()
 
 void CoreTools::StaticPropertyExternalTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(GetSetTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetSet0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetSet1Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetSet2Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetSet3Test);
 }
 
-void CoreTools::StaticPropertyExternalTesting::GetSetTest()
+void CoreTools::StaticPropertyExternalTesting::GetSet0Test()
 {
     StaticPropertyExternal staticPropertyExternal{};
 
-    std::string value{ staticPropertyExternal.getExternalType };
+    const std::string value{ staticPropertyExternal.getExternalType };
 
     ASSERT_TRUE(value.empty());
+}
 
-    const std::string setValue{ "set" };
+void CoreTools::StaticPropertyExternalTesting::GetSet1Test()
+{
+    StaticPropertyExternal staticPropertyExternal{};
 
     staticPropertyExternal.setExternalType = setValue;
 
-    value = staticPropertyExternal.getSetExternalType;
+    const std::string value{ staticPropertyExternal.getSetExternalType };
 
     ASSERT_EQUAL(value, setValue);
+}
+
+void CoreTools::StaticPropertyExternalTesting::GetSet2Test()
+{
+    StaticPropertyExternal staticPropertyExternal{};
 
     staticPropertyExternal.getSetExternalType = setValue + setValue;
 
-    value = staticPropertyExternal.getExternalType;
+    const std::string value{ staticPropertyExternal.getExternalType };
 
     ASSERT_EQUAL(value, setValue + setValue);
+}
+
+void CoreTools::StaticPropertyExternalTesting::GetSet3Test()
+{
+    StaticPropertyExternal staticPropertyExternal{};
 
     staticPropertyExternal.getSetType = setValue + setValue + setValue;
 
-    value = staticPropertyExternal.getSetType;
+    const std::string value{ staticPropertyExternal.getSetType };
 
     ASSERT_EQUAL(value, setValue + setValue + setValue);
 }

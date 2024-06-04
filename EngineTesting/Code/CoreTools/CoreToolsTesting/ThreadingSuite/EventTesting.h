@@ -42,6 +42,9 @@ namespace CoreTools
         void Thread5();
         void Thread6();
 
+        void DoManualResetTrueCreateThreadTest();
+        void DoManualResetFalseCreateThreadTest();
+
     private:
         Event manualResetTrueEvent;
         Event manualResetFalseEvent;

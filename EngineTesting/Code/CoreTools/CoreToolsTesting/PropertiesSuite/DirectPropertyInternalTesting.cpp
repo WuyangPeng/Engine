@@ -15,7 +15,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 CoreTools::DirectPropertyInternalTesting::DirectPropertyInternalTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream }, getType{ "Init" }, setType{ "SetType" }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -29,27 +29,40 @@ void CoreTools::DirectPropertyInternalTesting::DoRunUnitTest()
 
 void CoreTools::DirectPropertyInternalTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(GetSetTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetTypeTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SetValueTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetValueTest);
 }
 
-void CoreTools::DirectPropertyInternalTesting::GetSetTest()
+void CoreTools::DirectPropertyInternalTesting::GetTypeTest()
 {
-    DirectPropertyInternal directPropertyInternal{ DisableNotThrow::Disable };
+    const DirectPropertyInternal directPropertyInternal{ getType, setType };
 
-    std::string value{ directPropertyInternal.getType };
+    const std::string value{ directPropertyInternal.getType };
 
-    ASSERT_EQUAL(value, "Init");
+    ASSERT_EQUAL(value, getType);
+}
+
+void CoreTools::DirectPropertyInternalTesting::SetValueTest()
+{
+    DirectPropertyInternal directPropertyInternal{ getType, setType };
 
     const std::string setValue{ "set" };
 
     directPropertyInternal.SetValue(setValue);
 
-    value = directPropertyInternal.getType;
+    const std::string value{ directPropertyInternal.getType };
 
     ASSERT_EQUAL(value, setValue);
+}
 
-    ASSERT_EQUAL("SetType", directPropertyInternal.GetValue());
+void CoreTools::DirectPropertyInternalTesting::GetValueTest()
+{
+    DirectPropertyInternal directPropertyInternal{ getType, setType };
 
+    ASSERT_EQUAL(setType, directPropertyInternal.GetValue());
+
+    const std::string setValue{ "set" };
     directPropertyInternal.setType = setValue;
 
     ASSERT_EQUAL(setValue, directPropertyInternal.GetValue());

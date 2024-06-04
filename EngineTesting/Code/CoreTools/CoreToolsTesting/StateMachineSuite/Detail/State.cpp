@@ -10,6 +10,6 @@
 #include "State.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-CoreTools::CdDetected::CdDetected(const char*, const std::vector<clock_t>&) noexcept
+CoreTools::CdDetected::CdDetected(const char*, const ClockContainer&) noexcept
 {
 }

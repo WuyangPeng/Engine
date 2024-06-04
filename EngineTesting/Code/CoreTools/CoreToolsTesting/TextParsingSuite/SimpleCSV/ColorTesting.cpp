@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 16:45)
+/// 版本：1.0.0.10 (2024/06/01 17:49)
 
 #include "ColorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -35,13 +35,18 @@ void CoreTools::ColorTesting::MainTest()
 
 void CoreTools::ColorTesting::DefaultColorTest()
 {
-    constexpr SimpleCSV::Color color0{};
+    constexpr SimpleCSV::Color color{};
 
-    ASSERT_EQUAL(color0.GetAlpha(), 255);
-    ASSERT_EQUAL(color0.GetRed(), 0);
-    ASSERT_EQUAL(color0.GetGreen(), 0);
-    ASSERT_EQUAL(color0.GetBlue(), 0);
+    ASSERT_EQUAL(color.GetAlpha(), 255);
+    ASSERT_EQUAL(color.GetRed(), 0);
+    ASSERT_EQUAL(color.GetGreen(), 0);
+    ASSERT_EQUAL(color.GetBlue(), 0);
 
+    ASSERT_NOT_THROW_EXCEPTION_1(DefaultColorGetHexTest, color);
+}
+
+void CoreTools::ColorTesting::DefaultColorGetHexTest(const Color& color0)
+{
     const auto hex = color0.GetHex();
 
     const SimpleCSV::Color color1{ hex };
@@ -54,13 +59,18 @@ void CoreTools::ColorTesting::DefaultColorTest()
 
 void CoreTools::ColorTesting::RgbColorTest()
 {
-    const SimpleCSV::Color color0{ 20, 30, 40 };
+    const SimpleCSV::Color color{ 20, 30, 40 };
 
-    ASSERT_EQUAL(color0.GetAlpha(), 255);
-    ASSERT_EQUAL(color0.GetRed(), 20);
-    ASSERT_EQUAL(color0.GetGreen(), 30);
-    ASSERT_EQUAL(color0.GetBlue(), 40);
+    ASSERT_EQUAL(color.GetAlpha(), 255);
+    ASSERT_EQUAL(color.GetRed(), 20);
+    ASSERT_EQUAL(color.GetGreen(), 30);
+    ASSERT_EQUAL(color.GetBlue(), 40);
 
+    ASSERT_NOT_THROW_EXCEPTION_1(RgbColorGetHexTest, color);
+}
+
+void CoreTools::ColorTesting::RgbColorGetHexTest(const Color& color0)
+{
     const auto hex = color0.GetHex();
 
     SimpleCSV::Color color1{ hex };
@@ -80,13 +90,18 @@ void CoreTools::ColorTesting::RgbColorTest()
 
 void CoreTools::ColorTesting::RgbaColorTest()
 {
-    const SimpleCSV::Color color0{ 10, 20, 30, 40 };
+    const SimpleCSV::Color color{ 10, 20, 30, 40 };
 
-    ASSERT_EQUAL(color0.GetAlpha(), 10);
-    ASSERT_EQUAL(color0.GetRed(), 20);
-    ASSERT_EQUAL(color0.GetGreen(), 30);
-    ASSERT_EQUAL(color0.GetBlue(), 40);
+    ASSERT_EQUAL(color.GetAlpha(), 10);
+    ASSERT_EQUAL(color.GetRed(), 20);
+    ASSERT_EQUAL(color.GetGreen(), 30);
+    ASSERT_EQUAL(color.GetBlue(), 40);
 
+    ASSERT_NOT_THROW_EXCEPTION_1(RgbaColorGetHexTest, color);
+}
+
+void CoreTools::ColorTesting::RgbaColorGetHexTest(const Color& color0)
+{
     const auto hex = color0.GetHex();
 
     SimpleCSV::Color color1{ hex };

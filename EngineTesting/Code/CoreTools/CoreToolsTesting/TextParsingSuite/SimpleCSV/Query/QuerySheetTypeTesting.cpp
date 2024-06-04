@@ -31,20 +31,25 @@ void CoreTools::QuerySheetTypeTesting::DoRunUnitTest()
 
 void CoreTools::QuerySheetTypeTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetTypeTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetType0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetType1Test);
 }
 
-void CoreTools::QuerySheetTypeTesting::QuerySheetTypeTest()
+void CoreTools::QuerySheetTypeTesting::QuerySheetType0Test()
 {
     const auto sheetId = "sheetId"s;
     constexpr auto sheetType = SimpleCSV::ContentType::Chart;
-    const SimpleCSV::QuerySheetType querySheetType0{ sheetId, sheetType };
+    const SimpleCSV::QuerySheetType querySheetType{ sheetId, sheetType };
 
-    ASSERT_EQUAL(sheetId, querySheetType0.GetSheetId());
-    ASSERT_EQUAL(sheetType, querySheetType0.GetSheetType());
+    ASSERT_EQUAL(sheetId, querySheetType.GetSheetId());
+    ASSERT_EQUAL(sheetType, querySheetType.GetSheetType());
+}
 
-    const SimpleCSV::QuerySheetType querySheetType1{ sheetId };
+void CoreTools::QuerySheetTypeTesting::QuerySheetType1Test()
+{
+    const auto sheetId = "sheetId"s;
+    const SimpleCSV::QuerySheetType querySheetType{ sheetId };
 
-    ASSERT_EQUAL(sheetId, querySheetType1.GetSheetId());
-    ASSERT_EQUAL(querySheetType1.GetSheetType(), SimpleCSV::ContentType::Workbook);
+    ASSERT_EQUAL(sheetId, querySheetType.GetSheetId());
+    ASSERT_EQUAL(querySheetType.GetSheetType(), SimpleCSV::ContentType::Workbook);
 }

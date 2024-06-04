@@ -41,17 +41,27 @@ void CoreTools::ContentTypesTesting::ContentTypesTest()
     auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
     const auto data = make_shared<SimpleCSV::XmlData>(document, "[Content_Types].xml");
 
-    SimpleCSV::ContentTypes contentTypes{ data };
-
-    const auto size = contentTypes.GetContentItems().size();
+    ContentTypes contentTypes{ data };
 
     for (const auto& item : contentTypes.GetContentItems())
     {
-        auto contentItem = contentTypes.GetContentItem(item.GetPath());
-
-        ASSERT_EQUAL(contentItem.GetPath(), item.GetPath());
-        ASSERT_EQUAL(contentItem.GetType(), item.GetType());
+        ASSERT_NOT_THROW_EXCEPTION_2(GetContentItemTest, contentTypes, item);
     }
+
+    ASSERT_NOT_THROW_EXCEPTION_1(OverrideTest, contentTypes);
+}
+
+void CoreTools::ContentTypesTesting::GetContentItemTest(const ContentTypes& contentTypes, const ContentItem& item)
+{
+    const auto contentItem = contentTypes.GetContentItem(item.GetPath());
+
+    ASSERT_EQUAL(contentItem.GetPath(), item.GetPath());
+    ASSERT_EQUAL(contentItem.GetType(), item.GetType());
+}
+
+void CoreTools::ContentTypesTesting::OverrideTest(ContentTypes& contentTypes)
+{
+    const auto size = contentTypes.GetContentItems().size();
 
     contentTypes.AddOverride("/xl/worksheets/sheet4.xml", SimpleCSV::ContentType::Worksheet);
 

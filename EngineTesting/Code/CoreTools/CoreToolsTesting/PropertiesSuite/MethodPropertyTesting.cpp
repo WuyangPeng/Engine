@@ -5,12 +5,18 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.9 (2024/04/23 12:55)
+/// 版本：1.0.0.10 (2024/05/28 11:06)
 
 #include "MethodPropertyTesting.h"
 #include "Detail/MethodProperty.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Properties/MethodPropertyGetDetail.h"
+#include "CoreTools/Properties/MethodPropertyGetExternalDetail.h"
+#include "CoreTools/Properties/MethodPropertyGetSetDetail.h"
+#include "CoreTools/Properties/MethodPropertyGetSetExternalDetail.h"
+#include "CoreTools/Properties/MethodPropertySetDetail.h"
+#include "CoreTools/Properties/MethodPropertySetExternalDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 CoreTools::MethodPropertyTesting::MethodPropertyTesting(const OStreamShared& stream)

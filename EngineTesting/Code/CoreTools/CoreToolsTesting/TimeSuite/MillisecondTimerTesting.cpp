@@ -44,14 +44,23 @@ void CoreTools::MillisecondTimerTesting::MainTest()
 
 void CoreTools::MillisecondTimerTesting::TimeTest()
 {
-    constexpr int64_t microseconds{ System::gMillisecond };
     MillisecondTimer millisecondTimer{ microseconds };
-    constexpr int32_t epsilon{ 10 };
 
+    ASSERT_NOT_THROW_EXCEPTION_1(TimeBaseTest, millisecondTimer);
+    ASSERT_NOT_THROW_EXCEPTION_1(Sleep0Test, millisecondTimer);
+    ASSERT_NOT_THROW_EXCEPTION_1(ReTimingTest, millisecondTimer);
+    ASSERT_NOT_THROW_EXCEPTION_1(Sleep1Test, millisecondTimer);
+}
+
+void CoreTools::MillisecondTimerTesting::TimeBaseTest(const MillisecondTimer& millisecondTimer)
+{
     ASSERT_RANGE(millisecondTimer.GetRemain(), microseconds - epsilon, microseconds);
     ASSERT_RANGE(millisecondTimer.GetElapsedTime(), 0, epsilon);
     ASSERT_FALSE(millisecondTimer.IsElapsed());
+}
 
+void CoreTools::MillisecondTimerTesting::Sleep0Test(const MillisecondTimer& millisecondTimer)
+{
     const auto nowTime = millisecondTimer.GetNowTime();
     ASSERT_LESS(0, nowTime);
 
@@ -60,14 +69,19 @@ void CoreTools::MillisecondTimerTesting::TimeTest()
     ASSERT_RANGE(millisecondTimer.GetRemain(), 0, epsilon);
     ASSERT_RANGE(millisecondTimer.GetElapsedTime(), microseconds, microseconds + epsilon);
     ASSERT_TRUE(millisecondTimer.IsElapsed());
+}
 
-    constexpr int64_t twoMicroseconds{ microseconds * 2 };
+void CoreTools::MillisecondTimerTesting::ReTimingTest(MillisecondTimer& millisecondTimer)
+{
     millisecondTimer.ReTiming(twoMicroseconds);
 
     ASSERT_RANGE(millisecondTimer.GetRemain(), twoMicroseconds - epsilon, twoMicroseconds);
     ASSERT_RANGE(millisecondTimer.GetElapsedTime(), 0, epsilon);
     ASSERT_FALSE(millisecondTimer.IsElapsed());
+}
 
+void CoreTools::MillisecondTimerTesting::Sleep1Test(const MillisecondTimer& millisecondTimer)
+{
     System::SystemSleep(boost::numeric_cast<uint32_t>(twoMicroseconds));
 
     ASSERT_RANGE(millisecondTimer.GetRemain(), 0, epsilon);

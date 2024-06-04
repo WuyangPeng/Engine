@@ -10,6 +10,7 @@
 #ifndef CONCURRENT_TOOLS_TIME_SUITE_CUSTOM_TIME_TESTING_H
 #define CONCURRENT_TOOLS_TIME_SUITE_CUSTOM_TIME_TESTING_H
 
+#include "CoreTools/Time/CustomTime.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -31,6 +32,10 @@ namespace CoreTools
 
         void TimeTest();
         void DescribeTest();
+
+        void Time0Test(CustomTime& time);
+        void Time1Test(CustomTime& time);
+        void Time2Test(CustomTime& time);
     };
 }
 

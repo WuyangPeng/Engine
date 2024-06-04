@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 17:02)
+/// 版本：1.0.0.10 (2024/06/01 13:55)
 
 #include "RowRangeTesting.h"
 #include "System/Helper/PragmaWarning/PugiXml.h"
@@ -21,7 +21,9 @@
 #include "Mathematics/Base/MathDetail.h"
 
 CoreTools::RowRangeTesting::RowRangeTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      document{ SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx") },
+      workbook{ document->GetWorkbook() }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -40,15 +42,12 @@ void CoreTools::RowRangeTesting::MainTest()
 
 void CoreTools::RowRangeTesting::RowRangeTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheet = GetWorkSheet();
 
     auto rows = worksheet.GetRows();
+
     ASSERT_EQUAL(rows.GetSharedStrings(), workbook.GetSharedStrings());
+
     const auto rowCount = rows.GetRowCount();
 
     auto size = 0;
@@ -66,4 +65,12 @@ void CoreTools::RowRangeTesting::RowRangeTest()
     ASSERT_EQUAL(rows.GetLastRow(), size);
 
     ASSERT_UNEQUAL_NULL_PTR(rows.GetDataNode());
+}
+
+CoreTools::RowRangeTesting::Worksheet CoreTools::RowRangeTesting::GetWorkSheet()
+{
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    const auto& worksheetName = worksheetNames.at(0);
+
+    return workbook.GetWorksheet(worksheetName);
 }

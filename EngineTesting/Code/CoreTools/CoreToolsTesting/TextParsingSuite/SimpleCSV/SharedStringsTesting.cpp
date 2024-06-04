@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 17:05)
+/// 版本：1.0.0.10 (2024/06/01 11:48)
 
 #include "SharedStringsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -45,18 +45,35 @@ void CoreTools::SharedStringsTesting::SharedStringsTest()
 
     SimpleCSV::SharedStrings sharedStrings{ xmlData };
 
+    ASSERT_NOT_THROW_EXCEPTION_1(IsStringExistsTest, sharedStrings);
+    ASSERT_NOT_THROW_EXCEPTION_1(GetStringTest, sharedStrings);
+
+    const auto index = AppendStringTest(sharedStrings);
+
+    sharedStrings.ClearString(index);
+    ASSERT_TRUE(sharedStrings.GetString(index).empty());
+}
+
+void CoreTools::SharedStringsTesting::IsStringExistsTest(const SharedStrings& sharedStrings)
+{
     ASSERT_TRUE(sharedStrings.IsStringExists(0));
     ASSERT_TRUE(sharedStrings.IsStringExists("bool"));
     ASSERT_LESS_EQUAL(0, sharedStrings.GetStringIndex("bool"));
+}
 
-    const auto value = sharedStrings.GetString(10);
+void CoreTools::SharedStringsTesting::GetStringTest(const SharedStrings& sharedStrings)
+{
+    const auto& value = sharedStrings.GetString(10);
     ASSERT_EQUAL(10, sharedStrings.GetStringIndex(value));
+}
 
+int CoreTools::SharedStringsTesting::AppendStringTest(SharedStrings& sharedStrings)
+{
     const auto index = sharedStrings.AppendString("sharedStrings");
+
     ASSERT_LESS(0, index);
     ASSERT_EQUAL(index, sharedStrings.GetStringIndex("sharedStrings"));
     ASSERT_EQUAL("sharedStrings", sharedStrings.GetString(index));
 
-    sharedStrings.ClearString(index);
-    ASSERT_TRUE(sharedStrings.GetString(index).empty());
+    return index;
 }

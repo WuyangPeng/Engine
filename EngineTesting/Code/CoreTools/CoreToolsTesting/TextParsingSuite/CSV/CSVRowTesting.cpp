@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 17:55)
+/// 版本：1.0.0.10 (2024/05/31 15:30)
 
 #include "CSVRowTesting.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
@@ -26,6 +26,7 @@
 
 #include <map>
 
+using System::operator+;
 using System::operator++;
 using namespace std::literals;
 
@@ -75,7 +76,10 @@ CoreTools::CSVDataType CoreTools::CSVRow::StringCastEnum<CoreTools::CSVDataType>
 }
 
 CoreTools::CSVRowTesting::CSVRowTesting(const OStreamShared& stream)
-    : ParentType{ stream }, rowContent0{}, rowContent1{}
+    : ParentType{ stream },
+      rowContent0{},
+      rowContent1{},
+      csvFileName{ SYSTEM_TEXT("Resource/CSVTesting/CSVHead/CSVHeadTesting.csv"s) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -97,18 +101,27 @@ void CoreTools::CSVRowTesting::MainTest()
 
 void CoreTools::CSVRowTesting::CreateCSV()
 {
-    ExcelConversionCSV excelConversionCSV{ "Resource/CSVTesting/CSVHeadTesting.xlsx"s, SYSTEM_TEXT("Resource/CSVTesting/CSVHead/CSVHeadTesting.csv"s), false };
+    ExcelConversionCSV excelConversionCSV{ "Resource/CSVTesting/CSVHeadTesting.xlsx"s, csvFileName, false };
 }
 
 CoreTools::CSVHead CoreTools::CSVRowTesting::ReadFile()
 {
-    using FileContent = std::vector<String>;
-
-    FileContent fileContent{};
-
-    const IFileStreamManager streamManager{ SYSTEM_TEXT("Resource/CSVTesting/CSVHead/CSVHeadTesting.csv"s) };
+    const IFileStreamManager streamManager{ csvFileName };
 
     const auto content = streamManager.GetFileContent(SYSTEM_TEXT("\r\n"));
+
+    const auto fileContent = GetFileContent(content);
+
+    rowContent0 = content.at(System::EnumCastUnderlying(CSVType::VariableName));
+    constexpr auto nextIndex = System::EnumCastUnderlying(CSVType::VariableName + 1);
+    rowContent1 = content.at(nextIndex);
+
+    return CSVHead{ csvFileName, fileContent };
+}
+
+CoreTools::CSVRowTesting::FileContent CoreTools::CSVRowTesting::GetFileContent(const FileContent& content)
+{
+    FileContent fileContent{};
 
     auto csvType = CSVType::Format;
     for (const auto& element : content)
@@ -122,13 +135,7 @@ CoreTools::CSVHead CoreTools::CSVRowTesting::ReadFile()
         }
     }
 
-    rowContent0 = content.at(System::EnumCastUnderlying(CSVType::VariableName));
-    constexpr auto nextIndex = System::EnumCastUnderlying(CSVType::VariableName) + 1;
-    rowContent1 = content.at(nextIndex);
-
-    CSVHead csvHead{ SYSTEM_TEXT("Resource/CSVTesting/CSVHead/CSVHeadTesting.csv"s), fileContent };
-
-    return csvHead;
+    return fileContent;
 }
 
 void CoreTools::CSVRowTesting::CSVRow0Test()
@@ -138,6 +145,17 @@ void CoreTools::CSVRowTesting::CSVRow0Test()
 
     ASSERT_EQUAL(csvRow.GetCount(), 28);
 
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVRow0BaseTest, csvRow);
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVRow0VectorTest, csvRow);
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVRow0IntVectorTest, csvRow);
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVRow0ArrayTest, csvRow);
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVRow0VectorArrayTest, csvRow);
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVRow0IntVectorArrayTest, csvRow);
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVRow0StringArrayTest, csvRow);
+}
+
+void CoreTools::CSVRowTesting::CSVRow0BaseTest(const CSVRow& csvRow)
+{
     ASSERT_EQUAL(csvRow.GetInt(SYSTEM_TEXT("id"s)), 10001);
     ASSERT_TRUE(csvRow.GetBool(SYSTEM_TEXT("test0"s)));
     ASSERT_EQUAL(System::String{ csvRow.GetChar(SYSTEM_TEXT("test1"s)) }, System::String{ SYSTEM_TEXT('a') });
@@ -146,7 +164,10 @@ void CoreTools::CSVRowTesting::CSVRow0Test()
     ASSERT_EQUAL(csvRow.GetInt(SYSTEM_TEXT("test4"s)), 7);
     ASSERT_EQUAL(csvRow.GetString(SYSTEM_TEXT("test5"s)), SYSTEM_TEXT("测试4,测试5,测试6,"s));
     ASSERT_EQUAL(csvRow.GetEnum<CSVDataType>(SYSTEM_TEXT("test6"s)), CSVDataType::String);
+}
 
+void CoreTools::CSVRowTesting::CSVRow0VectorTest(const CSVRow& csvRow)
+{
     const auto vector2 = csvRow.GetVector2(SYSTEM_TEXT("test7"s));
     ASSERT_APPROXIMATE(vector2.GetX(), 1.1, Mathematics::MathD::epsilon);
     ASSERT_APPROXIMATE(vector2.GetY(), 1.2, Mathematics::MathD::epsilon);
@@ -161,7 +182,10 @@ void CoreTools::CSVRowTesting::CSVRow0Test()
     ASSERT_APPROXIMATE(vector4.GetY(), 1.5, Mathematics::MathD::epsilon);
     ASSERT_APPROXIMATE(vector4.GetZ(), 1.6, Mathematics::MathD::epsilon);
     ASSERT_APPROXIMATE(vector4.GetW(), 1.4, Mathematics::MathD::epsilon);
+}
 
+void CoreTools::CSVRowTesting::CSVRow0IntVectorTest(const CSVRow& csvRow)
+{
     ASSERT_EQUAL(csvRow.GetIntVector2(SYSTEM_TEXT("test10"s)).GetX(), 1);
     ASSERT_EQUAL(csvRow.GetIntVector2(SYSTEM_TEXT("test10"s)).GetY(), 5);
 
@@ -173,20 +197,26 @@ void CoreTools::CSVRowTesting::CSVRow0Test()
     ASSERT_EQUAL(csvRow.GetIntVector4(SYSTEM_TEXT("test12"s)).GetY(), 5);
     ASSERT_EQUAL(csvRow.GetIntVector4(SYSTEM_TEXT("test12"s)).GetZ(), 4);
     ASSERT_EQUAL(csvRow.GetIntVector4(SYSTEM_TEXT("test12"s)).GetW(), 7);
+}
 
-    ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test13"s)), (std::vector<int>{ 10001, 14, 66 }));
-    ASSERT_EQUAL(csvRow.GetBoolArray(SYSTEM_TEXT("test14"s)), (std::deque<bool>{ true, false }));
-    ASSERT_EQUAL(csvRow.GetCharArray(SYSTEM_TEXT("test15"s)), (std::vector<System::TChar>{ SYSTEM_TEXT('a'), SYSTEM_TEXT('i') }));
+void CoreTools::CSVRowTesting::CSVRow0ArrayTest(const CSVRow& csvRow)
+{
+    ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test13"s)), (std::vector{ 10001, 14, 66 }));
+    ASSERT_EQUAL(csvRow.GetBoolArray(SYSTEM_TEXT("test14"s)), (std::deque{ true, false }));
+    ASSERT_EQUAL(csvRow.GetCharArray(SYSTEM_TEXT("test15"s)), (std::vector{ SYSTEM_TEXT('a'), SYSTEM_TEXT('i') }));
 
     const auto doubleArray = csvRow.GetDoubleArray(SYSTEM_TEXT("test16"s));
     ASSERT_EQUAL(doubleArray.size(), 2u);
     ASSERT_APPROXIMATE(doubleArray.at(0), 1.1, Mathematics::MathD::epsilon);
     ASSERT_APPROXIMATE(doubleArray.at(1), 1.1, Mathematics::MathD::epsilon);
 
-    ASSERT_EQUAL(csvRow.GetInt64Array(SYSTEM_TEXT("test17"s)), (std::vector<int64_t>{ 10001 }));
-    ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test18"s)), (std::vector<int>{ 7, 2 }));
-    ASSERT_EQUAL(csvRow.GetEnumArray<CSVDataType>(SYSTEM_TEXT("test19"s)), (std::vector<CSVDataType>{ CSVDataType::String, CSVDataType::Vector2 }));
+    ASSERT_EQUAL(csvRow.GetInt64Array(SYSTEM_TEXT("test17"s)), (std::vector{ 10001LL }));
+    ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test18"s)), (std::vector{ 7, 2 }));
+    ASSERT_EQUAL(csvRow.GetEnumArray<CSVDataType>(SYSTEM_TEXT("test19"s)), (std::vector{ CSVDataType::String, CSVDataType::Vector2 }));
+}
 
+void CoreTools::CSVRowTesting::CSVRow0VectorArrayTest(const CSVRow& csvRow)
+{
     const auto vector2Array = csvRow.GetVector2Array(SYSTEM_TEXT("test20"s));
     ASSERT_EQUAL(vector2Array.size(), 2u);
     ASSERT_APPROXIMATE(vector2Array.at(0).GetX(), 1.1, Mathematics::MathD::epsilon);
@@ -206,7 +236,10 @@ void CoreTools::CSVRowTesting::CSVRow0Test()
     ASSERT_APPROXIMATE(vector4Array.at(0).GetY(), 1.5, Mathematics::MathD::epsilon);
     ASSERT_APPROXIMATE(vector4Array.at(0).GetZ(), 1.6, Mathematics::MathD::epsilon);
     ASSERT_APPROXIMATE(vector4Array.at(0).GetW(), 1.4, Mathematics::MathD::epsilon);
+}
 
+void CoreTools::CSVRowTesting::CSVRow0IntVectorArrayTest(const CSVRow& csvRow)
+{
     ASSERT_EQUAL(csvRow.GetIntVector2Array(SYSTEM_TEXT("test23"s)).at(0).GetX(), 1);
     ASSERT_EQUAL(csvRow.GetIntVector2Array(SYSTEM_TEXT("test23"s)).at(0).GetY(), 5);
 
@@ -218,7 +251,10 @@ void CoreTools::CSVRowTesting::CSVRow0Test()
     ASSERT_EQUAL(csvRow.GetIntVector4Array(SYSTEM_TEXT("test25"s)).at(0).GetY(), 5);
     ASSERT_EQUAL(csvRow.GetIntVector4Array(SYSTEM_TEXT("test25"s)).at(0).GetZ(), 6);
     ASSERT_EQUAL(csvRow.GetIntVector4Array(SYSTEM_TEXT("test25"s)).at(0).GetW(), 7);
+}
 
+void CoreTools::CSVRowTesting::CSVRow0StringArrayTest(const CSVRow& csvRow)
+{
     const auto result = csvRow.GetStringArray(SYSTEM_TEXT("test26"s));
     ASSERT_EQUAL(result.at(0), SYSTEM_TEXT("a"s));
     ASSERT_EQUAL(result.at(1), SYSTEM_TEXT("i"s));
@@ -232,6 +268,17 @@ void CoreTools::CSVRowTesting::CSVRow1Test()
 
     ASSERT_EQUAL(csvRow.GetCount(), 28);
 
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVRow1BaseTest, csvRow);
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVRow1VectorTest, csvRow);
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVRow1IntVectorTest, csvRow);
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVRow1ArrayTest, csvRow);
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVRow1VectorArrayTest, csvRow);
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVRow1IntVectorArrayTest, csvRow);
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVRow1StringArrayTest, csvRow);
+}
+
+void CoreTools::CSVRowTesting::CSVRow1BaseTest(const CSVRow& csvRow)
+{
     ASSERT_EQUAL(csvRow.GetInt(SYSTEM_TEXT("id"s)), 10002);
     ASSERT_TRUE(csvRow.GetBool(SYSTEM_TEXT("test0"s)));
     ASSERT_EQUAL(System::String{ csvRow.GetChar(SYSTEM_TEXT("test1"s)) }, System::String{ SYSTEM_TEXT('b') });
@@ -240,7 +287,10 @@ void CoreTools::CSVRowTesting::CSVRow1Test()
     ASSERT_EQUAL(csvRow.GetInt(SYSTEM_TEXT("test4"s)), 3);
     ASSERT_EQUAL(csvRow.GetString(SYSTEM_TEXT("test5"s)), SYSTEM_TEXT("测试5"s));
     ASSERT_EQUAL(csvRow.GetEnum<CSVDataType>(SYSTEM_TEXT("test6"s)), CSVDataType::Char);
+}
 
+void CoreTools::CSVRowTesting::CSVRow1VectorTest(const CSVRow& csvRow)
+{
     const auto vector2 = csvRow.GetVector2(SYSTEM_TEXT("test7"s));
     ASSERT_APPROXIMATE(vector2.GetX(), 1.1, Mathematics::MathD::epsilon);
     ASSERT_APPROXIMATE(vector2.GetY(), 1.3, Mathematics::MathD::epsilon);
@@ -255,7 +305,10 @@ void CoreTools::CSVRowTesting::CSVRow1Test()
     ASSERT_APPROXIMATE(vector4.GetY(), 1.5, Mathematics::MathD::epsilon);
     ASSERT_APPROXIMATE(vector4.GetZ(), 1.6, Mathematics::MathD::epsilon);
     ASSERT_APPROXIMATE(vector4.GetW(), 1.5, Mathematics::MathD::epsilon);
+}
 
+void CoreTools::CSVRowTesting::CSVRow1IntVectorTest(const CSVRow& csvRow)
+{
     ASSERT_EQUAL(csvRow.GetIntVector2(SYSTEM_TEXT("test10"s)).GetX(), 1);
     ASSERT_EQUAL(csvRow.GetIntVector2(SYSTEM_TEXT("test10"s)).GetY(), 6);
 
@@ -267,7 +320,10 @@ void CoreTools::CSVRowTesting::CSVRow1Test()
     ASSERT_EQUAL(csvRow.GetIntVector4(SYSTEM_TEXT("test12"s)).GetY(), 7);
     ASSERT_EQUAL(csvRow.GetIntVector4(SYSTEM_TEXT("test12"s)).GetZ(), 4);
     ASSERT_EQUAL(csvRow.GetIntVector4(SYSTEM_TEXT("test12"s)).GetW(), 6);
+}
 
+void CoreTools::CSVRowTesting::CSVRow1ArrayTest(const CSVRow& csvRow)
+{
     ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test13"s)), (std::vector{ 10002, 55, 4 }));
     ASSERT_EQUAL(csvRow.GetBoolArray(SYSTEM_TEXT("test14"s)), (std::deque{ true }));
     ASSERT_EQUAL(csvRow.GetCharArray(SYSTEM_TEXT("test15"s)), (std::vector{ SYSTEM_TEXT('b') }));
@@ -276,10 +332,13 @@ void CoreTools::CSVRowTesting::CSVRow1Test()
     ASSERT_EQUAL(doubleArray.size(), 1u);
     ASSERT_APPROXIMATE(doubleArray.at(0), 1.2, Mathematics::MathD::epsilon);
 
-    ASSERT_EQUAL(csvRow.GetInt64Array(SYSTEM_TEXT("test17"s)), (std::vector<int64_t>{ 10002 }));
+    ASSERT_EQUAL(csvRow.GetInt64Array(SYSTEM_TEXT("test17"s)), (std::vector{ 10002LL }));
     ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test18"s)), (std::vector{ 3 }));
     ASSERT_EQUAL(csvRow.GetEnumArray<CSVDataType>(SYSTEM_TEXT("test19"s)), (std::vector{ CSVDataType::Char }));
+}
 
+void CoreTools::CSVRowTesting::CSVRow1VectorArrayTest(const CSVRow& csvRow)
+{
     const auto vector2Array = csvRow.GetVector2Array(SYSTEM_TEXT("test20"s));
     ASSERT_EQUAL(vector2Array.size(), 1u);
     ASSERT_APPROXIMATE(vector2Array.at(0).GetX(), 1.1, Mathematics::MathD::epsilon);
@@ -297,7 +356,10 @@ void CoreTools::CSVRowTesting::CSVRow1Test()
     ASSERT_APPROXIMATE(vector4Array.at(0).GetY(), 1.5, Mathematics::MathD::epsilon);
     ASSERT_APPROXIMATE(vector4Array.at(0).GetZ(), 1.6, Mathematics::MathD::epsilon);
     ASSERT_APPROXIMATE(vector4Array.at(0).GetW(), 1.5, Mathematics::MathD::epsilon);
+}
 
+void CoreTools::CSVRowTesting::CSVRow1IntVectorArrayTest(const CSVRow& csvRow)
+{
     ASSERT_EQUAL(csvRow.GetIntVector2Array(SYSTEM_TEXT("test23"s)).at(0).GetX(), 1);
     ASSERT_EQUAL(csvRow.GetIntVector2Array(SYSTEM_TEXT("test23"s)).at(0).GetY(), 6);
 
@@ -309,7 +371,10 @@ void CoreTools::CSVRowTesting::CSVRow1Test()
     ASSERT_EQUAL(csvRow.GetIntVector4Array(SYSTEM_TEXT("test25"s)).at(0).GetY(), 7);
     ASSERT_EQUAL(csvRow.GetIntVector4Array(SYSTEM_TEXT("test25"s)).at(0).GetZ(), 4);
     ASSERT_EQUAL(csvRow.GetIntVector4Array(SYSTEM_TEXT("test25"s)).at(0).GetW(), 6);
+}
 
+void CoreTools::CSVRowTesting::CSVRow1StringArrayTest(const CSVRow& csvRow)
+{
     const auto result = csvRow.GetStringArray(SYSTEM_TEXT("test26"s));
     ASSERT_EQUAL(result.at(0), SYSTEM_TEXT("b"s));
     ASSERT_EQUAL(result.size(), 1u);

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 16:53)
+/// 版本：1.0.0.10 (2024/06/01 16:48)
 
 #include "RelationshipItemTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -48,11 +48,16 @@ void CoreTools::RelationshipItemTesting::RelationshipItemTest()
     for (const SimpleCSV::Relationships relationships{ data };
          const auto& relationshipItem : relationships.GetRelationships())
     {
-        ASSERT_EQUAL(relationshipItem.GetId(), relationships.GetRelationshipById(relationshipItem.GetId()).GetId());
-        ASSERT_EQUAL(relationshipItem.GetTarget(), relationships.GetRelationshipByTarget(relationshipItem.GetTarget()).GetTarget());
-
-        ASSERT_EQUAL(SimpleCSV::RelationshipItem::GetTypeFromString(SimpleCSV::RelationshipItem::GetStringFromType(relationshipItem.GetType())), relationshipItem.GetType());
+        ASSERT_NOT_THROW_EXCEPTION_2(DoRelationshipItemTest, relationships, relationshipItem);
     }
+}
+
+void CoreTools::RelationshipItemTesting::DoRelationshipItemTest(const Relationships& relationships, const RelationshipItem& relationshipItem)
+{
+    ASSERT_EQUAL(relationshipItem.GetId(), relationships.GetRelationshipById(relationshipItem.GetId()).GetId());
+    ASSERT_EQUAL(relationshipItem.GetTarget(), relationships.GetRelationshipByTarget(relationshipItem.GetTarget()).GetTarget());
+
+    ASSERT_EQUAL(SimpleCSV::RelationshipItem::GetTypeFromString(SimpleCSV::RelationshipItem::GetStringFromType(relationshipItem.GetType())), relationshipItem.GetType());
 }
 
 void CoreTools::RelationshipItemTesting::TypeStringTest()

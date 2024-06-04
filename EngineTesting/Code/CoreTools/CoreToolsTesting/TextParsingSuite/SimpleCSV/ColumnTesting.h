@@ -26,10 +26,15 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using Worksheet = SimpleCSV::Worksheet;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void ColumnTest();
+
+        void DoColumnTest(const Worksheet& worksheet);
     };
 }
 

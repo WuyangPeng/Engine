@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 17:07)
+/// 版本：1.0.0.10 (2024/06/01 10:55)
 
 #include "WorkbookTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -21,7 +21,13 @@
 using namespace std::literals;
 
 CoreTools::WorkbookTesting::WorkbookTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      document{ SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s) },
+      workbook{ document->GetWorkbook() },
+      sheet1Name{ "Sheet1" },
+      sheet3Name{ "Sheet3" },
+      sheet4Name{ "Sheet4" },
+      sheet5Name{ "Sheet5" }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -46,11 +52,22 @@ void CoreTools::WorkbookTesting::MainTest()
 
 void CoreTools::WorkbookTesting::GetWorksheetTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
     auto worksheetNames = workbook.GetWorksheetNames();
+
+    ASSERT_NOT_THROW_EXCEPTION_1(GetWorksheetSizeTest, worksheetNames);
+
+    const auto size = worksheetNames.size();
+
+    ASSERT_NOT_THROW_EXCEPTION_1(AddWorksheetTest, size);
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteSheet0Test, size);
+    ASSERT_NOT_THROW_EXCEPTION_1(CloneSheetTest, size);
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteSheet1Test, size);
+}
+
+void CoreTools::WorkbookTesting::GetWorksheetSizeTest(const SheetNamesType& worksheetNames)
+{
     const auto& worksheetName = worksheetNames.at(0);
+
     const auto worksheet0 = workbook.GetSheet(worksheetName);
     const auto worksheet1 = workbook.GetSheet(1);
     const auto worksheet2 = workbook.GetWorksheet(worksheetName);
@@ -62,102 +79,145 @@ void CoreTools::WorkbookTesting::GetWorksheetTest()
     ASSERT_EQUAL(worksheet0.GetRowCount(), worksheet2.GetRowCount());
     ASSERT_EQUAL(worksheet3.GetColumnCount(), worksheet2.GetColumnCount());
     ASSERT_EQUAL(worksheet3.GetRowCount(), worksheet2.GetRowCount());
+}
 
-    const auto size = worksheetNames.size();
+void CoreTools::WorkbookTesting::AddWorksheetTest(size_t size)
+{
+    workbook.AddWorksheet(sheet4Name);
 
-    workbook.AddWorksheet("Sheet4"s);
-    worksheetNames = workbook.GetWorksheetNames();
-    ASSERT_EQUAL(worksheetNames.at(worksheetNames.size() - 1), "Sheet4"s);
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    ASSERT_EQUAL(worksheetNames.at(worksheetNames.size() - 1), sheet4Name);
     ASSERT_EQUAL(size + 1, worksheetNames.size());
-    ASSERT_EQUAL(workbook.GetIndexOfSheet("Sheet4"s), 4);
+    ASSERT_EQUAL(workbook.GetIndexOfSheet(sheet4Name), boost::numeric_cast<int>(size) + 1);
+}
 
-    workbook.DeleteSheet("Sheet4"s);
-    worksheetNames = workbook.GetWorksheetNames();
-    ASSERT_EQUAL(worksheetNames.at(worksheetNames.size() - 1), "Sheet3"s);
+void CoreTools::WorkbookTesting::DeleteSheet0Test(size_t size)
+{
+    workbook.DeleteSheet(sheet4Name);
+
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    ASSERT_EQUAL(worksheetNames.at(worksheetNames.size() - 1), sheet3Name);
     ASSERT_EQUAL(size, worksheetNames.size());
+}
 
-    workbook.CloneSheet("Sheet1"s, "Sheet5"s);
-    worksheetNames = workbook.GetWorksheetNames();
-    ASSERT_EQUAL(worksheetNames.at(worksheetNames.size() - 1), "Sheet5"s);
+void CoreTools::WorkbookTesting::CloneSheetTest(size_t size)
+{
+    workbook.CloneSheet(sheet1Name, sheet5Name);
+
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    ASSERT_EQUAL(worksheetNames.at(worksheetNames.size() - 1), sheet5Name);
     ASSERT_EQUAL(size + 1, worksheetNames.size());
-    ASSERT_EQUAL(workbook.GetIndexOfSheet("Sheet5"s), 4);
+    ASSERT_EQUAL(workbook.GetIndexOfSheet(sheet5Name), 4);
+}
 
-    workbook.DeleteSheet("Sheet5"s);
-    worksheetNames = workbook.GetWorksheetNames();
-    ASSERT_EQUAL(worksheetNames.at(worksheetNames.size() - 1), "Sheet3"s);
+void CoreTools::WorkbookTesting::DeleteSheet1Test(size_t size)
+{
+    workbook.DeleteSheet(sheet5Name);
+
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    ASSERT_EQUAL(worksheetNames.at(worksheetNames.size() - 1), sheet3Name);
     ASSERT_EQUAL(size, worksheetNames.size());
 }
 
 void CoreTools::WorkbookTesting::WorksheetIndexTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
     const auto worksheetNames = workbook.GetWorksheetNames();
 
-    const auto worksheet0 = workbook.GetSheet(1);
+    const auto worksheet = workbook.GetSheet(1);
 
-    workbook.SetSheetIndex("Sheet1"s, 6);
+    ASSERT_NOT_THROW_EXCEPTION_1(WorksheetIndex0Test, worksheet);
+    ASSERT_NOT_THROW_EXCEPTION_1(WorksheetIndex1Test, worksheet);
+    ASSERT_NOT_THROW_EXCEPTION_1(WorksheetIndex2Test, worksheet);
+    ASSERT_NOT_THROW_EXCEPTION_1(WorksheetIndex3Test, worksheet);
+    ASSERT_NOT_THROW_EXCEPTION_1(WorksheetIndex4Test, worksheet);
+    ASSERT_NOT_THROW_EXCEPTION_1(WorksheetIndex5Test, worksheet);
+    ASSERT_NOT_THROW_EXCEPTION_1(WorksheetIndex6Test, worksheet);
+    ASSERT_NOT_THROW_EXCEPTION_1(WorksheetIndex7Test, worksheet);
+}
+
+void CoreTools::WorkbookTesting::WorksheetIndex0Test(const Worksheet& worksheet0)
+{
+    workbook.SetSheetIndex(sheet1Name, 6);
     const auto worksheet1 = workbook.GetSheet(3);
+
     ASSERT_EQUAL(worksheet0.GetColumnCount(), worksheet1.GetColumnCount());
     ASSERT_EQUAL(worksheet0.GetRowCount(), worksheet1.GetRowCount());
-    ASSERT_EQUAL(workbook.GetIndexOfSheet("Sheet1"s), 3);
+    ASSERT_EQUAL(workbook.GetIndexOfSheet(sheet1Name), 3);
+}
 
-    const auto worksheet2 = workbook.GetSheet(1);
-    ASSERT_UNEQUAL(worksheet0.GetRowCount(), worksheet2.GetRowCount());
+void CoreTools::WorkbookTesting::WorksheetIndex1Test(const Worksheet& worksheet0)
+{
+    const auto worksheet1 = workbook.GetSheet(1);
+    ASSERT_UNEQUAL(worksheet0.GetRowCount(), worksheet1.GetRowCount());
+}
 
-    workbook.SetSheetIndex("Sheet1"s, 2);
-    const auto worksheet3 = workbook.GetSheet(2);
-    ASSERT_EQUAL(worksheet0.GetColumnCount(), worksheet3.GetColumnCount());
-    ASSERT_EQUAL(worksheet0.GetRowCount(), worksheet3.GetRowCount());
-    ASSERT_EQUAL(workbook.GetIndexOfSheet("Sheet1"s), 2);
+void CoreTools::WorkbookTesting::WorksheetIndex2Test(const Worksheet& worksheet0)
+{
+    workbook.SetSheetIndex(sheet1Name, 2);
+    const auto worksheet1 = workbook.GetSheet(2);
+    ASSERT_EQUAL(worksheet0.GetColumnCount(), worksheet1.GetColumnCount());
+    ASSERT_EQUAL(worksheet0.GetRowCount(), worksheet1.GetRowCount());
+    ASSERT_EQUAL(workbook.GetIndexOfSheet(sheet1Name), 2);
+}
 
-    const auto worksheet4 = workbook.GetSheet(3);
-    ASSERT_UNEQUAL(worksheet0.GetRowCount(), worksheet4.GetRowCount());
+void CoreTools::WorkbookTesting::WorksheetIndex3Test(const Worksheet& worksheet0)
+{
+    const auto worksheet1 = workbook.GetSheet(3);
+    ASSERT_UNEQUAL(worksheet0.GetRowCount(), worksheet1.GetRowCount());
+}
 
-    workbook.SetSheetIndex("Sheet1"s, 1);
-    const auto worksheet5 = workbook.GetSheet(1);
-    ASSERT_EQUAL(worksheet0.GetColumnCount(), worksheet5.GetColumnCount());
-    ASSERT_EQUAL(worksheet0.GetRowCount(), worksheet5.GetRowCount());
-    ASSERT_EQUAL(workbook.GetIndexOfSheet("Sheet1"s), 1);
+void CoreTools::WorkbookTesting::WorksheetIndex4Test(const Worksheet& worksheet0)
+{
+    workbook.SetSheetIndex(sheet1Name, 1);
+    const auto worksheet1 = workbook.GetSheet(1);
+    ASSERT_EQUAL(worksheet0.GetColumnCount(), worksheet1.GetColumnCount());
+    ASSERT_EQUAL(worksheet0.GetRowCount(), worksheet1.GetRowCount());
+    ASSERT_EQUAL(workbook.GetIndexOfSheet(sheet1Name), 1);
+}
 
-    const auto worksheet6 = workbook.GetSheet(2);
-    ASSERT_UNEQUAL(worksheet0.GetRowCount(), worksheet6.GetRowCount());
+void CoreTools::WorkbookTesting::WorksheetIndex5Test(const Worksheet& worksheet0)
+{
+    const auto worksheet1 = workbook.GetSheet(2);
+    ASSERT_UNEQUAL(worksheet0.GetRowCount(), worksheet1.GetRowCount());
+}
 
-    workbook.SetSheetIndex("Sheet1"s, 2);
-    const auto worksheet7 = workbook.GetSheet(2);
-    ASSERT_EQUAL(worksheet0.GetColumnCount(), worksheet7.GetColumnCount());
-    ASSERT_EQUAL(worksheet0.GetRowCount(), worksheet7.GetRowCount());
+void CoreTools::WorkbookTesting::WorksheetIndex6Test(const Worksheet& worksheet0)
+{
+    workbook.SetSheetIndex(sheet1Name, 2);
+    const auto worksheet1 = workbook.GetSheet(2);
+    ASSERT_EQUAL(worksheet0.GetColumnCount(), worksheet1.GetColumnCount());
+    ASSERT_EQUAL(worksheet0.GetRowCount(), worksheet1.GetRowCount());
+}
 
-    const auto worksheet8 = workbook.GetSheet(1);
-    ASSERT_UNEQUAL(worksheet0.GetRowCount(), worksheet8.GetRowCount());
-    ASSERT_EQUAL(workbook.GetIndexOfSheet("Sheet1"s), 2);
+void CoreTools::WorkbookTesting::WorksheetIndex7Test(const Worksheet& worksheet0)
+{
+    const auto worksheet1 = workbook.GetSheet(1);
+    ASSERT_UNEQUAL(worksheet0.GetRowCount(), worksheet1.GetRowCount());
+    ASSERT_EQUAL(workbook.GetIndexOfSheet(sheet1Name), 2);
 }
 
 void CoreTools::WorkbookTesting::TypeTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
     const auto count = workbook.GetWorksheetCount();
     for (auto i = 0; i < count; ++i)
     {
-        auto sheet = workbook.GetSheet(i + 1);
-
-        ASSERT_EQUAL(workbook.GetTypeOfSheet(sheet.GetName()), SimpleCSV::SheetType::Worksheet);
-        ASSERT_EQUAL(workbook.GetTypeOfSheet(i + 1), SimpleCSV::SheetType::Worksheet);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoTypeTest, i);
     }
 
     ASSERT_EQUAL(workbook.GetSheetCount(), count);
     ASSERT_EQUAL(workbook.GetChartSheetCount(), 0);
 }
 
+void CoreTools::WorkbookTesting::DoTypeTest(int index)
+{
+    const auto sheet = workbook.GetSheet(index + 1);
+
+    ASSERT_EQUAL(workbook.GetTypeOfSheet(sheet.GetName()), SimpleCSV::SheetType::Worksheet);
+    ASSERT_EQUAL(workbook.GetTypeOfSheet(index + 1), SimpleCSV::SheetType::Worksheet);
+}
+
 void CoreTools::WorkbookTesting::SheetNamesTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
-
     for (const auto& worksheetNames = workbook.GetWorksheetNames();
          const auto& name : worksheetNames)
     {
@@ -171,10 +231,6 @@ void CoreTools::WorkbookTesting::SheetNamesTest()
 
 void CoreTools::WorkbookTesting::ExistsTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    const auto workbook = document->GetWorkbook();
-
     for (const auto worksheetNames = workbook.GetWorksheetNames();
          const auto& name : worksheetNames)
     {
@@ -186,36 +242,25 @@ void CoreTools::WorkbookTesting::ExistsTest()
 
 void CoreTools::WorkbookTesting::SharedStringTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
-
     ASSERT_TRUE(workbook.HasSharedStrings());
     ASSERT_UNEQUAL_NULL_PTR(workbook.GetSharedStrings());
 }
 
 void CoreTools::WorkbookTesting::SetSheetNameTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    workbook.SetSheetName(sheet1Name, sheet4Name);
 
-    auto workbook = document->GetWorkbook();
-    workbook.SetSheetName("Sheet1"s, "Sheet4"s);
-
-    ASSERT_EQUAL(workbook.GetSheet(1).GetName(), "Sheet4"s);
+    ASSERT_EQUAL(workbook.GetSheet(1).GetName(), sheet4Name);
 }
 
 void CoreTools::WorkbookTesting::SheetIdTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto sheetId = workbook.GetSheetId(sheet1Name);
 
-    auto workbook = document->GetWorkbook();
-
-    const auto sheetId = workbook.GetSheetId("Sheet1"s);
-
-    ASSERT_EQUAL(workbook.GetSheetName(sheetId), "Sheet1"s);
+    ASSERT_EQUAL(workbook.GetSheetName(sheetId), sheet1Name);
     ASSERT_EQUAL(workbook.GetSheetVisibility(sheetId), ""s);
 
     ASSERT_EQUAL(workbook.CreateInternalSheetId(), 4);
 
-    workbook.PrepareSheetMetadata("Sheet4"s, workbook.CreateInternalSheetId());
+    workbook.PrepareSheetMetadata(sheet4Name, workbook.CreateInternalSheetId());
 }

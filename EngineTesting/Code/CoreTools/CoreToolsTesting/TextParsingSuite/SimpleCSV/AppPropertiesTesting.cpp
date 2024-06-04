@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 10:34)
+/// 版本：1.0.0.10 (2024/06/03 16:06)
 
 #include "AppPropertiesTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -19,7 +19,8 @@
 #include "Mathematics/Base/MathDetail.h"
 
 CoreTools::AppPropertiesTesting::AppPropertiesTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      docPath{ "Resource/CSVTesting/ExcelConversionCSVTesting.xlsx" }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -41,7 +42,7 @@ void CoreTools::AppPropertiesTesting::MainTest()
 
 void CoreTools::AppPropertiesTesting::AppendSheetNameTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
+    const auto document = SimpleCSV::Document::Open(docPath);
 
     auto workbook = document->GetWorkbook();
     auto worksheetNames = workbook.GetWorksheetNames();
@@ -58,7 +59,7 @@ void CoreTools::AppPropertiesTesting::AppendSheetNameTest()
 
 void CoreTools::AppPropertiesTesting::DeleteSheetNameTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
+    const auto document = SimpleCSV::Document::Open(docPath);
 
     auto workbook = document->GetWorkbook();
     auto worksheetNames = workbook.GetWorksheetNames();
@@ -75,7 +76,7 @@ void CoreTools::AppPropertiesTesting::DeleteSheetNameTest()
 
 void CoreTools::AppPropertiesTesting::SetSheetNameTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
+    const auto document = SimpleCSV::Document::Open(docPath);
 
     auto workbook = document->GetWorkbook();
     const auto worksheetNames = workbook.GetWorksheetNames();
@@ -88,7 +89,7 @@ void CoreTools::AppPropertiesTesting::SetSheetNameTest()
 
 void CoreTools::AppPropertiesTesting::PropertyTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
+    const auto document = SimpleCSV::Document::Open(docPath);
 
     document->SetProperty(SimpleCSV::Property::Company, "TCRE");
 

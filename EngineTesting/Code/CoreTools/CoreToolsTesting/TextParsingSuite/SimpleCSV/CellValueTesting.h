@@ -26,13 +26,18 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using CellValue = SimpleCSV::CellValue;
+        using ValueType = SimpleCSV::ValueType;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void CreateDefaultTest();
         void CreateErrorTest();
         void CreateBoolTest();
-        void CreateIntTest();
+        void CreateInt32Test();
+        void CreateInt64Test();
         void CreateDoubleTest();
         void CreateStringTest();
         void ClearTest();
@@ -42,6 +47,21 @@ namespace CoreTools
         void EqualTest();
         void LessTest();
         void OStreamTest();
+
+        void CreateString0Test();
+        void CreateString1Test();
+
+        void CellValueSet0Test(CellValue& cellValue);
+        void CellValueSet1Test(CellValue& cellValue);
+        void CellValueSet2Test(CellValue& cellValue);
+        void CellValueSet3Test(CellValue& cellValue);
+        void CellValueSet4Test(CellValue& cellValue);
+        void CellValueSet5Test(const CellValue& cellValue);
+        void CellValueEqual0Test(CellValue& cellValue);
+        void CellValueEqual1Test(CellValue& cellValue);
+        void CellValueEqual2Test(CellValue& cellValue);
+        void CellValueEqual3Test(CellValue& cellValue);
+        void CellValueEqual4Test(CellValue& cellValue);
     };
 }
 

@@ -30,6 +30,9 @@ namespace CoreTools
         void MainTest();
 
         void ScopeTest();
+
+        void Scope0Test(int& value);
+        void Scope1Test(int& value);
     };
 }
 

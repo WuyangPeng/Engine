@@ -30,20 +30,25 @@ void CoreTools::QuerySheetVisibilityTesting::DoRunUnitTest()
 
 void CoreTools::QuerySheetVisibilityTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetVisibilityTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetVisibility0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetVisibility1Test);
 }
 
-void CoreTools::QuerySheetVisibilityTesting::QuerySheetVisibilityTest()
+void CoreTools::QuerySheetVisibilityTesting::QuerySheetVisibility0Test()
 {
     const auto sheetId = "sheetId"s;
     const auto sheetVisibility = "sheetVisibility"s;
-    const SimpleCSV::QuerySheetVisibility querySheetVisibility0{ sheetId, sheetVisibility };
+    const SimpleCSV::QuerySheetVisibility querySheetVisibility{ sheetId, sheetVisibility };
 
-    ASSERT_EQUAL(sheetId, querySheetVisibility0.GetSheetId());
-    ASSERT_EQUAL(sheetVisibility, querySheetVisibility0.GetSheetVisibility());
+    ASSERT_EQUAL(sheetId, querySheetVisibility.GetSheetId());
+    ASSERT_EQUAL(sheetVisibility, querySheetVisibility.GetSheetVisibility());
+}
 
-    const SimpleCSV::QuerySheetVisibility querySheetVisibility1{ sheetId };
+void CoreTools::QuerySheetVisibilityTesting::QuerySheetVisibility1Test()
+{
+    const auto sheetId = "sheetId"s;
+    const SimpleCSV::QuerySheetVisibility querySheetVisibility{ sheetId };
 
-    ASSERT_EQUAL(sheetId, querySheetVisibility1.GetSheetId());
-    ASSERT_TRUE(querySheetVisibility1.GetSheetVisibility().empty());
+    ASSERT_EQUAL(sheetId, querySheetVisibility.GetSheetId());
+    ASSERT_TRUE(querySheetVisibility.GetSheetVisibility().empty());
 }

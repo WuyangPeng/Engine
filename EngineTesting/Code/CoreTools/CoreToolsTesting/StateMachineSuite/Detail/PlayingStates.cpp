@@ -48,13 +48,12 @@ CoreTools::State<CoreTools::PlayerEntity>::MessageResult CoreTools::PlayingState
         case States::Empty:
             return { shared_from_this(), false };
         case States::Open:
-            return { shared_from_this(), true };
-        case States::Stopped:
-            return { ParentType::MakeState<StoppedStates>(), true };
         case States::Playing:
             return { shared_from_this(), true };
+        case States::Stopped:
+            return { MakeState<StoppedStates>(), true };
         case States::Paused:
-            return { ParentType::MakeState<PausedStates>(), true };
+            return { MakeState<PausedStates>(), true };
         case States::Previous:
             return { GetPossiblePreviousState(), true };
         default:

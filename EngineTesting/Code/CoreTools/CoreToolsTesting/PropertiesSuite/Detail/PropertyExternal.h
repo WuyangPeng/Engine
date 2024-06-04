@@ -5,15 +5,15 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.9 (2024/04/23 12:53)
+/// 版本：1.0.0.10 (2024/05/27 19:40)
 
 #ifndef CORE_TOOLS_PROPERTIES_SUITE_PROPERTY_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_SUITE_PROPERTY_EXTERNAL_H
 
 #include "CoreTools/Helper/UserMacro.h"
-#include "CoreTools/Properties/PropertyGetExternalDetail.h"
-#include "CoreTools/Properties/PropertyGetSetExternalDetail.h"
-#include "CoreTools/Properties/PropertySetExternalDetail.h"
+#include "CoreTools/Properties/PropertyGetExternal.h"
+#include "CoreTools/Properties/PropertyGetSetExternal.h"
+#include "CoreTools/Properties/PropertySetExternal.h"
 
 #include <string>
 

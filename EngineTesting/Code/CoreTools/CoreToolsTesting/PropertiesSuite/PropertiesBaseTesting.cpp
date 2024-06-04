@@ -33,7 +33,7 @@ void CoreTools::PropertiesBaseTesting::MainTest()
 
 void CoreTools::PropertiesBaseTesting::GetSetTest()
 {
-    PropertiesBase propertiesBase;
+    PropertiesBase propertiesBase{};
 
     ASSERT_EQUAL(propertiesBase.propValue, 0);
 

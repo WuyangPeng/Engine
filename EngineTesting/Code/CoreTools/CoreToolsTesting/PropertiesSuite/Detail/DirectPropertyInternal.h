@@ -27,7 +27,7 @@ namespace CoreTools
     public:
         CLASS_INVARIANT_DECLARE;
 
-        explicit DirectPropertyInternal(DisableNotThrow disableNotThrow);
+        DirectPropertyInternal(const std::string& getType, const std::string& setType);
 
         void SetValue(const std::string& value);
         NODISCARD std::string GetValue() const;

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 18:12)
+/// 版本：1.0.0.10 (2024/05/31 17:15)
 
 #include "CSVTypeConversionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -42,6 +42,14 @@ void CoreTools::CSVTypeConversionTesting::MainTest()
 
 void CoreTools::CSVTypeConversionTesting::CSVDataTypeTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(GetTypeDescribe0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetTypeDescribe1Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetDataType0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetDataType1Test);
+}
+
+void CoreTools::CSVTypeConversionTesting::GetTypeDescribe0Test()
+{
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVDataType::String), "string"s);
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVDataType::Bool), "bool"s);
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVDataType::Char), "char"s);
@@ -56,7 +64,10 @@ void CoreTools::CSVTypeConversionTesting::CSVDataTypeTest()
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVDataType::IntVector2), "intVector2"s);
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVDataType::IntVector3), "intVector3"s);
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVDataType::IntVector4), "intVector4"s);
+}
 
+void CoreTools::CSVTypeConversionTesting::GetTypeDescribe1Test()
+{
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVDataType::BoolArray), "bool[]"s);
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVDataType::CharArray), "char[]"s);
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVDataType::IntArray), "int[]"s);
@@ -70,7 +81,10 @@ void CoreTools::CSVTypeConversionTesting::CSVDataTypeTest()
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVDataType::IntVector2Array), "intVector2[]"s);
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVDataType::IntVector3Array), "intVector3[]"s);
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVDataType::IntVector4Array), "intVector4[]"s);
+}
 
+void CoreTools::CSVTypeConversionTesting::GetDataType0Test()
+{
     ASSERT_EQUAL(CSVDataType::String, CSVTypeConversion::GetDataType(SYSTEM_TEXT("string"s)));
     ASSERT_EQUAL(CSVDataType::Bool, CSVTypeConversion::GetDataType(SYSTEM_TEXT("bool"s)));
     ASSERT_EQUAL(CSVDataType::Char, CSVTypeConversion::GetDataType(SYSTEM_TEXT("char"s)));
@@ -86,7 +100,10 @@ void CoreTools::CSVTypeConversionTesting::CSVDataTypeTest()
     ASSERT_EQUAL(CSVDataType::IntVector2, CSVTypeConversion::GetDataType(SYSTEM_TEXT("intVector2"s)));
     ASSERT_EQUAL(CSVDataType::IntVector3, CSVTypeConversion::GetDataType(SYSTEM_TEXT("intVector3"s)));
     ASSERT_EQUAL(CSVDataType::IntVector4, CSVTypeConversion::GetDataType(SYSTEM_TEXT("intVector4"s)));
+}
 
+void CoreTools::CSVTypeConversionTesting::GetDataType1Test()
+{
     ASSERT_EQUAL(CSVDataType::BoolArray, CSVTypeConversion::GetDataType(SYSTEM_TEXT("bool[]"s)));
     ASSERT_EQUAL(CSVDataType::CharArray, CSVTypeConversion::GetDataType(SYSTEM_TEXT("char[]"s)));
     ASSERT_EQUAL(CSVDataType::IntArray, CSVTypeConversion::GetDataType(SYSTEM_TEXT("int[]"s)));
@@ -105,6 +122,12 @@ void CoreTools::CSVTypeConversionTesting::CSVDataTypeTest()
 
 void CoreTools::CSVTypeConversionTesting::CSVFormatTypeTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(GetTypeDescribe2Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetFormatType0Test);
+}
+
+void CoreTools::CSVTypeConversionTesting::GetTypeDescribe2Test()
+{
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVFormatType::Default), "@default"s);
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVFormatType::Ignore), "@ignore"s);
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVFormatType::Vector), "@vector"s);
@@ -113,7 +136,10 @@ void CoreTools::CSVTypeConversionTesting::CSVFormatTypeTest()
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVFormatType::Key), "@key"s);
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVFormatType::Enum), "@enum"s);
     ASSERT_EQUAL(CSVTypeConversion::GetTypeDescribe(CSVFormatType::Unique), "@unique"s);
+}
 
+void CoreTools::CSVTypeConversionTesting::GetFormatType0Test()
+{
     ASSERT_EQUAL(CSVFormatType::Default, CSVTypeConversion::GetFormatType(SYSTEM_TEXT("@default"s)));
     ASSERT_EQUAL(CSVFormatType::Ignore, CSVTypeConversion::GetFormatType(SYSTEM_TEXT("@ignore"s)));
     ASSERT_EQUAL(CSVFormatType::Vector, CSVTypeConversion::GetFormatType(SYSTEM_TEXT("@vector"s)));
@@ -125,6 +151,12 @@ void CoreTools::CSVTypeConversionTesting::CSVFormatTypeTest()
 }
 
 void CoreTools::CSVTypeConversionTesting::ActualTypeTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(GetActualType0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetActualType1Test);
+}
+
+void CoreTools::CSVTypeConversionTesting::GetActualType0Test()
 {
     ASSERT_EQUAL(CSVTypeConversion::GetActualType(CSVDataType::String), SYSTEM_TEXT("System::String"s));
     ASSERT_EQUAL(CSVTypeConversion::GetActualType(CSVDataType::Bool), SYSTEM_TEXT("bool"s));
@@ -138,7 +170,10 @@ void CoreTools::CSVTypeConversionTesting::ActualTypeTest()
     ASSERT_EQUAL(CSVTypeConversion::GetActualType(CSVDataType::IntVector2), SYSTEM_TEXT("CoreTools::IntVector2"s));
     ASSERT_EQUAL(CSVTypeConversion::GetActualType(CSVDataType::IntVector3), SYSTEM_TEXT("CoreTools::IntVector3"s));
     ASSERT_EQUAL(CSVTypeConversion::GetActualType(CSVDataType::IntVector4), SYSTEM_TEXT("CoreTools::IntVector4"s));
+}
 
+void CoreTools::CSVTypeConversionTesting::GetActualType1Test()
+{
     ASSERT_EQUAL(CSVTypeConversion::GetActualType(CSVDataType::BoolArray), SYSTEM_TEXT("std::deque<bool>"s));
     ASSERT_EQUAL(CSVTypeConversion::GetActualType(CSVDataType::CharArray), SYSTEM_TEXT("std::vector<System::TChar>"s));
     ASSERT_EQUAL(CSVTypeConversion::GetActualType(CSVDataType::IntArray), SYSTEM_TEXT("std::vector<int>"s));
@@ -154,6 +189,12 @@ void CoreTools::CSVTypeConversionTesting::ActualTypeTest()
 
 void CoreTools::CSVTypeConversionTesting::GetFunctionNameTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(GetFunctionName0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetFunctionName1Test);
+}
+
+void CoreTools::CSVTypeConversionTesting::GetFunctionName0Test()
+{
     ASSERT_EQUAL(CSVTypeConversion::GetFunctionName(CSVDataType::String), SYSTEM_TEXT("GetString"s));
     ASSERT_EQUAL(CSVTypeConversion::GetFunctionName(CSVDataType::Bool), SYSTEM_TEXT("GetBool"s));
     ASSERT_EQUAL(CSVTypeConversion::GetFunctionName(CSVDataType::Char), SYSTEM_TEXT("GetChar"s));
@@ -166,7 +207,10 @@ void CoreTools::CSVTypeConversionTesting::GetFunctionNameTest()
     ASSERT_EQUAL(CSVTypeConversion::GetFunctionName(CSVDataType::IntVector2), SYSTEM_TEXT("GetIntVector2"s));
     ASSERT_EQUAL(CSVTypeConversion::GetFunctionName(CSVDataType::IntVector3), SYSTEM_TEXT("GetIntVector3"s));
     ASSERT_EQUAL(CSVTypeConversion::GetFunctionName(CSVDataType::IntVector4), SYSTEM_TEXT("GetIntVector4"s));
+}
 
+void CoreTools::CSVTypeConversionTesting::GetFunctionName1Test()
+{
     ASSERT_EQUAL(CSVTypeConversion::GetFunctionName(CSVDataType::BoolArray), SYSTEM_TEXT("GetBoolArray"s));
     ASSERT_EQUAL(CSVTypeConversion::GetFunctionName(CSVDataType::CharArray), SYSTEM_TEXT("GetCharArray"s));
     ASSERT_EQUAL(CSVTypeConversion::GetFunctionName(CSVDataType::IntArray), SYSTEM_TEXT("GetIntArray"s));
@@ -182,6 +226,12 @@ void CoreTools::CSVTypeConversionTesting::GetFunctionNameTest()
 
 void CoreTools::CSVTypeConversionTesting::ValueTypeTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(GetValueType0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetValueType1Test);
+}
+
+void CoreTools::CSVTypeConversionTesting::GetValueType0Test()
+{
     ASSERT_EQUAL(CSVTypeConversion::GetValueType(CSVDataType::String), SYSTEM_TEXT("System::String"s));
     ASSERT_EQUAL(CSVTypeConversion::GetValueType(CSVDataType::Bool), SYSTEM_TEXT("bool"s));
     ASSERT_EQUAL(CSVTypeConversion::GetValueType(CSVDataType::Char), SYSTEM_TEXT("System::TChar"s));
@@ -194,7 +244,10 @@ void CoreTools::CSVTypeConversionTesting::ValueTypeTest()
     ASSERT_EQUAL(CSVTypeConversion::GetValueType(CSVDataType::IntVector2), SYSTEM_TEXT("CoreTools::IntVector2"s));
     ASSERT_EQUAL(CSVTypeConversion::GetValueType(CSVDataType::IntVector3), SYSTEM_TEXT("CoreTools::IntVector3"s));
     ASSERT_EQUAL(CSVTypeConversion::GetValueType(CSVDataType::IntVector4), SYSTEM_TEXT("CoreTools::IntVector4"s));
+}
 
+void CoreTools::CSVTypeConversionTesting::GetValueType1Test()
+{
     ASSERT_EQUAL(CSVTypeConversion::GetValueType(CSVDataType::BoolArray), SYSTEM_TEXT("bool"s));
     ASSERT_EQUAL(CSVTypeConversion::GetValueType(CSVDataType::CharArray), SYSTEM_TEXT("System::TChar"s));
     ASSERT_EQUAL(CSVTypeConversion::GetValueType(CSVDataType::IntArray), SYSTEM_TEXT("int"s));
@@ -225,6 +278,12 @@ void CoreTools::CSVTypeConversionTesting::BaseReturnDescribeTest()
 
 void CoreTools::CSVTypeConversionTesting::GetAbbreviationTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(GetAbbreviation0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetAbbreviation1Test);
+}
+
+void CoreTools::CSVTypeConversionTesting::GetAbbreviation0Test()
+{
     ASSERT_EQUAL(CSVTypeConversion::GetAbbreviation(CSVDataType::String), SYSTEM_TEXT("String"s));
     ASSERT_EQUAL(CSVTypeConversion::GetAbbreviation(CSVDataType::Bool), SYSTEM_TEXT("bool"s));
     ASSERT_EQUAL(CSVTypeConversion::GetAbbreviation(CSVDataType::Char), SYSTEM_TEXT("Char"s));
@@ -237,7 +296,10 @@ void CoreTools::CSVTypeConversionTesting::GetAbbreviationTest()
     ASSERT_EQUAL(CSVTypeConversion::GetAbbreviation(CSVDataType::IntVector2), SYSTEM_TEXT("CoreTools::IntVector2"s));
     ASSERT_EQUAL(CSVTypeConversion::GetAbbreviation(CSVDataType::IntVector3), SYSTEM_TEXT("CoreTools::IntVector3"s));
     ASSERT_EQUAL(CSVTypeConversion::GetAbbreviation(CSVDataType::IntVector4), SYSTEM_TEXT("CoreTools::IntVector4"s));
+}
 
+void CoreTools::CSVTypeConversionTesting::GetAbbreviation1Test()
+{
     ASSERT_EQUAL(CSVTypeConversion::GetAbbreviation(CSVDataType::BoolArray), SYSTEM_TEXT("BoolContainer"s));
     ASSERT_EQUAL(CSVTypeConversion::GetAbbreviation(CSVDataType::CharArray), SYSTEM_TEXT("CharContainer"s));
     ASSERT_EQUAL(CSVTypeConversion::GetAbbreviation(CSVDataType::IntArray), SYSTEM_TEXT("IntContainer"s));

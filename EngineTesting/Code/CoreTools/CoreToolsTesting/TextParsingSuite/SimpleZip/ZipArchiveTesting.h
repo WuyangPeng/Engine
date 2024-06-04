@@ -26,6 +26,9 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using ZipArchive = SimpleZip::ZipArchive;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
@@ -35,6 +38,9 @@ namespace CoreTools
         void DefaultTest();
 
         NODISCARD static std::string GetZipArchiveFileName();
+
+        void CreateZipArchiveAddEntryTest(ZipArchive& zipArchive);
+        void CreateZipArchiveDeleteEntryTest(ZipArchive& zipArchive);
 
     private:
         std::string entryName;

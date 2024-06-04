@@ -23,9 +23,11 @@ CoreTools::GlobalStates::GlobalStates() noexcept
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, GlobalStates)
 
-CoreTools::GlobalStates::StateSharedPtr CoreTools::GlobalStates::Execute([[maybe_unused]] int64_t timeInterval)
+CoreTools::GlobalStates::StateSharedPtr CoreTools::GlobalStates::Execute(int64_t timeInterval)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
+
+    System::UnusedFunction(timeInterval);
 
     return shared_from_this();
 }
@@ -42,13 +44,10 @@ CoreTools::State<CoreTools::PlayerEntity>::MessageResult CoreTools::GlobalStates
     switch (telegram.GetMessageType())
     {
         case States::Empty:
-            return { ParentType::MakeState<EmptyStates>(), true };
+            return { MakeState<EmptyStates>(), true };
         case States::Open:
-            return { shared_from_this(), true };
         case States::Stopped:
-            return { shared_from_this(), true };
         case States::Playing:
-            return { shared_from_this(), true };
         case States::Paused:
             return { shared_from_this(), true };
         case States::Previous:

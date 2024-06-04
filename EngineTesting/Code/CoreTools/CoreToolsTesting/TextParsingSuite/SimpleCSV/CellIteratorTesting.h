@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_CELL_ITERATOR_TESTING_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_CELL_ITERATOR_TESTING_H
 
+#include "CoreTools/TextParsing/SimpleCSV/Document.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,11 +27,32 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using Worksheet = SimpleCSV::Worksheet;
+        using Document = SimpleCSV::Document;
+        using DocumentSharedPtr = Document::DocumentSharedPtr;
+        using Cell = SimpleCSV::Cell;
+        using CellRange = SimpleCSV::CellRange;
+        using CellIterator = SimpleCSV::CellIterator;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void CellRangeIteratorTest();
         void SuffixIteratorTest();
+
+        NODISCARD Worksheet GetWorkSheet();
+        void DoCellRangeIteratorTest(int row,
+                                     int column,
+                                     int distance,
+                                     CellRange& cellRange,
+                                     CellIterator& iter);
+        void DoSuffixIteratorTest(int distance,
+                                  CellRange& cellRange,
+                                  const CellIterator& iter);
+
+    private:
+        DocumentSharedPtr document;
     };
 }
 

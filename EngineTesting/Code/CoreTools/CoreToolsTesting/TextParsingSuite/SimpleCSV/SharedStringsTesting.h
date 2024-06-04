@@ -26,10 +26,17 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using SharedStrings = SimpleCSV::SharedStrings;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void SharedStringsTest();
+
+        void IsStringExistsTest(const SharedStrings& sharedStrings);
+        void GetStringTest(const SharedStrings& sharedStrings);
+        NODISCARD int AppendStringTest(SharedStrings& sharedStrings);
     };
 }
 

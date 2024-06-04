@@ -10,6 +10,8 @@
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_WORKSHEET_TESTING_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_WORKSHEET_TESTING_H
 
+#include "CoreTools/TextParsing/SimpleCSV/Document.h"
+#include "CoreTools/TextParsing/SimpleCSV/Worksheet.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,6 +28,14 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using Worksheet = SimpleCSV::Worksheet;
+        using Cell = SimpleCSV::Cell;
+        using Color = SimpleCSV::Color;
+        using CellReference = SimpleCSV::CellReference;
+        using Document = SimpleCSV::Document;
+        using DocumentSharedPtr = Document::DocumentSharedPtr;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
@@ -37,6 +47,23 @@ namespace CoreTools
         void LastCellTest();
         void SelectedTest();
         void ColorTest();
+
+        void WorksheetCell0Test();
+        void WorksheetCell1Test();
+        void WorksheetCell2Test(const CellReference& cellReference);
+        void WorksheetRange0Test();
+        void WorksheetRange1Test();
+
+        NODISCARD static Worksheet GetWorkSheet(const Document& document);
+
+        void WorksheetRowRange0Test();
+        void WorksheetRowRange1Test();
+        void WorksheetRowRange2Test();
+
+    private:
+        std::string docPath;
+        DocumentSharedPtr document;
+        Worksheet worksheet;
     };
 }
 

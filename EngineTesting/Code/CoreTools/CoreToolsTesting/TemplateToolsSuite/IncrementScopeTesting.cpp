@@ -37,19 +37,25 @@ void CoreTools::IncrementScopeTesting::ScopeTest()
 
     ASSERT_EQUAL(value, 0);
 
-    {
-        IncrementScope incrementScope{ value };
-
-        ASSERT_EQUAL(value, 1);
-    }
+    ASSERT_NOT_THROW_EXCEPTION_1(Scope0Test, value);
 
     ASSERT_EQUAL(value, 0);
 
-    {
-        IncrementScope<int, SimpleDecrementer<int>, SimpleIncrementer<int>> incrementScope{ value };
-
-        ASSERT_EQUAL(value, -1);
-    }
+    ASSERT_NOT_THROW_EXCEPTION_1(Scope1Test, value);
 
     ASSERT_EQUAL(value, 0);
+}
+
+void CoreTools::IncrementScopeTesting::Scope0Test(int& value)
+{
+    IncrementScope incrementScope{ value };
+
+    ASSERT_EQUAL(value, 1);
+}
+
+void CoreTools::IncrementScopeTesting::Scope1Test(int& value)
+{
+    IncrementScope<int, SimpleDecrementer<int>, SimpleIncrementer<int>> incrementScope{ value };
+
+    ASSERT_EQUAL(value, -1);
 }

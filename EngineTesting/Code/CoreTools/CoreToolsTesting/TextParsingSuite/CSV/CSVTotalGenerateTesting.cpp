@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 18:11)
+/// 版本：1.0.0.10 (2024/05/31 16:57)
 
 #include "CSVTotalGenerateTesting.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
@@ -19,10 +19,10 @@
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <filesystem>
-
 CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      directory{ SYSTEM_TEXT("Resource/CSVConfigure") },
+      path{ directory }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -37,121 +37,42 @@ void CoreTools::CSVTotalGenerateTesting::DoRunUnitTest()
 void CoreTools::CSVTotalGenerateTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateCSV);
-    ASSERT_NOT_THROW_EXCEPTION_0(CSVTotalGenerateHeadTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(CSVTotalGenerateFwdHeadTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(CSVTotalGenerateContainerHeadTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(CSVTotalGenerateContainerSourceTest);
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVTotalGenerateTest, CSVTotalGenerateType::Head);
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVTotalGenerateTest, CSVTotalGenerateType::FwdHead);
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVTotalGenerateTest, CSVTotalGenerateType::ContainerHead);
+    ASSERT_NOT_THROW_EXCEPTION_1(CSVTotalGenerateTest, CSVTotalGenerateType::ContainerSource);
 }
 
 void CoreTools::CSVTotalGenerateTesting::CreateCSV()
 {
-    const BatchConversionCSV batchConversionCSV{ SYSTEM_TEXT("Resource/CSVConfigure"), SYSTEM_TEXT("Resource/CSVConfigure") };
+    const BatchConversionCSV batchConversionCSV{ directory, directory };
 }
 
-void CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateHeadTest()
+void CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateTest(CSVTotalGenerateType csvTotalGenerateType)
 {
-    const std::filesystem::path path{ SYSTEM_TEXT("Resource/CSVConfigure") };
-
-    CSVTotalGenerate::CSVHeadContainer container{};
-
-    for (const auto& inputPath : std::filesystem::directory_iterator(path))
-    {
-        const auto nativeFileName = inputPath.path().native();
-
-        if (nativeFileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT("csv"))) != nativeFileName.size() - 3)
-        {
-            continue;
-        }
-
-        CSVContent csvContent{ StringConversion::WideCharConversionStandard(nativeFileName) };
-
-        container.emplace_back(csvContent.GetCSVHead());
-    }
+    const auto container = GetCSVHeadContainer();
 
     const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json") };
 
-    const CSVTotalGenerate csvTotalGenerate{ SYSTEM_TEXT("CSVConfigure"), container, codeMappingAnalysis, CSVTotalGenerateType::Head };
+    const CSVTotalGenerate csvTotalGenerate{ SYSTEM_TEXT("CSVConfigure"), container, codeMappingAnalysis, csvTotalGenerateType };
 
     csvTotalGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"), SYSTEM_TEXT("Resource/CSVGenerate"));
 }
 
-void CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateFwdHeadTest()
+CoreTools::CSVTotalGenerateTesting::CSVHeadContainer CoreTools::CSVTotalGenerateTesting::GetCSVHeadContainer() const
 {
-    const std::filesystem::path path{ SYSTEM_TEXT("Resource/CSVConfigure") };
-
-    CSVTotalGenerate::CSVHeadContainer container{};
+    CSVHeadContainer container{};
 
     for (const auto& inputPath : std::filesystem::directory_iterator(path))
     {
-        const auto nativeFileName = inputPath.path().native();
-
-        if (nativeFileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT("csv"))) != nativeFileName.size() - 3)
+        if (const auto nativeFileName = inputPath.path().native();
+            nativeFileName.find(StringConversion::StandardConversionWideChar(SYSTEM_TEXT("csv"))) == nativeFileName.size() - 3)
         {
-            continue;
+            CSVContent csvContent{ StringConversion::WideCharConversionStandard(nativeFileName) };
+
+            container.emplace_back(csvContent.GetCSVHead());
         }
-
-        CSVContent csvContent{ StringConversion::WideCharConversionStandard(nativeFileName) };
-
-        container.emplace_back(csvContent.GetCSVHead());
     }
 
-    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json") };
-
-    const CSVTotalGenerate csvTotalGenerate{ SYSTEM_TEXT("CSVConfigure"), container, codeMappingAnalysis, CSVTotalGenerateType::FwdHead };
-
-    csvTotalGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"), SYSTEM_TEXT("Resource/CSVGenerate"));
-}
-
-void CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateContainerHeadTest()
-{
-    const std::filesystem::path path{ SYSTEM_TEXT("Resource/CSVConfigure") };
-
-    CSVTotalGenerate::CSVHeadContainer container{};
-
-    for (const auto& inputPath : std::filesystem::directory_iterator(path))
-    {
-        const auto nativeFileName = inputPath.path().native();
-
-        if (nativeFileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT("csv"))) != nativeFileName.size() - 3)
-        {
-            continue;
-        }
-
-        CSVContent csvContent{ StringConversion::WideCharConversionStandard(nativeFileName) };
-
-        container.emplace_back(csvContent.GetCSVHead());
-    }
-
-    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json") };
-
-    const CSVTotalGenerate csvTotalGenerate{ SYSTEM_TEXT("CSVConfigure"), container, codeMappingAnalysis, CSVTotalGenerateType::ContainerHead };
-
-    csvTotalGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"), SYSTEM_TEXT("Resource/CSVGenerate"));
-}
-
-void CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateContainerSourceTest()
-{
-    const std::filesystem::path path{ SYSTEM_TEXT("Resource/CSVConfigure") };
-
-    CSVTotalGenerate::CSVHeadContainer container{};
-
-    for (const auto& inputPath : std::filesystem::directory_iterator(path))
-    {
-        const auto nativeFileName = inputPath.path().native();
-
-        if (nativeFileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT("csv"))) != nativeFileName.size() - 3)
-        {
-            continue;
-        }
-
-        CSVContent csvContent{ StringConversion::WideCharConversionStandard(nativeFileName) };
-
-        container.emplace_back(csvContent.GetCSVHead());
-    }
-
-    const CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/CSVEngineering/CSVEngineering.json") };
-
-    const CSVTotalGenerate csvTotalGenerate{ SYSTEM_TEXT("CSVConfigure"), container, codeMappingAnalysis, CSVTotalGenerateType::ContainerSource };
-
-    csvTotalGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVEngineering"), SYSTEM_TEXT("Resource/CSVGenerate"));
+    return container;
 }

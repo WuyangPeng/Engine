@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_CELL_VALUE_PROXY_TESTING_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_CELL_VALUE_PROXY_TESTING_H
 
+#include "CoreTools/TextParsing/SimpleCSV/Document.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,6 +27,12 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using Worksheet = SimpleCSV::Worksheet;
+        using Document = SimpleCSV::Document;
+        using DocumentSharedPtr = Document::DocumentSharedPtr;
+        using CellValueProxy = SimpleCSV::CellValueProxy;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
@@ -36,6 +43,37 @@ namespace CoreTools
         void CellValueSetTest();
         void CellValueEqualTest();
         void CellTest();
+
+        NODISCARD Worksheet GetWorkSheet();
+        void CellValueProxyType0Test(const Worksheet& worksheet);
+        void CellValueProxyType1Test(const Worksheet& worksheet);
+        void CellValueProxyType2Test(const Worksheet& worksheet);
+        void CellValueProxyType3Test(const Worksheet& worksheet);
+        void CellValueProxyType4Test(const Worksheet& worksheet);
+
+        void CellValueProxySet0Test(CellValueProxy& cellValueProxy);
+        void CellValueProxySet1Test(CellValueProxy& cellValueProxy);
+        void CellValueProxySet2Test(CellValueProxy& cellValueProxy);
+        void CellValueProxySet3Test(CellValueProxy& cellValueProxy);
+        void CellValueProxySet4Test(CellValueProxy& cellValueProxy);
+        void CellValueProxySet5Test(CellValueProxy& cellValueProxy);
+
+        void CellValueSet0Test(CellValueProxy& cellValueProxy);
+        void CellValueSet1Test(CellValueProxy& cellValueProxy);
+        void CellValueSet2Test(CellValueProxy& cellValueProxy);
+        void CellValueSet3Test(CellValueProxy& cellValueProxy);
+        void CellValueSet4Test(CellValueProxy& cellValueProxy);
+        void CellValueSet5Test(CellValueProxy& cellValueProxy);
+        void CellValueSet6Test(CellValueProxy& cellValueProxy);
+
+        void CellValueEqual0Test(CellValueProxy& cellValueProxy);
+        void CellValueEqual1Test(CellValueProxy& cellValueProxy);
+        void CellValueEqual2Test(CellValueProxy& cellValueProxy);
+        void CellValueEqual3Test(CellValueProxy& cellValueProxy);
+        void CellValueEqual4Test(CellValueProxy& cellValueProxy);
+
+    private:
+        DocumentSharedPtr document;
     };
 }
 

@@ -10,6 +10,8 @@
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_XML_DATA_TESTING_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_XML_DATA_TESTING_H
 
+#include "CoreTools/TextParsing/SimpleCSV/Document.h"
+#include "CoreTools/TextParsing/SimpleCSV/Flags/ContentFlags.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,11 +28,24 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using Document = SimpleCSV::Document;
+        using XmlData = SimpleCSV::XmlData;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void XmlDataTest();
         void ConstXmlDataTest();
+
+        void XmlData0Test(Document& document, XmlData& xmlData);
+        void XmlData1Test(const XmlData& xmlData);
+
+    private:
+        static constexpr auto contentType = SimpleCSV::ContentType::ChartSheet;
+
+        std::string xmlPath;
+        std::string xmlId;
     };
 }
 

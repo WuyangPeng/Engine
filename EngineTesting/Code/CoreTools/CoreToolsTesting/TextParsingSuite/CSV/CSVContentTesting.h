@@ -12,8 +12,6 @@
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
-#include <vector>
-
 namespace CoreTools
 {
     class CSVContentTesting final : public UnitTest
@@ -22,12 +20,13 @@ namespace CoreTools
         using ClassType = CSVContentTesting;
         using ParentType = UnitTest;
 
-        using String = System::String;
-
     public:
         explicit CSVContentTesting(const OStreamShared& stream);
 
         CLASS_INVARIANT_FINAL_DECLARE;
+
+    private:
+        using String = System::String;
 
     private:
         void DoRunUnitTest() override;
@@ -35,6 +34,13 @@ namespace CoreTools
 
         void CreateCSV();
         void CSVContentTest();
+        void ContentIsNotEmptyTest(const CSVContent& csvContent);
+
+    private:
+        String directory;
+        String nameSpace;
+        String csvClassName;
+        String fileName;
     };
 }
 

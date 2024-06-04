@@ -16,7 +16,7 @@
 
 template <typename T>
 template <typename V>
-CoreTools::ValueScope<T>::ValueScope(Reference value, V const& set) noexcept(std::is_arithmetic_v<T>)
+CoreTools::ValueScope<T>::ValueScope(Reference value, const V& set) noexcept(std::is_arithmetic_v<T>)
     : value{ value }, revert{ value }
 {
     value = set;
@@ -26,7 +26,7 @@ CoreTools::ValueScope<T>::ValueScope(Reference value, V const& set) noexcept(std
 
 template <typename T>
 template <typename V1, typename V2>
-CoreTools::ValueScope<T>::ValueScope(Reference value, V1 const& set, V2 const& revert) noexcept(std::is_arithmetic_v<T>)
+CoreTools::ValueScope<T>::ValueScope(Reference value, const V1& set, const V2& revert) noexcept(std::is_arithmetic_v<T>)
     : value{ value }, revert{ revert }
 {
     value = set;

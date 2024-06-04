@@ -1,15 +1,15 @@
 @ingroup group_Documentation
 
-Threading Core Render Engine 1.0.0.10
+Threading Core Render Engine 1.0.0.11
 
 ----------------------------
 更新日志
 ----------------------------
-1.0.0.10（2024/05/26——2024/06/30）
+1.0.0.11（2024/06/05——2024/06/30）
 
 	完成功能： 
 	（引擎）
-	+ CoreTools工程整理。@
+	+ Network工程整理。@
 	+ 实现ParametricCurve。@
 	+ 实现ApprConvexQuadByRect。@
 	+ 实现ApprCurveByArcs。@
@@ -34,7 +34,14 @@ Threading Core Render Engine 1.0.0.10
 	+ 实现ApprSphere3。@
 	+ 实现ApprTorus3。@
 	+ 实现Approximation。@
-	+ linux系统通过编译。@	
+	+ linux系统通过编译。@
+	
+----------------------------
+1.0.0.10（2024/05/26——2024/06/04）
+
+	完成功能： 
+	（引擎）
+	+ CoreTools工程整理。
 	
 ----------------------------
 1.0.0.9（2024/04/22——2024/05/25）

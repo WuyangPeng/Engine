@@ -27,6 +27,11 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using ZipEntry = SimpleZip::ZipEntry;
+        using ZipEntryInfo = SimpleZip::ZipEntryInfo;
+        using ZipEntryData = SimpleZip::ZipEntryData;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
@@ -37,8 +42,26 @@ namespace CoreTools
         void ReaderExtractFileToMemTest();
         void RemoveFile();
 
-        NODISCARD SimpleZip::ZipEntryInfo GetZipEntryInfo(mz_uint32 fileIndex);
+        NODISCARD static ZipEntryInfo GetZipEntryInfo(mz_uint32 fileIndex);
         NODISCARD static std::string GetZipArchiveFileName();
+
+        void ZipEntryInfoDataTest(const ZipEntry& zipEntry);
+        void ZipEntryInfoBase0Test(mz_uint32 fileIndex, const ZipEntry& zipEntry);
+        void ZipEntryInfoCommentTest(const ZipEntry& zipEntry);
+        void GetZipEntryInfoTest(mz_uint32 fileIndex, const ZipEntry& zipEntry);
+        void ZipEntryInfoBase1Test(ZipEntry& zipEntry);
+
+        void ZipEntryData0Test(const ZipEntryData& originalZipEntryData, const ZipEntry& zipEntry);
+        void ZipEntryData1Test(const ZipEntry& zipEntry);
+        void ZipEntryData2Test(const ZipEntry& zipEntry);
+        void ZipEntryData3Test(const ZipEntry& zipEntry);
+        void ZipEntryData4Test(ZipEntry& zipEntry);
+
+        void StringDataTest0Test(const ZipEntry& zipEntry);
+        void StringDataTest1Test(const ZipEntry& zipEntry);
+        void StringDataTest2Test(const ZipEntry& zipEntry);
+        void StringDataTest3Test(const ZipEntry& zipEntry);
+        void StringDataTest4Test(ZipEntry& zipEntry);
     };
 }
 

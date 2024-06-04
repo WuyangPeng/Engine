@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.9 (2024/04/23 12:53)
+/// 版本：1.0.0.10 (2024/05/27 19:40)
 
 #ifndef CORE_TOOLS_PROPERTIES_SUITE_PROPERTY_BASE_H
 #define CORE_TOOLS_PROPERTIES_SUITE_PROPERTY_BASE_H

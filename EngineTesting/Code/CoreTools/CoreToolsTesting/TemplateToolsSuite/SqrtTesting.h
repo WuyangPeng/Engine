@@ -29,7 +29,10 @@ namespace CoreTools
         void DoRunUnitTest() override;
         void MainTest();
 
-        void SqrtTest();
+        void Sqrt0Test();
+        void Sqrt1Test();
+        void Sqrt2Test();
+        void Sqrt3Test();
     };
 }
 

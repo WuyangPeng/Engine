@@ -29,7 +29,13 @@ namespace CoreTools
         void DoRunUnitTest() override;
         void MainTest();
 
-        void GetSetTest();
+        void GetSet0Test();
+        void GetSet1Test();
+        void GetSet2Test();
+        void GetSet3Test();
+
+    private:
+        std::string setValue;
     };
 }
 

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.9 (2024/04/23 12:59)
+/// 版本：1.0.0.10 (2024/05/28 11:22)
 
 #include "StateEntityTesting.h"
 #include "Detail/EmptyStates.h"
@@ -33,69 +33,109 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, StateEntityTesting)
 
 void CoreTools::StateEntityTesting::DoRunUnitTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
-}
-
-void CoreTools::StateEntityTesting::MainTest()
-{
     EntityManager::Create();
 
-    ASSERT_NOT_THROW_EXCEPTION_0(PlayerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 
     EntityManager::Destroy();
 }
 
+void CoreTools::StateEntityTesting::MainTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(PlayerTest);
+}
+
 void CoreTools::StateEntityTesting::PlayerTest()
 {
-    auto currentState0 = State<PlayerEntity>::MakeState<EmptyStates>();
-    auto globalState0 = State<PlayerEntity>::MakeState<GlobalStates>();
-    auto playerEntity = ENTITY_MANAGER_SINGLETON.MakeEntity<PlayerEntity>(currentState0, globalState0);
+    const auto playerEntity = MakeEntity();
 
-    auto currentState1 = playerEntity->GetCurrentState();
-    auto globalState1 = playerEntity->GetGlobalState();
+    ASSERT_NOT_THROW_EXCEPTION_1(StateTest, *playerEntity);
 
-    ASSERT_TRUE(currentState1->IsExactly(EmptyStates::GetCurrentRttiType()));
-    ASSERT_TRUE(globalState1->IsExactly(GlobalStates::GetCurrentRttiType()));
+    ASSERT_NOT_THROW_EXCEPTION_1(EventFunction0Test, *playerEntity);
+    ASSERT_NOT_THROW_EXCEPTION_1(EventFunction1Test, *playerEntity);
+    ASSERT_NOT_THROW_EXCEPTION_1(EventFunction2Test, *playerEntity);
+    ASSERT_NOT_THROW_EXCEPTION_1(EventFunction3Test, *playerEntity);
+    ASSERT_NOT_THROW_EXCEPTION_1(EventFunction4Test, *playerEntity);
+    ASSERT_NOT_THROW_EXCEPTION_1(EventFunction5Test, *playerEntity);
+    ASSERT_NOT_THROW_EXCEPTION_1(EventFunction6Test, *playerEntity);
+}
 
-    Telegram telegram0{ 1, States::Open, 0 };
+CoreTools::StateEntityTesting::PlayerEntitySharedPtr CoreTools::StateEntityTesting::MakeEntity()
+{
+    auto currentState = State<PlayerEntity>::MakeState<EmptyStates>();
+    auto globalState = State<PlayerEntity>::MakeState<GlobalStates>();
 
-    MAYBE_UNUSED const auto value0 = playerEntity->EventFunction(telegram0);
+    return ENTITY_MANAGER_SINGLETON.MakeEntity<PlayerEntity>(currentState, globalState);
+}
 
-    ASSERT_TRUE(playerEntity->GetCurrentState()->IsExactly(OpenStates::GetCurrentRttiType()));
+void CoreTools::StateEntityTesting::StateTest(const PlayerEntity& playerEntity)
+{
+    const auto currentState = playerEntity.GetCurrentState();
+    const auto globalState = playerEntity.GetGlobalState();
 
-    Telegram telegram1{ 1, States::Stopped, 0 };
+    ASSERT_TRUE(currentState->IsExactly(EmptyStates::GetCurrentRttiType()));
+    ASSERT_TRUE(globalState->IsExactly(GlobalStates::GetCurrentRttiType()));
+}
 
-    MAYBE_UNUSED const auto value1 = playerEntity->EventFunction(telegram1);
+void CoreTools::StateEntityTesting::EventFunction0Test(PlayerEntity& playerEntity)
+{
+    const Telegram telegram{ 1, States::Open, 0 };
 
-    ASSERT_TRUE(playerEntity->GetCurrentState()->IsExactly(StoppedStates::GetCurrentRttiType()));
+    std::ignore = playerEntity.EventFunction(telegram);
 
-    Telegram telegram2{ 1, States::Playing, 0 };
+    ASSERT_TRUE(playerEntity.GetCurrentState()->IsExactly(OpenStates::GetCurrentRttiType()));
+}
 
-    MAYBE_UNUSED const auto value2 = playerEntity->EventFunction(telegram2);
+void CoreTools::StateEntityTesting::EventFunction1Test(PlayerEntity& playerEntity)
+{
+    const Telegram telegram{ 1, States::Stopped, 0 };
 
-    ASSERT_TRUE(playerEntity->GetCurrentState()->IsExactly(PlayingStates::GetCurrentRttiType()));
+    std::ignore = playerEntity.EventFunction(telegram);
 
-    Telegram telegram3{ 1, States::Paused, 0 };
+    ASSERT_TRUE(playerEntity.GetCurrentState()->IsExactly(StoppedStates::GetCurrentRttiType()));
+}
 
-    MAYBE_UNUSED const auto value3 = playerEntity->EventFunction(telegram3);
+void CoreTools::StateEntityTesting::EventFunction2Test(PlayerEntity& playerEntity)
+{
+    const Telegram telegram{ 1, States::Playing, 0 };
 
-    ASSERT_TRUE(playerEntity->GetCurrentState()->IsExactly(PausedStates::GetCurrentRttiType()));
+    std::ignore = playerEntity.EventFunction(telegram);
 
-    Telegram telegram4{ 1, States::Stopped, 0 };
+    ASSERT_TRUE(playerEntity.GetCurrentState()->IsExactly(PlayingStates::GetCurrentRttiType()));
+}
 
-    MAYBE_UNUSED const auto value4 = playerEntity->EventFunction(telegram4);
+void CoreTools::StateEntityTesting::EventFunction3Test(PlayerEntity& playerEntity)
+{
+    const Telegram telegram{ 1, States::Paused, 0 };
 
-    ASSERT_TRUE(playerEntity->GetCurrentState()->IsExactly(StoppedStates::GetCurrentRttiType()));
+    std::ignore = playerEntity.EventFunction(telegram);
 
-    Telegram telegram5{ 1, States::Empty, 0 };
+    ASSERT_TRUE(playerEntity.GetCurrentState()->IsExactly(PausedStates::GetCurrentRttiType()));
+}
 
-    MAYBE_UNUSED const auto value5 = playerEntity->EventFunction(telegram5);
+void CoreTools::StateEntityTesting::EventFunction4Test(PlayerEntity& playerEntity)
+{
+    const Telegram telegram{ 1, States::Stopped, 0 };
 
-    ASSERT_TRUE(playerEntity->GetCurrentState()->IsExactly(EmptyStates::GetCurrentRttiType()));
+    std::ignore = playerEntity.EventFunction(telegram);
 
-    Telegram telegram6{ 1, States::Previous, 0 };
+    ASSERT_TRUE(playerEntity.GetCurrentState()->IsExactly(StoppedStates::GetCurrentRttiType()));
+}
 
-    MAYBE_UNUSED const auto value6 = playerEntity->EventFunction(telegram6);
+void CoreTools::StateEntityTesting::EventFunction5Test(PlayerEntity& playerEntity)
+{
+    const Telegram telegram{ 1, States::Empty, 0 };
 
-    ASSERT_TRUE(playerEntity->GetCurrentState()->IsExactly(StoppedStates::GetCurrentRttiType()));
+    std::ignore = playerEntity.EventFunction(telegram);
+
+    ASSERT_TRUE(playerEntity.GetCurrentState()->IsExactly(EmptyStates::GetCurrentRttiType()));
+}
+
+void CoreTools::StateEntityTesting::EventFunction6Test(PlayerEntity& playerEntity)
+{
+    const Telegram telegram{ 1, States::Previous, 0 };
+
+    std::ignore = playerEntity.EventFunction(telegram);
+
+    ASSERT_TRUE(playerEntity.GetCurrentState()->IsExactly(StoppedStates::GetCurrentRttiType()));
 }

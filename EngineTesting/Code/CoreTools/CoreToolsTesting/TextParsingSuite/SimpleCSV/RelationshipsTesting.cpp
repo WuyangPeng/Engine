@@ -44,16 +44,26 @@ void CoreTools::RelationshipsTesting::RelationshipsTest()
 
     SimpleCSV::Relationships relationships{ data };
 
-    const auto size = relationships.GetRelationships().size();
-
     for (const auto& relationshipItem : relationships.GetRelationships())
     {
-        ASSERT_EQUAL(relationshipItem.GetId(), relationships.GetRelationshipById(relationshipItem.GetId()).GetId());
-        ASSERT_EQUAL(relationshipItem.GetTarget(), relationships.GetRelationshipByTarget(relationshipItem.GetTarget()).GetTarget());
-
-        ASSERT_TRUE(relationships.IsIdExists(relationshipItem.GetId()));
-        ASSERT_TRUE(relationships.IsTargetExists(relationshipItem.GetTarget()));
+        ASSERT_NOT_THROW_EXCEPTION_2(GetRelationshipByIdTest, relationships, relationshipItem);
     }
+
+    ASSERT_NOT_THROW_EXCEPTION_1(RelationshipsOperationTest, relationships);
+}
+
+void CoreTools::RelationshipsTesting::GetRelationshipByIdTest(const Relationships& relationships, const RelationshipItem& relationshipItem)
+{
+    ASSERT_EQUAL(relationshipItem.GetId(), relationships.GetRelationshipById(relationshipItem.GetId()).GetId());
+    ASSERT_EQUAL(relationshipItem.GetTarget(), relationships.GetRelationshipByTarget(relationshipItem.GetTarget()).GetTarget());
+
+    ASSERT_TRUE(relationships.IsIdExists(relationshipItem.GetId()));
+    ASSERT_TRUE(relationships.IsTargetExists(relationshipItem.GetTarget()));
+}
+
+void CoreTools::RelationshipsTesting::RelationshipsOperationTest(Relationships& relationships)
+{
+    const auto size = relationships.GetRelationships().size();
 
     relationships.AddRelationship(SimpleCSV::RelationshipType::ChartSheet, "/xl/");
 

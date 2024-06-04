@@ -10,7 +10,10 @@
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_CSV_TOTAL_GENERATE_TESTING_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_CSV_TOTAL_GENERATE_TESTING_H
 
+#include "CoreTools/TextParsing/CSV/CSVTotalGenerate.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
+
+#include <filesystem>
 
 namespace CoreTools
 {
@@ -26,14 +29,20 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using String = System::String;
+        using CSVHeadContainer = CSVTotalGenerate::CSVHeadContainer;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void CreateCSV();
-        void CSVTotalGenerateHeadTest();
-        void CSVTotalGenerateFwdHeadTest();
-        void CSVTotalGenerateContainerHeadTest();
-        void CSVTotalGenerateContainerSourceTest();
+        void CSVTotalGenerateTest(CSVTotalGenerateType csvTotalGenerateType);
+        NODISCARD CSVHeadContainer GetCSVHeadContainer() const;
+
+    private:
+        String directory;
+        std::filesystem::path path;
     };
 }
 

@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_ROW_RANGE_TESTING_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_ROW_RANGE_TESTING_H
 
+#include "CoreTools/TextParsing/SimpleCSV/Document.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,10 +27,22 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using Worksheet = SimpleCSV::Worksheet;
+        using Document = SimpleCSV::Document;
+        using Workbook = SimpleCSV::Workbook;
+        using DocumentSharedPtr = Document::DocumentSharedPtr;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void RowRangeTest();
+
+        NODISCARD Worksheet GetWorkSheet();
+
+    private:
+        DocumentSharedPtr document;
+        Workbook workbook;
     };
 }
 

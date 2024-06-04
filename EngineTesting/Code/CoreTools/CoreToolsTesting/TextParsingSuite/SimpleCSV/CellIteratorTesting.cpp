@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 16:18)
+/// 版本：1.0.0.10 (2024/06/03 16:05)
 
 #include "CellIteratorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -21,7 +21,8 @@
 #include "Mathematics/Base/MathDetail.h"
 
 CoreTools::CellIteratorTesting::CellIteratorTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      document{ SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx") }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -41,12 +42,7 @@ void CoreTools::CellIteratorTesting::MainTest()
 
 void CoreTools::CellIteratorTesting::CellRangeIteratorTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheet = GetWorkSheet();
 
     auto cellRange = worksheet.GetRange();
 
@@ -57,18 +53,7 @@ void CoreTools::CellIteratorTesting::CellRangeIteratorTest()
     auto distance = 80;
     for (auto iter = cellRange.begin(); iter != cellRange.end(); ++iter)
     {
-        ASSERT_FALSE(iter.IsSame(cellRange.end()));
-        ASSERT_EQUAL(iter.Distance(cellRange.end()), distance);
-
-        const auto cellReference0 = iter->GetCellReference();
-
-        ASSERT_EQUAL(cellReference0.GetRow(), row);
-        ASSERT_EQUAL(cellReference0.GetColumn(), column);
-
-        const auto cellReference1 = (*iter).GetCellReference();
-
-        ASSERT_EQUAL(cellReference1.GetRow(), row);
-        ASSERT_EQUAL(cellReference1.GetColumn(), column);
+        DoCellRangeIteratorTest(row, column, distance, cellRange, iter);
 
         ++column;
         if (column > 8)
@@ -80,14 +65,29 @@ void CoreTools::CellIteratorTesting::CellRangeIteratorTest()
     }
 }
 
+void CoreTools::CellIteratorTesting::DoCellRangeIteratorTest(int row,
+                                                             int column,
+                                                             int distance,
+                                                             CellRange& cellRange,
+                                                             CellIterator& iter)
+{
+    ASSERT_FALSE(iter.IsSame(cellRange.end()));
+    ASSERT_EQUAL(iter.Distance(cellRange.end()), distance);
+
+    const auto cellReference0 = iter->GetCellReference();
+
+    ASSERT_EQUAL(cellReference0.GetRow(), row);
+    ASSERT_EQUAL(cellReference0.GetColumn(), column);
+
+    const auto cellReference1 = (*iter).GetCellReference();
+
+    ASSERT_EQUAL(cellReference1.GetRow(), row);
+    ASSERT_EQUAL(cellReference1.GetColumn(), column);
+}
+
 void CoreTools::CellIteratorTesting::SuffixIteratorTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheet = GetWorkSheet();
 
     auto cellRange = worksheet.GetRange();
 
@@ -96,9 +96,27 @@ void CoreTools::CellIteratorTesting::SuffixIteratorTest()
     /// 测试CellIterator operator++(int);
     for (auto iter = cellRange.begin(); iter != cellRange.end(); iter++)
     {
-        ASSERT_FALSE(iter.IsSame(cellRange.end()));
-        ASSERT_EQUAL(iter.Distance(cellRange.end()), distance);
+        ASSERT_NOT_THROW_EXCEPTION_3(DoSuffixIteratorTest, distance, cellRange, iter);
 
         --distance;
     }
+}
+
+void CoreTools::CellIteratorTesting::DoSuffixIteratorTest(int distance,
+                                                          CellRange& cellRange,
+                                                          const CellIterator& iter)
+{
+    ASSERT_FALSE(iter.IsSame(cellRange.end()));
+    ASSERT_EQUAL(iter.Distance(cellRange.end()), distance);
+}
+
+CoreTools::CellIteratorTesting::Worksheet CoreTools::CellIteratorTesting::GetWorkSheet()
+{
+    document = Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx");
+
+    auto workbook = document->GetWorkbook();
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    const auto& worksheetName = worksheetNames.at(0);
+
+    return workbook.GetWorksheet(worksheetName);
 }

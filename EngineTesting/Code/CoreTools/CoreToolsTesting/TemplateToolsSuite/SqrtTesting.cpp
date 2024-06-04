@@ -28,27 +28,39 @@ void CoreTools::SqrtTesting::DoRunUnitTest()
 
 void CoreTools::SqrtTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(SqrtTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(Sqrt0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Sqrt1Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Sqrt2Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Sqrt3Test);
 }
 
-void CoreTools::SqrtTesting::SqrtTest()
+void CoreTools::SqrtTesting::Sqrt0Test()
 {
     ASSERT_EQUAL(SqrtAlgorithm0<16>::Result, 4);
     ASSERT_EQUAL(SqrtAlgorithm0<25>::Result, 5);
     ASSERT_EQUAL(SqrtAlgorithm0<42>::Result, 6);
     ASSERT_EQUAL(SqrtAlgorithm0<1>::Result, 1);
+}
 
+void CoreTools::SqrtTesting::Sqrt1Test()
+{
     ASSERT_EQUAL(SqrtAlgorithm1<16>::Result, 4);
     ASSERT_EQUAL(SqrtAlgorithm1<25>::Result, 5);
     ASSERT_EQUAL(SqrtAlgorithm1<42>::Result, 6);
     ASSERT_EQUAL(SqrtAlgorithm1<1>::Result, 1);
+}
 
+void CoreTools::SqrtTesting::Sqrt2Test()
+{
     ASSERT_EQUAL(SqrtAlgorithm2<16>::Result, 4);
     ASSERT_EQUAL(SqrtAlgorithm2<25>::Result, 5);
     ASSERT_EQUAL(SqrtAlgorithm2<42>::Result, 7);
     ASSERT_EQUAL(SqrtAlgorithm2<48>::Result, 7);
     ASSERT_EQUAL(SqrtAlgorithm2<1>::Result, 1);
+}
 
+void CoreTools::SqrtTesting::Sqrt3Test()
+{
     ASSERT_EQUAL(SqrtAlgorithm3<16>::Result, 4);
     ASSERT_EQUAL(SqrtAlgorithm3<25>::Result, 5);
     ASSERT_EQUAL(SqrtAlgorithm3<42>::Result, 7);

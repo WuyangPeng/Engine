@@ -10,6 +10,7 @@
 #ifndef CONCURRENT_TOOLS_UNIT_TEST_SUITE_SUITE_TESTING_H
 #define CONCURRENT_TOOLS_UNIT_TEST_SUITE_SUITE_TESTING_H
 
+#include "CoreTools/UnitTestSuite/Suite.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -34,6 +35,9 @@ namespace CoreTools
         void AddTestTest();
         void AddSuiteTest();
         void TestDataTest();
+
+        void AddSuite0Test(Suite& suite);
+        void AddSuite1Test(const std::string& suiteName, Suite& suite0);
     };
 }
 

@@ -46,15 +46,14 @@ CoreTools::State<CoreTools::PlayerEntity>::MessageResult CoreTools::OpenStates::
     switch (telegram.GetMessageType())
     {
         case States::Empty:
-            return { ParentType::MakeState<EmptyStates>(), true };
+            return { MakeState<EmptyStates>(), true };
         case States::Open:
-            return { shared_from_this(), true };
-        case States::Stopped:
-            return { ParentType::MakeState<StoppedStates>(), true };
-        case States::Playing:
-            return { ParentType::MakeState<PlayingStates>(), true };
         case States::Paused:
             return { shared_from_this(), true };
+        case States::Stopped:
+            return { MakeState<StoppedStates>(), true };
+        case States::Playing:
+            return { MakeState<PlayingStates>(), true };
         case States::Previous:
             return { GetPossiblePreviousState(), true };
         default:

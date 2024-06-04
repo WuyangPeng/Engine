@@ -29,7 +29,8 @@ namespace CoreTools
         void DoRunUnitTest() override;
         void MainTest();
 
-        void QuerySheetNameTest();
+        void QuerySheetName0Test();
+        void QuerySheetName1Test();
     };
 }
 

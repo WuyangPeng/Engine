@@ -10,6 +10,7 @@
 #ifndef CONCURRENT_TOOLS_TIME_SUITE_DELTA_TIME_MANAGER_TESTING_H
 #define CONCURRENT_TOOLS_TIME_SUITE_DELTA_TIME_MANAGER_TESTING_H
 
+#include "CoreTools/Time/DeltaTimeManager.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -30,6 +31,8 @@ namespace CoreTools
         void MainTest();
 
         void TimeTest();
+        void TimeBaseTest(const DeltaTimeManager& time);
+        void ResetCurrentTimeTest(DeltaTimeManager& time);
     };
 }
 

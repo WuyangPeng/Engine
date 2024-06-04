@@ -25,9 +25,11 @@ CoreTools::StoppedStates::StoppedStates() noexcept
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, StoppedStates)
 
-CoreTools::StoppedStates::StateSharedPtr CoreTools::StoppedStates::Execute([[maybe_unused]] int64_t timeInterval)
+CoreTools::StoppedStates::StateSharedPtr CoreTools::StoppedStates::Execute(int64_t timeInterval)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
+
+    System::UnusedFunction(timeInterval);
 
     return shared_from_this();
 }
@@ -46,13 +48,12 @@ CoreTools::State<CoreTools::PlayerEntity>::MessageResult CoreTools::StoppedState
         case States::Empty:
             return { shared_from_this(), false };
         case States::Open:
-            return { shared_from_this(), true };
         case States::Stopped:
             return { shared_from_this(), true };
         case States::Playing:
-            return { ParentType::MakeState<PlayingStates>(), true };
+            return { MakeState<PlayingStates>(), true };
         case States::Paused:
-            return { ParentType::MakeState<PausedStates>(), true };
+            return { MakeState<PausedStates>(), true };
         case States::Previous:
             return { GetPossiblePreviousState(), true };
         default:

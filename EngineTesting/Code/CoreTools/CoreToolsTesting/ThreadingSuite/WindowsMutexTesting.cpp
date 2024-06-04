@@ -15,7 +15,9 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 CoreTools::WindowsMutexTesting::WindowsMutexTesting(const OStreamShared& stream)
-    : ParentType{ stream }, windowsMutex{ MutexCreate::UseDefault }, windowsDllMutex{ MutexCreate::UseDefault }
+    : ParentType{ stream },
+      windowsMutex{ MutexCreate::UseDefault },
+      windowsDllMutex{ MutexCreate::UseDefault }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

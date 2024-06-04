@@ -51,7 +51,7 @@ void CoreTools::BatchConversionCodeTesting::VerifyTest()
     {
         const auto fileName = inputPath.path().native();
 
-        IFileStreamManager ifStreamManager{ CoreTools::StringConversion::WideCharConversionStandard(fileName) };
+        IFileStreamManager ifStreamManager{ StringConversion::WideCharConversionStandard(fileName) };
 
         ASSERT_FALSE(ifStreamManager.GetFileContent().empty());
 

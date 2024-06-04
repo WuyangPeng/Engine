@@ -29,8 +29,12 @@ namespace CoreTools
         void DoRunUnitTest() override;
         void MainTest();
 
-        void QueryXmlDataTest();
+        void QueryXmlData0Test();
+        void QueryXmlData1Test();
         void ExceptionTest();
+
+    private:
+        std::string xmlPath;
     };
 }
 

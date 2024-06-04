@@ -30,20 +30,25 @@ void CoreTools::QuerySheetRelsTargetTesting::DoRunUnitTest()
 
 void CoreTools::QuerySheetRelsTargetTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetRelsTargetTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetRelsTarget0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetRelsTarget1Test);
 }
 
-void CoreTools::QuerySheetRelsTargetTesting::QuerySheetRelsTargetTest()
+void CoreTools::QuerySheetRelsTargetTesting::QuerySheetRelsTarget0Test()
 {
     const auto sheetId = "sheetId"s;
     const auto sheetTarget = "sheetTarget"s;
-    const SimpleCSV::QuerySheetRelationshipTarget querySheetRelsTarget0{ sheetId, sheetTarget };
+    const SimpleCSV::QuerySheetRelationshipTarget querySheetRelsTarget{ sheetId, sheetTarget };
 
-    ASSERT_EQUAL(sheetId, querySheetRelsTarget0.GetSheetId());
-    ASSERT_EQUAL(sheetTarget, querySheetRelsTarget0.GetSheetTarget());
+    ASSERT_EQUAL(sheetId, querySheetRelsTarget.GetSheetId());
+    ASSERT_EQUAL(sheetTarget, querySheetRelsTarget.GetSheetTarget());
+}
 
-    const SimpleCSV::QuerySheetRelationshipTarget querySheetRelsTarget1{ sheetId };
+void CoreTools::QuerySheetRelsTargetTesting::QuerySheetRelsTarget1Test()
+{
+    const auto sheetId = "sheetId"s;
+    const SimpleCSV::QuerySheetRelationshipTarget querySheetRelsTarget{ sheetId };
 
-    ASSERT_EQUAL(sheetId, querySheetRelsTarget1.GetSheetId());
-    ASSERT_TRUE(querySheetRelsTarget1.GetSheetTarget().empty());
+    ASSERT_EQUAL(sheetId, querySheetRelsTarget.GetSheetId());
+    ASSERT_TRUE(querySheetRelsTarget.GetSheetTarget().empty());
 }

@@ -30,20 +30,25 @@ void CoreTools::QuerySheetRelsIdTesting::DoRunUnitTest()
 
 void CoreTools::QuerySheetRelsIdTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetRelsIdTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetRelsId0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetRelsId1Test);
 }
 
-void CoreTools::QuerySheetRelsIdTesting::QuerySheetRelsIdTest()
+void CoreTools::QuerySheetRelsIdTesting::QuerySheetRelsId0Test()
 {
     const auto sheetId = "sheetId"s;
     const auto sheetPath = "sheetPath"s;
-    const SimpleCSV::QuerySheetRelationshipId querySheetRelsId0{ sheetPath, sheetId };
+    const SimpleCSV::QuerySheetRelationshipId querySheetRelsId{ sheetPath, sheetId };
 
-    ASSERT_EQUAL(sheetId, querySheetRelsId0.GetSheetId());
-    ASSERT_EQUAL(sheetPath, querySheetRelsId0.GetSheetPath());
+    ASSERT_EQUAL(sheetId, querySheetRelsId.GetSheetId());
+    ASSERT_EQUAL(sheetPath, querySheetRelsId.GetSheetPath());
+}
 
-    const SimpleCSV::QuerySheetRelationshipId querySheetRelsId1{ sheetPath };
+void CoreTools::QuerySheetRelsIdTesting::QuerySheetRelsId1Test()
+{
+    const auto sheetPath = "sheetPath"s;
+    const SimpleCSV::QuerySheetRelationshipId querySheetRelsId{ sheetPath };
 
-    ASSERT_EQUAL(sheetPath, querySheetRelsId1.GetSheetPath());
-    ASSERT_TRUE(querySheetRelsId1.GetSheetId().empty());
+    ASSERT_EQUAL(sheetPath, querySheetRelsId.GetSheetPath());
+    ASSERT_TRUE(querySheetRelsId.GetSheetId().empty());
 }

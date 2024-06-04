@@ -29,7 +29,11 @@ namespace CoreTools
         void DoRunUnitTest() override;
         void MainTest();
 
-        void CastTest() noexcept;
+        void Int8CastTest() noexcept;
+        void UInt8CastTest() noexcept;
+        void UInt32CastTest() noexcept;
+        void Int64CastTest() noexcept;
+        void UInt64CastTest() noexcept;
     };
 }
 

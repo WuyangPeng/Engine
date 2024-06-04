@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_STATE_MACHINE_SUITE_STATE_MACHINE_TESTING_H
 #define CORE_TOOLS_STATE_MACHINE_SUITE_STATE_MACHINE_TESTING_H
 
+#include "Detail/Player.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -30,6 +31,10 @@ namespace CoreTools
         void MainTest();
 
         void PlayerTest();
+
+        void OpenCloseTest(Player& player);
+        void PlayTest(Player& player);
+        void StopTest(Player& player);
     };
 }
 

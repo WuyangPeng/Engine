@@ -58,14 +58,21 @@ void CoreTools::ThreadTesting::CreateThread()
     thread0.Suspend();
     thread0.Resume();
 
-    Thread thread1{ Thread1, nullptr };
-
-    thread1.Resume();
+    auto thread1 = DoCreateThread();
 
     isContinue = true;
 
     thread0.Wait();
     thread1.Wait();
+}
+
+CoreTools::Thread CoreTools::ThreadTesting::DoCreateThread()
+{
+    Thread thread1{ Thread1, nullptr };
+
+    thread1.Resume();
+
+    return thread1;
 }
 
 uint32_t CoreTools::ThreadTesting::Thread0(void* threadParameter) noexcept

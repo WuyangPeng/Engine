@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 16:57)
+/// 版本：1.0.0.10 (2024/06/01 15:06)
 
 #include "RowDataProxyTesting.h"
 #include "System/Helper/PragmaWarning/PugiXml.h"
@@ -24,7 +24,9 @@
 using namespace std::literals;
 
 CoreTools::RowDataProxyTesting::RowDataProxyTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      document{ SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx") },
+      workbook{ document->GetWorkbook() }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -51,30 +53,25 @@ void CoreTools::RowDataProxyTesting::MainTest()
 
 void CoreTools::RowDataProxyTesting::RowDataProxyTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheet = GetWorkSheet();
 
     for (auto rows = worksheet.GetRows();
          auto& row : rows)
     {
-        auto& rowDataProxy = row.GetValues();
-        ASSERT_EQUAL(rowDataProxy.GetRowNode(), row.GetRowNode());
-        ASSERT_EQUAL(rowDataProxy.GetSharedStrings(), row.GetSharedStrings());
+        ASSERT_NOT_THROW_EXCEPTION_1(DoRowDataProxyTest, row);
     }
+}
+
+void CoreTools::RowDataProxyTesting::DoRowDataProxyTest(Row& row)
+{
+    auto& rowDataProxy = row.GetValues();
+    ASSERT_EQUAL(rowDataProxy.GetRowNode(), row.GetRowNode());
+    ASSERT_EQUAL(rowDataProxy.GetSharedStrings(), row.GetSharedStrings());
 }
 
 void CoreTools::RowDataProxyTesting::CellValueContainerTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheet = GetWorkSheet();
 
     auto rows = worksheet.GetRows();
 
@@ -84,11 +81,16 @@ void CoreTools::RowDataProxyTesting::CellValueContainerTest()
 
     auto& rowDataProxy = row->GetValues();
 
-    const SimpleCSV::RowDataProxy::CellValueContainer cellValueContainer{ SimpleCSV::CellValue{ 1 },
-                                                                          SimpleCSV::CellValue{ false },
-                                                                          SimpleCSV::CellValue{ "1" },
-                                                                          SimpleCSV::CellValue{ 1.2 },
-                                                                          SimpleCSV::CellValue{ 1.7 } };
+    ASSERT_NOT_THROW_EXCEPTION_1(CellValueContainerOperatorTest, rowDataProxy);
+}
+
+void CoreTools::RowDataProxyTesting::CellValueContainerOperatorTest(RowDataProxy& rowDataProxy)
+{
+    const CellValueContainer cellValueContainer{ CellValue{ 1 },
+                                                 CellValue{ false },
+                                                 CellValue{ "1" },
+                                                 CellValue{ 1.2 },
+                                                 CellValue{ 1.7 } };
 
     rowDataProxy = cellValueContainer;
 
@@ -97,12 +99,7 @@ void CoreTools::RowDataProxyTesting::CellValueContainerTest()
 
 void CoreTools::RowDataProxyTesting::BoolContainerTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheet = GetWorkSheet();
 
     auto rows = worksheet.GetRows();
 
@@ -112,7 +109,12 @@ void CoreTools::RowDataProxyTesting::BoolContainerTest()
 
     auto& rowDataProxy = row->GetValues();
 
-    const SimpleCSV::RowDataProxy::BoolContainer boolContainer{ false, true, true, false, false };
+    ASSERT_NOT_THROW_EXCEPTION_1(BoolContainerOperatorTest, rowDataProxy);
+}
+
+void CoreTools::RowDataProxyTesting::BoolContainerOperatorTest(RowDataProxy& rowDataProxy)
+{
+    const BoolContainer boolContainer{ false, true, true, false, false };
 
     rowDataProxy = boolContainer;
 
@@ -136,12 +138,7 @@ void CoreTools::RowDataProxyTesting::BoolContainerTest()
 
 void CoreTools::RowDataProxyTesting::DeleteCellValuesTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheet = GetWorkSheet();
 
     auto rows = worksheet.GetRows();
 
@@ -151,11 +148,16 @@ void CoreTools::RowDataProxyTesting::DeleteCellValuesTest()
 
     auto& rowDataProxy = row->GetValues();
 
-    const SimpleCSV::RowDataProxy::CellValueContainer cellValueContainer{ SimpleCSV::CellValue{ 1 },
-                                                                          SimpleCSV::CellValue{ false },
-                                                                          SimpleCSV::CellValue{ "1" },
-                                                                          SimpleCSV::CellValue{ 1.2 },
-                                                                          SimpleCSV::CellValue{ 1.7 } };
+    ASSERT_NOT_THROW_EXCEPTION_1(DoDeleteCellValuesTest, rowDataProxy);
+}
+
+void CoreTools::RowDataProxyTesting::DoDeleteCellValuesTest(RowDataProxy& rowDataProxy)
+{
+    const CellValueContainer cellValueContainer{ CellValue{ 1 },
+                                                 CellValue{ false },
+                                                 CellValue{ "1" },
+                                                 CellValue{ 1.2 },
+                                                 CellValue{ 1.7 } };
 
     rowDataProxy = cellValueContainer;
 
@@ -163,22 +165,17 @@ void CoreTools::RowDataProxyTesting::DeleteCellValuesTest()
 
     ASSERT_EQUAL(rowDataProxy.GetValues().size(), cellValueContainer.size());
 
-    const SimpleCSV::RowDataProxy::CellValueContainer resultContainer{ SimpleCSV::CellValue::CreateDefault(),
-                                                                       SimpleCSV::CellValue::CreateDefault(),
-                                                                       SimpleCSV::CellValue::CreateDefault(),
-                                                                       SimpleCSV::CellValue{ 1.2 },
-                                                                       SimpleCSV::CellValue{ 1.7 } };
+    const CellValueContainer resultContainer{ CellValue::CreateDefault(),
+                                              CellValue::CreateDefault(),
+                                              CellValue::CreateDefault(),
+                                              CellValue{ 1.2 },
+                                              CellValue{ 1.7 } };
     ASSERT_EQUAL(rowDataProxy.GetValues(), resultContainer);
 }
 
 void CoreTools::RowDataProxyTesting::PrependCellValueTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheet = GetWorkSheet();
 
     auto rows = worksheet.GetRows();
 
@@ -188,38 +185,38 @@ void CoreTools::RowDataProxyTesting::PrependCellValueTest()
 
     auto& rowDataProxy = row->GetValues();
 
-    const SimpleCSV::RowDataProxy::CellValueContainer cellValueContainer{ SimpleCSV::CellValue{ 1 },
-                                                                          SimpleCSV::CellValue{ false },
-                                                                          SimpleCSV::CellValue{ "1" },
-                                                                          SimpleCSV::CellValue{ 1.2 },
-                                                                          SimpleCSV::CellValue{ 1.7 } };
+    ASSERT_NOT_THROW_EXCEPTION_1(DoPrependCellValueTest, rowDataProxy);
+}
+
+void CoreTools::RowDataProxyTesting::DoPrependCellValueTest(RowDataProxy& rowDataProxy)
+{
+    const CellValueContainer cellValueContainer{ CellValue{ 1 },
+                                                 CellValue{ false },
+                                                 CellValue{ "1" },
+                                                 CellValue{ 1.2 },
+                                                 CellValue{ 1.7 } };
 
     rowDataProxy = cellValueContainer;
 
     rowDataProxy.DeleteCellValues(3);
-    rowDataProxy.PrependCellValue(SimpleCSV::CellValue{ 2 }, 1);
-    rowDataProxy.PrependCellValue(SimpleCSV::CellValue{ 3 }, 2);
-    rowDataProxy.PrependCellValue(SimpleCSV::CellValue{ 4 }, 3);
+    rowDataProxy.PrependCellValue(CellValue{ 2 }, 1);
+    rowDataProxy.PrependCellValue(CellValue{ 3 }, 2);
+    rowDataProxy.PrependCellValue(CellValue{ 4 }, 3);
 
     ASSERT_EQUAL(rowDataProxy.GetValues().size(), cellValueContainer.size());
 
-    const SimpleCSV::RowDataProxy::CellValueContainer resultContainer{ SimpleCSV::CellValue{ 2 },
-                                                                       SimpleCSV::CellValue{ 3 },
-                                                                       SimpleCSV::CellValue{ 4 },
-                                                                       SimpleCSV::CellValue{ 1.2 },
-                                                                       SimpleCSV::CellValue{ 1.7 } };
+    const CellValueContainer resultContainer{ CellValue{ 2 },
+                                              CellValue{ 3 },
+                                              CellValue{ 4 },
+                                              CellValue{ 1.2 },
+                                              CellValue{ 1.7 } };
     const auto values = rowDataProxy.GetValues();
     ASSERT_EQUAL(values, resultContainer);
 }
 
 void CoreTools::RowDataProxyTesting::ClearTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheet = GetWorkSheet();
 
     auto rows = worksheet.GetRows();
 
@@ -236,12 +233,7 @@ void CoreTools::RowDataProxyTesting::ClearTest()
 
 void CoreTools::RowDataProxyTesting::DequeTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheet = GetWorkSheet();
 
     auto rows = worksheet.GetRows();
 
@@ -251,11 +243,16 @@ void CoreTools::RowDataProxyTesting::DequeTest()
 
     auto& rowDataProxy = row->GetValues();
 
-    const std::deque cellValueContainer{ SimpleCSV::CellValue{ 1 },
-                                         SimpleCSV::CellValue{ false },
-                                         SimpleCSV::CellValue{ "1" },
-                                         SimpleCSV::CellValue{ 1.2 },
-                                         SimpleCSV::CellValue{ 1.7 } };
+    ASSERT_NOT_THROW_EXCEPTION_1(DoDequeTest, rowDataProxy);
+}
+
+void CoreTools::RowDataProxyTesting::DoDequeTest(RowDataProxy& rowDataProxy)
+{
+    const std::deque cellValueContainer{ CellValue{ 1 },
+                                         CellValue{ false },
+                                         CellValue{ "1" },
+                                         CellValue{ 1.2 },
+                                         CellValue{ 1.7 } };
 
     rowDataProxy = cellValueContainer;
 
@@ -268,17 +265,12 @@ void CoreTools::RowDataProxyTesting::DequeTest()
         ASSERT_EQUAL(values.at(index), cellValueContainer.at(index));
     }
 
-    ASSERT_EQUAL(static_cast<std::deque<SimpleCSV::CellValue>>(rowDataProxy), cellValueContainer);
+    ASSERT_EQUAL(static_cast<CellValueDeque>(rowDataProxy), cellValueContainer);
 }
 
 void CoreTools::RowDataProxyTesting::ListTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheet = GetWorkSheet();
 
     auto rows = worksheet.GetRows();
 
@@ -288,28 +280,28 @@ void CoreTools::RowDataProxyTesting::ListTest()
 
     auto& rowDataProxy = row->GetValues();
 
-    const std::list cellValueContainer{ SimpleCSV::CellValue{ 1 },
-                                        SimpleCSV::CellValue{ false },
-                                        SimpleCSV::CellValue{ "1" },
-                                        SimpleCSV::CellValue{ 1.2 },
-                                        SimpleCSV::CellValue{ 1.7 } };
+    ASSERT_NOT_THROW_EXCEPTION_1(DoListTest, rowDataProxy);
+}
+
+void CoreTools::RowDataProxyTesting::DoListTest(RowDataProxy& rowDataProxy)
+{
+    const std::list cellValueContainer{ CellValue{ 1 },
+                                        CellValue{ false },
+                                        CellValue{ "1" },
+                                        CellValue{ 1.2 },
+                                        CellValue{ 1.7 } };
 
     rowDataProxy = cellValueContainer;
 
     const auto values = rowDataProxy.GetValues();
 
     ASSERT_EQUAL(values.size(), cellValueContainer.size());
-    ASSERT_EQUAL(static_cast<std::list<SimpleCSV::CellValue>>(rowDataProxy), cellValueContainer);
+    ASSERT_EQUAL(static_cast<CellValueList>(rowDataProxy), cellValueContainer);
 }
 
 void CoreTools::RowDataProxyTesting::StringListTest()
 {
-    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-
-    auto workbook = document->GetWorkbook();
-    const auto worksheetNames = workbook.GetWorksheetNames();
-    const auto& worksheetName = worksheetNames.at(0);
-    const auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheet = GetWorkSheet();
 
     auto rows = worksheet.GetRows();
 
@@ -326,5 +318,13 @@ void CoreTools::RowDataProxyTesting::StringListTest()
     const auto values = rowDataProxy.GetValues();
 
     ASSERT_EQUAL(values.size(), stringContainer.size());
-    ASSERT_EQUAL(static_cast<std::list<std::string>>(rowDataProxy), stringContainer);
+    ASSERT_EQUAL(static_cast<StringList>(rowDataProxy), stringContainer);
+}
+
+CoreTools::RowDataProxyTesting::Worksheet CoreTools::RowDataProxyTesting::GetWorkSheet()
+{
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    const auto& worksheetName = worksheetNames.at(0);
+
+    return workbook.GetWorksheet(worksheetName);
 }

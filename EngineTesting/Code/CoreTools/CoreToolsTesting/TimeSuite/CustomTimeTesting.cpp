@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.9 (2024/04/23 10:11)
+/// 版本：1.0.0.10 (2024/06/04 10:51)
 
 #include "CustomTimeTesting.h"
 #include "System/Threading/SyncTools.h"
@@ -38,6 +38,13 @@ void CoreTools::CustomTimeTesting::TimeTest()
 {
     CustomTime time{};
 
+    ASSERT_NOT_THROW_EXCEPTION_1(Time0Test, time);
+    ASSERT_NOT_THROW_EXCEPTION_1(Time1Test, time);
+    ASSERT_NOT_THROW_EXCEPTION_1(Time2Test, time);
+}
+
+void CoreTools::CustomTimeTesting::Time0Test(CustomTime& time)
+{
     ASSERT_APPROXIMATE(time.GetThisElapsedTime(), 0.0, 1e-10);
     ASSERT_APPROXIMATE(time.GetNowTime(), 0.0, 1e-10);
 
@@ -52,7 +59,10 @@ void CoreTools::CustomTimeTesting::TimeTest()
     ASSERT_TRUE(elapsedTime <= nowTime);
     ASSERT_TRUE(0 <= elapsedTime);
     ASSERT_TRUE(0 <= nowTime);
+}
 
+void CoreTools::CustomTimeTesting::Time1Test(CustomTime& time)
+{
     time.ResetCustomTime();
 
     ASSERT_APPROXIMATE(time.GetThisElapsedTime(), 0.0, 1e-10);
@@ -69,7 +79,10 @@ void CoreTools::CustomTimeTesting::TimeTest()
     ASSERT_TRUE(elapsedMillisecondTime <= nowMillisecondTime);
     ASSERT_TRUE(0 <= elapsedMillisecondTime);
     ASSERT_TRUE(0 <= nowMillisecondTime);
+}
 
+void CoreTools::CustomTimeTesting::Time2Test(CustomTime& time)
+{
     time.ResetCustomTime();
 
     ASSERT_RANGE(time.GetThisElapsedMillisecondTime(), 0.0, 1.0);

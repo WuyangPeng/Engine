@@ -5,11 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/16 15:19)
+/// 版本：1.0.0.10 (2024/06/03 16:29)
 
 #ifndef CORE_TOOLS_THREADING_SUITE_THREAD_TESTING_H
 #define CORE_TOOLS_THREADING_SUITE_THREAD_TESTING_H
 
+#include "CoreTools/Threading/Thread.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -29,11 +30,11 @@ namespace CoreTools
         void DoRunUnitTest() override;
         void MainTest();
 
-    private:
         NODISCARD static uint32_t Thread0(void* threadParameter) noexcept;
         NODISCARD static uint32_t Thread1(void* threadParameter) noexcept;
 
         void CreateThread();
+        NODISCARD static Thread DoCreateThread();
     };
 }
 

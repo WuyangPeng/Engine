@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 09:42)
+/// 版本：1.0.0.10 (2024/05/31 17:39)
 
 #include "ZipEntryTesting.h"
 #include "System/CharacterString/FormatString.h"
@@ -54,14 +54,26 @@ void CoreTools::ZipEntryTesting::ZipEntryInfoTest()
     const auto fileIndex = boost::numeric_cast<mz_uint32>(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::ZipFile));
     const auto zipEntryInfo = GetZipEntryInfo(fileIndex);
 
-    SimpleZip::ZipEntry zipEntry{ zipEntryInfo };
+    ZipEntry zipEntry{ zipEntryInfo };
 
+    ASSERT_NOT_THROW_EXCEPTION_1(ZipEntryInfoDataTest, zipEntry);
+    ASSERT_NOT_THROW_EXCEPTION_2(ZipEntryInfoBase0Test, fileIndex, zipEntry);
+    ASSERT_NOT_THROW_EXCEPTION_1(ZipEntryInfoCommentTest, zipEntry);
+    ASSERT_NOT_THROW_EXCEPTION_2(GetZipEntryInfoTest, fileIndex, zipEntry);
+    ASSERT_NOT_THROW_EXCEPTION_1(ZipEntryInfoBase1Test, zipEntry);
+}
+
+void CoreTools::ZipEntryTesting::ZipEntryInfoDataTest(const ZipEntry& zipEntry)
+{
     const auto zipEntryData = zipEntry.GetEntryData();
     ASSERT_TRUE(zipEntryData.empty());
 
     const auto dataAsString = zipEntry.GetDataAsString();
     ASSERT_TRUE(dataAsString.empty());
+}
 
+void CoreTools::ZipEntryTesting::ZipEntryInfoBase0Test(mz_uint32 fileIndex, const ZipEntry& zipEntry)
+{
     ASSERT_EQUAL(fileIndex, zipEntry.GetIndex());
     ASSERT_EQUAL(100, zipEntry.GetCompressedSize());
     ASSERT_EQUAL(200, zipEntry.GetUncompressedSize());
@@ -71,19 +83,28 @@ void CoreTools::ZipEntryTesting::ZipEntryInfoTest()
     ASSERT_TRUE(zipEntry.IsSupported());
 
     ASSERT_FALSE(zipEntry.IsModified());
+}
 
+void CoreTools::ZipEntryTesting::ZipEntryInfoCommentTest(const ZipEntry& zipEntry)
+{
     ASSERT_EQUAL("ZipEntryInfo.zip", zipEntry.GetFileName());
     ASSERT_EQUAL("comment", zipEntry.GetComment());
 
     ASSERT_EQUAL(0u, zipEntry.GetEntrySize());
     ASSERT_TRUE(zipEntry.IsEntryDataEmpty());
     ASSERT_LESS_EQUAL(zipEntry.GetTime(), System::GetTimeInSeconds());
+}
 
+void CoreTools::ZipEntryTesting::GetZipEntryInfoTest(mz_uint32 fileIndex, const ZipEntry& zipEntry)
+{
     const auto result = zipEntry.GetZipEntryInfo();
     ASSERT_EQUAL(fileIndex, result.m_file_index);
     ASSERT_EQUAL(100, result.m_comp_size);
     ASSERT_EQUAL(200, result.m_uncomp_size);
+}
 
+void CoreTools::ZipEntryTesting::ZipEntryInfoBase1Test(ZipEntry& zipEntry)
+{
     zipEntry.SetFileName("EntryInfo.zip");
     ASSERT_EQUAL("EntryInfo.zip", zipEntry.GetFileName());
 
@@ -99,7 +120,7 @@ void CoreTools::ZipEntryTesting::ZipEntryInfoTest()
 
 CoreTools::SimpleZip::ZipEntryInfo CoreTools::ZipEntryTesting::GetZipEntryInfo(mz_uint32 fileIndex)
 {
-    SimpleZip::ZipEntryInfo zipEntryInfo{};
+    ZipEntryInfo zipEntryInfo{};
 
     zipEntryInfo.m_file_index = fileIndex;
     zipEntryInfo.m_central_dir_ofs = 0;
@@ -127,9 +148,18 @@ CoreTools::SimpleZip::ZipEntryInfo CoreTools::ZipEntryTesting::GetZipEntryInfo(m
 
 void CoreTools::ZipEntryTesting::ZipEntryDataTest()
 {
-    const SimpleZip::ZipEntryData originalZipEntryData{ '1', '2' };
-    SimpleZip::ZipEntry zipEntry{ "ZipEntryInfo.zip", originalZipEntryData };
+    const ZipEntryData originalZipEntryData{ '1', '2' };
+    ZipEntry zipEntry{ "ZipEntryInfo.zip", originalZipEntryData };
 
+    ASSERT_NOT_THROW_EXCEPTION_2(ZipEntryData0Test, originalZipEntryData, zipEntry);
+    ASSERT_NOT_THROW_EXCEPTION_1(ZipEntryData1Test, zipEntry);
+    ASSERT_NOT_THROW_EXCEPTION_1(ZipEntryData2Test, zipEntry);
+    ASSERT_NOT_THROW_EXCEPTION_1(ZipEntryData3Test, zipEntry);
+    ASSERT_NOT_THROW_EXCEPTION_1(ZipEntryData4Test, zipEntry);
+}
+
+void CoreTools::ZipEntryTesting::ZipEntryData0Test(const ZipEntryData& originalZipEntryData, const ZipEntry& zipEntry)
+{
     const auto zipEntryData = zipEntry.GetEntryData();
     ASSERT_FALSE(zipEntryData.empty());
     ASSERT_EQUAL(zipEntryData, originalZipEntryData);
@@ -137,7 +167,10 @@ void CoreTools::ZipEntryTesting::ZipEntryDataTest()
     const auto dataAsString = zipEntry.GetDataAsString();
     ASSERT_FALSE(dataAsString.empty());
     ASSERT_EQUAL(dataAsString.size(), 2u);
+}
 
+void CoreTools::ZipEntryTesting::ZipEntryData1Test(const ZipEntry& zipEntry)
+{
     ASSERT_LESS_EQUAL(1u, zipEntry.GetIndex());
     ASSERT_EQUAL(0, zipEntry.GetUncompressedSize());
     ASSERT_EQUAL(0, zipEntry.GetUncompressedSize());
@@ -147,19 +180,28 @@ void CoreTools::ZipEntryTesting::ZipEntryDataTest()
     ASSERT_TRUE(zipEntry.IsSupported());
 
     ASSERT_TRUE(zipEntry.IsModified());
+}
 
+void CoreTools::ZipEntryTesting::ZipEntryData2Test(const ZipEntry& zipEntry)
+{
     ASSERT_EQUAL("ZipEntryInfo.zip", zipEntry.GetFileName());
     ASSERT_TRUE(zipEntry.GetComment().empty());
 
     ASSERT_EQUAL(2u, zipEntry.GetEntrySize());
     ASSERT_FALSE(zipEntry.IsEntryDataEmpty());
     ASSERT_LESS_EQUAL(System::GetTimeInSeconds(), zipEntry.GetTime());
+}
 
+void CoreTools::ZipEntryTesting::ZipEntryData3Test(const ZipEntry& zipEntry)
+{
     const auto result = zipEntry.GetZipEntryInfo();
     ASSERT_EQUAL(zipEntry.GetIndex(), result.m_file_index);
     ASSERT_EQUAL(0, result.m_comp_size);
     ASSERT_EQUAL(0, result.m_uncomp_size);
+}
 
+void CoreTools::ZipEntryTesting::ZipEntryData4Test(ZipEntry& zipEntry)
+{
     zipEntry.SetFileName("EntryInfo.zip");
     ASSERT_EQUAL("EntryInfo.zip", zipEntry.GetFileName());
 
@@ -175,8 +217,17 @@ void CoreTools::ZipEntryTesting::ZipEntryDataTest()
 
 void CoreTools::ZipEntryTesting::StringDataTest()
 {
-    SimpleZip::ZipEntry zipEntry{ "ZipEntryInfo.zip", "12" };
+    ZipEntry zipEntry{ "ZipEntryInfo.zip", "12" };
 
+    ASSERT_NOT_THROW_EXCEPTION_1(StringDataTest0Test, zipEntry);
+    ASSERT_NOT_THROW_EXCEPTION_1(StringDataTest1Test, zipEntry);
+    ASSERT_NOT_THROW_EXCEPTION_1(StringDataTest2Test, zipEntry);
+    ASSERT_NOT_THROW_EXCEPTION_1(StringDataTest3Test, zipEntry);
+    ASSERT_NOT_THROW_EXCEPTION_1(StringDataTest4Test, zipEntry);
+}
+
+void CoreTools::ZipEntryTesting::StringDataTest0Test(const ZipEntry& zipEntry)
+{
     const auto zipEntryData = zipEntry.GetEntryData();
     ASSERT_FALSE(zipEntryData.empty());
     ASSERT_EQUAL(zipEntryData.size(), 2u);
@@ -184,7 +235,10 @@ void CoreTools::ZipEntryTesting::StringDataTest()
     const auto dataAsString = zipEntry.GetDataAsString();
     ASSERT_FALSE(dataAsString.empty());
     ASSERT_EQUAL(dataAsString.size(), 2u);
+}
 
+void CoreTools::ZipEntryTesting::StringDataTest1Test(const ZipEntry& zipEntry)
+{
     ASSERT_LESS_EQUAL(1u, zipEntry.GetIndex());
     ASSERT_EQUAL(0, zipEntry.GetCompressedSize());
     ASSERT_EQUAL(0, zipEntry.GetUncompressedSize());
@@ -194,19 +248,28 @@ void CoreTools::ZipEntryTesting::StringDataTest()
     ASSERT_TRUE(zipEntry.IsSupported());
 
     ASSERT_TRUE(zipEntry.IsModified());
+}
 
+void CoreTools::ZipEntryTesting::StringDataTest2Test(const ZipEntry& zipEntry)
+{
     ASSERT_EQUAL("ZipEntryInfo.zip", zipEntry.GetFileName());
     ASSERT_TRUE(zipEntry.GetComment().empty());
 
     ASSERT_EQUAL(2u, zipEntry.GetEntrySize());
     ASSERT_FALSE(zipEntry.IsEntryDataEmpty());
     ASSERT_LESS_EQUAL(System::GetTimeInSeconds(), zipEntry.GetTime());
+}
 
+void CoreTools::ZipEntryTesting::StringDataTest3Test(const ZipEntry& zipEntry)
+{
     const auto result = zipEntry.GetZipEntryInfo();
     ASSERT_EQUAL(zipEntry.GetIndex(), result.m_file_index);
     ASSERT_EQUAL(0, result.m_comp_size);
     ASSERT_EQUAL(0, result.m_uncomp_size);
+}
 
+void CoreTools::ZipEntryTesting::StringDataTest4Test(ZipEntry& zipEntry)
+{
     zipEntry.SetFileName("EntryInfo.zip");
     ASSERT_EQUAL("EntryInfo.zip", zipEntry.GetFileName());
 
@@ -232,7 +295,7 @@ void CoreTools::ZipEntryTesting::WriterAddMemTest()
     auto zipEntryInfo = GetZipEntryInfo(fileIndex);
     zipEntryInfo.m_comp_size = data.size();
 
-    SimpleZip::ZipEntry zipEntry{ zipEntryInfo };
+    ZipEntry zipEntry{ zipEntryInfo };
     zipEntry.SetFileName("Test.txt");
     zipEntry.SetData(data);
 
@@ -254,7 +317,7 @@ void CoreTools::ZipEntryTesting::ReaderExtractFileToMemTest()
     const auto fileIndex = boost::numeric_cast<mz_uint32>(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::ZipFile));
     const auto zipEntryInfo = GetZipEntryInfo(fileIndex);
 
-    SimpleZip::ZipEntry zipEntry{ zipEntryInfo };
+    ZipEntry zipEntry{ zipEntryInfo };
 
     const auto data = "123456789"s;
     zipEntry.ResizeZipEntryData(boost::numeric_cast<int>(data.size()));

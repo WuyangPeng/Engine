@@ -13,8 +13,6 @@
 #include "CoreTools/ReportOutput/UnitTestFailReportOutput.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using namespace std::literals;
-
 CoreTools::UnitTestFailReportOutputTesting::UnitTestFailReportOutputTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -35,7 +33,7 @@ void CoreTools::UnitTestFailReportOutputTesting::MainTest()
 
 void CoreTools::UnitTestFailReportOutputTesting::ReportOutputTest()
 {
-    UnitTestFailReportOutput output{ "ClassName"s, "FileName"s, 0, ""s, GetStream(), LogLevel::Trace };
+    UnitTestFailReportOutput output{ "ClassName", "FileName", 0, "", GetStream(), LogLevel::Trace };
 
     output.PrintFailClassInformation();
     output.PrintFailFileName();

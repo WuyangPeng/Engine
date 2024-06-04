@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_DOCUMENT_TESTING_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_DOCUMENT_TESTING_H
 
+#include "CoreTools/TextParsing/SimpleCSV/Document.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
@@ -26,6 +27,12 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using Workbook = SimpleCSV::Workbook;
+        using Worksheet = SimpleCSV::Worksheet;
+        using Document = SimpleCSV::Document;
+        using DocumentSharedPtr = SimpleCSV::Document::DocumentSharedPtr;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
@@ -33,8 +40,26 @@ namespace CoreTools
         void CreateTest();
         void RemoveFile();
         void PropertyTest();
+
         void ExecuteCommandTest();
         void ExecuteQueryTest();
+
+        NODISCARD static DocumentSharedPtr GetDocument();
+
+        void CommandSetSheetNameTest(Document& document, Workbook& workbook, const std::string& worksheetName);
+        void CommandSetSheetIndexTest(Document& document, Workbook& workbook);
+        void CommandAddWorksheetTest(Document& document, Workbook& workbook);
+        void CommandCloneSheetTest(Document& document, Workbook& workbook);
+        void CommandDeleteSheetTest(Document& document, Workbook& workbook);
+
+        void QuerySheetNameTest(const Document& document);
+        void QuerySheetVisibilityTest(const Document& document);
+        void QuerySheetTypeTest(const Document& document);
+        void QuerySheetIdTest(const Document& document);
+        void QuerySheetRelationshipIdTest(const Document& document);
+        void QuerySheetRelationshipTargetTest(const Document& document);
+        void QuerySharedStringsTest(const Document& document);
+        void QueryXmlDataTest(const Document& document);
     };
 }
 

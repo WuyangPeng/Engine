@@ -28,22 +28,53 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using CellReference = SimpleCSV::CellReference;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void CellAddressTest();
+
         NODISCARD bool RowTest();
         void OneLetterColumnTest();
+
         NODISCARD bool TwoLetterRowTest();
         NODISCARD bool ThreeLetterRowTest();
         void OperatorTest();
         void GetColumnTest();
+
+        void SetRowTest(CellReference& cellReference);
+        void DoOneLetterColumnTest(int column);
+        void GetAddressTest(int row, const CellReference& cellReference0);
+        void DoOneLetterColumn0Test(int row, int column, const std::string& address, const CellReference& cellReference);
+        void DoOneLetterColumn1Test(int row, const CellReference& cellReference0);
+        void DoOneLetterColumn2Test(int column, const CellReference& cellReference0);
+
+        void TwoLetterRow0Test(int row,
+                               int column0,
+                               int column1,
+                               const std::string& address,
+                               const CellReference& cellReference);
+        void TwoLetterRow1Test(int row, const CellReference& cellReference0);
+        void TwoLetterRow2Test(const CellReference& cellReference0);
+
+        void ThreeLetterRow0Test(int row,
+                                 int column0,
+                                 int column1,
+                                 int column2,
+                                 const std::string& address,
+                                 const CellReference& cellReference);
+        void ThreeLetterRow1Test(int row, const CellReference& cellReference0);
+        void ThreeLetterRow2Test(const CellReference& cellReference0);
 
     private:
         static constexpr auto alphabetSize = 26;
 
     private:
         std::default_random_engine randomEngine;
+        std::uniform_int_distribution<> rowRandomDistribution;
+        std::uniform_int_distribution<> alphabetRandomDistribution;
     };
 }
 

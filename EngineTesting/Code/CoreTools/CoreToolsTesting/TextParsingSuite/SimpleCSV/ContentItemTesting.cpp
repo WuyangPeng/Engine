@@ -48,69 +48,114 @@ void CoreTools::ContentItemTesting::ContentItemTest()
     for (const SimpleCSV::ContentTypes contentTypes{ data };
          const auto& item : contentTypes.GetContentItems())
     {
-        switch (const auto type = item.GetType();
-                type)
-        {
-            case SimpleCSV::ContentType::Workbook:
-            {
-                auto path = item.GetPath();
-                ASSERT_UNEQUAL(path.find("workbook"), std::string::npos);
-                ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
-            }
-            break;
-            case SimpleCSV::ContentType::Worksheet:
-            {
-                auto path = item.GetPath();
-                ASSERT_UNEQUAL(path.find("sheet"), std::string::npos);
-                ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
-            }
-            break;
-            case SimpleCSV::ContentType::Theme:
-            {
-                auto path = item.GetPath();
-                ASSERT_UNEQUAL(path.find("theme"), std::string::npos);
-                ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
-            }
-            break;
-            case SimpleCSV::ContentType::Styles:
-            {
-                auto path = item.GetPath();
-                ASSERT_UNEQUAL(path.find("styles"), std::string::npos);
-                ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
-            }
-            break;
-            case SimpleCSV::ContentType::SharedStrings:
-            {
-                auto path = item.GetPath();
-                ASSERT_UNEQUAL(path.find("sharedStrings"), std::string::npos);
-                ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
-            }
-            break;
-            case SimpleCSV::ContentType::CoreProperties:
-            {
-                auto path = item.GetPath();
-                ASSERT_UNEQUAL(path.find("core"), std::string::npos);
-                ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
-            }
-            break;
-            case SimpleCSV::ContentType::ExtendedProperties:
-            {
-                auto path = item.GetPath();
-                ASSERT_UNEQUAL(path.find("app"), std::string::npos);
-                ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
-            }
-            break;
-            case SimpleCSV::ContentType::CustomProperties:
-            {
-                auto path = item.GetPath();
-                ASSERT_UNEQUAL(path.find("custom"), std::string::npos);
-                ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
-            }
-            break;
-            default:
-                break;
-        }
+        ASSERT_NOT_THROW_EXCEPTION_1(DoContentItemTest, item);
     }
+}
+
+void CoreTools::ContentItemTesting::DoContentItemTest(const ContentItem& item)
+{
+    switch (const auto type = item.GetType();
+            type)
+    {
+        case ContentType::Workbook:
+        {
+            ASSERT_NOT_THROW_EXCEPTION_1(ContentTypeTest, item);
+        }
+        break;
+        case ContentType::Worksheet:
+        {
+            ASSERT_NOT_THROW_EXCEPTION_1(WorksheetTest, item);
+        }
+        break;
+        case ContentType::Theme:
+        {
+            ASSERT_NOT_THROW_EXCEPTION_1(ThemeTest, item);
+        }
+        break;
+        case ContentType::Styles:
+        {
+            ASSERT_NOT_THROW_EXCEPTION_1(StylesTest, item);
+        }
+        break;
+        case ContentType::SharedStrings:
+        {
+            ASSERT_NOT_THROW_EXCEPTION_1(SharedStringsTest, item);
+        }
+        break;
+        case ContentType::CoreProperties:
+        {
+            ASSERT_NOT_THROW_EXCEPTION_1(CorePropertiesTest, item);
+        }
+        break;
+        case ContentType::ExtendedProperties:
+        {
+            ASSERT_NOT_THROW_EXCEPTION_1(ExtendedPropertiesTest, item);
+        }
+        break;
+        case ContentType::CustomProperties:
+        {
+            ASSERT_NOT_THROW_EXCEPTION_1(CustomPropertiesTest, item);
+        }
+        break;
+        default:
+            break;
+    }
+}
+
+void CoreTools::ContentItemTesting::ContentTypeTest(const ContentItem& item)
+{
+    const auto path = item.GetPath();
+    ASSERT_UNEQUAL(path.find("workbook"), std::string::npos);
+    ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
+}
+
+void CoreTools::ContentItemTesting::WorksheetTest(const ContentItem& item)
+{
+    const auto path = item.GetPath();
+    ASSERT_UNEQUAL(path.find("sheet"), std::string::npos);
+    ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
+}
+
+void CoreTools::ContentItemTesting::ThemeTest(const ContentItem& item)
+{
+    const auto path = item.GetPath();
+    ASSERT_UNEQUAL(path.find("theme"), std::string::npos);
+    ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
+}
+
+void CoreTools::ContentItemTesting::StylesTest(const ContentItem& item)
+{
+    const auto path = item.GetPath();
+    ASSERT_UNEQUAL(path.find("styles"), std::string::npos);
+    ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
+}
+
+void CoreTools::ContentItemTesting::SharedStringsTest(const ContentItem& item)
+{
+    const auto path = item.GetPath();
+    ASSERT_UNEQUAL(path.find("sharedStrings"), std::string::npos);
+    ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
+}
+
+void CoreTools::ContentItemTesting::CorePropertiesTest(const ContentItem& item)
+{
+    const auto path = item.GetPath();
+    ASSERT_UNEQUAL(path.find("core"), std::string::npos);
+    ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
+}
+
+void CoreTools::ContentItemTesting::ExtendedPropertiesTest(const ContentItem& item)
+{
+    const auto path = item.GetPath();
+    ASSERT_UNEQUAL(path.find("app"), std::string::npos);
+    ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
+}
+
+void CoreTools::ContentItemTesting::CustomPropertiesTest(const ContentItem& item)
+{
+    const auto path = item.GetPath();
+    ASSERT_UNEQUAL(path.find("custom"), std::string::npos);
+    ASSERT_UNEQUAL(path.find("xml"), std::string::npos);
 }
 
 void CoreTools::ContentItemTesting::TypeStringTest()

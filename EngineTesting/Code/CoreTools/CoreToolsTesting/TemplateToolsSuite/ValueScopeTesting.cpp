@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.9 (2024/04/23 12:43)
+/// 版本：1.0.0.10 (2024/05/31 09:31)
 
 #include "ValueScopeTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -14,7 +14,13 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 CoreTools::ValueScopeTesting::ValueScopeTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      original0{ "Original 1" },
+      original1{ "Original 2" },
+      rebel{ "Rebel" },
+      matthew{ "Matthew" },
+      sarah{ "Sarah" },
+      result{ "woz 'ere" }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -28,64 +34,108 @@ void CoreTools::ValueScopeTesting::DoRunUnitTest()
 
 void CoreTools::ValueScopeTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(CastTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ValueScope0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(ValueScope1Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(ValueScope2Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(ValueScope3Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(ValueScope4Test);
 }
 
-void CoreTools::ValueScopeTesting::CastTest()
+void CoreTools::ValueScopeTesting::ValueScope0Test()
 {
-    auto value0 = 313;
+    auto value = value0;
 
-    ASSERT_EQUAL(value0, 313);
-    {
-        ValueScope valueScope{ value0, 201 };
+    ASSERT_EQUAL(value, value0);
 
-        ASSERT_EQUAL(value0, 201);
-    }
-    ASSERT_EQUAL(value0, 313);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoValueScope0Test, value);
 
-    auto value1 = 33;
+    ASSERT_EQUAL(value, value0);
+}
 
-    ASSERT_EQUAL(value1, 33);
-    {
-        ValueScope valueScope{ value1, 20 };
+void CoreTools::ValueScopeTesting::DoValueScope0Test(int& value)
+{
+    ValueScope valueScope{ value, value1 };
 
-        ASSERT_EQUAL(value1, 20);
-    }
-    ASSERT_EQUAL(value1, 33);
+    ASSERT_EQUAL(value, value1);
+}
 
-    int value2{ 33 };
+void CoreTools::ValueScopeTesting::ValueScope1Test()
+{
+    auto value = value2;
 
-    ASSERT_EQUAL(value2, 33);
-    {
-        ValueScope valueScope{ value2, 20, 10 };
+    ASSERT_EQUAL(value, value2);
 
-        ASSERT_EQUAL(value2, 20);
-    }
-    ASSERT_EQUAL(value2, 10);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoValueScope1Test, value);
 
-    std::string value3{ "Original 1" };
+    ASSERT_EQUAL(value, value2);
+}
 
-    ASSERT_EQUAL(value3, "Original 1");
-    {
-        ValueScope valueScope{ value3, "Rebel" };
+void CoreTools::ValueScopeTesting::DoValueScope1Test(int& value)
+{
+    ValueScope valueScope{ value, value3 };
 
-        ASSERT_EQUAL(value3, "Rebel");
-    }
-    ASSERT_EQUAL(value3, "Original 1");
+    ASSERT_EQUAL(value, value3);
+}
 
-    std::string value4{ "Original 2" };
+void CoreTools::ValueScopeTesting::ValueScope2Test()
+{
+    auto value = value2;
 
-    ASSERT_EQUAL(value4, "Original 2");
-    {
-        ValueScope firstValueScope{ value4, "Matthew", "woz 'ere" };
+    ASSERT_EQUAL(value, value2);
 
-        ASSERT_EQUAL(value4, "Matthew");
+    ASSERT_NOT_THROW_EXCEPTION_1(DoValueScope2Test, value);
 
-        const std::string sarah{ "Sarah" };
-        const std::string isOut{ "is out" };
-        ValueScope secondValueScope{ value4, sarah, isOut };
+    ASSERT_EQUAL(value, value4);
+}
 
-        ASSERT_EQUAL(value4, "Sarah");
-    }
-    ASSERT_EQUAL(value4, "woz 'ere");
+void CoreTools::ValueScopeTesting::DoValueScope2Test(int& value)
+{
+    ValueScope valueScope{ value, value3, value4 };
+
+    ASSERT_EQUAL(value, value3);
+}
+
+void CoreTools::ValueScopeTesting::ValueScope3Test()
+{
+    auto value = original0;
+
+    ASSERT_EQUAL(value, original0);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DoValueScope3Test, value);
+
+    ASSERT_EQUAL(value, original0);
+}
+
+void CoreTools::ValueScopeTesting::DoValueScope3Test(std::string& value)
+{
+    ValueScope valueScope{ value, rebel };
+
+    ASSERT_EQUAL(value, rebel);
+}
+
+void CoreTools::ValueScopeTesting::ValueScope4Test()
+{
+    std::string value{ original1 };
+
+    ASSERT_EQUAL(value, original1);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DoValueScope4Test, value);
+
+    ASSERT_EQUAL(value, result);
+}
+
+void CoreTools::ValueScopeTesting::DoValueScope4Test(std::string& value)
+{
+    ValueScope valueScope{ value, matthew, result };
+
+    ASSERT_EQUAL(value, matthew);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DoValueScope5Test, value);
+}
+
+void CoreTools::ValueScopeTesting::DoValueScope5Test(std::string& value)
+{
+    ValueScope valueScope{ value, sarah, "is out" };
+
+    ASSERT_EQUAL(value, sarah);
 }

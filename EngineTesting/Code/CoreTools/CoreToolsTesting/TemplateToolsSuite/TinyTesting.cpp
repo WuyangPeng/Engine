@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.9 (2024/04/23 12:40)
+/// 版本：1.0.0.10 (2024/05/31 09:47)
 
 #include "TinyTesting.h"
 #include "Detail/TinyTest.h"
@@ -42,32 +42,51 @@ void CoreTools::TinyTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(EraseTest);
 }
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26814)
+void CoreTools::TinyTesting::InitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(InitSizeTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(InitEmptyTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(InitFrontBackTest);
+}
 
-void CoreTools::TinyTesting::InitTest() noexcept
+void CoreTools::TinyTesting::InitSizeTest() noexcept
 {
     using Tiny0 = Tiny<>;
     using Tiny1 = Tiny<char>;
     using Tiny2 = Tiny<char, long>;
     using Tiny3 = Tiny<char, char, int>;
 
-    BOOST_MPL_ASSERT_RELATION(boost::mpl::size<Tiny0>::value, ==, 0);
-    BOOST_MPL_ASSERT_RELATION(boost::mpl::size<Tiny1>::value, ==, 1);
-    BOOST_MPL_ASSERT_RELATION(boost::mpl::size<Tiny2>::value, ==, 2);
-    BOOST_MPL_ASSERT_RELATION(boost::mpl::size<Tiny3>::value, ==, 3);
+    constexpr BOOST_MPL_ASSERT_RELATION(boost::mpl::size<Tiny0>::value, ==, 0);
+    constexpr BOOST_MPL_ASSERT_RELATION(boost::mpl::size<Tiny1>::value, ==, 1);
+    constexpr BOOST_MPL_ASSERT_RELATION(boost::mpl::size<Tiny2>::value, ==, 2);
+    constexpr BOOST_MPL_ASSERT_RELATION(boost::mpl::size<Tiny3>::value, ==, 3);
+}
 
-    BOOST_MPL_ASSERT((boost::mpl::empty<Tiny0>));
-    BOOST_MPL_ASSERT_NOT((boost::mpl::empty<Tiny1>));
-    BOOST_MPL_ASSERT_NOT((boost::mpl::empty<Tiny2>));
-    BOOST_MPL_ASSERT_NOT((boost::mpl::empty<Tiny3>));
+void CoreTools::TinyTesting::InitEmptyTest() noexcept
+{
+    using Tiny0 = Tiny<>;
+    using Tiny1 = Tiny<char>;
+    using Tiny2 = Tiny<char, long>;
+    using Tiny3 = Tiny<char, char, int>;
 
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<Tiny1>::type, char>));
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny1>::type, char>));
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<Tiny2>::type, char>));
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny2>::type, long>));
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<Tiny3>::type, char>));
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny3>::type, int>));
+    constexpr BOOST_MPL_ASSERT((boost::mpl::empty<Tiny0>));
+    constexpr BOOST_MPL_ASSERT_NOT((boost::mpl::empty<Tiny1>));
+    constexpr BOOST_MPL_ASSERT_NOT((boost::mpl::empty<Tiny2>));
+    constexpr BOOST_MPL_ASSERT_NOT((boost::mpl::empty<Tiny3>));
+}
+
+void CoreTools::TinyTesting::InitFrontBackTest() noexcept
+{
+    using Tiny0 = Tiny<char>;
+    using Tiny1 = Tiny<char, long>;
+    using Tiny2 = Tiny<char, char, int>;
+
+    constexpr BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<Tiny0>::type, char>));
+    constexpr BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny0>::type, char>));
+    constexpr BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<Tiny1>::type, char>));
+    constexpr BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny1>::type, long>));
+    constexpr BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<Tiny2>::type, char>));
+    constexpr BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny2>::type, int>));
 }
 
 void CoreTools::TinyTesting::PushBackTest() noexcept
@@ -75,19 +94,19 @@ void CoreTools::TinyTesting::PushBackTest() noexcept
     using Tiny0 = Tiny<>;
 
     using Tiny1 = boost::mpl::push_back<Tiny0, int>::type;
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny1>::type, int>));
+    constexpr BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny1>::type, int>));
 
     using Tiny2 = boost::mpl::push_front<Tiny1, char>::type;
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny2>::type, int>));
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<Tiny2>::type, char>));
+    constexpr BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny2>::type, int>));
+    constexpr BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<Tiny2>::type, char>));
 
     using Tiny3 = boost::mpl::push_back<Tiny2, long>::type;
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny3>::type, long>));
+    constexpr BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny3>::type, long>));
 
-    MAYBE_UNUSED const TinyTest<Tiny0>::type tiny0{};
-    MAYBE_UNUSED const TinyTest<Tiny1>::type tiny1{};
-    MAYBE_UNUSED const TinyTest<Tiny2>::type tiny2{};
-    MAYBE_UNUSED const TinyTest<Tiny3>::type tiny3{};
+    MAYBE_UNUSED constexpr TinyTest<Tiny0>::type tiny0{};
+    MAYBE_UNUSED constexpr TinyTest<Tiny1>::type tiny1{};
+    MAYBE_UNUSED constexpr TinyTest<Tiny2>::type tiny2{};
+    MAYBE_UNUSED constexpr TinyTest<Tiny3>::type tiny3{};
 
     using Tiny4 = boost::mpl::push_back<Tiny0, char>::type;
     using Tiny5 = boost::mpl::push_back<Tiny4, int>::type;
@@ -103,15 +122,13 @@ void CoreTools::TinyTesting::PushBackTest() noexcept
     BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny6, Tiny3>::type::value));
 }
 
-#include SYSTEM_WARNING_POP
-
 void CoreTools::TinyTesting::ClearTest() noexcept
 {
     using Tiny0 = Tiny<>;
     using Tiny1 = Tiny<unsigned short, double&, bool>;
 
-    MAYBE_UNUSED TinyTest<Tiny0>::type tiny0;
-    MAYBE_UNUSED TinyTest<Tiny1>::type tiny1;
+    MAYBE_UNUSED constexpr TinyTest<Tiny0>::type tiny0{};
+    MAYBE_UNUSED constexpr TinyTest<Tiny1>::type tiny1{};
 
     using Clean = boost::mpl::clear<Tiny1>::type;
     BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny0, Clean>::type::value));
@@ -124,10 +141,10 @@ void CoreTools::TinyTesting::PushFrontTest() noexcept
     using Tiny2 = Tiny<const long, char*>;
     using Tiny3 = Tiny<unsigned short&, const long, char*>;
 
-    MAYBE_UNUSED TinyTest<Tiny0>::type tiny0;
-    MAYBE_UNUSED TinyTest<Tiny1>::type tiny1;
-    MAYBE_UNUSED TinyTest<Tiny2>::type tiny2;
-    MAYBE_UNUSED TinyTest<Tiny3>::type tiny3;
+    MAYBE_UNUSED constexpr TinyTest<Tiny0>::type tiny0{};
+    MAYBE_UNUSED constexpr TinyTest<Tiny1>::type tiny1{};
+    MAYBE_UNUSED constexpr TinyTest<Tiny2>::type tiny2{};
+    MAYBE_UNUSED constexpr TinyTest<Tiny3>::type tiny3{};
 
     using Tiny4 = boost::mpl::push_front<Tiny0, char*>::type;
     using Tiny5 = boost::mpl::push_front<Tiny1, const long>::type;
@@ -148,7 +165,7 @@ void CoreTools::TinyTesting::EmptyTest() noexcept
 {
     using Tiny0 = Tiny<>;
 
-    MAYBE_UNUSED TinyTest<Tiny0>::type tiny0;
+    MAYBE_UNUSED constexpr TinyTest<Tiny0>::type tiny0{};
 
 #ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
@@ -191,276 +208,323 @@ void CoreTools::TinyTesting::EmptyTest() noexcept
 #endif  // TINY_COMPILE_ERROR
 }
 
-void CoreTools::TinyTesting::IteratorTest() noexcept
+void CoreTools::TinyTesting::IteratorTest()
 {
-    using Tiny0 = Tiny<>;
-    using Tiny1 = Tiny<int>;
-    using Tiny2 = Tiny<char*, const long>;
-    using Tiny3 = Tiny<unsigned short&, const long, char*>;
-
-    MAYBE_UNUSED TinyTest<Tiny0>::type tiny1;
-    MAYBE_UNUSED TinyTest<Tiny1>::type tiny2;
-    MAYBE_UNUSED TinyTest<Tiny2>::type tiny3;
-    MAYBE_UNUSED TinyTest<Tiny3>::type tiny4;
-
-    {
-        using TinyIterator0 = TinyIterator<Tiny0, TinyZero>;
-        using TinyIterator1 = boost::mpl::insert<Tiny0, TinyIterator0, long>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator1, Tiny<long>>::type::value));
-
-        using TinyIterator2 = TinyIterator<TinyIterator1, TinyZero>;
-        using TinyIterator3 = boost::mpl::insert<TinyIterator1, TinyIterator2, int>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator3, Tiny<int, long>>::type::value));
-
-        using TinyIterator4 = TinyIterator<TinyIterator3, TinyZero>;
-        using TinyIterator5 = boost::mpl::insert<TinyIterator3, TinyIterator4, char>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator5, Tiny<char, int, long>>::type::value));
-
-        using TinyIterator6 = TinyIterator<TinyIterator5, TinyZero>;
-
-#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
-
-        using InvalidTinyIterator = boost::mpl::insert<TinyIterator5, TinyIterator6, bool>::type;
-
-#endif  // TINY_COMPILE_ERROR
-    }
-
-    {
-        using TinyIterator0 = TinyIterator<Tiny1, TinyOne>;
-        using TinyIterator1 = boost::mpl::insert<Tiny1, TinyIterator0, long>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator1, Tiny<int, long>>::type::value));
-
-        using TinyIterator2 = TinyIterator<TinyIterator1, TinyOne>;
-        using TinyIterator3 = boost::mpl::insert<TinyIterator1, TinyIterator2, char>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator3, Tiny<int, char, long>>::type::value));
-        using TinyIterator4 = TinyIterator<TinyIterator3, TinyOne>;
-
-#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
-
-        using InvalidTinyIterator = boost::mpl::insert<TinyIterator3, TinyIterator4, bool>::type;
-
-#endif  // TINY_COMPILE_ERROR
-    }
-
-    {
-        using TinyIterator0 = TinyIterator<Tiny2, TinyTwo>;
-        using TinyIterator1 = boost::mpl::insert<Tiny2, TinyIterator0, long>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator1, Tiny<char*, const long, long>>::type::value));
-        using TinyIterator2 = TinyIterator<TinyIterator1, TinyTwo>;
-
-#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
-
-        using InvalidTinyIterator = boost::mpl::insert<TinyIterator1, TinyIterator2, char>::type;
-
-#endif  // TINY_COMPILE_ERROR
-    }
-
-    {
-        using Tiny4 = boost::mpl::pop_front<Tiny3>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny4, Tiny<const long, char*>>::type::value));
-        using Tiny5 = boost::mpl::pop_front<Tiny2>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny5, Tiny<const long>>::type::value));
-        using Tiny6 = boost::mpl::pop_front<Tiny1>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny6, Tiny<>>::type::value));
-
-#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
-
-        using InvalidType = boost::mpl::pop_front<Tiny0>::type;
-
-#endif  // TINY_COMPILE_ERROR
-    }
-
-    {
-        using Tiny4 = boost::mpl::pop_back<Tiny3>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny4, Tiny<unsigned short&, const long>>::type::value));
-        using Tiny5 = boost::mpl::pop_back<Tiny2>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny5, Tiny<char*>>::type::value));
-        using Tiny6 = boost::mpl::pop_back<Tiny1>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny6, Tiny<>>::type::value));
-
-#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
-
-        using InvalidType = boost::mpl::pop_back<Tiny6>::type;
-
-#endif  // TINY_COMPILE_ERROR
-    }
+    ASSERT_NOT_THROW_EXCEPTION_0(Iterator0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Iterator1Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Iterator2Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Iterator3Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Iterator4Test);
 }
 
-void CoreTools::TinyTesting::EraseTest() noexcept
+void CoreTools::TinyTesting::Iterator0Test() noexcept
 {
-    using Tiny0 = Tiny<>;
-    using Tiny1 = Tiny<char*>;
-    using Tiny2 = Tiny<const long, char*>;
-    using Tiny3 = Tiny<unsigned short&, const long, char*>;
+    using TinyType = Tiny<>;
+    MAYBE_UNUSED constexpr TinyTest<TinyType>::type tiny{};
 
-    MAYBE_UNUSED TinyTest<Tiny0>::type tiny1;
-    MAYBE_UNUSED TinyTest<Tiny1>::type tiny2;
-    MAYBE_UNUSED TinyTest<Tiny2>::type tiny3;
-    MAYBE_UNUSED TinyTest<Tiny3>::type tiny4;
+    using TinyIterator0 = TinyIterator<TinyType, TinyZero>;
+    using TinyIterator1 = boost::mpl::insert<TinyType, TinyIterator0, long>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator1, Tiny<long>>::type::value));
 
-    {
-        using TinyIterator0 = TinyIterator<Tiny3, TinyZero>;
-        using Erase0 = boost::mpl::erase<Tiny3, TinyIterator0>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase0, Tiny<const long, char*>>::type::value));
+    using TinyIterator2 = TinyIterator<TinyIterator1, TinyZero>;
+    using TinyIterator3 = boost::mpl::insert<TinyIterator1, TinyIterator2, int>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator3, Tiny<int, long>>::type::value));
 
-        using TinyIterator1 = TinyIterator<Tiny3, TinyOne>;
-        using Erase1 = boost::mpl::erase<Tiny3, TinyIterator1>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase1, Tiny<unsigned short&, char*>>::type::value));
+    using TinyIterator4 = TinyIterator<TinyIterator3, TinyZero>;
+    using TinyIterator5 = boost::mpl::insert<TinyIterator3, TinyIterator4, char>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator5, Tiny<char, int, long>>::type::value));
 
-        using TinyIterator2 = TinyIterator<Tiny3, TinyTwo>;
-
-        using Erase2 = boost::mpl::erase<Tiny3, TinyIterator2>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase2, Tiny<unsigned short&, const long>>::type::value));
-    }
-
-    {
-        using TinyIterator0 = TinyIterator<Tiny2, TinyZero>;
-        using Erase0 = boost::mpl::erase<Tiny2, TinyIterator0>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase0, Tiny<char*>>::type::value));
-
-        using TinyIterator1 = TinyIterator<Tiny2, TinyOne>;
-        using Erase1 = boost::mpl::erase<Tiny2, TinyIterator1>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase1, Tiny<const long>>::type::value));
-
-        using TinyIterator2 = TinyIterator<Tiny2, TinyTwo>;
+    using TinyIterator6 = TinyIterator<TinyIterator5, TinyZero>;
 
 #ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
-        using Invalid = boost::mpl::erase<Tiny2, TinyIterator2>::type;
+    using InvalidTinyIterator = boost::mpl::insert<TinyIterator5, TinyIterator6, bool>::type;
 
 #endif  // TINY_COMPILE_ERROR
-    }
+}
 
-    {
-        using TinyIterator0 = TinyIterator<Tiny1, TinyZero>;
-        using Erase0 = boost::mpl::erase<Tiny1, TinyIterator0>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase0, Tiny<>>::type::value));
+void CoreTools::TinyTesting::Iterator1Test() noexcept
+{
+    using TinyType = Tiny<int>;
+    MAYBE_UNUSED constexpr TinyTest<TinyType>::type tiny{};
 
-        using TinyIterator1 = TinyIterator<Tiny1, TinyOne>;
+    using TinyIterator0 = TinyIterator<TinyType, TinyOne>;
+    using TinyIterator1 = boost::mpl::insert<TinyType, TinyIterator0, long>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator1, Tiny<int, long>>::type::value));
+
+    using TinyIterator2 = TinyIterator<TinyIterator1, TinyOne>;
+    using TinyIterator3 = boost::mpl::insert<TinyIterator1, TinyIterator2, char>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator3, Tiny<int, char, long>>::type::value));
+    using TinyIterator4 = TinyIterator<TinyIterator3, TinyOne>;
 
 #ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
-        using Invalid = boost::mpl::erase<Tiny1, TinyIterator1>::type;
+    using InvalidTinyIterator = boost::mpl::insert<TinyIterator3, TinyIterator4, bool>::type;
 
 #endif  // TINY_COMPILE_ERROR
-    }
+}
 
-    {
-        using TinyIterator0 = TinyIterator<Tiny0, TinyZero>;
+void CoreTools::TinyTesting::Iterator2Test() noexcept
+{
+    using TinyType = Tiny<char*, const long>;
+    MAYBE_UNUSED constexpr TinyTest<TinyType>::type tiny{};
+
+    using TinyIterator0 = TinyIterator<TinyType, TinyTwo>;
+    using TinyIterator1 = boost::mpl::insert<TinyType, TinyIterator0, long>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator1, Tiny<char*, const long, long>>::type::value));
+    using TinyIterator2 = TinyIterator<TinyIterator1, TinyTwo>;
 
 #ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
-        using Invalid = boost::mpl::erase<Tiny0, TinyIterator0>::type;
+    using InvalidTinyIterator = boost::mpl::insert<TinyIterator1, TinyIterator2, char>::type;
 
 #endif  // TINY_COMPILE_ERROR
-    }
+}
 
-    {
-        using TinyIterator0 = TinyIterator<Tiny3, TinyZero>;
-        using TinyIterator1 = TinyIterator<Tiny3, TinyOne>;
-        using TinyIterator2 = TinyIterator<Tiny3, TinyTwo>;
-        using TinyIterator3 = TinyIterator<Tiny3, TinyThree>;
+void CoreTools::TinyTesting::Iterator3Test() noexcept
+{
+    using Tiny0 = Tiny<int>;
+    using Tiny1 = Tiny<char*, const long>;
+    using Tiny2 = Tiny<unsigned short&, const long, char*>;
+
+    MAYBE_UNUSED constexpr TinyTest<Tiny2>::type tiny{};
+
+    using Tiny3 = boost::mpl::pop_front<Tiny2>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny3, Tiny<const long, char*>>::type::value));
+    using Tiny4 = boost::mpl::pop_front<Tiny1>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny4, Tiny<const long>>::type::value));
+    using Tiny5 = boost::mpl::pop_front<Tiny0>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny5, Tiny<>>::type::value));
 
 #ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
-        using Invalid0 = boost::mpl::erase<Tiny3, TinyIterator0, TinyIterator0>::type;
+    using InvalidType = boost::mpl::pop_front<Tiny0>::type;
 
 #endif  // TINY_COMPILE_ERROR
+}
 
-        using Erase0 = boost::mpl::erase<Tiny3, TinyIterator0, TinyIterator1>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase0, Tiny<const long, char*>>::type::value));
+void CoreTools::TinyTesting::Iterator4Test() noexcept
+{
+    using Tiny0 = Tiny<int>;
+    using Tiny1 = Tiny<char*, const long>;
+    using Tiny2 = Tiny<unsigned short&, const long, char*>;
 
-        using Erase1 = boost::mpl::erase<Tiny3, TinyIterator0, TinyIterator2>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase1, Tiny<char*>>::type::value));
-
-        using Erase2 = boost::mpl::erase<Tiny3, TinyIterator0, TinyIterator3>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase2, Tiny<>>::type::value));
+    using Tiny3 = boost::mpl::pop_back<Tiny2>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny3, Tiny<unsigned short&, const long>>::type::value));
+    using Tiny4 = boost::mpl::pop_back<Tiny1>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny4, Tiny<char*>>::type::value));
+    using Tiny5 = boost::mpl::pop_back<Tiny0>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny5, Tiny<>>::type::value));
 
 #ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
-        using Invalid1 = boost::mpl::erase<Tiny3, TinyIterator1, TinyIterator1>::type;
+    using InvalidType = boost::mpl::pop_back<Tiny5>::type;
 
 #endif  // TINY_COMPILE_ERROR
+}
 
-        using Erase3 = boost::mpl::erase<Tiny3, TinyIterator1, TinyIterator2>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase3, Tiny<unsigned short&, char*>>::type::value));
+void CoreTools::TinyTesting::EraseTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(Empty0Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Empty1Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Empty2Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Empty3Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Empty4Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Empty5Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Empty6Test);
+    ASSERT_NOT_THROW_EXCEPTION_0(Empty7Test);
+}
 
-        using Erase4 = boost::mpl::erase<Tiny3, TinyIterator1, TinyIterator3>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase4, Tiny<unsigned short&>>::type::value));
+void CoreTools::TinyTesting::Empty0Test() noexcept
+{
+    using TinyType = Tiny<unsigned short&, const long, char*>;
+    MAYBE_UNUSED constexpr TinyTest<TinyType>::type tiny{};
+
+    using TinyIterator0 = TinyIterator<TinyType, TinyZero>;
+    using Erase0 = boost::mpl::erase<TinyType, TinyIterator0>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Erase0, Tiny<const long, char*>>::type::value));
+
+    using TinyIterator1 = TinyIterator<TinyType, TinyOne>;
+    using Erase1 = boost::mpl::erase<TinyType, TinyIterator1>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Erase1, Tiny<unsigned short&, char*>>::type::value));
+
+    using TinyIterator2 = TinyIterator<TinyType, TinyTwo>;
+
+    using Erase2 = boost::mpl::erase<TinyType, TinyIterator2>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Erase2, Tiny<unsigned short&, const long>>::type::value));
+}
+
+void CoreTools::TinyTesting::Empty1Test() noexcept
+{
+    using TinyType = Tiny<const long, char*>;
+    MAYBE_UNUSED constexpr TinyTest<TinyType>::type tiny{};
+
+    using TinyIterator0 = TinyIterator<TinyType, TinyZero>;
+    using Erase0 = boost::mpl::erase<TinyType, TinyIterator0>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Erase0, Tiny<char*>>::type::value));
+
+    using TinyIterator1 = TinyIterator<TinyType, TinyOne>;
+    using Erase1 = boost::mpl::erase<TinyType, TinyIterator1>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Erase1, Tiny<const long>>::type::value));
+
+    using TinyIterator2 = TinyIterator<TinyType, TinyTwo>;
 
 #ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
-        using Invalid2 = boost::mpl::erase<Tiny3, TinyIterator2, TinyIterator2>::type;
+    using Invalid = boost::mpl::erase<TinyType, TinyIterator2>::type;
 
 #endif  // TINY_COMPILE_ERROR
+}
 
-        using Erase5 = boost::mpl::erase<Tiny3, TinyIterator2, TinyIterator3>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase5, Tiny<unsigned short&, const long>>::type::value));
-    }
+void CoreTools::TinyTesting::Empty2Test() noexcept
+{
+    using TinyType = Tiny<char*>;
+    MAYBE_UNUSED constexpr TinyTest<TinyType>::type tiny{};
 
-    {
-        using TinyIterator0 = TinyIterator<Tiny2, TinyZero>;
-        using TinyIterator1 = TinyIterator<Tiny2, TinyOne>;
-        using TinyIterator2 = TinyIterator<Tiny2, TinyTwo>;
-        using TinyIterator3 = TinyIterator<Tiny2, TinyThree>;
+    using TinyIterator0 = TinyIterator<TinyType, TinyZero>;
+    using EraseType = boost::mpl::erase<TinyType, TinyIterator0>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<EraseType, Tiny<>>::type::value));
 
-        using Erase0 = boost::mpl::erase<Tiny2, TinyIterator0, TinyIterator1>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase0, Tiny<char*>>::type::value));
-
-        using Erase1 = boost::mpl::erase<Tiny2, TinyIterator0, TinyIterator2>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase1, Tiny<>>::type::value));
+    using TinyIterator1 = TinyIterator<TinyType, TinyOne>;
 
 #ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
-        using Invalid0 = boost::mpl::erase<Tiny3, TinyIterator0, TinyIterator3>::type;
+    using Invalid = boost::mpl::erase<TinyType, TinyIterator1>::type;
 
 #endif  // TINY_COMPILE_ERROR
+}
 
-        using Erase2 = boost::mpl::erase<Tiny2, TinyIterator1, TinyIterator2>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase2, Tiny<const long>>::type::value));
+void CoreTools::TinyTesting::Empty3Test() noexcept
+{
+    using TinyType = Tiny<>;
+    MAYBE_UNUSED constexpr TinyTest<TinyType>::type tiny{};
+
+    using TinyIterator = TinyIterator<TinyType, TinyZero>;
 
 #ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
-        using Invalid1 = boost::mpl::erase<Tiny2, TinyIterator1, TinyIterator3>::type;
+    using Invalid = boost::mpl::erase<TinyType, TinyIterator>::type;
+
+#endif  // TINY_COMPILE_ERROR
+}
+
+void CoreTools::TinyTesting::Empty4Test() noexcept
+{
+    using TinyType = Tiny<unsigned short&, const long, char*>;
+
+    using TinyIterator0 = TinyIterator<TinyType, TinyZero>;
+    using TinyIterator1 = TinyIterator<TinyType, TinyOne>;
+    using TinyIterator2 = TinyIterator<TinyType, TinyTwo>;
+    using TinyIterator3 = TinyIterator<TinyType, TinyThree>;
+
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
+
+    using Invalid0 = boost::mpl::erase<TinyType, TinyIterator0, TinyIterator0>::type;
+
+#endif  // TINY_COMPILE_ERROR
+
+    using Erase0 = boost::mpl::erase<TinyType, TinyIterator0, TinyIterator1>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Erase0, Tiny<const long, char*>>::type::value));
+
+    using Erase1 = boost::mpl::erase<TinyType, TinyIterator0, TinyIterator2>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Erase1, Tiny<char*>>::type::value));
+
+    using Erase2 = boost::mpl::erase<TinyType, TinyIterator0, TinyIterator3>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Erase2, Tiny<>>::type::value));
+
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
+
+    using Invalid1 = boost::mpl::erase<TinyType, TinyIterator1, TinyIterator1>::type;
+
+#endif  // TINY_COMPILE_ERROR
+
+    using Erase3 = boost::mpl::erase<TinyType, TinyIterator1, TinyIterator2>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Erase3, Tiny<unsigned short&, char*>>::type::value));
+
+    using Erase4 = boost::mpl::erase<TinyType, TinyIterator1, TinyIterator3>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Erase4, Tiny<unsigned short&>>::type::value));
+
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
+
+    using Invalid2 = boost::mpl::erase<TinyType, TinyIterator2, TinyIterator2>::type;
+
+#endif  // TINY_COMPILE_ERROR
+
+    using Erase5 = boost::mpl::erase<TinyType, TinyIterator2, TinyIterator3>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Erase5, Tiny<unsigned short&, const long>>::type::value));
+}
+
+void CoreTools::TinyTesting::Empty5Test() noexcept
+{
+    using TinyType = Tiny<const long, char*>;
+
+    using TinyIterator0 = TinyIterator<TinyType, TinyZero>;
+    using TinyIterator1 = TinyIterator<TinyType, TinyOne>;
+    using TinyIterator2 = TinyIterator<TinyType, TinyTwo>;
+    using TinyIterator3 = TinyIterator<TinyType, TinyThree>;
+
+    using Erase0 = boost::mpl::erase<TinyType, TinyIterator0, TinyIterator1>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Erase0, Tiny<char*>>::type::value));
+
+    using Erase1 = boost::mpl::erase<TinyType, TinyIterator0, TinyIterator2>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Erase1, Tiny<>>::type::value));
+
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
+
+    using Invalid0 = boost::mpl::erase<TinyType, TinyIterator0, TinyIterator3>::type;
+
+#endif  // TINY_COMPILE_ERROR
+
+    using Erase2 = boost::mpl::erase<TinyType, TinyIterator1, TinyIterator2>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Erase2, Tiny<const long>>::type::value));
+
+#ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
+
+    using Invalid1 = boost::mpl::erase<TinyType, TinyIterator1, TinyIterator3>::type;
 
 #endif  // TINY_COMPILE_ERROR
 
 #ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
-        using Invalid2 = boost::mpl::erase<Tiny2, TinyIterator2, TinyIterator3>::type;
+    using Invalid2 = boost::mpl::erase<TinyType, TinyIterator2, TinyIterator3>::type;
 
 #endif  // TINY_COMPILE_ERROR
-    }
+}
 
-    {
-        using TinyIterator0 = TinyIterator<Tiny1, TinyZero>;
-        using TinyIterator1 = TinyIterator<Tiny1, TinyOne>;
-        using TinyIterator2 = TinyIterator<Tiny1, TinyTwo>;
+void CoreTools::TinyTesting::Empty6Test() noexcept
+{
+    using TinyType = Tiny<char*>;
 
-        using e0 = boost::mpl::erase<Tiny1, TinyIterator0, TinyIterator1>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<e0, Tiny<>>::type::value));
+    using TinyIterator0 = TinyIterator<TinyType, TinyZero>;
+    using TinyIterator1 = TinyIterator<TinyType, TinyOne>;
+    using TinyIterator2 = TinyIterator<TinyType, TinyTwo>;
+
+    using EraseType = boost::mpl::erase<TinyType, TinyIterator0, TinyIterator1>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<EraseType, Tiny<>>::type::value));
 
 #ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
-        using Invalid0 = boost::mpl::erase<Tiny1, TinyIterator0, TinyIterator2>::type;
+    using Invalid0 = boost::mpl::erase<TinyType, TinyIterator0, TinyIterator2>::type;
 
 #endif  // TINY_COMPILE_ERROR
 
 #ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
-        using Invalid1 = boost::mpl::erase<Tiny1, TinyIterator1, TinyIterator2>::type;
+    using Invalid1 = boost::mpl::erase<TinyType, TinyIterator1, TinyIterator2>::type;
 
 #endif  // TINY_COMPILE_ERROR
-    }
+}
 
-    {
-        using TinyIterator0 = TinyIterator<Tiny0, TinyZero>;
-        using TinyIterator1 = TinyIterator<Tiny0, TinyOne>;
+void CoreTools::TinyTesting::Empty7Test() noexcept
+{
+    using TinyType = Tiny<>;
+
+    using TinyIterator0 = TinyIterator<TinyType, TinyZero>;
+    using TinyIterator1 = TinyIterator<TinyType, TinyOne>;
 
 #ifdef TINY_COMPILE_ERROR  // 这里应该产生编译错误。
 
-        using Invalid = boost::mpl::erase<Tiny0, TinyIterator0, TinyIterator1>::type;
+    using Invalid = boost::mpl::erase<TinyType, TinyIterator0, TinyIterator1>::type;
 
 #endif  // TINY_COMPILE_ERROR
-    }
 }

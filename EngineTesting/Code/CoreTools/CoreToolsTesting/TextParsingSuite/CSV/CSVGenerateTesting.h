@@ -26,6 +26,9 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using String = System::String;
+
+    private:
         void DoRunUnitTest() override;
         void MainTest();
 
@@ -45,6 +48,12 @@ namespace CoreTools
         void CSVGenerateTotalEnumSourceTest();
         void CSVGenerateTotalEnumTotalTest();
         void CSVGenerateTotalUniqueTest();
+
+    private:
+        String directory;
+        String csvEngineeringDirectory;
+        String csvGenerateDirectory;
+        String csvEngineeringJson;
     };
 }
 
