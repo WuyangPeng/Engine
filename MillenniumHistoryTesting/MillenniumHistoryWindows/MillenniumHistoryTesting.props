@@ -4,9 +4,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <OutDir>$(ProjectDir)..\..\..\$(Platform)\$(Configuration)Windows\</OutDir>
-    <IntDir>$(ProjectDir)..\..\..\Temporary\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>	
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <IntDir>$(ProjectDir)..\..\..\Temporary\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
