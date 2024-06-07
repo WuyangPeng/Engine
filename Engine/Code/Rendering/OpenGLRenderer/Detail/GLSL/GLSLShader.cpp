@@ -12,6 +12,7 @@
 #include "GLSLShader.h"
 #include "System/Helper/PragmaWarning/PolymorphicCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
 #include "Rendering/Resources/Buffers/RawBuffer.h"
@@ -31,7 +32,7 @@
 #include "Rendering/State/SamplerState.h"
 
 Rendering::GLSLShader::GLSLShader(const Reflection& reflector, ReferenceType referenceType)
-    : ParentType{}
+    : ParentType{ CoreTools::DisableNotThrow::Disable }
 {
     if (ReferenceType::Compute == referenceType)
     {

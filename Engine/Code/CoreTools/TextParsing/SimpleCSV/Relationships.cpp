@@ -81,7 +81,7 @@ int CoreTools::SimpleCSV::Relationships::GetNewRelationshipId(XMLNode relationsh
 
     const auto children = relationshipsNode.children();
 
-    constexpr auto maxElement = [&](const auto& lhs, const auto& rhs) {
+    const auto maxElement = [&](const auto& lhs, const auto& rhs) {
         return stoi(std::string{ lhs.attribute(TextParsing::gId.data()).value() }.substr(idBeginIndex)) < stoi(std::string{ rhs.attribute(TextParsing::gId.data()).value() }.substr(idBeginIndex));
     };
 

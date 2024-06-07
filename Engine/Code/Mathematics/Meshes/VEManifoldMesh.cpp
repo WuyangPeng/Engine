@@ -257,14 +257,14 @@ void Mathematics::VEManifoldMesh::Print(const std::string& filename)
 
 // VEManifoldMesh::Vertex
 
-Mathematics::VEManifoldMesh::Vertex::Vertex(int v) noexcept
+Mathematics::VEManifoldMesh::Vertex::Vertex(int v)  
     : v{ v }, e{}
 {
 }
 
 // VEManifoldMesh::Edge
 
-Mathematics::VEManifoldMesh::Edge::Edge(int v0, int v1) noexcept
+Mathematics::VEManifoldMesh::Edge::Edge(int v0, int v1)  
     : v{ v0, v1 }, e{}
 {
 }

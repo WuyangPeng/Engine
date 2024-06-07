@@ -321,14 +321,14 @@ const Mathematics::ETManifoldMesh::TriangleMap& Mathematics::ETManifoldMesh::Get
 
 // ETManifoldMesh::Edge
 
-Mathematics::ETManifoldMesh::Edge::Edge(int v0, int v1) noexcept
+Mathematics::ETManifoldMesh::Edge::Edge(int v0, int v1)
     : v{ v0, v1 }, t{}
 {
 }
 
 // ETManifoldMesh::Triangle
 
-Mathematics::ETManifoldMesh::Triangle::Triangle(int v0, int v1, int v2) noexcept
-    : e{}, v{ v0, v1, v2 }, t{}
+Mathematics::ETManifoldMesh::Triangle::Triangle(int v0, int v1, int v2)
+    : v{ v0, v1, v2 }, e{}, t{}
 {
 }

@@ -50,7 +50,7 @@ namespace Rendering
         using ObjectRegister = CoreTools::ObjectRegister;
 
     public:
-        ShaderImpl() noexcept;
+        explicit ShaderImpl(CoreTools::DisableNotThrow disableNotThrow);
         virtual ~ShaderImpl() noexcept = default;
         ShaderImpl(const ShaderImpl& rhs) = default;
         ShaderImpl& operator=(const ShaderImpl& rhs) = default;

@@ -284,12 +284,12 @@ bool Mathematics::TSManifoldMesh::Print(const std::string& filename)
     return true;
 }
 
-Mathematics::TSManifoldMesh::Triangle::Triangle(int v0, int v1, int v2) noexcept
+Mathematics::TSManifoldMesh::Triangle::Triangle(int v0, int v1, int v2)  
     : v{ v0, v1, v2 }, t{}
 {
 }
 
-Mathematics::TSManifoldMesh::Tetrahedron::Tetrahedron(int v0, int v1, int v2, int v3) noexcept
+Mathematics::TSManifoldMesh::Tetrahedron::Tetrahedron(int v0, int v1, int v2, int v3)  
     : v{ v0, v1, v2, v3 }, t{}, s{}
 {
 }
