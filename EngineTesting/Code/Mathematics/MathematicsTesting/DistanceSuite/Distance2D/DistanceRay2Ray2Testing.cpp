@@ -50,7 +50,7 @@ void Mathematics::DistanceRay2Ray2Testing::MainTest()
 void Mathematics::DistanceRay2Ray2Testing::BaseTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    std::uniform_real_distribution<float> randomDistribution(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -90,7 +90,7 @@ void Mathematics::DistanceRay2Ray2Testing::BaseTest()
 void Mathematics::DistanceRay2Ray2Testing::StaticTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real_distribution<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -353,7 +353,7 @@ void Mathematics::DistanceRay2Ray2Testing::StaticTest()
 void Mathematics::DistanceRay2Ray2Testing::DynamicTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real_distribution<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -518,7 +518,7 @@ void Mathematics::DistanceRay2Ray2Testing::DynamicTest()
 void Mathematics::DistanceRay2Ray2Testing::DerivativeTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real_distribution<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -558,7 +558,7 @@ void Mathematics::DistanceRay2Ray2Testing::DerivativeTest()
 void Mathematics::DistanceRay2Ray2Testing::IntervalTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution(-10.0, 10.0);
+    std::uniform_real_distribution<double> randomDistribution(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

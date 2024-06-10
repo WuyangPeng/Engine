@@ -48,8 +48,8 @@ void Mathematics::Vector2InformationTesting::DimensionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> randomDistribution0{ 0.0001, 0.0002 };
-    std::uniform_real<double> randomDistribution1(-10.0, 10.0);
+    std::uniform_real_distribution<double> randomDistribution0{ 0.0001, 0.0002 };
+    std::uniform_real_distribution<double> randomDistribution1(-10.0, 10.0);
 
     std::vector<Vector2D> vector0;
     std::vector<Vector2D> vector1;
@@ -95,7 +95,7 @@ void Mathematics::Vector2InformationTesting::AxesAlignBoundingBoxTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> randomDistribution{ -100.0f, 100.0f };
+    std::uniform_real_distribution<double> randomDistribution{ -100.0f, 100.0f };
 
     std::vector<Vector2D> vectors;
 
@@ -131,7 +131,7 @@ void Mathematics::Vector2InformationTesting::DirectionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> randomDistribution{ -100.0f, 100.0f };
+    std::uniform_real_distribution<double> randomDistribution{ -100.0f, 100.0f };
 
     std::vector<Vector2D> vectors;
 
@@ -207,7 +207,7 @@ void Mathematics::Vector2InformationTesting::ExtremeTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> randomDistribution{ -100.0f, 100.0f };
+    std::uniform_real_distribution<double> randomDistribution{ -100.0f, 100.0f };
 
     std::vector<Vector2D> vectors;
 

@@ -48,8 +48,8 @@ void Mathematics::Torus3Testing::TorusTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> randomDistribution0(0.1, 100.0);
-    std::uniform_real<double> randomDistribution1(0.0, 1.0);
+    std::uniform_real_distribution<double> randomDistribution0(0.1, 100.0);
+    std::uniform_real_distribution<double> randomDistribution1(0.0, 1.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -57,7 +57,7 @@ void Mathematics::Torus3Testing::TorusTest()
     {
         auto innerRadius = randomDistribution0(generator);
 
-        std::uniform_real<double> thirdRandomDistribution(innerRadius, 105.0);
+        std::uniform_real_distribution<double> thirdRandomDistribution(innerRadius, 105.0);
 
         auto outerRadius = thirdRandomDistribution(generator);
 

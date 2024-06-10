@@ -44,8 +44,8 @@ void Mathematics::Vector2OrthonormalizeTesting::OrthonormalizeTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> randomDistribution0{ -10.0, 10.0 };
-    std::uniform_real<float> randomDistribution1{ -10.0f, 10.0f };
+    std::uniform_real_distribution<double> randomDistribution0{ -10.0, 10.0 };
+    std::uniform_real_distribution<float> randomDistribution1{ -10.0f, 10.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 

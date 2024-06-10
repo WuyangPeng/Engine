@@ -123,7 +123,7 @@ void Mathematics::BitHacksTesting::SignIntLog2OfPowerOfTwoTest()
     auto max = boost::numeric_cast<int>(pow(2.0, 31) - 1);
 
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    std::uniform_int<> integerRandomDistribution{ 0, max };
+    std::uniform_int_distribution<> integerRandomDistribution{ 0, max };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -141,7 +141,7 @@ void Mathematics::BitHacksTesting::UnsignIntLog2OfPowerOfTwoTest()
     const auto max = boost::numeric_cast<uint32_t>(pow(2.0, 32) - 1);
 
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    std::uniform_int<uint32_t> integerRandomDistribution{ 0, max };
+    std::uniform_int_distribution<uint32_t> integerRandomDistribution{ 0, max };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -184,8 +184,8 @@ void Mathematics::BitHacksTesting::ScaledFloatToIntRandomTest()
 {
     // Ëæ»úÖµ²âÊÔ
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    std::uniform_int<uint32_t> integerRandomDistribution{ 0, 24 };
-    std::uniform_real<float> floatRandomDistribution{ 0.0f, 1.0f };
+    std::uniform_int_distribution<uint32_t> integerRandomDistribution{ 0, 24 };
+    std::uniform_real_distribution<float> floatRandomDistribution{ 0.0f, 1.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 

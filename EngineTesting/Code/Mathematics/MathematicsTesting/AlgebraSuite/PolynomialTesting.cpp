@@ -96,7 +96,7 @@ void Mathematics::PolynomialTesting::ConstructionTest()
 void Mathematics::PolynomialTesting::AccessTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real_distribution<double> randomDistribution{ -100.0, 100.0 };
 
     std::vector<double> doubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
                                       randomDistribution(generator), randomDistribution(generator) };
@@ -113,7 +113,7 @@ void Mathematics::PolynomialTesting::AccessTest()
 void Mathematics::PolynomialTesting::UpdateOperatorTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real_distribution<double> randomDistribution{ -100.0, 100.0 };
 
     std::vector<double> firstDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
                                            randomDistribution(generator), randomDistribution(generator) };
@@ -217,7 +217,7 @@ void Mathematics::PolynomialTesting::UpdateOperatorTest()
 void Mathematics::PolynomialTesting::OperationTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real_distribution<double> randomDistribution{ -100.0, 100.0 };
 
     std::vector<double> firstDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
                                            randomDistribution(generator), randomDistribution(generator) };
@@ -322,7 +322,7 @@ void Mathematics::PolynomialTesting::OperationTest()
 void Mathematics::PolynomialTesting::CalculateTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real_distribution<double> randomDistribution{ -100.0, 100.0 };
 
     std::vector<double> firstDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
                                            randomDistribution(generator), randomDistribution(generator) };

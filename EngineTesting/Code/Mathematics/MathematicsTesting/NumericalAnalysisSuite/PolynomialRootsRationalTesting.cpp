@@ -55,8 +55,8 @@ void Mathematics::PolynomialRootsRationalTesting::BaseTest()
 void Mathematics::PolynomialRootsRationalTesting::OnceTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-1.0e10, 1.0e10);
-    std::uniform_int<> randomDistribution1(0, 100000000);
+    std::uniform_real_distribution<double> randomDistribution0(-1.0e10, 1.0e10);
+    std::uniform_int_distribution<> randomDistribution1(0, 100000000);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -133,8 +133,8 @@ void Mathematics::PolynomialRootsRationalTesting::OnceTest()
 void Mathematics::PolynomialRootsRationalTesting::SecondaryTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-1.0e8, 1.0e8);
-    std::uniform_int<> randomDistribution1(0, 1000000);
+    std::uniform_real_distribution<double> randomDistribution0(-1.0e8, 1.0e8);
+    std::uniform_int_distribution<> randomDistribution1(0, 1000000);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -234,8 +234,8 @@ void Mathematics::PolynomialRootsRationalTesting::SecondaryTest()
 void Mathematics::PolynomialRootsRationalTesting::ThriceTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-1.0e7, 1.0e7);
-    std::uniform_int<> randomDistribution1(0, 1000000);
+    std::uniform_real_distribution<double> randomDistribution0(-1.0e7, 1.0e7);
+    std::uniform_int_distribution<> randomDistribution1(0, 1000000);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -330,8 +330,8 @@ void Mathematics::PolynomialRootsRationalTesting::ThriceTest()
 void Mathematics::PolynomialRootsRationalTesting::QuarticTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-1.0e6, 1.0e6);
-    std::uniform_int<> randomDistribution1(0, 1000000);
+    std::uniform_real_distribution<double> randomDistribution0(-1.0e6, 1.0e6);
+    std::uniform_int_distribution<> randomDistribution1(0, 1000000);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

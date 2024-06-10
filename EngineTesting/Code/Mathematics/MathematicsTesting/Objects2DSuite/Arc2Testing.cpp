@@ -43,8 +43,8 @@ void Mathematics::Arc2Testing::MainTest()
 void Mathematics::Arc2Testing::Arc2Test()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
-    std::uniform_real<double> randomDistribution1{ 0.0, MathD::GetTwoPI() };
+    std::uniform_real_distribution<double> randomDistribution0{ -100.0, 100.0 };
+    std::uniform_real_distribution<double> randomDistribution1{ 0.0, MathD::GetTwoPI() };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -58,7 +58,7 @@ void Mathematics::Arc2Testing::Arc2Test()
 
         const Vector2 end0(center[0] + radius * MathD::Cos(firstAngle), center[1] + radius * MathD::Sin(firstAngle));
 
-        std::uniform_real<double> thirdRandomDistribution(firstAngle, MathD::GetTwoPI());
+        std::uniform_real_distribution<double> thirdRandomDistribution(firstAngle, MathD::GetTwoPI());
 
         const double secondAngle(thirdRandomDistribution(generator));
 

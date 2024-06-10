@@ -65,7 +65,7 @@ void Mathematics::Vector4ToolsTesting::ProductTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real_distribution<double> randomDistribution{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -94,7 +94,7 @@ void Mathematics::Vector4ToolsTesting::ProjectionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real_distribution<double> randomDistribution{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -151,7 +151,7 @@ void Mathematics::Vector4ToolsTesting::OtherCalculateTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real_distribution<double> randomDistribution{ -100.0, 100.0 };
 
     std::vector<Vector4D> vectors;
 

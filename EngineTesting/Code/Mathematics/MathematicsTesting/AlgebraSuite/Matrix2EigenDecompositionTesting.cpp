@@ -43,7 +43,7 @@ void Mathematics::Matrix2EigenDecompositionTesting::MainTest()
 void Mathematics::Matrix2EigenDecompositionTesting::EigenDecompositionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution{ -10.0, 10.0 };
+    std::uniform_real_distribution<double> randomDistribution{ -10.0, 10.0 };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {

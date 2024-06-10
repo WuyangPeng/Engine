@@ -38,7 +38,7 @@ void Mathematics::QuerySortToolsTesting::MainTest()
 void Mathematics::QuerySortToolsTesting::SortTwoValueTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<> randomDistribution0(0, 2000);
+    std::uniform_int_distribution<> randomDistribution0(0, 2000);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -65,7 +65,7 @@ void Mathematics::QuerySortToolsTesting::SortTwoValueTest()
 void Mathematics::QuerySortToolsTesting::SortThreeValueTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<> randomDistribution0(0, 2000);
+    std::uniform_int_distribution<> randomDistribution0(0, 2000);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -110,7 +110,7 @@ void Mathematics::QuerySortToolsTesting::SortThreeValueTest()
 void Mathematics::QuerySortToolsTesting::SortFourValueTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<> randomDistribution0(0, 2000);
+    std::uniform_int_distribution<> randomDistribution0(0, 2000);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

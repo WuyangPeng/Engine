@@ -779,7 +779,7 @@ void Mathematics::MatrixTesting::OperatorCalculateTest()
     ASSERT_APPROXIMATE(matrix3(3, 3), -16.6f, 1e-8f);
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution{ -10.0f, 10.0f };
+    std::uniform_real_distribution<float> randomDistribution{ -10.0f, 10.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -978,7 +978,7 @@ void Mathematics::MatrixTesting::OperatorCalculateTest()
 void Mathematics::MatrixTesting::ArithmeticCalculateTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution{ -10.0f, 10.0f };
+    std::uniform_real_distribution<float> randomDistribution{ -10.0f, 10.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -1086,7 +1086,7 @@ void Mathematics::MatrixTesting::ArithmeticCalculateTest()
         ASSERT_APPROXIMATE(matrix5(2, 1), matrix1(2, 1), 0.00001f);
         ASSERT_APPROXIMATE(matrix5(2, 2), matrix1(2, 2), 0.00001f);
 
-        std::uniform_real<float> angleRandomDistribution(0.0f, MathF::GetPI() - 0.01f);
+        std::uniform_real_distribution<float> angleRandomDistribution(0.0f, MathF::GetPI() - 0.01f);
 
         const float angle = angleRandomDistribution(generator);
         AVectorF vector0(randomDistribution(generator),
@@ -1133,7 +1133,7 @@ void Mathematics::MatrixTesting::ArithmeticCalculateTest()
 void Mathematics::MatrixTesting::ProjectionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution{ -100.0f, 100.0f };
+    std::uniform_real_distribution<float> randomDistribution{ -100.0f, 100.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -1244,7 +1244,7 @@ void Mathematics::MatrixTesting::CompareTest()
 void Mathematics::MatrixTesting::HomogeneousPointTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution{ -100.0f, 100.0f };
+    std::uniform_real_distribution<float> randomDistribution{ -100.0f, 100.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -1472,7 +1472,7 @@ void Mathematics::MatrixTesting::HomogeneousPointTest()
 void Mathematics::MatrixTesting::Invert3x3Test()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution{ -10.0f, 10.0f };
+    std::uniform_real_distribution<float> randomDistribution{ -10.0f, 10.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 

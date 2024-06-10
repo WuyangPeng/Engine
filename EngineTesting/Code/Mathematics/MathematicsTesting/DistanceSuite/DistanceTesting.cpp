@@ -53,7 +53,7 @@ void Mathematics::DistanceTesting::MainTest()
 void Mathematics::DistanceTesting::BaseTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    std::uniform_real_distribution<float> randomDistribution(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -79,7 +79,7 @@ void Mathematics::DistanceTesting::BaseTest()
 void Mathematics::DistanceTesting::StaticTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real_distribution<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -107,7 +107,7 @@ void Mathematics::DistanceTesting::StaticTest()
 void Mathematics::DistanceTesting::DynamicTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
+    std::uniform_real_distribution<float> randomDistribution(-10.0f, 10.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -141,7 +141,7 @@ void Mathematics::DistanceTesting::DynamicTest()
 void Mathematics::DistanceTesting::DerivativeTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::uniform_real_distribution<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -174,7 +174,7 @@ void Mathematics::DistanceTesting::DerivativeTest()
 void Mathematics::DistanceTesting::IntervalTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution(-10.0, 10.0);
+    std::uniform_real_distribution<double> randomDistribution(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -219,7 +219,7 @@ void Mathematics::DistanceTesting::BeginIntervalTest()
 {
     // 测试距离为有效值零。对象是在最初位置接触。
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution(-10.0, 10.0);
+    std::uniform_real_distribution<double> randomDistribution(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -268,7 +268,7 @@ void Mathematics::DistanceTesting::EndIntervalTest()
 {
     // 测试距离为有效值零。对象是在最终位置接触。
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution(-10.0, 10.0);
+    std::uniform_real_distribution<double> randomDistribution(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -321,7 +321,7 @@ void Mathematics::DistanceTesting::IterationIntervalTest()
 {
     // 测试牛顿法过程中返回的情况
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution(-10.0, 10.0);
+    std::uniform_real_distribution<double> randomDistribution(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

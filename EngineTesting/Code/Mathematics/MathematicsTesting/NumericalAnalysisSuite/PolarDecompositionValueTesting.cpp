@@ -44,7 +44,7 @@ void Mathematics::PolarDecompositionValueTesting::MainTest()
 void Mathematics::PolarDecompositionValueTesting::PolarDecompositionValueTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-1.0e5, 1.0e5);
+    std::uniform_real_distribution<double> randomDistribution0(-1.0e5, 1.0e5);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

@@ -428,7 +428,7 @@ void Mathematics::Matrix4Testing::OperatorCalculateTest()
     ASSERT_APPROXIMATE(matrix3(3, 3), -16.6f, 1e-8f);
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution{ -10.0f, 10.0f };
+    std::uniform_real_distribution<float> randomDistribution{ -10.0f, 10.0f };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -625,7 +625,7 @@ void Mathematics::Matrix4Testing::OperatorCalculateTest()
 void Mathematics::Matrix4Testing::ArithmeticCalculateTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution{ -10.0f, 10.0f };
+    std::uniform_real_distribution<float> randomDistribution{ -10.0f, 10.0f };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -716,7 +716,7 @@ void Mathematics::Matrix4Testing::ArithmeticCalculateTest()
 void Mathematics::Matrix4Testing::ProjectionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution{ -100.0f, 100.0f };
+    std::uniform_real_distribution<float> randomDistribution{ -100.0f, 100.0f };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {

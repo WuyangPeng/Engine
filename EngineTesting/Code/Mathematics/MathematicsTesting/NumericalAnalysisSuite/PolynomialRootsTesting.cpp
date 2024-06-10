@@ -53,7 +53,7 @@ void Mathematics::PolynomialRootsTesting::BaseTest()
 void Mathematics::PolynomialRootsTesting::OnceTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-1.0e10, 1.0e10);
+    std::uniform_real_distribution<double> randomDistribution0(-1.0e10, 1.0e10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -102,7 +102,7 @@ void Mathematics::PolynomialRootsTesting::OnceTest()
 void Mathematics::PolynomialRootsTesting::SecondaryTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-1.0e8, 1.0e8);
+    std::uniform_real_distribution<double> randomDistribution0(-1.0e8, 1.0e8);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -155,8 +155,8 @@ void Mathematics::PolynomialRootsTesting::SecondaryTest()
 void Mathematics::PolynomialRootsTesting::ThriceTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-1.0e5, 1.0e5);
-    std::uniform_real<double> randomDistribution1(-1.0e1, 1.0e1);
+    std::uniform_real_distribution<double> randomDistribution0(-1.0e5, 1.0e5);
+    std::uniform_real_distribution<double> randomDistribution1(-1.0e1, 1.0e1);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -295,7 +295,7 @@ void Mathematics::PolynomialRootsTesting::ThriceTest()
 void Mathematics::PolynomialRootsTesting::SpecialCubicTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-1.0e5, 1.0e5);
+    std::uniform_real_distribution<double> randomDistribution0(-1.0e5, 1.0e5);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -320,8 +320,8 @@ void Mathematics::PolynomialRootsTesting::SpecialCubicTest()
 void Mathematics::PolynomialRootsTesting::PolynomialTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-1.0e3, 1.0e3);
-    std::uniform_int<> randomDistribution1(2, 7);
+    std::uniform_real_distribution<double> randomDistribution0(-1.0e3, 1.0e3);
+    std::uniform_int_distribution<> randomDistribution1(2, 7);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -377,8 +377,8 @@ void Mathematics::PolynomialRootsTesting::PolynomialTest()
 void Mathematics::PolynomialRootsTesting::AllRealPartsNegativeTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-1.0e6, 1.0e6);
-    std::uniform_int<> randomDistribution1(2, 8);
+    std::uniform_real_distribution<double> randomDistribution0(-1.0e6, 1.0e6);
+    std::uniform_int_distribution<> randomDistribution1(2, 8);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -474,8 +474,8 @@ void Mathematics::PolynomialRootsTesting::AllRealPartsNegativeTest()
 void Mathematics::PolynomialRootsTesting::AllRealPartsPositiveTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-1.0e6, 1.0e6);
-    std::uniform_int<> randomDistribution1(2, 8);
+    std::uniform_real_distribution<double> randomDistribution0(-1.0e6, 1.0e6);
+    std::uniform_int_distribution<> randomDistribution1(2, 8);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -578,8 +578,8 @@ void Mathematics::PolynomialRootsTesting::AllRealPartsPositiveTest()
 void Mathematics::PolynomialRootsTesting::GetRootCountTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-1.0e6, 1.0e6);
-    std::uniform_int<> randomDistribution1(2, 8);
+    std::uniform_real_distribution<double> randomDistribution0(-1.0e6, 1.0e6);
+    std::uniform_int_distribution<> randomDistribution1(2, 8);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

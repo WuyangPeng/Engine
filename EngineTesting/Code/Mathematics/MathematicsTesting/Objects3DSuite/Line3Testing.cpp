@@ -13,6 +13,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
 #include "Mathematics/Objects3D/Line3Detail.h"
+#include "Mathematics/Primitives/LineDetail.h"
 
 #include <random>
 
@@ -44,7 +45,7 @@ void Mathematics::Line3Testing::LineTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_real_distribution<double> randomDistribution0(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

@@ -158,7 +158,7 @@ void Mathematics::MathTesting::FloatTrigonometricTest()
     }
 
     // 随机值测试
-    std::uniform_real<float> randomDistribution{ -MathF::maxReal / 100.0f, MathF::maxReal / 100.0f };
+    std::uniform_real_distribution<float> randomDistribution{ -MathF::maxReal / 100.0f, MathF::maxReal / 100.0f };
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
@@ -207,7 +207,7 @@ void Mathematics::MathTesting::DoubleTrigonometricTest()
 
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution{ -MathD::maxReal / 100.0, MathD::maxReal / 100.0 };
+    std::uniform_real_distribution<double> randomDistribution{ -MathD::maxReal / 100.0, MathD::maxReal / 100.0 };
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
@@ -263,7 +263,7 @@ void Mathematics::MathTesting::FloatBaseMathTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution{ -MathF::maxReal / 100.0f, MathF::maxReal / 100.0f };
+    std::uniform_real_distribution<float> randomDistribution{ -MathF::maxReal / 100.0f, MathF::maxReal / 100.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -308,7 +308,7 @@ void Mathematics::MathTesting::DoubleBaseMathTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution{ -MathD::maxReal / 100.0, MathD::maxReal / 100.0 };
+    std::uniform_real_distribution<double> randomDistribution{ -MathD::maxReal / 100.0, MathD::maxReal / 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -368,7 +368,7 @@ void Mathematics::MathTesting::FloatLogTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution{ MathF::GetZeroTolerance(), MathF::maxReal };
+    std::uniform_real_distribution<float> randomDistribution{ MathF::GetZeroTolerance(), MathF::maxReal };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -386,7 +386,7 @@ void Mathematics::MathTesting::DoubleLogTest()
 {
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution{ MathD::GetZeroTolerance(), MathD::maxReal };
+    std::uniform_real_distribution<double> randomDistribution{ MathD::GetZeroTolerance(), MathD::maxReal };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -415,7 +415,7 @@ void Mathematics::MathTesting::FloatPowTest()
 
     // 使用-MathF::sm_MaxReal至MathF::GetExponent()，
     // 会导致使用大量相同作用的负值进行测试。
-    std::uniform_real<float> expRandomDistribution{ -MathF::GetExponent(), MathF::GetExponent() };
+    std::uniform_real_distribution<float> expRandomDistribution{ -MathF::GetExponent(), MathF::GetExponent() };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -426,13 +426,13 @@ void Mathematics::MathTesting::FloatPowTest()
         ASSERT_APPROXIMATE(MathF::Exp(floatValue), exp(floatValue), 1.0e-8f);
     }
 
-    std::uniform_real<float> positiveRandomDistribution{ MathF::GetZeroTolerance(), MathF::maxReal };
+    std::uniform_real_distribution<float> positiveRandomDistribution{ MathF::GetZeroTolerance(), MathF::maxReal };
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstFloatValue = positiveRandomDistribution(randomEngine);
 
-        std::uniform_real<float> powRandomDistribution{ -MathF::Log(MathF::maxReal) / MathF::Log(firstFloatValue),
+        std::uniform_real_distribution<float> powRandomDistribution{ -MathF::Log(MathF::maxReal) / MathF::Log(firstFloatValue),
                                                               MathF::Log(MathF::maxReal) / MathF::Log(firstFloatValue) };
 
         const float secondFloatValue = powRandomDistribution(randomEngine);
@@ -440,7 +440,7 @@ void Mathematics::MathTesting::FloatPowTest()
         ASSERT_APPROXIMATE(MathF::Pow(firstFloatValue, secondFloatValue), pow(firstFloatValue, secondFloatValue), 1.0e-8f);
     }
 
-    std::uniform_real<float> sqrtRandomDistribution{ -MathF::Sqrt(MathF::maxReal), MathF::Sqrt(MathF::maxReal) };
+    std::uniform_real_distribution<float> sqrtRandomDistribution{ -MathF::Sqrt(MathF::maxReal), MathF::Sqrt(MathF::maxReal) };
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
@@ -449,7 +449,7 @@ void Mathematics::MathTesting::FloatPowTest()
         ASSERT_APPROXIMATE(MathF::Square(floatValue), floatValue * floatValue, 1.0e-8f);
     }
 
-    std::uniform_real<float> nonNegativeRandomDistribution{ MathF::GetValue(0), MathF::maxReal };
+    std::uniform_real_distribution<float> nonNegativeRandomDistribution{ MathF::GetValue(0), MathF::maxReal };
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
@@ -479,7 +479,7 @@ void Mathematics::MathTesting::DoublePowTest()
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> expRandomDistribution{ -MathD::GetExponent(), MathD::GetExponent() };
+    std::uniform_real_distribution<double> expRandomDistribution{ -MathD::GetExponent(), MathD::GetExponent() };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -490,13 +490,13 @@ void Mathematics::MathTesting::DoublePowTest()
         ASSERT_APPROXIMATE(MathD::Exp(doubleValue), exp(doubleValue), 1.0e-10);
     }
 
-    std::uniform_real<double> positiveRandomDistribution{ MathD::GetZeroTolerance(), MathD::maxReal };
+    std::uniform_real_distribution<double> positiveRandomDistribution{ MathD::GetZeroTolerance(), MathD::maxReal };
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstDoubleValue = positiveRandomDistribution(randomEngine);
 
-        std::uniform_real<double> powRandomDistribution{ -MathD::Log(MathD::maxReal) / MathD::Log(firstDoubleValue),
+        std::uniform_real_distribution<double> powRandomDistribution{ -MathD::Log(MathD::maxReal) / MathD::Log(firstDoubleValue),
                                                                MathD::Log(MathD::maxReal) / MathD::Log(firstDoubleValue) };
 
         auto secondDoubleValue = powRandomDistribution(randomEngine);
@@ -504,7 +504,7 @@ void Mathematics::MathTesting::DoublePowTest()
         ASSERT_APPROXIMATE(MathD::Pow(firstDoubleValue, secondDoubleValue), pow(firstDoubleValue, secondDoubleValue), 1.0e-10);
     }
 
-    std::uniform_real<double> sqrtRandomDistribution{ -MathD::Sqrt(MathD::maxReal), MathD::Sqrt(MathD::maxReal) };
+    std::uniform_real_distribution<double> sqrtRandomDistribution{ -MathD::Sqrt(MathD::maxReal), MathD::Sqrt(MathD::maxReal) };
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
@@ -513,7 +513,7 @@ void Mathematics::MathTesting::DoublePowTest()
         ASSERT_APPROXIMATE(MathD::Square(doubleValue), doubleValue * doubleValue, 1.0e-10);
     }
 
-    std::uniform_real<double> nonNegativeRandomDistribution{ MathD::GetValue(0), MathD::maxReal };
+    std::uniform_real_distribution<double> nonNegativeRandomDistribution{ MathD::GetValue(0), MathD::maxReal };
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
@@ -543,7 +543,7 @@ void Mathematics::MathTesting::PowBoundaryTest()
     // 随机值测试
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> doubleRandomDistribution{ MathD::epsilon, MathD::maxReal };
+    std::uniform_real_distribution<double> doubleRandomDistribution{ MathD::epsilon, MathD::maxReal };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -554,7 +554,7 @@ void Mathematics::MathTesting::PowBoundaryTest()
         ASSERT_APPROXIMATE(MathD::Pow(0.0, doubleValue), pow(0.0, doubleValue), 1.0e-10);
     }
 
-    std::uniform_real<float> floatRandomDistribution{ MathF::epsilon, MathF::maxReal };
+    std::uniform_real_distribution<float> floatRandomDistribution{ MathF::epsilon, MathF::maxReal };
 
     for (auto loop = 0; loop < 1; ++loop)
     {

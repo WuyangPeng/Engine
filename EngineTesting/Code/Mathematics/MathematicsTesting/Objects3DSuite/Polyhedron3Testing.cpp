@@ -44,8 +44,8 @@ void Mathematics::Polyhedron3Testing::PolyhedronTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> randomDistribution0(0.0, 100.0);
-    std::uniform_real<double> randomDistribution1(-100.0, 0.0);
+    std::uniform_real_distribution<double> randomDistribution0(0.0, 100.0);
+    std::uniform_real_distribution<double> randomDistribution1(-100.0, 0.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

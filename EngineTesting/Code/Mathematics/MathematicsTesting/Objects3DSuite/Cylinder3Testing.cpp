@@ -11,8 +11,11 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Mathematics/Algebra/Vector/Vector3Detail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Cylinder3Detail.h"
+#include "Mathematics/Objects3D/Line3Detail.h"
+#include "Mathematics/Primitives/LineDetail.h"
 
 #include <random>
 
@@ -43,8 +46,8 @@ void Mathematics::Cylinder3Testing::MainTest()
 void Mathematics::Cylinder3Testing::CylinderTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0{ 0.0, 100.0 };
-    std::uniform_real<double> randomDistribution1(0.0, MathD::GetHalfPI());
+    std::uniform_real_distribution<double> randomDistribution0{ 0.0, 100.0 };
+    std::uniform_real_distribution<double> randomDistribution1(0.0, MathD::GetHalfPI());
 
     const auto aTestLoopCount = GetTestLoopCount();
 

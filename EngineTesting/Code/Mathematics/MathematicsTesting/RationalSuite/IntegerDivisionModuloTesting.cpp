@@ -46,7 +46,7 @@ void Mathematics::IntegerDivisionModuloTesting::MainTest()
 void Mathematics::IntegerDivisionModuloTesting::DenominatorIsLargeTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
+    std::uniform_int_distribution<uint16_t> randomDistribution0(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -119,7 +119,7 @@ void Mathematics::IntegerDivisionModuloTesting::DenominatorIsLargeTest()
 void Mathematics::IntegerDivisionModuloTesting::SingleTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
+    std::uniform_int_distribution<uint16_t> randomDistribution0(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -182,8 +182,8 @@ void Mathematics::IntegerDivisionModuloTesting::SingleTest()
 void Mathematics::IntegerDivisionModuloTesting::MultipleTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
-    std::uniform_int<> randomDistribution1(33, 66);
+    std::uniform_int_distribution<uint16_t> randomDistribution0(0, UINT16_MAX);
+    std::uniform_int_distribution<> randomDistribution1(33, 66);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -251,7 +251,7 @@ void Mathematics::IntegerDivisionModuloTesting::MultipleTest()
 void Mathematics::IntegerDivisionModuloTesting::Int32Test()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<> randomDistribution0(INT32_MIN, UINT32_MAX);
+    std::uniform_int_distribution<> randomDistribution0(INT32_MIN, UINT32_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

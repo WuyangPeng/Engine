@@ -16,8 +16,8 @@
 #include <random>
 
 using std::default_random_engine;
-using std::uniform_int;
-using std::uniform_real;
+using std::uniform_int_distribution;
+using std::uniform_real_distribution;
 using std::vector;
 
 Mathematics::LinearSystemInverseTesting::LinearSystemInverseTesting(const OStreamShared& streamShared)

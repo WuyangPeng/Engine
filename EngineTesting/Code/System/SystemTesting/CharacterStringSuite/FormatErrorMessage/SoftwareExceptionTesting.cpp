@@ -205,7 +205,7 @@ bool System::SoftwareExceptionTesting::MakeSoftwareExceptionTest()
 
 void System::SoftwareExceptionTesting::DoMakeSoftwareExceptionTest(size_t index)
 {
-    std::uniform_int randomDistribution{ 0u, exceptionBit };
+    std::uniform_int_distribution randomDistribution{ 0u, exceptionBit };
 
     const auto severity = severities.at(index % severities.size());
     const auto facility = facilities.at(index % facilities.size());

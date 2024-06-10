@@ -33,7 +33,7 @@ namespace Network
         using MessageType = std::array<std::any, size>;
 
     public:
-        MultipleMessageContainer() noexcept;
+        MultipleMessageContainer();
 
         template <typename T, typename... OtherTypes>
         explicit MultipleMessageContainer(T value, OtherTypes&&... otherValue);

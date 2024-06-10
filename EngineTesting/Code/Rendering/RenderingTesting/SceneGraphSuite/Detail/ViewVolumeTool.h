@@ -53,7 +53,7 @@ namespace Rendering
 
     private:
         std::default_random_engine generator;
-        std::uniform_real<float> randomDistribution;
+        std::uniform_real_distribution<float> randomDistribution;
 
         AVector directionVector;
         AVector upVector;

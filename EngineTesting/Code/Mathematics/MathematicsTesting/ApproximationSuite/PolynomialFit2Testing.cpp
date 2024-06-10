@@ -45,9 +45,9 @@ void Mathematics::PolynomialFit2Testing::MainTest()
 void Mathematics::PolynomialFit2Testing::FitTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-50.0, 50.0);
-    std::uniform_int<> randomDistribution1(10, 50);
-    std::uniform_int<> thirdRandomDistribution(3, 10);
+    std::uniform_real_distribution<double> randomDistribution0(-50.0, 50.0);
+    std::uniform_int_distribution<> randomDistribution1(10, 50);
+    std::uniform_int_distribution<> thirdRandomDistribution(3, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

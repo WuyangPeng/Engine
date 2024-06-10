@@ -51,7 +51,7 @@ void Mathematics::EigenDecompositionTesting::MainTest()
 void Mathematics::EigenDecompositionTesting::Eigenvalue2Test()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution(-1.0e2, 1.0e2);
+    std::uniform_real_distribution<double> randomDistribution(-1.0e2, 1.0e2);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -89,7 +89,7 @@ void Mathematics::EigenDecompositionTesting::Eigenvalue2Test()
 void Mathematics::EigenDecompositionTesting::Eigenvalue3Test()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution(-1.0e2, 1.0e2);
+    std::uniform_real_distribution<double> randomDistribution(-1.0e2, 1.0e2);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -138,8 +138,8 @@ void Mathematics::EigenDecompositionTesting::Eigenvalue3Test()
 void Mathematics::EigenDecompositionTesting::EigenvalueNTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-1.0e2, 1.0e2);
-    std::uniform_int<> randomDistribution1(4, 10);
+    std::uniform_real_distribution<double> randomDistribution0(-1.0e2, 1.0e2);
+    std::uniform_int_distribution<> randomDistribution1(4, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -205,7 +205,7 @@ void Mathematics::EigenDecompositionTesting::EigenvalueNTest()
 void Mathematics::EigenDecompositionTesting::BaseTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution(-1.0e2, 1.0e2);
+    std::uniform_real_distribution<double> randomDistribution(-1.0e2, 1.0e2);
     constexpr int size = 4;
 
     const auto aTestLoopCount = GetTestLoopCount();

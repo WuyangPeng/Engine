@@ -40,7 +40,7 @@ void Mathematics::Int64Vector2Testing::MainTest()
 void Mathematics::Int64Vector2Testing::ConstructionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
+    std::uniform_int_distribution<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
 
     Int64Vector2 vector0 = Int64Vector2::CreateDefault();
 
@@ -95,7 +95,7 @@ void Mathematics::Int64Vector2Testing::ConstructionTest()
 void Mathematics::Int64Vector2Testing::CalculateTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
+    std::uniform_int_distribution<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
 
     Int64Vector2 vector0(randomDistribution0(generator),
                          randomDistribution0(generator));
@@ -123,7 +123,7 @@ void Mathematics::Int64Vector2Testing::CalculateTest()
 void Mathematics::Int64Vector2Testing::OperatorTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
+    std::uniform_int_distribution<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
 
     Int64Vector2 vector0(randomDistribution0(generator),
                          randomDistribution0(generator));
@@ -178,7 +178,7 @@ void Mathematics::Int64Vector2Testing::OperatorTest()
 void Mathematics::Int64Vector2Testing::CompareTest()
 {
     const std::default_random_engine generator{ GetEngineRandomSeed() };
-    const std::uniform_int<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
+    const std::uniform_int_distribution<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
 
     Int64Vector2 vector0(0, 5);
     Int64Vector2 vector1(1, 3);

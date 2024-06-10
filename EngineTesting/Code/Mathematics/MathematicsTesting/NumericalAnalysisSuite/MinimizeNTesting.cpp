@@ -64,7 +64,7 @@ void Mathematics::MinimizeNTesting::GetMinimumTest()
 
         for (auto beginIndex = 0u; beginIndex < begin.size(); ++beginIndex)
         {
-            std::uniform_int<> integerRandomDistribution(static_cast<int>(begin.at(beginIndex)), static_cast<int>(end.at(beginIndex)));
+            std::uniform_int_distribution<> integerRandomDistribution(static_cast<int>(begin.at(beginIndex)), static_cast<int>(end.at(beginIndex)));
 
             value.push_back(integerRandomDistribution(generator));
         }

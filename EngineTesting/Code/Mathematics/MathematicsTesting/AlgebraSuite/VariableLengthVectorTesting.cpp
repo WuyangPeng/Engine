@@ -51,7 +51,7 @@ void Mathematics::VariableLengthVectorTesting::MainTest()
 void Mathematics::VariableLengthVectorTesting::ConstructionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution{ -100.0f, 100.0f };
+    std::uniform_real_distribution<float> randomDistribution{ -100.0f, 100.0f };
 
     VariableLengthVectorF vector0(5);
 
@@ -97,7 +97,7 @@ void Mathematics::VariableLengthVectorTesting::ConstructionTest()
 void Mathematics::VariableLengthVectorTesting::AccessTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real_distribution<double> randomDistribution{ -100.0, 100.0 };
 
     std::vector<double> doubleVector;
     for (int i = 0; i < 15; ++i)
@@ -115,7 +115,7 @@ void Mathematics::VariableLengthVectorTesting::AccessTest()
 void Mathematics::VariableLengthVectorTesting::ArithmeticCalculateTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real_distribution<double> randomDistribution{ -100.0, 100.0 };
 
     std::vector<double> firstDoubleVector;
     for (int i = 0; i < 15; ++i)
@@ -206,7 +206,7 @@ void Mathematics::VariableLengthVectorTesting::ArithmeticCalculateTest()
 void Mathematics::VariableLengthVectorTesting::VectorCalculateTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real_distribution<double> randomDistribution{ -100.0, 100.0 };
 
     std::vector<double> firstDoubleVector;
     for (int i = 0; i < 15; ++i)
@@ -251,7 +251,7 @@ void Mathematics::VariableLengthVectorTesting::VectorCalculateTest()
 void Mathematics::VariableLengthVectorTesting::CompareTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::uniform_real_distribution<double> randomDistribution{ -100.0, 100.0 };
 
     std::vector<double> firstDoubleVector;
     for (int i = 0; i < 15; ++i)

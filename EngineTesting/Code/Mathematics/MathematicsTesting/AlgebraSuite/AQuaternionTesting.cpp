@@ -143,8 +143,8 @@ void Mathematics::AQuaternionTesting::AccessTest()
 void Mathematics::AQuaternionTesting::OperatorCalculateTest()
 {
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
-    std::uniform_real<double> randomDistribution1{ 0.0, MathD::GetTwoPI() };
+    std::uniform_real_distribution<double> randomDistribution0{ -100.0, 100.0 };
+    std::uniform_real_distribution<double> randomDistribution1{ 0.0, MathD::GetTwoPI() };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -274,10 +274,10 @@ void Mathematics::AQuaternionTesting::OperatorCalculateTest()
 void Mathematics::AQuaternionTesting::ArithmeticCalculateTest()
 {
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
-    std::uniform_real<float> randomDistribution1{ 0.0, MathF::GetTwoPI() };
-    std::uniform_real<float> randomDistribution2{ 0.0f, 1.0f };
-    const std::uniform_int<> randomDistribution3{ 0, 20 };
+    std::uniform_real_distribution<float> randomDistribution0{ -100.0f, 100.0f };
+    std::uniform_real_distribution<float> randomDistribution1{ 0.0, MathF::GetTwoPI() };
+    std::uniform_real_distribution<float> randomDistribution2{ 0.0f, 1.0f };
+    const std::uniform_int_distribution<> randomDistribution3{ 0, 20 };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -437,7 +437,7 @@ void Mathematics::AQuaternionTesting::ArithmeticCalculateTest()
 void Mathematics::AQuaternionTesting::CompareTest()
 {
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution{ -100.0f, 100.0f };
+    std::uniform_real_distribution<float> randomDistribution{ -100.0f, 100.0f };
 
     AQuaternionF quaternion0{ randomDistribution(randomEngine), randomDistribution(randomEngine), randomDistribution(randomEngine), randomDistribution(randomEngine) };
 

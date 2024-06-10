@@ -44,7 +44,7 @@ void Mathematics::Frustum3Testing::FrustumTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> randomDistribution0(-10.0, 10.0);
+    std::uniform_real_distribution<double> randomDistribution0(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

@@ -69,8 +69,8 @@ void Mathematics::IntegerDataOperatorTesting::MainTest()
 void Mathematics::IntegerDataOperatorTesting::AdditionTest()
 {
     std::default_random_engine generator{};
-    std::uniform_int<> randomDistribution0(0, INT32_MAX / 2);
-    std::uniform_int<uint16_t> randomDistribution1(0, UINT16_MAX);
+    std::uniform_int_distribution<> randomDistribution0(0, INT32_MAX / 2);
+    std::uniform_int_distribution<uint16_t> randomDistribution1(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -163,8 +163,8 @@ void Mathematics::IntegerDataOperatorTesting::AdditionTest()
 void Mathematics::IntegerDataOperatorTesting::SubtractionTest()
 {
     std::default_random_engine generator{};
-    std::uniform_int<> randomDistribution0(0, INT32_MAX / 2);
-    std::uniform_int<uint16_t> randomDistribution1(0, UINT16_MAX);
+    std::uniform_int_distribution<> randomDistribution0(0, INT32_MAX / 2);
+    std::uniform_int_distribution<uint16_t> randomDistribution1(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -275,8 +275,8 @@ void Mathematics::IntegerDataOperatorTesting::SubtractionTest()
 void Mathematics::IntegerDataOperatorTesting::MultiplicationTest()
 {
     std::default_random_engine generator{};
-    std::uniform_int<> randomDistribution0(0, INT32_MAX / 2);
-    std::uniform_int<uint16_t> randomDistribution1(0, UINT16_MAX);
+    std::uniform_int_distribution<> randomDistribution0(0, INT32_MAX / 2);
+    std::uniform_int_distribution<uint16_t> randomDistribution1(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -326,8 +326,8 @@ void Mathematics::IntegerDataOperatorTesting::MultiplicationTest()
 void Mathematics::IntegerDataOperatorTesting::LeftShiftTest()
 {
     std::default_random_engine generator{};
-    std::uniform_int<> randomDistribution0(0, 16 * 20);
-    std::uniform_int<uint16_t> randomDistribution1(0, UINT16_MAX);
+    std::uniform_int_distribution<> randomDistribution0(0, 16 * 20);
+    std::uniform_int_distribution<uint16_t> randomDistribution1(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -370,8 +370,8 @@ void Mathematics::IntegerDataOperatorTesting::LeftShiftTest()
 void Mathematics::IntegerDataOperatorTesting::RightShiftTest()
 {
     std::default_random_engine generator{};
-    std::uniform_int<> randomDistribution0(0, 16 * 20);
-    std::uniform_int<uint16_t> randomDistribution1(0, UINT16_MAX);
+    std::uniform_int_distribution<> randomDistribution0(0, 16 * 20);
+    std::uniform_int_distribution<uint16_t> randomDistribution1(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -414,8 +414,8 @@ void Mathematics::IntegerDataOperatorTesting::RightShiftTest()
 void Mathematics::IntegerDataOperatorTesting::DivisionModuloTest()
 {
     std::default_random_engine generator{};
-    std::uniform_int<> randomDistribution0(0, INT16_MAX);
-    std::uniform_int<uint16_t> randomDistribution1(0, UINT16_MAX);
+    std::uniform_int_distribution<> randomDistribution0(0, INT16_MAX);
+    std::uniform_int_distribution<uint16_t> randomDistribution1(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

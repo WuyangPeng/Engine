@@ -52,8 +52,8 @@ void Mathematics::Query2Int64Testing::MainTest()
 void Mathematics::Query2Int64Testing::VerticesTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    std::uniform_int<> randomDistribution1(1, 50);
+    std::uniform_real_distribution<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_int_distribution<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -82,8 +82,8 @@ void Mathematics::Query2Int64Testing::VerticesTest()
 void Mathematics::Query2Int64Testing::LineTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    std::uniform_int<> randomDistribution1(1, 50);
+    std::uniform_real_distribution<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_int_distribution<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -97,7 +97,7 @@ void Mathematics::Query2Int64Testing::LineTest()
             vertices.emplace_back(randomDistribution0(generator), randomDistribution0(generator));
         }
 
-        std::uniform_int<> thirdRandomDistribution(0, size - 1);
+        std::uniform_int_distribution<> thirdRandomDistribution(0, size - 1);
 
         MAYBE_UNUSED const auto firstIndex = thirdRandomDistribution(generator);
         const auto secondIndex = thirdRandomDistribution(generator);
@@ -113,8 +113,8 @@ void Mathematics::Query2Int64Testing::LineTest()
 void Mathematics::Query2Int64Testing::TriangleTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    std::uniform_int<> randomDistribution1(1, 50);
+    std::uniform_real_distribution<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_int_distribution<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -128,7 +128,7 @@ void Mathematics::Query2Int64Testing::TriangleTest()
             vertices.emplace_back(randomDistribution0(generator), randomDistribution0(generator));
         }
 
-        std::uniform_int<> thirdRandomDistribution(0, size - 1);
+        std::uniform_int_distribution<> thirdRandomDistribution(0, size - 1);
 
         const auto firstIndex = thirdRandomDistribution(generator);
         auto secondIndex = thirdRandomDistribution(generator);
@@ -175,8 +175,8 @@ void Mathematics::Query2Int64Testing::TriangleTest()
 void Mathematics::Query2Int64Testing::CircumcircleTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    std::uniform_int<> randomDistribution1(1, 50);
+    std::uniform_real_distribution<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_int_distribution<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -190,7 +190,7 @@ void Mathematics::Query2Int64Testing::CircumcircleTest()
             vertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
-        std::uniform_int<> thirdRandomDistribution(0, size - 1);
+        std::uniform_int_distribution<> thirdRandomDistribution(0, size - 1);
 
         MAYBE_UNUSED const auto firstIndex = thirdRandomDistribution(generator);
         const auto secondIndex = thirdRandomDistribution(generator);

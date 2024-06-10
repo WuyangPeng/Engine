@@ -59,7 +59,7 @@ void Rendering::ProjectorTesting::MainTest()
 void Rendering::ProjectorTesting::FrameTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    std::uniform_real_distribution<float> firstFloatRandomDistribution(-100.0f, 100.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {

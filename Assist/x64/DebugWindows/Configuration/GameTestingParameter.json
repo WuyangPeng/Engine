@@ -7,8 +7,8 @@
   "ProjectCapital": "THE_LAST_OVERLORD_TESTING",
   "ProjectAbbreviation": "TLOT",
   "EndYear": "2023",
-  "Version": "1.0.0.0",
-  "VersionNum": "1000000",
+  "Version": "1.0.0.2",
+  "VersionNum": "1000002",
   "TestingName": "TheLastOverlord",
 
   "Module": {
@@ -72,10 +72,10 @@
       "Uppercase": "WORLD_SERVER"
     },
 
-    "CorssServer": {
+    "CrossServer": {
       "ChineseName": "跨服服务器",
       "ProjectServiceType": 2,
-      "Uppercase": "CORSS_SERVER"
+      "Uppercase": "CROSS_SERVER"
     },
 
     "OfflineServer": {

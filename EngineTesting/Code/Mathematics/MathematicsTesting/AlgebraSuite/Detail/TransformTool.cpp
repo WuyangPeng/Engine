@@ -130,7 +130,7 @@ float Mathematics::TransformTool::GetRandom(float max)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    std::uniform_real randomDistribution{ 0.0f, max };
+    std::uniform_real_distribution randomDistribution{ 0.0f, max };
 
     return randomDistribution(generator);
 }
@@ -242,7 +242,7 @@ double Mathematics::TransformTool::GetRandom(double max)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    std::uniform_real randomDistribution{ 0.0, max };
+    std::uniform_real_distribution randomDistribution{ 0.0, max };
 
     return randomDistribution(generator);
 }
