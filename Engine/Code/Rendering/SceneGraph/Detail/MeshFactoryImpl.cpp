@@ -14,7 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
-#include "Mathematics/Algebra/Vector3Tools.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
 #include "Rendering/Resources/Flags/UsageType.h"
 
