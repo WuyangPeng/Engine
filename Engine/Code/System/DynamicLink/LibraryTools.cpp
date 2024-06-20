@@ -82,15 +82,20 @@ std::string System::GetExecutableName()
     const auto exePath = GetDynamicLinkFileName(nullptr);
 
     const std::filesystem::path filesystemPath{ exePath };
-    auto executableName = filesystemPath.stem().string();
+    return filesystemPath.stem().string();
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
     const auto exePath = std::filesystem::read_symlink("/proc/self/exe");
 
-    auto executableName = exePath.stem().string();
+    return exePath.stem().string();
 
 #endif  // SYSTEM_PLATFORM_WIN32
+}
+
+std::string System::GetExecutableNameRemoveSuffix()
+{
+    auto executableName = GetExecutableName();
 
     if (executableName.empty())
     {

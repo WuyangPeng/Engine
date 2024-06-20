@@ -99,7 +99,7 @@ Framework::EnvironmentDirectoryImpl::String Framework::EnvironmentDirectoryImpl:
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return GetDirectory(UpperDirectory::Configuration) + CoreTools::StringConversion::MultiByteConversionStandard(System::GetExecutableName()) + DirectoryDefaultName::GetSuffix();
+    return GetDirectory(UpperDirectory::Configuration) + CoreTools::StringConversion::MultiByteConversionStandard(System::GetExecutableNameRemoveSuffix()) + DirectoryDefaultName::GetSuffix();
 }
 
 System::String Framework::EnvironmentDirectoryImpl::GetPath(RenderingAnalysisDirectory analysisDirectory) const

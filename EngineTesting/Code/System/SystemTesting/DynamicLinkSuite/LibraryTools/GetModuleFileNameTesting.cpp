@@ -95,5 +95,21 @@ void System::GetModuleFileNameTesting::DllModuleFileNameFailureTest(WindowsDWord
 
 void System::GetModuleFileNameTesting::GetExecutableNameTest()
 {
-    ASSERT_EQUAL(GetExecutableName(), "SystemTesting");
+    ASSERT_EQUAL(GetExecutableNameRemoveSuffix(), "SystemTesting");
+
+    std::string result{ "SystemTesting" };
+
+#ifdef BUILDING_SYSTEM_STATIC
+
+    result += "Static";
+
+#endif  // BUILDING_SYSTEM_STATIC
+
+#ifdef _DEBUG
+
+    result += "D";
+
+#endif  // _DEBUG
+
+    ASSERT_EQUAL(GetExecutableName(), result);
 }
