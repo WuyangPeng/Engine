@@ -99,18 +99,20 @@ std::string System::GetExecutableName()
 
 #ifdef _DEBUG
 
-    executableName = executableName.substr(0, executableName.size() - 1);
+    if (executableName.back() == 'D')
+    {
+        executableName = executableName.substr(0, executableName.size() - 1);
+    }
 
 #endif  // _DEBUG
 
-    if (executableName.size() <= 6)
-    {
-        return "";
-    }
-
 #ifdef BUILDING_SYSTEM_STATIC
 
-    executableName = executableName.substr(0, executableName.size() - 6);
+    if (const auto position = executableName.find("Static");
+        position != std::string::npos)
+    {
+        executableName = executableName.substr(0, position);
+    }
 
 #endif  // BUILDING_SYSTEM_STATIC
 
