@@ -47,7 +47,7 @@ void System::SocketNameTesting::SocketNameTest()
 
 void System::SocketNameTesting::DoSocketNameTest(WinSocket socketHandle)
 {
-    const auto address = GetAddress(defaultHttpPort, GetConnectHostname());
+    const auto address = GetAddress(GetConnectPort(), GetConnectHostname());
     ASSERT_TRUE(Connect(socketHandle, &address));
 
     const auto peerName = GetPeerNameTest(socketHandle);

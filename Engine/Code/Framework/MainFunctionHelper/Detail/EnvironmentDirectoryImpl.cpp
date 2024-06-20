@@ -5,13 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 15:11)
+/// 版本：1.0.1.0 (2024/06/20 18:02)
 
 #include "Framework/FrameworkExport.h"
 
 #include "AnalysisEngineDirectory.h"
 #include "DirectoryDefaultName.h"
 #include "EnvironmentDirectoryImpl.h"
+#include "System/DynamicLink/LibraryTools.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/FileManager/EnvironmentVariable.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
@@ -92,6 +93,13 @@ System::String Framework::EnvironmentDirectoryImpl::GetDirectory(UpperDirectory 
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
     return GetEngineDirectory() + engineDirectoryPath.GetDirectory(System::EnumCastUnderlying<AnalysisDirectory>(analysisDirectory)) + DirectoryDefaultName::GetSuffix();
+}
+
+Framework::EnvironmentDirectoryImpl::String Framework::EnvironmentDirectoryImpl::GetServerConfigurationDirectory() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+    return GetDirectory(UpperDirectory::Configuration) + CoreTools::StringConversion::MultiByteConversionStandard(System::GetExecutableName()) + DirectoryDefaultName::GetSuffix();
 }
 
 System::String Framework::EnvironmentDirectoryImpl::GetPath(RenderingAnalysisDirectory analysisDirectory) const

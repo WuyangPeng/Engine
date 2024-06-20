@@ -31,6 +31,7 @@ namespace System
 
     protected:
         NODISCARD std::string GetConnectHostname() const;
+        NODISCARD uint16_t GetConnectPort() const;
     };
 }
 

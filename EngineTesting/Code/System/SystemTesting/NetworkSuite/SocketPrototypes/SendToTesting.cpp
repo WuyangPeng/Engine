@@ -49,7 +49,7 @@ void System::SendToTesting::SendToTest()
 
 void System::SendToTesting::DoSendToTest(WinSocket socketHandle) const
 {
-    const auto address = GetAddress(defaultHttpPort, GetConnectHostname());
+    const auto address = GetAddress(GetConnectPort(), GetConnectHostname());
 
     std::string sendMessage{ "GET /index.html HTTP/1.0\r\n\r\n" };
 

@@ -50,7 +50,7 @@ void System::ShutDownTesting::ShutDownTest(ShutdownHow shutdownHow)
 
 void System::ShutDownTesting::DoShutDownTest(WinSocket socketHandle, ShutdownHow shutdownHow)
 {
-    const auto address = GetAddress(defaultHttpPort, GetConnectHostname());
+    const auto address = GetAddress(GetConnectPort(), GetConnectHostname());
     ASSERT_TRUE(Connect(socketHandle, &address));
 
     ASSERT_TRUE(ShutDown(socketHandle, shutdownHow));

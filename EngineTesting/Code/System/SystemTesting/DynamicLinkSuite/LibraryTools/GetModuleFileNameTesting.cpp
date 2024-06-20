@@ -30,6 +30,7 @@ void System::GetModuleFileNameTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(GetModuleFileNameSucceedTest);
     ASSERT_NOT_THROW_EXCEPTION_0(GetModuleFileNameFailureTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetExecutableNameTest);
 }
 
 void System::GetModuleFileNameTesting::GetModuleFileNameSucceedTest()
@@ -90,4 +91,9 @@ void System::GetModuleFileNameTesting::DllModuleFileNameFailureTest(WindowsDWord
     }
 
     ASSERT_TRUE(GetDynamicLinkFileName(libraryModule).empty());
+}
+
+void System::GetModuleFileNameTesting::GetExecutableNameTest()
+{
+    ASSERT_EQUAL(GetExecutableName(), "SystemTesting");
 }

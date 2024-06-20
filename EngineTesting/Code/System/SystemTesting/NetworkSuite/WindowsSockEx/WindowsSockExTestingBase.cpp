@@ -30,3 +30,14 @@ System::String System::WindowsSockExTestingBase::GetConnectHostname() const
 
     return mainTree.get<String>(SYSTEM_TEXT("ConnectHostname"));
 }
+
+uint16_t System::WindowsSockExTestingBase::GetConnectPort() const
+{
+    SYSTEM_CLASS_IS_VALID_CONST_1;
+
+    boost::property_tree::basic_ptree<std::string, std::string> mainTree{};
+
+    read_json("Configuration/EnvironmentVariable.json", mainTree);
+
+    return mainTree.get<uint16_t>("ConnectPort");
+}

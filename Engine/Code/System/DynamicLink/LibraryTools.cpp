@@ -15,6 +15,7 @@
 #include "System/Helper/WindowsMacro.h"
 
 #include <array>
+#include <filesystem>
 
 System::DynamicLinkModule System::GetDynamicLinkHandle(const DynamicLinkCharType* moduleName) noexcept
 {
@@ -54,8 +55,6 @@ System::WindowsDWord System::GetDynamicLinkFileName(DynamicLinkModule module, Dy
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(module, filename, size);
-
     return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
@@ -74,4 +73,46 @@ System::DynamicLinkString System::GetDynamicLinkFileName(DynamicLinkModule modul
     {
         return DynamicLinkString{};
     }
+}
+
+std::string System::GetExecutableName()
+{
+#ifdef SYSTEM_PLATFORM_WIN32
+
+    const auto exePath = GetDynamicLinkFileName(nullptr);
+
+    const std::filesystem::path filesystemPath{ exePath };
+    auto executableName = filesystemPath.stem().string();
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    const auto exePath = std::filesystem::read_symlink("/proc/self/exe");
+
+    auto executableName = exePath.stem().string();
+
+#endif  // SYSTEM_PLATFORM_WIN32
+
+    if (executableName.empty())
+    {
+        return executableName;
+    }
+
+#ifdef _DEBUG
+
+    executableName = executableName.substr(0, executableName.size() - 1);
+
+#endif  // _DEBUG
+
+    if (executableName.size() <= 6)
+    {
+        return "";
+    }
+
+#ifdef BUILDING_SYSTEM_STATIC
+
+    executableName = executableName.substr(0, executableName.size() - 6);
+
+#endif  // BUILDING_SYSTEM_STATIC
+
+    return executableName;
 }

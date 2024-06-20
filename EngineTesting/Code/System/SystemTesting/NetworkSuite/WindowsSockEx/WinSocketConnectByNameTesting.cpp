@@ -53,10 +53,11 @@ void System::WinSocketConnectByNameTesting::ConnectTest()
 void System::WinSocketConnectByNameTesting::DoConnectTest(WinSocket socketHandle)
 {
     const auto serverHostname = GetConnectHostname();
+    const auto port = ToString(GetConnectPort());
 
     ASSERT_TRUE(WinSocketConnectByName(socketHandle,
                                        const_cast<TChar*>(serverHostname.c_str()),
-                                       const_cast<TChar*>(SYSTEM_TEXT("80")),
+                                       const_cast<TChar*>(port.c_str()),
                                        nullptr,
                                        nullptr,
                                        nullptr,

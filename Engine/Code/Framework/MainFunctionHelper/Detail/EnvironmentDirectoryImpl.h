@@ -37,6 +37,7 @@ namespace Framework
         NODISCARD String GetEngineDirectory() const;
 
         NODISCARD String GetDirectory(UpperDirectory analysisDirectory) const;
+        NODISCARD String GetServerConfigurationDirectory() const;
 
         NODISCARD String GetPath(RenderingAnalysisDirectory analysisDirectory) const;
         NODISCARD String GetPath(RenderingDirectory renderingDirectory, RenderingAnalysisDirectory analysisDirectory) const;

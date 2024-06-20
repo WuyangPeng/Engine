@@ -53,7 +53,7 @@ void System::ConnectTesting::ConnectTest()
 
 void System::ConnectTesting::DoConnectTest(WinSocket socketHandle)
 {
-    const auto address = GetAddress(defaultHttpPort, GetConnectHostname());
+    const auto address = GetAddress(GetConnectPort(), GetConnectHostname());
 
     ASSERT_TRUE(Connect(socketHandle, &address));
 

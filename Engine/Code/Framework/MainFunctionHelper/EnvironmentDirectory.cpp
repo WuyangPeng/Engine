@@ -42,6 +42,13 @@ Framework::EnvironmentDirectory::String Framework::EnvironmentDirectory::GetDire
     return impl->GetDirectory(analysisDirectory);
 }
 
+Framework::EnvironmentDirectory::String Framework::EnvironmentDirectory::GetServerConfigurationDirectory() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetServerConfigurationDirectory();
+}
+
 Framework::EnvironmentDirectory::String Framework::EnvironmentDirectory::GetPath(RenderingAnalysisDirectory analysisDirectory) const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;

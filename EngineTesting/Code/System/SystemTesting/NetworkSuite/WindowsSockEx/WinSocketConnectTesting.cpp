@@ -29,7 +29,7 @@ void System::WinSocketConnectTesting::DoConnectTest(WinSocket socketHandle)
 {
     const auto serverHostname = CoreTools::StringConversion::StandardConversionMultiByte(GetConnectHostname());
 
-    const auto address = GetAddress(80, serverHostname);
+    const auto address = GetAddress(GetConnectPort(), serverHostname);
 
     ASSERT_TRUE(WinSocketConnect(socketHandle, reinterpret_cast<const WinSockAddress*>(&address), sizeof(WinSockAddress), nullptr, nullptr, nullptr, nullptr));
 

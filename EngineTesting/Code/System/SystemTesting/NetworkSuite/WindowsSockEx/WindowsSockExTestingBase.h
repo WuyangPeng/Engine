@@ -27,6 +27,7 @@ namespace System
 
     protected:
         NODISCARD String GetConnectHostname() const;
+        NODISCARD uint16_t GetConnectPort() const;
     };
 }
 
