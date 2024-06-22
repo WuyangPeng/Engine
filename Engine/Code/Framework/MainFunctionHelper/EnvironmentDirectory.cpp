@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 15:11)
+/// 版本：1.0.1.0 (2024/06/22 14:06)
 
 #include "Framework/FrameworkExport.h"
 
@@ -21,35 +21,35 @@ Framework::EnvironmentDirectory::EnvironmentDirectory(const String& engineEnviro
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, EnvironmentDirectory)
 
-Framework::EnvironmentDirectory::String Framework::EnvironmentDirectory::GetEngineEnvironment() const
+System::String Framework::EnvironmentDirectory::GetEngineEnvironment() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
     return impl->GetEngineEnvironment();
 }
 
-Framework::EnvironmentDirectory::String Framework::EnvironmentDirectory::GetEngineDirectory() const
+System::String Framework::EnvironmentDirectory::GetEngineDirectory() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
     return impl->GetEngineDirectory();
 }
 
-Framework::EnvironmentDirectory::String Framework::EnvironmentDirectory::GetDirectory(UpperDirectory analysisDirectory) const
+System::String Framework::EnvironmentDirectory::GetDirectory(UpperDirectory analysisDirectory) const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
     return impl->GetDirectory(analysisDirectory);
 }
 
-Framework::EnvironmentDirectory::String Framework::EnvironmentDirectory::GetExecutableConfigurationDirectory() const
+System::String Framework::EnvironmentDirectory::GetExecutableConfigurationDirectory() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
     return impl->GetExecutableConfigurationDirectory();
 }
 
-Framework::EnvironmentDirectory::String Framework::EnvironmentDirectory::GetPath(RenderingAnalysisDirectory analysisDirectory) const
+System::String Framework::EnvironmentDirectory::GetPath(RenderingAnalysisDirectory analysisDirectory) const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 

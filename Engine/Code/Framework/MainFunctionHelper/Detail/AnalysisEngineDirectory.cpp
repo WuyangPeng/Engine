@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 15:12)
+/// 版本：1.0.1.0 (2024/06/22 14:20)
 
 #include "Framework/FrameworkExport.h"
 
@@ -20,25 +20,35 @@ using System::operator++;
 Framework::AnalysisEngineDirectory::AnalysisEngineDirectory(const std::string& jsonName)
     : basicTree{}, resourceTree{}, configurationTree{}, result{}
 {
+    Init(jsonName);
+
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
+}
+
+void Framework::AnalysisEngineDirectory::Init(const std::string& jsonName)
+{
     if (!jsonName.empty())
     {
         Analysis(jsonName);
     }
 
     result.SetDefaultDirectory();
-
-    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 void Framework::AnalysisEngineDirectory::Analysis(const std::string& jsonName)
 {
     EXCEPTION_TRY
     {
-        read_json(jsonName, basicTree);
-        AnalysisBase();
-        AnalysisRendering();
+        DoAnalysis(jsonName);
     }
     EXCEPTION_STD_EXCEPTION_CATCH(Framework)
+}
+
+void Framework::AnalysisEngineDirectory::DoAnalysis(const std::string& jsonName)
+{
+    read_json(jsonName, basicTree);
+    AnalysisBase();
+    AnalysisRendering();
 }
 
 void Framework::AnalysisEngineDirectory::AnalysisBase()
@@ -61,12 +71,17 @@ void Framework::AnalysisEngineDirectory::AnalysisRendering(RenderingDirectory re
 {
     EXCEPTION_TRY
     {
-        const auto analysisDirectory = System::EnumCastUnderlying<AnalysisDirectory>(renderingDirectory);
-        const auto renderingTree = basicTree.get_child(DirectoryDefaultName::GetDefaultKeyName(analysisDirectory));
-
-        AnalysisRendering(renderingDirectory, renderingTree);
+        DoAnalysisRendering(renderingDirectory);
     }
     EXCEPTION_STD_EXCEPTION_CATCH(Framework)
+}
+
+void Framework::AnalysisEngineDirectory::DoAnalysisRendering(RenderingDirectory renderingDirectory)
+{
+    const auto analysisDirectory = System::EnumCastUnderlying<AnalysisDirectory>(renderingDirectory);
+    const auto& renderingTree = basicTree.get_child(DirectoryDefaultName::GetDefaultKeyName(analysisDirectory));
+
+    AnalysisRendering(renderingDirectory, renderingTree);
 }
 
 void Framework::AnalysisEngineDirectory::AnalysisRendering(RenderingDirectory renderingDirectory, const BasicTree& renderingTree)

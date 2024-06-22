@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.1.0 (2024/06/20 18:02)
+/// 版本：1.0.1.0 (2024/06/22 14:09)
 
 #include "Framework/FrameworkExport.h"
 
@@ -59,14 +59,7 @@ std::string Framework::EnvironmentDirectoryImpl::GetJsonName(const String& varia
 
 bool Framework::EnvironmentDirectoryImpl::IsValid() const noexcept
 {
-    if (!engineEnvironment.empty())
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return !engineEnvironment.empty();
 }
 
 #endif  // OPEN_CLASS_INVARIANT

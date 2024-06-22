@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 15:15)
+/// 版本：1.0.1.0 (2024/06/22 14:20)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_ANALYSIS_ENGINE_DIRECTORY_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_ANALYSIS_ENGINE_DIRECTORY_H
@@ -35,10 +35,13 @@ namespace Framework
         using BasicTree = boost::property_tree::basic_ptree<String, String>;
 
     private:
+        void Init(const std::string& jsonName);
         void Analysis(const std::string& jsonName);
+        void DoAnalysis(const std::string& jsonName);
         void AnalysisBase();
         void AnalysisRendering();
         void AnalysisRendering(RenderingDirectory renderingDirectory);
+        void DoAnalysisRendering(RenderingDirectory renderingDirectory);
         void AnalysisRendering(RenderingDirectory renderingDirectory, const BasicTree& renderingTree);
         void InsertResult(RenderingDirectory renderingDirectory, AnalysisDirectory analysisDirectory);
         void InsertResult(RenderingDirectory renderingDirectory, AnalysisDirectory analysisDirectory, const BasicTree& renderingTree);

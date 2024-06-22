@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 15:11)
+/// 版本：1.0.1.0 (2024/06/22 14:14)
 
 #include "Framework/FrameworkExport.h"
 
@@ -16,8 +16,8 @@
 
 using System::operator++;
 
-Framework::EngineDirectoryPath::EngineDirectoryPath(const EngineDirectoryResult& result)
-    : result{ result }
+Framework::EngineDirectoryPath::EngineDirectoryPath(EngineDirectoryResult result)
+    : result{ std::move(result) }
 {
     Analysis();
 
@@ -55,7 +55,7 @@ void Framework::EngineDirectoryPath::Analysis(RenderingDirectory renderingDirect
     pathType.emplace(IndexType{ endianDirectory, renderingDirectory, analysisDirectory }, directory);
 }
 
-Framework::EngineDirectoryPath::String Framework::EngineDirectoryPath::GetDirectoryResult(RenderingDirectory renderingDirectory, EndianDirectory endianDirectory, AnalysisDirectory analysisDirectory)
+System::String Framework::EngineDirectoryPath::GetDirectoryResult(RenderingDirectory renderingDirectory, EndianDirectory endianDirectory, AnalysisDirectory analysisDirectory) const
 {
     auto endianDirectoryDescribe = result.GetDirectory(renderingDirectory, System::EnumCastUnderlying<AnalysisDirectory>(endianDirectory));
 
@@ -107,7 +107,7 @@ System::String Framework::EngineDirectoryPath::GetPath(EndianDirectory endianDir
     }
 }
 
-NODISCARD System::String Framework::EngineDirectoryPath::GetDirectory(AnalysisDirectory analysisDirectory) const
+System::String Framework::EngineDirectoryPath::GetDirectory(AnalysisDirectory analysisDirectory) const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 

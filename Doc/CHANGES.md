@@ -10,7 +10,7 @@ Threading Core Render Engine 1.0.1.0
 	完成功能：
 	
 	（服务器）	
-	+ 服务器配置路径。@
+	+ 服务器配置目录类：EnvironmentDirectory。@
 	+ ServerManager启动类。@
 	
 	（客户端）	 
