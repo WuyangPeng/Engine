@@ -95,7 +95,7 @@ System::String Framework::EnvironmentDirectoryImpl::GetDirectory(UpperDirectory 
     return GetEngineDirectory() + engineDirectoryPath.GetDirectory(System::EnumCastUnderlying<AnalysisDirectory>(analysisDirectory)) + DirectoryDefaultName::GetSuffix();
 }
 
-Framework::EnvironmentDirectoryImpl::String Framework::EnvironmentDirectoryImpl::GetServerConfigurationDirectory() const
+Framework::EnvironmentDirectoryImpl::String Framework::EnvironmentDirectoryImpl::GetExecutableConfigurationDirectory() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 

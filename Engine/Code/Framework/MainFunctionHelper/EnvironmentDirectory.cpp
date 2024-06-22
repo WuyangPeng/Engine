@@ -42,11 +42,11 @@ Framework::EnvironmentDirectory::String Framework::EnvironmentDirectory::GetDire
     return impl->GetDirectory(analysisDirectory);
 }
 
-Framework::EnvironmentDirectory::String Framework::EnvironmentDirectory::GetServerConfigurationDirectory() const
+Framework::EnvironmentDirectory::String Framework::EnvironmentDirectory::GetExecutableConfigurationDirectory() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return impl->GetServerConfigurationDirectory();
+    return impl->GetExecutableConfigurationDirectory();
 }
 
 Framework::EnvironmentDirectory::String Framework::EnvironmentDirectory::GetPath(RenderingAnalysisDirectory analysisDirectory) const

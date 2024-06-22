@@ -24,7 +24,7 @@
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
 
 Framework::PixelViewMiddleLayerTesting::PixelViewMiddleLayerTesting(const OStreamShared& stream)
-    : ParentType{ stream }, random{}
+    : ParentType{ stream }, random{ 0, std::numeric_limits<uint8_t>::max() }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

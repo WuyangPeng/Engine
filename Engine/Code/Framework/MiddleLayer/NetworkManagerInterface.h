@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 15:00)
+/// 版本：1.0.1.0 (2024/06/22 10:05)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_NETWORK_MANAGER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_NETWORK_MANAGER_INTERFACE_H
@@ -48,18 +48,18 @@ namespace Framework
         NODISCARD bool Destroy() override;
         NODISCARD bool Idle(int64_t timeDelta) override;
 
-        // 渲染中间层处理
+        /// 渲染中间层处理
         NODISCARD bool Paint() final;
         NODISCARD bool Move(const WindowPoint& point) final;
         NODISCARD bool Resize(WindowDisplay windowDisplay, const WindowSize& size) final;
 
-        // 按键消息中间层处理
+        /// 按键消息中间层处理
         NODISCARD bool KeyUp(int key, const WindowPoint& point) final;
         NODISCARD bool KeyDown(int key, const WindowPoint& point) final;
         NODISCARD bool SpecialKeyUp(int key, const WindowPoint& point) final;
         NODISCARD bool SpecialKeyDown(int key, const WindowPoint& point) final;
 
-        // 鼠标消息中间层处理
+        /// 鼠标消息中间层处理
         NODISCARD bool PassiveMotion(const WindowPoint& point) final;
         NODISCARD bool Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
         NODISCARD bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;

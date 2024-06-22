@@ -133,6 +133,9 @@
     <Filter Include="ProjectSuite 源文件\Detail">
       <UniqueIdentifier>{6736cff1-44f6-4eb7-be8c-a6711f9311e0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="配置\FrameworkTesting">
+      <UniqueIdentifier>{38a0ce82-d79b-4b80-943a-8c11e01445ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json">
@@ -164,6 +167,9 @@
     </None>
     <None Include="Configuration\Project.json">
       <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\FrameworkTesting\Renderer.json">
+      <Filter>配置\FrameworkTesting</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
