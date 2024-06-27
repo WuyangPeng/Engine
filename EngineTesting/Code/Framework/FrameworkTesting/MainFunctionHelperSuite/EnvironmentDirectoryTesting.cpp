@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/11 19:27)
+/// 标准：std:c++20
+/// 版本：1.0.1.0 (2024/06/27 14:06)
 
 #include "EnvironmentDirectoryTesting.h"
 #include "Flags/DescriptionFlags.h"
@@ -20,7 +20,7 @@ using System::operator++;
 
 Framework::EnvironmentDirectoryTesting::EnvironmentDirectoryTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      mDescription{ { Description::Resource, SYSTEM_TEXT("Resource"s) },
+      descriptionType{ { Description::Resource, SYSTEM_TEXT("Resource"s) },
                     { Description::Configuration, SYSTEM_TEXT("Configuration"s) },
                     { Description::Directory, SYSTEM_TEXT(""s) },
                     { Description::LittleEndian, SYSTEM_TEXT("LittleEndian"s) },
@@ -56,8 +56,8 @@ System::String Framework::EnvironmentDirectoryTesting::GetDescription(Descriptio
         return GetDescription(Description::Null, false);
     }
 
-    if (const auto iter = mDescription.find(description);
-        iter != mDescription.cend())
+    if (const auto iter = descriptionType.find(description);
+        iter != descriptionType.cend())
     {
         auto element = iter->second;
         if (isFile && IsDirectory(description))
@@ -75,8 +75,8 @@ System::String Framework::EnvironmentDirectoryTesting::GetDescription(Descriptio
 
 System::String Framework::EnvironmentDirectoryTesting::GetPrefix(Description description) const
 {
-    if (const auto iter = mDescription.find(description);
-        iter != mDescription.cend())
+    if (const auto iter = descriptionType.find(description);
+        iter != descriptionType.cend())
     {
         return iter->second;
     }
@@ -120,6 +120,7 @@ void Framework::EnvironmentDirectoryTesting::DefaultValueTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_1(EngineEnvironmentTest, defaultEnvironmentDirectory);
     ASSERT_NOT_THROW_EXCEPTION_1(EngineDirectoryTest, defaultEnvironmentDirectory);
+
     for (auto i = UpperDirectory::Resource; i <= UpperDirectory::Configuration; ++i)
     {
         ASSERT_NOT_THROW_EXCEPTION_2(DirectoryTest, false, i);
@@ -141,6 +142,7 @@ void Framework::EnvironmentDirectoryTesting::FileValueTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_1(EngineEnvironmentTest, fileEnvironmentDirectory);
     ASSERT_NOT_THROW_EXCEPTION_1(EngineDirectoryTest, fileEnvironmentDirectory);
+
     for (auto i = UpperDirectory::Resource; i <= UpperDirectory::Configuration; ++i)
     {
         ASSERT_NOT_THROW_EXCEPTION_2(DirectoryTest, true, i);

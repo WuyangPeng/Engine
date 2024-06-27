@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/11 19:26)
+/// 标准：std:c++20
+/// 版本：1.0.1.0 (2024/06/27 14:06)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_SUITE_ENVIRONMENT_DIRECTORY_TESTING_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_SUITE_ENVIRONMENT_DIRECTORY_TESTING_H
@@ -24,6 +24,7 @@ namespace Framework
         using ClassType = EnvironmentDirectoryTesting;
         using ParentType = UnitTest;
         using TestingType = EnvironmentDirectory;
+
         using String = System::String;
 
     public:
@@ -63,7 +64,7 @@ namespace Framework
         NODISCARD static bool IsLittleEndian(Description description) noexcept;
 
     private:
-        DescriptionType mDescription;
+        DescriptionType descriptionType;
         TestingType defaultEnvironmentDirectory;
         TestingType fileEnvironmentDirectory;
     };
