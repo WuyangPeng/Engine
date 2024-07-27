@@ -10,7 +10,7 @@
 #ifndef SERVER_MANAGER_MIDDLE_LAYER_ARTIFICIAL_INTELLIGENCE_FWD_H
 #define SERVER_MANAGER_MIDDLE_LAYER_ARTIFICIAL_INTELLIGENCE_FWD_H
 
-    namespace ServerManagerMiddleLayer
+namespace ServerManagerMiddleLayer
 {
     class ArtificialIntelligenceManager;
 }
