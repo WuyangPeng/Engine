@@ -39,6 +39,12 @@
     <None Include="Configuration\ServerManager\Renderer.json">
       <Filter>配置\ServerManager</Filter>
     </None>
+    <None Include="Configuration\ServerManager\Database.json">
+      <Filter>配置\ServerManager</Filter>
+    </None>
+    <None Include="Configuration\ServerManager\Network.json">
+      <Filter>配置\ServerManager</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\ServerManager\ServerManager\ServerManager.h">
