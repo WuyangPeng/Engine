@@ -27,9 +27,8 @@ Framework::EnvironmentDirectoryImpl::EnvironmentDirectoryImpl(const String& engi
 System::String Framework::EnvironmentDirectoryImpl::GenerateEngineDirectory(const String& engineEnvironment)
 {
     const CoreTools::EnvironmentVariable variable{ engineEnvironment };
-    auto engineInstallationDirectory = variable.GetVariable();
 
-    return engineInstallationDirectory;
+    return variable.GetVariable();
 }
 
 Framework::EngineDirectoryPath Framework::EnvironmentDirectoryImpl::GetEngineDirectoryPath(const String& engineDirectory)
@@ -75,10 +74,14 @@ System::String Framework::EnvironmentDirectoryImpl::GetEngineDirectory() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    if (!engineDirectory.empty())
-        return engineDirectory + DirectoryDefaultName::GetSuffix();
-    else
+    if (engineDirectory.empty())
+    {
         return DirectoryDefaultName::GetDefaultNullName();
+    }
+    else
+    {
+        return engineDirectory + DirectoryDefaultName::GetSuffix();
+    }
 }
 
 System::String Framework::EnvironmentDirectoryImpl::GetDirectory(UpperDirectory analysisDirectory) const

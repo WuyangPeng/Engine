@@ -44,6 +44,8 @@ namespace Framework
         void Analysis(RenderingDirectory renderingDirectory, EndianDirectory endianDirectory, AnalysisDirectory analysisDirectory);
 
         NODISCARD String GetDirectoryResult(RenderingDirectory renderingDirectory, EndianDirectory endianDirectory, AnalysisDirectory analysisDirectory) const;
+        NODISCARD String GetRenderingDirectoryResult(RenderingDirectory renderingDirectory, const String& endianDirectoryDescribe, const String& directory) const;
+        NODISCARD static String GetNoRenderingDirectoryResult(const String& endianDirectoryDescribe, const String& directory);
 
     private:
         EngineDirectoryResult result;

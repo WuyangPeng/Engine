@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.1.0 (2024/06/27 14:06)
+/// 版本：1.0.1.0 (2024/08/07 10:42)
 
 #include "EnvironmentDirectoryTesting.h"
 #include "Flags/DescriptionFlags.h"
@@ -15,27 +15,27 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 
-using namespace std::literals;
 using System::operator++;
+using namespace std::literals;
 
 Framework::EnvironmentDirectoryTesting::EnvironmentDirectoryTesting(const OStreamShared& stream)
     : ParentType{ stream },
       descriptionType{ { Description::Resource, SYSTEM_TEXT("Resource"s) },
-                    { Description::Configuration, SYSTEM_TEXT("Configuration"s) },
-                    { Description::Directory, SYSTEM_TEXT(""s) },
-                    { Description::LittleEndian, SYSTEM_TEXT("LittleEndian"s) },
-                    { Description::BigEndian, SYSTEM_TEXT("BigEndian"s) },
-                    { Description::Shader, SYSTEM_TEXT("Shader"s) },
-                    { Description::Scene, SYSTEM_TEXT("Scene"s) },
-                    { Description::Texture, SYSTEM_TEXT("Texture"s) },
-                    { Description::Vertex, SYSTEM_TEXT("Vertex"s) },
-                    { Description::Image, SYSTEM_TEXT("Image"s) },
-                    { Description::Default, SYSTEM_TEXT("Default"s) },
-                    { Description::OpenGL, SYSTEM_TEXT("OpenGL"s) },
-                    { Description::DirectX, SYSTEM_TEXT("DirectX"s) },
-                    { Description::Null, SYSTEM_TEXT(""s) },
-                    { Description::Framework, SYSTEM_TEXT("Framework"s) },
-                    { Description::EngineEnvironment, SYSTEM_TEXT("EngineTestingInclude"s) } },
+                       { Description::Configuration, SYSTEM_TEXT("Configuration"s) },
+                       { Description::Directory, SYSTEM_TEXT(""s) },
+                       { Description::LittleEndian, SYSTEM_TEXT("LittleEndian"s) },
+                       { Description::BigEndian, SYSTEM_TEXT("BigEndian"s) },
+                       { Description::Shader, SYSTEM_TEXT("Shader"s) },
+                       { Description::Scene, SYSTEM_TEXT("Scene"s) },
+                       { Description::Texture, SYSTEM_TEXT("Texture"s) },
+                       { Description::Vertex, SYSTEM_TEXT("Vertex"s) },
+                       { Description::Image, SYSTEM_TEXT("Image"s) },
+                       { Description::Default, SYSTEM_TEXT("Default"s) },
+                       { Description::OpenGL, SYSTEM_TEXT("OpenGL"s) },
+                       { Description::DirectX, SYSTEM_TEXT("DirectX"s) },
+                       { Description::Null, SYSTEM_TEXT(""s) },
+                       { Description::Framework, SYSTEM_TEXT("Framework"s) },
+                       { Description::EngineEnvironment, SYSTEM_TEXT("EngineTestingInclude"s) } },
       defaultEnvironmentDirectory{ GetDescription(Description::EngineEnvironment), SYSTEM_TEXT("Default"s) },
       fileEnvironmentDirectory{ GetDescription(Description::EngineEnvironment), SYSTEM_TEXT("FrameworkEngineDirectory"s) }
 {
@@ -47,67 +47,6 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, EnvironmentDirectoryTesting)
 void Framework::EnvironmentDirectoryTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
-}
-
-System::String Framework::EnvironmentDirectoryTesting::GetDescription(Description description, bool isFile) const
-{
-    if ((IsRendering(description) || IsLittleEndian(description)) && !isFile)
-    {
-        return GetDescription(Description::Null, false);
-    }
-
-    if (const auto iter = descriptionType.find(description);
-        iter != descriptionType.cend())
-    {
-        auto element = iter->second;
-        if (isFile && IsDirectory(description))
-        {
-            element = GetDescription(Description::Framework, false) + element;
-        }
-
-        return element;
-    }
-    else
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("未找到相关描述"s))
-    }
-}
-
-System::String Framework::EnvironmentDirectoryTesting::GetPrefix(Description description) const
-{
-    if (const auto iter = descriptionType.find(description);
-        iter != descriptionType.cend())
-    {
-        return iter->second;
-    }
-    else
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("未找到相关描述"s))
-    }
-}
-
-bool Framework::EnvironmentDirectoryTesting::IsDirectory(Description description) noexcept
-{
-    if (description == Description::Resource || description == Description::Configuration || IsRendering(description))
-        return true;
-    else
-        return false;
-}
-
-bool Framework::EnvironmentDirectoryTesting::IsRendering(Description description) noexcept
-{
-    if (description == Description::Default || description == Description::OpenGL || description == Description::DirectX)
-        return true;
-    else
-        return false;
-}
-
-bool Framework::EnvironmentDirectoryTesting::IsLittleEndian(Description description) noexcept
-{
-    if (description == Description::LittleEndian)
-        return true;
-    else
-        return false;
 }
 
 void Framework::EnvironmentDirectoryTesting::MainTest()
@@ -261,4 +200,65 @@ void Framework::EnvironmentDirectoryTesting::PathTest(bool isFile, RenderingAnal
     }
 
     ASSERT_EQUAL(path, directory + renderingDescription + endianDescription + analysisDescription);
+}
+
+System::String Framework::EnvironmentDirectoryTesting::GetDescription(Description description, bool isFile) const
+{
+    if ((IsRendering(description) || IsLittleEndian(description)) && !isFile)
+    {
+        return GetDescription(Description::Null, false);
+    }
+
+    if (const auto iter = descriptionType.find(description);
+        iter != descriptionType.cend())
+    {
+        auto element = iter->second;
+        if (isFile && IsDirectory(description))
+        {
+            element = GetDescription(Description::Framework, false) + element;
+        }
+
+        return element;
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到相关描述"s))
+    }
+}
+
+System::String Framework::EnvironmentDirectoryTesting::GetPrefix(Description description) const
+{
+    if (const auto iter = descriptionType.find(description);
+        iter != descriptionType.cend())
+    {
+        return iter->second;
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到相关描述"s))
+    }
+}
+
+bool Framework::EnvironmentDirectoryTesting::IsDirectory(Description description) noexcept
+{
+    if (description == Description::Resource || description == Description::Configuration || IsRendering(description))
+        return true;
+    else
+        return false;
+}
+
+bool Framework::EnvironmentDirectoryTesting::IsRendering(Description description) noexcept
+{
+    if (description == Description::Default || description == Description::OpenGL || description == Description::DirectX)
+        return true;
+    else
+        return false;
+}
+
+bool Framework::EnvironmentDirectoryTesting::IsLittleEndian(Description description) noexcept
+{
+    if (description == Description::LittleEndian)
+        return true;
+    else
+        return false;
 }
