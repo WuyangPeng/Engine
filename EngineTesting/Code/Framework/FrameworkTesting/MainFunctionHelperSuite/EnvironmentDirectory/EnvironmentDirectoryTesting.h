@@ -57,8 +57,11 @@ namespace Framework
         using DescriptionType = std::map<Description, String>;
 
     private:
-        NODISCARD System::String GetDescription(Description description, bool isDirectoryFile = false) const;
-        NODISCARD System::String GetPrefix(Description description) const;
+        NODISCARD String GetDescription(Description description, bool isDirectoryFile = false) const;
+        NODISCARD String GetRenderingDescription(Description renderingDirectory) const;
+        NODISCARD String GetEndianDescription(Description endianDirectory, Description renderingDirectory) const;
+        NODISCARD String GetAnalysisDescription(Description renderingAnalysisDirectory, Description renderingDirectory) const;
+        NODISCARD String GetPrefix(Description description) const;
         NODISCARD static bool IsDirectory(Description description) noexcept;
         NODISCARD static bool IsRendering(Description description) noexcept;
         NODISCARD static bool IsLittleEndian(Description description) noexcept;

@@ -16,26 +16,30 @@
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 
 using System::operator++;
-using namespace std::literals;
+
+namespace
+{
+    constexpr auto separate = SYSTEM_TEXT("/");
+}
 
 Framework::EnvironmentDirectoryTesting::EnvironmentDirectoryTesting(const OStreamShared& stream, const String& engineDirectory, bool isFile)
     : ParentType{ stream },
-      descriptionType{ { Description::Resource, SYSTEM_TEXT("Resource"s) },
-                       { Description::Configuration, SYSTEM_TEXT("Configuration"s) },
-                       { Description::Directory, SYSTEM_TEXT(""s) },
-                       { Description::LittleEndian, SYSTEM_TEXT("LittleEndian"s) },
-                       { Description::BigEndian, SYSTEM_TEXT("BigEndian"s) },
-                       { Description::Shader, SYSTEM_TEXT("Shader"s) },
-                       { Description::Scene, SYSTEM_TEXT("Scene"s) },
-                       { Description::Texture, SYSTEM_TEXT("Texture"s) },
-                       { Description::Vertex, SYSTEM_TEXT("Vertex"s) },
-                       { Description::Image, SYSTEM_TEXT("Image"s) },
-                       { Description::Default, SYSTEM_TEXT("Default"s) },
-                       { Description::OpenGL, SYSTEM_TEXT("OpenGL"s) },
-                       { Description::DirectX, SYSTEM_TEXT("DirectX"s) },
-                       { Description::Null, SYSTEM_TEXT(""s) },
-                       { Description::Framework, SYSTEM_TEXT("Framework"s) },
-                       { Description::EngineEnvironment, SYSTEM_TEXT("EngineTestingInclude"s) } },
+      descriptionType{ { Description::Resource, SYSTEM_TEXT("Resource") },
+                       { Description::Configuration, SYSTEM_TEXT("Configuration") },
+                       { Description::Directory, SYSTEM_TEXT("") },
+                       { Description::LittleEndian, SYSTEM_TEXT("LittleEndian") },
+                       { Description::BigEndian, SYSTEM_TEXT("BigEndian") },
+                       { Description::Shader, SYSTEM_TEXT("Shader") },
+                       { Description::Scene, SYSTEM_TEXT("Scene") },
+                       { Description::Texture, SYSTEM_TEXT("Texture") },
+                       { Description::Vertex, SYSTEM_TEXT("Vertex") },
+                       { Description::Image, SYSTEM_TEXT("Image") },
+                       { Description::Default, SYSTEM_TEXT("Default") },
+                       { Description::OpenGL, SYSTEM_TEXT("OpenGL") },
+                       { Description::DirectX, SYSTEM_TEXT("DirectX") },
+                       { Description::Null, SYSTEM_TEXT("") },
+                       { Description::Framework, SYSTEM_TEXT("Framework") },
+                       { Description::EngineEnvironment, SYSTEM_TEXT("EngineTestingInclude") } },
       environmentDirectory{ GetDescription(Description::EngineEnvironment), engineDirectory },
       isFile{ isFile }
 {
@@ -93,10 +97,9 @@ void Framework::EnvironmentDirectoryTesting::DirectoryTest(UpperDirectory upperD
 {
     const auto directory = environmentDirectory.GetDirectory(upperDirectory);
     const auto description = GetDescription(System::EnumCastUnderlying<Description>(upperDirectory), isFile);
-
     const auto engineDirectory = environmentDirectory.GetEngineDirectory();
 
-    ASSERT_EQUAL(directory, engineDirectory + description + SYSTEM_TEXT("/"s));
+    ASSERT_EQUAL(directory, engineDirectory + description + separate);
 }
 
 void Framework::EnvironmentDirectoryTesting::DefaultPathTest(RenderingAnalysisDirectory renderingAnalysisDirectory)
@@ -142,38 +145,58 @@ void Framework::EnvironmentDirectoryTesting::BigEndianDirectXTest(RenderingAnaly
 void Framework::EnvironmentDirectoryTesting::PathTest(RenderingAnalysisDirectory renderingAnalysisDirectory, EndianDirectory endianDirectory, RenderingDirectory renderingDirectory)
 {
     const auto path = environmentDirectory.GetPath(endianDirectory, renderingDirectory, renderingAnalysisDirectory);
-
     const auto directory = environmentDirectory.GetDirectory(UpperDirectory::Resource);
+    const auto renderingDescription = GetRenderingDescription(System::EnumCastUnderlying<Description>(renderingDirectory));
+    const auto endianDescription = GetEndianDescription(System::EnumCastUnderlying<Description>(endianDirectory), System::EnumCastUnderlying<Description>(renderingDirectory));
+    const auto analysisDescription = GetAnalysisDescription(System::EnumCastUnderlying<Description>(renderingAnalysisDirectory), System::EnumCastUnderlying<Description>(renderingDirectory));
 
-    auto renderingDescription = GetDescription(System::EnumCastUnderlying<Description>(renderingDirectory), isFile);
+    ASSERT_EQUAL(path, directory + renderingDescription + endianDescription + analysisDescription);
+}
+
+System::String Framework::EnvironmentDirectoryTesting::GetRenderingDescription(Description renderingDirectory) const
+{
+    auto renderingDescription = GetDescription(renderingDirectory, isFile);
+
     if (!renderingDescription.empty())
     {
-        renderingDescription += SYSTEM_TEXT("/"s);
+        renderingDescription += separate;
     }
 
-    auto endianDescription = GetDescription(System::EnumCastUnderlying<Description>(endianDirectory), isFile);
+    return renderingDescription;
+}
+
+System::String Framework::EnvironmentDirectoryTesting::GetEndianDescription(Description endianDirectory, Description renderingDirectory) const
+{
+    auto endianDescription = GetDescription(endianDirectory, isFile);
+
     if (isFile)
     {
-        endianDescription = GetPrefix(System::EnumCastUnderlying<Description>(renderingDirectory)) + endianDescription;
+        endianDescription = GetPrefix(renderingDirectory) + endianDescription;
     }
 
     if (!endianDescription.empty())
     {
-        endianDescription += SYSTEM_TEXT("/"s);
+        endianDescription += separate;
     }
 
-    auto analysisDescription = GetDescription(System::EnumCastUnderlying<Description>(renderingAnalysisDirectory), isFile);
-    if (isFile && renderingAnalysisDirectory != RenderingAnalysisDirectory::Directory)
+    return endianDescription;
+}
+
+System::String Framework::EnvironmentDirectoryTesting::GetAnalysisDescription(Description renderingAnalysisDirectory, Description renderingDirectory) const
+{
+    auto analysisDescription = GetDescription(renderingAnalysisDirectory, isFile);
+
+    if (isFile && renderingAnalysisDirectory != Description::Directory)
     {
-        analysisDescription = GetPrefix(System::EnumCastUnderlying<Description>(renderingDirectory)) + analysisDescription;
+        analysisDescription = GetPrefix(renderingDirectory) + analysisDescription;
     }
 
     if (!analysisDescription.empty())
     {
-        analysisDescription += SYSTEM_TEXT("/"s);
+        analysisDescription += separate;
     }
 
-    ASSERT_EQUAL(path, directory + renderingDescription + endianDescription + analysisDescription);
+    return analysisDescription;
 }
 
 System::String Framework::EnvironmentDirectoryTesting::GetDescription(Description description, bool isDirectoryFile) const
@@ -186,10 +209,10 @@ System::String Framework::EnvironmentDirectoryTesting::GetDescription(Descriptio
     if (const auto iter = descriptionType.find(description);
         iter != descriptionType.cend())
     {
-        auto element = iter->second;
+        const auto& element = iter->second;
         if (isDirectoryFile && IsDirectory(description))
         {
-            element = GetDescription(Description::Framework, false) + element;
+            return GetDescription(Description::Framework, false) + element;
         }
 
         return element;
