@@ -53,6 +53,7 @@ void Framework::EnvironmentDirectoryTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(DefaultValueTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FileValueTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ExecutableConfigurationDirectoryTest);
 }
 
 void Framework::EnvironmentDirectoryTesting::DefaultValueTest()
@@ -261,4 +262,8 @@ bool Framework::EnvironmentDirectoryTesting::IsLittleEndian(Description descript
         return true;
     else
         return false;
+}
+
+void Framework::EnvironmentDirectoryTesting::ExecutableConfigurationDirectoryTest()
+{
 }

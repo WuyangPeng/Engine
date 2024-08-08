@@ -42,6 +42,7 @@ namespace Framework
 
         void EngineEnvironmentTest(const TestingType& environmentDirectory);
         void EngineDirectoryTest(const TestingType& environmentDirectory);
+
         void DirectoryTest(bool isFile, UpperDirectory upperDirectory);
         void DefaultPathTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory);
         void LittleEndianDefaultTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory);
@@ -52,6 +53,8 @@ namespace Framework
         void BigEndianDirectXTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory);
 
         void PathTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory, EndianDirectory endianDirectory, RenderingDirectory renderingDirectory);
+
+        void ExecutableConfigurationDirectoryTest();
 
     private:
         using DescriptionType = std::map<Description, String>;
