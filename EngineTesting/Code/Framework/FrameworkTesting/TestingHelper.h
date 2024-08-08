@@ -20,6 +20,8 @@ namespace Framework
         using ClassType = TestingHelper;
         using ParentType = CMainFunctionTestingHelper;
 
+        using Suite = CoreTools::Suite;
+
     public:
         TestingHelper(int argc, char** argv);
 
@@ -42,6 +44,8 @@ namespace Framework
         void AddMacintoshFrameSuite();
         void AddConsoleFrameSuite();
         void AddProjectSuite();
+
+        NODISCARD Suite GetEnvironmentDirectorySuite();
     };
 }
 

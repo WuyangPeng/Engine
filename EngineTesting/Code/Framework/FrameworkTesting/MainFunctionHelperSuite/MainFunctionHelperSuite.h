@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.1.0 (2024/08/07 10:42)
+/// 版本：1.0.1.0 (2024/08/08 22:13)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_SUITE_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_SUITE_H
@@ -13,7 +13,8 @@
 #include "AndroidMainFunctionHelperTesting.h"
 #include "ConsoleMainFunctionHelperBaseTesting.h"
 #include "ConsoleMainFunctionHelperTesting.h"
-#include "EnvironmentDirectoryTesting.h"
+#include "EnvironmentDirectory/DefaultEnvironmentDirectoryTesting.h"
+#include "EnvironmentDirectory/FileEnvironmentDirectoryTesting.h"
 #include "MacintoshMainFunctionHelperTesting.h"
 #include "MainFunctionHelperBaseTesting.h"
 #include "OpenGLGlutMainFunctionHelperTesting.h"

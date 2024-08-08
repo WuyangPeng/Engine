@@ -136,6 +136,12 @@
     <Filter Include="配置\FrameworkTesting">
       <UniqueIdentifier>{38a0ce82-d79b-4b80-943a-8c11e01445ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainFunctionHelperSuite 头文件\EnvironmentDirectory">
+      <UniqueIdentifier>{9a399370-b43a-41a5-90b9-44f7e10a33be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainFunctionHelperSuite 源文件\EnvironmentDirectory">
+      <UniqueIdentifier>{6b5bc17a-1994-4156-826c-ee911daab8d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json">
@@ -240,9 +246,6 @@
       <Filter>MacintoshFrameSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\ConsoleMainFunctionHelperTesting.h">
-      <Filter>MainFunctionHelperSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\EnvironmentDirectoryTesting.h">
       <Filter>MainFunctionHelperSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\MainFunctionHelperBaseTesting.h">
@@ -560,6 +563,15 @@
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\Detail\SystemProjectManagerMock.h">
       <Filter>ProjectSuite 头文件\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\EnvironmentDirectory\EnvironmentDirectoryTesting.h">
+      <Filter>MainFunctionHelperSuite 头文件\EnvironmentDirectory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\EnvironmentDirectory\DefaultEnvironmentDirectoryTesting.h">
+      <Filter>MainFunctionHelperSuite 头文件\EnvironmentDirectory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\EnvironmentDirectory\FileEnvironmentDirectoryTesting.h">
+      <Filter>MainFunctionHelperSuite 头文件\EnvironmentDirectory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\TestingHelper.cpp">
@@ -620,9 +632,6 @@
       <Filter>MainFunctionHelperSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\ConsoleMainFunctionHelperTesting.cpp">
-      <Filter>MainFunctionHelperSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\EnvironmentDirectoryTesting.cpp">
       <Filter>MainFunctionHelperSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\MainFunctionHelperBaseTesting.cpp">
@@ -897,6 +906,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\Detail\SystemProjectManagerMock.cpp">
       <Filter>ProjectSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\EnvironmentDirectory\DefaultEnvironmentDirectoryTesting.cpp">
+      <Filter>MainFunctionHelperSuite 源文件\EnvironmentDirectory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\EnvironmentDirectory\EnvironmentDirectoryTesting.cpp">
+      <Filter>MainFunctionHelperSuite 源文件\EnvironmentDirectory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\EnvironmentDirectory\FileEnvironmentDirectoryTesting.cpp">
+      <Filter>MainFunctionHelperSuite 源文件\EnvironmentDirectory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

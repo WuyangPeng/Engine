@@ -59,7 +59,7 @@ void Framework::TestingHelper::AddMainFunctionHelperSuite()
 {
     auto mainFunctionHelperSuite = GenerateSuite("主函数帮助");
 
-    ADD_TEST(mainFunctionHelperSuite, EnvironmentDirectoryTesting);
+    mainFunctionHelperSuite.AddSuite(GetEnvironmentDirectorySuite());
     ADD_TEST(mainFunctionHelperSuite, MainFunctionHelperBaseTesting);
     ADD_TEST(mainFunctionHelperSuite, ConsoleMainFunctionHelperBaseTesting);
     ADD_TEST(mainFunctionHelperSuite, ConsoleMainFunctionHelperTesting);
@@ -69,6 +69,16 @@ void Framework::TestingHelper::AddMainFunctionHelperSuite()
     ADD_TEST(mainFunctionHelperSuite, MacintoshMainFunctionHelperTesting);
 
     AddSuite(mainFunctionHelperSuite);
+}
+
+Framework::TestingHelper::Suite Framework::TestingHelper::GetEnvironmentDirectorySuite()
+{
+    auto environmentDirectorySuite = GenerateSuite("环境目录");
+
+    ADD_TEST(environmentDirectorySuite, DefaultEnvironmentDirectoryTesting);
+    ADD_TEST(environmentDirectorySuite, FileEnvironmentDirectoryTesting);
+
+    return environmentDirectorySuite;
 }
 
 void Framework::TestingHelper::AddWindowCreateSuite()

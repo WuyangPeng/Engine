@@ -5,10 +5,10 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.1.0 (2024/08/07 10:42)
+/// 版本：1.0.1.0 (2024/08/08 22:38)
 
 #include "EnvironmentDirectoryTesting.h"
-#include "Flags/DescriptionFlags.h"
+#include "System/DynamicLink/LibraryTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -18,7 +18,7 @@
 using System::operator++;
 using namespace std::literals;
 
-Framework::EnvironmentDirectoryTesting::EnvironmentDirectoryTesting(const OStreamShared& stream)
+Framework::EnvironmentDirectoryTesting::EnvironmentDirectoryTesting(const OStreamShared& stream, const String& engineDirectory, bool isFile)
     : ParentType{ stream },
       descriptionType{ { Description::Resource, SYSTEM_TEXT("Resource"s) },
                        { Description::Configuration, SYSTEM_TEXT("Configuration"s) },
@@ -36,8 +36,8 @@ Framework::EnvironmentDirectoryTesting::EnvironmentDirectoryTesting(const OStrea
                        { Description::Null, SYSTEM_TEXT(""s) },
                        { Description::Framework, SYSTEM_TEXT("Framework"s) },
                        { Description::EngineEnvironment, SYSTEM_TEXT("EngineTestingInclude"s) } },
-      defaultEnvironmentDirectory{ GetDescription(Description::EngineEnvironment), SYSTEM_TEXT("Default"s) },
-      fileEnvironmentDirectory{ GetDescription(Description::EngineEnvironment), SYSTEM_TEXT("FrameworkEngineDirectory"s) }
+      environmentDirectory{ GetDescription(Description::EngineEnvironment), engineDirectory },
+      isFile{ isFile }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -51,71 +51,46 @@ void Framework::EnvironmentDirectoryTesting::DoRunUnitTest()
 
 void Framework::EnvironmentDirectoryTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(DefaultValueTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(FileValueTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ValueTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ExecutableConfigurationDirectoryTest);
 }
 
-void Framework::EnvironmentDirectoryTesting::DefaultValueTest()
+void Framework::EnvironmentDirectoryTesting::ValueTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_1(EngineEnvironmentTest, defaultEnvironmentDirectory);
-    ASSERT_NOT_THROW_EXCEPTION_1(EngineDirectoryTest, defaultEnvironmentDirectory);
+    ASSERT_NOT_THROW_EXCEPTION_0(EngineEnvironmentTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(EngineDirectoryTest);
 
-    for (auto i = UpperDirectory::Resource; i <= UpperDirectory::Configuration; ++i)
+    for (auto upperDirectory = UpperDirectory::Resource; upperDirectory <= UpperDirectory::Configuration; ++upperDirectory)
     {
-        ASSERT_NOT_THROW_EXCEPTION_2(DirectoryTest, false, i);
+        ASSERT_NOT_THROW_EXCEPTION_1(DirectoryTest, upperDirectory);
     }
 
-    for (auto i = RenderingAnalysisDirectory::Directory; i <= RenderingAnalysisDirectory::Image; ++i)
+    for (auto renderingAnalysisDirectory = RenderingAnalysisDirectory::Directory; renderingAnalysisDirectory <= RenderingAnalysisDirectory::Image; ++renderingAnalysisDirectory)
     {
-        ASSERT_NOT_THROW_EXCEPTION_2(DefaultPathTest, false, i);
-        ASSERT_NOT_THROW_EXCEPTION_2(LittleEndianDefaultTest, false, i);
-        ASSERT_NOT_THROW_EXCEPTION_2(LittleEndianOpenGLTest, false, i);
-        ASSERT_NOT_THROW_EXCEPTION_2(LittleEndianDirectXTest, false, i);
-        ASSERT_NOT_THROW_EXCEPTION_2(BigEndianDefaultTest, false, i);
-        ASSERT_NOT_THROW_EXCEPTION_2(BigEndianOpenGLTest, false, i);
-        ASSERT_NOT_THROW_EXCEPTION_2(BigEndianDirectXTest, false, i);
+        ASSERT_NOT_THROW_EXCEPTION_1(DefaultPathTest, renderingAnalysisDirectory);
+        ASSERT_NOT_THROW_EXCEPTION_1(LittleEndianDefaultTest, renderingAnalysisDirectory);
+        ASSERT_NOT_THROW_EXCEPTION_1(LittleEndianOpenGLTest, renderingAnalysisDirectory);
+        ASSERT_NOT_THROW_EXCEPTION_1(LittleEndianDirectXTest, renderingAnalysisDirectory);
+        ASSERT_NOT_THROW_EXCEPTION_1(BigEndianDefaultTest, renderingAnalysisDirectory);
+        ASSERT_NOT_THROW_EXCEPTION_1(BigEndianOpenGLTest, renderingAnalysisDirectory);
+        ASSERT_NOT_THROW_EXCEPTION_1(BigEndianDirectXTest, renderingAnalysisDirectory);
     }
 }
 
-void Framework::EnvironmentDirectoryTesting::FileValueTest()
-{
-    ASSERT_NOT_THROW_EXCEPTION_1(EngineEnvironmentTest, fileEnvironmentDirectory);
-    ASSERT_NOT_THROW_EXCEPTION_1(EngineDirectoryTest, fileEnvironmentDirectory);
-
-    for (auto i = UpperDirectory::Resource; i <= UpperDirectory::Configuration; ++i)
-    {
-        ASSERT_NOT_THROW_EXCEPTION_2(DirectoryTest, true, i);
-    }
-
-    for (auto i = RenderingAnalysisDirectory::Directory; i <= RenderingAnalysisDirectory::Image; ++i)
-    {
-        ASSERT_NOT_THROW_EXCEPTION_2(DefaultPathTest, true, i);
-        ASSERT_NOT_THROW_EXCEPTION_2(LittleEndianDefaultTest, true, i);
-        ASSERT_NOT_THROW_EXCEPTION_2(LittleEndianOpenGLTest, true, i);
-        ASSERT_NOT_THROW_EXCEPTION_2(LittleEndianDirectXTest, true, i);
-        ASSERT_NOT_THROW_EXCEPTION_2(BigEndianDefaultTest, true, i);
-        ASSERT_NOT_THROW_EXCEPTION_2(BigEndianOpenGLTest, true, i);
-        ASSERT_NOT_THROW_EXCEPTION_2(BigEndianDirectXTest, true, i);
-    }
-}
-
-void Framework::EnvironmentDirectoryTesting::EngineEnvironmentTest(const TestingType& environmentDirectory)
+void Framework::EnvironmentDirectoryTesting::EngineEnvironmentTest()
 {
     ASSERT_EQUAL(GetDescription(Description::EngineEnvironment), environmentDirectory.GetEngineEnvironment());
 }
 
-void Framework::EnvironmentDirectoryTesting::EngineDirectoryTest(const TestingType& environmentDirectory)
+void Framework::EnvironmentDirectoryTesting::EngineDirectoryTest()
 {
     const auto engineDirectory = environmentDirectory.GetEngineDirectory();
 
     ASSERT_FALSE(engineDirectory.empty());
 }
 
-void Framework::EnvironmentDirectoryTesting::DirectoryTest(bool isFile, UpperDirectory upperDirectory)
+void Framework::EnvironmentDirectoryTesting::DirectoryTest(UpperDirectory upperDirectory)
 {
-    const auto& environmentDirectory = isFile ? fileEnvironmentDirectory : defaultEnvironmentDirectory;
-
     const auto directory = environmentDirectory.GetDirectory(upperDirectory);
     const auto description = GetDescription(System::EnumCastUnderlying<Description>(upperDirectory), isFile);
 
@@ -124,10 +99,8 @@ void Framework::EnvironmentDirectoryTesting::DirectoryTest(bool isFile, UpperDir
     ASSERT_EQUAL(directory, engineDirectory + description + SYSTEM_TEXT("/"s));
 }
 
-void Framework::EnvironmentDirectoryTesting::DefaultPathTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory)
+void Framework::EnvironmentDirectoryTesting::DefaultPathTest(RenderingAnalysisDirectory renderingAnalysisDirectory)
 {
-    const auto& environmentDirectory = isFile ? fileEnvironmentDirectory : defaultEnvironmentDirectory;
-
     const auto path0 = environmentDirectory.GetPath(renderingAnalysisDirectory);
     const auto path1 = environmentDirectory.GetPath(RenderingDirectory::Default, renderingAnalysisDirectory);
     const auto path2 = environmentDirectory.GetPath(EndianDirectory::LittleEndian, RenderingDirectory::Default, renderingAnalysisDirectory);
@@ -136,40 +109,38 @@ void Framework::EnvironmentDirectoryTesting::DefaultPathTest(bool isFile, Render
     ASSERT_EQUAL(path1, path2);
 }
 
-void Framework::EnvironmentDirectoryTesting::LittleEndianDefaultTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory)
+void Framework::EnvironmentDirectoryTesting::LittleEndianDefaultTest(RenderingAnalysisDirectory renderingAnalysisDirectory)
 {
-    PathTest(isFile, renderingAnalysisDirectory, EndianDirectory::LittleEndian, RenderingDirectory::Default);
+    PathTest(renderingAnalysisDirectory, EndianDirectory::LittleEndian, RenderingDirectory::Default);
 }
 
-void Framework::EnvironmentDirectoryTesting::LittleEndianOpenGLTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory)
+void Framework::EnvironmentDirectoryTesting::LittleEndianOpenGLTest(RenderingAnalysisDirectory renderingAnalysisDirectory)
 {
-    PathTest(isFile, renderingAnalysisDirectory, EndianDirectory::LittleEndian, RenderingDirectory::OpenGL);
+    PathTest(renderingAnalysisDirectory, EndianDirectory::LittleEndian, RenderingDirectory::OpenGL);
 }
 
-void Framework::EnvironmentDirectoryTesting::LittleEndianDirectXTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory)
+void Framework::EnvironmentDirectoryTesting::LittleEndianDirectXTest(RenderingAnalysisDirectory renderingAnalysisDirectory)
 {
-    PathTest(isFile, renderingAnalysisDirectory, EndianDirectory::LittleEndian, RenderingDirectory::DirectX);
+    PathTest(renderingAnalysisDirectory, EndianDirectory::LittleEndian, RenderingDirectory::DirectX);
 }
 
-void Framework::EnvironmentDirectoryTesting::BigEndianDefaultTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory)
+void Framework::EnvironmentDirectoryTesting::BigEndianDefaultTest(RenderingAnalysisDirectory renderingAnalysisDirectory)
 {
-    PathTest(isFile, renderingAnalysisDirectory, EndianDirectory::BigEndian, RenderingDirectory::Default);
+    PathTest(renderingAnalysisDirectory, EndianDirectory::BigEndian, RenderingDirectory::Default);
 }
 
-void Framework::EnvironmentDirectoryTesting::BigEndianOpenGLTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory)
+void Framework::EnvironmentDirectoryTesting::BigEndianOpenGLTest(RenderingAnalysisDirectory renderingAnalysisDirectory)
 {
-    PathTest(isFile, renderingAnalysisDirectory, EndianDirectory::BigEndian, RenderingDirectory::OpenGL);
+    PathTest(renderingAnalysisDirectory, EndianDirectory::BigEndian, RenderingDirectory::OpenGL);
 }
 
-void Framework::EnvironmentDirectoryTesting::BigEndianDirectXTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory)
+void Framework::EnvironmentDirectoryTesting::BigEndianDirectXTest(RenderingAnalysisDirectory renderingAnalysisDirectory)
 {
-    PathTest(isFile, renderingAnalysisDirectory, EndianDirectory::BigEndian, RenderingDirectory::DirectX);
+    PathTest(renderingAnalysisDirectory, EndianDirectory::BigEndian, RenderingDirectory::DirectX);
 }
 
-void Framework::EnvironmentDirectoryTesting::PathTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory, EndianDirectory endianDirectory, RenderingDirectory renderingDirectory)
+void Framework::EnvironmentDirectoryTesting::PathTest(RenderingAnalysisDirectory renderingAnalysisDirectory, EndianDirectory endianDirectory, RenderingDirectory renderingDirectory)
 {
-    const auto& environmentDirectory = isFile ? fileEnvironmentDirectory : defaultEnvironmentDirectory;
-
     const auto path = environmentDirectory.GetPath(endianDirectory, renderingDirectory, renderingAnalysisDirectory);
 
     const auto directory = environmentDirectory.GetDirectory(UpperDirectory::Resource);
@@ -185,6 +156,7 @@ void Framework::EnvironmentDirectoryTesting::PathTest(bool isFile, RenderingAnal
     {
         endianDescription = GetPrefix(System::EnumCastUnderlying<Description>(renderingDirectory)) + endianDescription;
     }
+
     if (!endianDescription.empty())
     {
         endianDescription += SYSTEM_TEXT("/"s);
@@ -195,6 +167,7 @@ void Framework::EnvironmentDirectoryTesting::PathTest(bool isFile, RenderingAnal
     {
         analysisDescription = GetPrefix(System::EnumCastUnderlying<Description>(renderingDirectory)) + analysisDescription;
     }
+
     if (!analysisDescription.empty())
     {
         analysisDescription += SYSTEM_TEXT("/"s);
@@ -203,9 +176,9 @@ void Framework::EnvironmentDirectoryTesting::PathTest(bool isFile, RenderingAnal
     ASSERT_EQUAL(path, directory + renderingDescription + endianDescription + analysisDescription);
 }
 
-System::String Framework::EnvironmentDirectoryTesting::GetDescription(Description description, bool isFile) const
+System::String Framework::EnvironmentDirectoryTesting::GetDescription(Description description, bool isDirectoryFile) const
 {
-    if ((IsRendering(description) || IsLittleEndian(description)) && !isFile)
+    if ((IsRendering(description) || IsLittleEndian(description)) && !isDirectoryFile)
     {
         return GetDescription(Description::Null, false);
     }
@@ -214,7 +187,7 @@ System::String Framework::EnvironmentDirectoryTesting::GetDescription(Descriptio
         iter != descriptionType.cend())
     {
         auto element = iter->second;
-        if (isFile && IsDirectory(description))
+        if (isDirectoryFile && IsDirectory(description))
         {
             element = GetDescription(Description::Framework, false) + element;
         }
@@ -266,4 +239,9 @@ bool Framework::EnvironmentDirectoryTesting::IsLittleEndian(Description descript
 
 void Framework::EnvironmentDirectoryTesting::ExecutableConfigurationDirectoryTest()
 {
+    const auto executableConfigurationDirectory = environmentDirectory.GetExecutableConfigurationDirectory();
+
+    const auto executableNameRemoveSuffix = CoreTools::StringConversion::MultiByteConversionStandard(System::GetExecutableNameRemoveSuffix()) + SYSTEM_TEXT("/");
+
+    ASSERT_EQUAL(executableConfigurationDirectory, environmentDirectory.GetDirectory(UpperDirectory::Configuration) + executableNameRemoveSuffix);
 }
