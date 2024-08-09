@@ -13,3 +13,4 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, JsonBase)
+CORE_TOOLS_RTTI_BASE_DEFINE(CoreTools, JsonBase)

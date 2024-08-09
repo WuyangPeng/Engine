@@ -30,6 +30,9 @@ namespace CoreTools
         NON_COPY_TYPE_DECLARE(JsonAnalysisManager);
         using ParentType = Singleton<JsonAnalysisManager>;
 
+        using FactoryFunction = JsonBase::FactoryFunction;
+        using JsonBaseSharedPtr = JsonBase::JsonBaseSharedPtr;
+
     private:
         enum class JsonAnalysisManagerCreate
         {
@@ -46,13 +49,11 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-    public:
-        using FactoryFunction = JsonBase::FactoryFunction;
-
-    public:
         NODISCARD FactoryFunction Find(const std::string& name) const;
         void Insert(const std::string& name, FactoryFunction function);
         void Remove(const std::string& name);
+
+        NODISCARD JsonBaseSharedPtr Create(const std::string& fileName, const std::string& rttiName) const;
 
     private:
         using JsonAnalysisManagerUniquePtr = std::unique_ptr<JsonAnalysisManager>;
@@ -62,5 +63,7 @@ namespace CoreTools
         PackageType impl;
     };
 }
+
+#define JSON_ANALYSIS_MANAGER_SINGLETON CoreTools::JsonAnalysisManager::GetSingleton()
 
 #endif  // CORE_TOOLS_TEXT_PARSING_JSON_JSON_ANALYSIS_MANAGER_H

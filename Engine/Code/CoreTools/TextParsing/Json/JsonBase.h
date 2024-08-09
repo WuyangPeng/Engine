@@ -14,6 +14,7 @@
 
 #include "System/Helper/PragmaWarning/PropertyTree.h"
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Helper/RttiMacro.h"
 
 namespace CoreTools
 {
@@ -38,6 +39,8 @@ namespace CoreTools
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         virtual void Load(BasicTree& mainTree) = 0;
+
+        CORE_TOOLS_RTTI_DECLARE;
     };
 }
 

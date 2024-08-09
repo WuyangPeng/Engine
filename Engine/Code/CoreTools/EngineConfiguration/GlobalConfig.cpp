@@ -14,6 +14,7 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/TextParsing/Json/JsonAnalysisManager.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, GlobalConfig)
 
@@ -26,6 +27,7 @@ CoreTools::GlobalConfig::GlobalConfig(DisableNotThrow disableNotThrow)
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, GlobalConfig)
+CORE_TOOLS_RTTI_DEFINE(CoreTools, GlobalConfig)
 
 System::String CoreTools::GlobalConfig::GetDescribe() const
 {
@@ -129,4 +131,11 @@ CoreTools::JsonBase::JsonBaseSharedPtr CoreTools::GlobalConfig::Factory(BasicTre
     globalConfig->Load(mainTree);
 
     return globalConfig;
+}
+
+bool CoreTools::GlobalConfig::RegisterFactory()
+{
+    JSON_ANALYSIS_MANAGER_SINGLETON.Insert(GetCurrentRttiType().GetName(), &ClassType::Factory);
+
+    return true;
 }

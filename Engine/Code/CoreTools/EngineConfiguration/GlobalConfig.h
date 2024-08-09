@@ -24,6 +24,7 @@ namespace CoreTools
     {
     public:
         COPY_UNSHARED_TYPE_DECLARE(GlobalConfig);
+        using ParentType = JsonBase;
 
     public:
         explicit GlobalConfig(DisableNotThrow disableNotThrow);
@@ -48,9 +49,20 @@ namespace CoreTools
 
         NODISCARD static JsonBaseSharedPtr Factory(BasicTree& mainTree);
 
+        NODISCARD static bool RegisterFactory();
+
+        CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
+
     private:
         PackageType impl;
     };
+
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+
+    static auto gGlobalConfigRegisterFactory = GlobalConfig::RegisterFactory();
+
+#include SYSTEM_WARNING_POP
 }
 
 #endif  // CORE_TOOLS_ENGINE_CONFIGURATION_GLOBAL_CONFIG_H

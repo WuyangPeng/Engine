@@ -13,6 +13,7 @@
 #include "Detail/JsonAnalysisManagerImpl.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 SINGLETON_GET_PTR_DEFINE(CoreTools, JsonAnalysisManager);
 
@@ -59,4 +60,22 @@ void CoreTools::JsonAnalysisManager::Remove(const std::string& name)
     SINGLETON_MUTEX_ENTER_MEMBER;
 
     return impl->Remove(name);
+}
+
+CoreTools::JsonAnalysisManager::JsonBaseSharedPtr CoreTools::JsonAnalysisManager::Create(const std::string& fileName, const std::string& rttiName) const
+{
+    SINGLETON_MUTEX_ENTER_MEMBER;
+
+    JsonBase::BasicTree mainTree{};
+    read_json(fileName, mainTree);
+
+    if (const auto factoryFunction = Find(rttiName);
+        factoryFunction != nullptr)
+    {
+        return factoryFunction(mainTree);
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("找不到工厂函数。"))
+    }
 }
