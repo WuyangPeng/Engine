@@ -425,6 +425,7 @@
 
 对引擎配置模块的单元测试，包括：
 （1） 字符替换：StringReplacingTesting。
+（2） 引擎配置：GlobalConfigTesting。
 
 ----------------------------
 24.	 PropertiesSuite（属性）

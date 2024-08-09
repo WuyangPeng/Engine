@@ -579,6 +579,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetJsonSuite()
     auto jsonSuite = GenerateSuite("json");
 
     ADD_TEST(jsonSuite, JsonBaseTesting);
+    ADD_TEST(jsonSuite, JsonAnalysisManagerTesting);
 
     return jsonSuite;
 }
@@ -794,6 +795,7 @@ void CoreTools::TestingHelper::AddEngineConfigurationSuite()
     auto engineConfigurationSuite = GenerateSuite("“˝«Ê≈‰÷√");
 
     ADD_TEST(engineConfigurationSuite, StringReplacingTesting);
+    ADD_TEST(engineConfigurationSuite, GlobalConfigTesting);
 
     AddSuite(engineConfigurationSuite);
 }

@@ -1983,6 +1983,12 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\JsonBaseTesting.h">
       <Filter>TextParsingSuite 头文件\Json</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\JsonAnalysisManagerTesting.h">
+      <Filter>TextParsingSuite 头文件\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\GlobalConfigTesting.h">
+      <Filter>EngineConfigurationSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp">
@@ -3256,6 +3262,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\JsonBaseTesting.cpp">
       <Filter>TextParsingSuite 源文件\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\JsonAnalysisManagerTesting.cpp">
+      <Filter>TextParsingSuite 源文件\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\GlobalConfigTesting.cpp">
+      <Filter>EngineConfigurationSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
