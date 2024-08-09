@@ -24,6 +24,8 @@ namespace CoreTools
 
         using String = System::String;
         using BasicTree = boost::property_tree::basic_ptree<String, String>;
+        using JsonBaseSharedPtr = std::shared_ptr<JsonBase>;
+        using FactoryFunction = JsonBaseSharedPtr (*)(BasicTree& mainTree);
 
     public:
         JsonBase() = default;

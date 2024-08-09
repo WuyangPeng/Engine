@@ -442,6 +442,12 @@
     <Filter Include="TextParsing 源文件\Json">
       <UniqueIdentifier>{abb9de61-a1b5-4872-b496-8ea9972435a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TextParsing 头文件\Json\Detail">
+      <UniqueIdentifier>{86bf915f-4dfd-4481-9dd4-2766657caff7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 源文件\Json\Detail">
+      <UniqueIdentifier>{0355ab04-3821-4ee6-a106-369e92f99db2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsImport.h">
@@ -2787,6 +2793,12 @@
     <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\GlobalConfig.h">
       <Filter>EngineConfiguration 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Json\JsonAnalysisManager.h">
+      <Filter>TextParsing 头文件\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Json\Detail\JsonAnalysisManagerImpl.h">
+      <Filter>TextParsing 头文件\Json\Detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp">
@@ -3973,6 +3985,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\GlobalConfig.cpp">
       <Filter>EngineConfiguration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Json\JsonAnalysisManager.cpp">
+      <Filter>TextParsing 源文件\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Json\Detail\JsonAnalysisManagerImpl.cpp">
+      <Filter>TextParsing 源文件\Json\Detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

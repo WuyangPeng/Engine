@@ -11,6 +11,7 @@
 
 #include "GlobalConfig.h"
 #include "Detail/GlobalConfigImpl.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
@@ -120,4 +121,12 @@ void CoreTools::GlobalConfig::Load(BasicTree& mainTree)
     impl->SetDomainName(mainTree.get(SYSTEM_TEXT("domainName"), SYSTEM_TEXT("")));
     impl->SetGameSuffix(mainTree.get(SYSTEM_TEXT("gameSuffix"), SYSTEM_TEXT("")));
     impl->SetPortShifting(mainTree.get(SYSTEM_TEXT("portShifting"), 0));
+}
+
+CoreTools::JsonBase::JsonBaseSharedPtr CoreTools::GlobalConfig::Factory(BasicTree& mainTree)
+{
+    auto globalConfig = std::make_shared<ClassType>(DisableNotThrow::Disable);
+    globalConfig->Load(mainTree);
+
+    return globalConfig;
 }

@@ -902,6 +902,8 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Flags\CSVCondition.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Flags\TextParsingConstant.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Flags\CSVFlags.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Json\Detail\JsonAnalysisManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Json\JsonAnalysisManager.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Json\JsonBase.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\AppProperties.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Cell.h" />
@@ -1331,6 +1333,8 @@
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\Parsing.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\PathSplitParsing.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\ScopeExpressionParsing.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Json\Detail\JsonAnalysisManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Json\JsonAnalysisManager.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Json\JsonBase.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\AppProperties.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Cell.cpp" />

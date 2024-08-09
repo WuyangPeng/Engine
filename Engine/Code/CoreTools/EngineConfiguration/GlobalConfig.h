@@ -46,6 +46,8 @@ namespace CoreTools
 
         void Load(BasicTree& mainTree) override;
 
+        NODISCARD static JsonBaseSharedPtr Factory(BasicTree& mainTree);
+
     private:
         PackageType impl;
     };
