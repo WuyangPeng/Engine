@@ -496,6 +496,18 @@
     <Filter Include="FileManagerSuite 模板文件">
       <UniqueIdentifier>{7a408f03-4bc1-4ddf-bf51-8ac9e610f1e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TextParsingSuite 头文件\Json">
+      <UniqueIdentifier>{5e085bb9-ee83-4b05-8cd0-42b498d81d88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsingSuite 源文件\Json">
+      <UniqueIdentifier>{3cfccd0d-abb7-4237-ae97-8d0371bd91b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsingSuite 头文件\Json\Detail">
+      <UniqueIdentifier>{6fec5e4b-d727-41d8-956a-97ac7ef85a11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsingSuite 源文件\Json\Detail">
+      <UniqueIdentifier>{4f2b87fd-2c3f-41a2-bc13-125fa6dbca92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\BaseSuite.h">
@@ -1965,6 +1977,12 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\GenerateRandomNameTestingDetail.h">
       <Filter>FileManagerSuite 模板文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\Detail\TestConfig.h">
+      <Filter>TextParsingSuite 头文件\Json\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\JsonBaseTesting.h">
+      <Filter>TextParsingSuite 头文件\Json</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp">
@@ -3232,6 +3250,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIO\BufferIOTesting.cpp">
       <Filter>FileManagerSuite 源文件\BufferIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\Detail\TestConfig.cpp">
+      <Filter>TextParsingSuite 源文件\Json\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\JsonBaseTesting.cpp">
+      <Filter>TextParsingSuite 源文件\Json</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

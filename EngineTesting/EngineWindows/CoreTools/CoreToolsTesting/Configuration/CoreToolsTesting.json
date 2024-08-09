@@ -303,6 +303,10 @@
     "CSVConfigureLoadingTesting": 1
   },
 
+  "jsonSuite": {
+    "JsonBaseTesting": 1
+  },
+
   "logManagerSuite": {
     "LogFilterManagerTesting": 1,
     "LogLevelManagerTesting": 1,

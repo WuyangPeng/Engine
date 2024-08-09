@@ -72,46 +72,46 @@ int CoreTools::GlobalConfig::GetPortShifting() const noexcept
     return impl->GetPortShifting();
 }
 
-void CoreTools::GlobalConfig::SetDescribe(const String& aDescribe)
+void CoreTools::GlobalConfig::SetDescribe(const String& describe)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return impl->SetDescribe(aDescribe);
+    return impl->SetDescribe(describe);
 }
 
-void CoreTools::GlobalConfig::SetSuffix(const String& aSuffix)
+void CoreTools::GlobalConfig::SetSuffix(const String& suffix)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return impl->SetSuffix(aSuffix);
+    return impl->SetSuffix(suffix);
 }
 
-void CoreTools::GlobalConfig::SetPublicSuffix(const String& aPublicSuffix)
+void CoreTools::GlobalConfig::SetPublicSuffix(const String& publicSuffix)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return impl->SetPublicSuffix(aPublicSuffix);
+    return impl->SetPublicSuffix(publicSuffix);
 }
 
-void CoreTools::GlobalConfig::SetDomainName(const String& aDomainName)
+void CoreTools::GlobalConfig::SetDomainName(const String& domainName)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return impl->SetPublicSuffix(aDomainName);
+    return impl->SetPublicSuffix(domainName);
 }
 
-void CoreTools::GlobalConfig::SetGameSuffix(const String& aGameSuffix)
+void CoreTools::GlobalConfig::SetGameSuffix(const String& gameSuffix)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return impl->SetPublicSuffix(aGameSuffix);
+    return impl->SetPublicSuffix(gameSuffix);
 }
 
-void CoreTools::GlobalConfig::SetPortShifting(int aPortShifting) noexcept
+void CoreTools::GlobalConfig::SetPortShifting(int portShifting) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return impl->SetPortShifting(aPortShifting);
+    return impl->SetPortShifting(portShifting);
 }
 
 void CoreTools::GlobalConfig::Load(BasicTree& mainTree)

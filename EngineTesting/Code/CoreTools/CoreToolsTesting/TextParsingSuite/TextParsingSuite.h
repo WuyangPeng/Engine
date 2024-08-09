@@ -23,6 +23,7 @@
 #include "Excel/BatchConversionCSVTesting.h"
 #include "Excel/BatchConversionCodeTesting.h"
 #include "Excel/ExcelConversionCSVTesting.h"
+#include "Json/JsonBaseTesting.h"
 #include "SimpleCSV/AppPropertiesTesting.h"
 #include "SimpleCSV/CellIteratorTesting.h"
 #include "SimpleCSV/CellRangeTesting.h"

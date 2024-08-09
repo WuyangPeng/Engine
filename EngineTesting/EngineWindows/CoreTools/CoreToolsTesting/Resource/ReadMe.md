@@ -241,6 +241,8 @@
 			  CSVConfigureTesting¡¢
 			  DataTypeDescribeTesting¡¢
 			  CSVConfigureLoadingTesting¡£
+£¨7£©json½âÎö£ºJsonBaseTesting¡¢
+			   JsonAnalysisManagerTesting¡£
 
 ----------------------------
 10.	 LogManagerSuite 

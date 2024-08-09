@@ -76,6 +76,8 @@ namespace CoreTools
         NODISCARD Suite GetCommandSuite();
         NODISCARD Suite GetQuerySuite();
 
+        NODISCARD Suite GetJsonSuite();
+
         void AddLogManagerSuite();
         void AddDataTypesSuite();
         void AddMemoryToolsSuite();

@@ -813,6 +813,8 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\BatchConversionCodeTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\BatchConversionCSVTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\ExcelConversionCSVTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\Detail\TestConfig.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\JsonBaseTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\AppPropertiesTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellIteratorTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellRangeTesting.h" />
@@ -1479,6 +1481,8 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\BatchConversionCodeTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\BatchConversionCSVTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\ExcelConversionCSVTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\Detail\TestConfig.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\JsonBaseTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\AppPropertiesTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellIteratorTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellRangeTesting.cpp" />

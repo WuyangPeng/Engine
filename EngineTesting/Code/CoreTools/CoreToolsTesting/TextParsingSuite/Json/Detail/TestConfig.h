@@ -7,27 +7,21 @@
 /// 标准：std:c++20
 /// 版本：1.0.1.0 (2024/08/09 16:52)
 
-#ifndef CORE_TOOLS_ENGINE_CONFIGURATION_GLOBAL_CONFIG_H
-#define CORE_TOOLS_ENGINE_CONFIGURATION_GLOBAL_CONFIG_H
+#ifndef CORE_TOOLS_TEXT_PARSING_SUITE_TEST_CONFIG_H
+#define CORE_TOOLS_TEXT_PARSING_SUITE_TEST_CONFIG_H
 
-#include "CoreTools/CoreToolsDll.h"
-
-#include "CoreTools/Contract/ContractFwd.h"
-#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/TextParsing/Json/JsonBase.h"
-
-CORE_TOOLS_COPY_UNSHARED_EXPORT_IMPL(GlobalConfig, GlobalConfigImpl);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE GlobalConfig : public JsonBase
+    class TestConfig final : public JsonBase
     {
     public:
-        COPY_UNSHARED_TYPE_DECLARE(GlobalConfig);
+        using ClassType = TestConfig;
         using ParentType = JsonBase;
 
     public:
-        explicit GlobalConfig(DisableNotThrow disableNotThrow);
+        explicit TestConfig(int portShifting) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -38,12 +32,12 @@ namespace CoreTools
         NODISCARD String GetGameSuffix() const;
         NODISCARD int GetPortShifting() const noexcept;
 
-        void SetDescribe(const String& describe);
-        void SetSuffix(const String& suffix);
-        void SetPublicSuffix(const String& publicSuffix);
-        void SetDomainName(const String& domainName);
-        void SetGameSuffix(const String& gameSuffix);
-        void SetPortShifting(int portShifting) noexcept;
+        void SetDescribe(const String& aDescribe);
+        void SetSuffix(const String& aSuffix);
+        void SetPublicSuffix(const String& aPublicSuffix);
+        void SetDomainName(const String& aDomainName);
+        void SetGameSuffix(const String& aGameSuffix);
+        void SetPortShifting(int aPortShifting) noexcept;
 
         void Load(BasicTree& mainTree) override;
 
@@ -56,15 +50,20 @@ namespace CoreTools
         CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
 
     private:
-        PackageType impl;
+        String describe;
+        String suffix;
+        String publicSuffix;
+        String domainName;
+        String gameSuffix;
+        int portShifting;
     };
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 
-    static auto gGlobalConfigRegisterFactory = GlobalConfig::RegisterFactory();
+    static auto gTestConfigRegisterFactory = TestConfig::RegisterFactory();
 
 #include SYSTEM_WARNING_POP
 }
 
-#endif  // CORE_TOOLS_ENGINE_CONFIGURATION_GLOBAL_CONFIG_H
+#endif  // CORE_TOOLS_TEXT_PARSING_SUITE_TEST_CONFIG_H

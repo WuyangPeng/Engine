@@ -458,6 +458,7 @@ void CoreTools::TestingHelper::AddTextParsingSuite()
     textParsingSuite.AddSuite(GetSimpleCSVSuite());
     textParsingSuite.AddSuite(GetExcelSuite());
     textParsingSuite.AddSuite(GetCSVSuite());
+    textParsingSuite.AddSuite(GetJsonSuite());
 
     AddSuite(textParsingSuite);
 }
@@ -571,6 +572,15 @@ CoreTools::Suite CoreTools::TestingHelper::GetCSVSuite()
     ADD_TEST(csvSuite, CSVConfigureLoadingTesting);
 
     return csvSuite;
+}
+
+CoreTools::Suite CoreTools::TestingHelper::GetJsonSuite()
+{
+    auto jsonSuite = GenerateSuite("json");
+
+    ADD_TEST(jsonSuite, JsonBaseTesting);
+
+    return jsonSuite;
 }
 
 void CoreTools::TestingHelper::AddLogManagerSuite()
