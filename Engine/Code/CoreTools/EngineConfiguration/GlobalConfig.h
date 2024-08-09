@@ -50,6 +50,8 @@ namespace CoreTools
         NODISCARD static JsonBaseSharedPtr Factory(BasicTree& mainTree);
 
         NODISCARD static bool RegisterFactory();
+        static void InitializeFactory();
+        static void TerminateFactory();
 
         CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
 

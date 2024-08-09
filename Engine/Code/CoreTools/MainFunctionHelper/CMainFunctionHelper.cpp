@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/12 14:49)
+/// 版本：1.0.1.0 (2024/08/09 22:32)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,6 +16,7 @@
 #include "CoreTools/Command/CommandHandle.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/TextParsing/Json/JsonAnalysisManager.h"
 
 #include <fstream>
 #include <iostream>
@@ -135,6 +136,7 @@ void CoreTools::CMainFunctionHelper::InitSingleton()
     InitLog();
     GenerateStream();
     InitStreamLocale();
+    InitJsonAnalysis();
 }
 
 void CoreTools::CMainFunctionHelper::InitUniqueIdManager()
@@ -174,14 +176,30 @@ void CoreTools::CMainFunctionHelper::GenerateStream()
         stream = OStreamShared{ true };
     }
 
+    schedule = ScheduleType::JsonAnalysis;
+}
+
+void CoreTools::CMainFunctionHelper::InitJsonAnalysis()
+{
+    JsonAnalysisManager::Create();
+
     schedule = ScheduleType::Max;
 }
 
 void CoreTools::CMainFunctionHelper::DestroySingleton() noexcept
 {
+    DestroyJsonAnalysis();
     DestroyStream();
     DestroyLog();
     DestroyUniqueIdManager();
+}
+
+void CoreTools::CMainFunctionHelper::DestroyJsonAnalysis() noexcept
+{
+    if (ScheduleType::Max <= schedule)
+    {
+        JsonAnalysisManager::Destroy();
+    }
 }
 
 void CoreTools::CMainFunctionHelper::DestroyStream() noexcept

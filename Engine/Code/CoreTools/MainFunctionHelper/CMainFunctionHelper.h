@@ -48,7 +48,9 @@ namespace CoreTools
         void InitLog();
         void GenerateStream();
         void InitStreamLocale();
+        void InitJsonAnalysis();
 
+        void DestroyJsonAnalysis() noexcept;
         void DestroySingleton() noexcept;
         void DestroyStream() noexcept;
         void DestroyLog() noexcept;
@@ -62,7 +64,8 @@ namespace CoreTools
             Failure = 0,
             UniqueIdManager = 1,
             Log = 2,
-            Max = 3,
+            JsonAnalysis = 3,
+            Max = 4,
         };
 
     private:

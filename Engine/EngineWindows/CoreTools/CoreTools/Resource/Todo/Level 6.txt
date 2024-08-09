@@ -1,6 +1,6 @@
 TODO Level 6
  
-1.0.0.8
+1.0.1.0
 
 1.  （ModuleInitializerTerminator）增加一个需要加载模块配置类，对配置进行读取。 
 2.  （ModuleInitializerTerminator）增加一个模块自动加载及终止类。

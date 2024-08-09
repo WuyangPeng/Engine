@@ -5,13 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/12 18:14)
+/// 版本：1.0.1.0 (2024/08/09 22:02)
 
 #include "Testing.h"
 #include "TestingHelper.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
+#include "CoreTools/TextParsing/Json/JsonAnalysisManager.h"
 
 CoreTools::TestingHelper::TestingHelper(int argc, char** argv)
     : ParentType{ argc, argv, "核心工具库" }

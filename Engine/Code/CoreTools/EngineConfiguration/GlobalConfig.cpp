@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.1.0 (2024/08/09 16:52)
+/// 版本：1.0.1.0 (2024/08/09 22:30)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,6 +14,7 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/InitTermRegisterFactory.h"
 #include "CoreTools/TextParsing/Json/JsonAnalysisManager.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, GlobalConfig)
@@ -135,7 +136,17 @@ CoreTools::JsonBase::JsonBaseSharedPtr CoreTools::GlobalConfig::Factory(BasicTre
 
 bool CoreTools::GlobalConfig::RegisterFactory()
 {
-    JSON_ANALYSIS_MANAGER_SINGLETON.Insert(GetCurrentRttiType().GetName(), &ClassType::Factory);
+    static InitTermRegisterFactory registerFactory{ &ClassType::InitializeFactory, &ClassType::TerminateFactory };
 
     return true;
+}
+
+void CoreTools::GlobalConfig::InitializeFactory()
+{
+    JSON_ANALYSIS_MANAGER_SINGLETON.Insert(GetCurrentRttiType().GetName(), &ClassType::Factory);
+}
+
+void CoreTools::GlobalConfig::TerminateFactory()
+{
+    JSON_ANALYSIS_MANAGER_SINGLETON.Remove(GetCurrentRttiType().GetName());
 }
