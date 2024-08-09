@@ -27,7 +27,9 @@ namespace CoreTools
 
     private:
         void DoRunUnitTest() override;
-        void MainTest() noexcept;
+        void MainTest();
+
+        void TestConfigTest();
     };
 }
 

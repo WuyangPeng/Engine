@@ -3489,5 +3489,8 @@
     <None Include="Resource\CSVEngineering\CSVEngineering.json">
       <Filter>资源文件\CSVEngineering</Filter>
     </None>
+    <None Include="Configuration\TestConfig.json">
+      <Filter>配置</Filter>
+    </None>
   </ItemGroup>
 </Project>

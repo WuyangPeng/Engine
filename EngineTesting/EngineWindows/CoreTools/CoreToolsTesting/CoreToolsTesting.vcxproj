@@ -1800,6 +1800,7 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\StringReplacing.json" />
+    <None Include="Configuration\TestConfig.json" />
     <None Include="Configuration\Testing.json" />
     <None Include="Resource\CSVConfigure\Chapter.csv" />
     <None Include="Resource\CSVConfigure\Chapter.xlsx" />
