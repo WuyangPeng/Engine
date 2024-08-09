@@ -17,7 +17,7 @@
 #include <map>
 #include <string>
 
-    namespace CoreTools
+namespace CoreTools
 {
     class CORE_TOOLS_HIDDEN_DECLARE StringReplacingImpl final
     {

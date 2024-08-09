@@ -108,8 +108,7 @@ void Framework::EnvironmentDirectoryTesting::DefaultPathTest(RenderingAnalysisDi
     const auto path1 = environmentDirectory.GetPath(RenderingDirectory::Default, renderingAnalysisDirectory);
     const auto path2 = environmentDirectory.GetPath(EndianDirectory::LittleEndian, RenderingDirectory::Default, renderingAnalysisDirectory);
 
-    ASSERT_EQUAL(path0, path1);
-    ASSERT_EQUAL(path1, path2);
+    ASSERT_THREE_EQUAL(path0, path1, path2);
 }
 
 void Framework::EnvironmentDirectoryTesting::LittleEndianDefaultTest(RenderingAnalysisDirectory renderingAnalysisDirectory)

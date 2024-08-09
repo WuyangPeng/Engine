@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_ENGINE_CONFIGURATION_H
 #define CORE_TOOLS_ENGINE_CONFIGURATION_H
 
+#include "GlobalConfig.h"
 #include "StringReplacing.h"
 
 #endif  // CORE_TOOLS_ENGINE_CONFIGURATION_H

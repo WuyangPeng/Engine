@@ -436,6 +436,12 @@
     <Filter Include="FileManager 模板文件">
       <UniqueIdentifier>{c8b3acaf-129f-413a-97a6-03c243df6ac8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TextParsing 头文件\Json">
+      <UniqueIdentifier>{d992662c-79fa-4237-a1df-4fdc6165967b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 源文件\Json">
+      <UniqueIdentifier>{abb9de61-a1b5-4872-b496-8ea9972435a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsImport.h">
@@ -2772,6 +2778,15 @@
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\TypeTraits.h">
       <Filter>MemoryTools 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Json\JsonBase.h">
+      <Filter>TextParsing 头文件\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\GlobalConfigImpl.h">
+      <Filter>EngineConfiguration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\GlobalConfig.h">
+      <Filter>EngineConfiguration 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp">
@@ -3949,6 +3964,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipHelper.cpp">
       <Filter>TextParsing 源文件\SimpleZip\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Json\JsonBase.cpp">
+      <Filter>TextParsing 源文件\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\GlobalConfigImpl.cpp">
+      <Filter>EngineConfiguration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\GlobalConfig.cpp">
+      <Filter>EngineConfiguration 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

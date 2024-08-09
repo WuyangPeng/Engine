@@ -20,6 +20,7 @@
 #include "CSV/CSVTypeConversion.h"
 #include "CSV/DataTypeDescribe.h"
 #include "CSV/ExcelConversionCSV.h"
+#include "Json/JsonBase.h"
 #include "SimpleCSV/AppProperties.h"
 #include "SimpleCSV/Cell.h"
 #include "SimpleCSV/CellIterator.h"

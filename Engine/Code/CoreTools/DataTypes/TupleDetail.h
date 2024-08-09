@@ -16,12 +16,17 @@
 
 #include <iostream>
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+
 template <int Dimension, typename Type>
 CoreTools::Tuple<Dimension, Type>::Tuple() noexcept
     : tuple{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
+
+#include SYSTEM_WARNING_POP
 
 template <int Dimension, typename Type>
 CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0) noexcept(std::is_arithmetic_v<Type>) requires(Dimension == 1)

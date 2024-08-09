@@ -12,6 +12,7 @@
 
 namespace CoreTools
 {
+    class GlobalConfig;
     class StringReplacing;
 }
 
