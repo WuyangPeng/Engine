@@ -19,8 +19,8 @@ namespace Framework
         Failure = 0,
         UniqueId,
         Log,
-        InitTerm,
         JsonAnalysis,
+        InitTerm,        
         Max,
     };
 

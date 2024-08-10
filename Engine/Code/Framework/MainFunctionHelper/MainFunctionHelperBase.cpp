@@ -119,9 +119,9 @@ void Framework::MainFunctionHelperBase::DoMainFunctionHelperInit(const Environme
 {
     InitUniqueIdManager();
     InitLog(environmentDirectory);
+    InitJsonAnalysis();
     InitInitTerm();
     InitImpl(environmentDirectory);
-    InitJsonAnalysis();
 }
 
 void Framework::MainFunctionHelperBase::InitUniqueIdManager()
@@ -138,6 +138,12 @@ void Framework::MainFunctionHelperBase::InitLog(const EnvironmentDirectory& envi
     mainFunctionSchedule = MainFunctionSchedule::Log;
 }
 
+void Framework::MainFunctionHelperBase::InitJsonAnalysis()
+{
+    CoreTools::JsonAnalysisManager::Create();
+    mainFunctionSchedule = MainFunctionSchedule::JsonAnalysis;
+}
+
 void Framework::MainFunctionHelperBase::InitInitTerm()
 {
     CoreTools::InitTerm::ExecuteInitializer();
@@ -147,36 +153,21 @@ void Framework::MainFunctionHelperBase::InitInitTerm()
 void Framework::MainFunctionHelperBase::InitImpl(const EnvironmentDirectory& environmentDirectory)
 {
     impl = std::make_shared<ImplType>(environmentDirectory);
-    mainFunctionSchedule = MainFunctionSchedule::JsonAnalysis;
-}
-
-void Framework::MainFunctionHelperBase::InitJsonAnalysis()
-{
-    CoreTools::JsonAnalysisManager::Create();
     mainFunctionSchedule = MainFunctionSchedule::Max;
 }
 
 void Framework::MainFunctionHelperBase::MainFunctionHelperDestroy()
 {
-    DestroyJsonAnalysis();
     DestroyMainImpl();
     DestroyInitTerm();
+    DestroyJsonAnalysis();
     DestroyLog();
     DestroyUniqueIdManager();
 }
 
-void Framework::MainFunctionHelperBase::DestroyJsonAnalysis() noexcept
-{
-    if (MainFunctionSchedule::Max <= mainFunctionSchedule)
-    {
-        CoreTools::JsonAnalysisManager::Destroy();
-        mainFunctionSchedule = MainFunctionSchedule::JsonAnalysis;
-    }
-}
-
 void Framework::MainFunctionHelperBase::DestroyMainImpl() noexcept
 {
-    if (MainFunctionSchedule::JsonAnalysis <= mainFunctionSchedule)
+    if (MainFunctionSchedule::Max <= mainFunctionSchedule)
     {
         impl.reset();
         mainFunctionSchedule = MainFunctionSchedule::InitTerm;
@@ -188,6 +179,15 @@ void Framework::MainFunctionHelperBase::DestroyInitTerm()
     if (MainFunctionSchedule::InitTerm <= mainFunctionSchedule)
     {
         CoreTools::InitTerm::ExecuteTerminator();
+        mainFunctionSchedule = MainFunctionSchedule::JsonAnalysis;
+    }
+}
+
+void Framework::MainFunctionHelperBase::DestroyJsonAnalysis() noexcept
+{
+    if (MainFunctionSchedule::JsonAnalysis <= mainFunctionSchedule)
+    {
+        CoreTools::JsonAnalysisManager::Destroy();
         mainFunctionSchedule = MainFunctionSchedule::Log;
     }
 }
