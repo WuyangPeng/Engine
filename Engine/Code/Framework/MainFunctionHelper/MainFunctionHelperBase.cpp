@@ -23,6 +23,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/InitTerm.h"
+#include "CoreTools/TextParsing/Json/JsonAnalysisManager.h"
 
 #include <iostream>
 
@@ -120,6 +121,7 @@ void Framework::MainFunctionHelperBase::DoMainFunctionHelperInit(const Environme
     InitLog(environmentDirectory);
     InitInitTerm();
     InitImpl(environmentDirectory);
+    InitJsonAnalysis();
 }
 
 void Framework::MainFunctionHelperBase::InitUniqueIdManager()
@@ -145,20 +147,36 @@ void Framework::MainFunctionHelperBase::InitInitTerm()
 void Framework::MainFunctionHelperBase::InitImpl(const EnvironmentDirectory& environmentDirectory)
 {
     impl = std::make_shared<ImplType>(environmentDirectory);
+    mainFunctionSchedule = MainFunctionSchedule::JsonAnalysis;
+}
+
+void Framework::MainFunctionHelperBase::InitJsonAnalysis()
+{
+    CoreTools::JsonAnalysisManager::Create();
     mainFunctionSchedule = MainFunctionSchedule::Max;
 }
 
 void Framework::MainFunctionHelperBase::MainFunctionHelperDestroy()
 {
+    DestroyJsonAnalysis();
     DestroyMainImpl();
     DestroyInitTerm();
     DestroyLog();
     DestroyUniqueIdManager();
 }
 
-void Framework::MainFunctionHelperBase::DestroyMainImpl() noexcept
+void Framework::MainFunctionHelperBase::DestroyJsonAnalysis() noexcept
 {
     if (MainFunctionSchedule::Max <= mainFunctionSchedule)
+    {
+        CoreTools::JsonAnalysisManager::Destroy();
+        mainFunctionSchedule = MainFunctionSchedule::JsonAnalysis;
+    }
+}
+
+void Framework::MainFunctionHelperBase::DestroyMainImpl() noexcept
+{
+    if (MainFunctionSchedule::JsonAnalysis <= mainFunctionSchedule)
     {
         impl.reset();
         mainFunctionSchedule = MainFunctionSchedule::InitTerm;

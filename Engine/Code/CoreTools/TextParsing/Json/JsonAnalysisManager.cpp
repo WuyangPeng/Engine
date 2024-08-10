@@ -64,10 +64,10 @@ void CoreTools::JsonAnalysisManager::Remove(const std::string& name)
 
 CoreTools::JsonAnalysisManager::JsonBaseSharedPtr CoreTools::JsonAnalysisManager::Create(const std::string& fileName, const std::string& rttiName) const
 {
-    SINGLETON_MUTEX_ENTER_MEMBER;
-
     JsonBase::BasicTree mainTree{};
     read_json(fileName, mainTree);
+
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
     if (const auto factoryFunction = Find(rttiName);
         factoryFunction != nullptr)

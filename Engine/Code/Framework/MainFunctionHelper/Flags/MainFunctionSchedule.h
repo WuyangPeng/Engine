@@ -20,6 +20,7 @@ namespace Framework
         UniqueId,
         Log,
         InitTerm,
+        JsonAnalysis,
         Max,
     };
 

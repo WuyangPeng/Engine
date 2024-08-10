@@ -24,11 +24,17 @@ namespace Framework
 
     public:
         TestingHelper(int argc, char** argv);
+        virtual ~TestingHelper() noexcept;
+        TestingHelper(const TestingHelper& rhs) = delete;
+        TestingHelper& operator=(const TestingHelper& rhs) = delete;
+        TestingHelper(TestingHelper&& rhs) noexcept = default;
+        TestingHelper& operator=(TestingHelper&& rhs) noexcept = default;
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void InitSuite();
+        void Destroy();
 
         void AddHelperSuite();
         void AddMainFunctionHelperSuite();

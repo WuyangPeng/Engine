@@ -177,6 +177,9 @@
     <None Include="Configuration\FrameworkTesting\Renderer.json">
       <Filter>配置\FrameworkTesting</Filter>
     </None>
+    <None Include="Configuration\Global.json">
+      <Filter>配置</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\TestingHelper.h">

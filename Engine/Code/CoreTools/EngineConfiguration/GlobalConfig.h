@@ -14,13 +14,14 @@
 
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
+#include "CoreTools/Helper/InitializeTerminatorMacro.h"
 #include "CoreTools/TextParsing/Json/JsonBase.h"
 
 CORE_TOOLS_COPY_UNSHARED_EXPORT_IMPL(GlobalConfig, GlobalConfigImpl);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE GlobalConfig : public JsonBase
+    class CORE_TOOLS_DEFAULT_DECLARE GlobalConfig final : public JsonBase
     {
     public:
         COPY_UNSHARED_TYPE_DECLARE(GlobalConfig);
@@ -49,10 +50,7 @@ namespace CoreTools
 
         NODISCARD static JsonBaseSharedPtr Factory(BasicTree& mainTree);
 
-        NODISCARD static bool RegisterFactory();
-        static void InitializeFactory();
-        static void TerminateFactory();
-
+        CORE_TOOLS_INITIALIZE_TERMINATE_DECLARE(false);
         CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
 
     private:
@@ -62,7 +60,7 @@ namespace CoreTools
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 
-    static auto gGlobalConfigRegisterFactory = GlobalConfig::RegisterFactory();
+    CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(GlobalConfig);
 
 #include SYSTEM_WARNING_POP
 }

@@ -12,15 +12,33 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 Framework::TestingHelper::TestingHelper(int argc, char** argv)
     : ParentType{ argc, argv, "øÚº‹≤‚ ‘" }
 {
+    CoreTools::InitTerm::ExecuteInitializer();
+
     InitSuite();
 
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
+}
+
+Framework::TestingHelper::~TestingHelper() noexcept
+{
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+
+    EXCEPTION_TRY
+    {
+        Destroy();
+    }
+    EXCEPTION_ALL_CATCH(Framework)
+}
+
+void Framework::TestingHelper::Destroy()
+{
+    CoreTools::InitTerm::ExecuteTerminator();
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, TestingHelper)

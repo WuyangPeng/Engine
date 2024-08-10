@@ -13,13 +13,12 @@
 #include "Flags/SystemMiddleLayerFlags.h"
 #include "Detail/EngineMiddleLayerInterfaceImpl.h"
 #include "Detail/SystemManagerImpl.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
 Framework::SystemManagerInterface::SystemManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory },
       impl{ System::EnumCastUnderlying(SystemMiddleLayer::Count) },
-      system{ CoreTools::DisableNotThrow::Disable }
+      system{ environmentDirectory }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }

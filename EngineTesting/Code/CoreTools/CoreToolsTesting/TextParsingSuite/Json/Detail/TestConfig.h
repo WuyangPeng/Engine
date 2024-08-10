@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_TEST_CONFIG_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_TEST_CONFIG_H
 
+#include "CoreTools/Helper/InitializeTerminatorMacro.h"
 #include "CoreTools/TextParsing/Json/JsonBase.h"
 
 namespace CoreTools
@@ -43,10 +44,7 @@ namespace CoreTools
 
         NODISCARD static JsonBaseSharedPtr Factory(BasicTree& mainTree);
 
-        NODISCARD static bool RegisterFactory();
-        static void InitializeFactory();
-        static void TerminateFactory();
-
+        CORE_TOOLS_INITIALIZE_TERMINATE_DECLARE(false);
         CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
 
     private:
@@ -61,7 +59,7 @@ namespace CoreTools
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 
-    static auto gTestConfigRegisterFactory = TestConfig::RegisterFactory();
+    CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(TestConfig);
 
 #include SYSTEM_WARNING_POP
 }
