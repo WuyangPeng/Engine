@@ -11,7 +11,7 @@ Threading Core Render Engine 1.0.1.0
 	
 	（服务器）	
 	+ 服务器配置目录类：EnvironmentDirectory。
-	+ 服务器全局配置类：global.json。@
+	+ 服务器全局配置类：global.json。
 	+ 服务器邮件类：mail.json。@
 	+ 服务器数据库层加载。
 	+ 服务器网络层加载。

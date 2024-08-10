@@ -33,6 +33,8 @@ namespace Framework
 
         CLASS_INVARIANT_DECLARE;
 
+        NODISCARD GlobalConfig GetGlobalConfig() const;
+
     private:
         using GlobalConfigSharedPtr = std::shared_ptr<GlobalConfig>;
 

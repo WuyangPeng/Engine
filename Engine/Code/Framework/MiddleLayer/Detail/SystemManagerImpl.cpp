@@ -26,3 +26,10 @@ Framework::SystemManagerImpl::SystemManagerImpl(const EnvironmentDirectory& envi
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, SystemManagerImpl)
+
+CoreTools::GlobalConfig Framework::SystemManagerImpl::GetGlobalConfig() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return *globalConfig;
+}

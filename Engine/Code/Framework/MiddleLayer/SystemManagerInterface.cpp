@@ -35,6 +35,13 @@ ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, System, CameraSystems)
 ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, System, Rendering)
 ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, System, Engine)
 
+CoreTools::GlobalConfig Framework::SystemManagerInterface::GetGlobalConfig() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return system->GetGlobalConfig();
+}
+
 bool Framework::SystemManagerInterface::Paint()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
