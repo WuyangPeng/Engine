@@ -2799,6 +2799,12 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Json\Detail\JsonAnalysisManagerImpl.h">
       <Filter>TextParsing 头文件\Json\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\SmtpConfigImpl.h">
+      <Filter>EngineConfiguration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\SmtpConfig.h">
+      <Filter>EngineConfiguration 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp">
@@ -3991,6 +3997,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Json\Detail\JsonAnalysisManagerImpl.cpp">
       <Filter>TextParsing 源文件\Json\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\SmtpConfigImpl.cpp">
+      <Filter>EngineConfiguration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\SmtpConfig.cpp">
+      <Filter>EngineConfiguration 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

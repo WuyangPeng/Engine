@@ -421,10 +421,12 @@
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\TupleLessDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DllLib.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\GlobalConfigImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\SmtpConfigImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\StringReplacingImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\EngineConfiguration.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\EngineConfigurationFwd.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\GlobalConfig.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\SmtpConfig.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\StringReplacing.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Exception\Detail\ErrorFactory.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Exception\Detail\ErrorImpl.h" />
@@ -1127,8 +1129,10 @@
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\DllMain.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\GlobalConfigImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\SmtpConfigImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\StringReplacingImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\GlobalConfig.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\SmtpConfig.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\StringReplacing.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Exception\Detail\ErrorFactory.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Exception\Detail\ErrorImpl.cpp" />

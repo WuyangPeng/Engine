@@ -508,6 +508,7 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TupleTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\EngineConfigurationSuite.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\GlobalConfigTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\SmtpConfigTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\StringReplacingTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\Detail\GameErrorType.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\ErrorTesting.h" />
@@ -1219,6 +1220,7 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TupleLessTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TupleTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\GlobalConfigTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\SmtpConfigTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\StringReplacingTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\ErrorTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\GameErrorTesting.cpp" />
@@ -1803,6 +1805,7 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <None Include="Configuration\CoreToolsTesting.json" />
     <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\Log.json" />
+    <None Include="Configuration\SmtpConfig.json" />
     <None Include="Configuration\StringReplacing.json" />
     <None Include="Configuration\TestConfig.json" />
     <None Include="Configuration\Testing.json" />

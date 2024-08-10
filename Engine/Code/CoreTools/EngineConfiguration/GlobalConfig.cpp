@@ -97,14 +97,14 @@ void CoreTools::GlobalConfig::SetDomainName(const String& domainName)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return impl->SetPublicSuffix(domainName);
+    return impl->SetDomainName(domainName);
 }
 
 void CoreTools::GlobalConfig::SetGameSuffix(const String& gameSuffix)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return impl->SetPublicSuffix(gameSuffix);
+    return impl->SetGameSuffix(gameSuffix);
 }
 
 void CoreTools::GlobalConfig::SetPortShifting(int portShifting) noexcept
@@ -118,12 +118,12 @@ void CoreTools::GlobalConfig::Load(BasicTree& mainTree)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    impl->SetDescribe(mainTree.get(SYSTEM_TEXT("describe"), SYSTEM_TEXT("")));
-    impl->SetSuffix(mainTree.get(SYSTEM_TEXT("suffix"), SYSTEM_TEXT("")));
-    impl->SetPublicSuffix(mainTree.get(SYSTEM_TEXT("publicSuffix"), SYSTEM_TEXT("")));
-    impl->SetDomainName(mainTree.get(SYSTEM_TEXT("domainName"), SYSTEM_TEXT("")));
-    impl->SetGameSuffix(mainTree.get(SYSTEM_TEXT("gameSuffix"), SYSTEM_TEXT("")));
-    impl->SetPortShifting(mainTree.get(SYSTEM_TEXT("portShifting"), 0));
+    SetDescribe(mainTree.get(SYSTEM_TEXT("describe"), SYSTEM_TEXT("")));
+    SetSuffix(mainTree.get(SYSTEM_TEXT("suffix"), SYSTEM_TEXT("")));
+    SetPublicSuffix(mainTree.get(SYSTEM_TEXT("publicSuffix"), SYSTEM_TEXT("")));
+    SetDomainName(mainTree.get(SYSTEM_TEXT("domainName"), SYSTEM_TEXT("")));
+    SetGameSuffix(mainTree.get(SYSTEM_TEXT("gameSuffix"), SYSTEM_TEXT("")));
+    SetPortShifting(mainTree.get(SYSTEM_TEXT("portShifting"), 0));
 }
 
 CoreTools::JsonBase::JsonBaseSharedPtr CoreTools::GlobalConfig::Factory(BasicTree& mainTree)

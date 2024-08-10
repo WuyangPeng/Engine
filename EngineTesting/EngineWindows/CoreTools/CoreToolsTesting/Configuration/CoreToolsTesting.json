@@ -457,7 +457,8 @@
 
   "engineConfigurationSuite": {
     "StringReplacingTesting": 1,
-    "GlobalConfigTesting": 1
+    "GlobalConfigTesting": 1,
+    "SmtpConfigTesting": 1
   },
 
   "propertiesSuite": {

@@ -1989,6 +1989,9 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\GlobalConfigTesting.h">
       <Filter>EngineConfigurationSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\SmtpConfigTesting.h">
+      <Filter>EngineConfigurationSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp">
@@ -3269,6 +3272,9 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\GlobalConfigTesting.cpp">
       <Filter>EngineConfigurationSuite 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\SmtpConfigTesting.cpp">
+      <Filter>EngineConfigurationSuite 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">
@@ -3502,6 +3508,9 @@
       <Filter>资源文件\CSVEngineering</Filter>
     </None>
     <None Include="Configuration\TestConfig.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\SmtpConfig.json">
       <Filter>配置</Filter>
     </None>
   </ItemGroup>

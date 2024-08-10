@@ -796,6 +796,7 @@ void CoreTools::TestingHelper::AddEngineConfigurationSuite()
 
     ADD_TEST(engineConfigurationSuite, StringReplacingTesting);
     ADD_TEST(engineConfigurationSuite, GlobalConfigTesting);
+    ADD_TEST(engineConfigurationSuite, SmtpConfigTesting);
 
     AddSuite(engineConfigurationSuite);
 }
