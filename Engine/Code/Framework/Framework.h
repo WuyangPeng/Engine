@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.1.0 (2024/08/07 10:39)
+/// 版本：1.0.1.0 (2024/08/19 10:17)
 
 #ifndef FRAMEWORK_H
 #define FRAMEWORK_H
@@ -20,6 +20,7 @@
 #include "MiddleLayer/MiddleLayer.h"
 #include "OpenGLGlutFrame/OpenGLGlutFrame.h"
 #include "Project/Project.h"
+#include "Smtp/Smtp.h"
 #include "WindowCreate/WindowCreate.h"
 #include "WindowProcess/WindowProcess.h"
 #include "WindowRegister/WindowRegister.h"

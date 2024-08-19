@@ -20,6 +20,7 @@
 #include "MiddleLayer/MiddleLayerFwd.h"
 #include "OpenGLGlutFrame/OpenGLGlutFrameFwd.h"
 #include "Project/ProjectFwd.h"
+#include "Smtp/SmtpFwd.h"
 #include "WindowCreate/WindowCreateFwd.h"
 #include "WindowProcess/WindowProcessFwd.h"
 #include "WindowRegister/WindowRegisterFwd.h"
