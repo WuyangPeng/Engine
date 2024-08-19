@@ -10,11 +10,27 @@
 #include "Framework/FrameworkExport.h"
 
 #include "SmtpTransportImpl.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+#include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/TextParsing/Json/JsonAnalysisManager.h"
+#include "Framework/MainFunctionHelper/AndroidMainFunctionHelper.h"
+#include "Framework/MainFunctionHelper/Flags/Directory.h"
 
-Framework::SmtpTransportImpl::SmtpTransportImpl() noexcept
+Framework::SmtpTransportImpl::SmtpTransportImpl(const EnvironmentDirectory& environmentDirectory)
+    : smtpConfig{ boost::polymorphic_pointer_cast<SmtpConfig>(JSON_ANALYSIS_MANAGER_SINGLETON.Create(CoreTools::StringConversion::StandardConversionMultiByte(environmentDirectory.GetDirectory(UpperDirectory::Configuration)) + "Smtp.json",
+                                                                                                     SmtpConfig::GetCurrentRttiType().GetName())) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, SmtpTransportImpl)
+
+void Framework::SmtpTransportImpl::SendMailMessage(const String& title, const String& content)
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(title, content);
+
+    CoreTools::DisableNoexcept();
+}

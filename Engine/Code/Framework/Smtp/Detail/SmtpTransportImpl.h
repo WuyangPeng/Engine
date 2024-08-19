@@ -12,6 +12,10 @@
 
 #include "Framework/FrameworkDll.h"
 
+#include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/EngineConfiguration/SmtpConfig.h"
+#include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
+
 namespace Framework
 {
     class FRAMEWORK_HIDDEN_DECLARE SmtpTransportImpl
@@ -19,10 +23,21 @@ namespace Framework
     public:
         using ClassType = SmtpTransportImpl;
 
+        using String = System::String;
+
     public:
-        SmtpTransportImpl() noexcept;
+        explicit SmtpTransportImpl(const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_DECLARE;
+
+        void SendMailMessage(const String& title, const String& content);
+
+    private:
+        using SmtpConfig = CoreTools::SmtpConfig;
+        using SmtpConfigSharedPtr = std::shared_ptr<SmtpConfig>;
+
+    private:
+        SmtpConfigSharedPtr smtpConfig;
     };
 }
 

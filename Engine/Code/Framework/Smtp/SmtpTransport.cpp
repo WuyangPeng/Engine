@@ -14,12 +14,17 @@
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
-Framework::SmtpTransport::SmtpTransport(CoreTools::DisableNotThrow disableNotThrow)
-    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+Framework::SmtpTransport::SmtpTransport(const EnvironmentDirectory& environmentDirectory)
+    : impl{ environmentDirectory }
 {
-    System::UnusedFunction(disableNotThrow);
-
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, SmtpTransport)
+
+void Framework::SmtpTransport::SendMailMessage(const String& title, const String& content)
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SendMailMessage(title, content);
+}
