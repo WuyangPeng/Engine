@@ -469,7 +469,7 @@ void Mathematics::Matrix3Testing::OperatorCalculateTest()
     ASSERT_APPROXIMATE(matrix32(2, 2), -3.5f, 1e-8f);
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution{ -10.0f, 10.0f };
+    std::uniform_real_distribution<float> randomDistribution{ -10.0f, 10.0f };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -584,8 +584,8 @@ void Mathematics::Matrix3Testing::OperatorCalculateTest()
 void Mathematics::Matrix3Testing::ArithmeticCalculateTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution{ -10.0f, 10.0f };
-    std::uniform_real<float> angleRandomDistribution{ 0.0f, MathF::GetPI() - 0.01f };
+    std::uniform_real_distribution<float> randomDistribution{ -10.0f, 10.0f };
+    std::uniform_real_distribution<float> angleRandomDistribution{ 0.0f, MathF::GetPI() - 0.01f };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -760,9 +760,9 @@ void Mathematics::Matrix3Testing::ArithmeticCalculateTest()
 void Mathematics::Matrix3Testing::EulerTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> firstAngleRandomDistribution{ -MathD::GetPI(), MathD::GetPI() };
-    std::uniform_real<double> secondAngleRandomDistribution{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
-    std::uniform_real<double> thirdAngleRandomDistribution{ 0.0, MathD::GetHalfPI() };
+    std::uniform_real_distribution<double> firstAngleRandomDistribution{ -MathD::GetPI(), MathD::GetPI() };
+    std::uniform_real_distribution<double> secondAngleRandomDistribution{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
+    std::uniform_real_distribution<double> thirdAngleRandomDistribution{ 0.0, MathD::GetHalfPI() };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {

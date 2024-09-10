@@ -38,8 +38,8 @@ void Mathematics::SolveBandedTesting::MainTest()
 void Mathematics::SolveBandedTesting::BandedTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    std::uniform_int<> integerRandomDistribution(4, 10);
+    std::uniform_real_distribution<double> floatRandomDistribution(-100.0, 100.0);
+    std::uniform_int_distribution<> integerRandomDistribution(4, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

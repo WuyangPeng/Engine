@@ -22,15 +22,15 @@
     <Filter Include="Helper 头文件">
       <UniqueIdentifier>{e3fa5a78-1e4e-479b-9669-800a0377976d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="配置\RiseOfHistory">
+      <UniqueIdentifier>{4bb8ad60-2d48-4dfe-9c32-777d6a7e7487}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json">
       <Filter>配置</Filter>
     </None>
     <None Include="Configuration\Log.json">
-      <Filter>配置</Filter>
-    </None>
-    <None Include="Configuration\Renderer.json">
       <Filter>配置</Filter>
     </None>
     <None Include="Configuration\Project.json">
@@ -44,6 +44,12 @@
     </None>
     <None Include="Resource\Schedule.md">
       <Filter>资源文件</Filter>
+    </None>
+    <None Include="Configuration\RiseOfHistory\Renderer.json">
+      <Filter>配置\RiseOfHistory</Filter>
+    </None>
+    <None Include="Configuration\Global.json">
+      <Filter>配置</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

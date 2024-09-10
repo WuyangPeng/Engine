@@ -45,10 +45,10 @@ void Mathematics::PolynomialFit3PowersTesting::MainTest()
 void Mathematics::PolynomialFit3PowersTesting::FitTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(0.0, 2.0);
-    std::uniform_int<> randomDistribution1(3, 7);
-    std::uniform_int<> thirdRandomDistribution(2, 5);
-    std::uniform_int<> fourthRandomDistribution(0, 3);
+    std::uniform_real_distribution<double> randomDistribution0(0.0, 2.0);
+    std::uniform_int_distribution<> randomDistribution1(3, 7);
+    std::uniform_int_distribution<> thirdRandomDistribution(2, 5);
+    std::uniform_int_distribution<> fourthRandomDistribution(0, 3);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

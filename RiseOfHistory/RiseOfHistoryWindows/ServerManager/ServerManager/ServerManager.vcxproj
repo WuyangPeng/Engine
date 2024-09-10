@@ -339,7 +339,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command />
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(ProjectDir)/../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
@@ -356,7 +356,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command />
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(ProjectDir)/../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
@@ -375,6 +375,9 @@
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(ProjectDir)/../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|Win32'">
     <ClCompile>
@@ -389,6 +392,9 @@
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(ProjectDir)/../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -405,7 +411,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command />
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(ProjectDir)/../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
@@ -426,7 +432,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command />
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(ProjectDir)/../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
@@ -449,6 +455,9 @@
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(ProjectDir)/../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|Win32'">
     <ClCompile>
@@ -467,6 +476,9 @@
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(ProjectDir)/../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -479,7 +491,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command />
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(ProjectDir)/../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
@@ -496,7 +508,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command />
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(ProjectDir)/../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
@@ -515,6 +527,9 @@
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(ProjectDir)/../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|x64'">
     <ClCompile>
@@ -529,6 +544,9 @@
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(ProjectDir)/../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -545,7 +563,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command />
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(ProjectDir)/../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
@@ -566,7 +584,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command />
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(ProjectDir)/../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
@@ -589,6 +607,9 @@
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(ProjectDir)/../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|x64'">
     <ClCompile>
@@ -607,11 +628,17 @@
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(ProjectDir)/../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json" />
+    <None Include="Configuration\Global.json" />
     <None Include="Configuration\Log.json" />
-    <None Include="Configuration\Renderer.json" />
+    <None Include="Configuration\ServerManager\Database.json" />
+    <None Include="Configuration\ServerManager\Network.json" />
+    <None Include="Configuration\ServerManager\Renderer.json" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>

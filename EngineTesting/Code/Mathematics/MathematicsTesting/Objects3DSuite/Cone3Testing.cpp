@@ -43,8 +43,8 @@ void Mathematics::Cone3Testing::MainTest()
 void Mathematics::Cone3Testing::ConeTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
-    std::uniform_real<double> randomDistribution1(0.0, MathD::GetHalfPI());
+    std::uniform_real_distribution<double> randomDistribution0{ -100.0, 100.0 };
+    std::uniform_real_distribution<double> randomDistribution1(0.0, MathD::GetHalfPI());
 
     const auto aTestLoopCount = GetTestLoopCount();
 

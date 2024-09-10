@@ -85,8 +85,8 @@ void Mathematics::QuaternionTesting::ConstructionTest()
     ASSERT_APPROXIMATE(secondQuaternion[3], 35.0, 1e-10);
 
     std::default_random_engine generator{};
-    std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
-    std::uniform_real<float> randomDistribution1{ 0.0f, MathF::GetTwoPI() };
+    std::uniform_real_distribution<float> randomDistribution0{ -100.0f, 100.0f };
+    std::uniform_real_distribution<float> randomDistribution1{ 0.0f, MathF::GetTwoPI() };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -209,8 +209,8 @@ void Mathematics::QuaternionTesting::AccessTest()
 void Mathematics::QuaternionTesting::OperatorCalculateTest()
 {
     std::default_random_engine generator{};
-    std::uniform_real<double> randomDistribution0{ -100.0f, 100.0f };
-    std::uniform_real<double> randomDistribution1{ 0.0f, MathF::GetTwoPI() };
+    std::uniform_real_distribution<double> randomDistribution0{ -100.0f, 100.0f };
+    std::uniform_real_distribution<double> randomDistribution1{ 0.0f, MathF::GetTwoPI() };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -349,10 +349,10 @@ void Mathematics::QuaternionTesting::OperatorCalculateTest()
 void Mathematics::QuaternionTesting::ArithmeticCalculateTest()
 {
     std::default_random_engine generator{};
-    std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
-    std::uniform_real<float> randomDistribution1{ 0.0f, MathF::GetTwoPI() };
-    std::uniform_real<float> thirdRandomDistribution{ 0.0f, 1.0f };
-    std::uniform_int<> fourthRandomDistribution(0, 20);
+    std::uniform_real_distribution<float> randomDistribution0{ -100.0f, 100.0f };
+    std::uniform_real_distribution<float> randomDistribution1{ 0.0f, MathF::GetTwoPI() };
+    std::uniform_real_distribution<float> thirdRandomDistribution{ 0.0f, 1.0f };
+    std::uniform_int_distribution<> fourthRandomDistribution(0, 20);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -601,7 +601,7 @@ void Mathematics::QuaternionTesting::ArithmeticCalculateTest()
 void Mathematics::QuaternionTesting::ClosestCalculateTest()
 {
     std::default_random_engine generator{};
-    std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
+    std::uniform_real_distribution<float> randomDistribution0{ -100.0f, 100.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -772,7 +772,7 @@ void Mathematics::QuaternionTesting::ClosestCalculateTest()
 void Mathematics::QuaternionTesting::FactorCalculateTest()
 {
     std::default_random_engine generator{};
-    std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
+    std::uniform_real_distribution<float> randomDistribution0{ -100.0f, 100.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -885,8 +885,8 @@ void Mathematics::QuaternionTesting::FactorCalculateTest()
 void Mathematics::QuaternionTesting::ConstraintsClosestCalculateTest()
 {
     std::default_random_engine generator{};
-    std::uniform_real<float> randomDistribution0{ -MathF::GetHalfPI(), MathF::GetHalfPI() };
-    std::uniform_real<float> thirdRandomDistribution{ -100.0f, 100.0f };
+    std::uniform_real_distribution<float> randomDistribution0{ -MathF::GetHalfPI(), MathF::GetHalfPI() };
+    std::uniform_real_distribution<float> thirdRandomDistribution{ -100.0f, 100.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -894,7 +894,7 @@ void Mathematics::QuaternionTesting::ConstraintsClosestCalculateTest()
     {
         const float firstAngle = randomDistribution0(generator);
 
-        std::uniform_real<float> randomDistribution1(firstAngle, MathF::GetHalfPI());
+        std::uniform_real_distribution<float> randomDistribution1(firstAngle, MathF::GetHalfPI());
 
         const float secondAngle = randomDistribution1(generator);
 
@@ -1059,7 +1059,7 @@ void Mathematics::QuaternionTesting::ConstraintsClosestCalculateTest()
 
         const float thirdAngle = randomDistribution0(generator);
 
-        std::uniform_real<float> fourthRandomDistribution(thirdAngle, MathF::GetHalfPI());
+        std::uniform_real_distribution<float> fourthRandomDistribution(thirdAngle, MathF::GetHalfPI());
 
         const float fourthAngle = fourthRandomDistribution(generator);
 
@@ -1614,7 +1614,7 @@ void Mathematics::QuaternionTesting::CompareTest()
 {
     std::default_random_engine generator{};
 
-    std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
+    std::uniform_real_distribution<float> randomDistribution0{ -100.0f, 100.0f };
 
     QuaternionF firstQuaternion(randomDistribution0(generator),
                                 randomDistribution0(generator),

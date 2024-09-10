@@ -31,7 +31,7 @@ Real Mathematics::Random<Real>::UnitRandom(uint32_t seed)
     const auto timestamp = boost::numeric_cast<uint32_t>(std::chrono::duration_cast<std::chrono::seconds>(currentTime).count());
 
     std::default_random_engine generator{ timestamp };
-    std::uniform_int randomDistribution{ 0, RAND_MAX };
+    std::uniform_int_distribution<> randomDistribution{ 0, RAND_MAX };
 
     const auto ratio = (static_cast<Real>(randomDistribution(generator))) / (static_cast<Real>(RAND_MAX));
 

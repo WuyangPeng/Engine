@@ -65,7 +65,7 @@ void Mathematics::OrientedBoundingBoxTree<Real>::Create(const std::vector<Vector
     /// 对OrientedBoundingBoxNode的引用被传递到BuildTree，
     /// 节点被附加到std::vector。
     /// 因为引用在堆栈上，所以我们必须保证不会发生重新分配，以避免引用无效。
-    const auto numNodes = (static_cast<size_t>(1) << (height + 1)) - 1;
+    const auto numNodes = (gsl::narrow_cast<size_t>(1) << (height + 1)) - 1;
     nodes.resize(numNodes);
 
     /// 数组分区将索引存储到质心中，以便在节点上，

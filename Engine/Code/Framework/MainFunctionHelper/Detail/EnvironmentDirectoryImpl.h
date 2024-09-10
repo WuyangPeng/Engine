@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 15:15)
+/// 版本：1.0.1.0 (2024/08/06 19:33)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_ENVIRONMENT_DIRECTORY_IMPL_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_ENVIRONMENT_DIRECTORY_IMPL_H
@@ -16,7 +16,6 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "Framework/MainFunctionHelper/MainFunctionHelperFwd.h"
 
-#include <map>
 #include <string>
 
 namespace Framework
@@ -37,6 +36,7 @@ namespace Framework
         NODISCARD String GetEngineDirectory() const;
 
         NODISCARD String GetDirectory(UpperDirectory analysisDirectory) const;
+        NODISCARD String GetExecutableConfigurationDirectory() const;
 
         NODISCARD String GetPath(RenderingAnalysisDirectory analysisDirectory) const;
         NODISCARD String GetPath(RenderingDirectory renderingDirectory, RenderingAnalysisDirectory analysisDirectory) const;

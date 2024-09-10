@@ -13,6 +13,7 @@
 #include "Framework/FrameworkDll.h"
 
 #include "EngineMiddleLayerInterface.h"
+#include "CoreTools/EngineConfiguration/GlobalConfig.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SharedPtrMacro.h"
@@ -30,6 +31,8 @@ namespace Framework
         using SystemManagerInterfaceImpl = EngineMiddleLayerInterfaceImpl;
         NON_COPY_TYPE_DECLARE(SystemManagerInterface);
         using ParentType = EngineMiddleLayerInterface;
+
+        using GlobalConfig = CoreTools::GlobalConfig;
 
     public:
         SystemManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
@@ -62,6 +65,8 @@ namespace Framework
         ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(CameraSystems)
         ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Rendering)
         ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Engine)
+
+        NODISCARD GlobalConfig GetGlobalConfig() const;
 
     private:
         using SystemPackageType = CoreTools::NonCopyImpl<SystemManagerImpl>;

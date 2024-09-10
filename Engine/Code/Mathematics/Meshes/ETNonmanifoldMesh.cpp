@@ -328,14 +328,14 @@ int Mathematics::ETNonmanifoldMesh::GetNumEdges() const noexcept
 
 // ETNonmanifoldMesh::Edge
 
-Mathematics::ETNonmanifoldMesh::Edge::Edge(int v0, int v1) noexcept
+Mathematics::ETNonmanifoldMesh::Edge::Edge(int v0, int v1)  
     : v{ v0, v1 }, t{}
 {
 }
 
 // ETNonmanifoldMesh::Triangle
 
-Mathematics::ETNonmanifoldMesh::Triangle::Triangle(int v0, int v1, int v2) noexcept
+Mathematics::ETNonmanifoldMesh::Triangle::Triangle(int v0, int v1, int v2)  
     : e{}, v{ v0, v1, v2 }
 {
 }

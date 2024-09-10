@@ -67,15 +67,15 @@ void Mathematics::AxesAlignBoundingBox3DTesting::ConstructionTest()
 void Mathematics::AxesAlignBoundingBox3DTesting::AccessTest()
 {
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
+    std::uniform_real_distribution<float> randomDistribution0{ -100.0f, 100.0f };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         Vector3F vector0(randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine));
 
-        std::uniform_real<float> randomDistribution1(vector0[0], 100.0f);
-        std::uniform_real<float> randomDistribution2(vector0[1], 100.0f);
-        std::uniform_real<float> randomDistribution3(vector0[2], 100.0f);
+        std::uniform_real_distribution<float> randomDistribution1(vector0[0], 100.0f);
+        std::uniform_real_distribution<float> randomDistribution2(vector0[1], 100.0f);
+        std::uniform_real_distribution<float> randomDistribution3(vector0[2], 100.0f);
 
         Vector3F vector1(randomDistribution1(randomEngine), randomDistribution2(randomEngine), randomDistribution3(randomEngine));
 
@@ -96,23 +96,23 @@ void Mathematics::AxesAlignBoundingBox3DTesting::AccessTest()
 void Mathematics::AxesAlignBoundingBox3DTesting::IntersectionTest()
 {
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
+    std::uniform_real_distribution<float> randomDistribution0{ -100.0f, 100.0f };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         Vector3F vector0(randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine));
 
-        std::uniform_real<float> randomDistribution1(vector0[0], 100.0f);
-        std::uniform_real<float> randomDistribution2(vector0[1], 100.0f);
-        std::uniform_real<float> randomDistribution3(vector0[2], 100.0f);
+        std::uniform_real_distribution<float> randomDistribution1(vector0[0], 100.0f);
+        std::uniform_real_distribution<float> randomDistribution2(vector0[1], 100.0f);
+        std::uniform_real_distribution<float> randomDistribution3(vector0[2], 100.0f);
 
         Vector3F vector1(randomDistribution1(randomEngine), randomDistribution2(randomEngine), randomDistribution3(randomEngine));
 
         Vector3F vector2(randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine));
 
-        std::uniform_real<float> randomDistribution4(vector2[0], 100.0f);
-        std::uniform_real<float> randomDistribution5(vector2[1], 100.0f);
-        std::uniform_real<float> randomDistribution6(vector2[2], 100.0f);
+        std::uniform_real_distribution<float> randomDistribution4(vector2[0], 100.0f);
+        std::uniform_real_distribution<float> randomDistribution5(vector2[1], 100.0f);
+        std::uniform_real_distribution<float> randomDistribution6(vector2[2], 100.0f);
 
         Vector3F vector3(randomDistribution4(randomEngine), randomDistribution5(randomEngine), randomDistribution6(randomEngine));
 

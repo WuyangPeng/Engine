@@ -5,13 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 15:11)
+/// 版本：1.0.1.0 (2024/08/06 19:33)
 
 #include "Framework/FrameworkExport.h"
 
 #include "AnalysisEngineDirectory.h"
 #include "DirectoryDefaultName.h"
 #include "EnvironmentDirectoryImpl.h"
+#include "System/DynamicLink/LibraryTools.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/FileManager/EnvironmentVariable.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
@@ -26,9 +27,8 @@ Framework::EnvironmentDirectoryImpl::EnvironmentDirectoryImpl(const String& engi
 System::String Framework::EnvironmentDirectoryImpl::GenerateEngineDirectory(const String& engineEnvironment)
 {
     const CoreTools::EnvironmentVariable variable{ engineEnvironment };
-    auto engineInstallationDirectory = variable.GetVariable();
 
-    return engineInstallationDirectory;
+    return variable.GetVariable();
 }
 
 Framework::EngineDirectoryPath Framework::EnvironmentDirectoryImpl::GetEngineDirectoryPath(const String& engineDirectory)
@@ -58,14 +58,7 @@ std::string Framework::EnvironmentDirectoryImpl::GetJsonName(const String& varia
 
 bool Framework::EnvironmentDirectoryImpl::IsValid() const noexcept
 {
-    if (!engineEnvironment.empty())
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return !engineEnvironment.empty();
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -81,10 +74,14 @@ System::String Framework::EnvironmentDirectoryImpl::GetEngineDirectory() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    if (!engineDirectory.empty())
-        return engineDirectory + DirectoryDefaultName::GetSuffix();
-    else
+    if (engineDirectory.empty())
+    {
         return DirectoryDefaultName::GetDefaultNullName();
+    }
+    else
+    {
+        return engineDirectory + DirectoryDefaultName::GetSuffix();
+    }
 }
 
 System::String Framework::EnvironmentDirectoryImpl::GetDirectory(UpperDirectory analysisDirectory) const
@@ -92,6 +89,13 @@ System::String Framework::EnvironmentDirectoryImpl::GetDirectory(UpperDirectory 
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
     return GetEngineDirectory() + engineDirectoryPath.GetDirectory(System::EnumCastUnderlying<AnalysisDirectory>(analysisDirectory)) + DirectoryDefaultName::GetSuffix();
+}
+
+Framework::EnvironmentDirectoryImpl::String Framework::EnvironmentDirectoryImpl::GetExecutableConfigurationDirectory() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+    return GetDirectory(UpperDirectory::Configuration) + CoreTools::StringConversion::MultiByteConversionStandard(System::GetExecutableNameRemoveSuffix()) + DirectoryDefaultName::GetSuffix();
 }
 
 System::String Framework::EnvironmentDirectoryImpl::GetPath(RenderingAnalysisDirectory analysisDirectory) const

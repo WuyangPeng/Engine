@@ -48,8 +48,8 @@ void Mathematics::DistancePoint2Ellipse2Testing::MainTest()
 void Mathematics::DistancePoint2Ellipse2Testing::BaseTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    std::uniform_real<double> randomDistribution1(0.0, 100.0);
+    std::uniform_real_distribution<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_real_distribution<double> randomDistribution1(0.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -102,8 +102,8 @@ void Mathematics::DistancePoint2Ellipse2Testing::BaseTest()
 void Mathematics::DistancePoint2Ellipse2Testing::StaticDistanceTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-10.0, 10.0);
-    std::uniform_real<double> randomDistribution1(0.0, 10.0);
+    std::uniform_real_distribution<double> randomDistribution0(-10.0, 10.0);
+    std::uniform_real_distribution<double> randomDistribution1(0.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -177,8 +177,8 @@ void Mathematics::DistancePoint2Ellipse2Testing::StaticDistanceTest()
 void Mathematics::DistancePoint2Ellipse2Testing::DynamicDistanceTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    std::uniform_real<double> randomDistribution1(0.0, 100.0);
+    std::uniform_real_distribution<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_real_distribution<double> randomDistribution1(0.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -263,8 +263,8 @@ void Mathematics::DistancePoint2Ellipse2Testing::DynamicDistanceTest()
 void Mathematics::DistancePoint2Ellipse2Testing::DerivativeDistanceTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    std::uniform_real<double> randomDistribution1(0.0, 100.0);
+    std::uniform_real_distribution<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_real_distribution<double> randomDistribution1(0.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

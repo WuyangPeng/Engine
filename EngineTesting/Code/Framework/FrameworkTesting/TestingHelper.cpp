@@ -1,26 +1,44 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.3 (2023/08/11 18:22)
+/// 标准：std:c++20
+/// 版本：1.0.1.0 (2024/08/07 10:41)
 
 #include "Testing.h"
 #include "TestingHelper.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 Framework::TestingHelper::TestingHelper(int argc, char** argv)
     : ParentType{ argc, argv, "框架测试" }
 {
+    CoreTools::InitTerm::ExecuteInitializer();
+
     InitSuite();
 
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
+}
+
+Framework::TestingHelper::~TestingHelper() noexcept
+{
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+
+    EXCEPTION_TRY
+    {
+        Destroy();
+    }
+    EXCEPTION_ALL_CATCH(Framework)
+}
+
+void Framework::TestingHelper::Destroy()
+{
+    CoreTools::InitTerm::ExecuteTerminator();
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, TestingHelper)
@@ -59,7 +77,7 @@ void Framework::TestingHelper::AddMainFunctionHelperSuite()
 {
     auto mainFunctionHelperSuite = GenerateSuite("主函数帮助");
 
-    ADD_TEST(mainFunctionHelperSuite, EnvironmentDirectoryTesting);
+    mainFunctionHelperSuite.AddSuite(GetEnvironmentDirectorySuite());
     ADD_TEST(mainFunctionHelperSuite, MainFunctionHelperBaseTesting);
     ADD_TEST(mainFunctionHelperSuite, ConsoleMainFunctionHelperBaseTesting);
     ADD_TEST(mainFunctionHelperSuite, ConsoleMainFunctionHelperTesting);
@@ -69,6 +87,16 @@ void Framework::TestingHelper::AddMainFunctionHelperSuite()
     ADD_TEST(mainFunctionHelperSuite, MacintoshMainFunctionHelperTesting);
 
     AddSuite(mainFunctionHelperSuite);
+}
+
+Framework::TestingHelper::Suite Framework::TestingHelper::GetEnvironmentDirectorySuite()
+{
+    auto environmentDirectorySuite = GenerateSuite("环境目录");
+
+    ADD_TEST(environmentDirectorySuite, DefaultEnvironmentDirectoryTesting);
+    ADD_TEST(environmentDirectorySuite, FileEnvironmentDirectoryTesting);
+
+    return environmentDirectorySuite;
 }
 
 void Framework::TestingHelper::AddWindowCreateSuite()

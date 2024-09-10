@@ -280,7 +280,7 @@ void Mathematics::Matrix2Testing::OperatorCalculateTest()
     ASSERT_APPROXIMATE(matrix31(1, 1), 1.6f, 1e-8f);
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution{ -10.0f, 10.0f };
+    std::uniform_real_distribution<float> randomDistribution{ -10.0f, 10.0f };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -340,8 +340,8 @@ void Mathematics::Matrix2Testing::OperatorCalculateTest()
 void Mathematics::Matrix2Testing::ArithmeticCalculateTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution{ -10.0f, 10.0f };
-    std::uniform_real<float> angleRandomDistribution(0.0f, MathF::GetHalfPI());
+    std::uniform_real_distribution<float> randomDistribution{ -10.0f, 10.0f };
+    std::uniform_real_distribution<float> angleRandomDistribution(0.0f, MathF::GetHalfPI());
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {

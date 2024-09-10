@@ -14,12 +14,17 @@
 #include "TupleDetail.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26447)
+
 template <int Rows, int Columns, typename Type>
 CoreTools::Table<Rows, Columns, Type>::Table() noexcept
     : entry{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
+
+#include SYSTEM_WARNING_POP
 
 template <int Rows, int Columns, typename Type>
 CoreTools::Table<Rows, Columns, Type>::Table(ParamType member00, ParamType member01, ParamType member10, ParamType member11) noexcept(std::is_arithmetic_v<Type>) requires(Rows == 2 && Columns == 2)

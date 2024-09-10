@@ -76,6 +76,9 @@ void Framework::CameraMotionTesting::SpeedTest()
     ASSERT_APPROXIMATE(cameraMotion.GetRotationSpeed(), rotationSpeed / rotationSpeedFactor, Mathematics::MathF::epsilon);
 }
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
 void Framework::CameraMotionTesting::MoveTest()
 {
     constexpr auto translationSpeed = 1.0f;
@@ -88,7 +91,7 @@ void Framework::CameraMotionTesting::MoveTest()
     auto right = camera->GetRightVector();
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<> random{ 0, 1 };
+    std::uniform_int_distribution<> random{ 0, 1 };
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
@@ -222,6 +225,8 @@ void Framework::CameraMotionTesting::MoveTest()
         AssertCamera(*camera, *cameraMotion.GetCamera());
     }
 }
+
+#include SYSTEM_WARNING_POP
 
 void Framework::CameraMotionTesting::AssertCamera(const Camera& lhs, const Camera& rhs)
 {

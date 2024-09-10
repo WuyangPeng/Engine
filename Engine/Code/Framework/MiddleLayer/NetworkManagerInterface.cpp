@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 15:04)
+/// 版本：1.0.1.0 (2024/06/22 10:06)
 
 #include "Framework/FrameworkExport.h"
 
@@ -40,8 +40,8 @@ bool Framework::NetworkManagerInterface::Create(const EnvironmentParameter& envi
 
     if (ParentType::Create(environmentParameter))
     {
-        // 连接服务器和监听客户端。
-        const auto networkFileName = GetEnvironmentDirectory().GetDirectory(UpperDirectory::Configuration) + SYSTEM_TEXT("Network.json");
+        /// 连接服务器和监听客户端。
+        const auto networkFileName = GetEnvironmentDirectory().GetExecutableConfigurationDirectory() + SYSTEM_TEXT("Network.json");
 
         networkManager->ResetSendSocketManager(CoreTools::StringConversion::StandardConversionMultiByte(networkFileName));
 
@@ -59,7 +59,7 @@ bool Framework::NetworkManagerInterface::Initialize()
 
     if (ParentType::Initialize())
     {
-        // 子类在这里注册消息。
+        /// 子类在这里注册消息。
         RegisteredMessages();
 
         return true;
@@ -95,8 +95,7 @@ bool Framework::NetworkManagerInterface::Idle(int64_t timeDelta)
 
     if (ParentType::Idle(timeDelta))
     {
-        // 发送和接收消息
-
+        /// 发送和接收消息
         return true;
     }
     else

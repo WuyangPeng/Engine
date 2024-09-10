@@ -420,9 +420,13 @@
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\TupleLess.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\TupleLessDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DllLib.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\GlobalConfigImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\SmtpConfigImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\StringReplacingImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\EngineConfiguration.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\EngineConfigurationFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\GlobalConfig.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\SmtpConfig.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\StringReplacing.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Exception\Detail\ErrorFactory.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Exception\Detail\ErrorImpl.h" />
@@ -900,6 +904,9 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Flags\CSVCondition.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Flags\TextParsingConstant.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Flags\CSVFlags.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Json\Detail\JsonAnalysisManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Json\JsonAnalysisManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Json\JsonBase.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\AppProperties.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Cell.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CellValueDetail.h" />
@@ -1121,7 +1128,11 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\SpecifyCheckSum.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\DllMain.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\GlobalConfigImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\SmtpConfigImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\Detail\StringReplacingImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\GlobalConfig.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\SmtpConfig.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\StringReplacing.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Exception\Detail\ErrorFactory.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Exception\Detail\ErrorImpl.cpp" />
@@ -1326,6 +1337,9 @@
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\Parsing.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\PathSplitParsing.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\ScopeExpressionParsing.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Json\Detail\JsonAnalysisManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Json\JsonAnalysisManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Json\JsonBase.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\AppProperties.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Cell.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CellValueProxy.cpp" />

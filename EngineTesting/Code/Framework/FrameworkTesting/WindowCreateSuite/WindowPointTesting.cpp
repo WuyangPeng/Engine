@@ -51,7 +51,7 @@ void Framework::WindowPointTesting::RandomTest()
     constexpr auto maxValue = 2048;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<> random{ minValue, maxValue };
+    std::uniform_int_distribution<> random{ minValue, maxValue };
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
@@ -86,7 +86,7 @@ void Framework::WindowPointTesting::LParamTest()
     constexpr auto maxValue = 2048;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<> random{ minValue, maxValue };
+    std::uniform_int_distribution<> random{ minValue, maxValue };
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
@@ -108,7 +108,7 @@ void Framework::WindowPointTesting::EqualTest()
     constexpr auto maxValue = 2048;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<> random(minValue, maxValue);
+    std::uniform_int_distribution<> random(minValue, maxValue);
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
@@ -134,7 +134,7 @@ void Framework::WindowPointTesting::OStreamTest()
     constexpr auto maxValue = 2048;
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<> random{ minValue, maxValue };
+    std::uniform_int_distribution<> random{ minValue, maxValue };
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {

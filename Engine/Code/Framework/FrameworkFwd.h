@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 14:09)
+/// 版本：1.0.1.0 (2024/08/07 10:39)
 
 #ifndef FRAMEWORK_FWD_H
 #define FRAMEWORK_FWD_H
@@ -20,6 +20,7 @@
 #include "MiddleLayer/MiddleLayerFwd.h"
 #include "OpenGLGlutFrame/OpenGLGlutFrameFwd.h"
 #include "Project/ProjectFwd.h"
+#include "Smtp/SmtpFwd.h"
 #include "WindowCreate/WindowCreateFwd.h"
 #include "WindowProcess/WindowProcessFwd.h"
 #include "WindowRegister/WindowRegisterFwd.h"

@@ -40,7 +40,7 @@ namespace Mathematics
         class Vertex
         {
         public:
-            Vertex(int v) noexcept;
+            explicit Vertex(int v);
             virtual ~Vertex() noexcept = default;
             Vertex(const Vertex& rhs) = default;
             Vertex& operator=(const Vertex& rhs) = default;
@@ -54,7 +54,7 @@ namespace Mathematics
         class Edge
         {
         public:
-            Edge(int v0, int v1) noexcept;
+            Edge(int v0, int v1);
             virtual ~Edge() noexcept = default;
             Edge(const Edge& rhs) = default;
             Edge& operator=(const Edge& rhs) = default;

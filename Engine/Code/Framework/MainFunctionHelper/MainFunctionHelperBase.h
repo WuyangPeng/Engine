@@ -58,11 +58,13 @@ namespace Framework
 
         void InitUniqueIdManager();
         void InitLog(const EnvironmentDirectory& environmentDirectory);
-        void InitInitTerm(); 
+        void InitJsonAnalysis();
+        void InitInitTerm();
         void InitImpl(const EnvironmentDirectory& environmentDirectory);
 
-        void DestroyMainImpl() noexcept; 
+        void DestroyMainImpl() noexcept;
         void DestroyInitTerm();
+        void DestroyJsonAnalysis() noexcept;
         void DestroyLog() noexcept;
         void DestroyUniqueIdManager() noexcept;
 

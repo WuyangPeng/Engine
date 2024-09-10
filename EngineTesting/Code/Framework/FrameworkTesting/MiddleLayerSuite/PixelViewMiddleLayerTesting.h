@@ -70,7 +70,7 @@ namespace Framework
         static constexpr auto maxColour = gsl::narrow_cast<uint8_t>(Rendering::ColourDefaultTraits<uint8_t>::maxValue);
         static constexpr Colour black{};
 
-        std::uniform_int<uint8_t> random;
+        std::uniform_int_distribution<uint16_t> random;
     };
 }
 

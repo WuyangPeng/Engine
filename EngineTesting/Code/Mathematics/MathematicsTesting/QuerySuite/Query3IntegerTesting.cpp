@@ -55,8 +55,8 @@ void Mathematics::Query3IntegerTesting::MainTest()
 void Mathematics::Query3IntegerTesting::VerticesTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    std::uniform_int<> randomDistribution1(1, 50);
+    std::uniform_real_distribution<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_int_distribution<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -85,8 +85,8 @@ void Mathematics::Query3IntegerTesting::VerticesTest()
 void Mathematics::Query3IntegerTesting::PlaneTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    std::uniform_int<> randomDistribution1(1, 50);
+    std::uniform_real_distribution<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_int_distribution<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -100,7 +100,7 @@ void Mathematics::Query3IntegerTesting::PlaneTest()
             vertices.push_back(Vector3D(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator)));
         }
 
-        std::uniform_int<> thirdRandomDistribution(0, size - 1);
+        std::uniform_int_distribution<> thirdRandomDistribution(0, size - 1);
 
         const auto secondIndex = thirdRandomDistribution(generator);
         const auto thirdIndex = thirdRandomDistribution(generator);
@@ -117,8 +117,8 @@ void Mathematics::Query3IntegerTesting::PlaneTest()
 void Mathematics::Query3IntegerTesting::TetrahedronTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    std::uniform_int<> randomDistribution1(1, 50);
+    std::uniform_real_distribution<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_int_distribution<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -132,7 +132,7 @@ void Mathematics::Query3IntegerTesting::TetrahedronTest()
             vertices.emplace_back(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
         }
 
-        std::uniform_int<> thirdRandomDistribution(0, size - 1);
+        std::uniform_int_distribution<> thirdRandomDistribution(0, size - 1);
 
         auto firstIndex = thirdRandomDistribution(generator);
         auto secondIndex = thirdRandomDistribution(generator);
@@ -181,8 +181,8 @@ void Mathematics::Query3IntegerTesting::TetrahedronTest()
 void Mathematics::Query3IntegerTesting::CircumspherTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    std::uniform_int<> randomDistribution1(1, 50);
+    std::uniform_real_distribution<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_int_distribution<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -196,7 +196,7 @@ void Mathematics::Query3IntegerTesting::CircumspherTest()
             vertices.emplace_back(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
         }
 
-        std::uniform_int<> thirdRandomDistribution(0, size - 1);
+        std::uniform_int_distribution<> thirdRandomDistribution(0, size - 1);
 
         auto secondIndex = thirdRandomDistribution(generator);
         auto thirdIndex = thirdRandomDistribution(generator);

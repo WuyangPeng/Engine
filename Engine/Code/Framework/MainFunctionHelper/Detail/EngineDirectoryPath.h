@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 15:15)
+/// 版本：1.0.1.0 (2024/08/06 19:32)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_ENGINE_DIRECTORY_PATH_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_ENGINE_DIRECTORY_PATH_H
@@ -26,7 +26,7 @@ namespace Framework
         using String = System::String;
 
     public:
-        explicit EngineDirectoryPath(const EngineDirectoryResult& result);
+        explicit EngineDirectoryPath(EngineDirectoryResult result);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,7 +43,9 @@ namespace Framework
         void Analysis(RenderingDirectory renderingDirectory, EndianDirectory endianDirectory);
         void Analysis(RenderingDirectory renderingDirectory, EndianDirectory endianDirectory, AnalysisDirectory analysisDirectory);
 
-        NODISCARD String GetDirectoryResult(RenderingDirectory renderingDirectory, EndianDirectory endianDirectory, AnalysisDirectory analysisDirectory);
+        NODISCARD String GetDirectoryResult(RenderingDirectory renderingDirectory, EndianDirectory endianDirectory, AnalysisDirectory analysisDirectory) const;
+        NODISCARD String GetRenderingDirectoryResult(RenderingDirectory renderingDirectory, const String& endianDirectoryDescribe, const String& directory) const;
+        NODISCARD static String GetNoRenderingDirectoryResult(const String& endianDirectoryDescribe, const String& directory);
 
     private:
         EngineDirectoryResult result;

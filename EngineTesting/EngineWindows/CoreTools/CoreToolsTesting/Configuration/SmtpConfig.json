@@ -1,0 +1,13 @@
+{
+  "smtpHost": "smtp.qq.com",
+  "smtpSslEnable": false,
+  "smtpAuth": true,
+  "sendUser": "94458936@qq.com",
+  "password": "bbbbbbbbbbbbcbbb",
+  "receiveUser": [
+    "user1@example.com",
+    "user2@example.com",
+    "user3@example.com"
+  ]
+}
+      

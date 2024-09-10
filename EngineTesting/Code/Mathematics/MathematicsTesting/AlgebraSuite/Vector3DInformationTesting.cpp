@@ -37,7 +37,7 @@ void Mathematics::Vector3InformationTesting::DoRunUnitTest()
 
 void Mathematics::Vector3InformationTesting::MainTest()
 {
-   // ASSERT_NOT_THROW_EXCEPTION_0(DimensionTest);
+    // ASSERT_NOT_THROW_EXCEPTION_0(DimensionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AxesAlignBoundingBoxTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DirectionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ExtremeTest);
@@ -47,8 +47,8 @@ void Mathematics::Vector3InformationTesting::DimensionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> randomDistribution0{ 0.0001, 0.0002 };
-    std::uniform_real<double> randomDistribution1{ -5.0, 5.1 };
+    std::uniform_real_distribution<double> randomDistribution0{ 0.0001, 0.0002 };
+    std::uniform_real_distribution<double> randomDistribution1{ -5.0, 5.1 };
 
     std::vector<Vector3D> vector0;
     std::vector<Vector3D> vector1;
@@ -112,7 +112,7 @@ void Mathematics::Vector3InformationTesting::AxesAlignBoundingBoxTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> randomDistribution{ -100.0f, 100.0f };
+    std::uniform_real_distribution<double> randomDistribution{ -100.0f, 100.0f };
 
     std::vector<Vector3D> vectors;
 
@@ -158,7 +158,7 @@ void Mathematics::Vector3InformationTesting::DirectionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> randomDistribution{ -100.0f, 100.0f };
+    std::uniform_real_distribution<double> randomDistribution{ -100.0f, 100.0f };
 
     std::vector<Vector3D> vectors;
 
@@ -267,7 +267,7 @@ void Mathematics::Vector3InformationTesting::ExtremeTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> randomDistribution{ -100.0f, 100.0f };
+    std::uniform_real_distribution<double> randomDistribution{ -100.0f, 100.0f };
 
     std::vector<Vector3D> vectors;
 

@@ -13,13 +13,12 @@
 #include "Flags/SystemMiddleLayerFlags.h"
 #include "Detail/EngineMiddleLayerInterfaceImpl.h"
 #include "Detail/SystemManagerImpl.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
 Framework::SystemManagerInterface::SystemManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory },
       impl{ System::EnumCastUnderlying(SystemMiddleLayer::Count) },
-      system{ CoreTools::DisableNotThrow::Disable }
+      system{ environmentDirectory }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -35,6 +34,13 @@ ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, System, Audio)
 ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, System, CameraSystems)
 ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, System, Rendering)
 ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, System, Engine)
+
+CoreTools::GlobalConfig Framework::SystemManagerInterface::GetGlobalConfig() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return system->GetGlobalConfig();
+}
 
 bool Framework::SystemManagerInterface::Paint()
 {

@@ -36,6 +36,8 @@ namespace System
 
         void GetModuleFileNameFailureTest();
         void DllModuleFileNameFailureTest(WindowsDWord maxFileNameLength, DynamicLinkModule libraryModule, const DynamicLinkCharBufferType& moduleFileName);
+
+        void GetExecutableNameTest();
     };
 }
 

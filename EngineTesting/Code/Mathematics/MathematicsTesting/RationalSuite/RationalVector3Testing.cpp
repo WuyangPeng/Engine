@@ -48,7 +48,7 @@ void Mathematics::RationalVector3Testing::MainTest()
 void Mathematics::RationalVector3Testing::ConstructionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<int> randomDistribution0(INT32_MIN, INT32_MAX);
+    std::uniform_int_distribution<int> randomDistribution0(INT32_MIN, INT32_MAX);
 
     RationalVector3<7> vector0;
 
@@ -111,7 +111,7 @@ void Mathematics::RationalVector3Testing::CalculateTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_int<int> randomDistribution0(INT16_MIN, INT16_MAX);
+    std::uniform_int_distribution<int> randomDistribution0(INT16_MIN, INT16_MAX);
 
     const SignRational<15> firstRational(randomDistribution0(generator), randomDistribution0(generator));
 
@@ -156,7 +156,7 @@ void Mathematics::RationalVector3Testing::CalculateTest()
 void Mathematics::RationalVector3Testing::OperatorTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<int> randomDistribution0(INT16_MIN, INT16_MAX);
+    std::uniform_int_distribution<int> randomDistribution0(INT16_MIN, INT16_MAX);
 
     const SignRational<12> firstRational(randomDistribution0(generator), randomDistribution0(generator));
 
@@ -226,7 +226,7 @@ void Mathematics::RationalVector3Testing::OperatorTest()
 void Mathematics::RationalVector3Testing::CompareTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<int> randomDistribution0(INT16_MIN, INT16_MAX);
+    std::uniform_int_distribution<int> randomDistribution0(INT16_MIN, INT16_MAX);
 
     const SignRational<3> firstRational(randomDistribution0(generator), randomDistribution0(generator));
 

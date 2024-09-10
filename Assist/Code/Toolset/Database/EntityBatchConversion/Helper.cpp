@@ -14,8 +14,8 @@
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
 #include "CoreTools/CharacterString/CodeMappingAnalysis.h"
 #include "CoreTools/CharacterString/StringConversion.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
-#include "CoreTools/FileManager/OFStreamManager.h"
+#include "CoreTools/FileManager/IFileStreamManager.h"
+#include "CoreTools/FileManager/OFileStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
@@ -86,7 +86,7 @@ void BatchConversion::Helper::Conversion()
         if (const auto result = GetContent(codeOutput + SYSTEM_TEXT("/") + codeEntityAnalysis.GetNamespaceName() + SYSTEM_TEXT("Fwd.h"));
             result != codeFwdHeaderFileGeneration.GetContent())
         {
-            CoreTools::OFStreamManager streamManager{ codeOutput + SYSTEM_TEXT("/") + codeEntityAnalysis.GetNamespaceName() + SYSTEM_TEXT("Fwd.h"), false };
+            CoreTools::OFileStreamManager streamManager{ codeOutput + SYSTEM_TEXT("/") + codeEntityAnalysis.GetNamespaceName() + SYSTEM_TEXT("Fwd.h"), false };
             streamManager.SetSimplifiedChinese();
 
             streamManager << codeFwdHeaderFileGeneration.GetContent();
@@ -99,7 +99,7 @@ void BatchConversion::Helper::Conversion()
         if (const auto result = GetContent(codeOutput + SYSTEM_TEXT("/") + codeEntityAnalysis.GetNamespaceName() + SYSTEM_TEXT(".h"));
             result != codeHeaderFileGeneration.GetContent())
         {
-            CoreTools::OFStreamManager streamManager{ codeOutput + SYSTEM_TEXT("/") + codeEntityAnalysis.GetNamespaceName() + SYSTEM_TEXT(".h"), false };
+            CoreTools::OFileStreamManager streamManager{ codeOutput + SYSTEM_TEXT("/") + codeEntityAnalysis.GetNamespaceName() + SYSTEM_TEXT(".h"), false };
             streamManager.SetSimplifiedChinese();
 
             streamManager << codeHeaderFileGeneration.GetContent();
@@ -117,7 +117,7 @@ void BatchConversion::Helper::Conversion()
             if (const auto result = GetContent(codeOutput + SYSTEM_TEXT("/") + codeEntityClass.GetEntityClassName() + SYSTEM_TEXT(".h"));
                 result != entityHeaderFileGeneration.GetContent())
             {
-                CoreTools::OFStreamManager streamManager{ codeOutput + SYSTEM_TEXT("/") + codeEntityClass.GetEntityClassName() + SYSTEM_TEXT(".h"), false };
+                CoreTools::OFileStreamManager streamManager{ codeOutput + SYSTEM_TEXT("/") + codeEntityClass.GetEntityClassName() + SYSTEM_TEXT(".h"), false };
                 streamManager.SetSimplifiedChinese();
 
                 streamManager << entityHeaderFileGeneration.GetContent();
@@ -135,7 +135,7 @@ void BatchConversion::Helper::Conversion()
             if (const auto result = GetContent(codeOutput + SYSTEM_TEXT("/") + codeEntityClass.GetEntityClassName() + SYSTEM_TEXT(".cpp"));
                 result != entitySourceFileGeneration.GetContent())
             {
-                CoreTools::OFStreamManager streamManager{ codeOutput + SYSTEM_TEXT("/") + codeEntityClass.GetEntityClassName() + SYSTEM_TEXT(".cpp"), false };
+                CoreTools::OFileStreamManager streamManager{ codeOutput + SYSTEM_TEXT("/") + codeEntityClass.GetEntityClassName() + SYSTEM_TEXT(".cpp"), false };
                 streamManager.SetSimplifiedChinese();
 
                 streamManager << entitySourceFileGeneration.GetContent();
@@ -146,7 +146,7 @@ void BatchConversion::Helper::Conversion()
 
 System::String BatchConversion::Helper::GetContent(const String& fileName)
 {
-    CoreTools::IFStreamManager streamManager{ fileName };
+    CoreTools::IFileStreamManager streamManager{ fileName };
     streamManager.SetSimplifiedChinese();
 
     return streamManager.GetFileContent();

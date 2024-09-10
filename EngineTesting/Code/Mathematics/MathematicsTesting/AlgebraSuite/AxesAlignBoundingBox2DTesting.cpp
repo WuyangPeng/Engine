@@ -67,14 +67,14 @@ void Mathematics::AxesAlignBoundingBox2DTesting::ConstructionTest()
 void Mathematics::AxesAlignBoundingBox2DTesting::AccessTest()
 {
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
+    std::uniform_real_distribution<float> randomDistribution0{ -100.0f, 100.0f };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         Vector2F vector0(randomDistribution0(randomEngine), randomDistribution0(randomEngine));
 
-        std::uniform_real<float> randomDistribution1(vector0[0], 100.0f);
-        std::uniform_real<float> thirdRandomDistribution(vector0[1], 100.0f);
+        std::uniform_real_distribution<float> randomDistribution1(vector0[0], 100.0f);
+        std::uniform_real_distribution<float> thirdRandomDistribution(vector0[1], 100.0f);
 
         Vector2F vector1(randomDistribution1(randomEngine), thirdRandomDistribution(randomEngine));
 
@@ -93,21 +93,21 @@ void Mathematics::AxesAlignBoundingBox2DTesting::AccessTest()
 void Mathematics::AxesAlignBoundingBox2DTesting::IntersectionTest()
 {
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
+    std::uniform_real_distribution<float> randomDistribution0{ -100.0f, 100.0f };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         Vector2F vector0(randomDistribution0(randomEngine), randomDistribution0(randomEngine));
 
-        std::uniform_real<float> randomDistribution1(vector0[0], 100.0f);
-        std::uniform_real<float> randomDistribution2(vector0[1], 100.0f);
+        std::uniform_real_distribution<float> randomDistribution1(vector0[0], 100.0f);
+        std::uniform_real_distribution<float> randomDistribution2(vector0[1], 100.0f);
 
         Vector2F vector1(randomDistribution1(randomEngine), randomDistribution2(randomEngine));
 
         Vector2F vector2(randomDistribution0(randomEngine), randomDistribution0(randomEngine));
 
-        std::uniform_real<float> randomDistribution3(vector2[0], 100.0f);
-        std::uniform_real<float> randomDistribution4(vector2[1], 100.0f);
+        std::uniform_real_distribution<float> randomDistribution3(vector2[0], 100.0f);
+        std::uniform_real_distribution<float> randomDistribution4(vector2[1], 100.0f);
 
         Vector2F vector3(randomDistribution3(randomEngine), randomDistribution4(randomEngine));
 

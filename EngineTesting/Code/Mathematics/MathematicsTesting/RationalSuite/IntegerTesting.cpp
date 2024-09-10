@@ -53,8 +53,8 @@ void Mathematics::IntegerTesting::ConstructionTest()
 void Mathematics::IntegerTesting::PositiveTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<uint32_t> randomDistribution0(0, INT32_MAX);
-    std::uniform_int<uint16_t> randomDistribution1(0, UINT16_MAX);
+    std::uniform_int_distribution<uint32_t> randomDistribution0(0, INT32_MAX);
+    std::uniform_int_distribution<uint16_t> randomDistribution1(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -114,7 +114,7 @@ void Mathematics::IntegerTesting::PositiveTest()
 void Mathematics::IntegerTesting::NegativeTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<> randomDistribution0(-INT32_MAX, 0);
+    std::uniform_int_distribution<> randomDistribution0(-INT32_MAX, 0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -193,8 +193,8 @@ void Mathematics::IntegerTesting::CalculateTest()
 void Mathematics::IntegerTesting::ReverseTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
-    std::uniform_int<uint32_t> randomDistribution1(0, INT32_MAX);
+    std::uniform_int_distribution<uint16_t> randomDistribution0(0, UINT16_MAX);
+    std::uniform_int_distribution<uint32_t> randomDistribution1(0, INT32_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -228,8 +228,8 @@ void Mathematics::IntegerTesting::ReverseTest()
 void Mathematics::IntegerTesting::AbsoluteValueTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<> randomDistribution0(-INT32_MAX, INT32_MAX);
-    std::uniform_int<uint16_t> randomDistribution1(0, UINT16_MAX);
+    std::uniform_int_distribution<> randomDistribution0(-INT32_MAX, INT32_MAX);
+    std::uniform_int_distribution<uint16_t> randomDistribution1(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -264,8 +264,8 @@ void Mathematics::IntegerTesting::AbsoluteValueTest()
 void Mathematics::IntegerTesting::AddTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<> randomDistribution0(0, INT32_MAX / 2);
-    std::uniform_int<uint16_t> randomDistribution1(0, UINT16_MAX);
+    std::uniform_int_distribution<> randomDistribution0(0, INT32_MAX / 2);
+    std::uniform_int_distribution<uint16_t> randomDistribution1(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -349,8 +349,8 @@ void Mathematics::IntegerTesting::AddTest()
 void Mathematics::IntegerTesting::MinusTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<> randomDistribution0(0, INT32_MAX / 2);
-    std::uniform_int<uint16_t> randomDistribution1(0, UINT16_MAX);
+    std::uniform_int_distribution<> randomDistribution0(0, INT32_MAX / 2);
+    std::uniform_int_distribution<uint16_t> randomDistribution1(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -435,8 +435,8 @@ void Mathematics::IntegerTesting::MinusTest()
 void Mathematics::IntegerTesting::MultiplyTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<> randomDistribution0(0, INT16_MAX);
-    std::uniform_int<uint16_t> randomDistribution1(0, UINT16_MAX);
+    std::uniform_int_distribution<> randomDistribution0(0, INT16_MAX);
+    std::uniform_int_distribution<uint16_t> randomDistribution1(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -493,8 +493,8 @@ void Mathematics::IntegerTesting::MultiplyTest()
 void Mathematics::IntegerTesting::DivideTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<> randomDistribution0(0, INT16_MAX);
-    std::uniform_int<uint16_t> randomDistribution1(0, UINT16_MAX);
+    std::uniform_int_distribution<> randomDistribution0(0, INT16_MAX);
+    std::uniform_int_distribution<uint16_t> randomDistribution1(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -555,8 +555,8 @@ void Mathematics::IntegerTesting::DivideTest()
 void Mathematics::IntegerTesting::LeftShiftTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<> randomDistribution0(0, 16 * 20);
-    std::uniform_int<uint16_t> randomDistribution1(0, UINT16_MAX);
+    std::uniform_int_distribution<> randomDistribution0(0, 16 * 20);
+    std::uniform_int_distribution<uint16_t> randomDistribution1(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -604,8 +604,8 @@ void Mathematics::IntegerTesting::LeftShiftTest()
 void Mathematics::IntegerTesting::RightShiftTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<> randomDistribution0(0, 16 * 20);
-    std::uniform_int<uint16_t> randomDistribution1(0, UINT16_MAX);
+    std::uniform_int_distribution<> randomDistribution0(0, 16 * 20);
+    std::uniform_int_distribution<uint16_t> randomDistribution1(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -653,7 +653,7 @@ void Mathematics::IntegerTesting::RightShiftTest()
 void Mathematics::IntegerTesting::SignTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
+    std::uniform_int_distribution<uint16_t> randomDistribution0(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -680,7 +680,7 @@ void Mathematics::IntegerTesting::SignTest()
 void Mathematics::IntegerTesting::CompareTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
+    std::uniform_int_distribution<uint16_t> randomDistribution0(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -822,8 +822,8 @@ void Mathematics::IntegerTesting::UtilitiesTest()
 void Mathematics::IntegerTesting::BlockTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_int<uint16_t> randomDistribution0(0, 39);
-    std::uniform_int<uint16_t> randomDistribution1(0, UINT16_MAX);
+    std::uniform_int_distribution<uint16_t> randomDistribution0(0, 39);
+    std::uniform_int_distribution<uint16_t> randomDistribution1(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -895,8 +895,8 @@ void Mathematics::IntegerTesting::Bit1Test()
 void Mathematics::IntegerTesting::ConversionTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<float> randomDistribution0(-1.0e38f, 1.0e38f);
-    std::uniform_real<double> randomDistribution1(static_cast<double>(std::numeric_limits<uint64_t>::min()), static_cast<double>(std::numeric_limits<uint64_t>::max()));
+    std::uniform_real_distribution<float> randomDistribution0(-1.0e38f, 1.0e38f);
+    std::uniform_real_distribution<double> randomDistribution1(static_cast<double>(std::numeric_limits<uint64_t>::min()), static_cast<double>(std::numeric_limits<uint64_t>::max()));
 
     const auto aTestLoopCount = GetTestLoopCount();
 

@@ -507,6 +507,8 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TupleLessTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TupleTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\EngineConfigurationSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\GlobalConfigTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\SmtpConfigTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\StringReplacingTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\Detail\GameErrorType.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\ErrorTesting.h" />
@@ -813,6 +815,9 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\BatchConversionCodeTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\BatchConversionCSVTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\ExcelConversionCSVTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\Detail\TestConfig.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\JsonAnalysisManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\JsonBaseTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\AppPropertiesTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellIteratorTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellRangeTesting.h" />
@@ -1214,6 +1219,8 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\ThreadSafeQueueTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TupleLessTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TupleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\GlobalConfigTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\SmtpConfigTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\StringReplacingTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\ErrorTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\GameErrorTesting.cpp" />
@@ -1479,6 +1486,9 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\BatchConversionCodeTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\BatchConversionCSVTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Excel\ExcelConversionCSVTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\Detail\TestConfig.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\JsonAnalysisManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\Json\JsonBaseTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\AppPropertiesTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellIteratorTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellRangeTesting.cpp" />
@@ -1795,7 +1805,9 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <None Include="Configuration\CoreToolsTesting.json" />
     <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\Log.json" />
+    <None Include="Configuration\SmtpConfig.json" />
     <None Include="Configuration\StringReplacing.json" />
+    <None Include="Configuration\TestConfig.json" />
     <None Include="Configuration\Testing.json" />
     <None Include="Resource\CSVConfigure\Chapter.csv" />
     <None Include="Resource\CSVConfigure\Chapter.xlsx" />

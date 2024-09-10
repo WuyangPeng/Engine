@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/12 22:58)
+/// 版本：1.0.1.0 (2024/08/10 13:26)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_SYSTEM_MANAGER_IMPL_H
 #define FRAMEWORK_MIDDLE_LAYER_SYSTEM_MANAGER_IMPL_H
@@ -13,7 +13,9 @@
 #include "Framework/FrameworkDll.h"
 
 #include "CoreTools/Contract/ContractFwd.h"
+#include "CoreTools/EngineConfiguration/GlobalConfig.h"
 #include "CoreTools/FileManager/Environment.h"
+#include "Framework/MainFunctionHelper/MainFunctionHelperFwd.h"
 
 namespace Framework
 {
@@ -23,16 +25,24 @@ namespace Framework
         using ClassType = SystemManagerImpl;
 
         using Environment = CoreTools::Environment;
+        using GlobalConfig = CoreTools::GlobalConfig;
         using DisableNotThrow = CoreTools::DisableNotThrow;
 
     public:
-        explicit SystemManagerImpl(DisableNotThrow disableNotThrow);
+        explicit SystemManagerImpl(const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_DECLARE;
+
+        NODISCARD GlobalConfig GetGlobalConfig() const;
+
+    private:
+        using GlobalConfigSharedPtr = std::shared_ptr<GlobalConfig>;
 
     private:
         // 支持访问环境变量和路径。
         Environment environment;
+
+        GlobalConfigSharedPtr globalConfig;
     };
 }
 

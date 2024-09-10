@@ -17,7 +17,8 @@
 
 主函数帮助单元测试模块：
 
-（1）EnvironmentDirectory
+（1）环境目录：DefaultEnvironmentDirectoryTesting、
+			   FileEnvironmentDirectoryTesting。
 （2）MainFunctionHelperBase
 （3）ConsoleMainFunctionHelperBase
 （4）ConsoleMainFunctionHelper

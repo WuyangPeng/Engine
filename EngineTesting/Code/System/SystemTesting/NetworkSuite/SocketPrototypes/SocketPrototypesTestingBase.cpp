@@ -35,3 +35,14 @@ std::string System::SocketPrototypesTestingBase::GetConnectHostname() const
 
     return mainTree.get<std::string>("ConnectHostname");
 }
+
+uint16_t System::SocketPrototypesTestingBase::GetConnectPort() const
+{
+    SYSTEM_CLASS_IS_VALID_CONST_1;
+
+    boost::property_tree::basic_ptree<std::string, std::string> mainTree{};
+
+    read_json("Configuration/EnvironmentVariable.json", mainTree);
+
+    return mainTree.get<uint16_t>("ConnectPort");
+}

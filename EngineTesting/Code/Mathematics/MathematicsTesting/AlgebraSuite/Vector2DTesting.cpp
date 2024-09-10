@@ -178,7 +178,7 @@ void Mathematics::Vector2Testing::BarycentricsTest()
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    std::uniform_real<double> randomDistribution{ -10.0f, 10.0f };
+    std::uniform_real_distribution<double> randomDistribution{ -10.0f, 10.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 

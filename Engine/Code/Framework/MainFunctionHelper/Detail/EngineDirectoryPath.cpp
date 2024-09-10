@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 15:11)
+/// 版本：1.0.1.0 (2024/08/07 10:34)
 
 #include "Framework/FrameworkExport.h"
 
@@ -16,8 +16,8 @@
 
 using System::operator++;
 
-Framework::EngineDirectoryPath::EngineDirectoryPath(const EngineDirectoryResult& result)
-    : result{ result }
+Framework::EngineDirectoryPath::EngineDirectoryPath(EngineDirectoryResult result)
+    : result{ std::move(result) }
 {
     Analysis();
 
@@ -50,44 +50,56 @@ void Framework::EngineDirectoryPath::Analysis(RenderingDirectory renderingDirect
 
 void Framework::EngineDirectoryPath::Analysis(RenderingDirectory renderingDirectory, EndianDirectory endianDirectory, AnalysisDirectory analysisDirectory)
 {
-    auto directory = GetDirectoryResult(renderingDirectory, endianDirectory, analysisDirectory);
+    const auto directory = GetDirectoryResult(renderingDirectory, endianDirectory, analysisDirectory);
 
     pathType.emplace(IndexType{ endianDirectory, renderingDirectory, analysisDirectory }, directory);
 }
 
-Framework::EngineDirectoryPath::String Framework::EngineDirectoryPath::GetDirectoryResult(RenderingDirectory renderingDirectory, EndianDirectory endianDirectory, AnalysisDirectory analysisDirectory)
+System::String Framework::EngineDirectoryPath::GetDirectoryResult(RenderingDirectory renderingDirectory, EndianDirectory endianDirectory, AnalysisDirectory analysisDirectory) const
 {
-    auto endianDirectoryDescribe = result.GetDirectory(renderingDirectory, System::EnumCastUnderlying<AnalysisDirectory>(endianDirectory));
+    const auto endianDirectoryDescribe = result.GetDirectory(renderingDirectory, System::EnumCastUnderlying<AnalysisDirectory>(endianDirectory));
 
-    auto directory = result.GetDirectory(renderingDirectory, analysisDirectory);
+    const auto directory = result.GetDirectory(renderingDirectory, analysisDirectory);
 
     if (analysisDirectory == AnalysisDirectory::Directory)
     {
-        if (!directory.empty())
-        {
-            directory += DirectoryDefaultName::GetSuffix();
-        }
-
-        directory += endianDirectoryDescribe;
+        return GetNoRenderingDirectoryResult(endianDirectoryDescribe, directory);
     }
     else
     {
-        auto renderingDirectoryDescribe = result.GetDirectory(renderingDirectory, AnalysisDirectory::Directory);
+        return GetRenderingDirectoryResult(renderingDirectory, endianDirectoryDescribe, directory);
+    }
+}
 
-        if (!renderingDirectoryDescribe.empty())
-        {
-            renderingDirectoryDescribe += DirectoryDefaultName::GetSuffix();
-        }
+System::String Framework::EngineDirectoryPath::GetRenderingDirectoryResult(RenderingDirectory renderingDirectory, const String& endianDirectoryDescribe, const String& directory) const
+{
+    auto renderingDirectoryDescribe = result.GetDirectory(renderingDirectory, AnalysisDirectory::Directory);
 
-        if (!endianDirectoryDescribe.empty())
-        {
-            endianDirectoryDescribe += DirectoryDefaultName::GetSuffix();
-        }
-
-        directory = renderingDirectoryDescribe + endianDirectoryDescribe + directory;
+    if (!renderingDirectoryDescribe.empty())
+    {
+        renderingDirectoryDescribe += DirectoryDefaultName::GetSuffix();
     }
 
-    return directory;
+    if (endianDirectoryDescribe.empty())
+    {
+        return renderingDirectoryDescribe + directory;
+    }
+    else
+    {
+        return renderingDirectoryDescribe + endianDirectoryDescribe + DirectoryDefaultName::GetSuffix() + directory;
+    }
+}
+
+System::String Framework::EngineDirectoryPath::GetNoRenderingDirectoryResult(const String& endianDirectoryDescribe, const String& directory)
+{
+    if (directory.empty())
+    {
+        return endianDirectoryDescribe;
+    }
+    else
+    {
+        return directory + DirectoryDefaultName::GetSuffix() + endianDirectoryDescribe;
+    }
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, EngineDirectoryPath)
@@ -107,7 +119,7 @@ System::String Framework::EngineDirectoryPath::GetPath(EndianDirectory endianDir
     }
 }
 
-NODISCARD System::String Framework::EngineDirectoryPath::GetDirectory(AnalysisDirectory analysisDirectory) const
+System::String Framework::EngineDirectoryPath::GetDirectory(AnalysisDirectory analysisDirectory) const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 

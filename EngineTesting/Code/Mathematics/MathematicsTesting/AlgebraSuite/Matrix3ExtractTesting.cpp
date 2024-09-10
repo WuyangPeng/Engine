@@ -44,8 +44,8 @@ void Mathematics::Matrix3ExtractTesting::MainTest()
 void Mathematics::Matrix3ExtractTesting::ExtractTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution{ -10.0, 10.0 };
-    std::uniform_real<double> angleDistribution(0.0, MathD::GetPI());
+    std::uniform_real_distribution<double> randomDistribution{ -10.0, 10.0 };
+    std::uniform_real_distribution<double> angleDistribution(0.0, MathD::GetPI());
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {

@@ -43,7 +43,7 @@ namespace Mathematics
         {
         public:
             virtual ~Triangle() noexcept = default;
-            Triangle(int v0, int v1, int v2) noexcept;
+            Triangle(int v0, int v1, int v2);
             Triangle(const Triangle& rhs) = default;
             Triangle& operator=(const Triangle& rhs) = default;
             Triangle(Triangle&& rhs) noexcept = default;
@@ -58,7 +58,7 @@ namespace Mathematics
         {
         public:
             virtual ~Tetrahedron() noexcept = default;
-            Tetrahedron(int v0, int v1, int v2, int v3) noexcept;
+            Tetrahedron(int v0, int v1, int v2, int v3);
             Tetrahedron(const Tetrahedron& rhs) = default;
             Tetrahedron& operator=(const Tetrahedron& rhs) = default;
             Tetrahedron(Tetrahedron&& rhs) noexcept = default;

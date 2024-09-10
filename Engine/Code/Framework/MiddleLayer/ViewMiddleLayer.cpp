@@ -56,7 +56,7 @@ bool Framework::ViewMiddleLayer::Create(const EnvironmentParameter& environmentP
 
     if (ParentType::Create(environmentParameter))
     {
-        const auto rendererFileName = GetEnvironmentDirectory().GetDirectory(UpperDirectory::Configuration) + SYSTEM_TEXT("Renderer.json");
+        const auto rendererFileName = GetEnvironmentDirectory().GetExecutableConfigurationDirectory() + SYSTEM_TEXT("Renderer.json");
 
         impl->ResetRenderer(CoreTools::StringConversion::StandardConversionMultiByte(rendererFileName), environmentParameter);
 

@@ -26,6 +26,8 @@ namespace System
 
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE GetDynamicLinkFileName(DynamicLinkModule module, DynamicLinkCharType* filename, WindowsDWord size) noexcept;
     NODISCARD DynamicLinkString SYSTEM_DEFAULT_DECLARE GetDynamicLinkFileName(DynamicLinkModule module);
+    NODISCARD std::string SYSTEM_DEFAULT_DECLARE GetExecutableName();
+    NODISCARD std::string SYSTEM_DEFAULT_DECLARE GetExecutableNameRemoveSuffix();
 }
 
 #endif  // SYSTEM_DYNAMIC_LINK_LIBRARY_TOOLS_H

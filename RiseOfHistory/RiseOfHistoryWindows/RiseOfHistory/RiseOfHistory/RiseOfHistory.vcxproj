@@ -348,9 +348,10 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
     </PreLinkEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
@@ -387,9 +388,10 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)
     </PreLinkEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
@@ -422,9 +424,10 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|Win32'">
@@ -460,9 +463,10 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)
     </PreLinkEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -500,9 +504,10 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
     </PreLinkEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|Win32'">
@@ -540,9 +545,10 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)
     </PreLinkEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
@@ -576,9 +582,10 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|Win32'">
@@ -615,9 +622,10 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)
     </PreLinkEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -654,9 +662,10 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
     </PreLinkEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
@@ -693,9 +702,10 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)
     </PreLinkEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -728,9 +738,10 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|x64'">
@@ -766,9 +777,10 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)
     </PreLinkEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -806,9 +818,10 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
     </PreLinkEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|x64'">
@@ -846,9 +859,10 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)
     </PreLinkEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
@@ -882,9 +896,10 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|x64'">
@@ -921,17 +936,19 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)
     </PreLinkEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json" />
+    <None Include="Configuration\Global.json" />
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\Project.json" />
-    <None Include="Configuration\Renderer.json" />
     <None Include="Configuration\RiseOfHistory.json" />
+    <None Include="Configuration\RiseOfHistory\Renderer.json" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 15:12)
+/// 版本：1.0.1.0 (2024/08/06 19:32)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,16 +13,14 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 
-using namespace std::literals;
-
 System::String Framework::DirectoryDefaultName::GetDefaultNullName()
 {
-    return SYSTEM_TEXT(""s);
+    return SYSTEM_TEXT("");
 }
 
 System::String Framework::DirectoryDefaultName::GetSuffix()
 {
-    return SYSTEM_TEXT("/"s);
+    return SYSTEM_TEXT("/");
 }
 
 System::String Framework::DirectoryDefaultName::GetDefaultName(AnalysisDirectory analysisDirectory)
@@ -45,7 +43,7 @@ System::String Framework::DirectoryDefaultName::GetDefaultName(AnalysisDirectory
 
 #define DIRECTORY_DESCRIBE_JUDGE(describe)       \
     case Framework::AnalysisDirectory::describe: \
-        return SYSTEM_TEXT(SYSTEM_CONCATENATOR(#describe, s))
+        return SYSTEM_TEXT(#describe)
 
 System::String Framework::DirectoryDefaultName::GetDefaultKeyName(AnalysisDirectory analysisDirectory)
 {

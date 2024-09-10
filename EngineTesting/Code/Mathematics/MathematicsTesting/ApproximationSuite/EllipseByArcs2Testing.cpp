@@ -44,8 +44,8 @@ void Mathematics::EllipseByArcs2Testing::MainTest()
 void Mathematics::EllipseByArcs2Testing::Arcs2Test()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(5.0, 100.0);
-    std::uniform_int<> randomDistribution1(10, 50);
+    std::uniform_real_distribution<double> randomDistribution0(5.0, 100.0);
+    std::uniform_int_distribution<> randomDistribution1(10, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

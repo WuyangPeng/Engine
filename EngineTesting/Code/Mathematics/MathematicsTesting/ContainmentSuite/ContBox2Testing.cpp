@@ -46,8 +46,8 @@ void Mathematics::ContBox2Testing::MainTest()
 void Mathematics::ContBox2Testing::ContAlignedBoxTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    std::uniform_int<> randomDistribution1(10, 50);
+    std::uniform_real_distribution<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_int_distribution<> randomDistribution1(10, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -73,8 +73,8 @@ void Mathematics::ContBox2Testing::ContAlignedBoxTest()
 void Mathematics::ContBox2Testing::ContOrientedBoxTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    std::uniform_int<> randomDistribution1(10, 50);
+    std::uniform_real_distribution<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_int_distribution<> randomDistribution1(10, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -100,8 +100,8 @@ void Mathematics::ContBox2Testing::ContOrientedBoxTest()
 void Mathematics::ContBox2Testing::MergeBoxesTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(-100.0, 100.0);
-    std::uniform_int<> randomDistribution1(10, 50);
+    std::uniform_real_distribution<double> randomDistribution0(-100.0, 100.0);
+    std::uniform_int_distribution<> randomDistribution1(10, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

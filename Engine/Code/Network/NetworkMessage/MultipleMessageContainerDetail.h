@@ -18,13 +18,18 @@
 #include "Network/NetworkMessage/MultipleMessageStreamingSaveDetail.h"
 #include "Network/NetworkMessage/MultipleMessageStreamingSizeDetail.h"
 
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
+
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
 requires(std::is_enum_v<E>)
-Network::MultipleMessageContainer<E, ByteType, Types...>::MultipleMessageContainer() noexcept
+Network::MultipleMessageContainer<E, ByteType, Types...>::MultipleMessageContainer()  
     : message{}
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
+
+#include SYSTEM_WARNING_POP
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
 requires(std::is_enum_v<E>)

@@ -7,7 +7,6 @@
   },
 
   "mainFunctionHelperSuite": {
-    "EnvironmentDirectoryTesting": 1,
     "MainFunctionHelperBaseTesting": 0,
     "ConsoleMainFunctionHelperBaseTesting": 0,
     "ConsoleMainFunctionHelperTesting": 0,
@@ -15,6 +14,11 @@
     "OpenGLGlutMainFunctionHelperTesting": 0,
     "AndroidMainFunctionHelperTesting": 0,
     "MacintoshMainFunctionHelperTesting": 0
+  },
+
+  "environmentDirectorySuite": {
+    "DefaultEnvironmentDirectoryTesting": 1,
+    "FileEnvironmentDirectoryTesting": 1
   },
 
   "windowCreateSuite": {
@@ -66,7 +70,7 @@
     "ControllerMiddleLayerTesting": 1,
     "PixelViewMiddleLayerTesting": 1,
     "CameraModelMiddleLayerTesting": 1,
-    "CameraViewMiddleLayerTesting": 1 ,
+    "CameraViewMiddleLayerTesting": 1,
     "CameraControllerMiddleLayerTesting": 1,
     "EngineMiddleLayerInterfaceTesting": 1,
     "NetworkManagerInterfaceTesting": 1,

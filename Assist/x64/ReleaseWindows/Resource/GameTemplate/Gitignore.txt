@@ -35,3 +35,5 @@ CodeAnalysisResultManifest.txt
 Doxygen/html/*
 
 Temporary/*
+
+.vs/

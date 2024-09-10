@@ -39,7 +39,8 @@ System::String CoreTools::StringReplacingImpl::GetReplacing(const String& origin
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (const auto iter = replacing.find(original); iter != replacing.cend())
+    if (const auto iter = replacing.find(original);
+        iter != replacing.cend())
         return iter->second;
     else
         return String{};

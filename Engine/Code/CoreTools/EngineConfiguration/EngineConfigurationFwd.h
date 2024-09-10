@@ -12,6 +12,8 @@
 
 namespace CoreTools
 {
+    class GlobalConfig;
+    class SmtpConfig;
     class StringReplacing;
 }
 

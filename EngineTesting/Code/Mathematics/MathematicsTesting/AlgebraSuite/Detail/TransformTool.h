@@ -51,8 +51,8 @@ namespace Mathematics
 
     private:
         std::default_random_engine generator;
-        std::uniform_real<float> floatRandomDistribution;
-        std::uniform_real<> doubleRandomDistribution;
+        std::uniform_real_distribution<float> floatRandomDistribution;
+        std::uniform_real_distribution<> doubleRandomDistribution;
     };
 }
 

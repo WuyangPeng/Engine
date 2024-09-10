@@ -5,13 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/12 18:14)
+/// 版本：1.0.1.0 (2024/08/09 22:02)
 
 #include "Testing.h"
 #include "TestingHelper.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
+#include "CoreTools/TextParsing/Json/JsonAnalysisManager.h"
 
 CoreTools::TestingHelper::TestingHelper(int argc, char** argv)
     : ParentType{ argc, argv, "核心工具库" }
@@ -457,6 +458,7 @@ void CoreTools::TestingHelper::AddTextParsingSuite()
     textParsingSuite.AddSuite(GetSimpleCSVSuite());
     textParsingSuite.AddSuite(GetExcelSuite());
     textParsingSuite.AddSuite(GetCSVSuite());
+    textParsingSuite.AddSuite(GetJsonSuite());
 
     AddSuite(textParsingSuite);
 }
@@ -570,6 +572,16 @@ CoreTools::Suite CoreTools::TestingHelper::GetCSVSuite()
     ADD_TEST(csvSuite, CSVConfigureLoadingTesting);
 
     return csvSuite;
+}
+
+CoreTools::Suite CoreTools::TestingHelper::GetJsonSuite()
+{
+    auto jsonSuite = GenerateSuite("json");
+
+    ADD_TEST(jsonSuite, JsonBaseTesting);
+    ADD_TEST(jsonSuite, JsonAnalysisManagerTesting);
+
+    return jsonSuite;
 }
 
 void CoreTools::TestingHelper::AddLogManagerSuite()
@@ -783,6 +795,8 @@ void CoreTools::TestingHelper::AddEngineConfigurationSuite()
     auto engineConfigurationSuite = GenerateSuite("引擎配置");
 
     ADD_TEST(engineConfigurationSuite, StringReplacingTesting);
+    ADD_TEST(engineConfigurationSuite, GlobalConfigTesting);
+    ADD_TEST(engineConfigurationSuite, SmtpConfigTesting);
 
     AddSuite(engineConfigurationSuite);
 }

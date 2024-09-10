@@ -37,7 +37,7 @@ Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::OpenGLGlutFrameBuild(GLUTApp
 template <typename OpenGLGlutProcess>
 std::string Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::GetRendererParameter(const EnvironmentDirectory& environmentDirectory)
 {
-    return CoreTools::StringConversion::StandardConversionMultiByte(environmentDirectory.GetDirectory(UpperDirectory::Configuration) + SYSTEM_TEXT("Renderer.json"));
+    return CoreTools::StringConversion::StandardConversionMultiByte(environmentDirectory.GetExecutableConfigurationDirectory() + SYSTEM_TEXT("Renderer.json"));
 }
 
 #ifdef OPEN_CLASS_INVARIANT

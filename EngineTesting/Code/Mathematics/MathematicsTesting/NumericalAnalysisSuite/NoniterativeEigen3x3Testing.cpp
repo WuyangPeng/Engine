@@ -43,7 +43,7 @@ void Mathematics::NoniterativeEigen3x3Testing::MainTest()
 void Mathematics::NoniterativeEigen3x3Testing::EigenTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution(-1.0e2, 1.0e2);
+    std::uniform_real_distribution<double> randomDistribution(-1.0e2, 1.0e2);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

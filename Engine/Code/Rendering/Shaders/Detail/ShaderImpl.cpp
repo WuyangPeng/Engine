@@ -20,7 +20,7 @@
 #include "Rendering/Resources/Buffers/StructuredBuffer.h"
 #include "Rendering/Resources/Buffers/TextureBuffer.h"
 
-Rendering::ShaderImpl::ShaderImpl() noexcept
+Rendering::ShaderImpl::ShaderImpl(CoreTools::DisableNotThrow disableNotThrow)
     : lookupData{},
       compiledCode{},
       numXThreads{ 0 },
@@ -30,6 +30,8 @@ Rendering::ShaderImpl::ShaderImpl() noexcept
       textureBufferLayouts{},
       structuredBufferLayouts{}
 {
+    System::UnusedFunction(disableNotThrow);
+
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 

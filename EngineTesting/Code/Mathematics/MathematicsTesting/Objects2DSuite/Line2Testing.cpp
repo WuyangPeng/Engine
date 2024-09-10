@@ -43,7 +43,7 @@ void Mathematics::Line2Testing::MainTest()
 void Mathematics::Line2Testing::LineTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
+    std::uniform_real_distribution<double> randomDistribution0{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 

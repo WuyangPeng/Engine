@@ -108,6 +108,8 @@ namespace CoreTools
 
     class BatchConversionCode;
 
+    class JsonBase;
+
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_FWD_H

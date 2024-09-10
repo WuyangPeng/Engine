@@ -303,6 +303,11 @@
     "CSVConfigureLoadingTesting": 1
   },
 
+  "jsonSuite": {
+    "JsonBaseTesting": 1,
+    "JsonAnalysisManagerTesting": 1
+  },
+
   "logManagerSuite": {
     "LogFilterManagerTesting": 1,
     "LogLevelManagerTesting": 1,
@@ -451,7 +456,9 @@
   },
 
   "engineConfigurationSuite": {
-    "StringReplacingTesting": 1
+    "StringReplacingTesting": 1,
+    "GlobalConfigTesting": 1,
+    "SmtpConfigTesting": 1
   },
 
   "propertiesSuite": {

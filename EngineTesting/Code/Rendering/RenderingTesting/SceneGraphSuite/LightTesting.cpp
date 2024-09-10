@@ -50,16 +50,16 @@ void Rendering::LightTesting::MainTest()
 void Rendering::LightTesting::BaseTest()
 {
     const std::default_random_engine generator;
-    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    const std::uniform_real_distribution<float> firstFloatRandomDistribution(-100.0f, 100.0f);
 
-    const std::uniform_real<float> secondFloatRandomDistribution(0.0f, 1.0f);
+    const std::uniform_real_distribution<float> secondFloatRandomDistribution(0.0f, 1.0f);
 }
 
 void Rendering::LightTesting::CalculateTest()
 {
     const std::default_random_engine generator;
-    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
-    const std::uniform_real<float> secondFloatRandomDistribution(0.0f, Mathematics::MathF::GetPI());
+    const std::uniform_real_distribution<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    const std::uniform_real_distribution<float> secondFloatRandomDistribution(0.0f, Mathematics::MathF::GetPI());
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -69,9 +69,9 @@ void Rendering::LightTesting::CalculateTest()
 void Rendering::LightTesting::CopyTest()
 {
     const std::default_random_engine generator;
-    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
-    const std::uniform_real<float> secondFloatRandomDistribution(0.0f, Mathematics::MathF::GetPI());
-    const std::uniform_real<float> thirdFloatRandomDistribution(0.0f, 1.0f);
+    const std::uniform_real_distribution<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    const std::uniform_real_distribution<float> secondFloatRandomDistribution(0.0f, Mathematics::MathF::GetPI());
+    const std::uniform_real_distribution<float> thirdFloatRandomDistribution(0.0f, 1.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {

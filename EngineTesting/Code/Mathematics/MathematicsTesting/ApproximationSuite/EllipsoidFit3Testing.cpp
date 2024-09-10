@@ -40,8 +40,8 @@ void Mathematics::EllipsoidFit3Testing::MainTest()
 void Mathematics::EllipsoidFit3Testing::FitTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> randomDistribution0(0.0, 100.0);
-    std::uniform_int<> randomDistribution1(15, 20);
+    std::uniform_real_distribution<double> randomDistribution0(0.0, 100.0);
+    std::uniform_int_distribution<> randomDistribution1(15, 20);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

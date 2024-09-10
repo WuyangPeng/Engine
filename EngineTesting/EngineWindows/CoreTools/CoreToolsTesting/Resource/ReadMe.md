@@ -241,6 +241,8 @@
 			  CSVConfigureTesting、
 			  DataTypeDescribeTesting、
 			  CSVConfigureLoadingTesting。
+（7）json解析：JsonBaseTesting、
+			   JsonAnalysisManagerTesting。
 
 ----------------------------
 10.	 LogManagerSuite 
@@ -423,6 +425,8 @@
 
 对引擎配置模块的单元测试，包括：
 （1） 字符替换：StringReplacingTesting。
+（2） 引擎配置：GlobalConfigTesting、
+			    SmtpConfigTesting。
 
 ----------------------------
 24.	 PropertiesSuite（属性）

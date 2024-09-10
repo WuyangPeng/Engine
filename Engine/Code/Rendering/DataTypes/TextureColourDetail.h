@@ -99,10 +99,10 @@ template <Rendering::TextureFormat Format>
 template <Rendering::TextureFormat RhsFormat>
 Rendering::TextureColour<Format>::TextureColour(const TextureColour<RhsFormat>& colour)
 {
-    static_assert(std::is_same_v<RedType, TextureColour<RhsFormat>::RedType>, "RedType isn't same!");
-    static_assert(std::is_same_v<GreenType, TextureColour<RhsFormat>::GreenType>, "GreenType isn't same!");
-    static_assert(std::is_same_v<BlueType, TextureColour<RhsFormat>::BlueType>, "BlueType isn't same!");
-    static_assert(std::is_same_v<LuminanceType, TextureColour<RhsFormat>::LuminanceType>, "LuminanceType isn't same!");
+    static_assert(std::is_same_v<RedType, typename TextureColour<RhsFormat>::RedType>, "RedType isn't same!");
+    static_assert(std::is_same_v<GreenType, typename TextureColour<RhsFormat>::GreenType>, "GreenType isn't same!");
+    static_assert(std::is_same_v<BlueType, typename TextureColour<RhsFormat>::BlueType>, "BlueType isn't same!");
+    static_assert(std::is_same_v<LuminanceType, typename TextureColour<RhsFormat>::LuminanceType>, "LuminanceType isn't same!");
 
     ConvertingColourFormat(colour);
 
@@ -113,10 +113,10 @@ template <Rendering::TextureFormat Format>
 template <Rendering::TextureFormat RhsFormat>
 Rendering::TextureColour<Format>& Rendering::TextureColour<Format>::operator=(const TextureColour<RhsFormat>& colour)
 {
-    static_assert(std::is_same_v<RedType, TextureColour<RhsFormat>::RedType>, "RedType isn't same!");
-    static_assert(std::is_same_v<GreenType, TextureColour<RhsFormat>::GreenType>, "GreenType isn't same!");
-    static_assert(std::is_same_v<BlueType, TextureColour<RhsFormat>::BlueType>, "BlueType isn't same!");
-    static_assert(std::is_same_v<LuminanceType, TextureColour<RhsFormat>::LuminanceType>, "LuminanceType isn't same!");
+    static_assert(std::is_same_v<RedType, typename TextureColour<RhsFormat>::RedType>, "RedType isn't same!");
+    static_assert(std::is_same_v<GreenType, typename TextureColour<RhsFormat>::GreenType>, "GreenType isn't same!");
+    static_assert(std::is_same_v<BlueType, typename TextureColour<RhsFormat>::BlueType>, "BlueType isn't same!");
+    static_assert(std::is_same_v<LuminanceType, typename TextureColour<RhsFormat>::LuminanceType>, "LuminanceType isn't same!");
 
     RENDERING_CLASS_IS_VALID_3;
 
@@ -135,11 +135,11 @@ void Rendering::TextureColour<Format>::ConvertingColourFormat(const TextureColou
     constexpr auto rhsBlueMaxValue = ColourTextureFormatTraits<RhsFormat>::blueMaxValue;
     constexpr auto rhsLuminanceMaxValue = ColourTextureFormatTraits<RhsFormat>::luminanceMaxValue;
 
-    Converting<RhsFormat, redIndex, TextureColour<RhsFormat>::redIndex>(colour, redMaxValue, rhsRedMaxValue, std::is_same<ColourTextureFormatTraits<Format>::RedType, TrueType>());
-    Converting<RhsFormat, greenIndex, TextureColour<RhsFormat>::greenIndex>(colour, greenMaxValue, rhsGreenMaxValue, std::is_same<ColourTextureFormatTraits<Format>::GreenType, TrueType>());
-    Converting<RhsFormat, blueIndex, TextureColour<RhsFormat>::blueIndex>(colour, blueMaxValue, rhsBlueMaxValue, std::is_same<ColourTextureFormatTraits<Format>::BlueType, TrueType>());
-    ConvertingAlpha(colour, std::is_same<AlphaType, TrueType>(), std::is_same<TextureColour<RhsFormat>::AlphaType, TrueType>());
-    Converting<RhsFormat, luminanceIndex, TextureColour<RhsFormat>::luminanceIndex>(colour, luminanceMaxValue, rhsLuminanceMaxValue, std::is_same<ColourTextureFormatTraits<Format>::LuminanceType, TrueType>());
+    Converting<RhsFormat, redIndex, TextureColour<RhsFormat>::redIndex>(colour, redMaxValue, rhsRedMaxValue, std::is_same<typename ColourTextureFormatTraits<Format>::RedType, TrueType>());
+    Converting<RhsFormat, greenIndex, TextureColour<RhsFormat>::greenIndex>(colour, greenMaxValue, rhsGreenMaxValue, std::is_same<typename ColourTextureFormatTraits<Format>::GreenType, TrueType>());
+    Converting<RhsFormat, blueIndex, TextureColour<RhsFormat>::blueIndex>(colour, blueMaxValue, rhsBlueMaxValue, std::is_same<typename ColourTextureFormatTraits<Format>::BlueType, TrueType>());
+    ConvertingAlpha(colour, std::is_same<AlphaType, TrueType>(), std::is_same<typename TextureColour<RhsFormat>::AlphaType, TrueType>());
+    Converting<RhsFormat, luminanceIndex, TextureColour<RhsFormat>::luminanceIndex>(colour, luminanceMaxValue, rhsLuminanceMaxValue, std::is_same<typename ColourTextureFormatTraits<Format>::LuminanceType, TrueType>());
 }
 
 // private
@@ -178,7 +178,7 @@ void Rendering::TextureColour<Format>::ConvertingAlpha(const TextureColour<RhsFo
 {
     constexpr auto rhsAlphaMaxValue = ColourTextureFormatTraits<RhsFormat>::alphaMaxValue;
 
-    Converting<RhsFormat, alphaIndex, TextureColour<RhsFormat>::alphaIndex>(colour, alphaMaxValue, rhsAlphaMaxValue, std::is_same<ColourTextureFormatTraits<Format>::AlphaType, TrueType>());
+    Converting<RhsFormat, alphaIndex, TextureColour<RhsFormat>::alphaIndex>(colour, alphaMaxValue, rhsAlphaMaxValue, std::is_same<typename ColourTextureFormatTraits<Format>::AlphaType, TrueType>());
 }
 
 // private

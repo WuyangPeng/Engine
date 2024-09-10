@@ -196,6 +196,18 @@
     <Filter Include="Project 模板文件">
       <UniqueIdentifier>{7319edc2-6ee7-4e5d-af15-7509df98e65a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Smtp 头文件">
+      <UniqueIdentifier>{f9cd8af8-3206-4a32-b687-0d47caa5205a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="smtp 源文件">
+      <UniqueIdentifier>{b587eb4a-2e4e-4c71-8b8a-8a9542217c6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Smtp 头文件\Detail">
+      <UniqueIdentifier>{19d519d5-b5b2-4e9c-9f0e-e3b52c7e10a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="smtp 源文件\Detail">
+      <UniqueIdentifier>{7f7622ae-71a8-456e-b47c-bff50f66d92a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Framework\FrameworkFwd.h">
@@ -897,6 +909,18 @@
     <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\Detail\SystemManagerImpl.h">
       <Filter>MiddleLayer 头文件\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\Smtp\Smtp.h">
+      <Filter>Smtp 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\Smtp\SmtpFwd.h">
+      <Filter>Smtp 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\Smtp\Detail\SmtpTransportImpl.h">
+      <Filter>Smtp 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\Smtp\SmtpTransport.h">
+      <Filter>Smtp 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Framework\DllLib.cpp">
@@ -1234,6 +1258,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\SystemManagerImpl.cpp">
       <Filter>MiddleLayer 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\Smtp\Detail\SmtpTransportImpl.cpp">
+      <Filter>smtp 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\Smtp\SmtpTransport.cpp">
+      <Filter>smtp 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

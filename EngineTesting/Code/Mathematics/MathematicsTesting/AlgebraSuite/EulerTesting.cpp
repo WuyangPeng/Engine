@@ -59,8 +59,8 @@ void Mathematics::EulerTesting::MainTest()
 void Mathematics::EulerTesting::EulerXYZTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
-    std::uniform_real<double> angleDistribution1{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
+    std::uniform_real_distribution<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution1{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -105,8 +105,8 @@ void Mathematics::EulerTesting::EulerXYZTest()
 void Mathematics::EulerTesting::EulerXZYTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
-    std::uniform_real<double> angleDistribution1{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
+    std::uniform_real_distribution<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution1{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -151,8 +151,8 @@ void Mathematics::EulerTesting::EulerXZYTest()
 void Mathematics::EulerTesting::EulerYXZTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
-    std::uniform_real<double> angleDistribution1{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
+    std::uniform_real_distribution<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution1{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -197,8 +197,8 @@ void Mathematics::EulerTesting::EulerYXZTest()
 void Mathematics::EulerTesting::EulerYZXTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
-    std::uniform_real<double> angleDistribution1{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
+    std::uniform_real_distribution<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution1{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -243,8 +243,8 @@ void Mathematics::EulerTesting::EulerYZXTest()
 void Mathematics::EulerTesting::EulerZXYTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
-    std::uniform_real<double> angleDistribution1{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
+    std::uniform_real_distribution<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution1{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -289,8 +289,8 @@ void Mathematics::EulerTesting::EulerZXYTest()
 void Mathematics::EulerTesting::EulerZYXTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
-    std::uniform_real<double> angleDistribution1{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
+    std::uniform_real_distribution<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution1{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -335,8 +335,8 @@ void Mathematics::EulerTesting::EulerZYXTest()
 void Mathematics::EulerTesting::EulerXYXTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
-    std::uniform_real<double> angleDistribution1{ 0, MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution1{ 0, MathD::GetPI() };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -381,8 +381,8 @@ void Mathematics::EulerTesting::EulerXYXTest()
 void Mathematics::EulerTesting::EulerXZXTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
-    std::uniform_real<double> angleDistribution1{ 0, MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution1{ 0, MathD::GetPI() };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -427,8 +427,8 @@ void Mathematics::EulerTesting::EulerXZXTest()
 void Mathematics::EulerTesting::EulerYXYTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
-    std::uniform_real<double> angleDistribution1{ 0, MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution1{ 0, MathD::GetPI() };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -473,8 +473,8 @@ void Mathematics::EulerTesting::EulerYXYTest()
 void Mathematics::EulerTesting::EulerYZYTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
-    std::uniform_real<double> angleDistribution1{ 0, MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution1{ 0, MathD::GetPI() };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -519,8 +519,8 @@ void Mathematics::EulerTesting::EulerYZYTest()
 void Mathematics::EulerTesting::EulerZXZTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
-    std::uniform_real<double> angleDistribution1{ 0, MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution1{ 0, MathD::GetPI() };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -565,8 +565,8 @@ void Mathematics::EulerTesting::EulerZXZTest()
 void Mathematics::EulerTesting::EulerZYZTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
-    std::uniform_real<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
-    std::uniform_real<double> angleDistribution1{ 0, MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution0{ -MathD::GetPI(), MathD::GetPI() };
+    std::uniform_real_distribution<double> angleDistribution1{ 0, MathD::GetPI() };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/17 09:37)
+/// 版本：1.0.1.0 (2024/08/10 00:08)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_H
@@ -23,6 +23,8 @@
 #include "Excel/BatchConversionCSVTesting.h"
 #include "Excel/BatchConversionCodeTesting.h"
 #include "Excel/ExcelConversionCSVTesting.h"
+#include "Json/JsonAnalysisManagerTesting.h"
+#include "Json/JsonBaseTesting.h"
 #include "SimpleCSV/AppPropertiesTesting.h"
 #include "SimpleCSV/CellIteratorTesting.h"
 #include "SimpleCSV/CellRangeTesting.h"
