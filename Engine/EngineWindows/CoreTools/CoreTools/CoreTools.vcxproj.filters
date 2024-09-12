@@ -2805,6 +2805,9 @@
     <ClInclude Include="..\..\..\Code\CoreTools\EngineConfiguration\SmtpConfig.h">
       <Filter>EngineConfiguration 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\Base64Encode.h">
+      <Filter>CharacterString 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp">
@@ -4003,6 +4006,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\EngineConfiguration\SmtpConfig.cpp">
       <Filter>EngineConfiguration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\Base64Encode.cpp">
+      <Filter>CharacterString 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

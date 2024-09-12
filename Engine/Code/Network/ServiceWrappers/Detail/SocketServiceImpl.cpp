@@ -20,7 +20,7 @@ Network::SocketServiceImpl::SocketServiceImpl(ConfigurationStrategy configuratio
 
 CLASS_INVARIANT_STUB_DEFINE(Network, SocketServiceImpl)
 
-void Network::SocketServiceImpl::SendTextMessage(const String& message)
+void Network::SocketServiceImpl::SendTextMessage(const std::string& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 

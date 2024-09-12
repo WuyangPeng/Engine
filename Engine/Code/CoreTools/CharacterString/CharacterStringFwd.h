@@ -22,6 +22,8 @@ namespace CoreTools
 
     class CodeMapping;
     class CodeMappingAnalysis;
+
+    class Base64Encode;
 }
 
 #endif  // CORE_TOOLS_CHARACTER_STRING_FWD_H

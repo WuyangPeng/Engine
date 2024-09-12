@@ -10,7 +10,9 @@
 #include "Framework/FrameworkExport.h"
 
 #include "SmtpTransportImpl.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+#include "CoreTools/CharacterString/Base64Encode.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/EngineConfiguration/SmtpConfig.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
@@ -23,7 +25,7 @@ using namespace std::literals;
 
 namespace
 {
-    const auto lineBreak = SYSTEM_TEXT("\r\n"s);
+    const auto lineBreak = "\r\n"s;
 }
 
 Framework::SmtpTransportImpl::SmtpTransportImpl(const EnvironmentDirectory& environmentDirectory)
@@ -51,33 +53,39 @@ void Framework::SmtpTransportImpl::SendMailMessage(const String& title, const St
 
 void Framework::SmtpTransportImpl::Authenticate(SocketService& socketService) const
 {
-    socketService.SendTextMessage(SYSTEM_TEXT("EHLO ") + smtpConfig->GetEhlo() + lineBreak);
-    socketService.SendTextMessage(SYSTEM_TEXT("STARTTLS a") + lineBreak);
+    socketService.SendTextMessage("EHLO " + CoreTools::StringConversion::StandardConversionMultiByte(smtpConfig->GetEhlo()) + lineBreak);
+    socketService.SendTextMessage("STARTTLS a" + lineBreak);
 
     // 发送AUTH命令使用PLAIN方法
-    const auto authCommand = SYSTEM_TEXT("AUTH PLAIN "s);
-    const auto plainCredentials = SYSTEM_TEXT('\0') + smtpConfig->GetSendUser() + SYSTEM_TEXT('\0') + smtpConfig->GetPassword();
-    const auto base64Encoded = CoreTools::StringConversion::Base64Encode(plainCredentials);
+    const auto authCommand = "AUTH PLAIN "s;
+    const auto plainCredentials = '\0' + CoreTools::StringConversion::StandardConversionMultiByte(smtpConfig->GetSendUser()) + '\0' + CoreTools::StringConversion::StandardConversionMultiByte(smtpConfig->GetPassword());
+
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+    const auto base64Encoded = CoreTools::Base64Encode::Encode(reinterpret_cast<const uint8_t*>(plainCredentials.c_str()), boost::numeric_cast<int>(plainCredentials.size()));
+
+#include SYSTEM_WARNING_POP
 
     socketService.SendTextMessage(base64Encoded + lineBreak);
 }
 
 void Framework::SmtpTransportImpl::SendMailMessage(SocketService& socketService, const String& title, const String& content) const
 {
-    socketService.SendTextMessage(SYSTEM_TEXT("MAIL FROM:<") + smtpConfig->GetSendUser() + SYSTEM_TEXT(">") + lineBreak);
+    socketService.SendTextMessage("MAIL FROM:<" + CoreTools::StringConversion::StandardConversionMultiByte(smtpConfig->GetSendUser()) + ">" + lineBreak);
 
     for (const auto& element : smtpConfig->GetReceiveUser())
     {
-        socketService.SendTextMessage(SYSTEM_TEXT("RCPT TO:<") + element + SYSTEM_TEXT(">") + lineBreak);
+        socketService.SendTextMessage("RCPT TO:<" + CoreTools::StringConversion::StandardConversionMultiByte(element) + ">" + lineBreak);
 
-        socketService.SendTextMessage(SYSTEM_TEXT("DATA") + lineBreak);
+        socketService.SendTextMessage("DATA" + lineBreak);
 
-        socketService.SendTextMessage(SYSTEM_TEXT("From: ") + smtpConfig->GetSendUser() + lineBreak);
-        socketService.SendTextMessage(SYSTEM_TEXT("To: ") + element + lineBreak);
+        socketService.SendTextMessage("From: " + CoreTools::StringConversion::StandardConversionMultiByte(smtpConfig->GetSendUser()) + lineBreak);
+        socketService.SendTextMessage("To: " + CoreTools::StringConversion::StandardConversionMultiByte(element) + lineBreak);
 
-        socketService.SendTextMessage(title + lineBreak);
-        socketService.SendTextMessage(content + lineBreak);
+        socketService.SendTextMessage(CoreTools::StringConversion::StandardConversionMultiByte(title) + lineBreak);
+        socketService.SendTextMessage(CoreTools::StringConversion::StandardConversionMultiByte(content) + lineBreak);
     }
 
-    socketService.SendTextMessage(SYSTEM_TEXT("QUIT") + lineBreak);
+    socketService.SendTextMessage("QUIT" + lineBreak);
 }

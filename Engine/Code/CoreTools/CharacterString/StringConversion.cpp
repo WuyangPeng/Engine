@@ -188,8 +188,3 @@ std::string CoreTools::StringConversion::MultiByteConversionUtf8(const std::stri
 
     return WideCharConversionUtf8(wideChar);
 }
-
-System::String CoreTools::StringConversion::Base64Encode(const String& character)
-{
-    return character;
-}
