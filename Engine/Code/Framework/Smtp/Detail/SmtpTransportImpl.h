@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.1.0 (2024/08/19 10:20)
+/// 版本：1.0.1.1 (2024/09/12 09:33)
 
 #ifndef FRAMEWORK_SMTP_SMTP_TRANSPORT_IMPL_H
 #define FRAMEWORK_SMTP_SMTP_TRANSPORT_IMPL_H
@@ -13,8 +13,9 @@
 #include "Framework/FrameworkDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/EngineConfiguration/SmtpConfig.h"
-#include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
+#include "CoreTools/EngineConfiguration/EngineConfigurationFwd.h"
+#include "Network/ServiceWrappers/ServiceWrappersFwd.h"
+#include "Framework/MainFunctionHelper/MainFunctionHelperFwd.h"
 
 namespace Framework
 {
@@ -35,6 +36,11 @@ namespace Framework
     private:
         using SmtpConfig = CoreTools::SmtpConfig;
         using SmtpConfigSharedPtr = std::shared_ptr<SmtpConfig>;
+        using SocketService = Network::SocketService;
+
+    private:
+        void Authenticate(SocketService& socketService) const;
+        void SendMailMessage(SocketService& socketService, const String& title, const String& content) const;
 
     private:
         SmtpConfigSharedPtr smtpConfig;

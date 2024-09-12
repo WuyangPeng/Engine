@@ -24,10 +24,14 @@ namespace Network
     public:
         using ClassType = SocketServiceImpl;
 
+        using String = System::String;
+
     public:
         explicit SocketServiceImpl(ConfigurationStrategy configurationStrategy);
 
         CLASS_INVARIANT_DECLARE;
+
+        void SendTextMessage(const String& message);
 
     private:
         ServiceSession serviceSession;

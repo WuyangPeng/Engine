@@ -14,6 +14,8 @@
 
 CoreTools::SmtpConfigImpl::SmtpConfigImpl() noexcept
     : smtpHost{ SYSTEM_TEXT("smtp.qq.com") },
+      smtpPort{ 25 },
+      ehlo{},
       smtpSslEnable{ false },
       smtpAuth{ true },
       sendUser{},
@@ -30,6 +32,20 @@ System::String CoreTools::SmtpConfigImpl::GetSmtpHost() const
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return smtpHost;
+}
+
+int CoreTools::SmtpConfigImpl::GetSmtpPort() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return smtpPort;
+}
+
+System::String CoreTools::SmtpConfigImpl::GetEhlo() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return ehlo;
 }
 
 bool CoreTools::SmtpConfigImpl::GetSmtpSslEnable() const noexcept
@@ -72,6 +88,20 @@ void CoreTools::SmtpConfigImpl::SetSmtpHost(const String& aSmtpHost)
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     smtpHost = aSmtpHost;
+}
+
+void CoreTools::SmtpConfigImpl::SetSmtpPort(int aSmtpPort) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    smtpPort = aSmtpPort;
+}
+
+void CoreTools::SmtpConfigImpl::SetEhlo(const String& aEhlo)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    ehlo = aEhlo;
 }
 
 void CoreTools::SmtpConfigImpl::SetSmtpSslEnable(bool aSmtpSslEnable) noexcept

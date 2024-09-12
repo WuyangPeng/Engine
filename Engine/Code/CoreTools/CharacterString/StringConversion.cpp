@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/03/29 23:09)
+/// 版本：1.0.1.1 (2024/09/12 09:52)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -187,4 +187,9 @@ std::string CoreTools::StringConversion::MultiByteConversionUtf8(const std::stri
     const auto wideChar = MultiByteConversionWideChar(character);
 
     return WideCharConversionUtf8(wideChar);
+}
+
+System::String CoreTools::StringConversion::Base64Encode(const String& character)
+{
+    return character;
 }

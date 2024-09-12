@@ -36,6 +36,8 @@ namespace CoreTools
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         NODISCARD String GetSmtpHost() const;
+        NODISCARD int GetSmtpPort() const;
+        NODISCARD String GetEhlo() const;
         NODISCARD bool GetSmtpSslEnable() const noexcept;
         NODISCARD bool GetSmtpAuth() const noexcept;
         NODISCARD String GetSendUser() const;
@@ -43,6 +45,8 @@ namespace CoreTools
         NODISCARD ReceiveUserType GetReceiveUser() const;
 
         void SetSmtpHost(const String& smtpHost);
+        void SetSmtpPort(int smtpPort) noexcept;
+        void SetEhlo(const String& ehlo);
         void SetSmtpSslEnable(bool smtpSslEnable) noexcept;
         void SetSmtpAuth(bool smtpAuth) noexcept;
         void SetSendUser(const String& sendUser);

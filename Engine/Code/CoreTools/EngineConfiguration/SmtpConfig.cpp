@@ -40,6 +40,20 @@ System::String CoreTools::SmtpConfig::GetSmtpHost() const
     return impl->GetSmtpHost();
 }
 
+int CoreTools::SmtpConfig::GetSmtpPort() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetSmtpPort();
+}
+
+CoreTools::JsonBase::String CoreTools::SmtpConfig::GetEhlo() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetEhlo();
+}
+
 bool CoreTools::SmtpConfig::GetSmtpSslEnable() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
@@ -82,6 +96,20 @@ void CoreTools::SmtpConfig::SetSmtpHost(const String& smtpHost)
     return impl->SetSmtpHost(smtpHost);
 }
 
+void CoreTools::SmtpConfig::SetSmtpPort(int smtpPort) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetSmtpPort(smtpPort);
+}
+
+void CoreTools::SmtpConfig::SetEhlo(const String& ehlo)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetEhlo(ehlo);
+}
+
 void CoreTools::SmtpConfig::SetSmtpSslEnable(bool smtpSslEnable) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -122,6 +150,8 @@ void CoreTools::SmtpConfig::Load(BasicTree& mainTree)
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     SetSmtpHost(mainTree.get(SYSTEM_TEXT("smtpHost"), SYSTEM_TEXT("smtp.qq.com")));
+    SetSmtpPort(mainTree.get(SYSTEM_TEXT("smtpPort"), 25));
+    SetEhlo(mainTree.get(SYSTEM_TEXT("ehlo"), SYSTEM_TEXT("test")));
     SetSmtpSslEnable(mainTree.get(SYSTEM_TEXT("smtpSslEnable"), false));
     SetSmtpAuth(mainTree.get(SYSTEM_TEXT("smtpAuth"), true));
     SetSendUser(mainTree.get(SYSTEM_TEXT("sendUser"), SYSTEM_TEXT("")));

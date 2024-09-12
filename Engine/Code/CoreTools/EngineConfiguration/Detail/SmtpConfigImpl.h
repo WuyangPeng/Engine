@@ -30,6 +30,8 @@ namespace CoreTools
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD String GetSmtpHost() const;
+        NODISCARD int GetSmtpPort() const;
+        NODISCARD String GetEhlo() const;
         NODISCARD bool GetSmtpSslEnable() const noexcept;
         NODISCARD bool GetSmtpAuth() const noexcept;
         NODISCARD String GetSendUser() const;
@@ -37,6 +39,8 @@ namespace CoreTools
         NODISCARD ReceiveUserType GetReceiveUser() const;
 
         void SetSmtpHost(const String& aSmtpHost);
+        void SetSmtpPort(int aSmtpPort) noexcept;
+        void SetEhlo(const String& aEhlo);
         void SetSmtpSslEnable(bool aSmtpSslEnable) noexcept;
         void SetSmtpAuth(bool aSmtpAuth) noexcept;
         void SetSendUser(const String& aSendUser);
@@ -46,6 +50,8 @@ namespace CoreTools
 
     private:
         String smtpHost;
+        int smtpPort;
+        String ehlo;
         bool smtpSslEnable;
         bool smtpAuth;
         String sendUser;

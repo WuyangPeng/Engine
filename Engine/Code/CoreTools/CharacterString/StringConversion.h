@@ -51,6 +51,8 @@ namespace CoreTools
         NODISCARD static std::string StandardConversionUtf8(const String& character);
         NODISCARD static std::string Utf8ConversionMultiByte(const std::string& character);
         NODISCARD static std::string MultiByteConversionUtf8(const std::string& character);
+
+        NODISCARD static String Base64Encode(const String& character);
     };
 }
 

@@ -19,3 +19,12 @@ Network::SocketServiceImpl::SocketServiceImpl(ConfigurationStrategy configuratio
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, SocketServiceImpl)
+
+void Network::SocketServiceImpl::SendTextMessage(const String& message)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(message);
+
+    CoreTools::DisableNoexcept();
+}

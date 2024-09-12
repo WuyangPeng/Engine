@@ -45,6 +45,8 @@ void CoreTools::SmtpConfigTesting::SmtpConfigTest()
     const auto smtpConfig = boost::polymorphic_pointer_downcast<SmtpConfig>(jsonBase);
 
     ASSERT_EQUAL(smtpConfig->GetSmtpHost(), SYSTEM_TEXT("smtp.qq.com"));
+    ASSERT_EQUAL(smtpConfig->GetSmtpPort(), 25);
+    ASSERT_EQUAL(smtpConfig->GetEhlo(), SYSTEM_TEXT("test"));
     ASSERT_FALSE(smtpConfig->GetSmtpSslEnable());
     ASSERT_TRUE(smtpConfig->GetSmtpAuth());
     ASSERT_EQUAL(smtpConfig->GetSendUser(), SYSTEM_TEXT("94458936@qq.com"));

@@ -35,6 +35,7 @@ namespace Network
         explicit ConfigurationStrategy(CoreTools::DisableNotThrow disableNotThrow);
 
     public:
+        ConfigurationStrategy(const std::string& host, int port);
         ConfigurationStrategy(WrappersStrategy wrappersStrategy,
                               ConnectStrategy connectStrategy,
                               ServerStrategy serverStrategy,
