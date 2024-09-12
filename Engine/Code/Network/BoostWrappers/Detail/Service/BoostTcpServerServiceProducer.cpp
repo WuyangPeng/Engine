@@ -19,3 +19,12 @@ Network::BoostTcpServerServiceProducer::BoostTcpServerServiceProducer(const Conf
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, BoostTcpServerServiceProducer)
+
+void Network::BoostTcpServerServiceProducer::SendTextMessage(ServiceSession& serviceSession, const std::string& message)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(serviceSession, message);
+
+    CoreTools::DisableNoexcept();
+}

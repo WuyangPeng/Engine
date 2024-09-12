@@ -12,6 +12,7 @@
 
 #include "Network/NetworkDll.h"
 
+#include "Network/Interface/NetworkInternalFwd.h"
 #include "Network/ServiceWrappers/Detail/ClientServiceSession.h"
 
 namespace Network
@@ -23,9 +24,15 @@ namespace Network
         using ParentType = ClientServiceSession;
 
     public:
-        explicit BoostTcpClientServiceSession(const ConfigurationStrategy& configurationStrategy) noexcept;
+        explicit BoostTcpClientServiceSession(const ConfigurationStrategy& configurationStrategy);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+    private:
+        void Connect();
+
+    private:
+        BoostSockStreamType socket;
     };
 }
 

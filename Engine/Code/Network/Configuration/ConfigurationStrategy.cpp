@@ -33,7 +33,7 @@ Network::ConfigurationStrategy::ConfigurationStrategy(const std::string& host, i
     : impl{ CoreTools::ImplCreateUseFactory::Default,
             WrappersStrategy::Boost,
             ConnectStrategy::Tcp,
-            ServerStrategy::Default,
+            ClientStrategy::Default,
             MessageStrategy::Default,
             ParserStrategy::LittleEndian,
             OpenSslStrategy::Default,

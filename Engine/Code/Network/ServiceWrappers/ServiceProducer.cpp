@@ -21,3 +21,10 @@ Network::ServiceProducer::ServiceProducer(const ConfigurationStrategy& configura
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ServiceProducer)
+
+void Network::ServiceProducer::SendTextMessage(ServiceSession& serviceSession, const std::string& message)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->SendTextMessage(serviceSession, message);
+}

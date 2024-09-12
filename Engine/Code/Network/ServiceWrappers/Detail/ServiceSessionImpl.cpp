@@ -39,3 +39,17 @@ Network::ServiceSessionImpl& Network::ServiceSessionImpl::operator=(ServiceSessi
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ServiceSessionImpl)
+
+std::string Network::ServiceSessionImpl::GetHost() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return configurationStrategy.GetHost();
+}
+
+int Network::ServiceSessionImpl::GetPort() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return configurationStrategy.GetPort();
+}

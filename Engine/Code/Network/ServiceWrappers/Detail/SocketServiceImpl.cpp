@@ -24,7 +24,5 @@ void Network::SocketServiceImpl::SendTextMessage(const std::string& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    System::UnusedFunction(message);
-
-    CoreTools::DisableNoexcept();
+    producer.SendTextMessage(serviceSession, message);
 }

@@ -39,6 +39,10 @@ namespace Network
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
+    protected:
+        NODISCARD std::string GetHost() const;
+        NODISCARD int GetPort() const noexcept;
+
     private:
         ConfigurationStrategy configurationStrategy;
     };

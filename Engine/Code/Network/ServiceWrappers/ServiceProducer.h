@@ -17,6 +17,7 @@
 #include "Network/Configuration/ConfigurationFwd.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/NetworkMessage/MessageInterface.h"
+#include "Network/ServiceWrappers/ServiceWrappersFwd.h"
 
 NETWORK_NON_COPY_EXPORT_IMPL(ServiceProducerImpl);
 
@@ -33,6 +34,8 @@ namespace Network
         explicit ServiceProducer(const ConfigurationStrategy& configurationStrategy);
 
         CLASS_INVARIANT_DECLARE;
+
+        void SendTextMessage(ServiceSession& serviceSession, const std::string& message);
 
     private:
         PackageType impl;
