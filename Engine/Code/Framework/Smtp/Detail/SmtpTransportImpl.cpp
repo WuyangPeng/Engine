@@ -12,7 +12,7 @@
 #include "SmtpTransportImpl.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
-#include "CoreTools/CharacterString/Base64Encode.h"
+#include "CoreTools/CharacterString/Base64.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/EngineConfiguration/SmtpConfig.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
@@ -59,12 +59,7 @@ void Framework::SmtpTransportImpl::Authenticate(SocketService& socketService) co
     const auto authCommand = "AUTH PLAIN "s;
     const auto plainCredentials = '\0' + smtpConfig->GetSendUser() + '\0' + smtpConfig->GetPassword();
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-
-    const auto base64Encoded = CoreTools::Base64Encode::Encode(reinterpret_cast<const uint8_t*>(plainCredentials.c_str()), boost::numeric_cast<int>(plainCredentials.size()));
-
-#include SYSTEM_WARNING_POP
+    const auto base64Encoded = CoreTools::Base64::Encode(plainCredentials);
 
     socketService.SendTextMessage(base64Encoded + lineBreak);
 }

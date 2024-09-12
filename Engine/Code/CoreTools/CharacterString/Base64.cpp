@@ -9,14 +9,12 @@
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "Base64Encode.h"
+#include "Base64.h"
+#include "System/Helper/PragmaWarning/Base64.h"
 
-#include <boost/archive/iterators/base64_from_binary.hpp>
-#include <boost/archive/iterators/binary_from_base64.hpp>
-#include <boost/archive/iterators/transform_width.hpp>
 #include <sstream>
 
-std::string CoreTools::Base64Encode::Encode(const std::string& input)
+std::string CoreTools::Base64::Encode(const std::string& input)
 {
     using Base64EncodeIterator = boost::archive::iterators::base64_from_binary<boost::archive::iterators::transform_width<std::string::const_iterator, 6, 8>>;
 
@@ -32,16 +30,14 @@ std::string CoreTools::Base64Encode::Encode(const std::string& input)
     return result.str();
 }
 
-std::string CoreTools::Base64Encode::Decode(const std::string& input)
+std::string CoreTools::Base64::Decode(const std::string& input)
 {
     using BinaryIterator = boost::archive::iterators::transform_width<boost::archive::iterators::binary_from_base64<std::string::const_iterator>, 8, 6>;
 
-    std::stringstream result;
-    std::copy(BinaryIterator(input.begin()),
-              BinaryIterator(input.end()),
-              std::ostream_iterator<char>(result));
+    std::stringstream result{};
+    std::copy(BinaryIterator(input.begin()), BinaryIterator(input.end()), std::ostream_iterator<char>(result));
 
-    std::string decoded = result.str();
+    auto decoded = result.str();
     decoded.erase(decoded.find_last_not_of('\0') + 1);
 
     return decoded;

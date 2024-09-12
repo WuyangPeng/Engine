@@ -105,6 +105,7 @@
 （4）字符串工具：StringUtilityTesting。
 （5）代码映射：CodeMappingTesting、
 			   CodeMappingAnalysisTesting。
+（6）Base64转换：Base64Testing。
 
 ----------------------------
 5.   ExceptionSuite 

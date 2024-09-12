@@ -7,8 +7,8 @@
 /// 标准：std:c++20
 /// 版本：1.0.1.1 (2024/09/12 16:15)
 
-#ifndef CORE_TOOLS_CHARACTER_STRING_BASE64_ENCODE_H
-#define CORE_TOOLS_CHARACTER_STRING_BASE64_ENCODE_H
+#ifndef CORE_TOOLS_CHARACTER_STRING_BASE64_H
+#define CORE_TOOLS_CHARACTER_STRING_BASE64_H
 
 #include "CoreTools/CoreToolsDll.h"
 
@@ -16,10 +16,10 @@
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE Base64Encode
+    class CORE_TOOLS_DEFAULT_DECLARE Base64
     {
     public:
-        using ClassType = Base64Encode;
+        using ClassType = Base64;
 
     public:
         NODISCARD static std::string Encode(const std::string& input);
@@ -27,4 +27,4 @@ namespace CoreTools
     };
 }
 
-#endif  // CORE_TOOLS_CHARACTER_STRING_BASE64_ENCODE_H
+#endif  // CORE_TOOLS_CHARACTER_STRING_BASE64_H

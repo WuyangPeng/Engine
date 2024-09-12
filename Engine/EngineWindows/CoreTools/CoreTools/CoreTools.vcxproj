@@ -311,7 +311,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Base\UniqueIdManager.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Base\UniqueIdManagerDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Base\Version.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\Base64Encode.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\Base64.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CaseInsensitiveString.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CaseInsensitiveStringDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CharacterString.h" />
@@ -1089,7 +1089,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\Base\LoadingLibrary.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Base\UniqueIdManager.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Base\Version.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\Base64Encode.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\Base64.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\CaseInsensitiveString.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\CodeMapping.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\CodeMappingAnalysis.cpp" />

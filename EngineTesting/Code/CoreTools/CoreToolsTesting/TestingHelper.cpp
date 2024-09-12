@@ -274,6 +274,7 @@ void CoreTools::TestingHelper::AddCharacterStringSuite()
     characterStringSuite.AddSuite(GetCaseInsensitiveStringSuite());
     ADD_TEST(characterStringSuite, StringUtilityTesting);
     characterStringSuite.AddSuite(GetCodeMappingSuite());
+    ADD_TEST(characterStringSuite, Base64Testing);
 
     AddSuite(characterStringSuite);
 }

@@ -18,6 +18,7 @@
 #include "System/Helper/PragmaWarning/AsioIpTcp.h"
 #include "System/Helper/PragmaWarning/AsioPlaceholders.h"
 #include "System/Helper/PragmaWarning/AsioPost.h"
+#include "System/Helper/PragmaWarning/Base64.h"
 #include "System/Helper/PragmaWarning/Bind.h"
 #include "System/Helper/PragmaWarning/CallTraits.h"
 #include "System/Helper/PragmaWarning/Chrono.h"
@@ -62,6 +63,7 @@
 
 #include SYSTEM_WARNING_DISABLE(4100)
 #include SYSTEM_WARNING_DISABLE(4101)
+#include SYSTEM_WARNING_DISABLE(4127)
 #include SYSTEM_WARNING_DISABLE(4200)
 #include SYSTEM_WARNING_DISABLE(4239)
 #include SYSTEM_WARNING_DISABLE(4244)

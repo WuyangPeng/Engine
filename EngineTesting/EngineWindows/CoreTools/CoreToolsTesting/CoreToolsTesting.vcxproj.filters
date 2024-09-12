@@ -1992,6 +1992,9 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\SmtpConfigTesting.h">
       <Filter>EngineConfigurationSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\Base64Testing.h">
+      <Filter>CharacterStringSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp">
@@ -3274,6 +3277,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\SmtpConfigTesting.cpp">
       <Filter>EngineConfigurationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\Base64Testing.cpp">
+      <Filter>CharacterStringSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

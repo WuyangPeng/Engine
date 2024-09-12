@@ -1863,6 +1863,9 @@
     <ClInclude Include="..\..\..\Code\System\OpenGL\Flags\OpenGLTextureFlags.h">
       <Filter>OpenGL 头文件\Flags</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Base64.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\DllLib.cpp">
@@ -2269,6 +2272,9 @@
       <Filter>Helper 内联文件\PragmaWarning</Filter>
     </None>
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26445.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </None>
+    <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4127.inl">
       <Filter>Helper 内联文件\PragmaWarning</Filter>
     </None>
   </ItemGroup>

@@ -434,6 +434,7 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\AsioIpTcp.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\AsioPlaceholders.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\AsioPost.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Base64.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Bind.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\CallTraits.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Chrono.h" />
@@ -927,6 +928,7 @@
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26437.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26445.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26826.inl" />
+    <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4127.inl" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>

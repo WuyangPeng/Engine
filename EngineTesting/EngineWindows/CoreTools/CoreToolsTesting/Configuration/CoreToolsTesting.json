@@ -123,7 +123,8 @@
   "characterStringSuite": {
     "FormatErrorMessageTesting": 1,
     "StringConversionTesting": 1,
-    "StringUtilityTesting": 1
+    "StringUtilityTesting": 1,
+    "Base64Testing": 1
   },
 
   "caseInsensitiveStringSuite": {
