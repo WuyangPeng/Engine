@@ -31,7 +31,7 @@ namespace Framework
 
         CLASS_INVARIANT_DECLARE;
 
-        void SendMailMessage(const String& title, const String& content);
+        void SendMailMessage(const std::string& title, const std::string& content);
 
     private:
         using SmtpConfig = CoreTools::SmtpConfig;
@@ -40,7 +40,7 @@ namespace Framework
 
     private:
         void Authenticate(SocketService& socketService) const;
-        void SendMailMessage(SocketService& socketService, const String& title, const String& content) const;
+        void SendMailMessage(SocketService& socketService, const std::string& title, const std::string& content) const;
 
     private:
         SmtpConfigSharedPtr smtpConfig;

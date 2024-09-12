@@ -22,7 +22,8 @@ namespace CoreTools
         using ClassType = Base64Encode;
 
     public:
-        NODISCARD static std::string Encode(const uint8_t* bytesToEncode, int length);
+        NODISCARD static std::string Encode(const std::string& input);
+        NODISCARD static std::string Decode(const std::string& input);
     };
 }
 

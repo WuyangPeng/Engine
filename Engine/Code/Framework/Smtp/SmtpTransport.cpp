@@ -22,7 +22,7 @@ Framework::SmtpTransport::SmtpTransport(const EnvironmentDirectory& environmentD
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, SmtpTransport)
 
-void Framework::SmtpTransport::SendMailMessage(const String& title, const String& content)
+void Framework::SmtpTransport::SendMailMessage(const std::string& title, const std::string& content)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 

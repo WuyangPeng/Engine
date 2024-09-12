@@ -5,66 +5,44 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.1.1 (2024/09/12 16:16)
+/// 版本：1.0.1.1 (2024/09/12 17:40)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "Base64Encode.h"
 
-using namespace std::literals;
+#include <boost/archive/iterators/base64_from_binary.hpp>
+#include <boost/archive/iterators/binary_from_base64.hpp>
+#include <boost/archive/iterators/transform_width.hpp>
+#include <sstream>
 
-namespace
+std::string CoreTools::Base64Encode::Encode(const std::string& input)
 {
-    const auto base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"s;
+    using Base64EncodeIterator = boost::archive::iterators::base64_from_binary<boost::archive::iterators::transform_width<std::string::const_iterator, 6, 8>>;
+
+    std::stringstream result{};
+    std::copy(Base64EncodeIterator(input.begin()), Base64EncodeIterator(input.end()), std::ostream_iterator<char>(result));
+
+    const auto padding = (3 - input.size() % 3) % 3;
+    for (auto i = 0u; i < padding; ++i)
+    {
+        result.put('=');
+    }
+
+    return result.str();
 }
 
-std::string CoreTools::Base64Encode::Encode(const uint8_t* bytesToEncode, int length)
+std::string CoreTools::Base64Encode::Decode(const std::string& input)
 {
-    std::string ret;
-    int i = 0;
-    int j = 0;
-    unsigned char char_array_3[3];
-    unsigned char char_array_4[4];
+    using BinaryIterator = boost::archive::iterators::transform_width<boost::archive::iterators::binary_from_base64<std::string::const_iterator>, 8, 6>;
 
-    while (length--)
-    {
-        char_array_3[i++] = *(bytesToEncode++);
-        if (i == 3)
-        {
-            char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
-            char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
-            char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
-            char_array_4[3] = char_array_3[2] & 0x3f;
+    std::stringstream result;
+    std::copy(BinaryIterator(input.begin()),
+              BinaryIterator(input.end()),
+              std::ostream_iterator<char>(result));
 
-            for (i = 0; (i < 4); i++)
-            {
-                ret += base64Chars[char_array_4[i]];
-            }
-            i = 0;
-        }
-    }
+    std::string decoded = result.str();
+    decoded.erase(decoded.find_last_not_of('\0') + 1);
 
-    if (i != 0)
-    {
-        for (j = i; j < 3; j++)
-        {
-            char_array_3[j] = '\0';
-        }
-
-        char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
-        char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
-        char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
-
-        for (j = 0; (j < i + 1); j++)
-        {
-            ret += base64Chars[char_array_4[j]];
-        }
-
-        while ((i++ < 3))
-        {
-            ret += '=';
-        }
-    }
-
-    return ret;
+    return decoded;
 }

@@ -28,20 +28,20 @@ namespace CoreTools
         COPY_UNSHARED_TYPE_DECLARE(SmtpConfig);
         using ParentType = JsonBase;
 
-        using ReceiveUserType = std::vector<String>;
+        using ReceiveUserType = std::vector<std::string>;
 
     public:
         explicit SmtpConfig(DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD String GetSmtpHost() const;
-        NODISCARD int GetSmtpPort() const;
-        NODISCARD String GetEhlo() const;
+        NODISCARD std::string GetSmtpHost() const;
+        NODISCARD int GetSmtpPort() const noexcept;
+        NODISCARD std::string GetEhlo() const;
         NODISCARD bool GetSmtpSslEnable() const noexcept;
         NODISCARD bool GetSmtpAuth() const noexcept;
-        NODISCARD String GetSendUser() const;
-        NODISCARD String GetPassword() const;
+        NODISCARD std::string GetSendUser() const;
+        NODISCARD std::string GetPassword() const;
         NODISCARD ReceiveUserType GetReceiveUser() const;
 
         void SetSmtpHost(const String& smtpHost);

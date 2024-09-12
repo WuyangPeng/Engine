@@ -37,12 +37,11 @@ Framework::SmtpTransportImpl::SmtpTransportImpl(const EnvironmentDirectory& envi
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, SmtpTransportImpl)
 
-void Framework::SmtpTransportImpl::SendMailMessage(const String& title, const String& content)
+void Framework::SmtpTransportImpl::SendMailMessage(const std::string& title, const std::string& content)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    const Network::ConfigurationStrategy configurationStrategy{ CoreTools::StringConversion::StandardConversionMultiByte(smtpConfig->GetSmtpHost()),
-                                                                smtpConfig->GetSmtpPort() };
+    const Network::ConfigurationStrategy configurationStrategy{ smtpConfig->GetSmtpHost(), smtpConfig->GetSmtpPort() };
 
     SocketService socketService{ configurationStrategy };
 
@@ -53,12 +52,12 @@ void Framework::SmtpTransportImpl::SendMailMessage(const String& title, const St
 
 void Framework::SmtpTransportImpl::Authenticate(SocketService& socketService) const
 {
-    socketService.SendTextMessage("EHLO " + CoreTools::StringConversion::StandardConversionMultiByte(smtpConfig->GetEhlo()) + lineBreak);
+    socketService.SendTextMessage("EHLO " + smtpConfig->GetEhlo() + lineBreak);
     socketService.SendTextMessage("STARTTLS a" + lineBreak);
 
     // 发送AUTH命令使用PLAIN方法
     const auto authCommand = "AUTH PLAIN "s;
-    const auto plainCredentials = '\0' + CoreTools::StringConversion::StandardConversionMultiByte(smtpConfig->GetSendUser()) + '\0' + CoreTools::StringConversion::StandardConversionMultiByte(smtpConfig->GetPassword());
+    const auto plainCredentials = '\0' + smtpConfig->GetSendUser() + '\0' + smtpConfig->GetPassword();
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
@@ -70,21 +69,21 @@ void Framework::SmtpTransportImpl::Authenticate(SocketService& socketService) co
     socketService.SendTextMessage(base64Encoded + lineBreak);
 }
 
-void Framework::SmtpTransportImpl::SendMailMessage(SocketService& socketService, const String& title, const String& content) const
+void Framework::SmtpTransportImpl::SendMailMessage(SocketService& socketService, const std::string& title, const std::string& content) const
 {
-    socketService.SendTextMessage("MAIL FROM:<" + CoreTools::StringConversion::StandardConversionMultiByte(smtpConfig->GetSendUser()) + ">" + lineBreak);
+    socketService.SendTextMessage("MAIL FROM:<" + smtpConfig->GetSendUser() + ">" + lineBreak);
 
     for (const auto& element : smtpConfig->GetReceiveUser())
     {
-        socketService.SendTextMessage("RCPT TO:<" + CoreTools::StringConversion::StandardConversionMultiByte(element) + ">" + lineBreak);
+        socketService.SendTextMessage("RCPT TO:<" + element + ">" + lineBreak);
 
         socketService.SendTextMessage("DATA" + lineBreak);
 
-        socketService.SendTextMessage("From: " + CoreTools::StringConversion::StandardConversionMultiByte(smtpConfig->GetSendUser()) + lineBreak);
-        socketService.SendTextMessage("To: " + CoreTools::StringConversion::StandardConversionMultiByte(element) + lineBreak);
+        socketService.SendTextMessage("From: " + smtpConfig->GetSendUser() + lineBreak);
+        socketService.SendTextMessage("To: " + element + lineBreak);
 
-        socketService.SendTextMessage(CoreTools::StringConversion::StandardConversionMultiByte(title) + lineBreak);
-        socketService.SendTextMessage(CoreTools::StringConversion::StandardConversionMultiByte(content) + lineBreak);
+        socketService.SendTextMessage(title + lineBreak);
+        socketService.SendTextMessage(content + lineBreak);
     }
 
     socketService.SendTextMessage("QUIT" + lineBreak);

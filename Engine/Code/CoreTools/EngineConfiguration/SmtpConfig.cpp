@@ -33,21 +33,21 @@ CLASS_INVARIANT_STUB_DEFINE(CoreTools, SmtpConfig)
 
 CORE_TOOLS_RTTI_DEFINE(CoreTools, SmtpConfig)
 
-System::String CoreTools::SmtpConfig::GetSmtpHost() const
+std::string CoreTools::SmtpConfig::GetSmtpHost() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetSmtpHost();
 }
 
-int CoreTools::SmtpConfig::GetSmtpPort() const
+int CoreTools::SmtpConfig::GetSmtpPort() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetSmtpPort();
 }
 
-CoreTools::JsonBase::String CoreTools::SmtpConfig::GetEhlo() const
+std::string CoreTools::SmtpConfig::GetEhlo() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -68,14 +68,14 @@ bool CoreTools::SmtpConfig::GetSmtpAuth() const noexcept
     return impl->GetSmtpAuth();
 }
 
-System::String CoreTools::SmtpConfig::GetSendUser() const
+std::string CoreTools::SmtpConfig::GetSendUser() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetSendUser();
 }
 
-System::String CoreTools::SmtpConfig::GetPassword() const
+std::string CoreTools::SmtpConfig::GetPassword() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

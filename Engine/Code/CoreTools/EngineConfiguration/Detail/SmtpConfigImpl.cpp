@@ -10,10 +10,11 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "SmtpConfigImpl.h"
+#include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::SmtpConfigImpl::SmtpConfigImpl() noexcept
-    : smtpHost{ SYSTEM_TEXT("smtp.qq.com") },
+    : smtpHost{ "smtp.qq.com" },
       smtpPort{ 25 },
       ehlo{},
       smtpSslEnable{ false },
@@ -27,21 +28,21 @@ CoreTools::SmtpConfigImpl::SmtpConfigImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, SmtpConfigImpl)
 
-System::String CoreTools::SmtpConfigImpl::GetSmtpHost() const
+std::string CoreTools::SmtpConfigImpl::GetSmtpHost() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return smtpHost;
 }
 
-int CoreTools::SmtpConfigImpl::GetSmtpPort() const
+int CoreTools::SmtpConfigImpl::GetSmtpPort() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return smtpPort;
 }
 
-System::String CoreTools::SmtpConfigImpl::GetEhlo() const
+std::string CoreTools::SmtpConfigImpl::GetEhlo() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -62,14 +63,14 @@ bool CoreTools::SmtpConfigImpl::GetSmtpAuth() const noexcept
     return smtpAuth;
 }
 
-System::String CoreTools::SmtpConfigImpl::GetSendUser() const
+std::string CoreTools::SmtpConfigImpl::GetSendUser() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return sendUser;
 }
 
-System::String CoreTools::SmtpConfigImpl::GetPassword() const
+std::string CoreTools::SmtpConfigImpl::GetPassword() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -87,7 +88,7 @@ void CoreTools::SmtpConfigImpl::SetSmtpHost(const String& aSmtpHost)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    smtpHost = aSmtpHost;
+    smtpHost = StringConversion::StandardConversionMultiByte(aSmtpHost);
 }
 
 void CoreTools::SmtpConfigImpl::SetSmtpPort(int aSmtpPort) noexcept
@@ -101,7 +102,7 @@ void CoreTools::SmtpConfigImpl::SetEhlo(const String& aEhlo)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    ehlo = aEhlo;
+    ehlo = StringConversion::StandardConversionMultiByte(aEhlo);
 }
 
 void CoreTools::SmtpConfigImpl::SetSmtpSslEnable(bool aSmtpSslEnable) noexcept
@@ -122,14 +123,14 @@ void CoreTools::SmtpConfigImpl::SetSendUser(const String& aSendUser)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    sendUser = aSendUser;
+    sendUser = StringConversion::StandardConversionMultiByte(aSendUser);
 }
 
 void CoreTools::SmtpConfigImpl::SetPassword(const String& aPassword)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    password = aPassword;
+    password = StringConversion::StandardConversionMultiByte(aPassword);
 }
 
 void CoreTools::SmtpConfigImpl::SetReceiveUser(const ReceiveUserType& aReceiveUser)
@@ -143,5 +144,5 @@ void CoreTools::SmtpConfigImpl::AddReceiveUser(const String& aReceiveUser)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    receiveUser.emplace_back(aReceiveUser);
+    receiveUser.emplace_back(StringConversion::StandardConversionMultiByte(aReceiveUser));
 }

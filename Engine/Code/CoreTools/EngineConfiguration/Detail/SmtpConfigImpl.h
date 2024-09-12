@@ -22,20 +22,20 @@ namespace CoreTools
         using ClassType = SmtpConfigImpl;
 
         using String = System::String;
-        using ReceiveUserType = std::vector<String>;
+        using ReceiveUserType = std::vector<std::string>;
 
     public:
         SmtpConfigImpl() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD String GetSmtpHost() const;
-        NODISCARD int GetSmtpPort() const;
-        NODISCARD String GetEhlo() const;
+        NODISCARD std::string GetSmtpHost() const;
+        NODISCARD int GetSmtpPort() const noexcept;
+        NODISCARD std::string GetEhlo() const;
         NODISCARD bool GetSmtpSslEnable() const noexcept;
         NODISCARD bool GetSmtpAuth() const noexcept;
-        NODISCARD String GetSendUser() const;
-        NODISCARD String GetPassword() const;
+        NODISCARD std::string GetSendUser() const;
+        NODISCARD std::string GetPassword() const;
         NODISCARD ReceiveUserType GetReceiveUser() const;
 
         void SetSmtpHost(const String& aSmtpHost);
@@ -49,13 +49,13 @@ namespace CoreTools
         void AddReceiveUser(const String& aReceiveUser);
 
     private:
-        String smtpHost;
+        std::string smtpHost;
         int smtpPort;
-        String ehlo;
+        std::string ehlo;
         bool smtpSslEnable;
         bool smtpAuth;
-        String sendUser;
-        String password;
+        std::string sendUser;
+        std::string password;
         ReceiveUserType receiveUser;
     };
 }
