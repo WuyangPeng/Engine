@@ -41,7 +41,7 @@ void Framework::SmtpTransportImpl::SendMailMessage(const std::string& title, con
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    const Network::ConfigurationStrategy configurationStrategy{ smtpConfig->GetSmtpHost(), smtpConfig->GetSmtpPort() };
+    const auto configurationStrategy = Network::ConfigurationStrategy::CreateClient(smtpConfig->GetSmtpHost(), smtpConfig->GetSmtpPort());
 
     SocketService socketService{ configurationStrategy };
 
@@ -55,7 +55,7 @@ void Framework::SmtpTransportImpl::Authenticate(SocketService& socketService) co
     socketService.SendTextMessage("EHLO " + smtpConfig->GetEhlo() + lineBreak);
     socketService.SendTextMessage("STARTTLS a" + lineBreak);
 
-    // 发送AUTH命令使用PLAIN方法
+    /// 发送AUTH命令使用PLAIN方法
     const auto authCommand = "AUTH PLAIN "s;
     const auto plainCredentials = '\0' + smtpConfig->GetSendUser() + '\0' + smtpConfig->GetPassword();
 
