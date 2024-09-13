@@ -28,6 +28,8 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
+        void SendTextMessage(const std::string& message) override;
+
     private:
         void Connect();
 

@@ -21,3 +21,10 @@ Network::ServiceSession::ServiceSession(const ConfigurationStrategy& configurati
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ServiceSession)
+
+void Network::ServiceSession::SendTextMessage(const std::string& message)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->SendTextMessage(message);
+}

@@ -40,6 +40,15 @@ Network::ServiceSessionImpl& Network::ServiceSessionImpl::operator=(ServiceSessi
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ServiceSessionImpl)
 
+void Network::ServiceSessionImpl::SendTextMessage(const std::string& message)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(message);
+
+    CoreTools::DisableNoexcept();
+}
+
 std::string Network::ServiceSessionImpl::GetHost() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;

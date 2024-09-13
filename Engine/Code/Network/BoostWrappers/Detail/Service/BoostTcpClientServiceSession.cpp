@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Interface/BaseMainManager.h"
 
-Network::BoostTcpClientServiceSession::BoostTcpClientServiceSession(const ConfigurationStrategy& configurationStrategy)  
+Network::BoostTcpClientServiceSession::BoostTcpClientServiceSession(const ConfigurationStrategy& configurationStrategy)
     : ParentType{ configurationStrategy },
       socket{ BASE_MAIN_MANAGER_SINGLETON.GetContext() }
 {
@@ -32,3 +32,10 @@ void Network::BoostTcpClientServiceSession::Connect()
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, BoostTcpClientServiceSession)
+
+void Network::BoostTcpClientServiceSession::SendTextMessage(const std::string& message)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    socket.send(boost::asio::buffer(message));
+}

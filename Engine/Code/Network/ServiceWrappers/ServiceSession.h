@@ -34,6 +34,8 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
+        void SendTextMessage(const std::string& message);
+
     private:
         PackageType impl;
     };

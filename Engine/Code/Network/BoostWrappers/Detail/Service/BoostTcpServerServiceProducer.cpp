@@ -11,6 +11,7 @@
 
 #include "BoostTcpServerServiceProducer.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "Network/ServiceWrappers/ServiceSession.h"
 
 Network::BoostTcpServerServiceProducer::BoostTcpServerServiceProducer(const ConfigurationStrategy& configurationStrategy) noexcept
     : ParentType{ configurationStrategy }
@@ -24,7 +25,5 @@ void Network::BoostTcpServerServiceProducer::SendTextMessage(ServiceSession& ser
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    System::UnusedFunction(serviceSession, message);
-
-    CoreTools::DisableNoexcept();
+    serviceSession.SendTextMessage(message);
 }
