@@ -86,5 +86,5 @@ void Network::BoostTcpClientServiceSession::SendTextMessage(const std::string& m
 
     boost::asio::write(socket, boost::asio::buffer(message));
 
-   // response(socket);
+    response(socket);
 }
