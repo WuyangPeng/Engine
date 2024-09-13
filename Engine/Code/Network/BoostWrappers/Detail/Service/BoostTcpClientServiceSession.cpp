@@ -17,26 +17,11 @@
 Network::BoostTcpClientServiceSession::BoostTcpClientServiceSession(const ConfigurationStrategy& configurationStrategy)
     : ParentType{ configurationStrategy },
       context{},
-      socket{ context },
-      thread{ [](IoContextType& aContext) {
-                 aContext.run();
-             },
-              std::ref(context) }
+      socket{ context }
 {
     Connect();
 
     NETWORK_SELF_CLASS_IS_VALID_9;
-}
-
-Network::BoostTcpClientServiceSession::~BoostTcpClientServiceSession() noexcept
-{
-    NETWORK_SELF_CLASS_IS_VALID_9;
-
-    EXCEPTION_TRY
-    {
-        Join();
-    }
-    EXCEPTION_ALL_CATCH(Network)
 }
 
 void Network::BoostTcpClientServiceSession::Connect()
@@ -45,11 +30,6 @@ void Network::BoostTcpClientServiceSession::Connect()
     const auto endPoints = resolver.resolve(GetHost(), std::to_string(GetPort()));
 
     boost::asio::connect(socket, endPoints);
-}
-
-void Network::BoostTcpClientServiceSession::Join()
-{
-    thread.join();
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, BoostTcpClientServiceSession)
@@ -105,5 +85,5 @@ void Network::BoostTcpClientServiceSession::SendTextMessage(const std::string& m
 
     response(socket);
 
-    boost::asio::write(socket, boost::asio::buffer(message));
+    socket.write_some(boost::asio::buffer(message));
 }

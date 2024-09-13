@@ -25,11 +25,6 @@ namespace Network
 
     public:
         explicit BoostTcpClientServiceSession(const ConfigurationStrategy& configurationStrategy);
-        ~BoostTcpClientServiceSession() noexcept;
-        BoostTcpClientServiceSession(const BoostTcpClientServiceSession& rhs) = delete;
-        BoostTcpClientServiceSession& operator=(const BoostTcpClientServiceSession& rhs) = delete;
-        BoostTcpClientServiceSession(BoostTcpClientServiceSession&& rhs) noexcept = delete;
-        BoostTcpClientServiceSession& operator=(BoostTcpClientServiceSession&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -37,12 +32,10 @@ namespace Network
 
     private:
         void Connect();
-        void Join();
 
     private:
         IoContextType context;
         BoostSockStreamType socket;
-        std::thread thread;
     };
 }
 

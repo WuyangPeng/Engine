@@ -1,7 +1,7 @@
 {
   "smtpHost": "smtp.qq.com",
   "smtpPort": "25",
-  "ehlo": "test",
+  "ehlo": "pwy",
   "smtpSslEnable": false,
   "smtpAuth": true,
   "sendUser": "94458936@qq.com",
@@ -12,4 +12,3 @@
     "94458936@qq.com"
   ]
 }
-      
