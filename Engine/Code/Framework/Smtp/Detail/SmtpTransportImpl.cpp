@@ -61,7 +61,7 @@ void Framework::SmtpTransportImpl::Authenticate(SocketService& socketService) co
 
     const auto base64Encoded = CoreTools::Base64::Encode(plainCredentials);
 
-    socketService.SendTextMessage(base64Encoded + lineBreak);
+    socketService.SendTextMessage(authCommand + base64Encoded + lineBreak);
 }
 
 void Framework::SmtpTransportImpl::SendMailMessage(SocketService& socketService, const std::string& title, const std::string& content) const

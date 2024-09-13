@@ -11,6 +11,7 @@
 
 #include "BoostTcpClientServiceProducer.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "Network/ServiceWrappers/ServiceSession.h"
 
 Network::BoostTcpClientServiceProducer::BoostTcpClientServiceProducer(const ConfigurationStrategy& configurationStrategy) noexcept
     : ParentType{ configurationStrategy }
@@ -19,3 +20,10 @@ Network::BoostTcpClientServiceProducer::BoostTcpClientServiceProducer(const Conf
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, BoostTcpClientServiceProducer)
+
+void Network::BoostTcpClientServiceProducer::SendTextMessage(ServiceSession& serviceSession, const std::string& message)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return serviceSession.SendTextMessage(message);
+}

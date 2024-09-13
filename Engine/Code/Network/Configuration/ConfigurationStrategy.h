@@ -35,7 +35,8 @@ namespace Network
         explicit ConfigurationStrategy(CoreTools::DisableNotThrow disableNotThrow);
 
     public:
-        NODISCARD static ConfigurationStrategy CreateClient(const std::string& host, int port);
+        NODISCARD static ConfigurationStrategy CreateClient(const std::string& host, int port); 
+
         ConfigurationStrategy(WrappersStrategy wrappersStrategy,
                               ConnectStrategy connectStrategy,
                               ServerStrategy serverStrategy,

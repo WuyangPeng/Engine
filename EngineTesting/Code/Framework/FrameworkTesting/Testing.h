@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.1.0 (2024/08/07 10:41)
+/// 版本：1.0.1.1 (2024/09/13 09:42)
 
 #ifndef FRAMEWORK_TESTING_H
 #define FRAMEWORK_TESTING_H
@@ -20,6 +20,7 @@
 #include "MiddleLayerSuite/MiddleLayerSuite.h"
 #include "OpenGLGlutFrameSuite/OpenGLGlutFrameSuite.h"
 #include "ProjectSuite/ProjectSuite.h"
+#include "SmtpSuite/SmtpSuite.h"
 #include "WindowCreateSuite/WindowCreateSuite.h"
 #include "WindowProcessSuite/WindowProcessSuite.h"
 #include "WindowRegisterSuite/WindowRegisterSuite.h"

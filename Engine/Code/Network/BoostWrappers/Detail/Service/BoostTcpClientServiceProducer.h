@@ -26,6 +26,8 @@ namespace Network
         explicit BoostTcpClientServiceProducer(const ConfigurationStrategy& configurationStrategy) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        void SendTextMessage(ServiceSession& serviceSession, const std::string& message) override;
     };
 }
 

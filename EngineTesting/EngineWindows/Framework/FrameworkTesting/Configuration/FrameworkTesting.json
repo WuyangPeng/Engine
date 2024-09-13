@@ -139,5 +139,9 @@
     "InputProjectManagerTesting": 1,
     "ResourceProjectManagerTesting": 1,
     "SystemProjectManagerTesting": 0
+  },
+
+  "smtpSuite": {
+    "SmtpTransportTesting": 1
   }
 }
