@@ -61,17 +61,36 @@ void response(boost::asio::ip::tcp::socket& socket)
 {
     try
     {
-        // 等待服务器响应
         boost::asio::streambuf response;
         boost::asio::read_until(socket, response, "\r\n");
 
-        // 使用std::istream从streambuf读取数据
         std::istream response_stream(&response);
         std::string line;
-        // 读取并打印每一行
         while (std::getline(response_stream, line))
         {
             std::cout << "Server response: " << line << std::endl;
+
+            // 解析状态码
+            if (line.size() >= 3 && std::isdigit(line[0]) && std::isdigit(line[1]) && std::isdigit(line[2]))
+            {
+                int statusCode = std::stoi(line.substr(0, 3));
+                if (statusCode >= 200 && statusCode < 300)
+                {
+                    // 2xx 响应，操作成功
+                }
+                else if (statusCode >= 300 && statusCode < 400)
+                {
+                    // 3xx 响应，需要进一步操作
+                }
+                else if (statusCode >= 400 && statusCode < 500)
+                {
+                    // 4xx 响应，临时错误
+                }
+                else if (statusCode >= 500 && statusCode < 600)
+                {
+                    // 5xx 响应，永久错误
+                }
+            }
         }
     }
     catch (std::exception& e)
@@ -84,7 +103,7 @@ void Network::BoostTcpClientServiceSession::SendTextMessage(const std::string& m
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    boost::asio::write(socket, boost::asio::buffer(message));
-
     response(socket);
+
+    boost::asio::write(socket, boost::asio::buffer(message));
 }
