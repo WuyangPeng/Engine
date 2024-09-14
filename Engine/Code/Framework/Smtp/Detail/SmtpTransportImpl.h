@@ -36,12 +36,6 @@ namespace Framework
     private:
         using SmtpConfig = CoreTools::SmtpConfig;
         using SmtpConfigSharedPtr = std::shared_ptr<SmtpConfig>;
-        using SocketService = Network::SocketService;
-
-    private:
-        void Authenticate(SocketService& socketService) const;
-        void SendMailMessage(SocketService& socketService, const std::string& title, const std::string& content) const;
-        void Response(SocketService& socketService) const;
 
     private:
         SmtpConfigSharedPtr smtpConfig;

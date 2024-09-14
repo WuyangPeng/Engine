@@ -1,0 +1,57 @@
+﻿/// Copyright (c) 2010-2024
+/// Threading Core Render Engine
+///
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
+///
+/// 标准：std:c++20
+/// 版本：1.0.1.1 (2024/09/14 15:23)
+
+#ifndef FRAMEWORK_SMTP_SMTP_TRANSPORT_MESSAGE_H
+#define FRAMEWORK_SMTP_SMTP_TRANSPORT_MESSAGE_H
+
+#include "Framework/FrameworkDll.h"
+
+#include "CoreTools/EngineConfiguration/SmtpConfig.h"
+#include "Network/ServiceWrappers/SocketService.h"
+
+namespace Framework
+{
+    class FRAMEWORK_HIDDEN_DECLARE SmtpTransportMessage
+    {
+    public:
+        using ClassType = SmtpTransportMessage;
+
+        using SmtpConfig = CoreTools::SmtpConfig;
+
+    public:
+        SmtpTransportMessage(const SmtpConfig& smtpConfig, std::string title, std::string content);
+
+        CLASS_INVARIANT_DECLARE;
+
+        void Authenticate();
+        void SendMailMessage();
+        void Response();
+
+    private:
+        using SocketService = Network::SocketService;
+        using SplitType = std::vector<std::string>;
+
+    private:
+        NODISCARD std::string GetFromMessage() const;
+        NODISCARD static std::string GetRcptMessage(const std::string& receiveUser);
+        NODISCARD std::string GetTextMessage(int index, const std::string& receiveUser) const;
+
+        void SendMailMessage(int index, const std::string& receiveUser);
+        static void Analysis(const std::string& line);
+        static void DoAnalysis(const std::string& line);
+
+    private:
+        SmtpConfig smtpConfig;
+        SocketService socketService;
+        std::string title;
+        std::string content;
+    };
+}
+
+#endif  // FRAMEWORK_SMTP_SMTP_TRANSPORT_MESSAGE_H

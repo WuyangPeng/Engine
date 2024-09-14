@@ -10,26 +10,13 @@
 #include "Framework/FrameworkExport.h"
 
 #include "SmtpTransportImpl.h"
-#include "System/Helper/PragmaWarning/Algorithm.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "SmtpTransportMessage.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
-#include "CoreTools/CharacterString/Base64.h"
 #include "CoreTools/CharacterString/StringConversion.h"
-#include "CoreTools/EngineConfiguration/SmtpConfig.h"
-#include "CoreTools/Helper//LogMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/TextParsing/Json/JsonAnalysisManager.h"
-#include "Network/ServiceWrappers/SocketService.h"
 #include "Framework/MainFunctionHelper/AndroidMainFunctionHelper.h"
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
-
-using namespace std::literals;
-
-namespace
-{
-    const auto lineBreak = "\r\n"s;
-}
 
 Framework::SmtpTransportImpl::SmtpTransportImpl(const EnvironmentDirectory& environmentDirectory)
     : smtpConfig{ boost::polymorphic_pointer_cast<SmtpConfig>(JSON_ANALYSIS_MANAGER_SINGLETON.Create(CoreTools::StringConversion::StandardConversionMultiByte(environmentDirectory.GetDirectory(UpperDirectory::Configuration)) + "Smtp.json",
@@ -44,95 +31,9 @@ void Framework::SmtpTransportImpl::SendMailMessage(const std::string& title, con
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    const auto configurationStrategy = Network::ConfigurationStrategy::CreateClient(smtpConfig->GetSmtpHost(), smtpConfig->GetSmtpPort());
+    SmtpTransportMessage smtpTransportMessage{ *smtpConfig, title, content };
 
-    SocketService socketService{ configurationStrategy };
-
-    Response(socketService);
-
-    Authenticate(socketService);
-
-    SendMailMessage(socketService, title, content);
-}
-
-void Framework::SmtpTransportImpl::Authenticate(SocketService& socketService) const
-{
-    socketService.SendTextMessage("EHLO " + smtpConfig->GetEhlo() + lineBreak);
-
-    Response(socketService);
-
-    /// 发送AUTH命令使用PLAIN方法
-    const auto authCommand = "AUTH PLAIN "s;
-    const auto plainCredentials = '\0' + smtpConfig->GetSendUser() + '\0' + smtpConfig->GetPassword();
-
-    const auto base64Encoded = CoreTools::Base64::Encode(plainCredentials);
-
-    socketService.SendTextMessage(authCommand + base64Encoded + lineBreak);
-
-    Response(socketService);
-}
-
-void Framework::SmtpTransportImpl::SendMailMessage(SocketService& socketService, const std::string& title, const std::string& content) const
-{
-    auto index = 0;
-    for (const auto& element : smtpConfig->GetReceiveUser())
-    {
-        socketService.SendTextMessage("MAIL FROM:<" + smtpConfig->GetSendUser() + ">" + lineBreak);
-
-        Response(socketService);
-
-        socketService.SendTextMessage("RCPT TO:<" + element + ">" + lineBreak);
-
-        Response(socketService);
-
-        socketService.SendTextMessage("DATA" + lineBreak + "From: " + smtpConfig->GetSendUser() + lineBreak + "To: " + element + lineBreak + "Subject: " + title + std::to_string(index) + lineBreak + lineBreak + content + lineBreak + "." + lineBreak);
-
-        Response(socketService);
-
-        ++index;
-    }
-
-    socketService.SendTextMessage("QUIT" + lineBreak);
-
-    Response(socketService);
-}
-
-void Framework::SmtpTransportImpl::Response(SocketService& socketService) const
-{
-    const auto response = socketService.Response();
-
-    std::vector<std::string> content{};
-
-    split(content, response, boost::is_any_of(lineBreak), boost::token_compress_on);
-
-    for (const auto& line : content)
-    {
-        LOG_SINGLETON_FILE_APPENDER(Info, Framework, SYSTEM_TEXT("Smtp"), line);
-
-        /// 解析状态码
-        if (3 <= line.size() && std::isdigit(line.at(0)) && std::isdigit(line.at(1)) && std::isdigit(line.at(2)))
-        {
-            if (const auto statusCode = std::stoi(line.substr(0, 3));
-                200 <= statusCode && statusCode < 300)
-            {
-                /// 2xx 响应，操作成功
-                LOG_SINGLETON_FILE_APPENDER(Info, Framework, SYSTEM_TEXT("Smtp"), statusCode);
-            }
-            else if (300 <= statusCode && statusCode < 400)
-            {
-                /// 3xx 响应，需要进一步操作
-                LOG_SINGLETON_FILE_APPENDER(Info, Framework, SYSTEM_TEXT("Smtp"), statusCode);
-            }
-            else if (400 <= statusCode && statusCode < 500)
-            {
-                /// 4xx 响应，临时错误
-                LOG_SINGLETON_FILE_APPENDER(Warn, Framework, SYSTEM_TEXT("Smtp"), statusCode, CoreTools::LogAppenderIOManageSign::TriggerAssert);
-            }
-            else if (500 <= statusCode && statusCode < 600)
-            {
-                /// 5xx 响应，永久错误
-                THROW_EXCEPTION(SYSTEM_TEXT("永久错误：") + System::ToString(statusCode));
-            }
-        }
-    }
+    smtpTransportMessage.Response();
+    smtpTransportMessage.Authenticate();
+    smtpTransportMessage.SendMailMessage();
 }
