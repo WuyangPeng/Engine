@@ -36,5 +36,5 @@ void Framework::SmtpTransportTesting::SmtpTransportTest()
 {
     SmtpTransport smtpTransport{ EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    smtpTransport.SendMailMessage("TEST", "TEST1");
+    smtpTransport.SendMailMessage("Test Email", "This is the body of the email.");
 }

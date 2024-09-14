@@ -31,7 +31,7 @@ namespace Framework
 
         CLASS_INVARIANT_DECLARE;
 
-        void SendMailMessage(const std::string& title, const std::string& content);
+        void SendMailMessage(const std::string& title, const std::string& content) const;
 
     private:
         using SmtpConfig = CoreTools::SmtpConfig;

@@ -37,7 +37,7 @@ Framework::SmtpTransportImpl::SmtpTransportImpl(const EnvironmentDirectory& envi
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, SmtpTransportImpl)
 
-void Framework::SmtpTransportImpl::SendMailMessage(const std::string& title, const std::string& content)
+void Framework::SmtpTransportImpl::SendMailMessage(const std::string& title, const std::string& content) const
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
@@ -53,7 +53,6 @@ void Framework::SmtpTransportImpl::SendMailMessage(const std::string& title, con
 void Framework::SmtpTransportImpl::Authenticate(SocketService& socketService) const
 {
     socketService.SendTextMessage("EHLO " + smtpConfig->GetEhlo() + lineBreak);
-    socketService.SendTextMessage("STARTTLS a" + lineBreak);
 
     /// 发送AUTH命令使用PLAIN方法
     const auto authCommand = "AUTH PLAIN "s;
@@ -66,19 +65,16 @@ void Framework::SmtpTransportImpl::Authenticate(SocketService& socketService) co
 
 void Framework::SmtpTransportImpl::SendMailMessage(SocketService& socketService, const std::string& title, const std::string& content) const
 {
-    socketService.SendTextMessage("MAIL FROM:<" + smtpConfig->GetSendUser() + ">" + lineBreak);
-
+    auto index = 0;
     for (const auto& element : smtpConfig->GetReceiveUser())
     {
+        socketService.SendTextMessage("MAIL FROM:<" + smtpConfig->GetSendUser() + ">" + lineBreak);
+
         socketService.SendTextMessage("RCPT TO:<" + element + ">" + lineBreak);
 
-        socketService.SendTextMessage("DATA" + lineBreak);
+        socketService.SendTextMessage("DATA" + lineBreak + "From: " + smtpConfig->GetSendUser() + lineBreak + "To: " + element + lineBreak + "Subject: " + title + std::to_string(index) + lineBreak + lineBreak + content + lineBreak + "." + lineBreak);
 
-        socketService.SendTextMessage("From: " + smtpConfig->GetSendUser() + lineBreak);
-        socketService.SendTextMessage("To: " + element + lineBreak);
-
-        socketService.SendTextMessage(title + lineBreak);
-        socketService.SendTextMessage(content + lineBreak);
+        ++index;
     }
 
     socketService.SendTextMessage("QUIT" + lineBreak);
