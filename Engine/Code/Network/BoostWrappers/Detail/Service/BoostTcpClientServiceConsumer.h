@@ -26,6 +26,8 @@ namespace Network
         explicit BoostTcpClientServiceConsumer(const ConfigurationStrategy& configurationStrategy) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        NODISCARD std::string Response(ServiceSession& serviceSession) override;
     };
 }
 

@@ -40,6 +40,7 @@ namespace Network
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         virtual void SendTextMessage(const std::string& message);
+        virtual std::string Response();
 
     protected:
         NODISCARD std::string GetHost() const;

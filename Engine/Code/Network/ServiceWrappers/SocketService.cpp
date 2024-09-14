@@ -27,3 +27,10 @@ void Network::SocketService::SendTextMessage(const std::string& message)
 
     return impl->SendTextMessage(message);
 }
+
+std::string Network::SocketService::Response()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->Response();
+}

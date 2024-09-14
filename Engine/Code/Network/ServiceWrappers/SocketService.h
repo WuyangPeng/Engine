@@ -33,6 +33,7 @@ namespace Network
         CLASS_INVARIANT_DECLARE;
 
         void SendTextMessage(const std::string& message);
+        NODISCARD std::string Response();
 
     private:
         PackageType impl;

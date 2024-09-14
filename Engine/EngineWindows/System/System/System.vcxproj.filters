@@ -1866,6 +1866,9 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Base64.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Asio.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\DllLib.cpp">
@@ -2275,6 +2278,12 @@
       <Filter>Helper 内联文件\PragmaWarning</Filter>
     </None>
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4127.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </None>
+    <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6031.inl">
+      <Filter>Helper 内联文件\PragmaWarning</Filter>
+    </None>
+    <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26417.inl">
       <Filter>Helper 内联文件\PragmaWarning</Filter>
     </None>
   </ItemGroup>

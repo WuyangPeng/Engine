@@ -28,3 +28,10 @@ void Network::ServiceSession::SendTextMessage(const std::string& message)
 
     return impl->SendTextMessage(message);
 }
+
+std::string Network::ServiceSession::Response()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->Response();
+}

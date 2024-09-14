@@ -49,6 +49,13 @@ void Network::ServiceSessionImpl::SendTextMessage(const std::string& message)
     CoreTools::DisableNoexcept();
 }
 
+std::string Network::ServiceSessionImpl::Response()
+{
+    CoreTools::DisableNoexcept();
+
+    return "";
+}
+
 std::string Network::ServiceSessionImpl::GetHost() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;

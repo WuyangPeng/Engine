@@ -22,3 +22,10 @@ Network::ServiceConsumer::ServiceConsumer(const ConfigurationStrategy& configura
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ServiceConsumer)
+
+std::string Network::ServiceConsumer::Response(ServiceSession& serviceSession)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->Response(serviceSession);
+}

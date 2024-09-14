@@ -29,9 +29,11 @@ namespace Network
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         void SendTextMessage(const std::string& message) override;
+        NODISCARD std::string Response() override;
 
     private:
         void Connect();
+        NODISCARD std::string DoResponse();
 
     private:
         IoContextType context;

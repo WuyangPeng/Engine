@@ -17,6 +17,7 @@
 #include "Network/Configuration/ConfigurationFwd.h"
 #include "Network/Interface/NetworkInternalFwd.h"
 #include "Network/NetworkMessage/NetworkMessageFwd.h"
+#include "Network/ServiceWrappers/ServiceWrappersFwd.h"
 
 NETWORK_NON_COPY_EXPORT_IMPL(ServiceConsumerImpl);
 
@@ -33,6 +34,8 @@ namespace Network
         explicit ServiceConsumer(const ConfigurationStrategy& configurationStrategy);
 
         CLASS_INVARIANT_DECLARE;
+
+        NODISCARD std::string Response(ServiceSession& serviceSession);
 
     private:
         PackageType impl;

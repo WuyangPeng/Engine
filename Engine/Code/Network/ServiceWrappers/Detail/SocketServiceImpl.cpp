@@ -26,3 +26,10 @@ void Network::SocketServiceImpl::SendTextMessage(const std::string& message)
 
     producer.SendTextMessage(serviceSession, message);
 }
+
+std::string Network::SocketServiceImpl::Response()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return consumer.Response(serviceSession);
+}
