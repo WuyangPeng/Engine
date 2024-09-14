@@ -107,30 +107,30 @@ void Framework::SmtpTransportImpl::Response(SocketService& socketService) const
 
     for (const auto& line : content)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, line);
+        LOG_SINGLETON_FILE_APPENDER(Info, Framework, SYSTEM_TEXT("Smtp"), line);
 
-        // 解析状态码
-        if (line.size() >= 3 && std::isdigit(line[0]) && std::isdigit(line[1]) && std::isdigit(line[2]))
+        /// 解析状态码
+        if (3 <= line.size() && std::isdigit(line.at(0)) && std::isdigit(line.at(1)) && std::isdigit(line.at(2)))
         {
-            const auto statusCode = std::stoi(line.substr(0, 3));
-            if (statusCode >= 200 && statusCode < 300)
+            if (const auto statusCode = std::stoi(line.substr(0, 3));
+                200 <= statusCode && statusCode < 300)
             {
-                // 2xx 响应，操作成功
-                LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, statusCode);
+                /// 2xx 响应，操作成功
+                LOG_SINGLETON_FILE_APPENDER(Info, Framework, SYSTEM_TEXT("Smtp"), statusCode);
             }
-            else if (statusCode >= 300 && statusCode < 400)
+            else if (300 <= statusCode && statusCode < 400)
             {
-                // 3xx 响应，需要进一步操作
-                LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, statusCode);
+                /// 3xx 响应，需要进一步操作
+                LOG_SINGLETON_FILE_APPENDER(Info, Framework, SYSTEM_TEXT("Smtp"), statusCode);
             }
-            else if (statusCode >= 400 && statusCode < 500)
+            else if (400 <= statusCode && statusCode < 500)
             {
-                // 4xx 响应，临时错误
-                LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework, statusCode, CoreTools::LogAppenderIOManageSign::TriggerAssert);
+                /// 4xx 响应，临时错误
+                LOG_SINGLETON_FILE_APPENDER(Warn, Framework, SYSTEM_TEXT("Smtp"), statusCode, CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
-            else if (statusCode >= 500 && statusCode < 600)
+            else if (500 <= statusCode && statusCode < 600)
             {
-                // 5xx 响应，永久错误
+                /// 5xx 响应，永久错误
                 THROW_EXCEPTION(SYSTEM_TEXT("永久错误：") + System::ToString(statusCode));
             }
         }
