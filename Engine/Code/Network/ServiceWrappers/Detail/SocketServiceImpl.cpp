@@ -27,9 +27,9 @@ void Network::SocketServiceImpl::SendTextMessage(const std::string& message)
     producer.SendTextMessage(message);
 }
 
-std::string Network::SocketServiceImpl::Response()
+void Network::SocketServiceImpl::Response(const std::function<void(const std::string&)>& processDataCallback)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return consumer.Response();
+    return consumer.Response(processDataCallback);
 }

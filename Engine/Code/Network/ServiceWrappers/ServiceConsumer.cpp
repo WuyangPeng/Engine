@@ -23,9 +23,9 @@ Network::ServiceConsumer::ServiceConsumer(ServiceSession& serviceSession, const 
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ServiceConsumer)
 
-std::string Network::ServiceConsumer::Response()
+void Network::ServiceConsumer::Response(const std::function<void(const std::string&)>& processDataCallback)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return impl->Response();
+    return impl->Response(processDataCallback);
 }

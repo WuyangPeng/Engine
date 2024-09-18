@@ -28,9 +28,9 @@ void Network::SocketService::SendTextMessage(const std::string& message)
     return impl->SendTextMessage(message);
 }
 
-std::string Network::SocketService::Response()
+void Network::SocketService::Response(const std::function<void(const std::string&)>& processDataCallback)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return impl->Response();
+    return impl->Response(processDataCallback);
 }

@@ -40,7 +40,7 @@ namespace Network
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        NODISCARD virtual std::string Response();
+        virtual void Response(const std::function<void(const std::string&)>& processDataCallback);
 
     private:
         ConfigurationStrategy configurationStrategy;

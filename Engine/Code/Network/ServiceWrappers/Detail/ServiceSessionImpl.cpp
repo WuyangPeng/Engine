@@ -49,11 +49,25 @@ void Network::ServiceSessionImpl::SendTextMessage(const std::string& message)
     CoreTools::DisableNoexcept();
 }
 
-std::string Network::ServiceSessionImpl::Response()
+void Network::ServiceSessionImpl::Response(const std::function<void(const std::string&)>& processDataCallback)
 {
-    CoreTools::DisableNoexcept();
+    System::UnusedFunction(processDataCallback);
 
-    return "";
+    CoreTools::DisableNoexcept();
+}
+
+void Network::ServiceSessionImpl::Run()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    CoreTools::DisableNoexcept();
+}
+
+void Network::ServiceSessionImpl::Stop()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    CoreTools::DisableNoexcept();
 }
 
 std::string Network::ServiceSessionImpl::GetHost() const

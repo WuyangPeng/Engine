@@ -32,7 +32,7 @@ namespace Network
         CLASS_INVARIANT_DECLARE;
 
         void SendTextMessage(const std::string& message);
-        NODISCARD std::string Response();
+        void Response(const std::function<void(const std::string&)>& processDataCallback);
 
     private:
         ServiceSession serviceSession;

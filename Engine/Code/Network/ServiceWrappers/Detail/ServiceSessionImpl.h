@@ -32,6 +32,7 @@ namespace Network
     public:
         explicit ServiceSessionImpl(ConfigurationStrategy configurationStrategy) noexcept;
         virtual ~ServiceSessionImpl() noexcept = 0;
+
         ServiceSessionImpl(const ServiceSessionImpl& rhs) noexcept = delete;
         ServiceSessionImpl& operator=(const ServiceSessionImpl& rhs) noexcept = delete;
         ServiceSessionImpl(ServiceSessionImpl&& rhs) noexcept;
@@ -40,7 +41,9 @@ namespace Network
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         virtual void SendTextMessage(const std::string& message);
-        virtual std::string Response();
+        virtual void Response(const std::function<void(const std::string&)>& processDataCallback);
+        virtual void Run();
+        virtual void Stop();
 
     protected:
         NODISCARD std::string GetHost() const;

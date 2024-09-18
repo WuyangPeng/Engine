@@ -11,6 +11,7 @@
 
 #include "BoostTcpClientServiceSession.h"
 #include "System/Helper/PragmaWarning/Asio.h"
+#include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
@@ -42,32 +43,54 @@ void Network::BoostTcpClientServiceSession::SendTextMessage(const std::string& m
     socket.write_some(boost::asio::buffer(message));
 }
 
-std::string Network::BoostTcpClientServiceSession::Response()
+void Network::BoostTcpClientServiceSession::Response(const std::function<void(const std::string&)>& processDataCallback)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    try
+    EXCEPTION_TRY
     {
-        return DoResponse();
+        return DoResponse(processDataCallback);
     }
-    catch (std::exception& exception)
-    {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("消息接收失败："), exception, CoreTools::LogAppenderIOManageSign::TriggerAssert);
-    }
-
-    return "";
+    EXCEPTION_ALL_CATCH(Network)
 }
 
-std::string Network::BoostTcpClientServiceSession::DoResponse()
+void Network::BoostTcpClientServiceSession::Run()
 {
-    boost::asio::streambuf response{};
-    read_until(socket, response, "\r\n");
+    NETWORK_CLASS_IS_VALID_9;
 
-    std::string result{};
-    result.resize(response.size());
+    context.run();
+}
 
-    const auto buffers = response.data();
-    buffer_copy(boost::asio::buffer(result), buffers);
+void Network::BoostTcpClientServiceSession::Stop()
+{
+    NETWORK_CLASS_IS_VALID_9;
 
-    return result;
+    context.stop();
+}
+
+void Network::BoostTcpClientServiceSession::DoResponse(const std::function<void(const std::string&)>& processDataCallback)
+{
+    /// 异步读取，直到遇到分隔符
+    async_read_until(socket, response, "\r\n",
+                     [processDataCallback, this](const boost::system::error_code& error, size_t bytesTransferred) {
+                         System::UnusedFunction(bytesTransferred);
+
+                         if (!error)
+                         {
+                             std::string result{};
+                             result.resize(response.size());
+
+                             const auto buffers = response.data();
+                             buffer_copy(boost::asio::buffer(result), buffers);
+
+                             response.consume(response.size());
+
+                             /// 调用回调函数处理数据
+                             processDataCallback(result);
+                         }
+                         else
+                         {
+                             THROW_EXCEPTION(SYSTEM_TEXT("response error =") + CoreTools::StringConversion::MultiByteConversionStandard(error.message()))
+                         }
+                     });
 }

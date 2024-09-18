@@ -31,9 +31,7 @@ void Framework::SmtpTransportImpl::SendMailMessage(const std::string& title, con
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    SmtpTransportMessage smtpTransportMessage{ *smtpConfig, title, content };
+    const auto smtpTransportMessage = SmtpTransportMessage::Create(*smtpConfig, title, content);
 
-    smtpTransportMessage.Response();
-    smtpTransportMessage.Authenticate();
-    smtpTransportMessage.SendMailMessage();
+    smtpTransportMessage->SendMailMessage();
 }

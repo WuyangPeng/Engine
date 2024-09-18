@@ -35,7 +35,7 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD std::string Response();
+        void Response(const std::function<void(const std::string&)>& processDataCallback);
 
     private:
         PackageType impl;

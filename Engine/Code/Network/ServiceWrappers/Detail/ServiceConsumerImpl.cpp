@@ -42,11 +42,11 @@ Network::ServiceConsumerImpl& Network::ServiceConsumerImpl::operator=(ServiceCon
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ServiceConsumerImpl)
 
-std::string Network::ServiceConsumerImpl::Response()
+void Network::ServiceConsumerImpl::Response(const std::function<void(const std::string&)>& processDataCallback)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    CoreTools::DisableNoexcept();
+    System::UnusedFunction(processDataCallback);
 
-    return std::string{};
+    CoreTools::DisableNoexcept();
 }

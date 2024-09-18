@@ -11,6 +11,7 @@
 
 #include "SmtpTransportMessage.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/CharacterString/Base64.h"
 #include "CoreTools/EngineConfiguration/SmtpConfig.h"
 #include "CoreTools/Helper//LogMacro.h"
@@ -24,66 +25,65 @@ namespace
     const auto lineBreak = "\r\n"s;
 }
 
-Framework::SmtpTransportMessage::SmtpTransportMessage(const SmtpConfig& smtpConfig, std::string title, std::string content)
+Framework::SmtpTransportMessage::SmtpTransportMessageSharedPtr Framework::SmtpTransportMessage::Create(const SmtpConfig& smtpConfig, const std::string& title, const std::string& content)
+{
+    return std::make_shared<ClassType>(smtpConfig, title, content, SmtpTransportMessageCreate::Init);
+}
+
+Framework::SmtpTransportMessage::SmtpTransportMessage(const SmtpConfig& smtpConfig, std::string title, std::string content, SmtpTransportMessageCreate smtpTransportMessageCreate)
     : smtpConfig{ smtpConfig },
       socketService{ Network::ConfigurationStrategy::CreateClient(smtpConfig.GetSmtpHost(), smtpConfig.GetSmtpPort()) },
       title{ std::move(title) },
-      content{ std::move(content) }
+      content{ std::move(content) },
+      message{ "EHLO " + smtpConfig.GetEhlo() + lineBreak,
+               GetBase64Encoded() },
+      sendIndex{ 0 }
 {
+    System::UnusedFunction(smtpTransportMessageCreate);
+
+    AddMailMessage();
+
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
+}
+
+void Framework::SmtpTransportMessage::AddMailMessage()
+{
+    auto index = 0;
+    for (const auto& receiveUser : smtpConfig.GetReceiveUser())
+    {
+        AddMailMessage(index, receiveUser);
+
+        ++index;
+    }
+
+    message.emplace_back("QUIT" + lineBreak);
+}
+
+void Framework::SmtpTransportMessage::AddMailMessage(int index, const std::string& receiveUser)
+{
+    message.emplace_back(GetFromMessage());
+    message.emplace_back(GetRcptMessage(receiveUser));
+    message.emplace_back(GetTextMessage(index, receiveUser));
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, SmtpTransportMessage)
 
-void Framework::SmtpTransportMessage::Authenticate()
+void Framework::SmtpTransportMessage::SendMailMessage()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    socketService.SendTextMessage("EHLO " + smtpConfig.GetEhlo() + lineBreak);
-
     Response();
+}
 
+std::string Framework::SmtpTransportMessage::GetBase64Encoded() const
+{
     /// 发送AUTH命令使用PLAIN方法
     const auto authCommand = "AUTH PLAIN "s;
     const auto plainCredentials = '\0' + smtpConfig.GetSendUser() + '\0' + smtpConfig.GetPassword();
 
     const auto base64Encoded = CoreTools::Base64::Encode(plainCredentials);
 
-    socketService.SendTextMessage(authCommand + base64Encoded + lineBreak);
-
-    Response();
-}
-
-void Framework::SmtpTransportMessage::SendMailMessage()
-{
-    FRAMEWORK_CLASS_IS_VALID_9;
-
-    auto index = 0;
-    for (const auto& receiveUser : smtpConfig.GetReceiveUser())
-    {
-        SendMailMessage(index, receiveUser);
-
-        ++index;
-    }
-
-    socketService.SendTextMessage("QUIT" + lineBreak);
-
-    Response();
-}
-
-void Framework::SmtpTransportMessage::SendMailMessage(int index, const std::string& receiveUser)
-{
-    socketService.SendTextMessage(GetFromMessage());
-
-    Response();
-
-    socketService.SendTextMessage(GetRcptMessage(receiveUser));
-
-    Response();
-
-    socketService.SendTextMessage(GetTextMessage(index, receiveUser));
-
-    Response();
+    return authCommand + base64Encoded + lineBreak;
 }
 
 std::string Framework::SmtpTransportMessage::GetFromMessage() const
@@ -105,16 +105,29 @@ void Framework::SmtpTransportMessage::Response()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    const auto response = socketService.Response();
+    const auto self = shared_from_this();
 
-    SplitType splitContent{};
+    socketService.Response([self](const std::string& response) {
+        SplitType splitContent{};
 
-    split(splitContent, response, boost::is_any_of(lineBreak), boost::token_compress_on);
+        split(splitContent, response, boost::is_any_of(lineBreak), boost::token_compress_on);
 
-    for (const auto& line : splitContent)
-    {
-        Analysis(line);
-    }
+        for (const auto& line : splitContent)
+        {
+            if (!line.empty())
+            {
+                self->Analysis(line);
+            }
+        }
+
+        if (boost::numeric_cast<int>(self->message.size()) <= self->sendIndex)
+        {
+            return;
+        }
+
+        self->socketService.SendTextMessage(self->message.at(self->sendIndex++));
+        self->Response();
+    });
 }
 
 void Framework::SmtpTransportMessage::Analysis(const std::string& line)

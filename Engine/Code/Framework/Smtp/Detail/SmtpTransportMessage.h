@@ -17,40 +17,51 @@
 
 namespace Framework
 {
-    class FRAMEWORK_HIDDEN_DECLARE SmtpTransportMessage
+    class FRAMEWORK_HIDDEN_DECLARE SmtpTransportMessage : public std::enable_shared_from_this<SmtpTransportMessage>
     {
     public:
         using ClassType = SmtpTransportMessage;
 
+        using SmtpTransportMessageSharedPtr = std::shared_ptr<ClassType>;
         using SmtpConfig = CoreTools::SmtpConfig;
 
+    private:
+        enum class SmtpTransportMessageCreate
+        {
+            Init
+        };
+
     public:
-        SmtpTransportMessage(const SmtpConfig& smtpConfig, std::string title, std::string content);
+        NODISCARD static SmtpTransportMessageSharedPtr Create(const SmtpConfig& smtpConfig, const std::string& title, const std::string& content);
+        SmtpTransportMessage(const SmtpConfig& smtpConfig, std::string title, std::string content, SmtpTransportMessageCreate smtpTransportMessageCreate);
 
         CLASS_INVARIANT_DECLARE;
 
-        void Authenticate();
         void SendMailMessage();
-        void Response();
 
     private:
         using SocketService = Network::SocketService;
         using SplitType = std::vector<std::string>;
 
     private:
+        NODISCARD std::string GetBase64Encoded() const;
         NODISCARD std::string GetFromMessage() const;
         NODISCARD static std::string GetRcptMessage(const std::string& receiveUser);
         NODISCARD std::string GetTextMessage(int index, const std::string& receiveUser) const;
+        void AddMailMessage();
+        void AddMailMessage(int index, const std::string& receiveUser);
 
-        void SendMailMessage(int index, const std::string& receiveUser);
         static void Analysis(const std::string& line);
         static void DoAnalysis(const std::string& line);
+        void Response();
 
     private:
         SmtpConfig smtpConfig;
         SocketService socketService;
         std::string title;
         std::string content;
+        SplitType message;
+        int sendIndex;
     };
 }
 

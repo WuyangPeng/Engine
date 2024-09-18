@@ -29,9 +29,23 @@ void Network::ServiceSession::SendTextMessage(const std::string& message)
     return impl->SendTextMessage(message);
 }
 
-std::string Network::ServiceSession::Response()
+void Network::ServiceSession::Response(const std::function<void(const std::string&)>& processDataCallback)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return impl->Response();
+    return impl->Response(processDataCallback);
+}
+
+void Network::ServiceSession::Run()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->Run();
+}
+
+void Network::ServiceSession::Stop()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->Stop();
 }
