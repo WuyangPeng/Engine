@@ -64,5 +64,8 @@ void Network::BoostTcpClientServiceConsumer::Join()
 
     serviceSession.Stop();
 
-    thread.join();
+    if (thread.joinable())
+    {
+        thread.join();
+    }
 }
