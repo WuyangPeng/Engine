@@ -20,11 +20,11 @@
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ServiceProducerFactory)
 
-Network::ServiceProducerFactory::ProducerSharedPtr Network::ServiceProducerFactory::Create(const ConfigurationStrategy& configurationStrategy)
+Network::ServiceProducerFactory::ProducerSharedPtr Network::ServiceProducerFactory::Create(ServiceSession& serviceSession, const ConfigurationStrategy& configurationStrategy)
 {
     if (configurationStrategy.IsClient())
     {
-        return CreateClient(configurationStrategy);
+        return CreateClient(serviceSession, configurationStrategy);
     }
     else if (configurationStrategy.IsServer())
     {
@@ -34,7 +34,7 @@ Network::ServiceProducerFactory::ProducerSharedPtr Network::ServiceProducerFacto
     return std::make_shared<NullServiceProducer>(configurationStrategy);
 }
 
-Network::ServiceProducerFactory::ProducerSharedPtr Network::ServiceProducerFactory::CreateClient(const ConfigurationStrategy& configurationStrategy)
+Network::ServiceProducerFactory::ProducerSharedPtr Network::ServiceProducerFactory::CreateClient(ServiceSession& serviceSession, const ConfigurationStrategy& configurationStrategy)
 {
     switch (configurationStrategy.GetWrappersStrategy())
     {
@@ -43,7 +43,7 @@ Network::ServiceProducerFactory::ProducerSharedPtr Network::ServiceProducerFacto
 
         case WrappersStrategy::Default:
         case WrappersStrategy::Boost:
-            return CreateBoostClient(configurationStrategy);
+            return CreateBoostClient(serviceSession, configurationStrategy);
 
         default:
             return std::make_shared<NullServiceProducer>(configurationStrategy);
@@ -88,12 +88,12 @@ Network::ServiceProducerFactory::ProducerSharedPtr Network::ServiceProducerFacto
     }
 }
 
-Network::ServiceProducerFactory::ProducerSharedPtr Network::ServiceProducerFactory::CreateBoostClient(const ConfigurationStrategy& configurationStrategy)
+Network::ServiceProducerFactory::ProducerSharedPtr Network::ServiceProducerFactory::CreateBoostClient(ServiceSession& serviceSession, const ConfigurationStrategy& configurationStrategy)
 {
     switch (configurationStrategy.GetConnectStrategy())
     {
         case ConnectStrategy::Tcp:
-            return std::make_shared<BoostTcpClientServiceProducer>(configurationStrategy);
+            return std::make_shared<BoostTcpClientServiceProducer>(serviceSession, configurationStrategy);
         default:
             return std::make_shared<NullServiceProducer>(configurationStrategy);
     }

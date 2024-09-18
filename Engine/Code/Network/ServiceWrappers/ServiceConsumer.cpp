@@ -15,17 +15,17 @@
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
-Network::ServiceConsumer::ServiceConsumer(const ConfigurationStrategy& configurationStrategy)
-    : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy }
+Network::ServiceConsumer::ServiceConsumer(ServiceSession& serviceSession, const ConfigurationStrategy& configurationStrategy)
+    : impl{ CoreTools::ImplCreateUseFactory::Default, serviceSession, configurationStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ServiceConsumer)
 
-std::string Network::ServiceConsumer::Response(ServiceSession& serviceSession)
+std::string Network::ServiceConsumer::Response()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return impl->Response(serviceSession);
+    return impl->Response();
 }

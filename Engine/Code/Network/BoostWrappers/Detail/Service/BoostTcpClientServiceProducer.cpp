@@ -13,15 +13,15 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/ServiceWrappers/ServiceSession.h"
 
-Network::BoostTcpClientServiceProducer::BoostTcpClientServiceProducer(const ConfigurationStrategy& configurationStrategy) noexcept
-    : ParentType{ configurationStrategy }
+Network::BoostTcpClientServiceProducer::BoostTcpClientServiceProducer(ServiceSession& serviceSession, const ConfigurationStrategy& configurationStrategy) noexcept
+    : ParentType{ configurationStrategy }, serviceSession{ serviceSession }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, BoostTcpClientServiceProducer)
 
-void Network::BoostTcpClientServiceProducer::SendTextMessage(ServiceSession& serviceSession, const std::string& message)
+void Network::BoostTcpClientServiceProducer::SendTextMessage(const std::string& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 

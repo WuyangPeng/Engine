@@ -23,11 +23,14 @@ namespace Network
         using ParentType = ClientServiceConsumer;
 
     public:
-        explicit BoostTcpClientServiceConsumer(const ConfigurationStrategy& configurationStrategy) noexcept;
+        explicit BoostTcpClientServiceConsumer(ServiceSession& serviceSession, const ConfigurationStrategy& configurationStrategy) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD std::string Response(ServiceSession& serviceSession) override;
+        NODISCARD std::string Response() override;
+
+    private:
+        ServiceSession& serviceSession;
     };
 }
 

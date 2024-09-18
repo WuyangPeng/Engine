@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 Network::SocketServiceImpl::SocketServiceImpl(ConfigurationStrategy configurationStrategy)
-    : serviceSession{ configurationStrategy }, consumer{ configurationStrategy }, producer{ configurationStrategy }, configurationStrategy{ std::move(configurationStrategy) }
+    : serviceSession{ configurationStrategy }, consumer{ serviceSession, configurationStrategy }, producer{ serviceSession, configurationStrategy }, configurationStrategy{ std::move(configurationStrategy) }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ void Network::SocketServiceImpl::SendTextMessage(const std::string& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    producer.SendTextMessage(serviceSession, message);
+    producer.SendTextMessage(message);
 }
 
 std::string Network::SocketServiceImpl::Response()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return consumer.Response(serviceSession);
+    return consumer.Response();
 }

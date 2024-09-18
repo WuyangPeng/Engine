@@ -31,11 +31,11 @@ namespace Network
         using String = System::String;
 
     public:
-        explicit ServiceProducer(const ConfigurationStrategy& configurationStrategy);
+        ServiceProducer(ServiceSession& serviceSession, const ConfigurationStrategy& configurationStrategy);
 
         CLASS_INVARIANT_DECLARE;
 
-        void SendTextMessage(ServiceSession& serviceSession, const std::string& message);
+        void SendTextMessage(const std::string& message);
 
     private:
         PackageType impl;

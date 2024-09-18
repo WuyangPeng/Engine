@@ -31,11 +31,11 @@ namespace Network
         using String = System::String;
 
     public:
-        explicit ServiceConsumer(const ConfigurationStrategy& configurationStrategy);
+        ServiceConsumer(ServiceSession& serviceSession, const ConfigurationStrategy& configurationStrategy);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD std::string Response(ServiceSession& serviceSession);
+        NODISCARD std::string Response();
 
     private:
         PackageType impl;

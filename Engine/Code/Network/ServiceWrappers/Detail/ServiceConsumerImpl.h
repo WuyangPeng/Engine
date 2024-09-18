@@ -40,7 +40,7 @@ namespace Network
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        NODISCARD virtual std::string Response(ServiceSession& serviceSession);
+        NODISCARD virtual std::string Response();
 
     private:
         ConfigurationStrategy configurationStrategy;
