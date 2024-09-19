@@ -112,7 +112,19 @@ void Framework::SmtpTransportMessage::Response()
 
     Response(promise);
 
-    future.wait();
+    if (const auto timeout = smtpConfig.GetTimeout();
+        0 < timeout)
+    {
+        if (future.wait_for(std::chrono::seconds{ timeout }) == std::future_status::timeout)
+        {
+            socketService.Close();
+            THROW_EXCEPTION(SYSTEM_TEXT("SmtpTransportMessage timeout"))
+        }
+    }
+    else
+    {
+        future.wait();
+    }
 }
 
 void Framework::SmtpTransportMessage::Response(std::promise<void>& promise)

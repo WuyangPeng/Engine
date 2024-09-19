@@ -43,6 +43,7 @@ namespace CoreTools
         NODISCARD std::string GetSendUser() const;
         NODISCARD std::string GetPassword() const;
         NODISCARD ReceiveUserType GetReceiveUser() const;
+        NODISCARD int GetTimeout() const noexcept;
 
         void SetSmtpHost(const String& smtpHost);
         void SetSmtpPort(int smtpPort) noexcept;
@@ -52,6 +53,7 @@ namespace CoreTools
         void SetSendUser(const String& sendUser);
         void SetPassword(const String& password);
         void SetReceiveUser(const ReceiveUserType& receiveUser);
+        void SetTimeout(int timeout) noexcept;
 
         void Load(BasicTree& mainTree) override;
 

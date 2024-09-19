@@ -51,6 +51,7 @@ void CoreTools::SmtpConfigTesting::SmtpConfigTest()
     ASSERT_TRUE(smtpConfig->GetSmtpAuth());
     ASSERT_EQUAL(smtpConfig->GetSendUser(), "94458936@qq.com");
     ASSERT_EQUAL(smtpConfig->GetPassword(), "bbbbbbbbbbbbcbbb");
+    ASSERT_EQUAL(smtpConfig->GetTimeout(), 5);
 
     const SmtpConfig::ReceiveUserType receiveUserType{ "user1@example.com",
                                                        "user2@example.com",

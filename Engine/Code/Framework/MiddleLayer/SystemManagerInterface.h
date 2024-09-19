@@ -68,6 +68,8 @@ namespace Framework
 
         NODISCARD GlobalConfig GetGlobalConfig() const;
 
+        void SendSmtpTransportMessage(const std::string& title, const std::string& content);
+
     private:
         using SystemPackageType = CoreTools::NonCopyImpl<SystemManagerImpl>;
 

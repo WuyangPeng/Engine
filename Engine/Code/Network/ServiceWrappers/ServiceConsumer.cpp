@@ -29,3 +29,10 @@ void Network::ServiceConsumer::Response(const std::function<void(const std::stri
 
     return impl->Response(processDataCallback);
 }
+
+void Network::ServiceConsumer::Close()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->Close();
+}

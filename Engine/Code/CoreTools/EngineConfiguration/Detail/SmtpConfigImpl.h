@@ -37,6 +37,7 @@ namespace CoreTools
         NODISCARD std::string GetSendUser() const;
         NODISCARD std::string GetPassword() const;
         NODISCARD ReceiveUserType GetReceiveUser() const;
+        NODISCARD int GetTimeout() const noexcept;
 
         void SetSmtpHost(const String& aSmtpHost);
         void SetSmtpPort(int aSmtpPort) noexcept;
@@ -47,6 +48,7 @@ namespace CoreTools
         void SetPassword(const String& aPassword);
         void SetReceiveUser(const ReceiveUserType& aReceiveUser);
         void AddReceiveUser(const String& aReceiveUser);
+        void SetTimeout(int aTimeout) noexcept;
 
     private:
         std::string smtpHost;
@@ -57,6 +59,7 @@ namespace CoreTools
         std::string sendUser;
         std::string password;
         ReceiveUserType receiveUser;
+        int timeout;
     };
 }
 

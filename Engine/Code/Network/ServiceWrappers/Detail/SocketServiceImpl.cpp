@@ -39,4 +39,5 @@ void Network::SocketServiceImpl::Close()
     NETWORK_CLASS_IS_VALID_9;
 
     serviceSession.Close();
+    consumer.Close();
 }

@@ -20,7 +20,8 @@
 Framework::SystemManagerImpl::SystemManagerImpl(const EnvironmentDirectory& environmentDirectory)
     : environment{ Environment::Create() },
       globalConfig{ boost::polymorphic_pointer_cast<GlobalConfig>(JSON_ANALYSIS_MANAGER_SINGLETON.Create(CoreTools::StringConversion::StandardConversionMultiByte(environmentDirectory.GetDirectory(UpperDirectory::Configuration)) + "Global.json",
-                                                                                                         GlobalConfig::GetCurrentRttiType().GetName())) }
+                                                                                                         GlobalConfig::GetCurrentRttiType().GetName())) },
+      smtpTransportAsynchronous{ environmentDirectory }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -32,4 +33,11 @@ CoreTools::GlobalConfig Framework::SystemManagerImpl::GetGlobalConfig() const
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
     return *globalConfig;
+}
+
+void Framework::SystemManagerImpl::SendSmtpTransportMessage(const std::string& title, const std::string& content)
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    smtpTransportAsynchronous.Registered(title, content);
 }

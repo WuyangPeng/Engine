@@ -42,6 +42,13 @@ CoreTools::GlobalConfig Framework::SystemManagerInterface::GetGlobalConfig() con
     return system->GetGlobalConfig();
 }
 
+void Framework::SystemManagerInterface::SendSmtpTransportMessage(const std::string& title, const std::string& content)
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return system->SendSmtpTransportMessage(title, content);
+}
+
 bool Framework::SystemManagerInterface::Paint()
 {
     FRAMEWORK_CLASS_IS_VALID_9;

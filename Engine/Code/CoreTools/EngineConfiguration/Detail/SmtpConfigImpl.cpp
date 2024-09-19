@@ -21,7 +21,8 @@ CoreTools::SmtpConfigImpl::SmtpConfigImpl() noexcept
       smtpAuth{ true },
       sendUser{},
       password{},
-      receiveUser{}
+      receiveUser{},
+      timeout{ 5 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -82,6 +83,13 @@ CoreTools::SmtpConfigImpl::ReceiveUserType CoreTools::SmtpConfigImpl::GetReceive
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return receiveUser;
+}
+
+int CoreTools::SmtpConfigImpl::GetTimeout() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return timeout;
 }
 
 void CoreTools::SmtpConfigImpl::SetSmtpHost(const String& aSmtpHost)
@@ -145,4 +153,11 @@ void CoreTools::SmtpConfigImpl::AddReceiveUser(const String& aReceiveUser)
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     receiveUser.emplace_back(StringConversion::StandardConversionMultiByte(aReceiveUser));
+}
+
+void CoreTools::SmtpConfigImpl::SetTimeout(int aTimeout) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    timeout = aTimeout;
 }

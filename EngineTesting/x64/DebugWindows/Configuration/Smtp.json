@@ -6,6 +6,7 @@
   "smtpAuth": true,
   "sendUser": "94458936@qq.com",
   "password": "wdbffoqhahivcbbb",
+  "timeout": "5",
   "receiveUser": [
     "94458936@qq.com",
     "94458936@qq.com",

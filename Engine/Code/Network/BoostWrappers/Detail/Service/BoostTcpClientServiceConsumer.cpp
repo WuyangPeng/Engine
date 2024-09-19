@@ -46,6 +46,13 @@ void Network::BoostTcpClientServiceConsumer::Response(const std::function<void(c
     return serviceSession.Response(processDataCallback);
 }
 
+void Network::BoostTcpClientServiceConsumer::Close()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    Join();
+}
+
 void Network::BoostTcpClientServiceConsumer::Run()
 {
     while (!isStop)
@@ -61,8 +68,6 @@ void Network::BoostTcpClientServiceConsumer::Run()
 void Network::BoostTcpClientServiceConsumer::Join()
 {
     isStop = true;
-
-    serviceSession.Stop();
 
     if (thread.joinable())
     {

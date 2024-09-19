@@ -36,6 +36,7 @@ namespace Network
         CLASS_INVARIANT_DECLARE;
 
         void Response(const std::function<void(const std::string&)>& processDataCallback);
+        void Close();
 
     private:
         PackageType impl;

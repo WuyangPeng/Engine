@@ -89,6 +89,13 @@ CoreTools::SmtpConfig::ReceiveUserType CoreTools::SmtpConfig::GetReceiveUser() c
     return impl->GetReceiveUser();
 }
 
+int CoreTools::SmtpConfig::GetTimeout() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetTimeout();
+}
+
 void CoreTools::SmtpConfig::SetSmtpHost(const String& smtpHost)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -145,6 +152,13 @@ void CoreTools::SmtpConfig::SetReceiveUser(const ReceiveUserType& receiveUser)
     return impl->SetReceiveUser(receiveUser);
 }
 
+void CoreTools::SmtpConfig::SetTimeout(int timeout) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetTimeout(timeout);
+}
+
 void CoreTools::SmtpConfig::Load(BasicTree& mainTree)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -156,6 +170,7 @@ void CoreTools::SmtpConfig::Load(BasicTree& mainTree)
     SetSmtpAuth(mainTree.get(SYSTEM_TEXT("smtpAuth"), true));
     SetSendUser(mainTree.get(SYSTEM_TEXT("sendUser"), SYSTEM_TEXT("")));
     SetPassword(mainTree.get(SYSTEM_TEXT("password"), SYSTEM_TEXT("")));
+    SetTimeout(mainTree.get(SYSTEM_TEXT("timeout"), 5));
 
     for (const auto receiveUser = mainTree.get_child(SYSTEM_TEXT("receiveUser"));
          const auto& element : receiveUser | std::views::values)

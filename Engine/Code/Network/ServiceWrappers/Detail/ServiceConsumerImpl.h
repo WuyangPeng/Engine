@@ -41,6 +41,7 @@ namespace Network
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         virtual void Response(const std::function<void(const std::string&)>& processDataCallback);
+        virtual void Close();
 
     private:
         ConfigurationStrategy configurationStrategy;

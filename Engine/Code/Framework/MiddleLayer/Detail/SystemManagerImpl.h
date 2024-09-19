@@ -16,6 +16,7 @@
 #include "CoreTools/EngineConfiguration/GlobalConfig.h"
 #include "CoreTools/FileManager/Environment.h"
 #include "Framework/MainFunctionHelper/MainFunctionHelperFwd.h"
+#include "Framework/Smtp/Detail/SmtpTransportAsynchronous.h"
 
 namespace Framework
 {
@@ -35,6 +36,8 @@ namespace Framework
 
         NODISCARD GlobalConfig GetGlobalConfig() const;
 
+        void SendSmtpTransportMessage(const std::string& title, const std::string& content);
+
     private:
         using GlobalConfigSharedPtr = std::shared_ptr<GlobalConfig>;
 
@@ -43,6 +46,7 @@ namespace Framework
         Environment environment;
 
         GlobalConfigSharedPtr globalConfig;
+        SmtpTransportAsynchronous smtpTransportAsynchronous;
     };
 }
 

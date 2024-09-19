@@ -459,8 +459,10 @@
     <ClInclude Include="..\..\..\Code\Framework\Project\ProjectName.h" />
     <ClInclude Include="..\..\..\Code\Framework\Project\ResourceProjectManager.h" />
     <ClInclude Include="..\..\..\Code\Framework\Project\SystemProjectManager.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Smtp\Detail\SmtpTransportAsynchronous.h" />
     <ClInclude Include="..\..\..\Code\Framework\Smtp\Detail\SmtpTransportImpl.h" />
     <ClInclude Include="..\..\..\Code\Framework\Smtp\Detail\SmtpTransportMessage.h" />
+    <ClInclude Include="..\..\..\Code\Framework\Smtp\Detail\SmtpTransportParameter.h" />
     <ClInclude Include="..\..\..\Code\Framework\Smtp\Smtp.h" />
     <ClInclude Include="..\..\..\Code\Framework\Smtp\SmtpFwd.h" />
     <ClInclude Include="..\..\..\Code\Framework\Smtp\SmtpTransport.h" />
@@ -596,8 +598,10 @@
     <ClCompile Include="..\..\..\Code\Framework\Project\ProjectName.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Project\ResourceProjectManager.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Project\SystemProjectManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\Smtp\Detail\SmtpTransportAsynchronous.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Smtp\Detail\SmtpTransportImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Smtp\Detail\SmtpTransportMessage.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\Smtp\Detail\SmtpTransportParameter.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\Smtp\SmtpTransport.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\WindowCreate\Detail\WindowCreateHandleImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\WindowCreate\Detail\WindowCreateParameterImpl.cpp" />

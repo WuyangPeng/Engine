@@ -50,3 +50,10 @@ void Network::ServiceConsumerImpl::Response(const std::function<void(const std::
 
     CoreTools::DisableNoexcept();
 }
+
+void Network::ServiceConsumerImpl::Close()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    CoreTools::DisableNoexcept();
+}

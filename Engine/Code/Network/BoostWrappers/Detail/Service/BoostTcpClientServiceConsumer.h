@@ -33,6 +33,7 @@ namespace Network
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         void Response(const std::function<void(const std::string&)>& processDataCallback) override;
+        void Close() override;
 
     private:
         void Run();
@@ -40,7 +41,7 @@ namespace Network
 
     private:
         ServiceSession& serviceSession;
-        std::atomic_bool isStop;
+        volatile std::atomic_bool isStop;
         std::thread thread;
     };
 }

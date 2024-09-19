@@ -924,6 +924,12 @@
     <ClInclude Include="..\..\..\Code\Framework\Smtp\Detail\SmtpTransportMessage.h">
       <Filter>Smtp 头文件\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\Smtp\Detail\SmtpTransportParameter.h">
+      <Filter>Smtp 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\Smtp\Detail\SmtpTransportAsynchronous.h">
+      <Filter>Smtp 头文件\Detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Framework\DllLib.cpp">
@@ -1269,6 +1275,12 @@
       <Filter>smtp 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Framework\Smtp\Detail\SmtpTransportMessage.cpp">
+      <Filter>smtp 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\Smtp\Detail\SmtpTransportParameter.cpp">
+      <Filter>smtp 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\Smtp\Detail\SmtpTransportAsynchronous.cpp">
       <Filter>smtp 源文件\Detail</Filter>
     </ClCompile>
   </ItemGroup>
