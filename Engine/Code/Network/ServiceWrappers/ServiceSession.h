@@ -38,6 +38,7 @@ namespace Network
         void Response(const std::function<void(const std::string&)>& processDataCallback);
         void Run();
         void Stop();
+        void Close();
 
     private:
         PackageType impl;

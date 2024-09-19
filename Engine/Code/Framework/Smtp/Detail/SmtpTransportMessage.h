@@ -15,6 +15,8 @@
 #include "CoreTools/EngineConfiguration/SmtpConfig.h"
 #include "Network/ServiceWrappers/SocketService.h"
 
+#include <future>
+
 namespace Framework
 {
     class FRAMEWORK_HIDDEN_DECLARE SmtpTransportMessage : public std::enable_shared_from_this<SmtpTransportMessage>
@@ -54,6 +56,7 @@ namespace Framework
         static void Analysis(const std::string& line);
         static void DoAnalysis(const std::string& line);
         void Response();
+        void Response(std::promise<void>& promise);
 
     private:
         SmtpConfig smtpConfig;

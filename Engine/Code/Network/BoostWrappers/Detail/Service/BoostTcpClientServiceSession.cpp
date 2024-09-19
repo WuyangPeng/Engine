@@ -68,6 +68,13 @@ void Network::BoostTcpClientServiceSession::Stop()
     context.stop();
 }
 
+void Network::BoostTcpClientServiceSession::Close()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    socket.close();
+}
+
 void Network::BoostTcpClientServiceSession::DoResponse(const std::function<void(const std::string&)>& processDataCallback)
 {
     /// 异步读取，直到遇到分隔符

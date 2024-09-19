@@ -34,3 +34,10 @@ void Network::SocketService::Response(const std::function<void(const std::string
 
     return impl->Response(processDataCallback);
 }
+
+void Network::SocketService::Close()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->Close();
+}

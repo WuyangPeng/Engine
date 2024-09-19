@@ -33,6 +33,7 @@ namespace Network
         void Response(const std::function<void(const std::string&)>& processDataCallback) override;
         void Run() override;
         void Stop() override;
+        void Close() override;
 
     private:
         void Connect();

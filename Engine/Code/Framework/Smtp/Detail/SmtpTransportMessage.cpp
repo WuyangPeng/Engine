@@ -18,6 +18,8 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
+#include <future>
+
 using namespace std::literals;
 
 namespace
@@ -105,11 +107,20 @@ void Framework::SmtpTransportMessage::Response()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
+    std::promise<void> promise{};
+    const auto future = promise.get_future();
+
+    Response(promise);
+
+    future.wait();
+}
+
+void Framework::SmtpTransportMessage::Response(std::promise<void>& promise)
+{
     const auto self = shared_from_this();
 
-    socketService.Response([self](const std::string& response) {
+    socketService.Response([self, &promise](const std::string& response) {
         SplitType splitContent{};
-
         split(splitContent, response, boost::is_any_of(lineBreak), boost::token_compress_on);
 
         for (const auto& line : splitContent)
@@ -122,11 +133,12 @@ void Framework::SmtpTransportMessage::Response()
 
         if (boost::numeric_cast<int>(self->message.size()) <= self->sendIndex)
         {
+            promise.set_value();
             return;
         }
 
         self->socketService.SendTextMessage(self->message.at(self->sendIndex++));
-        self->Response();
+        self->Response(promise);
     });
 }
 

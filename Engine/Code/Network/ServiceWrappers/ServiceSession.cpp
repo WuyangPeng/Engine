@@ -49,3 +49,10 @@ void Network::ServiceSession::Stop()
 
     return impl->Stop();
 }
+
+void Network::ServiceSession::Close()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->Close();
+}

@@ -44,6 +44,7 @@ namespace Network
         virtual void Response(const std::function<void(const std::string&)>& processDataCallback);
         virtual void Run();
         virtual void Stop();
+        virtual void Close();
 
     protected:
         NODISCARD std::string GetHost() const;

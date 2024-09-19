@@ -33,3 +33,10 @@ void Network::SocketServiceImpl::Response(const std::function<void(const std::st
 
     return consumer.Response(processDataCallback);
 }
+
+void Network::SocketServiceImpl::Close()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    serviceSession.Close();
+}

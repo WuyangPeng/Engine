@@ -70,6 +70,13 @@ void Network::ServiceSessionImpl::Stop()
     CoreTools::DisableNoexcept();
 }
 
+void Network::ServiceSessionImpl::Close()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    CoreTools::DisableNoexcept();
+}
+
 std::string Network::ServiceSessionImpl::GetHost() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;

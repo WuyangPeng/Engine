@@ -34,6 +34,7 @@ namespace Network
 
         void SendTextMessage(const std::string& message);
         void Response(const std::function<void(const std::string&)>& processDataCallback);
+        void Close();
 
     private:
         PackageType impl;
