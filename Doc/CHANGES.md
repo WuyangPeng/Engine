@@ -12,9 +12,9 @@ Threading Core Render Engine 1.0.1.0
 	（服务器）	
 	+ base64。
 	+ 服务器邮件类：smtp.json。
-	+ 服务器数据库层加载。@
-	+ 服务器网络层加载。@
+	+ 服务器数据库层加载。
 	+ recordProcessId。@
+	+ 服务器网络层加载。@	
 	+ ServerManager启动类。@
 	
 	（客户端）	 

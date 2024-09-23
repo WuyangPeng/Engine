@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.1.0 (2024/08/10 13:21)
+/// 版本：1.0.1.1 (2024/09/23 09:30)
 
 #include "Framework/FrameworkExport.h"
 
@@ -21,7 +21,8 @@ Framework::SystemManagerImpl::SystemManagerImpl(const EnvironmentDirectory& envi
     : environment{ Environment::Create() },
       globalConfig{ boost::polymorphic_pointer_cast<GlobalConfig>(JSON_ANALYSIS_MANAGER_SINGLETON.Create(CoreTools::StringConversion::StandardConversionMultiByte(environmentDirectory.GetDirectory(UpperDirectory::Configuration)) + "Global.json",
                                                                                                          GlobalConfig::GetCurrentRttiType().GetName())) },
-      smtpTransportAsynchronous{ environmentDirectory }
+      smtpTransportAsynchronous{ environmentDirectory },
+      databaseManager{ CoreTools::StringConversion::StandardConversionMultiByte(environmentDirectory.GetEngineDirectory() + environmentDirectory.GetDirectory(UpperDirectory::Configuration)) + "Database.json" }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -40,4 +41,25 @@ void Framework::SystemManagerImpl::SendSmtpTransportMessage(const std::string& t
     FRAMEWORK_CLASS_IS_VALID_9;
 
     smtpTransportAsynchronous.Registered(title, content);
+}
+
+void Framework::SystemManagerImpl::ChangeDatabase(const String& databaseIndex, int64_t userId, const BasisDatabaseManager& basisDatabaseContainer)
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return databaseManager.ChangeDatabase(databaseIndex, userId, basisDatabaseContainer);
+}
+
+Database::BasisDatabaseManager Framework::SystemManagerImpl::SelectOne(const String& databaseIndex, const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return databaseManager.SelectOne(databaseIndex, basisDatabaseContainer, fieldNameContainer);
+}
+
+Database::DatabaseManager::ResultContainer Framework::SystemManagerImpl::SelectAll(const String& databaseIndex, const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return databaseManager.SelectAll(databaseIndex, basisDatabaseContainer, fieldNameContainer);
 }

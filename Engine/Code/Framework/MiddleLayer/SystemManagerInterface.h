@@ -17,6 +17,7 @@
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SharedPtrMacro.h"
+#include "Database/DatabaseInterface/DatabaseManager.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(SystemManagerImpl);
@@ -32,7 +33,11 @@ namespace Framework
         NON_COPY_TYPE_DECLARE(SystemManagerInterface);
         using ParentType = EngineMiddleLayerInterface;
 
+        using String = System::String;
         using GlobalConfig = CoreTools::GlobalConfig;
+        using BasisDatabaseManager = Database::BasisDatabaseManager;
+        using ResultContainer = Database::DatabaseManager::ResultContainer;
+        using FieldNameContainer = Database::DatabaseManager::FieldNameContainer;
 
     public:
         SystemManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
@@ -69,6 +74,11 @@ namespace Framework
         NODISCARD GlobalConfig GetGlobalConfig() const;
 
         void SendSmtpTransportMessage(const std::string& title, const std::string& content);
+
+        void ChangeDatabase(const String& databaseIndex, int64_t userId, const BasisDatabaseManager& basisDatabaseContainer);
+
+        NODISCARD BasisDatabaseManager SelectOne(const String& databaseIndex, const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const;
+        NODISCARD ResultContainer SelectAll(const String& databaseIndex, const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const;
 
     private:
         using SystemPackageType = CoreTools::NonCopyImpl<SystemManagerImpl>;
