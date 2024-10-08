@@ -10,26 +10,44 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "SmtpConfigImpl.h"
+#include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::SmtpConfigImpl::SmtpConfigImpl() noexcept
-    : smtpHost{ SYSTEM_TEXT("smtp.qq.com") },
+    : smtpHost{ "smtp.qq.com" },
+      smtpPort{ 25 },
+      ehlo{},
       smtpSslEnable{ false },
       smtpAuth{ true },
       sendUser{},
       password{},
-      receiveUser{}
+      receiveUser{},
+      timeout{ 5 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, SmtpConfigImpl)
 
-System::String CoreTools::SmtpConfigImpl::GetSmtpHost() const
+std::string CoreTools::SmtpConfigImpl::GetSmtpHost() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return smtpHost;
+}
+
+int CoreTools::SmtpConfigImpl::GetSmtpPort() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return smtpPort;
+}
+
+std::string CoreTools::SmtpConfigImpl::GetEhlo() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return ehlo;
 }
 
 bool CoreTools::SmtpConfigImpl::GetSmtpSslEnable() const noexcept
@@ -46,14 +64,14 @@ bool CoreTools::SmtpConfigImpl::GetSmtpAuth() const noexcept
     return smtpAuth;
 }
 
-System::String CoreTools::SmtpConfigImpl::GetSendUser() const
+std::string CoreTools::SmtpConfigImpl::GetSendUser() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return sendUser;
 }
 
-System::String CoreTools::SmtpConfigImpl::GetPassword() const
+std::string CoreTools::SmtpConfigImpl::GetPassword() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -67,11 +85,32 @@ CoreTools::SmtpConfigImpl::ReceiveUserType CoreTools::SmtpConfigImpl::GetReceive
     return receiveUser;
 }
 
+int CoreTools::SmtpConfigImpl::GetTimeout() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return timeout;
+}
+
 void CoreTools::SmtpConfigImpl::SetSmtpHost(const String& aSmtpHost)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    smtpHost = aSmtpHost;
+    smtpHost = StringConversion::StandardConversionMultiByte(aSmtpHost);
+}
+
+void CoreTools::SmtpConfigImpl::SetSmtpPort(int aSmtpPort) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    smtpPort = aSmtpPort;
+}
+
+void CoreTools::SmtpConfigImpl::SetEhlo(const String& aEhlo)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    ehlo = StringConversion::StandardConversionMultiByte(aEhlo);
 }
 
 void CoreTools::SmtpConfigImpl::SetSmtpSslEnable(bool aSmtpSslEnable) noexcept
@@ -92,14 +131,14 @@ void CoreTools::SmtpConfigImpl::SetSendUser(const String& aSendUser)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    sendUser = aSendUser;
+    sendUser = StringConversion::StandardConversionMultiByte(aSendUser);
 }
 
 void CoreTools::SmtpConfigImpl::SetPassword(const String& aPassword)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    password = aPassword;
+    password = StringConversion::StandardConversionMultiByte(aPassword);
 }
 
 void CoreTools::SmtpConfigImpl::SetReceiveUser(const ReceiveUserType& aReceiveUser)
@@ -113,5 +152,12 @@ void CoreTools::SmtpConfigImpl::AddReceiveUser(const String& aReceiveUser)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    receiveUser.emplace_back(aReceiveUser);
+    receiveUser.emplace_back(StringConversion::StandardConversionMultiByte(aReceiveUser));
+}
+
+void CoreTools::SmtpConfigImpl::SetTimeout(int aTimeout) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    timeout = aTimeout;
 }

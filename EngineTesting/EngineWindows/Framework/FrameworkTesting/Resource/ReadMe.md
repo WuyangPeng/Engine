@@ -184,3 +184,10 @@ ConsoleFrame框架单元测试模块：
 			 SystemProjectManagerTesting。
 
 ----------------------------
+15. Smtp
+
+Smtp单元测试模块：
+
+（1）电子邮件传输协议：SmtpTransportTesting。
+
+----------------------------

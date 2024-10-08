@@ -11,6 +11,7 @@
 
 #include "BoostTcpServerServiceProducer.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "Network/ServiceWrappers/ServiceSession.h"
 
 Network::BoostTcpServerServiceProducer::BoostTcpServerServiceProducer(const ConfigurationStrategy& configurationStrategy) noexcept
     : ParentType{ configurationStrategy }

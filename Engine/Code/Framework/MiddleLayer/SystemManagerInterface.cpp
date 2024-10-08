@@ -42,6 +42,34 @@ CoreTools::GlobalConfig Framework::SystemManagerInterface::GetGlobalConfig() con
     return system->GetGlobalConfig();
 }
 
+void Framework::SystemManagerInterface::SendSmtpTransportMessage(const std::string& title, const std::string& content)
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return system->SendSmtpTransportMessage(title, content);
+}
+
+void Framework::SystemManagerInterface::ChangeDatabase(const String& databaseIndex, int64_t userId, const BasisDatabaseManager& basisDatabaseContainer)
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return system->ChangeDatabase(databaseIndex, userId, basisDatabaseContainer);
+}
+
+Framework::SystemManagerInterface::BasisDatabaseManager Framework::SystemManagerInterface::SelectOne(const String& databaseIndex, const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return system->SelectOne(databaseIndex, basisDatabaseContainer, fieldNameContainer);
+}
+
+Framework::SystemManagerInterface::ResultContainer Framework::SystemManagerInterface::SelectAll(const String& databaseIndex, const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return system->SelectAll(databaseIndex, basisDatabaseContainer, fieldNameContainer);
+}
+
 bool Framework::SystemManagerInterface::Paint()
 {
     FRAMEWORK_CLASS_IS_VALID_9;

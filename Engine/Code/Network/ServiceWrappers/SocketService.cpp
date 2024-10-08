@@ -20,3 +20,24 @@ Network::SocketService::SocketService(const ConfigurationStrategy& configuration
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, SocketService)
+
+void Network::SocketService::SendTextMessage(const std::string& message)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->SendTextMessage(message);
+}
+
+void Network::SocketService::Response(const std::function<void(const std::string&)>& processDataCallback)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->Response(processDataCallback);
+}
+
+void Network::SocketService::Close()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->Close();
+}

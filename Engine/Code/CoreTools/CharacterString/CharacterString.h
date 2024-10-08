@@ -10,6 +10,7 @@
 #ifndef CORE_TOOLS_CHARACTER_STRING_H
 #define CORE_TOOLS_CHARACTER_STRING_H
 
+#include "Base64.h"
 #include "CaseInsensitiveStringDetail.h"
 #include "CodeMapping.h"
 #include "CodeMappingAnalysis.h"

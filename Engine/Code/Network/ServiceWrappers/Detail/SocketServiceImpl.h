@@ -24,10 +24,16 @@ namespace Network
     public:
         using ClassType = SocketServiceImpl;
 
+        using String = System::String;
+
     public:
         explicit SocketServiceImpl(ConfigurationStrategy configurationStrategy);
 
         CLASS_INVARIANT_DECLARE;
+
+        void SendTextMessage(const std::string& message);
+        void Response(const std::function<void(const std::string&)>& processDataCallback);
+        void Close();
 
     private:
         ServiceSession serviceSession;

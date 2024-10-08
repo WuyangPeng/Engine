@@ -5,11 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.1.0 (2024/08/19 10:21)
+/// 版本：1.0.1.1 (2024/09/12 09:35)
 
 #include "Framework/FrameworkExport.h"
 
 #include "SmtpTransportImpl.h"
+#include "SmtpTransportMessage.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
@@ -26,11 +27,11 @@ Framework::SmtpTransportImpl::SmtpTransportImpl(const EnvironmentDirectory& envi
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, SmtpTransportImpl)
 
-void Framework::SmtpTransportImpl::SendMailMessage(const String& title, const String& content)
+void Framework::SmtpTransportImpl::SendMailMessage(const std::string& title, const std::string& content) const
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    System::UnusedFunction(title, content);
+    const auto smtpTransportMessage = SmtpTransportMessage::Create(*smtpConfig, title, content);
 
-    CoreTools::DisableNoexcept();
+    smtpTransportMessage->SendMailMessage();
 }

@@ -39,6 +39,8 @@ namespace Network
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
+        virtual void SendTextMessage(const std::string& message);
+
     private:
         ConfigurationStrategy configurationStrategy;
     };

@@ -29,6 +29,22 @@ Network::ConfigurationStrategy::ConfigurationStrategy(CoreTools::DisableNotThrow
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
+Network::ConfigurationStrategy Network::ConfigurationStrategy::CreateClient(const std::string& host, int port)
+{
+    return ConfigurationStrategy{ WrappersStrategy::Boost,
+                                  ConnectStrategy::Tcp,
+                                  ClientStrategy::Default,
+                                  MessageStrategy::Default,
+                                  ParserStrategy::LittleEndian,
+                                  OpenSslStrategy::Default,
+                                  EncryptedCompressionStrategy::Default,
+                                  ConfigurationSubStrategy::Create(),
+                                  ConfigurationParameter::Create(),
+                                  SocketSendMessage::Default,
+                                  host,
+                                  port };
+}
+
 Network::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappersStrategy, ConnectStrategy connectStrategy, ServerStrategy serverStrategy, MessageStrategy messageStrategy, ParserStrategy parserStrategy, OpenSslStrategy openSslStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy, const ConfigurationSubStrategy& subStrategy, const ConfigurationParameter& configurationParameter, SocketSendMessage socketSendMessage, const std::string& host, int port)
     : impl{ CoreTools::ImplCreateUseFactory::Default, wrappersStrategy, connectStrategy, serverStrategy, messageStrategy, parserStrategy, openSslStrategy, encryptedCompressionStrategy, subStrategy, configurationParameter, socketSendMessage, host, port }
 {

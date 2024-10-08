@@ -50,6 +50,7 @@ namespace Framework
         void AddMacintoshFrameSuite();
         void AddConsoleFrameSuite();
         void AddProjectSuite();
+        void AddSmtpSuite();
 
         NODISCARD Suite GetEnvironmentDirectorySuite();
     };

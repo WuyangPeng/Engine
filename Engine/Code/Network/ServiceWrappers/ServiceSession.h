@@ -34,6 +34,12 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
+        void SendTextMessage(const std::string& message);
+        void Response(const std::function<void(const std::string&)>& processDataCallback);
+        void Run();
+        void Stop();
+        void Close();
+
     private:
         PackageType impl;
     };

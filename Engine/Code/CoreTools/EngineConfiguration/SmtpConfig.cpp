@@ -33,11 +33,25 @@ CLASS_INVARIANT_STUB_DEFINE(CoreTools, SmtpConfig)
 
 CORE_TOOLS_RTTI_DEFINE(CoreTools, SmtpConfig)
 
-System::String CoreTools::SmtpConfig::GetSmtpHost() const
+std::string CoreTools::SmtpConfig::GetSmtpHost() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetSmtpHost();
+}
+
+int CoreTools::SmtpConfig::GetSmtpPort() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetSmtpPort();
+}
+
+std::string CoreTools::SmtpConfig::GetEhlo() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetEhlo();
 }
 
 bool CoreTools::SmtpConfig::GetSmtpSslEnable() const noexcept
@@ -54,14 +68,14 @@ bool CoreTools::SmtpConfig::GetSmtpAuth() const noexcept
     return impl->GetSmtpAuth();
 }
 
-System::String CoreTools::SmtpConfig::GetSendUser() const
+std::string CoreTools::SmtpConfig::GetSendUser() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetSendUser();
 }
 
-System::String CoreTools::SmtpConfig::GetPassword() const
+std::string CoreTools::SmtpConfig::GetPassword() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -75,11 +89,32 @@ CoreTools::SmtpConfig::ReceiveUserType CoreTools::SmtpConfig::GetReceiveUser() c
     return impl->GetReceiveUser();
 }
 
+int CoreTools::SmtpConfig::GetTimeout() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetTimeout();
+}
+
 void CoreTools::SmtpConfig::SetSmtpHost(const String& smtpHost)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     return impl->SetSmtpHost(smtpHost);
+}
+
+void CoreTools::SmtpConfig::SetSmtpPort(int smtpPort) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetSmtpPort(smtpPort);
+}
+
+void CoreTools::SmtpConfig::SetEhlo(const String& ehlo)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetEhlo(ehlo);
 }
 
 void CoreTools::SmtpConfig::SetSmtpSslEnable(bool smtpSslEnable) noexcept
@@ -117,15 +152,25 @@ void CoreTools::SmtpConfig::SetReceiveUser(const ReceiveUserType& receiveUser)
     return impl->SetReceiveUser(receiveUser);
 }
 
+void CoreTools::SmtpConfig::SetTimeout(int timeout) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetTimeout(timeout);
+}
+
 void CoreTools::SmtpConfig::Load(BasicTree& mainTree)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     SetSmtpHost(mainTree.get(SYSTEM_TEXT("smtpHost"), SYSTEM_TEXT("smtp.qq.com")));
+    SetSmtpPort(mainTree.get(SYSTEM_TEXT("smtpPort"), 25));
+    SetEhlo(mainTree.get(SYSTEM_TEXT("ehlo"), SYSTEM_TEXT("test")));
     SetSmtpSslEnable(mainTree.get(SYSTEM_TEXT("smtpSslEnable"), false));
     SetSmtpAuth(mainTree.get(SYSTEM_TEXT("smtpAuth"), true));
     SetSendUser(mainTree.get(SYSTEM_TEXT("sendUser"), SYSTEM_TEXT("")));
     SetPassword(mainTree.get(SYSTEM_TEXT("password"), SYSTEM_TEXT("")));
+    SetTimeout(mainTree.get(SYSTEM_TEXT("timeout"), 5));
 
     for (const auto receiveUser = mainTree.get_child(SYSTEM_TEXT("receiveUser"));
          const auto& element : receiveUser | std::views::values)

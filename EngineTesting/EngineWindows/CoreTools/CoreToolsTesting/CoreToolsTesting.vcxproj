@@ -454,6 +454,7 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\StaticSingletonTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\UniqueIdManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\VersionTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\Base64Testing.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CaseInsensitiveString\CaseInsensitiveStringIOStreamTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CaseInsensitiveString\CaseInsensitiveStringTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CharacterStringSuite.h" />
@@ -1174,6 +1175,7 @@ xcopy "$(ProjectDir)/Resource/CSVEngineering/*.*" "$(EngineTestingEngineering)/$
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\StaticSingletonTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\UniqueIdManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\VersionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\Base64Testing.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CaseInsensitiveString\CaseInsensitiveStringIOStreamTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CaseInsensitiveString\CaseInsensitiveStringTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CodeMapping\CodeMappingAnalysisTesting.cpp" />

@@ -23,9 +23,14 @@ namespace Network
         using ParentType = ClientServiceProducer;
 
     public:
-        explicit BoostTcpClientServiceProducer(const ConfigurationStrategy& configurationStrategy) noexcept;
+        explicit BoostTcpClientServiceProducer(ServiceSession& serviceSession, const ConfigurationStrategy& configurationStrategy) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        void SendTextMessage(const std::string& message) override;
+
+    private:
+        ServiceSession& serviceSession;
     };
 }
 

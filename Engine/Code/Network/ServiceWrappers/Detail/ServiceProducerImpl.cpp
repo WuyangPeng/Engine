@@ -39,3 +39,12 @@ Network::ServiceProducerImpl& Network::ServiceProducerImpl::operator=(ServicePro
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ServiceProducerImpl)
+
+void Network::ServiceProducerImpl::SendTextMessage(const std::string& message)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(message);
+
+    CoreTools::DisableNoexcept();
+}

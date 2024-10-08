@@ -13,9 +13,31 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 Network::SocketServiceImpl::SocketServiceImpl(ConfigurationStrategy configurationStrategy)
-    : serviceSession{ configurationStrategy }, consumer{ configurationStrategy }, producer{ configurationStrategy }, configurationStrategy{ std::move(configurationStrategy) }
+    : serviceSession{ configurationStrategy }, consumer{ serviceSession, configurationStrategy }, producer{ serviceSession, configurationStrategy }, configurationStrategy{ std::move(configurationStrategy) }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, SocketServiceImpl)
+
+void Network::SocketServiceImpl::SendTextMessage(const std::string& message)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    producer.SendTextMessage(message);
+}
+
+void Network::SocketServiceImpl::Response(const std::function<void(const std::string&)>& processDataCallback)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return consumer.Response(processDataCallback);
+}
+
+void Network::SocketServiceImpl::Close()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    serviceSession.Close();
+    consumer.Close();
+}

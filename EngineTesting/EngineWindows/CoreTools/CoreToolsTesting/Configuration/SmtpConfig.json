@@ -1,13 +1,15 @@
 {
   "smtpHost": "smtp.qq.com",
+  "smtpPort": "25",
+  "ehlo": "test",
   "smtpSslEnable": false,
   "smtpAuth": true,
   "sendUser": "94458936@qq.com",
   "password": "bbbbbbbbbbbbcbbb",
+  "timeout": 5,
   "receiveUser": [
     "user1@example.com",
     "user2@example.com",
     "user3@example.com"
   ]
 }
-      

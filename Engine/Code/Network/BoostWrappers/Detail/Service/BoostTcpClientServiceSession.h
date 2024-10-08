@@ -12,6 +12,8 @@
 
 #include "Network/NetworkDll.h"
 
+#include "System/Helper/PragmaWarning/Asio.h"
+#include "Network/Interface/NetworkInternalFwd.h"
 #include "Network/ServiceWrappers/Detail/ClientServiceSession.h"
 
 namespace Network
@@ -23,9 +25,24 @@ namespace Network
         using ParentType = ClientServiceSession;
 
     public:
-        explicit BoostTcpClientServiceSession(const ConfigurationStrategy& configurationStrategy) noexcept;
+        explicit BoostTcpClientServiceSession(const ConfigurationStrategy& configurationStrategy);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        void SendTextMessage(const std::string& message) override;
+        void Response(const std::function<void(const std::string&)>& processDataCallback) override;
+        void Run() override;
+        void Stop() override;
+        void Close() override;
+
+    private:
+        void Connect();
+        void DoResponse(const std::function<void(const std::string&)>& processDataCallback);
+
+    private:
+        IoContextType context;
+        BoostSockStreamType socket;
+        boost::asio::streambuf response;
     };
 }
 

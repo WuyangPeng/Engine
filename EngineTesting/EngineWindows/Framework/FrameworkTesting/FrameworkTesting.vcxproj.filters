@@ -142,6 +142,12 @@
     <Filter Include="MainFunctionHelperSuite 源文件\EnvironmentDirectory">
       <UniqueIdentifier>{6b5bc17a-1994-4156-826c-ee911daab8d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SmtpSuite 头文件">
+      <UniqueIdentifier>{f15343d9-5b4f-4098-9e88-e00278ddbf39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SmtpSuite 源文件">
+      <UniqueIdentifier>{de329efe-0303-4ae0-a49c-f94b406c60fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json">
@@ -178,6 +184,12 @@
       <Filter>配置\FrameworkTesting</Filter>
     </None>
     <None Include="Configuration\Global.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Smtp.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Database.json">
       <Filter>配置</Filter>
     </None>
   </ItemGroup>
@@ -575,6 +587,12 @@
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\EnvironmentDirectory\FileEnvironmentDirectoryTesting.h">
       <Filter>MainFunctionHelperSuite 头文件\EnvironmentDirectory</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\SmtpSuite\SmtpTransportTesting.h">
+      <Filter>SmtpSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\SmtpSuite\SmtpSuite.h">
+      <Filter>SmtpSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\TestingHelper.cpp">
@@ -918,6 +936,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\EnvironmentDirectory\FileEnvironmentDirectoryTesting.cpp">
       <Filter>MainFunctionHelperSuite 源文件\EnvironmentDirectory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\SmtpSuite\SmtpTransportTesting.cpp">
+      <Filter>SmtpSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

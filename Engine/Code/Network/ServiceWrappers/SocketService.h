@@ -25,10 +25,16 @@ namespace Network
     public:
         NON_COPY_TYPE_DECLARE(SocketService);
 
+        using String = System::String;
+
     public:
         explicit SocketService(const ConfigurationStrategy& configurationStrategy);
 
         CLASS_INVARIANT_DECLARE;
+
+        void SendTextMessage(const std::string& message);
+        void Response(const std::function<void(const std::string&)>& processDataCallback);
+        void Close();
 
     private:
         PackageType impl;

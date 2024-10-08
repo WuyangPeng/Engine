@@ -14,10 +14,17 @@
 #include "Detail/ServiceProducerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
-Network::ServiceProducer::ServiceProducer(const ConfigurationStrategy& configurationStrategy)
-    : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy }
+Network::ServiceProducer::ServiceProducer(ServiceSession& serviceSession, const ConfigurationStrategy& configurationStrategy)
+    : impl{ CoreTools::ImplCreateUseFactory::Default, serviceSession, configurationStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ServiceProducer)
+
+void Network::ServiceProducer::SendTextMessage(const std::string& message)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    return impl->SendTextMessage(message);
+}

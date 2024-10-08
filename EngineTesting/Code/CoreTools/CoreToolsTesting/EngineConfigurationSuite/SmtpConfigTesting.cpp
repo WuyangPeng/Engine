@@ -44,15 +44,18 @@ void CoreTools::SmtpConfigTesting::SmtpConfigTest()
 
     const auto smtpConfig = boost::polymorphic_pointer_downcast<SmtpConfig>(jsonBase);
 
-    ASSERT_EQUAL(smtpConfig->GetSmtpHost(), SYSTEM_TEXT("smtp.qq.com"));
+    ASSERT_EQUAL(smtpConfig->GetSmtpHost(), "smtp.qq.com");
+    ASSERT_EQUAL(smtpConfig->GetSmtpPort(), 25);
+    ASSERT_EQUAL(smtpConfig->GetEhlo(), "test");
     ASSERT_FALSE(smtpConfig->GetSmtpSslEnable());
     ASSERT_TRUE(smtpConfig->GetSmtpAuth());
-    ASSERT_EQUAL(smtpConfig->GetSendUser(), SYSTEM_TEXT("94458936@qq.com"));
-    ASSERT_EQUAL(smtpConfig->GetPassword(), SYSTEM_TEXT("bbbbbbbbbbbbcbbb"));
+    ASSERT_EQUAL(smtpConfig->GetSendUser(), "94458936@qq.com");
+    ASSERT_EQUAL(smtpConfig->GetPassword(), "bbbbbbbbbbbbcbbb");
+    ASSERT_EQUAL(smtpConfig->GetTimeout(), 5);
 
-    const SmtpConfig::ReceiveUserType receiveUserType{ SYSTEM_TEXT("user1@example.com"),
-                                                       SYSTEM_TEXT("user2@example.com"),
-                                                       SYSTEM_TEXT("user3@example.com") };
+    const SmtpConfig::ReceiveUserType receiveUserType{ "user1@example.com",
+                                                       "user2@example.com",
+                                                       "user3@example.com" };
 
     ASSERT_EQUAL(smtpConfig->GetReceiveUser(), receiveUserType);
 }

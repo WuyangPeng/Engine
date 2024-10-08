@@ -32,7 +32,7 @@ namespace Framework
 
         CLASS_INVARIANT_DECLARE;
 
-        void SendMailMessage(const String& title, const String& content);
+        void SendMailMessage(const std::string& title, const std::string& content);
 
     private:
         PackageType impl;

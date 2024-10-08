@@ -17,6 +17,7 @@
 #include "Network/Configuration/ConfigurationFwd.h"
 #include "Network/Interface/NetworkInternalFwd.h"
 #include "Network/NetworkMessage/NetworkMessageFwd.h"
+#include "Network/ServiceWrappers/ServiceWrappersFwd.h"
 
 NETWORK_NON_COPY_EXPORT_IMPL(ServiceConsumerImpl);
 
@@ -30,9 +31,12 @@ namespace Network
         using String = System::String;
 
     public:
-        explicit ServiceConsumer(const ConfigurationStrategy& configurationStrategy);
+        ServiceConsumer(ServiceSession& serviceSession, const ConfigurationStrategy& configurationStrategy);
 
         CLASS_INVARIANT_DECLARE;
+
+        void Response(const std::function<void(const std::string&)>& processDataCallback);
+        void Close();
 
     private:
         PackageType impl;

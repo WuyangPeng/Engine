@@ -35,6 +35,16 @@
       "Extension": "log"
     },
 
+    "File": {
+      "Directory": "Log",
+      "FileName": "Smtp",
+      "Flags": 1,
+      "Level": 1,
+      "MaxFileSize": 1000000,
+      "Backup": true,
+      "Extension": "log"
+    },
+
     "Default": {
       "Directory": "Log",
       "Flags": 15,

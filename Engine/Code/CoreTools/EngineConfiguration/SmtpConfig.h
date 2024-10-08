@@ -28,26 +28,32 @@ namespace CoreTools
         COPY_UNSHARED_TYPE_DECLARE(SmtpConfig);
         using ParentType = JsonBase;
 
-        using ReceiveUserType = std::vector<String>;
+        using ReceiveUserType = std::vector<std::string>;
 
     public:
         explicit SmtpConfig(DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD String GetSmtpHost() const;
+        NODISCARD std::string GetSmtpHost() const;
+        NODISCARD int GetSmtpPort() const noexcept;
+        NODISCARD std::string GetEhlo() const;
         NODISCARD bool GetSmtpSslEnable() const noexcept;
         NODISCARD bool GetSmtpAuth() const noexcept;
-        NODISCARD String GetSendUser() const;
-        NODISCARD String GetPassword() const;
+        NODISCARD std::string GetSendUser() const;
+        NODISCARD std::string GetPassword() const;
         NODISCARD ReceiveUserType GetReceiveUser() const;
+        NODISCARD int GetTimeout() const noexcept;
 
         void SetSmtpHost(const String& smtpHost);
+        void SetSmtpPort(int smtpPort) noexcept;
+        void SetEhlo(const String& ehlo);
         void SetSmtpSslEnable(bool smtpSslEnable) noexcept;
         void SetSmtpAuth(bool smtpAuth) noexcept;
         void SetSendUser(const String& sendUser);
         void SetPassword(const String& password);
         void SetReceiveUser(const ReceiveUserType& receiveUser);
+        void SetTimeout(int timeout) noexcept;
 
         void Load(BasicTree& mainTree) override;
 

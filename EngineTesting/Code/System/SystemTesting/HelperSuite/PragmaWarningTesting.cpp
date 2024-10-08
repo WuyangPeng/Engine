@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.7 (2024/03/08 15:56)
+/// 版本：1.0.1.1 (2024/09/14 11:17)
 
 #include "PragmaWarningTesting.h"
 #include "System/Helper/Platform.h"
@@ -14,10 +14,12 @@
 #include "System/Helper/PragmaWarning/ActiveMQ.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
 #include "System/Helper/PragmaWarning/Any.h"
+#include "System/Helper/PragmaWarning/Asio.h"
 #include "System/Helper/PragmaWarning/AsioConnect.h"
 #include "System/Helper/PragmaWarning/AsioIpTcp.h"
 #include "System/Helper/PragmaWarning/AsioPlaceholders.h"
 #include "System/Helper/PragmaWarning/AsioPost.h"
+#include "System/Helper/PragmaWarning/Base64.h"
 #include "System/Helper/PragmaWarning/Bind.h"
 #include "System/Helper/PragmaWarning/CallTraits.h"
 #include "System/Helper/PragmaWarning/Chrono.h"
@@ -62,6 +64,7 @@
 
 #include SYSTEM_WARNING_DISABLE(4100)
 #include SYSTEM_WARNING_DISABLE(4101)
+#include SYSTEM_WARNING_DISABLE(4127)
 #include SYSTEM_WARNING_DISABLE(4200)
 #include SYSTEM_WARNING_DISABLE(4239)
 #include SYSTEM_WARNING_DISABLE(4244)
@@ -72,6 +75,7 @@
 #include SYSTEM_WARNING_DISABLE(4996)
 
 #include SYSTEM_WARNING_DISABLE(6001)
+#include SYSTEM_WARNING_DISABLE(6031)
 #include SYSTEM_WARNING_DISABLE(6054)
 #include SYSTEM_WARNING_DISABLE(6201)
 #include SYSTEM_WARNING_DISABLE(6246)
@@ -106,6 +110,7 @@
 #include SYSTEM_WARNING_DISABLE(26414)
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26416)
+#include SYSTEM_WARNING_DISABLE(26417)
 #include SYSTEM_WARNING_DISABLE(26418)
 
 #include SYSTEM_WARNING_DISABLE(26426)

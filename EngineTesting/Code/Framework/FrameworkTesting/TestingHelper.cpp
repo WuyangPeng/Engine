@@ -59,6 +59,7 @@ void Framework::TestingHelper::InitSuite()
     AddMacintoshFrameSuite();
     AddConsoleFrameSuite();
     AddProjectSuite();
+    AddSmtpSuite();
 }
 
 void Framework::TestingHelper::AddHelperSuite()
@@ -277,4 +278,13 @@ void Framework::TestingHelper::AddProjectSuite()
     ADD_TEST(projectSuite, SystemProjectManagerTesting);
 
     AddSuite(projectSuite);
+}
+
+void Framework::TestingHelper::AddSmtpSuite()
+{
+    auto smtpSuite = GenerateSuite("smtp");
+
+    ADD_TEST(smtpSuite, SmtpTransportTesting);
+
+    AddSuite(smtpSuite);
 }

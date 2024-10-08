@@ -32,12 +32,16 @@ namespace Network
     public:
         explicit ServiceConsumerImpl(ConfigurationStrategy configurationStrategy) noexcept;
         virtual ~ServiceConsumerImpl() noexcept = 0;
+
         ServiceConsumerImpl(const ServiceConsumerImpl& rhs) noexcept = delete;
         ServiceConsumerImpl& operator=(const ServiceConsumerImpl& rhs) noexcept = delete;
         ServiceConsumerImpl(ServiceConsumerImpl&& rhs) noexcept;
         ServiceConsumerImpl& operator=(ServiceConsumerImpl&& rhs) noexcept;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
+
+        virtual void Response(const std::function<void(const std::string&)>& processDataCallback);
+        virtual void Close();
 
     private:
         ConfigurationStrategy configurationStrategy;

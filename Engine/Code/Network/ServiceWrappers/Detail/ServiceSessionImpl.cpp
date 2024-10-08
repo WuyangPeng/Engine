@@ -39,3 +39,54 @@ Network::ServiceSessionImpl& Network::ServiceSessionImpl::operator=(ServiceSessi
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ServiceSessionImpl)
+
+void Network::ServiceSessionImpl::SendTextMessage(const std::string& message)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(message);
+
+    CoreTools::DisableNoexcept();
+}
+
+void Network::ServiceSessionImpl::Response(const std::function<void(const std::string&)>& processDataCallback)
+{
+    System::UnusedFunction(processDataCallback);
+
+    CoreTools::DisableNoexcept();
+}
+
+void Network::ServiceSessionImpl::Run()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    CoreTools::DisableNoexcept();
+}
+
+void Network::ServiceSessionImpl::Stop()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    CoreTools::DisableNoexcept();
+}
+
+void Network::ServiceSessionImpl::Close()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    CoreTools::DisableNoexcept();
+}
+
+std::string Network::ServiceSessionImpl::GetHost() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return configurationStrategy.GetHost();
+}
+
+int Network::ServiceSessionImpl::GetPort() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return configurationStrategy.GetPort();
+}

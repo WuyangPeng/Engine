@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.4 (2024/01/11 17:22)
+/// 版本：1.0.1.1 (2024/09/18 09:36)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_TCP_CLIENT_SERVICE_CONSUMER_H
 #define NETWORK_BOOST_WRAPPERS_BOOST_TCP_CLIENT_SERVICE_CONSUMER_H
@@ -23,9 +23,26 @@ namespace Network
         using ParentType = ClientServiceConsumer;
 
     public:
-        explicit BoostTcpClientServiceConsumer(const ConfigurationStrategy& configurationStrategy) noexcept;
+        explicit BoostTcpClientServiceConsumer(ServiceSession& serviceSession, const ConfigurationStrategy& configurationStrategy) noexcept;
+        ~BoostTcpClientServiceConsumer() noexcept;
+        BoostTcpClientServiceConsumer(const BoostTcpClientServiceConsumer& rhs) = delete;
+        BoostTcpClientServiceConsumer& operator=(const BoostTcpClientServiceConsumer& rhs) = delete;
+        BoostTcpClientServiceConsumer(BoostTcpClientServiceConsumer&& rhs) noexcept = delete;
+        BoostTcpClientServiceConsumer& operator=(BoostTcpClientServiceConsumer&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        void Response(const std::function<void(const std::string&)>& processDataCallback) override;
+        void Close() override;
+
+    private:
+        void Run();
+        void Join();
+
+    private:
+        ServiceSession& serviceSession;
+        volatile std::atomic_bool isStop;
+        std::thread thread;
     };
 }
 

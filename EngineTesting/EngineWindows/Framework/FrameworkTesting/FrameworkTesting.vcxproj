@@ -181,7 +181,9 @@
 xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I
-xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Smtp.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Database.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
@@ -200,7 +202,9 @@ xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Pl
 xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I
-xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Smtp.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Database.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -223,7 +227,9 @@ xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Pl
 xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I
-xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Smtp.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Database.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
@@ -246,7 +252,9 @@ xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Pl
 xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I
-xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Smtp.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Database.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -265,7 +273,9 @@ xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Pl
 xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I
-xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Smtp.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Database.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -284,7 +294,9 @@ xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Pl
 xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I
-xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Smtp.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Database.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -307,7 +319,9 @@ xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Pl
 xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I
-xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Smtp.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Database.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
@@ -330,10 +344,13 @@ xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Pl
 xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName)" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)" /F /Y /E /I
-xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Smtp.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Database.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="Configuration\Database.json" />
     <None Include="Configuration\EngineDirectory.json" />
     <None Include="Configuration\FrameworkEngineDirectory.json" />
     <None Include="Configuration\EnvironmentVariable.json" />
@@ -343,6 +360,7 @@ xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Pl
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\Project.json" />
     <None Include="Configuration\Renderer.json" />
+    <None Include="Configuration\Smtp.json" />
     <None Include="Configuration\Testing.json" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
@@ -453,6 +471,8 @@ xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Pl
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\ProjectSuite.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\ResourceProjectManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\SystemProjectManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\SmtpSuite\SmtpSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\SmtpSuite\SmtpTransportTesting.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\TestingHelper.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowCreateParameterTesting.h" />
@@ -572,6 +592,7 @@ xcopy "$(ProjectDir)/Configuration/Global.json" "$(EngineTestingInclude)/../$(Pl
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\ProjectNameTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\ResourceProjectManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\SystemProjectManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\SmtpSuite\SmtpTransportTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\TestingHelper.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\TestingMain.cpp" />

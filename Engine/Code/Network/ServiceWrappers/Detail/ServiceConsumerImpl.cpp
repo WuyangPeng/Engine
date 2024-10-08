@@ -12,6 +12,8 @@
 #include "ServiceConsumerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
+#include <sstream>
+
 Network::ServiceConsumerImpl::ServiceConsumerImpl(ConfigurationStrategy configurationStrategy) noexcept
     : configurationStrategy{ std::move(configurationStrategy) }
 {
@@ -39,3 +41,19 @@ Network::ServiceConsumerImpl& Network::ServiceConsumerImpl::operator=(ServiceCon
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ServiceConsumerImpl)
+
+void Network::ServiceConsumerImpl::Response(const std::function<void(const std::string&)>& processDataCallback)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(processDataCallback);
+
+    CoreTools::DisableNoexcept();
+}
+
+void Network::ServiceConsumerImpl::Close()
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    CoreTools::DisableNoexcept();
+}

@@ -29,16 +29,16 @@ namespace Network
     public:
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD static ConsumerSharedPtr Create(const ConfigurationStrategy& configurationStrategy);
+        NODISCARD static ConsumerSharedPtr Create(ServiceSession& serviceSession, const ConfigurationStrategy& configurationStrategy);
 
     private:
-        NODISCARD static ConsumerSharedPtr CreateClient(const ConfigurationStrategy& configurationStrategy);
+        NODISCARD static ConsumerSharedPtr CreateClient(ServiceSession& serviceSession, const ConfigurationStrategy& configurationStrategy);
         NODISCARD static ConsumerSharedPtr CreateServer(const ConfigurationStrategy& configurationStrategy);
 
         NODISCARD static ConsumerSharedPtr CreateAceClient(const ConfigurationStrategy& configurationStrategy);
         NODISCARD static ConsumerSharedPtr CreateAceServer(const ConfigurationStrategy& configurationStrategy);
 
-        NODISCARD static ConsumerSharedPtr CreateBoostClient(const ConfigurationStrategy& configurationStrategy);
+        NODISCARD static ConsumerSharedPtr CreateBoostClient(ServiceSession& serviceSession, const ConfigurationStrategy& configurationStrategy);
         NODISCARD static ConsumerSharedPtr CreateBoostServer(const ConfigurationStrategy& configurationStrategy);
     };
 }
