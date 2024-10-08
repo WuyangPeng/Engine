@@ -1,9 +1,22 @@
 @ingroup group_Documentation
 
-Threading Core Render Engine 1.0.1.0
+Threading Core Render Engine 1.0.1.2
 
 ----------------------------
 更新日志
+----------------------------
+1.0.1.2（2024/10/01——2024/10/31）
+
+	完成功能：
+	
+	（服务器）		
+	+ recordProcessId。@
+	+ 服务器网络层加载。@	
+	+ ServerManager启动类。@
+	
+	（客户端）	 
+	+ 启动类。@
+	
 ----------------------------
 1.0.1.1（2024/09/11——2024/09/30）
 
@@ -13,12 +26,6 @@ Threading Core Render Engine 1.0.1.0
 	+ base64。
 	+ 服务器邮件类：smtp.json。
 	+ 服务器数据库层加载。
-	+ recordProcessId。@
-	+ 服务器网络层加载。@	
-	+ ServerManager启动类。@
-	
-	（客户端）	 
-	+ 启动类。@
 	
 ----------------------------
 1.0.1.0（2024/08/01——2024/09/10）
