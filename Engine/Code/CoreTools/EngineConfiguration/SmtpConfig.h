@@ -10,7 +10,6 @@
 #ifndef CORE_TOOLS_ENGINE_CONFIGURATION_SMTP_CONFIG_H
 #define CORE_TOOLS_ENGINE_CONFIGURATION_SMTP_CONFIG_H
 
-#include "GlobalConfig.h"
 #include "CoreTools/CoreToolsDll.h"
 
 #include "CoreTools/Contract/ContractFwd.h"
