@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::LogMessageImpl::LogMessageImpl(LogLevel level, LogFilter filter, const FunctionDescribed& functionDescribed) noexcept
-    : logLevel{ level }, filter{ filter }, message{}, functionDescribed{ functionDescribed }
+    : logLevel{ level }, filter{ filter }, message{}, functionDescribed{ static_cast<FunctionDescribed>(functionDescribed) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

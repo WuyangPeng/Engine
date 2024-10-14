@@ -10,8 +10,8 @@ Threading Core Render Engine 1.0.1.2
 	完成功能：
 	
 	（GTL-Utility）		
-	+ AtomicMinMax。@
-	+ ContainerAdapter。@	
+	+ AtomicMinMax。
+	+ ContainerAdapter。	
 	+ Exceptions。@	 
 	+ HashCombine。@
 	+ Lattice。@

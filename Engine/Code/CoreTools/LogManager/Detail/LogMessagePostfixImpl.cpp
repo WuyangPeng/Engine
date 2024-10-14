@@ -18,7 +18,7 @@
 #include "CoreTools/LogManager/Flags/LogManagerFlags.h"
 
 CoreTools::LogMessagePostfixImpl::LogMessagePostfixImpl(AppenderPrint appenderPrint, LogLevel level, const FunctionDescribed& functionDescribed)
-    : postfix{}, appenderPrint{ appenderPrint }, level{ level }, functionDescribed{ functionDescribed }
+    : postfix{}, appenderPrint{ appenderPrint }, level{ level }, functionDescribed{ static_cast<FunctionDescribed>(functionDescribed) }
 {
     GeneratePostfix();
 
