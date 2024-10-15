@@ -12,8 +12,8 @@ Threading Core Render Engine 1.0.1.2
 	£¨GTL-Utility£©		
 	+ AtomicMinMax¡£
 	+ ContainerAdapter¡£
-	+ HashCombine¡£@
-	+ Lattice¡£@
+	+ HashCombine¡£
+	+ Lattice¡£
 	+ MinHeap¡£@
 	+ Multiarray¡£@
 	+ MultiarrayAdapter¡£@

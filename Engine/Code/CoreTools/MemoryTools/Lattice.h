@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/11 15:46)
+/// 版本：1.0.1.2 (2024/10/15 10:41)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_LATTICE_H
 #define CORE_TOOLS_MEMORY_TOOLS_LATTICE_H
@@ -43,7 +43,8 @@ namespace CoreTools
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        /// 维度数是Sizes参数包中的参数数量。这是关于格子框架注释中的'n'。
+        /// 维度数是Sizes参数包中的参数数量。
+        /// 这是关于格子框架注释中的'n'。
         NODISCARD static constexpr int GetDimensions() noexcept
         {
             return sizeof...(Sizes);
