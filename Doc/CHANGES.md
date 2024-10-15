@@ -9,22 +9,14 @@ Threading Core Render Engine 1.0.1.2
 
 	完成功能：
 	
-	（GTL-Utility）		
-	+ AtomicMinMax。
-	+ ContainerAdapter。
-	+ HashCombine。
-	+ Lattice。
-	+ MinHeap。@
-	+ Multiarray。@
-	+ MultiarrayAdapter。@
-	+ RangeIteration。@
-	+ RawIterators。@
-	+ RawPtrCompare。@
-	+ SharedPtrCompare。@
-	+ StringUtility。@
-	+ Timer。@
-	+ TypeTraits。@
-	+ WeakPtrCompare。@
+	（服务器）		
+	+ recordProcessId。@
+	+ 服务器网络层加载。@	
+	+ ServerManager启动类。@
+	
+	（客户端）	 
+	+ 启动类。@
+
 	
 ----------------------------
 1.0.1.1（2024/09/11——2024/09/30）
