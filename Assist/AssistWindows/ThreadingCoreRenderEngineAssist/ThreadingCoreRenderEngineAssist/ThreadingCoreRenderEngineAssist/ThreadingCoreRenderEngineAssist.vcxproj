@@ -197,10 +197,13 @@ xcopy "$(HiredisWin32DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)W
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/EngineDirectory.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Testing.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Smtp.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Database.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
@@ -235,10 +238,13 @@ xcopy "$(HiredisWin32DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)W
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/EngineDirectory.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Testing.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Smtp.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Database.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
@@ -260,10 +266,13 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../../$(Platfo
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/EngineDirectory.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Testing.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Smtp.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Database.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
@@ -302,10 +311,13 @@ xcopy "$(HiredisWin32ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/EngineDirectory.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Testing.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Smtp.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Database.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
@@ -340,10 +352,13 @@ xcopy "$(HiredisWin32ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/EngineDirectory.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Testing.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Smtp.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Database.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
@@ -378,10 +393,13 @@ xcopy "$(HiredisX64DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Win
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/EngineDirectory.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Testing.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Smtp.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Database.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
@@ -420,10 +438,13 @@ xcopy "$(HiredisX64DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Win
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/EngineDirectory.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Testing.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Smtp.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Database.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
@@ -462,10 +483,13 @@ xcopy "$(HiredisX64ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)W
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/EngineDirectory.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/$(ProjectName)/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/$(ProjectName)/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Testing.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Global.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Smtp.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Database.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "$(ProjectDir)/Resource/Shader/" /F /Y
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PostBuildEvent>
@@ -485,13 +509,16 @@ xcopy "$(HiredisX64ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)W
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="Configuration\Database.json" />
     <None Include="Configuration\EngineDirectory.json" />
     <None Include="Configuration\EnvironmentVariable.json" />
+    <None Include="Configuration\Global.json" />
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\Project.json" />
-    <None Include="Configuration\Renderer.json" />
+    <None Include="Configuration\Smtp.json" />
     <None Include="Configuration\Testing.json" />
     <None Include="Configuration\ThreadingCoreRenderEngineAssist.json" />
+    <None Include="Configuration\ThreadingCoreRenderEngineAssist\Renderer.json" />
     <None Include="Resource\LearningLibrary.md" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />

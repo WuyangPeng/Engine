@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/21 09:20)
+/// 版本：1.0.1.2 (2024/10/16 19:54)
 
 #include "ThreadingCoreRenderEngineTesting/Version.h"
 #include "VersionTesting.h"
