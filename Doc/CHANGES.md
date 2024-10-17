@@ -9,6 +9,10 @@ Threading Core Render Engine 1.0.1.2
 
 	完成功能：
 	
+	（工程）
+	+ 工程整理。
+	+ System库整理。@
+	
 	（服务器）		
 	+ recordProcessId。@
 	+ 服务器网络层加载。@	
