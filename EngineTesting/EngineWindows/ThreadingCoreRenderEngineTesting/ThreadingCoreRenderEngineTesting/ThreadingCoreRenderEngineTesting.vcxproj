@@ -196,7 +196,8 @@ xcopy "$(ActiveMQWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Win
 xcopy "$(AprWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(MongoCxxDriverWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(BsoncxxWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/mongoc*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/bson*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(HiredisWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
@@ -235,7 +236,8 @@ xcopy "$(ActiveMQWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Win
 xcopy "$(AprWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(MongoCxxDriverWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(BsoncxxWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/mongoc*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/bson*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(HiredisWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -272,7 +274,8 @@ xcopy "$(ActiveMQWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)W
 xcopy "$(AprWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(MongoCxxDriverWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(BsoncxxWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/mongoc*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/bson*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(HiredisWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
@@ -312,7 +315,8 @@ xcopy "$(ActiveMQWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)W
 xcopy "$(AprWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(MongoCxxDriverWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(BsoncxxWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/mongoc*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/bson*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(HiredisWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -348,7 +352,8 @@ xcopy "$(ActiveMQX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windo
 xcopy "$(AprX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(MongoCxxDriverX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(BsoncxxX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/mongoc*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/bson*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(HiredisX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
@@ -387,7 +392,8 @@ xcopy "$(ActiveMQX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windo
 xcopy "$(AprX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(MongoCxxDriverX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(BsoncxxX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/mongoc*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/bson*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(HiredisX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -424,7 +430,8 @@ xcopy "$(ActiveMQX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Win
 xcopy "$(AprX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(MongoCxxDriverX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(BsoncxxX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/mongoc*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/bson*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(HiredisX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
@@ -464,7 +471,8 @@ xcopy "$(ActiveMQX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Win
 xcopy "$(AprX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(MongoCxxDriverX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(BsoncxxX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/mongoc*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/bson*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(HiredisX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
