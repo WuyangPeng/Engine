@@ -120,9 +120,6 @@
     <None Include="Configuration\EnvironmentVariable.json">
       <Filter>配置</Filter>
     </None>
-    <None Include="Configuration\Renderer.json">
-      <Filter>配置</Filter>
-    </None>
     <None Include="Configuration\EngineDirectory.json">
       <Filter>配置</Filter>
     </None>
