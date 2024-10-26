@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/28 10:38)
+/// 版本：1.0.1.2 (2024/10/26 17:47)
 
 #ifndef SYSTEM_SECURITY_SECURITY_BASE_FLAGS_H
 #define SYSTEM_SECURITY_SECURITY_BASE_FLAGS_H
@@ -40,7 +40,7 @@ namespace System
         ValidAttributes = SE_GROUP_VALID_ATTRIBUTES,
     };
 
-    enum class SpecifiesAdditionalPrivilegeOptions
+    enum class SpecifiesAdditionalPrivilegeOptions : int8_t
     {
         Default = 0x0,
         DisableMaxPrivilege = DISABLE_MAX_PRIVILEGE,
@@ -83,7 +83,7 @@ namespace System
                            IntegrityEnabled),
     };
 
-    enum class SpecifiesAdditionalPrivilegeOptions
+    enum class SpecifiesAdditionalPrivilegeOptions : int8_t
     {
         Default = 0x0,
         DisableMaxPrivilege = 0x1,
