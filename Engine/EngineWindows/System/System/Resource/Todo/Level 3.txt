@@ -1,6 +1,6 @@
 TODO Level 3
  
-1.0.0.7
+1.0.1.2
 
 1.（Helper）考虑是否添加不同类型枚举之间的数学运算符。 
 2.（FileManager）安卓系统屏蔽GetEnvironment函数的调用，查看是否有解决方案。
