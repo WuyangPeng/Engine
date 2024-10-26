@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/24 19:55)
+/// 版本：1.0.1.2 (2024/10/26 15:40)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_CREATE_H
 #define SYSTEM_WINDOWS_WINDOWS_CREATE_H

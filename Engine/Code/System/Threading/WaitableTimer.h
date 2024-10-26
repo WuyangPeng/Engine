@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/27 17:53)
+/// 版本：1.0.1.2 (2024/10/26 17:15)
 
 #ifndef SYSTEM_THREADING_WAITABLE_TIMER_H
 #define SYSTEM_THREADING_WAITABLE_TIMER_H

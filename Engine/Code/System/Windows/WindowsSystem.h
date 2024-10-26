@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/24 19:57)
+/// 版本：1.0.1.2 (2024/10/26 15:37)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_SYSTEM_H
 #define SYSTEM_WINDOWS_WINDOWS_SYSTEM_H
@@ -36,11 +36,12 @@ namespace System
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemClientRect(WindowsHWnd hWnd, WindowsRect& windowsRect) noexcept;
 
-    /// 正式环境禁止调用DebugBreak、Exit和GetSystemInput。
     /// SystemCommand函数不是线程安全的。
+    int SYSTEM_DEFAULT_DECLARE SystemCommand(const char* command) noexcept;
+
+    /// 正式环境禁止调用DebugBreak、Exit和GetSystemInput。
     void SYSTEM_DEFAULT_DECLARE DebugBreak() noexcept;
     void SYSTEM_DEFAULT_DECLARE Exit() noexcept;
-    int SYSTEM_DEFAULT_DECLARE SystemCommand(const char* command) noexcept;
 
     template <typename T>
     NODISCARD T GetSystemInput()
