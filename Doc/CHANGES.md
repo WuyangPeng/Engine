@@ -10,6 +10,9 @@ Threading Core Render Engine 1.0.2.0
 	完成功能：
 	
 	（工程）
-	+ 工程整理。@
+	+ RiseOfHistory工程整理。@
+	+ RiseOfHistoryTesting工程整理。@
+	+ Game工程整理。@
+	+ GameTesting工程整理。@
 	
 ----------------------------
