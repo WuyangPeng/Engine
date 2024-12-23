@@ -13,7 +13,9 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::Date::Date(const Year& year, const Month& month, const Day& day) noexcept
-    : year{ year }, month{ month }, day{ day }
+    : year{ year },
+      month{ static_cast<Month>(month) },
+      day{ static_cast<Day>(day) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

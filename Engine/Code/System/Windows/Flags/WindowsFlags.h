@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/23 16:26)
+/// 版本：1.0.1.2 (2024/10/26 16:20)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_FLAGS_H
 #define SYSTEM_WINDOWS_WINDOWS_FLAGS_H
@@ -94,7 +94,6 @@ namespace System
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32
-
 }
 
 #endif  // SYSTEM_WINDOWS_WINDOWS_FLAGS_H

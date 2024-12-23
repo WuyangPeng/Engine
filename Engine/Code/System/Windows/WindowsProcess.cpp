@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/26 13:38)
+/// 版本：1.0.1.2 (2024/10/26 15:29)
 
 #include "System/SystemExport.h"
 
@@ -143,12 +143,12 @@ int System::PostSystemQuitMessage() noexcept
 
 bool System::DefaultMessageBox(WindowsHWnd hWnd, const String& information, const String& title) noexcept
 {
-    if (constexpr MessageBoxFlagsData flagsData{ MessageBoxType::YesNo,
-                                                 MessageBoxIcon::Exclamation,
-                                                 MessageBoxDefault::Button2,
-                                                 MessageBoxMode::ApplicationModal,
-                                                 MessageBoxMisc::NoMisc };
-        MessageBoxSelection(hWnd, information.c_str(), title.c_str(), flagsData) == DialogBoxCommand::IdYes)
+    if (constexpr MessageBoxFlagsData messageBoxFlag{ MessageBoxType::YesNo,
+                                                      MessageBoxIcon::Exclamation,
+                                                      MessageBoxDefault::Button2,
+                                                      MessageBoxMode::ApplicationModal,
+                                                      MessageBoxMisc::NoMisc };
+        MessageBoxSelection(hWnd, information.c_str(), title.c_str(), messageBoxFlag) == DialogBoxCommand::IdYes)
     {
         return true;
     }

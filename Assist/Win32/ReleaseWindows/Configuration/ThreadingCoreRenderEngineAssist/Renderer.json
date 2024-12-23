@@ -8,14 +8,14 @@
   },
 
   "ClearColor": {
-    "Red": 0.0,
-    "Green": 0.0,
-    "Blue": 0.0,
+    "Red": 1.0,
+    "Green": 1.0,
+    "Blue": 1.0,
     "Alpha": 1.0
   },
 
   "WindowParameter": {
-    "WindowTitle": "Threading Core Render Engine Testing",
+    "WindowTitle": "ThreadingCoreRenderEngineAssist",
     "Width": 1024,
     "Height": 768,
     "X": 0,

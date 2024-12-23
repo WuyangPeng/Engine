@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/11 15:45)
+/// 版本：1.0.1.2 (2024/10/14 13:58)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_CONTAINER_ADAPTER_H
 #define CORE_TOOLS_MEMORY_TOOLS_CONTAINER_ADAPTER_H
@@ -17,17 +17,16 @@
 /// ContainerAdapter类是一种用于一维数据的适配器机制。
 /// 它提供了std::array和std::vector中最常见的成员函数，包括使用基于范围的迭代。
 /// 它还提供构造函数来包装来自另一个包的原始指针。
-
 namespace CoreTools
 {
     /// 容器的主要模板具有std::vector的大部分接口，但源数据是一个原始指针。
-    /// 这支持的函数可以接受std::array<T,N>类型的参数，或者对于N>0（编译时已知大小），接受ContainerAdapter<T,N>类型的自变量。
+    /// 这支持的函数可以接受std::array<T,N>类型的参数，或者对于0 < N（编译时已知大小），接受ContainerAdapter<T,N>类型的函数。
     /// 它支持可以接受std::vector<T>类型或ContainerAdapter<T>（大小仅在运行时已知）类型的参数的函数。
     template <typename T, int...>
     class ContainerAdapter;
 
     template <typename T, int N>
-    requires(N > 0)
+    requires(0 < N)
     class ContainerAdapter<T, N>
     {
     public:
@@ -46,7 +45,8 @@ namespace CoreTools
         using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
     public:
-        /// 输入是指向连续元素数组的非空指针。调用方必须确保元素数至少为N。
+        /// 输入是指向连续元素数组的非空指针。
+        /// 调用方必须确保元素数至少为N。
         /// 最后一个默认参数numElements允许在适配器操作中实现泛型，构造函数将忽略它。
         explicit ContainerAdapter(T* elements, int numElements = N);
 

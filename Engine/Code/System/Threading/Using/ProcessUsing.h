@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/27 17:44)
+/// 版本：1.0.1.2 (2024/10/26 17:11)
 
 #ifndef SYSTEM_THREADING_PROCESS_USING_H
 #define SYSTEM_THREADING_PROCESS_USING_H

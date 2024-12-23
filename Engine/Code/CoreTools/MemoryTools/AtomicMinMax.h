@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/04/11 15:44)
+/// 版本：1.0.1.2 (2024/10/14 10:52)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_ATOMIC_MIN_MAX_H
 #define CORE_TOOLS_MEMORY_TOOLS_ATOMIC_MIN_MAX_H

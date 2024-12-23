@@ -12,9 +12,12 @@
 
 #include "Network/NetworkDll.h"
 
+#include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
+
+#include <functional>
 
 NETWORK_NON_COPY_EXPORT_IMPL(SocketServiceImpl);
 

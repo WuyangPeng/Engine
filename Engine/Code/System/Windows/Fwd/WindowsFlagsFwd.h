@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/23 23:38)
+/// 版本：1.0.1.2 (2024/10/26 16:09)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_FWD_H
 #define SYSTEM_WINDOWS_WINDOWS_FWD_H
@@ -44,11 +44,11 @@ namespace System
     enum class WindowsBrushTypes : uint32_t;
 
     /// WindowsProcess
-    enum class PeekMessageOptions;
+    enum class PeekMessageOptions : int8_t;
 
     /// WindowsKeyCodes
     enum class WindowsKeyCodes;
-    enum class WindowsModifiersCodes;
+    enum class WindowsModifiersCodes : int8_t;
 }
 
 #endif  // SYSTEM_WINDOWS_WINDOWS_FWD_H

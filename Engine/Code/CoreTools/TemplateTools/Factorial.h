@@ -12,7 +12,7 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
-    namespace CoreTools
+namespace CoreTools
 {
     template <unsigned N>
     struct Factorial

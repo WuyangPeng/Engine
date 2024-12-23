@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/23 23:39)
+/// 版本：1.0.1.2 (2024/10/26 16:07)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_REGISTRY_USING_H
 #define SYSTEM_WINDOWS_WINDOWS_REGISTRY_USING_H
@@ -21,16 +21,16 @@ namespace System
     using SystemHKey = HKEY;
     using SystemRegSam = REGSAM;
 
-    static const SystemHKey gClassesRoot{ HKEY_CLASSES_ROOT };
-    static const SystemHKey gCurrentUser{ HKEY_CURRENT_USER };
-    static const SystemHKey gLocalMachine{ HKEY_LOCAL_MACHINE };
-    static const SystemHKey gUsers{ HKEY_USERS };
-    static const SystemHKey gPerformanceData{ HKEY_PERFORMANCE_DATA };
-    static const SystemHKey gPerformanceText{ HKEY_PERFORMANCE_TEXT };
-    static const SystemHKey gPerformanceNaturalLanguageSpeechText{ HKEY_PERFORMANCE_NLSTEXT };
-    static const SystemHKey gCurrentConfig{ HKEY_CURRENT_CONFIG };
-    static const SystemHKey gDynData{ HKEY_DYN_DATA };
-    static const SystemHKey gCurrentUserLocalSettings{ HKEY_CURRENT_USER_LOCAL_SETTINGS };
+    static const auto gClassesRoot = HKEY_CLASSES_ROOT;
+    static const auto gCurrentUser = HKEY_CURRENT_USER;
+    static const auto gLocalMachine = HKEY_LOCAL_MACHINE;
+    static const auto gUsers = HKEY_USERS;
+    static const auto gPerformanceData = HKEY_PERFORMANCE_DATA;
+    static const auto gPerformanceText = HKEY_PERFORMANCE_TEXT;
+    static const auto gPerformanceNaturalLanguageSpeechText = HKEY_PERFORMANCE_NLSTEXT;
+    static const auto gCurrentConfig = HKEY_CURRENT_CONFIG;
+    static const auto gDynData = HKEY_DYN_DATA;
+    static const auto gCurrentUserLocalSettings = HKEY_CURRENT_USER_LOCAL_SETTINGS;
 
     static const TChar* gArrow{ IDC_ARROW };
     static const TChar* gIbeam{ IDC_IBEAM };
