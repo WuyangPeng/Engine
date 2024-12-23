@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/27 17:44)
+/// 版本：1.0.1.2 (2024/10/26 17:08)
 
 #ifndef SYSTEM_THREADING_THREADING_FLAGS_FWD_H
 #define SYSTEM_THREADING_THREADING_FLAGS_FWD_H
@@ -15,7 +15,7 @@
 namespace System
 {
     /// ConditionVariable
-    enum class ConditionVariableLockMode;
+    enum class ConditionVariableLockMode : int8_t;
 
     /// CriticalSection
     enum class CriticalSectionInfo;
@@ -25,7 +25,7 @@ namespace System
     enum class CreateEventType;
 
     /// InitOnce
-    enum class InitOnceBeginInitialize;
+    enum class InitOnceBeginInitialize : int8_t;
 
     /// Mutex
     enum class MutexCreate;

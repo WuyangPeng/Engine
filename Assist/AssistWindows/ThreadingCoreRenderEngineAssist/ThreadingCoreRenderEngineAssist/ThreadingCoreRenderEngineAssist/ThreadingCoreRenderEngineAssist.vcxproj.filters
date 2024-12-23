@@ -22,15 +22,15 @@
     <Filter Include="Helper 头文件">
       <UniqueIdentifier>{38fca08c-eb5d-40ee-8751-0e47f39f7732}</UniqueIdentifier>
     </Filter>
+    <Filter Include="配置\ThreadingCoreRenderEngineAssist">
+      <UniqueIdentifier>{d3014e03-cb8f-42de-b752-6dec1a1933f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json">
       <Filter>配置</Filter>
     </None>
     <None Include="Configuration\Log.json">
-      <Filter>配置</Filter>
-    </None>
-    <None Include="Configuration\Renderer.json">
       <Filter>配置</Filter>
     </None>
     <None Include="Configuration\Project.json">
@@ -53,6 +53,18 @@
     </None>
     <None Include="Configuration\Testing.json">
       <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Global.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Smtp.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Database.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\ThreadingCoreRenderEngineAssist\Renderer.json">
+      <Filter>配置\ThreadingCoreRenderEngineAssist</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

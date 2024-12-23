@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/27 17:37)
+/// 版本：1.0.1.2 (2024/10/26 16:52)
 
 #ifndef SYSTEM_THREADING_PROCESS_FLAGS_H
 #define SYSTEM_THREADING_PROCESS_FLAGS_H

@@ -5,12 +5,12 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.8 (2024/03/28 11:02)
+/// 版本：1.0.1.2 (2024/10/14 16:39)
 
 #ifndef CORE_TOOLS_HELPER_HASH_COMBINE_H
 #define CORE_TOOLS_HELPER_HASH_COMBINE_H
 
-#include "UserMacro.h"
+#include "CoreTools/CoreToolsDll.h"
 
 #include <functional>
 #include <type_traits>

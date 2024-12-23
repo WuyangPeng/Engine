@@ -13,7 +13,8 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::ErrorImpl::ErrorImpl(const FunctionDescribed& functionDescribed, String message) noexcept
-    : functionDescribed{ functionDescribed }, errorMessage{ std::move(message) }
+    : functionDescribed{ static_cast<FunctionDescribed>(functionDescribed) },
+      errorMessage{ std::move(message) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

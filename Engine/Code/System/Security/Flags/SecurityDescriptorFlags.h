@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/28 10:38)
+/// 版本：1.0.1.2 (2024/10/26 17:46)
 
 #ifndef SYSTEM_SECURITY_SECURITY_DESCRIPTOR_FLAGS_H
 #define SYSTEM_SECURITY_SECURITY_DESCRIPTOR_FLAGS_H
@@ -16,7 +16,7 @@ namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    enum class InitializeSecurityDescriptorRevision
+    enum class InitializeSecurityDescriptorRevision : int8_t
     {
         Revision = SECURITY_DESCRIPTOR_REVISION,
     };
@@ -40,7 +40,7 @@ namespace System
         SelfRelative = SE_SELF_RELATIVE,
     };
 
-    enum class SecurityDescriptorRmControlReturn
+    enum class SecurityDescriptorRmControlReturn : int8_t
     {
         Success = ERROR_SUCCESS,
         InvalidData = ERROR_INVALID_DATA,
@@ -48,7 +48,7 @@ namespace System
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    enum class InitializeSecurityDescriptorRevision
+    enum class InitializeSecurityDescriptorRevision : int8_t
     {
         Revision = 1,
     };
@@ -72,7 +72,7 @@ namespace System
         SelfRelative = (0x8000),
     };
 
-    enum class SecurityDescriptorRmControlReturn
+    enum class SecurityDescriptorRmControlReturn : int8_t
     {
         Success = 0L,
         InvalidData = 13L,

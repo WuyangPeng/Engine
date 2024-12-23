@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/26 13:36)
+/// 版本：1.0.1.2 (2024/10/26 15:31)
 
 #include "System/SystemExport.h"
 
@@ -13,8 +13,6 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
-
-#include <gsl/util>
 
 int System::GetStringWidth(WindowsHWnd hWnd, const String& text)
 {
@@ -41,13 +39,14 @@ int System::GetCharacterWidth(WindowsHWnd hWnd, TChar character)
     return GetStringWidth(hWnd, String{ 1, character });
 }
 
-int System::GetFontHeight(WindowsHWnd hWnd) noexcept
+int System::GetFontHeight(WindowsHWnd hWnd)
 {
     const auto context = GetSystemDC(hWnd);
     WindowsTextMetric metric{};
-    if (GetSystemTextMetrics(context, &metric) && ReleaseSystemDC(hWnd, context))
+    if (GetSystemTextMetrics(context, &metric) &&
+        ReleaseSystemDC(hWnd, context))
     {
-        return gsl::narrow_cast<int>(metric.tmHeight);
+        return boost::numeric_cast<int>(metric.tmHeight);
     }
     else
     {

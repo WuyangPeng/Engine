@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/27 17:43)
+/// 版本：1.0.1.2 (2024/10/26 17:06)
 
 #ifndef SYSTEM_THREADING_SYNC_TOOLS_FLAGS_H
 #define SYSTEM_THREADING_SYNC_TOOLS_FLAGS_H
@@ -16,7 +16,7 @@ namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    enum class SleepReturn
+    enum class SleepReturn  
     {
         Succeed = 0,
         WaitIOCompletion = WAIT_IO_COMPLETION,
@@ -24,7 +24,7 @@ namespace System
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    enum class SleepReturn
+    enum class SleepReturn 
     {
         Succeed = 0,
         WaitIOCompletion = 0x000000C0L,

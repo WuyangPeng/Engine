@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/26 13:03)
+/// 版本：1.0.1.2 (2024/10/26 15:35)
 
 #include "System/SystemExport.h"
 
@@ -26,7 +26,8 @@ namespace System
     {
         TCharContainer name{};
 
-        if (getWindowsInformationFunction != nullptr && getWindowsInformationFunction(hWnd, name.data(), gMaxPath) == 0)
+        if (getWindowsInformationFunction != nullptr &&
+            getWindowsInformationFunction(hWnd, name.data(), gMaxPath) == 0)
         {
             result.clear();
             return false;
@@ -148,7 +149,8 @@ bool System::RemoveMenuCloseButton(WindowsHWnd hWnd) noexcept
 
     const auto menu = GetWindowSystemMenu(hWnd);
 
-    return menu != nullptr && RemoveSystemMenu(menu, SystemMenuCommand::Close, MenuItem::ByCommand);
+    return menu != nullptr &&
+           RemoveSystemMenu(menu, SystemMenuCommand::Close, MenuItem::ByCommand);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

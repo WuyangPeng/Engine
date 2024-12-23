@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/21 14:10)
+/// 版本：1.0.1.2 (2024/10/16 20:45)
 
 #ifndef THREADING_CORE_RENDER_ENGINE_ASSIST_ASSIST_H
 #define THREADING_CORE_RENDER_ENGINE_ASSIST_ASSIST_H

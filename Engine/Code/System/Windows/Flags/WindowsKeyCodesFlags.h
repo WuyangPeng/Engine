@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.6 (2024/02/23 16:26)
+/// 版本：1.0.1.2 (2024/10/26 16:18)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_CODES_FLAGS_H
 #define SYSTEM_WINDOWS_WINDOWS_CODES_FLAGS_H
@@ -242,7 +242,7 @@ namespace System
         OemClear = VK_OEM_CLEAR,
     };
 
-    enum class WindowsModifiersCodes
+    enum class WindowsModifiersCodes : int8_t
     {
         Control = MK_CONTROL,
         LeftButton = MK_LBUTTON,
@@ -479,7 +479,7 @@ namespace System
         OemClear = 0xFE,
     };
 
-    enum class WindowsModifiersCodes
+    enum class WindowsModifiersCodes : int8_t
     {
         Control = 0x0008,
         LeftButton = 0x0001,
