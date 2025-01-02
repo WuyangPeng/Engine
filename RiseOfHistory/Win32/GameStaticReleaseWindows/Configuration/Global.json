@@ -1,0 +1,8 @@
+{
+  "describe": "tcre",
+  "suffix": "suffix",
+  "publicSuffix": "tcre_suffix",
+  "domainName": "www.tcre.com",
+  "gameSuffix": "tcre_game",
+  "portShifting": 10
+}      

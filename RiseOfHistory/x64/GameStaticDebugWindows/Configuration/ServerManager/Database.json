@@ -1,0 +1,59 @@
+{
+  "GameServerDB": {
+    "Ip": "43.139.123.106",
+    "Port": 33060,
+    "Wrappers": "MysqlConnector",
+    "HostName": "tcretest",
+    "UserName": "root",
+    "Password": "TCRE",
+
+    "Pooling": true,
+    "PoolMaxSize": 10,
+    "PoolQueueTimeout": 1000,
+    "PoolMaxIdleTime": 500,
+
+    "UseDBMapping": 1,
+    "DBMapping": {
+      "DBName1": 1,
+      "DBName2": 2
+    },
+
+    "UseSSLOption": 0,
+    "SSLOption": {
+      "sslKey": "",
+      "sslCert": "",
+      "sslCA": "",
+      "sslCAPath": "",
+      "sslCipher": "",
+      "sslCRL": "",
+      "sslCRLPath": ""
+    },
+
+    "UseFlagsOption": 1,
+    "FlagsOption": {
+      "CLIENT_COMPRESS": 1,
+      "CLIENT_FOUND_ROWS": 0,
+      "CLIENT_IGNORE_SIGPIPE": 1,
+      "CLIENT_IGNORE_SPACE": 0,
+      "CLIENT_INTERACTIVE": 0,
+      "CLIENT_LOCAL_FILES": 1,
+      "CLIENT_MULTI_STATEMENTS": 0,
+      "CLIENT_NO_SCHEMA": 0
+    },
+
+    "UseStringOption": 1,
+    "StringOption": {
+      "characterSetResults": "utf8mb4"
+    },
+
+    "UseBooleanOption": 1,
+    "BooleanOption": {
+      "OPT_REPORT_DATA_TRUNCATION": 1
+    },
+
+    "UseIntOption": 1,
+    "IntOption": {
+      "OPT_READ_TIMEOUT": 10
+    }
+  }
+}

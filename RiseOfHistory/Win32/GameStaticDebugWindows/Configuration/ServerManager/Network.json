@@ -1,0 +1,29 @@
+{
+  "GameServer": {
+    "Host": "127.0.1.1",
+    "Port": 8010,
+    "Client": 0,
+    "Server": 2,
+    "Wrappers": "ACE",
+    "Connect": "UDP",
+    "Message": 1,
+    "Parser": 1,
+    "OpenSSL": 1,
+    "Send": 0,
+
+    "WrappersSub": {
+      "SendBufferSize": 1048576,
+      "ReceiveBufferSize": 1048576,
+      "Threads": 3,
+      "MultiContext": 2
+    },
+
+    "Parameter": {
+      "ServerId": 1,
+      "PlatformId": 1,
+      "CellId": 1,
+      "ServerName": "ServerManager",
+      "BufferSize": 100000
+    }
+  }
+}
