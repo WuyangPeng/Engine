@@ -325,14 +325,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ACEWin32Lib)/ACEd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MysqlConnectorWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorWin32Lib)/vld_x86.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorWin32Lib)/dbghelp.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorWin32Lib)/*.manifest" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(FreeglutWin32DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
@@ -340,10 +333,7 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)
 xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyProjectTestingConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
@@ -358,24 +348,14 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platfor
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ACEWin32Lib)/ACEd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MysqlConnectorWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorWin32Lib)/vld_x86.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorWin32Lib)/dbghelp.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorWin32Lib)/*.manifest" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(FreeglutWin32DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineInclude)/../$(Platform)/DebugWindows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyProjectTestingConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
@@ -389,21 +369,11 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platfor
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ACEWin32Lib)/ACEd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MysqlConnectorWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorWin32Lib)/vld_x86.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorWin32Lib)/dbghelp.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorWin32Lib)/*.manifest" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(FreeglutWin32DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyProjectTestingConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|Win32'">
@@ -417,24 +387,14 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platfor
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ACEWin32Lib)/ACEd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MysqlConnectorWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorWin32Lib)/vld_x86.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorWin32Lib)/dbghelp.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorWin32Lib)/*.manifest" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(FreeglutWin32DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyProjectTestingConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -452,11 +412,7 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platfor
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ACEWin32Lib)/ACE.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MysqlConnectorWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(FreeglutWin32ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
@@ -464,10 +420,7 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)
 xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyProjectTestingConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|Win32'">
@@ -485,21 +438,14 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platfor
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ACEWin32Lib)/ACE.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MysqlConnectorWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(FreeglutWin32ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineInclude)/../$(Platform)/ReleaseWindows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyProjectTestingConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
@@ -517,18 +463,11 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platfor
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ACEWin32Lib)/ACE.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MysqlConnectorWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(FreeglutWin32ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyProjectTestingConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|Win32'">
@@ -546,21 +485,14 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platfor
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ACEWin32Lib)/ACE.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MysqlConnectorWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(FreeglutWin32ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyProjectTestingConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -574,14 +506,7 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platfor
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ACEX64Lib)/ACEd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MysqlConnectorX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorX64Lib)/vld_x64.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorX64Lib)/dbghelp.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorX64Lib)/*.manifest" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(FreeglutX64DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
@@ -589,10 +514,7 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)
 xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyProjectTestingConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
@@ -606,24 +528,14 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platfor
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ACEX64Lib)/ACEd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MysqlConnectorX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorX64Lib)/vld_x64.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorX64Lib)/dbghelp.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorX64Lib)/*.manifest" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(FreeglutX64DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineInclude)/../$(Platform)/DebugWindows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyProjectTestingConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -637,21 +549,11 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platfor
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ACEX64Lib)/ACEd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MysqlConnectorX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorX64Lib)/vld_x64.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorX64Lib)/dbghelp.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorX64Lib)/*.manifest" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(FreeglutX64DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyProjectTestingConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|x64'">
@@ -665,24 +567,14 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platfor
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ACEX64Lib)/ACEd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MysqlConnectorX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorX64Lib)/vld_x64.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorX64Lib)/dbghelp.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(VisualLeakDetectorX64Lib)/*.manifest" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(FreeglutX64DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyProjectTestingConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -700,11 +592,7 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platfor
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ACEX64Lib)/ACE.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MysqlConnectorX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(FreeglutX64ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
@@ -712,10 +600,7 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)
 xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyProjectTestingConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|x64'">
@@ -733,21 +618,14 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platfor
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ACEX64Lib)/ACE.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MysqlConnectorX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(FreeglutX64ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineInclude)/../$(Platform)/ReleaseWindows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyProjectTestingConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
@@ -765,18 +643,11 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platfor
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ACEX64Lib)/ACE.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MysqlConnectorX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(FreeglutX64ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyProjectTestingConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|x64'">
@@ -794,21 +665,14 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platfor
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ACEX64Lib)/ACE.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(MysqlConnectorX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(FreeglutX64ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
 xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
-xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyProjectTestingConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

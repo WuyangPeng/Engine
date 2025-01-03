@@ -10,6 +10,7 @@ Threading Core Render Engine 1.0.2.0
 	完成功能：	
 	
 	（服务器）	
+		+  RiseOfHistory工程整理。
 		+  启动类。@
 		+  网络层。@
 		+  数据库层。@

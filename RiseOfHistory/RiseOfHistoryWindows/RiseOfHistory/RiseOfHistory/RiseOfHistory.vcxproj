@@ -325,7 +325,8 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
@@ -346,7 +347,8 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineInclude)/../$(Platform)/DebugWindows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
@@ -367,7 +369,8 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>call $(ProjectDir)/../../../../Bat/CopyProjectConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
@@ -384,7 +387,8 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -408,7 +412,8 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
@@ -433,7 +438,8 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineInclude)/../$(Platform)/ReleaseWindows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
@@ -458,7 +464,8 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>call $(ProjectDir)/../../../../Bat/CopyProjectConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
@@ -479,7 +486,8 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseWin32Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -499,7 +507,8 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
@@ -520,7 +529,8 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineInclude)/../$(Platform)/DebugWindows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
@@ -541,7 +551,8 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>call $(ProjectDir)/../../../../Bat/CopyProjectConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
@@ -558,7 +569,8 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyDebugX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -582,7 +594,8 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
@@ -607,7 +620,8 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineInclude)/../$(Platform)/ReleaseWindows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
@@ -632,7 +646,8 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>call $(ProjectDir)/../../../../Bat/CopyProjectConfiguration.bat $(ProjectDir) $(ProjectName) ../../../$(Platform)/$(Configuration)Windows/Configuration/</Command>
@@ -653,7 +668,8 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/</Command>
+      <Command>call $(ProjectDir)/../../../../Bat/CopyReleaseX64Dll.bat $(Platform) ../../../$(Platform)/$(Configuration)Windows/
+xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/Shader/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
