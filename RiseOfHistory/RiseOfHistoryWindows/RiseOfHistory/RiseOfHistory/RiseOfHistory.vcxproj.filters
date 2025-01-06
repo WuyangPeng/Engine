@@ -54,8 +54,8 @@
     <None Include="Configuration\Smtp.json">
       <Filter>配置</Filter>
     </None>
-    <None Include="Configuration\Database.json">
-      <Filter>配置</Filter>
+    <None Include="Configuration\RiseOfHistory\Database.json">
+      <Filter>配置\RiseOfHistory</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

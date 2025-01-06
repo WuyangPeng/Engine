@@ -679,12 +679,12 @@ xcopy "$(EngineInclude)/Rendering/LocalEffects/Shader/*.*" "../../../$(Platform)
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="Configuration\Database.json" />
     <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\Global.json" />
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\Project.json" />
     <None Include="Configuration\RiseOfHistory.json" />
+    <None Include="Configuration\RiseOfHistory\Database.json" />
     <None Include="Configuration\RiseOfHistory\Renderer.json" />
     <None Include="Configuration\Smtp.json" />
     <None Include="Resource\ReadMe.md" />

@@ -11,12 +11,15 @@ Threading Core Render Engine 1.0.2.0
 	
 	（服务器）	
 		+  RiseOfHistory工程整理。
+		+  RiseOfHistoryTesting工程整理。
+		+  ServerManager工程整理。
 		+  启动类。@
 		+  网络层。@
 		+  数据库层。@
 		+  Actor层。@
 			
 	（客户端）
+		+  GameClient工程整理。@
 		+  启动类。@
 		+  场景类。@
 	
