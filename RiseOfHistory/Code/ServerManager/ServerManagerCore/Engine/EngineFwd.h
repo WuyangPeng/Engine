@@ -5,9 +5,14 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.2.0 (2025/01/06 09:55)
+/// 版本：1.0.2.0 (2025/01/06 10:39)
 
 #ifndef SERVER_MANAGER_CORE_ENGINE_FWD_H
 #define SERVER_MANAGER_CORE_ENGINE_FWD_H
+
+namespace ServerManagerCore
+{
+    class Placeholder;
+}
 
 #endif  // SERVER_MANAGER_CORE_ENGINE_FWD_H

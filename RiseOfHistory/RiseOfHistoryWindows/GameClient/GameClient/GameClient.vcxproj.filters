@@ -19,7 +19,10 @@
     <Filter Include="配置">
       <UniqueIdentifier>{cf19820d-faff-4a5b-ad27-59c68960e702}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>  
+    <Filter Include="配置\GameClient">
+      <UniqueIdentifier>{3e7e2f30-c927-46ae-8cff-ea568181c5fe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">
       <Filter>资源文件</Filter>
@@ -33,7 +36,19 @@
     <None Include="Configuration\Log.json">
       <Filter>配置</Filter>
     </None>
-    <None Include="Configuration\Renderer.json">
+    <None Include="Configuration\GameClient\Database.json">
+      <Filter>配置\GameClient</Filter>
+    </None>
+    <None Include="Configuration\GameClient\Network.json">
+      <Filter>配置\GameClient</Filter>
+    </None>
+    <None Include="Configuration\GameClient\Renderer.json">
+      <Filter>配置\GameClient</Filter>
+    </None>
+    <None Include="Configuration\Global.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Smtp.json">
       <Filter>配置</Filter>
     </None>
   </ItemGroup>
@@ -61,7 +76,7 @@
     <ClCompile Include="..\..\..\Code\GameClient\GameClient\GameClientMessage.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-  </ItemGroup> 
+  </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">
       <Filter>资源文件\Todo</Filter>
