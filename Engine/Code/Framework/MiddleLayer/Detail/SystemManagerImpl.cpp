@@ -22,7 +22,7 @@ Framework::SystemManagerImpl::SystemManagerImpl(const EnvironmentDirectory& envi
       globalConfig{ boost::polymorphic_pointer_cast<GlobalConfig>(JSON_ANALYSIS_MANAGER_SINGLETON.Create(CoreTools::StringConversion::StandardConversionMultiByte(environmentDirectory.GetDirectory(UpperDirectory::Configuration)) + "Global.json",
                                                                                                          GlobalConfig::GetCurrentRttiType().GetName())) },
       smtpTransportAsynchronous{ environmentDirectory },
-      databaseManager{ CoreTools::StringConversion::StandardConversionMultiByte(environmentDirectory.GetEngineDirectory() + environmentDirectory.GetDirectory(UpperDirectory::Configuration)) + "Database.json" }
+      databaseManager{ CoreTools::StringConversion::StandardConversionMultiByte(environmentDirectory.GetExecutableConfigurationDirectory()) + "Database.json" }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }

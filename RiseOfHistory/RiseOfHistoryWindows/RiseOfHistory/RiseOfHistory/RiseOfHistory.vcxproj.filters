@@ -51,6 +51,12 @@
     <None Include="Configuration\Global.json">
       <Filter>配置</Filter>
     </None>
+    <None Include="Configuration\Smtp.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\RiseOfHistory\Database.json">
+      <Filter>配置\RiseOfHistory</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">

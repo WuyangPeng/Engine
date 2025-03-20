@@ -639,6 +639,7 @@
     <None Include="Configuration\ServerManager\Database.json" />
     <None Include="Configuration\ServerManager\Network.json" />
     <None Include="Configuration\ServerManager\Renderer.json" />
+    <None Include="Configuration\Smtp.json" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
