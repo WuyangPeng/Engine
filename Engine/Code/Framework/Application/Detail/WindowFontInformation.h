@@ -29,7 +29,7 @@ namespace Framework
 
         NODISCARD int GetStringWidth(const String& text) const override;
         NODISCARD int GetCharacterWidth(const TChar character) const override;
-        NODISCARD int GetFontHeight() const noexcept override;
+        NODISCARD int GetFontHeight() const override;
 
     private:
         WindowsHWnd hWnd;

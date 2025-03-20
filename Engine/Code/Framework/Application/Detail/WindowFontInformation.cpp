@@ -45,7 +45,7 @@ int Framework::WindowFontInformation::GetCharacterWidth(const TChar character) c
     return System::GetCharacterWidth(hWnd, character);
 }
 
-int Framework::WindowFontInformation::GetFontHeight() const noexcept
+int Framework::WindowFontInformation::GetFontHeight() const  
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 

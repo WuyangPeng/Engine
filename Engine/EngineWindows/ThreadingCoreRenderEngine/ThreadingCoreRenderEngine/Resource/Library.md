@@ -212,7 +212,7 @@ pugixml（引擎直接关联）
 miniz（引擎直接关联）
 
 1. 版本：2.2.0。
-2. 官方网站：https://github.com/richgel999/miniz。
+2. 官方网站：https://github.com/richgel999/miniz 。
 3. 使用releases page页的版本编译静态库，名为miniz。
 
 ----------------------------
