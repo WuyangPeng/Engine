@@ -1,12 +1,12 @@
 @ingroup group_Documentation
 
-Threading Core Render Engine 1.0.3.0
+Threading Core Render Engine 1.0.2.0
 
 ----------------------------
 更新日志
 
 ----------------------------
-1.0.3.0（2025/03/20——2025/04/30）
+1.0.2.0（2025/03/20——2025/04/30）
 
 	完成功能：
 	
