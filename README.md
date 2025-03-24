@@ -46,8 +46,8 @@ It can be used for activities such as:
 
 ### linux平台 
 
-- 将Libs文件复制到/data/github/下。
+- 将Libs文件复制到/data/coding/Libs下。
 	
-- 执行cd /data/github/Libs/Bat。
+- 执行cd /data/coding/Libs/Bat。
 	
-- 执行sh create_lib。如果出现依赖库错误，根据Engine\EngineWindows\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine\Resource下的Library.md进行修正。
+- 执行sh create_lib.sh。如果出现依赖库错误，根据Engine\EngineWindows\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine\Resource下的Library.md进行修正。
