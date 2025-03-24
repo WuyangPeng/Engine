@@ -9,11 +9,11 @@ set(CMAKE_CXX_STANDARD 20)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
-	include_directories(/data/github/Libs/boost/)
-	include_directories(/data/github/Libs/GSL/include/)
-	include_directories(/data/github/Libs/STLSoft/include/)
-	include_directories(/data/github/Libs/miniz/)
-	include_directories(/data/github/Libs/pugixml/src/) 
+	include_directories(/data/coding/Libs/boost/)
+	include_directories(/data/coding/Libs/GSL/include/)
+	include_directories(/data/coding/Libs/STLSoft/include/)
+	include_directories(/data/coding/Libs/miniz/)
+	include_directories(/data/coding/Libs/pugixml/src/) 
 
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
