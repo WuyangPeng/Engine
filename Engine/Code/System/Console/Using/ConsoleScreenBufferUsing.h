@@ -41,6 +41,7 @@ namespace System
         ConsoleCoord dwMaximumWindowSize;
     };
     using ConsoleScreenBufferInfoPtr = ConsoleScreenBufferInfo*;
+    using ConsoleColorRef = uint32_t;
 
     struct ConsoleScreenBufferInfoEx
     {
