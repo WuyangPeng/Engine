@@ -51,3 +51,7 @@ It can be used for activities such as:
 - 执行cd /data/coding/Libs/Bat。
 	
 - 执行sh create_lib.sh。如果出现依赖库错误，根据Engine\EngineWindows\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine\Resource下的Library.md进行修正。
+
+- 执行cd /data/coding/Engine/Bat。
+
+- 执行sh compile.sh。
