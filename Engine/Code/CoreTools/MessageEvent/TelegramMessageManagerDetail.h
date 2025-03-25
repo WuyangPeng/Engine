@@ -167,7 +167,7 @@ void CoreTools::TelegramMessageManager<EventType>::DisposeEvent(int64_t entityId
 {
     const auto entity = ENTITY_MANAGER_SINGLETON.GetEntity(entityId);
 
-    if (auto eventEntity = boost::polymorphic_pointer_downcast<EventEntity>(entity);
+    if (auto eventEntity = boost::polymorphic_pointer_downcast<EventEntityType>(entity);
         !eventEntity->EventFunction(telegram))
     {
         LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("EventFunction Ê§°Ü"));

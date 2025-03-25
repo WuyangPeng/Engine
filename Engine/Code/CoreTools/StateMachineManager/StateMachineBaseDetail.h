@@ -66,7 +66,7 @@ typename CoreTools::StateMachineBase<EntityType, EventType>::StateSharedPtr Core
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26473)
 
-    return std::const_pointer_cast<State>(static_cast<const ClassType*>(this)->GetPossiblePreviousState());
+    return std::const_pointer_cast<StateType>(static_cast<const ClassType*>(this)->GetPossiblePreviousState());
 
 #include SYSTEM_WARNING_POP
 }
@@ -99,7 +99,7 @@ typename CoreTools::StateMachineBase<EntityType, EventType>::ConstStateSharedPtr
 }
 
 template <typename EntityType, typename EventType>
-bool CoreTools::StateMachineBase<EntityType, EventType>::IsInState(const State& state) const
+bool CoreTools::StateMachineBase<EntityType, EventType>::IsInState(const StateType& state) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -110,7 +110,7 @@ bool CoreTools::StateMachineBase<EntityType, EventType>::IsInState(const State& 
 }
 
 template <typename EntityType, typename EventType>
-bool CoreTools::StateMachineBase<EntityType, EventType>::HandleMessage(const Telegram& msg)
+bool CoreTools::StateMachineBase<EntityType, EventType>::HandleMessage(const TelegramType& msg)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

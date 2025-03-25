@@ -55,8 +55,8 @@ namespace CoreTools
         using EventContainer = std::set<TelegramType, TelegramLessType>;
         using RegisterContainer = std::set<int64_t>;
         using EventRegisterContainer = std::map<EventType, RegisterContainer>;
-        using EventEntity = EventEntity<EventType>;
-        using EventEntityPtr = std::shared_ptr<EventEntity>;
+        using EventEntityType = EventEntity<EventType>;
+        using EventEntityPtr = std::shared_ptr<EventEntityType>;
 
     private:
         void DisposeEvent(const TelegramType& telegram);
