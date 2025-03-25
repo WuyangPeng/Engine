@@ -15,6 +15,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	include_directories(/data/coding/Libs/miniz/)
 	include_directories(/data/coding/Libs/pugixml/src/) 
 	include_directories(/data/coding/Libs/ACE/ACE_wrappers/)
+	include_directories(/data/coding/Libs/protobuf/src/)
 
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
