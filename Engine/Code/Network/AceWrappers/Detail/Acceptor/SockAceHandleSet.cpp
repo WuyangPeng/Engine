@@ -33,12 +33,20 @@ int64_t Network::SockAceHandleSet::GetMaxSet() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    #include SYSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26490)
+    #ifdef TCRE_USE_GCC
+
+    return aceHandleSet.max_set();
+
+    #else  // !TCRE_USE_GCC
+
+        #include SYSTEM_WARNING_PUSH
+        #include SYSTEM_WARNING_DISABLE(26490)
 
     return reinterpret_cast<int64_t>(aceHandleSet.max_set());
 
-    #include SYSTEM_WARNING_POP
+        #include SYSTEM_WARNING_POP
+
+    #endif  // TCRE_USE_GCC
 }
 
 Network::SockFdSet* Network::SockAceHandleSet::GetFdSet()
