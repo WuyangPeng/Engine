@@ -24,11 +24,11 @@ namespace CoreTools
         using ClassType = StateEntity<Subclass, EventType>;
         using ParentType = EventEntity<EventType>;
 
-        using StateMachineBase = StateMachineBase<Subclass, EventType>;
-        using State = State<Subclass>;
-        using StateSharedPtr = std::shared_ptr<State>;
-        using ConstStateSharedPtr = std::shared_ptr<const State>;
-        using Telegram = Telegram<EventType>;
+        using StateMachineBaseType = StateMachineBase<Subclass, EventType>;
+        using StateType = State<Subclass>;
+        using StateSharedPtr = std::shared_ptr<StateType>;
+        using ConstStateSharedPtr = std::shared_ptr<const StateType>;
+        using TelegramType = Telegram<EventType>;
 
     public:
         explicit StateEntity(const StateSharedPtr& currentState);
@@ -36,7 +36,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD bool EventFunction(const Telegram& telegram) override;
+        NODISCARD bool EventFunction(const TelegramType& telegram) override;
 
         void Update(int64_t timeInterval);
 
@@ -48,7 +48,7 @@ namespace CoreTools
         void DoRegister() override;
 
     private:
-        StateMachineBase stateMachineBase;
+        StateMachineBaseType stateMachineBase;
     };
 }
 

@@ -55,7 +55,7 @@ void CoreTools::StateEntity<Subclass, EventType>::DoRegister()
 }
 
 template <typename Subclass, typename EventType>
-bool CoreTools::StateEntity<Subclass, EventType>::EventFunction(const Telegram& telegram)
+bool CoreTools::StateEntity<Subclass, EventType>::EventFunction(const TelegramType& telegram)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
