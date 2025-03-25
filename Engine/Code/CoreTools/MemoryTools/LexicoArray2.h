@@ -62,11 +62,11 @@ namespace CoreTools
     public:
         using ClassType = LexicoArray2<false, Iter>;
 
-        using SpanIterator = SpanIterator<Iter>;
-        using Real = typename SpanIterator::ValueType;
+        using SpanIteratorType = SpanIterator<Iter>;
+        using Real = typename SpanIteratorType::ValueType;
 
     public:
-        LexicoArray2(int numRows, int numColumns, const SpanIterator& matrix) noexcept;
+        LexicoArray2(int numRows, int numColumns, const SpanIteratorType& matrix) noexcept;
         LexicoArray2(int numRows, int numColumns, const Iter& begin, const Iter& end) noexcept;
 
         CLASS_INVARIANT_DECLARE;
@@ -84,7 +84,7 @@ namespace CoreTools
     private:
         int numRows;
         int numColumns;
-        SpanIterator matrix;
+        SpanIteratorType matrix;
     };
 
     /// 数组维度在编译时是已知的。
@@ -94,11 +94,11 @@ namespace CoreTools
     public:
         using ClassType = LexicoArray2<true, Iter, NumRows, NumColumns>;
 
-        using SpanIterator = SpanIterator<Iter>;
-        using Real = typename SpanIterator::ValueType;
+        using SpanIteratorType = SpanIterator<Iter>;
+        using Real = typename SpanIteratorType::ValueType;
 
     public:
-        explicit LexicoArray2(const SpanIterator& matrix) noexcept;
+        explicit LexicoArray2(const SpanIteratorType& matrix) noexcept;
         LexicoArray2(const Iter& begin, const Iter& end) noexcept;
 
         CLASS_INVARIANT_DECLARE;
@@ -114,7 +114,7 @@ namespace CoreTools
         void FillZero();
 
     private:
-        SpanIterator matrix;
+        SpanIteratorType matrix;
     };
 
     template <typename Iter, int NumRows, int NumColumns>
@@ -123,11 +123,11 @@ namespace CoreTools
     public:
         using ClassType = LexicoArray2<false, Iter, NumRows, NumColumns>;
 
-        using SpanIterator = SpanIterator<Iter>;
-        using Real = typename SpanIterator::ValueType;
+        using SpanIteratorType = SpanIterator<Iter>;
+        using Real = typename SpanIteratorType::ValueType;
 
     public:
-        explicit LexicoArray2(const SpanIterator& matrix) noexcept;
+        explicit LexicoArray2(const SpanIteratorType& matrix) noexcept;
         LexicoArray2(const Iter& begin, const Iter& end) noexcept;
 
         CLASS_INVARIANT_DECLARE;
@@ -143,7 +143,7 @@ namespace CoreTools
         void FillZero();
 
     private:
-        SpanIterator matrix;
+        SpanIteratorType matrix;
     };
 }
 
