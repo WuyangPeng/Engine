@@ -10,10 +10,6 @@
 #ifndef SYSTEM_HELPER_PRAGMA_WARNING_ACE_H
 #define SYSTEM_HELPER_PRAGMA_WARNING_ACE_H
 
-#if !defined(ACE_HAS_NONSTATIC_OBJECT_MANAGER)
-    #define ACE_HAS_NONSTATIC_OBJECT_MANAGER
-#endif  // ACE_HAS_NONSTATIC_OBJECT_MANAGER
-
 #ifdef NETWORK_USE_ACE
 
     #include "System/Helper/PragmaWarning.h"
@@ -73,6 +69,19 @@
     #include <ace/SOCK_Acceptor.h>
     #include <ace/SOCK_Connector.h>
     #include <ace/SOCK_Stream.h>
+
+    #ifdef TCRE_USE_GCC
+
+class ACE_Main_Base
+{
+public:
+    ACE_Main_Base();
+    virtual ~ACE_Main_Base();
+    int run(int, char*[]);
+    virtual int run_i(int, char*[]) = 0;
+};
+
+    #endif  // TCRE_USE_GCC
 
     #include SYSTEM_WARNING_POP
 
