@@ -145,12 +145,20 @@ bool Network::AceSockStream::CloseHandle()
 
     if (aceSockStream.close() == 0)
     {
-    #include SYSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26490)
+    #ifdef TCRE_USE_GCC
+
+        aceSockStream.set_handle(static_cast<ACEHandle>(System::invalidSocket));
+
+    #else  // !TCRE_USE_GCC
+
+        #include SYSTEM_WARNING_PUSH
+        #include SYSTEM_WARNING_DISABLE(26490)
 
         aceSockStream.set_handle(reinterpret_cast<ACEHandle>(System::invalidSocket));
 
-    #include SYSTEM_WARNING_POP
+        #include SYSTEM_WARNING_POP
+
+    #endif  // TCRE_USE_GCC
 
         return true;
     }
