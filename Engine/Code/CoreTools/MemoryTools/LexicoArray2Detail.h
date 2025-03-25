@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename Iter>
-CoreTools::LexicoArray2<true, Iter>::LexicoArray2(int numRows, int numColumns, const SpanIterator& matrix) noexcept
+CoreTools::LexicoArray2<true, Iter>::LexicoArray2(int numRows, int numColumns, const SpanIteratorType& matrix) noexcept
     : numRows{ numRows },
       numColumns{ numColumns },
       matrix{ matrix }

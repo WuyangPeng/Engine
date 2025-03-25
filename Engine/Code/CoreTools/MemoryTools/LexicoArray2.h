@@ -31,11 +31,11 @@ namespace CoreTools
     public:
         using ClassType = LexicoArray2<true, Iter>;
 
-        using SpanIterator = SpanIterator<Iter>;
-        using Real = typename SpanIterator::ValueType;
+        using SpanIteratorType = SpanIterator<Iter>;
+        using Real = typename SpanIteratorType::ValueType;
 
     public:
-        LexicoArray2(int numRows, int numColumns, const SpanIterator& matrix) noexcept;
+        LexicoArray2(int numRows, int numColumns, const SpanIteratorType& matrix) noexcept;
         LexicoArray2(int numRows, int numColumns, const Iter& begin, const Iter& end) noexcept;
 
         CLASS_INVARIANT_DECLARE;
@@ -53,7 +53,7 @@ namespace CoreTools
     private:
         int numRows;
         int numColumns;
-        SpanIterator matrix;
+        SpanIteratorType matrix;
     };
 
     template <typename Iter>

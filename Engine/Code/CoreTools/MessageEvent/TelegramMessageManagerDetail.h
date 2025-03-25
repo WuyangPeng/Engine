@@ -66,7 +66,7 @@ bool CoreTools::TelegramMessageManager<EventType>::UnRegister(EventType eventTyp
 }
 
 template <typename EventType>
-void CoreTools::TelegramMessageManager<EventType>::CallEvent(const Telegram& telegram)
+void CoreTools::TelegramMessageManager<EventType>::CallEvent(const TelegramType& telegram)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -74,7 +74,7 @@ void CoreTools::TelegramMessageManager<EventType>::CallEvent(const Telegram& tel
 }
 
 template <typename EventType>
-void CoreTools::TelegramMessageManager<EventType>::CallEventImmediately(int64_t currentTime, const Telegram& telegram)
+void CoreTools::TelegramMessageManager<EventType>::CallEventImmediately(int64_t currentTime, const TelegramType& telegram)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -124,7 +124,7 @@ void CoreTools::TelegramMessageManager<EventType>::DispatchDelayEvent(int64_t cu
 }
 
 template <typename EventType>
-void CoreTools::TelegramMessageManager<EventType>::DisposeEvent(const Telegram& telegram)
+void CoreTools::TelegramMessageManager<EventType>::DisposeEvent(const TelegramType& telegram)
 {
     for (auto receiver = telegram.GetReceiver();
          auto id : receiver)
@@ -142,7 +142,7 @@ void CoreTools::TelegramMessageManager<EventType>::DisposeEvent(const Telegram& 
 }
 
 template <typename EventType>
-void CoreTools::TelegramMessageManager<EventType>::DisposeAllEvent(const Telegram& telegram)
+void CoreTools::TelegramMessageManager<EventType>::DisposeAllEvent(const TelegramType& telegram)
 {
     auto registerContainerClone = registerContainer;
     const auto& container = eventRegisterContainer[telegram.GetMessageType()];
@@ -163,7 +163,7 @@ void CoreTools::TelegramMessageManager<EventType>::DisposeAllEvent(const Telegra
 }
 
 template <typename EventType>
-void CoreTools::TelegramMessageManager<EventType>::DisposeEvent(int64_t entityId, const Telegram& telegram)
+void CoreTools::TelegramMessageManager<EventType>::DisposeEvent(int64_t entityId, const TelegramType& telegram)
 {
     const auto entity = ENTITY_MANAGER_SINGLETON.GetEntity(entityId);
 

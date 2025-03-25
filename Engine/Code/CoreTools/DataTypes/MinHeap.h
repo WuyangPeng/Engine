@@ -127,7 +127,7 @@ namespace CoreTools
         /// 最小堆节点的值必须通过此函数调用进行修改。副作用是将二进制树恢复为最小堆。
         /// 输入'index' 应该是通过调用"index = Insert(handle, oldWeight)"返回的键。
         /// 输入'weight'是要与该键（和句柄）关联的新值。
-        NODISCARD void Update(int index, const ValueType& weight);
+        void Update(int index, const ValueType& weight);
 
         NODISCARD MinHeapRecordType GetRecord(int index) const;
 

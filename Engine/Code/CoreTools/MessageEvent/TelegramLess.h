@@ -22,17 +22,17 @@ namespace CoreTools
     public:
         using ClassType = TelegramLess<EventType>;
 
-        using Telegram = Telegram<EventType>;
+        using TelegramType = Telegram<EventType>;
 
     public:
         explicit TelegramLess(int64_t difference) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD bool operator()(const Telegram& lhs, const Telegram& rhs) const;
+        NODISCARD bool operator()(const TelegramType& lhs, const TelegramType& rhs) const;
 
     private:
-        NODISCARD static bool DoNotCompareTime(const Telegram& lhs, const Telegram& rhs);
+        NODISCARD static bool DoNotCompareTime(const TelegramType& lhs, const TelegramType& rhs);
 
     private:
         int64_t difference;

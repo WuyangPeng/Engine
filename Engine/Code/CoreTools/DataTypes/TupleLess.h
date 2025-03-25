@@ -21,14 +21,14 @@ namespace CoreTools
     {
     public:
         using ClassType = TupleLess<Dimension, Type>;
-        using Tuple = Tuple<Dimension, Type>;
+        using TupleType = Tuple<Dimension, Type>;
 
     public:
         explicit TupleLess(int index) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD bool operator()(const Tuple& lhs, const Tuple& rhs) const;
+        NODISCARD bool operator()(const TupleType& lhs, const TupleType& rhs) const;
 
     private:
         int index;
