@@ -24,7 +24,13 @@ CoreTools::ThreadImpl::ThreadImpl(void* function, void* userData, int processorN
       userData{ userData },
       processorNumber{ processorNumber },
       stackSize{ stackSize },
-      thread{ System::CreateSystemThread(stackSize, static_cast<System::ThreadStartRoutine>(function), userData, &threadId) }
+
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26471)
+
+      thread{ System::CreateSystemThread(stackSize, reinterpret_cast<System::ThreadStartRoutine>(function), userData, &threadId) }
+
+#include SYSTEM_WARNING_POP
 {
     if (thread == nullptr)
     {
