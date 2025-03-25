@@ -12,7 +12,7 @@
 
 #include "Network/NetworkDll.h"
 
-#include "Network/ACEWrappers/Using/AceUsing.h"
+#include "Network/ACEWrappers/Using/ACEUsing.h"
 
 #include <string>
 
