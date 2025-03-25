@@ -60,7 +60,7 @@
 ///
 ///    while (minHeap.GetNumElements() >= 2)
 ///    {
-///        MinHeapRecord minHeapRecord = minHeap.Remove();
+///        MinHeapRecordType minHeapRecord = minHeap.Remove();
 ///        <根据应用程序的需要使用'vertex'>;
 ///
 ///        Vertex vertex = minHeapRecord.GetHandle();
@@ -84,8 +84,8 @@ namespace CoreTools
     public:
         using ClassType = MinHeap<KeyType, ValueType>;
 
-        using MinHeapRecord = MinHeapRecord<KeyType, ValueType>;
-        using MinHeapRecordContainer = std::vector<MinHeapRecord>;
+        using MinHeapRecordType = MinHeapRecord<KeyType, ValueType>;
+        using MinHeapRecordContainer = std::vector<MinHeapRecordType>;
 
     public:
         explicit MinHeap(int maxElements);
@@ -108,7 +108,7 @@ namespace CoreTools
         /// 函数返回的是MinHeapRecord。
         /// 如果最小堆不为空，则MinHeapRecord中的'index'有效， 'weight'对应于最小堆的根，'handle'是用户为相应应用程序对象提供的标识符。
         /// 如果最小堆为空，则抛出异常。
-        NODISCARD MinHeapRecord GetMinimum() const;
+        NODISCARD MinHeapRecordType GetMinimum() const;
 
         /// 将（handle、weight）插入最小堆中。函数返回为'index'。如果在插入之前最小堆未满，则'index'是有效的，并且（handle，weight）存储在相应的节点中。
         /// 如果在插入之前最小堆已满，则抛出异常，并且不修改最小堆。插入成功后，'index'可以稍后在调用Update时使用。
@@ -122,14 +122,14 @@ namespace CoreTools
         /// 如果最小堆在删除之前不为空，则MinHeapRecord里的'index'是有效的，并且对应于存储的节点（handle，weight）。
         /// 如果删除前最小堆为空，则抛出异常，操作不成功，并且不修改最小堆。
         /// 这样做的目的是让调用者使用'index'，并在必要时，在任何其他堆修改调用之前清理与'index'关联的任何资源。
-        NODISCARD MinHeapRecord Remove();
+        NODISCARD MinHeapRecordType Remove();
 
         /// 最小堆节点的值必须通过此函数调用进行修改。副作用是将二进制树恢复为最小堆。
         /// 输入'index' 应该是通过调用"index = Insert(handle, oldWeight)"返回的键。
         /// 输入'weight'是要与该键（和句柄）关联的新值。
         NODISCARD void Update(int index, const ValueType& weight);
 
-        NODISCARD MinHeapRecord GetRecord(int index) const;
+        NODISCARD MinHeapRecordType GetRecord(int index) const;
 
         NODISCARD KeyType GetHandle(int index) const;
         NODISCARD ValueType GetWeight(int index) const;
