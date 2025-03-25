@@ -279,8 +279,11 @@ CoreTools::SimpleCSV::CellValue CoreTools::SimpleCSV::CellValueProxyImpl::GetVal
         }
         case ValueType::Integer:
         {
-            int64_t value = cellNode.child("v").text().as_llong();
-            return CellValue{ value };
+#ifdef TCRE_USE_GCC
+            return CellValue{ static_cast<int64_t>(cellNode.child("v").text().as_llong()) };
+#else  // !TCRE_USE_GCC
+            return CellValue{ cellNode.child("v").text().as_llong() };
+#endif  // TCRE_USE_GCC
         }
         case ValueType::String:
         {
