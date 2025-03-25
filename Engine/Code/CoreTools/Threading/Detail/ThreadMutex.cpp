@@ -29,20 +29,20 @@ void CoreTools::ThreadMutex::Initialize()
 
     /// 成功 = 0
     /// 错误 = ENOMEM
-    if (PThreadMutexAttributeInit(&mutex.attribute) != System::PThreadResult::Successful)
+    if (System::PThreadMutexAttributeInit(&mutex.attribute) != System::PThreadResult::Successful)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexattrInit初始化Mutex失败。"s))
     }
 
     /// 成功 = 0
-    if (PThreadMutexAttributeSetType(&mutex.attribute) != System::PThreadResult::Successful)
+    if (System::PThreadMutexAttributeSetType(&mutex.attribute) != System::PThreadResult::Successful)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexattrSettype初始化Mutex失败。"s))
     }
 
     /// 成功 = 0
     /// 错误 = EAGAIN, ENOMEM, EPERM, EBUSY, EINVAL
-    if (PThreadMutexInit(&mutex.attribute, &mutex.mutex) != System::PThreadResult::Successful)
+    if (System::PThreadMutexInit(&mutex.attribute, &mutex.mutex) != System::PThreadResult::Successful)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexInit初始化Mutex失败。"s))
     }
@@ -61,7 +61,7 @@ void CoreTools::ThreadMutex::Delete() noexcept
 
     /// 成功 = 0
     /// 错误 = EBUSY, EINVAL
-    if (PThreadMutexAttributeDestroy(&mutex.attribute) != System::PThreadResult::Successful)
+    if (System::PThreadMutexAttributeDestroy(&mutex.attribute) != System::PThreadResult::Successful)
     {
         LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("PthreadMutexattrDestroy销毁Mutex失败"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
