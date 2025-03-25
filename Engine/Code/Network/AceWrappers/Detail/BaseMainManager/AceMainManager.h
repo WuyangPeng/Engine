@@ -19,7 +19,9 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE AceMainManager final : public BaseMainManagerImpl, public ACE_Main_Base
+    class NETWORK_HIDDEN_DECLARE AceMainManager final :
+    public BaseMainManagerImpl,
+    public ACE_Main_Base
     {
     public:
         using ClassType = AceMainManager;
