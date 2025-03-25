@@ -13,7 +13,6 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 #include <fstream>
-#include <memory>
 
 CoreTools::OStreamImpl::OStreamImpl(bool isCout) noexcept
     : stream{}, isCout{ isCout }
