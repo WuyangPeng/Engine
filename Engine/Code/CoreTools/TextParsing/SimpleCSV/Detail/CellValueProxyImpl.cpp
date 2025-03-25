@@ -279,7 +279,8 @@ CoreTools::SimpleCSV::CellValue CoreTools::SimpleCSV::CellValueProxyImpl::GetVal
         }
         case ValueType::Integer:
         {
-            return CellValue{ cellNode.child("v").text().as_llong() };
+            auto value = cellNode.child("v").text().as_llong();
+            return CellValue{ value };
         }
         case ValueType::String:
         {
