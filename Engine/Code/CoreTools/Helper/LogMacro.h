@@ -36,7 +36,7 @@
     #define LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(appender, filterType, functionDescribed, ...) \
         const CoreTools::LogHelper SYSTEM_CONCATENATOR(logHelper, __LINE__)                             \
         {                                                                                               \
-            LogLevelManager::GetLogLevel(SYSTEM_STRINGIZE(appender)),                                   \
+            CoreTools::LogLevelManager::GetLogLevel(SYSTEM_STRINGIZE(appender)),                        \
                 LogFilterManager::GetLogFilterType(SYSTEM_STRINGIZE(filterType)),                       \
                 functionDescribed,                                                                      \
                 __VA_ARGS__                                                                             \
