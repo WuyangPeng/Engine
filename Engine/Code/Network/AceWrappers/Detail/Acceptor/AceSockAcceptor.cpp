@@ -18,7 +18,7 @@
 #include "CoreTools/MessageEvent/CallbackParameters.h"
 #include "CoreTools/MessageEvent/EventInterface.h"
 #include "Network/ACEWrappers/Detail/Address/AceSockInternetAddress.h"
-#include "Network/ACEWrappers/Using/ACEUsing.h"
+#include "Network/AceWrappers/Using/AceUsing.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/Interface/SockAddress.h"
 #include "Network/Interface/SockStream.h"

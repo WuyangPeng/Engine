@@ -14,7 +14,7 @@
 
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "Network/ACEWrappers/Using/AceUsing.h"
+#include "Network/AceWrappers/Using/AceUsing.h"
 #include "Network/Interface/NetworkInternalFwd.h"
 
 NETWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(HandleSet, HandleSetImpl);

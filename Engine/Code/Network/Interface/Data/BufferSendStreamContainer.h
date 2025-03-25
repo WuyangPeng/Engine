@@ -12,7 +12,7 @@
 
 #include "Network/NetworkDll.h"
 
-#include "Network/ACEWrappers/Using/AceUsing.h"
+#include "Network/AceWrappers/Using/AceUsing.h"
 #include "Network/Interface/NetworkInternalFwd.h"
 #include "Network/NetworkMessage/BufferSendStream.h"
 
