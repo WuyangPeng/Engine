@@ -22,8 +22,6 @@
     #include SYSTEM_WARNING_DISABLE(26455)
     #include SYSTEM_WARNING_DISABLE(26814)
 
-    #define PUGIXML_HAS_LONG_LONG
-
     #include <OpenXLSX.hpp>
 
     #include SYSTEM_WARNING_POP

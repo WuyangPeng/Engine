@@ -59,6 +59,8 @@
 #include SYSTEM_WARNING_DISABLE(26819)
 #include SYSTEM_WARNING_DISABLE(28182)
 
+#define PUGIXML_HAS_LONG_LONG
+
 #include <pugixml.hpp>
 
 #include SYSTEM_WARNING_POP
