@@ -37,7 +37,7 @@
         const CoreTools::LogHelper SYSTEM_CONCATENATOR(logHelper, __LINE__)                             \
         {                                                                                               \
             CoreTools::LogLevelManager::GetLogLevel(SYSTEM_STRINGIZE(appender)),                        \
-                LogFilterManager::GetLogFilterType(SYSTEM_STRINGIZE(filterType)),                       \
+                CoreTools::LogFilterManager::GetLogFilterType(SYSTEM_STRINGIZE(filterType)),            \
                 functionDescribed,                                                                      \
                 __VA_ARGS__                                                                             \
         }
@@ -65,8 +65,8 @@
         const CoreTools::LogHelper SYSTEM_CONCATENATOR(logHelper, __LINE__)                                            \
         {                                                                                                              \
             CoreTools::LogFileName{ fileName },                                                                        \
-                LogLevelManager::GetLogLevel(SYSTEM_STRINGIZE(appender)),                                              \
-                LogFilterManager::GetLogFilterType(SYSTEM_STRINGIZE(filterType)),                                      \
+                CoreTools::LogLevelManager::GetLogLevel(SYSTEM_STRINGIZE(appender)),                                   \
+                CoreTools::LogFilterManager::GetLogFilterType(SYSTEM_STRINGIZE(filterType)),                           \
                 functionDescribed,                                                                                     \
                 __VA_ARGS__                                                                                            \
         }
