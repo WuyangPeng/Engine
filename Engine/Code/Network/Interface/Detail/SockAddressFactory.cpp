@@ -14,7 +14,7 @@
 #include "SockAddressImpl.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "Network/ACEWrappers/Detail/Address/AceSockInternetAddress.h"
+#include "Network/AceWrappers/Detail/Address/AceSockInternetAddress.h"
 #include "Network/BoostWrappers/Detail/Address/BoostSockInternetAddress.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"

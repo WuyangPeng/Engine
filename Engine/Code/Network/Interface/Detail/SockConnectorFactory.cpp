@@ -13,7 +13,7 @@
 #include "SockConnectorFactory.h"
 #include "SockConnectorImpl.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "Network/ACEWrappers/Detail/Connector/AceSockConnector.h"
+#include "Network/AceWrappers/Detail/Connector/AceSockConnector.h"
 #include "Network/BoostWrappers/Detail/Connector/BoostSockConnector.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"

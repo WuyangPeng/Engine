@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/MessageEvent/CallbackParameters.h"
 #include "CoreTools/MessageEvent/EventInterface.h"
-#include "Network/ACEWrappers/Detail/Address/AceSockInternetAddress.h"
+#include "Network/AceWrappers/Detail/Address/AceSockInternetAddress.h"
 #include "Network/AceWrappers/Using/AceUsing.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/Interface/SockAddress.h"

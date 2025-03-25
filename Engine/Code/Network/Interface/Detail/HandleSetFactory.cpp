@@ -13,7 +13,7 @@
 #include "HandleSetImpl.h"
 #include "NullHandleSet.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "Network/ACEWrappers/Detail/Acceptor/SockAceHandleSet.h"
+#include "Network/AceWrappers/Detail/Acceptor/SockAceHandleSet.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 

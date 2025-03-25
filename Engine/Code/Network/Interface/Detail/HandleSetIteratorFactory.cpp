@@ -12,7 +12,7 @@
 #include "HandleSetIteratorFactory.h"
 #include "HandleSetIteratorImpl.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "Network/ACEWrappers/Detail/Acceptor/SockAceHandleSetIterator.h"
+#include "Network/AceWrappers/Detail/Acceptor/SockAceHandleSetIterator.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/Interface/HandleSet.h"
