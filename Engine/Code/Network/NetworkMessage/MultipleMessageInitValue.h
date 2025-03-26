@@ -40,11 +40,11 @@ namespace Network
     class MultipleMessageInitValue<1, MultipleMessageContainer<E, ByteType, Types...>>
     {
     public:
-        using MultipleMessageContainer = MultipleMessageContainer<E, ByteType, Types...>;
-        using ClassType = MultipleMessageInitValue<0, MultipleMessageContainer>;
+        using MultipleMessageContainerType = MultipleMessageContainer<E, ByteType, Types...>;
+        using ClassType = MultipleMessageInitValue<0, MultipleMessageContainerType>;
 
         template <typename T>
-        MultipleMessageInitValue(MultipleMessageContainer& container, T value);
+        MultipleMessageInitValue(MultipleMessageContainerType& container, T value);
 
         virtual ~MultipleMessageInitValue() noexcept = default;
 

@@ -35,9 +35,9 @@ bool Network::MultipleMessageInitValue<Index, Network::MultipleMessageContainer<
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
 template <typename T>
-Network::MultipleMessageInitValue<1, Network::MultipleMessageContainer<E, ByteType, Types...>>::MultipleMessageInitValue(MultipleMessageContainer& container, T value)
+Network::MultipleMessageInitValue<1, Network::MultipleMessageContainer<E, ByteType, Types...>>::MultipleMessageInitValue(MultipleMessageContainerType& container, T value)
 {
-    container.SetValue<MultipleMessageSize<MultipleMessageContainer>::value - 1>(value);
+    container.SetValue<MultipleMessageSize<MultipleMessageContainerType>::value - 1>(value);
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
