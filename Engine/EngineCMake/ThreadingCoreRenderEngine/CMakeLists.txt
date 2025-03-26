@@ -17,6 +17,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	include_directories(/data/coding/Libs/ACE/ACE_wrappers/)
 	include_directories(/data/coding/Libs/protobuf/src/)
 	include_directories(/data/coding/Libs/activemq/src/main/)
+	include_directories(/data/coding/Libs/mongo-cxx-driver/src/)
 
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
