@@ -45,7 +45,16 @@ Network::NetworkSockInternetAddress::NetworkSockInternetAddress(CoreTools::Disab
 
     internetAddress.sin_family = boost::numeric_cast<uint16_t>(System::EnumCastUnderlying(System::AddressFamilies::Internet));
     internetAddress.sin_port = System::GetHostToNetShort(0);
+
+#ifdef TCRE_USE_GCC
+
+    internetAddress.sin_addr = System::GetHostToNetLong(System::internetAddressAny);
+
+#else  // !TCRE_USE_GCC
+
     internetAddress.sin_addr.s_addr = System::GetHostToNetLong(System::internetAddressAny);
+
+#endif  // TCRE_USE_GCC
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -55,7 +64,16 @@ Network::NetworkSockInternetAddress::NetworkSockInternetAddress(int port)
 {
     internetAddress.sin_family = boost::numeric_cast<int16_t>(System::EnumCastUnderlying(System::AddressFamilies::Internet));
     internetAddress.sin_port = System::GetHostToNetShort(boost::numeric_cast<uint16_t>(port));
+
+#ifdef TCRE_USE_GCC
+
+    internetAddress.sin_addr = System::GetHostToNetLong(System::internetAddressAny);
+
+#else  // !TCRE_USE_GCC
+
     internetAddress.sin_addr.s_addr = System::GetHostToNetLong(System::internetAddressAny);
+
+#endif  // TCRE_USE_GCC
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
