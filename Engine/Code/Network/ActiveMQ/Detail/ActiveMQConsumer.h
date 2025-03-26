@@ -16,6 +16,7 @@
 #include "ActiveMQService.h"
 #include "Network/MessageOrientedMiddleware/Detail/ConsumerImpl.h"
 
+#include <condition_variable>
 #include <deque>
 #include <thread>
 
