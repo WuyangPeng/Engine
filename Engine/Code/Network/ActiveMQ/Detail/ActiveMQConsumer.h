@@ -17,6 +17,7 @@
 #include "Network/MessageOrientedMiddleware/Detail/ConsumerImpl.h"
 
 #include <deque>
+#include <thread>
 
 #ifdef NETWORK_USE_ACTIVE_MQ
 
