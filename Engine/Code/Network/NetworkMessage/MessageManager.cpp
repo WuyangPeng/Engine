@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
 
-SINGLETON_GET_PTR_DEFINE(CoreTools, EntityManager);
+SINGLETON_GET_PTR_DEFINE(Network, MessageManager);
 
 Network::MessageManager::MessageManagerUniquePtr Network::MessageManager::messageManager{};
 
