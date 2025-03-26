@@ -41,7 +41,7 @@ namespace Database
         static void Create();
         static void Destroy() noexcept;
 
-        SINGLETON_GET_PTR_DECLARE(Log)
+        SINGLETON_GET_PTR_DECLARE(DatabaseEnvironment)
 
         CLASS_INVARIANT_DECLARE;
 
