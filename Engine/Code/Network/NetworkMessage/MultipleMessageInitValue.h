@@ -26,12 +26,12 @@ namespace Network
     class MultipleMessageInitValue<Index, MultipleMessageContainer<E, ByteType, Types...>> : public MultipleMessageInitValue<Index - 1, MultipleMessageContainer<E, ByteType, Types...>>
     {
     public:
-        using MultipleMessageContainer = MultipleMessageContainer<E, ByteType, Types...>;
-        using ClassType = MultipleMessageInitValue<Index, MultipleMessageContainer>;
-        using ParentType = MultipleMessageInitValue<Index - 1, MultipleMessageContainer>;
+        using MultipleMessageContainerType = MultipleMessageContainer<E, ByteType, Types...>;
+        using ClassType = MultipleMessageInitValue<Index, MultipleMessageContainerType>;
+        using ParentType = MultipleMessageInitValue<Index - 1, MultipleMessageContainerType>;
 
         template <typename T, typename... OtherT>
-        MultipleMessageInitValue(MultipleMessageContainer& container, T value, OtherT&&... otherValues);
+        MultipleMessageInitValue(MultipleMessageContainerType& container, T value, OtherT&&... otherValues);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };
