@@ -26,23 +26,23 @@ namespace Network
     class MultipleMessageStreamingLoad<Index, MultipleMessageContainer<E, ByteType, Types...>> : public MultipleMessageStreamingLoad<Index - 1, MultipleMessageContainer<E, ByteType, Types...>>
     {
     public:
-        using MultipleMessageContainer = MultipleMessageContainer<E, ByteType, Types...>;
-        using ClassType = MultipleMessageStreamingLoad<Index, MultipleMessageContainer>;
-        using ParentType = MultipleMessageStreamingLoad<Index - 1, MultipleMessageContainer>;
+        using MultipleMessageContainerType = MultipleMessageContainer<E, ByteType, Types...>;
+        using ClassType = MultipleMessageStreamingLoad<Index, MultipleMessageContainerType>;
+        using ParentType = MultipleMessageStreamingLoad<Index - 1, MultipleMessageContainerType>;
 
         MultipleMessageStreamingLoad() noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        void Load(MultipleMessageContainer& container, MessageSource& source) const override;
+        void Load(MultipleMessageContainerType& container, MessageSource& source) const override;
     };
 
     template <typename E, MultipleMessageByteType ByteType, MultipleMessageByteType... Types>
     class MultipleMessageStreamingLoad<1, MultipleMessageContainer<E, ByteType, Types...>>
     {
     public:
-        using MultipleMessageContainer = MultipleMessageContainer<E, ByteType, Types...>;
-        using ClassType = MultipleMessageStreamingLoad<0, MultipleMessageContainer>;
+        using MultipleMessageContainerType = MultipleMessageContainer<E, ByteType, Types...>;
+        using ClassType = MultipleMessageStreamingLoad<0, MultipleMessageContainerType>;
 
         MultipleMessageStreamingLoad() noexcept;
         virtual ~MultipleMessageStreamingLoad() noexcept = default;
@@ -54,7 +54,7 @@ namespace Network
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        virtual void Load(MultipleMessageContainer& container, MessageSource& source) const;
+        virtual void Load(MultipleMessageContainerType& container, MessageSource& source) const;
     };
 }
 

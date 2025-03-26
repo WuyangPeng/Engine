@@ -36,13 +36,13 @@ bool Network::MultipleMessageStreamingLoad<Index, Network::MultipleMessageContai
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int Index, typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-void Network::MultipleMessageStreamingLoad<Index, Network::MultipleMessageContainer<E, ByteType, Types...>>::Load(MultipleMessageContainer& container, MessageSource& source) const
+void Network::MultipleMessageStreamingLoad<Index, Network::MultipleMessageContainer<E, ByteType, Types...>>::Load(MultipleMessageContainerType& container, MessageSource& source) const
 {
     NETWORK_CLASS_IS_VALID_9;
 
     ParentType::Load(container, source);
 
-    using ValueType = typename MultipleMessageCast<MultipleMessageElement<Index - 1, MultipleMessageContainer>::byteType>::ValueType;
+    using ValueType = typename MultipleMessageCast<MultipleMessageElement<Index - 1, MultipleMessageContainerType>::byteType>::ValueType;
 
     ValueType value{};
     source.Read(value);
@@ -67,11 +67,11 @@ bool Network::MultipleMessageStreamingLoad<1, Network::MultipleMessageContainer<
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-void Network::MultipleMessageStreamingLoad<1, Network::MultipleMessageContainer<E, ByteType, Types...>>::Load(MultipleMessageContainer& container, MessageSource& source) const
+void Network::MultipleMessageStreamingLoad<1, Network::MultipleMessageContainer<E, ByteType, Types...>>::Load(MultipleMessageContainerType& container, MessageSource& source) const
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    using ValueType = typename MultipleMessageCast<MultipleMessageElement<0, MultipleMessageContainer>::byteType>::ValueType;
+    using ValueType = typename MultipleMessageCast<MultipleMessageElement<0, MultipleMessageContainerType>::byteType>::ValueType;
 
     ValueType value{};
     source.Read(value);

@@ -26,23 +26,23 @@ namespace Network
     class MultipleMessageStreamingSave<Index, MultipleMessageContainer<E, ByteType, Types...>> : public MultipleMessageStreamingSave<Index - 1, MultipleMessageContainer<E, ByteType, Types...>>
     {
     public:
-        using MultipleMessageContainer = MultipleMessageContainer<E, ByteType, Types...>;
-        using ClassType = MultipleMessageStreamingSave<Index, MultipleMessageContainer>;
-        using ParentType = MultipleMessageStreamingSave<Index - 1, MultipleMessageContainer>;
+        using MultipleMessageContainerType = MultipleMessageContainer<E, ByteType, Types...>;
+        using ClassType = MultipleMessageStreamingSave<Index, MultipleMessageContainerType>;
+        using ParentType = MultipleMessageStreamingSave<Index - 1, MultipleMessageContainerType>;
 
         MultipleMessageStreamingSave() noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        void Save(const MultipleMessageContainer& container, MessageTarget& target) const override;
+        void Save(const MultipleMessageContainerType& container, MessageTarget& target) const override;
     };
 
     template <typename E, MultipleMessageByteType ByteType, MultipleMessageByteType... Types>
     class MultipleMessageStreamingSave<1, MultipleMessageContainer<E, ByteType, Types...>>
     {
     public:
-        using MultipleMessageContainer = MultipleMessageContainer<E, ByteType, Types...>;
-        using ClassType = MultipleMessageStreamingSave<0, MultipleMessageContainer>;
+        using MultipleMessageContainerType = MultipleMessageContainer<E, ByteType, Types...>;
+        using ClassType = MultipleMessageStreamingSave<0, MultipleMessageContainerType>;
 
         MultipleMessageStreamingSave() noexcept;
         virtual ~MultipleMessageStreamingSave() noexcept = default;
@@ -54,7 +54,7 @@ namespace Network
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        virtual void Save(const MultipleMessageContainer& container, MessageTarget& target) const;
+        virtual void Save(const MultipleMessageContainerType& container, MessageTarget& target) const;
     };
 }
 
