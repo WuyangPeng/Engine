@@ -24,7 +24,16 @@ Network::NetworkSockInternetAddress::NetworkSockInternetAddress(const std::strin
 {
     internetAddress.sin_family = boost::numeric_cast<uint16_t>(System::EnumCastUnderlying(System::AddressFamilies::Internet));
     internetAddress.sin_port = System::GetHostToNetShort(boost::numeric_cast<uint16_t>(port));
+
+#ifdef TCRE_USE_GCC
+
+    internetAddress.sin_addr = System::GetInternetAddress(hostName.c_str());
+
+#else  // !TCRE_USE_GCC
+
     internetAddress.sin_addr.s_addr = System::GetInternetAddress(hostName.c_str());
+
+#endif  // TCRE_USE_GCC
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
