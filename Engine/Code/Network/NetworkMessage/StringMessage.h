@@ -25,8 +25,8 @@ namespace Network
         using ClassType = StringMessage<E>;
         using ParentType = MessageInterface;
 
-        using MessageContainer = MessageContainer<E, std::string>;
-        using StringType = typename MessageContainer::MessageType;
+        using MessageContainerType = MessageContainer<E, std::string>;
+        using StringType = typename MessageContainerType::MessageType;
 
     public:
         StringMessage(MessageHeadStrategy messageHeadStrategy, int64_t messageId, const StringType& message);
@@ -40,7 +40,7 @@ namespace Network
         NODISCARD int GetSize() const noexcept;
 
     private:
-        MessageContainer message;
+        MessageContainerType message;
     };
 
     template <typename E>
