@@ -19,6 +19,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	include_directories(/data/coding/Libs/activemq/src/main/)
 	include_directories(/data/coding/Libs/mongo-cxx-driver/src/)
 	include_directories(/data/coding/Libs/mongo-cxx-driver/BuildX64/src/)
+	include_directories(/data/coding/Libs/mysql-connector-c++/include/)
 	
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
