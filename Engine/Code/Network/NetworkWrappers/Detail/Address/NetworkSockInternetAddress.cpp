@@ -27,7 +27,10 @@ Network::NetworkSockInternetAddress::NetworkSockInternetAddress(const std::strin
 
 #ifdef TCRE_USE_GCC
 
-    internetAddress.sin_addr = System::GetInternetAddress(hostName.c_str());
+    if (inet_pton(AF_INET, hostName.c_str(), &internetAddress.sin_addr) <= 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT(Invalid address / Address not supported \n))
+    }
 
 #else  // !TCRE_USE_GCC
 
@@ -48,7 +51,10 @@ Network::NetworkSockInternetAddress::NetworkSockInternetAddress(CoreTools::Disab
 
 #ifdef TCRE_USE_GCC
 
-    internetAddress.sin_addr = System::GetHostToNetLong(System::internetAddressAny);
+    if (inet_pton(AF_INET, hostName.c_str(), &internetAddress.sin_addr) <= 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT(Invalid address / Address not supported \n))
+    }
 
 #else  // !TCRE_USE_GCC
 
@@ -67,7 +73,10 @@ Network::NetworkSockInternetAddress::NetworkSockInternetAddress(int port)
 
 #ifdef TCRE_USE_GCC
 
-    internetAddress.sin_addr = System::GetHostToNetLong(System::internetAddressAny);
+    if (inet_pton(AF_INET, hostName.c_str(), &internetAddress.sin_addr) <= 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT(Invalid address / Address not supported \n))
+    }
 
 #else  // !TCRE_USE_GCC
 
