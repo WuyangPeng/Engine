@@ -82,7 +82,7 @@ namespace Mathematics
 
         // 构建m_Center，m_Axis和m_Extent从二次方程。
         // 如果输入系数不能表示一个椭圆，则抛出异常。
-        void FromCoefficients(const Ellipse2CoefficientsType& coefficients, const Real newEpsilon = Math::GetZeroTolerance());
+        void FromCoefficients(const Ellipse2CoefficientsType& coefficients, const Real newEpsilon = MathType::GetZeroTolerance());
 
         // 计算的二次函数 Q(X) = (X-K)^T * M * (X-K) - 1.
         NODISCARD Real Evaluate(const Vector2Type& point) const;
