@@ -25,9 +25,9 @@ namespace Mathematics
     public:
         using ClassType = CholeskyDecomposition<Real, N>;
 
-        using Matrix = Algebra::Matrix<N, N, Real>;
-        using Vector = Algebra::Vector<N, Real>;
-        using Math = Math<Real>;
+        using MatrixType = Algebra::Matrix<N, N, Real>;
+        using VectorType = Algebra::Vector<N, Real>;
+        using MathType = Math<Real>;
 
     public:
         CholeskyDecomposition() noexcept;
@@ -37,15 +37,15 @@ namespace Mathematics
         /// 输入时，A是对称的。
         /// 仅修改了下部三角形部分。
         /// 输出时，下三角部分为L，其中A = L * L^T
-        NODISCARD bool Factor(Matrix& a);
+        NODISCARD bool Factor(MatrixType& a);
 
         /// 求解L*Y = B，其中L是下三角形且可逆。
         /// Y的输入值是B。在输出时，Y是解。
-        NODISCARD Vector SolveLower(const Matrix& l);
+        NODISCARD VectorType SolveLower(const MatrixType& l);
 
         /// 求解L^T*X = Y，其中L是下三角（L^T是上三角）且可逆。
         /// X的输入值是Y。在输出时，X是解。
-        NODISCARD Vector SolveUpper(const Matrix& l);
+        NODISCARD VectorType SolveUpper(const MatrixType& l);
     };
 
     /// 仅在运行时才知道大小的实现。
