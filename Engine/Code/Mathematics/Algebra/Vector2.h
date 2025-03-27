@@ -44,7 +44,7 @@ namespace Mathematics
         using ClassType = Vector2<Real>;
 
         using MathType = Math<Real>;
-        using BarycentricCoordinates = BarycentricCoordinates<Real, pointSize + 1>;
+        using BarycentricCoordinatesType = BarycentricCoordinates<Real, pointSize + 1>;
         using ArrayType = std::array<Real, pointSize>;
         using ToolsType = Vector2Tools<Real>;
         using AlgebraVector2 = Algebra::Vector<2, Real>;
@@ -136,7 +136,7 @@ namespace Mathematics
         // 这里b0 + b1 + b2 = 1。
         // 当且仅当{V0，V1，V2}是线性无关组时返回值是有效的。
         // 数值上，测试 |det[V0 V1 V2]| <= epsilon。
-        NODISCARD BarycentricCoordinates GetBarycentrics(const Vector2& vector0, const Vector2& vector1, const Vector2& vector2, const Real epsilon = MathType::GetZeroTolerance()) const;
+        NODISCARD BarycentricCoordinatesType GetBarycentrics(const Vector2& vector0, const Vector2& vector1, const Vector2& vector2, const Real epsilon = MathType::GetZeroTolerance()) const;
 
         NODISCARD Vector2 GetMove(Real t, const Vector2& velocity) const;
 

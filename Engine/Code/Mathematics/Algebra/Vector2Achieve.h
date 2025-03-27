@@ -322,7 +322,7 @@ Mathematics::Vector2<Real>& Mathematics::Vector2<Real>::operator/=(Real rhs) noe
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector2<Real>::BarycentricCoordinates Mathematics::Vector2<Real>::GetBarycentrics(const Vector2& vector0, const Vector2& vector1, const Vector2& vector2, const Real epsilon) const
+typename Mathematics::Vector2<Real>::BarycentricCoordinatesType Mathematics::Vector2<Real>::GetBarycentrics(const Vector2& vector0, const Vector2& vector1, const Vector2& vector2, const Real epsilon) const
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -341,7 +341,7 @@ typename Mathematics::Vector2<Real>::BarycentricCoordinates Mathematics::Vector2
 
         bary[z] = MathType::GetValue(1) - bary[xIndex] - bary[yIndex];
 
-        return BarycentricCoordinates{ true, bary };
+        return BarycentricCoordinatesType{ true, bary };
     }
     else
     {
@@ -351,7 +351,7 @@ typename Mathematics::Vector2<Real>::BarycentricCoordinates Mathematics::Vector2
 
 #endif  // MATHEMATICS_ASSERT_ON_BARYCENTRIC2_DEGENERATE
 
-        return BarycentricCoordinates{};
+        return BarycentricCoordinatesType{};
     }
 }
 
