@@ -56,17 +56,17 @@ requires std::is_arithmetic_v<Real> bool Mathematics::BandedMatrixSolve<Real>::I
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::BandedMatrixSolve<Real>::IsSolveValid() const
 {
-    BandedMatrix upperBandedMatrix{ cholesky };
+    BandedMatrixType upperBandedMatrix{ cholesky };
     upperBandedMatrix.SetLowerBandZero();
 
-    BandedMatrix lowerBandedMatrix{ cholesky };
+    BandedMatrixType lowerBandedMatrix{ cholesky };
     lowerBandedMatrix.SetUpperBandZero();
 
     for (auto row = 0; row < input.GetSize(); ++row)
     {
         for (auto column = 0; column < input.GetSize(); ++column)
         {
-            if (!Math::Approximate(input(row, column), GetProduct(upperBandedMatrix, lowerBandedMatrix, row, column), epsilon))
+            if (!MathType::Approximate(input(row, column), GetProduct(upperBandedMatrix, lowerBandedMatrix, row, column), epsilon))
             {
                 return false;
             }
@@ -78,7 +78,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::BandedMatrixSolve<Real>::I
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::BandedMatrixSolve<Real>::GetProduct(const BandedMatrix& upperBandedMatrix, const BandedMatrix& lowerBandedMatrix, int row, int column) const
+Real Mathematics::BandedMatrixSolve<Real>::GetProduct(const BandedMatrixType& upperBandedMatrix, const BandedMatrixType& lowerBandedMatrix, int row, int column) const
 {
     Real sum{};
     for (auto index = 0; index < upperBandedMatrix.GetSize(); ++index)
@@ -282,7 +282,7 @@ void Mathematics::BandedMatrixSolve<Real>::SetIdentity()
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::BandedMatrixSolve<Real>::ToInputVariableMatrix() const
+typename Mathematics::BandedMatrixSolve<Real>::VariableMatrixType Mathematics::BandedMatrixSolve<Real>::ToInputVariableMatrix() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_6;
 
@@ -291,7 +291,7 @@ typename Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::Bande
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::BandedMatrixSolve<Real>::ToCholeskyVariableMatrix() const
+typename Mathematics::BandedMatrixSolve<Real>::VariableMatrixType Mathematics::BandedMatrixSolve<Real>::ToCholeskyVariableMatrix() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_6;
 
@@ -342,14 +342,14 @@ requires std::is_arithmetic_v<Real> bool Mathematics::BandedMatrixSolve<Real>::C
             }
 
             const auto diagonal = cholesky(index, index);
-            if (diagonal <= Math::GetValue(0))
+            if (diagonal <= MathType::GetValue(0))
             {
                 solve = BandedMatrixSolveFlags::Failure;
 
                 return false;
             }
 
-            const auto invSqrt = Math::InvSqrt(diagonal);
+            const auto invSqrt = MathType::InvSqrt(diagonal);
             for (auto i = index; i <= maxColumn; ++i)
             {
                 cholesky(i, index) *= invSqrt;
@@ -364,7 +364,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::BandedMatrixSolve<Real>::C
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::BandedMatrixSolve<Real>::VariableLengthVector Mathematics::BandedMatrixSolve<Real>::SolveSystem(const VariableLengthVector& vector)
+typename Mathematics::BandedMatrixSolve<Real>::VariableLengthVectorType Mathematics::BandedMatrixSolve<Real>::SolveSystem(const VariableLengthVectorType& vector)
 {
     MATHEMATICS_CLASS_IS_VALID_6;
     MATHEMATICS_ASSERTION_0(vector.GetSize() == GetSize(), "矩阵和向量大小不相等");
@@ -381,16 +381,16 @@ typename Mathematics::BandedMatrixSolve<Real>::VariableLengthVector Mathematics:
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::BandedMatrixSolve<Real>::VariableLengthVector Mathematics::BandedMatrixSolve<Real>::SolveLower(const VariableLengthVector& vector) const
+typename Mathematics::BandedMatrixSolve<Real>::VariableLengthVectorType Mathematics::BandedMatrixSolve<Real>::SolveLower(const VariableLengthVectorType& vector) const
 {
-    VariableLengthVector result{ vector };
+    VariableLengthVectorType result{ vector };
 
     const auto size = GetSize();
 
     for (auto row = 0; row < size; ++row)
     {
         const auto lowerRowRow = cholesky(row, row);
-        if (Math::FAbs(lowerRowRow) < epsilon)
+        if (MathType::FAbs(lowerRowRow) < epsilon)
         {
             THROW_EXCEPTION(SYSTEM_TEXT("因子分解失败在SolveLower！"s));
         }
@@ -409,16 +409,16 @@ typename Mathematics::BandedMatrixSolve<Real>::VariableLengthVector Mathematics:
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::BandedMatrixSolve<Real>::VariableLengthVector Mathematics::BandedMatrixSolve<Real>::SolveUpper(const VariableLengthVector& vector) const
+typename Mathematics::BandedMatrixSolve<Real>::VariableLengthVectorType Mathematics::BandedMatrixSolve<Real>::SolveUpper(const VariableLengthVectorType& vector) const
 {
-    VariableLengthVector result{ vector };
+    VariableLengthVectorType result{ vector };
 
     const auto size = GetSize();
 
     for (auto row = size - 1; 0 <= row; --row)
     {
         const auto upperRowRow = cholesky(row, row);
-        if (Math::FAbs(upperRowRow) < epsilon)
+        if (MathType::FAbs(upperRowRow) < epsilon)
         {
             THROW_EXCEPTION(SYSTEM_TEXT("因子分解失败在SolveUpper！"s));
         }
@@ -438,7 +438,7 @@ typename Mathematics::BandedMatrixSolve<Real>::VariableLengthVector Mathematics:
 template <typename Real>
 requires std::is_arithmetic_v<Real>
 template <bool RowMajor>
-typename Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::BandedMatrixSolve<Real>::SolveSystem(const VariableMatrix& matrix)
+typename Mathematics::BandedMatrixSolve<Real>::VariableMatrixType Mathematics::BandedMatrixSolve<Real>::SolveSystem(const VariableMatrixType& matrix)
 {
     MATHEMATICS_CLASS_IS_VALID_6;
     MATHEMATICS_ASSERTION_0(matrix.GetColumnsNumber() == GetSize() && matrix.GetRowsNumber() == GetSize(), "矩阵大小不相等");
@@ -456,7 +456,7 @@ typename Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::Bande
 template <typename Real>
 requires std::is_arithmetic_v<Real>
 template <bool RowMajor>
-typename Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::BandedMatrixSolve<Real>::SolveLower(const VariableMatrix& matrix) const
+typename Mathematics::BandedMatrixSolve<Real>::VariableMatrixType Mathematics::BandedMatrixSolve<Real>::SolveLower(const VariableMatrixType& matrix) const
 {
     const auto size = GetSize();
     std::vector<Real> container{ matrix.GetContainer() };
@@ -465,7 +465,7 @@ typename Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::Bande
     for (auto row = 0; row < size; ++row)
     {
         const auto lowerRowRow = cholesky(row, row);
-        if (Math::FAbs(lowerRowRow) < epsilon)
+        if (MathType::FAbs(lowerRowRow) < epsilon)
         {
             THROW_EXCEPTION(SYSTEM_TEXT("因子分解失败在SolveLower！"s));
         }
@@ -479,20 +479,20 @@ typename Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::Bande
             }
         }
 
-        const auto inverse = Math::GetValue(1) / lowerRowRow;
+        const auto inverse = MathType::GetValue(1) / lowerRowRow;
         for (auto resultColumn = 0; resultColumn < matrix.GetColumnsNumber(); ++resultColumn)
         {
             data(row, resultColumn) *= inverse;
         }
     }
 
-    return VariableMatrix{ matrix.GetRowsNumber(), matrix.GetColumnsNumber(), data.template GetContainer<std::vector<Real>>() };
+    return VariableMatrixType{ matrix.GetRowsNumber(), matrix.GetColumnsNumber(), data.template GetContainer<std::vector<Real>>() };
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
 template <bool RowMajor>
-typename Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::BandedMatrixSolve<Real>::SolveUpper(const VariableMatrix& matrix) const
+typename Mathematics::BandedMatrixSolve<Real>::VariableMatrixType Mathematics::BandedMatrixSolve<Real>::SolveUpper(const VariableMatrixType& matrix) const
 {
     const auto size = GetSize();
 
@@ -502,7 +502,7 @@ typename Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::Bande
     for (auto row = GetSize() - 1; 0 <= row; --row)
     {
         const auto upperRowRow = cholesky(row, row);
-        if (Math::FAbs(upperRowRow) < epsilon)
+        if (MathType::FAbs(upperRowRow) < epsilon)
         {
             THROW_EXCEPTION(SYSTEM_TEXT("因子分解失败在SolveUpper！"s));
         }
@@ -516,14 +516,14 @@ typename Mathematics::BandedMatrixSolve<Real>::VariableMatrix Mathematics::Bande
             }
         }
 
-        const auto inverse = Math::GetValue(1) / upperRowRow;
+        const auto inverse = MathType::GetValue(1) / upperRowRow;
         for (auto resultColumn = 0; resultColumn < matrix.GetColumnsNumber(); ++resultColumn)
         {
             data(row, resultColumn) *= inverse;
         }
     }
 
-    return VariableMatrix{ matrix.GetRowsNumber(), matrix.GetColumnsNumber(), data.template GetContainer<std::vector<Real>>() };
+    return VariableMatrixType{ matrix.GetRowsNumber(), matrix.GetColumnsNumber(), data.template GetContainer<std::vector<Real>>() };
 }
 
 #endif  // MATHEMATICS_ALGEBRA_BANDED_MATRIX_SOLVE_DETAIL_H
