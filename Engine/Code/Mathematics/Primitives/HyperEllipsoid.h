@@ -73,7 +73,7 @@ namespace Mathematics
         NODISCARD AxisType GetAxis() const noexcept;
         void SetAxis(const AxisType& aAxis) noexcept;
         NODISCARD Vector GetAxis(int index) const;
-        NODISCARD void SetAxis(int index, const Vector& aAxis);
+        void SetAxis(int index, const Vector& aAxis);
 
         NODISCARD Vector GetExtent() const noexcept;
         void SetExtent(const Vector& aExtent) noexcept;

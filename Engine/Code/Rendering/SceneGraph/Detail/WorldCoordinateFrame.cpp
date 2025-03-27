@@ -69,9 +69,9 @@ bool Rendering::WorldCoordinateFrame::IsValid() const noexcept
         if (directionVector.IsNormalize(epsilon) &&
             upVector.IsNormalize(epsilon) &&
             rightVector.IsNormalize(epsilon) &&
-            MathType::FAbs(Dot(directionVector, upVector)) <= epsilon &&
-            MathType::FAbs(Dot(upVector, rightVector)) <= epsilon &&
-            MathType::FAbs(Dot(rightVector, directionVector)) <= epsilon)
+            Math::FAbs(Dot(directionVector, upVector)) <= epsilon &&
+            Math::FAbs(Dot(upVector, rightVector)) <= epsilon &&
+            Math::FAbs(Dot(rightVector, directionVector)) <= epsilon)
         {
             return true;
         }

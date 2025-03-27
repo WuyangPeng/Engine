@@ -17,6 +17,7 @@
 
 #include <numeric>
 #include <random>
+#include <ranges>
 
 template <typename Real, typename ObservationType>
 requires(std::is_arithmetic_v<Real>)
