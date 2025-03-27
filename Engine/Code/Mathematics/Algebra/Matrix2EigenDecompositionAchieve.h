@@ -17,7 +17,7 @@
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Matrix2EigenDecomposition<Real>::Matrix2EigenDecomposition(const Matrix2& rotation, const Matrix2& diagonal, Real epsilon) noexcept
+Mathematics::Matrix2EigenDecomposition<Real>::Matrix2EigenDecomposition(const Matrix2Type& rotation, const Matrix2Type& diagonal, Real epsilon) noexcept
     : rotation{ rotation }, diagonal{ diagonal }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -28,11 +28,11 @@ Mathematics::Matrix2EigenDecomposition<Real>::Matrix2EigenDecomposition(const Ma
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::Matrix2EigenDecomposition<Real>::IsValid() const noexcept
 {
-    if (Math::FAbs(rotation.template GetValue<0, 0>() - rotation.template GetValue<1, 1>()) <= epsilon &&
-        Math::FAbs(rotation.template GetValue<0, 1>() + rotation.template GetValue<1, 0>()) <= epsilon &&
-        Math::FAbs(rotation.template GetValue<0, 0>() * rotation.template GetValue<1, 1>() - rotation.template GetValue<0, 1>() * rotation.template GetValue<1, 0>() - Math::GetValue(1)) <= epsilon &&
-        Math::FAbs(diagonal.template GetValue<0, 1>() - Math::GetValue(0)) <= epsilon &&
-        Math::FAbs(diagonal.template GetValue<1, 0>() - Math::GetValue(0)) <= epsilon)
+    if (MathType::FAbs(rotation.template GetValue<0, 0>() - rotation.template GetValue<1, 1>()) <= epsilon &&
+        MathType::FAbs(rotation.template GetValue<0, 1>() + rotation.template GetValue<1, 0>()) <= epsilon &&
+        MathType::FAbs(rotation.template GetValue<0, 0>() * rotation.template GetValue<1, 1>() - rotation.template GetValue<0, 1>() * rotation.template GetValue<1, 0>() - MathType::GetValue(1)) <= epsilon &&
+        MathType::FAbs(diagonal.template GetValue<0, 1>() - MathType::GetValue(0)) <= epsilon &&
+        MathType::FAbs(diagonal.template GetValue<1, 0>() - MathType::GetValue(0)) <= epsilon)
     {
         return true;
     }
@@ -46,7 +46,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Matrix2EigenDecomposition<
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix2EigenDecomposition<Real>::Matrix2 Mathematics::Matrix2EigenDecomposition<Real>::GetRotation() const noexcept
+typename Mathematics::Matrix2EigenDecomposition<Real>::Matrix2Type Mathematics::Matrix2EigenDecomposition<Real>::GetRotation() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -55,7 +55,7 @@ typename Mathematics::Matrix2EigenDecomposition<Real>::Matrix2 Mathematics::Matr
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix2EigenDecomposition<Real>::Matrix2 Mathematics::Matrix2EigenDecomposition<Real>::GetDiagonal() const noexcept
+typename Mathematics::Matrix2EigenDecomposition<Real>::Matrix2Type Mathematics::Matrix2EigenDecomposition<Real>::GetDiagonal() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
