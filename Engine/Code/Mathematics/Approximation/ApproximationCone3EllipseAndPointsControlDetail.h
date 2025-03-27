@@ -16,12 +16,12 @@
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 Mathematics::ApproximationCone3EllipseAndPointsControl<Real>::ApproximationCone3EllipseAndPointsControl() noexcept
-    : penalty{ Math::GetValue(1) },
+    : penalty{ MathType::GetValue(1) },
       maxSubdivisions{ 8 },
       maxBisections{ 64 },
-      epsilon{ Math::GetValue(1e-08) },
-      tolerance{ Math::GetValue(1e-04) },
-      padding{ Math::GetValue(1e-03) }
+      epsilon{ MathType::GetValue(1e-08) },
+      tolerance{ MathType::GetValue(1e-04) },
+      padding{ MathType::GetValue(1e-03) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }

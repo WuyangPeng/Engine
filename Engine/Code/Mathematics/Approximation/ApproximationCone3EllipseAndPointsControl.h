@@ -23,7 +23,7 @@ namespace Mathematics
     public:
         using ClassType = ApproximationCone3EllipseAndPointsControl<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         ApproximationCone3EllipseAndPointsControl() noexcept;
@@ -54,8 +54,8 @@ namespace Mathematics
         /// Minimizer1<T>的参数
         int maxSubdivisions;
         int maxBisections = 64;
-        Real epsilon = Math::GetValue(1e-08);
-        Real tolerance = Math::GetValue(1e-04);
+        Real epsilon = MathType::GetValue(1e-08);
+        Real tolerance = MathType::GetValue(1e-04);
 
         /// 在[0 + padding, pi/2 - padding]上搜索最小值，
         /// 以避免在[0,pi/2]的端点处被最小二乘误差函数的零除。
