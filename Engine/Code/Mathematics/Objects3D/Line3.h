@@ -27,25 +27,25 @@ namespace Mathematics
         using ClassType = Line3<Real>;
 
         using MathType = Math<Real>;
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using AlgebraLine3 = Algebra::Line3<Real>;
 
     public:
         // 线表示为P+t*D，其中P是线原点，D是单位长度的方向向量，t是任意实数。
         // 用户必须确保D是单位长度。
-        Line3(const Vector3& origin, const Vector3& direction, Real epsilon = MathType::GetZeroTolerance()) noexcept;
+        Line3(const Vector3Type& origin, const Vector3Type& direction, Real epsilon = MathType::GetZeroTolerance()) noexcept;
         explicit Line3(const AlgebraLine3& line, Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetOrigin() const noexcept;
-        NODISCARD Vector3 GetDirection() const noexcept;
+        NODISCARD Vector3Type GetOrigin() const noexcept;
+        NODISCARD Vector3Type GetDirection() const noexcept;
 
-        NODISCARD Line3 GetMove(Real t, const Vector3& velocity) const;
+        NODISCARD Line3 GetMove(Real t, const Vector3Type& velocity) const;
 
     private:
-        Vector3 origin;
-        Vector3 direction;
+        Vector3Type origin;
+        Vector3Type direction;
         Real epsilon;
     };
 

@@ -31,7 +31,7 @@ Mathematics::CylinderFit3<Real>::CylinderFit3(const Points& points, const Real e
 }
 
 template <typename Real>
-Mathematics::CylinderFit3<Real>::CylinderFit3(const Points& points, const Vector3& guessCenter, const Vector3& guessAxis, const Real epsilon)
+Mathematics::CylinderFit3<Real>::CylinderFit3(const Points& points, const Vector3Type& guessCenter, const Vector3Type& guessAxis, const Real epsilon)
     : center{ guessCenter }, axis{ guessAxis }, radius{}, height{}, exactly{ MathType::maxReal }, inputsAreInitialGuess{ true }, epsilon{ epsilon }
 {
     Fit3(points);
@@ -135,7 +135,7 @@ Real Mathematics::CylinderFit3<Real>::GetExactly() const noexcept
 }
 
 template <typename Real>
-typename Mathematics::CylinderFit3<Real>::Vector3 Mathematics::CylinderFit3<Real>::GetCenter() const noexcept
+typename Mathematics::CylinderFit3<Real>::Vector3Type Mathematics::CylinderFit3<Real>::GetCenter() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -143,7 +143,7 @@ typename Mathematics::CylinderFit3<Real>::Vector3 Mathematics::CylinderFit3<Real
 }
 
 template <typename Real>
-typename Mathematics::CylinderFit3<Real>::Vector3 Mathematics::CylinderFit3<Real>::GetAxis() const noexcept
+typename Mathematics::CylinderFit3<Real>::Vector3Type Mathematics::CylinderFit3<Real>::GetAxis() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
