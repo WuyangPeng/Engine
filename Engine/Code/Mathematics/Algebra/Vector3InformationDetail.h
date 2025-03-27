@@ -27,7 +27,7 @@ Mathematics::Vector3Information<Real>::Vector3Information(const ContainerType& p
       epsilon{ epsilon },
       dimension{ -1 },
       axesAlignBoundingBox{},
-      maxRange{ Math::GetValue(0) },
+      maxRange{ MathType::GetValue(0) },
       origin{},
       directionX{},
       directionY{},
@@ -40,7 +40,7 @@ Mathematics::Vector3Information<Real>::Vector3Information(const ContainerType& p
       indexMin{},
       indexMax{}
 {
-    if (points.empty() || epsilon < Math::GetValue(0))
+    if (points.empty() || epsilon < MathType::GetValue(0))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("无效输入在Vector3Information\n"s));
     }
@@ -96,13 +96,13 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 void Mathematics::Vector3Information<Real>::ComputeAxisAlignedBoundingBox()
 {
-    Vector3 min{ Math::maxReal, Math::maxReal, Math::maxReal };
-    Vector3 max{ Math::minReal, Math::minReal, Math::minReal };
+    Vector3Type min{ MathType::maxReal, MathType::maxReal, MathType::maxReal };
+    Vector3Type max{ MathType::minReal, MathType::minReal, MathType::minReal };
 
     auto pointsIndex = 0;
     for (const auto& point : points)
     {
-        for (auto directionIndex = 0u; directionIndex < Vector3::pointSize; ++directionIndex)
+        for (auto directionIndex = 0u; directionIndex < Vector3Type::pointSize; ++directionIndex)
         {
             if (point[directionIndex] < min[directionIndex])
             {
@@ -122,7 +122,7 @@ void Mathematics::Vector3Information<Real>::ComputeAxisAlignedBoundingBox()
         ++pointsIndex;
     }
 
-    axesAlignBoundingBox = AxesAlignBoundingBox3{ min, max };
+    axesAlignBoundingBox = AxesAlignBoundingBox3Type{ min, max };
 }
 
 template <typename Real>
@@ -134,10 +134,10 @@ void Mathematics::Vector3Information<Real>::DetermineMaximumRange()
 
     maxRange = maxPoint.GetX() - minPoint.GetX();
 
-    minExtreme = indexMin.at(Vector3::xIndex);
-    maxExtreme = indexMax.at(Vector3::xIndex);
+    minExtreme = indexMin.at(Vector3Type::xIndex);
+    maxExtreme = indexMax.at(Vector3Type::xIndex);
 
-    for (auto i = Vector3::yIndex; i < Vector3::pointSize; ++i)
+    for (auto i = Vector3Type::yIndex; i < Vector3Type::pointSize; ++i)
     {
         auto range = maxPoint[i] - minPoint[i];
 
@@ -179,7 +179,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
     /// 测试向量集是否（几乎）是线段。我们需要{directionY，directionZ}来跨越directionX的正交补码。
     directionX = points.at(maxExtreme) - origin;
     directionX.Normalize(epsilon);
-    if (Math::FAbs(directionX[1]) < Math::FAbs(directionX[0]))
+    if (MathType::FAbs(directionX[1]) < MathType::FAbs(directionX[0]))
     {
         directionY[0] = -directionX[2];
         directionY[1] = Real{};
@@ -196,7 +196,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
 
     /// 计算点与直线的最大距离
     /// origin + t * directionX
-    auto maxDistance = Math::GetValue(0);
+    auto maxDistance = MathType::GetValue(0);
     perpendicularExtreme = minExtreme;
     auto index = 0;
     for (const auto& point : points)
@@ -246,7 +246,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
 
     /// 计算点与平面的最大距离
     /// origin+t0 * directionX + t1 * directionY
-    auto maxDistance = Math::GetValue(0);
+    auto maxDistance = MathType::GetValue(0);
     auto maxSign = NumericalValueSymbol::Zero;
     tetrahedronExtreme = minExtreme;
 
@@ -255,8 +255,8 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
     {
         const auto diff = point - origin;
         auto distance = Vector3Tools::DotProduct(directionZ, diff);
-        const auto sign = Math::Sign(distance);
-        distance = Math::FAbs(distance);
+        const auto sign = MathType::Sign(distance);
+        distance = MathType::FAbs(distance);
         if (maxDistance < distance)
         {
             maxDistance = distance;
