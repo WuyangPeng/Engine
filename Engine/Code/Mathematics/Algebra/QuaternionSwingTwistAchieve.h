@@ -18,7 +18,7 @@
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::QuaternionSwingTwist<Real>::QuaternionSwingTwist(const Quaternion& swing, const Quaternion& twist) noexcept
+Mathematics::QuaternionSwingTwist<Real>::QuaternionSwingTwist(const QuaternionType& swing, const QuaternionType& twist) noexcept
     : swing{ swing }, twist{ twist }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;

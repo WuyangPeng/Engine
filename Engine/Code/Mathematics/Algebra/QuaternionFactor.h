@@ -26,11 +26,11 @@ namespace Mathematics
     {
     public:
         using ClassType = QuaternionFactor<Real>;
-        using Quaternion = Quaternion<Real>;
-        using Math = Math<Real>;
+        using QuaternionType = Quaternion<Real>;
+        using MathType = Math<Real>;
 
     public:
-        QuaternionFactor(const Quaternion& quaternion, QuaternionFactorFlags flag) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        QuaternionFactor(const QuaternionType& quaternion, QuaternionFactorFlags flag) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -61,7 +61,7 @@ namespace Mathematics
         void FactorZYX() noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
     private:
-        Quaternion quaternion;
+        QuaternionType quaternion;
         Real sinX;
         Real cosX;
         Real sinY;
