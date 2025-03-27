@@ -84,7 +84,7 @@ namespace Mathematics
         void ComputeLinearSystemInputs(const DVector& pCurrent);
 
     private:
-        using CholeskyDecomposition = CholeskyDecomposition<Real>;
+        using CholeskyDecompositionType = CholeskyDecomposition<Real>;
 
     private:
         int numPDimensions;
@@ -99,7 +99,7 @@ namespace Mathematics
         JtjMatrix jtj;
         JtfVector negJtf;
 
-        CholeskyDecomposition decomposer;
+        CholeskyDecompositionType decomposer;
 
         bool useJFunction;
     };
