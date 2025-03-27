@@ -37,11 +37,11 @@ void Mathematics::EllipseFit2<Real>::Fit2()
 
     InitialGuess();
 
-    auto angle = MathType::ATan2(rotate.GetValue<0, 1>(), rotate.GetValue<0, 0>());
-    auto value0 = extent0 * MathType::FAbs(rotate.GetValue<0, 0>()) +
-                  extent1 * MathType::FAbs(rotate.GetValue<1, 0>());
-    auto value1 = extent0 * MathType::FAbs(rotate.GetValue<0, 1>()) +
-                  extent1 * MathType::FAbs(rotate.GetValue<1, 1>());
+    auto angle = MathType::ATan2(rotate.template GetValue<0, 1>(), rotate.template GetValue<0, 0>());
+    auto value0 = extent0 * MathType::FAbs(rotate.template GetValue<0, 0>()) +
+                  extent1 * MathType::FAbs(rotate.template GetValue<1, 0>());
+    auto value1 = extent0 * MathType::FAbs(rotate.template GetValue<0, 1>()) +
+                  extent1 * MathType::FAbs(rotate.template GetValue<1, 1>());
 
     Container begin{ MathType::GetRational(1, 2) * extent0,
                      MathType::GetRational(1, 2) * extent1,
