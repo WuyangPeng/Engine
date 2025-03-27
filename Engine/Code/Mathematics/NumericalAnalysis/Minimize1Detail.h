@@ -52,13 +52,13 @@ const UserDataType* Mathematics::Minimize1<Real, UserDataType>::GetUserData() co
 }
 
 template <typename Real, typename UserDataType>
-typename Mathematics::Minimize1<Real, UserDataType>::Minimize1Data Mathematics::Minimize1<Real, UserDataType>::GetMinimum(Real begin, Real end, Real initial) const
+typename Mathematics::Minimize1<Real, UserDataType>::Minimize1DataType Mathematics::Minimize1<Real, UserDataType>::GetMinimum(Real begin, Real end, Real initial) const
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
     MATHEMATICS_ASSERTION_1(begin <= initial && initial <= end, "无效的初始t值\n");
 
-    Minimize1Data minimize1Data;
+    Minimize1DataType minimize1Data;
 
     const auto beginFunction = function(begin, userData);
     minimize1Data.CompareData(begin, beginFunction);
@@ -75,7 +75,7 @@ typename Mathematics::Minimize1<Real, UserDataType>::Minimize1Data Mathematics::
 }
 
 template <typename Real, typename UserDataType>
-void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real beginFunction, Real end, Real endFunction, int level, Minimize1Data& minimize1Data) const
+void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real beginFunction, Real end, Real endFunction, int level, Minimize1DataType& minimize1Data) const
 {
     if (level-- == 0)
     {
@@ -146,7 +146,7 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real
 }
 
 template <typename Real, typename UserDataType>
-void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real beginFunction, Real middle, Real middleFunction, Real end, Real endFunction, int level, Minimize1Data& minimize1Data) const
+void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real beginFunction, Real middle, Real middleFunction, Real end, Real endFunction, int level, Minimize1DataType& minimize1Data) const
 {
     if (level-- == 0)
     {
@@ -212,7 +212,7 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real
 }
 
 template <typename Real, typename UserDataType>
-void Mathematics::Minimize1<Real, UserDataType>::CompareBracketedMinimum(Real begin, Real beginFunction, Real middle, Real middleFunction, Real end, Real endFunction, int level, Minimize1Data& minimize1Data) const
+void Mathematics::Minimize1<Real, UserDataType>::CompareBracketedMinimum(Real begin, Real beginFunction, Real middle, Real middleFunction, Real end, Real endFunction, int level, Minimize1DataType& minimize1Data) const
 {
     for (auto i = 0; i < maxBracket; ++i)
     {
