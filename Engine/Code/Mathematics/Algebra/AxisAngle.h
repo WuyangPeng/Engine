@@ -25,19 +25,19 @@ namespace Mathematics
     public:
         using ClassType = AxisAngle<Real>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
 
     public:
-        AxisAngle(Real angle, const Vector3& axis) noexcept;
+        AxisAngle(Real angle, const Vector3Type& axis) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD Real GetAngle() const noexcept;
-        NODISCARD Vector3 GetAxis() const noexcept;
+        NODISCARD Vector3Type GetAxis() const noexcept;
 
     private:
         Real angle;
-        Vector3 axis;
+        Vector3Type axis;
     };
 
     using AxisAngleF = AxisAngle<float>;

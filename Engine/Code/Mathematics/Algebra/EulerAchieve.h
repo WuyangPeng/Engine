@@ -36,12 +36,12 @@ Mathematics::Euler<Real>::Euler(EulerResult type, ExtractEulerResultOrder order,
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::Euler<Real>::IsValid() const noexcept
 {
-    if (-Math::GetPI() <= x0Angle && x0Angle <= Math::GetPI() &&
-        -Math::GetPI() <= y0Angle && y0Angle <= Math::GetPI() &&
-        -Math::GetPI() <= z0Angle && z0Angle <= Math::GetPI() &&
-        -Math::GetPI() <= x1Angle && x1Angle <= Math::GetPI() &&
-        -Math::GetPI() <= y1Angle && y1Angle <= Math::GetPI() &&
-        -Math::GetPI() <= z1Angle && z1Angle <= Math::GetPI())
+    if (-MathType::GetPI() <= x0Angle && x0Angle <= MathType::GetPI() &&
+        -MathType::GetPI() <= y0Angle && y0Angle <= MathType::GetPI() &&
+        -MathType::GetPI() <= z0Angle && z0Angle <= MathType::GetPI() &&
+        -MathType::GetPI() <= x1Angle && x1Angle <= MathType::GetPI() &&
+        -MathType::GetPI() <= y1Angle && y1Angle <= MathType::GetPI() &&
+        -MathType::GetPI() <= z1Angle && z1Angle <= MathType::GetPI())
     {
         return true;
     }

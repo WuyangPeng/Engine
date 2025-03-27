@@ -17,7 +17,7 @@
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::AxisAngle<Real>::AxisAngle(Real angle, const Vector3& axis) noexcept
+Mathematics::AxisAngle<Real>::AxisAngle(Real angle, const Vector3Type& axis) noexcept
     : angle{ angle }, axis{ axis }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -44,7 +44,7 @@ Real Mathematics::AxisAngle<Real>::GetAngle() const noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::AxisAngle<Real>::Vector3 Mathematics::AxisAngle<Real>::GetAxis() const noexcept
+typename Mathematics::AxisAngle<Real>::Vector3Type Mathematics::AxisAngle<Real>::GetAxis() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
