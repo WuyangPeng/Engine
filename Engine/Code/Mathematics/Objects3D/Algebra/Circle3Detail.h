@@ -17,15 +17,15 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 Mathematics::Algebra::Circle3<Real>::Circle3() noexcept
     : center{},
-      normal{ Math::GetValue(0), Math::GetValue(0), Math::GetValue(1) },
-      radius{ Math::GetValue(1) }
+      normal{ MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(1) },
+      radius{ MathType::GetValue(1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Algebra::Circle3<Real>::Circle3(const Vector3& inCenter, const Vector3& inNormal, Real inRadius) noexcept
+Mathematics::Algebra::Circle3<Real>::Circle3(const Vector3Type& inCenter, const Vector3Type& inNormal, Real inRadius) noexcept
     : center{ inCenter },
       normal{ inNormal },
       radius{ inRadius }
@@ -46,7 +46,7 @@ bool Mathematics::Algebra::Circle3<Real>::IsValid() const noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Algebra::Circle3<Real>::Vector3 Mathematics::Algebra::Circle3<Real>::GetCenter() const noexcept
+typename Mathematics::Algebra::Circle3<Real>::Vector3Type Mathematics::Algebra::Circle3<Real>::GetCenter() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -55,7 +55,7 @@ typename Mathematics::Algebra::Circle3<Real>::Vector3 Mathematics::Algebra::Circ
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Algebra::Circle3<Real>::Vector3 Mathematics::Algebra::Circle3<Real>::GetNormal() const noexcept
+typename Mathematics::Algebra::Circle3<Real>::Vector3Type Mathematics::Algebra::Circle3<Real>::GetNormal() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -73,7 +73,7 @@ Real Mathematics::Algebra::Circle3<Real>::GetRadius() const noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::Algebra::Circle3<Real>::SetCenter(const Vector3& aCenter) noexcept
+void Mathematics::Algebra::Circle3<Real>::SetCenter(const Vector3Type& aCenter) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -82,7 +82,7 @@ void Mathematics::Algebra::Circle3<Real>::SetCenter(const Vector3& aCenter) noex
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::Algebra::Circle3<Real>::SetNormal(const Vector3& aNormal) noexcept
+void Mathematics::Algebra::Circle3<Real>::SetNormal(const Vector3Type& aNormal) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

@@ -50,7 +50,7 @@ namespace Mathematics::Algebra
     public:
         using ClassType = Torus3<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector3 = Vector3<Real>;
         using EvaluateResult = std::vector<Vector3>;
 

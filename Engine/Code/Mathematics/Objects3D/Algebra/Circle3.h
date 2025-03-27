@@ -25,28 +25,28 @@ namespace Mathematics::Algebra
     public:
         using ClassType = Circle3<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using Math = Math<Real>;
+        using Vector3Type = Vector3<Real>;
+        using MathType = Math<Real>;
 
     public:
         /// 默认构造函数将中心设置为(0,0,0)，法线设置为(0,0,1)，半径设置为1。
         Circle3() noexcept;
 
-        Circle3(const Vector3& inCenter, const Vector3& inNormal, Real inRadius) noexcept;
+        Circle3(const Vector3Type& inCenter, const Vector3Type& inNormal, Real inRadius) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetCenter() const noexcept;
-        NODISCARD Vector3 GetNormal() const noexcept;
+        NODISCARD Vector3Type GetCenter() const noexcept;
+        NODISCARD Vector3Type GetNormal() const noexcept;
         NODISCARD Real GetRadius() const noexcept;
 
-        NODISCARD void SetCenter(const Vector3& aCenter) noexcept;
-        NODISCARD void SetNormal(const Vector3& aNormal) noexcept;
+        NODISCARD void SetCenter(const Vector3Type& aCenter) noexcept;
+        NODISCARD void SetNormal(const Vector3Type& aNormal) noexcept;
         NODISCARD void SetRadius(Real aRadius) noexcept;
 
     private:
-        Vector3 center;
-        Vector3 normal;
+        Vector3Type center;
+        Vector3Type normal;
         Real radius;
     };
 

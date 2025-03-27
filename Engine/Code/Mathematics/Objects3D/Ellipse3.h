@@ -27,8 +27,8 @@ namespace Mathematics
 
         using ClassType = Ellipse3<Real>;
 
-        using Math = Math<Real>;
-        using Vector3 = Vector3<Real>;
+        using MathType = Math<Real>;
+        using Vector3Type = Vector3<Real>;
 
     public:
         // 含椭圆的面是Dot(N,X-C) = 0 ，
@@ -39,28 +39,28 @@ namespace Mathematics
         // 在此讨论的符号均与类成员如下。
         // 成员'Center'为C，“Normal”是N，'Major'是U，'Minor'是V，
         // 'MajorLength“是a和”MinorLength'为b。
-        Ellipse3(const Vector3& center,
-                 const Vector3& normal,
-                 const Vector3& major,
-                 const Vector3& minor,
+        Ellipse3(const Vector3Type& center,
+                 const Vector3Type& normal,
+                 const Vector3Type& major,
+                 const Vector3Type& minor,
                  Real majorLength,
                  Real minorLength,
-                 const Real epsilon = Math::GetZeroTolerance()) noexcept;
+                 const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetCenter() const noexcept;
-        NODISCARD Vector3 GetNormal() const noexcept;
-        NODISCARD Vector3 GetMajor() const noexcept;
-        NODISCARD Vector3 GetMinor() const noexcept;
+        NODISCARD Vector3Type GetCenter() const noexcept;
+        NODISCARD Vector3Type GetNormal() const noexcept;
+        NODISCARD Vector3Type GetMajor() const noexcept;
+        NODISCARD Vector3Type GetMinor() const noexcept;
         NODISCARD Real GetMajorLength() const noexcept;
         NODISCARD Real GetMinorLength() const noexcept;
 
     private:
-        Vector3 center;
-        Vector3 normal;
-        Vector3 major;
-        Vector3 minor;
+        Vector3Type center;
+        Vector3Type normal;
+        Vector3Type major;
+        Vector3Type minor;
         Real majorLength;
         Real minorLength;
 

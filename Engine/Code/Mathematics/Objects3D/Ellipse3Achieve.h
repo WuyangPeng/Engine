@@ -15,10 +15,10 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::Ellipse3<Real>::Ellipse3(const Vector3& center,
-                                      const Vector3& normal,
-                                      const Vector3& major,
-                                      const Vector3& minor,
+Mathematics::Ellipse3<Real>::Ellipse3(const Vector3Type& center,
+                                      const Vector3Type& normal,
+                                      const Vector3Type& major,
+                                      const Vector3Type& minor,
                                       Real majorLength,
                                       Real minorLength,
                                       const Real epsilon) noexcept
@@ -43,8 +43,8 @@ bool Mathematics::Ellipse3<Real>::IsValid() const noexcept
         if (normal.IsNormalize(epsilon) &&
             major.IsNormalize(epsilon) &&
             minor.IsNormalize(epsilon) &&
-            Math::GetValue(0) <= majorLength &&
-            Math::GetValue(0) <= minorLength)
+            MathType::GetValue(0) <= majorLength &&
+            MathType::GetValue(0) <= minorLength)
         {
             return true;
         }

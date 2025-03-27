@@ -18,11 +18,11 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 Mathematics::Algebra::Torus3<Real>::Torus3() noexcept
     : center{},
-      direction0{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0) },
-      direction1{ Math::GetValue(0), Math::GetValue(1), Math::GetValue(0) },
-      normal{ Math::GetValue(0), Math::GetValue(0), Math::GetValue(1) },
-      radius0{ Math::GetValue(2) },
-      radius1{ Math::GetValue(1) }
+      direction0{ MathType::GetValue(1), MathType::GetValue(0), MathType::GetValue(0) },
+      direction1{ MathType::GetValue(0), MathType::GetValue(1), MathType::GetValue(0) },
+      normal{ MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(1) },
+      radius0{ MathType::GetValue(2) },
+      radius1{ MathType::GetValue(1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -109,10 +109,10 @@ void Mathematics::Algebra::Torus3<Real>::GetParameters(const Vector3& x, Real& u
     const auto dot2 = Dot(normal, delta);
 
     // r1*cos(v)
-    const auto r1Csv = Math::Sqrt(dot0 * dot0 + dot1 * dot1) - radius0;
+    const auto r1Csv = MathType::Sqrt(dot0 * dot0 + dot1 * dot1) - radius0;
 
-    u = Math::ATan2(dot1, dot0);
-    v = Math::ATan2(dot2, r1Csv);
+    u = MathType::ATan2(dot1, dot0);
+    v = MathType::ATan2(dot2, r1Csv);
 }
 
 template <typename Real>

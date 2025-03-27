@@ -34,10 +34,10 @@ namespace Mathematics::Algebra
     public:
         using ClassType = Ellipse3<Real>;
 
-        using Math = Math<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vector3 = Vector3<Real>;
-        using AxisType = std::array<Vector3, 2>;
+        using MathType = Math<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Vector3Type = Vector3<Real>;
+        using AxisType = std::array<Vector3Type, 2>;
 
     public:
         /// 默认构造函数将中心设置为(0,0,0)，
@@ -48,28 +48,28 @@ namespace Mathematics::Algebra
         /// e1设置为1。
         Ellipse3() noexcept;
 
-        Ellipse3(const Vector3& center, const Vector3& normal, const AxisType& axis, const Vector2& extent) noexcept;
+        Ellipse3(const Vector3Type& center, const Vector3Type& normal, const AxisType& axis, const Vector2Type& extent) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetCenter() const noexcept;
-        NODISCARD Vector3 GetNormal() const noexcept;
+        NODISCARD Vector3Type GetCenter() const noexcept;
+        NODISCARD Vector3Type GetNormal() const noexcept;
         NODISCARD AxisType GetAxis() const noexcept;
-        NODISCARD Vector3 GetAxis(int index) const;
-        NODISCARD Vector2 GetExtent() const noexcept;
+        NODISCARD Vector3Type GetAxis(int index) const;
+        NODISCARD Vector2Type GetExtent() const noexcept;
         NODISCARD Real GetExtent(int index) const;
 
-        NODISCARD void SetCenter(const Vector3& aCenter) noexcept;
-        NODISCARD void SetNormal(const Vector3& aNormal) noexcept;
+        NODISCARD void SetCenter(const Vector3Type& aCenter) noexcept;
+        NODISCARD void SetNormal(const Vector3Type& aNormal) noexcept;
         NODISCARD void SetAxis(const AxisType& aAxis) noexcept;
-        NODISCARD void SetExtent(const Vector2& aExtent) noexcept;
-        NODISCARD void SetAxis(int index, const Vector3& aAxis);
+        NODISCARD void SetExtent(const Vector2Type& aExtent) noexcept;
+        NODISCARD void SetAxis(int index, const Vector3Type& aAxis);
 
     private:
-        Vector3 center;
-        Vector3 normal;
+        Vector3Type center;
+        Vector3Type normal;
         AxisType axis;
-        Vector2 extent;
+        Vector2Type extent;
     };
 
     /// 与支持排序容器的比较。

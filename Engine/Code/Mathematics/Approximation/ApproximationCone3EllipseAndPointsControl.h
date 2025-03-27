@@ -39,12 +39,12 @@ namespace Mathematics
         NODISCARD Real GetTolerance() const noexcept;
         NODISCARD Real GetPadding() const noexcept;
 
-        NODISCARD void SetPenalty(Real aPenalty) noexcept;
-        NODISCARD void SetMaxSubdivisions(int aMaxSubdivisions) noexcept;
-        NODISCARD void SetMaxBisections(int aMaxBisections) noexcept;
-        NODISCARD void SetEpsilon(Real aEpsilon) noexcept;
-        NODISCARD void SetTolerance(Real aTolerance) noexcept;
-        NODISCARD void SetPadding(Real aPadding) noexcept;
+        void SetPenalty(Real aPenalty) noexcept;
+        void SetMaxSubdivisions(int aMaxSubdivisions) noexcept;
+        void SetMaxBisections(int aMaxBisections) noexcept;
+        void SetEpsilon(Real aEpsilon) noexcept;
+        void SetTolerance(Real aTolerance) noexcept;
+        void SetPadding(Real aPadding) noexcept;
 
     private:
         /// 用位于支撑圆锥体的平面下方的points[i]的罚值来更新最小二乘误差函数；
