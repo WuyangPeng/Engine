@@ -59,7 +59,7 @@ Mathematics::Matrix3<Real>::Matrix3(const ContainerType& entry, MatrixMajorFlags
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Matrix3<Real>::Matrix3(const Vector3& vector0, const Vector3& vector1, const Vector3& vector2, MatrixMajorFlags majorFlag)
+Mathematics::Matrix3<Real>::Matrix3(const Vector3Type& vector0, const Vector3Type& vector1, const Vector3Type& vector2, MatrixMajorFlags majorFlag)
     : x{}, y{}, z{}
 {
     if (majorFlag == MatrixMajorFlags::Row)
@@ -111,7 +111,7 @@ Mathematics::Matrix3<Real>::Matrix3(const Vector3ContainerType& vectors, MatrixM
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Matrix3<Real>::Matrix3(const Vector3& axis, Real angle) noexcept
+Mathematics::Matrix3<Real>::Matrix3(const Vector3Type& axis, Real angle) noexcept
     : x{}, y{}, z{}
 {
     MakeRotation(axis, angle);
@@ -131,7 +131,7 @@ Mathematics::Matrix3<Real>::Matrix3(MatrixRotationAxis axis, Real angle) noexcep
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Matrix3<Real>::Matrix3(const Vector3& vector0, const Vector3& vector1) noexcept
+Mathematics::Matrix3<Real>::Matrix3(const Vector3Type& vector0, const Vector3Type& vector1) noexcept
     : x{}, y{}, z{}
 {
     MakeTensorProduct(vector0, vector1);
@@ -166,9 +166,9 @@ void Mathematics::Matrix3<Real>::MakeIdentity() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    x = Vector3::GetUnitX();
-    y = Vector3::GetUnitY();
-    z = Vector3::GetUnitZ();
+    x = Vector3Type::GetUnitX();
+    y = Vector3Type::GetUnitY();
+    z = Vector3Type::GetUnitZ();
 }
 
 template <typename Real>
@@ -184,7 +184,7 @@ void Mathematics::Matrix3<Real>::MakeDiagonal(Real member00, Real member11, Real
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::Matrix3<Real>::MakeRotation(const Vector3& axis, Real angle) noexcept
+void Mathematics::Matrix3<Real>::MakeRotation(const Vector3Type& axis, Real angle) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -226,7 +226,7 @@ void Mathematics::Matrix3<Real>::MakeRotation(MatrixRotationAxis axis, Real angl
     {
         case MatrixRotationAxis::X:
         {
-            x = Vector3::GetUnitX();
+            x = Vector3Type::GetUnitX();
             y.SetCoordinate(MathType::GetValue(0), cosValue, -sinValue);
             z.SetCoordinate(MathType::GetValue(0), sinValue, cosValue);
 
@@ -236,7 +236,7 @@ void Mathematics::Matrix3<Real>::MakeRotation(MatrixRotationAxis axis, Real angl
         case MatrixRotationAxis::Y:
         {
             x.SetCoordinate(cosValue, MathType::GetValue(0), sinValue);
-            y = Vector3::GetUnitY();
+            y = Vector3Type::GetUnitY();
             z.SetCoordinate(-sinValue, MathType::GetValue(0), cosValue);
 
             break;
@@ -246,7 +246,7 @@ void Mathematics::Matrix3<Real>::MakeRotation(MatrixRotationAxis axis, Real angl
         {
             x.SetCoordinate(cosValue, -sinValue, MathType::GetValue(0));
             y.SetCoordinate(sinValue, cosValue, MathType::GetValue(0));
-            z = Vector3::GetUnitZ();
+            z = Vector3Type::GetUnitZ();
 
             break;
         }
@@ -260,7 +260,7 @@ void Mathematics::Matrix3<Real>::MakeRotation(MatrixRotationAxis axis, Real angl
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::Matrix3<Real>::MakeTensorProduct(const Vector3& vector0, const Vector3& vector1) noexcept
+void Mathematics::Matrix3<Real>::MakeTensorProduct(const Vector3Type& vector0, const Vector3Type& vector1) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -305,7 +305,7 @@ const Real& Mathematics::Matrix3<Real>::operator()(int row, int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
     MATHEMATICS_ASSERTION_0(xIndex <= row && row < vectorSize, "row索引错误！");
-    MATHEMATICS_ASSERTION_0(Vector3::xIndex <= column && column < Vector3::pointSize, "column索引错误！");
+    MATHEMATICS_ASSERTION_0(Vector3Type::xIndex <= column && column < Vector3Type::pointSize, "column索引错误！");
 
     return (*this)[row][column];
 }
@@ -395,7 +395,7 @@ Mathematics::Matrix3<Real>& Mathematics::Matrix3<Real>::operator/=(Real scalar) 
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Matrix3<Real>::QuadraticForm(const Vector3& lhs, const Vector3& rhs) const noexcept
+Real Mathematics::Matrix3<Real>::QuadraticForm(const Vector3Type& lhs, const Vector3Type& rhs) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -432,7 +432,7 @@ Mathematics::Matrix3<Real>& Mathematics::Matrix3<Real>::operator*=(const Matrix3
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::TimesDiagonal(const Vector3& diagonal) const noexcept
+Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::TimesDiagonal(const Vector3Type& diagonal) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -449,7 +449,7 @@ Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::TimesDiagonal(const Vecto
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::DiagonalTimes(const Vector3& diagonal) const noexcept
+Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::DiagonalTimes(const Vector3Type& diagonal) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -597,7 +597,7 @@ typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::
 
     if (MathType::GetZeroTolerance() < angle)
     {
-        Vector3 axis{ GetValue<2, 1>() - GetValue<1, 2>(),
+        Vector3Type axis{ GetValue<2, 1>() - GetValue<1, 2>(),
                       GetValue<0, 2>() - GetValue<2, 0>(),
                       GetValue<1, 0>() - GetValue<0, 1>() };
 
@@ -617,7 +617,7 @@ typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::
 
                 const auto halfInverse = MathType::GetRational(1, 2) / axisX;
 
-                axis = Vector3{ axisX, halfInverse * GetValue<0, 1>(), halfInverse * GetValue<0, 2>() };
+                axis = Vector3Type{ axisX, halfInverse * GetValue<0, 1>(), halfInverse * GetValue<0, 2>() };
             }
             else if (GetValue<0, 0>() < GetValue<1, 1>() && GetValue<2, 2>() <= GetValue<1, 1>())
             {
@@ -628,7 +628,7 @@ typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::
 
                 const auto halfInverse = MathType::GetRational(1, 2) / axisY;
 
-                axis = Vector3{ halfInverse * GetValue<0, 1>(), axisY, halfInverse * GetValue<1, 2>() };
+                axis = Vector3Type{ halfInverse * GetValue<0, 1>(), axisY, halfInverse * GetValue<1, 2>() };
             }
             else
             {
@@ -637,7 +637,7 @@ typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::
 
                 const auto halfInverse = MathType::GetRational(1, 2) / axisZ;
 
-                axis = Vector3{ halfInverse * GetValue<0, 2>(), halfInverse * GetValue<1, 2>(), axisZ };
+                axis = Vector3Type{ halfInverse * GetValue<0, 2>(), halfInverse * GetValue<1, 2>(), axisZ };
             }
         }
 
@@ -646,13 +646,13 @@ typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::
     else
     {
         // 角度为0的矩阵是单位矩阵。所有轴都可以工作，因此只需使用x轴。
-        return Matrix3Extract{ angle, Vector3::GetUnitX() };
+        return Matrix3Extract{ angle, Vector3Type::GetUnitX() };
     }
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix3<Real>::Vector3 Mathematics::Matrix3<Real>::ExtractAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
+typename Mathematics::Matrix3<Real>::Vector3Type Mathematics::Matrix3<Real>::ExtractAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -1684,7 +1684,7 @@ void Mathematics::Matrix3<Real>::Set(const ArrayType& coordinate)
     auto index = 0;
     for (auto value : coordinate)
     {
-        (*this)(index / vectorSize, index % Vector3::pointSize) = value;
+        (*this)(index / vectorSize, index % Vector3Type::pointSize) = value;
 
         ++index;
     }

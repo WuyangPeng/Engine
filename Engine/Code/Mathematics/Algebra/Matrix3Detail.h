@@ -25,7 +25,7 @@ template <int Row, int Column>
 Real Mathematics::Matrix3<Real>::GetValue() const noexcept
 {
     static_assert(0 <= Row && Row < vectorSize);
-    static_assert(0 <= Column && Column < Vector3::pointSize);
+    static_assert(0 <= Column && Column < Vector3Type::pointSize);
 
     const auto& vector = GetVector<Row>();
 
@@ -45,7 +45,7 @@ template <int Row, int Column>
 void Mathematics::Matrix3<Real>::SetValue(Real value) noexcept
 {
     static_assert(0 <= Row && Row < vectorSize);
-    static_assert(0 <= Column && Column < Vector3::pointSize);
+    static_assert(0 <= Column && Column < Vector3Type::pointSize);
 
     auto& vector = GetVector<Row>();
 
@@ -81,7 +81,7 @@ Mathematics::Vector3<Real>& Mathematics::Matrix3<Real>::GetVector() noexcept
 {
     static_assert(0 <= Row && Row < vectorSize);
 
-    return NON_CONST_MEMBER_CALL_CONST_MEMBER(Vector3&, GetVector<Row>);
+    return NON_CONST_MEMBER_CALL_CONST_MEMBER(Vector3Type&, GetVector<Row>);
 }
 
 template <typename Real>
@@ -89,14 +89,14 @@ requires std::is_arithmetic_v<Real>
 template <int Column>
 typename Mathematics::Vector3<Real>::GetCoordinateFunction Mathematics::Matrix3<Real>::GetVectorGetFunction() const noexcept
 {
-    static_assert(0 <= Column && Column < Vector3::pointSize);
+    static_assert(0 <= Column && Column < Vector3Type::pointSize);
 
-    if constexpr (Column == Vector3::xIndex)
-        return &Vector3::GetX;
-    else if constexpr (Column == Vector3::yIndex)
-        return &Vector3::GetY;
+    if constexpr (Column == Vector3Type::xIndex)
+        return &Vector3Type::GetX;
+    else if constexpr (Column == Vector3Type::yIndex)
+        return &Vector3Type::GetY;
     else
-        return &Vector3::GetZ;
+        return &Vector3Type::GetZ;
 }
 
 template <typename Real>
@@ -104,14 +104,14 @@ requires std::is_arithmetic_v<Real>
 template <int Column>
 typename Mathematics::Vector3<Real>::SetCoordinateFunction Mathematics::Matrix3<Real>::GetVectorSetFunction() const noexcept
 {
-    static_assert(0 <= Column && Column < Vector3::pointSize);
+    static_assert(0 <= Column && Column < Vector3Type::pointSize);
 
-    if constexpr (Column == Vector3::xIndex)
-        return &Vector3::SetX;
-    else if constexpr (Column == Vector3::yIndex)
-        return &Vector3::SetY;
+    if constexpr (Column == Vector3Type::xIndex)
+        return &Vector3Type::SetX;
+    else if constexpr (Column == Vector3Type::yIndex)
+        return &Vector3Type::SetY;
     else
-        return &Vector3::SetZ;
+        return &Vector3Type::SetZ;
 }
 
 template <typename Real>

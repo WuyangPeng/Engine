@@ -45,13 +45,13 @@ namespace Mathematics
     public:
         using ClassType = Matrix3<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using VectorIndex = typename Vector3::PointIndex;
-        static constexpr auto xIndex = Vector3::xIndex;
-        static constexpr auto yIndex = Vector3::yIndex;
-        static constexpr auto zIndex = Vector3::zIndex;
-        static constexpr auto vectorSize = Vector3::pointSize;
-        static constexpr auto matrixSize = vectorSize * Vector3::pointSize;
+        using Vector3Type = Vector3<Real>;
+        using VectorIndex = typename Vector3Type::PointIndex;
+        static constexpr auto xIndex = Vector3Type::xIndex;
+        static constexpr auto yIndex = Vector3Type::yIndex;
+        static constexpr auto zIndex = Vector3Type::zIndex;
+        static constexpr auto vectorSize = Vector3Type::pointSize;
+        static constexpr auto matrixSize = vectorSize * Vector3Type::pointSize;
 
         using MathType = Math<Real>;
         using EulerType = Euler<Real>;
@@ -62,7 +62,7 @@ namespace Mathematics
         using Matrix3EigenDecompositionType = Matrix3EigenDecomposition<Real>;
         using ArrayType = std::array<Real, matrixSize>;
         using ContainerType = std::vector<Real>;
-        using Vector3ContainerType = std::vector<Vector3>;
+        using Vector3ContainerType = std::vector<Vector3Type>;
 
     public:
         // 如果标志为MatrixFlagsZero，创建零矩阵，
@@ -97,7 +97,7 @@ namespace Mathematics
         // 创建基于输入矢量的矩阵。MatrixMajorFlags解释为
         // MatrixTypeFlagsRow：向量是矩阵的行
         // MatrixTypeFlagsColumn：向量是矩阵的列
-        Matrix3(const Vector3& vector0, const Vector3& vector1, const Vector3& vector2, MatrixMajorFlags majorFlag);
+        Matrix3(const Vector3Type& vector0, const Vector3Type& vector1, const Vector3Type& vector2, MatrixMajorFlags majorFlag);
         Matrix3(const Vector3ContainerType& vectors, MatrixMajorFlags majorFlag);
 
         // 创建一个对角矩阵,
@@ -111,11 +111,11 @@ namespace Mathematics
 
         // 创建一个旋转矩阵（角度为正->逆时针方向）
         // angle必须为弧度，不是角度。
-        Matrix3(const Vector3& axis, Real angle) noexcept;
+        Matrix3(const Vector3Type& axis, Real angle) noexcept;
         Matrix3(MatrixRotationAxis axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 创建一个张量积 U * V^T
-        Matrix3(const Vector3& vector0, const Vector3& vector1) noexcept;
+        Matrix3(const Vector3Type& vector0, const Vector3Type& vector1) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -123,12 +123,12 @@ namespace Mathematics
         void MakeZero() noexcept;
         void MakeIdentity() noexcept;
         void MakeDiagonal(Real member00, Real member11, Real member22) noexcept;
-        void MakeRotation(const Vector3& axis, Real angle) noexcept;
+        void MakeRotation(const Vector3Type& axis, Real angle) noexcept;
         void MakeRotation(MatrixRotationAxis axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
-        void MakeTensorProduct(const Vector3& vector0, const Vector3& vector1) noexcept;
+        void MakeTensorProduct(const Vector3Type& vector0, const Vector3Type& vector1) noexcept;
 
-        NODISCARD const Vector3& operator[](int row) const;
-        NODISCARD Vector3& operator[](int row);
+        NODISCARD const Vector3Type& operator[](int row) const;
+        NODISCARD Vector3Type& operator[](int row);
         NODISCARD const Real& operator()(int row, int column) const;
         NODISCARD Real& operator()(int row, int column);
 
@@ -145,7 +145,7 @@ namespace Mathematics
         Matrix3& operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // lhs^T * M * rhs
-        NODISCARD Real QuadraticForm(const Vector3& lhs, const Vector3& rhs) const noexcept;
+        NODISCARD Real QuadraticForm(const Vector3Type& lhs, const Vector3Type& rhs) const noexcept;
 
         // M^T
         NODISCARD Matrix3 Transpose() const noexcept;
@@ -154,8 +154,8 @@ namespace Mathematics
         Matrix3& operator*=(const Matrix3& rhs) noexcept;
 
         // 其它运算
-        NODISCARD Matrix3 TimesDiagonal(const Vector3& diagonal) const noexcept;  // M * D
-        NODISCARD Matrix3 DiagonalTimes(const Vector3& diagonal) const noexcept;  // D * M
+        NODISCARD Matrix3 TimesDiagonal(const Vector3Type& diagonal) const noexcept;  // M * D
+        NODISCARD Matrix3 DiagonalTimes(const Vector3Type& diagonal) const noexcept;  // D * M
         NODISCARD Matrix3 Inverse(const Real epsilon = MathType::GetZeroTolerance()) const;
         NODISCARD Matrix3 Adjoint() const noexcept;
         NODISCARD Real Determinant() const noexcept;
@@ -167,7 +167,7 @@ namespace Mathematics
         // Orthonormalize函数使用Gram-Schmidt正交化施加到所述旋转矩阵。
         // 角度必须为弧度，而不是度数。
         NODISCARD Real ExtractAngle() const noexcept;
-        NODISCARD Vector3 ExtractAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD Vector3Type ExtractAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD Matrix3Extract ExtractAngleAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
         void Orthonormalize();
 
@@ -345,43 +345,43 @@ namespace Mathematics
         NODISCARD Real Trace() const noexcept;
 
     private:
-        NODISCARD static constexpr Vector3 Create(MatrixInitType flag, VectorIndex vectorIndex)
+        NODISCARD static constexpr Vector3Type Create(MatrixInitType flag, VectorIndex vectorIndex)
         {
             if (flag == MatrixInitType::Zero)
             {
-                return Vector3{};
+                return Vector3Type{};
             }
             else if (vectorIndex == VectorIndex::X)
             {
-                return Vector3::GetUnitX();
+                return Vector3Type::GetUnitX();
             }
             else if (vectorIndex == VectorIndex::Y)
             {
-                return Vector3::GetUnitY();
+                return Vector3Type::GetUnitY();
             }
             else
             {
-                return Vector3::GetUnitZ();
+                return Vector3Type::GetUnitZ();
             }
         }
 
         template <int Row>
-        NODISCARD const Vector3& GetVector() const noexcept;
+        NODISCARD const Vector3Type& GetVector() const noexcept;
 
         template <int Row>
-        NODISCARD Vector3& GetVector() noexcept;
+        NODISCARD Vector3Type& GetVector() noexcept;
 
         template <int Column>
-        NODISCARD typename Vector3::GetCoordinateFunction GetVectorGetFunction() const noexcept;
+        NODISCARD typename Vector3Type::GetCoordinateFunction GetVectorGetFunction() const noexcept;
 
         template <int Column>
-        NODISCARD typename Vector3::SetCoordinateFunction GetVectorSetFunction() const noexcept;
+        NODISCARD typename Vector3Type::SetCoordinateFunction GetVectorSetFunction() const noexcept;
 
     private:
         // 存储为行主序。
-        Vector3 x;
-        Vector3 y;
-        Vector3 z;
+        Vector3Type x;
+        Vector3Type y;
+        Vector3Type z;
     };
 
     // vec^T * M
