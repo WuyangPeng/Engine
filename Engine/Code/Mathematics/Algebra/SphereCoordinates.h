@@ -31,11 +31,11 @@ namespace Mathematics
 
     public:
         constexpr SphereCoordinates() noexcept
-            : r{}, ¦È{}, ¦Õ{}
+            : r{}, theta{}, phi{}
         {
         }
 
-        SphereCoordinates(Real r, Real ¦È, Real ¦Õ);
+        SphereCoordinates(Real r, Real theta, Real phi);
 
         NODISCARD bool IsValid() const noexcept;
 
@@ -50,24 +50,24 @@ namespace Mathematics
 
         NODISCARD constexpr Real GetTheta() const noexcept
         {
-            return ¦È;
+            return theta;
         }
 
         NODISCARD constexpr Real GetPhi() const noexcept
         {
-            return ¦Õ;
+            return phi;
         }
 
         void SetR(Real radius);
 
-        void SetTheta(Real theta);
+        void SetTheta(Real aTheta);
 
-        void SetPhi(Real phi);
+        void SetPhi(Real aPhi);
 
     private:
         Real r;
-        Real ¦È;
-        Real ¦Õ;
+        Real theta;
+        Real phi;
     };
 }
 
