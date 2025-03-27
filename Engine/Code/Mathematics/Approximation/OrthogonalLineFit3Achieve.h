@@ -45,7 +45,7 @@ template <typename Real>
 Mathematics::Line3<Real> Mathematics::OrthogonalLineFit3<Real>::Calculate(const Points& points)
 {
     // 计算点的平均值。
-    Vector3 origin{};
+    Vector3Type origin{};
     for (const auto& point : points)
     {
         origin += point;
@@ -97,7 +97,7 @@ Mathematics::Line3<Real> Mathematics::OrthogonalLineFit3<Real>::Calculate(const 
     // 对于最佳拟合线的单位长度方向。
     const auto direction = eigenSystem.GetEigenvector3(2);
 
-    return Line3{ origin, direction };
+    return Line3Type{ origin, direction };
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_ORTHOGONAL_LINT_FIT3_ACHIEVE_H

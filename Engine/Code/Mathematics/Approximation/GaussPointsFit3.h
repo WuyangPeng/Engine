@@ -27,9 +27,9 @@ namespace Mathematics
     public:
         using ClassType = GaussPointsFit3<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using Box3 = Box3<Real>;
-        using PointsType = std::vector<Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using Box3Type = Box3<Real>;
+        using PointsType = std::vector<Vector3Type>;
         using MathType = Math<Real>;
 
     public:
@@ -37,13 +37,13 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Box3 GetBox3() const noexcept;
+        NODISCARD Box3Type GetBox3() const noexcept;
 
     private:
-        NODISCARD static Box3 Calculate(const PointsType& points);
+        NODISCARD static Box3Type Calculate(const PointsType& points);
 
     private:
-        Box3 box;
+        Box3Type box;
     };
 
     using GaussPointsFit3F = GaussPointsFit3<float>;

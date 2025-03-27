@@ -43,10 +43,10 @@ Mathematics::Line2<Real> Mathematics::OrthogonalLineFit2<Real>::GetLine2() const
 
 // static
 template <typename Real>
-typename Mathematics::OrthogonalLineFit2<Real>::Line2 Mathematics::OrthogonalLineFit2<Real>::Calculate(const Points& points)
+typename Mathematics::OrthogonalLineFit2<Real>::Line2Type Mathematics::OrthogonalLineFit2<Real>::Calculate(const Points& points)
 {
     // 计算点的平均值。
-    Vector2 origin{};
+    Vector2Type origin{};
     for (const auto& point : points)
     {
         origin += point;
@@ -83,7 +83,7 @@ typename Mathematics::OrthogonalLineFit2<Real>::Line2 Mathematics::OrthogonalLin
     // 对于最佳拟合线的单位长度方向。
     const auto direction = eigenSystem.GetEigenvector2(1);
 
-    return Line2{ origin, direction };
+    return Line2Type{ origin, direction };
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_ORTHOGONAL_LINT_FIT2_ACHIEVE_H

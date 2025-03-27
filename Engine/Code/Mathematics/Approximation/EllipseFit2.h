@@ -32,9 +32,9 @@ namespace Mathematics
     public:
         using ClassType = EllipseFit2<Real>;
 
-        using Vector2 = Vector2<Real>;
-        using Points = std::vector<Vector2>;
-        using Matrix2 = Matrix2<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Points = std::vector<Vector2Type>;
+        using Matrix2Type = Matrix2<Real>;
         using MathType = Math<Real>;
 
     public:
@@ -44,13 +44,13 @@ namespace Mathematics
 
         NODISCARD Real GetExactly() const noexcept;
 
-        NODISCARD Vector2 GetCenter() const noexcept;
-        NODISCARD Matrix2 GetRotate() const noexcept;
+        NODISCARD Vector2Type GetCenter() const noexcept;
+        NODISCARD Matrix2Type GetRotate() const noexcept;
         NODISCARD Real GetExtent0() const noexcept;
         NODISCARD Real GetExtent1() const noexcept;
 
         NODISCARD int GetNumPoint() const;
-        NODISCARD Vector2 GetPoint(int index) const;
+        NODISCARD Vector2Type GetPoint(int index) const;
 
     private:
         using Container = std::vector<Real>;
@@ -63,8 +63,8 @@ namespace Mathematics
 
     private:
         Points points;
-        Vector2 center;
-        Matrix2 rotate;
+        Vector2Type center;
+        Matrix2Type rotate;
         Real extent0;
         Real extent1;
         Real exactly;

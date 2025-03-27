@@ -146,7 +146,7 @@ void Mathematics::ParaboloidFit3<Real>::Calculate(const Points& points)
 
         auto result = linearSystem.Solve(matrix, rhs);
 
-        coeff = VariableLengthVector{ result };
+        coeff = VariableLengthVectorType{ result };
         isFitSuccess = true;
     }
     catch (CoreTools::Error&)

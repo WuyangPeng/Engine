@@ -41,8 +41,8 @@ void Mathematics::EllipseByArcs2<Real>::Calculate(Real begin, Real end)
     const auto numArcs = boost::numeric_cast<int>(circle.size());
 
     // 在第一象限椭圆的终点。点按逆时针顺序产生。
-    points.at(0) = Vector2{ begin, MathType::GetValue(0) };
-    points.at(numArcs) = Vector2{ MathType::GetValue(0), end };
+    points.at(0) = Vector2Type{ begin, MathType::GetValue(0) };
+    points.at(numArcs) = Vector2Type{ MathType::GetValue(0), end };
 
     // 终点的曲率，对于计算圆弧存储曲率。
     auto beginCurvature = begin / endSquare;
@@ -63,12 +63,12 @@ void Mathematics::EllipseByArcs2<Real>::Calculate(Real begin, Real end)
     }
 
     // 计算圆弧在 (a,0).
-    ScribeCircle2Circumscribe<Real> beginCircumscribe{ Vector2{ points.at(1).GetX(), -points.at(1).GetY() }, points.at(0), points.at(1) };
+    ScribeCircle2Circumscribe<Real> beginCircumscribe{ Vector2Type{ points.at(1).GetX(), -points.at(1).GetY() }, points.at(0), points.at(1) };
     circle.at(0) = beginCircumscribe.GetCircle2();
 
     // 计算圆弧在 (0,b).
     const auto last = numArcs - 1;
-    ScribeCircle2Circumscribe<Real> endCircumscribe{ Vector2{ -points.at(last).GetX(), points.at(last).GetY() }, points.at(numArcs), points.at(last) };
+    ScribeCircle2Circumscribe<Real> endCircumscribe{ Vector2Type{ -points.at(last).GetX(), points.at(last).GetY() }, points.at(numArcs), points.at(last) };
     circle.at(last) = endCircumscribe.GetCircle2();
 
     // 在点(a,0) 和 (0,b)间计算圆弧
@@ -128,7 +128,7 @@ Mathematics::Arc2<Real> Mathematics::EllipseByArcs2<Real>::GetArc2(int index) co
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     const auto nextIndex = index + 1;
-    Arc2 arc{ circle.at(index).GetCenter(), circle.at(index).GetRadius(), points.at(index), points.at(nextIndex) };
+    Arc2Type arc{ circle.at(index).GetCenter(), circle.at(index).GetRadius(), points.at(index), points.at(nextIndex) };
 
     return arc;
 }

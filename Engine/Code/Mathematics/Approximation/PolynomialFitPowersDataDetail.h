@@ -127,7 +127,7 @@ void Mathematics::PolynomialFitPowersData<Real, S>::SetScale(int index, Real aSc
 }
 
 template <typename Real, int S>
-void Mathematics::PolynomialFitPowersData<Real, S>::Solve(const VariableMatrix& matrix, const VariableLengthVector& vector)
+void Mathematics::PolynomialFitPowersData<Real, S>::Solve(const VariableMatrixType& matrix, const VariableLengthVectorType& vector)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

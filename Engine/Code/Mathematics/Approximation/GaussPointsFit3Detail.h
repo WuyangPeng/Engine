@@ -46,7 +46,7 @@ Mathematics::Box3<Real> Mathematics::GaussPointsFit3<Real>::Calculate(const Poin
     const auto numPoints = static_cast<Real>(points.size());
 
     // 计算点的平均值。
-    Vector3 center{};
+    Vector3Type center{};
     for (const auto& point : points)
     {
         center += point;
@@ -98,7 +98,7 @@ Mathematics::Box3<Real> Mathematics::GaussPointsFit3<Real>::Calculate(const Poin
     eigenSystem.Solve(true);
 
     std::array<Real, size> extent{};
-    std::array<Vector3, size> axis{};
+    std::array<Vector3Type, size> axis{};
 
     for (auto i = 0; i < size; ++i)
     {
@@ -110,7 +110,7 @@ Mathematics::Box3<Real> Mathematics::GaussPointsFit3<Real>::Calculate(const Poin
         axis[i] = eigenSystem.GetEigenvector3(i);
     }
 
-    return Box3{ center, axis[0], axis[1], axis[2], extent[0], extent[1], extent[2] };
+    return Box3Type{ center, axis[0], axis[1], axis[2], extent[0], extent[1], extent[2] };
 
 #include SYSTEM_WARNING_POP
 }

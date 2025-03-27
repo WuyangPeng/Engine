@@ -33,13 +33,13 @@ namespace Mathematics
     public:
         using ClassType = EllipseByArcs2<Real>;
 
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
 
         using MathType = Math<Real>;
-        using Arc2 = Arc2<Real>;
-        using Circle2 = Circle2<Real>;
-        using PointsType = std::vector<Vector2>;
-        using Circle2Container = std::vector<Circle2>;
+        using Arc2Type = Arc2<Real>;
+        using Circle2Type = Circle2<Real>;
+        using PointsType = std::vector<Vector2Type>;
+        using Circle2Container = std::vector<Circle2Type>;
 
     public:
         EllipseByArcs2(Real begin, Real end, size_t numArcs);
@@ -49,7 +49,7 @@ namespace Mathematics
         NODISCARD PointsType GetPoints() const;
         NODISCARD Circle2Container GetCircle2() const;
 
-        NODISCARD Arc2 GetArc2(int index) const;
+        NODISCARD Arc2Type GetArc2(int index) const;
         NODISCARD int GetNumArcs() const;
 
     private:

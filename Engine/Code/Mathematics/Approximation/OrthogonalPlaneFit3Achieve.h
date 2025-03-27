@@ -44,7 +44,7 @@ template <typename Real>
 Mathematics::Plane3<Real> Mathematics::OrthogonalPlaneFit3<Real>::Calculate(const Points& points)
 {
     // 计算点的平均值。
-    Vector3 origin{};
+    Vector3Type origin{};
     for (const auto& point : points)
     {
         origin += point;
@@ -98,7 +98,7 @@ Mathematics::Plane3<Real> Mathematics::OrthogonalPlaneFit3<Real>::Calculate(cons
     const auto normal = esystem.GetEigenvector3(2);
 
     // 最小能量
-    return Plane3{ normal, origin };
+    return Plane3Type{ normal, origin };
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_ORTHOGONAL_PLANE_FIT3_ACHIEVE_H

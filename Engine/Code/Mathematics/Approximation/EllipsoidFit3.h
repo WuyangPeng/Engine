@@ -37,9 +37,9 @@ namespace Mathematics
     public:
         using ClassType = EllipsoidFit3<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using Points = std::vector<Vector3>;
-        using Matrix3 = Matrix3<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Points = std::vector<Vector3Type>;
+        using Matrix3Type = Matrix3<Real>;
         using Angle = std::vector<Real>;
         using MathType = Math<Real>;
 
@@ -50,14 +50,14 @@ namespace Mathematics
 
         NODISCARD Real GetExactly() const noexcept;
 
-        NODISCARD Vector3 GetCenter() const noexcept;
-        NODISCARD Matrix3 GetRotate() const noexcept;
+        NODISCARD Vector3Type GetCenter() const noexcept;
+        NODISCARD Matrix3Type GetRotate() const noexcept;
         NODISCARD Real GetExtent0() const noexcept;
         NODISCARD Real GetExtent1() const noexcept;
         NODISCARD Real GetExtent2() const noexcept;
 
         NODISCARD int GetNumPoint() const;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         void Fit3();
@@ -65,13 +65,13 @@ namespace Mathematics
 
         static Real Energy(const Angle& input, const EllipsoidFit3* userData);
 
-        static Angle MatrixToAngles(const Matrix3& rotate);
-        static Matrix3 AnglesToMatrix(const Angle& angle) noexcept;
+        static Angle MatrixToAngles(const Matrix3Type& rotate);
+        static Matrix3Type AnglesToMatrix(const Angle& angle) noexcept;
 
     private:
         Points points;
-        Vector3 center;
-        Matrix3 rotate;
+        Vector3Type center;
+        Matrix3Type rotate;
         Real extent0;
         Real extent1;
         Real extent2;

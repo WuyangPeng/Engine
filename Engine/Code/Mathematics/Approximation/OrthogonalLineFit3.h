@@ -25,23 +25,23 @@ namespace Mathematics
     public:
         using ClassType = OrthogonalLineFit3<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using Line3 = Line3<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Line3Type = Line3<Real>;
         using MathType = Math<Real>;
-        using Points = std::vector<Vector3>;
+        using Points = std::vector<Vector3Type>;
 
     public:
         explicit OrthogonalLineFit3(const Points& points);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Line3 GetLine3() const noexcept;
+        NODISCARD Line3Type GetLine3() const noexcept;
 
     private:
-        NODISCARD static Line3 Calculate(const Points& points);
+        NODISCARD static Line3Type Calculate(const Points& points);
 
     private:
-        Line3 line;
+        Line3Type line;
     };
 
     using OrthogonalLineFit3F = OrthogonalLineFit3<float>;

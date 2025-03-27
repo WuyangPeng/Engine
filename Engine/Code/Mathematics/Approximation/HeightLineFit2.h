@@ -26,10 +26,10 @@ namespace Mathematics
     public:
         using ClassType = HeightLineFit2<Real>;
 
-        using Vector2 = Vector2<Real>;
-        using Line2 = Line2<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Line2Type = Line2<Real>;
         using MathType = Math<Real>;
-        using Points = std::vector<Vector2>;
+        using Points = std::vector<Vector2Type>;
 
     public:
         explicit HeightLineFit2(const Points& points);

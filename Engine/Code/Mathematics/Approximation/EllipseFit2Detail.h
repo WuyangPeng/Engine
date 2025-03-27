@@ -101,9 +101,9 @@ Real Mathematics::EllipseFit2<Real>::Energy(const Container& input, const Ellips
     const auto& self = *userData;
 
     // 构建旋转矩阵
-    const Matrix2 rotate{ -input.at(4) };
+    const Matrix2Type rotate{ -input.at(4) };
 
-    const Ellipse2<Real> ellipse{ Vector2::GetZero(), Vector2::GetUnitX(), Vector2::GetUnitY(), input.at(0), input.at(1) };
+    const Ellipse2<Real> ellipse{ Vector2Type::GetZero(), Vector2Type::GetUnitX(), Vector2Type::GetUnitY(), input.at(0), input.at(1) };
 
     // 变换点到中心C和旋转Real的列的坐标系统
     auto energy = MathType::GetValue(0);
@@ -113,7 +113,7 @@ Real Mathematics::EllipseFit2<Real>::Energy(const Container& input, const Ellips
     for (auto i = 0; i < numPoints; ++i)
     {
         const auto& value = self.GetPoint(i);
-        const Vector2 diff{ value.GetX() - input.at(2), value.GetY() - input.at(3) };
+        const Vector2Type diff{ value.GetX() - input.at(2), value.GetY() - input.at(3) };
 
         const auto point = rotate * diff;
 

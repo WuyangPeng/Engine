@@ -27,23 +27,23 @@ namespace Mathematics
     public:
         using ClassType = GaussPointsFit2<Real>;
 
-        using Vector2 = Vector2<Real>;
-        using Box2 = Box2<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Box2Type = Box2<Real>;
         using MathType = Math<Real>;
-        using PointsType = std::vector<Vector2>;
+        using PointsType = std::vector<Vector2Type>;
 
     public:
         explicit GaussPointsFit2(const PointsType& points);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Box2 GetBox2() const noexcept;
+        NODISCARD Box2Type GetBox2() const noexcept;
 
     private:
-        NODISCARD static Box2 Calculate(const PointsType& points);
+        NODISCARD static Box2Type Calculate(const PointsType& points);
 
     private:
-        Box2 box;
+        Box2Type box;
     };
 
     using GaussPointsFit2F = GaussPointsFit2<float>;

@@ -32,8 +32,8 @@ namespace Mathematics
 
         using MathType = Math<Real>;
         using Coefficients = std::vector<Real>;
-        using VariableLengthVector = VariableLengthVector<Real>;
-        using VariableMatrix = VariableMatrix<Real>;
+        using VariableLengthVectorType = VariableLengthVector<Real>;
+        using VariableMatrixType = VariableMatrix<Real>;
 
     public:
         PolynomialFitPowersData() noexcept;
@@ -53,7 +53,7 @@ namespace Mathematics
         void SetMaxPower(int index, int power);
         void SetScale(int index, Real aScale);
 
-        void Solve(const VariableMatrix& matrix, const VariableLengthVector& vector);
+        void Solve(const VariableMatrixType& matrix, const VariableLengthVectorType& vector);
 
     private:
         using PowerType = std::array<int, size - 1>;

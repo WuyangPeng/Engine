@@ -41,7 +41,7 @@ namespace Mathematics
         using ClassType = PolynomialFit2<Real>;
 
         using Samples = std::vector<Real>;
-        using Polynomial = Polynomial<Real>;
+        using PolynomialType = Polynomial<Real>;
         using MathType = Math<Real>;
 
     public:
@@ -49,14 +49,14 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Polynomial GetCoeff() const;
+        NODISCARD PolynomialType GetCoeff() const;
         NODISCARD bool IsSolveSucceed() const noexcept;
 
     private:
         void Calculate(const Samples& xSamples, const Samples& wSamples);
 
     private:
-        Polynomial coeff;
+        PolynomialType coeff;
         bool solveSucceed;
     };
 

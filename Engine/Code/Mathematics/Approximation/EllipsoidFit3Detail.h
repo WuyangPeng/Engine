@@ -96,7 +96,7 @@ void Mathematics::EllipsoidFit3<Real>::InitialGuess()
     const auto box = ContBox3<Real>::ContOrientedBox(points);
 
     center = box.GetCenter();
-    rotate = Matrix3{ box.GetAxis0().GetX(),
+    rotate = Matrix3Type{ box.GetAxis0().GetX(),
                       box.GetAxis0().GetY(),
                       box.GetAxis0().GetZ(),
                       box.GetAxis1().GetX(),
@@ -138,7 +138,7 @@ Real Mathematics::EllipsoidFit3<Real>::Energy(const Angle& input, const Ellipsoi
         maxValue = input[2];
     }
 
-    const Ellipsoid3<Real> ellipsoid{ Vector3::GetZero(), Vector3::GetUnitX(), Vector3::GetUnitY(), Vector3::GetUnitZ(), input[0] / maxValue, input[1] / maxValue, input[2] / maxValue };
+    const Ellipsoid3<Real> ellipsoid{ Vector3Type::GetZero(), Vector3Type::GetUnitX(), Vector3Type::GetUnitY(), Vector3Type::GetUnitZ(), input[0] / maxValue, input[1] / maxValue, input[2] / maxValue };
 
     // 变换点到中心C和旋转Real的列的坐标系统
     auto energy = MathType::GetValue(0);
@@ -147,7 +147,7 @@ Real Mathematics::EllipsoidFit3<Real>::Energy(const Angle& input, const Ellipsoi
 
     for (auto i = 0; i < numPoints; ++i)
     {
-        const Vector3 diff{ self.GetPoint(i).GetX() - input[3],
+        const Vector3Type diff{ self.GetPoint(i).GetX() - input[3],
                             self.GetPoint(i).GetY() - input[4],
                             self.GetPoint(i).GetZ() - input[5] };
 
@@ -165,7 +165,7 @@ Real Mathematics::EllipsoidFit3<Real>::Energy(const Angle& input, const Ellipsoi
 }
 
 template <typename Real>
-typename Mathematics::EllipsoidFit3<Real>::Angle Mathematics::EllipsoidFit3<Real>::MatrixToAngles(const Matrix3& rotate)
+typename Mathematics::EllipsoidFit3<Real>::Angle Mathematics::EllipsoidFit3<Real>::MatrixToAngles(const Matrix3Type& rotate)
 {
     // 旋转轴 = (cos(a0)sin(a1),sin(a0)sin(a1),cos(a1))
     // a0 在 [-pi,pi], a1 在 [0,pi], a2 在 [0,pi]
@@ -217,9 +217,9 @@ Mathematics::Matrix3<Real> Mathematics::EllipsoidFit3<Real>::AnglesToMatrix(cons
     const auto cs1 = MathType::Cos(angle[1]);
     const auto sn1 = MathType::Sin(angle[1]);
 
-    const Vector3 axis{ cs0 * sn1, sn0 * sn1, cs1 };
+    const Vector3Type axis{ cs0 * sn1, sn0 * sn1, cs1 };
 
-    return Matrix3{ axis, angle[2] };
+    return Matrix3Type{ axis, angle[2] };
 
 #include SYSTEM_WARNING_POP
 }

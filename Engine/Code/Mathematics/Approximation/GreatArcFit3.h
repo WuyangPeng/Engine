@@ -28,8 +28,8 @@ namespace Mathematics
     public:
         using ClassType = GreatArcFit3<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using Points = std::vector<Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using Points = std::vector<Vector3Type>;
         using MathType = Math<Real>;
 
     public:
@@ -37,17 +37,17 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetNormal() const noexcept;
-        NODISCARD Vector3 GetArcEnd0() const noexcept;
-        NODISCARD Vector3 GetArcEnd1() const noexcept;
+        NODISCARD Vector3Type GetNormal() const noexcept;
+        NODISCARD Vector3Type GetArcEnd0() const noexcept;
+        NODISCARD Vector3Type GetArcEnd1() const noexcept;
 
     private:
         void Calculate(const Points& points);
 
     private:
-        Vector3 normal;
-        Vector3 arcEnd0;
-        Vector3 arcEnd1;
+        Vector3Type normal;
+        Vector3Type arcEnd0;
+        Vector3Type arcEnd1;
     };
 
     using GreatArcFit3F = GreatArcFit3<float>;
