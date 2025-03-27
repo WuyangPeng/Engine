@@ -128,8 +128,8 @@ void CoreTools::BufferTarget::WriteContainerWithoutNumber(const T& objects)
     }
 }
 
-template <typename T, int Size>
-requires(std::is_arithmetic_v<T> && !std::is_same_v<bool, T> && 0 <= Size)
+template <typename T, size_t Size>
+requires(std::is_arithmetic_v<T>)
 void CoreTools::BufferTarget::WriteContainer(const std::array<T, Size>& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;

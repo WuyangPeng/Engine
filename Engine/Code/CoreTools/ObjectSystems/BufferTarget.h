@@ -121,8 +121,8 @@ namespace CoreTools
         requires(std::is_arithmetic_v<typename T::value_type>)
         void WriteContainerWithoutNumber(const T& objects);
 
-        template <typename T, int Size>
-        requires(std::is_arithmetic_v<T> && !std::is_same_v<bool, T> && 0 <= Size)
+        template <typename T, size_t Size>
+        requires(std::is_arithmetic_v<T>)
         void WriteContainer(const std::array<T, Size>& objects);
 
         // –¥»Î√∂æŸ÷µ°£
