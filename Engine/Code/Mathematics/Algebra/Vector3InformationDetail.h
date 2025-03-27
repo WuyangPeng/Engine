@@ -192,7 +192,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
         directionY[2] = -directionX[1];
     }
     directionY.Normalize(epsilon);
-    directionZ = Vector3Tools::CrossProduct(directionX, directionY);
+    directionZ = Vector3ToolsType::CrossProduct(directionX, directionY);
 
     /// 计算点与直线的最大距离
     /// origin + t * directionX
@@ -202,9 +202,9 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
     for (const auto& point : points)
     {
         const auto difference = point - origin;
-        const auto dot = Vector3Tools::DotProduct(directionX, difference);
+        const auto dot = Vector3ToolsType::DotProduct(directionX, difference);
         const auto proj = difference - dot * directionX;
-        const auto distance = Vector3Tools::GetLength(proj);
+        const auto distance = Vector3ToolsType::GetLength(proj);
 
         if (maxDistance < distance)
         {
@@ -237,12 +237,12 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
     /// 向量v[extreme[perpendicularExtreme]]- origin 不一定垂直于directionX，
     /// 因此投影出directionX分量，使结果垂直于directionX。
     directionY = points.at(perpendicularExtreme) - origin;
-    const auto dot = Vector3Tools::DotProduct(directionX, directionY);
+    const auto dot = Vector3ToolsType::DotProduct(directionX, directionY);
     directionY -= dot * directionX;
     directionY.Normalize(epsilon);
 
     /// 我们需要directionZ来跨越{directionX，directionY}的正交补码。
-    directionZ = Vector3Tools::CrossProduct(directionX, directionY);
+    directionZ = Vector3ToolsType::CrossProduct(directionX, directionY);
 
     /// 计算点与平面的最大距离
     /// origin+t0 * directionX + t1 * directionY
@@ -254,7 +254,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
     for (const auto& point : points)
     {
         const auto diff = point - origin;
-        auto distance = Vector3Tools::DotProduct(directionZ, diff);
+        auto distance = Vector3ToolsType::DotProduct(directionZ, diff);
         const auto sign = MathType::Sign(distance);
         distance = MathType::FAbs(distance);
         if (maxDistance < distance)
