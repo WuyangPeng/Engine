@@ -609,7 +609,7 @@ typename Mathematics::Quaternion<Real>::Vector3 Mathematics::Quaternion<Real>::R
 
 #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
-    const Vector3 vVector{ -x, -y, -z };
+    const Vector3Type vVector{ -x, -y, -z };
 
 #endif  // !MATHEMATICS_USE_MATRIX_VECTOR
 

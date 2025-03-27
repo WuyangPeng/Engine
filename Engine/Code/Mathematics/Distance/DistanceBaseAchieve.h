@@ -21,7 +21,7 @@ Mathematics::DistanceBase<Real, Vector>::DistanceBase() noexcept
     : maximumIterations{ defaultMaximumIterations },
       zeroThreshold{ defaultZeroThreshold },
       differenceStep{ defaultDifferenceStep },
-      inverseTwoDifferenceStep{ Math::GetRational(1, 2) / differenceStep }
+      inverseTwoDifferenceStep{ MathType::GetRational(1, 2) / differenceStep }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -34,9 +34,9 @@ bool Mathematics::DistanceBase<Real, Vector>::IsValid() const noexcept
     try
     {
         if (0 < maximumIterations &&
-            Math::GetValue(0) <= zeroThreshold &&
-            Math::GetValue(0) < differenceStep &&
-            Math::Approximate(Math::GetRational(1, 2) / differenceStep, inverseTwoDifferenceStep, zeroThreshold))
+            MathType::GetValue(0) <= zeroThreshold &&
+            MathType::GetValue(0) < differenceStep &&
+            MathType::Approximate(MathType::GetRational(1, 2) / differenceStep, inverseTwoDifferenceStep, zeroThreshold))
         {
             return true;
         }
@@ -57,10 +57,10 @@ template <typename Real, typename Vector>
 void Mathematics::DistanceBase<Real, Vector>::SetDifferenceStep(Real newDifferenceStep) noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_2(Math::GetValue(0) < newDifferenceStep, "无效的相差步进值\n");
+    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) < newDifferenceStep, "无效的相差步进值\n");
 
     differenceStep = newDifferenceStep;
-    inverseTwoDifferenceStep = Math::GetRational(1, 2) / differenceStep;
+    inverseTwoDifferenceStep = MathType::GetRational(1, 2) / differenceStep;
 }
 
 template <typename Real, typename Vector>
@@ -84,7 +84,7 @@ template <typename Real, typename Vector>
 void Mathematics::DistanceBase<Real, Vector>::SetZeroThreshold(Real newZeroThreshold) noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= newZeroThreshold, "无效的临界值\n");
+    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= newZeroThreshold, "无效的临界值\n");
 
     zeroThreshold = newZeroThreshold;
 }
@@ -149,7 +149,7 @@ Real Mathematics::DistanceBase<Real, Vector>::GetDerivativeSquared(Real t, const
     const auto distance = Get(t, lhsVelocity, rhsVelocity);
     const auto derivative = GetDerivative(t, lhsVelocity, rhsVelocity);
 
-    return Math::GetValue(2) * distance.GetDistance() * derivative;
+    return MathType::GetValue(2) * distance.GetDistance() * derivative;
 }
 
 template <typename Real, typename Vector>

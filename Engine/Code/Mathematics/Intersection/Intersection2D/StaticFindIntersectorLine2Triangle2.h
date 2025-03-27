@@ -29,7 +29,7 @@ namespace Mathematics
         using Line2 = Line2<Real>;
         using Triangle2 = Triangle2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticFindIntersectorLine2Triangle2(const Line2& line, const Triangle2& triangle, const Real dotThreshold = Math::GetZeroTolerance());

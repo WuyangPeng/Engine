@@ -121,7 +121,7 @@ void Mathematics::HeightPlaneFit3<Real>::Calculate(const Points& points)
 
     try
     {
-        using Vector = typename LinearSystem<Real>::Vector3;
+        using Vector = typename LinearSystem<Real>::Vector3Type;
         using Matrix3 = typename LinearSystem<Real>::Matrix3;
 
         const Matrix3 matrix{ Vector{ sumXX, sumXY, sumX }, Vector{ sumXY, sumYY, sumY }, Vector{ sumX, sumY, numPoints } };

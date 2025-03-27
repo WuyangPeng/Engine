@@ -45,8 +45,8 @@ namespace Mathematics
         using RealContainer = std::vector<Real>;
         using Vector2 = std::array<Real, 2>;
         using Matrix2 = std::array<Vector2, 2>;
-        using Vector3 = std::array<Real, 3>;
-        using Matrix3 = std::array<Vector3, 3>;
+        using Vector3Type = std::array<Real, 3>;
+        using Matrix3 = std::array<Vector3Type, 3>;
         using BandedMatrix = BandedMatrix<Real>;
         using SparseMatrix = SparseMatrix<Real>;
         using VariableMatrix = VariableMatrix<Real>;
@@ -70,7 +70,7 @@ namespace Mathematics
         // 2×2和3x3系统（避免了高斯消元的开销）
         NODISCARD Vector2 Solve2(const Matrix2& matrix, const Vector2& vector) const;
 
-        NODISCARD Vector3 Solve3(const Matrix3& matrix, const Vector3& vector) const;
+        NODISCARD Vector3Type Solve3(const Matrix3& matrix, const Vector3Type& vector) const;
 
         // 输入:
         //     matrix[iSize][iSize], 项是 matrix[row][col]
@@ -219,7 +219,7 @@ namespace Mathematics
 
     private:
         // 线性系统求解容差。
-        // 默认 = Math<Real>::GetZeroTolerance()
+        // 默认 = MathType<Real>::GetZeroTolerance()
         Real zeroTolerance;
     };
 

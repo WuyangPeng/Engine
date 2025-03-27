@@ -26,7 +26,7 @@ namespace Mathematics
         using Vector2 = Vector2<Real>;
         using Box2 = Box2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticTestIntersectorBox2Box2(const Box2& lhsBox, const Box2& rhsBox, const Real epsilon = Math::GetZeroTolerance());

@@ -32,7 +32,7 @@ namespace Mathematics
         using Cylinder3 = Cylinder3<Real>;
         using Vector2 = Vector2<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticTestIntersectorTriangle3Cylinder3(const Triangle3& triangle, const Cylinder3& cylinder, const Real epsilon = Math::GetZeroTolerance());

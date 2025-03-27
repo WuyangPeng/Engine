@@ -76,22 +76,22 @@ typename Mathematics::LinearSystem<Real>::Vector2 Mathematics::LinearSystem<Real
 }
 
 template <typename Real>
-typename Mathematics::LinearSystem<Real>::Vector3 Mathematics::LinearSystem<Real>::Solve3(const Matrix3& matrix, const Vector3& vector) const
+typename Mathematics::LinearSystem<Real>::Vector3Type Mathematics::LinearSystem<Real>::Solve3(const Matrix3& matrix, const Vector3Type& vector) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-    Matrix3 invMatrix{ Vector3{ matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1],
+    Matrix3 invMatrix{ Vector3Type{ matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1],
                                 matrix[0][2] * matrix[2][1] - matrix[0][1] * matrix[2][2],
                                 matrix[0][1] * matrix[1][2] - matrix[0][2] * matrix[1][1] },
 
-                       Vector3{ matrix[1][2] * matrix[2][0] - matrix[1][0] * matrix[2][2],
+                       Vector3Type{ matrix[1][2] * matrix[2][0] - matrix[1][0] * matrix[2][2],
                                 matrix[0][0] * matrix[2][2] - matrix[0][2] * matrix[2][0],
                                 matrix[0][2] * matrix[1][0] - matrix[0][0] * matrix[1][2] },
 
-                       Vector3{ matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0],
+                       Vector3Type{ matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0],
                                 matrix[0][1] * matrix[2][0] - matrix[0][0] * matrix[2][1],
                                 matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0] } };
 
@@ -115,7 +115,7 @@ typename Mathematics::LinearSystem<Real>::Vector3 Mathematics::LinearSystem<Real
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-    return Vector3{ invMatrix[0][0] * vector[0] + invMatrix[0][1] * vector[1] + invMatrix[0][2] * vector[2],
+    return Vector3Type{ invMatrix[0][0] * vector[0] + invMatrix[0][1] * vector[1] + invMatrix[0][2] * vector[2],
                     invMatrix[1][0] * vector[0] + invMatrix[1][1] * vector[1] + invMatrix[1][2] * vector[2],
                     invMatrix[2][0] * vector[0] + invMatrix[2][1] * vector[1] + invMatrix[2][2] * vector[2] };
 

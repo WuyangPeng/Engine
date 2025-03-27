@@ -175,12 +175,12 @@ namespace Mathematics::Algebra
         /// 注：选择顺序反转，以便使用一个乘法约定构建的旋转矩阵是使用另一个乘法惯例构建的旋转基质的转置。因此
         /// [MATHEMATICS_USE_MATRIX_VECTOR]
         ///   Matrix3x3<Real> R_mvConvention(N0,N1,N2,angleN0,angleN1,angleN2);
-        ///   Vector3<Real> V(...);
-        ///   Vector3<Real> U = R_mvConvention*V;  // (u0,u1,u2) = R2*R1*R0*V
+        ///   Vector3Type<Real> V(...);
+        ///   Vector3Type<Real> U = R_mvConvention*V;  // (u0,u1,u2) = R2*R1*R0*V
         /// [MATHEMATICS_USE_VECTOR_MATRIX]
         ///   Matrix3x3<Real> R_vmConvention(N0,N1,N2,angleN0,angleN1,angleN2);
-        ///   Vector3<Real> V(...);
-        ///   Vector3<Real> U = R_mvConvention*V;  // (u0,u1,u2) = V*R0*R1*R2
+        ///   Vector3Type<Real> V(...);
+        ///   Vector3Type<Real> U = R_mvConvention*V;  // (u0,u1,u2) = V*R0*R1*R2
         /// 在任一约定中，都会得到相同的三元组U。
         static void Convert(const EulerAngles& eulerAngles, Matrix& matrix);
 

@@ -1101,9 +1101,9 @@ Real Mathematics::Matrix<Real>::GetNorm() const
 #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
     // 使用最大列和矩阵范数。
-    const auto sum0 = Math::FAbs(GetValue<0, 0>()) + Math::FAbs(GetValue<1, 0>()) + Math::FAbs(GetValue<2, 0>());
-    const auto sum1 = Math::FAbs(GetValue<0, 1>()) + Math::FAbs(GetValue<1, 1>()) + Math::FAbs(GetValue<2, 1>());
-    const auto sum2 = Math::FAbs(GetValue<0, 2>()) + Math::FAbs(GetValue<1, 2>()) + Math::FAbs(GetValue<2, 2>());
+    const auto sum0 = MathType::FAbs(GetValue<0, 0>()) + MathType::FAbs(GetValue<1, 0>()) + MathType::FAbs(GetValue<2, 0>());
+    const auto sum1 = MathType::FAbs(GetValue<0, 1>()) + MathType::FAbs(GetValue<1, 1>()) + MathType::FAbs(GetValue<2, 1>());
+    const auto sum2 = MathType::FAbs(GetValue<0, 2>()) + MathType::FAbs(GetValue<1, 2>()) + MathType::FAbs(GetValue<2, 2>());
 
 #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 

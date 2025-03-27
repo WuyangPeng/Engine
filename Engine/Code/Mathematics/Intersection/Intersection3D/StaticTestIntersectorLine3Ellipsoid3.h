@@ -29,7 +29,7 @@ namespace Mathematics
         using Line3 = Line3<Real>;
         using Ellipsoid3 = Ellipsoid3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticTestIntersectorLine3Ellipsoid3(const Line3& line, const Ellipsoid3& ellipsoid, const Real epsilon = Math::GetZeroTolerance());

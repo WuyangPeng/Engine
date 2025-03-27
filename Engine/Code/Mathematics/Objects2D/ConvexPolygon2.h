@@ -31,10 +31,10 @@ namespace Mathematics
         using ParentType = Polygon2<Real>;
         using Line2 = Line2<Real>;
         using LineType = std::vector<Line2>;
-        using Math = typename ParentType::Math;
-        using Vector2 = typename ParentType::Vector2;
+        using Math = typename ParentType::MathType;
+        using Vector2 = typename ParentType::Vector2Type;
         using VerticesType = typename ParentType::VerticesType;
-        using Vector2Tools = typename ParentType::Vector2Tools;
+        using Vector2Tools = typename ParentType::Vector2ToolsType;
 
     public:
         // 调用方负责确保顶点数组表示凸多边形，且逆时针顺序。

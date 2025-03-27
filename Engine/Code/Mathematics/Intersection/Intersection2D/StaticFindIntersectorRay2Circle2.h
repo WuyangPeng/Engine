@@ -29,7 +29,7 @@ namespace Mathematics
         using Ray2 = Ray2<Real>;
         using Circle2 = Circle2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticFindIntersectorRay2Circle2(const Ray2& ray, const Circle2& circle, const Real dotThreshold = Math::GetZeroTolerance());

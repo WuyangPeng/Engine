@@ -65,7 +65,7 @@ Real Mathematics::SingleCurve3<Real>::GetTime(Real length, int iterations, Real 
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (length <= Math ::GetValue(0))
+    if (length <= MathType ::GetValue(0))
     {
         return this->GetMinTime();
     }
@@ -76,7 +76,7 @@ Real Mathematics::SingleCurve3<Real>::GetTime(Real length, int iterations, Real 
     }
 
     auto ratio = length / this->GetTotalLength();
-    auto oneMinusRatio = Math::GetValue(1) - ratio;
+    auto oneMinusRatio = MathType::GetValue(1) - ratio;
     auto t = oneMinusRatio * this->GetMinTime() + ratio * this->GetMaxTime();
 
     auto lower = this->GetMinTime();
@@ -85,19 +85,19 @@ Real Mathematics::SingleCurve3<Real>::GetTime(Real length, int iterations, Real 
     for (auto i = 0; i < iterations; ++i)
     {
         auto difference = GetLength(this->GetMinTime(), t) - length;
-        if (Math ::FAbs(difference) < tolerance)
+        if (MathType ::FAbs(difference) < tolerance)
         {
             return t;
         }
 
         auto tCandidate = t - difference / this->GetSpeed(t);
 
-        if (difference > Math ::GetValue(0))
+        if (difference > MathType ::GetValue(0))
         {
             upper = t;
             if (tCandidate <= lower)
             {
-                t = Math::GetRational(1, 2) * (upper + lower);
+                t = MathType::GetRational(1, 2) * (upper + lower);
             }
             else
             {
@@ -109,7 +109,7 @@ Real Mathematics::SingleCurve3<Real>::GetTime(Real length, int iterations, Real 
             lower = t;
             if (tCandidate >= upper)
             {
-                t = Math::GetRational(1, 2) * (upper + lower);
+                t = MathType::GetRational(1, 2) * (upper + lower);
             }
             else
             {

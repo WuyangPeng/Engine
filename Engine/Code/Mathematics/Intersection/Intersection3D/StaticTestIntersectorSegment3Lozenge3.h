@@ -29,7 +29,7 @@ namespace Mathematics
         using Segment3 = Segment3<Real>;
         using Lozenge3 = Lozenge3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticTestIntersectorSegment3Lozenge3(const Segment3& segment, const Lozenge3& lozenge, const Real epsilon = Math::GetZeroTolerance());

@@ -430,15 +430,15 @@ void Mathematics::Algebra::Rotation<N, Real>::Convert(const Matrix& matrix, Eule
             /// 将(0,1,2), (1,2,0)和(2,0,1)映射到+1。
             /// 将(0,2,1), (2,1,0)和(1,0,2)映射到-1。
             const auto parity = (((axis0 | (axis1 << 2)) >> axis2) & 1);
-            const auto symbol = (parity & 1 ? Math::GetValue(1) : Math::GetValue(-1));
+            const auto symbol = (parity & 1 ? MathType::GetValue(1) : MathType::GetValue(-1));
 
-            if (matrix(axis0, axis2) < Math::GetValue(1))
+            if (matrix(axis0, axis2) < MathType::GetValue(1))
             {
-                if (Math::GetValue(-1) < matrix(axis0, axis2))
+                if (MathType::GetValue(-1) < matrix(axis0, axis2))
                 {
-                    const auto angle0 = Math::ATan2(symbol * matrix(axis1, axis2), matrix(axis2, axis2));
-                    const auto angle1 = Math::ASin(-symbol * matrix(axis0, axis2));
-                    const auto angle2 = Math::ATan2(symbol * matrix(axis0, axis1), matrix(axis0, axis0));
+                    const auto angle0 = MathType::ATan2(symbol * matrix(axis1, axis2), matrix(axis2, axis2));
+                    const auto angle1 = MathType::ASin(-symbol * matrix(axis0, axis2));
+                    const auto angle2 = MathType::ATan2(symbol * matrix(axis0, axis1), matrix(axis0, axis0));
 
                     eulerAngles.SetAngle(angle0, angle1, angle2);
                     eulerAngles.SetEulerResult(EulerResult::Unique);
@@ -446,8 +446,8 @@ void Mathematics::Algebra::Rotation<N, Real>::Convert(const Matrix& matrix, Eule
                 else
                 {
                     constexpr auto angle0 = Real{};
-                    const auto angle1 = symbol * Math::GetHalfPI();
-                    const auto angle2 = Math::ATan2(-symbol * matrix(axis1, axis0), matrix(axis1, axis1));
+                    const auto angle1 = symbol * MathType::GetHalfPI();
+                    const auto angle2 = MathType::ATan2(-symbol * matrix(axis1, axis0), matrix(axis1, axis1));
 
                     eulerAngles.SetAngle(angle0, angle1, angle2);
                     eulerAngles.SetEulerResult(EulerResult::NotUniqueDifference);
@@ -456,8 +456,8 @@ void Mathematics::Algebra::Rotation<N, Real>::Convert(const Matrix& matrix, Eule
             else
             {
                 constexpr auto angle0 = Real{};
-                const auto angle1 = symbol * Math::GetHalfPI();
-                const auto angle2 = Math::ATan2(-symbol * matrix(axis1, axis0), matrix(axis1, axis1));
+                const auto angle1 = symbol * MathType::GetHalfPI();
+                const auto angle2 = MathType::ATan2(-symbol * matrix(axis1, axis0), matrix(axis1, axis1));
 
                 eulerAngles.SetAngle(angle0, angle1, angle2);
                 eulerAngles.SetEulerResult(EulerResult::NotUniqueSum);
@@ -512,15 +512,15 @@ void Mathematics::Algebra::Rotation<N, Real>::Convert(const Matrix& matrix, Eule
             /// 将(0,1,0), (1,2,1)和(2,0,2)映射到+1。
             const auto b2 = 3 - axis0 - axis1;
             const auto parity = (((b2 | (axis1 << 2)) >> axis0) & 1);
-            const auto symbol = (parity & 1 ? Math::GetValue(-1) : Math::GetValue(1));
+            const auto symbol = (parity & 1 ? MathType::GetValue(-1) : MathType::GetValue(1));
 
-            if (matrix(axis0, axis0) < Math::GetValue(1))
+            if (matrix(axis0, axis0) < MathType::GetValue(1))
             {
-                if (Math::GetValue(-1) < matrix(axis0, axis0))
+                if (MathType::GetValue(-1) < matrix(axis0, axis0))
                 {
-                    const auto angle0 = Math::ATan2(matrix(axis1, axis0), symbol * matrix(b2, axis0));
-                    const auto angle1 = Math::ACos(matrix(axis0, axis0));
-                    const auto angle2 = Math::ATan2(matrix(axis0, axis1), -symbol * matrix(axis0, b2));
+                    const auto angle0 = MathType::ATan2(matrix(axis1, axis0), symbol * matrix(b2, axis0));
+                    const auto angle1 = MathType::ACos(matrix(axis0, axis0));
+                    const auto angle2 = MathType::ATan2(matrix(axis0, axis1), -symbol * matrix(axis0, b2));
 
                     eulerAngles.SetAngle(angle0, angle1, angle2);
                     eulerAngles.SetEulerResult(EulerResult::Unique);
@@ -528,8 +528,8 @@ void Mathematics::Algebra::Rotation<N, Real>::Convert(const Matrix& matrix, Eule
                 else
                 {
                     constexpr auto angle0 = Real{};
-                    constexpr auto angle1 = Math::GetPI();
-                    const auto angle2 = Math::ATan2(symbol * matrix(axis1, b2), matrix(axis1, axis1));
+                    constexpr auto angle1 = MathType::GetPI();
+                    const auto angle2 = MathType::ATan2(symbol * matrix(axis1, b2), matrix(axis1, axis1));
 
                     eulerAngles.SetAngle(angle0, angle1, angle2);
                     eulerAngles.SetEulerResult(EulerResult::NotUniqueDifference);
@@ -539,7 +539,7 @@ void Mathematics::Algebra::Rotation<N, Real>::Convert(const Matrix& matrix, Eule
             {
                 constexpr auto angle0 = Real{};
                 constexpr auto angle1 = Real{};
-                const auto angle2 = Math::ATan2(symbol * matrix(axis1, b2), matrix(axis1, axis1));
+                const auto angle2 = MathType::ATan2(symbol * matrix(axis1, b2), matrix(axis1, axis1));
 
                 eulerAngles.SetAngle(angle0, angle1, angle2);
                 eulerAngles.SetEulerResult(EulerResult::NotUniqueSum);
@@ -589,15 +589,15 @@ void Mathematics::Algebra::Rotation<N, Real>::Convert(const Quaternion& quaterni
 
 #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
-    matrix(0, 0) = Math::GetValue(1) - twoYY - twoZZ;
+    matrix(0, 0) = MathType::GetValue(1) - twoYY - twoZZ;
     matrix(1, 0) = twoXY - twoZW;
     matrix(2, 0) = twoXZ + twoYW;
     matrix(0, 1) = twoXY + twoZW;
-    matrix(1, 1) = Math::GetValue(1) - twoXX - twoZZ;
+    matrix(1, 1) = MathType::GetValue(1) - twoXX - twoZZ;
     matrix(2, 1) = twoYZ - twoXW;
     matrix(0, 2) = twoXZ - twoYW;
     matrix(1, 2) = twoYZ + twoXW;
-    matrix(2, 2) = Math::GetValue(1) - twoXX - twoYY;
+    matrix(2, 2) = MathType::GetValue(1) - twoXX - twoYY;
 
 #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 }
@@ -615,7 +615,7 @@ void Mathematics::Algebra::Rotation<N, Real>::Convert(const Quaternion& quaterni
 
 #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
-        const auto adjust = Math::GetValue(-1) / Math::Sqrt(axisSqrLen);
+        const auto adjust = MathType::GetValue(-1) / MathType::Sqrt(axisSqrLen);
 
 #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 
@@ -705,7 +705,7 @@ void Mathematics::Algebra::Rotation<N, Real>::Convert(const AxisAngle& axisAngle
 
 #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
-    const auto halfAngle = Math::GetRational(-1, 2) * axisAngle.GetAngle();
+    const auto halfAngle = MathType::GetRational(-1, 2) * axisAngle.GetAngle();
 
 #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 

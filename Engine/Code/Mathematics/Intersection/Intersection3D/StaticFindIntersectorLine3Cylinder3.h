@@ -29,7 +29,7 @@ namespace Mathematics
         using Line3 = Line3<Real>;
         using Cylinder3 = Cylinder3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticFindIntersectorLine3Cylinder3(const Line3& line, const Cylinder3& cylinder, const Real epsilon = Math::GetZeroTolerance());

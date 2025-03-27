@@ -34,7 +34,7 @@ namespace Mathematics
         using Box3 = Box3<Real>;
         using Plane3 = Plane3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         DynamicTestIntersectorHalfspace3Box3(const Plane3& halfspace,

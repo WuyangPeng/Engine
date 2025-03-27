@@ -26,7 +26,7 @@ namespace Mathematics
         using Vector2 = Vector2<Real>;
         using Box2 = Box2<Real>;
         using Circle2 = Circle2<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticTestIntersectorBox2Circle2(const Box2& box, const Circle2& circle, const Real epsilon = Math::GetZeroTolerance());

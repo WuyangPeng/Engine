@@ -65,7 +65,7 @@ const Mathematics::Vector2<Real>& Mathematics::Polygon2<Real>::GetVertex(int ind
 }
 
 template <typename Real>
-void Mathematics::Polygon2<Real>::SetVertex(int index, const Vector2& vertex)
+void Mathematics::Polygon2<Real>::SetVertex(int index, const Vector2Type& vertex)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -73,11 +73,11 @@ void Mathematics::Polygon2<Real>::SetVertex(int index, const Vector2& vertex)
 }
 
 template <typename Real>
-typename Mathematics::Polygon2<Real>::Vector2 Mathematics::Polygon2<Real>::ComputeVertexAverage() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
+typename Mathematics::Polygon2<Real>::Vector2Type Mathematics::Polygon2<Real>::ComputeVertexAverage() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    Vector2 average{};
+    Vector2Type average{};
     for (const auto& vertex : vertices)
     {
         average += vertex;
@@ -95,7 +95,7 @@ Real Mathematics::Polygon2<Real>::ComputePerimeterLength() const
     const auto numVertices = vertices.size();
     const auto last = vertices.size() - 1;
 
-    auto perimeterLength = Vector2Tools::GetLength(vertices.at(0) - vertices.at(last));
+    auto perimeterLength = Vector2ToolsType::GetLength(vertices.at(0) - vertices.at(last));
     for (auto i = 1u; i < numVertices; ++i)
     {
 #include SYSTEM_WARNING_PUSH
@@ -105,7 +105,7 @@ Real Mathematics::Polygon2<Real>::ComputePerimeterLength() const
 
 #include SYSTEM_WARNING_POP
 
-        perimeterLength += Vector2Tools::GetLength(edge);
+        perimeterLength += Vector2ToolsType::GetLength(edge);
     }
 
     return perimeterLength;
@@ -133,7 +133,7 @@ Real Mathematics::Polygon2<Real>::ComputeArea() const
 #include SYSTEM_WARNING_POP
     }
 
-    area *= Math::GetRational(1, 2);
+    area *= MathType::GetRational(1, 2);
 
     return area;
 }

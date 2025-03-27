@@ -21,7 +21,7 @@
 
 template <typename T>
 requires std::is_arithmetic_v<T>
-Mathematics::APoint<T>::APoint(const Vector3& rhs) noexcept
+Mathematics::APoint<T>::APoint(const Vector3Type& rhs) noexcept
     : APoint{ rhs.GetX(), rhs.GetY(), rhs.GetZ() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -30,7 +30,7 @@ Mathematics::APoint<T>::APoint(const Vector3& rhs) noexcept
 template <typename T>
 requires std::is_arithmetic_v<T>
 Mathematics::APoint<T>::APoint(const ArrayType& rhs)
-    : APoint{ rhs.at(HomogeneousPoint::xIndex), rhs.at(HomogeneousPoint::yIndex), rhs.at(HomogeneousPoint::zIndex) }
+    : APoint{ rhs.at(HomogeneousPointType::xIndex), rhs.at(HomogeneousPointType::yIndex), rhs.at(HomogeneousPointType::zIndex) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -54,7 +54,7 @@ Mathematics::Vector3<T> Mathematics::APoint<T>::GetVector3() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return Vector3{ GetX(), GetY(), GetZ() };
+    return Vector3Type{ GetX(), GetY(), GetZ() };
 }
 
 template <typename T>
@@ -140,7 +140,7 @@ void Mathematics::APoint<T>::SetZ(T z) noexcept
 
 template <typename T>
 requires std::is_arithmetic_v<T>
-Mathematics::APoint<T>& Mathematics::APoint<T>::operator+=(const AVector& rhs)
+Mathematics::APoint<T>& Mathematics::APoint<T>::operator+=(const AVectorType& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -154,7 +154,7 @@ Mathematics::APoint<T>& Mathematics::APoint<T>::operator+=(const AVector& rhs)
 
 template <typename T>
 requires std::is_arithmetic_v<T>
-Mathematics::APoint<T>& Mathematics::APoint<T>::operator-=(const AVector& rhs)
+Mathematics::APoint<T>& Mathematics::APoint<T>::operator-=(const AVectorType& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -261,9 +261,9 @@ template <typename T>
 requires std::is_arithmetic_v<T>
 void Mathematics::APoint<T>::Set(const ArrayType& coordinate)
 {
-    SetX(coordinate.at(HomogeneousPoint::xIndex));
-    SetY(coordinate.at(HomogeneousPoint::yIndex));
-    SetZ(coordinate.at(HomogeneousPoint::zIndex));
+    SetX(coordinate.at(HomogeneousPointType::xIndex));
+    SetY(coordinate.at(HomogeneousPointType::yIndex));
+    SetZ(coordinate.at(HomogeneousPointType::zIndex));
 }
 
 #endif  //  MATHEMATICS_ALGEBRA_A_POINT_ACHIEVE_H

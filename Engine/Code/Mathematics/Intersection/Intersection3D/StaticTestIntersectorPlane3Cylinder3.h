@@ -32,7 +32,7 @@ namespace Mathematics
         using Plane3 = Plane3<Real>;
         using Cylinder3 = Cylinder3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticTestIntersectorPlane3Cylinder3(const Plane3& plane, const Cylinder3& cylinder, const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 3 || gMathematicsAssert < 3);

@@ -29,7 +29,7 @@ namespace Mathematics
         using Segment3 = Segment3<Real>;
         using Capsule3 = Capsule3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticFindIntersectorSegment3Capsule3(const Segment3& segment, const Capsule3& capsule, const Real epsilon = Math::GetZeroTolerance());

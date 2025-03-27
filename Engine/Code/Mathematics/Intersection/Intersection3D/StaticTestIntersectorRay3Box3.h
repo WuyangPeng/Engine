@@ -29,7 +29,7 @@ namespace Mathematics
         using Ray3 = Ray3<Real>;
         using Box3 = Box3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticTestIntersectorRay3Box3(const Ray3& ray, const Box3& box, const Real epsilon = Math::GetZeroTolerance());

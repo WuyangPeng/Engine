@@ -29,7 +29,7 @@ namespace Mathematics
         using Line3 = Line3<Real>;
         using Torus3 = Torus3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticFindIntersectorLine3Torus3(const Line3& line, const Torus3& torus, const Real epsilon = Math::GetZeroTolerance());

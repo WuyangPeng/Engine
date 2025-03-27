@@ -249,7 +249,7 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
         SetRoot(0, cubeRoot);
         count = 1;
     }
-    else  // if (discr <  Math::sm_Zero)
+    else  // if (discr <  MathType::sm_Zero)
     {
         const auto dist = Math::Sqrt(-third * a);
         const auto angle = third * Math::ATan2(Math::Sqrt(-discriminant), -halfB);

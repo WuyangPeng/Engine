@@ -25,7 +25,7 @@ namespace Mathematics
 
         using ClassType = PolynomialCurve3<Real>;
         using ParentType = SingleCurve3<Real>;
-        using Math = ParentType::Math;
+        using Math = ParentType::MathType;
 
     public:
         PolynomialCurve3(const Polynomial<Real>& xPoly, const Polynomial<Real>& yPoly, const Polynomial<Real>& zPoly);

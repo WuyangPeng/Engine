@@ -359,15 +359,15 @@ bool Mathematics::BoundingSphere<T>::TestSegmentIntersection(const APoint& origi
 #if 0
 
     const auto q0 = segmentExtent * segmentExtent + difference;
-    const auto q1 = Math::GetValue(2) * dot * segmentExtent;
+    const auto q1 = MathType::GetValue(2) * dot * segmentExtent;
     const auto qMinus = q0 - q1;
     const auto qPlus = q0 + q1;
-    if (qMinus * qPlus <= Math::GetValue(0))
+    if (qMinus * qPlus <= MathType::GetValue(0))
     {
         return true;
     }
 
-    return Math::GetValue(0) < qMinus && Math::FAbs(dot) < segmentExtent;
+    return MathType::GetValue(0) < qMinus && MathType::FAbs(dot) < segmentExtent;
 
 #endif  // 0
 }

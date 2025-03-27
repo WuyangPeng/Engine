@@ -29,7 +29,7 @@ namespace Mathematics
         using Vector2 = Vector2<Real>;
         using Ellipse2 = Ellipse2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticFindIntersectorEllipse2Ellipse2(const Ellipse2& ellipse0, const Ellipse2& ellipse1, const Real epsilon = Math::GetZeroTolerance());

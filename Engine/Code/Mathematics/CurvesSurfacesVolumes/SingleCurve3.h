@@ -24,7 +24,7 @@ namespace Mathematics
 
         using ClassType = SingleCurve3<Real>;
         using ParentType = Curve3<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         SingleCurve3(Real tmin, Real tmax) noexcept;

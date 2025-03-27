@@ -28,15 +28,15 @@ namespace Mathematics
 
         using ClassType = Intersector1<Real>;
 
-        using Math = Math<Real>;
-        using Vector2 = Vector2<Real>;
+        using MathType = Math<Real>;
+        using Vector2Type = Vector2<Real>;
 
     public:
         // 间隔[u0,u1]和[v0,v1]交集的类。
         // 终点必须排序：u0 <= u1和v0 <= v1。
         // 允许sm_MaxReal和-sm_MaxReal的值，
         // 允许退化间隔：u0 = u1或v0 = v1。
-        Intersector1(Real u0, Real u1, Real v0, Real v1, Real epsilon = Math::GetZeroTolerance()) noexcept;
+        Intersector1(Real u0, Real u1, Real v0, Real v1, Real epsilon = MathType::GetZeroTolerance()) noexcept;
         virtual ~Intersector1() = default;
         Intersector1(const Intersector1& rhs) noexcept = default;
         Intersector1& operator=(const Intersector1& rhs) noexcept = default;
@@ -57,8 +57,8 @@ namespace Mathematics
 
     private:
         // 相交的间隔。
-        Vector2 u;
-        Vector2 v;
+        Vector2Type u;
+        Vector2Type v;
 
         Real epsilon;
     };

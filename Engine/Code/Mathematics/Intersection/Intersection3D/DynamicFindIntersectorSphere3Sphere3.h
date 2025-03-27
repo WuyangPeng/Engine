@@ -29,7 +29,7 @@ namespace Mathematics
         using Sphere3 = Sphere3<Real>;
         using Circle3 = Circle3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         DynamicFindIntersectorSphere3Sphere3(const Sphere3& sphere0,

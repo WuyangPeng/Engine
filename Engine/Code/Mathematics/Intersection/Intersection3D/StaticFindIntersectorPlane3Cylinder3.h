@@ -35,7 +35,7 @@ namespace Mathematics
         using Circle3 = Circle3<Real>;
         using Ellipse3 = Ellipse3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
         using TwoLine = std::pair<Line3, Line3>;
 
     public:

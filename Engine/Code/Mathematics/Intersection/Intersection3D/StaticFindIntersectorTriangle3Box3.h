@@ -29,7 +29,7 @@ namespace Mathematics
         using Triangle3 = Triangle3<Real>;
         using Box3 = Box3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
         using Container = std::vector<Vector3>;
 
     public:

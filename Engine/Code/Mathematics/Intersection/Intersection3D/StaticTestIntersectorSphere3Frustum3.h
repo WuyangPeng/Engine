@@ -29,7 +29,7 @@ namespace Mathematics
         using Sphere3 = Sphere3<Real>;
         using Frustum3 = Frustum3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticTestIntersectorSphere3Frustum3(const Sphere3& sphere, const Frustum3& frustum, const Real epsilon = Math::GetZeroTolerance());

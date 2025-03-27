@@ -29,7 +29,7 @@ namespace Mathematics
         using Plane3 = Plane3<Real>;
         using Box3 = Box3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticTestIntersectorHalfspace3Box3(const Plane3& halfspace, const Box3& box, const Real epsilon = Math::GetZeroTolerance());

@@ -26,7 +26,7 @@ namespace Mathematics
         using ClassType = DistanceBase<Real, Vector>;
 
         using DistanceResult = DistanceResult<Real, Vector>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         DistanceBase() noexcept;
@@ -72,14 +72,14 @@ namespace Mathematics
 
     private:
         static constexpr auto defaultMaximumIterations = 8;
-        static constexpr Real defaultZeroThreshold = Math::GetZeroTolerance();
-        static constexpr Real defaultDifferenceStep = Math::GetRational(1, 1000);
+        static constexpr Real defaultZeroThreshold = MathType::GetZeroTolerance();
+        static constexpr Real defaultDifferenceStep = MathType::GetRational(1, 1000);
 
     private:
         // 对于牛顿法和逆抛物线插值。
         // 默认 = 8
         int maximumIterations;
-        // 默认 = Math<Real>::GetZeroTolerance()
+        // 默认 = MathType<Real>::GetZeroTolerance()
         Real zeroThreshold;
 
         // 默认 = 1e-03

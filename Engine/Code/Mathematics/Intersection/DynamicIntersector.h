@@ -26,7 +26,7 @@ namespace Mathematics
         using ClassType = DynamicIntersector<Real, Vector>;
         using ParentType = Intersector<Real, Vector>;
 
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
         using VectorType = typename ParentType::VectorType;
 
     public:

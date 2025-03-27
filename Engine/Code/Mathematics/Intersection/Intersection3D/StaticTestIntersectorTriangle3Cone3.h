@@ -29,7 +29,7 @@ namespace Mathematics
         using Triangle3 = Triangle3<Real>;
         using Cone3 = Cone3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticTestIntersectorTriangle3Cone3(const Triangle3& triangle, const Cone3& cone, const Real epsilon = Math::GetZeroTolerance());

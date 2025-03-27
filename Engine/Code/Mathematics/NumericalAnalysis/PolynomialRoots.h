@@ -105,7 +105,7 @@ namespace Mathematics
         NODISCARD bool AllRealPartsPositive(const Polynomial& polynomial);
 
         // 计算[begin,end]中根的数目。
-        // 利用Sturm序列做计数。它允许通过在 -Math<Real>::sm_MaxReal或 end = Math<Real>::sm_MaxReal。
+        // 利用Sturm序列做计数。它允许通过在 -MathType<Real>::sm_MaxReal或 end = MathType<Real>::sm_MaxReal。
         // m_Epsilon的值被用作在终点上的Sturm多项式的值的阈值。
         // 如果更小，则该值被假设为零。返回值是根数。如果有无穷多个，则返回-1。
         NODISCARD int GetRootCount(const Polynomial& polynomial, Real begin, Real end);

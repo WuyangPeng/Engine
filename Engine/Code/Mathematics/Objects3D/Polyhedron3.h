@@ -29,9 +29,9 @@ namespace Mathematics
 
         using Math = Math<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using VerticesType = std::vector<Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using VerticesType = std::vector<Vector3Type>;
         using IndicesType = std::vector<int>;
 
     public:
@@ -61,17 +61,17 @@ namespace Mathematics
         // 只读成员访问。
         NODISCARD int GetNumVertices() const;
         NODISCARD VerticesType GetVertices() const;
-        NODISCARD const Vector3& GetVertex(int index) const;
+        NODISCARD const Vector3Type& GetVertex(int index) const;
         NODISCARD int GetNumTriangles() const;
         NODISCARD int GetNumIndices() const;  // = 3 * numTriangles
         NODISCARD IndicesType GetIndices() const;
         NODISCARD IndicesType GetTriangle(int index) const;
 
         // 允许顶点修改。调用者必须确保多面体仍然是简单多面体。
-        virtual void SetVertex(int index, const Vector3& vertex);
+        virtual void SetVertex(int index, const Vector3Type& vertex);
 
         // 计算关于所述多面体的各种信息。
-        NODISCARD Vector3 ComputeVertexAverage() const;
+        NODISCARD Vector3Type ComputeVertexAverage() const;
         NODISCARD Real ComputeSurfaceArea() const;
         NODISCARD Real ComputeVolume() const;
 

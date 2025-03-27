@@ -25,7 +25,7 @@ namespace Mathematics
 
         using ClassType = BSplineCurve3<Real>;
         using ParentType = SingleCurve3<Real>;
-        using Math = ParentType::Math;
+        using Math = ParentType::MathType;
 
     public:
         BSplineCurve3(const std::vector<Vector3<Real>>& ctrlPoint, int degree, bool loop, bool open);

@@ -24,7 +24,7 @@ namespace Mathematics
 
         using ClassType = BezierCurve3<Real>;
         using ParentType = SingleCurve3<Real>;
-        using Math = ParentType::Math;
+        using Math = ParentType::MathType;
 
     public:
         BezierCurve3(int degree, const std::vector<Vector3<Real>>& ctrlPoint);

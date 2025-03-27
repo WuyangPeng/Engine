@@ -309,22 +309,22 @@ Mathematics::Algebra::Matrix4x4<Real> Mathematics::Algebra::MakeReflection(const
 
 #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
-    matrix(0, 0) = Math<Real>::GetValue(1) - Math<Real>::GetValue(2) * normal[0] * normal[0];
-    matrix(1, 0) = -Math<Real>::GetValue(2) * normal[0] * normal[1];
-    matrix(2, 0) = -Math<Real>::GetValue(2) * normal[0] * normal[2];
+    matrix(0, 0) = MathType<Real>::GetValue(1) - MathType<Real>::GetValue(2) * normal[0] * normal[0];
+    matrix(1, 0) = -MathType<Real>::GetValue(2) * normal[0] * normal[1];
+    matrix(2, 0) = -MathType<Real>::GetValue(2) * normal[0] * normal[2];
     matrix(3, 0) = twoDotNormalOrigin * normal[0];
     matrix(0, 1) = matrix(1, 0);
-    matrix(1, 1) = Math<Real>::GetValue(1) - Math<Real>::GetValue(2) * normal[1] * normal[1];
-    matrix(2, 1) = -Math<Real>::GetValue(2) * normal[1] * normal[2];
+    matrix(1, 1) = MathType<Real>::GetValue(1) - MathType<Real>::GetValue(2) * normal[1] * normal[1];
+    matrix(2, 1) = -MathType<Real>::GetValue(2) * normal[1] * normal[2];
     matrix(3, 1) = twoDotNormalOrigin * normal[1];
     matrix(0, 2) = matrix(2, 0);
     matrix(1, 2) = matrix(2, 1);
-    matrix(2, 2) = Math<Real>::GetValue(1) - Math<Real>::GetValue(2) * normal[2] * normal[2];
+    matrix(2, 2) = MathType<Real>::GetValue(1) - MathType<Real>::GetValue(2) * normal[2] * normal[2];
     matrix(3, 2) = twoDotNormalOrigin * normal[2];
     matrix(0, 3) = Real{};
     matrix(1, 3) = Real{};
     matrix(2, 3) = Real{};
-    matrix(3, 3) = Math<Real>::GetValue(1);
+    matrix(3, 3) = MathType<Real>::GetValue(1);
 
 #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 

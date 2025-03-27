@@ -62,7 +62,7 @@ namespace Mathematics
 
     private:
         // 线性系统求解容差。
-        Real zeroTolerance;  // 默认 = Math::GetZeroTolerance()
+        Real zeroTolerance;  // 默认 = MathType::GetZeroTolerance()
         VariableMatrix inverse;
         int size;
         IndexContainer columnsIndex;

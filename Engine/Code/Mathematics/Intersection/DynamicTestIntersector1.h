@@ -23,7 +23,7 @@ namespace Mathematics
         using ClassType = DynamicTestIntersector1<Real>;
         using ParentType = Intersector1<Real>;
 
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         DynamicTestIntersector1(Real u0, Real u1, Real v0, Real v1, Real tMax, Real speedU, Real speedV, const Real epsilon = Math::GetZeroTolerance());

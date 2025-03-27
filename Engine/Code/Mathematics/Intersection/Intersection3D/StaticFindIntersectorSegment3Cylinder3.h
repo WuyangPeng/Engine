@@ -29,7 +29,7 @@ namespace Mathematics
         using Segment3 = Segment3<Real>;
         using Cylinder3 = Cylinder3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticFindIntersectorSegment3Cylinder3(const Segment3& segment, const Cylinder3& cylinder, const Real epsilon = Math::GetZeroTolerance());

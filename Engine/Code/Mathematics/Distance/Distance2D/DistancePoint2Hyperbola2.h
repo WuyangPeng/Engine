@@ -64,7 +64,7 @@ namespace Mathematics
         using ParentType = DistanceBase<Real, Vector2>;
 
         using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResult;
 
     public:

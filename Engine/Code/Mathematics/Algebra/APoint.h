@@ -29,12 +29,12 @@ namespace Mathematics
         using ClassType = APoint<T>;
 
         using Math = Math<T>;
-        using AVector = AVector<T>;
-        using Vector3 = Vector3<T>;
-        using HomogeneousPoint = HomogeneousPoint<T>;
+        using AVectorType = AVector<T>;
+        using Vector3Type = Vector3<T>;
+        using HomogeneousPointType = HomogeneousPoint<T>;
         using ContainerType = std::vector<ClassType>;
 
-        static constexpr auto pointSize = System::EnumCastUnderlying(HomogeneousPoint::PointIndex::W);
+        static constexpr auto pointSize = System::EnumCastUnderlying(HomogeneousPointType::PointIndex::W);
         using ArrayType = std::array<T, pointSize>;
 
     public:
@@ -49,7 +49,7 @@ namespace Mathematics
         {
         }
 
-        explicit APoint(const Vector3& rhs) noexcept;
+        explicit APoint(const Vector3Type& rhs) noexcept;
         explicit APoint(const ArrayType& rhs);
 
         CLASS_INVARIANT_DECLARE;
@@ -61,8 +61,8 @@ namespace Mathematics
         NODISCARD T GetZ() const noexcept;
         void SetZ(T z) noexcept;
 
-        NODISCARD Vector3 GetVector3() const noexcept;
-        NODISCARD HomogeneousPoint GetHomogeneousPoint() const noexcept;
+        NODISCARD Vector3Type GetVector3() const noexcept;
+        NODISCARD HomogeneousPointType GetHomogeneousPoint() const noexcept;
 
         NODISCARD const T& operator[](int index) const;
         NODISCARD T& operator[](int index);
@@ -70,8 +70,8 @@ namespace Mathematics
         // 算术运算支持仿射代数。
 
         // 一个点加或减一个向量的结果是一个点
-        APoint& operator+=(const AVector& rhs);
-        APoint& operator-=(const AVector& rhs);
+        APoint& operator+=(const AVectorType& rhs);
+        APoint& operator-=(const AVectorType& rhs);
 
         APoint& operator+=(const APoint& rhs);
         APoint& operator-=(const APoint& rhs);
@@ -95,7 +95,7 @@ namespace Mathematics
         }
 
     private:
-        HomogeneousPoint homogeneousPoint;
+        HomogeneousPointType homogeneousPoint;
     };
 
     // 两个点相减为一个向量

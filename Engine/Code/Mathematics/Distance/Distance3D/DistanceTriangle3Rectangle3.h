@@ -29,7 +29,7 @@ namespace Mathematics
         using Rectangle3 = Rectangle3<Real>;
         using Triangle3 = Triangle3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResult;
 
     public:

@@ -30,7 +30,7 @@ namespace Mathematics
         using Vector2 = Vector2<Real>;
         using Circle2 = Circle2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
         using Intersection = std::vector<Vector2>;
 
     public:

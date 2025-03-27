@@ -33,8 +33,8 @@
 
 // CylinderFit3<Real> fit0{ points };
 // Real exactly0 = fit0.GetExactly();
-// Vector3<Real> center = fit0.GetCenter();
-// Vector3<Real> axis = fit0.GetAxis();
+// Vector3Type<Real> center = fit0.GetCenter();
+// Vector3Type<Real> axis = fit0.GetAxis();
 // for (int i = 0; i <= max; ++i)
 // {
 //     CylinderFit3<Real> fit1{ points,center,axis };

@@ -23,7 +23,7 @@ namespace Mathematics
         using ClassType = StaticIntersector<Real, Vector>;
         using ParentType = Intersector<Real, Vector>;
 
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         explicit StaticIntersector(const Real epsilon = Math::GetZeroTolerance()) noexcept;

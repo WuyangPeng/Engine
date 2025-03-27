@@ -51,7 +51,7 @@ Real Mathematics::Algebra::GetRotationAngle(const Matrix2x2<Real>& rotation)
 
 #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
-    return Math<Real>::ATan2(rotation(0, 1), rotation(0, 0));
+    return MathType<Real>::ATan2(rotation(0, 1), rotation(0, 0));
 
 #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 }

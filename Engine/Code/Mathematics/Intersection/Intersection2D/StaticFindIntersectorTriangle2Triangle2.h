@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorTriangle2Triangle2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
         using Vector2 = Vector2<Real>;
         using Triangle2 = Triangle2<Real>;
         using Vector2Tools = Vector2Tools<Real>;

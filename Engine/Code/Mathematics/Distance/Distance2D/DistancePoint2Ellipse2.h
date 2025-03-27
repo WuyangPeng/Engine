@@ -28,7 +28,7 @@ namespace Mathematics
 
         using Ellipse2 = Ellipse2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResult;
 
     public:

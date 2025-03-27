@@ -31,7 +31,7 @@ namespace Mathematics
         using Plane3 = Plane3<Real>;
         using Line3 = Line3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         DynamicTestIntersectorTriangle3Triangle3(const Triangle3& triangle0,

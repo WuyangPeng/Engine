@@ -31,7 +31,7 @@ namespace Mathematics
         using Sphere3 = Sphere3<Real>;
         using Circle3 = Circle3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         StaticFindIntersectorPlane3Sphere3(const Plane3& plane, const Sphere3& sphere, const Real epsilon = Math::GetZeroTolerance());

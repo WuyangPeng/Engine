@@ -83,7 +83,7 @@ typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathematics
             t0 = tRoot;
             tRoot = Math::GetRational(1, 2) * (t0 + t1);
         }
-        else  // hyperbolaRoot < Math<Real>::sm_Zero
+        else  // hyperbolaRoot < MathType<Real>::sm_Zero
         {
             t1 = tRoot;
         }

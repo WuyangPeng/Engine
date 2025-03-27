@@ -27,7 +27,7 @@ namespace Mathematics
         using Vector3 = Vector3<Real>;
         using Box3 = Box3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Math = typename ParentType::MathType;
 
     public:
         DynamicFindIntersectorBox3Box3(const Box3& box0,

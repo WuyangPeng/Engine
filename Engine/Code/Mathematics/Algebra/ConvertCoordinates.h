@@ -44,12 +44,12 @@
 /// Vector<3, double> X, Y, P0, P1, diff;
 /// Matrix<3, 3, double> U, V, A, B;
 /// bool isRHU, isRHV;
-/// U.SetCol(0, Vector3<double>{1.0, 0.0, 0.0});
-/// U.SetCol(1, Vector3<double>{0.0, 1.0, 0.0});
-/// U.SetCol(2, Vector3<double>{0.0, 0.0, 1.0});
-/// V.SetCol(0, Vector3<double>{1.0, 0.0, 0.0});
-/// V.SetCol(1, Vector3<double>{0.0, 0.0, 1.0});
-/// V.SetCol(2, Vector3<double>{0.0, 1.0, 0.0});
+/// U.SetCol(0, Vector3Type<double>{1.0, 0.0, 0.0});
+/// U.SetCol(1, Vector3Type<double>{0.0, 1.0, 0.0});
+/// U.SetCol(2, Vector3Type<double>{0.0, 0.0, 1.0});
+/// V.SetCol(0, Vector3Type<double>{1.0, 0.0, 0.0});
+/// V.SetCol(1, Vector3Type<double>{0.0, 0.0, 1.0});
+/// V.SetCol(2, Vector3Type<double>{0.0, 1.0, 0.0});
 /// convert(U, true, V, true);
 /// isRHU = convert.IsRightHandedU();  // true
 /// isRHV = convert.IsRightHandedV();  // false
@@ -64,9 +64,9 @@
 /// P1 = V*Y;
 /// diff = P0 - P1;  // { 0, 0, 0 }
 /// double cs = 0.6, sn = 0.8;  // cs*cs + sn*sn = 1
-/// A.SetCol(0, Vector3<double>{  c,   s, 0.0});
-/// A.SetCol(1, Vector3<double>{ -s,   c, 0.0});
-/// A.SetCol(2, Vector3<double>{0.0, 0.0, 1.0});
+/// A.SetCol(0, Vector3Type<double>{  c,   s, 0.0});
+/// A.SetCol(1, Vector3Type<double>{ -s,   c, 0.0});
+/// A.SetCol(2, Vector3Type<double>{0.0, 0.0, 1.0});
 /// B = convert.UToV(A);
 ///   // B.GetCol(0) = { c, 0, s}
 ///   // B.GetCol(1) = { 0, 1, 0}

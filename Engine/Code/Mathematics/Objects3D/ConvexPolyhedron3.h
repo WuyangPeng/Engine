@@ -39,8 +39,8 @@ namespace Mathematics
         using PlaneContainerType = std::vector<Plane3>;
         using TrianglesType = std::set<int>;
 
-        using Vector3 = typename ParentType::Vector3;
-        using Vector3Tools = typename ParentType::Vector3Tools;
+        using Vector3 = typename ParentType::Vector3Type;
+        using Vector3Tools = typename ParentType::Vector3ToolsType;
         using VerticesType = typename ParentType::VerticesType;
         using IndicesType = typename ParentType::IndicesType;
 
