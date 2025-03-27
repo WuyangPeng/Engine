@@ -26,20 +26,20 @@ namespace Mathematics
     public:
         using ClassType = Matrix3EigenDecomposition<Real>;
 
-        using Matrix3 = Matrix3<Real>;
-        using Math = Math<Real>;
+        using Matrix3Type = Matrix3<Real>;
+        using MathType = Math<Real>;
 
     public:
-        Matrix3EigenDecomposition(const Matrix3& rotation, const Matrix3& diagonal, Real epsilon) noexcept;
+        Matrix3EigenDecomposition(const Matrix3Type& rotation, const Matrix3Type& diagonal, Real epsilon) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Matrix3 GetRotation() const noexcept;
-        NODISCARD Matrix3 GetDiagonal() const noexcept;
+        NODISCARD Matrix3Type GetRotation() const noexcept;
+        NODISCARD Matrix3Type GetDiagonal() const noexcept;
 
     private:
-        Matrix3 rotation;
-        Matrix3 diagonal;
+        Matrix3Type rotation;
+        Matrix3Type diagonal;
         Real epsilon;
     };
 
