@@ -89,7 +89,7 @@ void Mathematics::BandedMatrix<Real>::ResetSize(int size, int lowerBandsNumber, 
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    diagonalBandContainer.resize(size, Math::GetValue(0));
+    diagonalBandContainer.resize(size, MathType::GetValue(0));
     lowerBandData.ResetSize(size, lowerBandsNumber);
     upperBandData.ResetSize(size, upperBandsNumber);
 }
@@ -243,7 +243,7 @@ void Mathematics::BandedMatrix<Real>::SetZero()
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    fill(diagonalBandContainer.begin(), diagonalBandContainer.end(), Math::GetValue(0));
+    fill(diagonalBandContainer.begin(), diagonalBandContainer.end(), MathType::GetValue(0));
     upperBandData.SetZero();
     lowerBandData.SetZero();
 }
@@ -254,19 +254,19 @@ void Mathematics::BandedMatrix<Real>::SetIdentity()
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    fill(diagonalBandContainer.begin(), diagonalBandContainer.end(), Math::GetValue(1));
+    fill(diagonalBandContainer.begin(), diagonalBandContainer.end(), MathType::GetValue(1));
     upperBandData.SetZero();
     lowerBandData.SetZero();
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::BandedMatrix<Real>::VariableMatrix Mathematics::BandedMatrix<Real>::ToVariableMatrix() const
+typename Mathematics::BandedMatrix<Real>::VariableMatrixType Mathematics::BandedMatrix<Real>::ToVariableMatrix() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     const auto size = GetSize();
-    VariableMatrix variableMatrix{ size, size };
+    VariableMatrixType variableMatrix{ size, size };
 
     for (auto row = 0; row < size; ++row)
     {
@@ -282,7 +282,7 @@ typename Mathematics::BandedMatrix<Real>::VariableMatrix Mathematics::BandedMatr
 template <typename Real>
 requires std::is_arithmetic_v<Real>
 template <bool RowMajor>
-typename Mathematics::BandedMatrix<Real>::VariableMatrix Mathematics::BandedMatrix<Real>::ComputeInverse(Real epsilon) const
+typename Mathematics::BandedMatrix<Real>::VariableMatrixType Mathematics::BandedMatrix<Real>::ComputeInverse(Real epsilon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -300,7 +300,7 @@ typename Mathematics::BandedMatrix<Real>::VariableMatrix Mathematics::BandedMatr
             }
             else
             {
-                inverseLexicoArray(row, row) = Math::GetValue(1);
+                inverseLexicoArray(row, row) = MathType::GetValue(1);
             }
         }
     }
@@ -312,13 +312,13 @@ typename Mathematics::BandedMatrix<Real>::VariableMatrix Mathematics::BandedMatr
     {
         /// 枢轴必须为非零才能继续。
         const auto diagonal = result(row, row);
-        if (Math::FAbs(diagonal) <= epsilon)
+        if (MathType::FAbs(diagonal) <= epsilon)
         {
             THROW_EXCEPTION(SYSTEM_TEXT("不存在逆矩阵。"))
         }
 
-        Real invDiagonal = Math::GetValue(1) / diagonal;
-        result(row, row) = Math::GetValue(1);
+        Real invDiagonal = MathType::GetValue(1) / diagonal;
+        result(row, row) = MathType::GetValue(1);
 
         /// 将行相乘，使其与对角线项1一致。
         const auto columnMin = row + 1;
@@ -382,7 +382,7 @@ typename Mathematics::BandedMatrix<Real>::VariableMatrix Mathematics::BandedMatr
         }
     }
 
-    return VariableMatrix{ size, size, inverseLexicoArray.GetContainer() };
+    return VariableMatrixType{ size, size, inverseLexicoArray.GetContainer() };
 }
 
 #endif  // MATHEMATICS_ALGEBRA_BANDED_MATRIX_DETAIL_H

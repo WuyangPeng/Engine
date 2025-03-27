@@ -36,9 +36,9 @@ namespace Mathematics
     public:
         using ClassType = BandedMatrix<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using ContainerType = std::vector<Real>;
-        using VariableMatrix = VariableMatrix<Real>;
+        using VariableMatrixType = VariableMatrix<Real>;
         using BandedMatrixData = BandedMatrixData<Real>;
 
     public:
@@ -80,14 +80,14 @@ namespace Mathematics
         void SetZero();
         void SetIdentity();
 
-        NODISCARD VariableMatrix ToVariableMatrix() const;
+        NODISCARD VariableMatrixType ToVariableMatrix() const;
 
         /// 计算带状矩阵的逆。
         /// 当矩阵可逆时，返回值为逆矩阵。
         /// 当矩阵不可逆时，函数抛出异常。
         /// RowMajor必须具有由模板参数指定的存储顺序。
         template <bool RowMajor>
-        NODISCARD VariableMatrix ComputeInverse(Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD VariableMatrixType ComputeInverse(Real epsilon = MathType::GetZeroTolerance()) const;
 
     private:
         ContainerType diagonalBandContainer;  // 对角线
