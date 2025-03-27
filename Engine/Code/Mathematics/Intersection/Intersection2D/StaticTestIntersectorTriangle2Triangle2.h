@@ -28,10 +28,10 @@ namespace Mathematics
         using Vector2 = Vector2<Real>;
         using Triangle2 = Triangle2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, const Real dotThreshold = Math::GetZeroTolerance());
+        StaticTestIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, const Real dotThreshold = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

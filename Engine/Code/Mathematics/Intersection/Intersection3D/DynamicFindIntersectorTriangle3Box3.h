@@ -29,7 +29,7 @@ namespace Mathematics
         using Triangle3 = Triangle3<Real>;
         using Box3 = Box3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
         using Container = std::vector<Vector3>;
 
     public:
@@ -38,7 +38,7 @@ namespace Mathematics
                                             Real tMax,
                                             const Vector3& lhsVelocity,
                                             const Vector3& rhsVelocity,
-                                            const Real epsilon = Math::GetZeroTolerance());
+                                            const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

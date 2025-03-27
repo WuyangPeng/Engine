@@ -29,7 +29,7 @@ namespace Mathematics
 
         using ClassType = MinimizeN<Real, UserDataType>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using MinimizeNData = MinimizeNData<Real>;
         using Container = std::vector<Real>;
 

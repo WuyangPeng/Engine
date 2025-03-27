@@ -62,18 +62,18 @@ void Mathematics::BSplineFitBasis<Real>::Compute(Real t, int& imin, int& imax) c
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    MATHEMATICS_ASSERTION_0(Math::GetValue(0) <= t && t <= Math::GetValue(1), "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(MathType::GetValue(0) <= t && t <= MathType::GetValue(1), "无效输入。\n");
 
     const auto temp = quantity - degree;
     auto qmd = static_cast<Real>(temp);
     Real tValue{};
-    if (t <= Math::GetValue(0))
+    if (t <= MathType::GetValue(0))
     {
-        tValue = Math::GetValue(0);
+        tValue = MathType::GetValue(0);
         imin = 0;
         imax = degree;
     }
-    else if (t >= Math::GetValue(1))
+    else if (t >= MathType::GetValue(1))
     {
         tValue = qmd;
         imax = quantity - 1;
@@ -90,7 +90,7 @@ void Mathematics::BSplineFitBasis<Real>::Compute(Real t, int& imin, int& imax) c
     {
         if (i1 <= degree)
         {
-            knot.at(i0) = Math::GetValue(0);
+            knot.at(i0) = MathType::GetValue(0);
         }
         else if (i1 >= quantity)
         {
@@ -103,7 +103,7 @@ void Mathematics::BSplineFitBasis<Real>::Compute(Real t, int& imin, int& imax) c
         }
     }
 
-    value.at(degree) = Math::GetValue(1);
+    value.at(degree) = MathType::GetValue(1);
 
     for (auto row = degree - 1; row >= 0; --row)
     {
@@ -111,7 +111,7 @@ void Mathematics::BSplineFitBasis<Real>::Compute(Real t, int& imin, int& imax) c
         auto k1 = row;
         auto knot0 = knot.at(k0);
         auto knot1 = knot.at(k1);
-        auto invDenom = (Math::GetValue(1)) / (knot0 - knot1);
+        auto invDenom = (MathType::GetValue(1)) / (knot0 - knot1);
         auto c1 = (knot0 - tValue) * invDenom;
         Real c0{};
         value.at(row) = c1 * value.at(gsl::narrow_cast<size_t>(row) + 1);
@@ -123,7 +123,7 @@ void Mathematics::BSplineFitBasis<Real>::Compute(Real t, int& imin, int& imax) c
 
             knot0 = knot.at(++k0);
             knot1 = knot.at(++k1);
-            invDenom = (Math::GetValue(1)) / (knot0 - knot1);
+            invDenom = (MathType::GetValue(1)) / (knot0 - knot1);
             c1 = (knot0 - tValue) * invDenom;
             value.at(col) += c1 * value.at(gsl::narrow_cast<size_t>(col) + 1);
         }

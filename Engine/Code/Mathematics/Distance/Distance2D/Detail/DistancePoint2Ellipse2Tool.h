@@ -23,7 +23,7 @@ namespace Mathematics
         using ClassType = DistancePoint2Ellipse2Tool<Real>;
 
         using Vector2 = Vector2<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         DistancePoint2Ellipse2Tool(Real extent0, Real extent1, const Vector2& vector, Real zeroThreshold);

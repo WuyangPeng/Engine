@@ -56,7 +56,7 @@ namespace Mathematics
         using IndicesContainer = std::vector<int>;
         using Ellipse2 = Algebra::Ellipse2<Real>;
         using Matrix2x2 = Algebra::Matrix2x2<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         ApproximationEllipse2() noexcept;

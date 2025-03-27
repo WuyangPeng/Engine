@@ -35,7 +35,7 @@ void Mathematics::CircleFit2<Real>::Calculate(const PointType& points, int maxIt
     // 猜测初始中心。
     if (initialCenterIsAverage)
     {
-        circle.SetCircle(average, Math::GetValue(0));
+        circle.SetCircle(average, MathType::GetValue(0));
     }
     else
     {
@@ -53,8 +53,8 @@ void Mathematics::CircleFit2<Real>::Calculate(const PointType& points, int maxIt
 
         const auto circleDifference = circle.GetCenter() - current;
 
-        if (Math::FAbs(circleDifference[0]) <= Math::GetZeroTolerance() &&
-            Math::FAbs(circleDifference[1]) <= Math::GetZeroTolerance())
+        if (MathType::FAbs(circleDifference[0]) <= MathType::GetZeroTolerance() &&
+            MathType::FAbs(circleDifference[1]) <= MathType::GetZeroTolerance())
         {
             return;
         }
@@ -84,7 +84,7 @@ template <typename Real>
 void Mathematics::CircleFit2<Real>::Iteration(const PointType& points, const Vector2& average)
 {
     // 计算平均值L, dL/da, dL/db。
-    auto lengthAverage = Math::GetValue(0);
+    auto lengthAverage = MathType::GetValue(0);
     Vector2 derLengthAverage{};
 
     for (const auto& value : points)
@@ -92,7 +92,7 @@ void Mathematics::CircleFit2<Real>::Iteration(const PointType& points, const Vec
         auto difference = value - circle.GetCenter();
 
         auto length = Vector2Tools<Real>::GetLength(difference);
-        if (Math::GetZeroTolerance() < length)
+        if (MathType::GetZeroTolerance() < length)
         {
             lengthAverage += length;
             derLengthAverage -= difference / length;

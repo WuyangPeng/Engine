@@ -73,7 +73,7 @@ void Mathematics::DynamicTestIntersectorSegment3Sphere3<Real>::Test()
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
     auto relSpeed = Vector3Tools::GetLength(relVelocity);
     relVelocity.Normalize();
-    const Segment3 path{ (Math::GetRational(1, 2)) * this->GetTMax() * relSpeed, sphere.GetCenter() + (Math::GetRational(1, 2)) * this->GetTMax() * relSpeed * relVelocity, relVelocity };
+    const Segment3 path{ (MathType::GetRational(1, 2)) * this->GetTMax() * relSpeed, sphere.GetCenter() + (MathType::GetRational(1, 2)) * this->GetTMax() * relSpeed * relVelocity, relVelocity };
 
     StaticTestIntersectorSegment3Capsule3<Real> intersector{ path, capsule };
     this->SetIntersectionType(intersector.GetIntersectionType());

@@ -62,7 +62,7 @@ void Mathematics::StaticFindIntersectorRay3Plane3<Real>::Find() noexcept
     const Line3<Real> line{ ray.GetOrigin(), ray.GetDirection() };
     StaticFindIntersectorLine3Plane3<Real> intr{ line, plane };
     rayParameter = intr.GetLineParameter();
-    if (intr.IsIntersection() && Math::GetValue(0) <= rayParameter)
+    if (intr.IsIntersection() && MathType::GetValue(0) <= rayParameter)
     {
         // 线与平面相交，但可能与射线不在同一点。
         this->SetIntersectionType(intr.GetIntersectionType());

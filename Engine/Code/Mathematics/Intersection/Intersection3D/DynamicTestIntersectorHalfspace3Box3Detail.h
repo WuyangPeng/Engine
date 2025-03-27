@@ -55,12 +55,12 @@ Mathematics::Box3<Real> Mathematics::DynamicTestIntersectorHalfspace3Box3<Real>:
 template <typename Real>
 void Mathematics::DynamicTestIntersectorHalfspace3Box3<Real>::Test()
 {
-    this->SetContactTime(Math::GetValue(0));
+    this->SetContactTime(MathType::GetValue(0));
 
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
     const auto projection = TestIntersectorAxis<Real>::GetProjection(halfspace.GetNormal(), box);
 
-    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -Math::maxReal, halfspace.GetConstant(), projection.first, projection.second, this->GetTMax() };
+    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -MathType::maxReal, halfspace.GetConstant(), projection.first, projection.second, this->GetTMax() };
 
     auto contactTime = testIntersectorAxis.GetTFirst();
     if (testIntersectorAxis.GetResult())

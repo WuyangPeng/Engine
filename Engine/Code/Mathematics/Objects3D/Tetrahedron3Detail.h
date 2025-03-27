@@ -120,7 +120,7 @@ typename Mathematics::Tetrahedron3<Real>::PlaneContainerType Mathematics::Tetrah
 
 #include SYSTEM_WARNING_POP
 
-    if (det < Math::GetValue(0))
+    if (det < MathType::GetValue(0))
     {
         // 法线是指向内部点，改变他们的方向。
         for (auto& value : normal)

@@ -29,10 +29,10 @@ namespace Mathematics
         using Ray2 = Ray2<Real>;
         using Triangle2 = Triangle2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorRay2Triangle2(const Ray2& ray, const Triangle2& triangle, const Real dotThreshold = Math::GetZeroTolerance());
+        StaticTestIntersectorRay2Triangle2(const Ray2& ray, const Triangle2& triangle, const Real dotThreshold = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

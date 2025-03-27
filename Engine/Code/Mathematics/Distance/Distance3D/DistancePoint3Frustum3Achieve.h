@@ -64,7 +64,7 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
 
     // 在具有非负Real和U坐标的八分圆中执行计算。
     auto rSignChange = false;
-    if (test.GetX() < Math::GetValue(0))
+    if (test.GetX() < MathType::GetValue(0))
     {
         rSignChange = true;
         test.SetX(-test.GetX());
@@ -75,7 +75,7 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
     }
 
     auto uSignChange = false;
-    if (test.GetY() < Math::GetValue(0))
+    if (test.GetY() < MathType::GetValue(0))
     {
         uSignChange = true;
         test.SetY(-test.GetY());
@@ -215,7 +215,7 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
             {
                 auto rightUpDirectionDot = rightMin * test.GetX() + upMin * test.GetY() + directionMin * test.GetZ();
                 auto rightEdgeDot = upMin * rightUpDirectionDot - minRightUpDirectionDot * test.GetY();
-                if (Math::GetValue(0) <= rightEdgeDot)
+                if (MathType::GetValue(0) <= rightEdgeDot)
                 {
                     auto rightDirectionDot = rightMin * test.GetX() + directionMin * test.GetZ();
                     if (maxRightDirectionDot <= rightDirectionDot)
@@ -245,7 +245,7 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
                 else
                 {
                     auto upEdgeDot = rightMin * rightUpDirectionDot - minRightUpDirectionDot * test.GetX();
-                    if (Math::GetValue(0) <= upEdgeDot)
+                    if (MathType::GetValue(0) <= upEdgeDot)
                     {
                         auto upDirectionDot = upMin * test.GetY() + directionMin * test.GetZ();
                         if (maxUpDirectionDot <= upDirectionDot)
@@ -305,9 +305,9 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
     {
         auto rightDot = directionMin * test.GetX() - rightMin * test.GetZ();
         auto upDot = directionMin * test.GetY() - upMin * test.GetZ();
-        if (rightDot <= Math::GetValue(0))
+        if (rightDot <= MathType::GetValue(0))
         {
-            if (upDot <= Math::GetValue(0))
+            if (upDot <= MathType::GetValue(0))
             {
                 // 指向内部视锥
                 closest = test;
@@ -334,7 +334,7 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
         }
         else
         {
-            if (upDot <= Math::GetValue(0))
+            if (upDot <= MathType::GetValue(0))
             {
                 auto rightDirectionDot = rightMin * test.GetX() + directionMin * test.GetZ();
                 if (maxRightDirectionDot <= rightDirectionDot)
@@ -357,7 +357,7 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
             {
                 auto rightUpDirectionDot = rightMin * test.GetX() + upMin * test.GetY() + directionMin * test.GetZ();
                 auto rightEdgeDot = upMin * rightUpDirectionDot - minRightUpDirectionDot * test.GetY();
-                if (Math::GetValue(0) <= rightEdgeDot)
+                if (MathType::GetValue(0) <= rightEdgeDot)
                 {
                     auto rightDirectionDot = rightMin * test.GetX() + directionMin * test.GetZ();
                     if (maxRightDirectionDot <= rightDirectionDot)
@@ -379,7 +379,7 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
                 else
                 {
                     auto upEdgeDot = rightMin * rightUpDirectionDot - minRightUpDirectionDot * test.GetX();
-                    if (Math::GetValue(0) <= upEdgeDot)
+                    if (MathType::GetValue(0) <= upEdgeDot)
                     {
                         auto upDirectionDot = upMin * test.GetY() + directionMin * test.GetZ();
                         if (maxUpDirectionDot <= upDirectionDot)
@@ -440,7 +440,7 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
                               closest.GetY() * frustum.GetUpVector() +
                               closest.GetZ() * frustum.GetDirectionVector();
 
-    return DistanceResult{ Vector3Tools::GetLengthSquared(diff), Math::GetValue(0), point, closestPoint };
+    return DistanceResult{ Vector3Tools::GetLengthSquared(diff), MathType::GetValue(0), point, closestPoint };
 }
 
 template <typename Real>

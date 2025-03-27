@@ -29,10 +29,10 @@ namespace Mathematics
         using Box3 = Box3<Real>;
         using Sphere3 = Sphere3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorBox3Sphere3(const Box3& box, const Sphere3& sphere, const Real epsilon = Math::GetZeroTolerance());
+        StaticTestIntersectorBox3Sphere3(const Box3& box, const Sphere3& sphere, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

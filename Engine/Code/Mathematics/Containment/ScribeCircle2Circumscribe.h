@@ -26,7 +26,7 @@ namespace Mathematics
         using ClassType = ScribeCircle2Circumscribe<Real>;
         using Vector2 = Vector2<Real>;
         using Circle2 = Circle2<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         ScribeCircle2Circumscribe(const Vector2& v0, const Vector2& v1, const Vector2& v2);

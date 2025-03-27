@@ -121,7 +121,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
 
     std::array<Real, 3> z{ temp.at(j0)[2], temp.at(j1)[2], temp.at(j2)[2] };
 
-    const auto hhalf = Math::GetRational(1, 2) * cylinder.GetHeight();
+    const auto hhalf = MathType::GetRational(1, 2) * cylinder.GetHeight();
     if (z.at(2) < -hhalf || hhalf < z.at(0))
     {
         this->SetIntersectionType(IntersectionType::Empty);
@@ -152,8 +152,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
             {
                 auto numer0 = -hhalf - z.at(0);
                 auto numer1 = +hhalf - z.at(0);
-                auto invDenom0 = Math::GetValue(1) / (z.at(1) - z.at(0));
-                auto invDenom1 = Math::GetValue(1) / (z.at(2) - z.at(0));
+                auto invDenom0 = MathType::GetValue(1) / (z.at(1) - z.at(0));
+                auto invDenom1 = MathType::GetValue(1) / (z.at(2) - z.at(0));
                 auto t = numer0 * invDenom1;
                 polygon.at(0) = q.at(0) + t * (q.at(2) - q.at(0));
                 t = numer0 * invDenom0;
@@ -177,8 +177,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
             {
                 auto numer0 = -hhalf - z.at(2);
                 auto numer1 = +hhalf - z.at(2);
-                auto invDenom0 = (Math::GetValue(1)) / (z.at(1) - z.at(2));
-                auto invDenom1 = (Math::GetValue(1)) / (z.at(0) - z.at(2));
+                auto invDenom0 = (MathType::GetValue(1)) / (z.at(1) - z.at(2));
+                auto invDenom1 = (MathType::GetValue(1)) / (z.at(0) - z.at(2));
                 auto t = numer0 * invDenom1;
                 polygon.at(0) = q.at(2) + t * (q.at(0) - q.at(2));
                 t = numer0 * invDenom0;
@@ -202,8 +202,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
             {
                 auto numer0 = -hhalf - z.at(0);
                 auto numer1 = +hhalf - z.at(0);
-                auto invDenom0 = (Math::GetValue(1)) / (z.at(1) - z.at(0));
-                auto invDenom1 = (Math::GetValue(1)) / (z.at(2) - z.at(0));
+                auto invDenom0 = (MathType::GetValue(1)) / (z.at(1) - z.at(0));
+                auto invDenom1 = (MathType::GetValue(1)) / (z.at(2) - z.at(0));
                 auto t = numer0 * invDenom1;
                 polygon.at(0) = q.at(0) + t * (q.at(2) - q.at(0));
                 t = numer0 * invDenom0;
@@ -230,8 +230,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
             if (z.at(1) <= -hhalf)
             {
                 auto numer0 = -hhalf - z.at(2);
-                auto invDenom0 = Math::GetValue(1) / (z.at(1) - z.at(2));
-                auto invDenom1 = Math::GetValue(1) / (z.at(0) - z.at(2));
+                auto invDenom0 = MathType::GetValue(1) / (z.at(1) - z.at(2));
+                auto invDenom1 = MathType::GetValue(1) / (z.at(0) - z.at(2));
                 auto t = numer0 * invDenom0;
                 polygon.at(0) = q.at(2) + t * (q.at(1) - q.at(2));
                 t = numer0 * invDenom1;
@@ -251,8 +251,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
             else
             {
                 auto numer0 = -hhalf - z.at(0);
-                auto invDenom0 = (Math::GetValue(1)) / (z.at(2) - z.at(0));
-                auto invDenom1 = (Math::GetValue(1)) / (z.at(1) - z.at(0));
+                auto invDenom0 = (MathType::GetValue(1)) / (z.at(2) - z.at(0));
+                auto invDenom1 = (MathType::GetValue(1)) / (z.at(1) - z.at(0));
                 auto t = numer0 * invDenom0;
                 polygon.at(0) = q.at(0) + t * (q.at(2) - q.at(0));
                 t = numer0 * invDenom1;
@@ -306,8 +306,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
         if (hhalf <= z.at(1))
         {
             auto numer0 = -hhalf - z.at(0);
-            auto invDenom0 = (Math::GetValue(1)) / (z.at(2) - z.at(0));
-            auto invDenom1 = (Math::GetValue(1)) / (z.at(1) - z.at(0));
+            auto invDenom0 = (MathType::GetValue(1)) / (z.at(2) - z.at(0));
+            auto invDenom1 = (MathType::GetValue(1)) / (z.at(1) - z.at(0));
             auto t = numer0 * invDenom0;
             polygon.at(0) = q.at(0) + t * (q.at(2) - q.at(0));
             t = numer0 * invDenom1;
@@ -327,8 +327,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
         else
         {
             auto numer0 = -hhalf - z.at(2);
-            auto invDenom0 = (Math::GetValue(1)) / (z.at(1) - z.at(2));
-            auto invDenom1 = (Math::GetValue(1)) / (z.at(0) - z.at(2));
+            auto invDenom0 = (MathType::GetValue(1)) / (z.at(1) - z.at(2));
+            auto invDenom1 = (MathType::GetValue(1)) / (z.at(0) - z.at(2));
             auto t = numer0 * invDenom0;
             polygon.at(0) = q.at(2) + t * (q.at(1) - q.at(2));
             t = numer0 * invDenom1;
@@ -390,7 +390,7 @@ bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::DiskOverlapsSeg
     auto rSqr = cylinder.GetRadius() * cylinder.GetRadius();
     auto D = q0 - q1;
     auto dot = Vector2Tools<Real>::DotProduct(q0, D);
-    if (dot <= Math::GetValue(0))
+    if (dot <= MathType::GetValue(0))
     {
         return Vector2Tools<Real>::DotProduct(q0, q0) <= rSqr;
     }
@@ -415,11 +415,11 @@ bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::DiskOverlapsPol
     for (auto i0 = numVertices - 1, i1 = 0; i1 < numVertices; i0 = i1++)
     {
         auto dot = Vector2Tools<Real>::DotPerp(q.at(i0), (q.at(i0) - q.at(i1)));
-        if (Math::GetValue(0) < dot)
+        if (MathType::GetValue(0) < dot)
         {
             ++positive;
         }
-        else if (dot < Math::GetValue(0))
+        else if (dot < MathType::GetValue(0))
         {
             ++negative;
         }

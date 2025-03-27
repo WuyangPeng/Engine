@@ -28,10 +28,10 @@ namespace Mathematics
 
         using Function = Real (*)(Real, Real, Real);
         using Bisect3Root = Bisect3Root<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
-        Bisect3(Function function0, Function function1, Function function2, int maxLevel, Real tolerance = Math::GetZeroTolerance()) noexcept;
+        Bisect3(Function function0, Function function1, Function function2, int maxLevel, Real tolerance = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

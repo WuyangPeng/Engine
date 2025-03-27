@@ -63,7 +63,7 @@ typename Mathematics::DistanceLine3Triangle3<Real>::DistanceResult Mathematics::
     const auto normal = Vector3Tools::UnitCrossProduct(edge0, edge1);
 
     if (const auto normalDotDirection = Vector3Tools::DotProduct(normal, line.GetDirection());
-        Math::GetZeroTolerance() < Math::FAbs(normalDotDirection))
+        MathType::GetZeroTolerance() < MathType::FAbs(normalDotDirection))
     {
         // 直线和三角形不平行，因此直线与三角形的平面相交。
         auto diff = line.GetOrigin() - triangle.GetVertex(0);
@@ -78,14 +78,14 @@ typename Mathematics::DistanceLine3Triangle3<Real>::DistanceResult Mathematics::
         auto vVectorDotEdge0 = Vector3Tools::DotProduct(vVector, edge0);
         auto vVectorDotEdge1 = Vector3Tools::DotProduct(vVector, edge1);
         auto vVectorDotDiff = Vector3Tools::DotProduct(vVector, diff);
-        auto invDet = (Math::GetValue(1)) / (uVectorDotEdge0 * vVectorDotEdge1 - uVectorDotEdge1 * vVectorDotEdge0);
+        auto invDet = (MathType::GetValue(1)) / (uVectorDotEdge0 * vVectorDotEdge1 - uVectorDotEdge1 * vVectorDotEdge0);
 
         // 相交点的重心坐标。
         auto b1 = (vVectorDotEdge1 * uVectorDotDiff - uVectorDotEdge1 * vVectorDotDiff) * invDet;
         auto b2 = (uVectorDotEdge0 * vVectorDotDiff - vVectorDotEdge0 * uVectorDotDiff) * invDet;
-        auto b0 = Math::GetValue(1) - b1 - b2;
+        auto b0 = MathType::GetValue(1) - b1 - b2;
 
-        if (Math::GetValue(0) <= b0 && Math::GetValue(0) <= b1 && Math::GetValue(0) <= b2)
+        if (MathType::GetValue(0) <= b0 && MathType::GetValue(0) <= b1 && MathType::GetValue(0) <= b2)
         {
             // 相交点的线参数。
             auto directionDotEdge0 = Vector3Tools::DotProduct(line.GetDirection(), edge0);
@@ -103,24 +103,24 @@ typename Mathematics::DistanceLine3Triangle3<Real>::DistanceResult Mathematics::
 
             const auto closestPoint1 = triangle.GetVertex(0) + b1 * edge0 + b2 * edge1;
 
-            return DistanceResult{ Math::GetValue(0), Math::GetValue(0), closestPoint0, closestPoint1, lineParameter, Math::GetValue(0) };
+            return DistanceResult{ MathType::GetValue(0), MathType::GetValue(0), closestPoint0, closestPoint1, lineParameter, MathType::GetValue(0) };
         }
     }
 
     Vector3 closestPoint0{};
     Vector3 closestPoint1{};
-    auto lineParameter = Math::GetValue(0);
+    auto lineParameter = MathType::GetValue(0);
 
     /// （1）线不平行于三角形，并且线和三角形的平面的交点在三角形之外，或者（2）线和三角形平行。
     /// 无论如何，三角形上的最接近点在三角形的边缘上。 将线与三角形的所有三个边缘进行比较。
-    auto sqrDist = Math::maxReal;
+    auto sqrDist = MathType::maxReal;
     constexpr auto size = 3;
     for (auto i0 = 2, i1 = 0; i1 < size; i0 = i1++)
     {
-        auto center = (Math::GetRational(1, 2)) * (triangle.GetVertex(i0) + triangle.GetVertex(i1));
+        auto center = (MathType::GetRational(1, 2)) * (triangle.GetVertex(i0) + triangle.GetVertex(i1));
         auto direction = triangle.GetVertex(i1) - triangle.GetVertex(i0);
 
-        auto extent = (Math::GetRational(1, 2)) * Vector3Tools::GetLength(direction);
+        auto extent = (MathType::GetRational(1, 2)) * Vector3Tools::GetLength(direction);
         const Segment3<Real> segment{ extent, center, direction };
 
         DistanceLine3Segment3<Real> distanceLine3Segment3{ line, segment };
@@ -133,13 +133,13 @@ typename Mathematics::DistanceLine3Triangle3<Real>::DistanceResult Mathematics::
 
             lineParameter = squared.GetLhsParameter();
             auto ratio = squared.GetRhsParameter() / segment.GetExtent();
-            triangleBary[i0] = (Math::GetRational(1, 2)) * (Math::GetValue(1) - ratio);
-            triangleBary[i1] = Math::GetValue(1) - triangleBary[i0];
-            triangleBary[size - i0 - i1] = Math::GetValue(0);
+            triangleBary[i0] = (MathType::GetRational(1, 2)) * (MathType::GetValue(1) - ratio);
+            triangleBary[i1] = MathType::GetValue(1) - triangleBary[i0];
+            triangleBary[size - i0 - i1] = MathType::GetValue(0);
         }
     }
 
-    return DistanceResult{ sqrDist, Math::GetValue(0), closestPoint0, closestPoint1, lineParameter, Math::GetValue(0) };
+    return DistanceResult{ sqrDist, MathType::GetValue(0), closestPoint0, closestPoint1, lineParameter, MathType::GetValue(0) };
 }
 
 template <typename Real>

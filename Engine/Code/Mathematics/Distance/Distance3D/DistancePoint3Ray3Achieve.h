@@ -61,19 +61,19 @@ typename Mathematics::DistancePoint3Ray3<Real>::DistanceResult Mathematics::Dist
     auto difference = point - ray.GetOrigin();
     auto param = Vector3Tools::DotProduct(ray.GetDirection(), difference);
 
-    if (param <= Math::GetValue(0))
+    if (param <= MathType::GetValue(0))
     {
-        param = Math::GetValue(0);
+        param = MathType::GetValue(0);
     }
 
     const auto rhsClosestPoint = ray.GetOrigin() + param * ray.GetDirection();
     difference = rhsClosestPoint - point;
 
     return DistanceResult{ Vector3Tools::GetLengthSquared(difference),
-                           Math::GetValue(0),
+                           MathType::GetValue(0),
                            point,
                            rhsClosestPoint,
-                           Math::GetValue(0),
+                           MathType::GetValue(0),
                            param };
 }
 

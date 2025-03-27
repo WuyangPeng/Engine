@@ -25,7 +25,7 @@ namespace Mathematics
 
         using ClassType = BrentsMethod<Real, UserDataType>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using BrentsMethodRoot = BrentsMethodRoot<Real>;
 
         // 一个函数F(x)，但有一个额外的参数，

@@ -33,7 +33,7 @@ Mathematics::Sphere3<Real>::Sphere3() noexcept
 template <typename Real>
 bool Mathematics::Sphere3<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= radius)
+    if (MathType::GetValue(0) <= radius)
         return true;
     else
         return false;

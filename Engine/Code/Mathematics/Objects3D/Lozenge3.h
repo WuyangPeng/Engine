@@ -25,7 +25,7 @@ namespace Mathematics
     public:
         using ClassType = Lozenge3<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Rectangle3 = Rectangle3<Real>;
         using AlgebraRectangle3 = Algebra::Rectangle3<Real>;
 

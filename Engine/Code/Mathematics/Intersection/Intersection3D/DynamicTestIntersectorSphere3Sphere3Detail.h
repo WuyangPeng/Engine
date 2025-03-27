@@ -62,10 +62,10 @@ void Mathematics::DynamicTestIntersectorSphere3Sphere3<Real>::Test()
     auto radiusSumSqr = radiusSum * radiusSum;
 
     auto result = false;
-    if (Math::GetValue(0) < relVelocitySquared)
+    if (MathType::GetValue(0) < relVelocitySquared)
     {
         auto dot = Vector3Tools::DotProduct(diff, relVelocity);
-        if (dot <= Math::GetValue(0))
+        if (dot <= MathType::GetValue(0))
         {
             if (-this->GetTMax() * relVelocitySquared <= dot)
             {
@@ -73,7 +73,7 @@ void Mathematics::DynamicTestIntersectorSphere3Sphere3<Real>::Test()
             }
             else
             {
-                result = this->GetTMax() * (this->GetTMax() * relVelocitySquared + (Math::GetValue(2)) * dot) + diffSquared <= radiusSumSqr;
+                result = this->GetTMax() * (this->GetTMax() * relVelocitySquared + (MathType::GetValue(2)) * dot) + diffSquared <= radiusSumSqr;
             }
         }
     }

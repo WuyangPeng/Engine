@@ -17,7 +17,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorSegment3Triangle3<Real>::StaticFindIntersectorSegment3Triangle3(const Segment3& segment, const Triangle3& triangle, const Real epsilon)
-    : ParentType{ epsilon }, segment{ segment }, triangle{ triangle }, segmentParameter{}, triBary0{}, triBary1{}, triBary2{ Math::GetValue(1) }, quantity{}, point0{}, point1{}
+    : ParentType{ epsilon }, segment{ segment }, triangle{ triangle }, segmentParameter{}, triBary0{}, triBary1{}, triBary2{ MathType::GetValue(1) }, quantity{}, point0{}, point1{}
 {
     Find();
 
@@ -68,14 +68,14 @@ void Mathematics::StaticFindIntersectorSegment3Triangle3<Real>::Find()
     //   |Dot(D,N)|*b2 = sign(Dot(D,N))*Dot(D,Cross(E1,Q))
     //   |Dot(D,N)|*t = -sign(Dot(D,N))*Dot(Q,N)
     auto directionDotNormal = Vector3Tools::DotProduct(segment.GetDirection(), normal);
-    auto sign = Math::GetValue(0);
-    if (Math::GetZeroTolerance() < directionDotNormal)
+    auto sign = MathType::GetValue(0);
+    if (MathType::GetZeroTolerance() < directionDotNormal)
     {
-        sign = Math::GetValue(1);
+        sign = MathType::GetValue(1);
     }
-    else if (directionDotNormal < -Math::GetZeroTolerance())
+    else if (directionDotNormal < -MathType::GetZeroTolerance())
     {
-        sign = Math::GetValue(-1);
+        sign = MathType::GetValue(-1);
         directionDotNormal = -directionDotNormal;
     }
     else
@@ -87,10 +87,10 @@ void Mathematics::StaticFindIntersectorSegment3Triangle3<Real>::Find()
     }
 
     auto value0 = sign * Vector3Tools::DotProduct(segment.GetDirection(), Vector3Tools::CrossProduct(diff, edge2));
-    if (Math::GetValue(0) <= value0)
+    if (MathType::GetValue(0) <= value0)
     {
         Real value1 = sign * Vector3Tools::DotProduct(segment.GetDirection(), Vector3Tools::CrossProduct(edge1, diff));
-        if (Math::GetValue(0) <= value1)
+        if (MathType::GetValue(0) <= value1)
         {
             if (value0 + value1 <= directionDotNormal)
             {
@@ -100,11 +100,11 @@ void Mathematics::StaticFindIntersectorSegment3Triangle3<Real>::Find()
                 if (-value3 <= value2 && value2 <= value3)
                 {
                     // 线段与三角形相交。
-                    auto inv = (Math::GetValue(1)) / directionDotNormal;
+                    auto inv = (MathType::GetValue(1)) / directionDotNormal;
                     segmentParameter = value2 * inv;
                     triBary1 = value0 * inv;
                     triBary2 = value1 * inv;
-                    triBary0 = Math::GetValue(1) - triBary1 - triBary2;
+                    triBary0 = MathType::GetValue(1) - triBary1 - triBary2;
 
                     this->SetIntersectionType(IntersectionType::Point);
                     quantity = 1;

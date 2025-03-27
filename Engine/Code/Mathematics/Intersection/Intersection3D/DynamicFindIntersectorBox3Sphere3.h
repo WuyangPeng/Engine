@@ -29,7 +29,7 @@ namespace Mathematics
         using Box3 = Box3<Real>;
         using Sphere3 = Sphere3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
 
     public:
         DynamicFindIntersectorBox3Sphere3(const Box3& box,
@@ -37,7 +37,7 @@ namespace Mathematics
                                           Real tmax,
                                           const Vector3& lhsVelocity,
                                           const Vector3& rhsVelocity,
-                                          const Real epsilon = Math::GetZeroTolerance());
+                                          const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

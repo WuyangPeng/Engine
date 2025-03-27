@@ -32,7 +32,7 @@ namespace Mathematics
 
         using Bisect2Root = Bisect2Root<Real>;
         using Bisect2RootSharedPtr = std::shared_ptr<Bisect2Root>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Bisect2 = Bisect2<Real>;
         using Bisect2Node = Bisect2Node<Real>;
         using Bisect2NodeSharedPtr = std::shared_ptr<Bisect2Node>;

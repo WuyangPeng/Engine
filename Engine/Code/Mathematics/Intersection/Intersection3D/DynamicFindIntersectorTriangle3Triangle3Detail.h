@@ -79,7 +79,7 @@ Mathematics::Vector3<Real> Mathematics::DynamicFindIntersectorTriangle3Triangle3
 
 template <typename Real>
 Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectInfo::IntersectInfo() noexcept
-    : result{}, side{ ContactSide::None }, tCfg0{}, tCfg1{}, tFirst{}, tLast{ Math::maxReal }
+    : result{}, side{ ContactSide::None }, tCfg0{}, tCfg1{}, tFirst{}, tLast{ MathType::maxReal }
 {
 }
 
@@ -118,7 +118,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
                             triangle1.GetVertex(0) - triangle1.GetVertex(2) };
     const auto normal1 = Vector3Tools::UnitCrossProduct(edge1.at(0), edge1.at(1));
 
-    if (Math::FAbs(Vector3Tools::DotProduct(normal0, normal1)) < Math::GetValue(1) - Math::GetZeroTolerance())
+    if (MathType::FAbs(Vector3Tools::DotProduct(normal0, normal1)) < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
         // 三角形不平行。
 
@@ -176,7 +176,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
         }
     }
 
-    if (intersectInfo.tFirst <= Math::GetValue(0))
+    if (intersectInfo.tFirst <= MathType::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;
@@ -220,9 +220,9 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configurat
     {
         if (d1 <= d2)  // D0 <= D1 <= D2
         {
-            if (Math::Approximate(d0, d1))
+            if (MathType::Approximate(d0, d1))
             {
-                if (Math::Approximate(d1, d2))
+                if (MathType::Approximate(d1, d2))
                 {
                     cfg.vertexProjectionMap = VertexProjectionMap::M111;
                 }
@@ -233,7 +233,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configurat
             }
             else  // ( D0 == D1 )
             {
-                if (Math::Approximate(d1, d2))
+                if (MathType::Approximate(d1, d2))
                 {
                     cfg.vertexProjectionMap = VertexProjectionMap::M21;
                 }
@@ -250,7 +250,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configurat
         }
         else if (d0 <= d2)  // D0 <= D2 < D1
         {
-            if (Math::Approximate(d1, d2))
+            if (MathType::Approximate(d1, d2))
             {
                 cfg.vertexProjectionMap = VertexProjectionMap::M111;
                 cfg.index.at(0) = 0;
@@ -269,7 +269,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configurat
         }
         else  // D2 < D0 <= D1
         {
-            if (Math::Approximate(d0, d1))
+            if (MathType::Approximate(d0, d1))
             {
                 cfg.vertexProjectionMap = VertexProjectionMap::M111;
             }
@@ -287,7 +287,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configurat
     }
     else if (d2 <= d1)  // D2 <= D1 < D0
     {
-        if (Math::Approximate(d2, d1))
+        if (MathType::Approximate(d2, d1))
         {
             cfg.vertexProjectionMap = VertexProjectionMap::M111;
             cfg.index.at(0) = 2;
@@ -306,7 +306,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configurat
     }
     else if (d2 <= d0)  // D1 < D2 <= D0
     {
-        if (Math::Approximate(d2, d0))
+        if (MathType::Approximate(d2, d0))
         {
             cfg.vertexProjectionMap = VertexProjectionMap::M111;
         }
@@ -341,11 +341,11 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
 
     // 等速分离轴测试。 uConfiguration和vConfiguration是新的潜在配置，而intersectInfo是最好的配置。
 
-    auto t = Math::GetValue(0);
+    auto t = MathType::GetValue(0);
 
     if (vConfiguration.max < uConfiguration.min)  // V在U的左侧
     {
-        if (speed <= Math::GetValue(0))  // V从U移开
+        if (speed <= MathType::GetValue(0))  // V从U移开
         {
             return intersectInfo;
         }
@@ -383,7 +383,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
     }
     else if (uConfiguration.max < vConfiguration.min)  // V在U的右边
     {
-        if (Math::GetValue(0) <= speed)  // V从U移开
+        if (MathType::GetValue(0) <= speed)  // V从U移开
         {
             return intersectInfo;
         }
@@ -421,7 +421,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
     }
     else  // 重叠间隔上的V和U
     {
-        if (Math::GetValue(0) < speed)
+        if (MathType::GetValue(0) < speed)
         {
             // 查找该轴上的最后一次接触时间。
             t = (uConfiguration.max - vConfiguration.min) / speed;
@@ -436,7 +436,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
                 return intersectInfo;
             }
         }
-        else if (speed < Math::GetValue(0))
+        else if (speed < MathType::GetValue(0))
         {
             // 查找该轴上的最后一次接触时间。
             t = (uConfiguration.min - vConfiguration.max) / speed;
@@ -570,14 +570,14 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
 {
     // 在与平面法线最对齐的坐标平面上投影三角形。
     auto maxNormal = 0;
-    auto x = Math::FAbs(plane.GetNormal().GetX());
-    auto y = Math::FAbs(plane.GetNormal().GetY());
+    auto x = MathType::FAbs(plane.GetNormal().GetX());
+    auto y = MathType::FAbs(plane.GetNormal().GetY());
     if (x < y)
     {
         maxNormal = 1;
         x = y;
     }
-    y = Math::FAbs(plane.GetNormal().GetZ());
+    y = MathType::FAbs(plane.GetNormal().GetZ());
     if (x < y)
     {
         maxNormal = 2;
@@ -623,7 +623,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
 
     auto edge0 = projectTriangle0.GetVertex(1) - projectTriangle0.GetVertex(0);
     auto edge1 = projectTriangle0.GetVertex(2) - projectTriangle0.GetVertex(0);
-    if (Vector2Tools<Real>::DotPerp(edge0, edge1) < Math::GetValue(0))
+    if (Vector2Tools<Real>::DotPerp(edge0, edge1) < MathType::GetValue(0))
     {
         // 三角形是顺时针方向，请重新排序。
         projectTriangle0 = Triangle2<Real>{ projectTriangle0Vector.at(0), projectTriangle0Vector.at(2), projectTriangle0Vector.at(1) };
@@ -631,7 +631,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
 
     edge0 = projectTriangle1.GetVertex(1) - projectTriangle1.GetVertex(0);
     edge1 = projectTriangle1.GetVertex(2) - projectTriangle1.GetVertex(0);
-    if (Vector2Tools<Real>::DotPerp(edge0, edge1) < Math::GetValue(0))
+    if (Vector2Tools<Real>::DotPerp(edge0, edge1) < MathType::GetValue(0))
     {
         // 三角形是顺时针方向，请重新排序。
         projectTriangle1 = Triangle2<Real>{ projectTriangle1Vector.at(0), projectTriangle1Vector.at(2), projectTriangle1Vector.at(1) };
@@ -647,30 +647,30 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
     const auto quantity = intr.GetQuantity();
     if (maxNormal == 0)
     {
-        auto invNormalX = (Math::GetValue(1)) / plane.GetNormal().GetX();
+        auto invNormalX = (MathType::GetValue(1)) / plane.GetNormal().GetX();
         for (auto i = 0; i < quantity; i++)
         {
-            Vector3 vertex{ Math::GetValue(0), intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY() };
+            Vector3 vertex{ MathType::GetValue(0), intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY() };
             vertex.SetX(invNormalX * (plane.GetConstant() - plane.GetNormal().GetY() * vertex.GetY() - plane.GetNormal().GetZ() * vertex.GetZ()));
             point.emplace_back(vertex);
         }
     }
     else if (maxNormal == 1)
     {
-        auto invNormalY = (Math::GetValue(1)) / plane.GetNormal().GetY();
+        auto invNormalY = (MathType::GetValue(1)) / plane.GetNormal().GetY();
         for (auto i = 0; i < quantity; i++)
         {
-            Vector3 vertex{ intr.GetPoint(i).GetX(), Math::GetValue(0), intr.GetPoint(i).GetY() };
+            Vector3 vertex{ intr.GetPoint(i).GetX(), MathType::GetValue(0), intr.GetPoint(i).GetY() };
             vertex.SetY(invNormalY * (plane.GetConstant() - plane.GetNormal().GetX() * vertex.GetX() - plane.GetNormal().GetZ() * vertex.GetZ()));
             point.emplace_back(vertex);
         }
     }
     else
     {
-        auto invNormalZ = (Math::GetValue(1)) / plane.GetNormal().GetZ();
+        auto invNormalZ = (MathType::GetValue(1)) / plane.GetNormal().GetZ();
         for (auto i = 0; i < quantity; i++)
         {
-            Vector3 vertex{ intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY(), Math::GetValue(0) };
+            Vector3 vertex{ intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY(), MathType::GetValue(0) };
             vertex.SetZ(invNormalZ * (plane.GetConstant() - plane.GetNormal().GetX() * vertex.GetX() - plane.GetNormal().GetY() * vertex.GetY()));
             point.emplace_back(vertex);
         }
@@ -693,15 +693,15 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeEdgeInt
     /// 因此s * N = s * E0xE1 = DxE1且s = N * DxE1 / N * N。
     auto delta = v0 - u0;
     auto s = Vector3Tools::DotProduct(normal, (Vector3Tools::CrossProduct(delta, edge1) / Vector3Tools::GetLengthSquared(normal)));
-    if (s < Math::GetValue(0))
+    if (s < MathType::GetValue(0))
     {
-        MATHEMATICS_ASSERTION_0(-Math::GetZeroTolerance() <= s, "意外的s值。\n");
-        s = Math::GetValue(0);
+        MATHEMATICS_ASSERTION_0(-MathType::GetZeroTolerance() <= s, "意外的s值。\n");
+        s = MathType::GetValue(0);
     }
-    else if (Math::GetValue(1) < s)
+    else if (MathType::GetValue(1) < s)
     {
-        MATHEMATICS_ASSERTION_0(s <= Math::GetValue(1) + Math::GetZeroTolerance(), "意外的s值。\n");
-        s = Math::GetValue(1);
+        MATHEMATICS_ASSERTION_0(s <= MathType::GetValue(1) + MathType::GetZeroTolerance(), "意外的s值。\n");
+        s = MathType::GetValue(1);
     }
 
     this->SetIntersectionType(IntersectionType::Point);

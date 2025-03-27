@@ -27,7 +27,7 @@ namespace Mathematics
         using ClassType = Circle3<Real>;
 
         using Vector3 = Vector3<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector3Tools = Vector3Tools<Real>;
 
     public:
@@ -44,7 +44,7 @@ namespace Mathematics
                 const Vector3& direction1,
                 const Vector3& normal,
                 const Real radius,
-                const Real epsilon = Math::GetZeroTolerance()) noexcept;
+                const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

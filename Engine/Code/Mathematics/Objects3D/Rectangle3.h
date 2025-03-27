@@ -27,7 +27,7 @@ namespace Mathematics
 
         using ClassType = Rectangle3<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector3 = Vector3<Real>;
         using VerticesType = std::vector<Vector3>;
         using AlgebraRectangle3 = Algebra::Rectangle3<Real>;
@@ -37,8 +37,8 @@ namespace Mathematics
         // 参数s0和s1是由约束|s0| <= e0 和|s1| <= e1，
         // 其中e0 > 0和e1 > 0称为矩形的范围。
         Rectangle3() noexcept;
-        Rectangle3(const Vector3& center, const Vector3& axis0, const Vector3& axis1, Real extent0, Real extent1, Real epsilon = Math::GetZeroTolerance()) noexcept;
-        explicit Rectangle3(const AlgebraRectangle3& rectangle3, Real epsilon = Math::GetZeroTolerance());
+        Rectangle3(const Vector3& center, const Vector3& axis0, const Vector3& axis1, Real extent0, Real extent1, Real epsilon = MathType::GetZeroTolerance()) noexcept;
+        explicit Rectangle3(const AlgebraRectangle3& rectangle3, Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 

@@ -27,13 +27,13 @@ namespace Mathematics
 
         using ClassType = LinearSystemInverse<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using VariableMatrix = VariableMatrix<Real>;
         using RealContainer = std::vector<Real>;
 
     public:
-        explicit LinearSystemInverse(const VariableMatrix& matrix, const RealContainer& input, Real zeroTolerance = Math::GetZeroTolerance());
-        explicit LinearSystemInverse(const VariableMatrix& matrix, Real zeroTolerance = Math::GetZeroTolerance());
+        explicit LinearSystemInverse(const VariableMatrix& matrix, const RealContainer& input, Real zeroTolerance = MathType::GetZeroTolerance());
+        explicit LinearSystemInverse(const VariableMatrix& matrix, Real zeroTolerance = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 

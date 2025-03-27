@@ -69,7 +69,7 @@ void Mathematics::StaticFindIntersectorSegment2Arc2<Real>::Find()
         // 如果线-圆交点不在线段上，则减少根数。
         if (rootCount == 1)
         {
-            if (segment.GetExtent() < Math::FAbs(line2Circle2.GetParameter(0)))
+            if (segment.GetExtent() < MathType::FAbs(line2Circle2.GetParameter(0)))
             {
                 rootCount = 0;
             }

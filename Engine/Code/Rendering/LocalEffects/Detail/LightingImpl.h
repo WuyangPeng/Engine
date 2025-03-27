@@ -30,7 +30,7 @@ namespace Rendering
         using BufferTarget = CoreTools::BufferTarget;
 
     public:
-        explicit LightingImpl(float epsilon = Math::GetZeroTolerance()) noexcept;
+        explicit LightingImpl(float epsilon = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

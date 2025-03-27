@@ -18,7 +18,7 @@
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::AlignedBox<N, Real>::AlignedBox() noexcept requires(N == 2)
-    : min{ Math::GetValue(-1), Math::GetValue(-1) }, max{ Math::GetValue(1), Math::GetValue(1) }
+    : min{ MathType::GetValue(-1), MathType::GetValue(-1) }, max{ MathType::GetValue(1), MathType::GetValue(1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -26,7 +26,7 @@ Mathematics::AlignedBox<N, Real>::AlignedBox() noexcept requires(N == 2)
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::AlignedBox<N, Real>::AlignedBox() noexcept requires(N == 3)
-    : min{ Math::GetValue(-1), Math::GetValue(-1), Math::GetValue(-1) }, max{ Math::GetValue(1), Math::GetValue(1), Math::GetValue(1) }
+    : min{ MathType::GetValue(-1), MathType::GetValue(-1), MathType::GetValue(-1) }, max{ MathType::GetValue(1), MathType::GetValue(1), MathType::GetValue(1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -115,8 +115,8 @@ typename Mathematics::AlignedBox<N, Real>::AlignedBoxCentered Mathematics::Align
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const auto center = (max + min) * Math::GetRational(1, 2);
-    const auto extent = (max - min) * Math::GetRational(1, 2);
+    const auto center = (max + min) * MathType::GetRational(1, 2);
+    const auto extent = (max - min) * MathType::GetRational(1, 2);
 
     return AlignedBoxCentered{ center, extent };
 }

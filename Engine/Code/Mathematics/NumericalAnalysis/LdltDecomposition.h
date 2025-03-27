@@ -33,7 +33,7 @@ namespace Mathematics
 
         using Matrix = Algebra::Matrix<N, N, T>;
         using Vector = Algebra::Vector<N, T>;
-        using Math = Math<T>;
+        using MathType = Math<T>;
 
     public:
         LdltDecomposition() noexcept;
@@ -60,7 +60,7 @@ namespace Mathematics
 
         using VariableMatrix = VariableMatrix<T>;
         using VariableLengthVector = VariableLengthVector<T>;
-        using Math = Math<T>;
+        using MathType = Math<T>;
 
     public:
         explicit LdltDecomposition(int n);

@@ -61,13 +61,13 @@ void Mathematics::StaticTestIntersectorSegment3Triangle3<Real>::Test()
 
     auto ddn = Vector3Tools::DotProduct(segment.GetDirection(), normal);
     Real sign{};
-    if (ddn > Math::GetZeroTolerance())
+    if (ddn > MathType::GetZeroTolerance())
     {
-        sign = Math::GetValue(1);
+        sign = MathType::GetValue(1);
     }
-    else if (ddn < -Math::GetZeroTolerance())
+    else if (ddn < -MathType::GetZeroTolerance())
     {
-        sign = Math::GetValue(-1);
+        sign = MathType::GetValue(-1);
         ddn = -ddn;
     }
     else
@@ -78,10 +78,10 @@ void Mathematics::StaticTestIntersectorSegment3Triangle3<Real>::Test()
     }
 
     auto ddqxe2 = sign * Vector3Tools::DotProduct(segment.GetDirection(), Vector3Tools::CrossProduct(diff, edge2));
-    if (Math::GetValue(0) <= ddqxe2)
+    if (MathType::GetValue(0) <= ddqxe2)
     {
         auto dde1xq = sign * Vector3Tools::DotProduct(segment.GetDirection(), Vector3Tools::CrossProduct(edge1, diff));
-        if (Math::GetValue(0) <= dde1xq)
+        if (MathType::GetValue(0) <= dde1xq)
         {
             if (ddqxe2 + dde1xq <= ddn)
             {

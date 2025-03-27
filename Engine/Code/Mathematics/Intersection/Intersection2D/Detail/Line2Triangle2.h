@@ -23,7 +23,7 @@ namespace Mathematics
     public:
         using ClassType = Line2Triangle2<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector2 = Vector2<Real>;
         using Triangle2 = Triangle2<Real>;
         using Vector2Tools = Vector2Tools<Real>;

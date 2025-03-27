@@ -25,7 +25,7 @@ namespace Mathematics
 
         using Vector2 = Vector2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
 
     public:
         // 线性分量的分类。
@@ -43,7 +43,7 @@ namespace Mathematics
                                            const Vector2& rhsOrigin,
                                            const Vector2& rhsDirection,
                                            bool isCalculateParameter = true,
-                                           const Real epsilon = Math::GetZeroTolerance());
+                                           const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

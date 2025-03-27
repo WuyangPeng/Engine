@@ -23,10 +23,10 @@ Mathematics::Ellipsoid3Coefficients<Real>::Ellipsoid3Coefficients(const Matrix3&
                     vector.GetY(),
                     vector.GetZ(),
                     matrix.template GetValue<0, 0>(),
-                    matrix.template GetValue<0, 1>() * Math::GetValue(2),
-                    matrix.template GetValue<0, 2>() * Math::GetValue(2),
+                    matrix.template GetValue<0, 1>() * MathType::GetValue(2),
+                    matrix.template GetValue<0, 2>() * MathType::GetValue(2),
                     matrix.template GetValue<1, 1>(),
-                    matrix.template GetValue<1, 2>() * Math::GetValue(2),
+                    matrix.template GetValue<1, 2>() * MathType::GetValue(2),
                     matrix.template GetValue<2, 2>() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -61,13 +61,13 @@ Mathematics::Matrix3<Real> Mathematics::Ellipsoid3Coefficients<Real>::GetMatrix(
 #include SYSTEM_WARNING_DISABLE(26446)
 
     return Matrix3{ coefficients[4],
-                    Math::GetRational(1, 2) * coefficients[5],
-                    Math::GetRational(1, 2) * coefficients[6],
-                    Math::GetRational(1, 2) * coefficients[5],
+                    MathType::GetRational(1, 2) * coefficients[5],
+                    MathType::GetRational(1, 2) * coefficients[6],
+                    MathType::GetRational(1, 2) * coefficients[5],
                     coefficients[7],
-                    Math::GetRational(1, 2) * coefficients[8],
-                    Math::GetRational(1, 2) * coefficients[6],
-                    Math::GetRational(1, 2) * coefficients[8],
+                    MathType::GetRational(1, 2) * coefficients[8],
+                    MathType::GetRational(1, 2) * coefficients[6],
+                    MathType::GetRational(1, 2) * coefficients[8],
                     coefficients[9] };
 
 #include SYSTEM_WARNING_POP
@@ -110,22 +110,22 @@ typename Mathematics::Ellipsoid3Coefficients<Real>::CoefficientsType Mathematics
 #include SYSTEM_WARNING_DISABLE(26446)
 
     // 安排x0^2或x1^2或x2^2系数之一是1。
-    auto maxValue = Math::FAbs(result[4]);
+    auto maxValue = MathType::FAbs(result[4]);
     int maxIndex{ 4 };
-    auto absValue = Math::FAbs(result[7]);
+    auto absValue = MathType::FAbs(result[7]);
     if (maxValue < absValue)
     {
         maxValue = absValue;
         maxIndex = 7;
     }
-    absValue = Math::FAbs(result[9]);
+    absValue = MathType::FAbs(result[9]);
     if (maxValue < absValue)
     {
         maxValue = absValue;
         maxIndex = 9;
     }
 
-    auto invMaxValue = Math::GetValue(1) / maxValue;
+    auto invMaxValue = MathType::GetValue(1) / maxValue;
     for (auto i = 0; i < GetCoefficientsSize(); ++i)
     {
         if (i != maxIndex)
@@ -134,7 +134,7 @@ typename Mathematics::Ellipsoid3Coefficients<Real>::CoefficientsType Mathematics
         }
         else
         {
-            result[i] = Math::GetValue(1);
+            result[i] = MathType::GetValue(1);
         }
     }
 

@@ -29,10 +29,10 @@ namespace Mathematics
         using Line3 = Line3<Real>;
         using Box3 = Box3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorLine3Box3(const Line3& line, const Box3& box, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorLine3Box3(const Line3& line, const Box3& box, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

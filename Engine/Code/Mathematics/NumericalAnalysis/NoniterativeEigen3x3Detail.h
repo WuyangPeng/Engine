@@ -27,12 +27,12 @@ Mathematics::NoniterativeEigen3x3<Real>::NoniterativeEigen3x3(const Matrix3& mat
 template <typename Real>
 Real Mathematics::NoniterativeEigen3x3<Real>::GetMaxValue(const Matrix3& matrix) const
 {
-    Container maxValue{ Math::FAbs(matrix.template GetValue<0, 0>()),
-                        Math::FAbs(matrix.template GetValue<0, 1>()),
-                        Math::FAbs(matrix.template GetValue<0, 2>()),
-                        Math::FAbs(matrix.template GetValue<1, 1>()),
-                        Math::FAbs(matrix.template GetValue<1, 2>()),
-                        Math::FAbs(matrix.template GetValue<2, 2>()) };
+    Container maxValue{ MathType::FAbs(matrix.template GetValue<0, 0>()),
+                        MathType::FAbs(matrix.template GetValue<0, 1>()),
+                        MathType::FAbs(matrix.template GetValue<0, 2>()),
+                        MathType::FAbs(matrix.template GetValue<1, 1>()),
+                        MathType::FAbs(matrix.template GetValue<1, 2>()),
+                        MathType::FAbs(matrix.template GetValue<2, 2>()) };
 
     const auto iter = max_element(maxValue.begin(), maxValue.end());
     if (iter != maxValue.end())
@@ -54,7 +54,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::Compute(const Matrix3& matrix)
     Matrix3 scaledEntry{ matrix };
     const auto maxValue = GetMaxValue(scaledEntry);
 
-    if (Math::GetValue(1) < maxValue)
+    if (MathType::GetValue(1) < maxValue)
     {
         scaledEntry /= maxValue;
     }
@@ -114,7 +114,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::Compute(const Matrix3& matrix)
 template <typename Real>
 void Mathematics::NoniterativeEigen3x3<Real>::RescaleBack(Real maxValue) noexcept
 {
-    if (Math::GetValue(1) < maxValue)
+    if (MathType::GetValue(1) < maxValue)
     {
         for (auto& value : eigenvalue)
         {
@@ -126,7 +126,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::RescaleBack(Real maxValue) noexcep
 template <typename Real>
 void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3& matrix)
 {
-    static const auto sqrt3Value = Math::Sqrt(Math::GetValue(3));
+    static const auto sqrt3Value = MathType::Sqrt(MathType::GetValue(3));
 
     // 转换的唯一的矩阵元素为双精度
     const auto a00 = matrix(0, 0);
@@ -139,7 +139,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3& matrix
     // 特征方程为x^3 - c2 * x^2 + c1 * x - c0 = 0。
     // 特征值是这个方程的根，保证都是实数值，因为矩阵是对称的。
     const auto c0 = a00 * a11 * a22 +
-                    Math::GetValue(2) * a01 * a02 * a12 -
+                    MathType::GetValue(2) * a01 * a02 * a12 -
                     a00 * a12 * a12 -
                     a11 * a02 * a02 -
                     a22 * a01 * a01;
@@ -154,28 +154,28 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3& matrix
     const auto c2 = a00 + a11 + a22;
 
     // 构造参数使用在方程的根进行分类，并以闭合形式根部方程求解。
-    const auto c2Divided3 = c2 * Math::GetRational(1, 3);
-    auto aDivided3 = (c1 - c2 * c2Divided3) * Math::GetRational(1, 3);
+    const auto c2Divided3 = c2 * MathType::GetRational(1, 3);
+    auto aDivided3 = (c1 - c2 * c2Divided3) * MathType::GetRational(1, 3);
 
-    if (Math::GetValue(0) < aDivided3)
+    if (MathType::GetValue(0) < aDivided3)
     {
-        aDivided3 = Math::GetValue(0);
+        aDivided3 = MathType::GetValue(0);
     }
 
-    const auto halfMB = Math::GetRational(1, 2) * (c0 + c2Divided3 * (Math::GetValue(2) * c2Divided3 * c2Divided3 - c1));
+    const auto halfMB = MathType::GetRational(1, 2) * (c0 + c2Divided3 * (MathType::GetValue(2) * c2Divided3 * c2Divided3 - c1));
 
     auto q = halfMB * halfMB + aDivided3 * aDivided3 * aDivided3;
-    if (Math::GetValue(0) < q)
+    if (MathType::GetValue(0) < q)
     {
-        q = Math::GetValue(0);
+        q = MathType::GetValue(0);
     }
 
     // 通过求解该多项式的根，计算特征值。
-    const auto magnitude = Math::Sqrt(-aDivided3);
-    const auto angle = Math::ATan2(Math::Sqrt(-q), halfMB) * Math::GetRational(1, 3);
-    const auto cosValue = Math::Cos(angle);
-    const auto sinValue = Math::Sin(angle);
-    const auto root0 = c2Divided3 + Math::GetValue(2) * magnitude * cosValue;
+    const auto magnitude = MathType::Sqrt(-aDivided3);
+    const auto angle = MathType::ATan2(MathType::Sqrt(-q), halfMB) * MathType::GetRational(1, 3);
+    const auto cosValue = MathType::Cos(angle);
+    const auto sinValue = MathType::Sin(angle);
+    const auto root0 = c2Divided3 + MathType::GetValue(2) * magnitude * cosValue;
     const auto root1 = c2Divided3 - magnitude * (cosValue + sqrt3Value * sinValue);
     const auto root2 = c2Divided3 - magnitude * (cosValue - sqrt3Value * sinValue);
 
@@ -219,14 +219,14 @@ template <typename Real>
 bool Mathematics::NoniterativeEigen3x3<Real>::PositiveRank(Matrix3& matrix, Real& maxEntry, Vector3& maxRow) const
 {
     // 找到矩阵的最大幅度条目。
-    maxEntry = Math::GetValue(-1);
+    maxEntry = MathType::GetValue(-1);
 
     auto maxRowIndex = -1;
     for (auto row = 0; row < eigenMax; ++row)
     {
         for (auto column = row; column < eigenMax; ++column)
         {
-            auto absValue = Math::FAbs(matrix(row, column));
+            auto absValue = MathType::FAbs(matrix(row, column));
             if (maxEntry < absValue)
             {
                 maxEntry = absValue;
@@ -238,7 +238,7 @@ bool Mathematics::NoniterativeEigen3x3<Real>::PositiveRank(Matrix3& matrix, Real
     // 返回包含最大值的行，要用于特征向量构造。
     maxRow = Vector3{ matrix(maxRowIndex, 0), matrix(maxRowIndex, 1), matrix(maxRowIndex, 2) };
 
-    return Math::GetZeroTolerance() <= maxEntry;
+    return MathType::GetZeroTolerance() <= maxEntry;
 }
 
 template <typename Real>
@@ -260,32 +260,32 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeVectors(const Matrix3& matr
     auto p01 = Vector3Tools::DotProduct(vVector, uVectorTransition);
     auto p11 = eigenvalue.at(index2) - Vector3Tools::DotProduct(vVector, vVectorTransition);
 
-    auto maxValue = Math::FAbs(p00);
+    auto maxValue = MathType::FAbs(p00);
     auto row = 0;
-    auto absValue = Math::FAbs(p01);
+    auto absValue = MathType::FAbs(p01);
     if (maxValue < absValue)
     {
         maxValue = absValue;
     }
-    absValue = Math::FAbs(p11);
+    absValue = MathType::FAbs(p11);
     if (maxValue < absValue)
     {
         maxValue = absValue;
         row = 1;
     }
 
-    if (Math::GetZeroTolerance() <= maxValue)
+    if (MathType::GetZeroTolerance() <= maxValue)
     {
         if (row == 0)
         {
-            const auto invLength = Math::InvSqrt(p00 * p00 + p01 * p01);
+            const auto invLength = MathType::InvSqrt(p00 * p00 + p01 * p01);
             p00 *= invLength;
             p01 *= invLength;
             eigenvector.at(index2) = p01 * uVector + p00 * vVector;
         }
         else
         {
-            const auto invLength = Math::InvSqrt(p11 * p11 + p01 * p01);
+            const auto invLength = MathType::InvSqrt(p11 * p11 + p01 * p01);
             p11 *= invLength;
             p01 *= invLength;
             eigenvector.at(index2) = p11 * uVector + p01 * vVector;
@@ -314,32 +314,32 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeVectors(const Matrix3& matr
     p01 = Vector3Tools::DotProduct(wVectorCross, wVectorTransition);
     p11 = eigenvalue.at(index0) - Vector3Tools::DotProduct(wVectorCross, matrix * wVectorCross);
 
-    maxValue = Math::FAbs(p00);
+    maxValue = MathType::FAbs(p00);
     row = 0;
-    absValue = Math::FAbs(p01);
+    absValue = MathType::FAbs(p01);
     if (maxValue < absValue)
     {
         maxValue = absValue;
     }
-    absValue = Math::FAbs(p11);
+    absValue = MathType::FAbs(p11);
     if (maxValue < absValue)
     {
         maxValue = absValue;
         row = 1;
     }
 
-    if (Math::GetZeroTolerance() <= maxValue)
+    if (MathType::GetZeroTolerance() <= maxValue)
     {
         if (row == 0)
         {
-            const auto invLength = Math::InvSqrt(p00 * p00 + p01 * p01);
+            const auto invLength = MathType::InvSqrt(p00 * p00 + p01 * p01);
             p00 *= invLength;
             p01 *= invLength;
             eigenvector.at(index0) = p01 * wVector + p00 * wVectorCross;
         }
         else
         {
-            const auto invLength = Math::InvSqrt(p11 * p11 + p01 * p01);
+            const auto invLength = MathType::InvSqrt(p11 * p11 + p01 * p01);
             p11 *= invLength;
             p01 *= invLength;
             eigenvector.at(index0) = p11 * wVector + p01 * wVectorCross;

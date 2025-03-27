@@ -104,7 +104,7 @@ int Mathematics::UnsymmetricEigenvalues<Real>::Solve(const std::vector<Real>& in
                     auto a11 = A(i + 1, i + 1);
                     auto tr = a00 + a11;
                     auto det = a00 * a11 - a01 * a10;
-                    auto halfTr = tr * Math::GetRational(1, 2);
+                    auto halfTr = tr * MathType::GetRational(1, 2);
                     auto discr = halfTr * halfTr - det;
                     if (discr >= Real{})
                     {
@@ -178,23 +178,23 @@ void Mathematics::UnsymmetricEigenvalues<Real>::House(int rMin, int rMax)
         length += x.at(r) * x.at(r);
     }
     length = std::sqrt(length);
-    if (!Math::Approximate(length, Real{}))
+    if (!MathType::Approximate(length, Real{}))
     {
-        auto sign = (x.at(rMin) >= Real{} ? Math::GetValue(1) : Math::GetValue(-1));
-        auto invDenom = Math::GetValue(1) / (x.at(rMin) + sign * length);
+        auto sign = (x.at(rMin) >= Real{} ? MathType::GetValue(1) : MathType::GetValue(-1));
+        auto invDenom = MathType::GetValue(1) / (x.at(rMin) + sign * length);
         for (auto r = rMin + 1; r <= rMax; ++r)
         {
             v.at(r) = x.at(r) * invDenom;
         }
     }
-    v.at(rMin) = Math::GetValue(1);
+    v.at(rMin) = MathType::GetValue(1);
 
-    auto dot = Math::GetValue(1);
+    auto dot = MathType::GetValue(1);
     for (int r = rMin + 1; r <= rMax; ++r)
     {
         dot += v.at(r) * v.at(r);
     }
-    auto scale = Math::GetValue(-2) / dot;
+    auto scale = MathType::GetValue(-2) / dot;
     for (auto r = rMin; r <= rMax; ++r)
     {
         scaledV.at(r) = scale * v.at(r);
@@ -318,7 +318,7 @@ bool Mathematics::UnsymmetricEigenvalues<Real>::GetBlock(std::array<int, 2>& blo
         auto a21 = A(i + 1, i);
         auto sum0 = a00 + a11;
         auto sum1 = sum0 + a21;
-        flagStorage.at(gsl::narrow_cast<size_t>(i) + 1) = (!Math::Approximate(sum1, sum0) ? 1 : 0);
+        flagStorage.at(gsl::narrow_cast<size_t>(i) + 1) = (!MathType::Approximate(sum1, sum0) ? 1 : 0);
     }
 
     for (auto i = 0; i < sizeM1; ++i)

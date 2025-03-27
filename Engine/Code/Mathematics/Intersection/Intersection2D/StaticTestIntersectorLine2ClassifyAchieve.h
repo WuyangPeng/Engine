@@ -25,8 +25,8 @@ Mathematics::StaticTestIntersectorLine2Classify<Real>::StaticTestIntersectorLine
                                                                                           bool isCalculateParameter,
                                                                                           const Real epsilon)
     : ParentType{ epsilon },
-      parameter0{ Math::GetValue(0) },
-      parameter1{ Math::GetValue(0) }
+      parameter0{ MathType::GetValue(0) },
+      parameter1{ MathType::GetValue(0) }
 {
     Test(lhsOrigin, lhsDirection, rhsOrigin, rhsDirection, isCalculateParameter);
 
@@ -46,7 +46,7 @@ void Mathematics::StaticTestIntersectorLine2Classify<Real>::Test(const Vector2& 
     /// 同样，s1 = Q.Dot(Perp(D0)) / D0.Dot(Perp(D1))
     auto difference = rhsOrigin - lhsOrigin;
     auto lhsDirectionDotPerpRhsDirection = Vector2Tools::DotPerp(lhsDirection, rhsDirection);
-    if (dotThreshold < Math::FAbs(lhsDirectionDotPerpRhsDirection))
+    if (dotThreshold < MathType::FAbs(lhsDirectionDotPerpRhsDirection))
     {
         // 线在单个点相交。
         if (isCalculateParameter)
@@ -71,7 +71,7 @@ void Mathematics::StaticTestIntersectorLine2Classify<Real>::Test(const Vector2& 
 
     difference.Normalize(dotThreshold);
     auto differenceDotPerpRhsDirection = Vector2Tools::DotPerp(difference, rhsDirection);
-    if (Math::FAbs(differenceDotPerpRhsDirection) <= dotThreshold)
+    if (MathType::FAbs(differenceDotPerpRhsDirection) <= dotThreshold)
     {
         // 线是共线的.
         this->SetIntersectionType(IntersectionType::Line);

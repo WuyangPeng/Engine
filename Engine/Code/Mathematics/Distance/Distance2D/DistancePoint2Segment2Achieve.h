@@ -79,7 +79,7 @@ typename Mathematics::DistancePoint2Segment2<Real>::DistanceResult Mathematics::
 
     difference = rhsClosestPoint - point;
 
-    return DistanceResult{ Vector2Tools::GetLengthSquared(difference), Math::GetValue(0), point, rhsClosestPoint };
+    return DistanceResult{ Vector2Tools::GetLengthSquared(difference), MathType::GetValue(0), point, rhsClosestPoint };
 }
 
 template <typename Real>

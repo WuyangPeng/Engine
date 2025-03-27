@@ -52,7 +52,7 @@ void Mathematics::SphereFit3<Real>::Calculate(const Points& points, int maxItera
     // 猜测初始中心。
     if (initialCenterIsAverage)
     {
-        sphere.SetSphere(average, Math::GetValue(0));
+        sphere.SetSphere(average, MathType::GetValue(0));
     }
     else
     {
@@ -70,8 +70,8 @@ void Mathematics::SphereFit3<Real>::Calculate(const Points& points, int maxItera
 
         const auto circleDifference = sphere.GetCenter() - current;
 
-        if (Math::FAbs(circleDifference[0]) <= Math::GetZeroTolerance() &&
-            Math::FAbs(circleDifference[1]) <= Math::GetZeroTolerance())
+        if (MathType::FAbs(circleDifference[0]) <= MathType::GetZeroTolerance() &&
+            MathType::FAbs(circleDifference[1]) <= MathType::GetZeroTolerance())
         {
             return;
         }
@@ -106,7 +106,7 @@ void Mathematics::SphereFit3<Real>::Iteration(const Points& points, const Vector
     auto numPoints = boost::numeric_cast<Real>(points.size());
 
     // 计算平均值L, dL/da, dL/db, dL/dc。
-    auto lengthAverage = Math::GetValue(0);
+    auto lengthAverage = MathType::GetValue(0);
     Vector3 derLengthAverage{};
 
     for (const auto& point : points)
@@ -114,7 +114,7 @@ void Mathematics::SphereFit3<Real>::Iteration(const Points& points, const Vector
         auto difference = point - sphere.GetCenter();
 
         auto length = Vector3Tools<Real>::GetLength(difference);
-        if (Math::GetZeroTolerance() < length)
+        if (MathType::GetZeroTolerance() < length)
         {
             lengthAverage += length;
             derLengthAverage -= difference / length;

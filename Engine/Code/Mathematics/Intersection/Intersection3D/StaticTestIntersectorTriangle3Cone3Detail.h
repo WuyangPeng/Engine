@@ -63,10 +63,10 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>::Test()
 
     auto diff0 = triangle.GetVertex(0) - cone.GetVertex();
     auto add0 = Vector3Tools::DotProduct(cone.GetAxis(), diff0);
-    if (Math::GetValue(0) <= add0)
+    if (MathType::GetValue(0) <= add0)
     {
         p0Test = add0 * add0 - cosSqr * (Vector3Tools::DotProduct(diff0, diff0));
-        if (Math::GetValue(0) <= p0Test)
+        if (MathType::GetValue(0) <= p0Test)
         {
             this->SetIntersectionType(IntersectionType::Other);
             return;
@@ -80,10 +80,10 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>::Test()
     auto edge0 = triangle.GetVertex(1) - triangle.GetVertex(0);
     auto diff1 = diff0 + edge0;
     auto add1 = Vector3Tools::DotProduct(cone.GetAxis(), diff1);
-    if (Math::GetValue(0) <= add1)
+    if (MathType::GetValue(0) <= add1)
     {
         p1Test = add1 * add1 - cosSqr * (Vector3Tools::DotProduct(diff1, diff1));
-        if (Math::GetValue(0) <= p1Test)
+        if (MathType::GetValue(0) <= p1Test)
         {
             this->SetIntersectionType(IntersectionType::Other);
             return;
@@ -97,10 +97,10 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>::Test()
     auto edge1 = triangle.GetVertex(2) - triangle.GetVertex(0);
     auto diff2 = diff0 + edge1;
     auto add2 = Vector3Tools::DotProduct(cone.GetAxis(), diff2);
-    if (Math::GetValue(0) <= add2)
+    if (MathType::GetValue(0) <= add2)
     {
         p2Test = add2 * add2 - cosSqr * (Vector3Tools::DotProduct(diff2, diff2));
-        if (Math::GetValue(0) <= p2Test)
+        if (MathType::GetValue(0) <= p2Test)
         {
             this->SetIntersectionType(IntersectionType::Other);
             return;
@@ -116,7 +116,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>::Test()
         auto ade = add1 - add0;
         auto ede = Vector3Tools::DotProduct(edge0, edge0);
         auto c2 = ade * ade - cosSqr * ede;
-        if (c2 < Math::GetValue(0))
+        if (c2 < MathType::GetValue(0))
         {
             auto edd = Vector3Tools::DotProduct(edge0, diff0);
             auto c1 = ade * add0 - cosSqr * edd;
@@ -124,7 +124,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>::Test()
             {
                 if (onConeSide & 2)
                 {
-                    if (Math::GetValue(0) <= c1 && c1 <= -c2 && p0Test * c2 <= c1 * c1)
+                    if (MathType::GetValue(0) <= c1 && c1 <= -c2 && p0Test * c2 <= c1 * c1)
                     {
                         this->SetIntersectionType(IntersectionType::Other);
                         return;
@@ -132,7 +132,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>::Test()
                 }
                 else
                 {
-                    if (Math::GetValue(0) <= c1 && c2 * add0 <= c1 * ade && p0Test * c2 <= c1 * c1)
+                    if (MathType::GetValue(0) <= c1 && c2 * add0 <= c1 * ade && p0Test * c2 <= c1 * c1)
                     {
                         this->SetIntersectionType(IntersectionType::Other);
                         return;
@@ -159,7 +159,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>::Test()
         auto ade = add2 - add0;
         auto ede = Vector3Tools::DotProduct(edge1, edge1);
         auto c2 = ade * ade - cosSqr * ede;
-        if (c2 < Math::GetValue(0))
+        if (c2 < MathType::GetValue(0))
         {
             auto edd = Vector3Tools::DotProduct(edge1, diff0);
             auto c1 = ade * add0 - cosSqr * edd;
@@ -167,7 +167,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>::Test()
             {
                 if (onConeSide & 4)
                 {
-                    if (Math::GetValue(0) <= c1 && c1 <= -c2 && p0Test * c2 <= c1 * c1)
+                    if (MathType::GetValue(0) <= c1 && c1 <= -c2 && p0Test * c2 <= c1 * c1)
                     {
                         this->SetIntersectionType(IntersectionType::Other);
                         return;
@@ -175,7 +175,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>::Test()
                 }
                 else
                 {
-                    if (Math::GetValue(0) <= c1 && c2 * add0 <= c1 * ade && p0Test * c2 <= c1 * c1)
+                    if (MathType::GetValue(0) <= c1 && c2 * add0 <= c1 * ade && p0Test * c2 <= c1 * c1)
                     {
                         this->SetIntersectionType(IntersectionType::Other);
                         return;
@@ -203,7 +203,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>::Test()
         auto ade = add2 - add1;
         auto ede = Vector3Tools::DotProduct(ke2, ke2);
         auto c2 = ade * ade - cosSqr * ede;
-        if (c2 < Math::GetValue(0))
+        if (c2 < MathType::GetValue(0))
         {
             auto edd = Vector3Tools::DotProduct(ke2, diff1);
             auto c1 = ade * add1 - cosSqr * edd;
@@ -211,7 +211,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>::Test()
             {
                 if (onConeSide & 4)
                 {
-                    if (Math::GetValue(0) <= c1 && c1 <= -c2 && p1Test * c2 <= c1 * c1)
+                    if (MathType::GetValue(0) <= c1 && c1 <= -c2 && p1Test * c2 <= c1 * c1)
                     {
                         this->SetIntersectionType(IntersectionType::Other);
                         return;
@@ -219,7 +219,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>::Test()
                 }
                 else
                 {
-                    if (Math::GetValue(0) <= c1 && c2 * add1 <= c1 * ade && p1Test * c2 <= c1 * c1)
+                    if (MathType::GetValue(0) <= c1 && c2 * add1 <= c1 * ade && p1Test * c2 <= c1 * c1)
                     {
                         this->SetIntersectionType(IntersectionType::Other);
                         return;
@@ -251,12 +251,12 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>::Test()
 
         const auto ncude0 = Vector3Tools::DotProduct(ncu, edge0);
 
-        if (Math::GetValue(0) <= nda)
+        if (MathType::GetValue(0) <= nda)
         {
-            if (ncude0 <= Math::GetValue(0))
+            if (ncude0 <= MathType::GetValue(0))
             {
                 auto ncude1 = Vector3Tools::DotProduct(ncu, edge1);
-                if (Math::GetValue(0) <= ncude1)
+                if (MathType::GetValue(0) <= ncude1)
                 {
                     auto ncude2 = ncude1 - ncude0;
                     auto ndn = Vector3Tools::GetLengthSquared(n);
@@ -270,10 +270,10 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>::Test()
         }
         else
         {
-            if (Math::GetValue(0) <= ncude0)
+            if (MathType::GetValue(0) <= ncude0)
             {
                 auto ncude1 = Vector3Tools::DotProduct(ncu, edge1);
-                if (ncude1 <= Math::GetValue(0))
+                if (ncude1 <= MathType::GetValue(0))
                 {
                     auto ncude2 = ncude1 - ncude0;
                     auto ndn = Vector3Tools::GetLengthSquared(n);

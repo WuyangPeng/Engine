@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorPlane3Triangle3<Real>::StaticFindIntersectorPlane3Triangle3(const Plane3& plane, const Triangle3& triangle, Real epsilon)
-    : ParentType{ Math::GetValue(0) <= epsilon ? epsilon : Math::GetValue(0) },
+    : ParentType{ MathType::GetValue(0) <= epsilon ? epsilon : MathType::GetValue(0) },
       plane{ plane },
       triangle{ triangle },
       quantity{},
@@ -63,12 +63,12 @@ void Mathematics::StaticFindIntersectorPlane3Triangle3<Real>::Find()
 {
     // 计算从顶点到平面的符号距离。
     auto epsilon = this->GetEpsilon();
-    auto zero = Math::GetValue(0);
+    auto zero = MathType::GetValue(0);
     std::array<Real, 3> distance{};
     for (auto i = 0u; i < distance.size(); ++i)
     {
         distance.at(i) = plane.DistanceTo(triangle.GetVertex(i));
-        if (Math::FAbs(distance.at(i)) <= epsilon)
+        if (MathType::FAbs(distance.at(i)) <= epsilon)
         {
             distance.at(i) = zero;
         }

@@ -24,7 +24,7 @@ namespace Mathematics
         using ClassType = Query3Filtered<Real>;
         using ParentType = Query3<Real>;
 
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
         using Vector3 = typename ParentType::Vector3Type;
         using VerticesType = typename ParentType::VerticesType;
 

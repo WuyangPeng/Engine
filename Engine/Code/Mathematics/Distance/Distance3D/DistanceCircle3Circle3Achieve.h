@@ -93,59 +93,59 @@ typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathematics::
     // 计算多项式 q0 = q00 + q01 * z + q02 * z^2.
     Polynomial<Real> q0{ 2 };
     q0[0] = a0 * a0 + a2 * a2 + a3 * a3 + a5 * a5;
-    q0[1] = Math::GetValue(2) * (a0 * a1 + a3 * a4);
+    q0[1] = MathType::GetValue(2) * (a0 * a1 + a3 * a4);
     q0[2] = a1 * a1 - a2 * a2 + a4 * a4 - a5 * a5;
 
     // 计算多项式 q1 = q10 + q11 * z.
     Polynomial<Real> q1{ 1 };
-    q1[0] = Math::GetValue(2) * (a0 * a2 + a3 * a5);
-    q1[1] = Math::GetValue(2) * (a1 * a2 + a4 * a5);
+    q1[0] = MathType::GetValue(2) * (a0 * a2 + a3 * a5);
+    q1[1] = MathType::GetValue(2) * (a1 * a2 + a4 * a5);
 
     // 计算系数 r0 = r00+r02*z^2.
     Polynomial<Real> r0{ 2 };
     r0[0] = b0 * b0;
-    r0[1] = Math::GetValue(0);
+    r0[1] = MathType::GetValue(0);
     r0[2] = b3 * b3 - b0 * b0;
 
     // 计算多项式 r1 = r11 * z.
     Polynomial<Real> r1{ 1 };
-    r1[0] = Math::GetValue(0);
-    r1[1] = Math::GetValue(2) * b0 * b3;
+    r1[0] = MathType::GetValue(0);
+    r1[1] = MathType::GetValue(2) * b0 * b3;
 
     // 计算多项式 g0 = g00 + g01 * z + g02 * z^2 + g03 * z^3 + g04 * z^4.
     Polynomial<Real> g0{ 4 };
     g0[0] = p0[0] * p0[0] + p1[0] * p1[0] - q0[0] * r0[0];
-    g0[1] = Math::GetValue(2) * (p0[0] * p0[1] + p1[0] * p1[1]) - q0[1] * r0[0] - q1[0] * r1[1];
+    g0[1] = MathType::GetValue(2) * (p0[0] * p0[1] + p1[0] * p1[1]) - q0[1] * r0[0] - q1[0] * r1[1];
     g0[2] = p0[1] * p0[1] +
-            Math::GetValue(2) * p0[0] * p0[2] -
+            MathType::GetValue(2) * p0[0] * p0[2] -
             p1[0] * p1[0] +
             p1[1] * p1[1] -
             q0[2] * r0[0] -
             q0[0] * r0[2] -
             q1[1] * r1[1];
-    g0[3] = Math::GetValue(2) * (p0[1] * p0[2] - p1[0] * p1[1]) - q0[1] * r0[2] + q1[0] * r1[1];
+    g0[3] = MathType::GetValue(2) * (p0[1] * p0[2] - p1[0] * p1[1]) - q0[1] * r0[2] + q1[0] * r1[1];
     g0[4] = p0[2] * p0[2] - p1[1] * p1[1] - q0[2] * r0[2] + q1[1] * r1[1];
 
     // 计算多项式 g1 = g10 + g11 * z + g12 * z^2 + g13 * z^3.
     Polynomial<Real> g1{ 3 };
-    g1[0] = Math::GetValue(2) * p0[0] * p1[0] - q1[0] * r0[0];
-    g1[1] = Math::GetValue(2) * (p0[1] * p1[0] + p0[0] * p1[1]) - q1[1] * r0[0] - q0[0] * r1[1];
-    g1[2] = Math::GetValue(2) * (p0[2] * p1[0] + p0[1] * p1[1]) - q1[0] * r0[2] - q0[1] * r1[1];
-    g1[3] = Math::GetValue(2) * p0[2] * p1[1] - q1[1] * r0[2] - q0[2] * r1[1];
+    g1[0] = MathType::GetValue(2) * p0[0] * p1[0] - q1[0] * r0[0];
+    g1[1] = MathType::GetValue(2) * (p0[1] * p1[0] + p0[0] * p1[1]) - q1[1] * r0[0] - q0[0] * r1[1];
+    g1[2] = MathType::GetValue(2) * (p0[2] * p1[0] + p0[1] * p1[1]) - q1[0] * r0[2] - q0[1] * r1[1];
+    g1[3] = MathType::GetValue(2) * p0[2] * p1[1] - q1[1] * r0[2] - q0[2] * r1[1];
 
     // 计算多项式 h = sum_{i=0}^8 h_i z^i.
     Polynomial<Real> h{ 8 };
     h[0] = g0[0] * g0[0] - g1[0] * g1[0];
-    h[1] = Math::GetValue(2) * (g0[0] * g0[1] - g1[0] * g1[1]);
-    h[2] = g0[1] * g0[1] + g1[0] * g1[0] - g1[1] * g1[1] + Math::GetValue(2) * (g0[0] * g0[2] - g1[0] * g1[2]);
-    h[3] = Math::GetValue(2) * (g0[1] * g0[2] + g0[0] * g0[3] + g1[0] * g1[1] - g1[1] * g1[2] - g1[0] * g1[3]);
-    h[4] = g0[2] * g0[2] + g1[1] * g1[1] - g1[2] * g1[2] + Math::GetValue(2) * (g0[1] * g0[3] + g0[0] * g0[4] + g1[0] * g1[2] - g1[1] * g1[3]);
-    h[5] = Math::GetValue(2) * (g0[2] * g0[3] + g0[1] * g0[4] + g1[1] * g1[2] + g1[0] * g1[3] - g1[2] * g1[3]);
-    h[6] = g0[3] * g0[3] + g1[2] * g1[2] - g1[3] * g1[3] + Math::GetValue(2) * (g0[2] * g0[4] + g1[1] * g1[3]);
-    h[7] = Math::GetValue(2) * (g0[3] * g0[4] + g1[2] * g1[3]);
+    h[1] = MathType::GetValue(2) * (g0[0] * g0[1] - g1[0] * g1[1]);
+    h[2] = g0[1] * g0[1] + g1[0] * g1[0] - g1[1] * g1[1] + MathType::GetValue(2) * (g0[0] * g0[2] - g1[0] * g1[2]);
+    h[3] = MathType::GetValue(2) * (g0[1] * g0[2] + g0[0] * g0[3] + g1[0] * g1[1] - g1[1] * g1[2] - g1[0] * g1[3]);
+    h[4] = g0[2] * g0[2] + g1[1] * g1[1] - g1[2] * g1[2] + MathType::GetValue(2) * (g0[1] * g0[3] + g0[0] * g0[4] + g1[0] * g1[2] - g1[1] * g1[3]);
+    h[5] = MathType::GetValue(2) * (g0[2] * g0[3] + g0[1] * g0[4] + g1[1] * g1[2] + g1[0] * g1[3] - g1[2] * g1[3]);
+    h[6] = g0[3] * g0[3] + g1[2] * g1[2] - g1[3] * g1[3] + MathType::GetValue(2) * (g0[2] * g0[4] + g1[1] * g1[3]);
+    h[7] = MathType::GetValue(2) * (g0[3] * g0[4] + g1[2] * g1[3]);
     h[8] = g0[4] * g0[4] + g1[3] * g1[3];
 
-    auto minSquaredDistance = Math::maxReal;
+    auto minSquaredDistance = MathType::maxReal;
     Vector3 lhsClosestPoint{};
     Vector3 rhsClosestPoint{};
 
@@ -157,24 +157,24 @@ typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathematics::
 
     for (auto iter = polyroots.GetBegin(); iter != polyroots.GetEnd(); ++iter)
     {
-        auto rhsCosValue = Math::GetNumericalRoundOff(*iter, Math::GetValue(-1), Math::GetValue(1));
+        auto rhsCosValue = MathType::GetNumericalRoundOff(*iter, MathType::GetValue(-1), MathType::GetValue(1));
 
         // 你也可以尝试rhsSinValue = -g0（rhsCosValue）/ g1（rhsCosValue）避免sqrt调用，
         // 但要小心g1几乎为零。 现在我使用g0和g1来确定rhsSinValue的符号。
-        auto rhsSinValue = Math::Sqrt(Math::FAbs(Math::GetValue(1) - rhsCosValue * rhsCosValue));
+        auto rhsSinValue = MathType::Sqrt(MathType::FAbs(MathType::GetValue(1) - rhsCosValue * rhsCosValue));
 
         auto g0cs1 = g0(rhsCosValue);
         auto g1cs1 = g1(rhsCosValue);
         auto product = g0cs1 * g1cs1;
-        if (Math::GetValue(0) < product)
+        if (MathType::GetValue(0) < product)
         {
             rhsSinValue = -rhsSinValue;
         }
-        else if (product < Math::GetValue(0))
+        else if (product < MathType::GetValue(0))
         {
             // rhsSinValue已经有正确的符号
         }
-        else if (!Math::Approximate(g1cs1, Math::GetValue(0), this->GetZeroThreshold()))
+        else if (!MathType::Approximate(g1cs1, MathType::GetValue(0), this->GetZeroThreshold()))
         {
             // g0 == 0.0
             // assert( rhsSinValue == 0.0 );
@@ -192,14 +192,14 @@ typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathematics::
         auto m10 = b2 * rhsSinValue + b5 * rhsCosValue;
         auto m11 = b1 * rhsSinValue + b4 * rhsCosValue;
         auto det = m00 * m11 - m01 * m10;
-        if (this->GetZeroThreshold() <= Math::FAbs(det))
+        if (this->GetZeroThreshold() <= MathType::FAbs(det))
         {
             auto lambda = -(b0 * rhsSinValue + b3 * rhsCosValue);
             auto lhsCosValue = lambda * m00 / det;
             auto lhsSinValue = -lambda * m01 / det;
 
             // 在数值错误的情况下单位化。 如果您对lhsCosValue和lhsSinValue的准确性有信心，请删除。
-            auto tmp = Math::InvSqrt(lhsCosValue * lhsCosValue + lhsSinValue * lhsSinValue);
+            auto tmp = MathType::InvSqrt(lhsCosValue * lhsCosValue + lhsSinValue * lhsSinValue);
             lhsCosValue *= tmp;
             lhsSinValue *= tmp;
 
@@ -224,7 +224,7 @@ typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathematics::
         }
     }
 
-    return DistanceResult{ minSquaredDistance, Math::GetValue(0), lhsClosestPoint, rhsClosestPoint };
+    return DistanceResult{ minSquaredDistance, MathType::GetValue(0), lhsClosestPoint, rhsClosestPoint };
 }
 
 template <typename Real>

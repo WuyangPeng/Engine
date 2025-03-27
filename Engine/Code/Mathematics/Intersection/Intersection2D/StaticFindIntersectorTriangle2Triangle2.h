@@ -25,13 +25,13 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorTriangle2Triangle2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
         using Vector2 = Vector2<Real>;
         using Triangle2 = Triangle2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
 
     public:
-        StaticFindIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

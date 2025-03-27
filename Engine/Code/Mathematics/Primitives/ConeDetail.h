@@ -20,16 +20,16 @@
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::Cone<N, Real>::Cone() noexcept requires(N == 3)
-    : ray{ Vector{}, Vector{ Real{}, Real{}, Math::GetValue(1) } },
-      angle{ Math::GetQuarterPI() },
-      cosAngle{ Math::Cos(angle) },
-      sinAngle{ Math::Sin(angle) },
-      tanAngle{ Math::Tan(angle) },
+    : ray{ Vector{}, Vector{ Real{}, Real{}, MathType::GetValue(1) } },
+      angle{ MathType::GetQuarterPI() },
+      cosAngle{ MathType::Cos(angle) },
+      sinAngle{ MathType::Sin(angle) },
+      tanAngle{ MathType::Tan(angle) },
       cosAngleSqr{ cosAngle * cosAngle },
       sinAngleSqr{ sinAngle * sinAngle },
-      invSinAngle{ Math::GetValue(1) / sinAngle },
+      invSinAngle{ MathType::GetValue(1) / sinAngle },
       minHeight{},
-      maxHeight{ Math::GetValue(-1) }
+      maxHeight{ MathType::GetValue(-1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -39,14 +39,14 @@ requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::Cone<N, Real>::Cone(const Ray& ray, Real angle) noexcept
     : ray{ ray },
       angle{ angle },
-      cosAngle{ Math::Cos(angle) },
-      sinAngle{ Math::Sin(angle) },
-      tanAngle{ Math::Tan(angle) },
+      cosAngle{ MathType::Cos(angle) },
+      sinAngle{ MathType::Sin(angle) },
+      tanAngle{ MathType::Tan(angle) },
       cosAngleSqr{ cosAngle * cosAngle },
       sinAngleSqr{ sinAngle * sinAngle },
-      invSinAngle{ Math::GetValue(1) / sinAngle },
+      invSinAngle{ MathType::GetValue(1) / sinAngle },
       minHeight{},
-      maxHeight{ Math::GetValue(-1) }
+      maxHeight{ MathType::GetValue(-1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -56,14 +56,14 @@ requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::Cone<N, Real>::Cone(const Ray& ray, Real angle, Real minHeight) noexcept
     : ray{ ray },
       angle{ angle },
-      cosAngle{ Math::Cos(angle) },
-      sinAngle{ Math::Sin(angle) },
-      tanAngle{ Math::Tan(angle) },
+      cosAngle{ MathType::Cos(angle) },
+      sinAngle{ MathType::Sin(angle) },
+      tanAngle{ MathType::Tan(angle) },
       cosAngleSqr{ cosAngle * cosAngle },
       sinAngleSqr{ sinAngle * sinAngle },
-      invSinAngle{ Math::GetValue(1) / sinAngle },
+      invSinAngle{ MathType::GetValue(1) / sinAngle },
       minHeight{ minHeight },
-      maxHeight{ Math::GetValue(-1) }
+      maxHeight{ MathType::GetValue(-1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -73,12 +73,12 @@ requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::Cone<N, Real>::Cone(const Ray& ray, Real angle, Real minHeight, Real maxHeight) noexcept
     : ray{ ray },
       angle{ angle },
-      cosAngle{ Math::Cos(angle) },
-      sinAngle{ Math::Sin(angle) },
-      tanAngle{ Math::Tan(angle) },
+      cosAngle{ MathType::Cos(angle) },
+      sinAngle{ MathType::Sin(angle) },
+      tanAngle{ MathType::Tan(angle) },
       cosAngleSqr{ cosAngle * cosAngle },
       sinAngleSqr{ sinAngle * sinAngle },
-      invSinAngle{ Math::GetValue(1) / sinAngle },
+      invSinAngle{ MathType::GetValue(1) / sinAngle },
       minHeight{ minHeight },
       maxHeight{ maxHeight }
 {
@@ -129,19 +129,19 @@ void Mathematics::Cone<N, Real>::SetAngle(Real aAngle)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (aAngle <= Real{} || Math::GetHalfPI() <= aAngle)
+    if (aAngle <= Real{} || MathType::GetHalfPI() <= aAngle)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("无效角度"))
     }
 
     angle = aAngle;
 
-    cosAngle = Math::Cos(angle);
-    sinAngle = Math::Sin(angle);
-    tanAngle = Math::Tan(angle);
+    cosAngle = MathType::Cos(angle);
+    sinAngle = MathType::Sin(angle);
+    tanAngle = MathType::Tan(angle);
     cosAngleSqr = cosAngle * cosAngle;
     sinAngleSqr = sinAngle * sinAngle;
-    invSinAngle = Math::GetValue(1) / sinAngle;
+    invSinAngle = MathType::GetValue(1) / sinAngle;
 }
 
 template <int N, typename Real>
@@ -205,7 +205,7 @@ void Mathematics::Cone<N, Real>::MakeInfiniteCone() noexcept
     MATHEMATICS_CLASS_IS_VALID_9;
 
     minHeight = Real{};
-    maxHeight = Math::GetValue(-1);
+    maxHeight = MathType::GetValue(-1);
 }
 
 template <int N, typename Real>
@@ -220,7 +220,7 @@ void Mathematics::Cone<N, Real>::MakeInfiniteTruncatedCone(Real aMinHeight)
     }
 
     minHeight = aMinHeight;
-    maxHeight = Math::GetValue(-1);
+    maxHeight = MathType::GetValue(-1);
 }
 
 template <int N, typename Real>
@@ -277,7 +277,7 @@ bool Mathematics::Cone<N, Real>::HeightInRange(Real h) const noexcept(gAssert < 
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return minHeight <= h && (!Math::Approximate(maxHeight, Math::GetValue(-1)) ? h <= maxHeight : true);
+    return minHeight <= h && (!MathType::Approximate(maxHeight, MathType::GetValue(-1)) ? h <= maxHeight : true);
 }
 
 template <int N, typename Real>
@@ -295,7 +295,7 @@ bool Mathematics::Cone<N, Real>::HeightGreaterThanMax(Real h) const noexcept(gAs
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return (!Math::Approximate(maxHeight, Math::GetValue(-1)) ? maxHeight < h : false);
+    return (!MathType::Approximate(maxHeight, MathType::GetValue(-1)) ? maxHeight < h : false);
 }
 
 template <int N, typename Real>
@@ -304,7 +304,7 @@ bool Mathematics::Cone<N, Real>::IsFinite() const noexcept(gAssert < 3 || gMathe
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return !Math::Approximate(maxHeight, Math::GetValue(-1));
+    return !MathType::Approximate(maxHeight, MathType::GetValue(-1));
 }
 
 template <int N, typename Real>
@@ -313,7 +313,7 @@ bool Mathematics::Cone<N, Real>::IsInfinite() const noexcept(gAssert < 3 || gMat
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Math::Approximate(maxHeight, Math::GetValue(-1));
+    return MathType::Approximate(maxHeight, MathType::GetValue(-1));
 }
 
 template <int N, typename Real>
@@ -331,11 +331,11 @@ void Mathematics::Cone<N, Real>::CreateMesh(int numMinVertices, bool inscribed, 
     const auto hMax = GetMaxHeight();
     const auto rMin = hMin * tanAngle;
     const auto rMax = hMax * tanAngle;
-    const auto tNumExtra = Math::GetRational(1, 2) * rMax / rMin - Math::GetValue(1);
+    const auto tNumExtra = MathType::GetRational(1, 2) * rMax / rMin - MathType::GetValue(1);
     auto numExtra = 0;
     if (Real{} < tNumExtra)
     {
-        numExtra = boost::numeric_cast<int>(Math::Ceil(tNumExtra));
+        numExtra = boost::numeric_cast<int>(MathType::Ceil(tNumExtra));
     }
     const auto numMaxVertices = 2 * numMinVertices * (1 + numExtra);
     vertices.clear();
@@ -382,12 +382,12 @@ template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 void Mathematics::Cone<N, Real>::GenerateInscribed(int numVertices, Real radius, Vector2Container& polygon) requires(N == 3)
 {
-    const auto theta = Math::GetTwoPI() / boost::numeric_cast<Real>(numVertices);
+    const auto theta = MathType::GetTwoPI() / boost::numeric_cast<Real>(numVertices);
     polygon.clear();
     for (auto i = 0; i < numVertices; ++i)
     {
         const auto angleTheta = boost::numeric_cast<Real>(i) * theta;
-        polygon.emplace_back(radius * Math::Cos(angleTheta), radius * Math::Sin(angleTheta));
+        polygon.emplace_back(radius * MathType::Cos(angleTheta), radius * MathType::Sin(angleTheta));
     }
     polygon.emplace_back(polygon.at(0));
 }
@@ -396,16 +396,16 @@ template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 void Mathematics::Cone<N, Real>::GenerateCircumscribed(int numVertices, Real radius, Vector2Container& polygon) requires(N == 3)
 {
-    const auto theta = Math::GetTwoPI() / boost::numeric_cast<Real>(numVertices);
+    const auto theta = MathType::GetTwoPI() / boost::numeric_cast<Real>(numVertices);
     Vector2Container inscribed{};
     for (auto i = 0; i < numVertices; ++i)
     {
         const auto angleTheta = boost::numeric_cast<Real>(i) * theta;
-        inscribed.emplace_back(radius * Math::Cos(angleTheta), radius * Math::Sin(angleTheta));
+        inscribed.emplace_back(radius * MathType::Cos(angleTheta), radius * MathType::Sin(angleTheta));
     }
     inscribed.emplace_back(inscribed.at(0));
 
-    const auto divisor = Math::GetValue(1) + Math::Cos(theta);
+    const auto divisor = MathType::GetValue(1) + MathType::Cos(theta);
     polygon.clear();
     for (auto i = 0, ip1 = 1; i < numVertices; ++i, ++ip1)
     {

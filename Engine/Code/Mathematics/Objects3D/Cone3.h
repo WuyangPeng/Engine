@@ -25,7 +25,7 @@ namespace Mathematics
 
         using ClassType = Cone3<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector3 = Vector3<Real>;
 
     public:
@@ -49,7 +49,7 @@ namespace Mathematics
               const Vector3& axis,
               const Real angle,
               const Real height,
-              const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+              const Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // axis必须是单位长度。
         // 一对(cosAngle,sinAngle)必须严格在平面的第一象限，以保证锥角为(0,pi/2)
@@ -59,7 +59,7 @@ namespace Mathematics
               const Real height,
               const Vector3& vertex,
               const Vector3& axis,
-              const Real epsilon = Math::GetZeroTolerance()) noexcept;
+              const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

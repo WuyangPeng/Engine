@@ -58,7 +58,7 @@ typename Mathematics::DistancePoint3Plane3<Real>::DistanceResult Mathematics::Di
 
     const auto signedDistance = Vector3Tools::DotProduct(plane.GetNormal(), point) - plane.GetConstant();
 
-    return DistanceResult{ Math::FAbs(signedDistance), Math::GetValue(0), point, point - signedDistance * plane.GetNormal() };
+    return DistanceResult{ MathType::FAbs(signedDistance), MathType::GetValue(0), point, point - signedDistance * plane.GetNormal() };
 }
 
 template <typename Real>

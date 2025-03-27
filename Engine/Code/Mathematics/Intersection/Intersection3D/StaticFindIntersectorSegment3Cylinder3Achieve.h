@@ -57,13 +57,13 @@ void Mathematics::StaticFindIntersectorSegment3Cylinder3<Real>::Find()
 {
     const auto findShared = StaticFindIntersectorLine3Cylinder3<Real>::Find(segment.GetCenterPoint(), segment.GetDirection(), cylinder);
 
-    if (0 < findShared.quantity && Math::FAbs(findShared.parameter0) <= segment.GetExtent())
+    if (0 < findShared.quantity && MathType::FAbs(findShared.parameter0) <= segment.GetExtent())
     {
         point0 = segment.GetCenterPoint() + findShared.parameter0 * segment.GetDirection();
         ++quantity;
     }
 
-    if (1 < findShared.quantity && Math::FAbs(findShared.parameter1) <= segment.GetExtent())
+    if (1 < findShared.quantity && MathType::FAbs(findShared.parameter1) <= segment.GetExtent())
     {
         if (quantity == 0)
         {

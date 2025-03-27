@@ -70,7 +70,7 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::Calculate()
         // 该端点是满足函数公差的近似根。
         bisect2Root = BrentsMethodRoot{ end, endFunction, BrentsMethodRootType::HaveSolution };
     }
-    else if (beginFunction * endFunction < Math::GetValue(0))
+    else if (beginFunction * endFunction < MathType::GetValue(0))
     {
         Search();
     }
@@ -126,7 +126,7 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::Search()
 template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethodCalculate<Real, UserDataType>::SwapBeginEnd() noexcept
 {
-    if (Math::FAbs(beginFunction) < Math::FAbs(endFunction))
+    if (MathType::FAbs(beginFunction) < MathType::FAbs(endFunction))
     {
         // 交换m_Begin和m_End，使得|f(end)| <= |f(begin)|。
         // 数值m_End被认为是根的最佳估计。
@@ -149,8 +149,8 @@ bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::RootSearch()
 {
     UpdateFunctionDifference();
 
-    if (Math::GetZeroTolerance() < Math::FAbs(beginSearchFunctionDifference) &&
-        Math::GetZeroTolerance() < Math::FAbs(endSearchFunctionDifference))
+    if (MathType::GetZeroTolerance() < MathType::FAbs(beginSearchFunctionDifference) &&
+        MathType::GetZeroTolerance() < MathType::FAbs(endSearchFunctionDifference))
     {
         // 使用逆二次插值。
         InverseQuadratic();
@@ -216,18 +216,18 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::InverseLinear() noe
 template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethodCalculate<Real, UserDataType>::AcceptOrRejectTests() noexcept
 {
-    auto solutionAvrDiff = solution - Math::GetRational(3, 4) * begin - Math::GetRational(1, 4) * end;
+    auto solutionAvrDiff = solution - MathType::GetRational(3, 4) * begin - MathType::GetRational(1, 4) * end;
 
     auto solutionEndDiff = solution - end;
 
-    auto absSolutionEndDiff = Math::FAbs(solutionEndDiff);
+    auto absSolutionEndDiff = MathType::FAbs(solutionEndDiff);
 
-    auto absEndSearchBeginDiff = Math::FAbs(end - searchBegin);
+    auto absEndSearchBeginDiff = MathType::FAbs(end - searchBegin);
 
-    auto absSearchBeginSearchEndDiff = Math::FAbs(searchBegin - searchEnd);
+    auto absSearchBeginSearchEndDiff = MathType::FAbs(searchBegin - searchEnd);
 
     auto currentBisected = false;
-    if (Math::GetZeroTolerance() < solutionAvrDiff * solutionEndDiff)
+    if (MathType::GetZeroTolerance() < solutionAvrDiff * solutionEndDiff)
     {
         // 值s不是在0.75 * x0+0.25 * x1和x1之间。
         // 注：该算法有时有x0 < x1但有时x1 < x0，
@@ -237,19 +237,19 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::AcceptOrRejectTests
     else if (previousBisected)
     {
         // Brent的第一测试，以确定是否接受该插值 。
-        currentBisected = (Math::GetRational(1, 2) * absEndSearchBeginDiff) <= absSolutionEndDiff || (absEndSearchBeginDiff <= brentsMethod.GetStepXTolerance());
+        currentBisected = (MathType::GetRational(1, 2) * absEndSearchBeginDiff) <= absSolutionEndDiff || (absEndSearchBeginDiff <= brentsMethod.GetStepXTolerance());
     }
     else
     {
         // Brent的第二测试，以确定是否接受该插值 。
-        currentBisected = ((Math::GetRational(1, 2) * absSearchBeginSearchEndDiff) <= absSolutionEndDiff || (absSearchBeginSearchEndDiff <= brentsMethod.GetStepXTolerance()));
+        currentBisected = ((MathType::GetRational(1, 2) * absSearchBeginSearchEndDiff) <= absSolutionEndDiff || (absSearchBeginSearchEndDiff <= brentsMethod.GetStepXTolerance()));
     }
 
     if (currentBisected)
     {
         // 其中一个额外的测试失败，
         // 所以拒绝插值，并用二分法来代替。
-        solution = Math::GetRational(1, 2) * (begin + end);
+        solution = MathType::GetRational(1, 2) * (begin + end);
         previousBisected = true;
     }
     else
@@ -264,7 +264,7 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::UpdateSubinterval()
     searchEnd = searchBegin;
     searchBegin = end;
     searchFunction = endFunction;
-    if (beginFunction * solutionFunction < Math::GetValue(0))
+    if (beginFunction * solutionFunction < MathType::GetValue(0))
     {
         end = solution;
         endFunction = solutionFunction;
@@ -292,7 +292,7 @@ bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::IsSolutionSatisfyCo
 template <typename Real, typename UserDataType>
 bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::IsConvXTolerance() const noexcept
 {
-    if (Math::FAbs(end - begin) <= brentsMethod.GetConvXTolerance())
+    if (MathType::FAbs(end - begin) <= brentsMethod.GetConvXTolerance())
     {
         return true;
     }

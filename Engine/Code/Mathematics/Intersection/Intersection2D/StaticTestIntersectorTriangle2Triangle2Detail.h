@@ -100,11 +100,11 @@ Mathematics::NumericalValueSymbol Mathematics::StaticTestIntersectorTriangle2Tri
     for (const auto& value : vertex)
     {
         auto t = Vector2Tools::DotProduct(direction, (value - point));
-        if (Math::GetValue(0) < t)
+        if (MathType::GetValue(0) < t)
         {
             ++positive;
         }
-        else if (t < Math::GetValue(0))
+        else if (t < MathType::GetValue(0))
         {
             ++negative;
         }

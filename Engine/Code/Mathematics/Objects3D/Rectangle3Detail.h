@@ -17,7 +17,7 @@
 
 template <typename Real>
 Mathematics::Rectangle3<Real>::Rectangle3() noexcept
-    : center{}, axis{ Vector3::GetUnitX(), Vector3::GetUnitY() }, extent{ Math::GetValue(1), Math::GetValue(1) }, epsilon{ Math::GetZeroTolerance() }
+    : center{}, axis{ Vector3::GetUnitX(), Vector3::GetUnitY() }, extent{ MathType::GetValue(1), MathType::GetValue(1) }, epsilon{ MathType::GetZeroTolerance() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }

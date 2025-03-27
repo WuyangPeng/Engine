@@ -32,7 +32,7 @@ namespace Mathematics
         using Segment2 = Segment2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
         using DistanceLine2Line2Tool = DistanceLine2Line2Tool<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResult;
 
     public:

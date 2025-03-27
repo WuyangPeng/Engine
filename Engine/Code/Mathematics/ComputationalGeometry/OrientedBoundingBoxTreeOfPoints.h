@@ -27,7 +27,7 @@ namespace Mathematics
         using OrientedBox3 = Algebra::OrientedBox3<Real>;
         using Vector3 = Algebra::Vector3<Real>;
         using Vector3Container = std::vector<Vector3>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         OrientedBoundingBoxTreeOfPoints() noexcept;

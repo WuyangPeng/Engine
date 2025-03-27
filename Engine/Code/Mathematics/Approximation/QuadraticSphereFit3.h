@@ -33,7 +33,7 @@ namespace Mathematics
 
         using Vector3 = Vector3<Real>;
         using Points = std::vector<Vector3>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         explicit QuadraticSphereFit3(const Points& points);

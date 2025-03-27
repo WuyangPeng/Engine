@@ -24,7 +24,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = BSplineGeodesic<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         BSplineGeodesic(const BSplineRectangle<Real>& spline);

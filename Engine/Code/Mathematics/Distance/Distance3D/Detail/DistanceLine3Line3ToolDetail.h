@@ -21,7 +21,7 @@ Mathematics::DistanceLine3Line3Tool<Real>::DistanceLine3Line3Tool(const Vector3&
       originDifferenceDotLhsDirection{ Vector3Tools::DotProduct(originDifference, lhsDirection) },
       originDifferenceDotRhsDirection{ -Vector3Tools::DotProduct(originDifference, rhsDirection) },
       originDifferenceSquaredLength{ Vector3Tools::GetLengthSquared(originDifference) },
-      det{ Math::FAbs(Math::GetValue(1) - directionDot * directionDot) }
+      det{ MathType::FAbs(MathType::GetValue(1) - directionDot * directionDot) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -108,7 +108,7 @@ Real Mathematics::DistanceLine3Line3Tool<Real>::GetSquaredDistanceWithLhs() cons
     auto squaredDistance = -originDifferenceDotLhsDirection * originDifferenceDotLhsDirection + originDifferenceSquaredLength;
 
     // 计算数值舍入误差
-    return Math::GetNumericalRoundOffNonnegative(squaredDistance);
+    return MathType::GetNumericalRoundOffNonnegative(squaredDistance);
 }
 
 template <typename Real>
@@ -119,7 +119,7 @@ Real Mathematics::DistanceLine3Line3Tool<Real>::GetSquaredDistanceWithRhs() cons
     auto squaredDistance = -originDifferenceDotRhsDirection * originDifferenceDotRhsDirection + originDifferenceSquaredLength;
 
     // 计算数值舍入误差
-    return Math::GetNumericalRoundOffNonnegative(squaredDistance);
+    return MathType::GetNumericalRoundOffNonnegative(squaredDistance);
 }
 
 template <typename Real>
@@ -143,8 +143,8 @@ Real Mathematics::DistanceLine3Line3Tool<Real>::GetOriginDifferenceDotDirectionA
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto sign = (Math::GetValue(0) < directionDot ? Math::GetValue(-1) : Math::GetValue(1));
-    const auto average = Math::GetRational(1, 2) * (originDifferenceDotLhsDirection - sign * originDifferenceDotRhsDirection);
+    const auto sign = (MathType::GetValue(0) < directionDot ? MathType::GetValue(-1) : MathType::GetValue(1));
+    const auto average = MathType::GetRational(1, 2) * (originDifferenceDotLhsDirection - sign * originDifferenceDotRhsDirection);
 
     return average;
 }

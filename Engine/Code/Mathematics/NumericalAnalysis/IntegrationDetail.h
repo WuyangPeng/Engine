@@ -39,11 +39,11 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 Real Mathematics::Integration<Real>::TrapezoidRule(int numSamples, Real a, Real b, const std::function<Real(Real)>& integrand)
 {
-    const auto h = (b - a) / (Math::GetValue(numSamples) - Math::GetValue(1));
-    auto result = Math::GetRational(1, 2) * (integrand(a) + integrand(b));
+    const auto h = (b - a) / (MathType::GetValue(numSamples) - MathType::GetValue(1));
+    auto result = MathType::GetRational(1, 2) * (integrand(a) + integrand(b));
     for (auto i = 1; i <= numSamples - 2; ++i)
     {
-        result += integrand(a + Math::GetValue(i) * h);
+        result += integrand(a + MathType::GetValue(i) * h);
     }
     result *= h;
     return result;
@@ -53,7 +53,7 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 Real Mathematics::Integration<Real>::Romberg(int order, Real a, Real b, const std::function<Real(Real)>& integrand)
 {
-    constexpr auto half = Math::GetRational(1, 2);
+    constexpr auto half = MathType::GetRational(1, 2);
     std::vector<std::array<Real, 2>> rom(order);
     auto h = b - a;
     rom.at(0).at(0) = half * h * (integrand(a) + integrand(b));
@@ -64,14 +64,14 @@ Real Mathematics::Integration<Real>::Romberg(int order, Real a, Real b, const st
         auto i1 = 1;
         for (; i1 <= p0; ++i1)
         {
-            sum += integrand(a + h * (Math::GetValue(i1) - half));
+            sum += integrand(a + h * (MathType::GetValue(i1) - half));
         }
 
         /// 理查森推断。
         rom.at(0).at(1) = half * (rom.at(0).at(0) + h * sum);
         for (auto i2 = 1, i2M1 = 0, p2 = 4; i2 < i0; ++i2, ++i2M1, p2 *= 4)
         {
-            rom.at(i2).at(1) = (Math::GetValue(p2) * rom.at(i2M1).at(1) - rom.at(i2M1).at(0)) / Math::GetValue(p2 - 1);
+            rom.at(i2).at(1) = (MathType::GetValue(p2) * rom.at(i2M1).at(1) - rom.at(i2M1).at(0)) / MathType::GetValue(p2 - 1);
         }
 
         for (i1 = 0; i1 < i0; ++i1)
@@ -88,9 +88,9 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 void Mathematics::Integration<Real>::ComputeQuadratureInfo(int degree, std::vector<Real>& roots, std::vector<Real>& coefficients)
 {
-    constexpr auto zero = Math::GetValue(0);
-    constexpr auto one = Math::GetValue(1);
-    constexpr auto half = Math::GetRational(1, 2);
+    constexpr auto zero = MathType::GetValue(0);
+    constexpr auto one = MathType::GetValue(1);
+    constexpr auto half = MathType::GetRational(1, 2);
 
     std::vector<std::vector<Real>> poly(gsl::narrow_cast<size_t>(degree) + 1);
 
@@ -103,8 +103,8 @@ void Mathematics::Integration<Real>::ComputeQuadratureInfo(int degree, std::vect
 
     for (auto n = 2, nm1 = 1, nm2 = 0, np1 = 3; n <= degree; ++n, ++nm1, ++nm2, ++np1)
     {
-        auto mult0 = Math::GetValue(nm1) / Math::GetValue(n);
-        auto mult1 = (Math::GetValue(2) * Math::GetValue(n) - Math::GetValue(1)) / Math::GetValue(n);
+        auto mult0 = MathType::GetValue(nm1) / MathType::GetValue(n);
+        auto mult1 = (MathType::GetValue(2) * MathType::GetValue(n) - MathType::GetValue(1)) / MathType::GetValue(n);
 
         poly.at(n).resize(np1);
         poly.at(n).at(0) = -mult0 * poly.at(nm2).at(0);
@@ -124,7 +124,7 @@ void Mathematics::Integration<Real>::ComputeQuadratureInfo(int degree, std::vect
     std::vector<Real> subRoots(n);
     for (auto i = 0u; i < roots.size(); ++i)
     {
-        auto denominator = Math::GetValue(1);
+        auto denominator = MathType::GetValue(1);
         for (auto j = 0u, k = 0u; j < roots.size(); ++j)
         {
             if (j != i)
@@ -142,8 +142,8 @@ void Mathematics::Integration<Real>::ComputeQuadratureInfo(int degree, std::vect
         weights.at(0).at(1) = half * delta.at(1) * delta.at(1);
         for (auto k = 1u; k < n; ++k)
         {
-            auto dk = Math::GetValue(k);
-            auto mult = -dk / (dk + Math::GetValue(2));
+            auto dk = MathType::GetValue(k);
+            auto mult = -dk / (dk + MathType::GetValue(2));
             weights.at(k).at(0) = mult * delta.at(0) * weights.at(k - 1).at(0);
             weights.at(k).at(1) = mult * delta.at(1) * weights.at(k - 1).at(1);
         }
@@ -196,7 +196,7 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 Real Mathematics::Integration<Real>::GaussianQuadrature(const std::vector<Real>& roots, const std::vector<Real>& coefficients, Real a, Real b, const std::function<Real(Real)>& integrand)
 {
-    constexpr auto half = Math::GetRational(1, 2);
+    constexpr auto half = MathType::GetRational(1, 2);
     const auto radius = half * (b - a);
     const auto center = half * (b + a);
     Real result{};

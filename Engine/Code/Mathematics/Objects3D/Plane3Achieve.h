@@ -24,7 +24,7 @@ Mathematics::Plane3<Real>::Plane3(const Vector3& normal, Real constant, Real eps
 
 template <typename Real>
 Mathematics::Plane3<Real>::Plane3() noexcept
-    : normal{ Vector3::GetUnitX() }, constant{}, epsilon{ Math::GetZeroTolerance() }
+    : normal{ Vector3::GetUnitX() }, constant{}, epsilon{ MathType::GetZeroTolerance() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }

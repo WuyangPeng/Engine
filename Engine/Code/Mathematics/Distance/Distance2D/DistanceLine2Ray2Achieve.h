@@ -66,12 +66,12 @@ typename Mathematics::DistanceLine2Ray2<Real>::DistanceResult Mathematics::Dista
     {
         const auto rhsT = tool.GetRhsT();
 
-        if (Math::GetValue(0) <= rhsT)
+        if (MathType::GetValue(0) <= rhsT)
         {
             // 两个内部点最接近，一个在直线上，一个在射线上。
             const auto lhsT = tool.GetLhsT();
 
-            return DistanceResult{ Math::GetValue(0), Math::GetValue(0), line.GetOrigin() + lhsT / det * line.GetDirection(), ray.GetOrigin() + rhsT / det * ray.GetDirection() };
+            return DistanceResult{ MathType::GetValue(0), MathType::GetValue(0), line.GetOrigin() + lhsT / det * line.GetDirection(), ray.GetOrigin() + rhsT / det * ray.GetDirection() };
         }
         else
         {
@@ -91,7 +91,7 @@ typename Mathematics::DistanceLine2Ray2<Real>::DistanceResult Mathematics::Dista
 {
     const auto squaredDistance = tool.GetSquaredDistanceWithLhs();
 
-    return DistanceResult{ squaredDistance, Math::GetValue(0), line.GetOrigin() - tool.GetOriginDifferenceDotLhsDirection() * line.GetDirection(), ray.GetOrigin() };
+    return DistanceResult{ squaredDistance, MathType::GetValue(0), line.GetOrigin() - tool.GetOriginDifferenceDotLhsDirection() * line.GetDirection(), ray.GetOrigin() };
 }
 
 template <typename Real>

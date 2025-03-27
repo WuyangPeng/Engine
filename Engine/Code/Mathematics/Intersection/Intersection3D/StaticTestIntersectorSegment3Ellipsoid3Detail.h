@@ -61,16 +61,16 @@ void Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>::Test()
     const auto matDiff = matrix * diff;
     const auto a2 = Vector3Tools::DotProduct(segment.GetDirection(), matDir);
     const auto a1 = Vector3Tools::DotProduct(segment.GetDirection(), matDiff);
-    const auto a0 = Vector3Tools::DotProduct(diff, matDiff) - Math::GetValue(1);
+    const auto a0 = Vector3Tools::DotProduct(diff, matDiff) - MathType::GetValue(1);
 
     const auto discr = a1 * a1 - a0 * a2;
-    if (discr < Math::GetValue(0))
+    if (discr < MathType::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
-    if (a0 <= Math::GetValue(0))
+    if (a0 <= MathType::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Other);
         return;
@@ -78,17 +78,17 @@ void Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>::Test()
 
     auto e = segment.GetExtent();
 
-    if (Math::GetValue(0) <= a1)
+    if (MathType::GetValue(0) <= a1)
     {
-        auto q = a0 + e * (Math::GetValue(-2) * a1 + a2 * e);
-        if (q <= Math::GetValue(0))
+        auto q = a0 + e * (MathType::GetValue(-2) * a1 + a2 * e);
+        if (q <= MathType::GetValue(0))
         {
             this->SetIntersectionType(IntersectionType::Other);
             return;
         }
 
         auto qder = a1 - a2 * e;
-        if (qder < Math::GetValue(0))
+        if (qder < MathType::GetValue(0))
         {
             this->SetIntersectionType(IntersectionType::Other);
             return;
@@ -96,15 +96,15 @@ void Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>::Test()
     }
     else
     {
-        auto q = a0 + e * (Math::GetValue(2) * a1 + a2 * e);
-        if (q <= Math::GetValue(0))
+        auto q = a0 + e * (MathType::GetValue(2) * a1 + a2 * e);
+        if (q <= MathType::GetValue(0))
         {
             this->SetIntersectionType(IntersectionType::Other);
             return;
         }
 
         auto qder = a1 + a2 * e;
-        if (qder < Math::GetValue(0))
+        if (qder < MathType::GetValue(0))
         {
             this->SetIntersectionType(IntersectionType::Other);
             return;

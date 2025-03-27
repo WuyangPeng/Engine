@@ -30,7 +30,7 @@ namespace Mathematics
 
         using BrentsMethod = BrentsMethod<Real, UserDataType>;
         using BrentsMethodRoot = BrentsMethodRoot<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         BrentsMethodCalculate(const BrentsMethod& brentsMethod, Real begin, Real end);

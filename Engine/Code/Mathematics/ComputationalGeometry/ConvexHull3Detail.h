@@ -80,7 +80,7 @@ void Mathematics::ConvexHull3<Real>::Init()
     if (eQueryType != QueryType::Rational && eQueryType != QueryType::Filtered)
     {
         const auto minValue = info.GetMinExtreme();
-        const auto scale = Math::GetValue(1) / info.GetMaxRange();
+        const auto scale = MathType::GetValue(1) / info.GetMaxRange();
         for (auto i = 0; i < mNumVertices; ++i)
         {
             sVertices.at(i) = (vertices.at(i) - minValue) * scale;
@@ -89,17 +89,17 @@ void Mathematics::ConvexHull3<Real>::Init()
         Real expand{};
         if (eQueryType == QueryType::Int64)
         {
-            expand = Math::GetValue(1 << 20);
+            expand = MathType::GetValue(1 << 20);
             query = std::make_shared<Query3Int64<Real>>(sVertices);
         }
         else if (eQueryType == QueryType::Integer)
         {
-            expand = Math::GetValue(1 << 24);
+            expand = MathType::GetValue(1 << 24);
             query = std::make_shared<Query3Integer<Real>>(sVertices);
         }
         else
         {
-            expand = Math::GetValue(1);
+            expand = MathType::GetValue(1);
             query = std::make_shared<Query3>(sVertices);
         }
 
@@ -249,7 +249,7 @@ Mathematics::ConvexHull2<Real> Mathematics::ConvexHull3<Real>::GetConvexHull2() 
 
 template <typename Real>
 Mathematics::ConvexHull3<Real>::ConvexHull3(const String& filename)
-    : ParentType{ 0, Math::GetValue(0), QueryType::Real },
+    : ParentType{ 0, MathType::GetValue(0), QueryType::Real },
       vertices{},
       sVertices{},
       query{},

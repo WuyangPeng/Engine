@@ -59,7 +59,7 @@ void Mathematics::StaticFindIntersectorSegment3Sphere3<Real>::Find()
     auto a0 = Vector3Tools::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
     auto a1 = Vector3Tools::DotProduct(segment.GetDirection(), diff);
     auto discr = a1 * a1 - a0;
-    if (discr < Math::GetValue(0))
+    if (discr < MathType::GetValue(0))
     {
         quantity = 0;
         this->SetIntersectionType(IntersectionType::Empty);
@@ -67,25 +67,25 @@ void Mathematics::StaticFindIntersectorSegment3Sphere3<Real>::Find()
     }
 
     auto extent0 = segment.GetExtent() * segment.GetExtent() + a0;
-    auto extent1 = (Math::GetValue(2)) * a1 * segment.GetExtent();
+    auto extent1 = (MathType::GetValue(2)) * a1 * segment.GetExtent();
     auto minus = extent0 - extent1;
     auto plus = extent0 + extent1;
 
-    if (minus * plus <= Math::GetValue(0))
+    if (minus * plus <= MathType::GetValue(0))
     {
-        auto root = Math::Sqrt(discr);
-        segmentParameter0 = (minus > Math::GetValue(0) ? -a1 - root : -a1 + root);
+        auto root = MathType::Sqrt(discr);
+        segmentParameter0 = (minus > MathType::GetValue(0) ? -a1 - root : -a1 + root);
         point0 = segment.GetCenterPoint() + segmentParameter0 * segment.GetDirection();
         quantity = 1;
         this->SetIntersectionType(IntersectionType::Point);
         return;
     }
 
-    if (Math::GetValue(0) < minus && Math::FAbs(a1) < segment.GetExtent())
+    if (MathType::GetValue(0) < minus && MathType::FAbs(a1) < segment.GetExtent())
     {
         if (this->GetEpsilon() <= discr)
         {
-            auto root = Math::Sqrt(discr);
+            auto root = MathType::Sqrt(discr);
             segmentParameter0 = -a1 - root;
             segmentParameter1 = -a1 + root;
             point0 = segment.GetCenterPoint() + segmentParameter0 * segment.GetDirection();

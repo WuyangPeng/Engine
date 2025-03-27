@@ -27,7 +27,7 @@ void Mathematics::TrapezoidRule<Real, UserDataType>::Calculate()
 {
     const auto numSamplesReduce1 = numSamples - 1;
     auto difference = (end - begin) / boost::numeric_cast<Real>(numSamplesReduce1);
-    value = Math::GetRational(1, 2) * (function(begin, userData) + function(end, userData));
+    value = MathType::GetRational(1, 2) * (function(begin, userData) + function(end, userData));
 
     for (auto i = 1; i <= numSamples - 2; ++i)
     {

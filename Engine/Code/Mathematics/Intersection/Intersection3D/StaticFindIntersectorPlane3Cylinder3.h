@@ -35,11 +35,11 @@ namespace Mathematics
         using Circle3 = Circle3<Real>;
         using Ellipse3 = Ellipse3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
         using TwoLine = std::pair<Line3, Line3>;
 
     public:
-        StaticFindIntersectorPlane3Cylinder3(const Plane3& plane, const Cylinder3& cylinder, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorPlane3Cylinder3(const Plane3& plane, const Cylinder3& cylinder, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

@@ -63,8 +63,8 @@ typename Mathematics::DistancePoint2Box2<Real>::DistanceResult Mathematics::Dist
     // 计算平方距离和包围盒上的最近点。
     Vector2 closest{ Vector2Tools::DotProduct(difference, box.GetAxis0()),
                      Vector2Tools::DotProduct(difference, box.GetAxis1()) };
-    auto squaredDistance = Math::GetValue(0);
-    auto delta = Math::GetValue(0);
+    auto squaredDistance = MathType::GetValue(0);
+    auto delta = MathType::GetValue(0);
 
     if (closest.GetX() < -box.GetExtent0())
     {
@@ -93,7 +93,7 @@ typename Mathematics::DistancePoint2Box2<Real>::DistanceResult Mathematics::Dist
     }
 
     return DistanceResult{ squaredDistance,
-                           Math::GetValue(0),
+                           MathType::GetValue(0),
                            point,
                            box.GetCenter() + closest.GetX() * box.GetAxis0() + closest.GetY() * box.GetAxis1() };
 }

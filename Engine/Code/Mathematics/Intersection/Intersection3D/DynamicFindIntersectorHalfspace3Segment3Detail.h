@@ -58,7 +58,7 @@ Mathematics::Segment3<Real> Mathematics::DynamicFindIntersectorHalfspace3Segment
 template <typename Real>
 void Mathematics::DynamicFindIntersectorHalfspace3Segment3<Real>::Find()
 {
-    this->SetContactTime(Math::GetValue(0));
+    this->SetContactTime(MathType::GetValue(0));
 
     using SegmentType = std::array<Vector3, 2>;
     SegmentType segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
@@ -66,7 +66,7 @@ void Mathematics::DynamicFindIntersectorHalfspace3Segment3<Real>::Find()
     const auto cfg = FindIntersectorAxis<Real>::GetConfiguration(halfspace.GetNormal(), segmentType);
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
-    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -Math::maxReal, halfspace.GetConstant(), cfg.GetMin(), cfg.GetMax(), this->GetTMax() };
+    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -MathType::maxReal, halfspace.GetConstant(), cfg.GetMin(), cfg.GetMax(), this->GetTMax() };
     auto contactTime = testIntersectorAxis.GetTFirst();
 
     if (!testIntersectorAxis.GetResult())
@@ -77,7 +77,7 @@ void Mathematics::DynamicFindIntersectorHalfspace3Segment3<Real>::Find()
         return;
     }
 
-    if (Math::Approximate(contactTime, Math::GetValue(0)))
+    if (MathType::Approximate(contactTime, MathType::GetValue(0)))
     {
         // 现在相交。
         this->SetIntersectionType(IntersectionType::Empty);

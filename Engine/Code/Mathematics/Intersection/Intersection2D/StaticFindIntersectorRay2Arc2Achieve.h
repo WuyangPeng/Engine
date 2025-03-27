@@ -63,18 +63,18 @@ void Mathematics::StaticFindIntersectorRay2Arc2<Real>::Find()
         /// 如果线与圆的交点不在射线中，则减少根数。
         if (rootCount == 1)
         {
-            if (line2Circle2.GetParameter(0) < Math::GetValue(0))
+            if (line2Circle2.GetParameter(0) < MathType::GetValue(0))
             {
                 rootCount = 0;
             }
         }
         else
         {
-            if (line2Circle2.GetParameter(1) < Math::GetValue(0))
+            if (line2Circle2.GetParameter(1) < MathType::GetValue(0))
             {
                 rootCount = 0;
             }
-            else if (line2Circle2.GetParameter(0) < Math::GetValue(0))
+            else if (line2Circle2.GetParameter(0) < MathType::GetValue(0))
             {
                 rootCount = 1;
                 line2Circle2.ClearParameter0();

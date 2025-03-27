@@ -22,7 +22,7 @@ namespace Mathematics
 
         using ClassType = PolarDecompositionValue<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Matrix3 = Matrix3<Real>;
 
     public:

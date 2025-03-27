@@ -71,20 +71,20 @@ typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::Distan
         const auto lhsT = tool.GetLhsT();
         const auto rhsT = tool.GetRhsT();
 
-        if (Math::GetValue(0) <= lhsT)
+        if (MathType::GetValue(0) <= lhsT)
         {
             // 区域0（内部）
-            if (Math::GetValue(0) <= rhsT)
+            if (MathType::GetValue(0) <= rhsT)
             {
                 // 最小值为两个射线内部点。
-                return DistanceResult{ Math::GetValue(0),
-                                       Math::GetValue(0),
+                return DistanceResult{ MathType::GetValue(0),
+                                       MathType::GetValue(0),
                                        lhsRay.GetOrigin() + lhsT / det * lhsRay.GetDirection(),
                                        rhsRay.GetOrigin() + rhsT / det * rhsRay.GetDirection() };
             }
             else  // 区域3（边）
             {
-                if (Math::GetValue(0) <= originDifferenceDotLhsDirection)
+                if (MathType::GetValue(0) <= originDifferenceDotLhsDirection)
                 {
                     return GetSquaredWithClosestPointsIsOrigin(tool);
                 }
@@ -98,9 +98,9 @@ typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::Distan
         {
             auto originDifferenceDotRhsDirection = tool.GetOriginDifferenceDotRhsDirection();
 
-            if (Math::GetValue(0) <= rhsT)  // 区域1（边）
+            if (MathType::GetValue(0) <= rhsT)  // 区域1（边）
             {
-                if (Math::GetValue(0) <= originDifferenceDotRhsDirection)
+                if (MathType::GetValue(0) <= originDifferenceDotRhsDirection)
                 {
                     return GetSquaredWithClosestPointsIsOrigin(tool);
                 }
@@ -111,13 +111,13 @@ typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::Distan
             }
             else  // 区域2（角）
             {
-                if (originDifferenceDotLhsDirection < Math::GetValue(0))
+                if (originDifferenceDotLhsDirection < MathType::GetValue(0))
                 {
                     return GetSquaredWithClosestPointsIsLhs(tool);
                 }
                 else
                 {
-                    if (Math::GetValue(0) <= originDifferenceDotRhsDirection)
+                    if (MathType::GetValue(0) <= originDifferenceDotRhsDirection)
                     {
                         return GetSquaredWithClosestPointsIsOrigin(tool);
                     }
@@ -134,10 +134,10 @@ typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::Distan
         // 射线是平行的。
         const auto directionDot = tool.GetDirectionDot();
 
-        if (Math::GetValue(0) < directionDot)
+        if (MathType::GetValue(0) < directionDot)
         {
             // 相反的方向向量。
-            if (Math::GetValue(0) <= originDifferenceDotLhsDirection)
+            if (MathType::GetValue(0) <= originDifferenceDotLhsDirection)
             {
                 return GetSquaredWithClosestPointsIsOrigin(tool);
             }
@@ -149,7 +149,7 @@ typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::Distan
         else
         {
             // 相同的方向向量
-            if (Math::GetValue(0) <= originDifferenceDotLhsDirection)
+            if (MathType::GetValue(0) <= originDifferenceDotLhsDirection)
             {
                 return GetSquaredWithClosestPointsIsRhs(tool);
             }
@@ -164,8 +164,8 @@ typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::Distan
 template <typename Real>
 typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::DistanceRay2Ray2<Real>::GetSquaredWithClosestPointsIsOrigin(const DistanceLine2Line2Tool& tool) const
 {
-    return DistanceResult{ Math::GetNumericalRoundOffNonnegative(tool.GetOriginDifferenceSquaredLength()),
-                           Math::GetValue(0),
+    return DistanceResult{ MathType::GetNumericalRoundOffNonnegative(tool.GetOriginDifferenceSquaredLength()),
+                           MathType::GetValue(0),
                            lhsRay.GetOrigin(),
                            rhsRay.GetOrigin() };
 }
@@ -175,7 +175,7 @@ typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::Distan
 {
     const auto squaredDistance = tool.GetSquaredDistanceWithLhs();
 
-    return DistanceResult{ squaredDistance, Math::GetValue(0), lhsRay.GetOrigin() - tool.GetOriginDifferenceDotLhsDirection() * lhsRay.GetDirection(), rhsRay.GetOrigin() };
+    return DistanceResult{ squaredDistance, MathType::GetValue(0), lhsRay.GetOrigin() - tool.GetOriginDifferenceDotLhsDirection() * lhsRay.GetDirection(), rhsRay.GetOrigin() };
 }
 
 template <typename Real>
@@ -183,7 +183,7 @@ typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::Distan
 {
     const auto squaredDistance = tool.GetSquaredDistanceWithRhs();
 
-    return DistanceResult{ squaredDistance, Math::GetValue(0), lhsRay.GetOrigin(), rhsRay.GetOrigin() - tool.GetOriginDifferenceDotRhsDirection() * rhsRay.GetDirection() };
+    return DistanceResult{ squaredDistance, MathType::GetValue(0), lhsRay.GetOrigin(), rhsRay.GetOrigin() - tool.GetOriginDifferenceDotRhsDirection() * rhsRay.GetDirection() };
 }
 
 template <typename Real>

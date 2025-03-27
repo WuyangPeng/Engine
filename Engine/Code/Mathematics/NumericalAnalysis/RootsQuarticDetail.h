@@ -44,13 +44,13 @@ int Mathematics::RootsQuartic<T>::Solve(bool useBisection,
 {
     /// 测试度数是否小于4。
 
-    if (Math::Approximate(g4, T{}))
+    if (MathType::Approximate(g4, T{}))
     {
         return RootsCubic::Solve(useBisection, g0, g1, g2, g3, roots);
     }
 
     /// 测试零值根。
-    if (Math::Approximate(g0, T{}))
+    if (MathType::Approximate(g0, T{}))
     {
         return HasZeroValuedRoots(useBisection, g1, g2, g3, g4, roots);
     }
@@ -81,7 +81,7 @@ int Mathematics::RootsQuartic<T>::Solve(bool useBisection,
                                         PolynomialRootContainer& roots) requires(std::is_floating_point_v<T> || std::is_same_v<T, Rational>)
 {
     /// 测试零值根。
-    if (Math::Approximate(m0, T{}))
+    if (MathType::Approximate(m0, T{}))
     {
         return HasZeroValuedRoots(useBisection, m1, m2, m3, roots);
     }
@@ -146,11 +146,11 @@ int Mathematics::RootsQuartic<T>::HasZeroValuedRoots(bool useBisection,
                                                      const T& g4,
                                                      PolynomialRootContainer& roots)
 {
-    if (Math::Approximate(g1, T{}))
+    if (MathType::Approximate(g1, T{}))
     {
-        if (Math::Approximate(g2, T{}))
+        if (MathType::Approximate(g2, T{}))
         {
-            if (Math::Approximate(g3, T{}))
+            if (MathType::Approximate(g3, T{}))
             {
                 roots.at(0) = { T{}, 4 };
                 return 1;
@@ -187,11 +187,11 @@ int Mathematics::RootsQuartic<T>::HasZeroValuedRoots(bool useBisection,
                                                      const T& m3,
                                                      PolynomialRootContainer& roots)
 {
-    if (Math::Approximate(m1, T{}))
+    if (MathType::Approximate(m1, T{}))
     {
-        if (Math::Approximate(m2, T{}))
+        if (MathType::Approximate(m2, T{}))
         {
-            if (Math::Approximate(m3, T{}))
+            if (MathType::Approximate(m3, T{}))
             {
                 roots.at(0) = { T{}, 4 };
                 return 1;

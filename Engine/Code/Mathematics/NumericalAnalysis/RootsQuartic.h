@@ -58,7 +58,7 @@ namespace Mathematics
         using PolynomialRootContainer = std::vector<PolynomialRoot>;
         using RationalPolynomialRoot = Algebra::PolynomialRoot<Rational>;
         using RationalPolynomialRootContainer = std::array<RationalPolynomialRoot, 4>;
-        using Math = Math<T>;
+        using MathType = Math<T>;
 
     public:
         RootsQuartic() noexcept;

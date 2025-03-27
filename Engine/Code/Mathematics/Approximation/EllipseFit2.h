@@ -35,7 +35,7 @@ namespace Mathematics
         using Vector2 = Vector2<Real>;
         using Points = std::vector<Vector2>;
         using Matrix2 = Matrix2<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         explicit EllipseFit2(const Points& points);

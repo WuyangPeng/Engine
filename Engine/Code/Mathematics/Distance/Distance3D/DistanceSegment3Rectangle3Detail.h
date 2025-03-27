@@ -97,7 +97,7 @@ typename Mathematics::DistanceSegment3Rectangle3<Real>::DistanceResult Mathemati
         rectCoord[1] = distancePoint3Rectangle3.GetRectangleCoordinate(1);
     }
 
-    return DistanceResult{ sqrDist.GetDistance(), Math::GetValue(0), closestPoint0, closestPoint1, segmentParameter, Math::GetValue(0) };
+    return DistanceResult{ sqrDist.GetDistance(), MathType::GetValue(0), closestPoint0, closestPoint1, segmentParameter, MathType::GetValue(0) };
 }
 
 template <typename Real>

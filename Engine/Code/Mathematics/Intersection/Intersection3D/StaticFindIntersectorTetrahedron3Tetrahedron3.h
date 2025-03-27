@@ -28,11 +28,11 @@ namespace Mathematics
         using Tetrahedron3 = Tetrahedron3<Real>;
         using Plane3 = Plane3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
         using IntersectionContainer = std::vector<Tetrahedron3>;
 
     public:
-        StaticFindIntersectorTetrahedron3Tetrahedron3(const Tetrahedron3& tetrahedron0, const Tetrahedron3& tetrahedron1, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorTetrahedron3Tetrahedron3(const Tetrahedron3& tetrahedron0, const Tetrahedron3& tetrahedron1, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

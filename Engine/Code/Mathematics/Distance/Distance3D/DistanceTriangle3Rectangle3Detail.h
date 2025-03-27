@@ -62,13 +62,13 @@ typename Mathematics::DistanceTriangle3Rectangle3<Real>::DistanceResult Mathemat
     Vector3 closestPoint1{};
 
     // 比较三角形的边缘与矩形的内部。
-    auto sqrDist = Math::maxReal;
+    auto sqrDist = MathType::maxReal;
 
     for (auto index0 = 2, index1 = 0; index1 < 3; index0 = index1++)
     {
-        auto center = (Math::GetRational(1, 2)) * (triangle.GetVertex(index0) + triangle.GetVertex(index1));
+        auto center = (MathType::GetRational(1, 2)) * (triangle.GetVertex(index0) + triangle.GetVertex(index1));
         auto direction = triangle.GetVertex(index1) - triangle.GetVertex(index0);
-        auto extent = (Math::GetRational(1, 2)) * Vector3Tools::GetLength(direction);
+        auto extent = (MathType::GetRational(1, 2)) * Vector3Tools::GetLength(direction);
 
         const Segment3<Real> edge{ extent, center, direction };
 
@@ -111,7 +111,7 @@ typename Mathematics::DistanceTriangle3Rectangle3<Real>::DistanceResult Mathemat
             }
         }
     }
-    return DistanceResult{ sqrDist, Math::GetValue(0), closestPoint0, closestPoint1 };
+    return DistanceResult{ sqrDist, MathType::GetValue(0), closestPoint0, closestPoint1 };
 }
 
 template <typename Real>

@@ -26,7 +26,7 @@ namespace Mathematics
 
         using ClassType = MinimizeNData<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Container = std::vector<Real>;
         using ConstIter = typename Container::const_iterator;
 

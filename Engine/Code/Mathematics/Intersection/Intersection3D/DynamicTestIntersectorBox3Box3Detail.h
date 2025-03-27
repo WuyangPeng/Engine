@@ -63,7 +63,7 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
         this->SetIntersectionType(intersector.GetIntersectionType());
         if (intersector.IsIntersection())
         {
-            this->SetContactTime(Math::GetValue(0));
+            this->SetContactTime(MathType::GetValue(0));
             return;
         }
         return;
@@ -71,7 +71,7 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
 
     /// 框轴之间的角度的余弦值的截止值。 用于捕捉至少一对轴平行的情况。
     /// 如果发生这种情况，则无需包括叉积轴以进行分离。
-    constexpr auto cutoff = Math::GetValue(1) - Math::GetZeroTolerance();
+    constexpr auto cutoff = MathType::GetValue(1) - MathType::GetZeroTolerance();
     auto existsParallelPair = false;
 
     // 便利变量
@@ -90,15 +90,15 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
                                 Vector3Tools::DotProduct(box0.GetAxis(2), box1.GetAxis(2)) };
 
     // |c_{ij}|
-    Matrix3<Real> absMatrix{ Math::FAbs(matrix.template GetValue<0, 0>()),
-                             Math::FAbs(matrix.template GetValue<0, 1>()),
-                             Math::FAbs(matrix.template GetValue<0, 2>()),
-                             Math::FAbs(matrix.template GetValue<1, 0>()),
-                             Math::FAbs(matrix.template GetValue<1, 1>()),
-                             Math::FAbs(matrix.template GetValue<1, 2>()),
-                             Math::FAbs(matrix.template GetValue<2, 0>()),
-                             Math::FAbs(matrix.template GetValue<2, 1>()),
-                             Math::FAbs(matrix.template GetValue<2, 2>()) };
+    Matrix3<Real> absMatrix{ MathType::FAbs(matrix.template GetValue<0, 0>()),
+                             MathType::FAbs(matrix.template GetValue<0, 1>()),
+                             MathType::FAbs(matrix.template GetValue<0, 2>()),
+                             MathType::FAbs(matrix.template GetValue<1, 0>()),
+                             MathType::FAbs(matrix.template GetValue<1, 1>()),
+                             MathType::FAbs(matrix.template GetValue<1, 2>()),
+                             MathType::FAbs(matrix.template GetValue<2, 0>()),
+                             MathType::FAbs(matrix.template GetValue<2, 1>()),
+                             MathType::FAbs(matrix.template GetValue<2, 2>()) };
     // Dot(A_i,D)
     Vector3 axisDotCenterDiff{ Vector3Tools::DotProduct(box0.GetAxis(0), centerDiff),
                                Vector3Tools::DotProduct(box0.GetAxis(1), centerDiff),
@@ -109,8 +109,8 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
                                   Vector3Tools::DotProduct(box0.GetAxis(1), velocityDiff),
                                   Vector3Tools::DotProduct(box0.GetAxis(2), velocityDiff) };
 
-    this->SetContactTime(Math::GetValue(0));
-    Separated tLast{ false, Math::maxReal };
+    this->SetContactTime(MathType::GetValue(0));
+    Separated tLast{ false, MathType::maxReal };
 
     // 轴 C0 + t * A[i]
     constexpr auto size = 3;
@@ -318,18 +318,18 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
 template <typename Real>
 typename Mathematics::DynamicTestIntersectorBox3Box3<Real>::Separated Mathematics::DynamicTestIntersectorBox3Box3<Real>::IsSeparated(Real min0, Real max0, Real min1, Real max1, Real speed, Real tmax, Real tlast) noexcept
 {
-    auto invSpeed = Math::GetValue(0);
-    auto t = Math::GetValue(0);
+    auto invSpeed = MathType::GetValue(0);
+    auto t = MathType::GetValue(0);
 
     // box1最初位于box0的左侧
     if (max1 < min0)
     {
-        if (speed <= Math::GetValue(0))
+        if (speed <= MathType::GetValue(0))
         {
             // 投影间隔分离。
             return { true, tlast };
         }
-        invSpeed = (Math::GetValue(1)) / speed;
+        invSpeed = (MathType::GetValue(1)) / speed;
 
         t = (min0 - max1) * invSpeed;
         if (this->GetContactTime() < t)
@@ -358,12 +358,12 @@ typename Mathematics::DynamicTestIntersectorBox3Box3<Real>::Separated Mathematic
     // box1最初位于box0的右侧
     else if (max0 < min1)
     {
-        if (speed >= Math::GetValue(0))
+        if (speed >= MathType::GetValue(0))
         {
             // 投影间隔分离。
             return { true, tlast };
         }
-        invSpeed = (Math::GetValue(1)) / speed;
+        invSpeed = (MathType::GetValue(1)) / speed;
 
         t = (max0 - min1) * invSpeed;
         if (this->GetContactTime() < t)
@@ -392,7 +392,7 @@ typename Mathematics::DynamicTestIntersectorBox3Box3<Real>::Separated Mathematic
     // box0和box1最初重叠
     else
     {
-        if (Math::GetValue(0) < speed)
+        if (MathType::GetValue(0) < speed)
         {
             t = (max0 - min1) / speed;
             if (t < tlast)
@@ -406,7 +406,7 @@ typename Mathematics::DynamicTestIntersectorBox3Box3<Real>::Separated Mathematic
                 return { true, tlast };
             }
         }
-        else if (speed < Math::GetValue(0))
+        else if (speed < MathType::GetValue(0))
         {
             t = (min0 - max1) / speed;
             if (t < tlast)

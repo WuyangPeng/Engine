@@ -28,7 +28,7 @@ namespace Mathematics
 
         using ClassType = Bisect2Node<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Bisect2NodeSharedPtr = std::shared_ptr<Bisect2Node>;
         using ConstBisect2NodeSharedPtr = std::shared_ptr<const Bisect2Node>;
 

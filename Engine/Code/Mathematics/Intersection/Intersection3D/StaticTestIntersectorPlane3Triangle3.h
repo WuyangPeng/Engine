@@ -29,10 +29,10 @@ namespace Mathematics
         using Plane3 = Plane3<Real>;
         using Triangle3 = Triangle3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorPlane3Triangle3(const Plane3& plane, const Triangle3& triangle, Real epsilon = Math::GetValue(0));
+        StaticTestIntersectorPlane3Triangle3(const Plane3& plane, const Triangle3& triangle, Real epsilon = MathType::GetValue(0));
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

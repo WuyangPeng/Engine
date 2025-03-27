@@ -57,7 +57,7 @@ namespace Mathematics
         using PolynomialRootContainer = std::vector<PolynomialRoot>;
         using RationalPolynomialRoot = Algebra::PolynomialRoot<Rational>;
         using RationalPolynomialRootContainer = std::array<RationalPolynomialRoot, 3>;
-        using Math = Math<T>;
+        using MathType = Math<T>;
 
     public:
         RootsCubic() noexcept;

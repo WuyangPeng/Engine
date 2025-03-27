@@ -71,7 +71,7 @@ typename Mathematics::DistancePoint3Rectangle3<Real>::DistanceResult Mathematics
     {
         s0 = rectangle.GetExtent(0);
     }
-    sqrDistance += s0 * (s0 + (Math::GetValue(2)) * dot0);
+    sqrDistance += s0 * (s0 + (MathType::GetValue(2)) * dot0);
 
     if (s1 < -rectangle.GetExtent(1))
     {
@@ -81,19 +81,19 @@ typename Mathematics::DistancePoint3Rectangle3<Real>::DistanceResult Mathematics
     {
         s1 = rectangle.GetExtent(1);
     }
-    sqrDistance += s1 * (s1 + (Math::GetValue(2)) * dot1);
+    sqrDistance += s1 * (s1 + (MathType::GetValue(2)) * dot1);
 
     // 解决数字舍入误差。
-    if (sqrDistance < Math::GetValue(0))
+    if (sqrDistance < MathType::GetValue(0))
     {
-        sqrDistance = Math::GetValue(0);
+        sqrDistance = MathType::GetValue(0);
     }
 
     auto closestPoint = rectangle.GetCenter() + s0 * rectangle.GetAxis(0) + s1 * rectangle.GetAxis(1);
     rectCoord[0] = s0;
     rectCoord[1] = s1;
 
-    return DistanceResult{ sqrDistance, Math::GetValue(0), point, closestPoint };
+    return DistanceResult{ sqrDistance, MathType::GetValue(0), point, closestPoint };
 }
 
 template <typename Real>

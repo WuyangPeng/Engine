@@ -31,7 +31,7 @@ namespace Mathematics::Algebra
     public:
         using ClassType = MinimizeN<T>;
 
-        using Math = Math<T>;
+        using MathType = Math<T>;
         using Container = std::vector<T>;
         using FunctionType = std::function<T(const Container&)>;
 
@@ -41,7 +41,7 @@ namespace Mathematics::Algebra
                   int maxLevel,
                   int maxBracket,
                   int maxIterations,
-                  T epsilon = Math::GetValue(1e-06));
+                  T epsilon = MathType::GetValue(1e-06));
 
         CLASS_INVARIANT_DECLARE;
 

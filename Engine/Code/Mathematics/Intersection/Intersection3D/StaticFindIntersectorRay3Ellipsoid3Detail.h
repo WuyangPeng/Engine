@@ -66,31 +66,31 @@ void Mathematics::StaticFindIntersectorRay3Ellipsoid3<Real>::Find()
     const auto matrixDiff = matrix * diff;
     auto a2 = Vector3Tools::DotProduct(ray.GetDirection(), matrixDirection);
     auto a1 = Vector3Tools::DotProduct(ray.GetDirection(), matrixDiff);
-    auto a0 = Vector3Tools::DotProduct(diff, matrixDiff) - Math::GetValue(1);
+    auto a0 = Vector3Tools::DotProduct(diff, matrixDiff) - MathType::GetValue(1);
 
     // 如果Q(t) 具有t >= 0的实根，则发生相交。
     auto discr = a1 * a1 - a0 * a2;
 
-    if (discr < Math::GetValue(0))
+    if (discr < MathType::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Empty);
         quantity = 0;
     }
-    else if (Math::GetZeroTolerance() < discr)
+    else if (MathType::GetZeroTolerance() < discr)
     {
-        auto root = Math::Sqrt(discr);
-        auto inv = Math::GetValue(1) / a2;
+        auto root = MathType::Sqrt(discr);
+        auto inv = MathType::GetValue(1) / a2;
         auto t0 = (-a1 - root) * inv;
         auto t1 = (-a1 + root) * inv;
 
-        if (Math::GetValue(0) <= t0)
+        if (MathType::GetValue(0) <= t0)
         {
             this->SetIntersectionType(IntersectionType::Segment);
             quantity = 2;
             point0 = ray.GetOrigin() + t0 * ray.GetDirection();
             point1 = ray.GetOrigin() + t1 * ray.GetDirection();
         }
-        else if (Math::GetValue(0) <= t1)
+        else if (MathType::GetValue(0) <= t1)
         {
             this->SetIntersectionType(IntersectionType::Point);
             quantity = 1;
@@ -106,7 +106,7 @@ void Mathematics::StaticFindIntersectorRay3Ellipsoid3<Real>::Find()
     else
     {
         auto t0 = -a1 / a2;
-        if (Math::GetValue(0) <= t0)
+        if (MathType::GetValue(0) <= t0)
         {
             this->SetIntersectionType(IntersectionType::Point);
             quantity = 1;

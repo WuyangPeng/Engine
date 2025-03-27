@@ -89,7 +89,7 @@ typename Mathematics::DistanceSegment3Box3<Real>::DistanceResult Mathematics::Di
         closestPoint1 = sqrDistance.GetRhsClosestPoint();
     }
 
-    return DistanceResult{ sqrDistance.GetDistance(), Math::GetValue(0), closestPoint0, closestPoint1, lineParameter, Math::GetValue(0) };
+    return DistanceResult{ sqrDistance.GetDistance(), MathType::GetValue(0), closestPoint0, closestPoint1, lineParameter, MathType::GetValue(0) };
 }
 
 template <typename Real>

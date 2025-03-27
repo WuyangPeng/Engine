@@ -32,10 +32,10 @@ namespace Mathematics
         using Cylinder3 = Cylinder3<Real>;
         using Vector2 = Vector2<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorTriangle3Cylinder3(const Triangle3& triangle, const Cylinder3& cylinder, const Real epsilon = Math::GetZeroTolerance());
+        StaticTestIntersectorTriangle3Cylinder3(const Triangle3& triangle, const Cylinder3& cylinder, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

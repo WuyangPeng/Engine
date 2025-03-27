@@ -28,7 +28,7 @@ namespace Mathematics
     public:
         using ClassType = Line<N, Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector = Algebra::Vector<N, Real>;
 
     public:

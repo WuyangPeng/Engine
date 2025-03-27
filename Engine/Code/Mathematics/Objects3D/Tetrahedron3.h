@@ -27,7 +27,7 @@ namespace Mathematics
 
         using ClassType = Tetrahedron3<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Plane3 = Plane3<Real>;
         using Vector3 = Vector3<Real>;
         using Vector3Tools = Vector3Tools<Real>;

@@ -69,7 +69,7 @@ typename Mathematics::DistancePoint2Ellipse2<Real>::DistanceResult Mathematics::
     const auto lhsClosestPoint = point;
     const auto rhsClosestPoint = ellipse.GetCenter() + outputVector[0] * ellipse.GetAxis0() + outputVector[1] * ellipse.GetAxis1();
 
-    return DistanceResult{ squaredDistance, Math::GetValue(0), lhsClosestPoint, rhsClosestPoint };
+    return DistanceResult{ squaredDistance, MathType::GetValue(0), lhsClosestPoint, rhsClosestPoint };
 }
 
 template <typename Real>

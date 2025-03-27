@@ -66,11 +66,11 @@ void Mathematics::StaticFindIntersectorPlane3Plane3<Real>::Find()
     /// 其中det = 1 - d^2。
 
     auto dot = Vector3Tools::DotProduct(plane0.GetNormal(), plane1.GetNormal());
-    if (Math::GetValue(1) - Math::GetZeroTolerance() <= Math::FAbs(dot))
+    if (MathType::GetValue(1) - MathType::GetZeroTolerance() <= MathType::FAbs(dot))
     {
         // 这些平面是平行的。 检查它们是否共面。
-        auto diff = Math::GetValue(0);
-        if (Math::GetValue(0) <= dot)
+        auto diff = MathType::GetValue(0);
+        if (MathType::GetValue(0) <= dot)
         {
             // 法线方向相同，需要查看c0 - c1。
             diff = plane0.GetConstant() - plane1.GetConstant();
@@ -81,7 +81,7 @@ void Mathematics::StaticFindIntersectorPlane3Plane3<Real>::Find()
             diff = plane0.GetConstant() + plane1.GetConstant();
         }
 
-        if (Math::FAbs(diff) < Math::GetZeroTolerance())
+        if (MathType::FAbs(diff) < MathType::GetZeroTolerance())
         {
             // 平面共面。
             this->SetIntersectionType(IntersectionType::Plane);
@@ -94,7 +94,7 @@ void Mathematics::StaticFindIntersectorPlane3Plane3<Real>::Find()
         return;
     }
 
-    auto invDet = (Math::GetValue(1)) / (Math::GetValue(1) - dot * dot);
+    auto invDet = (MathType::GetValue(1)) / (MathType::GetValue(1) - dot * dot);
     auto c0 = (plane0.GetConstant() - dot * plane1.GetConstant()) * invDet;
     auto c1 = (plane1.GetConstant() - dot * plane0.GetConstant()) * invDet;
     this->SetIntersectionType(IntersectionType::Line);

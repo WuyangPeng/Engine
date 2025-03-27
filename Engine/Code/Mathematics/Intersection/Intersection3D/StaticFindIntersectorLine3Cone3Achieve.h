@@ -73,21 +73,21 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>::Find()
     auto c0 = axisDotEdge * axisDotEdge - cosSqr * edgeDotEdge;
 
     // 解二次方。 仅保留 Dot(A,X - V) >= 0的那些X。
-    if (Math::GetZeroTolerance() <= Math::FAbs(c2))
+    if (MathType::GetZeroTolerance() <= MathType::FAbs(c2))
     {
         // c2 != 0
         auto discr = c1 * c1 - c0 * c2;
-        if (discr < Math::GetValue(0))
+        if (discr < MathType::GetValue(0))
         {
             // Q(t) = 0 没有实值根。 该线不与双面圆锥相交。
             this->SetIntersectionType(IntersectionType::Empty);
             quantity = 0;
         }
-        else if (discr > Math::GetZeroTolerance())
+        else if (discr > MathType::GetZeroTolerance())
         {
             // Q(t) = 0具有两个不同的实值根。 但是，它们中的一个或两个都可能与顶点“后”的双面圆锥体部分相交。
             // 我们仅对顶点“前面”的那些交点感兴趣。
-            auto root = Math::Sqrt(discr);
+            auto root = MathType::Sqrt(discr);
 
             quantity = 0;
 
@@ -95,7 +95,7 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>::Find()
             point0 = line.GetOrigin() + t * line.GetDirection();
             edge = point0 - cone.GetVertex();
             auto dot = Vector3Tools::DotProduct(edge, cone.GetAxis());
-            if (Math::GetValue(0) < dot)
+            if (MathType::GetValue(0) < dot)
             {
                 ++quantity;
             }
@@ -114,7 +114,7 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>::Find()
             }
 
             dot = Vector3Tools::DotProduct(edge, cone.GetAxis());
-            if (Math::GetValue(0) < dot)
+            if (MathType::GetValue(0) < dot)
             {
                 ++quantity;
             }
@@ -142,7 +142,7 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>::Find()
             // 一个重复的实根（线与圆锥相切）。
             point0 = line.GetOrigin() - (c1 / c2) * line.GetDirection();
             edge = point0 - cone.GetVertex();
-            if (Math::GetValue(0) < Vector3Tools::DotProduct(edge, cone.GetAxis()))
+            if (MathType::GetValue(0) < Vector3Tools::DotProduct(edge, cone.GetAxis()))
             {
                 this->SetIntersectionType(IntersectionType::Point);
                 quantity = 1;
@@ -154,13 +154,13 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>::Find()
             }
         }
     }
-    else if (Math::GetZeroTolerance() <= Math::FAbs(c1))
+    else if (MathType::GetZeroTolerance() <= MathType::FAbs(c1))
     {
         // c2 = 0, c1 != 0 （D是圆锥边界上的方向向量）
-        point0 = line.GetOrigin() - (Math::GetRational(1, 2) * c0 / c1) * line.GetDirection();
+        point0 = line.GetOrigin() - (MathType::GetRational(1, 2) * c0 / c1) * line.GetDirection();
         edge = point0 - cone.GetVertex();
         auto dot = Vector3Tools::DotProduct(edge, cone.GetAxis());
-        if (Math::GetValue(0) < dot)
+        if (MathType::GetValue(0) < dot)
         {
             this->SetIntersectionType(IntersectionType::Ray);
             quantity = 2;
@@ -172,7 +172,7 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>::Find()
             quantity = 0;
         }
     }
-    else if (Math::GetZeroTolerance() <= Math::FAbs(c0))
+    else if (MathType::GetZeroTolerance() <= MathType::FAbs(c0))
     {
         // c2 = c1 = 0, c0 != 0
         this->SetIntersectionType(IntersectionType::Empty);

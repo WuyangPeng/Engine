@@ -32,7 +32,7 @@ namespace Mathematics
         using ConvexHull2 = ConvexHull2<Real>;
         using String = System::String;
         using IndicesType = ParentType::IndicesType;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         ConvexHull3(const Vertices& vertices, Real epsilon, QueryType queryType);

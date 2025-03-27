@@ -23,7 +23,7 @@
 
 template <typename Real>
 Mathematics::CylinderFit3<Real>::CylinderFit3(const Points& points, const Real epsilon)
-    : center{}, axis{}, radius{}, height{}, exactly{ Math::maxReal }, inputsAreInitialGuess{ false }, epsilon{ epsilon }
+    : center{}, axis{}, radius{}, height{}, exactly{ MathType::maxReal }, inputsAreInitialGuess{ false }, epsilon{ epsilon }
 {
     Fit3(points);
 
@@ -32,7 +32,7 @@ Mathematics::CylinderFit3<Real>::CylinderFit3(const Points& points, const Real e
 
 template <typename Real>
 Mathematics::CylinderFit3<Real>::CylinderFit3(const Points& points, const Vector3& guessCenter, const Vector3& guessAxis, const Real epsilon)
-    : center{ guessCenter }, axis{ guessAxis }, radius{}, height{}, exactly{ Math::maxReal }, inputsAreInitialGuess{ true }, epsilon{ epsilon }
+    : center{ guessCenter }, axis{ guessAxis }, radius{}, height{}, exactly{ MathType::maxReal }, inputsAreInitialGuess{ true }, epsilon{ epsilon }
 {
     Fit3(points);
 
@@ -70,7 +70,7 @@ void Mathematics::CylinderFit3<Real>::Update(const Points& points)
     CylinderFit3Update<Real> update{ points, center, axis, epsilon };
     update.Update(maxLoopTime);
 
-    radius = Math::InvSqrt(update.GetInverseRadiusSquare());
+    radius = MathType::InvSqrt(update.GetInverseRadiusSquare());
     center = update.GetCenter();
     axis = update.GetAxis();
 
@@ -99,7 +99,7 @@ Real Mathematics::CylinderFit3<Real>::ComputeHeight(const Points& points)
 template <typename Real>
 void Mathematics::CylinderFit3<Real>::ComputeCenter(Real average)
 {
-    center += Math::GetRational(1, 2) * average * axis;
+    center += MathType::GetRational(1, 2) * average * axis;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -109,7 +109,7 @@ bool Mathematics::CylinderFit3<Real>::IsValid() const noexcept
 {
     try
     {
-        if (Math::GetValue(0) <= radius && Math::GetValue(0) <= height && Math::GetValue(0) <= exactly && Math::GetValue(0) <= epsilon && axis.IsNormalize(epsilon))
+        if (MathType::GetValue(0) <= radius && MathType::GetValue(0) <= height && MathType::GetValue(0) <= exactly && MathType::GetValue(0) <= epsilon && axis.IsNormalize(epsilon))
         {
             return true;
         }

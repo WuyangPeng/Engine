@@ -56,10 +56,10 @@ void Mathematics::StaticTestIntersectorPlane3Ellipsoid3<Real>::Test()
 {
     const auto mInverse = ellipsoid.GetMatrixInverse();
     const auto discr = mInverse.QuadraticForm(plane.GetNormal(), plane.GetNormal());
-    const auto root = Math::Sqrt(Math::FAbs(discr));
+    const auto root = MathType::Sqrt(MathType::FAbs(discr));
     const auto sDist = plane.DistanceTo(ellipsoid.GetCenter());
 
-    if (Math::FAbs(sDist) <= root)
+    if (MathType::FAbs(sDist) <= root)
     {
         this->SetIntersectionType(IntersectionType::Other);
     }
@@ -77,7 +77,7 @@ bool Mathematics::StaticTestIntersectorPlane3Ellipsoid3<Real>::EllipsoidIsCulled
     const auto matrixInverse = ellipsoid.GetMatrixInverse();
 
     const auto discr = matrixInverse.QuadraticForm(plane.GetNormal(), plane.GetNormal());
-    const auto root = Math::Sqrt(Math::FAbs(discr));
+    const auto root = MathType::Sqrt(MathType::FAbs(discr));
     const auto sDist = plane.DistanceTo(ellipsoid.GetCenter());
 
     return sDist <= -root;

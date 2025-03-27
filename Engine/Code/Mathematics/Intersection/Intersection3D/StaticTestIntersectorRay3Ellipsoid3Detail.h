@@ -62,22 +62,22 @@ void Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>::Test()
     const auto matDiff = matrix * diff;
     const auto a2 = Vector3Tools::DotProduct(ray.GetDirection(), matDir);
     const auto a1 = Vector3Tools::DotProduct(ray.GetDirection(), matDiff);
-    const auto a0 = Vector3Tools::DotProduct(diff, matDiff) - Math::GetValue(1);
+    const auto a0 = Vector3Tools::DotProduct(diff, matDiff) - MathType::GetValue(1);
 
     const auto discr = a1 * a1 - a0 * a2;
-    if (discr < Math::GetValue(0))
+    if (discr < MathType::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
-    if (a0 <= Math::GetValue(0))
+    if (a0 <= MathType::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Point);
         return;
     }
 
-    if (a1 < Math::GetValue(0))
+    if (a1 < MathType::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Point);
     }

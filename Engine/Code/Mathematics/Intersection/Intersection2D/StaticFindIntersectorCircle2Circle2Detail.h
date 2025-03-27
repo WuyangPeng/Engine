@@ -56,7 +56,7 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>::Find()
     auto rhsRadius = rhsCircle.GetRadius();
     auto lhsRadiusMinusRhsRadius = lhsRadius - rhsRadius;
     auto epsilon = ParentType::GetEpsilon();
-    if (centerDifferenceSquaredLength < epsilon && Math::FAbs(lhsRadiusMinusRhsRadius) < epsilon)
+    if (centerDifferenceSquaredLength < epsilon && MathType::FAbs(lhsRadiusMinusRhsRadius) < epsilon)
     {
         // 圆基本相同。
         this->SetIntersectionType(IntersectionType::Other);
@@ -82,17 +82,17 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>::Find()
     {
         if (lhsRadiusMinusRhsRadiusSquared + epsilon < centerDifferenceSquaredLength)
         {
-            auto ordinal = Math::GetRational(1, 2) * ((lhsRadius * lhsRadius - rhsRadius * rhsRadius) / centerDifferenceSquaredLength + Math::GetValue(1));
+            auto ordinal = MathType::GetRational(1, 2) * ((lhsRadius * lhsRadius - rhsRadius * rhsRadius) / centerDifferenceSquaredLength + MathType::GetValue(1));
             auto amendmentCenter = lhsCircle.GetCenter() + ordinal * centerDifference;
 
             // 理论上，discriminant是非负的。
             // 然而，数值四舍五入误差可能使其略负。将其截断为零。
             auto discriminant = lhsRadius * lhsRadius / centerDifferenceSquaredLength - ordinal * ordinal;
-            if (discriminant < Math::GetValue(0))
+            if (discriminant < MathType::GetValue(0))
             {
-                discriminant = Math::GetValue(0);
+                discriminant = MathType::GetValue(0);
             }
-            auto discriminantSqrt = Math::Sqrt(discriminant);
+            auto discriminantSqrt = MathType::Sqrt(discriminant);
             const auto perp = Vector2Tools::GetPerp(centerDifference);
 
             auto lhsPoint = amendmentCenter - discriminantSqrt * perp;
@@ -100,7 +100,7 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>::Find()
 
             if (Vector2Tools::Approximate(lhsPoint, rhsPoint, epsilon))
             {
-                point.emplace_back((lhsPoint + rhsPoint) / Math::GetValue(2));
+                point.emplace_back((lhsPoint + rhsPoint) / MathType::GetValue(2));
             }
             else
             {

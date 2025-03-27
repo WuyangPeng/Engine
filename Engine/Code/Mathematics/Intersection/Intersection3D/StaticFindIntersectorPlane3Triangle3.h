@@ -29,11 +29,11 @@ namespace Mathematics
         using Plane3 = Plane3<Real>;
         using Triangle3 = Triangle3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
 
     public:
         // 如果要进行模糊确定，请将epsilon值设置为较小的正数。
-        StaticFindIntersectorPlane3Triangle3(const Plane3& plane, const Triangle3& triangle, Real epsilon = Math::GetValue(0));
+        StaticFindIntersectorPlane3Triangle3(const Plane3& plane, const Triangle3& triangle, Real epsilon = MathType::GetValue(0));
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

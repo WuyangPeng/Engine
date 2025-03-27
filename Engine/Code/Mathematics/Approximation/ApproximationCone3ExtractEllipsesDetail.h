@@ -157,7 +157,7 @@ requires(std::is_arithmetic_v<Real>)
 void Mathematics::ApproximationCone3ExtractEllipses<Real>::ProcessPlane(const Plane3& plane)
 {
     const auto epsilon = cosAngleEpsilon;
-    const auto oneMinusEpsilon = Math::GetValue(1) - epsilon;
+    const auto oneMinusEpsilon = MathType::GetValue(1) - epsilon;
 
     for (auto i = 0u; i < planes.size(); ++i)
     {

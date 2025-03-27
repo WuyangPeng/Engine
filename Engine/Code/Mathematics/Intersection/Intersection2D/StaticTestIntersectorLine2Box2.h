@@ -29,10 +29,10 @@ namespace Mathematics
         using Line2 = Line2<Real>;
         using Box2 = Box2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorLine2Box2(const Line2& line, const Box2& box, const Real epsilon = Math::GetZeroTolerance());
+        StaticTestIntersectorLine2Box2(const Line2& line, const Box2& box, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

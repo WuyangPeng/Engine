@@ -19,7 +19,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorRay3Triangle3<Real>::StaticFindIntersectorRay3Triangle3(const Ray3& ray, const Triangle3& triangle, const Real epsilon)
-    : ParentType{ epsilon }, ray{ ray }, triangle{ triangle }, rayParameter{}, triangleBary0{}, triangleBary1{}, triangleBary2{ Math::GetValue(1) }
+    : ParentType{ epsilon }, ray{ ray }, triangle{ triangle }, rayParameter{}, triangleBary0{}, triangleBary1{}, triangleBary2{ MathType::GetValue(1) }
 {
     Find();
 
@@ -70,14 +70,14 @@ void Mathematics::StaticFindIntersectorRay3Triangle3<Real>::Find()
     //   |Dot(D,N)| * b2 = sign(Dot(D,N)) * Dot(D,Cross(E1,Q))
     //   |Dot(D,N)| * t = -sign(Dot(D,N)) * Dot(Q,N)
     auto directionDotNormal = Vector3Tools::DotProduct(ray.GetDirection(), normal);
-    auto sign = Math::GetValue(0);
-    if (Math::GetZeroTolerance() < directionDotNormal)
+    auto sign = MathType::GetValue(0);
+    if (MathType::GetZeroTolerance() < directionDotNormal)
     {
-        sign = Math::GetValue(1);
+        sign = MathType::GetValue(1);
     }
-    else if (directionDotNormal < -Math::GetZeroTolerance())
+    else if (directionDotNormal < -MathType::GetZeroTolerance())
     {
-        sign = Math::GetValue(-1);
+        sign = MathType::GetValue(-1);
         directionDotNormal = -directionDotNormal;
     }
     else
@@ -88,23 +88,23 @@ void Mathematics::StaticFindIntersectorRay3Triangle3<Real>::Find()
     }
 
     auto value0 = sign * Vector3Tools::DotProduct(ray.GetDirection(), Vector3Tools::CrossProduct(diff, edge2));
-    if (Math::GetValue(0) <= value0)
+    if (MathType::GetValue(0) <= value0)
     {
         auto value1 = sign * Vector3Tools::DotProduct(ray.GetDirection(), Vector3Tools::CrossProduct(edge1, diff));
-        if (Math::GetValue(0) <= value1)
+        if (MathType::GetValue(0) <= value1)
         {
             if (value0 + value1 <= directionDotNormal)
             {
                 // 线与三角形相交，检查射线是否相交。
                 auto value2 = -sign * Vector3Tools::DotProduct(diff, normal);
-                if (Math::GetValue(0) <= value2)
+                if (MathType::GetValue(0) <= value2)
                 {
                     // 射线与三角形相交。
-                    auto inv = (Math::GetValue(1)) / directionDotNormal;
+                    auto inv = (MathType::GetValue(1)) / directionDotNormal;
                     rayParameter = value2 * inv;
                     triangleBary1 = value0 * inv;
                     triangleBary2 = value1 * inv;
-                    triangleBary0 = Math::GetValue(1) - triangleBary1 - triangleBary2;
+                    triangleBary0 = MathType::GetValue(1) - triangleBary1 - triangleBary2;
                     this->SetIntersectionType(IntersectionType::Point);
                     return;
                 }

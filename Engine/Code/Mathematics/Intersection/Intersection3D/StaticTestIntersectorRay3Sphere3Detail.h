@@ -57,14 +57,14 @@ void Mathematics::StaticTestIntersectorRay3Sphere3<Real>::Test()
 {
     const auto diff = ray.GetOrigin() - sphere.GetCenter();
     const auto a0 = Vector3Tools::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
-    if (a0 <= Math ::GetValue(0))
+    if (a0 <= MathType ::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Other);
         return;
     }
 
     const auto a1 = Vector3Tools::DotProduct(ray.GetDirection(), diff);
-    if (Math ::GetValue(0) <= a1)
+    if (MathType ::GetValue(0) <= a1)
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;

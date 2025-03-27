@@ -53,7 +53,7 @@ Mathematics::Triangle3<Real> Mathematics::DynamicTestIntersectorTriangle3Triangl
 
 template <typename Real>
 Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::IntersectInfo::IntersectInfo() noexcept
-    : result{}, tFirst{}, tLast{ Math::maxReal }
+    : result{}, tFirst{}, tLast{ MathType::maxReal }
 {
 }
 
@@ -69,7 +69,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::Test()
     auto tMax = this->GetTMax();
     const auto velocity0 = this->GetLhsVelocity();
     const auto velocity1 = this->GetRhsVelocity();
-    auto tFirst = Math::GetValue(0);
+    auto tFirst = MathType::GetValue(0);
 
     // 相对于三角形0的速度。
     auto relVelocity = velocity1 - velocity0;
@@ -97,7 +97,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::Test()
 
     const auto normal1 = Vector3Tools::UnitCrossProduct(edge1.at(0), edge1.at(1));
 
-    if (Math::FAbs(Vector3Tools::DotProduct(normal0, normal1)) < Math::GetValue(1) - Math::GetZeroTolerance())
+    if (MathType::FAbs(Vector3Tools::DotProduct(normal0, normal1)) < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
         // 三角形不平行。
 
@@ -206,7 +206,7 @@ typename Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::IntersectI
 
     if (vMax < uMin)  // V在U的左侧
     {
-        if (speed <= Math::GetValue(0))  // V从U移开
+        if (speed <= MathType::GetValue(0))  // V从U移开
         {
             return intersectInfo;
         }
@@ -239,7 +239,7 @@ typename Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::IntersectI
     }
     else if (uMax < vMin)  // V在U的右边
     {
-        if (Math::GetValue(0) <= speed)  // V从U移开
+        if (MathType::GetValue(0) <= speed)  // V从U移开
         {
             return intersectInfo;
         }
@@ -272,7 +272,7 @@ typename Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::IntersectI
     }
     else  // 重叠间隔上的V和U
     {
-        if (Math::GetValue(0) < speed)
+        if (MathType::GetValue(0) < speed)
         {
             // 查找该轴上的最后一次接触时间。
             auto t = (uMax - vMin) / speed;
@@ -287,7 +287,7 @@ typename Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::IntersectI
                 return intersectInfo;
             }
         }
-        else if (speed < Math::GetValue(0))
+        else if (speed < MathType::GetValue(0))
         {
             // F查找该轴上的最后一次接触时间。
             auto t = (uMin - vMax) / speed;

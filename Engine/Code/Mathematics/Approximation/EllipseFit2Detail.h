@@ -37,23 +37,23 @@ void Mathematics::EllipseFit2<Real>::Fit2()
 
     InitialGuess();
 
-    auto angle = Math::ATan2(rotate.GetValue<0, 1>(), rotate.GetValue<0, 0>());
-    auto value0 = extent0 * Math::FAbs(rotate.GetValue<0, 0>()) +
-                  extent1 * Math::FAbs(rotate.GetValue<1, 0>());
-    auto value1 = extent0 * Math::FAbs(rotate.GetValue<0, 1>()) +
-                  extent1 * Math::FAbs(rotate.GetValue<1, 1>());
+    auto angle = MathType::ATan2(rotate.GetValue<0, 1>(), rotate.GetValue<0, 0>());
+    auto value0 = extent0 * MathType::FAbs(rotate.GetValue<0, 0>()) +
+                  extent1 * MathType::FAbs(rotate.GetValue<1, 0>());
+    auto value1 = extent0 * MathType::FAbs(rotate.GetValue<0, 1>()) +
+                  extent1 * MathType::FAbs(rotate.GetValue<1, 1>());
 
-    Container begin{ Math::GetRational(1, 2) * extent0,
-                     Math::GetRational(1, 2) * extent1,
+    Container begin{ MathType::GetRational(1, 2) * extent0,
+                     MathType::GetRational(1, 2) * extent1,
                      center.GetX() - value0,
                      center.GetY() - value1,
-                     -Math::GetPI() };
+                     -MathType::GetPI() };
 
-    Container end{ Math::GetValue(2) * extent0,
-                   Math::GetValue(2) * extent1,
+    Container end{ MathType::GetValue(2) * extent0,
+                   MathType::GetValue(2) * extent1,
                    center.GetX() + value0,
                    center.GetY() + value1,
-                   Math::GetPI() };
+                   MathType::GetPI() };
 
     Container initial{ extent0,
                        extent1,
@@ -106,7 +106,7 @@ Real Mathematics::EllipseFit2<Real>::Energy(const Container& input, const Ellips
     const Ellipse2<Real> ellipse{ Vector2::GetZero(), Vector2::GetUnitX(), Vector2::GetUnitY(), input.at(0), input.at(1) };
 
     // 变换点到中心C和旋转Real的列的坐标系统
-    auto energy = Math::GetValue(0);
+    auto energy = MathType::GetValue(0);
 
     const auto numPoints = userData->GetNumPoint();
 
@@ -131,7 +131,7 @@ Real Mathematics::EllipseFit2<Real>::Energy(const Container& input, const Ellips
 template <typename Real>
 bool Mathematics::EllipseFit2<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= exactly)
+    if (MathType::GetValue(0) <= exactly)
         return true;
     else
         return false;

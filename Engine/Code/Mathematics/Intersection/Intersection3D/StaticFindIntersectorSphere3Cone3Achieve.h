@@ -69,7 +69,7 @@ void Mathematics::StaticFindIntersectorSphere3Cone3<Real>::Find()
     auto dot = Vector3Tools::DotProduct(diff, cone.GetAxis());
     auto dotSqr = dot * dot;
     auto cosSqr = cone.GetCosAngle() * cone.GetCosAngle();
-    if (lengthSqr * cosSqr <= dotSqr && Math::GetValue(0) < dot)
+    if (lengthSqr * cosSqr <= dotSqr && MathType::GetValue(0) < dot)
     {
         // 球体中心在圆锥体内部，因此球体和圆锥体相交。
         this->SetIntersectionType(IntersectionType::Other);
@@ -85,17 +85,17 @@ void Mathematics::StaticFindIntersectorSphere3Cone3<Real>::Find()
     /// dot(D,C - V)^2 >= dot(C - V,C - V) - Real^2
     /// 注意，如果右侧为非正，则不等式为true（球体包含V）。 我已经在此函数的第一段代码中排除了这一点
 
-    auto length = Math::Sqrt(Math::FAbs(lengthSqr - dotSqr));
+    auto length = MathType::Sqrt(MathType::FAbs(lengthSqr - dotSqr));
     auto test = cone.GetCosAngle() * dot + cone.GetSinAngle() * length;
     auto discr = test * test - lengthSqr + radiusSqr;
 
     // 计算最接近顶点V的交点
-    auto t = test - Math::Sqrt(discr);
+    auto t = test - MathType::Sqrt(discr);
     auto value0 = diff - dot * cone.GetAxis();
     auto value1 = cone.GetSinAngle() / length;
     point = t * (cone.GetCosAngle() * cone.GetAxis() + value1 * value0);
 
-    if (Math::GetValue(0) <= discr && Math::GetValue(0) <= test)
+    if (MathType::GetValue(0) <= discr && MathType::GetValue(0) <= test)
     {
         this->SetIntersectionType(IntersectionType::Other);
     }

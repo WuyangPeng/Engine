@@ -29,10 +29,10 @@ namespace Mathematics
         using Line3 = Line3<Real>;
         using Capsule3 = Capsule3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorLine3Capsule3(const Line3& line, const Capsule3& capsule, const Real epsilon = Math::GetZeroTolerance());
+        StaticTestIntersectorLine3Capsule3(const Line3& line, const Capsule3& capsule, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

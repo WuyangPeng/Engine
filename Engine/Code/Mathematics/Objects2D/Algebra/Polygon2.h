@@ -49,7 +49,7 @@ namespace Mathematics::Algebra
         using VerticesType = std::set<int>;
         using IndicesType = std::vector<int>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         /// 构造当'numIndices' >= 3且“vertexPool”和“indices”不为空时，构造函数成功；

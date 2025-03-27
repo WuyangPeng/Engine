@@ -61,24 +61,24 @@ void Mathematics::SingularValueDecomposition<Real>::HouseholderQR()
         // 创建Householder向量对A的部分列
         for (auto row = 0; row < column; ++row)
         {
-            vector[row] = Math::GetValue(0);
+            vector[row] = MathType::GetValue(0);
         }
-        auto length = Math::GetValue(0);
+        auto length = MathType::GetValue(0);
         for (auto row = column; row < numRows; ++row)
         {
             vector[row] = diagonal(row, column);
             length += vector[row] * vector[row];
         }
-        length = Math::Sqrt(length);
-        auto beta = vector[column] + length * System::EnumCastUnderlying(Math::Sign(vector[column]));
-        if (Math::GetZeroTolerance() < Math::FAbs(beta))
+        length = MathType::Sqrt(length);
+        auto beta = vector[column] + length * System::EnumCastUnderlying(MathType::Sign(vector[column]));
+        if (MathType::GetZeroTolerance() < MathType::FAbs(beta))
         {
             for (int i = column + 1; i < numRows; ++i)
             {
                 vector[i] /= beta;
             }
         }
-        vector[column] = Math::GetValue(1);
+        vector[column] = MathType::GetValue(1);
 
         // 由V-反射矩阵预乘A。
         HouseholderPremultiply(vector, diagonal);
@@ -109,8 +109,8 @@ typename Mathematics::SingularValueDecomposition<Real>::VariableLengthVector Mat
 
     auto householderVector = vector;
     auto length = householderVector.Length();
-    auto beta = vector[0] + length * Math::Sign(vector[0]);
-    if (Math::GetZeroTolerance() < Math::FAbs(beta))
+    auto beta = vector[0] + length * MathType::Sign(vector[0]);
+    if (MathType::GetZeroTolerance() < MathType::FAbs(beta))
     {
         for (auto i = 1; i < householderVector.GetSize(); ++i)
         {
@@ -118,7 +118,7 @@ typename Mathematics::SingularValueDecomposition<Real>::VariableLengthVector Mat
         }
     }
 
-    householderVector[0] = Math::GetValue(1);
+    householderVector[0] = MathType::GetValue(1);
 
     return householderVector;
 }
@@ -127,7 +127,7 @@ template <typename Real>
 void Mathematics::SingularValueDecomposition<Real>::HouseholderPremultiply(const VariableLengthVector& vector, VariableMatrix& matrix)
 {
     const auto transitionVector = vector * matrix;
-    const auto wVector = (Math::GetValue(-2) / vector.SquaredLength()) * transitionVector;
+    const auto wVector = (MathType::GetValue(-2) / vector.SquaredLength()) * transitionVector;
     const auto numRows = matrix.GetRowsNumber();
     const auto numColumns = matrix.GetColumnsNumber();
     for (auto row = 0; row < numRows; ++row)
@@ -142,7 +142,7 @@ void Mathematics::SingularValueDecomposition<Real>::HouseholderPremultiply(const
 template <typename Real>
 void Mathematics::SingularValueDecomposition<Real>::HouseholderPostmultiply(const VariableLengthVector& vector, VariableMatrix& matrix)
 {
-    const auto transitionVector = (Math::GetValue(-2) / vector.SquaredLength()) * (matrix * vector);
+    const auto transitionVector = (MathType::GetValue(-2) / vector.SquaredLength()) * (matrix * vector);
     const auto numRows = matrix.GetRowsNumber();
     const auto numColumns = matrix.GetColumnsNumber();
     for (auto row = 0; row < numRows; ++row)

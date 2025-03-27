@@ -80,8 +80,8 @@ void Mathematics::OrientedBoundingBoxTreeOfPoints<Real>::ComputeInteriorBox(int 
 
     for (auto j = 0; j < 3; ++j)
     {
-        box.SetCenter(box.GetCenter() + Math::GetRational(1, 2) * (pMin[j] + pMax[j]) * box.GetAxis(j));
-        box.SetExtent(j, Math::GetRational(1, 2) * (pMax[j] - pMin[j]));
+        box.SetCenter(box.GetCenter() + MathType::GetRational(1, 2) * (pMin[j] + pMax[j]) * box.GetAxis(j));
+        box.SetExtent(j, MathType::GetRational(1, 2) * (pMax[j] - pMin[j]));
     }
 }
 

@@ -19,7 +19,7 @@
 
 template <typename Real>
 Mathematics::BezierCurve3<Real>::BezierCurve3(int degree, const std::vector<Vector3<Real>>& ctrlPoint)
-    : ParentType{ Math ::GetValue(0), Math::GetValue(1) },
+    : ParentType{ MathType::GetValue(0), MathType::GetValue(1) },
       degree{ degree },
       numCtrlPoints{ degree + 1 },
       ctrlPoint{ ctrlPoint },
@@ -49,13 +49,13 @@ Mathematics::BezierCurve3<Real>::BezierCurve3(int degree, const std::vector<Vect
         }
     }
 
-    choose.at(0).at(0) = Math::GetValue(1);
-    choose.at(1).at(0) = Math::GetValue(1);
-    choose.at(1).at(1) = Math::GetValue(1);
+    choose.at(0).at(0) = MathType::GetValue(1);
+    choose.at(1).at(0) = MathType::GetValue(1);
+    choose.at(1).at(1) = MathType::GetValue(1);
     for (auto i = 2; i <= degree; ++i)
     {
-        choose.at(i).at(0) = Math::GetValue(1);
-        choose.at(i).at(i) = Math::GetValue(1);
+        choose.at(i).at(0) = MathType::GetValue(1);
+        choose.at(i).at(i) = MathType::GetValue(1);
         for (auto j = 1; j < i; ++j)
         {
             choose.at(i).at(j) = choose.at(gsl::narrow_cast<size_t>(i) - 1).at(gsl::narrow_cast<size_t>(j) - 1) + choose.at(gsl::narrow_cast<size_t>(i) - 1).at(j);
@@ -96,7 +96,7 @@ Mathematics::Vector3<Real> Mathematics::BezierCurve3<Real>::GetPosition(Real t) 
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    auto oneMinusT = Math::GetValue(1) - t;
+    auto oneMinusT = MathType::GetValue(1) - t;
     auto powT = t;
     auto result = oneMinusT * ctrlPoint.at(0);
 
@@ -117,7 +117,7 @@ Mathematics::Vector3<Real> Mathematics::BezierCurve3<Real>::GetFirstDerivative(R
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    auto oneMinusT = Math::GetValue(1) - t;
+    auto oneMinusT = MathType::GetValue(1) - t;
     auto powT = t;
     auto result = oneMinusT * der1CtrlPoint.at(0);
 
@@ -140,7 +140,7 @@ Mathematics::Vector3<Real> Mathematics::BezierCurve3<Real>::GetSecondDerivative(
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    auto oneMinusT = Math::GetValue(1) - t;
+    auto oneMinusT = MathType::GetValue(1) - t;
     auto powT = t;
     auto result = oneMinusT * der2CtrlPoint.at(0);
 
@@ -170,7 +170,7 @@ Mathematics::Vector3<Real> Mathematics::BezierCurve3<Real>::GetThirdDerivative(R
         return Vector3<Real>::GetZero();
     }
 
-    auto oneMinusT = Math::GetValue(1) - t;
+    auto oneMinusT = MathType::GetValue(1) - t;
     auto powT = t;
     auto result = oneMinusT * der3CtrlPoint.at(0);
 

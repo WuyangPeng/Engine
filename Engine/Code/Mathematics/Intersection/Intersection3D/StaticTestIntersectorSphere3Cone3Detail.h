@@ -55,19 +55,19 @@ Mathematics::Cone3<Real> Mathematics::StaticTestIntersectorSphere3Cone3<Real>::G
 template <typename Real>
 void Mathematics::StaticTestIntersectorSphere3Cone3<Real>::Test()
 {
-    auto invSin = Math::GetValue(1) / cone.GetSinAngle();
+    auto invSin = MathType::GetValue(1) / cone.GetSinAngle();
     auto cosSqr = cone.GetCosAngle() * cone.GetCosAngle();
 
     auto cmv = sphere.GetCenter() - cone.GetVertex();
     auto d = cmv + (sphere.GetRadius() * invSin) * cone.GetAxis();
     auto dSqrLen = Vector3Tools::GetLengthSquared(d);
     auto e = Vector3Tools::DotProduct(d, cone.GetAxis());
-    if (Math ::GetValue(0) < e && e * e >= dSqrLen * cosSqr)
+    if (MathType ::GetValue(0) < e && e * e >= dSqrLen * cosSqr)
     {
         auto sinSqr = cone.GetSinAngle() * cone.GetSinAngle();
         dSqrLen = Vector3Tools::GetLengthSquared(cmv);
         e = -Vector3Tools::DotProduct(cmv, cone.GetAxis());
-        if (Math ::GetValue(0) < e && dSqrLen * sinSqr <= e * e)
+        if (MathType ::GetValue(0) < e && dSqrLen * sinSqr <= e * e)
         {
             auto rSqr = sphere.GetRadius() * sphere.GetRadius();
             if (dSqrLen <= rSqr)

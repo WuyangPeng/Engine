@@ -33,7 +33,7 @@ namespace Mathematics
         using Rational = BinaryScientificRational<UIntegerArbitraryPrecision32>;
         using PolynomialRoot = Algebra::PolynomialRoot<T>;
         using PolynomialRootContainer = std::vector<PolynomialRoot>;
-        using Math = Math<T>;
+        using MathType = Math<T>;
 
     public:
         RootsLinear() noexcept;

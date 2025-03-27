@@ -62,7 +62,7 @@ void Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::Find()
     for (auto i = 0; i < findShared.quantity; ++i)
     {
         auto parameter = (i == 0) ? findShared.parameter0 : findShared.parameter1;
-        if (Math::FAbs(parameter) <= segment.GetExtent())
+        if (MathType::FAbs(parameter) <= segment.GetExtent())
         {
             if (quantity == 0)
             {

@@ -51,7 +51,7 @@ namespace Mathematics
         using Rational = BinaryScientificRational<UIntegerArbitraryPrecision32>;
         using RationalContainer = std::vector<Rational>;
         using Container = std::vector<T>;
-        using Math = Math<T>;
+        using MathType = Math<T>;
 
     public:
         RootsGeneralPolynomial() noexcept;

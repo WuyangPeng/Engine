@@ -29,10 +29,10 @@ namespace Mathematics
         using Segment2 = Segment2<Real>;
         using Box2 = Box2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorSegment2Box2(const Segment2& segment, const Box2& box, bool solid, const Real dotThreshold = Math::GetZeroTolerance());
+        StaticFindIntersectorSegment2Box2(const Segment2& segment, const Box2& box, bool solid, const Real dotThreshold = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

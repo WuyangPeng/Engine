@@ -26,7 +26,7 @@ namespace Mathematics
 
         using ClassType = Segment3<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector3 = Vector3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
 
@@ -39,10 +39,10 @@ namespace Mathematics
         // 且|t| <= e。值 e = Length(P1-P0)/2是该线段的“范围”（半径或半长）。
 
         // 构造函数计算center、direction和extent从beginPoint和endPoint
-        Segment3(const Vector3& beginPoint, const Vector3& endPoint, Real epsilon = Math::GetZeroTolerance());
+        Segment3(const Vector3& beginPoint, const Vector3& endPoint, Real epsilon = MathType::GetZeroTolerance());
 
         // 构造函数计算beginPoint和endPoint从center、direction和extent
-        Segment3(Real extent, const Vector3& center, const Vector3& direction, Real epsilon = Math::GetZeroTolerance());
+        Segment3(Real extent, const Vector3& center, const Vector3& direction, Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 

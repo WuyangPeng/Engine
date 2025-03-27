@@ -60,7 +60,7 @@ typename Mathematics::DistanceRectangle3Rectangle3<Real>::DistanceResult Mathema
     Vector3 closestPoint0{};
     Vector3 closestPoint1{};
 
-    auto sqrDist = Math::maxReal;
+    auto sqrDist = MathType::maxReal;
 
     // 将矩形0的边缘与矩形1的内部进行比较。
     for (auto outerIndex = 0; outerIndex < 2; ++outerIndex)
@@ -105,7 +105,7 @@ typename Mathematics::DistanceRectangle3Rectangle3<Real>::DistanceResult Mathema
         }
     }
 
-    return DistanceResult{ sqrDist, Math::GetValue(0), closestPoint0, closestPoint1 };
+    return DistanceResult{ sqrDist, MathType::GetValue(0), closestPoint0, closestPoint1 };
 }
 
 template <typename Real>

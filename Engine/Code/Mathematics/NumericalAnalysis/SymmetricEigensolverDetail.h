@@ -74,14 +74,14 @@ void Mathematics::SymmetricEigensolver<Real>::TriDiagonalize()
 
             length += vr * vr;
         }
-        auto vdv = Math::GetValue(1);
-        length = Math::Sqrt(length);
+        auto vdv = MathType::GetValue(1);
+        length = MathType::Sqrt(length);
         if (Real{} < length)
         {
             auto& v1 = vVector.at(ip1);
-            auto sgn = (Real{} <= v1 ? Math::GetValue(1) : Math::GetValue(-1));
-            auto invDenominator = Math::GetValue(1) / (v1 + sgn * length);
-            v1 = Math::GetValue(1);
+            auto sgn = (Real{} <= v1 ? MathType::GetValue(1) : MathType::GetValue(-1));
+            auto invDenominator = MathType::GetValue(1) / (v1 + sgn * length);
+            v1 = MathType::GetValue(1);
             for (auto r = ip1 + 1; r < size; ++r)
             {
                 auto& vr = vVector.at(r);
@@ -91,8 +91,8 @@ void Mathematics::SymmetricEigensolver<Real>::TriDiagonalize()
         }
 
         /// 计算秩1偏移量v*w^T和w*v^T。
-        const auto invVdv = Math::GetValue(1) / vdv;
-        Real twoInvVdv = invVdv * Math::GetValue(2);
+        const auto invVdv = MathType::GetValue(1) / vdv;
+        Real twoInvVdv = invVdv * MathType::GetValue(2);
         Real pdvtVdv{};
         for (auto r = i; r < size; ++r)
         {
@@ -121,7 +121,7 @@ void Mathematics::SymmetricEigensolver<Real>::TriDiagonalize()
         {
             const auto vr = vVector.at(r);
             const auto wr = wVector.at(r);
-            auto offset = vr * wr * Math::GetValue(2);
+            auto offset = vr * wr * MathType::GetValue(2);
             matrix.at(r + gsl::narrow_cast<size_t>(size) * r) -= offset;
             for (auto c = r + 1; c < size; ++c)
             {
@@ -160,24 +160,24 @@ requires(std::is_arithmetic_v<Real>)
 void Mathematics::SymmetricEigensolver<Real>::GetSinCos(Real x, Real y, Real& cs, Real& sn) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     /// 鲁棒地求解 sn*x + cs*y = 0
-    if (!Math::Approximate(y, Real{}))
+    if (!MathType::Approximate(y, Real{}))
     {
-        if (Math::FAbs(x) < Math::FAbs(y))
+        if (MathType::FAbs(x) < MathType::FAbs(y))
         {
             const auto tau = -x / y;
-            sn = Math::GetValue(1) / Math::Sqrt(Math::GetValue(1) + tau * tau);
+            sn = MathType::GetValue(1) / MathType::Sqrt(MathType::GetValue(1) + tau * tau);
             cs = sn * tau;
         }
         else
         {
             const auto tau = -y / x;
-            cs = Math::GetValue(1) / Math::Sqrt(Math::GetValue(1) + tau * tau);
+            cs = MathType::GetValue(1) / MathType::Sqrt(MathType::GetValue(1) + tau * tau);
             sn = cs * tau;
         }
     }
     else
     {
-        cs = Math::GetValue(1);
+        cs = MathType::GetValue(1);
         sn = Real{};
     }
 }
@@ -191,10 +191,10 @@ void Mathematics::SymmetricEigensolver<Real>::DoQrImplicitShift(int iMin, int iM
     const auto a00 = diagonal.at(iMax);
     const auto a01 = superDiagonal.at(iMax);
     auto a11 = diagonal.at(gsl::narrow_cast<size_t>(iMax) + 1);
-    const auto dif = (a00 - a11) * Math::GetRational(1, 2);
-    const auto sgn = (Real{} <= dif ? Math::GetValue(1) : Math::GetValue(-1));
+    const auto dif = (a00 - a11) * MathType::GetRational(1, 2);
+    const auto sgn = (Real{} <= dif ? MathType::GetValue(1) : MathType::GetValue(-1));
     const auto a01Sqr = a01 * a01;
-    const auto u = a11 - a01Sqr / (dif + sgn * Math::Sqrt(dif * dif + a01Sqr));
+    const auto u = a11 - a01Sqr / (dif + sgn * MathType::Sqrt(dif * dif + a01Sqr));
     auto x = diagonal.at(iMin) - u;
     auto y = superDiagonal.at(iMin);
 
@@ -337,8 +337,8 @@ int Mathematics::SymmetricEigensolver<Real>::Solve(const MatrixType& input, int 
                 const auto a00 = diagonal.at(i);
                 const auto a01 = superDiagonal.at(i);
                 const auto a11 = diagonal.at(gsl::narrow_cast<size_t>(i) + 1);
-                const auto sum = Math::FAbs(a00) + Math::FAbs(a11);
-                if (sum + Math::FAbs(a01) != sum)
+                const auto sum = MathType::FAbs(a00) + MathType::FAbs(a11);
+                if (sum + MathType::FAbs(a01) != sum)
                 {
                     if (iMax == -1)
                     {
@@ -417,7 +417,7 @@ typename Mathematics::SymmetricEigensolver<Real>::MatrixType Mathematics::Symmet
         /// 从单位矩阵开始。
         for (auto d = 0; d < size; ++d)
         {
-            eigenvectors.at(d + gsl::narrow_cast<size_t>(size) * d) = Math::GetValue(1);
+            eigenvectors.at(d + gsl::narrow_cast<size_t>(size) * d) = MathType::GetValue(1);
         }
 
         /// 使用向后累加乘以Householder反射。
@@ -431,7 +431,7 @@ typename Mathematics::SymmetricEigensolver<Real>::MatrixType Mathematics::Symmet
             {
                 vVector.at(r) = Real{};
             }
-            vVector.at(r) = Math::GetValue(1);
+            vVector.at(r) = MathType::GetValue(1);
             for (++r; r < size; ++r)
             {
                 vVector.at(r) = matrix.at(i + gsl::narrow_cast<size_t>(size) * r);
@@ -546,11 +546,11 @@ typename Mathematics::SymmetricEigensolver<Real>::DiagonalType Mathematics::Symm
         if (0 <= permutation.at(0))
         {
             /// 已请求排序。
-            x.at(permutation.at(c)) = Math::GetValue(1);
+            x.at(permutation.at(c)) = MathType::GetValue(1);
         }
         else
         {
-            x.at(c) = Math::GetValue(1);
+            x.at(c) = MathType::GetValue(1);
         }
 
         /// 应用Givens旋转。

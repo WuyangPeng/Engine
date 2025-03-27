@@ -18,7 +18,7 @@
 
 template <typename Real>
 Mathematics::BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Vector3<Real>>>& ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen)
-    : ParentType{ Math::GetValue(0), Math::GetValue(1), Math::GetValue(0), Math::GetValue(1), true },
+    : ParentType{ MathType::GetValue(0), MathType::GetValue(1), MathType::GetValue(0), MathType::GetValue(1), true },
       numUCtrlPoints{ numUCtrlPoints },
       numVCtrlPoints{ numVCtrlPoints },
       ctrlPoint{ ctrlPoint },
@@ -40,7 +40,7 @@ Mathematics::BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int nu
 
 template <typename Real>
 Mathematics::BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Vector3<Real>>>& ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, Real* vKnot)
-    : ParentType{ Math ::GetValue(0), Math::GetValue(1), Math ::GetValue(0), Math::GetValue(1), true },
+    : ParentType{ MathType ::GetValue(0), MathType::GetValue(1), MathType ::GetValue(0), MathType::GetValue(1), true },
       numUCtrlPoints{ numUCtrlPoints },
       numVCtrlPoints{ numVCtrlPoints },
       ctrlPoint{ ctrlPoint },
@@ -62,7 +62,7 @@ Mathematics::BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int nu
 
 template <typename Real>
 Mathematics::BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Vector3<Real>>>& ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot, bool vOpen)
-    : ParentType{ Math ::GetValue(0), Math::GetValue(1), Math ::GetValue(0), Math::GetValue(1), true },
+    : ParentType{ MathType ::GetValue(0), MathType::GetValue(1), MathType ::GetValue(0), MathType::GetValue(1), true },
       numUCtrlPoints{ numUCtrlPoints },
       numVCtrlPoints{ numVCtrlPoints },
       ctrlPoint{ ctrlPoint },
@@ -84,7 +84,7 @@ Mathematics::BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int nu
 
 template <typename Real>
 Mathematics::BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Vector3<Real>>>& ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot, Real* vKnot)
-    : ParentType{ Math ::GetValue(0), Math::GetValue(1), Math ::GetValue(0), Math::GetValue(1), true },
+    : ParentType{ MathType::GetValue(0), MathType::GetValue(1), MathType::GetValue(0), MathType::GetValue(1), true },
       numUCtrlPoints{ numUCtrlPoints },
       numVCtrlPoints{ numVCtrlPoints },
       ctrlPoint{ ctrlPoint },
@@ -195,7 +195,7 @@ Mathematics::Vector3<Real> Mathematics::BSplineRectangle<Real>::GetControlPoint(
         return ctrlPoint.at(uIndex).at(vIndex);
     }
 
-    return Vector3<Real>{ Math ::maxReal, Math ::maxReal, Math ::maxReal };
+    return Vector3<Real>{ MathType ::maxReal, MathType ::maxReal, MathType ::maxReal };
 }
 
 template <typename Real>
@@ -219,7 +219,7 @@ Real Mathematics::BSplineRectangle<Real>::GetKnot(int dim, int i) const
         return basis.at(dim).GetKnot(i);
     }
 
-    return Math ::maxReal;
+    return MathType::maxReal;
 }
 
 template <typename Real>

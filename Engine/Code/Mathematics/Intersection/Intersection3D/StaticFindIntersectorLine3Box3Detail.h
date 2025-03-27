@@ -55,8 +55,8 @@ Mathematics::Box3<Real> Mathematics::StaticFindIntersectorLine3Box3<Real>::GetBo
 template <typename Real>
 void Mathematics::StaticFindIntersectorLine3Box3<Real>::Find()
 {
-    constexpr auto t0 = -Math::maxReal;
-    constexpr auto t1 = Math::maxReal;
+    constexpr auto t0 = -MathType::maxReal;
+    constexpr auto t1 = MathType::maxReal;
     const auto findShared = DoClipping(t0, t1, line.GetOrigin(), line.GetDirection(), box, true);
     this->SetIntersectionType(findShared.intersectionType);
     quantity = findShared.quantity;
@@ -120,7 +120,7 @@ typename Mathematics::StaticFindIntersectorLine3Box3<Real>::FindShared Mathemati
         notAllClipped = Clip(-boxDirection.GetZ(), +boxOrigin.GetZ() - box.GetExtent(2), notAllClipped.t0, notAllClipped.t1);
     }
 
-    if (notAllClipped.result && (solid || Math::Approximate(notAllClipped.t0, t0) || Math::Approximate(notAllClipped.t1, t1)))
+    if (notAllClipped.result && (solid || MathType::Approximate(notAllClipped.t0, t0) || MathType::Approximate(notAllClipped.t1, t1)))
     {
         if (notAllClipped.t0 < notAllClipped.t1)
         {
@@ -153,7 +153,7 @@ typename Mathematics::StaticFindIntersectorLine3Box3<Real>::ClipType Mathematics
     clipType.t1 = t1;
 
     // 如果线段与当前测试平面相交，则返回值为“true”。 否则，将返回“false”，在这种情况下，线段将被完全剪切。
-    if (Math::GetValue(0) < denom)
+    if (MathType::GetValue(0) < denom)
     {
         if (denom * t1 < numer)
         {
@@ -167,7 +167,7 @@ typename Mathematics::StaticFindIntersectorLine3Box3<Real>::ClipType Mathematics
         clipType.result = true;
         return clipType;
     }
-    else if (denom < Math::GetValue(0))
+    else if (denom < MathType::GetValue(0))
     {
         if (denom * t0 < numer)
         {
@@ -183,7 +183,7 @@ typename Mathematics::StaticFindIntersectorLine3Box3<Real>::ClipType Mathematics
     }
     else
     {
-        clipType.result = numer <= Math::GetValue(0);
+        clipType.result = numer <= MathType::GetValue(0);
         return clipType;
     }
 }

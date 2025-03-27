@@ -54,7 +54,7 @@ namespace Mathematics
     public:
         using ClassType = RootsPolynomial<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         RootsPolynomial() noexcept;

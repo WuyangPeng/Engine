@@ -60,7 +60,7 @@ void Mathematics::DynamicFindIntersectorSegment3Sphere3<Real>::Find()
     StaticFindIntersectorSegment3Sphere3<Real> intersector{ segment, sphere };
     if (intersector.IsIntersection())
     {
-        this->SetContactTime(Math::GetValue(0));
+        this->SetContactTime(MathType::GetValue(0));
         this->SetIntersectionType(IntersectionType::Other);
         if (intersector.GetQuantity() == 1)
         {
@@ -89,12 +89,12 @@ void Mathematics::DynamicFindIntersectorSegment3Sphere3<Real>::Find()
 
     // 单位长度向量
     relVelocity.Normalize();
-    const Segment3 path{ (Math::GetRational(1, 2)) * this->GetTMax() * relSpeed, sphere.GetCenter() + (Math::GetRational(1, 2)) * this->GetTMax() * relSpeed * relVelocity, relVelocity };
+    const Segment3 path{ (MathType::GetRational(1, 2)) * this->GetTMax() * relSpeed, sphere.GetCenter() + (MathType::GetRational(1, 2)) * this->GetTMax() * relSpeed * relVelocity, relVelocity };
 
     StaticFindIntersectorSegment3Capsule3<Real> staticFindIntersectorSegment3Capsule3{ path, capsule };
     if (!staticFindIntersectorSegment3Capsule3.IsIntersection())
     {
-        this->SetContactTime(Math::GetValue(0));
+        this->SetContactTime(MathType::GetValue(0));
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }

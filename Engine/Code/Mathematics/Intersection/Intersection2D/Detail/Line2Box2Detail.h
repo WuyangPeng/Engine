@@ -72,7 +72,7 @@ void Mathematics::Line2Box2<Real>::DoClipping(Real t0, Real t1, const Vector2& o
     clipType = Clip(+boxDirection.GetY(), -boxOrigin.GetY() - box.GetExtent1(), clipType);
     clipType = Clip(-boxDirection.GetY(), +boxOrigin.GetY() - box.GetExtent1(), clipType);
 
-    if (clipType.result && (solid || !Math::Approximate(t0, clipType.t0) || !Math::Approximate(t1, clipType.t1)))
+    if (clipType.result && (solid || !MathType::Approximate(t0, clipType.t0) || !MathType::Approximate(t1, clipType.t1)))
     {
         if (t0 < t1)
         {
@@ -119,7 +119,7 @@ typename Mathematics::Line2Box2<Real>::ClipType Mathematics::Line2Box2<Real>::Cl
     /// 如果线段与当前测试平面相交，则返回值为“ true”。 否则，将返回“ false”，在这种情况下，线段将被完全剪切。
     ClipType result{ clipType };
 
-    if (Math::GetValue(0) < denom)
+    if (MathType::GetValue(0) < denom)
     {
         if (numer > denom * result.t1)
         {
@@ -133,7 +133,7 @@ typename Mathematics::Line2Box2<Real>::ClipType Mathematics::Line2Box2<Real>::Cl
         result.result = true;
         return result;
     }
-    else if (denom < Math::GetValue(0))
+    else if (denom < MathType::GetValue(0))
     {
         if (numer > denom * result.t0)
         {
@@ -149,7 +149,7 @@ typename Mathematics::Line2Box2<Real>::ClipType Mathematics::Line2Box2<Real>::Cl
     }
     else
     {
-        result.result = numer <= Math::GetValue(0);
+        result.result = numer <= MathType::GetValue(0);
         return clipType;
     }
 }

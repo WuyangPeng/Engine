@@ -87,8 +87,8 @@ void Mathematics::DynamicFindIntersectorBox2Circle2<Real>::Find()
     const auto extent1 = box.GetExtent1();
 
     auto type = IntersectingType::NoIntersection;
-    auto indexX = Math::GetValue(0);
-    auto indexY = Math::GetValue(0);
+    auto indexX = MathType::GetValue(0);
+    auto indexY = MathType::GetValue(0);
 
     if (centerDotX < -extent0)
     {
@@ -131,7 +131,7 @@ void Mathematics::DynamicFindIntersectorBox2Circle2<Real>::Find()
         {
             // 区域 Rzz:
             // 圆圈已经与盒子相交了。 使用圆心作为交点，但通过返回“其他”交点，可以使调用者知道对象重叠。
-            this->SetContactTime(Math::GetValue(0));
+            this->SetContactTime(MathType::GetValue(0));
             contactPoint = circle.GetCenter();
             this->SetIntersectionType(IntersectionType::Other);
             return;
@@ -191,38 +191,38 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
     auto dy = centerDotY + extent1;
     auto radiusSqr = circle.GetRadius() * circle.GetRadius();
     auto diff = dx * dx + dy * dy - radiusSqr;
-    if (diff <= Math::GetValue(0))
+    if (diff <= MathType::GetValue(0))
     {
         // 圆圈已经与盒子相交了。
-        this->SetContactTime(Math::GetValue(0));
+        this->SetContactTime(MathType::GetValue(0));
         return RegionInfo{ IntersectingType::Initially };
     }
 
     auto dot = velocityDotX * dx + velocityDotY * dy;
-    if (Math::GetValue(0) <= dot)
+    if (MathType::GetValue(0) <= dot)
     {
         // 圆圈未移向盒子。
         return RegionInfo{ IntersectingType::NoIntersection };
     }
 
     auto dotPerp = velocityDotX * dy - velocityDotY * dx;
-    auto indexX = Math::GetValue(0);
-    auto indexY = Math::GetValue(0);
+    auto indexX = MathType::GetValue(0);
+    auto indexY = MathType::GetValue(0);
 
-    if (Math::GetValue(0) <= dotPerp)
+    if (MathType::GetValue(0) <= dotPerp)
     {
         // 潜在接触在左边缘。
         if (dotPerp <= circle.GetRadius() * velocityDotY)
         {
             // 左下角是第一个接触点。
             auto velocitySqr = velocityDotX * velocityDotX + velocityDotY * velocityDotY;
-            auto inv = Math::InvSqrt(Math::FAbs(dot * dot - velocitySqr * diff));
-            this->SetContactTime(diff * inv / (Math::GetValue(1) - dot * inv));
+            auto inv = MathType::InvSqrt(MathType::FAbs(dot * dot - velocitySqr * diff));
+            this->SetContactTime(diff * inv / (MathType::GetValue(1) - dot * inv));
 
             return RegionInfo{ IntersectingType::Intersect, -extent0, -extent1 };
         }
 
-        if (velocityDotX <= Math::GetValue(0))
+        if (velocityDotX <= MathType::GetValue(0))
         {
             // 经过角，离开盒子。
             return RegionInfo{ IntersectingType::NoIntersection };
@@ -231,7 +231,7 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
         auto velocitySqr = velocityDotX * velocityDotX + velocityDotY * velocityDotY;
         dy = centerDotY - extent1;
         dotPerp = velocityDotX * dy - velocityDotY * dx;
-        if (Math::GetValue(0) <= dotPerp && radiusSqr * velocitySqr < dotPerp * dotPerp)
+        if (MathType::GetValue(0) <= dotPerp && radiusSqr * velocitySqr < dotPerp * dotPerp)
         {
             // 圆圈未命中盒子。
             return RegionInfo{ IntersectingType::NoIntersection, indexX, indexY };
@@ -251,8 +251,8 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
             // 盒子的左上角的第一个接触点。
             dot = velocityDotX * dx + velocityDotY * dy;
             diff = dx * dx + dy * dy - radiusSqr;
-            auto inv = Math::InvSqrt(Math::FAbs(dot * dot - velocitySqr * diff));
-            this->SetContactTime(diff * inv / (Math::GetValue(1) - dot * inv));
+            auto inv = MathType::InvSqrt(MathType::FAbs(dot * dot - velocitySqr * diff));
+            this->SetContactTime(diff * inv / (MathType::GetValue(1) - dot * inv));
             indexY = extent1;
         }
     }
@@ -264,13 +264,13 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
             // 左下角是第一个接触点。
 
             auto velocitySqr = velocityDotX * velocityDotX + velocityDotY * velocityDotY;
-            auto inv = Math::InvSqrt(Math::FAbs(dot * dot - velocitySqr * diff));
-            this->SetContactTime(diff * inv / (Math::GetValue(1) - dot * inv));
+            auto inv = MathType::InvSqrt(MathType::FAbs(dot * dot - velocitySqr * diff));
+            this->SetContactTime(diff * inv / (MathType::GetValue(1) - dot * inv));
 
             return RegionInfo{ IntersectingType::Intersect, -extent0, -extent1 };
         }
 
-        if (velocityDotY <= Math::GetValue(0))
+        if (velocityDotY <= MathType::GetValue(0))
         {
             // 经过角，离开盒子。
             return RegionInfo{ IntersectingType::NoIntersection, indexX, indexY };
@@ -279,7 +279,7 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
         auto velocitySqr = velocityDotX * velocityDotX + velocityDotY * velocityDotY;
         dx = centerDotX - extent0;
         dotPerp = velocityDotX * dy - velocityDotY * dx;
-        if (Math::GetValue(0) <= -dotPerp && radiusSqr * velocitySqr < dotPerp * dotPerp)
+        if (MathType::GetValue(0) <= -dotPerp && radiusSqr * velocitySqr < dotPerp * dotPerp)
         {
             // 圆圈未命中盒子。
             return RegionInfo{ IntersectingType::NoIntersection, indexX, indexY };
@@ -299,8 +299,8 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
             // 第一次接触在盒子的右下角。
             dot = velocityDotX * dx + velocityDotY * dy;
             diff = dx * dx + dy * dy - radiusSqr;
-            auto inv = Math::InvSqrt(Math::FAbs(dot * dot - velocitySqr * diff));
-            this->SetContactTime(diff * inv / (Math::GetValue(1) - dot * inv));
+            auto inv = MathType::InvSqrt(MathType::FAbs(dot * dot - velocitySqr * diff));
+            this->SetContactTime(diff * inv / (MathType::GetValue(1) - dot * inv));
             indexX = extent0;
         }
     }
@@ -311,19 +311,19 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
 template <typename Real>
 typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathematics::DynamicFindIntersectorBox2Circle2<Real>::TestEdgeRegion(Real centerDotX, Real centerDotY, Real velocityDotX, Real velocityDotY, Real extent0, Real extent1) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    auto indexX = Math::GetValue(0);
-    auto indexY = Math::GetValue(0);
+    auto indexX = MathType::GetValue(0);
+    auto indexY = MathType::GetValue(0);
     auto dx = centerDotX + extent0;
     auto xSignedDist = dx + circle.GetRadius();
-    if (Math::GetValue(0) <= xSignedDist)
+    if (MathType::GetValue(0) <= xSignedDist)
     {
         // 圆圈已经与盒子相交了。
-        this->SetContactTime(Math::GetValue(0));
+        this->SetContactTime(MathType::GetValue(0));
 
         return RegionInfo{ IntersectingType::Initially, indexX, indexY };
     }
 
-    if (velocityDotX <= Math::GetValue(0))
+    if (velocityDotX <= MathType::GetValue(0))
     {
         // 圆圈未移向盒子。
         return RegionInfo{ IntersectingType::NoIntersection, indexX, indexY };
@@ -332,11 +332,11 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
     auto radiusSqr = circle.GetRadius() * circle.GetRadius();
     auto velocitySqr = velocityDotX * velocityDotX + velocityDotY * velocityDotY;
 
-    if (Math::GetValue(0) <= velocityDotY)
+    if (MathType::GetValue(0) <= velocityDotY)
     {
         auto dy = centerDotY - extent1;
         auto dotPerp = velocityDotX * dy - velocityDotY * dx;
-        if (Math::GetValue(0) <= dotPerp && radiusSqr * velocitySqr < dotPerp * dotPerp)
+        if (MathType::GetValue(0) <= dotPerp && radiusSqr * velocitySqr < dotPerp * dotPerp)
         {
             // 圆圈未命中盒子。
             return RegionInfo{ IntersectingType::NoIntersection, indexX, indexY };
@@ -356,8 +356,8 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
             // 第一次接触在盒子的一角。
             auto dot = velocityDotX * dx + velocityDotY * dy;
             auto diff = dx * dx + dy * dy - radiusSqr;
-            auto inv = Math::InvSqrt(Math::FAbs(dot * dot - velocitySqr * diff));
-            this->SetContactTime(diff * inv / (Math::GetValue(1) - dot * inv));
+            auto inv = MathType::InvSqrt(MathType::FAbs(dot * dot - velocitySqr * diff));
+            this->SetContactTime(diff * inv / (MathType::GetValue(1) - dot * inv));
             indexY = extent1;
         }
     }
@@ -365,7 +365,7 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
     {
         auto dy = centerDotY + extent1;
         auto dotPerp = velocityDotX * dy - velocityDotY * dx;
-        if (dotPerp <= Math::GetValue(0) && radiusSqr * velocitySqr < dotPerp * dotPerp)
+        if (dotPerp <= MathType::GetValue(0) && radiusSqr * velocitySqr < dotPerp * dotPerp)
         {
             // 圆圈未命中盒子。
             return RegionInfo{ IntersectingType::NoIntersection, indexX, indexY };
@@ -385,8 +385,8 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
             // 第一次接触在盒子的一角。
             auto dot = velocityDotX * dx + velocityDotY * dy;
             auto diff = dx * dx + dy * dy - radiusSqr;
-            auto inv = Math::InvSqrt(Math::FAbs(dot * dot - velocitySqr * diff));
-            this->SetContactTime(diff * inv / (Math::GetValue(1) - dot * inv));
+            auto inv = MathType::InvSqrt(MathType::FAbs(dot * dot - velocitySqr * diff));
+            this->SetContactTime(diff * inv / (MathType::GetValue(1) - dot * inv));
             indexY = -extent1;
         }
     }

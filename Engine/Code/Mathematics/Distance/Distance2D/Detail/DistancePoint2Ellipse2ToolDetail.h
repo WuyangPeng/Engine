@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::DistancePoint2Ellipse2Tool<Real>::DistancePoint2Ellipse2Tool(Real extent0, Real extent1, const Vector2& vector, Real zeroThreshold)
-    : extent{ extent0, extent1 }, inputVector{ vector }, outputVector{}, squaredDistance{ Math::GetValue(0) }, zeroThreshold{ zeroThreshold }
+    : extent{ extent0, extent1 }, inputVector{ vector }, outputVector{}, squaredDistance{ MathType::GetValue(0) }, zeroThreshold{ zeroThreshold }
 {
     ComputeSquaredDistance();
 
@@ -29,7 +29,7 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistance()
     constexpr auto size = 2;
 
     // 确定m_InputVector的反射到第一象限。
-    const std::array<bool, size> reflect{ inputVector.GetX() < Math::GetValue(0), inputVector.GetY() < Math::GetValue(0) };
+    const std::array<bool, size> reflect{ inputVector.GetX() < MathType::GetValue(0), inputVector.GetY() < MathType::GetValue(0) };
 
     // 确定递减辐度轴顺序。
     std::array<int, size> permute{};
@@ -95,21 +95,21 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistanceSpecia
             constexpr auto maxLoop = 2 * std::numeric_limits<Real>::max_exponent;
             for (auto i = 0; i < maxLoop; ++i)
             {
-                middleT = Math::GetRational(1, 2) * (beginT + endT);
-                if (Math::FAbs(middleT - beginT) <= zeroThreshold || Math::FAbs(middleT - endT) <= zeroThreshold)
+                middleT = MathType::GetRational(1, 2) * (beginT + endT);
+                if (MathType::FAbs(middleT - beginT) <= zeroThreshold || MathType::FAbs(middleT - endT) <= zeroThreshold)
                 {
                     break;
                 }
 
                 const Vector2 r{ extentMultiplyQueryPoint[0] / (middleT + extentSquared[0]),
                                  extentMultiplyQueryPoint[1] / (middleT + extentSquared[1]) };
-                auto lengthSquaredMinusOne = Vector2Tools<Real>::GetLengthSquared(r) - Math::GetValue(1);
+                auto lengthSquaredMinusOne = Vector2Tools<Real>::GetLengthSquared(r) - MathType::GetValue(1);
 
-                if (Math::GetValue(0) < lengthSquaredMinusOne)
+                if (MathType::GetValue(0) < lengthSquaredMinusOne)
                 {
                     beginT = middleT;
                 }
-                else if (lengthSquaredMinusOne < Math::GetValue(0))
+                else if (lengthSquaredMinusOne < MathType::GetValue(0))
                 {
                     endT = middleT;
                 }
@@ -126,7 +126,7 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistanceSpecia
         }
         else  // y0 == 0
         {
-            outputVector[0] = Math::GetValue(0);
+            outputVector[0] = MathType::GetValue(0);
             outputVector[1] = localExtent[1];
             const auto difference = queryPoint[1] - localExtent[1];
             squaredDistance = difference * difference;
@@ -142,7 +142,7 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistanceSpecia
             const auto xDividedExtent = extentMultiplyQueryPoint / denom;
             const auto x0de0squared = xDividedExtent * xDividedExtent;
             outputVector[0] = localExtent[0] * xDividedExtent;
-            outputVector[1] = localExtent[1] * Math::Sqrt(Math::FAbs(Math::GetValue(1) - x0de0squared));
+            outputVector[1] = localExtent[1] * MathType::Sqrt(MathType::FAbs(MathType::GetValue(1) - x0de0squared));
             const auto xDifference = outputVector[0] - queryPoint[0];
             squaredDistance = xDifference * xDifference + outputVector[1] * outputVector[1];
         }
@@ -152,7 +152,7 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistanceSpecia
             // 最近的椭圆点有m_OutputVector.y == 0，
             // 在域边界间隔(x0/e0)^2 = 1。
             outputVector[0] = localExtent[0];
-            outputVector[1] = Math::GetValue(0);
+            outputVector[1] = MathType::GetValue(0);
             const auto difference = queryPoint[0] - localExtent[0];
             squaredDistance = difference * difference;
         }
@@ -164,7 +164,7 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistanceSpecia
 template <typename Real>
 bool Mathematics::DistancePoint2Ellipse2Tool<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= squaredDistance)
+    if (MathType::GetValue(0) <= squaredDistance)
         return true;
     else
         return false;

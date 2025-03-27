@@ -35,7 +35,7 @@ namespace Mathematics
         using Vector3 = Vector3<Real>;
         using Sphere3 = Sphere3<Real>;
         using Points = std::vector<Vector3>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         SphereFit3(const Points& points, int maxIterations, bool initialCenterIsAverage);

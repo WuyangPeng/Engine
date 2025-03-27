@@ -26,7 +26,7 @@ namespace Mathematics
         using ClassType = Line2Circle2<Real>;
 
         using Parameter = std::array<Real, 2>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector2 = Vector2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
 

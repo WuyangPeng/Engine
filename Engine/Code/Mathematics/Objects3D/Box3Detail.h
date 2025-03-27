@@ -52,7 +52,7 @@ bool Mathematics::Box3<Real>::IsValid() const noexcept
             -epsilon <= extent[0] &&
             -epsilon <= extent[1] &&
             -epsilon <= extent[2] &&
-            Math::GetValue(0) <= epsilon)
+            MathType::GetValue(0) <= epsilon)
 
     #include SYSTEM_WARNING_POP
         {

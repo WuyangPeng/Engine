@@ -45,7 +45,7 @@ void Mathematics::TrianglePlaneRelations<Real>::Relations(const Triangle3& trian
         }
         else
         {
-            distance.at(i) = Math::GetValue(0);
+            distance.at(i) = MathType::GetValue(0);
             sign.at(i) = NumericalValueSymbol::Zero;
             ++zero;
         }

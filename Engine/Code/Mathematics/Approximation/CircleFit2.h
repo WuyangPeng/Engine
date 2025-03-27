@@ -35,7 +35,7 @@ namespace Mathematics
         using Vector2 = Vector2<Real>;
         using Circle2 = Circle2<Real>;
         using PointType = std::vector<Vector2>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         CircleFit2(const PointType& points, int maxIterations, bool initialCenterIsAverage);

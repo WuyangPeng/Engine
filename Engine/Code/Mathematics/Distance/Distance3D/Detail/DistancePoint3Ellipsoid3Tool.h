@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = DistancePoint3Ellipsoid3Tool<Real>;
 
         using Vector3 = Vector3<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         DistancePoint3Ellipsoid3Tool(Real extent0, Real extent1, Real extent2, const Vector3& vector, Real zeroThreshold);

@@ -60,16 +60,16 @@ typename Mathematics::DistanceTriangle3Triangle3<Real>::DistanceResult Mathemati
     Vector3 closestPoint0;
     Vector3 closestPoint1;
 
-    auto sqrDist = Math::maxReal;
+    auto sqrDist = MathType::maxReal;
 
     // 比较三角形0的边缘与三角形1的内部。
-    auto ratio = Math::GetValue(0);
+    auto ratio = MathType::GetValue(0);
 
     for (auto i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
     {
-        auto center = (Math::GetRational(1, 2)) * (lhsTriangle.GetVertex(i0) + lhsTriangle.GetVertex(i1));
+        auto center = (MathType::GetRational(1, 2)) * (lhsTriangle.GetVertex(i0) + lhsTriangle.GetVertex(i1));
         auto direction = lhsTriangle.GetVertex(i1) - lhsTriangle.GetVertex(i0);
-        auto extent = (Math::GetRational(1, 2)) * Vector3Tools::GetLength(direction);
+        auto extent = (MathType::GetRational(1, 2)) * Vector3Tools::GetLength(direction);
 
         const Segment3<Real> edge{ extent, center, direction };
 
@@ -83,16 +83,16 @@ typename Mathematics::DistanceTriangle3Triangle3<Real>::DistanceResult Mathemati
             sqrDist = squared.GetDistance();
 
             ratio = squared.GetLhsParameter() / edge.GetExtent();
-            triangleBary0[i0] = (Math::GetRational(1, 2)) * (Math::GetValue(1) - ratio);
-            triangleBary0[i1] = Math::GetValue(1) - triangleBary0[i0];
-            triangleBary0[3 - i0 - i1] = Math::GetValue(0);
+            triangleBary0[i0] = (MathType::GetRational(1, 2)) * (MathType::GetValue(1) - ratio);
+            triangleBary0[i1] = MathType::GetValue(1) - triangleBary0[i0];
+            triangleBary0[3 - i0 - i1] = MathType::GetValue(0);
             triangleBary1[0] = distanceSegment3Triangle3.GetTriangleBary(0);
             triangleBary1[1] = distanceSegment3Triangle3.GetTriangleBary(1);
             triangleBary1[2] = distanceSegment3Triangle3.GetTriangleBary(2);
 
-            if (sqrDist <= Math::GetZeroTolerance())
+            if (sqrDist <= MathType::GetZeroTolerance())
             {
-                DistanceResult{ Math::GetValue(0), Math::GetValue(0), closestPoint0, closestPoint1 };
+                DistanceResult{ MathType::GetValue(0), MathType::GetValue(0), closestPoint0, closestPoint1 };
             }
         }
     }
@@ -100,9 +100,9 @@ typename Mathematics::DistanceTriangle3Triangle3<Real>::DistanceResult Mathemati
     // 将三角形1的边缘与三角形0的内部进行比较。
     for (auto i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
     {
-        auto center = (Math::GetRational(1, 2)) * (rhsTriangle.GetVertex(i0) + rhsTriangle.GetVertex(i1));
+        auto center = (MathType::GetRational(1, 2)) * (rhsTriangle.GetVertex(i0) + rhsTriangle.GetVertex(i1));
         auto direction = rhsTriangle.GetVertex(i1) - rhsTriangle.GetVertex(i0);
-        auto extent = (Math::GetRational(1, 2)) * Vector3Tools::GetLength(direction);
+        auto extent = (MathType::GetRational(1, 2)) * Vector3Tools::GetLength(direction);
 
         const Segment3<Real> edge{ extent, center, direction };
 
@@ -116,21 +116,21 @@ typename Mathematics::DistanceTriangle3Triangle3<Real>::DistanceResult Mathemati
             sqrDist = squared.GetDistance();
 
             ratio = squared.GetLhsParameter() / edge.GetExtent();
-            triangleBary1[i0] = (Math::GetRational(1, 2)) * (Math::GetValue(1) - ratio);
-            triangleBary1[i1] = Math::GetValue(1) - triangleBary1[i0];
-            triangleBary1[3 - i0 - i1] = Math::GetValue(0);
+            triangleBary1[i0] = (MathType::GetRational(1, 2)) * (MathType::GetValue(1) - ratio);
+            triangleBary1[i1] = MathType::GetValue(1) - triangleBary1[i0];
+            triangleBary1[3 - i0 - i1] = MathType::GetValue(0);
             triangleBary0[0] = distanceSegment3Triangle3.GetTriangleBary(0);
             triangleBary0[1] = distanceSegment3Triangle3.GetTriangleBary(1);
             triangleBary0[2] = distanceSegment3Triangle3.GetTriangleBary(2);
 
-            if (sqrDist <= Math::GetZeroTolerance())
+            if (sqrDist <= MathType::GetZeroTolerance())
             {
-                return DistanceResult{ Math::GetValue(0), Math::GetValue(0), closestPoint0, closestPoint1 };
+                return DistanceResult{ MathType::GetValue(0), MathType::GetValue(0), closestPoint0, closestPoint1 };
             }
         }
     }
 
-    return DistanceResult{ sqrDist, Math::GetValue(0), closestPoint0, closestPoint1 };
+    return DistanceResult{ sqrDist, MathType::GetValue(0), closestPoint0, closestPoint1 };
 }
 
 template <typename Real>

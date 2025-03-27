@@ -67,14 +67,14 @@ void Mathematics::StaticFindIntersectorLine3Torus3<Real>::Find()
     Polynomial<Real> poly{ 4 };
     auto zOrigin = line.GetOrigin().GetZ();
     auto zDir = line.GetDirection().GetZ();
-    poly[0] = dot * dot - Math::GetValue(4) * outerRadiusSquare * (innerRadiusSquare - zOrigin * zOrigin);
-    poly[1] = Math::GetValue(4) * originDotDirection * dot + Math::GetValue(8) * outerRadiusSquare * zDir * zOrigin;
-    poly[2] = (Math::GetValue(2)) * directionDotDirection * dot + Math::GetValue(4) * originDotDirection * originDotDirection + Math::GetValue(4) * outerRadiusSquare * zDir * zDir;
-    poly[3] = Math::GetValue(4) * directionDotDirection * originDotDirection;
+    poly[0] = dot * dot - MathType::GetValue(4) * outerRadiusSquare * (innerRadiusSquare - zOrigin * zOrigin);
+    poly[1] = MathType::GetValue(4) * originDotDirection * dot + MathType::GetValue(8) * outerRadiusSquare * zDir * zOrigin;
+    poly[2] = (MathType::GetValue(2)) * directionDotDirection * dot + MathType::GetValue(4) * originDotDirection * originDotDirection + MathType::GetValue(4) * outerRadiusSquare * zDir * zDir;
+    poly[3] = MathType::GetValue(4) * directionDotDirection * originDotDirection;
     poly[4] = directionDotDirection * directionDotDirection;
 
     // 解决四次方程。
-    PolynomialRoots<Real> proots{ Math::GetZeroTolerance() };
+    PolynomialRoots<Real> proots{ MathType::GetZeroTolerance() };
     if (!proots.FindBisection(poly, 6))
     {
         this->SetIntersectionType(IntersectionType::Empty);

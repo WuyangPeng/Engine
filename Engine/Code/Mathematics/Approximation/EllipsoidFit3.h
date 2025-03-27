@@ -41,7 +41,7 @@ namespace Mathematics
         using Points = std::vector<Vector3>;
         using Matrix3 = Matrix3<Real>;
         using Angle = std::vector<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         explicit EllipsoidFit3(const Points& points);

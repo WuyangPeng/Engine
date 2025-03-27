@@ -27,13 +27,13 @@ namespace Mathematics
         using ClassType = CylinderFit3Update<Real>;
 
         using Vector3 = Vector3<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Points = std::vector<Vector3>;
         using CylinderFit3UpdateData = CylinderFit3UpdateData<Real>;
         using UpdateData = std::vector<CylinderFit3UpdateData>;
 
     public:
-        CylinderFit3Update(Points points, const Vector3& guessCenter, const Vector3& guessAxis, const Real epsilon = Math::GetZeroTolerance()) noexcept;
+        CylinderFit3Update(Points points, const Vector3& guessCenter, const Vector3& guessAxis, const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

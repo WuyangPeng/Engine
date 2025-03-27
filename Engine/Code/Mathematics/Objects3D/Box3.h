@@ -28,7 +28,7 @@ namespace Mathematics
 
         using ClassType = Box3<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector3 = Vector3<Real>;
         using VerticesType = std::vector<Vector3>;
 
@@ -45,7 +45,7 @@ namespace Mathematics
              const Real extent0,
              const Real extent1,
              const Real extent2,
-             const Real epsilon = Math::GetZeroTolerance()) noexcept;
+             const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

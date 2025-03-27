@@ -100,7 +100,7 @@ typename Mathematics::DistanceSegment3Triangle3<Real>::DistanceResult Mathematic
         triangleBary[2] = distancePoint3Triangle3.GetTriangleBary(2);
     }
 
-    return DistanceResult{ sqrDist.GetDistance(), Math::GetValue(0), closestPoint0, closestPoint1, segmentParameter, Math::GetValue(0) };
+    return DistanceResult{ sqrDist.GetDistance(), MathType::GetValue(0), closestPoint0, closestPoint1, segmentParameter, MathType::GetValue(0) };
 }
 
 template <typename Real>

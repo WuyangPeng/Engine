@@ -30,7 +30,7 @@ namespace Mathematics
         using Line3 = Line3<Real>;
         using Circle3 = Circle3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResult;
 
     public:

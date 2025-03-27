@@ -64,18 +64,18 @@ void Mathematics::StaticFindIntersectorRay2Circle2<Real>::Find()
         auto rootCount = line2Circle2.GetRootCount();
         if (rootCount == 1)
         {
-            if (line2Circle2.GetParameter(0) < Math::GetValue(0))
+            if (line2Circle2.GetParameter(0) < MathType::GetValue(0))
             {
                 rootCount = 0;
             }
         }
         else
         {
-            if (line2Circle2.GetParameter(1) < Math::GetValue(0))
+            if (line2Circle2.GetParameter(1) < MathType::GetValue(0))
             {
                 rootCount = 0;
             }
-            else if (line2Circle2.GetParameter(0) < Math::GetValue(0))
+            else if (line2Circle2.GetParameter(0) < MathType::GetValue(0))
             {
                 rootCount = 1;
                 line2Circle2.ClearParameter0();

@@ -23,7 +23,7 @@ namespace Mathematics
     public:
         using ClassType = DistanceLine2Line2Tool<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector2 = Vector2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
 

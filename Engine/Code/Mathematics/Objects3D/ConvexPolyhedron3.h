@@ -29,7 +29,7 @@ namespace Mathematics
         using ClassType = ConvexPolyhedron3<Real>;
         using ParentType = Polyhedron3<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Plane3 = Plane3<Real>;
 
         // 该Plane表示Dot(N,X) = c。
@@ -76,11 +76,11 @@ namespace Mathematics
         // 其有符号的距离满足d < 0，数值舍入误差会产生不正确凸性测试，
         // 所以一个小的负阈值t可能通过该函数，
         // 在这种情况下，距离测试会变成d < t < 0。
-        NODISCARD bool IsConvex(Real threshold = -Math::GetZeroTolerance()) const;
+        NODISCARD bool IsConvex(Real threshold = -MathType::GetZeroTolerance()) const;
 
         // 点在多面体的测试，在点和平面的面，在n个顶点之间查询执行，为O(n)算法。
         // 这不是最优算法。可将基本BSP算法用于这个类。这是一个O(log n)的算法。
-        NODISCARD bool Contains(const Vector3& point, Real threshold = -Math::GetZeroTolerance()) const;
+        NODISCARD bool Contains(const Vector3& point, Real threshold = -MathType::GetZeroTolerance()) const;
 
     private:
         void InitPlanes();

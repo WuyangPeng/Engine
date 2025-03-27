@@ -26,12 +26,12 @@ namespace Mathematics
         using ClassType = Ray3<Real>;
 
         using Vector3 = Vector3<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         // 射线表示为P+t*D，其中P是线原点，D是单位长度的方向向量，t >= 0。
         // 用户必须确保D是单位长度。
-        Ray3(const Vector3& origin, const Vector3& direction, Real epsilon = Math::GetZeroTolerance()) noexcept;
+        Ray3(const Vector3& origin, const Vector3& direction, Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

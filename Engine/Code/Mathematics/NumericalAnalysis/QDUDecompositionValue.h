@@ -23,7 +23,7 @@ namespace Mathematics
         using ClassType = QDUDecompositionValue<Real>;
 
         using Matrix3 = Matrix3<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         explicit QDUDecompositionValue(const Matrix3& matrix);

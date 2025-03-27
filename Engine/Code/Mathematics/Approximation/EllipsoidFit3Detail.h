@@ -40,29 +40,29 @@ void Mathematics::EllipsoidFit3<Real>::Fit3()
 
     auto angle = MatrixToAngles(rotate);
 
-    Angle extent{ extent0 * Math::FAbs(rotate.template GetValue<0, 0>()) + extent1 * Math::FAbs(rotate.template GetValue<0, 1>()) + extent2 * Math::FAbs(rotate.template GetValue<0, 2>()),
-                  extent0 * Math::FAbs(rotate.template GetValue<1, 0>()) + extent1 * Math::FAbs(rotate.template GetValue<1, 1>()) + extent2 * Math::FAbs(rotate.template GetValue<1, 2>()),
-                  extent0 * Math::FAbs(rotate.template GetValue<2, 0>()) + extent1 * Math::FAbs(rotate.template GetValue<2, 1>()) + extent2 * Math::FAbs(rotate.template GetValue<2, 2>()) };
+    Angle extent{ extent0 * MathType::FAbs(rotate.template GetValue<0, 0>()) + extent1 * MathType::FAbs(rotate.template GetValue<0, 1>()) + extent2 * MathType::FAbs(rotate.template GetValue<0, 2>()),
+                  extent0 * MathType::FAbs(rotate.template GetValue<1, 0>()) + extent1 * MathType::FAbs(rotate.template GetValue<1, 1>()) + extent2 * MathType::FAbs(rotate.template GetValue<1, 2>()),
+                  extent0 * MathType::FAbs(rotate.template GetValue<2, 0>()) + extent1 * MathType::FAbs(rotate.template GetValue<2, 1>()) + extent2 * MathType::FAbs(rotate.template GetValue<2, 2>()) };
 
-    Angle begin{ Math::GetRational(1, 2) * extent0,
-                 Math::GetRational(1, 2) * extent1,
-                 Math::GetRational(1, 2) * extent2,
+    Angle begin{ MathType::GetRational(1, 2) * extent0,
+                 MathType::GetRational(1, 2) * extent1,
+                 MathType::GetRational(1, 2) * extent2,
                  center.GetX() - extent.at(0),
                  center.GetY() - extent.at(1),
                  center.GetZ() - extent.at(2),
-                 -Math::GetPI(),
-                 Math::GetValue(0),
-                 Math::GetValue(0) };
+                 -MathType::GetPI(),
+                 MathType::GetValue(0),
+                 MathType::GetValue(0) };
 
-    Angle end{ Math::GetValue(2) * extent0,
-               Math::GetValue(2) * extent1,
-               Math::GetValue(2) * extent2,
+    Angle end{ MathType::GetValue(2) * extent0,
+               MathType::GetValue(2) * extent1,
+               MathType::GetValue(2) * extent2,
                center.GetX() + extent.at(0),
                center.GetY() + extent.at(1),
                center.GetZ() + extent.at(2),
-               Math::GetPI(),
-               Math::GetPI(),
-               Math::GetPI() };
+               MathType::GetPI(),
+               MathType::GetPI(),
+               MathType::GetPI() };
 
     Angle initial{ extent0,
                    extent1,
@@ -141,7 +141,7 @@ Real Mathematics::EllipsoidFit3<Real>::Energy(const Angle& input, const Ellipsoi
     const Ellipsoid3<Real> ellipsoid{ Vector3::GetZero(), Vector3::GetUnitX(), Vector3::GetUnitY(), Vector3::GetUnitZ(), input[0] / maxValue, input[1] / maxValue, input[2] / maxValue };
 
     // 变换点到中心C和旋转Real的列的坐标系统
-    auto energy = Math::GetValue(0);
+    auto energy = MathType::GetValue(0);
 
     const auto numPoints = userData->GetNumPoint();
 
@@ -179,23 +179,23 @@ typename Mathematics::EllipsoidFit3<Real>::Angle Mathematics::EllipsoidFit3<Real
     Angle angle(3);
     angle[2] = extract.GetAngle();
 
-    if (Math::GetValue(-1) < axis.GetZ())
+    if (MathType::GetValue(-1) < axis.GetZ())
     {
-        if (axis.GetZ() < Math::GetValue(1))
+        if (axis.GetZ() < MathType::GetValue(1))
         {
-            angle[0] = Math::ATan2(axis.GetY(), axis.GetX());
-            angle[1] = Math::ACos(axis.GetZ());
+            angle[0] = MathType::ATan2(axis.GetY(), axis.GetX());
+            angle[1] = MathType::ACos(axis.GetZ());
         }
         else
         {
-            angle[0] = Math::GetValue(0);
-            angle[1] = Math::GetValue(0);
+            angle[0] = MathType::GetValue(0);
+            angle[1] = MathType::GetValue(0);
         }
     }
     else
     {
-        angle[0] = Math::GetValue(0);
-        angle[1] = Math::GetPI();
+        angle[0] = MathType::GetValue(0);
+        angle[1] = MathType::GetPI();
     }
 
 #include SYSTEM_WARNING_POP
@@ -212,10 +212,10 @@ Mathematics::Matrix3<Real> Mathematics::EllipsoidFit3<Real>::AnglesToMatrix(cons
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-    const auto cs0 = Math::Cos(angle[0]);
-    const auto sn0 = Math::Sin(angle[0]);
-    const auto cs1 = Math::Cos(angle[1]);
-    const auto sn1 = Math::Sin(angle[1]);
+    const auto cs0 = MathType::Cos(angle[0]);
+    const auto sn0 = MathType::Sin(angle[0]);
+    const auto cs1 = MathType::Cos(angle[1]);
+    const auto sn1 = MathType::Sin(angle[1]);
 
     const Vector3 axis{ cs0 * sn1, sn0 * sn1, cs1 };
 
@@ -229,7 +229,7 @@ Mathematics::Matrix3<Real> Mathematics::EllipsoidFit3<Real>::AnglesToMatrix(cons
 template <typename Real>
 bool Mathematics::EllipsoidFit3<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= exactly)
+    if (MathType::GetValue(0) <= exactly)
         return true;
     else
         return false;

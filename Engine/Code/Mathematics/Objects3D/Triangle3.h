@@ -28,7 +28,7 @@ namespace Mathematics
 
         using ClassType = Triangle3<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector3 = Vector3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
         using ContainerType = std::vector<Vector3>;

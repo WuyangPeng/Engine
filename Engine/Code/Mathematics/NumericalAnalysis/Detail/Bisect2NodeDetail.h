@@ -137,7 +137,7 @@ bool Mathematics::Bisect2Node<Real>::IsFunctionResult0SameSign() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto symbol = Math::Sign(nodeFunctionResult0);
+    const auto symbol = MathType::Sign(nodeFunctionResult0);
 
     if (symbol == NumericalValueSymbol::Zero)
     {
@@ -146,7 +146,7 @@ bool Mathematics::Bisect2Node<Real>::IsFunctionResult0SameSign() const noexcept
 
     if (xNext != nullptr)
     {
-        if (Math::Sign(xNext->GetFunctionResult0()) != symbol)
+        if (MathType::Sign(xNext->GetFunctionResult0()) != symbol)
         {
             return false;
         }
@@ -154,14 +154,14 @@ bool Mathematics::Bisect2Node<Real>::IsFunctionResult0SameSign() const noexcept
         {
             auto xNextYNext = xNext->GetYNext();
 
-            if (xNextYNext != nullptr && Math::Sign(xNextYNext->GetFunctionResult0()) != symbol)
+            if (xNextYNext != nullptr && MathType::Sign(xNextYNext->GetFunctionResult0()) != symbol)
             {
                 return false;
             }
         }
     }
 
-    if (yNext != nullptr && Math::Sign(yNext->GetFunctionResult0()) != symbol)
+    if (yNext != nullptr && MathType::Sign(yNext->GetFunctionResult0()) != symbol)
     {
         return false;
     }
@@ -174,7 +174,7 @@ bool Mathematics::Bisect2Node<Real>::IsFunctionResult1SameSign() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto symbol = Math::Sign(nodeFunctionResult1);
+    const auto symbol = MathType::Sign(nodeFunctionResult1);
 
     if (symbol == NumericalValueSymbol::Zero)
     {
@@ -183,7 +183,7 @@ bool Mathematics::Bisect2Node<Real>::IsFunctionResult1SameSign() const noexcept
 
     if (xNext != nullptr)
     {
-        if (Math::Sign(xNext->GetFunctionResult1()) != symbol)
+        if (MathType::Sign(xNext->GetFunctionResult1()) != symbol)
         {
             return false;
         }
@@ -191,14 +191,14 @@ bool Mathematics::Bisect2Node<Real>::IsFunctionResult1SameSign() const noexcept
         {
             auto xNextYNext = xNext->GetYNext();
 
-            if (xNextYNext != nullptr && Math::Sign(xNextYNext->GetFunctionResult1()) != symbol)
+            if (xNextYNext != nullptr && MathType::Sign(xNextYNext->GetFunctionResult1()) != symbol)
             {
                 return false;
             }
         }
     }
 
-    if (yNext != nullptr && Math::Sign(yNext->GetFunctionResult1()) != symbol)
+    if (yNext != nullptr && MathType::Sign(yNext->GetFunctionResult1()) != symbol)
     {
         return false;
     }

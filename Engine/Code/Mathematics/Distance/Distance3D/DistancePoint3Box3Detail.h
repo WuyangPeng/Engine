@@ -65,8 +65,8 @@ typename Mathematics::DistancePoint3Box3<Real>::DistanceResult Mathematics::Dist
     Vector3 closest{ Vector3Tools::DotProduct(difference, box.GetAxis0()),
                      Vector3Tools::DotProduct(difference, box.GetAxis1()),
                      Vector3Tools::DotProduct(difference, box.GetAxis2()) };
-    auto squaredDistance = Math::GetValue(0);
-    auto delta = Math::GetValue(0);
+    auto squaredDistance = MathType::GetValue(0);
+    auto delta = MathType::GetValue(0);
 
     if (closest.GetX() < -box.GetExtent0())
     {
@@ -108,7 +108,7 @@ typename Mathematics::DistancePoint3Box3<Real>::DistanceResult Mathematics::Dist
     }
 
     return DistanceResult{ squaredDistance,
-                           Math::GetValue(0),
+                           MathType::GetValue(0),
                            point,
                            box.GetCenter() + closest.GetX() * box.GetAxis0() + closest.GetY() * box.GetAxis1() + closest.GetZ() * box.GetAxis2() };
 }

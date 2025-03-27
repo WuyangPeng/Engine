@@ -25,13 +25,13 @@ namespace Mathematics
         using ClassType = DynamicFindIntersectorBox2Circle2<Real>;
         using ParentType = DynamicIntersector<Real, Vector2>;
 
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
         using Box2 = Box2<Real>;
         using Circle2 = Circle2<Real>;
         using Vector2 = Vector2<Real>;
 
     public:
-        DynamicFindIntersectorBox2Circle2(const Box2& box, const Circle2& circle, Real tmax, const Vector2& lhsVelocity, const Vector2& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
+        DynamicFindIntersectorBox2Circle2(const Box2& box, const Circle2& circle, Real tmax, const Vector2& lhsVelocity, const Vector2& rhsVelocity, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

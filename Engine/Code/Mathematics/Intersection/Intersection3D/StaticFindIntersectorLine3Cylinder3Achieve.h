@@ -112,7 +112,7 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
     const auto uVector = generateComplementBasis.GetUVector();
     const auto vVector = generateComplementBasis.GetVVector();
 
-    auto halfHeight = Math::GetRational(1, 2) * cylinder.GetHeight();
+    auto halfHeight = MathType::GetRational(1, 2) * cylinder.GetHeight();
     auto radiusSqr = cylinder.GetRadius() * cylinder.GetRadius();
 
     // 将输入线原点转换为圆柱坐标
@@ -122,18 +122,18 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
     // 获取传入线的单位长度方向的z值（以圆柱坐标表示）。
     auto dirZ = Vector3Tools::DotProduct(wVector, dir);
 
-    if (Math::GetValue(1) - Math::GetZeroTolerance() <= Math::FAbs(dirZ))
+    if (MathType::GetValue(1) - MathType::GetZeroTolerance() <= MathType::FAbs(dirZ))
     {
         // 该线平行于圆柱轴。 确定该线是否与圆筒端盘相交。
         auto radialSqrDist = radiusSqr - point.GetX() * point.GetX() - point.GetY() * point.GetY();
-        if (radialSqrDist < Math::GetValue(0))
+        if (radialSqrDist < MathType::GetValue(0))
         {
             // 线在圆柱体外面，没有相交。
             return findShared;
         }
 
         // 线与圆筒端盘相交。
-        if (Math::GetValue(0) < dirZ)
+        if (MathType::GetValue(0) < dirZ)
         {
             findShared.parameter0 = -point.GetZ() - halfHeight;
             findShared.parameter1 = -point.GetZ() + halfHeight;
@@ -151,10 +151,10 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
     // 将输入线单位长度方向转换为圆柱坐标
     const Vector3 direction{ Vector3Tools::DotProduct(uVector, dir), Vector3Tools::DotProduct(vVector, dir), dirZ };
 
-    if (Math::FAbs(direction.GetZ()) <= Math::GetZeroTolerance())
+    if (MathType::FAbs(direction.GetZ()) <= MathType::GetZeroTolerance())
     {
         // 该线垂直于圆柱轴。
-        if (halfHeight < Math::FAbs(point.GetZ()))
+        if (halfHeight < MathType::FAbs(point.GetZ()))
         {
             // 线在圆筒端盘的平面之外。
             return findShared;
@@ -167,16 +167,16 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
         auto a1 = point.GetX() * direction.GetX() + point.GetY() * direction.GetY();
         auto a2 = direction.GetX() * direction.GetX() + direction.GetY() * direction.GetY();
         auto discr = a1 * a1 - a0 * a2;
-        if (discr < Math::GetValue(0))
+        if (discr < MathType::GetValue(0))
         {
             // 线不与圆柱相交。
             return findShared;
         }
-        else if (Math::GetZeroTolerance() < discr)
+        else if (MathType::GetZeroTolerance() < discr)
         {
             // 线在两个位置与圆柱相交。
-            auto root = Math::Sqrt(discr);
-            auto inv = Math::GetValue(1) / a2;
+            auto root = MathType::Sqrt(discr);
+            auto inv = MathType::GetValue(1) / a2;
             findShared.parameter0 = (-a1 - root) * inv;
             findShared.parameter1 = (-a1 + root) * inv;
             findShared.quantity = 2;
@@ -238,15 +238,15 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
     auto a1 = point.GetX() * direction.GetX() + point.GetY() * direction.GetY();
     auto a2 = direction.GetX() * direction.GetX() + direction.GetY() * direction.GetY();
     auto discr = a1 * a1 - a0 * a2;
-    if (discr < Math::GetValue(0))
+    if (discr < MathType::GetValue(0))
     {
         // 线不与圆筒壁相交。
         MATHEMATICS_ASSERTION_0(quantity == 0, "意外状况\n");
         return findShared;
     }
-    else if (Math::GetZeroTolerance() < discr)
+    else if (MathType::GetZeroTolerance() < discr)
     {
-        auto root = Math::Sqrt(discr);
+        auto root = MathType::Sqrt(discr);
         auto tValue = (-a1 - root) / a2;
         if (t0 <= t1)
         {

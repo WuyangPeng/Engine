@@ -17,7 +17,7 @@
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 Mathematics::Lozenge3<Real>::Lozenge3() noexcept
-    : rectangle{}, radius{ Math::GetValue(1) }
+    : rectangle{}, radius{ MathType::GetValue(1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -44,7 +44,7 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 bool Mathematics::Lozenge3<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) < radius)
+    if (MathType::GetValue(0) < radius)
         return true;
     else
         return false;

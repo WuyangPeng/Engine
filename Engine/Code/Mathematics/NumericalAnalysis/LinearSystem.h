@@ -41,7 +41,7 @@ namespace Mathematics
 
         using ClassType = LinearSystem<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using RealContainer = std::vector<Real>;
         using Vector2 = std::array<Real, 2>;
         using Matrix2 = std::array<Vector2, 2>;
@@ -61,7 +61,7 @@ namespace Mathematics
         using AlgebraSparseMatrix = std::map<std::array<int, 2>, Real>;
 
     public:
-        explicit LinearSystem(Real zeroTolerance = Math::GetZeroTolerance()) noexcept;
+        explicit LinearSystem(Real zeroTolerance = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

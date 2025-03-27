@@ -70,7 +70,7 @@ void Mathematics::CubicPolynomialCurve3<Real>::Tessellate(int level)
     {
         ip.xuu.at(0) = this->GetSecondDerivative(this->GetMinTime());
         ip.xuu.at(1) = this->GetSecondDerivative(this->GetMaxTime());
-        Subdivide(--level, Math::GetRational(1, 4), vertices, ip);
+        Subdivide(--level, MathType::GetRational(1, 4), vertices, ip);
     }
 }
 
@@ -79,13 +79,13 @@ void Mathematics::CubicPolynomialCurve3<Real>::Subdivide(int level, Real dsqr, s
 {
     const auto iMid = (ip.i0 + ip.i1) >> 1;
 
-    auto xuuM = Math::GetRational(1, 2) * (ip.xuu.at(0) + ip.xuu.at(1));
-    x.at(iMid) = Math::GetRational(1, 2) * (x.at(ip.i0) + x.at(ip.i1) - dsqr * xuuM);
+    auto xuuM = MathType::GetRational(1, 2) * (ip.xuu.at(0) + ip.xuu.at(1));
+    x.at(iMid) = MathType::GetRational(1, 2) * (x.at(ip.i0) + x.at(ip.i1) - dsqr * xuuM);
 
     if (level > 0)
     {
         --level;
-        dsqr *= Math::GetRational(1, 4);
+        dsqr *= MathType::GetRational(1, 4);
 
         IntervalParameters subIP{};
 

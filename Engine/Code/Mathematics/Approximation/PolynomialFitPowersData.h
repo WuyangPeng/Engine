@@ -30,7 +30,7 @@ namespace Mathematics
         static constexpr auto size = S;
         using ClassType = PolynomialFitPowersData<Real, size>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Coefficients = std::vector<Real>;
         using VariableLengthVector = VariableLengthVector<Real>;
         using VariableMatrix = VariableMatrix<Real>;

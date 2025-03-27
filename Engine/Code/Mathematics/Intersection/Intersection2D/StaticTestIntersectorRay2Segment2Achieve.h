@@ -38,7 +38,7 @@ void Mathematics::StaticTestIntersectorRay2Segment2<Real>::Test()
     if (intersectionType == IntersectionType::Point)
     {
         // 测试直线-直线的相交点是否在射线和线段上。
-        if (0 <= classify.GetParameter0() && Math::FAbs(classify.GetParameter1()) <= segment.GetExtent() + intervalThreshold)
+        if (0 <= classify.GetParameter0() && MathType::FAbs(classify.GetParameter1()) <= segment.GetExtent() + intervalThreshold)
         {
             quantity = 1;
         }

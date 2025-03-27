@@ -113,7 +113,7 @@ typename Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Intersectio
     {
         auto diff = Vector2Tools::DotProduct(axis, value) - dot;
         dotProduct.emplace_back(diff);
-        if (Math::GetValue(0) < diff)
+        if (MathType::GetValue(0) < diff)
         {
             ++positive;
             if (firstIndex < 0)
@@ -121,7 +121,7 @@ typename Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Intersectio
                 firstIndex = index;
             }
         }
-        else if (diff < Math::GetValue(0))
+        else if (diff < MathType::GetValue(0))
         {
             ++negative;
         }
@@ -146,7 +146,7 @@ typename Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Intersectio
                 result.emplace_back(intersection.at(currentIndex) + t * (intersection.at(previousIndex) - intersection.at(currentIndex)));
 
                 // 顶点在线的正侧。
-                while (currentIndex < quantity && Math::GetValue(0) < dotProduct.at(currentIndex))
+                while (currentIndex < quantity && MathType::GetValue(0) < dotProduct.at(currentIndex))
                 {
                     result.emplace_back(intersection.at(currentIndex++));
                 }
@@ -168,7 +168,7 @@ typename Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Intersectio
             {
                 // 顶点在行的正侧。
                 auto currentIndex = 0;
-                while (currentIndex < quantity && Math::GetValue(0) < dotProduct.at(currentIndex))
+                while (currentIndex < quantity && MathType::GetValue(0) < dotProduct.at(currentIndex))
                 {
                     result.emplace_back(intersection.at(currentIndex++));
                 }
@@ -179,7 +179,7 @@ typename Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Intersectio
                 result.emplace_back(intersection.at(currentIndex) + t * (intersection.at(previousIndex) - intersection.at(currentIndex)));
 
                 // 跳过负侧的顶点。
-                while (currentIndex < quantity && dotProduct.at(currentIndex) <= Math::GetValue(0))
+                while (currentIndex < quantity && dotProduct.at(currentIndex) <= MathType::GetValue(0))
                 {
                     ++currentIndex;
                 }
@@ -192,7 +192,7 @@ typename Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Intersectio
                     result.emplace_back(intersection.at(currentIndex) + t * (intersection.at(previousIndex) - intersection.at(currentIndex)));
 
                     // 顶点在线的正侧。
-                    while (currentIndex < quantity && Math::GetValue(0) < dotProduct.at(currentIndex))
+                    while (currentIndex < quantity && MathType::GetValue(0) < dotProduct.at(currentIndex))
                     {
                         result.emplace_back(intersection.at(currentIndex++));
                     }

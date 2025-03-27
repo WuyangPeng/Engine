@@ -37,7 +37,7 @@ namespace Mathematics
 
         using ClassType = Frustum3<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector3 = Vector3<Real>;
         using AlgebraVector3 = Algebra::Vector3<Real>;
         using VerticesType = std::vector<Vector3>;
@@ -65,7 +65,7 @@ namespace Mathematics
                  Real directionMax,
                  Real upBound,
                  Real rightBound,
-                 Real epsilon = Math::GetZeroTolerance()) noexcept;
+                 Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         Frustum3(const AlgebraVector3& origin,
                  const AlgebraVector3& directionVector,
@@ -75,7 +75,7 @@ namespace Mathematics
                  Real directionMax,
                  Real upBound,
                  Real rightBound,
-                 Real epsilon = Math::GetZeroTolerance());
+                 Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 

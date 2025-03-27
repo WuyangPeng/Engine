@@ -59,7 +59,7 @@ void Mathematics::StaticTestIntersectorLine3Sphere3<Real>::Test()
     const auto a0 = Vector3Tools::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
     const auto a1 = Vector3Tools::DotProduct(line.GetDirection(), diff);
     const auto discr = a1 * a1 - a0;
-    if (Math::GetValue(0) <= discr)
+    if (MathType::GetValue(0) <= discr)
     {
         this->SetIntersectionType(IntersectionType::Point);
     }

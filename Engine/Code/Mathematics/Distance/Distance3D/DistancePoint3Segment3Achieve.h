@@ -82,10 +82,10 @@ typename Mathematics::DistancePoint3Segment3<Real>::DistanceResult Mathematics::
     difference = rhsClosestPoint - point;
 
     return DistanceResult{ Vector3Tools::GetLengthSquared(difference),
-                           Math::GetValue(0),
+                           MathType::GetValue(0),
                            point,
                            rhsClosestPoint,
-                           Math::GetValue(0),
+                           MathType::GetValue(0),
                            param };
 }
 

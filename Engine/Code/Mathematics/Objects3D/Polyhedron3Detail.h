@@ -158,7 +158,7 @@ Real Mathematics::Polyhedron3<Real>::ComputeSurfaceArea() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
-    auto surfaceArea = Math::GetValue(0);
+    auto surfaceArea = MathType::GetValue(0);
 
     for (auto i = 0; i < GetNumTriangles(); ++i)
     {
@@ -175,7 +175,7 @@ Real Mathematics::Polyhedron3<Real>::ComputeSurfaceArea() const
         surfaceArea += Vector3ToolsType::GetLength(cross);
     }
 
-    surfaceArea *= Math::GetRational(1, 2);
+    surfaceArea *= MathType::GetRational(1, 2);
 
     return surfaceArea;
 }
@@ -185,7 +185,7 @@ Real Mathematics::Polyhedron3<Real>::ComputeVolume() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
-    auto volume = Math::GetValue(0);
+    auto volume = MathType::GetValue(0);
 
     for (auto i = 0; i < GetNumTriangles(); ++i)
     {
@@ -202,7 +202,7 @@ Real Mathematics::Polyhedron3<Real>::ComputeVolume() const
         volume += Vector3ToolsType::DotProduct(vertices.at(v0), cross);
     }
 
-    volume /= Math::GetValue(6);
+    volume /= MathType::GetValue(6);
 
     return volume;
 }

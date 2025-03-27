@@ -25,7 +25,7 @@ namespace Mathematics
 
         using Vector3 = Vector3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         DistanceLine3Line3Tool(const Vector3& lhsOrigin, const Vector3& lhsDirection, const Vector3& rhsOrigin, const Vector3& rhsDirection);

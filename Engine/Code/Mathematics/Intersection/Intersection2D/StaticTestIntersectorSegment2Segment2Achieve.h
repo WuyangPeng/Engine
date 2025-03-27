@@ -39,8 +39,8 @@ void Mathematics::StaticTestIntersector<Mathematics::Segment2<Real>, Mathematics
     if (intersectionType == IntersectionType::Point)
     {
         // 测试直线-直线的相交点是否在线段上。
-        if (Math::FAbs(classify.GetParameter0()) <= lhsSegment.GetExtent() + intervalThreshold &&
-            Math::FAbs(classify.GetParameter1()) <= rhsSegment.GetExtent() + intervalThreshold)
+        if (MathType::FAbs(classify.GetParameter0()) <= lhsSegment.GetExtent() + intervalThreshold &&
+            MathType::FAbs(classify.GetParameter1()) <= rhsSegment.GetExtent() + intervalThreshold)
         {
             quantity = 1;
         }

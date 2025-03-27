@@ -117,7 +117,7 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::Find()
     // 获取相对于线段的三角形速度。
     auto relVelocity = rhsVelocity - lhsVelocity;
 
-    this->SetContactTime(Math::GetValue(0));
+    this->SetContactTime(MathType::GetValue(0));
 
     // 测试三角形法线
     const auto normal = Vector3Tools::CrossProduct(edge0, edge1);
@@ -141,7 +141,7 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::Find()
     auto directionSqrLength = Vector3Tools::GetLengthSquared(directionU);
     auto normalUSqrLength = Vector3Tools::GetLengthSquared(normalU);
     auto normalVSqrLength = Vector3Tools::GetLengthSquared(normal);
-    auto oneMinusEpsilon = Math::GetValue(1) - Math::GetZeroTolerance();
+    auto oneMinusEpsilon = MathType::GetValue(1) - MathType::GetZeroTolerance();
 
     // 平行
     if (oneMinusEpsilon * normalVSqrLength * directionSqrLength < normalUSqrLength)
@@ -204,7 +204,7 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::Find()
         }
     }
 
-    if (contactTime < Math::GetValue(0))
+    if (contactTime < MathType::GetValue(0))
     {
         this->SetContactTime(contactTime);
         this->SetIntersectionType(IntersectionType::Empty);

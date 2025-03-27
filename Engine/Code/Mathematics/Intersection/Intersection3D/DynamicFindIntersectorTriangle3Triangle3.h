@@ -32,7 +32,7 @@ namespace Mathematics
         using Plane3 = Plane3<Real>;
         using Line3 = Line3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
         using Container = std::vector<Vector3>;
 
     public:
@@ -41,7 +41,7 @@ namespace Mathematics
                                                  Real tmax,
                                                  const Vector3& lhsVelocity,
                                                  const Vector3& rhsVelocity,
-                                                 const Real epsilon = Math::GetZeroTolerance());
+                                                 const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

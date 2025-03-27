@@ -96,14 +96,14 @@ void Mathematics::HeightPlaneFit3<Real>::Calculate(const Points& points)
 
     // 计算线性系统的总和。
 
-    auto sumX = Math::GetValue(0);
-    auto sumY = Math::GetValue(0);
-    auto sumZ = Math::GetValue(0);
-    auto sumXX = Math::GetValue(0);
-    auto sumXY = Math::GetValue(0);
-    auto sumXZ = Math::GetValue(0);
-    auto sumYY = Math::GetValue(0);
-    auto sumYZ = Math::GetValue(0);
+    auto sumX = MathType::GetValue(0);
+    auto sumY = MathType::GetValue(0);
+    auto sumZ = MathType::GetValue(0);
+    auto sumXX = MathType::GetValue(0);
+    auto sumXY = MathType::GetValue(0);
+    auto sumXZ = MathType::GetValue(0);
+    auto sumYY = MathType::GetValue(0);
+    auto sumYZ = MathType::GetValue(0);
 
     const auto numPoints = static_cast<Real>(points.size());
 

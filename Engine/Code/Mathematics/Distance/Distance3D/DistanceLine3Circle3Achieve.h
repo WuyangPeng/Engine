@@ -84,9 +84,9 @@ typename Mathematics::DistanceLine3Circle3<Real>::DistanceResult Mathematics::Di
 
     const auto lineCrossNormal = Vector3Tools::CrossProduct(line.GetDirection(), circle.GetNormal());
     const auto dot = Vector3Tools::DotProduct(lineCrossNormal, lineCrossNormal);
-    if (Math::GetValue(0) < dot)
+    if (MathType::GetValue(0) < dot)
     {
-        const auto dotSqrt = Math::Sqrt(dot);
+        const auto dotSqrt = MathType::Sqrt(dot);
         const auto radiusMultiplyDotSqrt = circle.GetRadius() * dotSqrt;
         auto diffCrossNormal = Vector3Tools::CrossProduct(diff, circle.GetNormal());
         const auto lambda = Vector3Tools::DotProduct(-lineCrossNormal, diffCrossNormal) / dot;
@@ -94,15 +94,15 @@ typename Mathematics::DistanceLine3Circle3<Real>::DistanceResult Mathematics::Di
         diffCrossNormal += lambda * lineCrossNormal;
         const auto lineDotDiff = Vector3Tools::DotProduct(line.GetDirection(), diff);
         const auto diffCrossNormalDot = Vector3Tools::DotProduct(diffCrossNormal, diffCrossNormal);
-        if (Math::GetValue(0) < diffCrossNormalDot)
+        if (MathType::GetValue(0) < diffCrossNormalDot)
         {
-            const auto diffCrossNormalDotSqrt = Math::Sqrt(diffCrossNormalDot);
+            const auto diffCrossNormalDotSqrt = MathType::Sqrt(diffCrossNormalDot);
             const auto radiusMultiplyDot = circle.GetRadius() * dot;
             if (diffCrossNormalDotSqrt < radiusMultiplyDot)
             {
-                constexpr auto twoThirds = Math::GetRational(2, 3);
-                auto sHat = Math::Sqrt(Math::Pow(radiusMultiplyDot * diffCrossNormalDot, twoThirds) - diffCrossNormalDot) / dotSqrt;
-                auto gHat = radiusMultiplyDot * sHat / Math::Sqrt(dot * sHat * sHat + diffCrossNormalDot);
+                constexpr auto twoThirds = MathType::GetRational(2, 3);
+                auto sHat = MathType::Sqrt(MathType::Pow(radiusMultiplyDot * diffCrossNormalDot, twoThirds) - diffCrossNormalDot) / dotSqrt;
+                auto gHat = radiusMultiplyDot * sHat / MathType::Sqrt(dot * sHat * sHat + diffCrossNormalDot);
                 auto cutoff = gHat - sHat;
                 if (lineDotDiff <= -cutoff)
                 {
@@ -114,7 +114,7 @@ typename Mathematics::DistanceLine3Circle3<Real>::DistanceResult Mathematics::Di
                     sqrDistance = distanceInfo.sqrDistance;
 
                     auto closestCircle0 = distanceInfo.closestCircle;
-                    if (Math::Approximate(lineDotDiff, -cutoff))
+                    if (MathType::Approximate(lineDotDiff, -cutoff))
                     {
                         auto closestLine1 = line.GetOrigin() + (-sHat + lambda) * line.GetDirection();
                         distanceInfo = SqrDistancePointCircle(closestLine1);
@@ -153,7 +153,7 @@ typename Mathematics::DistanceLine3Circle3<Real>::DistanceResult Mathematics::Di
                     sqrDistance = distanceInfo.sqrDistance;
 
                     auto closestCircle0 = distanceInfo.closestCircle;
-                    if (Math::Approximate(lineDotDiff, cutoff))
+                    if (MathType::Approximate(lineDotDiff, cutoff))
                     {
                         auto closestLine1 = line.GetOrigin() + (+sHat + lambda) * line.GetDirection();
                         distanceInfo = SqrDistancePointCircle(closestLine1);
@@ -185,7 +185,7 @@ typename Mathematics::DistanceLine3Circle3<Real>::DistanceResult Mathematics::Di
                 }
                 else
                 {
-                    if (lineDotDiff <= Math::GetValue(0))
+                    if (lineDotDiff <= MathType::GetValue(0))
                     {
                         auto bisect = BisectF(lineDotDiff, radiusMultiplyDot, dot, diffCrossNormalDot, -lineDotDiff, -lineDotDiff + radiusMultiplyDotSqrt);
 
@@ -251,7 +251,7 @@ typename Mathematics::DistanceLine3Circle3<Real>::DistanceResult Mathematics::Di
             }
             else
             {
-                if (lineDotDiff < Math::GetValue(0))
+                if (lineDotDiff < MathType::GetValue(0))
                 {
                     auto bisect = BisectF(lineDotDiff, radiusMultiplyDot, dot, diffCrossNormalDot, -lineDotDiff, -lineDotDiff + radiusMultiplyDotSqrt);
 
@@ -265,7 +265,7 @@ typename Mathematics::DistanceLine3Circle3<Real>::DistanceResult Mathematics::Di
 
                     closestCircle.emplace_back(closestCircle0);
                 }
-                else if (Math::GetValue(0) < lineDotDiff)
+                else if (MathType::GetValue(0) < lineDotDiff)
                 {
                     auto bisect = BisectF(lineDotDiff, radiusMultiplyDot, dot, diffCrossNormalDot, -lineDotDiff - radiusMultiplyDotSqrt, -lineDotDiff);
 
@@ -295,7 +295,7 @@ typename Mathematics::DistanceLine3Circle3<Real>::DistanceResult Mathematics::Di
         }
         else
         {
-            if (lineDotDiff < Math::GetValue(0))
+            if (lineDotDiff < MathType::GetValue(0))
             {
                 auto bisect = -lineDotDiff + radiusMultiplyDotSqrt;
 
@@ -309,7 +309,7 @@ typename Mathematics::DistanceLine3Circle3<Real>::DistanceResult Mathematics::Di
 
                 closestCircle.emplace_back(closestCircle0);
             }
-            else if (Math::GetValue(0) < lineDotDiff)
+            else if (MathType::GetValue(0) < lineDotDiff)
             {
                 auto bisect = -lineDotDiff - radiusMultiplyDotSqrt;
 
@@ -359,7 +359,7 @@ typename Mathematics::DistanceLine3Circle3<Real>::DistanceResult Mathematics::Di
         closestCircle.emplace_back(closestCircle0);
     }
 
-    return DistanceResult{ sqrDistance, Math::GetValue(0), closestLine, closestCircle };
+    return DistanceResult{ sqrDistance, MathType::GetValue(0), closestLine, closestCircle };
 }
 
 template <typename Real>
@@ -376,7 +376,7 @@ typename Mathematics::DistanceLine3Circle3<Real>::DistanceInfo Mathematics::Dist
     auto lineMinusCenter = closestLine - circle.GetCenter();
     auto dot = lineMinusCenter - Vector3Tools::DotProduct(circle.GetNormal(), lineMinusCenter) * circle.GetNormal();
     auto dotLength = Vector3Tools::GetLength(dot);
-    if (Math::GetValue(0) < dotLength)
+    if (MathType::GetValue(0) < dotLength)
     {
         numClosestCircle = 1;
         closestCircle = circle.GetCenter() + circle.GetRadius() * dot / dotLength;
@@ -401,14 +401,14 @@ Real Mathematics::DistanceLine3Circle3<Real>::BisectF(Real lineDotDiff, Real rad
 
     for (auto i = 0; i < maximumIterations; ++i)
     {
-        s = (Math::GetRational(1, 2)) * (smin + smax);
-        auto f = s + lineDotDiff - radiusMultiplyDot * s / Math::Sqrt(dot * s * s + diffCrossNormalDot);
-        if (Math::Approximate(f, Math::GetValue(0)) || Math::Approximate(s, smin) || Math::Approximate(s, smax))
+        s = (MathType::GetRational(1, 2)) * (smin + smax);
+        auto f = s + lineDotDiff - radiusMultiplyDot * s / MathType::Sqrt(dot * s * s + diffCrossNormalDot);
+        if (MathType::Approximate(f, MathType::GetValue(0)) || MathType::Approximate(s, smin) || MathType::Approximate(s, smax))
         {
             return s;
         }
 
-        if (Math::GetValue(0) < f)
+        if (MathType::GetValue(0) < f)
         {
             smax = s;
         }

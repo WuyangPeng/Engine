@@ -62,7 +62,7 @@ void Mathematics::DynamicTestIntersectorSegment3Box3<Real>::Test()
     // 获取相对于线段的框速度。
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
-    auto contactTime = Math::GetValue(0);
+    auto contactTime = MathType::GetValue(0);
 
     // 测试盒法线。
     for (auto i = 0; i < 3; ++i)

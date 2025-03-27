@@ -35,7 +35,7 @@ namespace Mathematics
         using Bisect3 = Bisect3<Real>;
         using Bisect3Node = Bisect3Node<Real>;
         using Bisect3NodeSharedPtr = std::shared_ptr<Bisect3Node>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         explicit Bisect3Storage(const Bisect3& bisect) noexcept;

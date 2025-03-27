@@ -17,7 +17,7 @@
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 Mathematics::Cylinder3<Real>::Cylinder3() noexcept
-    : axis{ Vector3::GetZero(), Vector3::GetUnitX() }, radius{ Math::GetValue(1) }, height{ Math::GetValue(1) }
+    : axis{ Vector3::GetZero(), Vector3::GetUnitX() }, radius{ MathType::GetValue(1) }, height{ MathType::GetValue(1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -46,7 +46,7 @@ bool Mathematics::Cylinder3<Real>::IsValid() const noexcept
 {
     try
     {
-        if (Math::GetValue(0) <= radius && (Math::GetValue(0) <= height || Math::Approximate(height, Math::GetValue(-1))))
+        if (MathType::GetValue(0) <= radius && (MathType::GetValue(0) <= height || MathType::Approximate(height, MathType::GetValue(-1))))
             return true;
         else
             return false;
@@ -101,7 +101,7 @@ void Mathematics::Cylinder3<Real>::MakeInfiniteCylinder() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    height = Math::GetValue(-1);
+    height = MathType::GetValue(-1);
 }
 
 template <typename Real>

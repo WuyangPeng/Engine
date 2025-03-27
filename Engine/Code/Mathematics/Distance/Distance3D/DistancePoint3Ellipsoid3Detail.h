@@ -70,7 +70,7 @@ typename Mathematics::DistancePoint3Ellipsoid3<Real>::DistanceResult Mathematics
     const auto lhsClosestPoint = point;
     const auto rhsClosestPoint = ellipsoid.GetCenter() + outputVector.GetX() * ellipsoid.GetAxis0() + outputVector.GetY() * ellipsoid.GetAxis1() + outputVector.GetZ() * ellipsoid.GetAxis2();
 
-    return DistanceResult{ squaredDistance, Math::GetValue(0), lhsClosestPoint, rhsClosestPoint };
+    return DistanceResult{ squaredDistance, MathType::GetValue(0), lhsClosestPoint, rhsClosestPoint };
 }
 
 template <typename Real>

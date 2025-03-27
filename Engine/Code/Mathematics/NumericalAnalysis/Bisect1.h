@@ -26,12 +26,12 @@ namespace Mathematics
 
         using ClassType = Bisect1<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Function = Real (*)(Real);
         using Bisect1Root = Bisect1Root<Real>;
 
     public:
-        Bisect1(Function function, int maxLevel, Real tolerance = Math::GetZeroTolerance()) noexcept;
+        Bisect1(Function function, int maxLevel, Real tolerance = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

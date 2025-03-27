@@ -94,7 +94,7 @@ void Mathematics::QuadraticFit2<Real>::Calculate(const Points& points)
 
     // 对于精确配合，数字舍入误差可能使最小特征值仅仅略为负值。
     // 返回的绝对值，因为应用程序可能依赖的返回值是非负数。
-    eigenValue = Math::FAbs(eigenSystem.GetEigenvalue(0));
+    eigenValue = MathType::FAbs(eigenSystem.GetEigenvalue(0));
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -102,7 +102,7 @@ void Mathematics::QuadraticFit2<Real>::Calculate(const Points& points)
 template <typename Real>
 bool Mathematics::QuadraticFit2<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= eigenValue)
+    if (MathType::GetValue(0) <= eigenValue)
         return true;
     else
         return false;

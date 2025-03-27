@@ -39,7 +39,7 @@ void Mathematics::StaticFindIntersectorRay2Segment2<Real>::Find()
     if (intersectionType == IntersectionType::Point)
     {
         // 测试直线-直线的相交点是否在射线和线段上。
-        if (0 <= classify.GetParameter0() && Math::FAbs(classify.GetParameter1()) <= segment.GetExtent() + intervalThreshold)
+        if (0 <= classify.GetParameter0() && MathType::FAbs(classify.GetParameter1()) <= segment.GetExtent() + intervalThreshold)
         {
             quantity = 1;
             point0 = ray.GetOrigin() + classify.GetParameter0() * ray.GetDirection();
@@ -61,7 +61,7 @@ void Mathematics::StaticFindIntersectorRay2Segment2<Real>::Find()
         auto tmax = dotProduct + segment.GetExtent();
 
         // 计算区间 [0,+infinity) 和 [tmin,tmax]相交点。
-        StaticFindIntersector1<Real> calc{ Math::GetValue(0), Math::maxReal, tmin, tmax, dotThreshold };
+        StaticFindIntersector1<Real> calc{ MathType::GetValue(0), MathType::maxReal, tmin, tmax, dotThreshold };
 
         quantity = calc.GetNumIntersections();
 

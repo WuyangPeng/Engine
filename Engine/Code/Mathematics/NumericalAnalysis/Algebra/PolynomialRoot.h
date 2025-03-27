@@ -25,7 +25,7 @@ namespace Mathematics::Algebra
     public:
         using ClassType = PolynomialRoot<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         NODISCARD static PolynomialRoot CreateZero() noexcept(noexcept(Real::CreateZero())) requires(!std::is_floating_point_v<Real>);

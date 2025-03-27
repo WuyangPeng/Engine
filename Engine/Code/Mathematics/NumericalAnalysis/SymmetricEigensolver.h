@@ -102,7 +102,7 @@ namespace Mathematics
     public:
         using ClassType = SymmetricEigensolver<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using GivensRotation = GivensRotation<Real>;
         using MatrixType = std::vector<Real>;
         using DiagonalType = std::vector<Real>;

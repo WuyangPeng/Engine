@@ -56,7 +56,7 @@ bool Mathematics::Ellipsoid3<Real>::IsValid() const noexcept
             -epsilon <= extent[0] &&
             -epsilon <= extent[1] &&
             -epsilon <= extent[2] &&
-            Math::GetValue(0) <= epsilon)
+            MathType::GetValue(0) <= epsilon)
 
     #include SYSTEM_WARNING_POP
         {
@@ -191,8 +191,8 @@ typename Mathematics::Ellipsoid3<Real>::Ellipsoid3Coefficients Mathematics::Elli
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     const Matrix3 matrix{ GetMatrix() };
-    const Vector3 vector{ Math::GetValue(-2) * (matrix * center) };
-    const auto constants = matrix.QuadraticForm(center, center) - Math::GetValue(1);
+    const Vector3 vector{ MathType::GetValue(-2) * (matrix * center) };
+    const auto constants = matrix.QuadraticForm(center, center) - MathType::GetValue(1);
 
     return Ellipsoid3Coefficients{ matrix, vector, constants };
 }
@@ -211,11 +211,11 @@ void Mathematics::Ellipsoid3<Real>::FromCoefficients(const Ellipsoid3Coefficient
     // 计算的中心 K = -A^{-1}*B/2.
     const auto invMatrix = matrix.Inverse(epsilon);
 
-    center = Math::GetRational(-1, 2) * (invMatrix * vector);
+    center = MathType::GetRational(-1, 2) * (invMatrix * vector);
 
     // 计算 B^T*A^{-1}*B/4 - C = K^T*A*K - C = -K^T*B/2 - C。
-    auto rightSide = Math::GetRational(-1, 2) * Vector3Tools::DotProduct(center, vector) - constants;
-    if (Math::FAbs(rightSide) < epsilon)
+    auto rightSide = MathType::GetRational(-1, 2) * Vector3Tools::DotProduct(center, vector) - constants;
+    if (MathType::FAbs(rightSide) < epsilon)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("除零错误！"s));
     }
@@ -242,7 +242,7 @@ void Mathematics::Ellipsoid3<Real>::FromCoefficients(const Ellipsoid3Coefficient
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
-        extent[i] = Math::InvSqrt(eigenValue);
+        extent[i] = MathType::InvSqrt(eigenValue);
 
         axis[i] = Vector3{ rotation(0, i), rotation(1, i), rotation(2, i) };
 
@@ -259,7 +259,7 @@ Real Mathematics::Ellipsoid3<Real>::Evaluate(const Vector3& point) const
     const auto ratio0 = Vector3Tools::DotProduct(GetAxis0(), diff) / GetExtent0();
     const auto ratio1 = Vector3Tools::DotProduct(GetAxis1(), diff) / GetExtent1();
     const auto ratio2 = Vector3Tools::DotProduct(GetAxis2(), diff) / GetExtent2();
-    const auto value = ratio0 * ratio0 + ratio1 * ratio1 + ratio2 * ratio2 - Math::GetValue(1);
+    const auto value = ratio0 * ratio0 + ratio1 * ratio1 + ratio2 * ratio2 - MathType::GetValue(1);
 
     return value;
 }

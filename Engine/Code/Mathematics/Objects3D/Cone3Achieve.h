@@ -20,12 +20,12 @@ template <typename Real>
 Mathematics::Cone3<Real>::Cone3(const Vector3& vertex, const Vector3& axis, const Real angle, const Real height, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : vertex{ vertex },
       axis{ axis },
-      cosAngle{ Math::Cos(angle) },
-      sinAngle{ Math::Sin(angle) },
+      cosAngle{ MathType::Cos(angle) },
+      sinAngle{ MathType::Sin(angle) },
       height{ height },
       epsilon{ epsilon }
 {
-    MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "角度必须在第一象限！");
+    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= angle && angle <= MathType::GetHalfPI(), "角度必须在第一象限！");
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -44,7 +44,7 @@ bool Mathematics::Cone3<Real>::IsValid() const noexcept
 {
     try
     {
-        if (Math::Approximate(cosAngle * cosAngle + sinAngle * sinAngle, Math::GetValue(1), epsilon) &&
+        if (MathType::Approximate(cosAngle * cosAngle + sinAngle * sinAngle, MathType::GetValue(1), epsilon) &&
             epsilon < height &&
             axis.IsNormalize(epsilon))
         {

@@ -58,12 +58,12 @@ void Mathematics::StaticFindIntersectorRay3Sphere3<Real>::Find()
     auto diff = ray.GetOrigin() - sphere.GetCenter();
     auto a0 = Vector3Tools::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
 
-    if (a0 <= Math::GetValue(0))
+    if (a0 <= MathType::GetValue(0))
     {
         // P在球体内
         auto a1 = Vector3Tools::DotProduct(ray.GetDirection(), diff);
         auto discr = a1 * a1 - a0;
-        auto root = Math::Sqrt(discr);
+        auto root = MathType::Sqrt(discr);
         rayParameter0 = -a1 + root;
         point0 = ray.GetOrigin() + rayParameter0 * ray.GetDirection();
         quantity = 1;
@@ -73,7 +73,7 @@ void Mathematics::StaticFindIntersectorRay3Sphere3<Real>::Find()
     // 否则：P在范围之外
 
     auto a1 = Vector3Tools::DotProduct(ray.GetDirection(), diff);
-    if (Math::GetValue(0) <= a1)
+    if (MathType::GetValue(0) <= a1)
     {
         quantity = 0;
         this->SetIntersectionType(IntersectionType::Empty);
@@ -81,14 +81,14 @@ void Mathematics::StaticFindIntersectorRay3Sphere3<Real>::Find()
     }
 
     auto discr = a1 * a1 - a0;
-    if (discr < Math::GetValue(0))
+    if (discr < MathType::GetValue(0))
     {
         quantity = 0;
         this->SetIntersectionType(IntersectionType::Empty);
     }
-    else if (Math::GetZeroTolerance() <= discr)
+    else if (MathType::GetZeroTolerance() <= discr)
     {
-        auto root = Math::Sqrt(discr);
+        auto root = MathType::Sqrt(discr);
         rayParameter0 = -a1 - root;
         rayParameter1 = -a1 + root;
         point0 = ray.GetOrigin() + rayParameter0 * ray.GetDirection();

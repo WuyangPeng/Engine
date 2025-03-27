@@ -18,7 +18,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastNegativeExp<Real>::FastNegativeExpMoreRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
 
     auto result = static_cast<Real>(0.0038278);
 
@@ -39,7 +39,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastNegativeExp<Real>::FastNegativeExpRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
 
     auto result = static_cast<Real>(0.00026695);
 
@@ -62,7 +62,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastNegativeExp<Real>::FastNegativeExpPreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
 
     auto result = static_cast<Real>(0.000014876);
 
@@ -88,7 +88,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastNegativeExp<Real>::FastNegativeExpMorePreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
 
     auto result = static_cast<Real>(0.0000006906);
 

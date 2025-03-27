@@ -31,11 +31,11 @@ namespace Mathematics
         using Circle2 = Circle2<Real>;
         using Arc2 = Arc2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
         using Intersection = std::vector<Vector2>;
 
     public:
-        StaticFindIntersectorArc2Circle2(const Arc2& arc, const Circle2& circle, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorArc2Circle2(const Arc2& arc, const Circle2& circle, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

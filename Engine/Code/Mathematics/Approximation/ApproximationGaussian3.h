@@ -33,7 +33,7 @@ namespace Mathematics
         using Vector3 = Algebra::Vector3<Real>;
         using ObservationTypeContainer = std::vector<Vector3>;
         using IndicesContainer = std::vector<int>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         ApproximationGaussian3() noexcept;

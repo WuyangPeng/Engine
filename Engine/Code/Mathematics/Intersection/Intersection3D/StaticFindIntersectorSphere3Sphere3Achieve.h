@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::StaticFindIntersectorSphere3Sphere3(const Sphere3& sphere0, const Sphere3& sphere1, const Real epsilon)
-    : ParentType{ epsilon }, sphere0{ sphere0 }, sphere1{ sphere1 }, circle{ Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), Math::GetValue(0) }, contactPoint{}
+    : ParentType{ epsilon }, sphere0{ sphere0 }, sphere1{ sphere1 }, circle{ Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), MathType::GetValue(0) }, contactPoint{}
 {
     Find();
 
@@ -70,13 +70,13 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
         return;
     }
 
-    if (Math::Approximate(sqrLen, radiusSumSqr))
+    if (MathType::Approximate(sqrLen, radiusSumSqr))
     {
         // 球体刚刚接触。 调用者必须调用GetIntersectionType() 以确定发生了哪种类型的相交。
         // 在这种情况下，应该调用 GetContactPoint()，而不是GetCircle()。 仅在调用者不测试交叉点类型的情况下设置圆形参数。
         center1MinusCenter0.Normalize();
         contactPoint = sphere0.GetCenter() + radius0 * center1MinusCenter0;
-        circle = Circle3{ contactPoint, Vector3::GetZero(), Vector3::GetZero(), center1MinusCenter0, Math::GetValue(0) };
+        circle = Circle3{ contactPoint, Vector3::GetZero(), Vector3::GetZero(), center1MinusCenter0, MathType::GetValue(0) };
         this->SetIntersectionType(IntersectionType::Point);
         return;
     }
@@ -89,14 +89,14 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
         /// 在这种情况下，不应调用GetCircle()和GetContactPoint()。
         ///  仅在调用者不测试交叉点类型的情况下设置圆形和接触参数，但选择是任意的。
         center1MinusCenter0.Normalize();
-        contactPoint = Math::GetRational(1, 2) * (sphere0.GetCenter() + sphere1.GetCenter());
-        circle = Circle3{ contactPoint, Vector3::GetZero(), Vector3::GetZero(), center1MinusCenter0, Math::GetValue(0) };
+        contactPoint = MathType::GetRational(1, 2) * (sphere0.GetCenter() + sphere1.GetCenter());
+        circle = Circle3{ contactPoint, Vector3::GetZero(), Vector3::GetZero(), center1MinusCenter0, MathType::GetValue(0) };
 
-        this->SetIntersectionType(radiusDiff <= Math::GetValue(0) ? IntersectionType::Sphere0 : IntersectionType::Sphere1);
+        this->SetIntersectionType(radiusDiff <= MathType::GetValue(0) ? IntersectionType::Sphere0 : IntersectionType::Sphere1);
         return;
     }
 
-    if (Math::Approximate(sqrLen, radiusDiffSqr))
+    if (MathType::Approximate(sqrLen, radiusDiffSqr))
     {
         /// 一个球包含在另一个球中，但只有一个接触点。
         /// 调用者必须调用GetIntersectionType()以确定发生了哪种类型的相交。
@@ -104,7 +104,7 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
         /// 仅在调用者不测试交叉点类型的情况下设置圆形参数。
         center1MinusCenter0.Normalize();
 
-        if (radiusDiff <= Math::GetValue(0))
+        if (radiusDiff <= MathType::GetValue(0))
         {
             contactPoint = sphere1.GetCenter() + radius1 * center1MinusCenter0;
             this->SetIntersectionType(IntersectionType::Sphere0Point);
@@ -115,13 +115,13 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
             this->SetIntersectionType(IntersectionType::Sphere1Point);
         }
 
-        circle = Circle3(contactPoint, Vector3::GetZero(), Vector3::GetZero(), center1MinusCenter0, Math::GetValue(0));
+        circle = Circle3(contactPoint, Vector3::GetZero(), Vector3::GetZero(), center1MinusCenter0, MathType::GetValue(0));
 
         return;
     }
 
     // 计算相交圆具有中心的t：K = C0 + t*(C1 - C0)。
-    auto t = Math::GetRational(1, 2) * (Math::GetValue(1) + radiusDiff * radiusSum / sqrLen);
+    auto t = MathType::GetRational(1, 2) * (MathType::GetValue(1) + radiusDiff * radiusSum / sqrLen);
 
     // 相交圆的中心和半径。
 
@@ -132,7 +132,7 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
     circle = Circle3{ sphere0.GetCenter() + t * center1MinusCenter0, Vector3OrthonormalBasis.GetUVector(),
                       Vector3OrthonormalBasis.GetVVector(),
                       center1MinusCenter0,
-                      Math::Sqrt(Math::FAbs(radius0 * radius0 - t * t * sqrLen)) };
+                      MathType::Sqrt(MathType::FAbs(radius0 * radius0 - t * t * sqrLen)) };
 
     // 相交是一个圆。
     this->SetIntersectionType(IntersectionType::Circle);

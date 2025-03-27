@@ -29,10 +29,10 @@ namespace Mathematics
         using Ray3 = Ray3<Real>;
         using Cylinder3 = Cylinder3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorRay3Cylinder3(const Ray3& ray, const Cylinder3& cylinder, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorRay3Cylinder3(const Ray3& ray, const Cylinder3& cylinder, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

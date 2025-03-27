@@ -32,7 +32,7 @@ namespace Mathematics
         using ClassType = QuadraticCircleFit2<Real>;
 
         using Vector2 = Vector2<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Points = std::vector<Vector2>;
 
     public:

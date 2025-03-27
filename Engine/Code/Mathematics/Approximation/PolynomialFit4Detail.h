@@ -65,7 +65,7 @@ void Mathematics::PolynomialFit4<Real>::Calculate(const Samples& xSamples,
             {
                 const auto index = xDegreeIndex + xBound * (yDegreeIndex + yBound * zDegreeIndex);
 
-                inputVector.at(index) = Math::GetValue(0);
+                inputVector.at(index) = MathType::GetValue(0);
                 for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
                 {
                     inputVector.at(index) += wSamples.at(samplesIndex) * xPower(samplesIndex, xDegreeIndex) * yPower(samplesIndex, yDegreeIndex) * zPower(samplesIndex, zDegreeIndex);
@@ -78,7 +78,7 @@ void Mathematics::PolynomialFit4<Real>::Calculate(const Samples& xSamples,
                         for (auto innerXDegreeIndex = 0; innerXDegreeIndex <= xDegree; ++innerXDegreeIndex)
                         {
                             const auto innerIndex = innerXDegreeIndex + xBound * (innerYDegreeIndex + yBound * innerZDegreeIndex);
-                            auto sum = Math::GetValue(0);
+                            auto sum = MathType::GetValue(0);
                             for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
                             {
                                 sum += xPower(samplesIndex, xDegreeIndex + innerXDegreeIndex) *

@@ -27,7 +27,7 @@ namespace Mathematics
 
         using ClassType = Ellipsoid3Coefficients<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector3 = Vector3<Real>;
         using Matrix3 = Matrix3<Real>;
         using CoefficientsType = std::vector<Real>;

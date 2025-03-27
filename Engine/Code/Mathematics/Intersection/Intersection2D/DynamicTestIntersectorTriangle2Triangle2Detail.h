@@ -118,7 +118,7 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::Configurat
     cfg.projectionMap = ProjectionMap::M12;
     cfg.index = decltype(cfg.index){ i0, i1, i2 };
     cfg.min = Vector2Tools::DotProduct(axis, (vertex.at(i0) - vertex.at(i1)));
-    cfg.max = Math::GetValue(0);
+    cfg.max = MathType::GetValue(0);
 
     return cfg;
 }
@@ -138,9 +138,9 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::Configurat
     {
         if (d1 <= d2)  // d0 <= d1 <= d2
         {
-            if (!Math::Approximate(d0, d1))
+            if (!MathType::Approximate(d0, d1))
             {
-                cfg.projectionMap = (!Math::Approximate(d1, d2) ? ProjectionMap::M11 : ProjectionMap::M12);
+                cfg.projectionMap = (!MathType::Approximate(d1, d2) ? ProjectionMap::M11 : ProjectionMap::M12);
             }
             else
             {
@@ -154,7 +154,7 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::Configurat
         }
         else if (d0 <= d2)  // d0 <= d2 < d1
         {
-            if (!Math::Approximate(d0, d2))
+            if (!MathType::Approximate(d0, d2))
             {
                 cfg.projectionMap = ProjectionMap::M11;
 
@@ -172,7 +172,7 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::Configurat
         }
         else  // d2 < d0 <= d1
         {
-            cfg.projectionMap = (!Math::Approximate(d0, d1) ? ProjectionMap::M12 : ProjectionMap::M11);
+            cfg.projectionMap = (!MathType::Approximate(d0, d1) ? ProjectionMap::M12 : ProjectionMap::M11);
 
             cfg.index = decltype(cfg.index){ 2, 0, 1 };
 
@@ -184,7 +184,7 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::Configurat
     {
         if (d2 <= d1)  // d2 <= d1 < d0
         {
-            if (!Math::Approximate(d1, d2))
+            if (!MathType::Approximate(d1, d2))
             {
                 cfg.projectionMap = ProjectionMap::M11;
 
@@ -202,7 +202,7 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::Configurat
         }
         else if (d2 <= d0)  // d1 < d2 <= d0
         {
-            cfg.projectionMap = (!Math::Approximate(d0, d2) ? ProjectionMap::M11 : ProjectionMap::M12);
+            cfg.projectionMap = (!MathType::Approximate(d0, d2) ? ProjectionMap::M11 : ProjectionMap::M12);
 
             cfg.index = decltype(cfg.index){ 1, 2, 0 };
 
@@ -231,7 +231,7 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::IntersectI
     if (cfg1.max < cfg0.min)
     {
         // V1间隔最初位于V0间隔的左侧。
-        if (speed <= Math::GetValue(0))
+        if (speed <= MathType::GetValue(0))
         {
             // 间隔分开。
             intersectInfo.result = true;
@@ -239,7 +239,7 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::IntersectI
         }
 
         // 第一次更新。
-        auto invSpeed = (Math::GetValue(1)) / speed;
+        auto invSpeed = (MathType::GetValue(1)) / speed;
         auto t = (cfg0.min - cfg1.max) * invSpeed;
         if (intersectInfo.tFirst < t)
         {
@@ -273,7 +273,7 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::IntersectI
     else if (cfg0.max < cfg1.min)
     {
         // V1间隔最初位于V0间隔的右侧。
-        if (Math::GetValue(0) <= speed)
+        if (MathType::GetValue(0) <= speed)
         {
             // 间隔分开。
             intersectInfo.result = true;
@@ -281,7 +281,7 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::IntersectI
         }
 
         // 更新 first time.
-        auto invSpeed = (Math::GetValue(1)) / speed;
+        auto invSpeed = (MathType::GetValue(1)) / speed;
         auto t = (cfg0.max - cfg1.min) * invSpeed;
         if (intersectInfo.tFirst < t)
         {
@@ -315,10 +315,10 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::IntersectI
     else
     {
         // V0间隔和V1间隔最初重叠。
-        if (Math::GetValue(0) < speed)
+        if (MathType::GetValue(0) < speed)
         {
             // 更新 last time.
-            auto invSpeed = (Math::GetValue(1)) / speed;
+            auto invSpeed = (MathType::GetValue(1)) / speed;
             auto t = (cfg0.max - cfg1.min) * invSpeed;
             if (t < intersectInfo.tLast)
             {
@@ -332,10 +332,10 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::IntersectI
                 return intersectInfo;
             }
         }
-        else if (speed < Math::GetValue(0))
+        else if (speed < MathType::GetValue(0))
         {
             // 更新 last time.
-            auto invSpeed = (Math::GetValue(1)) / speed;
+            auto invSpeed = (MathType::GetValue(1)) / speed;
             auto t = (cfg0.min - cfg1.max) * invSpeed;
             if (t < intersectInfo.tLast)
             {
@@ -356,7 +356,7 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::IntersectI
 
 template <typename Real>
 Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::IntersectInfo::IntersectInfo() noexcept
-    : result{}, side{ SideType::None }, tCfg0{}, tCfg1{}, tFirst{}, tLast{ Math::maxReal }
+    : result{}, side{ SideType::None }, tCfg0{}, tCfg1{}, tFirst{}, tLast{ MathType::maxReal }
 {
 }
 

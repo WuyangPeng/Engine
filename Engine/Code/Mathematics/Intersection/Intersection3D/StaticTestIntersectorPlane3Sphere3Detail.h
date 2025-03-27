@@ -55,7 +55,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorPlane3Sphere3<Real>::Test() noexcept
 {
     if (const auto signedDistance = plane.DistanceTo(sphere.GetCenter());
-        Math::FAbs(signedDistance) <= sphere.GetRadius())
+        MathType::FAbs(signedDistance) <= sphere.GetRadius())
     {
         this->SetIntersectionType(IntersectionType::Other);
     }

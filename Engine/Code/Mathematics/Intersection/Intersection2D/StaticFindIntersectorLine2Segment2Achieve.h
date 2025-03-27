@@ -37,7 +37,7 @@ void Mathematics::StaticFindIntersectorLine2Segment2<Real>::Find()
     if (intersectionType == IntersectionType::Point)
     {
         // 测试线-线相交的点是否在线段上。
-        if (Math::FAbs(classify.GetParameter1()) <= segment.GetExtent() + intervalThreshold)
+        if (MathType::FAbs(classify.GetParameter1()) <= segment.GetExtent() + intervalThreshold)
         {
             quantity = 1;
             point = line.GetOrigin() + classify.GetParameter0() * line.GetDirection();

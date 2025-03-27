@@ -26,7 +26,7 @@ Rendering::LightingImpl::LightingImpl(float epsilon) noexcept
     : ambient{ 1.0f, 1.0f, 1.0f, 1.0f },
       diffuse{ 1.0f, 1.0f, 1.0f, 1.0f },
       specular{ 1.0f, 1.0f, 1.0f, 1.0f },
-      angle{ Math::GetPI() / 2 },
+      angle{ MathType::GetPI() / 2 },
       cosAngle{ 0.0f },
       sinAngle{ 1.0f },
       exponent{ 1.0f },
@@ -45,11 +45,11 @@ bool Rendering::LightingImpl::IsValid() const noexcept
 {
     try
     {
-        if (0 < angle && angle <= Math::GetPI() &&
+        if (0 < angle && angle <= MathType::GetPI() &&
             0 <= constant && 0 <= linear &&
             0 <= quadratic && 0 <= intensity &&
-            Math::Approximate(cosAngle, Math::Cos(angle), epsilon) &&
-            Math::Approximate(sinAngle, Math::Sin(angle), epsilon))
+            MathType::Approximate(cosAngle, MathType::Cos(angle), epsilon) &&
+            MathType::Approximate(sinAngle, MathType::Sin(angle), epsilon))
         {
             return true;
         }
@@ -69,11 +69,11 @@ bool Rendering::LightingImpl::IsValid() const noexcept
 void Rendering::LightingImpl::SetAngle(float aAngle)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0.0f < aAngle && aAngle <= Math::GetPI(), "Angle超出范围在SetAngle。\n");
+    RENDERING_ASSERTION_0(0.0f < aAngle && aAngle <= MathType::GetPI(), "Angle超出范围在SetAngle。\n");
 
     angle = aAngle;
-    cosAngle = Math::Cos(aAngle);
-    sinAngle = Math::Sin(aAngle);
+    cosAngle = MathType::Cos(aAngle);
+    sinAngle = MathType::Sin(aAngle);
 }
 
 void Rendering::LightingImpl::SetExponent(float aExponent) noexcept

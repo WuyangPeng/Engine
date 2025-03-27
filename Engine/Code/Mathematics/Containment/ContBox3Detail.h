@@ -38,9 +38,9 @@ template <typename Real>
 typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::ContAlignedBox(const Points& points)
 {
     const auto aabb = Vector3Tools<Real>::ComputeExtremes(points);
-    auto halfDiagonal = Math::GetRational(1, 2) * (aabb.GetMaxPoint() - aabb.GetMinPoint());
+    auto halfDiagonal = MathType::GetRational(1, 2) * (aabb.GetMaxPoint() - aabb.GetMinPoint());
 
-    return Box3{ Math::GetRational(1, 2) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
+    return Box3{ MathType::GetRational(1, 2) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
                  Vector3::GetUnitX(),
                  Vector3::GetUnitY(),
                  Vector3::GetUnitZ(),
@@ -89,13 +89,13 @@ typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::ContOrie
     const auto thirdBoundary = std::minmax_element(thirdDotCollection.begin(), thirdDotCollection.end());
 
     auto center = box.GetCenter() +
-                  (Math::GetRational(1, 2) * (*firstBoundary.first + *firstBoundary.second) * box.GetAxis0() +
-                   Math::GetRational(1, 2) * (*secondBoundary.first + *secondBoundary.second) * box.GetAxis1() +
-                   Math::GetRational(1, 2) * (*thirdBoundary.first + *thirdBoundary.second) * box.GetAxis2());
+                  (MathType::GetRational(1, 2) * (*firstBoundary.first + *firstBoundary.second) * box.GetAxis0() +
+                   MathType::GetRational(1, 2) * (*secondBoundary.first + *secondBoundary.second) * box.GetAxis1() +
+                   MathType::GetRational(1, 2) * (*thirdBoundary.first + *thirdBoundary.second) * box.GetAxis2());
 
-    auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * Math::GetRational(1, 2);
-    auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * Math::GetRational(1, 2);
-    auto thirdExtent = (*thirdBoundary.second - *thirdBoundary.first) * Math::GetRational(1, 2);
+    auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * MathType::GetRational(1, 2);
+    auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * MathType::GetRational(1, 2);
+    auto thirdExtent = (*thirdBoundary.second - *thirdBoundary.first) * MathType::GetRational(1, 2);
 
     return Box3{ center, box.GetAxis0(), box.GetAxis1(), box.GetAxis2(), firstExtent, secondExtent, thirdExtent };
 }
@@ -127,7 +127,7 @@ typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::MergeBox
 {
     // 在包围盒中心的第一个猜想。输入包围盒顶点投影到确定的平均包围盒的轴，
     // 此值将在后面进行更新。
-    auto center = Math::GetRational(1, 2) * (lhs.GetCenter() + rhs.GetCenter());
+    auto center = MathType::GetRational(1, 2) * (lhs.GetCenter() + rhs.GetCenter());
 
     // 一个包围盒的轴，就像一个列矩阵形成一个旋转矩阵。
     // 输入包围盒的轴被转换为四元数。
@@ -141,13 +141,13 @@ typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::MergeBox
     const Quaternion<Real> lhsQuaternion{ lhsRotationColumn };
     Quaternion<Real> rhsQuaternion{ rhsRotationColumn };
 
-    if (Dot(lhsQuaternion, rhsQuaternion) < Math::GetValue(0))
+    if (Dot(lhsQuaternion, rhsQuaternion) < MathType::GetValue(0))
     {
         rhsQuaternion = -rhsQuaternion;
     }
 
     auto sumQuaternion = lhsQuaternion + rhsQuaternion;
-    auto invLength = Math::InvSqrt(Dot(sumQuaternion, sumQuaternion));
+    auto invLength = MathType::InvSqrt(Dot(sumQuaternion, sumQuaternion));
     sumQuaternion = invLength * sumQuaternion;
 
     const auto sumRotationColumn = sumQuaternion.ToRotationColumnVector3();
@@ -194,13 +194,13 @@ typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::MergeBox
 
     // [min,max] 为合并后的包围盒的轴在坐标系中为轴对齐包围盒。
     // 更新当前包围盒中心成为新包围盒的中心。计算基于新的中心的范围。
-    center += Math::GetRational(1, 2) * (*firstBoundary.first + *firstBoundary.second) * sumRotationColumn.at(0) +
-              Math::GetRational(1, 2) * (*secondBoundary.first + *secondBoundary.second) * sumRotationColumn.at(1) +
-              Math::GetRational(1, 2) * (*thirdBoundary.first + *thirdBoundary.second) * sumRotationColumn.at(2);
+    center += MathType::GetRational(1, 2) * (*firstBoundary.first + *firstBoundary.second) * sumRotationColumn.at(0) +
+              MathType::GetRational(1, 2) * (*secondBoundary.first + *secondBoundary.second) * sumRotationColumn.at(1) +
+              MathType::GetRational(1, 2) * (*thirdBoundary.first + *thirdBoundary.second) * sumRotationColumn.at(2);
 
-    auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * Math::GetRational(1, 2);
-    auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * Math::GetRational(1, 2);
-    auto thirdExtent = (*thirdBoundary.second - *thirdBoundary.first) * Math::GetRational(1, 2);
+    auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * MathType::GetRational(1, 2);
+    auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * MathType::GetRational(1, 2);
+    auto thirdExtent = (*thirdBoundary.second - *thirdBoundary.first) * MathType::GetRational(1, 2);
 
     return Box3{ center, sumRotationColumn.at(0), sumRotationColumn.at(1), sumRotationColumn.at(2), firstExtent, secondExtent, thirdExtent };
 }

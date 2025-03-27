@@ -29,7 +29,7 @@ namespace Mathematics
         using ClassType = Plane3<Real>;
 
         using Vector3 = Vector3<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector3Tools = Vector3Tools<Real>;
         using Triangle3 = Triangle3<Real>;
 
@@ -42,16 +42,16 @@ namespace Mathematics
         Plane3() noexcept;
 
         // 直接指定N和C。
-        Plane3(const Vector3& normal, Real constant, Real epsilon = Math::GetZeroTolerance()) noexcept;
+        Plane3(const Vector3& normal, Real constant, Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         // 指定N，c = Dot(N,P)，这里P是平面是的一点。
-        Plane3(const Vector3& normal, const Vector3& point, Real epsilon = Math::GetZeroTolerance()) noexcept;
+        Plane3(const Vector3& normal, const Vector3& point, Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         // N = Cross(P1 - P0,P2 - P0)/Length(Cross(P1 - P0,P2 - P0))，
         // c = Dot(N,P0)，其中P0，P1，P2是在平面上的点。
-        Plane3(const Vector3& point0, const Vector3& point1, const Vector3& point2, Real epsilon = Math::GetZeroTolerance());
+        Plane3(const Vector3& point0, const Vector3& point1, const Vector3& point2, Real epsilon = MathType::GetZeroTolerance());
 
-        explicit Plane3(const Triangle3& triangle, Real epsilon = Math::GetZeroTolerance());
+        explicit Plane3(const Triangle3& triangle, Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 

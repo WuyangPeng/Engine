@@ -89,7 +89,7 @@ void Mathematics::StaticFindIntersectorCircle3Plane3<Real>::Find()
     auto a0 = Vector3Tools::GetLengthSquared(diff) - circle.GetRadius() * circle.GetRadius();
 
     auto discr = dotProduct * dotProduct - a0 * directionSquared;
-    if (discr < Math::GetValue(0))
+    if (discr < MathType::GetValue(0))
     {
         // 没有实数的根，圆不与平面相交。
         this->SetIntersectionType(IntersectionType::Empty);
@@ -98,8 +98,8 @@ void Mathematics::StaticFindIntersectorCircle3Plane3<Real>::Find()
 
     this->SetIntersectionType(IntersectionType::Point);
 
-    auto inv = (Math::GetValue(1)) / directionSquared;
-    if (discr < Math::GetZeroTolerance())
+    auto inv = (MathType::GetValue(1)) / directionSquared;
+    if (discr < MathType::GetZeroTolerance())
     {
         // 一个重复的根，圆刚碰到平面。
         quantity = 1;
@@ -108,7 +108,7 @@ void Mathematics::StaticFindIntersectorCircle3Plane3<Real>::Find()
     }
 
     // 圆有两个不同的实数的根，与平面在两个点上相交。
-    auto root = Math::Sqrt(discr);
+    auto root = MathType::Sqrt(discr);
     quantity = 2;
     point0 = line.GetOrigin() - ((dotProduct + root) * inv) * line.GetDirection();
     point1 = line.GetOrigin() - ((dotProduct - root) * inv) * line.GetDirection();

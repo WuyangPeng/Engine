@@ -40,11 +40,11 @@ void Mathematics::BandedMatrixInvert<Real>::Solve()
         {
             if (row != col)
             {
-                output(row, col) = Math::GetValue(0);
+                output(row, col) = MathType::GetValue(0);
             }
             else
             {
-                output(row, row) = Math::GetValue(1);
+                output(row, row) = MathType::GetValue(1);
             }
         }
     }
@@ -67,12 +67,12 @@ void Mathematics::BandedMatrixInvert<Real>::ForwardEliminate(int reduceRow)
 {
     // 枢轴必须按顺序进行且非零。
     const auto diag = matrix(reduceRow, reduceRow);
-    if (Math::FAbs(diag) <= zeroTolerance)
+    if (MathType::FAbs(diag) <= zeroTolerance)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("支点必须非零！"s));
     }
 
-    matrix(reduceRow, reduceRow) = Math::GetValue(1);
+    matrix(reduceRow, reduceRow) = MathType::GetValue(1);
 
     // 行相乘使对角线项为1一致
     const auto columnMin = reduceRow + 1;
@@ -103,7 +103,7 @@ void Mathematics::BandedMatrixInvert<Real>::ForwardEliminate(int reduceRow)
     for (auto row = rowMin; row < rowMax; ++row)
     {
         auto mult = matrix(row, reduceRow);
-        matrix(row, reduceRow) = Math::GetValue(0);
+        matrix(row, reduceRow) = MathType::GetValue(0);
         for (auto column = columnMin; column < columnMax; ++column)
         {
             matrix(row, column) -= mult * matrix(reduceRow, column);
@@ -128,7 +128,7 @@ void Mathematics::BandedMatrixInvert<Real>::BackwardEliminate(int reduceRow)
     for (auto row = rowMax; rowMin <= row; --row)
     {
         auto mult = matrix(row, reduceRow);
-        matrix(row, reduceRow) = Math::GetValue(0);
+        matrix(row, reduceRow) = MathType::GetValue(0);
         for (auto column = 0; column < output.GetColumnsNumber(); ++column)
         {
             output(row, column) -= mult * output(reduceRow, column);
@@ -141,7 +141,7 @@ void Mathematics::BandedMatrixInvert<Real>::BackwardEliminate(int reduceRow)
 template <typename Real>
 bool Mathematics::BandedMatrixInvert<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= zeroTolerance)
+    if (MathType::GetValue(0) <= zeroTolerance)
         return true;
     else
         return false;

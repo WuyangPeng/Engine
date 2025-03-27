@@ -195,7 +195,7 @@ bool Rendering::BumpMapEffectImpl::ComputeTangent(const Vector3& position0,
     const auto deltaPosition1 = position1 - position0;
     const auto deltaPosition2 = position2 - position0;
 
-    constexpr auto epsilon = Math::GetZeroTolerance();
+    constexpr auto epsilon = MathType::GetZeroTolerance();
     if (Vector3Tools::GetLength(deltaPosition1) <= epsilon || Vector3Tools::GetLength(deltaPosition2) <= epsilon)
     {
         return false;

@@ -32,7 +32,7 @@ namespace Mathematics
         // 用户数据可以是复杂的。
         using Function = Real (*)(Real, const UserDataType*);
         using Minimize1Data = Minimize1Data<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         // 区间[t0,t1]提供给GetMinimum(Real,Real,Real)

@@ -37,7 +37,7 @@ void Mathematics::SymmetricEigensolver2x2<Real>::operator()(Real a00, Real a01, 
 {
     /// 稳健地规范化(c2,s2)，避免sqrt调用中的浮点溢出。
 
-    auto c2 = Math::GetRational(1, 2) * (a00 - a11);
+    auto c2 = MathType::GetRational(1, 2) * (a00 - a11);
     auto s2 = a01;
     auto maxAbsComp = std::max(std::fabs(c2), std::fabs(s2));
     if (maxAbsComp > Real{})
@@ -55,12 +55,12 @@ void Mathematics::SymmetricEigensolver2x2<Real>::operator()(Real a00, Real a01, 
     }
     else
     {
-        c2 = -Math::GetValue(1);
+        c2 = -MathType::GetValue(1);
         s2 = Real{};
     }
 
-    auto s = std::sqrt(Math::GetRational(1, 2) * (Math::GetValue(1) - c2));  // >= 1/sqrt(2)
-    auto c = Math::GetRational(1, 2) * s2 / s;
+    auto s = std::sqrt(MathType::GetRational(1, 2) * (MathType::GetValue(1) - c2));  // >= 1/sqrt(2)
+    auto c = MathType::GetRational(1, 2) * s2 / s;
 
     auto cSqr = c * c;
     auto sSqr = s * s;

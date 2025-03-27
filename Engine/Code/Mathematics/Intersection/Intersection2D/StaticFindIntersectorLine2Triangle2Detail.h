@@ -69,7 +69,7 @@ void Mathematics::StaticFindIntersectorLine2Triangle2<Real>::Find()
     {
         auto param = line2Triangle2.GetInterval();
 
-        StaticFindIntersector1<Real> intr{ param[0], param[1], -Math::maxReal, +Math::maxReal };
+        StaticFindIntersector1<Real> intr{ param[0], param[1], -MathType::maxReal, +MathType::maxReal };
 
         quantity = intr.GetNumIntersections();
         if (quantity == 2)

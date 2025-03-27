@@ -27,7 +27,7 @@ namespace Mathematics
 
         using ClassType = NoniterativeEigen3x3<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Matrix3 = Matrix3<Real>;
         using Vector3 = Vector3<Real>;
         using Vector3Tools = Vector3Tools<Real>;

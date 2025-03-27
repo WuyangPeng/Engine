@@ -38,7 +38,7 @@ Mathematics::LinearSystem<Real>::LinearSystem(Real zeroTolerance) noexcept
 template <typename Real>
 bool Mathematics::LinearSystem<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= zeroTolerance)
+    if (MathType::GetValue(0) <= zeroTolerance)
         return true;
     else
         return false;
@@ -64,7 +64,7 @@ typename Mathematics::LinearSystem<Real>::Vector2 Mathematics::LinearSystem<Real
 
     auto det = matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
 
-    if (Math::FAbs(det) <= zeroTolerance)
+    if (MathType::FAbs(det) <= zeroTolerance)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("Solve2 失败！det为0。"s));
     }
@@ -99,7 +99,7 @@ typename Mathematics::LinearSystem<Real>::Vector3Type Mathematics::LinearSystem<
 
 #include SYSTEM_WARNING_POP
 
-    if (Math::FAbs(det) <= zeroTolerance)
+    if (MathType::FAbs(det) <= zeroTolerance)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("Solve3 失败！det为0。"s));
     }
@@ -159,7 +159,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
         THROW_EXCEPTION(SYSTEM_TEXT("数组大小错误！"s));
     }
 
-    if (Math::FAbs(mainDdiagonal.at(0)) <= zeroTolerance)
+    if (MathType::FAbs(mainDdiagonal.at(0)) <= zeroTolerance)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("求解失败！"s));
     }
@@ -177,7 +177,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
         upperAmend.at(i) = upper.at(i) / mainAmend;
         const auto next = i + 1;
         mainAmend = mainDdiagonal.at(next) - lower.at(i) * upperAmend.at(i);
-        if (Math::FAbs(mainAmend) <= zeroTolerance)
+        if (MathType::FAbs(mainAmend) <= zeroTolerance)
         {
             THROW_EXCEPTION(SYSTEM_TEXT("求解失败！"s));
         }
@@ -204,7 +204,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
         THROW_EXCEPTION(SYSTEM_TEXT("数组大小错误！"s));
     }
 
-    if (Math::FAbs(mainDdiagonal) <= zeroTolerance)
+    if (MathType::FAbs(mainDdiagonal) <= zeroTolerance)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("求解失败！"s));
     }
@@ -221,7 +221,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
     {
         upperAmend.at(i) = upper / mainAmend;
         mainAmend = mainDdiagonal - lower * upperAmend.at(i);
-        if (Math::FAbs(mainAmend) <= zeroTolerance)
+        if (MathType::FAbs(mainAmend) <= zeroTolerance)
         {
             THROW_EXCEPTION(SYSTEM_TEXT("求解失败！"s));
         }
@@ -372,25 +372,25 @@ bool Mathematics::LinearSystem<Real>::Solve(int n, int m, const RealContainer& a
 template <typename Real>
 bool Mathematics::LinearSystem<Real>::SolveTriDiagonal(int n, const RealContainer& subDiagonal, const RealContainer& diagonal, const RealContainer& superDiagonal, const RealContainer& b, RealContainer& x)
 {
-    if (Math::Approximate(diagonal.at(0), Real{}))
+    if (MathType::Approximate(diagonal.at(0), Real{}))
     {
         return false;
     }
 
     RealContainer tmp(boost::numeric_cast<size_t>(n) - 1);
     auto expr = diagonal.at(0);
-    auto invExpr = Math::GetValue(1) / expr;
+    auto invExpr = MathType::GetValue(1) / expr;
     x.at(0) = b.at(0) * invExpr;
 
     for (auto i0 = 0, i1 = 1; i1 < n; ++i0, ++i1)
     {
         tmp.at(i0) = superDiagonal.at(i0) * invExpr;
         expr = diagonal.at(i1) - subDiagonal.at(i0) * tmp.at(i0);
-        if (Math::Approximate(expr, Real{}))
+        if (MathType::Approximate(expr, Real{}))
         {
             return false;
         }
-        invExpr = Math::GetValue(1) / expr;
+        invExpr = MathType::GetValue(1) / expr;
         x.at(i1) = (b.at(i1) - subDiagonal.at(i0) * x.at(i0)) * invExpr;
     }
 
@@ -404,25 +404,25 @@ bool Mathematics::LinearSystem<Real>::SolveTriDiagonal(int n, const RealContaine
 template <typename Real>
 bool Mathematics::LinearSystem<Real>::SolveConstantTriDiagonal(int n, Real subDiagonal, Real diagonal, Real superDiagonal, const RealContainer& b, RealContainer& x)
 {
-    if (Math::Approximate(diagonal, Real{}))
+    if (MathType::Approximate(diagonal, Real{}))
     {
         return false;
     }
 
     RealContainer tmp(boost::numeric_cast<size_t>(n) - 1);
     auto expr = diagonal;
-    auto invExpr = Math::GetValue(1) / expr;
+    auto invExpr = MathType::GetValue(1) / expr;
     x.at(0) = b.at(0) * invExpr;
 
     for (auto i0 = 0, i1 = 1; i1 < n; ++i0, ++i1)
     {
         tmp.at(i0) = superDiagonal * invExpr;
         expr = diagonal - subDiagonal * tmp.at(i0);
-        if (Math::Approximate(expr, Real{}))
+        if (MathType::Approximate(expr, Real{}))
         {
             return false;
         }
-        invExpr = Math::GetValue(1) / expr;
+        invExpr = MathType::GetValue(1) / expr;
         x.at(i1) = (b.at(i1) - subDiagonal * x.at(i0)) * invExpr;
     }
 

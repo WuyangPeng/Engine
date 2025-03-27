@@ -25,7 +25,7 @@ namespace Mathematics
     public:
         using ClassType = NISymmetricEigensolver3x3<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         NISymmetricEigensolver3x3() noexcept;

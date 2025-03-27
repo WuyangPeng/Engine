@@ -25,7 +25,7 @@ namespace Mathematics
 
         using DistanceBase = DistanceBase<Real, Vector>;
         using DistanceResult = DistanceResult<Real, Vector>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         IntervalDistanceBase(const DistanceBase& distance, Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity);

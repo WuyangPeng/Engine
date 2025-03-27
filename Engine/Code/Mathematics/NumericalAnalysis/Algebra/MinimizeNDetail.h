@@ -137,11 +137,11 @@ void Mathematics::Algebra::MinimizeN<T>::ComputeDomain(const Container& t0, cons
     for (auto i = 0; i < dimensions; ++i)
     {
         auto value = directions.at(dCurrIndex)[i];
-        if (!Math::Approximate(value, T{}))
+        if (!MathType::Approximate(value, T{}))
         {
             auto b0 = t0.at(i) - tCurr[i];
             auto b1 = t1.at(i) - tCurr[i];
-            auto inv = Math::GetValue(1) / value;
+            auto inv = MathType::GetValue(1) / value;
             if (value > T{})
             {
                 /// 有效的t-区间是[b0,b1]。

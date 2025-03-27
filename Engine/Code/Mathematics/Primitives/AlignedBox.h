@@ -28,7 +28,7 @@ namespace Mathematics
     public:
         using ClassType = AlignedBox<N, Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector = Algebra::Vector<N, Real>;
         using AlignedBoxCentered = AlignedBoxCentered<N, Real>;
         using VerticesType = std::array<Vector, (1 << N)>;

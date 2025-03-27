@@ -28,7 +28,7 @@ namespace Mathematics
         using Vector3 = Vector3<Real>;
         using Plane3 = Plane3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
 
     public:
         DynamicTestIntersectorPlane3Plane3(const Plane3& plane0,
@@ -36,7 +36,7 @@ namespace Mathematics
                                            Real tMax,
                                            const Vector3& lhsVelocity,
                                            const Vector3& rhsVelocity,
-                                           const Real epsilon = Math::GetZeroTolerance());
+                                           const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

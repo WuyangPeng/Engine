@@ -62,7 +62,7 @@ void Mathematics::StaticFindIntersectorSegment3Plane3<Real>::Find() noexcept
         // 线与平面相交，但可能在不位于线段上的点处。
         this->SetIntersectionType(intr.GetIntersectionType());
         segmentParameter = intr.GetLineParameter();
-        if (!(Math::FAbs(segmentParameter) <= segment.GetExtent()))
+        if (!(MathType::FAbs(segmentParameter) <= segment.GetExtent()))
         {
             this->SetIntersectionType(IntersectionType::Empty);
             return;

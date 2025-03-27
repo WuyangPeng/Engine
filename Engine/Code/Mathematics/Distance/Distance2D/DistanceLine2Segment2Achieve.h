@@ -76,8 +76,8 @@ typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathematics::D
                 // 两个内部点最接近，一个在直线上，一个在线段上。
                 const auto lhsT = tool.GetLhsT();
 
-                return DistanceResult{ Math::GetValue(0),
-                                       Math::GetValue(0),
+                return DistanceResult{ MathType::GetValue(0),
+                                       MathType::GetValue(0),
                                        line.GetOrigin() + lhsT / det * line.GetDirection(),
                                        segment.GetCenterPoint() + rhsT / det * segment.GetDirection() };
             }
@@ -104,10 +104,10 @@ template <typename Real>
 typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathematics::DistanceLine2Segment2<Real>::GetSquaredWithClosestPoints(const DistanceLine2Line2Tool& tool, Real rhsExtent) const
 {
     const auto t = tool.GetLhsT(-rhsExtent);
-    const auto rhsSquare = rhsExtent * (rhsExtent + Math::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) + tool.GetOriginDifferenceSquaredLength();
+    const auto rhsSquare = rhsExtent * (rhsExtent + MathType::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) + tool.GetOriginDifferenceSquaredLength();
 
-    return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-t * t + rhsSquare),
-                           Math::GetValue(0),
+    return DistanceResult{ MathType::GetNumericalRoundOffNonnegative(-t * t + rhsSquare),
+                           MathType::GetValue(0),
                            line.GetOrigin() + t * line.GetDirection(),
                            segment.GetCenterPoint() + rhsExtent * segment.GetDirection() };
 }
@@ -119,7 +119,7 @@ typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathematics::D
     const auto squaredDistance = tool.GetSquaredDistanceWithParallel();
 
     return DistanceResult{ squaredDistance,
-                           Math::GetValue(0),
+                           MathType::GetValue(0),
                            line.GetOrigin() - originDifferenceDotLhsDirection * line.GetDirection(),
                            segment.GetCenterPoint() };
 }

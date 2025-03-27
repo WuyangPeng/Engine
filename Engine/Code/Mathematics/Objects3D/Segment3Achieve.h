@@ -19,9 +19,9 @@ template <typename Real>
 Mathematics::Segment3<Real>::Segment3(const Vector3& beginPoint, const Vector3& endPoint, Real epsilon)
     : beginPoint{ beginPoint },
       endPoint{ endPoint },
-      center{ Math::GetRational(1, 2) * (beginPoint + endPoint) },
+      center{ MathType::GetRational(1, 2) * (beginPoint + endPoint) },
       direction{ endPoint - beginPoint },
-      extent{ Vector3Tools::GetLength(direction) / Math::GetValue(2) },
+      extent{ Vector3Tools::GetLength(direction) / MathType::GetValue(2) },
       epsilon{ epsilon }
 {
     direction.Normalize(epsilon);
@@ -51,7 +51,7 @@ bool Mathematics::Segment3<Real>::IsValid() const noexcept
         if (direction.IsNormalize(epsilon) &&
             Vector3Tools::Approximate(beginPoint, center - extent * direction, epsilon) &&
             Vector3Tools::Approximate(endPoint, center + extent * direction, epsilon) &&
-            Vector3Tools::Approximate(center, Math::GetRational(1, 2) * (beginPoint + endPoint), epsilon))
+            Vector3Tools::Approximate(center, MathType::GetRational(1, 2) * (beginPoint + endPoint), epsilon))
         {
             return true;
         }
@@ -111,9 +111,9 @@ Real Mathematics::Segment3<Real>::GetExtent() const noexcept
 template <typename Real>
 void Mathematics::Segment3<Real>::ComputeCenterDirectionExtent()
 {
-    center = Math::GetRational(1, 2) * (beginPoint + endPoint);
+    center = MathType::GetRational(1, 2) * (beginPoint + endPoint);
     direction = endPoint - beginPoint;
-    extent = Vector3Tools::GetLength(direction) / Math::GetValue(2);
+    extent = Vector3Tools::GetLength(direction) / MathType::GetValue(2);
 
     direction.Normalize(epsilon);
 }

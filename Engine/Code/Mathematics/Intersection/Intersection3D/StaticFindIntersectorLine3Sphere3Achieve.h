@@ -60,14 +60,14 @@ void Mathematics::StaticFindIntersectorLine3Sphere3<Real>::Find()
     auto a1 = Vector3Tools::DotProduct(line.GetDirection(), diff);
     auto discr = a1 * a1 - a0;
 
-    if (discr < Math::GetValue(0))
+    if (discr < MathType::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Empty);
         quantity = 0;
     }
-    else if (Math::GetZeroTolerance() <= discr)
+    else if (MathType::GetZeroTolerance() <= discr)
     {
-        auto root = Math::Sqrt(discr);
+        auto root = MathType::Sqrt(discr);
         lineParameter0 = -a1 - root;
         lineParameter1 = -a1 + root;
         point0 = line.GetOrigin() + lineParameter0 * line.GetDirection();

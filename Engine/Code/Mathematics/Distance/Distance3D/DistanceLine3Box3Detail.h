@@ -87,7 +87,7 @@ typename Mathematics::DistanceLine3Box3<Real>::DistanceResult Mathematics::Dista
 
     for (auto i = 0; i < size; ++i)
     {
-        if (direction[i] < Math::GetValue(0))
+        if (direction[i] < MathType::GetValue(0))
         {
             point[i] = -point[i];
             direction[i] = -direction[i];
@@ -100,14 +100,14 @@ typename Mathematics::DistanceLine3Box3<Real>::DistanceResult Mathematics::Dista
     }
 
     Real sqrDistance{};
-    auto lineParameter = Math::GetValue(0);
+    auto lineParameter = MathType::GetValue(0);
 
-    if (Math::GetValue(0) < direction.GetX())
+    if (MathType::GetValue(0) < direction.GetX())
     {
-        if (Math::GetValue(0) < direction.GetY())
+        if (MathType::GetValue(0) < direction.GetY())
         {
             // (+,+,+)
-            if (Math::GetValue(0) < direction.GetZ())
+            if (MathType::GetValue(0) < direction.GetZ())
             {
                 sqrDistance = CaseNoZeros(direction, lineParameter, point);
             }
@@ -119,7 +119,7 @@ typename Mathematics::DistanceLine3Box3<Real>::DistanceResult Mathematics::Dista
         else
         {
             // (+,0,+)
-            if (Math::GetValue(0) < direction.GetZ())
+            if (MathType::GetValue(0) < direction.GetZ())
             {
                 sqrDistance = Case0(0, 2, 1, direction, lineParameter, point);
             }
@@ -131,10 +131,10 @@ typename Mathematics::DistanceLine3Box3<Real>::DistanceResult Mathematics::Dista
     }
     else
     {
-        if (Math::GetValue(0) < direction.GetY())
+        if (MathType::GetValue(0) < direction.GetY())
         {
             // (0,+,+)
-            if (Math::GetValue(0) < direction.GetZ())
+            if (MathType::GetValue(0) < direction.GetZ())
             {
                 sqrDistance = Case0(1, 2, 0, direction, lineParameter, point);
             }
@@ -146,7 +146,7 @@ typename Mathematics::DistanceLine3Box3<Real>::DistanceResult Mathematics::Dista
         else
         {
             // (0,0,+)
-            if (Math::GetValue(0) < direction.GetZ())
+            if (MathType::GetValue(0) < direction.GetZ())
             {
                 sqrDistance = Case00(2, 0, 1, direction, lineParameter, point);
             }
@@ -173,7 +173,7 @@ typename Mathematics::DistanceLine3Box3<Real>::DistanceResult Mathematics::Dista
         closestPoint1 += point[i] * box.GetAxis(i);
     }
 
-    return DistanceResult{ sqrDistance, Math::GetValue(0), closestPoint0, closestPoint1, lineParameter, Math::GetValue(0) };
+    return DistanceResult{ sqrDistance, MathType::GetValue(0), closestPoint0, closestPoint1, lineParameter, MathType::GetValue(0) };
 }
 
 template <typename Real>
@@ -184,10 +184,10 @@ Real Mathematics::DistanceLine3Box3<Real>::CaseNoZeros(const Vector3& direction,
 
     auto prodDxPy = direction.GetX() * pointMinusExtent.GetY();
     auto prodDyPx = direction.GetY() * pointMinusExtent.GetX();
-    auto prodDzPx = Math::GetValue(0);
-    auto prodDxPz = Math::GetValue(0);
-    auto prodDzPy = Math::GetValue(0);
-    auto prodDyPz = Math::GetValue(0);
+    auto prodDzPx = MathType::GetValue(0);
+    auto prodDxPz = MathType::GetValue(0);
+    auto prodDzPy = MathType::GetValue(0);
+    auto prodDyPz = MathType::GetValue(0);
 
     if (prodDxPy <= prodDyPx)
     {
@@ -247,7 +247,7 @@ Real Mathematics::DistanceLine3Box3<Real>::Face(int i0, int i1, int i2, const Ve
             // v[i1] >= -e[i1], v[i2] < -e[i2]
             auto lenSqr = direction[i0] * direction[i0] + direction[i2] * direction[i2];
             auto value = lenSqr * pointPlusExtent[i1] - direction[i1] * (direction[i0] * pointMinusExtent[i0] + direction[i2] * pointPlusExtent[i2]);
-            if (value <= (Math::GetValue(2) * lenSqr * box.GetExtent(i1)))
+            if (value <= (MathType::GetValue(2) * lenSqr * box.GetExtent(i1)))
             {
                 auto t = value / lenSqr;
                 lenSqr += direction[i1] * direction[i1];
@@ -282,7 +282,7 @@ Real Mathematics::DistanceLine3Box3<Real>::Face(int i0, int i1, int i2, const Ve
             // v[i1] < -e[i1], v[i2] >= -e[i2]
             auto lenSqr = direction[i0] * direction[i0] + direction[i1] * direction[i1];
             auto value = lenSqr * pointPlusExtent[i2] - direction[i2] * (direction[i0] * pointMinusExtent[i0] + direction[i1] * pointPlusExtent[i1]);
-            if (value <= (Math::GetValue(2)) * lenSqr * box.GetExtent(i2))
+            if (value <= (MathType::GetValue(2)) * lenSqr * box.GetExtent(i2))
             {
                 auto t = value / lenSqr;
                 lenSqr += direction[i2] * direction[i2];
@@ -314,10 +314,10 @@ Real Mathematics::DistanceLine3Box3<Real>::Face(int i0, int i1, int i2, const Ve
             // v[i1] < -e[i1], v[i2] < -e[i2]
             auto lenSqr = direction[i0] * direction[i0] + direction[i2] * direction[i2];
             auto value = lenSqr * pointPlusExtent[i1] - direction[i1] * (direction[i0] * pointMinusExtent[i0] + direction[i2] * pointPlusExtent[i2]);
-            if (value >= Math::GetValue(0))
+            if (value >= MathType::GetValue(0))
             {
                 // v[i1]-边是最近点
-                if (value <= (Math::GetValue(2)) * lenSqr * box.GetExtent(i1))
+                if (value <= (MathType::GetValue(2)) * lenSqr * box.GetExtent(i1))
                 {
                     auto t = value / lenSqr;
                     lenSqr += direction[i1] * direction[i1];
@@ -348,10 +348,10 @@ Real Mathematics::DistanceLine3Box3<Real>::Face(int i0, int i1, int i2, const Ve
 
             lenSqr = direction[i0] * direction[i0] + direction[i1] * direction[i1];
             value = lenSqr * pointPlusExtent[i2] - direction[i2] * (direction[i0] * pointMinusExtent[i0] + direction[i1] * pointPlusExtent[i1]);
-            if (Math::GetValue(0) <= value)
+            if (MathType::GetValue(0) <= value)
             {
                 // v[i2]-边是最近点
-                if (value <= (Math::GetValue(2)) * lenSqr * box.GetExtent(i2))
+                if (value <= (MathType::GetValue(2)) * lenSqr * box.GetExtent(i2))
                 {
                     auto t = value / lenSqr;
                     lenSqr += direction[i2] * direction[i2];
@@ -399,7 +399,7 @@ Real Mathematics::DistanceLine3Box3<Real>::Face(int i0, int i1, int i2, const Ve
 template <typename Real>
 Real Mathematics::DistanceLine3Box3<Real>::Case0(int i0, int i1, int i2, const Vector3& direction, Real& lineParameter, Vector3& point) const
 {
-    auto sqrDistance = Math::GetValue(0);
+    auto sqrDistance = MathType::GetValue(0);
     auto pointMinusE0 = point[i0] - box.GetExtent(i0);
     auto pointMinusE1 = point[i1] - box.GetExtent(i1);
     auto prod0 = direction[i1] * pointMinusE0;
@@ -412,9 +412,9 @@ Real Mathematics::DistanceLine3Box3<Real>::Case0(int i0, int i1, int i2, const V
 
         auto pointPlusE1 = point[i1] + box.GetExtent(i1);
         auto delta = prod0 - direction[i0] * pointPlusE1;
-        if (Math::GetValue(0) <= delta)
+        if (MathType::GetValue(0) <= delta)
         {
-            auto invLSqr = (Math::GetValue(1)) / (direction[i0] * direction[i0] + direction[i1] * direction[i1]);
+            auto invLSqr = (MathType::GetValue(1)) / (direction[i0] * direction[i0] + direction[i1] * direction[i1]);
             sqrDistance += delta * delta * invLSqr;
             point[i1] = -box.GetExtent(i1);
             lineParameter = -(direction[i0] * pointMinusE0 + direction[i1] * pointPlusE1) * invLSqr;
@@ -432,9 +432,9 @@ Real Mathematics::DistanceLine3Box3<Real>::Case0(int i0, int i1, int i2, const V
 
         auto pointPlusE0 = point[i0] + box.GetExtent(i0);
         auto delta = prod1 - direction[i1] * pointPlusE0;
-        if (Math::GetValue(0) <= delta)
+        if (MathType::GetValue(0) <= delta)
         {
-            auto invLSqr = (Math::GetValue(1)) / (direction[i0] * direction[i0] + direction[i1] * direction[i1]);
+            auto invLSqr = (MathType::GetValue(1)) / (direction[i0] * direction[i0] + direction[i1] * direction[i1]);
             sqrDistance += delta * delta * invLSqr;
             point[i0] = -box.GetExtent(i0);
             lineParameter = -(direction[i0] * pointPlusE0 + direction[i1] * pointMinusE1) * invLSqr;
@@ -465,7 +465,7 @@ Real Mathematics::DistanceLine3Box3<Real>::Case0(int i0, int i1, int i2, const V
 template <typename Real>
 Real Mathematics::DistanceLine3Box3<Real>::Case00(int i0, int i1, int i2, const Vector3& dir, Real& lineParameter, Vector3& point) const
 {
-    auto sqrDistance = Math::GetValue(0);
+    auto sqrDistance = MathType::GetValue(0);
 
     lineParameter = (box.GetExtent(i0) - point[i0]) / dir[i0];
 
@@ -503,7 +503,7 @@ Real Mathematics::DistanceLine3Box3<Real>::Case00(int i0, int i1, int i2, const 
 template <typename Real>
 Real Mathematics::DistanceLine3Box3<Real>::Case000(Vector3& point) const
 {
-    auto sqrDistance = Math::GetValue(0);
+    auto sqrDistance = MathType::GetValue(0);
 
     if (point.GetX() < -box.GetExtent(0))
     {

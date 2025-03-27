@@ -38,7 +38,7 @@ void Mathematics::StaticTestIntersectorRay2Ray2<Real>::Test()
     if (intersectionType == IntersectionType::Point)
     {
         // 测试直线交点是否在射线上。
-        if (Math::GetValue(0) <= classify.GetParameter0() && Math::GetValue(0) <= classify.GetParameter1())
+        if (MathType::GetValue(0) <= classify.GetParameter0() && MathType::GetValue(0) <= classify.GetParameter1())
         {
             quantity = 1;
             intersectionType = IntersectionType::Point;
@@ -51,7 +51,7 @@ void Mathematics::StaticTestIntersectorRay2Ray2<Real>::Test()
     }
     else if (intersectionType == IntersectionType::Line)
     {
-        if (Math::GetValue(0) < Vector2Tools::DotProduct(lhsRay.GetDirection(), rhsRay.GetDirection()))
+        if (MathType::GetValue(0) < Vector2Tools::DotProduct(lhsRay.GetDirection(), rhsRay.GetDirection()))
         {
             // 射线是共线的并且在相同的方向，所以它们必须是重叠的。
             quantity = std::numeric_limits<int>::max();

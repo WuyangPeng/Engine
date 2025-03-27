@@ -58,9 +58,9 @@ void Mathematics::StaticTestIntersectorBox3Sphere3<Real>::Test()
     // 通过将球体转换为该坐标系来测试盒子坐标系中的交集。
     auto centerDiff = sphere.GetCenter() - box.GetCenter();
 
-    auto centerDiffX = Math::FAbs(Vector3Tools::DotProduct(centerDiff, box.GetAxis(0)));
-    auto centerDiffY = Math::FAbs(Vector3Tools::DotProduct(centerDiff, box.GetAxis(1)));
-    auto centerDiffZ = Math::FAbs(Vector3Tools::DotProduct(centerDiff, box.GetAxis(2)));
+    auto centerDiffX = MathType::FAbs(Vector3Tools::DotProduct(centerDiff, box.GetAxis(0)));
+    auto centerDiffY = MathType::FAbs(Vector3Tools::DotProduct(centerDiff, box.GetAxis(1)));
+    auto centerDiffZ = MathType::FAbs(Vector3Tools::DotProduct(centerDiff, box.GetAxis(2)));
     auto diffX = centerDiffX - box.GetExtent(0);
     auto diffY = centerDiffY - box.GetExtent(1);
     auto diffZ = centerDiffZ - box.GetExtent(2);

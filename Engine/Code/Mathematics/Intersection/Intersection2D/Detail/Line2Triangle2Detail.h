@@ -58,19 +58,19 @@ void Mathematics::Line2Triangle2<Real>::TriangleLineRelations()
     {
         auto diff = vertex.at(i) - origin;
         distance.at(i) = Vector2Tools::DotPerp(diff, direction);
-        if (Math::GetZeroTolerance() < distance.at(i))
+        if (MathType::GetZeroTolerance() < distance.at(i))
         {
             sign.at(i) = NumericalValueSymbol::Positive;
             ++positive;
         }
-        else if (distance.at(i) < -Math::GetZeroTolerance())
+        else if (distance.at(i) < -MathType::GetZeroTolerance())
         {
             sign.at(i) = NumericalValueSymbol::Negative;
             ++negative;
         }
         else
         {
-            distance.at(i) = Math::GetValue(0);
+            distance.at(i) = MathType::GetValue(0);
             sign.at(i) = NumericalValueSymbol::Zero;
             ++zero;
         }

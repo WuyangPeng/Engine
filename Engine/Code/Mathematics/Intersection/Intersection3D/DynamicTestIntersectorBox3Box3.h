@@ -27,10 +27,10 @@ namespace Mathematics
         using Vector3 = Vector3<Real>;
         using Box3 = Box3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
 
     public:
-        DynamicTestIntersectorBox3Box3(const Box3& box0, const Box3& box1, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
+        DynamicTestIntersectorBox3Box3(const Box3& box0, const Box3& box1, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

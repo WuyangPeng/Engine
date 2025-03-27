@@ -223,14 +223,14 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
 
     /// 将三角形投影到与平面法线最对齐的坐标平面上。
     auto maxNormal = 0;
-    auto x = Math::FAbs(plane.GetNormal().GetX());
-    auto y = Math::FAbs(plane.GetNormal().GetY());
+    auto x = MathType::FAbs(plane.GetNormal().GetX());
+    auto y = MathType::FAbs(plane.GetNormal().GetY());
     if (x < y)
     {
         maxNormal = 1;
         x = y;
     }
-    y = Math::FAbs(plane.GetNormal().GetZ());
+    y = MathType::FAbs(plane.GetNormal().GetZ());
     if (x < y)
     {
         maxNormal = 2;
@@ -313,10 +313,10 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
     // 取消投影相交线段。
     if (maxNormal == 0)
     {
-        Real invNormalX = (Math::GetValue(1)) / plane.GetNormal().GetX();
+        Real invNormalX = (MathType::GetValue(1)) / plane.GetNormal().GetX();
         for (auto i = 0; i < quantity; ++i)
         {
-            Vector3 vector3{ Math::GetValue(0), intersector.at(i).GetX(), intersector.at(i).GetY() };
+            Vector3 vector3{ MathType::GetValue(0), intersector.at(i).GetX(), intersector.at(i).GetY() };
 
             vector3.SetX(invNormalX * (plane.GetConstant() - plane.GetNormal().GetY() * vector3.GetY() - plane.GetNormal().GetZ() * vector3.GetZ()));
 
@@ -325,10 +325,10 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
     }
     else if (maxNormal == 1)
     {
-        Real invNormalY = (Math::GetValue(1)) / plane.GetNormal().GetY();
+        Real invNormalY = (MathType::GetValue(1)) / plane.GetNormal().GetY();
         for (auto i = 0; i < quantity; ++i)
         {
-            Vector3 vector3{ intersector.at(i).GetX(), intersector.at(i).GetY(), Math::GetValue(0) };
+            Vector3 vector3{ intersector.at(i).GetX(), intersector.at(i).GetY(), MathType::GetValue(0) };
 
             vector3.SetZ(invNormalY * (plane.GetConstant() - plane.GetNormal().GetX() * vector3.GetX() - plane.GetNormal().GetZ() * vector3.GetZ()));
 
@@ -337,10 +337,10 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
     }
     else
     {
-        Real invNormalZ = (Math::GetValue(1)) / plane.GetNormal().GetZ();
+        Real invNormalZ = (MathType::GetValue(1)) / plane.GetNormal().GetZ();
         for (auto i = 0; i < quantity; ++i)
         {
-            Vector3 vector3{ intersector.at(i).GetX(), intersector.at(i).GetY(), Math::GetValue(0) };
+            Vector3 vector3{ intersector.at(i).GetX(), intersector.at(i).GetY(), MathType::GetValue(0) };
 
             vector3.SetZ(invNormalZ * (plane.GetConstant() - plane.GetNormal().GetX() * vector3.GetX() - plane.GetNormal().GetY() * vector3.GetY()));
 
@@ -354,14 +354,14 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInte
 {
     // 在与平面法线最对齐的坐标平面上投影三角形。
     auto maxNormal = 0;
-    auto x = Math::FAbs(plane.GetNormal().GetX());
-    auto y = Math::FAbs(plane.GetNormal().GetY());
+    auto x = MathType::FAbs(plane.GetNormal().GetX());
+    auto y = MathType::FAbs(plane.GetNormal().GetY());
     if (x < y)
     {
         maxNormal = 1;
         x = y;
     }
-    y = Math::FAbs(plane.GetNormal().GetZ());
+    y = MathType::FAbs(plane.GetNormal().GetZ());
     if (x < y)
     {
         maxNormal = 2;
@@ -407,7 +407,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInte
 
     auto edge0 = projectTriangle0.GetVertex(1) - projectTriangle0.GetVertex(0);
     auto edge1 = projectTriangle0.GetVertex(2) - projectTriangle0.GetVertex(0);
-    if (Vector2Tools<Real>::DotPerp(edge0, edge1) < Math::GetValue(0))
+    if (Vector2Tools<Real>::DotPerp(edge0, edge1) < MathType::GetValue(0))
     {
         // 三角形是顺时针方向，请重新排序。
         projectTriangle0 = Triangle2<Real>{ projectTriangle0Vector.at(0), projectTriangle0Vector.at(2), projectTriangle0Vector.at(1) };
@@ -415,7 +415,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInte
 
     edge0 = projectTriangle1.GetVertex(1) - projectTriangle1.GetVertex(0);
     edge1 = projectTriangle1.GetVertex(2) - projectTriangle1.GetVertex(0);
-    if (Vector2Tools<Real>::DotPerp(edge0, edge1) < Math::GetValue(0))
+    if (Vector2Tools<Real>::DotPerp(edge0, edge1) < MathType::GetValue(0))
     {
         // 三角形是顺时针方向，请重新排序。
         projectTriangle1 = Triangle2<Real>{ projectTriangle1Vector.at(0), projectTriangle1Vector.at(2), projectTriangle1Vector.at(1) };
@@ -431,30 +431,30 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInte
     const auto quantity = intr.GetQuantity();
     if (maxNormal == 0)
     {
-        auto invNormalX = (Math::GetValue(1)) / plane.GetNormal().GetX();
+        auto invNormalX = (MathType::GetValue(1)) / plane.GetNormal().GetX();
         for (auto i = 0; i < quantity; i++)
         {
-            Vector3 vector3{ Math::GetValue(0), intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY() };
+            Vector3 vector3{ MathType::GetValue(0), intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY() };
             vector3.SetX(invNormalX * (plane.GetConstant() - plane.GetNormal().GetY() * vector3.GetY() - plane.GetNormal().GetZ() * vector3.GetZ()));
             point.emplace_back(vector3);
         }
     }
     else if (maxNormal == 1)
     {
-        auto invNormalY = (Math::GetValue(1)) / plane.GetNormal().GetY();
+        auto invNormalY = (MathType::GetValue(1)) / plane.GetNormal().GetY();
         for (auto i = 0; i < quantity; i++)
         {
-            Vector3 vector3{ intr.GetPoint(i).GetX(), Math::GetValue(0), intr.GetPoint(i).GetY() };
+            Vector3 vector3{ intr.GetPoint(i).GetX(), MathType::GetValue(0), intr.GetPoint(i).GetY() };
             vector3.SetY(invNormalY * (plane.GetConstant() - plane.GetNormal().GetX() * vector3.GetX() - plane.GetNormal().GetZ() * vector3.GetZ()));
             point.emplace_back(vector3);
         }
     }
     else
     {
-        auto invNormalZ = (Math::GetValue(1)) / plane.GetNormal().GetZ();
+        auto invNormalZ = (MathType::GetValue(1)) / plane.GetNormal().GetZ();
         for (auto i = 0; i < quantity; i++)
         {
-            Vector3 vector3{ intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY(), Math::GetValue(0) };
+            Vector3 vector3{ intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY(), MathType::GetValue(0) };
             vector3.SetZ(invNormalZ * (plane.GetConstant() - plane.GetNormal().GetX() * vector3.GetX() - plane.GetNormal().GetY() * vector3.GetY()));
             point.emplace_back(vector3);
         }

@@ -29,7 +29,7 @@ namespace Mathematics
 
         using ClassType = EigenDecomposition<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Matrix2 = Matrix2<Real>;
         using Matrix3 = Matrix3<Real>;
         using Vector2 = Vector2<Real>;

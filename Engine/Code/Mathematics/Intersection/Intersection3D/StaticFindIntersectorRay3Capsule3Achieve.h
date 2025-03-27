@@ -57,13 +57,13 @@ void Mathematics::StaticFindIntersectorRay3Capsule3<Real>::Find()
 {
     const auto findShared = StaticFindIntersectorLine3Capsule3<Real>::Find(ray.GetOrigin(), ray.GetDirection(), capsule);
 
-    if (0 < findShared.quantity && Math::GetValue(0) <= findShared.parameter0)
+    if (0 < findShared.quantity && MathType::GetValue(0) <= findShared.parameter0)
     {
         point0 = ray.GetOrigin() + findShared.parameter0 * ray.GetDirection();
         ++quantity;
     }
 
-    if (1 < findShared.quantity && Math::GetValue(0) <= findShared.parameter1)
+    if (1 < findShared.quantity && MathType::GetValue(0) <= findShared.parameter1)
     {
         if (quantity == 0)
         {

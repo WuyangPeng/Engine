@@ -85,7 +85,7 @@ void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>::Test()
     auto directionUSqrLen = Vector3Tools::GetLengthSquared(directionU);
     auto normalUSqrLen = Vector3Tools::GetLengthSquared(normalU);
     auto edgeNormalSqrLen = Vector3Tools::GetLengthSquared(edgeNormal);
-    auto oneMinusEpsilon = Math::GetValue(1) - Math::GetZeroTolerance();
+    auto oneMinusEpsilon = MathType::GetValue(1) - MathType::GetZeroTolerance();
 
     // Æ½ÐÐ
     if (oneMinusEpsilon * edgeNormalSqrLen * directionUSqrLen < normalUSqrLen)

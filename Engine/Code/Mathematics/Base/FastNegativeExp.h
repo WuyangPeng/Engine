@@ -26,7 +26,7 @@ namespace Mathematics
     public:
         using ClassType = FastNegativeExp<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         // 快速逼近exp(-x)。输入x必须在范围[0,无穷大)

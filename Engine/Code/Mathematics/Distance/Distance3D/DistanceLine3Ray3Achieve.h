@@ -67,17 +67,17 @@ typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::Dista
     {
         auto rhsT = tool.GetRhsT();
 
-        if (Math::GetValue(0) <= rhsT)
+        if (MathType::GetValue(0) <= rhsT)
         {
             // 两个内部点最接近，一个在直线上，一个在射线上。
             auto lhsT = tool.GetLhsT() / det;
             rhsT /= det;
-            auto squaredDistance = lhsT * (lhsT + tool.GetDirectionDot() * rhsT + Math::GetValue(2) * tool.GetOriginDifferenceDotLhsDirection()) +
-                                   rhsT * (tool.GetDirectionDot() * lhsT + rhsT + Math::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) +
+            auto squaredDistance = lhsT * (lhsT + tool.GetDirectionDot() * rhsT + MathType::GetValue(2) * tool.GetOriginDifferenceDotLhsDirection()) +
+                                   rhsT * (tool.GetDirectionDot() * lhsT + rhsT + MathType::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) +
                                    tool.GetOriginDifferenceSquaredLength();
 
-            return DistanceResult{ Math::GetNumericalRoundOffNonnegative(squaredDistance),
-                                   Math::GetValue(0),
+            return DistanceResult{ MathType::GetNumericalRoundOffNonnegative(squaredDistance),
+                                   MathType::GetValue(0),
                                    line.GetOrigin() + lhsT * line.GetDirection(),
                                    ray.GetOrigin() + rhsT * ray.GetDirection(),
                                    lhsT,
@@ -102,11 +102,11 @@ typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::Dista
     auto squaredDistance = tool.GetSquaredDistanceWithLhs();
 
     return DistanceResult{ squaredDistance,
-                           Math::GetValue(0),
+                           MathType::GetValue(0),
                            line.GetOrigin() - tool.GetOriginDifferenceDotLhsDirection() * line.GetDirection(),
                            ray.GetOrigin(),
                            -tool.GetOriginDifferenceDotLhsDirection(),
-                           Math::GetValue(0) };
+                           MathType::GetValue(0) };
 }
 
 template <typename Real>

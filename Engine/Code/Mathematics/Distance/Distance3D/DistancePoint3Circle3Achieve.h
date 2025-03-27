@@ -62,7 +62,7 @@ typename Mathematics::DistancePoint3Circle3<Real>::DistanceResult Mathematics::D
     const auto lengthDiscriminant = Vector3Tools::GetLength(discriminant);
     Vector3 closestPoint{};
 
-    if (Math::GetValue(0) < lengthDiscriminant)
+    if (MathType::GetValue(0) < lengthDiscriminant)
     {
         closestPoint = circle.GetCenter() + circle.GetRadius() * discriminant / lengthDiscriminant;
     }
@@ -75,7 +75,7 @@ typename Mathematics::DistancePoint3Circle3<Real>::DistanceResult Mathematics::D
     const auto diff = point - closestPoint;
     const auto sqrDistance = Vector3Tools::DotProduct(diff, diff);
 
-    return DistanceResult{ sqrDistance, Math::GetValue(0), point, closestPoint };
+    return DistanceResult{ sqrDistance, MathType::GetValue(0), point, closestPoint };
 }
 
 template <typename Real>

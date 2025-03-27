@@ -63,7 +63,7 @@ typename Mathematics::DistancePoint3Tetrahedron3<Real>::DistanceResult Mathemati
     auto planes = tetrahedron.GetPlanes();
 
     /// 确定哪些面对查询点可见。 点到三角形的距离查询只需要处理这些。
-    auto minSqrDistance = Math::maxReal;
+    auto minSqrDistance = MathType::maxReal;
     auto minTetraClosest = Vector3::GetZero();
     constexpr auto tetrahedronSize = 4;
     for (auto i = 0; i < tetrahedronSize; ++i)
@@ -84,7 +84,7 @@ typename Mathematics::DistancePoint3Tetrahedron3<Real>::DistanceResult Mathemati
     }
 
     Vector3 closestPoint{};
-    if (Math::Approximate(minSqrDistance, Math::maxReal))
+    if (MathType::Approximate(minSqrDistance, MathType::maxReal))
     {
         // 查询点在“实心”四面体之外。
         closestPoint = minTetraClosest;
@@ -92,11 +92,11 @@ typename Mathematics::DistancePoint3Tetrahedron3<Real>::DistanceResult Mathemati
     else
     {
         // 查询点在“实心”四面体内部。 返回零距离。 最接近的点是相同的。
-        minSqrDistance = Math::GetValue(0);
+        minSqrDistance = MathType::GetValue(0);
         closestPoint = point;
     }
 
-    return DistanceResult{ minSqrDistance, Math::GetValue(0), point, closestPoint };
+    return DistanceResult{ minSqrDistance, MathType::GetValue(0), point, closestPoint };
 }
 
 template <typename Real>

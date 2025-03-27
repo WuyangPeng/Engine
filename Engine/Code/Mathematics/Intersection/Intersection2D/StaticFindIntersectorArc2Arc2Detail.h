@@ -65,7 +65,7 @@ void Mathematics::StaticFindIntersectorArc2Arc2<Real>::Find()
                 {
                     // m_LhsArc和m_RhsArc共享端点 <B0,A0,B1,A1>, A0 = B1.
                     this->SetIntersectionType(IntersectionType::Point);
-                    point.emplace_back((lhsArc.GetEnd0() + rhsArc.GetEnd1()) / Math::GetValue(2));
+                    point.emplace_back((lhsArc.GetEnd0() + rhsArc.GetEnd1()) / MathType::GetValue(2));
                 }
             }
 
@@ -85,7 +85,7 @@ void Mathematics::StaticFindIntersectorArc2Arc2<Real>::Find()
             {
                 // m_LhsArc和m_RhsArc共享端点， <A0,B0,A1,B1>, B0 = A1.
                 this->SetIntersectionType(IntersectionType::Point);
-                point.emplace_back((rhsArc.GetEnd0() + lhsArc.GetEnd1()) / Math::GetValue(2));
+                point.emplace_back((rhsArc.GetEnd0() + lhsArc.GetEnd1()) / MathType::GetValue(2));
             }
 
             return;

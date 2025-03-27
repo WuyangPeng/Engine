@@ -95,7 +95,7 @@ namespace Mathematics
     public:
         using ClassType = Cone<N, Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector = Algebra::Vector<N, Real>;
         using Ray = Ray<N, Real>;
         using Vector2 = Algebra::Vector<2, Real>;

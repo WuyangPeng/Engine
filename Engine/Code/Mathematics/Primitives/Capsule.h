@@ -24,7 +24,7 @@ namespace Mathematics
     public:
         using ClassType = Capsule<N, Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Segment = Segment<N, Real>;
 
     public:

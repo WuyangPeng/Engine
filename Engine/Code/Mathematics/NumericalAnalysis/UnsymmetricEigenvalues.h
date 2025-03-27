@@ -26,7 +26,7 @@ namespace Mathematics
     public:
         using ClassType = UnsymmetricEigenvalues<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         /// 求解器处理NxN个矩阵（不一定是对称的），

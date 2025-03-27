@@ -55,8 +55,8 @@ Mathematics::Box3<Real> Mathematics::StaticFindIntersectorRay3Box3<Real>::GetBox
 template <typename Real>
 void Mathematics::StaticFindIntersectorRay3Box3<Real>::Find()
 {
-    constexpr auto t0 = Math::GetValue(0);
-    constexpr auto t1 = Math::maxReal;
+    constexpr auto t0 = MathType::GetValue(0);
+    constexpr auto t1 = MathType::maxReal;
 
     const auto findShared = StaticFindIntersectorLine3Box3<Real>::DoClipping(t0, t1, ray.GetOrigin(), ray.GetDirection(), box, true);
     quantity = findShared.quantity;

@@ -25,7 +25,7 @@ namespace Mathematics
 
         using ClassType = SingularValueDecomposition<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using VariableMatrix = VariableMatrix<Real>;
         using VariableLengthVector = VariableLengthVector<Real>;
 

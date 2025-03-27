@@ -61,7 +61,7 @@ void Mathematics::StaticTestIntersectorRay3Plane3<Real>::Test() noexcept
 {
     const Line3<Real> line{ ray.GetOrigin(), ray.GetDirection() };
     StaticFindIntersectorLine3Plane3<Real> intr{ line, plane };
-    if (intr.IsIntersection() && Math::GetValue(0) <= intr.GetLineParameter())
+    if (intr.IsIntersection() && MathType::GetValue(0) <= intr.GetLineParameter())
     {
         this->SetIntersectionType(intr.GetIntersectionType());
 

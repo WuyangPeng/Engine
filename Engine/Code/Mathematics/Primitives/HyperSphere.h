@@ -23,7 +23,7 @@ namespace Mathematics
     public:
         using ClassType = HyperSphere<N, Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector = Algebra::Vector<N, Real>;
 
     public:

@@ -23,12 +23,12 @@ namespace Mathematics
     public:
         using ClassType = BandedMatrixInvert<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using BandedMatrix = BandedMatrix<Real>;
         using VariableMatrix = VariableMatrix<Real>;
 
     public:
-        explicit BandedMatrixInvert(const BandedMatrix& matrix, Real zeroTolerance = Math::GetZeroTolerance());
+        explicit BandedMatrixInvert(const BandedMatrix& matrix, Real zeroTolerance = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 

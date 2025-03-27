@@ -21,8 +21,8 @@ Mathematics::EllipseByArcs2<Real>::EllipseByArcs2(Real begin, Real end, size_t n
     : points(numArcs + 1), circle(numArcs)
 {
     MATHEMATICS_ASSERTION_2(2 <= circle.size(), "必须至少指定两个圆弧\n");
-    MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= begin, "begin必须大于或等于0\n");
-    MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= end, " end必须大于或等于0\n");
+    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= begin, "begin必须大于或等于0\n");
+    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= end, " end必须大于或等于0\n");
 
     Calculate(begin, end);
 
@@ -36,13 +36,13 @@ void Mathematics::EllipseByArcs2<Real>::Calculate(Real begin, Real end)
     const auto beginSquare = begin * begin;
     const auto endSquare = end * end;
     const auto aMultipliedB = begin * end;
-    const auto inverseEndSquareMinusBeginSquare = Math::GetValue(1) / (endSquare - beginSquare);
+    const auto inverseEndSquareMinusBeginSquare = MathType::GetValue(1) / (endSquare - beginSquare);
 
     const auto numArcs = boost::numeric_cast<int>(circle.size());
 
     // 在第一象限椭圆的终点。点按逆时针顺序产生。
-    points.at(0) = Vector2{ begin, Math::GetValue(0) };
-    points.at(numArcs) = Vector2{ Math::GetValue(0), end };
+    points.at(0) = Vector2{ begin, MathType::GetValue(0) };
+    points.at(numArcs) = Vector2{ MathType::GetValue(0), end };
 
     // 终点的曲率，对于计算圆弧存储曲率。
     auto beginCurvature = begin / endSquare;
@@ -53,13 +53,13 @@ void Mathematics::EllipseByArcs2<Real>::Calculate(Real begin, Real end)
     {
         // 新点曲率为两端曲率加权平均值。
         auto weight1 = static_cast<Real>(index) / static_cast<Real>(numArcs);
-        auto weight0 = Math::GetValue(1) - weight1;
+        auto weight0 = MathType::GetValue(1) - weight1;
         auto curvature = weight0 * beginCurvature + weight1 * endCurvature;
 
         // 使用曲率计算点。
-        auto pow = Math::Pow(aMultipliedB / curvature, Math::GetValue(2) / Math::GetValue(3));
-        points.at(index).SetCoordinate(begin * Math::Sqrt(Math::FAbs((pow - beginSquare) * inverseEndSquareMinusBeginSquare)),
-                                       end * Math::Sqrt(Math::FAbs((pow - endSquare) * inverseEndSquareMinusBeginSquare)));
+        auto pow = MathType::Pow(aMultipliedB / curvature, MathType::GetValue(2) / MathType::GetValue(3));
+        points.at(index).SetCoordinate(begin * MathType::Sqrt(MathType::FAbs((pow - beginSquare) * inverseEndSquareMinusBeginSquare)),
+                                       end * MathType::Sqrt(MathType::FAbs((pow - endSquare) * inverseEndSquareMinusBeginSquare)));
     }
 
     // 计算圆弧在 (a,0).

@@ -87,7 +87,7 @@ void Mathematics::StaticTestIntersectorCircle3Plane3<Real>::Test()
 
     // 实值根表示一个交集。
     auto discr = a1 * a1 - a0 * a2;
-    this->SetIntersectionType(Math::GetValue(0) <= discr ? IntersectionType::Point : IntersectionType::Empty);
+    this->SetIntersectionType(MathType::GetValue(0) <= discr ? IntersectionType::Point : IntersectionType::Empty);
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_CIRCLE3_PLANE3_ACHIEVE_H

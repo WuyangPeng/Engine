@@ -55,7 +55,7 @@ Mathematics::Segment3<Real> Mathematics::DynamicTestIntersectorHalfspace3Segment
 template <typename Real>
 void Mathematics::DynamicTestIntersectorHalfspace3Segment3<Real>::Test()
 {
-    this->SetContactTime(Math::GetValue(0));
+    this->SetContactTime(MathType::GetValue(0));
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
     using SegmentType = std::array<Vector3, 2>;
@@ -63,7 +63,7 @@ void Mathematics::DynamicTestIntersectorHalfspace3Segment3<Real>::Test()
 
     const auto projection = TestIntersectorAxis<Real>::GetProjection(halfspace.GetNormal(), segmentType);
 
-    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -Math::maxReal, halfspace.GetConstant(), projection.first, projection.second, this->GetTMax() };
+    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -MathType::maxReal, halfspace.GetConstant(), projection.first, projection.second, this->GetTMax() };
 
     auto contactTime = testIntersectorAxis.GetTFirst();
     if (testIntersectorAxis.GetResult())

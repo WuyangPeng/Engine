@@ -28,7 +28,7 @@ namespace Mathematics
         using Vector3 = Vector3<Real>;
         using Points = std::vector<Vector3>;
         using Box3 = Box3<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         ContBox3() noexcept;

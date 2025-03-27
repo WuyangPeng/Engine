@@ -27,7 +27,7 @@ namespace Mathematics
     public:
         using ClassType = ApproximationCone3ExtractEllipses<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector3 = Algebra::Vector3<Real>;
         using Vector3Container = std::vector<Vector3>;
         using Ellipse3 = Algebra::Ellipse3<Real>;

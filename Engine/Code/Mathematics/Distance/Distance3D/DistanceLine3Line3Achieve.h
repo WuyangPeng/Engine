@@ -67,12 +67,12 @@ typename Mathematics::DistanceLine3Line3<Real>::DistanceResult Mathematics::Dist
         // 线不平行。
         const auto lhsT = tool.GetLhsT() / det;
         const auto rhsT = tool.GetRhsT() / det;
-        const auto squaredDistance = lhsT * (lhsT + tool.GetDirectionDot() * rhsT + Math::GetValue(2) * tool.GetOriginDifferenceDotLhsDirection()) +
-                                     rhsT * (tool.GetDirectionDot() * lhsT + rhsT + Math::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) +
+        const auto squaredDistance = lhsT * (lhsT + tool.GetDirectionDot() * rhsT + MathType::GetValue(2) * tool.GetOriginDifferenceDotLhsDirection()) +
+                                     rhsT * (tool.GetDirectionDot() * lhsT + rhsT + MathType::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) +
                                      tool.GetOriginDifferenceSquaredLength();
 
-        return DistanceResult{ Math::GetNumericalRoundOffNonnegative(squaredDistance),
-                               Math::GetValue(0),
+        return DistanceResult{ MathType::GetNumericalRoundOffNonnegative(squaredDistance),
+                               MathType::GetValue(0),
                                lhsLine.GetOrigin() + lhsT * lhsLine.GetDirection(),
                                rhsLine.GetOrigin() + rhsT * rhsLine.GetDirection(),
                                lhsT,
@@ -85,11 +85,11 @@ typename Mathematics::DistanceLine3Line3<Real>::DistanceResult Mathematics::Dist
         const auto squaredDistance = tool.GetSquaredDistanceWithParallel();
 
         return DistanceResult{ squaredDistance,
-                               Math::GetValue(0),
+                               MathType::GetValue(0),
                                lhsLine.GetOrigin() - originDifferenceDotLhsDirection * lhsLine.GetDirection(),
                                rhsLine.GetOrigin(),
                                -originDifferenceDotLhsDirection,
-                               Math::GetValue(0) };
+                               MathType::GetValue(0) };
     }
 }
 

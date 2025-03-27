@@ -61,7 +61,7 @@ typename Mathematics::DistanceLine3Rectangle3<Real>::DistanceResult Mathematics:
     const auto crossProduct = Vector3Tools::CrossProduct(rectangle.GetAxis0(), rectangle.GetAxis1());
 
     if (const auto dot = Vector3Tools::DotProduct(crossProduct, line.GetDirection());
-        Math::GetZeroTolerance() < Math::FAbs(dot))
+        MathType::GetZeroTolerance() < MathType::FAbs(dot))
     {
         // 线和矩形不平行，因此线与矩形的平面相交。
         const auto diff = line.GetOrigin() - rectangle.GetCenter();
@@ -75,13 +75,13 @@ typename Mathematics::DistanceLine3Rectangle3<Real>::DistanceResult Mathematics:
         const auto vVectorDotAxis0 = Vector3Tools::DotProduct(vVector, rectangle.GetAxis0());
         const auto vVectorDotAxis1 = Vector3Tools::DotProduct(vVector, rectangle.GetAxis1());
         const auto vVectorDotDiff = Vector3Tools::DotProduct(vVector, diff);
-        const auto invDet = (Math::GetValue(1)) / (uVectorDotAxis0 * vVectorDotAxis1 - uVectorDotAxis1 * vVectorDotAxis0);
+        const auto invDet = (MathType::GetValue(1)) / (uVectorDotAxis0 * vVectorDotAxis1 - uVectorDotAxis1 * vVectorDotAxis0);
 
         // 相交点的矩形坐标。
         const auto s0 = (vVectorDotAxis1 * uVectorDotDiff - uVectorDotAxis1 * vVectorDotDiff) * invDet;
         const auto s1 = (uVectorDotAxis0 * vVectorDotDiff - vVectorDotAxis0 * uVectorDotDiff) * invDet;
 
-        if (Math::FAbs(s0) <= rectangle.GetExtent0() && Math::FAbs(s1) <= rectangle.GetExtent1())
+        if (MathType::FAbs(s0) <= rectangle.GetExtent0() && MathType::FAbs(s1) <= rectangle.GetExtent1())
         {
             // 相交点的线参数。
             const auto directionDotAxis0 = Vector3Tools::DotProduct(line.GetDirection(), rectangle.GetAxis0());
@@ -98,7 +98,7 @@ typename Mathematics::DistanceLine3Rectangle3<Real>::DistanceResult Mathematics:
 
             const auto closestPoint1 = rectangle.GetCenter() + s0 * rectangle.GetAxis0() + s1 * rectangle.GetAxis1();
 
-            return DistanceResult{ Math::GetValue(0), Math::GetValue(0), closestPoint0, closestPoint1, lineParameter, Math::GetValue(0) };
+            return DistanceResult{ MathType::GetValue(0), MathType::GetValue(0), closestPoint0, closestPoint1, lineParameter, MathType::GetValue(0) };
         }
     }
 
@@ -109,7 +109,7 @@ typename Mathematics::DistanceLine3Rectangle3<Real>::DistanceResult Mathematics:
     /// （1）线不与矩形平行，且线和矩形平面的交点在矩形外部，或者（2）线和矩形平行。
     /// 无论如何，矩形上的最接近点在矩形的边缘上。 将线与矩形的所有四个边缘进行比较。
 
-    auto sqrDist = Math::maxReal;
+    auto sqrDist = MathType::maxReal;
     constexpr auto size = 2;
     std::array<Vector3, size> scaledDir{ rectangle.GetExtent0() * rectangle.GetAxis0(), rectangle.GetExtent1() * rectangle.GetAxis1() };
 
@@ -142,7 +142,7 @@ typename Mathematics::DistanceLine3Rectangle3<Real>::DistanceResult Mathematics:
         }
     }
 
-    return DistanceResult{ sqrDist, Math::GetValue(0), closestPoint0, closestPoint1, lineParameter, Math::GetValue(0) };
+    return DistanceResult{ sqrDist, MathType::GetValue(0), closestPoint0, closestPoint1, lineParameter, MathType::GetValue(0) };
 }
 
 template <typename Real>

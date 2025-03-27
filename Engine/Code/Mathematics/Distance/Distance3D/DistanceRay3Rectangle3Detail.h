@@ -66,7 +66,7 @@ typename Mathematics::DistanceRay3Rectangle3<Real>::DistanceResult Mathematics::
     auto sqrDist = distanceLine3Rectangle3.GetSquared();
     auto rayParameter = sqrDist.GetLhsParameter();
 
-    if (Math::GetValue(0) <= rayParameter)
+    if (MathType::GetValue(0) <= rayParameter)
     {
         closestPoint0 = sqrDist.GetLhsClosestPoint();
         closestPoint1 = sqrDist.GetRhsClosestPoint();
@@ -79,12 +79,12 @@ typename Mathematics::DistanceRay3Rectangle3<Real>::DistanceResult Mathematics::
         DistancePoint3Rectangle3<Real> distancePoint3Rectangle3{ closestPoint0, rectangle };
         sqrDist = distancePoint3Rectangle3.GetSquared();
         closestPoint1 = sqrDist.GetRhsClosestPoint();
-        rayParameter = Math::GetValue(0);
+        rayParameter = MathType::GetValue(0);
         rectCoord[0] = distancePoint3Rectangle3.GetRectangleCoordinate(0);
         rectCoord[1] = distancePoint3Rectangle3.GetRectangleCoordinate(1);
     }
 
-    return DistanceResult{ sqrDist.GetDistance(), Math::GetValue(0), closestPoint0, closestPoint1, rayParameter, Math::GetValue(0) };
+    return DistanceResult{ sqrDist.GetDistance(), MathType::GetValue(0), closestPoint0, closestPoint1, rayParameter, MathType::GetValue(0) };
 }
 
 template <typename Real>

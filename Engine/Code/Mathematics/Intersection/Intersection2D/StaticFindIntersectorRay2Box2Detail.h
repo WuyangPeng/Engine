@@ -56,8 +56,8 @@ Mathematics::Box2<Real> Mathematics::StaticFindIntersectorRay2Box2<Real>::GetBox
 template <typename Real>
 void Mathematics::StaticFindIntersectorRay2Box2<Real>::Find()
 {
-    constexpr auto t0 = Math::GetValue(0);
-    constexpr auto t1 = Math::maxReal;
+    constexpr auto t0 = MathType::GetValue(0);
+    constexpr auto t1 = MathType::maxReal;
 
     const Line2Box2<Real> line2Box2{ t0, t1, ray.GetOrigin(), ray.GetDirection(), box, true };
     quantity = line2Box2.GetRootCount();

@@ -67,7 +67,7 @@ void Mathematics::StaticFindIntersectorLine3Ellipsoid3<Real>::Find()
     const auto matrixDiff = matrix * diff;
     auto a2 = Vector3Tools::DotProduct(line.GetDirection(), matrixDirection);
     auto a1 = Vector3Tools::DotProduct(line.GetDirection(), matrixDiff);
-    auto a0 = Vector3Tools::DotProduct(diff, matrixDiff) - Math::GetValue(1);
+    auto a0 = Vector3Tools::DotProduct(diff, matrixDiff) - MathType::GetValue(1);
 
     // 如果Q(t)具有实根，则发生相交。
     auto discr = a1 * a1 - a0 * a2;
@@ -82,8 +82,8 @@ void Mathematics::StaticFindIntersectorLine3Ellipsoid3<Real>::Find()
         this->SetIntersectionType(IntersectionType::Segment);
         quantity = 2;
 
-        auto root = Math::Sqrt(discr);
-        auto inv = (Math::GetValue(1)) / a2;
+        auto root = MathType::Sqrt(discr);
+        auto inv = (MathType::GetValue(1)) / a2;
         auto t0 = (-a1 - root) * inv;
         auto t1 = (-a1 + root) * inv;
         point0 = line.GetOrigin() + t0 * line.GetDirection();
@@ -128,9 +128,9 @@ void Mathematics::StaticFindIntersectorLine3Ellipsoid3<Real>::SetNegativeThresho
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    MATHEMATICS_ASSERTION_0(Math::GetValue(0) < negThreshold, "负阈值必须为非正数。");
+    MATHEMATICS_ASSERTION_0(MathType::GetValue(0) < negThreshold, "负阈值必须为非正数。");
 
-    if (negThreshold <= Math::GetValue(0))
+    if (negThreshold <= MathType::GetValue(0))
     {
         negativeThreshold = negThreshold;
     }
@@ -149,9 +149,9 @@ void Mathematics::StaticFindIntersectorLine3Ellipsoid3<Real>::SetPositiveThresho
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    MATHEMATICS_ASSERTION_0(posThreshold < Math::GetValue(0), "正阈值必须为非负。");
+    MATHEMATICS_ASSERTION_0(posThreshold < MathType::GetValue(0), "正阈值必须为非负。");
 
-    if (Math::GetValue(0) <= posThreshold)
+    if (MathType::GetValue(0) <= posThreshold)
     {
         positiveThreshold = posThreshold;
     }

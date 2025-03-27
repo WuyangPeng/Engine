@@ -127,19 +127,19 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
 
     // 获取线的单位长度方向在胶囊坐标中的z值。
     auto directionDot = Vector3Tools::DotProduct(segmentDirection, direction);
-    if (Math::GetValue(1) - Math::GetZeroTolerance() <= Math::FAbs(directionDot))
+    if (MathType::GetValue(1) - MathType::GetZeroTolerance() <= MathType::FAbs(directionDot))
     {
         // 该线平行于胶囊轴线。 确定该线是否与胶囊半球相交。
         auto radialSqrDist = radiusSqr - point.GetX() * point.GetX() - point.GetY() * point.GetY();
-        if (radialSqrDist < Math::GetValue(0))
+        if (radialSqrDist < MathType::GetValue(0))
         {
             // 线在胶囊圆柱体的外部，无相交处。
             return findShared;
         }
 
         // 线与半球帽相交
-        auto zOffset = Math::Sqrt(radialSqrDist) + extent;
-        if (Math::GetValue(0) < directionDot)
+        auto zOffset = MathType::Sqrt(radialSqrDist) + extent;
+        if (MathType::GetValue(0) < directionDot)
         {
             findShared.parameter0 = -point.GetZ() - zOffset;
             findShared.parameter1 = -point.GetZ() + zOffset;
@@ -164,21 +164,21 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
     auto a1 = point.GetX() * dot.GetX() + point.GetY() * dot.GetY();
     auto a2 = dot.GetX() * dot.GetX() + dot.GetY() * dot.GetY();
     auto discr = a1 * a1 - a0 * a2;
-    if (discr < Math::GetValue(0))
+    if (discr < MathType::GetValue(0))
     {
         // 线不与无限圆柱相交。
         return findShared;
     }
 
     int quantity = 0;
-    if (Math::GetZeroTolerance() < discr)
+    if (MathType::GetZeroTolerance() < discr)
     {
         // 线在两个地方与无限圆柱相交。
-        auto root = Math::Sqrt(discr);
-        auto inv = (Math::GetValue(1)) / a2;
+        auto root = MathType::Sqrt(discr);
+        auto inv = (MathType::GetValue(1)) / a2;
         auto tValue = (-a1 - root) * inv;
         auto zValue = point.GetZ() + tValue * dot.GetZ();
-        if (Math::FAbs(zValue) <= extent)
+        if (MathType::FAbs(zValue) <= extent)
         {
             findShared.parameter0 = tValue;
             ++quantity;
@@ -186,7 +186,7 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
 
         tValue = (-a1 + root) * inv;
         zValue = point.GetZ() + tValue * dot.GetZ();
-        if (Math::FAbs(zValue) <= extent)
+        if (MathType::FAbs(zValue) <= extent)
         {
             if (quantity == 0)
             {
@@ -212,7 +212,7 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
         auto tValue = -a1 / a2;
 
         if (auto zValue = point.GetZ() + tValue * dot.GetZ();
-            Math::FAbs(zValue) <= extent)
+            MathType::FAbs(zValue) <= extent)
         {
             findShared.parameter0 = tValue;
 
@@ -227,9 +227,9 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
     a1 += zPlusExtent * dot.GetZ();
     a0 += zPlusExtent * zPlusExtent;
     discr = a1 * a1 - a0;
-    if (Math::GetZeroTolerance() < discr)
+    if (MathType::GetZeroTolerance() < discr)
     {
-        auto root = Math::Sqrt(discr);
+        auto root = MathType::Sqrt(discr);
         auto tValue = -a1 - root;
         auto zValue = point.GetZ() + tValue * dot.GetZ();
         if (zValue <= -extent)
@@ -280,7 +280,7 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
             }
         }
     }
-    else if (Math::FAbs(discr) <= Math::GetZeroTolerance())
+    else if (MathType::FAbs(discr) <= MathType::GetZeroTolerance())
     {
         auto tValue = -a1;
         auto zValue = point.GetZ() + tValue * dot.GetZ();
@@ -311,12 +311,12 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
     /// 测试与上半球的交点。 二次方程是t^2 + 2 * (px * dx + py * dy + (pz - e) * dz) * t + (px^2 + py^2 + (pz - e)^2 - r^2) = 0
     /// 使用当前a1 = px * dx  + py * dy + (pz + e) * dz和a0 = px^2 + py^2 + (pz + e)^2 - r^2的事实。
     /// 前导系数为a2 = 1，因此无需包含在构造中。
-    a1 -= (Math::GetValue(2)) * extent * dot.GetZ();
-    a0 -= (Math::GetValue(4)) * extent * point.GetZ();
+    a1 -= (MathType::GetValue(2)) * extent * dot.GetZ();
+    a0 -= (MathType::GetValue(4)) * extent * point.GetZ();
     discr = a1 * a1 - a0;
-    if (Math::GetZeroTolerance() < discr)
+    if (MathType::GetZeroTolerance() < discr)
     {
-        auto root = Math::Sqrt(discr);
+        auto root = MathType::Sqrt(discr);
         auto tValue = -a1 - root;
         auto zValue = point.GetZ() + tValue * dot.GetZ();
         if (extent <= zValue)
@@ -367,7 +367,7 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
             }
         }
     }
-    else if (Math::FAbs(discr) <= Math::GetZeroTolerance())
+    else if (MathType::FAbs(discr) <= MathType::GetZeroTolerance())
     {
         auto tValue = -a1;
         auto zValue = point.GetZ() + tValue * dot.GetZ();

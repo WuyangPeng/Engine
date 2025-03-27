@@ -54,12 +54,12 @@ Mathematics::Plane3<Real> Mathematics::OrthogonalPlaneFit3<Real>::Calculate(cons
     origin /= numPoints;
 
     // 计算产品总和
-    auto sumXX = Math::GetValue(0);
-    auto sumXY = Math::GetValue(0);
-    auto sumXZ = Math::GetValue(0);
-    auto sumYY = Math::GetValue(0);
-    auto sumYZ = Math::GetValue(0);
-    auto sumZZ = Math::GetValue(0);
+    auto sumXX = MathType::GetValue(0);
+    auto sumXY = MathType::GetValue(0);
+    auto sumXZ = MathType::GetValue(0);
+    auto sumYY = MathType::GetValue(0);
+    auto sumYZ = MathType::GetValue(0);
+    auto sumZZ = MathType::GetValue(0);
 
     for (const auto& point : points)
     {

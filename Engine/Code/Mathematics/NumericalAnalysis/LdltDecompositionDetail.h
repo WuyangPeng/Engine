@@ -50,12 +50,12 @@ bool Mathematics::LdltDecomposition<T, N>::Factor(const Matrix& a, Matrix& l, Ma
             djj -= ljk * ljk * dkk;
         }
         d(j, j) = djj;
-        if (Math::Approximate(djj, T{}))
+        if (MathType::Approximate(djj, T{}))
         {
             return false;
         }
 
-        l(j, j) = Math::GetValue(1);
+        l(j, j) = MathType::GetValue(1);
         for (auto i = j + 1; i < N; ++i)
         {
             auto lij = a(i, j);
@@ -164,12 +164,12 @@ bool Mathematics::LdltDecomposition<T>::Factor(const VariableMatrix& a, Variable
             djj -= ljk * ljk * dkk;
         }
         d(j, j) = djj;
-        if (Math::Approximate(djj, T{}))
+        if (MathType::Approximate(djj, T{}))
         {
             return false;
         }
 
-        l(j, j) = Math::GetValue(1);
+        l(j, j) = MathType::GetValue(1);
         for (auto i = j + 1; i < n; ++i)
         {
             auto lij = a(i, j);

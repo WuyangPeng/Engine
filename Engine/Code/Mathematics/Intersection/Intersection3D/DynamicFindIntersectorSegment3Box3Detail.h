@@ -60,7 +60,7 @@ void Mathematics::DynamicFindIntersectorSegment3Box3<Real>::Find()
 {
     quantity = 0;
     this->SetIntersectionType(IntersectionType::Empty);
-    this->SetContactTime(Math::GetValue(0));
+    this->SetContactTime(MathType::GetValue(0));
 
     using SegmentType = std::array<Vector3, 2>;
 
@@ -133,7 +133,7 @@ void Mathematics::DynamicFindIntersectorSegment3Box3<Real>::Find()
         }
     }
 
-    if (contactTime < Math::GetValue(0) || side == ContactSide::None)
+    if (contactTime < MathType::GetValue(0) || side == ContactSide::None)
     {
         // 现在相交
         this->SetContactTime(contactTime);

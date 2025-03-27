@@ -25,7 +25,7 @@ namespace Mathematics
 
         using ClassType = Ellipsoid3<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector3 = Vector3<Real>;
         using Matrix3 = Matrix3<Real>;
         using Ellipsoid3Coefficients = Ellipsoid3Coefficients<Real>;
@@ -58,9 +58,9 @@ namespace Mathematics
                    const Real extent0,
                    const Real extent1,
                    const Real extent2,
-                   const Real epsilon = Math::GetZeroTolerance()) noexcept;
+                   const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
-        explicit Ellipsoid3(const Ellipsoid3Coefficients& coefficients, const Real epsilon = Math::GetZeroTolerance());
+        explicit Ellipsoid3(const Ellipsoid3Coefficients& coefficients, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
@@ -83,7 +83,7 @@ namespace Mathematics
 
         // 构建m_Center，m_Axis和m_Extent从二次方程。
         // 如果输入系数不能表示一个椭圆体，则抛出异常。
-        void FromCoefficients(const Ellipsoid3Coefficients& coefficients, const Real newEpsilon = Math::GetZeroTolerance());
+        void FromCoefficients(const Ellipsoid3Coefficients& coefficients, const Real newEpsilon = MathType::GetZeroTolerance());
 
         // 计算的二次函数 Q(X) = (X-K)^T * M * (X-K) - 1.
         NODISCARD Real Evaluate(const Vector3& point) const;

@@ -71,7 +71,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
                    triangle.GetVertex(2) - triangle.GetVertex(1),
                    triangle.GetVertex(0) - triangle.GetVertex(2) };
     const auto triangleNorm = Vector3Tools::CrossProduct(edge.at(0), edge.at(1));
-    this->SetContactTime(Math::GetValue(0));
+    this->SetContactTime(MathType::GetValue(0));
 
     const FindIntersectorAxis<Real> intersector{ triangleNorm, triangle, box, relVelocity, tMax };
     auto tLast = intersector.GetTLast();
@@ -112,8 +112,8 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
         auto triangleNormDotAxis = Vector3Tools::DotProduct(triangleNorm, axis);
         auto triangleNormDotTriangleNorm = Vector3Tools::GetLengthSquared(triangleNorm);
         auto axisDotAxis = Vector3Tools::GetLengthSquared(axis);
-        auto sinValue = Math::Sqrt(Math::FAbs(Math::GetValue(1) - triangleNormDotAxis * triangleNormDotAxis / (triangleNormDotTriangleNorm * axisDotAxis)));
-        if (sinValue < Math::GetZeroTolerance())
+        auto sinValue = MathType::Sqrt(MathType::FAbs(MathType::GetValue(1) - triangleNormDotAxis * triangleNormDotAxis / (triangleNormDotTriangleNorm * axisDotAxis)));
+        if (sinValue < MathType::GetZeroTolerance())
         {
             coplanar = i;
         }
@@ -185,7 +185,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
         }
     }
 
-    if (contactTime < Math::GetValue(0) || side == ContactSide::None)
+    if (contactTime < MathType::GetValue(0) || side == ContactSide::None)
     {
         this->SetContactTime(contactTime);
         this->SetIntersectionType(IntersectionType::Empty);

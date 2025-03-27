@@ -26,12 +26,12 @@ namespace Mathematics
 
         using ClassType = SolveBanded<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using BandedMatrix = BandedMatrix<Real>;
         using RealContainer = std::vector<Real>;
 
     public:
-        SolveBanded(BandedMatrix matrix, RealContainer inputVector, Real zeroTolerance = Math::GetZeroTolerance());
+        SolveBanded(BandedMatrix matrix, RealContainer inputVector, Real zeroTolerance = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 

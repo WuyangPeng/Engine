@@ -113,11 +113,11 @@ typename Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::Inter
     for (auto i = 0; i < 4; ++i)
     {
         distance.at(i) = plane.DistanceTo(tetraCopy.GetVertex(i));
-        if (Math::GetValue(0) < distance.at(i))
+        if (MathType::GetValue(0) < distance.at(i))
         {
             positiveIndex.at(positive++) = i;
         }
-        else if (distance.at(i) < Math::GetValue(0))
+        else if (distance.at(i) < MathType::GetValue(0))
         {
             negativeIndex.at(negative++) = i;
         }

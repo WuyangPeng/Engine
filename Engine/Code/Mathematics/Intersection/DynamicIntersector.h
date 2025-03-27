@@ -26,11 +26,11 @@ namespace Mathematics
         using ClassType = DynamicIntersector<Real, Vector>;
         using ParentType = Intersector<Real, Vector>;
 
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
         using VectorType = typename ParentType::VectorType;
 
     public:
-        explicit DynamicIntersector(Real tMax, const VectorType& lhsVelocity, const VectorType& rhsVelocity, const Real epsilon = Math::GetZeroTolerance()) noexcept;
+        explicit DynamicIntersector(Real tMax, const VectorType& lhsVelocity, const VectorType& rhsVelocity, const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

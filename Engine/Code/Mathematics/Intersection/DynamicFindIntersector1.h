@@ -25,11 +25,11 @@ namespace Mathematics
         using ClassType = DynamicFindIntersector1<Real>;
         using ParentType = Intersector1<Real>;
 
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
         using IntersectionsType = std::vector<Real>;
 
     public:
-        DynamicFindIntersector1(Real u0, Real u1, Real v0, Real v1, Real tMax, Real speedU, Real speedV, const Real epsilon = Math::GetZeroTolerance());
+        DynamicFindIntersector1(Real u0, Real u1, Real v0, Real v1, Real tMax, Real speedU, Real speedV, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_FINAL_DECLARE;
 

@@ -53,7 +53,7 @@ namespace Mathematics
         using Vector2 = Vector2<Real>;
         using VariableLengthVector = VariableLengthVector<Real>;
         using Points = std::vector<Vector2>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         explicit QuadraticFit2(const Points& points);

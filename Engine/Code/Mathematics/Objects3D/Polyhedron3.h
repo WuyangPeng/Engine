@@ -27,7 +27,7 @@ namespace Mathematics
 
         using ClassType = Polyhedron3<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
         using Vector3Type = Vector3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;

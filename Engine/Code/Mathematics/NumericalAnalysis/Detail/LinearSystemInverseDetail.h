@@ -60,7 +60,7 @@ bool Mathematics::LinearSystemInverse<Real>::IsValid() const noexcept
 {
     try
     {
-        if (Math::GetValue(0) <= zeroTolerance &&
+        if (MathType::GetValue(0) <= zeroTolerance &&
             inverse.GetRowsNumber() == inverse.GetColumnsNumber() &&
             size == boost::numeric_cast<int>(columnsIndex.size()) &&
             columnsIndex.size() == rowIndex.size() &&
@@ -120,8 +120,8 @@ void Mathematics::LinearSystemInverse<Real>::Inverse(int index)
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>::ScaleRow()
 {
-    const auto reciprocal = Math::GetValue(1) / inverse(currentColumn, currentColumn);
-    inverse(currentColumn, currentColumn) = Math::GetValue(1);
+    const auto reciprocal = MathType::GetValue(1) / inverse(currentColumn, currentColumn);
+    inverse(currentColumn, currentColumn) = MathType::GetValue(1);
     for (auto index = 0; index < size; index++)
     {
         inverse(currentColumn, index) *= reciprocal;
@@ -150,7 +150,7 @@ void Mathematics::LinearSystemInverse<Real>::SwapRows()
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>::CalculateCurrentMaxValue()
 {
-    currentMaxValue = Math::GetValue(0);
+    currentMaxValue = MathType::GetValue(0);
 
     for (auto outerIndex = 0; outerIndex < size; ++outerIndex)
     {
@@ -160,7 +160,7 @@ void Mathematics::LinearSystemInverse<Real>::CalculateCurrentMaxValue()
             {
                 if (!pivoted.at(innerIndex))
                 {
-                    auto absValue = Math::FAbs(inverse(outerIndex, innerIndex));
+                    auto absValue = MathType::FAbs(inverse(outerIndex, innerIndex));
                     if (currentMaxValue < absValue)
                     {
                         currentMaxValue = absValue;
@@ -194,7 +194,7 @@ template <typename Real>
 void Mathematics::LinearSystemInverse<Real>::ZeroOutPivotColumnLocations(int outerIndex)
 {
     auto save = inverse(outerIndex, currentColumn);
-    inverse(outerIndex, currentColumn) = Math::GetValue(0);
+    inverse(outerIndex, currentColumn) = MathType::GetValue(0);
     for (int innerIndex = 0; innerIndex < size; ++innerIndex)
     {
         inverse(outerIndex, innerIndex) -= inverse(currentColumn, innerIndex) * save;

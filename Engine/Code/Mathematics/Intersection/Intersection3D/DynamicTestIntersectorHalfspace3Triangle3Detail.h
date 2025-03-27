@@ -59,7 +59,7 @@ void Mathematics::DynamicTestIntersectorHalfspace3Triangle3<Real>::Test()
 
     const auto projection = TestIntersectorAxis<Real>::GetProjection(halfspace.GetNormal(), triangle);
 
-    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -Math::maxReal, halfspace.GetConstant(), projection.first, projection.second, this->GetTMax() };
+    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -MathType::maxReal, halfspace.GetConstant(), projection.first, projection.second, this->GetTMax() };
 
     auto contactTime = testIntersectorAxis.GetTFirst();
     if (testIntersectorAxis.GetResult())

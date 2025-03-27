@@ -27,7 +27,7 @@ Mathematics::DistancePoint2Hyperbola2<Real>::DistancePoint2Hyperbola2(const Vect
 template <typename Real>
 bool Mathematics::DistancePoint2Hyperbola2<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && Math::GetValue(0) < extent.GetX() && Math::GetValue(0) < extent.GetY())
+    if (ParentType::IsValid() && MathType::GetValue(0) < extent.GetX() && MathType::GetValue(0) < extent.GetY())
         return true;
     else
         return false;
@@ -57,13 +57,13 @@ typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathematics
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     Vector2 extentSquared{ extent.GetX() * extent.GetX(), extent.GetY() * extent.GetY() };
-    const Vector2 reciprocalExtentSquared{ Math::GetValue(1) / extentSquared[0], Math::GetValue(1) / extentSquared[1] };
+    const Vector2 reciprocalExtentSquared{ MathType::GetValue(1) / extentSquared[0], MathType::GetValue(1) / extentSquared[1] };
 
     // 初始化二分法。 与H(-a^2)= +无穷大和H(b^2)= -infinity不相关，
     // 因此我们只需要用相应的有符号数字初始化函数值。
     auto t0 = -extentSquared.GetX();
     auto t1 = extentSquared.GetY();
-    auto tRoot = Math::GetRational(1, 2) * (t0 + t1);
+    auto tRoot = MathType::GetRational(1, 2) * (t0 + t1);
     auto hyperbolaRoot = GetHyperbola(tRoot, reciprocalExtentSquared);
 
     // 迭代直到 H(troot)正好为零或直到一个浮点端点不再改变。
@@ -71,24 +71,24 @@ typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathematics
     const auto maximumIterations = this->GetMaximumIterations();
     for (auto loop = 0; loop < maximumIterations; ++loop)
     {
-        if (!Math::Approximate(hyperbolaRoot, Math::GetValue(0), this->GetZeroThreshold()) &&
-            !Math::Approximate(tRoot, t0, this->GetZeroThreshold()) &&
-            !Math::Approximate(tRoot, t1, this->GetZeroThreshold()))
+        if (!MathType::Approximate(hyperbolaRoot, MathType::GetValue(0), this->GetZeroThreshold()) &&
+            !MathType::Approximate(tRoot, t0, this->GetZeroThreshold()) &&
+            !MathType::Approximate(tRoot, t1, this->GetZeroThreshold()))
         {
             break;
         }
 
-        if (Math::GetValue(0) < hyperbolaRoot)
+        if (MathType::GetValue(0) < hyperbolaRoot)
         {
             t0 = tRoot;
-            tRoot = Math::GetRational(1, 2) * (t0 + t1);
+            tRoot = MathType::GetRational(1, 2) * (t0 + t1);
         }
         else  // hyperbolaRoot < MathType<Real>::sm_Zero
         {
             t1 = tRoot;
         }
 
-        tRoot = Math::GetRational(1, 2) * (t0 + t1);
+        tRoot = MathType::GetRational(1, 2) * (t0 + t1);
         hyperbolaRoot = GetHyperbola(tRoot, reciprocalExtentSquared);
 
         if (loop + 1 == maximumIterations)
@@ -97,21 +97,21 @@ typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathematics
         }
     }
 
-    const Vector2 closest{ point.GetX() / (Math::GetValue(1) + tRoot * reciprocalExtentSquared.GetX()),
-                           point.GetY() / (Math::GetValue(1) - tRoot * reciprocalExtentSquared.GetY()) };
+    const Vector2 closest{ point.GetX() / (MathType::GetValue(1) + tRoot * reciprocalExtentSquared.GetX()),
+                           point.GetY() / (MathType::GetValue(1) - tRoot * reciprocalExtentSquared.GetY()) };
 
     const auto diff = point - closest;
 
-    return DistanceResult{ Vector2Tools::GetLengthSquared(diff), Math::GetValue(0), point, closest };
+    return DistanceResult{ Vector2Tools::GetLengthSquared(diff), MathType::GetValue(0), point, closest };
 }
 
 template <typename Real>
 Real Mathematics::DistancePoint2Hyperbola2<Real>::GetHyperbola(Real t, const Vector2& reciprocalExtentSquared) const
 {
-    const auto ratio0 = point.GetX() / (Math::GetValue(1) + t * reciprocalExtentSquared[0]);
-    const auto ratio1 = point.GetY() / (Math::GetValue(1) - t * reciprocalExtentSquared[1]);
+    const auto ratio0 = point.GetX() / (MathType::GetValue(1) + t * reciprocalExtentSquared[0]);
+    const auto ratio1 = point.GetY() / (MathType::GetValue(1) - t * reciprocalExtentSquared[1]);
 
-    return ratio0 * ratio0 - ratio1 * ratio1 - Math::GetValue(1);
+    return ratio0 * ratio0 - ratio1 * ratio1 - MathType::GetValue(1);
 }
 
 template <typename Real>

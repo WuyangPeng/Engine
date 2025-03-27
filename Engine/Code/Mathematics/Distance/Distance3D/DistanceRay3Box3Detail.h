@@ -66,7 +66,7 @@ typename Mathematics::DistanceRay3Box3<Real>::DistanceResult Mathematics::Distan
     auto sqrDistance = distanceLine3Box3.GetSquared();
     auto lineParameter = sqrDistance.GetLhsParameter();
 
-    if (Math::GetValue(0) <= lineParameter)
+    if (MathType::GetValue(0) <= lineParameter)
     {
         closestPoint0 = sqrDistance.GetLhsClosestPoint();
         closestPoint1 = sqrDistance.GetRhsClosestPoint();
@@ -79,7 +79,7 @@ typename Mathematics::DistanceRay3Box3<Real>::DistanceResult Mathematics::Distan
         closestPoint1 = sqrDistance.GetRhsClosestPoint();
     }
 
-    return DistanceResult{ sqrDistance.GetDistance(), Math::GetValue(0), closestPoint0, closestPoint1 };
+    return DistanceResult{ sqrDistance.GetDistance(), MathType::GetValue(0), closestPoint0, closestPoint1 };
 }
 
 template <typename Real>

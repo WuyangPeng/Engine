@@ -29,10 +29,10 @@ namespace Mathematics
         using Triangle3 = Triangle3<Real>;
         using Vector3 = Vector3<Real>;
         using Plane3 = Plane3<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
-        TrianglePlaneRelations(const Triangle3& triangle, const Plane3& plane, const Real epsilon = Math::GetZeroTolerance());
+        TrianglePlaneRelations(const Triangle3& triangle, const Plane3& plane, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 

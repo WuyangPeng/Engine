@@ -122,7 +122,7 @@ void Mathematics::PolynomialFitPowersData<Real, S>::SetScale(int index, Real aSc
 
     if (index == size - 1)
     {
-        invTwoWScale = Math::GetRational(1, 2) / scale.at(index);
+        invTwoWScale = MathType::GetRational(1, 2) / scale.at(index);
     }
 }
 

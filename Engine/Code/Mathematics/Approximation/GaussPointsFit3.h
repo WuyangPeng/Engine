@@ -30,7 +30,7 @@ namespace Mathematics
         using Vector3 = Vector3<Real>;
         using Box3 = Box3<Real>;
         using PointsType = std::vector<Vector3>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         explicit GaussPointsFit3(const PointsType& points);

@@ -60,11 +60,11 @@ namespace Mathematics
 
         using Vector3 = Vector3<Real>;
         using Points = std::vector<Vector3>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
-        explicit CylinderFit3(const Points& points, const Real epsilon = Math::GetZeroTolerance());
-        CylinderFit3(const Points& points, const Vector3& guessCenter, const Vector3& guessAxis, const Real epsilon = Math::GetZeroTolerance());
+        explicit CylinderFit3(const Points& points, const Real epsilon = MathType::GetZeroTolerance());
+        CylinderFit3(const Points& points, const Vector3& guessCenter, const Vector3& guessAxis, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 

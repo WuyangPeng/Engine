@@ -16,7 +16,7 @@
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::Capsule<N, Real>::Capsule() noexcept
-    : segment{}, radius{ Math::GetValue(1) }
+    : segment{}, radius{ MathType::GetValue(1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }

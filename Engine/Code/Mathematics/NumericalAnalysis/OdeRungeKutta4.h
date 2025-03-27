@@ -27,7 +27,7 @@ namespace Mathematics
         using ClassType = OdeRungeKutta4<Real, UserDataType>;
         using ParentType = OdeSolver<Real, UserDataType>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Data = typename ParentType::Data;
         using Function = typename ParentType::Function;
         using Container = typename ParentType::Container;

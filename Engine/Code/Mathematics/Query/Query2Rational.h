@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = Query2Rational<Real>;
         using ParentType = Query2<Real>;
 
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
         using Vector2 = typename ParentType::Vector2Type;
         using VerticesType = typename ParentType::VerticesType;
 

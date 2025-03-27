@@ -26,7 +26,7 @@ namespace Mathematics
         using ClassType = PolynomialSamplesPower<Real>;
 
         using Samples = std::vector<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using VariableMatrix = VariableMatrix<Real>;
 
     public:

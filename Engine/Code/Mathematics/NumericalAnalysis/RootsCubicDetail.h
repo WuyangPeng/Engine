@@ -37,13 +37,13 @@ template <typename T>
 int Mathematics::RootsCubic<T>::Solve(bool useBisection, const T& g0, const T& g1, const T& g2, const T& g3, PolynomialRootContainer& roots) requires(std::is_floating_point_v<T> || std::is_same_v<T, Rational>)
 {
     /// 测试度数是否小于3。
-    if (Math::Approximate(g3, T{}))
+    if (MathType::Approximate(g3, T{}))
     {
         return RootsQuadratic::Solve(useBisection, g0, g1, g2, roots);
     }
 
     /// 测试零值根。
-    if (Math::Approximate(g0, T{}))
+    if (MathType::Approximate(g0, T{}))
     {
         return HasZeroValuedRoots(useBisection, g1, g2, g3, roots);
     }
@@ -68,7 +68,7 @@ template <typename T>
 int Mathematics::RootsCubic<T>::Solve(bool useBisection, const T& m0, const T& m1, const T& m2, PolynomialRootContainer& roots) requires(std::is_floating_point_v<T> || std::is_same_v<T, Rational>)
 {
     /// 测试零值根。
-    if (Math::Approximate(m0, T{}))
+    if (MathType::Approximate(m0, T{}))
     {
         return HasZeroValuedRoots(useBisection, m1, m2, roots);
     }
@@ -119,9 +119,9 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRoots(bool useBisection, const R
 template <typename T>
 int Mathematics::RootsCubic<T>::HasZeroValuedRoots(bool useBisection, const T& g1, const T& g2, const T& g3, PolynomialRootContainer& roots)
 {
-    if (Math::Approximate(g1, T{}))
+    if (MathType::Approximate(g1, T{}))
     {
-        if (Math::Approximate(g2, T{}))
+        if (MathType::Approximate(g2, T{}))
         {
             roots.at(0) = { T{}, 3 };
             return 1;
@@ -146,9 +146,9 @@ int Mathematics::RootsCubic<T>::HasZeroValuedRoots(bool useBisection, const T& g
 template <typename T>
 int Mathematics::RootsCubic<T>::HasZeroValuedRoots(bool useBisection, const T& m1, const T& m2, PolynomialRootContainer& roots)
 {
-    if (Math::Approximate(m1, T{}))
+    if (MathType::Approximate(m1, T{}))
     {
-        if (Math::Approximate(m2, T{}))
+        if (MathType::Approximate(m2, T{}))
         {
             roots.at(0) = { T{}, 3 };
             return 1;
@@ -223,7 +223,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
     {
         /// 一个实根，重数1。
         auto d0 = static_cast<T>(rD0);
-        auto b = std::max(Math::GetValue(1), std::fabs(d0));
+        auto b = std::max(MathType::GetValue(1), std::fabs(d0));
         auto f = [&d0](T x) noexcept {
             return Fma(x, x * x, d0);
         };
@@ -290,7 +290,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         /// 在区间 [-b,b]上使用平分来估计根。
         auto d0 = static_cast<T>(rD0);
         auto d1 = static_cast<T>(rD1);
-        auto b = std::max(Math::GetValue(1), std::max(std::fabs(d0), std::fabs(d1)));
+        auto b = std::max(MathType::GetValue(1), std::max(std::fabs(d0), std::fabs(d1)));
         auto f = [&d0, &d1](T x) noexcept {
             return std::fma(x, std::fma(x, x, d1), d0);
         };

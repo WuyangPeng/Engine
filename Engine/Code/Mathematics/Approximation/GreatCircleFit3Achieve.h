@@ -46,12 +46,12 @@ template <typename Real>
 void Mathematics::GreatCircleFit3<Real>::Calculate(const Points& points)
 {
     // 计算向量的协方差矩阵。
-    auto sumXX = Math::GetValue(0);
-    auto sumXY = Math::GetValue(0);
-    auto sumXZ = Math::GetValue(0);
-    auto sumYY = Math::GetValue(0);
-    auto sumYZ = Math::GetValue(0);
-    auto sumZZ = Math::GetValue(0);
+    auto sumXX = MathType::GetValue(0);
+    auto sumXY = MathType::GetValue(0);
+    auto sumXZ = MathType::GetValue(0);
+    auto sumYY = MathType::GetValue(0);
+    auto sumYZ = MathType::GetValue(0);
+    auto sumZZ = MathType::GetValue(0);
     const auto numPoints = boost::numeric_cast<Real>(points.size());
 
     for (const auto& point : points)

@@ -59,12 +59,12 @@ void Mathematics::SolveBanded<Real>::ForwardEliminate(int reduceRow)
 {
     // 枢轴必须按顺序进行且非零。
     auto diag = matrix(reduceRow, reduceRow);
-    if (Math::FAbs(diag) <= zeroTolerance)
+    if (MathType::FAbs(diag) <= zeroTolerance)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("支点必须非零！"s));
     }
 
-    matrix(reduceRow, reduceRow) = Math::GetValue(1);
+    matrix(reduceRow, reduceRow) = MathType::GetValue(1);
 
     // 行相乘使对角线项为1一致
     const auto columnMin = reduceRow + 1;
@@ -92,7 +92,7 @@ void Mathematics::SolveBanded<Real>::ForwardEliminate(int reduceRow)
     for (auto row = rowMin; row < rowMax; ++row)
     {
         auto mult = matrix(row, reduceRow);
-        matrix(row, reduceRow) = Math::GetValue(0);
+        matrix(row, reduceRow) = MathType::GetValue(0);
         for (auto column = columnMin; column < columnMax; ++column)
         {
             matrix(row, column) -= mult * matrix(reduceRow, column);
@@ -107,7 +107,7 @@ void Mathematics::SolveBanded<Real>::ForwardEliminate(int reduceRow)
 template <typename Real>
 bool Mathematics::SolveBanded<Real>::IsValid() const noexcept
 {
-    if (!output.empty() && Math::GetValue(0) <= zeroTolerance)
+    if (!output.empty() && MathType::GetValue(0) <= zeroTolerance)
     {
         return true;
     }

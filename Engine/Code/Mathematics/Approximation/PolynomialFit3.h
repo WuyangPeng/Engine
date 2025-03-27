@@ -47,7 +47,7 @@ namespace Mathematics
 
         using Samples = std::vector<Real>;
         using Polynomial = Polynomial<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         PolynomialFit3(const Samples& xSamples, const Samples& ySamples, const Samples& wSamples, size_t xDegree, size_t yDegree);

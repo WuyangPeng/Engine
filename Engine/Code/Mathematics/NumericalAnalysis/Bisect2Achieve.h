@@ -31,7 +31,7 @@ Mathematics::Bisect2<Real>::Bisect2(Function function0, Function function1, int 
 template <typename Real>
 bool Mathematics::Bisect2<Real>::IsValid() const noexcept
 {
-    if (function0 != nullptr && function1 != nullptr && 0 < maxLevel && Math::GetValue(0) <= tolerance)
+    if (function0 != nullptr && function1 != nullptr && 0 < maxLevel && MathType::GetValue(0) <= tolerance)
     {
         return true;
     }

@@ -22,7 +22,7 @@ namespace Mathematics
     public:
         using ClassType = Line2Box2<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector2 = Vector2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
         using Parameter = std::array<Vector2, 2>;

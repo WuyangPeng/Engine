@@ -43,10 +43,10 @@ bool Mathematics::BrentsMethod<Real, UserDataType>::IsValid() const noexcept
 {
     if (function != nullptr &&
         1 <= maxIterations &&
-        negativeFTolerance <= Math::GetValue(0) &&
-        Math::GetValue(0) <= positiveFTolerance &&
-        Math::GetValue(0) <= stepXTolerance &&
-        Math::GetValue(0) <= convXTolerance)
+        negativeFTolerance <= MathType::GetValue(0) &&
+        MathType::GetValue(0) <= positiveFTolerance &&
+        MathType::GetValue(0) <= stepXTolerance &&
+        MathType::GetValue(0) <= convXTolerance)
     {
         return true;
     }
@@ -96,7 +96,7 @@ template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethod<Real, UserDataType>::SetNegativeFTolerance(Real newNegativeFTolerance) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_1(newNegativeFTolerance <= Math::GetValue(0), "无效 negativeFTolerance。\n");
+    MATHEMATICS_ASSERTION_1(newNegativeFTolerance <= MathType::GetValue(0), "无效 negativeFTolerance。\n");
 
     negativeFTolerance = newNegativeFTolerance;
 }
@@ -113,7 +113,7 @@ template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethod<Real, UserDataType>::SetPositiveFTolerance(Real newPositiveFTolerance) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= positiveFTolerance, "无效 positiveFTolerance。\n");
+    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= positiveFTolerance, "无效 positiveFTolerance。\n");
 
     positiveFTolerance = newPositiveFTolerance;
 }
@@ -130,7 +130,7 @@ template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethod<Real, UserDataType>::SetStepXTolerance(Real newStepXTolerance) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= newStepXTolerance, "无效 stepXTolerance。\n");
+    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= newStepXTolerance, "无效 stepXTolerance。\n");
 
     stepXTolerance = newStepXTolerance;
 }
@@ -147,7 +147,7 @@ template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethod<Real, UserDataType>::SetConvXTolerance(Real newConvXTolerance) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= newConvXTolerance, "无效 convXTolerance。\n");
+    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= newConvXTolerance, "无效 convXTolerance。\n");
 
     convXTolerance = newConvXTolerance;
 }

@@ -35,7 +35,7 @@ namespace Mathematics
 
         using Vector2 = Vector2<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Arc2 = Arc2<Real>;
         using Circle2 = Circle2<Real>;
         using PointsType = std::vector<Vector2>;

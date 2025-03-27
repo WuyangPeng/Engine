@@ -29,7 +29,7 @@ namespace Mathematics
 
         using Vector2 = Vector2<Real>;
         using Box2 = Box2<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using PointsType = std::vector<Vector2>;
 
     public:

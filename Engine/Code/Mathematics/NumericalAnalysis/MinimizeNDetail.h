@@ -61,7 +61,7 @@ typename Mathematics::MinimizeN<Real, UserDataType>::MinimizeNData Mathematics::
 
         // 估计一个单位长度的共轭方向。
         const auto length = minimizeNGetMinimum.EstimateUnitLengthConjugateDirection();
-        if (length < Math::epsilon)
+        if (length < MathType::epsilon)
         {
             // 新的位置并没有从旧的位置有显著改变。在这里是否有更好的收敛准则？
             break;

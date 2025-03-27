@@ -21,14 +21,14 @@ Mathematics::Frustum3<Real>::Frustum3() noexcept
       directionVector{ Vector3::GetUnitZ() },
       upVector{ Vector3::GetUnitY() },
       rightVector{ Vector3::GetUnitX() },
-      directionMin{ Math::GetValue(1) },
-      directionMax{ Math::GetValue(2) },
-      upBound{ Math::GetValue(1) },
-      rightBound{ Math::GetValue(1) },
+      directionMin{ MathType::GetValue(1) },
+      directionMax{ MathType::GetValue(2) },
+      upBound{ MathType::GetValue(1) },
+      rightBound{ MathType::GetValue(1) },
       directionRatio{ directionMax / directionMin },
-      twoUpF{ Math::GetValue(-2) * upBound * directionMax },
-      twoRightF{ Math::GetValue(-2) * rightBound * directionMax },
-      epsilon{ Math::GetZeroTolerance() }
+      twoUpF{ MathType::GetValue(-2) * upBound * directionMax },
+      twoRightF{ MathType::GetValue(-2) * rightBound * directionMax },
+      epsilon{ MathType::GetZeroTolerance() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -53,8 +53,8 @@ Mathematics::Frustum3<Real>::Frustum3(const Vector3& origin,
       upBound{ upBound },
       rightBound{ rightBound },
       directionRatio{ directionMax / directionMin },
-      twoUpF{ Math::GetValue(-2) * upBound * directionMax },
-      twoRightF{ Math::GetValue(-2) * rightBound * directionMax },
+      twoUpF{ MathType::GetValue(-2) * upBound * directionMax },
+      twoRightF{ MathType::GetValue(-2) * rightBound * directionMax },
       epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -87,10 +87,10 @@ bool Mathematics::Frustum3<Real>::IsValid() const noexcept
         if (directionVector.IsNormalize(epsilon) &&
             upVector.IsNormalize(epsilon) &&
             rightVector.IsNormalize(epsilon) &&
-            Math::GetValue(0) < directionMin &&
+            MathType::GetValue(0) < directionMin &&
             directionMin < directionMax &&
-            Math::GetValue(0) < rightBound &&
-            Math::GetValue(0) < upBound)
+            MathType::GetValue(0) < rightBound &&
+            MathType::GetValue(0) < upBound)
         {
             return true;
         }
@@ -434,8 +434,8 @@ requires std::is_arithmetic_v<Real>
 void Mathematics::Frustum3<Real>::Update() noexcept
 {
     directionRatio = directionMax / directionMin;
-    twoUpF = Math::GetValue(-2) * upBound * directionMax;
-    twoRightF = Math::GetValue(-2) * rightBound * directionMax;
+    twoUpF = MathType::GetValue(-2) * upBound * directionMax;
+    twoRightF = MathType::GetValue(-2) * rightBound * directionMax;
 }
 
 template <typename Real>

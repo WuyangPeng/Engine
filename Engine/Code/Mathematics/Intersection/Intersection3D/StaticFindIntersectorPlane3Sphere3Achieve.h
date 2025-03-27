@@ -15,7 +15,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorPlane3Sphere3<Real>::StaticFindIntersectorPlane3Sphere3(const Plane3& plane, const Sphere3& sphere, const Real epsilon)
-    : ParentType{ epsilon }, plane{ plane }, sphere{ sphere }, circle{ Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), Math::GetValue(0) }
+    : ParentType{ epsilon }, plane{ plane }, sphere{ sphere }, circle{ Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), MathType::GetValue(0) }
 {
     Find();
 
@@ -55,20 +55,20 @@ template <typename Real>
 void Mathematics::StaticFindIntersectorPlane3Sphere3<Real>::Find()
 {
     auto signedDistance = plane.DistanceTo(sphere.GetCenter());
-    auto distance = Math::FAbs(signedDistance);
+    auto distance = MathType::FAbs(signedDistance);
     auto center = sphere.GetCenter() - signedDistance * plane.GetNormal();
     const auto normal = plane.GetNormal();
     if (distance <= sphere.GetRadius())
     {
         // 球体与平面相交成一个圆。 当距离等于m_Sphere.GetRadius()时，圆会退化，在这种情况下，圆半径为零。
-        auto radius = Math::Sqrt(Math::FAbs(sphere.GetRadius() * sphere.GetRadius() - distance * distance));
+        auto radius = MathType::Sqrt(MathType::FAbs(sphere.GetRadius() * sphere.GetRadius() - distance * distance));
         this->SetIntersectionType(IntersectionType::Point);
         circle = Circle3{ center, Vector3::GetZero(), Vector3::GetZero(), normal, radius };
         return;
     }
 
     // 圆的附加指示。
-    auto radius = Math::GetValue(-1);
+    auto radius = MathType::GetValue(-1);
     circle = Circle3{ center, Vector3::GetZero(), Vector3::GetZero(), normal, radius };
     this->SetIntersectionType(IntersectionType::Empty);
 }

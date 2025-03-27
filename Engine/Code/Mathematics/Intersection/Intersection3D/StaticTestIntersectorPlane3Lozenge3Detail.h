@@ -56,27 +56,27 @@ void Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>::Test()
 {
     const auto sDistMM = plane.DistanceTo(lozenge.GetRectangle().GetMMCorner());
     const auto sDistPM = plane.DistanceTo(lozenge.GetRectangle().GetPMCorner());
-    if (sDistMM * sDistPM <= Math::GetValue(0))
+    if (sDistMM * sDistPM <= MathType::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Other);
         return;
     }
 
     const auto sDistMP = plane.DistanceTo(lozenge.GetRectangle().GetMPCorner());
-    if (sDistMM * sDistMP <= Math::GetValue(0))
+    if (sDistMM * sDistMP <= MathType::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Other);
         return;
     }
 
     const auto sDistPP = plane.DistanceTo(lozenge.GetRectangle().GetPPCorner());
-    if (sDistPM * sDistPP <= Math::GetValue(0))
+    if (sDistPM * sDistPP <= MathType::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Other);
         return;
     }
 
-    if (Math::FAbs(sDistMM) <= lozenge.GetRadius() || Math::FAbs(sDistPM) <= lozenge.GetRadius() || Math::FAbs(sDistMP) <= lozenge.GetRadius() || Math::FAbs(sDistPP) <= lozenge.GetRadius())
+    if (MathType::FAbs(sDistMM) <= lozenge.GetRadius() || MathType::FAbs(sDistPM) <= lozenge.GetRadius() || MathType::FAbs(sDistMP) <= lozenge.GetRadius() || MathType::FAbs(sDistPP) <= lozenge.GetRadius())
     {
         this->SetIntersectionType(IntersectionType::Other);
     }
@@ -92,16 +92,16 @@ bool Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>::LozengeIsCulled() c
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
     const auto sDistMM = plane.DistanceTo(lozenge.GetRectangle().GetMMCorner());
-    if (sDistMM < Math::GetValue(0))
+    if (sDistMM < MathType::GetValue(0))
     {
         auto sDistPM = plane.DistanceTo(lozenge.GetRectangle().GetPMCorner());
-        if (sDistPM < Math::GetValue(0))
+        if (sDistPM < MathType::GetValue(0))
         {
             auto sDistMP = plane.DistanceTo(lozenge.GetRectangle().GetMPCorner());
-            if (sDistMP < Math::GetValue(0))
+            if (sDistMP < MathType::GetValue(0))
             {
                 auto sDistPP = plane.DistanceTo(lozenge.GetRectangle().GetPPCorner());
-                if (sDistPP < Math::GetValue(0))
+                if (sDistPP < MathType::GetValue(0))
                 {
                     if (sDistMM <= sDistPM)
                     {

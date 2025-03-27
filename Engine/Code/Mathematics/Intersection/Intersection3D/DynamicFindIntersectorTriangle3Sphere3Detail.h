@@ -118,7 +118,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
                 if (inside.at(2))
                 {
                     // 球体内的三角形。
-                    this->SetContactTime(Math::GetValue(0));
+                    this->SetContactTime(MathType::GetValue(0));
                     this->SetIntersectionType(IntersectionType::Empty);
                     return;
                 }
@@ -168,7 +168,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
                     {
                         this->SetIntersectionType(IntersectionType::Empty);
                     }
-                    this->SetContactTime(Math::GetValue(0));
+                    this->SetContactTime(MathType::GetValue(0));
                     return;
                 }
             }
@@ -204,7 +204,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
                     {
                         this->SetIntersectionType(IntersectionType::Empty);
                     }
-                    this->SetContactTime(Math::GetValue(0));
+                    this->SetContactTime(MathType::GetValue(0));
                     return;
                 }
             }
@@ -221,7 +221,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
                     {
                         this->SetIntersectionType(IntersectionType::Empty);
                     }
-                    this->SetContactTime(Math::GetValue(0));
+                    this->SetContactTime(MathType::GetValue(0));
                     return;
                 }
                 else  // !inside[2]
@@ -251,7 +251,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
         if (normalDotTriangle < normalDotCenter)
         {
             // 正面
-            if (Math::GetValue(0) <= Vector3Tools::DotProduct(relVelocity, normal))
+            if (MathType::GetValue(0) <= Vector3Tools::DotProduct(relVelocity, normal))
             {
                 this->SetIntersectionType(IntersectionType::Empty);
                 return;
@@ -262,7 +262,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
         else
         {
             // 负面
-            if (Vector3Tools::DotProduct(relVelocity, normal) <= Math::GetValue(0))
+            if (Vector3Tools::DotProduct(relVelocity, normal) <= MathType::GetValue(0))
             {
                 this->SetIntersectionType(IntersectionType::Empty);
                 return;
@@ -355,7 +355,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
                     {
                         this->SetIntersectionType(IntersectionType::Empty);
                     }
-                    this->SetContactTime(Math::GetValue(0));
+                    this->SetContactTime(MathType::GetValue(0));
                     return;
                 }
             }
@@ -391,7 +391,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
                     {
                         this->SetIntersectionType(IntersectionType::Empty);
                     }
-                    this->SetContactTime(Math::GetValue(0));
+                    this->SetContactTime(MathType::GetValue(0));
                     return;
                 }
             }
@@ -408,7 +408,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
                     {
                         this->SetIntersectionType(IntersectionType::Empty);
                     }
-                    this->SetContactTime(Math::GetValue(0));
+                    this->SetContactTime(MathType::GetValue(0));
                     return;
                 }
                 else  // !inside[2]
@@ -434,14 +434,14 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindTriangleSphe
     if (Vector3Tools::GetLengthSquared(dist) < sphere.GetRadius() * sphere.GetRadius())
     {
         // 已经与该顶点相交。
-        this->SetContactTime(Math::GetValue(0));
+        this->SetContactTime(MathType::GetValue(0));
         return false;
     }
 
     // 三角形静止不动，球运动。
     auto relVelocity = velocity1 - velocity0;
 
-    if (Vector3Tools::DotProduct(relVelocity, dist) <= Math::GetValue(0))
+    if (Vector3Tools::DotProduct(relVelocity, dist) <= MathType::GetValue(0))
     {
         return false;
     }
@@ -513,9 +513,9 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindSphereVertex
     // 找到相交的时间。
     auto dot = Vector3Tools::DotProduct(minus, relVelocity);
     auto diff = Vector3Tools::GetLengthSquared(minus) - radiusSqr;
-    auto inv = Math::InvSqrt(Math::FAbs(dot * dot - velocitySqr * diff));
+    auto inv = MathType::InvSqrt(MathType::FAbs(dot * dot - velocitySqr * diff));
 
-    auto contactTime = diff * inv / (Math::GetValue(1) - dot * inv);
+    auto contactTime = diff * inv / (MathType::GetValue(1) - dot * inv);
     this->SetContactTime(contactTime);
     if (tmax < contactTime)
     {

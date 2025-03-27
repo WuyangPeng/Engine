@@ -58,10 +58,10 @@ void Mathematics::StaticTestIntersectorPlane3Box3<Real>::Test()
                              box.GetExtent(1) * (Vector3Tools::DotProduct(plane.GetNormal(), box.GetAxis(1))),
                              box.GetExtent(2) * (Vector3Tools::DotProduct(plane.GetNormal(), box.GetAxis(2))) };
 
-    auto radius = Math::FAbs(tmp.at(0)) + Math::FAbs(tmp.at(1)) + Math::FAbs(tmp.at(2));
+    auto radius = MathType::FAbs(tmp.at(0)) + MathType::FAbs(tmp.at(1)) + MathType::FAbs(tmp.at(2));
 
     auto signedDistance = plane.DistanceTo(box.GetCenter());
-    if (Math::FAbs(signedDistance) <= radius)
+    if (MathType::FAbs(signedDistance) <= radius)
     {
         this->SetIntersectionType(IntersectionType::Point);
     }
@@ -80,7 +80,7 @@ bool Mathematics::StaticTestIntersectorPlane3Box3<Real>::BoxIsCulled() const
                              box.GetExtent(1) * (Vector3Tools::DotProduct(plane.GetNormal(), box.GetAxis(1))),
                              box.GetExtent(2) * (Vector3Tools::DotProduct(plane.GetNormal(), box.GetAxis(2))) };
 
-    auto radius = Math::FAbs(tmp.at(0)) + Math::FAbs(tmp.at(1)) + Math::FAbs(tmp.at(2));
+    auto radius = MathType::FAbs(tmp.at(0)) + MathType::FAbs(tmp.at(1)) + MathType::FAbs(tmp.at(2));
 
     auto signedDistance = plane.DistanceTo(box.GetCenter());
 

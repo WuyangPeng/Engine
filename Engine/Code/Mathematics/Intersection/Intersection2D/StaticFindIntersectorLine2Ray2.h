@@ -30,10 +30,10 @@ namespace Mathematics
         using Line2 = Line2<Real>;
         using Ray2 = Ray2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorLine2Ray2(const Line2& line, const Ray2& ray, const Real dotThreshold = Math::GetZeroTolerance());
+        StaticFindIntersectorLine2Ray2(const Line2& line, const Ray2& ray, const Real dotThreshold = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

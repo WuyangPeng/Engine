@@ -52,7 +52,7 @@ void Mathematics::GreatArcFit3<Real>::Calculate(const Points& points)
     // 连续定位的角度是一个最大的差值。
     // 实际上, 我们构建一个圆锥包含最小角的单位长度向量。
     const auto numPointsMinus1 = points.size() - 1;
-    auto maxDiff = Math::GetTwoPI() + items.at(0).GetAngle() - items.at(numPointsMinus1).GetAngle();
+    auto maxDiff = MathType::GetTwoPI() + items.at(0).GetAngle() - items.at(numPointsMinus1).GetAngle();
     auto end0 = 0;
     auto end1 = numPointsMinus1;
     for (auto index = 0u; index < numPointsMinus1; ++index)

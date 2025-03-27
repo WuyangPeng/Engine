@@ -83,10 +83,10 @@ void Mathematics::Line2Circle2<Real>::Find(const Vector2& origin, const Vector2&
     auto a0 = Vector2Tools::GetLengthSquared(diff) - radius * radius;
     auto a1 = Vector2Tools::DotProduct(direction, diff);
     auto discr = a1 * a1 - a0;
-    if (discr > Math::GetZeroTolerance())
+    if (discr > MathType::GetZeroTolerance())
     {
         rootCount = 2;
-        discr = Math::Sqrt(discr);
+        discr = MathType::Sqrt(discr);
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
@@ -96,7 +96,7 @@ void Mathematics::Line2Circle2<Real>::Find(const Vector2& origin, const Vector2&
 
 #include SYSTEM_WARNING_POP
     }
-    else if (discr < -Math::GetZeroTolerance())
+    else if (discr < -MathType::GetZeroTolerance())
     {
         rootCount = 0;
     }

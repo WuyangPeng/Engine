@@ -135,7 +135,7 @@ void Rendering::CullerImpl::SetFrustum(const Container& aFrustum)
     plane.at(System::EnumCastUnderlying(ViewFrustum::DirectionMax)) = Plane{ -directionVector, -(directionDotEye + frustum.GetDirectionMax()), epsilon };
 
     // 更新底部平面
-    auto invLength = Math::InvSqrt(directionMin2 + upMin2);
+    auto invLength = MathType::InvSqrt(directionMin2 + upMin2);
     auto c0 = -frustum.GetUpMin() * invLength;
     auto c1 = +frustum.GetDirectionMin() * invLength;
     auto normal = c0 * directionVector + c1 * upVector;
@@ -143,7 +143,7 @@ void Rendering::CullerImpl::SetFrustum(const Container& aFrustum)
     plane.at(System::EnumCastUnderlying(ViewFrustum::UpMin)) = Plane{ normal, constant, epsilon };
 
     // 更新顶部平面
-    invLength = Math::InvSqrt(directionMin2 + upMax2);
+    invLength = MathType::InvSqrt(directionMin2 + upMax2);
     c0 = +frustum.GetUpMax() * invLength;
     c1 = -frustum.GetDirectionMin() * invLength;
     normal = c0 * directionVector + c1 * upVector;
@@ -151,7 +151,7 @@ void Rendering::CullerImpl::SetFrustum(const Container& aFrustum)
     plane.at(System::EnumCastUnderlying(ViewFrustum::UpMax)) = Plane(normal, constant, epsilon);
 
     // 更新左平面
-    invLength = Math::InvSqrt(directionMin2 + rightMin2);
+    invLength = MathType::InvSqrt(directionMin2 + rightMin2);
     c0 = -frustum.GetRightMin() * invLength;
     c1 = +frustum.GetDirectionMin() * invLength;
     normal = c0 * directionVector + c1 * rightVector;
@@ -159,7 +159,7 @@ void Rendering::CullerImpl::SetFrustum(const Container& aFrustum)
     plane.at(System::EnumCastUnderlying(ViewFrustum::RightMin)) = Plane(normal, constant, epsilon);
 
     // 更新右平面
-    invLength = Math::InvSqrt(directionMin2 + rightMax2);
+    invLength = MathType::InvSqrt(directionMin2 + rightMax2);
     c0 = +frustum.GetRightMax() * invLength;
     c1 = -frustum.GetDirectionMin() * invLength;
     normal = c0 * directionVector + c1 * rightVector;
@@ -239,7 +239,7 @@ bool Rendering::CullerImpl::IsVisible(const BoundingSphere& bound) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    if (bound.GetRadius() <= Math::GetZeroTolerance())
+    if (bound.GetRadius() <= MathType::GetZeroTolerance())
     {
         // 节点是一个虚拟节点不可见。
         return false;

@@ -55,9 +55,9 @@ Mathematics::Box2<Real> Mathematics::GaussPointsFit2<Real>::Calculate(const Poin
     center /= numPoints;
 
     // 计算点的协方差矩阵。
-    auto sumXX = Math::GetValue(0);
-    auto sumXY = Math::GetValue(0);
-    auto sumYY = Math::GetValue(0);
+    auto sumXX = MathType::GetValue(0);
+    auto sumXY = MathType::GetValue(0);
+    auto sumYY = MathType::GetValue(0);
     for (const auto& point : points)
     {
         auto diff = point - center;

@@ -29,10 +29,10 @@ namespace Mathematics
         using Sphere3 = Sphere3<Real>;
         using Frustum3 = Frustum3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::MathType;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorSphere3Frustum3(const Sphere3& sphere, const Frustum3& frustum, const Real epsilon = Math::GetZeroTolerance());
+        StaticTestIntersectorSphere3Frustum3(const Sphere3& sphere, const Frustum3& frustum, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

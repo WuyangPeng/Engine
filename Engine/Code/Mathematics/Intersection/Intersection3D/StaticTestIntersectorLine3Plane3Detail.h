@@ -58,14 +58,14 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorLine3Plane3<Real>::Test() noexcept
 {
     if (const auto ddn = Vector3Tools::DotProduct(line.GetDirection(), plane.GetNormal());
-        Math::GetZeroTolerance() < Math::FAbs(ddn))
+        MathType::GetZeroTolerance() < MathType::FAbs(ddn))
     {
         this->SetIntersectionType(IntersectionType::Point);
         return;
     }
 
     if (const auto signedDistance = plane.DistanceTo(line.GetOrigin());
-        Math::FAbs(signedDistance) <= Math::GetZeroTolerance())
+        MathType::FAbs(signedDistance) <= MathType::GetZeroTolerance())
     {
         this->SetIntersectionType(IntersectionType::Line);
         return;

@@ -41,14 +41,14 @@ int Mathematics::RootsBisection<Real>::Find(const std::function<Real(Real)>& f, 
     {
         /// 测试端点以查看F(t)是否为零。
         auto f0 = f(t0);
-        if (Math::Approximate(f0, Real{}))
+        if (MathType::Approximate(f0, Real{}))
         {
             root = t0;
             return 1;
         }
 
         auto f1 = f(t1);
-        if (Math::Approximate(f1, Real{}))
+        if (MathType::Approximate(f1, Real{}))
         {
             root = t1;
             return 1;
@@ -63,8 +63,8 @@ int Mathematics::RootsBisection<Real>::Find(const std::function<Real(Real)>& f, 
         auto i = 2;
         for (; i <= maxIterations; ++i)
         {
-            root = Math::GetRational(1, 2) * (t0 + t1);
-            if (Math::Approximate(root, t0) || Math::Approximate(root, t1))
+            root = MathType::GetRational(1, 2) * (t0 + t1);
+            if (MathType::Approximate(root, t0) || MathType::Approximate(root, t1))
             {
                 /// 数字t0和t1是连续的浮点数。
                 break;
@@ -105,13 +105,13 @@ int Mathematics::RootsBisection<Real>::Find(const std::function<Real(Real)>& f, 
     if (t0 < t1)
     {
         /// 测试端点以查看F(t)是否为零。
-        if (Math::Approximate(f0, Real{}))
+        if (MathType::Approximate(f0, Real{}))
         {
             root = t0;
             return 1;
         }
 
-        if (Math::Approximate(f1, Real{}))
+        if (MathType::Approximate(f1, Real{}))
         {
             root = t1;
             return 1;
@@ -127,8 +127,8 @@ int Mathematics::RootsBisection<Real>::Find(const std::function<Real(Real)>& f, 
         root = t0;
         for (; i <= maxIterations; ++i)
         {
-            root = Math::GetRational(1, 2) * (t0 + t1);
-            if (Math::Approximate(root, t0) || Math::Approximate(root, t1))
+            root = MathType::GetRational(1, 2) * (t0 + t1);
+            if (MathType::Approximate(root, t0) || MathType::Approximate(root, t1))
             {
                 /// 数字t0和t1是连续的浮点数。
                 break;

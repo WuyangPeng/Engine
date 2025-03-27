@@ -26,7 +26,7 @@ namespace Mathematics
 
         using ClassType = Sphere3<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector3 = Vector3<Real>;
 
     public:
