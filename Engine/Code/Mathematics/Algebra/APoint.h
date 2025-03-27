@@ -28,7 +28,7 @@ namespace Mathematics
     public:
         using ClassType = APoint<T>;
 
-        using Math = Math<T>;
+        using MathType = Math<T>;
         using AVectorType = AVector<T>;
         using Vector3Type = Vector3<T>;
         using HomogeneousPointType = HomogeneousPoint<T>;
@@ -40,12 +40,12 @@ namespace Mathematics
     public:
         // APoint表示仿射坐标 (x,y,z,1)。 默认 (0,0,0,1)
         constexpr APoint() noexcept
-            : APoint{ Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) }
+            : APoint{ MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) }
         {
         }
 
         constexpr APoint(T x, T y, T z) noexcept
-            : homogeneousPoint{ x, y, z, Math::GetValue(1) }
+            : homogeneousPoint{ x, y, z, MathType::GetValue(1) }
         {
         }
 
@@ -91,7 +91,7 @@ namespace Mathematics
 
         NODISCARD static constexpr APoint GetUnit() noexcept
         {
-            return APoint{ Math::GetValue(1), Math::GetValue(1), Math::GetValue(1) };
+            return APoint{ MathType::GetValue(1), MathType::GetValue(1), MathType::GetValue(1) };
         }
 
     private:

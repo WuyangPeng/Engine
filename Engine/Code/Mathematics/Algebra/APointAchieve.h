@@ -40,7 +40,7 @@ Mathematics::APoint<T>::APoint(const ArrayType& rhs)
 template <typename T>
 requires std::is_arithmetic_v<T> bool Mathematics::APoint<T>::IsValid() const noexcept
 {
-    if (Math::FAbs(homogeneousPoint.GetW() - Math::GetValue(1)) <= Math::GetZeroTolerance())
+    if (MathType::FAbs(homogeneousPoint.GetW() - MathType::GetValue(1)) <= MathType::GetZeroTolerance())
         return true;
     else
         return false;
@@ -214,9 +214,9 @@ Mathematics::APoint<T>& Mathematics::APoint<T>::operator/=(T scalar)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (Math::GetZeroTolerance() < Math::FAbs(scalar))
+    if (MathType::GetZeroTolerance() < MathType::FAbs(scalar))
     {
-        auto invScalar = Math::GetValue(1) / scalar;
+        auto invScalar = MathType::GetValue(1) / scalar;
 
         *this *= invScalar;
     }
@@ -243,9 +243,9 @@ T Mathematics::APoint<T>::GetNorm() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const auto xFAbs = Math::FAbs(GetX());
-    const auto yFAbs = Math::FAbs(GetY());
-    const auto zFAbs = Math::FAbs(GetZ());
+    const auto xFAbs = MathType::FAbs(GetX());
+    const auto yFAbs = MathType::FAbs(GetY());
+    const auto zFAbs = MathType::FAbs(GetZ());
 
     return CoreTools::MaxElement({ xFAbs, yFAbs, zFAbs });
 }
