@@ -95,7 +95,7 @@ double Rendering::ControllerImpl::GetControlTime(double aApplicationTime) const
         0.0 < timeRange)
     {
         const auto multiples = (controlTime - minTime) / timeRange;
-        const auto integerTime = MathType::Floor(multiples);
+        const auto integerTime = Math::Floor(multiples);
         const auto fractionTime = multiples - integerTime;
         if (repeat == ControllerRepeatType::Wrap)
         {

@@ -30,7 +30,7 @@ namespace Rendering
     public:
         NODISCARD static CameraSharedPtr Create(bool isPerspective, DepthType depthType, float epsilon);
 
-        Camera(bool isPerspective, DepthType depthType, float epsilon = MathType::GetZeroTolerance());
+        Camera(bool isPerspective, DepthType depthType, float epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
