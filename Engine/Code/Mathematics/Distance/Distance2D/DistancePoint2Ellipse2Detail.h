@@ -16,7 +16,7 @@
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistancePoint2Ellipse2<Real>::DistancePoint2Ellipse2(const Vector2& point, const Ellipse2& ellipse) noexcept
+Mathematics::DistancePoint2Ellipse2<Real>::DistancePoint2Ellipse2(const Vector2Type& point, const Ellipse2Type& ellipse) noexcept
     : ParentType{}, point{ point }, ellipse{ ellipse }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -58,8 +58,8 @@ typename Mathematics::DistancePoint2Ellipse2<Real>::DistanceResult Mathematics::
 
     // 在椭圆坐标系计算点的坐标。
     const auto difference = point - ellipse.GetCenter();
-    const Vector2 dot{ Vector2Tools::DotProduct(difference, ellipse.GetAxis0()),
-                       Vector2Tools::DotProduct(difference, ellipse.GetAxis1()) };
+    const Vector2Type dot{ Vector2ToolsType::DotProduct(difference, ellipse.GetAxis0()),
+                           Vector2ToolsType::DotProduct(difference, ellipse.GetAxis1()) };
 
     const DistancePoint2Ellipse2Tool<Real> tool{ ellipse.GetExtent0(), ellipse.GetExtent1(), dot, this->GetZeroThreshold() };
 
@@ -73,7 +73,7 @@ typename Mathematics::DistancePoint2Ellipse2<Real>::DistanceResult Mathematics::
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint2Ellipse2<Real>::DistanceResult Mathematics::DistancePoint2Ellipse2<Real>::GetSquared(Real t, const Vector2& lhsVelocity, const Vector2& rhsVelocity) const
+typename Mathematics::DistancePoint2Ellipse2<Real>::DistanceResult Mathematics::DistancePoint2Ellipse2<Real>::GetSquared(Real t, const Vector2Type& lhsVelocity, const Vector2Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
