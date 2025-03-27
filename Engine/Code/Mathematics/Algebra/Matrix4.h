@@ -29,20 +29,20 @@ namespace Mathematics
     public:
         using ClassType = Matrix4<Real>;
 
-        using Vector4 = Vector4<Real>;
-        using VectorIndex = typename Vector4::PointIndex;
-        static constexpr auto xIndex = Vector4::xIndex;
-        static constexpr auto yIndex = Vector4::yIndex;
-        static constexpr auto zIndex = Vector4::zIndex;
-        static constexpr auto wIndex = Vector4::wIndex;
+        using Vector4Type = Vector4<Real>;
+        using VectorIndex = typename Vector4Type::PointIndex;
+        static constexpr auto xIndex = Vector4Type::xIndex;
+        static constexpr auto yIndex = Vector4Type::yIndex;
+        static constexpr auto zIndex = Vector4Type::zIndex;
+        static constexpr auto wIndex = Vector4Type::wIndex;
         static constexpr auto vectorSize = System::EnumCastUnderlying(VectorIndex::Size);
-        static constexpr auto matrixSize = vectorSize * Vector4::pointSize;
+        static constexpr auto matrixSize = vectorSize * Vector4Type::pointSize;
 
-        using Math = Math<Real>;
-        using Matrix3 = Matrix3<Real>;
-        using Vector3 = Vector3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Vector4Tools = Vector4Tools<Real>;
+        using MathType = Math<Real>;
+        using Matrix3Type = Matrix3<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using Vector4ToolsType = Vector4Tools<Real>;
         using ArrayType = std::array<Real, matrixSize>;
         using ContainerType = std::vector<Real>;
 
@@ -94,8 +94,8 @@ namespace Mathematics
         void MakeZero() noexcept;
         void MakeIdentity() noexcept;
 
-        NODISCARD const Vector4& operator[](int row) const;
-        NODISCARD Vector4& operator[](int row);
+        NODISCARD const Vector4Type& operator[](int row) const;
+        NODISCARD Vector4Type& operator[](int row);
         NODISCARD const Real& operator()(int row, int column) const;
         NODISCARD Real& operator()(int row, int column);
 
@@ -112,7 +112,7 @@ namespace Mathematics
         Matrix4& operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // lhs^T * M * rhs
-        NODISCARD Real QuadraticForm(const Vector4& lhs, const Vector4& rhs) const noexcept;
+        NODISCARD Real QuadraticForm(const Vector4Type& lhs, const Vector4Type& rhs) const noexcept;
 
         // M^T
         NODISCARD Matrix4 Transpose() const noexcept;
@@ -121,26 +121,26 @@ namespace Mathematics
         Matrix4& operator*=(const Matrix4& rhs) noexcept;
 
         // 其它运算
-        NODISCARD Matrix4 Inverse(Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Matrix4 Inverse(Real epsilon = MathType::GetZeroTolerance()) const;
         NODISCARD Matrix4 Adjoint() const noexcept;
         NODISCARD Real Determinant() const noexcept;
 
-        NODISCARD Matrix4 GaussianEliminationInverse(Real epsilon = Math::GetZeroTolerance()) const;
-        NODISCARD Real GaussianEliminationDeterminant(Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Matrix4 GaussianEliminationInverse(Real epsilon = MathType::GetZeroTolerance()) const;
+        NODISCARD Real GaussianEliminationDeterminant(Real epsilon = MathType::GetZeroTolerance()) const;
 
         // 投影矩阵到一个指定的平面
         // （包含“原点”和单位长度的“向量”）。
-        void MakeObliqueProjection(const Vector3& normal, const Vector3& origin, const Vector3& direction) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void MakeObliqueProjection(const Vector3Type& normal, const Vector3Type& origin, const Vector3Type& direction) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        void MakePerspectiveProjection(const Vector3& normal, const Vector3& origin, const Vector3& eye);
+        void MakePerspectiveProjection(const Vector3Type& normal, const Vector3Type& origin, const Vector3Type& eye);
 
         // 通过指定的平面反射矩阵。
-        void MakeReflection(const Vector3& normal, const Vector3& origin) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void MakeReflection(const Vector3Type& normal, const Vector3Type& origin) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         void MakeFrustumMatrix44(Real left, Real right, Real bottom, Real top, Real nearDistance, Real farDistance) noexcept;
         void MakePerspectiveMatrix44(Real fieldOfViewY, Real aspect, Real nearDistance, Real farDistance) noexcept;
         void MakeOrthoMatrix44(Real left, Real right, Real bottom, Real top, Real nearDistance, Real farDistance) noexcept;
-        void MakeOrthoNormalMatrix44(const Vector3& xDirection, const Vector3& yDirection, const Vector3& zDirection) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void MakeOrthoNormalMatrix44(const Vector3Type& xDirection, const Vector3Type& yDirection, const Vector3Type& zDirection) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         NODISCARD const ArrayType GetCoordinate() const noexcept;
         void Set(const ArrayType& coordinate);
@@ -158,53 +158,53 @@ namespace Mathematics
             return Matrix4{ MatrixInitType::Identity };
         }
 
-        NODISCARD Matrix3 Project() const;
+        NODISCARD Matrix3Type Project() const;
 
         NODISCARD Real Trace() const noexcept;
 
     private:
-        NODISCARD static constexpr Vector4 Create(MatrixInitType flag, VectorIndex vectorIndex)
+        NODISCARD static constexpr Vector4Type Create(MatrixInitType flag, VectorIndex vectorIndex)
         {
             if (flag == MatrixInitType::Zero)
             {
-                return Vector4{};
+                return Vector4Type{};
             }
             else if (vectorIndex == VectorIndex::X)
             {
-                return Vector4::GetUnitX();
+                return Vector4Type::GetUnitX();
             }
             else if (vectorIndex == VectorIndex::Y)
             {
-                return Vector4::GetUnitY();
+                return Vector4Type::GetUnitY();
             }
             else if (vectorIndex == VectorIndex::Z)
             {
-                return Vector4::GetUnitZ();
+                return Vector4Type::GetUnitZ();
             }
             else
             {
-                return Vector4::GetUnitW();
+                return Vector4Type::GetUnitW();
             }
         }
 
         template <int Row>
-        NODISCARD const Vector4& GetVector() const noexcept;
+        NODISCARD const Vector4Type& GetVector() const noexcept;
 
         template <int Row>
-        NODISCARD Vector4& GetVector() noexcept;
+        NODISCARD Vector4Type& GetVector() noexcept;
 
         template <int Column>
-        NODISCARD typename Vector4::GetCoordinateFunction GetVectorGetFunction() const noexcept;
+        NODISCARD typename Vector4Type::GetCoordinateFunction GetVectorGetFunction() const noexcept;
 
         template <int Column>
-        NODISCARD typename Vector4::SetCoordinateFunction GetVectorSetFunction() const noexcept;
+        NODISCARD typename Vector4Type::SetCoordinateFunction GetVectorSetFunction() const noexcept;
 
     private:
         // 存储为行主序。
-        Vector4 x;
-        Vector4 y;
-        Vector4 z;
-        Vector4 w;
+        Vector4Type x;
+        Vector4Type y;
+        Vector4Type z;
+        Vector4Type w;
     };
 
     // M * vec
