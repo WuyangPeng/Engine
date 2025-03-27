@@ -26,29 +26,29 @@ namespace Mathematics
     public:
         using ClassType = AVectorOrthonormalize<Real>;
 
-        using Math = Math<Real>;
-        using AVector = AVector<Real>;
+        using MathType = Math<Real>;
+        using AVectorType = AVector<Real>;
 
     public:
         // Gram-Schmidt正交化。
         // 以线性无关的向量U、V和W，来计算一个正交组（单位长度，相互垂直）。
-        AVectorOrthonormalize(const AVector& uVector, const AVector& vVector, const AVector& wVector, Real epsilon = Math::GetZeroTolerance());
+        AVectorOrthonormalize(const AVectorType& uVector, const AVectorType& vVector, const AVectorType& wVector, Real epsilon = MathType::GetZeroTolerance());
 
-        explicit AVectorOrthonormalize(const std::vector<AVector> vectors, Real epsilon = Math::GetZeroTolerance());
+        explicit AVectorOrthonormalize(const std::vector<AVectorType> vectors, Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD AVector GetUVector() const noexcept;
-        NODISCARD AVector GetVVector() const noexcept;
-        NODISCARD AVector GetWVector() const noexcept;
+        NODISCARD AVectorType GetUVector() const noexcept;
+        NODISCARD AVectorType GetVVector() const noexcept;
+        NODISCARD AVectorType GetWVector() const noexcept;
 
     private:
         void Generate();
 
     private:
-        AVector uVector;
-        AVector vVector;
-        AVector wVector;
+        AVectorType uVector;
+        AVectorType vVector;
+        AVectorType wVector;
         Real epsilon;
     };
 

@@ -23,7 +23,7 @@ Mathematics::Algebra::AxisAngle<N, Real>::AxisAngle() noexcept
 
 template <int N, typename Real>
 requires(3 <= N && N <= 4 && std::is_arithmetic_v<Real>)
-Mathematics::Algebra::AxisAngle<N, Real>::AxisAngle(const Vector& axis, Real angle) noexcept
+Mathematics::Algebra::AxisAngle<N, Real>::AxisAngle(const VectorType& axis, Real angle) noexcept
     : axis{ axis }, angle{ angle }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -42,7 +42,7 @@ bool Mathematics::Algebra::AxisAngle<N, Real>::IsValid() const noexcept
 
 template <int N, typename Real>
 requires(3 <= N && N <= 4 && std::is_arithmetic_v<Real>)
-typename Mathematics::Algebra::AxisAngle<N, Real>::Vector Mathematics::Algebra::AxisAngle<N, Real>::GetAxis() const noexcept
+typename Mathematics::Algebra::AxisAngle<N, Real>::VectorType Mathematics::Algebra::AxisAngle<N, Real>::GetAxis() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -60,7 +60,7 @@ Real Mathematics::Algebra::AxisAngle<N, Real>::GetAngle() const noexcept
 
 template <int N, typename Real>
 requires(3 <= N && N <= 4 && std::is_arithmetic_v<Real>)
-void Mathematics::Algebra::AxisAngle<N, Real>::SetAxis(const Vector& aAxis) noexcept
+void Mathematics::Algebra::AxisAngle<N, Real>::SetAxis(const VectorType& aAxis) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

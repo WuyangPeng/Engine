@@ -103,7 +103,7 @@ int Mathematics::QuarticRootsQr<Real>::operator()(int maxIterations, Matrix& a, 
             /// 因此将子矩阵a复制到B是运行解算器的一个简单解决方法。
             /// 编写避免此类复制的通用根查找/代码。
             const auto subMaxIterations = maxIterations - numIterations;
-            typename CubicRootsQr<Real>::Matrix b{};
+            typename CubicRootsQr<Real>::MatrixType b{};
             for (auto r = 0, rp1 = 1; r < 3; ++r, ++rp1)
             {
                 for (auto c = 0, cp1 = 1; c < 3; ++c, ++cp1)
@@ -133,7 +133,7 @@ int Mathematics::QuarticRootsQr<Real>::operator()(int maxIterations, Matrix& a, 
             /// 因此将子矩阵a复制到B是运行解算器的一个简单解决方法。
             /// 编写避免此类复制的通用根查找/代码。
             const auto subMaxIterations = maxIterations - numIterations;
-            typename CubicRootsQr<Real>::Matrix b{};
+            typename CubicRootsQr<Real>::MatrixType b{};
             for (auto r = 0; r < 3; ++r)
             {
                 for (auto c = 0; c < 3; ++c)

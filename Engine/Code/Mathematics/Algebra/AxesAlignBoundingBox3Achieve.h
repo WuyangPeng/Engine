@@ -18,7 +18,7 @@
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::AxesAlignBoundingBox3<Real>::AxesAlignBoundingBox3(const Vector3& minPoint, const Vector3& maxPoint) noexcept
+Mathematics::AxesAlignBoundingBox3<Real>::AxesAlignBoundingBox3(const Vector3Type& minPoint, const Vector3Type& maxPoint) noexcept
     : minPoint{ minPoint }, maxPoint{ maxPoint }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -115,11 +115,11 @@ Real Mathematics::AxesAlignBoundingBox3<Real>::GetMaxPoint(PointIndex index) con
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::AxesAlignBoundingBox3<Real>::Vector3 Mathematics::AxesAlignBoundingBox3<Real>::GetCenter() const
+typename Mathematics::AxesAlignBoundingBox3<Real>::Vector3Type Mathematics::AxesAlignBoundingBox3<Real>::GetCenter() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return (maxPoint + minPoint) / Math::GetValue(2);
+    return (maxPoint + minPoint) / MathType::GetValue(2);
 }
 
 template <typename Real>
@@ -128,7 +128,7 @@ Real Mathematics::AxesAlignBoundingBox3<Real>::GetExtentX() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return (maxPoint.GetX() - minPoint.GetX()) / Math::GetValue(2);
+    return (maxPoint.GetX() - minPoint.GetX()) / MathType::GetValue(2);
 }
 
 template <typename Real>
@@ -137,7 +137,7 @@ Real Mathematics::AxesAlignBoundingBox3<Real>::GetExtentY() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return (maxPoint.GetY() - minPoint.GetY()) / Math::GetValue(2);
+    return (maxPoint.GetY() - minPoint.GetY()) / MathType::GetValue(2);
 }
 
 template <typename Real>
@@ -146,7 +146,7 @@ Real Mathematics::AxesAlignBoundingBox3<Real>::GetExtentZ() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return (maxPoint.GetZ() - minPoint.GetZ()) / Math::GetValue(2);
+    return (maxPoint.GetZ() - minPoint.GetZ()) / MathType::GetValue(2);
 }
 
 #endif  // MATHEMATICS_ALGEBRA_AXES_ALIGN_BOUNDING_BOX3_ACHIEVE_H

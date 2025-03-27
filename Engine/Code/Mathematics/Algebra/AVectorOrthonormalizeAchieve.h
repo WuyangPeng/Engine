@@ -17,7 +17,7 @@
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::AVectorOrthonormalize<Real>::AVectorOrthonormalize(const AVector& uVector, const AVector& vVector, const AVector& wVector, Real epsilon)
+Mathematics::AVectorOrthonormalize<Real>::AVectorOrthonormalize(const AVectorType& uVector, const AVectorType& vVector, const AVectorType& wVector, Real epsilon)
     : uVector{ uVector }, vVector{ vVector }, wVector{ wVector }, epsilon{ epsilon }
 {
     Generate();
@@ -27,7 +27,7 @@ Mathematics::AVectorOrthonormalize<Real>::AVectorOrthonormalize(const AVector& u
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::AVectorOrthonormalize<Real>::AVectorOrthonormalize(const std::vector<AVector> vectors, Real epsilon)
+Mathematics::AVectorOrthonormalize<Real>::AVectorOrthonormalize(const std::vector<AVectorType> vectors, Real epsilon)
     : uVector{ vectors.at(0) }, vVector{ vectors.at(1) }, wVector{ vectors.at(2) }, epsilon{ epsilon }
 {
     Generate();
@@ -78,9 +78,9 @@ requires std::is_arithmetic_v<Real> bool Mathematics::AVectorOrthonormalize<Real
 {
     try
     {
-        if (Math::FAbs(Dot(uVector, vVector)) <= epsilon &&
-            Math::FAbs(Dot(uVector, wVector)) <= epsilon &&
-            Math::FAbs(Dot(vVector, wVector)) <= epsilon &&
+        if (MathType::FAbs(Dot(uVector, vVector)) <= epsilon &&
+            MathType::FAbs(Dot(uVector, wVector)) <= epsilon &&
+            MathType::FAbs(Dot(vVector, wVector)) <= epsilon &&
             uVector.IsNormalize(epsilon) &&
             vVector.IsNormalize(epsilon) &&
             wVector.IsNormalize(epsilon))
@@ -102,7 +102,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::AVectorOrthonormalize<Real
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AVectorOrthonormalize<Real>::GetUVector() const noexcept
+typename Mathematics::AVectorOrthonormalize<Real>::AVectorType Mathematics::AVectorOrthonormalize<Real>::GetUVector() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -111,7 +111,7 @@ typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AVectorO
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AVectorOrthonormalize<Real>::GetVVector() const noexcept
+typename Mathematics::AVectorOrthonormalize<Real>::AVectorType Mathematics::AVectorOrthonormalize<Real>::GetVVector() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -120,7 +120,7 @@ typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AVectorO
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AVectorOrthonormalize<Real>::GetWVector() const noexcept
+typename Mathematics::AVectorOrthonormalize<Real>::AVectorType Mathematics::AVectorOrthonormalize<Real>::GetWVector() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

@@ -23,17 +23,17 @@ namespace Mathematics
     public:
         using ClassType = AxesAlignBoundingBox3<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using Math = Math<Real>;
-        using PointIndex = typename Vector3::PointIndex;
+        using Vector3Type = Vector3<Real>;
+        using MathType = Math<Real>;
+        using PointIndex = typename Vector3Type::PointIndex;
 
     public:
         constexpr AxesAlignBoundingBox3() noexcept
-            : minPoint{ Math::maxReal, Math::maxReal, Math::maxReal }, maxPoint{ Math::minReal, Math::minReal, Math::minReal }
+            : minPoint{ MathType::maxReal, MathType::maxReal, MathType::maxReal }, maxPoint{ MathType::minReal, MathType::minReal, MathType::minReal }
         {
         }
 
-        AxesAlignBoundingBox3(const Vector3& minPoint, const Vector3& maxPoint) noexcept;
+        AxesAlignBoundingBox3(const Vector3Type& minPoint, const Vector3Type& maxPoint) noexcept;
 
         // 调用者必须确保xMin <= xMax 、 yMin <= yMax和zMin <= zMax。
         AxesAlignBoundingBox3(Real xMin, Real xMax, Real yMin, Real yMax, Real zMin, Real zMax) noexcept;
@@ -45,22 +45,22 @@ namespace Mathematics
 
         NODISCARD bool IsBoxValid() const noexcept;
 
-        NODISCARD Vector3 GetMinPoint() const noexcept;
-        NODISCARD Vector3 GetMaxPoint() const noexcept;
+        NODISCARD Vector3Type GetMinPoint() const noexcept;
+        NODISCARD Vector3Type GetMaxPoint() const noexcept;
         NODISCARD Real GetMinPoint(int index) const;
         NODISCARD Real GetMaxPoint(int index) const;
         NODISCARD Real GetMinPoint(PointIndex index) const;
         NODISCARD Real GetMaxPoint(PointIndex index) const;
 
         // 计算盒子的中心点和盒子中心到盒子边缘（半径）的长度。
-        NODISCARD Vector3 GetCenter() const;
+        NODISCARD Vector3Type GetCenter() const;
         NODISCARD Real GetExtentX() const noexcept;
         NODISCARD Real GetExtentY() const noexcept;
         NODISCARD Real GetExtentZ() const noexcept;
 
     private:
-        Vector3 minPoint;
-        Vector3 maxPoint;
+        Vector3Type minPoint;
+        Vector3Type maxPoint;
     };
 
     // 重叠的测试是在严格意义上。

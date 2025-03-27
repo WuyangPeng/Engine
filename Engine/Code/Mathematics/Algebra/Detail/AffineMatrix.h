@@ -24,9 +24,9 @@ namespace Mathematics
     public:
         using ClassType = AffineMatrix<Real>;
 
-        using Math = Math<Real>;
-        using APoint = APoint<Real>;
-        using Matrix = Matrix<Real>;
+        using MathType = Math<Real>;
+        using APointType = APoint<Real>;
+        using MatrixType = Matrix<Real>;
 
     public:
         AffineMatrix() noexcept;
@@ -41,17 +41,17 @@ namespace Mathematics
         // 设置转换的缩放值为1。
         void MakeUnitScale() noexcept;
 
-        NODISCARD Matrix GetRotationOrGeneralMatrix() const noexcept;
-        NODISCARD APoint GetTranslate() const noexcept;
-        NODISCARD APoint GetScale() const noexcept;
-        void SetRotationOrGeneralMatrix(const Matrix& aRotationOrGeneralMatrix) noexcept;
-        void SetTranslate(const APoint& aTranslate) noexcept;
-        void SetScale(const APoint& aScale) noexcept;
+        NODISCARD MatrixType GetRotationOrGeneralMatrix() const noexcept;
+        NODISCARD APointType GetTranslate() const noexcept;
+        NODISCARD APointType GetScale() const noexcept;
+        void SetRotationOrGeneralMatrix(const MatrixType& aRotationOrGeneralMatrix) noexcept;
+        void SetTranslate(const APointType& aTranslate) noexcept;
+        void SetScale(const APointType& aScale) noexcept;
 
     private:
-        Matrix rotationOrGeneralMatrix;  // M (普通) or R (旋转)
-        APoint translate;  // T
-        APoint scale;  // S
+        MatrixType rotationOrGeneralMatrix;  // M (普通) or R (旋转)
+        APointType translate;  // T
+        APointType scale;  // S
     };
 }
 

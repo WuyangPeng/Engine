@@ -190,11 +190,11 @@ const Real& Mathematics::BandedMatrixData<Real>::operator()(int row, int column)
     /// 在这种情况下，矩阵项为零。
     static Real zero{};
 
-    MATHEMATICS_ASSERTION_1(Math::FAbs(zero) <= Math::GetZeroTolerance(), "静态变量dummy值被修改！dummy值必须为零！");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(zero) <= MathType::GetZeroTolerance(), "静态变量dummy值被修改！dummy值必须为零！");
 
     /// 将该值设置为零，
     /// 以防有人在前一次调用operator(int,int)时无意中修改了dummy。
-    zero = Math::GetValue(0);
+    zero = MathType::GetValue(0);
 
     return zero;
 }
@@ -207,7 +207,7 @@ void Mathematics::BandedMatrixData<Real>::SetZero()
 
     for (auto& element : bands)
     {
-        std::ranges::fill(element, Math::GetValue(0));
+        std::ranges::fill(element, MathType::GetValue(0));
     }
 }
 

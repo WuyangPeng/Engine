@@ -23,8 +23,8 @@ namespace Mathematics
     public:
         using ClassType = TransformMatrix<Real>;
 
-        using APoint = APoint<Real>;
-        using Matrix = Matrix<Real>;
+        using APointType = APoint<Real>;
+        using MatrixType = Matrix<Real>;
 
     public:
         TransformMatrix() noexcept;
@@ -40,25 +40,25 @@ namespace Mathematics
         NODISCARD bool IsRotationOrScaleMatrix() const noexcept;
         NODISCARD bool IsUniformScale() const noexcept;
 
-        void SetRotate(const Matrix& rotate, const APoint& scale) noexcept;
-        void SetMatrix(const Matrix& matrix) noexcept;
-        void SetTranslate(const APoint& translate) noexcept;
-        void SetScale(const Matrix& rotate, const APoint& scale);
-        void SetUniformScale(const Matrix& rotate, Real scale);
+        void SetRotate(const MatrixType& rotate, const APointType& scale) noexcept;
+        void SetMatrix(const MatrixType& matrix) noexcept;
+        void SetTranslate(const APointType& translate) noexcept;
+        void SetScale(const MatrixType& rotate, const APointType& scale);
+        void SetUniformScale(const MatrixType& rotate, Real scale);
 
-        NODISCARD Matrix GetMatrix() const noexcept;
+        NODISCARD MatrixType GetMatrix() const noexcept;
 
         NODISCARD int GetStreamingSize() const noexcept;
 
     private:
         /// 每当组件matrix、translate或scale之一发生变化时，
         /// 请填写transformMatrix的条目。
-        void Modification(const APoint& translate) noexcept;
-        void Modification(const Matrix& matrix) noexcept;
-        void Modification(const Matrix& rotate, const APoint& scale) noexcept;
+        void Modification(const APointType& translate) noexcept;
+        void Modification(const MatrixType& matrix) noexcept;
+        void Modification(const MatrixType& rotate, const APointType& scale) noexcept;
 
     private:
-        Matrix transformMatrix;
+        MatrixType transformMatrix;
 
         bool isIdentity;
         bool isRotationOrScaleMatrix;
