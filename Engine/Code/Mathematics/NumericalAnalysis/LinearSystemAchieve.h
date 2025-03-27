@@ -123,7 +123,7 @@ typename Mathematics::LinearSystem<Real>::Vector3Type Mathematics::LinearSystem<
 }
 
 template <typename Real>
-Mathematics::VariableMatrix<Real> Mathematics::LinearSystem<Real>::Inverse(const VariableMatrix& matrix) const
+Mathematics::VariableMatrix<Real> Mathematics::LinearSystem<Real>::Inverse(const VariableMatrixType& matrix) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_1(matrix.GetRowsNumber() == matrix.GetColumnsNumber(), "æÿ’Û±ÿ–Î «∑Ω’Û\n");
@@ -134,7 +134,7 @@ Mathematics::VariableMatrix<Real> Mathematics::LinearSystem<Real>::Inverse(const
 }
 
 template <typename Real>
-typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::Solve(const VariableMatrix& matrix, const RealContainer& vector) const
+typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::Solve(const VariableMatrixType& matrix, const RealContainer& vector) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -241,7 +241,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
 }
 
 template <typename Real>
-typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::SolveSymmetricConjugateGradient(const VariableMatrix& matrix, const RealContainer& vector) const
+typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::SolveSymmetricConjugateGradient(const VariableMatrixType& matrix, const RealContainer& vector) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -254,7 +254,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
 }
 
 template <typename Real>
-typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::SolveSymmetricConjugateGradient(const SparseMatrix& matrix, const RealContainer& vector) const
+typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::SolveSymmetricConjugateGradient(const SparseMatrixType& matrix, const RealContainer& vector) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -267,7 +267,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
 }
 
 template <typename Real>
-typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::SolveBanded(const BandedMatrix& matrix, const RealContainer& vector) const
+typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::SolveBanded(const BandedMatrixType& matrix, const RealContainer& vector) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -277,7 +277,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
 }
 
 template <typename Real>
-typename Mathematics::LinearSystem<Real>::VariableMatrix Mathematics::LinearSystem<Real>::Invert(const BandedMatrix& matrix) const
+typename Mathematics::LinearSystem<Real>::VariableMatrixType Mathematics::LinearSystem<Real>::Invert(const BandedMatrixType& matrix) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

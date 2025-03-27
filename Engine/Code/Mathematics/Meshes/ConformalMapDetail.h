@@ -33,7 +33,7 @@ Mathematics::ConformalMap<Real>::ConformalMap(int numPoints, const std::vector<V
     planes.resize(numPoints);
     spheres.resize(numPoints);
 
-    typename LinearSystem<Real>::SparseMatrix aMat{ numEdges, numEdges };
+    typename LinearSystem<Real>::SparseMatrixType aMat{ numEdges, numEdges };
 
     auto value = Math<Real>::GetValue(0);
     for (auto e = 0; e < numEdges; ++e)
