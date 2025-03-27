@@ -23,7 +23,7 @@
 #include <algorithm>
 
 template <typename Real>
-Mathematics::CylinderFit3Update<Real>::CylinderFit3Update(Points points, const Vector3& guessCenter, const Vector3& guessAxis, const Real epsilon) noexcept
+Mathematics::CylinderFit3Update<Real>::CylinderFit3Update(Points points, const Vector3Type& guessCenter, const Vector3Type& guessAxis, const Real epsilon) noexcept
     : points{ std::move(points) },
       inverseRadiusSquare{ MathType::GetValue(1) },
       axis{ guessAxis },
@@ -86,7 +86,7 @@ template <typename Real>
 void Mathematics::CylinderFit3Update<Real>::UpdateDirection()
 {
     // 计算的最快下降的方向。
-    Vector3 descentDirection{};
+    Vector3Type descentDirection{};
     auto aMean = MathType::GetValue(0);
     auto aaMean = MathType::GetValue(0);
 
@@ -186,7 +186,7 @@ void Mathematics::CylinderFit3Update<Real>::UpdateCenter()
     auto inverseNumPoints = MathType::GetValue(1) / static_cast<Real>(updateData.size());
 
     // 计算的最快下降的方向。
-    Vector3 descentDirection{};
+    Vector3Type descentDirection{};
     auto aMean = MathType::GetValue(0);
     auto aaMean = MathType::GetValue(0);
 
@@ -305,7 +305,7 @@ Real Mathematics::CylinderFit3Update<Real>::GetExactly() const noexcept
 }
 
 template <typename Real>
-typename Mathematics::CylinderFit3Update<Real>::Vector3 Mathematics::CylinderFit3Update<Real>::GetCenter() const noexcept
+typename Mathematics::CylinderFit3Update<Real>::Vector3Type Mathematics::CylinderFit3Update<Real>::GetCenter() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -313,7 +313,7 @@ typename Mathematics::CylinderFit3Update<Real>::Vector3 Mathematics::CylinderFit
 }
 
 template <typename Real>
-typename Mathematics::CylinderFit3Update<Real>::Vector3 Mathematics::CylinderFit3Update<Real>::GetAxis() const noexcept
+typename Mathematics::CylinderFit3Update<Real>::Vector3Type Mathematics::CylinderFit3Update<Real>::GetAxis() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

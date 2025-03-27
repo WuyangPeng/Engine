@@ -22,28 +22,28 @@ namespace Mathematics
     public:
         using ClassType = CylinderFit3UpdateData<Real>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
 
     public:
-        CylinderFit3UpdateData(const Vector3& point, const Vector3& center, const Vector3& axis);
+        CylinderFit3UpdateData(const Vector3Type& point, const Vector3Type& center, const Vector3Type& axis);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetPoint() const noexcept;
-        NODISCARD Vector3 GetDelta() const noexcept;
-        NODISCARD Vector3 GetDeltaCrossAxis() const noexcept;
+        NODISCARD Vector3Type GetPoint() const noexcept;
+        NODISCARD Vector3Type GetDelta() const noexcept;
+        NODISCARD Vector3Type GetDeltaCrossAxis() const noexcept;
         NODISCARD Real GetDeltaCrossAxisLengthQuartic() const noexcept;
-        NODISCARD Vector3 GetDescentDirection() const noexcept;
+        NODISCARD Vector3Type GetDescentDirection() const noexcept;
 
     private:
-        NODISCARD static Vector3 CalculateDescentDirection(const Vector3& delta, const Vector3& axis) noexcept;
+        NODISCARD static Vector3Type CalculateDescentDirection(const Vector3Type& delta, const Vector3Type& axis) noexcept;
 
     private:
-        Vector3 point;
-        Vector3 delta;
-        Vector3 deltaCrossAxis;
+        Vector3Type point;
+        Vector3Type delta;
+        Vector3Type deltaCrossAxis;
         Real deltaCrossAxisLengthQuartic;
-        Vector3 descentDirection;
+        Vector3Type descentDirection;
     };
 }
 
