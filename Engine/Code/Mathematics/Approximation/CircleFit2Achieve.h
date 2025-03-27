@@ -68,7 +68,7 @@ Mathematics::Vector2<Real> Mathematics::CircleFit2<Real>::GetAveragePoint(const 
 {
     MATHEMATICS_ASSERTION_0(!points.empty(), "输入的数组大小为零！");
 
-    Vector2 average{};
+    Vector2Type average{};
 
     for (const auto& value : points)
     {
@@ -81,11 +81,11 @@ Mathematics::Vector2<Real> Mathematics::CircleFit2<Real>::GetAveragePoint(const 
 }
 
 template <typename Real>
-void Mathematics::CircleFit2<Real>::Iteration(const PointType& points, const Vector2& average)
+void Mathematics::CircleFit2<Real>::Iteration(const PointType& points, const Vector2Type& average)
 {
     // 计算平均值L, dL/da, dL/db。
     auto lengthAverage = MathType::GetValue(0);
-    Vector2 derLengthAverage{};
+    Vector2Type derLengthAverage{};
 
     for (const auto& value : points)
     {
@@ -116,7 +116,7 @@ bool Mathematics::CircleFit2<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename Mathematics::CircleFit2<Real>::Circle2 Mathematics::CircleFit2<Real>::GetCircle() const noexcept
+typename Mathematics::CircleFit2<Real>::Circle2Type Mathematics::CircleFit2<Real>::GetCircle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
