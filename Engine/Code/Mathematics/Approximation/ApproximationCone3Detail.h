@@ -23,7 +23,7 @@ requires(std::is_arithmetic_v<Real>)
 Mathematics::ApproximationCone3<Real>::ApproximationCone3() noexcept
     : points{},
       /// F[i](V,W) = D^T * (I - W * W^T) * D, D = V - X[i], P = (V,W)
-      fFunction{ [this](const VariableLengthVector& p, VariableLengthVector& f) {
+      fFunction{ [this](const VariableLengthVectorType& p, VariableLengthVectorType& f) {
           const auto numPoints = boost::numeric_cast<int>(points.size());
           const Vector3 v{ p[0], p[1], p[2] };
           const Vector3 w{ p[3], p[4], p[5] };
@@ -36,7 +36,7 @@ Mathematics::ApproximationCone3<Real>::ApproximationCone3() noexcept
       } },
       /// dF[i]/dV = 2 * (D - Dot(W, D) * W)
       /// dF[i]/dW = -2 * Dot(W, D) * D
-      jFunction{ [this](const VariableLengthVector& p, VariableMatrix& j) {
+      jFunction{ [this](const VariableLengthVectorType& p, VariableMatrixType& j) {
           const auto numPoints = boost::numeric_cast<int>(points.size());
           const Vector3 v{ p[0], p[1], p[2] };
           const Vector3 w{ p[3], p[4], p[5] };
@@ -70,7 +70,7 @@ bool Mathematics::ApproximationCone3<Real>::IsValid() const noexcept
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-typename Mathematics::ApproximationCone3<Real>::GaussNewtonMinimizerResult Mathematics::ApproximationCone3<Real>::operator()(const Vector3Container& aPoints, int maxIterations, Real updateLengthTolerance, Real errorDifferenceTolerance, bool useConeInputAsInitialGuess, Vector3& coneVertex, Vector3& coneAxis, Real& coneAngle)
+typename Mathematics::ApproximationCone3<Real>::GaussNewtonMinimizerResultType Mathematics::ApproximationCone3<Real>::operator()(const Vector3Container& aPoints, int maxIterations, Real updateLengthTolerance, Real errorDifferenceTolerance, bool useConeInputAsInitialGuess, Vector3& coneVertex, Vector3& coneAxis, Real& coneAngle)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -87,7 +87,7 @@ typename Mathematics::ApproximationCone3<Real>::GaussNewtonMinimizerResult Mathe
     }
 
     /// 圆锥体顶点的初始猜测。
-    VariableLengthVector initial{ 6 };
+    VariableLengthVectorType initial{ 6 };
     initial[0] = coneVertex[0];
     initial[1] = coneVertex[1];
     initial[2] = coneVertex[2];
@@ -123,7 +123,7 @@ typename Mathematics::ApproximationCone3<Real>::GaussNewtonMinimizerResult Mathe
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-typename Mathematics::ApproximationCone3<Real>::LevenbergMarquardtMinimizerResult Mathematics::ApproximationCone3<Real>::operator()(const Vector3Container& aPoints, int maxIterations, Real updateLengthTolerance, Real errorDifferenceTolerance, Real lambdaFactor, Real lambdaAdjust, int maxAdjustments, bool useConeInputAsInitialGuess, Vector3& coneVertex, Vector3& coneAxis, Real& coneAngle)
+typename Mathematics::ApproximationCone3<Real>::LevenbergMarquardtMinimizerResultType Mathematics::ApproximationCone3<Real>::operator()(const Vector3Container& aPoints, int maxIterations, Real updateLengthTolerance, Real errorDifferenceTolerance, Real lambdaFactor, Real lambdaAdjust, int maxAdjustments, bool useConeInputAsInitialGuess, Vector3& coneVertex, Vector3& coneAxis, Real& coneAngle)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -140,7 +140,7 @@ typename Mathematics::ApproximationCone3<Real>::LevenbergMarquardtMinimizerResul
     }
 
     /// 圆锥体顶点的初始猜测。
-    VariableLengthVector initial{ 6 };
+    VariableLengthVectorType initial{ 6 };
     initial[0] = coneVertex[0];
     initial[1] = coneVertex[1];
     initial[2] = coneVertex[2];
