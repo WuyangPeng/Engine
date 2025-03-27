@@ -17,7 +17,7 @@
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::Ray<N, Real>::Ray() noexcept requires(N == 2)
-    : origin{}, direction{ Math::GetValue(1), Math::GetValue(0) }
+    : origin{}, direction{ MathType::GetValue(1), MathType::GetValue(0) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -25,7 +25,7 @@ Mathematics::Ray<N, Real>::Ray() noexcept requires(N == 2)
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::Ray<N, Real>::Ray() noexcept requires(N == 3)
-    : origin{}, direction{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0) }
+    : origin{}, direction{ MathType::GetValue(1), MathType::GetValue(0), MathType::GetValue(0) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
