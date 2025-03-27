@@ -775,31 +775,31 @@ typename Mathematics::Transform<Real>::MatrixType Mathematics::Transform<Real>::
 
 #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-                    inverseMatrix.SetValue<0, 0>(inverseScale * rotationOrGeneralMatrix.template GetValue<0, 0>());
-                    inverseMatrix.SetValue<0, 1>(inverseScale * rotationOrGeneralMatrix.template GetValue<1, 0>());
-                    inverseMatrix.SetValue<0, 2>(inverseScale * rotationOrGeneralMatrix.template GetValue<2, 0>());
+                    inverseMatrix.template SetValue<0, 0>(inverseScale * rotationOrGeneralMatrix.template GetValue<0, 0>());
+                    inverseMatrix.template SetValue<0, 1>(inverseScale * rotationOrGeneralMatrix.template GetValue<1, 0>());
+                    inverseMatrix.template SetValue<0, 2>(inverseScale * rotationOrGeneralMatrix.template GetValue<2, 0>());
 
-                    inverseMatrix.SetValue<1, 0>(inverseScale * rotationOrGeneralMatrix.template GetValue<0, 1>());
-                    inverseMatrix.SetValue<1, 1>(inverseScale * rotationOrGeneralMatrix.template GetValue<1, 1>());
-                    inverseMatrix.SetValue<1, 2>(inverseScale * rotationOrGeneralMatrix.template GetValue<2, 1>());
+                    inverseMatrix.template SetValue<1, 0>(inverseScale * rotationOrGeneralMatrix.template GetValue<0, 1>());
+                    inverseMatrix.template SetValue<1, 1>(inverseScale * rotationOrGeneralMatrix.template GetValue<1, 1>());
+                    inverseMatrix.template SetValue<1, 2>(inverseScale * rotationOrGeneralMatrix.template GetValue<2, 1>());
 
-                    inverseMatrix.SetValue<2, 0>(inverseScale * rotationOrGeneralMatrix.template GetValue<0, 2>());
-                    inverseMatrix.SetValue<2, 1>(inverseScale * rotationOrGeneralMatrix.template GetValue<1, 2>());
-                    inverseMatrix.SetValue<2, 2>(inverseScale * rotationOrGeneralMatrix.template GetValue<2, 2>());
+                    inverseMatrix.template SetValue<2, 0>(inverseScale * rotationOrGeneralMatrix.template GetValue<0, 2>());
+                    inverseMatrix.template SetValue<2, 1>(inverseScale * rotationOrGeneralMatrix.template GetValue<1, 2>());
+                    inverseMatrix.template SetValue<2, 2>(inverseScale * rotationOrGeneralMatrix.template GetValue<2, 2>());
 
 #else  // !defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-                    inverseMatrix.SetValue<0, 0>(rotationOrGeneralMatrix.template GetValue<0, 0>() * inverseScale);
-                    inverseMatrix.SetValue<0, 1>(rotationOrGeneralMatrix.template GetValue<1, 0>() * inverseScale);
-                    inverseMatrix.SetValue<0, 2>(rotationOrGeneralMatrix.template GetValue<2, 0>() * inverseScale);
+                    inverseMatrix.template SetValue<0, 0>(rotationOrGeneralMatrix.template GetValue<0, 0>() * inverseScale);
+                    inverseMatrix.template SetValue<0, 1>(rotationOrGeneralMatrix.template GetValue<1, 0>() * inverseScale);
+                    inverseMatrix.template SetValue<0, 2>(rotationOrGeneralMatrix.template GetValue<2, 0>() * inverseScale);
 
-                    inverseMatrix.SetValue<1, 0>(rotationOrGeneralMatrix.template GetValue<0, 1>() * inverseScale);
-                    inverseMatrix.SetValue<1, 1>(rotationOrGeneralMatrix.template GetValue<1, 1>() * inverseScale);
-                    inverseMatrix.SetValue<1, 2>(rotationOrGeneralMatrix.template GetValue<2, 1>() * inverseScale);
+                    inverseMatrix.template SetValue<1, 0>(rotationOrGeneralMatrix.template GetValue<0, 1>() * inverseScale);
+                    inverseMatrix.template SetValue<1, 1>(rotationOrGeneralMatrix.template GetValue<1, 1>() * inverseScale);
+                    inverseMatrix.template SetValue<1, 2>(rotationOrGeneralMatrix.template GetValue<2, 1>() * inverseScale);
 
-                    inverseMatrix.SetValue<2, 0>(rotationOrGeneralMatrix.template GetValue<0, 2>() * inverseScale);
-                    inverseMatrix.SetValue<2, 1>(rotationOrGeneralMatrix.template GetValue<1, 2>() * inverseScale);
-                    inverseMatrix.SetValue<2, 2>(rotationOrGeneralMatrix.template GetValue<2, 2>() * inverseScale);
+                    inverseMatrix.template SetValue<2, 0>(rotationOrGeneralMatrix.template GetValue<0, 2>() * inverseScale);
+                    inverseMatrix.template SetValue<2, 1>(rotationOrGeneralMatrix.template GetValue<1, 2>() * inverseScale);
+                    inverseMatrix.template SetValue<2, 2>(rotationOrGeneralMatrix.template GetValue<2, 2>() * inverseScale);
 
 #endif  // defined(MATHEMATICS_USE_MATRIX_VECTOR)
                 }
@@ -816,31 +816,31 @@ typename Mathematics::Transform<Real>::MatrixType Mathematics::Transform<Real>::
 
 #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-                    inverseMatrix.SetValue<0, 0>(inverseScale0 * rotationOrGeneralMatrix.template GetValue<0, 0>());
-                    inverseMatrix.SetValue<0, 1>(inverseScale0 * rotationOrGeneralMatrix.template GetValue<1, 0>());
-                    inverseMatrix.SetValue<0, 2>(inverseScale0 * rotationOrGeneralMatrix.template GetValue<2, 0>());
+                    inverseMatrix.template SetValue<0, 0>(inverseScale0 * rotationOrGeneralMatrix.template GetValue<0, 0>());
+                    inverseMatrix.template SetValue<0, 1>(inverseScale0 * rotationOrGeneralMatrix.template GetValue<1, 0>());
+                    inverseMatrix.template SetValue<0, 2>(inverseScale0 * rotationOrGeneralMatrix.template GetValue<2, 0>());
 
-                    inverseMatrix.SetValue<1, 0>(inverseScale1 * rotationOrGeneralMatrix.template GetValue<0, 1>());
-                    inverseMatrix.SetValue<1, 1>(inverseScale1 * rotationOrGeneralMatrix.template GetValue<1, 1>());
-                    inverseMatrix.SetValue<1, 2>(inverseScale1 * rotationOrGeneralMatrix.template GetValue<2, 1>());
+                    inverseMatrix.template SetValue<1, 0>(inverseScale1 * rotationOrGeneralMatrix.template GetValue<0, 1>());
+                    inverseMatrix.template SetValue<1, 1>(inverseScale1 * rotationOrGeneralMatrix.template GetValue<1, 1>());
+                    inverseMatrix.template SetValue<1, 2>(inverseScale1 * rotationOrGeneralMatrix.template GetValue<2, 1>());
 
-                    inverseMatrix.SetValue<2, 0>(inverseScale2 * rotationOrGeneralMatrix.template GetValue<0, 2>());
-                    inverseMatrix.SetValue<2, 1>(inverseScale2 * rotationOrGeneralMatrix.template GetValue<1, 2>());
-                    inverseMatrix.SetValue<2, 2>(inverseScale2 * rotationOrGeneralMatrix.template GetValue<2, 2>());
+                    inverseMatrix.template SetValue<2, 0>(inverseScale2 * rotationOrGeneralMatrix.template GetValue<0, 2>());
+                    inverseMatrix.template SetValue<2, 1>(inverseScale2 * rotationOrGeneralMatrix.template GetValue<1, 2>());
+                    inverseMatrix.template SetValue<2, 2>(inverseScale2 * rotationOrGeneralMatrix.template GetValue<2, 2>());
 
 #else  // !defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-                    inverseMatrix.SetValue<0, 0>(rotationOrGeneralMatrix.template GetValue<0, 0>() * inverseScale0);
-                    inverseMatrix.SetValue<0, 1>(rotationOrGeneralMatrix.template GetValue<1, 0>() * inverseScale0);
-                    inverseMatrix.SetValue<0, 2>(rotationOrGeneralMatrix.template GetValue<2, 0>() * inverseScale0);
+                    inverseMatrix.template SetValue<0, 0>(rotationOrGeneralMatrix.template GetValue<0, 0>() * inverseScale0);
+                    inverseMatrix.template SetValue<0, 1>(rotationOrGeneralMatrix.template GetValue<1, 0>() * inverseScale0);
+                    inverseMatrix.template SetValue<0, 2>(rotationOrGeneralMatrix.template GetValue<2, 0>() * inverseScale0);
 
-                    inverseMatrix.SetValue<1, 0>(rotationOrGeneralMatrix.template GetValue<0, 1>() * inverseScale1);
-                    inverseMatrix.SetValue<1, 1>(rotationOrGeneralMatrix.template GetValue<1, 1>() * inverseScale1);
-                    inverseMatrix.SetValue<1, 2>(rotationOrGeneralMatrix.template GetValue<2, 1>() * inverseScale1);
+                    inverseMatrix.template SetValue<1, 0>(rotationOrGeneralMatrix.template GetValue<0, 1>() * inverseScale1);
+                    inverseMatrix.template SetValue<1, 1>(rotationOrGeneralMatrix.template GetValue<1, 1>() * inverseScale1);
+                    inverseMatrix.template SetValue<1, 2>(rotationOrGeneralMatrix.template GetValue<2, 1>() * inverseScale1);
 
-                    inverseMatrix.SetValue<2, 0>(rotationOrGeneralMatrix.template GetValue<0, 2>() * inverseScale2);
-                    inverseMatrix.SetValue<2, 1>(rotationOrGeneralMatrix.template GetValue<1, 2>() * inverseScale2);
-                    inverseMatrix.SetValue<2, 2>(rotationOrGeneralMatrix.template GetValue<2, 2>() * inverseScale2);
+                    inverseMatrix.template SetValue<2, 0>(rotationOrGeneralMatrix.template GetValue<0, 2>() * inverseScale2);
+                    inverseMatrix.template SetValue<2, 1>(rotationOrGeneralMatrix.template GetValue<1, 2>() * inverseScale2);
+                    inverseMatrix.template SetValue<2, 2>(rotationOrGeneralMatrix.template GetValue<2, 2>() * inverseScale2);
 
 #endif  // defined(MATHEMATICS_USE_MATRIX_VECTOR)
                 }
@@ -852,31 +852,31 @@ typename Mathematics::Transform<Real>::MatrixType Mathematics::Transform<Real>::
 
 #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-            inverseMatrix.SetValue<0, 3>(-(inverseMatrix.template GetValue<0, 0>() * translateMatrix.GetX() +
-                                           inverseMatrix.template GetValue<0, 1>() * translateMatrix.GetY() +
-                                           inverseMatrix.template GetValue<0, 2>() * translateMatrix.GetZ()));
+            inverseMatrix.template SetValue<0, 3>(-(inverseMatrix.template GetValue<0, 0>() * translateMatrix.GetX() +
+                                                    inverseMatrix.template GetValue<0, 1>() * translateMatrix.GetY() +
+                                                    inverseMatrix.template GetValue<0, 2>() * translateMatrix.GetZ()));
 
-            inverseMatrix.SetValue<1, 3>(-(inverseMatrix.template GetValue<1, 0>() * translateMatrix.GetX() +
-                                           inverseMatrix.template GetValue<1, 1>() * translateMatrix.GetY() +
-                                           inverseMatrix.template GetValue<1, 2>() * translateMatrix.GetZ()));
+            inverseMatrix.template SetValue<1, 3>(-(inverseMatrix.template GetValue<1, 0>() * translateMatrix.GetX() +
+                                                    inverseMatrix.template GetValue<1, 1>() * translateMatrix.GetY() +
+                                                    inverseMatrix.template GetValue<1, 2>() * translateMatrix.GetZ()));
 
-            inverseMatrix.SetValue<2, 3>(-(inverseMatrix.template GetValue<2, 0>() * translateMatrix.GetX() +
-                                           inverseMatrix.template GetValue<2, 1>() * translateMatrix.GetY() +
-                                           inverseMatrix.template GetValue<2, 2>() * translateMatrix.GetZ()));
+            inverseMatrix.template SetValue<2, 3>(-(inverseMatrix.template GetValue<2, 0>() * translateMatrix.GetX() +
+                                                    inverseMatrix.template GetValue<2, 1>() * translateMatrix.GetY() +
+                                                    inverseMatrix.template GetValue<2, 2>() * translateMatrix.GetZ()));
 
 #else  // !defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-            inverseMatrix.SetValue<3, 0>(-(inverseMatrix.template GetValue<0, 0>() * translate.GetX() +
-                                           inverseMatrix.template GetValue<1, 0>() * translate.GetY() +
-                                           inverseMatrix.template GetValue<2, 0>() * translate.GetZ()));
+            inverseMatrix.template SetValue<3, 0>(-(inverseMatrix.template GetValue<0, 0>() * translate.GetX() +
+                                                    inverseMatrix.template GetValue<1, 0>() * translate.GetY() +
+                                                    inverseMatrix.template GetValue<2, 0>() * translate.GetZ()));
 
-            inverseMatrix.SetValue<3, 1>(-(inverseMatrix.template GetValue<0, 1>() * translate.GetX() +
-                                           inverseMatrix.template GetValue<1, 1>() * translate.GetY() +
-                                           inverseMatrix.template GetValue<2, 1>() * translate.GetZ()));
+            inverseMatrix.template SetValue<3, 1>(-(inverseMatrix.template GetValue<0, 1>() * translate.GetX() +
+                                                    inverseMatrix.template GetValue<1, 1>() * translate.GetY() +
+                                                    inverseMatrix.template GetValue<2, 1>() * translate.GetZ()));
 
-            inverseMatrix.SetValue<3, 2>(-(inverseMatrix.template GetValue<0, 2>() * translate.GetX() +
-                                           inverseMatrix.template GetValue<1, 2>() * translate.GetY() +
-                                           inverseMatrix.template GetValue<2, 2>() * translate.GetZ()));
+            inverseMatrix.template SetValue<3, 2>(-(inverseMatrix.template GetValue<0, 2>() * translate.GetX() +
+                                                    inverseMatrix.template GetValue<1, 2>() * translate.GetY() +
+                                                    inverseMatrix.template GetValue<2, 2>() * translate.GetZ()));
 
 #endif  // defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
