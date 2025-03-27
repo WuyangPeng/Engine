@@ -39,7 +39,7 @@ namespace Mathematics
         using MathType = Math<Real>;
         using ContainerType = std::vector<Real>;
         using VariableMatrixType = VariableMatrix<Real>;
-        using BandedMatrixData = BandedMatrixData<Real>;
+        using BandedMatrixDataType = BandedMatrixData<Real>;
 
     public:
         BandedMatrix(int size, int lowerBandsNumber, int upperBandsNumber);
@@ -91,8 +91,8 @@ namespace Mathematics
 
     private:
         ContainerType diagonalBandContainer;  // 对角线
-        BandedMatrixData lowerBandData;  // 下三角
-        BandedMatrixData upperBandData;  // 上三角
+        BandedMatrixDataType lowerBandData;  // 下三角
+        BandedMatrixDataType upperBandData;  // 上三角
     };
 
     using BandedMatrixF = BandedMatrix<float>;
