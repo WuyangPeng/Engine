@@ -39,7 +39,7 @@ bool Mathematics::GaussNewtonMinimizerResult<Real>::IsValid() const noexcept
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-typename Mathematics::GaussNewtonMinimizerResult<Real>::VariableLengthVector Mathematics::GaussNewtonMinimizerResult<Real>::GetMinLocation() const
+typename Mathematics::GaussNewtonMinimizerResult<Real>::VariableLengthVectorType Mathematics::GaussNewtonMinimizerResult<Real>::GetMinLocation() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -48,7 +48,7 @@ typename Mathematics::GaussNewtonMinimizerResult<Real>::VariableLengthVector Mat
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-void Mathematics::GaussNewtonMinimizerResult<Real>::SetMinLocation(const VariableLengthVector& aMinLocation)
+void Mathematics::GaussNewtonMinimizerResult<Real>::SetMinLocation(const VariableLengthVectorType& aMinLocation)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

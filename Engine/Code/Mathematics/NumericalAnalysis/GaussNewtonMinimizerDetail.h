@@ -91,11 +91,11 @@ int Mathematics::GaussNewtonMinimizer<Real>::GetNumFDimensions() const noexcept
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-typename Mathematics::GaussNewtonMinimizer<Real>::GaussNewtonMinimizerResult Mathematics::GaussNewtonMinimizer<Real>::operator()(const DVector& p0, int maxIterations, Real updateLengthTolerance, Real errorDifferenceTolerance)
+typename Mathematics::GaussNewtonMinimizer<Real>::GaussNewtonMinimizerResultType Mathematics::GaussNewtonMinimizer<Real>::operator()(const DVector& p0, int maxIterations, Real updateLengthTolerance, Real errorDifferenceTolerance)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    GaussNewtonMinimizerResult result{};
+    GaussNewtonMinimizerResultType result{};
     result.SetMinLocation(p0);
     result.SetMinError(std::numeric_limits<Real>::max());
     result.SetMinErrorDifference(std::numeric_limits<Real>::max());
