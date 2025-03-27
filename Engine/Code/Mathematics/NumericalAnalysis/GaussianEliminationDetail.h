@@ -30,7 +30,7 @@ Mathematics::GaussianElimination<Real>::GaussianElimination(int numRows, const C
       epsilon{ epsilon },
       isInverse{ false },
       inverseMatrix{ numRows, numRows, this->matrix.begin(), this->matrix.end() },
-      determinant{ Math::GetValue(1) },
+      determinant{ MathType::GetValue(1) },
       x{ b },
       y{ numRows, numColumns, this->c.begin(), this->c.end() }
 {
@@ -85,7 +85,7 @@ void Mathematics::GaussianElimination<Real>::Init()
     for (auto i0 = 0; i0 < numRows; ++i0)
     {
         /// 搜索矩阵（不包括旋转行）以获取最大绝对条目。
-        Real maxValue = Math::GetValue(0);
+        Real maxValue = MathType::GetValue(0);
         for (auto i1 = 0; i1 < numRows; ++i1)
         {
             if (!pivoted.at(i1))
@@ -95,7 +95,7 @@ void Mathematics::GaussianElimination<Real>::Init()
                     if (!pivoted.at(i2))
                     {
                         auto value = inverseMatrix(i1, i2);
-                        auto absValue = Math::FAbs(value);
+                        auto absValue = MathType::FAbs(value);
                         if (maxValue < absValue)
                         {
                             maxValue = absValue;
@@ -115,11 +115,11 @@ void Mathematics::GaussianElimination<Real>::Init()
                 inverseMatrix.FillZero();
             }
 
-            determinant = Math::GetValue(0);
+            determinant = MathType::GetValue(0);
 
             if (!b.empty())
             {
-                fill(x.begin(), x.end(), Math::GetValue(0));
+                fill(x.begin(), x.end(), MathType::GetValue(0));
             }
 
             if (!c.empty())
@@ -162,8 +162,8 @@ void Mathematics::GaussianElimination<Real>::Init()
         /// 缩放行，使旋转轴条目为1。
         auto diagonal = inverseMatrix(column, column);
         determinant *= diagonal;
-        auto inverse = Math::GetValue(1) / diagonal;
-        inverseMatrix(column, column) = Math::GetValue(1);
+        auto inverse = MathType::GetValue(1) / diagonal;
+        inverseMatrix(column, column) = MathType::GetValue(1);
         for (auto i = 0; i < numRows; ++i)
         {
             inverseMatrix(column, i) *= inverse;
@@ -188,7 +188,7 @@ void Mathematics::GaussianElimination<Real>::Init()
             if (i1 != column)
             {
                 auto save = inverseMatrix(i1, column);
-                inverseMatrix(i1, column) = Math::GetValue(0);
+                inverseMatrix(i1, column) = MathType::GetValue(0);
                 for (auto i2 = 0; i2 < numRows; ++i2)
                 {
                     inverseMatrix(i1, i2) -= inverseMatrix(column, i2) * save;
