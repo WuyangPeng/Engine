@@ -238,7 +238,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator+=(const P
         coefficient.at(i) += result.coefficient.at(i);
     }
 
-    EliminateLeadingZeros(Math::GetZeroTolerance());
+    EliminateLeadingZeros(MathType::GetZeroTolerance());
 
     return *this;
 }
@@ -307,7 +307,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator/=(Real sc
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (Math::GetZeroTolerance() < Math::FAbs(scalar))
+    if (MathType::GetZeroTolerance() < MathType::FAbs(scalar))
     {
         for (auto& element : coefficient)
         {
@@ -376,7 +376,7 @@ Mathematics::Polynomial<Real> Mathematics::Polynomial<Real>::GetTranslation(Real
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     // f(t) = t - t0
-    Polynomial factor{ ContainerType{ -t0, Math::GetValue(1) } };
+    Polynomial factor{ ContainerType{ -t0, MathType::GetValue(1) } };
     const auto degree = GetDegree();
     Polynomial result{ ContainerType{ coefficient.at(degree) } };
     for (auto index = degree - 1; 0 <= index; --index)
@@ -429,7 +429,7 @@ void Mathematics::Polynomial<Real>::MakeCompress(Real epsilon)
     {
         Polynomial result{ degree };
 
-        result[degree] = Math::GetValue(1);
+        result[degree] = MathType::GetValue(1);
         for (auto i = 0; i < degree; ++i)
         {
             result[i] = coefficient.at(i) / coefficient.at(degree);
@@ -449,7 +449,7 @@ int Mathematics::Polynomial<Real>::GetCompressDegree(Real epsilon) const
 
     for (; 0 < leading; --leading)
     {
-        if (epsilon < Math::FAbs(coefficient.at(leading)))
+        if (epsilon < MathType::FAbs(coefficient.at(leading)))
         {
             return leading;
         }
@@ -460,7 +460,7 @@ int Mathematics::Polynomial<Real>::GetCompressDegree(Real epsilon) const
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Polynomial<Real>::PolynomialDivide Mathematics::Polynomial<Real>::Divide(const Polynomial& divisor, Real epsilon) const
+typename Mathematics::Polynomial<Real>::PolynomialDivideType Mathematics::Polynomial<Real>::Divide(const Polynomial& divisor, Real epsilon) const
 {
     const auto degree = GetDegree();
     const auto divisorDegree = divisor.GetDegree();
@@ -474,7 +474,7 @@ typename Mathematics::Polynomial<Real>::PolynomialDivide Mathematics::Polynomial
         Polynomial remainder{ *this };
 
         /// 做除法（欧几里得算法）。
-        const auto inv = Math::GetValue(1) / divisor[divisorDegree];
+        const auto inv = MathType::GetValue(1) / divisor[divisorDegree];
         for (auto quotientIndex = quotientDegree; 0 <= quotientIndex; --quotientIndex)
         {
             auto divisorIndex = divisorDegree + quotientIndex;
@@ -490,7 +490,7 @@ typename Mathematics::Polynomial<Real>::PolynomialDivide Mathematics::Polynomial
         if (1 <= divisorDegree)
         {
             auto remainderDegree = divisorDegree - 1;
-            while (0 < remainderDegree && Math::FAbs(remainder[remainderDegree]) < epsilon)
+            while (0 < remainderDegree && MathType::FAbs(remainder[remainderDegree]) < epsilon)
             {
                 --remainderDegree;
             }
@@ -502,13 +502,13 @@ typename Mathematics::Polynomial<Real>::PolynomialDivide Mathematics::Polynomial
                 correctRemainder[i] = remainder[i];
             }
 
-            return PolynomialDivide{ quotient, correctRemainder };
+            return PolynomialDivideType{ quotient, correctRemainder };
         }
         else
         {
             Polynomial correctRemainder{ 0 };
 
-            return PolynomialDivide{ quotient, correctRemainder };
+            return PolynomialDivideType{ quotient, correctRemainder };
         }
     }
     else
@@ -516,7 +516,7 @@ typename Mathematics::Polynomial<Real>::PolynomialDivide Mathematics::Polynomial
         Polynomial quotient{ 0 };
         Polynomial remainder{ *this };
 
-        return PolynomialDivide{ quotient, *this };
+        return PolynomialDivideType{ quotient, *this };
     }
 }
 
