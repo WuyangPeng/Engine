@@ -27,17 +27,17 @@ namespace Mathematics
     public:
         using ClassType = AVectorOrthonormalBasis<Real>;
 
-        using Math = Math<Real>;
-        using AVector = AVector<Real>;
+        using MathType = Math<Real>;
+        using AVectorType = AVector<Real>;
 
     public:
-        explicit AVectorOrthonormalBasis(const AVector& nonzeroVector, bool isUnit, Real epsilon = Math::GetZeroTolerance());
+        explicit AVectorOrthonormalBasis(const AVectorType& nonzeroVector, bool isUnit, Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD AVector GetUVector() const noexcept;
-        NODISCARD AVector GetVVector() const noexcept;
-        NODISCARD AVector GetWVector() const noexcept;
+        NODISCARD AVectorType GetUVector() const noexcept;
+        NODISCARD AVectorType GetVVector() const noexcept;
+        NODISCARD AVectorType GetWVector() const noexcept;
 
     private:
         void Generate();
@@ -46,9 +46,9 @@ namespace Mathematics
 
     private:
         bool isUnit;
-        AVector uVector;
-        AVector vVector;
-        AVector wVector;
+        AVectorType uVector;
+        AVectorType vVector;
+        AVectorType wVector;
         Real epsilon;
     };
 
