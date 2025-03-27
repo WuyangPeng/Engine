@@ -35,7 +35,7 @@ Mathematics::BarycentricCoordinates<Real, WindowSize>::BarycentricCoordinates(bo
 template <typename Real, int WindowSize>
 requires std::is_arithmetic_v<Real> && (WindowSize == 3 || WindowSize == 4) bool Mathematics::BarycentricCoordinates<Real, WindowSize>::IsValid() const noexcept
 {
-    if (!isValid || Math::FAbs(Math::GetValue(1) - tuple.GetSum()) <= Math::GetZeroTolerance())
+    if (!isValid || MathType::FAbs(MathType::GetValue(1) - tuple.GetSum()) <= MathType::GetZeroTolerance())
         return true;
     else
         return false;
