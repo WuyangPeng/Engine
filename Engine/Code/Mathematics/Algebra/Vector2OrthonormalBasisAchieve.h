@@ -18,7 +18,7 @@
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Vector2OrthonormalBasis<Real>::Vector2OrthonormalBasis(const Vector2& nonzeroVector, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+Mathematics::Vector2OrthonormalBasis<Real>::Vector2OrthonormalBasis(const Vector2Type& nonzeroVector, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : uVector{ nonzeroVector }, vVector{}, epsilon{ epsilon }
 {
     MATHEMATICS_ASSERTION_1(!nonzeroVector.IsZero(epsilon), "输入必须是非零向量！");
@@ -33,7 +33,7 @@ requires std::is_arithmetic_v<Real>
 void Mathematics::Vector2OrthonormalBasis<Real>::Generate() noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     uVector.Normalize(epsilon);
-    vVector = Vector2Tools::GetPerp(uVector);
+    vVector = Vector2ToolsType::GetPerp(uVector);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -43,7 +43,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector2OrthonormalBasis<Re
 {
     try
     {
-        if (Math::FAbs(Vector2Tools::DotProduct(uVector, vVector)) <= epsilon &&
+        if (MathType::FAbs(Vector2ToolsType::DotProduct(uVector, vVector)) <= epsilon &&
             uVector.IsNormalize(epsilon) &&
             vVector.IsNormalize(epsilon))
         {
@@ -64,7 +64,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector2OrthonormalBasis<Re
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector2OrthonormalBasis<Real>::Vector2 Mathematics::Vector2OrthonormalBasis<Real>::GetUVector() const noexcept
+typename Mathematics::Vector2OrthonormalBasis<Real>::Vector2Type Mathematics::Vector2OrthonormalBasis<Real>::GetUVector() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -73,7 +73,7 @@ typename Mathematics::Vector2OrthonormalBasis<Real>::Vector2 Mathematics::Vector
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector2OrthonormalBasis<Real>::Vector2 Mathematics::Vector2OrthonormalBasis<Real>::GetVVector() const noexcept
+typename Mathematics::Vector2OrthonormalBasis<Real>::Vector2Type Mathematics::Vector2OrthonormalBasis<Real>::GetVVector() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
