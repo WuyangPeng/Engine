@@ -32,7 +32,7 @@ Mathematics::AQuaternion<Real>::AQuaternion(const ArrayType& coordinate) noexcep
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::AQuaternion<Real>::AQuaternion(const Matrix& matrix)
+Mathematics::AQuaternion<Real>::AQuaternion(const MatrixType& matrix)
     : w{}, x{}, y{}, z{}
 {
     FromRotationMatrix(matrix);
@@ -42,7 +42,7 @@ Mathematics::AQuaternion<Real>::AQuaternion(const Matrix& matrix)
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::AQuaternion<Real>::FromRotationMatrix(const Matrix& matrix)
+void Mathematics::AQuaternion<Real>::FromRotationMatrix(const MatrixType& matrix)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -94,7 +94,7 @@ void Mathematics::AQuaternion<Real>::FromRotationMatrix(const Matrix& matrix)
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::AQuaternion<Real>::AQuaternion(const AVector& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+Mathematics::AQuaternion<Real>::AQuaternion(const AVectorType& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : w{}, x{}, y{}, z{}
 {
     MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis必须是单位向量！");
@@ -106,7 +106,7 @@ Mathematics::AQuaternion<Real>::AQuaternion(const AVector& axis, Real angle) noe
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::AQuaternion<Real>::FromAxisAngle(const AVector& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+void Mathematics::AQuaternion<Real>::FromAxisAngle(const AVectorType& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis必须是单位向量！");
@@ -310,10 +310,10 @@ Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator/=(Real 
     {
         MATHEMATICS_ASSERTION_1(false, "除零错误！");
 
-        w = Math::maxReal;
-        x = Math::maxReal;
-        y = Math::maxReal;
-        z = Math::maxReal;
+        w = MathType::maxReal;
+        x = MathType::maxReal;
+        y = MathType::maxReal;
+        z = MathType::maxReal;
     }
     else
     {
@@ -328,7 +328,7 @@ Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator/=(Real 
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::AQuaternion<Real>::Matrix Mathematics::AQuaternion<Real>::ToRotationMatrix() const noexcept
+typename Mathematics::AQuaternion<Real>::MatrixType Mathematics::AQuaternion<Real>::ToRotationMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -345,7 +345,7 @@ typename Mathematics::AQuaternion<Real>::Matrix Mathematics::AQuaternion<Real>::
     const auto twoYZ = twoZ * y;
     const auto twoZZ = twoZ * z;
 
-    return Matrix{ Math::GetValue(1) - (twoYY + twoZZ),
+    return MatrixType{ Math::GetValue(1) - (twoYY + twoZZ),
                    twoXY - twoWZ,
                    twoXZ + twoWY,
                    Math::GetValue(0),
@@ -368,7 +368,7 @@ typename Mathematics::AQuaternion<Real>::Matrix Mathematics::AQuaternion<Real>::
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<Real>::ToAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
+typename Mathematics::AQuaternion<Real>::AVectorType Mathematics::AQuaternion<Real>::ToAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -381,12 +381,12 @@ typename Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<Real>:
     {
         const auto invLength = Math::InvSqrt(squareLength);
 
-        return AVector{ x * invLength, y * invLength, z * invLength };
+        return AVectorType{ x * invLength, y * invLength, z * invLength };
     }
     else
     {
         // 角度是 0 (2 * pi的模), 所以任何轴都行。
-        return AVector::GetUnitX();
+        return AVectorType::GetUnitX();
     }
 }
 
@@ -571,7 +571,7 @@ Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Log() const noexc
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<Real>::Rotate(const AVector& vector) const noexcept
+typename Mathematics::AQuaternion<Real>::AVectorType Mathematics::AQuaternion<Real>::Rotate(const AVectorType& vector) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

@@ -28,9 +28,9 @@ namespace Mathematics
     public:
         using ClassType = AQuaternion<Real>;
 
-        using Math = Math<Real>;
-        using Matrix = Matrix<Real>;
-        using AVector = AVector<Real>;
+        using MathType = Math<Real>;
+        using MatrixType = Matrix<Real>;
+        using AVectorType = AVector<Real>;
 
         enum class PointIndex
         {
@@ -62,10 +62,10 @@ namespace Mathematics
         explicit AQuaternion(const ArrayType& coordinate) noexcept;
 
         // 输入为旋转矩阵构造四元数
-        explicit AQuaternion(const Matrix& matrix);
+        explicit AQuaternion(const MatrixType& matrix);
 
         // 通过轴-角的旋转构造四元数
-        AQuaternion(const AVector& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        AQuaternion(const AVectorType& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -92,10 +92,10 @@ namespace Mathematics
         AQuaternion& operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 四元数，矩阵和轴——角之间的转换。
-        void FromRotationMatrix(const Matrix& matrix);
-        NODISCARD Matrix ToRotationMatrix() const noexcept;
-        void FromAxisAngle(const AVector& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
-        NODISCARD AVector ToAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        void FromRotationMatrix(const MatrixType& matrix);
+        NODISCARD MatrixType ToRotationMatrix() const noexcept;
+        void FromAxisAngle(const AVectorType& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        NODISCARD AVectorType ToAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD Real ToAngle() const noexcept;
 
         // 4-tuple的长度
@@ -104,7 +104,7 @@ namespace Mathematics
         // 4-tuple的长度的平方
         NODISCARD Real SquaredLength() const noexcept;
 
-        void Normalize(Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void Normalize(Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 适用于非零四元数
         NODISCARD AQuaternion Inverse() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
@@ -118,10 +118,10 @@ namespace Mathematics
         // 适用于单位长度四元数
         NODISCARD AQuaternion Log() const noexcept;
 
-        NODISCARD bool IsNormalize(Real epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        NODISCARD bool IsNormalize(Real epsilon = MathType::GetZeroTolerance()) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 由四元数旋转向量。
-        NODISCARD AVector Rotate(const AVector& vector) const noexcept;
+        NODISCARD AVectorType Rotate(const AVectorType& vector) const noexcept;
 
         // 球面线性插值
         void Slerp(Real t, const AQuaternion& quaternion0, const AQuaternion& quaternion1) noexcept;
@@ -143,7 +143,7 @@ namespace Mathematics
 
         static constexpr AQuaternion GetIdentity()
         {
-            return AQuaternion{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return AQuaternion{ MathType::GetValue(1), MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
         }
 
     private:
