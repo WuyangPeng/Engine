@@ -46,7 +46,7 @@ namespace Mathematics
         static constexpr auto wIndex = System::EnumCastUnderlying(PointIndex::W);
         static constexpr auto pointSize = System::EnumCastUnderlying(PointIndex::Size);
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using ArrayType = std::array<Real, pointSize>;
         using AlgebraVector4 = Algebra::Vector<4, Real>;
 
@@ -83,7 +83,7 @@ namespace Mathematics
         NODISCARD Real GetY() const noexcept;
         NODISCARD Real GetZ() const noexcept;
         NODISCARD Real GetW() const noexcept;
-        NODISCARD bool IsZero(Real epsilon = Math::GetZeroTolerance()) const noexcept;
+        NODISCARD bool IsZero(Real epsilon = MathType::GetZeroTolerance()) const noexcept;
 
         void ZeroOut() noexcept;
         void SetCoordinate(Real aX, Real aY, Real aZ, Real aW) noexcept;
@@ -91,9 +91,9 @@ namespace Mathematics
         void SetY(Real aY) noexcept;
         void SetZ(Real aZ) noexcept;
         void SetW(Real aW) noexcept;
-        void Normalize(Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
-        void RobustNormalize(Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
-        void ProjectionNormalization(Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void Normalize(Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void RobustNormalize(Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void ProjectionNormalization(Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         NODISCARD Vector4 operator-() const noexcept;
         NODISCARD const Real& operator[](int index) const;
@@ -117,31 +117,31 @@ namespace Mathematics
         // (1,0,0,0)
         NODISCARD static constexpr Vector4 GetUnitX()
         {
-            return Vector4{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return Vector4{ MathType::GetValue(1), MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
         }
 
         // (0,1,0,0)
         NODISCARD static constexpr Vector4 GetUnitY()
         {
-            return Vector4{ Math::GetValue(0), Math::GetValue(1), Math::GetValue(0), Math::GetValue(0) };
+            return Vector4{ MathType::GetValue(0), MathType::GetValue(1), MathType::GetValue(0), MathType::GetValue(0) };
         }
 
         // (0,0,1,0)
         NODISCARD static constexpr Vector4 GetUnitZ()
         {
-            return Vector4{ Math::GetValue(0), Math::GetValue(0), Math::GetValue(1), Math::GetValue(0) };
+            return Vector4{ MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(1), MathType::GetValue(0) };
         }
 
         // (0,0,0,1)
         NODISCARD static constexpr Vector4 GetUnitW()
         {
-            return Vector4{ Math::GetValue(0), Math::GetValue(0), Math::GetValue(0), Math::GetValue(1) };
+            return Vector4{ MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(1) };
         }
 
         // (1,1,1,1)
         NODISCARD static constexpr Vector4 GetOne()
         {
-            return Vector4{ Math::GetValue(1), Math::GetValue(1), Math::GetValue(1), Math::GetValue(1) };
+            return Vector4{ MathType::GetValue(1), MathType::GetValue(1), MathType::GetValue(1), MathType::GetValue(1) };
         }
 
         NODISCARD Vector4 GetMove(Real t, const Vector4& velocity) const;
