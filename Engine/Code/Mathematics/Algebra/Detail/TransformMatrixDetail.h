@@ -77,15 +77,15 @@ void Mathematics::TransformMatrix<Real>::Modification(const APointType& translat
 
 #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-    transformMatrix.SetValue<0, 3>(translate.GetX());
-    transformMatrix.SetValue<1, 3>(translate.GetY());
-    transformMatrix.SetValue<2, 3>(translate.GetZ());
+    transformMatrix.template SetValue<0, 3>(translate.GetX());
+    transformMatrix.template SetValue<1, 3>(translate.GetY());
+    transformMatrix.template SetValue<2, 3>(translate.GetZ());
 
 #else  // !defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-    transformMatrix.SetValue<3, 0>(translate.GetX());
-    transformMatrix.SetValue<3, 1>(translate.GetY());
-    transformMatrix.SetValue<3, 2>(translate.GetZ());
+    transformMatrix.template SetValue<3, 0>(translate.GetX());
+    transformMatrix.template SetValue<3, 1>(translate.GetY());
+    transformMatrix.template SetValue<3, 2>(translate.GetZ());
 
 #endif  // defined(MATHEMATICS_USE_MATRIX_VECTOR)
 }
@@ -93,17 +93,17 @@ void Mathematics::TransformMatrix<Real>::Modification(const APointType& translat
 template <typename Real>
 void Mathematics::TransformMatrix<Real>::Modification(const MatrixType& matrix) noexcept
 {
-    transformMatrix.SetValue<0, 0>(matrix.template GetValue<0, 0>());
-    transformMatrix.SetValue<0, 1>(matrix.template GetValue<0, 1>());
-    transformMatrix.SetValue<0, 2>(matrix.template GetValue<0, 2>());
+    transformMatrix.template SetValue<0, 0>(matrix.template GetValue<0, 0>());
+    transformMatrix.template SetValue<0, 1>(matrix.template GetValue<0, 1>());
+    transformMatrix.template SetValue<0, 2>(matrix.template GetValue<0, 2>());
 
-    transformMatrix.SetValue<1, 0>(matrix.template GetValue<1, 0>());
-    transformMatrix.SetValue<1, 1>(matrix.template GetValue<1, 1>());
-    transformMatrix.SetValue<1, 2>(matrix.template GetValue<1, 2>());
+    transformMatrix.template SetValue<1, 0>(matrix.template GetValue<1, 0>());
+    transformMatrix.template SetValue<1, 1>(matrix.template GetValue<1, 1>());
+    transformMatrix.template SetValue<1, 2>(matrix.template GetValue<1, 2>());
 
-    transformMatrix.SetValue<2, 0>(matrix.template GetValue<2, 0>());
-    transformMatrix.SetValue<2, 1>(matrix.template GetValue<2, 1>());
-    transformMatrix.SetValue<2, 2>(matrix.template GetValue<2, 2>());
+    transformMatrix.template SetValue<2, 0>(matrix.template GetValue<2, 0>());
+    transformMatrix.template SetValue<2, 1>(matrix.template GetValue<2, 1>());
+    transformMatrix.template SetValue<2, 2>(matrix.template GetValue<2, 2>());
 }
 
 template <typename Real>
@@ -125,17 +125,17 @@ void Mathematics::TransformMatrix<Real>::Modification(const MatrixType& rotate, 
 
 #else  // !defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-    transformMatrix.SetValue<0, 0>(scale.GetX() * rotate.template GetValue<0, 0>());
-    transformMatrix.SetValue<0, 1>(scale.GetY() * rotate.template GetValue<0, 1>());
-    transformMatrix.SetValue<0, 2>(scale.GetZ() * rotate.template GetValue<0, 2>());
+    transformMatrix.template SetValue<0, 0>(scale.GetX() * rotate.template GetValue<0, 0>());
+    transformMatrix.template SetValue<0, 1>(scale.GetY() * rotate.template GetValue<0, 1>());
+    transformMatrix.template SetValue<0, 2>(scale.GetZ() * rotate.template GetValue<0, 2>());
 
-    transformMatrix.SetValue<1, 0>(scale.GetX() * rotate.template GetValue<1, 0>());
-    transformMatrix.SetValue<1, 1>(scale.GetY() * rotate.template GetValue<1, 1>());
-    transformMatrix.SetValue<1, 2>(scale.GetZ() * rotate.template GetValue<1, 2>());
+    transformMatrix.template SetValue<1, 0>(scale.GetX() * rotate.template GetValue<1, 0>());
+    transformMatrix.template SetValue<1, 1>(scale.GetY() * rotate.template GetValue<1, 1>());
+    transformMatrix.template SetValue<1, 2>(scale.GetZ() * rotate.template GetValue<1, 2>());
 
-    transformMatrix.SetValue<2, 0>(scale.GetX() * rotate.template GetValue<2, 0>());
-    transformMatrix.SetValue<2, 1>(scale.GetY() * rotate.template GetValue<2, 1>());
-    transformMatrix.SetValue<2, 2>(scale.GetZ() * rotate.template GetValue<2, 2>());
+    transformMatrix.template SetValue<2, 0>(scale.GetX() * rotate.template GetValue<2, 0>());
+    transformMatrix.template SetValue<2, 1>(scale.GetY() * rotate.template GetValue<2, 1>());
+    transformMatrix.template SetValue<2, 2>(scale.GetZ() * rotate.template GetValue<2, 2>());
 
 #endif  // defined(MATHEMATICS_USE_MATRIX_VECTOR)
 }
