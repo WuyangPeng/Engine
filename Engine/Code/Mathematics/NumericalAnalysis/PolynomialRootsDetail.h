@@ -281,7 +281,7 @@ bool Mathematics::PolynomialRoots<Real>::FindEigenvalues(Real constant, Real onc
     secondary /= thrice;
 
     // 构造3×3协同矩阵。
-    VariableMatrix matrix{ 3, 3 };  // 初始化为0。
+    VariableMatrixType matrix{ 3, 3 };  // 初始化为0。
     matrix(1, 0) = MathType::GetValue(1);
     matrix(2, 1) = MathType::GetValue(1);
     matrix(0, 2) = -constant;
@@ -304,7 +304,7 @@ bool Mathematics::PolynomialRoots<Real>::FindEigenvalues(Real constant, Real onc
 }
 
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::BalanceCompanion3(VariableMatrix& matrix, Real tolerance)
+void Mathematics::PolynomialRoots<Real>::BalanceCompanion3(VariableMatrixType& matrix, Real tolerance)
 {
     auto a10 = MathType::FAbs(matrix(1, 0));
     auto a21 = MathType::FAbs(matrix(2, 1));
@@ -391,9 +391,9 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion3(Real a10, Real a21
 }
 
 template <typename Real>
-bool Mathematics::PolynomialRoots<Real>::QRIteration3(VariableMatrix& matrix)
+bool Mathematics::PolynomialRoots<Real>::QRIteration3(VariableMatrixType& matrix)
 {
-    VariableLengthVector variableLengthVector{ 3 };
+    VariableLengthVectorType variableLengthVector{ 3 };
 
     for (auto i = 0; i < maxIterations; ++i)
     {
@@ -463,7 +463,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration3(VariableMatrix& matrix)
 }
 
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::FrancisQRStep(VariableMatrix& hessenbergMatrix, VariableLengthVector& vector)
+void Mathematics::PolynomialRoots<Real>::FrancisQRStep(VariableMatrixType& hessenbergMatrix, VariableLengthVectorType& vector)
 {
     // 给定一个n乘n未还原的上Hessenberg矩阵H其尾部2×2主子阵具有特征值a1和a2，
     // 覆盖 H以Z^T * H * Z其中Z = P(1) * ... * P(n-2)是Householder矩阵和
@@ -475,7 +475,7 @@ void Mathematics::PolynomialRoots<Real>::FrancisQRStep(VariableMatrix& hessenber
     auto trace = hessenbergMatrix(rowsNumber - 2, rowsNumber - 2) + hessenbergMatrix(rowsNumber - 1, rowsNumber - 1);
     auto det = hessenbergMatrix(rowsNumber - 2, rowsNumber - 2) * hessenbergMatrix(rowsNumber - 1, rowsNumber - 1) -
                hessenbergMatrix(rowsNumber - 2, rowsNumber - 1) * hessenbergMatrix(rowsNumber - 1, rowsNumber - 2);
-    Vector3 uVector{ hessenbergMatrix(0, 0) * hessenbergMatrix(1, 1) + hessenbergMatrix(0, 1) * hessenbergMatrix(1, 0) - trace * hessenbergMatrix(0, 0) + det,
+    Vector3Type uVector{ hessenbergMatrix(0, 0) * hessenbergMatrix(1, 1) + hessenbergMatrix(0, 1) * hessenbergMatrix(1, 0) - trace * hessenbergMatrix(0, 0) + det,
                      hessenbergMatrix(1, 0) * (hessenbergMatrix(0, 0) + hessenbergMatrix(1, 1) - trace),
                      hessenbergMatrix(1, 0) * hessenbergMatrix(2, 1) };
 
@@ -515,9 +515,9 @@ void Mathematics::PolynomialRoots<Real>::FrancisQRStep(VariableMatrix& hessenber
 }
 
 template <typename Real>
-typename Mathematics::PolynomialRoots<Real>::Vector3 Mathematics::PolynomialRoots<Real>::GetHouseholderVector(int size, const Vector3& uVector)
+typename Mathematics::PolynomialRoots<Real>::Vector3Type Mathematics::PolynomialRoots<Real>::GetHouseholderVector(int size, const Vector3Type& uVector)
 {
-    Vector3 vVector{};
+    Vector3Type vVector{};
 
     // Householder向量V：
     // 给定一个向量的U，计算矢量V像这样
@@ -558,7 +558,7 @@ typename Mathematics::PolynomialRoots<Real>::Vector3 Mathematics::PolynomialRoot
 }
 
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::PremultiplyHouseholder(VariableMatrix& matrix, VariableLengthVector& variableLengthVector, int rowMin, int rowMax, int columnMin, int columnMax, int vSize, const Vector3& vVector)
+void Mathematics::PolynomialRoots<Real>::PremultiplyHouseholder(VariableMatrixType& matrix, VariableLengthVectorType& variableLengthVector, int rowMin, int rowMax, int columnMin, int columnMax, int vSize, const Vector3Type& vVector)
 {
     // Householder预乘：给定的矩阵A和m×1矢量V采用V[0]= 1，
     // 令S是A的子矩阵m行的rmin <= r <= m + rmin - 1和列的子cmin <= c <= cmax。
@@ -594,14 +594,14 @@ void Mathematics::PolynomialRoots<Real>::PremultiplyHouseholder(VariableMatrix& 
 }
 
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::PostmultiplyHouseholder(VariableMatrix& matrix,
-                                                                 VariableLengthVector& variableLengthVector,
+void Mathematics::PolynomialRoots<Real>::PostmultiplyHouseholder(VariableMatrixType& matrix,
+                                                                 VariableLengthVectorType& variableLengthVector,
                                                                  int rowMin,
                                                                  int rowMax,
                                                                  int columnMin,
                                                                  int columnMax,
                                                                  int vSize,
-                                                                 const Vector3& vVector)
+                                                                 const Vector3Type& vVector)
 {
     // Householder预乘：给定的矩阵A和m×1矢量V采用V[0]= 1，
     // 令S是A的子矩阵m行的rmin <= r <= m + rmin - 1和列的子cmin <= c <= cmax。
@@ -666,7 +666,7 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(Real constant, Real once, Real
 }
 
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::Balance3(VariableMatrix& matrix, Real tolerance)
+void Mathematics::PolynomialRoots<Real>::Balance3(VariableMatrixType& matrix, Real tolerance)
 {
     for (auto loop = 0; loop < balanceIterationMax; ++loop)
     {
@@ -690,7 +690,7 @@ void Mathematics::PolynomialRoots<Real>::Balance3(VariableMatrix& matrix, Real t
 }
 
 template <typename Real>
-bool Mathematics::PolynomialRoots<Real>::IsBalanced3(VariableMatrix& matrix, Real tolerance)
+bool Mathematics::PolynomialRoots<Real>::IsBalanced3(VariableMatrixType& matrix, Real tolerance)
 {
     for (auto i = 0; i < 3; ++i)
     {
@@ -706,7 +706,7 @@ bool Mathematics::PolynomialRoots<Real>::IsBalanced3(VariableMatrix& matrix, Rea
 }
 
 template <typename Real>
-Real Mathematics::PolynomialRoots<Real>::GetRowNorm(int row, VariableMatrix& matrix)
+Real Mathematics::PolynomialRoots<Real>::GetRowNorm(int row, VariableMatrixType& matrix)
 {
     auto norm = MathType::GetValue(0);
     for (auto column = 0; column < matrix.GetColumnsNumber(); ++column)
@@ -721,7 +721,7 @@ Real Mathematics::PolynomialRoots<Real>::GetRowNorm(int row, VariableMatrix& mat
 }
 
 template <typename Real>
-Real Mathematics::PolynomialRoots<Real>::GetColumnNorm(int column, VariableMatrix& matrix)
+Real Mathematics::PolynomialRoots<Real>::GetColumnNorm(int column, VariableMatrixType& matrix)
 {
     auto norm = MathType::GetValue(0);
     for (auto row = 0; row < matrix.GetRowsNumber(); ++row)
@@ -736,7 +736,7 @@ Real Mathematics::PolynomialRoots<Real>::GetColumnNorm(int column, VariableMatri
 }
 
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::ScaleRow(int row, Real scale, VariableMatrix& matrix)
+void Mathematics::PolynomialRoots<Real>::ScaleRow(int row, Real scale, VariableMatrixType& matrix)
 {
     for (auto column = 0; column < matrix.GetColumnsNumber(); ++column)
     {
@@ -745,7 +745,7 @@ void Mathematics::PolynomialRoots<Real>::ScaleRow(int row, Real scale, VariableM
 }
 
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::ScaleColumn(int column, Real scale, VariableMatrix& matrix)
+void Mathematics::PolynomialRoots<Real>::ScaleColumn(int column, Real scale, VariableMatrixType& matrix)
 {
     for (auto row = 0; row < matrix.GetRowsNumber(); ++row)
     {
@@ -903,7 +903,7 @@ bool Mathematics::PolynomialRoots<Real>::FindEigenvalues(Real constant, Real onc
     thrice /= quartic;
 
     // 构建4×4的同伴矩阵。初始化为零
-    VariableMatrix matrix{ 4, 4 };
+    VariableMatrixType matrix{ 4, 4 };
     matrix(1, 0) = MathType::GetValue(1);
     matrix(2, 1) = MathType::GetValue(1);
     matrix(3, 2) = MathType::GetValue(1);
@@ -921,7 +921,7 @@ bool Mathematics::PolynomialRoots<Real>::FindEigenvalues(Real constant, Real onc
 }
 
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::BalanceCompanion4(VariableMatrix& matrix, Real tolerance)
+void Mathematics::PolynomialRoots<Real>::BalanceCompanion4(VariableMatrixType& matrix, Real tolerance)
 {
     auto a10 = MathType::FAbs(matrix(1, 0));
     auto a21 = MathType::FAbs(matrix(2, 1));
@@ -1037,9 +1037,9 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion4(Real a10, Real a21
 }
 
 template <typename Real>
-bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrix& matrix)
+bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrixType& matrix)
 {
-    VariableLengthVector vector{ 4 };
+    VariableLengthVectorType vector{ 4 };
 
     for (auto i = 0; i < maxIterations; ++i)
     {
@@ -1049,7 +1049,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrix& matrix)
         {
             // matrix(0,0)是一个根，减少3×3子矩阵
             // 避免拷贝，并通过行/列偏移量的FrancisQR方法。
-            VariableMatrix matrixMS{ 3, 3 };
+            VariableMatrixType matrixMS{ 3, 3 };
 
             matrixMS(0, 0) = matrix(1, 1);
             matrixMS(0, 1) = matrix(1, 2);
@@ -1108,7 +1108,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrix& matrix)
         {
             // matrix(3,3)是一个根，减少3×3子矩阵
             // 避免拷贝，并通过行/列偏移量的FrancisQR方法。
-            VariableMatrix matrixMS{ 3, 3 };
+            VariableMatrixType matrixMS{ 3, 3 };
 
             matrixMS(0, 0) = matrix(0, 0);
             matrixMS(0, 1) = matrix(0, 1);
@@ -1157,7 +1157,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrix& matrix)
     {
         // matrix(0,0)是一个根，减少3×3子矩阵
         // 避免拷贝，并通过行/列偏移量的FrancisQR方法。
-        VariableMatrix matrixMS{ 3, 3 };
+        VariableMatrixType matrixMS{ 3, 3 };
 
         matrixMS(0, 0) = matrix(1, 1);
         matrixMS(0, 1) = matrix(1, 2);
@@ -1205,7 +1205,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrix& matrix)
     {
         // matrix(3,3)是一个根，减少3×3子矩阵
         // 避免拷贝，并通过行/列偏移量的FrancisQR方法。
-        VariableMatrix matrixMS{ 3, 3 };
+        VariableMatrixType matrixMS{ 3, 3 };
 
         matrixMS(0, 0) = matrix(0, 0);
         matrixMS(0, 1) = matrix(0, 1);
@@ -1261,7 +1261,7 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(Real constant, Real once, Real
 }
 
 template <typename Real>
-bool Mathematics::PolynomialRoots<Real>::FindBisection(const Polynomial& polynomial, int digits)
+bool Mathematics::PolynomialRoots<Real>::FindBisection(const PolynomialType& polynomial, int digits)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -1274,7 +1274,7 @@ bool Mathematics::PolynomialRoots<Real>::FindBisection(const Polynomial& polynom
 }
 
 template <typename Real>
-Real Mathematics::PolynomialRoots<Real>::GetBound(const Polynomial& polynomial)
+Real Mathematics::PolynomialRoots<Real>::GetBound(const PolynomialType& polynomial)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -1302,7 +1302,7 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(const Polynomial& polynomial)
 }
 
 template <typename Real>
-bool Mathematics::PolynomialRoots<Real>::FindBisection(const Polynomial& polynomial, Real xMin, Real xMax, int digits)
+bool Mathematics::PolynomialRoots<Real>::FindBisection(const PolynomialType& polynomial, Real xMin, Real xMax, int digits)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -1399,7 +1399,7 @@ bool Mathematics::PolynomialRoots<Real>::FindBisection(const Polynomial& polynom
 }
 
 template <typename Real>
-bool Mathematics::PolynomialRoots<Real>::Bisection(const Polynomial& polynomial, Real xMin, Real xMax, int digits, Real& result) noexcept(gAssert < 3 || gMathematicsAssert < 3)
+bool Mathematics::PolynomialRoots<Real>::Bisection(const PolynomialType& polynomial, Real xMin, Real xMax, int digits, Real& result) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     auto xMinPolynomial = polynomial(xMin);
     if (MathType::FAbs(xMinPolynomial) <= MathType::GetZeroTolerance())
@@ -1451,7 +1451,7 @@ bool Mathematics::PolynomialRoots<Real>::Bisection(const Polynomial& polynomial,
 }
 
 template <typename Real>
-bool Mathematics::PolynomialRoots<Real>::AllRealPartsNegative(const Polynomial& polynomial)
+bool Mathematics::PolynomialRoots<Real>::AllRealPartsNegative(const PolynomialType& polynomial)
 {
     // 使用系数的一个副本，以后调用将改变副本。
     const auto degree = polynomial.GetDegree();
@@ -1477,7 +1477,7 @@ bool Mathematics::PolynomialRoots<Real>::AllRealPartsNegative(const Polynomial& 
 }
 
 template <typename Real>
-bool Mathematics::PolynomialRoots<Real>::AllRealPartsPositive(const Polynomial& polynomial)
+bool Mathematics::PolynomialRoots<Real>::AllRealPartsPositive(const PolynomialType& polynomial)
 {
     // 使用系数的一个副本，以后调用将改变副本。
     const auto degree = polynomial.GetDegree();
@@ -1568,7 +1568,7 @@ bool Mathematics::PolynomialRoots<Real>::AllRealPartsNegative(int degree, Contai
 }
 
 template <typename Real>
-int Mathematics::PolynomialRoots<Real>::GetRootCount(const Polynomial& polynomial, Real begin, Real end)
+int Mathematics::PolynomialRoots<Real>::GetRootCount(const PolynomialType& polynomial, Real begin, Real end)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -1590,7 +1590,7 @@ int Mathematics::PolynomialRoots<Real>::GetRootCount(const Polynomial& polynomia
     }
 
     // 生成Sturm序列。
-    std::vector<Polynomial> sturm{ Polynomial{ polynomial }, polynomial.GetDerivative() };
+    std::vector<PolynomialType> sturm{ PolynomialType{ polynomial }, polynomial.GetDerivative() };
     auto beginPolynomialIndex = 0;
     auto endPolynomialIndex = 1;
     auto currentIndex = sturm.size() - 1;
