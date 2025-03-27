@@ -53,13 +53,13 @@ namespace Mathematics
         static constexpr auto vectorSize = Vector3::pointSize;
         static constexpr auto matrixSize = vectorSize * Vector3::pointSize;
 
-        using Math = Math<Real>;
-        using Euler = Euler<Real>;
-        using Matrix2 = Matrix2<Real>;
-        using Matrix4 = Matrix4<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using MathType = Math<Real>;
+        using EulerType = Euler<Real>;
+        using Matrix2Type = Matrix2<Real>;
+        using Matrix4Type = Matrix4<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using Matrix3Extract = AxisAngle<Real>;
-        using Matrix3EigenDecomposition = Matrix3EigenDecomposition<Real>;
+        using Matrix3EigenDecompositionType = Matrix3EigenDecomposition<Real>;
         using ArrayType = std::array<Real, matrixSize>;
         using ContainerType = std::vector<Real>;
         using Vector3ContainerType = std::vector<Vector3>;
@@ -103,9 +103,9 @@ namespace Mathematics
         // 创建一个对角矩阵,
         // member01 = member10 = member02 = member20 = member12 = member21 = 0
         constexpr Matrix3(Real member00, Real member11, Real member22) noexcept
-            : x{ member00, Math::GetValue(0), Math::GetValue(0) },
-              y{ Math::GetValue(0), member11, Math::GetValue(0) },
-              z{ Math::GetValue(0), Math::GetValue(0), member22 }
+            : x{ member00, MathType::GetValue(0), MathType::GetValue(0) },
+              y{ MathType::GetValue(0), member11, MathType::GetValue(0) },
+              z{ MathType::GetValue(0), MathType::GetValue(0), member22 }
         {
         }
 
@@ -156,12 +156,12 @@ namespace Mathematics
         // 其它运算
         NODISCARD Matrix3 TimesDiagonal(const Vector3& diagonal) const noexcept;  // M * D
         NODISCARD Matrix3 DiagonalTimes(const Vector3& diagonal) const noexcept;  // D * M
-        NODISCARD Matrix3 Inverse(const Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Matrix3 Inverse(const Real epsilon = MathType::GetZeroTolerance()) const;
         NODISCARD Matrix3 Adjoint() const noexcept;
         NODISCARD Real Determinant() const noexcept;
 
-        NODISCARD Matrix3 GaussianEliminationInverse(Real epsilon = Math::GetZeroTolerance()) const;
-        NODISCARD Real GaussianEliminationDeterminant(Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Matrix3 GaussianEliminationInverse(Real epsilon = MathType::GetZeroTolerance()) const;
+        NODISCARD Real GaussianEliminationDeterminant(Real epsilon = MathType::GetZeroTolerance()) const;
 
         // 矩阵必须是一个旋转矩阵，下面函数才有效。
         // Orthonormalize函数使用Gram-Schmidt正交化施加到所述旋转矩阵。
@@ -177,7 +177,7 @@ namespace Mathematics
         // D = diag(d0,d1,d2)是一个对角矩阵，这里对角线项为d0、d1和d2。
         // 特征向量u[i]对应的特征向量d[i]。特征值排序为d0 <= d1 <= d2。
         // 返回值的第一部分为rotation，第二部分为diagonal。
-        NODISCARD Matrix3EigenDecomposition EigenDecomposition(Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Matrix3EigenDecompositionType EigenDecomposition(Real epsilon = MathType::GetZeroTolerance()) const;
 
         // 从欧拉角创建旋转矩阵
         void MakeEulerXYZ(Real xAngle, Real yAngle, Real zAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
@@ -193,9 +193,9 @@ namespace Mathematics
         void MakeEulerZXZ(Real z0Angle, Real xAngle, Real z1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
         void MakeEulerZYZ(Real z0Angle, Real yAngle, Real z1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        void MakeEuler(const Euler& euler) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void MakeEuler(const EulerType& euler) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        NODISCARD Euler ExtractEuler(ExtractEulerResultOrder euler) const noexcept;
+        NODISCARD EulerType ExtractEuler(ExtractEulerResultOrder euler) const noexcept;
 
         /// 返回值顺序为xAngle、yAngle、zAngle
         /// 且在指定的范围内：
@@ -205,7 +205,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：zAngle + xAngle= c
         /// ExtractEulerResultType::Difference：zAngle - xAngle= c
         /// 对一些角度c。
-        NODISCARD Euler ExtractEulerXYZ() const noexcept;
+        NODISCARD EulerType ExtractEulerXYZ() const noexcept;
 
         /// 返回值顺序为xAngle、zAngle、yAngle
         /// 且在指定的范围内：
@@ -215,7 +215,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：yAngle + xAngle = c
         /// ExtractEulerResultType::Difference：yAngle - xAngle = c
         /// 对一些角度c。
-        NODISCARD Euler ExtractEulerXZY() const noexcept;
+        NODISCARD EulerType ExtractEulerXZY() const noexcept;
 
         /// 返回值顺序为yAngle、xAngle、zAngle
         /// 且在指定的范围内：
@@ -225,7 +225,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：zAngle + yAngle = c
         /// ExtractEulerResultType::Difference：zAngle - yAngle = c
         /// 对一些角度c。
-        NODISCARD Euler ExtractEulerYXZ() const noexcept;
+        NODISCARD EulerType ExtractEulerYXZ() const noexcept;
 
         /// 返回值顺序为yAngle、zAngle、xAngle
         /// 且在指定的范围内：
@@ -235,7 +235,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：xAngle + yAngle = c
         /// ExtractEulerResultType::Difference：xAngle - yAngle = c
         /// 对一些角度c。
-        NODISCARD Euler ExtractEulerYZX() const noexcept;
+        NODISCARD EulerType ExtractEulerYZX() const noexcept;
 
         /// 返回值顺序为zAngle、xAngle、yAngle
         /// 且在指定的范围内：
@@ -245,7 +245,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：yAngle + zAngle = c
         /// ExtractEulerResultType::Difference：yAngle - zAngle = c
         /// 对一些角度c。
-        NODISCARD Euler ExtractEulerZXY() const noexcept;
+        NODISCARD EulerType ExtractEulerZXY() const noexcept;
 
         /// 返回值顺序为zAngle、yAngle、xAngle
         /// 且在指定的范围内：
@@ -255,7 +255,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：xAngle + zAngle = c
         /// ExtractEulerResultType::Difference：xAngle - zAngle = c
         /// 对一些角度c。
-        NODISCARD Euler ExtractEulerZYX() const noexcept;
+        NODISCARD EulerType ExtractEulerZYX() const noexcept;
 
         /// 返回值顺序为x0Angle、yAngle、x1Angle
         /// 且在指定的范围内：
@@ -265,7 +265,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：x1Angle + x0Angle = c
         /// ExtractEulerResultType::Difference： x1Angle - x0Angle = c
         /// 对一些角度c。
-        NODISCARD Euler ExtractEulerXYX() const noexcept;
+        NODISCARD EulerType ExtractEulerXYX() const noexcept;
 
         /// 返回值顺序为x0Angle、zAngle、x1Angle
         /// 且在指定的范围内：
@@ -275,7 +275,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：x1Angle + x0Angle = c
         /// ExtractEulerResultType::Difference： x1Angle - x0Angle = c
         /// 对一些角度c。
-        NODISCARD Euler ExtractEulerXZX() const noexcept;
+        NODISCARD EulerType ExtractEulerXZX() const noexcept;
 
         /// 返回值顺序为y0Angle、xAngle、y1Angle
         /// 且在指定的范围内：
@@ -285,7 +285,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：y1Angle + y0Angle = c
         /// ExtractEulerResultType::Difference： y1Angle - y0Angle = c
         /// 对一些角度c。
-        NODISCARD Euler ExtractEulerYXY() const noexcept;
+        NODISCARD EulerType ExtractEulerYXY() const noexcept;
 
         /// 返回值顺序为y0Angle、zAngle、y1Angle
         /// 且在指定的范围内：
@@ -295,7 +295,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：y1Angle + y0Angle = c
         /// ExtractEulerResultType::Difference： y1Angle - y0Angle = c
         /// 对一些角度c。
-        NODISCARD Euler ExtractEulerYZY() const noexcept;
+        NODISCARD EulerType ExtractEulerYZY() const noexcept;
 
         /// 返回值顺序为z0Angle、xAngle、z1Angle
         /// 且在指定的范围内：
@@ -305,7 +305,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：z1Angle + z0Angle = c
         /// ExtractEulerResultType::Difference： z1Angle - z0Angle = c
         /// 对一些角度c。
-        NODISCARD Euler ExtractEulerZXZ() const noexcept;
+        NODISCARD EulerType ExtractEulerZXZ() const noexcept;
 
         /// 返回值顺序为z0Angle、yAngle、z1Angle
         /// 且在指定的范围内：
@@ -315,7 +315,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：z1Angle + z0Angle = c
         /// ExtractEulerResultType::Difference： z1Angle - z0Angle = c
         /// 对一些角度c。
-        NODISCARD Euler ExtractEulerZYZ() const noexcept;
+        NODISCARD EulerType ExtractEulerZYZ() const noexcept;
 
         /// SLERP（球面线性插值）而不使用四元数。
         /// 计算 Real(t) = R0*(Transpose(R0)*R1)^t
@@ -339,8 +339,8 @@ namespace Mathematics
             return Matrix3{ MatrixInitType::Identity };
         }
 
-        NODISCARD Matrix4 Lift() const;
-        NODISCARD Matrix2 Project() const;
+        NODISCARD Matrix4Type Lift() const;
+        NODISCARD Matrix2Type Project() const;
 
         NODISCARD Real Trace() const noexcept;
 

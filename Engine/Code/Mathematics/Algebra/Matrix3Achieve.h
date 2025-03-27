@@ -177,9 +177,9 @@ void Mathematics::Matrix3<Real>::MakeDiagonal(Real member00, Real member11, Real
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    x.SetCoordinate(member00, Math::GetValue(0), Math::GetValue(0));
-    y.SetCoordinate(Math::GetValue(0), member11, Math::GetValue(0));
-    z.SetCoordinate(Math::GetValue(0), Math::GetValue(0), member22);
+    x.SetCoordinate(member00, MathType::GetValue(0), MathType::GetValue(0));
+    y.SetCoordinate(MathType::GetValue(0), member11, MathType::GetValue(0));
+    z.SetCoordinate(MathType::GetValue(0), MathType::GetValue(0), member22);
 }
 
 template <typename Real>
@@ -188,9 +188,9 @@ void Mathematics::Matrix3<Real>::MakeRotation(const Vector3& axis, Real angle) n
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    const auto cosValue = Math::Cos(angle);
-    const auto sinValue = Math::Sin(angle);
-    const auto oneMinusCos = Math::GetValue(1) - cosValue;
+    const auto cosValue = MathType::Cos(angle);
+    const auto sinValue = MathType::Sin(angle);
+    const auto oneMinusCos = MathType::GetValue(1) - cosValue;
 
     const auto xAxisSquare = axis.GetX() * axis.GetX();
     const auto yAxisSquare = axis.GetY() * axis.GetY();
@@ -219,33 +219,33 @@ void Mathematics::Matrix3<Real>::MakeRotation(MatrixRotationAxis axis, Real angl
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    const auto cosValue = Math::Cos(angle);
-    const auto sinValue = Math::Sin(angle);
+    const auto cosValue = MathType::Cos(angle);
+    const auto sinValue = MathType::Sin(angle);
 
     switch (axis)
     {
         case MatrixRotationAxis::X:
         {
             x = Vector3::GetUnitX();
-            y.SetCoordinate(Math::GetValue(0), cosValue, -sinValue);
-            z.SetCoordinate(Math::GetValue(0), sinValue, cosValue);
+            y.SetCoordinate(MathType::GetValue(0), cosValue, -sinValue);
+            z.SetCoordinate(MathType::GetValue(0), sinValue, cosValue);
 
             break;
         }
 
         case MatrixRotationAxis::Y:
         {
-            x.SetCoordinate(cosValue, Math::GetValue(0), sinValue);
+            x.SetCoordinate(cosValue, MathType::GetValue(0), sinValue);
             y = Vector3::GetUnitY();
-            z.SetCoordinate(-sinValue, Math::GetValue(0), cosValue);
+            z.SetCoordinate(-sinValue, MathType::GetValue(0), cosValue);
 
             break;
         }
 
         case MatrixRotationAxis::Z:
         {
-            x.SetCoordinate(cosValue, -sinValue, Math::GetValue(0));
-            y.SetCoordinate(sinValue, cosValue, Math::GetValue(0));
+            x.SetCoordinate(cosValue, -sinValue, MathType::GetValue(0));
+            y.SetCoordinate(sinValue, cosValue, MathType::GetValue(0));
             z = Vector3::GetUnitZ();
 
             break;
@@ -399,7 +399,7 @@ Real Mathematics::Matrix3<Real>::QuadraticForm(const Vector3& lhs, const Vector3
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Vector3Tools::DotProduct(lhs, (*this) * rhs);
+    return Vector3ToolsType::DotProduct(lhs, (*this) * rhs);
 }
 
 template <typename Real>
@@ -508,7 +508,7 @@ Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::Inverse(const Real epsilo
 
     const auto det = GetValue<0, 0>() * adjoint.template GetValue<0, 0>() + GetValue<0, 1>() * adjoint.template GetValue<1, 0>() + GetValue<0, 2>() * adjoint.template GetValue<2, 0>();
 
-    if (epsilon < Math::FAbs(det))
+    if (epsilon < MathType::FAbs(det))
     {
         // 除零错误使用的epsilon和这里的epsilon不同，
         // 所以使用先求倒数，再乘。
@@ -563,9 +563,9 @@ Real Mathematics::Matrix3<Real>::ExtractAngle() const noexcept
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
     const auto trace = GetValue<0, 0>() + GetValue<1, 1>() + GetValue<2, 2>();
-    const auto cosValue = Math::GetRational(1, 2) * (trace - Math::GetValue(1));
+    const auto cosValue = MathType::GetRational(1, 2) * (trace - MathType::GetValue(1));
 
-    return Math::ACos(cosValue);  // angle范围在 [0,PI]
+    return MathType::ACos(cosValue);  // angle范围在 [0,PI]
 }
 
 template <typename Real>
@@ -595,13 +595,13 @@ typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::
 
     const auto angle = ExtractAngle();  // angle范围在 [0,PI]
 
-    if (Math::GetZeroTolerance() < angle)
+    if (MathType::GetZeroTolerance() < angle)
     {
         Vector3 axis{ GetValue<2, 1>() - GetValue<1, 2>(),
                       GetValue<0, 2>() - GetValue<2, 0>(),
                       GetValue<1, 0>() - GetValue<0, 1>() };
 
-        if (Math::GetZeroTolerance() * Math::GetZeroTolerance() < Vector3Tools::GetLengthSquared(axis))
+        if (MathType::GetZeroTolerance() * MathType::GetZeroTolerance() < Vector3ToolsType::GetLengthSquared(axis))
         {
             axis.Normalize();
         }
@@ -613,9 +613,9 @@ typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::
                 // r11 <= r00
 
                 // r00是最大对角线项
-                auto axisX = Math::GetRational(1, 2) * Math::Sqrt(Math::GetValue(1) + GetValue<0, 0>() - GetValue<1, 1>() - GetValue<2, 2>());
+                auto axisX = MathType::GetRational(1, 2) * MathType::Sqrt(MathType::GetValue(1) + GetValue<0, 0>() - GetValue<1, 1>() - GetValue<2, 2>());
 
-                const auto halfInverse = Math::GetRational(1, 2) / axisX;
+                const auto halfInverse = MathType::GetRational(1, 2) / axisX;
 
                 axis = Vector3{ axisX, halfInverse * GetValue<0, 1>(), halfInverse * GetValue<0, 2>() };
             }
@@ -624,18 +624,18 @@ typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::
                 // r00 < r11
 
                 // r11是最大对角线项
-                auto axisY = Math::GetRational(1, 2) * Math::Sqrt(Math::GetValue(1) + GetValue<1, 1>() - GetValue<0, 0>() - GetValue<2, 2>());
+                auto axisY = MathType::GetRational(1, 2) * MathType::Sqrt(MathType::GetValue(1) + GetValue<1, 1>() - GetValue<0, 0>() - GetValue<2, 2>());
 
-                const auto halfInverse = Math::GetRational(1, 2) / axisY;
+                const auto halfInverse = MathType::GetRational(1, 2) / axisY;
 
                 axis = Vector3{ halfInverse * GetValue<0, 1>(), axisY, halfInverse * GetValue<1, 2>() };
             }
             else
             {
                 // r22是最大对角线项
-                auto axisZ = Math::GetRational(1, 2) * Math::Sqrt(Math::GetValue(1) + GetValue<2, 2>() - GetValue<0, 0>() - GetValue<1, 1>());
+                auto axisZ = MathType::GetRational(1, 2) * MathType::Sqrt(MathType::GetValue(1) + GetValue<2, 2>() - GetValue<0, 0>() - GetValue<1, 1>());
 
-                const auto halfInverse = Math::GetRational(1, 2) / axisZ;
+                const auto halfInverse = MathType::GetRational(1, 2) / axisZ;
 
                 axis = Vector3{ halfInverse * GetValue<0, 2>(), halfInverse * GetValue<1, 2>(), axisZ };
             }
@@ -676,7 +676,7 @@ void Mathematics::Matrix3<Real>::Orthonormalize()
     // 其中|V|表示向量V的长度和A * B表示向量A和B的点积
 
     // 计算 q0.
-    auto invLength = Math::InvSqrt(GetValue<0, 0>() * GetValue<0, 0>() + GetValue<1, 0>() * GetValue<1, 0>() + GetValue<2, 0>() * GetValue<2, 0>());
+    auto invLength = MathType::InvSqrt(GetValue<0, 0>() * GetValue<0, 0>() + GetValue<1, 0>() * GetValue<1, 0>() + GetValue<2, 0>() * GetValue<2, 0>());
 
     (*this)(0, 0) *= invLength;
     (*this)(1, 0) *= invLength;
@@ -689,7 +689,7 @@ void Mathematics::Matrix3<Real>::Orthonormalize()
     (*this)(1, 1) -= dot0 * GetValue<1, 0>();
     (*this)(2, 1) -= dot0 * GetValue<2, 0>();
 
-    invLength = Math::InvSqrt(GetValue<0, 1>() * GetValue<0, 1>() + GetValue<1, 1>() * GetValue<1, 1>() + GetValue<2, 1>() * GetValue<2, 1>());
+    invLength = MathType::InvSqrt(GetValue<0, 1>() * GetValue<0, 1>() + GetValue<1, 1>() * GetValue<1, 1>() + GetValue<2, 1>() * GetValue<2, 1>());
 
     (*this)(0, 1) *= invLength;
     (*this)(1, 1) *= invLength;
@@ -704,7 +704,7 @@ void Mathematics::Matrix3<Real>::Orthonormalize()
     (*this)(1, 2) -= dot2 * GetValue<1, 0>() + dot1 * GetValue<1, 1>();
     (*this)(2, 2) -= dot2 * GetValue<2, 0>() + dot1 * GetValue<2, 1>();
 
-    invLength = Math::InvSqrt(GetValue<0, 2>() * GetValue<0, 2>() + GetValue<1, 2>() * GetValue<1, 2>() + GetValue<2, 2>() * GetValue<2, 2>());
+    invLength = MathType::InvSqrt(GetValue<0, 2>() * GetValue<0, 2>() + GetValue<1, 2>() * GetValue<1, 2>() + GetValue<2, 2>() * GetValue<2, 2>());
 
     (*this)(0, 2) *= invLength;
     (*this)(1, 2) *= invLength;
@@ -713,13 +713,13 @@ void Mathematics::Matrix3<Real>::Orthonormalize()
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix3<Real>::Matrix3EigenDecomposition Mathematics::Matrix3<Real>::EigenDecomposition(Real epsilon) const
+typename Mathematics::Matrix3<Real>::Matrix3EigenDecompositionType Mathematics::Matrix3<Real>::EigenDecomposition(Real epsilon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    MATHEMATICS_ASSERTION_1(Math::FAbs(GetValue<0, 1>() - GetValue<1, 0>()) <= epsilon, "矩阵必须是对称矩阵。");
-    MATHEMATICS_ASSERTION_1(Math::FAbs(GetValue<0, 2>() - GetValue<2, 0>()) <= epsilon, "矩阵必须是对称矩阵。");
-    MATHEMATICS_ASSERTION_1(Math::FAbs(GetValue<1, 2>() - GetValue<2, 1>()) <= epsilon, "矩阵必须是对称矩阵。");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 1>() - GetValue<1, 0>()) <= epsilon, "矩阵必须是对称矩阵。");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 2>() - GetValue<2, 0>()) <= epsilon, "矩阵必须是对称矩阵。");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<1, 2>() - GetValue<2, 1>()) <= epsilon, "矩阵必须是对称矩阵。");
 
     // 系数 M = Real * D * Real^T。
     // Real的列是特征向量。D的对角元素为相应的特征值。
@@ -779,12 +779,12 @@ typename Mathematics::Matrix3<Real>::Matrix3EigenDecomposition Mathematics::Matr
         rotation(2, 2) = -rotation.template GetValue<2, 2>();
     }
 
-    return Matrix3EigenDecomposition{ rotation, diagonalMatrix, epsilon };
+    return Matrix3EigenDecompositionType{ rotation, diagonalMatrix, epsilon };
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::Matrix3<Real>::MakeEuler(const Euler& euler) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+void Mathematics::Matrix3<Real>::MakeEuler(const EulerType& euler) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -833,7 +833,7 @@ void Mathematics::Matrix3<Real>::MakeEuler(const Euler& euler) noexcept(gAssert 
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEuler(ExtractEulerResultOrder euler) const noexcept
+typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::ExtractEuler(ExtractEulerResultOrder euler) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -1026,7 +1026,7 @@ void Mathematics::Matrix3<Real>::MakeEulerZYZ(Real z0Angle, Real yAngle, Real z1
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerXYZ() const noexcept
+typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::ExtractEulerXYZ() const noexcept
 {
     // +-           -+   +-                                        -+
     // | r00 r01 r02 |   |  cy*cz           -cy*sz            sy    |
@@ -1035,29 +1035,29 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
     // +-           -+   +-                                        -+
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (GetValue<0, 2>() < Math::GetValue(1) - Math::GetZeroTolerance())
+    if (GetValue<0, 2>() < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
-        if (Math::GetValue(-1) + Math::GetZeroTolerance() < GetValue<0, 2>())
+        if (MathType::GetValue(-1) + MathType::GetZeroTolerance() < GetValue<0, 2>())
         {
             // y_angle = asin(r02)
             // x_angle = atan2(-r12,r22)
             // z_angle = atan2(-r01,r00)
-            const auto yAngle = Math::ASin(GetValue<0, 2>());
-            const auto xAngle = Math::ATan2(-GetValue<1, 2>(), GetValue<2, 2>());
-            const auto zAngle = Math::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
+            const auto yAngle = MathType::ASin(GetValue<0, 2>());
+            const auto xAngle = MathType::ATan2(-GetValue<1, 2>(), GetValue<2, 2>());
+            const auto zAngle = MathType::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
 
-            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::XYZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return EulerType{ EulerResult::Unique, ExtractEulerResultOrder::XYZ, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
         }
         else
         {
             // y_angle = -pi/2
             // z_angle - x_angle = atan2(r10,r11)
             // 警告。该解不是唯一的。选择z_angle = 0.
-            constexpr auto yAngle = -Math::GetHalfPI();
-            const auto xAngle = -Math::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
-            constexpr auto zAngle = Math::GetValue(0);
+            constexpr auto yAngle = -MathType::GetHalfPI();
+            const auto xAngle = -MathType::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
+            constexpr auto zAngle = MathType::GetValue(0);
 
-            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::XYZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return EulerType{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::XYZ, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
         }
     }
     else
@@ -1065,17 +1065,17 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         // y_angle = +pi/2
         // z_angle + x_angle = atan2(r10,r11)
         // 警告。该解不是唯一的。选择z_angle = 0.
-        constexpr auto yAngle = Math::GetHalfPI();
-        const auto xAngle = Math::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
-        constexpr auto zAngle = Math::GetValue(0);
+        constexpr auto yAngle = MathType::GetHalfPI();
+        const auto xAngle = MathType::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
+        constexpr auto zAngle = MathType::GetValue(0);
 
-        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::XYZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+        return EulerType{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::XYZ, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
     }
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerXZY() const noexcept
+typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::ExtractEulerXZY() const noexcept
 {
     // +-           -+   +-                                        -+
     // | r00 r01 r02 |   |  cy*cz           -sz      cz*sy          |
@@ -1084,29 +1084,29 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
     // +-           -+   +-                                        -+
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (GetValue<0, 1>() < Math::GetValue(1) - Math::GetZeroTolerance())
+    if (GetValue<0, 1>() < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
-        if (Math::GetValue(-1) + Math::GetZeroTolerance() < GetValue<0, 1>())
+        if (MathType::GetValue(-1) + MathType::GetZeroTolerance() < GetValue<0, 1>())
         {
             // z_angle = asin(-r01)
             // x_angle = atan2(r21,r11)
             // y_angle = atan2(r02,r00)
-            const auto zAngle = Math::ASin(-GetValue<0, 1>());
-            const auto xAngle = Math::ATan2(GetValue<2, 1>(), GetValue<1, 1>());
-            const auto yAngle = Math::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
+            const auto zAngle = MathType::ASin(-GetValue<0, 1>());
+            const auto xAngle = MathType::ATan2(GetValue<2, 1>(), GetValue<1, 1>());
+            const auto yAngle = MathType::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
 
-            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::XZY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return EulerType{ EulerResult::Unique, ExtractEulerResultOrder::XZY, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
         }
         else
         {
             // z_angle = +pi/2
             // y_angle - x_angle = atan2(-r20,r22)
             // 警告。该解不是唯一的。选择y_angle = 0.
-            constexpr auto zAngle = Math::GetHalfPI();
-            const auto xAngle = -Math::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
-            constexpr auto yAngle = Math::GetValue(0);
+            constexpr auto zAngle = MathType::GetHalfPI();
+            const auto xAngle = -MathType::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
+            constexpr auto yAngle = MathType::GetValue(0);
 
-            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::XZY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return EulerType{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::XZY, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
         }
     }
     else
@@ -1114,17 +1114,17 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         // z_angle = -pi/2
         // y_angle + x_angle = atan2(-r20,r22)
         // 警告。该解不是唯一的。选择y_angle = 0.
-        constexpr auto zAngle = -Math::GetHalfPI();
-        const auto xAngle = Math::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
-        constexpr auto yAngle = Math::GetValue(0);
+        constexpr auto zAngle = -MathType::GetHalfPI();
+        const auto xAngle = MathType::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
+        constexpr auto yAngle = MathType::GetValue(0);
 
-        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::XZY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+        return EulerType{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::XZY, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
     }
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerYXZ() const noexcept
+typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::ExtractEulerYXZ() const noexcept
 {
     // +-           -+   +-                                       -+
     // | r00 r01 r02 |   |  cy*cz+sx*sy*sz  cz*sx*sy-cy*sz   cx*sy |
@@ -1134,29 +1134,29 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (GetValue<1, 2>() < Math::GetValue(1) - Math::GetZeroTolerance())
+    if (GetValue<1, 2>() < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
-        if (Math::GetValue(-1) + Math::GetZeroTolerance() < GetValue<1, 2>())
+        if (MathType::GetValue(-1) + MathType::GetZeroTolerance() < GetValue<1, 2>())
         {
             // x_angle = asin(-r12)
             // y_angle = atan2(r02,r22)
             // z_angle = atan2(r10,r11)
-            const auto xAngle = Math::ASin(-GetValue<1, 2>());
-            const auto yAngle = Math::ATan2(GetValue<0, 2>(), GetValue<2, 2>());
-            const auto zAngle = Math::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
+            const auto xAngle = MathType::ASin(-GetValue<1, 2>());
+            const auto yAngle = MathType::ATan2(GetValue<0, 2>(), GetValue<2, 2>());
+            const auto zAngle = MathType::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
 
-            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::YXZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return EulerType{ EulerResult::Unique, ExtractEulerResultOrder::YXZ, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
         }
         else
         {
             // x_angle = +pi/2
             // z_angle - y_angle = atan2(-r01,r00)
             // 警告。该解不是唯一的。选择 z_angle = 0.
-            constexpr auto xAngle = Math::GetHalfPI();
-            const auto yAngle = -Math::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
-            constexpr auto zAngle = Math::GetValue(0);
+            constexpr auto xAngle = MathType::GetHalfPI();
+            const auto yAngle = -MathType::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
+            constexpr auto zAngle = MathType::GetValue(0);
 
-            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::YXZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return EulerType{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::YXZ, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
         }
     }
     else
@@ -1164,17 +1164,17 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         // x_angle = -pi/2
         // z_angle + y_angle = atan2(-r01,r00)
         // 警告。该解不是唯一的。选择z_angle = 0.
-        constexpr auto xAngle = -Math::GetHalfPI();
-        const auto yAngle = Math::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
-        constexpr auto zAngle = Math::GetValue(0);
+        constexpr auto xAngle = -MathType::GetHalfPI();
+        const auto yAngle = MathType::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
+        constexpr auto zAngle = MathType::GetValue(0);
 
-        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::YXZ, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+        return EulerType{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::YXZ, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
     }
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerYZX() const noexcept
+typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::ExtractEulerYZX() const noexcept
 {
     // +-           -+   +-                                       -+
     // | r00 r01 r02 |   |  cy*cz  sx*sy-cx*cy*sz   cx*sy+cy*sx*sz |
@@ -1184,18 +1184,18 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (GetValue<1, 0>() < Math::GetValue(1) - Math::GetZeroTolerance())
+    if (GetValue<1, 0>() < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
-        if (Math::GetValue(-1) + Math::GetZeroTolerance() < GetValue<1, 0>())
+        if (MathType::GetValue(-1) + MathType::GetZeroTolerance() < GetValue<1, 0>())
         {
             // z_angle = asin(r10)
             // y_angle = atan2(-r20,r00)
             // x_angle = atan2(-r12,r11)
-            const auto zAngle = Math::ASin(GetValue<1, 0>());
-            const auto yAngle = Math::ATan2(-GetValue<2, 0>(), GetValue<0, 0>());
-            const auto xAngle = Math::ATan2(-GetValue<1, 2>(), GetValue<1, 1>());
+            const auto zAngle = MathType::ASin(GetValue<1, 0>());
+            const auto yAngle = MathType::ATan2(-GetValue<2, 0>(), GetValue<0, 0>());
+            const auto xAngle = MathType::ATan2(-GetValue<1, 2>(), GetValue<1, 1>());
 
-            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::YZX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return EulerType{ EulerResult::Unique, ExtractEulerResultOrder::YZX, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
         }
         else
         {
@@ -1203,11 +1203,11 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             // x_angle - y_angle = atan2(r21,r22)
             // 警告。该解不是唯一的。选择 x_angle = 0.
 
-            constexpr auto zAngle = -Math::GetHalfPI();
-            const auto yAngle = -Math::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
-            constexpr auto xAngle = Math::GetValue(0);
+            constexpr auto zAngle = -MathType::GetHalfPI();
+            const auto yAngle = -MathType::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
+            constexpr auto xAngle = MathType::GetValue(0);
 
-            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::YZX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return EulerType{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::YZX, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
         }
     }
     else
@@ -1216,17 +1216,17 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         // x_angle + y_angle = atan2(r21,r22)
         // 警告。该解不是唯一的。选择 x_angle = 0.
 
-        constexpr auto zAngle = Math::GetHalfPI();
-        const auto yAngle = Math::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
-        constexpr auto xAngle = Math::GetValue(0);
+        constexpr auto zAngle = MathType::GetHalfPI();
+        const auto yAngle = MathType::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
+        constexpr auto xAngle = MathType::GetValue(0);
 
-        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::YZX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+        return EulerType{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::YZX, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
     }
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerZXY() const noexcept
+typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::ExtractEulerZXY() const noexcept
 {
     // +-           -+   +-                                        -+
     // | r00 r01 r02 |   |  cy*cz-sx*sy*sz  -cx*sz   cz*sy+cy*sx*sz |
@@ -1236,19 +1236,19 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (GetValue<2, 1>() < Math::GetValue(1) - Math::GetZeroTolerance())
+    if (GetValue<2, 1>() < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
-        if (Math::GetValue(-1) + Math::GetZeroTolerance() < GetValue<2, 1>())
+        if (MathType::GetValue(-1) + MathType::GetZeroTolerance() < GetValue<2, 1>())
         {
             // x_angle = asin(r21)
             // z_angle = atan2(-r01,r11)
             // y_angle = atan2(-r20,r22)
 
-            const auto xAngle = Math::ASin(GetValue<2, 1>());
-            const auto zAngle = Math::ATan2(-GetValue<0, 1>(), GetValue<1, 1>());
-            const auto yAngle = Math::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
+            const auto xAngle = MathType::ASin(GetValue<2, 1>());
+            const auto zAngle = MathType::ATan2(-GetValue<0, 1>(), GetValue<1, 1>());
+            const auto yAngle = MathType::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
 
-            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::ZXY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return EulerType{ EulerResult::Unique, ExtractEulerResultOrder::ZXY, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
         }
         else
         {
@@ -1256,11 +1256,11 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             // y_angle - z_angle = atan2(r02,r00)
             // 警告。该解不是唯一的。选择 y_angle = 0.
 
-            constexpr auto xAngle = -Math::GetHalfPI();
-            const auto zAngle = -Math::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
-            constexpr auto yAngle = Math::GetValue(0);
+            constexpr auto xAngle = -MathType::GetHalfPI();
+            const auto zAngle = -MathType::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
+            constexpr auto yAngle = MathType::GetValue(0);
 
-            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::ZXY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return EulerType{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::ZXY, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
         }
     }
     else
@@ -1269,17 +1269,17 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         // y_angle + z_angle = atan2(r02,r00)
         // 警告。该解不是唯一的。选择 y_angle = 0.
 
-        constexpr auto xAngle = Math::GetHalfPI();
-        const auto zAngle = Math::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
-        constexpr auto yAngle = Math::GetValue(0);
+        constexpr auto xAngle = MathType::GetHalfPI();
+        const auto zAngle = MathType::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
+        constexpr auto yAngle = MathType::GetValue(0);
 
-        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::ZXY, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+        return EulerType{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::ZXY, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
     }
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerZYX() const noexcept
+typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::ExtractEulerZYX() const noexcept
 {
     // +-           -+   +-                                      -+
     // | r00 r01 r02 |   |  cy*cz  cz*sx*sy-cx*sz  cx*cz*sy+sx*sz |
@@ -1289,19 +1289,19 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (GetValue<2, 0>() < Math::GetValue(1) - Math::GetZeroTolerance())
+    if (GetValue<2, 0>() < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
-        if (Math::GetValue(-1) + Math::GetZeroTolerance() < GetValue<2, 0>())
+        if (MathType::GetValue(-1) + MathType::GetZeroTolerance() < GetValue<2, 0>())
         {
             // y_angle = asin(-r20)
             // z_angle = atan2(r10,r00)
             // x_angle = atan2(r21,r22)
 
-            const auto yAngle = Math::ASin(-GetValue<2, 0>());
-            const auto zAngle = Math::ATan2(GetValue<1, 0>(), GetValue<0, 0>());
-            const auto xAngle = Math::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
+            const auto yAngle = MathType::ASin(-GetValue<2, 0>());
+            const auto zAngle = MathType::ATan2(GetValue<1, 0>(), GetValue<0, 0>());
+            const auto xAngle = MathType::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
 
-            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::ZYX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return EulerType{ EulerResult::Unique, ExtractEulerResultOrder::ZYX, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
         }
         else
         {
@@ -1309,11 +1309,11 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
             // x_angle - z_angle = atan2(r01,r02)
             // 警告。该解不是唯一的。选择 x_angle = 0.
 
-            constexpr auto yAngle = Math::GetHalfPI();
-            const auto zAngle = -Math::ATan2(GetValue<0, 1>(), GetValue<0, 2>());
-            constexpr auto xAngle = Math::GetValue(0);
+            constexpr auto yAngle = MathType::GetHalfPI();
+            const auto zAngle = -MathType::ATan2(GetValue<0, 1>(), GetValue<0, 2>());
+            constexpr auto xAngle = MathType::GetValue(0);
 
-            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::ZYX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+            return EulerType{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::ZYX, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
         }
     }
     else
@@ -1322,17 +1322,17 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
         // x_angle + z_angle = atan2(-r01,-r02)
         // 警告。该解不是唯一的。选择 x_angle = 0;
 
-        constexpr auto yAngle = -Math::GetHalfPI();
-        const auto zAngle = Math::ATan2(-GetValue<0, 1>(), -GetValue<0, 2>());
-        constexpr auto xAngle = Math::GetValue(0);
+        constexpr auto yAngle = -MathType::GetHalfPI();
+        const auto zAngle = MathType::ATan2(-GetValue<0, 1>(), -GetValue<0, 2>());
+        constexpr auto xAngle = MathType::GetValue(0);
 
-        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::ZYX, xAngle, yAngle, zAngle, Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) };
+        return EulerType{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::ZYX, xAngle, yAngle, zAngle, MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) };
     }
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerXYX() const noexcept
+typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::ExtractEulerXYX() const noexcept
 {
     // +-           -+   +-                                                -+
     // | r00 r01 r02 |   |  cy      sy*sx1               sy*cx1             |
@@ -1342,45 +1342,45 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (GetValue<0, 0>() < Math::GetValue(1) - Math::GetZeroTolerance())
+    if (GetValue<0, 0>() < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
-        if (Math::GetValue(-1) + Math::GetZeroTolerance() < GetValue<0, 0>())
+        if (MathType::GetValue(-1) + MathType::GetZeroTolerance() < GetValue<0, 0>())
         {
             // y_angle  = acos(r00)
             // x0_angle = atan2(r10,-r20)
             // x1_angle = atan2(r01,r02)
 
-            const auto yAngle = Math::ACos(GetValue<0, 0>());
-            const auto x0Angle = Math::ATan2(GetValue<1, 0>(), -GetValue<2, 0>());
-            const auto x1Angle = Math::ATan2(GetValue<0, 1>(), GetValue<0, 2>());
+            const auto yAngle = MathType::ACos(GetValue<0, 0>());
+            const auto x0Angle = MathType::ATan2(GetValue<1, 0>(), -GetValue<2, 0>());
+            const auto x1Angle = MathType::ATan2(GetValue<0, 1>(), GetValue<0, 2>());
 
-            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::XYX, x0Angle, yAngle, Math::GetValue(0), x1Angle, Math::GetValue(0), Math::GetValue(0) };
+            return EulerType{ EulerResult::Unique, ExtractEulerResultOrder::XYX, x0Angle, yAngle, MathType::GetValue(0), x1Angle, MathType::GetValue(0), MathType::GetValue(0) };
         }
         else
         {
             // 该解不是唯一的:  x1_angle - x0_angle = atan2(-r12,r11)
 
-            constexpr auto yAngle = Math::GetPI();
-            const auto x0Angle = -Math::ATan2(-GetValue<1, 2>(), GetValue<1, 1>());
-            constexpr auto x1Angle = Math::GetValue(0);
+            constexpr auto yAngle = MathType::GetPI();
+            const auto x0Angle = -MathType::ATan2(-GetValue<1, 2>(), GetValue<1, 1>());
+            constexpr auto x1Angle = MathType::GetValue(0);
 
-            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::XYX, x0Angle, yAngle, Math::GetValue(0), x1Angle, Math::GetValue(0), Math::GetValue(0) };
+            return EulerType{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::XYX, x0Angle, yAngle, MathType::GetValue(0), x1Angle, MathType::GetValue(0), MathType::GetValue(0) };
         }
     }
     else
     {
         // 该解不是唯一的:  x1_angle + x0_angle = atan2(-r12,r11)
-        constexpr auto yAngle = Math::GetValue(0);
-        const auto x0Angle = Math::ATan2(-GetValue<1, 2>(), GetValue<1, 1>());
-        constexpr auto x1Angle = Math::GetValue(0);
+        constexpr auto yAngle = MathType::GetValue(0);
+        const auto x0Angle = MathType::ATan2(-GetValue<1, 2>(), GetValue<1, 1>());
+        constexpr auto x1Angle = MathType::GetValue(0);
 
-        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::XYX, x0Angle, yAngle, Math::GetValue(0), x1Angle, Math::GetValue(0), Math::GetValue(0) };
+        return EulerType{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::XYX, x0Angle, yAngle, MathType::GetValue(0), x1Angle, MathType::GetValue(0), MathType::GetValue(0) };
     }
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerXZX() const noexcept
+typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::ExtractEulerXZX() const noexcept
 {
     // +-           -+   +-                                                -+
     // | r00 r01 r02 |   | cz      -sz*cx1               sz*sx1             |
@@ -1390,46 +1390,46 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (GetValue<0, 0>() < Math::GetValue(1) - Math::GetZeroTolerance())
+    if (GetValue<0, 0>() < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
-        if (Math::GetValue(-1) + Math::GetZeroTolerance() < GetValue<0, 0>())
+        if (MathType::GetValue(-1) + MathType::GetZeroTolerance() < GetValue<0, 0>())
         {
             // z_angle  = acos(r00)
             // x0_angle = atan2(r20,r10)
             // x1_angle = atan2(r02,-r01)
 
-            const auto zAngle = Math::ACos(GetValue<0, 0>());
-            const auto x0Angle = Math::ATan2(GetValue<2, 0>(), GetValue<1, 0>());
-            const auto x1Angle = Math::ATan2(GetValue<0, 2>(), -GetValue<0, 1>());
+            const auto zAngle = MathType::ACos(GetValue<0, 0>());
+            const auto x0Angle = MathType::ATan2(GetValue<2, 0>(), GetValue<1, 0>());
+            const auto x1Angle = MathType::ATan2(GetValue<0, 2>(), -GetValue<0, 1>());
 
-            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::XZX, x0Angle, Math::GetValue(0), zAngle, x1Angle, Math::GetValue(0), Math::GetValue(0) };
+            return EulerType{ EulerResult::Unique, ExtractEulerResultOrder::XZX, x0Angle, MathType::GetValue(0), zAngle, x1Angle, MathType::GetValue(0), MathType::GetValue(0) };
         }
         else
         {
             // 该解不是唯一的:  x1_angle - x0_angle = atan2(r21,r22)
 
-            constexpr auto zAngle = Math::GetPI();
-            const auto x0Angle = -Math::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
-            constexpr auto x1Angle = Math::GetValue(0);
+            constexpr auto zAngle = MathType::GetPI();
+            const auto x0Angle = -MathType::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
+            constexpr auto x1Angle = MathType::GetValue(0);
 
-            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::XZX, x0Angle, Math::GetValue(0), zAngle, x1Angle, Math::GetValue(0), Math::GetValue(0) };
+            return EulerType{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::XZX, x0Angle, MathType::GetValue(0), zAngle, x1Angle, MathType::GetValue(0), MathType::GetValue(0) };
         }
     }
     else
     {
         // 该解不是唯一的: x1_angle + x0_angle = atan2(r21,r22)
 
-        constexpr auto zAngle = Math::GetValue(0);
-        const auto x0Angle = Math::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
-        constexpr auto x1Angle = Math::GetValue(0);
+        constexpr auto zAngle = MathType::GetValue(0);
+        const auto x0Angle = MathType::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
+        constexpr auto x1Angle = MathType::GetValue(0);
 
-        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::XZX, x0Angle, Math::GetValue(0), zAngle, x1Angle, Math::GetValue(0), Math::GetValue(0) };
+        return EulerType{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::XZX, x0Angle, MathType::GetValue(0), zAngle, x1Angle, MathType::GetValue(0), MathType::GetValue(0) };
     }
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerYXY() const noexcept
+typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::ExtractEulerYXY() const noexcept
 {
     // +-           -+   +-                                                -+
     // | r00 r01 r02 |   |  cy0*cy1-cx*sy0*sy1  sx*sy0   cx*cy1*sy0+cy0*sy1 |
@@ -1439,46 +1439,46 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (GetValue<1, 1>() < Math::GetValue(1) - Math::GetZeroTolerance())
+    if (GetValue<1, 1>() < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
-        if (Math::GetValue(-1) + Math::GetZeroTolerance() < GetValue<1, 1>())
+        if (MathType::GetValue(-1) + MathType::GetZeroTolerance() < GetValue<1, 1>())
         {
             // x_angle  = acos(r11)
             // y0_angle = atan2(r01,r21)
             // y1_angle = atan2(r10,-r12)
 
-            const auto xAngle = Math::ACos(GetValue<1, 1>());
-            const auto y0Angle = Math::ATan2(GetValue<0, 1>(), GetValue<2, 1>());
-            const auto y1Angle = Math::ATan2(GetValue<1, 0>(), -GetValue<1, 2>());
+            const auto xAngle = MathType::ACos(GetValue<1, 1>());
+            const auto y0Angle = MathType::ATan2(GetValue<0, 1>(), GetValue<2, 1>());
+            const auto y1Angle = MathType::ATan2(GetValue<1, 0>(), -GetValue<1, 2>());
 
-            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::YXY, xAngle, y0Angle, Math::GetValue(0), Math::GetValue(0), y1Angle, Math::GetValue(0) };
+            return EulerType{ EulerResult::Unique, ExtractEulerResultOrder::YXY, xAngle, y0Angle, MathType::GetValue(0), MathType::GetValue(0), y1Angle, MathType::GetValue(0) };
         }
         else
         {
             // 该解不是唯一的:  y1_angle - y0_angle = atan2(r02,r00)
 
-            constexpr auto xAngle = Math::GetPI();
-            const auto y0Angle = -Math::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
-            constexpr auto y1Angle = Math::GetValue(0);
+            constexpr auto xAngle = MathType::GetPI();
+            const auto y0Angle = -MathType::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
+            constexpr auto y1Angle = MathType::GetValue(0);
 
-            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::YXY, xAngle, y0Angle, Math::GetValue(0), Math::GetValue(0), y1Angle, Math::GetValue(0) };
+            return EulerType{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::YXY, xAngle, y0Angle, MathType::GetValue(0), MathType::GetValue(0), y1Angle, MathType::GetValue(0) };
         }
     }
     else
     {
         // 该解不是唯一的: y1_angle + y0_angle = atan2(r02,r00)
 
-        constexpr auto xAngle = Math::GetValue(0);
-        const auto y0Angle = Math::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
-        constexpr auto y1Angle = Math::GetValue(0);
+        constexpr auto xAngle = MathType::GetValue(0);
+        const auto y0Angle = MathType::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
+        constexpr auto y1Angle = MathType::GetValue(0);
 
-        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::YXY, xAngle, y0Angle, Math::GetValue(0), Math::GetValue(0), y1Angle, Math::GetValue(0) };
+        return EulerType{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::YXY, xAngle, y0Angle, MathType::GetValue(0), MathType::GetValue(0), y1Angle, MathType::GetValue(0) };
     }
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerYZY() const noexcept
+typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::ExtractEulerYZY() const noexcept
 {
     // +-           -+   +-                                                -+
     // | r00 r01 r02 |   |  cz*cy0*cy1-sy0*sy1  -sz*cy0  cy1*sy0+cz*cy0*sy1 |
@@ -1488,46 +1488,46 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (GetValue<1, 1>() < Math::GetValue(1) - Math::GetZeroTolerance())
+    if (GetValue<1, 1>() < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
-        if (Math::GetValue(-1) + Math::GetZeroTolerance() < GetValue<1, 1>())
+        if (MathType::GetValue(-1) + MathType::GetZeroTolerance() < GetValue<1, 1>())
         {
             // z_angle  = acos(r11)
             // y0_angle = atan2(r21,-r01)
             // y1_angle = atan2(r12,r10)
 
-            const auto zAngle = Math::ACos(GetValue<1, 1>());
-            const auto y0Angle = Math::ATan2(GetValue<2, 1>(), -GetValue<0, 1>());
-            const auto y1Angle = Math::ATan2(GetValue<1, 2>(), GetValue<1, 0>());
+            const auto zAngle = MathType::ACos(GetValue<1, 1>());
+            const auto y0Angle = MathType::ATan2(GetValue<2, 1>(), -GetValue<0, 1>());
+            const auto y1Angle = MathType::ATan2(GetValue<1, 2>(), GetValue<1, 0>());
 
-            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::YZY, Math::GetValue(0), y0Angle, zAngle, Math::GetValue(0), y1Angle, Math::GetValue(0) };
+            return EulerType{ EulerResult::Unique, ExtractEulerResultOrder::YZY, MathType::GetValue(0), y0Angle, zAngle, MathType::GetValue(0), y1Angle, MathType::GetValue(0) };
         }
         else
         {
             // 该解不是唯一的:  y1_angle - y0_angle = atan2(-r20,r22)
 
-            constexpr auto zAngle = Math::GetPI();
-            const auto y0Angle = -Math::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
-            constexpr auto y1Angle = Math::GetValue(0);
+            constexpr auto zAngle = MathType::GetPI();
+            const auto y0Angle = -MathType::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
+            constexpr auto y1Angle = MathType::GetValue(0);
 
-            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::YZY, Math::GetValue(0), y0Angle, zAngle, Math::GetValue(0), y1Angle, Math::GetValue(0) };
+            return EulerType{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::YZY, MathType::GetValue(0), y0Angle, zAngle, MathType::GetValue(0), y1Angle, MathType::GetValue(0) };
         }
     }
     else
     {
         // 该解不是唯一的:  y1_angle + y0_angle = atan2(-r20,r22)
 
-        constexpr auto zAngle = Math::GetValue(0);
-        const auto y0Angle = Math::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
-        constexpr auto y1Angle = Math::GetValue(0);
+        constexpr auto zAngle = MathType::GetValue(0);
+        const auto y0Angle = MathType::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
+        constexpr auto y1Angle = MathType::GetValue(0);
 
-        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::YZY, Math::GetValue(0), y0Angle, zAngle, Math::GetValue(0), y1Angle, Math::GetValue(0) };
+        return EulerType{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::YZY, MathType::GetValue(0), y0Angle, zAngle, MathType::GetValue(0), y1Angle, MathType::GetValue(0) };
     }
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerZXZ() const noexcept
+typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::ExtractEulerZXZ() const noexcept
 {
     // +-           -+   +-                                                -+
     // | r00 r01 r02 |   | cz0*cz1-cx*sz0*sz1  -cx*cz1*sz0-cz0*sz1   sx*sz0 |
@@ -1537,46 +1537,46 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (GetValue<2, 2>() < Math::GetValue(1) - Math::GetZeroTolerance())
+    if (GetValue<2, 2>() < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
-        if (Math::GetValue(-1) + Math::GetZeroTolerance() < GetValue<2, 2>())
+        if (MathType::GetValue(-1) + MathType::GetZeroTolerance() < GetValue<2, 2>())
         {
             // x_angle  = acos(r22)
             // z0_angle = atan2(r02,-r12)
             // z1_angle = atan2(r20,r21)
 
-            const auto xAngle = Math::ACos(GetValue<2, 2>());
-            const auto z0Angle = Math::ATan2(GetValue<0, 2>(), -GetValue<1, 2>());
-            const auto z1Angle = Math::ATan2(GetValue<2, 0>(), GetValue<2, 1>());
+            const auto xAngle = MathType::ACos(GetValue<2, 2>());
+            const auto z0Angle = MathType::ATan2(GetValue<0, 2>(), -GetValue<1, 2>());
+            const auto z1Angle = MathType::ATan2(GetValue<2, 0>(), GetValue<2, 1>());
 
-            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::ZXZ, xAngle, Math::GetValue(0), z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
+            return EulerType{ EulerResult::Unique, ExtractEulerResultOrder::ZXZ, xAngle, MathType::GetValue(0), z0Angle, MathType::GetValue(0), MathType::GetValue(0), z1Angle };
         }
         else
         {
             // 该解不是唯一的:  z1_angle - z0_angle = atan2(-r01,r00)
 
-            constexpr auto xAngle = Math::GetPI();
-            const auto z0Angle = -Math::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
-            constexpr auto z1Angle = Math::GetValue(0);
+            constexpr auto xAngle = MathType::GetPI();
+            const auto z0Angle = -MathType::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
+            constexpr auto z1Angle = MathType::GetValue(0);
 
-            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::ZXZ, xAngle, Math::GetValue(0), z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
+            return EulerType{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::ZXZ, xAngle, MathType::GetValue(0), z0Angle, MathType::GetValue(0), MathType::GetValue(0), z1Angle };
         }
     }
     else
     {
         // 该解不是唯一的: z1_angle + z0_angle = atan2(-r01,r00)
 
-        constexpr auto xAngle = Math::GetValue(0);
-        const auto z0Angle = Math::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
-        constexpr auto z1Angle = Math::GetValue(0);
+        constexpr auto xAngle = MathType::GetValue(0);
+        const auto z0Angle = MathType::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
+        constexpr auto z1Angle = MathType::GetValue(0);
 
-        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::ZXZ, xAngle, Math::GetValue(0), z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
+        return EulerType{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::ZXZ, xAngle, MathType::GetValue(0), z0Angle, MathType::GetValue(0), MathType::GetValue(0), z1Angle };
     }
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerZYZ() const noexcept
+typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::ExtractEulerZYZ() const noexcept
 {
     // +-           -+   +-                                                -+
     // | r00 r01 r02 |   |  cy*cz0*cz1-sz0*sz1  -cz1*sz0-cy*cz0*sz1  sy*cz0 |
@@ -1586,40 +1586,40 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (GetValue<2, 2>() < Math::GetValue(1) - Math::GetZeroTolerance())
+    if (GetValue<2, 2>() < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
-        if (Math::GetValue(-1) + Math::GetZeroTolerance() < GetValue<2, 2>())
+        if (MathType::GetValue(-1) + MathType::GetZeroTolerance() < GetValue<2, 2>())
         {
             // y_angle  = acos(r22)
             // z0_angle = atan2(r12,r02)
             // z1_angle = atan2(r21,-r20)
 
-            const auto yAngle = Math::ACos(GetValue<2, 2>());
-            const auto z0Angle = Math::ATan2(GetValue<1, 2>(), GetValue<0, 2>());
-            const auto z1Angle = Math::ATan2(GetValue<2, 1>(), -GetValue<2, 0>());
+            const auto yAngle = MathType::ACos(GetValue<2, 2>());
+            const auto z0Angle = MathType::ATan2(GetValue<1, 2>(), GetValue<0, 2>());
+            const auto z1Angle = MathType::ATan2(GetValue<2, 1>(), -GetValue<2, 0>());
 
-            return Euler{ EulerResult::Unique, ExtractEulerResultOrder::ZYZ, Math::GetValue(0), yAngle, z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
+            return EulerType{ EulerResult::Unique, ExtractEulerResultOrder::ZYZ, MathType::GetValue(0), yAngle, z0Angle, MathType::GetValue(0), MathType::GetValue(0), z1Angle };
         }
         else  // r22 = -1
         {
             // 该解不是唯一的:  z1_angle - z0_angle = atan2(r10,r11)
 
-            constexpr auto yAngle = Math::GetPI();
-            const auto z0Angle = -Math::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
-            constexpr auto z1Angle = Math::GetValue(0);
+            constexpr auto yAngle = MathType::GetPI();
+            const auto z0Angle = -MathType::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
+            constexpr auto z1Angle = MathType::GetValue(0);
 
-            return Euler{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::ZYZ, Math::GetValue(0), yAngle, z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
+            return EulerType{ EulerResult::NotUniqueDifference, ExtractEulerResultOrder::ZYZ, MathType::GetValue(0), yAngle, z0Angle, MathType::GetValue(0), MathType::GetValue(0), z1Angle };
         }
     }
     else  // r22 = +1
     {
         // 该解不是唯一的: z1_angle + z0_angle = atan2(r10,r11)
 
-        constexpr auto yAngle = Math::GetValue(0);
-        const auto z0Angle = Math::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
-        constexpr auto z1Angle = Math::GetValue(0);
+        constexpr auto yAngle = MathType::GetValue(0);
+        const auto z0Angle = MathType::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
+        constexpr auto z1Angle = MathType::GetValue(0);
 
-        return Euler{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::ZYZ, Math::GetValue(0), yAngle, z0Angle, Math::GetValue(0), Math::GetValue(0), z1Angle };
+        return EulerType{ EulerResult::NotUniqueSum, ExtractEulerResultOrder::ZYZ, MathType::GetValue(0), yAngle, z0Angle, MathType::GetValue(0), MathType::GetValue(0), z1Angle };
     }
 }
 
@@ -1696,7 +1696,7 @@ Mathematics::Matrix4<Real> Mathematics::Matrix3<Real>::Lift() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    Matrix4 result{ MatrixInitType::Identity };
+    Matrix4Type result{ MatrixInitType::Identity };
 
     for (auto r = 0; r < vectorSize; ++r)
     {
@@ -1714,11 +1714,11 @@ Mathematics::Matrix2<Real> Mathematics::Matrix3<Real>::Project() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    Matrix2 result{ MatrixInitType::Zero };
+    Matrix2Type result{ MatrixInitType::Zero };
 
-    for (auto r = 0; r < Matrix2::vectorSize; ++r)
+    for (auto r = 0; r < Matrix2Type::vectorSize; ++r)
     {
-        for (auto c = 0; c < Matrix2::vectorSize; ++c)
+        for (auto c = 0; c < Matrix2Type::vectorSize; ++c)
         {
             result(r, c) = (*this)(r, c);
         }
