@@ -38,7 +38,7 @@ requires std::is_floating_point_v<Real>
 Mathematics::Transform<Real>::Transform(Real scale) noexcept
     : affineMatrix{ scale },
       transformMatrix{ scale },
-      inverseMatrix{ Math::GetValue(1) / scale, Math::GetValue(1) / scale, Math::GetValue(1) / scale },
+      inverseMatrix{ MathType::GetValue(1) / scale, MathType::GetValue(1) / scale, MathType::GetValue(1) / scale },
       inverseNeedsUpdate{ false }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -49,7 +49,7 @@ requires std::is_floating_point_v<Real>
 Mathematics::Transform<Real>::Transform(Real s0, Real s1, Real s2) noexcept
     : affineMatrix{ s0, s1, s2 },
       transformMatrix{ s0, s1, s2 },
-      inverseMatrix{ Math::GetValue(1) / s0, Math::GetValue(1) / s1, Math::GetValue(1) / s2 },
+      inverseMatrix{ MathType::GetValue(1) / s0, MathType::GetValue(1) / s1, MathType::GetValue(1) / s2 },
       inverseNeedsUpdate{ false }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -128,7 +128,7 @@ bool Mathematics::Transform<Real>::IsUniformScale() const noexcept
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-void Mathematics::Transform<Real>::SetRotate(const Matrix& rotate) noexcept
+void Mathematics::Transform<Real>::SetRotate(const MatrixType& rotate) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -144,7 +144,7 @@ void Mathematics::Transform<Real>::SetRotate(const Matrix4x4& rotate)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    Matrix matrix{ MatrixInitType::Identity };
+    MatrixType matrix{ MatrixInitType::Identity };
 
     for (auto row = 0; row < 4; ++row)
     {
@@ -163,7 +163,7 @@ void Mathematics::Transform<Real>::SetMatrix(const Matrix4x4& matrix)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    Matrix result{ MatrixInitType::Identity };
+    MatrixType result{ MatrixInitType::Identity };
 
     for (auto row = 0; row < 4; ++row)
     {
@@ -178,7 +178,7 @@ void Mathematics::Transform<Real>::SetMatrix(const Matrix4x4& matrix)
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-void Mathematics::Transform<Real>::SetMatrix(const Matrix& matrix) noexcept
+void Mathematics::Transform<Real>::SetMatrix(const MatrixType& matrix) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -190,7 +190,7 @@ void Mathematics::Transform<Real>::SetMatrix(const Matrix& matrix) noexcept
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-void Mathematics::Transform<Real>::SetTranslate(const APoint& translate) noexcept
+void Mathematics::Transform<Real>::SetTranslate(const APointType& translate) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -206,12 +206,12 @@ void Mathematics::Transform<Real>::SetTranslate(Real x0, Real x1, Real x2) noexc
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    SetTranslate(APoint{ x0, x1, x2 });
+    SetTranslate(APointType{ x0, x1, x2 });
 }
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-void Mathematics::Transform<Real>::SetTranslate(const Vector3& translate) noexcept
+void Mathematics::Transform<Real>::SetTranslate(const Vector3Type& translate) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -220,7 +220,7 @@ void Mathematics::Transform<Real>::SetTranslate(const Vector3& translate) noexce
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-void Mathematics::Transform<Real>::SetTranslate(const Vector4& translate) noexcept
+void Mathematics::Transform<Real>::SetTranslate(const Vector4Type& translate) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -247,10 +247,10 @@ void Mathematics::Transform<Real>::SetTranslate(const AlgebraVector4& translate)
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-void Mathematics::Transform<Real>::SetScale(const APoint& scale)
+void Mathematics::Transform<Real>::SetScale(const APointType& scale)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_0(!Approximate(scale, APoint::GetOrigin(), Math::GetZeroTolerance()), "scale不能为零。\n");
+    MATHEMATICS_ASSERTION_0(!Approximate(scale, APointType::GetOrigin(), MathType::GetZeroTolerance()), "scale不能为零。\n");
 
     affineMatrix.SetScale(scale);
     transformMatrix.SetScale(affineMatrix.GetRotationOrGeneralMatrix(), affineMatrix.GetScale());
@@ -264,12 +264,12 @@ void Mathematics::Transform<Real>::SetScale(Real s0, Real s1, Real s2)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    SetScale(APoint{ s0, s1, s2 });
+    SetScale(APointType{ s0, s1, s2 });
 }
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-void Mathematics::Transform<Real>::SetScale(const Vector3& scale)
+void Mathematics::Transform<Real>::SetScale(const Vector3Type& scale)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -278,7 +278,7 @@ void Mathematics::Transform<Real>::SetScale(const Vector3& scale)
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-void Mathematics::Transform<Real>::SetScale(const Vector4& scale)
+void Mathematics::Transform<Real>::SetScale(const Vector4Type& scale)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -308,9 +308,9 @@ requires std::is_floating_point_v<Real>
 void Mathematics::Transform<Real>::SetUniformScale(Real scale)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_0(!Math::Approximate(scale, Real{}, Math::GetZeroTolerance()), "scale不能为零。\n");
+    MATHEMATICS_ASSERTION_0(!MathType::Approximate(scale, Real{}, MathType::GetZeroTolerance()), "scale不能为零。\n");
 
-    affineMatrix.SetScale(APoint{ scale, scale, scale });
+    affineMatrix.SetScale(APointType{ scale, scale, scale });
     transformMatrix.SetUniformScale(affineMatrix.GetRotationOrGeneralMatrix(), affineMatrix.GetScale().GetX());
 
     inverseNeedsUpdate = true;
@@ -318,7 +318,7 @@ void Mathematics::Transform<Real>::SetUniformScale(Real scale)
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::Matrix Mathematics::Transform<Real>::GetRotate() const
+typename Mathematics::Transform<Real>::MatrixType Mathematics::Transform<Real>::GetRotate() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
     MATHEMATICS_ASSERTION_0(transformMatrix.IsRotationOrScaleMatrix(), "Matrix不是旋转矩阵\n");
@@ -339,7 +339,7 @@ typename Mathematics::Transform<Real>::Matrix4x4 Mathematics::Transform<Real>::G
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::Matrix Mathematics::Transform<Real>::GetMatrix() const noexcept
+typename Mathematics::Transform<Real>::MatrixType Mathematics::Transform<Real>::GetMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -359,7 +359,7 @@ typename Mathematics::Transform<Real>::Matrix4x4 Mathematics::Transform<Real>::G
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::APoint Mathematics::Transform<Real>::GetTranslate() const noexcept
+typename Mathematics::Transform<Real>::APointType Mathematics::Transform<Real>::GetTranslate() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -368,24 +368,24 @@ typename Mathematics::Transform<Real>::APoint Mathematics::Transform<Real>::GetT
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::Vector4 Mathematics::Transform<Real>::GetTranslationW0() const noexcept
+typename Mathematics::Transform<Real>::Vector4Type Mathematics::Transform<Real>::GetTranslationW0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
     const auto translationMatrix = affineMatrix.GetTranslate();
 
-    return Vector4{ translationMatrix.GetX(), translationMatrix.GetY(), translationMatrix.GetZ(), Math::GetValue(0) };
+    return Vector4Type{ translationMatrix.GetX(), translationMatrix.GetY(), translationMatrix.GetZ(), MathType::GetValue(0) };
 }
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::Vector4 Mathematics::Transform<Real>::GetTranslationW1() const noexcept
+typename Mathematics::Transform<Real>::Vector4Type Mathematics::Transform<Real>::GetTranslationW1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
     const auto translationMatrix = affineMatrix.GetTranslate();
 
-    return Vector4{ translationMatrix.GetX(), translationMatrix.GetY(), translationMatrix.GetZ(), Math::GetValue(1) };
+    return Vector4Type{ translationMatrix.GetX(), translationMatrix.GetY(), translationMatrix.GetZ(), MathType::GetValue(1) };
 }
 
 template <typename Real>
@@ -407,7 +407,7 @@ typename Mathematics::Transform<Real>::AlgebraVector4 Mathematics::Transform<Rea
 
     const auto translationMatrix = affineMatrix.GetTranslate();
 
-    return AlgebraVector4{ translationMatrix.GetX(), translationMatrix.GetY(), translationMatrix.GetZ(), Math::GetValue(0) };
+    return AlgebraVector4{ translationMatrix.GetX(), translationMatrix.GetY(), translationMatrix.GetZ(), MathType::GetValue(0) };
 }
 
 template <typename Real>
@@ -418,12 +418,12 @@ typename Mathematics::Transform<Real>::AlgebraVector4 Mathematics::Transform<Rea
 
     const auto translationMatrix = affineMatrix.GetTranslate();
 
-    return AlgebraVector4{ translationMatrix.GetX(), translationMatrix.GetY(), translationMatrix.GetZ(), Math::GetValue(1) };
+    return AlgebraVector4{ translationMatrix.GetX(), translationMatrix.GetY(), translationMatrix.GetZ(), MathType::GetValue(1) };
 }
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::APoint Mathematics::Transform<Real>::GetScale() const
+typename Mathematics::Transform<Real>::APointType Mathematics::Transform<Real>::GetScale() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
     MATHEMATICS_ASSERTION_0(transformMatrix.IsRotationOrScaleMatrix(), "Matrix不是旋转矩阵\n");
@@ -433,13 +433,13 @@ typename Mathematics::Transform<Real>::APoint Mathematics::Transform<Real>::GetS
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::Vector4 Mathematics::Transform<Real>::GetScaleW1() const noexcept
+typename Mathematics::Transform<Real>::Vector4Type Mathematics::Transform<Real>::GetScaleW1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
     const auto scaleMatrix = affineMatrix.GetScale();
 
-    return Vector4{ scaleMatrix.GetX(), scaleMatrix.GetY(), scaleMatrix.GetZ(), Math::GetValue(1) };
+    return Vector4Type{ scaleMatrix.GetX(), scaleMatrix.GetY(), scaleMatrix.GetZ(), MathType::GetValue(1) };
 }
 
 template <typename Real>
@@ -461,7 +461,7 @@ typename Mathematics::Transform<Real>::AlgebraVector4 Mathematics::Transform<Rea
 
     const auto scaleMatrix = affineMatrix.GetScale();
 
-    return AlgebraVector4{ scaleMatrix.GetX(), scaleMatrix.GetY(), scaleMatrix.GetZ(), Math::GetValue(1) };
+    return AlgebraVector4{ scaleMatrix.GetX(), scaleMatrix.GetY(), scaleMatrix.GetZ(), MathType::GetValue(1) };
 }
 
 template <typename Real>
@@ -477,16 +477,16 @@ Real Mathematics::Transform<Real>::GetUniformScale() const
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-void Mathematics::Transform<Real>::SetRotation(const Matrix3& rotate)
+void Mathematics::Transform<Real>::SetRotation(const Matrix3Type& rotate)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    SetRotate(Matrix{ rotate });
+    SetRotate(MatrixType{ rotate });
 }
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::Matrix3 Mathematics::Transform<Real>::GetRotationMatrix3() const
+typename Mathematics::Transform<Real>::Matrix3Type Mathematics::Transform<Real>::GetRotationMatrix3() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -499,7 +499,7 @@ void Mathematics::Transform<Real>::SetRotation(const Matrix3x3& rotate)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    Matrix matrix{ MatrixInitType::Identity };
+    MatrixType matrix{ MatrixInitType::Identity };
 
     for (auto row = 0; row < 3; ++row)
     {
@@ -534,7 +534,7 @@ typename Mathematics::Transform<Real>::Matrix3x3 Mathematics::Transform<Real>::G
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-void Mathematics::Transform<Real>::SetRotation(const AQuaternion& quaternion) noexcept
+void Mathematics::Transform<Real>::SetRotation(const AQuaternionType& quaternion) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -543,11 +543,11 @@ void Mathematics::Transform<Real>::SetRotation(const AQuaternion& quaternion) no
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::AQuaternion Mathematics::Transform<Real>::GetRotationAQuaternion() const
+typename Mathematics::Transform<Real>::AQuaternionType Mathematics::Transform<Real>::GetRotationAQuaternion() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    AQuaternion quaternion{};
+    AQuaternionType quaternion{};
 
     quaternion.FromRotationMatrix(GetRotate());
 
@@ -556,7 +556,7 @@ typename Mathematics::Transform<Real>::AQuaternion Mathematics::Transform<Real>:
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-void Mathematics::Transform<Real>::SetRotation(const Quaternion& quaternion)
+void Mathematics::Transform<Real>::SetRotation(const QuaternionType& quaternion)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -565,31 +565,31 @@ void Mathematics::Transform<Real>::SetRotation(const Quaternion& quaternion)
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::Quaternion Mathematics::Transform<Real>::GetRotationQuaternion() const
+typename Mathematics::Transform<Real>::QuaternionType Mathematics::Transform<Real>::GetRotationQuaternion() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
     const auto matrix = GetAlgebraMatrix();
 
-    return static_cast<Quaternion>(Algebra::Rotation<4, Real>(matrix));
+    return static_cast<QuaternionType>(Algebra::Rotation<4, Real>(matrix));
 }
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-void Mathematics::Transform<Real>::SetRotation(const AxisAngle& axisAngle)
+void Mathematics::Transform<Real>::SetRotation(const AxisAngleType& axisAngle)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    Matrix matrix{};
+    MatrixType matrix{};
 
-    matrix.MakeRotation(AVector{ axisAngle.GetAxis() }, axisAngle.GetAngle());
+    matrix.MakeRotation(AVectorType{ axisAngle.GetAxis() }, axisAngle.GetAngle());
 
     SetRotate(matrix);
 }
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::AxisAngle Mathematics::Transform<Real>::GetRotationAxisAngle() const
+typename Mathematics::Transform<Real>::AxisAngleType Mathematics::Transform<Real>::GetRotationAxisAngle() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -602,7 +602,7 @@ void Mathematics::Transform<Real>::SetRotation(const AlgebraAxisAngle3& axisAngl
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    const AlgebraAxisAngle4 axisAngle4{ HomogeneousLift(axisAngle.GetAxis(), Math::GetValue(1)), axisAngle.GetAngle() };
+    const AlgebraAxisAngle4 axisAngle4{ HomogeneousLift(axisAngle.GetAxis(), MathType::GetValue(1)), axisAngle.GetAngle() };
 
     SetRotate(static_cast<Matrix4x4>(Algebra::Rotation<4, Real>(axisAngle4)));
 }
@@ -642,19 +642,19 @@ typename Mathematics::Transform<Real>::AlgebraAxisAngle4 Mathematics::Transform<
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-void Mathematics::Transform<Real>::SetRotation(const Euler& eulerAngles)
+void Mathematics::Transform<Real>::SetRotation(const EulerType& eulerAngles)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    Matrix3 rotate{};
+    Matrix3Type rotate{};
     rotate.MakeEuler(eulerAngles);
 
-    SetRotate(Matrix{ rotate });
+    SetRotate(MatrixType{ rotate });
 }
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::Euler Mathematics::Transform<Real>::GetRotationEuler(ExtractEulerResultOrder order) const
+typename Mathematics::Transform<Real>::EulerType Mathematics::Transform<Real>::GetRotationEuler(ExtractEulerResultOrder order) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -702,7 +702,7 @@ Real Mathematics::Transform<Real>::GetNorm() const
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::APoint Mathematics::Transform<Real>::operator*(const APoint& point) const noexcept
+typename Mathematics::Transform<Real>::APointType Mathematics::Transform<Real>::operator*(const APointType& point) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -711,7 +711,7 @@ typename Mathematics::Transform<Real>::APoint Mathematics::Transform<Real>::oper
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::AVector Mathematics::Transform<Real>::operator*(const AVector& vector) const noexcept
+typename Mathematics::Transform<Real>::AVectorType Mathematics::Transform<Real>::operator*(const AVectorType& vector) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -731,7 +731,7 @@ Mathematics::Transform<Real>& Mathematics::Transform<Real>::operator*=(const Tra
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::Matrix Mathematics::Transform<Real>::GetHomogeneousMatrix() const noexcept
+typename Mathematics::Transform<Real>::MatrixType Mathematics::Transform<Real>::GetHomogeneousMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -751,7 +751,7 @@ typename Mathematics::Transform<Real>::Matrix4x4 Mathematics::Transform<Real>::G
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-typename Mathematics::Transform<Real>::Matrix Mathematics::Transform<Real>::GetInverseMatrix(Real epsilon) const
+typename Mathematics::Transform<Real>::MatrixType Mathematics::Transform<Real>::GetInverseMatrix(Real epsilon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -771,7 +771,7 @@ typename Mathematics::Transform<Real>::Matrix Mathematics::Transform<Real>::GetI
             {
                 if (transformMatrix.IsUniformScale())
                 {
-                    const auto inverseScale = Math::GetValue(1) / scaleMatrix.GetX();
+                    const auto inverseScale = MathType::GetValue(1) / scaleMatrix.GetX();
 
 #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
@@ -809,7 +809,7 @@ typename Mathematics::Transform<Real>::Matrix Mathematics::Transform<Real>::GetI
                     const auto scale01 = scaleMatrix.GetX() * scaleMatrix.GetY();
                     const auto scale02 = scaleMatrix.GetX() * scaleMatrix.GetZ();
                     const auto scale12 = scaleMatrix.GetY() * scaleMatrix.GetZ();
-                    const auto inverseScale012 = Math::GetValue(1) / (scale01 * scaleMatrix.GetZ());
+                    const auto inverseScale012 = MathType::GetValue(1) / (scale01 * scaleMatrix.GetZ());
                     const auto inverseScale0 = scale12 * inverseScale012;
                     const auto inverseScale1 = scale02 * inverseScale012;
                     const auto inverseScale2 = scale01 * inverseScale012;
@@ -906,7 +906,7 @@ Mathematics::Transform<Real> Mathematics::Transform<Real>::GetInverseTransform(R
             const auto translateMatrix = affineMatrix.GetTranslate();
 
             const auto inverseRotation = rotationOrGeneralMatrix.Transpose();
-            const auto inverseScale = Math::GetValue(1) / scaleMatrix.GetX();
+            const auto inverseScale = MathType::GetValue(1) / scaleMatrix.GetX();
             const auto inverseTransform = -inverseScale * (inverseRotation * GetTranslate());
 
             inverse.SetRotate(inverseRotation);
@@ -992,9 +992,9 @@ void Mathematics::Transform<Real>::ReadAggregate(BufferSource& source)
     {
         if (isUniformScale)
         {
-            Matrix rotate{};
+            MatrixType rotate{};
             Real scale{};
-            APoint translate{};
+            APointType translate{};
 
             source.ReadAggregate(rotate);
             source.Read(scale);
@@ -1006,9 +1006,9 @@ void Mathematics::Transform<Real>::ReadAggregate(BufferSource& source)
         }
         else
         {
-            Matrix rotate{};
-            APoint scale{};
-            APoint translate{};
+            MatrixType rotate{};
+            APointType scale{};
+            APointType translate{};
 
             source.ReadAggregate(rotate);
             source.ReadAggregate(scale);
@@ -1021,8 +1021,8 @@ void Mathematics::Transform<Real>::ReadAggregate(BufferSource& source)
     }
     else
     {
-        Matrix matrix{};
-        APoint translate{};
+        MatrixType matrix{};
+        APointType translate{};
 
         source.ReadAggregate(matrix);
         source.ReadAggregate(translate);

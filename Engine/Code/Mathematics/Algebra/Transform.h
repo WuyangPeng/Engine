@@ -57,17 +57,17 @@ namespace Mathematics
         using BufferTarget = CoreTools::BufferTarget;
         using BufferSource = CoreTools::BufferSource;
 
-        using Math = Math<Real>;
-        using Matrix = Matrix<Real>;
-        using APoint = APoint<Real>;
-        using AVector = AVector<Real>;
-        using Vector3 = Vector3<Real>;
-        using Vector4 = Vector4<Real>;
-        using Matrix3 = Matrix3<Real>;
-        using AQuaternion = AQuaternion<Real>;
-        using Quaternion = Quaternion<Real>;
-        using Euler = Euler<Real>;
-        using AxisAngle = AxisAngle<Real>;
+        using MathType = Math<Real>;
+        using MatrixType = Matrix<Real>;
+        using APointType = APoint<Real>;
+        using AVectorType = AVector<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Vector4Type = Vector4<Real>;
+        using Matrix3Type = Matrix3<Real>;
+        using AQuaternionType = AQuaternion<Real>;
+        using QuaternionType = Quaternion<Real>;
+        using EulerType = Euler<Real>;
+        using AxisAngleType = AxisAngle<Real>;
         using Matrix3x3 = Algebra::Matrix3x3<Real>;
         using Matrix4x4 = Algebra::Matrix4x4<Real>;
         using AlgebraVector3 = Algebra::Vector3<Real>;
@@ -115,46 +115,46 @@ namespace Mathematics
         ///     当GetInverseMatrix被调用，这种情况逆矩阵必须被重新计算，并设置inverseNeedsUpdate为false。
 
         /// {{R,0},{0,1}}
-        void SetRotate(const Matrix& rotate) noexcept;
+        void SetRotate(const MatrixType& rotate) noexcept;
         void SetRotate(const Matrix4x4& rotate);
 
         /// {{M,0},{0,1}}
-        void SetMatrix(const Matrix& matrix) noexcept;
+        void SetMatrix(const MatrixType& matrix) noexcept;
         void SetMatrix(const Matrix4x4& matrix);
 
-        void SetTranslate(const APoint& translate) noexcept;
+        void SetTranslate(const APointType& translate) noexcept;
         void SetTranslate(Real x0, Real x1, Real x2) noexcept;
-        void SetTranslate(const Vector3& translate) noexcept;
-        void SetTranslate(const Vector4& translate) noexcept;
+        void SetTranslate(const Vector3Type& translate) noexcept;
+        void SetTranslate(const Vector4Type& translate) noexcept;
         void SetTranslate(const AlgebraVector3& translate);
         void SetTranslate(const AlgebraVector4& translate);
-        void SetScale(const APoint& scale);
+        void SetScale(const APointType& scale);
         void SetScale(Real s0, Real s1, Real s2);
-        void SetScale(const Vector3& scale);
-        void SetScale(const Vector4& scale);
+        void SetScale(const Vector3Type& scale);
+        void SetScale(const Vector4Type& scale);
         void SetScale(const AlgebraVector3& scale);
         void SetScale(const AlgebraVector4& scale);
         void SetUniformScale(Real scale);
 
         /// {{R,0},{0,1}}
-        NODISCARD Matrix GetRotate() const;
+        NODISCARD MatrixType GetRotate() const;
         NODISCARD Matrix4x4 GetAlgebraRotate() const;
 
         /// {{M,0},{0,1}}
-        NODISCARD Matrix GetMatrix() const noexcept;
+        NODISCARD MatrixType GetMatrix() const noexcept;
         NODISCARD Matrix4x4 GetAlgebraMatrix() const;
 
         /// (x,y,z)
-        NODISCARD APoint GetTranslate() const noexcept;
-        NODISCARD Vector4 GetTranslationW0() const noexcept;
-        NODISCARD Vector4 GetTranslationW1() const noexcept;
+        NODISCARD APointType GetTranslate() const noexcept;
+        NODISCARD Vector4Type GetTranslationW0() const noexcept;
+        NODISCARD Vector4Type GetTranslationW1() const noexcept;
         NODISCARD AlgebraVector3 GetAlgebraTranslate() const noexcept;
         NODISCARD AlgebraVector4 GetAlgebraTranslationW0() const noexcept;
         NODISCARD AlgebraVector4 GetAlgebraTranslationW1() const noexcept;
 
         /// (s0,s1,s2)
-        NODISCARD APoint GetScale() const;
-        NODISCARD Vector4 GetScaleW1() const noexcept;
+        NODISCARD APointType GetScale() const;
+        NODISCARD Vector4Type GetScaleW1() const noexcept;
         NODISCARD AlgebraVector3 GetAlgebraScale() const;
         NODISCARD AlgebraVector4 GetAlgebraScaleW1() const noexcept;
 
@@ -163,28 +163,28 @@ namespace Mathematics
         /// 用于设置/获取旋转的备用表示。
 
         /// 从3x3矩阵中设置/获取。
-        void SetRotation(const Matrix3& rotate);
-        NODISCARD Matrix3 GetRotationMatrix3() const;
+        void SetRotation(const Matrix3Type& rotate);
+        NODISCARD Matrix3Type GetRotationMatrix3() const;
         void SetRotation(const Matrix3x3& rotate);
         NODISCARD Matrix3x3 GetRotationMatrix3x3() const;
 
         /// 四元数是单位长度。
-        void SetRotation(const AQuaternion& quaternion) noexcept;
-        NODISCARD AQuaternion GetRotationAQuaternion() const;
-        void SetRotation(const Quaternion& quaternion);
-        NODISCARD Quaternion GetRotationQuaternion() const;
+        void SetRotation(const AQuaternionType& quaternion) noexcept;
+        NODISCARD AQuaternionType GetRotationAQuaternion() const;
+        void SetRotation(const QuaternionType& quaternion);
+        NODISCARD QuaternionType GetRotationQuaternion() const;
 
         /// 轴为单位长度，角度以弧度为单位。
-        void SetRotation(const AxisAngle& axisAngle);
-        NODISCARD AxisAngle GetRotationAxisAngle() const;
+        void SetRotation(const AxisAngleType& axisAngle);
+        NODISCARD AxisAngleType GetRotationAxisAngle() const;
         void SetRotation(const AlgebraAxisAngle3& axisAngle);
         NODISCARD AlgebraAxisAngle3 GetRotationAlgebraAxisAngle3() const;
         void SetRotation(const AlgebraAxisAngle4& axisAngle);
         NODISCARD AlgebraAxisAngle4 GetRotationAlgebraAxisAngle4() const;
 
         /// Euler角度以弧度为单位。GetEulerAngles函数要求将order值设置为所需的轴顺序。
-        void SetRotation(const Euler& eulerAngles);
-        NODISCARD Euler GetRotationEuler(ExtractEulerResultOrder order) const;
+        void SetRotation(const EulerType& eulerAngles);
+        NODISCARD EulerType GetRotationEuler(ExtractEulerResultOrder order) const;
 
         /// Euler角度以弧度为单位。GetEulerAngles函数要求根据axis值设置为所需的轴顺序。
         void SetRotation(const EulerAngles& eulerAngles);
@@ -196,16 +196,16 @@ namespace Mathematics
         NODISCARD Real GetNorm() const;
 
         /// 矩阵-点乘法, M * p。
-        NODISCARD APoint operator*(const APoint& point) const noexcept;
+        NODISCARD APointType operator*(const APointType& point) const noexcept;
 
         /// 矩阵-向量乘法, M * v。
-        NODISCARD AVector operator*(const AVector& vector) const noexcept;
+        NODISCARD AVectorType operator*(const AVectorType& vector) const noexcept;
 
         /// 矩阵-矩阵乘法。
         Transform& operator*=(const Transform& transform);
 
         /// 获取齐次矩阵。
-        NODISCARD Matrix GetHomogeneousMatrix() const noexcept;
+        NODISCARD MatrixType GetHomogeneousMatrix() const noexcept;
         NODISCARD Matrix4x4 GetMatrix4x4() const;
 
         /// 获取齐次矩阵的逆，当需要时重新计算。
@@ -213,13 +213,13 @@ namespace Mathematics
         /// H = {{M,T},{0,1}}, 这里 H^{-1} = {{M^{-1},-M^{-1}*T},{0,1}}。
         /// 未定义MATHEMATICS_USE_MATRIX_VECTOR
         /// H = {{M,0},{T,1}}, 这里 H^{-1} = {{M^{-1},0},{-M^{-1}*T,1}}
-        NODISCARD Matrix GetInverseMatrix(Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD MatrixType GetInverseMatrix(Real epsilon = MathType::GetZeroTolerance()) const;
 
         /// 获取Transform的逆。不执行测试来确保调用的转换是可逆的。
         /// Transform逆。如果可能，通道已正确分配。
         /// 例如，如果输入的IsRotationOrScaleMatrix等于 'true'，则逆矩阵的IsRotationOrScaleMatrix也等于'true'，
         /// 并且逆矩阵的旋转矩阵，scale也相应地设置。
-        NODISCARD Transform GetInverseTransform(Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Transform GetInverseTransform(Real epsilon = MathType::GetZeroTolerance()) const;
 
         /// 流支持
         NODISCARD int GetStreamingSize() const noexcept;
@@ -242,7 +242,7 @@ namespace Mathematics
         /// 完整的4x4齐次矩阵H = {{M,T},{0,1}}和它的逆矩阵为H^{-1} = {M^{-1},-M^{-1}*T},{0,1}}。 逆矩阵只在需要时计算。
         TransformMatrix transformMatrix;
 
-        mutable Matrix inverseMatrix;
+        mutable MatrixType inverseMatrix;
         mutable bool inverseNeedsUpdate;
     };
 
