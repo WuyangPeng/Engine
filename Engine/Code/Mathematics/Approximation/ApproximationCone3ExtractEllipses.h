@@ -32,8 +32,8 @@ namespace Mathematics
         using Vector3Container = std::vector<Vector3>;
         using Ellipse3 = Algebra::Ellipse3<Real>;
         using Ellipse3Container = std::vector<Ellipse3>;
-        using OrientedBoundingBoxNode = OrientedBoundingBoxNode<Real>;
-        using OrientedBoundingBoxNodeContainer = std::vector<OrientedBoundingBoxNode>;
+        using OrientedBoundingBoxNodeType = OrientedBoundingBoxNode<Real>;
+        using OrientedBoundingBoxNodeContainer = std::vector<OrientedBoundingBoxNodeType>;
         using Plane3 = Algebra::Plane3<Real>;
         using Plane3Container = std::vector<Plane3>;
         using IndicesType = std::vector<int>;
