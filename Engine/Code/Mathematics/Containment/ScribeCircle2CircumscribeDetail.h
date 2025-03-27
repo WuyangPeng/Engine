@@ -18,7 +18,7 @@
 #include "Mathematics/NumericalAnalysis/LinearSystemDetail.h"
 
 template <typename Real>
-Mathematics::ScribeCircle2Circumscribe<Real>::ScribeCircle2Circumscribe(const Vector2& v0, const Vector2& v1, const Vector2& v2)
+Mathematics::ScribeCircle2Circumscribe<Real>::ScribeCircle2Circumscribe(const Vector2Type& v0, const Vector2Type& v1, const Vector2Type& v2)
     : points{ v0, v1, v2 }, circle2{}, isCircleConstructed{ false }
 {
     Calculate();
@@ -43,7 +43,7 @@ void Mathematics::ScribeCircle2Circumscribe<Real>::Calculate()
 
         std::array<Real, 2> outputVector = linearSystem.Solve2(matrix, inputVector);
 
-        const Vector2 solution{ outputVector.at(0), outputVector.at(1) };
+        const Vector2Type solution{ outputVector.at(0), outputVector.at(1) };
         auto center = points.at(0) + solution;
         auto radius = Vector2Tools<Real>::GetLength(solution);
 
@@ -52,7 +52,7 @@ void Mathematics::ScribeCircle2Circumscribe<Real>::Calculate()
     }
     catch (CoreTools::Error&)
     {
-        circle2 = Circle2();
+        circle2 = Circle2Type();
         isCircleConstructed = false;
     }
 }
@@ -76,7 +76,7 @@ bool Mathematics::ScribeCircle2Circumscribe<Real>::IsCircleConstructed() const n
 }
 
 template <typename Real>
-typename Mathematics::ScribeCircle2Circumscribe<Real>::Circle2 Mathematics::ScribeCircle2Circumscribe<Real>::GetCircle2() const
+typename Mathematics::ScribeCircle2Circumscribe<Real>::Circle2Type Mathematics::ScribeCircle2Circumscribe<Real>::GetCircle2() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
