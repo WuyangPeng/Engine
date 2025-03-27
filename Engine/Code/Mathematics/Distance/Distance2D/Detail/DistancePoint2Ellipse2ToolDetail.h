@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector2Detail.h"
 
 template <typename Real>
-Mathematics::DistancePoint2Ellipse2Tool<Real>::DistancePoint2Ellipse2Tool(Real extent0, Real extent1, const Vector2& vector, Real zeroThreshold)
+Mathematics::DistancePoint2Ellipse2Tool<Real>::DistancePoint2Ellipse2Tool(Real extent0, Real extent1, const Vector2Type& vector, Real zeroThreshold)
     : extent{ extent0, extent1 }, inputVector{ vector }, outputVector{}, squaredDistance{ MathType::GetValue(0) }, zeroThreshold{ zeroThreshold }
 {
     ComputeSquaredDistance();
@@ -50,8 +50,8 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistance()
         invPermute.at(permute.at(index)) = index;
     }
 
-    Vector2 localExtent{};
-    Vector2 localQueryPoint{};
+    Vector2Type localExtent{};
+    Vector2Type localQueryPoint{};
     for (auto index = 0; index < size; ++index)
     {
         const auto permuteIndex = permute.at(index);
@@ -80,15 +80,15 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistance()
 }
 
 template <typename Real>
-void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistanceSpecial(const Vector2& localExtent, const Vector2& queryPoint)
+void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistanceSpecial(const Vector2Type& localExtent, const Vector2Type& queryPoint)
 {
     if (zeroThreshold < queryPoint[1])
     {
         if (zeroThreshold < queryPoint[0])
         {
             // 平分计算F(t)的根t >= -e1 * e1。
-            Vector2 extentSquared{ localExtent[0] * localExtent[0], localExtent[1] * localExtent[1] };
-            Vector2 extentMultiplyQueryPoint{ localExtent[0] * queryPoint[0], localExtent[1] * queryPoint[1] };
+            Vector2Type extentSquared{ localExtent[0] * localExtent[0], localExtent[1] * localExtent[1] };
+            Vector2Type extentMultiplyQueryPoint{ localExtent[0] * queryPoint[0], localExtent[1] * queryPoint[1] };
             auto beginT = -extentSquared[1] + extentMultiplyQueryPoint[1];
             auto endT = -extentSquared[1] + Vector2Tools<Real>::GetLength(extentMultiplyQueryPoint);
             auto middleT = beginT;
@@ -101,7 +101,7 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistanceSpecia
                     break;
                 }
 
-                const Vector2 r{ extentMultiplyQueryPoint[0] / (middleT + extentSquared[0]),
+                const Vector2Type r{ extentMultiplyQueryPoint[0] / (middleT + extentSquared[0]),
                                  extentMultiplyQueryPoint[1] / (middleT + extentSquared[1]) };
                 auto lengthSquaredMinusOne = Vector2Tools<Real>::GetLengthSquared(r) - MathType::GetValue(1);
 
@@ -121,7 +121,7 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistanceSpecia
 
             outputVector[0] = extentSquared[0] * queryPoint[0] / (middleT + extentSquared[0]);
             outputVector[1] = extentSquared[1] * queryPoint[1] / (middleT + extentSquared[1]);
-            const Vector2 distance{ outputVector[0] - queryPoint[0], outputVector[1] - queryPoint[1] };
+            const Vector2Type distance{ outputVector[0] - queryPoint[0], outputVector[1] - queryPoint[1] };
             squaredDistance = Vector2Tools<Real>::GetLengthSquared(distance);
         }
         else  // y0 == 0

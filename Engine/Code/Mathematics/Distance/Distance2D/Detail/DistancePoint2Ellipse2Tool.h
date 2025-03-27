@@ -22,16 +22,16 @@ namespace Mathematics
     public:
         using ClassType = DistancePoint2Ellipse2Tool<Real>;
 
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
         using MathType = Math<Real>;
 
     public:
-        DistancePoint2Ellipse2Tool(Real extent0, Real extent1, const Vector2& vector, Real zeroThreshold);
+        DistancePoint2Ellipse2Tool(Real extent0, Real extent1, const Vector2Type& vector, Real zeroThreshold);
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD Real GetSquaredDistance() const noexcept;
-        NODISCARD Vector2 GetOutputVector() const noexcept;
+        NODISCARD Vector2Type GetOutputVector() const noexcept;
 
     private:
         // 椭圆是(x0 / e0)^2 + (x1 / e1)^2 = 1且e0 >= e1。
@@ -44,12 +44,12 @@ namespace Mathematics
         // 查询点是 (y0,y1)。
         // 函数返回从查询点到椭圆的平方距离。
         // 它也计算最接近(y0,y1)的椭圆点 (x0,x1) 。
-        void ComputeSquaredDistanceSpecial(const Vector2& localExtent, const Vector2& queryPoint);
+        void ComputeSquaredDistanceSpecial(const Vector2Type& localExtent, const Vector2Type& queryPoint);
 
     private:
-        Vector2 extent;
-        Vector2 inputVector;
-        Vector2 outputVector;
+        Vector2Type extent;
+        Vector2Type inputVector;
+        Vector2Type outputVector;
         Real squaredDistance;
         Real zeroThreshold;
     };

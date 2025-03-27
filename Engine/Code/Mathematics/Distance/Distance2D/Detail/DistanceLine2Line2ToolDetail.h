@@ -15,12 +15,12 @@
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
 template <typename Real>
-Mathematics::DistanceLine2Line2Tool<Real>::DistanceLine2Line2Tool(const Vector2& lhsOrigin, const Vector2& lhsDirection, const Vector2& rhsOrigin, const Vector2& rhsDirection)
+Mathematics::DistanceLine2Line2Tool<Real>::DistanceLine2Line2Tool(const Vector2Type& lhsOrigin, const Vector2Type& lhsDirection, const Vector2Type& rhsOrigin, const Vector2Type& rhsDirection)
     : originDifference{ lhsOrigin - rhsOrigin },
-      directionDot{ -Vector2Tools::DotProduct(lhsDirection, rhsDirection) },
-      originDifferenceDotLhsDirection{ Vector2Tools::DotProduct(originDifference, lhsDirection) },
-      originDifferenceDotRhsDirection{ -Vector2Tools::DotProduct(originDifference, rhsDirection) },
-      originDifferenceSquaredLength{ Vector2Tools::GetLengthSquared(originDifference) },
+      directionDot{ -Vector2ToolsType::DotProduct(lhsDirection, rhsDirection) },
+      originDifferenceDotLhsDirection{ Vector2ToolsType::DotProduct(originDifference, lhsDirection) },
+      originDifferenceDotRhsDirection{ -Vector2ToolsType::DotProduct(originDifference, rhsDirection) },
+      originDifferenceSquaredLength{ Vector2ToolsType::GetLengthSquared(originDifference) },
       det{ MathType::FAbs(MathType::GetValue(1) - directionDot * directionDot) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
