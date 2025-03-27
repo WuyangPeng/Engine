@@ -17,9 +17,9 @@
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-Mathematics::SphereCoordinates<Real>::SphereCoordinates(Real r, Real ¦È, Real phi)
+Mathematics::SphereCoordinates<Real>::SphereCoordinates(Real r, Real theta, Real phi)
     : r{ r },
-      theta{ ¦È },
+      theta{ theta },
       phi{ phi }
 {
     if (!IsValid())
