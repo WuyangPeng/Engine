@@ -36,7 +36,7 @@ Mathematics::Cone<N, Real>::Cone() noexcept requires(N == 3)
 
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
-Mathematics::Cone<N, Real>::Cone(const Ray& ray, Real angle) noexcept
+Mathematics::Cone<N, Real>::Cone(const RayType& ray, Real angle) noexcept
     : ray{ ray },
       angle{ angle },
       cosAngle{ MathType::Cos(angle) },
@@ -53,7 +53,7 @@ Mathematics::Cone<N, Real>::Cone(const Ray& ray, Real angle) noexcept
 
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
-Mathematics::Cone<N, Real>::Cone(const Ray& ray, Real angle, Real minHeight) noexcept
+Mathematics::Cone<N, Real>::Cone(const RayType& ray, Real angle, Real minHeight) noexcept
     : ray{ ray },
       angle{ angle },
       cosAngle{ MathType::Cos(angle) },
@@ -70,7 +70,7 @@ Mathematics::Cone<N, Real>::Cone(const Ray& ray, Real angle, Real minHeight) noe
 
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
-Mathematics::Cone<N, Real>::Cone(const Ray& ray, Real angle, Real minHeight, Real maxHeight) noexcept
+Mathematics::Cone<N, Real>::Cone(const RayType& ray, Real angle, Real minHeight, Real maxHeight) noexcept
     : ray{ ray },
       angle{ angle },
       cosAngle{ MathType::Cos(angle) },
@@ -98,7 +98,7 @@ bool Mathematics::Cone<N, Real>::IsValid() const noexcept
 
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
-typename Mathematics::Cone<N, Real>::Ray Mathematics::Cone<N, Real>::GetRay() const noexcept
+typename Mathematics::Cone<N, Real>::RayType Mathematics::Cone<N, Real>::GetRay() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -107,7 +107,7 @@ typename Mathematics::Cone<N, Real>::Ray Mathematics::Cone<N, Real>::GetRay() co
 
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
-void Mathematics::Cone<N, Real>::SetRay(const Ray& aRay) noexcept
+void Mathematics::Cone<N, Real>::SetRay(const RayType& aRay) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
