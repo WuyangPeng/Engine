@@ -25,7 +25,7 @@ Mathematics::BarycentricCoordinates<Real, WindowSize>::BarycentricCoordinates() 
 
 template <typename Real, int WindowSize>
 requires std::is_arithmetic_v<Real> && (WindowSize == 3 || WindowSize == 4)
-Mathematics::BarycentricCoordinates<Real, WindowSize>::BarycentricCoordinates(bool isValid, const Tuple& tuple) noexcept
+Mathematics::BarycentricCoordinates<Real, WindowSize>::BarycentricCoordinates(bool isValid, const TupleType& tuple) noexcept
     : isValid{ isValid }, tuple{ tuple }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_3;
