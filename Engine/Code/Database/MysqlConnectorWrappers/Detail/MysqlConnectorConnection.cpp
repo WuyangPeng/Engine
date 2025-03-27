@@ -222,7 +222,7 @@ Database::BasisDatabase Database::MysqlConnectorConnection::GetBasisDatabase(con
     {
         case DataType::String:
         {
-            const std::string result{ rowView };
+            const std::string result{ static_cast<std::string>(rowView) };
             return BasisDatabase{ fieldName.GetFieldName(), result };
         }
 
