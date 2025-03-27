@@ -15,6 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Time/Timer.h"
 
+#include <algorithm>
 #include <numeric>
 #include <random>
 #include <ranges>
