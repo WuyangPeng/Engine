@@ -29,7 +29,7 @@ namespace Mathematics
         using Ellipsoid3 = Ellipsoid3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
         DistancePoint3Ellipsoid3(const Vector3& point, const Ellipsoid3& ellipsoid) noexcept;

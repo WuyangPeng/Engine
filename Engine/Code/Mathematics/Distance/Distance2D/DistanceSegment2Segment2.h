@@ -31,7 +31,7 @@ namespace Mathematics
         using Vector2Tools = Vector2Tools<Real>;
         using DistanceLine2Line2Tool = DistanceLine2Line2Tool<Real>;
         using MathType = typename ParentType::MathType;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
         DistanceSegment2Segment2(const Segment2& lhsSegment, const Segment2& rhsSegment) noexcept;

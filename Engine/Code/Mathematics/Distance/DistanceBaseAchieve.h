@@ -106,7 +106,7 @@ Real Mathematics::DistanceBase<Real, Vector>::GetZeroThreshold() const noexcept
 }
 
 template <typename Real, typename Vector>
-typename Mathematics::DistanceBase<Real, Vector>::DistanceResult Mathematics::DistanceBase<Real, Vector>::Get() const
+typename Mathematics::DistanceBase<Real, Vector>::DistanceResultType Mathematics::DistanceBase<Real, Vector>::Get() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -117,7 +117,7 @@ typename Mathematics::DistanceBase<Real, Vector>::DistanceResult Mathematics::Di
 }
 
 template <typename Real, typename Vector>
-typename Mathematics::DistanceBase<Real, Vector>::DistanceResult Mathematics::DistanceBase<Real, Vector>::Get(Real t, const Vector& lhsVelocity, const Vector& rhsVelocity) const
+typename Mathematics::DistanceBase<Real, Vector>::DistanceResultType Mathematics::DistanceBase<Real, Vector>::Get(Real t, const Vector& lhsVelocity, const Vector& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -153,7 +153,7 @@ Real Mathematics::DistanceBase<Real, Vector>::GetDerivativeSquared(Real t, const
 }
 
 template <typename Real, typename Vector>
-typename Mathematics::DistanceBase<Real, Vector>::DistanceResult Mathematics::DistanceBase<Real, Vector>::GetInterval(Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity) const
+typename Mathematics::DistanceBase<Real, Vector>::DistanceResultType Mathematics::DistanceBase<Real, Vector>::GetInterval(Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -167,7 +167,7 @@ typename Mathematics::DistanceBase<Real, Vector>::DistanceResult Mathematics::Di
 }
 
 template <typename Real, typename Vector>
-typename Mathematics::DistanceBase<Real, Vector>::DistanceResult Mathematics::DistanceBase<Real, Vector>::GetIntervalSquared(Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity) const
+typename Mathematics::DistanceBase<Real, Vector>::DistanceResultType Mathematics::DistanceBase<Real, Vector>::GetIntervalSquared(Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

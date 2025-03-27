@@ -30,7 +30,7 @@ namespace Mathematics
         using Box3 = Box3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
         DistanceSegment3Box3(const Segment3& segment, const Box3& box) noexcept;

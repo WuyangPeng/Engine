@@ -31,7 +31,7 @@ namespace Mathematics
         using Vector2Tools = Vector2Tools<Real>;
         using DistanceLine2Line2Tool = DistanceLine2Line2Tool<Real>;
         using MathType = typename ParentType::MathType;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
         DistanceRay2Ray2(const Ray2& lhsRay, const Ray2& rhsRay) noexcept;

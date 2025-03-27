@@ -33,7 +33,7 @@ namespace Mathematics
         using Vector3Tools = Vector3Tools<Real>;
         using DistanceLine3Line3Tool = DistanceLine3Line3Tool<Real>;
         using MathType = typename ParentType::MathType;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
         DistanceRay3Segment3(const Ray3& ray, const Segment3& segment) noexcept;

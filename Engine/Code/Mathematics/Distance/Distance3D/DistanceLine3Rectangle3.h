@@ -32,7 +32,7 @@ namespace Mathematics
         using Rectangle3 = Rectangle3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
         DistanceLine3Rectangle3(const Line3& line, const Rectangle3& rectangle) noexcept;

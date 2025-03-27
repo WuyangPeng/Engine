@@ -29,7 +29,7 @@ namespace Mathematics
         using Line3 = Line3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
         DistanceLine3Line3(const Line3& lhsLine, const Line3& rhsLine) noexcept;

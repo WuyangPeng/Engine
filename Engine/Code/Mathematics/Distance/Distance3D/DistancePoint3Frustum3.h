@@ -28,7 +28,7 @@ namespace Mathematics
         using Frustum3 = Frustum3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
         DistancePoint3Frustum3(const Vector3& point, const Frustum3& frustum) noexcept;

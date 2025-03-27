@@ -29,7 +29,7 @@ namespace Mathematics
         using Box2 = Box2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
         DistancePoint2Box2(const Vector2& point, const Box2& ellipse) noexcept;

@@ -30,7 +30,7 @@ namespace Mathematics
         using Line2 = Line2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
         DistancePoint2Line2(const Vector2& point, const Line2& line) noexcept;

@@ -30,7 +30,7 @@ namespace Mathematics
         using Ray2 = Ray2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
         DistancePoint2Ray2(const Vector2& point, const Ray2& ray) noexcept;

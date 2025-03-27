@@ -28,7 +28,7 @@ namespace Mathematics
         using Plane3 = Plane3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
         DistancePoint3Plane3(const Vector3& point, const Plane3& plane) noexcept;

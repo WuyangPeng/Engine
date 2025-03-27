@@ -29,7 +29,7 @@ namespace Mathematics
         using Circle3 = Circle3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
         DistanceCircle3Circle3(const Circle3& lhsCircle, const Circle3& rhsCircle) noexcept;

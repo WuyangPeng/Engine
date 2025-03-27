@@ -30,7 +30,7 @@ namespace Mathematics
         using Triangle3 = Triangle3<Real>;
         using Vector3Tools = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
         DistanceRay3Triangle3(const Ray3& ray, const Triangle3& triangle) noexcept;
