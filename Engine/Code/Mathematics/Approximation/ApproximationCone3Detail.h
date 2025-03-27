@@ -48,8 +48,8 @@ Mathematics::ApproximationCone3<Real>::ApproximationCone3() noexcept
               auto temp1 = deltaDotW * delta;
               for (auto col = 0; col < 3; ++col)
               {
-                  j(row, col) = Math::GetValue(2) * temp0[col];
-                  j(row, col + 3) = -Math::GetValue(2) * temp1[col];
+                  j(row, col) = MathType::GetValue(2) * temp0[col];
+                  j(row, col + 3) = -MathType::GetValue(2) * temp1[col];
               }
           }
       } }
@@ -114,7 +114,7 @@ typename Mathematics::ApproximationCone3<Real>::GaussNewtonMinimizerResultType M
     /// std::min调用防止舍入错误导致数字略大于1。
     /// 夹紧确保std::acos不会返回NaN。
 
-    coneCosAngle = std::min(Math::GetValue(1) / Normalize(coneAxis), Math::GetValue(1));
+    coneCosAngle = std::min(MathType::GetValue(1) / Normalize(coneAxis), MathType::GetValue(1));
     coneAngle = std::acos(coneCosAngle);
 
     points.clear();
@@ -167,7 +167,7 @@ typename Mathematics::ApproximationCone3<Real>::LevenbergMarquardtMinimizerResul
     /// std::min调用防止舍入错误导致数字略大于1。
     /// 夹紧确保 std::acos不会返回NaN。
 
-    coneCosAngle = std::min(Math::GetValue(1) / Normalize(coneAxis), Math::GetValue(1));
+    coneCosAngle = std::min(MathType::GetValue(1) / Normalize(coneAxis), MathType::GetValue(1));
     coneAngle = std::acos(coneCosAngle);
 
     points.clear();

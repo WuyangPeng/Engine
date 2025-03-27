@@ -26,7 +26,7 @@ namespace Mathematics
     public:
         using ClassType = LevenbergMarquardtMinimizer<T>;
 
-        using Math = Math<T>;
+        using MathType = Math<T>;
         using LevenbergMarquardtMinimizerResultType = LevenbergMarquardtMinimizerResult<T>;
 
         /// 域向量、范围向量、函数F和雅可比J的方便类型。
@@ -91,7 +91,7 @@ namespace Mathematics
                                                     LevenbergMarquardtMinimizerResultType& result);
 
     private:
-        using CholeskyDecomposition = CholeskyDecomposition<T>;
+        using CholeskyDecompositionType = CholeskyDecomposition<T>;
 
     private:
         int numPDimensions;
@@ -106,7 +106,7 @@ namespace Mathematics
         JtjMatrix jtj;
         JtfVector negJtf;
 
-        CholeskyDecomposition decomposer;
+        CholeskyDecompositionType decomposer;
 
         bool useJFunction;
     };

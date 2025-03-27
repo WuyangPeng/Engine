@@ -104,7 +104,7 @@ typename Mathematics::LevenbergMarquardtMinimizer<T>::LevenbergMarquardtMinimize
     {
         maxAdjustments = 1;
         lambdaFactor = T{};
-        lambdaAdjust = Math::GetValue(1);
+        lambdaAdjust = MathType::GetValue(1);
     }
 
     /// 作为一个简单的预防措施，确保公差为非负。

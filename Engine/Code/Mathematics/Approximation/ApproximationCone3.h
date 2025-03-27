@@ -42,7 +42,7 @@ namespace Mathematics
         using Vector3Container = std::vector<Vector3>;
         using VariableLengthVectorType = VariableLengthVector<Real>;
         using VariableMatrixType = VariableMatrix<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using GaussNewtonMinimizerResultType = GaussNewtonMinimizerResult<Real>;
         using LevenbergMarquardtMinimizerResultType = LevenbergMarquardtMinimizerResult<Real>;
 
