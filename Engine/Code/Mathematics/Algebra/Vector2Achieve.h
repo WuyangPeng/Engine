@@ -67,7 +67,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector2<Real>::IsZero(Real
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (Math::FAbs(x) <= epsilon && Math::FAbs(y) <= epsilon)
+    if (MathType::FAbs(x) <= epsilon && MathType::FAbs(y) <= epsilon)
         return true;
     else
         return false;
@@ -79,7 +79,7 @@ void Mathematics::Vector2<Real>::ZeroOut() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    SetCoordinate(Math::GetValue(0), Math::GetValue(0));
+    SetCoordinate(MathType::GetValue(0), MathType::GetValue(0));
 }
 
 template <typename Real>
@@ -173,7 +173,7 @@ Real Mathematics::Vector2<Real>::GetMaxAbsComp() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return std::max(Math::FAbs(GetX()), Math::FAbs(GetY()));
+    return std::max(MathType::FAbs(GetX()), MathType::FAbs(GetY()));
 }
 
 template <typename Real>
@@ -202,7 +202,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector2<Real>::IsNormalize
 
     const auto length = ToolsType::GetLength(*this);
 
-    if (Math::FAbs(length - Math::GetValue(1)) <= epsilon)
+    if (MathType::FAbs(length - MathType::GetValue(1)) <= epsilon)
         return true;
     else
         return false;
@@ -305,7 +305,7 @@ Mathematics::Vector2<Real>& Mathematics::Vector2<Real>::operator/=(Real rhs) noe
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (Math::GetZeroTolerance() < Math::FAbs(rhs))
+    if (MathType::GetZeroTolerance() < MathType::FAbs(rhs))
     {
         x /= rhs;
         y /= rhs;
@@ -331,15 +331,15 @@ typename Mathematics::Vector2<Real>::BarycentricCoordinates Mathematics::Vector2
 
     auto det = ToolsType::DotPerp(difference.at(xIndex), difference.at(yIndex));
 
-    if (epsilon < Math::FAbs(det))
+    if (epsilon < MathType::FAbs(det))
     {
         constexpr auto z = pointSize;
 
         CoreTools::Tuple<z + 1, Real> bary{ ToolsType::DotPerp(difference.at(z), difference.at(yIndex)) / det,
                                             ToolsType::DotPerp(difference.at(xIndex), difference.at(z)) / det,
-                                            Math::GetValue(0) };
+                                            MathType::GetValue(0) };
 
-        bary[z] = Math::GetValue(1) - bary[xIndex] - bary[yIndex];
+        bary[z] = MathType::GetValue(1) - bary[xIndex] - bary[yIndex];
 
         return BarycentricCoordinates{ true, bary };
     }

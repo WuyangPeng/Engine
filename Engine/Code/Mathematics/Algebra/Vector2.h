@@ -43,7 +43,7 @@ namespace Mathematics
 
         using ClassType = Vector2<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using BarycentricCoordinates = BarycentricCoordinates<Real, pointSize + 1>;
         using ArrayType = std::array<Real, pointSize>;
         using ToolsType = Vector2Tools<Real>;
@@ -79,7 +79,7 @@ namespace Mathematics
         // 坐标访问
         NODISCARD Real GetX() const noexcept;
         NODISCARD Real GetY() const noexcept;
-        NODISCARD bool IsZero(Real epsilon = Math::GetZeroTolerance()) const noexcept;
+        NODISCARD bool IsZero(Real epsilon = MathType::GetZeroTolerance()) const noexcept;
 
         void SetCoordinate(const ArrayType& coordinate);
         NODISCARD ArrayType GetCoordinate() const noexcept;
@@ -88,11 +88,11 @@ namespace Mathematics
         void SetCoordinate(Real aX, Real aY) noexcept;
         void SetX(Real aX) noexcept;
         void SetY(Real aY) noexcept;
-        void Normalize(Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
-        void RobustNormalize(Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void Normalize(Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void RobustNormalize(Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        NODISCARD bool IsNormalize(Real epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        NODISCARD Vector2 GetNormalize(Real epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD bool IsNormalize(Real epsilon = MathType::GetZeroTolerance()) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD Vector2 GetNormalize(Real epsilon = MathType::GetZeroTolerance()) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         NODISCARD const Real& operator[](int index) const;
         NODISCARD Real& operator[](int index);
@@ -116,19 +116,19 @@ namespace Mathematics
         // (1,0)
         NODISCARD static constexpr Vector2 GetUnitX()
         {
-            return Vector2{ Math::GetValue(1), Math::GetValue(0) };
+            return Vector2{ MathType::GetValue(1), MathType::GetValue(0) };
         }
 
         // (0,1)
         NODISCARD static constexpr Vector2 GetUnitY()
         {
-            return Vector2{ Math::GetValue(0), Math::GetValue(1) };
+            return Vector2{ MathType::GetValue(0), MathType::GetValue(1) };
         }
 
         // (1,1)
         NODISCARD static constexpr Vector2 GetOne()
         {
-            return Vector2{ Math::GetValue(1), Math::GetValue(1) };
+            return Vector2{ MathType::GetValue(1), MathType::GetValue(1) };
         }
 
         // 相对于计算出点V的重心坐标到三角形<V0,V1,V2>
@@ -136,7 +136,7 @@ namespace Mathematics
         // 这里b0 + b1 + b2 = 1。
         // 当且仅当{V0，V1，V2}是线性无关组时返回值是有效的。
         // 数值上，测试 |det[V0 V1 V2]| <= epsilon。
-        NODISCARD BarycentricCoordinates GetBarycentrics(const Vector2& vector0, const Vector2& vector1, const Vector2& vector2, const Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD BarycentricCoordinates GetBarycentrics(const Vector2& vector0, const Vector2& vector1, const Vector2& vector2, const Real epsilon = MathType::GetZeroTolerance()) const;
 
         NODISCARD Vector2 GetMove(Real t, const Vector2& velocity) const;
 
