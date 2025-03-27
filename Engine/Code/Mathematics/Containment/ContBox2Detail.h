@@ -34,21 +34,21 @@ bool Mathematics::ContBox2<Real>::IsValid() const noexcept
 
 // static
 template <typename Real>
-typename Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::ContAlignedBox(const Points& points)
+typename Mathematics::ContBox2<Real>::Box2Type Mathematics::ContBox2<Real>::ContAlignedBox(const Points& points)
 {
     const auto aabb = Vector2Tools<Real>::ComputeExtremes(points);
     const auto halfDiagonal = MathType::GetRational(1, 2) * (aabb.GetMaxPoint() - aabb.GetMinPoint());
 
-    return Box2{ MathType::GetRational(1, 2) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
-                 Vector2::GetUnitX(),
-                 Vector2::GetUnitY(),
+    return Box2Type{ MathType::GetRational(1, 2) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
+                 Vector2Type::GetUnitX(),
+                 Vector2Type::GetUnitY(),
                  halfDiagonal[0],
                  halfDiagonal[1] };
 }
 
 // static
 template <typename Real>
-typename Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::ContOrientedBox(const Points& points)
+typename Mathematics::ContBox2<Real>::Box2Type Mathematics::ContBox2<Real>::ContOrientedBox(const Points& points)
 {
     const GaussPointsFit2<Real> gaussPointsFit2{ points };
     const auto box = gaussPointsFit2.GetBox2();
@@ -86,12 +86,12 @@ typename Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::ContOrie
     const auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * MathType::GetRational(1, 2);
     const auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * MathType::GetRational(1, 2);
 
-    return Box2{ center, box.GetAxis0(), box.GetAxis1(), firstExtent, secondExtent };
+    return Box2Type{ center, box.GetAxis0(), box.GetAxis1(), firstExtent, secondExtent };
 }
 
 // static
 template <typename Real>
-bool Mathematics::ContBox2<Real>::InBox(const Vector2& point, const Box2& box)
+bool Mathematics::ContBox2<Real>::InBox(const Vector2Type& point, const Box2Type& box)
 {
     const auto diff = point - box.GetCenter();
     const auto firstCoeff = Vector2Tools<Real>::DotProduct(diff, box.GetAxis0());
@@ -109,7 +109,7 @@ bool Mathematics::ContBox2<Real>::InBox(const Vector2& point, const Box2& box)
 
 // static
 template <typename Real>
-typename Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::MergeBoxes(const Box2& lhs, const Box2& rhs)
+typename Mathematics::ContBox2<Real>::Box2Type Mathematics::ContBox2<Real>::MergeBoxes(const Box2Type& lhs, const Box2Type& rhs)
 {
     // 在包围盒中心的第一个猜想。输入包围盒顶点投影到确定的平均包围盒的轴，
     // 此值将在后面进行更新。
@@ -117,7 +117,7 @@ typename Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::MergeBox
 
     // 合并的包围盒的轴是输入包围盒轴的平均值。
     // 如果需要的话，第二个包围盒的轴被取负，这样它们形成与第一个包围盒的轴线为锐角。
-    Vector2 firstAxis{};
+    Vector2Type firstAxis{};
     if (MathType::GetValue(0) <= Vector2Tools<Real>::DotProduct(lhs.GetAxis0(), rhs.GetAxis0()))
     {
         firstAxis = MathType::GetRational(1, 2) * (lhs.GetAxis0() + rhs.GetAxis0());
@@ -172,7 +172,7 @@ typename Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::MergeBox
     const auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * MathType::GetRational(1, 2);
     const auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * MathType::GetRational(1, 2);
 
-    return Box2{ center, firstAxis, secondAxis, firstExtent, secondExtent };
+    return Box2Type{ center, firstAxis, secondAxis, firstExtent, secondExtent };
 }
 
 #endif  // MATHEMATICS_CONTAINMENT_CONT_BOX2_DETAIL_H
