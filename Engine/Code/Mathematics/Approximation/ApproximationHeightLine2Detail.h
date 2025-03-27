@@ -70,7 +70,7 @@ bool Mathematics::ApproximationHeightLine2<Real>::FitIndexed(const ObservationTy
             {
                 parameters.first = mean;
                 parameters.second[0] = covar01 / covar00;
-                parameters.second[1] = Math::GetValue(-1);
+                parameters.second[1] = MathType::GetValue(-1);
                 return true;
             }
         }
