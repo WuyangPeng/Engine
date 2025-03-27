@@ -27,8 +27,8 @@ namespace Mathematics::Algebra
     public:
         using ClassType = Matrix<NumRows, NumColumns, Real>;
 
-        using Math = Math<Real>;
-        using MatrixTable = MatrixTable<NumRows, NumColumns, Real>;
+        using MathType = Math<Real>;
+        using MatrixTableType = MatrixTable<NumRows, NumColumns, Real>;
         static constexpr auto numElements = NumRows * NumColumns;
         using Container = std::array<Real, numElements>;
         using BaseContainer = std::vector<Real>;
@@ -125,7 +125,7 @@ namespace Mathematics::Algebra
         Matrix& operator/=(Real scalar);
 
     private:
-        MatrixTable table;
+        MatrixTableType table;
     };
 
     template <int NumRows, int NumColumns, typename Real>
