@@ -26,8 +26,8 @@ namespace Mathematics
     public:
         using ClassType = CylindricalCoordinates<Real>;
 
-        using Math = Math<Real>;
-        using Vector3 = Vector3<Real>;
+        using MathType = Math<Real>;
+        using Vector3Type = Vector3<Real>;
 
     public:
         constexpr CylindricalCoordinates() noexcept
@@ -41,7 +41,7 @@ namespace Mathematics
 
         void SetCartesian(Real xCoordinate, Real yCoordinate, Real zCoordinate) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        NODISCARD Vector3 GetCartesian() const noexcept;
+        NODISCARD Vector3Type GetCartesian() const noexcept;
 
         NODISCARD constexpr Real GetR() const noexcept
         {
@@ -60,7 +60,7 @@ namespace Mathematics
 
         void SetR(Real radius);
 
-        void SetPhi(Real phi);
+        void SetPhi(Real aPhi);
 
         constexpr void SetY(Real yCoordinate) noexcept
         {
