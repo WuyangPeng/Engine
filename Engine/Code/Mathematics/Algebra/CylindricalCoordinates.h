@@ -31,11 +31,11 @@ namespace Mathematics
 
     public:
         constexpr CylindricalCoordinates() noexcept
-            : r{}, ¦Õ{}, y{}
+            : r{}, phi{}, y{}
         {
         }
 
-        CylindricalCoordinates(Real r, Real ¦Õ, Real y);
+        CylindricalCoordinates(Real r, Real phi, Real y);
 
         NODISCARD bool IsValid() const noexcept;
 
@@ -50,7 +50,7 @@ namespace Mathematics
 
         NODISCARD constexpr Real GetPhi() const noexcept
         {
-            return ¦Õ;
+            return phi;
         }
 
         NODISCARD constexpr Real GetY() const noexcept
@@ -69,7 +69,7 @@ namespace Mathematics
 
     private:
         Real r;
-        Real ¦Õ;
+        Real phi;
         Real y;
     };
 }
