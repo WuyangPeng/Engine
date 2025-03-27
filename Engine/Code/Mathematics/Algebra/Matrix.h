@@ -34,16 +34,16 @@ namespace Mathematics
     public:
         using ClassType = Matrix<Real>;
 
-        using Math = Math<Real>;
-        using APoint = APoint<Real>;
-        using AVector = AVector<Real>;
-        using Matrix3 = Matrix3<Real>;
-        using Vector4 = Vector4<Real>;
-        using Matrix4 = Matrix4<Real>;
-        using HomogeneousPoint = HomogeneousPoint<Real>;
+        using MathType = Math<Real>;
+        using APointType = APoint<Real>;
+        using AVectorType = AVector<Real>;
+        using Matrix3Type = Matrix3<Real>;
+        using Vector4Type = Vector4<Real>;
+        using Matrix4Type = Matrix4<Real>;
+        using HomogeneousPointType = HomogeneousPoint<Real>;
 
-        constexpr static auto rowSize = HomogeneousPoint::pointSize;
-        constexpr static auto columnSize = HomogeneousPoint::pointSize;
+        constexpr static auto rowSize = HomogeneousPointType::pointSize;
+        constexpr static auto columnSize = HomogeneousPointType::pointSize;
         constexpr static auto entrySize = rowSize * columnSize;
 
         using ContainerType = std::vector<Real>;
@@ -97,26 +97,26 @@ namespace Mathematics
         // 创建一个对角矩阵,
         constexpr Matrix(Real member00, Real member11, Real member22) noexcept
             : entry{ Create(member00,
-                            Math::GetValue(0),
-                            Math::GetValue(0),
-                            Math::GetValue(0),
-                            Math::GetValue(0),
+                            MathType::GetValue(0),
+                            MathType::GetValue(0),
+                            MathType::GetValue(0),
+                            MathType::GetValue(0),
                             member11,
-                            Math::GetValue(0),
-                            Math::GetValue(0),
-                            Math::GetValue(0),
-                            Math::GetValue(0),
+                            MathType::GetValue(0),
+                            MathType::GetValue(0),
+                            MathType::GetValue(0),
+                            MathType::GetValue(0),
                             member22,
-                            Math::GetValue(0),
-                            Math::GetValue(0),
-                            Math::GetValue(0),
-                            Math::GetValue(0),
-                            Math::GetValue(1),
+                            MathType::GetValue(0),
+                            MathType::GetValue(0),
+                            MathType::GetValue(0),
+                            MathType::GetValue(0),
+                            MathType::GetValue(1),
                             MatrixMajorFlags::Row) }
         {
         }
 
-        explicit Matrix(const Matrix3& rhs);
+        explicit Matrix(const Matrix3Type& rhs);
 
         // 创建矩阵来自数组数字。
         // 输入数组是基于MatrixTypeFlags的输入的解释
@@ -129,13 +129,13 @@ namespace Mathematics
         // 创建基于输入矢量的矩阵。MatrixMajorFlags解释为
         // MatrixTypeFlagsRow：向量是矩阵的行
         // MatrixTypeFlagsColumn：向量是矩阵的列
-        Matrix(const Vector4& vector0, const Vector4& vector1, const Vector4& vector2, const Vector4& vector3, MatrixMajorFlags majorFlag);
-        Matrix(const AVector& vector0, const AVector& vector1, const AVector& vector2, const APoint& point, MatrixMajorFlags majorFlag);
+        Matrix(const Vector4Type& vector0, const Vector4Type& vector1, const Vector4Type& vector2, const Vector4Type& vector3, MatrixMajorFlags majorFlag);
+        Matrix(const AVectorType& vector0, const AVectorType& vector1, const AVectorType& vector2, const APointType& point, MatrixMajorFlags majorFlag);
 
         // 创建一个旋转矩阵（角度为正->逆时针方向）。angle必须为弧度，不是角度。
-        Matrix(const AVector& axis, Real angle);
+        Matrix(const AVectorType& axis, Real angle);
 
-        Matrix& operator=(const Matrix3& rhs);
+        Matrix& operator=(const Matrix3Type& rhs);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -143,18 +143,18 @@ namespace Mathematics
         NODISCARD EntryTypeConstIter end() const noexcept;
 
         // Matrix的上3x3的块复制到Matrix3对象。
-        NODISCARD Matrix3 GetMatrix3() const noexcept;
+        NODISCARD Matrix3Type GetMatrix3() const noexcept;
 
-        NODISCARD Matrix4 GetMatrix4() const noexcept;
+        NODISCARD Matrix4Type GetMatrix4() const noexcept;
 
         // 坐标访问
         NODISCARD EntryType GetData() const noexcept;
         NODISCARD const Real& operator()(int row, int column) const;
         NODISCARD Real& operator()(int row, int column);
-        void SetRow(int row, const HomogeneousPoint& point);
-        NODISCARD HomogeneousPoint GetRow(int row) const;
-        void SetColumn(int column, const HomogeneousPoint& point);
-        NODISCARD HomogeneousPoint GetColumn(int column) const;
+        void SetRow(int row, const HomogeneousPointType& point);
+        NODISCARD HomogeneousPointType GetRow(int row) const;
+        void SetColumn(int column, const HomogeneousPointType& point);
+        NODISCARD HomogeneousPointType GetColumn(int column) const;
 
         template <int Index>
         NODISCARD constexpr Real GetValue() const noexcept
@@ -262,38 +262,38 @@ namespace Mathematics
         void MakeZero();  // Z
         void MakeIdentity() noexcept;  // I
         void MakeDiagonal(Real member00, Real member11, Real member22) noexcept;  // D
-        void MakeRotation(const AVector& axis, Real angle);  // Real
+        void MakeRotation(const AVectorType& axis, Real angle);  // Real
 
         NODISCARD Matrix Transpose() const noexcept;  // M^T
         NODISCARD Matrix Adjoint() const noexcept;  // M^{adj}
-        NODISCARD Matrix Inverse(const Real epsilon = Math::GetZeroTolerance()) const;  // M^{-1}
+        NODISCARD Matrix Inverse(const Real epsilon = MathType::GetZeroTolerance()) const;  // M^{-1}
 
         /// 反转输入矩阵的左上角3x3块。
-        NODISCARD Matrix Invert3x3(const Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Matrix Invert3x3(const Real epsilon = MathType::GetZeroTolerance()) const;
 
         NODISCARD Real Determinant() const noexcept;  // det(M)
 
         Matrix& operator*=(const Matrix& rhs) noexcept;
 
         // 只对左上角3x3矩阵进行运算
-        NODISCARD Matrix TimesDiagonal(const APoint& diagonal) const noexcept;  // M * D
-        NODISCARD Matrix DiagonalTimes(const APoint& diagonal) const noexcept;  // D * M
+        NODISCARD Matrix TimesDiagonal(const APointType& diagonal) const noexcept;  // M * D
+        NODISCARD Matrix DiagonalTimes(const APointType& diagonal) const noexcept;  // D * M
 
         // 适用于左上3x3的块
         void Orthonormalize() noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 计算一个二次型。
         // p0^T * M * p1
-        NODISCARD Real QuadraticForm(const HomogeneousPoint& point0, const HomogeneousPoint& point1) const noexcept;
+        NODISCARD Real QuadraticForm(const HomogeneousPointType& point0, const HomogeneousPointType& point1) const noexcept;
 
         // 投影矩阵到一个指定的平面，这个平面包含“原点”和单位长度的“向量”。
-        void MakeObliqueProjection(const APoint& origin, const AVector& normal, const AVector& direction);
+        void MakeObliqueProjection(const APointType& origin, const AVectorType& normal, const AVectorType& direction);
 
         // 设置透视投影矩阵到指定的平面上，这个平面有一个“origin”和单位长度的“normal”，“eye”是投影的原点。
-        void MakePerspectiveProjection(const APoint& origin, const AVector& normal, const APoint& eye);
+        void MakePerspectiveProjection(const APointType& origin, const AVectorType& normal, const APointType& eye);
 
         // 反射矩阵到一个指定的平面，这个平面包含“原点”和单位长度的“向量”。
-        void MakeReflection(const APoint& origin, const AVector& normal);
+        void MakeReflection(const APointType& origin, const AVectorType& normal);
 
         NODISCARD Real GetNorm() const;
 
@@ -375,22 +375,22 @@ namespace Mathematics
             }
             else
             {
-                return EntryType{ Math::GetValue(1),
-                                  Math::GetValue(0),
-                                  Math::GetValue(0),
-                                  Math::GetValue(0),
-                                  Math::GetValue(0),
-                                  Math::GetValue(1),
-                                  Math::GetValue(0),
-                                  Math::GetValue(0),
-                                  Math::GetValue(0),
-                                  Math::GetValue(0),
-                                  Math::GetValue(1),
-                                  Math::GetValue(0),
-                                  Math::GetValue(0),
-                                  Math::GetValue(0),
-                                  Math::GetValue(0),
-                                  Math::GetValue(1) };
+                return EntryType{ MathType::GetValue(1),
+                                  MathType::GetValue(0),
+                                  MathType::GetValue(0),
+                                  MathType::GetValue(0),
+                                  MathType::GetValue(0),
+                                  MathType::GetValue(1),
+                                  MathType::GetValue(0),
+                                  MathType::GetValue(0),
+                                  MathType::GetValue(0),
+                                  MathType::GetValue(0),
+                                  MathType::GetValue(1),
+                                  MathType::GetValue(0),
+                                  MathType::GetValue(0),
+                                  MathType::GetValue(0),
+                                  MathType::GetValue(0),
+                                  MathType::GetValue(1) };
             }
         }
 

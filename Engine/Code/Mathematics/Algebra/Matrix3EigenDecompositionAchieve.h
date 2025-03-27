@@ -29,12 +29,12 @@ Mathematics::Matrix3EigenDecomposition<Real>::Matrix3EigenDecomposition(const Ma
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::Matrix3EigenDecomposition<Real>::IsValid() const noexcept
 {
-    if (Math::FAbs(diagonal.template GetValue<0, 1>()) <= epsilon &&
-        Math::FAbs(diagonal.template GetValue<0, 2>()) <= epsilon &&
-        Math::FAbs(diagonal.template GetValue<1, 0>()) <= epsilon &&
-        Math::FAbs(diagonal.template GetValue<1, 2>()) <= epsilon &&
-        Math::FAbs(diagonal.template GetValue<2, 0>()) <= epsilon &&
-        Math::FAbs(diagonal.template GetValue<2, 1>()) <= epsilon)
+    if (MathType::FAbs(diagonal.template GetValue<0, 1>()) <= epsilon &&
+        MathType::FAbs(diagonal.template GetValue<0, 2>()) <= epsilon &&
+        MathType::FAbs(diagonal.template GetValue<1, 0>()) <= epsilon &&
+        MathType::FAbs(diagonal.template GetValue<1, 2>()) <= epsilon &&
+        MathType::FAbs(diagonal.template GetValue<2, 0>()) <= epsilon &&
+        MathType::FAbs(diagonal.template GetValue<2, 1>()) <= epsilon)
     {
         return true;
     }
