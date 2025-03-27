@@ -26,11 +26,11 @@
 
 template <typename T>
 requires std::is_floating_point_v<T>
-Mathematics::BoundingSphere<T>::BoundingSphere(const APoint& center, T radius)
+Mathematics::BoundingSphere<T>::BoundingSphere(const APointType& center, T radius)
     : center{ center }, radius{ radius }
 {
     // 半径必须为正数。零半径表示边界无效。
-    if (radius < Math::GetValue(0))
+    if (radius < MathType::GetValue(0))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("半径必须为正数"s))
     }
@@ -44,7 +44,7 @@ template <typename T>
 requires std::is_floating_point_v<T>
 bool Mathematics::BoundingSphere<T>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= radius)
+    if (MathType::GetValue(0) <= radius)
         return true;
     else
         return false;
@@ -54,7 +54,7 @@ bool Mathematics::BoundingSphere<T>::IsValid() const noexcept
 
 template <typename T>
 requires std::is_floating_point_v<T>
-void Mathematics::BoundingSphere<T>::SetCenter(const APoint& aCenter) noexcept
+void Mathematics::BoundingSphere<T>::SetCenter(const APointType& aCenter) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -67,7 +67,7 @@ void Mathematics::BoundingSphere<T>::SetRadius(T aRadius)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (aRadius < Math::GetValue(0))
+    if (aRadius < MathType::GetValue(0))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("半径必须为正数"s))
     }
@@ -77,7 +77,7 @@ void Mathematics::BoundingSphere<T>::SetRadius(T aRadius)
 
 template <typename T>
 requires std::is_floating_point_v<T>
-typename Mathematics::BoundingSphere<T>::APoint Mathematics::BoundingSphere<T>::GetCenter() const noexcept
+typename Mathematics::BoundingSphere<T>::APointType Mathematics::BoundingSphere<T>::GetCenter() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -95,7 +95,7 @@ T Mathematics::BoundingSphere<T>::GetRadius() const noexcept
 
 template <typename T>
 requires std::is_floating_point_v<T>
-Mathematics::NumericalValueSymbol Mathematics::BoundingSphere<T>::WhichSide(const Plane& plane, T epsilon) const noexcept
+Mathematics::NumericalValueSymbol Mathematics::BoundingSphere<T>::WhichSide(const PlaneType& plane, T epsilon) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -141,7 +141,7 @@ void Mathematics::BoundingSphere<T>::GrowToContain(const BoundingSphere& bound, 
 
     if (lengthSquare <= radiusDifferenceSquare)
     {
-        if (Math::GetValue(0) <= radiusDifference)
+        if (MathType::GetValue(0) <= radiusDifference)
         {
             center = bound.center;
             radius = bound.radius;
@@ -150,19 +150,19 @@ void Mathematics::BoundingSphere<T>::GrowToContain(const BoundingSphere& bound, 
         return;
     }
 
-    const auto length = Math::Sqrt(lengthSquare);
+    const auto length = MathType::Sqrt(lengthSquare);
     if (epsilon < length)
     {
-        const auto coefficient = (length + radiusDifference) / (Math::GetValue(2) * length);
+        const auto coefficient = (length + radiusDifference) / (MathType::GetValue(2) * length);
         center += coefficient * centerDifference;
     }
 
-    radius = Math::GetRational(1, 2) * (length + radius + bound.radius);
+    radius = MathType::GetRational(1, 2) * (length + radius + bound.radius);
 }
 
 template <typename T>
 requires std::is_floating_point_v<T>
-Mathematics::BoundingSphere<T> Mathematics::BoundingSphere<T>::TransformBy(const Transform& transform) const
+Mathematics::BoundingSphere<T> Mathematics::BoundingSphere<T>::TransformBy(const TransformType& transform) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -180,7 +180,7 @@ void Mathematics::BoundingSphere<T>::ComputeFromData(int numElements, int stride
 
     APointContainer container{};
 
-    const auto difference = (stride == 0) ? 0 : (stride - CoreTools::GetStreamSize<T>() * APoint::pointSize);
+    const auto difference = (stride == 0) ? 0 : (stride - CoreTools::GetStreamSize<T>() * APointType::pointSize);
 
     if (difference < 0)
     {
@@ -225,7 +225,7 @@ void Mathematics::BoundingSphere<T>::ComputeFromData(const APointContainer& data
     MATHEMATICS_CLASS_IS_VALID_1;
 
     // 中点是位置的平均值
-    APoint sum{};
+    APointType sum{};
     for (const auto& position : data)
     {
         sum += position;
@@ -234,7 +234,7 @@ void Mathematics::BoundingSphere<T>::ComputeFromData(const APointContainer& data
     center = sum / boost::numeric_cast<T>(data.size());
 
     // 半径是位置到中心的最大距离
-    auto maxRadiusSquared = Math::GetValue(0);
+    auto maxRadiusSquared = MathType::GetValue(0);
     for (const auto& position : data)
     {
         const auto difference = position - center;
@@ -247,27 +247,27 @@ void Mathematics::BoundingSphere<T>::ComputeFromData(const APointContainer& data
         }
     }
 
-    radius = Math::Sqrt(maxRadiusSquared);
+    radius = MathType::Sqrt(maxRadiusSquared);
 }
 
 template <typename T>
 requires std::is_floating_point_v<T>
-bool Mathematics::BoundingSphere<T>::TestIntersection(const APoint& origin, const AVector& direction, T tMin, T tMax) const
+bool Mathematics::BoundingSphere<T>::TestIntersection(const APointType& origin, const AVectorType& direction, T tMin, T tMax) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    if (radius <= Math::GetZeroTolerance())
+    if (radius <= MathType::GetZeroTolerance())
     {
         // 边界是无效的，不相交。
         return false;
     }
 
-    if (Math::Approximate(tMin, -Math::maxReal))
+    if (MathType::Approximate(tMin, -MathType::maxReal))
     {
         return TestLineIntersection(origin, direction, tMax);
     }
 
-    if (Math::Approximate(tMax, Math::maxReal))
+    if (MathType::Approximate(tMax, MathType::maxReal))
     {
         return TestRayIntersection(origin, direction, tMin);
     }
@@ -277,9 +277,9 @@ bool Mathematics::BoundingSphere<T>::TestIntersection(const APoint& origin, cons
 
 template <typename T>
 requires std::is_floating_point_v<T>
-bool Mathematics::BoundingSphere<T>::TestLineIntersection(const APoint& origin, const AVector& direction, T tMax) const noexcept(gAssert < 2 || gMathematicsAssert < 2)
+bool Mathematics::BoundingSphere<T>::TestLineIntersection(const APointType& origin, const AVectorType& direction, T tMax) const noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
-    MATHEMATICS_ASSERTION_2(Math::Approximate(tMax, Math::maxReal), "tMax对线必须是无穷大。\n");
+    MATHEMATICS_ASSERTION_2(MathType::Approximate(tMax, MathType::maxReal), "tMax对线必须是无穷大。\n");
 
     System::UnusedFunction(tMax);
 
@@ -294,9 +294,9 @@ bool Mathematics::BoundingSphere<T>::TestLineIntersection(const APoint& origin, 
 
 template <typename T>
 requires std::is_floating_point_v<T>
-bool Mathematics::BoundingSphere<T>::TestRayIntersection(const APoint& origin, const AVector& direction, T tMin) const noexcept(gAssert < 2 || gMathematicsAssert < 2)
+bool Mathematics::BoundingSphere<T>::TestRayIntersection(const APointType& origin, const AVectorType& direction, T tMin) const noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
-    MATHEMATICS_ASSERTION_2(Math::Approximate(tMin, Math::GetValue(0)), "tMin在射线中必须是零。\n");
+    MATHEMATICS_ASSERTION_2(MathType::Approximate(tMin, MathType::GetValue(0)), "tMin在射线中必须是零。\n");
 
     System::UnusedFunction(tMin);
 
@@ -326,13 +326,13 @@ bool Mathematics::BoundingSphere<T>::TestRayIntersection(const APoint& origin, c
 
 template <typename T>
 requires std::is_floating_point_v<T>
-bool Mathematics::BoundingSphere<T>::TestSegmentIntersection(const APoint& origin, const AVector& direction, T tMin, T tMax) const
+bool Mathematics::BoundingSphere<T>::TestSegmentIntersection(const APointType& origin, const AVectorType& direction, T tMin, T tMax) const
 {
     MATHEMATICS_ASSERTION_1(tMin < tMax, "tmin < tmax在线段中的必需的。\n");
 
     // 测试球——线段相交
 
-    const auto segmentExtent = Math::GetRational(1, 2) * (tMin + tMax);
+    const auto segmentExtent = MathType::GetRational(1, 2) * (tMin + tMax);
     const auto segmentOrigin = origin + segmentExtent * direction;
 
     const auto pointDifference = segmentOrigin - center;
@@ -351,7 +351,7 @@ bool Mathematics::BoundingSphere<T>::TestSegmentIntersection(const APoint& origi
         return false;
     }
 
-    auto absDot = Math::FAbs(dot);
+    auto absDot = MathType::FAbs(dot);
     auto temp = segmentExtent - absDot;
 
     return temp * temp <= discriminant || absDot <= segmentExtent;
@@ -378,8 +378,8 @@ void Mathematics::BoundingSphere<T>::ReadAggregate(CoreTools::BufferSource& sour
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    APoint aCenter{};
-    auto aRadius = Math::GetValue(0);
+    APointType aCenter{};
+    auto aRadius = MathType::GetValue(0);
 
     source.ReadAggregate(aCenter);
     source.Read(aRadius);
