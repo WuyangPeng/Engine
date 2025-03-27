@@ -30,23 +30,23 @@ namespace Mathematics
         using ClassType = EigenDecomposition<Real>;
 
         using MathType = Math<Real>;
-        using Matrix2 = Matrix2<Real>;
-        using Matrix3 = Matrix3<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vector3 = Vector3<Real>;
-        using VariableMatrix = VariableMatrix<Real>;
-        using VariableLengthVector = VariableLengthVector<Real>;
+        using Matrix2Type = Matrix2<Real>;
+        using Matrix3Type = Matrix3<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Vector3Type = Vector3<Real>;
+        using VariableMatrixType = VariableMatrix<Real>;
+        using VariableLengthVectorType = VariableLengthVector<Real>;
 
     public:
         // 一个特征系统的矩阵必须是对称的。
         explicit EigenDecomposition(int size);
-        explicit EigenDecomposition(const Matrix2& rhs);
-        explicit EigenDecomposition(const Matrix3& rhs);
-        explicit EigenDecomposition(const VariableMatrix& rhs);
+        explicit EigenDecomposition(const Matrix2Type& rhs);
+        explicit EigenDecomposition(const Matrix3Type& rhs);
+        explicit EigenDecomposition(const VariableMatrixType& rhs);
 
-        EigenDecomposition& operator=(const Matrix2& rhs);
-        EigenDecomposition& operator=(const Matrix3& rhs);
-        EigenDecomposition& operator=(const VariableMatrix& rhs);
+        EigenDecomposition& operator=(const Matrix2Type& rhs);
+        EigenDecomposition& operator=(const Matrix3Type& rhs);
+        EigenDecomposition& operator=(const VariableMatrixType& rhs);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -65,12 +65,12 @@ namespace Mathematics
         // 得到结果。如果你知道特征系统的相应尺寸应该调用
         // GetEigenvector2和GetEigenvector3。
         NODISCARD Real GetEigenvalue(int index) const;
-        NODISCARD Vector2 GetEigenvector2(int index) const;
-        NODISCARD Matrix2 GetEigenvectors2() const;
-        NODISCARD Vector3 GetEigenvector3(int index) const;
-        NODISCARD Matrix3 GetEigenvectors3() const;
-        NODISCARD VariableLengthVector GetEigenvector(int index) const;
-        NODISCARD VariableMatrix GetEigenvectors() const;
+        NODISCARD Vector2Type GetEigenvector2(int index) const;
+        NODISCARD Matrix2Type GetEigenvectors2() const;
+        NODISCARD Vector3Type GetEigenvector3(int index) const;
+        NODISCARD Matrix3Type GetEigenvectors3() const;
+        NODISCARD VariableLengthVectorType GetEigenvector(int index) const;
+        NODISCARD VariableMatrixType GetEigenvectors() const;
 
     private:
         void Swap(EigenDecomposition& rhs) noexcept;
@@ -113,8 +113,8 @@ namespace Mathematics
         static constexpr auto maxIter = 32;
 
         int size;
-        VariableMatrix matrix;
-        VariableMatrix solveMatrix;
+        VariableMatrixType matrix;
+        VariableMatrixType solveMatrix;
         Diagonal diagonal;
         Subdiagonal subdiagonal;
 

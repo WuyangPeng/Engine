@@ -32,8 +32,8 @@ Mathematics::EigenDecomposition<Real>::EigenDecomposition(int size)
 }
 
 template <typename Real>
-Mathematics::EigenDecomposition<Real>::EigenDecomposition(const Matrix2& rhs)
-    : size{ Matrix2::vectorSize },
+Mathematics::EigenDecomposition<Real>::EigenDecomposition(const Matrix2Type& rhs)
+    : size{ Matrix2Type::vectorSize },
       matrix{ rhs },
       solveMatrix{ rhs },
       diagonal(size),
@@ -45,8 +45,8 @@ Mathematics::EigenDecomposition<Real>::EigenDecomposition(const Matrix2& rhs)
 }
 
 template <typename Real>
-Mathematics::EigenDecomposition<Real>::EigenDecomposition(const Matrix3& rhs)
-    : size{ Matrix3::vectorSize },
+Mathematics::EigenDecomposition<Real>::EigenDecomposition(const Matrix3Type& rhs)
+    : size{ Matrix3Type::vectorSize },
       matrix{ rhs },
       solveMatrix{ rhs },
       diagonal(size),
@@ -58,7 +58,7 @@ Mathematics::EigenDecomposition<Real>::EigenDecomposition(const Matrix3& rhs)
 }
 
 template <typename Real>
-Mathematics::EigenDecomposition<Real>::EigenDecomposition(const VariableMatrix& rhs)
+Mathematics::EigenDecomposition<Real>::EigenDecomposition(const VariableMatrixType& rhs)
     : size{ rhs.GetRowsNumber() },
       matrix{ rhs },
       solveMatrix{ rhs },
@@ -83,7 +83,7 @@ void Mathematics::EigenDecomposition<Real>::Swap(EigenDecomposition& rhs) noexce
 }
 
 template <typename Real>
-Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::operator=(const Matrix2& rhs)
+Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::operator=(const Matrix2Type& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -95,7 +95,7 @@ Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::op
 }
 
 template <typename Real>
-Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::operator=(const Matrix3& rhs)
+Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::operator=(const Matrix3Type& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -107,7 +107,7 @@ Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::op
 }
 
 template <typename Real>
-Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::operator=(const VariableMatrix& rhs)
+Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::operator=(const VariableMatrixType& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -125,7 +125,7 @@ bool Mathematics::EigenDecomposition<Real>::IsValid() const noexcept
 {
     try
     {
-        if (Matrix2::vectorSize <= size &&
+        if (Matrix2Type::vectorSize <= size &&
             matrix.GetColumnsNumber() == matrix.GetRowsNumber() &&
             solveMatrix.GetColumnsNumber() == solveMatrix.GetRowsNumber() &&
             matrix.GetColumnsNumber() == solveMatrix.GetColumnsNumber())
@@ -183,10 +183,10 @@ void Mathematics::EigenDecomposition<Real>::Solve(bool increasingSort)
 
     switch (size)
     {
-        case Matrix2::vectorSize:
+        case Matrix2Type::vectorSize:
             Tridiagonal2();
             break;
-        case Matrix3::vectorSize:
+        case Matrix3Type::vectorSize:
             Tridiagonal3();
             break;
         default:
@@ -672,9 +672,9 @@ Mathematics::Vector2<Real> Mathematics::EigenDecomposition<Real>::GetEigenvector
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(solve, "未解析！");
     MATHEMATICS_ASSERTION_1(0 <= index && index < size, "无效索引在GetEigenvector2\n");
-    MATHEMATICS_ASSERTION_1(size == Matrix2::vectorSize, "维度不匹配在GetEigenvector2\n");
+    MATHEMATICS_ASSERTION_1(size == Matrix2Type::vectorSize, "维度不匹配在GetEigenvector2\n");
 
-    Vector2 eigenVector{};
+    Vector2Type eigenVector{};
     for (auto row = 0; row < size; ++row)
     {
         eigenVector[row] = solveMatrix(row, index);
@@ -688,12 +688,12 @@ Mathematics::Matrix2<Real> Mathematics::EigenDecomposition<Real>::GetEigenvector
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(solve, "未解析！");
-    MATHEMATICS_ASSERTION_1(size == Matrix2::vectorSize, "维度不匹配在GetEigenvector2\n");
+    MATHEMATICS_ASSERTION_1(size == Matrix2Type::vectorSize, "维度不匹配在GetEigenvector2\n");
 
-    Matrix2 eigenVectors{};
-    for (auto row = 0; row < Matrix2::vectorSize; ++row)
+    Matrix2Type eigenVectors{};
+    for (auto row = 0; row < Matrix2Type::vectorSize; ++row)
     {
-        for (auto column = 0; column < Vector2::pointSize; ++column)
+        for (auto column = 0; column < Vector2Type::pointSize; ++column)
         {
             eigenVectors(row, column) = solveMatrix(row, column);
         }
@@ -708,9 +708,9 @@ Mathematics::Vector3<Real> Mathematics::EigenDecomposition<Real>::GetEigenvector
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(solve, "未解析！");
     MATHEMATICS_ASSERTION_1(0 <= index && index < size, "无效索引在GetEigenvector3\n");
-    MATHEMATICS_ASSERTION_1(size == Matrix3::vectorSize, "维度不匹配在GetEigenvector3\n");
+    MATHEMATICS_ASSERTION_1(size == Matrix3Type::vectorSize, "维度不匹配在GetEigenvector3\n");
 
-    Vector3 eigenVector{};
+    Vector3Type eigenVector{};
     for (auto row = 0; row < size; ++row)
     {
         eigenVector[row] = solveMatrix(row, index);
@@ -724,7 +724,7 @@ Mathematics::Matrix3<Real> Mathematics::EigenDecomposition<Real>::GetEigenvector
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(solve, "未解析！");
-    MATHEMATICS_ASSERTION_1(size == Matrix3::vectorSize, "维度不匹配在GetEigenvector3\n");
+    MATHEMATICS_ASSERTION_1(size == Matrix3Type::vectorSize, "维度不匹配在GetEigenvector3\n");
 
     return solveMatrix.GetMatrix3();
 }
