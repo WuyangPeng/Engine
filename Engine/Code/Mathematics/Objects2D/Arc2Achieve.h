@@ -20,14 +20,14 @@
 template <typename Real>
 requires std::is_arithmetic_v<Real>
 Mathematics::Arc2<Real>::Arc2() noexcept
-    : center{ Vector2::GetZero() }, radius{ Math::GetValue(1) }, end0{ Vector2::GetUnitX() }, end1{ Vector2::GetUnitY() }, epsilon{ Math::GetZeroTolerance() }
+    : center{ Vector2Type::GetZero() }, radius{ MathType::GetValue(1) }, end0{ Vector2Type::GetUnitX() }, end1{ Vector2Type::GetUnitY() }, epsilon{ MathType::GetZeroTolerance() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Arc2<Real>::Arc2(const Vector2& center, Real radius, const Vector2& end0, const Vector2& end1, Real epsilon) noexcept
+Mathematics::Arc2<Real>::Arc2(const Vector2Type& center, Real radius, const Vector2Type& end0, const Vector2Type& end1, Real epsilon) noexcept
     : center{ center }, radius{ radius }, end0{ end0 }, end1{ end1 }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -49,8 +49,8 @@ bool Mathematics::Arc2<Real>::IsValid() const noexcept
 {
     try
     {
-        if (Math::Approximate(Vector2Tools::Distance(center, end0), radius, epsilon) &&
-            Math::Approximate(Vector2Tools::Distance(center, end1), radius, epsilon))
+        if (MathType::Approximate(Vector2ToolsType::Distance(center, end0), radius, epsilon) &&
+            MathType::Approximate(Vector2ToolsType::Distance(center, end1), radius, epsilon))
         {
             return true;
         }
@@ -69,18 +69,18 @@ bool Mathematics::Arc2<Real>::IsValid() const noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-bool Mathematics::Arc2<Real>::Contains(const Vector2& point) const
+bool Mathematics::Arc2<Real>::Contains(const Vector2Type& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     /// 如果epsilon为负，则公差的行为就像传递了epsilon的零值一样。
 
-    const auto length = Vector2Tools::GetLength(point - center);
-    if (Math::FAbs(length - radius) <= epsilon)
+    const auto length = Vector2ToolsType::GetLength(point - center);
+    if (MathType::FAbs(length - radius) <= epsilon)
     {
         const auto diffPointEnd0 = point - end0;
         const auto diffEnd1End0 = end1 - end0;
-        const auto dotPerp = Vector2Tools::DotPerp(diffPointEnd0, diffEnd1End0);
+        const auto dotPerp = Vector2ToolsType::DotPerp(diffPointEnd0, diffEnd1End0);
 
         return Real{} <= dotPerp;
     }
@@ -96,18 +96,18 @@ bool Mathematics::Arc2<Real>::Contains(const AlgebraVector2& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return Contains(Vector2{ point[0], point[1] });
+    return Contains(Vector2Type{ point[0], point[1] });
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-bool Mathematics::Arc2<Real>::CircleContains(const Vector2& point) const
+bool Mathematics::Arc2<Real>::CircleContains(const Vector2Type& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     const auto diffPointEnd0 = point - end0;
     const auto diffEnd1End0 = end1 - end0;
-    const auto dotPerp = Vector2Tools::DotPerp(diffPointEnd0, diffEnd1End0);
+    const auto dotPerp = Vector2ToolsType::DotPerp(diffPointEnd0, diffEnd1End0);
 
     return Real{} <= dotPerp;
 }
@@ -118,12 +118,12 @@ bool Mathematics::Arc2<Real>::CircleContains(const AlgebraVector2& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return CircleContains(Vector2{ point[0], point[1] });
+    return CircleContains(Vector2Type{ point[0], point[1] });
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Arc2<Real>::Vector2 Mathematics::Arc2<Real>::GetCenter() const noexcept
+typename Mathematics::Arc2<Real>::Vector2Type Mathematics::Arc2<Real>::GetCenter() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -141,7 +141,7 @@ Real Mathematics::Arc2<Real>::GetRadius() const noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Arc2<Real>::Vector2 Mathematics::Arc2<Real>::GetEnd0() const noexcept
+typename Mathematics::Arc2<Real>::Vector2Type Mathematics::Arc2<Real>::GetEnd0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -150,7 +150,7 @@ typename Mathematics::Arc2<Real>::Vector2 Mathematics::Arc2<Real>::GetEnd0() con
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Arc2<Real>::Vector2 Mathematics::Arc2<Real>::GetEnd1() const noexcept
+typename Mathematics::Arc2<Real>::Vector2Type Mathematics::Arc2<Real>::GetEnd1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

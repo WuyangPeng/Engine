@@ -17,7 +17,7 @@
 #include <iostream>
 
 template <typename Real>
-Mathematics::Box2<Real>::Box2(const Vector2& center, const Vector2& axis0, const Vector2& axis1, const Real extent0, const Real extent1, const Real epsilon) noexcept
+Mathematics::Box2<Real>::Box2(const Vector2Type& center, const Vector2Type& axis0, const Vector2Type& axis1, const Real extent0, const Real extent1, const Real epsilon) noexcept
     : center{ center }, axis{ axis0, axis1 }, extent{ extent0, extent1 }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -79,7 +79,7 @@ typename Mathematics::Box2<Real>::VerticesType Mathematics::Box2<Real>::ComputeV
 }
 
 template <typename Real>
-typename Mathematics::Box2<Real>::Vector2 Mathematics::Box2<Real>::GetCenter() const noexcept
+typename Mathematics::Box2<Real>::Vector2Type Mathematics::Box2<Real>::GetCenter() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -87,7 +87,7 @@ typename Mathematics::Box2<Real>::Vector2 Mathematics::Box2<Real>::GetCenter() c
 }
 
 template <typename Real>
-typename Mathematics::Box2<Real>::Vector2 Mathematics::Box2<Real>::GetAxis0() const noexcept
+typename Mathematics::Box2<Real>::Vector2Type Mathematics::Box2<Real>::GetAxis0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -100,7 +100,7 @@ typename Mathematics::Box2<Real>::Vector2 Mathematics::Box2<Real>::GetAxis0() co
 }
 
 template <typename Real>
-typename Mathematics::Box2<Real>::Vector2 Mathematics::Box2<Real>::GetAxis1() const noexcept
+typename Mathematics::Box2<Real>::Vector2Type Mathematics::Box2<Real>::GetAxis1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -147,7 +147,7 @@ Real Mathematics::Box2<Real>::GetEpsilon() const noexcept
 }
 
 template <typename Real>
-Mathematics::Box2<Real> Mathematics::Box2<Real>::GetMove(Real t, const Vector2& velocity) const
+Mathematics::Box2<Real> Mathematics::Box2<Real>::GetMove(Real t, const Vector2Type& velocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

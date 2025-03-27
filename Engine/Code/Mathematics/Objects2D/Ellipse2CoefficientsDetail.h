@@ -15,8 +15,8 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
-Mathematics::Ellipse2Coefficients<Real>::Ellipse2Coefficients(const Matrix2& matrix, const Vector2& vector, Real constants)
-    : coefficients{ constants, vector.GetX(), vector.GetY(), matrix.template GetValue<0, 0>(), matrix.template GetValue<0, 1>() * Math::GetValue(2), matrix.template GetValue<1, 1>() }
+Mathematics::Ellipse2Coefficients<Real>::Ellipse2Coefficients(const Matrix2Type& matrix, const Vector2Type& vector, Real constants)
+    : coefficients{ constants, vector.GetX(), vector.GetY(), matrix.template GetValue<0, 0>(), matrix.template GetValue<0, 1>() * MathType::GetValue(2), matrix.template GetValue<1, 1>() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -44,7 +44,7 @@ Mathematics::Matrix2<Real> Mathematics::Ellipse2Coefficients<Real>::GetMatrix() 
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return Matrix2{ coefficients.at(3), Math::GetRational(1, 2) * coefficients.at(4), Math::GetRational(1, 2) * coefficients.at(4), coefficients.at(5) };
+    return Matrix2Type{ coefficients.at(3), MathType::GetRational(1, 2) * coefficients.at(4), MathType::GetRational(1, 2) * coefficients.at(4), coefficients.at(5) };
 }
 
 template <typename Real>
@@ -52,7 +52,7 @@ Mathematics::Vector2<Real> Mathematics::Ellipse2Coefficients<Real>::GetVector() 
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return Vector2{ coefficients.at(1), coefficients.at(2) };
+    return Vector2Type{ coefficients.at(1), coefficients.at(2) };
 }
 
 template <typename Real>
@@ -71,16 +71,16 @@ typename Mathematics::Ellipse2Coefficients<Real>::CoefficientsType Mathematics::
     CoefficientsType result{ coefficients };
 
     // 安排x0^2或x1^2系数之一是1。
-    auto maxValue = Math::FAbs(result.at(3));
+    auto maxValue = MathType::FAbs(result.at(3));
     auto maxIndex = 3;
-    auto absValue = Math::FAbs(result.at(5));
+    auto absValue = MathType::FAbs(result.at(5));
     if (maxValue < absValue)
     {
         maxValue = absValue;
         maxIndex = 5;
     }
 
-    auto invMaxValue = Math::GetValue(1) / maxValue;
+    auto invMaxValue = MathType::GetValue(1) / maxValue;
     for (auto i = 0; i < coefficientsSize; ++i)
     {
 #include SYSTEM_WARNING_PUSH
@@ -92,7 +92,7 @@ typename Mathematics::Ellipse2Coefficients<Real>::CoefficientsType Mathematics::
         }
         else
         {
-            result[i] = Math::GetValue(1);
+            result[i] = MathType::GetValue(1);
         }
 
 #include SYSTEM_WARNING_POP

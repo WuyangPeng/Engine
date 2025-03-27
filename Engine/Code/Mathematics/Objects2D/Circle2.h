@@ -27,28 +27,28 @@ namespace Mathematics
 
         using ClassType = Circle2<Real>;
 
-        using Math = Math<Real>;
-        using Vector2 = Vector2<Real>;
+        using MathType = Math<Real>;
+        using Vector2Type = Vector2<Real>;
         using AlgebraVector2 = Algebra::Vector2<Real>;
 
     public:
-        Circle2(const Vector2& center, Real radius) noexcept;
+        Circle2(const Vector2Type& center, Real radius) noexcept;
         Circle2() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector2 GetCenter() const noexcept;
+        NODISCARD Vector2Type GetCenter() const noexcept;
         NODISCARD Real GetRadius() const noexcept;
 
-        void SetCircle(const Vector2& aCenter, Real aRadius) noexcept;
-        void SetCenter(const Vector2& aCenter) noexcept;
+        void SetCircle(const Vector2Type& aCenter, Real aRadius) noexcept;
+        void SetCenter(const Vector2Type& aCenter) noexcept;
         void SetCenter(const AlgebraVector2& aCenter);
         void SetCenterX(Real x) noexcept;
         void SetCenterY(Real y) noexcept;
         void SetRadius(Real aRadius) noexcept;
 
     private:
-        Vector2 center;
+        Vector2Type center;
         Real radius;
     };
 

@@ -27,9 +27,9 @@ namespace Mathematics
 
         using ClassType = Segment2<Real>;
 
-        using Math = Math<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
+        using MathType = Math<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
         using AlgebraVector2 = Algebra::Vector2<Real>;
 
     public:
@@ -41,21 +41,21 @@ namespace Mathematics
         // 且|t| <= e。值 e = Length(P1-P0)/2是该线段的“范围”（半径或半长）。
 
         // 构造函数计算center、direction和extent从beginPoint和endPoint
-        Segment2(const Vector2& beginPoint, const Vector2& endPoint, Real epsilon = Math::GetZeroTolerance());
-        Segment2(const AlgebraVector2& beginPoint, const AlgebraVector2& endPoint, Real epsilon = Math::GetZeroTolerance());
+        Segment2(const Vector2Type& beginPoint, const Vector2Type& endPoint, Real epsilon = MathType::GetZeroTolerance());
+        Segment2(const AlgebraVector2& beginPoint, const AlgebraVector2& endPoint, Real epsilon = MathType::GetZeroTolerance());
 
         // 构造函数计算beginPoint和endPoint从center、direction和extent
-        Segment2(Real extent, const Vector2& center, const Vector2& direction, Real epsilon = Math::GetZeroTolerance());
+        Segment2(Real extent, const Vector2Type& center, const Vector2Type& direction, Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector2 GetBeginPoint() const noexcept;
-        NODISCARD Vector2 GetEndPoint() const noexcept;
-        NODISCARD Vector2 GetCenterPoint() const noexcept;
-        NODISCARD Vector2 GetDirection() const noexcept;
+        NODISCARD Vector2Type GetBeginPoint() const noexcept;
+        NODISCARD Vector2Type GetEndPoint() const noexcept;
+        NODISCARD Vector2Type GetCenterPoint() const noexcept;
+        NODISCARD Vector2Type GetDirection() const noexcept;
         NODISCARD Real GetExtent() const noexcept;
 
-        NODISCARD Segment2 GetMove(Real t, const Vector2& velocity) const;
+        NODISCARD Segment2 GetMove(Real t, const Vector2Type& velocity) const;
 
     private:
         // 当你改变beginPoint或endPoint时调用
@@ -66,12 +66,12 @@ namespace Mathematics
 
     private:
         // 终点表示。
-        Vector2 beginPoint;
-        Vector2 endPoint;
+        Vector2Type beginPoint;
+        Vector2Type endPoint;
 
         // 中心—方向—范围表示。
-        Vector2 center;
-        Vector2 direction;
+        Vector2Type center;
+        Vector2Type direction;
         Real extent;
 
         Real epsilon;

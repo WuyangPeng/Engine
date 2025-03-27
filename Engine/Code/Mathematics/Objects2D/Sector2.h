@@ -29,8 +29,8 @@ namespace Mathematics
     public:
         using ClassType = Sector2<Real>;
 
-        using Vector2 = Algebra::Vector2<Real>;
-        using Math = Math<Real>;
+        using Vector2Type = Algebra::Vector2<Real>;
+        using MathType = Math<Real>;
 
     public:
         /// 默认构造函数将顶点设置为(0,0)，半径设置为1，
@@ -39,9 +39,9 @@ namespace Mathematics
         /// 所有这些都定义了一个圆盘。
         Sector2() noexcept;
 
-        Sector2(const Vector2& inVertex,
+        Sector2(const Vector2Type& inVertex,
                 Real inRadius,
-                const Vector2& inDirection,
+                const Vector2Type& inDirection,
                 Real inAngle) noexcept;
 
         CLASS_INVARIANT_DECLARE;
@@ -49,27 +49,27 @@ namespace Mathematics
         /// 同时设置角度和cos(angle)。
         void SetAngle(Real inAngle) noexcept;
 
-        NODISCARD Vector2 GetVertex() const noexcept;
+        NODISCARD Vector2Type GetVertex() const noexcept;
         NODISCARD Real GetRadius() const noexcept;
-        NODISCARD Vector2 GetDirection() const noexcept;
+        NODISCARD Vector2Type GetDirection() const noexcept;
         NODISCARD Real GetAngle() const noexcept;
         NODISCARD Real GetCosAngle() const noexcept;
         NODISCARD Real GetSinAngle() const noexcept;
 
-        void SetVertex(const Vector2& aVertex) noexcept;
+        void SetVertex(const Vector2Type& aVertex) noexcept;
         void SetRadius(Real aRadius) noexcept;
-        void SetDirection(const Vector2& aDirection) noexcept;
+        void SetDirection(const Vector2Type& aDirection) noexcept;
 
         /// 测试P是否在扇区中。
-        NODISCARD bool Contains(const Vector2& point) const;
+        NODISCARD bool Contains(const Vector2Type& point) const;
 
     private:
         /// 在查询中使用角度的余弦和正弦，
         /// 因此存储所有的o角度、cos(angle)和 sin(angle)。
         /// 您可以调用 SetAngle(...) 以确保一致性。
-        Vector2 vertex;
+        Vector2Type vertex;
         Real radius;
-        Vector2 direction;
+        Vector2Type direction;
         Real angle;
         Real cosAngle;
         Real sinAngle;

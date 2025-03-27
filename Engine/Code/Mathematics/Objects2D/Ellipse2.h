@@ -29,11 +29,11 @@ namespace Mathematics
 
         using ClassType = Ellipse2<Real>;
 
-        using Math = Math<Real>;
-        using Vector2 = Vector2<Real>;
-        using Matrix2 = Matrix2<Real>;
-        using Ellipse2Coefficients = Ellipse2Coefficients<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
+        using MathType = Math<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Matrix2Type = Matrix2<Real>;
+        using Ellipse2CoefficientsType = Ellipse2Coefficients<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
 
     public:
         // 椭圆具有中心K，轴方向U[0]和U[1]（两个都是单位长度向量），
@@ -54,52 +54,52 @@ namespace Mathematics
         // 其中K = -A^{-1} * B / 2, M = A / (B^T * A^{-1} * B / 4 - C)。
         // 为椭圆形时，M必须具有所有特征值为正。
 
-        Ellipse2(const Vector2& center,
-                 const Vector2& axis0,
-                 const Vector2& axis1,
+        Ellipse2(const Vector2Type& center,
+                 const Vector2Type& axis0,
+                 const Vector2Type& axis1,
                  const Real extent0,
                  const Real extent1,
-                 const Real epsilon = Math::GetZeroTolerance()) noexcept;
+                 const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
-        explicit Ellipse2(const Ellipse2Coefficients& coefficients, const Real epsilon = Math::GetZeroTolerance());
+        explicit Ellipse2(const Ellipse2CoefficientsType& coefficients, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector2 GetCenter() const noexcept;
-        NODISCARD Vector2 GetAxis0() const noexcept;
-        NODISCARD Vector2 GetAxis1() const noexcept;
+        NODISCARD Vector2Type GetCenter() const noexcept;
+        NODISCARD Vector2Type GetAxis0() const noexcept;
+        NODISCARD Vector2Type GetAxis1() const noexcept;
         NODISCARD Real GetExtent0() const noexcept;
         NODISCARD Real GetExtent1() const noexcept;
 
         // 计算 M = sum_{i=0}^1 U[i]*U[i]^T/e[i]^2.
-        NODISCARD Matrix2 GetMatrix() const;
+        NODISCARD Matrix2Type GetMatrix() const;
 
         // 计算 M^{-1} = sum_{i=0}^1 U[i]*U[i]^T*e[i]^2.
-        NODISCARD Matrix2 GetMatrixInverse() const;
+        NODISCARD Matrix2Type GetMatrixInverse() const;
 
         // 构建二次方程式，表示椭圆的系数。
-        NODISCARD Ellipse2Coefficients ToCoefficients() const;
+        NODISCARD Ellipse2CoefficientsType ToCoefficients() const;
 
         // 构建m_Center，m_Axis和m_Extent从二次方程。
         // 如果输入系数不能表示一个椭圆，则抛出异常。
-        void FromCoefficients(const Ellipse2Coefficients& coefficients, const Real newEpsilon = Math::GetZeroTolerance());
+        void FromCoefficients(const Ellipse2CoefficientsType& coefficients, const Real newEpsilon = Math::GetZeroTolerance());
 
         // 计算的二次函数 Q(X) = (X-K)^T * M * (X-K) - 1.
-        NODISCARD Real Evaluate(const Vector2& point) const;
+        NODISCARD Real Evaluate(const Vector2Type& point) const;
 
         // 测试输入点是否在椭圆形内部或边上。
         // 该点被包含当Q(X) <= 0，其中Q(X)函数Evaluate()。
-        NODISCARD bool Contains(const Vector2& point) const;
+        NODISCARD bool Contains(const Vector2Type& point) const;
 
-        NODISCARD Ellipse2 GetMove(Real t, const Vector2& velocity) const;
+        NODISCARD Ellipse2 GetMove(Real t, const Vector2Type& velocity) const;
 
     private:
         static constexpr auto axisSize = 2;
-        using AxisType = std::array<Vector2, axisSize>;
+        using AxisType = std::array<Vector2Type, axisSize>;
         using ExtentType = std::array<Real, axisSize>;
 
     private:
-        Vector2 center;
+        Vector2Type center;
         AxisType axis;
         ExtentType extent;
         Real epsilon;

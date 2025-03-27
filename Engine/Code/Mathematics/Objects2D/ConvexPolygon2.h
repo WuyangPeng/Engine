@@ -29,8 +29,8 @@ namespace Mathematics
         using ClassType = ConvexPolygon2<Real>;
 
         using ParentType = Polygon2<Real>;
-        using Line2 = Line2<Real>;
-        using LineType = std::vector<Line2>;
+        using Line2Type = Line2<Real>;
+        using LineType = std::vector<Line2Type>;
         using Math = typename ParentType::MathType;
         using Vector2 = typename ParentType::Vector2Type;
         using VerticesType = typename ParentType::VerticesType;
@@ -44,7 +44,7 @@ namespace Mathematics
 
         // 只读成员访问。
         NODISCARD LineType GetLines() const;
-        NODISCARD const Line2& GetLine(int index) const;
+        NODISCARD const Line2Type& GetLine(int index) const;
 
         // 允许顶点修改。调用者必须确保多边形仍是凸多边形。
         // 只要你修改尽可能多的顶点后，调用UpdateLines()。

@@ -29,22 +29,22 @@ namespace Mathematics
 
         using ClassType = Ellipse2Coefficients<Real>;
 
-        using Math = Math<Real>;
-        using Matrix2 = Matrix2<Real>;
-        using Vector2 = Vector2<Real>;
+        using MathType = Math<Real>;
+        using Matrix2Type = Matrix2<Real>;
+        using Vector2Type = Vector2<Real>;
         using CoefficientsType = std::vector<Real>;
 
         static constexpr auto coefficientsSize = 6;
 
     public:
-        Ellipse2Coefficients(const Matrix2& matrix, const Vector2& vector, Real constants);
+        Ellipse2Coefficients(const Matrix2Type& matrix, const Vector2Type& vector, Real constants);
 
         explicit Ellipse2Coefficients(CoefficientsType coefficient) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Matrix2 GetMatrix() const;
-        NODISCARD Vector2 GetVector() const;
+        NODISCARD Matrix2Type GetMatrix() const;
+        NODISCARD Vector2Type GetVector() const;
         NODISCARD Real GetConstants() const;
         NODISCARD CoefficientsType GetCoefficients() const;
 
