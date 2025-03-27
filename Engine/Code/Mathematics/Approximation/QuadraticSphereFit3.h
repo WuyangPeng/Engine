@@ -31,8 +31,8 @@ namespace Mathematics
     public:
         using ClassType = QuadraticSphereFit3<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using Points = std::vector<Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using Points = std::vector<Vector3Type>;
         using MathType = Math<Real>;
 
     public:
@@ -40,7 +40,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetCenter() const noexcept;
+        NODISCARD Vector3Type GetCenter() const noexcept;
         NODISCARD Real GetRadius() const noexcept;
         NODISCARD Real GetEigenValue() const noexcept;
 
@@ -51,7 +51,7 @@ namespace Mathematics
         constexpr static int eigenSystemSize = 5;
 
     private:
-        Vector3 center;
+        Vector3Type center;
         Real radius;
         Real eigenValue;
     };

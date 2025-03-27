@@ -32,9 +32,9 @@ namespace Mathematics
     public:
         using ClassType = SphereFit3<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using Sphere3 = Sphere3<Real>;
-        using Points = std::vector<Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using Sphere3Type = Sphere3<Real>;
+        using Points = std::vector<Vector3Type>;
         using MathType = Math<Real>;
 
     public:
@@ -42,15 +42,15 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Sphere3 GetSphere() const noexcept;
+        NODISCARD Sphere3Type GetSphere() const noexcept;
 
     private:
         void Calculate(const Points& points, int maxIterations, bool initialCenterIsAverage);
-        NODISCARD Vector3 GetAveragePoint(const Points& points);
-        void Iteration(const Points& points, const Vector3& average);
+        NODISCARD Vector3Type GetAveragePoint(const Points& points);
+        void Iteration(const Points& points, const Vector3Type& average);
 
     private:
-        Sphere3 sphere;
+        Sphere3Type sphere;
     };
 
     using SphereFit3F = SphereFit3<float>;

@@ -86,7 +86,7 @@ Mathematics::Vector3<Real> Mathematics::SphereFit3<Real>::GetAveragePoint(const 
     MATHEMATICS_ASSERTION_0(!points.empty(), "输入的数组大小为零！");
 
     // 计算数据点的平均值。
-    Vector3 average{};
+    Vector3Type average{};
 
     const auto numPoints = boost::numeric_cast<Real>(points.size());
 
@@ -101,13 +101,13 @@ Mathematics::Vector3<Real> Mathematics::SphereFit3<Real>::GetAveragePoint(const 
 }
 
 template <typename Real>
-void Mathematics::SphereFit3<Real>::Iteration(const Points& points, const Vector3& average)
+void Mathematics::SphereFit3<Real>::Iteration(const Points& points, const Vector3Type& average)
 {
     auto numPoints = boost::numeric_cast<Real>(points.size());
 
     // 计算平均值L, dL/da, dL/db, dL/dc。
     auto lengthAverage = MathType::GetValue(0);
-    Vector3 derLengthAverage{};
+    Vector3Type derLengthAverage{};
 
     for (const auto& point : points)
     {

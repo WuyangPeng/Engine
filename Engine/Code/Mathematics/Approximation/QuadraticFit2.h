@@ -50,9 +50,9 @@ namespace Mathematics
     public:
         using ClassType = QuadraticFit2<Real>;
 
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
         using VariableLengthVector = VariableLengthVector<Real>;
-        using Points = std::vector<Vector2>;
+        using Points = std::vector<Vector2Type>;
         using MathType = Math<Real>;
 
     public:
