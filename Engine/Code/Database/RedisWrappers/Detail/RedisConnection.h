@@ -17,6 +17,7 @@
 #include "Database/DatabaseInterface/BasisDatabaseManager.h"
 #include "Database/DatabaseInterface/DatabaseInterfaceFwd.h"
 
+#include <condition_variable>
 #include <deque>
 #include <mutex>
 #include <thread>
