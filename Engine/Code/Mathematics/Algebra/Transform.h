@@ -233,14 +233,14 @@ namespace Mathematics
         }
 
     private:
-        using TransformMatrix = TransformMatrix<Real>;
-        using AffineMatrix = AffineMatrix<Real>;
+        using TransformMatrixType = TransformMatrix<Real>;
+        using AffineMatrixType = AffineMatrix<Real>;
 
     private:
-        AffineMatrix affineMatrix;
+        AffineMatrixType affineMatrix;
 
         /// 完整的4x4齐次矩阵H = {{M,T},{0,1}}和它的逆矩阵为H^{-1} = {M^{-1},-M^{-1}*T},{0,1}}。 逆矩阵只在需要时计算。
-        TransformMatrix transformMatrix;
+        TransformMatrixType transformMatrix;
 
         mutable MatrixType inverseMatrix;
         mutable bool inverseNeedsUpdate;
