@@ -50,10 +50,10 @@ namespace Mathematics
         NODISCARD CircumsphereQueryType ToCircumsphere(const Vector3& testVector, int v0, int v1, int v2, int v3) const override;
 
     private:
-        using Query3Rational = Query3Rational<Real>;
+        using Query3RationalType = Query3Rational<Real>;
 
     private:
-        Query3Rational rationalQuery;
+        Query3RationalType rationalQuery;
         Real uncertainty;
     };
 
