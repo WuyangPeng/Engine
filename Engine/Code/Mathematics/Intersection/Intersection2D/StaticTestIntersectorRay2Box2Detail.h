@@ -56,16 +56,16 @@ Mathematics::Box2<Real> Mathematics::StaticTestIntersectorRay2Box2<Real>::GetBox
 template <typename Real>
 void Mathematics::StaticTestIntersectorRay2Box2<Real>::Test()
 {
-    Vector2 directionDotAxis{};
-    Vector2 directionDotAxisAbs{};
-    Vector2 diffDotAxis{};
-    Vector2 diffDotAxisAbs{};
+    Vector2Type directionDotAxis{};
+    Vector2Type directionDotAxisAbs{};
+    Vector2Type diffDotAxis{};
+    Vector2Type diffDotAxisAbs{};
 
     auto diff = ray.GetOrigin() - box.GetCenter();
 
-    directionDotAxis[0] = Vector2Tools::DotProduct(ray.GetDirection(), box.GetAxis0());
+    directionDotAxis[0] = Vector2ToolsType::DotProduct(ray.GetDirection(), box.GetAxis0());
     directionDotAxisAbs[0] = MathType::FAbs(directionDotAxis[0]);
-    diffDotAxis[0] = Vector2Tools::DotProduct(diff, box.GetAxis0());
+    diffDotAxis[0] = Vector2ToolsType::DotProduct(diff, box.GetAxis0());
     diffDotAxisAbs[0] = MathType::FAbs(diffDotAxis[0]);
     if (box.GetExtent0() < diffDotAxisAbs[0] && MathType::GetValue(0) <= diffDotAxis[0] * directionDotAxis[0])
     {
@@ -73,9 +73,9 @@ void Mathematics::StaticTestIntersectorRay2Box2<Real>::Test()
         return;
     }
 
-    directionDotAxis[1] = Vector2Tools::DotProduct(ray.GetDirection(), box.GetAxis1());
+    directionDotAxis[1] = Vector2ToolsType::DotProduct(ray.GetDirection(), box.GetAxis1());
     directionDotAxisAbs[1] = MathType::FAbs(directionDotAxis[1]);
-    diffDotAxis[1] = Vector2Tools::DotProduct(diff, box.GetAxis1());
+    diffDotAxis[1] = Vector2ToolsType::DotProduct(diff, box.GetAxis1());
     diffDotAxisAbs[1] = MathType::FAbs(diffDotAxis[1]);
     if (box.GetExtent1() < diffDotAxisAbs[1] && MathType::GetValue(0) <= diffDotAxis[1] * directionDotAxis[1])
     {
@@ -83,10 +83,10 @@ void Mathematics::StaticTestIntersectorRay2Box2<Real>::Test()
         return;
     }
 
-    const auto perp = Vector2Tools::GetPerp(ray.GetDirection());
-    const auto lhs = MathType::FAbs(Vector2Tools::DotProduct(perp, diff));
-    const auto part0 = MathType::FAbs(Vector2Tools::DotProduct(perp, box.GetAxis0()));
-    const auto part1 = MathType::FAbs(Vector2Tools::DotProduct(perp, box.GetAxis1()));
+    const auto perp = Vector2ToolsType::GetPerp(ray.GetDirection());
+    const auto lhs = MathType::FAbs(Vector2ToolsType::DotProduct(perp, diff));
+    const auto part0 = MathType::FAbs(Vector2ToolsType::DotProduct(perp, box.GetAxis0()));
+    const auto part1 = MathType::FAbs(Vector2ToolsType::DotProduct(perp, box.GetAxis1()));
     const auto rhs = box.GetExtent0() * part0 + box.GetExtent1() * part1;
     if (lhs <= rhs)
     {
