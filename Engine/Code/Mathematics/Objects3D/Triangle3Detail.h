@@ -16,7 +16,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::Triangle3<Real>::Triangle3(const Vector3& vector0, const Vector3& vector1, const Vector3& vector2) noexcept
+Mathematics::Triangle3<Real>::Triangle3(const Vector3Type& vector0, const Vector3Type& vector1, const Vector3Type& vector2) noexcept
     : vertex{ vector0, vector1, vector2 }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -63,7 +63,7 @@ Mathematics::Vector3<Real> Mathematics::Triangle3<Real>::GetNormal() const
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-    return Vector3Tools::UnitCrossProduct(vertex[1] - vertex[0], vertex[2] - vertex[1]);
+    return Vector3ToolsType::UnitCrossProduct(vertex[1] - vertex[0], vertex[2] - vertex[1]);
 
 #include SYSTEM_WARNING_POP
 }
@@ -77,7 +77,7 @@ Mathematics::Vector3<Real> Mathematics::Triangle3<Real>::GetVertex(int index) co
 }
 
 template <typename Real>
-Real Mathematics::Triangle3<Real>::DistanceTo(const Vector3& point) const
+Real Mathematics::Triangle3<Real>::DistanceTo(const Vector3Type& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -90,12 +90,12 @@ Real Mathematics::Triangle3<Real>::DistanceTo(const Vector3& point) const
 
 #include SYSTEM_WARNING_POP
 
-    const auto a00 = Vector3Tools::GetLengthSquared(edge0);
-    const auto a01 = Vector3Tools::DotProduct(edge0, edge1);
-    const auto a11 = Vector3Tools::GetLengthSquared(edge1);
-    const auto b0 = Vector3Tools::DotProduct(diff, edge0);
-    const auto b1 = Vector3Tools::DotProduct(diff, edge1);
-    const auto c = Vector3Tools::GetLengthSquared(diff);
+    const auto a00 = Vector3ToolsType::GetLengthSquared(edge0);
+    const auto a01 = Vector3ToolsType::DotProduct(edge0, edge1);
+    const auto a11 = Vector3ToolsType::GetLengthSquared(edge1);
+    const auto b0 = Vector3ToolsType::DotProduct(diff, edge0);
+    const auto b1 = Vector3ToolsType::DotProduct(diff, edge1);
+    const auto c = Vector3ToolsType::GetLengthSquared(diff);
     const auto det = MathType::FAbs(a00 * a11 - a01 * a01);
     auto s = a01 * b1 - a11 * b0;
     auto t = a01 * b0 - a00 * b1;
@@ -283,7 +283,7 @@ Real Mathematics::Triangle3<Real>::DistanceTo(const Vector3& point) const
 }
 
 template <typename Real>
-Mathematics::Triangle3<Real> Mathematics::Triangle3<Real>::GetMove(Real t, const Vector3& velocity) const
+Mathematics::Triangle3<Real> Mathematics::Triangle3<Real>::GetMove(Real t, const Vector3Type& velocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

@@ -26,7 +26,7 @@ namespace Mathematics
 
         using ClassType = Circle3<Real>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using MathType = Math<Real>;
         using Vector3Tools = Vector3Tools<Real>;
 
@@ -39,28 +39,28 @@ namespace Mathematics
 
         // U 是输入向量 'direction0', V 是输入向量 'direction1,
         // 和 N 是输入向量 'normal'.
-        Circle3(const Vector3& center,
-                const Vector3& direction0,
-                const Vector3& direction1,
-                const Vector3& normal,
+        Circle3(const Vector3Type& center,
+                const Vector3Type& direction0,
+                const Vector3Type& direction1,
+                const Vector3Type& normal,
                 const Real radius,
                 const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetCenter() const noexcept;
-        NODISCARD Vector3 GetDirection0() const noexcept;
-        NODISCARD Vector3 GetDirection1() const noexcept;
-        NODISCARD Vector3 GetNormal() const noexcept;
+        NODISCARD Vector3Type GetCenter() const noexcept;
+        NODISCARD Vector3Type GetDirection0() const noexcept;
+        NODISCARD Vector3Type GetDirection1() const noexcept;
+        NODISCARD Vector3Type GetNormal() const noexcept;
         NODISCARD Real GetRadius() const noexcept;
 
-        NODISCARD Circle3 GetMove(Real t, const Vector3& velocity) const;
+        NODISCARD Circle3 GetMove(Real t, const Vector3Type& velocity) const;
 
     private:
-        Vector3 center;
-        Vector3 direction0;
-        Vector3 direction1;
-        Vector3 normal;
+        Vector3Type center;
+        Vector3Type direction0;
+        Vector3Type direction1;
+        Vector3Type normal;
         Real radius;
         Real epsilon;
     };

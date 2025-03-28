@@ -17,10 +17,10 @@
 template <typename Real>
 requires std::is_arithmetic_v<Real>
 Mathematics::Frustum3<Real>::Frustum3() noexcept
-    : origin{ Vector3::GetZero() },
-      directionVector{ Vector3::GetUnitZ() },
-      upVector{ Vector3::GetUnitY() },
-      rightVector{ Vector3::GetUnitX() },
+    : origin{ Vector3Type::GetZero() },
+      directionVector{ Vector3Type::GetUnitZ() },
+      upVector{ Vector3Type::GetUnitY() },
+      rightVector{ Vector3Type::GetUnitX() },
       directionMin{ MathType::GetValue(1) },
       directionMax{ MathType::GetValue(2) },
       upBound{ MathType::GetValue(1) },
@@ -35,10 +35,10 @@ Mathematics::Frustum3<Real>::Frustum3() noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Frustum3<Real>::Frustum3(const Vector3& origin,
-                                      const Vector3& directionVector,
-                                      const Vector3& upVector,
-                                      const Vector3& rightVector,
+Mathematics::Frustum3<Real>::Frustum3(const Vector3Type& origin,
+                                      const Vector3Type& directionVector,
+                                      const Vector3Type& upVector,
+                                      const Vector3Type& rightVector,
                                       Real directionMin,
                                       Real directionMax,
                                       Real upBound,
@@ -71,7 +71,7 @@ Mathematics::Frustum3<Real>::Frustum3(const AlgebraVector3& origin,
                                       Real upBound,
                                       Real rightBound,
                                       Real epsilon)
-    : Frustum3{ Vector3{ origin }, Vector3{ directionVector }, Vector3{ upVector }, Vector3{ rightVector }, directionMin, directionMax, upBound, rightBound, epsilon }
+    : Frustum3{ Vector3Type{ origin }, Vector3Type{ directionVector }, Vector3Type{ upVector }, Vector3Type{ rightVector }, directionMin, directionMax, upBound, rightBound, epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -298,7 +298,7 @@ typename Mathematics::Frustum3<Real>::ArrayType Mathematics::Frustum3<Real>::Com
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Frustum3<Real> Mathematics::Frustum3<Real>::GetMove(Real t, const Vector3& velocity) const
+Mathematics::Frustum3<Real> Mathematics::Frustum3<Real>::GetMove(Real t, const Vector3Type& velocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -315,7 +315,7 @@ Mathematics::Frustum3<Real> Mathematics::Frustum3<Real>::GetMove(Real t, const V
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::Frustum3<Real>::SetOrigin(const Vector3& aOrigin) noexcept
+void Mathematics::Frustum3<Real>::SetOrigin(const Vector3Type& aOrigin) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -324,7 +324,7 @@ void Mathematics::Frustum3<Real>::SetOrigin(const Vector3& aOrigin) noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::Frustum3<Real>::SetDirectionVector(const Vector3& aDirectionVector) noexcept
+void Mathematics::Frustum3<Real>::SetDirectionVector(const Vector3Type& aDirectionVector) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -333,7 +333,7 @@ void Mathematics::Frustum3<Real>::SetDirectionVector(const Vector3& aDirectionVe
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::Frustum3<Real>::SetUpVector(const Vector3& aUpVector) noexcept
+void Mathematics::Frustum3<Real>::SetUpVector(const Vector3Type& aUpVector) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -342,7 +342,7 @@ void Mathematics::Frustum3<Real>::SetUpVector(const Vector3& aUpVector) noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::Frustum3<Real>::SetRightVector(const Vector3& aRightVector) noexcept
+void Mathematics::Frustum3<Real>::SetRightVector(const Vector3Type& aRightVector) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -399,7 +399,7 @@ void Mathematics::Frustum3<Real>::SetOrigin(const AlgebraVector3& aOrigin)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    SetOrigin(Vector3{ aOrigin });
+    SetOrigin(Vector3Type{ aOrigin });
 }
 
 template <typename Real>
@@ -408,7 +408,7 @@ void Mathematics::Frustum3<Real>::SetDirectionVector(const AlgebraVector3& aDire
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    SetDirectionVector(Vector3{ aDirectionVector });
+    SetDirectionVector(Vector3Type{ aDirectionVector });
 }
 
 template <typename Real>
@@ -417,7 +417,7 @@ void Mathematics::Frustum3<Real>::SetUpVector(const AlgebraVector3& aUpVector)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    SetUpVector(Vector3{ aUpVector });
+    SetUpVector(Vector3Type{ aUpVector });
 }
 
 template <typename Real>
@@ -426,7 +426,7 @@ void Mathematics::Frustum3<Real>::SetRightVector(const AlgebraVector3& aRightVec
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    SetRightVector(Vector3{ aRightVector });
+    SetRightVector(Vector3Type{ aRightVector });
 }
 
 template <typename Real>

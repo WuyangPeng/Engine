@@ -26,7 +26,7 @@ namespace Mathematics
         using ClassType = Cone3<Real>;
 
         using MathType = Math<Real>;
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
 
     public:
         // 锐角锥体是Dot(A,X-V) = |X-V| cos(t)
@@ -45,8 +45,8 @@ namespace Mathematics
 
         // axis必须是单位长度和角度必须在(0,pi/2)。
         // 对于无限锥，设置“height”为Math<Real>::sm_MaxReal
-        Cone3(const Vector3& vertex,
-              const Vector3& axis,
+        Cone3(const Vector3Type& vertex,
+              const Vector3Type& axis,
               const Real angle,
               const Real height,
               const Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
@@ -57,21 +57,21 @@ namespace Mathematics
         Cone3(const Real cosAngle,
               const Real sinAngle,
               const Real height,
-              const Vector3& vertex,
-              const Vector3& axis,
+              const Vector3Type& vertex,
+              const Vector3Type& axis,
               const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetVertex() const noexcept;
-        NODISCARD Vector3 GetAxis() const noexcept;
+        NODISCARD Vector3Type GetVertex() const noexcept;
+        NODISCARD Vector3Type GetAxis() const noexcept;
         NODISCARD Real GetCosAngle() const noexcept;
         NODISCARD Real GetSinAngle() const noexcept;
         NODISCARD Real GetHeight() const noexcept;
 
     private:
-        Vector3 vertex;
-        Vector3 axis;
+        Vector3Type vertex;
+        Vector3Type axis;
         Real cosAngle;
         Real sinAngle;
         Real height;

@@ -24,7 +24,7 @@ Mathematics::Lozenge3<Real>::Lozenge3() noexcept
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-Mathematics::Lozenge3<Real>::Lozenge3(const Rectangle3& rectangle, Real radius) noexcept
+Mathematics::Lozenge3<Real>::Lozenge3(const Rectangle3Type& rectangle, Real radius) noexcept
     : rectangle{ rectangle }, radius{ radius }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;

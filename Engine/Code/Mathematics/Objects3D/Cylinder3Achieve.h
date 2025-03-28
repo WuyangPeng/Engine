@@ -17,14 +17,14 @@
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 Mathematics::Cylinder3<Real>::Cylinder3() noexcept
-    : axis{ Vector3::GetZero(), Vector3::GetUnitX() }, radius{ MathType::GetValue(1) }, height{ MathType::GetValue(1) }
+    : axis{ Vector3Type::GetZero(), Vector3Type::GetUnitX() }, radius{ MathType::GetValue(1) }, height{ MathType::GetValue(1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-Mathematics::Cylinder3<Real>::Cylinder3(const Line3& axis, Real radius, Real height) noexcept
+Mathematics::Cylinder3<Real>::Cylinder3(const Line3Type& axis, Real radius, Real height) noexcept
     : axis{ axis }, radius{ radius }, height{ height }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;

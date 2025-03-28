@@ -29,7 +29,7 @@ Mathematics::Algebra::Torus3<Real>::Torus3() noexcept
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-Mathematics::Algebra::Torus3<Real>::Torus3(Vector3 center, Vector3 direction0, Vector3 direction1, Vector3 normal, Real radius0, Real radius1) noexcept
+Mathematics::Algebra::Torus3<Real>::Torus3(Vector3Type center, Vector3Type direction0, Vector3Type direction1, Vector3Type normal, Real radius0, Real radius1) noexcept
     : center{ center },
       direction0{ direction0 },
       direction1{ direction1 },
@@ -93,7 +93,7 @@ typename Mathematics::Algebra::Torus3<Real>::EvaluateResult Mathematics::Algebra
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-void Mathematics::Algebra::Torus3<Real>::GetParameters(const Vector3& x, Real& u, Real& v) const
+void Mathematics::Algebra::Torus3<Real>::GetParameters(const Vector3Type& x, Real& u, Real& v) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -117,7 +117,7 @@ void Mathematics::Algebra::Torus3<Real>::GetParameters(const Vector3& x, Real& u
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-typename Mathematics::Algebra::Torus3<Real>::Vector3 Mathematics::Algebra::Torus3<Real>::GetCenter() const noexcept
+typename Mathematics::Algebra::Torus3<Real>::Vector3Type Mathematics::Algebra::Torus3<Real>::GetCenter() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -126,7 +126,7 @@ typename Mathematics::Algebra::Torus3<Real>::Vector3 Mathematics::Algebra::Torus
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-void Mathematics::Algebra::Torus3<Real>::SetCenter(const Vector3& aCenter) noexcept
+void Mathematics::Algebra::Torus3<Real>::SetCenter(const Vector3Type& aCenter) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -135,7 +135,7 @@ void Mathematics::Algebra::Torus3<Real>::SetCenter(const Vector3& aCenter) noexc
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-typename Mathematics::Algebra::Torus3<Real>::Vector3 Mathematics::Algebra::Torus3<Real>::GetDirection0() const noexcept
+typename Mathematics::Algebra::Torus3<Real>::Vector3Type Mathematics::Algebra::Torus3<Real>::GetDirection0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -144,7 +144,7 @@ typename Mathematics::Algebra::Torus3<Real>::Vector3 Mathematics::Algebra::Torus
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-void Mathematics::Algebra::Torus3<Real>::SetDirection0(const Vector3& aDirection0) noexcept
+void Mathematics::Algebra::Torus3<Real>::SetDirection0(const Vector3Type& aDirection0) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -153,7 +153,7 @@ void Mathematics::Algebra::Torus3<Real>::SetDirection0(const Vector3& aDirection
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-typename Mathematics::Algebra::Torus3<Real>::Vector3 Mathematics::Algebra::Torus3<Real>::GetDirection1() const noexcept
+typename Mathematics::Algebra::Torus3<Real>::Vector3Type Mathematics::Algebra::Torus3<Real>::GetDirection1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -162,7 +162,7 @@ typename Mathematics::Algebra::Torus3<Real>::Vector3 Mathematics::Algebra::Torus
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-void Mathematics::Algebra::Torus3<Real>::SetDirection1(const Vector3& aDirection1) noexcept
+void Mathematics::Algebra::Torus3<Real>::SetDirection1(const Vector3Type& aDirection1) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -171,7 +171,7 @@ void Mathematics::Algebra::Torus3<Real>::SetDirection1(const Vector3& aDirection
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-typename Mathematics::Algebra::Torus3<Real>::Vector3 Mathematics::Algebra::Torus3<Real>::GetNormal() const noexcept
+typename Mathematics::Algebra::Torus3<Real>::Vector3Type Mathematics::Algebra::Torus3<Real>::GetNormal() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -180,7 +180,7 @@ typename Mathematics::Algebra::Torus3<Real>::Vector3 Mathematics::Algebra::Torus
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-void Mathematics::Algebra::Torus3<Real>::SetNormal(const Vector3& aNormal) noexcept
+void Mathematics::Algebra::Torus3<Real>::SetNormal(const Vector3Type& aNormal) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

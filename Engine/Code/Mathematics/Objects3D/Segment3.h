@@ -27,8 +27,8 @@ namespace Mathematics
         using ClassType = Segment3<Real>;
 
         using MathType = Math<Real>;
-        using Vector3 = Vector3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
 
     public:
         // 线段被表示为(1-s) * P0 + s * P1，其中P0和P1是线段的端点和0 <= s <= 1。
@@ -39,20 +39,20 @@ namespace Mathematics
         // 且|t| <= e。值 e = Length(P1-P0)/2是该线段的“范围”（半径或半长）。
 
         // 构造函数计算center、direction和extent从beginPoint和endPoint
-        Segment3(const Vector3& beginPoint, const Vector3& endPoint, Real epsilon = MathType::GetZeroTolerance());
+        Segment3(const Vector3Type& beginPoint, const Vector3Type& endPoint, Real epsilon = MathType::GetZeroTolerance());
 
         // 构造函数计算beginPoint和endPoint从center、direction和extent
-        Segment3(Real extent, const Vector3& center, const Vector3& direction, Real epsilon = MathType::GetZeroTolerance());
+        Segment3(Real extent, const Vector3Type& center, const Vector3Type& direction, Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetBeginPoint() const noexcept;
-        NODISCARD Vector3 GetEndPoint() const noexcept;
-        NODISCARD Vector3 GetCenterPoint() const noexcept;
-        NODISCARD Vector3 GetDirection() const noexcept;
+        NODISCARD Vector3Type GetBeginPoint() const noexcept;
+        NODISCARD Vector3Type GetEndPoint() const noexcept;
+        NODISCARD Vector3Type GetCenterPoint() const noexcept;
+        NODISCARD Vector3Type GetDirection() const noexcept;
         NODISCARD Real GetExtent() const noexcept;
 
-        NODISCARD Segment3 GetMove(Real t, const Vector3& velocity) const;
+        NODISCARD Segment3 GetMove(Real t, const Vector3Type& velocity) const;
 
     private:
         // 当你改变beginPoint或endPoint时调用
@@ -63,12 +63,12 @@ namespace Mathematics
 
     private:
         // 终点表示。
-        Vector3 beginPoint;
-        Vector3 endPoint;
+        Vector3Type beginPoint;
+        Vector3Type endPoint;
 
         // 中心—方向—范围表示。
-        Vector3 center;
-        Vector3 direction;
+        Vector3Type center;
+        Vector3Type direction;
         Real extent;
 
         Real epsilon;

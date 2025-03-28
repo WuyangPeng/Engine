@@ -30,13 +30,13 @@ namespace Mathematics
         using ParentType = Polyhedron3<Real>;
 
         using MathType = Math<Real>;
-        using Plane3 = Plane3<Real>;
+        using Plane3Type = Plane3<Real>;
 
         // 该Plane表示Dot(N,X) = c。
         // N表示单位法线在这个平面。
         // c表示平面的常量。
         // X是平面上的任意点。
-        using PlaneContainerType = std::vector<Plane3>;
+        using PlaneContainerType = std::vector<Plane3Type>;
         using TrianglesType = std::set<int>;
 
         using Vector3 = typename ParentType::Vector3Type;
@@ -60,7 +60,7 @@ namespace Mathematics
 
         // 只读成员访问。
         NODISCARD PlaneContainerType GetPlanes() const;
-        NODISCARD const Plane3& GetPlane(int index) const;
+        NODISCARD const Plane3Type& GetPlane(int index) const;
 
         // 允许顶点修改。调用者必须确保多面体仍是凸多面体。
         // 只要你修改尽可能多的顶点后，调用UpdatePlanes()。

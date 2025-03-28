@@ -65,7 +65,7 @@ Mathematics::Vector3<Real> Mathematics::Torus3<Real>::GetPosition(Real s, Real t
     const auto sinTwoPiT = MathType::Sin(twoPiT);
     const auto maxRadius = outerRadius + innerRadius * cosTwoPiT;
 
-    return Vector3{ maxRadius * cosTwoPiS, maxRadius * sinTwoPiS, innerRadius * sinTwoPiT };
+    return Vector3Type{ maxRadius * cosTwoPiS, maxRadius * sinTwoPiS, innerRadius * sinTwoPiT };
 }
 
 template <typename Real>
@@ -79,7 +79,7 @@ Mathematics::Vector3<Real> Mathematics::Torus3<Real>::GetNormal(Real s, Real t) 
     const auto sinTwoPiS = MathType::Sin(twoPiS);
     const auto position = GetPosition(s, t);
 
-    Vector3 normal{ position.GetX() - outerRadius * cosTwoPiS,
+    Vector3Type normal{ position.GetX() - outerRadius * cosTwoPiS,
                     position.GetY() - outerRadius * sinTwoPiS,
                     position.GetZ() };
     normal.Normalize();
@@ -88,7 +88,7 @@ Mathematics::Vector3<Real> Mathematics::Torus3<Real>::GetNormal(Real s, Real t) 
 }
 
 template <typename Real>
-Mathematics::Torus3Parameters<Real> Mathematics::Torus3<Real>::GetParameters(const Vector3& position) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
+Mathematics::Torus3Parameters<Real> Mathematics::Torus3<Real>::GetParameters(const Vector3Type& position) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -130,7 +130,7 @@ Mathematics::Torus3Parameters<Real> Mathematics::Torus3<Real>::GetParameters(con
         }
     }
 
-    return Torus3Parameters{ s, t };
+    return Torus3ParametersType{ s, t };
 }
 
 #endif  // MATHEMATICS_OBJECTS_3D_TORUS3_ACHIEVE_H

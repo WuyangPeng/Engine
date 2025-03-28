@@ -17,7 +17,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::Cone3<Real>::Cone3(const Vector3& vertex, const Vector3& axis, const Real angle, const Real height, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+Mathematics::Cone3<Real>::Cone3(const Vector3Type& vertex, const Vector3Type& axis, const Real angle, const Real height, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : vertex{ vertex },
       axis{ axis },
       cosAngle{ MathType::Cos(angle) },
@@ -31,7 +31,7 @@ Mathematics::Cone3<Real>::Cone3(const Vector3& vertex, const Vector3& axis, cons
 }
 
 template <typename Real>
-Mathematics::Cone3<Real>::Cone3(const Real cosAngle, const Real sinAngle, const Real height, const Vector3& vertex, const Vector3& axis, const Real epsilon) noexcept
+Mathematics::Cone3<Real>::Cone3(const Real cosAngle, const Real sinAngle, const Real height, const Vector3Type& vertex, const Vector3Type& axis, const Real epsilon) noexcept
     : vertex{ vertex }, axis{ axis }, cosAngle{ cosAngle }, sinAngle{ sinAngle }, height{ height }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;

@@ -25,19 +25,19 @@ namespace Mathematics
 
         using ClassType = Capsule3<Real>;
 
-        using Segment3 = Segment3<Real>;
+        using Segment3Type = Segment3<Real>;
 
     public:
         // 胶囊体是一组从线段中等距的点， 公共距离被称为半径。
-        Capsule3(const Segment3& segment, Real radius) noexcept;
+        Capsule3(const Segment3Type& segment, Real radius) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Segment3 GetSegment() const noexcept;
+        NODISCARD Segment3Type GetSegment() const noexcept;
         NODISCARD Real GetRadius() const noexcept;
 
     private:
-        Segment3 segment;
+        Segment3Type segment;
         Real radius;
     };
 

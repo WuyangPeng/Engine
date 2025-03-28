@@ -28,10 +28,10 @@ namespace Mathematics
 
         using ClassType = Plane3<Real>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using MathType = Math<Real>;
         using Vector3Tools = Vector3Tools<Real>;
-        using Triangle3 = Triangle3<Real>;
+        using Triangle3Type = Triangle3<Real>;
 
     public:
         // 平面表示为Dot(N,X) = c，
@@ -42,20 +42,20 @@ namespace Mathematics
         Plane3() noexcept;
 
         // 直接指定N和C。
-        Plane3(const Vector3& normal, Real constant, Real epsilon = MathType::GetZeroTolerance()) noexcept;
+        Plane3(const Vector3Type& normal, Real constant, Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         // 指定N，c = Dot(N,P)，这里P是平面是的一点。
-        Plane3(const Vector3& normal, const Vector3& point, Real epsilon = MathType::GetZeroTolerance()) noexcept;
+        Plane3(const Vector3Type& normal, const Vector3Type& point, Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         // N = Cross(P1 - P0,P2 - P0)/Length(Cross(P1 - P0,P2 - P0))，
         // c = Dot(N,P0)，其中P0，P1，P2是在平面上的点。
-        Plane3(const Vector3& point0, const Vector3& point1, const Vector3& point2, Real epsilon = MathType::GetZeroTolerance());
+        Plane3(const Vector3Type& point0, const Vector3Type& point1, const Vector3Type& point2, Real epsilon = MathType::GetZeroTolerance());
 
-        explicit Plane3(const Triangle3& triangle, Real epsilon = MathType::GetZeroTolerance());
+        explicit Plane3(const Triangle3Type& triangle, Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetNormal() const noexcept;
+        NODISCARD Vector3Type GetNormal() const noexcept;
         NODISCARD Real GetConstant() const noexcept;
 
         // 计算d = Dot(N,P)-c 其中N是平面法线和c是平面常量。
@@ -63,18 +63,18 @@ namespace Mathematics
         // 如果返回值的符号是正的，则该点是在平面上的正方向，
         // 如果是负的，则在平面负方向，
         // 如果为零，则点在平面上。
-        NODISCARD Real DistanceTo(const Vector3& point) const noexcept;
+        NODISCARD Real DistanceTo(const Vector3Type& point) const noexcept;
 
         // 平面的正面是法线点所在的半空间，背面是另一半空间。
         // 函数返回点在平面的哪一侧。
-        NODISCARD NumericalValueSymbol WhichSide(const Vector3& point) const noexcept;
+        NODISCARD NumericalValueSymbol WhichSide(const Vector3Type& point) const noexcept;
 
-        void SetPlane(const Vector3& newNormal, const Vector3& point) noexcept;
+        void SetPlane(const Vector3Type& newNormal, const Vector3Type& point) noexcept;
 
-        NODISCARD Plane3 GetMove(Real t, const Vector3& velocity) const noexcept;
+        NODISCARD Plane3 GetMove(Real t, const Vector3Type& velocity) const noexcept;
 
     private:
-        Vector3 normal;
+        Vector3Type normal;
         Real constant;
 
         Real epsilon;

@@ -39,8 +39,8 @@ namespace Mathematics
         using ClassType = Cylinder3<Real>;
 
         using MathType = Math<Real>;
-        using Line3 = Line3<Real>;
-        using Vector3 = Vector3<Real>;
+        using Line3Type = Line3<Real>;
+        using Vector3Type = Vector3<Real>;
         using AlgebraLine3 = Algebra::Line3<Real>;
 
     public:
@@ -51,12 +51,12 @@ namespace Mathematics
         /// 缸体壁是在距离轴线Real单元。无限的缸体有无限的高度。
         /// 一个有限缸体有中点C在线的起点和具有有限的高度H
         /// 线段为有限圆柱体端点C-(H/2)*D 和 C+(H/2)*D，其中D是线的单位长度方向。
-        Cylinder3(const Line3& axis, Real radius, Real height) noexcept;
+        Cylinder3(const Line3Type& axis, Real radius, Real height) noexcept;
         Cylinder3(const AlgebraLine3& axis, Real radius, Real height);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Line3 GetAxis() const noexcept;
+        NODISCARD Line3Type GetAxis() const noexcept;
         NODISCARD Real GetRadius() const noexcept;
         NODISCARD Real GetHeight() const noexcept;
         NODISCARD AlgebraLine3 GetAlgebraAxis() const noexcept;
@@ -71,7 +71,7 @@ namespace Mathematics
         NODISCARD bool IsInfinite() const noexcept;
 
     private:
-        Line3 axis;
+        Line3Type axis;
         Real radius;
         Real height;
     };

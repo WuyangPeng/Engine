@@ -26,7 +26,7 @@ namespace Mathematics
         using ClassType = Lozenge3<Real>;
 
         using MathType = Math<Real>;
-        using Rectangle3 = Rectangle3<Real>;
+        using Rectangle3Type = Rectangle3<Real>;
         using AlgebraRectangle3 = Algebra::Rectangle3<Real>;
 
     public:
@@ -34,17 +34,17 @@ namespace Mathematics
         /// 轴(1,0,0)和 (0,1,0)以及范围均为1。
         /// 默认半径为1。
         Lozenge3() noexcept;
-        Lozenge3(const Rectangle3& rectangle, Real radius) noexcept;
+        Lozenge3(const Rectangle3Type& rectangle, Real radius) noexcept;
         Lozenge3(const AlgebraRectangle3& rectangle, Real radius);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Rectangle3 GetRectangle() const noexcept;
+        NODISCARD Rectangle3Type GetRectangle() const noexcept;
         NODISCARD AlgebraRectangle3 GetAlgebraRectangle() const noexcept;
         NODISCARD Real GetRadius() const noexcept;
 
     private:
-        Rectangle3 rectangle;
+        Rectangle3Type rectangle;
         Real radius;
     };
 

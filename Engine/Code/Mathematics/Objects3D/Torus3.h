@@ -27,9 +27,9 @@ namespace Mathematics
 
         using ClassType = Torus3<Real>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using MathType = Math<Real>;
-        using Torus3Parameters = Torus3Parameters<Real>;
+        using Torus3ParametersType = Torus3Parameters<Real>;
 
     public:
         // 以z轴为对称轴，中心在（0,0,0）圆环的实现
@@ -54,11 +54,11 @@ namespace Mathematics
         NODISCARD Real GetOuterRadius() const noexcept;
         NODISCARD Real GetInnerRadius() const noexcept;
 
-        NODISCARD Vector3 GetPosition(Real s, Real t) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
-        NODISCARD Vector3 GetNormal(Real s, Real t) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        NODISCARD Vector3Type GetPosition(Real s, Real t) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        NODISCARD Vector3Type GetNormal(Real s, Real t) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 返回值第一部分为s，第二部分为t
-        NODISCARD Torus3Parameters GetParameters(const Vector3& position) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD Torus3ParametersType GetParameters(const Vector3Type& position) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
     private:
         Real outerRadius;
