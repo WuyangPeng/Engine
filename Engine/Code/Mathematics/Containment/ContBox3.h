@@ -25,8 +25,8 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = ContBox3<Real>;
-        using Vector3 = Vector3<Real>;
-        using Points = std::vector<Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using Points = std::vector<Vector3Type>;
         using Box3 = Box3<Real>;
         using MathType = Math<Real>;
 
@@ -45,7 +45,7 @@ namespace Mathematics
         // 试验包含。
         // 设X = C + y0 * U0 + y1 * U1 + y2 * U2，其中C是包围盒的中心和U0,U1和U2是盒子的正交轴。
         // 如果|y_i| <= E_i ,则对于所有i在框中，这里E_i是包围盒的范围。
-        NODISCARD static bool InBox(const Vector3& point, const Box3& box);
+        NODISCARD static bool InBox(const Vector3Type& point, const Box3& box);
 
         // 构造包含另外两个定向包围盒的定向包围盒。
         // 其结果不能保证是包含输入包围盒的最小体积包围盒。

@@ -41,9 +41,9 @@ typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::ContAlig
     auto halfDiagonal = MathType::GetRational(1, 2) * (aabb.GetMaxPoint() - aabb.GetMinPoint());
 
     return Box3{ MathType::GetRational(1, 2) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
-                 Vector3::GetUnitX(),
-                 Vector3::GetUnitY(),
-                 Vector3::GetUnitZ(),
+                 Vector3Type::GetUnitX(),
+                 Vector3Type::GetUnitY(),
+                 Vector3Type::GetUnitZ(),
                  halfDiagonal[0],
                  halfDiagonal[1],
                  halfDiagonal[2] };
@@ -101,7 +101,7 @@ typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::ContOrie
 }
 
 template <typename Real>
-bool Mathematics::ContBox3<Real>::InBox(const Vector3& point, const Box3& box)
+bool Mathematics::ContBox3<Real>::InBox(const Vector3Type& point, const Box3& box)
 {
     auto diff = point - box.GetCenter();
     auto firstCoeff = Vector3Tools<Real>::DotProduct(diff, box.GetAxis0());
@@ -134,9 +134,9 @@ typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::MergeBox
     // 计算平均四元数，然后标准化为单位长度。
     // 结果为具有t值为1/2的两个输入四元数的球面线性插值。
     // 结果被转换回旋转矩阵和它的列被选择作为合并包围盒的轴。
-    std::vector<Vector3> lhsRotationColumn{ lhs.GetAxis0(), lhs.GetAxis1(), lhs.GetAxis2() };
+    std::vector<Vector3Type> lhsRotationColumn{ lhs.GetAxis0(), lhs.GetAxis1(), lhs.GetAxis2() };
 
-    std::vector<Vector3> rhsRotationColumn{ rhs.GetAxis0(), rhs.GetAxis1(), rhs.GetAxis2() };
+    std::vector<Vector3Type> rhsRotationColumn{ rhs.GetAxis0(), rhs.GetAxis1(), rhs.GetAxis2() };
 
     const Quaternion<Real> lhsQuaternion{ lhsRotationColumn };
     Quaternion<Real> rhsQuaternion{ rhsRotationColumn };
