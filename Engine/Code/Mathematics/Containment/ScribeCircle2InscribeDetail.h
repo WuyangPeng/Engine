@@ -49,7 +49,7 @@ void Mathematics::ScribeCircle2Inscribe<Real>::Calculate()
     }
     else
     {
-        circle2 = Circle2{};
+        circle2 = Circle2Type{};
         isCircleConstructed = false;
     }
 }
@@ -73,7 +73,7 @@ bool Mathematics::ScribeCircle2Inscribe<Real>::IsCircleConstructed() const noexc
 }
 
 template <typename Real>
-typename Mathematics::ScribeCircle2Inscribe<Real>::Circle2 Mathematics::ScribeCircle2Inscribe<Real>::GetCircle2() const
+typename Mathematics::ScribeCircle2Inscribe<Real>::Circle2Type Mathematics::ScribeCircle2Inscribe<Real>::GetCircle2() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

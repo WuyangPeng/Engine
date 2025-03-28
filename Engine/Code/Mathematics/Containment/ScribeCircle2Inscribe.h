@@ -25,7 +25,7 @@ namespace Mathematics
     public:
         using ClassType = ScribeCircle2Inscribe<Real>;
         using Vector2Type = Vector2<Real>;
-        using Circle2 = Circle2<Real>;
+        using Circle2Type = Circle2<Real>;
 
     public:
         ScribeCircle2Inscribe(const Vector2Type& v0, const Vector2Type& v1, const Vector2Type& v2);
@@ -34,14 +34,14 @@ namespace Mathematics
 
         // 如果圆被构造，返回真，否则返回假，（输入点是线性相关的）
         NODISCARD bool IsCircleConstructed() const noexcept;
-        NODISCARD Circle2 GetCircle2() const;
+        NODISCARD Circle2Type GetCircle2() const;
 
     private:
         void Calculate();
 
     private:
         std::vector<Vector2Type> points;
-        Circle2 circle2;
+        Circle2Type circle2;
         bool isCircleConstructed;
     };
 
