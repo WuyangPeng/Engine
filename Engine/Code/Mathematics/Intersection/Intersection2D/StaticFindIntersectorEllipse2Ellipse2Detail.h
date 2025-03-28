@@ -16,7 +16,7 @@
 #include "Mathematics/NumericalAnalysis/PolynomialRoots.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::StaticFindIntersectorEllipse2Ellipse2(const Ellipse2& ellipse0, const Ellipse2& ellipse1, const Real epsilon)
+Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::StaticFindIntersectorEllipse2Ellipse2(const Ellipse2Type& ellipse0, const Ellipse2Type& ellipse1, const Real epsilon)
     : ParentType{ epsilon }, ellipse0{ ellipse0 }, ellipse1{ ellipse1 }, point{}, transverse{}, digitsAccuracy{ 10 }
 {
     Find();
@@ -117,12 +117,12 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
     const auto matrix1Axis0 = matrix1 * ellipse0.GetAxis0();
     const auto matrix1Axis1 = matrix1 * ellipse0.GetAxis1();
 
-    const CoeffType coeff{ Vector2Tools::DotProduct(matrix1Center0MinusCenter1, center0MinusCenter1) - MathType::GetValue(1),
-                           (MathType::GetValue(2)) * ellipse0.GetExtent0() * Vector2Tools::DotProduct(matrix1Axis0, center0MinusCenter1),
-                           (MathType::GetValue(2)) * ellipse0.GetExtent1() * Vector2Tools::DotProduct(matrix1Axis1, center0MinusCenter1),
-                           ellipse0.GetExtent0() * ellipse0.GetExtent0() * Vector2Tools::DotProduct(matrix1Axis0, ellipse0.GetAxis0()),
-                           (MathType::GetValue(2)) * ellipse0.GetExtent0() * ellipse0.GetExtent1() * Vector2Tools::DotProduct(matrix1Axis0, ellipse0.GetAxis1()),
-                           ellipse0.GetExtent1() * ellipse0.GetExtent1() * Vector2Tools::DotProduct(matrix1Axis1, ellipse0.GetAxis1()) };
+    const CoeffType coeff{ Vector2ToolsType::DotProduct(matrix1Center0MinusCenter1, center0MinusCenter1) - MathType::GetValue(1),
+                           (MathType::GetValue(2))*ellipse0.GetExtent0() * Vector2ToolsType::DotProduct(matrix1Axis0, center0MinusCenter1),
+                           (MathType::GetValue(2))*ellipse0.GetExtent1() * Vector2ToolsType::DotProduct(matrix1Axis1, center0MinusCenter1),
+                           ellipse0.GetExtent0() * ellipse0.GetExtent0() * Vector2ToolsType::DotProduct(matrix1Axis0, ellipse0.GetAxis0()),
+                           (MathType::GetValue(2))*ellipse0.GetExtent0() * ellipse0.GetExtent1() * Vector2ToolsType::DotProduct(matrix1Axis0, ellipse0.GetAxis1()),
+                           ellipse0.GetExtent1() * ellipse0.GetExtent1() * Vector2ToolsType::DotProduct(matrix1Axis1, ellipse0.GetAxis1()) };
 
     /// 求解二次方，保存这些值以供以后测试接近零和根部抛光的程度。
     auto ellipse0Coefficients = ellipse0.ToCoefficients();
@@ -205,7 +205,7 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
 }
 
 template <typename Real>
-Mathematics::Polynomial<Real> Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::GetQuartic(const Ellipse2& ellipse0, const Ellipse2& ellipse1)
+Mathematics::Polynomial<Real> Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::GetQuartic(const Ellipse2Type& ellipse0, const Ellipse2Type& ellipse1)
 {
     const auto ellipse2Coefficients0 = ellipse0.ToCoefficients();
     const auto ellipse2Coefficients1 = ellipse1.ToCoefficients();
@@ -251,9 +251,9 @@ Mathematics::Polynomial<Real> Mathematics::StaticFindIntersectorEllipse2Ellipse2
 
     Polynomial<Real> poly{ 4 };
     poly[0] = d01 * d13 - d30 * d30;
-    poly[1] = d01 * d43 + d04p21 * d13 - (MathType::GetValue(2)) * d30 * d32;
-    poly[2] = d04p21 * d43 + d24p51 * d13 - (MathType::GetValue(2)) * d30 * d35 - d32 * d32;
-    poly[3] = d24p51 * d43 + d54 * d13 - (MathType::GetValue(2)) * d32 * d35;
+    poly[1] = d01 * d43 + d04p21 * d13 - (MathType::GetValue(2))*d30 * d32;
+    poly[2] = d04p21 * d43 + d24p51 * d13 - (MathType::GetValue(2))*d30 * d35 - d32 * d32;
+    poly[3] = d24p51 * d43 + d54 * d13 - (MathType::GetValue(2))*d32 * d35;
     poly[4] = d54 * d43 - d35 * d35;
 
     return poly;
@@ -268,8 +268,8 @@ typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Measurement M
     ///  f'(angle) = -d1 * s + d2 * c + (d5 - d3) * 2 * c * s + d4 * (c^2 - s^2)
 
     auto diff = vector2 - ellipse0.GetCenter();
-    auto cos = Vector2Tools::DotProduct(diff, ellipse0.GetAxis0()) / ellipse0.GetExtent0();
-    auto sin = Vector2Tools::DotProduct(diff, ellipse0.GetAxis1()) / ellipse0.GetExtent1();
+    auto cos = Vector2ToolsType::DotProduct(diff, ellipse0.GetAxis0()) / ellipse0.GetExtent0();
+    auto sin = Vector2ToolsType::DotProduct(diff, ellipse0.GetAxis1()) / ellipse0.GetExtent1();
     auto aTan = MathType::ATan2(sin, cos);
     auto f0 = coeff.at(0) + coeff.at(1) * cos + coeff.at(2) * sin + coeff.at(3) * cos * cos + coeff.at(4) * cos * sin + coeff.at(5) * sin * sin;
     auto df0 = -coeff.at(1) * sin + coeff.at(2) * cos + (MathType::GetValue(2)) * (coeff.at(5) - coeff.at(3)) * cos * sin + coeff.at(4) * (cos * cos - sin * sin);

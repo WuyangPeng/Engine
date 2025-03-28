@@ -99,7 +99,7 @@ Mathematics::NumericalValueSymbol Mathematics::StaticTestIntersectorTriangle2Tri
     auto zero = 0;
     for (const auto& value : vertex)
     {
-        auto t = Vector2Tools::DotProduct(direction, (value - point));
+        auto t = Vector2ToolsType::DotProduct(direction, (value - point));
         if (MathType::GetValue(0) < t)
         {
             ++positive;

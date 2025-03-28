@@ -56,10 +56,10 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorLine2Box2<Real>::Test()
 {
     const auto diff = line.GetOrigin() - box.GetCenter();
-    const auto perp = Vector2Tools::GetPerp(line.GetDirection());
-    const auto lhs = MathType::FAbs(Vector2Tools::DotProduct(perp, diff));
-    const auto part0 = MathType::FAbs(Vector2Tools::DotProduct(perp, box.GetAxis0()));
-    const auto part1 = MathType::FAbs(Vector2Tools::DotProduct(perp, box.GetAxis1()));
+    const auto perp = Vector2ToolsType::GetPerp(line.GetDirection());
+    const auto lhs = MathType::FAbs(Vector2ToolsType::DotProduct(perp, diff));
+    const auto part0 = MathType::FAbs(Vector2ToolsType::DotProduct(perp, box.GetAxis0()));
+    const auto part1 = MathType::FAbs(Vector2ToolsType::DotProduct(perp, box.GetAxis1()));
     const auto rhs = box.GetExtent0() * part0 + box.GetExtent1() * part1;
 
     if (lhs <= rhs)

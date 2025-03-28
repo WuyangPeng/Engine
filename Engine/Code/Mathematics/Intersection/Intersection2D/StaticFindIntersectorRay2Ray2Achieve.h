@@ -53,9 +53,9 @@ void Mathematics::StaticFindIntersectorRay2Ray2<Real>::Find()
     }
     else if (intersectionType == IntersectionType::Line)
     {
-        auto dotProduct = Vector2Tools::DotProduct(lhsRay.GetDirection(), rhsRay.GetOrigin() - lhsRay.GetOrigin());
+        auto dotProduct = Vector2ToolsType::DotProduct(lhsRay.GetDirection(), rhsRay.GetOrigin() - lhsRay.GetOrigin());
 
-        if (MathType::GetValue(0) < Vector2Tools::DotProduct(lhsRay.GetDirection(), rhsRay.GetDirection()))
+        if (MathType::GetValue(0) < Vector2ToolsType::DotProduct(lhsRay.GetDirection(), rhsRay.GetDirection()))
         {
             // 射线是共线的并且在相同的方向，所以它们必须是重叠的。
             quantity = std::numeric_limits<int>::max();

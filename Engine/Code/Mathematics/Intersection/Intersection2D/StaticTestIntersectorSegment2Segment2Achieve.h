@@ -54,7 +54,7 @@ void Mathematics::StaticTestIntersector<Mathematics::Segment2<Real>, Mathematics
     {
         // 计算线段m_RhsSegment终点相对于线段m_LhsSegment的位置。
         auto difference = rhsSegment.GetCenterPoint() - lhsSegment.GetCenterPoint();
-        auto dotProduct = Vector2Tools::DotProduct(lhsSegment.GetDirection(), difference);
+        auto dotProduct = Vector2ToolsType::DotProduct(lhsSegment.GetDirection(), difference);
         auto tmin = dotProduct - rhsSegment.GetExtent();
         auto tmax = dotProduct + rhsSegment.GetExtent();
 

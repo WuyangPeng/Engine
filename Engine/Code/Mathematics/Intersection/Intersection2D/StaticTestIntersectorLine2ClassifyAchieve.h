@@ -45,14 +45,14 @@ void Mathematics::StaticTestIntersectorLine2Classify<Real>::Test(const Vector2Ty
     /// 如果D0.Dot(Perp(D1))不为零，则s0 = Q.Dot(Perp(D1)) / D0.Dot(Perp(D1))产生交点。
     /// 同样，s1 = Q.Dot(Perp(D0)) / D0.Dot(Perp(D1))
     auto difference = rhsOrigin - lhsOrigin;
-    auto lhsDirectionDotPerpRhsDirection = Vector2Tools::DotPerp(lhsDirection, rhsDirection);
+    auto lhsDirectionDotPerpRhsDirection = Vector2ToolsType::DotPerp(lhsDirection, rhsDirection);
     if (dotThreshold < MathType::FAbs(lhsDirectionDotPerpRhsDirection))
     {
         // 线在单个点相交。
         if (isCalculateParameter)
         {
-            auto differenceDotPerpLhsDirection = Vector2Tools::DotPerp(difference, lhsDirection);
-            auto differenceDotPerpRhsDirection = Vector2Tools::DotPerp(difference, rhsDirection);
+            auto differenceDotPerpLhsDirection = Vector2ToolsType::DotPerp(difference, lhsDirection);
+            auto differenceDotPerpRhsDirection = Vector2ToolsType::DotPerp(difference, rhsDirection);
             parameter0 = differenceDotPerpRhsDirection / lhsDirectionDotPerpRhsDirection;
             parameter1 = differenceDotPerpLhsDirection / lhsDirectionDotPerpRhsDirection;
         }
@@ -70,7 +70,7 @@ void Mathematics::StaticTestIntersectorLine2Classify<Real>::Test(const Vector2Ty
     }
 
     difference.Normalize(dotThreshold);
-    auto differenceDotPerpRhsDirection = Vector2Tools::DotPerp(difference, rhsDirection);
+    auto differenceDotPerpRhsDirection = Vector2ToolsType::DotPerp(difference, rhsDirection);
     if (MathType::FAbs(differenceDotPerpRhsDirection) <= dotThreshold)
     {
         // 线是共线的.

@@ -28,7 +28,7 @@ namespace Mathematics
         using Vector2Type = Vector2<Real>;
         using Segment2 = Segment2<Real>;
         using Triangle2 = Triangle2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:

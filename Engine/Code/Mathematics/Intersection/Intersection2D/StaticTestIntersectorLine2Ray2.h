@@ -27,7 +27,7 @@ namespace Mathematics
         using Vector2Type = Vector2<Real>;
         using Line2 = Line2<Real>;
         using Ray2 = Ray2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:

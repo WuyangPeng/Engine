@@ -28,7 +28,7 @@ namespace Mathematics
         using MathType = typename ParentType::MathType;
         using Vector2Type = Vector2<Real>;
         using Triangle2 = Triangle2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
 
     public:
         StaticFindIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, const Real epsilon = MathType::GetZeroTolerance());

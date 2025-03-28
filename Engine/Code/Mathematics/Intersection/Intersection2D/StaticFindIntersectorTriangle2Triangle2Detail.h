@@ -82,7 +82,7 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Find()
 
         // ²Ã¼ô±ßÑØ <V0[i1],V0[i0]>.
         const Vector2 axis{ vector1.GetY() - vector0.GetY(), vector0.GetX() - vector1.GetX() };
-        auto dot = Vector2Tools::DotProduct(axis, vector1);
+        auto dot = Vector2ToolsType::DotProduct(axis, vector1);
         intersection = ClipConvexPolygonAgainstLine(axis, dot, intersection);
         if (intersection.empty())
         {
@@ -111,7 +111,7 @@ typename Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Intersectio
     auto index = 0;
     for (const auto& value : intersection)
     {
-        auto diff = Vector2Tools::DotProduct(axis, value) - dot;
+        auto diff = Vector2ToolsType::DotProduct(axis, value) - dot;
         dotProduct.emplace_back(diff);
         if (MathType::GetValue(0) < diff)
         {
