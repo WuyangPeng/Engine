@@ -215,7 +215,7 @@ void Mathematics::TriangulateEC<Real>::InitializePositions(const Positions& posi
                 sPositions.at(i) = positions.at(i);
             }
 
-            query = std::make_shared<Query2>(sPositions);
+            query = std::make_shared<Query2Type>(sPositions);
             return;
         }
 
@@ -407,7 +407,7 @@ int Mathematics::TriangulateEC<Real>::TriangleQuery(const Vector2Type& position,
             return System::EnumCastUnderlying(Query2Integer<Real>(triangleVec).ToTriangle(position, 0, 1, 2));
 
         case QueryType::Real:
-            return System::EnumCastUnderlying(Query2(triangleVec).ToTriangle(position, 0, 1, 2));
+            return System::EnumCastUnderlying(Query2Type(triangleVec).ToTriangle(position, 0, 1, 2));
 
         case QueryType::Rational:
             return System::EnumCastUnderlying(Query2Rational<Real>(triangleVec).ToTriangle(position, 0, 1, 2));

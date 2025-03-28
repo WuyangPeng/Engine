@@ -101,8 +101,8 @@ namespace Mathematics
         void RemoveR(int i);
 
     private:
-        using Query2 = Query2<Real>;
-        using Query2SharedPtr = std::shared_ptr<Query2>;
+        using Query2Type = Query2<Real>;
+        using Query2SharedPtr = std::shared_ptr<Query2Type>;
 
     private:
         std::vector<Vertex> vertices;
