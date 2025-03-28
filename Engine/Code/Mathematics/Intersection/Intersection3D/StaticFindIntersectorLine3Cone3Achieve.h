@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorLine3Cone3<Real>::StaticFindIntersectorLine3Cone3(const Line3& line, const Cone3& cone, const Real epsilon)
+Mathematics::StaticFindIntersectorLine3Cone3<Real>::StaticFindIntersectorLine3Cone3(const Line3Type& line, const Cone3Type& cone, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, cone{ cone }, quantity{}, point0{}, point1{}
 {
     Find();

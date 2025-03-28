@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorPlane3Plane3<Real>::StaticTestIntersectorPlane3Plane3(const Plane3& plane0, const Plane3& plane1, const Real epsilon) noexcept
+Mathematics::StaticTestIntersectorPlane3Plane3<Real>::StaticTestIntersectorPlane3Plane3(const Plane3Type& plane0, const Plane3Type& plane1, const Real epsilon) noexcept
     : ParentType{ epsilon }, plane0{ plane0 }, plane1{ plane1 }
 {
     Test();

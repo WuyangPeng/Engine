@@ -26,18 +26,18 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Box3 = Box3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Box3Type = Box3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorPlane3Box3(const Plane3& plane, const Box3& box, const Real epsilon = MathType::GetZeroTolerance());
+        StaticTestIntersectorPlane3Box3(const Plane3Type& plane, const Box3Type& box, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Plane3 GetPlane() const noexcept;
-        NODISCARD Box3 GetBox() const noexcept;
+        NODISCARD Plane3Type GetPlane() const noexcept;
+        NODISCARD Box3Type GetBox() const noexcept;
 
         NODISCARD bool BoxIsCulled() const;
 
@@ -45,8 +45,8 @@ namespace Mathematics
         void Test();
 
     private:
-        Plane3 plane;
-        Box3 box;
+        Plane3Type plane;
+        Box3Type box;
     };
 }
 

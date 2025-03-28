@@ -26,18 +26,18 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Line3 = Line3<Real>;
-        using Cylinder3 = Cylinder3<Real>;
+        using Line3Type = Line3<Real>;
+        using Cylinder3Type = Cylinder3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorLine3Cylinder3(const Line3& line, const Cylinder3& cylinder, const Real epsilon = MathType::GetZeroTolerance());
+        StaticFindIntersectorLine3Cylinder3(const Line3Type& line, const Cylinder3Type& cylinder, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line3 GetLine() const noexcept;
-        NODISCARD Cylinder3 GetCylinder() const noexcept;
+        NODISCARD Line3Type GetLine() const noexcept;
+        NODISCARD Cylinder3Type GetCylinder() const noexcept;
 
         NODISCARD int GetQuantity() const noexcept;
         NODISCARD Vector3Type GetPoint(int index) const;
@@ -46,8 +46,8 @@ namespace Mathematics
         void Find();
 
     private:
-        Line3 line;
-        Cylinder3 cylinder;
+        Line3Type line;
+        Cylinder3Type cylinder;
 
         int quantity;
         Vector3Type point0;
@@ -62,7 +62,7 @@ namespace Mathematics
             Real parameter1;
         };
 
-        NODISCARD static FindShared Find(const Vector3Type& origin, const Vector3Type& dir, const Cylinder3& cylinder);
+        NODISCARD static FindShared Find(const Vector3Type& origin, const Vector3Type& dir, const Cylinder3Type& cylinder);
     };
 }
 

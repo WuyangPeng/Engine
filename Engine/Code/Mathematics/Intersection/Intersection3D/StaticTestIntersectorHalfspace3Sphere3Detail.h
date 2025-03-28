@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorHalfspace3Sphere3<Real>::StaticTestIntersectorHalfspace3Sphere3(const Plane3& halfspace, const Sphere3& sphere, const Real epsilon) noexcept
+Mathematics::StaticTestIntersectorHalfspace3Sphere3<Real>::StaticTestIntersectorHalfspace3Sphere3(const Plane3Type& halfspace, const Sphere3Type& sphere, const Real epsilon) noexcept
     : ParentType{ epsilon }, halfspace{ halfspace }, sphere{ sphere }
 {
     Test();

@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorLine3Sphere3<Real>::StaticFindIntersectorLine3Sphere3(const Line3& line, const Sphere3& sphere, const Real epsilon)
+Mathematics::StaticFindIntersectorLine3Sphere3<Real>::StaticFindIntersectorLine3Sphere3(const Line3Type& line, const Sphere3Type& sphere, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, sphere{ sphere }, quantity{}, point0{}, point1{}, lineParameter0{}, lineParameter1{}
 {
     Find();

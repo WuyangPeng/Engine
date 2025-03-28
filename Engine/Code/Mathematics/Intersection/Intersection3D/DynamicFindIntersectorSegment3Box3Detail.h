@@ -18,7 +18,7 @@
 #include "Mathematics/Intersection/Intersection3D/IntersectorConfigurationDetail.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorSegment3Box3<Real>::DynamicFindIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorSegment3Box3<Real>::DynamicFindIntersectorSegment3Box3(const Segment3Type& segment, const Box3Type& box, bool solid, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, segment{ segment }, box{ box }, solid{ solid }, quantity{}, point0{}, point1{}
 {
     Find();

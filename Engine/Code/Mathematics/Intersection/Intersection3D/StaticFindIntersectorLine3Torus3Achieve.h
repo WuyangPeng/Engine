@@ -17,7 +17,7 @@
 #include "Mathematics/Objects3D/Torus3Detail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorLine3Torus3<Real>::StaticFindIntersectorLine3Torus3(const Line3& line, const Torus3& torus, const Real epsilon)
+Mathematics::StaticFindIntersectorLine3Torus3<Real>::StaticFindIntersectorLine3Torus3(const Line3Type& line, const Torus3Type& torus, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, torus{ torus }, quantity{}, point0{}, point1{}, point2{}, point3{}
 {
     Find();

@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>::StaticTestIntersectorPlane3Cylinder3(const Plane3& plane, const Cylinder3& cylinder, const Real epsilon) noexcept(gAssert < 3 || gMathematicsAssert < 3)
+Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>::StaticTestIntersectorPlane3Cylinder3(const Plane3Type& plane, const Cylinder3Type& cylinder, const Real epsilon) noexcept(gAssert < 3 || gMathematicsAssert < 3)
     : ParentType{ epsilon }, plane{ plane }, cylinder{ cylinder }
 {
     Test();

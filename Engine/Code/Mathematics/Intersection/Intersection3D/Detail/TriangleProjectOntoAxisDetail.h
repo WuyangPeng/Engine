@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::TriangleProjectOntoAxis<Real>::TriangleProjectOntoAxis(const Triangle3& triangle, const Vector3Type& axis)
+Mathematics::TriangleProjectOntoAxis<Real>::TriangleProjectOntoAxis(const Triangle3Type& triangle, const Vector3Type& axis)
     : min{}, max{}
 {
     Project(triangle, axis);
@@ -24,7 +24,7 @@ Mathematics::TriangleProjectOntoAxis<Real>::TriangleProjectOntoAxis(const Triang
 }
 
 template <typename Real>
-void Mathematics::TriangleProjectOntoAxis<Real>::Project(const Triangle3& triangle, const Vector3Type& axis)
+void Mathematics::TriangleProjectOntoAxis<Real>::Project(const Triangle3Type& triangle, const Vector3Type& axis)
 {
     using Container = std::vector<Real>;
 

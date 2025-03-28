@@ -19,7 +19,7 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorRay3Plane3<Real>::StaticTestIntersectorRay3Plane3(const Ray3& ray, const Plane3& plane, const Real epsilon) noexcept
+Mathematics::StaticTestIntersectorRay3Plane3<Real>::StaticTestIntersectorRay3Plane3(const Ray3Type& ray, const Plane3Type& plane, const Real epsilon) noexcept
     : ParentType{ epsilon }, ray{ ray }, plane{ plane }
 {
     Test();

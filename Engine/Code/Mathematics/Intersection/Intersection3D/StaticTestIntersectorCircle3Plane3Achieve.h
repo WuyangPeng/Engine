@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorCircle3Plane3<Real>::StaticTestIntersectorCircle3Plane3(const Circle3& circle, const Plane3& plane, const Real epsilon)
+Mathematics::StaticTestIntersectorCircle3Plane3<Real>::StaticTestIntersectorCircle3Plane3(const Circle3Type& circle, const Plane3Type& plane, const Real epsilon)
     : ParentType{ epsilon }, circle{ circle }, plane{ plane }
 {
     Test();
@@ -56,7 +56,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorCircle3Plane3<Real>::Test()
 {
     // 构造圆的平面。
-    const Plane3 circlePlane{ circle.GetNormal(), circle.GetCenter() };
+    const Plane3Type circlePlane{ circle.GetNormal(), circle.GetCenter() };
 
     // 计算此平面与输入平面的交点。
     StaticFindIntersectorPlane3Plane3<Real> intr{ plane, circlePlane };

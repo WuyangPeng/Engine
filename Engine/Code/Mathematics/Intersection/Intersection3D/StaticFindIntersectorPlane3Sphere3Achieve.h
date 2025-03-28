@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorPlane3Sphere3<Real>::StaticFindIntersectorPlane3Sphere3(const Plane3& plane, const Sphere3& sphere, const Real epsilon)
+Mathematics::StaticFindIntersectorPlane3Sphere3<Real>::StaticFindIntersectorPlane3Sphere3(const Plane3Type& plane, const Sphere3Type& sphere, const Real epsilon)
     : ParentType{ epsilon }, plane{ plane }, sphere{ sphere }, circle{ Vector3Type::GetZero(), Vector3Type::GetZero(), Vector3Type::GetZero(), Vector3Type::GetZero(), MathType::GetValue(0) }
 {
     Find();

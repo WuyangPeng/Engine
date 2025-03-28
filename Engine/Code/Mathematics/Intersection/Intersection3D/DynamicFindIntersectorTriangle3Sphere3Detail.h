@@ -16,7 +16,7 @@
 #include "Mathematics/Objects3D/Segment3Detail.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::DynamicFindIntersectorTriangle3Sphere3(const Triangle3& triangle, const Sphere3& sphere, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::DynamicFindIntersectorTriangle3Sphere3(const Triangle3Type& triangle, const Sphere3Type& sphere, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, triangle{ triangle }, sphere{ sphere }, point{}
 {
     Find();

@@ -26,21 +26,21 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Sphere3 = Sphere3<Real>;
-        using Circle3 = Circle3<Real>;
+        using Sphere3Type = Sphere3<Real>;
+        using Circle3Type = Circle3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorSphere3Sphere3(const Sphere3& sphere0, const Sphere3& sphere1, const Real epsilon = MathType::GetZeroTolerance());
+        StaticFindIntersectorSphere3Sphere3(const Sphere3Type& sphere0, const Sphere3Type& sphere1, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Sphere3 GetSphere0() const noexcept;
-        NODISCARD Sphere3 GetSphere1() const noexcept;
+        NODISCARD Sphere3Type GetSphere0() const noexcept;
+        NODISCARD Sphere3Type GetSphere1() const noexcept;
 
         // 用于静态查找交叉点查询的交叉点集。
-        NODISCARD Circle3 GetCircle() const noexcept;
+        NODISCARD Circle3Type GetCircle() const noexcept;
 
         // 用于动态查找相交查询的相交集。
         NODISCARD Vector3Type GetContactPoint() const noexcept;
@@ -49,11 +49,11 @@ namespace Mathematics
         void Find();
 
     private:
-        Sphere3 sphere0;
-        Sphere3 sphere1;
+        Sphere3Type sphere0;
+        Sphere3Type sphere1;
 
         // 静态球体的相交圆。
-        Circle3 circle;
+        Circle3Type circle;
 
         // 动态球体的交点。
         Vector3Type contactPoint;

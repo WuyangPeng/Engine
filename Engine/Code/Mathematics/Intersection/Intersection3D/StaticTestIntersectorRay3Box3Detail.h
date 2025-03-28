@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorRay3Box3<Real>::StaticTestIntersectorRay3Box3(const Ray3& ray, const Box3& box, const Real epsilon)
+Mathematics::StaticTestIntersectorRay3Box3<Real>::StaticTestIntersectorRay3Box3(const Ray3Type& ray, const Box3Type& box, const Real epsilon)
     : ParentType{ epsilon }, ray{ ray }, box{ box }
 {
     Test();

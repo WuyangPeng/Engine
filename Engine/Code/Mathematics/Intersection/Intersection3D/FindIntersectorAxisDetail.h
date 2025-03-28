@@ -15,7 +15,7 @@
 #include "Mathematics/Intersection/Flags/ContactSide.h"
 
 template <typename Real>
-Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Triangle3& triangle, const Vector3Type& velocity, Real tmax)
+Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Triangle3Type& triangle, const Vector3Type& velocity, Real tmax)
     : result{ false }, tFirst{}, tLast{ Math<Real>::maxReal }, side{}, cfgFinal0{}, cfgFinal1{}
 {
     const auto segmentCfgStart = GetConfiguration(axis, segment);
@@ -28,7 +28,7 @@ Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3Type& a
 }
 
 template <typename Real>
-Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Box3& box, const Vector3Type& velocity, Real tmax)
+Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Box3Type& box, const Vector3Type& velocity, Real tmax)
     : result{ false }, tFirst{}, tLast{ Math<Real>::maxReal }, side{}, cfgFinal0{}, cfgFinal1{}
 {
     const auto segmentCfgStart = GetConfiguration(axis, segment);
@@ -41,7 +41,7 @@ Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3Type& a
 }
 
 template <typename Real>
-Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3Type& axis, const Triangle3& triangle, const Box3& box, const Vector3Type& velocity, Real tmax)
+Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3Type& axis, const Triangle3Type& triangle, const Box3Type& box, const Vector3Type& velocity, Real tmax)
     : result{ false }, tFirst{}, tLast{ Math<Real>::maxReal }, side{}, cfgFinal0{}, cfgFinal1{}
 {
     const auto triangleCfgStart = GetConfiguration(axis, triangle);
@@ -53,7 +53,7 @@ Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3Type& a
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 template <typename Real>
-Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3Type& axis, const Box3& box0, const Box3& box1, const Vector3Type& velocity, Real tmax)
+Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3Type& axis, const Box3Type& box0, const Box3Type& box1, const Vector3Type& velocity, Real tmax)
     : result{ false }, tFirst{}, tLast{ Math<Real>::maxReal }, side{}, cfgFinal0{}, cfgFinal1{}
 {
     const auto box0CfgStart = GetConfiguration(axis, box0);
@@ -158,7 +158,7 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
 }
 
 template <typename Real>
-Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Real>::GetConfiguration(const Vector3Type& axis, const Triangle3& triangle)
+Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Real>::GetConfiguration(const Vector3Type& axis, const Triangle3Type& triangle)
 {
     IntersectorConfiguration cfg{};
 
@@ -286,7 +286,7 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
 }
 
 template <typename Real>
-Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Real>::GetConfiguration(const Vector3Type& axis, const Box3& box)
+Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Real>::GetConfiguration(const Vector3Type& axis, const Box3Type& box)
 {
     // IntersectorConfiguration.mIndex的坐标排序方案的说明。
     // 顶点数（向上/向下）与范围的符号（仅在向后映射中很重要）

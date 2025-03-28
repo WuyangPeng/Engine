@@ -28,16 +28,16 @@ namespace Mathematics
         using ParentType = DynamicIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Line3 = Line3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Line3Type = Line3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using Container = std::vector<Vector3Type>;
 
     public:
-        DynamicFindIntersectorTriangle3Triangle3(const Triangle3& triangle0,
-                                                 const Triangle3& triangle1,
+        DynamicFindIntersectorTriangle3Triangle3(const Triangle3Type& triangle0,
+                                                 const Triangle3Type& triangle1,
                                                  Real tmax,
                                                  const Vector3Type& lhsVelocity,
                                                  const Vector3Type& rhsVelocity,
@@ -45,8 +45,8 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Triangle3 GetTriangle0() const noexcept;
-        NODISCARD Triangle3 GetTriangle1() const noexcept;
+        NODISCARD Triangle3Type GetTriangle0() const noexcept;
+        NODISCARD Triangle3Type GetTriangle1() const noexcept;
 
         NODISCARD int GetQuantity() const;
         NODISCARD Vector3Type GetPoint(int index) const;
@@ -91,23 +91,23 @@ namespace Mathematics
 
         NODISCARD IntersectInfo FindOverlap(const Vector3Type& axis, Real tmax, const Vector3Type& velocity);
 
-        void FindContactSet(const Triangle3& moveTriangle0,
-                            const Triangle3& moveTriangle1,
+        void FindContactSet(const Triangle3Type& moveTriangle0,
+                            const Triangle3Type& moveTriangle1,
                             const ContactSide& side,
                             const Configuration& cfg0,
                             const Configuration& cfg1);
 
-        NODISCARD static Configuration ProjectOntoAxis(const Triangle3& triangle, const Vector3Type& axis);
+        NODISCARD static Configuration ProjectOntoAxis(const Triangle3Type& triangle, const Vector3Type& axis);
 
         void GetEdgeEdgeIntersection(const Vector3Type& u0, const Vector3Type& u1, const Vector3Type& v0, const Vector3Type& v1);
 
-        void GetEdgeFaceIntersection(const Vector3Type& u0, const Vector3Type& u1, const Triangle3& triangle);
+        void GetEdgeFaceIntersection(const Vector3Type& u0, const Vector3Type& u1, const Triangle3Type& triangle);
 
-        void GetCoplanarIntersection(const Plane3& plane, const Triangle3& moveTriangle0, const Triangle3& moveTriangle1);
+        void GetCoplanarIntersection(const Plane3Type& plane, const Triangle3Type& moveTriangle0, const Triangle3Type& moveTriangle1);
 
     private:
-        Triangle3 triangle0;
-        Triangle3 triangle1;
+        Triangle3Type triangle0;
+        Triangle3Type triangle1;
 
         Container point;
     };

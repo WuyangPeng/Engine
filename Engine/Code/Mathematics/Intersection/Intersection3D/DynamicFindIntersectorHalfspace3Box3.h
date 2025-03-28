@@ -29,15 +29,15 @@ namespace Mathematics
         using ParentType = DynamicIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Box3 = Box3<Real>;
-        using Plane3 = Plane3<Real>;
+        using Box3Type = Box3<Real>;
+        using Plane3Type = Plane3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using Container = std::vector<Vector3Type>;
 
     public:
-        DynamicFindIntersectorHalfspace3Box3(const Plane3& halfSpace,
-                                             const Box3& box,
+        DynamicFindIntersectorHalfspace3Box3(const Plane3Type& halfSpace,
+                                             const Box3Type& box,
                                              Real tMax,
                                              const Vector3Type& lhsVelocity,
                                              const Vector3Type& rhsVelocity,
@@ -45,8 +45,8 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Plane3 GetHalfspace() const noexcept;
-        NODISCARD Box3 GetBox() const noexcept;
+        NODISCARD Plane3Type GetHalfspace() const noexcept;
+        NODISCARD Box3Type GetBox() const noexcept;
 
         // 相交点集合为空，点，线段或矩形。 函数 GetQuantity()返回0、1、2或4。
         NODISCARD int GetQuantity() const;
@@ -57,8 +57,8 @@ namespace Mathematics
 
     private:
         // 要相交的对象。
-        Plane3 halfSpace;
-        Box3 box;
+        Plane3Type halfSpace;
+        Box3Type box;
 
         // 有关交集的信息。
         Container point;

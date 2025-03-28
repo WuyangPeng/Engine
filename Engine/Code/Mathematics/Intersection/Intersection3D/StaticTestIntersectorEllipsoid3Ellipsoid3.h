@@ -25,17 +25,17 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Ellipsoid3 = Ellipsoid3<Real>;
+        using Ellipsoid3Type = Ellipsoid3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorEllipsoid3Ellipsoid3(const Ellipsoid3& ellipsoid0, const Ellipsoid3& ellipsoid1, const Real epsilon = MathType::GetZeroTolerance());
+        StaticTestIntersectorEllipsoid3Ellipsoid3(const Ellipsoid3Type& ellipsoid0, const Ellipsoid3Type& ellipsoid1, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Ellipsoid3 GetEllipsoid0() const noexcept;
-        NODISCARD Ellipsoid3 GetEllipsoid1() const noexcept;
+        NODISCARD Ellipsoid3Type GetEllipsoid0() const noexcept;
+        NODISCARD Ellipsoid3Type GetEllipsoid1() const noexcept;
 
         // 测试查询的一种形式。 椭球是分开的，相交的（在点或曲线上），椭球0严格包含在椭球1中，或椭球1严格包含在椭球0中。
         enum class Classification
@@ -76,8 +76,8 @@ namespace Mathematics
         NODISCARD static ResultType BisectDF(Real d0, Real d1, Real d0c0, Real d1c1, Real smin, Real dfmin, Real smax, Real dfmax) noexcept;
 
     private:
-        Ellipsoid3 ellipsoid0;
-        Ellipsoid3 ellipsoid1;
+        Ellipsoid3Type ellipsoid0;
+        Ellipsoid3Type ellipsoid1;
         Classification classification;
     };
 }

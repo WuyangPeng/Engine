@@ -18,8 +18,8 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::DynamicAngularTestIntersectorBox3Box3<Real>::DynamicAngularTestIntersectorBox3Box3(const Box3& box0,
-                                                                                                const Box3& box1,
+Mathematics::DynamicAngularTestIntersectorBox3Box3<Real>::DynamicAngularTestIntersectorBox3Box3(const Box3Type& box0,
+                                                                                                const Box3Type& box1,
                                                                                                 Real tMax,
                                                                                                 int numSteps,
                                                                                                 const Vector3Type& lhsVelocity,
@@ -119,11 +119,11 @@ void Mathematics::DynamicAngularTestIntersectorBox3Box3<Real>::Test()
         const auto vector3Orthonormalize0 = Vector3ToolsType::Orthonormalize(axis0);
         const auto vector3Orthonormalize1 = Vector3ToolsType::Orthonormalize(axis1);
 
-        subBox0 = Box3{ subBox0.GetCenter(), vector3Orthonormalize0.GetUVector(),
+        subBox0 = Box3Type{ subBox0.GetCenter(), vector3Orthonormalize0.GetUVector(),
                         vector3Orthonormalize0.GetVVector(), vector3Orthonormalize0.GetWVector(),
                         subBox0.GetExtent0(), subBox0.GetExtent1(), subBox0.GetExtent2() };
 
-        subBox1 = Box3{ subBox1.GetCenter(), vector3Orthonormalize1.GetUVector(),
+        subBox1 = Box3Type{ subBox1.GetCenter(), vector3Orthonormalize1.GetUVector(),
                         vector3Orthonormalize1.GetVVector(), vector3Orthonormalize1.GetWVector(),
                         subBox1.GetExtent0(), subBox1.GetExtent1(), subBox1.GetExtent2() };
     }

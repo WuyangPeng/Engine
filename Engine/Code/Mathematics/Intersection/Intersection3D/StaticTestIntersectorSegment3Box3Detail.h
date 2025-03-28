@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment3Box3<Real>::StaticTestIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid, const Real epsilon)
+Mathematics::StaticTestIntersectorSegment3Box3<Real>::StaticTestIntersectorSegment3Box3(const Segment3Type& segment, const Box3Type& box, bool solid, const Real epsilon)
     : ParentType{ epsilon }, segment{ segment }, box{ box }, solid{ solid }
 {
     Test();

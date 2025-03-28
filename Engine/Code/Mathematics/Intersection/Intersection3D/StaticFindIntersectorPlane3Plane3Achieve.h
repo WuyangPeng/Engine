@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorPlane3Plane3<Real>::StaticFindIntersectorPlane3Plane3(const Plane3& plane0, const Plane3& plane1, const Real epsilon)
+Mathematics::StaticFindIntersectorPlane3Plane3<Real>::StaticFindIntersectorPlane3Plane3(const Plane3Type& plane0, const Plane3Type& plane1, const Real epsilon)
     : ParentType{ epsilon }, plane0{ plane0 }, plane1{ plane1 }, intrLine{ Vector3Type::GetZero(), Vector3Type::GetZero() }, intrPlane{}
 {
     Find();
@@ -98,7 +98,7 @@ void Mathematics::StaticFindIntersectorPlane3Plane3<Real>::Find()
     auto c0 = (plane0.GetConstant() - dot * plane1.GetConstant()) * invDet;
     auto c1 = (plane1.GetConstant() - dot * plane0.GetConstant()) * invDet;
     this->SetIntersectionType(IntersectionType::Line);
-    intrLine = Line3{ c0 * plane0.GetNormal() + c1 * plane1.GetNormal(), Vector3ToolsType::UnitCrossProduct(plane0.GetNormal(), plane1.GetNormal()) };
+    intrLine = Line3Type{ c0 * plane0.GetNormal() + c1 * plane1.GetNormal(), Vector3ToolsType::UnitCrossProduct(plane0.GetNormal(), plane1.GetNormal()) };
 }
 
 template <typename Real>

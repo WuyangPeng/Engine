@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorPlane3Triangle3<Real>::StaticFindIntersectorPlane3Triangle3(const Plane3& plane, const Triangle3& triangle, Real epsilon)
+Mathematics::StaticFindIntersectorPlane3Triangle3<Real>::StaticFindIntersectorPlane3Triangle3(const Plane3Type& plane, const Triangle3Type& triangle, Real epsilon)
     : ParentType{ MathType::GetValue(0) <= epsilon ? epsilon : MathType::GetValue(0) },
       plane{ plane },
       triangle{ triangle },

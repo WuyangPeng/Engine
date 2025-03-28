@@ -29,18 +29,18 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Cylinder3 = Cylinder3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Cylinder3Type = Cylinder3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorPlane3Cylinder3(const Plane3& plane, const Cylinder3& cylinder, const Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        StaticTestIntersectorPlane3Cylinder3(const Plane3Type& plane, const Cylinder3Type& cylinder, const Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Plane3 GetPlane() const noexcept;
-        NODISCARD Cylinder3 GetCylinder() const noexcept;
+        NODISCARD Plane3Type GetPlane() const noexcept;
+        NODISCARD Cylinder3Type GetCylinder() const noexcept;
 
         NODISCARD bool CylinderIsCulled() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
@@ -48,8 +48,8 @@ namespace Mathematics
         void Test() noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
     private:
-        Plane3 plane;
-        Cylinder3 cylinder;
+        Plane3Type plane;
+        Cylinder3Type cylinder;
     };
 }
 

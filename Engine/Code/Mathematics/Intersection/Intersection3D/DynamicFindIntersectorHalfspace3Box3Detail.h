@@ -17,7 +17,7 @@
 #include "Mathematics/Intersection/Intersection3D/IntersectorUtility3Detail.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::DynamicFindIntersectorHalfspace3Box3(const Plane3& halfSpace, const Box3& box, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::DynamicFindIntersectorHalfspace3Box3(const Plane3Type& halfSpace, const Box3Type& box, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, halfSpace{ halfSpace }, box{ box }, point{}
 {
     Find();

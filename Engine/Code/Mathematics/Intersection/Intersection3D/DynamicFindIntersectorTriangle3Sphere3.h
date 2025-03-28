@@ -26,14 +26,14 @@ namespace Mathematics
         using ParentType = DynamicIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Sphere3 = Sphere3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Sphere3Type = Sphere3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        DynamicFindIntersectorTriangle3Sphere3(const Triangle3& triangle,
-                                               const Sphere3& sphere,
+        DynamicFindIntersectorTriangle3Sphere3(const Triangle3Type& triangle,
+                                               const Sphere3Type& sphere,
                                                Real tMax,
                                                const Vector3Type& lhsVelocity,
                                                const Vector3Type& rhsVelocity,
@@ -41,8 +41,8 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Triangle3 GetTriangle() const noexcept;
-        NODISCARD Sphere3 GetSphere() const noexcept;
+        NODISCARD Triangle3Type GetTriangle() const noexcept;
+        NODISCARD Sphere3Type GetSphere() const noexcept;
 
         // 接触点。
         NODISCARD Vector3Type GetPoint() const noexcept;
@@ -64,8 +64,8 @@ namespace Mathematics
 
     private:
         // 要相交的对象。
-        Triangle3 triangle;
-        Sphere3 sphere;
+        Triangle3Type triangle;
+        Sphere3Type sphere;
 
         // 动态查询的相交点。
         Vector3Type point;

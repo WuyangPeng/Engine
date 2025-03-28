@@ -178,7 +178,7 @@ typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::Intersec
 }
 
 template <typename Real>
-Mathematics::Vector3<Real> Mathematics::IntersectorUtility3<Real>::GetPointFromIndex(int index, const Box3& box)
+Mathematics::Vector3<Real> Mathematics::IntersectorUtility3<Real>::GetPointFromIndex(int index, const Box3Type& box)
 {
     auto point = box.GetCenter();
 

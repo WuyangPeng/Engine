@@ -17,7 +17,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::DynamicTestIntersectorBox3Box3<Real>::DynamicTestIntersectorBox3Box3(const Box3& box0, const Box3& box1, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
+Mathematics::DynamicTestIntersectorBox3Box3<Real>::DynamicTestIntersectorBox3Box3(const Box3Type& box0, const Box3Type& box1, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, box0{ box0 }, box1{ box1 }
 {
     Test();

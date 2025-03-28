@@ -30,7 +30,7 @@
 #include "Mathematics/Query/Query2Detail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::StaticFindIntersectorTriangle3Triangle3(const Triangle3& lhsTriangle, const Triangle3& rhsTriangle, bool reportCoplanarIntersections, const Real epsilon)
+Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::StaticFindIntersectorTriangle3Triangle3(const Triangle3Type& lhsTriangle, const Triangle3Type& rhsTriangle, bool reportCoplanarIntersections, const Real epsilon)
     : ParentType{ epsilon }, triangle0{ lhsTriangle }, triangle1{ rhsTriangle }, reportCoplanarIntersections{ reportCoplanarIntersections }, point{}
 {
     Find();
@@ -42,7 +42,7 @@ template <typename Real>
 void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Find()
 {
     // 获取m_LhsTriangle的平面
-    const Plane3 lhsPlane0{ triangle0 };
+    const Plane3Type lhsPlane0{ triangle0 };
 
     // 计算三角形m_RhsTriangle顶点到平面lhsPlane0的有符号距离。使用epsilon-thick测试。
     const TrianglePlaneRelations<Real> rhsTrianglePlaneRelations{ triangle1, lhsPlane0, this->GetEpsilon() };
@@ -149,7 +149,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IsValid() const
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Triangle3 Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetLhsTriangle() const noexcept
+typename Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Triangle3Type Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetLhsTriangle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -157,7 +157,7 @@ typename Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Triangle3 M
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Triangle3 Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetRhsTriangle() const noexcept
+typename Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Triangle3Type Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetRhsTriangle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -181,7 +181,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorTriangle3Triangle3<
 }
 
 template <typename Real>
-void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::ContainsPoint(const Triangle3& triangle, const Plane3& plane, const Vector3Type& vector3)
+void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::ContainsPoint(const Triangle3Type& triangle, const Plane3Type& plane, const Vector3Type& vector3)
 {
     /// 生成平面的坐标系。 传入三角形的顶点为<V0,V1,V2>。
     /// 输入平面的单位长度法向为N，输入点为P。选择V0作为平面的原点。 坐标轴方向是两个单位长度向量U0和U1，
@@ -217,7 +217,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::ContainsPoint(c
 }
 
 template <typename Real>
-void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegment(const Plane3& plane, const Triangle3& triangle, const Vector3Type& end0, const Vector3Type& end1)
+void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegment(const Plane3Type& plane, const Triangle3Type& triangle, const Vector3Type& end0, const Vector3Type& end1)
 {
     /// 计算三角形顶点的二维表示以及相对于三角形平面的线段端点。 然后计算2D空间中的交点。
 
@@ -350,7 +350,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
 }
 
 template <typename Real>
-void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarIntersection(const Plane3& plane, const Triangle3& lhsTriangle, const Triangle3& rhsTriangle)
+void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarIntersection(const Plane3Type& plane, const Triangle3Type& lhsTriangle, const Triangle3Type& rhsTriangle)
 {
     // 在与平面法线最对齐的坐标平面上投影三角形。
     auto maxNormal = 0;

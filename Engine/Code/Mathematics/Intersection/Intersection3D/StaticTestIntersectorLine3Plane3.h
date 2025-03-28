@@ -26,26 +26,26 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Line3 = Line3<Real>;
-        using Plane3 = Plane3<Real>;
+        using Line3Type = Line3<Real>;
+        using Plane3Type = Plane3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorLine3Plane3(const Line3& line, const Plane3& plane, const Real epsilon = MathType::GetZeroTolerance()) noexcept;
+        StaticTestIntersectorLine3Plane3(const Line3Type& line, const Plane3Type& plane, const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line3 GetLine() const noexcept;
-        NODISCARD Plane3 GetPlane() const noexcept;
+        NODISCARD Line3Type GetLine() const noexcept;
+        NODISCARD Plane3Type GetPlane() const noexcept;
 
     private:
         void Test() noexcept;
 
     private:
         // 相交对象
-        Line3 line;
-        Plane3 plane;
+        Line3Type line;
+        Plane3Type plane;
     };
 }
 

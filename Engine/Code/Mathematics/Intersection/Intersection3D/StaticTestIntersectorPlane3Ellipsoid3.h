@@ -26,18 +26,18 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Ellipsoid3 = Ellipsoid3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Ellipsoid3Type = Ellipsoid3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorPlane3Ellipsoid3(const Plane3& plane, const Ellipsoid3& ellipsoid, const Real epsilon = MathType::GetZeroTolerance());
+        StaticTestIntersectorPlane3Ellipsoid3(const Plane3Type& plane, const Ellipsoid3Type& ellipsoid, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Plane3 GetPlane() const noexcept;
-        NODISCARD Ellipsoid3 GetEllipsoid() const noexcept;
+        NODISCARD Plane3Type GetPlane() const noexcept;
+        NODISCARD Ellipsoid3Type GetEllipsoid() const noexcept;
 
         NODISCARD bool EllipsoidIsCulled() const;
 
@@ -45,8 +45,8 @@ namespace Mathematics
         void Test();
 
     private:
-        Plane3 plane;
-        Ellipsoid3 ellipsoid;
+        Plane3Type plane;
+        Ellipsoid3Type ellipsoid;
     };
 }
 

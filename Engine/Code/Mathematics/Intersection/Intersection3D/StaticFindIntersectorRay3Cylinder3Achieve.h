@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorRay3Cylinder3<Real>::StaticFindIntersectorRay3Cylinder3(const Ray3& ray, const Cylinder3& cylinder, const Real epsilon)
+Mathematics::StaticFindIntersectorRay3Cylinder3<Real>::StaticFindIntersectorRay3Cylinder3(const Ray3Type& ray, const Cylinder3Type& cylinder, const Real epsilon)
     : ParentType{ epsilon }, ray{ ray }, cylinder{ cylinder }, quantity{}, point0{}, point1{}
 {
     Find();

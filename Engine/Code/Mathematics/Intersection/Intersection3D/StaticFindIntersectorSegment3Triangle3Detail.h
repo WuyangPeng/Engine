@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorSegment3Triangle3<Real>::StaticFindIntersectorSegment3Triangle3(const Segment3& segment, const Triangle3& triangle, const Real epsilon)
+Mathematics::StaticFindIntersectorSegment3Triangle3<Real>::StaticFindIntersectorSegment3Triangle3(const Segment3Type& segment, const Triangle3Type& triangle, const Real epsilon)
     : ParentType{ epsilon }, segment{ segment }, triangle{ triangle }, segmentParameter{}, triBary0{}, triBary1{}, triBary2{ MathType::GetValue(1) }, quantity{}, point0{}, point1{}
 {
     Find();

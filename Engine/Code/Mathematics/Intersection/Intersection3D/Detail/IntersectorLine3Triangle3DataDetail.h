@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::IntersectorLine3Triangle3Data<Real>::IntersectorLine3Triangle3Data(const Line3& line, const Triangle3& triangle)
+Mathematics::IntersectorLine3Triangle3Data<Real>::IntersectorLine3Triangle3Data(const Line3Type& line, const Triangle3Type& triangle)
     : line{ line }, triangle{ triangle }, origin{}, edge1{}, edge2{}, normal{}, directionDotNormal{}
 {
     CalculateDirectionDotNormal();

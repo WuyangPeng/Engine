@@ -15,7 +15,7 @@
 #include "Mathematics/Intersection/StaticFindIntersector1Detail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorSegment3Ellipsoid3<Real>::StaticFindIntersectorSegment3Ellipsoid3(const Segment3& segment, const Ellipsoid3& ellipsoid, const Real epsilon)
+Mathematics::StaticFindIntersectorSegment3Ellipsoid3<Real>::StaticFindIntersectorSegment3Ellipsoid3(const Segment3Type& segment, const Ellipsoid3Type& ellipsoid, const Real epsilon)
     : ParentType{ epsilon }, segment{ segment }, ellipsoid{ ellipsoid }, quantity{}, point0{}, point1{}
 {
     Find();

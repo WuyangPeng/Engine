@@ -18,7 +18,7 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorLine3Triangle3<Real>::StaticTestIntersectorLine3Triangle3(const Line3& line, const Triangle3& triangle, const Real epsilon)
+Mathematics::StaticTestIntersectorLine3Triangle3<Real>::StaticTestIntersectorLine3Triangle3(const Line3Type& line, const Triangle3Type& triangle, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, triangle{ triangle }
 {
     Test();

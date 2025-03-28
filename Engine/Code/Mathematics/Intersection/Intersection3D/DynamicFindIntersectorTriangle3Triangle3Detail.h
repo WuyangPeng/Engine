@@ -24,7 +24,7 @@
 #include "Mathematics/Objects3D/Segment3Detail.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::DynamicFindIntersectorTriangle3Triangle3(const Triangle3& triangle0, const Triangle3& triangle1, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::DynamicFindIntersectorTriangle3Triangle3(const Triangle3Type& triangle0, const Triangle3Type& triangle1, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, triangle0{ triangle0 }, triangle1{ triangle1 }, point{}
 {
     Find();
@@ -185,10 +185,10 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
     this->SetContactTime(intersectInfo.tFirst);
 
     // 在找到触点组之前，第一次调整U和V
-    const Triangle3 moveTriangle0{ triangle0.GetVertex(0) + intersectInfo.tFirst * lhsVelocity,
+    const Triangle3Type moveTriangle0{ triangle0.GetVertex(0) + intersectInfo.tFirst * lhsVelocity,
                                    triangle0.GetVertex(1) + intersectInfo.tFirst * lhsVelocity,
                                    triangle0.GetVertex(2) + intersectInfo.tFirst * lhsVelocity };
-    const Triangle3 moveTriangle1{ triangle1.GetVertex(0) + intersectInfo.tFirst * rhsVelocity,
+    const Triangle3Type moveTriangle1{ triangle1.GetVertex(0) + intersectInfo.tFirst * rhsVelocity,
                                    triangle1.GetVertex(1) + intersectInfo.tFirst * rhsVelocity,
                                    triangle1.GetVertex(2) + intersectInfo.tFirst * rhsVelocity };
 
@@ -206,7 +206,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
 }
 
 template <typename Real>
-typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configuration Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::ProjectOntoAxis(const Triangle3& triangle, const Vector3Type& axis)
+typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configuration Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::ProjectOntoAxis(const Triangle3Type& triangle, const Vector3Type& axis)
 {
     Configuration cfg{};
 
@@ -458,7 +458,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
 }
 
 template <typename Real>
-void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet(const Triangle3& moveTriangle0, const Triangle3& moveTriangle1, const ContactSide& side, const Configuration& cfg0, const Configuration& cfg1)
+void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet(const Triangle3Type& moveTriangle0, const Triangle3Type& moveTriangle1, const ContactSide& side, const Configuration& cfg0, const Configuration& cfg1)
 {
     if (side == ContactSide::Right)  // ri0在tri1的右边
     {
@@ -500,7 +500,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet
             else  // cfg1.vertexProjectionMap == M3
             {
                 // 面0-面1 相交
-                const Plane3 plane0{ moveTriangle0.GetVertex(0), moveTriangle0.GetVertex(1), moveTriangle0.GetVertex(2) };
+                const Plane3Type plane0{ moveTriangle0.GetVertex(0), moveTriangle0.GetVertex(1), moveTriangle0.GetVertex(2) };
                 GetCoplanarIntersection(plane0, moveTriangle0, moveTriangle1);
             }
         }
@@ -544,7 +544,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet
             else  // cfg0.vertexProjectionMap == M
             {
                 // 面0-面1 相交
-                const Plane3 plane0{ moveTriangle0.GetVertex(0), moveTriangle0.GetVertex(1), moveTriangle0.GetVertex(2) };
+                const Plane3Type plane0{ moveTriangle0.GetVertex(0), moveTriangle0.GetVertex(1), moveTriangle0.GetVertex(2) };
                 GetCoplanarIntersection(plane0, moveTriangle0, moveTriangle1);
             }
         }
@@ -566,7 +566,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet
 }
 
 template <typename Real>
-void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarIntersection(const Plane3& plane, const Triangle3& moveTriangle0, const Triangle3& moveTriangle1)
+void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarIntersection(const Plane3Type& plane, const Triangle3Type& moveTriangle0, const Triangle3Type& moveTriangle1)
 {
     // 在与平面法线最对齐的坐标平面上投影三角形。
     auto maxNormal = 0;
@@ -712,7 +712,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeEdgeInt
 }
 
 template <typename Real>
-void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeFaceIntersection(const Vector3Type& u0, const Vector3Type& u1, const Triangle3& triangle)
+void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeFaceIntersection(const Vector3Type& u0, const Vector3Type& u1, const Triangle3Type& triangle)
 {
     // 计算三角形的平面。
     const auto vertex = triangle.GetVertex(0);

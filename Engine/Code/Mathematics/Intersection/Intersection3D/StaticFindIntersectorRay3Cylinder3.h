@@ -26,18 +26,18 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Ray3 = Ray3<Real>;
-        using Cylinder3 = Cylinder3<Real>;
+        using Ray3Type = Ray3<Real>;
+        using Cylinder3Type = Cylinder3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorRay3Cylinder3(const Ray3& ray, const Cylinder3& cylinder, const Real epsilon = MathType::GetZeroTolerance());
+        StaticFindIntersectorRay3Cylinder3(const Ray3Type& ray, const Cylinder3Type& cylinder, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Ray3 GetRay() const noexcept;
-        NODISCARD Cylinder3 GetCylinder() const noexcept;
+        NODISCARD Ray3Type GetRay() const noexcept;
+        NODISCARD Cylinder3Type GetCylinder() const noexcept;
 
         NODISCARD int GetQuantity() const noexcept;
         NODISCARD Vector3Type GetPoint(int index) const;
@@ -46,8 +46,8 @@ namespace Mathematics
         void Find();
 
     private:
-        Ray3 ray;
-        Cylinder3 cylinder;
+        Ray3Type ray;
+        Cylinder3Type cylinder;
 
         int quantity;
         Vector3Type point0;

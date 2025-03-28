@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorSegment3Plane3<Real>::StaticFindIntersectorSegment3Plane3(const Segment3& segment, const Plane3& plane, const Real epsilon) noexcept
+Mathematics::StaticFindIntersectorSegment3Plane3<Real>::StaticFindIntersectorSegment3Plane3(const Segment3Type& segment, const Plane3Type& plane, const Real epsilon) noexcept
     : ParentType{ epsilon }, segment{ segment }, plane{ plane }, segmentParameter{}
 {
     Find();

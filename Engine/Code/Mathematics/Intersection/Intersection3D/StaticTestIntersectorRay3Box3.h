@@ -26,25 +26,25 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Ray3 = Ray3<Real>;
-        using Box3 = Box3<Real>;
+        using Ray3Type = Ray3<Real>;
+        using Box3Type = Box3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorRay3Box3(const Ray3& ray, const Box3& box, const Real epsilon = MathType::GetZeroTolerance());
+        StaticTestIntersectorRay3Box3(const Ray3Type& ray, const Box3Type& box, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Ray3 GetRay() const noexcept;
-        NODISCARD Box3 GetBox() const noexcept;
+        NODISCARD Ray3Type GetRay() const noexcept;
+        NODISCARD Box3Type GetBox() const noexcept;
 
     private:
         void Test();
 
     private:
-        Ray3 ray;
-        Box3 box;
+        Ray3Type ray;
+        Box3Type box;
     };
 }
 

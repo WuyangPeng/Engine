@@ -26,15 +26,15 @@ namespace Mathematics
         using ParentType = DynamicIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Box3 = Box3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Box3Type = Box3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using Container = std::vector<Vector3Type>;
 
     public:
-        DynamicFindIntersectorTriangle3Box3(const Triangle3& triangle,
-                                            const Box3& box,
+        DynamicFindIntersectorTriangle3Box3(const Triangle3Type& triangle,
+                                            const Box3Type& box,
                                             Real tMax,
                                             const Vector3Type& lhsVelocity,
                                             const Vector3Type& rhsVelocity,
@@ -42,8 +42,8 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Triangle3 GetTriangle() const noexcept;
-        NODISCARD Box3 GetBox() const noexcept;
+        NODISCARD Triangle3Type GetTriangle() const noexcept;
+        NODISCARD Box3Type GetBox() const noexcept;
 
         NODISCARD int GetQuantity() const;
         NODISCARD Vector3Type GetPoint(int index) const;
@@ -53,8 +53,8 @@ namespace Mathematics
 
     private:
         // 要相交的对象。
-        Triangle3 triangle;
-        Box3 box;
+        Triangle3Type triangle;
+        Box3Type box;
 
         /// 静态查询的交集。 一个三角形最多可以在7个顶点处相交一个框。
         Container point;

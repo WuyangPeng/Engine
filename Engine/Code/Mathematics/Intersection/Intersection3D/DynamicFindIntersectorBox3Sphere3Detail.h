@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::DynamicFindIntersectorBox3Sphere3(const Box3& box, const Sphere3& sphere, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::DynamicFindIntersectorBox3Sphere3(const Box3Type& box, const Sphere3Type& sphere, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, box{ box }, sphere{ sphere }, contactPoint{}, x{}, y{}, z{}
 {
     Find();

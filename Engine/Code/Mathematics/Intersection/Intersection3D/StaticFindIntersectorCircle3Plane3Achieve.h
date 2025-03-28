@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorCircle3Plane3<Real>::StaticFindIntersectorCircle3Plane3(const Circle3& circle, const Plane3& plane, const Real epsilon)
+Mathematics::StaticFindIntersectorCircle3Plane3<Real>::StaticFindIntersectorCircle3Plane3(const Circle3Type& circle, const Plane3Type& plane, const Real epsilon)
     : ParentType{ epsilon }, circle{ circle }, plane{ plane }, quantity{}, point0{}, point1{}
 {
     Find();
@@ -59,7 +59,7 @@ void Mathematics::StaticFindIntersectorCircle3Plane3<Real>::Find()
     quantity = 0;
 
     // 构造圆的平面。
-    const Plane3 cPlane{ circle.GetNormal(), circle.GetCenter() };
+    const Plane3Type cPlane{ circle.GetNormal(), circle.GetCenter() };
 
     // 计算此平面与输入平面的交点。
     StaticFindIntersectorPlane3Plane3<Real> intersector{ plane, cPlane };

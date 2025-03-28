@@ -26,25 +26,25 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Segment3 = Segment3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Segment3Type = Segment3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorHalfspace3Segment3(const Plane3& halfspace, const Segment3& segment, const Real epsilon = MathType::GetZeroTolerance()) noexcept;
+        StaticTestIntersectorHalfspace3Segment3(const Plane3Type& halfspace, const Segment3Type& segment, const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Plane3 GetHalfspace() const noexcept;
-        NODISCARD Segment3 GetSegment() const noexcept;
+        NODISCARD Plane3Type GetHalfspace() const noexcept;
+        NODISCARD Segment3Type GetSegment() const noexcept;
 
     private:
         void Test() noexcept;
 
     private:
-        Plane3 halfspace;
-        Segment3 segment;
+        Plane3Type halfspace;
+        Segment3Type segment;
     };
 }
 

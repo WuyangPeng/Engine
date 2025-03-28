@@ -27,20 +27,20 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Line3 = Line3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Triangle3 = Triangle3<Real>;
+        using Line3Type = Line3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Triangle3Type = Triangle3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using Container = std::vector<Vector3Type>;
 
     public:
-        StaticFindIntersectorTriangle3Triangle3(const Triangle3& lhsTriangle, const Triangle3& rhsTriangle, bool reportCoplanarIntersections = true, const Real epsilon = MathType::GetZeroTolerance());
+        StaticFindIntersectorTriangle3Triangle3(const Triangle3Type& lhsTriangle, const Triangle3Type& rhsTriangle, bool reportCoplanarIntersections = true, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Triangle3 GetLhsTriangle() const noexcept;
-        NODISCARD Triangle3 GetRhsTriangle() const noexcept;
+        NODISCARD Triangle3Type GetLhsTriangle() const noexcept;
+        NODISCARD Triangle3Type GetRhsTriangle() const noexcept;
 
         NODISCARD int GetQuantity() const;
         NODISCARD Vector3Type GetPoint(int index) const;
@@ -48,17 +48,17 @@ namespace Mathematics
     private:
         void Find();
 
-        void ContainsPoint(const Triangle3& triangle, const Plane3& plane, const Vector3Type& vector3);
+        void ContainsPoint(const Triangle3Type& triangle, const Plane3Type& plane, const Vector3Type& vector3);
 
-        void IntersectsSegment(const Plane3& plane, const Triangle3& triangle, const Vector3Type& end0, const Vector3Type& end1);
-        void GetCoplanarIntersection(const Plane3& plane, const Triangle3& lhsTriangle, const Triangle3& rhsTriangle);
+        void IntersectsSegment(const Plane3Type& plane, const Triangle3Type& triangle, const Vector3Type& end0, const Vector3Type& end1);
+        void GetCoplanarIntersection(const Plane3Type& plane, const Triangle3Type& lhsTriangle, const Triangle3Type& rhsTriangle);
 
     private:
         // д╛хо 'true'
         bool reportCoplanarIntersections;
 
-        Triangle3 triangle0;
-        Triangle3 triangle1;
+        Triangle3Type triangle0;
+        Triangle3Type triangle1;
 
         Container point;
     };

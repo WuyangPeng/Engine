@@ -26,8 +26,8 @@ namespace Mathematics
         using ClassType = FindContactSet<Real>;
 
         using Vector3Type = Vector3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Box3 = Box3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Box3Type = Box3<Real>;
         using IntersectorConfiguration = IntersectorConfiguration<Real>;
         using SegmentType = std::array<Vector3Type, 2>;
         using TriangleType = std::array<Vector3Type, 3>;
@@ -36,7 +36,7 @@ namespace Mathematics
 
     public:
         FindContactSet(const SegmentType& segment,
-                       const Triangle3& triangle,
+                       const Triangle3Type& triangle,
                        ContactSide side,
                        const IntersectorConfiguration& segmentCfg,
                        const IntersectorConfiguration& triangleCfg,
@@ -45,7 +45,7 @@ namespace Mathematics
                        Real tFirst);
 
         FindContactSet(const SegmentType& segment,
-                       const Box3& box,
+                       const Box3Type& box,
                        ContactSide side,
                        const IntersectorConfiguration& segmentCfg,
                        const IntersectorConfiguration& boxCfg,
@@ -53,8 +53,8 @@ namespace Mathematics
                        const Vector3Type& boxVelocity,
                        Real tFirst);
 
-        FindContactSet(const Triangle3& triangle,
-                       const Box3& box,
+        FindContactSet(const Triangle3Type& triangle,
+                       const Box3Type& box,
                        ContactSide side,
                        const IntersectorConfiguration& triangleCfg,
                        const IntersectorConfiguration& boxCfg,
@@ -62,8 +62,8 @@ namespace Mathematics
                        const Vector3Type& boxVelocity,
                        Real tFirst);
 
-        FindContactSet(const Box3& box0,
-                       const Box3& box1,
+        FindContactSet(const Box3Type& box0,
+                       const Box3Type& box1,
                        ContactSide side,
                        const IntersectorConfiguration& box0Cfg,
                        const IntersectorConfiguration& box1Cfg,

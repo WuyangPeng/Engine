@@ -27,15 +27,15 @@ namespace Mathematics
         using ParentType = DynamicIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Line3 = Line3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Line3Type = Line3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        DynamicTestIntersectorTriangle3Triangle3(const Triangle3& triangle0,
-                                                 const Triangle3& triangle1,
+        DynamicTestIntersectorTriangle3Triangle3(const Triangle3Type& triangle0,
+                                                 const Triangle3Type& triangle1,
                                                  Real tMax,
                                                  const Vector3Type& lhsVelocity,
                                                  const Vector3Type& rhsVelocity,
@@ -43,8 +43,8 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Triangle3 GetTriangle0() const noexcept;
-        NODISCARD Triangle3 GetTriangle1() const noexcept;
+        NODISCARD Triangle3Type GetTriangle0() const noexcept;
+        NODISCARD Triangle3Type GetTriangle1() const noexcept;
 
     private:
         void Test();
@@ -63,11 +63,11 @@ namespace Mathematics
 
         NODISCARD IntersectInfo TestOverlap(const Vector3Type& axis, Real tMax, const Vector3Type& velocity);
 
-        NODISCARD static IntersectInfo ProjectOntoAxis(const Triangle3& triangle, const Vector3Type& axis);
+        NODISCARD static IntersectInfo ProjectOntoAxis(const Triangle3Type& triangle, const Vector3Type& axis);
 
     private:
-        Triangle3 triangle0;
-        Triangle3 triangle1;
+        Triangle3Type triangle0;
+        Triangle3Type triangle1;
     };
 }
 

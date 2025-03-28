@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::StaticFindIntersectorTetrahedron3Tetrahedron3(const Tetrahedron3& tetrahedron0, const Tetrahedron3& tetrahedron1, const Real epsilon)
+Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::StaticFindIntersectorTetrahedron3Tetrahedron3(const Tetrahedron3Type& tetrahedron0, const Tetrahedron3Type& tetrahedron1, const Real epsilon)
     : ParentType{ epsilon }, tetrahedron0{ tetrahedron0 }, tetrahedron1{ tetrahedron1 }, intersectionContainer{}
 {
     Find();
@@ -95,7 +95,7 @@ typename Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::Inter
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::IntersectionContainer Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::SplitAndDecompose(const Tetrahedron3& tetra, const Plane3& plane, const IntersectionContainer& inside)
+typename Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::IntersectionContainer Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::SplitAndDecompose(const Tetrahedron3Type& tetra, const Plane3Type& plane, const IntersectionContainer& inside)
 {
     auto result = inside;
     auto tetraCopy = tetra;
@@ -179,8 +179,8 @@ typename Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::Inter
             tetraCopy.SetVertex(positiveIndex.at(1), intp.at(1));
 
             result.emplace_back(tetraCopy);
-            result.emplace_back(Tetrahedron3{ tetraCopy.GetVertex(negativeIndex.at(1)), intp.at(3), intp.at(2), intp.at(1) });
-            result.emplace_back(Tetrahedron3{ tetraCopy.GetVertex(negativeIndex.at(0)), intp.at(0), intp.at(1), intp.at(2) });
+            result.emplace_back(Tetrahedron3Type{ tetraCopy.GetVertex(negativeIndex.at(1)), intp.at(3), intp.at(2), intp.at(1) });
+            result.emplace_back(Tetrahedron3Type{ tetraCopy.GetVertex(negativeIndex.at(0)), intp.at(0), intp.at(1), intp.at(2) });
         }
         else
         {
@@ -209,8 +209,8 @@ typename Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::Inter
             tetraCopy.SetVertex(positiveIndex.at(0), intp.at(0));
 
             result.emplace_back(tetraCopy);
-            result.emplace_back(Tetrahedron3{ intp.at(0), tetraCopy.GetVertex(negativeIndex.at(1)), tetraCopy.GetVertex(negativeIndex.at(2)), intp.at(1) });
-            result.emplace_back(Tetrahedron3{ tetraCopy.GetVertex(negativeIndex.at(2)), intp.at(1), intp.at(2), intp.at(0) });
+            result.emplace_back(Tetrahedron3Type{ intp.at(0), tetraCopy.GetVertex(negativeIndex.at(1)), tetraCopy.GetVertex(negativeIndex.at(2)), intp.at(1) });
+            result.emplace_back(Tetrahedron3Type{ tetraCopy.GetVertex(negativeIndex.at(2)), intp.at(1), intp.at(2), intp.at(0) });
         }
         else if (negative == 2)
         {
@@ -225,7 +225,7 @@ typename Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::Inter
             tetraCopy.SetVertex(positiveIndex.at(0), intp.at(0));
 
             result.emplace_back(tetraCopy);
-            result.emplace_back(Tetrahedron3{ intp.at(1), tetraCopy.GetVertex(zeroIndex.at(0)), tetraCopy.GetVertex(negativeIndex.at(1)), intp.at(0) });
+            result.emplace_back(Tetrahedron3Type{ intp.at(1), tetraCopy.GetVertex(zeroIndex.at(0)), tetraCopy.GetVertex(negativeIndex.at(1)), intp.at(0) });
         }
         else
         {

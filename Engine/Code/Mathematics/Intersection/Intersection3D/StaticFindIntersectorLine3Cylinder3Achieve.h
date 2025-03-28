@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::StaticFindIntersectorLine3Cylinder3(const Line3& line, const Cylinder3& cylinder, const Real epsilon)
+Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::StaticFindIntersectorLine3Cylinder3(const Line3Type& line, const Cylinder3Type& cylinder, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, cylinder{ cylinder }, quantity{}, point0{}, point1{}
 {
     Find();
@@ -100,7 +100,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorLine3Cylinder3<Real
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::Find(const Vector3Type& origin, const Vector3Type& dir, const Cylinder3& cylinder)
+typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::Find(const Vector3Type& origin, const Vector3Type& dir, const Cylinder3Type& cylinder)
 {
     FindShared findShared{};
 

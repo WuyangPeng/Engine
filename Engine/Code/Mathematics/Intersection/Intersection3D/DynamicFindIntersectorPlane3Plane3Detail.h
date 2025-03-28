@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorPlane3Plane3<Real>::DynamicFindIntersectorPlane3Plane3(const Plane3& plane0, const Plane3& plane1, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorPlane3Plane3<Real>::DynamicFindIntersectorPlane3Plane3(const Plane3Type& plane0, const Plane3Type& plane1, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, plane0{ plane0 }, plane1{ plane1 }, intersectionLine{ Vector3Type::GetZero(), Vector3Type::GetZero() }, intersectionPlane{}
 {
     Find();
@@ -64,7 +64,7 @@ void Mathematics::DynamicFindIntersectorPlane3Plane3<Real>::Find()
         auto c0 = (plane0.GetConstant() - dot * plane1.GetConstant()) * invDet;
         auto c1 = (plane1.GetConstant() - dot * plane0.GetConstant()) * invDet;
         this->SetIntersectionType(IntersectionType::Line);
-        intersectionLine = Line3{ c0 * plane0.GetNormal() + c1 * plane1.GetNormal(), Vector3ToolsType::UnitCrossProduct(plane0.GetNormal(), plane1.GetNormal()) };
+        intersectionLine = Line3Type{ c0 * plane0.GetNormal() + c1 * plane1.GetNormal(), Vector3ToolsType::UnitCrossProduct(plane0.GetNormal(), plane1.GetNormal()) };
 
         return;
     }
@@ -107,7 +107,7 @@ void Mathematics::DynamicFindIntersectorPlane3Plane3<Real>::Find()
     {
         // 平面彼此相向，并会在指定的时间间隔内相遇。
         this->SetIntersectionType(IntersectionType::Plane);
-        intersectionPlane = Plane3{ plane0.GetNormal(), plane0.GetConstant() + this->GetContactTime() * (Vector3ToolsType::DotProduct(plane0.GetNormal(), this->GetLhsVelocity())) };
+        intersectionPlane = Plane3Type{ plane0.GetNormal(), plane0.GetConstant() + this->GetContactTime() * (Vector3ToolsType::DotProduct(plane0.GetNormal(), this->GetLhsVelocity())) };
 
         return;
     }

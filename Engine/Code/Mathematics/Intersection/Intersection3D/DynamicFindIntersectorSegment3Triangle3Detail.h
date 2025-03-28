@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::DynamicFindIntersectorSegment3Triangle3(const Segment3& segment, const Triangle3& triangle, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::DynamicFindIntersectorSegment3Triangle3(const Segment3Type& segment, const Triangle3Type& triangle, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon },
       segment{ segment },
       triangle{ triangle },

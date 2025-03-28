@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::StaticFindIntersectorPlane3Cylinder3(const Plane3& plane, const Cylinder3& cylinder, const Real epsilon)
+Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::StaticFindIntersectorPlane3Cylinder3(const Plane3Type& plane, const Cylinder3Type& cylinder, const Real epsilon)
     : ParentType{ epsilon },
       plane{ plane },
       cylinder{ cylinder },
@@ -76,7 +76,7 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::Find()
             auto minor = Vector3ToolsType::CrossProduct(plane.GetNormal(), major);
             major.Normalize();
             minor.Normalize();
-            ellipse = Ellipse3{ center - (distance / cosTheta) * cylinder.GetAxis().GetDirection(),
+            ellipse = Ellipse3Type{ center - (distance / cosTheta) * cylinder.GetAxis().GetDirection(),
                                 plane.GetNormal(),
                                 major,
                                 minor,
@@ -88,7 +88,7 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::Find()
         else
         {
             type = CylinderPlaneIntersection::Circle;
-            circle = Circle3{ center, circle.GetDirection0(), circle.GetDirection1(), plane.GetNormal(), cylinder.GetRadius() };
+            circle = Circle3Type{ center, circle.GetDirection0(), circle.GetDirection1(), plane.GetNormal(), cylinder.GetRadius() };
 
             this->SetIntersectionType(IntersectionType::Other);
 
@@ -106,8 +106,8 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::Find()
             const auto offset = Vector3ToolsType::CrossProduct(cylinder.GetAxis().GetDirection(), plane.GetNormal());
             auto extent = MathType::Sqrt(cylinder.GetRadius() * cylinder.GetRadius() - distance * distance);
 
-            line0 = Line3{ center - extent * offset, cylinder.GetAxis().GetDirection() };
-            line1 = Line3{ center + extent * offset, cylinder.GetAxis().GetDirection() };
+            line0 = Line3Type{ center - extent * offset, cylinder.GetAxis().GetDirection() };
+            line1 = Line3Type{ center + extent * offset, cylinder.GetAxis().GetDirection() };
 
             this->SetIntersectionType(IntersectionType::Other);
             return;
@@ -115,7 +115,7 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::Find()
         else if (MathType::Approximate(absDistance, cylinder.GetRadius()))
         {
             type = CylinderPlaneIntersection::OneLine;
-            line0 = Line3{ center, cylinder.GetAxis().GetDirection() };
+            line0 = Line3Type{ center, cylinder.GetAxis().GetDirection() };
 
             this->SetIntersectionType(IntersectionType::Other);
             return;

@@ -26,26 +26,26 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Ray3 = Ray3<Real>;
-        using Triangle3 = Triangle3<Real>;
+        using Ray3Type = Ray3<Real>;
+        using Triangle3Type = Triangle3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorRay3Triangle3(const Ray3& ray, const Triangle3& triangle, const Real epsilon = MathType::GetZeroTolerance());
+        StaticTestIntersectorRay3Triangle3(const Ray3Type& ray, const Triangle3Type& triangle, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Ray3 GetRay() const noexcept;
-        NODISCARD Triangle3 GetTriangle() const noexcept;
+        NODISCARD Ray3Type GetRay() const noexcept;
+        NODISCARD Triangle3Type GetTriangle() const noexcept;
 
     private:
         void Test();
 
     private:
         // 相交对象
-        Ray3 ray;
-        Triangle3 triangle;
+        Ray3Type ray;
+        Triangle3Type triangle;
     };
 }
 

@@ -15,7 +15,7 @@
 #include "Mathematics/Distance/Distance3D/DistanceLine3Segment3Detail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorLine3Capsule3<Real>::StaticTestIntersectorLine3Capsule3(const Line3& line, const Capsule3& capsule, const Real epsilon)
+Mathematics::StaticTestIntersectorLine3Capsule3<Real>::StaticTestIntersectorLine3Capsule3(const Line3Type& line, const Capsule3Type& capsule, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, capsule{ capsule }
 {
     Test();

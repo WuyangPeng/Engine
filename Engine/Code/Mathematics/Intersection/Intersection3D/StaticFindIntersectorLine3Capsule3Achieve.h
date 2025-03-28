@@ -15,7 +15,7 @@
 #include "Mathematics/Distance/Distance3D/DistanceLine3Segment3Detail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorLine3Capsule3<Real>::StaticFindIntersectorLine3Capsule3(const Line3& line, const Capsule3& capsule, const Real epsilon)
+Mathematics::StaticFindIntersectorLine3Capsule3<Real>::StaticFindIntersectorLine3Capsule3(const Line3Type& line, const Capsule3Type& capsule, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, capsule{ capsule }, quantity{}, point0{}, point1{}
 {
     Find();
@@ -106,7 +106,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathematics::StaticFindIntersectorLine3Capsule3<Real>::Find(const Vector3Type& origin, const Vector3Type& direction, const Capsule3& capsule)
+typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathematics::StaticFindIntersectorLine3Capsule3<Real>::Find(const Vector3Type& origin, const Vector3Type& direction, const Capsule3Type& capsule)
 {
     FindShared findShared{};
 

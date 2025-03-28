@@ -26,18 +26,18 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Line3 = Line3<Real>;
-        using Capsule3 = Capsule3<Real>;
+        using Line3Type = Line3<Real>;
+        using Capsule3Type = Capsule3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorLine3Capsule3(const Line3& line, const Capsule3& capsule, const Real epsilon = MathType::GetZeroTolerance());
+        StaticFindIntersectorLine3Capsule3(const Line3Type& line, const Capsule3Type& capsule, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line3 GetLine() const noexcept;
-        NODISCARD Capsule3 GetCapsule() const noexcept;
+        NODISCARD Line3Type GetLine() const noexcept;
+        NODISCARD Capsule3Type GetCapsule() const noexcept;
 
         NODISCARD int GetQuantity() const noexcept;
         NODISCARD Vector3Type GetPoint(int index) const;
@@ -46,8 +46,8 @@ namespace Mathematics
         void Find();
 
     private:
-        Line3 line;
-        Capsule3 capsule;
+        Line3Type line;
+        Capsule3Type capsule;
 
         int quantity;
         Vector3Type point0;
@@ -62,7 +62,7 @@ namespace Mathematics
             Real parameter1;
         };
 
-        NODISCARD static FindShared Find(const Vector3Type& origin, const Vector3Type& direction, const Capsule3& capsule);
+        NODISCARD static FindShared Find(const Vector3Type& origin, const Vector3Type& direction, const Capsule3Type& capsule);
     };
 }
 

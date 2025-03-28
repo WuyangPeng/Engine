@@ -26,18 +26,18 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Line3 = Line3<Real>;
-        using Ellipsoid3 = Ellipsoid3<Real>;
+        using Line3Type = Line3<Real>;
+        using Ellipsoid3Type = Ellipsoid3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorLine3Ellipsoid3(const Line3& line, const Ellipsoid3& ellipsoid, const Real epsilon = MathType::GetZeroTolerance());
+        StaticTestIntersectorLine3Ellipsoid3(const Line3Type& line, const Ellipsoid3Type& ellipsoid, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line3 GetLine() const noexcept;
-        NODISCARD Ellipsoid3 GetEllipsoid() const noexcept;
+        NODISCARD Line3Type GetLine() const noexcept;
+        NODISCARD Ellipsoid3Type GetEllipsoid() const noexcept;
 
         void SetNegativeThreshold(Real negThreshold);
         NODISCARD Real GetNegativeThreshold() const noexcept;
@@ -48,8 +48,8 @@ namespace Mathematics
         void Test();
 
     private:
-        Line3 line;
-        Ellipsoid3 ellipsoid;
+        Line3Type line;
+        Ellipsoid3Type ellipsoid;
 
         Real negativeThreshold;
         Real positiveThreshold;

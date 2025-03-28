@@ -25,13 +25,13 @@ namespace Mathematics
         using ParentType = DynamicIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Box3 = Box3<Real>;
+        using Box3Type = Box3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        DynamicAngularTestIntersectorBox3Box3(const Box3& box0,
-                                              const Box3& box1,
+        DynamicAngularTestIntersectorBox3Box3(const Box3Type& box0,
+                                              const Box3Type& box1,
                                               Real tMax,
                                               int numSteps,
                                               const Vector3Type& lhsVelocity,
@@ -44,8 +44,8 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Box3 GetBox0() const noexcept;
-        NODISCARD Box3 GetBox1() const noexcept;
+        NODISCARD Box3Type GetBox0() const noexcept;
+        NODISCARD Box3Type GetBox1() const noexcept;
 
     private:
         /// 动态测试交叉点查询，其中框具有恒定的线速度和恒定的角速度。 旋转轴的长度是角速度。
@@ -53,8 +53,8 @@ namespace Mathematics
         void Test();
 
     private:
-        Box3 box0;
-        Box3 box1;
+        Box3Type box0;
+        Box3Type box1;
 
         int numSteps;
         Vector3Type lhsRotCenter;

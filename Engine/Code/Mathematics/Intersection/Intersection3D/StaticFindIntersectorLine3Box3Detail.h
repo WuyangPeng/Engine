@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorLine3Box3<Real>::StaticFindIntersectorLine3Box3(const Line3& line, const Box3& box, const Real epsilon)
+Mathematics::StaticFindIntersectorLine3Box3<Real>::StaticFindIntersectorLine3Box3(const Line3Type& line, const Box3Type& box, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, box{ box }, quantity{}, point0{}, point1{}
 {
     Find();
@@ -89,7 +89,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorLine3Box3<Real>::Ge
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorLine3Box3<Real>::FindShared Mathematics::StaticFindIntersectorLine3Box3<Real>::DoClipping(Real t0, Real t1, const Vector3Type& origin, const Vector3Type& direction, const Box3& box, bool solid)
+typename Mathematics::StaticFindIntersectorLine3Box3<Real>::FindShared Mathematics::StaticFindIntersectorLine3Box3<Real>::DoClipping(Real t0, Real t1, const Vector3Type& origin, const Vector3Type& direction, const Box3Type& box, bool solid)
 {
     FindShared findShared{};
 

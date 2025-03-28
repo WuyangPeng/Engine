@@ -26,14 +26,14 @@ namespace Mathematics
         using ParentType = DynamicIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Segment3 = Segment3<Real>;
-        using Triangle3 = Triangle3<Real>;
+        using Segment3Type = Segment3<Real>;
+        using Triangle3Type = Triangle3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        DynamicTestIntersectorSegment3Triangle3(const Segment3& segment,
-                                                const Triangle3& triangle,
+        DynamicTestIntersectorSegment3Triangle3(const Segment3Type& segment,
+                                                const Triangle3Type& triangle,
                                                 Real tMax,
                                                 const Vector3Type& lhsVelocity,
                                                 const Vector3Type& rhsVelocity,
@@ -41,15 +41,15 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Segment3 GetSegment() const noexcept;
-        NODISCARD Triangle3 GetTriangle() const noexcept;
+        NODISCARD Segment3Type GetSegment() const noexcept;
+        NODISCARD Triangle3Type GetTriangle() const noexcept;
 
     private:
         void Test();
 
     private:
-        Segment3 segment;
-        Triangle3 triangle;
+        Segment3Type segment;
+        Triangle3Type triangle;
     };
 }
 

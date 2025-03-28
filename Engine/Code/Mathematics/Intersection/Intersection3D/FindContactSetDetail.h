@@ -21,7 +21,7 @@
 
 template <typename Real>
 Mathematics::FindContactSet<Real>::FindContactSet(const SegmentType& segment,
-                                                  const Triangle3& triangle,
+                                                  const Triangle3Type& triangle,
                                                   ContactSide side,
                                                   const IntersectorConfiguration& segmentCfg,
                                                   const IntersectorConfiguration& triangleCfg,
@@ -86,7 +86,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const SegmentType& segment,
 
 template <typename Real>
 Mathematics::FindContactSet<Real>::FindContactSet(const SegmentType& segment,
-                                                  const Box3& box,
+                                                  const Box3Type& box,
                                                   ContactSide side,
                                                   const IntersectorConfiguration& segmentCfg,
                                                   const IntersectorConfiguration& boxCfg,
@@ -166,8 +166,8 @@ Mathematics::FindContactSet<Real>::FindContactSet(const SegmentType& segment,
 }
 
 template <typename Real>
-Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3& triangle,
-                                                  const Box3& box,
+Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3Type& triangle,
+                                                  const Box3Type& box,
                                                   ContactSide side,
                                                   const IntersectorConfiguration& triangleCfg,
                                                   const IntersectorConfiguration& boxCfg,
@@ -309,8 +309,8 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3& triangle,
 }
 
 template <typename Real>
-Mathematics::FindContactSet<Real>::FindContactSet(const Box3& box0,
-                                                  const Box3& box1,
+Mathematics::FindContactSet<Real>::FindContactSet(const Box3Type& box0,
+                                                  const Box3Type& box1,
                                                   ContactSide side,
                                                   const IntersectorConfiguration& box0Cfg,
                                                   const IntersectorConfiguration& box1Cfg,

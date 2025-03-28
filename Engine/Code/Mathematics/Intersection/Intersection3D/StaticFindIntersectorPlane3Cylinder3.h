@@ -29,22 +29,22 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Cylinder3 = Cylinder3<Real>;
-        using Line3 = Line3<Real>;
-        using Circle3 = Circle3<Real>;
-        using Ellipse3 = Ellipse3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Cylinder3Type = Cylinder3<Real>;
+        using Line3Type = Line3<Real>;
+        using Circle3Type = Circle3<Real>;
+        using Ellipse3Type = Ellipse3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
-        using TwoLine = std::pair<Line3, Line3>;
+        using TwoLine = std::pair<Line3Type, Line3Type>;
 
     public:
-        StaticFindIntersectorPlane3Cylinder3(const Plane3& plane, const Cylinder3& cylinder, const Real epsilon = MathType::GetZeroTolerance());
+        StaticFindIntersectorPlane3Cylinder3(const Plane3Type& plane, const Cylinder3Type& cylinder, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Plane3 GetPlane() const noexcept;
-        NODISCARD Cylinder3 GetCylinder() const noexcept;
+        NODISCARD Plane3Type GetPlane() const noexcept;
+        NODISCARD Cylinder3Type GetCylinder() const noexcept;
 
         // 剔除支持。 视锥台被认为位于平面的正侧。 如果圆柱体位于平面的负侧，则将其剔除。
         NODISCARD bool CylinderIsCulled() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
@@ -62,31 +62,31 @@ namespace Mathematics
         NODISCARD CylinderPlaneIntersection GetType() const noexcept;
 
         // 当GetType()返回OneLine时有效。
-        Line3 GetOneLine() const noexcept;
+        Line3Type GetOneLine() const noexcept;
 
         // 当GetType()返回TwoLines时有效。
         TwoLine GetTwoLines() const noexcept;
 
         // 当GetType()返回Circle时有效。
-        Circle3 GetCircle() const noexcept;
+        Circle3Type GetCircle() const noexcept;
 
         // 当GetType()返回Ellipse时有效。
-        Ellipse3 GetEllipse() const noexcept;
+        Ellipse3Type GetEllipse() const noexcept;
 
     private:
         // *无限*圆柱体的静态交点查询。
         void Find();
 
     private:
-        Plane3 plane;
-        Cylinder3 cylinder;
+        Plane3Type plane;
+        Cylinder3Type cylinder;
 
         // 圆柱无限时的相交设置。
         CylinderPlaneIntersection type;
-        Line3 line0;
-        Line3 line1;
-        Circle3 circle;
-        Ellipse3 ellipse;
+        Line3Type line0;
+        Line3Type line1;
+        Circle3Type circle;
+        Ellipse3Type ellipse;
     };
 }
 

@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::DynamicTestIntersectorTriangle3Triangle3(const Triangle3& triangle0, const Triangle3& triangle1, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
+Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::DynamicTestIntersectorTriangle3Triangle3(const Triangle3Type& triangle0, const Triangle3Type& triangle1, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, triangle0{ triangle0 }, triangle1{ triangle1 }
 {
     Test();
@@ -165,7 +165,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::Test()
 }
 
 template <typename Real>
-typename Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::IntersectInfo Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::ProjectOntoAxis(const Triangle3& triangle, const Vector3Type& axis)
+typename Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::IntersectInfo Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::ProjectOntoAxis(const Triangle3Type& triangle, const Vector3Type& axis)
 {
     auto dot0 = Vector3ToolsType::DotProduct(axis, triangle.GetVertex(0));
     auto dot1 = Vector3ToolsType::DotProduct(axis, triangle.GetVertex(1));

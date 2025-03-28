@@ -18,7 +18,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorHalfspace3Segment3<Real>::DynamicFindIntersectorHalfspace3Segment3(const Plane3& halfspace, const Segment3& segment, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorHalfspace3Segment3<Real>::DynamicFindIntersectorHalfspace3Segment3(const Plane3Type& halfspace, const Segment3Type& segment, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, halfspace{ halfspace }, segment{ segment }, quantity{}, point0{}, point1{}
 {
     Find();

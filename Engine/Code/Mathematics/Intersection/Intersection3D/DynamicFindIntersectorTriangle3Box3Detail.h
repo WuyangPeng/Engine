@@ -18,7 +18,7 @@
 #include "Mathematics/Intersection/Flags/ContactSide.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::DynamicFindIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::DynamicFindIntersectorTriangle3Box3(const Triangle3Type& triangle, const Box3Type& box, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, triangle{ triangle }, box{ box }, point{}
 {
     Find();

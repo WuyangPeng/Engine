@@ -26,18 +26,18 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Capsule3 = Capsule3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Capsule3Type = Capsule3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorPlane3Capsule3(const Plane3& plane, const Capsule3& capsule, const Real epsilon = MathType::GetZeroTolerance()) noexcept;
+        StaticTestIntersectorPlane3Capsule3(const Plane3Type& plane, const Capsule3Type& capsule, const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Plane3 GetPlane() const noexcept;
-        NODISCARD Capsule3 GetCapsule() const noexcept;
+        NODISCARD Plane3Type GetPlane() const noexcept;
+        NODISCARD Capsule3Type GetCapsule() const noexcept;
 
         NODISCARD bool CapsuleIsCulled() const noexcept;
 
@@ -45,8 +45,8 @@ namespace Mathematics
         void Test() noexcept;
 
     private:
-        Plane3 plane;
-        Capsule3 capsule;
+        Plane3Type plane;
+        Capsule3Type capsule;
     };
 }
 

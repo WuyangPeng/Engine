@@ -26,18 +26,18 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Segment3 = Segment3<Real>;
-        using Ellipsoid3 = Ellipsoid3<Real>;
+        using Segment3Type = Segment3<Real>;
+        using Ellipsoid3Type = Ellipsoid3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorSegment3Ellipsoid3(const Segment3& segment, const Ellipsoid3& ellipsoid, const Real epsilon = MathType::GetZeroTolerance());
+        StaticFindIntersectorSegment3Ellipsoid3(const Segment3Type& segment, const Ellipsoid3Type& ellipsoid, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Segment3 GetSegment() const noexcept;
-        NODISCARD Ellipsoid3 GetEllipsoid() const noexcept;
+        NODISCARD Segment3Type GetSegment() const noexcept;
+        NODISCARD Ellipsoid3Type GetEllipsoid() const noexcept;
 
         /// 相交集。 椭圆体被认为是实体，因此如果线段严格位于椭圆体内部，
         /// 则交点类型为IT_SEGMENT，函数GetPoint(i)返回线段终点。
@@ -50,8 +50,8 @@ namespace Mathematics
         void Find();
 
     private:
-        Segment3 segment;
-        Ellipsoid3 ellipsoid;
+        Segment3Type segment;
+        Ellipsoid3Type ellipsoid;
 
         int quantity;
         Vector3Type point0;

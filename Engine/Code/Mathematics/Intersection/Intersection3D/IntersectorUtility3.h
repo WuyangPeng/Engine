@@ -28,7 +28,7 @@ namespace Mathematics
 
         using Vector3Type = Vector3<Real>;
         using Container = std::vector<Vector3Type>;
-        using Box3 = Box3<Real>;
+        using Box3Type = Box3<Real>;
 
     public:
         IntersectorUtility3() = delete;
@@ -39,7 +39,7 @@ namespace Mathematics
         NODISCARD static Container ClipConvexPolygonAgainstPlane(const Vector3Type& normal, Real bonstant, const Container& point);
 
         // 将索引转换为盒内的实际坐标。
-        NODISCARD static Vector3Type GetPointFromIndex(int index, const Box3& box);
+        NODISCARD static Vector3Type GetPointFromIndex(int index, const Box3Type& box);
     };
 
     using IntersectorUtility3F = IntersectorUtility3<float>;

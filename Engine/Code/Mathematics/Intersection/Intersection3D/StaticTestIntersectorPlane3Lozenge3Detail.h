@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>::StaticTestIntersectorPlane3Lozenge3(const Plane3& plane, const Lozenge3& lozenge, const Real epsilon)
+Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>::StaticTestIntersectorPlane3Lozenge3(const Plane3Type& plane, const Lozenge3Type& lozenge, const Real epsilon)
     : ParentType{ epsilon }, plane{ plane }, lozenge{ lozenge }
 {
     Test();

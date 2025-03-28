@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorBox3Sphere3<Real>::StaticTestIntersectorBox3Sphere3(const Box3& box, const Sphere3& sphere, const Real epsilon)
+Mathematics::StaticTestIntersectorBox3Sphere3<Real>::StaticTestIntersectorBox3Sphere3(const Box3Type& box, const Sphere3Type& sphere, const Real epsilon)
     : ParentType{ epsilon }, box{ box }, sphere{ sphere }
 {
     Test();

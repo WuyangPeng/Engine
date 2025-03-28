@@ -15,7 +15,7 @@
 #include "Mathematics/Objects3D/Circle3Detail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::StaticFindIntersectorSphere3Sphere3(const Sphere3& sphere0, const Sphere3& sphere1, const Real epsilon)
+Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::StaticFindIntersectorSphere3Sphere3(const Sphere3Type& sphere0, const Sphere3Type& sphere1, const Real epsilon)
     : ParentType{ epsilon }, sphere0{ sphere0 }, sphere1{ sphere1 }, circle{ Vector3Type::GetZero(), Vector3Type::GetZero(), Vector3Type::GetZero(), Vector3Type::GetZero(), MathType::GetValue(0) }, contactPoint{}
 {
     Find();
@@ -76,7 +76,7 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
         // 在这种情况下，应该调用 GetContactPoint()，而不是GetCircle()。 仅在调用者不测试交叉点类型的情况下设置圆形参数。
         center1MinusCenter0.Normalize();
         contactPoint = sphere0.GetCenter() + radius0 * center1MinusCenter0;
-        circle = Circle3{ contactPoint, Vector3Type::GetZero(), Vector3Type::GetZero(), center1MinusCenter0, MathType::GetValue(0) };
+        circle = Circle3Type{ contactPoint, Vector3Type::GetZero(), Vector3Type::GetZero(), center1MinusCenter0, MathType::GetValue(0) };
         this->SetIntersectionType(IntersectionType::Point);
         return;
     }
@@ -90,7 +90,7 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
         ///  仅在调用者不测试交叉点类型的情况下设置圆形和接触参数，但选择是任意的。
         center1MinusCenter0.Normalize();
         contactPoint = MathType::GetRational(1, 2) * (sphere0.GetCenter() + sphere1.GetCenter());
-        circle = Circle3{ contactPoint, Vector3Type::GetZero(), Vector3Type::GetZero(), center1MinusCenter0, MathType::GetValue(0) };
+        circle = Circle3Type{ contactPoint, Vector3Type::GetZero(), Vector3Type::GetZero(), center1MinusCenter0, MathType::GetValue(0) };
 
         this->SetIntersectionType(radiusDiff <= MathType::GetValue(0) ? IntersectionType::Sphere0 : IntersectionType::Sphere1);
         return;
@@ -115,7 +115,7 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
             this->SetIntersectionType(IntersectionType::Sphere1Point);
         }
 
-        circle = Circle3(contactPoint, Vector3Type::GetZero(), Vector3Type::GetZero(), center1MinusCenter0, MathType::GetValue(0));
+        circle = Circle3Type(contactPoint, Vector3Type::GetZero(), Vector3Type::GetZero(), center1MinusCenter0, MathType::GetValue(0));
 
         return;
     }
@@ -129,7 +129,7 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
     center1MinusCenter0.Normalize();
 
     const auto Vector3OrthonormalBasis = Vector3ToolsType::GenerateComplementBasis(center1MinusCenter0);
-    circle = Circle3{ sphere0.GetCenter() + t * center1MinusCenter0, Vector3OrthonormalBasis.GetUVector(),
+    circle = Circle3Type{ sphere0.GetCenter() + t * center1MinusCenter0, Vector3OrthonormalBasis.GetUVector(),
                       Vector3OrthonormalBasis.GetVVector(),
                       center1MinusCenter0,
                       MathType::Sqrt(MathType::FAbs(radius0 * radius0 - t * t * sqrLen)) };

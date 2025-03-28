@@ -26,13 +26,13 @@ namespace Mathematics
         using ParentType = DynamicIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Sphere3 = Sphere3<Real>;
+        using Sphere3Type = Sphere3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        DynamicTestIntersectorSphere3Sphere3(const Sphere3& sphere0,
-                                             const Sphere3& sphere1,
+        DynamicTestIntersectorSphere3Sphere3(const Sphere3Type& sphere0,
+                                             const Sphere3Type& sphere1,
                                              Real tMax,
                                              const Vector3Type& lhsVelocity,
                                              const Vector3Type& rhsVelocity,
@@ -40,15 +40,15 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Sphere3 GetSphere0() const noexcept;
-        NODISCARD Sphere3 GetSphere1() const noexcept;
+        NODISCARD Sphere3Type GetSphere0() const noexcept;
+        NODISCARD Sphere3Type GetSphere1() const noexcept;
 
     private:
         void Test();
 
     private:
-        Sphere3 sphere0;
-        Sphere3 sphere1;
+        Sphere3Type sphere0;
+        Sphere3Type sphere1;
     };
 }
 

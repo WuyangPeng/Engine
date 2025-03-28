@@ -29,14 +29,14 @@ namespace Mathematics
         using ParentType = DynamicIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Segment3 = Segment3<Real>;
-        using Plane3 = Plane3<Real>;
+        using Segment3Type = Segment3<Real>;
+        using Plane3Type = Plane3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        DynamicFindIntersectorHalfspace3Segment3(const Plane3& halfspace,
-                                                 const Segment3& segment,
+        DynamicFindIntersectorHalfspace3Segment3(const Plane3Type& halfspace,
+                                                 const Segment3Type& segment,
                                                  Real tmax,
                                                  const Vector3Type& lhsVelocity,
                                                  const Vector3Type& rhsVelocity,
@@ -44,8 +44,8 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Plane3 GetHalfspace() const noexcept;
-        NODISCARD Segment3 GetSegment() const noexcept;
+        NODISCARD Plane3Type GetHalfspace() const noexcept;
+        NODISCARD Segment3Type GetSegment() const noexcept;
 
         /// 相交集为空，点或线段。 函数GetQuantity() 返回0、1或2。
         NODISCARD int GetQuantity() const noexcept;
@@ -56,8 +56,8 @@ namespace Mathematics
         void Find();
 
         // 要相交的对象。
-        Plane3 halfspace;
-        Segment3 segment;
+        Plane3Type halfspace;
+        Segment3Type segment;
 
         // 有关交集的信息。
         int quantity;

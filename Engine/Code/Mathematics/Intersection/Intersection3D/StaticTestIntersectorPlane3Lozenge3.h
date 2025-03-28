@@ -26,18 +26,18 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Lozenge3 = Lozenge3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Lozenge3Type = Lozenge3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorPlane3Lozenge3(const Plane3& plane, const Lozenge3& lozenge, const Real epsilon = MathType::GetZeroTolerance());
+        StaticTestIntersectorPlane3Lozenge3(const Plane3Type& plane, const Lozenge3Type& lozenge, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Plane3 GetPlane() const noexcept;
-        NODISCARD Lozenge3 GetLozenge() const noexcept;
+        NODISCARD Plane3Type GetPlane() const noexcept;
+        NODISCARD Lozenge3Type GetLozenge() const noexcept;
 
         NODISCARD bool LozengeIsCulled() const;
 
@@ -45,8 +45,8 @@ namespace Mathematics
         void Test();
 
     private:
-        Plane3 plane;
-        Lozenge3 lozenge;
+        Plane3Type plane;
+        Lozenge3Type lozenge;
     };
 }
 

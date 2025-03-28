@@ -18,7 +18,7 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorLine3Triangle3<Real>::StaticFindIntersectorLine3Triangle3(const Line3& line, const Triangle3& triangle, const Real epsilon)
+Mathematics::StaticFindIntersectorLine3Triangle3<Real>::StaticFindIntersectorLine3Triangle3(const Line3Type& line, const Triangle3Type& triangle, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, triangle{ triangle }, lineParameter{}, triangleBary0{}, triangleBary1{}, triangleBary2{ MathType::GetValue(1) }, point{}
 {
     Find();

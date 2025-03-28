@@ -26,13 +26,13 @@ namespace Mathematics
         using ParentType = DynamicIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Plane3 = Plane3<Real>;
+        using Plane3Type = Plane3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        DynamicTestIntersectorPlane3Plane3(const Plane3& plane0,
-                                           const Plane3& plane1,
+        DynamicTestIntersectorPlane3Plane3(const Plane3Type& plane0,
+                                           const Plane3Type& plane1,
                                            Real tMax,
                                            const Vector3Type& lhsVelocity,
                                            const Vector3Type& rhsVelocity,
@@ -40,15 +40,15 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Plane3 GetPlane0() const noexcept;
-        NODISCARD Plane3 GetPlane1() const noexcept;
+        NODISCARD Plane3Type GetPlane0() const noexcept;
+        NODISCARD Plane3Type GetPlane1() const noexcept;
 
     private:
         void Test();
 
     private:
-        Plane3 plane0;
-        Plane3 plane1;
+        Plane3Type plane0;
+        Plane3Type plane1;
     };
 }
 
