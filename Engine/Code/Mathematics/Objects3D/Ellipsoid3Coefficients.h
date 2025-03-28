@@ -28,19 +28,19 @@ namespace Mathematics
         using ClassType = Ellipsoid3Coefficients<Real>;
 
         using MathType = Math<Real>;
-        using Vector3 = Vector3<Real>;
-        using Matrix3 = Matrix3<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Matrix3Type = Matrix3<Real>;
         using CoefficientsType = std::vector<Real>;
 
     public:
-        Ellipsoid3Coefficients(const Matrix3& matrix, const Vector3& vector, Real constants);
+        Ellipsoid3Coefficients(const Matrix3Type& matrix, const Vector3Type& vector, Real constants);
 
         explicit Ellipsoid3Coefficients(const CoefficientsType& coefficient);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Matrix3 GetMatrix() const noexcept;
-        NODISCARD Vector3 GetVector() const noexcept;
+        NODISCARD Matrix3Type GetMatrix() const noexcept;
+        NODISCARD Vector3Type GetVector() const noexcept;
         NODISCARD Real GetConstants() const noexcept;
         NODISCARD CoefficientsType GetCoefficients() const;
 

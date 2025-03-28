@@ -17,7 +17,7 @@
 #include <gsl/util>
 
 template <typename Real>
-Mathematics::Ellipsoid3Coefficients<Real>::Ellipsoid3Coefficients(const Matrix3& matrix, const Vector3& vector, Real constants)
+Mathematics::Ellipsoid3Coefficients<Real>::Ellipsoid3Coefficients(const Matrix3Type& matrix, const Vector3Type& vector, Real constants)
     : coefficients{ constants,
                     vector.GetX(),
                     vector.GetY(),
@@ -60,7 +60,7 @@ Mathematics::Matrix3<Real> Mathematics::Ellipsoid3Coefficients<Real>::GetMatrix(
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-    return Matrix3{ coefficients[4],
+    return Matrix3Type{ coefficients[4],
                     MathType::GetRational(1, 2) * coefficients[5],
                     MathType::GetRational(1, 2) * coefficients[6],
                     MathType::GetRational(1, 2) * coefficients[5],
@@ -81,7 +81,7 @@ Mathematics::Vector3<Real> Mathematics::Ellipsoid3Coefficients<Real>::GetVector(
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-    return Vector3{ coefficients[1], coefficients[2], coefficients[3] };
+    return Vector3Type{ coefficients[1], coefficients[2], coefficients[3] };
 
 #include SYSTEM_WARNING_POP
 }

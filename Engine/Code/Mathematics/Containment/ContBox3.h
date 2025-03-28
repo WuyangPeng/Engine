@@ -27,7 +27,7 @@ namespace Mathematics
         using ClassType = ContBox3<Real>;
         using Vector3Type = Vector3<Real>;
         using Points = std::vector<Vector3Type>;
-        using Box3 = Box3<Real>;
+        using Box3Type = Box3<Real>;
         using MathType = Math<Real>;
 
     public:
@@ -36,20 +36,20 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
         // 计算点的最小的轴对齐包围盒。
-        NODISCARD static Box3 ContAlignedBox(const Points& points);
+        NODISCARD static Box3Type ContAlignedBox(const Points& points);
 
         // 计算点的定向边界框。包围盒中心是点的平均值。
         // 包围盒的轴是协方差矩阵的特征向量。
-        NODISCARD static Box3 ContOrientedBox(const Points& points);
+        NODISCARD static Box3Type ContOrientedBox(const Points& points);
 
         // 试验包含。
         // 设X = C + y0 * U0 + y1 * U1 + y2 * U2，其中C是包围盒的中心和U0,U1和U2是盒子的正交轴。
         // 如果|y_i| <= E_i ,则对于所有i在框中，这里E_i是包围盒的范围。
-        NODISCARD static bool InBox(const Vector3Type& point, const Box3& box);
+        NODISCARD static bool InBox(const Vector3Type& point, const Box3Type& box);
 
         // 构造包含另外两个定向包围盒的定向包围盒。
         // 其结果不能保证是包含输入包围盒的最小体积包围盒。
-        NODISCARD static Box3 MergeBoxes(const Box3& lhs, const Box3& rhs);
+        NODISCARD static Box3Type MergeBoxes(const Box3Type& lhs, const Box3Type& rhs);
     };
 
     using ContBox3D = ContBox3<double>;

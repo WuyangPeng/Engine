@@ -35,12 +35,12 @@ bool Mathematics::ContBox3<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::ContAlignedBox(const Points& points)
+typename Mathematics::ContBox3<Real>::Box3Type Mathematics::ContBox3<Real>::ContAlignedBox(const Points& points)
 {
     const auto aabb = Vector3Tools<Real>::ComputeExtremes(points);
     auto halfDiagonal = MathType::GetRational(1, 2) * (aabb.GetMaxPoint() - aabb.GetMinPoint());
 
-    return Box3{ MathType::GetRational(1, 2) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
+    return Box3Type{ MathType::GetRational(1, 2) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
                  Vector3Type::GetUnitX(),
                  Vector3Type::GetUnitY(),
                  Vector3Type::GetUnitZ(),
@@ -50,7 +50,7 @@ typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::ContAlig
 }
 
 template <typename Real>
-typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::ContOrientedBox(const Points& points)
+typename Mathematics::ContBox3<Real>::Box3Type Mathematics::ContBox3<Real>::ContOrientedBox(const Points& points)
 {
     const GaussPointsFit3<Real> gaussPointsFit3{ points };
     const auto box = gaussPointsFit3.GetBox3();
@@ -97,11 +97,11 @@ typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::ContOrie
     auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * MathType::GetRational(1, 2);
     auto thirdExtent = (*thirdBoundary.second - *thirdBoundary.first) * MathType::GetRational(1, 2);
 
-    return Box3{ center, box.GetAxis0(), box.GetAxis1(), box.GetAxis2(), firstExtent, secondExtent, thirdExtent };
+    return Box3Type{ center, box.GetAxis0(), box.GetAxis1(), box.GetAxis2(), firstExtent, secondExtent, thirdExtent };
 }
 
 template <typename Real>
-bool Mathematics::ContBox3<Real>::InBox(const Vector3Type& point, const Box3& box)
+bool Mathematics::ContBox3<Real>::InBox(const Vector3Type& point, const Box3Type& box)
 {
     auto diff = point - box.GetCenter();
     auto firstCoeff = Vector3Tools<Real>::DotProduct(diff, box.GetAxis0());
@@ -123,7 +123,7 @@ bool Mathematics::ContBox3<Real>::InBox(const Vector3Type& point, const Box3& bo
 }
 
 template <typename Real>
-typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::MergeBoxes(const Box3& lhs, const Box3& rhs)
+typename Mathematics::ContBox3<Real>::Box3Type Mathematics::ContBox3<Real>::MergeBoxes(const Box3Type& lhs, const Box3Type& rhs)
 {
     // 在包围盒中心的第一个猜想。输入包围盒顶点投影到确定的平均包围盒的轴，
     // 此值将在后面进行更新。
@@ -202,7 +202,7 @@ typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::MergeBox
     auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * MathType::GetRational(1, 2);
     auto thirdExtent = (*thirdBoundary.second - *thirdBoundary.first) * MathType::GetRational(1, 2);
 
-    return Box3{ center, sumRotationColumn.at(0), sumRotationColumn.at(1), sumRotationColumn.at(2), firstExtent, secondExtent, thirdExtent };
+    return Box3Type{ center, sumRotationColumn.at(0), sumRotationColumn.at(1), sumRotationColumn.at(2), firstExtent, secondExtent, thirdExtent };
 }
 
 #endif  // MATHEMATICS_CONTAINMENT_CONT_BOX3_DETAIL_H
