@@ -26,10 +26,10 @@ namespace Mathematics
         using ClassType = Ellipsoid3<Real>;
 
         using MathType = Math<Real>;
-        using Vector3 = Vector3<Real>;
-        using Matrix3 = Matrix3<Real>;
-        using Ellipsoid3Coefficients = Ellipsoid3Coefficients<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Matrix3Type = Matrix3<Real>;
+        using Ellipsoid3CoefficientsType = Ellipsoid3Coefficients<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
 
     public:
         // 椭圆体有中心K，轴方向U[0], U[1], 和 U[2]（所有单位长度向量），
@@ -51,56 +51,56 @@ namespace Mathematics
         // 其中X = (x[0],x[1],x[2])。这个等式可以被分解到(X-K)^T * M * (X - K) = 1，
         // 其中K = -A^{-1} * B / 2, M = A / (B^T * A^{-1} * B / 4 - C)。
         // 为椭圆体时，M必须具有所有特征值为正。
-        Ellipsoid3(const Vector3& center,
-                   const Vector3& axis0,
-                   const Vector3& axis1,
-                   const Vector3& axis2,
+        Ellipsoid3(const Vector3Type& center,
+                   const Vector3Type& axis0,
+                   const Vector3Type& axis1,
+                   const Vector3Type& axis2,
                    const Real extent0,
                    const Real extent1,
                    const Real extent2,
                    const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
-        explicit Ellipsoid3(const Ellipsoid3Coefficients& coefficients, const Real epsilon = MathType::GetZeroTolerance());
+        explicit Ellipsoid3(const Ellipsoid3CoefficientsType& coefficients, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetCenter() const noexcept;
-        NODISCARD Vector3 GetAxis0() const noexcept;
-        NODISCARD Vector3 GetAxis1() const noexcept;
-        NODISCARD Vector3 GetAxis2() const noexcept;
+        NODISCARD Vector3Type GetCenter() const noexcept;
+        NODISCARD Vector3Type GetAxis0() const noexcept;
+        NODISCARD Vector3Type GetAxis1() const noexcept;
+        NODISCARD Vector3Type GetAxis2() const noexcept;
         NODISCARD Real GetExtent0() const noexcept;
         NODISCARD Real GetExtent1() const noexcept;
         NODISCARD Real GetExtent2() const noexcept;
 
         // 计算 M = sum_{i = 0}^2 U[i] * U[i]^T/e[i]^2.
-        NODISCARD Matrix3 GetMatrix() const;
+        NODISCARD Matrix3Type GetMatrix() const;
 
         // 计算 M^{-1} = sum_{i = 0}^2 U[i] * U[i]^T * e[i]^2.
-        NODISCARD Matrix3 GetMatrixInverse() const;
+        NODISCARD Matrix3Type GetMatrixInverse() const;
 
         // 构建二次方程式，表示椭圆体的系数。
-        NODISCARD Ellipsoid3Coefficients ToCoefficients() const;
+        NODISCARD Ellipsoid3CoefficientsType ToCoefficients() const;
 
         // 构建m_Center，m_Axis和m_Extent从二次方程。
         // 如果输入系数不能表示一个椭圆体，则抛出异常。
-        void FromCoefficients(const Ellipsoid3Coefficients& coefficients, const Real newEpsilon = MathType::GetZeroTolerance());
+        void FromCoefficients(const Ellipsoid3CoefficientsType& coefficients, const Real newEpsilon = MathType::GetZeroTolerance());
 
         // 计算的二次函数 Q(X) = (X-K)^T * M * (X-K) - 1.
-        NODISCARD Real Evaluate(const Vector3& point) const;
+        NODISCARD Real Evaluate(const Vector3Type& point) const;
 
         // 测试输入点是否在椭圆体内部或边上。
         // 该点被包含当Q(X) <= 0，其中Q(X)为函数Evaluate()。
-        NODISCARD bool Contains(const Vector3& point) const;
+        NODISCARD bool Contains(const Vector3Type& point) const;
 
-        NODISCARD Ellipsoid3 GetMove(Real t, const Vector3& velocity) const;
+        NODISCARD Ellipsoid3 GetMove(Real t, const Vector3Type& velocity) const;
 
     private:
         static constexpr auto axisSize = 3;
-        using AxisType = std::array<Vector3, axisSize>;
+        using AxisType = std::array<Vector3Type, axisSize>;
         using ExtentType = std::array<Real, axisSize>;
 
     private:
-        Vector3 center;
+        Vector3Type center;
         AxisType axis;
         ExtentType extent;
 

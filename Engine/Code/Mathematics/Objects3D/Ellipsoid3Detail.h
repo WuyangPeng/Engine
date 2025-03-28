@@ -18,10 +18,10 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::Ellipsoid3<Real>::Ellipsoid3(const Vector3& center,
-                                          const Vector3& axis0,
-                                          const Vector3& axis1,
-                                          const Vector3& axis2,
+Mathematics::Ellipsoid3<Real>::Ellipsoid3(const Vector3Type& center,
+                                          const Vector3Type& axis0,
+                                          const Vector3Type& axis1,
+                                          const Vector3Type& axis2,
                                           const Real extent0,
                                           const Real extent1,
                                           const Real extent2,
@@ -32,8 +32,8 @@ Mathematics::Ellipsoid3<Real>::Ellipsoid3(const Vector3& center,
 }
 
 template <typename Real>
-Mathematics::Ellipsoid3<Real>::Ellipsoid3(const Ellipsoid3Coefficients& coefficients, const Real epsilon)
-    : center{}, axis{ Vector3::GetUnitX(), Vector3::GetUnitY(), Vector3::GetUnitZ() }, extent{}, epsilon{ epsilon }
+Mathematics::Ellipsoid3<Real>::Ellipsoid3(const Ellipsoid3CoefficientsType& coefficients, const Real epsilon)
+    : center{}, axis{ Vector3Type::GetUnitX(), Vector3Type::GetUnitY(), Vector3Type::GetUnitZ() }, extent{}, epsilon{ epsilon }
 {
     FromCoefficients(coefficients, epsilon);
 
@@ -170,7 +170,7 @@ Mathematics::Matrix3<Real> Mathematics::Ellipsoid3<Real>::GetMatrix() const
     const auto ratio1 = GetAxis1() / GetExtent1();
     const auto ratio2 = GetAxis2() / GetExtent2();
 
-    return Matrix3{ ratio0, ratio0 } + Matrix3{ ratio1, ratio1 } + Matrix3{ ratio2, ratio2 };
+    return Matrix3Type{ ratio0, ratio0 } + Matrix3Type{ ratio1, ratio1 } + Matrix3Type{ ratio2, ratio2 };
 }
 
 template <typename Real>
@@ -182,23 +182,23 @@ Mathematics::Matrix3<Real> Mathematics::Ellipsoid3<Real>::GetMatrixInverse() con
     const auto ratio1 = GetAxis1() * GetExtent1();
     const auto ratio2 = GetAxis2() * GetExtent2();
 
-    return Matrix3{ ratio0, ratio0 } + Matrix3{ ratio1, ratio1 } + Matrix3{ ratio2, ratio2 };
+    return Matrix3Type{ ratio0, ratio0 } + Matrix3Type{ ratio1, ratio1 } + Matrix3Type{ ratio2, ratio2 };
 }
 
 template <typename Real>
-typename Mathematics::Ellipsoid3<Real>::Ellipsoid3Coefficients Mathematics::Ellipsoid3<Real>::ToCoefficients() const
+typename Mathematics::Ellipsoid3<Real>::Ellipsoid3CoefficientsType Mathematics::Ellipsoid3<Real>::ToCoefficients() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const Matrix3 matrix{ GetMatrix() };
-    const Vector3 vector{ MathType::GetValue(-2) * (matrix * center) };
+    const Matrix3Type matrix{ GetMatrix() };
+    const Vector3Type vector{ MathType::GetValue(-2) * (matrix * center) };
     const auto constants = matrix.QuadraticForm(center, center) - MathType::GetValue(1);
 
-    return Ellipsoid3Coefficients{ matrix, vector, constants };
+    return Ellipsoid3CoefficientsType{ matrix, vector, constants };
 }
 
 template <typename Real>
-void Mathematics::Ellipsoid3<Real>::FromCoefficients(const Ellipsoid3Coefficients& coefficients, const Real newEpsilon)
+void Mathematics::Ellipsoid3<Real>::FromCoefficients(const Ellipsoid3CoefficientsType& coefficients, const Real newEpsilon)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -214,7 +214,7 @@ void Mathematics::Ellipsoid3<Real>::FromCoefficients(const Ellipsoid3Coefficient
     center = MathType::GetRational(-1, 2) * (invMatrix * vector);
 
     // º∆À„ B^T*A^{-1}*B/4 - C = K^T*A*K - C = -K^T*B/2 - C°£
-    auto rightSide = MathType::GetRational(-1, 2) * Vector3Tools::DotProduct(center, vector) - constants;
+    auto rightSide = MathType::GetRational(-1, 2) * Vector3ToolsType::DotProduct(center, vector) - constants;
     if (MathType::FAbs(rightSide) < epsilon)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("≥˝¡„¥ÌŒÛ£°"s));
@@ -229,7 +229,7 @@ void Mathematics::Ellipsoid3<Real>::FromCoefficients(const Ellipsoid3Coefficient
     const auto diagonal = eigenDecomposition.GetDiagonal();
     const auto rotation = eigenDecomposition.GetRotation();
 
-    for (auto i = 0; i < Vector3::pointSize; ++i)
+    for (auto i = 0; i < Vector3Type::pointSize; ++i)
     {
         auto eigenValue = diagonal(i, i);
 
@@ -244,28 +244,28 @@ void Mathematics::Ellipsoid3<Real>::FromCoefficients(const Ellipsoid3Coefficient
 
         extent[i] = MathType::InvSqrt(eigenValue);
 
-        axis[i] = Vector3{ rotation(0, i), rotation(1, i), rotation(2, i) };
+        axis[i] = Vector3Type{ rotation(0, i), rotation(1, i), rotation(2, i) };
 
 #include SYSTEM_WARNING_POP
     }
 }
 
 template <typename Real>
-Real Mathematics::Ellipsoid3<Real>::Evaluate(const Vector3& point) const
+Real Mathematics::Ellipsoid3<Real>::Evaluate(const Vector3Type& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     const auto diff = point - center;
-    const auto ratio0 = Vector3Tools::DotProduct(GetAxis0(), diff) / GetExtent0();
-    const auto ratio1 = Vector3Tools::DotProduct(GetAxis1(), diff) / GetExtent1();
-    const auto ratio2 = Vector3Tools::DotProduct(GetAxis2(), diff) / GetExtent2();
+    const auto ratio0 = Vector3ToolsType::DotProduct(GetAxis0(), diff) / GetExtent0();
+    const auto ratio1 = Vector3ToolsType::DotProduct(GetAxis1(), diff) / GetExtent1();
+    const auto ratio2 = Vector3ToolsType::DotProduct(GetAxis2(), diff) / GetExtent2();
     const auto value = ratio0 * ratio0 + ratio1 * ratio1 + ratio2 * ratio2 - MathType::GetValue(1);
 
     return value;
 }
 
 template <typename Real>
-bool Mathematics::Ellipsoid3<Real>::Contains(const Vector3& point) const
+bool Mathematics::Ellipsoid3<Real>::Contains(const Vector3Type& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -273,7 +273,7 @@ bool Mathematics::Ellipsoid3<Real>::Contains(const Vector3& point) const
 }
 
 template <typename Real>
-Mathematics::Ellipsoid3<Real> Mathematics::Ellipsoid3<Real>::GetMove(Real t, const Vector3& velocity) const
+Mathematics::Ellipsoid3<Real> Mathematics::Ellipsoid3<Real>::GetMove(Real t, const Vector3Type& velocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
