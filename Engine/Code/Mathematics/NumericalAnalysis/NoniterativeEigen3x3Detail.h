@@ -244,7 +244,7 @@ bool Mathematics::NoniterativeEigen3x3<Real>::PositiveRank(Matrix3& matrix, Real
 template <typename Real>
 void Mathematics::NoniterativeEigen3x3<Real>::ComputeVectors(const Matrix3& matrix, const Vector3& vector, int index0, int index1, int index2)
 {
-    const auto basis = Vector3Tools::GenerateComplementBasis(vector);
+    const auto basis = Vector3ToolsType::GenerateComplementBasis(vector);
     const auto uVector = basis.GetUVector();
     const auto vVector = basis.GetVVector();
     const auto wVector = basis.GetWVector();
@@ -256,9 +256,9 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeVectors(const Matrix3& matr
     const auto uVectorTransition = matrix * uVector;
     const auto vVectorTransition = matrix * vVector;
 
-    auto p00 = eigenvalue.at(index2) - Vector3Tools::DotProduct(uVector, uVectorTransition);
-    auto p01 = Vector3Tools::DotProduct(vVector, uVectorTransition);
-    auto p11 = eigenvalue.at(index2) - Vector3Tools::DotProduct(vVector, vVectorTransition);
+    auto p00 = eigenvalue.at(index2) - Vector3ToolsType::DotProduct(uVector, uVectorTransition);
+    auto p01 = Vector3ToolsType::DotProduct(vVector, uVectorTransition);
+    auto p11 = eigenvalue.at(index2) - Vector3ToolsType::DotProduct(vVector, vVectorTransition);
 
     auto maxValue = MathType::FAbs(p00);
     auto row = 0;
@@ -307,12 +307,12 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeVectors(const Matrix3& matr
     // e0 * V[i0] = c0 * A * Real + c1 * A * S
     // e0 * c0 = c0 * Real.Dot(A * Real) + c1 * Real.Dot(A * S) = d00 * c0 + d01 * c1
     // e0 * c1 = c0 * S.Dot(A * Real) + c1 * S.Dot(A * S) = d01 * c0 + d11 * c1
-    const auto wVectorCross = Vector3Tools::CrossProduct(wVector, eigenvector.at(index2));
+    const auto wVectorCross = Vector3ToolsType::CrossProduct(wVector, eigenvector.at(index2));
     const auto wVectorTransition = matrix * wVector;
 
-    p00 = eigenvalue.at(index0) - Vector3Tools::DotProduct(wVector, wVectorTransition);
-    p01 = Vector3Tools::DotProduct(wVectorCross, wVectorTransition);
-    p11 = eigenvalue.at(index0) - Vector3Tools::DotProduct(wVectorCross, matrix * wVectorCross);
+    p00 = eigenvalue.at(index0) - Vector3ToolsType::DotProduct(wVector, wVectorTransition);
+    p01 = Vector3ToolsType::DotProduct(wVectorCross, wVectorTransition);
+    p11 = eigenvalue.at(index0) - Vector3ToolsType::DotProduct(wVectorCross, matrix * wVectorCross);
 
     maxValue = MathType::FAbs(p00);
     row = 0;
@@ -358,7 +358,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeVectors(const Matrix3& matr
     }
 
     // V[i1] = Cross(V[i2],V[i0])
-    eigenvector.at(index1) = Vector3Tools::CrossProduct(eigenvector.at(index2), eigenvector.at(index0));
+    eigenvector.at(index1) = Vector3ToolsType::CrossProduct(eigenvector.at(index2), eigenvector.at(index0));
 }
 
 #ifdef OPEN_CLASS_INVARIANT

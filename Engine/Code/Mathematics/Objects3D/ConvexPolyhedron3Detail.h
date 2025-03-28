@@ -144,12 +144,12 @@ void Mathematics::ConvexPolyhedron3<Real>::UpdatePlane(int index, const Vector3&
     auto diff = average - vertex0;
     auto edge1 = vertex1 - vertex0;
     auto edge2 = vertex2 - vertex0;
-    auto normal = Vector3Tools::CrossProduct(edge2, edge1);
-    auto length = Vector3Tools::GetLength(normal);
+    auto normal = Vector3ToolsType::CrossProduct(edge2, edge1);
+    auto length = Vector3ToolsType::GetLength(normal);
     if (MathType::GetZeroTolerance() < length)
     {
         normal /= length;
-        auto dot = Vector3Tools::DotProduct(normal, diff);
+        auto dot = Vector3ToolsType::DotProduct(normal, diff);
         MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= dot, "点积必须为非负数\n");
         if (dot < MathType::GetValue(0))
         {

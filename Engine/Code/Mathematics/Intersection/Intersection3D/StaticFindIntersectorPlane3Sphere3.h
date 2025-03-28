@@ -30,7 +30,7 @@ namespace Mathematics
         using Plane3 = Plane3<Real>;
         using Sphere3 = Sphere3<Real>;
         using Circle3 = Circle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:

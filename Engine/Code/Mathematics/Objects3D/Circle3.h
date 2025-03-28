@@ -28,7 +28,7 @@ namespace Mathematics
 
         using Vector3Type = Vector3<Real>;
         using MathType = Math<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
 
     public:
         // 含有该圆的平面是Dot(N,X-C) = 0，其中X是在平面上的任意点。

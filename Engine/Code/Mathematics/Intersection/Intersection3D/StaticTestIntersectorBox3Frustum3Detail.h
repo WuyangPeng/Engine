@@ -82,10 +82,10 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
     Vector upDotMaxMinusRightDotMax{};  // rmax*Dot(U,A.at(i)) - umax*Dot(R,A.at(i))
 
     // M = D
-    diffDot.at(2) = Vector3Tools::DotProduct(diff, frustum.GetDirectionVector());
+    diffDot.at(2) = Vector3ToolsType::DotProduct(diff, frustum.GetDirectionVector());
     for (auto i = 0; i < 3; ++i)
     {
-        directionDot.at(i) = Vector3Tools::DotProduct(axes.at(i), frustum.GetDirectionVector());
+        directionDot.at(i) = Vector3ToolsType::DotProduct(axes.at(i), frustum.GetDirectionVector());
     }
     auto radius = extents.at(0) * MathType::FAbs(directionDot.at(0)) + extents.at(1) * MathType::FAbs(directionDot.at(1)) + extents.at(2) * MathType::FAbs(directionDot.at(2));
     if (diffDot.at(2) + radius < frustum.GetDirectionMin() || frustum.GetDirectionMax() < diffDot.at(2) - radius)
@@ -97,12 +97,12 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
     // M = n * Real - r * D
     for (auto i = 0; i < 3; ++i)
     {
-        rightDot.at(i) = Vector3Tools::DotProduct(axes.at(i), frustum.GetRightVector());
+        rightDot.at(i) = Vector3ToolsType::DotProduct(axes.at(i), frustum.GetRightVector());
         rightDotMax.at(i) = frustum.GetRightBound() * directionDot.at(i);
         rightDotMin.at(i) = frustum.GetDirectionMin() * rightDot.at(i);
         rightDotMinMinusDirectionDotMax.at(i) = rightDotMin.at(i) - rightDotMax.at(i);
     }
-    diffDot.at(0) = Vector3Tools::DotProduct(diff, frustum.GetRightVector());
+    diffDot.at(0) = Vector3ToolsType::DotProduct(diff, frustum.GetRightVector());
     radius = extents.at(0) * MathType::FAbs(rightDotMinMinusDirectionDotMax.at(0)) + extents.at(1) * MathType::FAbs(rightDotMinMinusDirectionDotMax.at(1)) + extents.at(2) * MathType::FAbs(rightDotMinMinusDirectionDotMax.at(2));
     diffDotMin.at(0) = frustum.GetDirectionMin() * diffDot.at(0);
     upDotMax.at(2) = frustum.GetRightBound() * diffDot.at(2);
@@ -130,12 +130,12 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
     // M = n*U - u*D
     for (auto i = 0; i < 3; ++i)
     {
-        upDot.at(i) = Vector3Tools::DotProduct(axes.at(i), frustum.GetUpVector());
+        upDot.at(i) = Vector3ToolsType::DotProduct(axes.at(i), frustum.GetUpVector());
         directionDotMax.at(i) = frustum.GetUpBound() * directionDot.at(i);
         upDotMin.at(i) = frustum.GetDirectionMin() * upDot.at(i);
         upDotMinMinusDirectionDotMax.at(i) = upDotMin.at(i) - directionDotMax.at(i);
     }
-    diffDot.at(1) = Vector3Tools::DotProduct(diff, frustum.GetUpVector());
+    diffDot.at(1) = Vector3ToolsType::DotProduct(diff, frustum.GetUpVector());
     radius = extents.at(0) * MathType::FAbs(upDotMinMinusDirectionDotMax.at(0)) + extents.at(1) * MathType::FAbs(upDotMinMinusDirectionDotMax.at(1)) + extents.at(2) * MathType::FAbs(upDotMinMinusDirectionDotMax.at(2));
     diffDotMin.at(1) = frustum.GetDirectionMin() * diffDot.at(1);
     diffDotMax.at(2) = frustum.GetUpBound() * diffDot.at(2);

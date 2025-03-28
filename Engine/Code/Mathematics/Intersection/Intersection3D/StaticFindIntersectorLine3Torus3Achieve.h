@@ -60,9 +60,9 @@ void Mathematics::StaticFindIntersectorLine3Torus3<Real>::Find()
     // 计算四次多项式的系数。
     auto outerRadiusSquare = torus.GetOuterRadius() * torus.GetOuterRadius();
     auto innerRadiusSquare = torus.GetInnerRadius() * torus.GetInnerRadius();
-    auto directionDotDirection = Vector3Tools::DotProduct(line.GetDirection(), line.GetDirection());
-    auto originDotDirection = Vector3Tools::DotProduct(line.GetOrigin(), line.GetDirection());
-    auto dot = Vector3Tools::DotProduct(line.GetOrigin(), line.GetOrigin()) - (outerRadiusSquare + innerRadiusSquare);
+    auto directionDotDirection = Vector3ToolsType::DotProduct(line.GetDirection(), line.GetDirection());
+    auto originDotDirection = Vector3ToolsType::DotProduct(line.GetOrigin(), line.GetDirection());
+    auto dot = Vector3ToolsType::DotProduct(line.GetOrigin(), line.GetOrigin()) - (outerRadiusSquare + innerRadiusSquare);
 
     Polynomial<Real> poly{ 4 };
     auto zOrigin = line.GetOrigin().GetZ();

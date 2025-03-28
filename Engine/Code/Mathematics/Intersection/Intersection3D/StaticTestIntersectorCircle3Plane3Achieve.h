@@ -81,9 +81,9 @@ void Mathematics::StaticTestIntersectorCircle3Plane3<Real>::Test()
     /// 则r^2 = |t * D + P - C|^2 = |D|^2 * t^2 + 2 * Dot(D,P-C) * t + |P-C|^2。
     /// 这是形式为a2 * t^2 + 2 * a1 * t + a0 = 0的二次方程。
     auto diff = line.GetOrigin() - circle.GetCenter();
-    auto a2 = Vector3Tools::GetLengthSquared(line.GetDirection());
-    auto a1 = Vector3Tools::DotProduct(diff, line.GetDirection());
-    auto a0 = Vector3Tools::GetLengthSquared(diff) - circle.GetRadius() * circle.GetRadius();
+    auto a2 = Vector3ToolsType::GetLengthSquared(line.GetDirection());
+    auto a1 = Vector3ToolsType::DotProduct(diff, line.GetDirection());
+    auto a0 = Vector3ToolsType::GetLengthSquared(diff) - circle.GetRadius() * circle.GetRadius();
 
     // 实值根表示一个交集。
     auto discr = a1 * a1 - a0 * a2;

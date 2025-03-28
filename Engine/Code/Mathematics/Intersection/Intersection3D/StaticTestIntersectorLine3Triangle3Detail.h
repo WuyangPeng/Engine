@@ -82,10 +82,10 @@ void Mathematics::StaticTestIntersectorLine3Triangle3<Real>::Test()
 
     using namespace System;
 
-    auto directionDotOriginCrossEdge2 = sign * Vector3Tools::DotProduct(line.GetDirection(), data.GetOriginCrossEdge2());
+    auto directionDotOriginCrossEdge2 = sign * Vector3ToolsType::DotProduct(line.GetDirection(), data.GetOriginCrossEdge2());
     if (MathType::GetValue(0) <= directionDotOriginCrossEdge2)
     {
-        auto directionDotEdge1CrossOrigin = sign * Vector3Tools::DotProduct(line.GetDirection(), data.GetEdge1CrossOrigin());
+        auto directionDotEdge1CrossOrigin = sign * Vector3ToolsType::DotProduct(line.GetDirection(), data.GetEdge1CrossOrigin());
 
         if (MathType::GetValue(0) <= directionDotEdge1CrossOrigin)
         {

@@ -56,7 +56,7 @@ void Mathematics::StaticTestIntersectorSphere3Sphere3<Real>::Test()
 {
     const auto diff = sphere1.GetCenter() - sphere0.GetCenter();
     const auto rSum = sphere0.GetRadius() + sphere1.GetRadius();
-    if (Vector3Tools::GetLengthSquared(diff) <= rSum * rSum)
+    if (Vector3ToolsType::GetLengthSquared(diff) <= rSum * rSum)
     {
         this->SetIntersectionType(IntersectionType::Point);
     }

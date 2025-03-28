@@ -54,7 +54,7 @@ Mathematics::Plane3<Real> Mathematics::DynamicFindIntersectorPlane3Plane3<Real>:
 template <typename Real>
 void Mathematics::DynamicFindIntersectorPlane3Plane3<Real>::Find()
 {
-    auto dot = Vector3Tools::DotProduct(plane0.GetNormal(), plane1.GetNormal());
+    auto dot = Vector3ToolsType::DotProduct(plane0.GetNormal(), plane1.GetNormal());
     if (MathType::FAbs(dot) < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
         // 面最初是相交的。 线速度不会改变它们相交的事实。
@@ -64,7 +64,7 @@ void Mathematics::DynamicFindIntersectorPlane3Plane3<Real>::Find()
         auto c0 = (plane0.GetConstant() - dot * plane1.GetConstant()) * invDet;
         auto c1 = (plane1.GetConstant() - dot * plane0.GetConstant()) * invDet;
         this->SetIntersectionType(IntersectionType::Line);
-        intersectionLine = Line3{ c0 * plane0.GetNormal() + c1 * plane1.GetNormal(), Vector3Tools::UnitCrossProduct(plane0.GetNormal(), plane1.GetNormal()) };
+        intersectionLine = Line3{ c0 * plane0.GetNormal() + c1 * plane1.GetNormal(), Vector3ToolsType::UnitCrossProduct(plane0.GetNormal(), plane1.GetNormal()) };
 
         return;
     }
@@ -94,7 +94,7 @@ void Mathematics::DynamicFindIntersectorPlane3Plane3<Real>::Find()
 
     // 这些平面是平行且分开的。 确定何时它们将成为共面的。
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
-    dot = Vector3Tools::DotProduct(plane0.GetNormal(), relVelocity);
+    dot = Vector3ToolsType::DotProduct(plane0.GetNormal(), relVelocity);
     if (MathType::FAbs(dot) < MathType::GetZeroTolerance())
     {
         // 平面的相对运动使它们保持平行。
@@ -107,7 +107,7 @@ void Mathematics::DynamicFindIntersectorPlane3Plane3<Real>::Find()
     {
         // 平面彼此相向，并会在指定的时间间隔内相遇。
         this->SetIntersectionType(IntersectionType::Plane);
-        intersectionPlane = Plane3{ plane0.GetNormal(), plane0.GetConstant() + this->GetContactTime() * (Vector3Tools::DotProduct(plane0.GetNormal(), this->GetLhsVelocity())) };
+        intersectionPlane = Plane3{ plane0.GetNormal(), plane0.GetConstant() + this->GetContactTime() * (Vector3ToolsType::DotProduct(plane0.GetNormal(), this->GetLhsVelocity())) };
 
         return;
     }

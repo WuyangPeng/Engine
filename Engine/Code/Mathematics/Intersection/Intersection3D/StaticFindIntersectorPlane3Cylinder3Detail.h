@@ -63,7 +63,7 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::Find()
 {
     auto distance = plane.DistanceTo(cylinder.GetAxis().GetOrigin());
     auto center = cylinder.GetAxis().GetOrigin() - distance * plane.GetNormal();
-    auto cosTheta = Vector3Tools::DotProduct(cylinder.GetAxis().GetDirection(), plane.GetNormal());
+    auto cosTheta = Vector3ToolsType::DotProduct(cylinder.GetAxis().GetDirection(), plane.GetNormal());
     auto absCosTheta = MathType::FAbs(cosTheta);
 
     if (MathType::GetValue(0) < absCosTheta)
@@ -73,7 +73,7 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::Find()
         {
             type = CylinderPlaneIntersection::Ellipse;
             auto major = (cylinder.GetAxis().GetDirection() - cosTheta * plane.GetNormal());
-            auto minor = Vector3Tools::CrossProduct(plane.GetNormal(), major);
+            auto minor = Vector3ToolsType::CrossProduct(plane.GetNormal(), major);
             major.Normalize();
             minor.Normalize();
             ellipse = Ellipse3{ center - (distance / cosTheta) * cylinder.GetAxis().GetDirection(),
@@ -103,7 +103,7 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::Find()
         {
             type = CylinderPlaneIntersection::TwoLines;
 
-            const auto offset = Vector3Tools::CrossProduct(cylinder.GetAxis().GetDirection(), plane.GetNormal());
+            const auto offset = Vector3ToolsType::CrossProduct(cylinder.GetAxis().GetDirection(), plane.GetNormal());
             auto extent = MathType::Sqrt(cylinder.GetRadius() * cylinder.GetRadius() - distance * distance);
 
             line0 = Line3{ center - extent * offset, cylinder.GetAxis().GetDirection() };
@@ -136,7 +136,7 @@ bool Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::CylinderIsCulled()
     //   min = (Dot(N,C)-d) - r*sqrt(1-Dot(N,W)^2) - (h/2)*|Dot(N,W)|
     //   max = (Dot(N,C)-d) + r*sqrt(1-Dot(N,W)^2) + (h/2)*|Dot(N,W)|
     const auto distance = plane.DistanceTo(cylinder.GetAxis().GetOrigin());
-    const auto absNormalDotDirection = MathType::FAbs(Vector3Tools::DotProduct(plane.GetNormal(), cylinder.GetAxis().GetDirection()));
+    const auto absNormalDotDirection = MathType::FAbs(Vector3ToolsType::DotProduct(plane.GetNormal(), cylinder.GetAxis().GetDirection()));
     const auto root = MathType::Sqrt(MathType::FAbs(MathType::GetValue(1) - absNormalDotDirection * absNormalDotDirection));
     const auto term = cylinder.GetRadius() * root + MathType::GetRational(1, 2) * cylinder.GetHeight() * absNormalDotDirection;
 

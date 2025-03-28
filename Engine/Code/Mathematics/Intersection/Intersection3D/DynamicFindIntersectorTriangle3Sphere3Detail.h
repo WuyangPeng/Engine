@@ -77,25 +77,25 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
     EdgesType edges{ vertices.at(1) - vertices.at(0), vertices.at(2) - vertices.at(1), vertices.at(0) - vertices.at(2) };
 
     // 得到三角形法线。
-    auto normal = Vector3Tools::CrossProduct(edges.at(1), edges.at(0));
+    auto normal = Vector3ToolsType::CrossProduct(edges.at(1), edges.at(0));
 
     // 球体中心投影在三角形法线上。
-    auto normalDotCenter = Vector3Tools::DotProduct(normal, sphere.GetCenter());
+    auto normalDotCenter = Vector3ToolsType::DotProduct(normal, sphere.GetCenter());
 
     // 半径在法线方向上的投影长度。 直到绝对需要时，这才使平方根归一化法线。
     auto radiusSqr = sphere.GetRadius() * sphere.GetRadius();
-    auto normRadiusSqr = Vector3Tools::GetLengthSquared(normal) * radiusSqr;
+    auto normRadiusSqr = Vector3ToolsType::GetLengthSquared(normal) * radiusSqr;
 
     // 三角形法线上的三角形投影。
-    auto normalDotTriangle = Vector3Tools::DotProduct(normal, vertices.at(0));
+    auto normalDotTriangle = Vector3ToolsType::DotProduct(normal, vertices.at(0));
 
     // 球体到三角形沿法线的距离。
     auto distance = normalDotCenter - normalDotTriangle;
 
     // 由边i和三角形法线形成的平面的法线。
-    EdgesType edgesCrossNormal{ Vector3Tools::CrossProduct(edges.at(0), normal),
-                                Vector3Tools::CrossProduct(edges.at(1), normal),
-                                Vector3Tools::CrossProduct(edges.at(2), normal) };
+    EdgesType edgesCrossNormal{ Vector3ToolsType::CrossProduct(edges.at(0), normal),
+                                Vector3ToolsType::CrossProduct(edges.at(1), normal),
+                                Vector3ToolsType::CrossProduct(edges.at(2), normal) };
 
     using InsideType = std::array<bool, 3>;
 
@@ -108,7 +108,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
         InsideType inside{};
         for (auto i = 0u; i < inside.size(); ++i)
         {
-            inside.at(i) = Vector3Tools::DotProduct(edgesCrossNormal.at(i), vertices.at(i)) <= Vector3Tools::DotProduct(edgesCrossNormal.at(i), sphere.GetCenter());
+            inside.at(i) = Vector3ToolsType::DotProduct(edgesCrossNormal.at(i), vertices.at(i)) <= Vector3ToolsType::DotProduct(edgesCrossNormal.at(i), sphere.GetCenter());
         }
 
         if (inside.at(0))
@@ -251,7 +251,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
         if (normalDotTriangle < normalDotCenter)
         {
             // 正面
-            if (MathType::GetValue(0) <= Vector3Tools::DotProduct(relVelocity, normal))
+            if (MathType::GetValue(0) <= Vector3ToolsType::DotProduct(relVelocity, normal))
             {
                 this->SetIntersectionType(IntersectionType::Empty);
                 return;
@@ -262,7 +262,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
         else
         {
             // 负面
-            if (Vector3Tools::DotProduct(relVelocity, normal) <= MathType::GetValue(0))
+            if (Vector3ToolsType::DotProduct(relVelocity, normal) <= MathType::GetValue(0))
             {
                 this->SetIntersectionType(IntersectionType::Empty);
                 return;
@@ -274,9 +274,9 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
         // 找到速度射线与三角形平面的交点。
 
         // 将射线和平面投影到法线平面上。
-        auto plane = Vector3Tools::DotProduct(normal, vertices.at(0));
-        auto dotProduct = Vector3Tools::DotProduct(normal, spherePoint);
-        auto velocity = Vector3Tools::DotProduct(normal, relVelocity);
+        auto plane = Vector3ToolsType::DotProduct(normal, vertices.at(0));
+        auto dotProduct = Vector3ToolsType::DotProduct(normal, spherePoint);
+        auto velocity = Vector3ToolsType::DotProduct(normal, relVelocity);
         auto time = (plane - dotProduct) / velocity;
 
         // 这相交的地方。
@@ -286,7 +286,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
         InsideType inside{};
         for (auto i = 0u; i < inside.size(); ++i)
         {
-            inside.at(i) = Vector3Tools::DotProduct(edgesCrossNormal.at(i), vertices.at(i)) <= Vector3Tools::DotProduct(edgesCrossNormal.at(i), intrPoint);
+            inside.at(i) = Vector3ToolsType::DotProduct(edgesCrossNormal.at(i), vertices.at(i)) <= Vector3ToolsType::DotProduct(edgesCrossNormal.at(i), intrPoint);
         }
 
         if (inside.at(0))
@@ -431,7 +431,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindTriangleSphe
 
     // 在时间0检查交叉点。
     auto dist = vertexs.at(index) - sphere.GetCenter();
-    if (Vector3Tools::GetLengthSquared(dist) < sphere.GetRadius() * sphere.GetRadius())
+    if (Vector3ToolsType::GetLengthSquared(dist) < sphere.GetRadius() * sphere.GetRadius())
     {
         // 已经与该顶点相交。
         this->SetContactTime(MathType::GetValue(0));
@@ -441,7 +441,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindTriangleSphe
     // 三角形静止不动，球运动。
     auto relVelocity = velocity1 - velocity0;
 
-    if (Vector3Tools::DotProduct(relVelocity, dist) <= MathType::GetValue(0))
+    if (Vector3ToolsType::DotProduct(relVelocity, dist) <= MathType::GetValue(0))
     {
         return false;
     }
@@ -449,15 +449,15 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindTriangleSphe
     // 找到速度射线与侧面法线的交点。
 
     // 将射线和平面投影到法线平面上。
-    auto plane = Vector3Tools::DotProduct(sideNorm, vertexs.at(index));
-    auto center = Vector3Tools::DotProduct(sideNorm, sphere.GetCenter());
-    auto velocity = Vector3Tools::DotProduct(sideNorm, relVelocity);
+    auto plane = Vector3ToolsType::DotProduct(sideNorm, vertexs.at(index));
+    auto center = Vector3ToolsType::DotProduct(sideNorm, sphere.GetCenter());
+    auto velocity = Vector3ToolsType::DotProduct(sideNorm, relVelocity);
     auto factor = (plane - center) / velocity;
     auto spherePoint = sphere.GetCenter() + factor * relVelocity;
 
     // 通过将顶点和新点都投影到三角形边缘（使用其“法线”找到该点的同一边缘）上，来找到顶点位于哪一侧。
-    auto vertexDot = Vector3Tools::DotProduct(side, vertexs.at(index));
-    auto pointDot = Vector3Tools::DotProduct(side, spherePoint);
+    auto vertexDot = Vector3ToolsType::DotProduct(side, vertexs.at(index));
+    auto pointDot = Vector3ToolsType::DotProduct(side, spherePoint);
     const Vector3 end0 = vertexs.at(index);
     Vector3 end1{};
     if (vertexDot <= pointDot)
@@ -500,19 +500,19 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindSphereVertex
     /// （以及可能错过的可能发生的情况）。
     auto relVelocity = velocity1 - velocity0;
     auto minus = sphere.GetCenter() - vertex;
-    const auto cross = Vector3Tools::CrossProduct(minus, relVelocity);
+    const auto cross = Vector3ToolsType::CrossProduct(minus, relVelocity);
     auto radiusSqr = sphere.GetRadius() * sphere.GetRadius();
-    auto velocitySqr = Vector3Tools::GetLengthSquared(relVelocity);
+    auto velocitySqr = Vector3ToolsType::GetLengthSquared(relVelocity);
 
-    if (radiusSqr * velocitySqr < Vector3Tools::GetLengthSquared(cross))
+    if (radiusSqr * velocitySqr < Vector3ToolsType::GetLengthSquared(cross))
     {
         // 射线越过球体。
         return false;
     }
 
     // 找到相交的时间。
-    auto dot = Vector3Tools::DotProduct(minus, relVelocity);
-    auto diff = Vector3Tools::GetLengthSquared(minus) - radiusSqr;
+    auto dot = Vector3ToolsType::DotProduct(minus, relVelocity);
+    auto diff = Vector3ToolsType::GetLengthSquared(minus) - radiusSqr;
     auto inv = MathType::InvSqrt(MathType::FAbs(dot * dot - velocitySqr * diff));
 
     auto contactTime = diff * inv / (MathType::GetValue(1) - dot * inv);

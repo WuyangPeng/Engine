@@ -65,7 +65,7 @@ void Mathematics::StaticFindIntersectorPlane3Plane3<Real>::Find()
     ///   c1 = (d1 - d * d0) / det
     /// 其中det = 1 - d^2。
 
-    auto dot = Vector3Tools::DotProduct(plane0.GetNormal(), plane1.GetNormal());
+    auto dot = Vector3ToolsType::DotProduct(plane0.GetNormal(), plane1.GetNormal());
     if (MathType::GetValue(1) - MathType::GetZeroTolerance() <= MathType::FAbs(dot))
     {
         // 这些平面是平行的。 检查它们是否共面。
@@ -98,7 +98,7 @@ void Mathematics::StaticFindIntersectorPlane3Plane3<Real>::Find()
     auto c0 = (plane0.GetConstant() - dot * plane1.GetConstant()) * invDet;
     auto c1 = (plane1.GetConstant() - dot * plane0.GetConstant()) * invDet;
     this->SetIntersectionType(IntersectionType::Line);
-    intrLine = Line3{ c0 * plane0.GetNormal() + c1 * plane1.GetNormal(), Vector3Tools::UnitCrossProduct(plane0.GetNormal(), plane1.GetNormal()) };
+    intrLine = Line3{ c0 * plane0.GetNormal() + c1 * plane1.GetNormal(), Vector3ToolsType::UnitCrossProduct(plane0.GetNormal(), plane1.GetNormal()) };
 }
 
 template <typename Real>

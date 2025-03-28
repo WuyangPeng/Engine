@@ -56,8 +56,8 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorSegment3Sphere3<Real>::Test()
 {
     auto diff = segment.GetCenterPoint() - sphere.GetCenter();
-    auto a0 = Vector3Tools::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
-    auto a1 = Vector3Tools::DotProduct(segment.GetDirection(), diff);
+    auto a0 = Vector3ToolsType::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
+    auto a1 = Vector3ToolsType::DotProduct(segment.GetDirection(), diff);
     auto discr = a1 * a1 - a0;
     if (discr < MathType::GetValue(0))
     {

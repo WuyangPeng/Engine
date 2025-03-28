@@ -55,7 +55,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>::Test() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     const auto sDist = plane.DistanceTo(cylinder.GetAxis().GetOrigin());
-    const auto absNdW = MathType::FAbs(Vector3Tools::DotProduct(plane.GetNormal(), cylinder.GetAxis().GetDirection()));
+    const auto absNdW = MathType::FAbs(Vector3ToolsType::DotProduct(plane.GetNormal(), cylinder.GetAxis().GetDirection()));
     const auto root = MathType::Sqrt(MathType::FAbs(MathType::GetValue(1) - absNdW * absNdW));
     const auto term = cylinder.GetRadius() * root + MathType::GetRational(1, 2) * cylinder.GetHeight() * absNdW;
 
@@ -75,7 +75,7 @@ bool Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>::CylinderIsCulled()
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
     const auto sDist = plane.DistanceTo(cylinder.GetAxis().GetOrigin());
-    const auto absNdW = MathType::FAbs(Vector3Tools::DotProduct(plane.GetNormal(), cylinder.GetAxis().GetDirection()));
+    const auto absNdW = MathType::FAbs(Vector3ToolsType::DotProduct(plane.GetNormal(), cylinder.GetAxis().GetDirection()));
     const auto root = MathType::Sqrt(MathType::FAbs(MathType::GetValue(1) - absNdW * absNdW));
     const auto term = cylinder.GetRadius() * root + MathType::GetRational(1, 2) * cylinder.GetHeight() * absNdW;
 

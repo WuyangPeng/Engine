@@ -31,7 +31,7 @@ namespace Mathematics
         using Triangle3 = Triangle3<Real>;
         using Cylinder3 = Cylinder3<Real>;
         using Vector2Type = Vector2<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:

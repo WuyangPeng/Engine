@@ -85,7 +85,7 @@ void Mathematics::DynamicFindIntersectorSegment3Sphere3<Real>::Find()
     const Capsule3<Real> capsule{ segment, sphere.GetRadius() };
 
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
-    auto relSpeed = Vector3Tools::GetLength(relVelocity);
+    auto relSpeed = Vector3ToolsType::GetLength(relVelocity);
 
     // 单位长度向量
     relVelocity.Normalize();
@@ -109,10 +109,10 @@ void Mathematics::DynamicFindIntersectorSegment3Sphere3<Real>::Find()
 
     auto moveCenter = sphere.GetCenter() + this->GetContactTime() * this->GetRhsVelocity();
     auto moveOrigin = segment.GetCenterPoint() + this->GetContactTime() * this->GetLhsVelocity();
-    auto origin = Vector3Tools::DotProduct(segment.GetDirection(), moveOrigin);
+    auto origin = Vector3ToolsType::DotProduct(segment.GetDirection(), moveOrigin);
     auto negEnd = origin - segment.GetExtent();
     auto posEnd = origin + segment.GetExtent();
-    auto center = Vector3Tools::DotProduct(segment.GetDirection(), moveCenter);
+    auto center = Vector3ToolsType::DotProduct(segment.GetDirection(), moveCenter);
 
     if (center < negEnd)
     {

@@ -53,7 +53,7 @@ void Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Test()
     const auto lhsNormal = lhsTriangle.GetNormal();
 
     // 将三角形rhsTriangle投影到三角形m_LhsTriangle的法线上，进行分割测试。
-    auto lhsNormalDotVertex0 = Vector3Tools::DotProduct(lhsNormal, lhsTriangle.GetVertex(0));
+    auto lhsNormalDotVertex0 = Vector3ToolsType::DotProduct(lhsNormal, lhsTriangle.GetVertex(0));
 
     const TriangleProjectOntoAxis<Real> rhsTriangleProjectOntoAxis{ rhsTriangle, lhsNormal };
 
@@ -68,14 +68,14 @@ void Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Test()
     // 获取m_RhsTriangle的法线
     const auto rhsNormal = rhsTriangle.GetNormal();
 
-    const auto lhsNormalCrossRhsNormal = Vector3Tools::UnitCrossProduct(lhsNormal, rhsNormal);
+    const auto lhsNormalCrossRhsNormal = Vector3ToolsType::UnitCrossProduct(lhsNormal, rhsNormal);
 
-    if (this->GetEpsilon() <= Vector3Tools::DotProduct(lhsNormalCrossRhsNormal, lhsNormalCrossRhsNormal))
+    if (this->GetEpsilon() <= Vector3ToolsType::DotProduct(lhsNormalCrossRhsNormal, lhsNormalCrossRhsNormal))
     {
         // 三角形不平行。
 
         // 将三角形m_LhsTriangle投影到三角形m_RhsTriangle的法线上，进行分割测试。
-        auto rhsNormalDotVertex0 = Vector3Tools::DotProduct(rhsNormal, rhsTriangle.GetVertex(0));
+        auto rhsNormalDotVertex0 = Vector3ToolsType::DotProduct(rhsNormal, rhsTriangle.GetVertex(0));
 
         const TriangleProjectOntoAxis<Real> lhsTriangleProjectOntoAxis{ lhsTriangle, rhsNormal };
 
@@ -89,7 +89,7 @@ void Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Test()
         {
             for (auto lhsIndex = 0; lhsIndex < 3; ++lhsIndex)
             {
-                const auto dir = Vector3Tools::UnitCrossProduct(lhsEdge.at(lhsIndex), rhsEdge.at(rhsIndex));
+                const auto dir = Vector3ToolsType::UnitCrossProduct(lhsEdge.at(lhsIndex), rhsEdge.at(rhsIndex));
 
                 const TriangleProjectOntoAxis<Real> lhsTriangleProjectOntoDir{ lhsTriangle, dir };
                 const TriangleProjectOntoAxis<Real> rhsTriangleProjectOntoDir{ rhsTriangle, dir };
@@ -109,7 +109,7 @@ void Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Test()
         // 方向 lhsTriangle X lhsEdge[index]
         for (auto index = 0; index < 3; ++index)
         {
-            const auto dir = Vector3Tools::UnitCrossProduct(lhsNormal, lhsEdge.at(index));
+            const auto dir = Vector3ToolsType::UnitCrossProduct(lhsNormal, lhsEdge.at(index));
 
             const TriangleProjectOntoAxis<Real> lhsTriangleProjectOntoDir{ lhsTriangle, dir };
             const TriangleProjectOntoAxis<Real> rhsTriangleProjectOntoDir{ rhsTriangle, dir };
@@ -123,7 +123,7 @@ void Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Test()
         // 方向 rhsTriangle X rhsEdge[index]
         for (auto index = 0; index < 3; ++index)
         {
-            const auto dir = Vector3Tools::UnitCrossProduct(rhsNormal, rhsEdge.at(index));
+            const auto dir = Vector3ToolsType::UnitCrossProduct(rhsNormal, rhsEdge.at(index));
 
             const TriangleProjectOntoAxis<Real> lhsTriangleProjectOntoDir{ lhsTriangle, dir };
             const TriangleProjectOntoAxis<Real> rhsTriangleProjectOntoDir{ rhsTriangle, dir };

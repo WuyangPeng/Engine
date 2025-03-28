@@ -188,7 +188,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::ContainsPoint(c
     /// 构造为{ U0，U1，N } 是一个正交集。 平面中的任何点Q均可写为Q = V0 + x0 * U0 + x1 * U1。
     ///  坐标计算为x0 = Dot(U0,Q - V0)和x1 = Dot(U1,Q - V0)。
 
-    const auto vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(plane.GetNormal());
+    const auto vector3OrthonormalBasis = Vector3ToolsType::GenerateComplementBasis(plane.GetNormal());
     const auto uVector = vector3OrthonormalBasis.GetUVector();
     const auto vVector = vector3OrthonormalBasis.GetVVector();
 
@@ -198,14 +198,14 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::ContainsPoint(c
     auto vertex2MinusVertex0 = triangle.GetVertex(2) - triangle.GetVertex(0);
 
     // P - V0的平面表示。.
-    const Vector2<Real> planar{ Vector3Tools::DotProduct(uVector, pointMinusVertex0), Vector3Tools::DotProduct(vVector, pointMinusVertex0) };
+    const Vector2<Real> planar{ Vector3ToolsType::DotProduct(uVector, pointMinusVertex0), Vector3ToolsType::DotProduct(vVector, pointMinusVertex0) };
 
     using Triangle = std::vector<Vector2<Real>>;
 
     /// 三角形<V0-V0,V1-V0,V2-V0>的平面表示。
     Triangle triangleVector{ Vector2<Real>::GetZero(),
-                             Vector2<Real>{ Vector3Tools::DotProduct(uVector, vertex1MinusVertex0), Vector3Tools::DotProduct(vVector, vertex1MinusVertex0) },
-                             Vector2<Real>{ Vector3Tools::DotProduct(uVector, vertex2MinusVertex0), Vector3Tools::DotProduct(vVector, vertex2MinusVertex0) } };
+                             Vector2<Real>{ Vector3ToolsType::DotProduct(uVector, vertex1MinusVertex0), Vector3ToolsType::DotProduct(vVector, vertex1MinusVertex0) },
+                             Vector2<Real>{ Vector3ToolsType::DotProduct(uVector, vertex2MinusVertex0), Vector3ToolsType::DotProduct(vVector, vertex2MinusVertex0) } };
 
     /// 测试P-V0是否在三角形<0,V1-V0,V2-V0>中。
     if (Query2<Real>{ triangleVector }.ToTriangle(planar, 0, 1, 2) != TriangleQueryType::Outside)

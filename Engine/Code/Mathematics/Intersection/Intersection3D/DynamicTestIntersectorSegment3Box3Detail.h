@@ -82,7 +82,7 @@ void Mathematics::DynamicTestIntersectorSegment3Box3<Real>::Test()
     // 测试线段方向的交叉盒边缘。
     for (auto i = 0; i < 3; ++i)
     {
-        const auto axis = Vector3Tools::CrossProduct(box.GetAxis(i), segment.GetDirection());
+        const auto axis = Vector3ToolsType::CrossProduct(box.GetAxis(i), segment.GetDirection());
 
         const TestIntersectorAxis<Real> testIntersectorAxis{ axis, segmentType, box, relVelocity, this->GetTMax() };
         contactTime = testIntersectorAxis.GetTFirst();
@@ -98,7 +98,7 @@ void Mathematics::DynamicTestIntersectorSegment3Box3<Real>::Test()
     // 测试速度穿越盒——面。
     for (auto i = 0; i < 3; i++)
     {
-        const auto axis = Vector3Tools::CrossProduct(relVelocity, box.GetAxis(i));
+        const auto axis = Vector3ToolsType::CrossProduct(relVelocity, box.GetAxis(i));
         const TestIntersectorAxis<Real> testIntersectorAxis{ axis, segmentType, box, relVelocity, this->GetTMax() };
         contactTime = testIntersectorAxis.GetTFirst();
 

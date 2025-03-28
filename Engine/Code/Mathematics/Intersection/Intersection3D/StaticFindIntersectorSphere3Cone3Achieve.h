@@ -58,7 +58,7 @@ void Mathematics::StaticFindIntersectorSphere3Cone3<Real>::Find()
     // 测试圆锥顶点是否在球体中。
     auto diff = sphere.GetCenter() - cone.GetVertex();
     auto radiusSqr = sphere.GetRadius() * sphere.GetRadius();
-    auto lengthSqr = Vector3Tools::GetLengthSquared(diff);
+    auto lengthSqr = Vector3ToolsType::GetLengthSquared(diff);
     if (lengthSqr <= radiusSqr)
     {
         this->SetIntersectionType(IntersectionType::Other);
@@ -66,7 +66,7 @@ void Mathematics::StaticFindIntersectorSphere3Cone3<Real>::Find()
     }
 
     // 测试球心是否在圆锥中
-    auto dot = Vector3Tools::DotProduct(diff, cone.GetAxis());
+    auto dot = Vector3ToolsType::DotProduct(diff, cone.GetAxis());
     auto dotSqr = dot * dot;
     auto cosSqr = cone.GetCosAngle() * cone.GetCosAngle();
     if (lengthSqr * cosSqr <= dotSqr && MathType::GetValue(0) < dot)

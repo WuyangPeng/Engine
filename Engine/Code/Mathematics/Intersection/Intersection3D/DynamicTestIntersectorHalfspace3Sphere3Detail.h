@@ -58,7 +58,7 @@ void Mathematics::DynamicTestIntersectorHalfspace3Sphere3<Real>::Test()
     this->SetContactTime(MathType::GetValue(0));
 
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
-    auto distance = Vector3Tools::DotProduct(halfspace.GetNormal(), sphere.GetCenter());
+    auto distance = Vector3ToolsType::DotProduct(halfspace.GetNormal(), sphere.GetCenter());
 
     const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -MathType::maxReal, halfspace.GetConstant(), distance - sphere.GetRadius(), distance + sphere.GetRadius(), this->GetTMax() };
 

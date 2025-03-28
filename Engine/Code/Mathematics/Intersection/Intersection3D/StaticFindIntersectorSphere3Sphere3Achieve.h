@@ -57,7 +57,7 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
 {
     // 相交平面必须以N为法线。
     auto center1MinusCenter0 = sphere1.GetCenter() - sphere0.GetCenter();
-    auto sqrLen = Vector3Tools::GetLengthSquared(center1MinusCenter0);
+    auto sqrLen = Vector3ToolsType::GetLengthSquared(center1MinusCenter0);
     auto radius0 = sphere0.GetRadius();
     auto radius1 = sphere1.GetRadius();
 
@@ -128,7 +128,7 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
     // 计算圆平面的N，U和V。
     center1MinusCenter0.Normalize();
 
-    const auto Vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(center1MinusCenter0);
+    const auto Vector3OrthonormalBasis = Vector3ToolsType::GenerateComplementBasis(center1MinusCenter0);
     circle = Circle3{ sphere0.GetCenter() + t * center1MinusCenter0, Vector3OrthonormalBasis.GetUVector(),
                       Vector3OrthonormalBasis.GetVVector(),
                       center1MinusCenter0,

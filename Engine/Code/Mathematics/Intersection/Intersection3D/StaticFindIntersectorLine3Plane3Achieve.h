@@ -55,7 +55,7 @@ Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorLine3Plane3<Real>::G
 template <typename Real>
 void Mathematics::StaticFindIntersectorLine3Plane3<Real>::Find() noexcept
 {
-    auto directionDotNormal = Vector3Tools::DotProduct(line.GetDirection(), plane.GetNormal());
+    auto directionDotNormal = Vector3ToolsType::DotProduct(line.GetDirection(), plane.GetNormal());
     auto signedDistance = plane.DistanceTo(line.GetOrigin());
     if (MathType::GetZeroTolerance() < MathType::FAbs(directionDotNormal))
     {

@@ -132,10 +132,10 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>::Find()
     {
         for (auto innerIndex = 0; innerIndex < 3; ++innerIndex)
         {
-            const auto axis = Vector3Tools::CrossProduct(box0.GetAxis(outerIndex), box1.GetAxis(innerIndex));
+            const auto axis = Vector3ToolsType::CrossProduct(box0.GetAxis(outerIndex), box1.GetAxis(innerIndex));
 
             // 由于所有轴都是单位长度（假定），因此可以将其与恒定（而非相对）epsilon进行比较。
-            if (Vector3Tools::GetLengthSquared(axis) <= MathType::GetZeroTolerance())
+            if (Vector3ToolsType::GetLengthSquared(axis) <= MathType::GetZeroTolerance())
             {
                 /// 轴i0和i1平行。 如果任意两个轴平行，则唯一需要的比较就是面自身之间的比较。
                 /// 目前，这些面已经过测试，没有分离，因此所有进一步的分离测试将仅显示重叠。
@@ -167,7 +167,7 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>::Find()
     // 速度交叉box0边
     for (auto i = 0; i < 3; ++i)
     {
-        const auto axis = Vector3Tools::CrossProduct(relVelocity, box0.GetAxis(i));
+        const auto axis = Vector3ToolsType::CrossProduct(relVelocity, box0.GetAxis(i));
 
         const FindIntersectorAxis<Real> findIntersectorAxis{ axis, box0, box1, relVelocity, this->GetTMax() };
         contactTime = findIntersectorAxis.GetTFirst();
@@ -188,7 +188,7 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>::Find()
     // 速度交叉box1边
     for (auto i = 0; i < 3; ++i)
     {
-        const auto axis = Vector3Tools::CrossProduct(relVelocity, box1.GetAxis(i));
+        const auto axis = Vector3ToolsType::CrossProduct(relVelocity, box1.GetAxis(i));
 
         const FindIntersectorAxis<Real> findIntersectorAxis{ axis, box0, box1, relVelocity, this->GetTMax() };
         contactTime = findIntersectorAxis.GetTFirst();

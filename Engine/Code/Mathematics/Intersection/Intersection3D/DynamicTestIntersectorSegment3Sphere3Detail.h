@@ -71,7 +71,7 @@ void Mathematics::DynamicTestIntersectorSegment3Sphere3<Real>::Test()
     const Capsule3<Real> capsule{ segment, sphere.GetRadius() };
 
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
-    auto relSpeed = Vector3Tools::GetLength(relVelocity);
+    auto relSpeed = Vector3ToolsType::GetLength(relVelocity);
     relVelocity.Normalize();
     const Segment3 path{ (MathType::GetRational(1, 2)) * this->GetTMax() * relSpeed, sphere.GetCenter() + (MathType::GetRational(1, 2)) * this->GetTMax() * relSpeed * relVelocity, relVelocity };
 

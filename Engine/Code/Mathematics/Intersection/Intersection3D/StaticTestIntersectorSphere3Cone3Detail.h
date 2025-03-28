@@ -60,13 +60,13 @@ void Mathematics::StaticTestIntersectorSphere3Cone3<Real>::Test()
 
     auto cmv = sphere.GetCenter() - cone.GetVertex();
     auto d = cmv + (sphere.GetRadius() * invSin) * cone.GetAxis();
-    auto dSqrLen = Vector3Tools::GetLengthSquared(d);
-    auto e = Vector3Tools::DotProduct(d, cone.GetAxis());
+    auto dSqrLen = Vector3ToolsType::GetLengthSquared(d);
+    auto e = Vector3ToolsType::DotProduct(d, cone.GetAxis());
     if (MathType ::GetValue(0) < e && e * e >= dSqrLen * cosSqr)
     {
         auto sinSqr = cone.GetSinAngle() * cone.GetSinAngle();
-        dSqrLen = Vector3Tools::GetLengthSquared(cmv);
-        e = -Vector3Tools::DotProduct(cmv, cone.GetAxis());
+        dSqrLen = Vector3ToolsType::GetLengthSquared(cmv);
+        e = -Vector3ToolsType::DotProduct(cmv, cone.GetAxis());
         if (MathType ::GetValue(0) < e && dSqrLen * sinSqr <= e * e)
         {
             auto rSqr = sphere.GetRadius() * sphere.GetRadius();

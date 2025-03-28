@@ -60,8 +60,8 @@ void Mathematics::StaticTestIntersectorTriangle3Box3<Real>::Test()
                                  triangle.GetVertex(2) - triangle.GetVertex(0),
                                  Vector3{} };
 
-    auto d = Vector3Tools::CrossProduct(edge.at(0), edge.at(1));
-    auto min0 = Vector3Tools::DotProduct(d, triangle.GetVertex(0));
+    auto d = Vector3ToolsType::CrossProduct(edge.at(0), edge.at(1));
+    auto min0 = Vector3ToolsType::DotProduct(d, triangle.GetVertex(0));
     auto max0 = min0;
     auto result = TestIntersectorAxis<Real>::GetProjection(d, box);
     auto min1 = result.first;
@@ -78,7 +78,7 @@ void Mathematics::StaticTestIntersectorTriangle3Box3<Real>::Test()
         result = TestIntersectorAxis<Real>::GetProjection(d, triangle);
         min0 = result.first;
         max0 = result.second;
-        auto ddc = Vector3Tools::DotProduct(d, box.GetCenter());
+        auto ddc = Vector3ToolsType::DotProduct(d, box.GetCenter());
         min1 = ddc - box.GetExtent(i);
         max1 = ddc + box.GetExtent(i);
         if (max1 < min0 || max0 < min1)
@@ -93,7 +93,7 @@ void Mathematics::StaticTestIntersectorTriangle3Box3<Real>::Test()
     {
         for (int i1 = 0; i1 < 3; ++i1)
         {
-            d = Vector3Tools::CrossProduct(edge.at(i0), box.GetAxis(i1));
+            d = Vector3ToolsType::CrossProduct(edge.at(i0), box.GetAxis(i1));
             result = TestIntersectorAxis<Real>::GetProjection(d, triangle);
             min0 = result.first;
             max0 = result.second;

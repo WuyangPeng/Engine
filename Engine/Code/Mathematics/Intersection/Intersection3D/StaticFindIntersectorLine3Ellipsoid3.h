@@ -28,7 +28,7 @@ namespace Mathematics
         using Vector3 = Vector3<Real>;
         using Line3 = Line3<Real>;
         using Ellipsoid3 = Ellipsoid3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:

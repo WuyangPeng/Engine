@@ -30,7 +30,7 @@ namespace Mathematics
         using Vector3 = Vector3<Real>;
         using Ray3 = Ray3<Real>;
         using Triangle3 = Triangle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:

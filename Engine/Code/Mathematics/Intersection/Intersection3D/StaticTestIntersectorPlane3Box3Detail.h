@@ -54,9 +54,9 @@ Mathematics::Box3<Real> Mathematics::StaticTestIntersectorPlane3Box3<Real>::GetB
 template <typename Real>
 void Mathematics::StaticTestIntersectorPlane3Box3<Real>::Test()
 {
-    std::array<Real, 3> tmp{ box.GetExtent(0) * (Vector3Tools::DotProduct(plane.GetNormal(), box.GetAxis(0))),
-                             box.GetExtent(1) * (Vector3Tools::DotProduct(plane.GetNormal(), box.GetAxis(1))),
-                             box.GetExtent(2) * (Vector3Tools::DotProduct(plane.GetNormal(), box.GetAxis(2))) };
+    std::array<Real, 3> tmp{ box.GetExtent(0) * (Vector3ToolsType::DotProduct(plane.GetNormal(), box.GetAxis(0))),
+                             box.GetExtent(1) * (Vector3ToolsType::DotProduct(plane.GetNormal(), box.GetAxis(1))),
+                             box.GetExtent(2) * (Vector3ToolsType::DotProduct(plane.GetNormal(), box.GetAxis(2))) };
 
     auto radius = MathType::FAbs(tmp.at(0)) + MathType::FAbs(tmp.at(1)) + MathType::FAbs(tmp.at(2));
 
@@ -76,9 +76,9 @@ bool Mathematics::StaticTestIntersectorPlane3Box3<Real>::BoxIsCulled() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    std::array<Real, 3> tmp{ box.GetExtent(0) * (Vector3Tools::DotProduct(plane.GetNormal(), box.GetAxis(0))),
-                             box.GetExtent(1) * (Vector3Tools::DotProduct(plane.GetNormal(), box.GetAxis(1))),
-                             box.GetExtent(2) * (Vector3Tools::DotProduct(plane.GetNormal(), box.GetAxis(2))) };
+    std::array<Real, 3> tmp{ box.GetExtent(0) * (Vector3ToolsType::DotProduct(plane.GetNormal(), box.GetAxis(0))),
+                             box.GetExtent(1) * (Vector3ToolsType::DotProduct(plane.GetNormal(), box.GetAxis(1))),
+                             box.GetExtent(2) * (Vector3ToolsType::DotProduct(plane.GetNormal(), box.GetAxis(2))) };
 
     auto radius = MathType::FAbs(tmp.at(0)) + MathType::FAbs(tmp.at(1)) + MathType::FAbs(tmp.at(2));
 

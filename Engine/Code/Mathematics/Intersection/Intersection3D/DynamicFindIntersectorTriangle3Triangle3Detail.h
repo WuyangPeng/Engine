@@ -104,7 +104,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
     Vector3Container edge0{ triangle0.GetVertex(1) - triangle0.GetVertex(0),
                             triangle0.GetVertex(2) - triangle0.GetVertex(1),
                             triangle0.GetVertex(0) - triangle0.GetVertex(2) };
-    const auto normal0 = Vector3Tools::UnitCrossProduct(edge0.at(0), edge0.at(1));
+    const auto normal0 = Vector3ToolsType::UnitCrossProduct(edge0.at(0), edge0.at(1));
     auto intersectInfo = FindOverlap(normal0, tMax, relVelocity);
     if (!intersectInfo.result)
     {
@@ -116,9 +116,9 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
     Vector3Container edge1{ triangle1.GetVertex(1) - triangle1.GetVertex(0),
                             triangle1.GetVertex(2) - triangle1.GetVertex(1),
                             triangle1.GetVertex(0) - triangle1.GetVertex(2) };
-    const auto normal1 = Vector3Tools::UnitCrossProduct(edge1.at(0), edge1.at(1));
+    const auto normal1 = Vector3ToolsType::UnitCrossProduct(edge1.at(0), edge1.at(1));
 
-    if (MathType::FAbs(Vector3Tools::DotProduct(normal0, normal1)) < MathType::GetValue(1) - MathType::GetZeroTolerance())
+    if (MathType::FAbs(Vector3ToolsType::DotProduct(normal0, normal1)) < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
         // 三角形不平行。
 
@@ -136,7 +136,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
         {
             for (auto i0 = 0; i0 < 3; ++i0)
             {
-                const auto dir = Vector3Tools::UnitCrossProduct(edge0.at(i0), edge1.at(i1));
+                const auto dir = Vector3ToolsType::UnitCrossProduct(edge0.at(i0), edge1.at(i1));
 
                 intersectInfo = FindOverlap(dir, tMax, relVelocity);
                 if (!intersectInfo.result)
@@ -152,7 +152,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
         // 方向 NxE[i0].
         for (auto i = 0; i < 3; ++i)
         {
-            const auto dir = Vector3Tools::UnitCrossProduct(normal0, edge0.at(i));
+            const auto dir = Vector3ToolsType::UnitCrossProduct(normal0, edge0.at(i));
 
             intersectInfo = FindOverlap(dir, tMax, relVelocity);
             if (!intersectInfo.result)
@@ -165,7 +165,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
         // 方向 NxF[i1].
         for (auto i = 0; i < 3; ++i)
         {
-            const auto dir = Vector3Tools::UnitCrossProduct(normal1, edge1.at(i));
+            const auto dir = Vector3ToolsType::UnitCrossProduct(normal1, edge1.at(i));
 
             intersectInfo = FindOverlap(dir, tMax, relVelocity);
             if (!intersectInfo.result)
@@ -201,7 +201,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
 {
     const auto cfg0 = ProjectOntoAxis(triangle0, axis);
     const auto cfg1 = ProjectOntoAxis(triangle1, axis);
-    const auto speed = Vector3Tools::DotProduct(velocity, axis);
+    const auto speed = Vector3ToolsType::DotProduct(velocity, axis);
     return FindOverlap(tmax, speed, cfg0, cfg1);
 }
 
@@ -211,9 +211,9 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configurat
     Configuration cfg{};
 
     // 查找顶点到潜在分离轴上的投影。
-    const auto d0 = Vector3Tools::DotProduct(axis, triangle.GetVertex(0));
-    const auto d1 = Vector3Tools::DotProduct(axis, triangle.GetVertex(1));
-    const auto d2 = Vector3Tools::DotProduct(axis, triangle.GetVertex(2));
+    const auto d0 = Vector3ToolsType::DotProduct(axis, triangle.GetVertex(0));
+    const auto d1 = Vector3ToolsType::DotProduct(axis, triangle.GetVertex(1));
+    const auto d2 = Vector3ToolsType::DotProduct(axis, triangle.GetVertex(2));
 
     // 显式排序的顶点以构造Configuration对象。
     if (d0 <= d1)
@@ -685,14 +685,14 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeEdgeInt
     // 计算两个边缘平面的法线。
     auto edge0 = u1 - u0;
     auto edge1 = v1 - v0;
-    const auto normal = Vector3Tools::CrossProduct(edge0, edge1);
+    const auto normal = Vector3ToolsType::CrossProduct(edge0, edge1);
 
     /// 求解U0 + s * (U1 - U0) = V0 + t * (V1 - V0)。
     /// 我们知道边相交，所以[0,1]中的s和[0,1]中的t。 因此，只需解决s。
     /// 注意，s * E0 = D + t * E1，其中D = V0 - U0。
     /// 因此s * N = s * E0xE1 = DxE1且s = N * DxE1 / N * N。
     auto delta = v0 - u0;
-    auto s = Vector3Tools::DotProduct(normal, (Vector3Tools::CrossProduct(delta, edge1) / Vector3Tools::GetLengthSquared(normal)));
+    auto s = Vector3ToolsType::DotProduct(normal, (Vector3ToolsType::CrossProduct(delta, edge1) / Vector3ToolsType::GetLengthSquared(normal)));
     if (s < MathType::GetValue(0))
     {
         MATHEMATICS_ASSERTION_0(-MathType::GetZeroTolerance() <= s, "意外的s值。\n");
@@ -718,27 +718,27 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeFaceInt
     const auto vertex = triangle.GetVertex(0);
     const auto edge0 = triangle.GetVertex(1) - vertex;
     const auto edge1 = triangle.GetVertex(2) - vertex;
-    const auto normal = Vector3Tools::UnitCrossProduct(edge0, edge1);
+    const auto normal = Vector3ToolsType::UnitCrossProduct(edge0, edge1);
 
-    const auto Vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(normal);
+    const auto Vector3OrthonormalBasis = Vector3ToolsType::GenerateComplementBasis(normal);
     const auto dir0 = Vector3OrthonormalBasis.GetUVector();
     const auto dir1 = Vector3OrthonormalBasis.GetVVector();
 
     // 将边缘端点投影到平面上。
 
     auto diff = u0 - vertex;
-    const Vector2<Real> projectU0{ Vector3Tools::DotProduct(dir0, diff), Vector3Tools::DotProduct(dir1, diff) };
+    const Vector2<Real> projectU0{ Vector3ToolsType::DotProduct(dir0, diff), Vector3ToolsType::DotProduct(dir1, diff) };
 
     diff = u1 - vertex;
-    const Vector2<Real> projectU1{ Vector3Tools::DotProduct(dir0, diff), Vector3Tools::DotProduct(dir1, diff) };
+    const Vector2<Real> projectU1{ Vector3ToolsType::DotProduct(dir0, diff), Vector3ToolsType::DotProduct(dir1, diff) };
 
     const Segment2<Real> projectSegment{ projectU0, projectU1 };
 
     // 计算三角形的平面坐标。
     using Triangle = std::array<Vector2<Real>, 3>;
     Triangle projectTriangleVector{ Vector2<Real>::GetZero(),
-                                    Vector2<Real>(Vector3Tools::DotProduct(dir0, edge0), Vector3Tools::DotProduct(dir1, edge0)),
-                                    Vector2<Real>(Vector3Tools::DotProduct(dir0, edge1), Vector3Tools::DotProduct(dir1, edge1)) };
+                                    Vector2<Real>(Vector3ToolsType::DotProduct(dir0, edge0), Vector3ToolsType::DotProduct(dir1, edge0)),
+                                    Vector2<Real>(Vector3ToolsType::DotProduct(dir0, edge1), Vector3ToolsType::DotProduct(dir1, edge1)) };
 
     const Triangle2<Real> projectTriangle{ projectTriangleVector.at(0), projectTriangleVector.at(1), projectTriangleVector.at(2) };
 

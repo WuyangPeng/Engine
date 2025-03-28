@@ -57,7 +57,7 @@ Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorLine3Plane3<Real>::G
 template <typename Real>
 void Mathematics::StaticTestIntersectorLine3Plane3<Real>::Test() noexcept
 {
-    if (const auto ddn = Vector3Tools::DotProduct(line.GetDirection(), plane.GetNormal());
+    if (const auto ddn = Vector3ToolsType::DotProduct(line.GetDirection(), plane.GetNormal());
         MathType::GetZeroTolerance() < MathType::FAbs(ddn))
     {
         this->SetIntersectionType(IntersectionType::Point);

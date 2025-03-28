@@ -30,7 +30,7 @@ namespace Mathematics
         using MathType = Math<Real>;
         using Matrix3 = Matrix3<Real>;
         using Vector3 = Vector3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
 
     public:
         // 输入矩阵必须是对称的。

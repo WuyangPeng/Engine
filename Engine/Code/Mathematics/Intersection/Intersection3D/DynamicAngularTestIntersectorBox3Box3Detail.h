@@ -91,8 +91,8 @@ void Mathematics::DynamicAngularTestIntersectorBox3Box3<Real>::Test()
         auto newRotCenter1 = rhsRotCenter + subTime * this->GetRhsVelocity();
         auto diff0 = subBox0.GetCenter() - newRotCenter0;
         auto diff1 = subBox1.GetCenter() - newRotCenter1;
-        auto subVelocity0 = stepSize * (this->GetLhsVelocity() + Vector3Tools::CrossProduct(lhsRotAxis, diff0));
-        auto subVelocity1 = stepSize * (this->GetRhsVelocity() + Vector3Tools::CrossProduct(rhsRotAxis, diff1));
+        auto subVelocity0 = stepSize * (this->GetLhsVelocity() + Vector3ToolsType::CrossProduct(lhsRotAxis, diff0));
+        auto subVelocity1 = stepSize * (this->GetRhsVelocity() + Vector3ToolsType::CrossProduct(rhsRotAxis, diff1));
 
         DynamicTestIntersectorBox3Box3<Real> calc{ subBox0, subBox1, stepSize, subVelocity0, subVelocity1 };
         if (calc.IsIntersection())
@@ -107,17 +107,17 @@ void Mathematics::DynamicAngularTestIntersectorBox3Box3<Real>::Test()
 
         // 更新盒子轴。
         using AxisType = std::vector<Vector3>;
-        AxisType axis0{ subBox0.GetAxis(0) + stepSize * Vector3Tools::CrossProduct(lhsRotAxis, subBox0.GetAxis(0)),
-                        subBox0.GetAxis(1) + stepSize * Vector3Tools::CrossProduct(lhsRotAxis, subBox0.GetAxis(1)),
-                        subBox0.GetAxis(2) + stepSize * Vector3Tools::CrossProduct(lhsRotAxis, subBox0.GetAxis(2)) };
-        AxisType axis1{ subBox1.GetAxis(0) + stepSize * Vector3Tools::CrossProduct(rhsRotAxis, subBox1.GetAxis(0)),
-                        subBox1.GetAxis(1) + stepSize * Vector3Tools::CrossProduct(rhsRotAxis, subBox1.GetAxis(1)),
-                        subBox1.GetAxis(2) + stepSize * Vector3Tools::CrossProduct(rhsRotAxis, subBox1.GetAxis(2)) };
+        AxisType axis0{ subBox0.GetAxis(0) + stepSize * Vector3ToolsType::CrossProduct(lhsRotAxis, subBox0.GetAxis(0)),
+                        subBox0.GetAxis(1) + stepSize * Vector3ToolsType::CrossProduct(lhsRotAxis, subBox0.GetAxis(1)),
+                        subBox0.GetAxis(2) + stepSize * Vector3ToolsType::CrossProduct(lhsRotAxis, subBox0.GetAxis(2)) };
+        AxisType axis1{ subBox1.GetAxis(0) + stepSize * Vector3ToolsType::CrossProduct(rhsRotAxis, subBox1.GetAxis(0)),
+                        subBox1.GetAxis(1) + stepSize * Vector3ToolsType::CrossProduct(rhsRotAxis, subBox1.GetAxis(1)),
+                        subBox1.GetAxis(2) + stepSize * Vector3ToolsType::CrossProduct(rhsRotAxis, subBox1.GetAxis(2)) };
 
         /// 使用Gram-Schmidt对更新的轴进行正则化。
         /// 注意：如果T/N小而N小，则可以在假定更新轴接近正交的情况下删除此昂贵的步长。
-        const auto vector3Orthonormalize0 = Vector3Tools::Orthonormalize(axis0);
-        const auto vector3Orthonormalize1 = Vector3Tools::Orthonormalize(axis1);
+        const auto vector3Orthonormalize0 = Vector3ToolsType::Orthonormalize(axis0);
+        const auto vector3Orthonormalize1 = Vector3ToolsType::Orthonormalize(axis1);
 
         subBox0 = Box3{ subBox0.GetCenter(), vector3Orthonormalize0.GetUVector(),
                         vector3Orthonormalize0.GetVVector(), vector3Orthonormalize0.GetWVector(),

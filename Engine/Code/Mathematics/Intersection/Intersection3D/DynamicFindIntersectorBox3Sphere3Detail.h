@@ -66,12 +66,12 @@ void Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::Find()
     /// 查找相对于盒子的坐标系的交点。 球体将转换为盒子坐标，并且球体的速度是相对于盒子的。
     auto centerDiff = sphere.GetCenter() - box.GetCenter();
     auto relativeVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
-    auto centerDiffDotX = Vector3Tools::DotProduct(centerDiff, box.GetAxis(0));
-    auto centerDiffDotY = Vector3Tools::DotProduct(centerDiff, box.GetAxis(1));
-    auto centerDiffDotZ = Vector3Tools::DotProduct(centerDiff, box.GetAxis(2));
-    auto relativeVelocityDotX = Vector3Tools::DotProduct(relativeVelocity, box.GetAxis(0));
-    auto relativeVelocityDotY = Vector3Tools::DotProduct(relativeVelocity, box.GetAxis(1));
-    auto relativeVelocityDotZ = Vector3Tools::DotProduct(relativeVelocity, box.GetAxis(2));
+    auto centerDiffDotX = Vector3ToolsType::DotProduct(centerDiff, box.GetAxis(0));
+    auto centerDiffDotY = Vector3ToolsType::DotProduct(centerDiff, box.GetAxis(1));
+    auto centerDiffDotZ = Vector3ToolsType::DotProduct(centerDiff, box.GetAxis(2));
+    auto relativeVelocityDotX = Vector3ToolsType::DotProduct(relativeVelocity, box.GetAxis(0));
+    auto relativeVelocityDotY = Vector3ToolsType::DotProduct(relativeVelocity, box.GetAxis(1));
+    auto relativeVelocityDotZ = Vector3ToolsType::DotProduct(relativeVelocity, box.GetAxis(2));
 
     // 将坐标框翻转到第一个八分圆。
     auto signX = 1;
@@ -302,8 +302,8 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindFaceRegionIntersec
 
             const Vector3 relVelocity{ relativeVelocityDotX, relativeVelocityDotY, relativeVelocityDotZ };
             const Vector3 diff{ diffX, diffY, diffZ };
-            const auto cross = Vector3Tools::CrossProduct(diff, relVelocity);
-            if (radiusSqr * Vector3Tools::GetLengthSquared(relVelocity) < Vector3Tools::GetLengthSquared(cross))
+            const auto cross = Vector3ToolsType::CrossProduct(diff, relVelocity);
+            if (radiusSqr * Vector3ToolsType::GetLengthSquared(relVelocity) < Vector3ToolsType::GetLengthSquared(cross))
             {
                 // 圆超出了角落的框。
                 return 0;
@@ -393,8 +393,8 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindJustEdgeIntersecti
         // 球体可能与顶点相交。
         const Vector3 relVelocity{ relativeVelocityDotX, relativeVelocityDotY, relativeVelocityDotZ };
         const Vector3 diff{ diffX, diffY, diffZ };
-        const auto cross = Vector3Tools::CrossProduct(diff, relVelocity);
-        if (radiusSqr * Vector3Tools::GetLengthSquared(relVelocity) < Vector3Tools::GetLengthSquared(cross))
+        const auto cross = Vector3ToolsType::CrossProduct(diff, relVelocity);
+        if (radiusSqr * Vector3ToolsType::GetLengthSquared(relVelocity) < Vector3ToolsType::GetLengthSquared(cross))
         {
             // 球体会超出顶点上的框。
             return 0;

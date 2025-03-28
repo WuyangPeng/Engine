@@ -59,9 +59,9 @@ void Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>::Test()
     const auto diff = segment.GetCenterPoint() - ellipsoid.GetCenter();
     const auto matDir = matrix * segment.GetDirection();
     const auto matDiff = matrix * diff;
-    const auto a2 = Vector3Tools::DotProduct(segment.GetDirection(), matDir);
-    const auto a1 = Vector3Tools::DotProduct(segment.GetDirection(), matDiff);
-    const auto a0 = Vector3Tools::DotProduct(diff, matDiff) - MathType::GetValue(1);
+    const auto a2 = Vector3ToolsType::DotProduct(segment.GetDirection(), matDir);
+    const auto a1 = Vector3ToolsType::DotProduct(segment.GetDirection(), matDiff);
+    const auto a0 = Vector3ToolsType::DotProduct(diff, matDiff) - MathType::GetValue(1);
 
     const auto discr = a1 * a1 - a0 * a2;
     if (discr < MathType::GetValue(0))

@@ -57,7 +57,7 @@ Mathematics::Box3<Real> Mathematics::DynamicTestIntersectorBox3Box3<Real>::GetBo
 template <typename Real>
 void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
 {
-    if (Vector3Tools::Approximate(this->GetLhsVelocity(), this->GetRhsVelocity()))
+    if (Vector3ToolsType::Approximate(this->GetLhsVelocity(), this->GetRhsVelocity()))
     {
         StaticTestIntersectorBox3Box3<Real> intersector{ box0, box1 };
         this->SetIntersectionType(intersector.GetIntersectionType());
@@ -79,15 +79,15 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
     auto velocityDiff = this->GetRhsVelocity() - this->GetLhsVelocity();
 
     // matrix C = A^T B, c_{ij} = Dot(A_i,B_j)
-    const Matrix3<Real> matrix{ Vector3Tools::DotProduct(box0.GetAxis(0), box1.GetAxis(0)),
-                                Vector3Tools::DotProduct(box0.GetAxis(0), box1.GetAxis(1)),
-                                Vector3Tools::DotProduct(box0.GetAxis(0), box1.GetAxis(2)),
-                                Vector3Tools::DotProduct(box0.GetAxis(1), box1.GetAxis(0)),
-                                Vector3Tools::DotProduct(box0.GetAxis(1), box1.GetAxis(1)),
-                                Vector3Tools::DotProduct(box0.GetAxis(1), box1.GetAxis(2)),
-                                Vector3Tools::DotProduct(box0.GetAxis(2), box1.GetAxis(0)),
-                                Vector3Tools::DotProduct(box0.GetAxis(2), box1.GetAxis(1)),
-                                Vector3Tools::DotProduct(box0.GetAxis(2), box1.GetAxis(2)) };
+    const Matrix3<Real> matrix{ Vector3ToolsType::DotProduct(box0.GetAxis(0), box1.GetAxis(0)),
+                                Vector3ToolsType::DotProduct(box0.GetAxis(0), box1.GetAxis(1)),
+                                Vector3ToolsType::DotProduct(box0.GetAxis(0), box1.GetAxis(2)),
+                                Vector3ToolsType::DotProduct(box0.GetAxis(1), box1.GetAxis(0)),
+                                Vector3ToolsType::DotProduct(box0.GetAxis(1), box1.GetAxis(1)),
+                                Vector3ToolsType::DotProduct(box0.GetAxis(1), box1.GetAxis(2)),
+                                Vector3ToolsType::DotProduct(box0.GetAxis(2), box1.GetAxis(0)),
+                                Vector3ToolsType::DotProduct(box0.GetAxis(2), box1.GetAxis(1)),
+                                Vector3ToolsType::DotProduct(box0.GetAxis(2), box1.GetAxis(2)) };
 
     // |c_{ij}|
     Matrix3<Real> absMatrix{ MathType::FAbs(matrix.template GetValue<0, 0>()),
@@ -100,14 +100,14 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
                              MathType::FAbs(matrix.template GetValue<2, 1>()),
                              MathType::FAbs(matrix.template GetValue<2, 2>()) };
     // Dot(A_i,D)
-    Vector3 axisDotCenterDiff{ Vector3Tools::DotProduct(box0.GetAxis(0), centerDiff),
-                               Vector3Tools::DotProduct(box0.GetAxis(1), centerDiff),
-                               Vector3Tools::DotProduct(box0.GetAxis(2), centerDiff) };
+    Vector3 axisDotCenterDiff{ Vector3ToolsType::DotProduct(box0.GetAxis(0), centerDiff),
+                               Vector3ToolsType::DotProduct(box0.GetAxis(1), centerDiff),
+                               Vector3ToolsType::DotProduct(box0.GetAxis(2), centerDiff) };
 
     // Dot(A_i,W)
-    Vector3 axisDotAvelocityDiff{ Vector3Tools::DotProduct(box0.GetAxis(0), velocityDiff),
-                                  Vector3Tools::DotProduct(box0.GetAxis(1), velocityDiff),
-                                  Vector3Tools::DotProduct(box0.GetAxis(2), velocityDiff) };
+    Vector3 axisDotAvelocityDiff{ Vector3ToolsType::DotProduct(box0.GetAxis(0), velocityDiff),
+                                  Vector3ToolsType::DotProduct(box0.GetAxis(1), velocityDiff),
+                                  Vector3ToolsType::DotProduct(box0.GetAxis(2), velocityDiff) };
 
     this->SetContactTime(MathType::GetValue(0));
     Separated tLast{ false, MathType::maxReal };
@@ -149,10 +149,10 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
         auto radius = box0.GetExtent(0) * absMatrix(0, i) + box0.GetExtent(1) * absMatrix(1, i) + box0.GetExtent(2) * absMatrix(2, i);
         auto min0 = -radius;
         auto max0 = +radius;
-        auto center = Vector3Tools::DotProduct(box1.GetAxis(i), centerDiff);
+        auto center = Vector3ToolsType::DotProduct(box1.GetAxis(i), centerDiff);
         auto min1 = center - box1.GetExtent(i);
         auto max1 = center + box1.GetExtent(i);
-        auto speed = Vector3Tools::DotProduct(velocityDiff, box1.GetAxis(i));
+        auto speed = Vector3ToolsType::DotProduct(velocityDiff, box1.GetAxis(i));
         tLast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tLast.second);
         if (tLast.first)
         {

@@ -27,7 +27,7 @@ namespace Mathematics
         using Vector3 = Vector3<Real>;
         using Tetrahedron3 = Tetrahedron3<Real>;
         using Plane3 = Plane3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using IntersectionContainer = std::vector<Tetrahedron3>;
 

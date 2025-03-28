@@ -108,7 +108,7 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
     /// 如果P = x * U + y * V + z * W，则圆柱体为x^2 + y^2 = r^2，其中r为圆柱体半径。
     /// 端盖为 |z| = h/2，其中h是圆柱体高度。
     const auto wVector = cylinder.GetAxis().GetDirection();
-    const auto generateComplementBasis = Vector3Tools::GenerateComplementBasis(wVector);
+    const auto generateComplementBasis = Vector3ToolsType::GenerateComplementBasis(wVector);
     const auto uVector = generateComplementBasis.GetUVector();
     const auto vVector = generateComplementBasis.GetVVector();
 
@@ -117,10 +117,10 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
 
     // 将输入线原点转换为圆柱坐标
     auto diff = origin - cylinder.GetAxis().GetOrigin();
-    const Vector3 point{ Vector3Tools::DotProduct(uVector, diff), Vector3Tools::DotProduct(vVector, diff), Vector3Tools::DotProduct(wVector, diff) };
+    const Vector3 point{ Vector3ToolsType::DotProduct(uVector, diff), Vector3ToolsType::DotProduct(vVector, diff), Vector3ToolsType::DotProduct(wVector, diff) };
 
     // 获取传入线的单位长度方向的z值（以圆柱坐标表示）。
-    auto dirZ = Vector3Tools::DotProduct(wVector, dir);
+    auto dirZ = Vector3ToolsType::DotProduct(wVector, dir);
 
     if (MathType::GetValue(1) - MathType::GetZeroTolerance() <= MathType::FAbs(dirZ))
     {
@@ -149,7 +149,7 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
     }
 
     // 将输入线单位长度方向转换为圆柱坐标
-    const Vector3 direction{ Vector3Tools::DotProduct(uVector, dir), Vector3Tools::DotProduct(vVector, dir), dirZ };
+    const Vector3 direction{ Vector3ToolsType::DotProduct(uVector, dir), Vector3ToolsType::DotProduct(vVector, dir), dirZ };
 
     if (MathType::FAbs(direction.GetZ()) <= MathType::GetZeroTolerance())
     {

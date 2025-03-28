@@ -65,7 +65,7 @@ void Mathematics::StaticFindIntersectorTriangle3Box3<Real>::Find()
         for (auto side = 0; side < 3; ++side)
         {
             auto innerNormal = MathType::GetValue(dir) * box.GetAxis(side);
-            auto constant = Vector3Tools::DotProduct(innerNormal, box.GetCenter()) - box.GetExtent(side);
+            auto constant = Vector3ToolsType::DotProduct(innerNormal, box.GetCenter()) - box.GetExtent(side);
             container = IntersectorUtility3<Real>::ClipConvexPolygonAgainstPlane(innerNormal, constant, container);
         }
     }

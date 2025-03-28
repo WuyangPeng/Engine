@@ -93,10 +93,10 @@ void Mathematics::StaticFindIntersectorLine3Triangle3<Real>::Find()
 
     using namespace System;
 
-    auto directionDotOriginCrossEdge2 = System::EnumCastUnderlying(sign) * Vector3Tools::DotProduct(line.GetDirection(), data.GetOriginCrossEdge2());
+    auto directionDotOriginCrossEdge2 = System::EnumCastUnderlying(sign) * Vector3ToolsType::DotProduct(line.GetDirection(), data.GetOriginCrossEdge2());
     if (MathType::GetValue(0) <= directionDotOriginCrossEdge2)
     {
-        auto directionDotEdge1CrossOrigin = System::EnumCastUnderlying(sign) * Vector3Tools::DotProduct(line.GetDirection(), data.GetEdge1CrossOrigin());
+        auto directionDotEdge1CrossOrigin = System::EnumCastUnderlying(sign) * Vector3ToolsType::DotProduct(line.GetDirection(), data.GetEdge1CrossOrigin());
 
         if (MathType::GetValue(0) <= directionDotEdge1CrossOrigin)
         {

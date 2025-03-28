@@ -60,14 +60,14 @@ void Mathematics::StaticFindIntersectorSegment3Triangle3<Real>::Find()
     auto diff = segment.GetCenterPoint() - triangle.GetVertex(0);
     auto edge1 = triangle.GetVertex(1) - triangle.GetVertex(0);
     auto edge2 = triangle.GetVertex(2) - triangle.GetVertex(0);
-    const auto normal = Vector3Tools::CrossProduct(edge1, edge2);
+    const auto normal = Vector3ToolsType::CrossProduct(edge1, edge2);
 
     // 求解 Q + t*D = b1*E1 + b2*E2 (Q = diff, D = 线段方向,
     // E1 = edge1, E2 = edge2, N = Cross(E1,E2))
     //   |Dot(D,N)|*b1 = sign(Dot(D,N))*Dot(D,Cross(Q,E2))
     //   |Dot(D,N)|*b2 = sign(Dot(D,N))*Dot(D,Cross(E1,Q))
     //   |Dot(D,N)|*t = -sign(Dot(D,N))*Dot(Q,N)
-    auto directionDotNormal = Vector3Tools::DotProduct(segment.GetDirection(), normal);
+    auto directionDotNormal = Vector3ToolsType::DotProduct(segment.GetDirection(), normal);
     auto sign = MathType::GetValue(0);
     if (MathType::GetZeroTolerance() < directionDotNormal)
     {
@@ -86,16 +86,16 @@ void Mathematics::StaticFindIntersectorSegment3Triangle3<Real>::Find()
         return;
     }
 
-    auto value0 = sign * Vector3Tools::DotProduct(segment.GetDirection(), Vector3Tools::CrossProduct(diff, edge2));
+    auto value0 = sign * Vector3ToolsType::DotProduct(segment.GetDirection(), Vector3ToolsType::CrossProduct(diff, edge2));
     if (MathType::GetValue(0) <= value0)
     {
-        Real value1 = sign * Vector3Tools::DotProduct(segment.GetDirection(), Vector3Tools::CrossProduct(edge1, diff));
+        Real value1 = sign * Vector3ToolsType::DotProduct(segment.GetDirection(), Vector3ToolsType::CrossProduct(edge1, diff));
         if (MathType::GetValue(0) <= value1)
         {
             if (value0 + value1 <= directionDotNormal)
             {
                 // 线与三角形相交，检查线段是否相交。
-                auto value2 = -sign * Vector3Tools::DotProduct(diff, normal);
+                auto value2 = -sign * Vector3ToolsType::DotProduct(diff, normal);
                 auto value3 = segment.GetExtent() * directionDotNormal;
                 if (-value3 <= value2 && value2 <= value3)
                 {

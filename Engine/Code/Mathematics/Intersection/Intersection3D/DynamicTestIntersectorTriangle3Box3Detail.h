@@ -64,7 +64,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Box3<Real>::Test()
                        triangle.GetVertex(2) - triangle.GetVertex(0),
                        triangle.GetVertex(2) - triangle.GetVertex(1) };
 
-    auto crossProduct = Vector3Tools::CrossProduct(edge.at(0), edge.at(1));
+    auto crossProduct = Vector3ToolsType::CrossProduct(edge.at(0), edge.at(1));
 
     const TestIntersectorAxis<Real> testIntersectorAxis{ crossProduct, triangle, box, relVelocity, this->GetTMax() };
     auto contactTime = testIntersectorAxis.GetTFirst();
@@ -94,7 +94,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Box3<Real>::Test()
     {
         for (auto i1 = 0; i1 < 3; ++i1)
         {
-            crossProduct = Vector3Tools::CrossProduct(edge.at(i0), box.GetAxis(i1));
+            crossProduct = Vector3ToolsType::CrossProduct(edge.at(i0), box.GetAxis(i1));
 
             const TestIntersectorAxis<Real> intersector{ crossProduct, triangle, box, relVelocity, this->GetTMax() };
             contactTime = intersector.GetTFirst();

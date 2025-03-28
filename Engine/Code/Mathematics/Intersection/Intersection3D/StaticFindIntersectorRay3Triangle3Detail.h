@@ -62,14 +62,14 @@ void Mathematics::StaticFindIntersectorRay3Triangle3<Real>::Find()
     auto diff = ray.GetOrigin() - triangle.GetVertex(0);
     auto edge1 = triangle.GetVertex(1) - triangle.GetVertex(0);
     auto edge2 = triangle.GetVertex(2) - triangle.GetVertex(0);
-    const auto normal = Vector3Tools::CrossProduct(edge1, edge2);
+    const auto normal = Vector3ToolsType::CrossProduct(edge1, edge2);
 
     // 求解 Q + t * D = b1 * E1 + b2 * E2（Q = kDiff，D = 射线方向，
     // E1 = kEdge1, E2 = kEdge2, N = Cross(E1,E2))
     //   |Dot(D,N)| * b1 = sign(Dot(D,N)) * Dot(D,Cross(Q,E2))
     //   |Dot(D,N)| * b2 = sign(Dot(D,N)) * Dot(D,Cross(E1,Q))
     //   |Dot(D,N)| * t = -sign(Dot(D,N)) * Dot(Q,N)
-    auto directionDotNormal = Vector3Tools::DotProduct(ray.GetDirection(), normal);
+    auto directionDotNormal = Vector3ToolsType::DotProduct(ray.GetDirection(), normal);
     auto sign = MathType::GetValue(0);
     if (MathType::GetZeroTolerance() < directionDotNormal)
     {
@@ -87,16 +87,16 @@ void Mathematics::StaticFindIntersectorRay3Triangle3<Real>::Find()
         return;
     }
 
-    auto value0 = sign * Vector3Tools::DotProduct(ray.GetDirection(), Vector3Tools::CrossProduct(diff, edge2));
+    auto value0 = sign * Vector3ToolsType::DotProduct(ray.GetDirection(), Vector3ToolsType::CrossProduct(diff, edge2));
     if (MathType::GetValue(0) <= value0)
     {
-        auto value1 = sign * Vector3Tools::DotProduct(ray.GetDirection(), Vector3Tools::CrossProduct(edge1, diff));
+        auto value1 = sign * Vector3ToolsType::DotProduct(ray.GetDirection(), Vector3ToolsType::CrossProduct(edge1, diff));
         if (MathType::GetValue(0) <= value1)
         {
             if (value0 + value1 <= directionDotNormal)
             {
                 // 线与三角形相交，检查射线是否相交。
-                auto value2 = -sign * Vector3Tools::DotProduct(diff, normal);
+                auto value2 = -sign * Vector3ToolsType::DotProduct(diff, normal);
                 if (MathType::GetValue(0) <= value2)
                 {
                     // 射线与三角形相交。

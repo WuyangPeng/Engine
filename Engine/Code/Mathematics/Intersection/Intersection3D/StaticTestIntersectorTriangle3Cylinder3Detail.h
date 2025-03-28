@@ -55,7 +55,7 @@ Mathematics::Cylinder3<Real> Mathematics::StaticTestIntersectorTriangle3Cylinder
 template <typename Real>
 void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
 {
-    const auto vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(cylinder.GetAxis().GetDirection());
+    const auto vector3OrthonormalBasis = Vector3ToolsType::GenerateComplementBasis(cylinder.GetAxis().GetDirection());
     const auto u = vector3OrthonormalBasis.GetUVector();
     const auto v = vector3OrthonormalBasis.GetVVector();
 
@@ -64,9 +64,9 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
     for (auto i = 0; i < 3; ++i)
     {
         auto delta = triangle.GetVertex(i) - cylinder.GetAxis().GetOrigin();
-        temp.at(i)[0] = Vector3Tools::DotProduct(u, delta);
-        temp.at(i)[1] = Vector3Tools::DotProduct(v, delta);
-        temp.at(i)[2] = Vector3Tools::DotProduct(cylinder.GetAxis().GetDirection(), delta);
+        temp.at(i)[0] = Vector3ToolsType::DotProduct(u, delta);
+        temp.at(i)[1] = Vector3ToolsType::DotProduct(v, delta);
+        temp.at(i)[2] = Vector3ToolsType::DotProduct(cylinder.GetAxis().GetDirection(), delta);
     }
 
     auto j0 = 0;

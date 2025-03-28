@@ -62,12 +62,12 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>::Find()
     /// 这定义了一个双面锥体。 线是L(t) = P + t * D，其中P是线的原点，D是单位长度方向的向量。
     /// 将X = L(t)代入上述圆锥方程式，将得出 Q(t) = 0。
     /// 由于我们只希望单面圆锥上的交点位于A指向的半空间中，因此任意点 L(t) ,由Q(t) = 0的根生成的，必须测试Dot(A,L(t) - V) >= 0。
-    auto axisDotDirection = Vector3Tools::DotProduct(cone.GetAxis(), line.GetDirection());
+    auto axisDotDirection = Vector3ToolsType::DotProduct(cone.GetAxis(), line.GetDirection());
     auto cosSqr = cone.GetCosAngle() * cone.GetCosAngle();
     auto edge = line.GetOrigin() - cone.GetVertex();
-    auto axisDotEdge = Vector3Tools::DotProduct(cone.GetVertex(), edge);
-    auto directionDotEdge = Vector3Tools::DotProduct(line.GetDirection(), edge);
-    auto edgeDotEdge = Vector3Tools::DotProduct(edge, edge);
+    auto axisDotEdge = Vector3ToolsType::DotProduct(cone.GetVertex(), edge);
+    auto directionDotEdge = Vector3ToolsType::DotProduct(line.GetDirection(), edge);
+    auto edgeDotEdge = Vector3ToolsType::DotProduct(edge, edge);
     auto c2 = axisDotDirection * axisDotDirection - cosSqr;
     auto c1 = axisDotDirection * axisDotEdge - cosSqr * directionDotEdge;
     auto c0 = axisDotEdge * axisDotEdge - cosSqr * edgeDotEdge;
@@ -94,7 +94,7 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>::Find()
             auto t = (-c1 - root) / c2;
             point0 = line.GetOrigin() + t * line.GetDirection();
             edge = point0 - cone.GetVertex();
-            auto dot = Vector3Tools::DotProduct(edge, cone.GetAxis());
+            auto dot = Vector3ToolsType::DotProduct(edge, cone.GetAxis());
             if (MathType::GetValue(0) < dot)
             {
                 ++quantity;
@@ -113,7 +113,7 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>::Find()
                 edge = point1 - cone.GetVertex();
             }
 
-            dot = Vector3Tools::DotProduct(edge, cone.GetAxis());
+            dot = Vector3ToolsType::DotProduct(edge, cone.GetAxis());
             if (MathType::GetValue(0) < dot)
             {
                 ++quantity;
@@ -142,7 +142,7 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>::Find()
             // 一个重复的实根（线与圆锥相切）。
             point0 = line.GetOrigin() - (c1 / c2) * line.GetDirection();
             edge = point0 - cone.GetVertex();
-            if (MathType::GetValue(0) < Vector3Tools::DotProduct(edge, cone.GetAxis()))
+            if (MathType::GetValue(0) < Vector3ToolsType::DotProduct(edge, cone.GetAxis()))
             {
                 this->SetIntersectionType(IntersectionType::Point);
                 quantity = 1;
@@ -159,7 +159,7 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>::Find()
         // c2 = 0, c1 != 0 （D是圆锥边界上的方向向量）
         point0 = line.GetOrigin() - (MathType::GetRational(1, 2) * c0 / c1) * line.GetDirection();
         edge = point0 - cone.GetVertex();
-        auto dot = Vector3Tools::DotProduct(edge, cone.GetAxis());
+        auto dot = Vector3ToolsType::DotProduct(edge, cone.GetAxis());
         if (MathType::GetValue(0) < dot)
         {
             this->SetIntersectionType(IntersectionType::Ray);

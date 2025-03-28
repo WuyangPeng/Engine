@@ -95,8 +95,8 @@ typename Mathematics::StaticFindIntersectorLine3Box3<Real>::FindShared Mathemati
 
     // 将线性分量转换为框坐标。
     auto diff = origin - box.GetCenter();
-    const Vector3 boxOrigin{ Vector3Tools::DotProduct(diff, box.GetAxis(0)), Vector3Tools::DotProduct(diff, box.GetAxis(1)), Vector3Tools::DotProduct(diff, box.GetAxis(2)) };
-    const Vector3 boxDirection{ Vector3Tools::DotProduct(direction, box.GetAxis(0)), Vector3Tools::DotProduct(direction, box.GetAxis(1)), Vector3Tools::DotProduct(direction, box.GetAxis(2)) };
+    const Vector3 boxOrigin{ Vector3ToolsType::DotProduct(diff, box.GetAxis(0)), Vector3ToolsType::DotProduct(diff, box.GetAxis(1)), Vector3ToolsType::DotProduct(diff, box.GetAxis(2)) };
+    const Vector3 boxDirection{ Vector3ToolsType::DotProduct(direction, box.GetAxis(0)), Vector3ToolsType::DotProduct(direction, box.GetAxis(1)), Vector3ToolsType::DotProduct(direction, box.GetAxis(2)) };
 
     auto notAllClipped = Clip(+boxDirection.GetX(), -boxOrigin.GetX() - box.GetExtent(0), t0, t1);
     if (notAllClipped.result)

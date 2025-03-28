@@ -115,7 +115,7 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
     /// 组成胶囊减去其半球形端盖的有限圆柱体的z值|z| <= e，其中e是胶囊段的范围。
     /// 对于z > = e，上半球上限为x^2+y^2+(z-e)^2 = r^2；对于z <= -e，下半球上限为x^2+y^2+(z+e)^2 = r^2。
     const auto segmentDirection = capsule.GetSegment().GetDirection();
-    const auto vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(segmentDirection);
+    const auto vector3OrthonormalBasis = Vector3ToolsType::GenerateComplementBasis(segmentDirection);
     const auto uVector = vector3OrthonormalBasis.GetUVector();
     const auto vVector = vector3OrthonormalBasis.GetVVector();
     auto radiusSqr = capsule.GetRadius() * capsule.GetRadius();
@@ -123,10 +123,10 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
 
     // 将输入线的原点转换为胶囊坐标。
     auto diff = origin - capsule.GetSegment().GetCenterPoint();
-    const Vector3 point{ Vector3Tools::DotProduct(uVector, diff), Vector3Tools::DotProduct(vVector, diff), Vector3Tools::DotProduct(segmentDirection, diff) };
+    const Vector3 point{ Vector3ToolsType::DotProduct(uVector, diff), Vector3ToolsType::DotProduct(vVector, diff), Vector3ToolsType::DotProduct(segmentDirection, diff) };
 
     // 获取线的单位长度方向在胶囊坐标中的z值。
-    auto directionDot = Vector3Tools::DotProduct(segmentDirection, direction);
+    auto directionDot = Vector3ToolsType::DotProduct(segmentDirection, direction);
     if (MathType::GetValue(1) - MathType::GetZeroTolerance() <= MathType::FAbs(directionDot))
     {
         // 该线平行于胶囊轴线。 确定该线是否与胶囊半球相交。
@@ -155,7 +155,7 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
     }
 
     // 将输入线单位长度方向转换为胶囊坐标。
-    const Vector3 dot{ Vector3Tools::DotProduct(uVector, direction), Vector3Tools::DotProduct(vVector, direction), directionDot };
+    const Vector3 dot{ Vector3ToolsType::DotProduct(uVector, direction), Vector3ToolsType::DotProduct(vVector, direction), directionDot };
 
     /// 测试线 P + t * D与无限圆柱x^2 + y^2 = r^2的交点。 这简化为计算二次方程式的根。
     /// 如果P = (px,py,pz)和 D = (dx,dy,dz)，则二次方程为

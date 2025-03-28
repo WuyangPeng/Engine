@@ -77,14 +77,14 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     // ÷· C0 + t * A0
     for (auto i = 0; i < size; ++i)
     {
-        matrix(0, i) = Vector3Tools::DotProduct(box0.GetAxis(0), box1.GetAxis(i));
+        matrix(0, i) = Vector3ToolsType::DotProduct(box0.GetAxis(0), box1.GetAxis(i));
         absMatrix(0, i) = MathType::FAbs(matrix(0, i));
         if (cutoff < absMatrix(0, i))
         {
             existsParallelPair = true;
         }
     }
-    axisDotCenterDiff[0] = Vector3Tools::DotProduct(box0.GetAxis(0), centerDiff);
+    axisDotCenterDiff[0] = Vector3ToolsType::DotProduct(box0.GetAxis(0), centerDiff);
 
     /// º‰∏Ù∞Îæ∂∫Õ÷––ƒ÷Æº‰µƒæ‡¿Î
     auto r = MathType::FAbs(axisDotCenterDiff[0]);
@@ -99,14 +99,14 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     // ÷· C0 + t * A1
     for (auto i = 0; i < size; ++i)
     {
-        matrix(1, i) = Vector3Tools::DotProduct(box0.GetAxis(1), box1.GetAxis(i));
+        matrix(1, i) = Vector3ToolsType::DotProduct(box0.GetAxis(1), box1.GetAxis(i));
         absMatrix(1, i) = MathType::FAbs(matrix(1, i));
         if (cutoff < absMatrix(1, i))
         {
             existsParallelPair = true;
         }
     }
-    axisDotCenterDiff[1] = Vector3Tools::DotProduct(box0.GetAxis(1), centerDiff);
+    axisDotCenterDiff[1] = Vector3ToolsType::DotProduct(box0.GetAxis(1), centerDiff);
     r = MathType::FAbs(axisDotCenterDiff[1]);
     r1 = box1.GetExtent(0) * absMatrix.template GetValue<1, 0>() + box1.GetExtent(1) * absMatrix.template GetValue<1, 1>() + box1.GetExtent(2) * absMatrix.template GetValue<1, 2>();
     r01 = box0.GetExtent(1) + r1;
@@ -119,14 +119,14 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     // ÷· C0 + t * A2
     for (auto i = 0; i < 3; ++i)
     {
-        matrix(2, i) = Vector3Tools::DotProduct(box0.GetAxis(2), box1.GetAxis(i));
+        matrix(2, i) = Vector3ToolsType::DotProduct(box0.GetAxis(2), box1.GetAxis(i));
         absMatrix(2, i) = MathType::FAbs(matrix(2, i));
         if (cutoff < absMatrix(2, i))
         {
             existsParallelPair = true;
         }
     }
-    axisDotCenterDiff[2] = Vector3Tools::DotProduct(box0.GetAxis(2), centerDiff);
+    axisDotCenterDiff[2] = Vector3ToolsType::DotProduct(box0.GetAxis(2), centerDiff);
     r = MathType::FAbs(axisDotCenterDiff[2]);
     r1 = box1.GetExtent(0) * absMatrix.template GetValue<2, 0>() + box1.GetExtent(1) * absMatrix.template GetValue<2, 1>() + box1.GetExtent(2) * absMatrix.template GetValue<2, 2>();
     r01 = box0.GetExtent(2) + r1;
@@ -137,7 +137,7 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     }
 
     // ÷· C0 + t * B0
-    r = MathType::FAbs(Vector3Tools::DotProduct(box1.GetAxis(0), centerDiff));
+    r = MathType::FAbs(Vector3ToolsType::DotProduct(box1.GetAxis(0), centerDiff));
     auto r0 = box1.GetExtent(0) * absMatrix.template GetValue<0, 0>() + box1.GetExtent(1) * absMatrix.template GetValue<1, 0>() + box1.GetExtent(2) * absMatrix.template GetValue<2, 0>();
     r01 = r0 + box1.GetExtent(0);
     if (r01 < r)
@@ -147,7 +147,7 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     }
 
     // ÷· C0+ t * B1
-    r = MathType::FAbs(Vector3Tools::DotProduct(box1.GetAxis(1), centerDiff));
+    r = MathType::FAbs(Vector3ToolsType::DotProduct(box1.GetAxis(1), centerDiff));
     r0 = box1.GetExtent(0) * absMatrix.template GetValue<0, 1>() + box1.GetExtent(1) * absMatrix.template GetValue<1, 1>() + box1.GetExtent(2) * absMatrix.template GetValue<2, 1>();
     r01 = r0 + box1.GetExtent(1);
     if (r01 < r)
@@ -157,7 +157,7 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     }
 
     // ÷· C0 + t * B2
-    r = MathType::FAbs(Vector3Tools::DotProduct(box1.GetAxis(2), centerDiff));
+    r = MathType::FAbs(Vector3ToolsType::DotProduct(box1.GetAxis(2), centerDiff));
     r0 = box1.GetExtent(0) * absMatrix.template GetValue<0, 2>() + box1.GetExtent(1) * absMatrix.template GetValue<1, 2>() + box1.GetExtent(2) * absMatrix.template GetValue<2, 2>();
     r01 = r0 + box1.GetExtent(2);
     if (r01 < r)

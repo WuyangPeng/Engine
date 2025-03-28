@@ -84,9 +84,9 @@ void Mathematics::StaticFindIntersectorCircle3Plane3<Real>::Find()
     /// 则r^2 = |t * D + P - C|^2 = |D|^2 * t^2 + 2 * Dot(D,P - C) * t + |P - C|^2。
     /// 这是形式为a2 * t^2 + 2 * a1 * t + a0 = 0的二次方程。
     auto diff = line.GetOrigin() - circle.GetCenter();
-    auto directionSquared = Vector3Tools::GetLengthSquared(line.GetDirection());
-    auto dotProduct = Vector3Tools::DotProduct(diff, line.GetDirection());
-    auto a0 = Vector3Tools::GetLengthSquared(diff) - circle.GetRadius() * circle.GetRadius();
+    auto directionSquared = Vector3ToolsType::GetLengthSquared(line.GetDirection());
+    auto dotProduct = Vector3ToolsType::DotProduct(diff, line.GetDirection());
+    auto a0 = Vector3ToolsType::GetLengthSquared(diff) - circle.GetRadius() * circle.GetRadius();
 
     auto discr = dotProduct * dotProduct - a0 * directionSquared;
     if (discr < MathType::GetValue(0))

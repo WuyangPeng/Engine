@@ -30,9 +30,9 @@ bool Mathematics::Circle3<Real>::IsValid() const noexcept
 {
     try
     {
-        if (Vector3Tools::Approximate(Vector3Tools::CrossProduct(direction0, direction1), normal, epsilon) &&
-            Vector3Tools::Approximate(Vector3Tools::CrossProduct(direction1, normal), direction0, epsilon) &&
-            Vector3Tools::Approximate(Vector3Tools::CrossProduct(normal, direction0), direction1, epsilon))
+        if (Vector3ToolsType::Approximate(Vector3ToolsType::CrossProduct(direction0, direction1), normal, epsilon) &&
+            Vector3ToolsType::Approximate(Vector3ToolsType::CrossProduct(direction1, normal), direction0, epsilon) &&
+            Vector3ToolsType::Approximate(Vector3ToolsType::CrossProduct(normal, direction0), direction1, epsilon))
         {
             return true;
         }

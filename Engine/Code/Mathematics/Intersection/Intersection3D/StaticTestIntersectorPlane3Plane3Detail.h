@@ -54,7 +54,7 @@ Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorPlane3Plane3<Real>::
 template <typename Real>
 void Mathematics::StaticTestIntersectorPlane3Plane3<Real>::Test() noexcept
 {
-    if (const auto dot = Vector3Tools::DotProduct(plane0.GetNormal(), plane1.GetNormal());
+    if (const auto dot = Vector3ToolsType::DotProduct(plane0.GetNormal(), plane1.GetNormal());
         MathType::FAbs(dot) < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
         this->SetIntersectionType(IntersectionType::Other);

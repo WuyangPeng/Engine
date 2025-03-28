@@ -29,7 +29,7 @@ void Mathematics::IntersectorLine3Triangle3Data<Real>::CalculateDirectionDotNorm
     origin = line.GetOrigin() - triangle.GetVertex(0);
     edge1 = triangle.GetVertex(1) - triangle.GetVertex(0);
     edge2 = triangle.GetVertex(2) - triangle.GetVertex(0);
-    normal = Vector3Tools::CrossProduct(edge1, edge2);
+    normal = Vector3ToolsType::CrossProduct(edge1, edge2);
 
     // 求解 Q + t * D = b1 * E1 + b2 * E2
     // (其中Q = m_OriginDifference, D = 线的Direction,
@@ -37,7 +37,7 @@ void Mathematics::IntersectorLine3Triangle3Data<Real>::CalculateDirectionDotNorm
     //   |Dot(D,N)| * b1 = sign(Dot(D,N)) * Dot(D,Cross(Q,E2))
     //   |Dot(D,N)| * b2 = sign(Dot(D,N)) * Dot(D,Cross(E1,Q))
     //   |Dot(D,N)| * t = -sign(Dot(D,N)) * Dot(Q,N)
-    directionDotNormal = Vector3Tools::DotProduct(line.GetDirection(), normal);
+    directionDotNormal = Vector3ToolsType::DotProduct(line.GetDirection(), normal);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -79,7 +79,7 @@ Mathematics::Vector3<Real> Mathematics::IntersectorLine3Triangle3Data<Real>::Get
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Vector3Tools::CrossProduct(origin, edge2);
+    return Vector3ToolsType::CrossProduct(origin, edge2);
 }
 
 template <typename Real>
@@ -87,7 +87,7 @@ Mathematics::Vector3<Real> Mathematics::IntersectorLine3Triangle3Data<Real>::Get
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Vector3Tools::CrossProduct(edge1, origin);
+    return Vector3ToolsType::CrossProduct(edge1, origin);
 }
 
 template <typename Real>
@@ -95,7 +95,7 @@ Real Mathematics::IntersectorLine3Triangle3Data<Real>::GetOriginDotNormal() cons
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Vector3Tools::DotProduct(origin, normal);
+    return Vector3ToolsType::DotProduct(origin, normal);
 }
 
 #endif  // MATHEMATICS_INTERSECTION_INTERSECTOR_LINE3_TRIANGLE3_DATA_DETAIL_H

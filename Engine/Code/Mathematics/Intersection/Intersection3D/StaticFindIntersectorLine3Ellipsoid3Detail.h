@@ -65,9 +65,9 @@ void Mathematics::StaticFindIntersectorLine3Ellipsoid3<Real>::Find()
     auto diff = line.GetOrigin() - ellipsoid.GetCenter();
     const auto matrixDirection = matrix * line.GetDirection();
     const auto matrixDiff = matrix * diff;
-    auto a2 = Vector3Tools::DotProduct(line.GetDirection(), matrixDirection);
-    auto a1 = Vector3Tools::DotProduct(line.GetDirection(), matrixDiff);
-    auto a0 = Vector3Tools::DotProduct(diff, matrixDiff) - MathType::GetValue(1);
+    auto a2 = Vector3ToolsType::DotProduct(line.GetDirection(), matrixDirection);
+    auto a1 = Vector3ToolsType::DotProduct(line.GetDirection(), matrixDiff);
+    auto a0 = Vector3ToolsType::DotProduct(diff, matrixDiff) - MathType::GetValue(1);
 
     // 如果Q(t)具有实根，则发生相交。
     auto discr = a1 * a1 - a0 * a2;

@@ -54,7 +54,7 @@ Mathematics::Plane3<Real> Mathematics::DynamicTestIntersectorPlane3Plane3<Real>:
 template <typename Real>
 void Mathematics::DynamicTestIntersectorPlane3Plane3<Real>::Test()
 {
-    auto dot = Vector3Tools::DotProduct(plane0.GetNormal(), plane1.GetNormal());
+    auto dot = Vector3ToolsType::DotProduct(plane0.GetNormal(), plane1.GetNormal());
     if (MathType::FAbs(dot) < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
         /// 平面最初是相交的。 线速度不会改变它们相交的事实。
@@ -86,7 +86,7 @@ void Mathematics::DynamicTestIntersectorPlane3Plane3<Real>::Test()
 
     // 这些平面是平行且分开的。 确定何时它们将成为共面的。
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
-    dot = Vector3Tools::DotProduct(plane0.GetNormal(), relVelocity);
+    dot = Vector3ToolsType::DotProduct(plane0.GetNormal(), relVelocity);
     if (MathType::FAbs(dot) < MathType::GetZeroTolerance())
     {
         // 平面的相对运动使它们保持平行。

@@ -63,15 +63,15 @@ void Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>::Find()
     auto tMax = this->GetTMax();
 
     auto relVelocity = rhsVelocity - lhsVelocity;
-    auto relVelocitySquared = Vector3Tools::GetLengthSquared(relVelocity);
+    auto relVelocitySquared = Vector3ToolsType::GetLengthSquared(relVelocity);
     auto diff = sphere1.GetCenter() - sphere0.GetCenter();
-    auto diffSqr = Vector3Tools::GetLengthSquared(diff);
+    auto diffSqr = Vector3ToolsType::GetLengthSquared(diff);
     auto radiusSum = sphere0.GetRadius() + sphere1.GetRadius();
     auto radiusSumSqr = radiusSum * radiusSum;
 
     if (MathType::GetValue(0) < relVelocitySquared)
     {
-        auto dot = Vector3Tools::DotProduct(diff, relVelocity);
+        auto dot = Vector3ToolsType::DotProduct(diff, relVelocity);
         if (dot <= MathType::GetValue(0))
         {
             if (-tMax * relVelocitySquared <= dot || tMax * (tMax * relVelocitySquared + MathType::GetValue(2) * dot) + diffSqr <= radiusSumSqr)

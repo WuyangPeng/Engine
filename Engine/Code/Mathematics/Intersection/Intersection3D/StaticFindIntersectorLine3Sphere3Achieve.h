@@ -56,8 +56,8 @@ template <typename Real>
 void Mathematics::StaticFindIntersectorLine3Sphere3<Real>::Find()
 {
     auto diff = line.GetOrigin() - sphere.GetCenter();
-    auto a0 = Vector3Tools::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
-    auto a1 = Vector3Tools::DotProduct(line.GetDirection(), diff);
+    auto a0 = Vector3ToolsType::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
+    auto a1 = Vector3ToolsType::DotProduct(line.GetDirection(), diff);
     auto discr = a1 * a1 - a0;
 
     if (discr < MathType::GetValue(0))

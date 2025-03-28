@@ -56,12 +56,12 @@ template <typename Real>
 void Mathematics::StaticFindIntersectorRay3Sphere3<Real>::Find()
 {
     auto diff = ray.GetOrigin() - sphere.GetCenter();
-    auto a0 = Vector3Tools::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
+    auto a0 = Vector3ToolsType::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
 
     if (a0 <= MathType::GetValue(0))
     {
         // P在球体内
-        auto a1 = Vector3Tools::DotProduct(ray.GetDirection(), diff);
+        auto a1 = Vector3ToolsType::DotProduct(ray.GetDirection(), diff);
         auto discr = a1 * a1 - a0;
         auto root = MathType::Sqrt(discr);
         rayParameter0 = -a1 + root;
@@ -72,7 +72,7 @@ void Mathematics::StaticFindIntersectorRay3Sphere3<Real>::Find()
     }
     // 否则：P在范围之外
 
-    auto a1 = Vector3Tools::DotProduct(ray.GetDirection(), diff);
+    auto a1 = Vector3ToolsType::DotProduct(ray.GetDirection(), diff);
     if (MathType::GetValue(0) <= a1)
     {
         quantity = 0;
