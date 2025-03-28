@@ -82,10 +82,10 @@ void Mathematics::EllipseFit2<Real>::InitialGuess()
     const auto box = ContBox2<Real>::ContOrientedBox(points);
 
     center = box.GetCenter();
-    rotate.SetValue<0, 0>(box.GetAxis0().GetX());
-    rotate.SetValue<0, 1>(box.GetAxis0().GetY());
-    rotate.SetValue<1, 0>(box.GetAxis1().GetX());
-    rotate.SetValue<1, 1>(box.GetAxis1().GetY());
+    rotate.template SetValue<0, 0>(box.GetAxis0().GetX());
+    rotate.template SetValue<0, 1>(box.GetAxis0().GetY());
+    rotate.template SetValue<1, 0>(box.GetAxis1().GetX());
+    rotate.template SetValue<1, 1>(box.GetAxis1().GetY());
     extent0 = box.GetExtent0();
     extent1 = box.GetExtent1();
 }
