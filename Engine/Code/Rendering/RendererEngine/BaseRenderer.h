@@ -104,7 +104,7 @@ namespace Rendering
         NODISCARD std::string GetShaderName(const std::string& name) const;
 
         /// 窗口大小变化
-        NODISCARD void Resize(int width, int height);
+        void Resize(int width, int height);
 
         /// 访问颜色，深度和模板缓冲区的当前清除参数。 颜色缓冲区是后缓冲区。
         void SetClearColor(const Colour& clearColor) noexcept;

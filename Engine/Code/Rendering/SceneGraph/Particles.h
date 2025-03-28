@@ -47,7 +47,7 @@ namespace Rendering
 
         NODISCARD int GetNumParticles() const;
         NODISCARD Vector4 GetParticlesPosition(int index) const;
-        NODISCARD void SetSizeAdjust(float sizeAdjust);
+        void SetSizeAdjust(float sizeAdjust);
         NODISCARD float GetSizeAdjust() const noexcept;
 
         void SetPosition(int index, const Vector4& position);
@@ -66,7 +66,7 @@ namespace Rendering
         using Vector3 = Mathematics::Vector3F;
 
     protected:
-        NODISCARD void Check(const VertexFormat& vertexFormat) const;
+        void Check(const VertexFormat& vertexFormat) const;
 
     private:
         PackageType impl;

@@ -55,8 +55,8 @@ namespace Rendering
         NODISCARD int GetCameraRow() const noexcept;
         NODISCARD int GetCameraColumn() const noexcept;
 
-        NODISCARD void SetCameraRow(int aCameraRow) noexcept;
-        NODISCARD void SetCameraColumn(int aCameraColumn) noexcept;
+        void SetCameraRow(int aCameraRow) noexcept;
+        void SetCameraColumn(int aCameraColumn) noexcept;
 
         NODISCARD int GetStreamingSize() const noexcept;
         void Save(BufferTarget& target) const;

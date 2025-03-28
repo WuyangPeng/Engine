@@ -43,8 +43,8 @@ namespace Mathematics
         NODISCARD Vector GetOrigin() const noexcept;
         NODISCARD Vector GetDirection() const noexcept;
 
-        NODISCARD void SetOrigin(const Vector& aOrigin) noexcept;
-        NODISCARD void SetDirection(const Vector& aDirection) noexcept;
+        void SetOrigin(const Vector& aOrigin) noexcept;
+        void SetDirection(const Vector& aDirection) noexcept;
 
     private:
         /// 方向必须是单位长度。

@@ -84,7 +84,7 @@ namespace Mathematics
 
         NODISCARD bool IsClosed() const noexcept;
 
-        NODISCARD void Print(const std::string& acFilename);
+        void Print(const std::string& acFilename);
 
     protected:
         NODISCARD static EdgeSharedPtr CreateEdge(int v0, int v1);

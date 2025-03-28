@@ -32,7 +32,7 @@ namespace Mathematics
 
         // 发生在动态查询其最小距离的时间。
         NODISCARD Real GetContactTime() const noexcept override;
-        NODISCARD void SetContactTime(Real newContactTime) noexcept override;
+        void SetContactTime(Real newContactTime) noexcept override;
 
         NODISCARD ImplTypeSharedPtr Clone() const override;
 

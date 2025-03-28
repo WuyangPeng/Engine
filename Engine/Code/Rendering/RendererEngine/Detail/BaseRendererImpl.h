@@ -84,7 +84,7 @@ namespace Rendering
 
         NODISCARD bool HasDepthRange01() const;
         NODISCARD std::string GetShaderName(const std::string& name) const;
-        NODISCARD void Resize(int width, int height);
+        void Resize(int width, int height);
         void DisplayColorBuffer(int syncInterval);
 
         void SetClearColor(const Colour& clearColor) noexcept;

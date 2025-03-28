@@ -61,7 +61,7 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD bool IsZero() const noexcept;
-        NODISCARD void SetZero();
+        void SetZero();
         NODISCARD NumericalValueSymbol GetSign() const noexcept;
 
         NODISCARD uint16_t& operator[](int index);

@@ -118,7 +118,7 @@ namespace Mathematics
 
     template <typename Real, int N>
     requires(0 < N)
-    NODISCARD void Check(QuadraticFieldsNumber<Real, N>& lhs, const QuadraticFieldsNumber<Real, N>& rhs);
+    void Check(QuadraticFieldsNumber<Real, N>& lhs, const QuadraticFieldsNumber<Real, N>& rhs);
 
     /// 只有当d值相同时，才能在二次域的元素之间进行算术更新。
     /// 要捕获不匹配，定义MATHEMATICS_USE_ASSERT_ON_QUADRATIC_FIELDS_NUMBER_MISMATCHED_D。

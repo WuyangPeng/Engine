@@ -40,9 +40,9 @@ namespace Mathematics::Algebra
         NODISCARD Vector3Type GetNormal() const noexcept;
         NODISCARD Real GetRadius() const noexcept;
 
-        NODISCARD void SetCenter(const Vector3Type& aCenter) noexcept;
-        NODISCARD void SetNormal(const Vector3Type& aNormal) noexcept;
-        NODISCARD void SetRadius(Real aRadius) noexcept;
+        void SetCenter(const Vector3Type& aCenter) noexcept;
+        void SetNormal(const Vector3Type& aNormal) noexcept;
+        void SetRadius(Real aRadius) noexcept;
 
     private:
         Vector3Type center;
